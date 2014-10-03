@@ -31,6 +31,7 @@
 
 #define NM_SERVICE "org.freedesktop.NetworkManager"
 #define NM_PATH "/org/freedesktop/NetworkManager"
+#define NM_DEVICE_IFACE "org.freedesktop.NetworkManager.Device"
 
 typedef QMap<QString,QVariantMap> ConfigurationData;
 Q_DECLARE_METATYPE(ConfigurationData)
@@ -96,9 +97,9 @@ void WifiDbusHelper::connect(QString ssid, int security, QString password)
 
     QDBusObjectPath dev;
     for (const auto &d : devices) {
-        QDBusInterface iface("org.freedesktop.NetworkManager",
+        QDBusInterface iface(NM_SERVICE,
                              d.path(),
-                             "org.freedesktop.NetworkManager.Device",
+                             NM_DEVICE_IFACE,
                              QDBusConnection::systemBus());
 
         auto type_v = iface.property("DeviceType");
@@ -110,14 +111,42 @@ void WifiDbusHelper::connect(QString ssid, int security, QString password)
 
     if (dev.path().isEmpty()) {
         // didn't find a wifi device
+        qWarning() << "Could not find wifi device.";
         return;
     }
+
+    mgr.connection().disconnect(
+        mgr.service(),
+        dev.path(),
+        NM_DEVICE_IFACE,
+        "StateChanged",
+        this,
+        SLOT(nmDeviceStateChanged(uint, uint, uint)));
+
+    mgr.connection().connect(
+        mgr.service(),
+        dev.path(),
+        NM_DEVICE_IFACE,
+        "StateChanged",
+        this,
+        SLOT(nmDeviceStateChanged(uint, uint, uint)));
 
     QDBusObjectPath tmp;
     auto reply2 = mgr.AddAndActivateConnection(configuration,
                                                dev,
                                                QDBusObjectPath("/"),
                                                tmp);
+    if(!reply2.isValid()) {
+        qWarning() << "Could not connect: " << reply2.error().message() << "\n";
+    }
+}
+
+void WifiDbusHelper::nmDeviceStateChanged(uint newState,
+                                           uint oldState,
+                                           uint reason)
+{
+    Q_UNUSED (oldState);
+    Q_EMIT (deviceStateChanged(newState, reason));
 }
 
 QString WifiDbusHelper::getWifiIpAddress()
@@ -138,11 +167,7 @@ QString WifiDbusHelper::getWifiIpAddress()
 
     QDBusObjectPath dev;
     for (const auto &d : devices) {
-        QDBusInterface iface("org.freedesktop.NetworkManager",
-                             d.path(),
-                             "org.freedesktop.NetworkManager.Device",
-                             m_systemBusConnection);
-
+        QDBusInterface iface(NM_SERVICE, d.path(), NM_DEVICE_IFACE, m_systemBusConnection);
         auto type_v = iface.property("DeviceType");
         if (type_v.toUInt() == 2 /* NM_DEVICE_TYPE_WIFI */) {
             ip4addr = iface.property("Ip4Address").toInt();
@@ -323,7 +348,7 @@ QList<QStringList> WifiDbusHelper::getPreviouslyConnectedWifiNetworks() {
     QList<QStringList> networks;
 
    OrgFreedesktopNetworkManagerSettingsInterface foo
-            ("org.freedesktop.NetworkManager",
+            (NM_SERVICE,
              "/org/freedesktop/NetworkManager/Settings",
              QDBusConnection::systemBus());
     auto reply = foo.ListConnections();
@@ -359,7 +384,7 @@ QList<QStringList> WifiDbusHelper::getPreviouslyConnectedWifiNetworks() {
 
 void WifiDbusHelper::forgetConnection(const QString dbus_path) {
     OrgFreedesktopNetworkManagerSettingsConnectionInterface bar
-            ("org.freedesktop.NetworkManager",
+            (NM_SERVICE,
              dbus_path,
              QDBusConnection::systemBus());
     auto reply = bar.Delete();
@@ -369,7 +394,7 @@ void WifiDbusHelper::forgetConnection(const QString dbus_path) {
     }
 }
 
-bool WifiDbusHelper::deactivateConnection() {
+bool WifiDbusHelper::disconnectDevice() {
     OrgFreedesktopNetworkManagerInterface mgr(NM_SERVICE,
                                               NM_PATH,
                                               m_systemBusConnection);
@@ -377,42 +402,27 @@ bool WifiDbusHelper::deactivateConnection() {
     auto reply1 = mgr.GetDevices();
     reply1.waitForFinished();
     if(!reply1.isValid()) {
-        qWarning() << "deactivateConnection: Could not get network device: " << reply1.error().message() << "\n";
+        qWarning() << "disconnectDevice: Could not get network device: " << reply1.error().message() << "\n";
         return false;
     }
     auto devices = reply1.value();
 
-    QDBusObjectPath activeConnection;
     QDBusObjectPath dev;
     for (const auto &d : devices) {
-        QDBusInterface iface(NM_SERVICE,
-                             d.path(),
-                             "org.freedesktop.NetworkManager.Device",
-                             m_systemBusConnection);
+        QDBusInterface iface(NM_SERVICE, d.path(), NM_DEVICE_IFACE, m_systemBusConnection);
 
         auto type_v = iface.property("DeviceType");
         if (type_v.toUInt() == 2 /* NM_DEVICE_TYPE_WIFI */) {
-            activeConnection = qvariant_cast<QDBusObjectPath>(iface.property("ActiveConnection"));
-            dev = d;
+            if (d.path().isEmpty()) {
+                // didn't find a wifi device
+                qWarning() << "disconnectDevice: Could not find wifi device\n";
+                return false;
+            } else {
+                iface.call("Disconnect");
+                return true;
+            }
             break;
         }
     }
-
-    if (dev.path().isEmpty()) {
-        // didn't find a wifi device
-        return false;
-    }
-
-    if (activeConnection.path().isEmpty()) {
-        // no active connection
-        return false;
-    }
-
-    auto reply = mgr.DeactivateConnection(activeConnection);
-    reply.waitForFinished();
-    if(!reply.isValid()) {
-        qWarning() << "Error deactivating connection: " << reply.error().message() << "\n";
-        return false;
-    }
-    return true;
+    return false;
 }

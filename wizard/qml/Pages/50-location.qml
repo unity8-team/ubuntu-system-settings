@@ -25,16 +25,6 @@ LocalComponents.Page {
     title: i18n.tr("Location")
     forwardButtonSourceComponent: forwardButton
 
-    property bool pathSet: System.hereLicensePath !== " " // single space means it's unassigned
-    property bool countSet: false
-    skipValid: pathSet && (System.hereLicensePath === "" || countSet)
-    skip: skipValid && (System.hereLicensePath === "" || termsModel.count === 0)
-
-    Connections {
-        target: termsModel
-        onCountChanged: if (pathSet) countSet = true
-    }
-
     FolderListModel {
         id: termsModel
         folder: System.hereLicensePath
@@ -68,7 +58,9 @@ LocalComponents.Page {
         LocalComponents.CheckableSetting {
             id: termsCheck
             showDivider: false
-            text: i18n.tr("I have read and agreed to the HERE <a href='here-terms.qml'>Terms and Conditions</a>")
+            visible: System.hereLicensePath !== "" && termsModel.count > 0
+            // TRANSLATORS: HERE is a trademark for Nokia's location service, you probably shouldn't translate it
+            text: i18n.tr("I have read and agreed to the HERE <a href='terms.qml'>Terms and Conditions</a>")
             onLinkActivated: pageStack.load(Qt.resolvedUrl(link))
             checked: System.hereEnabled
             onTriggered: System.hereEnabled = checked

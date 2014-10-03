@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-09-22 19:11+0200\n"
-"PO-Revision-Date: 2014-09-21 20:01+0000\n"
+"POT-Creation-Date: 2014-09-26 12:27-0400\n"
+"PO-Revision-Date: 2014-10-02 00:58+0000\n"
 "Last-Translator: samson <Unknown>\n"
 "Language-Team: Amharic <am@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2014-09-23 07:14+0000\n"
+"X-Launchpad-Export-Date: 2014-10-03 06:20+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 
 #: ubuntu-system-settings.desktop.in.in.h:1 ../src/qml/MainWindow.qml:112
@@ -30,512 +30,6 @@ msgstr "ስርአት:"
 msgid "Preferences;Settings;"
 msgstr "ምርጫዎች: ማሰናጃዎች:"
 
-#: ../plugins/language//RebootNecessary.qml:34
-#: ../plugins/reset//ResetLauncherHome.qml:59
-msgid "The phone needs to restart for changes to take effect."
-msgstr "ለውጦቹን ተግባራዊ ለማድረግ ስልኩን እንደገና ማስነሳት ያስፈልጋል"
-
-#: ../plugins/language//RebootNecessary.qml:38
-msgid "Restart Now"
-msgstr "እንደገና ልጀምር አሁን"
-
-#: ../plugins/language//RebootNecessary.qml:47
-#: ../plugins/language//DisplayLanguage.qml:98
-#: ../plugins/cellular//HotspotSetup.qml:85
-#: ../plugins/wifi//OtherNetwork.qml:137
-#: ../plugins/time-date//TimePicker.qml:173
-#: ../plugins/phone//CallForwarding.qml:139
-#: ../plugins/reset//ResetAllSettings.qml:38
-#: ../plugins/reset//EraseEverything.qml:54
-#: ../plugins/reset//ResetLauncherHome.qml:55
-#: ../plugins/security-privacy//LockSecurity.qml:283
-#: ../plugins/security-privacy//SimPin.qml:149
-#: ../plugins/security-privacy//SimPin.qml:266
-#: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:49
-#: ../plugins/bluetooth//ProvidePinCodeDialog.qml:55
-#: ../plugins/bluetooth//ProvidePasskeyDialog.qml:54
-#: ../plugins/background//Preview.qml:101
-#: ../plugins/cellular//Components//SimEditor.qml:189
-#: ../plugins/background//Components//AddRemove.qml:42
-msgid "Cancel"
-msgstr "መሰረዣ"
-
-#: ../plugins/language//KeyboardLayouts.qml:26
-#: ../plugins/language//PageComponent.qml:117
-msgid "Keyboard layouts"
-msgstr "የ ፊደል ገበታ አቀራረብ"
-
-#: ../plugins/language//KeyboardLayouts.qml:39
-msgid "Current layouts:"
-msgstr "የ አሁኑ እቅድ:"
-
-#: ../plugins/language//KeyboardLayouts.qml:40
-msgid "All layouts available:"
-msgstr "ሁሉም እቅዶች ዝግጁ ናቸው:"
-
-#: ../plugins/language//SpellChecking.qml:27
-#: ../plugins/language//SpellChecking.qml:36
-#: ../plugins/language//PageComponent.qml:132
-#: ../plugins/language//PageComponent.qml:142
-msgid "Spell checking"
-msgstr "የ ቃላት ስህተት ማረሚያ"
-
-#: ../plugins/language//SpellChecking.qml:53
-msgid "Current spelling languages:"
-msgstr "የ አሁኑ ቋንቋ ፊደል ማረሚያ:"
-
-#: ../plugins/language//SpellChecking.qml:54
-msgid "All languages available:"
-msgstr "ሁሉም ቋንቋዎች ዝግጁ ናቸው:"
-
-#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: ../plugins/language//PageComponent.qml:34
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:2
-msgid "Language & Text"
-msgstr "ቋንቋ & ጽሁፍ"
-
-#: ../plugins/language//PageComponent.qml:100
-msgid "Display language…"
-msgstr "ቋንቋ ማሳያ…"
-
-#: ../plugins/language//PageComponent.qml:152
-msgid "Auto correction"
-msgstr "በራሱ ማረሚያ"
-
-#: ../plugins/language//PageComponent.qml:162
-msgid "Word suggestions"
-msgstr "የ ቃላት ሐሳብ አሳሳቢ"
-
-#: ../plugins/language//PageComponent.qml:175
-msgid "Auto capitalization"
-msgstr "በራሱ በ አቢይ ፊደል መጻፊያ"
-
-#: ../plugins/language//PageComponent.qml:185
-msgid "Turns on Shift to capitalize the first letter of each sentence."
-msgstr ""
-
-#: ../plugins/language//PageComponent.qml:192
-msgid "Auto punctuation"
-msgstr "በራሱ ነጥቦች ማስገቢያ"
-
-#: ../plugins/language//PageComponent.qml:202
-msgid ""
-"Adds a period, and any missing quotes or brackets, when you tap Space twice."
-msgstr ""
-
-#: ../plugins/language//PageComponent.qml:209
-#: ../plugins/sound//PageComponent.qml:196
-msgid "Keyboard sound"
-msgstr "የ ፊደል ገበታ ድምፅ"
-
-#: ../plugins/language//PageComponent.qml:219
-msgid "Keyboard vibration"
-msgstr "የ ፊደል ገበታ ማንቀጥቀጫ"
-
-#: ../plugins/language//DisplayLanguage.qml:36
-msgid "Display language"
-msgstr "ቋንቋ ማሳያ"
-
-#: ../plugins/language//DisplayLanguage.qml:118
-msgid "Confirm"
-msgstr "ማረጋገጫ"
-
-#: ../plugins/battery//SleepValues.qml:77
-msgid "Lock the phone when it's not in use:"
-msgstr "ስልኩን መቆለፊያ በማይጠቀሙበት ጊዜ:"
-
-#: ../plugins/battery//SleepValues.qml:77
-msgid "Put the phone to sleep when it is not in use:"
-msgstr "ስልኩን ማስተኛ በማይጠቀሙበት ጊዜ:"
-
-#. TRANSLATORS: %1 is the number of minutes
-#: ../plugins/battery//SleepValues.qml:83
-#: ../plugins/battery//SleepValues.qml:87
-#: ../plugins/battery//SleepValues.qml:91
-#: ../plugins/battery//SleepValues.qml:95
-#: ../plugins/battery//SleepValues.qml:99
-#: ../plugins/battery//SleepValues.qml:103
-#: ../plugins/battery//PageComponent.qml:312
-#: ../plugins/battery//PageComponent.qml:321
-#: ../plugins/security-privacy//PageComponent.qml:137
-#: ../plugins/security-privacy//PageComponent.qml:146
-#, qt-format
-msgid "After %1 minute"
-msgid_plural "After %1 minutes"
-msgstr[0] "ከ %1 ደቂቃ በኋላ"
-msgstr[1] "ከ %1 ደቂቆች በኋላ"
-
-#: ../plugins/battery//SleepValues.qml:106
-#: ../plugins/battery//PageComponent.qml:315
-#: ../plugins/battery//PageComponent.qml:324
-#: ../plugins/wifi//NetworkDetails.qml:55
-#: ../plugins/system-update//Configuration.qml:52
-#: ../plugins/system-update//PageComponent.qml:568
-#: ../plugins/about//PageComponent.qml:162
-#: ../plugins/security-privacy//PhoneLocking.qml:78
-#: ../plugins/security-privacy//PhoneLocking.qml:87
-#: ../plugins/security-privacy//PageComponent.qml:140
-msgid "Never"
-msgstr "በፍጹም"
-
-#: ../plugins/battery//SleepValues.qml:117
-msgid ""
-"Shorter times are more secure. Phone won't lock during calls or video "
-"playback."
-msgstr "ስልኩ ወደ ማስተኛ ዘዴ አይሄድም በ ጥሪ ላይ ወይንም ቪዲዮ በድጋሚ ሲያጫውቱ አጭር ጊዜ ለደህንነት ጥሩ ነው"
-
-#: ../plugins/battery//SleepValues.qml:117
-msgid "Phone won’t sleep during calls or video playback."
-msgstr "ስልኩ ወደ ማስተኛ ዘዴ አይሄድም በ ጥሪ ላይ ወይንም ቪዲዮ በድጋሚ ሲያጫውቱ"
-
-#. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
-#: ../plugins/battery//PageComponent.qml:34
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:12
-msgid "Battery"
-msgstr "ባትሪ"
-
-#. TRANSLATORS: %1 is the number of seconds
-#: ../plugins/battery//PageComponent.qml:46
-#, qt-format
-msgid "%1 second ago"
-msgid_plural "%1 seconds ago"
-msgstr[0] "%1 ሰከንድ በፊት"
-msgstr[1] "%1 ሰከንዶች በፊት"
-
-#. TRANSLATORS: %1 is the number of minutes
-#: ../plugins/battery//PageComponent.qml:49
-#, qt-format
-msgid "%1 minute ago"
-msgid_plural "%1 minutes ago"
-msgstr[0] "%1 ደቂቃ በፊት"
-msgstr[1] "%1 ደቂቆች በፊት"
-
-#. TRANSLATORS: %1 is the number of hours
-#: ../plugins/battery//PageComponent.qml:52
-#, qt-format
-msgid "%1 hour ago"
-msgid_plural "%1 hours ago"
-msgstr[0] "%1 ሰአት በፊት"
-msgstr[1] "%1 ሰአቶች በፊት"
-
-#. TRANSLATORS: %1 is the number of days
-#: ../plugins/battery//PageComponent.qml:55
-#, qt-format
-msgid "%1 day ago"
-msgid_plural "%1 days ago"
-msgstr[0] "%1 ቀን በፊት"
-msgstr[1] "%1 ቀኖች በፊት"
-
-#: ../plugins/battery//PageComponent.qml:85
-msgid "Charging now"
-msgstr "አሁን በመሙላት ላይ"
-
-#: ../plugins/battery//PageComponent.qml:90
-msgid "Last full charge"
-msgstr "መጨረሻ ሙሉ የተሞላው"
-
-#: ../plugins/battery//PageComponent.qml:95
-msgid "Fully charged"
-msgstr "በሙሉ ሞልቷል"
-
-#: ../plugins/battery//PageComponent.qml:126
-msgid "Charge level"
-msgstr "የተሞላው ደረጃ"
-
-#: ../plugins/battery//PageComponent.qml:131
-#: ../plugins/battery//PageComponent.qml:287
-#: ../plugins/cellular//PageChooseCarriers.qml:49
-#: ../plugins/cellular//PageChooseCarriers.qml:65
-#: ../plugins/about//Storage.qml:204
-#: ../plugins/cellular//Components//SingleSim.qml:62
-#: ../plugins/cellular//Components//NoSim.qml:48
-msgid "N/A"
-msgstr "ዝግጁ አይደለም"
-
-#. TRANSLATORS: %1 refers to a percentage that indicates the charging level of the battery
-#: ../plugins/battery//PageComponent.qml:134
-#, qt-format
-msgid "%1%"
-msgstr "%1%"
-
-#: ../plugins/battery//PageComponent.qml:212
-#: ../plugins/battery//PageComponent.qml:214
-msgid "Yesterday"
-msgstr "ትናንት"
-
-#: ../plugins/battery//PageComponent.qml:220
-#: ../plugins/battery//PageComponent.qml:222
-msgid "Today"
-msgstr "ዛሬ"
-
-#: ../plugins/battery//PageComponent.qml:292
-msgid "Ways to reduce battery use:"
-msgstr "የባትሪ አጠቃቀም ለመቀነስ:"
-
-#: ../plugins/battery//PageComponent.qml:296
-#: ../plugins/brightness//BrightnessSlider.qml:51
-msgid "Display brightness"
-msgstr "ብርሁነት ማሳያ"
-
-#: ../plugins/battery//PageComponent.qml:306
-#: ../plugins/security-privacy//PhoneLocking.qml:68
-msgid "Lock when idle"
-msgstr "በማይሰራ ጊዜ መቆለፊያ"
-
-#: ../plugins/battery//PageComponent.qml:306
-#: ../plugins/security-privacy//PhoneLocking.qml:69
-msgid "Sleep when idle"
-msgstr "በማይሰራ ጊዜ ማስተኛ"
-
-#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: ../plugins/battery//PageComponent.qml:333
-#: ../plugins/wifi//PageComponent.qml:26
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:44
-msgid "Wi-Fi"
-msgstr "ዋይ-ፋይ"
-
-#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
-#: ../plugins/battery//PageComponent.qml:363
-#: ../plugins/bluetooth//PageComponent.qml:32
-#: ../plugins/bluetooth//PageComponent.qml:147
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:146
-msgid "Bluetooth"
-msgstr "ብሉቱዝ"
-
-#: ../plugins/battery//PageComponent.qml:394
-msgid "GPS"
-msgstr "ጂፒኤስ"
-
-#: ../plugins/battery//PageComponent.qml:412
-msgid "Accurate location detection requires GPS and/or Wi-Fi."
-msgstr "በትክክል ያሉበትን ቦታ ለማግኘት የ ጂፒኤስ እና/ወይንም ዋይ-ፋይ ያስፈልጋል"
-
-#: ../plugins/cellular//Hotspot.qml:29
-#: ../plugins/cellular//Components//SingleSim.qml:43
-#: ../plugins/cellular//Components//MultiSim.qml:48
-msgid "Wi-Fi hotspot"
-msgstr ""
-
-#: ../plugins/cellular//Hotspot.qml:40
-msgid "Hotspot"
-msgstr ""
-
-#: ../plugins/cellular//Hotspot.qml:60
-msgid ""
-"When hotspot is on, other devices can use your cellular data connection over "
-"Wi-Fi. Normal data charges apply."
-msgstr ""
-
-#: ../plugins/cellular//Hotspot.qml:61
-msgid ""
-"Other devices can use your cellular data connection over the Wi-Fi network. "
-"Normal data charges apply."
-msgstr ""
-
-#: ../plugins/cellular//Hotspot.qml:65
-msgid "Set up hotspot"
-msgstr ""
-
-#: ../plugins/cellular//PageChooseCarriers.qml:28
-#: ../plugins/cellular//Components//MultiSim.qml:68
-msgid "Carriers"
-msgstr "አቅራቢዎች"
-
-#: ../plugins/cellular//PageChooseCarrier.qml:102
-msgid "Choose carrier:"
-msgstr "አቅራቢዎች ይምረጡ:"
-
-#: ../plugins/cellular//PageChooseCarrier.qml:103
-#: ../plugins/time-date//ChooseTimeZone.qml:47
-#: ../plugins/time-date//PageComponent.qml:69
-msgid "Automatically"
-msgstr "ራስ በራሱ"
-
-#: ../plugins/cellular//PageChooseCarrier.qml:103
-#: ../plugins/time-date//ChooseTimeZone.qml:47
-#: ../plugins/time-date//PageComponent.qml:69
-#: ../plugins/security-privacy//PageComponent.qml:149
-msgid "Manually"
-msgstr "በ እጅ የሚሰራ"
-
-#: ../plugins/cellular//PageChooseCarrier.qml:130
-msgid "Refresh"
-msgstr "ማነቃቂያ"
-
-#: ../plugins/cellular//PageChooseCarrier.qml:151
-msgid "Searching"
-msgstr "በ መፈለግ ላይ"
-
-#: ../plugins/cellular//HotspotSetup.qml:29
-msgid "Change hotspot setup"
-msgstr ""
-
-#: ../plugins/cellular//HotspotSetup.qml:40
-msgid "Hotspot name"
-msgstr ""
-
-#: ../plugins/cellular//HotspotSetup.qml:54
-msgid "Key (must be 8 characters or longer)"
-msgstr "ቁልፍ (8 ባህሪዎች ወይንም ከዚያ በላይ መሆን አለበት)"
-
-#: ../plugins/cellular//HotspotSetup.qml:68
-msgid "Show key"
-msgstr "ቁልፍ ማሳያ"
-
-#: ../plugins/cellular//HotspotSetup.qml:94
-#: ../plugins/security-privacy//LockSecurity.qml:302
-#: ../plugins/security-privacy//SimPin.qml:157
-msgid "Change"
-msgstr "መቀየሪያ"
-
-#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: ../plugins/cellular//PageComponent.qml:32
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:18
-msgid "Cellular"
-msgstr "ሴሉላር"
-
-#: ../plugins/sound//SilentModeWarning.qml:31
-msgid "The phone is in Silent Mode."
-msgstr "ስልኩ ያለው በ ዝምታ ዘዴ ነው"
-
-#: ../plugins/sound//SoundsList.qml:60
-msgid "Stop playing"
-msgstr "ጨዋታውን ማስቆሚያ"
-
-#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
-#: ../plugins/sound//PageComponent.qml:37
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:38
-msgid "Sound"
-msgstr "ድምፅ"
-
-#: ../plugins/sound//PageComponent.qml:76
-msgid "Silent Mode"
-msgstr "በ ዝምታ ዘዴ"
-
-#: ../plugins/sound//PageComponent.qml:80
-msgid "Ringer:"
-msgstr "ደዋይ:"
-
-#: ../plugins/sound//PageComponent.qml:112
-msgid "Phone calls:"
-msgstr "የ ስልክ ጥሪዎች:"
-
-#: ../plugins/sound//PageComponent.qml:116
-#: ../plugins/sound//PageComponent.qml:122
-msgid "Ringtone"
-msgstr "የ ስልክ ጥሪ ድምፅ"
-
-#: ../plugins/sound//PageComponent.qml:135
-msgid "Vibrate when ringing"
-msgstr "በሚደወል ጊዜ ማንቀጥቀጫ"
-
-#: ../plugins/sound//PageComponent.qml:144
-#: ../plugins/sound//PageComponent.qml:188
-msgid "Vibrate in Silent Mode"
-msgstr "በ ዝምታ ዘዴ ማንቀጥቀጫ"
-
-#: ../plugins/sound//PageComponent.qml:153
-#: ../plugins/phone//PageComponent.qml:109
-msgid "Dialpad sounds"
-msgstr "የ መደወያ ድምፅ"
-
-#: ../plugins/sound//PageComponent.qml:157
-msgid "Messages:"
-msgstr "መልእክቶች:"
-
-#: ../plugins/sound//PageComponent.qml:161
-#: ../plugins/sound//PageComponent.qml:167
-msgid "Message received"
-msgstr "የተቀበሉት መልእክቶች"
-
-#: ../plugins/sound//PageComponent.qml:179
-msgid "Vibrate with message sound"
-msgstr "ማንቀጥቀጫ ከ መልእክት ድምፅ ጋር"
-
-#: ../plugins/sound//PageComponent.qml:192
-msgid "Other sounds:"
-msgstr "ሌሎች ድምፆች:"
-
-#: ../plugins/sound//PageComponent.qml:210
-msgid "Lock sound"
-msgstr "ድምፅ መቆለፊያ"
-
-#: ../plugins/wifi//OtherNetwork.qml:27 ../plugins/wifi//PageComponent.qml:135
-msgid "Connect to hidden network"
-msgstr ""
-
-#: ../plugins/wifi//OtherNetwork.qml:65
-msgid "Network name"
-msgstr "የ ኔትዎርክ ስም"
-
-#: ../plugins/wifi//OtherNetwork.qml:78
-#: ../plugins/security-privacy//PageComponent.qml:126
-msgid "Security"
-msgstr "ደህንነት"
-
-#: ../plugins/wifi//OtherNetwork.qml:79
-#: ../plugins/bluetooth//PageComponent.qml:116
-#: ../plugins/bluetooth//PageComponent.qml:323
-#: ../plugins/bluetooth//PageComponent.qml:344
-msgid "None"
-msgstr "ምንም"
-
-#: ../plugins/wifi//OtherNetwork.qml:80
-msgid "WPA & WPA2 Personal"
-msgstr "WPA & WPA2 የግል"
-
-#: ../plugins/wifi//OtherNetwork.qml:81
-msgid "WEP"
-msgstr "WEP"
-
-#: ../plugins/wifi//OtherNetwork.qml:88 ../plugins/wifi//NetworkDetails.qml:61
-msgid "Password"
-msgstr "የመግቢያ ቃል"
-
-#: ../plugins/wifi//OtherNetwork.qml:106
-msgid "Password visible"
-msgstr "የሚታይ የመግቢያ ቃል"
-
-#: ../plugins/wifi//OtherNetwork.qml:146
-#: ../plugins/bluetooth//PageComponent.qml:408
-msgid "Connect"
-msgstr "መገናኛ"
-
-#: ../plugins/wifi//NetworkDetailsBrief.qml:42
-#: ../plugins/bluetooth//PageComponent.qml:408
-msgid "Disconnect"
-msgstr "ማቋረጫ"
-
-#: ../plugins/wifi//NetworkDetailsBrief.qml:58
-msgid "IP address"
-msgstr "IP አድራሻ"
-
-#: ../plugins/wifi//NetworkDetails.qml:36
-msgid "Network details"
-msgstr "የ ኔትዎርክ ዝርዝር"
-
-#: ../plugins/wifi//NetworkDetails.qml:43
-#: ../plugins/bluetooth//PageComponent.qml:343
-msgid "Name"
-msgstr "ስም"
-
-#: ../plugins/wifi//NetworkDetails.qml:51
-msgid "Last connected"
-msgstr "መጨረሻ የተገናኘው"
-
-#: ../plugins/wifi//NetworkDetails.qml:73
-msgid "Show password"
-msgstr "የመግቢያ ቃል ማሳያ"
-
-#: ../plugins/wifi//NetworkDetails.qml:83
-msgid "Forget network"
-msgstr "ኔትዎርክን መተው"
-
-#: ../plugins/wifi//PreviousNetworks.qml:26
-#: ../plugins/wifi//PageComponent.qml:129
-msgid "Previous networks"
-msgstr "ቀደም ያሉ ኔትዎርኮች"
-
 #: ../plugins/system-update//Configuration.qml:29
 #: ../plugins/system-update//PageComponent.qml:565
 msgid "Auto download"
@@ -544,6 +38,19 @@ msgstr "በራሱ ማውረጃ"
 #: ../plugins/system-update//Configuration.qml:34
 msgid "Download future updates automatically:"
 msgstr "ራሱ በራሱ የወደፊት ማሻሻያዎችን ማውረጃ:"
+
+#: ../plugins/system-update//Configuration.qml:52
+#: ../plugins/system-update//PageComponent.qml:568
+#: ../plugins/wifi//NetworkDetails.qml:55
+#: ../plugins/about//PageComponent.qml:167
+#: ../plugins/security-privacy//PageComponent.qml:140
+#: ../plugins/security-privacy//PhoneLocking.qml:78
+#: ../plugins/security-privacy//PhoneLocking.qml:87
+#: ../plugins/battery//PageComponent.qml:315
+#: ../plugins/battery//PageComponent.qml:324
+#: ../plugins/battery//SleepValues.qml:106
+msgid "Never"
+msgstr "በፍጹም"
 
 #: ../plugins/system-update//Configuration.qml:53
 msgid "When on wi-fi"
@@ -559,7 +66,7 @@ msgstr "የ ዳታ ክፍያ ሊጠየቁ ይችላሉ"
 
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
 #: ../plugins/system-update//PageComponent.qml:37
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:58
+#: ../po/settings.js:4
 msgid "Updates"
 msgstr "ማሻሻያዎች"
 
@@ -573,7 +80,7 @@ msgstr "የ ስርአቱን ማሻሻያ ለመግጠም ስልኩን እንደ�
 
 #: ../plugins/system-update//PageComponent.qml:95
 msgid "Connect the phone to power before installing the system update."
-msgstr ""
+msgstr "የ ስርአቱን ማሻሻያ ከ መግጠሞ በፊት ስልኩን ከ ሐይል ጋር ያገናኙ"
 
 #: ../plugins/system-update//PageComponent.qml:98
 msgid "Install & Restart"
@@ -681,92 +188,779 @@ msgstr " ሜጋ ባይት"
 msgid " GiB"
 msgstr " ጌጋ ባይት"
 
-#. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
-#: ../plugins/brightness//PageComponent.qml:32
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:68
-msgid "Brightness"
-msgstr "ብሩህነት"
+#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
+#: ../plugins/phone//PageComponent.qml:32
+#: ../plugins/bluetooth//PageComponent.qml:93
+#: ../po/settings.js:46
+msgid "Phone"
+msgstr "ስልክ"
 
-#: ../plugins/brightness//PageComponent.qml:52
-msgid "Adjust automatically"
-msgstr "ራሱ በራሱ ማስተካከያ"
+#: ../plugins/phone//PageComponent.qml:109
+#: ../plugins/sound//PageComponent.qml:153
+msgid "Dialpad sounds"
+msgstr "የ መደወያ ድምፅ"
 
-#: ../plugins/brightness//PageComponent.qml:65
-msgid "Brightens and dims the display to suit the surroundings."
-msgstr "ብርሁነት እና ማደብዘዣ ማሳያው ለ አካባቢው እንዲስማማ"
+#: ../plugins/phone//ServiceInfo.qml:109
+#, qt-format
+msgid "Last called %1"
+msgstr "መጨረሻ የደወሉት %1"
 
-#: ../plugins/time-date//ChooseTimeZone.qml:28
-msgid "Time zone"
-msgstr "የ ሰአት ክልል"
+#: ../plugins/phone//ServiceInfo.qml:119
+msgid "Call"
+msgstr "ጥሪ"
 
-#: ../plugins/time-date//ChooseTimeZone.qml:46
-msgid "Set the time zone:"
-msgstr "የ ሰአት ክልል ማሰናጃ:"
+#: ../plugins/phone//CallForwarding.qml:32
+#: ../plugins/phone//CallForwarding.qml:76 ../plugins/phone//NoSims.qml:28
+#: ../plugins/phone//SingleSim.qml:33 ../plugins/phone//MultiSim.qml:36
+#: ../plugins/phone//MultiSim.qml:74
+msgid "Call forwarding"
+msgstr "ጥሪ ወደ ፊት ማስተላለፊያ"
 
-#: ../plugins/time-date//ChooseTimeZone.qml:126
-msgid "Enter your current location."
-msgstr "የ አሁኑን አካባቢ ያስገቡ"
+#: ../plugins/phone//CallForwarding.qml:91
+msgid ""
+"Redirects phone calls to another number whenever you don't answer, or your "
+"phone is busy, turned off, or out of range."
+msgstr ""
 
-#: ../plugins/time-date//ChooseTimeZone.qml:127
-msgid "No matching place"
-msgstr "ተመሳሳይ ቦታ የለም"
+#: ../plugins/phone//CallForwarding.qml:101
+msgid "Forward to"
+msgstr "ወደ ፊት ወደ"
 
-#: ../plugins/time-date//TimePicker.qml:26
-msgid "Set time & date"
-msgstr "ሰአት & ቀን ማሰናጃ"
+#: ../plugins/phone//CallForwarding.qml:139
+#: ../plugins/background//Preview.qml:102
+#: ../plugins/language//DisplayLanguage.qml:98
+#: ../plugins/language//RebootNecessary.qml:47
+#: ../plugins/bluetooth//ProvidePasskeyDialog.qml:54
+#: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:49
+#: ../plugins/bluetooth//ProvidePinCodeDialog.qml:55
+#: ../plugins/wifi//OtherNetwork.qml:288
+#: ../plugins/security-privacy//SimPin.qml:149
+#: ../plugins/security-privacy//SimPin.qml:266
+#: ../plugins/security-privacy//LockSecurity.qml:283
+#: ../plugins/time-date//TimePicker.qml:173
+#: ../plugins/reset//ResetLauncherHome.qml:55
+#: ../plugins/reset//EraseEverything.qml:54
+#: ../plugins/reset//ResetAllSettings.qml:38
+#: ../plugins/cellular//HotspotSetup.qml:85
+#: ../plugins/background//Components//AddRemove.qml:42
+#: ../plugins/cellular//Components//SimEditor.qml:189
+msgid "Cancel"
+msgstr "መሰረዣ"
 
-#: ../plugins/time-date//TimePicker.qml:68
-msgid "Time"
-msgstr "ሰአት"
-
-#: ../plugins/time-date//TimePicker.qml:81
-msgid "Hour"
-msgstr "ሰአት"
-
-#: ../plugins/time-date//TimePicker.qml:95
-msgid "Minute"
-msgstr "ደቂቃ"
-
-#: ../plugins/time-date//TimePicker.qml:109
-msgid "Second"
-msgstr "ሰከንድ"
-
-#: ../plugins/time-date//TimePicker.qml:118
-msgid "Date"
-msgstr "ቀን"
-
-#: ../plugins/time-date//TimePicker.qml:130
-msgid "Day"
-msgstr "ቀን"
-
-#: ../plugins/time-date//TimePicker.qml:144
-msgid "Month"
-msgstr "ወር"
-
-#: ../plugins/time-date//TimePicker.qml:162
-msgid "Year"
-msgstr "አመት"
-
-#: ../plugins/time-date//TimePicker.qml:182
 #: ../plugins/phone//CallForwarding.qml:152
+#: ../plugins/background//Preview.qml:109
 #: ../plugins/security-privacy//LockSecurity.qml:304
-#: ../plugins/background//Preview.qml:108
+#: ../plugins/time-date//TimePicker.qml:182
 msgid "Set"
 msgstr "ማሰናጃ"
 
-#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
-#: ../plugins/time-date//PageComponent.qml:29
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:74
-msgid "Time & Date"
-msgstr "ሰአት & ቀን"
+#. TRANSLATORS: %1 is the name of the (network) carrier
+#: ../plugins/phone//Services.qml:34 ../plugins/phone//SingleSim.qml:51
+#, qt-format
+msgid "%1 Services"
+msgstr "%1 ግልጋሎቶች"
 
-#: ../plugins/time-date//PageComponent.qml:53
-msgid "Time zone:"
-msgstr "የ ሰአት ክልል:"
+#: ../plugins/phone//NoSims.qml:34 ../plugins/phone//SingleSim.qml:40
+#: ../plugins/phone//MultiSim.qml:46 ../plugins/phone//MultiSim.qml:84
+#: ../plugins/phone//CallWaiting.qml:31 ../plugins/phone//CallWaiting.qml:74
+msgid "Call waiting"
+msgstr "ጥሪ ማቆያ"
 
-#: ../plugins/time-date//PageComponent.qml:68
-msgid "Set the time and date:"
-msgstr "ሰአት እና ቀን ማሰናጃ:"
+#: ../plugins/phone//NoSims.qml:42 ../plugins/phone//MultiSim.qml:56
+#: ../plugins/phone//MultiSim.qml:94
+msgid "Services"
+msgstr "አገልግሎቶች"
+
+#: ../plugins/phone//SingleSim.qml:29
+msgid "SIM"
+msgstr "ሲም"
+
+#: ../plugins/phone//CallWaiting.qml:89
+msgid ""
+"Lets you answer or start a new call while on another call, and switch "
+"between them"
+msgstr ""
+"አዲስ ጥሪ ማስጀመር ወይንም መመለስ ያስችሎታል: በሌላ ጥሪ ላይ እና በሁለቱ ጥሪዎች መከከል መቀያየር ይችላሉ"
+
+#: ../plugins/background//Preview.qml:70
+msgid "Preview"
+msgstr "ቅድመ እይታ"
+
+#: ../plugins/background//Preview.qml:102
+msgid "Remove image"
+msgstr "ምስል ማስወገጃ"
+
+#. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
+#: ../plugins/background//MainPage.qml:35
+#: ../po/settings.js:64
+msgid "Background"
+msgstr "መደቡ"
+
+#: ../plugins/background//MainPage.qml:99
+msgid "Ubuntu Art"
+msgstr "የ ኡቡንቱ ኪነ ጥበብ"
+
+#: ../plugins/background//MainPage.qml:115
+msgid "Custom"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
+#: ../plugins/language//PageComponent.qml:34
+#: ../po/settings.js:80
+msgid "Language & Text"
+msgstr "ቋንቋ & ጽሁፍ"
+
+#: ../plugins/language//PageComponent.qml:100
+msgid "Display language…"
+msgstr "ቋንቋ ማሳያ…"
+
+#: ../plugins/language//PageComponent.qml:117
+#: ../plugins/language//KeyboardLayouts.qml:26
+msgid "Keyboard layouts"
+msgstr "የ ፊደል ገበታ አቀራረብ"
+
+#: ../plugins/language//PageComponent.qml:132
+#: ../plugins/language//PageComponent.qml:142
+#: ../plugins/language//SpellChecking.qml:27
+#: ../plugins/language//SpellChecking.qml:36
+msgid "Spell checking"
+msgstr "የ ቃላት ስህተት ማረሚያ"
+
+#: ../plugins/language//PageComponent.qml:152
+msgid "Auto correction"
+msgstr "በራሱ ማረሚያ"
+
+#: ../plugins/language//PageComponent.qml:162
+msgid "Word suggestions"
+msgstr "የ ቃላት ሐሳብ አሳሳቢ"
+
+#: ../plugins/language//PageComponent.qml:175
+msgid "Auto capitalization"
+msgstr "በራሱ በ አቢይ ፊደል መጻፊያ"
+
+#: ../plugins/language//PageComponent.qml:185
+msgid "Turns on Shift to capitalize the first letter of each sentence."
+msgstr "የ እያብዳንዱን አረፍተ ነገር መጀመሪያ በ አቢይ ፊደል ለመጻፍ የ ሺፍት ቁልፍን ያብሩ"
+
+#: ../plugins/language//PageComponent.qml:192
+msgid "Auto punctuation"
+msgstr "በራሱ ነጥቦች ማስገቢያ"
+
+#: ../plugins/language//PageComponent.qml:202
+msgid ""
+"Adds a period, and any missing quotes or brackets, when you tap Space twice."
+msgstr "መጨመሪያ ነጥብ እና የጎደሉ ትምህርተ ጥቅስ: የ ክፍተት ቁልፍን ሁለት ጊዜ መታ ሲያደርጉ"
+
+#: ../plugins/language//PageComponent.qml:209
+#: ../plugins/sound//PageComponent.qml:196
+msgid "Keyboard sound"
+msgstr "የ ፊደል ገበታ ድምፅ"
+
+#: ../plugins/language//PageComponent.qml:219
+msgid "Keyboard vibration"
+msgstr "የ ፊደል ገበታ ማንቀጥቀጫ"
+
+#: ../plugins/language//SpellChecking.qml:53
+msgid "Current spelling languages:"
+msgstr "የ አሁኑ ቋንቋ ፊደል ማረሚያ:"
+
+#: ../plugins/language//SpellChecking.qml:54
+msgid "All languages available:"
+msgstr "ሁሉም ቋንቋዎች ዝግጁ ናቸው:"
+
+#: ../plugins/language//KeyboardLayouts.qml:39
+msgid "Current layouts:"
+msgstr "የ አሁኑ እቅድ:"
+
+#: ../plugins/language//KeyboardLayouts.qml:40
+msgid "All layouts available:"
+msgstr "ሁሉም እቅዶች ዝግጁ ናቸው:"
+
+#: ../plugins/language//DisplayLanguage.qml:36
+msgid "Display language"
+msgstr "ቋንቋ ማሳያ"
+
+#: ../plugins/language//DisplayLanguage.qml:118
+msgid "Confirm"
+msgstr "ማረጋገጫ"
+
+#: ../plugins/language//RebootNecessary.qml:34
+#: ../plugins/reset//ResetLauncherHome.qml:59
+msgid "The phone needs to restart for changes to take effect."
+msgstr "ለውጦቹን ተግባራዊ ለማድረግ ስልኩን እንደገና ማስነሳት ያስፈልጋል"
+
+#: ../plugins/language//RebootNecessary.qml:38
+msgid "Restart Now"
+msgstr "እንደገና ልጀምር አሁን"
+
+#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
+#: ../plugins/bluetooth//PageComponent.qml:32
+#: ../plugins/bluetooth//PageComponent.qml:147
+#: ../plugins/battery//PageComponent.qml:363
+#: ../po/settings.js:114
+msgid "Bluetooth"
+msgstr "ብሉቱዝ"
+
+#: ../plugins/bluetooth//PageComponent.qml:82
+msgid "Connected"
+msgstr "ተገናኝቷል"
+
+#: ../plugins/bluetooth//PageComponent.qml:83
+msgid "Connecting…"
+msgstr "በመገናኘት ላይ…"
+
+#: ../plugins/bluetooth//PageComponent.qml:84
+msgid "Disconnecting…"
+msgstr "በማቋረጥ ላይ …"
+
+#: ../plugins/bluetooth//PageComponent.qml:85
+msgid "Disconnected"
+msgstr "ተቋርጧል"
+
+#: ../plugins/bluetooth//PageComponent.qml:86 ../plugins/wifi//Common.qml:96
+msgid "Unknown"
+msgstr "ያልታወቀ"
+
+#: ../plugins/bluetooth//PageComponent.qml:92
+msgid "Computer"
+msgstr "ኮምፒዩተር"
+
+#: ../plugins/bluetooth//PageComponent.qml:94
+msgid "Modem"
+msgstr "ሞደም"
+
+#: ../plugins/bluetooth//PageComponent.qml:95 ../src/qml/MainWindow.qml:147
+msgid "Network"
+msgstr "ኔትዎርክ"
+
+#: ../plugins/bluetooth//PageComponent.qml:96
+msgid "Headset"
+msgstr "በ ጆሮ ማድመጫ"
+
+#: ../plugins/bluetooth//PageComponent.qml:97
+msgid "Headphones"
+msgstr "በ ጆሮ ማድመጫዎች"
+
+#: ../plugins/bluetooth//PageComponent.qml:98
+msgid "Video"
+msgstr "ቪዲዮ"
+
+#: ../plugins/bluetooth//PageComponent.qml:99
+msgid "Other Audio"
+msgstr "ሌላ ድምፅ"
+
+#: ../plugins/bluetooth//PageComponent.qml:100
+msgid "Joypad"
+msgstr ""
+
+#: ../plugins/bluetooth//PageComponent.qml:101
+msgid "Keyboard"
+msgstr "የ ፊደል ገበታ"
+
+#: ../plugins/bluetooth//PageComponent.qml:102
+msgid "Tablet"
+msgstr "ታብሌት"
+
+#: ../plugins/bluetooth//PageComponent.qml:103
+msgid "Mouse"
+msgstr "አይጥ"
+
+#: ../plugins/bluetooth//PageComponent.qml:104
+msgid "Printer"
+msgstr "ማተሚያ"
+
+#: ../plugins/bluetooth//PageComponent.qml:105
+#: ../plugins/security-privacy//AppAccess.qml:41
+msgid "Camera"
+msgstr "ካሜራ"
+
+#: ../plugins/bluetooth//PageComponent.qml:106
+msgid "Other"
+msgstr "ሌሎች"
+
+#: ../plugins/bluetooth//PageComponent.qml:112
+msgid "Excellent"
+msgstr "እጅግ በጥም ጥሩ"
+
+#: ../plugins/bluetooth//PageComponent.qml:113
+msgid "Good"
+msgstr "ጥሩ"
+
+#: ../plugins/bluetooth//PageComponent.qml:114
+msgid "Fair"
+msgstr "ደህና"
+
+#: ../plugins/bluetooth//PageComponent.qml:115
+msgid "Poor"
+msgstr "ደካማ"
+
+#: ../plugins/bluetooth//PageComponent.qml:116
+#: ../plugins/bluetooth//PageComponent.qml:326
+#: ../plugins/bluetooth//PageComponent.qml:347
+#: ../plugins/wifi//OtherNetwork.qml:214
+msgid "None"
+msgstr "ምንም"
+
+#: ../plugins/bluetooth//PageComponent.qml:182
+msgid "Discoverable"
+msgstr ""
+
+#: ../plugins/bluetooth//PageComponent.qml:182
+msgid "Not discoverable"
+msgstr "ማግኘት አይቻልም"
+
+#: ../plugins/bluetooth//PageComponent.qml:213
+msgid "Connected devices:"
+msgstr "የተገናኙ አካሎች:"
+
+#: ../plugins/bluetooth//PageComponent.qml:251
+msgid "Connect another device:"
+msgstr "ሌላ አካል መገናኛ:"
+
+#: ../plugins/bluetooth//PageComponent.qml:251
+msgid "Connect a device:"
+msgstr "አካል ማገናኛ:"
+
+#: ../plugins/bluetooth//PageComponent.qml:285
+msgid "None detected"
+msgstr "ምንም አልተገኘ"
+
+#: ../plugins/bluetooth//PageComponent.qml:293
+#: ../plugins/bluetooth//PageComponent.qml:397
+msgid "Connect automatically when detected:"
+msgstr "ራሱ በራሱ መገናኛ በሚገኝበት ጊዜ:"
+
+#: ../plugins/bluetooth//PageComponent.qml:346
+#: ../plugins/wifi//NetworkDetails.qml:43
+msgid "Name"
+msgstr "ስም"
+
+#: ../plugins/bluetooth//PageComponent.qml:364
+msgid "Type"
+msgstr "አይነት"
+
+#: ../plugins/bluetooth//PageComponent.qml:388
+msgid "Status"
+msgstr "ሁኔታው"
+
+#: ../plugins/bluetooth//PageComponent.qml:392
+msgid "Signal Strength"
+msgstr "የ ምልክት ጥንካሬ"
+
+#: ../plugins/bluetooth//PageComponent.qml:411
+#: ../plugins/wifi//NetworkDetailsBrief.qml:42
+msgid "Disconnect"
+msgstr "ማቋረጫ"
+
+#: ../plugins/bluetooth//PageComponent.qml:411
+#: ../plugins/wifi//OtherNetwork.qml:304
+msgid "Connect"
+msgstr "መገናኛ"
+
+#: ../plugins/bluetooth//PageComponent.qml:429
+msgid "Forget this device"
+msgstr "ይህን አካል ተወው"
+
+#: ../plugins/bluetooth//ProvidePasskeyDialog.qml:28
+#: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:28
+#: ../plugins/bluetooth//ProvidePinCodeDialog.qml:28
+msgid "Bluetooth Pairing Request"
+msgstr "የ ብሉቱዝ ማጣመሪያ ጥያቄ"
+
+#: ../plugins/bluetooth//ProvidePasskeyDialog.qml:36
+#: ../plugins/bluetooth//ProvidePinCodeDialog.qml:36
+#, qt-format
+msgid "PIN for '%1'"
+msgstr "ፒን ለ '%1'"
+
+#: ../plugins/bluetooth//ProvidePasskeyDialog.qml:62
+#: ../plugins/bluetooth//ProvidePinCodeDialog.qml:63
+msgid "Pair"
+msgstr "ማጣመሪያ"
+
+#. TRANSLATORS: %1 is the name of the bluetooth device being paired
+#: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:37
+#, qt-format
+msgid "Please confirm that the PIN displayed on '%1' matches this one"
+msgstr "እባክዎን ያረጋግጡ ይህ የሚታየው ፒን ከ '%1' ከዚህ ጋር እንደሚመሳሰል"
+
+#: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:57
+msgid "Confirm PIN"
+msgstr "ማረጋገጫ ፒን"
+
+#: ../plugins/sound//SilentModeWarning.qml:31
+msgid "The phone is in Silent Mode."
+msgstr "ስልኩ ያለው በ ዝምታ ዘዴ ነው"
+
+#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
+#: ../plugins/sound//PageComponent.qml:37
+#: ../po/settings.js:144
+msgid "Sound"
+msgstr "ድምፅ"
+
+#: ../plugins/sound//PageComponent.qml:76
+msgid "Silent Mode"
+msgstr "በ ዝምታ ዘዴ"
+
+#: ../plugins/sound//PageComponent.qml:80
+msgid "Ringer:"
+msgstr "ደዋይ:"
+
+#: ../plugins/sound//PageComponent.qml:112
+msgid "Phone calls:"
+msgstr "የ ስልክ ጥሪዎች:"
+
+#: ../plugins/sound//PageComponent.qml:116
+#: ../plugins/sound//PageComponent.qml:122
+msgid "Ringtone"
+msgstr "የ ስልክ ጥሪ ድምፅ"
+
+#: ../plugins/sound//PageComponent.qml:135
+msgid "Vibrate when ringing"
+msgstr "በሚደወል ጊዜ ማንቀጥቀጫ"
+
+#: ../plugins/sound//PageComponent.qml:144
+#: ../plugins/sound//PageComponent.qml:188
+msgid "Vibrate in Silent Mode"
+msgstr "በ ዝምታ ዘዴ ማንቀጥቀጫ"
+
+#: ../plugins/sound//PageComponent.qml:157
+msgid "Messages:"
+msgstr "መልእክቶች:"
+
+#: ../plugins/sound//PageComponent.qml:161
+#: ../plugins/sound//PageComponent.qml:167
+msgid "Message received"
+msgstr "የተቀበሉት መልእክቶች"
+
+#: ../plugins/sound//PageComponent.qml:179
+msgid "Vibrate with message sound"
+msgstr "ማንቀጥቀጫ ከ መልእክት ድምፅ ጋር"
+
+#: ../plugins/sound//PageComponent.qml:192
+msgid "Other sounds:"
+msgstr "ሌሎች ድምፆች:"
+
+#: ../plugins/sound//PageComponent.qml:210
+msgid "Lock sound"
+msgstr "ድምፅ መቆለፊያ"
+
+#: ../plugins/sound//SoundsList.qml:60
+msgid "Stop playing"
+msgstr "ጨዋታውን ማስቆሚያ"
+
+#: ../plugins/wifi//NetworkDetails.qml:36
+msgid "Network details"
+msgstr "የ ኔትዎርክ ዝርዝር"
+
+#: ../plugins/wifi//NetworkDetails.qml:51
+msgid "Last connected"
+msgstr "መጨረሻ የተገናኘው"
+
+#: ../plugins/wifi//NetworkDetails.qml:61
+#: ../plugins/wifi//OtherNetwork.qml:222
+msgid "Password"
+msgstr "የመግቢያ ቃል"
+
+#: ../plugins/wifi//NetworkDetails.qml:73
+#: ../plugins/wifi//OtherNetwork.qml:256
+msgid "Show password"
+msgstr "የመግቢያ ቃል ማሳያ"
+
+#: ../plugins/wifi//NetworkDetails.qml:83
+msgid "Forget network"
+msgstr "ኔትዎርክን መተው"
+
+#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
+#: ../plugins/wifi//PageComponent.qml:28
+#: ../plugins/battery//PageComponent.qml:333
+#: ../po/settings.js:162
+msgid "Wi-Fi"
+msgstr "ዋይ-ፋይ"
+
+#: ../plugins/wifi//PageComponent.qml:131
+#: ../plugins/wifi//PreviousNetworks.qml:26
+msgid "Previous networks"
+msgstr "ቀደም ያሉ ኔትዎርኮች"
+
+#: ../plugins/wifi//PageComponent.qml:138
+msgid "Connect to hidden network…"
+msgstr "ከ ተደበቀ ኔትዎርክ ጋር መገናኛ…"
+
+#: ../plugins/wifi//OtherNetwork.qml:96
+msgid "Connect to Hidden Network"
+msgstr "ከ ተደበቀ ኔትዎርክ ጋር መገናኛ"
+
+#: ../plugins/wifi//OtherNetwork.qml:187
+msgid "Network name"
+msgstr "የ ኔትዎርክ ስም"
+
+#: ../plugins/wifi//OtherNetwork.qml:203
+#: ../plugins/security-privacy//PageComponent.qml:126
+msgid "Security"
+msgstr "ደህንነት"
+
+#: ../plugins/wifi//OtherNetwork.qml:215
+msgid "WPA & WPA2 Personal"
+msgstr "WPA & WPA2 የግል"
+
+#: ../plugins/wifi//OtherNetwork.qml:216
+msgid "WEP"
+msgstr "WEP"
+
+#: ../plugins/wifi//RemoveBackground.qml:28
+msgid "Clear"
+msgstr "ማጽጃ"
+
+#: ../plugins/wifi//Common.qml:36
+msgid "Unknown error"
+msgstr "ያልታወቀ ስህተት"
+
+#: ../plugins/wifi//Common.qml:38
+msgid "No reason given"
+msgstr "ምንም ምክንያት አልተሰጠም"
+
+#: ../plugins/wifi//Common.qml:40
+msgid "Device is now managed"
+msgstr "አካሉ አሁን በ አስተዳዳሪው ቁጥጥር ውስጥ ነው"
+
+#: ../plugins/wifi//Common.qml:42
+msgid "Device is now unmanaged"
+msgstr "አካሉ አሁን በ አስተዳዳሪው ቁጥጥር ውስጥ አይደለም"
+
+#: ../plugins/wifi//Common.qml:44
+msgid "The device could not be readied for configuration"
+msgstr ""
+
+#: ../plugins/wifi//Common.qml:46
+msgid ""
+"IP configuration could not be reserved (no available address, timeout, etc.)"
+msgstr ""
+
+#: ../plugins/wifi//Common.qml:48
+msgid "The IP configuration is no longer valid"
+msgstr ""
+
+#: ../plugins/wifi//Common.qml:50
+msgid "Your authentication details were incorrect"
+msgstr "የ እርስዎ ማረጋገጫ ዝርዝር ትክክል አይደለም"
+
+#: ../plugins/wifi//Common.qml:52
+msgid "802.1X supplicant disconnected"
+msgstr ""
+
+#: ../plugins/wifi//Common.qml:54
+msgid "802.1X supplicant configuration failed"
+msgstr ""
+
+#: ../plugins/wifi//Common.qml:56
+msgid "802.1X supplicant failed"
+msgstr ""
+
+#: ../plugins/wifi//Common.qml:58
+msgid "802.1X supplicant took too long to authenticate"
+msgstr ""
+
+#: ../plugins/wifi//Common.qml:60
+msgid "DHCP client failed to start"
+msgstr "የ DHCP ደንበኛ ማስጀመር አልተቻለም"
+
+#: ../plugins/wifi//Common.qml:62
+msgid "DHCP client error"
+msgstr "የ DHCP ደንበኛ ስህተት"
+
+#: ../plugins/wifi//Common.qml:64
+msgid "DHCP client failed"
+msgstr "የ DHCP ደንበኛ ወድቋል"
+
+#: ../plugins/wifi//Common.qml:66
+msgid "Shared connection service failed to start"
+msgstr "የሚጋሩትን የ ግንኙነት ግልጋሎት ማስጀመር አልተቻለም"
+
+#: ../plugins/wifi//Common.qml:68
+msgid "Shared connection service failed"
+msgstr "የሚጋሩት የ ግንኙነት ግልጋሎት ወድቋል"
+
+#: ../plugins/wifi//Common.qml:70
+msgid "Necessary firmware for the device may be missing"
+msgstr ""
+
+#: ../plugins/wifi//Common.qml:72
+msgid "The device was removed"
+msgstr "አካሉ ተወግዷል"
+
+#: ../plugins/wifi//Common.qml:74
+msgid "NetworkManager went to sleep"
+msgstr ""
+
+#: ../plugins/wifi//Common.qml:76
+msgid "The device's active connection disappeared"
+msgstr "የ አካሉ ንቁ ግንኙነት ጠፍቷል"
+
+#: ../plugins/wifi//Common.qml:78
+msgid "Device disconnected by user or client"
+msgstr "አካሉ በ ተጠቃሚው ወይንም በ ደንበኛው ተለያይቷል"
+
+#: ../plugins/wifi//Common.qml:80
+msgid "The device's existing connection was assumed"
+msgstr ""
+
+#: ../plugins/wifi//Common.qml:82
+msgid "The supplicant is now available"
+msgstr ""
+
+#: ../plugins/wifi//Common.qml:84
+msgid "The modem could not be found"
+msgstr "ሞደም ማግኘት አልተቻለም"
+
+#: ../plugins/wifi//Common.qml:86
+msgid "The Bluetooth connection failed or timed out"
+msgstr "የ ብሉቱዝ ግንኙነት ወድቋል ወይንም ጊዜው አልፏል"
+
+#: ../plugins/wifi//Common.qml:88
+msgid "A dependency of the connection failed"
+msgstr ""
+
+#: ../plugins/wifi//Common.qml:90
+msgid "ModemManager is unavailable"
+msgstr "የ ሞደም አስተዳዳሪ አልተገኘም"
+
+#: ../plugins/wifi//Common.qml:92
+msgid "The Wi-Fi network could not be found"
+msgstr "የ ዋይ-ፋይ ኔትዎርክ አልተገኘም"
+
+#: ../plugins/wifi//Common.qml:94
+msgid "A secondary connection of the base connection failed"
+msgstr ""
+
+#: ../plugins/wifi//NetworkDetailsBrief.qml:58
+msgid "IP address"
+msgstr "IP አድራሻ"
+
+#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
+#: ../plugins/notifications//PageComponent.qml:29
+#: ../po/settings.js:182
+msgid "Notifications"
+msgstr "ማስታወቂያዎች"
+
+#: ../plugins/notifications//PageComponent.qml:40
+msgid ""
+"Selected apps can alert you using notification bubbles, sounds, vibrations, "
+"and the Notification Center."
+msgstr ""
+
+#: ../plugins/about//License.qml:30
+msgid "Sorry, this license could not be displayed."
+msgstr "አዝናለሁ ይህን ፍቃድ ማሳየት አይቻልም"
+
+#: ../plugins/about//Storage.qml:33 ../plugins/about//PageComponent.qml:143
+msgid "Storage"
+msgstr "ማጠራቀሚያ"
+
+#: ../plugins/about//Storage.qml:85
+msgid "Used by Ubuntu"
+msgstr "ኡቡንቱ የሚጠቀማቸው"
+
+#: ../plugins/about//Storage.qml:86
+msgid "Videos"
+msgstr "ቪዲዮዎች"
+
+#: ../plugins/about//Storage.qml:87
+msgid "Audio"
+msgstr "ድምፅ"
+
+#: ../plugins/about//Storage.qml:88
+msgid "Pictures"
+msgstr "ስእሎች"
+
+#: ../plugins/about//Storage.qml:89
+msgid "Other files"
+msgstr "ሌሎች ፋይሎች"
+
+#: ../plugins/about//Storage.qml:90
+msgid "Used by apps"
+msgstr "መተግበሪያ የሚጠቀማቸው"
+
+#: ../plugins/about//Storage.qml:140
+msgid "Total storage"
+msgstr "ጠቅላላ ማጠራቀሚያው"
+
+#: ../plugins/about//Storage.qml:152
+msgid "Free space"
+msgstr "ነፃ ቦታ"
+
+#: ../plugins/about//Storage.qml:172
+msgid "By name"
+msgstr "በ ስም"
+
+#: ../plugins/about//Storage.qml:172
+msgid "By size"
+msgstr "በ መጠን"
+
+#: ../plugins/about//Storage.qml:203
+#: ../plugins/cellular//PageChooseCarriers.qml:49
+#: ../plugins/cellular//PageChooseCarriers.qml:65
+#: ../plugins/battery//PageComponent.qml:131
+#: ../plugins/battery//PageComponent.qml:287
+#: ../plugins/cellular//Components//NoSim.qml:48
+#: ../plugins/cellular//Components//SingleSim.qml:62
+msgid "N/A"
+msgstr "ዝግጁ አይደለም"
+
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: ../plugins/about//PageComponent.qml:34
+#: ../po/settings.js:206
+msgid "About this phone"
+msgstr "ስለዚህ ስልክ"
+
+#: ../plugins/about//PageComponent.qml:109
+msgid "Serial"
+msgstr "ተከታታይ"
+
+#: ../plugins/about//PageComponent.qml:124
+msgid "Wi-Fi address"
+msgstr "የ ዋይ-ፋይ አድራሻ"
+
+#: ../plugins/about//PageComponent.qml:132
+msgid "Bluetooth address"
+msgstr "የ ብሉቱዝ አድራሻ"
+
+#: ../plugins/about//PageComponent.qml:144
+#, qt-format
+msgid "%1 free"
+msgstr "%1 ነፃ"
+
+#: ../plugins/about//PageComponent.qml:151
+msgid "Software:"
+msgstr "ሶፍትዌር:"
+
+#: ../plugins/about//PageComponent.qml:156
+msgid "OS"
+msgstr "ስራት"
+
+#: ../plugins/about//PageComponent.qml:165
+msgid "Last updated"
+msgstr "መጨረሻ የተሻሻለው"
+
+#: ../plugins/about//PageComponent.qml:173
+msgid "Check for updates"
+msgstr "ማሻሻያዎች መፈለጊያ"
+
+#: ../plugins/about//PageComponent.qml:182
+msgid "Legal:"
+msgstr "ሕጋዊ:"
+
+#: ../plugins/about//PageComponent.qml:187 ../plugins/about//Software.qml:11
+msgid "Software licenses"
+msgstr "የ ሶፍትዌር ፍቃዶች"
+
+#: ../plugins/about//PageComponent.qml:195
+msgid "Regulatory info"
+msgstr "የ ደንብ መረጃ"
+
+#: ../plugins/about//PageComponent.qml:203
+msgid "Developer mode"
+msgstr ""
 
 #: ../plugins/about//Version.qml:36
 msgid "OS Build Details"
@@ -796,247 +990,155 @@ msgstr "የ አካል መገንቢያ መግለጫ"
 msgid "Customization Image part"
 msgstr ""
 
-#: ../plugins/about//License.qml:30
-msgid "Sorry, this license could not be displayed."
-msgstr "አዝናለሁ ይህን ፍቃድ ማሳየት አይቻልም"
-
-#: ../plugins/about//Software.qml:11 ../plugins/about//PageComponent.qml:182
-msgid "Software licenses"
-msgstr "የ ሶፍትዌር ፍቃዶች"
-
-#: ../plugins/about//DevMode.qml:35 ../plugins/about//DevMode.qml:88
-msgid "Developer Mode"
-msgstr ""
-
-#: ../plugins/about//DevMode.qml:82
-msgid ""
-"In Developer Mode, anyone can access, change or delete anything on this "
-"phone by connecting it to another device."
-msgstr ""
-
-#: ../plugins/about//DevMode.qml:108
-msgid "You need a PIN code or passphrase set to use Developer Mode."
-msgstr ""
-
-#: ../plugins/about//DevMode.qml:114
-#: ../plugins/security-privacy//LockSecurity.qml:32
-#: ../plugins/security-privacy//PhoneLocking.qml:49
-msgid "Lock security"
-msgstr "ደህንነት መቆለፊያ"
+#: ../plugins/about//PhoneNumber.qml:36
+msgid "Phone number"
+msgstr "የ ስልክ ቁጥር"
 
 #: ../plugins/about//PhoneNumbers.qml:31
 msgid "Phone number:"
 msgstr "የ ስልክ ቍጥር:"
 
-#: ../plugins/about//PhoneNumber.qml:36
-msgid "Phone number"
-msgstr "የ ስልክ ቁጥር"
-
-#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: ../plugins/about//PageComponent.qml:34
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:84
-msgid "About this phone"
-msgstr "ስለዚህ ስልክ"
-
-#: ../plugins/about//PageComponent.qml:105
-msgid "Serial"
-msgstr "ተከታታይ"
-
-#: ../plugins/about//PageComponent.qml:120
-msgid "Wi-Fi address"
+#: ../plugins/about//DevMode.qml:35 ../plugins/about//DevMode.qml:90
+msgid "Developer Mode"
 msgstr ""
 
-#: ../plugins/about//PageComponent.qml:128
-msgid "Bluetooth address"
-msgstr "የ ብሉቱዝ አድራሻ"
-
-#: ../plugins/about//PageComponent.qml:139 ../plugins/about//Storage.qml:33
-msgid "Storage"
-msgstr "ማጠራቀሚያ"
-
-#: ../plugins/about//PageComponent.qml:146
-msgid "Software:"
-msgstr "ሶፍትዌር:"
-
-#: ../plugins/about//PageComponent.qml:151
-msgid "OS"
-msgstr "ስራት"
-
-#: ../plugins/about//PageComponent.qml:160
-msgid "Last updated"
-msgstr "መጨረሻ የተሻሻለው"
-
-#: ../plugins/about//PageComponent.qml:168
-msgid "Check for updates"
-msgstr "ማሻሻያዎች መፈለጊያ"
-
-#: ../plugins/about//PageComponent.qml:177
-msgid "Legal:"
-msgstr "ሕጋዊ:"
-
-#: ../plugins/about//PageComponent.qml:190
-msgid "Regulatory info"
-msgstr "የ ደንብ መረጃ"
-
-#: ../plugins/about//PageComponent.qml:198
-msgid "Developer mode"
+#: ../plugins/about//DevMode.qml:84
+msgid ""
+"In Developer Mode, anyone can access, change or delete anything on this "
+"phone by connecting it to another device."
 msgstr ""
 
-#: ../plugins/about//Storage.qml:87
-msgid "Used by Ubuntu"
-msgstr "ኡቡንቱ የሚጠቀማቸው"
+#: ../plugins/about//DevMode.qml:110
+msgid "You need a PIN code or passphrase set to use Developer Mode."
+msgstr ""
 
-#: ../plugins/about//Storage.qml:88
-msgid "Videos"
-msgstr "ቪዲዮዎች"
+#: ../plugins/about//DevMode.qml:116
+#: ../plugins/security-privacy//PhoneLocking.qml:49
+#: ../plugins/security-privacy//LockSecurity.qml:32
+msgid "Lock security"
+msgstr "ደህንነት መቆለፊያ"
 
-#: ../plugins/about//Storage.qml:89
-msgid "Audio"
-msgstr "ድምፅ"
+#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
+#: ../plugins/security-privacy//PageComponent.qml:37
+#: ../po/settings.js:242
+msgid "Security & Privacy"
+msgstr "ደህንነት & የ ግል"
 
-#: ../plugins/about//Storage.qml:90
-msgid "Pictures"
-msgstr "ስእሎች"
+#: ../plugins/security-privacy//PageComponent.qml:100
+#: ../plugins/security-privacy//PageComponent.qml:218
+#: ../plugins/security-privacy//Dash.qml:46
+msgid "Phone and Internet"
+msgstr "ስልክ እና ኢንተርኔት"
 
-#: ../plugins/about//Storage.qml:91
-msgid "Other files"
-msgstr "ሌሎች ፋይሎች"
+#: ../plugins/security-privacy//PageComponent.qml:102
+#: ../plugins/security-privacy//PageComponent.qml:219
+#: ../plugins/security-privacy//Dash.qml:46
+msgid "Phone only"
+msgstr "ስልክ ብቻ"
 
-#: ../plugins/about//Storage.qml:92
-msgid "Used by apps"
-msgstr "መተግበሪያ የሚጠቀማቸው"
+#: ../plugins/security-privacy//PageComponent.qml:131
+msgid "Lock phone"
+msgstr "ስልኩን መቆለፊያ"
 
-#: ../plugins/about//Storage.qml:142
-msgid "Total storage"
-msgstr "ጠቅላላ ማጠራቀሚያው"
-
-#: ../plugins/about//Storage.qml:154
-msgid "Free space"
-msgstr "ነፃ ቦታ"
-
-#: ../plugins/about//Storage.qml:174
-msgid "By name"
-msgstr "በ ስም"
-
-#: ../plugins/about//Storage.qml:174
-msgid "By size"
-msgstr "በ መጠን"
-
-#: ../plugins/phone//NoSims.qml:28 ../plugins/phone//SingleSim.qml:33
-#: ../plugins/phone//MultiSim.qml:36 ../plugins/phone//MultiSim.qml:74
-#: ../plugins/phone//CallForwarding.qml:32
-#: ../plugins/phone//CallForwarding.qml:76
-msgid "Call forwarding"
-msgstr "ጥሪ ወደ ፊት ማስተላለፊያ"
-
-#: ../plugins/phone//NoSims.qml:34 ../plugins/phone//SingleSim.qml:40
-#: ../plugins/phone//CallWaiting.qml:31 ../plugins/phone//CallWaiting.qml:74
-#: ../plugins/phone//MultiSim.qml:46 ../plugins/phone//MultiSim.qml:84
-msgid "Call waiting"
-msgstr "ጥሪ ማቆያ"
-
-#: ../plugins/phone//NoSims.qml:42 ../plugins/phone//MultiSim.qml:56
-#: ../plugins/phone//MultiSim.qml:94
-msgid "Services"
-msgstr "አገልግሎቶች"
-
-#: ../plugins/phone//SingleSim.qml:29
-msgid "SIM"
-msgstr "ሲም"
-
-#. TRANSLATORS: %1 is the name of the (network) carrier
-#: ../plugins/phone//SingleSim.qml:51 ../plugins/phone//Services.qml:34
+#. TRANSLATORS: %1 is the number of minutes
+#: ../plugins/security-privacy//PageComponent.qml:137
+#: ../plugins/security-privacy//PageComponent.qml:146
+#: ../plugins/battery//PageComponent.qml:312
+#: ../plugins/battery//PageComponent.qml:321
+#: ../plugins/battery//SleepValues.qml:83
+#: ../plugins/battery//SleepValues.qml:87
+#: ../plugins/battery//SleepValues.qml:91
+#: ../plugins/battery//SleepValues.qml:95
+#: ../plugins/battery//SleepValues.qml:99
+#: ../plugins/battery//SleepValues.qml:103
 #, qt-format
-msgid "%1 Services"
-msgstr "%1 ግልጋሎቶች"
+msgid "After %1 minute"
+msgid_plural "After %1 minutes"
+msgstr[0] "ከ %1 ደቂቃ በኋላ"
+msgstr[1] "ከ %1 ደቂቆች በኋላ"
 
-#: ../plugins/phone//CallWaiting.qml:89
-msgid ""
-"Lets you answer or start a new call while on another call, and switch "
-"between them"
-msgstr ""
-"አዲስ ጥሪ ማስጀመር ወይንም መመለስ ያስችሎታል: በሌላ ጥሪ ላይ እና በሁለቱ ጥሪዎች መከከል መቀያየር ይችላሉ"
+#: ../plugins/security-privacy//PageComponent.qml:149
+#: ../plugins/time-date//PageComponent.qml:69
+#: ../plugins/time-date//ChooseTimeZone.qml:47
+#: ../plugins/cellular//PageChooseCarrier.qml:103
+msgid "Manually"
+msgstr "በ እጅ የሚሰራ"
 
-#: ../plugins/phone//ServiceInfo.qml:109
-#, qt-format
-msgid "Last called %1"
-msgstr "መጨረሻ የደወሉት %1"
+#: ../plugins/security-privacy//PageComponent.qml:158
+#: ../plugins/security-privacy//SimPin.qml:34
+#: ../plugins/security-privacy//SimPin.qml:322
+msgid "SIM PIN"
+msgstr "SIM PIN"
 
-#: ../plugins/phone//ServiceInfo.qml:119
-msgid "Call"
-msgstr "ጥሪ"
+#: ../plugins/security-privacy//PageComponent.qml:161
+#: ../plugins/security-privacy//PageComponent.qml:244
+msgid "On"
+msgstr "ማብሪያ"
 
-#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
-#: ../plugins/phone//PageComponent.qml:32
-#: ../plugins/bluetooth//PageComponent.qml:93
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:92
-msgid "Phone"
-msgstr "ስልክ"
+#: ../plugins/security-privacy//PageComponent.qml:165
+#: ../plugins/security-privacy//PageComponent.qml:244
+#: ../plugins/cellular//Components//CellularMultiSim.qml:30
+#: ../plugins/cellular//Components//NoSim.qml:32
+#: ../plugins/cellular//Components//CellularSingleSim.qml:50
+msgid "Off"
+msgstr "ማጥፊያ"
 
-#: ../plugins/phone//CallForwarding.qml:91
-msgid ""
-"Redirects phone calls to another number whenever you don't answer, or your "
-"phone is busy, turned off, or out of range."
-msgstr ""
-
-#: ../plugins/phone//CallForwarding.qml:101
-msgid "Forward to"
-msgstr "ወደ ፊት ወደ"
-
-#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
-#: ../plugins/notifications//PageComponent.qml:29
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:98
-msgid "Notifications"
-msgstr "ማስታወቂያዎች"
-
-#: ../plugins/notifications//PageComponent.qml:40
-msgid ""
-"Selected apps can alert you using notification bubbles, sounds, vibrations, "
-"and the Notification Center."
+#: ../plugins/security-privacy//PageComponent.qml:172
+msgid "Encryption"
 msgstr ""
 
-#: ../plugins/reset//ResetAllSettings.qml:29
+#: ../plugins/security-privacy//PageComponent.qml:181
 msgid ""
-"The contents and layout of the launcher, and the filters in the home screen "
-"will be returned to their original settings."
-msgstr "የ ማስነሻ ይዞታ እና እቅድ እና ማጣሪያዎች በ ቤት መመልከቻ ውስጥ ወደ ነበረበት ወደ ማሰናጃው ይመለሳል"
+"Encryption protects against access to phone data when the phone is connected "
+"to a PC or other device."
+msgstr ""
 
-#: ../plugins/reset//ResetAllSettings.qml:31
-msgid "Reset all system settings"
-msgstr "ሁሉንም የ ስርአት ማሰናጃ እንደ ነበር መመለሻ"
+#: ../plugins/security-privacy//PageComponent.qml:185
+msgid "Privacy"
+msgstr "የ ግል"
 
-#: ../plugins/reset//EraseEverything.qml:41
-msgid ""
-"All documents, saved games, settings, and other items will be permanently "
-"deleted from this phone."
-msgstr "ሁሉም ሰነዶች: የተቀመጡ ጨዋታዎች: ማሰናጃዎች: እና ሌሎችም እቃዎች በቋሚነት ከዚህ ስልክ ውስጥ ይጠፋሉ"
+#: ../plugins/security-privacy//PageComponent.qml:188
+msgid "Stats on welcome screen"
+msgstr "የ እንኳን ደህና መጡ ሁኔታ መመልከቻ"
 
-#: ../plugins/reset//EraseEverything.qml:44
-msgid "Erase & Reset Everything"
-msgstr "ማጥፊያ & ሁሉንም እንደ ነበር መመለሻ"
+#: ../plugins/security-privacy//PageComponent.qml:201
+msgid "Messages on welcome screen"
+msgstr "የ እንኳን ደህና መጡ መልእክቶች መመልከቻ"
 
-#: ../plugins/reset//ResetLauncherHome.qml:40
-msgid "The Launcher will be returned to its original contents."
-msgstr "ማስነሻው ወደ ነበረበት ወደ ዋናው ይዞታ ይመለሳል"
+#: ../plugins/security-privacy//PageComponent.qml:216
+#: ../plugins/security-privacy//Dash.qml:29
+msgid "Dash search"
+msgstr "ዳሽ ውስጥ መፈለጊያ"
 
-#: ../plugins/reset//ResetLauncherHome.qml:44
-#: ../plugins/reset//PageComponent.qml:73
-msgid "Reset Launcher"
-msgstr "ማስነሻውን እንደ ነበር መመለሻ"
+#: ../plugins/security-privacy//PageComponent.qml:235
+msgid "Location access"
+msgstr "የ አካባቢ መድረሻ"
 
-#. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
-#: ../plugins/reset//PageComponent.qml:32
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:114
-msgid "Reset phone"
-msgstr "ስልኩን እንደ ነበር መመለሻ"
+#: ../plugins/security-privacy//PageComponent.qml:253
+#: ../plugins/security-privacy//AppAccess.qml:28
+msgid "Other app access"
+msgstr "ለ ሌሎች መተግበሪያዎች መፍቀጃ"
 
-#: ../plugins/reset//PageComponent.qml:87
-msgid "Reset all system settings…"
-msgstr "ሁሉንም የ ስርአት ማሰናጃ እንደ ነበር መመለሻ"
+#: ../plugins/security-privacy//PageComponent.qml:258
+#: ../plugins/security-privacy//diagnostics//PageComponent.qml:30
+msgid "Diagnostics"
+msgstr "መመርመሪያ"
 
-#: ../plugins/reset//PageComponent.qml:101
-msgid "Erase & Reset Everything…"
-msgstr "ማጥፊያ & ሁሉንም እንደ ነበር መመለሻ…"
+#. TRANSLATORS: This string is shown when crash
+#. reports are to be sent by the system.
+#: ../plugins/security-privacy//PageComponent.qml:263
+msgid "Sent"
+msgstr "ተልኳል"
+
+#. TRANSLATORS: This string is shown when crash
+#. reports are not to be sent by the system
+#: ../plugins/security-privacy//PageComponent.qml:266
+msgid "Not sent"
+msgstr "አልተላከም"
+
+#: ../plugins/security-privacy//Dash.qml:45
+msgid "Return results from:"
+msgstr "የተመለሰው ውጤት ከ:"
 
 #: ../plugins/security-privacy//Location.qml:31
 #: ../wizard/qml/Pages//30-location.qml:25
@@ -1096,6 +1198,174 @@ msgstr ""
 #: ../plugins/security-privacy//Location.qml:90
 msgid "Allow access to location:"
 msgstr "ለ አካባቢው ፍቃድ መፍቀጃ:"
+
+#: ../plugins/security-privacy//SimPin.qml:44
+msgid "Change SIM PIN"
+msgstr "መቀየሪያ ሲም ፒን"
+
+#: ../plugins/security-privacy//SimPin.qml:47
+#, qt-format
+msgid "Incorrect PIN. %1 attempt remaining."
+msgid_plural "Incorrect PIN. %1 attempts remaining."
+msgstr[0] "የተሳሳተ ፒን %1 ሙከራ ይቀራል"
+msgstr[1] "የተሳሳተ ፒን %1 ሙከራዎች ይቀራል"
+
+#: ../plugins/security-privacy//SimPin.qml:81
+msgid "Current PIN:"
+msgstr "የ አሁኑ ፒን:"
+
+#: ../plugins/security-privacy//SimPin.qml:93
+#, qt-format
+msgid "%1 attempt allowed."
+msgid_plural "%1 attempts allowed."
+msgstr[0] "%1 ሙከራ ተፈቅዷል"
+msgstr[1] "%1 ሙከራዎች ተፈቅደዋል"
+
+#: ../plugins/security-privacy//SimPin.qml:107
+msgid "Choose new PIN:"
+msgstr "ይምረጡ አዲስ ፒን:"
+
+#: ../plugins/security-privacy//SimPin.qml:118
+msgid "Confirm new PIN:"
+msgstr "ማረጋገጫ አዲስ ፒን:"
+
+#: ../plugins/security-privacy//SimPin.qml:137
+msgid "PINs don't match. Try again."
+msgstr "ፒን አይመሳሰልም እንደገና ይሞክሩ"
+
+#: ../plugins/security-privacy//SimPin.qml:157
+#: ../plugins/security-privacy//LockSecurity.qml:302
+#: ../plugins/cellular//HotspotSetup.qml:94
+msgid "Change"
+msgstr "መቀየሪያ"
+
+#: ../plugins/security-privacy//SimPin.qml:183
+msgid "Enter SIM PIN"
+msgstr "ሲም ፒን ያስገቡ"
+
+#: ../plugins/security-privacy//SimPin.qml:184
+msgid "Enter Previous SIM PIN"
+msgstr "ያስገቡ ቀደም ያለውን ሲም ፒን"
+
+#: ../plugins/security-privacy//SimPin.qml:187
+#, qt-format
+msgid "Incorrect PIN. %1 attempts remaining."
+msgstr "የተሳሳተ ፒን %1 የሚቀረው ሙከራ"
+
+#: ../plugins/security-privacy//SimPin.qml:246
+#, qt-format
+msgid "%1 attempts allowed."
+msgstr "%1 የተፈቀዱት ሙከራዎች"
+
+#: ../plugins/security-privacy//SimPin.qml:282
+msgid "Unlock"
+msgstr "መክፈቻ"
+
+#: ../plugins/security-privacy//SimPin.qml:282
+msgid "Lock"
+msgstr "መቆለፊያ"
+
+#: ../plugins/security-privacy//SimPin.qml:340
+msgid "Change PIN…"
+msgstr "መቀየሪያ ፒን…"
+
+#: ../plugins/security-privacy//SimPin.qml:357
+msgid ""
+"When a SIM PIN is set, it must be entered to access cellular services after "
+"restarting the phone or swapping the SIM."
+msgstr ""
+
+#: ../plugins/security-privacy//SimPin.qml:361
+msgid "Entering an incorrect PIN repeatedly may lock the SIM permanently."
+msgstr "የተሳሳተ ፒን ደጋግሞ ማስገባት በቋሚነት ሲም ን ሊቆልፈው ይችላል"
+
+#: ../plugins/security-privacy//PhoneLocking.qml:31
+msgid "Phone locking"
+msgstr "ስልክ በመቆለፍ ላይ"
+
+#: ../plugins/security-privacy//PhoneLocking.qml:45
+msgctxt "Unlock with swipe"
+msgid "None"
+msgstr "ምንም"
+
+#: ../plugins/security-privacy//PhoneLocking.qml:46
+#: ../wizard/qml/Pages//15-passwd.qml:106
+msgid "PIN code"
+msgstr "ፒን ኮድ"
+
+#: ../plugins/security-privacy//PhoneLocking.qml:47
+#: ../plugins/security-privacy//LockSecurity.qml:350
+#: ../wizard/qml/Pages//15-passwd.qml:108
+msgid "Passphrase"
+msgstr "የማለፊያ ሐረግ"
+
+#: ../plugins/security-privacy//PhoneLocking.qml:68
+#: ../plugins/battery//PageComponent.qml:306
+msgid "Lock when idle"
+msgstr "በማይሰራ ጊዜ መቆለፊያ"
+
+#: ../plugins/security-privacy//PhoneLocking.qml:69
+#: ../plugins/battery//PageComponent.qml:306
+msgid "Sleep when idle"
+msgstr "በማይሰራ ጊዜ ማስተኛ"
+
+#. TRANSLATORS: %1 is the number of minutes
+#: ../plugins/security-privacy//PhoneLocking.qml:75
+#: ../plugins/security-privacy//PhoneLocking.qml:84
+#, qt-format
+msgid "%1 minute"
+msgid_plural "%1 minutes"
+msgstr[0] "%1 ደቂቃ"
+msgstr[1] "%1 ደቂቃዎች"
+
+#: ../plugins/security-privacy//PhoneLocking.qml:101
+msgid "Sleep locks immediately"
+msgstr "ወዲያውኑ ማስተኛ መቆለፊያ"
+
+#: ../plugins/security-privacy//PhoneLocking.qml:106
+msgid "When locked, allow:"
+msgstr "በሚቆለፍ ጊዜ: መፍቀጃ:"
+
+#: ../plugins/security-privacy//PhoneLocking.qml:110
+msgid "Launcher"
+msgstr "ማስነሻ"
+
+#: ../plugins/security-privacy//PhoneLocking.qml:120
+msgid "Notifications and quick settings"
+msgstr "ማስታወቂያዎች እና በፍጥነት ማሰናጃዎች"
+
+#: ../plugins/security-privacy//PhoneLocking.qml:131
+msgid "Turn on lock security to restrict access when the phone is locked."
+msgstr ""
+
+#: ../plugins/security-privacy//PhoneLocking.qml:132
+msgid "Other apps and functions will prompt you to unlock."
+msgstr "ሌሎች መትግበሪያዎች እና ተግባሮች እንዳይቆለፍ ይጠይቃሉ"
+
+#: ../plugins/security-privacy//AppAccess.qml:35
+msgid "Apps that you have granted and have requested access to:"
+msgstr ""
+
+#: ../plugins/security-privacy//AppAccess.qml:42
+msgid "Apps that have requested access to your camera"
+msgstr ""
+
+#: ../plugins/security-privacy//AppAccess.qml:46
+msgid "Mic"
+msgstr "ማይክ"
+
+#: ../plugins/security-privacy//AppAccess.qml:47
+msgid "Apps that have requested access to your mic"
+msgstr ""
+
+#: ../plugins/security-privacy//AppAccess.qml:59
+#, qt-format
+msgid "%1/%2"
+msgstr "%1/%2"
+
+#: ../plugins/security-privacy//AppAccess.qml:60
+msgid "0"
+msgstr "0"
 
 #: ../plugins/security-privacy//LockSecurity.qml:96
 #: ../plugins/security-privacy//LockSecurity.qml:384
@@ -1167,12 +1437,6 @@ msgstr "መጥረጊያ (ደህንነት የለም)"
 msgid "4-digit PIN code"
 msgstr "4-ዲጂት ፒን ኮድ"
 
-#: ../plugins/security-privacy//LockSecurity.qml:350
-#: ../plugins/security-privacy//PhoneLocking.qml:47
-#: ../wizard/qml/Pages//15-passwd.qml:101
-msgid "Passphrase"
-msgstr "የማለፊያ ሐረግ"
-
 #: ../plugins/security-privacy//LockSecurity.qml:351
 msgid "Swipe (no security)… "
 msgstr "መጥረጊያ (ደህንነት የለም)… "
@@ -1185,511 +1449,323 @@ msgstr "4-ዲጂት ፒን ኮድ…"
 msgid "Passphrase…"
 msgstr "የ ማለፊያ ሐረግ …"
 
-#: ../plugins/security-privacy//Dash.qml:29
-#: ../plugins/security-privacy//PageComponent.qml:216
-msgid "Dash search"
-msgstr "ዳሽ ውስጥ መፈለጊያ"
+#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
+#: ../plugins/time-date//PageComponent.qml:29
+#: ../po/settings.js:266
+msgid "Time & Date"
+msgstr "ሰአት & ቀን"
 
-#: ../plugins/security-privacy//Dash.qml:45
-msgid "Return results from:"
-msgstr "የተመለሰው ውጤት ከ:"
+#: ../plugins/time-date//PageComponent.qml:53
+msgid "Time zone:"
+msgstr "የ ሰአት ክልል:"
 
-#: ../plugins/security-privacy//Dash.qml:46
-#: ../plugins/security-privacy//PageComponent.qml:102
-#: ../plugins/security-privacy//PageComponent.qml:219
-msgid "Phone only"
-msgstr "ስልክ ብቻ"
+#: ../plugins/time-date//PageComponent.qml:68
+msgid "Set the time and date:"
+msgstr "ሰአት እና ቀን ማሰናጃ:"
 
-#: ../plugins/security-privacy//Dash.qml:46
-#: ../plugins/security-privacy//PageComponent.qml:100
-#: ../plugins/security-privacy//PageComponent.qml:218
-msgid "Phone and Internet"
-msgstr "ስልክ እና ኢንተርኔት"
+#: ../plugins/time-date//PageComponent.qml:69
+#: ../plugins/time-date//ChooseTimeZone.qml:47
+#: ../plugins/cellular//PageChooseCarrier.qml:103
+msgid "Automatically"
+msgstr "ራስ በራሱ"
 
-#: ../plugins/security-privacy//SimPin.qml:34
-#: ../plugins/security-privacy//SimPin.qml:322
-#: ../plugins/security-privacy//PageComponent.qml:158
-msgid "SIM PIN"
-msgstr "SIM PIN"
+#: ../plugins/time-date//TimePicker.qml:26
+msgid "Set time & date"
+msgstr "ሰአት & ቀን ማሰናጃ"
 
-#: ../plugins/security-privacy//SimPin.qml:44
-msgid "Change SIM PIN"
-msgstr "መቀየሪያ ሲም ፒን"
+#: ../plugins/time-date//TimePicker.qml:68
+msgid "Time"
+msgstr "ሰአት"
 
-#: ../plugins/security-privacy//SimPin.qml:47
-#, qt-format
-msgid "Incorrect PIN. %1 attempt remaining."
-msgid_plural "Incorrect PIN. %1 attempts remaining."
-msgstr[0] ""
-msgstr[1] ""
+#: ../plugins/time-date//TimePicker.qml:81
+msgid "Hour"
+msgstr "ሰአት"
 
-#: ../plugins/security-privacy//SimPin.qml:81
-msgid "Current PIN:"
-msgstr "የ አሁኑ ፒን:"
+#: ../plugins/time-date//TimePicker.qml:95
+msgid "Minute"
+msgstr "ደቂቃ"
 
-#: ../plugins/security-privacy//SimPin.qml:93
-#, qt-format
-msgid "%1 attempt allowed."
-msgid_plural "%1 attempts allowed."
-msgstr[0] ""
-msgstr[1] ""
+#: ../plugins/time-date//TimePicker.qml:109
+msgid "Second"
+msgstr "ሰከንድ"
 
-#: ../plugins/security-privacy//SimPin.qml:107
-msgid "Choose new PIN:"
-msgstr "ይምረጡ አዲስ ፒን:"
+#: ../plugins/time-date//TimePicker.qml:118
+msgid "Date"
+msgstr "ቀን"
 
-#: ../plugins/security-privacy//SimPin.qml:118
-msgid "Confirm new PIN:"
-msgstr "ማረጋገጫ አዲስ ፒን:"
+#: ../plugins/time-date//TimePicker.qml:130
+msgid "Day"
+msgstr "ቀን"
 
-#: ../plugins/security-privacy//SimPin.qml:137
-msgid "PINs don't match. Try again."
-msgstr "ፒን አይመሳሰልም እንደገና ይሞክሩ"
+#: ../plugins/time-date//TimePicker.qml:144
+msgid "Month"
+msgstr "ወር"
 
-#: ../plugins/security-privacy//SimPin.qml:183
-msgid "Enter SIM PIN"
-msgstr "ሲም ፒን ያስገቡ"
+#: ../plugins/time-date//TimePicker.qml:162
+msgid "Year"
+msgstr "አመት"
 
-#: ../plugins/security-privacy//SimPin.qml:184
-msgid "Enter Previous SIM PIN"
-msgstr "ያስገቡ ቀደም ያለውን ሲም ፒን"
+#: ../plugins/time-date//ChooseTimeZone.qml:28
+msgid "Time zone"
+msgstr "የ ሰአት ክልል"
 
-#: ../plugins/security-privacy//SimPin.qml:187
-#, qt-format
-msgid "Incorrect PIN. %1 attempts remaining."
-msgstr "የተሳሳተ ፒን %1 የሚቀረው ሙከራ"
+#: ../plugins/time-date//ChooseTimeZone.qml:46
+msgid "Set the time zone:"
+msgstr "የ ሰአት ክልል ማሰናጃ:"
 
-#: ../plugins/security-privacy//SimPin.qml:246
-#, qt-format
-msgid "%1 attempts allowed."
-msgstr "%1 የተፈቀዱት ሙከራዎች"
+#: ../plugins/time-date//ChooseTimeZone.qml:126
+msgid "Enter your current location."
+msgstr "የ አሁኑን አካባቢ ያስገቡ"
 
-#: ../plugins/security-privacy//SimPin.qml:282
-msgid "Unlock"
-msgstr "መክፈቻ"
+#: ../plugins/time-date//ChooseTimeZone.qml:127
+msgid "No matching place"
+msgstr "ተመሳሳይ ቦታ የለም"
 
-#: ../plugins/security-privacy//SimPin.qml:282
-msgid "Lock"
-msgstr "መቆለፊያ"
+#: ../plugins/reset//ResetLauncherHome.qml:40
+msgid "The Launcher will be returned to its original contents."
+msgstr "ማስነሻው ወደ ነበረበት ወደ ዋናው ይዞታ ይመለሳል"
 
-#: ../plugins/security-privacy//SimPin.qml:340
-msgid "Change PIN…"
-msgstr "መቀየሪያ ፒን…"
+#: ../plugins/reset//ResetLauncherHome.qml:44
+#: ../plugins/reset//PageComponent.qml:73
+msgid "Reset Launcher"
+msgstr "ማስነሻውን እንደ ነበር መመለሻ"
 
-#: ../plugins/security-privacy//SimPin.qml:357
+#. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
+#: ../plugins/reset//PageComponent.qml:32
+#: ../po/settings.js:276
+msgid "Reset phone"
+msgstr "ስልኩን እንደ ነበር መመለሻ"
+
+#: ../plugins/reset//PageComponent.qml:87
+msgid "Reset all system settings…"
+msgstr "ሁሉንም የ ስርአት ማሰናጃ እንደ ነበር መመለሻ"
+
+#: ../plugins/reset//PageComponent.qml:101
+msgid "Erase & Reset Everything…"
+msgstr "ማጥፊያ & ሁሉንም እንደ ነበር መመለሻ…"
+
+#: ../plugins/reset//EraseEverything.qml:41
 msgid ""
-"When a SIM PIN is set, it must be entered to access cellular services after "
-"restarting the phone or swapping the SIM."
+"All documents, saved games, settings, and other items will be permanently "
+"deleted from this phone."
+msgstr "ሁሉም ሰነዶች: የተቀመጡ ጨዋታዎች: ማሰናጃዎች: እና ሌሎችም እቃዎች በቋሚነት ከዚህ ስልክ ውስጥ ይጠፋሉ"
+
+#: ../plugins/reset//EraseEverything.qml:44
+msgid "Erase & Reset Everything"
+msgstr "ማጥፊያ & ሁሉንም እንደ ነበር መመለሻ"
+
+#: ../plugins/reset//ResetAllSettings.qml:29
+msgid ""
+"The contents and layout of the launcher, and the filters in the home screen "
+"will be returned to their original settings."
+msgstr "የ ማስነሻ ይዞታ እና እቅድ እና ማጣሪያዎች በ ቤት መመልከቻ ውስጥ ወደ ነበረበት ወደ ማሰናጃው ይመለሳል"
+
+#: ../plugins/reset//ResetAllSettings.qml:31
+msgid "Reset all system settings"
+msgstr "ሁሉንም የ ስርአት ማሰናጃ እንደ ነበር መመለሻ"
+
+#: ../plugins/cellular//HotspotSetup.qml:29
+msgid "Change hotspot setup"
+msgstr "የ ሆትስፖት ማሰናጃ መቀየሪያ"
+
+#: ../plugins/cellular//HotspotSetup.qml:40
+msgid "Hotspot name"
+msgstr "የ ሆትስፖት ስም"
+
+#: ../plugins/cellular//HotspotSetup.qml:54
+msgid "Key (must be 8 characters or longer)"
+msgstr "ቁልፍ (8 ባህሪዎች ወይንም ከዚያ በላይ መሆን አለበት)"
+
+#: ../plugins/cellular//HotspotSetup.qml:68
+msgid "Show key"
+msgstr "ቁልፍ ማሳያ"
+
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#: ../plugins/cellular//PageComponent.qml:32
+#: ../po/settings.js:288
+msgid "Cellular"
+msgstr "ሴሉላር"
+
+#: ../plugins/cellular//PageChooseCarrier.qml:102
+msgid "Choose carrier:"
+msgstr "አቅራቢዎች ይምረጡ:"
+
+#: ../plugins/cellular//PageChooseCarrier.qml:130
+msgid "Refresh"
+msgstr "ማነቃቂያ"
+
+#: ../plugins/cellular//PageChooseCarrier.qml:151
+msgid "Searching"
+msgstr "በ መፈለግ ላይ"
+
+#: ../plugins/cellular//Hotspot.qml:29
+#: ../plugins/cellular//Components//SingleSim.qml:43
+#: ../plugins/cellular//Components//MultiSim.qml:48
+msgid "Wi-Fi hotspot"
+msgstr "ዋይ-ፋይ ሆትስፖት"
+
+#: ../plugins/cellular//Hotspot.qml:40
+msgid "Hotspot"
+msgstr "ሆትስፖት"
+
+#: ../plugins/cellular//Hotspot.qml:60
+msgid ""
+"When hotspot is on, other devices can use your cellular data connection over "
+"Wi-Fi. Normal data charges apply."
 msgstr ""
 
-#: ../plugins/security-privacy//SimPin.qml:361
-msgid "Entering an incorrect PIN repeatedly may lock the SIM permanently."
-msgstr "የተሳሳተ ፒን ደጋግሞ ማስገባት በቋሚነት ሲም ን ሊቆልፈው ይችላል"
+#: ../plugins/cellular//Hotspot.qml:61
+msgid ""
+"Other devices can use your cellular data connection over the Wi-Fi network. "
+"Normal data charges apply."
+msgstr ""
 
-#: ../plugins/security-privacy//PhoneLocking.qml:31
-msgid "Phone locking"
-msgstr "ስልክ በመቆለፍ ላይ"
+#: ../plugins/cellular//Hotspot.qml:65
+msgid "Set up hotspot"
+msgstr "ሆትስፖት ማሰናጃ"
 
-#: ../plugins/security-privacy//PhoneLocking.qml:45
-msgctxt "Unlock with swipe"
-msgid "None"
-msgstr "ምንም"
+#: ../plugins/cellular//PageChooseCarriers.qml:28
+#: ../plugins/cellular//Components//MultiSim.qml:68
+msgid "Carriers"
+msgstr "አቅራቢዎች"
 
-#: ../plugins/security-privacy//PhoneLocking.qml:46
-#: ../wizard/qml/Pages//15-passwd.qml:99
-msgid "PIN code"
-msgstr "ፒን ኮድ"
+#. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
+#: ../plugins/battery//PageComponent.qml:34
+#: ../po/settings.js:316
+msgid "Battery"
+msgstr "ባትሪ"
+
+#. TRANSLATORS: %1 is the number of seconds
+#: ../plugins/battery//PageComponent.qml:46
+#, qt-format
+msgid "%1 second ago"
+msgid_plural "%1 seconds ago"
+msgstr[0] "%1 ሰከንድ በፊት"
+msgstr[1] "%1 ሰከንዶች በፊት"
 
 #. TRANSLATORS: %1 is the number of minutes
-#: ../plugins/security-privacy//PhoneLocking.qml:75
-#: ../plugins/security-privacy//PhoneLocking.qml:84
+#: ../plugins/battery//PageComponent.qml:49
 #, qt-format
-msgid "%1 minute"
-msgid_plural "%1 minutes"
-msgstr[0] "%1 ደቂቃ"
-msgstr[1] "%1 ደቂቃዎች"
+msgid "%1 minute ago"
+msgid_plural "%1 minutes ago"
+msgstr[0] "%1 ደቂቃ በፊት"
+msgstr[1] "%1 ደቂቆች በፊት"
 
-#: ../plugins/security-privacy//PhoneLocking.qml:101
-msgid "Sleep locks immediately"
-msgstr "ወዲያውኑ ማስተኛ መቆለፊያ"
-
-#: ../plugins/security-privacy//PhoneLocking.qml:106
-msgid "When locked, allow:"
-msgstr "በሚቆለፍ ጊዜ: መፍቀጃ:"
-
-#: ../plugins/security-privacy//PhoneLocking.qml:110
-msgid "Launcher"
-msgstr "ማስነሻ"
-
-#: ../plugins/security-privacy//PhoneLocking.qml:120
-msgid "Notifications and quick settings"
-msgstr "ማስታወቂያዎች እና በፍጥነት ማሰናጃዎች"
-
-#: ../plugins/security-privacy//PhoneLocking.qml:131
-msgid "Turn on lock security to restrict access when the phone is locked."
-msgstr ""
-
-#: ../plugins/security-privacy//PhoneLocking.qml:132
-msgid "Other apps and functions will prompt you to unlock."
-msgstr "ሌሎች መትግበሪያዎች እና ተግባሮች እንዳይቆለፍ ይጠይቃሉ"
-
-#: ../plugins/security-privacy//AppAccess.qml:28
-#: ../plugins/security-privacy//PageComponent.qml:253
-msgid "Other app access"
-msgstr "ለ ሌሎች መተግበሪያዎች መፍቀጃ"
-
-#: ../plugins/security-privacy//AppAccess.qml:35
-msgid "Apps that you have granted and have requested access to:"
-msgstr ""
-
-#: ../plugins/security-privacy//AppAccess.qml:41
-#: ../plugins/bluetooth//PageComponent.qml:105
-msgid "Camera"
-msgstr "ካሜራ"
-
-#: ../plugins/security-privacy//AppAccess.qml:42
-msgid "Apps that have requested access to your camera"
-msgstr ""
-
-#: ../plugins/security-privacy//AppAccess.qml:46
-msgid "Mic"
-msgstr "ማይክ"
-
-#: ../plugins/security-privacy//AppAccess.qml:47
-msgid "Apps that have requested access to your mic"
-msgstr ""
-
-#: ../plugins/security-privacy//AppAccess.qml:59
+#. TRANSLATORS: %1 is the number of hours
+#: ../plugins/battery//PageComponent.qml:52
 #, qt-format
-msgid "%1/%2"
-msgstr "%1/%2"
+msgid "%1 hour ago"
+msgid_plural "%1 hours ago"
+msgstr[0] "%1 ሰአት በፊት"
+msgstr[1] "%1 ሰአቶች በፊት"
 
-#: ../plugins/security-privacy//AppAccess.qml:60
-msgid "0"
-msgstr "0"
+#. TRANSLATORS: %1 is the number of days
+#: ../plugins/battery//PageComponent.qml:55
+#, qt-format
+msgid "%1 day ago"
+msgid_plural "%1 days ago"
+msgstr[0] "%1 ቀን በፊት"
+msgstr[1] "%1 ቀኖች በፊት"
 
-#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: ../plugins/security-privacy//PageComponent.qml:37
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:138
-msgid "Security & Privacy"
-msgstr "ደህንነት & የ ግል"
+#: ../plugins/battery//PageComponent.qml:85
+msgid "Charging now"
+msgstr "አሁን በመሙላት ላይ"
 
-#: ../plugins/security-privacy//PageComponent.qml:131
-msgid "Lock phone"
-msgstr "ስልኩን መቆለፊያ"
+#: ../plugins/battery//PageComponent.qml:90
+msgid "Last full charge"
+msgstr "መጨረሻ ሙሉ የተሞላው"
 
-#: ../plugins/security-privacy//PageComponent.qml:161
-#: ../plugins/security-privacy//PageComponent.qml:244
-msgid "On"
-msgstr "ማብሪያ"
+#: ../plugins/battery//PageComponent.qml:95
+msgid "Fully charged"
+msgstr "በሙሉ ሞልቷል"
 
-#: ../plugins/security-privacy//PageComponent.qml:165
-#: ../plugins/security-privacy//PageComponent.qml:244
-#: ../plugins/cellular//Components//NoSim.qml:32
-#: ../plugins/cellular//Components//CellularMultiSim.qml:30
-#: ../plugins/cellular//Components//CellularSingleSim.qml:50
-msgid "Off"
-msgstr "ማጥፊያ"
+#: ../plugins/battery//PageComponent.qml:126
+msgid "Charge level"
+msgstr "የተሞላው ደረጃ"
 
-#: ../plugins/security-privacy//PageComponent.qml:172
-msgid "Encryption"
-msgstr ""
+#. TRANSLATORS: %1 refers to a percentage that indicates the charging level of the battery
+#: ../plugins/battery//PageComponent.qml:134
+#, qt-format
+msgid "%1%"
+msgstr "%1%"
 
-#: ../plugins/security-privacy//PageComponent.qml:181
+#: ../plugins/battery//PageComponent.qml:212
+#: ../plugins/battery//PageComponent.qml:214
+msgid "Yesterday"
+msgstr "ትናንት"
+
+#: ../plugins/battery//PageComponent.qml:220
+#: ../plugins/battery//PageComponent.qml:222
+msgid "Today"
+msgstr "ዛሬ"
+
+#: ../plugins/battery//PageComponent.qml:292
+msgid "Ways to reduce battery use:"
+msgstr "የባትሪ አጠቃቀም ለመቀነስ:"
+
+#: ../plugins/battery//PageComponent.qml:296
+#: ../plugins/brightness//BrightnessSlider.qml:51
+msgid "Display brightness"
+msgstr "ብርሁነት ማሳያ"
+
+#: ../plugins/battery//PageComponent.qml:394
+msgid "GPS"
+msgstr "ጂፒኤስ"
+
+#: ../plugins/battery//PageComponent.qml:412
+msgid "Accurate location detection requires GPS and/or Wi-Fi."
+msgstr "በትክክል ያሉበትን ቦታ ለማግኘት የ ጂፒኤስ እና/ወይንም ዋይ-ፋይ ያስፈልጋል"
+
+#: ../plugins/battery//SleepValues.qml:77
+msgid "Lock the phone when it's not in use:"
+msgstr "ስልኩን መቆለፊያ በማይጠቀሙበት ጊዜ:"
+
+#: ../plugins/battery//SleepValues.qml:77
+msgid "Put the phone to sleep when it is not in use:"
+msgstr "ስልኩን ማስተኛ በማይጠቀሙበት ጊዜ:"
+
+#: ../plugins/battery//SleepValues.qml:117
 msgid ""
-"Encryption protects against access to phone data when the phone is connected "
-"to a PC or other device."
-msgstr ""
+"Shorter times are more secure. Phone won't lock during calls or video "
+"playback."
+msgstr "ስልኩ ወደ ማስተኛ ዘዴ አይሄድም በ ጥሪ ላይ ወይንም ቪዲዮ በድጋሚ ሲያጫውቱ አጭር ጊዜ ለደህንነት ጥሩ ነው"
 
-#: ../plugins/security-privacy//PageComponent.qml:185
-msgid "Privacy"
-msgstr "የ ግል"
+#: ../plugins/battery//SleepValues.qml:117
+msgid "Phone won’t sleep during calls or video playback."
+msgstr "ስልኩ ወደ ማስተኛ ዘዴ አይሄድም በ ጥሪ ላይ ወይንም ቪዲዮ በድጋሚ ሲያጫውቱ"
 
-#: ../plugins/security-privacy//PageComponent.qml:188
-msgid "Stats on welcome screen"
-msgstr "የ እንኳን ደህና መጡ ሁኔታ መመልከቻ"
+#. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
+#: ../plugins/brightness//PageComponent.qml:32
+#: ../po/settings.js:332
+msgid "Brightness"
+msgstr "ብሩህነት"
 
-#: ../plugins/security-privacy//PageComponent.qml:201
-msgid "Messages on welcome screen"
-msgstr "የ እንኳን ደህና መጡ መልእክቶች መመልከቻ"
+#: ../plugins/brightness//PageComponent.qml:52
+msgid "Adjust automatically"
+msgstr "ራሱ በራሱ ማስተካከያ"
 
-#: ../plugins/security-privacy//PageComponent.qml:235
-msgid "Location access"
-msgstr "የ አካባቢ መድረሻ"
+#: ../plugins/brightness//PageComponent.qml:65
+msgid "Brightens and dims the display to suit the surroundings."
+msgstr "ብርሁነት እና ማደብዘዣ ማሳያው ለ አካባቢው እንዲስማማ"
 
-#: ../plugins/security-privacy//PageComponent.qml:258
-#: ../plugins/security-privacy//diagnostics//PageComponent.qml:30
-msgid "Diagnostics"
-msgstr "መመርመሪያ"
+#: ../plugins/background//Components//AddRemove.qml:52
+msgid "No images selected"
+msgstr "ምንም ምስል አልተመረጠም"
 
-#. TRANSLATORS: This string is shown when crash
-#. reports are to be sent by the system.
-#: ../plugins/security-privacy//PageComponent.qml:263
-msgid "Sent"
-msgstr "ተልኳል"
-
-#. TRANSLATORS: This string is shown when crash
-#. reports are not to be sent by the system
-#: ../plugins/security-privacy//PageComponent.qml:266
-msgid "Not sent"
-msgstr "አልተላከም"
-
-#: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:28
-#: ../plugins/bluetooth//ProvidePinCodeDialog.qml:28
-#: ../plugins/bluetooth//ProvidePasskeyDialog.qml:28
-msgid "Bluetooth Pairing Request"
-msgstr ""
-
-#. TRANSLATORS: %1 is the name of the bluetooth device being paired
-#: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:37
+#: ../plugins/background//Components//AddRemove.qml:65
 #, qt-format
-msgid "Please confirm that the PIN displayed on '%1' matches this one"
-msgstr "እባክዎን ያረጋግጡ ይህ የሚታየው ፒን ከ '%1' ከዚህ ጋር እንደሚመሳሰል"
+msgid "Remove %1 image"
+msgid_plural "Remove %1 images"
+msgstr[0] "ማስወገጃ %1 ምስል"
+msgstr[1] "ማስወገጃ %1 ምስሎች"
 
-#: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:57
-msgid "Confirm PIN"
-msgstr "ማረጋገጫ ፒን"
+#: ../plugins/background//Components//AddRemove.qml:80
+msgid "Add an image…"
+msgstr "ምስል መጨመሪያ…"
 
-#: ../plugins/bluetooth//ProvidePinCodeDialog.qml:36
-#: ../plugins/bluetooth//ProvidePasskeyDialog.qml:36
-#, qt-format
-msgid "PIN for '%1'"
-msgstr "ፒን ለ '%1'"
-
-#: ../plugins/bluetooth//ProvidePinCodeDialog.qml:63
-#: ../plugins/bluetooth//ProvidePasskeyDialog.qml:62
-msgid "Pair"
-msgstr ""
-
-#: ../plugins/bluetooth//PageComponent.qml:82
-msgid "Connected"
-msgstr "ተገናኝቷል"
-
-#: ../plugins/bluetooth//PageComponent.qml:83
-msgid "Connecting…"
-msgstr "በመገናኘት ላይ…"
-
-#: ../plugins/bluetooth//PageComponent.qml:84
-msgid "Disconnecting…"
-msgstr "በማቋረጥ ላይ …"
-
-#: ../plugins/bluetooth//PageComponent.qml:85
-msgid "Disconnected"
-msgstr "ተቋርጧል"
-
-#: ../plugins/bluetooth//PageComponent.qml:86
-msgid "Unknown"
-msgstr "ያልታወቀ"
-
-#: ../plugins/bluetooth//PageComponent.qml:92
-msgid "Computer"
-msgstr "ኮምፒዩተር"
-
-#: ../plugins/bluetooth//PageComponent.qml:94
-msgid "Modem"
-msgstr "ሞደም"
-
-#: ../plugins/bluetooth//PageComponent.qml:95 ../src/qml/MainWindow.qml:147
-msgid "Network"
-msgstr "ኔትዎርክ"
-
-#: ../plugins/bluetooth//PageComponent.qml:96
-msgid "Headset"
-msgstr "በ ጆሮ ማድመጫ"
-
-#: ../plugins/bluetooth//PageComponent.qml:97
-msgid "Headphones"
-msgstr "በ ጆሮ ማድመጫዎች"
-
-#: ../plugins/bluetooth//PageComponent.qml:98
-msgid "Video"
-msgstr "ቪዲዮ"
-
-#: ../plugins/bluetooth//PageComponent.qml:99
-msgid "Other Audio"
-msgstr "ሌላ ድምፅ"
-
-#: ../plugins/bluetooth//PageComponent.qml:100
-msgid "Joypad"
-msgstr ""
-
-#: ../plugins/bluetooth//PageComponent.qml:101
-msgid "Keyboard"
-msgstr "የ ፊደል ገበታ"
-
-#: ../plugins/bluetooth//PageComponent.qml:102
-msgid "Tablet"
-msgstr "ታብሌት"
-
-#: ../plugins/bluetooth//PageComponent.qml:103
-msgid "Mouse"
-msgstr "አይጥ"
-
-#: ../plugins/bluetooth//PageComponent.qml:104
-msgid "Printer"
-msgstr "ማተሚያ"
-
-#: ../plugins/bluetooth//PageComponent.qml:106
-msgid "Other"
-msgstr "ሌሎች"
-
-#: ../plugins/bluetooth//PageComponent.qml:112
-msgid "Excellent"
-msgstr "እጅግ በጥም ጥሩ"
-
-#: ../plugins/bluetooth//PageComponent.qml:113
-msgid "Good"
-msgstr "ጥሩ"
-
-#: ../plugins/bluetooth//PageComponent.qml:114
-msgid "Fair"
-msgstr "ደህና"
-
-#: ../plugins/bluetooth//PageComponent.qml:115
-msgid "Poor"
-msgstr "ደካማ"
-
-#: ../plugins/bluetooth//PageComponent.qml:182
-msgid "Discoverable"
-msgstr ""
-
-#: ../plugins/bluetooth//PageComponent.qml:182
-msgid "Not discoverable"
-msgstr "ማግኘት አይቻልም"
-
-#: ../plugins/bluetooth//PageComponent.qml:213
-msgid "Connected devices:"
-msgstr "የተገናኙ አካሎች:"
-
-#: ../plugins/bluetooth//PageComponent.qml:250
-msgid "Connect another device:"
-msgstr "ሌላ አካል መገናኛ:"
-
-#: ../plugins/bluetooth//PageComponent.qml:250
-msgid "Connect a device:"
-msgstr "አካል ማገናኛ:"
-
-#: ../plugins/bluetooth//PageComponent.qml:283
-msgid "None detected"
-msgstr "ምንም አልተገኘ"
-
-#: ../plugins/bluetooth//PageComponent.qml:291
-#: ../plugins/bluetooth//PageComponent.qml:394
-msgid "Connect automatically when detected:"
-msgstr "ራሱ በራሱ መገናኛ በሚገኝበት ጊዜ:"
-
-#: ../plugins/bluetooth//PageComponent.qml:361
-msgid "Type"
-msgstr "አይነት"
-
-#: ../plugins/bluetooth//PageComponent.qml:385
-msgid "Status"
-msgstr "ሁኔታው"
-
-#: ../plugins/bluetooth//PageComponent.qml:389
-msgid "Signal Strength"
-msgstr "የ ምልክት ጥንካሬ"
-
-#: ../plugins/bluetooth//PageComponent.qml:426
-msgid "Forget this device"
-msgstr "ይህን አካል ተወው"
-
-#: ../plugins/background//Preview.qml:70
-msgid "Preview"
-msgstr "ቅድመ እይታ"
-
-#: ../plugins/background//Preview.qml:101
-msgid "Remove image"
-msgstr "ምስል ማስወገጃ"
-
-#. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: ../plugins/background//MainPage.qml:38
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:152
-msgid "Background"
-msgstr "መደቡ"
-
-#: ../plugins/background//MainPage.qml:109
-msgid "Ubuntu Art"
-msgstr "የ ኡቡንቱ ኪነ ጥበብ"
-
-#: ../plugins/background//MainPage.qml:125
-msgid "Custom"
-msgstr ""
-
-#: ../plugins/cellular//Components//SingleSim.qml:37
-#: ../plugins/cellular//Components//MultiSim.qml:42
-msgid "Hotspot disabled because Wi-Fi is off."
-msgstr ""
-
-#: ../plugins/cellular//Components//SingleSim.qml:52
-#: ../plugins/cellular//Components//MultiSim.qml:58
-msgid "Data usage statistics"
-msgstr "የ ዳታ አጠቃቀም ስታትስቲክስ"
-
-#: ../plugins/cellular//Components//SingleSim.qml:58
-#: ../plugins/cellular//Components//SingleSim.qml:66
-#: ../plugins/cellular//Components//NoSim.qml:47
-msgid "Carrier"
-msgstr "አቅራቢ"
-
-#: ../plugins/cellular//Components//SingleSim.qml:72
-msgid "APN"
-msgstr ""
-
-#: ../plugins/cellular//Components//NoSim.qml:29
-#: ../plugins/cellular//Components//CellularMultiSim.qml:82
-#: ../plugins/cellular//Components//CellularSingleSim.qml:32
-msgid "Cellular data:"
-msgstr "የ ሴሉላር ዳታ:"
-
-#: ../plugins/cellular//Components//NoSim.qml:32
-#: ../plugins/cellular//Components//CellularMultiSim.qml:138
-#: ../plugins/cellular//Components//CellularSingleSim.qml:51
-msgid "2G only (saves battery)"
-msgstr "2ጂ ብቻ (ባትሪ ይቆጥባል)"
-
-#: ../plugins/cellular//Components//NoSim.qml:32
-#: ../plugins/cellular//Components//CellularMultiSim.qml:140
-#: ../plugins/cellular//Components//CellularSingleSim.qml:53
-msgid "2G/3G/4G (faster)"
-msgstr "2ጂ/3ጂ/4ጂ (ፈጣን)"
-
-#: ../plugins/cellular//Components//NoSim.qml:37
-#: ../plugins/cellular//Components//CellularMultiSim.qml:182
-#: ../plugins/cellular//Components//CellularSingleSim.qml:72
-msgid "Data roaming"
-msgstr "ዳታ ማንቀሳቀሻ"
-
-#: ../plugins/cellular//Components//SimEditor.qml:77
-msgid "Edit SIM Name"
-msgstr "የ ሲም ስም ማረሚያ"
-
-#: ../plugins/cellular//Components//SimEditor.qml:200
-msgid "OK"
-msgstr "እሺ"
-
-#: ../plugins/cellular//Components//DefaultSim.qml:29
-msgid "Ask me each time"
-msgstr "ሁል ጊዜ ጠይቀኝ"
-
-#: ../plugins/cellular//Components//DefaultSim.qml:34
-msgid "For outgoing calls, use:"
-msgstr "ወደ ውጪ ለሚላኩ ጥሪዎች: ይጠቀሙ:"
-
-#: ../plugins/cellular//Components//DefaultSim.qml:48
-msgid ""
-"You can change the SIM for individual calls, or for contacts in the address "
-"book."
-msgstr ""
-
-#: ../plugins/cellular//Components//DefaultSim.qml:55
-msgid "For messages, use:"
-msgstr "ለ መልእክቶች: ይጠቀሙ:"
-
-#: ../plugins/cellular//Components//CellularMultiSim.qml:139
-#: ../plugins/cellular//Components//CellularSingleSim.qml:52
-msgid "2G/3G (faster)"
-msgstr "2ጂ/3ጂ (ፈጣን)"
+#: ../plugins/background//Components//AddRemove.qml:91
+msgid "Remove images…"
+msgstr "ምስል ማስወገጃ…"
 
 #: ../plugins/security-privacy//diagnostics//PageComponent.qml:51
 msgid "Privacy policy"
@@ -1711,24 +1787,80 @@ msgstr "ቀደም ያለው የ ስህተት መግለጫዎች"
 msgid "Includes info about what an app was doing when it failed."
 msgstr ""
 
-#: ../plugins/background//Components//AddRemove.qml:52
-msgid "No images selected"
-msgstr "ምንም ምስል አልተመረጠም"
+#: ../plugins/cellular//Components//CellularMultiSim.qml:82
+#: ../plugins/cellular//Components//NoSim.qml:29
+#: ../plugins/cellular//Components//CellularSingleSim.qml:32
+msgid "Cellular data:"
+msgstr "የ ሴሉላር ዳታ:"
 
-#: ../plugins/background//Components//AddRemove.qml:65
-#, qt-format
-msgid "Remove %1 image"
-msgid_plural "Remove %1 images"
-msgstr[0] "ማስወገጃ %1 ምስል"
-msgstr[1] "ማስወገጃ %1 ምስሎች"
+#: ../plugins/cellular//Components//CellularMultiSim.qml:138
+#: ../plugins/cellular//Components//NoSim.qml:32
+#: ../plugins/cellular//Components//CellularSingleSim.qml:51
+msgid "2G only (saves battery)"
+msgstr "2ጂ ብቻ (ባትሪ ይቆጥባል)"
 
-#: ../plugins/background//Components//AddRemove.qml:80
-msgid "Add an image…"
-msgstr "ምስል መጨመሪያ…"
+#: ../plugins/cellular//Components//CellularMultiSim.qml:139
+#: ../plugins/cellular//Components//CellularSingleSim.qml:52
+msgid "2G/3G (faster)"
+msgstr "2ጂ/3ጂ (ፈጣን)"
 
-#: ../plugins/background//Components//AddRemove.qml:91
-msgid "Remove images…"
-msgstr "ምስል ማስወገጃ…"
+#: ../plugins/cellular//Components//CellularMultiSim.qml:140
+#: ../plugins/cellular//Components//NoSim.qml:32
+#: ../plugins/cellular//Components//CellularSingleSim.qml:53
+msgid "2G/3G/4G (faster)"
+msgstr "2ጂ/3ጂ/4ጂ (ፈጣን)"
+
+#: ../plugins/cellular//Components//CellularMultiSim.qml:182
+#: ../plugins/cellular//Components//NoSim.qml:37
+#: ../plugins/cellular//Components//CellularSingleSim.qml:72
+msgid "Data roaming"
+msgstr "ዳታ ማንቀሳቀሻ"
+
+#: ../plugins/cellular//Components//SimEditor.qml:77
+msgid "Edit SIM Name"
+msgstr "የ ሲም ስም ማረሚያ"
+
+#: ../plugins/cellular//Components//SimEditor.qml:200
+msgid "OK"
+msgstr "እሺ"
+
+#: ../plugins/cellular//Components//NoSim.qml:47
+#: ../plugins/cellular//Components//SingleSim.qml:58
+#: ../plugins/cellular//Components//SingleSim.qml:66
+msgid "Carrier"
+msgstr "አቅራቢ"
+
+#: ../plugins/cellular//Components//SingleSim.qml:37
+#: ../plugins/cellular//Components//MultiSim.qml:42
+msgid "Hotspot disabled because Wi-Fi is off."
+msgstr "ሆትስፖት ተሰናክሏል ምክንያቱም ዋይ-ፋይ አልበራም"
+
+#: ../plugins/cellular//Components//SingleSim.qml:52
+#: ../plugins/cellular//Components//MultiSim.qml:58
+msgid "Data usage statistics"
+msgstr "የ ዳታ አጠቃቀም ስታትስቲክስ"
+
+#: ../plugins/cellular//Components//SingleSim.qml:72
+msgid "APN"
+msgstr ""
+
+#: ../plugins/cellular//Components//DefaultSim.qml:29
+msgid "Ask me each time"
+msgstr "ሁል ጊዜ ጠይቀኝ"
+
+#: ../plugins/cellular//Components//DefaultSim.qml:34
+msgid "For outgoing calls, use:"
+msgstr "ወደ ውጪ ለሚላኩ ጥሪዎች: ይጠቀሙ:"
+
+#: ../plugins/cellular//Components//DefaultSim.qml:48
+msgid ""
+"You can change the SIM for individual calls, or for contacts in the address "
+"book."
+msgstr ""
+
+#: ../plugins/cellular//Components//DefaultSim.qml:55
+msgid "For messages, use:"
+msgstr "ለ መልእክቶች: ይጠቀሙ:"
 
 #: ../src/qml/MainWindow.qml:133
 msgid "Search"
@@ -1742,19 +1874,79 @@ msgstr "የግል"
 msgid "System"
 msgstr "ስርአት"
 
-#: ../wizard/qml/Components//StackButton.qml:51
-#, qt-format
-msgid "〈  %1"
-msgstr "〈  %1"
+#: ../wizard/qml/Pages//80-finished.qml:22
+msgid "All done"
+msgstr "ሁሉም ተፈጽሟል"
 
-#: ../wizard/qml/Components//StackButton.qml:54
-#, qt-format
-msgid "%1  〉"
-msgstr "%1  〉"
+#: ../wizard/qml/Pages//80-finished.qml:37
+msgid "Nice work!"
+msgstr "ጥሩ ሰርተዋል!"
 
-#: ../wizard/qml/Components//Page.qml:84
-msgid "Back"
-msgstr "ወደ ኋላ"
+#: ../wizard/qml/Pages//80-finished.qml:45
+msgid "Your phone is now ready to use."
+msgstr "ስልኩ አሁን ለመጠቀም ዝግጁ ነው"
+
+#: ../wizard/qml/Pages//80-finished.qml:52
+msgid "Finish"
+msgstr "መጨረሻ"
+
+#: ../wizard/qml/Pages//terms.qml:25
+msgid "Terms & Conditions"
+msgstr "ውሎች & ሁኔታዎች"
+
+#: ../wizard/qml/Pages//15-passwd.qml:38
+msgid "Set lock security"
+msgstr ""
+
+#: ../wizard/qml/Pages//15-passwd.qml:104
+msgid "Swipe"
+msgstr "መጥረጊያ"
+
+#: ../wizard/qml/Pages//15-passwd.qml:154
+msgid "Those PIN codes don't match."
+msgstr "እነዚህ የ ፒን ኮዶች አይመሳሰሉም"
+
+#: ../wizard/qml/Pages//15-passwd.qml:156
+msgid "Those passphrases don't match."
+msgstr "እነዚህ የ ማለፊያ ሐረጎች አይመሳሰሉም"
+
+#: ../wizard/qml/Pages//15-passwd.qml:164
+msgid "PIN code must be at least four digits long."
+msgstr "የ ፒን ኮድ ቢያንስ አራት አሀዝ መሆን አለበት"
+
+#: ../wizard/qml/Pages//15-passwd.qml:166
+msgid "Passphrase must be at least four characters long."
+msgstr "የ ማለፊያ ሐረጎች ቢያንስ አራት አሀዝ መሆን አለበት"
+
+#: ../wizard/qml/Pages//15-passwd.qml:178
+#: ../wizard/qml/Pages//30-location.qml:80
+#: ../wizard/qml/Pages//40-reporting.qml:50
+#: ../wizard/qml/Pages//10-welcome.qml:85 ../wizard/qml/Pages//20-wifi.qml:195
+msgid "Continue"
+msgstr "ይቀጥሉ"
+
+#: ../wizard/qml/Pages//30-location.qml:60
+msgid "Use your mobile network and Wi-Fi to work out where you are"
+msgstr ""
+
+#. TRANSLATORS: HERE is a trademark for Nokia's location service, you probably shouldn't translate it
+#: ../wizard/qml/Pages//30-location.qml:70
+msgid ""
+"I have read and agreed to the HERE <a href='terms.qml'>terms and "
+"conditions</a>"
+msgstr ""
+
+#: ../wizard/qml/Pages//40-reporting.qml:22
+msgid "Bug reporting"
+msgstr ""
+
+#: ../wizard/qml/Pages//40-reporting.qml:35
+msgid "Your phone is set up to automatically report errors to Canonical."
+msgstr ""
+
+#: ../wizard/qml/Pages//40-reporting.qml:43
+msgid "This can be disabled in System Settings."
+msgstr "ይህን በ ስርአቱ ማሰናጃ ውስጥ ማሰናከል ይችላሉ"
 
 #: ../wizard/qml/Pages//no-sim.qml:22
 msgid "Add a SIM card"
@@ -1784,41 +1976,6 @@ msgstr "እንኳን ደህና መጡ ወደ እርስዎ ኡቡንቱ ስልክ
 msgid "Let’s get started."
 msgstr "ስራ እንጀምር"
 
-#: ../wizard/qml/Pages//10-welcome.qml:85
-#: ../wizard/qml/Pages//15-passwd.qml:170 ../wizard/qml/Pages//20-wifi.qml:195
-#: ../wizard/qml/Pages//40-reporting.qml:50
-#: ../wizard/qml/Pages//30-location.qml:79
-msgid "Continue"
-msgstr "ይቀጥሉ"
-
-#: ../wizard/qml/Pages//15-passwd.qml:38
-msgid "Set lock security"
-msgstr ""
-
-#: ../wizard/qml/Pages//15-passwd.qml:97
-msgid "Swipe"
-msgstr "መጥረጊያ"
-
-#: ../wizard/qml/Pages//15-passwd.qml:147
-msgid "Those PIN codes don't match."
-msgstr "እነዚህ የ ፒን ኮዶች አይመሳሰሉም"
-
-#: ../wizard/qml/Pages//15-passwd.qml:149
-msgid "Those passphrases don't match."
-msgstr "እነዚህ የ ማለፊያ ሐረጎች አይመሳሰሉም"
-
-#: ../wizard/qml/Pages//15-passwd.qml:157
-msgid "PIN code must be at least four digits long."
-msgstr "የ ፒን ኮድ ቢያንስ አራት አሀዝ መሆን አለበት"
-
-#: ../wizard/qml/Pages//15-passwd.qml:159
-msgid "Passphrase must be at least four characters long."
-msgstr "የ ማለፊያ ሐረጎች ቢያንስ አራት አሀዝ መሆን አለበት"
-
-#: ../wizard/qml/Pages//terms.qml:25
-msgid "Terms & Conditions"
-msgstr "ውሎች & ሁኔታዎች"
-
 #: ../wizard/qml/Pages//20-wifi.qml:27
 msgid "Connect to Wi‑Fi"
 msgstr "ወደ ዋይ‑ፋይ መገናኛ"
@@ -1827,339 +1984,743 @@ msgstr "ወደ ዋይ‑ፋይ መገናኛ"
 msgid "Available networks"
 msgstr "ዝግጁ ኔትዎርኮች"
 
-#: ../wizard/qml/Pages//40-reporting.qml:22
-msgid "Bug reporting"
-msgstr ""
+#: ../wizard/qml/Components//Page.qml:83
+msgid "Back"
+msgstr "ወደ ኋላ"
 
-#: ../wizard/qml/Pages//40-reporting.qml:35
-msgid "Your phone is set up to automatically report errors to Canonical."
-msgstr ""
+#: ../wizard/qml/Components//StackButton.qml:51
+#, qt-format
+msgid "〈  %1"
+msgstr "〈  %1"
 
-#: ../wizard/qml/Pages//40-reporting.qml:43
-msgid "This can be disabled in System Settings."
-msgstr "ይህን በ ስርአቱ ማሰናጃ ውስጥ ማሰናከል ይችላሉ"
-
-#: ../wizard/qml/Pages//80-finished.qml:22
-msgid "All done"
-msgstr "ሁሉም ተፈጽሟል"
-
-#: ../wizard/qml/Pages//80-finished.qml:37
-msgid "Nice work!"
-msgstr "ጥሩ ሰርተዋል!"
-
-#: ../wizard/qml/Pages//80-finished.qml:45
-msgid "Your phone is now ready to use."
-msgstr "ስልኩ አሁን ለመጠቀም ዝግጁ ነው"
-
-#: ../wizard/qml/Pages//80-finished.qml:52
-msgid "Finish"
-msgstr "መጨረሻ"
-
-#: ../wizard/qml/Pages//30-location.qml:60
-msgid "Use your mobile network and Wi-Fi to work out where you are"
-msgstr ""
-
-#: ../wizard/qml/Pages//30-location.qml:69
-msgid ""
-"I have read and agreed to the HERE <a href='terms.qml'>terms and "
-"conditions</a>"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:4
-msgid "language"
-msgstr "ቋንቋ"
-
-#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:6
-msgid "lang"
-msgstr "ቋንቋ"
-
-#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:8
-msgid "i18n"
-msgstr "i18n"
-
-#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:10
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:28
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:42
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:54
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:66
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:72
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:82
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:96
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:104
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:112
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:118
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:144
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:150
-msgid "settings"
-msgstr "ማሰናጃዎች"
-
-#. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:14
-msgid "battery"
-msgstr "ባትሪ"
-
-#. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:16
-msgid "power"
-msgstr "ሐይል"
-
-#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:20
-msgid "cellular"
-msgstr "ሴሉላር"
-
-#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:22
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:46
-msgid "network"
-msgstr "ኔትዎርክ"
-
-#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:24
-msgid "mobile"
-msgstr "ተንቀሳቃሽ"
-
-#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:26
-msgid "gsm"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:30
-msgid "Flight Mode"
-msgstr "በ በረራ ዘዴ"
-
-#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:32
-msgid "flight"
-msgstr "በረራ"
-
-#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:34
-msgid "plane"
-msgstr "አውሮፕላን"
-
-#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:36
-msgid "offline"
-msgstr "ከ መስመር ውጪ"
-
-#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:40
-msgid "sound"
-msgstr "ድምፅ"
-
-#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:48
-msgid "wireless"
-msgstr "ሽቦአልባ"
-
-#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:50
-msgid "wifi"
-msgstr "ዋይፋይ"
-
-#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:52
-msgid "wi-fi"
-msgstr "ዋይ-ፋይ"
+#: ../wizard/qml/Components//StackButton.qml:54
+#, qt-format
+msgid "%1  〉"
+msgstr "%1  〉"
 
 #. TRANSLATORS: This is a keyword or name for the update-notification plugin which is used while searching
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:56
+#: ../po/settings.js:2
 msgid "Updates available"
 msgstr "ማሻሻያው ዝግጁ ነው"
 
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:60
+#: ../po/settings.js:6
 msgid "system"
 msgstr "ስርአት"
 
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:62
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:100
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: ../po/settings.js:8
+#: ../po/settings.js:184
+#: ../po/settings.js:230
 msgid "software"
 msgstr "ሶፍትዌር"
 
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:64
+#: ../po/settings.js:10
 msgid "update"
 msgstr "ማሻሻያ"
 
-#. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:70
-msgid "brightness"
-msgstr "ብርሁነት"
-
-#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:76
-msgid "time"
-msgstr "ሰአት"
-
-#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:78
-msgid "date"
-msgstr "ቀን"
-
-#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:80
-msgid "timezone"
-msgstr "የ ሰአት ክልል"
-
-#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:86
-msgid "about"
-msgstr "ስለ"
-
-#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:88
-msgid "device"
-msgstr "አካል"
-
-#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:90
-msgid "info"
-msgstr "መረጃ"
-
-#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:94
-msgid "phone"
-msgstr "ስልክ"
-
+#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:102
-msgid "notifications"
-msgstr "ማስታወቂያዎች"
+#: ../po/settings.js:12
+#: ../po/settings.js:44
+#: ../po/settings.js:188
+msgid "apps"
+msgstr "መተግበሪያዎች"
 
-#. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:106
-msgid "Accessibility"
-msgstr "ተደራሽነት"
+#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
+#: ../po/settings.js:14
+#: ../po/settings.js:88
+#: ../po/settings.js:274
+#: ../po/settings.js:340
+msgid "automatic"
+msgstr "ራስ በራሱ"
 
-#. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:108
-msgid "accessibility"
-msgstr "ተደራሽነት"
+#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
+#: ../po/settings.js:16
+msgid "download"
+msgstr "የወረደ"
 
-#. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:110
-msgid "a11y"
-msgstr "a11y"
+#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
+#: ../po/settings.js:18
+msgid "upgrade"
+msgstr "ማሻሻያ"
 
-#. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:116
-msgid "reset"
-msgstr "እንደ ነበር መመለሻ"
+#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
+#: ../po/settings.js:20
+msgid "click"
+msgstr "ይጫኑ"
+
+#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
+#: ../po/settings.js:22
+msgid "Flight Mode"
+msgstr "በ በረራ ዘዴ"
+
+#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
+#: ../po/settings.js:24
+msgid "flight"
+msgstr "በረራ"
+
+#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
+#: ../po/settings.js:26
+msgid "plane"
+msgstr "አውሮፕላን"
+
+#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
+#: ../po/settings.js:28
+msgid "offline"
+msgstr "ከ መስመር ውጪ"
+
+#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
+#: ../po/settings.js:30
+msgid "airplane"
+msgstr "አውሮፕላን"
+
+#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#: ../po/settings.js:32
+#: ../po/settings.js:164
+#: ../po/settings.js:292
+msgid "network"
+msgstr "ኔትዎርክ"
 
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:120
+#: ../po/settings.js:34
 msgid "Orientation Lock"
 msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:122
+#: ../po/settings.js:36
 msgid "rotation"
 msgstr "ማዞሪያ"
 
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:124
+#: ../po/settings.js:38
 msgid "orientation"
 msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:126
+#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
+#: ../po/settings.js:40
+#: ../po/settings.js:248
+#: ../po/settings.js:326
 msgid "lock"
 msgstr "መቆለፊያ"
 
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:128
+#. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
+#: ../po/settings.js:42
+#: ../po/settings.js:338
 msgid "screen"
 msgstr "መመልከቻ"
 
-#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:130
-msgid "Example"
-msgstr "ለምሳሌ"
+#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: ../po/settings.js:48
+#: ../po/settings.js:214
+msgid "phone"
+msgstr "ስልክ"
 
-#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:132
-msgid "example"
-msgstr "ለምሳሌ"
+#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
+#: ../po/settings.js:50
+msgid "services"
+msgstr "ግልጋሎቶች"
 
-#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:134
-msgid "test"
-msgstr "ለሙከራ"
+#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
+#: ../po/settings.js:52
+msgid "forwarding"
+msgstr "ወደ ፊት ማስተላለፊያ"
 
-#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:136
-msgid "sample"
-msgstr "ናሙና"
+#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
+#: ../po/settings.js:54
+msgid "waiting"
+msgstr "በ መጠበቅ ላይ"
 
-#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:140
-msgid "security"
-msgstr "ድህንነት"
+#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
+#: ../po/settings.js:56
+msgid "call"
+msgstr ""
 
-#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:142
-msgid "privacy"
-msgstr "የ ግል"
+#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
+#: ../po/settings.js:58
+#: ../po/settings.js:154
+msgid "dialpad"
+msgstr ""
 
-#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:148
-msgid "bluetooth"
-msgstr "ብሉቱዝ"
+#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
+#: ../po/settings.js:60
+msgid "shortcuts"
+msgstr "አቋራጮች"
+
+#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
+#: ../po/settings.js:62
+msgid "numbers"
+msgstr "ቁጥሮች"
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:154
+#: ../po/settings.js:66
 msgid "appearance"
 msgstr "አቀራረብ"
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:156
+#: ../po/settings.js:68
 msgid "background"
 msgstr "መደብ"
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:158
+#: ../po/settings.js:70
 msgid "wallpaper"
 msgstr "የ ግድግዳ ወረቀት"
 
-#: ../push-helper/software_updates_helper.py:150
-msgid "There's an updated system image."
-msgstr "ለ ስርአቱ ምስል ማሻሻያ ዝግጁ ነው"
+#. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
+#: ../po/settings.js:72
+msgid "art"
+msgstr ""
 
-#: ../push-helper/software_updates_helper.py:151
-msgid "Tap to open the system updater."
-msgstr "የ ስርአት ማሻሻያውን ለመክፈት መታ ያድርጉ"
+#. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
+#: ../po/settings.js:74
+msgid "photo"
+msgstr "ፎቶ"
 
-#: ../plugins/system-update//system_update.cpp:92
+#. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
+#: ../po/settings.js:76
+msgid "picture"
+msgstr "ስእል"
+
+#. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
+#: ../po/settings.js:78
+msgid "image"
+msgstr "ምስል"
+
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
+#: ../po/settings.js:82
+msgid "language"
+msgstr "ቋንቋ"
+
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
+#: ../po/settings.js:84
+#: ../po/settings.js:158
+msgid "keyboard"
+msgstr "የ ፊደል ገበታ"
+
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
+#: ../po/settings.js:86
+msgid "spellcheck"
+msgstr "ፊደል ማረሚያ"
+
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
+#: ../po/settings.js:90
+msgid "correct"
+msgstr "ማረሚያ"
+
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
+#: ../po/settings.js:92
+msgid "suggestions"
+msgstr "አስተያየቶች"
+
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
+#: ../po/settings.js:94
+msgid "capitalization"
+msgstr "በ አቢይ ፊደል"
+
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
+#: ../po/settings.js:96
+msgid "punctuation"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
+#: ../po/settings.js:98
+msgid "layout"
+msgstr "እቅድ"
+
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
+#: ../po/settings.js:100
+#: ../po/settings.js:336
+msgid "display"
+msgstr "ማሳያ"
+
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
+#: ../po/settings.js:102
+msgid "words"
+msgstr "ቃላቶች"
+
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
+#: ../po/settings.js:104
+msgid "vibration"
+msgstr "ማንቀጥቀጫ"
+
+#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
+#: ../po/settings.js:106
+msgid "Example"
+msgstr "ለምሳሌ"
+
+#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
+#: ../po/settings.js:108
+msgid "example"
+msgstr "ለምሳሌ"
+
+#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
+#: ../po/settings.js:110
+msgid "test"
+msgstr "ለሙከራ"
+
+#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
+#: ../po/settings.js:112
+msgid "sample"
+msgstr "ናሙና"
+
+#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
+#: ../po/settings.js:116
+msgid "bluetooth"
+msgstr "ብሉቱዝ"
+
+#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
+#: ../po/settings.js:118
+msgid "headset"
+msgstr "የ ጆሮ ማድምድጫ"
+
+#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
+#: ../po/settings.js:120
+msgid "pair"
+msgstr "ማጣመሪያ"
+
+#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: ../po/settings.js:122
+#: ../po/settings.js:210
+msgid "device"
+msgstr "አካል"
+
+#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
+#: ../po/settings.js:124
+msgid "discover"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
+#: ../po/settings.js:126
+msgid "car"
+msgstr "መኪና"
+
+#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
+#: ../po/settings.js:128
+msgid "handsfree"
+msgstr "ከ እጅ ነፃ"
+
+#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
+#: ../po/settings.js:130
+#: ../po/settings.js:166
+msgid "wireless"
+msgstr "ሽቦአልባ"
+
+#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
+#: ../po/settings.js:132
+#: ../po/settings.js:172
+msgid "connect"
+msgstr "መገናኛ"
+
+#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
+#: ../po/settings.js:134
+#: ../po/settings.js:174
+msgid "disconnect"
+msgstr "መለያያ"
+
+#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
+#: ../po/settings.js:136
+msgid "stereo"
+msgstr "ስቴሪዮ"
+
+#. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
+#: ../po/settings.js:138
+msgid "Accessibility"
+msgstr "ተደራሽነት"
+
+#. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
+#: ../po/settings.js:140
+msgid "accessibility"
+msgstr "ተደራሽነት"
+
+#. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
+#: ../po/settings.js:142
+msgid "a11y"
+msgstr "a11y"
+
+#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
+#: ../po/settings.js:146
+msgid "sound"
+msgstr "ድምፅ"
+
+#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
+#: ../po/settings.js:148
+msgid "silent"
+msgstr "በ ዝምታ"
+
+#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
+#: ../po/settings.js:150
+msgid "ringtone"
+msgstr "የጥሪ ድምፅ"
+
+#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
+#: ../po/settings.js:152
+msgid "vibrate"
+msgstr "ማንቀጥቀጫ"
+
+#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
+#: ../po/settings.js:156
+msgid "message"
+msgstr "መልእክት"
+
+#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
+#: ../po/settings.js:160
+msgid "volume"
+msgstr "መጠን"
+
+#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
+#: ../po/settings.js:168
+msgid "wifi"
+msgstr "ዋይፋይ"
+
+#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
+#: ../po/settings.js:170
+msgid "wi-fi"
+msgstr "ዋይ-ፋይ"
+
+#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
+#: ../po/settings.js:176
+msgid "hidden"
+msgstr "የተደበቀ"
+
+#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
+#: ../po/settings.js:178
+msgid "ip"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: ../po/settings.js:180
+#: ../po/settings.js:222
+msgid "address"
+msgstr "አድራሻ"
+
+#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
+#: ../po/settings.js:186
+msgid "notifications"
+msgstr "ማስታወቂያዎች"
+
+#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
+#: ../po/settings.js:190
+msgid "authorize"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
+#: ../po/settings.js:192
+msgid "alerts"
+msgstr "ማስጠንቀቂያ"
+
+#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
+#: ../po/settings.js:194
+msgid "permissions"
+msgstr "ፍቃዶች"
+
+#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
+#: ../po/settings.js:196
+msgid "badges"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
+#: ../po/settings.js:198
+msgid "facebook"
+msgstr "ፌስቡክ"
+
+#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
+#: ../po/settings.js:200
+msgid "twitter"
+msgstr "ትዊተር"
+
+#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
+#: ../po/settings.js:202
+msgid "flickr"
+msgstr "ፍሊከር"
+
+#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
+#: ../po/settings.js:204
+msgid "gmail"
+msgstr "ጂሜይል"
+
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: ../po/settings.js:208
+msgid "about"
+msgstr "ስለ"
+
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: ../po/settings.js:212
+msgid "info"
+msgstr "መረጃ"
+
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: ../po/settings.js:216
+msgid "number"
+msgstr "ቁጥር"
+
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: ../po/settings.js:218
+msgid "imei"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: ../po/settings.js:220
+msgid "serial"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: ../po/settings.js:224
+msgid "mac"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: ../po/settings.js:226
+msgid "licenses"
+msgstr "ፍቃዶች"
+
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: ../po/settings.js:228
+msgid "developer"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: ../po/settings.js:232
+msgid "storage"
+msgstr "ማጠራቀሚያ"
+
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: ../po/settings.js:234
+msgid "disk"
+msgstr "ዲስክ"
+
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: ../po/settings.js:236
+msgid "space"
+msgstr "ቦታ"
+
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: ../po/settings.js:238
+msgid "version"
+msgstr "እትም"
+
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: ../po/settings.js:240
+msgid "revision"
+msgstr "ግምገማ"
+
+#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
+#: ../po/settings.js:244
+msgid "security"
+msgstr "ድህንነት"
+
+#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
+#: ../po/settings.js:246
+msgid "privacy"
+msgstr "የ ግል"
+
+#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#: ../po/settings.js:250
+#: ../po/settings.js:314
+msgid "sim"
+msgstr "ሲም"
+
+#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
+#: ../po/settings.js:252
+msgid "pin"
+msgstr "ፒን"
+
+#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
+#: ../po/settings.js:254
+msgid "code"
+msgstr "ኮድ"
+
+#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
+#: ../po/settings.js:256
+msgid "password"
+msgstr "የመግቢያ ቃል"
+
+#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
+#: ../po/settings.js:258
+msgid "passphrase"
+msgstr "የ ማለፊያ ሐረግ"
+
+#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
+#: ../po/settings.js:260
+msgid "swipe"
+msgstr "መጥረጊያ"
+
+#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
+#: ../po/settings.js:262
+msgid "allow"
+msgstr "መፍቀጃ"
+
+#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
+#: ../po/settings.js:264
+msgid "access"
+msgstr "ፍቃድ"
+
+#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
+#: ../po/settings.js:268
+msgid "time"
+msgstr "ሰአት"
+
+#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
+#: ../po/settings.js:270
+msgid "date"
+msgstr "ቀን"
+
+#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
+#: ../po/settings.js:272
+msgid "timezone"
+msgstr "የ ሰአት ክልል"
+
+#. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
+#: ../po/settings.js:278
+msgid "reset"
+msgstr "እንደ ነበር መመለሻ"
+
+#. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
+#: ../po/settings.js:280
+msgid "erase"
+msgstr "መሰረዣ"
+
+#. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
+#: ../po/settings.js:282
+msgid "factory"
+msgstr "ፋክቶሪ"
+
+#. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
+#: ../po/settings.js:284
+msgid "clear"
+msgstr "ማጽጃ"
+
+#. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
+#: ../po/settings.js:286
+msgid "restore"
+msgstr "እንደ ነበር መመለሻ"
+
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#: ../po/settings.js:290
+msgid "cellular"
+msgstr "ሴሉላር"
+
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#: ../po/settings.js:294
+msgid "mobile"
+msgstr "ተንቀሳቃሽ"
+
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#: ../po/settings.js:296
+msgid "gsm"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#: ../po/settings.js:298
+msgid "data"
+msgstr "ዳታ"
+
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#: ../po/settings.js:300
+msgid "carrier"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#: ../po/settings.js:302
+msgid "4g"
+msgstr "4ጂ"
+
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#: ../po/settings.js:304
+msgid "3g"
+msgstr "3ጂ"
+
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#: ../po/settings.js:306
+msgid "2g"
+msgstr "2ጂ"
+
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#: ../po/settings.js:308
+msgid "lte"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#: ../po/settings.js:310
+msgid "apn"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#: ../po/settings.js:312
+msgid "roam"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
+#: ../po/settings.js:318
+msgid "battery"
+msgstr "ባትሪ"
+
+#. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
+#: ../po/settings.js:320
+msgid "power"
+msgstr "ሐይል"
+
+#. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
+#: ../po/settings.js:322
+msgid "charge"
+msgstr "መሙያ"
+
+#. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
+#: ../po/settings.js:324
+msgid "idle"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
+#: ../po/settings.js:328
+msgid "disable"
+msgstr "ማሰናከያ"
+
+#. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
+#: ../po/settings.js:330
+msgid "enable"
+msgstr "ማስቻያ"
+
+#. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
+#: ../po/settings.js:334
+msgid "brightness"
+msgstr "ብርሁነት"
+
+#. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
+#: ../po/settings.js:342
+msgid "adjust"
+msgstr "ማስተካከያ"
+
+#: ../plugins/system-update//system_update.cpp:94
 msgid "Can't cancel current request (can't contact service)"
-msgstr ""
+msgstr "የ አሁኑን ጥያቄ መሰረዝ አልተቻለም (ግልጋሎቱ መገናኘት አልተቻለም)"
 
-#: ../plugins/system-update//system_update.cpp:98
+#: ../plugins/system-update//system_update.cpp:100
 msgid "Can't pause current request (can't contact service)"
-msgstr ""
+msgstr "የ አሁኑን ጥያቄ ማስቆም አልተቻለም (ግልጋሎቱ መገናኘት አልተቻለም)"
 
-#: ../plugins/about//click.cpp:134
+#: ../plugins/about//click.cpp:171
 msgid "Unknown title"
 msgstr "ያልታወቀ አርእስት"
 
@@ -2183,6 +2744,17 @@ msgstr ""
 msgid "Authentication token manipulation error"
 msgstr ""
 
+#: ../push-helper/software_updates_helper.py:150
+msgid "There's an updated system image."
+msgstr "ለ ስርአቱ ምስል ማሻሻያ ዝግጁ ነው"
+
+#: ../push-helper/software_updates_helper.py:151
+msgid "Tap to open the system updater."
+msgstr "የ ስርአት ማሻሻያውን ለመክፈት መታ ያድርጉ"
+
+#~ msgid "Password visible"
+#~ msgstr "የሚታይ የመግቢያ ቃል"
+
 #~ msgid "Other network"
 #~ msgstr "ሌላ ኔትዎርክ"
 
@@ -2191,3 +2763,15 @@ msgstr ""
 
 #~ msgid "Connect to Wi-Fi"
 #~ msgstr "ወደ ዋይ-ፋይ መገናኛFi"
+
+#~ msgid "settings"
+#~ msgstr "ማሰናጃዎች"
+
+#~ msgid "i18n"
+#~ msgstr "i18n"
+
+#~ msgid "lang"
+#~ msgstr "ቋንቋ"
+
+#~ msgid "Connect to hidden network"
+#~ msgstr "ወደ ተደበቅ ኔትዎርክ መገናኛ"

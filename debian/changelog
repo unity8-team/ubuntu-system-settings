@@ -1,3 +1,80 @@
+ubuntu-system-settings (0.3+14.10.20141002-0ubuntu1) utopic; urgency=low
+
+  [ jonas-drange ]
+  * [cellular] react to application.state changes and update potential
+    out-of-date default SIM settings (LP: #1364103)
+  * [wifi] let removed networks update the previous network model so
+    that we can reuse the model (and not pop the pagestack twice,
+    causing this ux issue) (LP: #1370389)
+
+  [ Sebastien Bacher ]
+  * [location] use a flickable so the list can be scrolled (LP:
+    #1374017)
+  * [security] get localized application names from the trust-store (LP:
+    #1374018)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 02 Oct 2014 14:05:35 +0000
+
+ubuntu-system-settings (0.3+14.10.20141001-0ubuntu1) utopic; urgency=low
+
+  [ Ken VanDine ]
+  * Fixed handling of the Downloading/Installing label based on actual
+    state. . Forward updateProgress signals for system updates. Layout
+    fixes (LP: #1312587)
+  * Use new splash screen (LP: #1376242)
+  * Improved tracking download states
+  * Use new target_build_number from system-image-dbus to determine
+    visibility of the update notification (LP: #1355803)
+
+  [ CI bot ]
+  * Resync trunk
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 01 Oct 2014 16:01:54 +0000
+
+ubuntu-system-settings (0.3+14.10.20140926-0ubuntu1) utopic; urgency=low
+
+  [ Sebastien Bacher ]
+  * [storage] use libclick rather than calling the command line (LP:
+    #1368967)
+  * [storage] tweaks to the disk informations, limit the free space to
+    the user available one (excluding the system partitions), don't list
+    the external mounts, that's described in the design and is going to
+    require work on the categories computation to give correct values
+    (LP: #1284247)
+  * [about] display the free space value next to the storage label (LP:
+    #1335144)
+
+  [ Albert Astals ]
+  * Add i18n.tr
+
+  [ jonas-drange ]
+  * [wifi] connect to hidden network is now a dialog (LP: #1366005)
+
+  [ Ken VanDine ]
+  * Provide more keywords to make search useful (LP: #1370219) (LP:
+    #1370219)
+  * [background] set sourceSize in the image preview to work around an
+    issue loading large images (LP: #1373462)
+
+  [ CI bot ]
+  * Resync trunk
+
+  [ Mathieu Trudel-Lapierre ]
+  * [bluetooth] Properly handle device types for connection and
+    disconnection. (LP: #1369964)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 26 Sep 2014 15:32:57 +0000
+
+ubuntu-system-settings (0.3+14.10.20140925-0ubuntu1) utopic; urgency=low
+
+  [ Michael Terry ]
+  * Add a translator comment for what HERE means. (LP: #1368838) (LP:
+    #1368838)
+  * Prevent a crash in unity8 when the wizard also crashes or stops
+    early. (LP: #1355892) (LP: #1355892)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 25 Sep 2014 00:22:52 +0000
+
 ubuntu-system-settings (0.3+14.10.20140924.1-0ubuntu1) utopic; urgency=low
 
   [ Michael Terry ]

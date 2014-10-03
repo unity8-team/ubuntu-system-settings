@@ -1,6 +1,7 @@
 set(QML_SOURCES
 AccessPoint.qml
 BaseMenuItem.qml
+Common.qml
 DivMenuItem.qml
 FramedMenuItem.qml
 HLine.qml
