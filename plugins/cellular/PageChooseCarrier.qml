@@ -230,7 +230,7 @@ ItemPage {
             ListItem.Standard {
                 text: i18n.tr("APN")
                 progression: true
-                enabled: !sim.connMan.powered
+                enabled: sim.connMan.powered
                 onClicked: {
                     pageStack.push(Qt.resolvedUrl("PageChooseApn.qml"), {sim: sim})
                 }
