@@ -1,3 +1,19 @@
+ubuntu-system-settings (0.3+14.10.20141003-0ubuntu1) utopic; urgency=low
+
+  [ Iain Lane ]
+  * [storage/about] Use a QSharedPointer to manage freeing of the
+    counter which we use to display all of the collected sizes at once.
+    If the measuring process was cancelled, we were freeing it multiple
+    times - once for each outstanding size measurement. This led to a
+    crash. (LP: #1375988)
+  * [security-privacy] Link with gobject, uses symbols from this
+    library. Prevents "[…]libUbuntuSecurityPrivacyPanel.so contains an
+    unresolvable reference to symbol
+    g_signal_handlers_disconnect_matched: it's probably a plugin"
+    warnings.
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 03 Oct 2014 13:52:42 +0000
+
 ubuntu-system-settings (0.3+14.10.20141002-0ubuntu1) utopic; urgency=low
 
   [ jonas-drange ]
