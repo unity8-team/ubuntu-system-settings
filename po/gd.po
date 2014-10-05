@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 || n==11) ? 0 : (n==2 || n==12) ? 1 : "
 "(n > 2 && n < 20) ? 2 : 3;\n"
-"X-Launchpad-Export-Date: 2014-10-04 06:27+0000\n"
+"X-Launchpad-Export-Date: 2014-10-05 06:37+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 "Language: gd\n"
 
@@ -2877,6 +2877,3 @@ msgstr "Thoir gnogag gus ùraichear an t-siostaim fhosgladh."
 
 #~ msgid "Connect to Wi-Fi"
 #~ msgstr "Ceangail ri Wi-Fi"
-
-#~ msgid "Connect to hidden network"
-#~ msgstr "Ceangail ri lìonra falaichte"
