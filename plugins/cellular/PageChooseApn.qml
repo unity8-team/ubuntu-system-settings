@@ -274,9 +274,10 @@ ItemPage {
         }
 
         function activateHelper(type, contextPath, customMmsData) {
-            if (type === "internet")
+            if (type === "internet") {
                 activator.activate(contextPath, sim.simMng.subscriberIdentity, sim.simMng.modemPath)
-            if (type === "mms") {
+            }
+            else if (type === "mms") {
                 if (contextPath === undefined) {
                     // LP(:#1362795)
                     pendingCustomMmsData = customMmsData
@@ -292,6 +293,11 @@ ItemPage {
                     });
                     sim.connMan.addContext("mms")
                 }
+            } else {
+                // somebody is calling the function wrong
+                // the exception gives a very nice log error message from QmlEngine and does not
+                // have any side effects
+                throw "activateHelper: bad data: type: " + type + ", contextPath: " + contextPath + ", customMmsData: " + customMmsData;
             }
         }
     }
@@ -416,7 +422,7 @@ ItemPage {
                             }
                         }
 
-                        d.activateHelper(ctx.contextPath);
+                        d.activateHelper("internet", ctx.contextPath);
                     }
                 }
             }
