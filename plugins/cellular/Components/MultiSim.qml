@@ -68,7 +68,6 @@ Column {
         text: i18n.tr("Carriers")
         id: chooseCarrier
         objectName: "chooseCarrier"
-        enabled: sim.netReg.status !== ""
         progression: enabled
         onClicked: {
             pageStack.push(Qt.resolvedUrl("../PageChooseCarriers.qml"), {
