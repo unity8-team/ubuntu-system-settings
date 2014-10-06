@@ -450,8 +450,10 @@ ItemPage {
                         enabled: {
                             if (modelData !== "/same/as/internet")
                                 return true;
-                            else
-                                d.mContexts[internetApnSelector.model[internetApnSelector.selectedIndex]].dual
+                            else {
+                                var tmp = d.mContexts[internetApnSelector.model[internetApnSelector.selectedIndex]]
+                                return tmp === undefined ? false : tmp.dual
+                            }
                         }
                         // work around OptionSelectorDelegate not having a visual change depending on being disabled
                         opacity: enabled ? 1.0 : 0.5

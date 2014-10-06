@@ -115,6 +115,7 @@ ItemPage {
             left: parent.left
             right: parent.right
             bottom: parent.bottom
+            margins: units.gu(2)
         }
         contentWidth: parent.width
         clip: true
@@ -122,17 +123,23 @@ ItemPage {
         boundsBehavior: (contentHeight > height) ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
         flickableDirection: Flickable.VerticalFlick
 
-        Item {
+        ColumnLayout {
             id: theContents
-            height: sameSwitch.height + theGrid.height
-            width: parent.width
+            anchors {
+                left: parent.left
+                right: parent.right
+            }
+            spacing: units.gu(2)
 
             ListItem.Standard {
                 id: sameSwitch
-                anchors.top: parent.top
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                }
                 /// @todo disable for now
                 //visible: d.isMms
-                visible: false
+                visible: false                
                 text: i18n.tr("Same APN as for Internet")
                 control: Switch {
                     id: doBoth
@@ -155,10 +162,8 @@ ItemPage {
                 columnSpacing: units.gu(1)
                 rowSpacing: units.gu(1)
                 anchors{
-                    top: d.isMms ? sameSwitch.bottom : parent.top
                     right: parent.right
                     left:parent.left
-                    margins: units.gu(0.5)
                 }
 
                 Label {
@@ -223,6 +228,7 @@ ItemPage {
                 }
                 /// @todo support for ipv6 will be added after RTM
             }
+
             Item {
                 id: buttonRectangle
 
@@ -231,7 +237,6 @@ ItemPage {
                 anchors {
                     left: parent.left
                     right: parent.right
-                    top: theGrid.bottom
                 }
 
                 Button {
@@ -244,7 +249,6 @@ ItemPage {
                         right: parent.horizontalCenter
                         bottom: parent.bottom
                         topMargin: units.gu(1)
-                        leftMargin: units.gu(2)
                         rightMargin: units.gu(1)
                         bottomMargin: units.gu(1)
                     }
@@ -265,7 +269,7 @@ ItemPage {
                         bottom: parent.bottom
                         topMargin: units.gu(1)
                         leftMargin: units.gu(1)
-                        rightMargin: units.gu(2)
+                        rightMargin: units.gu(4)
                         bottomMargin: units.gu(1)
                     }
 
