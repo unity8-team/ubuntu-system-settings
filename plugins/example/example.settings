@@ -1,8 +1,9 @@
 {
-    "name": "Example",
+    "name": "Identity Management",
     "icon": "totem",
     "translations": "settings-example",
     "category": "network",
+    "priority": 2,
     "keywords": [
         "example",
         "test",
@@ -10,5 +11,6 @@
     ],
     "has-dynamic-keywords": false,
     "has-dynamic-visibility": false,
-    "plugin": "example-plugin"
+    "plugin": "example-plugin",
+    "page-component": "PageComponent.qml"
 }
