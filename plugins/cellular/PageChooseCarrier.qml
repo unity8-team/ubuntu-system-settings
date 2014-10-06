@@ -52,7 +52,7 @@ ItemPage {
     }
 
     // map of operatorPath : netOp
-    property var operators: ({}) // naughty, naughty
+    property var operators: ({})
     function updateNetworkOperators()
     {
         var tmp = sim.netReg.networkOperators;
@@ -142,8 +142,10 @@ ItemPage {
         boundsBehavior: (contentHeight > parent.height) ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
 
         ColumnLayout {
-            anchors.left: parent.left
-            anchors.right: parent.right
+            anchors {
+                left: parent.left
+                right: parent.right
+            }
 
             ListItem.ItemSelector {
                 id: chooseCarrier
@@ -171,8 +173,10 @@ ItemPage {
             }
             ListItem.SingleControl {
                 enabled: chooseCarrier.selectedIndex === 1
-                anchors.left: parent.left
-                anchors.leftMargin: units.gu(0)
+                anchors {
+                    left: parent.left
+                    leftMargin: units.gu(0)
+                }
                 control: ColumnLayout {
                     id: child
                     width: parent.width - units.gu(4)

@@ -63,7 +63,7 @@ ItemPage {
         }
     }
 
-    //: %1 is either i18n.tr("Internet") or i18n.tr("MMS")
+    //TRANSLATORS: %1 is either i18n.tr("Internet") or i18n.tr("MMS")
     title: i18n.tr("Custom %1 APN").arg(d.typeText)
 
     // workaround of getting the following error on startup:
@@ -154,7 +154,7 @@ ItemPage {
                 columns: 2
                 columnSpacing: units.gu(1)
                 rowSpacing: units.gu(1)
-                anchors{
+                anchors {
                     top: d.isMms ? sameSwitch.bottom : parent.top
                     right: parent.right
                     left:parent.left
@@ -162,7 +162,7 @@ ItemPage {
                 }
 
                 Label {
-                    //: %1 is either i18n.tr("Internet") or i18n.tr("MMS")
+                    //TRANSLATORS: %1 is either i18n.tr("Internet") or i18n.tr("MMS")
                     text: i18n.tr("%1 APN").arg(d.typeText)
                 }
                 TextField {
@@ -231,22 +231,26 @@ ItemPage {
 
         height: cancelButton.height + units.gu(2)
 
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.bottom: parent.bottom
+        anchors {
+            left: parent.left
+            right: parent.right
+            bottom: parent.bottom
+        }
 
         Button {
             id: cancelButton
 
             text: i18n.tr("Cancel")
 
-            anchors.left: parent.left
-            anchors.right: parent.horizontalCenter
-            anchors.bottom: parent.bottom
-            anchors.topMargin: units.gu(1)
-            anchors.leftMargin: units.gu(2)
-            anchors.rightMargin: units.gu(1)
-            anchors.bottomMargin: units.gu(1)
+            anchors {
+                left: parent.left
+                right: parent.horizontalCenter
+                bottom: parent.bottom
+                topMargin: units.gu(1)
+                leftMargin: units.gu(2)
+                rightMargin: units.gu(1)
+                bottomMargin: units.gu(1)
+            }
 
             onClicked: {
                 pageStack.pop()
@@ -257,13 +261,15 @@ ItemPage {
             id: confirmButton
 
             text: d.isMms ? i18n.tr("Save") : i18n.tr("Activate")
-            anchors.left: parent.horizontalCenter
-            anchors.right: parent.right
-            anchors.bottom: parent.bottom
-            anchors.topMargin: units.gu(1)
-            anchors.leftMargin: units.gu(1)
-            anchors.rightMargin: units.gu(2)
-            anchors.bottomMargin: units.gu(1)
+            anchors {
+                left: parent.horizontalCenter
+                right: parent.right
+                bottom: parent.bottom
+                topMargin: units.gu(1)
+                leftMargin: units.gu(1)
+                rightMargin: units.gu(2)
+                bottomMargin: units.gu(1)
+            }
 
             enabled: d.isValid;
 
