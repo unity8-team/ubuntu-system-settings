@@ -61,35 +61,4 @@ ListView {
         }
         enabled: model.enabled
     }
-
-    add: Transition {
-        NumberAnimation {
-            property: "opacity"
-            duration: duration
-            from: 0
-            to: 1
-        }
-    }
-
-    displaced: Transition {
-        NumberAnimation {
-            property: "y"
-            duration: duration
-        }
-    }
-
-    remove: Transition {
-        ParallelAnimation {
-            NumberAnimation {
-                property: "opacity"
-                duration: duration
-                to: 0
-            }
-
-            NumberAnimation {
-                property: "y"
-                duration: duration
-            }
-        }
-    }
 }

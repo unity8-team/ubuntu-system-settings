@@ -30,9 +30,10 @@ import Ubuntu.SystemSettings.SecurityPrivacy 1.0
 import Ubuntu.SystemSettings.StorageAbout 1.0
 
 ItemPage {
-    id: versionPage
-    objectName: "versionPage"
+    id: devModePage
+    objectName: "devModePage"
     title: i18n.tr("Developer Mode")
+    flickable: scrollWidget
 
     UbuntuStorageAboutPanel {
         id: storedInfo
@@ -42,11 +43,21 @@ ItemPage {
         id: securityPrivacy
     }
 
+    onActiveChanged: devModeSwitch.checked = storedInfo.developerMode
+
     Flickable {
+        id: scrollWidget
         anchors.fill: parent
 
+        contentHeight: contentItem.childrenRect.height
+        boundsBehavior: (contentHeight > devModePage.height) ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
+        /* Set the direction to workaround https://bugreports.qt-project.org/browse/QTBUG-31905
+           otherwise the UI might end up in a situation where scrolling doesn't work */
+        flickableDirection: Flickable.VerticalFlick
+
         Column {
-            anchors.fill: parent
+            anchors.left: parent.left
+            anchors.right: parent.right
 
             ListItem.SingleValue {
                 objectName: "devModeWarningItem"
@@ -80,16 +91,17 @@ ItemPage {
                 enabled: securityPrivacy.securityType !== UbuntuSecurityPrivacyPanel.Swipe
                 control: Switch {
                     id: devModeSwitch
-                    checked: storedInfo.getDeveloperMode
-                    onClicked: checked = storedInfo.toggleDeveloperMode
+                    checked: storedInfo.developerMode
+                    onClicked: storedInfo.developerMode = checked
                 }
             }
 
             ListItem.Divider {}
 
             ListItem.SingleValue {
+                height: lockSecurityLabel.height + units.gu(2)
                 Label {
-                    id: "lockSecurityLabel"
+                    id: lockSecurityLabel
                     width: parent.width
                     anchors.verticalCenter: parent.verticalCenter
                     anchors.horizontalCenter: parent.horizontalCenter

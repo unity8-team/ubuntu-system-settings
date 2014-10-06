@@ -6,6 +6,7 @@ import Ubuntu.SystemSettings.StorageAbout 1.0
 
 ItemPage {
     property string binary;
+    property string license: backendInfo.licenseInfo(binary);
 
     id: licensesPage
     title: binary
@@ -26,7 +27,7 @@ ItemPage {
 
         Label {
             id: textId
-            text: backendInfo.licenseInfo(binary)
+            text: license ? license : i18n.tr("Sorry, this license could not be displayed.")
             width: scrollWidget.width
             wrapMode: Text.WordWrap
         }

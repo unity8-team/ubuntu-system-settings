@@ -38,21 +38,27 @@ ItemPage {
         id: backendInfos
     }
 
+    StorageInfo {
+        id: storageInfo
+    }
+
     DeviceInfo {
         id: deviceInfos
     }
 
-    UpdateManager {
-        id: updateBackend
-    }
-
     OfonoManager {
         id: manager
+        Component.onCompleted: {
+            if (manager.modems.length === 1) {
+                phoneNumbers.setSource("PhoneNumber.qml", {path: manager.modems[0]})
+            } else if (manager.modems.length > 1) {
+                phoneNumbers.setSource("PhoneNumbers.qml", {paths: manager.modems.slice(0).sort()})
+            }
+        }
     }
 
-    OfonoSimManager {
-        id: sim
-        modemPath: manager.modems[0]
+    NetworkAbout {
+        id: network
     }
 
     Flickable {
@@ -91,14 +97,10 @@ ItemPage {
                 }
             }
 
-            ListItem.SingleValue {
-                id: numberItem
-                objectName: "numberItem"
-                text: i18n.tr("Phone number")
-                property string phoneNumber
-                phoneNumber: sim.subscriberNumbers.length > 0 ? sim.subscriberNumbers[0] : ""
-                value: phoneNumber
-                visible: phoneNumber.length > 0
+            Loader {
+                id: phoneNumbers
+                anchors.left: parent.left
+                anchors.right: parent.right
             }
 
             ListItem.SingleValue {
@@ -118,12 +120,28 @@ ItemPage {
                 visible: imeiNumber
             }
 
+            ListItem.SingleValue {
+                text: i18n.tr("Wi-Fi address")
+                value: network.networkMacAddresses[0]
+                visible: network.networkMacAddresses.length > 0
+                showDivider: bthwaddr.visible
+            }
+
+            ListItem.SingleValue {
+                id: bthwaddr
+                text: i18n.tr("Bluetooth address")
+                value: network.bluetoothMacAddress
+                visible: network.bluetoothMacAddress
+                showDivider: false
+            }
+
             ListItem.Divider {}
 
-            ListItem.Standard {
+            ListItem.SingleValue {
                 id: storageItem
                 objectName: "storageItem"
                 text: i18n.tr("Storage")
+                value: i18n.tr("%1 free").arg(backendInfos.formatSize(storageInfo.availableDiskSpace("/home")))
                 progression: true
                 onClicked: pageStack.push(Qt.resolvedUrl("Storage.qml"))
             }
@@ -137,7 +155,7 @@ ItemPage {
                 objectName: "osItem"
                 text: i18n.tr("OS")
                 value: "Ubuntu " + deviceInfos.version(DeviceInfo.Os) +
-                       (updateBackend.currentBuildNumber ? " (r%1)".arg(updateBackend.currentBuildNumber) : "")
+                       (UpdateManager.currentBuildNumber ? " (r%1)".arg(UpdateManager.currentBuildNumber) : "")
                 progression: true
                 onClicked: pageStack.push(Qt.resolvedUrl("Version.qml"))
             }
@@ -145,8 +163,8 @@ ItemPage {
             ListItem.SingleValue {
                 objectName: "lastUpdatedItem"
                 text: i18n.tr("Last updated")
-                value: updateBackend.lastUpdateDate && !isNaN(updateBackend.lastUpdateDate) ?
-                    Qt.formatDate(updateBackend.lastUpdateDate) : i18n.tr("Never")
+                value: UpdateManager.lastUpdateDate && !isNaN(UpdateManager.lastUpdateDate) ?
+                    Qt.formatDate(UpdateManager.lastUpdateDate) : i18n.tr("Never")
             }
 
             ListItem.SingleControl {

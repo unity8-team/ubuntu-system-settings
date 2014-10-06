@@ -78,7 +78,7 @@ ItemPage {
 
         function updateContexts()
         {
-            var tmp = sim.connMan.contexts;
+            var tmp = sim.connMan.contexts.slice(0);
             var added = tmp.filter(function(i) {
                 return mContexts[i] === undefined;
             });
@@ -89,6 +89,8 @@ ItemPage {
             removed.forEach(function(currentValue, index, array) {
                 // just asserting to verify the logic
                 // remove once proven functional
+                // the exception gives a very nice log error message from QmlEngine and does not
+                // have any side effects
                 if (mContexts[currentValue] === undefined) {
                     throw "updateContexts: removed is broken";
                 }
@@ -105,6 +107,8 @@ ItemPage {
             added.forEach(function(currentValue, index, array) {
                 // just asserting to verify the logic
                 // remove once proven functional
+                // the exception gives a very nice log error message from QmlEngine and does not
+                // have any side effects
                 if (mContexts[currentValue] !== undefined) {
                     throw "updateContexts: added is broken";
                 }
@@ -138,6 +142,8 @@ ItemPage {
 
             // just asserting to verify the logic
             // remove once proven functional
+            // the exception gives a very nice log error message from QmlEngine and does not
+            // have any side effects
             if (Object.keys(mContexts).length !== tmp.length) {
                 throw "Object.keys(contexts).length !== tmp.length";
             }
@@ -196,7 +202,7 @@ ItemPage {
         property var mMmsApns : [];
         function buildLists()
         {
-            __suppressActivation = true;
+            d.__suppressActivation = true;
 
             var internet = [];
             var mms = [];
@@ -539,17 +545,17 @@ ItemPage {
 
             // @todo: no means of doing any meaningful reset right now.
             // LP(#1338758)
-            //ListItem.ThinDivider {}
-            //ListItem.SingleControl {
-            //    control: Button {
-            //        objectName: "resetButton"
-            //        text: i18n.tr("Reset APN Settings")
-            //        width: parent.width - units.gu(4)
-            //        onClicked: {
-            //            PopupUtils.open(resetDialog)
-            //        }
-            //    }
-            //}
+            // ListItem.ThinDivider {}
+            // ListItem.SingleControl {
+            //     control: Button {
+            //         objectName: "resetButton"
+            //         text: i18n.tr("Reset APN Settings")
+            //         width: parent.width - units.gu(4)
+            //         onClicked: {
+            //             PopupUtils.open(resetDialog)
+            //         }
+            //     }
+            // }
         }
     }
 

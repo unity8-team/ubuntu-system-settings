@@ -22,6 +22,7 @@ import QtQuick 2.0
 import SystemSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
+import Ubuntu.SystemSettings.Sound 1.0
 import MeeGo.QOfono 0.2
 import "sims.js" as Sims
 
@@ -45,8 +46,9 @@ ItemPage {
         State {
             name: "singleSim"
             StateChangeScript {
-                script: loader.setSource("SingleSim.qml", { sim: Sims.get(0) })
-
+                script: loader.setSource("SingleSim.qml", {
+                    sim: Sims.getFirstPresent()
+                })
             }
             when: simsLoaded && (Sims.getPresentCount() === 1)
         },
@@ -79,6 +81,8 @@ ItemPage {
         }
     }
 
+    UbuntuSoundPanel { id: soundPlugin }
+
     Flickable {
         id: flick
         anchors.fill: parent
@@ -88,11 +92,22 @@ ItemPage {
             Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
 
         Column {
-            anchors { left: parent.left; right: parent.right }
+            anchors { left: parent.left; right: parent.right }
 
             Loader {
                 id: loader
-                anchors { left: parent.left; right: parent.right }
+                anchors { left: parent.left; right: parent.right }
+            }
+
+            ListItem.Divider {}
+
+            ListItem.Standard {
+                control: Switch {
+                    objectName: "dialpadSounds"
+                    checked: soundPlugin.dialpadSoundsEnabled
+                    onCheckedChanged: soundPlugin.dialpadSoundsEnabled = checked
+                }
+                text: i18n.tr("Dialpad sounds")
             }
         }
     }

@@ -114,7 +114,7 @@ ItemPage {
             top: parent.top
             left: parent.left
             right: parent.right
-            bottom: buttonRectangle.top
+            bottom: parent.bottom
         }
         contentWidth: parent.width
         clip: true
@@ -154,7 +154,7 @@ ItemPage {
                 columns: 2
                 columnSpacing: units.gu(1)
                 rowSpacing: units.gu(1)
-                anchors {
+                anchors{
                     top: d.isMms ? sameSwitch.bottom : parent.top
                     right: parent.right
                     left:parent.left
@@ -223,102 +223,100 @@ ItemPage {
                 }
                 /// @todo support for ipv6 will be added after RTM
             }
+            Item {
+                id: buttonRectangle
+
+                height: cancelButton.height + units.gu(2)
+
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                    top: theGrid.bottom
+                }
+
+                Button {
+                    id: cancelButton
+
+                    text: i18n.tr("Cancel")
+
+                    anchors {
+                        left: parent.left
+                        right: parent.horizontalCenter
+                        bottom: parent.bottom
+                        topMargin: units.gu(1)
+                        leftMargin: units.gu(2)
+                        rightMargin: units.gu(1)
+                        bottomMargin: units.gu(1)
+                    }
+
+                    onClicked: {
+                        pageStack.pop()
+                    }
+                }
+
+                Button {
+                    id: confirmButton
+
+                    text: d.isMms ? i18n.tr("Save") : i18n.tr("Activate")
+
+                    anchors {
+                        left: parent.horizontalCenter
+                        right: parent.right
+                        bottom: parent.bottom
+                        topMargin: units.gu(1)
+                        leftMargin: units.gu(1)
+                        rightMargin: units.gu(2)
+                        bottomMargin: units.gu(1)
+                    }
+
+                    enabled: d.isValid;
+
+                    onClicked: {
+                        var ctx;
+                        if (d.isMms)
+                            ctx = contexts["mms"];
+                        else
+                            ctx = contexts["internet"];
+
+                        /// @bug LP(:#1362795)
+                        if (d.isMms && ctx === undefined) {
+                            var mmsData = ({})
+                            mmsData["accessPointName"] = apnName.text;
+                            mmsData["username"] = userName.text;
+                            mmsData["password"] = pword.text;
+                            mmsData["messageCenter"] = mmsc.text
+                            var proxyValue = "";
+                            if (proxy.text !== "") {
+                                proxyValue = proxy.text;
+                                if (port.text !== "")
+                                    proxyValue = proxyValue + ":" + port.text;
+                            }
+                            mmsData["messageProxy"] = proxyValue;
+                            activateCb("mms", undefined, mmsData);
+                            pageStack.pop();
+                            return;
+                        }
+
+                        ctx.accessPointName = apnName.text;
+                        ctx.username = userName.text;
+                        ctx.password = pword.text;
+                        if (d.isMms) {
+                            ctx.messageCenter = mmsc.text;
+                            var proxyValue = "";
+                            if (proxy.text !== "") {
+                                proxyValue = proxy.text;
+                                if (port.text !== "")
+                                    proxyValue = proxyValue + ":" + port.text;
+                            }
+                            ctx.messageProxy = proxyValue
+                        }
+                        /// @todo map protocol values
+
+                        activateCb(ctx.type, ctx.contextPath);
+                        pageStack.pop();
+                    }
+                }
+            } // item for buttons
         } // the contents
     } // the flickable
-
-    Item {
-        id: buttonRectangle
-
-        height: cancelButton.height + units.gu(2)
-
-        anchors {
-            left: parent.left
-            right: parent.right
-            bottom: parent.bottom
-        }
-
-        Button {
-            id: cancelButton
-
-            text: i18n.tr("Cancel")
-
-            anchors {
-                left: parent.left
-                right: parent.horizontalCenter
-                bottom: parent.bottom
-                topMargin: units.gu(1)
-                leftMargin: units.gu(2)
-                rightMargin: units.gu(1)
-                bottomMargin: units.gu(1)
-            }
-
-            onClicked: {
-                pageStack.pop()
-            }
-        }
-
-        Button {
-            id: confirmButton
-
-            text: d.isMms ? i18n.tr("Save") : i18n.tr("Activate")
-            anchors {
-                left: parent.horizontalCenter
-                right: parent.right
-                bottom: parent.bottom
-                topMargin: units.gu(1)
-                leftMargin: units.gu(1)
-                rightMargin: units.gu(2)
-                bottomMargin: units.gu(1)
-            }
-
-            enabled: d.isValid;
-
-            onClicked: {
-                var ctx;
-                if (d.isMms)
-                    ctx = contexts["mms"];
-                else
-                    ctx = contexts["internet"];
-
-                /// @bug LP(:#1362795)
-                if (d.isMms && ctx === undefined) {
-                    var mmsData = ({})
-                    mmsData["accessPointName"] = apnName.text;
-                    mmsData["username"] = userName.text;
-                    mmsData["password"] = pword.text;
-                    mmsData["messageCenter"] = mmsc.text
-                    var proxyValue = "";
-                    if (proxy.text !== "") {
-                        proxyValue = proxy.text;
-                        if (port.text !== "")
-                            proxyValue = proxyValue + ":" + port.text;
-                    }
-                    mmsData["messageProxy"] = proxyValue;
-                    activateCb("mms", undefined, mmsData);
-                    pageStack.pop();
-                    return;
-                }
-
-                ctx.accessPointName = apnName.text;
-                ctx.username = userName.text;
-                ctx.password = pword.text;
-                if (d.isMms) {
-                    ctx.messageCenter = mmsc.text;
-                    var proxyValue = "";
-                    if (proxy.text !== "") {
-                        proxyValue = proxy.text;
-                        if (port.text !== "")
-                            proxyValue = proxyValue + ":" + port.text;
-                    }
-                    ctx.messageProxy = proxyValue
-                }
-                /// @todo map protocol values
-
-                activateCb(ctx.type, ctx.contextPath);
-                pageStack.pop();
-            }
-        }
-    } // item for buttons
-
 }
-

@@ -6,6 +6,7 @@ set(QML_SOURCES
     KeyboardLayoutItem.qml
     KeyboardLayouts.qml
     PageComponent.qml
+    RebootNecessary.qml
     SpellChecking.qml
     SubsetView.qml
 )
@@ -15,7 +16,7 @@ add_library(UbuntuLanguagePlugin MODULE
  keyboard-layout.h language-plugin.h plugin.h subset-model.h
  ${QML_SOURCES})
 qt5_use_modules(UbuntuLanguagePlugin Qml Quick DBus)
-target_link_libraries(UbuntuLanguagePlugin ${GLIB_LDFLAGS} ${GIO_LDFLAGS} ${ACCOUNTSSERVICE_LDFLAGS} ${ICU_LDFLAGS})
+target_link_libraries(UbuntuLanguagePlugin uss-sessionservice ${GLIB_LDFLAGS} ${GIO_LDFLAGS} ${ACCOUNTSSERVICE_LDFLAGS} ${ICU_LDFLAGS})
 
 set(PLUG_DIR ${PLUGIN_PRIVATE_MODULE_DIR}/Ubuntu/SystemSettings/LanguagePlugin)
 install(TARGETS UbuntuLanguagePlugin DESTINATION ${PLUG_DIR})

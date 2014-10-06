@@ -28,6 +28,9 @@ ItemPage {
     anchors.fill: parent
 
     property string uri
+
+    // whether an image was just imported from e.g. contentHub
+    property bool imported: false
     signal save
     property Item headerStyle: header.__styleInstance ?
                                    header.__styleInstance : null
@@ -68,10 +71,11 @@ ItemPage {
 
     Image {
         id: previewImage
-        anchors.centerIn: parent
+        anchors.fill: parent
         source: uri
-        height: parent.height
-        fillMode: Image.PreserveAspectFit
+        sourceSize.height: height
+        sourceSize.width: width
+        fillMode: Image.PreserveAspectCrop
     }
 
     ListItem.ThinDivider {
@@ -94,7 +98,8 @@ ItemPage {
 
             Button {
                 objectName: "cancelButton"
-                text: i18n.tr("Cancel")
+                text: preview.imported ?
+                    i18n.tr("Remove image") : i18n.tr("Cancel")
                 width: (previewButtons.width-units.gu(2)*4)/2
                 gradient: UbuntuColors.greyGradient
                 onClicked: preview.state = "cancelled"

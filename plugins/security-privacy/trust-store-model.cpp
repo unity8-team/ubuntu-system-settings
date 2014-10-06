@@ -25,11 +25,12 @@
 #include <QList>
 #include <QMap>
 #include <QSet>
-#include <QSettings>
 #include <QStandardPaths>
 
 #include <core/trust/resolve.h>
 #include <core/trust/store.h>
+
+#include <glib.h>
 
 class Application
 {
@@ -39,15 +40,65 @@ public:
     void setId(const QString &id) {
         this->id = id;
 
+        GKeyFile *desktopInfo = g_key_file_new();
+        QString desktopFilename = resolveDesktopFilename(id);
+
+        gboolean loaded = g_key_file_load_from_file(desktopInfo,
+                                                    desktopFilename.toUtf8().data(),
+                                                    G_KEY_FILE_NONE,
+                                                    nullptr);
+
+        if (!loaded) {
+            g_warning("Couldn't parse the desktop: %s", desktopFilename.toUtf8().data());
+            g_key_file_free(desktopInfo);
+            return;
+        }
+
+        gchar *name = g_key_file_get_locale_string(desktopInfo,
+                                                   G_KEY_FILE_DESKTOP_GROUP,
+                                                   G_KEY_FILE_DESKTOP_KEY_NAME,
+                                                   nullptr,
+                                                   nullptr);
+        displayName = QString::fromUtf8(name);
+
+        gchar *icon = g_key_file_get_string(desktopInfo,
+                                            G_KEY_FILE_DESKTOP_GROUP,
+                                            G_KEY_FILE_DESKTOP_KEY_ICON,
+                                            nullptr);
+        gchar *path = g_key_file_get_string(desktopInfo,
+                                            G_KEY_FILE_DESKTOP_GROUP,
+                                            G_KEY_FILE_DESKTOP_KEY_PATH,
+                                            nullptr);
+        iconName = resolveIcon(QString::fromUtf8(icon),
+                               QString::fromUtf8(path));
+        g_free(name);
+        g_free(icon);
+        g_free(path);
+        g_key_file_free(desktopInfo);
+    }
+
+    QString resolveDesktopFilename(const QString &id) {
         QString localShare =
             QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation);
-        QSettings desktopFile(QString("%1/applications/%2.desktop").
-                              arg(localShare).arg(id),
-                              QSettings::IniFormat);
-        desktopFile.beginGroup("Desktop Entry");
-        displayName = desktopFile.value("Name").toString();
-        iconName = resolveIcon(desktopFile.value("Icon").toString(),
-                               desktopFile.value("Path").toString());
+        QString desktopFilename(QString("%1/applications/%2.desktop").
+                                arg(localShare).arg(id));
+        if (QFile(desktopFilename).exists())
+            return desktopFilename;
+
+        /* search the directory for a matching filename */
+        QDir dir(QString("%1/applications").arg(localShare));
+        dir.setFilter(QDir::Files);
+        QStringList fileList = dir.entryList();
+        QString pattern = QString("%1*.desktop").arg(id);
+        for (int i = 0; i < fileList.count(); i++) {
+            /* stop at the first match */
+            if (QDir::match(pattern, fileList[i])) {
+                return QString("%1/applications/%2").arg(localShare).arg(fileList[i]);
+            }
+        } 
+        
+        qWarning() << "No desktop file found for app id: " << id;
+        return QString();
     }
 
     QString resolveIcon(const QString &iconName, const QString &basePath) {
@@ -159,6 +210,12 @@ void TrustStoreModelPrivate::update()
             auto r = query->current();
 
             QString applicationId = QString::fromStdString(r.from);
+
+            /* filter out unconfined apps, they can access everything anyway */
+            if (applicationId == "unconfined") {
+                query->next();
+                continue;
+            }
 
             Application &app = appMap[applicationId];
             app.setId(applicationId);

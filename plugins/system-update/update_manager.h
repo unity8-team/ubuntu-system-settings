@@ -75,6 +75,7 @@ Q_SIGNALS:
     void updateProcessFailed(QString message);
     void systemUpdateFailed(int consecutiveFailureCount, QString lastReason);
     void versionChanged();
+    void rebooting(bool status);
     
 public:
     explicit UpdateManager(QObject *parent = 0);
@@ -85,6 +86,7 @@ public:
     Q_INVOKABLE void pauseDownload(const QString &packagename);
     Q_INVOKABLE void retryDownload(const QString &packagename);
     Q_INVOKABLE void applySystemUpdate() { m_systemUpdate.applyUpdate(); }
+    Q_INVOKABLE void updateClickScope();
 
     QVariantList model() const { return m_model; }
     int downloadMode() { return m_systemUpdate.downloadMode(); }
@@ -113,7 +115,10 @@ public Q_SLOTS:
 
 private Q_SLOTS:
     void clickUpdateNotAvailable();
+    void updateFailed(int consecutiveFailureCount, QString lastReason);
+    void updateDownloaded();
     void systemUpdatePaused(int value);
+    void systemUpdateProgress(int value, double eta);
     void processOutput();
     void processUpdates();
     void downloadUrlObtained(const QString &packagename, const QString &url);

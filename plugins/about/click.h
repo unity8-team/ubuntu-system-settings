@@ -23,7 +23,6 @@
 #include <QAbstractTableModel>
 #include <QDir>
 #include <QObject>
-#include <QProcess>
 #include <QSortFilterProxyModel>
 
 class ClickModel : public QAbstractTableModel
@@ -57,9 +56,9 @@ public:
     quint64 getClickSize() const;
 
 private:
-    void populateFromDesktopFile(Click *newClick,
-                                 QVariantMap hooks,
-                                 QDir directory);
+    void populateFromDesktopOrIniFile(Click *newClick,
+                                      QVariantMap hooks,
+                                      QDir directory);
     Click buildClick(QVariantMap manifest);
     QList<Click> buildClickList();
 

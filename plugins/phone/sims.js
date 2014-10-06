@@ -13,6 +13,10 @@ function get (n) {
     return getAll()[n];
 }
 
+function getFirstPresent () {
+    return getPresent()[0];
+}
+
 function getCount () {
     return getAll().length;
 }

@@ -131,7 +131,7 @@ ItemPage {
             }
             onNameChanged:  buildLists();
             onStatusChanged: buildLists();
-        }        
+        }
     }
 
     Flickable {
@@ -188,7 +188,7 @@ ItemPage {
                         visible: sim.netReg.status === "searching"
                         ActivityIndicator {
                             id: activityIndicator
-                            anchors.verticalCenter: parent.verticalCenter                            
+                            anchors.verticalCenter: parent.verticalCenter
                             running: parent.visible
                         }
                         Label {
