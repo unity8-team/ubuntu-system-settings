@@ -331,6 +331,23 @@ ItemPage {
 
         Component.onCompleted: {
             d.updateContexts();
+
+
+            /// @todo workaround the work around that the UI currently only supports max. 1 MMS context
+            ///       remove once nuntium stuff is implemented
+            // remove all but one MMS context
+            var mms = Object.keys(d.mContexts).filter(function(i) {
+                var ctx = d.mContexts[i]
+                if (ctx.type === "mms")
+                        return true;
+                return false;
+            });
+            mms = mms.slice(1);
+            mms.forEach(function(currentValue, index, array) {
+                sim.connMan.removeContext(currentValue);
+            });
+
+
             // do this once.
             d.checkAndCreateCustomContexts();
         }
