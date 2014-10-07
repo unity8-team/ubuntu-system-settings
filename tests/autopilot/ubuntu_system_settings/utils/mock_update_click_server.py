@@ -15,8 +15,8 @@ class MyHandler(BaseHTTPRequestHandler):
 
     def response_item_info(self):
         response = [{
-            "name": "title",
-            "version": "1.0",
+            "name": "com.ubuntu.calculator",
+            "version": "9.0",
             "icon_url": "https://raw.githubusercontent.com/ninja-ide/ninja-ide/master/ninja_ide/img/ninja_icon.png",
             "download_url": "https://raw.githubusercontent.com/ninja-ide/ninja-ide/master/ninja_ide/img/ninja_icon.png",
             "binary_filesize": 3423,
