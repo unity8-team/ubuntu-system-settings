@@ -48,16 +48,6 @@ ItemPage {
     property var notificationAction;
     property string errorDialogText: ""
 
-    onHasConnectionChanged: {
-        if (hasConnection) {
-            activity.running = true;
-            root.state = "SEARCHING";
-            updateManager.checkUpdates();
-        } else {
-            activity.running = false;
-        }
-    }
-
     QDBusActionGroup {
         id: indicatorPower
         busType: 1
