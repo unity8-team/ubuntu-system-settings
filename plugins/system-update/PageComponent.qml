@@ -63,7 +63,7 @@ ItemPage {
             if (online) {
                 activity.running = true;
                 root.state = "SEARCHING";
-                updateManager.checkUpdates();
+                UpdateManager.checkUpdates();
             } else {
                 activity.running = false;
             }
@@ -192,7 +192,7 @@ ItemPage {
         Component.onCompleted: {
             credentialsNotification.visible = false;
             root.state = "SEARCHING";
-            updateManager.checkUpdates();
+            UpdateManager.checkUpdates();
         }
 
         onUpdateAvailableFound: {
@@ -311,7 +311,7 @@ ItemPage {
                     onClicked: {
                         activity.running = true;
                         root.state = "SEARCHING";
-                        updateManager.checkUpdates();
+                        UpdateManager.checkUpdates();
                     }
                 }
             }
