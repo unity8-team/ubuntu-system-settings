@@ -70,6 +70,11 @@ public Q_SLOTS:
 Q_SIGNALS:
     void error(const QString &errorMessage);
     void finished(const QString &path);
+    void started(bool success);
+    void canceled(bool success);
+    void paused(bool success);
+    void resumed(bool success);
+    void processing(const QString &path);
     void progressChanged();
     void errorFound(const QString &error);
 

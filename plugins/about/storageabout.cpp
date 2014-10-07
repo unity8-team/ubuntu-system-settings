@@ -233,10 +233,9 @@ bool StorageAbout::getDeveloperMode()
     }
 }
 
-bool StorageAbout::toggleDeveloperMode()
+void StorageAbout::setDeveloperMode(bool mode)
 {
-    m_propertyService->call("SetProperty", "adb", !getDeveloperMode());
-    return getDeveloperMode();
+    m_propertyService->call("SetProperty", "adb", mode);
 }
 
 QString StorageAbout::licenseInfo(const QString &subdir) const

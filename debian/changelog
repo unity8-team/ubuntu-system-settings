@@ -1,3 +1,164 @@
+ubuntu-system-settings (0.3+14.10.20141001-0ubuntu1) utopic; urgency=low
+
+  [ Ken VanDine ]
+  * Fixed handling of the Downloading/Installing label based on actual
+    state. . Forward updateProgress signals for system updates. Layout
+    fixes (LP: #1312587)
+  * Use new splash screen (LP: #1376242)
+  * Improved tracking download states
+  * Use new target_build_number from system-image-dbus to determine
+    visibility of the update notification (LP: #1355803)
+
+  [ CI bot ]
+  * Resync trunk
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 01 Oct 2014 16:01:54 +0000
+
+ubuntu-system-settings (0.3+14.10.20140926-0ubuntu1) utopic; urgency=low
+
+  [ Sebastien Bacher ]
+  * [storage] use libclick rather than calling the command line (LP:
+    #1368967)
+  * [storage] tweaks to the disk informations, limit the free space to
+    the user available one (excluding the system partitions), don't list
+    the external mounts, that's described in the design and is going to
+    require work on the categories computation to give correct values
+    (LP: #1284247)
+  * [about] display the free space value next to the storage label (LP:
+    #1335144)
+
+  [ Albert Astals ]
+  * Add i18n.tr
+
+  [ jonas-drange ]
+  * [wifi] connect to hidden network is now a dialog (LP: #1366005)
+
+  [ Ken VanDine ]
+  * Provide more keywords to make search useful (LP: #1370219) (LP:
+    #1370219)
+  * [background] set sourceSize in the image preview to work around an
+    issue loading large images (LP: #1373462)
+
+  [ CI bot ]
+  * Resync trunk
+
+  [ Mathieu Trudel-Lapierre ]
+  * [bluetooth] Properly handle device types for connection and
+    disconnection. (LP: #1369964)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 26 Sep 2014 15:32:57 +0000
+
+ubuntu-system-settings (0.3+14.10.20140925-0ubuntu1) utopic; urgency=low
+
+  [ Michael Terry ]
+  * Add a translator comment for what HERE means. (LP: #1368838) (LP:
+    #1368838)
+  * Prevent a crash in unity8 when the wizard also crashes or stops
+    early. (LP: #1355892) (LP: #1355892)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 25 Sep 2014 00:22:52 +0000
+
+ubuntu-system-settings (0.3+14.10.20140924.1-0ubuntu1) utopic; urgency=low
+
+  [ Michael Terry ]
+  * Prevent the buttons of the wizard's password page from overlapping
+    its content when the OSK appears. (LP: #1368346) (LP: #1368346)
+
+  [ Ken VanDine ]
+  * Set the version information in the SystemUpdate constructor (LP:
+    #1371810) (LP: #1371810)
+  * [reset] Don't bail out on an isValid() check on the SystemImage
+    QDBusInterface, the docs say isValid() may not be reliable for
+    remote interfaces (LP: #1370815) (LP: #1370815)
+  * Fixed reference error for count on the various device models (LP:
+    #1362517) (LP: #1362517)
+  * [background] Use the ContentPeerPicker to select sources for
+    backgrounds (LP: #1356542) (LP: #1356542)
+
+  [ Iain Lane ]
+  * Don't check if the timedated interface is valid before calling
+    SetTime on it, it might have timed out and we should reactivate it
+    in that case.
+  * [about] Fix developerMode property to be QMLish - read & write
+    instead of separate "read" and "toggle" properties.
+  * [about] Don't display a frame for icons that can't be found,
+    improving the visual appearance. Also return the correct path for
+    click packages which use the icon theme.
+
+  [ Sebastien Bacher ]
+  * [storage] handle the scope click .ini and get the correct icons (LP:
+    #1368920)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 24 Sep 2014 16:47:25 +0000
+
+ubuntu-system-settings (0.3+14.10.20140924-0ubuntu1) utopic; urgency=low
+
+  [ Albert Astals ]
+  * make pot
+
+  [ Oliver Grawert ]
+  * fix LP: #1365903, add a watch to Developer Mode page so the page
+    gets refreshed when going back through the page stack, also fix the
+    page id and bounds (LP: #1365903)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 24 Sep 2014 11:10:54 +0000
+
+ubuntu-system-settings (0.3+14.10.20140917.1-0ubuntu2) UNRELEASED; urgency=medium
+
+  * Some packaging fixes
+    - > is not a valid relationship. It should be >>
+    - Don't recommend suru-icon-theme since we also depend on it
+    - Bump S-V to 3.9.6 which for example allows the images we ship in
+      /usr/lib/
+    - Override binary-no-manpage lintian warnings. We're not going to get man
+      pages for u-s-s any time soon
+
+ -- Iain Lane <iain.lane@canonical.com>  Wed, 24 Sep 2014 12:12:26 +0100
+
+ubuntu-system-settings (0.3+14.10.20140917.1-0ubuntu1) utopic; urgency=low
+
+  [ Ken VanDine ]
+  * Make UpdateManager a singleton and refresh the availableUpdates
+    count when the model updates (LP: #1325629) (LP: #1325629)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 17 Sep 2014 14:04:04 +0000
+
+ubuntu-system-settings (0.3+14.10.20140917-0ubuntu1) utopic; urgency=low
+
+  [ Ken VanDine ]
+  * Include an icon instead of using the themed icon (LP: #1365408) (LP:
+    #1365408)
+
+  [ Mathieu Trudel-Lapierre ]
+  * [bluetooth] don't try to enable Discoverable if the device isn't
+    powered yet. (LP: #1355904)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 17 Sep 2014 02:19:38 +0000
+
+ubuntu-system-settings (0.3+14.10.20140915.1-0ubuntu1) utopic; urgency=low
+
+  [ Ken VanDine ]
+  * When activated by a url request for a specific panel, clear the
+    pageStack to maintain the natural navigation instead of pushing a
+    new page on top of a page from a the previous panel (LP: #1362025)
+    (LP: #1362025, #1359953)
+
+  [ Lars Uebernickel ]
+  * Use Icon instead of StatusIcon
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Mon, 15 Sep 2014 23:26:16 +0000
+
+ubuntu-system-settings (0.3+14.10.20140915-0ubuntu1) utopic; urgency=low
+
+  [ CI bot ]
+  * Resync trunk
+
+  [ John R. Lenton ]
+  * Take the system settings push helper closer to implementing the spec
+    at https://wiki.ubuntu.com/SoftwareUpdates#Prompting (LP: #1363972)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Mon, 15 Sep 2014 13:54:48 +0000
+
 ubuntu-system-settings (0.3+14.10.20140913-0ubuntu1) utopic; urgency=low
 
   [ Ken VanDine ]

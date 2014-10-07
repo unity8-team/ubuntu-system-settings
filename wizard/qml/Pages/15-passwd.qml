@@ -71,95 +71,103 @@ LocalComponents.Page {
         modemPath: manager.modems.length >= 2 ? manager.modems[1] : ""
     }
 
-    Column {
-        id: column
-        spacing: units.gu(2)
+    // Use a flickable for this so that we can properly clip the contents when
+    // the OSK appears.
+    Flickable {
         anchors.fill: content
+        clip: true
+        contentHeight: column.height
+        boundsBehavior: (contentHeight > height) ? Flickable.DragOverBounds : Flickable.StopAtBounds
 
-        ComboButton {
-            id: combo
+        Column {
+            id: column
+            spacing: units.gu(2)
 
-            text: listview.currentItem.text
-            onClicked: {
-                expanded = !expanded
-                forceActiveFocus() // hides OSK if up
+            ComboButton {
+                id: combo
+
+                text: listview.currentItem.text
+                onClicked: {
+                    expanded = !expanded
+                    forceActiveFocus() // hides OSK if up
+                }
+                UbuntuListView {
+                    id: listview
+                    width: parent.width
+                    height: combo.comboListHeight
+                    model: 3
+                    currentIndex: 1
+                    delegate: Standard {
+                        text: {
+                            var method = indexToMethod(modelData)
+                            if (method === UbuntuSecurityPrivacyPanel.Swipe)
+                                return i18n.tr("Swipe")
+                            else if (method === UbuntuSecurityPrivacyPanel.Passcode)
+                                return i18n.tr("PIN code")
+                            else
+                                return i18n.tr("Passphrase")
+                        }
+                        onClicked: {
+                            listview.currentIndex = index
+                            combo.expanded = false
+                        }
+                    }
+                }
             }
-            UbuntuListView {
-                id: listview
+
+            TextField {
+                id: passwordInput
+                echoMode: TextInput.Password
+                inputMethodHints: {
+                    var hints = Qt.ImhNoAutoUppercase | Qt.ImhSensitiveData
+                    if (passwdPage.method === UbuntuSecurityPrivacyPanel.Passcode)
+                        hints |= Qt.ImhDigitsOnly
+                    return hints
+                }
+                inputMask: {
+                    if (passwdPage.method === UbuntuSecurityPrivacyPanel.Passcode)
+                        return "9999"
+                    else
+                        return ""
+                }
+                visible: passwdPage.method !== UbuntuSecurityPrivacyPanel.Swipe
+            }
+
+            TextField {
+                id: confirmInput
+                echoMode: passwordInput.echoMode
+                inputMethodHints: passwordInput.inputMethodHints
+                inputMask: passwordInput.inputMask
+                visible: passwordInput.visible
+            }
+
+            Label {
+                id: problem
                 width: parent.width
-                height: combo.comboListHeight
-                model: 3
-                currentIndex: 1
-                delegate: Standard {
-                    text: {
-                        var method = indexToMethod(modelData)
-                        if (method === UbuntuSecurityPrivacyPanel.Swipe)
-                            return i18n.tr("Swipe")
-                        else if (method === UbuntuSecurityPrivacyPanel.Passcode)
-                            return i18n.tr("PIN code")
-                        else
-                            return i18n.tr("Passphrase")
+                wrapMode: Text.Wrap
+                visible: text !== ""
+                color: UbuntuColors.red
+                text: {
+                    if (passwordInput.visible) {
+                        if (passwordInput.text !== confirmInput.text) {
+                            if (passwdPage.method === UbuntuSecurityPrivacyPanel.Passcode)
+                                return i18n.tr("Those PIN codes don't match.")
+                            else
+                                return i18n.tr("Those passphrases don't match.")
+                        } else if (passwordInput.text.length < 4) {
+                            // Note that the number four comes from PAM settings,
+                            // which we don't have a good way to interrogate.  We
+                            // only do this matching instead of PAM because we want
+                            // to set the password via PAM in a different place
+                            // than this page.  See comments at top of file.
+                            if (passwdPage.method === UbuntuSecurityPrivacyPanel.Passcode)
+                                return i18n.tr("PIN code must be at least four digits long.")
+                            else
+                                return i18n.tr("Passphrase must be at least four characters long.")
+                        }
                     }
-                    onClicked: {
-                        listview.currentIndex = index
-                        combo.expanded = false
-                    }
-                }
-            }
-        }
-
-        TextField {
-            id: passwordInput
-            echoMode: TextInput.Password
-            inputMethodHints: {
-                var hints = Qt.ImhNoAutoUppercase | Qt.ImhSensitiveData
-                if (passwdPage.method === UbuntuSecurityPrivacyPanel.Passcode)
-                    hints |= Qt.ImhDigitsOnly
-                return hints
-            }
-            inputMask: {
-                if (passwdPage.method === UbuntuSecurityPrivacyPanel.Passcode)
-                    return "9999"
-                else
                     return ""
-            }
-            visible: passwdPage.method !== UbuntuSecurityPrivacyPanel.Swipe
-        }
-
-        TextField {
-            id: confirmInput
-            echoMode: passwordInput.echoMode
-            inputMethodHints: passwordInput.inputMethodHints
-            inputMask: passwordInput.inputMask
-            visible: passwordInput.visible
-        }
-
-        Label {
-            id: problem
-            width: parent.width
-            wrapMode: Text.Wrap
-            visible: text !== ""
-            color: UbuntuColors.red
-            text: {
-                if (passwordInput.visible) {
-                    if (passwordInput.text !== confirmInput.text) {
-                        if (passwdPage.method === UbuntuSecurityPrivacyPanel.Passcode)
-                            return i18n.tr("Those PIN codes don't match.")
-                        else
-                            return i18n.tr("Those passphrases don't match.")
-                    } else if (passwordInput.text.length < 4) {
-                        // Note that the number four comes from PAM settings,
-                        // which we don't have a good way to interrogate.  We
-                        // only do this matching instead of PAM because we want
-                        // to set the password via PAM in a different place
-                        // than this page.  See comments at top of file.
-                        if (passwdPage.method === UbuntuSecurityPrivacyPanel.Passcode)
-                            return i18n.tr("PIN code must be at least four digits long.")
-                        else
-                            return i18n.tr("Passphrase must be at least four characters long.")
-                    }
                 }
-                return ""
             }
         }
     }

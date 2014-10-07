@@ -46,7 +46,7 @@ ItemPage {
                 margins: units.gu(2)
             }
             onClicked: {
-                if (DbusHelper.deactivateConnection()) {
+                if (DbusHelper.disconnectDevice()) {
                     accessPoint.checked = false;
                     accessPoint.checkedChanged(false)
                 }

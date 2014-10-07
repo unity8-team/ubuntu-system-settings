@@ -39,14 +39,15 @@ class Update : public QObject
                NOTIFY localVersionChanged)
     Q_PROPERTY(QString remoteVersion READ getRemoteVersion
                NOTIFY remoteVersionChanged)
-    Q_PROPERTY(QString updateRequired READ updateRequired)
+    Q_PROPERTY(bool updateRequired READ updateRequired WRITE setUpdateRequired
+               NOTIFY updateRequiredChanged)
     Q_PROPERTY(QString iconUrl READ iconUrl NOTIFY iconUrlChanged)
     Q_PROPERTY(int binaryFilesize READ binaryFilesize
                NOTIFY binaryFilesizeChanged)
     Q_PROPERTY(bool updateState READ updateState WRITE setUpdateState
-               NOTIFY updatesStateChanged)
+               NOTIFY updateStateChanged)
     Q_PROPERTY(bool updateReady READ updateReady WRITE setUpdateReady
-               NOTIFY updatesReadyChanged)
+               NOTIFY updateReadyChanged)
     Q_PROPERTY(bool selected READ selected WRITE setSelected
                NOTIFY selectedChanged)
     Q_PROPERTY(QString error READ getError NOTIFY errorChanged)
@@ -65,8 +66,9 @@ Q_SIGNALS:
     void iconUrlChanged();
     void localVersionChanged();
     void remoteVersionChanged();
-    void updatesStateChanged();
-    void updatesReadyChanged();
+    void updateRequiredChanged();
+    void updateStateChanged();
+    void updateReadyChanged();
     void selectedChanged();
     void errorChanged();
     void downloadProgressChanged();
@@ -103,6 +105,7 @@ public:
     void initializeApplication(QString packagename, QString title,
                                QString version);
     void setRemoteVersion(QString &version);
+    void setUpdateRequired(bool state);
     void setUpdateState(bool state);
     void setUpdateReady(bool ready);
     void setSelected(bool value);
