@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 Canonical, Ltd.
+ * Copyright (C) 2013,2014 Canonical, Ltd.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -26,7 +26,7 @@ LocalComponents.Page {
     Column {
         id: column
         anchors.fill: content
-        spacing: units.gu(2)
+        spacing: units.gu(1)
 
         Label {
             anchors.left: parent.left

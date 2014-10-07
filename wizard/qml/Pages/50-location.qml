@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 Canonical, Ltd.
+ * Copyright (C) 2013,2014 Canonical, Ltd.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -25,6 +25,8 @@ LocalComponents.Page {
     title: i18n.tr("Location")
     forwardButtonSourceComponent: forwardButton
 
+    property bool hereInstalled: System.hereLicensePath !== "" && termsModel.count > 0
+
     FolderListModel {
         id: termsModel
         folder: System.hereLicensePath
@@ -47,10 +49,19 @@ LocalComponents.Page {
         anchors.fill: content
         spacing: units.gu(2)
 
+        Label {
+            anchors.left: parent.left
+            anchors.right: parent.right
+            visible: hereInstalled
+            wrapMode: Text.Wrap
+            // TRANSLATORS: HERE is a trademark for Nokia's location service, you probably shouldn't translate it
+            text: i18n.tr("Ubuntu includes location services provided by HERE, enabling apps to pinpoint your location.")
+        }
+
         LocalComponents.CheckableSetting {
             id: locationCheck
             showDivider: false
-            text: i18n.tr("Use your mobile network and Wi-Fi to determine where you are")
+            text: i18n.tr("Allow apps to use your mobile and Wi-Fi networks to determine your location.")
             checked: locationActionGroup.enabled.state
             onTriggered: locationActionGroup.enabled.activate()
         }
@@ -58,12 +69,20 @@ LocalComponents.Page {
         LocalComponents.CheckableSetting {
             id: termsCheck
             showDivider: false
-            visible: System.hereLicensePath !== "" && termsModel.count > 0
+            visible: hereInstalled
             // TRANSLATORS: HERE is a trademark for Nokia's location service, you probably shouldn't translate it
-            text: i18n.tr("I have read and agreed to the HERE <a href='terms.qml'>Terms and Conditions</a>")
+            text: i18n.tr("Accept the HERE <a href='terms.qml'>terms and conditions</a> to enable these services.")
             onLinkActivated: pageStack.load(Qt.resolvedUrl(link))
             checked: System.hereEnabled
             onTriggered: System.hereEnabled = checked
+        }
+
+        Label {
+            anchors.left: parent.left
+            anchors.right: parent.right
+            visible: hereInstalled
+            wrapMode: Text.Wrap
+            text: i18n.tr("This service can be disabled at any time from the <b>System Settings</b> menu.")
         }
     }
 

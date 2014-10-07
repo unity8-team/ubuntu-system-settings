@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 Canonical, Ltd.
+ * Copyright (C) 2013,2014 Canonical, Ltd.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@ import Ubuntu.Components 0.1
 import "../Components" as LocalComponents
 
 LocalComponents.Page {
-    title: i18n.tr("Bug reporting")
+    title: i18n.tr("Improving your experience")
     forwardButtonSourceComponent: forwardButton
 
     Column {
@@ -38,9 +38,7 @@ LocalComponents.Page {
             anchors.left: parent.left
             anchors.right: parent.right
             wrapMode: Text.Wrap
-            textFormat: Text.StyledText
-            text: i18n.tr("This can be disabled here:") + "<br>" +
-                  "<b>" + i18n.tr("System Settings &gt; Security &amp; Privacy") + "</b>"
+            text: i18n.tr("This can be disabled in <b>System Settings</b> under <b>Security &amp; Privacy</b>")
         }
     }
 
