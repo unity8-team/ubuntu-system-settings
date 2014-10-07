@@ -143,8 +143,8 @@ LocalComponents.Page {
             anchors.right: parent.right
             anchors.rightMargin: rightMargin
             fontSize: "small"
-            text: menuModel.count > 0 ? i18n.tr("Available networks…")
-                                      : i18n.tr("No available networks.")
+            text: mainMenu.count > 0 ? i18n.tr("Available networks…")
+                                     : i18n.tr("No available networks.")
         }
 
         Flickable {
