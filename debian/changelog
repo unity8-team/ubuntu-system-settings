@@ -1,3 +1,11 @@
+ubuntu-system-settings (0.3+14.10.20141007-0ubuntu1) utopic; urgency=low
+
+  [ jonas-drange ]
+  * [wifi/phone] dynamically chooses what SIM to use when there's only
+    one present. (LP: #1375832)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 07 Oct 2014 18:21:03 +0000
+
 ubuntu-system-settings (0.3+14.10.20141003-0ubuntu1) utopic; urgency=low
 
   [ Iain Lane ]
