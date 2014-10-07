@@ -57,8 +57,9 @@ ItemPage {
         Component.onCompleted: start()
     }
 
-    NetworkingStatus {
+    Connections {
         id: networkingStatus
+        target: NetworkingStatus
         onOnlineChanged: {
             if (online) {
                 activity.running = true;
@@ -69,6 +70,7 @@ ItemPage {
             }
         }
     }
+
 
     DeviceInfo {
         id: deviceInfo
