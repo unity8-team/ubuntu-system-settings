@@ -28,6 +28,7 @@ import Ubuntu.Components.ListItems 0.1 as ListItem
 import Ubuntu.Components.Popups 0.1
 import Ubuntu.OnlineAccounts.Client 0.1
 import Ubuntu.SystemSettings.Update 1.0
+import Ubuntu.Connectivity 1.0
 
 
 ItemPage {
@@ -46,8 +47,6 @@ ItemPage {
     property var chargeLevel: indicatorPower.batteryLevel || 0
     property var notificationAction;
     property string errorDialogText: ""
-
-    property bool hasConnection: (actionGroup.actionObject.valid ? actionGroup.actionObject.state : true)
 
     onHasConnectionChanged: {
         if (hasConnection) {
@@ -68,14 +67,16 @@ ItemPage {
         Component.onCompleted: start()
     }
 
-    QDBusActionGroup {
-        id: actionGroup
-        busType: 1
-        busName: "com.canonical.indicator.network"
-        objectPath: "/com/canonical/indicator/network"
-        property variant actionObject: action("wifi.enable")
-        Component.onCompleted: {
-            start()
+    NetworkingStatus {
+        id: networkingStatus
+        onOnlineChanged: {
+            if (online) {
+                activity.running = true;
+                root.state = "SEARCHING";
+                updateManager.checkUpdates();
+            } else {
+                activity.running = false;
+            }
         }
     }
 
