@@ -6,18 +6,17 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
-"Report-Msgid-Bugs-To: \n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-09-26 12:27-0400\n"
-"PO-Revision-Date: 2014-09-28 17:42+0000\n"
-"Last-Translator: Drago S. <Unknown>\n"
+"PO-Revision-Date: 2014-10-04 11:30+0000\n"
+"Last-Translator: Marian Vasile <marianvasile1972@gmail.com>\n"
 "Language-Team: Romanian <ro@li.org>\n"
-"Language: ro\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n == 1 ? 0: (((n % 100 > 19) || ((n % 100 "
 "== 0) && (n != 0))) ? 2: 1));\n"
-"X-Launchpad-Export-Date: 2014-09-29 05:18+0000\n"
+"X-Launchpad-Export-Date: 2014-10-05 06:37+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 
 #: ubuntu-system-settings.desktop.in.in.h:1 ../src/qml/MainWindow.qml:112
@@ -67,7 +66,8 @@ msgid "Data charges may apply."
 msgstr "Pot apărea costuri generate de traficul de date."
 
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#: ../plugins/system-update//PageComponent.qml:37 ../po/settings.js:4
+#: ../plugins/system-update//PageComponent.qml:37
+#: ../po/settings.js:4
 msgid "Updates"
 msgstr "Actualizări"
 
@@ -196,7 +196,8 @@ msgstr " GiB"
 
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
 #: ../plugins/phone//PageComponent.qml:32
-#: ../plugins/bluetooth//PageComponent.qml:93 ../po/settings.js:46
+#: ../plugins/bluetooth//PageComponent.qml:93
+#: ../po/settings.js:46
 msgid "Phone"
 msgstr "Telefon"
 
@@ -300,7 +301,8 @@ msgid "Remove image"
 msgstr "Eliminare imagine"
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: ../plugins/background//MainPage.qml:35 ../po/settings.js:64
+#: ../plugins/background//MainPage.qml:35
+#: ../po/settings.js:64
 msgid "Background"
 msgstr "Fundal"
 
@@ -313,7 +315,8 @@ msgid "Custom"
 msgstr "Personalizat"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: ../plugins/language//PageComponent.qml:34 ../po/settings.js:80
+#: ../plugins/language//PageComponent.qml:34
+#: ../po/settings.js:80
 msgid "Language & Text"
 msgstr "Limbă și text"
 
@@ -407,7 +410,8 @@ msgstr "Reporniți acum"
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
 #: ../plugins/bluetooth//PageComponent.qml:32
 #: ../plugins/bluetooth//PageComponent.qml:147
-#: ../plugins/battery//PageComponent.qml:363 ../po/settings.js:114
+#: ../plugins/battery//PageComponent.qml:363
+#: ../po/settings.js:114
 msgid "Bluetooth"
 msgstr "Bluetooth"
 
@@ -603,7 +607,8 @@ msgid "The phone is in Silent Mode."
 msgstr "Telefonul este în modul silențios."
 
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
-#: ../plugins/sound//PageComponent.qml:37 ../po/settings.js:144
+#: ../plugins/sound//PageComponent.qml:37
+#: ../po/settings.js:144
 msgid "Sound"
 msgstr "Sunete"
 
@@ -682,7 +687,8 @@ msgstr "Uită rețeaua"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #: ../plugins/wifi//PageComponent.qml:28
-#: ../plugins/battery//PageComponent.qml:333 ../po/settings.js:162
+#: ../plugins/battery//PageComponent.qml:333
+#: ../po/settings.js:162
 msgid "Wi-Fi"
 msgstr "Rețea fără fir"
 
@@ -843,14 +849,15 @@ msgstr "Rețeaua Wi-Fi nu poate fi găsită"
 
 #: ../plugins/wifi//Common.qml:94
 msgid "A secondary connection of the base connection failed"
-msgstr ""
+msgstr "O conexiune secundară a conexiunii de bază a eșuat."
 
 #: ../plugins/wifi//NetworkDetailsBrief.qml:58
 msgid "IP address"
 msgstr "Adresă IP"
 
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
-#: ../plugins/notifications//PageComponent.qml:29 ../po/settings.js:182
+#: ../plugins/notifications//PageComponent.qml:29
+#: ../po/settings.js:182
 msgid "Notifications"
 msgstr "Notificări"
 
@@ -921,7 +928,8 @@ msgid "N/A"
 msgstr "Indisponibil"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: ../plugins/about//PageComponent.qml:34 ../po/settings.js:206
+#: ../plugins/about//PageComponent.qml:34
+#: ../po/settings.js:206
 msgid "About this phone"
 msgstr "Despre telefon"
 
@@ -1035,7 +1043,8 @@ msgid "Lock security"
 msgstr "Blocare de securitate"
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: ../plugins/security-privacy//PageComponent.qml:37 ../po/settings.js:242
+#: ../plugins/security-privacy//PageComponent.qml:37
+#: ../po/settings.js:242
 msgid "Security & Privacy"
 msgstr "Securitate și confidențialitate"
 
@@ -1493,7 +1502,8 @@ msgid "Passphrase…"
 msgstr "Frază parolă..."
 
 #. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
-#: ../plugins/time-date//PageComponent.qml:29 ../po/settings.js:266
+#: ../plugins/time-date//PageComponent.qml:29
+#: ../po/settings.js:266
 msgid "Time & Date"
 msgstr "Oră și dată"
 
@@ -1573,7 +1583,8 @@ msgid "Reset Launcher"
 msgstr "Resetare Lansator"
 
 #. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
-#: ../plugins/reset//PageComponent.qml:32 ../po/settings.js:276
+#: ../plugins/reset//PageComponent.qml:32
+#: ../po/settings.js:276
 msgid "Reset phone"
 msgstr "Resetare telefon"
 
@@ -1626,7 +1637,8 @@ msgid "Show key"
 msgstr "Arată cheia"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: ../plugins/cellular//PageComponent.qml:32 ../po/settings.js:288
+#: ../plugins/cellular//PageComponent.qml:32
+#: ../po/settings.js:288
 msgid "Cellular"
 msgstr "Celulară"
 
@@ -1678,7 +1690,8 @@ msgid "Carriers"
 msgstr "Rețele"
 
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
-#: ../plugins/battery//PageComponent.qml:34 ../po/settings.js:316
+#: ../plugins/battery//PageComponent.qml:34
+#: ../po/settings.js:316
 msgid "Battery"
 msgstr "Baterie"
 
@@ -1790,7 +1803,8 @@ msgstr ""
 "video."
 
 #. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
-#: ../plugins/brightness//PageComponent.qml:32 ../po/settings.js:332
+#: ../plugins/brightness//PageComponent.qml:32
+#: ../po/settings.js:332
 msgid "Brightness"
 msgstr "Luminozitate"
 
@@ -1993,8 +2007,8 @@ msgstr ""
 #. TRANSLATORS: HERE is a trademark for Nokia's location service, you probably shouldn't translate it
 #: ../wizard/qml/Pages//30-location.qml:70
 msgid ""
-"I have read and agreed to the HERE <a href='terms.qml'>terms and conditions</"
-"a>"
+"I have read and agreed to the HERE <a href='terms.qml'>terms and "
+"conditions</a>"
 msgstr ""
 "Am citit și sunt de acord cu <a href='terms.qml'>termenii și condițiile</a> "
 "DE AICI."
@@ -2023,7 +2037,8 @@ msgstr "Introduceți o cartelă SIM înainte de a continua"
 
 #: ../wizard/qml/Pages//no-sim.qml:35
 msgid "Without it, you won’t be able to make calls or use text messaging."
-msgstr "Fără aceasta, nu veți putea efectua apeluri sau utiliza mesajele text."
+msgstr ""
+"Fără aceasta, nu veți putea efectua apeluri sau utiliza mesajele text."
 
 #: ../wizard/qml/Pages//no-sim.qml:50 ../wizard/qml/Pages//20-wifi.qml:195
 msgid "Skip"
@@ -2076,7 +2091,9 @@ msgstr "sistem"
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: ../po/settings.js:8 ../po/settings.js:184 ../po/settings.js:230
+#: ../po/settings.js:8
+#: ../po/settings.js:184
+#: ../po/settings.js:230
 msgid "software"
 msgstr "software"
 
@@ -2088,7 +2105,9 @@ msgstr "actualizare"
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
-#: ../po/settings.js:12 ../po/settings.js:44 ../po/settings.js:188
+#: ../po/settings.js:12
+#: ../po/settings.js:44
+#: ../po/settings.js:188
 msgid "apps"
 msgstr "aplicații"
 
@@ -2096,7 +2115,9 @@ msgstr "aplicații"
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
-#: ../po/settings.js:14 ../po/settings.js:88 ../po/settings.js:274
+#: ../po/settings.js:14
+#: ../po/settings.js:88
+#: ../po/settings.js:274
 #: ../po/settings.js:340
 msgid "automatic"
 msgstr "automat"
@@ -2144,7 +2165,9 @@ msgstr "avion"
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: ../po/settings.js:32 ../po/settings.js:164 ../po/settings.js:292
+#: ../po/settings.js:32
+#: ../po/settings.js:164
+#: ../po/settings.js:292
 msgid "network"
 msgstr "rețea"
 
@@ -2166,19 +2189,23 @@ msgstr "orientare"
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
-#: ../po/settings.js:40 ../po/settings.js:248 ../po/settings.js:326
+#: ../po/settings.js:40
+#: ../po/settings.js:248
+#: ../po/settings.js:326
 msgid "lock"
 msgstr "blocare"
 
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
-#: ../po/settings.js:42 ../po/settings.js:338
+#: ../po/settings.js:42
+#: ../po/settings.js:338
 msgid "screen"
 msgstr "ecran"
 
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: ../po/settings.js:48 ../po/settings.js:214
+#: ../po/settings.js:48
+#: ../po/settings.js:214
 msgid "phone"
 msgstr "telefon"
 
@@ -2204,7 +2231,8 @@ msgstr "apel"
 
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
-#: ../po/settings.js:58 ../po/settings.js:154
+#: ../po/settings.js:58
+#: ../po/settings.js:154
 msgid "dialpad"
 msgstr "tastatură"
 
@@ -2260,7 +2288,8 @@ msgstr "limbă"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
-#: ../po/settings.js:84 ../po/settings.js:158
+#: ../po/settings.js:84
+#: ../po/settings.js:158
 msgid "keyboard"
 msgstr "tastatură"
 
@@ -2296,7 +2325,8 @@ msgstr "poziționare"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
-#: ../po/settings.js:100 ../po/settings.js:336
+#: ../po/settings.js:100
+#: ../po/settings.js:336
 msgid "display"
 msgstr "afișaj"
 
@@ -2347,7 +2377,8 @@ msgstr "pereche"
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: ../po/settings.js:122 ../po/settings.js:210
+#: ../po/settings.js:122
+#: ../po/settings.js:210
 msgid "device"
 msgstr "dispozitiv"
 
@@ -2368,19 +2399,22 @@ msgstr "mâini libere"
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: ../po/settings.js:130 ../po/settings.js:166
+#: ../po/settings.js:130
+#: ../po/settings.js:166
 msgid "wireless"
 msgstr "fără fir"
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: ../po/settings.js:132 ../po/settings.js:172
+#: ../po/settings.js:132
+#: ../po/settings.js:172
 msgid "connect"
 msgstr "conectare"
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: ../po/settings.js:134 ../po/settings.js:174
+#: ../po/settings.js:134
+#: ../po/settings.js:174
 msgid "disconnect"
 msgstr "deconectare"
 
@@ -2456,7 +2490,8 @@ msgstr "ip"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: ../po/settings.js:180 ../po/settings.js:222
+#: ../po/settings.js:180
+#: ../po/settings.js:222
 msgid "address"
 msgstr "adresă"
 
@@ -2582,7 +2617,8 @@ msgstr "confidențialitate"
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: ../po/settings.js:250 ../po/settings.js:314
+#: ../po/settings.js:250
+#: ../po/settings.js:314
 msgid "sim"
 msgstr "sim"
 
@@ -2609,7 +2645,7 @@ msgstr "frază secretă"
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
 #: ../po/settings.js:260
 msgid "swipe"
-msgstr ""
+msgstr "glisare"
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
 #: ../po/settings.js:262
@@ -2714,7 +2750,7 @@ msgstr "apn"
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
 #: ../po/settings.js:312
 msgid "roam"
-msgstr ""
+msgstr "celular"
 
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
 #: ../po/settings.js:318
@@ -2754,7 +2790,7 @@ msgstr "luminozitate"
 #. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
 #: ../po/settings.js:342
 msgid "adjust"
-msgstr ""
+msgstr "ajustare"
 
 #: ../plugins/system-update//system_update.cpp:94
 msgid "Can't cancel current request (can't contact service)"
@@ -2819,6 +2855,3 @@ msgstr "Atingeți pentru a deschide programul de actualizare a sistemului."
 
 #~ msgid "lang"
 #~ msgstr "limbă"
-
-#~ msgid "Connect to hidden network"
-#~ msgstr "Conectare la o rețea ascunsă"

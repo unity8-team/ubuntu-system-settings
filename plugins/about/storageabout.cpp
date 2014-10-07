@@ -43,18 +43,20 @@ namespace {
 }
 
 struct MeasureData {
-    uint *running;
+    QSharedPointer<quint32> running;
     StorageAbout *object;
     quint64 *size;
     GCancellable *cancellable;
-    MeasureData (uint *running,
+    MeasureData (QSharedPointer<quint32> running,
                  StorageAbout *object,
                  quint64 *size,
                  GCancellable *cancellable):
         running(running),
         object(object),
         size(size),
-        cancellable(cancellable){}
+        cancellable(cancellable){
+            ++(*running);
+        }
 };
 
 static void measure_file(const char * filename,
@@ -84,19 +86,6 @@ static void measure_special_file(GUserDirectory directory,
     measure_file (g_get_user_special_dir (directory), callback, user_data);
 }
 
-static void maybeEmit(MeasureData *data)
-{
-    --(*data->running);
-
-    if (*data->running == 0) {
-        Q_EMIT (data->object->sizeReady());
-        delete data->running;
-    }
-
-    delete data;
-
-}
-
 static void measure_finished(GObject *source_object,
                              GAsyncResult *result,
                              gpointer user_data)
@@ -118,20 +107,24 @@ static void measure_finished(GObject *source_object,
 
     if (err != nullptr) {
         if (g_error_matches (err, G_IO_ERROR, G_IO_ERROR_CANCELLED)) {
-            delete data->running;
             delete data;
-            g_object_unref (file);
+            g_clear_object (&file);
             g_error_free (err);
+            err = nullptr;
             return;
         } else {
             qWarning() << "Measuring of" << g_file_get_path (file)
                        << "failed:" << err->message;
-            g_error_free(err);
+            g_error_free (err);
+            err = nullptr;
         }
     }
 
-    g_object_unref (file);
-    maybeEmit(data);
+    if (--(*data->running) == 0)
+        Q_EMIT (data->object->sizeReady());
+
+    delete data;
+    g_clear_object (&file);
 }
 
 StorageAbout::StorageAbout(QObject *parent) :
@@ -310,7 +303,8 @@ QString StorageAbout::formatSize(quint64 size) const
 
 void StorageAbout::populateSizes()
 {
-    uint *running = new uint(0);
+    quint32 *running = new quint32(0);
+    QSharedPointer<quint32> running_ptr(running);
 
     if (!m_cancellable)
         m_cancellable = g_cancellable_new();
@@ -318,25 +312,25 @@ void StorageAbout::populateSizes()
     measure_special_file(
                 G_USER_DIRECTORY_VIDEOS,
                 measure_finished,
-                new MeasureData(&++(*running), this, &m_moviesSize,
+                new MeasureData(running_ptr, this, &m_moviesSize,
                                 m_cancellable));
 
     measure_special_file(
                 G_USER_DIRECTORY_MUSIC,
                 measure_finished,
-                new MeasureData(&++(*running), this, &m_audioSize,
+                new MeasureData(running_ptr, this, &m_audioSize,
                                 m_cancellable));
 
     measure_special_file(
                 G_USER_DIRECTORY_PICTURES,
                 measure_finished,
-                new MeasureData(&++(*running), this, &m_picturesSize,
+                new MeasureData(running_ptr, this, &m_picturesSize,
                                 m_cancellable));
 
     measure_file(
                 g_get_home_dir(),
                 measure_finished,
-                new MeasureData(&++(*running), this, &m_homeSize,
+                new MeasureData(running_ptr, this, &m_homeSize,
                                 m_cancellable));
 }
 
