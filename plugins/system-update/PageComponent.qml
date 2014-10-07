@@ -63,7 +63,7 @@ ItemPage {
             if (online) {
                 activity.running = true;
                 root.state = "SEARCHING";
-                updateManager.checkUpdates();
+                UpdateManager.checkUpdates();
             } else {
                 activity.running = false;
             }
