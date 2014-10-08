@@ -17,8 +17,11 @@ class MyHandler(BaseHTTPRequestHandler):
         response = [{
             "name": "com.ubuntu.calculator",
             "version": "9.0",
-            "icon_url": "https://raw.githubusercontent.com/ninja-ide/ninja-ide/master/ninja_ide/img/ninja_icon.png",
-            "download_url": "https://public.apps.ubuntu.com/download/com.ubuntu/calculator/com.ubuntu.calculator_1.3.329_all.click",
+            "icon_url": ("https://raw.githubusercontent.com/ninja-ide/"
+                         "ninja-ide/master/ninja_ide/img/ninja_icon.png"),
+            "download_url": ("https://public.apps.ubuntu.com/download/com."
+                             "ubuntu/calculator/com.ubuntu.calculator_1"
+                             ".3.329_all.click"),
             "binary_filesize": 3423,
             "download_sha512": "343244fsdfdsffs"
         }]
