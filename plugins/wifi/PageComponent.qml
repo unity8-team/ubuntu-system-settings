@@ -128,6 +128,7 @@ ItemPage {
             ListItem.Divider {}
 
             ListItem.SingleValue {
+                objectName: "previousNetwork"
                 text: i18n.tr("Previous networks")
                 progression: true
                 onClicked: pageStack.push(Qt.resolvedUrl("PreviousNetworks.qml"))

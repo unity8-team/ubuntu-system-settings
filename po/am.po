@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-09-26 12:27-0400\n"
-"PO-Revision-Date: 2014-10-02 00:58+0000\n"
+"PO-Revision-Date: 2014-10-05 19:47+0000\n"
 "Last-Translator: samson <Unknown>\n"
 "Language-Team: Amharic <am@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2014-10-02 06:36+0000\n"
+"X-Launchpad-Export-Date: 2014-10-06 06:59+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 
 #: ubuntu-system-settings.desktop.in.in.h:1 ../src/qml/MainWindow.qml:112
@@ -221,6 +221,8 @@ msgid ""
 "Redirects phone calls to another number whenever you don't answer, or your "
 "phone is busy, turned off, or out of range."
 msgstr ""
+"ጥሪዎችን ወደ ሌላ ቁጥር ማስተላለፊያ ጥሪውን በማይመልሱ ጊዜ: ወይንም ስልኩ በስራ ላይ በሚሆን ጊዜ: በሚጠፋ ጊዜ: "
+"ወይንም ከ ክልል ውጪ ሲሆኑ"
 
 #: ../plugins/phone//CallForwarding.qml:101
 msgid "Forward to"
@@ -2772,6 +2774,3 @@ msgstr "የ ስርአት ማሻሻያውን ለመክፈት መታ ያድርጉ"
 
 #~ msgid "lang"
 #~ msgstr "ቋንቋ"
-
-#~ msgid "Connect to hidden network"
-#~ msgstr "ወደ ተደበቅ ኔትዎርክ መገናኛ"

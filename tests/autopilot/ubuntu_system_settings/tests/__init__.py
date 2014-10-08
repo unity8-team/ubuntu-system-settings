@@ -110,7 +110,6 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
                                         dbusmock.DBusTestCase):
     """Class for cellular tests which sets up an Ofono mock """
 
-    technology_preference = 'gsm'
     use_sims = 1
 
     @property
@@ -183,11 +182,12 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
             ]
         )
 
-    def mock_radio_settings(self, modem):
+    def mock_radio_settings(self, modem, preference='gsm',
+                            technologies=['gsm', 'umts', 'lte']):
         modem.AddProperty(
-            RDO_IFACE, 'TechnologyPreference', self.technology_preference)
+            RDO_IFACE, 'TechnologyPreference', preference)
         modem.AddProperty(
-            RDO_IFACE, 'ModemTechnologies', ['gsm', 'umts', 'lte'])
+            RDO_IFACE, 'ModemTechnologies', technologies)
         modem.AddMethods(
             RDO_IFACE,
             [('GetProperties', '', 'a{sv}',
@@ -260,7 +260,7 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
                 self.get_all_operators(second_modem)),
         ])
         self.mock_carriers(second_modem)
-        self.mock_radio_settings(self.modem_1)
+        self.mock_radio_settings(self.modem_1, technologies=['gsm'])
         self.mock_connection_manager(self.modem_1)
         self.mock_call_forwarding(self.modem_1)
         self.mock_call_settings(self.modem_1)
@@ -774,3 +774,10 @@ class WifiBaseTestCase(UbuntuSystemSettingsTestCase,
         super(WifiBaseTestCase, self).setUp()
         self.wifi_page = self.system_settings.\
             main_view.go_to_wifi_page()
+
+    def add_previous_networks(self, networks):
+        dev_path = str(self.obj_nm.GetDevices()[0])
+        for network in networks:
+            self.obj_nm.AddWiFiConnection(
+                dev_path, network['connection_name'],
+                network['ssid'], network.get('keymng', ''))
