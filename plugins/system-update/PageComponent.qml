@@ -61,7 +61,7 @@ ItemPage {
         id: networkingStatus
         target: NetworkingStatus
         onOnlineChanged: {
-            if (online) {
+            if (NetworkingStatus.online) {
                 activity.running = true;
                 root.state = "SEARCHING";
                 UpdateManager.checkUpdates();
