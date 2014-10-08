@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-09-26 12:27-0400\n"
-"PO-Revision-Date: 2014-10-01 10:21+0000\n"
+"PO-Revision-Date: 2014-10-07 10:57+0000\n"
 "Last-Translator: David Planella <david.planella@ubuntu.com>\n"
 "Language-Team: Catalan <ca@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-10-02 06:36+0000\n"
+"X-Launchpad-Export-Date: 2014-10-08 07:38+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 "Language: ca\n"
 
@@ -695,11 +695,11 @@ msgstr "Xarxes anteriors"
 
 #: ../plugins/wifi//PageComponent.qml:138
 msgid "Connect to hidden network…"
-msgstr ""
+msgstr "Connecta't a una xarxa oculta..."
 
 #: ../plugins/wifi//OtherNetwork.qml:96
 msgid "Connect to Hidden Network"
-msgstr ""
+msgstr "Connecta't a una xarxa oculta"
 
 #: ../plugins/wifi//OtherNetwork.qml:187
 msgid "Network name"
@@ -720,7 +720,7 @@ msgstr "WEP"
 
 #: ../plugins/wifi//RemoveBackground.qml:28
 msgid "Clear"
-msgstr ""
+msgstr "Neteja-ho"
 
 #: ../plugins/wifi//Common.qml:36
 msgid "Unknown error"
@@ -732,11 +732,11 @@ msgstr "No s'ha indicat cap motiu"
 
 #: ../plugins/wifi//Common.qml:40
 msgid "Device is now managed"
-msgstr ""
+msgstr "El dispositiu ara és gestionat"
 
 #: ../plugins/wifi//Common.qml:42
 msgid "Device is now unmanaged"
-msgstr ""
+msgstr "El dispositiu ara no és gestionat"
 
 #: ../plugins/wifi//Common.qml:44
 msgid "The device could not be readied for configuration"
@@ -821,7 +821,7 @@ msgstr ""
 
 #: ../plugins/wifi//Common.qml:84
 msgid "The modem could not be found"
-msgstr ""
+msgstr "No s'ha trobat el mòdem"
 
 #: ../plugins/wifi//Common.qml:86
 msgid "The Bluetooth connection failed or timed out"
@@ -940,7 +940,7 @@ msgstr "Adreça Bluetooth"
 #: ../plugins/about//PageComponent.qml:144
 #, qt-format
 msgid "%1 free"
-msgstr ""
+msgstr "%1 lliure"
 
 #: ../plugins/about//PageComponent.qml:151
 msgid "Software:"
@@ -2841,6 +2841,3 @@ msgstr "Feu un toc per obrir l'actualitzador del sistema."
 
 #~ msgid "Other network"
 #~ msgstr "Altres xarxes"
-
-#~ msgid "Connect to hidden network"
-#~ msgstr "Connecta't a una xarxa oculta"

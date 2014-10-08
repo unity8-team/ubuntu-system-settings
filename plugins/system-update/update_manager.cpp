@@ -88,7 +88,7 @@ UpdateManager::UpdateManager(QObject *parent):
     QObject::connect(&m_systemUpdate, SIGNAL(updateProgress(int, double)),
                   SLOT(systemUpdateProgress(int, double)));
     QObject::connect(&m_systemUpdate, SIGNAL(rebooting(bool)),
-                  SIGNAL(rebooting(bool))); 
+                  SIGNAL(rebooting(bool)));
 }
 
 UpdateManager::~UpdateManager()
