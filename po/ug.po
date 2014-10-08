@@ -6,17 +6,16 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
-"Report-Msgid-Bugs-To: \n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-09-26 12:27-0400\n"
-"PO-Revision-Date: 2014-09-29 02:12+0000\n"
+"PO-Revision-Date: 2014-10-07 09:02+0000\n"
 "Last-Translator: Gheyret T.Kenji <Unknown>\n"
 "Language-Team: Uyghur Computer Science Association <UKIJ@yahoogroups.com>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2014-09-29 05:18+0000\n"
+"X-Launchpad-Export-Date: 2014-10-08 07:38+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 
 #: ubuntu-system-settings.desktop.in.in.h:1 ../src/qml/MainWindow.qml:112
@@ -66,7 +65,8 @@ msgid "Data charges may apply."
 msgstr "سانلىق -مەلۇماتقا پۇل كېتىشى مۇمكىن."
 
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#: ../plugins/system-update//PageComponent.qml:37 ../po/settings.js:4
+#: ../plugins/system-update//PageComponent.qml:37
+#: ../po/settings.js:4
 msgid "Updates"
 msgstr "يېڭىلانمىلار"
 
@@ -76,7 +76,8 @@ msgstr "سىستېما يېڭىلا"
 
 #: ../plugins/system-update//PageComponent.qml:95
 msgid "The phone needs to restart to install the system update."
-msgstr "سىستېما يېڭىلانمىلىرىنى ئورنىتىش ئۈچۈن تېلېفوننى قايتا قوزغىتىش كېرەك."
+msgstr ""
+"سىستېما يېڭىلانمىلىرىنى ئورنىتىش ئۈچۈن تېلېفوننى قايتا قوزغىتىش كېرەك."
 
 #: ../plugins/system-update//PageComponent.qml:95
 msgid "Connect the phone to power before installing the system update."
@@ -188,7 +189,8 @@ msgstr " گىگابايت"
 
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
 #: ../plugins/phone//PageComponent.qml:32
-#: ../plugins/bluetooth//PageComponent.qml:93 ../po/settings.js:46
+#: ../plugins/bluetooth//PageComponent.qml:93
+#: ../po/settings.js:46
 msgid "Phone"
 msgstr "تېلېفون"
 
@@ -292,7 +294,8 @@ msgid "Remove image"
 msgstr "سۈرەت چىقىرىۋەت"
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: ../plugins/background//MainPage.qml:35 ../po/settings.js:64
+#: ../plugins/background//MainPage.qml:35
+#: ../po/settings.js:64
 msgid "Background"
 msgstr "تەگلىك"
 
@@ -305,7 +308,8 @@ msgid "Custom"
 msgstr "ئىختىيارى"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: ../plugins/language//PageComponent.qml:34 ../po/settings.js:80
+#: ../plugins/language//PageComponent.qml:34
+#: ../po/settings.js:80
 msgid "Language & Text"
 msgstr "تىل ۋە تېكىست"
 
@@ -390,7 +394,8 @@ msgstr "جەزملە"
 #: ../plugins/language//RebootNecessary.qml:34
 #: ../plugins/reset//ResetLauncherHome.qml:59
 msgid "The phone needs to restart for changes to take effect."
-msgstr "ئۆزگىرىشلەرنىڭ ئىناۋەتلىك بولۇشى ئۈچۈن تېلېفوننى قايتا قوزغىتىش كېرەك."
+msgstr ""
+"ئۆزگىرىشلەرنىڭ ئىناۋەتلىك بولۇشى ئۈچۈن تېلېفوننى قايتا قوزغىتىش كېرەك."
 
 #: ../plugins/language//RebootNecessary.qml:38
 msgid "Restart Now"
@@ -399,7 +404,8 @@ msgstr "ھازىرلا قايتا باشلا"
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
 #: ../plugins/bluetooth//PageComponent.qml:32
 #: ../plugins/bluetooth//PageComponent.qml:147
-#: ../plugins/battery//PageComponent.qml:363 ../po/settings.js:114
+#: ../plugins/battery//PageComponent.qml:363
+#: ../po/settings.js:114
 msgid "Bluetooth"
 msgstr "كۆكچىش"
 
@@ -595,7 +601,8 @@ msgid "The phone is in Silent Mode."
 msgstr "تېلېفون ئۈنسىز ھالەتتە."
 
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
-#: ../plugins/sound//PageComponent.qml:37 ../po/settings.js:144
+#: ../plugins/sound//PageComponent.qml:37
+#: ../po/settings.js:144
 msgid "Sound"
 msgstr "ئاۋاز"
 
@@ -674,7 +681,8 @@ msgstr "تورنى ئۇنتۇپ كەت"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #: ../plugins/wifi//PageComponent.qml:28
-#: ../plugins/battery//PageComponent.qml:333 ../po/settings.js:162
+#: ../plugins/battery//PageComponent.qml:333
+#: ../po/settings.js:162
 msgid "Wi-Fi"
 msgstr "سمسىز تور (wi-fi)"
 
@@ -840,7 +848,8 @@ msgid "IP address"
 msgstr "‍IP ئادرېس"
 
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
-#: ../plugins/notifications//PageComponent.qml:29 ../po/settings.js:182
+#: ../plugins/notifications//PageComponent.qml:29
+#: ../po/settings.js:182
 msgid "Notifications"
 msgstr "ئۇقتۇرۇشلار"
 
@@ -911,7 +920,8 @@ msgid "N/A"
 msgstr "N/A"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: ../plugins/about//PageComponent.qml:34 ../po/settings.js:206
+#: ../plugins/about//PageComponent.qml:34
+#: ../po/settings.js:206
 msgid "About this phone"
 msgstr "بۇ تېلېفون ھەققىدە"
 
@@ -1024,7 +1034,8 @@ msgid "Lock security"
 msgstr "قۇلۇپلاش بىخەتەرلىكى"
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: ../plugins/security-privacy//PageComponent.qml:37 ../po/settings.js:242
+#: ../plugins/security-privacy//PageComponent.qml:37
+#: ../po/settings.js:242
 msgid "Security & Privacy"
 msgstr "بىخەتەرلىك ۋە شەخسىيەت"
 
@@ -1471,7 +1482,8 @@ msgid "Passphrase…"
 msgstr "ئىم جۈملىسى..."
 
 #. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
-#: ../plugins/time-date//PageComponent.qml:29 ../po/settings.js:266
+#: ../plugins/time-date//PageComponent.qml:29
+#: ../po/settings.js:266
 msgid "Time & Date"
 msgstr "ۋاقىت ۋە چېسلا"
 
@@ -1551,7 +1563,8 @@ msgid "Reset Launcher"
 msgstr "ئىجراچىنى ئەسلىگە قايتۇرۇش"
 
 #. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
-#: ../plugins/reset//PageComponent.qml:32 ../po/settings.js:276
+#: ../plugins/reset//PageComponent.qml:32
+#: ../po/settings.js:276
 msgid "Reset phone"
 msgstr "تېلېفوننى ئەسلىگە قايتۇر"
 
@@ -1604,7 +1617,8 @@ msgid "Show key"
 msgstr "ئاچقۇچ كۆرسەت"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: ../plugins/cellular//PageComponent.qml:32 ../po/settings.js:288
+#: ../plugins/cellular//PageComponent.qml:32
+#: ../po/settings.js:288
 msgid "Cellular"
 msgstr "كۆچمە تور"
 
@@ -1657,7 +1671,8 @@ msgid "Carriers"
 msgstr "توشۇغۇچىلار(شىركەت)"
 
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
-#: ../plugins/battery//PageComponent.qml:34 ../po/settings.js:316
+#: ../plugins/battery//PageComponent.qml:34
+#: ../po/settings.js:316
 msgid "Battery"
 msgstr "توكدان"
 
@@ -1759,7 +1774,8 @@ msgid "Phone won’t sleep during calls or video playback."
 msgstr "سۆزلىشىۋاتقاندا ۋە سىن قويۇۋاتقاندا ئۇخلاپ قالمايدۇ."
 
 #. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
-#: ../plugins/brightness//PageComponent.qml:32 ../po/settings.js:332
+#: ../plugins/brightness//PageComponent.qml:32
+#: ../po/settings.js:332
 msgid "Brightness"
 msgstr "يورۇقلۇقى"
 
@@ -1956,8 +1972,8 @@ msgstr "قەيەردىلىكىڭىزنى بىلىش ئۈچۈن يانفون تو
 #. TRANSLATORS: HERE is a trademark for Nokia's location service, you probably shouldn't translate it
 #: ../wizard/qml/Pages//30-location.qml:70
 msgid ""
-"I have read and agreed to the HERE <a href='terms.qml'>terms and conditions</"
-"a>"
+"I have read and agreed to the HERE <a href='terms.qml'>terms and "
+"conditions</a>"
 msgstr ""
 "مەن HERE نىڭ  <a href='terms.qml'>ئىشلىتىش تۈزۈمى</a>نى ئوقۇدۇم ۋە قوشۇلىمەن."
 
@@ -2038,7 +2054,9 @@ msgstr "سىستېما"
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: ../po/settings.js:8 ../po/settings.js:184 ../po/settings.js:230
+#: ../po/settings.js:8
+#: ../po/settings.js:184
+#: ../po/settings.js:230
 msgid "software"
 msgstr "يۇمشاق دېتال"
 
@@ -2050,7 +2068,9 @@ msgstr "يېڭىلا"
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
-#: ../po/settings.js:12 ../po/settings.js:44 ../po/settings.js:188
+#: ../po/settings.js:12
+#: ../po/settings.js:44
+#: ../po/settings.js:188
 msgid "apps"
 msgstr "ئەپلەر"
 
@@ -2058,7 +2078,9 @@ msgstr "ئەپلەر"
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
-#: ../po/settings.js:14 ../po/settings.js:88 ../po/settings.js:274
+#: ../po/settings.js:14
+#: ../po/settings.js:88
+#: ../po/settings.js:274
 #: ../po/settings.js:340
 msgid "automatic"
 msgstr "ئاپتوماتىك"
@@ -2106,7 +2128,9 @@ msgstr "ئايروپىلان"
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: ../po/settings.js:32 ../po/settings.js:164 ../po/settings.js:292
+#: ../po/settings.js:32
+#: ../po/settings.js:164
+#: ../po/settings.js:292
 msgid "network"
 msgstr "تور"
 
@@ -2128,19 +2152,23 @@ msgstr "يۆنىلىش"
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
-#: ../po/settings.js:40 ../po/settings.js:248 ../po/settings.js:326
+#: ../po/settings.js:40
+#: ../po/settings.js:248
+#: ../po/settings.js:326
 msgid "lock"
 msgstr "قۇلۇپلا"
 
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
-#: ../po/settings.js:42 ../po/settings.js:338
+#: ../po/settings.js:42
+#: ../po/settings.js:338
 msgid "screen"
 msgstr "ئېكران"
 
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: ../po/settings.js:48 ../po/settings.js:214
+#: ../po/settings.js:48
+#: ../po/settings.js:214
 msgid "phone"
 msgstr "تېلېفون"
 
@@ -2166,7 +2194,8 @@ msgstr "چاقىرىش"
 
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
-#: ../po/settings.js:58 ../po/settings.js:154
+#: ../po/settings.js:58
+#: ../po/settings.js:154
 msgid "dialpad"
 msgstr "نومۇر تاختىسى"
 
@@ -2222,7 +2251,8 @@ msgstr "تىل"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
-#: ../po/settings.js:84 ../po/settings.js:158
+#: ../po/settings.js:84
+#: ../po/settings.js:158
 msgid "keyboard"
 msgstr "ھەرپتاختا"
 
@@ -2258,7 +2288,8 @@ msgstr "ئورۇنلاشتۇرۇش"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
-#: ../po/settings.js:100 ../po/settings.js:336
+#: ../po/settings.js:100
+#: ../po/settings.js:336
 msgid "display"
 msgstr "كۆرسىتىش"
 
@@ -2309,7 +2340,8 @@ msgstr "جۈپ"
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: ../po/settings.js:122 ../po/settings.js:210
+#: ../po/settings.js:122
+#: ../po/settings.js:210
 msgid "device"
 msgstr "ئۈسكۈنە"
 
@@ -2330,19 +2362,22 @@ msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: ../po/settings.js:130 ../po/settings.js:166
+#: ../po/settings.js:130
+#: ../po/settings.js:166
 msgid "wireless"
 msgstr "سىمسىز"
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: ../po/settings.js:132 ../po/settings.js:172
+#: ../po/settings.js:132
+#: ../po/settings.js:172
 msgid "connect"
 msgstr "باغلىنىش"
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: ../po/settings.js:134 ../po/settings.js:174
+#: ../po/settings.js:134
+#: ../po/settings.js:174
 msgid "disconnect"
 msgstr "ئۈزۈلۈش"
 
@@ -2418,7 +2453,8 @@ msgstr "ip"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: ../po/settings.js:180 ../po/settings.js:222
+#: ../po/settings.js:180
+#: ../po/settings.js:222
 msgid "address"
 msgstr "ئادرېسلار"
 
@@ -2445,7 +2481,7 @@ msgstr "ئىمتىيازلار"
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
 #: ../po/settings.js:196
 msgid "badges"
-msgstr ""
+msgstr "ئىزناكلار"
 
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
 #: ../po/settings.js:198
@@ -2544,7 +2580,8 @@ msgstr "شەخسىيەت"
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: ../po/settings.js:250 ../po/settings.js:314
+#: ../po/settings.js:250
+#: ../po/settings.js:314
 msgid "sim"
 msgstr "sim"
 
@@ -2778,6 +2815,3 @@ msgstr "سىستېما يېڭىلىغۇنى ئىجرا قىلىش ئۈچۈن چ�
 
 #~ msgid "Other network"
 #~ msgstr "باشقا تور"
-
-#~ msgid "Connect to hidden network"
-#~ msgstr "يوشۇرۇن تورغا باغلانسۇن"
