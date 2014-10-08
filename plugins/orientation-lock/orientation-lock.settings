@@ -12,7 +12,8 @@
         "rotation",
         "orientation",
         "lock",
-        "screen"
+        "screen",
+        "apps"
     ],
     "has-dynamic-keywords": false,
     "has-dynamic-visibility": false,

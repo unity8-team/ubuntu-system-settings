@@ -77,6 +77,7 @@ Q_SIGNALS:
     void updateProcessFailed(QString message);
     void systemUpdateFailed(int consecutiveFailureCount, QString lastReason);
     void versionChanged();
+    void rebooting(bool status);
     
 public:
     explicit UpdateManager(QObject *parent = 0);
@@ -116,7 +117,10 @@ public Q_SLOTS:
 
 private Q_SLOTS:
     void clickUpdateNotAvailable();
+    void updateFailed(int consecutiveFailureCount, QString lastReason);
+    void updateDownloaded();
     void systemUpdatePaused(int value);
+    void systemUpdateProgress(int value, double eta);
     void processOutput();
     void processUpdates();
     void downloadApp(Update *app);
