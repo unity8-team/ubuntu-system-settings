@@ -63,12 +63,13 @@ UpdateManager::UpdateManager(QObject *parent):
                   this, SLOT(clickUpdateNotAvailable()));
     QObject::connect(&m_network, SIGNAL(errorOccurred()),
                   this, SIGNAL(errorFound()));
+    QObject::connect(&m_network, SIGNAL(networkError()),
+                  this, SIGNAL(networkError()));
+    QObject::connect(&m_network, SIGNAL(serverError()),
+                  this, SIGNAL(serverError()));
     QObject::connect(&m_network,
                      SIGNAL(clickTokenObtained(Update*, const QString&)),
                      this, SLOT(clickTokenReceived(Update*, const QString&)));
-    QObject::connect(&m_network,
-                     SIGNAL(downloadUrlFound(const QString&, const QString&)),
-                     this, SLOT(downloadUrlObtained(const QString&, const QString&)));
     // SYSTEM UPDATE
     QObject::connect(&m_systemUpdate, SIGNAL(updateAvailable(const QString&, Update*)),
                   this, SLOT(registerSystemUpdate(const QString&, Update*)));
@@ -281,7 +282,7 @@ void UpdateManager::startDownload(const QString &packagename)
     if (m_apps[packagename]->systemUpdate()) {
         m_systemUpdate.downloadUpdate();
     } else {
-        m_network.getResourceUrl(packagename);
+        downloadApp(m_apps[packagename]);
     }
 }
 
@@ -305,16 +306,13 @@ void UpdateManager::pauseDownload(const QString &packagename)
     m_systemUpdate.pauseDownload();
 }
 
-void UpdateManager::downloadUrlObtained(const QString &packagename,
-                                        const QString &url)
+void UpdateManager::downloadApp(Update *app)
 {
     if (m_token.isValid()) {
-        QString authHeader = m_token.signUrl(url, QStringLiteral("HEAD"), true);
-        Update *app = m_apps[packagename];
-        app->setClickUrl(url);
-        m_network.getClickToken(app, url, authHeader);
+        QString authHeader = m_token.signUrl(app->downloadUrl(), QStringLiteral("HEAD"), true);
+        app->setClickUrl(app->downloadUrl());
+        m_network.getClickToken(app, app->downloadUrl(), authHeader);
     } else {
-        Update *app = m_apps[packagename];
         app->setError("Invalid User Token");
     }
 }

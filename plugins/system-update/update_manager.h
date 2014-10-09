@@ -70,6 +70,8 @@ Q_SIGNALS:
     void credentialsNotFound();
     void updateAvailableFound(bool downloading);
     void errorFound();
+    void networkError();
+    void serverError();
     void downloadModeChanged();
     void systemUpdateDownloaded();
     void updateProcessFailed(QString message);
@@ -121,7 +123,7 @@ private Q_SLOTS:
     void systemUpdateProgress(int value, double eta);
     void processOutput();
     void processUpdates();
-    void downloadUrlObtained(const QString &packagename, const QString &url);
+    void downloadApp(Update *app);
     void handleCredentialsFound(Token token);
     void clickTokenReceived(Update *app, const QString &clickToken);
 
