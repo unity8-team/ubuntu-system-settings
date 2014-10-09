@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: Josef Andersson <josef.andersson@fripost.org>\n"
 "POT-Creation-Date: 2014-09-26 12:27-0400\n"
-"PO-Revision-Date: 2014-10-06 18:27+0000\n"
+"PO-Revision-Date: 2014-10-08 21:11+0000\n"
 "Last-Translator: Josef Andersson <Unknown>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se.>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-10-07 06:57+0000\n"
+"X-Launchpad-Export-Date: 2014-10-09 06:35+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 "Language: sv\n"
 
@@ -1031,7 +1031,7 @@ msgstr ""
 #: ../plugins/security-privacy//PhoneLocking.qml:49
 #: ../plugins/security-privacy//LockSecurity.qml:32
 msgid "Lock security"
-msgstr "Låssäkerhet"
+msgstr "Säkerhetslås"
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
 #: ../plugins/security-privacy//PageComponent.qml:37
@@ -1369,7 +1369,7 @@ msgstr "Notifieringar och snabbinställningar"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:131
 msgid "Turn on lock security to restrict access when the phone is locked."
-msgstr "Slå på låssäkerhet för att begränsa åtkomst när telefonen är låst."
+msgstr "Slå på säkerhetslås för att begränsa åtkomst när telefonen är låst."
 
 #: ../plugins/security-privacy//PhoneLocking.qml:132
 msgid "Other apps and functions will prompt you to unlock."
@@ -1943,11 +1943,11 @@ msgstr "Villkor och regler"
 
 #: ../wizard/qml/Pages//15-passwd.qml:38
 msgid "Set lock security"
-msgstr "Ställ in låssäkerhet"
+msgstr "Ställ in säkerhetslås"
 
 #: ../wizard/qml/Pages//15-passwd.qml:104
 msgid "Swipe"
-msgstr "Svep"
+msgstr "Gest"
 
 #: ../wizard/qml/Pages//15-passwd.qml:154
 msgid "Those PIN codes don't match."
@@ -1974,7 +1974,7 @@ msgstr "Fortsätt"
 
 #: ../wizard/qml/Pages//30-location.qml:60
 msgid "Use your mobile network and Wi-Fi to work out where you are"
-msgstr "Använd ditt mobila- och trådlösa nätverk för att lista ut var du är"
+msgstr "Använd ditt mobila och trådlösa nätverk för att lista ut var du är"
 
 #. TRANSLATORS: HERE is a trademark for Nokia's location service, you probably shouldn't translate it
 #: ../wizard/qml/Pages//30-location.qml:70
@@ -2024,7 +2024,7 @@ msgstr "Välkommen till din Ubuntutelefon."
 
 #: ../wizard/qml/Pages//10-welcome.qml:50
 msgid "Let’s get started."
-msgstr "Kom igång."
+msgstr "Låt oss komma igång"
 
 #: ../wizard/qml/Pages//20-wifi.qml:27
 msgid "Connect to Wi‑Fi"
