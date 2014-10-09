@@ -91,6 +91,19 @@ QDBusObjectPath detectDevice(const QString &modemPath) {
 void activateOfono(QDBusObjectPath connection, QDBusObjectPath device)
 {
     OrgFreedesktopNetworkManagerInterface nm(nmService, nmPath, QDBusConnection::systemBus());
+
+
+    /// @bug https://bugs.launchpad.net/ubuntu/+source/network-manager/+bug/1378102
+    /// This is a big and fat workaround for the above bug
+    // this is probably racy as well as we are not tracking the ActiveConnection to know
+    // when the Device has actually disconnected.
+    QDBusInterface dev_iface("org.freedesktop.NetworkManager",
+                             device.path(),
+                             "org.freedesktop.NetworkManager.Device",
+                             nm.connection());
+    dev_iface.call("Disconnect");
+
+
     nm.ActivateConnection(connection, device, QDBusObjectPath("/"));
 }
 
