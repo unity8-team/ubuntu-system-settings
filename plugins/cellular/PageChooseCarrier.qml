@@ -96,7 +96,7 @@ ItemPage {
 
             ListItem.ItemSelector {
                 id: chooseCarrier
-                objectName: "autoChooseCarrierSelector"
+                objectName: "mode"
                 expanded: true
                 enabled: netReg.mode !== "auto-only"
                 text: i18n.tr("Choose carrier:")
@@ -110,7 +110,7 @@ ItemPage {
 
             ListItem.ItemSelector {
                 id: carrierSelector
-                objectName: "carrierSelector"
+                objectName: "carriers"
                 expanded: enabled
                 enabled: chooseCarrier.selectedIndex === 1
                 model: operatorNames

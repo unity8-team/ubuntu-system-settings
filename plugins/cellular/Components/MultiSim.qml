@@ -23,16 +23,28 @@ import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 
 Column {
-
+    id: root
     objectName: "multiSim"
 
     property var sims
+    property var poweredSim: {
+        var s = null;
+        sims.forEach(function (sim) {
+            if (sim.connMan.powered === true) {
+                s = sim;
+            }
+        });
+        return s;
+    }
     property var modems
-
     // make settings available to all children of root
     property var settings: phoneSettings
 
-    CellularMultiSim {
+    Label {
+        text: poweredSim ? 'powered' + poweredSim.path : 'none'
+    }
+
+    DataMultiSim {
         anchors { left: parent.left; right: parent.right }
     }
 
@@ -69,6 +81,7 @@ Column {
         id: chooseCarrier
         objectName: "chooseCarrier"
         progression: enabled
+        showDivider: false
         onClicked: {
             pageStack.push(Qt.resolvedUrl("../PageChooseCarriers.qml"), {
                 sims: sims

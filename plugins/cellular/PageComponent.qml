@@ -94,6 +94,7 @@ ItemPage {
             start()
         }
     }
+
     Flickable {
         anchors.fill: parent
         contentWidth: parent.width

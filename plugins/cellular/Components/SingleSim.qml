@@ -27,11 +27,29 @@ Column {
 
     property var sim
 
-    CellularSingleSim {
-        anchors { left: parent.left; right: parent.right }
+    ListItem.Standard {
+        id: selector
+        text: i18n.tr("Cellular data:")
+        control: Switch {
+            id: dataControl
+            objectName: 'data'
+            checked: sim.connMan.powered
+            onClicked: sim.connMan.powered = checked
+        }
     }
 
-    ListItem.Divider {}
+    ListItem.Standard {
+        id: dataRoamingItem
+        text: i18n.tr("Data roaming")
+        enabled: sim.connMan.powered
+        showDivider: false
+        control: Switch {
+            id: dataRoamingControl
+            objectName: "roaming"
+            checked: sim.connMan.roamingAllowed
+            onClicked: sim.connMan.roamingAllowed = checked
+        }
+    }
 
     ListItem.SingleValue {
         text : i18n.tr("Hotspot disabled because Wi-Fi is off.")
@@ -54,10 +72,22 @@ Column {
         visible: showAllUI
     }
 
+    ListItem.Divider {
+        visible: radio.selector.model.length
+    }
+
+    RadioSingleSim {
+        id: radio
+        anchors { left: parent.left; right: parent.right }
+        visible: radio.selector.model.length
+    }
+
+    ListItem.Divider {}
+
     ListItem.SingleValue {
         text: i18n.tr("Carrier");
         id: chooseCarrier
-        objectName: "chooseCarrier"
+        objectName: "carrier"
         progression: enabled
         value: sim.netReg.name || i18n.tr("N/A")
         onClicked: {
