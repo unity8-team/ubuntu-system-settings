@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 Canonical, Ltd.
+ * Copyright (C) 2013,2014 Canonical, Ltd.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -15,7 +15,7 @@
  */
 
 import QtQuick 2.3
-import QMenuModel 0.1
+import QMenuModel 0.1 as QMenuModel
 import Qt.labs.folderlistmodel 2.1
 import Ubuntu.Components 1.1
 import Ubuntu.SystemSettings.Wizard.Utils 0.1
@@ -25,16 +25,7 @@ LocalComponents.Page {
     title: i18n.tr("Location")
     forwardButtonSourceComponent: forwardButton
 
-    QDBusActionGroup {
-        id: locationActionGroup
-        busType: DBus.SessionBus
-        busName: "com.canonical.indicator.location"
-        objectPath: "/com/canonical/indicator/location"
-
-        property variant enabled: action("location-detection-enabled")
-
-        Component.onCompleted: start()
-    }
+    property bool hereInstalled: System.hereLicensePath !== "" && termsModel.count > 0
 
     FolderListModel {
         id: termsModel
@@ -44,20 +35,33 @@ LocalComponents.Page {
         showOnlyReadable: true
     }
 
+    QMenuModel.QDBusActionGroup {
+        id: locationActionGroup
+        busType: QMenuModel.DBus.SessionBus
+        busName: "com.canonical.indicator.location"
+        objectPath: "/com/canonical/indicator/location"
+        property variant enabled: action("location-detection-enabled")
+        Component.onCompleted: start()
+    }
+
     Column {
         id: column
         anchors.fill: content
-        spacing: units.gu(4)
+        spacing: units.gu(2)
 
-        Item { // spacer
-            height: units.gu(1)
-            width: units.gu(1) // needed else it will be ignored
+        Label {
+            anchors.left: parent.left
+            anchors.right: parent.right
+            visible: hereInstalled
+            wrapMode: Text.Wrap
+            // TRANSLATORS: HERE is a trademark for Nokia's location service, you probably shouldn't translate it
+            text: i18n.tr("Ubuntu includes location services provided by HERE, enabling apps to pinpoint your location.")
         }
 
         LocalComponents.CheckableSetting {
             id: locationCheck
             showDivider: false
-            text: i18n.tr("Use your mobile network and Wi-Fi to work out where you are")
+            text: i18n.tr("Allow apps to use your mobile and Wi-Fi networks to determine your location.")
             checked: locationActionGroup.enabled.state
             onTriggered: locationActionGroup.enabled.activate()
         }
@@ -65,12 +69,20 @@ LocalComponents.Page {
         LocalComponents.CheckableSetting {
             id: termsCheck
             showDivider: false
-            visible: System.hereLicensePath !== "" && termsModel.count > 0
+            visible: hereInstalled
             // TRANSLATORS: HERE is a trademark for Nokia's location service, you probably shouldn't translate it
-            text: i18n.tr("I have read and agreed to the HERE <a href='terms.qml'>terms and conditions</a>")
-            onLinkActivated: pageStack.push(Qt.resolvedUrl(link))
+            text: i18n.tr("Accept the HERE <a href='terms.qml'>terms and conditions</a> to enable these services.")
+            onLinkActivated: pageStack.load(Qt.resolvedUrl(link))
             checked: System.hereEnabled
             onTriggered: System.hereEnabled = checked
+        }
+
+        Label {
+            anchors.left: parent.left
+            anchors.right: parent.right
+            visible: hereInstalled
+            wrapMode: Text.Wrap
+            text: i18n.tr("This service can be disabled at any time from the <b>System Settings</b> menu.")
         }
     }
 
