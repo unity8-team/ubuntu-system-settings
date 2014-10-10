@@ -31,7 +31,7 @@ System::System()
     : QObject(),
       m_accounts(nullptr),
       m_hereEnabled(false),
-      m_hereLicensePath()
+      m_hereLicensePath(" ") // use a single space to indicate it is unasssigned
 {
     m_accounts = new QDBusInterface("org.freedesktop.Accounts",
                                     "/org/freedesktop/Accounts/User" + QString::number(geteuid()),
@@ -84,8 +84,12 @@ void System::getHereLicensePathFinished(QDBusPendingCallWatcher *watcher)
     if (!reply.isError()) {
         QVariant value = reply.argumentAt<0>();
         m_hereLicensePath = value.toString();
-        Q_EMIT hereLicensePathChanged();
+    } else {
+        m_hereLicensePath = "";
     }
+
+    Q_EMIT hereLicensePathChanged();
+
     watcher->deleteLater();
 }
 
