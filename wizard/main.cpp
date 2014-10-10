@@ -59,16 +59,20 @@ int main(int argc, const char *argv[])
     if (rootDir.isEmpty())
         rootDir = WIZARD_ROOT;
 
+    QString modulesDir = qgetenv("UBUNTU_SYSTEM_SETTINGS_WIZARD_MODULES"); // for testing
+    if (modulesDir.isEmpty())
+        modulesDir = PLUGIN_PRIVATE_MODULE_DIR;
+
     if (!isMirServer) {
-        view->engine()->addImportPath(PLUGIN_PRIVATE_MODULE_DIR "/Ubuntu/SystemSettings/Wizard/NonMir");
+        view->engine()->addImportPath(modulesDir + "/Ubuntu/SystemSettings/Wizard/NonMir");
     }
-    view->engine()->addImportPath(PLUGIN_PRIVATE_MODULE_DIR);
+    view->engine()->addImportPath(modulesDir);
     view->engine()->addImportPath(PLUGIN_QML_DIR);
     view->engine()->addImportPath(SHELL_PLUGINDIR);
 
     PageList pageList;
     view->rootContext()->setContextProperty("pageList", &pageList);
-    view->setSource(QUrl(rootDir + "/qml/main.qml"));
+    view->setSource(QUrl(rootDir + "/ubuntu/settings/wizard/qml/main.qml"));
     view->setColor("transparent");
 
     QObject::connect(view->engine(), &QQmlEngine::quit, handleQuit);

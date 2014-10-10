@@ -26,6 +26,12 @@ Item {
     readonly property real leftMargin: units.gu(2)
     readonly property real rightMargin: units.gu(2)
 
+    // If you want to skip a page, mark skipValid false while you figure out
+    // whether to skip, then set it to true once you've determined the value
+    // of the skip property.
+    property bool skipValid: true
+    property bool skip: false
+
     property bool hasBackButton: true
     property bool customBack: false
     property alias forwardButtonSourceComponent: forwardButton.sourceComponent
@@ -82,7 +88,7 @@ Item {
         z: 1
         text: i18n.tr("Back")
         visible: pageStack.depth > 1 && hasBackButton
-        leftArrow: true
+        backArrow: true
 
         onClicked: customBack ? backClicked() : pageStack.prev()
     }
