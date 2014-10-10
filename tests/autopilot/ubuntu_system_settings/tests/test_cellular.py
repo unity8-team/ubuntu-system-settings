@@ -378,13 +378,6 @@ class DualSimCellularTestCase(CellularBaseTestCase):
         self.assertEqual(
             'gsm', self.modem_0.Get(RDO_IFACE, 'TechnologyPreference'))
 
-    def test_use_umts_for_sim_2(self):
-        self.use_selector(USE_SIM_2)
-        self.select_preference(PREFERENCE_UMTS)
-        sleep(1)
-        self.assertEqual(
-            'umts', self.modem_1.Get(RDO_IFACE, 'TechnologyPreference'))
-
     def test_when_sim_1_comes_online_ui_is_correct(self):
         self.use_selector(USE_SIM_1)
         self.select_preference(PREFERENCE_UMTS)
@@ -404,7 +397,7 @@ class DualSimCellularTestCase(CellularBaseTestCase):
 
     def test_when_sim_2_comes_online_ui_is_correct(self):
         self.use_selector(USE_SIM_2)
-        self.select_preference(PREFERENCE_UMTS)
+        self.select_preference(PREFERENCE_2G)
         self.use_selector(USE_OFF)
         sleep(2)
         self.modem_1.Set(CONNMAN_IFACE, 'Powered', True)
@@ -415,9 +408,9 @@ class DualSimCellularTestCase(CellularBaseTestCase):
             ['Powered', 'true'])
 
         self.assertEqual(
-            'umts', self.modem_1.Get(RDO_IFACE, 'TechnologyPreference'))
+            'gsm', self.modem_1.Get(RDO_IFACE, 'TechnologyPreference'))
         self.assert_used(2)
-        self.assert_selected_preference(1)
+        self.assert_selected_preference(0)
 
     def test_roaming_switch(self):
         roaming_switch = self.system_settings.main_view.select_single(
@@ -673,3 +666,16 @@ class DualSimCellularTestCase(CellularBaseTestCase):
         self.assertThat(
             lambda: self.system_settings.main_view.select_single(
                 objectName='singleSim'), raises(StateNotFoundError))
+
+    # regression test for 1375832
+    # tests that the second slot only exposes gsm, which
+    # the testdata indicates
+    def test_slot_two(self):
+        self.modem_0.EmitSignal(
+            SIM_IFACE,
+            'PropertyChanged',
+            'sv',
+            ['Present', 'False'])
+        self.select_preference(PREFERENCE_2G)
+        self.assertRaises(StateNotFoundError,
+                          self.select_preference, PREFERENCE_UMTS)

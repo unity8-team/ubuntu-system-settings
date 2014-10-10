@@ -47,7 +47,7 @@ ItemPage {
             name: "singleSim"
             StateChangeScript {
                 script: loader.setSource("Components/SingleSim.qml", {
-                    sim: Sims.get(0)
+                    sim: Sims.getFirstPresent()
                 })
             }
             when: simsLoaded && (Sims.getPresentCount() === 1)
