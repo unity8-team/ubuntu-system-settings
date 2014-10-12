@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-10-03 09:12-0400\n"
-"PO-Revision-Date: 2014-10-08 17:23+0000\n"
+"PO-Revision-Date: 2014-10-11 11:20+0000\n"
 "Last-Translator: rob <linuxned@gmail.com>\n"
 "Language-Team: Dutch <nl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-10-11 05:08+0000\n"
+"X-Launchpad-Export-Date: 2014-10-12 06:54+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 
 #: ubuntu-system-settings.desktop.in.in.h:1 ../src/qml/MainWindow.qml:112
@@ -692,7 +692,7 @@ msgstr "Geen"
 #: ../plugins/security-privacy//PhoneLocking.qml:46
 #: ../wizard/qml/Pages//30-passwd-type.qml:95
 msgid "Passcode"
-msgstr ""
+msgstr "Toegangscode"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:47
 #: ../plugins/security-privacy//LockSecurity.qml:350
@@ -855,7 +855,7 @@ msgstr "Bevestig nieuwe pincode:"
 
 #: ../plugins/security-privacy//SimPin.qml:137
 msgid "PINs don't match. Try again."
-msgstr "Pincodes komen niet overeen. Probeer het opnieuw."
+msgstr "Pincodes komen niet overeen. Probeer het a.u.b. opnieuw."
 
 #: ../plugins/security-privacy//SimPin.qml:157
 #: ../plugins/security-privacy//LockSecurity.qml:302
@@ -911,7 +911,7 @@ msgstr ""
 #: ../plugins/security-privacy//LockSecurity.qml:96
 #: ../plugins/security-privacy//LockSecurity.qml:384
 msgid "Change passcode…"
-msgstr ""
+msgstr "Toegangscode wijzigen…"
 
 #: ../plugins/security-privacy//LockSecurity.qml:98
 #: ../plugins/security-privacy//LockSecurity.qml:385
@@ -924,7 +924,7 @@ msgstr "Overschakelen naar vegen"
 
 #: ../plugins/security-privacy//LockSecurity.qml:107
 msgid "Switch to passcode"
-msgstr ""
+msgstr "Overschakelen naar toegangscode"
 
 #: ../plugins/security-privacy//LockSecurity.qml:109
 msgid "Switch to passphrase"
@@ -932,7 +932,7 @@ msgstr "Overschakelen naar wachtwoordzin"
 
 #: ../plugins/security-privacy//LockSecurity.qml:118
 msgid "Existing passcode"
-msgstr ""
+msgstr "Huidige toegangscode"
 
 #: ../plugins/security-privacy//LockSecurity.qml:120
 msgid "Existing passphrase"
@@ -940,7 +940,7 @@ msgstr "Huidige wachtwoordzin"
 
 #: ../plugins/security-privacy//LockSecurity.qml:174
 msgid "Choose passcode"
-msgstr ""
+msgstr "Kies een toegangscode"
 
 #: ../plugins/security-privacy//LockSecurity.qml:176
 msgid "Choose passphrase"
@@ -949,7 +949,7 @@ msgstr "Kies een wachtwoordzin"
 #: ../plugins/security-privacy//LockSecurity.qml:220
 #: ../wizard/qml/Pages//passwd-confirm.qml:48
 msgid "Confirm passcode"
-msgstr ""
+msgstr "Toegangscode bevestigen"
 
 #: ../plugins/security-privacy//LockSecurity.qml:222
 #: ../wizard/qml/Pages//passwd-confirm.qml:47
@@ -958,11 +958,12 @@ msgstr "Bevestig de wachtwoordzin"
 
 #: ../plugins/security-privacy//LockSecurity.qml:265
 msgid "Those passcodes don't match. Try again."
-msgstr ""
+msgstr "De toegangscodes komen niet overeen. Probeer het a.u.b. opnieuw."
 
 #: ../plugins/security-privacy//LockSecurity.qml:268
 msgid "Those passphrases don't match. Try again."
-msgstr "Deze wachtwoordzinnen komen niet overeen. Probeer het opnieuw."
+msgstr ""
+"Deze wachtwoordzinnen komen niet overeen. Probeer het a.u.b. opnieuw."
 
 #: ../plugins/security-privacy//LockSecurity.qml:299
 msgid "Unset"
@@ -978,7 +979,7 @@ msgstr "Vegen (geen beveiliging)"
 
 #: ../plugins/security-privacy//LockSecurity.qml:349
 msgid "4-digit passcode"
-msgstr ""
+msgstr "Viercijferige toegangscode"
 
 #: ../plugins/security-privacy//LockSecurity.qml:351
 msgid "Swipe (no security)… "
@@ -986,7 +987,7 @@ msgstr "Vegen (geen beveiliging)… "
 
 #: ../plugins/security-privacy//LockSecurity.qml:352
 msgid "4-digit passcode…"
-msgstr ""
+msgstr "Viercijferige toegangscode…"
 
 #: ../plugins/security-privacy//LockSecurity.qml:353
 msgid "Passphrase…"
@@ -1051,7 +1052,7 @@ msgstr "Software is bijgewerkt"
 
 #: ../plugins/system-update//PageComponent.qml:201
 msgid "Restarting…"
-msgstr ""
+msgstr "Herstarten…"
 
 #: ../plugins/system-update//PageComponent.qml:246
 msgid "Checking for updates…"
@@ -1081,7 +1082,7 @@ msgstr "Opnieuw proberen"
 
 #: ../plugins/system-update//PageComponent.qml:401
 msgid "Install…"
-msgstr ""
+msgstr "Installeren…"
 
 #: ../plugins/system-update//PageComponent.qml:403
 msgid "Download"
@@ -1109,12 +1110,12 @@ msgstr "Geïnstalleerd"
 
 #: ../plugins/system-update//PageComponent.qml:452
 msgid "Downloading"
-msgstr ""
+msgstr "Downloaden"
 
 #: ../plugins/system-update//PageComponent.qml:463
 #, qt-format
 msgid "%1 of %2"
-msgstr ""
+msgstr "%1 van %2"
 
 #: ../plugins/system-update//PageComponent.qml:562
 msgid "Version: "
@@ -1644,6 +1645,8 @@ msgstr ""
 #: ../plugins/about//DevMode.qml:110
 msgid "You need a passcode or passphrase set to use Developer Mode."
 msgstr ""
+"U moet een toegangscode of wachtwoordzin instellen voor het gebruiken van de "
+"ontwikkelaarsmodus."
 
 #: ../plugins/cellular//HotspotSetup.qml:29
 msgid "Change hotspot setup"
@@ -1967,11 +1970,11 @@ msgstr "Verbinden met Wi-Fi"
 
 #: ../wizard/qml/Pages//40-wifi.qml:146
 msgid "Available networks…"
-msgstr ""
+msgstr "Beschikbare netwerken…"
 
 #: ../wizard/qml/Pages//40-wifi.qml:147
 msgid "No available networks."
-msgstr ""
+msgstr "Geen netwerken beschikbaar."
 
 #: ../wizard/qml/Pages//40-wifi.qml:196
 #: ../wizard/qml/Pages//60-reporting.qml:50
@@ -2004,16 +2007,16 @@ msgstr "Voltooien"
 
 #: ../wizard/qml/Pages//passwd-confirm.qml:51
 msgid "Sorry, incorrect passphrase."
-msgstr ""
+msgstr "Sorry, onjuiste wachtwoordzin."
 
 #: ../wizard/qml/Pages//passwd-confirm.qml:51
 #: ../wizard/qml/Pages//passwd-confirm.qml:52
 msgid "Please try again."
-msgstr ""
+msgstr "Probeer het a.u.b. opnieuw."
 
 #: ../wizard/qml/Pages//passwd-confirm.qml:52
 msgid "Sorry, incorrect passcode."
-msgstr ""
+msgstr "Sorry, onjuiste toegangscode."
 
 #: ../wizard/qml/Pages//60-reporting.qml:22
 msgid "Bug reporting"
@@ -2024,18 +2027,20 @@ msgid ""
 "Your phone is set up to automatically report errors to Canonical and its "
 "partners, the makers of the operating system."
 msgstr ""
+"Uw telefoon is ingesteld om fouten automatisch te rapporteren aan Canonical "
+"en partners, de makers van het besturingssysteem."
 
 #: ../wizard/qml/Pages//60-reporting.qml:42
 msgid "This can be disabled here:"
-msgstr ""
+msgstr "Dit kan hier worden uitgeschakeld:"
 
 #: ../wizard/qml/Pages//60-reporting.qml:43
 msgid "System Settings &gt; Security &amp; Privacy"
-msgstr ""
+msgstr "Systeeminstellingen&gt; Beveiliging &amp; Privacy"
 
 #: ../wizard/qml/Pages//50-location.qml:53
 msgid "Use your mobile network and Wi-Fi to determine where you are"
-msgstr ""
+msgstr "Gebruik uw mobiele netwerk en Wi-Fi om uw locatie te bepalen"
 
 #. TRANSLATORS: HERE is a trademark for Nokia's location service, you probably shouldn't translate it
 #: ../wizard/qml/Pages//50-location.qml:63
@@ -2043,10 +2048,12 @@ msgid ""
 "I have read and agreed to the HERE <a href='terms.qml'>Terms and "
 "Conditions</a>"
 msgstr ""
+"Ik heb de <a href='terms.qml'>Algemene voorwaarden</a> gelezen en "
+"geaccepteerd"
 
 #: ../wizard/qml/Pages//20-sim.qml:23
 msgid "Add a SIM card and restart your device"
-msgstr ""
+msgstr "Voeg een simkaart toe en herstart uw apparaat"
 
 #: ../wizard/qml/Pages//20-sim.qml:53
 msgid "Without it, you won’t be able to make calls or use text messaging."
@@ -2070,19 +2077,19 @@ msgstr "Algemene voorwaarden"
 
 #: ../wizard/qml/Pages//31-passwd-set.qml:48
 msgid "Enter passphrase"
-msgstr ""
+msgstr "Voer wachtwoordzin in"
 
 #: ../wizard/qml/Pages//31-passwd-set.qml:49
 msgid "Choose your passcode"
-msgstr ""
+msgstr "Kies een toegangscode"
 
 #: ../wizard/qml/Pages//31-passwd-set.qml:56
 msgid "Passphrase must be 4 characters long"
-msgstr ""
+msgstr "De wachtwoordzin moet 4 tekens lang zijn"
 
 #: ../wizard/qml/Pages//30-passwd-type.qml:72
 msgid "Please select how you’d like to unlock your phone."
-msgstr ""
+msgstr "Selecteer a.u.b. hoe u uw telefoon wilt ontgrendelen."
 
 #: ../wizard/qml/Pages//30-passwd-type.qml:92
 msgid "Swipe"
@@ -2090,15 +2097,15 @@ msgstr "Vegen"
 
 #: ../wizard/qml/Pages//30-passwd-type.qml:93
 msgid "No security"
-msgstr ""
+msgstr "Geen beveiliging"
 
 #: ../wizard/qml/Pages//30-passwd-type.qml:96
 msgid "4 numbers"
-msgstr ""
+msgstr "4 cijfers"
 
 #: ../wizard/qml/Pages//30-passwd-type.qml:99
 msgid "Numbers and letters"
-msgstr ""
+msgstr "Cijfers en letters"
 
 #. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
 #: /home/mike/Work/code/ubuntu-system-settings/ui-refresh-take-6/obj-x86_64-linux-gnu/po/settings.js:2
@@ -2816,11 +2823,11 @@ msgstr "vliegtuig"
 
 #: ../plugins/security-privacy//securityprivacy.cpp:318
 msgid "Incorrect passcode. Try again."
-msgstr ""
+msgstr "Onjuiste toegangscode. Probeer het a.u.b. opnieuw."
 
 #: ../plugins/security-privacy//securityprivacy.cpp:320
 msgid "Incorrect passphrase. Try again."
-msgstr "Onjuiste wachtwoordzin. Probeer het opnieuw."
+msgstr "Onjuiste wachtwoordzin. Probeer het a.u.b. opnieuw."
 
 #: ../plugins/security-privacy//securityprivacy.cpp:323
 msgid "Could not set security mode"

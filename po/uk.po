@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-10-03 09:12-0400\n"
-"PO-Revision-Date: 2014-09-27 11:44+0000\n"
+"PO-Revision-Date: 2014-10-11 10:41+0000\n"
 "Last-Translator: Yuri Chornoivan <yurchor@gmail.com>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2014-10-11 05:12+0000\n"
+"X-Launchpad-Export-Date: 2014-10-12 06:54+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 "Language: uk\n"
 
@@ -697,7 +697,7 @@ msgstr "Нічого"
 #: ../plugins/security-privacy//PhoneLocking.qml:46
 #: ../wizard/qml/Pages//30-passwd-type.qml:95
 msgid "Passcode"
-msgstr ""
+msgstr "Код-пароль"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:47
 #: ../plugins/security-privacy//LockSecurity.qml:350
@@ -929,7 +929,7 @@ msgstr ""
 #: ../plugins/security-privacy//LockSecurity.qml:96
 #: ../plugins/security-privacy//LockSecurity.qml:384
 msgid "Change passcode…"
-msgstr ""
+msgstr "Змінити код-пароль…"
 
 #: ../plugins/security-privacy//LockSecurity.qml:98
 #: ../plugins/security-privacy//LockSecurity.qml:385
@@ -942,7 +942,7 @@ msgstr "Перемкнутися на рух пальцем"
 
 #: ../plugins/security-privacy//LockSecurity.qml:107
 msgid "Switch to passcode"
-msgstr ""
+msgstr "Перемкнутися на код-пароль"
 
 #: ../plugins/security-privacy//LockSecurity.qml:109
 msgid "Switch to passphrase"
@@ -950,7 +950,7 @@ msgstr "Перемкнутися на пароль"
 
 #: ../plugins/security-privacy//LockSecurity.qml:118
 msgid "Existing passcode"
-msgstr ""
+msgstr "Наявний код-пароль"
 
 #: ../plugins/security-privacy//LockSecurity.qml:120
 msgid "Existing passphrase"
@@ -958,7 +958,7 @@ msgstr "Наявні паролі"
 
 #: ../plugins/security-privacy//LockSecurity.qml:174
 msgid "Choose passcode"
-msgstr ""
+msgstr "Виберіть код-пароль"
 
 #: ../plugins/security-privacy//LockSecurity.qml:176
 msgid "Choose passphrase"
@@ -967,16 +967,16 @@ msgstr "Виберіть пароль"
 #: ../plugins/security-privacy//LockSecurity.qml:220
 #: ../wizard/qml/Pages//passwd-confirm.qml:48
 msgid "Confirm passcode"
-msgstr ""
+msgstr "Підтвердіть код-пароль"
 
 #: ../plugins/security-privacy//LockSecurity.qml:222
 #: ../wizard/qml/Pages//passwd-confirm.qml:47
 msgid "Confirm passphrase"
-msgstr "Підтвердить пароль"
+msgstr "Підтвердіть пароль"
 
 #: ../plugins/security-privacy//LockSecurity.qml:265
 msgid "Those passcodes don't match. Try again."
-msgstr ""
+msgstr "Введені коди-паролі не збігаються. Повторіть спробу"
 
 #: ../plugins/security-privacy//LockSecurity.qml:268
 msgid "Those passphrases don't match. Try again."
@@ -996,7 +996,7 @@ msgstr "рухом пальцем (без захисту)"
 
 #: ../plugins/security-privacy//LockSecurity.qml:349
 msgid "4-digit passcode"
-msgstr ""
+msgstr "4-цифровий код-пароль"
 
 #: ../plugins/security-privacy//LockSecurity.qml:351
 msgid "Swipe (no security)… "
@@ -1004,7 +1004,7 @@ msgstr "рухом пальцем (без захисту)… "
 
 #: ../plugins/security-privacy//LockSecurity.qml:352
 msgid "4-digit passcode…"
-msgstr ""
+msgstr "4-цифровий код-пароль"
 
 #: ../plugins/security-privacy//LockSecurity.qml:353
 msgid "Passphrase…"
@@ -1070,7 +1070,7 @@ msgstr "Програмне забезпечення не потребує оно
 
 #: ../plugins/system-update//PageComponent.qml:201
 msgid "Restarting…"
-msgstr ""
+msgstr "Перезавантаження…"
 
 #: ../plugins/system-update//PageComponent.qml:246
 msgid "Checking for updates…"
@@ -1102,7 +1102,7 @@ msgstr "Повторити"
 
 #: ../plugins/system-update//PageComponent.qml:401
 msgid "Install…"
-msgstr ""
+msgstr "Встановити…"
 
 #: ../plugins/system-update//PageComponent.qml:403
 msgid "Download"
@@ -1130,12 +1130,12 @@ msgstr "Встановлено"
 
 #: ../plugins/system-update//PageComponent.qml:452
 msgid "Downloading"
-msgstr ""
+msgstr "Завантаження"
 
 #: ../plugins/system-update//PageComponent.qml:463
 #, qt-format
 msgid "%1 of %2"
-msgstr ""
+msgstr "%1 з %2"
 
 #: ../plugins/system-update//PageComponent.qml:562
 msgid "Version: "
@@ -1665,6 +1665,8 @@ msgstr ""
 #: ../plugins/about//DevMode.qml:110
 msgid "You need a passcode or passphrase set to use Developer Mode."
 msgstr ""
+"Щоб скористатися режимо розробника, вам слід встановити код-пароль або "
+"просто пароль."
 
 #: ../plugins/cellular//HotspotSetup.qml:29
 msgid "Change hotspot setup"
@@ -1995,11 +1997,11 @@ msgstr "З’єднатися із Wi‑Fi"
 
 #: ../wizard/qml/Pages//40-wifi.qml:146
 msgid "Available networks…"
-msgstr ""
+msgstr "Доступні мережі…"
 
 #: ../wizard/qml/Pages//40-wifi.qml:147
 msgid "No available networks."
-msgstr ""
+msgstr "Немає доступних мереж."
 
 #: ../wizard/qml/Pages//40-wifi.qml:196
 #: ../wizard/qml/Pages//60-reporting.qml:50
@@ -2032,16 +2034,16 @@ msgstr "Завершити"
 
 #: ../wizard/qml/Pages//passwd-confirm.qml:51
 msgid "Sorry, incorrect passphrase."
-msgstr ""
+msgstr "Вибачте, помилковий пароль."
 
 #: ../wizard/qml/Pages//passwd-confirm.qml:51
 #: ../wizard/qml/Pages//passwd-confirm.qml:52
 msgid "Please try again."
-msgstr ""
+msgstr "Будь ласка, спробуйте ще раз!"
 
 #: ../wizard/qml/Pages//passwd-confirm.qml:52
 msgid "Sorry, incorrect passcode."
-msgstr ""
+msgstr "Вибачте, помилковий код-пароль."
 
 #: ../wizard/qml/Pages//60-reporting.qml:22
 msgid "Bug reporting"
@@ -2052,18 +2054,22 @@ msgid ""
 "Your phone is set up to automatically report errors to Canonical and its "
 "partners, the makers of the operating system."
 msgstr ""
+"Ваш телефон налаштовано на автоматичне надсилання звітів щодо помилок до "
+"Canonical та партнерських установ, виробників операційної системи."
 
 #: ../wizard/qml/Pages//60-reporting.qml:42
 msgid "This can be disabled here:"
-msgstr ""
+msgstr "Вимкнути це можна тут:"
 
 #: ../wizard/qml/Pages//60-reporting.qml:43
 msgid "System Settings &gt; Security &amp; Privacy"
-msgstr ""
+msgstr "Системні параметри &gt; Безпека &amp; Конфіденційність"
 
 #: ../wizard/qml/Pages//50-location.qml:53
 msgid "Use your mobile network and Wi-Fi to determine where you are"
 msgstr ""
+"Використовувати вашу мобільну мережу та Wi-Fi для визначення вашого місця "
+"перебування"
 
 #. TRANSLATORS: HERE is a trademark for Nokia's location service, you probably shouldn't translate it
 #: ../wizard/qml/Pages//50-location.qml:63
@@ -2071,10 +2077,12 @@ msgid ""
 "I have read and agreed to the HERE <a href='terms.qml'>Terms and "
 "Conditions</a>"
 msgstr ""
+"<a href='terms.qml'>Умови надання послуг</a> HERE прочитано. Погоджуюся з "
+"ними."
 
 #: ../wizard/qml/Pages//20-sim.qml:23
 msgid "Add a SIM card and restart your device"
-msgstr ""
+msgstr "Додайте SIM-картку і перезапустіть ваш пристрій"
 
 #: ../wizard/qml/Pages//20-sim.qml:53
 msgid "Without it, you won’t be able to make calls or use text messaging."
@@ -2098,19 +2106,19 @@ msgstr "Умови користування"
 
 #: ../wizard/qml/Pages//31-passwd-set.qml:48
 msgid "Enter passphrase"
-msgstr ""
+msgstr "Введіть пароль"
 
 #: ../wizard/qml/Pages//31-passwd-set.qml:49
 msgid "Choose your passcode"
-msgstr ""
+msgstr "Виберіть ваш код-пароль"
 
 #: ../wizard/qml/Pages//31-passwd-set.qml:56
 msgid "Passphrase must be 4 characters long"
-msgstr ""
+msgstr "Пароль має складатися принаймні з 4 символів"
 
 #: ../wizard/qml/Pages//30-passwd-type.qml:72
 msgid "Please select how you’d like to unlock your phone."
-msgstr ""
+msgstr "Будь ласка, виберіть спосіб розблокування вашого телефону."
 
 #: ../wizard/qml/Pages//30-passwd-type.qml:92
 msgid "Swipe"
@@ -2118,15 +2126,15 @@ msgstr "Рух пальцем"
 
 #: ../wizard/qml/Pages//30-passwd-type.qml:93
 msgid "No security"
-msgstr ""
+msgstr "Без захисту"
 
 #: ../wizard/qml/Pages//30-passwd-type.qml:96
 msgid "4 numbers"
-msgstr ""
+msgstr "4 цифри"
 
 #: ../wizard/qml/Pages//30-passwd-type.qml:99
 msgid "Numbers and letters"
-msgstr ""
+msgstr "Цифри і літери"
 
 #. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
 #: /home/mike/Work/code/ubuntu-system-settings/ui-refresh-take-6/obj-x86_64-linux-gnu/po/settings.js:2
@@ -2844,7 +2852,7 @@ msgstr "політ"
 
 #: ../plugins/security-privacy//securityprivacy.cpp:318
 msgid "Incorrect passcode. Try again."
-msgstr ""
+msgstr "Неправильний пароль. Спробуйте ще раз."
 
 #: ../plugins/security-privacy//securityprivacy.cpp:320
 msgid "Incorrect passphrase. Try again."
