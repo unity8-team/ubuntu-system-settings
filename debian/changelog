@@ -1,3 +1,21 @@
+ubuntu-system-settings (0.3+14.10.20141010-0ubuntu1) utopic; urgency=low
+
+  [ Michael Terry ]
+  * Complete the unlock security screens and update a host of other
+    small design issues. (LP: #1365034, LP: #1348362) (LP: #1365034,
+    #1348362)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 10 Oct 2014 18:02:19 +0000
+
+ubuntu-system-settings (0.3+14.10.20141009-0ubuntu1) utopic; urgency=low
+
+  [ Diego Sarmentero ]
+  * Improves in network backend. Detect network connection and show
+    "Connect to the internet..." message or retry on netword detected. .
+  * Detect account added on online accounts (LP: #1362149)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 09 Oct 2014 15:09:57 +0000
+
 ubuntu-system-settings (0.3+14.10.20141007-0ubuntu1) utopic; urgency=low
 
   [ jonas-drange ]

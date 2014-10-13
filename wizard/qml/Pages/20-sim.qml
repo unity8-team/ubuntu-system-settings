@@ -15,25 +15,42 @@
  */
 
 import QtQuick 2.0
+import MeeGo.QOfono 0.2
 import Ubuntu.Components 0.1
 import "../Components" as LocalComponents
 
 LocalComponents.Page {
-    title: i18n.tr("Add a SIM card")
+    title: i18n.tr("Add a SIM card and restart your device")
     forwardButtonSourceComponent: forwardButton
-    hasBackButton: false
+
+    // No need for skipValid, since OfonoManager does everything synchronously
+    skip: !manager.available || manager.modems.length === 0 || simManager0.present || simManager1.present
+
+    OfonoManager {
+        id: manager
+    }
+
+    // Ideally we would query the system more cleverly than hardcoding two
+    // modems.  But we don't yet have a more clever way.  :(
+    OfonoSimManager {
+        id: simManager0
+        modemPath: manager.modems.length >= 1 ? manager.modems[0] : ""
+    }
+
+    OfonoSimManager {
+        id: simManager1
+        modemPath: manager.modems.length >= 2 ? manager.modems[1] : ""
+    }
 
     Column {
         anchors.fill: content
+        spacing: units.gu(4)
 
         Label {
             anchors.left: parent.left
             anchors.right: parent.right
             wrapMode: Text.Wrap
-            text: i18n.tr("Please insert a SIM card before you continue.") +
-                  "\n\n" +
-                  i18n.tr("Without it, you won’t be able to make calls or use text messaging.") +
-                  "\n"
+            text: i18n.tr("Without it, you won’t be able to make calls or use text messaging.")
         }
 
         Image {
@@ -48,7 +65,6 @@ LocalComponents.Page {
         id: forwardButton
         LocalComponents.StackButton {
             text: i18n.tr("Skip")
-            rightArrow: true
             onClicked: pageStack.next()
         }
     }
