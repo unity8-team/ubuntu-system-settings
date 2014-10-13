@@ -38,7 +38,7 @@ Column {
         model: sim.radioSettings.modemTechnologies
 
         delegate: OptionSelectorDelegate {
-            objectName: "radio_" + modelData
+            objectName: sim.path + "_radio_" + modelData
             text: {
                 return {
                     'gsm': i18n.tr("2G only (saves battery)"),

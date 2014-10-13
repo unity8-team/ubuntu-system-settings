@@ -3,7 +3,6 @@ set(QML_SOURCES
     DefaultSim.qml
     MultiSim.qml
     NoSim.qml
-    RadioMultiSim.qml
     RadioSingleSim.qml
     Sim.qml
     SimEditor.qml

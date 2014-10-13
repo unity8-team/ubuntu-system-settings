@@ -226,6 +226,9 @@ class CellularPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
     def disable_data(self):
         self._set_data(False)
 
+    def disable_datas(self):
+        self.select_sim_for_data('off')
+
     @autopilot.logging.log_action(logger.debug)
     def _set_data(self, data):
         chk = self.select_single(objectName='data')
@@ -239,40 +242,55 @@ class CellularPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
         return self.select_single(objectName='data').checked
 
     @autopilot.logging.log_action(logger.debug)
-    def enable_roaming(self):
-        self._set_roaming(True)
+    def enable_roaming(self, timeout=10):
+        self._set_roaming(True, timeout=timeout)
 
     @autopilot.logging.log_action(logger.debug)
-    def disable_roaming(self):
-        self._set_roaming(False)
+    def disable_roaming(self, timeout=10):
+        self._set_roaming(False, timeout=timeout)
 
     @autopilot.logging.log_action(logger.debug)
-    def _set_roaming(self, roaming):
+    def _set_roaming(self, roaming, timeout):
         chk = self.select_single(objectName='roaming')
         if roaming:
-            chk.check()
+            chk.check(timeout=timeout)
         else:
-            chk.uncheck()
+            chk.uncheck(timeout=timeout)
 
     @autopilot.logging.log_action(logger.debug)
-    def set_connection_type(self, radio_type):
-        self._set_connection_type(radio_type)
+    def set_connection_type(self, radio_type, sim='/ril_0',
+                            scroll_to_and_click=None):
+        self._set_connection_type(radio_type, sim, scroll_to_and_click)
 
     @autopilot.logging.log_action(logger.debug)
-    def _set_connection_type(self, radio_type):
+    def _set_connection_type(self, radio_type, sim, scroll_to_and_click):
         t = self.select_single('OptionSelectorDelegate',
-                               objectName='radio_%s' % radio_type)
+                               objectName='%s_radio_%s' % (sim, radio_type))
+        if scroll_to_and_click:
+            scroll_to_and_click(t)
+        else:
+            t.swipe_into_view()
+
         self.pointing_device.click_object(t)
 
     @autopilot.logging.log_action(logger.debug)
-    def change_carrier(self, carrier):
-        carrierPage = self._click_carrier()
+    def change_carrier(self, carrier, sim=None):
+        if sim:
+            carriersPage = self._click_carriers()
+            carrierPage = carriersPage.select_sim(sim)
+        else:
+            carrierPage = self._click_carrier()
+
         carrierPage.set_manual()
         carrierPage.set_carrier(carrier)
 
     @autopilot.logging.log_action(logger.debug)
-    def get_carrier(self):
-        carrierPage = self._click_carrier()
+    def get_carrier(self, sim=None):
+        if sim:
+            carriersPage = self._click_carriers()
+            carrierPage = carriersPage.select_sim(sim)
+        else:
+            carrierPage = self._click_carrier()
         return carrierPage.get_carrier()
 
     @autopilot.logging.log_action(logger.debug)
@@ -283,6 +301,13 @@ class CellularPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
             objectName='chooseCarrierPage')
 
     @autopilot.logging.log_action(logger.debug)
+    def _click_carriers(self):
+        item = self.select_single(objectName='carriers')
+        self.pointing_device.click_object(item)
+        return self.get_root_instance().wait_select_single(
+            objectName='chooseCarriersPage')
+
+    @autopilot.logging.log_action(logger.debug)
     def select_sim_for_data(self, sim):
         self._select_sim_for_data(sim)
 
@@ -290,7 +315,6 @@ class CellularPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
     def _select_sim_for_data(self, sim):
         item = self.select_single(objectName='use%s' % sim)
         self.pointing_device.click_object(item)
-        sleep(4)
 
     @autopilot.logging.log_action(logger.debug)
     def select_sim_for_calls(self, sim):
@@ -302,28 +326,59 @@ class CellularPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
 
     @autopilot.logging.log_action(logger.debug)
     def set_name(self, sim, name):
-        pass
+        self._set_name(sim, name)
+
+    def get_name(self, sim):
+        obj = self.select_single(
+            objectName="label_%s" % sim)
+        return obj.text
+
+    def _set_name(self, sim, name):
+        obj = self.select_single(
+            objectName="edit_name_%s" % sim)
+        self.pointing_device.click_object(obj)
+        ok = self.select_single('Button', objectName="doRename")
+
+        field = self.select_single('TextField', objectName="nameField")
+        field.write(name)
+        self.pointing_device.click_object(ok)
+
+    # def get_sim_name(self, num):
+
+    # def rename_sim(self, num, new_name):
+    #     obj = self.system_settings.main_view.cellular_page.select_single(
+    #         objectName="simEditor"
+    #     ).select_single(objectName="editSim%d" % num)
+    #     self.system_settings.main_view.scroll_to_and_click(obj)
+    #     field = self.system_settings.main_view.cellular_page.select_single(
+    #         objectName="nameField"
+    #     )
+    #     self.system_settings.main_view.scroll_to_and_click(field)
+    #     self.system_settings.main_view.scroll_to_and_click(
+    #         field.select_single(objectName="clear_button"))
+    #     self.keyboard.type(new_name)
+    #     self.system_settings.main_view.scroll_to_and_click(
+    #         self.system_settings.main_view.cellular_page.select_single(
+    #             objectName=
+        # item = self.select_single(objectName='use%s' % sim)
+        # self.pointing_device.click_object(item)
+        # "edit_name_" + sims[1].path
 
 
 class PageChooseCarriers(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
 
     """Autopilot helper for carrier selection page (multisim)."""
 
-    @classmethod
-    def validate_dbus_object(cls, path, state):
-        name = introspection.get_classname_from_path(path)
-        if name == b'PageComponent':
-            if state['objectName'][1] == 'chooseCarriersPage':
-                return True
-        return False
+    @autopilot.logging.log_action(logger.debug)
+    def select_sim(self, sim):
+        return self._select_sim(sim)
 
     @autopilot.logging.log_action(logger.debug)
-    def enable_cellular_data(self):
-        pass
-
-    @autopilot.logging.log_action(logger.debug)
-    def disable_cellular_data(self):
-        pass
+    def _select_sim(self, sim):
+        item = self.select_single(objectName='%s_carriers' % sim)
+        self.pointing_device.click_object(item)
+        return self.get_root_instance().wait_select_single(
+            objectName='chooseCarrierPage')
 
 
 class PageChooseCarrier(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
@@ -347,6 +402,9 @@ class PageChooseCarrier(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
         return selected.select_single('Label', visible=True).text
 
     def set_carrier(self, carrier):
+        # wait for animation, since page.animationRunning.wait_for(False)
+        # does not work?
+        sleep(0.5)
         item = self.select_single(text=carrier)
         self.pointing_device.click_object(item)
 

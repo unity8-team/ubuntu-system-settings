@@ -81,11 +81,11 @@ Column {
 
     ListItem.Standard {
         id: dataRoamingItem
-        objectName: "dataRoamingSwitch"
         text: i18n.tr("Data roaming")
         enabled: use.selectedIndex !== 0
         control: Switch {
             id: dataRoamingControl
+            objectName: "roaming"
             onClicked: poweredSim.connMan.roamingAllowed = checked
         }
         showDivider: false

@@ -48,8 +48,6 @@ Column {
         anchors { left: parent.left; right: parent.right }
     }
 
-    ListItem.Divider {}
-
     ListItem.SingleValue {
         text : i18n.tr("Hotspot disabled because Wi-Fi is off.")
         visible: showAllUI && !hotspotItem.visible
@@ -72,14 +70,12 @@ Column {
         visible: showAllUI
     }
 
-    ListItem.Divider {
-        visible: hotspotItem.visible || dataUsage.visible
-    }
+    ListItem.Divider {}
 
     ListItem.SingleValue {
         text: i18n.tr("Carriers")
         id: chooseCarrier
-        objectName: "chooseCarrier"
+        objectName: "carriers"
         progression: enabled
         showDivider: false
         onClicked: {
@@ -99,6 +95,40 @@ Column {
 
     DefaultSim {
         anchors { left: parent.left; right: parent.right }
+    }
+
+    ListItem.Divider {}
+
+    function techToString (tech) {
+        return {
+            'gsm': i18n.tr("2G only (saves battery)"),
+            'umts': i18n.tr("2G/3G (faster)"),
+            'lte': i18n.tr("2G/3G/4G (faster)")
+        }[tech]
+    }
+
+    ListItem.ItemSelector {
+        id:radio
+        expanded: true
+        text: i18n.tr("Connection type:")
+        model: poweredSim.radioSettings.modemTechnologies
+        delegate: OptionSelectorDelegate {
+            objectName: poweredSim.path + "_radio_" + modelData
+            text: techToString(modelData)
+        }
+        visible: poweredSim
+        onDelegateClicked: {
+            poweredSim.radioSettings.technologyPreference = model[index];
+        }
+    }
+
+    Connections {
+        target: poweredSim.radioSettings
+        onTechnologyPreferenceChanged: {
+            radio.selectedIndex =
+                poweredSim.radioSettings.modemTechnologies.indexOf(preference)
+        }
+        ignoreUnknownSignals: true
     }
 
     GSettings {
