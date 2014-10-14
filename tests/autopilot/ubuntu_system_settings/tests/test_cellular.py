@@ -72,14 +72,11 @@ class CellularTestCase(CellularBaseTestCase):
             self.assertThat(get_pref, Eventually(Equals(pref)))
 
     def test_current_carrier(self):
-        self.assertThat(self.cellular_page.get_carrier(), Equals('fake.tel'))
         self.assertThat(lambda: self.modem_0.Get(NETREG_IFACE, 'Name'),
                         Eventually(Equals('fake.tel')))
 
     def test_change_carrier(self):
         self.cellular_page.change_carrier('my.cool.telco')
-        self.assertThat(self.cellular_page.get_carrier(),
-                        Equals('my.cool.telco'))
 
     def test_no_forbidden_network(self):
         """ Ensures that a forbidden network is not shown """
@@ -147,28 +144,20 @@ class DualSimCellularTestCase(CellularBaseTestCase):
             self.assertThat(get_pref, Eventually(Equals(pref)))
 
     def test_current_carrier_sim1(self):
-        sim = '/ril_0'
-        self.assertThat(self.cellular_page.get_carrier(sim=sim),
-                        Equals('fake.tel'))
         self.assertThat(lambda: self.modem_0.Get(NETREG_IFACE, 'Name'),
                         Eventually(Equals('fake.tel')))
 
     def test_change_carrier_sim1(self):
         sim = '/ril_0'
         self.cellular_page.change_carrier('my.cool.telco', sim=sim)
-        self.cellular_page.get_carrier(sim=sim)
 
     def test_current_carrier_sim2(self):
-        sim = '/ril_1'
-        self.assertThat(self.cellular_page.get_carrier(sim=sim),
-                        Equals('fake.tel'))
         self.assertThat(lambda: self.modem_1.Get(NETREG_IFACE, 'Name'),
                         Eventually(Equals('fake.tel')))
 
     def test_change_carrier_sim2(self):
         sim = '/ril_1'
         self.cellular_page.change_carrier('my.cool.telco', sim=sim)
-        self.cellular_page.get_carrier(sim=sim)
 
     def test_change_sim1_name(self):
         gsettings = Gio.Settings.new('com.ubuntu.phone')

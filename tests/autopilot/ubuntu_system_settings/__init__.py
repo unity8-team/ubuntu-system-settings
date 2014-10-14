@@ -285,15 +285,6 @@ class CellularPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
         carrierPage.set_carrier(carrier)
 
     @autopilot.logging.log_action(logger.debug)
-    def get_carrier(self, sim=None):
-        if sim:
-            carriersPage = self._click_carriers()
-            carrierPage = carriersPage.select_sim(sim)
-        else:
-            carrierPage = self._click_carrier()
-        return carrierPage.get_carrier()
-
-    @autopilot.logging.log_action(logger.debug)
     def _click_carrier(self):
         item = self.select_single(objectName='carrier')
         self.pointing_device.click_object(item)
@@ -373,12 +364,6 @@ class PageChooseCarrier(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
     def set_automatic(self):
         item = self.select_single(text='Automatically')
         self.pointing_device.click_object(item)
-
-    def get_carrier(self):
-        carriers = self.select_single(objectName='carriers')
-        selected = carriers.select_single('OptionSelectorDelegate',
-                                          selected=True)
-        return selected.select_single('Label', visible=True).text
 
     def set_carrier(self, carrier):
         # wait for animation, since page.animationRunning.wait_for(False)
