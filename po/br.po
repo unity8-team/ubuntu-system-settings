@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-10-03 09:12-0400\n"
-"PO-Revision-Date: 2014-09-29 06:44+0000\n"
+"PO-Revision-Date: 2014-10-13 06:31+0000\n"
 "Last-Translator: Fohanno Thierry <thierry.fohanno@ofis-bzh.org>\n"
 "Language-Team: Breton <br@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2014-10-11 05:08+0000\n"
+"X-Launchpad-Export-Date: 2014-10-14 07:11+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 
 #: ubuntu-system-settings.desktop.in.in.h:1 ../src/qml/MainWindow.qml:112
@@ -693,7 +693,7 @@ msgstr "Hini ebet"
 #: ../plugins/security-privacy//PhoneLocking.qml:46
 #: ../wizard/qml/Pages//30-passwd-type.qml:95
 msgid "Passcode"
-msgstr ""
+msgstr "Kod-tremen"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:47
 #: ../plugins/security-privacy//LockSecurity.qml:350
@@ -917,7 +917,7 @@ msgstr ""
 #: ../plugins/security-privacy//LockSecurity.qml:96
 #: ../plugins/security-privacy//LockSecurity.qml:384
 msgid "Change passcode…"
-msgstr ""
+msgstr "Cheñch kod-tremen..."
 
 #: ../plugins/security-privacy//LockSecurity.qml:98
 #: ../plugins/security-privacy//LockSecurity.qml:385
@@ -930,7 +930,7 @@ msgstr "Prennañ o risklañ"
 
 #: ../plugins/security-privacy//LockSecurity.qml:107
 msgid "Switch to passcode"
-msgstr ""
+msgstr "Tremen d'ar ger-tremen"
 
 #: ../plugins/security-privacy//LockSecurity.qml:109
 msgid "Switch to passphrase"
@@ -938,7 +938,7 @@ msgstr "Prennañ gant ar frazenn-dremen"
 
 #: ../plugins/security-privacy//LockSecurity.qml:118
 msgid "Existing passcode"
-msgstr ""
+msgstr "Ger-tremen a zo anezhañ dija"
 
 #: ../plugins/security-privacy//LockSecurity.qml:120
 msgid "Existing passphrase"
@@ -946,7 +946,7 @@ msgstr "Frazenn-dremen a vremañ"
 
 #: ../plugins/security-privacy//LockSecurity.qml:174
 msgid "Choose passcode"
-msgstr ""
+msgstr "Choaz ur ger-tremen"
 
 #: ../plugins/security-privacy//LockSecurity.qml:176
 msgid "Choose passphrase"
@@ -955,7 +955,7 @@ msgstr "Dibabit ho frazenn-dremen"
 #: ../plugins/security-privacy//LockSecurity.qml:220
 #: ../wizard/qml/Pages//passwd-confirm.qml:48
 msgid "Confirm passcode"
-msgstr ""
+msgstr "Kadarnaat ar ger-tremen"
 
 #: ../plugins/security-privacy//LockSecurity.qml:222
 #: ../wizard/qml/Pages//passwd-confirm.qml:47
@@ -964,7 +964,7 @@ msgstr "Kadarnaat ar frazenn-dremen"
 
 #: ../plugins/security-privacy//LockSecurity.qml:265
 msgid "Those passcodes don't match. Try again."
-msgstr ""
+msgstr "Ne glot ket ar gerioù-tremen-se. Esaeit en-dro."
 
 #: ../plugins/security-privacy//LockSecurity.qml:268
 msgid "Those passphrases don't match. Try again."
@@ -984,7 +984,7 @@ msgstr "Ur riskladenn (tamm surentez ebet)"
 
 #: ../plugins/security-privacy//LockSecurity.qml:349
 msgid "4-digit passcode"
-msgstr ""
+msgstr "Ger-tremen gant 4 sifr"
 
 #: ../plugins/security-privacy//LockSecurity.qml:351
 msgid "Swipe (no security)… "
@@ -992,7 +992,7 @@ msgstr "Riskladenn (tamm surentez ebet)... "
 
 #: ../plugins/security-privacy//LockSecurity.qml:352
 msgid "4-digit passcode…"
-msgstr ""
+msgstr "Ger-tremen gant 4 sifr..."
 
 #: ../plugins/security-privacy//LockSecurity.qml:353
 msgid "Passphrase…"
@@ -1056,7 +1056,7 @@ msgstr "Ar meziant n'en deus ket ezhomm da vezañ hizivaet"
 
 #: ../plugins/system-update//PageComponent.qml:201
 msgid "Restarting…"
-msgstr ""
+msgstr "Oc'h adloc'hañ..."
 
 #: ../plugins/system-update//PageComponent.qml:246
 msgid "Checking for updates…"
@@ -1086,7 +1086,7 @@ msgstr "Esaeañ en-dro"
 
 #: ../plugins/system-update//PageComponent.qml:401
 msgid "Install…"
-msgstr ""
+msgstr "Staliañ..."
 
 #: ../plugins/system-update//PageComponent.qml:403
 msgid "Download"
@@ -1114,12 +1114,12 @@ msgstr "Staliet"
 
 #: ../plugins/system-update//PageComponent.qml:452
 msgid "Downloading"
-msgstr ""
+msgstr "O pellgargañ"
 
 #: ../plugins/system-update//PageComponent.qml:463
 #, qt-format
 msgid "%1 of %2"
-msgstr ""
+msgstr "%1 diwar %2"
 
 #: ../plugins/system-update//PageComponent.qml:562
 msgid "Version: "
@@ -1649,6 +1649,8 @@ msgstr ""
 #: ../plugins/about//DevMode.qml:110
 msgid "You need a passcode or passphrase set to use Developer Mode."
 msgstr ""
+"Ezhomm ho peus da gaout ur ger-tremen pe ur frazenn-dremen da implijout ar "
+"Mod Diorroer."
 
 #: ../plugins/cellular//HotspotSetup.qml:29
 msgid "Change hotspot setup"
@@ -1973,11 +1975,11 @@ msgstr "Kevreañ ouzh ar Wi-Fi"
 
 #: ../wizard/qml/Pages//40-wifi.qml:146
 msgid "Available networks…"
-msgstr ""
+msgstr "Rouedadoù a c'haller kaout..."
 
 #: ../wizard/qml/Pages//40-wifi.qml:147
 msgid "No available networks."
-msgstr ""
+msgstr "N'eus rouedad ebet da gaout."
 
 #: ../wizard/qml/Pages//40-wifi.qml:196
 #: ../wizard/qml/Pages//60-reporting.qml:50
@@ -2010,16 +2012,16 @@ msgstr "Echuiñ"
 
 #: ../wizard/qml/Pages//passwd-confirm.qml:51
 msgid "Sorry, incorrect passphrase."
-msgstr ""
+msgstr "Siwazh, frazenn-dremen direizh"
 
 #: ../wizard/qml/Pages//passwd-confirm.qml:51
 #: ../wizard/qml/Pages//passwd-confirm.qml:52
 msgid "Please try again."
-msgstr ""
+msgstr "esaeit en-dro, mar plij."
 
 #: ../wizard/qml/Pages//passwd-confirm.qml:52
 msgid "Sorry, incorrect passcode."
-msgstr ""
+msgstr "Siwazh, kod-tremen direizh"
 
 #: ../wizard/qml/Pages//60-reporting.qml:22
 msgid "Bug reporting"
@@ -2030,18 +2032,20 @@ msgid ""
 "Your phone is set up to automatically report errors to Canonical and its "
 "partners, the makers of the operating system."
 msgstr ""
+"Arventennet eo ho pellgomzer evit titourañ ent emgefre ar fazioù da "
+"gCanonical ha d'e gevelerien, ar re o deus savet ar reizhiad korvoiñ."
 
 #: ../wizard/qml/Pages//60-reporting.qml:42
 msgid "This can be disabled here:"
-msgstr ""
+msgstr "Ne c'hall ket an dra-mañ bezañ diweredekaet amañ :"
 
 #: ../wizard/qml/Pages//60-reporting.qml:43
 msgid "System Settings &gt; Security &amp; Privacy"
-msgstr ""
+msgstr "Arventennoù ar Reizhiad &gt; Surentez &amp; Buhez prevez"
 
 #: ../wizard/qml/Pages//50-location.qml:53
 msgid "Use your mobile network and Wi-Fi to determine where you are"
-msgstr ""
+msgstr "Implijout ho rouedad hezoug hag ar Wiki evit gouzout pelec'h emaoc'h"
 
 #. TRANSLATORS: HERE is a trademark for Nokia's location service, you probably shouldn't translate it
 #: ../wizard/qml/Pages//50-location.qml:63
@@ -2049,10 +2053,12 @@ msgid ""
 "I have read and agreed to the HERE <a href='terms.qml'>Terms and "
 "Conditions</a>"
 msgstr ""
+"Lennet am eus an <a href='terms.qml'>Termenoù ha Divizoù implij</a> hag "
+"asantiñ a ran dezho AMAÑ"
 
 #: ../wizard/qml/Pages//20-sim.qml:23
 msgid "Add a SIM card and restart your device"
-msgstr ""
+msgstr "Lakait ur gartenn SIM hag adloc'hit ho penveg"
 
 #: ../wizard/qml/Pages//20-sim.qml:53
 msgid "Without it, you won’t be able to make calls or use text messaging."
@@ -2076,19 +2082,20 @@ msgstr "Penndivizoù implij"
 
 #: ../wizard/qml/Pages//31-passwd-set.qml:48
 msgid "Enter passphrase"
-msgstr ""
+msgstr "Merkañ ar frazenn-dremen"
 
 #: ../wizard/qml/Pages//31-passwd-set.qml:49
 msgid "Choose your passcode"
-msgstr ""
+msgstr "Choaz ho ker-tremen"
 
 #: ../wizard/qml/Pages//31-passwd-set.qml:56
 msgid "Passphrase must be 4 characters long"
-msgstr ""
+msgstr "4 arouezenn a rank bezañ er frazenn-dremen"
 
 #: ../wizard/qml/Pages//30-passwd-type.qml:72
 msgid "Please select how you’d like to unlock your phone."
 msgstr ""
+"Diuzit e peseurt mod e fell deoc'h dibrennañ ho pellgomzer, mar plij."
 
 #: ../wizard/qml/Pages//30-passwd-type.qml:92
 msgid "Swipe"
@@ -2096,15 +2103,15 @@ msgstr "Riklañ"
 
 #: ../wizard/qml/Pages//30-passwd-type.qml:93
 msgid "No security"
-msgstr ""
+msgstr "Tamm surentez ebet"
 
 #: ../wizard/qml/Pages//30-passwd-type.qml:96
 msgid "4 numbers"
-msgstr ""
+msgstr "4 sifr"
 
 #: ../wizard/qml/Pages//30-passwd-type.qml:99
 msgid "Numbers and letters"
-msgstr ""
+msgstr "Sifroù ha lizherennoù"
 
 #. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
 #: /home/mike/Work/code/ubuntu-system-settings/ui-refresh-take-6/obj-x86_64-linux-gnu/po/settings.js:2
@@ -2822,7 +2829,7 @@ msgstr "nijerez"
 
 #: ../plugins/security-privacy//securityprivacy.cpp:318
 msgid "Incorrect passcode. Try again."
-msgstr ""
+msgstr "Ger-tremen direizh. Esaeit en-dro."
 
 #: ../plugins/security-privacy//securityprivacy.cpp:320
 msgid "Incorrect passphrase. Try again."
