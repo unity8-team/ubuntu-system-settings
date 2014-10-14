@@ -74,6 +74,10 @@ ItemPage {
                     onCheckedChanged: backendInfo.silentMode = checked
                 }
                 text: i18n.tr("Silent Mode")
+                showDivider: false
+            }
+
+            ListItem.Divider {
             }
 
             ListItem.Header {
@@ -113,11 +117,17 @@ ItemPage {
                 minIcon: "image://theme/audio-volume-low" 
                 maxIcon: "image://theme/audio-volume-high" 
                 onUpdated: soundActionGroup.volume.updateState(value);
+                showDivider: highVolume.visible
             }
 
             ListItem.Standard {
+                id: highVolume
                 visible: false
                 text: i18n.tr("High volume can damage your hearing.")
+                showDivider: false
+            }
+
+            ListItem.Divider {
             }
 
             ListItem.Header {
@@ -163,6 +173,10 @@ ItemPage {
                     onCheckedChanged: backendInfo.dialpadSoundsEnabled = checked
                 }
                 text: i18n.tr("Dialpad sounds")
+                showDivider: false
+            }
+
+            ListItem.Divider {
             }
 
             ListItem.Header {
@@ -198,6 +212,10 @@ ItemPage {
                     onCheckedChanged: backendInfo.incomingMessageVibrateSilentMode = checked
                 }
                 text: i18n.tr("Vibrate in Silent Mode")
+                showDivider: false
+            }
+
+            ListItem.Divider {
             }
 
             ListItem.Header {
@@ -213,9 +231,12 @@ ItemPage {
 
                     onClicked: keyboardSettings.keyPressFeedback = checked
                 }
+
+                showDivider: lockSound.visible
             }
 
             ListItem.Standard {
+                id: lockSound
                 control: Switch {
                     checked: false
                 }
