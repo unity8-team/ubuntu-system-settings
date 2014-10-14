@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-10-03 09:12-0400\n"
-"PO-Revision-Date: 2014-10-04 01:04+0000\n"
+"PO-Revision-Date: 2014-10-13 09:30+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Fòram na Gàidhlig\n"
 "MIME-Version: 1.0\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 || n==11) ? 0 : (n==2 || n==12) ? 1 : "
 "(n > 2 && n < 20) ? 2 : 3;\n"
-"X-Launchpad-Export-Date: 2014-10-11 05:09+0000\n"
+"X-Launchpad-Export-Date: 2014-10-14 07:11+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 "Language: gd\n"
 
@@ -699,7 +699,7 @@ msgstr "Chan eil gin"
 #: ../plugins/security-privacy//PhoneLocking.qml:46
 #: ../wizard/qml/Pages//30-passwd-type.qml:95
 msgid "Passcode"
-msgstr ""
+msgstr "Còd-faire"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:47
 #: ../plugins/security-privacy//LockSecurity.qml:350
@@ -930,7 +930,7 @@ msgstr ""
 #: ../plugins/security-privacy//LockSecurity.qml:96
 #: ../plugins/security-privacy//LockSecurity.qml:384
 msgid "Change passcode…"
-msgstr ""
+msgstr "Atharraich an còd-faire…"
 
 #: ../plugins/security-privacy//LockSecurity.qml:98
 #: ../plugins/security-privacy//LockSecurity.qml:385
@@ -943,7 +943,7 @@ msgstr "Cleachd grad-shlaighdeadh"
 
 #: ../plugins/security-privacy//LockSecurity.qml:107
 msgid "Switch to passcode"
-msgstr ""
+msgstr "Gearr leum gu còd-faire"
 
 #: ../plugins/security-privacy//LockSecurity.qml:109
 msgid "Switch to passphrase"
@@ -951,7 +951,7 @@ msgstr "Cleachd abairt-fhaire"
 
 #: ../plugins/security-privacy//LockSecurity.qml:118
 msgid "Existing passcode"
-msgstr ""
+msgstr "Còd-faire a tha ann"
 
 #: ../plugins/security-privacy//LockSecurity.qml:120
 msgid "Existing passphrase"
@@ -959,7 +959,7 @@ msgstr "An abairt-fhaire làithreach"
 
 #: ../plugins/security-privacy//LockSecurity.qml:174
 msgid "Choose passcode"
-msgstr ""
+msgstr "Tagh còd-faire"
 
 #: ../plugins/security-privacy//LockSecurity.qml:176
 msgid "Choose passphrase"
@@ -968,7 +968,7 @@ msgstr "Tagh abairt-fhaire"
 #: ../plugins/security-privacy//LockSecurity.qml:220
 #: ../wizard/qml/Pages//passwd-confirm.qml:48
 msgid "Confirm passcode"
-msgstr ""
+msgstr "Dearbhaich an còd-faire"
 
 #: ../plugins/security-privacy//LockSecurity.qml:222
 #: ../wizard/qml/Pages//passwd-confirm.qml:47
@@ -977,7 +977,7 @@ msgstr "Dearbh an abairt-fhaire"
 
 #: ../plugins/security-privacy//LockSecurity.qml:265
 msgid "Those passcodes don't match. Try again."
-msgstr ""
+msgstr "Chan eil an dà chòd-faire co-ionnann. feuch ris a-rithist."
 
 #: ../plugins/security-privacy//LockSecurity.qml:268
 msgid "Those passphrases don't match. Try again."
@@ -997,7 +997,7 @@ msgstr "Grad-shlaighdeadh (gun tèarainteachd)"
 
 #: ../plugins/security-privacy//LockSecurity.qml:349
 msgid "4-digit passcode"
-msgstr ""
+msgstr "Còd-faire de 4 àireamhan"
 
 #: ../plugins/security-privacy//LockSecurity.qml:351
 msgid "Swipe (no security)… "
@@ -1005,7 +1005,7 @@ msgstr "Grad-shlaighdeadh (gun tèarainteachd)… "
 
 #: ../plugins/security-privacy//LockSecurity.qml:352
 msgid "4-digit passcode…"
-msgstr ""
+msgstr "Còd-faire de 4 àireamhan…"
 
 #: ../plugins/security-privacy//LockSecurity.qml:353
 msgid "Passphrase…"
@@ -1071,7 +1071,7 @@ msgstr "Tha am bathar-bog cho ùr 's a ghabhas"
 
 #: ../plugins/system-update//PageComponent.qml:201
 msgid "Restarting…"
-msgstr ""
+msgstr "'Ga thòiseachadh às ùr…"
 
 #: ../plugins/system-update//PageComponent.qml:246
 msgid "Checking for updates…"
@@ -1105,7 +1105,7 @@ msgstr "Feuch ris a-rithist"
 
 #: ../plugins/system-update//PageComponent.qml:401
 msgid "Install…"
-msgstr ""
+msgstr "Stàlaich…"
 
 #: ../plugins/system-update//PageComponent.qml:403
 msgid "Download"
@@ -1133,12 +1133,12 @@ msgstr "Air a stàladh"
 
 #: ../plugins/system-update//PageComponent.qml:452
 msgid "Downloading"
-msgstr ""
+msgstr "'Ga luchdadh a-nuas"
 
 #: ../plugins/system-update//PageComponent.qml:463
 #, qt-format
 msgid "%1 of %2"
-msgstr ""
+msgstr "%1 à %2"
 
 #: ../plugins/system-update//PageComponent.qml:562
 msgid "Version: "
@@ -1672,6 +1672,8 @@ msgstr ""
 #: ../plugins/about//DevMode.qml:110
 msgid "You need a passcode or passphrase set to use Developer Mode."
 msgstr ""
+"Feumaidh tu còd-faire no abairt-fhaire a shuidheachadh mus cleachd thu modh "
+"an luchd-leasachaidh."
 
 #: ../plugins/cellular//HotspotSetup.qml:29
 msgid "Change hotspot setup"
@@ -2005,11 +2007,11 @@ msgstr "Ceangail ri Wi-Fi"
 
 #: ../wizard/qml/Pages//40-wifi.qml:146
 msgid "Available networks…"
-msgstr ""
+msgstr "Lìonraidhean ri làimh…"
 
 #: ../wizard/qml/Pages//40-wifi.qml:147
 msgid "No available networks."
-msgstr ""
+msgstr "Chan eil lìonra ri làimh."
 
 #: ../wizard/qml/Pages//40-wifi.qml:196
 #: ../wizard/qml/Pages//60-reporting.qml:50
@@ -2042,16 +2044,16 @@ msgstr "Crìochnaich"
 
 #: ../wizard/qml/Pages//passwd-confirm.qml:51
 msgid "Sorry, incorrect passphrase."
-msgstr ""
+msgstr "Duilich ach tha an abairt-fhaire cearr."
 
 #: ../wizard/qml/Pages//passwd-confirm.qml:51
 #: ../wizard/qml/Pages//passwd-confirm.qml:52
 msgid "Please try again."
-msgstr ""
+msgstr "Feuch ris a-rithist."
 
 #: ../wizard/qml/Pages//passwd-confirm.qml:52
 msgid "Sorry, incorrect passcode."
-msgstr ""
+msgstr "Duilich ach tha an còd-faire cearr."
 
 #: ../wizard/qml/Pages//60-reporting.qml:22
 msgid "Bug reporting"
@@ -2062,18 +2064,22 @@ msgid ""
 "Your phone is set up to automatically report errors to Canonical and its "
 "partners, the makers of the operating system."
 msgstr ""
+"Chaidh am fòn agad a shuidheachadh gus innse mu mhearachdan gu fèin-"
+"obrachail do Chanonical  's a chom-pàirtichean a rinn an siostam-obrachaidh "
+"seo."
 
 #: ../wizard/qml/Pages//60-reporting.qml:42
 msgid "This can be disabled here:"
-msgstr ""
+msgstr "'S urrainn dhut seo a chur à comas an-seo:"
 
 #: ../wizard/qml/Pages//60-reporting.qml:43
 msgid "System Settings &gt; Security &amp; Privacy"
-msgstr ""
+msgstr "Roghainnean an t-siostaim &gt; Tèarainteachd ⁊ prìobhaideachd"
 
 #: ../wizard/qml/Pages//50-location.qml:53
 msgid "Use your mobile network and Wi-Fi to determine where you are"
 msgstr ""
+"Cleachd lìonra an fhòn-làimhe no Wi-Fi gus faighinn a-mach far a bheil thu"
 
 #. TRANSLATORS: HERE is a trademark for Nokia's location service, you probably shouldn't translate it
 #: ../wizard/qml/Pages//50-location.qml:63
@@ -2081,10 +2087,12 @@ msgid ""
 "I have read and agreed to the HERE <a href='terms.qml'>Terms and "
 "Conditions</a>"
 msgstr ""
+"Tha mi air na <a href='terms.qml'>teirmichean is cumhaichean</a> aig HERE a "
+"leughadh 's air aontachadh riutha"
 
 #: ../wizard/qml/Pages//20-sim.qml:23
 msgid "Add a SIM card and restart your device"
-msgstr ""
+msgstr "Cuir cairt SIM ris 's tòisich an uidheam agad às ùr"
 
 #: ../wizard/qml/Pages//20-sim.qml:53
 msgid "Without it, you won’t be able to make calls or use text messaging."
@@ -2108,19 +2116,19 @@ msgstr "Teirmichean ⁊ cumhaichean"
 
 #: ../wizard/qml/Pages//31-passwd-set.qml:48
 msgid "Enter passphrase"
-msgstr ""
+msgstr "Cuir abairt-fhaire a-steach"
 
 #: ../wizard/qml/Pages//31-passwd-set.qml:49
 msgid "Choose your passcode"
-msgstr ""
+msgstr "Tagh an còd-faire agad"
 
 #: ../wizard/qml/Pages//31-passwd-set.qml:56
 msgid "Passphrase must be 4 characters long"
-msgstr ""
+msgstr "Feumaidh an abairt-fhaire a bhith 4 caractaran a dh'fhaid"
 
 #: ../wizard/qml/Pages//30-passwd-type.qml:72
 msgid "Please select how you’d like to unlock your phone."
-msgstr ""
+msgstr "Tagh an dòigh sa tha thu airson a' ghlas a thoirt far an fhòn agad."
 
 #: ../wizard/qml/Pages//30-passwd-type.qml:92
 msgid "Swipe"
@@ -2128,15 +2136,15 @@ msgstr "Grad-shlaighd"
 
 #: ../wizard/qml/Pages//30-passwd-type.qml:93
 msgid "No security"
-msgstr ""
+msgstr "Gun tèarainteachd"
 
 #: ../wizard/qml/Pages//30-passwd-type.qml:96
 msgid "4 numbers"
-msgstr ""
+msgstr "4 àireamhan"
 
 #: ../wizard/qml/Pages//30-passwd-type.qml:99
 msgid "Numbers and letters"
-msgstr ""
+msgstr "Àireamhan 's litrichean"
 
 #. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
 #: /home/mike/Work/code/ubuntu-system-settings/ui-refresh-take-6/obj-x86_64-linux-gnu/po/settings.js:2
@@ -2854,7 +2862,7 @@ msgstr "airplane;itealan;itealain;plèana"
 
 #: ../plugins/security-privacy//securityprivacy.cpp:318
 msgid "Incorrect passcode. Try again."
-msgstr ""
+msgstr "Tha an còd-faire cearr. Feuch ris a-rithist."
 
 #: ../plugins/security-privacy//securityprivacy.cpp:320
 msgid "Incorrect passphrase. Try again."

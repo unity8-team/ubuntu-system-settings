@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-10-03 09:12-0400\n"
-"PO-Revision-Date: 2014-10-12 15:31+0000\n"
-"Last-Translator: Jiri Grönroos <Unknown>\n"
+"PO-Revision-Date: 2014-10-13 10:43+0000\n"
+"Last-Translator: Timo Jyrinki <timo.jyrinki@canonical.com>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-10-13 06:14+0000\n"
+"X-Launchpad-Export-Date: 2014-10-14 07:11+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 
 #: ubuntu-system-settings.desktop.in.in.h:1 ../src/qml/MainWindow.qml:112
@@ -691,7 +691,7 @@ msgstr "Ei mitään"
 #: ../plugins/security-privacy//PhoneLocking.qml:46
 #: ../wizard/qml/Pages//30-passwd-type.qml:95
 msgid "Passcode"
-msgstr ""
+msgstr "Suojakoodi"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:47
 #: ../plugins/security-privacy//LockSecurity.qml:350
@@ -911,7 +911,7 @@ msgstr ""
 #: ../plugins/security-privacy//LockSecurity.qml:96
 #: ../plugins/security-privacy//LockSecurity.qml:384
 msgid "Change passcode…"
-msgstr ""
+msgstr "Vaihda suojakoodia..."
 
 #: ../plugins/security-privacy//LockSecurity.qml:98
 #: ../plugins/security-privacy//LockSecurity.qml:385
@@ -924,7 +924,7 @@ msgstr "Vaihda pyyhkäisyyn"
 
 #: ../plugins/security-privacy//LockSecurity.qml:107
 msgid "Switch to passcode"
-msgstr ""
+msgstr "Vaihda suojakoodiin"
 
 #: ../plugins/security-privacy//LockSecurity.qml:109
 msgid "Switch to passphrase"
@@ -932,7 +932,7 @@ msgstr "Vaihda salasanaan"
 
 #: ../plugins/security-privacy//LockSecurity.qml:118
 msgid "Existing passcode"
-msgstr ""
+msgstr "Olemassa oleva suojakoodi"
 
 #: ../plugins/security-privacy//LockSecurity.qml:120
 msgid "Existing passphrase"
@@ -940,7 +940,7 @@ msgstr "Nykyinen salasana"
 
 #: ../plugins/security-privacy//LockSecurity.qml:174
 msgid "Choose passcode"
-msgstr ""
+msgstr "Valitse suojakoodi"
 
 #: ../plugins/security-privacy//LockSecurity.qml:176
 msgid "Choose passphrase"
@@ -949,7 +949,7 @@ msgstr "Valitse salasana"
 #: ../plugins/security-privacy//LockSecurity.qml:220
 #: ../wizard/qml/Pages//passwd-confirm.qml:48
 msgid "Confirm passcode"
-msgstr ""
+msgstr "Vahvista suojakoodi"
 
 #: ../plugins/security-privacy//LockSecurity.qml:222
 #: ../wizard/qml/Pages//passwd-confirm.qml:47
@@ -958,7 +958,7 @@ msgstr "Vahvista salasana"
 
 #: ../plugins/security-privacy//LockSecurity.qml:265
 msgid "Those passcodes don't match. Try again."
-msgstr ""
+msgstr "Suojakoodit eivät täsmää, yritä uudelleen."
 
 #: ../plugins/security-privacy//LockSecurity.qml:268
 msgid "Those passphrases don't match. Try again."
@@ -978,7 +978,7 @@ msgstr "Pyyhkäisy (ei turvallinen)"
 
 #: ../plugins/security-privacy//LockSecurity.qml:349
 msgid "4-digit passcode"
-msgstr ""
+msgstr "Nelinumeroinen suojakoodi"
 
 #: ../plugins/security-privacy//LockSecurity.qml:351
 msgid "Swipe (no security)… "
@@ -986,7 +986,7 @@ msgstr "Pyyhkäisy (ei turvallinen)… "
 
 #: ../plugins/security-privacy//LockSecurity.qml:352
 msgid "4-digit passcode…"
-msgstr ""
+msgstr "Nelinumeroinen suojakoodi..."
 
 #: ../plugins/security-privacy//LockSecurity.qml:353
 msgid "Passphrase…"
@@ -1639,7 +1639,7 @@ msgstr ""
 
 #: ../plugins/about//DevMode.qml:110
 msgid "You need a passcode or passphrase set to use Developer Mode."
-msgstr ""
+msgstr "Tarvitset suojakoodin tai salasanan käyttääksesi kehittäjätilaa"
 
 #: ../plugins/cellular//HotspotSetup.qml:29
 msgid "Change hotspot setup"
@@ -2024,7 +2024,7 @@ msgstr ""
 
 #: ../wizard/qml/Pages//60-reporting.qml:42
 msgid "This can be disabled here:"
-msgstr ""
+msgstr "Tämä voidaan ottaa pois käytöstä:"
 
 #: ../wizard/qml/Pages//60-reporting.qml:43
 msgid "System Settings &gt; Security &amp; Privacy"
@@ -2074,11 +2074,11 @@ msgstr "Anna tunnuslause"
 
 #: ../wizard/qml/Pages//31-passwd-set.qml:49
 msgid "Choose your passcode"
-msgstr ""
+msgstr "Valitse suojakoodi"
 
 #: ../wizard/qml/Pages//31-passwd-set.qml:56
 msgid "Passphrase must be 4 characters long"
-msgstr ""
+msgstr "Salasanan tulee olla neljä kirjainta pitkä"
 
 #: ../wizard/qml/Pages//30-passwd-type.qml:72
 msgid "Please select how you’d like to unlock your phone."
@@ -2816,7 +2816,7 @@ msgstr "lentotila"
 
 #: ../plugins/security-privacy//securityprivacy.cpp:318
 msgid "Incorrect passcode. Try again."
-msgstr ""
+msgstr "Virheellinen suojakoodi, yritä uudelleen."
 
 #: ../plugins/security-privacy//securityprivacy.cpp:320
 msgid "Incorrect passphrase. Try again."
