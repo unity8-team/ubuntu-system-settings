@@ -4,6 +4,8 @@ install(FILES cellular.settings DESTINATION ${PLUGIN_MANIFEST_DIR})
 install(FILES settings-cellular.svg DESTINATION ${PLUGIN_MANIFEST_DIR}/icons)
 
 set(QML_SOURCES
+    CustomApnEditor.qml
+    PageChooseApn.qml
     PageChooseCarrier.qml
     PageChooseCarriers.qml
     PageComponent.qml
@@ -18,6 +20,8 @@ add_library(UbuntuCellularPanel MODULE
   plugin.h
   hotspotmanager.cpp
   hotspotmanager.h
+  ofonoactivator.cpp
+  ofonoactivator.h
   nm_manager_proxy.h
   nm_settings_proxy.h
   nm_settings_connection_proxy.h
