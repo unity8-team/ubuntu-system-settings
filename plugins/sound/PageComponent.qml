@@ -76,11 +76,7 @@ ItemPage {
                 text: i18n.tr("Silent Mode")
             }
 
-            ListItem.Empty {
-                height: units.gu(3)
-            }
-
-            ListItem.Standard {
+            ListItem.Header {
                 text: i18n.tr("Ringer:")
             }
 
@@ -124,11 +120,7 @@ ItemPage {
                 text: i18n.tr("High volume can damage your hearing.")
             }
 
-            ListItem.Empty {
-                height: units.gu(3)
-            }
-
-            ListItem.Standard {
+            ListItem.Header {
                 text: i18n.tr("Phone calls:")
             }
 
@@ -173,11 +165,7 @@ ItemPage {
                 text: i18n.tr("Dialpad sounds")
             }
 
-            ListItem.Empty {
-                height: units.gu(3)
-            }
-
-            ListItem.Standard {
+            ListItem.Header {
                 text: i18n.tr("Messages:")
             }
 
@@ -212,11 +200,7 @@ ItemPage {
                 text: i18n.tr("Vibrate in Silent Mode")
             }
 
-            ListItem.Empty {
-                height: units.gu(3)
-            }
-
-            ListItem.Standard {
+            ListItem.Header {
                 text: i18n.tr("Other sounds:")
             }
 
