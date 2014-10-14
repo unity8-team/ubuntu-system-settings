@@ -343,27 +343,6 @@ class CellularPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
         field.write(name)
         self.pointing_device.click_object(ok)
 
-    # def get_sim_name(self, num):
-
-    # def rename_sim(self, num, new_name):
-    #     obj = self.system_settings.main_view.cellular_page.select_single(
-    #         objectName="simEditor"
-    #     ).select_single(objectName="editSim%d" % num)
-    #     self.system_settings.main_view.scroll_to_and_click(obj)
-    #     field = self.system_settings.main_view.cellular_page.select_single(
-    #         objectName="nameField"
-    #     )
-    #     self.system_settings.main_view.scroll_to_and_click(field)
-    #     self.system_settings.main_view.scroll_to_and_click(
-    #         field.select_single(objectName="clear_button"))
-    #     self.keyboard.type(new_name)
-    #     self.system_settings.main_view.scroll_to_and_click(
-    #         self.system_settings.main_view.cellular_page.select_single(
-    #             objectName=
-        # item = self.select_single(objectName='use%s' % sim)
-        # self.pointing_device.click_object(item)
-        # "edit_name_" + sims[1].path
-
 
 class PageChooseCarriers(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
 

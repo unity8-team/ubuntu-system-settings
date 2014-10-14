@@ -46,6 +46,7 @@ Column {
                     'lte': i18n.tr("2G/3G/4G (faster)")
                 }[modelData]
             }
+            showDivider: false
         }
         selectedIndex: model.indexOf(sim.radioSettings.technologyPreference)
         onDelegateClicked: {

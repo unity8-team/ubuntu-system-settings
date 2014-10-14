@@ -40,10 +40,6 @@ Column {
     // make settings available to all children of root
     property var settings: phoneSettings
 
-    Label {
-        text: poweredSim ? 'powered' + poweredSim.path : 'none'
-    }
-
     DataMultiSim {
         anchors { left: parent.left; right: parent.right }
     }
@@ -111,7 +107,7 @@ Column {
         id:radio
         expanded: true
         text: i18n.tr("Connection type:")
-        model: poweredSim.radioSettings.modemTechnologies
+        model: poweredSim ? poweredSim.radioSettings.modemTechnologies : []
         delegate: OptionSelectorDelegate {
             objectName: poweredSim.path + "_radio_" + modelData
             text: techToString(modelData)
@@ -123,7 +119,7 @@ Column {
     }
 
     Connections {
-        target: poweredSim.radioSettings
+        target: poweredSim ? poweredSim.radioSettings : null
         onTechnologyPreferenceChanged: {
             radio.selectedIndex =
                 poweredSim.radioSettings.modemTechnologies.indexOf(preference)

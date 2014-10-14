@@ -61,24 +61,6 @@ Column {
         }
     }
 
-    Connections {
-        target: sims[0].connMan
-        onPoweredChanged: {
-            if (powered) {
-                use.selectedIndex = 1;
-            }
-        }
-    }
-
-    Connections {
-        target: sims[1].connMan
-        onPoweredChanged: {
-            if (powered) {
-                use.selectedIndex = 2;
-            }
-        }
-    }
-
     ListItem.Standard {
         id: dataRoamingItem
         text: i18n.tr("Data roaming")
