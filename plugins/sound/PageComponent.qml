@@ -76,6 +76,10 @@ ItemPage {
                 text: i18n.tr("Silent Mode")
             }
 
+            ListItem.Empty {
+                height: units.gu(3)
+            }
+
             ListItem.Standard {
                 text: i18n.tr("Ringer:")
             }
@@ -87,6 +91,7 @@ ItemPage {
                 objectPath: "/com/canonical/indicator/sound"
 
                 property variant volume: action("volume")
+                property variant highVolume: action("high-volume")
 
                 Component.onCompleted: start()
             }
@@ -95,6 +100,12 @@ ItemPage {
                 target: sliderMenu
                 property: "value"
                 value: soundActionGroup.volume.state
+            }
+
+            Binding {
+                target: highVolumeWarning
+                property: "visible"
+                value: soundActionGroup.highVolume.state
             }
  
             Menus.SliderMenu {
@@ -106,6 +117,15 @@ ItemPage {
                 minIcon: "image://theme/audio-volume-low" 
                 maxIcon: "image://theme/audio-volume-high" 
                 onUpdated: soundActionGroup.volume.updateState(value);
+            }
+
+            ListItem.Standard {
+                visible: false
+                text: i18n.tr("High volume can damage your hearing.")
+            }
+
+            ListItem.Empty {
+                height: units.gu(3)
             }
 
             ListItem.Standard {
@@ -153,6 +173,10 @@ ItemPage {
                 text: i18n.tr("Dialpad sounds")
             }
 
+            ListItem.Empty {
+                height: units.gu(3)
+            }
+
             ListItem.Standard {
                 text: i18n.tr("Messages:")
             }
@@ -186,6 +210,10 @@ ItemPage {
                     onCheckedChanged: backendInfo.incomingMessageVibrateSilentMode = checked
                 }
                 text: i18n.tr("Vibrate in Silent Mode")
+            }
+
+            ListItem.Empty {
+                height: units.gu(3)
             }
 
             ListItem.Standard {
