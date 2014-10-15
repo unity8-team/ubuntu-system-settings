@@ -20,8 +20,10 @@ import Ubuntu.Components 1.1
 import Ubuntu.SystemSettings.SecurityPrivacy 1.0
 import Unity.Application 0.1
 import Unity.Notifications 1.0 as NotificationBackend
+import Unity.Session 0.1
 import "Components"
 import "file:///usr/share/unity8/Notifications" as Notifications // FIXME This should become a module or go away
+import "file:///usr/share/unity8/Components" as UnityComponents
 
 Item {
     id: root
@@ -190,5 +192,54 @@ Item {
                 PropertyChanges { target: notifications; width: units.gu(38) }
             }
         ]
+    }
+
+    UnityComponents.Dialogs {
+        id: dialogs
+        anchors.fill: parent
+        z: 10
+        onPowerOffClicked: {
+            shutdownFadeOutRectangle.enabled = true;
+            shutdownFadeOutRectangle.visible = true;
+            shutdownFadeOut.start();
+        }
+    }
+
+    Rectangle {
+        id: shutdownFadeOutRectangle
+        z: dialogs.z + 10
+        enabled: false
+        visible: false
+        color: "black"
+        anchors.fill: parent
+        opacity: 0.0
+        NumberAnimation on opacity {
+            id: shutdownFadeOut
+            from: 0.0
+            to: 1.0
+            onStopped: {
+                if (shutdownFadeOutRectangle.enabled && shutdownFadeOutRectangle.visible) {
+                    DBusUnitySessionService.Shutdown();
+                }
+            }
+        }
+    }
+
+    Keys.onPressed: {
+        if (event.key == Qt.Key_PowerOff || event.key == Qt.Key_PowerDown) {
+            dialogs.onPowerKeyPressed();
+            event.accepted = true;
+        } else {
+            event.accepted = false;
+        }
+    }
+
+    Keys.onReleased: {
+        if (event.key == Qt.Key_PowerOff || event.key == Qt.Key_PowerDown) {
+            dialogs.onPowerKeyReleased();
+            event.accepted = true;
+        } else {
+            event.accepted = false;
+        }
     }
 }
