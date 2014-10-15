@@ -29,6 +29,19 @@
 
 namespace UpdatePlugin {
 
+class RequestObject : public QObject
+{
+    Q_OBJECT
+public:
+    explicit RequestObject(QString oper, QObject *parent = 0) :
+        QObject(parent)
+    {
+        operation = oper;
+    }
+
+    QString operation;
+};
+
 class Network : public QObject
 {
     Q_OBJECT
@@ -36,7 +49,6 @@ public:
     explicit Network(QObject *parent = 0);
 
     void checkForNewVersions(QHash<QString, Update*> &apps);
-    void getResourceUrl(const QString &packagename);
     void getClickToken(Update *app, const QString &url,
                        const QString &authHeader);
 
@@ -44,7 +56,8 @@ Q_SIGNALS:
     void updatesFound();
     void updatesNotFound();
     void errorOccurred();
-    void downloadUrlFound(const QString &packagename, const QString &url);
+    void networkError();
+    void serverError();
     void clickTokenObtained(Update *app, const QString &clickToken);
 
 private Q_SLOTS:
@@ -52,11 +65,9 @@ private Q_SLOTS:
 
 private:
     QNetworkAccessManager m_nam;
-    QNetworkRequest m_request;
     QHash<QString, Update*> m_apps;
 
     QString getUrlApps();
-    QString getUrlPackage();
 };
 
 }

@@ -96,7 +96,8 @@ LocalComponents.Page {
 
         Label {
             id: termsLabel
-            anchors.fill: parent
+            anchors.left: parent.left
+            anchors.right: parent.right
             wrapMode: Text.Wrap
             linkColor: Theme.palette.normal.foregroundText
             onLinkActivated: {
@@ -107,7 +108,8 @@ LocalComponents.Page {
 
         WebView {
             id: webview
-            anchors.fill: parent
+            anchors.left: parent.left
+            anchors.right: parent.right
             visible: !termsLabel.visible
         }
     }

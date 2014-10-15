@@ -72,9 +72,13 @@ ItemPage {
                     onCheckedChanged: soundActionGroup.silentmode.state = checked
                 }
                 text: i18n.tr("Silent Mode")
+                showDivider: false
             }
 
-            ListItem.Standard {
+            ListItem.Divider {
+            }
+
+            ListItem.Header {
                 text: i18n.tr("Ringer:")
             }
 
@@ -86,6 +90,7 @@ ItemPage {
 
                 property variant volume: action("volume")
                 property variant silentMode: action("silent-mode")
+                property variant highVolume: action("high-volume")
 
                 Component.onCompleted: start()
             }
@@ -95,7 +100,7 @@ ItemPage {
                 property: "value"
                 value: soundActionGroup.volume.state
             }
- 
+
             Menus.SliderMenu {
                 id: sliderMenu
                 objectName: "sliderMenu"
@@ -105,9 +110,20 @@ ItemPage {
                 minIcon: "image://theme/audio-volume-low" 
                 maxIcon: "image://theme/audio-volume-high" 
                 onUpdated: soundActionGroup.volume.updateState(value);
+                showDivider: highVolumeWarning.visible
             }
 
             ListItem.Standard {
+                id: highVolumeWarning
+                visible: soundActionGroup.highVolume.state == true
+                text: i18n.tr("High volume can damage your hearing.")
+                showDivider: false
+            }
+
+            ListItem.Divider {
+            }
+
+            ListItem.Header {
                 text: i18n.tr("Phone calls:")
             }
 
@@ -150,9 +166,13 @@ ItemPage {
                     onCheckedChanged: backendInfo.dialpadSoundsEnabled = checked
                 }
                 text: i18n.tr("Dialpad sounds")
+                showDivider: false
             }
 
-            ListItem.Standard {
+            ListItem.Divider {
+            }
+
+            ListItem.Header {
                 text: i18n.tr("Messages:")
             }
 
@@ -185,9 +205,13 @@ ItemPage {
                     onCheckedChanged: backendInfo.incomingMessageVibrateSilentMode = checked
                 }
                 text: i18n.tr("Vibrate in Silent Mode")
+                showDivider: false
             }
 
-            ListItem.Standard {
+            ListItem.Divider {
+            }
+
+            ListItem.Header {
                 text: i18n.tr("Other sounds:")
             }
 
@@ -200,9 +224,12 @@ ItemPage {
 
                     onClicked: keyboardSettings.keyPressFeedback = checked
                 }
+
+                showDivider: lockSound.visible
             }
 
             ListItem.Standard {
+                id: lockSound
                 control: Switch {
                     checked: false
                 }

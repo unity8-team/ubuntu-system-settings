@@ -33,6 +33,7 @@ find_package(Qt5Widgets REQUIRED)
 set(QT_IMPORTS_DIR "${CMAKE_INSTALL_LIBDIR}/qt5/qml")
 set(CMAKE_AUTOMOC ON)
 
+pkg_search_module(GOBJECT REQUIRED gobject-2.0)
 pkg_search_module(GLIB REQUIRED glib-2.0)
 pkg_check_modules(GIO REQUIRED gio-2.0 gio-unix-2.0)
 pkg_search_module(UPOWER_GLIB REQUIRED upower-glib)
