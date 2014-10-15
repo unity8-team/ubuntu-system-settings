@@ -40,6 +40,7 @@ Item {
         // A visible selected background looks bad in ListItem widgets with our theme
         Theme.palette.selected.background = "#00000000"
         i18n.domain = "ubuntu-system-settings"
+        root.forceActiveFocus();
     }
 
     UbuntuSecurityPrivacyPanel {
