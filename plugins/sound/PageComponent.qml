@@ -65,8 +65,6 @@ ItemPage {
             anchors.left: parent.left
             anchors.right: parent.right
 
-            SilentModeWarning { visible: soundActionGroup.silentmode.state }
-
             ListItem.Standard {
                 control: Switch {
                     objectName: "silentMode"
