@@ -102,12 +102,6 @@ ItemPage {
                 value: soundActionGroup.volume.state
             }
 
-            Binding {
-                target: highVolumeWarning
-                property: "visible"
-                value: soundActionGroup.highVolume.state
-            }
- 
             Menus.SliderMenu {
                 id: sliderMenu
                 objectName: "sliderMenu"
@@ -117,12 +111,12 @@ ItemPage {
                 minIcon: "image://theme/audio-volume-low" 
                 maxIcon: "image://theme/audio-volume-high" 
                 onUpdated: soundActionGroup.volume.updateState(value);
-                showDivider: highVolume.visible
+                showDivider: highVolumeWarning.visible
             }
 
             ListItem.Standard {
-                id: highVolume
-                visible: false
+                id: highVolumeWarning
+                visible: soundActionGroup.highVolume.state == true
                 text: i18n.tr("High volume can damage your hearing.")
                 showDivider: false
             }
