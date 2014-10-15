@@ -21,7 +21,7 @@ import Ubuntu.Components 1.1
 import Ubuntu.SystemSettings.Wizard.Utils 0.1
 
 ItemPage {
-    title: i18n.tr("Terms & Conditions")
+    title: i18n.tr("Nokia HERE")
     id: termsPage
     FolderListModel {
         id: termsModel
@@ -91,15 +91,25 @@ ItemPage {
         flickableDirection: Flickable.VerticalFlick
 
         Column {
-            anchors.left: parent.left
-            anchors.right: parent.right
+            width: scrollWidget.width
+
+            Item {
+                height: units.gu(2)
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                }
+            }
 
             Label {
                 id: termsLabel
-                anchors.left: parent.left
-                anchors.right: parent.right
+                anchors {
+                    margins: units.gu(2)
+                    left: parent.left
+                    right: parent.right
+                }
                 wrapMode: Text.Wrap
-                linkColor: Theme.palette.normal.foregroundText
+                linkColor: Theme.palette.normal.backgroundText
                 onLinkActivated: {
                     Qt.openUrlExternally(link)
                 }
