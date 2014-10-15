@@ -5,6 +5,7 @@ import SystemSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 import Ubuntu.SystemSettings.Sound 1.0
+import QMenuModel 0.1
 
 import "utilities.js" as Utilities
 
@@ -42,6 +43,17 @@ ItemPage {
         schema.id: "com.ubuntu.touch.sound"
     }
 
+    QDBusActionGroup {
+        id: soundActionGroup
+        busType: DBus.SessionBus
+        busName: "com.canonical.indicator.sound"
+        objectPath: "/com/canonical/indicator/sound"
+
+        property variant silentMode: action("silent-mode")
+
+        Component.onCompleted: start()
+    }
+
     Audio {
         id: soundEffect
         audioRole: MediaPlayer.alert
@@ -52,7 +64,7 @@ ItemPage {
         anchors.left: parent.left
         anchors.right: parent.right
 
-        SilentModeWarning { visible: backendInfo.silentMode }
+        SilentModeWarning { visible: soundActionGroup.silentMode.state }
 
         ListItem.SingleControl {
             id: listId
@@ -63,7 +75,7 @@ ItemPage {
                     soundEffect.stop()
             }
             enabled: soundEffect.playbackState == Audio.PlayingState
-            visible: showStopButton && !backendInfo.silentMode
+            visible: showStopButton && !soundActionGroup.silentMode.state
         }
     }
 
@@ -94,7 +106,7 @@ ItemPage {
                 backendInfo.incomingMessageSound = soundFileNames[index]
             }
             /* Only preview the file if not in silent mode */
-            if (!backendInfo.silentMode) {
+            if (!soundActionGroup.silentMode.state) {
                 soundEffect.source = soundFileNames[index]
                 soundEffect.play()
             }
