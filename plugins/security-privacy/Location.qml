@@ -20,16 +20,40 @@
 
 import GSettings 1.0
 import QMenuModel 0.1
+import Qt.labs.folderlistmodel 2.1
 import QtQuick 2.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 import Ubuntu.SystemSettings.SecurityPrivacy 1.0
+import Ubuntu.SystemSettings.Wizard.Utils 0.1
 import SystemSettings 1.0
 
 ItemPage {
     id: dashPage
     title: i18n.tr("Location")
     flickable: scrollWidget
+
+    property bool canLocate: locationActionGroup.enabled.state !== undefined
+    property bool hereInstalled:
+        System.hereLicensePath !== "" && termsModel.count > 0
+
+    FolderListModel {
+        id: termsModel
+        folder: System.hereLicensePath
+        nameFilters: ["*.html"]
+        showDirs: false
+        showOnlyReadable: true
+    }
+
+    QDBusActionGroup {
+        id: locationActionGroup
+        busType: DBus.SessionBus
+        busName: "com.canonical.indicator.location"
+        objectPath: "/com/canonical/indicator/location"
+        property variant enabled: action("location-detection-enabled")
+        Component.onCompleted: start()
+    }
+
 
     Flickable {
         id: scrollWidget
@@ -44,33 +68,78 @@ ItemPage {
             anchors.left: parent.left
             anchors.right: parent.right
 
-            QDBusActionGroup {
-                id: locationActionGroup
-                busType: DBus.SessionBus
-                busName: "com.canonical.indicator.location"
-                objectPath: "/com/canonical/indicator/location"
 
-                property variant enabled: action("location-detection-enabled")
-
-                Component.onCompleted: start()
-            }
-
-            ListItem.Standard {
-                text: i18n.tr("Location detection")
-                control: Switch {
-                    id: locationOn
-                    onClicked: locationActionGroup.enabled.activate()
+            ListItem.ItemSelector {
+                property bool allow: selectedIndex > 0
+                function modelToString (data) {
+                    return {
+                        'off': i18n.tr("Not at all"),
+                        'gps': i18n.tr("Using GPS only (less accurate)"),
+                        /* TRANSLATORS: %1 is the resource wherein HERE terms
+                        and conditions reside. */
+                        'here': i18n.tr("Using GPS, anonymized Wi-Fi and cellular network info.<br>By selecting this option you accept the <a href='%1'>Nokia HERE terms and conditions</a>.")
+                            .arg("here-terms.qml")
+                    }[data];
                 }
-                visible: locationActionGroup.enabled.state !== undefined
-                Component.onCompleted:
-                    clicked.connect(locationOn.clicked)
+                id: detection
+                text: i18n.tr("Let the phone detect your location:")
+                expanded: true
+                model: {
+                    var m = ['off', 'gps', 'here'];
+                    // if (canLocate) {
+                    //     m.push('gps');
+                    // }
+                    // if (canLocate && hereInstalled) {
+                    //     m.push('here');
+                    // }
+                    return m;
+                }
+                delegate: OptionSelectorDelegate {
+                    id: dlgt
+                    text: " "
+                    height: label.height
+                    Label {
+                        id: label
+                        anchors {
+                            left: parent.left
+                            right: parent.right
+                            margins: units.gu(2)
+                            rightMargin: units.gu(6)
+                        }
+                        textFormat: Text.StyledText
+
+                        text: detection.modelToString(modelData)
+                        wrapMode: Text.WordWrap
+                        verticalAlignment: Text.AlignVCenter
+                        height: contentHeight + units.gu(4)
+                        onLinkActivated: {
+                            pageStack.push(Qt.resolvedUrl(link))
+
+                        }
+                        onLineLaidOut: {
+                            dlgt.height = label.height
+                        }
+                    }
+                }
+                visible: model.length > 1
             }
 
-            Binding {
-                target: locationOn
-                property: "checked"
-                value: locationActionGroup.enabled.state
-            }
+            // ListItem.ItemSelector {
+            //     text: i18n.tr("Let the phone detech your location:")
+            //     control: Switch {
+            //         id: locationOn
+            //         onClicked: locationActionGroup.enabled.activate()
+            //     }
+            //     visible: locationActionGroup.enabled.state !== undefined
+            //     Component.onCompleted:
+            //         clicked.connect(locationOn.clicked)
+            // }
+
+            // Binding {
+            //     target: locationOn
+            //     property: "checked"
+            //     value: locationActionGroup.enabled.state
+            // }
 
             ListItem.Caption {
                 /* TODO: replace by real info from the location service */
@@ -98,7 +167,7 @@ ItemPage {
 
             ListItem.Standard {
                 text: i18n.tr("Allow access to location:")
-                visible: locationOn.checked
+                visible: detection.allow
             }
 
             TrustStoreModel {
@@ -115,7 +184,7 @@ ItemPage {
                         checked: model.granted
                         onClicked: trustStoreModel.setEnabled(index, !model.granted)
                     }
-                    visible: locationOn.checked
+                    visible: detection.allow
                 }
             }
         }
