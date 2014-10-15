@@ -21,21 +21,30 @@
 import GSettings 1.0
 import QMenuModel 0.1
 import Qt.labs.folderlistmodel 2.1
-import QtQuick 2.0
-import Ubuntu.Components 0.1
+import QtQuick 2.3
+import Ubuntu.Components 1.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 import Ubuntu.SystemSettings.SecurityPrivacy 1.0
 import Ubuntu.SystemSettings.Wizard.Utils 0.1
 import SystemSettings 1.0
 
 ItemPage {
-    id: dashPage
+    id: locationPage
     title: i18n.tr("Location")
     flickable: scrollWidget
 
+    property bool useNone: !useLocation
     property bool canLocate: locationActionGroup.enabled.state !== undefined
-    property bool hereInstalled:
-        System.hereLicensePath !== "" && termsModel.count > 0
+    property bool useLocation: canLocate && locationActionGroup.enabled.state
+    property bool hereInstalled: System.hereLicensePath !== "" && termsModel.count > 0
+    property bool useHere: hereInstalled && System.hereEnabled
+
+    onCanLocateChanged: {
+        optionsModel.createModel();
+    }
+    onHereInstalledChanged: {
+        optionsModel.createModel();
+    }
 
     FolderListModel {
         id: termsModel
@@ -59,7 +68,7 @@ ItemPage {
         id: scrollWidget
         anchors.fill: parent
         contentHeight: contentItem.childrenRect.height
-        boundsBehavior: (contentHeight > dashPage.height) ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
+        boundsBehavior: (contentHeight > locationPage.height) ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
         /* Set the direction to workaround https://bugreports.qt-project.org/browse/QTBUG-31905
            otherwise the UI might end up in a situation where scrolling doesn't work */
         flickableDirection: Flickable.VerticalFlick
@@ -68,33 +77,46 @@ ItemPage {
             anchors.left: parent.left
             anchors.right: parent.right
 
-
             ListItem.ItemSelector {
-                property bool allow: selectedIndex > 0
-                function modelToString (data) {
-                    return {
-                        'off': i18n.tr("Not at all"),
-                        'gps': i18n.tr("Using GPS only (less accurate)"),
-                        /* TRANSLATORS: %1 is the resource wherein HERE terms
-                        and conditions reside. */
-                        'here': i18n.tr("Using GPS, anonymized Wi-Fi and cellular network info.<br>By selecting this option you accept the <a href='%1'>Nokia HERE terms and conditions</a>.")
-                            .arg("here-terms.qml")
-                    }[data];
-                }
                 id: detection
+
+                function activate (key) {
+                    var usingLocation = locationActionGroup.enabled.state;
+                    if (key === 'none' && usingLocation) {
+                        // turns OFF location detection
+                        locationActionGroup.enabled.activate();
+                    }
+                    if (key === 'gps' && !usingLocation) {
+                        // turns ON location detection
+                        locationActionGroup.enabled.activate();
+                    }
+                    if (key === 'here' && !usingLocation) {
+                        // turns ON location detection
+                        locationActionGroup.enabled.activate();
+                    }
+                    System.hereEnabled = key === 'here';
+                }
+                property bool allow: selectedIndex !== (model.count - 1)
+
                 text: i18n.tr("Let the phone detect your location:")
                 expanded: true
-                model: {
-                    var m = ['off', 'gps', 'here'];
-                    // if (canLocate) {
-                    //     m.push('gps');
-                    // }
-                    // if (canLocate && hereInstalled) {
-                    //     m.push('here');
-                    // }
-                    return m;
+                model: optionsModel
+                delegate: optionsDelegate
+                selectedIndex: {
+                    if (model.count === 0) return 0; // re-creating
+                    if (useNone) return model.count - 1;
+                    if (useLocation && !useHere) return 0;
+                    if (useHere) return 1;
                 }
-                delegate: OptionSelectorDelegate {
+                onDelegateClicked: {
+                    activate(model.get(index).key);
+                }
+            }
+
+            Component {
+                id: optionsDelegate
+                OptionSelectorDelegate {
+
                     id: dlgt
                     text: " "
                     height: label.height
@@ -107,39 +129,55 @@ ItemPage {
                             rightMargin: units.gu(6)
                         }
                         textFormat: Text.StyledText
-
-                        text: detection.modelToString(modelData)
+                        text: name
                         wrapMode: Text.WordWrap
                         verticalAlignment: Text.AlignVCenter
                         height: contentHeight + units.gu(4)
                         onLinkActivated: {
                             pageStack.push(Qt.resolvedUrl(link))
-
                         }
                         onLineLaidOut: {
                             dlgt.height = label.height
                         }
                     }
                 }
-                visible: model.length > 1
+             }
+
+            ListModel {
+                id: optionsModel
+
+                function createModel () {
+                    clear();
+
+                    if (canLocate) {
+                        optionsModel.append({
+                            name: i18n.tr("Using GPS only (less accurate)"),
+                            key: "gps"
+                        });
+                    }
+
+                    if (hereInstalled) {
+                        optionsModel.append({
+                            /* TRANSLATORS: %1 is the resource wherein HERE
+                            terms and conditions reside (typically a qml file).
+                            HERE is a Nokia trademark, so it should probably
+                            not be translated. */
+                            name: i18n.tr("Using GPS, anonymized Wi-Fi and cellular network info.<br>By selecting this option you accept the <a href='%1'>Nokia HERE terms and conditions</a>.").arg("here-terms.qml"),
+                            key: "here"
+                        });
+                    }
+
+                    optionsModel.append({
+                        name: i18n.tr("Not at all"),
+                        key: "none"
+                    });
+                }
+
+                dynamicRoles: true
+                Component.onCompleted: {
+                    createModel();
+                }
             }
-
-            // ListItem.ItemSelector {
-            //     text: i18n.tr("Let the phone detech your location:")
-            //     control: Switch {
-            //         id: locationOn
-            //         onClicked: locationActionGroup.enabled.activate()
-            //     }
-            //     visible: locationActionGroup.enabled.state !== undefined
-            //     Component.onCompleted:
-            //         clicked.connect(locationOn.clicked)
-            // }
-
-            // Binding {
-            //     target: locationOn
-            //     property: "checked"
-            //     value: locationActionGroup.enabled.state
-            // }
 
             ListItem.Caption {
                 /* TODO: replace by real info from the location service */
@@ -167,7 +205,7 @@ ItemPage {
 
             ListItem.Standard {
                 text: i18n.tr("Allow access to location:")
-                visible: detection.allow
+                enabled: detection.allow
             }
 
             TrustStoreModel {
@@ -184,7 +222,7 @@ ItemPage {
                         checked: model.granted
                         onClicked: trustStoreModel.setEnabled(index, !model.granted)
                     }
-                    visible: detection.allow
+                    enabled: detection.allow
                 }
             }
         }

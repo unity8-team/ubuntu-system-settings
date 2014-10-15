@@ -14,12 +14,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import QtQuick 2.0
+import QtQuick 2.3
 import Qt.labs.folderlistmodel 2.1
 import SystemSettings 1.0
-import Ubuntu.Components 0.1
+import Ubuntu.Components 1.1
 import Ubuntu.SystemSettings.Wizard.Utils 0.1
-import Ubuntu.Web 0.2
 
 ItemPage {
     title: i18n.tr("Terms & Conditions")
@@ -102,16 +101,8 @@ ItemPage {
                 wrapMode: Text.Wrap
                 linkColor: Theme.palette.normal.foregroundText
                 onLinkActivated: {
-                    webview.url = link
-                    termsLabel.visible = false
+                    Qt.openUrlExternally(link)
                 }
-            }
-
-            WebView {
-                id: webview
-                anchors.left: parent.left
-                anchors.right: parent.right
-                visible: !termsLabel.visible
             }
         }
     }
