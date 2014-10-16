@@ -94,6 +94,7 @@ ItemPage {
                     checked: storedInfo.developerMode
                     onClicked: storedInfo.developerMode = checked
                 }
+                showDivider: false
             }
 
             ListItem.Divider {}
