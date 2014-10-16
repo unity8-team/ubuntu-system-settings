@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-10-03 09:12-0400\n"
-"PO-Revision-Date: 2014-10-13 12:19+0000\n"
+"PO-Revision-Date: 2014-10-15 08:15+0000\n"
 "Last-Translator: David Planella <david.planella@ubuntu.com>\n"
 "Language-Team: Catalan <ca@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-10-14 07:11+0000\n"
+"X-Launchpad-Export-Date: 2014-10-16 05:43+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 "Language: ca\n"
 
@@ -2047,7 +2047,7 @@ msgstr "Configuració del sistema > Seguretat i privadesa"
 
 #: ../wizard/qml/Pages//50-location.qml:53
 msgid "Use your mobile network and Wi-Fi to determine where you are"
-msgstr ""
+msgstr "Utilitza la xarxa telefònica i la Wi-Fi per determinar on són"
 
 #. TRANSLATORS: HERE is a trademark for Nokia's location service, you probably shouldn't translate it
 #: ../wizard/qml/Pages//50-location.qml:63
@@ -2055,6 +2055,8 @@ msgid ""
 "I have read and agreed to the HERE <a href='terms.qml'>Terms and "
 "Conditions</a>"
 msgstr ""
+"He llegit i accepto les <a href='terms.qml'>condicions generals</a> del "
+"servei HERE"
 
 #: ../wizard/qml/Pages//20-sim.qml:23
 msgid "Add a SIM card and restart your device"
@@ -2901,68 +2903,3 @@ msgstr "Feu un toc per obrir l'actualitzador del sistema."
 
 #~ msgid "Passphrase must be at least four characters long."
 #~ msgstr "La contrasenya ha de teni almenys quatre caràcters."
-
-#~ msgid "Add a SIM card"
-#~ msgstr "Afegeix una targeta SIM"
-
-#~ msgid "PIN code"
-#~ msgstr "Codi PIN"
-
-#~ msgid "Existing PIN code"
-#~ msgstr "Codi PIN actual"
-
-#~ msgid "Change PIN code…"
-#~ msgstr "Canvia el codi PIN..."
-
-#~ msgid "Switch to PIN code"
-#~ msgstr "Canvia a codi PIN"
-
-#~ msgid "Please insert a SIM card before you continue."
-#~ msgstr "Inseriu una targeta SIM abans de continuar."
-
-#~ msgid "4-digit PIN code"
-#~ msgstr "Codi PIN de 4 dígits"
-
-#~ msgid "Those PIN codes don't match. Try again."
-#~ msgstr "Els codis PIN no concorden. Torneu-ho a intentar."
-
-#~ msgid "You need a PIN code or passphrase set to use Developer Mode."
-#~ msgstr ""
-#~ "Us caldrà definir un codi PIN o contrasenya per utilitzar el mode de "
-#~ "desenvolupador."
-
-#~ msgid "4-digit PIN code…"
-#~ msgstr "Codi PIN de 4 dígits..."
-
-#~ msgid "Choose PIN code"
-#~ msgstr "Trieu el codi PIN"
-
-#~ msgid "Confirm PIN code"
-#~ msgstr "Confirmeu el codi PIN"
-
-#~ msgid "PIN code must be at least four digits long."
-#~ msgstr "El codi PIN ha de tenir quatre dígits com a mínim."
-
-#~ msgid "This can be disabled in System Settings."
-#~ msgstr "Podeu inhabilitar-ho a l'aplicació Paràmetres del sistema"
-
-#~ msgid "Those PIN codes don't match."
-#~ msgstr "Els codis PIN no concorden."
-
-#~ msgid "Your phone is set up to automatically report errors to Canonical."
-#~ msgstr ""
-#~ "El telèfon està configurat per enviar informes d'errors a Canonical de "
-#~ "manera automàtica."
-
-#~ msgid "Incorrect PIN code. Try again."
-#~ msgstr "El codi PIN no és correcte. Torneu-ho a intentar."
-
-#~ msgid ""
-#~ "I have read and agreed to the HERE <a href='terms.qml'>terms and "
-#~ "conditions</a>"
-#~ msgstr ""
-#~ "He llegit i accepto les <a href='terms.qml'>condicions generals</a> del "
-#~ "servei HERE"
-
-#~ msgid "Use your mobile network and Wi-Fi to work out where you are"
-#~ msgstr "Utilitza la xarxa mòbil i la Wi-Fi per esbrinar on sóc"

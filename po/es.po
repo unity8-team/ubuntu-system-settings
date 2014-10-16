@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-10-03 09:12-0400\n"
-"PO-Revision-Date: 2014-10-05 00:05+0000\n"
+"PO-Revision-Date: 2014-10-15 07:46+0000\n"
 "Last-Translator: Adolfo Jayme <fitoschido@gmail.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-10-11 05:11+0000\n"
+"X-Launchpad-Export-Date: 2014-10-16 05:43+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 
 #: ubuntu-system-settings.desktop.in.in.h:1 ../src/qml/MainWindow.qml:112
@@ -692,7 +692,7 @@ msgstr "Ninguno"
 #: ../plugins/security-privacy//PhoneLocking.qml:46
 #: ../wizard/qml/Pages//30-passwd-type.qml:95
 msgid "Passcode"
-msgstr ""
+msgstr "Código"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:47
 #: ../plugins/security-privacy//LockSecurity.qml:350
@@ -912,7 +912,7 @@ msgstr ""
 #: ../plugins/security-privacy//LockSecurity.qml:96
 #: ../plugins/security-privacy//LockSecurity.qml:384
 msgid "Change passcode…"
-msgstr ""
+msgstr "Cambiar código…"
 
 #: ../plugins/security-privacy//LockSecurity.qml:98
 #: ../plugins/security-privacy//LockSecurity.qml:385
@@ -925,7 +925,7 @@ msgstr "Cambiar a deslizar"
 
 #: ../plugins/security-privacy//LockSecurity.qml:107
 msgid "Switch to passcode"
-msgstr ""
+msgstr "Cambiar a código"
 
 #: ../plugins/security-privacy//LockSecurity.qml:109
 msgid "Switch to passphrase"
@@ -933,7 +933,7 @@ msgstr "Cambiar a contraseña"
 
 #: ../plugins/security-privacy//LockSecurity.qml:118
 msgid "Existing passcode"
-msgstr ""
+msgstr "Código existente"
 
 #: ../plugins/security-privacy//LockSecurity.qml:120
 msgid "Existing passphrase"
@@ -941,7 +941,7 @@ msgstr "Contraseña actual"
 
 #: ../plugins/security-privacy//LockSecurity.qml:174
 msgid "Choose passcode"
-msgstr ""
+msgstr "Elija un código"
 
 #: ../plugins/security-privacy//LockSecurity.qml:176
 msgid "Choose passphrase"
@@ -950,7 +950,7 @@ msgstr "Seleccione la contraseña"
 #: ../plugins/security-privacy//LockSecurity.qml:220
 #: ../wizard/qml/Pages//passwd-confirm.qml:48
 msgid "Confirm passcode"
-msgstr ""
+msgstr "Confirme el código"
 
 #: ../plugins/security-privacy//LockSecurity.qml:222
 #: ../wizard/qml/Pages//passwd-confirm.qml:47
@@ -959,7 +959,7 @@ msgstr "Confirme la contraseña"
 
 #: ../plugins/security-privacy//LockSecurity.qml:265
 msgid "Those passcodes don't match. Try again."
-msgstr ""
+msgstr "Los códigos no coinciden. Inténtelo de nuevo."
 
 #: ../plugins/security-privacy//LockSecurity.qml:268
 msgid "Those passphrases don't match. Try again."
@@ -979,7 +979,7 @@ msgstr "Deslizar (no seguro)"
 
 #: ../plugins/security-privacy//LockSecurity.qml:349
 msgid "4-digit passcode"
-msgstr ""
+msgstr "Código de 4 dígitos"
 
 #: ../plugins/security-privacy//LockSecurity.qml:351
 msgid "Swipe (no security)… "
@@ -987,7 +987,7 @@ msgstr "Deslizar (no seguro)… "
 
 #: ../plugins/security-privacy//LockSecurity.qml:352
 msgid "4-digit passcode…"
-msgstr ""
+msgstr "Código de 4 dígitos…"
 
 #: ../plugins/security-privacy//LockSecurity.qml:353
 msgid "Passphrase…"
@@ -1051,7 +1051,7 @@ msgstr "El software está actualizado"
 
 #: ../plugins/system-update//PageComponent.qml:201
 msgid "Restarting…"
-msgstr ""
+msgstr "Reiniciando…"
 
 #: ../plugins/system-update//PageComponent.qml:246
 msgid "Checking for updates…"
@@ -1081,7 +1081,7 @@ msgstr "Reintentar"
 
 #: ../plugins/system-update//PageComponent.qml:401
 msgid "Install…"
-msgstr ""
+msgstr "Instalar…"
 
 #: ../plugins/system-update//PageComponent.qml:403
 msgid "Download"
@@ -1109,12 +1109,12 @@ msgstr "Instalado"
 
 #: ../plugins/system-update//PageComponent.qml:452
 msgid "Downloading"
-msgstr ""
+msgstr "Descargando"
 
 #: ../plugins/system-update//PageComponent.qml:463
 #, qt-format
 msgid "%1 of %2"
-msgstr ""
+msgstr "%1 de %2"
 
 #: ../plugins/system-update//PageComponent.qml:562
 msgid "Version: "
@@ -1641,7 +1641,7 @@ msgstr ""
 
 #: ../plugins/about//DevMode.qml:110
 msgid "You need a passcode or passphrase set to use Developer Mode."
-msgstr ""
+msgstr "Necesita un código o contraseña para usar el modo de desarrollador."
 
 #: ../plugins/cellular//HotspotSetup.qml:29
 msgid "Change hotspot setup"
@@ -1962,11 +1962,11 @@ msgstr "Conectar a wifi"
 
 #: ../wizard/qml/Pages//40-wifi.qml:146
 msgid "Available networks…"
-msgstr ""
+msgstr "Redes disponibles…"
 
 #: ../wizard/qml/Pages//40-wifi.qml:147
 msgid "No available networks."
-msgstr ""
+msgstr "No hay redes disponibles."
 
 #: ../wizard/qml/Pages//40-wifi.qml:196
 #: ../wizard/qml/Pages//60-reporting.qml:50
@@ -1999,16 +1999,16 @@ msgstr "Finalizar"
 
 #: ../wizard/qml/Pages//passwd-confirm.qml:51
 msgid "Sorry, incorrect passphrase."
-msgstr ""
+msgstr "La contraseña es incorrecta."
 
 #: ../wizard/qml/Pages//passwd-confirm.qml:51
 #: ../wizard/qml/Pages//passwd-confirm.qml:52
 msgid "Please try again."
-msgstr ""
+msgstr "Inténtelo de nuevo."
 
 #: ../wizard/qml/Pages//passwd-confirm.qml:52
 msgid "Sorry, incorrect passcode."
-msgstr ""
+msgstr "El código es incorrecto."
 
 #: ../wizard/qml/Pages//60-reporting.qml:22
 msgid "Bug reporting"
@@ -2019,18 +2019,20 @@ msgid ""
 "Your phone is set up to automatically report errors to Canonical and its "
 "partners, the makers of the operating system."
 msgstr ""
+"El teléfono está configurado para enviar automáticamente informes de error a "
+"Canonical y sus socios, los creadores del sistema operativo."
 
 #: ../wizard/qml/Pages//60-reporting.qml:42
 msgid "This can be disabled here:"
-msgstr ""
+msgstr "Esto se puede desactivar en:"
 
 #: ../wizard/qml/Pages//60-reporting.qml:43
 msgid "System Settings &gt; Security &amp; Privacy"
-msgstr ""
+msgstr "Configuración del sistema &gt; Seguridad y privacidad"
 
 #: ../wizard/qml/Pages//50-location.qml:53
 msgid "Use your mobile network and Wi-Fi to determine where you are"
-msgstr ""
+msgstr "Usar red de datos móviles y wifi para determinar su ubicación"
 
 #. TRANSLATORS: HERE is a trademark for Nokia's location service, you probably shouldn't translate it
 #: ../wizard/qml/Pages//50-location.qml:63
@@ -2038,10 +2040,11 @@ msgid ""
 "I have read and agreed to the HERE <a href='terms.qml'>Terms and "
 "Conditions</a>"
 msgstr ""
+"He leído y acepto los <a href='terms.qml'>términos y condiciones</a> de HERE"
 
 #: ../wizard/qml/Pages//20-sim.qml:23
 msgid "Add a SIM card and restart your device"
-msgstr ""
+msgstr "Inserte una tarjeta SIM y reinicie el dispositivo"
 
 #: ../wizard/qml/Pages//20-sim.qml:53
 msgid "Without it, you won’t be able to make calls or use text messaging."
@@ -2065,19 +2068,19 @@ msgstr "Términos y condiciones"
 
 #: ../wizard/qml/Pages//31-passwd-set.qml:48
 msgid "Enter passphrase"
-msgstr ""
+msgstr "Escriba la contraseña"
 
 #: ../wizard/qml/Pages//31-passwd-set.qml:49
 msgid "Choose your passcode"
-msgstr ""
+msgstr "Elija su código"
 
 #: ../wizard/qml/Pages//31-passwd-set.qml:56
 msgid "Passphrase must be 4 characters long"
-msgstr ""
+msgstr "El código debe tener 4 caracteres"
 
 #: ../wizard/qml/Pages//30-passwd-type.qml:72
 msgid "Please select how you’d like to unlock your phone."
-msgstr ""
+msgstr "Seleccione el método de desbloqueo del teléfono."
 
 #: ../wizard/qml/Pages//30-passwd-type.qml:92
 msgid "Swipe"
@@ -2085,15 +2088,15 @@ msgstr "Deslizar"
 
 #: ../wizard/qml/Pages//30-passwd-type.qml:93
 msgid "No security"
-msgstr ""
+msgstr "Sin seguridad"
 
 #: ../wizard/qml/Pages//30-passwd-type.qml:96
 msgid "4 numbers"
-msgstr ""
+msgstr "4 números"
 
 #: ../wizard/qml/Pages//30-passwd-type.qml:99
 msgid "Numbers and letters"
-msgstr ""
+msgstr "Números y letras"
 
 #. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
 #: /home/mike/Work/code/ubuntu-system-settings/ui-refresh-take-6/obj-x86_64-linux-gnu/po/settings.js:2
@@ -2811,7 +2814,7 @@ msgstr "avión"
 
 #: ../plugins/security-privacy//securityprivacy.cpp:318
 msgid "Incorrect passcode. Try again."
-msgstr ""
+msgstr "El código es incorrecto. Inténtelo de nuevo."
 
 #: ../plugins/security-privacy//securityprivacy.cpp:320
 msgid "Incorrect passphrase. Try again."
@@ -2884,65 +2887,3 @@ msgstr "Presione para abrir el actualizador del sistema."
 
 #~ msgid "Passphrase must be at least four characters long."
 #~ msgstr "La contraseña debe tener al menos cuatro caracteres."
-
-#~ msgid "Add a SIM card"
-#~ msgstr "Añadir una tarjeta SIM"
-
-#~ msgid "PIN code"
-#~ msgstr "Código PIN"
-
-#~ msgid "4-digit PIN code"
-#~ msgstr "PIN de cuatro dígitos"
-
-#~ msgid "4-digit PIN code…"
-#~ msgstr "PIN de cuatro dígitos..."
-
-#~ msgid "You need a PIN code or passphrase set to use Developer Mode."
-#~ msgstr "Necesita un PIN o contraseña para usar el modo de desarrollador."
-
-#~ msgid "Switch to PIN code"
-#~ msgstr "Cambiar a PIN"
-
-#~ msgid "Existing PIN code"
-#~ msgstr "PIN actual"
-
-#~ msgid "Change PIN code…"
-#~ msgstr "Cambiar el PIN..."
-
-#~ msgid "Choose PIN code"
-#~ msgstr "Seleccione el PIN"
-
-#~ msgid "Confirm PIN code"
-#~ msgstr "Confirme el PIN"
-
-#~ msgid "Your phone is set up to automatically report errors to Canonical."
-#~ msgstr ""
-#~ "El teléfono está configurado para enviar automáticamente informes de errores "
-#~ "a Canonical."
-
-#~ msgid "Incorrect PIN code. Try again."
-#~ msgstr "PIN incorrecto. Inténtelo de nuevo."
-
-#~ msgid "PIN code must be at least four digits long."
-#~ msgstr "El PIN debe tener al menos cuatro dígitos."
-
-#~ msgid "This can be disabled in System Settings."
-#~ msgstr "Esta opción se puede desactivar en Configuración del sistema."
-
-#~ msgid "Those PIN codes don't match. Try again."
-#~ msgstr "Esos PIN no coinciden. Inténtelo de nuevo."
-
-#~ msgid "Those PIN codes don't match."
-#~ msgstr "Los PIN no coinciden."
-
-#~ msgid "Please insert a SIM card before you continue."
-#~ msgstr "Inserte una tarjeta SIM antes de continuar."
-
-#~ msgid "Use your mobile network and Wi-Fi to work out where you are"
-#~ msgstr "Usar la red móvil y wifi para averiguar la ubicación"
-
-#~ msgid ""
-#~ "I have read and agreed to the HERE <a href='terms.qml'>terms and "
-#~ "conditions</a>"
-#~ msgstr ""
-#~ "He leído y acepto los <a href='terms.qml'>términos y condiciones</a> de HERE"
