@@ -235,15 +235,14 @@ bool sortSoundsList(const QString &s1, const QString &s2)
 /* List soundfiles in a directory and the corresponding /custom one,
  * which is what is used for eom customization, return a list of
  * the fullpaths to those sounds, sorted by name */
-QStringList Sound::listSounds(const QString &dirString)
+QStringList Sound::listSounds(const QStringList &dirs)
 {
-    if (m_soundsList.isEmpty())
-    {
-        m_soundsList = soundsListFromDir(dirString);
-        m_soundsList.append(soundsListFromDir("/custom" + dirString));
+    QStringList sounds;
 
-        qSort(m_soundsList.begin(), m_soundsList.end(), sortSoundsList);
-    }
+    for (int i = 0; i < dirs.size(); ++i)
+        sounds.append(soundsListFromDir(dirs[i]));
 
-    return m_soundsList;
+    qSort(sounds.begin(), sounds.end(), sortSoundsList);
+
+    return sounds;
 }
