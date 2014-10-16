@@ -177,6 +177,7 @@ ItemPage {
                     onClicked:
                         pageStack.push(pluginManager.getByName("system-update").pageComponent)
                 }
+                showDivider: false
             }
 
             ListItem.Divider {}
