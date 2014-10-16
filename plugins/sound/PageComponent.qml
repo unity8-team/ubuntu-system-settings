@@ -69,7 +69,7 @@ ItemPage {
                 control: Switch {
                     objectName: "silentMode"
                     checked: soundActionGroup.silentMode.state
-                    onCheckedChanged: soundActionGroup.silentMode.state = checked
+                    onCheckedChanged: soundActionGroup.silentMode.activate()
                 }
                 text: i18n.tr("Silent Mode")
                 showDivider: false
