@@ -144,6 +144,7 @@ ItemPage {
                 value: i18n.tr("%1 free").arg(backendInfos.formatSize(storageInfo.availableDiskSpace("/home")))
                 progression: true
                 onClicked: pageStack.push(Qt.resolvedUrl("Storage.qml"))
+                showDivider: false
             }
 
             ListItem.Divider {}
