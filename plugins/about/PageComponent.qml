@@ -146,7 +146,9 @@ ItemPage {
                 onClicked: pageStack.push(Qt.resolvedUrl("Storage.qml"))
             }
 
-            ListItem.Standard {
+            ListItem.Divider {}
+
+            ListItem.Header {
                 objectName: "softwareItem"
                 text: i18n.tr("Software:")
             }
@@ -177,7 +179,9 @@ ItemPage {
                 }
             }
 
-            ListItem.Standard {
+            ListItem.Divider {}
+
+            ListItem.Header {
                 objectName: "legalItem"
                 text: i18n.tr("Legal:")
             }
