@@ -18,14 +18,19 @@ import QtQuick 2.3
 import Qt.labs.folderlistmodel 2.1
 import SystemSettings 1.0
 import Ubuntu.Components 1.1
-import Ubuntu.SystemSettings.Wizard.Utils 0.1
+import Ubuntu.SystemSettings.SecurityPrivacy 1.0
 
 ItemPage {
     title: i18n.tr("Nokia HERE")
     id: termsPage
+
+    UbuntuSecurityPrivacyPanel {
+        id: securityPrivacy
+    }
+
     FolderListModel {
         id: termsModel
-        folder: System.hereLicensePath
+        folder: securityPrivacy.hereLicensePath
         nameFilters: ["*.html"]
         showDirs: false
         showOnlyReadable: true
@@ -71,9 +76,14 @@ ItemPage {
         }
     }
 
+
+    UbuntuSecurityPrivacyPanel {
+        id: securityPrivacy
+    }
+
     function loadFileContent() {
         var xhr = new XMLHttpRequest
-        xhr.open("GET", System.hereLicensePath + "/" + determineFileName())
+        xhr.open("GET", securityPrivacy.hereLicensePath + "/" + determineFileName())
         xhr.onreadystatechange = function() {
             if (xhr.readyState == XMLHttpRequest.DONE) {
                 termsLabel.text = xhr.responseText

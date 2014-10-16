@@ -25,7 +25,6 @@ import QtQuick 2.3
 import Ubuntu.Components 1.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 import Ubuntu.SystemSettings.SecurityPrivacy 1.0
-import Ubuntu.SystemSettings.Wizard.Utils 0.1
 import SystemSettings 1.0
 
 ItemPage {
@@ -33,11 +32,16 @@ ItemPage {
     title: i18n.tr("Location")
     flickable: scrollWidget
 
+
+    UbuntuSecurityPrivacyPanel {
+        id: securityPrivacy
+    }
+
     property bool useNone: !useLocation
     property bool canLocate: locationActionGroup.enabled.state !== undefined
     property bool useLocation: canLocate && locationActionGroup.enabled.state
-    property bool hereInstalled: System.hereLicensePath !== "" && termsModel.count > 0
-    property bool useHere: hereInstalled && System.hereEnabled
+    property bool hereInstalled: securityPrivacy.hereLicensePath !== "" && termsModel.count > 0
+    property bool useHere: hereInstalled && securityPrivacy.hereEnabled
 
     onCanLocateChanged: {
         optionsModel.createModel();
@@ -48,7 +52,7 @@ ItemPage {
 
     FolderListModel {
         id: termsModel
-        folder: System.hereLicensePath
+        folder: securityPrivacy.hereLicensePath
         nameFilters: ["*.html"]
         showDirs: false
         showOnlyReadable: true
@@ -94,7 +98,9 @@ ItemPage {
                         // turns ON location detection
                         locationActionGroup.enabled.activate();
                     }
-                    System.hereEnabled = key === 'here';
+                    if (locationPage.hereInstalled) {
+                        securityPrivacy.hereEnabled = key === 'here';
+                    }
                 }
                 property bool allow: selectedIndex !== (model.count - 1)
 
