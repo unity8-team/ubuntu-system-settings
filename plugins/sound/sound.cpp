@@ -233,7 +233,7 @@ bool sortSoundsList(const QString &s1, const QString &s2)
 }
 
 /* List soundfiles in a directory and the corresponding /custom one,
- * which is what is used for eom customization, return a list of
+ * which is what is used for oem customization, return a list of
  * the fullpaths to those sounds, sorted by name */
 QStringList Sound::listSounds(const QString &dirString)
 {
