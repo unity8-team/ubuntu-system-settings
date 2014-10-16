@@ -70,9 +70,6 @@ UpdateManager::UpdateManager(QObject *parent):
     QObject::connect(&m_network,
                      SIGNAL(clickTokenObtained(Update*, const QString&)),
                      this, SLOT(clickTokenReceived(Update*, const QString&)));
-    QObject::connect(&m_network,
-                     SIGNAL(downloadUrlFound(const QString&, const QString&)),
-                     this, SLOT(downloadUrlObtained(const QString&, const QString&)));
     // SYSTEM UPDATE
     QObject::connect(&m_systemUpdate, SIGNAL(updateAvailable(const QString&, Update*)),
                   this, SLOT(registerSystemUpdate(const QString&, Update*)));
@@ -286,7 +283,6 @@ void UpdateManager::clickTokenReceived(Update *app, const QString &clickToken)
 {
     app->setError("");
     app->setClickToken(clickToken);
-    app->setDownloadUrl(app->getClickUrl());
 }
 
 void UpdateManager::updateClickScope()
