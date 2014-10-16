@@ -429,13 +429,8 @@ ItemPage {
                                         tracker.pause();
                                     }
                                 } else {
-                                    if (!modelData.selected || modelData.systemUpdate) {
-                                        modelData.selected = true;
-                                        updateManager.startDownload(modelData.packageName);
-                                    } else {
-                                        modelData.updateState = true;
-                                        tracker.resume();
-                                    }
+                                    modelData.selected = true;
+                                    updateManager.startDownload(modelData.packageName);
                                 }
                             }
                         }

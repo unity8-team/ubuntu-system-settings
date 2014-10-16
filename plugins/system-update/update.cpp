@@ -29,6 +29,7 @@ Update::Update(QObject *parent) :
     QObject(parent),
     m_binary_filesize(0),
     m_click_url(""),
+    m_clickToken(""),
     m_downloadUrl(""),
     m_download_progress(0),
     m_error(""),
