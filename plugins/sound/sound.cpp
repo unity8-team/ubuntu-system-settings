@@ -210,13 +210,40 @@ void Sound::setDialpadSoundsEnabled(bool enabled)
     Q_EMIT(dialpadSoundsEnabledChanged());
 }
 
+QStringList soundsListFromDir(const QString &dirString)
+{
+    QDir soundsDir(dirString);
+
+    if (soundsDir.exists())
+    {
+        QStringList soundsList;
+
+        soundsDir.setFilter(QDir::Files | QDir::NoSymLinks);
+
+        for (uint i=0; i < soundsDir.count(); i++)
+            soundsList.append(soundsDir.absoluteFilePath(soundsDir[i])) ;
+        return soundsList;
+    }
+    return QStringList();
+}
+
+bool sortSoundsList(const QString &s1, const QString &s2)
+ {
+    return QFileInfo(s1).fileName() < QFileInfo(s2).fileName();
+}
+
+/* List soundfiles in a directory and the corresponding /custom one,
+ * which is what is used for eom customization, return a list of
+ * the fullpaths to those sounds, sorted by name */
 QStringList Sound::listSounds(const QString &dirString)
 {
     if (m_soundsList.isEmpty())
     {
-        QDir soundsDir(dirString);
-        soundsDir.setFilter(QDir::Files | QDir::NoSymLinks);
-        m_soundsList = soundsDir.entryList();
+        m_soundsList = soundsListFromDir(dirString);
+        m_soundsList.append(soundsListFromDir("/custom" + dirString));
+
+        qSort(m_soundsList.begin(), m_soundsList.end(), sortSoundsList);
     }
+
     return m_soundsList;
 }
