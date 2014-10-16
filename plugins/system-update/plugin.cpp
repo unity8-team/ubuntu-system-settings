@@ -30,11 +30,18 @@
 using namespace UpdatePlugin;
 
 
+static QObject *qml_update_manager(QQmlEngine *engine, QJSEngine *scriptEngine)
+{
+    Q_UNUSED(engine)
+    Q_UNUSED(scriptEngine)
+    return new UpdateManager();
+}
+
 void BackendPlugin::registerTypes(const char *uri)
 {
     Q_ASSERT(uri == QLatin1String("Ubuntu.SystemSettings.Update"));
     
-    qmlRegisterType<UpdateManager>(uri, 1, 0, "UpdateManager");
+    qmlRegisterSingletonType<UpdateManager>(uri, 1, 0, "UpdateManager", qml_update_manager);
     qmlRegisterType<SystemUpdate>(uri, 1, 0, "SystemUpdate");
     qmlRegisterType<Update>(uri, 1, 0, "Update");
     qmlRegisterType<DownloadTracker>(uri, 1, 0, "DownloadTracker");

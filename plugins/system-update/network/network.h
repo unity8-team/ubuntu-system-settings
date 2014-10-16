@@ -58,7 +58,6 @@ Q_SIGNALS:
     void errorOccurred();
     void networkError();
     void serverError();
-    void downloadUrlFound(const QString &packagename, const QString &url);
     void clickTokenObtained(Update *app, const QString &clickToken);
 
 private Q_SLOTS:
