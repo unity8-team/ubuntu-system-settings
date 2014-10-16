@@ -288,9 +288,7 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
         if self.use_sims == 2:
             self.add_sim2()
 
-        super(UbuntuSystemSettingsOfonoTestCase, self).setUp()
-        self.cellular_page = self.system_settings.\
-            main_view.go_to_cellular_page()
+        super(UbuntuSystemSettingsOfonoTestCase, self).setUp(panel)
 
     def set_default_for_calls(self, gsettings, default):
         gsettings.set_value('default-sim-for-calls', default)
@@ -314,9 +312,12 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
 
 
 class CellularBaseTestCase(UbuntuSystemSettingsOfonoTestCase):
+
     def setUp(self):
         """ Go to Cellular page """
         super(CellularBaseTestCase, self).setUp()
+        self.cellular_page = self.system_settings.\
+            main_view.go_to_cellular_page()
 
 
 class PhoneOfonoBaseTestCase(UbuntuSystemSettingsOfonoTestCase):
