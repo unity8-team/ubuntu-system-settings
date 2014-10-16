@@ -68,8 +68,8 @@ ItemPage {
             ListItem.Standard {
                 control: Switch {
                     objectName: "silentMode"
-                    checked: soundActionGroup.silentmode.state
-                    onCheckedChanged: soundActionGroup.silentmode.state = checked
+                    checked: soundActionGroup.silentMode.state
+                    onCheckedChanged: soundActionGroup.silentMode.state = checked
                 }
                 text: i18n.tr("Silent Mode")
                 showDivider: false
