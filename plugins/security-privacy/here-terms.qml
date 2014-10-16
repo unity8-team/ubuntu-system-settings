@@ -37,8 +37,6 @@ ItemPage {
         onCountChanged: loadFileContent()
     }
 
-    Component.onCompleted: termsPage.flickable = scrollWidget
-
     function makeFileName(lang, country) {
         return lang + "_" + country + ".html"
     }
@@ -76,14 +74,10 @@ ItemPage {
         }
     }
 
-
-    UbuntuSecurityPrivacyPanel {
-        id: securityPrivacy
-    }
-
     function loadFileContent() {
         var xhr = new XMLHttpRequest
         xhr.open("GET", securityPrivacy.hereLicensePath + "/" + determineFileName())
+        console.warn('opening', securityPrivacy.hereLicensePath + "/" + determineFileName())
         xhr.onreadystatechange = function() {
             if (xhr.readyState == XMLHttpRequest.DONE) {
                 termsLabel.text = xhr.responseText
