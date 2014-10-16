@@ -484,7 +484,7 @@ bool SecurityPrivacy::hereEnabled()
 void SecurityPrivacy::setHereEnabled(bool enabled)
 {
     m_accountsService.setUserProperty(HERE_IFACE, ENABLED_PROP,
-                                      QVariant::fromValue(QDBusVariant(enabled)));
+                                      QVariant::fromValue(enabled));
     Q_EMIT(hereEnabledChanged());
 }
 
