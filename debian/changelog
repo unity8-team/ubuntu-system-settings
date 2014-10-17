@@ -1,3 +1,25 @@
+ubuntu-system-settings (0.3+14.10.20141017~rtm-0ubuntu1) 14.09; urgency=low
+
+  [ Ken VanDine ]
+  * Updated the pot file.
+
+  [ jonas-drange ]
+  * [cellular] indirectly recreate ConnectionManager interface's dbus
+    proxy so it reports the true value of 'Powered' after flight mode
+    (LP: #1376957)
+
+  [ Iain Lane ]
+  * [sound] Make listSounds take a list of directories and list all of
+    the files in them, instead of assuming "/custom" all the time.
+
+  [ Ubuntu daily release ]
+  * New rebuild forced
+
+  [ Sebastien Bacher ]
+  * [sound] list custom ringtones as well (LP: #1381528)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 17 Oct 2014 14:57:51 +0000
+
 ubuntu-system-settings (0.3+14.10.20141014-0ubuntu1) utopic; urgency=low
 
   [ Ken VanDine ]
