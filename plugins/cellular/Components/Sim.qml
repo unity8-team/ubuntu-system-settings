@@ -39,6 +39,13 @@ Item {
     OfonoModem {
         id: modem
         modemPath: path
+        onInterfacesChanged: {
+            if (interfaces.indexOf('org.ofono.ConnectionManager') >= 0) {
+                connMan._valid = true;
+            } else {
+                connMan._valid = false;
+            }
+        }
     }
 
     OfonoNetworkRegistration {
@@ -58,6 +65,14 @@ Item {
 
     OfonoConnMan {
         id: connMan
+        property bool _valid: true
         modemPath: path
+        on_ValidChanged: {
+            if (_valid) {
+                // invalidate the binding's dbus proxy
+                modemPath = "/invalid";
+                modemPath = root.path;
+            }
+        }
     }
 }
