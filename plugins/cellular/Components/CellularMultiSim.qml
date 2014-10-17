@@ -50,7 +50,6 @@ Column {
             name: "sim1Online"
             when: sims[0].connMan.powered && !sims[1].connMan.powered
             StateChangeScript { script: {
-                console.warn('sim1Online');
                 selector.selectedIndex =
                     selector.model.indexOf(
                         sims[0].radioSettings.technologyPreference)
@@ -60,7 +59,6 @@ Column {
             name: "sim2Online"
             when: sims[1].connMan.powered && !sims[0].connMan.powered
             StateChangeScript { script: {
-                console.warn('sim2Online');
                 selector.selectedIndex =
                     selector.model.indexOf(
                         sims[1].radioSettings.technologyPreference)
@@ -70,7 +68,6 @@ Column {
             name: "bothOnline"
             when: sims[0].connMan.powered && sims[1].connMan.powered
             StateChangeScript { script: {
-                console.warn('both sims online');
                 sims[1].connMan.powered = false;
             }}
         }
@@ -96,6 +93,7 @@ Column {
         selectedIndex: [true, sims[0].connMan.powered, sims[1].connMan.powered]
             .lastIndexOf(true)
         onDelegateClicked: {
+            // power all sims on or off
             sims.forEach(function (sim) {
                 sim.connMan.powered = (model[index] === sim.path);
             });
