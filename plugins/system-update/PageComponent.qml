@@ -425,9 +425,13 @@ ItemPage {
 
                     function start () {
                         console.warn("START: " + modelData.packageName);
+                        if (!modelData.selected || modelData.systemUpdate) {
+                            UpdateManager.startDownload(modelData.packageName);
+                        } else {
+                            tracker.resume();
+                        }
                         modelData.selected = true;
                         modelData.updateState = true;
-                        UpdateManager.startDownload(modelData.packageName);
                     }
                     Column {
                         id: textArea
