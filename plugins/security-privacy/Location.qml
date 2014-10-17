@@ -67,6 +67,15 @@ ItemPage {
         Component.onCompleted: start()
     }
 
+    onUseLocationChanged: {
+        var newIndex;
+        if (useLocation) {
+            newIndex = useHere ? 1 : 0;
+        } else {
+            newIndex = detection.model.count - 1;
+        }
+        detection.selectedIndex = newIndex;
+    }
 
     Flickable {
         id: scrollWidget
@@ -90,15 +99,12 @@ ItemPage {
                         // turns OFF location detection
                         locationActionGroup.enabled.activate();
                     }
-                    if (key === 'gps' && !usingLocation) {
-                        // turns ON location detection
-                        locationActionGroup.enabled.activate();
-                    }
-                    if (key === 'here' && !usingLocation) {
+                    if ( (key === 'gps' || key === 'here') && !usingLocation) {
                         // turns ON location detection
                         locationActionGroup.enabled.activate();
                     }
                     if (locationPage.hereInstalled) {
+                        // toggles whether HERE is enabled
                         securityPrivacy.hereEnabled = key === 'here';
                     }
                 }
@@ -112,7 +118,7 @@ ItemPage {
                     if (model.count === 0) return 0; // re-creating
                     if (useNone) return model.count - 1;
                     if (useLocation && !useHere) return 0;
-                    if (useHere) return 1;
+                    if (useHere && useLocation) return 1;
                 }
                 onDelegateClicked: {
                     activate(model.get(index).key);
