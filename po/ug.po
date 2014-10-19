@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-10-16 20:04-0600\n"
-"PO-Revision-Date: 2014-10-14 16:56+0000\n"
+"PO-Revision-Date: 2014-10-19 01:58+0000\n"
 "Last-Translator: Gheyret T.Kenji <Unknown>\n"
 "Language-Team: Uyghur Computer Science Association <UKIJ@yahoogroups.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2014-10-18 07:12+0000\n"
+"X-Launchpad-Export-Date: 2014-10-19 07:05+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 
 #: ubuntu-system-settings.desktop.in.in.h:1 ../src/qml/MainWindow.qml:112
@@ -196,7 +196,7 @@ msgstr "باغلىنىشنى ئىشلەتكۈچى ياكى خېرىدار ئۈز
 
 #: ../plugins/wifi//Common.qml:80
 msgid "The device's existing connection was assumed"
-msgstr ""
+msgstr "ئۈسكۈنىنىڭ مەۋجۇت مەۋجۇت باغلىنىشى دەپ قارايدۇ"
 
 #: ../plugins/wifi//Common.qml:82
 msgid "The supplicant is now available"
@@ -798,36 +798,36 @@ msgstr "APN"
 
 #: ../plugins/cellular//PageChooseApn.qml:372
 msgid "Internet APN:"
-msgstr ""
+msgstr "ئىنتېرنېت  APN:"
 
 #: ../plugins/cellular//PageChooseApn.qml:449
 msgid "Custom Internet APN…"
-msgstr ""
+msgstr "ئىختىيارى ئىنتېرنېت  APN:"
 
 #: ../plugins/cellular//PageChooseApn.qml:460
 msgid "MMS APN:"
-msgstr ""
+msgstr "MMS APN:"
 
 #: ../plugins/cellular//PageChooseApn.qml:485
 #: ../plugins/cellular//CustomApnEditor.qml:143
 msgid "Same APN as for Internet"
-msgstr ""
+msgstr "ئىنتېرنېت بىلەن ئوخشاش APN"
 
 #: ../plugins/cellular//PageChooseApn.qml:565
 msgid "Custom MMS APN…"
-msgstr ""
+msgstr "ئىختىيارى MMS APN…"
 
 #: ../plugins/cellular//PageChooseApn.qml:591
 msgid "Reset APN Settings"
-msgstr ""
+msgstr "APN تەڭشىكىنى ئەسلىگە قايتۇر"
 
 #: ../plugins/cellular//PageChooseApn.qml:592
 msgid "Are you sure that you want to Reset APN Settings?"
-msgstr ""
+msgstr "APN تەڭشىكىنى راستلا ئەسلىگە قايتۇرسۇنمۇ؟"
 
 #: ../plugins/cellular//PageChooseApn.qml:598
 msgid "Reset"
-msgstr ""
+msgstr "ئەسلىگە قايتۇر"
 
 #: ../plugins/cellular//PageChooseCarriers.qml:27
 #: ../plugins/cellular//Components//MultiSim.qml:68
@@ -836,43 +836,43 @@ msgstr "توشۇغۇچىلار(شىركەت)"
 
 #: ../plugins/cellular//CustomApnEditor.qml:42
 msgid "Internet"
-msgstr ""
+msgstr "ئىنتېرنېت"
 
 #: ../plugins/cellular//CustomApnEditor.qml:42
 msgid "MMS"
-msgstr ""
+msgstr "MMS"
 
 #. TRANSLATORS: %1 is either i18n.tr("Internet") or i18n.tr("MMS")
 #: ../plugins/cellular//CustomApnEditor.qml:67
 #, qt-format
 msgid "Custom %1 APN"
-msgstr ""
+msgstr "ئىختىيارى %1 APN"
 
 #. TRANSLATORS: %1 is either i18n.tr("Internet") or i18n.tr("MMS")
 #: ../plugins/cellular//CustomApnEditor.qml:171
 #, qt-format
 msgid "%1 APN"
-msgstr ""
+msgstr "%1 APN"
 
 #: ../plugins/cellular//CustomApnEditor.qml:181
 msgid "MMSC"
-msgstr ""
+msgstr "MMSC"
 
 #: ../plugins/cellular//CustomApnEditor.qml:191
 msgid "Proxy"
-msgstr ""
+msgstr "ۋاكالەتچى"
 
 #: ../plugins/cellular//CustomApnEditor.qml:213
 msgid "Username"
-msgstr ""
+msgstr "ئىشلەتكۈچى ئاتى"
 
 #: ../plugins/cellular//CustomApnEditor.qml:264
 msgid "Save"
-msgstr ""
+msgstr "ساقلا"
 
 #: ../plugins/cellular//CustomApnEditor.qml:264
 msgid "Activate"
-msgstr ""
+msgstr "ئاكتىپلا"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
 #: ../plugins/cellular//PageComponent.qml:32
@@ -1768,7 +1768,7 @@ msgstr "ئورنات"
 
 #: ../plugins/system-update//PageComponent.qml:152
 msgid "Installation failed"
-msgstr ""
+msgstr "ئورنىتىش مەغلۇپ بولدى"
 
 #: ../plugins/system-update//PageComponent.qml:156
 #: ../plugins/cellular//Components//SimEditor.qml:200
@@ -1782,7 +1782,7 @@ msgstr "يۇمشاق دېتال ئەڭ يېڭى ھالەتتە"
 #: ../plugins/system-update//PageComponent.qml:235
 #: ../plugins/system-update//PageComponent.qml:241
 msgid "Sorry, the system update failed."
-msgstr ""
+msgstr "كەچۈرۈڭ، سىتېمىنى يېڭىلاش مەغلۇپ بولدى."
 
 #: ../plugins/system-update//PageComponent.qml:254
 msgid "Restarting…"
@@ -1794,7 +1794,7 @@ msgstr "يېڭىلانمىلار بارمۇ-يوق تەكشۈرۈۋاتىدۇ…
 
 #: ../plugins/system-update//PageComponent.qml:298
 msgid "Connect to the Internet to check for updates"
-msgstr ""
+msgstr "يېڭىلانمىلارنىڭ بار يوقلۇقىنى تەكشۈرۈش ئۈچۈن ئىنتېرنېتقا باغلىنىڭ"
 
 #: ../plugins/system-update//PageComponent.qml:313
 #: ../plugins/system-update//PageComponent.qml:471
@@ -2180,6 +2180,8 @@ msgid ""
 "This can be disabled in <b>System Settings</b> under <b>Security &amp; "
 "Privacy</b>"
 msgstr ""
+"بۇنى <b>بىخەتەرلىك &amp; شەخسىيەت</b>نىڭ ئاستىدىكى <b>سىستېما تەڭشىكى</b>دە "
+"ئىناۋەتسىز قىلىشقا بولىدۇ."
 
 #: ../wizard/qml/Components//Page.qml:89
 msgid "Back"
@@ -2987,21 +2989,3 @@ msgstr "سىستېما يېڭىلىغۇنى ئىجرا قىلىش ئۈچۈن چ�
 
 #~ msgid "Passphrase must be at least four characters long."
 #~ msgstr "ئىم جۈملىسى ئەڭ ئاز دېگەندە 4 ھەرپ بولۇشى كېرەك."
-
-#~ msgid "Bug reporting"
-#~ msgstr "كەمتۈك مەلۇم قىلىش"
-
-#~ msgid "This can be disabled here:"
-#~ msgstr "بۇنى بۇ يەردە ئىناۋەتسىز قىلىشقا بولىدۇ:"
-
-#~ msgid "System Settings &gt; Security &amp; Privacy"
-#~ msgstr "سىستېما تەڭشىكى &gt; بىخەتەرلىك &amp; شەخسىيەت"
-
-#~ msgid "Use your mobile network and Wi-Fi to determine where you are"
-#~ msgstr "قەيەردىلىكىڭىزنى بىلىش ئۈچۈن يانفون تورىنى ياكى Wi-Fi نى ئىشلەتسۇن"
-
-#~ msgid ""
-#~ "I have read and agreed to the HERE <a href='terms.qml'>Terms and "
-#~ "Conditions</a>"
-#~ msgstr ""
-#~ "مەن HERE نىڭ  <a href='terms.qml'>ئىشلىتىش تۈزۈمى</a>نى ئوقۇدۇم ۋە قوشۇلىمەن."

@@ -9,15 +9,15 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-10-16 20:04-0600\n"
-"PO-Revision-Date: 2014-10-14 10:20+0000\n"
-"Last-Translator: Akerbeltz <fios@akerbeltz.org>\n"
+"PO-Revision-Date: 2014-10-18 15:38+0000\n"
+"Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Fòram na Gàidhlig\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 || n==11) ? 0 : (n==2 || n==12) ? 1 : "
 "(n > 2 && n < 20) ? 2 : 3;\n"
-"X-Launchpad-Export-Date: 2014-10-18 07:09+0000\n"
+"X-Launchpad-Export-Date: 2014-10-19 07:05+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 "Language: gd\n"
 
@@ -846,7 +846,7 @@ msgstr ""
 
 #: ../plugins/cellular//PageChooseApn.qml:598
 msgid "Reset"
-msgstr ""
+msgstr "Ath-shuidhich"
 
 #: ../plugins/cellular//PageChooseCarriers.qml:27
 #: ../plugins/cellular//Components//MultiSim.qml:68
@@ -855,11 +855,11 @@ msgstr "Giùlanairean"
 
 #: ../plugins/cellular//CustomApnEditor.qml:42
 msgid "Internet"
-msgstr ""
+msgstr "Eadar-lìon"
 
 #: ../plugins/cellular//CustomApnEditor.qml:42
 msgid "MMS"
-msgstr ""
+msgstr "MMS"
 
 #. TRANSLATORS: %1 is either i18n.tr("Internet") or i18n.tr("MMS")
 #: ../plugins/cellular//CustomApnEditor.qml:67
@@ -879,19 +879,19 @@ msgstr ""
 
 #: ../plugins/cellular//CustomApnEditor.qml:191
 msgid "Proxy"
-msgstr ""
+msgstr "Progsaidh"
 
 #: ../plugins/cellular//CustomApnEditor.qml:213
 msgid "Username"
-msgstr ""
+msgstr "Ainm-cleachdaiche"
 
 #: ../plugins/cellular//CustomApnEditor.qml:264
 msgid "Save"
-msgstr ""
+msgstr "Sàbhail"
 
 #: ../plugins/cellular//CustomApnEditor.qml:264
 msgid "Activate"
-msgstr ""
+msgstr "Gnìomhaich"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
 #: ../plugins/cellular//PageComponent.qml:32
@@ -1807,7 +1807,7 @@ msgstr "Stàlaich"
 
 #: ../plugins/system-update//PageComponent.qml:152
 msgid "Installation failed"
-msgstr ""
+msgstr "Dh'fhàillig an stàladh"
 
 #: ../plugins/system-update//PageComponent.qml:156
 #: ../plugins/cellular//Components//SimEditor.qml:200
@@ -3036,9 +3036,6 @@ msgstr "Thoir gnogag gus ùraichear an t-siostaim fhosgladh."
 #~ msgid "Available networks"
 #~ msgstr "Lìonraidhean ri làimh"
 
-#~ msgid "Bug reporting"
-#~ msgstr "Aithris air bugaichean"
-
 #~ msgid "Set lock security"
 #~ msgstr "Suidhich tèarainteachd na glaise"
 
@@ -3048,20 +3045,3 @@ msgstr "Thoir gnogag gus ùraichear an t-siostaim fhosgladh."
 #~ msgid "Passphrase must be at least four characters long."
 #~ msgstr ""
 #~ "Feumaidh ceithir caractaran a bhith ann an abairt-fhaire air a char as lugha."
-
-#~ msgid "Use your mobile network and Wi-Fi to determine where you are"
-#~ msgstr ""
-#~ "Cleachd lìonra an fhòn-làimhe no Wi-Fi gus faighinn a-mach far a bheil thu"
-
-#~ msgid ""
-#~ "I have read and agreed to the HERE <a href='terms.qml'>Terms and "
-#~ "Conditions</a>"
-#~ msgstr ""
-#~ "Tha mi air na <a href='terms.qml'>teirmichean is cumhaichean</a> aig HERE a "
-#~ "leughadh 's air aontachadh riutha"
-
-#~ msgid "System Settings &gt; Security &amp; Privacy"
-#~ msgstr "Roghainnean an t-siostaim &gt; Tèarainteachd ⁊ prìobhaideachd"
-
-#~ msgid "This can be disabled here:"
-#~ msgstr "'S urrainn dhut seo a chur à comas an-seo:"
