@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-10-16 20:04-0600\n"
-"PO-Revision-Date: 2014-10-17 16:53+0000\n"
+"PO-Revision-Date: 2014-10-19 09:03+0000\n"
 "Last-Translator: ivarela <ivarela@ubuntu.com>\n"
 "Language-Team: Asturian <ast@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-10-18 07:08+0000\n"
+"X-Launchpad-Export-Date: 2014-10-20 07:03+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 
 #: ubuntu-system-settings.desktop.in.in.h:1 ../src/qml/MainWindow.qml:112
@@ -789,7 +789,7 @@ msgstr "Manualmente"
 
 #: ../plugins/cellular//PageChooseCarrier.qml:196
 msgid "Searching for carriers…"
-msgstr ""
+msgstr "Guetando operadores..."
 
 #: ../plugins/cellular//PageChooseCarrier.qml:229
 #: ../plugins/cellular//PageChooseApn.qml:31
@@ -799,36 +799,36 @@ msgstr "Nome del puntu d'accesu"
 
 #: ../plugins/cellular//PageChooseApn.qml:372
 msgid "Internet APN:"
-msgstr ""
+msgstr "APN a internet:"
 
 #: ../plugins/cellular//PageChooseApn.qml:449
 msgid "Custom Internet APN…"
-msgstr ""
+msgstr "Personalizar el APN a internet..."
 
 #: ../plugins/cellular//PageChooseApn.qml:460
 msgid "MMS APN:"
-msgstr ""
+msgstr "APN de MMS:"
 
 #: ../plugins/cellular//PageChooseApn.qml:485
 #: ../plugins/cellular//CustomApnEditor.qml:143
 msgid "Same APN as for Internet"
-msgstr ""
+msgstr "El mesmu APN que pa internet"
 
 #: ../plugins/cellular//PageChooseApn.qml:565
 msgid "Custom MMS APN…"
-msgstr ""
+msgstr "Personalizar el APN de MMS..."
 
 #: ../plugins/cellular//PageChooseApn.qml:591
 msgid "Reset APN Settings"
-msgstr ""
+msgstr "Restablecer los axustes de APN"
 
 #: ../plugins/cellular//PageChooseApn.qml:592
 msgid "Are you sure that you want to Reset APN Settings?"
-msgstr ""
+msgstr "¿De xuru que quies restablecer los axustes de APN?"
 
 #: ../plugins/cellular//PageChooseApn.qml:598
 msgid "Reset"
-msgstr ""
+msgstr "Reaniciar"
 
 #: ../plugins/cellular//PageChooseCarriers.qml:27
 #: ../plugins/cellular//Components//MultiSim.qml:68
@@ -837,43 +837,43 @@ msgstr "Operadores"
 
 #: ../plugins/cellular//CustomApnEditor.qml:42
 msgid "Internet"
-msgstr ""
+msgstr "Internet"
 
 #: ../plugins/cellular//CustomApnEditor.qml:42
 msgid "MMS"
-msgstr ""
+msgstr "MMS"
 
 #. TRANSLATORS: %1 is either i18n.tr("Internet") or i18n.tr("MMS")
 #: ../plugins/cellular//CustomApnEditor.qml:67
 #, qt-format
 msgid "Custom %1 APN"
-msgstr ""
+msgstr "Personalizar el APN de %1"
 
 #. TRANSLATORS: %1 is either i18n.tr("Internet") or i18n.tr("MMS")
 #: ../plugins/cellular//CustomApnEditor.qml:171
 #, qt-format
 msgid "%1 APN"
-msgstr ""
+msgstr "%1 APN"
 
 #: ../plugins/cellular//CustomApnEditor.qml:181
 msgid "MMSC"
-msgstr ""
+msgstr "MMSC"
 
 #: ../plugins/cellular//CustomApnEditor.qml:191
 msgid "Proxy"
-msgstr ""
+msgstr "Proxy"
 
 #: ../plugins/cellular//CustomApnEditor.qml:213
 msgid "Username"
-msgstr ""
+msgstr "Nome d'usuariu"
 
 #: ../plugins/cellular//CustomApnEditor.qml:264
 msgid "Save"
-msgstr ""
+msgstr "Guardar"
 
 #: ../plugins/cellular//CustomApnEditor.qml:264
 msgid "Activate"
-msgstr ""
+msgstr "Activar"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
 #: ../plugins/cellular//PageComponent.qml:32
@@ -1773,7 +1773,7 @@ msgstr "Instalar"
 
 #: ../plugins/system-update//PageComponent.qml:152
 msgid "Installation failed"
-msgstr ""
+msgstr "Falló la instalación"
 
 #: ../plugins/system-update//PageComponent.qml:156
 #: ../plugins/cellular//Components//SimEditor.qml:200
@@ -1787,7 +1787,7 @@ msgstr "El software ta anováu"
 #: ../plugins/system-update//PageComponent.qml:235
 #: ../plugins/system-update//PageComponent.qml:241
 msgid "Sorry, the system update failed."
-msgstr ""
+msgstr "Sentímoslo, falló la instalación del sistema"
 
 #: ../plugins/system-update//PageComponent.qml:254
 msgid "Restarting…"
@@ -1799,7 +1799,7 @@ msgstr "Comprobando anovamientos…"
 
 #: ../plugins/system-update//PageComponent.qml:298
 msgid "Connect to the Internet to check for updates"
-msgstr ""
+msgstr "Coneutar a internet pa guetar anovamientos"
 
 #: ../plugins/system-update//PageComponent.qml:313
 #: ../plugins/system-update//PageComponent.qml:471
@@ -2150,11 +2150,14 @@ msgid ""
 "Ubuntu includes location services provided by HERE, enabling apps to "
 "pinpoint your location."
 msgstr ""
+"Ubuntu inclúi servicios de llocalización proporcionaos por HERE. Esto "
+"permite a les apps identificar la to llocalización."
 
 #: ../wizard/qml/Pages//50-location.qml:64
 msgid ""
 "Allow apps to use your mobile and Wi-Fi networks to determine your location."
 msgstr ""
+"Permitir a les app usar la rede móvil y wifi pa determinar la llocalización."
 
 #. TRANSLATORS: HERE is a trademark for Nokia's location service, you probably shouldn't translate it
 #: ../wizard/qml/Pages//50-location.qml:74
@@ -2162,16 +2165,19 @@ msgid ""
 "Accept the HERE <a href='terms.qml'>terms and conditions</a> to enable these "
 "services."
 msgstr ""
+"Aceutar los <a href='terms.qml'>términos y condiciones</a> de HERE p'activar "
+"estos servicios."
 
 #: ../wizard/qml/Pages//50-location.qml:85
 msgid ""
 "This service can be disabled at any time from the <b>System Settings</b> "
 "menu."
 msgstr ""
+"Esti serviciu pue desactivase dende'l menú d'<b>Axustes del sistema</b>."
 
 #: ../wizard/qml/Pages//60-reporting.qml:22
 msgid "Improving your experience"
-msgstr ""
+msgstr "Ameyorar la esperiencia"
 
 #: ../wizard/qml/Pages//60-reporting.qml:34
 msgid ""
@@ -2186,6 +2192,8 @@ msgid ""
 "This can be disabled in <b>System Settings</b> under <b>Security &amp; "
 "Privacy</b>"
 msgstr ""
+"Esto pue desactivase nos <b>Axustes del sistema</b> en <b>Seguridá y "
+"privacidá</b>"
 
 #: ../wizard/qml/Components//Page.qml:89
 msgid "Back"
@@ -2986,9 +2994,6 @@ msgstr "Calca p'abrir l'anovador del sistema."
 #~ msgid "Other network"
 #~ msgstr "Otra rede"
 
-#~ msgid "Bug reporting"
-#~ msgstr "Informe de fallos"
-
 #~ msgid "Passphrase must be at least four characters long."
 #~ msgstr "La contraseña tien de tener polo menos cuatro caráuteres."
 
@@ -2997,18 +3002,3 @@ msgstr "Calca p'abrir l'anovador del sistema."
 
 #~ msgid "Set lock security"
 #~ msgstr "Afitar la seguridá de bloquéu"
-
-#~ msgid ""
-#~ "I have read and agreed to the HERE <a href='terms.qml'>Terms and "
-#~ "Conditions</a>"
-#~ msgstr ""
-#~ "Lleí y aceuto los <a href='terms.qml'>Términos y condiciones</a> de HERE"
-
-#~ msgid "Use your mobile network and Wi-Fi to determine where you are"
-#~ msgstr "Usa la rede móvil y Wi-Fi pa determinar ónde tas"
-
-#~ msgid "This can be disabled here:"
-#~ msgstr "Esto pue desactivase equí:"
-
-#~ msgid "System Settings &gt; Security &amp; Privacy"
-#~ msgstr "Axustes del sistema &gt; Seguridá &amp; Privacidá"
