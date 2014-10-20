@@ -453,12 +453,12 @@ ItemPage {
                                 objectName: "labelTitle"
                                 anchors {
                                     left: parent.left
-                                    right: buttonAppUpdate.left
+                                    right: buttonAppUpdate.visible ? buttonAppUpdate.left : parent.right
                                     verticalCenter: parent.verticalCenter
                                 }
                                 text: modelData.title
                                 font.bold: true
-                                elide: buttonAppUpdate.visible ? Text.ElideMiddle : Text.ElideNone
+                                elide: Text.ElideMiddle
                             }
 
                             Button {
