@@ -1,3 +1,4 @@
+
 # -*- Mode: Python; coding: utf-8; indent-tabs-mode: nil; tab-width: 4 -*-
 #
 # Copyright (C) 2014 Canonical Ltd.
@@ -264,8 +265,9 @@ class CellularPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
 
     @autopilot.logging.log_action(logger.debug)
     def _set_connection_type(self, radio_type, sim, scroll_to_and_click):
-        t = self.select_single('OptionSelectorDelegate',
-                               objectName='%s_radio_%s' % (sim, radio_type))
+        t = self.wait_select_single(
+            'OptionSelectorDelegate',
+            objectName='%s_radio_%s' % (sim, radio_type))
         if scroll_to_and_click:
             scroll_to_and_click(t)
         else:
@@ -328,6 +330,9 @@ class CellularPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
         obj = self.select_single(
             objectName="edit_name_%s" % sim)
         self.pointing_device.click_object(obj)
+
+        # wait for animation
+        sleep(1)
         ok = self.select_single('Button', objectName="doRename")
 
         field = self.select_single('TextField', objectName="nameField")
