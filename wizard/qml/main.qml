@@ -25,10 +25,11 @@ import "Components"
 import "file:///usr/share/unity8/Notifications" as Notifications // FIXME This should become a module or go away
 import "file:///usr/share/unity8/Components" as UnityComponents
 
-Item {
+FocusScope {
     id: root
     width: units.gu(40)
     height: units.gu(71)
+    focus: true
 
     // These should be set by a security page and we apply the settings when
     // the user exits the wizard.
@@ -40,7 +41,6 @@ Item {
         // A visible selected background looks bad in ListItem widgets with our theme
         Theme.palette.selected.background = "#00000000"
         i18n.domain = "ubuntu-system-settings"
-        root.forceActiveFocus();
     }
 
     UbuntuSecurityPrivacyPanel {
