@@ -206,7 +206,6 @@ void NotificationsManager::checkUpdates(QString key, bool value)
     GVariant *bl = g_variant_new("a(ss)", builder);
     g_variant_builder_unref (builder);
     g_settings_set_value(m_pushSettings, BLACKLIST_KEY, bl);
-    g_variant_unref (bl);
 }
 
 }
