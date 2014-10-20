@@ -1,6 +1,6 @@
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
-set(QML_SOURCES PageComponent.qml)
+set(QML_SOURCES PageComponent.qml profile.qml)
 QT5_ADD_RESOURCES(example-res ui.qrc)
 add_library(example-plugin MODULE example-plugin.cpp example-plugin.h ${example-res}
 ${QML_SOURCES})

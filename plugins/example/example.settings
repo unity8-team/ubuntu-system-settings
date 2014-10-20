@@ -1,8 +1,8 @@
 {
     "name": "Identity Management",
-    "icon": "totem",
-    "translations": "settings-example",
-    "category": "network",
+    "icon": "male66",
+    "translations": "settings-profile",
+    "category": "system",
     "priority": 2,
     "keywords": [
         "example",
