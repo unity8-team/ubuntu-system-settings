@@ -25,7 +25,7 @@ import "Components"
 import "file:///usr/share/unity8/Notifications" as Notifications // FIXME This should become a module or go away
 import "file:///usr/share/unity8/Components" as UnityComponents
 
-FocusScope {
+Item {
     id: root
     width: units.gu(40)
     height: units.gu(71)
