@@ -11,10 +11,8 @@ import "utilities.js" as Utilities
 ItemPage {
     property variant soundDisplayNames:
         Utilities.buildSoundValues(soundFileNames)
-    property variant soundFileNames:
-        backendInfo.listSounds(soundsDir).map(function (sound) {
-            return soundsDir+sound
-        })
+    property variant soundFileNames: backendInfo.listSounds(
+        [soundsDir, "/custom" + soundsDir])
     property bool showStopButton: false
     property int soundType // 0: ringtone, 1: message
     property string soundsDir
