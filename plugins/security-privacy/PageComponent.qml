@@ -124,7 +124,7 @@ ItemPage {
             ListItem.Standard {
                 id: securityTitle
                 text: i18n.tr("Security")
-            }            
+            }
             ListItem.SingleValue {
                 id: lockingControl
                 objectName: "lockingControl"
@@ -232,6 +232,7 @@ ItemPage {
             }
             ListItem.SingleValue {
                 id: locationItem
+                objectName: "locationItem"
                 text: i18n.tr("Location access")
                 value: ""
                 progression: true
