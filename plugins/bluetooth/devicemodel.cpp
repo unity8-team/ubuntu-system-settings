@@ -382,6 +382,8 @@ void DeviceModel::slotDeviceFound(const QString                &address,
         if (device->isValid()) {
             addDevice(device);
         }
+    } else {
+        device->setProperties(properties);
     }
 }
 
