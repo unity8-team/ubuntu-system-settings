@@ -453,11 +453,12 @@ ItemPage {
                                 objectName: "labelTitle"
                                 anchors {
                                     left: parent.left
+                                    right: buttonAppUpdate.visible ? buttonAppUpdate.left : parent.right
                                     verticalCenter: parent.verticalCenter
                                 }
                                 text: modelData.title
                                 font.bold: true
-                                elide: buttonAppUpdate.visible ? Text.ElideRight : Text.ElideNone
+                                elide: Text.ElideMiddle
                             }
 
                             Button {
@@ -514,6 +515,8 @@ ItemPage {
                             Label {
                                 objectName: "labelUpdateStatus"
                                 anchors.left: parent.left
+                                anchors.right: updateStatusLabel.left
+                                elide: Text.ElideMiddle
                                 fontSize: "small"
                                 text: {
                                     if (retry)
@@ -526,6 +529,7 @@ ItemPage {
                                 }
                             }
                             Label {
+                                id: updateStatusLabel
                                 anchors.right: parent.right
                                 visible: !labelSize.visible && !installing && !installed
                                 fontSize: "small"
