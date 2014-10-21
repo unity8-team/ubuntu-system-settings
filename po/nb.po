@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-10-16 20:04-0600\n"
-"PO-Revision-Date: 2014-10-14 08:31+0000\n"
+"PO-Revision-Date: 2014-10-20 13:27+0000\n"
 "Last-Translator: Åka Sikrom <Unknown>\n"
 "Language-Team: Norwegian Bokmal <nb@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-10-18 07:11+0000\n"
-"X-Generator: Launchpad (build 17196)\n"
+"X-Launchpad-Export-Date: 2014-10-21 07:25+0000\n"
+"X-Generator: Launchpad (build 17203)\n"
 
 #: ubuntu-system-settings.desktop.in.in.h:1 ../src/qml/MainWindow.qml:112
 msgid "System Settings"
@@ -793,7 +793,7 @@ msgstr "Manuelt"
 
 #: ../plugins/cellular//PageChooseCarrier.qml:196
 msgid "Searching for carriers…"
-msgstr ""
+msgstr "Søker etter tilbydere …"
 
 #: ../plugins/cellular//PageChooseCarrier.qml:229
 #: ../plugins/cellular//PageChooseApn.qml:31
@@ -803,36 +803,36 @@ msgstr "APN"
 
 #: ../plugins/cellular//PageChooseApn.qml:372
 msgid "Internet APN:"
-msgstr ""
+msgstr "Internett-tilknytningspunkt:"
 
 #: ../plugins/cellular//PageChooseApn.qml:449
 msgid "Custom Internet APN…"
-msgstr ""
+msgstr "Egendefinert internett-tilknytningspunkt (APN):"
 
 #: ../plugins/cellular//PageChooseApn.qml:460
 msgid "MMS APN:"
-msgstr ""
+msgstr "Internett-tilknytningspunkt (APN) for MMS:"
 
 #: ../plugins/cellular//PageChooseApn.qml:485
 #: ../plugins/cellular//CustomApnEditor.qml:143
 msgid "Same APN as for Internet"
-msgstr ""
+msgstr "Samme internett-tilknytningspunkt (APN) som for Internett."
 
 #: ../plugins/cellular//PageChooseApn.qml:565
 msgid "Custom MMS APN…"
-msgstr ""
+msgstr "Egendefinert internett-tilknytningspunkt (APN) for MMS …"
 
 #: ../plugins/cellular//PageChooseApn.qml:591
 msgid "Reset APN Settings"
-msgstr ""
+msgstr "Tilbakestill oppsett internett-tilknytningspunkt (APN)"
 
 #: ../plugins/cellular//PageChooseApn.qml:592
 msgid "Are you sure that you want to Reset APN Settings?"
-msgstr ""
+msgstr "Er du sikker på at du vil tilbakestille APN-oppsettet?"
 
 #: ../plugins/cellular//PageChooseApn.qml:598
 msgid "Reset"
-msgstr ""
+msgstr "Tilbakestill"
 
 #: ../plugins/cellular//PageChooseCarriers.qml:27
 #: ../plugins/cellular//Components//MultiSim.qml:68
@@ -841,43 +841,43 @@ msgstr "Tilbydere"
 
 #: ../plugins/cellular//CustomApnEditor.qml:42
 msgid "Internet"
-msgstr ""
+msgstr "Internett"
 
 #: ../plugins/cellular//CustomApnEditor.qml:42
 msgid "MMS"
-msgstr ""
+msgstr "MMS"
 
 #. TRANSLATORS: %1 is either i18n.tr("Internet") or i18n.tr("MMS")
 #: ../plugins/cellular//CustomApnEditor.qml:67
 #, qt-format
 msgid "Custom %1 APN"
-msgstr ""
+msgstr "Egendefinert internett-tilknytningspunkt (APN) for %1"
 
 #. TRANSLATORS: %1 is either i18n.tr("Internet") or i18n.tr("MMS")
 #: ../plugins/cellular//CustomApnEditor.qml:171
 #, qt-format
 msgid "%1 APN"
-msgstr ""
+msgstr "Internett-tilknytningspunkt for %1"
 
 #: ../plugins/cellular//CustomApnEditor.qml:181
 msgid "MMSC"
-msgstr ""
+msgstr "MMSC"
 
 #: ../plugins/cellular//CustomApnEditor.qml:191
 msgid "Proxy"
-msgstr ""
+msgstr "Mellomtjener"
 
 #: ../plugins/cellular//CustomApnEditor.qml:213
 msgid "Username"
-msgstr ""
+msgstr "Brukernavn"
 
 #: ../plugins/cellular//CustomApnEditor.qml:264
 msgid "Save"
-msgstr ""
+msgstr "Lagre"
 
 #: ../plugins/cellular//CustomApnEditor.qml:264
 msgid "Activate"
-msgstr ""
+msgstr "Aktiver"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
 #: ../plugins/cellular//PageComponent.qml:32
@@ -1773,7 +1773,7 @@ msgstr "Installer"
 
 #: ../plugins/system-update//PageComponent.qml:152
 msgid "Installation failed"
-msgstr ""
+msgstr "Installasjon mislyktes"
 
 #: ../plugins/system-update//PageComponent.qml:156
 #: ../plugins/cellular//Components//SimEditor.qml:200
@@ -1787,7 +1787,7 @@ msgstr "Programvaren er oppdatert"
 #: ../plugins/system-update//PageComponent.qml:235
 #: ../plugins/system-update//PageComponent.qml:241
 msgid "Sorry, the system update failed."
-msgstr ""
+msgstr "Systemoppdatering mislyktes."
 
 #: ../plugins/system-update//PageComponent.qml:254
 msgid "Restarting…"
@@ -1799,7 +1799,7 @@ msgstr "Ser etter oppdateringer …"
 
 #: ../plugins/system-update//PageComponent.qml:298
 msgid "Connect to the Internet to check for updates"
-msgstr ""
+msgstr "Koble til Internett for å se etter oppdateringer"
 
 #: ../plugins/system-update//PageComponent.qml:313
 #: ../plugins/system-update//PageComponent.qml:471
@@ -2154,11 +2154,15 @@ msgid ""
 "Ubuntu includes location services provided by HERE, enabling apps to "
 "pinpoint your location."
 msgstr ""
+"Ubuntu bruker tjenester levert av HERE for å gjøre programmer i stand til å "
+"se hvor du befinner deg."
 
 #: ../wizard/qml/Pages//50-location.qml:64
 msgid ""
 "Allow apps to use your mobile and Wi-Fi networks to determine your location."
 msgstr ""
+"Tillat programmer å bruke telefonens mobile og trådløse nettverk for å se "
+"hvor du befinner deg."
 
 #. TRANSLATORS: HERE is a trademark for Nokia's location service, you probably shouldn't translate it
 #: ../wizard/qml/Pages//50-location.qml:74
@@ -2166,16 +2170,20 @@ msgid ""
 "Accept the HERE <a href='terms.qml'>terms and conditions</a> to enable these "
 "services."
 msgstr ""
+"Godkjenn <a href='terms.qml'>brukervilkårene for HERE</a> for å aktivere "
+"disse tjenestene."
 
 #: ../wizard/qml/Pages//50-location.qml:85
 msgid ""
 "This service can be disabled at any time from the <b>System Settings</b> "
 "menu."
 msgstr ""
+"Denne tjenesten kan når som helst slås av i menyen "
+"<b>Systeminnstillinger</b>."
 
 #: ../wizard/qml/Pages//60-reporting.qml:22
 msgid "Improving your experience"
-msgstr ""
+msgstr "Forbedrer opplevelsen"
 
 #: ../wizard/qml/Pages//60-reporting.qml:34
 msgid ""
@@ -2190,6 +2198,8 @@ msgid ""
 "This can be disabled in <b>System Settings</b> under <b>Security &amp; "
 "Privacy</b>"
 msgstr ""
+"Dette kan slås av i menyen <b>Systeminnstillinger</b> under <b>Sikkerhet og "
+"personvern</b>"
 
 #: ../wizard/qml/Components//Page.qml:89
 msgid "Back"
@@ -3000,23 +3010,3 @@ msgstr "Trykk for å åpne systemoppdateringsverktøyet."
 
 #~ msgid "Set lock security"
 #~ msgstr "Velg låsesikkerhet"
-
-#~ msgid "Bug reporting"
-#~ msgstr "Feilrapportering"
-
-#~ msgid ""
-#~ "I have read and agreed to the HERE <a href='terms.qml'>Terms and "
-#~ "Conditions</a>"
-#~ msgstr ""
-#~ "Jeg har lest, forstått og godtatt <a href='terms.qml'>Bruksvilkårene</a> for "
-#~ "HERE"
-
-#~ msgid "Use your mobile network and Wi-Fi to determine where you are"
-#~ msgstr ""
-#~ "Bruk mobilnettverk og trådløs internettforbindelse for å finne ut hvor du er"
-
-#~ msgid "System Settings &gt; Security &amp; Privacy"
-#~ msgstr "Systemoppsett &gt; Sikkerhet og personvern"
-
-#~ msgid "This can be disabled here:"
-#~ msgstr "Du kan slå av dette her:"

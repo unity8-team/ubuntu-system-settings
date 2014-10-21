@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-10-16 20:04-0600\n"
-"PO-Revision-Date: 2014-10-19 18:08+0000\n"
+"PO-Revision-Date: 2014-10-20 19:38+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Fòram na Gàidhlig\n"
 "MIME-Version: 1.0\n"
@@ -17,8 +17,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 || n==11) ? 0 : (n==2 || n==12) ? 1 : "
 "(n > 2 && n < 20) ? 2 : 3;\n"
-"X-Launchpad-Export-Date: 2014-10-20 07:03+0000\n"
-"X-Generator: Launchpad (build 17196)\n"
+"X-Launchpad-Export-Date: 2014-10-21 07:25+0000\n"
+"X-Generator: Launchpad (build 17203)\n"
 "Language: gd\n"
 
 #: ubuntu-system-settings.desktop.in.in.h:1 ../src/qml/MainWindow.qml:112
@@ -27,7 +27,7 @@ msgstr "Roghainnean an t-siostaim"
 
 #: ubuntu-system-settings.desktop.in.in.h:2
 msgid "System;"
-msgstr "System;Siostam"
+msgstr "System;Siostam;"
 
 #: ubuntu-system-settings.desktop.in.in.h:3
 msgid "Preferences;Settings;"
@@ -838,11 +838,13 @@ msgstr "Puing-inntrigidh MMS ghnàthaichte:"
 
 #: ../plugins/cellular//PageChooseApn.qml:591
 msgid "Reset APN Settings"
-msgstr ""
+msgstr "Ath-shuidhich roghainnean nam puingean-inntrigidh"
 
 #: ../plugins/cellular//PageChooseApn.qml:592
 msgid "Are you sure that you want to Reset APN Settings?"
 msgstr ""
+"A bheil thu cinnteach gu bheil thu airson roghainnean nam puingean-"
+"inntrigidh ath-shuidheachadh?"
 
 #: ../plugins/cellular//PageChooseApn.qml:598
 msgid "Reset"
@@ -875,7 +877,7 @@ msgstr "Puing-inntrigidh %1"
 
 #: ../plugins/cellular//CustomApnEditor.qml:181
 msgid "MMSC"
-msgstr ""
+msgstr "MMSC"
 
 #: ../plugins/cellular//CustomApnEditor.qml:191
 msgid "Proxy"
@@ -2196,11 +2198,15 @@ msgid ""
 "Ubuntu includes location services provided by HERE, enabling apps to "
 "pinpoint your location."
 msgstr ""
+"Gabhaidh Ubuntu a-seach seirbheisean ionaid 'gan solar le HERE a leigeas le "
+"aplacaidean faighinn a-mach far a bheil thu."
 
 #: ../wizard/qml/Pages//50-location.qml:64
 msgid ""
 "Allow apps to use your mobile and Wi-Fi networks to determine your location."
 msgstr ""
+"Ceadaich da dh'aplacaidean gun cleachd iad na lìonraidhean inneil-làimhe 's "
+"WiFi agad gus faighinn a-mach far a bheil thu."
 
 #. TRANSLATORS: HERE is a trademark for Nokia's location service, you probably shouldn't translate it
 #: ../wizard/qml/Pages//50-location.qml:74
@@ -2208,16 +2214,20 @@ msgid ""
 "Accept the HERE <a href='terms.qml'>terms and conditions</a> to enable these "
 "services."
 msgstr ""
+"Aontaich ris na <a href='terms.qml'>teirmichean 's cumhaichean</a> aig HERE "
+"gus na seirbheisean seo a chur an comas."
 
 #: ../wizard/qml/Pages//50-location.qml:85
 msgid ""
 "This service can be disabled at any time from the <b>System Settings</b> "
 "menu."
 msgstr ""
+"'S urrainn dhut an t-seirbheise seo a chur à comas on clàr-taice "
+"<b>Roghainnean an t-siostaim</b>."
 
 #: ../wizard/qml/Pages//60-reporting.qml:22
 msgid "Improving your experience"
-msgstr ""
+msgstr "A' cur piseach air a' ghnàth-eòlas agad"
 
 #: ../wizard/qml/Pages//60-reporting.qml:34
 msgid ""
@@ -2233,6 +2243,8 @@ msgid ""
 "This can be disabled in <b>System Settings</b> under <b>Security &amp; "
 "Privacy</b>"
 msgstr ""
+"Gabhaidh seo cur à comas ann an <b>Roghainnean an t-siostaim</b> fo "
+"<b>Thèarainteachd ⁊  prìobhaideachd</b>"
 
 #: ../wizard/qml/Components//Page.qml:89
 msgid "Back"
