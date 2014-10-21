@@ -32,22 +32,32 @@ ItemPage {
     title: i18n.tr("Location")
     flickable: scrollWidget
 
-
-    UbuntuSecurityPrivacyPanel {
-        id: securityPrivacy
-    }
-
     property bool useNone: !useLocation
     property bool canLocate: locationActionGroup.enabled.state !== undefined
     property bool useLocation: canLocate && locationActionGroup.enabled.state
     property bool hereInstalled: securityPrivacy.hereLicensePath !== "" && termsModel.count > 0
     property bool useHere: hereInstalled && securityPrivacy.hereEnabled
 
+    onUseLocationChanged: {
+        var newIndex;
+        if (useLocation) {
+            newIndex = useHere ? 1 : 0;
+        } else {
+            newIndex = detection.model.count - 1;
+        }
+        detection.selectedIndex = newIndex;
+    }
+
     onCanLocateChanged: {
         optionsModel.createModel();
     }
+
     onHereInstalledChanged: {
         optionsModel.createModel();
+    }
+
+    UbuntuSecurityPrivacyPanel {
+        id: securityPrivacy
     }
 
     FolderListModel {
@@ -67,16 +77,6 @@ ItemPage {
         Component.onCompleted: start()
     }
 
-    onUseLocationChanged: {
-        var newIndex;
-        if (useLocation) {
-            newIndex = useHere ? 1 : 0;
-        } else {
-            newIndex = detection.model.count - 1;
-        }
-        detection.selectedIndex = newIndex;
-    }
-
     Flickable {
         id: scrollWidget
         anchors.fill: parent
@@ -93,6 +93,8 @@ ItemPage {
             ListItem.ItemSelector {
                 id: detection
 
+                /* Helper that toggles location detection and HERE based on
+                what selector element was tapped. */
                 function activate (key) {
                     var usingLocation = locationActionGroup.enabled.state;
                     if (key === 'none' && usingLocation) {
@@ -155,6 +157,7 @@ ItemPage {
                 }
              }
 
+
             ListModel {
                 id: optionsModel
 
@@ -163,7 +166,9 @@ ItemPage {
 
                     if (canLocate) {
                         optionsModel.append({
-                            name: i18n.tr("Using GPS only (less accurate)"),
+                            name: hereInstalled ?
+                                i18n.tr("Using GPS only (less accurate)") :
+                                i18n.tr("Using GPS"),
                             key: "gps"
                         });
                     }
@@ -215,6 +220,8 @@ ItemPage {
                 visible: showAllUI /* hide until the information is real */
             }
 
+            ListItem.Divider {}
+
             ListItem.Standard {
                 text: i18n.tr("Allow access to location:")
                 enabled: detection.allow
@@ -236,6 +243,12 @@ ItemPage {
                     }
                     enabled: detection.allow
                 }
+            }
+
+            ListItem.Standard {
+                text: i18n.tr("None requested")
+                visible: trustStoreModel.count === 0
+                enabled: false
             }
         }
 
