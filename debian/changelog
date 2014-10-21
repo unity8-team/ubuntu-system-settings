@@ -1,3 +1,11 @@
+ubuntu-system-settings (0.3+14.10.20141021-0ubuntu1) utopic; urgency=low
+
+  [ jonas-drange ]
+  * [security/privacy] allow user to change HERE and location detection
+    settings. (LP: #1375322)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 21 Oct 2014 13:23:03 +0000
+
 ubuntu-system-settings (0.3+14.10.20141017~rtm-0ubuntu1) 14.09; urgency=low
 
   [ Ken VanDine ]
