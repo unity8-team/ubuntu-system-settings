@@ -25,7 +25,15 @@ LocalComponents.Page {
     title: i18n.tr("Location")
     forwardButtonSourceComponent: forwardButton
 
-    property bool hereInstalled: System.hereLicensePath !== "" && termsModel.count > 0
+    property bool pathSet: System.hereLicensePath !== " " // single space means it's unassigned
+    property bool countSet: false
+    skipValid: pathSet && (System.hereLicensePath === "" || countSet)
+    skip: skipValid && (System.hereLicensePath === "" || termsModel.count === 0)
+
+    Connections {
+        target: termsModel
+        onCountChanged: if (pathSet) countSet = true
+    }
 
     FolderListModel {
         id: termsModel
@@ -60,8 +68,7 @@ LocalComponents.Page {
         LocalComponents.CheckableSetting {
             id: gpsCheck
             showDivider: false
-            text: hereInstalled ? i18n.tr("Using GPS only (less accurate)") : i18n.tr("Using GPS")
-            checked: !hereInstalled
+            text: i18n.tr("Using GPS only (less accurate)")
             onTriggered: {
                 gpsCheck.checked = true;
                 hereCheck.checked = false;
@@ -73,13 +80,12 @@ LocalComponents.Page {
             anchors.left: parent.left
             anchors.right: parent.right
             height: childrenRect.height
-            visible: hereInstalled
 
             LocalComponents.CheckableSetting {
                 id: hereCheck
                 showDivider: false
                 text: i18n.tr("Using GPS, anonymized Wi-Fi and cellular network info (recommended)")
-                checked: hereInstalled
+                checked: true
                 onTriggered: {
                     gpsCheck.checked = false;
                     hereCheck.checked = true;
@@ -135,9 +141,7 @@ LocalComponents.Page {
                 if (locationActionGroup.gps.state != gpsOn) {
                     locationActionGroup.gps.activate();
                 }
-                if (hereInstalled) {
-                    System.hereEnabled = hereOn;
-                }
+                System.hereEnabled = hereOn;
                 pageStack.next()
             }
         }
