@@ -39,6 +39,19 @@ using namespace UbuntuOne;
 
 namespace UpdatePlugin {
 
+UpdateManager *UpdateManager::m_instance = 0;
+
+UpdateManager *UpdateManager::instance()
+{
+    qWarning() << Q_FUNC_INFO;
+    if (!m_instance) {
+        qWarning() << Q_FUNC_INFO << "New instance";
+        m_instance = new UpdateManager;
+    }
+
+    return m_instance;
+}
+
 UpdateManager::UpdateManager(QObject *parent):
     QObject(parent),
     m_systemCheckingUpdate(false),
@@ -46,6 +59,7 @@ UpdateManager::UpdateManager(QObject *parent):
     m_checkingUpdates(0),
     m_downloadMode(-1)
 {
+    qWarning() << Q_FUNC_INFO;
     // SSO SERVICE
     QObject::connect(&m_service, SIGNAL(credentialsFound(const Token&)),
                      this, SLOT(handleCredentialsFound(Token)));
