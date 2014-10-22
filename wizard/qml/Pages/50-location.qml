@@ -121,8 +121,6 @@ LocalComponents.Page {
     Component {
         id: forwardButton
         LocalComponents.StackButton {
-            enabled: locationActionGroup.status === QMenuModel.DBus.Disconnected ||
-                     (locationActionGroup.location.valid && locationActionGroup.gps.valid)
             text: i18n.tr("Continue")
             onClicked: {
                 var locationOn = gpsCheck.checked || hereCheck.checked;
