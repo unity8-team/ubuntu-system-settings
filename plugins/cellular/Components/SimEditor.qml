@@ -67,6 +67,23 @@ Column {
         }
     ]
 
+    NumberAnimation {
+        id: scrollerAnimation
+        duration: UbuntuAnimation.SnapDuration
+        easing: UbuntuAnimation.StandardEasing
+        target: root.flickable
+        property: "contentY"
+    }
+
+    function openedEditor () {
+        var flickable = scrollerAnimation.target;
+        var maxFlick = Math.max(0, flickable.contentHeight - root.height);
+        scrollerAnimation.from = flickable.contentY;
+        scrollerAnimation.to = Math.min(y, maxFlick) - units.gu(9); // header
+        scrollerAnimation.start();
+        nameField.forceActiveFocus();
+    }
+
     ListItem.Standard {
         id: std
         text: i18n.tr("Edit SIM Name")
@@ -79,6 +96,8 @@ Column {
         }
         height: expandedItem ?
             expandedItem.expandedHeight : childrenRect.height
+
+        boundsBehavior: Flickable.StopAtBounds
 
         ListItem.Expandable {
             id: sim1Exp
@@ -112,7 +131,7 @@ Column {
             }
             onClicked: {
                 simList.state = "editingSim1";
-                nameField.forceActiveFocus();
+                simList.openedEditor();
             }
         }
 
@@ -149,7 +168,7 @@ Column {
             }
             onClicked: {
                 simList.state = "editingSim2";
-                nameField.forceActiveFocus();
+                simList.openedEditor();
             }
         }
     }

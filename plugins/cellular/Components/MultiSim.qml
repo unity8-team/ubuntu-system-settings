@@ -23,7 +23,6 @@ import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 
 Column {
-    id: root
     objectName: "multiSim"
 
     property var sims

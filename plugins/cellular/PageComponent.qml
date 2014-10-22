@@ -96,14 +96,13 @@ ItemPage {
     }
 
     Flickable {
+        id: flick
         anchors.fill: parent
         contentWidth: parent.width
         contentHeight: contentItem.childrenRect.height
         boundsBehavior: (contentHeight > root.height) ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
-
         Column {
             anchors { left: parent.left; right: parent.right }
-
             Loader {
                 id: loader
                 anchors { left: parent.left; right: parent.right }
