@@ -41,12 +41,8 @@ ItemPage {
         property bool __suppressActivation: false
     }
 
-    // Component.onCompleted: CHelper.updateNetworkOperators()
-
     Connections {
         target: sim.netReg
-        // onNetworkOperatorsChanged: CHelper.updateNetworkOperators()
-        // onCurrentOperatorPathChanged: CHelper.buildLists()
         onScanFinished: scanning = false;
         onScanError: {
             scanning = false;
@@ -59,15 +55,13 @@ ItemPage {
         OfonoNetworkOperator {
             onRegisterComplete: {
                 if (error === OfonoNetworkOperator.InProgressError) {
-                    /* Force a new selectedIndex, since the operation failed */
-                    carrierSelector.selectedIndex = CHelper.getCurrentOperator(
-                        carrierSelector.model);
+                    // Force a new selectedIndex, since the operation failed
+                    carrierSelector.selectedIndex = CHelper.getCurrentOpIndex();
                 } else if (error !== OfonoNetworkOperator.NoError) {
                     console.warn("registerComplete failed with error: " + errorString + " Falling back to default");
                     sim.netReg.registration();
-                    /* Force a new selectedIndex, since the operation failed */
-                    carrierSelector.selectedIndex = CHelper.getCurrentOperator(
-                        carrierSelector.model);
+                    // Force a new selectedIndex, since the operation failed
+                    carrierSelector.selectedIndex = CHelper.getCurrentOpIndex();
                 }
             }
             // onNameChanged:  CHelper.buildLists();
@@ -93,7 +87,9 @@ ItemPage {
                 id: chooseCarrier
                 objectName: "mode"
                 expanded: true
-                enabled: sim.netReg.mode !== "auto-only"
+                enabled: sim.netReg.mode !== "auto-only" && !scanning
+                // work around unfortunate ui
+                opacity: enabled ? 1.0 : 0.5
                 text: i18n.tr("Choose carrier:")
                 model: [i18n.tr("Automatically"), i18n.tr("Manually")]
 
@@ -103,7 +99,6 @@ ItemPage {
                 // we only want to do this per user input
                 onDelegateClicked: {
                     if (selectedIndex === -1 || d.__suppressActivation) {
-                        console.warn('ignored mode change')
                         return;
                     }
 
@@ -124,10 +119,10 @@ ItemPage {
                 objectName: "carriers"
                 expanded: chooseCarrier.selectedIndex === 1 && !scanning
                 enabled: enabled
-                // work around ItemSelector not having a visual change depending on being disabled
+                // work around unfortunate ui
                 opacity: enabled ? 1.0 : 0.5
                 width: parent.width
-                model: CHelper.allowedOperators(sim.netReg.networkOperators)
+                model: CHelper.allowedOps(sim.netReg.networkOperators)
                 delegate: OptionSelectorDelegate {
                     enabled: carrierSelector.enabled
                     showDivider: false
@@ -138,9 +133,9 @@ ItemPage {
                         console.warn('Ignored user request');
                         return;
                     }
-                    CHelper.setCurrentOperator(index);
+                    CHelper.setCurrentOp(index);
                 }
-                selectedIndex: CHelper.getCurrentOperator(model)
+                selectedIndex: CHelper.getCurrentOpIndex(model)
 
                 Rectangle {
                     id: searchingOverlay
@@ -150,8 +145,9 @@ ItemPage {
                         right: parent.right
                     }
                     opacity: scanning ? 1 : 0
-                    height: carrierSelector.itemHeight - units.gu(0.15)
+                    height: chooseCarrier.itemHeight - units.gu(0.15)
                     color: Theme.palette.normal.background
+
                     ActivityIndicator {
                         id: act
                         anchors {
@@ -161,6 +157,7 @@ ItemPage {
                         }
                         running: scanning
                     }
+
                     Label {
                         anchors {
                             left: act.right
@@ -172,6 +169,32 @@ ItemPage {
                         height: parent.height
                         text: i18n.tr("Searching for carriers…")
                         verticalAlignment: Text.AlignVCenter
+                    }
+
+                    Behavior on opacity {
+                        NumberAnimation {
+                            duration: UbuntuAnimation.SnapDuration
+                        }
+                    }
+                }
+
+                Rectangle {
+                    property bool relevant: chooseCarrier.selectedIndex !== 1
+                    color: Theme.palette.normal.background
+                    height: chooseCarrier.itemHeight
+                    opacity: relevant ? 1 : 0
+                    anchors {
+                        top: parent.top
+                        left: parent.left
+                        right: parent.right
+                    }
+                    ListItem.Standard {
+                        anchors.fill: parent
+                        enabled: false
+                        text: {
+                            return carrierSelector.model[
+                                carrierSelector.selectedIndex].name
+                        }
                     }
                     Behavior on opacity {
                         NumberAnimation {

@@ -1,5 +1,5 @@
 var _netopCache = {}
-var _allowedOperators = []
+var _allowedOps = []
 
 /*
 Returns an array of OfonoNetworkOperator objects,
@@ -8,22 +8,22 @@ that a non-forbidden status.
 @operators A QStringList of operator paths
 @returns Array of OfonoNetworkOperator elements
 */
-function allowedOperators (operators) {
-
+function allowedOps (operators) {
+    console.warn('got', operators.length, 'operators', operators);
     d.__suppressActivation = true;
     _garbageCollect(operators);
     _createQml(operators);
-    _allowedOperators = _getAllowedOperators();
+    _allowedOps = _getAllowedOps();
     d.__suppressActivation = false;
 
-    return _allowedOperators;
+    return _allowedOps;
 }
 
-function _getAllowedOperators () {
+function _getAllowedOps () {
     var allowed = [];
     var operatorQml;
 
-    /* Go through cache of netop objects, find those that are not forbidden */
+    // Go through cache of netop objects, find those that are not forbidden
     for (operatorQml in _netopCache) {
         if (_netopCache.hasOwnProperty(operatorQml)) {
             if (_netopCache[operatorQml].status !== "forbidden") {
@@ -48,15 +48,15 @@ Returns a negative number if no current operator was found.
 
 @returns Number index of the current operator
 */
-function getCurrentOperator () {
-    var allowed = -1;
-    _allowedOperators.forEach(function (op, i) {
+function getCurrentOpIndex () {
+    var idx = -1;
+    _allowedOps.forEach(function (op, i) {
         if (op.status === 'current') {
             console.warn('Current op:', op.name);
-            allowed = i;
+            idx = i;
         }
     });
-    return allowed;
+    return idx;
 }
 
 /*
@@ -66,20 +66,20 @@ registerOperator on the operator QML object.
 @index Number index of the new current operator
 @returns undefined
 */
-function setCurrentOperator (index) {
-    console.warn('Registering', _allowedOperators[index].name);
-    _allowedOperators[index].registerOperator();
+function setCurrentOp (index) {
+    console.warn('Registering', _allowedOps[index].name);
+    _allowedOps[index].registerOperator();
 }
 
 /* Call this to check and remove QML cache elements that
-do not appear in operator list, newOperators. */
-function _garbageCollect (newOperators) {
+do not appear in operator list, newOps. */
+function _garbageCollect (newOps) {
     var path;
     for (path in _netopCache) {
         if (_netopCache.hasOwnProperty(path)) {
             /* Found path that was not in the new operator list,
             let's remove it */
-            if (newOperators.indexOf(path) === -1) {
+            if (newOps.indexOf(path) === -1) {
                 console.warn('Destroyed path for path', _netopCache[path].operatorPath, _netopCache[path].name);
                 _netopCache[path].destroy();
             }
