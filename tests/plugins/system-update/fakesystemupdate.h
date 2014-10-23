@@ -55,7 +55,7 @@ Q_SIGNALS:
     void updateFailed(int consecutiveFailureCount, QString lastReason);
     void downloadModeChanged();
     void updateProcessFailed(const QString& reason);
-    
+    void rebooting(bool status);
 };
 
 }

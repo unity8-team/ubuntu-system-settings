@@ -38,6 +38,7 @@ private Q_SLOTS:
 
 private:
     Update* getUpdate();
+    UpdateManager* getManager();
 };
 
 Update* UpdateManagerTest::getUpdate()
@@ -54,11 +55,17 @@ Update* UpdateManagerTest::getUpdate()
 
     return update;
 }
+UpdateManager* UpdateManagerTest::getManager()
+{
+    UpdateManager *manager = UpdateManager::instance();
+    manager->get_model().clear();
+    manager->checkUpdates();
+    return manager;
+}
 
 void UpdateManagerTest::testRegisterSystemUpdateRequired()
 {
-    UpdateManager *manager = UpdateManager::instance();
-    manager->checkUpdates();
+    UpdateManager *manager = getManager();
     QSignalSpy spy(manager, SIGNAL(modelChanged()));
     QSignalSpy spy2(manager, SIGNAL(updateAvailableFound(bool)));
     QTRY_COMPARE(spy.count(), 0);
@@ -83,7 +90,7 @@ void UpdateManagerTest::testRegisterSystemUpdateRequired()
 
 void UpdateManagerTest::testRegisterSystemUpdateNotRequired()
 {
-    UpdateManager *manager = UpdateManager::instance();
+    UpdateManager *manager = getManager();
     manager->setCheckintUpdates(1);
     QSignalSpy spy(manager, SIGNAL(modelChanged()));
     QSignalSpy spy2(manager, SIGNAL(updateAvailableFound(bool)));
@@ -103,7 +110,7 @@ void UpdateManagerTest::testRegisterSystemUpdateNotRequired()
 
 void UpdateManagerTest::testStartDownload()
 {
-    UpdateManager *manager = UpdateManager::instance();
+    UpdateManager *manager = getManager();
     manager->setCheckSystemUpdates(true);
     Update *update = getUpdate();
     manager->registerSystemUpdate(update->getPackageName(), update);
@@ -113,7 +120,7 @@ void UpdateManagerTest::testStartDownload()
 
 void UpdateManagerTest::testPauseDownload()
 {
-    UpdateManager *manager = UpdateManager::instance();
+    UpdateManager *manager = getManager();
     manager->setCheckSystemUpdates(true);
     Update *update = getUpdate();
     manager->registerSystemUpdate(update->getPackageName(), update);
@@ -124,7 +131,7 @@ void UpdateManagerTest::testPauseDownload()
 
 void UpdateManagerTest::testCheckUpdatesModelSignal()
 {
-    UpdateManager *manager = UpdateManager::instance();
+    UpdateManager *manager = getManager();
     QSignalSpy spy(manager, SIGNAL(modelChanged()));
     QTRY_COMPARE(manager->get_apps().size(), 0);
     manager->getService().getCredentials();
@@ -138,7 +145,7 @@ void UpdateManagerTest::testCheckUpdatesModelSignal()
 
 void UpdateManagerTest::testCheckUpdatesUpdateSignal()
 {
-    UpdateManager *manager = UpdateManager::instance();
+    UpdateManager *manager = getManager();
     QSignalSpy spy(manager, SIGNAL(updateAvailableFound(bool)));
     QTRY_COMPARE(manager->get_apps().size(), 0);
     manager->getService().getCredentials();
