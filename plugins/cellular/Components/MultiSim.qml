@@ -103,7 +103,7 @@ Column {
     }
 
     ListItem.ItemSelector {
-        id:radio
+        id: radio
         expanded: true
         text: i18n.tr("Connection type:")
         model: poweredSim ? poweredSim.radioSettings.modemTechnologies : []
@@ -111,7 +111,11 @@ Column {
             objectName: poweredSim.path + "_radio_" + modelData
             text: techToString(modelData)
         }
+        enabled: poweredSim ?
+            (poweredSim.radioSettings.technologyPreference !== "") : false
         visible: poweredSim
+        selectedIndex: poweredSim ?
+            model.indexOf(poweredSim.radioSettings.technologyPreference) : -1
         onDelegateClicked: {
             poweredSim.radioSettings.technologyPreference = model[index];
         }
