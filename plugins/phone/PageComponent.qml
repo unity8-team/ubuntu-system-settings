@@ -23,6 +23,7 @@ import SystemSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 import Ubuntu.SystemSettings.Sound 1.0
+import Ubuntu.Settings.Components 0.1 as SettingsCompenents
 import MeeGo.QOfono 0.2
 import "sims.js" as Sims
 
@@ -102,10 +103,11 @@ ItemPage {
             ListItem.Divider {}
 
             ListItem.Standard {
-                control: Switch {
+                control: SettingsCompenents.SyncSwitch {
                     objectName: "dialpadSounds"
-                    checked: soundPlugin.dialpadSoundsEnabled
-                    onCheckedChanged: soundPlugin.dialpadSoundsEnabled = checked
+                    dataTarget: soundPlugin
+                    dataProperty: "dialpadSoundsEnabled"
+                    bidirectional: true
                 }
                 text: i18n.tr("Dialpad sounds")
             }

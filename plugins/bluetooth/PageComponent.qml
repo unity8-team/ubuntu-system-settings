@@ -25,6 +25,7 @@ import Ubuntu.Components 0.1
 import Ubuntu.Components.Popups 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 import Ubuntu.SystemSettings.Bluetooth 1.0
+import Ubuntu.Settings.Components 0.1 as SettingsCompenents
 
 
 ItemPage {
@@ -145,19 +146,13 @@ ItemPage {
 
             ListItem.Standard {
                 text: i18n.tr("Bluetooth")
-                control: Switch {
+                control: SettingsCompenents.SyncSwitch {
                     id: btSwitch
-                    // Cannot use onCheckedChanged as this triggers a loop
-                    onClicked: bluetoothActionGroup.enabled.activate()
-                    checked: backend.powered
-                }
-                Component.onCompleted: clicked.connect(btSwitch.clicked)
-            }
+                    dataTarget: bluetoothActionGroup.enabled
+                    dataProperty: "state"
 
-            Binding {
-                target: btSwitch
-                property: "checked"
-                value: bluetoothActionGroup.enabled.state
+                    onTriggered: bluetoothActionGroup.enabled.activate()
+                }
             }
 
             // Discoverability
@@ -395,16 +390,11 @@ ItemPage {
                 ListItem.Standard {
                     id: trustedCheck
                     text: i18n.tr("Connect automatically when detected:")
-                    control: CheckBox {
-                        onClicked: {
-                            if (backend.selectedDevice) {
-                                backend.selectedDevice.trusted = !backend.selectedDevice.trusted
-                            }
-                        }
-                        checked: backend.selectedDevice ? backend.selectedDevice.trusted : false
+                    control: SettingsCompenents.SyncCheckBox {
+                        dataTarget: backend.selectedDevice
+                        dataProperty: "trusted"
+                        bidirectional: true
                     }
-                    Component.onCompleted:
-                        clicked.connect(trustedCheck.clicked)
                 }
                 ListItem.SingleControl {
                     control: Button {

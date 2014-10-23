@@ -24,7 +24,8 @@ import SystemSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.Popups 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
-import Ubuntu.Settings.Menus 0.1 as Menus
+import Ubuntu.Settings.Menus 0.1 as SettingsMenus
+import Ubuntu.Settings.Components 0.1 as SettingsCompenents
 import Ubuntu.SystemSettings.LanguagePlugin 1.0
 
 ItemPage {
@@ -95,7 +96,7 @@ ItemPage {
             anchors.left: parent.left
             anchors.right: parent.right
 
-            Menus.StandardMenu {
+            SettingsMenus.StandardMenu {
                 iconSource: "image://theme/language-chooser"
                 text: i18n.tr("Display language…")
                 objectName: "displayLanguage"
@@ -141,30 +142,30 @@ ItemPage {
             ListItem.Standard {
                 text: i18n.tr("Spell checking")
 
-                control: Switch {
-                    checked: settings.spellChecking
-
-                    onClicked: settings.spellChecking = checked
+                control: SettingsCompenents.SyncSwitch {
+                    dataTarget: settings
+                    dataProperty: "spellChecking"
+                    bidirectional: true
                 }
             }
 
             ListItem.Standard {
                 text: i18n.tr("Auto correction")
 
-                control: Switch {
-                    checked: settings.autoCompletion
-
-                    onClicked: settings.autoCompletion = checked
+                control: SettingsCompenents.SyncSwitch {
+                    dataTarget: settings
+                    dataProperty: "autoCompletion"
+                    bidirectional: true
                 }
             }
 
             ListItem.Standard {
                 text: i18n.tr("Word suggestions")
 
-                control: Switch {
-                    checked: settings.predictiveText
-
-                    onClicked: settings.predictiveText = checked
+                control: SettingsCompenents.SyncSwitch {
+                    dataTarget: settings
+                    dataProperty: "predictiveText"
+                    bidirectional: true
                 }
             }
 
@@ -174,10 +175,10 @@ ItemPage {
             ListItem.Standard {
                 text: i18n.tr("Auto capitalization")
 
-                control: Switch {
-                    checked: settings.autoCapitalization
-
-                    onClicked: settings.autoCapitalization = checked
+                control: SettingsCompenents.SyncSwitch {
+                    dataTarget: settings
+                    dataProperty: "autoCapitalization"
+                    bidirectional: true
                 }
             }
 
@@ -191,10 +192,10 @@ ItemPage {
             ListItem.Standard {
                 text: i18n.tr("Auto punctuation")
 
-                control: Switch {
-                    checked: settings.doubleSpaceFullStop
-
-                    onClicked: settings.doubleSpaceFullStop = checked
+                control: SettingsCompenents.SyncSwitch {
+                    dataTarget: settings
+                    dataProperty: "doubleSpaceFullStop"
+                    bidirectional: true
                 }
             }
 
@@ -208,20 +209,20 @@ ItemPage {
             ListItem.Standard {
                 text: i18n.tr("Keyboard sound")
 
-                control: Switch {
-                    checked: settings.keyPressFeedback
-
-                    onClicked: settings.keyPressFeedback = checked
+                control: SettingsCompenents.SyncSwitch {
+                    dataTarget: settings
+                    dataProperty: "keyPressFeedback"
+                    bidirectional: true
                 }
             }
 
             ListItem.Standard {
                 text: i18n.tr("Keyboard vibration")
 
-                control: Switch {
-                    checked: settings.keyPressHapticFeedback
-
-                    onClicked: settings.keyPressHapticFeedback = checked
+                control: SettingsCompenents.SyncSwitch {
+                    dataTarget: settings
+                    dataProperty: "keyPressHapticFeedback"
+                    bidirectional: true
                 }
             }
         }

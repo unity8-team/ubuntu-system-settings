@@ -25,6 +25,7 @@ import Ubuntu.Components.ListItems 0.1 as ListItem
 import SystemSettings 1.0
 import Ubuntu.SystemSettings.Sound 1.0
 import Ubuntu.Settings.Menus 0.1 as Menus
+import Ubuntu.Settings.Components 0.1 as SettingsCompenents
 import QMenuModel 0.1
 
 import "utilities.js" as Utilities
@@ -68,10 +69,11 @@ ItemPage {
             SilentModeWarning { visible: backendInfo.silentMode }
 
             ListItem.Standard {
-                control: Switch {
+                control: SettingsCompenents.SyncSwitch {
                     objectName: "silentMode"
-                    checked: backendInfo.silentMode
-                    onCheckedChanged: backendInfo.silentMode = checked
+                    dataTarget: backendInfo
+                    dataProperty: "silentMode"
+                    bidirectional: true
                 }
                 text: i18n.tr("Silent Mode")
             }
@@ -127,28 +129,31 @@ ItemPage {
             }
 
             ListItem.Standard {
-                control: CheckBox {
+                control: SettingsCompenents.SyncCheckBox {
                     objectName: "callVibrate"
-                    checked: backendInfo.incomingCallVibrate
-                    onCheckedChanged: backendInfo.incomingCallVibrate = checked
+                    dataTarget: backendInfo
+                    dataProperty: "incomingCallVibrate"
+                    bidirectional: true
                 }
                 text: i18n.tr("Vibrate when ringing")
             }
 
             ListItem.Standard {
-                control: CheckBox {
+                control: SettingsCompenents.SyncCheckBox {
                     objectName: "callVibrateSilentMode"
-                    checked: backendInfo.incomingCallVibrateSilentMode
-                    onCheckedChanged: backendInfo.incomingCallVibrateSilentMode = checked
+                    dataTarget: backendInfo
+                    dataProperty: "incomingCallVibrateSilentMode"
+                    bidirectional: true
                 }
                 text: i18n.tr("Vibrate in Silent Mode")
             }
 
             ListItem.Standard {
-                control: Switch {
+                control: SettingsCompenents.SyncSwitch {
                     objectName: "dialpadSounds"
-                    checked: backendInfo.dialpadSoundsEnabled
-                    onCheckedChanged: backendInfo.dialpadSoundsEnabled = checked
+                    dataTarget: backendInfo
+                    dataProperty: "dialpadSoundsEnabled"
+                    bidirectional: true
                 }
                 text: i18n.tr("Dialpad sounds")
             }
@@ -171,19 +176,21 @@ ItemPage {
             }
 
             ListItem.Standard {
-                control: CheckBox {
+                control: SettingsCompenents.SyncCheckBox {
                     objectName: "messageVibrate"
-                    checked: backendInfo.incomingMessageVibrate
-                    onCheckedChanged: backendInfo.incomingMessageVibrate = checked
+                    dataTarget: backendInfo
+                    dataProperty: "incomingMessageVibrate"
+                    bidirectional: true
                 }
                 text: i18n.tr("Vibrate with message sound")
             }
 
             ListItem.Standard {
-                control: CheckBox {
+                control: SettingsCompenents.SyncCheckBox {
                     objectName: "messageVibrateSilentMode"
-                    checked: backendInfo.incomingMessageVibrateSilentMode
-                    onCheckedChanged: backendInfo.incomingMessageVibrateSilentMode = checked
+                    dataTarget: backendInfo
+                    dataProperty: "incomingMessageVibrateSilentMode"
+                    bidirectional: true
                 }
                 text: i18n.tr("Vibrate in Silent Mode")
             }
@@ -195,11 +202,11 @@ ItemPage {
             ListItem.Standard {
                 text: i18n.tr("Keyboard sound")
 
-                control: Switch {
+                control: SettingsCompenents.SyncSwitch {
                     objectName: "keyboardSoundSwitch"
-                    checked: keyboardSettings.keyPressFeedback
-
-                    onClicked: keyboardSettings.keyPressFeedback = checked
+                    dataTarget: keyboardSettings
+                    dataProperty: "keyPressFeedback"
+                    bidirectional: true
                 }
             }
 

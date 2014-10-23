@@ -22,6 +22,7 @@ import SystemSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 import Ubuntu.SystemSettings.LanguagePlugin 1.0
+import Ubuntu.Settings.Components 0.1 as SettingsCompenents
 
 ItemPage {
     title: i18n.tr("Spell checking")
@@ -35,10 +36,10 @@ ItemPage {
 
         text: i18n.tr("Spell checking")
 
-        control: Switch {
-            checked: plugin.spellChecking
-
-            onClicked: plugin.spellChecking = checked
+        control: SettingsCompenents.SyncSwitch {
+            dataTarget: plugin
+            dataProperty: "spellChecking"
+            bidirectional: true
         }
     }
 

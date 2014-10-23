@@ -20,6 +20,7 @@
 import QtQuick 2.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
+import Ubuntu.Settings.Components 0.1 as SettingsCompenents
 
 Column {
     id: root
@@ -179,16 +180,12 @@ Column {
         objectName: "dataRoamingSwitch"
         text: i18n.tr("Data roaming")
         enabled: use.selectedIndex !== 0
-        control: Switch {
+        control: SettingsCompenents.SyncSwitch {
             id: dataRoamingControl
-            onClicked: getOnlineSim().connMan.roamingAllowed = checked
-        }
-    }
+            dataTarget: getOnlineSim() ? getOnlineSim().connMan : null
+            dataProperty: "roamingAllowed"
 
-    Binding {
-        target: dataRoamingControl
-        property: "checked"
-        value: getOnlineSim() && getOnlineSim().connMan.roamingAllowed
-        when: getOnlineSim()
+            onTriggered: getOnlineSim().connMan.roamingAllowed = checked
+        }
     }
 }

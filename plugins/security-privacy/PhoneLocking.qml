@@ -24,6 +24,7 @@ import SystemSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 import Ubuntu.SystemSettings.SecurityPrivacy 1.0
+import Ubuntu.Settings.Components 0.1 as SettingsCompenents
 
 ItemPage {
     id: root
@@ -108,21 +109,27 @@ ItemPage {
 
         ListItem.Standard {
             text: i18n.tr("Launcher")
-            control: CheckBox {
+            control: SettingsCompenents.SyncCheckBox {
                 id: launcherCheck
                 enabled: securityPrivacy.securityType !== UbuntuSecurityPrivacyPanel.Swipe
-                checked: securityPrivacy.enableLauncherWhileLocked || !enabled
-                onClicked: securityPrivacy.enableLauncherWhileLocked = checked
+
+                property bool serverChecked: securityPrivacy.enableLauncherWhileLocked || !enabled
+                dataTarget: launcherCheck
+                dataProperty: "serverChecked"
+                onTriggered: securityPrivacy.enableLauncherWhileLocked = checked
             }
         }
 
         ListItem.Standard {
             text: i18n.tr("Notifications and quick settings")
-            control: CheckBox {
+            control: SettingsCompenents.SyncCheckBox {
                 id: indicatorsCheck
                 enabled: securityPrivacy.securityType !== UbuntuSecurityPrivacyPanel.Swipe
-                checked: securityPrivacy.enableIndicatorsWhileLocked || !enabled
-                onClicked: securityPrivacy.enableIndicatorsWhileLocked = checked
+
+                property bool serverChecked: securityPrivacy.enableIndicatorsWhileLocked || !enabled
+                dataTarget: indicatorsCheck
+                dataProperty: "serverChecked"
+                onTriggered: securityPrivacy.enableIndicatorsWhileLocked = checked
             }
         }
 

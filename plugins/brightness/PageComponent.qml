@@ -24,6 +24,7 @@ import SystemSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 import Ubuntu.SystemSettings.Brightness 1.0
+import Ubuntu.Settings.Components 0.1 as SettingsCompenents
 
 ItemPage {
     id: root
@@ -41,23 +42,17 @@ ItemPage {
 
         BrightnessSlider {}
 
-        Binding {
-            target: autoAdjustCheck
-            property: "checked"
-            value: adjust.visible && gsettings.autoBrightness
-        }
-
         ListItem.Standard {
             id: adjust
             text: i18n.tr("Adjust automatically")
             visible: brightnessPanel.powerdRunning &&
                      brightnessPanel.autoBrightnessAvailable
-            control: CheckBox {
+            control: SettingsCompenents.SyncCheckBox {
                 id: autoAdjustCheck
-                checked: gsettings.autoBrightness
-                onClicked: gsettings.autoBrightness = checked
+                dataTarget: gsettings
+                dataProperty: "autoBrightness"
+                bidirectional: true
             }
-            Component.onCompleted: clicked.connect(autoAdjustCheck.clicked)
             showDivider: false
         }
         ListItem.Caption {

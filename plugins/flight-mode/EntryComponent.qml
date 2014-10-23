@@ -22,20 +22,21 @@ import QtQuick 2.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 import Ubuntu.SystemSettings.FlightMode 1.0 as FlightMode
+import Ubuntu.Settings.Components 0.1 as SettingsCompenents
 
 ListItem.Standard {
     id: root
     iconSource: model.icon
     iconFrame: false
     text: i18n.tr(model.displayName)
-    control: Switch {
-        id: control
-        checked: helper.inFlightMode
+    control: SettingsCompenents.SyncSwitch {
+        dataTarget: helper
+        dataProperty: "inFlightMode"
+
         onTriggered: helper.setFlightMode(checked)
     }
 
     FlightMode.Helper {
         id: helper
-        onInFlightModeChanged: control.checked = inFlightMode
     }
 }

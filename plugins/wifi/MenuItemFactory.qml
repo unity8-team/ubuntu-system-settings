@@ -19,6 +19,7 @@
 
 import QtQuick 2.0
 import QMenuModel 0.1 as QMenuModel
+import Ubuntu.Settings.Menus 0.1 as Menus
 
 Item {
     id: menuFactory
@@ -36,6 +37,13 @@ Item {
 
         "unity.widgets.systemsettings.tablet.wifisection" : wifiSection,
         "unity.widgets.systemsettings.tablet.accesspoint" : accessPoint,
+    }
+
+    function getExtendedProperty(object, propertyName, defaultValue) {
+        if (object && object.hasOwnProperty(propertyName)) {
+            return object[propertyName];
+        }
+        return defaultValue;
     }
 
     Component { id: divMenu; DivMenuItem {} }
@@ -66,15 +74,18 @@ Item {
 
     Component {
         id: switchMenu;
-        SwitchMenuItem {
+        Menus.SwitchMenu {
             property QtObject menu: null
+            property bool serverChecked: menu && menu.isToggled || false
 
-            text: menu && menu.label ? menu.label : ""
-            icon: menu ? menu.icon : ""
-            checked: menu ? menu.isToggled : false
-            enabled: menu ? menu.sensitive : false
+            text: menu && menu.label || ""
+            iconSource: menu && menu.icon || ""
+            checked: serverChecked
+            enabled: menu && menu.sensitive || false
 
-            onActivate: model.activate(modelIndex);
+            onTriggered: model.activate(modelIndex);
+            // Fixes broken check state binding.
+            onServerCheckedChanged: checked = serverChecked;
         }
     }
 
@@ -100,11 +111,12 @@ Item {
                 model: menuFactory.model ? menuFactory.model : null
                 name: menu ? menu.ext.xCanonicalWifiApStrengthAction : ""
             }
+            property bool serverChecked: menu && menu.isToggled || false
 
             text: menu && menu.label ? menu.label : ""
             secure: menu ? menu.ext.xCanonicalWifiApIsSecure : false
             adHoc: menu ? menu.ext.xCanonicalWifiApIsAdhoc : false
-            checked: menu ? menu.isToggled : false
+            checked: serverChecked
             signalStrength: strenthAction.valid ? strenthAction.state : 0
             enabled: menu ? menu.sensitive : false
 
@@ -114,6 +126,8 @@ Item {
                                                           'x-canonical-wifi-ap-strength-action': 'string'});
             }
             onActivate: model.activate(modelIndex);
+            // Fixes broken check state binding.
+            onServerCheckedChanged: checked = serverChecked;
         }
     }
 
