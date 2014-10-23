@@ -43,6 +43,7 @@ public:
 private Q_SLOTS:
     void changeVisibility(const QString&, Update*);
     void onUpdateAvailableFound(bool);
+    void onModelChanged();
     void shouldShow();
 
 private:
@@ -59,7 +60,9 @@ UpdateItem::UpdateItem(const QVariantMap &staticData, QObject *parent):
                   this, SLOT(changeVisibility(const QString&, Update*)));
     QObject::connect(m_updateManager, SIGNAL(updateAvailableFound(bool)),
                   this, SLOT(onUpdateAvailableFound(bool)));
-    QTimer::singleShot(100, this, SLOT(shouldShow()));
+    QObject::connect(m_updateManager, SIGNAL(modelChanged()),
+                  this, SLOT(onModelChanged()));
+    shouldShow();
 }
 
 void UpdateItem::onUpdateAvailableFound(bool)
@@ -78,13 +81,24 @@ void UpdateItem::setVisibility(bool visible)
 {
     qWarning() << Q_FUNC_INFO << visible;
     setVisible(visible);
-    Q_EMIT visibilityChanged();
+}
+
+void UpdateItem::onModelChanged()
+{
+    if (m_updateManager->model().count() > 0)
+        setVisibility(true);
+    else 
+        setVisibility(false);
+    qWarning() << Q_FUNC_INFO << isVisible();
 }
 
 void UpdateItem::shouldShow()
 {
     if (m_systemUpdate.checkTarget())
+    {
+        qWarning() << Q_FUNC_INFO << "Has SystemUpdate";
         setVisibility(true);
+    }
     qWarning() << Q_FUNC_INFO << isVisible();
 }
 

@@ -33,32 +33,29 @@ ListItem.SingleValue {
     value: updatesAvailable > 0 ? updatesAvailable : ""
 
     property int updatesAvailable: 0
-    property variant updateModel: UpdateManager.model
 
     function _updatesRefresh() {
         console.warn("_updatesRefresh");
         var _updatesAvailable = 0;
-        for (var i=0; i < updateModel.length; i++) {
-            if (updateModel[i].updateRequired)
+        for (var i=0; i < UpdateManager.model.length; i++) {
+            if (UpdateManager.model[i].updateRequired)
                 _updatesAvailable += 1;
         }
-        root.updatesAvailable = _updatesAvailable;
-        if (root.updatesAvailable > 0)
-            root.parent.visible = true;
-        else
-            root.parent.visible = false;
-    }
-
-    Component.onCompleted: {
-        root._updatesRefresh();
+        updatesAvailable =  _updatesAvailable;
     }
 
     Connections {
         id: updateManager
         objectName: "updateManager"
         target: UpdateManager
-        onModelChanged: root._updatesRefresh()
-        onUpdateAvailableFound: root._updatesRefresh()
+        onModelChanged: {
+            console.warn("onModelChanged");
+            root._updatesRefresh();
+        }
+        onUpdateAvailableFound: {
+            console.warn("onUpdateAvailableFound");
+            root._updatesRefresh();
+        }
     }
 
     onClicked: main.loadPluginByName("system-update");
