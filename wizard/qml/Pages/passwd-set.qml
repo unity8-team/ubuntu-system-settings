@@ -34,6 +34,11 @@ LocalComponents.Page {
     // If we are entering this page, clear any saved password and get focus
     onEnabledChanged: if (enabled) lockscreen.clear(false)
 
+    function confirm() {
+        root.password = lockscreen.passphrase;
+        pageStack.load(Qt.resolvedUrl("passwd-confirm.qml"));
+    }
+
     UnityComponents.Lockscreen {
         id: lockscreen
         anchors {
@@ -63,8 +68,7 @@ LocalComponents.Page {
 
         onEntered: {
             if (passphrase.length >= 4) {
-                root.password = passphrase
-                pageStack.load(Qt.resolvedUrl("passwd-confirm.qml"))
+                passwdSetPage.confirm();
             } else {
                 lockscreen.clear(true)
             }
@@ -74,13 +78,10 @@ LocalComponents.Page {
     Component {
         id: forwardButton
         LocalComponents.StackButton {
-            text: i18n.tr("Skip")
-            onClicked: {
-                root.passwordMethod = UbuntuSecurityPrivacyPanel.Swipe
-                pageStack.prev()
-                pageStack.next()
-            }
-            visible: root.passwordMethod === UbuntuSecurityPrivacyPanel.Passcode
+            visible: root.passwordMethod === UbuntuSecurityPrivacyPanel.Passphrase
+            enabled: lockscreen.passphrase.length >= 4
+            text: i18n.tr("Continue")
+            onClicked: passwdSetPage.confirm()
         }
     }
 }
