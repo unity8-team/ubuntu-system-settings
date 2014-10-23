@@ -59,6 +59,13 @@ class SecurityPrivacy: public QObject
     Q_PROPERTY (SecurityType securityType
                 READ getSecurityType
                 NOTIFY securityTypeChanged)
+    Q_PROPERTY (bool hereEnabled
+                READ hereEnabled
+                WRITE setHereEnabled
+                NOTIFY hereEnabledChanged)
+    Q_PROPERTY (QString hereLicensePath
+                READ hereLicensePath
+                NOTIFY hereLicensePathChanged)
 
 public:
     enum SecurityType {
@@ -80,6 +87,10 @@ public:
     void setEnableIndicatorsWhileLocked(bool enabled);
     SecurityType getSecurityType();
 
+    bool hereEnabled();
+    void setHereEnabled(bool enabled);
+    QString hereLicensePath();
+
     // Returns error text, if an error occurred
     Q_INVOKABLE QString setSecurity(QString oldValue, QString value, SecurityType type);
     Q_INVOKABLE bool trySetSecurity(SecurityType type);
@@ -94,6 +105,8 @@ Q_SIGNALS:
     void enableLauncherWhileLockedChanged();
     void enableIndicatorsWhileLockedChanged();
     void securityTypeChanged();
+    void hereEnabledChanged();
+    void hereLicensePathChanged();
 
 private:
     void loadUser();

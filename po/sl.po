@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-10-16 20:04-0600\n"
-"PO-Revision-Date: 2014-10-13 17:31+0000\n"
+"PO-Revision-Date: 2014-10-20 08:39+0000\n"
 "Last-Translator: Damir Jerovšek <Unknown>\n"
 "Language-Team: Slovenian <sl@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -16,8 +16,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || "
 "n%100==4 ? 3 : 0);\n"
-"X-Launchpad-Export-Date: 2014-10-18 07:12+0000\n"
-"X-Generator: Launchpad (build 17196)\n"
+"X-Launchpad-Export-Date: 2014-10-21 07:25+0000\n"
+"X-Generator: Launchpad (build 17203)\n"
 
 #: ubuntu-system-settings.desktop.in.in.h:1 ../src/qml/MainWindow.qml:112
 msgid "System Settings"
@@ -801,7 +801,7 @@ msgstr "Ročno"
 
 #: ../plugins/cellular//PageChooseCarrier.qml:196
 msgid "Searching for carriers…"
-msgstr ""
+msgstr "Iskanje nosilnih signalov ..."
 
 #: ../plugins/cellular//PageChooseCarrier.qml:229
 #: ../plugins/cellular//PageChooseApn.qml:31
@@ -811,36 +811,36 @@ msgstr "APN"
 
 #: ../plugins/cellular//PageChooseApn.qml:372
 msgid "Internet APN:"
-msgstr ""
+msgstr "Internetni APN:"
 
 #: ../plugins/cellular//PageChooseApn.qml:449
 msgid "Custom Internet APN…"
-msgstr ""
+msgstr "Internetni APN po meri ..."
 
 #: ../plugins/cellular//PageChooseApn.qml:460
 msgid "MMS APN:"
-msgstr ""
+msgstr "APN MMS-a:"
 
 #: ../plugins/cellular//PageChooseApn.qml:485
 #: ../plugins/cellular//CustomApnEditor.qml:143
 msgid "Same APN as for Internet"
-msgstr ""
+msgstr "Enak APN kot za internet"
 
 #: ../plugins/cellular//PageChooseApn.qml:565
 msgid "Custom MMS APN…"
-msgstr ""
+msgstr "APN MMS-a po meri:"
 
 #: ../plugins/cellular//PageChooseApn.qml:591
 msgid "Reset APN Settings"
-msgstr ""
+msgstr "Ponastavi nastavitve APN-a"
 
 #: ../plugins/cellular//PageChooseApn.qml:592
 msgid "Are you sure that you want to Reset APN Settings?"
-msgstr ""
+msgstr "Ali ste prepričani, da želite ponastaviti nastavitve APN-a?"
 
 #: ../plugins/cellular//PageChooseApn.qml:598
 msgid "Reset"
-msgstr ""
+msgstr "Ponastavi"
 
 #: ../plugins/cellular//PageChooseCarriers.qml:27
 #: ../plugins/cellular//Components//MultiSim.qml:68
@@ -849,43 +849,43 @@ msgstr "Nosilni signali"
 
 #: ../plugins/cellular//CustomApnEditor.qml:42
 msgid "Internet"
-msgstr ""
+msgstr "Internet"
 
 #: ../plugins/cellular//CustomApnEditor.qml:42
 msgid "MMS"
-msgstr ""
+msgstr "MMS"
 
 #. TRANSLATORS: %1 is either i18n.tr("Internet") or i18n.tr("MMS")
 #: ../plugins/cellular//CustomApnEditor.qml:67
 #, qt-format
 msgid "Custom %1 APN"
-msgstr ""
+msgstr "APN %1-a po meri"
 
 #. TRANSLATORS: %1 is either i18n.tr("Internet") or i18n.tr("MMS")
 #: ../plugins/cellular//CustomApnEditor.qml:171
 #, qt-format
 msgid "%1 APN"
-msgstr ""
+msgstr "APN %1-a"
 
 #: ../plugins/cellular//CustomApnEditor.qml:181
 msgid "MMSC"
-msgstr ""
+msgstr "MMSC"
 
 #: ../plugins/cellular//CustomApnEditor.qml:191
 msgid "Proxy"
-msgstr ""
+msgstr "Posredniški strežnik"
 
 #: ../plugins/cellular//CustomApnEditor.qml:213
 msgid "Username"
-msgstr ""
+msgstr "Uporabniško ime"
 
 #: ../plugins/cellular//CustomApnEditor.qml:264
 msgid "Save"
-msgstr ""
+msgstr "Shrani"
 
 #: ../plugins/cellular//CustomApnEditor.qml:264
 msgid "Activate"
-msgstr ""
+msgstr "Omogoči"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
 #: ../plugins/cellular//PageComponent.qml:32
@@ -1787,7 +1787,7 @@ msgstr "Namesti"
 
 #: ../plugins/system-update//PageComponent.qml:152
 msgid "Installation failed"
-msgstr ""
+msgstr "Namestitev ni uspela"
 
 #: ../plugins/system-update//PageComponent.qml:156
 #: ../plugins/cellular//Components//SimEditor.qml:200
@@ -1801,7 +1801,7 @@ msgstr "Programska oprema je posodobljena"
 #: ../plugins/system-update//PageComponent.qml:235
 #: ../plugins/system-update//PageComponent.qml:241
 msgid "Sorry, the system update failed."
-msgstr ""
+msgstr "Sistemska posodobitev ni uspela."
 
 #: ../plugins/system-update//PageComponent.qml:254
 msgid "Restarting…"
@@ -1813,7 +1813,7 @@ msgstr "Preverjanje za posodobitve ..."
 
 #: ../plugins/system-update//PageComponent.qml:298
 msgid "Connect to the Internet to check for updates"
-msgstr ""
+msgstr "Za preveritev posodobitev se povežite z internetom"
 
 #: ../plugins/system-update//PageComponent.qml:313
 #: ../plugins/system-update//PageComponent.qml:471
@@ -2170,11 +2170,15 @@ msgid ""
 "Ubuntu includes location services provided by HERE, enabling apps to "
 "pinpoint your location."
 msgstr ""
+"Ubuntu vključuje lokacijske storitve, ki jih zagotavlja HERE, kar omogoča "
+"programom, da določajo vaš položaj."
 
 #: ../wizard/qml/Pages//50-location.qml:64
 msgid ""
 "Allow apps to use your mobile and Wi-Fi networks to determine your location."
 msgstr ""
+"Dovolite programom uporabo vašega mobilnega in Wi-Fi omrežja za določitev "
+"vašega položaja."
 
 #. TRANSLATORS: HERE is a trademark for Nokia's location service, you probably shouldn't translate it
 #: ../wizard/qml/Pages//50-location.qml:74
@@ -2182,16 +2186,20 @@ msgid ""
 "Accept the HERE <a href='terms.qml'>terms and conditions</a> to enable these "
 "services."
 msgstr ""
+"Sprejmite <a href='terms.qml'>pogoje in pravila</a> HERE za omogočitev teh "
+"storitev."
 
 #: ../wizard/qml/Pages//50-location.qml:85
 msgid ""
 "This service can be disabled at any time from the <b>System Settings</b> "
 "menu."
 msgstr ""
+"To storitev je mogoče kadarkoli onemogočiti v meniju <b>Sistemske "
+"nastavitve</b>."
 
 #: ../wizard/qml/Pages//60-reporting.qml:22
 msgid "Improving your experience"
-msgstr ""
+msgstr "Izboljševanje vaše izkušnje"
 
 #: ../wizard/qml/Pages//60-reporting.qml:34
 msgid ""
@@ -2206,6 +2214,8 @@ msgid ""
 "This can be disabled in <b>System Settings</b> under <b>Security &amp; "
 "Privacy</b>"
 msgstr ""
+"To je možno onemogočiti v <b>Sistemskih nastavitvah</b> pod  <b>Varnost "
+"&amp; Zasebnost</b>"
 
 #: ../wizard/qml/Components//Page.qml:89
 msgid "Back"
@@ -3016,15 +3026,3 @@ msgstr "Tapnite za odprtje posodobilnika sistema."
 
 #~ msgid "Set lock security"
 #~ msgstr "Nastavi zaklep"
-
-#~ msgid "Bug reporting"
-#~ msgstr "Poročanje hroščev"
-
-#~ msgid "Use your mobile network and Wi-Fi to determine where you are"
-#~ msgstr "Uporabite mobilno omrežje in Wi-Fi za določitev vašega položaja"
-
-#~ msgid "System Settings &gt; Security &amp; Privacy"
-#~ msgstr "Nastavitve sistema &gt; Varnost &amp; Zasebnost"
-
-#~ msgid "This can be disabled here:"
-#~ msgstr "To se da onemogočiti tukaj:"

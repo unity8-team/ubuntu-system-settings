@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-10-16 20:04-0600\n"
-"PO-Revision-Date: 2014-09-29 15:56+0000\n"
-"Last-Translator: Tobias Bannert <Unknown>\n"
+"PO-Revision-Date: 2014-10-21 11:18+0000\n"
+"Last-Translator: Niklas Wenzel <nikwen.developer@gmail.com>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-10-18 07:09+0000\n"
-"X-Generator: Launchpad (build 17196)\n"
+"X-Launchpad-Export-Date: 2014-10-22 06:16+0000\n"
+"X-Generator: Launchpad (build 17203)\n"
 
 #: ubuntu-system-settings.desktop.in.in.h:1 ../src/qml/MainWindow.qml:112
 msgid "System Settings"
@@ -795,7 +795,7 @@ msgstr "Manuell"
 
 #: ../plugins/cellular//PageChooseCarrier.qml:196
 msgid "Searching for carriers…"
-msgstr ""
+msgstr "Netzsuche…"
 
 #: ../plugins/cellular//PageChooseCarrier.qml:229
 #: ../plugins/cellular//PageChooseApn.qml:31
@@ -805,36 +805,36 @@ msgstr "Zugangspunkt"
 
 #: ../plugins/cellular//PageChooseApn.qml:372
 msgid "Internet APN:"
-msgstr ""
+msgstr "Internet APN:"
 
 #: ../plugins/cellular//PageChooseApn.qml:449
 msgid "Custom Internet APN…"
-msgstr ""
+msgstr "Benutzerdefinierr Internet-APN…"
 
 #: ../plugins/cellular//PageChooseApn.qml:460
 msgid "MMS APN:"
-msgstr ""
+msgstr "MMS APN:"
 
 #: ../plugins/cellular//PageChooseApn.qml:485
 #: ../plugins/cellular//CustomApnEditor.qml:143
 msgid "Same APN as for Internet"
-msgstr ""
+msgstr "Derselbe APN wie für das Internet"
 
 #: ../plugins/cellular//PageChooseApn.qml:565
 msgid "Custom MMS APN…"
-msgstr ""
+msgstr "Benutzerdefinierter MMS-APN…"
 
 #: ../plugins/cellular//PageChooseApn.qml:591
 msgid "Reset APN Settings"
-msgstr ""
+msgstr "APN-Einstellungen zurücksetzen"
 
 #: ../plugins/cellular//PageChooseApn.qml:592
 msgid "Are you sure that you want to Reset APN Settings?"
-msgstr ""
+msgstr "Sind Sie sicher, dass Sie die APN-Einstellungen zurücksetzen wollen?"
 
 #: ../plugins/cellular//PageChooseApn.qml:598
 msgid "Reset"
-msgstr ""
+msgstr "Zurücksetzen"
 
 #: ../plugins/cellular//PageChooseCarriers.qml:27
 #: ../plugins/cellular//Components//MultiSim.qml:68
@@ -843,43 +843,43 @@ msgstr "Anbieter"
 
 #: ../plugins/cellular//CustomApnEditor.qml:42
 msgid "Internet"
-msgstr ""
+msgstr "Internet"
 
 #: ../plugins/cellular//CustomApnEditor.qml:42
 msgid "MMS"
-msgstr ""
+msgstr "MMS"
 
 #. TRANSLATORS: %1 is either i18n.tr("Internet") or i18n.tr("MMS")
 #: ../plugins/cellular//CustomApnEditor.qml:67
 #, qt-format
 msgid "Custom %1 APN"
-msgstr ""
+msgstr "Benutzerdefinierter %1-APN"
 
 #. TRANSLATORS: %1 is either i18n.tr("Internet") or i18n.tr("MMS")
 #: ../plugins/cellular//CustomApnEditor.qml:171
 #, qt-format
 msgid "%1 APN"
-msgstr ""
+msgstr "%1-APN"
 
 #: ../plugins/cellular//CustomApnEditor.qml:181
 msgid "MMSC"
-msgstr ""
+msgstr "MMSC"
 
 #: ../plugins/cellular//CustomApnEditor.qml:191
 msgid "Proxy"
-msgstr ""
+msgstr "Proxy"
 
 #: ../plugins/cellular//CustomApnEditor.qml:213
 msgid "Username"
-msgstr ""
+msgstr "Benutzername"
 
 #: ../plugins/cellular//CustomApnEditor.qml:264
 msgid "Save"
-msgstr ""
+msgstr "Speichern"
 
 #: ../plugins/cellular//CustomApnEditor.qml:264
 msgid "Activate"
-msgstr ""
+msgstr "Aktivieren"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
 #: ../plugins/cellular//PageComponent.qml:32
@@ -949,7 +949,7 @@ msgstr "Sicherheit nach dem Sperren"
 #: ../plugins/security-privacy//LockSecurity.qml:96
 #: ../plugins/security-privacy//LockSecurity.qml:384
 msgid "Change passcode…"
-msgstr ""
+msgstr "PIN ändern…"
 
 #: ../plugins/security-privacy//LockSecurity.qml:98
 #: ../plugins/security-privacy//LockSecurity.qml:385
@@ -962,7 +962,7 @@ msgstr "Zu Fingerbewegung wechseln"
 
 #: ../plugins/security-privacy//LockSecurity.qml:107
 msgid "Switch to passcode"
-msgstr ""
+msgstr "Zu PIN wechseln"
 
 #: ../plugins/security-privacy//LockSecurity.qml:109
 msgid "Switch to passphrase"
@@ -970,7 +970,7 @@ msgstr "Zum Kennwort wechseln"
 
 #: ../plugins/security-privacy//LockSecurity.qml:118
 msgid "Existing passcode"
-msgstr ""
+msgstr "Existierende PIN"
 
 #: ../plugins/security-privacy//LockSecurity.qml:120
 msgid "Existing passphrase"
@@ -978,7 +978,7 @@ msgstr "Bestehendes Kennwort"
 
 #: ../plugins/security-privacy//LockSecurity.qml:174
 msgid "Choose passcode"
-msgstr ""
+msgstr "PIN wählen"
 
 #: ../plugins/security-privacy//LockSecurity.qml:176
 msgid "Choose passphrase"
@@ -987,7 +987,7 @@ msgstr "Kennwort wählen"
 #: ../plugins/security-privacy//LockSecurity.qml:220
 #: ../wizard/qml/Pages//passwd-confirm.qml:48
 msgid "Confirm passcode"
-msgstr ""
+msgstr "PIN bestätigen"
 
 #: ../plugins/security-privacy//LockSecurity.qml:222
 #: ../wizard/qml/Pages//passwd-confirm.qml:47
@@ -996,7 +996,7 @@ msgstr "Kennwort bestätigen"
 
 #: ../plugins/security-privacy//LockSecurity.qml:265
 msgid "Those passcodes don't match. Try again."
-msgstr ""
+msgstr "Die PINs stimmen nicht überein. Neuer Versuch."
 
 #: ../plugins/security-privacy//LockSecurity.qml:268
 msgid "Those passphrases don't match. Try again."
@@ -1016,7 +1016,7 @@ msgstr "Fingerbewegung (keine Sicherheit)"
 
 #: ../plugins/security-privacy//LockSecurity.qml:349
 msgid "4-digit passcode"
-msgstr ""
+msgstr "4-stellige PIN"
 
 #: ../plugins/security-privacy//LockSecurity.qml:350
 #: ../plugins/security-privacy//PhoneLocking.qml:47
@@ -1030,7 +1030,7 @@ msgstr "Fingerbewegung (keine Sicherheit) … "
 
 #: ../plugins/security-privacy//LockSecurity.qml:352
 msgid "4-digit passcode…"
-msgstr ""
+msgstr "4-stellige PIN..."
 
 #: ../plugins/security-privacy//LockSecurity.qml:353
 msgid "Passphrase…"
@@ -1131,7 +1131,7 @@ msgstr "Keine"
 #: ../plugins/security-privacy//PhoneLocking.qml:46
 #: ../wizard/qml/Pages//30-passwd-type.qml:95
 msgid "Passcode"
-msgstr ""
+msgstr "PIN"
 
 #. TRANSLATORS: %1 is the number of minutes
 #: ../plugins/security-privacy//PhoneLocking.qml:75
@@ -1587,6 +1587,7 @@ msgstr ""
 #: ../plugins/about//DevMode.qml:110
 msgid "You need a passcode or passphrase set to use Developer Mode."
 msgstr ""
+"Sie benötigen eine PIN oder ein Passwort, um den Entwicklermodus zu nutzen."
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: ../plugins/about//PageComponent.qml:34
@@ -1777,7 +1778,7 @@ msgstr "Installieren"
 
 #: ../plugins/system-update//PageComponent.qml:152
 msgid "Installation failed"
-msgstr ""
+msgstr "Installation fehlgeschlagen"
 
 #: ../plugins/system-update//PageComponent.qml:156
 #: ../plugins/cellular//Components//SimEditor.qml:200
@@ -1791,11 +1792,11 @@ msgstr "Die Software ist aktuell"
 #: ../plugins/system-update//PageComponent.qml:235
 #: ../plugins/system-update//PageComponent.qml:241
 msgid "Sorry, the system update failed."
-msgstr ""
+msgstr "Die Systemaktualisierung ist fehlgeschlagen."
 
 #: ../plugins/system-update//PageComponent.qml:254
 msgid "Restarting…"
-msgstr ""
+msgstr "Startet neu …"
 
 #: ../plugins/system-update//PageComponent.qml:298
 msgid "Checking for updates…"
@@ -1804,6 +1805,7 @@ msgstr "Aktualisierungen werden gesucht …"
 #: ../plugins/system-update//PageComponent.qml:298
 msgid "Connect to the Internet to check for updates"
 msgstr ""
+"Verbinde das Gerät mit dem Internet, um nach Aktualisierungen zu suchen"
 
 #: ../plugins/system-update//PageComponent.qml:313
 #: ../plugins/system-update//PageComponent.qml:471
@@ -1830,7 +1832,7 @@ msgstr "Alle anhalten"
 
 #: ../plugins/system-update//PageComponent.qml:474
 msgid "Install…"
-msgstr ""
+msgstr "Installieren…"
 
 #: ../plugins/system-update//PageComponent.qml:476
 msgid "Download"
@@ -1858,12 +1860,12 @@ msgstr "Installiert"
 
 #: ../plugins/system-update//PageComponent.qml:525
 msgid "Downloading"
-msgstr ""
+msgstr "Lädt herunter"
 
 #: ../plugins/system-update//PageComponent.qml:536
 #, qt-format
 msgid "%1 of %2"
-msgstr ""
+msgstr "%1 von %2"
 
 #: ../plugins/system-update//PageComponent.qml:635
 msgid "Version: "
@@ -2042,7 +2044,7 @@ msgstr "System"
 
 #: ../wizard/qml/Pages//30-passwd-type.qml:72
 msgid "Please select how you’d like to unlock your phone."
-msgstr ""
+msgstr "Bitte wählen Sie aus, wie Sie Ihr Telefon entsperren wollen."
 
 #: ../wizard/qml/Pages//30-passwd-type.qml:92
 msgid "Swipe"
@@ -2050,15 +2052,15 @@ msgstr "Wischen"
 
 #: ../wizard/qml/Pages//30-passwd-type.qml:93
 msgid "No security"
-msgstr ""
+msgstr "Keine Sicherheitssperre"
 
 #: ../wizard/qml/Pages//30-passwd-type.qml:96
 msgid "4 numbers"
-msgstr ""
+msgstr "4 Ziffern"
 
 #: ../wizard/qml/Pages//30-passwd-type.qml:99
 msgid "Numbers and letters"
-msgstr ""
+msgstr "Zahlen und Buchstaben"
 
 #: ../wizard/qml/Pages//30-passwd-type.qml:112
 #: ../wizard/qml/Pages//40-wifi.qml:196 ../wizard/qml/Pages//10-welcome.qml:85
@@ -2073,11 +2075,11 @@ msgstr "Mit WLAN verbinden"
 
 #: ../wizard/qml/Pages//40-wifi.qml:146
 msgid "Available networks…"
-msgstr ""
+msgstr "Verfügbare Netzwerke …"
 
 #: ../wizard/qml/Pages//40-wifi.qml:147
 msgid "No available networks."
-msgstr ""
+msgstr "Keine verfügbaren Netzwerke."
 
 #: ../wizard/qml/Pages//40-wifi.qml:196
 #: ../wizard/qml/Pages//31-passwd-set.qml:77
@@ -2091,19 +2093,19 @@ msgstr "Nutzungsbedingungen"
 
 #: ../wizard/qml/Pages//31-passwd-set.qml:48
 msgid "Enter passphrase"
-msgstr ""
+msgstr "Passwort eingeben"
 
 #: ../wizard/qml/Pages//31-passwd-set.qml:49
 msgid "Choose your passcode"
-msgstr ""
+msgstr "Wähle Sie Ihre PIN"
 
 #: ../wizard/qml/Pages//31-passwd-set.qml:56
 msgid "Passphrase must be 4 characters long"
-msgstr ""
+msgstr "Passwörter müssen 4 Buchstaben lang sein"
 
 #: ../wizard/qml/Pages//20-sim.qml:23
 msgid "Add a SIM card and restart your device"
-msgstr ""
+msgstr "SIM-Karte einlegen und Gerät neustarten"
 
 #: ../wizard/qml/Pages//20-sim.qml:53
 msgid "Without it, you won’t be able to make calls or use text messaging."
@@ -2111,16 +2113,16 @@ msgstr "Ohne SIM funktionieren Anrufe und Nachrichten nicht."
 
 #: ../wizard/qml/Pages//passwd-confirm.qml:51
 msgid "Sorry, incorrect passphrase."
-msgstr ""
+msgstr "Falsches Passwort."
 
 #: ../wizard/qml/Pages//passwd-confirm.qml:51
 #: ../wizard/qml/Pages//passwd-confirm.qml:52
 msgid "Please try again."
-msgstr ""
+msgstr "Bitte versuchen Sie es erneut."
 
 #: ../wizard/qml/Pages//passwd-confirm.qml:52
 msgid "Sorry, incorrect passcode."
-msgstr ""
+msgstr "Entschuldigung, falsche PIN."
 
 #: ../wizard/qml/Pages//80-finished.qml:22
 msgid "All done"
@@ -2156,11 +2158,15 @@ msgid ""
 "Ubuntu includes location services provided by HERE, enabling apps to "
 "pinpoint your location."
 msgstr ""
+"Ubuntu verwendet von HERE bereitgestellte Standortdienste, die Anwendungen "
+"ermöglichen Ihren Standort genau zu bestimmen."
 
 #: ../wizard/qml/Pages//50-location.qml:64
 msgid ""
 "Allow apps to use your mobile and Wi-Fi networks to determine your location."
 msgstr ""
+"Erlaube Anwendungen, Ihre Mobilfunk- und Funknetzwerke zu verwenden, um "
+"Ihren Standort zu bestimmen."
 
 #. TRANSLATORS: HERE is a trademark for Nokia's location service, you probably shouldn't translate it
 #: ../wizard/qml/Pages//50-location.qml:74
@@ -2168,28 +2174,36 @@ msgid ""
 "Accept the HERE <a href='terms.qml'>terms and conditions</a> to enable these "
 "services."
 msgstr ""
+"Akzeptiere die HERE <a href='terms.qml'>Nutzungsbedingungen</a>, um diese "
+"Dienste zu aktivieren."
 
 #: ../wizard/qml/Pages//50-location.qml:85
 msgid ""
 "This service can be disabled at any time from the <b>System Settings</b> "
 "menu."
 msgstr ""
+"Dieser Dienst kann jederzeit in den <b>Systemeinstellungen</b> deaktiviert "
+"werden."
 
 #: ../wizard/qml/Pages//60-reporting.qml:22
 msgid "Improving your experience"
-msgstr ""
+msgstr "Verbessert Ihre Erfahrung mit diesem Produkt"
 
 #: ../wizard/qml/Pages//60-reporting.qml:34
 msgid ""
 "Your phone is set up to automatically report errors to Canonical and its "
 "partners, the makers of the operating system."
 msgstr ""
+"Ihr Telefon ist so eingestellt, dass es automatisch Fehlerberichte an "
+"Canonical und seine Partner, die Hersteller des Betriebssystems, sendet."
 
 #: ../wizard/qml/Pages//60-reporting.qml:41
 msgid ""
 "This can be disabled in <b>System Settings</b> under <b>Security &amp; "
 "Privacy</b>"
 msgstr ""
+"Dies kann in den <b>Systemeinstellungen</b> unter <b>Sicherheit &amp; "
+"Datenschutz</b> deaktiviert werden"
 
 #: ../wizard/qml/Components//Page.qml:89
 msgid "Back"
@@ -2921,7 +2935,7 @@ msgstr "click"
 
 #: ../plugins/security-privacy//securityprivacy.cpp:318
 msgid "Incorrect passcode. Try again."
-msgstr ""
+msgstr "Falsche PIN. Neuer Versuch."
 
 #: ../plugins/security-privacy//securityprivacy.cpp:320
 msgid "Incorrect passphrase. Try again."
@@ -2993,9 +3007,6 @@ msgstr "Antippen, um die Systemaktualisierung zu starten."
 
 #~ msgid "Set lock security"
 #~ msgstr "Sperre setzen"
-
-#~ msgid "Bug reporting"
-#~ msgstr "Fehlermeldungen"
 
 #~ msgid "Those passphrases don't match."
 #~ msgstr "Diese Kennworter stimmen nicht überein."
