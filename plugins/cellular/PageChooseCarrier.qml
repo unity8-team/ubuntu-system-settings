@@ -34,10 +34,11 @@ ItemPage {
 
     property var sim
     property int mode
+    property bool scanning: false
 
     QtObject {
         id: d
-        property bool __suppressActivation : true
+        property bool __suppressActivation: false
     }
 
     // Component.onCompleted: CHelper.updateNetworkOperators()
@@ -46,6 +47,11 @@ ItemPage {
         target: sim.netReg
         // onNetworkOperatorsChanged: CHelper.updateNetworkOperators()
         // onCurrentOperatorPathChanged: CHelper.buildLists()
+        onScanFinished: scanning = false;
+        onScanError: {
+            scanning = false;
+            console.warn("onScanError: " + message);
+        }
     }
 
     Component {
@@ -59,6 +65,9 @@ ItemPage {
                 } else if (error !== OfonoNetworkOperator.NoError) {
                     console.warn("registerComplete failed with error: " + errorString + " Falling back to default");
                     sim.netReg.registration();
+                    /* Force a new selectedIndex, since the operation failed */
+                    carrierSelector.selectedIndex = CHelper.getCurrentOperator(
+                        carrierSelector.model);
                 }
             }
             // onNameChanged:  CHelper.buildLists();
@@ -92,15 +101,19 @@ ItemPage {
                 selectedIndex: sim.netReg.mode === "manual" ? 1 : 0
 
                 // we only want to do this per user input
-                onSelectedIndexChanged: {
-                    if (selectedIndex === -1 || d.__suppressActivation)
+                onDelegateClicked: {
+                    if (selectedIndex === -1 || d.__suppressActivation) {
+                        console.warn('ignored mode change')
                         return;
+                    }
 
-                    if (selectedIndex === 0) {
+                    if (index === 0) {
                         sim.netReg.registration();
-                    } else if (selectedIndex === 1) {
+                    } else if (index === 1) {
                         if (sim.netReg.status !== "searching") {
                             sim.netReg.scan();
+                            scanning = true;
+                            console.warn('Started search')
                         }
                     }
                 }
@@ -109,8 +122,8 @@ ItemPage {
             ListItem.ItemSelector {
                 id: carrierSelector
                 objectName: "carriers"
-                expanded: chooseCarrier.selectedIndex === 1 && sim.netReg.status !== "searching"
-                enabled: sim.netReg.status !== "searching" && chooseCarrier.selectedIndex === 1
+                expanded: chooseCarrier.selectedIndex === 1 && !scanning
+                enabled: enabled
                 // work around ItemSelector not having a visual change depending on being disabled
                 opacity: enabled ? 1.0 : 0.5
                 width: parent.width
@@ -136,9 +149,8 @@ ItemPage {
                         left: parent.left
                         right: parent.right
                     }
-                    visible: sim.netReg.status !== "searching" &&
-                        chooseCarrier.selectedIndex === 1
-                    height: carrierSelector.itemHeight
+                    opacity: scanning ? 1 : 0
+                    height: carrierSelector.itemHeight - units.gu(0.15)
                     color: Theme.palette.normal.background
                     ActivityIndicator {
                         id: act
@@ -147,7 +159,7 @@ ItemPage {
                             margins: units.gu(2)
                             verticalCenter: parent.verticalCenter
                         }
-                        running: true
+                        running: scanning
                     }
                     Label {
                         anchors {
@@ -160,6 +172,11 @@ ItemPage {
                         height: parent.height
                         text: i18n.tr("Searching for carriers…")
                         verticalAlignment: Text.AlignVCenter
+                    }
+                    Behavior on opacity {
+                        NumberAnimation {
+                            duration: UbuntuAnimation.SnapDuration
+                        }
                     }
                 }
             }

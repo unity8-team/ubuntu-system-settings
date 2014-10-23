@@ -1,6 +1,13 @@
 var _netopCache = {}
 var _allowedOperators = []
 
+/*
+Returns an array of OfonoNetworkOperator objects,
+that a non-forbidden status.
+
+@operators A QStringList of operator paths
+@returns Array of OfonoNetworkOperator elements
+*/
 function allowedOperators (operators) {
 
     d.__suppressActivation = true;
@@ -33,6 +40,14 @@ function _getAllowedOperators () {
     });
 }
 
+/*
+Returns an index of the current network operator.
+Uses internal list of allowed operators to find the index.
+
+Returns a negative number if no current operator was found.
+
+@returns Number index of the current operator
+*/
 function getCurrentOperator () {
     var allowed = -1;
     _allowedOperators.forEach(function (op, i) {
@@ -44,6 +59,13 @@ function getCurrentOperator () {
     return allowed;
 }
 
+/*
+Sets the current operator. It does this by calling
+registerOperator on the operator QML object.
+
+@index Number index of the new current operator
+@returns undefined
+*/
 function setCurrentOperator (index) {
     console.warn('Registering', _allowedOperators[index].name);
     _allowedOperators[index].registerOperator();
@@ -69,15 +91,13 @@ function _garbageCollect (newOperators) {
 function _createQml (paths) {
     paths.forEach(function (path, i) {
         if (!_netopCache.hasOwnProperty(path)) {
-            // unseen path
-            if (!_netopCache.hasOwnProperty(path)) {
-                _netopCache[path] = netOp.createObject(root, {
-                    'operatorPath': path
-                });
-                console.warn('_createQml created', path);
-            } else {
-                console.warn('_createQml ignored', path);
-            }
+            _netopCache[path] = netOp.createObject(root, {
+                'operatorPath': path
+            });
+            console.warn('_createQml created', path);
+        } else {
+            console.warn('_createQml ignored', path);
         }
+
     });
 }
