@@ -33,8 +33,6 @@ ItemPage {
     objectName: "chooseCarrierPage"
 
     property var sim
-    property var operatorNames
-    property var operators: ({})
     property int mode
 
     QtObject {
@@ -42,12 +40,12 @@ ItemPage {
         property bool __suppressActivation : true
     }
 
-    Component.onCompleted: CHelper.updateNetworkOperators()
+    // Component.onCompleted: CHelper.updateNetworkOperators()
 
     Connections {
         target: sim.netReg
-        onNetworkOperatorsChanged: CHelper.updateNetworkOperators()
-        onCurrentOperatorPathChanged: CHelper.buildLists()
+        // onNetworkOperatorsChanged: CHelper.updateNetworkOperators()
+        // onCurrentOperatorPathChanged: CHelper.buildLists()
     }
 
     Component {
@@ -55,14 +53,16 @@ ItemPage {
         OfonoNetworkOperator {
             onRegisterComplete: {
                 if (error === OfonoNetworkOperator.InProgressError) {
-                    console.warn("registerComplete failed with error: " + errorString);
+                    /* Force a new selectedIndex, since the operation failed */
+                    carrierSelector.selectedIndex = CHelper.getCurrentOperator(
+                        carrierSelector.model);
                 } else if (error !== OfonoNetworkOperator.NoError) {
                     console.warn("registerComplete failed with error: " + errorString + " Falling back to default");
                     sim.netReg.registration();
                 }
             }
-            onNameChanged:  CHelper.buildLists();
-            onStatusChanged: CHelper.buildLists();
+            // onNameChanged:  CHelper.buildLists();
+            // onStatusChanged: CHelper.buildLists();
         }
     }
 
@@ -78,6 +78,7 @@ ItemPage {
                 left: parent.left
                 right: parent.right
             }
+            spacing: 0
 
             ListItem.ItemSelector {
                 id: chooseCarrier
@@ -98,8 +99,9 @@ ItemPage {
                     if (selectedIndex === 0) {
                         sim.netReg.registration();
                     } else if (selectedIndex === 1) {
-                        if (sim.netReg.status !== "searching")
+                        if (sim.netReg.status !== "searching") {
                             sim.netReg.scan();
+                        }
                     }
                 }
             }
@@ -107,33 +109,61 @@ ItemPage {
             ListItem.ItemSelector {
                 id: carrierSelector
                 objectName: "carriers"
-                expanded: chooseCarrier.selectedIndex === 1
+                expanded: chooseCarrier.selectedIndex === 1 && sim.netReg.status !== "searching"
                 enabled: sim.netReg.status !== "searching" && chooseCarrier.selectedIndex === 1
                 // work around ItemSelector not having a visual change depending on being disabled
                 opacity: enabled ? 1.0 : 0.5
                 width: parent.width
-                model: operatorNames
+                model: CHelper.allowedOperators(sim.netReg.networkOperators)
                 delegate: OptionSelectorDelegate {
                     enabled: carrierSelector.enabled
                     showDivider: false
+                    text: modelData.name
                 }
-                onSelectedIndexChanged: {
-                    if (selectedIndex === -1 || d.__suppressActivation)
+                onDelegateClicked: {
+                    if (selectedIndex === -1 || d.__suppressActivation) {
+                        console.warn('Ignored user request');
                         return;
-
-                    // this assumes operator names are unique,
-                    // revise if not so
-                    for (var op in operators) {
-                        if (operators[op].name === operatorNames[selectedIndex]) {
-                            operators[op].registerOperator();
-                            return;
-                        }
                     }
-                    // just asserting to verify the logic
-                    // remove once proven functional
-                    throw "should not be reached.";
+                    CHelper.setCurrentOperator(index);
+                }
+                selectedIndex: CHelper.getCurrentOperator(model)
+
+                Rectangle {
+                    id: searchingOverlay
+                    anchors {
+                        top: parent.top
+                        left: parent.left
+                        right: parent.right
+                    }
+                    visible: sim.netReg.status !== "searching" &&
+                        chooseCarrier.selectedIndex === 1
+                    height: carrierSelector.itemHeight
+                    color: Theme.palette.normal.background
+                    ActivityIndicator {
+                        id: act
+                        anchors {
+                            left: parent.left
+                            margins: units.gu(2)
+                            verticalCenter: parent.verticalCenter
+                        }
+                        running: true
+                    }
+                    Label {
+                        anchors {
+                            left: act.right
+                            right: parent.right
+                            top: parent.top
+                            bottom: parent.bottom
+                            leftMargin: units.gu(1)
+                        }
+                        height: parent.height
+                        text: i18n.tr("Searching for carriers…")
+                        verticalAlignment: Text.AlignVCenter
+                    }
                 }
             }
+
 
             ListItem.Standard {
                 text: i18n.tr("APN")
