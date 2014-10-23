@@ -25,17 +25,18 @@ Column {
 
     objectName: "noSim"
 
-    ListItem.ItemSelector {
+    ListItem.Standard {
         text: i18n.tr("Cellular data:")
-        expanded: true
         enabled: false
-        model: [i18n.tr("Off"), i18n.tr("2G only (saves battery)"), i18n.tr("2G/3G/4G (faster)")]
-        selectedIndex: -1
+        control: Switch {
+            checked: false
+        }
     }
 
     ListItem.Standard {
         text: i18n.tr("Data roaming")
         enabled: false
+        showDivider: false
         control: Switch {
             checked: false
         }

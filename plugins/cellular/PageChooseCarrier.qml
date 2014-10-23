@@ -81,7 +81,7 @@ ItemPage {
 
             ListItem.ItemSelector {
                 id: chooseCarrier
-                objectName: "autoChooseCarrierSelector"
+                objectName: "mode"
                 expanded: true
                 enabled: sim.netReg.mode !== "auto-only"
                 text: i18n.tr("Choose carrier:")
@@ -106,7 +106,7 @@ ItemPage {
 
             ListItem.ItemSelector {
                 id: carrierSelector
-                objectName: "carrierSelector"
+                objectName: "carriers"
                 expanded: chooseCarrier.selectedIndex === 1
                 enabled: sim.netReg.status !== "searching" && chooseCarrier.selectedIndex === 1
                 // work around ItemSelector not having a visual change depending on being disabled
