@@ -92,9 +92,6 @@ ItemPage {
                 right: parent.right
             }
             spacing: 0
-            Label {
-                text: sim.netReg.status
-            }
             ListItem.ItemSelector {
                 id: chooseCarrier
                 objectName: "mode"
