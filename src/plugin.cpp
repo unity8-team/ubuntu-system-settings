@@ -224,7 +224,6 @@ bool Plugin::isVisible() const
     // TODO: visibility check depending on form-factor
     if (d->m_data.value(keyHasDynamicVisibility).toBool()) {
         if (!d->ensureLoaded()) return false;
-        //if (d->m_item == 0) return false;
         return d->m_item->isVisible();
     }
     return true;
