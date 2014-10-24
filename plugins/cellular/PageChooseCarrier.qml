@@ -45,7 +45,7 @@ ItemPage {
     }
 
     onOperatorsChanged: CHelper.operatorsChanged();
-    Component.onCompleted: operatorsChanged('ui done')
+    Component.onCompleted: operatorsChanged()
 
     Connections {
         target: sim.netReg

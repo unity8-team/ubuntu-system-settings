@@ -1,9 +1,9 @@
-var _netopCache = {}
+var _pathToQml = {}
 var _allowedOps = []
 
 /*
 Returns an array of OfonoNetworkOperator objects,
-that a non-forbidden status.
+that has a non-forbidden status.
 
 @returns Array of OfonoNetworkOperator elements
 */
@@ -12,9 +12,10 @@ function getAllowedOps () {
 }
 
 /*
-Given OfonoNetworkRegistration operators,
-it will create a OfonoNetworkOperator QML object for each unseen
-operator.
+Given an array of paths, it will create a OfonoNetworkOperator
+QML object for each unseen operator.
+
+It will also delete any QML objects that are not in operators.
 
 @operator Array of String
 @returns undefined
@@ -31,11 +32,10 @@ function _getAllowedOps () {
     var allowed = [];
     var path;
 
-    // Go through cache of netop objects, find those that are not forbidden
-    for (path in _netopCache) {
-        if (_netopCache.hasOwnProperty(path)) {
-            if (_netopCache[path].status !== "forbidden") {
-                allowed.push(_netopCache[path]);
+    for (path in _pathToQml) {
+        if (_pathToQml.hasOwnProperty(path)) {
+            if (_pathToQml[path].status !== "forbidden") {
+                allowed.push(_pathToQml[path]);
             }
         }
     }
@@ -48,20 +48,22 @@ function _getAllowedOps () {
 }
 
 /*
-Returns an index of the provided network operator.
+Returns the index of path in our list of
+allowed operators.
 
 Returns a negative number if no current operator was found.
+
 @path String a operator path
 @returns Number index of the operator
 */
 function getOpIndex (path) {
     console.warn('getOpIndex arg', path);
-    if (!_netopCache.hasOwnProperty(path)) {
+    if (!_pathToQml.hasOwnProperty(path)) {
         console.warn('getOpIndex ret', -1);
         return -1;
     }
-    console.warn('getOpIndex ret (late)', _allowedOps.indexOf(_netopCache[path]));
-    return _allowedOps.indexOf(_netopCache[path]);
+    console.warn('getOpIndex ret (late)', _allowedOps.indexOf(_pathToQml[path]));
+    return _allowedOps.indexOf(_pathToQml[path]);
 }
 
 /*
@@ -72,8 +74,8 @@ registerOperator on the operator QML object.
 @returns undefined
 */
 function setCurrentOp (path) {
-    console.warn('Registering', _netopCache[path].name);
-    _netopCache[path].registerOperator();
+    console.warn('Registering', _pathToQml[path].name);
+    _pathToQml[path].registerOperator();
     root.operatorsChanged('setCurrentOp');
 }
 
@@ -81,13 +83,14 @@ function setCurrentOp (path) {
 do not appear in operator list, newOps. */
 function _garbageCollect (newOps) {
     var path;
-    for (path in _netopCache) {
-        if (_netopCache.hasOwnProperty(path)) {
+    for (path in _pathToQml) {
+        if (_pathToQml.hasOwnProperty(path)) {
             /* Found path that was not in the new operator list,
             let's remove it */
             if (newOps.indexOf(path) === -1) {
-                console.warn('Destroyed path for path', _netopCache[path].operatorPath, _netopCache[path].name);
-                _netopCache[path].destroy();
+                console.warn('Destroyed path for path', _pathToQml[path].operatorPath, _pathToQml[path].name);
+                _pathToQml[path].destroy();
+                delete _pathToQml[path];
             }
         }
     }
@@ -96,11 +99,10 @@ function _garbageCollect (newOps) {
 function getOpName (path) {
     console.warn('getOpName', path);
     var name = "";
-    if (_netopCache.hasOwnProperty(path)) {
-        name = _netopCache[path].name;
+    if (_pathToQml.hasOwnProperty(path)) {
+        name = _pathToQml[path].name;
     } else {
-        console.warn('_netopCache did not have', path);
-        name = path;
+        throw new TypeError('OperatorPath', path, 'not in cache');
     }
     return name;
 }
@@ -108,8 +110,8 @@ function getOpName (path) {
 /* Creates QML objects for each path in paths. */
 function _createQml (paths) {
     paths.forEach(function (path, i) {
-        if (!_netopCache.hasOwnProperty(path)) {
-            _netopCache[path] = netOp.createObject(root, {
+        if (!_pathToQml.hasOwnProperty(path)) {
+            _pathToQml[path] = netOp.createObject(root, {
                 'operatorPath': path
             });
             console.warn('_createQml created', path);
