@@ -5,34 +5,41 @@ var _allowedOps = []
 Returns an array of OfonoNetworkOperator objects,
 that a non-forbidden status.
 
-@operators A QStringList of operator paths
 @returns Array of OfonoNetworkOperator elements
 */
-function allowedOps (operators) {
-    console.warn('got', operators.length, 'operators', operators);
+function getAllowedOps () {
+    return _allowedOps;
+}
+
+/*
+Given OfonoNetworkRegistration operators,
+it will create a OfonoNetworkOperator QML object for each unseen
+operator.
+
+@operator Array of String
+@returns undefined
+*/
+function updateOperatorQML (operators) {
     d.__suppressActivation = true;
     _garbageCollect(operators);
     _createQml(operators);
     _allowedOps = _getAllowedOps();
     d.__suppressActivation = false;
-
-    return _allowedOps;
 }
 
 function _getAllowedOps () {
     var allowed = [];
-    var operatorQml;
+    var path;
 
     // Go through cache of netop objects, find those that are not forbidden
-    for (operatorQml in _netopCache) {
-        if (_netopCache.hasOwnProperty(operatorQml)) {
-            if (_netopCache[operatorQml].status !== "forbidden") {
-                allowed.push(_netopCache[operatorQml]);
-                console.warn(_netopCache[operatorQml].mnc)
+    for (path in _netopCache) {
+        if (_netopCache.hasOwnProperty(path)) {
+            if (_netopCache[path].status !== "forbidden") {
+                allowed.push(_netopCache[path]);
             }
         }
     }
-    // Sort all modems on modem path before returning them
+    // Sort all modems on modem network code before returning them
     return allowed.sort(function (a, b) {
         if (a.mnc < b.mnc) return -1;
         if (a.mnc > b.mnc) return 1;
@@ -41,34 +48,33 @@ function _getAllowedOps () {
 }
 
 /*
-Returns an index of the current network operator.
-Uses internal list of allowed operators to find the index.
+Returns an index of the provided network operator.
 
 Returns a negative number if no current operator was found.
-
-@returns Number index of the current operator
+@path String a operator path
+@returns Number index of the operator
 */
-function getCurrentOpIndex () {
-    var idx = -1;
-    _allowedOps.forEach(function (op, i) {
-        if (op.status === 'current') {
-            console.warn('Current op:', op.name);
-            idx = i;
-        }
-    });
-    return idx;
+function getOpIndex (path) {
+    console.warn('getOpIndex arg', path);
+    if (!_netopCache.hasOwnProperty(path)) {
+        console.warn('getOpIndex ret', -1);
+        return -1;
+    }
+    console.warn('getOpIndex ret (late)', _allowedOps.indexOf(_netopCache[path]));
+    return _allowedOps.indexOf(_netopCache[path]);
 }
 
 /*
 Sets the current operator. It does this by calling
 registerOperator on the operator QML object.
 
-@index Number index of the new current operator
+@path String operator path of the new current operator
 @returns undefined
 */
-function setCurrentOp (index) {
-    console.warn('Registering', _allowedOps[index].name);
-    _allowedOps[index].registerOperator();
+function setCurrentOp (path) {
+    console.warn('Registering', _netopCache[path].name);
+    _netopCache[path].registerOperator();
+    root.operatorsChanged('setCurrentOp');
 }
 
 /* Call this to check and remove QML cache elements that
@@ -87,6 +93,18 @@ function _garbageCollect (newOps) {
     }
 }
 
+function getOpName (path) {
+    console.warn('getOpName', path);
+    var name = "";
+    if (_netopCache.hasOwnProperty(path)) {
+        name = _netopCache[path].name;
+    } else {
+        console.warn('_netopCache did not have', path);
+        name = path;
+    }
+    return name;
+}
+
 /* Creates QML objects for each path in paths. */
 function _createQml (paths) {
     paths.forEach(function (path, i) {
@@ -95,9 +113,19 @@ function _createQml (paths) {
                 'operatorPath': path
             });
             console.warn('_createQml created', path);
-        } else {
-            console.warn('_createQml ignored', path);
         }
-
     });
+}
+
+function operatorsChanged () {
+    console.warn('operatorsChanged');
+    var curOp = sim.netReg.currentOperatorPath;
+    CHelper.updateOperatorQML(sim.netReg.networkOperators);
+    carrierSelector.model = CHelper.getAllowedOps();
+    if (curOp) {
+        carrierSelector.selectedIndex = CHelper.getOpIndex(curOp);
+    }
+    if (curOp) {
+        curOpLabel.text = CHelper.getOpName(curOp);
+    }
 }

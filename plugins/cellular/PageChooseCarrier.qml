@@ -33,19 +33,30 @@ ItemPage {
     objectName: "chooseCarrierPage"
 
     property var sim
-    property int mode
     property bool scanning: false
+
+    /* Signal that ofono bindings can use to
+    trigger an update of the UI */
+    signal operatorsChanged ()
 
     QtObject {
         id: d
         property bool __suppressActivation: false
     }
 
+    onOperatorsChanged: CHelper.operatorsChanged();
+    Component.onCompleted: operatorsChanged('ui done')
+
     Connections {
         target: sim.netReg
-        onScanFinished: scanning = false;
+        onNetworkOperatorsChanged: operatorsChanged()
+        onScanFinished: {
+            scanning = false;
+            d.__suppressActivation = false;
+        }
         onScanError: {
             scanning = false;
+            d.__suppressActivation = false;
             console.warn("onScanError: " + message);
         }
     }
@@ -55,17 +66,16 @@ ItemPage {
         OfonoNetworkOperator {
             onRegisterComplete: {
                 if (error === OfonoNetworkOperator.InProgressError) {
-                    // Force a new selectedIndex, since the operation failed
-                    carrierSelector.selectedIndex = CHelper.getCurrentOpIndex();
+                    operatorsChanged()
                 } else if (error !== OfonoNetworkOperator.NoError) {
-                    console.warn("registerComplete failed with error: " + errorString + " Falling back to default");
+                    console.warn("Register complete:", errorString);
+                    console.warn("Falling back to default operator.");
                     sim.netReg.registration();
-                    // Force a new selectedIndex, since the operation failed
-                    carrierSelector.selectedIndex = CHelper.getCurrentOpIndex();
+                    operatorsChanged();
                 }
             }
-            // onNameChanged:  CHelper.buildLists();
-            // onStatusChanged: CHelper.buildLists();
+            onNameChanged: operatorsChanged();
+            onStatusChanged: operatorsChanged();
         }
     }
 
@@ -82,7 +92,9 @@ ItemPage {
                 right: parent.right
             }
             spacing: 0
-
+            Label {
+                text: sim.netReg.status
+            }
             ListItem.ItemSelector {
                 id: chooseCarrier
                 objectName: "mode"
@@ -92,22 +104,19 @@ ItemPage {
                 opacity: enabled ? 1.0 : 0.5
                 text: i18n.tr("Choose carrier:")
                 model: [i18n.tr("Automatically"), i18n.tr("Manually")]
-
                 delegate: OptionSelectorDelegate { showDivider: false }
                 selectedIndex: sim.netReg.mode === "manual" ? 1 : 0
-
-                // we only want to do this per user input
                 onDelegateClicked: {
                     if (selectedIndex === -1 || d.__suppressActivation) {
                         return;
                     }
-
                     if (index === 0) {
                         sim.netReg.registration();
                     } else if (index === 1) {
                         if (sim.netReg.status !== "searching") {
                             sim.netReg.scan();
                             scanning = true;
+                            d.__suppressActivation = true;
                             console.warn('Started search')
                         }
                     }
@@ -117,12 +126,10 @@ ItemPage {
             ListItem.ItemSelector {
                 id: carrierSelector
                 objectName: "carriers"
-                expanded: chooseCarrier.selectedIndex === 1 && !scanning
-                enabled: enabled
+                expanded: enabled
+                enabled: chooseCarrier.selectedIndex === 1 && !scanning
                 // work around unfortunate ui
-                opacity: enabled ? 1.0 : 0.5
                 width: parent.width
-                model: CHelper.allowedOps(sim.netReg.networkOperators)
                 delegate: OptionSelectorDelegate {
                     enabled: carrierSelector.enabled
                     showDivider: false
@@ -133,9 +140,11 @@ ItemPage {
                         console.warn('Ignored user request');
                         return;
                     }
-                    CHelper.setCurrentOp(index);
+                    if (index === selectedIndex) {
+                        return;
+                    }
+                    CHelper.setCurrentOp(model[index].operatorPath);
                 }
-                selectedIndex: CHelper.getCurrentOpIndex(model)
 
                 Rectangle {
                     id: searchingOverlay
@@ -179,23 +188,23 @@ ItemPage {
                 }
 
                 Rectangle {
-                    property bool relevant: chooseCarrier.selectedIndex !== 1
+                    property bool showName: chooseCarrier.selectedIndex !== 1
                     color: Theme.palette.normal.background
                     height: chooseCarrier.itemHeight
-                    opacity: relevant ? 1 : 0
+                    opacity: showName ? 1 : 0
                     anchors {
                         top: parent.top
                         left: parent.left
                         right: parent.right
                     }
+
                     ListItem.Standard {
+                        id: curOpLabel
                         anchors.fill: parent
                         enabled: false
-                        text: {
-                            return carrierSelector.model[
-                                carrierSelector.selectedIndex].name
-                        }
+                        text: i18n.tr("None")
                     }
+
                     Behavior on opacity {
                         NumberAnimation {
                             duration: UbuntuAnimation.SnapDuration
@@ -203,7 +212,6 @@ ItemPage {
                     }
                 }
             }
-
 
             ListItem.Standard {
                 text: i18n.tr("APN")

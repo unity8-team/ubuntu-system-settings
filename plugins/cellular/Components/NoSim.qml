@@ -33,20 +33,4 @@ Column {
         }
     }
 
-    ListItem.Standard {
-        text: i18n.tr("Data roaming")
-        enabled: false
-        showDivider: false
-        control: Switch {
-            checked: false
-        }
-    }
-
-    ListItem.Divider {}
-
-    ListItem.SingleValue {
-        text: i18n.tr("Carrier");
-        value: i18n.tr("N/A")
-        enabled: false
-    }
 }
