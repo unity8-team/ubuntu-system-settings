@@ -43,9 +43,13 @@ Column {
                 anchors.left: parent.left
                 anchors.right: parent.right
                 sourceComponent: model.item.entryComponent
+                active: model.item.visible
                 Connections {
                     ignoreUnknownSignals: true
                     target: loader.item
+                    onVisibleChanged: {
+                        console.warn(model.displayName + " onVisibleChanged: " + visible);
+                    }
                     onClicked: {
                         var pageComponent = model.item.pageComponent
                         if (pageComponent) {

@@ -25,7 +25,6 @@
 #include <QTimer>
 #include <SystemSettings/ItemBase>
 
-#include "../system_update.h"
 #include "../update_manager.h"
 
 using namespace SystemSettings;
@@ -41,28 +40,24 @@ public:
     ~UpdateItem();
 
 private Q_SLOTS:
-    void changeVisibility(const QString&, Update*);
     void onUpdateAvailableFound(bool);
     void onModelChanged();
     void shouldShow();
 
 private:
-    SystemUpdate m_systemUpdate;
     UpdateManager *m_updateManager;
 };
 
 UpdateItem::UpdateItem(const QVariantMap &staticData, QObject *parent):
-    ItemBase(staticData, parent),
-    m_systemUpdate(this)
+    ItemBase(staticData, parent)
 {
-    m_updateManager = UpdateManager::instance();
-    QObject::connect(&m_systemUpdate, SIGNAL(updateAvailable(const QString&, Update*)),
-                  this, SLOT(changeVisibility(const QString&, Update*)));
+    setVisibility(false);
+    m_updateManager = UpdateManager::instance();    
     QObject::connect(m_updateManager, SIGNAL(updateAvailableFound(bool)),
                   this, SLOT(onUpdateAvailableFound(bool)));
     QObject::connect(m_updateManager, SIGNAL(modelChanged()),
                   this, SLOT(onModelChanged()));
-    shouldShow();
+    QTimer::singleShot(100, this, SLOT(shouldShow()));
 }
 
 void UpdateItem::onUpdateAvailableFound(bool)
@@ -70,11 +65,6 @@ void UpdateItem::onUpdateAvailableFound(bool)
     qWarning() << Q_FUNC_INFO << m_updateManager->model().count();
     if (m_updateManager->model().count() > 0)
         setVisibility(true);
-}
-
-void UpdateItem::changeVisibility(const QString&, Update*)
-{
-    setVisibility(true);
 }
 
 void UpdateItem::setVisibility(bool visible)
@@ -94,7 +84,7 @@ void UpdateItem::onModelChanged()
 
 void UpdateItem::shouldShow()
 {
-    if (m_systemUpdate.checkTarget())
+    if (m_updateManager->checkTarget())
     {
         qWarning() << Q_FUNC_INFO << "Has SystemUpdate";
         setVisibility(true);

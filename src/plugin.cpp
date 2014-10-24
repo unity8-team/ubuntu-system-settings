@@ -101,6 +101,7 @@ bool PluginPrivate::ensureLoaded() const
     QString plugin = m_data.value(keyPlugin).toString();
     if (plugin.isEmpty())
         return false;
+    qWarning() << Q_FUNC_INFO << plugin;
 
     QString name = QString("%1/lib%2.so").arg(pluginModuleDir).arg(plugin);
 
@@ -223,6 +224,7 @@ bool Plugin::isVisible() const
     // TODO: visibility check depending on form-factor
     if (d->m_data.value(keyHasDynamicVisibility).toBool()) {
         if (!d->ensureLoaded()) return false;
+        //if (d->m_item == 0) return false;
         return d->m_item->isVisible();
     }
     return true;
@@ -277,7 +279,6 @@ void Plugin::reset()
 
     delete object;
     delete component;
-
 }
 
 QQmlComponent *Plugin::entryComponent()
@@ -288,6 +289,7 @@ QQmlComponent *Plugin::entryComponent()
     if (Q_UNLIKELY(context == 0)) return 0;
 
     QString title = displayName();
+    qWarning() << Q_FUNC_INFO << title;
     QUrl iconUrl = icon();
     QUrl entryComponentUrl = d->componentFromSettingsFile(keyEntryComponent);
     if (!entryComponentUrl.isEmpty()) {

@@ -96,6 +96,8 @@ public:
     QDateTime lastUpdateDate() { return m_systemUpdate.lastUpdateDate(); }
     QString currentUbuntuBuildNumber() { return m_systemUpdate.currentUbuntuBuildNumber(); }
     QString currentDeviceBuildNumber() { return m_systemUpdate.currentDeviceBuildNumber(); }
+    bool checkTarget() { return m_systemUpdate.checkTarget(); }
+
 
 #ifdef TESTS
     // For testing purposes

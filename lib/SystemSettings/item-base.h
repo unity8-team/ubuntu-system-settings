@@ -57,11 +57,11 @@ public:
                                           QObject *parent = 0);
     virtual QQmlComponent *pageComponent(QQmlEngine *engine,
                                          QObject *parent = 0);
+    void setVisible(bool visible);
 
 protected:
     void setIcon(const QUrl &icon);
     void setKeywords(const QStringList &keywords);
-    void setVisible(bool visible);
     const QVariantMap &staticData() const;
 
 Q_SIGNALS:
