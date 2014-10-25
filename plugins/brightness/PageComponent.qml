@@ -24,6 +24,8 @@ import SystemSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 import Ubuntu.SystemSettings.Brightness 1.0
+import Ubuntu.Settings.Menus 0.1 as Menus
+import QMenuModel 0.1
 
 ItemPage {
     id: root
@@ -39,7 +41,39 @@ ItemPage {
         anchors.left: parent.left
         anchors.right: parent.right
 
-        BrightnessSlider {}
+        QDBusActionGroup {
+            id: indicatorPower
+            busType: 1
+            busName: "com.canonical.indicator.power"
+            objectPath: "/com/canonical/indicator/power"
+
+            property variant brightness: action("brightness")
+
+            Component.onCompleted: start()
+        }
+
+        Binding {
+            target: sliderMenu
+            property: "value"
+            value: sliderMenu.enabled ? indicatorPower.action("brightness").state * 100 : 0.0
+        }
+
+        ListItem.Standard {
+            text: i18n.tr("Display brightness")
+            showDivider: false
+        }
+
+        Menus.SliderMenu {
+            id: sliderMenu
+            objectName: "sliderMenu"
+            enabled: indicatorPower.action("brightness").state != null
+            live: true
+            minimumValue: 0.0
+            maximumValue: 100.0
+            minIcon: "image://theme/torch-off"
+            maxIcon: "image://theme/torch-on"
+            onUpdated: indicatorPower.action("brightness").updateState(value / 100.0)
+        }
 
         Binding {
             target: autoAdjustCheck
