@@ -43,11 +43,8 @@ UpdateManager *UpdateManager::m_instance = 0;
 
 UpdateManager *UpdateManager::instance()
 {
-    qWarning() << Q_FUNC_INFO;
-    if (!m_instance) {
-        qWarning() << Q_FUNC_INFO << "New instance";
+    if (!m_instance)
         m_instance = new UpdateManager;
-    }
 
     return m_instance;
 }
@@ -59,7 +56,6 @@ UpdateManager::UpdateManager(QObject *parent):
     m_checkingUpdates(0),
     m_downloadMode(-1)
 {
-    qWarning() << Q_FUNC_INFO;
     // SSO SERVICE
     QObject::connect(&m_service, SIGNAL(credentialsFound(const Token&)),
                      this, SLOT(handleCredentialsFound(Token)));

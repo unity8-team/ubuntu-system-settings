@@ -62,14 +62,12 @@ UpdateItem::UpdateItem(const QVariantMap &staticData, QObject *parent):
 
 void UpdateItem::onUpdateAvailableFound(bool)
 {
-    qWarning() << Q_FUNC_INFO << m_updateManager->model().count();
     if (m_updateManager->model().count() > 0)
         setVisibility(true);
 }
 
 void UpdateItem::setVisibility(bool visible)
 {
-    qWarning() << Q_FUNC_INFO << visible;
     setVisible(visible);
 }
 
@@ -79,17 +77,12 @@ void UpdateItem::onModelChanged()
         setVisibility(true);
     else 
         setVisibility(false);
-    qWarning() << Q_FUNC_INFO << isVisible();
 }
 
 void UpdateItem::shouldShow()
 {
     if (m_updateManager->checkTarget())
-    {
-        qWarning() << Q_FUNC_INFO << "Has SystemUpdate";
         setVisibility(true);
-    }
-    qWarning() << Q_FUNC_INFO << isVisible();
 }
 
 UpdateItem::~UpdateItem()

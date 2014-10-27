@@ -47,9 +47,6 @@ Column {
                 Connections {
                     ignoreUnknownSignals: true
                     target: loader.item
-                    onVisibleChanged: {
-                        console.warn(model.displayName + " onVisibleChanged: " + visible);
-                    }
                     onClicked: {
                         var pageComponent = model.item.pageComponent
                         if (pageComponent) {
