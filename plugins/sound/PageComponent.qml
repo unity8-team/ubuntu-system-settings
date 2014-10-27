@@ -96,7 +96,7 @@ ItemPage {
                 property: "value"
                 value: soundActionGroup.volume.state
             }
- 
+
             Menus.SliderMenu {
                 id: sliderMenu
                 objectName: "sliderMenu"
@@ -104,7 +104,7 @@ ItemPage {
                 minimumValue: 0.0
                 maximumValue: 1.0
                 minIcon: "image://theme/audio-volume-low-zero"
-                maxIcon: "image://theme/audio-volume-high" 
+                maxIcon: "image://theme/audio-volume-high"
                 onUpdated: soundActionGroup.volume.updateState(value);
             }
 
@@ -210,6 +210,23 @@ ItemPage {
                 text: i18n.tr("Lock sound")
                 visible: showAllUI
             }
+
+            Item {
+                height: units.gu(2)
+                width: parent.width
+            }
+
+            ListItem.Standard {
+                text: i18n.tr("Other vibrations")
+
+                control: Switch {
+                    objectName: "otherVibrateSwitch"
+                    checked: backendInfo.otherVibrate
+
+                    onClicked: backendInfo.otherVibrate = checked
+                }
+            }
+
         }
     }
 }
