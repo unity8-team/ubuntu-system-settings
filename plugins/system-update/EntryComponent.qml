@@ -35,7 +35,6 @@ ListItem.SingleValue {
     property int updatesAvailable: 0
 
     function _updatesRefresh() {
-        console.warn("_updatesRefresh");
         var _updatesAvailable = 0;
         for (var i=0; i < UpdateManager.model.length; i++) {
             if (UpdateManager.model[i].updateRequired)
@@ -48,14 +47,8 @@ ListItem.SingleValue {
         id: updateManager
         objectName: "updateManager"
         target: UpdateManager
-        onModelChanged: {
-            console.warn("onModelChanged");
-            root._updatesRefresh();
-        }
-        onUpdateAvailableFound: {
-            console.warn("onUpdateAvailableFound");
-            root._updatesRefresh();
-        }
+        onModelChanged: root._updatesRefresh()
+        onUpdateAvailableFound: root._updatesRefresh()
     }
 
     onClicked: main.loadPluginByName("system-update");

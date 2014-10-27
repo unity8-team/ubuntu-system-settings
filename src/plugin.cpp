@@ -101,7 +101,6 @@ bool PluginPrivate::ensureLoaded() const
     QString plugin = m_data.value(keyPlugin).toString();
     if (plugin.isEmpty())
         return false;
-    qWarning() << Q_FUNC_INFO << plugin;
 
     QString name = QString("%1/lib%2.so").arg(pluginModuleDir).arg(plugin);
 
@@ -288,7 +287,6 @@ QQmlComponent *Plugin::entryComponent()
     if (Q_UNLIKELY(context == 0)) return 0;
 
     QString title = displayName();
-    qWarning() << Q_FUNC_INFO << title;
     QUrl iconUrl = icon();
     QUrl entryComponentUrl = d->componentFromSettingsFile(keyEntryComponent);
     if (!entryComponentUrl.isEmpty()) {
