@@ -1,3 +1,26 @@
+ubuntu-system-settings (0.3+14.10.20141022-0ubuntu1) utopic; urgency=low
+
+  [ CI bot ]
+  * Resync trunk
+
+  [ Michael Zanetti ]
+  * update code to reset launcher after launcher backend implementation
+    was reworked (LP: #1376707)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 22 Oct 2014 21:34:27 +0000
+
+ubuntu-system-settings (0.3+14.10.20141021.1-0ubuntu1) utopic; urgency=low
+
+  [ Sebastien Bacher ]
+  * [storage] translator comment for the string "%1 free" (LP: #1377929)
+  * [system-update] ellipsize labels if needed (LP: #1376286)
+  * [sound] Use the correct low icon (LP: #1376286)
+
+  [ Lars Uebernickel ]
+  * notification-manager: fix issues with GVariant API usage
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 21 Oct 2014 15:24:55 +0000
+
 ubuntu-system-settings (0.3+14.10.20141021-0ubuntu1) utopic; urgency=low
 
   [ jonas-drange ]
