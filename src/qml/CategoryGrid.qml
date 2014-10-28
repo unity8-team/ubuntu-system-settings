@@ -50,7 +50,7 @@ Column {
                 id: loader
                 width: parent.itemWidth
                 sourceComponent: model.item.entryComponent
-
+                active: model.item.visible
                 Connections {
                     ignoreUnknownSignals: true
                     target: loader.item
