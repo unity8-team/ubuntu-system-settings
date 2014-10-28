@@ -72,7 +72,7 @@ LocalComponents.Page {
             visible: hereInstalled
             // TRANSLATORS: HERE is a trademark for Nokia's location service, you probably shouldn't translate it
             text: i18n.tr("Accept the HERE <a href='terms.qml'>terms and conditions</a> to enable these services.")
-            onLinkActivated: pageStack.load(Qt.resolvedUrl(link))
+            onLinkActivated: pageStack.load(Qt.resolvedUrl("here-terms.qml"))
             checked: System.hereEnabled
             onTriggered: System.hereEnabled = checked
         }
