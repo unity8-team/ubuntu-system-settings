@@ -69,8 +69,6 @@ SystemUpdate::SystemUpdate(QObject *parent) :
                 this, SLOT(ProcessSettingChanged(QString, QString)));
     connect(&m_SystemServiceIface, SIGNAL(Rebooting(bool)),
                 this, SIGNAL(rebooting(bool)));
-
-    //setCurrentDetailedVersion();
 }
 
 SystemUpdate::~SystemUpdate() {
