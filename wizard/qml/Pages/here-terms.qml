@@ -110,6 +110,7 @@ LocalComponents.Page {
             id: webview
             anchors.left: parent.left
             anchors.right: parent.right
+            height: parent.height
             visible: !termsLabel.visible
         }
     }
