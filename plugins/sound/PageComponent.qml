@@ -23,7 +23,6 @@ import QtQuick 2.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 import SystemSettings 1.0
-import Ubuntu.SystemSettings.LanguagePlugin 1.0
 import Ubuntu.SystemSettings.Sound 1.0
 import Ubuntu.Settings.Menus 0.1 as Menus
 import QMenuModel 0.1
@@ -40,8 +39,10 @@ ItemPage {
 
     UbuntuSoundPanel { id: backendInfo }
 
-    UbuntuLanguagePlugin {
-        id: languagePlugin
+    GSettings {
+        id: keyboardSettings
+
+        schema.id: "com.canonical.keyboard.maliit"
     }
 
     GSettings {
@@ -102,7 +103,7 @@ ItemPage {
                 enabled: soundActionGroup.volume.state != null
                 minimumValue: 0.0
                 maximumValue: 1.0
-                minIcon: "image://theme/audio-volume-low" 
+                minIcon: "image://theme/audio-volume-low-zero"
                 maxIcon: "image://theme/audio-volume-high" 
                 onUpdated: soundActionGroup.volume.updateState(value);
             }
@@ -141,6 +142,15 @@ ItemPage {
                     onCheckedChanged: backendInfo.incomingCallVibrateSilentMode = checked
                 }
                 text: i18n.tr("Vibrate in Silent Mode")
+            }
+
+            ListItem.Standard {
+                control: Switch {
+                    objectName: "dialpadSounds"
+                    checked: backendInfo.dialpadSoundsEnabled
+                    onCheckedChanged: backendInfo.dialpadSoundsEnabled = checked
+                }
+                text: i18n.tr("Dialpad sounds")
             }
 
             ListItem.Standard {
@@ -187,9 +197,9 @@ ItemPage {
 
                 control: Switch {
                     objectName: "keyboardSoundSwitch"
-                    checked: languagePlugin.keyPressFeedback
+                    checked: keyboardSettings.keyPressFeedback
 
-                    onClicked: languagePlugin.keyPressFeedback = checked
+                    onClicked: keyboardSettings.keyPressFeedback = checked
                 }
             }
 

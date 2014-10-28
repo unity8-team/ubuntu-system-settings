@@ -12,10 +12,10 @@
         "rotation",
         "orientation",
         "lock",
-        "screen"
+        "screen",
+        "apps"
     ],
     "has-dynamic-keywords": false,
     "has-dynamic-visibility": false,
-    "entry-component": "EntryComponent.qml",
-    "hide-by-default": true
+    "entry-component": "EntryComponent.qml"
 }

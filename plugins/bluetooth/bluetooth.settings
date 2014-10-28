@@ -6,7 +6,16 @@
     "priority": 2,
     "keywords": [
         "bluetooth",
-        "settings"
+        "headset",
+        "pair",
+        "device",
+        "discover",
+        "car",
+        "handsfree",
+        "wireless",
+        "connect",
+        "disconnect",
+        "stereo"
     ],
     "has-dynamic-keywords": false,
     "has-dynamic-visibility": false,

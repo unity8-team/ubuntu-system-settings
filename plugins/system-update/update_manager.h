@@ -44,7 +44,9 @@
 #include "system_update.h"
 #endif
 
-using namespace UbuntuOne;
+// Having the full namespaced name in a slot seems to confuse
+// SignalSpy so we need this declaration.
+using UbuntuOne::Token;
 
 namespace UpdatePlugin {
 
@@ -68,11 +70,14 @@ Q_SIGNALS:
     void credentialsNotFound();
     void updateAvailableFound(bool downloading);
     void errorFound();
+    void networkError();
+    void serverError();
     void downloadModeChanged();
     void systemUpdateDownloaded();
     void updateProcessFailed(QString message);
     void systemUpdateFailed(int consecutiveFailureCount, QString lastReason);
     void versionChanged();
+    void rebooting(bool status);
     
 public:
     explicit UpdateManager(QObject *parent = 0);
@@ -83,6 +88,7 @@ public:
     Q_INVOKABLE void pauseDownload(const QString &packagename);
     Q_INVOKABLE void retryDownload(const QString &packagename);
     Q_INVOKABLE void applySystemUpdate() { m_systemUpdate.applyUpdate(); }
+    Q_INVOKABLE void updateClickScope();
 
     QVariantList model() const { return m_model; }
     int downloadMode() { return m_systemUpdate.downloadMode(); }
@@ -111,10 +117,13 @@ public Q_SLOTS:
 
 private Q_SLOTS:
     void clickUpdateNotAvailable();
+    void updateFailed(int consecutiveFailureCount, QString lastReason);
+    void updateDownloaded();
     void systemUpdatePaused(int value);
+    void systemUpdateProgress(int value, double eta);
     void processOutput();
     void processUpdates();
-    void downloadUrlObtained(const QString &packagename, const QString &url);
+    void downloadApp(Update *app);
     void handleCredentialsFound(Token token);
     void clickTokenReceived(Update *app, const QString &clickToken);
 
@@ -135,7 +144,7 @@ private:
 #else
     Network m_network;
     QProcess m_process;
-    SSOService m_service;
+    UbuntuOne::SSOService m_service;
     SystemUpdate m_systemUpdate;
 #endif
 

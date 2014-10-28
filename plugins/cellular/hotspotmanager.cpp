@@ -17,10 +17,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include "hotspotmanager.h"
+
 #include "nm_manager_proxy.h"
 #include "nm_settings_proxy.h"
 #include "nm_settings_connection_proxy.h"
-#include "hotspotmanager.h"
 #include <QStringList>
 #include <QDBusReply>
 #include <QtDebug>

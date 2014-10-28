@@ -32,8 +32,10 @@ int main()
 
     // Get pid
     pid_t ppid = getppid();
-    if (ppid == 1)
+    if (ppid == 1) {
+        uss_polkit_listener_free(polkitListener);
         return BAD_PPID;
+    }
     uss_polkit_listener_set_pid(polkitListener, ppid);
 
     // Read password
@@ -41,14 +43,18 @@ int main()
     std::getline(std::cin, password);
     uss_polkit_listener_set_password(polkitListener, password.c_str());
 
-    if (!uss_polkit_listener_register(polkitListener))
+    if (!uss_polkit_listener_register(polkitListener)) {
+        uss_polkit_listener_free(polkitListener);
         return CANNOT_REGISTER;
+    }
 
     // Tell caller that we're ready to start
     std::cout << "ready" << std::endl;
 
-    if (!uss_polkit_listener_run(polkitListener))
+    if (!uss_polkit_listener_run(polkitListener)) {
+        uss_polkit_listener_free(polkitListener);
         return CANNOT_RUN;
+    }
 
     uss_polkit_listener_free(polkitListener);
     return SUCCESS;

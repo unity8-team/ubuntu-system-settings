@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 Canonical, Ltd.
+ * Copyright (C) 2013,2014 Canonical, Ltd.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,32 +19,35 @@ import Ubuntu.Components 0.1
 import "../Components" as LocalComponents
 
 LocalComponents.Page {
-    title: i18n.tr("Setup complete")
+    title: i18n.tr("All done")
     forwardButtonSourceComponent: forwardButton
+    hasBackButton: false
 
-    Item {
-        id: content
-        anchors {
-            fill: parent
-            topMargin: topMargin
-            leftMargin: leftMargin
-            rightMargin: rightMargin
-            bottomMargin: bottomMargin
+    Column {
+        id: column
+        anchors.fill: content
+        spacing: units.gu(1)
+
+        Label {
+            anchors.left: parent.left
+            anchors.right: parent.right
+            wrapMode: Text.Wrap
+            fontSize: "large"
+            font.bold: true
+            text: i18n.tr("Nice work!")
         }
 
         Label {
-            width: parent.width
-            wrapMode: Text.WordWrap
-            fontSize: "large"
-            text: i18n.tr("Welcome to Ubuntu on your phone, brought to you by 1000’s of volunteers and the good folks at Canonical.") +
-                  "\n\n" +
-                  i18n.tr("Now you can start using your Ubuntu phone.")
+            anchors.left: parent.left
+            anchors.right: parent.right
+            wrapMode: Text.Wrap
+            text: i18n.tr("Your phone is now ready to use.")
         }
     }
 
     Component {
         id: forwardButton
-        LocalComponents.ForwardButton {
+        LocalComponents.StackButton {
             text: i18n.tr("Finish")
             onClicked: root.quitWizard()
         }

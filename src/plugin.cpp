@@ -18,8 +18,8 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "debug.h"
 #include "plugin.h"
+#include "debug.h"
 
 #include <QEventLoop>
 #include <QDir>
@@ -37,8 +37,8 @@
 
 using namespace SystemSettings;
 
-static const QLatin1String pluginModuleDir(PLUGIN_MODULE_DIR);
-static const QLatin1String pluginQmlDir(PLUGIN_QML_DIR);
+static const QLatin1String pluginModuleDir{PLUGIN_MODULE_DIR};
+static const QLatin1String pluginQmlDir{PLUGIN_QML_DIR};
 
 namespace SystemSettings {
 
@@ -67,9 +67,9 @@ private:
 PluginPrivate::PluginPrivate(Plugin *q, const QFileInfo &manifest):
     q_ptr(q),
     m_item(0),
-    m_baseName(manifest.completeBaseName()),
     m_plugin(0),
-    m_plugin2(0)
+    m_plugin2(0),
+    m_baseName(manifest.completeBaseName())
 {
     QFile file(manifest.filePath());
     if (Q_UNLIKELY(!file.open(QIODevice::ReadOnly | QIODevice::Text))) {

@@ -20,6 +20,10 @@
 #ifndef PREVIOUSNETWORKMODEL_H
 #define PREVIOUSNETWORKMODEL_H
 
+#include <QtCore/QVariant>
+
+#include "nm_manager_proxy.h"
+
 #include<QAbstractListModel>
 
 class PreviousNetworkModel : public QAbstractListModel
@@ -33,11 +37,14 @@ public:
         LastUsedRole,
     };
 
-    PreviousNetworkModel(QObject *parent = 0);
+    explicit PreviousNetworkModel(QObject *parent = 0);
     virtual ~PreviousNetworkModel();
     QHash<int, QByteArray> roleNames() const;
     int rowCount(const QModelIndex &parent) const;
     QVariant data(const QModelIndex & index, int role) const;
+
+public Q_SLOTS:
+    void removeConnection();
 
 private:
     struct Private;

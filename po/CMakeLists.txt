@@ -1,7 +1,16 @@
+ 
+file(RELATIVE_PATH DESKTOP_FILE_IN_IN ${CMAKE_SOURCE_DIR}
+     ${CMAKE_SOURCE_DIR}/${DESKTOP_FILE}.in.in)
+file(RELATIVE_PATH DESKTOP_FILE_IN_IN_H ${CMAKE_CURRENT_SOURCE_DIR}
+     ${CMAKE_CURRENT_SOURCE_DIR}/${DESKTOP_FILE_IN_IN}.h)
+
 file(GLOB CPPFILES RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}"
-                   "${CMAKE_SOURCE_DIR}/src/*.cpp")
+                   "${CMAKE_SOURCE_DIR}/plugins/*/*.cpp"
+                   "${CMAKE_SOURCE_DIR}/src/*.cpp"
+                   "${CMAKE_SOURCE_DIR}/wizard/*.cpp")
 file(GLOB QMLFILES RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}"
                    "${CMAKE_SOURCE_DIR}/plugins/*/*.qml"
+                   "${CMAKE_SOURCE_DIR}/plugins/*/*/*.qml"
                    "${CMAKE_SOURCE_DIR}/src/qml/*.qml"
                    "${CMAKE_SOURCE_DIR}/wizard/qml/*/*.qml")
 file(GLOB SETTINGSFILES RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}"
@@ -15,21 +24,29 @@ add_custom_command(OUTPUT settings.js
     DEPENDS ${SETTINGSFILES}
 )
 
-#add_custom_command(OUTPUT desktop.js
-#  command some_script ${CMAKE_SOURCE_DIR}/ubuntu-system-settings.desktop ${CMAKE_CURRENT_BINARY_DIR}/desktop.js 
-#  DEPENDS ${CMAKE_SOURCE_DIR}/ubuntu-system-settings.desktop
-#)
-
-add_custom_target(pot-qml
+add_custom_target(pot-desktop
+    COMMAND ${INTLTOOL_EXTRACT} --update --type=gettext/ini
+                            --srcdir=${CMAKE_SOURCE_DIR} ${DESKTOP_FILE_IN_IN}
     COMMAND ${XGETTEXT_BIN} -o ubuntu-system-settings.pot
                             --copyright=\"Canonical Ltd.\"
                             --package-name ubuntu-system-settings
                             --qt --c++ --add-comments=TRANSLATORS
-                            --keyword=QT_TR_NOOP
+                            --keyword=N_ --from-code=UTF-8
+                            ${DESKTOP_FILE_IN_IN_H}
+    WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
+)
+
+add_custom_target(pot-qml
+    COMMAND ${XGETTEXT_BIN} -o ubuntu-system-settings.pot
+                            --join-existing
+                            --copyright=\"Canonical Ltd.\"
+                            --package-name ubuntu-system-settings
+                            --qt --c++ --add-comments=TRANSLATORS
+                            --keyword=QT_TR_NOOP --keyword=qsTr:1,2c
                             --keyword=tr --keyword=tr:1,2 --from-code=UTF-8
                             ${QMLFILES} "${CMAKE_CURRENT_BINARY_DIR}/settings.js"
     WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
-    DEPENDS ${QMLFILES} "${CMAKE_CURRENT_BINARY_DIR}/settings.js" #desktop.js
+    DEPENDS pot-desktop ${QMLFILES} "${CMAKE_CURRENT_BINARY_DIR}/settings.js" #desktop.js
 )
 
 add_custom_target(pot-cpp
@@ -56,7 +73,7 @@ add_custom_target(pot-py
     DEPENDS ${PYFILES}
 )
 
-add_custom_target(pot DEPENDS pot-qml pot-cpp pot-py)
+add_custom_target(pot DEPENDS pot-desktop pot-qml pot-cpp pot-py)
 
 set(languages "ar;ast;be;bg;bs;ca;cs;de;el;en_AU;en_GB;eo;es;fa;fi;fr;gl;gu;he;hi;hr;hu;id;it;km;ko;lo;lv;ms;my;nb;pl;pt_BR;pt;ru;shn;sl;sv;tr;ug;uk;xh;zh_CN;zh_HK;zh_TW")
 foreach(i ${languages})

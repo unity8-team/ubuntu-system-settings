@@ -21,13 +21,7 @@
 #ifndef RESET_H
 #define RESET_H
 
-#include "accountsservice.h"
-
-#include <QDBusInterface>
-#include <QDBusServiceWatcher>
 #include <QObject>
-#include <QProcess>
-#include <QUrl>
 
 class Reset : public QObject
 {
@@ -36,12 +30,7 @@ class Reset : public QObject
 public:
     explicit Reset(QObject *parent = 0);
     ~Reset();
-    Q_INVOKABLE bool resetLauncher(void);
     Q_INVOKABLE bool factoryReset(void);
-
-private:
-    AccountsService m_accountsService;
-    QDBusConnection m_systemBusConnection;
 };
 
 #endif // RESET_H

@@ -15,6 +15,7 @@
  *
 */
 
+
 #include <gio/gio.h>
 #include <gio/gdesktopappinfo.h>
 
@@ -32,17 +33,17 @@ namespace NotificationsPlugin {
 
 void app_data_from_desktop_id (const char* desktop_id, char **display_name, char **icon_fname) {
     GAppInfo* app_info = (GAppInfo*)g_desktop_app_info_new(desktop_id);
-    if (app_info != NULL) {
+    if (app_info != nullptr) {
         *display_name = g_strdup(g_app_info_get_display_name(app_info));
         GIcon* icon = g_app_info_get_icon (app_info);
-        if (icon != NULL) {
+        if (icon != nullptr) {
             *icon_fname = g_icon_to_string (icon);
         }
         g_object_unref (app_info);
     }
     else {
-        *display_name = NULL;
-        *icon_fname = NULL;
+        *display_name = nullptr;
+        *icon_fname = nullptr;
     }
 }
 
@@ -189,7 +190,8 @@ void NotificationsManager::checkUpdates(QString key, bool value)
         }
     }
     // Save the config settings
-    GVariantBuilder *builder = g_variant_builder_new(G_VARIANT_TYPE("a(ss)"));
+    GVariantBuilder builder;
+    g_variant_builder_init(&builder, G_VARIANT_TYPE("a(ss)"));
     QList<QString> keys = m_blacklist.keys();
     for (int j = 0; j < keys.size(); ++j) {
         // Keys are in the form package::::app for click or appid::::appid for legacy apps
@@ -200,12 +202,9 @@ void NotificationsManager::checkUpdates(QString key, bool value)
         }
         QString pkgname = splitted.at(0);
         QString appname = splitted.at(1);
-        g_variant_builder_add(builder, "(ss)", pkgname.toUtf8().constData(), appname.toUtf8().constData());
+        g_variant_builder_add(&builder, "(ss)", pkgname.toUtf8().constData(), appname.toUtf8().constData());
     }
-    GVariant *bl = g_variant_new("a(ss)", builder);
-    g_variant_builder_unref (builder);
-    g_settings_set_value(m_pushSettings, BLACKLIST_KEY, bl);
-    g_variant_unref (bl);
+    g_settings_set_value(m_pushSettings, BLACKLIST_KEY, g_variant_builder_end (&builder));
 }
 
 }

@@ -34,7 +34,7 @@ class TimeZoneLocationModel : public QAbstractTableModel
     Q_OBJECT
 
 public:
-    TimeZoneLocationModel(QObject *parent = 0);
+    explicit TimeZoneLocationModel(QObject *parent = 0);
     ~TimeZoneLocationModel();
 
     enum Roles {

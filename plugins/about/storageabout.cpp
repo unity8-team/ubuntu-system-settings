@@ -17,6 +17,8 @@
  *
 */
 
+#include "storageabout.h"
+
 #include <QDebug>
 
 #include <gio/gio.h>
@@ -32,7 +34,6 @@
 #include <QJsonObject>
 #include <QProcess>
 #include <QVariant>
-#include "storageabout.h"
 #include <hybris/properties/properties.h>
 #include <QDBusReply>
 
@@ -42,25 +43,27 @@ namespace {
 }
 
 struct MeasureData {
-    uint *running;
+    QSharedPointer<quint32> running;
     StorageAbout *object;
     quint64 *size;
     GCancellable *cancellable;
-    MeasureData (uint *running,
+    MeasureData (QSharedPointer<quint32> running,
                  StorageAbout *object,
                  quint64 *size,
                  GCancellable *cancellable):
         running(running),
         object(object),
         size(size),
-        cancellable(cancellable){}
+        cancellable(cancellable){
+            ++(*running);
+        }
 };
 
 static void measure_file(const char * filename,
                          GAsyncReadyCallback callback,
                          gpointer user_data)
 {
-    MeasureData *data = (MeasureData *) user_data;
+    auto *data = static_cast<MeasureData *>(user_data);
 
     GFile *file = g_file_new_for_path (filename);
 
@@ -69,8 +72,8 @@ static void measure_file(const char * filename,
                 G_FILE_MEASURE_NONE,
                 G_PRIORITY_LOW,
                 data->cancellable, /* cancellable */
-                NULL, /* progress_callback */
-                NULL, /* progress_data */
+                nullptr, /* progress_callback */
+                nullptr, /* progress_data */
                 callback,
                 user_data);
 
@@ -83,27 +86,14 @@ static void measure_special_file(GUserDirectory directory,
     measure_file (g_get_user_special_dir (directory), callback, user_data);
 }
 
-static void maybeEmit(MeasureData *data)
-{
-    --(*data->running);
-
-    if (*data->running == 0) {
-        Q_EMIT (data->object->sizeReady());
-        delete data->running;
-    }
-
-    delete data;
-
-}
-
 static void measure_finished(GObject *source_object,
                              GAsyncResult *result,
                              gpointer user_data)
 {
-    GError *err = NULL;
+    GError *err = nullptr;
     GFile *file = G_FILE (source_object);
 
-    MeasureData *data = (MeasureData *) user_data;
+    auto data = static_cast<MeasureData *>(user_data);
 
     guint64 *size = (guint64 *) data->size;
 
@@ -111,46 +101,55 @@ static void measure_finished(GObject *source_object,
                 file,
                 result,
                 size,
-                NULL, /* num_dirs */
-                NULL, /* num_files */
+                nullptr, /* num_dirs */
+                nullptr, /* num_files */
                 &err);
 
-    if (err != NULL) {
+    if (err != nullptr) {
         if (g_error_matches (err, G_IO_ERROR, G_IO_ERROR_CANCELLED)) {
-            delete data->running;
             delete data;
-            g_object_unref (file);
+            g_clear_object (&file);
             g_error_free (err);
+            err = nullptr;
             return;
         } else {
             qWarning() << "Measuring of" << g_file_get_path (file)
                        << "failed:" << err->message;
-            g_error_free(err);
+            g_error_free (err);
+            err = nullptr;
         }
     }
 
-    g_object_unref (file);
-    maybeEmit(data);
+    if (--(*data->running) == 0)
+        Q_EMIT (data->object->sizeReady());
+
+    delete data;
+    g_clear_object (&file);
 }
 
 StorageAbout::StorageAbout(QObject *parent) :
     QObject(parent),
     m_clickModel(),
     m_clickFilterProxy(&m_clickModel),
+    m_moviesSize(0),
+    m_audioSize(0),
+    m_picturesSize(0),
+    m_otherSize(0),
+    m_homeSize(0),
     m_propertyService(new QDBusInterface(PROPERTY_SERVICE_OBJ,
         PROPERTY_SERVICE_PATH,
         PROPERTY_SERVICE_OBJ,
         QDBusConnection::systemBus())),
-    m_cancellable(NULL)
+    m_cancellable(nullptr)
 {
 }
 
 QString StorageAbout::serialNumber()
 {
-    static char serialBuffer[PROP_NAME_MAX];
 
     if (m_serialNumber.isEmpty() || m_serialNumber.isNull())
     {
+        char serialBuffer[PROP_VALUE_MAX];
         property_get("ro.serialno", serialBuffer, "");
         m_serialNumber = QString(serialBuffer);
     }
@@ -160,11 +159,10 @@ QString StorageAbout::serialNumber()
 
 QString StorageAbout::vendorString()
 {
-    static char manufacturerBuffer[PROP_NAME_MAX];
-    static char modelBuffer[PROP_NAME_MAX];
-
     if (m_vendorString.isEmpty() || m_vendorString.isNull())
     {
+        char manufacturerBuffer[PROP_VALUE_MAX];
+        char modelBuffer[PROP_VALUE_MAX];
         property_get("ro.product.manufacturer", manufacturerBuffer, "");
         property_get("ro.product.model", modelBuffer, "");
         m_vendorString = QString("%1 %2").arg(manufacturerBuffer).arg(modelBuffer);
@@ -175,10 +173,10 @@ QString StorageAbout::vendorString()
 
 QString StorageAbout::deviceBuildDisplayID()
 {
-    static char serialBuffer[PROP_NAME_MAX];
 
     if (m_deviceBuildDisplayID.isEmpty() || m_deviceBuildDisplayID.isNull())
     {
+        char serialBuffer[PROP_VALUE_MAX];
         property_get("ro.build.display.id", serialBuffer, "");
         m_deviceBuildDisplayID = QString(serialBuffer);
     }
@@ -228,10 +226,9 @@ bool StorageAbout::getDeveloperMode()
     }
 }
 
-bool StorageAbout::toggleDeveloperMode()
+void StorageAbout::setDeveloperMode(bool mode)
 {
-    m_propertyService->call("SetProperty", "adb", !getDeveloperMode());
-    return getDeveloperMode();
+    m_propertyService->call("SetProperty", "adb", mode);
 }
 
 QString StorageAbout::licenseInfo(const QString &subdir) const
@@ -241,7 +238,8 @@ QString StorageAbout::licenseInfo(const QString &subdir) const
     QString copyrightText;
 
     QFile file(copyright);
-    file.open(QIODevice::ReadOnly | QIODevice::Text);
+    if(!file.open(QIODevice::ReadOnly | QIODevice::Text))
+        return QString();
     copyrightText = QString(file.readAll());
     file.close();
     return copyrightText;
@@ -305,7 +303,8 @@ QString StorageAbout::formatSize(quint64 size) const
 
 void StorageAbout::populateSizes()
 {
-    uint *running = new uint(0);
+    quint32 *running = new quint32(0);
+    QSharedPointer<quint32> running_ptr(running);
 
     if (!m_cancellable)
         m_cancellable = g_cancellable_new();
@@ -313,25 +312,25 @@ void StorageAbout::populateSizes()
     measure_special_file(
                 G_USER_DIRECTORY_VIDEOS,
                 measure_finished,
-                new MeasureData(&++(*running), this, &m_moviesSize,
+                new MeasureData(running_ptr, this, &m_moviesSize,
                                 m_cancellable));
 
     measure_special_file(
                 G_USER_DIRECTORY_MUSIC,
                 measure_finished,
-                new MeasureData(&++(*running), this, &m_audioSize,
+                new MeasureData(running_ptr, this, &m_audioSize,
                                 m_cancellable));
 
     measure_special_file(
                 G_USER_DIRECTORY_PICTURES,
                 measure_finished,
-                new MeasureData(&++(*running), this, &m_picturesSize,
+                new MeasureData(running_ptr, this, &m_picturesSize,
                                 m_cancellable));
 
     measure_file(
                 g_get_home_dir(),
                 measure_finished,
-                new MeasureData(&++(*running), this, &m_homeSize,
+                new MeasureData(running_ptr, this, &m_homeSize,
                                 m_cancellable));
 }
 
@@ -339,10 +338,10 @@ QString StorageAbout::getDevicePath(const QString mount_point)
 {
     QString s_mount_point;
 
-    GUnixMountEntry * g_mount_point = NULL;
+    GUnixMountEntry * g_mount_point = nullptr;
 
     if (!mount_point.isNull() && !mount_point.isEmpty()) {
-         g_mount_point = g_unix_mount_at(mount_point.toLocal8Bit(), NULL);
+         g_mount_point = g_unix_mount_at(mount_point.toLocal8Bit(), nullptr);
     }
 
     if (g_mount_point) {

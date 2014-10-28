@@ -19,52 +19,68 @@
  */
 
 import QtQuick 2.0
-import GSettings 1.0
 import SystemSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 import MeeGo.QOfono 0.2
 import QMenuModel 0.1
-import "Components"
+import "Components" as LocalComponents
+import "sims.js" as Sims
 
 ItemPage {
     id: root
     title: i18n.tr("Cellular")
     objectName: "cellularPage"
 
-    // pointers to sim 1 and 2, lazy loaded
-    property alias sim1: simOneLoader.item
-    property alias sim2: simTwoLoader.item
     property var modemsSorted: manager.modems.slice(0).sort()
+    property int simsLoaded: 0
 
     states: [
         State {
-            name: "singleSim"
+            name: "noSim"
+            when: (simsLoaded === 0) || (Sims.getPresentCount() === 0)
             StateChangeScript {
-                name: "loadSim"
-                script: {
-                    var p = modemsSorted[0];
-                    simOneLoader.setSource("Components/Sim.qml", {
-                        path: p
-                    });
-                }
+                script: loader.source = "Components/NoSim.qml"
             }
         },
         State {
-            name: "dualSim"
-            extend: "singleSim"
+            name: "singleSim"
             StateChangeScript {
-                name: "loadSecondSim"
-                script: {
-                    var p = modemsSorted[1];
-                    simTwoLoader.setSource("Components/Sim.qml", {
-                        path: p
-                    });
-                    defaultSimLoader.source = "Components/DefaultSim.qml";
-                }
+                script: loader.setSource("Components/SingleSim.qml", {
+                    sim: Sims.getFirstPresent()
+                })
             }
+            when: simsLoaded && (Sims.getPresentCount() === 1)
+        },
+        State {
+            name: "multiSim"
+            StateChangeScript {
+                script: loader.setSource("Components/MultiSim.qml", {
+                    sims: Sims.getAll(),
+                    modems: modemsSorted
+                })
+            }
+            when: simsLoaded && (Sims.getPresentCount() > 1)
         }
     ]
+
+    OfonoManager {
+        id: manager
+        Component.onCompleted: {
+            var component = Qt.createComponent("Components/Sim.qml");
+            modemsSorted.forEach(function (path) {
+                var sim = component.createObject(root, {
+                    path: path
+                });
+                if (sim === null) {
+                    console.warn('Failed to create Sim qml:',
+                        component.errorString());
+                } else {
+                    Sims.add(sim);
+                }
+            });
+        }
+    }
 
     QDBusActionGroup {
         id: actionGroup
@@ -78,42 +94,6 @@ ItemPage {
             start()
         }
     }
-
-    OfonoManager {
-        id: manager
-        Component.onCompleted: {
-            if (modems.length === 1) {
-                root.state = "singleSim";
-            } else if (modems.length === 2) {
-                root.state = "dualSim";
-            }
-        }
-    }
-
-    Loader {
-        id: simOneLoader
-        onLoaded: {
-            if (parent.state === "singleSim") {
-                cellData.setSource("Components/CellularSingleSim.qml", {
-                    sim1: sim1
-                });
-            }
-        }
-    }
-
-    Loader {
-        id: simTwoLoader
-        onLoaded: {
-            // unload any single sim setup
-            cellData.source = "";
-            cellData.setSource("Components/CellularDualSim.qml", {
-                sim1: sim1,
-                sim2: sim2
-            });
-            simEditorLoader.source = "Components/SimEditor.qml";
-        }
-    }
-
     Flickable {
         anchors.fill: parent
         contentWidth: parent.width
@@ -124,106 +104,9 @@ ItemPage {
             anchors { left: parent.left; right: parent.right }
 
             Loader {
-                id: cellData
+                id: loader
                 anchors { left: parent.left; right: parent.right }
             }
-
-            ListItem.SingleValue {
-                text : i18n.tr("Hotspot disabled because Wi-Fi is off.")
-                visible: showAllUI && !hotspotItem.visible
-            }
-
-            ListItem.SingleValue {
-                id: hotspotItem
-                text: i18n.tr("Wi-Fi hotspot")
-                progression: true
-                onClicked: {
-                    pageStack.push(Qt.resolvedUrl("Hotspot.qml"))
-                }
-                visible: showAllUI && (actionGroup.actionObject.valid ? actionGroup.actionObject.state : false)
-            }
-
-            ListItem.Standard {
-                text: i18n.tr("Data usage statistics")
-                progression: true
-                visible: showAllUI
-            }
-
-            ListItem.SingleValue {
-                text: i18n.tr("Carrier", "Carriers", manager.modems.length);
-                id: chooseCarrier
-                objectName: "chooseCarrier"
-                progression: enabled
-                onClicked: {
-                    if (root.state === 'singleSim') {
-                        pageStack.push(Qt.resolvedUrl("PageChooseCarrier.qml"), {
-                            netReg: sim1.netReg,
-                            title: i18n.tr("Carrier")
-                        })
-                    } else if (root.state === 'dualSim') {
-                        pageStack.push(Qt.resolvedUrl("PageChooseCarriers.qml"), {
-                            sim1: sim1,
-                            sim2: sim2
-                        });
-                    }
-                }
-            }
-
-            Binding {
-                target: chooseCarrier
-                property: "value"
-                value: sim1.netReg.name || i18n.tr("N/A")
-                when: (simOneLoader.status === Loader.Ready) && root.state === "singleSim"
-            }
-
-            ListItem.Standard {
-                text: i18n.tr("APN")
-                progression: true
-                visible: showAllUI
-            }
-
-            Loader {
-                id: simEditorLoader
-                anchors { left: parent.left; right: parent.right }
-            }
-
-            ListItem.Divider {}
-
-            Loader {
-                id: defaultSimLoader
-                anchors.left: parent.left
-                anchors.right: parent.right
-            }
         }
-    }
-
-    GSettings {
-        id: phoneSettings
-        schema.id: "com.ubuntu.phone"
-        Component.onCompleted: {
-            // set default names
-            var simNames = phoneSettings.simNames;
-            var m0 = modemsSorted[0];
-            var m1 = modemsSorted[1];
-            if (!simNames[m0]) {
-                simNames[m0] = "SIM 1";
-            }
-            if (!simNames[m1]) {
-                simNames[m1] = "SIM 2";
-            }
-            phoneSettings.simNames = simNames;
-        }
-    }
-
-    Binding {
-        target: sim1
-        property: "name"
-        value: phoneSettings.simNames[modemsSorted[0]]
-    }
-
-    Binding {
-        target: sim2
-        property: "name"
-        value: phoneSettings.simNames[modemsSorted[1]]
     }
 }

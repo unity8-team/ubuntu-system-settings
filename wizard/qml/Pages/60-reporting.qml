@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 Canonical, Ltd.
+ * Copyright (C) 2013,2014 Canonical, Ltd.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,32 +19,32 @@ import Ubuntu.Components 0.1
 import "../Components" as LocalComponents
 
 LocalComponents.Page {
-    title: i18n.tr("Phone settings")
+    title: i18n.tr("Improving your experience")
     forwardButtonSourceComponent: forwardButton
 
-    Item {
-        id: content
-        anchors {
-            fill: parent
-            topMargin: topMargin
-            leftMargin: leftMargin
-            rightMargin: rightMargin
-            bottomMargin: bottomMargin
+    Column {
+        id: column
+        anchors.fill: content
+        spacing: units.gu(2)
+
+        Label {
+            anchors.left: parent.left
+            anchors.right: parent.right
+            wrapMode: Text.Wrap
+            text: i18n.tr("Your phone is set up to automatically report errors to Canonical and its partners, the makers of the operating system.")
         }
 
         Label {
-            width: parent.width
-            wrapMode: Text.WordWrap
-            fontSize: "large"
-            text: i18n.tr("Your phone is set up to automatically report errors to Canonical. This can be disabled in system settings.") +
-                  "\n\n" +
-                  i18n.tr("Your phone is set up to detect your location. This can be disabled in system settings.")
+            anchors.left: parent.left
+            anchors.right: parent.right
+            wrapMode: Text.Wrap
+            text: i18n.tr("This can be disabled in <b>System Settings</b> under <b>Security &amp; Privacy</b>")
         }
     }
 
     Component {
         id: forwardButton
-        LocalComponents.ForwardButton {
+        LocalComponents.StackButton {
             text: i18n.tr("Continue")
             onClicked: pageStack.next()
         }

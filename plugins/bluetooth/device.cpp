@@ -17,13 +17,14 @@
  * Charles Kerr <charles.kerr@canonical.com>
  */
 
+#include "device.h"
+
 #include <QDBusReply>
 #include <QDebug> // qWarning()
 #include <QThread>
 #include <QTimer>
 
 #include "dbus-shared.h"
-#include "device.h"
 
 /***
 ****
@@ -453,6 +454,7 @@ Device::Type Device::getTypeFromClass (quint32 c)
         default:
             return Type::OtherAudio;
         }
+        break;
 
     case 0x05:
         switch ((c & 0xc0) >> 6) {

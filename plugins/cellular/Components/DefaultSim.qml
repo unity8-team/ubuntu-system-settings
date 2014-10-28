@@ -23,10 +23,12 @@ import Ubuntu.Components.ListItems 0.1 as ListItem
 
 Column {
 
-    property var m: ["ask", sim1.path, sim2.path]
+    id: defaultSim
+
+    property var m: ["ask", sims[0].path, sims[1].path]
 
     function getNameFromIndex (index) {
-        return [i18n.tr("Ask me each time"), sim1.title, sim2.title][index];
+        return [i18n.tr("Ask me each time"), sims[0].title, sims[1].title][index];
     }
 
     ListItem.ItemSelector {
@@ -45,8 +47,7 @@ Column {
     }
 
     ListItem.Caption {
-        text: i18n.tr("You can change the SIM for individual calls,
-            or for contacts in the address book.")
+        text: i18n.tr("You can change the SIM for individual calls, or for contacts in the address book.")
     }
 
     ListItem.Divider {}
@@ -64,6 +65,22 @@ Column {
         onDelegateClicked: {
             phoneSettings.defaultSimForMessages = m[index];
 
+        }
+    }
+
+    Connections {
+        target: Qt.application
+        onStateChanged: {
+            /* Set the selected index of selectors for both
+            calls and SMS defaults upon regaining status as the top-most,
+            focused window */
+            if (state ===  Qt.ApplicationActive) {
+                callsDefaultSim.selectedIndex =
+                    defaultSim.m.indexOf(phoneSettings.defaultSimForCalls);
+
+                messagesDefaultSim.selectedIndex =
+                    defaultSim.m.indexOf(phoneSettings.defaultSimForMessages);
+            }
         }
     }
 }

@@ -58,12 +58,16 @@ ItemPage {
     }
 
     function openDialog() {
+        var newMethod = indexToMethod(unlockMethod.selectedIndex)
+        if (securityPrivacy.trySetSecurity(newMethod))
+            return // Oh, that was easy!  No need to prompt
+
         var dlg = PopupUtils.open(dialogComponent)
         // Set manually rather than have these be dynamically bound, since
         // the security type can change out from under us, but we don't
         // want dialog to change in that case.
         dlg.oldMethod = securityPrivacy.securityType
-        dlg.newMethod = indexToMethod(unlockMethod.selectedIndex)
+        dlg.newMethod = newMethod
     }
 
     Component {
@@ -89,9 +93,9 @@ ItemPage {
                         changeSecurityDialog.oldMethod) { // Changing existing
                     switch (changeSecurityDialog.newMethod) {
                     case UbuntuSecurityPrivacyPanel.Passcode:
-                        return i18n.tr("Change passcode")
+                        return i18n.tr("Change passcode…")
                     case UbuntuSecurityPrivacyPanel.Passphrase:
-                        return i18n.tr("Change passphrase")
+                        return i18n.tr("Change passphrase…")
                     default: // To stop the runtime complaining
                         return ""
                     }
@@ -390,6 +394,7 @@ ItemPage {
 
                 onClicked: openDialog()
             }
+            showDivider: false
         }
     }
 }

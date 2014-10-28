@@ -45,7 +45,7 @@ class UpdateItem: public ItemBase
     Q_OBJECT
 
 public:
-    UpdateItem(const QVariantMap &staticData, QObject *parent = 0);
+    explicit UpdateItem(const QVariantMap &staticData, QObject *parent = 0);
     void setVisibility(bool visible);
     ~UpdateItem();
 
@@ -80,7 +80,7 @@ UpdateItem::UpdateItem(const QVariantMap &staticData, QObject *parent):
     ItemBase(staticData, parent),
     m_systemUpdate(this)
 {
-    setVisibility(false);
+    setVisibility(m_systemUpdate.checkTarget());
     // SYSTEM UPDATE
     QObject::connect(&m_systemUpdate, SIGNAL(updateAvailable(const QString&, Update*)),
                   this, SLOT(changeVisibility(const QString&, Update*)));
@@ -95,7 +95,6 @@ UpdateItem::UpdateItem(const QVariantMap &staticData, QObject *parent):
     QObject::connect(&m_network, SIGNAL(updatesFound()),
                   this, SLOT(processUpdates()));
 
-    m_systemUpdate.checkForUpdate();
     m_service.getCredentials();
 }
 
@@ -155,12 +154,6 @@ void UpdateItem::setVisibility(bool visible)
 UpdateItem::~UpdateItem()
 {
 }
-
-CheckUpdatesPlugin::CheckUpdatesPlugin():
-    QObject()
-{
-}
-
 
 ItemBase *CheckUpdatesPlugin::createItem(const QVariantMap &staticData,
                                  QObject *parent)

@@ -18,8 +18,9 @@
  *
 */
 
-#include <QDir>
 #include "sound.h"
+
+#include <QDir>
 #include <unistd.h>
 
 #define AS_INTERFACE "com.ubuntu.touch.AccountsService.Sound"
@@ -192,13 +193,56 @@ void Sound::setIncomingMessageVibrateSilentMode(bool enabled)
     Q_EMIT(incomingMessageVibrateSilentModeChanged());
 }
 
-QStringList Sound::listSounds(const QString &dirString)
+bool Sound::getDialpadSoundsEnabled()
 {
-    if (m_soundsList.isEmpty())
+    return m_accountsService.getUserProperty(AS_INTERFACE,
+                                             "DialpadSoundsEnabled").toBool();
+}
+
+void Sound::setDialpadSoundsEnabled(bool enabled)
+{
+    if (enabled == getDialpadSoundsEnabled())
+        return;
+
+    m_accountsService.setUserProperty(AS_INTERFACE,
+                                      "DialpadSoundsEnabled",
+                                      QVariant::fromValue(enabled));
+    Q_EMIT(dialpadSoundsEnabledChanged());
+}
+
+QStringList soundsListFromDir(const QString &dirString)
+{
+    QDir soundsDir(dirString);
+
+    if (soundsDir.exists())
     {
-        QDir soundsDir(dirString);
+        QStringList soundsList;
+
         soundsDir.setFilter(QDir::Files | QDir::NoSymLinks);
-        m_soundsList = soundsDir.entryList();
+
+        for (uint i=0; i < soundsDir.count(); i++)
+            soundsList.append(soundsDir.absoluteFilePath(soundsDir[i])) ;
+        return soundsList;
     }
-    return m_soundsList;
+    return QStringList();
+}
+
+bool sortSoundsList(const QString &s1, const QString &s2)
+ {
+    return QFileInfo(s1).fileName() < QFileInfo(s2).fileName();
+}
+
+/* List soundfiles in a directory and the corresponding /custom one,
+ * which is what is used for oem customization, return a list of
+ * the fullpaths to those sounds, sorted by name */
+QStringList Sound::listSounds(const QStringList &dirs)
+{
+    QStringList sounds;
+
+    for (int i = 0; i < dirs.size(); ++i)
+        sounds.append(soundsListFromDir(dirs[i]));
+
+    qSort(sounds.begin(), sounds.end(), sortSoundsList);
+
+    return sounds;
 }

@@ -45,6 +45,11 @@ PageList::PageList(QObject *parent)
     QString disabledSuffix = ".disabled";
     QSet<QString> disabledPages;
     QStringList dataDirs = QStandardPaths::standardLocations(QStandardPaths::GenericDataLocation);
+
+    QString rootDir = qgetenv("UBUNTU_SYSTEM_SETTINGS_WIZARD_ROOT"); // for testing
+    if (!rootDir.isEmpty())
+        dataDirs = QStringList() << rootDir;
+
     Q_FOREACH(const QString &dataDir, dataDirs) {
         QDir dir(dataDir + "/ubuntu/settings/wizard/qml/Pages");
         QStringList entries = dir.entryList(QStringList("[0-9]*"), QDir::Files | QDir::Readable);

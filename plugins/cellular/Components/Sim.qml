@@ -21,12 +21,14 @@ import QtQuick 2.0
 import MeeGo.QOfono 0.2
 
 Item {
+    id: root
     property alias modem: modem
     property alias netReg: netReg
     property alias radioSettings: radioSettings
     property alias simMng: simMng
     property alias connMan: connMan
 
+    property alias present: simMng.present
     property string path
     property string name
     property string title: {
@@ -37,6 +39,13 @@ Item {
     OfonoModem {
         id: modem
         modemPath: path
+        onInterfacesChanged: {
+            if (interfaces.indexOf('org.ofono.ConnectionManager') >= 0) {
+                connMan._valid = true;
+            } else {
+                connMan._valid = false;
+            }
+        }
     }
 
     OfonoNetworkRegistration {
@@ -56,6 +65,14 @@ Item {
 
     OfonoConnMan {
         id: connMan
+        property bool _valid: true
         modemPath: path
+        on_ValidChanged: {
+            if (_valid) {
+                // invalidate the binding's dbus proxy
+                modemPath = "/invalid";
+                modemPath = root.path;
+            }
+        }
     }
 }

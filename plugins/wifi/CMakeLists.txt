@@ -1,12 +1,14 @@
 set(QML_SOURCES
 AccessPoint.qml
 BaseMenuItem.qml
+Common.qml
 DivMenuItem.qml
 FramedMenuItem.qml
 HLine.qml
 IndicatorBase.qml
 MenuItemFactory.qml
 NetworkDetails.qml
+NetworkDetailsBrief.qml
 OtherNetwork.qml
 PageComponent.qml
 PreviousNetworks.qml

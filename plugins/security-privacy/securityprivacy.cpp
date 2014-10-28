@@ -18,9 +18,11 @@
  */
 
 #include "securityprivacy.h"
+#include <QtCore/QDebug>
 #include <QtCore/QProcess>
 #include <QtDBus/QDBusConnection>
 #include <QtDBus/QDBusConnectionInterface>
+#include <QtDBus/QDBusInterface>
 #include <QtDBus/QDBusMessage>
 #include <QtDBus/QDBusVariant>
 #include <act/act.h>
@@ -28,11 +30,16 @@
 // FIXME: need to do this better including #include "../../src/i18n.h"
 // and linking to it
 #include <libintl.h>
+
+
 QString _(const char *text)
 {
     return QString::fromUtf8(dgettext(0, text));
 }
 
+#define HERE_IFACE   "com.ubuntu.location.providers.here.AccountsService"
+#define ENABLED_PROP "LicenseAccepted"
+#define PATH_PROP    "LicenseBasePath"
 #define AS_INTERFACE "com.ubuntu.AccountsService.SecurityPrivacy"
 #define AS_TOUCH_INTERFACE "com.ubuntu.touch.AccountsService.SecurityPrivacy"
 
@@ -43,7 +50,7 @@ void managerLoaded(GObject    *object,
 SecurityPrivacy::SecurityPrivacy(QObject* parent)
   : QObject(parent),
     m_manager(act_user_manager_get_default()),
-    m_user(NULL)
+    m_user(nullptr)
 {
     connect (&m_accountsService,
              SIGNAL (propertyChanged (QString, QString)),
@@ -55,11 +62,11 @@ SecurityPrivacy::SecurityPrivacy(QObject* parent)
              this,
              SLOT (slotNameOwnerChanged()));
 
-    if (m_manager != NULL) {
+    if (m_manager != nullptr) {
         g_object_ref(m_manager);
 
         gboolean loaded;
-        g_object_get(m_manager, "is-loaded", &loaded, NULL);
+        g_object_get(m_manager, "is-loaded", &loaded, nullptr);
 
         if (loaded)
             managerLoaded();
@@ -71,12 +78,12 @@ SecurityPrivacy::SecurityPrivacy(QObject* parent)
 
 SecurityPrivacy::~SecurityPrivacy()
 {
-    if (m_user != NULL) {
+    if (m_user != nullptr) {
         g_signal_handlers_disconnect_by_data(m_user, this);
         g_object_unref(m_user);
     }
 
-    if (m_manager != NULL) {
+    if (m_manager != nullptr) {
         g_signal_handlers_disconnect_by_data(m_manager, this);
         g_object_unref(m_manager);
     }
@@ -85,13 +92,24 @@ SecurityPrivacy::~SecurityPrivacy()
 void SecurityPrivacy::slotChanged(QString interface,
                                   QString property)
 {
-    if (interface != AS_TOUCH_INTERFACE)
-        return;
-
-    if (property == "MessagesWelcomeScreen") {
-        Q_EMIT messagesWelcomeScreenChanged();
-    } else if (property == "StatsWelcomeScreen") {
-        Q_EMIT statsWelcomeScreenChanged();
+    if (interface == AS_INTERFACE) {
+        if (property == "EnableLauncherWhileLocked") {
+            Q_EMIT enableLauncherWhileLockedChanged();
+        } else if (property == "EnableIndicatorsWhileLocked") {
+            Q_EMIT enableIndicatorsWhileLockedChanged();
+        }
+    } else if (interface == AS_TOUCH_INTERFACE) {
+        if (property == "MessagesWelcomeScreen") {
+            Q_EMIT messagesWelcomeScreenChanged();
+        } else if (property == "StatsWelcomeScreen") {
+            Q_EMIT statsWelcomeScreenChanged();
+        }
+    } else if (interface == HERE_IFACE) {
+        if (property == ENABLED_PROP) {
+            Q_EMIT hereEnabledChanged();
+        } else if (property == PATH_PROP) {
+            Q_EMIT hereLicensePathChanged();
+        }
     }
 }
 
@@ -100,6 +118,10 @@ void SecurityPrivacy::slotNameOwnerChanged()
     // Tell QML so that it refreshes its view of the property
     Q_EMIT messagesWelcomeScreenChanged();
     Q_EMIT statsWelcomeScreenChanged();
+    Q_EMIT enableLauncherWhileLockedChanged();
+    Q_EMIT enableIndicatorsWhileLockedChanged();
+    Q_EMIT hereEnabledChanged();
+    Q_EMIT hereLicensePathChanged();
 }
 
 bool SecurityPrivacy::getStatsWelcomeScreen()
@@ -136,9 +158,43 @@ void SecurityPrivacy::setMessagesWelcomeScreen(bool enabled)
     Q_EMIT(messagesWelcomeScreenChanged());
 }
 
+bool SecurityPrivacy::getEnableLauncherWhileLocked()
+{
+    return m_accountsService.getUserProperty(AS_INTERFACE,
+                                             "EnableLauncherWhileLocked").toBool();
+}
+
+void SecurityPrivacy::setEnableLauncherWhileLocked(bool enabled)
+{
+    if (enabled == getEnableLauncherWhileLocked())
+        return;
+
+    m_accountsService.setUserProperty(AS_INTERFACE,
+                                      "EnableLauncherWhileLocked",
+                                      QVariant::fromValue(enabled));
+    Q_EMIT enableLauncherWhileLockedChanged();
+}
+
+bool SecurityPrivacy::getEnableIndicatorsWhileLocked()
+{
+    return m_accountsService.getUserProperty(AS_INTERFACE,
+                                             "EnableIndicatorsWhileLocked").toBool();
+}
+
+void SecurityPrivacy::setEnableIndicatorsWhileLocked(bool enabled)
+{
+    if (enabled == getEnableIndicatorsWhileLocked())
+        return;
+
+    m_accountsService.setUserProperty(AS_INTERFACE,
+                                      "EnableIndicatorsWhileLocked",
+                                      QVariant::fromValue(enabled));
+    Q_EMIT enableIndicatorsWhileLockedChanged();
+}
+
 SecurityPrivacy::SecurityType SecurityPrivacy::getSecurityType()
 {
-    if (m_user == NULL || !act_user_is_loaded(m_user))
+    if (m_user == nullptr || !act_user_is_loaded(m_user))
         return SecurityPrivacy::Passphrase; // we need to return something
 
     if (act_user_get_password_mode(m_user) == ACT_USER_PASSWORD_MODE_NONE)
@@ -161,13 +217,43 @@ bool SecurityPrivacy::setDisplayHint(SecurityType type)
     return true;
 }
 
-bool SecurityPrivacy::setPasswordMode(SecurityType type, QString password)
+bool SecurityPrivacy::setPasswordMode(SecurityType type)
 {
     ActUserPasswordMode newMode = (type == SecurityPrivacy::Swipe) ?
                                   ACT_USER_PASSWORD_MODE_NONE :
                                   ACT_USER_PASSWORD_MODE_REGULAR;
 
-    // act_user_set_password_mode() will involve a check with policykit to see
+    /* We call SetPasswordMode directly over DBus ourselves, rather than rely
+       on the act_user_set_password_mode call, because that call gives no
+       feedback! How hard would it have been to add a bool return? Ah well. */
+
+    QString path = "/org/freedesktop/Accounts/User" + QString::number(geteuid());
+    QDBusInterface iface("org.freedesktop.Accounts",
+                         path,
+                         "org.freedesktop.Accounts.User",
+                         QDBusConnection::systemBus());
+
+    QDBusReply<void> reply = iface.call("SetPasswordMode", newMode);
+    if (reply.isValid() || reply.error().name() == "org.freedesktop.Accounts.Error.Failed") {
+        // We allow "org.freedesktop.Accounts.Error.Failed" because we actually
+        // expect that error in some cases.  In Ubuntu Touch, group memberships
+        // are not allowed to be changed (/etc/group is read-only).  So when
+        // AccountsService tries to add/remove the user from the nopasswdlogin
+        // group, it will fail.  Thankfully, this will be after it does what we
+        // actually care about it doing (deleting user password).  But it will
+        // return an error in this case, with a message about gpasswd failing
+        // and the above error name.  In other cases (like bad authentication),
+        // it will return something else (like Error.PermissionDenied).
+        return true;
+    } else {
+        qWarning() << "Could not set password mode:" << reply.error().message();
+        return false;
+    }
+}
+
+bool SecurityPrivacy::setPasswordModeWithPolicykit(SecurityType type, QString password)
+{
+    // SetPasswordMode will involve a check with policykit to see
     // if we have admin authorization.  Since Touch doesn't have a general
     // policykit agent yet (and the design for this panel involves asking for
     // the password up from anyway), we will spawn our own agent just for this
@@ -181,6 +267,12 @@ bool SecurityPrivacy::setPasswordMode(SecurityType type, QString password)
     // and QProcess's signal handling conflict.  They seem to get in each
     // other's way for the same signals.  So we just do this out-of-process.
 
+    // But first, see if we have cached authentication
+    if (setPasswordMode(type))
+        return true;
+    else if (password.isEmpty())
+        return false;
+
     QProcess polkitHelper;
     polkitHelper.setProgram(HELPER_EXEC);
     polkitHelper.start();
@@ -193,23 +285,11 @@ bool SecurityPrivacy::setPasswordMode(SecurityType type, QString password)
             break;
     }
 
-    act_user_set_password_mode(m_user, newMode);
+    bool success = setPasswordMode(type);
 
-    polkitHelper.kill(); // kill because maybe it wasn't even needed (polkit might not have need to auth us)
     polkitHelper.waitForFinished();
 
-    // act_user_set_password_mode() does not return success/failure, and we
-    // can't easily check get_password_mode() after setting to make sure it
-    // took, because that value is updated asynchronously when a change signal
-    // is received from AS.  So instead we just see whether our polkit helper
-    // authenticated correctly.
-
-    if (polkitHelper.exitStatus() == QProcess::NormalExit &&
-        polkitHelper.exitCode() != 0) {
-        return false;
-    }
-
-    return true;
+    return success;
 }
 
 QString SecurityPrivacy::setPassword(QString oldValue, QString value)
@@ -233,7 +313,7 @@ QString SecurityPrivacy::setPassword(QString oldValue, QString value)
         QString output = QString::fromUtf8(pamHelper.readLine());
         if (output.isEmpty()) {
             return "Internal error: could not run passwd";
-        } else {	
+        } else {
             // Grab everything on first line after the last colon.  This is because
             // passwd will bunch it up like so:
             // "(current) UNIX password: Enter new UNIX password: Retype new UNIX password: You must choose a longer password"
@@ -257,9 +337,33 @@ QString SecurityPrivacy::badPasswordMessage(SecurityType type)
     }
 }
 
-QString SecurityPrivacy::setSecurity(QString oldValue, QString value, SecurityType type)
+bool SecurityPrivacy::trySetSecurity(SecurityType type)
 {
     if (m_user == NULL || !act_user_is_loaded(m_user))
+        return false;
+
+    // We only support setting swipe without more information
+    if (type != SecurityPrivacy::Swipe)
+        return false;
+
+    SecurityType oldType = getSecurityType();
+    if (type == oldType)
+        return true; // nothing to do
+
+    if (!setDisplayHint(type))
+        return false;
+
+    if (!setPasswordMode(type)) {
+        setDisplayHint(oldType);
+        return false;
+    }
+
+    return true;
+}
+
+QString SecurityPrivacy::setSecurity(QString oldValue, QString value, SecurityType type)
+{
+    if (m_user == nullptr || !act_user_is_loaded(m_user))
         return "Internal error: user not loaded";
     else if (type == SecurityPrivacy::Swipe && !value.isEmpty())
         return "Internal error: trying to set password with swipe mode";
@@ -282,23 +386,34 @@ QString SecurityPrivacy::setSecurity(QString oldValue, QString value, SecurityTy
     }
 
     if (type == SecurityPrivacy::Swipe) {
-        if (!setPasswordMode(type, oldValue)) {
+        if (!setPasswordModeWithPolicykit(type, oldValue)) {
             setDisplayHint(oldType);
             return badPasswordMessage(oldType);
         }
     } else {
         QString errorText = setPassword(oldValue, value);
         if (!errorText.isEmpty()) {
-            setDisplayHint(oldType);
-            // Special case this common message because the one PAM gives is so awful
-            if (errorText == dgettext("Linux-PAM", "Authentication token manipulation error"))
+            if (errorText == dgettext("Linux-PAM", "Authentication token manipulation error")) {
+                // Special case this common message because the one PAM gives is so awful
+                setDisplayHint(oldType);
                 return badPasswordMessage(oldType);
-            else
+            } else if (oldValue != value) {
+                // Only treat this as an error case if the passwords aren't
+                // the same.  (If they are the same, and we're just switching
+                // display hints, then passwd will give us an error message
+                // like "Password unchanged" but we don't want to rely on
+                // parsing that output.  Instead, if we got past the "bad old
+                // password" part above and oldValue == value, we don't care
+                // about any errors from passwd.)
+                setDisplayHint(oldType);
                 return errorText;
+            }
+            // else fall through to below
         }
-        if (!setPasswordMode(type, value)) {
+        if (!setPasswordModeWithPolicykit(type, value)) {
             setDisplayHint(oldType);
             setPassword(value, oldValue);
+            setPasswordModeWithPolicykit(oldType, oldValue); // needed to revert to swipe
             return badPasswordMessage(oldType);
         }
     }
@@ -341,14 +456,14 @@ void userLoaded(GObject    *object,
 void SecurityPrivacy::managerLoaded()
 {
     gboolean loaded;
-    g_object_get(m_manager, "is-loaded", &loaded, NULL);
+    g_object_get(m_manager, "is-loaded", &loaded, nullptr);
 
     if (loaded) {
         g_signal_handlers_disconnect_by_data(m_manager, this);
 
         m_user = act_user_manager_get_user_by_id(m_manager, geteuid());
 
-        if (m_user != NULL) {
+        if (m_user != nullptr) {
             g_object_ref(m_user);
 
             if (act_user_is_loaded(m_user))
@@ -358,6 +473,25 @@ void SecurityPrivacy::managerLoaded()
                                  G_CALLBACK(::userLoaded), this);
         }
     }
+}
+
+bool SecurityPrivacy::hereEnabled()
+{
+    return m_accountsService.getUserProperty(HERE_IFACE,
+                                             ENABLED_PROP).toBool();
+}
+
+void SecurityPrivacy::setHereEnabled(bool enabled)
+{
+    m_accountsService.setUserProperty(HERE_IFACE, ENABLED_PROP,
+                                      QVariant::fromValue(enabled));
+    Q_EMIT(hereEnabledChanged());
+}
+
+QString SecurityPrivacy::hereLicensePath()
+{
+    return m_accountsService.getUserProperty(HERE_IFACE,
+                                             PATH_PROP).toString();
 }
 
 void managerLoaded(GObject    *object,

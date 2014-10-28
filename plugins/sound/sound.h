@@ -32,7 +32,7 @@ class Sound : public QObject
 
 public:
     explicit Sound(QObject *parent = 0);
-    Q_INVOKABLE QStringList listSounds(const QString &dirString);
+    Q_INVOKABLE QStringList listSounds(const QStringList &dirs);
     Q_PROPERTY (QString incomingCallSound
                 READ getIncomingCallSound
                 WRITE setIncomingCallSound
@@ -62,6 +62,11 @@ public:
                 WRITE setIncomingMessageVibrateSilentMode
                 NOTIFY incomingMessageVibrateSilentModeChanged)
 
+    Q_PROPERTY (bool dialpadSoundsEnabled
+                READ getDialpadSoundsEnabled
+                WRITE setDialpadSoundsEnabled
+                NOTIFY dialpadSoundsEnabledChanged)
+
 
 public Q_SLOTS:
     void slotChanged(QString, QString);
@@ -75,10 +80,10 @@ Q_SIGNALS:
     void incomingMessageVibrateChanged();
     void incomingCallVibrateSilentModeChanged();
     void incomingMessageVibrateSilentModeChanged();
+    void dialpadSoundsEnabledChanged();
 
 private:
     AccountsService m_accountsService;
-    QStringList m_soundsList;
 
     QString getIncomingCallSound();
     void setIncomingCallSound(QString sound);
@@ -94,6 +99,8 @@ private:
     void setIncomingCallVibrateSilentMode(bool enabled);
     bool getIncomingMessageVibrateSilentMode();
     void setIncomingMessageVibrateSilentMode(bool enabled);
+    bool getDialpadSoundsEnabled();
+    void setDialpadSoundsEnabled(bool enabled);
 
 };
 

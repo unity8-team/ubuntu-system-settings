@@ -13,17 +13,23 @@ set_target_properties(UbuntuSecurityPrivacyHelper PROPERTIES
 )
 target_link_libraries(UbuntuSecurityPrivacyHelper ${POLKIT_AGENT_LDFLAGS})
 
-include_directories(${CMAKE_CURRENT_BINARY_DIR} ${ACCOUNTSSERVICE_INCLUDE_DIRS} ${GLIB_INCLUDE_DIRS})
+include_directories(${CMAKE_CURRENT_BINARY_DIR}
+                    ${ACCOUNTSSERVICE_INCLUDE_DIRS}
+                    ${GOBJECT_INCLUDE_DIRS})
 add_definitions(-DHELPER_EXEC="${PLUG_DIR}/UbuntuSecurityPrivacyHelper" -DQT_NO_KEYWORDS)
 
 set(QML_SOURCES
     AppAccess.qml
     AppAccessControl.qml
     Dash.qml
+    here-terms.qml
     Location.qml
     LockSecurity.qml
+    Ofono.qml
     PageComponent.qml
     PhoneLocking.qml
+    SimPin.qml
+    sims.js
 )
 
 set(PANEL_SOURCES
@@ -44,13 +50,16 @@ pkg_check_modules(TRUST_STORE REQUIRED trust-store)
 include_directories(
     ${CMAKE_CURRENT_BINARY_DIR}
     ${TRUST_STORE_INCLUDE_DIRS}
+    ${GLIB_INCLUDE_DIRS}
 )
 
 set(PLUG_DIR ${PLUGIN_PRIVATE_MODULE_DIR}/Ubuntu/SystemSettings/SecurityPrivacy)
 target_link_libraries (UbuntuSecurityPrivacyPanel
     uss-accountsservice
     ${ACCOUNTSSERVICE_LDFLAGS}
+    ${GOBJECT_LDFLAGS}
     ${TRUST_STORE_LDFLAGS}
+    ${GLIB_LDFLAGS}
 )
 install(TARGETS UbuntuSecurityPrivacyPanel UbuntuSecurityPrivacyHelper DESTINATION ${PLUG_DIR})
 install(FILES qmldir DESTINATION ${PLUG_DIR})

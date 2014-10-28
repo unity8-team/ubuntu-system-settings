@@ -36,5 +36,5 @@ QString _(const char *text, const char *domain)
     return QString::fromUtf8(dgettext(domain, text));
 }
 
-}; // namespace
+} // namespace
 

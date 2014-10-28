@@ -14,9 +14,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import QtQuick 2.0
+import QtQuick 2.3
 import GSettings 1.0
-import Ubuntu.Components 0.1
+import Ubuntu.Components 1.1
 import Ubuntu.SystemSettings.SecurityPrivacy 1.0
 import Unity.Application 0.1
 import Unity.Notifications 1.0 as NotificationBackend
@@ -30,11 +30,13 @@ Item {
 
     // These should be set by a security page and we apply the settings when
     // the user exits the wizard.
-    property int passwordMethod: UbuntuSecurityPrivacyPanel.Swipe
+    property int passwordMethod: UbuntuSecurityPrivacyPanel.Passcode
     property string password: ""
 
     Component.onCompleted: {
         Theme.name = "Ubuntu.Components.Themes.SuruGradient"
+        // A visible selected background looks bad in ListItem widgets with our theme
+        Theme.palette.selected.background = "#00000000"
         i18n.domain = "ubuntu-system-settings"
     }
 
@@ -46,10 +48,13 @@ Item {
         // Immediately go to black to give quick feedback
         blackCover.visible = true
 
-        // Ignore any errors, since we're past where the user set the
-        // method.  Worst case, we just leave the user with a swipe
-        // security method and they fix it in the system settings.
-        securityPrivacy.setSecurity("", password, passwordMethod)
+        var errorMsg = securityPrivacy.setSecurity("", password, passwordMethod)
+        if (errorMsg !== "") {
+            // Ignore (but log) any errors, since we're past where the user set
+            // the method.  Worst case, we just leave the user with a swipe
+            // security method and they fix it in the system settings.
+            console.log("Error setting security method:", errorMsg)
+        }
 
         Qt.quit()
     }
@@ -70,6 +75,7 @@ Item {
         backgroundColor: "#A55263"
         footerColor: "#D75669"
         anchorToKeyboard: true
+        useDeprecatedToolbar: false
 
         GSettings {
             id: background
@@ -78,7 +84,12 @@ Item {
 
         Image {
             id: image
-            anchors.fill: parent
+            // Use x/y/height/width instead of anchors so that we don't adjust
+            // the image when the OSK appears.
+            x: 0
+            y: 0
+            height: root.height
+            width: root.width
             source: background.pictureUri
             fillMode: Image.PreserveAspectCrop
             visible: status === Image.Ready
@@ -92,15 +103,64 @@ Item {
                 // continuing so back button returns to the previous main page.
                 while (pageList.index < pageStack.depth - 1)
                     pop()
-                push(pageList.next())
+                load(pageList.next())
             }
 
             function prev() {
-                pageList.prev() // to update pageList.index
+                if (pageList.index >= pageStack.depth - 1)
+                    pageList.prev() // update pageList.index, but not for extra pages
                 pop()
+                if (!currentPage || currentPage.opacity === 0) { // undo skipped pages
+                    prev()
+                } else {
+                    currentPage.enabled = true
+                }
+            }
+
+            function load(path) {
+                if (currentPage) {
+                    currentPage.enabled = false
+                }
+
+                // First load it invisible, check that we should actually use
+                // this page, and either skip it or continue.
+                push(path, {"opacity": 0, "enabled": false})
+
+                // Check for immediate skip or not.  We may have to wait for
+                // skipValid to be assigned (see Connections object below)
+                _checkSkip()
+            }
+
+            function _checkSkip() {
+                if (!currentPage) { // may have had a parse error
+                    next()
+                } else if (currentPage.skipValid) {
+                    if (currentPage.skip) {
+                        next()
+                    } else {
+                        currentPage.opacity = 1
+                        currentPage.enabled = true
+                    }
+                }
+            }
+
+            Connections {
+                target: pageStack.currentPage
+                onSkipValidChanged: pageStack._checkSkip()
             }
 
             Component.onCompleted: next()
+        }
+    }
+
+    Rectangle {
+        id: modalNotificationBackground
+        visible: notifications.useModal && (notifications.state == "narrow")
+        anchors.fill: parent
+        color: "#80000000"
+
+        MouseArea {
+            anchors.fill: parent
         }
     }
 

@@ -48,9 +48,24 @@ class SecurityPrivacy: public QObject
                 READ getMessagesWelcomeScreen
                 WRITE setMessagesWelcomeScreen
                 NOTIFY messagesWelcomeScreenChanged)
+    Q_PROPERTY (bool enableLauncherWhileLocked
+                READ getEnableLauncherWhileLocked
+                WRITE setEnableLauncherWhileLocked
+                NOTIFY enableLauncherWhileLockedChanged)
+    Q_PROPERTY (bool enableIndicatorsWhileLocked
+                READ getEnableIndicatorsWhileLocked
+                WRITE setEnableIndicatorsWhileLocked
+                NOTIFY enableIndicatorsWhileLockedChanged)
     Q_PROPERTY (SecurityType securityType
                 READ getSecurityType
                 NOTIFY securityTypeChanged)
+    Q_PROPERTY (bool hereEnabled
+                READ hereEnabled
+                WRITE setHereEnabled
+                NOTIFY hereEnabledChanged)
+    Q_PROPERTY (QString hereLicensePath
+                READ hereLicensePath
+                NOTIFY hereLicensePathChanged)
 
 public:
     enum SecurityType {
@@ -66,10 +81,19 @@ public:
     void setStatsWelcomeScreen(bool enabled);
     bool getMessagesWelcomeScreen();
     void setMessagesWelcomeScreen(bool enabled);
+    bool getEnableLauncherWhileLocked();
+    void setEnableLauncherWhileLocked(bool enabled);
+    bool getEnableIndicatorsWhileLocked();
+    void setEnableIndicatorsWhileLocked(bool enabled);
     SecurityType getSecurityType();
+
+    bool hereEnabled();
+    void setHereEnabled(bool enabled);
+    QString hereLicensePath();
 
     // Returns error text, if an error occurred
     Q_INVOKABLE QString setSecurity(QString oldValue, QString value, SecurityType type);
+    Q_INVOKABLE bool trySetSecurity(SecurityType type);
 
 public Q_SLOTS:
     void slotChanged(QString, QString);
@@ -78,7 +102,11 @@ public Q_SLOTS:
 Q_SIGNALS:
     void statsWelcomeScreenChanged();
     void messagesWelcomeScreenChanged();
+    void enableLauncherWhileLockedChanged();
+    void enableIndicatorsWhileLockedChanged();
     void securityTypeChanged();
+    void hereEnabledChanged();
+    void hereLicensePathChanged();
 
 private:
     void loadUser();
@@ -95,7 +123,8 @@ private:
 
     QString badPasswordMessage(SecurityType type);
     bool setDisplayHint(SecurityType type);
-    bool setPasswordMode(SecurityType type, QString password);
+    bool setPasswordMode(SecurityType type);
+    bool setPasswordModeWithPolicykit(SecurityType type, QString password);
     QString setPassword(QString oldValue, QString value);
 
     AccountsService m_accountsService;

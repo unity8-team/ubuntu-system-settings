@@ -29,8 +29,8 @@ TestPlugin2::TestPlugin2():
 {
 }
 
-ItemBase *TestPlugin2::createItem(const QVariantMap &staticData,
-                                  QObject *parent)
+ItemBase *TestPlugin2::createItem(const QVariantMap &/*staticData*/,
+                                  QObject */*parent*/)
 {
     return NULL;
 }
