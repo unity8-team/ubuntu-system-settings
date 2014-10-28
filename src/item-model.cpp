@@ -136,7 +136,6 @@ QHash<int, QByteArray> ItemModel::roleNames() const
 void ItemModel::onItemVisibilityChanged()
 {
     Q_D(ItemModel);
-    qWarning() << Q_FUNC_INFO;
 
     Plugin *item = qobject_cast<Plugin *>(sender());
     Q_ASSERT(item != 0);
