@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-09-26 12:27-0400\n"
-"PO-Revision-Date: 2014-09-29 13:28+0000\n"
+"POT-Creation-Date: 2014-10-16 20:04-0600\n"
+"PO-Revision-Date: 2014-10-20 08:39+0000\n"
 "Last-Translator: Damir Jerovšek <Unknown>\n"
 "Language-Team: Slovenian <sl@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -16,8 +16,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || "
 "n%100==4 ? 3 : 0);\n"
-"X-Launchpad-Export-Date: 2014-09-30 07:08+0000\n"
-"X-Generator: Launchpad (build 17196)\n"
+"X-Launchpad-Export-Date: 2014-10-21 07:25+0000\n"
+"X-Generator: Launchpad (build 17203)\n"
 
 #: ubuntu-system-settings.desktop.in.in.h:1 ../src/qml/MainWindow.qml:112
 msgid "System Settings"
@@ -31,695 +31,78 @@ msgstr "Sistem;"
 msgid "Preferences;Settings;"
 msgstr "Možnosti;Nastavitve;"
 
-#: ../plugins/system-update//Configuration.qml:29
-#: ../plugins/system-update//PageComponent.qml:565
-msgid "Auto download"
-msgstr "Samodejni prejem"
-
-#: ../plugins/system-update//Configuration.qml:34
-msgid "Download future updates automatically:"
-msgstr "Prejmi prihodnje posodobitve samodejno:"
-
-#: ../plugins/battery//SleepValues.qml:106
-#: ../plugins/battery//PageComponent.qml:315
-#: ../plugins/battery//PageComponent.qml:324
-#: ../plugins/wifi//NetworkDetails.qml:55
-#: ../plugins/system-update//Configuration.qml:52
-#: ../plugins/system-update//PageComponent.qml:568
-#: ../plugins/about//PageComponent.qml:162
-#: ../plugins/security-privacy//PhoneLocking.qml:78
-#: ../plugins/security-privacy//PhoneLocking.qml:87
-#: ../plugins/security-privacy//PageComponent.qml:140
-msgid "Never"
-msgstr "Nikoli"
-
-#: ../plugins/system-update//Configuration.qml:53
-msgid "When on wi-fi"
-msgstr "kadar je vključen wi-fi"
-
-#: ../plugins/system-update//Configuration.qml:54
-msgid "On any data connection"
-msgstr "ob vsakršni podatkovni povezavi"
-
-#: ../plugins/system-update//Configuration.qml:55
-msgid "Data charges may apply."
-msgstr "Prenosi podatkov bodo morda zaračunani."
-
-#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#: ../plugins/system-update//PageComponent.qml:37
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:58
-msgid "Updates"
-msgstr "Posodobitve"
-
-#: ../plugins/system-update//PageComponent.qml:94
-msgid "Update System"
-msgstr "Posodobi sistem"
-
-#: ../plugins/system-update//PageComponent.qml:95
-msgid "The phone needs to restart to install the system update."
-msgstr "Telefon se mora zaradi namestitve posodobitev sistema znova zagnati."
-
-#: ../plugins/system-update//PageComponent.qml:95
-msgid "Connect the phone to power before installing the system update."
-msgstr ""
-"Pred nameščanjem posodobitev sistema povežite telefon v električno omrežje."
-
-#: ../plugins/system-update//PageComponent.qml:98
-msgid "Install & Restart"
-msgstr "Namesti in ponovno zaženi"
-
-#: ../plugins/system-update//PageComponent.qml:108
-msgid "Not Now"
-msgstr "Ne zdaj"
-
-#: ../plugins/system-update//PageComponent.qml:114
-msgid "Install"
-msgstr "Namesti"
-
-#: ../plugins/system-update//PageComponent.qml:135
-msgid "Software is up to date"
-msgstr "Programska oprema je posodobljena"
-
-#: ../plugins/system-update//PageComponent.qml:243
-msgid "Checking for updates…"
-msgstr "Preverjanje za posodobitve ..."
-
-#: ../plugins/system-update//PageComponent.qml:261
-#, qt-format
-msgid "Install %1 update…"
-msgid_plural "Install %1 updates…"
-msgstr[0] "Namesti %1 posodobitev ..."
-msgstr[1] "Namesti %1 posodobitev ..."
-msgstr[2] "Namesti %1 posodobitvi ..."
-msgstr[3] "Namesti %1 posodobitve .."
-
-#: ../plugins/system-update//PageComponent.qml:262
-#, qt-format
-msgid "Install %1 update"
-msgid_plural "Install %1 updates"
-msgstr[0] "Namesti %1 posodobitev"
-msgstr[1] "Namesti %1 posodobitev"
-msgstr[2] "Namesti %1 posodobitvi"
-msgstr[3] "Namesti %1 posodobitve"
-
-#: ../plugins/system-update//PageComponent.qml:263
-msgid "Pause All"
-msgstr "Premor vsega"
-
-#: ../plugins/system-update//PageComponent.qml:317
-msgid "Retry"
-msgstr "Poskusi znova"
-
-#: ../plugins/system-update//PageComponent.qml:333
-msgid "Download"
-msgstr "Prejem"
-
-#: ../plugins/system-update//PageComponent.qml:333
-msgid "Update"
-msgstr "Posodobi"
-
-#: ../plugins/system-update//PageComponent.qml:334
-msgid "Resume"
-msgstr "Nadaljuj"
-
-#: ../plugins/system-update//PageComponent.qml:335
-msgid "Pause"
-msgstr "Premor"
-
-#: ../plugins/system-update//PageComponent.qml:393
-msgid "Installing"
-msgstr "Nameščanje"
-
-#: ../plugins/system-update//PageComponent.qml:426
-msgid "Installed"
-msgstr "Nameščeno"
-
-#: ../plugins/system-update//PageComponent.qml:452
-msgid "Version: "
-msgstr "Različica: "
-
-#: ../plugins/system-update//PageComponent.qml:474
-msgid "Sign in to Ubuntu One to receive updates for apps."
-msgstr "Za prejemanje posodobitev programov se prijavite v Ubuntu One."
-
-#: ../plugins/system-update//PageComponent.qml:483
-msgid "Sign In…"
-msgstr "Prijava ..."
-
-#: ../plugins/system-update//PageComponent.qml:550
-msgid "Installing update…"
-msgstr "Nameščanje posodobitev ..."
-
-#: ../plugins/system-update//PageComponent.qml:570
-msgid "On wi-fi"
-msgstr "Ob povezavi wi-fi"
-
-#: ../plugins/system-update//PageComponent.qml:572
-msgid "Always"
-msgstr "Vedno"
-
-#: ../plugins/system-update//PageComponent.qml:587
-msgid " bytes"
-msgstr " bajtov"
-
-#: ../plugins/system-update//PageComponent.qml:590
-msgid " KiB"
-msgstr " KiB"
-
-#: ../plugins/system-update//PageComponent.qml:593
-msgid " MiB"
-msgstr " MiB"
-
-#: ../plugins/system-update//PageComponent.qml:596
-msgid " GiB"
-msgstr " GiB"
-
-#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
-#: ../plugins/phone//PageComponent.qml:32
-#: ../plugins/bluetooth//PageComponent.qml:93
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:92
-msgid "Phone"
-msgstr "Telefon"
-
-#: ../plugins/sound//PageComponent.qml:153
-#: ../plugins/phone//PageComponent.qml:109
-msgid "Dialpad sounds"
-msgstr "Zvoki številčnice"
-
-#: ../plugins/phone//ServiceInfo.qml:109
-#, qt-format
-msgid "Last called %1"
-msgstr "Zadnji klic %1"
-
-#: ../plugins/phone//ServiceInfo.qml:119
-msgid "Call"
-msgstr "Klic"
-
-#: ../plugins/phone//NoSims.qml:28 ../plugins/phone//SingleSim.qml:33
-#: ../plugins/phone//MultiSim.qml:36 ../plugins/phone//MultiSim.qml:74
-#: ../plugins/phone//CallForwarding.qml:32
-#: ../plugins/phone//CallForwarding.qml:76
-msgid "Call forwarding"
-msgstr "Posredovanje klica"
-
-#: ../plugins/phone//CallForwarding.qml:91
-msgid ""
-"Redirects phone calls to another number whenever you don't answer, or your "
-"phone is busy, turned off, or out of range."
-msgstr ""
-"Preusmeri telefonske klice na drugo številko, kadarkoli ne odgovorite na "
-"klic ali je Vaš telefon zaposlen, ugasnjen ali izven dosega."
-
-#: ../plugins/phone//CallForwarding.qml:101
-msgid "Forward to"
-msgstr "Posreduj"
-
-#: ../plugins/language//RebootNecessary.qml:47
-#: ../plugins/language//DisplayLanguage.qml:98
-#: ../plugins/cellular//HotspotSetup.qml:85
-#: ../plugins/wifi//OtherNetwork.qml:137
-#: ../plugins/time-date//TimePicker.qml:173
-#: ../plugins/phone//CallForwarding.qml:139
-#: ../plugins/reset//ResetAllSettings.qml:38
-#: ../plugins/reset//EraseEverything.qml:54
-#: ../plugins/reset//ResetLauncherHome.qml:55
-#: ../plugins/security-privacy//LockSecurity.qml:283
-#: ../plugins/security-privacy//SimPin.qml:149
-#: ../plugins/security-privacy//SimPin.qml:266
-#: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:49
-#: ../plugins/bluetooth//ProvidePinCodeDialog.qml:55
-#: ../plugins/bluetooth//ProvidePasskeyDialog.qml:54
-#: ../plugins/background//Preview.qml:101
-#: ../plugins/cellular//Components//SimEditor.qml:189
-#: ../plugins/background//Components//AddRemove.qml:42
-msgid "Cancel"
-msgstr "Prekliči"
-
-#: ../plugins/time-date//TimePicker.qml:182
-#: ../plugins/phone//CallForwarding.qml:152
-#: ../plugins/security-privacy//LockSecurity.qml:304
-#: ../plugins/background//Preview.qml:108
-msgid "Set"
-msgstr "Nastavi"
-
-#. TRANSLATORS: %1 is the name of the (network) carrier
-#: ../plugins/phone//SingleSim.qml:51 ../plugins/phone//Services.qml:34
-#, qt-format
-msgid "%1 Services"
-msgstr "%1 storitve"
-
-#: ../plugins/phone//NoSims.qml:34 ../plugins/phone//SingleSim.qml:40
-#: ../plugins/phone//CallWaiting.qml:31 ../plugins/phone//CallWaiting.qml:74
-#: ../plugins/phone//MultiSim.qml:46 ../plugins/phone//MultiSim.qml:84
-msgid "Call waiting"
-msgstr "Dajanje klica na čakanje"
-
-#: ../plugins/phone//NoSims.qml:42 ../plugins/phone//MultiSim.qml:56
-#: ../plugins/phone//MultiSim.qml:94
-msgid "Services"
-msgstr "Storitve"
-
-#: ../plugins/phone//SingleSim.qml:29
-msgid "SIM"
-msgstr "SIM"
-
-#: ../plugins/phone//CallWaiting.qml:89
-msgid ""
-"Lets you answer or start a new call while on another call, and switch "
-"between them"
-msgstr ""
-"Vam omogoči, da odgovorite ali začnete nov klic, medtem ko ste na drugem "
-"klicu in preklopi med njima"
-
 #: ../plugins/background//Preview.qml:70
 msgid "Preview"
 msgstr "Predogled"
 
-#: ../plugins/background//Preview.qml:101
+#: ../plugins/background//Preview.qml:102
 msgid "Remove image"
 msgstr "Odstrani sliko"
 
+#: ../plugins/background//Preview.qml:102
+#: ../plugins/wifi//OtherNetwork.qml:288
+#: ../plugins/reset//ResetAllSettings.qml:38
+#: ../plugins/reset//ResetLauncherHome.qml:55
+#: ../plugins/reset//EraseEverything.qml:54
+#: ../plugins/language//RebootNecessary.qml:47
+#: ../plugins/language//DisplayLanguage.qml:98
+#: ../plugins/phone//CallForwarding.qml:139
+#: ../plugins/cellular//PageChooseApn.qml:594
+#: ../plugins/cellular//CustomApnEditor.qml:245
+#: ../plugins/cellular//HotspotSetup.qml:85
+#: ../plugins/security-privacy//LockSecurity.qml:283
+#: ../plugins/security-privacy//SimPin.qml:149
+#: ../plugins/security-privacy//SimPin.qml:266
+#: ../plugins/bluetooth//ProvidePasskeyDialog.qml:54
+#: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:49
+#: ../plugins/bluetooth//ProvidePinCodeDialog.qml:55
+#: ../plugins/time-date//TimePicker.qml:173
+#: ../plugins/background//Components//AddRemove.qml:42
+#: ../plugins/cellular//Components//SimEditor.qml:189
+msgid "Cancel"
+msgstr "Prekliči"
+
+#: ../plugins/background//Preview.qml:109
+#: ../plugins/phone//CallForwarding.qml:152
+#: ../plugins/security-privacy//LockSecurity.qml:304
+#: ../plugins/time-date//TimePicker.qml:182
+msgid "Set"
+msgstr "Nastavi"
+
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: ../plugins/background//MainPage.qml:38
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:152
+#: ../plugins/background//MainPage.qml:35
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:2
 msgid "Background"
 msgstr "Ozadje"
 
-#: ../plugins/background//MainPage.qml:109
+#: ../plugins/background//MainPage.qml:99
 msgid "Ubuntu Art"
 msgstr "Galerija Ubuntu"
 
-#: ../plugins/background//MainPage.qml:125
+#: ../plugins/background//MainPage.qml:115
+#: ../plugins/cellular//PageChooseApn.qml:409
+#: ../plugins/cellular//PageChooseApn.qml:488
+#: ../plugins/cellular//PageChooseApn.qml:496
 msgid "Custom"
 msgstr "Po meri"
-
-#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: ../plugins/language//PageComponent.qml:34
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:2
-msgid "Language & Text"
-msgstr "Jezik in besedilo"
-
-#: ../plugins/language//PageComponent.qml:100
-msgid "Display language…"
-msgstr "Prikazni jezik ..."
-
-#: ../plugins/language//KeyboardLayouts.qml:26
-#: ../plugins/language//PageComponent.qml:117
-msgid "Keyboard layouts"
-msgstr "Razporeditve tipk"
-
-#: ../plugins/language//SpellChecking.qml:27
-#: ../plugins/language//SpellChecking.qml:36
-#: ../plugins/language//PageComponent.qml:132
-#: ../plugins/language//PageComponent.qml:142
-msgid "Spell checking"
-msgstr "Preverjanje črkovanja"
-
-#: ../plugins/language//PageComponent.qml:152
-msgid "Auto correction"
-msgstr "Samodejno popravljanje"
-
-#: ../plugins/language//PageComponent.qml:162
-msgid "Word suggestions"
-msgstr "Besedni predlogi"
-
-#: ../plugins/language//PageComponent.qml:175
-msgid "Auto capitalization"
-msgstr "Samodejno spreminjanje velikih začetnic"
-
-#: ../plugins/language//PageComponent.qml:185
-msgid "Turns on Shift to capitalize the first letter of each sentence."
-msgstr "Vklopi tipko Shift za spreminjanje velikih začetnic v vsaki povedi."
-
-#: ../plugins/language//PageComponent.qml:192
-msgid "Auto punctuation"
-msgstr "Samodejno postavljanje ločil"
-
-#: ../plugins/language//PageComponent.qml:202
-msgid ""
-"Adds a period, and any missing quotes or brackets, when you tap Space twice."
-msgstr ""
-"Doda piko in manjkajoče narekovaje ali oklepaje, ko tapnete dvakrat na "
-"Presledek."
-
-#: ../plugins/language//PageComponent.qml:209
-#: ../plugins/sound//PageComponent.qml:196
-msgid "Keyboard sound"
-msgstr "Zvok tipkovnice"
-
-#: ../plugins/language//PageComponent.qml:219
-msgid "Keyboard vibration"
-msgstr "Vibriranje tipkovnice"
-
-#: ../plugins/language//SpellChecking.qml:53
-msgid "Current spelling languages:"
-msgstr "Trenutni jeziki za črkovanje:"
-
-#: ../plugins/language//SpellChecking.qml:54
-msgid "All languages available:"
-msgstr "Vsi razpoložljivi jeziki:"
-
-#: ../plugins/language//KeyboardLayouts.qml:39
-msgid "Current layouts:"
-msgstr "Trenutne razporeditve:"
-
-#: ../plugins/language//KeyboardLayouts.qml:40
-msgid "All layouts available:"
-msgstr "Vse razpoložljive razporeditve:"
-
-#: ../plugins/language//DisplayLanguage.qml:36
-msgid "Display language"
-msgstr "Prikazni jezik"
-
-#: ../plugins/language//DisplayLanguage.qml:118
-msgid "Confirm"
-msgstr "Potrdi"
-
-#: ../plugins/language//RebootNecessary.qml:34
-#: ../plugins/reset//ResetLauncherHome.qml:59
-msgid "The phone needs to restart for changes to take effect."
-msgstr "Za uveljavitev sprememb se mora telefon znova zagnati."
-
-#: ../plugins/language//RebootNecessary.qml:38
-msgid "Restart Now"
-msgstr "Znova zaženi sedaj"
-
-#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
-#: ../plugins/battery//PageComponent.qml:363
-#: ../plugins/bluetooth//PageComponent.qml:32
-#: ../plugins/bluetooth//PageComponent.qml:147
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:146
-msgid "Bluetooth"
-msgstr "Bluetooth"
-
-#: ../plugins/bluetooth//PageComponent.qml:82
-msgid "Connected"
-msgstr "Povezano"
-
-#: ../plugins/bluetooth//PageComponent.qml:83
-msgid "Connecting…"
-msgstr "Povezovanje ..."
-
-#: ../plugins/bluetooth//PageComponent.qml:84
-msgid "Disconnecting…"
-msgstr "Prekinjanje povezave ..."
-
-#: ../plugins/bluetooth//PageComponent.qml:85
-msgid "Disconnected"
-msgstr "Prekinjena povezava"
-
-#: ../plugins/bluetooth//PageComponent.qml:86
-msgid "Unknown"
-msgstr "Neznano"
-
-#: ../plugins/bluetooth//PageComponent.qml:92
-msgid "Computer"
-msgstr "Računalnik"
-
-#: ../plugins/bluetooth//PageComponent.qml:94
-msgid "Modem"
-msgstr "Modem"
-
-#: ../plugins/bluetooth//PageComponent.qml:95 ../src/qml/MainWindow.qml:147
-msgid "Network"
-msgstr "Omrežje"
-
-#: ../plugins/bluetooth//PageComponent.qml:96
-msgid "Headset"
-msgstr "Slušalke z mikrofonom"
-
-#: ../plugins/bluetooth//PageComponent.qml:97
-msgid "Headphones"
-msgstr "Slušalke"
-
-#: ../plugins/bluetooth//PageComponent.qml:98
-msgid "Video"
-msgstr "Video"
-
-#: ../plugins/bluetooth//PageComponent.qml:99
-msgid "Other Audio"
-msgstr "Drugi zvoki"
-
-#: ../plugins/bluetooth//PageComponent.qml:100
-msgid "Joypad"
-msgstr "Igralni plošček"
-
-#: ../plugins/bluetooth//PageComponent.qml:101
-msgid "Keyboard"
-msgstr "Tipkovnica"
-
-#: ../plugins/bluetooth//PageComponent.qml:102
-msgid "Tablet"
-msgstr "Tablični računalnik"
-
-#: ../plugins/bluetooth//PageComponent.qml:103
-msgid "Mouse"
-msgstr "Miška"
-
-#: ../plugins/bluetooth//PageComponent.qml:104
-msgid "Printer"
-msgstr "Tiskalnik"
-
-#: ../plugins/security-privacy//AppAccess.qml:41
-#: ../plugins/bluetooth//PageComponent.qml:105
-msgid "Camera"
-msgstr "Fotoaparat"
-
-#: ../plugins/bluetooth//PageComponent.qml:106
-msgid "Other"
-msgstr "Drugo"
-
-#: ../plugins/bluetooth//PageComponent.qml:112
-msgid "Excellent"
-msgstr "Odlično"
-
-#: ../plugins/bluetooth//PageComponent.qml:113
-msgid "Good"
-msgstr "Dobro"
-
-#: ../plugins/bluetooth//PageComponent.qml:114
-msgid "Fair"
-msgstr "Zadovoljivo"
-
-#: ../plugins/bluetooth//PageComponent.qml:115
-msgid "Poor"
-msgstr "Slabo"
-
-#: ../plugins/wifi//OtherNetwork.qml:79
-#: ../plugins/bluetooth//PageComponent.qml:116
-#: ../plugins/bluetooth//PageComponent.qml:323
-#: ../plugins/bluetooth//PageComponent.qml:344
-msgid "None"
-msgstr "Brez"
-
-#: ../plugins/bluetooth//PageComponent.qml:182
-msgid "Discoverable"
-msgstr "Viden"
-
-#: ../plugins/bluetooth//PageComponent.qml:182
-msgid "Not discoverable"
-msgstr "Neviden"
-
-#: ../plugins/bluetooth//PageComponent.qml:213
-msgid "Connected devices:"
-msgstr "Povezane naprave:"
-
-#: ../plugins/bluetooth//PageComponent.qml:250
-msgid "Connect another device:"
-msgstr "Poveži drugo napravo:"
-
-#: ../plugins/bluetooth//PageComponent.qml:250
-msgid "Connect a device:"
-msgstr "Poveži napravo:"
-
-#: ../plugins/bluetooth//PageComponent.qml:283
-msgid "None detected"
-msgstr "Ni zaznanih"
-
-#: ../plugins/bluetooth//PageComponent.qml:291
-#: ../plugins/bluetooth//PageComponent.qml:394
-msgid "Connect automatically when detected:"
-msgstr "Poveži samodejno, ko je zaznano:"
-
-#: ../plugins/wifi//NetworkDetails.qml:43
-#: ../plugins/bluetooth//PageComponent.qml:343
-msgid "Name"
-msgstr "Ime"
-
-#: ../plugins/bluetooth//PageComponent.qml:361
-msgid "Type"
-msgstr "Vrsta"
-
-#: ../plugins/bluetooth//PageComponent.qml:385
-msgid "Status"
-msgstr "Stanje"
-
-#: ../plugins/bluetooth//PageComponent.qml:389
-msgid "Signal Strength"
-msgstr "Moč signala"
-
-#: ../plugins/wifi//NetworkDetailsBrief.qml:42
-#: ../plugins/bluetooth//PageComponent.qml:408
-msgid "Disconnect"
-msgstr "Prekini povezavo"
-
-#: ../plugins/wifi//OtherNetwork.qml:146
-#: ../plugins/bluetooth//PageComponent.qml:408
-msgid "Connect"
-msgstr "Poveži"
-
-#: ../plugins/bluetooth//PageComponent.qml:426
-msgid "Forget this device"
-msgstr "Pozabi to napravo"
-
-#: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:28
-#: ../plugins/bluetooth//ProvidePinCodeDialog.qml:28
-#: ../plugins/bluetooth//ProvidePasskeyDialog.qml:28
-msgid "Bluetooth Pairing Request"
-msgstr "Zahteva seznanjenja naprav Bluetooth"
-
-#: ../plugins/bluetooth//ProvidePinCodeDialog.qml:36
-#: ../plugins/bluetooth//ProvidePasskeyDialog.qml:36
-#, qt-format
-msgid "PIN for '%1'"
-msgstr "PIN za '%1'"
-
-#: ../plugins/bluetooth//ProvidePinCodeDialog.qml:63
-#: ../plugins/bluetooth//ProvidePasskeyDialog.qml:62
-msgid "Pair"
-msgstr "Seznani"
-
-#. TRANSLATORS: %1 is the name of the bluetooth device being paired
-#: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:37
-#, qt-format
-msgid "Please confirm that the PIN displayed on '%1' matches this one"
-msgstr "Potrdite, da se PIN, prikazan na '%1', ujema s tem"
-
-#: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:57
-msgid "Confirm PIN"
-msgstr "Potrdi PIN"
-
-#: ../plugins/sound//SilentModeWarning.qml:31
-msgid "The phone is in Silent Mode."
-msgstr "Telefon je v Tihem načinu."
-
-#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
-#: ../plugins/sound//PageComponent.qml:37
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:38
-msgid "Sound"
-msgstr "Zvok"
-
-#: ../plugins/sound//PageComponent.qml:76
-msgid "Silent Mode"
-msgstr "Tihi način"
-
-#: ../plugins/sound//PageComponent.qml:80
-msgid "Ringer:"
-msgstr "Zvok:"
-
-#: ../plugins/sound//PageComponent.qml:112
-msgid "Phone calls:"
-msgstr "Telefonski klici:"
-
-#: ../plugins/sound//PageComponent.qml:116
-#: ../plugins/sound//PageComponent.qml:122
-msgid "Ringtone"
-msgstr "Ton zvonjenja"
-
-#: ../plugins/sound//PageComponent.qml:135
-msgid "Vibrate when ringing"
-msgstr "Vibriraj med zvonenjem"
-
-#: ../plugins/sound//PageComponent.qml:144
-#: ../plugins/sound//PageComponent.qml:188
-msgid "Vibrate in Silent Mode"
-msgstr "Vibriraj v Tihem načinu"
-
-#: ../plugins/sound//PageComponent.qml:157
-msgid "Messages:"
-msgstr "Sporočila:"
-
-#: ../plugins/sound//PageComponent.qml:161
-#: ../plugins/sound//PageComponent.qml:167
-msgid "Message received"
-msgstr "Sporočilo je bilo prejeto"
-
-#: ../plugins/sound//PageComponent.qml:179
-msgid "Vibrate with message sound"
-msgstr "Vibriraj z zvokom sporočila"
-
-#: ../plugins/sound//PageComponent.qml:192
-msgid "Other sounds:"
-msgstr "Drugi zvoki:"
-
-#: ../plugins/sound//PageComponent.qml:210
-msgid "Lock sound"
-msgstr "Zvok zaklepa"
-
-#: ../plugins/sound//SoundsList.qml:60
-msgid "Stop playing"
-msgstr "Ustavi predvajanje"
-
-#: ../plugins/wifi//NetworkDetails.qml:36
-msgid "Network details"
-msgstr "Podrobnosti omrežja"
-
-#: ../plugins/wifi//NetworkDetails.qml:51
-msgid "Last connected"
-msgstr "Nazadnje povezano"
-
-#: ../plugins/wifi//OtherNetwork.qml:88 ../plugins/wifi//NetworkDetails.qml:61
-msgid "Password"
-msgstr "Geslo"
-
-#: ../plugins/wifi//NetworkDetails.qml:73
-msgid "Show password"
-msgstr "Pokaži geslo"
-
-#: ../plugins/wifi//NetworkDetails.qml:83
-msgid "Forget network"
-msgstr "Pozabi omrežje"
-
-#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: ../plugins/battery//PageComponent.qml:333
-#: ../plugins/wifi//PageComponent.qml:26
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:44
-msgid "Wi-Fi"
-msgstr "Wi-Fi"
-
-#: ../plugins/wifi//PreviousNetworks.qml:26
-#: ../plugins/wifi//PageComponent.qml:129
-msgid "Previous networks"
-msgstr "Predhodna omrežja"
-
-#: ../plugins/wifi//PageComponent.qml:138
-msgid "Connect to hidden network…"
-msgstr "Poveži se s skritim omrežjem ..."
-
-#: ../plugins/wifi//OtherNetwork.qml:96
-msgid "Connect to Hidden Network"
-msgstr "Poveži se s skritim omrežjem"
-
-#: ../plugins/wifi//OtherNetwork.qml:65
-msgid "Network name"
-msgstr "Ime omrežja"
-
-#: ../plugins/wifi//OtherNetwork.qml:78
-#: ../plugins/security-privacy//PageComponent.qml:126
-msgid "Security"
-msgstr "Varnost"
-
-#: ../plugins/wifi//OtherNetwork.qml:80
-msgid "WPA & WPA2 Personal"
-msgstr "Osebni WPA in WPA2"
-
-#: ../plugins/wifi//OtherNetwork.qml:81
-msgid "WEP"
-msgstr "WEP"
 
 #: ../plugins/wifi//RemoveBackground.qml:28
 msgid "Clear"
 msgstr "Počisti"
+
+#: ../plugins/wifi//NetworkDetailsBrief.qml:42
+#: ../plugins/bluetooth//PageComponent.qml:411
+msgid "Disconnect"
+msgstr "Prekini povezavo"
+
+#: ../plugins/wifi//NetworkDetailsBrief.qml:58
+msgid "IP address"
+msgstr "Naslov IP"
+
+#: ../plugins/wifi//PreviousNetworks.qml:27
+#: ../plugins/wifi//PageComponent.qml:132
+msgid "Previous networks"
+msgstr "Predhodna omrežja"
 
 #: ../plugins/wifi//Common.qml:36
 msgid "Unknown error"
@@ -844,13 +227,98 @@ msgstr "Omrežja Wi-Fi ni mogoče najti"
 msgid "A secondary connection of the base connection failed"
 msgstr "Drugo povezovanje z osnovno povezavo je spodletelo"
 
-#: ../plugins/wifi//NetworkDetailsBrief.qml:58
-msgid "IP address"
-msgstr "Naslov IP"
+#: ../plugins/wifi//Common.qml:96 ../plugins/bluetooth//PageComponent.qml:86
+msgid "Unknown"
+msgstr "Neznano"
+
+#: ../plugins/wifi//OtherNetwork.qml:96
+msgid "Connect to Hidden Network"
+msgstr "Poveži se s skritim omrežjem"
+
+#: ../plugins/wifi//OtherNetwork.qml:187
+msgid "Network name"
+msgstr "Ime omrežja"
+
+#: ../plugins/wifi//OtherNetwork.qml:203
+#: ../plugins/security-privacy//PageComponent.qml:126
+msgid "Security"
+msgstr "Varnost"
+
+#: ../plugins/wifi//OtherNetwork.qml:214
+#: ../plugins/bluetooth//PageComponent.qml:116
+#: ../plugins/bluetooth//PageComponent.qml:326
+#: ../plugins/bluetooth//PageComponent.qml:347
+msgid "None"
+msgstr "Brez"
+
+#: ../plugins/wifi//OtherNetwork.qml:215
+msgid "WPA & WPA2 Personal"
+msgstr "Osebni WPA in WPA2"
+
+#: ../plugins/wifi//OtherNetwork.qml:216
+msgid "WEP"
+msgstr "WEP"
+
+#: ../plugins/wifi//OtherNetwork.qml:222
+#: ../plugins/wifi//NetworkDetails.qml:64
+#: ../plugins/cellular//CustomApnEditor.qml:222
+msgid "Password"
+msgstr "Geslo"
+
+#: ../plugins/wifi//OtherNetwork.qml:256
+#: ../plugins/wifi//NetworkDetails.qml:77
+msgid "Show password"
+msgstr "Pokaži geslo"
+
+#: ../plugins/wifi//OtherNetwork.qml:304
+#: ../plugins/bluetooth//PageComponent.qml:411
+msgid "Connect"
+msgstr "Poveži"
+
+#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
+#: ../plugins/wifi//PageComponent.qml:28
+#: ../plugins/battery//PageComponent.qml:333
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:24
+msgid "Wi-Fi"
+msgstr "Wi-Fi"
+
+#: ../plugins/wifi//PageComponent.qml:139
+msgid "Connect to hidden network…"
+msgstr "Poveži se s skritim omrežjem ..."
+
+#: ../plugins/wifi//NetworkDetails.qml:38
+msgid "Network details"
+msgstr "Podrobnosti omrežja"
+
+#: ../plugins/wifi//NetworkDetails.qml:45
+#: ../plugins/bluetooth//PageComponent.qml:346
+msgid "Name"
+msgstr "Ime"
+
+#: ../plugins/wifi//NetworkDetails.qml:53
+msgid "Last connected"
+msgstr "Nazadnje povezano"
+
+#: ../plugins/wifi//NetworkDetails.qml:58
+#: ../plugins/battery//PageComponent.qml:315
+#: ../plugins/battery//PageComponent.qml:324
+#: ../plugins/battery//SleepValues.qml:106
+#: ../plugins/security-privacy//PhoneLocking.qml:78
+#: ../plugins/security-privacy//PhoneLocking.qml:87
+#: ../plugins/security-privacy//PageComponent.qml:140
+#: ../plugins/about//PageComponent.qml:167
+#: ../plugins/system-update//PageComponent.qml:762
+#: ../plugins/system-update//Configuration.qml:52
+msgid "Never"
+msgstr "Nikoli"
+
+#: ../plugins/wifi//NetworkDetails.qml:88
+msgid "Forget network"
+msgstr "Pozabi omrežje"
 
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
 #: ../plugins/notifications//PageComponent.qml:29
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:98
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:44
 msgid "Notifications"
 msgstr "Obvestila"
 
@@ -862,723 +330,87 @@ msgstr ""
 "Izbrani programi vas lahko opozorijo s pomočjo obvestilnih mehurčkov, "
 "zvokov, vibracij ter Središča za obvestila."
 
-#: ../plugins/about//License.qml:30
-msgid "Sorry, this license could not be displayed."
-msgstr "Tega dovoljenja ni mogoče prikazati."
+#: ../plugins/sound//SoundsList.qml:60
+msgid "Stop playing"
+msgstr "Ustavi predvajanje"
 
-#: ../plugins/about//PageComponent.qml:139 ../plugins/about//Storage.qml:33
-msgid "Storage"
-msgstr "Shramba"
-
-#: ../plugins/about//Storage.qml:87
-msgid "Used by Ubuntu"
-msgstr "Uporablja Ubuntu"
-
-#: ../plugins/about//Storage.qml:88
-msgid "Videos"
-msgstr "Video"
-
-#: ../plugins/about//Storage.qml:89
-msgid "Audio"
+#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
+#: ../plugins/sound//PageComponent.qml:37
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:68
+msgid "Sound"
 msgstr "Zvok"
 
-#: ../plugins/about//Storage.qml:90
-msgid "Pictures"
-msgstr "Slike"
-
-#: ../plugins/about//Storage.qml:91
-msgid "Other files"
-msgstr "Druge datoteke"
-
-#: ../plugins/about//Storage.qml:92
-msgid "Used by apps"
-msgstr "Uporabljajo programi"
-
-#: ../plugins/about//Storage.qml:142
-msgid "Total storage"
-msgstr "Celotna shramba"
-
-#: ../plugins/about//Storage.qml:154
-msgid "Free space"
-msgstr "Nezaseden prostor"
-
-#: ../plugins/about//Storage.qml:174
-msgid "By name"
-msgstr "Po imenu"
-
-#: ../plugins/about//Storage.qml:174
-msgid "By size"
-msgstr "Po velikosti"
-
-#: ../plugins/battery//PageComponent.qml:131
-#: ../plugins/battery//PageComponent.qml:287
-#: ../plugins/cellular//PageChooseCarriers.qml:49
-#: ../plugins/cellular//PageChooseCarriers.qml:65
-#: ../plugins/about//Storage.qml:204
-#: ../plugins/cellular//Components//SingleSim.qml:62
-#: ../plugins/cellular//Components//NoSim.qml:48
-msgid "N/A"
-msgstr "Ni na voljo"
-
-#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: ../plugins/about//PageComponent.qml:34
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:84
-msgid "About this phone"
-msgstr "O tem telefonu"
-
-#: ../plugins/about//PageComponent.qml:105
-msgid "Serial"
-msgstr "Zaporedna številka"
-
-#: ../plugins/about//PageComponent.qml:120
-msgid "Wi-Fi address"
-msgstr "Naslov Wi-Fi-ja"
-
-#: ../plugins/about//PageComponent.qml:128
-msgid "Bluetooth address"
-msgstr "Naslov Bluetootha"
-
-#: ../plugins/about//PageComponent.qml:144
-#, qt-format
-msgid "%1 free"
-msgstr "%1 prosto"
-
-#: ../plugins/about//PageComponent.qml:146
-msgid "Software:"
-msgstr "Programska oprema:"
-
-#: ../plugins/about//PageComponent.qml:151
-msgid "OS"
-msgstr "OS"
-
-#: ../plugins/about//PageComponent.qml:160
-msgid "Last updated"
-msgstr "Nazadnje posodobljeno"
-
-#: ../plugins/about//PageComponent.qml:168
-msgid "Check for updates"
-msgstr "Preveri za posodobitve"
-
-#: ../plugins/about//PageComponent.qml:177
-msgid "Legal:"
-msgstr "Pravno:"
-
-#: ../plugins/about//Software.qml:11 ../plugins/about//PageComponent.qml:182
-msgid "Software licenses"
-msgstr "Programska dovoljenja"
-
-#: ../plugins/about//PageComponent.qml:190
-msgid "Regulatory info"
-msgstr "Regulatorni podatki"
-
-#: ../plugins/about//PageComponent.qml:198
-msgid "Developer mode"
-msgstr "Način za razvijalce"
-
-#: ../plugins/about//Version.qml:36
-msgid "OS Build Details"
-msgstr "Podrobnosti izgradnje OS-a"
-
-#: ../plugins/about//Version.qml:61
-msgid "OS build number"
-msgstr "Številka izgradnje OS-a"
-
-#: ../plugins/about//Version.qml:67
-msgid "Ubuntu Image part"
-msgstr "Del odtisa Ubuntu"
-
-#: ../plugins/about//Version.qml:75
-msgid "Ubuntu build description"
-msgstr "Opis izgradnje Ubuntuja"
-
-#: ../plugins/about//Version.qml:81
-msgid "Device Image part"
-msgstr "Del odtisa naprave"
-
-#: ../plugins/about//Version.qml:88
-msgid "Device build description"
-msgstr "Opis izgradnje naprave"
-
-#: ../plugins/about//Version.qml:95
-msgid "Customization Image part"
-msgstr "Del odtisa prilagoditve"
-
-#: ../plugins/about//PhoneNumber.qml:36
-msgid "Phone number"
-msgstr "Telefonska številka"
-
-#: ../plugins/about//PhoneNumbers.qml:31
-msgid "Phone number:"
-msgstr "Telefonska številka:"
-
-#: ../plugins/about//DevMode.qml:35 ../plugins/about//DevMode.qml:88
-msgid "Developer Mode"
-msgstr "Način za razvijalce"
-
-#: ../plugins/about//DevMode.qml:82
-msgid ""
-"In Developer Mode, anyone can access, change or delete anything on this "
-"phone by connecting it to another device."
-msgstr ""
-"V Načinu za razvijalce lahko vsak dostopa, spreminja ali briše vse na tem "
-"telefonu s povezovanjem z drugo napravo."
-
-#: ../plugins/about//DevMode.qml:108
-msgid "You need a PIN code or passphrase set to use Developer Mode."
-msgstr ""
-"Za uporabo Načina za razvijalce potrebujete nastavljeno kodo PIN ali "
-"šifrirno reklo."
-
-#: ../plugins/about//DevMode.qml:114
-#: ../plugins/security-privacy//LockSecurity.qml:32
-#: ../plugins/security-privacy//PhoneLocking.qml:49
-msgid "Lock security"
-msgstr "Zakleni varnost"
-
-#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: ../plugins/security-privacy//PageComponent.qml:37
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:138
-msgid "Security & Privacy"
-msgstr "Varnost in zasebnost"
-
-#: ../plugins/security-privacy//Dash.qml:46
-#: ../plugins/security-privacy//PageComponent.qml:100
-#: ../plugins/security-privacy//PageComponent.qml:218
-msgid "Phone and Internet"
-msgstr "telefona in interneta"
-
-#: ../plugins/security-privacy//Dash.qml:46
-#: ../plugins/security-privacy//PageComponent.qml:102
-#: ../plugins/security-privacy//PageComponent.qml:219
-msgid "Phone only"
-msgstr "samo telefona"
-
-#: ../plugins/security-privacy//PageComponent.qml:131
-msgid "Lock phone"
-msgstr "Zakleni telefon"
-
-#. TRANSLATORS: %1 is the number of minutes
-#: ../plugins/battery//SleepValues.qml:83
-#: ../plugins/battery//SleepValues.qml:87
-#: ../plugins/battery//SleepValues.qml:91
-#: ../plugins/battery//SleepValues.qml:95
-#: ../plugins/battery//SleepValues.qml:99
-#: ../plugins/battery//SleepValues.qml:103
-#: ../plugins/battery//PageComponent.qml:312
-#: ../plugins/battery//PageComponent.qml:321
-#: ../plugins/security-privacy//PageComponent.qml:137
-#: ../plugins/security-privacy//PageComponent.qml:146
-#, qt-format
-msgid "After %1 minute"
-msgid_plural "After %1 minutes"
-msgstr[0] "Po %1 minutah"
-msgstr[1] "Po %1 minuti"
-msgstr[2] "Po %1 minutah"
-msgstr[3] "Po %1 minutah"
-
-#: ../plugins/cellular//PageChooseCarrier.qml:103
-#: ../plugins/time-date//ChooseTimeZone.qml:47
-#: ../plugins/time-date//PageComponent.qml:69
-#: ../plugins/security-privacy//PageComponent.qml:149
-msgid "Manually"
-msgstr "Ročno"
-
-#: ../plugins/security-privacy//SimPin.qml:34
-#: ../plugins/security-privacy//SimPin.qml:322
-#: ../plugins/security-privacy//PageComponent.qml:158
-msgid "SIM PIN"
-msgstr "Geslo PIN kartice SIM"
-
-#: ../plugins/security-privacy//PageComponent.qml:161
-#: ../plugins/security-privacy//PageComponent.qml:244
-msgid "On"
-msgstr "Omogočeno"
-
-#: ../plugins/security-privacy//PageComponent.qml:165
-#: ../plugins/security-privacy//PageComponent.qml:244
-#: ../plugins/cellular//Components//NoSim.qml:32
-#: ../plugins/cellular//Components//CellularMultiSim.qml:30
-#: ../plugins/cellular//Components//CellularSingleSim.qml:50
-msgid "Off"
-msgstr "Onemogočeno"
-
-#: ../plugins/security-privacy//PageComponent.qml:172
-msgid "Encryption"
-msgstr "Šifriranje"
-
-#: ../plugins/security-privacy//PageComponent.qml:181
-msgid ""
-"Encryption protects against access to phone data when the phone is connected "
-"to a PC or other device."
-msgstr ""
-"Šifriranje ščiti pred dostopom podatkov na telefonu, ko je telefon povezan z "
-"računalnikom ali drugo napravo."
-
-#: ../plugins/security-privacy//PageComponent.qml:185
-msgid "Privacy"
-msgstr "Zasebnost"
-
-#: ../plugins/security-privacy//PageComponent.qml:188
-msgid "Stats on welcome screen"
-msgstr "Statistika na pozdravnem zaslonu"
-
-#: ../plugins/security-privacy//PageComponent.qml:201
-msgid "Messages on welcome screen"
-msgstr "Sporočila na pozdravnem zaslonu"
-
-#: ../plugins/security-privacy//Dash.qml:29
-#: ../plugins/security-privacy//PageComponent.qml:216
-msgid "Dash search"
-msgstr "Iskanje v pregledni plošči"
-
-#: ../plugins/security-privacy//PageComponent.qml:235
-msgid "Location access"
-msgstr "Dostop do položaja"
-
-#: ../plugins/security-privacy//AppAccess.qml:28
-#: ../plugins/security-privacy//PageComponent.qml:253
-msgid "Other app access"
-msgstr "Dostop do drugega programa"
-
-#: ../plugins/security-privacy//PageComponent.qml:258
-#: ../plugins/security-privacy//diagnostics//PageComponent.qml:30
-msgid "Diagnostics"
-msgstr "Diagnostika"
-
-#. TRANSLATORS: This string is shown when crash
-#. reports are to be sent by the system.
-#: ../plugins/security-privacy//PageComponent.qml:263
-msgid "Sent"
-msgstr "Poslano"
-
-#. TRANSLATORS: This string is shown when crash
-#. reports are not to be sent by the system
-#: ../plugins/security-privacy//PageComponent.qml:266
-msgid "Not sent"
-msgstr "Ni poslano"
-
-#: ../plugins/security-privacy//Dash.qml:45
-msgid "Return results from:"
-msgstr "Vrni rezultate od:"
-
-#: ../plugins/security-privacy//Location.qml:31
-#: ../wizard/qml/Pages//30-location.qml:25
-msgid "Location"
-msgstr "Položaj"
-
-#: ../plugins/security-privacy//Location.qml:49
-msgid "Location detection"
-msgstr "Odkrivanje položaja"
-
-#: ../plugins/security-privacy//Location.qml:71
-msgid ""
-"Uses GPS to detect your rough location. When off, GPS turns off to save "
-"battery."
-msgstr ""
-"Uporabi GPS za odkritje Vaše grobega položaja. Kadar je ugasnjen, se GPS "
-"izklopi za varčevanje energije."
-
-#: ../plugins/security-privacy//Location.qml:73
-msgid ""
-"Uses wi-fi and GPS to detect your rough location. Turning off location "
-"detection saves battery."
-msgstr ""
-"Uporablja wi-fi in GPS za odkrivanje Vašega grobega položaja. Izklop "
-"odkrivanja položaja prihrani energijo."
-
-#: ../plugins/security-privacy//Location.qml:75
-msgid ""
-"Uses wi-fi (currently off) and GPS to detect your rough location. Turning "
-"off location detection saves battery."
-msgstr ""
-"Uporablja wi-fi (trenutno izklopljen) in GPS za odkrivanje Vašega grobega "
-"položaja. Izklop odkrivanja položaja prihrani energijo."
-
-#: ../plugins/security-privacy//Location.qml:77
-msgid ""
-"Uses wi-fi, cell tower locations, and GPS to detect your rough location. "
-"Turning off location detection saves battery."
-msgstr ""
-"Uporablja wi-fi, položaje baznih postaj in GPS za odkrivanje Vašega grobega "
-"položaja. Izklop odkrivanja položaja prihrani energijo."
-
-#: ../plugins/security-privacy//Location.qml:79
-msgid ""
-"Uses wi-fi, cell tower locations (no current cellular connection), and GPS "
-"to detect your rough location. Turning off location detection saves battery."
-msgstr ""
-"Uporablja wi-fi, položaje baznih postaj (trenutno ni mobilne povezave) in "
-"GPS za odkrivanje Vašega grobega položaja. Izklop odkrivanja položaja "
-"prihrani energijo."
-
-#: ../plugins/security-privacy//Location.qml:81
-msgid ""
-"Uses wi-fi (currently off), cell tower locations, and GPS to detect your "
-"rough location. Turning off location detection saves battery."
-msgstr ""
-"Uporablja wi-fi (trenutno izklopljen), položaje baznih postaj in GPS za "
-"odkrivanje Vašega grobega položaja. Izklop odkrivanja položaja prihrani "
-"energijo."
-
-#: ../plugins/security-privacy//Location.qml:83
-msgid ""
-"Uses wi-fi (currently off), cell tower locations (no current cellular "
-"connection), and GPS to detect your rough location. Turning off location "
-"detection saves battery."
-msgstr ""
-"Uporablja wi-fi (trenutno izklopljen), položaje baznih postaj (trenutno ni "
-"mobilne povezave) in GPS za odkrivanje Vašega grobega položaja. Izklop "
-"odkrivanja položaja prihrani energijo."
-
-#: ../plugins/security-privacy//Location.qml:90
-msgid "Allow access to location:"
-msgstr "Dovoli dostop do mesta:"
-
-#: ../plugins/security-privacy//SimPin.qml:44
-msgid "Change SIM PIN"
-msgstr "Spremeni PIN kartice SIM"
-
-#: ../plugins/security-privacy//SimPin.qml:47
-#, qt-format
-msgid "Incorrect PIN. %1 attempt remaining."
-msgid_plural "Incorrect PIN. %1 attempts remaining."
-msgstr[0] "Nepravilen PIN. Ostaja še %1 poskusov."
-msgstr[1] "Nepravilen PIN. Ostaja še %1 poskus."
-msgstr[2] "Nepravilen PIN. Ostajata še %1 poskusa."
-msgstr[3] "Nepravilen PIN. Ostajajo še %1 poskusi."
-
-#: ../plugins/security-privacy//SimPin.qml:81
-msgid "Current PIN:"
-msgstr "Trenutni PIN:"
-
-#: ../plugins/security-privacy//SimPin.qml:93
-#, qt-format
-msgid "%1 attempt allowed."
-msgid_plural "%1 attempts allowed."
-msgstr[0] "Dovoljenih je %1 poskusov."
-msgstr[1] "Dovoljen je %1 poskus."
-msgstr[2] "Dovoljena sta %1 poskusa."
-msgstr[3] "Dovoljeni so %1 poskusi."
-
-#: ../plugins/security-privacy//SimPin.qml:107
-msgid "Choose new PIN:"
-msgstr "Izberite nov PIN:"
-
-#: ../plugins/security-privacy//SimPin.qml:118
-msgid "Confirm new PIN:"
-msgstr "Potrdite novi PIN:"
-
-#: ../plugins/security-privacy//SimPin.qml:137
-msgid "PINs don't match. Try again."
-msgstr "PIN-a se ne ujemata. Poskusite znova."
-
-#: ../plugins/cellular//HotspotSetup.qml:94
-#: ../plugins/security-privacy//LockSecurity.qml:302
-#: ../plugins/security-privacy//SimPin.qml:157
-msgid "Change"
-msgstr "Spremeni"
-
-#: ../plugins/security-privacy//SimPin.qml:183
-msgid "Enter SIM PIN"
-msgstr "Vnesite PIN kartice SIM"
-
-#: ../plugins/security-privacy//SimPin.qml:184
-msgid "Enter Previous SIM PIN"
-msgstr "Vnesite predhodni PIN kartice SIM"
-
-#: ../plugins/security-privacy//SimPin.qml:187
-#, qt-format
-msgid "Incorrect PIN. %1 attempts remaining."
-msgstr "Nepravilen PIN. Ostaja še %1 poskusov."
-
-#: ../plugins/security-privacy//SimPin.qml:246
-#, qt-format
-msgid "%1 attempts allowed."
-msgstr "Dovoljenih je %1 poskusov."
-
-#: ../plugins/security-privacy//SimPin.qml:282
-msgid "Unlock"
-msgstr "Odkleni"
-
-#: ../plugins/security-privacy//SimPin.qml:282
-msgid "Lock"
-msgstr "Zakleni"
-
-#: ../plugins/security-privacy//SimPin.qml:340
-msgid "Change PIN…"
-msgstr "Spremeni PIN ..."
-
-#: ../plugins/security-privacy//SimPin.qml:357
-msgid ""
-"When a SIM PIN is set, it must be entered to access cellular services after "
-"restarting the phone or swapping the SIM."
-msgstr ""
-"Ko je PIN kartice SIM nastavljen, mora po ponovnem zagonu telefona ali "
-"zamenjavi SIM-a biti vnešen za dostop do mobilnih storitev."
-
-#: ../plugins/security-privacy//SimPin.qml:361
-msgid "Entering an incorrect PIN repeatedly may lock the SIM permanently."
-msgstr "Vnos večkrat nepravilnega PIN-a lahko trajno zaklene SIM."
-
-#: ../plugins/security-privacy//PhoneLocking.qml:31
-msgid "Phone locking"
-msgstr "Zaklepanje telefona"
-
-#: ../plugins/security-privacy//PhoneLocking.qml:45
-msgctxt "Unlock with swipe"
-msgid "None"
-msgstr "Brez"
-
-#: ../plugins/security-privacy//PhoneLocking.qml:46
-#: ../wizard/qml/Pages//15-passwd.qml:99
-msgid "PIN code"
-msgstr "koda PIN"
-
-#: ../plugins/security-privacy//LockSecurity.qml:350
-#: ../plugins/security-privacy//PhoneLocking.qml:47
-#: ../wizard/qml/Pages//15-passwd.qml:101
-msgid "Passphrase"
-msgstr "šifrirnim reklom"
-
-#: ../plugins/battery//PageComponent.qml:306
-#: ../plugins/security-privacy//PhoneLocking.qml:68
-msgid "Lock when idle"
-msgstr "Zakleni med nedejavnostjo"
-
-#: ../plugins/battery//PageComponent.qml:306
-#: ../plugins/security-privacy//PhoneLocking.qml:69
-msgid "Sleep when idle"
-msgstr "V pripravljenost med nedejavnostjo"
-
-#. TRANSLATORS: %1 is the number of minutes
-#: ../plugins/security-privacy//PhoneLocking.qml:75
-#: ../plugins/security-privacy//PhoneLocking.qml:84
-#, qt-format
-msgid "%1 minute"
-msgid_plural "%1 minutes"
-msgstr[0] "%1 minut"
-msgstr[1] "%1 minuta"
-msgstr[2] "%1 minuti"
-msgstr[3] "%1 minute"
-
-#: ../plugins/security-privacy//PhoneLocking.qml:101
-msgid "Sleep locks immediately"
-msgstr "Način pripravljenosti zaklene takoj"
-
-#: ../plugins/security-privacy//PhoneLocking.qml:106
-msgid "When locked, allow:"
-msgstr "Ko je zaklenjen, dovoli:"
-
-#: ../plugins/security-privacy//PhoneLocking.qml:110
-msgid "Launcher"
-msgstr "Zaganjalnik"
-
-#: ../plugins/security-privacy//PhoneLocking.qml:120
-msgid "Notifications and quick settings"
-msgstr "Obvestila in hitre nastavitve"
-
-#: ../plugins/security-privacy//PhoneLocking.qml:131
-msgid "Turn on lock security to restrict access when the phone is locked."
-msgstr ""
-"Vključi varnostni zaklep za omejitev dostopa, ko je telefon zaklenjen."
-
-#: ../plugins/security-privacy//PhoneLocking.qml:132
-msgid "Other apps and functions will prompt you to unlock."
-msgstr "Drugi programi in funkcije vas bodo pozvale k odklepu."
-
-#: ../plugins/security-privacy//AppAccess.qml:35
-msgid "Apps that you have granted and have requested access to:"
-msgstr "Programi, kateri imajo vaše dovoljenje ter so zahtevali dostop do:"
-
-#: ../plugins/security-privacy//AppAccess.qml:42
-msgid "Apps that have requested access to your camera"
-msgstr "Programi, kateri so zahtevali dostop do vašega fotoaparata"
-
-#: ../plugins/security-privacy//AppAccess.qml:46
-msgid "Mic"
-msgstr "Mikrofon"
-
-#: ../plugins/security-privacy//AppAccess.qml:47
-msgid "Apps that have requested access to your mic"
-msgstr "Programi, kateri so zahtevali dostop do vašega mikrofona"
-
-#: ../plugins/security-privacy//AppAccess.qml:59
-#, qt-format
-msgid "%1/%2"
-msgstr "%1/%2"
-
-#: ../plugins/security-privacy//AppAccess.qml:60
-msgid "0"
-msgstr "0"
-
-#: ../plugins/security-privacy//LockSecurity.qml:96
-#: ../plugins/security-privacy//LockSecurity.qml:384
-msgid "Change PIN code…"
-msgstr "Spremeni kodo PIN ..."
-
-#: ../plugins/security-privacy//LockSecurity.qml:98
-#: ../plugins/security-privacy//LockSecurity.qml:385
-msgid "Change passphrase…"
-msgstr "Spremeni šifrirno reklo ..."
-
-#: ../plugins/security-privacy//LockSecurity.qml:105
-msgid "Switch to swipe"
-msgstr "Preklopi na poteg"
-
-#: ../plugins/security-privacy//LockSecurity.qml:107
-msgid "Switch to PIN code"
-msgstr "Preklopi na kodo PIN"
-
-#: ../plugins/security-privacy//LockSecurity.qml:109
-msgid "Switch to passphrase"
-msgstr "Preklopi na šifrirno reklo"
-
-#: ../plugins/security-privacy//LockSecurity.qml:118
-msgid "Existing PIN code"
-msgstr "Obstoječa koda PIN"
-
-#: ../plugins/security-privacy//LockSecurity.qml:120
-msgid "Existing passphrase"
-msgstr "Obstoječe šifrirno reklo"
-
-#: ../plugins/security-privacy//LockSecurity.qml:174
-msgid "Choose PIN code"
-msgstr "Izberite kodo PIN"
-
-#: ../plugins/security-privacy//LockSecurity.qml:176
-msgid "Choose passphrase"
-msgstr "Izberi šifrirno reklo"
-
-#: ../plugins/security-privacy//LockSecurity.qml:220
-msgid "Confirm PIN code"
-msgstr "Potrdite kodo PIN"
-
-#: ../plugins/security-privacy//LockSecurity.qml:222
-msgid "Confirm passphrase"
-msgstr "Potrdi šifrirno reklo"
-
-#: ../plugins/security-privacy//LockSecurity.qml:265
-msgid "Those PIN codes don't match. Try again."
-msgstr "Ti kodi PIN se ne ujemata. Poskusite znova."
-
-#: ../plugins/security-privacy//LockSecurity.qml:268
-msgid "Those passphrases don't match. Try again."
-msgstr "Ti šifrirni rekli se ne ujemata. Poskusite znova."
-
-#: ../plugins/security-privacy//LockSecurity.qml:299
-msgid "Unset"
-msgstr "Prekliči nastavitev"
-
-#: ../plugins/security-privacy//LockSecurity.qml:344
-msgid "Unlock the phone using:"
-msgstr "Odkleni telefon s:"
-
-#: ../plugins/security-privacy//LockSecurity.qml:348
-msgid "Swipe (no security)"
-msgstr "potegom (brez varnosti)"
-
-#: ../plugins/security-privacy//LockSecurity.qml:349
-msgid "4-digit PIN code"
-msgstr "4-številčna koda PIN"
-
-#: ../plugins/security-privacy//LockSecurity.qml:351
-msgid "Swipe (no security)… "
-msgstr "Poteg (brez varnosti) ... "
-
-#: ../plugins/security-privacy//LockSecurity.qml:352
-msgid "4-digit PIN code…"
-msgstr "4-številčna koda PIN ..."
-
-#: ../plugins/security-privacy//LockSecurity.qml:353
-msgid "Passphrase…"
-msgstr "Šifrirno reklo ..."
-
-#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
-#: ../plugins/time-date//PageComponent.qml:29
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:74
-msgid "Time & Date"
-msgstr "Datum in čas"
-
-#: ../plugins/time-date//PageComponent.qml:53
-msgid "Time zone:"
-msgstr "Časovni pas:"
-
-#: ../plugins/time-date//PageComponent.qml:68
-msgid "Set the time and date:"
-msgstr "Nastavi čas in datum:"
-
-#: ../plugins/cellular//PageChooseCarrier.qml:103
-#: ../plugins/time-date//ChooseTimeZone.qml:47
-#: ../plugins/time-date//PageComponent.qml:69
-msgid "Automatically"
-msgstr "Samodejno"
-
-#: ../plugins/time-date//TimePicker.qml:26
-msgid "Set time & date"
-msgstr "Nastavi čas in datum"
-
-#: ../plugins/time-date//TimePicker.qml:68
-msgid "Time"
-msgstr "Čas"
-
-#: ../plugins/time-date//TimePicker.qml:81
-msgid "Hour"
-msgstr "Ura"
-
-#: ../plugins/time-date//TimePicker.qml:95
-msgid "Minute"
-msgstr "Minute"
-
-#: ../plugins/time-date//TimePicker.qml:109
-msgid "Second"
-msgstr "Sekunde"
-
-#: ../plugins/time-date//TimePicker.qml:118
-msgid "Date"
-msgstr "Datum"
-
-#: ../plugins/time-date//TimePicker.qml:130
-msgid "Day"
-msgstr "Dan"
-
-#: ../plugins/time-date//TimePicker.qml:144
-msgid "Month"
-msgstr "Mesec"
-
-#: ../plugins/time-date//TimePicker.qml:162
-msgid "Year"
-msgstr "Leto"
-
-#: ../plugins/time-date//ChooseTimeZone.qml:28
-msgid "Time zone"
-msgstr "Časovni pas"
-
-#: ../plugins/time-date//ChooseTimeZone.qml:46
-msgid "Set the time zone:"
-msgstr "Nastavi časovni pas:"
-
-#: ../plugins/time-date//ChooseTimeZone.qml:126
-msgid "Enter your current location."
-msgstr "Vnesite Vaš trenutni kraj."
-
-#: ../plugins/time-date//ChooseTimeZone.qml:127
-msgid "No matching place"
-msgstr "Kraja ni mogoče najti"
-
-#: ../plugins/reset//ResetLauncherHome.qml:40
-msgid "The Launcher will be returned to its original contents."
-msgstr "Zaganjalnik se bo vrnil na izvirno vsebino."
-
-#: ../plugins/reset//ResetLauncherHome.qml:44
-#: ../plugins/reset//PageComponent.qml:73
-msgid "Reset Launcher"
-msgstr "Ponastavi zaganjalnik"
+#: ../plugins/sound//PageComponent.qml:76
+msgid "Silent Mode"
+msgstr "Tihi način"
+
+#: ../plugins/sound//PageComponent.qml:80
+msgid "Ringer:"
+msgstr "Zvok:"
+
+#: ../plugins/sound//PageComponent.qml:112
+msgid "Phone calls:"
+msgstr "Telefonski klici:"
+
+#: ../plugins/sound//PageComponent.qml:116
+#: ../plugins/sound//PageComponent.qml:122
+msgid "Ringtone"
+msgstr "Ton zvonjenja"
+
+#: ../plugins/sound//PageComponent.qml:135
+msgid "Vibrate when ringing"
+msgstr "Vibriraj med zvonenjem"
+
+#: ../plugins/sound//PageComponent.qml:144
+#: ../plugins/sound//PageComponent.qml:188
+msgid "Vibrate in Silent Mode"
+msgstr "Vibriraj v Tihem načinu"
+
+#: ../plugins/sound//PageComponent.qml:153
+#: ../plugins/phone//PageComponent.qml:110
+msgid "Dialpad sounds"
+msgstr "Zvoki številčnice"
+
+#: ../plugins/sound//PageComponent.qml:157
+msgid "Messages:"
+msgstr "Sporočila:"
+
+#: ../plugins/sound//PageComponent.qml:161
+#: ../plugins/sound//PageComponent.qml:167
+msgid "Message received"
+msgstr "Sporočilo je bilo prejeto"
+
+#: ../plugins/sound//PageComponent.qml:179
+msgid "Vibrate with message sound"
+msgstr "Vibriraj z zvokom sporočila"
+
+#: ../plugins/sound//PageComponent.qml:192
+msgid "Other sounds:"
+msgstr "Drugi zvoki:"
+
+#: ../plugins/sound//PageComponent.qml:196
+#: ../plugins/language//PageComponent.qml:209
+msgid "Keyboard sound"
+msgstr "Zvok tipkovnice"
+
+#: ../plugins/sound//PageComponent.qml:210
+msgid "Lock sound"
+msgstr "Zvok zaklepa"
+
+#: ../plugins/sound//SilentModeWarning.qml:31
+msgid "The phone is in Silent Mode."
+msgstr "Telefon je v Tihem načinu."
 
 #. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
 #: ../plugins/reset//PageComponent.qml:32
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:114
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:86
 msgid "Reset phone"
 msgstr "Ponastavi telefon"
+
+#: ../plugins/reset//PageComponent.qml:73
+#: ../plugins/reset//ResetLauncherHome.qml:44
+msgid "Reset Launcher"
+msgstr "Ponastavi zaganjalnik"
 
 #: ../plugins/reset//PageComponent.qml:87
 msgid "Reset all system settings…"
@@ -1587,18 +419,6 @@ msgstr "Ponastavi vse sistemske nastavitve ..."
 #: ../plugins/reset//PageComponent.qml:101
 msgid "Erase & Reset Everything…"
 msgstr "Izbriši in ponastavi vse ..."
-
-#: ../plugins/reset//EraseEverything.qml:41
-msgid ""
-"All documents, saved games, settings, and other items will be permanently "
-"deleted from this phone."
-msgstr ""
-"Vsi dokumenti, shranjene igre, nastavitve in drugi predmeti bodo trajno "
-"izbrisani iz tega telefona."
-
-#: ../plugins/reset//EraseEverything.qml:44
-msgid "Erase & Reset Everything"
-msgstr "Izbriši in ponastavi vse"
 
 #: ../plugins/reset//ResetAllSettings.qml:29
 msgid ""
@@ -1612,79 +432,30 @@ msgstr ""
 msgid "Reset all system settings"
 msgstr "Ponastavi vse sistemske nastavitve"
 
-#: ../plugins/cellular//HotspotSetup.qml:29
-msgid "Change hotspot setup"
-msgstr "Spremeni nastavitve vroče dostopne točke"
+#: ../plugins/reset//ResetLauncherHome.qml:40
+msgid "The Launcher will be returned to its original contents."
+msgstr "Zaganjalnik se bo vrnil na izvirno vsebino."
 
-#: ../plugins/cellular//HotspotSetup.qml:40
-msgid "Hotspot name"
-msgstr "Ime vroče vstopne točke"
+#: ../plugins/reset//ResetLauncherHome.qml:59
+#: ../plugins/language//RebootNecessary.qml:34
+msgid "The phone needs to restart for changes to take effect."
+msgstr "Za uveljavitev sprememb se mora telefon znova zagnati."
 
-#: ../plugins/cellular//HotspotSetup.qml:54
-msgid "Key (must be 8 characters or longer)"
-msgstr "Ključ (mora vsebovati najmanj 8 znakov)"
-
-#: ../plugins/cellular//HotspotSetup.qml:68
-msgid "Show key"
-msgstr "Pokaži ključ"
-
-#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: ../plugins/cellular//PageComponent.qml:32
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:18
-msgid "Cellular"
-msgstr "Mobilno omrežje"
-
-#: ../plugins/cellular//PageChooseCarrier.qml:102
-msgid "Choose carrier:"
-msgstr "Izberite operaterja:"
-
-#: ../plugins/cellular//PageChooseCarrier.qml:130
-msgid "Refresh"
-msgstr "Osveži"
-
-#: ../plugins/cellular//PageChooseCarrier.qml:151
-msgid "Searching"
-msgstr "Iskanje"
-
-#: ../plugins/cellular//Hotspot.qml:29
-#: ../plugins/cellular//Components//SingleSim.qml:43
-#: ../plugins/cellular//Components//MultiSim.qml:48
-msgid "Wi-Fi hotspot"
-msgstr "Vroča vstopna točka Wi-Fi"
-
-#: ../plugins/cellular//Hotspot.qml:40
-msgid "Hotspot"
-msgstr "Vroča vstopna točka"
-
-#: ../plugins/cellular//Hotspot.qml:60
+#: ../plugins/reset//EraseEverything.qml:41
 msgid ""
-"When hotspot is on, other devices can use your cellular data connection over "
-"Wi-Fi. Normal data charges apply."
+"All documents, saved games, settings, and other items will be permanently "
+"deleted from this phone."
 msgstr ""
-"ko je vroča vstopna točka vklopljena, lahko druge naprave uporabljajo vašo "
-"povezavo z mobilnimi podatki preko Wi-Fi-ja. Prenosi podatkov bodo morda "
-"zaračunani."
+"Vsi dokumenti, shranjene igre, nastavitve in drugi predmeti bodo trajno "
+"izbrisani iz tega telefona."
 
-#: ../plugins/cellular//Hotspot.qml:61
-msgid ""
-"Other devices can use your cellular data connection over the Wi-Fi network. "
-"Normal data charges apply."
-msgstr ""
-"Druge naprave lahko uporabljajo vašo povezavo z mobilnimi podatki preko Wi-"
-"Fi-ja. Prenosi podatkov bodo morda zaračunani."
-
-#: ../plugins/cellular//Hotspot.qml:65
-msgid "Set up hotspot"
-msgstr "Nastavi vročo vstopno točko"
-
-#: ../plugins/cellular//PageChooseCarriers.qml:28
-#: ../plugins/cellular//Components//MultiSim.qml:68
-msgid "Carriers"
-msgstr "Nosilni signali"
+#: ../plugins/reset//EraseEverything.qml:44
+msgid "Erase & Reset Everything"
+msgstr "Izbriši in ponastavi vse"
 
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
 #: ../plugins/battery//PageComponent.qml:34
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:12
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:98
 msgid "Battery"
 msgstr "Baterija"
 
@@ -1744,6 +515,16 @@ msgstr "Popolnoma napolnjeno"
 msgid "Charge level"
 msgstr "Raven napolnjenosti"
 
+#: ../plugins/battery//PageComponent.qml:131
+#: ../plugins/battery//PageComponent.qml:287
+#: ../plugins/cellular//PageChooseCarriers.qml:48
+#: ../plugins/cellular//PageChooseCarriers.qml:65
+#: ../plugins/about//Storage.qml:203
+#: ../plugins/cellular//Components//SingleSim.qml:62
+#: ../plugins/cellular//Components//NoSim.qml:48
+msgid "N/A"
+msgstr "Ni na voljo"
+
 #. TRANSLATORS: %1 refers to a percentage that indicates the charging level of the battery
 #: ../plugins/battery//PageComponent.qml:134
 #, qt-format
@@ -1768,6 +549,43 @@ msgstr "Načini za zmanjšanje porabe baterije:"
 #: ../plugins/brightness//BrightnessSlider.qml:51
 msgid "Display brightness"
 msgstr "Svetlost zaslona"
+
+#: ../plugins/battery//PageComponent.qml:306
+#: ../plugins/security-privacy//PhoneLocking.qml:68
+msgid "Lock when idle"
+msgstr "Zakleni med nedejavnostjo"
+
+#: ../plugins/battery//PageComponent.qml:306
+#: ../plugins/security-privacy//PhoneLocking.qml:69
+msgid "Sleep when idle"
+msgstr "V pripravljenost med nedejavnostjo"
+
+#. TRANSLATORS: %1 is the number of minutes
+#: ../plugins/battery//PageComponent.qml:312
+#: ../plugins/battery//PageComponent.qml:321
+#: ../plugins/battery//SleepValues.qml:83
+#: ../plugins/battery//SleepValues.qml:87
+#: ../plugins/battery//SleepValues.qml:91
+#: ../plugins/battery//SleepValues.qml:95
+#: ../plugins/battery//SleepValues.qml:99
+#: ../plugins/battery//SleepValues.qml:103
+#: ../plugins/security-privacy//PageComponent.qml:137
+#: ../plugins/security-privacy//PageComponent.qml:146
+#, qt-format
+msgid "After %1 minute"
+msgid_plural "After %1 minutes"
+msgstr[0] "Po %1 minutah"
+msgstr[1] "Po %1 minuti"
+msgstr[2] "Po %1 minutah"
+msgstr[3] "Po %1 minutah"
+
+#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
+#: ../plugins/battery//PageComponent.qml:363
+#: ../plugins/bluetooth//PageComponent.qml:32
+#: ../plugins/bluetooth//PageComponent.qml:147
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:254
+msgid "Bluetooth"
+msgstr "Bluetooth"
 
 #: ../plugins/battery//PageComponent.qml:394
 msgid "GPS"
@@ -1798,9 +616,154 @@ msgid "Phone won’t sleep during calls or video playback."
 msgstr ""
 "Telefon med klici ali predvajanjem videa ne bo prešel v pripravljenost."
 
+#: ../plugins/language//SpellChecking.qml:27
+#: ../plugins/language//SpellChecking.qml:36
+#: ../plugins/language//PageComponent.qml:132
+#: ../plugins/language//PageComponent.qml:142
+msgid "Spell checking"
+msgstr "Preverjanje črkovanja"
+
+#: ../plugins/language//SpellChecking.qml:53
+msgid "Current spelling languages:"
+msgstr "Trenutni jeziki za črkovanje:"
+
+#: ../plugins/language//SpellChecking.qml:54
+msgid "All languages available:"
+msgstr "Vsi razpoložljivi jeziki:"
+
+#: ../plugins/language//RebootNecessary.qml:38
+msgid "Restart Now"
+msgstr "Znova zaženi sedaj"
+
+#: ../plugins/language//DisplayLanguage.qml:36
+msgid "Display language"
+msgstr "Prikazni jezik"
+
+#: ../plugins/language//DisplayLanguage.qml:118
+msgid "Confirm"
+msgstr "Potrdi"
+
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
+#: ../plugins/language//PageComponent.qml:34
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:114
+msgid "Language & Text"
+msgstr "Jezik in besedilo"
+
+#: ../plugins/language//PageComponent.qml:100
+msgid "Display language…"
+msgstr "Prikazni jezik ..."
+
+#: ../plugins/language//PageComponent.qml:117
+#: ../plugins/language//KeyboardLayouts.qml:26
+msgid "Keyboard layouts"
+msgstr "Razporeditve tipk"
+
+#: ../plugins/language//PageComponent.qml:152
+msgid "Auto correction"
+msgstr "Samodejno popravljanje"
+
+#: ../plugins/language//PageComponent.qml:162
+msgid "Word suggestions"
+msgstr "Besedni predlogi"
+
+#: ../plugins/language//PageComponent.qml:175
+msgid "Auto capitalization"
+msgstr "Samodejno spreminjanje velikih začetnic"
+
+#: ../plugins/language//PageComponent.qml:185
+msgid "Turns on Shift to capitalize the first letter of each sentence."
+msgstr "Vklopi tipko Shift za spreminjanje velikih začetnic v vsaki povedi."
+
+#: ../plugins/language//PageComponent.qml:192
+msgid "Auto punctuation"
+msgstr "Samodejno postavljanje ločil"
+
+#: ../plugins/language//PageComponent.qml:202
+msgid ""
+"Adds a period, and any missing quotes or brackets, when you tap Space twice."
+msgstr ""
+"Doda piko in manjkajoče narekovaje ali oklepaje, ko tapnete dvakrat na "
+"Presledek."
+
+#: ../plugins/language//PageComponent.qml:219
+msgid "Keyboard vibration"
+msgstr "Vibriranje tipkovnice"
+
+#: ../plugins/language//KeyboardLayouts.qml:39
+msgid "Current layouts:"
+msgstr "Trenutne razporeditve:"
+
+#: ../plugins/language//KeyboardLayouts.qml:40
+msgid "All layouts available:"
+msgstr "Vse razpoložljive razporeditve:"
+
+#: ../plugins/phone//CallWaiting.qml:31 ../plugins/phone//CallWaiting.qml:74
+#: ../plugins/phone//NoSims.qml:34 ../plugins/phone//MultiSim.qml:46
+#: ../plugins/phone//MultiSim.qml:84 ../plugins/phone//SingleSim.qml:40
+msgid "Call waiting"
+msgstr "Dajanje klica na čakanje"
+
+#: ../plugins/phone//CallWaiting.qml:89
+msgid ""
+"Lets you answer or start a new call while on another call, and switch "
+"between them"
+msgstr ""
+"Vam omogoči, da odgovorite ali začnete nov klic, medtem ko ste na drugem "
+"klicu in preklopi med njima"
+
+#. TRANSLATORS: %1 is the name of the (network) carrier
+#: ../plugins/phone//Services.qml:34 ../plugins/phone//SingleSim.qml:51
+#, qt-format
+msgid "%1 Services"
+msgstr "%1 storitve"
+
+#: ../plugins/phone//CallForwarding.qml:32
+#: ../plugins/phone//CallForwarding.qml:76 ../plugins/phone//NoSims.qml:28
+#: ../plugins/phone//MultiSim.qml:36 ../plugins/phone//MultiSim.qml:74
+#: ../plugins/phone//SingleSim.qml:33
+msgid "Call forwarding"
+msgstr "Posredovanje klica"
+
+#: ../plugins/phone//CallForwarding.qml:91
+msgid ""
+"Redirects phone calls to another number whenever you don't answer, or your "
+"phone is busy, turned off, or out of range."
+msgstr ""
+"Preusmeri telefonske klice na drugo številko, kadarkoli ne odgovorite na "
+"klic ali je Vaš telefon zaposlen, ugasnjen ali izven dosega."
+
+#: ../plugins/phone//CallForwarding.qml:101
+msgid "Forward to"
+msgstr "Posreduj"
+
+#: ../plugins/phone//ServiceInfo.qml:109
+#, qt-format
+msgid "Last called %1"
+msgstr "Zadnji klic %1"
+
+#: ../plugins/phone//ServiceInfo.qml:119
+msgid "Call"
+msgstr "Klic"
+
+#: ../plugins/phone//NoSims.qml:42 ../plugins/phone//MultiSim.qml:56
+#: ../plugins/phone//MultiSim.qml:94
+msgid "Services"
+msgstr "Storitve"
+
+#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
+#: ../plugins/phone//PageComponent.qml:32
+#: ../plugins/bluetooth//PageComponent.qml:93
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:140
+msgid "Phone"
+msgstr "Telefon"
+
+#: ../plugins/phone//SingleSim.qml:29
+msgid "SIM"
+msgstr "SIM"
+
 #. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
 #: ../plugins/brightness//PageComponent.qml:32
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:68
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:158
 msgid "Brightness"
 msgstr "Svetlost"
 
@@ -1811,6 +774,1171 @@ msgstr "Prilagodi samodejno"
 #: ../plugins/brightness//PageComponent.qml:65
 msgid "Brightens and dims the display to suit the surroundings."
 msgstr "Osvetli in zatemni zaslon glede na okolje."
+
+#: ../plugins/cellular//PageChooseCarrier.qml:30
+#: ../plugins/cellular//Components//SingleSim.qml:58
+#: ../plugins/cellular//Components//SingleSim.qml:67
+#: ../plugins/cellular//Components//NoSim.qml:47
+msgid "Carrier"
+msgstr "Ponudnik"
+
+#: ../plugins/cellular//PageChooseCarrier.qml:155
+msgid "Choose carrier:"
+msgstr "Izberite operaterja:"
+
+#: ../plugins/cellular//PageChooseCarrier.qml:156
+#: ../plugins/time-date//ChooseTimeZone.qml:47
+#: ../plugins/time-date//PageComponent.qml:69
+msgid "Automatically"
+msgstr "Samodejno"
+
+#: ../plugins/cellular//PageChooseCarrier.qml:156
+#: ../plugins/security-privacy//PageComponent.qml:149
+#: ../plugins/time-date//ChooseTimeZone.qml:47
+#: ../plugins/time-date//PageComponent.qml:69
+msgid "Manually"
+msgstr "Ročno"
+
+#: ../plugins/cellular//PageChooseCarrier.qml:196
+msgid "Searching for carriers…"
+msgstr "Iskanje nosilnih signalov ..."
+
+#: ../plugins/cellular//PageChooseCarrier.qml:229
+#: ../plugins/cellular//PageChooseApn.qml:31
+#: ../plugins/cellular//Components//SingleSim.qml:73
+msgid "APN"
+msgstr "APN"
+
+#: ../plugins/cellular//PageChooseApn.qml:372
+msgid "Internet APN:"
+msgstr "Internetni APN:"
+
+#: ../plugins/cellular//PageChooseApn.qml:449
+msgid "Custom Internet APN…"
+msgstr "Internetni APN po meri ..."
+
+#: ../plugins/cellular//PageChooseApn.qml:460
+msgid "MMS APN:"
+msgstr "APN MMS-a:"
+
+#: ../plugins/cellular//PageChooseApn.qml:485
+#: ../plugins/cellular//CustomApnEditor.qml:143
+msgid "Same APN as for Internet"
+msgstr "Enak APN kot za internet"
+
+#: ../plugins/cellular//PageChooseApn.qml:565
+msgid "Custom MMS APN…"
+msgstr "APN MMS-a po meri:"
+
+#: ../plugins/cellular//PageChooseApn.qml:591
+msgid "Reset APN Settings"
+msgstr "Ponastavi nastavitve APN-a"
+
+#: ../plugins/cellular//PageChooseApn.qml:592
+msgid "Are you sure that you want to Reset APN Settings?"
+msgstr "Ali ste prepričani, da želite ponastaviti nastavitve APN-a?"
+
+#: ../plugins/cellular//PageChooseApn.qml:598
+msgid "Reset"
+msgstr "Ponastavi"
+
+#: ../plugins/cellular//PageChooseCarriers.qml:27
+#: ../plugins/cellular//Components//MultiSim.qml:68
+msgid "Carriers"
+msgstr "Nosilni signali"
+
+#: ../plugins/cellular//CustomApnEditor.qml:42
+msgid "Internet"
+msgstr "Internet"
+
+#: ../plugins/cellular//CustomApnEditor.qml:42
+msgid "MMS"
+msgstr "MMS"
+
+#. TRANSLATORS: %1 is either i18n.tr("Internet") or i18n.tr("MMS")
+#: ../plugins/cellular//CustomApnEditor.qml:67
+#, qt-format
+msgid "Custom %1 APN"
+msgstr "APN %1-a po meri"
+
+#. TRANSLATORS: %1 is either i18n.tr("Internet") or i18n.tr("MMS")
+#: ../plugins/cellular//CustomApnEditor.qml:171
+#, qt-format
+msgid "%1 APN"
+msgstr "APN %1-a"
+
+#: ../plugins/cellular//CustomApnEditor.qml:181
+msgid "MMSC"
+msgstr "MMSC"
+
+#: ../plugins/cellular//CustomApnEditor.qml:191
+msgid "Proxy"
+msgstr "Posredniški strežnik"
+
+#: ../plugins/cellular//CustomApnEditor.qml:213
+msgid "Username"
+msgstr "Uporabniško ime"
+
+#: ../plugins/cellular//CustomApnEditor.qml:264
+msgid "Save"
+msgstr "Shrani"
+
+#: ../plugins/cellular//CustomApnEditor.qml:264
+msgid "Activate"
+msgstr "Omogoči"
+
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#: ../plugins/cellular//PageComponent.qml:32
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:170
+msgid "Cellular"
+msgstr "Mobilno omrežje"
+
+#: ../plugins/cellular//Hotspot.qml:29
+#: ../plugins/cellular//Components//MultiSim.qml:48
+#: ../plugins/cellular//Components//SingleSim.qml:43
+msgid "Wi-Fi hotspot"
+msgstr "Vroča vstopna točka Wi-Fi"
+
+#: ../plugins/cellular//Hotspot.qml:40
+msgid "Hotspot"
+msgstr "Vroča vstopna točka"
+
+#: ../plugins/cellular//Hotspot.qml:60
+msgid ""
+"When hotspot is on, other devices can use your cellular data connection over "
+"Wi-Fi. Normal data charges apply."
+msgstr ""
+"ko je vroča vstopna točka vklopljena, lahko druge naprave uporabljajo vašo "
+"povezavo z mobilnimi podatki preko Wi-Fi-ja. Prenosi podatkov bodo morda "
+"zaračunani."
+
+#: ../plugins/cellular//Hotspot.qml:61
+msgid ""
+"Other devices can use your cellular data connection over the Wi-Fi network. "
+"Normal data charges apply."
+msgstr ""
+"Druge naprave lahko uporabljajo vašo povezavo z mobilnimi podatki preko Wi-"
+"Fi-ja. Prenosi podatkov bodo morda zaračunani."
+
+#: ../plugins/cellular//Hotspot.qml:65
+msgid "Set up hotspot"
+msgstr "Nastavi vročo vstopno točko"
+
+#: ../plugins/cellular//HotspotSetup.qml:29
+msgid "Change hotspot setup"
+msgstr "Spremeni nastavitve vroče dostopne točke"
+
+#: ../plugins/cellular//HotspotSetup.qml:40
+msgid "Hotspot name"
+msgstr "Ime vroče vstopne točke"
+
+#: ../plugins/cellular//HotspotSetup.qml:54
+msgid "Key (must be 8 characters or longer)"
+msgstr "Ključ (mora vsebovati najmanj 8 znakov)"
+
+#: ../plugins/cellular//HotspotSetup.qml:68
+msgid "Show key"
+msgstr "Pokaži ključ"
+
+#: ../plugins/cellular//HotspotSetup.qml:94
+#: ../plugins/security-privacy//LockSecurity.qml:302
+#: ../plugins/security-privacy//SimPin.qml:157
+msgid "Change"
+msgstr "Spremeni"
+
+#: ../plugins/security-privacy//LockSecurity.qml:32
+#: ../plugins/security-privacy//PhoneLocking.qml:49
+#: ../plugins/about//DevMode.qml:116
+#: ../wizard/qml/Pages//30-passwd-type.qml:37
+msgid "Lock security"
+msgstr "Zakleni varnost"
+
+#: ../plugins/security-privacy//LockSecurity.qml:96
+#: ../plugins/security-privacy//LockSecurity.qml:384
+msgid "Change passcode…"
+msgstr "Spremeni geslo ..."
+
+#: ../plugins/security-privacy//LockSecurity.qml:98
+#: ../plugins/security-privacy//LockSecurity.qml:385
+msgid "Change passphrase…"
+msgstr "Spremeni šifrirno reklo ..."
+
+#: ../plugins/security-privacy//LockSecurity.qml:105
+msgid "Switch to swipe"
+msgstr "Preklopi na poteg"
+
+#: ../plugins/security-privacy//LockSecurity.qml:107
+msgid "Switch to passcode"
+msgstr "Preklopi na geslo"
+
+#: ../plugins/security-privacy//LockSecurity.qml:109
+msgid "Switch to passphrase"
+msgstr "Preklopi na šifrirno reklo"
+
+#: ../plugins/security-privacy//LockSecurity.qml:118
+msgid "Existing passcode"
+msgstr "Obstoječe geslo"
+
+#: ../plugins/security-privacy//LockSecurity.qml:120
+msgid "Existing passphrase"
+msgstr "Obstoječe šifrirno reklo"
+
+#: ../plugins/security-privacy//LockSecurity.qml:174
+msgid "Choose passcode"
+msgstr "Izberite geslo"
+
+#: ../plugins/security-privacy//LockSecurity.qml:176
+msgid "Choose passphrase"
+msgstr "Izberi šifrirno reklo"
+
+#: ../plugins/security-privacy//LockSecurity.qml:220
+#: ../wizard/qml/Pages//passwd-confirm.qml:48
+msgid "Confirm passcode"
+msgstr "Potrdite geslo"
+
+#: ../plugins/security-privacy//LockSecurity.qml:222
+#: ../wizard/qml/Pages//passwd-confirm.qml:47
+msgid "Confirm passphrase"
+msgstr "Potrdi šifrirno reklo"
+
+#: ../plugins/security-privacy//LockSecurity.qml:265
+msgid "Those passcodes don't match. Try again."
+msgstr "Ti gesli se ne ujemata. Poskusite znova."
+
+#: ../plugins/security-privacy//LockSecurity.qml:268
+msgid "Those passphrases don't match. Try again."
+msgstr "Ti šifrirni rekli se ne ujemata. Poskusite znova."
+
+#: ../plugins/security-privacy//LockSecurity.qml:299
+msgid "Unset"
+msgstr "Prekliči nastavitev"
+
+#: ../plugins/security-privacy//LockSecurity.qml:344
+msgid "Unlock the phone using:"
+msgstr "Odkleni telefon s:"
+
+#: ../plugins/security-privacy//LockSecurity.qml:348
+msgid "Swipe (no security)"
+msgstr "potegom (brez varnosti)"
+
+#: ../plugins/security-privacy//LockSecurity.qml:349
+msgid "4-digit passcode"
+msgstr "4-številčno geslo"
+
+#: ../plugins/security-privacy//LockSecurity.qml:350
+#: ../plugins/security-privacy//PhoneLocking.qml:47
+#: ../wizard/qml/Pages//30-passwd-type.qml:98
+msgid "Passphrase"
+msgstr "šifrirnim reklom"
+
+#: ../plugins/security-privacy//LockSecurity.qml:351
+msgid "Swipe (no security)… "
+msgstr "Poteg (brez varnosti) ... "
+
+#: ../plugins/security-privacy//LockSecurity.qml:352
+msgid "4-digit passcode…"
+msgstr "4-številčno geslo ..."
+
+#: ../plugins/security-privacy//LockSecurity.qml:353
+msgid "Passphrase…"
+msgstr "Šifrirno reklo ..."
+
+#: ../plugins/security-privacy//SimPin.qml:34
+#: ../plugins/security-privacy//SimPin.qml:322
+#: ../plugins/security-privacy//PageComponent.qml:158
+msgid "SIM PIN"
+msgstr "Geslo PIN kartice SIM"
+
+#: ../plugins/security-privacy//SimPin.qml:44
+msgid "Change SIM PIN"
+msgstr "Spremeni PIN kartice SIM"
+
+#: ../plugins/security-privacy//SimPin.qml:47
+#, qt-format
+msgid "Incorrect PIN. %1 attempt remaining."
+msgid_plural "Incorrect PIN. %1 attempts remaining."
+msgstr[0] "Nepravilen PIN. Ostaja še %1 poskusov."
+msgstr[1] "Nepravilen PIN. Ostaja še %1 poskus."
+msgstr[2] "Nepravilen PIN. Ostajata še %1 poskusa."
+msgstr[3] "Nepravilen PIN. Ostajajo še %1 poskusi."
+
+#: ../plugins/security-privacy//SimPin.qml:81
+msgid "Current PIN:"
+msgstr "Trenutni PIN:"
+
+#: ../plugins/security-privacy//SimPin.qml:93
+#, qt-format
+msgid "%1 attempt allowed."
+msgid_plural "%1 attempts allowed."
+msgstr[0] "Dovoljenih je %1 poskusov."
+msgstr[1] "Dovoljen je %1 poskus."
+msgstr[2] "Dovoljena sta %1 poskusa."
+msgstr[3] "Dovoljeni so %1 poskusi."
+
+#: ../plugins/security-privacy//SimPin.qml:107
+msgid "Choose new PIN:"
+msgstr "Izberite nov PIN:"
+
+#: ../plugins/security-privacy//SimPin.qml:118
+msgid "Confirm new PIN:"
+msgstr "Potrdite novi PIN:"
+
+#: ../plugins/security-privacy//SimPin.qml:137
+msgid "PINs don't match. Try again."
+msgstr "PIN-a se ne ujemata. Poskusite znova."
+
+#: ../plugins/security-privacy//SimPin.qml:183
+msgid "Enter SIM PIN"
+msgstr "Vnesite PIN kartice SIM"
+
+#: ../plugins/security-privacy//SimPin.qml:184
+msgid "Enter Previous SIM PIN"
+msgstr "Vnesite predhodni PIN kartice SIM"
+
+#: ../plugins/security-privacy//SimPin.qml:187
+#, qt-format
+msgid "Incorrect PIN. %1 attempts remaining."
+msgstr "Nepravilen PIN. Ostaja še %1 poskusov."
+
+#: ../plugins/security-privacy//SimPin.qml:246
+#, qt-format
+msgid "%1 attempts allowed."
+msgstr "Dovoljenih je %1 poskusov."
+
+#: ../plugins/security-privacy//SimPin.qml:282
+msgid "Unlock"
+msgstr "Odkleni"
+
+#: ../plugins/security-privacy//SimPin.qml:282
+msgid "Lock"
+msgstr "Zakleni"
+
+#: ../plugins/security-privacy//SimPin.qml:340
+msgid "Change PIN…"
+msgstr "Spremeni PIN ..."
+
+#: ../plugins/security-privacy//SimPin.qml:357
+msgid ""
+"When a SIM PIN is set, it must be entered to access cellular services after "
+"restarting the phone or swapping the SIM."
+msgstr ""
+"Ko je PIN kartice SIM nastavljen, mora po ponovnem zagonu telefona ali "
+"zamenjavi SIM-a biti vnešen za dostop do mobilnih storitev."
+
+#: ../plugins/security-privacy//SimPin.qml:361
+msgid "Entering an incorrect PIN repeatedly may lock the SIM permanently."
+msgstr "Vnos večkrat nepravilnega PIN-a lahko trajno zaklene SIM."
+
+#: ../plugins/security-privacy//PhoneLocking.qml:31
+msgid "Phone locking"
+msgstr "Zaklepanje telefona"
+
+#: ../plugins/security-privacy//PhoneLocking.qml:45
+msgctxt "Unlock with swipe"
+msgid "None"
+msgstr "Brez"
+
+#: ../plugins/security-privacy//PhoneLocking.qml:46
+#: ../wizard/qml/Pages//30-passwd-type.qml:95
+msgid "Passcode"
+msgstr "Geslo"
+
+#. TRANSLATORS: %1 is the number of minutes
+#: ../plugins/security-privacy//PhoneLocking.qml:75
+#: ../plugins/security-privacy//PhoneLocking.qml:84
+#, qt-format
+msgid "%1 minute"
+msgid_plural "%1 minutes"
+msgstr[0] "%1 minut"
+msgstr[1] "%1 minuta"
+msgstr[2] "%1 minuti"
+msgstr[3] "%1 minute"
+
+#: ../plugins/security-privacy//PhoneLocking.qml:101
+msgid "Sleep locks immediately"
+msgstr "Način pripravljenosti zaklene takoj"
+
+#: ../plugins/security-privacy//PhoneLocking.qml:106
+msgid "When locked, allow:"
+msgstr "Ko je zaklenjen, dovoli:"
+
+#: ../plugins/security-privacy//PhoneLocking.qml:110
+msgid "Launcher"
+msgstr "Zaganjalnik"
+
+#: ../plugins/security-privacy//PhoneLocking.qml:120
+msgid "Notifications and quick settings"
+msgstr "Obvestila in hitre nastavitve"
+
+#: ../plugins/security-privacy//PhoneLocking.qml:131
+msgid "Turn on lock security to restrict access when the phone is locked."
+msgstr ""
+"Vključi varnostni zaklep za omejitev dostopa, ko je telefon zaklenjen."
+
+#: ../plugins/security-privacy//PhoneLocking.qml:132
+msgid "Other apps and functions will prompt you to unlock."
+msgstr "Drugi programi in funkcije vas bodo pozvale k odklepu."
+
+#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
+#: ../plugins/security-privacy//PageComponent.qml:37
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:218
+msgid "Security & Privacy"
+msgstr "Varnost in zasebnost"
+
+#: ../plugins/security-privacy//PageComponent.qml:100
+#: ../plugins/security-privacy//PageComponent.qml:218
+#: ../plugins/security-privacy//Dash.qml:46
+msgid "Phone and Internet"
+msgstr "telefona in interneta"
+
+#: ../plugins/security-privacy//PageComponent.qml:102
+#: ../plugins/security-privacy//PageComponent.qml:219
+#: ../plugins/security-privacy//Dash.qml:46
+msgid "Phone only"
+msgstr "samo telefona"
+
+#: ../plugins/security-privacy//PageComponent.qml:131
+msgid "Lock phone"
+msgstr "Zakleni telefon"
+
+#: ../plugins/security-privacy//PageComponent.qml:161
+#: ../plugins/security-privacy//PageComponent.qml:244
+msgid "On"
+msgstr "Omogočeno"
+
+#: ../plugins/security-privacy//PageComponent.qml:165
+#: ../plugins/security-privacy//PageComponent.qml:244
+#: ../plugins/cellular//Components//CellularMultiSim.qml:30
+#: ../plugins/cellular//Components//NoSim.qml:32
+#: ../plugins/cellular//Components//CellularSingleSim.qml:50
+msgid "Off"
+msgstr "Onemogočeno"
+
+#: ../plugins/security-privacy//PageComponent.qml:172
+msgid "Encryption"
+msgstr "Šifriranje"
+
+#: ../plugins/security-privacy//PageComponent.qml:181
+msgid ""
+"Encryption protects against access to phone data when the phone is connected "
+"to a PC or other device."
+msgstr ""
+"Šifriranje ščiti pred dostopom podatkov na telefonu, ko je telefon povezan z "
+"računalnikom ali drugo napravo."
+
+#: ../plugins/security-privacy//PageComponent.qml:185
+msgid "Privacy"
+msgstr "Zasebnost"
+
+#: ../plugins/security-privacy//PageComponent.qml:188
+msgid "Stats on welcome screen"
+msgstr "Statistika na pozdravnem zaslonu"
+
+#: ../plugins/security-privacy//PageComponent.qml:201
+msgid "Messages on welcome screen"
+msgstr "Sporočila na pozdravnem zaslonu"
+
+#: ../plugins/security-privacy//PageComponent.qml:216
+#: ../plugins/security-privacy//Dash.qml:29
+msgid "Dash search"
+msgstr "Iskanje v pregledni plošči"
+
+#: ../plugins/security-privacy//PageComponent.qml:235
+msgid "Location access"
+msgstr "Dostop do položaja"
+
+#: ../plugins/security-privacy//PageComponent.qml:253
+#: ../plugins/security-privacy//AppAccess.qml:28
+msgid "Other app access"
+msgstr "Dostop do drugega programa"
+
+#: ../plugins/security-privacy//PageComponent.qml:258
+#: ../plugins/security-privacy//diagnostics//PageComponent.qml:30
+msgid "Diagnostics"
+msgstr "Diagnostika"
+
+#. TRANSLATORS: This string is shown when crash
+#. reports are to be sent by the system.
+#: ../plugins/security-privacy//PageComponent.qml:263
+msgid "Sent"
+msgstr "Poslano"
+
+#. TRANSLATORS: This string is shown when crash
+#. reports are not to be sent by the system
+#: ../plugins/security-privacy//PageComponent.qml:266
+msgid "Not sent"
+msgstr "Ni poslano"
+
+#: ../plugins/security-privacy//Location.qml:31
+#: ../wizard/qml/Pages//50-location.qml:25
+msgid "Location"
+msgstr "Položaj"
+
+#: ../plugins/security-privacy//Location.qml:59
+msgid "Location detection"
+msgstr "Odkrivanje položaja"
+
+#: ../plugins/security-privacy//Location.qml:81
+msgid ""
+"Uses GPS to detect your rough location. When off, GPS turns off to save "
+"battery."
+msgstr ""
+"Uporabi GPS za odkritje Vaše grobega položaja. Kadar je ugasnjen, se GPS "
+"izklopi za varčevanje energije."
+
+#: ../plugins/security-privacy//Location.qml:83
+msgid ""
+"Uses wi-fi and GPS to detect your rough location. Turning off location "
+"detection saves battery."
+msgstr ""
+"Uporablja wi-fi in GPS za odkrivanje Vašega grobega položaja. Izklop "
+"odkrivanja položaja prihrani energijo."
+
+#: ../plugins/security-privacy//Location.qml:85
+msgid ""
+"Uses wi-fi (currently off) and GPS to detect your rough location. Turning "
+"off location detection saves battery."
+msgstr ""
+"Uporablja wi-fi (trenutno izklopljen) in GPS za odkrivanje Vašega grobega "
+"položaja. Izklop odkrivanja položaja prihrani energijo."
+
+#: ../plugins/security-privacy//Location.qml:87
+msgid ""
+"Uses wi-fi, cell tower locations, and GPS to detect your rough location. "
+"Turning off location detection saves battery."
+msgstr ""
+"Uporablja wi-fi, položaje baznih postaj in GPS za odkrivanje Vašega grobega "
+"položaja. Izklop odkrivanja položaja prihrani energijo."
+
+#: ../plugins/security-privacy//Location.qml:89
+msgid ""
+"Uses wi-fi, cell tower locations (no current cellular connection), and GPS "
+"to detect your rough location. Turning off location detection saves battery."
+msgstr ""
+"Uporablja wi-fi, položaje baznih postaj (trenutno ni mobilne povezave) in "
+"GPS za odkrivanje Vašega grobega položaja. Izklop odkrivanja položaja "
+"prihrani energijo."
+
+#: ../plugins/security-privacy//Location.qml:91
+msgid ""
+"Uses wi-fi (currently off), cell tower locations, and GPS to detect your "
+"rough location. Turning off location detection saves battery."
+msgstr ""
+"Uporablja wi-fi (trenutno izklopljen), položaje baznih postaj in GPS za "
+"odkrivanje Vašega grobega položaja. Izklop odkrivanja položaja prihrani "
+"energijo."
+
+#: ../plugins/security-privacy//Location.qml:93
+msgid ""
+"Uses wi-fi (currently off), cell tower locations (no current cellular "
+"connection), and GPS to detect your rough location. Turning off location "
+"detection saves battery."
+msgstr ""
+"Uporablja wi-fi (trenutno izklopljen), položaje baznih postaj (trenutno ni "
+"mobilne povezave) in GPS za odkrivanje Vašega grobega položaja. Izklop "
+"odkrivanja položaja prihrani energijo."
+
+#: ../plugins/security-privacy//Location.qml:100
+msgid "Allow access to location:"
+msgstr "Dovoli dostop do mesta:"
+
+#: ../plugins/security-privacy//Dash.qml:45
+msgid "Return results from:"
+msgstr "Vrni rezultate od:"
+
+#: ../plugins/security-privacy//AppAccess.qml:35
+msgid "Apps that you have granted and have requested access to:"
+msgstr "Programi, kateri imajo vaše dovoljenje ter so zahtevali dostop do:"
+
+#: ../plugins/security-privacy//AppAccess.qml:41
+#: ../plugins/bluetooth//PageComponent.qml:105
+msgid "Camera"
+msgstr "Fotoaparat"
+
+#: ../plugins/security-privacy//AppAccess.qml:42
+msgid "Apps that have requested access to your camera"
+msgstr "Programi, kateri so zahtevali dostop do vašega fotoaparata"
+
+#: ../plugins/security-privacy//AppAccess.qml:46
+msgid "Mic"
+msgstr "Mikrofon"
+
+#: ../plugins/security-privacy//AppAccess.qml:47
+msgid "Apps that have requested access to your mic"
+msgstr "Programi, kateri so zahtevali dostop do vašega mikrofona"
+
+#: ../plugins/security-privacy//AppAccess.qml:59
+#, qt-format
+msgid "%1/%2"
+msgstr "%1/%2"
+
+#: ../plugins/security-privacy//AppAccess.qml:60
+msgid "0"
+msgstr "0"
+
+#: ../plugins/bluetooth//ProvidePasskeyDialog.qml:28
+#: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:28
+#: ../plugins/bluetooth//ProvidePinCodeDialog.qml:28
+msgid "Bluetooth Pairing Request"
+msgstr "Zahteva seznanjenja naprav Bluetooth"
+
+#: ../plugins/bluetooth//ProvidePasskeyDialog.qml:36
+#: ../plugins/bluetooth//ProvidePinCodeDialog.qml:36
+#, qt-format
+msgid "PIN for '%1'"
+msgstr "PIN za '%1'"
+
+#: ../plugins/bluetooth//ProvidePasskeyDialog.qml:62
+#: ../plugins/bluetooth//ProvidePinCodeDialog.qml:63
+msgid "Pair"
+msgstr "Seznani"
+
+#. TRANSLATORS: %1 is the name of the bluetooth device being paired
+#: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:37
+#, qt-format
+msgid "Please confirm that the PIN displayed on '%1' matches this one"
+msgstr "Potrdite, da se PIN, prikazan na '%1', ujema s tem"
+
+#: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:57
+msgid "Confirm PIN"
+msgstr "Potrdi PIN"
+
+#: ../plugins/bluetooth//PageComponent.qml:82
+msgid "Connected"
+msgstr "Povezano"
+
+#: ../plugins/bluetooth//PageComponent.qml:83
+msgid "Connecting…"
+msgstr "Povezovanje ..."
+
+#: ../plugins/bluetooth//PageComponent.qml:84
+msgid "Disconnecting…"
+msgstr "Prekinjanje povezave ..."
+
+#: ../plugins/bluetooth//PageComponent.qml:85
+msgid "Disconnected"
+msgstr "Prekinjena povezava"
+
+#: ../plugins/bluetooth//PageComponent.qml:92
+msgid "Computer"
+msgstr "Računalnik"
+
+#: ../plugins/bluetooth//PageComponent.qml:94
+msgid "Modem"
+msgstr "Modem"
+
+#: ../plugins/bluetooth//PageComponent.qml:95 ../src/qml/MainWindow.qml:147
+msgid "Network"
+msgstr "Omrežje"
+
+#: ../plugins/bluetooth//PageComponent.qml:96
+msgid "Headset"
+msgstr "Slušalke z mikrofonom"
+
+#: ../plugins/bluetooth//PageComponent.qml:97
+msgid "Headphones"
+msgstr "Slušalke"
+
+#: ../plugins/bluetooth//PageComponent.qml:98
+msgid "Video"
+msgstr "Video"
+
+#: ../plugins/bluetooth//PageComponent.qml:99
+msgid "Other Audio"
+msgstr "Drugi zvoki"
+
+#: ../plugins/bluetooth//PageComponent.qml:100
+msgid "Joypad"
+msgstr "Igralni plošček"
+
+#: ../plugins/bluetooth//PageComponent.qml:101
+msgid "Keyboard"
+msgstr "Tipkovnica"
+
+#: ../plugins/bluetooth//PageComponent.qml:102
+msgid "Tablet"
+msgstr "Tablični računalnik"
+
+#: ../plugins/bluetooth//PageComponent.qml:103
+msgid "Mouse"
+msgstr "Miška"
+
+#: ../plugins/bluetooth//PageComponent.qml:104
+msgid "Printer"
+msgstr "Tiskalnik"
+
+#: ../plugins/bluetooth//PageComponent.qml:106
+msgid "Other"
+msgstr "Drugo"
+
+#: ../plugins/bluetooth//PageComponent.qml:112
+msgid "Excellent"
+msgstr "Odlično"
+
+#: ../plugins/bluetooth//PageComponent.qml:113
+msgid "Good"
+msgstr "Dobro"
+
+#: ../plugins/bluetooth//PageComponent.qml:114
+msgid "Fair"
+msgstr "Zadovoljivo"
+
+#: ../plugins/bluetooth//PageComponent.qml:115
+msgid "Poor"
+msgstr "Slabo"
+
+#: ../plugins/bluetooth//PageComponent.qml:182
+msgid "Discoverable"
+msgstr "Viden"
+
+#: ../plugins/bluetooth//PageComponent.qml:182
+msgid "Not discoverable"
+msgstr "Neviden"
+
+#: ../plugins/bluetooth//PageComponent.qml:213
+msgid "Connected devices:"
+msgstr "Povezane naprave:"
+
+#: ../plugins/bluetooth//PageComponent.qml:251
+msgid "Connect another device:"
+msgstr "Poveži drugo napravo:"
+
+#: ../plugins/bluetooth//PageComponent.qml:251
+msgid "Connect a device:"
+msgstr "Poveži napravo:"
+
+#: ../plugins/bluetooth//PageComponent.qml:285
+msgid "None detected"
+msgstr "Ni zaznanih"
+
+#: ../plugins/bluetooth//PageComponent.qml:293
+#: ../plugins/bluetooth//PageComponent.qml:397
+msgid "Connect automatically when detected:"
+msgstr "Poveži samodejno, ko je zaznano:"
+
+#: ../plugins/bluetooth//PageComponent.qml:364
+msgid "Type"
+msgstr "Vrsta"
+
+#: ../plugins/bluetooth//PageComponent.qml:388
+msgid "Status"
+msgstr "Stanje"
+
+#: ../plugins/bluetooth//PageComponent.qml:392
+msgid "Signal Strength"
+msgstr "Moč signala"
+
+#: ../plugins/bluetooth//PageComponent.qml:429
+msgid "Forget this device"
+msgstr "Pozabi to napravo"
+
+#: ../plugins/about//PhoneNumbers.qml:31
+msgid "Phone number:"
+msgstr "Telefonska številka:"
+
+#: ../plugins/about//PhoneNumber.qml:36
+msgid "Phone number"
+msgstr "Telefonska številka"
+
+#: ../plugins/about//Storage.qml:33 ../plugins/about//PageComponent.qml:143
+msgid "Storage"
+msgstr "Shramba"
+
+#: ../plugins/about//Storage.qml:85
+msgid "Used by Ubuntu"
+msgstr "Uporablja Ubuntu"
+
+#: ../plugins/about//Storage.qml:86
+msgid "Videos"
+msgstr "Video"
+
+#: ../plugins/about//Storage.qml:87
+msgid "Audio"
+msgstr "Zvok"
+
+#: ../plugins/about//Storage.qml:88
+msgid "Pictures"
+msgstr "Slike"
+
+#: ../plugins/about//Storage.qml:89
+msgid "Other files"
+msgstr "Druge datoteke"
+
+#: ../plugins/about//Storage.qml:90
+msgid "Used by apps"
+msgstr "Uporabljajo programi"
+
+#: ../plugins/about//Storage.qml:140
+msgid "Total storage"
+msgstr "Celotna shramba"
+
+#: ../plugins/about//Storage.qml:152
+msgid "Free space"
+msgstr "Nezaseden prostor"
+
+#: ../plugins/about//Storage.qml:172
+msgid "By name"
+msgstr "Po imenu"
+
+#: ../plugins/about//Storage.qml:172
+msgid "By size"
+msgstr "Po velikosti"
+
+#: ../plugins/about//DevMode.qml:35 ../plugins/about//DevMode.qml:90
+msgid "Developer Mode"
+msgstr "Način za razvijalce"
+
+#: ../plugins/about//DevMode.qml:84
+msgid ""
+"In Developer Mode, anyone can access, change or delete anything on this "
+"phone by connecting it to another device."
+msgstr ""
+"V Načinu za razvijalce lahko vsak dostopa, spreminja ali briše vse na tem "
+"telefonu s povezovanjem z drugo napravo."
+
+#: ../plugins/about//DevMode.qml:110
+msgid "You need a passcode or passphrase set to use Developer Mode."
+msgstr ""
+"Za uporabo Načina za razvijalce potrebujete geslo ali šifrirno reklo."
+
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: ../plugins/about//PageComponent.qml:34
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:278
+msgid "About this phone"
+msgstr "O tem telefonu"
+
+#: ../plugins/about//PageComponent.qml:109
+msgid "Serial"
+msgstr "Zaporedna številka"
+
+#: ../plugins/about//PageComponent.qml:124
+msgid "Wi-Fi address"
+msgstr "Naslov Wi-Fi-ja"
+
+#: ../plugins/about//PageComponent.qml:132
+msgid "Bluetooth address"
+msgstr "Naslov Bluetootha"
+
+#: ../plugins/about//PageComponent.qml:144
+#, qt-format
+msgid "%1 free"
+msgstr "%1 prosto"
+
+#: ../plugins/about//PageComponent.qml:151
+msgid "Software:"
+msgstr "Programska oprema:"
+
+#: ../plugins/about//PageComponent.qml:156
+msgid "OS"
+msgstr "OS"
+
+#: ../plugins/about//PageComponent.qml:165
+msgid "Last updated"
+msgstr "Nazadnje posodobljeno"
+
+#: ../plugins/about//PageComponent.qml:173
+msgid "Check for updates"
+msgstr "Preveri za posodobitve"
+
+#: ../plugins/about//PageComponent.qml:182
+msgid "Legal:"
+msgstr "Pravno:"
+
+#: ../plugins/about//PageComponent.qml:187 ../plugins/about//Software.qml:11
+msgid "Software licenses"
+msgstr "Programska dovoljenja"
+
+#: ../plugins/about//PageComponent.qml:195
+msgid "Regulatory info"
+msgstr "Regulatorni podatki"
+
+#: ../plugins/about//PageComponent.qml:203
+msgid "Developer mode"
+msgstr "Način za razvijalce"
+
+#: ../plugins/about//License.qml:30
+msgid "Sorry, this license could not be displayed."
+msgstr "Tega dovoljenja ni mogoče prikazati."
+
+#: ../plugins/about//Version.qml:36
+msgid "OS Build Details"
+msgstr "Podrobnosti izgradnje OS-a"
+
+#: ../plugins/about//Version.qml:61
+msgid "OS build number"
+msgstr "Številka izgradnje OS-a"
+
+#: ../plugins/about//Version.qml:67
+msgid "Ubuntu Image part"
+msgstr "Del odtisa Ubuntu"
+
+#: ../plugins/about//Version.qml:75
+msgid "Ubuntu build description"
+msgstr "Opis izgradnje Ubuntuja"
+
+#: ../plugins/about//Version.qml:81
+msgid "Device Image part"
+msgstr "Del odtisa naprave"
+
+#: ../plugins/about//Version.qml:88
+msgid "Device build description"
+msgstr "Opis izgradnje naprave"
+
+#: ../plugins/about//Version.qml:95
+msgid "Customization Image part"
+msgstr "Del odtisa prilagoditve"
+
+#: ../plugins/time-date//ChooseTimeZone.qml:28
+msgid "Time zone"
+msgstr "Časovni pas"
+
+#: ../plugins/time-date//ChooseTimeZone.qml:46
+msgid "Set the time zone:"
+msgstr "Nastavi časovni pas:"
+
+#: ../plugins/time-date//ChooseTimeZone.qml:126
+msgid "Enter your current location."
+msgstr "Vnesite Vaš trenutni kraj."
+
+#: ../plugins/time-date//ChooseTimeZone.qml:127
+msgid "No matching place"
+msgstr "Kraja ni mogoče najti"
+
+#: ../plugins/time-date//TimePicker.qml:26
+msgid "Set time & date"
+msgstr "Nastavi čas in datum"
+
+#: ../plugins/time-date//TimePicker.qml:68
+msgid "Time"
+msgstr "Čas"
+
+#: ../plugins/time-date//TimePicker.qml:81
+msgid "Hour"
+msgstr "Ura"
+
+#: ../plugins/time-date//TimePicker.qml:95
+msgid "Minute"
+msgstr "Minute"
+
+#: ../plugins/time-date//TimePicker.qml:109
+msgid "Second"
+msgstr "Sekunde"
+
+#: ../plugins/time-date//TimePicker.qml:118
+msgid "Date"
+msgstr "Datum"
+
+#: ../plugins/time-date//TimePicker.qml:130
+msgid "Day"
+msgstr "Dan"
+
+#: ../plugins/time-date//TimePicker.qml:144
+msgid "Month"
+msgstr "Mesec"
+
+#: ../plugins/time-date//TimePicker.qml:162
+msgid "Year"
+msgstr "Leto"
+
+#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
+#: ../plugins/time-date//PageComponent.qml:29
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:314
+msgid "Time & Date"
+msgstr "Datum in čas"
+
+#: ../plugins/time-date//PageComponent.qml:53
+msgid "Time zone:"
+msgstr "Časovni pas:"
+
+#: ../plugins/time-date//PageComponent.qml:68
+msgid "Set the time and date:"
+msgstr "Nastavi čas in datum:"
+
+#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
+#: ../plugins/system-update//PageComponent.qml:38
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:326
+msgid "Updates"
+msgstr "Posodobitve"
+
+#: ../plugins/system-update//PageComponent.qml:117
+msgid "Update System"
+msgstr "Posodobi sistem"
+
+#: ../plugins/system-update//PageComponent.qml:118
+msgid "The phone needs to restart to install the system update."
+msgstr "Telefon se mora zaradi namestitve posodobitev sistema znova zagnati."
+
+#: ../plugins/system-update//PageComponent.qml:118
+msgid "Connect the phone to power before installing the system update."
+msgstr ""
+"Pred nameščanjem posodobitev sistema povežite telefon v električno omrežje."
+
+#: ../plugins/system-update//PageComponent.qml:121
+msgid "Install & Restart"
+msgstr "Namesti in ponovno zaženi"
+
+#: ../plugins/system-update//PageComponent.qml:131
+msgid "Not Now"
+msgstr "Ne zdaj"
+
+#: ../plugins/system-update//PageComponent.qml:137
+msgid "Install"
+msgstr "Namesti"
+
+#: ../plugins/system-update//PageComponent.qml:152
+msgid "Installation failed"
+msgstr "Namestitev ni uspela"
+
+#: ../plugins/system-update//PageComponent.qml:156
+#: ../plugins/cellular//Components//SimEditor.qml:200
+msgid "OK"
+msgstr "V redu"
+
+#: ../plugins/system-update//PageComponent.qml:176
+msgid "Software is up to date"
+msgstr "Programska oprema je posodobljena"
+
+#: ../plugins/system-update//PageComponent.qml:235
+#: ../plugins/system-update//PageComponent.qml:241
+msgid "Sorry, the system update failed."
+msgstr "Sistemska posodobitev ni uspela."
+
+#: ../plugins/system-update//PageComponent.qml:254
+msgid "Restarting…"
+msgstr "Ponovni zagon ..."
+
+#: ../plugins/system-update//PageComponent.qml:298
+msgid "Checking for updates…"
+msgstr "Preverjanje za posodobitve ..."
+
+#: ../plugins/system-update//PageComponent.qml:298
+msgid "Connect to the Internet to check for updates"
+msgstr "Za preveritev posodobitev se povežite z internetom"
+
+#: ../plugins/system-update//PageComponent.qml:313
+#: ../plugins/system-update//PageComponent.qml:471
+msgid "Retry"
+msgstr "Poskusi znova"
+
+#: ../plugins/system-update//PageComponent.qml:338
+#, qt-format
+msgid "Install %1 update…"
+msgid_plural "Install %1 updates…"
+msgstr[0] "Namesti %1 posodobitev ..."
+msgstr[1] "Namesti %1 posodobitev ..."
+msgstr[2] "Namesti %1 posodobitvi ..."
+msgstr[3] "Namesti %1 posodobitve .."
+
+#: ../plugins/system-update//PageComponent.qml:339
+#, qt-format
+msgid "Install %1 update"
+msgid_plural "Install %1 updates"
+msgstr[0] "Namesti %1 posodobitev"
+msgstr[1] "Namesti %1 posodobitev"
+msgstr[2] "Namesti %1 posodobitvi"
+msgstr[3] "Namesti %1 posodobitve"
+
+#: ../plugins/system-update//PageComponent.qml:340
+msgid "Pause All"
+msgstr "Premor vsega"
+
+#: ../plugins/system-update//PageComponent.qml:474
+msgid "Install…"
+msgstr "Namesti ..."
+
+#: ../plugins/system-update//PageComponent.qml:476
+msgid "Download"
+msgstr "Prejem"
+
+#: ../plugins/system-update//PageComponent.qml:480
+msgid "Pause"
+msgstr "Premor"
+
+#: ../plugins/system-update//PageComponent.qml:482
+msgid "Resume"
+msgstr "Nadaljuj"
+
+#: ../plugins/system-update//PageComponent.qml:484
+msgid "Update"
+msgstr "Posodobi"
+
+#: ../plugins/system-update//PageComponent.qml:522
+msgid "Installing"
+msgstr "Nameščanje"
+
+#: ../plugins/system-update//PageComponent.qml:524
+msgid "Installed"
+msgstr "Nameščeno"
+
+#: ../plugins/system-update//PageComponent.qml:525
+msgid "Downloading"
+msgstr "Prejemanje"
+
+#: ../plugins/system-update//PageComponent.qml:536
+#, qt-format
+msgid "%1 of %2"
+msgstr "%1 od %2"
+
+#: ../plugins/system-update//PageComponent.qml:635
+msgid "Version: "
+msgstr "Različica: "
+
+#: ../plugins/system-update//PageComponent.qml:667
+msgid "Sign in to Ubuntu One to receive updates for apps."
+msgstr "Za prejemanje posodobitev programov se prijavite v Ubuntu One."
+
+#: ../plugins/system-update//PageComponent.qml:676
+msgid "Sign In…"
+msgstr "Prijava ..."
+
+#: ../plugins/system-update//PageComponent.qml:720
+msgid "Installing update…"
+msgstr "Nameščanje posodobitev ..."
+
+#: ../plugins/system-update//PageComponent.qml:759
+#: ../plugins/system-update//Configuration.qml:29
+msgid "Auto download"
+msgstr "Samodejni prejem"
+
+#: ../plugins/system-update//PageComponent.qml:764
+msgid "On wi-fi"
+msgstr "Ob povezavi wi-fi"
+
+#: ../plugins/system-update//PageComponent.qml:766
+msgid "Always"
+msgstr "Vedno"
+
+#: ../plugins/system-update//PageComponent.qml:781
+msgid " bytes"
+msgstr " bajtov"
+
+#: ../plugins/system-update//PageComponent.qml:784
+msgid " KiB"
+msgstr " KiB"
+
+#: ../plugins/system-update//PageComponent.qml:787
+msgid " MiB"
+msgstr " MiB"
+
+#: ../plugins/system-update//PageComponent.qml:790
+msgid " GiB"
+msgstr " GiB"
+
+#: ../plugins/system-update//Configuration.qml:34
+msgid "Download future updates automatically:"
+msgstr "Prejmi prihodnje posodobitve samodejno:"
+
+#: ../plugins/system-update//Configuration.qml:53
+msgid "When on wi-fi"
+msgstr "kadar je vključen wi-fi"
+
+#: ../plugins/system-update//Configuration.qml:54
+msgid "On any data connection"
+msgstr "ob vsakršni podatkovni povezavi"
+
+#: ../plugins/system-update//Configuration.qml:55
+msgid "Data charges may apply."
+msgstr "Prenosi podatkov bodo morda zaračunani."
 
 #: ../plugins/background//Components//AddRemove.qml:52
 msgid "No images selected"
@@ -1833,6 +1961,67 @@ msgstr "Dodaj sliko ..."
 msgid "Remove images…"
 msgstr "Odstrani slike ..."
 
+#: ../plugins/cellular//Components//CellularMultiSim.qml:82
+#: ../plugins/cellular//Components//NoSim.qml:29
+#: ../plugins/cellular//Components//CellularSingleSim.qml:32
+msgid "Cellular data:"
+msgstr "Mobilni podatki:"
+
+#: ../plugins/cellular//Components//CellularMultiSim.qml:138
+#: ../plugins/cellular//Components//NoSim.qml:32
+#: ../plugins/cellular//Components//CellularSingleSim.qml:51
+msgid "2G only (saves battery)"
+msgstr "samo 2G (varčuje z baterijo)"
+
+#: ../plugins/cellular//Components//CellularMultiSim.qml:139
+#: ../plugins/cellular//Components//CellularSingleSim.qml:52
+msgid "2G/3G (faster)"
+msgstr "2G/3G (hitrejše)"
+
+#: ../plugins/cellular//Components//CellularMultiSim.qml:140
+#: ../plugins/cellular//Components//NoSim.qml:32
+#: ../plugins/cellular//Components//CellularSingleSim.qml:53
+msgid "2G/3G/4G (faster)"
+msgstr "2G/3G/4G (hitreje)"
+
+#: ../plugins/cellular//Components//CellularMultiSim.qml:182
+#: ../plugins/cellular//Components//NoSim.qml:37
+#: ../plugins/cellular//Components//CellularSingleSim.qml:72
+msgid "Data roaming"
+msgstr "Podatkovno gostovanje"
+
+#: ../plugins/cellular//Components//SimEditor.qml:77
+msgid "Edit SIM Name"
+msgstr "Uredi SIM ime"
+
+#: ../plugins/cellular//Components//DefaultSim.qml:31
+msgid "Ask me each time"
+msgstr "Vedno me vprašaj"
+
+#: ../plugins/cellular//Components//DefaultSim.qml:36
+msgid "For outgoing calls, use:"
+msgstr "Za odhodne klice uporabi:"
+
+#: ../plugins/cellular//Components//DefaultSim.qml:50
+msgid ""
+"You can change the SIM for individual calls, or for contacts in the address "
+"book."
+msgstr "SIM lahko spremenite za posamezne klice ali za stike v imeniku."
+
+#: ../plugins/cellular//Components//DefaultSim.qml:57
+msgid "For messages, use:"
+msgstr "Za sporočila uporabi:"
+
+#: ../plugins/cellular//Components//MultiSim.qml:42
+#: ../plugins/cellular//Components//SingleSim.qml:37
+msgid "Hotspot disabled because Wi-Fi is off."
+msgstr "Vroča vstopna točka je onemogočena, ker je Wi-Fi izklopljen."
+
+#: ../plugins/cellular//Components//MultiSim.qml:58
+#: ../plugins/cellular//Components//SingleSim.qml:52
+msgid "Data usage statistics"
+msgstr "Statistika uporabe podatkov"
+
 #: ../plugins/security-privacy//diagnostics//PageComponent.qml:51
 msgid "Privacy policy"
 msgstr "Pravilnik o zasebnosti"
@@ -1853,81 +2042,6 @@ msgstr "Predhodna poročila o napaki"
 msgid "Includes info about what an app was doing when it failed."
 msgstr "Zajema podrobnosti o tem, kaj je program počel, ko je spodletel."
 
-#: ../plugins/cellular//Components//NoSim.qml:29
-#: ../plugins/cellular//Components//CellularMultiSim.qml:82
-#: ../plugins/cellular//Components//CellularSingleSim.qml:32
-msgid "Cellular data:"
-msgstr "Mobilni podatki:"
-
-#: ../plugins/cellular//Components//NoSim.qml:32
-#: ../plugins/cellular//Components//CellularMultiSim.qml:138
-#: ../plugins/cellular//Components//CellularSingleSim.qml:51
-msgid "2G only (saves battery)"
-msgstr "samo 2G (varčuje z baterijo)"
-
-#: ../plugins/cellular//Components//CellularMultiSim.qml:139
-#: ../plugins/cellular//Components//CellularSingleSim.qml:52
-msgid "2G/3G (faster)"
-msgstr "2G/3G (hitrejše)"
-
-#: ../plugins/cellular//Components//NoSim.qml:32
-#: ../plugins/cellular//Components//CellularMultiSim.qml:140
-#: ../plugins/cellular//Components//CellularSingleSim.qml:53
-msgid "2G/3G/4G (faster)"
-msgstr "2G/3G/4G (hitreje)"
-
-#: ../plugins/cellular//Components//NoSim.qml:37
-#: ../plugins/cellular//Components//CellularMultiSim.qml:182
-#: ../plugins/cellular//Components//CellularSingleSim.qml:72
-msgid "Data roaming"
-msgstr "Podatkovno gostovanje"
-
-#: ../plugins/cellular//Components//SimEditor.qml:77
-msgid "Edit SIM Name"
-msgstr "Uredi SIM ime"
-
-#: ../plugins/cellular//Components//SimEditor.qml:200
-msgid "OK"
-msgstr "V redu"
-
-#: ../plugins/cellular//Components//SingleSim.qml:58
-#: ../plugins/cellular//Components//SingleSim.qml:66
-#: ../plugins/cellular//Components//NoSim.qml:47
-msgid "Carrier"
-msgstr "Ponudnik"
-
-#: ../plugins/cellular//Components//SingleSim.qml:37
-#: ../plugins/cellular//Components//MultiSim.qml:42
-msgid "Hotspot disabled because Wi-Fi is off."
-msgstr "Vroča vstopna točka je onemogočena, ker je Wi-Fi izklopljen."
-
-#: ../plugins/cellular//Components//SingleSim.qml:52
-#: ../plugins/cellular//Components//MultiSim.qml:58
-msgid "Data usage statistics"
-msgstr "Statistika uporabe podatkov"
-
-#: ../plugins/cellular//Components//SingleSim.qml:72
-msgid "APN"
-msgstr "APN"
-
-#: ../plugins/cellular//Components//DefaultSim.qml:29
-msgid "Ask me each time"
-msgstr "Vedno me vprašaj"
-
-#: ../plugins/cellular//Components//DefaultSim.qml:34
-msgid "For outgoing calls, use:"
-msgstr "Za odhodne klice uporabi:"
-
-#: ../plugins/cellular//Components//DefaultSim.qml:48
-msgid ""
-"You can change the SIM for individual calls, or for contacts in the address "
-"book."
-msgstr "SIM lahko spremenite za posamezne klice ali za stike v imeniku."
-
-#: ../plugins/cellular//Components//DefaultSim.qml:55
-msgid "For messages, use:"
-msgstr "Za sporočila uporabi:"
-
 #: ../src/qml/MainWindow.qml:133
 msgid "Search"
 msgstr "Iskanje"
@@ -1940,6 +2054,88 @@ msgstr "Osebno"
 msgid "System"
 msgstr "Sistem"
 
+#: ../wizard/qml/Pages//30-passwd-type.qml:72
+msgid "Please select how you’d like to unlock your phone."
+msgstr "Izberite, kako želite odkleniti vaš telefon."
+
+#: ../wizard/qml/Pages//30-passwd-type.qml:92
+msgid "Swipe"
+msgstr "Poteg"
+
+#: ../wizard/qml/Pages//30-passwd-type.qml:93
+msgid "No security"
+msgstr "Brez varnosti"
+
+#: ../wizard/qml/Pages//30-passwd-type.qml:96
+msgid "4 numbers"
+msgstr "4 številke"
+
+#: ../wizard/qml/Pages//30-passwd-type.qml:99
+msgid "Numbers and letters"
+msgstr "Številke in črke"
+
+#: ../wizard/qml/Pages//30-passwd-type.qml:112
+#: ../wizard/qml/Pages//40-wifi.qml:196 ../wizard/qml/Pages//10-welcome.qml:85
+#: ../wizard/qml/Pages//50-location.qml:92
+#: ../wizard/qml/Pages//60-reporting.qml:48
+msgid "Continue"
+msgstr "Nadaljuj"
+
+#: ../wizard/qml/Pages//40-wifi.qml:27
+msgid "Connect to Wi‑Fi"
+msgstr "Poveži se z Wi-Fi-jem"
+
+#: ../wizard/qml/Pages//40-wifi.qml:146
+msgid "Available networks…"
+msgstr "Razpoložljiva omrežja ..."
+
+#: ../wizard/qml/Pages//40-wifi.qml:147
+msgid "No available networks."
+msgstr "Ni razpoložljivih omrežij."
+
+#: ../wizard/qml/Pages//40-wifi.qml:196
+#: ../wizard/qml/Pages//31-passwd-set.qml:77
+#: ../wizard/qml/Pages//20-sim.qml:67
+msgid "Skip"
+msgstr "Preskoči"
+
+#: ../wizard/qml/Pages//here-terms.qml:25
+msgid "Terms & Conditions"
+msgstr "Pogoji uporabe"
+
+#: ../wizard/qml/Pages//31-passwd-set.qml:48
+msgid "Enter passphrase"
+msgstr "Vnesite šifrirno reklo"
+
+#: ../wizard/qml/Pages//31-passwd-set.qml:49
+msgid "Choose your passcode"
+msgstr "Izberite svoje geslo"
+
+#: ../wizard/qml/Pages//31-passwd-set.qml:56
+msgid "Passphrase must be 4 characters long"
+msgstr "Šifrirno reklo mora biti dolgo vsaj 4 znake"
+
+#: ../wizard/qml/Pages//20-sim.qml:23
+msgid "Add a SIM card and restart your device"
+msgstr "Dodajte kartico SIM in ponovno zaženite napravo"
+
+#: ../wizard/qml/Pages//20-sim.qml:53
+msgid "Without it, you won’t be able to make calls or use text messaging."
+msgstr "Brez nje ne bo mogoče opravljati klicev ali besedilnih sporočil."
+
+#: ../wizard/qml/Pages//passwd-confirm.qml:51
+msgid "Sorry, incorrect passphrase."
+msgstr "Nepravilno geslo."
+
+#: ../wizard/qml/Pages//passwd-confirm.qml:51
+#: ../wizard/qml/Pages//passwd-confirm.qml:52
+msgid "Please try again."
+msgstr "Poskusite znova."
+
+#: ../wizard/qml/Pages//passwd-confirm.qml:52
+msgid "Sorry, incorrect passcode."
+msgstr "Nepravilno geslo."
+
 #: ../wizard/qml/Pages//80-finished.qml:22
 msgid "All done"
 msgstr "Opravljeno"
@@ -1948,87 +2144,13 @@ msgstr "Opravljeno"
 msgid "Nice work!"
 msgstr "Odlično!"
 
-#: ../wizard/qml/Pages//80-finished.qml:45
+#: ../wizard/qml/Pages//80-finished.qml:44
 msgid "Your phone is now ready to use."
 msgstr "Vaš telefon je sedaj pripravljen za uporabo."
 
-#: ../wizard/qml/Pages//80-finished.qml:52
+#: ../wizard/qml/Pages//80-finished.qml:51
 msgid "Finish"
 msgstr "Dokončaj"
-
-#: ../wizard/qml/Pages//terms.qml:25
-msgid "Terms & Conditions"
-msgstr "Pogoji uporabe"
-
-#: ../wizard/qml/Pages//15-passwd.qml:38
-msgid "Set lock security"
-msgstr "Nastavi zaklep"
-
-#: ../wizard/qml/Pages//15-passwd.qml:97
-msgid "Swipe"
-msgstr "Poteg"
-
-#: ../wizard/qml/Pages//15-passwd.qml:147
-msgid "Those PIN codes don't match."
-msgstr "Kodi PIN se ne ujemata."
-
-#: ../wizard/qml/Pages//15-passwd.qml:149
-msgid "Those passphrases don't match."
-msgstr "Ti šifrirni rekli se ne ujemata."
-
-#: ../wizard/qml/Pages//15-passwd.qml:157
-msgid "PIN code must be at least four digits long."
-msgstr "Koda PIN mora biti dolga vsaj štiri številke."
-
-#: ../wizard/qml/Pages//15-passwd.qml:159
-msgid "Passphrase must be at least four characters long."
-msgstr "Šifrirno reklo mora biti dolgo vsaj štiri znake."
-
-#: ../wizard/qml/Pages//10-welcome.qml:85
-#: ../wizard/qml/Pages//15-passwd.qml:170 ../wizard/qml/Pages//20-wifi.qml:195
-#: ../wizard/qml/Pages//40-reporting.qml:50
-#: ../wizard/qml/Pages//30-location.qml:79
-msgid "Continue"
-msgstr "Nadaljuj"
-
-#: ../wizard/qml/Pages//30-location.qml:60
-msgid "Use your mobile network and Wi-Fi to work out where you are"
-msgstr ""
-
-#. TRANSLATORS: HERE is a trademark for Nokia's location service, you probably shouldn't translate it
-#: ../wizard/qml/Pages//30-location.qml:69
-msgid ""
-"I have read and agreed to the HERE <a href='terms.qml'>terms and "
-"conditions</a>"
-msgstr ""
-
-#: ../wizard/qml/Pages//40-reporting.qml:22
-msgid "Bug reporting"
-msgstr "Poročanje hroščev"
-
-#: ../wizard/qml/Pages//40-reporting.qml:35
-msgid "Your phone is set up to automatically report errors to Canonical."
-msgstr "Vaš telefon je nastavljen, da samodejno pošilja napake h Canonicalu."
-
-#: ../wizard/qml/Pages//40-reporting.qml:43
-msgid "This can be disabled in System Settings."
-msgstr "To se da onemogočiti v Nastavitvah sistema."
-
-#: ../wizard/qml/Pages//no-sim.qml:22
-msgid "Add a SIM card"
-msgstr "Dodaj kartico SIM"
-
-#: ../wizard/qml/Pages//no-sim.qml:33
-msgid "Please insert a SIM card before you continue."
-msgstr "Preden nadaljujete, vnesite kartico SIM."
-
-#: ../wizard/qml/Pages//no-sim.qml:35
-msgid "Without it, you won’t be able to make calls or use text messaging."
-msgstr "Brez nje ne bo mogoče opravljati klicev ali besedilnih sporočil."
-
-#: ../wizard/qml/Pages//no-sim.qml:50 ../wizard/qml/Pages//20-wifi.qml:195
-msgid "Skip"
-msgstr "Preskoči"
 
 #: ../wizard/qml/Pages//10-welcome.qml:25
 msgid "Hi!"
@@ -2042,744 +2164,790 @@ msgstr "Dobrodošli v vaš telefon Ubuntu."
 msgid "Let’s get started."
 msgstr "Pa začnimo."
 
-#: ../wizard/qml/Pages//20-wifi.qml:27
-msgid "Connect to Wi‑Fi"
-msgstr "Poveži se z Wi-Fi-jem"
+#. TRANSLATORS: HERE is a trademark for Nokia's location service, you probably shouldn't translate it
+#: ../wizard/qml/Pages//50-location.qml:58
+msgid ""
+"Ubuntu includes location services provided by HERE, enabling apps to "
+"pinpoint your location."
+msgstr ""
+"Ubuntu vključuje lokacijske storitve, ki jih zagotavlja HERE, kar omogoča "
+"programom, da določajo vaš položaj."
 
-#: ../wizard/qml/Pages//20-wifi.qml:146
-msgid "Available networks"
-msgstr "Razpoložljiva omrežja"
+#: ../wizard/qml/Pages//50-location.qml:64
+msgid ""
+"Allow apps to use your mobile and Wi-Fi networks to determine your location."
+msgstr ""
+"Dovolite programom uporabo vašega mobilnega in Wi-Fi omrežja za določitev "
+"vašega položaja."
 
-#: ../wizard/qml/Components//Page.qml:84
+#. TRANSLATORS: HERE is a trademark for Nokia's location service, you probably shouldn't translate it
+#: ../wizard/qml/Pages//50-location.qml:74
+msgid ""
+"Accept the HERE <a href='terms.qml'>terms and conditions</a> to enable these "
+"services."
+msgstr ""
+"Sprejmite <a href='terms.qml'>pogoje in pravila</a> HERE za omogočitev teh "
+"storitev."
+
+#: ../wizard/qml/Pages//50-location.qml:85
+msgid ""
+"This service can be disabled at any time from the <b>System Settings</b> "
+"menu."
+msgstr ""
+"To storitev je mogoče kadarkoli onemogočiti v meniju <b>Sistemske "
+"nastavitve</b>."
+
+#: ../wizard/qml/Pages//60-reporting.qml:22
+msgid "Improving your experience"
+msgstr "Izboljševanje vaše izkušnje"
+
+#: ../wizard/qml/Pages//60-reporting.qml:34
+msgid ""
+"Your phone is set up to automatically report errors to Canonical and its "
+"partners, the makers of the operating system."
+msgstr ""
+"Vaš telefon je nastavljen, da samodejno poroča napake Canonicalu in njegovim "
+"partnerjem, ustvarjalcem operacijskega sistema."
+
+#: ../wizard/qml/Pages//60-reporting.qml:41
+msgid ""
+"This can be disabled in <b>System Settings</b> under <b>Security &amp; "
+"Privacy</b>"
+msgstr ""
+"To je možno onemogočiti v <b>Sistemskih nastavitvah</b> pod  <b>Varnost "
+"&amp; Zasebnost</b>"
+
+#: ../wizard/qml/Components//Page.qml:89
 msgid "Back"
 msgstr "Nazaj"
 
-#: ../wizard/qml/Components//StackButton.qml:51
+#: ../wizard/qml/Components//StackButton.qml:40
 #, qt-format
 msgid "〈  %1"
 msgstr "〈  %1"
 
-#: ../wizard/qml/Components//StackButton.qml:54
+#: ../wizard/qml/Components//StackButton.qml:43
 #, qt-format
 msgid "%1  〉"
 msgstr "%1  〉"
 
-#. TRANSLATORS: This is a keyword or name for the update-notification plugin which is used while searching
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:56
-msgid "Updates available"
-msgstr "Na voljo so posodobitve"
-
-#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:60
-msgid "system"
-msgstr "sistem"
-
-#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:62
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:100
-msgid "software"
-msgstr "programska oprema"
-
-#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:64
-msgid "update"
-msgstr "posodobitve"
-
-#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
-#: ../po/settings.js:12
-#: ../po/settings.js:44
-#: ../po/settings.js:188
-msgid "apps"
-msgstr "programi"
-
-#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
-#: ../po/settings.js:14
-#: ../po/settings.js:88
-#: ../po/settings.js:274
-#: ../po/settings.js:340
-msgid "automatic"
-msgstr "samodejno"
-
-#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#: ../po/settings.js:16
-msgid "download"
-msgstr "prejem"
-
-#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#: ../po/settings.js:18
-msgid "upgrade"
-msgstr "nadgradi"
-
-#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#: ../po/settings.js:20
-msgid "click"
-msgstr "click"
-
-#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:30
-msgid "Flight Mode"
-msgstr "Način letenja"
-
-#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:32
-msgid "flight"
-msgstr "let"
-
-#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:34
-msgid "plane"
-msgstr "letalo"
-
-#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:36
-msgid "offline"
-msgstr "nepovezan"
-
-#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
-#: ../po/settings.js:30
-msgid "airplane"
-msgstr "letalo"
-
-#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:22
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:46
-msgid "network"
-msgstr "omrežje"
-
-#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:120
-msgid "Orientation Lock"
-msgstr "Zaklep usmerjenosti"
-
-#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:122
-msgid "rotation"
-msgstr "obračanje"
-
-#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:124
-msgid "orientation"
-msgstr "usmerjenost"
-
-#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:126
-msgid "lock"
-msgstr "zakleni"
-
-#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:128
-msgid "screen"
-msgstr "zaslon"
-
-#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:94
-msgid "phone"
-msgstr "telefon"
-
-#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
-#: ../po/settings.js:50
-msgid "services"
-msgstr "storitve"
-
-#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
-#: ../po/settings.js:52
-msgid "forwarding"
-msgstr "posredovanje"
-
-#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
-#: ../po/settings.js:54
-msgid "waiting"
-msgstr "čakanje"
-
-#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
-#: ../po/settings.js:56
-msgid "call"
-msgstr "klic"
-
-#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
-#: ../po/settings.js:58
-#: ../po/settings.js:154
-msgid "dialpad"
-msgstr "številčnica"
-
-#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
-#: ../po/settings.js:60
-msgid "shortcuts"
-msgstr "bližnjice"
-
-#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
-#: ../po/settings.js:62
-msgid "numbers"
-msgstr "številke"
-
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:154
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:4
 msgid "appearance"
 msgstr "izgled"
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:156
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:6
 msgid "background"
 msgstr "ozadje"
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:158
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:8
 msgid "wallpaper"
 msgstr "ozadje"
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: ../po/settings.js:72
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:10
 msgid "art"
 msgstr "umetnost"
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: ../po/settings.js:74
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:12
 msgid "photo"
 msgstr "fotografija"
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: ../po/settings.js:76
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:14
 msgid "picture"
 msgstr "slika"
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: ../po/settings.js:78
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:16
 msgid "image"
 msgstr "slika"
 
-#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:4
-msgid "language"
-msgstr "jezik"
-
-#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
-#: ../po/settings.js:84
-#: ../po/settings.js:158
-msgid "keyboard"
-msgstr "tipkovnica"
-
-#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: ../po/settings.js:86
-msgid "spellcheck"
-msgstr "črkovanje"
-
-#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: ../po/settings.js:90
-msgid "correct"
-msgstr "popravi"
-
-#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: ../po/settings.js:92
-msgid "suggestions"
-msgstr "predlogi"
-
-#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: ../po/settings.js:94
-msgid "capitalization"
-msgstr "velike začetnice"
-
-#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: ../po/settings.js:96
-msgid "punctuation"
-msgstr "ločila"
-
-#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: ../po/settings.js:98
-msgid "layout"
-msgstr "postavitev"
-
-#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
-#: ../po/settings.js:100
-#: ../po/settings.js:336
-msgid "display"
-msgstr "prikaz"
-
-#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: ../po/settings.js:102
-msgid "words"
-msgstr "besede"
-
-#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: ../po/settings.js:104
-msgid "vibration"
-msgstr "vibriranje"
-
-#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:130
-msgid "Example"
-msgstr "Primer"
-
-#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:132
-msgid "example"
-msgstr "primer"
-
-#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:134
-msgid "test"
-msgstr "preizkus"
-
-#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:136
-msgid "sample"
-msgstr "primer"
-
-#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:148
-msgid "bluetooth"
-msgstr "bluetooth"
-
-#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
-#: ../po/settings.js:118
-msgid "headset"
-msgstr "slušalke z mikrofonom"
-
-#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
-#: ../po/settings.js:120
-msgid "pair"
-msgstr "par"
-
-#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:88
-msgid "device"
-msgstr "naprava"
-
-#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
-#: ../po/settings.js:124
-msgid "discover"
-msgstr "odkrij"
-
-#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
-#: ../po/settings.js:126
-msgid "car"
-msgstr "avto"
-
-#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
-#: ../po/settings.js:128
-msgid "handsfree"
-msgstr "prostoročno"
-
-#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:48
-msgid "wireless"
-msgstr "brezžično"
-
-#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: ../po/settings.js:132
-#: ../po/settings.js:172
-msgid "connect"
-msgstr "poveži"
-
-#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: ../po/settings.js:134
-#: ../po/settings.js:174
-msgid "disconnect"
-msgstr "prekini"
-
-#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
-#: ../po/settings.js:136
-msgid "stereo"
-msgstr "stereo"
-
 #. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:106
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:18
 msgid "Accessibility"
 msgstr "Dostopnost"
 
 #. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:108
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:20
 msgid "accessibility"
 msgstr "dostopnost"
 
 #. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:110
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:22
 msgid "a11y"
 msgstr "a11y"
 
-#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:40
-msgid "sound"
-msgstr "zvok"
-
-#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
-#: ../po/settings.js:148
-msgid "silent"
-msgstr "tiho"
-
-#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
-#: ../po/settings.js:150
-msgid "ringtone"
-msgstr "melodija zvonjenja"
-
-#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
-#: ../po/settings.js:152
-msgid "vibrate"
-msgstr "vibriranje"
-
-#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
-#: ../po/settings.js:156
-msgid "message"
-msgstr "sporočilo"
-
-#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
-#: ../po/settings.js:160
-msgid "volume"
-msgstr "glasnost"
+#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:26
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:174
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:216
+msgid "network"
+msgstr "omrežje"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:50
+#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:28
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:270
+msgid "wireless"
+msgstr "brezžično"
+
+#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:30
 msgid "wifi"
 msgstr "wifi"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:52
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:32
 msgid "wi-fi"
 msgstr "wi-fi"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: ../po/settings.js:176
+#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:34
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:272
+msgid "connect"
+msgstr "poveži"
+
+#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:36
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:274
+msgid "disconnect"
+msgstr "prekini"
+
+#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:38
 msgid "hidden"
 msgstr "skrito"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: ../po/settings.js:178
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:40
 msgid "ip"
 msgstr "ip"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: ../po/settings.js:180
-#: ../po/settings.js:222
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:42
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:294
 msgid "address"
 msgstr "naslov"
 
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:102
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:46
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:302
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:330
+msgid "software"
+msgstr "programska oprema"
+
+#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:48
 msgid "notifications"
 msgstr "obvestila"
 
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
-#: ../po/settings.js:190
+#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:50
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:252
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:334
+msgid "apps"
+msgstr "programi"
+
+#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:52
 msgid "authorize"
 msgstr "pooblasti"
 
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
-#: ../po/settings.js:192
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:54
 msgid "alerts"
 msgstr "alarmi"
 
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
-#: ../po/settings.js:194
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:56
 msgid "permissions"
 msgstr "dovoljenja"
 
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
-#: ../po/settings.js:196
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:58
 msgid "badges"
 msgstr "značke"
 
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
-#: ../po/settings.js:198
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:60
 msgid "facebook"
 msgstr "facebook"
 
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
-#: ../po/settings.js:200
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:62
 msgid "twitter"
 msgstr "twitter"
 
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
-#: ../po/settings.js:202
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:64
 msgid "flickr"
 msgstr "flickr"
 
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
-#: ../po/settings.js:204
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:66
 msgid "gmail"
 msgstr "gmail"
 
-#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:86
-msgid "about"
-msgstr "o programu"
+#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:70
+msgid "sound"
+msgstr "zvok"
 
-#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:90
-msgid "info"
-msgstr "podrobnosti"
+#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:72
+msgid "silent"
+msgstr "tiho"
 
-#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: ../po/settings.js:216
-msgid "number"
-msgstr "število"
+#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:74
+msgid "ringtone"
+msgstr "melodija zvonjenja"
 
-#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: ../po/settings.js:218
-msgid "imei"
-msgstr "imei"
+#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:76
+msgid "vibrate"
+msgstr "vibriranje"
 
-#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: ../po/settings.js:220
-msgid "serial"
-msgstr "zaporedna številka"
+#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:78
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:152
+msgid "dialpad"
+msgstr "številčnica"
 
-#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: ../po/settings.js:224
-msgid "mac"
-msgstr "mac"
+#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:80
+msgid "message"
+msgstr "sporočilo"
 
-#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: ../po/settings.js:226
-msgid "licenses"
-msgstr "dovoljenja"
+#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:82
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:118
+msgid "keyboard"
+msgstr "tipkovnica"
 
-#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: ../po/settings.js:228
-msgid "developer"
-msgstr "razvijalec"
-
-#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: ../po/settings.js:232
-msgid "storage"
-msgstr "shramba"
-
-#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: ../po/settings.js:234
-msgid "disk"
-msgstr "disk"
-
-#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: ../po/settings.js:236
-msgid "space"
-msgstr "prostor"
-
-#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: ../po/settings.js:238
-msgid "version"
-msgstr "različica"
-
-#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: ../po/settings.js:240
-msgid "revision"
-msgstr "predelava"
-
-#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:140
-msgid "security"
-msgstr "varnost"
-
-#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:142
-msgid "privacy"
-msgstr "zasebnost"
-
-#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: ../po/settings.js:250
-#: ../po/settings.js:314
-msgid "sim"
-msgstr "sim"
-
-#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: ../po/settings.js:252
-msgid "pin"
-msgstr "pin"
-
-#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: ../po/settings.js:254
-msgid "code"
-msgstr "koda"
-
-#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: ../po/settings.js:256
-msgid "password"
-msgstr "geslo"
-
-#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: ../po/settings.js:258
-msgid "passphrase"
-msgstr "šifrirno reklo"
-
-#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: ../po/settings.js:260
-msgid "swipe"
-msgstr "poteg"
-
-#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: ../po/settings.js:262
-msgid "allow"
-msgstr "dovoli"
-
-#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: ../po/settings.js:264
-msgid "access"
-msgstr "dostop"
-
-#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:76
-msgid "time"
-msgstr "čas"
-
-#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:78
-msgid "date"
-msgstr "datum"
-
-#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:80
-msgid "timezone"
-msgstr "časovni pas"
+#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:84
+msgid "volume"
+msgstr "glasnost"
 
 #. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:116
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:88
 msgid "reset"
 msgstr "ponastavi"
 
 #. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
-#: ../po/settings.js:280
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:90
 msgid "erase"
 msgstr "izbriši"
 
 #. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
-#: ../po/settings.js:282
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:92
 msgid "factory"
 msgstr "tovarna"
 
 #. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
-#: ../po/settings.js:284
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:94
 msgid "clear"
 msgstr "počisti"
 
 #. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
-#: ../po/settings.js:286
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:96
 msgid "restore"
 msgstr "obnovi"
 
-#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:20
-msgid "cellular"
-msgstr "mobilno"
-
-#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:24
-msgid "mobile"
-msgstr "mobilno"
-
-#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:26
-msgid "gsm"
-msgstr "gsm"
-
-#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: ../po/settings.js:298
-msgid "data"
-msgstr "podatki"
-
-#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: ../po/settings.js:300
-msgid "carrier"
-msgstr "nosilni signal"
-
-#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: ../po/settings.js:302
-msgid "4g"
-msgstr "4g"
-
-#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: ../po/settings.js:304
-msgid "3g"
-msgstr "3g"
-
-#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: ../po/settings.js:306
-msgid "2g"
-msgstr "2g"
-
-#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: ../po/settings.js:308
-msgid "lte"
-msgstr "lte"
-
-#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: ../po/settings.js:310
-msgid "apn"
-msgstr "apn"
-
-#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: ../po/settings.js:312
-msgid "roam"
-msgstr "gostovanje"
-
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:14
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:100
 msgid "battery"
 msgstr "baterija"
 
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:16
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:102
 msgid "power"
 msgstr "energija"
 
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
-#: ../po/settings.js:322
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:104
 msgid "charge"
 msgstr "napajanje"
 
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
-#: ../po/settings.js:324
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:106
 msgid "idle"
 msgstr "nedejavno"
 
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
-#: ../po/settings.js:328
+#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:108
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:224
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:248
+msgid "lock"
+msgstr "zakleni"
+
+#. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:110
 msgid "disable"
 msgstr "onemogoči"
 
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
-#: ../po/settings.js:330
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:112
 msgid "enable"
 msgstr "omogoči"
 
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:116
+msgid "language"
+msgstr "jezik"
+
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:120
+msgid "spellcheck"
+msgstr "črkovanje"
+
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
-#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:70
+#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:122
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:166
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:322
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:336
+msgid "automatic"
+msgstr "samodejno"
+
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:124
+msgid "correct"
+msgstr "popravi"
+
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:126
+msgid "suggestions"
+msgstr "predlogi"
+
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:128
+msgid "capitalization"
+msgstr "velike začetnice"
+
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:130
+msgid "punctuation"
+msgstr "ločila"
+
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:132
+msgid "layout"
+msgstr "postavitev"
+
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:134
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:162
+msgid "display"
+msgstr "prikaz"
+
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:136
+msgid "words"
+msgstr "besede"
+
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:138
+msgid "vibration"
+msgstr "vibriranje"
+
+#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:142
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:286
+msgid "phone"
+msgstr "telefon"
+
+#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:144
+msgid "services"
+msgstr "storitve"
+
+#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:146
+msgid "forwarding"
+msgstr "posredovanje"
+
+#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:148
+msgid "waiting"
+msgstr "čakanje"
+
+#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:150
+msgid "call"
+msgstr "klic"
+
+#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:154
+msgid "shortcuts"
+msgstr "bližnjice"
+
+#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:156
+msgid "numbers"
+msgstr "številke"
+
+#. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:160
 msgid "brightness"
 msgstr "svetlost"
 
 #. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
-#: ../po/settings.js:342
+#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:164
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:250
+msgid "screen"
+msgstr "zaslon"
+
+#. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:168
 msgid "adjust"
 msgstr "prilagodi"
 
-#: ../plugins/system-update//system_update.cpp:92
-msgid "Can't cancel current request (can't contact service)"
-msgstr ""
-"Ni mogoče preklicati trenutne zahteve (ni mogoče navezati stik s storitvijo)"
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:172
+msgid "cellular"
+msgstr "mobilno"
 
-#: ../plugins/system-update//system_update.cpp:98
-msgid "Can't pause current request (can't contact service)"
-msgstr ""
-"Ni mogoče narediti premor trenutne zahteve (ni mogoče stopiti v stik s "
-"storitvijo)"
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:176
+msgid "mobile"
+msgstr "mobilno"
 
-#: ../plugins/about//click.cpp:134
-msgid "Unknown title"
-msgstr "Neznan naslov"
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:178
+msgid "gsm"
+msgstr "gsm"
+
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:180
+msgid "data"
+msgstr "podatki"
+
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:182
+msgid "carrier"
+msgstr "nosilni signal"
+
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:184
+msgid "4g"
+msgstr "4g"
+
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:186
+msgid "3g"
+msgstr "3g"
+
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:188
+msgid "2g"
+msgstr "2g"
+
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:190
+msgid "lte"
+msgstr "lte"
+
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:192
+msgid "apn"
+msgstr "apn"
+
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:194
+msgid "roam"
+msgstr "gostovanje"
+
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:196
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:226
+msgid "sim"
+msgstr "sim"
+
+#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:198
+msgid "Example"
+msgstr "Primer"
+
+#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:200
+msgid "example"
+msgstr "primer"
+
+#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:202
+msgid "test"
+msgstr "preizkus"
+
+#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:204
+msgid "sample"
+msgstr "primer"
+
+#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:206
+msgid "Flight Mode"
+msgstr "Način letenja"
+
+#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:208
+msgid "flight"
+msgstr "let"
+
+#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:210
+msgid "plane"
+msgstr "letalo"
+
+#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:212
+msgid "offline"
+msgstr "nepovezan"
+
+#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:214
+msgid "airplane"
+msgstr "letalo"
+
+#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:220
+msgid "security"
+msgstr "varnost"
+
+#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:222
+msgid "privacy"
+msgstr "zasebnost"
+
+#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:228
+msgid "pin"
+msgstr "pin"
+
+#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:230
+msgid "code"
+msgstr "koda"
+
+#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:232
+msgid "password"
+msgstr "geslo"
+
+#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:234
+msgid "passphrase"
+msgstr "šifrirno reklo"
+
+#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:236
+msgid "swipe"
+msgstr "poteg"
+
+#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:238
+msgid "allow"
+msgstr "dovoli"
+
+#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:240
+msgid "access"
+msgstr "dostop"
+
+#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:242
+msgid "Orientation Lock"
+msgstr "Zaklep usmerjenosti"
+
+#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:244
+msgid "rotation"
+msgstr "obračanje"
+
+#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:246
+msgid "orientation"
+msgstr "usmerjenost"
+
+#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:256
+msgid "bluetooth"
+msgstr "bluetooth"
+
+#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:258
+msgid "headset"
+msgstr "slušalke z mikrofonom"
+
+#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:260
+msgid "pair"
+msgstr "par"
+
+#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:262
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:282
+msgid "device"
+msgstr "naprava"
+
+#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:264
+msgid "discover"
+msgstr "odkrij"
+
+#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:266
+msgid "car"
+msgstr "avto"
+
+#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:268
+msgid "handsfree"
+msgstr "prostoročno"
+
+#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:276
+msgid "stereo"
+msgstr "stereo"
+
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:280
+msgid "about"
+msgstr "o programu"
+
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:284
+msgid "info"
+msgstr "podrobnosti"
+
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:288
+msgid "number"
+msgstr "število"
+
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:290
+msgid "imei"
+msgstr "imei"
+
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:292
+msgid "serial"
+msgstr "zaporedna številka"
+
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:296
+msgid "mac"
+msgstr "mac"
+
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:298
+msgid "licenses"
+msgstr "dovoljenja"
+
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:300
+msgid "developer"
+msgstr "razvijalec"
+
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:304
+msgid "storage"
+msgstr "shramba"
+
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:306
+msgid "disk"
+msgstr "disk"
+
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:308
+msgid "space"
+msgstr "prostor"
+
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:310
+msgid "version"
+msgstr "različica"
+
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:312
+msgid "revision"
+msgstr "predelava"
+
+#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:316
+msgid "time"
+msgstr "čas"
+
+#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:318
+msgid "date"
+msgstr "datum"
+
+#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:320
+msgid "timezone"
+msgstr "časovni pas"
+
+#. TRANSLATORS: This is a keyword or name for the update-notification plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:324
+msgid "Updates available"
+msgstr "Na voljo so posodobitve"
+
+#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:328
+msgid "system"
+msgstr "sistem"
+
+#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:332
+msgid "update"
+msgstr "posodobitve"
+
+#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:338
+msgid "download"
+msgstr "prejem"
+
+#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:340
+msgid "upgrade"
+msgstr "nadgradi"
+
+#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:342
+msgid "click"
+msgstr "click"
 
 #: ../plugins/security-privacy//securityprivacy.cpp:318
-msgid "Incorrect PIN code. Try again."
-msgstr "Nepravilna koda PIN. Poskusite znova."
+msgid "Incorrect passcode. Try again."
+msgstr "Nepravilno geslo. Poskusite znova."
 
 #: ../plugins/security-privacy//securityprivacy.cpp:320
 msgid "Incorrect passphrase. Try again."
@@ -2797,6 +2965,21 @@ msgstr "Ni mogoče nastaviti varnostnega prikaza namiga"
 msgid "Authentication token manipulation error"
 msgstr "Napaka ravnanja z overitvenim žetonom"
 
+#: ../plugins/about//click.cpp:171
+msgid "Unknown title"
+msgstr "Neznan naslov"
+
+#: ../plugins/system-update//system_update.cpp:96
+msgid "Can't cancel current request (can't contact service)"
+msgstr ""
+"Ni mogoče preklicati trenutne zahteve (ni mogoče navezati stik s storitvijo)"
+
+#: ../plugins/system-update//system_update.cpp:102
+msgid "Can't pause current request (can't contact service)"
+msgstr ""
+"Ni mogoče narediti premor trenutne zahteve (ni mogoče stopiti v stik s "
+"storitvijo)"
+
 #: ../push-helper/software_updates_helper.py:150
 msgid "There's an updated system image."
 msgstr "Obstaja posodobljen odtis sistema."
@@ -2804,6 +2987,12 @@ msgstr "Obstaja posodobljen odtis sistema."
 #: ../push-helper/software_updates_helper.py:151
 msgid "Tap to open the system updater."
 msgstr "Tapnite za odprtje posodobilnika sistema."
+
+#~ msgid "Refresh"
+#~ msgstr "Osveži"
+
+#~ msgid "Searching"
+#~ msgstr "Iskanje"
 
 #~ msgid "Remove"
 #~ msgstr "Odstrani"
@@ -2826,5 +3015,14 @@ msgstr "Tapnite za odprtje posodobilnika sistema."
 #~ msgid "Connect to Wi-Fi"
 #~ msgstr "Poveži se z Wi-Fi-jem"
 
-#~ msgid "Connect to hidden network"
-#~ msgstr "Poveži se s skritim omrežjem"
+#~ msgid "Available networks"
+#~ msgstr "Razpoložljiva omrežja"
+
+#~ msgid "Those passphrases don't match."
+#~ msgstr "Ti šifrirni rekli se ne ujemata."
+
+#~ msgid "Passphrase must be at least four characters long."
+#~ msgstr "Šifrirno reklo mora biti dolgo vsaj štiri znake."
+
+#~ msgid "Set lock security"
+#~ msgstr "Nastavi zaklep"

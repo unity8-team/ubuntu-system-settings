@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 Canonical, Ltd.
+ * Copyright (C) 2013,2014 Canonical, Ltd.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,28 +19,26 @@ import Ubuntu.Components 0.1
 import "../Components" as LocalComponents
 
 LocalComponents.Page {
-    title: i18n.tr("Bug reporting")
+    title: i18n.tr("Improving your experience")
     forwardButtonSourceComponent: forwardButton
 
     Column {
         id: column
         anchors.fill: content
+        spacing: units.gu(2)
 
         Label {
             anchors.left: parent.left
             anchors.right: parent.right
             wrapMode: Text.Wrap
-            fontSize: "large"
-            font.bold: true
-            text: i18n.tr("Your phone is set up to automatically report errors to Canonical.")
+            text: i18n.tr("Your phone is set up to automatically report errors to Canonical and its partners, the makers of the operating system.")
         }
 
         Label {
             anchors.left: parent.left
             anchors.right: parent.right
             wrapMode: Text.Wrap
-            fontSize: "large"
-            text: i18n.tr("This can be disabled in System Settings.")
+            text: i18n.tr("This can be disabled in <b>System Settings</b> under <b>Security &amp; Privacy</b>")
         }
     }
 

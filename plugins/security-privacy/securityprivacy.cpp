@@ -30,11 +30,16 @@
 // FIXME: need to do this better including #include "../../src/i18n.h"
 // and linking to it
 #include <libintl.h>
+
+
 QString _(const char *text)
 {
     return QString::fromUtf8(dgettext(0, text));
 }
 
+#define HERE_IFACE   "com.ubuntu.location.providers.here.AccountsService"
+#define ENABLED_PROP "LicenseAccepted"
+#define PATH_PROP    "LicenseBasePath"
 #define AS_INTERFACE "com.ubuntu.AccountsService.SecurityPrivacy"
 #define AS_TOUCH_INTERFACE "com.ubuntu.touch.AccountsService.SecurityPrivacy"
 
@@ -99,6 +104,12 @@ void SecurityPrivacy::slotChanged(QString interface,
         } else if (property == "StatsWelcomeScreen") {
             Q_EMIT statsWelcomeScreenChanged();
         }
+    } else if (interface == HERE_IFACE) {
+        if (property == ENABLED_PROP) {
+            Q_EMIT hereEnabledChanged();
+        } else if (property == PATH_PROP) {
+            Q_EMIT hereLicensePathChanged();
+        }
     }
 }
 
@@ -109,6 +120,8 @@ void SecurityPrivacy::slotNameOwnerChanged()
     Q_EMIT statsWelcomeScreenChanged();
     Q_EMIT enableLauncherWhileLockedChanged();
     Q_EMIT enableIndicatorsWhileLockedChanged();
+    Q_EMIT hereEnabledChanged();
+    Q_EMIT hereLicensePathChanged();
 }
 
 bool SecurityPrivacy::getStatsWelcomeScreen()
@@ -315,7 +328,7 @@ QString SecurityPrivacy::badPasswordMessage(SecurityType type)
 {
     switch (type) {
         case SecurityPrivacy::Passcode:
-            return _("Incorrect PIN code. Try again.");
+            return _("Incorrect passcode. Try again.");
         case SecurityPrivacy::Passphrase:
             return _("Incorrect passphrase. Try again.");
         default:
@@ -460,6 +473,25 @@ void SecurityPrivacy::managerLoaded()
                                  G_CALLBACK(::userLoaded), this);
         }
     }
+}
+
+bool SecurityPrivacy::hereEnabled()
+{
+    return m_accountsService.getUserProperty(HERE_IFACE,
+                                             ENABLED_PROP).toBool();
+}
+
+void SecurityPrivacy::setHereEnabled(bool enabled)
+{
+    m_accountsService.setUserProperty(HERE_IFACE, ENABLED_PROP,
+                                      QVariant::fromValue(enabled));
+    Q_EMIT(hereEnabledChanged());
+}
+
+QString SecurityPrivacy::hereLicensePath()
+{
+    return m_accountsService.getUserProperty(HERE_IFACE,
+                                             PATH_PROP).toString();
 }
 
 void managerLoaded(GObject    *object,

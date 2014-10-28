@@ -21,46 +21,33 @@ Item {
     id: stackButton
 
     property string text
-    property bool leftArrow: false
-    property bool rightArrow: false
+
+    property bool backArrow: false
 
     signal clicked()
 
-    readonly property bool hasArrow: leftArrow || rightArrow
-
-    width: button.width
-    height: button.height
-
-    Button {
-        id: button
-        anchors.fill: parent
-        visible: !hasArrow
-        text: stackButton.text
-        onClicked: stackButton.clicked()
-    }
+    width: label.width
+    height: label.height + units.gu(4)
 
     Label {
         id: label
         anchors.verticalCenter: parent.verticalCenter
         anchors.left: parent.left
         anchors.right: parent.right
-        visible: hasArrow
         text: {
-            if (leftArrow) {
+            if (backArrow) {
                 // Translators: This is the arrow for "Back" buttons
                 return i18n.tr("〈  %1".arg(stackButton.text))
-            } else if (rightArrow) {
+            } else {
                 // Translators: This is the arrow for "Forward" buttons
                 return i18n.tr("%1  〉".arg(stackButton.text))
-            } else {
-                return stackButton.text
             }
         }
-        horizontalAlignment: leftArrow ? Text.AlignLeft : Text.AlignRight
+        horizontalAlignment: backArrow ? Text.AlignLeft : Text.AlignRight
+    }
 
-        MouseArea {
-            anchors.fill: parent
-            onClicked: stackButton.clicked()
-        }
+    MouseArea {
+        anchors.fill: parent
+        onClicked: stackButton.clicked()
     }
 }
