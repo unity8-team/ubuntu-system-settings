@@ -1,3 +1,13 @@
+ubuntu-system-settings (0.3+15.04.20141028-0ubuntu1) vivid; urgency=low
+
+  [ Michael Terry ]
+  * Fix a typo in the HERE terms link.
+
+  [ CI bot ]
+  * Resync trunk
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 28 Oct 2014 14:15:45 +0000
+
 ubuntu-system-settings (0.3+14.10.20141022-0ubuntu1) utopic; urgency=low
 
   [ CI bot ]
