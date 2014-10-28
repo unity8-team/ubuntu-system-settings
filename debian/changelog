@@ -1,3 +1,14 @@
+ubuntu-system-settings (0.3+14.10.20141022-0ubuntu1) utopic; urgency=low
+
+  [ CI bot ]
+  * Resync trunk
+
+  [ Michael Zanetti ]
+  * update code to reset launcher after launcher backend implementation
+    was reworked (LP: #1376707)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 22 Oct 2014 21:34:27 +0000
+
 ubuntu-system-settings (0.3+14.10.20141021.1-0ubuntu1) utopic; urgency=low
 
   [ Sebastien Bacher ]
