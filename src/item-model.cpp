@@ -75,9 +75,7 @@ void ItemModel::setPlugins(const QMap<QString, Plugin *> &plugins)
     Q_FOREACH(Plugin *plugin, d->m_plugins.values()) {
         QObject::connect(plugin, SIGNAL(visibilityChanged()),
                          this, SLOT(onItemVisibilityChanged()));
-        if (plugin->isVisible()) {
-            d->m_visibleItems.append(plugin);
-        }
+        d->m_visibleItems.append(plugin);
     }
     endResetModel();
 }
@@ -138,6 +136,7 @@ QHash<int, QByteArray> ItemModel::roleNames() const
 void ItemModel::onItemVisibilityChanged()
 {
     Q_D(ItemModel);
+    qWarning() << Q_FUNC_INFO;
 
     Plugin *item = qobject_cast<Plugin *>(sender());
     Q_ASSERT(item != 0);

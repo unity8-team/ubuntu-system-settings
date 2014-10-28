@@ -70,7 +70,7 @@ SystemUpdate::SystemUpdate(QObject *parent) :
     connect(&m_SystemServiceIface, SIGNAL(Rebooting(bool)),
                 this, SIGNAL(rebooting(bool)));
 
-    setCurrentDetailedVersion();
+    //setCurrentDetailedVersion();
 }
 
 SystemUpdate::~SystemUpdate() {
