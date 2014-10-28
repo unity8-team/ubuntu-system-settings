@@ -41,12 +41,4 @@ Column {
             checked: false
         }
     }
-
-    ListItem.Divider {}
-
-    ListItem.SingleValue {
-        text: i18n.tr("Carrier");
-        value: i18n.tr("N/A")
-        enabled: false
-    }
 }
