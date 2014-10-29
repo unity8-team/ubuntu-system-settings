@@ -40,12 +40,13 @@ ItemPage {
     property alias usePowerd: batteryBackend.powerdRunning
     property bool lockOnSuspend
     property var modemsSorted: manager.modems.slice(0).sort()
-    property var sims
-    property int simsPresent: 0
+
+    // we make simsPresent dynamic by adding a qml property to the mix
+    property var simsPresent: Sims.getPresent(simQmlObjects)
     property int simQmlObjects: 0
-    property int simsLocked: {
+    property int simsLockedCount: {
         var t = 0;
-        sims.forEach(function (sim) {
+        simsPresent.forEach(function (sim) {
             if (sim.simMng.lockedPins.length > 0)
                 t++;
         });
@@ -78,11 +79,11 @@ ItemPage {
                 });
                 if (sim === null)
                     console.warn('failed to create sim object');
-                else
+                else {
+                    console.warn('created sim object');
                     Sims.add(sim);
+                }
             });
-            root.sims = Sims.getPresent();
-            root.simsPresent = Sims.getPresentCount();
         }
     }
 
@@ -157,22 +158,22 @@ ItemPage {
                 objectName: "simControl"
                 text: i18n.tr("SIM PIN")
                 value: {
-                    console.warn('simQmlObjects', simQmlObjects, 'simsLocked', simsLocked, 'simsPresent', simsPresent);
-                    if (simsPresent === 1 && simsLocked > 0)
+                    console.warn('simQmlObjects', simQmlObjects, 'simsLockedCount', simsLockedCount, 'simsPresent', simsPresent.length);
+                    if (simsPresent.length === 1 && simsLockedCount > 0)
                         return i18n.tr("On");
-                    else if (simsPresent > 1 && simsLocked > 0)
-                        return simsLocked + "/" + simsPresent;
-                    else if (simsPresent === 0)
+                    else if (simsPresent.length > 1 && simsLockedCount > 0)
+                        return simsLockedCount + "/" + simsPresent.length;
+                    else if (simsPresent.length === 0)
                         return i18n.tr("No SIMs found")
                     else
                         return i18n.tr("Off");
                 }
                 progression: enabled
-                enabled: simsPresent > 0
+                enabled: simsPresent.length > 0
                 onClicked: {
-                    if (simsPresent > 0) {
+                    if (simsPresent.length > 0) {
                         pageStack.push(Qt.resolvedUrl("SimPin.qml"), {
-                            sims: sims
+                            sims: simsPresent
                         });
                     }
                 }

@@ -2,7 +2,7 @@ var sims = [];
 
 function add (sim) {
     sims.push(sim);
-    root.simsLoaded++;
+    root.simQmlObjects++;
 }
 
 function getAll () {
