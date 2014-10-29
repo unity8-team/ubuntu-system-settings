@@ -1,3 +1,12 @@
+ubuntu-system-settings (0.3+14.10.20141029~rtm-0ubuntu1) 14.09; urgency=low
+
+  [ Ken VanDine ]
+  * Refactored to use a singleton for UpdateManager shared in both QML
+    and CPP. Don't load the dynamic visibility items while creating the
+    item model, defer that to the loader. (LP: #1317007)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 29 Oct 2014 13:31:03 +0000
+
 ubuntu-system-settings (0.3+14.10.20141028~rtm-0ubuntu1) 14.09; urgency=low
 
   [ Ken VanDine ]
