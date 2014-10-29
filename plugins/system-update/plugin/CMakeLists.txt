@@ -1,8 +1,9 @@
 SET (CMAKE_AUTOMOC ON)
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
-add_library(update-plugin SHARED update-plugin.h update-plugin.cpp ../update.cpp ../update.h
-../system_update.cpp ../system_update.h ../network/network.h ../network/network.cpp)
+add_library(update-plugin SHARED update-plugin.h update-plugin.cpp ../network/network.cpp ../network/network.h
+../update.cpp ../update.h ../update_manager.cpp ../update_manager.h ../system_update.cpp ../system_update.h
+../download_tracker.h ../download_tracker.cpp)
 
 qt5_use_modules(update-plugin Core Qml Quick Network DBus)
 include_directories(/usr/include/apt-pkg/)
