@@ -42,7 +42,7 @@ ItemPage {
     property var modemsSorted: manager.modems.slice(0).sort()
     property var sims
     property int simsPresent: 0
-    property int simsLoaded: 0
+    property int simQmlObjects: 0
     property int simsLocked: {
         var t = 0;
         sims.forEach(function (sim) {
@@ -81,7 +81,7 @@ ItemPage {
                 else
                     Sims.add(sim);
             });
-            root.sims = Sims.getAll();
+            root.sims = Sims.getPresent();
             root.simsPresent = Sims.getPresentCount();
         }
     }
@@ -157,16 +157,25 @@ ItemPage {
                 objectName: "simControl"
                 text: i18n.tr("SIM PIN")
                 value: {
-                    if (simsLoaded === 1 && simsLocked > 0)
+                    console.warn('simQmlObjects', simQmlObjects, 'simsLocked', simsLocked, 'simsPresent', simsPresent);
+                    if (simsPresent === 1 && simsLocked > 0)
                         return i18n.tr("On");
-                    else if (simsLoaded > 1 && simsLocked > 0)
-                        return simsLocked + "/" + simsLoaded;
+                    else if (simsPresent > 1 && simsLocked > 0)
+                        return simsLocked + "/" + simsPresent;
+                    else if (simsPresent === 0)
+                        return i18n.tr("No SIMs found")
                     else
                         return i18n.tr("Off");
                 }
-                visible: simsPresent > 0
-                progression: true
-                onClicked: pageStack.push(Qt.resolvedUrl("SimPin.qml"), { sims: sims })
+                progression: enabled
+                enabled: simsPresent > 0
+                onClicked: {
+                    if (simsPresent > 0) {
+                        pageStack.push(Qt.resolvedUrl("SimPin.qml"), {
+                            sims: sims
+                        });
+                    }
+                }
             }
             ListItem.Standard {
                 text: i18n.tr("Encryption")
