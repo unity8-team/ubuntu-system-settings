@@ -33,4 +33,12 @@ Column {
         }
     }
 
+    ListItem.Standard {
+        text: i18n.tr("Data roaming")
+        enabled: false
+        showDivider: false
+        control: Switch {
+            checked: false
+        }
+    }
 }
