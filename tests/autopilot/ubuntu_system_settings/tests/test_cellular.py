@@ -162,7 +162,10 @@ class DualSimCellularTestCase(CellularBaseTestCase):
     def test_change_sim1_name(self):
         gsettings = Gio.Settings.new('com.ubuntu.phone')
         sim = '/ril_0'
-        old_name = gsettings.get_value('sim-names')[sim]
+        try:
+            old_name = gsettings.get_value('sim-names')[sim]
+        except:
+            old_name = 'SIM 1'
         new_name = 'FOO BAR'
         self.cellular_page.set_name(sim, new_name)
 
@@ -180,7 +183,12 @@ class DualSimCellularTestCase(CellularBaseTestCase):
     def test_change_sim2_name(self):
         gsettings = Gio.Settings.new('com.ubuntu.phone')
         sim = '/ril_1'
-        old_name = gsettings.get_value('sim-names')[sim]
+
+        try:
+            old_name = gsettings.get_value('sim-names')[sim]
+        except:
+            old_name = 'SIM 2'
+
         new_name = 'BAR BAZ'
         self.cellular_page.set_name(sim, new_name)
 
