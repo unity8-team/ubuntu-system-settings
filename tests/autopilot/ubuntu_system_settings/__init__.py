@@ -374,7 +374,7 @@ class PageChooseCarrier(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
         # wait for animation, since page.animationRunning.wait_for(False)
         # does not work?
         sleep(0.5)
-        item = self.select_single(text=carrier)
+        item = self.select_single(text=carrier, objectName="carrier")
         self.pointing_device.click_object(item)
 
 

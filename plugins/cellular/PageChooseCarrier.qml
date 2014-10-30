@@ -128,6 +128,7 @@ ItemPage {
                 // work around unfortunate ui
                 width: parent.width
                 delegate: OptionSelectorDelegate {
+                    objectName: "carrier"
                     enabled: carrierSelector.enabled
                     showDivider: false
                     text: modelData.name
