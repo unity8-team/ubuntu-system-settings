@@ -28,12 +28,12 @@ add_executable(tst-update
 # set the path to the library folder
 include_directories(/usr/include/apt-pkg/)
 
-target_link_libraries(tst-update-manager apt-pkg ${UBUNTUONEAUTH_LDFLAGS})
+target_link_libraries(tst-update-manager apt-pkg update-plugin ${UBUNTUONEAUTH_LDFLAGS})
 qt5_use_modules(tst-update-manager Qml Quick Core DBus Xml Network Test)
 add_test(NAME tst-update-manager COMMAND ${XVFB_CMD} ${CMAKE_CURRENT_BINARY_DIR}/tst-update-manager)
 
 qt5_use_modules(tst-update Qml Quick Core DBus Xml Network Test)
-target_link_libraries(tst-update apt-pkg)
+target_link_libraries(tst-update apt-pkg update-plugin)
 add_test(NAME tst-update COMMAND ${XVFB_CMD} ${CMAKE_CURRENT_BINARY_DIR}/tst-update)
 
 add_custom_command(

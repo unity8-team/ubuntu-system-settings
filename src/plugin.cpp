@@ -277,7 +277,6 @@ void Plugin::reset()
 
     delete object;
     delete component;
-
 }
 
 QQmlComponent *Plugin::entryComponent()
