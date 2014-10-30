@@ -80,7 +80,6 @@ ItemPage {
                 if (sim === null)
                     console.warn('failed to create sim object');
                 else {
-                    console.warn('created sim object');
                     Sims.add(sim);
                 }
             });
@@ -158,7 +157,6 @@ ItemPage {
                 objectName: "simControl"
                 text: i18n.tr("SIM PIN")
                 value: {
-                    console.warn('simQmlObjects', simQmlObjects, 'simsLockedCount', simsLockedCount, 'simsPresent', simsPresent.length);
                     if (simsPresent.length === 1 && simsLockedCount > 0)
                         return i18n.tr("On");
                     else if (simsPresent.length > 1 && simsLockedCount > 0)
