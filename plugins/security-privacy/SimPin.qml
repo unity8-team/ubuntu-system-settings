@@ -378,8 +378,6 @@ ItemPage {
                             s.push(i);
                         }
                         s.reverse();
-
-                        console.warn('returning', 'modem.' + s[idx] + '::locked');
                         return 'modem.' + s[idx] + '::locked';
                     }
                     id: netActionGroup
