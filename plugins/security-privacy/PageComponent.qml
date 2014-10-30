@@ -169,7 +169,7 @@ ItemPage {
                 progression: enabled
                 enabled: simsPresent.length > 0
                 onClicked: {
-                    if (simsPresent.length > 0) {
+                    if (enabled) {
                         pageStack.push(Qt.resolvedUrl("SimPin.qml"), {
                             sims: simsPresent
                         });
