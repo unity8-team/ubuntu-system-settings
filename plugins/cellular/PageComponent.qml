@@ -47,7 +47,7 @@ ItemPage {
             name: "singleSim"
             StateChangeScript {
                 script: loader.setSource("Components/SingleSim.qml", {
-                    sim: Sims.get(0)
+                    sim: Sims.getFirstPresent()
                 })
             }
             when: simsLoaded && (Sims.getPresentCount() === 1)
@@ -69,12 +69,12 @@ ItemPage {
         Component.onCompleted: {
             var component = Qt.createComponent("Components/Sim.qml");
             modemsSorted.forEach(function (path) {
-                console.warn('creating sim object for', path)
                 var sim = component.createObject(root, {
                     path: path
                 });
                 if (sim === null) {
-                    console.warn('failed to create sim object');
+                    console.warn('Failed to create Sim qml:',
+                        component.errorString());
                 } else {
                     Sims.add(sim);
                 }

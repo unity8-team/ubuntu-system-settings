@@ -54,6 +54,7 @@ public:
     void applyUpdate();
     void cancelUpdate();
     void pauseDownload();
+    bool checkTarget();
 
 public Q_SLOTS:
     void ProcessAvailableStatus(bool, bool, QString, int, QString, QString);
@@ -69,6 +70,7 @@ Q_SIGNALS:
     void downloadModeChanged();
     void versionChanged();
     void updateProcessFailed(const QString& reason);
+    void rebooting(bool status);
 
 private Q_SLOTS:
     void updateDownloadProgress(int percentage, double eta);

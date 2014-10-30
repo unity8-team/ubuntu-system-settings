@@ -19,112 +19,365 @@ import QtQuick.Layouts 1.1
 import SystemSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
+import Ubuntu.Components.Popups 0.1
 import Ubuntu.SystemSettings.Wifi 1.0
 import QMenuModel 0.1
 
-ItemPage {
-    id: othernetwork
-    title: i18n.tr("Other network")
+Component {
 
-    function settingsValid() {
-        if(networkname.length == 0) {
-            return false;
-        }
-        if(securityList.selectedIndex == 0) {
-            return true
-        }
-        if(securityList.selectedIndex == 1) {
-            return password.length >= 8
-        }
-        // WEP
-        return password.length === 5  ||
-               password.length === 10 ||
-               password.length === 13 ||
-               password.length === 26;
-    }
+    Dialog {
 
+        id: otherNetworkDialog
+        objectName: "otherNetworkDialog"
+        anchorToKeyboard: true
 
-    Column {
-        id : otherview
-        anchors {
-            top: parent.top
-            left: parent.left
-            right: parent.right
+        /* The following is a (bad) workaround for bugs
+            #1337556
+            #1337555
+
+            If the Dialog does not shrink after a user chooses e.g. WPA,
+            the anchorToKeyboard setting of OrientationHelper have no effect,
+            since the dialog never shrinks in size.
+
+            This workaround resizes the Dialog.
+        */
+
+        property int dialogVisualsHeight
+        function getVisibleChildren () {
+            var children = [feedback, networknameLabel, networkname,
+                securityListLabel, securityList, passwordListLabel,
+                password, passwordVisiblityRow, buttonRow];
+            var ret = [];
+            children.forEach(function (child) {
+                if (child.visible) {
+                    ret.push(child);
+                }
+            });
+            return ret;
         }
 
-        ListItem.Standard {
+        function getVisibleChildrenHeight () {
+            var h = 0;
+            getVisibleChildren().forEach(function (child) {
+                h = h + child.height;
+            });
+            return h;
+        }
+
+        Component.onCompleted: {
+            dialogVisualsHeight =
+                __foreground.height - getVisibleChildrenHeight();
+        }
+
+        Binding {
+            target: __foreground
+            property: "height"
+            value: dialogVisualsHeight + getVisibleChildrenHeight()
+            when: dialogVisualsHeight
+        }
+
+        function settingsValid() {
+            if(networkname.length == 0) {
+                return false;
+            }
+            if(securityList.selectedIndex == 0) {
+                return true
+            }
+            if(securityList.selectedIndex == 1) {
+                return password.length >= 8
+            }
+            // WEP
+            return password.length === 5  ||
+                   password.length === 10 ||
+                   password.length === 13 ||
+                   password.length === 26;
+        }
+
+        title: i18n.tr("Connect to Hidden Network")
+        text: feedback.enabled ? feedback.text : "";
+
+        Common {
+            id: common
+        }
+
+        states: [
+            State {
+                name: "CONNECTING"
+                PropertyChanges {
+                    target: connectAction
+                    enabled: false
+                }
+                PropertyChanges {
+                    target: connectButtonIndicator
+                    running: true
+                }
+                PropertyChanges {
+                    target: passwordVisibleSwitch
+                    enabled: false
+                }
+                PropertyChanges {
+                    target: passwordVisibleLabel
+                    opacity: 0.5
+                }
+                PropertyChanges {
+                    target: password
+                    enabled: false
+                }
+                PropertyChanges {
+                    target: passwordListLabel
+                    opacity: 0.5
+                }
+                PropertyChanges {
+                    target: securityList
+                    enabled: false
+                    opacity: 0.5
+                }
+                PropertyChanges {
+                    target: securityListLabel
+                    opacity: 0.5
+                }
+                PropertyChanges {
+                    target: networkname
+                    enabled: false
+                }
+                PropertyChanges {
+                    target: networknameLabel
+                    opacity: 0.5
+                }
+                PropertyChanges {
+                    target: feedback
+                    enabled: true
+                }
+            },
+            State {
+                name: "FAILED"
+                PropertyChanges {
+                    target: feedback
+                    enabled: true
+                }
+            },
+            State {
+                name: "SUCCEEDED"
+                PropertyChanges {
+                    target: successIndicator
+                    running: true
+                }
+                PropertyChanges {
+                    target: cancelButton
+                    enabled: false
+                }
+                PropertyChanges {
+                    target: connectAction
+                    enabled: false
+                }
+            }
+        ]
+
+        Label {
+            property bool enabled: false
+            id: feedback
+            horizontalAlignment: Text.AlignHCenter
+            height: contentHeight
+            wrapMode: Text.Wrap
+            visible: false
+        }
+
+        Label {
+            id: networknameLabel
             text : i18n.tr("Network name")
+            objectName: "networknameLabel"
+            fontSize: "medium"
+            font.bold: true
+            color: Theme.palette.selected.backgroundText
+            elide: Text.ElideRight
         }
 
         TextField {
             id : networkname
-            width: parent.width
+            objectName: "networkname"
             inputMethodHints: Qt.ImhNoPredictiveText
+        }
+
+        Label {
+            id: securityListLabel
+            text : i18n.tr("Security")
+            objectName: "securityListLabel"
+            fontSize: "medium"
+            font.bold: true
+            color: Theme.palette.selected.backgroundText
+            elide: Text.ElideRight
         }
 
         ListItem.ItemSelector {
             id: securityList
-            text: i18n.tr("Security")
+            objectName: "securityList"
             model: [i18n.tr("None"),                 // index: 0
                     i18n.tr("WPA & WPA2 Personal"),  // index: 1
                     i18n.tr("WEP"),                  // index: 2
                     ]
         }
 
-        ListItem.Standard {
-            id: passwordList
+        Label {
+            id: passwordListLabel
+            text : i18n.tr("Password")
+            objectName: "passwordListLabel"
+            fontSize: "medium"
+            font.bold: true
+            color: Theme.palette.selected.backgroundText
+            elide: Text.ElideRight
             visible: securityList.selectedIndex !== 0
-            text: i18n.tr("Password")
-            control : TextInput {
-            }
         }
 
         TextField {
             id : password
+            objectName: "password"
             visible: securityList.selectedIndex !== 0
-            width: parent.width
-            echoMode: passwordVisibleSwitch.checked ? TextInput.Normal : TextInput.Password
+            echoMode: passwordVisibleSwitch.checked ?
+                TextInput.Normal : TextInput.Password
+            inputMethodHints: passwordVisibleSwitch.checked ?
+                Qt.ImhHiddenText : Qt.ImhNoPredictiveText;
+            onAccepted: {
+                connectAction.trigger();
+            }
         }
 
-        ListItem.Standard {
-            text: i18n.tr("Password visible")
+        Row {
+            id: passwordVisiblityRow
+            layoutDirection: Qt.LeftToRight
+            spacing: units.gu(2)
             visible: securityList.selectedIndex !== 0
-            id: passwordVisible
-            control: Switch {
+
+            CheckBox {
                 id: passwordVisibleSwitch
             }
-        }
-    }
 
-    RowLayout {
-        id: buttonRow
-
-        anchors {
-            bottom: parent.bottom
-            left: parent.left
-            right: parent.right
-            margins: units.gu(2)
-        }
-        spacing: units.gu(2)
-
-        Button {
-            id: cancelButton
-            Layout.fillWidth: true
-            text: i18n.tr("Cancel")
-            onClicked: {
-                pageStack.pop()
+            Label {
+                id: passwordVisibleLabel
+                text : i18n.tr("Show password")
+                objectName: "passwordVisibleLabel"
+                fontSize: "medium"
+                color: Theme.palette.selected.backgroundText
+                elide: Text.ElideRight
+                height: passwordVisibleSwitch.height
+                verticalAlignment: Text.AlignVCenter
+                MouseArea {
+                    anchors {
+                        fill: parent
+                    }
+                    onClicked: {
+                        passwordVisibleSwitch.checked =
+                            !passwordVisibleSwitch.checked
+                    }
+                }
             }
         }
 
-        Button {
-            id: connectButton
-            Layout.fillWidth: true
-            text: i18n.tr("Connect")
+        RowLayout {
+            id: buttonRow
+            anchors {
+                left: parent.left
+                right: parent.right
+            }
+            spacing: units.gu(2)
+            height: cancelButton.height
+
+            Button {
+                id: cancelButton
+                objectName: "cancel"
+                Layout.fillWidth: true
+                text: i18n.tr("Cancel")
+                onClicked: {
+                    PopupUtils.close(otherNetworkDialog);
+
+                    // If this dialog created the connection,
+                    // disconnect the device
+                    if (otherNetworkDialog.state === "CONNECTING") {
+                        DbusHelper.disconnectDevice();
+                    }
+                }
+            }
+
+            Button {
+                id: connectButton
+                objectName: "connect"
+                Layout.fillWidth: true
+                text: i18n.tr("Connect")
+                enabled: connectAction.enabled
+                action: connectAction
+                Icon {
+                    height: parent.height - units.gu(1.5)
+                    width: parent.height - units.gu(1.5)
+                    anchors {
+                        centerIn: parent
+                    }
+                    name: "tick"
+                    color: "green"
+                    visible: successIndicator.running
+                }
+                ActivityIndicator {
+                    id: connectButtonIndicator
+                    running: false
+                    visible: running
+                    height: parent.height - units.gu(1.5)
+                    anchors {
+                        centerIn: parent
+                    }
+                }
+            }
+        }
+
+        Action {
+            id: connectAction
             enabled: settingsValid()
-            onClicked: {
-                DbusHelper.connect(networkname.text, securityList.selectedIndex, password.text)
-                pageStack.pop()
+            onTriggered: {
+                DbusHelper.connect(
+                    networkname.text,
+                    securityList.selectedIndex,
+                    password.text);
+                otherNetworkDialog.state = "CONNECTING";
+            }
+        }
+
+        /* Timer that shows a tick in the connect button once we have
+        successfully connected. */
+        Timer {
+            id: successIndicator
+            interval: 2000
+            running: false
+            repeat: false
+            onTriggered: PopupUtils.close(otherNetworkDialog)
+        }
+
+        Connections {
+            target: DbusHelper
+            onDeviceStateChanged: {
+                if (otherNetworkDialog.state === "FAILED") {
+                    /* Disconnect the device if it tries to reconnect after a
+                    connection failure */
+                    if (newState === 40) { // 40 = NM_DEVICE_STATE_PREPARE
+                        DbusHelper.disconnectDevice();
+                    }
+                }
+
+                /* We will only consider these cases if we are in
+                the CONNECTING state. This means that this Dialog will not
+                react to what other NetworkManager consumers do.
+                */
+                if (otherNetworkDialog.state === "CONNECTING") {
+                    switch (newState) {
+                        case 120:
+                            feedback.text = common.reasonToString(reason);
+                            otherNetworkDialog.state = "FAILED";
+                            break;
+                        case 100:
+                            /* connection succeeded only if it was us that
+                            created it */
+                            otherNetworkDialog.state = "SUCCEEDED";
+                            break;
+                    }
+                }
             }
         }
     }
 }
+

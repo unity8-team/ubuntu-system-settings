@@ -19,57 +19,35 @@
 */
 
 #include "reset.h"
-#include <QEvent>
-#include <QDBusReply>
-#include <unistd.h>
-#include <QDBusMetaType>
 
-typedef QList<QVariantMap> resetLauncherItemsArg;
-Q_DECLARE_METATYPE(resetLauncherItemsArg)
+#include <QDBusInterface>
+#include <QDBusReply>
+#include <QDebug>
 
 Reset::Reset(QObject *parent)
-    : QObject(parent),
-    m_systemBusConnection(QDBusConnection::systemBus())
+    : QObject(parent)
 {
-    static bool isRegistered = false;
-    if(!isRegistered) {
-        qDBusRegisterMetaType<resetLauncherItemsArg>();
-        isRegistered = true;
-    }
-}
-
-bool Reset::resetLauncher()
-{
-    QList<QVariantMap> items;
-    QVariantMap defaults;
-    defaults.insert("defaults", true);
-    items << defaults;
-    QVariant answer = m_accountsService.setUserProperty(
-                "com.canonical.unity.AccountsService",
-                "launcher-items",
-                QVariant::fromValue(items));
-
-    if (answer.isValid())
-        return true;
-
-    return false;
 }
 
 bool Reset::factoryReset()
 {
-    QDBusInterface systemServiceInterface (
+    QDBusInterface iface (
                 "com.canonical.SystemImage",
                 "/Service",
                 "com.canonical.SystemImage",
-                m_systemBusConnection,
+                QDBusConnection::systemBus(),
                 this);
 
-    if (!systemServiceInterface.isValid())
-        return false;
+    // FIXME: temporary warning so we know we've reproduced bug #1370815
+    if (!iface.isValid())
+        qWarning() << iface.interface() << "Isn't valid";
 
-    QDBusReply<QString> reply = systemServiceInterface.call("FactoryReset");
-    if (!reply.isValid())
+
+    QDBusReply<QString> reply = iface.call("FactoryReset");
+    if (!reply.isValid()) {
+         qWarning() << reply.error().message(); 
         return false;
+    }
 
     return true;
 }

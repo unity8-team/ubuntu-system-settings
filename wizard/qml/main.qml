@@ -30,11 +30,13 @@ Item {
 
     // These should be set by a security page and we apply the settings when
     // the user exits the wizard.
-    property int passwordMethod: UbuntuSecurityPrivacyPanel.Swipe
+    property int passwordMethod: UbuntuSecurityPrivacyPanel.Passcode
     property string password: ""
 
     Component.onCompleted: {
         Theme.name = "Ubuntu.Components.Themes.SuruGradient"
+        // A visible selected background looks bad in ListItem widgets with our theme
+        Theme.palette.selected.background = "#00000000"
         i18n.domain = "ubuntu-system-settings"
     }
 
@@ -82,7 +84,12 @@ Item {
 
         Image {
             id: image
-            anchors.fill: parent
+            // Use x/y/height/width instead of anchors so that we don't adjust
+            // the image when the OSK appears.
+            x: 0
+            y: 0
+            height: root.height
+            width: root.width
             source: background.pictureUri
             fillMode: Image.PreserveAspectCrop
             visible: status === Image.Ready
@@ -96,13 +103,50 @@ Item {
                 // continuing so back button returns to the previous main page.
                 while (pageList.index < pageStack.depth - 1)
                     pop()
-                push(pageList.next())
+                load(pageList.next())
             }
 
             function prev() {
                 if (pageList.index >= pageStack.depth - 1)
                     pageList.prev() // update pageList.index, but not for extra pages
                 pop()
+                if (!currentPage || currentPage.opacity === 0) { // undo skipped pages
+                    prev()
+                } else {
+                    currentPage.enabled = true
+                }
+            }
+
+            function load(path) {
+                if (currentPage) {
+                    currentPage.enabled = false
+                }
+
+                // First load it invisible, check that we should actually use
+                // this page, and either skip it or continue.
+                push(path, {"opacity": 0, "enabled": false})
+
+                // Check for immediate skip or not.  We may have to wait for
+                // skipValid to be assigned (see Connections object below)
+                _checkSkip()
+            }
+
+            function _checkSkip() {
+                if (!currentPage) { // may have had a parse error
+                    next()
+                } else if (currentPage.skipValid) {
+                    if (currentPage.skip) {
+                        next()
+                    } else {
+                        currentPage.opacity = 1
+                        currentPage.enabled = true
+                    }
+                }
+            }
+
+            Connections {
+                target: pageStack.currentPage
+                onSkipValidChanged: pageStack._checkSkip()
             }
 
             Component.onCompleted: next()

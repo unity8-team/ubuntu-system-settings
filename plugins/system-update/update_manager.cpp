@@ -39,6 +39,16 @@ using namespace UbuntuOne;
 
 namespace UpdatePlugin {
 
+UpdateManager *UpdateManager::m_instance = 0;
+
+UpdateManager *UpdateManager::instance()
+{
+    if (!m_instance)
+        m_instance = new UpdateManager;
+
+    return m_instance;
+}
+
 UpdateManager::UpdateManager(QObject *parent):
     QObject(parent),
     m_systemCheckingUpdate(false),
@@ -63,12 +73,13 @@ UpdateManager::UpdateManager(QObject *parent):
                   this, SLOT(clickUpdateNotAvailable()));
     QObject::connect(&m_network, SIGNAL(errorOccurred()),
                   this, SIGNAL(errorFound()));
+    QObject::connect(&m_network, SIGNAL(networkError()),
+                  this, SIGNAL(networkError()));
+    QObject::connect(&m_network, SIGNAL(serverError()),
+                  this, SIGNAL(serverError()));
     QObject::connect(&m_network,
                      SIGNAL(clickTokenObtained(Update*, const QString&)),
                      this, SLOT(clickTokenReceived(Update*, const QString&)));
-    QObject::connect(&m_network,
-                     SIGNAL(downloadUrlFound(const QString&, const QString&)),
-                     this, SLOT(downloadUrlObtained(const QString&, const QString&)));
     // SYSTEM UPDATE
     QObject::connect(&m_systemUpdate, SIGNAL(updateAvailable(const QString&, Update*)),
                   this, SLOT(registerSystemUpdate(const QString&, Update*)));
@@ -77,13 +88,17 @@ UpdateManager::UpdateManager(QObject *parent):
     QObject::connect(&m_systemUpdate, SIGNAL(downloadModeChanged()),
                   SIGNAL(downloadModeChanged()));
     QObject::connect(&m_systemUpdate, SIGNAL(updateDownloaded()),
-                  SIGNAL(systemUpdateDownloaded()));
+                  SLOT(updateDownloaded()));
     QObject::connect(&m_systemUpdate, SIGNAL(updateProcessFailed(const QString&)),
                   SIGNAL(updateProcessFailed(QString)));
     QObject::connect(&m_systemUpdate, SIGNAL(updateFailed(int, QString)),
-                  SIGNAL(systemUpdateFailed(int, QString)));
+                  SLOT(updateFailed(int, QString)));
     QObject::connect(&m_systemUpdate, SIGNAL(updatePaused(int)),
                   SLOT(systemUpdatePaused(int)));
+    QObject::connect(&m_systemUpdate, SIGNAL(updateProgress(int, double)),
+                  SLOT(systemUpdateProgress(int, double)));
+    QObject::connect(&m_systemUpdate, SIGNAL(rebooting(bool)),
+                  SIGNAL(rebooting(bool)));
 }
 
 UpdateManager::~UpdateManager()
@@ -227,12 +242,46 @@ void UpdateManager::registerSystemUpdate(const QString& packageName, Update *upd
     reportCheckState();
 }
 
+void UpdateManager::updateDownloaded()
+{
+    QString packagename(UBUNTU_PACKAGE_NAME);
+    if (m_apps.contains(packagename)) {
+        Update *update = m_apps[packagename];
+        update->setSelected(false);
+        update->setUpdateState(false);
+        update->setUpdateReady(true);
+        Q_EMIT systemUpdateDownloaded();
+    }
+}
+void UpdateManager::updateFailed(int consecutiveFailureCount, QString lastReason)
+{
+    QString packagename(UBUNTU_PACKAGE_NAME);
+    if (m_apps.contains(packagename)) {
+        Update *update = m_apps[packagename];
+        update->setSelected(false);
+        update->setUpdateState(false);
+        update->setDownloadProgress(0);
+        Q_EMIT systemUpdateFailed(consecutiveFailureCount, lastReason);
+    }
+}
+
 void UpdateManager::systemUpdatePaused(int value)
 {
     QString packagename(UBUNTU_PACKAGE_NAME);
     if (m_apps.contains(packagename)) {
         Update *update = m_apps[packagename];
         update->setSelected(true);
+        update->setUpdateState(false);
+        update->setDownloadProgress(value);
+    }
+}
+
+void UpdateManager::systemUpdateProgress(int value, double eta)
+{
+    Q_UNUSED(eta);
+    QString packagename(UBUNTU_PACKAGE_NAME);
+    if (m_apps.contains(packagename)) {
+        Update *update = m_apps[packagename];
         update->setDownloadProgress(value);
     }
 }
@@ -243,7 +292,7 @@ void UpdateManager::startDownload(const QString &packagename)
     if (m_apps[packagename]->systemUpdate()) {
         m_systemUpdate.downloadUpdate();
     } else {
-        m_network.getResourceUrl(packagename);
+        downloadApp(m_apps[packagename]);
     }
 }
 
@@ -267,16 +316,13 @@ void UpdateManager::pauseDownload(const QString &packagename)
     m_systemUpdate.pauseDownload();
 }
 
-void UpdateManager::downloadUrlObtained(const QString &packagename,
-                                        const QString &url)
+void UpdateManager::downloadApp(Update *app)
 {
     if (m_token.isValid()) {
-        QString authHeader = m_token.signUrl(url, QStringLiteral("HEAD"), true);
-        Update *app = m_apps[packagename];
-        app->setClickUrl(url);
-        m_network.getClickToken(app, url, authHeader);
+        QString authHeader = m_token.signUrl(app->downloadUrl(), QStringLiteral("HEAD"), true);
+        app->setClickUrl(app->downloadUrl());
+        m_network.getClickToken(app, app->downloadUrl(), authHeader);
     } else {
-        Update *app = m_apps[packagename];
         app->setError("Invalid User Token");
     }
 }
@@ -297,6 +343,9 @@ void UpdateManager::updateClickScope()
                 "InvalidateResults");
     signal << "clickscope";
     QDBusConnection::sessionBus().send(signal);
+
+    // When a click update is complete, emit modelChanged
+    Q_EMIT modelChanged();
 }
 
 }

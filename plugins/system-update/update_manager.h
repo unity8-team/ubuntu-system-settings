@@ -70,15 +70,17 @@ Q_SIGNALS:
     void credentialsNotFound();
     void updateAvailableFound(bool downloading);
     void errorFound();
+    void networkError();
+    void serverError();
     void downloadModeChanged();
     void systemUpdateDownloaded();
     void updateProcessFailed(QString message);
     void systemUpdateFailed(int consecutiveFailureCount, QString lastReason);
     void versionChanged();
+    void rebooting(bool status);
     
 public:
-    explicit UpdateManager(QObject *parent = 0);
-    ~UpdateManager();
+    static UpdateManager *instance();
 
     Q_INVOKABLE void checkUpdates();
     Q_INVOKABLE void startDownload(const QString &packagename);
@@ -94,6 +96,8 @@ public:
     QDateTime lastUpdateDate() { return m_systemUpdate.lastUpdateDate(); }
     QString currentUbuntuBuildNumber() { return m_systemUpdate.currentUbuntuBuildNumber(); }
     QString currentDeviceBuildNumber() { return m_systemUpdate.currentDeviceBuildNumber(); }
+    bool checkTarget() { return m_systemUpdate.checkTarget(); }
+
 
 #ifdef TESTS
     // For testing purposes
@@ -112,16 +116,24 @@ public Q_SLOTS:
     void registerSystemUpdate(const QString& packageName, Update *update);
     void systemUpdateNotAvailable();
 
+protected:
+    explicit UpdateManager(QObject *parent = 0);
+    ~UpdateManager();
+
 private Q_SLOTS:
     void clickUpdateNotAvailable();
+    void updateFailed(int consecutiveFailureCount, QString lastReason);
+    void updateDownloaded();
     void systemUpdatePaused(int value);
+    void systemUpdateProgress(int value, double eta);
     void processOutput();
     void processUpdates();
-    void downloadUrlObtained(const QString &packagename, const QString &url);
+    void downloadApp(Update *app);
     void handleCredentialsFound(Token token);
     void clickTokenReceived(Update *app, const QString &clickToken);
 
 private:
+    static UpdateManager *m_instance;
     bool m_systemCheckingUpdate;
     bool m_clickCheckingUpdate;
     int m_checkingUpdates;

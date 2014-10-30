@@ -30,24 +30,25 @@ ListItem.SingleValue {
     iconSource: Qt.resolvedUrl(model.icon)
     iconFrame: false
     progression: true
-
-    value: root.updatesAvailable > 0 ? root.updatesAvailable : ""
+    value: updatesAvailable > 0 ? updatesAvailable : ""
 
     property int updatesAvailable: 0
 
-    Item {
-        UpdateManager {
-            id: updateManager
-            objectName: "updateManager"
-
-            Component.onCompleted: {
-                updateManager.checkUpdates();
-            }
-
-            onUpdateAvailableFound: {
-                root.updatesAvailable = updateManager.model.length;
-            }
+    function _updatesRefresh() {
+        var _updatesAvailable = 0;
+        for (var i=0; i < UpdateManager.model.length; i++) {
+            if (UpdateManager.model[i].updateRequired)
+                _updatesAvailable += 1;
         }
+        updatesAvailable =  _updatesAvailable;
+    }
+
+    Connections {
+        id: updateManager
+        objectName: "updateManager"
+        target: UpdateManager
+        onModelChanged: root._updatesRefresh()
+        onUpdateAvailableFound: root._updatesRefresh()
     }
 
     onClicked: main.loadPluginByName("system-update");

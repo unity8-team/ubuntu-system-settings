@@ -38,12 +38,12 @@ ItemPage {
         id: backendInfos
     }
 
-    DeviceInfo {
-        id: deviceInfos
+    StorageInfo {
+        id: storageInfo
     }
 
-    UpdateManager {
-        id: updateBackend
+    DeviceInfo {
+        id: deviceInfos
     }
 
     OfonoManager {
@@ -137,10 +137,12 @@ ItemPage {
 
             ListItem.Divider {}
 
-            ListItem.Standard {
+            ListItem.SingleValue {
                 id: storageItem
                 objectName: "storageItem"
                 text: i18n.tr("Storage")
+                /* TRANSLATORS: that's the free disk space, indicated in the most appropriate storage unit */
+                value: i18n.tr("%1 free").arg(backendInfos.formatSize(storageInfo.availableDiskSpace("/home")))
                 progression: true
                 onClicked: pageStack.push(Qt.resolvedUrl("Storage.qml"))
             }
@@ -154,7 +156,7 @@ ItemPage {
                 objectName: "osItem"
                 text: i18n.tr("OS")
                 value: "Ubuntu " + deviceInfos.version(DeviceInfo.Os) +
-                       (updateBackend.currentBuildNumber ? " (r%1)".arg(updateBackend.currentBuildNumber) : "")
+                       (UpdateManager.currentBuildNumber ? " (r%1)".arg(UpdateManager.currentBuildNumber) : "")
                 progression: true
                 onClicked: pageStack.push(Qt.resolvedUrl("Version.qml"))
             }
@@ -162,8 +164,8 @@ ItemPage {
             ListItem.SingleValue {
                 objectName: "lastUpdatedItem"
                 text: i18n.tr("Last updated")
-                value: updateBackend.lastUpdateDate && !isNaN(updateBackend.lastUpdateDate) ?
-                    Qt.formatDate(updateBackend.lastUpdateDate) : i18n.tr("Never")
+                value: UpdateManager.lastUpdateDate && !isNaN(UpdateManager.lastUpdateDate) ?
+                    Qt.formatDate(UpdateManager.lastUpdateDate) : i18n.tr("Never")
             }
 
             ListItem.SingleControl {

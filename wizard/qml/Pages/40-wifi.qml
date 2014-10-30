@@ -143,7 +143,8 @@ LocalComponents.Page {
             anchors.right: parent.right
             anchors.rightMargin: rightMargin
             fontSize: "small"
-            text: i18n.tr("Available networks")
+            text: mainMenu.count > 0 ? i18n.tr("Available networks…")
+                                     : i18n.tr("No available networks.")
         }
 
         Flickable {
@@ -192,8 +193,7 @@ LocalComponents.Page {
     Component {
         id: forwardButton
         LocalComponents.StackButton {
-            text: connected ? i18n.tr("Continue") : i18n.tr("Skip")
-            rightArrow: !connected
+            text: (connected || mainMenu.count === 0) ? i18n.tr("Continue") : i18n.tr("Skip")
             onClicked: pageStack.next()
         }
     }

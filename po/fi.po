@@ -7,139 +7,90 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-09-11 12:06-0400\n"
-"PO-Revision-Date: 2014-09-11 08:39+0000\n"
-"Last-Translator: Jiri Grönroos <Unknown>\n"
+"POT-Creation-Date: 2014-10-16 20:04-0600\n"
+"PO-Revision-Date: 2014-10-21 17:54+0000\n"
+"Last-Translator: Tommi Lehto <tommi.lehto@live.fi>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-09-12 06:55+0000\n"
-"X-Generator: Launchpad (build 17196)\n"
+"X-Launchpad-Export-Date: 2014-10-24 06:38+0000\n"
+"X-Generator: Launchpad (build 17203)\n"
 
-#: ubuntu-system-settings.desktop.in.in.h:1 ../src/qml/MainWindow.qml:110
+#: ubuntu-system-settings.desktop.in.in.h:1 ../src/qml/MainWindow.qml:112
 msgid "System Settings"
 msgstr "Järjestelmän asetukset"
 
 #: ubuntu-system-settings.desktop.in.in.h:2
 msgid "System;"
-msgstr ""
+msgstr "System;Järjestelmä;"
 
 #: ubuntu-system-settings.desktop.in.in.h:3
 msgid "Preferences;Settings;"
-msgstr ""
+msgstr "Preferences;Settings;Ominaisuudet;Asetukset;Valinnat;"
 
-#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: ../plugins/wifi//PageComponent.qml:26
-#: ../plugins/battery//PageComponent.qml:333
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:10
-msgid "Wi-Fi"
-msgstr "Wi-Fi"
+#: ../plugins/background//Preview.qml:70
+msgid "Preview"
+msgstr "Esikatselu"
 
-#: ../plugins/wifi//PageComponent.qml:114
-#: ../plugins/wifi//PreviousNetworks.qml:26
-msgid "Previous networks"
-msgstr "Aiemmat verkot"
+#: ../plugins/background//Preview.qml:102
+msgid "Remove image"
+msgstr "Poista kuva"
 
-#: ../plugins/wifi//PageComponent.qml:120 ../plugins/wifi//OtherNetwork.qml:27
-msgid "Other network"
-msgstr "Muu verkko"
-
-#: ../plugins/wifi//OtherNetwork.qml:56
-msgid "Network name"
-msgstr "Verkon nimi"
-
-#: ../plugins/wifi//OtherNetwork.qml:67
-#: ../plugins/security-privacy//PageComponent.qml:126
-msgid "Security"
-msgstr "Salaus"
-
-#: ../plugins/wifi//OtherNetwork.qml:68
-#: ../plugins/bluetooth//PageComponent.qml:116
-#: ../plugins/bluetooth//PageComponent.qml:323
-#: ../plugins/bluetooth//PageComponent.qml:344
-msgid "None"
-msgstr "Ei mitään"
-
-#: ../plugins/wifi//OtherNetwork.qml:69
-msgid "WPA & WPA2 Personal"
-msgstr "WPA & WPA2 Personal"
-
-#: ../plugins/wifi//OtherNetwork.qml:70
-msgid "WEP"
-msgstr "WEP"
-
-#: ../plugins/wifi//OtherNetwork.qml:77 ../plugins/wifi//NetworkDetails.qml:61
-msgid "Password"
-msgstr "Salasana"
-
-#: ../plugins/wifi//OtherNetwork.qml:90
-msgid "Password visible"
-msgstr "Salasana näkyviin"
-
-#: ../plugins/wifi//OtherNetwork.qml:113
-#: ../plugins/reset//EraseEverything.qml:54
-#: ../plugins/reset//ResetLauncherHome.qml:55
+#: ../plugins/background//Preview.qml:102
+#: ../plugins/wifi//OtherNetwork.qml:288
 #: ../plugins/reset//ResetAllSettings.qml:38
-#: ../plugins/cellular//HotspotSetup.qml:85
-#: ../plugins/language//DisplayLanguage.qml:98
+#: ../plugins/reset//ResetLauncherHome.qml:55
+#: ../plugins/reset//EraseEverything.qml:54
 #: ../plugins/language//RebootNecessary.qml:47
+#: ../plugins/language//DisplayLanguage.qml:98
 #: ../plugins/phone//CallForwarding.qml:139
-#: ../plugins/time-date//TimePicker.qml:173
-#: ../plugins/security-privacy//SimPin.qml:146
-#: ../plugins/security-privacy//SimPin.qml:263
+#: ../plugins/cellular//PageChooseApn.qml:594
+#: ../plugins/cellular//CustomApnEditor.qml:245
+#: ../plugins/cellular//HotspotSetup.qml:85
 #: ../plugins/security-privacy//LockSecurity.qml:283
+#: ../plugins/security-privacy//SimPin.qml:149
+#: ../plugins/security-privacy//SimPin.qml:266
 #: ../plugins/bluetooth//ProvidePasskeyDialog.qml:54
-#: ../plugins/bluetooth//ProvidePinCodeDialog.qml:55
 #: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:49
-#: ../plugins/background//Preview.qml:101
-#: ../plugins/cellular//Components//SimEditor.qml:189
+#: ../plugins/bluetooth//ProvidePinCodeDialog.qml:55
+#: ../plugins/time-date//TimePicker.qml:173
 #: ../plugins/background//Components//AddRemove.qml:42
+#: ../plugins/cellular//Components//SimEditor.qml:189
 msgid "Cancel"
 msgstr "Peru"
 
-#: ../plugins/wifi//OtherNetwork.qml:122
-#: ../plugins/bluetooth//PageComponent.qml:408
-msgid "Connect"
-msgstr "Yhdistä"
+#: ../plugins/background//Preview.qml:109
+#: ../plugins/phone//CallForwarding.qml:152
+#: ../plugins/security-privacy//LockSecurity.qml:304
+#: ../plugins/time-date//TimePicker.qml:182
+msgid "Set"
+msgstr "Aseta"
 
-#: ../plugins/wifi//NetworkDetails.qml:36
-msgid "Network details"
-msgstr "Verkon tiedot"
+#. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
+#: ../plugins/background//MainPage.qml:35
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:2
+msgid "Background"
+msgstr "Tausta"
 
-#: ../plugins/wifi//NetworkDetails.qml:43
-#: ../plugins/bluetooth//PageComponent.qml:343
-msgid "Name"
-msgstr "Nimi"
+#: ../plugins/background//MainPage.qml:99
+msgid "Ubuntu Art"
+msgstr "Ubuntu-kuvitus"
 
-#: ../plugins/wifi//NetworkDetails.qml:51
-msgid "Last connected"
-msgstr "Viimeksi yhdistetty"
+#: ../plugins/background//MainPage.qml:115
+#: ../plugins/cellular//PageChooseApn.qml:409
+#: ../plugins/cellular//PageChooseApn.qml:488
+#: ../plugins/cellular//PageChooseApn.qml:496
+msgid "Custom"
+msgstr "Omavalintainen"
 
-#: ../plugins/wifi//NetworkDetails.qml:55
-#: ../plugins/about//PageComponent.qml:166
-#: ../plugins/security-privacy//PageComponent.qml:140
-#: ../plugins/security-privacy//PhoneLocking.qml:78
-#: ../plugins/security-privacy//PhoneLocking.qml:87
-#: ../plugins/system-update//PageComponent.qml:563
-#: ../plugins/system-update//Configuration.qml:53
-#: ../plugins/battery//PageComponent.qml:315
-#: ../plugins/battery//PageComponent.qml:324
-#: ../plugins/battery//SleepValues.qml:106
-msgid "Never"
-msgstr "Ei koskaan"
-
-#: ../plugins/wifi//NetworkDetails.qml:73
-msgid "Show password"
-msgstr "Näytä salasana"
-
-#: ../plugins/wifi//NetworkDetails.qml:83
-msgid "Forget network"
-msgstr "Unohda verkko"
+#: ../plugins/wifi//RemoveBackground.qml:28
+msgid "Clear"
+msgstr "Tyhjennä"
 
 #: ../plugins/wifi//NetworkDetailsBrief.qml:42
-#: ../plugins/bluetooth//PageComponent.qml:408
+#: ../plugins/bluetooth//PageComponent.qml:411
 msgid "Disconnect"
 msgstr "Katkaise yhteys"
 
@@ -147,9 +98,311 @@ msgstr "Katkaise yhteys"
 msgid "IP address"
 msgstr "IP-osoite"
 
+#: ../plugins/wifi//PreviousNetworks.qml:27
+#: ../plugins/wifi//PageComponent.qml:132
+msgid "Previous networks"
+msgstr "Aiemmat verkot"
+
+#: ../plugins/wifi//Common.qml:36
+msgid "Unknown error"
+msgstr "Tuntematon virhe"
+
+#: ../plugins/wifi//Common.qml:38
+msgid "No reason given"
+msgstr "Syytä ei annettu"
+
+#: ../plugins/wifi//Common.qml:40
+msgid "Device is now managed"
+msgstr "Laite on nyt hallinnassa"
+
+#: ../plugins/wifi//Common.qml:42
+msgid "Device is now unmanaged"
+msgstr "Laite ei ole nyt hallinnassa"
+
+#: ../plugins/wifi//Common.qml:44
+msgid "The device could not be readied for configuration"
+msgstr "Laitteen valmistelu määrityksiä varten epäonnistui"
+
+#: ../plugins/wifi//Common.qml:46
+msgid ""
+"IP configuration could not be reserved (no available address, timeout, etc.)"
+msgstr ""
+"IP-määritysten tallentaminen epäonnistui (ei osoitetta saatavilla, "
+"aikakatkaisu tms.)"
+
+#: ../plugins/wifi//Common.qml:48
+msgid "The IP configuration is no longer valid"
+msgstr "IP-määritykset eivät ole enää kelvollisia"
+
+#: ../plugins/wifi//Common.qml:50
+msgid "Your authentication details were incorrect"
+msgstr "Tunnistautumistietosi olivat väärin"
+
+#: ../plugins/wifi//Common.qml:52
+msgid "802.1X supplicant disconnected"
+msgstr "802.1X-anoja katkaisi yhteyden"
+
+#: ../plugins/wifi//Common.qml:54
+msgid "802.1X supplicant configuration failed"
+msgstr "802.1X-anojan asetukset epäonnistuivat"
+
+#: ../plugins/wifi//Common.qml:56
+msgid "802.1X supplicant failed"
+msgstr "802.1X-anoja epäonnistui"
+
+#: ../plugins/wifi//Common.qml:58
+msgid "802.1X supplicant took too long to authenticate"
+msgstr "802.1X-anojan tunnistautuminen kesti liian kauan"
+
+#: ../plugins/wifi//Common.qml:60
+msgid "DHCP client failed to start"
+msgstr "DHCP-asiakkaan käynnistys epäonnistui"
+
+#: ../plugins/wifi//Common.qml:62
+msgid "DHCP client error"
+msgstr "DHCP-asiakkaan virhe"
+
+#: ../plugins/wifi//Common.qml:64
+msgid "DHCP client failed"
+msgstr "DHCP-asiakas epäonnistui"
+
+#: ../plugins/wifi//Common.qml:66
+msgid "Shared connection service failed to start"
+msgstr "Jaetun yhteyden palvelun käynnistys epäonnistui"
+
+#: ../plugins/wifi//Common.qml:68
+msgid "Shared connection service failed"
+msgstr "Jaetun yhteyden palvelu epäonnistui"
+
+#: ../plugins/wifi//Common.qml:70
+msgid "Necessary firmware for the device may be missing"
+msgstr "Laitteelle vaadittava laiteohjelmisto saattaa puuttua"
+
+#: ../plugins/wifi//Common.qml:72
+msgid "The device was removed"
+msgstr "Laite irrotettiin"
+
+#: ../plugins/wifi//Common.qml:74
+msgid "NetworkManager went to sleep"
+msgstr "NetworkManager meni lepotilaan"
+
+#: ../plugins/wifi//Common.qml:76
+msgid "The device's active connection disappeared"
+msgstr "Laitteen aktiivinen yhteys katosi"
+
+#: ../plugins/wifi//Common.qml:78
+msgid "Device disconnected by user or client"
+msgstr "Yhteys laitteeseen katkaistu käyttäjän tai asiakkaan toimesta"
+
+#: ../plugins/wifi//Common.qml:80
+msgid "The device's existing connection was assumed"
+msgstr "Oletettiin laitteen olemassa olevaa yhteyttä"
+
+#: ../plugins/wifi//Common.qml:82
+msgid "The supplicant is now available"
+msgstr "Anoja on nyt saatavilla"
+
+#: ../plugins/wifi//Common.qml:84
+msgid "The modem could not be found"
+msgstr "Modeemia ei löytynyt"
+
+#: ../plugins/wifi//Common.qml:86
+msgid "The Bluetooth connection failed or timed out"
+msgstr "Bluetooth-yhteys epäonnistui tai se aikakatkaistiin"
+
+#: ../plugins/wifi//Common.qml:88
+msgid "A dependency of the connection failed"
+msgstr "Yhteyden riippuvuus epäonnistui"
+
+#: ../plugins/wifi//Common.qml:90
+msgid "ModemManager is unavailable"
+msgstr "ModemManager ei ole käytettävissä"
+
+#: ../plugins/wifi//Common.qml:92
+msgid "The Wi-Fi network could not be found"
+msgstr "Wifi-verkkoa ei löytynyt"
+
+#: ../plugins/wifi//Common.qml:94
+msgid "A secondary connection of the base connection failed"
+msgstr "Perusyhteyden toissijainen yhteys epäonnistui"
+
+#: ../plugins/wifi//Common.qml:96 ../plugins/bluetooth//PageComponent.qml:86
+msgid "Unknown"
+msgstr "Tuntematon"
+
+#: ../plugins/wifi//OtherNetwork.qml:96
+msgid "Connect to Hidden Network"
+msgstr "Yhdistä piilotettuun verkkoon"
+
+#: ../plugins/wifi//OtherNetwork.qml:187
+msgid "Network name"
+msgstr "Verkon nimi"
+
+#: ../plugins/wifi//OtherNetwork.qml:203
+#: ../plugins/security-privacy//PageComponent.qml:126
+msgid "Security"
+msgstr "Salaus"
+
+#: ../plugins/wifi//OtherNetwork.qml:214
+#: ../plugins/bluetooth//PageComponent.qml:116
+#: ../plugins/bluetooth//PageComponent.qml:326
+#: ../plugins/bluetooth//PageComponent.qml:347
+msgid "None"
+msgstr "Ei mitään"
+
+#: ../plugins/wifi//OtherNetwork.qml:215
+msgid "WPA & WPA2 Personal"
+msgstr "WPA & WPA2 Personal"
+
+#: ../plugins/wifi//OtherNetwork.qml:216
+msgid "WEP"
+msgstr "WEP"
+
+#: ../plugins/wifi//OtherNetwork.qml:222
+#: ../plugins/wifi//NetworkDetails.qml:64
+#: ../plugins/cellular//CustomApnEditor.qml:222
+msgid "Password"
+msgstr "Salasana"
+
+#: ../plugins/wifi//OtherNetwork.qml:256
+#: ../plugins/wifi//NetworkDetails.qml:77
+msgid "Show password"
+msgstr "Näytä salasana"
+
+#: ../plugins/wifi//OtherNetwork.qml:304
+#: ../plugins/bluetooth//PageComponent.qml:411
+msgid "Connect"
+msgstr "Yhdistä"
+
+#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
+#: ../plugins/wifi//PageComponent.qml:28
+#: ../plugins/battery//PageComponent.qml:333
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:24
+msgid "Wi-Fi"
+msgstr "Wi-Fi"
+
+#: ../plugins/wifi//PageComponent.qml:139
+msgid "Connect to hidden network…"
+msgstr "Yhdistä piilotettuun verkkoon…"
+
+#: ../plugins/wifi//NetworkDetails.qml:38
+msgid "Network details"
+msgstr "Verkon tiedot"
+
+#: ../plugins/wifi//NetworkDetails.qml:45
+#: ../plugins/bluetooth//PageComponent.qml:346
+msgid "Name"
+msgstr "Nimi"
+
+#: ../plugins/wifi//NetworkDetails.qml:53
+msgid "Last connected"
+msgstr "Viimeksi yhdistetty"
+
+#: ../plugins/wifi//NetworkDetails.qml:58
+#: ../plugins/battery//PageComponent.qml:315
+#: ../plugins/battery//PageComponent.qml:324
+#: ../plugins/battery//SleepValues.qml:106
+#: ../plugins/security-privacy//PhoneLocking.qml:78
+#: ../plugins/security-privacy//PhoneLocking.qml:87
+#: ../plugins/security-privacy//PageComponent.qml:140
+#: ../plugins/about//PageComponent.qml:167
+#: ../plugins/system-update//PageComponent.qml:762
+#: ../plugins/system-update//Configuration.qml:52
+msgid "Never"
+msgstr "Ei koskaan"
+
+#: ../plugins/wifi//NetworkDetails.qml:88
+msgid "Forget network"
+msgstr "Unohda verkko"
+
+#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
+#: ../plugins/notifications//PageComponent.qml:29
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:44
+msgid "Notifications"
+msgstr "Ilmoitukset"
+
+#: ../plugins/notifications//PageComponent.qml:40
+msgid ""
+"Selected apps can alert you using notification bubbles, sounds, vibrations, "
+"and the Notification Center."
+msgstr ""
+"Valitut sovellukset voivat pyytää huomiotasi käyttämällä ilmoituksia, ääniä, "
+"värinää ja ilmoituskeskusta."
+
+#: ../plugins/sound//SoundsList.qml:60
+msgid "Stop playing"
+msgstr "Lopeta toisto"
+
+#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
+#: ../plugins/sound//PageComponent.qml:37
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:68
+msgid "Sound"
+msgstr "Ääni"
+
+#: ../plugins/sound//PageComponent.qml:76
+msgid "Silent Mode"
+msgstr "Äänetön tila"
+
+#: ../plugins/sound//PageComponent.qml:80
+msgid "Ringer:"
+msgstr "Soittoäänen voimakkuus:"
+
+#: ../plugins/sound//PageComponent.qml:112
+msgid "Phone calls:"
+msgstr "Puhelut:"
+
+#: ../plugins/sound//PageComponent.qml:116
+#: ../plugins/sound//PageComponent.qml:122
+msgid "Ringtone"
+msgstr "Soittoääni"
+
+#: ../plugins/sound//PageComponent.qml:135
+msgid "Vibrate when ringing"
+msgstr "Värinä soidessa"
+
+#: ../plugins/sound//PageComponent.qml:144
+#: ../plugins/sound//PageComponent.qml:188
+msgid "Vibrate in Silent Mode"
+msgstr "Värinä äänettömässä tilassa"
+
+#: ../plugins/sound//PageComponent.qml:153
+#: ../plugins/phone//PageComponent.qml:110
+msgid "Dialpad sounds"
+msgstr "Valintanäppäinten äänet"
+
+#: ../plugins/sound//PageComponent.qml:157
+msgid "Messages:"
+msgstr "Viestit:"
+
+#: ../plugins/sound//PageComponent.qml:161
+#: ../plugins/sound//PageComponent.qml:167
+msgid "Message received"
+msgstr "Viesti vastaanotettu"
+
+#: ../plugins/sound//PageComponent.qml:179
+msgid "Vibrate with message sound"
+msgstr "Värinä ja viestiääni"
+
+#: ../plugins/sound//PageComponent.qml:192
+msgid "Other sounds:"
+msgstr "Muut äänet:"
+
+#: ../plugins/sound//PageComponent.qml:196
+#: ../plugins/language//PageComponent.qml:209
+msgid "Keyboard sound"
+msgstr "Näppäimistön ääni"
+
+#: ../plugins/sound//PageComponent.qml:210
+msgid "Lock sound"
+msgstr "Lukitusääni"
+
+#: ../plugins/sound//SilentModeWarning.qml:31
+msgid "The phone is in Silent Mode."
+msgstr "Puhelin on äänettömässä tilassa."
+
 #. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
 #: ../plugins/reset//PageComponent.qml:32
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:22
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:86
 msgid "Reset phone"
 msgstr "Palauta alkuperäisasetukset"
 
@@ -166,27 +419,6 @@ msgstr "Palauta järjestelmän alkuperäisasetukset…"
 msgid "Erase & Reset Everything…"
 msgstr "Tyhjennä kaikki ja palauta alkuperäisasetukset…"
 
-#: ../plugins/reset//EraseEverything.qml:41
-msgid ""
-"All documents, saved games, settings, and other items will be permanently "
-"deleted from this phone."
-msgstr ""
-"Kaikki asiakirjat, tallennetut pelit, asetukset ja muut kohteet poistetaan "
-"pysyvästi puhelimesta."
-
-#: ../plugins/reset//EraseEverything.qml:44
-msgid "Erase & Reset Everything"
-msgstr "Tyhjennä kaikki ja palauta alkuperäisasetukset"
-
-#: ../plugins/reset//ResetLauncherHome.qml:40
-msgid "The Launcher will be returned to its original contents."
-msgstr "Käynnistin palautetaan alkuperäiseen tilaan."
-
-#: ../plugins/reset//ResetLauncherHome.qml:59
-#: ../plugins/language//RebootNecessary.qml:34
-msgid "The phone needs to restart for changes to take effect."
-msgstr "Puhelin tulee käynnistää uudelleen, jotta muutokset tulevat voimaan."
-
 #: ../plugins/reset//ResetAllSettings.qml:29
 msgid ""
 "The contents and layout of the launcher, and the filters in the home screen "
@@ -199,47 +431,455 @@ msgstr ""
 msgid "Reset all system settings"
 msgstr "Palauta järjestelmän alkuperäisasetukset"
 
-#: ../plugins/cellular//PageChooseCarriers.qml:28
+#: ../plugins/reset//ResetLauncherHome.qml:40
+msgid "The Launcher will be returned to its original contents."
+msgstr "Käynnistin palautetaan alkuperäiseen tilaan."
+
+#: ../plugins/reset//ResetLauncherHome.qml:59
+#: ../plugins/language//RebootNecessary.qml:34
+msgid "The phone needs to restart for changes to take effect."
+msgstr "Puhelin tulee käynnistää uudelleen, jotta muutokset tulevat voimaan."
+
+#: ../plugins/reset//EraseEverything.qml:41
+msgid ""
+"All documents, saved games, settings, and other items will be permanently "
+"deleted from this phone."
+msgstr ""
+"Kaikki asiakirjat, tallennetut pelit, asetukset ja muut kohteet poistetaan "
+"pysyvästi puhelimesta."
+
+#: ../plugins/reset//EraseEverything.qml:44
+msgid "Erase & Reset Everything"
+msgstr "Tyhjennä kaikki ja palauta alkuperäisasetukset"
+
+#. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
+#: ../plugins/battery//PageComponent.qml:34
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:98
+msgid "Battery"
+msgstr "Akku"
+
+#. TRANSLATORS: %1 is the number of seconds
+#: ../plugins/battery//PageComponent.qml:46
+#, qt-format
+msgid "%1 second ago"
+msgid_plural "%1 seconds ago"
+msgstr[0] "%1 sekunti sitten"
+msgstr[1] "%1 sekuntia sitten"
+
+#. TRANSLATORS: %1 is the number of minutes
+#: ../plugins/battery//PageComponent.qml:49
+#, qt-format
+msgid "%1 minute ago"
+msgid_plural "%1 minutes ago"
+msgstr[0] "%1 minuutti sitten"
+msgstr[1] "%1 minuuttia sitten"
+
+#. TRANSLATORS: %1 is the number of hours
+#: ../plugins/battery//PageComponent.qml:52
+#, qt-format
+msgid "%1 hour ago"
+msgid_plural "%1 hours ago"
+msgstr[0] "%1 tunti sitten"
+msgstr[1] "%1 tuntia sitten"
+
+#. TRANSLATORS: %1 is the number of days
+#: ../plugins/battery//PageComponent.qml:55
+#, qt-format
+msgid "%1 day ago"
+msgid_plural "%1 days ago"
+msgstr[0] "%1 päivä sitten"
+msgstr[1] "%1 päivää sitten"
+
+#: ../plugins/battery//PageComponent.qml:85
+msgid "Charging now"
+msgstr "Ladataan nyt"
+
+#: ../plugins/battery//PageComponent.qml:90
+msgid "Last full charge"
+msgstr "Viimeisin täysi lataus"
+
+#: ../plugins/battery//PageComponent.qml:95
+msgid "Fully charged"
+msgstr "Ladattu täyteen"
+
+#: ../plugins/battery//PageComponent.qml:126
+msgid "Charge level"
+msgstr "Varaustaso"
+
+#: ../plugins/battery//PageComponent.qml:131
+#: ../plugins/battery//PageComponent.qml:287
+#: ../plugins/cellular//PageChooseCarriers.qml:48
+#: ../plugins/cellular//PageChooseCarriers.qml:65
+#: ../plugins/about//Storage.qml:203
+#: ../plugins/cellular//Components//SingleSim.qml:62
+#: ../plugins/cellular//Components//NoSim.qml:48
+msgid "N/A"
+msgstr "–"
+
+#. TRANSLATORS: %1 refers to a percentage that indicates the charging level of the battery
+#: ../plugins/battery//PageComponent.qml:134
+#, qt-format
+msgid "%1%"
+msgstr "%1 %"
+
+#: ../plugins/battery//PageComponent.qml:212
+#: ../plugins/battery//PageComponent.qml:214
+msgid "Yesterday"
+msgstr "Eilen"
+
+#: ../plugins/battery//PageComponent.qml:220
+#: ../plugins/battery//PageComponent.qml:222
+msgid "Today"
+msgstr "Tänään"
+
+#: ../plugins/battery//PageComponent.qml:292
+msgid "Ways to reduce battery use:"
+msgstr "Säästä akkuvirtaa näin:"
+
+#: ../plugins/battery//PageComponent.qml:296
+#: ../plugins/brightness//BrightnessSlider.qml:51
+msgid "Display brightness"
+msgstr "Näytön kirkkaus"
+
+#: ../plugins/battery//PageComponent.qml:306
+#: ../plugins/security-privacy//PhoneLocking.qml:68
+msgid "Lock when idle"
+msgstr "Lukitse ilman käyttöä"
+
+#: ../plugins/battery//PageComponent.qml:306
+#: ../plugins/security-privacy//PhoneLocking.qml:69
+msgid "Sleep when idle"
+msgstr "Sammuta käyttämättömänä olleen laitteen näyttö"
+
+#. TRANSLATORS: %1 is the number of minutes
+#: ../plugins/battery//PageComponent.qml:312
+#: ../plugins/battery//PageComponent.qml:321
+#: ../plugins/battery//SleepValues.qml:83
+#: ../plugins/battery//SleepValues.qml:87
+#: ../plugins/battery//SleepValues.qml:91
+#: ../plugins/battery//SleepValues.qml:95
+#: ../plugins/battery//SleepValues.qml:99
+#: ../plugins/battery//SleepValues.qml:103
+#: ../plugins/security-privacy//PageComponent.qml:137
+#: ../plugins/security-privacy//PageComponent.qml:146
+#, qt-format
+msgid "After %1 minute"
+msgid_plural "After %1 minutes"
+msgstr[0] "%1 minuutin jälkeen"
+msgstr[1] "%1 minuutin jälkeen"
+
+#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
+#: ../plugins/battery//PageComponent.qml:363
+#: ../plugins/bluetooth//PageComponent.qml:32
+#: ../plugins/bluetooth//PageComponent.qml:147
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:254
+msgid "Bluetooth"
+msgstr "Bluetooth"
+
+#: ../plugins/battery//PageComponent.qml:394
+msgid "GPS"
+msgstr "GPS"
+
+#: ../plugins/battery//PageComponent.qml:412
+msgid "Accurate location detection requires GPS and/or Wi-Fi."
+msgstr "Sijainnin tarkka määrittäminen edellyttää GPS:n ja/tai Wi-Fin."
+
+#: ../plugins/battery//SleepValues.qml:77
+msgid "Lock the phone when it's not in use:"
+msgstr "Lukitse käyttämättömänä ollut puhelin:"
+
+#: ../plugins/battery//SleepValues.qml:77
+msgid "Put the phone to sleep when it is not in use:"
+msgstr "Sammuta laitteen näyttö, kun se on ollut käyttämättömänä:"
+
+#: ../plugins/battery//SleepValues.qml:117
+msgid ""
+"Shorter times are more secure. Phone won't lock during calls or video "
+"playback."
+msgstr ""
+"Lyhyt viive on pitkää turvallisempi. Puhelin ei lukitse itseään puheluiden "
+"tai videotoiston aikana."
+
+#: ../plugins/battery//SleepValues.qml:117
+msgid "Phone won’t sleep during calls or video playback."
+msgstr "Puhelin ei sammuta näyttöään puheluiden tai videotoiston aikana."
+
+#: ../plugins/language//SpellChecking.qml:27
+#: ../plugins/language//SpellChecking.qml:36
+#: ../plugins/language//PageComponent.qml:132
+#: ../plugins/language//PageComponent.qml:142
+msgid "Spell checking"
+msgstr "Oikoluku"
+
+#: ../plugins/language//SpellChecking.qml:53
+msgid "Current spelling languages:"
+msgstr "Nykyiset oikeinkirjoituksen kielet:"
+
+#: ../plugins/language//SpellChecking.qml:54
+msgid "All languages available:"
+msgstr "Kaikki saatavillat olevat kielet:"
+
+#: ../plugins/language//RebootNecessary.qml:38
+msgid "Restart Now"
+msgstr "Käynnistä uudelleen nyt"
+
+#: ../plugins/language//DisplayLanguage.qml:36
+msgid "Display language"
+msgstr "Kieli"
+
+#: ../plugins/language//DisplayLanguage.qml:118
+msgid "Confirm"
+msgstr "Hyväksy"
+
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
+#: ../plugins/language//PageComponent.qml:34
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:114
+msgid "Language & Text"
+msgstr "Kieli ja teksti"
+
+#: ../plugins/language//PageComponent.qml:100
+msgid "Display language…"
+msgstr "Kieli…"
+
+#: ../plugins/language//PageComponent.qml:117
+#: ../plugins/language//KeyboardLayouts.qml:26
+msgid "Keyboard layouts"
+msgstr "Näppäimistöasettelut"
+
+#: ../plugins/language//PageComponent.qml:152
+msgid "Auto correction"
+msgstr "Automaattinen korjaus"
+
+#: ../plugins/language//PageComponent.qml:162
+msgid "Word suggestions"
+msgstr "Sanaehdotukset"
+
+#: ../plugins/language//PageComponent.qml:175
+msgid "Auto capitalization"
+msgstr "Automaattiset isot kirjaimet"
+
+#: ../plugins/language//PageComponent.qml:185
+msgid "Turns on Shift to capitalize the first letter of each sentence."
+msgstr "Shift-näppäin on käytössä automaattisesti jokaisen lauseen alussa."
+
+#: ../plugins/language//PageComponent.qml:192
+msgid "Auto punctuation"
+msgstr "Automaattiset välimerkit"
+
+#: ../plugins/language//PageComponent.qml:202
+msgid ""
+"Adds a period, and any missing quotes or brackets, when you tap Space twice."
+msgstr ""
+"Lisää pisteen sekä puuttuvat lainausmerkit ja sulut, kun painat välilyöntiä "
+"kahdesti."
+
+#: ../plugins/language//PageComponent.qml:219
+msgid "Keyboard vibration"
+msgstr "Näppäimistön värinä"
+
+#: ../plugins/language//KeyboardLayouts.qml:39
+msgid "Current layouts:"
+msgstr "Nykyiset asettelut:"
+
+#: ../plugins/language//KeyboardLayouts.qml:40
+msgid "All layouts available:"
+msgstr "Kaikki saatavilla olevat asettelut:"
+
+#: ../plugins/phone//CallWaiting.qml:31 ../plugins/phone//CallWaiting.qml:74
+#: ../plugins/phone//NoSims.qml:34 ../plugins/phone//MultiSim.qml:46
+#: ../plugins/phone//MultiSim.qml:84 ../plugins/phone//SingleSim.qml:40
+msgid "Call waiting"
+msgstr "Koputuspalvelu"
+
+#: ../plugins/phone//CallWaiting.qml:89
+msgid ""
+"Lets you answer or start a new call while on another call, and switch "
+"between them"
+msgstr ""
+"Mahdollistaa uuden puhelun soittamisen tai vastaamisen saapuvaan puheluun, "
+"kun meneillään on jo puhelu."
+
+#. TRANSLATORS: %1 is the name of the (network) carrier
+#: ../plugins/phone//Services.qml:34 ../plugins/phone//SingleSim.qml:51
+#, qt-format
+msgid "%1 Services"
+msgstr "%1-palvelut"
+
+#: ../plugins/phone//CallForwarding.qml:32
+#: ../plugins/phone//CallForwarding.qml:76 ../plugins/phone//NoSims.qml:28
+#: ../plugins/phone//MultiSim.qml:36 ../plugins/phone//MultiSim.qml:74
+#: ../plugins/phone//SingleSim.qml:33
+msgid "Call forwarding"
+msgstr "Soitonsiirto"
+
+#: ../plugins/phone//CallForwarding.qml:91
+msgid ""
+"Redirects phone calls to another number whenever you don't answer, or your "
+"phone is busy, turned off, or out of range."
+msgstr ""
+"Siirtää puhelut toiseen numeroon, jos puhelimeen ei vastata, sillä puhutaan "
+"toista puhelua tai se on sammutettu tai lentotilassa."
+
+#: ../plugins/phone//CallForwarding.qml:101
+msgid "Forward to"
+msgstr "Välitä"
+
+#: ../plugins/phone//ServiceInfo.qml:109
+#, qt-format
+msgid "Last called %1"
+msgstr "Viimeksi soitettu %1"
+
+#: ../plugins/phone//ServiceInfo.qml:119
+msgid "Call"
+msgstr "Puhelut"
+
+#: ../plugins/phone//NoSims.qml:42 ../plugins/phone//MultiSim.qml:56
+#: ../plugins/phone//MultiSim.qml:94
+msgid "Services"
+msgstr "Palvelut"
+
+#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
+#: ../plugins/phone//PageComponent.qml:32
+#: ../plugins/bluetooth//PageComponent.qml:93
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:140
+msgid "Phone"
+msgstr "Puhelin"
+
+#: ../plugins/phone//SingleSim.qml:29
+msgid "SIM"
+msgstr "SIM-kortti"
+
+#. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
+#: ../plugins/brightness//PageComponent.qml:32
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:158
+msgid "Brightness"
+msgstr "Kirkkaus"
+
+#: ../plugins/brightness//PageComponent.qml:52
+msgid "Adjust automatically"
+msgstr "Säädä manuaalisesti"
+
+#: ../plugins/brightness//PageComponent.qml:65
+msgid "Brightens and dims the display to suit the surroundings."
+msgstr "Näytön kirkkauden säätö ympäristöön sopivaksi"
+
+#: ../plugins/cellular//PageChooseCarrier.qml:30
+#: ../plugins/cellular//Components//SingleSim.qml:58
+#: ../plugins/cellular//Components//SingleSim.qml:67
+#: ../plugins/cellular//Components//NoSim.qml:47
+msgid "Carrier"
+msgstr "Operaattori"
+
+#: ../plugins/cellular//PageChooseCarrier.qml:155
+msgid "Choose carrier:"
+msgstr "Valitse operaattori:"
+
+#: ../plugins/cellular//PageChooseCarrier.qml:156
+#: ../plugins/time-date//ChooseTimeZone.qml:47
+#: ../plugins/time-date//PageComponent.qml:69
+msgid "Automatically"
+msgstr "Automaattisesti"
+
+#: ../plugins/cellular//PageChooseCarrier.qml:156
+#: ../plugins/security-privacy//PageComponent.qml:149
+#: ../plugins/time-date//ChooseTimeZone.qml:47
+#: ../plugins/time-date//PageComponent.qml:69
+msgid "Manually"
+msgstr "Manuaalisesti"
+
+#: ../plugins/cellular//PageChooseCarrier.qml:196
+msgid "Searching for carriers…"
+msgstr "Etsitään verkkoa..."
+
+#: ../plugins/cellular//PageChooseCarrier.qml:229
+#: ../plugins/cellular//PageChooseApn.qml:31
+#: ../plugins/cellular//Components//SingleSim.qml:73
+msgid "APN"
+msgstr "APN"
+
+#: ../plugins/cellular//PageChooseApn.qml:372
+msgid "Internet APN:"
+msgstr "Internet APN:"
+
+#: ../plugins/cellular//PageChooseApn.qml:449
+msgid "Custom Internet APN…"
+msgstr "Mukautettu Internet APN"
+
+#: ../plugins/cellular//PageChooseApn.qml:460
+msgid "MMS APN:"
+msgstr "MMS APN:"
+
+#: ../plugins/cellular//PageChooseApn.qml:485
+#: ../plugins/cellular//CustomApnEditor.qml:143
+msgid "Same APN as for Internet"
+msgstr "Sama APN kuin Internetille"
+
+#: ../plugins/cellular//PageChooseApn.qml:565
+msgid "Custom MMS APN…"
+msgstr "Mukautettu MMS APN…"
+
+#: ../plugins/cellular//PageChooseApn.qml:591
+msgid "Reset APN Settings"
+msgstr "Palauta APN-asetukset"
+
+#: ../plugins/cellular//PageChooseApn.qml:592
+msgid "Are you sure that you want to Reset APN Settings?"
+msgstr "Haluatko varmasti palauttaa APN-asetukset?"
+
+#: ../plugins/cellular//PageChooseApn.qml:598
+msgid "Reset"
+msgstr "Palauta"
+
+#: ../plugins/cellular//PageChooseCarriers.qml:27
 #: ../plugins/cellular//Components//MultiSim.qml:68
 msgid "Carriers"
 msgstr "Operaattorit"
 
-#: ../plugins/cellular//PageChooseCarriers.qml:49
-#: ../plugins/cellular//PageChooseCarriers.qml:65
-#: ../plugins/about//Storage.qml:204 ../plugins/battery//PageComponent.qml:131
-#: ../plugins/battery//PageComponent.qml:287
-#: ../plugins/cellular//Components//NoSim.qml:48
-#: ../plugins/cellular//Components//SingleSim.qml:62
-msgid "N/A"
-msgstr "–"
+#: ../plugins/cellular//CustomApnEditor.qml:42
+msgid "Internet"
+msgstr "Internet"
 
-#: ../plugins/cellular//HotspotSetup.qml:29
-msgid "Change hotspot setup"
-msgstr "Muuta yhteyspisteen asetuksia"
+#: ../plugins/cellular//CustomApnEditor.qml:42
+msgid "MMS"
+msgstr "MMS"
 
-#: ../plugins/cellular//HotspotSetup.qml:40
-msgid "Hotspot name"
-msgstr "Yhteyspisteen nimi"
+#. TRANSLATORS: %1 is either i18n.tr("Internet") or i18n.tr("MMS")
+#: ../plugins/cellular//CustomApnEditor.qml:67
+#, qt-format
+msgid "Custom %1 APN"
+msgstr "Mukautettu %1 APN"
 
-#: ../plugins/cellular//HotspotSetup.qml:54
-msgid "Key (must be 8 characters or longer)"
-msgstr "Avain (vähintään 8 merkkiä)"
+#. TRANSLATORS: %1 is either i18n.tr("Internet") or i18n.tr("MMS")
+#: ../plugins/cellular//CustomApnEditor.qml:171
+#, qt-format
+msgid "%1 APN"
+msgstr "%1 APN"
 
-#: ../plugins/cellular//HotspotSetup.qml:68
-msgid "Show key"
-msgstr "Näytä avain"
+#: ../plugins/cellular//CustomApnEditor.qml:181
+msgid "MMSC"
+msgstr "MMSC"
 
-#: ../plugins/cellular//HotspotSetup.qml:94
-#: ../plugins/security-privacy//SimPin.qml:154
-#: ../plugins/security-privacy//LockSecurity.qml:302
-msgid "Change"
-msgstr "Muuta"
+#: ../plugins/cellular//CustomApnEditor.qml:191
+msgid "Proxy"
+msgstr "Välityspalvelin"
+
+#: ../plugins/cellular//CustomApnEditor.qml:213
+msgid "Username"
+msgstr "Käyttäjätunnus"
+
+#: ../plugins/cellular//CustomApnEditor.qml:264
+msgid "Save"
+msgstr "Tallenna"
+
+#: ../plugins/cellular//CustomApnEditor.qml:264
+msgid "Activate"
+msgstr "Aktivoi"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
 #: ../plugins/cellular//PageComponent.qml:32
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:28
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:170
 msgid "Cellular"
-msgstr "Matkapuhelin"
+msgstr "Puhelinverkko"
 
 #: ../plugins/cellular//Hotspot.qml:29
 #: ../plugins/cellular//Components//MultiSim.qml:48
@@ -271,527 +911,261 @@ msgstr ""
 msgid "Set up hotspot"
 msgstr "Aseta yhteyspiste"
 
-#: ../plugins/cellular//PageChooseCarrier.qml:102
-msgid "Choose carrier:"
-msgstr "Valitse operaattori:"
+#: ../plugins/cellular//HotspotSetup.qml:29
+msgid "Change hotspot setup"
+msgstr "Muuta yhteyspisteen asetuksia"
+
+#: ../plugins/cellular//HotspotSetup.qml:40
+msgid "Hotspot name"
+msgstr "Yhteyspisteen nimi"
+
+#: ../plugins/cellular//HotspotSetup.qml:54
+msgid "Key (must be 8 characters or longer)"
+msgstr "Avain (vähintään 8 merkkiä)"
+
+#: ../plugins/cellular//HotspotSetup.qml:68
+msgid "Show key"
+msgstr "Näytä avain"
+
+#: ../plugins/cellular//HotspotSetup.qml:94
+#: ../plugins/security-privacy//LockSecurity.qml:302
+#: ../plugins/security-privacy//SimPin.qml:157
+msgid "Change"
+msgstr "Muuta"
 
-#: ../plugins/cellular//PageChooseCarrier.qml:103
-#: ../plugins/time-date//PageComponent.qml:69
-#: ../plugins/time-date//ChooseTimeZone.qml:47
-msgid "Automatically"
-msgstr "Automaattisesti"
-
-#: ../plugins/cellular//PageChooseCarrier.qml:103
-#: ../plugins/time-date//PageComponent.qml:69
-#: ../plugins/time-date//ChooseTimeZone.qml:47
-#: ../plugins/security-privacy//PageComponent.qml:149
-msgid "Manually"
-msgstr "Manuaalisesti"
-
-#: ../plugins/cellular//PageChooseCarrier.qml:130
-msgid "Refresh"
-msgstr "Päivitä"
-
-#: ../plugins/cellular//PageChooseCarrier.qml:151
-msgid "Searching"
-msgstr "Etsitään"
-
-#: ../plugins/language//DisplayLanguage.qml:36
-msgid "Display language"
-msgstr "Kieli"
-
-#: ../plugins/language//DisplayLanguage.qml:118
-msgid "Confirm"
-msgstr "Hyväksy"
-
-#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: ../plugins/language//PageComponent.qml:34
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:40
-msgid "Language & Text"
-msgstr "Kieli ja teksti"
-
-#: ../plugins/language//PageComponent.qml:100
-msgid "Display language…"
-msgstr "Kieli…"
-
-#: ../plugins/language//PageComponent.qml:117
-#: ../plugins/language//KeyboardLayouts.qml:26
-msgid "Keyboard layouts"
-msgstr "Näppäimistöasettelut"
-
-#: ../plugins/language//PageComponent.qml:132
-#: ../plugins/language//PageComponent.qml:142
-#: ../plugins/language//SpellChecking.qml:27
-#: ../plugins/language//SpellChecking.qml:36
-msgid "Spell checking"
-msgstr "Oikoluku"
-
-#: ../plugins/language//PageComponent.qml:152
-msgid "Auto correction"
-msgstr "Automaattinen korjaus"
-
-#: ../plugins/language//PageComponent.qml:162
-msgid "Word suggestions"
-msgstr "Sanaehdotukset"
-
-#: ../plugins/language//PageComponent.qml:175
-msgid "Auto capitalization"
-msgstr "Automaattiset isot kirjaimet"
-
-#: ../plugins/language//PageComponent.qml:185
-msgid "Turns on Shift to capitalize the first letter of each sentence."
-msgstr "Shift-näppäin on käytössä automaattisesti jokaisen lauseen alussa."
-
-#: ../plugins/language//PageComponent.qml:192
-msgid "Auto punctuation"
-msgstr "Automaattiset välimerkit"
-
-#: ../plugins/language//PageComponent.qml:202
-msgid ""
-"Adds a period, and any missing quotes or brackets, when you tap Space twice."
-msgstr ""
-"Lisää pisteen sekä puuttuvat lainausmerkit ja sulut, kun painat välilyöntiä "
-"kahdesti."
-
-#: ../plugins/language//PageComponent.qml:209
-#: ../plugins/sound//PageComponent.qml:196
-msgid "Keyboard sound"
-msgstr "Näppäimistön ääni"
-
-#: ../plugins/language//PageComponent.qml:219
-msgid "Keyboard vibration"
-msgstr "Näppäimistön värinä"
-
-#: ../plugins/language//KeyboardLayouts.qml:39
-msgid "Current layouts:"
-msgstr "Nykyiset asettelut:"
-
-#: ../plugins/language//KeyboardLayouts.qml:40
-msgid "All layouts available:"
-msgstr "Kaikki saatavilla olevat asettelut:"
-
-#: ../plugins/language//SpellChecking.qml:53
-msgid "Current spelling languages:"
-msgstr "Nykyiset oikeinkirjoituksen kielet:"
-
-#: ../plugins/language//SpellChecking.qml:54
-msgid "All languages available:"
-msgstr "Kaikki saatavillat olevat kielet:"
-
-#: ../plugins/language//RebootNecessary.qml:38
-msgid "Restart Now"
-msgstr "Käynnistä uudelleen nyt"
-
-#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
-#: ../plugins/sound//PageComponent.qml:37
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:58
-msgid "Sound"
-msgstr "Ääni"
-
-#: ../plugins/sound//PageComponent.qml:76
-msgid "Silent Mode"
-msgstr "Äänetön tila"
-
-#: ../plugins/sound//PageComponent.qml:80
-msgid "Ringer:"
-msgstr "Soittoäänen voimakkuus:"
-
-#: ../plugins/sound//PageComponent.qml:112
-msgid "Phone calls:"
-msgstr "Puhelut:"
-
-#: ../plugins/sound//PageComponent.qml:116
-#: ../plugins/sound//PageComponent.qml:122
-msgid "Ringtone"
-msgstr "Soittoääni"
-
-#: ../plugins/sound//PageComponent.qml:135
-msgid "Vibrate when ringing"
-msgstr "Värinä soidessa"
-
-#: ../plugins/sound//PageComponent.qml:144
-#: ../plugins/sound//PageComponent.qml:188
-msgid "Vibrate in Silent Mode"
-msgstr "Värinä äänettömässä tilassa"
-
-#: ../plugins/sound//PageComponent.qml:153
-#: ../plugins/phone//PageComponent.qml:109
-msgid "Dialpad sounds"
-msgstr "Valintanäppäinten äänet"
-
-#: ../plugins/sound//PageComponent.qml:157
-msgid "Messages:"
-msgstr "Viestit:"
-
-#: ../plugins/sound//PageComponent.qml:161
-#: ../plugins/sound//PageComponent.qml:167
-msgid "Message received"
-msgstr "Viesti vastaanotettu"
-
-#: ../plugins/sound//PageComponent.qml:179
-msgid "Vibrate with message sound"
-msgstr "Värinä ja viestiääni"
-
-#: ../plugins/sound//PageComponent.qml:192
-msgid "Other sounds:"
-msgstr "Muut äänet:"
-
-#: ../plugins/sound//PageComponent.qml:210
-msgid "Lock sound"
-msgstr "Lukitusääni"
-
-#: ../plugins/sound//SoundsList.qml:60
-msgid "Stop playing"
-msgstr "Lopeta toisto"
-
-#: ../plugins/sound//SilentModeWarning.qml:31
-msgid "The phone is in Silent Mode."
-msgstr "Puhelin on äänettömässä tilassa."
-
-#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
-#: ../plugins/phone//PageComponent.qml:32
-#: ../plugins/bluetooth//PageComponent.qml:93
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:64
-msgid "Phone"
-msgstr "Puhelin"
-
-#: ../plugins/phone//ServiceInfo.qml:109
-#, qt-format
-msgid "Last called %1"
-msgstr "Viimeksi soitettu %1"
-
-#: ../plugins/phone//ServiceInfo.qml:119
-msgid "Call"
-msgstr "Puhelut"
-
-#: ../plugins/phone//MultiSim.qml:36 ../plugins/phone//MultiSim.qml:74
-#: ../plugins/phone//NoSims.qml:28 ../plugins/phone//CallForwarding.qml:32
-#: ../plugins/phone//CallForwarding.qml:76 ../plugins/phone//SingleSim.qml:33
-msgid "Call forwarding"
-msgstr "Soitonsiirto"
-
-#: ../plugins/phone//MultiSim.qml:46 ../plugins/phone//MultiSim.qml:84
-#: ../plugins/phone//NoSims.qml:34 ../plugins/phone//SingleSim.qml:40
-#: ../plugins/phone//CallWaiting.qml:31 ../plugins/phone//CallWaiting.qml:74
-msgid "Call waiting"
-msgstr "Koputuspalvelu"
-
-#: ../plugins/phone//MultiSim.qml:56 ../plugins/phone//MultiSim.qml:94
-#: ../plugins/phone//NoSims.qml:42
-msgid "Services"
-msgstr "Palvelut"
-
-#: ../plugins/phone//CallForwarding.qml:91
-msgid ""
-"Redirects phone calls to another number whenever you don't answer, or your "
-"phone is busy, turned off, or out of range."
-msgstr ""
-"Siirtää puhelut toiseen numeroon, jos puhelimeen ei vastata, sillä puhutaan "
-"toista puhelua tai se on sammutettu tai lentotilassa."
-
-#: ../plugins/phone//CallForwarding.qml:101
-msgid "Forward to"
-msgstr "Välitä"
-
-#: ../plugins/phone//CallForwarding.qml:152
-#: ../plugins/time-date//TimePicker.qml:182
-#: ../plugins/security-privacy//LockSecurity.qml:304
-#: ../plugins/background//Preview.qml:108
-msgid "Set"
-msgstr "Aseta"
-
-#: ../plugins/phone//SingleSim.qml:29
-msgid "SIM"
-msgstr "SIM-kortti"
-
-#. TRANSLATORS: %1 is the name of the (network) carrier
-#: ../plugins/phone//SingleSim.qml:51 ../plugins/phone//Services.qml:34
-#, qt-format
-msgid "%1 Services"
-msgstr "%1-palvelut"
-
-#: ../plugins/phone//CallWaiting.qml:89
-msgid ""
-"Lets you answer or start a new call while on another call, and switch "
-"between them"
-msgstr ""
-"Mahdollistaa uuden puhelun soittamisen tai vastaamisen saapuvaan puheluun, "
-"kun meneillään on jo puhelu."
-
-#: ../plugins/about//License.qml:30
-msgid "Sorry, this license could not be displayed."
-msgstr "Valitettavasti tämän lisenssin näyttäminen epäonnistui."
-
-#: ../plugins/about//Version.qml:36
-msgid "OS Build Details"
-msgstr "Järjestelmän koostamisen tiedot"
-
-#: ../plugins/about//Version.qml:65
-msgid "OS build number"
-msgstr "Järjestelmän koostamisnumero"
-
-#: ../plugins/about//Version.qml:71
-msgid "Ubuntu Image part"
-msgstr "Ubuntu-järjestelmäkuvan osa"
-
-#: ../plugins/about//Version.qml:79
-msgid "Ubuntu build description"
-msgstr "Ubuntu-julkaisun kuvaus"
-
-#: ../plugins/about//Version.qml:85
-msgid "Device Image part"
-msgstr "Laitekuvan osa"
-
-#: ../plugins/about//Version.qml:92
-msgid "Device build description"
-msgstr "Laitejulkaisun kuvaus"
-
-#: ../plugins/about//Version.qml:99
-msgid "Customization Image part"
-msgstr "Mukautuskuvan osa"
-
-#: ../plugins/about//PhoneNumbers.qml:31
-msgid "Phone number:"
-msgstr "Puhelinnumero:"
-
-#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: ../plugins/about//PageComponent.qml:34
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:70
-msgid "About this phone"
-msgstr "Tietoja laitteesta"
-
-#: ../plugins/about//PageComponent.qml:109
-msgid "Serial"
-msgstr "Sarjanumero"
-
-#: ../plugins/about//PageComponent.qml:124
-msgid "Wi-Fi address"
-msgstr "Wifi-osoite"
-
-#: ../plugins/about//PageComponent.qml:132
-msgid "Bluetooth address"
-msgstr "Bluetooth-osoite"
-
-#: ../plugins/about//PageComponent.qml:143 ../plugins/about//Storage.qml:33
-msgid "Storage"
-msgstr "Tallennustila"
-
-#: ../plugins/about//PageComponent.qml:150
-msgid "Software:"
-msgstr "Ohjelmisto:"
-
-#: ../plugins/about//PageComponent.qml:155
-msgid "OS"
-msgstr "Käyttöjärjestelmä"
-
-#: ../plugins/about//PageComponent.qml:164
-msgid "Last updated"
-msgstr "Päivitetty viimeksi"
-
-#: ../plugins/about//PageComponent.qml:172
-msgid "Check for updates"
-msgstr "Tarkista päivitykset"
-
-#: ../plugins/about//PageComponent.qml:181
-msgid "Legal:"
-msgstr "Oikeudellinen huomautus:"
-
-#: ../plugins/about//PageComponent.qml:186 ../plugins/about//Software.qml:11
-msgid "Software licenses"
-msgstr "Ohjelmistolisenssit"
-
-#: ../plugins/about//PageComponent.qml:194
-msgid "Regulatory info"
-msgstr "Sääntelytiedot"
-
-#: ../plugins/about//PageComponent.qml:202
-msgid "Developer mode"
-msgstr "Kehittäjätila"
-
-#: ../plugins/about//DevMode.qml:35 ../plugins/about//DevMode.qml:88
-msgid "Developer Mode"
-msgstr "Kehittäjätila"
-
-#: ../plugins/about//DevMode.qml:82
-msgid ""
-"In Developer Mode, anyone can access, change or delete anything on this "
-"phone by connecting it to another device."
-msgstr ""
-"Kehittäjätilassa kuka tahansa voi käyttää, muuttaa tai poistaa mitä tahansa "
-"tältä puhelimelta yhdistämällä puhelimen toiseen laitteeseen."
-
-#: ../plugins/about//DevMode.qml:108
-msgid "You need a PIN code or passphrase set to use Developer Mode."
-msgstr "Tarvitset PIN-koodin tai salasanan kehittäjätilan käyttöä varten."
-
-#: ../plugins/about//DevMode.qml:114
-#: ../plugins/security-privacy//PhoneLocking.qml:49
 #: ../plugins/security-privacy//LockSecurity.qml:32
+#: ../plugins/security-privacy//PhoneLocking.qml:49
+#: ../plugins/about//DevMode.qml:116
+#: ../wizard/qml/Pages//30-passwd-type.qml:37
 msgid "Lock security"
 msgstr "Lukitusturva"
 
-#: ../plugins/about//Storage.qml:87
-msgid "Used by Ubuntu"
-msgstr "Ubuntun käytössä"
+#: ../plugins/security-privacy//LockSecurity.qml:96
+#: ../plugins/security-privacy//LockSecurity.qml:384
+msgid "Change passcode…"
+msgstr "Vaihda suojakoodia..."
 
-#: ../plugins/about//Storage.qml:88
-msgid "Videos"
-msgstr "Videot"
+#: ../plugins/security-privacy//LockSecurity.qml:98
+#: ../plugins/security-privacy//LockSecurity.qml:385
+msgid "Change passphrase…"
+msgstr "Vaihda salasana…"
 
-#: ../plugins/about//Storage.qml:89
-msgid "Audio"
-msgstr "Ääni"
+#: ../plugins/security-privacy//LockSecurity.qml:105
+msgid "Switch to swipe"
+msgstr "Vaihda pyyhkäisyyn"
 
-#: ../plugins/about//Storage.qml:90
-msgid "Pictures"
-msgstr "Kuvat"
+#: ../plugins/security-privacy//LockSecurity.qml:107
+msgid "Switch to passcode"
+msgstr "Vaihda suojakoodiin"
 
-#: ../plugins/about//Storage.qml:91
-msgid "Other files"
-msgstr "Muut tiedostot"
+#: ../plugins/security-privacy//LockSecurity.qml:109
+msgid "Switch to passphrase"
+msgstr "Vaihda salasanaan"
 
-#: ../plugins/about//Storage.qml:92
-msgid "Used by apps"
-msgstr "Sovellusten käytössä"
+#: ../plugins/security-privacy//LockSecurity.qml:118
+msgid "Existing passcode"
+msgstr "Olemassa oleva suojakoodi"
 
-#: ../plugins/about//Storage.qml:142
-msgid "Total storage"
-msgstr "Tilaa yhteensä"
+#: ../plugins/security-privacy//LockSecurity.qml:120
+msgid "Existing passphrase"
+msgstr "Nykyinen salasana"
 
-#: ../plugins/about//Storage.qml:154
-msgid "Free space"
-msgstr "Vapaa tila"
+#: ../plugins/security-privacy//LockSecurity.qml:174
+msgid "Choose passcode"
+msgstr "Valitse suojakoodi"
 
-#: ../plugins/about//Storage.qml:174
-msgid "By name"
-msgstr "Nimen mukaan"
+#: ../plugins/security-privacy//LockSecurity.qml:176
+msgid "Choose passphrase"
+msgstr "Valitse salasana"
 
-#: ../plugins/about//Storage.qml:174
-msgid "By size"
-msgstr "Koon mukaan"
+#: ../plugins/security-privacy//LockSecurity.qml:220
+#: ../wizard/qml/Pages//passwd-confirm.qml:48
+msgid "Confirm passcode"
+msgstr "Vahvista suojakoodi"
 
-#: ../plugins/about//PhoneNumber.qml:36
-msgid "Phone number"
-msgstr "Puhelinnumero"
+#: ../plugins/security-privacy//LockSecurity.qml:222
+#: ../wizard/qml/Pages//passwd-confirm.qml:47
+msgid "Confirm passphrase"
+msgstr "Vahvista salasana"
 
-#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
-#: ../plugins/notifications//PageComponent.qml:29
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:96
-msgid "Notifications"
-msgstr "Ilmoitukset"
+#: ../plugins/security-privacy//LockSecurity.qml:265
+msgid "Those passcodes don't match. Try again."
+msgstr "Suojakoodit eivät täsmää, yritä uudelleen."
 
-#: ../plugins/notifications//PageComponent.qml:40
-msgid ""
-"Selected apps can alert you using notification bubbles, sounds, vibrations, "
-"and the Notification Center."
-msgstr ""
-"Valitut sovellukset voivat pyytää huomiotasi käyttämällä ilmoituksia, ääniä, "
-"värinää ja ilmoituskeskusta."
+#: ../plugins/security-privacy//LockSecurity.qml:268
+msgid "Those passphrases don't match. Try again."
+msgstr "Salasanat eivät vastaa toisiaan. Yritä uudelleen."
 
-#: ../plugins/time-date//TimePicker.qml:26
-msgid "Set time & date"
-msgstr "Aseta päivä ja aika"
+#: ../plugins/security-privacy//LockSecurity.qml:299
+msgid "Unset"
+msgstr "Ei määritetty"
 
-#: ../plugins/time-date//TimePicker.qml:68
-msgid "Time"
-msgstr "Aika"
+#: ../plugins/security-privacy//LockSecurity.qml:344
+msgid "Unlock the phone using:"
+msgstr "Lukituksen avaus:"
 
-#: ../plugins/time-date//TimePicker.qml:81
-msgid "Hour"
-msgstr "Tunti"
+#: ../plugins/security-privacy//LockSecurity.qml:348
+msgid "Swipe (no security)"
+msgstr "Pyyhkäisy (ei turvallinen)"
 
-#: ../plugins/time-date//TimePicker.qml:95
-msgid "Minute"
-msgstr "Minuutti"
+#: ../plugins/security-privacy//LockSecurity.qml:349
+msgid "4-digit passcode"
+msgstr "Nelinumeroinen suojakoodi"
 
-#: ../plugins/time-date//TimePicker.qml:109
-msgid "Second"
-msgstr "Sekunti"
+#: ../plugins/security-privacy//LockSecurity.qml:350
+#: ../plugins/security-privacy//PhoneLocking.qml:47
+#: ../wizard/qml/Pages//30-passwd-type.qml:98
+msgid "Passphrase"
+msgstr "Salasana"
 
-#: ../plugins/time-date//TimePicker.qml:118
-msgid "Date"
-msgstr "Päiväys"
+#: ../plugins/security-privacy//LockSecurity.qml:351
+msgid "Swipe (no security)… "
+msgstr "Pyyhkäisy (ei turvallinen)… "
 
-#: ../plugins/time-date//TimePicker.qml:130
-msgid "Day"
-msgstr "Päivä"
+#: ../plugins/security-privacy//LockSecurity.qml:352
+msgid "4-digit passcode…"
+msgstr "Nelinumeroinen suojakoodi..."
 
-#: ../plugins/time-date//TimePicker.qml:144
-msgid "Month"
-msgstr "Kuukausi"
+#: ../plugins/security-privacy//LockSecurity.qml:353
+msgid "Passphrase…"
+msgstr "Salasana…"
 
-#: ../plugins/time-date//TimePicker.qml:162
-msgid "Year"
-msgstr "Vuosi"
+#: ../plugins/security-privacy//SimPin.qml:34
+#: ../plugins/security-privacy//SimPin.qml:322
+#: ../plugins/security-privacy//PageComponent.qml:158
+msgid "SIM PIN"
+msgstr "SIM-kortin PIN-koodi"
 
-#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
-#: ../plugins/time-date//PageComponent.qml:29
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:104
-msgid "Time & Date"
-msgstr "Aika ja päiväys"
+#: ../plugins/security-privacy//SimPin.qml:44
+msgid "Change SIM PIN"
+msgstr "Vaihda SIM-kortin PIN-koodi"
 
-#: ../plugins/time-date//PageComponent.qml:53
-msgid "Time zone:"
-msgstr "Aikavyöhyke:"
-
-#: ../plugins/time-date//PageComponent.qml:68
-msgid "Set the time and date:"
-msgstr "Aseta aika ja päivä:"
-
-#: ../plugins/time-date//ChooseTimeZone.qml:28
-msgid "Time zone"
-msgstr "Aikavyöhyke"
-
-#: ../plugins/time-date//ChooseTimeZone.qml:46
-msgid "Set the time zone:"
-msgstr "Aseta aikavyöhyke:"
-
-#: ../plugins/time-date//ChooseTimeZone.qml:126
-msgid "Enter your current location."
-msgstr "Anna nykyinen sijaintisi."
-
-#: ../plugins/time-date//ChooseTimeZone.qml:127
-msgid "No matching place"
-msgstr "Ei vastaavaa paikkaa"
-
-#: ../plugins/security-privacy//AppAccess.qml:28
-#: ../plugins/security-privacy//PageComponent.qml:253
-msgid "Other app access"
-msgstr "Muiden sovellusten pääsy"
-
-#: ../plugins/security-privacy//AppAccess.qml:35
-msgid "Apps that you have granted and have requested access to:"
-msgstr "Sovellukset, jotka ovat pyytäneet ja joille on annettu oikeudet:"
-
-#: ../plugins/security-privacy//AppAccess.qml:41
-#: ../plugins/bluetooth//PageComponent.qml:105
-msgid "Camera"
-msgstr "Kamera"
-
-#: ../plugins/security-privacy//AppAccess.qml:42
-msgid "Apps that have requested access to your camera"
-msgstr "Sovellukset jotka ovat pyytäneet pääsyä kameraan"
-
-#: ../plugins/security-privacy//AppAccess.qml:46
-msgid "Mic"
-msgstr "Mikrofoni"
-
-#: ../plugins/security-privacy//AppAccess.qml:47
-msgid "Apps that have requested access to your mic"
-msgstr "Sovellukset jotka ovat pyytäneet pääsyä mikrofoniin"
-
-#: ../plugins/security-privacy//AppAccess.qml:59
+#: ../plugins/security-privacy//SimPin.qml:47
 #, qt-format
-msgid "%1/%2"
-msgstr "%1/%2"
+msgid "Incorrect PIN. %1 attempt remaining."
+msgid_plural "Incorrect PIN. %1 attempts remaining."
+msgstr[0] "Virheellinen PIN-koodi. %1 yritys jäljellä."
+msgstr[1] "Virheellinen PIN-koodi. %1 yritystä jäljellä."
 
-#: ../plugins/security-privacy//AppAccess.qml:60
-msgid "0"
-msgstr "0"
+#: ../plugins/security-privacy//SimPin.qml:81
+msgid "Current PIN:"
+msgstr "Nykyinen PIN-koodi:"
+
+#: ../plugins/security-privacy//SimPin.qml:93
+#, qt-format
+msgid "%1 attempt allowed."
+msgid_plural "%1 attempts allowed."
+msgstr[0] "%1 yritys sallittu."
+msgstr[1] "%1 yritystä sallittu."
+
+#: ../plugins/security-privacy//SimPin.qml:107
+msgid "Choose new PIN:"
+msgstr "Valitse uusi PIN-koodi:"
+
+#: ../plugins/security-privacy//SimPin.qml:118
+msgid "Confirm new PIN:"
+msgstr "Vahvista uusi PIN-koodi:"
+
+#: ../plugins/security-privacy//SimPin.qml:137
+msgid "PINs don't match. Try again."
+msgstr "PIN-koodit eivät vastaa toisiaan, yritä uudelleen."
+
+#: ../plugins/security-privacy//SimPin.qml:183
+msgid "Enter SIM PIN"
+msgstr "Anna SIM-kortin PIN-koodi"
+
+#: ../plugins/security-privacy//SimPin.qml:184
+msgid "Enter Previous SIM PIN"
+msgstr "Anna SIM-kortin aiempi PIN-koodi"
+
+#: ../plugins/security-privacy//SimPin.qml:187
+#, qt-format
+msgid "Incorrect PIN. %1 attempts remaining."
+msgstr "Virheellinen PIN-koodi. Yrityksiä jäljellä %1 ."
+
+#: ../plugins/security-privacy//SimPin.qml:246
+#, qt-format
+msgid "%1 attempts allowed."
+msgstr "Sallittuja yrityksiä %1."
+
+#: ../plugins/security-privacy//SimPin.qml:282
+msgid "Unlock"
+msgstr "Avaa lukitus"
+
+#: ../plugins/security-privacy//SimPin.qml:282
+msgid "Lock"
+msgstr "Lukitse"
+
+#: ../plugins/security-privacy//SimPin.qml:340
+msgid "Change PIN…"
+msgstr "Vaihda PIN-koodi…"
+
+#: ../plugins/security-privacy//SimPin.qml:357
+msgid ""
+"When a SIM PIN is set, it must be entered to access cellular services after "
+"restarting the phone or swapping the SIM."
+msgstr ""
+"Kun SIM-kortin PIN-koodi on asetettu, se tulee antaa puhelinpalveluiden "
+"käyttämiseksi puhelimen uudelleenkäynnistyksen tai SIM-kortin vaihtamisen "
+"jälkeen."
+
+#: ../plugins/security-privacy//SimPin.qml:361
+msgid "Entering an incorrect PIN repeatedly may lock the SIM permanently."
+msgstr ""
+"Virheellisen PIN-koodin antaminen useaan kertaan saattaa lukita SIM-kortin "
+"pysyvästi."
+
+#: ../plugins/security-privacy//PhoneLocking.qml:31
+msgid "Phone locking"
+msgstr "Puhelimen lukitus"
+
+#: ../plugins/security-privacy//PhoneLocking.qml:45
+msgctxt "Unlock with swipe"
+msgid "None"
+msgstr "Ei mitään"
+
+#: ../plugins/security-privacy//PhoneLocking.qml:46
+#: ../wizard/qml/Pages//30-passwd-type.qml:95
+msgid "Passcode"
+msgstr "Suojakoodi"
+
+#. TRANSLATORS: %1 is the number of minutes
+#: ../plugins/security-privacy//PhoneLocking.qml:75
+#: ../plugins/security-privacy//PhoneLocking.qml:84
+#, qt-format
+msgid "%1 minute"
+msgid_plural "%1 minutes"
+msgstr[0] "%1 minuutti"
+msgstr[1] "%1 minuuttia"
+
+#: ../plugins/security-privacy//PhoneLocking.qml:101
+msgid "Sleep locks immediately"
+msgstr "Valmiustila lukitsee välittömästi"
+
+#: ../plugins/security-privacy//PhoneLocking.qml:106
+msgid "When locked, allow:"
+msgstr "Salli lukittuna ollessa:"
+
+#: ../plugins/security-privacy//PhoneLocking.qml:110
+msgid "Launcher"
+msgstr "Käynnistin"
+
+#: ../plugins/security-privacy//PhoneLocking.qml:120
+msgid "Notifications and quick settings"
+msgstr "Ilmoitukset ja pika-asetukset"
+
+#: ../plugins/security-privacy//PhoneLocking.qml:131
+msgid "Turn on lock security to restrict access when the phone is locked."
+msgstr ""
+"Ota lukitusturva käyttöön rajoittaaksesi käyttöä puhelimen ollessa lukittu."
+
+#: ../plugins/security-privacy//PhoneLocking.qml:132
+msgid "Other apps and functions will prompt you to unlock."
+msgstr "Muut sovellukset ja toiminnot pyytävät avaamaan lukituksen."
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
 #: ../plugins/security-privacy//PageComponent.qml:37
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:114
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:218
 msgid "Security & Privacy"
 msgstr "Turvallisuus ja yksityisyys"
 
@@ -811,29 +1185,6 @@ msgstr "Vain puhelimesta"
 msgid "Lock phone"
 msgstr "Lukitse puhelin"
 
-#. TRANSLATORS: %1 is the number of minutes
-#: ../plugins/security-privacy//PageComponent.qml:137
-#: ../plugins/security-privacy//PageComponent.qml:146
-#: ../plugins/battery//PageComponent.qml:312
-#: ../plugins/battery//PageComponent.qml:321
-#: ../plugins/battery//SleepValues.qml:83
-#: ../plugins/battery//SleepValues.qml:87
-#: ../plugins/battery//SleepValues.qml:91
-#: ../plugins/battery//SleepValues.qml:95
-#: ../plugins/battery//SleepValues.qml:99
-#: ../plugins/battery//SleepValues.qml:103
-#, qt-format
-msgid "After %1 minute"
-msgid_plural "After %1 minutes"
-msgstr[0] "%1 minuutin jälkeen"
-msgstr[1] "%1 minuutin jälkeen"
-
-#: ../plugins/security-privacy//PageComponent.qml:158
-#: ../plugins/security-privacy//SimPin.qml:34
-#: ../plugins/security-privacy//SimPin.qml:319
-msgid "SIM PIN"
-msgstr "SIM-kortin PIN-koodi"
-
 #: ../plugins/security-privacy//PageComponent.qml:161
 #: ../plugins/security-privacy//PageComponent.qml:244
 msgid "On"
@@ -841,9 +1192,9 @@ msgstr "Päällä"
 
 #: ../plugins/security-privacy//PageComponent.qml:165
 #: ../plugins/security-privacy//PageComponent.qml:244
+#: ../plugins/cellular//Components//CellularMultiSim.qml:30
 #: ../plugins/cellular//Components//NoSim.qml:32
 #: ../plugins/cellular//Components//CellularSingleSim.qml:50
-#: ../plugins/cellular//Components//CellularMultiSim.qml:30
 msgid "Off"
 msgstr "Pois"
 
@@ -880,6 +1231,11 @@ msgstr "Hakutulokset"
 msgid "Location access"
 msgstr "Sijainnin käyttö"
 
+#: ../plugins/security-privacy//PageComponent.qml:253
+#: ../plugins/security-privacy//AppAccess.qml:28
+msgid "Other app access"
+msgstr "Muiden sovellusten pääsy"
+
 #: ../plugins/security-privacy//PageComponent.qml:258
 #: ../plugins/security-privacy//diagnostics//PageComponent.qml:30
 msgid "Diagnostics"
@@ -897,83 +1253,16 @@ msgstr "Lähetetään"
 msgid "Not sent"
 msgstr "Ei lähetetä"
 
-#: ../plugins/security-privacy//SimPin.qml:44
-msgid "Change SIM PIN"
-msgstr "Vaihda SIM-kortin PIN-koodi"
-
-#: ../plugins/security-privacy//SimPin.qml:47
-#: ../plugins/security-privacy//SimPin.qml:184
-#, qt-format
-msgid "Incorrect PIN. %1 attempts remaining."
-msgstr "Virheellinen PIN-koodi. Yrityksiä jäljellä %1 ."
-
-#: ../plugins/security-privacy//SimPin.qml:79
-msgid "Current PIN:"
-msgstr "Nykyinen PIN-koodi:"
-
-#: ../plugins/security-privacy//SimPin.qml:91
-#: ../plugins/security-privacy//SimPin.qml:243
-#, qt-format
-msgid "%1 attempts allowed."
-msgstr "Sallittuja yrityksiä %1."
-
-#: ../plugins/security-privacy//SimPin.qml:104
-msgid "Choose new PIN:"
-msgstr "Valitse uusi PIN-koodi:"
-
-#: ../plugins/security-privacy//SimPin.qml:115
-msgid "Confirm new PIN:"
-msgstr "Vahvista uusi PIN-koodi:"
-
-#: ../plugins/security-privacy//SimPin.qml:134
-msgid "PINs don't match. Try again."
-msgstr "PIN-koodit eivät vastaa toisiaan, yritä uudelleen."
-
-#: ../plugins/security-privacy//SimPin.qml:180
-msgid "Enter SIM PIN"
-msgstr "Anna SIM-kortin PIN-koodi"
-
-#: ../plugins/security-privacy//SimPin.qml:181
-msgid "Enter Previous SIM PIN"
-msgstr "Anna SIM-kortin aiempi PIN-koodi"
-
-#: ../plugins/security-privacy//SimPin.qml:279
-msgid "Unlock"
-msgstr "Avaa lukitus"
-
-#: ../plugins/security-privacy//SimPin.qml:279
-msgid "Lock"
-msgstr "Lukitse"
-
-#: ../plugins/security-privacy//SimPin.qml:337
-msgid "Change PIN…"
-msgstr "Vaihda PIN-koodi…"
-
-#: ../plugins/security-privacy//SimPin.qml:354
-msgid ""
-"When a SIM PIN is set, it must be entered to access cellular services after "
-"restarting the phone or swapping the SIM."
-msgstr ""
-"Kun SIM-kortin PIN-koodi on asetettu, se tulee antaa puhelinpalveluiden "
-"käyttämiseksi puhelimen uudelleenkäynnistyksen tai SIM-kortin vaihtamisen "
-"jälkeen."
-
-#: ../plugins/security-privacy//SimPin.qml:358
-msgid "Entering an incorrect PIN repeatedly may lock the SIM permanently."
-msgstr ""
-"Virheellisen PIN-koodin antaminen useaan kertaan saattaa lukita SIM-kortin "
-"pysyvästi."
-
 #: ../plugins/security-privacy//Location.qml:31
-#: ../wizard/qml/Pages//30-location.qml:25
+#: ../wizard/qml/Pages//50-location.qml:25
 msgid "Location"
 msgstr "Sijainti"
 
-#: ../plugins/security-privacy//Location.qml:49
+#: ../plugins/security-privacy//Location.qml:59
 msgid "Location detection"
 msgstr "Sijainnin havaitseminen"
 
-#: ../plugins/security-privacy//Location.qml:71
+#: ../plugins/security-privacy//Location.qml:81
 msgid ""
 "Uses GPS to detect your rough location. When off, GPS turns off to save "
 "battery."
@@ -981,7 +1270,7 @@ msgstr ""
 "Käyttää GPS:ää epätarkan sijainnin paikantamiseen. Kun ei käytössä, GPS ei "
 "ole käytössä virransäästön vuoksi."
 
-#: ../plugins/security-privacy//Location.qml:73
+#: ../plugins/security-privacy//Location.qml:83
 msgid ""
 "Uses wi-fi and GPS to detect your rough location. Turning off location "
 "detection saves battery."
@@ -989,7 +1278,7 @@ msgstr ""
 "Käyttää Wi-Fiä ja GPS:ää epätarkan sijainnin paikantamiseen. Toiminnon "
 "kytkeminen pois käytöstä säästää akkuvirtaa."
 
-#: ../plugins/security-privacy//Location.qml:75
+#: ../plugins/security-privacy//Location.qml:85
 msgid ""
 "Uses wi-fi (currently off) and GPS to detect your rough location. Turning "
 "off location detection saves battery."
@@ -997,7 +1286,7 @@ msgstr ""
 "Käyttää Wi-Fiä (ei käytössä nyt) ja GPS:ää epätarkan sijainnin "
 "paikantamiseen. Toiminnon kytkeminen pois käytöstä säästää akkuvirtaa."
 
-#: ../plugins/security-privacy//Location.qml:77
+#: ../plugins/security-privacy//Location.qml:87
 msgid ""
 "Uses wi-fi, cell tower locations, and GPS to detect your rough location. "
 "Turning off location detection saves battery."
@@ -1005,7 +1294,7 @@ msgstr ""
 "Käyttää Wi-Fiä, puhelinmastojen sijainteja ja GPS:ää epätarkan sijainnin "
 "paikantamiseen. Toiminnon kytkeminen pois käytöstä säästää akkuvirtaa."
 
-#: ../plugins/security-privacy//Location.qml:79
+#: ../plugins/security-privacy//Location.qml:89
 msgid ""
 "Uses wi-fi, cell tower locations (no current cellular connection), and GPS "
 "to detect your rough location. Turning off location detection saves battery."
@@ -1014,7 +1303,7 @@ msgstr ""
 "ja GPS:ää epätarkan sijainnin paikantamiseen. Toiminnon kytkeminen pois "
 "käytöstä säästää akkuvirtaa."
 
-#: ../plugins/security-privacy//Location.qml:81
+#: ../plugins/security-privacy//Location.qml:91
 msgid ""
 "Uses wi-fi (currently off), cell tower locations, and GPS to detect your "
 "rough location. Turning off location detection saves battery."
@@ -1023,7 +1312,7 @@ msgstr ""
 "epätarkan sijainnin paikantamiseen. Toiminnon kytkeminen pois käytöstä "
 "säästää akkuvirtaa."
 
-#: ../plugins/security-privacy//Location.qml:83
+#: ../plugins/security-privacy//Location.qml:93
 msgid ""
 "Uses wi-fi (currently off), cell tower locations (no current cellular "
 "connection), and GPS to detect your rough location. Turning off location "
@@ -1033,7 +1322,7 @@ msgstr ""
 "ei käytettävissä) ja GPS:ää epätarkan sijainnin paikantamiseen. Toiminnon "
 "kytkeminen pois käytöstä säästää akkuvirtaa."
 
-#: ../plugins/security-privacy//Location.qml:90
+#: ../plugins/security-privacy//Location.qml:100
 msgid "Allow access to location:"
 msgstr "Salli sijaintitiedon käyttö:"
 
@@ -1041,301 +1330,39 @@ msgstr "Salli sijaintitiedon käyttö:"
 msgid "Return results from:"
 msgstr "Palauta tulokset:"
 
-#: ../plugins/security-privacy//PhoneLocking.qml:31
-msgid "Phone locking"
-msgstr "Puhelimen lukitus"
+#: ../plugins/security-privacy//AppAccess.qml:35
+msgid "Apps that you have granted and have requested access to:"
+msgstr "Sovellukset, jotka ovat pyytäneet ja joille on annettu oikeudet:"
 
-#: ../plugins/security-privacy//PhoneLocking.qml:45
-msgctxt "Unlock with swipe"
-msgid "None"
-msgstr "Ei mitään"
+#: ../plugins/security-privacy//AppAccess.qml:41
+#: ../plugins/bluetooth//PageComponent.qml:105
+msgid "Camera"
+msgstr "Kamera"
 
-#: ../plugins/security-privacy//PhoneLocking.qml:46
-#: ../wizard/qml/Pages//15-passwd.qml:99
-msgid "PIN code"
-msgstr "PIN-koodi:"
+#: ../plugins/security-privacy//AppAccess.qml:42
+msgid "Apps that have requested access to your camera"
+msgstr "Sovellukset jotka ovat pyytäneet pääsyä kameraan"
 
-#: ../plugins/security-privacy//PhoneLocking.qml:47
-#: ../plugins/security-privacy//LockSecurity.qml:350
-#: ../wizard/qml/Pages//15-passwd.qml:101
-msgid "Passphrase"
-msgstr "Salasana"
+#: ../plugins/security-privacy//AppAccess.qml:46
+msgid "Mic"
+msgstr "Mikrofoni"
 
-#: ../plugins/security-privacy//PhoneLocking.qml:68
-#: ../plugins/battery//PageComponent.qml:306
-msgid "Lock when idle"
-msgstr "Lukitse käyttämättömänä ollut laite"
+#: ../plugins/security-privacy//AppAccess.qml:47
+msgid "Apps that have requested access to your mic"
+msgstr "Sovellukset jotka ovat pyytäneet pääsyä mikrofoniin"
 
-#: ../plugins/security-privacy//PhoneLocking.qml:69
-#: ../plugins/battery//PageComponent.qml:306
-msgid "Sleep when idle"
-msgstr "Sammuta käyttämättömänä olleen laitteen näyttö"
-
-#. TRANSLATORS: %1 is the number of minutes
-#: ../plugins/security-privacy//PhoneLocking.qml:75
-#: ../plugins/security-privacy//PhoneLocking.qml:84
+#: ../plugins/security-privacy//AppAccess.qml:59
 #, qt-format
-msgid "%1 minute"
-msgid_plural "%1 minutes"
-msgstr[0] "%1 minuutti"
-msgstr[1] "%1 minuuttia"
+msgid "%1/%2"
+msgstr "%1/%2"
 
-#: ../plugins/security-privacy//PhoneLocking.qml:101
-msgid "Sleep locks immediately"
-msgstr "Valmiustila lukitsee välittömästi"
-
-#: ../plugins/security-privacy//PhoneLocking.qml:106
-msgid "When locked, allow:"
-msgstr "Salli lukittuna ollessa:"
-
-#: ../plugins/security-privacy//PhoneLocking.qml:110
-msgid "Launcher"
-msgstr "Käynnistin"
-
-#: ../plugins/security-privacy//PhoneLocking.qml:120
-msgid "Notifications and quick settings"
-msgstr "Ilmoitukset ja pika-asetukset"
-
-#: ../plugins/security-privacy//PhoneLocking.qml:131
-msgid "Turn on lock security to restrict access when the phone is locked."
-msgstr ""
-"Ota lukitusturva käyttöön rajoittaaksesi käyttöä puhelimen ollessa lukittu."
-
-#: ../plugins/security-privacy//PhoneLocking.qml:132
-msgid "Other apps and functions will prompt you to unlock."
-msgstr "Muut sovellukset ja toiminnot pyytävät avaamaan lukituksen."
-
-#: ../plugins/security-privacy//LockSecurity.qml:96
-#: ../plugins/security-privacy//LockSecurity.qml:384
-msgid "Change PIN code…"
-msgstr "Vaihda PIN-koodi…"
-
-#: ../plugins/security-privacy//LockSecurity.qml:98
-#: ../plugins/security-privacy//LockSecurity.qml:385
-msgid "Change passphrase…"
-msgstr "Vaihda salasana…"
-
-#: ../plugins/security-privacy//LockSecurity.qml:105
-msgid "Switch to swipe"
-msgstr "Vaihda pyyhkäisyyn"
-
-#: ../plugins/security-privacy//LockSecurity.qml:107
-msgid "Switch to PIN code"
-msgstr "Vaihda PIN-koodiin"
-
-#: ../plugins/security-privacy//LockSecurity.qml:109
-msgid "Switch to passphrase"
-msgstr "Vaihda salasanaan"
-
-#: ../plugins/security-privacy//LockSecurity.qml:118
-msgid "Existing PIN code"
-msgstr "Olemassa oleva PIN-koodi"
-
-#: ../plugins/security-privacy//LockSecurity.qml:120
-msgid "Existing passphrase"
-msgstr "Nykyinen salasana"
-
-#: ../plugins/security-privacy//LockSecurity.qml:174
-msgid "Choose PIN code"
-msgstr "Valitse PIN-koodi"
-
-#: ../plugins/security-privacy//LockSecurity.qml:176
-msgid "Choose passphrase"
-msgstr "Valitse salasana"
-
-#: ../plugins/security-privacy//LockSecurity.qml:220
-msgid "Confirm PIN code"
-msgstr "Vahvista PIN-koodi"
-
-#: ../plugins/security-privacy//LockSecurity.qml:222
-msgid "Confirm passphrase"
-msgstr "Vahvista salasana"
-
-#: ../plugins/security-privacy//LockSecurity.qml:265
-msgid "Those PIN codes don't match. Try again."
-msgstr "PIN-koodit eivät vastaa toisiaan, yritä uudelleen."
-
-#: ../plugins/security-privacy//LockSecurity.qml:268
-msgid "Those passphrases don't match. Try again."
-msgstr "Salasanat eivät vastaa toisiaan. Yritä uudelleen."
-
-#: ../plugins/security-privacy//LockSecurity.qml:299
-msgid "Unset"
-msgstr "Ei määritetty"
-
-#: ../plugins/security-privacy//LockSecurity.qml:344
-msgid "Unlock the phone using:"
-msgstr "Lukituksen avaus:"
-
-#: ../plugins/security-privacy//LockSecurity.qml:348
-msgid "Swipe (no security)"
-msgstr "Pyyhkäisy (ei turvallinen)"
-
-#: ../plugins/security-privacy//LockSecurity.qml:349
-msgid "4-digit PIN code"
-msgstr "4-numeroinen PIN-koodi"
-
-#: ../plugins/security-privacy//LockSecurity.qml:351
-msgid "Swipe (no security)… "
-msgstr "Pyyhkäisy (ei turvallinen)… "
-
-#: ../plugins/security-privacy//LockSecurity.qml:352
-msgid "4-digit PIN code…"
-msgstr "4-numeroinen PIN-koodi…"
-
-#: ../plugins/security-privacy//LockSecurity.qml:353
-msgid "Passphrase…"
-msgstr "Salasana…"
-
-#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#: ../plugins/system-update//PageComponent.qml:36
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:124
-msgid "Updates"
-msgstr "Päivitykset"
-
-#: ../plugins/system-update//PageComponent.qml:87
-msgid "Update System"
-msgstr "Päivitä järjestelmä"
-
-#: ../plugins/system-update//PageComponent.qml:88
-msgid "The phone needs to restart to install the system update."
-msgstr ""
-"Järjestelmäpäivityksen asennus vaatii puhelimen uudelleenkäynnistyksen."
-
-#: ../plugins/system-update//PageComponent.qml:88
-msgid "Connect the phone to power before installing the system update."
-msgstr "Yhdistä puhelin laturiin, ennen kuin asennat järjestelmäpäivityksen."
-
-#: ../plugins/system-update//PageComponent.qml:91
-msgid "Install & Restart"
-msgstr "Asenna ja käynnistä uudelleen"
-
-#: ../plugins/system-update//PageComponent.qml:101
-msgid "Not Now"
-msgstr "Ei nyt"
-
-#: ../plugins/system-update//PageComponent.qml:107
-msgid "Install"
-msgstr "Asenna"
-
-#: ../plugins/system-update//PageComponent.qml:128
-msgid "Software is up to date"
-msgstr "Ohjelmiston on ajan tasalla"
-
-#: ../plugins/system-update//PageComponent.qml:239
-msgid "Checking for updates…"
-msgstr "Tarkistetaan päivityksiä…"
-
-#: ../plugins/system-update//PageComponent.qml:257
-#, qt-format
-msgid "Install %1 update…"
-msgid_plural "Install %1 updates…"
-msgstr[0] "Asenna %1 päivitys…"
-msgstr[1] "Asenna %1 päivitystä…"
-
-#: ../plugins/system-update//PageComponent.qml:258
-#, qt-format
-msgid "Install %1 update"
-msgid_plural "Install %1 updates"
-msgstr[0] "Asenna %1 päivitys"
-msgstr[1] "Asenna %1 päivitystä"
-
-#: ../plugins/system-update//PageComponent.qml:259
-msgid "Pause All"
-msgstr "Keskeytä kaikki"
-
-#: ../plugins/system-update//PageComponent.qml:313
-msgid "Retry"
-msgstr "Yritä uudelleen"
-
-#: ../plugins/system-update//PageComponent.qml:329
-msgid "Download"
-msgstr "Lataa"
-
-#: ../plugins/system-update//PageComponent.qml:329
-msgid "Update"
-msgstr "Päivitä"
-
-#: ../plugins/system-update//PageComponent.qml:330
-msgid "Resume"
-msgstr "Jatka"
-
-#: ../plugins/system-update//PageComponent.qml:331
-msgid "Pause"
-msgstr "Keskeytä"
-
-#: ../plugins/system-update//PageComponent.qml:389
-msgid "Installing"
-msgstr "Asennetaan"
-
-#: ../plugins/system-update//PageComponent.qml:422
-msgid "Installed"
-msgstr "Asennettu"
-
-#: ../plugins/system-update//PageComponent.qml:447
-msgid "Version: "
-msgstr "Versio: "
-
-#: ../plugins/system-update//PageComponent.qml:469
-msgid "Sign in to Ubuntu One to receive updates for apps."
-msgstr "Kirjaudu Ubuntu Oneen saadaksesi sovelluspäivityksiä."
-
-#: ../plugins/system-update//PageComponent.qml:478
-msgid "Sign In…"
-msgstr "Kirjaudu…"
-
-#: ../plugins/system-update//PageComponent.qml:545
-msgid "Installing update…"
-msgstr "Asennetaan päivitystä…"
-
-#: ../plugins/system-update//PageComponent.qml:560
-#: ../plugins/system-update//Configuration.qml:30
-msgid "Auto download"
-msgstr "Lataa automaattisesti"
-
-#: ../plugins/system-update//PageComponent.qml:565
-msgid "On wi-fi"
-msgstr "Wifillä"
-
-#: ../plugins/system-update//PageComponent.qml:567
-msgid "Always"
-msgstr "Aina"
-
-#: ../plugins/system-update//PageComponent.qml:582
-msgid " bytes"
-msgstr " tavua"
-
-#: ../plugins/system-update//PageComponent.qml:585
-msgid " KiB"
-msgstr " KiB"
-
-#: ../plugins/system-update//PageComponent.qml:588
-msgid " MiB"
-msgstr " MiB"
-
-#: ../plugins/system-update//PageComponent.qml:591
-msgid " GiB"
-msgstr " GiB"
-
-#: ../plugins/system-update//Configuration.qml:35
-msgid "Download future updates automatically:"
-msgstr "Lataa päivitykset jatkossa automaattisesti:"
-
-#: ../plugins/system-update//Configuration.qml:54
-msgid "When on wi-fi"
-msgstr "Vain Wi-Fillä"
-
-#: ../plugins/system-update//Configuration.qml:55
-msgid "On any data connection"
-msgstr "Millä tahansa yhteydellä"
-
-#: ../plugins/system-update//Configuration.qml:56
-msgid "Data charges may apply."
-msgstr "Huomioi mahdolliset datamaksut."
+#: ../plugins/security-privacy//AppAccess.qml:60
+msgid "0"
+msgstr "0"
 
 #: ../plugins/bluetooth//ProvidePasskeyDialog.qml:28
-#: ../plugins/bluetooth//ProvidePinCodeDialog.qml:28
 #: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:28
+#: ../plugins/bluetooth//ProvidePinCodeDialog.qml:28
 msgid "Bluetooth Pairing Request"
 msgstr "Bluetooth-parituspyyntö"
 
@@ -1350,13 +1377,15 @@ msgstr "PIN-koodi (%1)"
 msgid "Pair"
 msgstr "Parita"
 
-#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
-#: ../plugins/bluetooth//PageComponent.qml:32
-#: ../plugins/bluetooth//PageComponent.qml:147
-#: ../plugins/battery//PageComponent.qml:363
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:134
-msgid "Bluetooth"
-msgstr "Bluetooth"
+#. TRANSLATORS: %1 is the name of the bluetooth device being paired
+#: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:37
+#, qt-format
+msgid "Please confirm that the PIN displayed on '%1' matches this one"
+msgstr "Varmista, että laitteen \"%1\" PIN vastaa tätä"
+
+#: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:57
+msgid "Confirm PIN"
+msgstr "Vahvista PIN"
 
 #: ../plugins/bluetooth//PageComponent.qml:82
 msgid "Connected"
@@ -1374,10 +1403,6 @@ msgstr "Katkaistaan yhteyttä…"
 msgid "Disconnected"
 msgstr "Yhteys katkaistu"
 
-#: ../plugins/bluetooth//PageComponent.qml:86
-msgid "Unknown"
-msgstr "Tuntematon"
-
 #: ../plugins/bluetooth//PageComponent.qml:92
 msgid "Computer"
 msgstr "Tietokone"
@@ -1386,7 +1411,7 @@ msgstr "Tietokone"
 msgid "Modem"
 msgstr "Modeemi"
 
-#: ../plugins/bluetooth//PageComponent.qml:95 ../src/qml/MainWindow.qml:145
+#: ../plugins/bluetooth//PageComponent.qml:95 ../src/qml/MainWindow.qml:147
 msgid "Network"
 msgstr "Verkko"
 
@@ -1458,226 +1483,513 @@ msgstr "Ei löydettävissä"
 msgid "Connected devices:"
 msgstr "Yhdistetyt laitteet:"
 
-#: ../plugins/bluetooth//PageComponent.qml:250
+#: ../plugins/bluetooth//PageComponent.qml:251
 msgid "Connect another device:"
 msgstr "Yhdistä toiseen laitteeseen:"
 
-#: ../plugins/bluetooth//PageComponent.qml:250
+#: ../plugins/bluetooth//PageComponent.qml:251
 msgid "Connect a device:"
 msgstr "Yhdistä laite:"
 
-#: ../plugins/bluetooth//PageComponent.qml:283
+#: ../plugins/bluetooth//PageComponent.qml:285
 msgid "None detected"
 msgstr "Mitään ei havaittu"
 
-#: ../plugins/bluetooth//PageComponent.qml:291
-#: ../plugins/bluetooth//PageComponent.qml:394
+#: ../plugins/bluetooth//PageComponent.qml:293
+#: ../plugins/bluetooth//PageComponent.qml:397
 msgid "Connect automatically when detected:"
 msgstr "Yhdistä automaattisesti havaittaessa:"
 
-#: ../plugins/bluetooth//PageComponent.qml:361
+#: ../plugins/bluetooth//PageComponent.qml:364
 msgid "Type"
 msgstr "Tyyppi"
 
-#: ../plugins/bluetooth//PageComponent.qml:385
+#: ../plugins/bluetooth//PageComponent.qml:388
 msgid "Status"
 msgstr "Tila"
 
-#: ../plugins/bluetooth//PageComponent.qml:389
+#: ../plugins/bluetooth//PageComponent.qml:392
 msgid "Signal Strength"
 msgstr "Signaalin voimakkuus"
 
-#: ../plugins/bluetooth//PageComponent.qml:426
+#: ../plugins/bluetooth//PageComponent.qml:429
 msgid "Forget this device"
 msgstr "Unohda tämä laite"
 
-#. TRANSLATORS: %1 is the name of the bluetooth device being paired
-#: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:37
-#, qt-format
-msgid "Please confirm that the PIN displayed on '%1' matches this one"
-msgstr "Varmista, että laitteen \"%1\" PIN vastaa tätä"
+#: ../plugins/about//PhoneNumbers.qml:31
+msgid "Phone number:"
+msgstr "Puhelinnumero:"
 
-#: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:57
-msgid "Confirm PIN"
-msgstr "Vahvista PIN"
+#: ../plugins/about//PhoneNumber.qml:36
+msgid "Phone number"
+msgstr "Puhelinnumero"
 
-#. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
-#: ../plugins/battery//PageComponent.qml:34
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:140
-msgid "Battery"
-msgstr "Akku"
+#: ../plugins/about//Storage.qml:33 ../plugins/about//PageComponent.qml:143
+msgid "Storage"
+msgstr "Tallennustila"
 
-#. TRANSLATORS: %1 is the number of seconds
-#: ../plugins/battery//PageComponent.qml:46
-#, qt-format
-msgid "%1 second ago"
-msgid_plural "%1 seconds ago"
-msgstr[0] "%1 sekunti sitten"
-msgstr[1] "%1 sekuntia sitten"
+#: ../plugins/about//Storage.qml:85
+msgid "Used by Ubuntu"
+msgstr "Ubuntun käytössä"
 
-#. TRANSLATORS: %1 is the number of minutes
-#: ../plugins/battery//PageComponent.qml:49
-#, qt-format
-msgid "%1 minute ago"
-msgid_plural "%1 minutes ago"
-msgstr[0] "%1 minuutti sitten"
-msgstr[1] "%1 minuuttia sitten"
+#: ../plugins/about//Storage.qml:86
+msgid "Videos"
+msgstr "Videot"
 
-#. TRANSLATORS: %1 is the number of hours
-#: ../plugins/battery//PageComponent.qml:52
-#, qt-format
-msgid "%1 hour ago"
-msgid_plural "%1 hours ago"
-msgstr[0] "%1 tunti sitten"
-msgstr[1] "%1 tuntia sitten"
+#: ../plugins/about//Storage.qml:87
+msgid "Audio"
+msgstr "Ääni"
 
-#. TRANSLATORS: %1 is the number of days
-#: ../plugins/battery//PageComponent.qml:55
-#, qt-format
-msgid "%1 day ago"
-msgid_plural "%1 days ago"
-msgstr[0] "%1 päivä sitten"
-msgstr[1] "%1 päivää sitten"
+#: ../plugins/about//Storage.qml:88
+msgid "Pictures"
+msgstr "Kuvat"
 
-#: ../plugins/battery//PageComponent.qml:85
-msgid "Charging now"
-msgstr "Ladataan nyt"
+#: ../plugins/about//Storage.qml:89
+msgid "Other files"
+msgstr "Muut tiedostot"
 
-#: ../plugins/battery//PageComponent.qml:90
-msgid "Last full charge"
-msgstr "Viimeisin täysi lataus"
+#: ../plugins/about//Storage.qml:90
+msgid "Used by apps"
+msgstr "Sovellusten käytössä"
 
-#: ../plugins/battery//PageComponent.qml:95
-msgid "Fully charged"
-msgstr "Ladattu täyteen"
+#: ../plugins/about//Storage.qml:140
+msgid "Total storage"
+msgstr "Tilaa yhteensä"
 
-#: ../plugins/battery//PageComponent.qml:126
-msgid "Charge level"
-msgstr "Varaustaso"
+#: ../plugins/about//Storage.qml:152
+msgid "Free space"
+msgstr "Vapaa tila"
 
-#. TRANSLATORS: %1 refers to a percentage that indicates the charging level of the battery
-#: ../plugins/battery//PageComponent.qml:134
-#, qt-format
-msgid "%1%"
-msgstr "%1 %"
+#: ../plugins/about//Storage.qml:172
+msgid "By name"
+msgstr "Nimen mukaan"
 
-#: ../plugins/battery//PageComponent.qml:212
-#: ../plugins/battery//PageComponent.qml:214
-msgid "Yesterday"
-msgstr "Eilen"
+#: ../plugins/about//Storage.qml:172
+msgid "By size"
+msgstr "Koon mukaan"
 
-#: ../plugins/battery//PageComponent.qml:220
-#: ../plugins/battery//PageComponent.qml:222
-msgid "Today"
-msgstr "Tänään"
+#: ../plugins/about//DevMode.qml:35 ../plugins/about//DevMode.qml:90
+msgid "Developer Mode"
+msgstr "Kehittäjätila"
 
-#: ../plugins/battery//PageComponent.qml:292
-msgid "Ways to reduce battery use:"
-msgstr "Säästä akkuvirtaa näin:"
-
-#: ../plugins/battery//PageComponent.qml:296
-#: ../plugins/brightness//BrightnessSlider.qml:51
-msgid "Display brightness"
-msgstr "Näytön kirkkaus"
-
-#: ../plugins/battery//PageComponent.qml:394
-msgid "GPS"
-msgstr "GPS"
-
-#: ../plugins/battery//PageComponent.qml:412
-msgid "Accurate location detection requires GPS and/or Wi-Fi."
-msgstr "Sijainnin tarkka määrittäminen edellyttää GPS:n ja/tai Wi-Fin."
-
-#: ../plugins/battery//SleepValues.qml:77
-msgid "Lock the phone when it's not in use:"
-msgstr "Lukitse käyttämättömänä ollut puhelin:"
-
-#: ../plugins/battery//SleepValues.qml:77
-msgid "Put the phone to sleep when it is not in use:"
-msgstr "Sammuta laitteen näyttö, kun se on ollut käyttämättömänä:"
-
-#: ../plugins/battery//SleepValues.qml:117
+#: ../plugins/about//DevMode.qml:84
 msgid ""
-"Shorter times are more secure. Phone won't lock during calls or video "
-"playback."
+"In Developer Mode, anyone can access, change or delete anything on this "
+"phone by connecting it to another device."
 msgstr ""
-"Lyhyt viive on pitkää turvallisempi. Puhelin ei lukitse itseään puheluiden "
-"tai videotoiston aikana."
+"Kehittäjätilassa kuka tahansa voi käyttää, muuttaa tai poistaa mitä tahansa "
+"tältä puhelimelta yhdistämällä puhelimen toiseen laitteeseen."
 
-#: ../plugins/battery//SleepValues.qml:117
-msgid "Phone won’t sleep during calls or video playback."
-msgstr "Puhelin ei sammuta näyttöään puheluiden tai videotoiston aikana."
+#: ../plugins/about//DevMode.qml:110
+msgid "You need a passcode or passphrase set to use Developer Mode."
+msgstr "Tarvitset suojakoodin tai salasanan käyttääksesi kehittäjätilaa"
 
-#. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: ../plugins/background//MainPage.qml:38
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:146
-msgid "Background"
-msgstr "Tausta"
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: ../plugins/about//PageComponent.qml:34
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:278
+msgid "About this phone"
+msgstr "Tietoja laitteesta"
 
-#: ../plugins/background//MainPage.qml:109
-msgid "Ubuntu Art"
-msgstr "Ubuntu-kuvitus"
+#: ../plugins/about//PageComponent.qml:109
+msgid "Serial"
+msgstr "Sarjanumero"
 
-#: ../plugins/background//MainPage.qml:125
-msgid "Custom"
-msgstr "Omavalintainen"
+#: ../plugins/about//PageComponent.qml:124
+msgid "Wi-Fi address"
+msgstr "Wifi-osoite"
 
-#: ../plugins/background//Preview.qml:70
-msgid "Preview"
-msgstr "Esikatselu"
+#: ../plugins/about//PageComponent.qml:132
+msgid "Bluetooth address"
+msgstr "Bluetooth-osoite"
 
-#: ../plugins/background//Preview.qml:101
-msgid "Remove image"
-msgstr "Poista kuva"
+#: ../plugins/about//PageComponent.qml:144
+#, qt-format
+msgid "%1 free"
+msgstr "%1 vapaana"
 
-#. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
-#: ../plugins/brightness//PageComponent.qml:32
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:154
-msgid "Brightness"
-msgstr "Kirkkaus"
+#: ../plugins/about//PageComponent.qml:151
+msgid "Software:"
+msgstr "Ohjelmisto:"
 
-#: ../plugins/brightness//PageComponent.qml:52
-msgid "Adjust automatically"
-msgstr "Säädä manuaalisesti"
+#: ../plugins/about//PageComponent.qml:156
+msgid "OS"
+msgstr "Käyttöjärjestelmä"
 
-#: ../plugins/brightness//PageComponent.qml:65
-msgid "Brightens and dims the display to suit the surroundings."
-msgstr "Näytön kirkkauden säätö ympäristöön sopivaksi"
+#: ../plugins/about//PageComponent.qml:165
+msgid "Last updated"
+msgstr "Päivitetty viimeksi"
 
+#: ../plugins/about//PageComponent.qml:173
+msgid "Check for updates"
+msgstr "Tarkista päivitykset"
+
+#: ../plugins/about//PageComponent.qml:182
+msgid "Legal:"
+msgstr "Oikeudellinen huomautus:"
+
+#: ../plugins/about//PageComponent.qml:187 ../plugins/about//Software.qml:11
+msgid "Software licenses"
+msgstr "Ohjelmistolisenssit"
+
+#: ../plugins/about//PageComponent.qml:195
+msgid "Regulatory info"
+msgstr "Sääntelytiedot"
+
+#: ../plugins/about//PageComponent.qml:203
+msgid "Developer mode"
+msgstr "Kehittäjätila"
+
+#: ../plugins/about//License.qml:30
+msgid "Sorry, this license could not be displayed."
+msgstr "Valitettavasti tämän lisenssin näyttäminen epäonnistui."
+
+#: ../plugins/about//Version.qml:36
+msgid "OS Build Details"
+msgstr "Järjestelmän koostamisen tiedot"
+
+#: ../plugins/about//Version.qml:61
+msgid "OS build number"
+msgstr "Järjestelmän koostamisnumero"
+
+#: ../plugins/about//Version.qml:67
+msgid "Ubuntu Image part"
+msgstr "Ubuntu-järjestelmäkuvan osa"
+
+#: ../plugins/about//Version.qml:75
+msgid "Ubuntu build description"
+msgstr "Ubuntu-julkaisun kuvaus"
+
+#: ../plugins/about//Version.qml:81
+msgid "Device Image part"
+msgstr "Laitekuvan osa"
+
+#: ../plugins/about//Version.qml:88
+msgid "Device build description"
+msgstr "Laitejulkaisun kuvaus"
+
+#: ../plugins/about//Version.qml:95
+msgid "Customization Image part"
+msgstr "Mukautuskuvan osa"
+
+#: ../plugins/time-date//ChooseTimeZone.qml:28
+msgid "Time zone"
+msgstr "Aikavyöhyke"
+
+#: ../plugins/time-date//ChooseTimeZone.qml:46
+msgid "Set the time zone:"
+msgstr "Aseta aikavyöhyke:"
+
+#: ../plugins/time-date//ChooseTimeZone.qml:126
+msgid "Enter your current location."
+msgstr "Anna nykyinen sijaintisi."
+
+#: ../plugins/time-date//ChooseTimeZone.qml:127
+msgid "No matching place"
+msgstr "Ei vastaavaa paikkaa"
+
+#: ../plugins/time-date//TimePicker.qml:26
+msgid "Set time & date"
+msgstr "Aseta päivä ja aika"
+
+#: ../plugins/time-date//TimePicker.qml:68
+msgid "Time"
+msgstr "Aika"
+
+#: ../plugins/time-date//TimePicker.qml:81
+msgid "Hour"
+msgstr "Tunti"
+
+#: ../plugins/time-date//TimePicker.qml:95
+msgid "Minute"
+msgstr "Minuutti"
+
+#: ../plugins/time-date//TimePicker.qml:109
+msgid "Second"
+msgstr "Sekunti"
+
+#: ../plugins/time-date//TimePicker.qml:118
+msgid "Date"
+msgstr "Päiväys"
+
+#: ../plugins/time-date//TimePicker.qml:130
+msgid "Day"
+msgstr "Päivä"
+
+#: ../plugins/time-date//TimePicker.qml:144
+msgid "Month"
+msgstr "Kuukausi"
+
+#: ../plugins/time-date//TimePicker.qml:162
+msgid "Year"
+msgstr "Vuosi"
+
+#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
+#: ../plugins/time-date//PageComponent.qml:29
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:314
+msgid "Time & Date"
+msgstr "Aika ja päiväys"
+
+#: ../plugins/time-date//PageComponent.qml:53
+msgid "Time zone:"
+msgstr "Aikavyöhyke:"
+
+#: ../plugins/time-date//PageComponent.qml:68
+msgid "Set the time and date:"
+msgstr "Aseta aika ja päivä:"
+
+#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
+#: ../plugins/system-update//PageComponent.qml:38
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:326
+msgid "Updates"
+msgstr "Päivitykset"
+
+#: ../plugins/system-update//PageComponent.qml:117
+msgid "Update System"
+msgstr "Päivitä järjestelmä"
+
+#: ../plugins/system-update//PageComponent.qml:118
+msgid "The phone needs to restart to install the system update."
+msgstr ""
+"Järjestelmäpäivityksen asennus vaatii puhelimen uudelleenkäynnistyksen."
+
+#: ../plugins/system-update//PageComponent.qml:118
+msgid "Connect the phone to power before installing the system update."
+msgstr "Yhdistä puhelin laturiin, ennen kuin asennat järjestelmäpäivityksen."
+
+#: ../plugins/system-update//PageComponent.qml:121
+msgid "Install & Restart"
+msgstr "Asenna ja käynnistä uudelleen"
+
+#: ../plugins/system-update//PageComponent.qml:131
+msgid "Not Now"
+msgstr "Ei nyt"
+
+#: ../plugins/system-update//PageComponent.qml:137
+msgid "Install"
+msgstr "Asenna"
+
+#: ../plugins/system-update//PageComponent.qml:152
+msgid "Installation failed"
+msgstr "Asennus epäonnistui"
+
+#: ../plugins/system-update//PageComponent.qml:156
+#: ../plugins/cellular//Components//SimEditor.qml:200
+msgid "OK"
+msgstr "OK"
+
+#: ../plugins/system-update//PageComponent.qml:176
+msgid "Software is up to date"
+msgstr "Ohjelmiston on ajan tasalla"
+
+#: ../plugins/system-update//PageComponent.qml:235
+#: ../plugins/system-update//PageComponent.qml:241
+msgid "Sorry, the system update failed."
+msgstr "Valitettavasti järjestelmän päivitys epäonnistui."
+
+#: ../plugins/system-update//PageComponent.qml:254
+msgid "Restarting…"
+msgstr "Käynnistetään uudelleen…"
+
+#: ../plugins/system-update//PageComponent.qml:298
+msgid "Checking for updates…"
+msgstr "Tarkistetaan päivityksiä…"
+
+#: ../plugins/system-update//PageComponent.qml:298
+msgid "Connect to the Internet to check for updates"
+msgstr "Yhdistä internetiin tarkistaaksesi päivitykset"
+
+#: ../plugins/system-update//PageComponent.qml:313
+#: ../plugins/system-update//PageComponent.qml:471
+msgid "Retry"
+msgstr "Yritä uudelleen"
+
+#: ../plugins/system-update//PageComponent.qml:338
+#, qt-format
+msgid "Install %1 update…"
+msgid_plural "Install %1 updates…"
+msgstr[0] "Asenna %1 päivitys…"
+msgstr[1] "Asenna %1 päivitystä…"
+
+#: ../plugins/system-update//PageComponent.qml:339
+#, qt-format
+msgid "Install %1 update"
+msgid_plural "Install %1 updates"
+msgstr[0] "Asenna %1 päivitys"
+msgstr[1] "Asenna %1 päivitystä"
+
+#: ../plugins/system-update//PageComponent.qml:340
+msgid "Pause All"
+msgstr "Keskeytä kaikki"
+
+#: ../plugins/system-update//PageComponent.qml:474
+msgid "Install…"
+msgstr "Asenna…"
+
+#: ../plugins/system-update//PageComponent.qml:476
+msgid "Download"
+msgstr "Lataa"
+
+#: ../plugins/system-update//PageComponent.qml:480
+msgid "Pause"
+msgstr "Keskeytä"
+
+#: ../plugins/system-update//PageComponent.qml:482
+msgid "Resume"
+msgstr "Jatka"
+
+#: ../plugins/system-update//PageComponent.qml:484
+msgid "Update"
+msgstr "Päivitä"
+
+#: ../plugins/system-update//PageComponent.qml:522
+msgid "Installing"
+msgstr "Asennetaan"
+
+#: ../plugins/system-update//PageComponent.qml:524
+msgid "Installed"
+msgstr "Asennettu"
+
+#: ../plugins/system-update//PageComponent.qml:525
+msgid "Downloading"
+msgstr "Ladataan"
+
+#: ../plugins/system-update//PageComponent.qml:536
+#, qt-format
+msgid "%1 of %2"
+msgstr "%1/%2"
+
+#: ../plugins/system-update//PageComponent.qml:635
+msgid "Version: "
+msgstr "Versio: "
+
+#: ../plugins/system-update//PageComponent.qml:667
+msgid "Sign in to Ubuntu One to receive updates for apps."
+msgstr "Kirjaudu Ubuntu Oneen saadaksesi sovelluspäivityksiä."
+
+#: ../plugins/system-update//PageComponent.qml:676
+msgid "Sign In…"
+msgstr "Kirjaudu…"
+
+#: ../plugins/system-update//PageComponent.qml:720
+msgid "Installing update…"
+msgstr "Asennetaan päivitystä…"
+
+#: ../plugins/system-update//PageComponent.qml:759
+#: ../plugins/system-update//Configuration.qml:29
+msgid "Auto download"
+msgstr "Lataa automaattisesti"
+
+#: ../plugins/system-update//PageComponent.qml:764
+msgid "On wi-fi"
+msgstr "Wifi-verkossa"
+
+#: ../plugins/system-update//PageComponent.qml:766
+msgid "Always"
+msgstr "Aina"
+
+#: ../plugins/system-update//PageComponent.qml:781
+msgid " bytes"
+msgstr " tavua"
+
+#: ../plugins/system-update//PageComponent.qml:784
+msgid " KiB"
+msgstr " KiB"
+
+#: ../plugins/system-update//PageComponent.qml:787
+msgid " MiB"
+msgstr " MiB"
+
+#: ../plugins/system-update//PageComponent.qml:790
+msgid " GiB"
+msgstr " GiB"
+
+#: ../plugins/system-update//Configuration.qml:34
+msgid "Download future updates automatically:"
+msgstr "Lataa päivitykset jatkossa automaattisesti:"
+
+#: ../plugins/system-update//Configuration.qml:53
+msgid "When on wi-fi"
+msgstr "Vain wifi-verkossa"
+
+#: ../plugins/system-update//Configuration.qml:54
+msgid "On any data connection"
+msgstr "Millä tahansa yhteydellä"
+
+#: ../plugins/system-update//Configuration.qml:55
+msgid "Data charges may apply."
+msgstr "Huomioi mahdolliset datamaksut."
+
+#: ../plugins/background//Components//AddRemove.qml:52
+msgid "No images selected"
+msgstr "Ei valittuja kuvia"
+
+#: ../plugins/background//Components//AddRemove.qml:65
+#, qt-format
+msgid "Remove %1 image"
+msgid_plural "Remove %1 images"
+msgstr[0] "Poista %1 kuva"
+msgstr[1] "Poista %1 kuvaa"
+
+#: ../plugins/background//Components//AddRemove.qml:80
+msgid "Add an image…"
+msgstr "Lisää kuva…"
+
+#: ../plugins/background//Components//AddRemove.qml:91
+msgid "Remove images…"
+msgstr "Poista kuvia…"
+
+#: ../plugins/cellular//Components//CellularMultiSim.qml:82
 #: ../plugins/cellular//Components//NoSim.qml:29
 #: ../plugins/cellular//Components//CellularSingleSim.qml:32
-#: ../plugins/cellular//Components//CellularMultiSim.qml:82
 msgid "Cellular data:"
 msgstr "Mobiilidata:"
 
+#: ../plugins/cellular//Components//CellularMultiSim.qml:138
 #: ../plugins/cellular//Components//NoSim.qml:32
 #: ../plugins/cellular//Components//CellularSingleSim.qml:51
-#: ../plugins/cellular//Components//CellularMultiSim.qml:138
 msgid "2G only (saves battery)"
 msgstr "Pelkkä 2G (säästää akkua)"
 
+#: ../plugins/cellular//Components//CellularMultiSim.qml:139
+#: ../plugins/cellular//Components//CellularSingleSim.qml:52
+msgid "2G/3G (faster)"
+msgstr "2G/3G (nopeampi)"
+
+#: ../plugins/cellular//Components//CellularMultiSim.qml:140
 #: ../plugins/cellular//Components//NoSim.qml:32
 #: ../plugins/cellular//Components//CellularSingleSim.qml:53
-#: ../plugins/cellular//Components//CellularMultiSim.qml:140
 msgid "2G/3G/4G (faster)"
 msgstr "2G/3G/4G (nopeampi)"
 
+#: ../plugins/cellular//Components//CellularMultiSim.qml:182
 #: ../plugins/cellular//Components//NoSim.qml:37
 #: ../plugins/cellular//Components//CellularSingleSim.qml:72
-#: ../plugins/cellular//Components//CellularMultiSim.qml:182
 msgid "Data roaming"
 msgstr "Datavierailu"
 
-#: ../plugins/cellular//Components//NoSim.qml:47
-#: ../plugins/cellular//Components//SingleSim.qml:58
-#: ../plugins/cellular//Components//SingleSim.qml:66
-msgid "Carrier"
-msgstr "Operaattori"
+#: ../plugins/cellular//Components//SimEditor.qml:77
+msgid "Edit SIM Name"
+msgstr "Muokkaa SIM-kortin nimeä"
 
-#: ../plugins/cellular//Components//CellularSingleSim.qml:52
-#: ../plugins/cellular//Components//CellularMultiSim.qml:139
-msgid "2G/3G (faster)"
-msgstr "2G/3G (nopeampi)"
+#: ../plugins/cellular//Components//DefaultSim.qml:31
+msgid "Ask me each time"
+msgstr "Kysy joka kerta"
+
+#: ../plugins/cellular//Components//DefaultSim.qml:36
+msgid "For outgoing calls, use:"
+msgstr "Lähtevissä puheluissa käytä:"
+
+#: ../plugins/cellular//Components//DefaultSim.qml:50
+msgid ""
+"You can change the SIM for individual calls, or for contacts in the address "
+"book."
+msgstr ""
+"Voit vaihtaa SIM-korttia yksittäisille puheluille tai osoitekirjassa "
+"oleville yhteystiedoille."
+
+#: ../plugins/cellular//Components//DefaultSim.qml:57
+msgid "For messages, use:"
+msgstr "Viesteissä käytä:"
 
 #: ../plugins/cellular//Components//MultiSim.qml:42
 #: ../plugins/cellular//Components//SingleSim.qml:37
@@ -1688,38 +2000,6 @@ msgstr "Yhteyspiste on poistettu käytöstä, koska wifi ei ole päällä."
 #: ../plugins/cellular//Components//SingleSim.qml:52
 msgid "Data usage statistics"
 msgstr "Datakäytön tilastot"
-
-#: ../plugins/cellular//Components//DefaultSim.qml:29
-msgid "Ask me each time"
-msgstr "Kysy joka kerta"
-
-#: ../plugins/cellular//Components//DefaultSim.qml:34
-msgid "For outgoing calls, use:"
-msgstr "Lähtevissä puheluissa käytä:"
-
-#: ../plugins/cellular//Components//DefaultSim.qml:48
-msgid ""
-"You can change the SIM for individual calls, or for contacts in the address "
-"book."
-msgstr ""
-"Voit vaihtaa SIM-korttia yksittäisille puheluille tai osoitekirjassa "
-"oleville yhteystiedoille."
-
-#: ../plugins/cellular//Components//DefaultSim.qml:55
-msgid "For messages, use:"
-msgstr "Viesteissä käytä:"
-
-#: ../plugins/cellular//Components//SingleSim.qml:72
-msgid "APN"
-msgstr "APN"
-
-#: ../plugins/cellular//Components//SimEditor.qml:77
-msgid "Edit SIM Name"
-msgstr "Muokkaa SIM-kortin nimeä"
-
-#: ../plugins/cellular//Components//SimEditor.qml:200
-msgid "OK"
-msgstr "OK"
 
 #: ../plugins/security-privacy//diagnostics//PageComponent.qml:51
 msgid "Privacy policy"
@@ -1743,95 +2023,117 @@ msgstr ""
 "Sisältää tietoja siitä, mitä sovellus oli tekemäisillään virheen "
 "kohdatessaan."
 
-#: ../plugins/background//Components//AddRemove.qml:52
-msgid "No images selected"
-msgstr "Ei valittuja kuvia"
-
-#: ../plugins/background//Components//AddRemove.qml:65
-#, qt-format
-msgid "Remove %1 image"
-msgid_plural "Remove %1 images"
-msgstr[0] "Poista %1 kuva"
-msgstr[1] "Poista %1 kuvaa"
-
-#: ../plugins/background//Components//AddRemove.qml:80
-msgid "Add an image…"
-msgstr "Lisää kuva…"
-
-#: ../plugins/background//Components//AddRemove.qml:91
-msgid "Remove images…"
-msgstr "Poista kuvia…"
-
-#: ../src/qml/MainWindow.qml:131
+#: ../src/qml/MainWindow.qml:133
 msgid "Search"
 msgstr "Etsi"
 
-#: ../src/qml/MainWindow.qml:150
+#: ../src/qml/MainWindow.qml:152
 msgid "Personal"
 msgstr "Henkilökohtaiset"
 
-#: ../src/qml/MainWindow.qml:155
+#: ../src/qml/MainWindow.qml:157
 msgid "System"
 msgstr "Järjestelmä"
 
-#: ../wizard/qml/Pages//15-passwd.qml:38
-msgid "Set lock security"
-msgstr "Aseta lukitusturva"
+#: ../wizard/qml/Pages//30-passwd-type.qml:72
+msgid "Please select how you’d like to unlock your phone."
+msgstr "Valitse puhelimen lukituksen avaustapa."
 
-#: ../wizard/qml/Pages//15-passwd.qml:97
+#: ../wizard/qml/Pages//30-passwd-type.qml:92
 msgid "Swipe"
 msgstr "Pyyhkäisy"
 
-#: ../wizard/qml/Pages//15-passwd.qml:147
-msgid "Those PIN codes don't match."
-msgstr "PIN-koodit eivät vastaa toisiaan."
+#: ../wizard/qml/Pages//30-passwd-type.qml:93
+msgid "No security"
+msgstr "Ei suojausta"
 
-#: ../wizard/qml/Pages//15-passwd.qml:149
-msgid "Those passphrases don't match."
-msgstr "Salasanat eivät vastaa toisiaan."
+#: ../wizard/qml/Pages//30-passwd-type.qml:96
+msgid "4 numbers"
+msgstr "4 numeroa"
 
-#: ../wizard/qml/Pages//15-passwd.qml:157
-msgid "PIN code must be at least four digits long."
-msgstr "PIN-koodin täytyy sisältää vähintään neljä numeroa."
+#: ../wizard/qml/Pages//30-passwd-type.qml:99
+msgid "Numbers and letters"
+msgstr "Numerot ja kirjaimet"
 
-#: ../wizard/qml/Pages//15-passwd.qml:159
-msgid "Passphrase must be at least four characters long."
-msgstr "Salasanan tulee olla vähintään neljä merkkiä."
-
-#: ../wizard/qml/Pages//15-passwd.qml:170
-#: ../wizard/qml/Pages//30-location.qml:79
-#: ../wizard/qml/Pages//40-reporting.qml:50
-#: ../wizard/qml/Pages//10-welcome.qml:85 ../wizard/qml/Pages//20-wifi.qml:195
+#: ../wizard/qml/Pages//30-passwd-type.qml:112
+#: ../wizard/qml/Pages//40-wifi.qml:196 ../wizard/qml/Pages//10-welcome.qml:85
+#: ../wizard/qml/Pages//50-location.qml:92
+#: ../wizard/qml/Pages//60-reporting.qml:48
 msgid "Continue"
 msgstr "Jatka"
 
-#: ../wizard/qml/Pages//terms.qml:25
+#: ../wizard/qml/Pages//40-wifi.qml:27
+msgid "Connect to Wi‑Fi"
+msgstr "Yhdistä wifi-verkkoon"
+
+#: ../wizard/qml/Pages//40-wifi.qml:146
+msgid "Available networks…"
+msgstr "Käytettävissä olevat verkot…"
+
+#: ../wizard/qml/Pages//40-wifi.qml:147
+msgid "No available networks."
+msgstr "Ei käytettävissä olevia verkkoja."
+
+#: ../wizard/qml/Pages//40-wifi.qml:196
+#: ../wizard/qml/Pages//31-passwd-set.qml:77
+#: ../wizard/qml/Pages//20-sim.qml:67
+msgid "Skip"
+msgstr "Ohita"
+
+#: ../wizard/qml/Pages//here-terms.qml:25
 msgid "Terms & Conditions"
 msgstr "Käyttöehdot"
 
-#: ../wizard/qml/Pages//30-location.qml:60
-msgid "Use your mobile network and Wi-Fi to work out where you are"
-msgstr "Käytä mobiiliverkkoa ja wifiä sijainnin määrittämiseen"
+#: ../wizard/qml/Pages//31-passwd-set.qml:48
+msgid "Enter passphrase"
+msgstr "Anna tunnuslause"
 
-#: ../wizard/qml/Pages//30-location.qml:69
-msgid ""
-"I have read and agreed to the HERE <a href='terms.qml'>terms and "
-"conditions</a>"
+#: ../wizard/qml/Pages//31-passwd-set.qml:49
+msgid "Choose your passcode"
+msgstr "Valitse suojakoodi"
+
+#: ../wizard/qml/Pages//31-passwd-set.qml:56
+msgid "Passphrase must be 4 characters long"
+msgstr "Salasanan tulee olla neljä kirjainta pitkä"
+
+#: ../wizard/qml/Pages//20-sim.qml:23
+msgid "Add a SIM card and restart your device"
+msgstr "Lisää SIM-kortti ja käynnistä laite uudelleen"
+
+#: ../wizard/qml/Pages//20-sim.qml:53
+msgid "Without it, you won’t be able to make calls or use text messaging."
 msgstr ""
-"Olen lukenut ja hyväksynyt HERE-palvelun <a href='terms.qml'>käyttöehdot</a>"
+"Ilman sitä et voi soittaa tai vastaanottaa puheluja tai käyttää "
+"tekstiviestejä."
 
-#: ../wizard/qml/Pages//40-reporting.qml:22
-msgid "Bug reporting"
-msgstr "Ongelmien raportointi"
+#: ../wizard/qml/Pages//passwd-confirm.qml:51
+msgid "Sorry, incorrect passphrase."
+msgstr "Virheellinen tunnuslause."
 
-#: ../wizard/qml/Pages//40-reporting.qml:35
-msgid "Your phone is set up to automatically report errors to Canonical."
-msgstr ""
-"Puhelimesi on asetettu raportoimaan automaattisesti ongelmista Canonicalille."
+#: ../wizard/qml/Pages//passwd-confirm.qml:51
+#: ../wizard/qml/Pages//passwd-confirm.qml:52
+msgid "Please try again."
+msgstr "Yritä uudelleen."
 
-#: ../wizard/qml/Pages//40-reporting.qml:43
-msgid "This can be disabled in System Settings."
-msgstr "Tämän asetuksen voi poistaa käytöstä järjestelmän asetuksista."
+#: ../wizard/qml/Pages//passwd-confirm.qml:52
+msgid "Sorry, incorrect passcode."
+msgstr "Virheellinen suojakoodi."
+
+#: ../wizard/qml/Pages//80-finished.qml:22
+msgid "All done"
+msgstr "Kaikki valmiina"
+
+#: ../wizard/qml/Pages//80-finished.qml:37
+msgid "Nice work!"
+msgstr "Hyvä!"
+
+#: ../wizard/qml/Pages//80-finished.qml:44
+msgid "Your phone is now ready to use."
+msgstr "Puhelimesi on nyt valmis käytettäväksi."
+
+#: ../wizard/qml/Pages//80-finished.qml:51
+msgid "Finish"
+msgstr "Valmis"
 
 #: ../wizard/qml/Pages//10-welcome.qml:25
 msgid "Hi!"
@@ -1845,347 +2147,790 @@ msgstr "Tervetuloa Ubuntu-puhelimen pariin."
 msgid "Let’s get started."
 msgstr "Aloitetaanpa."
 
-#: ../wizard/qml/Pages//80-finished.qml:22
-msgid "All done"
-msgstr "Kaikki valmiina"
-
-#: ../wizard/qml/Pages//80-finished.qml:37
-msgid "Nice work!"
-msgstr "Hyvä!"
-
-#: ../wizard/qml/Pages//80-finished.qml:45
-msgid "Your phone is now ready to use."
-msgstr "Puhelimesi on nyt valmis käytettäväksi."
-
-#: ../wizard/qml/Pages//80-finished.qml:52
-msgid "Finish"
-msgstr "Valmis"
-
-#: ../wizard/qml/Pages//20-wifi.qml:27
-msgid "Connect to Wi‑Fi"
-msgstr "Yhdistä wifi-verkkoon"
-
-#: ../wizard/qml/Pages//20-wifi.qml:146
-msgid "Available networks"
-msgstr "Saatavilla olevat verkot"
-
-#: ../wizard/qml/Pages//20-wifi.qml:195 ../wizard/qml/Pages//no-sim.qml:50
-msgid "Skip"
-msgstr "Ohita"
-
-#: ../wizard/qml/Pages//no-sim.qml:22
-msgid "Add a SIM card"
-msgstr "Lisää SIM-kortti"
-
-#: ../wizard/qml/Pages//no-sim.qml:33
-msgid "Please insert a SIM card before you continue."
-msgstr "Aseta SIM-kortti, ennen kuin jatkat."
-
-#: ../wizard/qml/Pages//no-sim.qml:35
-msgid "Without it, you won’t be able to make calls or use text messaging."
+#. TRANSLATORS: HERE is a trademark for Nokia's location service, you probably shouldn't translate it
+#: ../wizard/qml/Pages//50-location.qml:58
+msgid ""
+"Ubuntu includes location services provided by HERE, enabling apps to "
+"pinpoint your location."
 msgstr ""
-"Ilman sitä et voi soittaa tai vastaanottaa puheluja tai käyttää "
-"tekstiviestejä."
+"Ubuntu sisältää HERE-paikannuspalveluita, jotka mahdollistavat sovellusten "
+"määrittää sijaintisi."
 
-#: ../wizard/qml/Components//Page.qml:84
+#: ../wizard/qml/Pages//50-location.qml:64
+msgid ""
+"Allow apps to use your mobile and Wi-Fi networks to determine your location."
+msgstr ""
+"Salli sovellusten käyttää puhelinverkkoa ja wifiä sijainnin määritystä "
+"varten."
+
+#. TRANSLATORS: HERE is a trademark for Nokia's location service, you probably shouldn't translate it
+#: ../wizard/qml/Pages//50-location.qml:74
+msgid ""
+"Accept the HERE <a href='terms.qml'>terms and conditions</a> to enable these "
+"services."
+msgstr ""
+"Hyväksy HERE-palvelun <a href='terms.qml'>käyttöehdot</a> ottaaksesi nämä "
+"palvelut käyttöön."
+
+#: ../wizard/qml/Pages//50-location.qml:85
+msgid ""
+"This service can be disabled at any time from the <b>System Settings</b> "
+"menu."
+msgstr ""
+"Tämä palvelu on mahdollista poistaa käytöstä milloin tahansa <b>Järjestelmän "
+"asetukset</b> -valikosta."
+
+#: ../wizard/qml/Pages//60-reporting.qml:22
+msgid "Improving your experience"
+msgstr "Käyttökokemuksen parantaminen"
+
+#: ../wizard/qml/Pages//60-reporting.qml:34
+msgid ""
+"Your phone is set up to automatically report errors to Canonical and its "
+"partners, the makers of the operating system."
+msgstr ""
+"Puhelimesi on asetettu ilmoittamaan virheistä automaattisesti Canonicalille "
+"ja partnereille, eli käyttöjärjestelmän kehittäjille."
+
+#: ../wizard/qml/Pages//60-reporting.qml:41
+msgid ""
+"This can be disabled in <b>System Settings</b> under <b>Security &amp; "
+"Privacy</b>"
+msgstr ""
+"Tämä on mahdollista poistaa käytöstä <b>Järjestelmän asetukset</b> -osion "
+"kohdasta <b>Turvallisuus ja yksityisyys</b>"
+
+#: ../wizard/qml/Components//Page.qml:89
 msgid "Back"
 msgstr "Takaisin"
 
-#: ../wizard/qml/Components//StackButton.qml:51
+#: ../wizard/qml/Components//StackButton.qml:40
 #, qt-format
 msgid "〈  %1"
 msgstr "〈  %1"
 
-#: ../wizard/qml/Components//StackButton.qml:54
+#: ../wizard/qml/Components//StackButton.qml:43
 #, qt-format
 msgid "%1  〉"
 msgstr "%1  〉"
 
-#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:2
-msgid "Example"
-msgstr "Esimerkki"
-
-#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:4
-msgid "example"
-msgstr "esimerkki"
-
-#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:6
-msgid "test"
-msgstr "testi"
-
-#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:8
-msgid "sample"
-msgstr "esimerkki"
-
-#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:12
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:32
-msgid "network"
-msgstr "verkko"
-
-#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:14
-msgid "wireless"
-msgstr "langaton"
-
-#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:16
-msgid "wifi"
-msgstr "wifi"
-
-#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:18
-msgid "wi-fi"
-msgstr "wi-fi"
-
-#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:20
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:26
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:38
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:48
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:56
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:62
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:68
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:102
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:112
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:120
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:132
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:138
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:158
-msgid "settings"
-msgstr "asetukset"
-
-#. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:24
-msgid "reset"
-msgstr "palauta"
-
-#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:30
-msgid "cellular"
-msgstr "matkapuhelin"
-
-#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:34
-msgid "mobile"
-msgstr "mobiili"
-
-#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:36
-msgid "gsm"
-msgstr "gsm"
-
-#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:42
-msgid "language"
-msgstr "kieli"
-
-#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:44
-msgid "lang"
-msgstr "kieli"
-
-#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:46
-msgid "i18n"
-msgstr "i18n"
-
-#. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:50
-msgid "Accessibility"
-msgstr "Esteettömyys"
-
-#. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:52
-msgid "accessibility"
-msgstr "esteettömyys"
-
-#. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:54
-msgid "a11y"
-msgstr "a11y"
-
-#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:60
-msgid "sound"
-msgstr "ääni"
-
-#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:66
-msgid "phone"
-msgstr "puhelin"
-
-#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:72
-msgid "about"
-msgstr "tietoa"
-
-#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:74
-msgid "device"
-msgstr "laite"
-
-#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:76
-msgid "info"
-msgstr "tiedot"
-
-#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:78
-msgid "Orientation Lock"
-msgstr "Suunnan lukitus"
-
-#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:80
-msgid "rotation"
-msgstr "kierto"
-
-#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:82
-msgid "orientation"
-msgstr "suunta"
-
-#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:84
-msgid "lock"
-msgstr "lukitse"
-
-#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:86
-msgid "screen"
-msgstr "näyttö"
-
-#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:88
-msgid "Flight Mode"
-msgstr "Lentotila"
-
-#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:90
-msgid "flight"
-msgstr "lento"
-
-#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:92
-msgid "plane"
-msgstr "lentokone"
-
-#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:94
-msgid "offline"
-msgstr "ei yhteyksiä"
-
-#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:98
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:128
-msgid "software"
-msgstr "ohjelmisto"
-
-#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:100
-msgid "notifications"
-msgstr "ilmoitukset"
-
-#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:106
-msgid "time"
-msgstr "aika"
-
-#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:108
-msgid "date"
-msgstr "päivä"
-
-#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:110
-msgid "timezone"
-msgstr "aikavyöhyke"
-
-#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:116
-msgid "security"
-msgstr "turvallisuus"
-
-#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:118
-msgid "privacy"
-msgstr "yksityisyys"
-
-#. TRANSLATORS: This is a keyword or name for the update-notification plugin which is used while searching
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:122
-msgid "Updates available"
-msgstr "Päivityksiä saatavilla"
-
-#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:126
-msgid "system"
-msgstr "järjestelmä"
-
-#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:130
-msgid "update"
-msgstr "päivitys"
-
-#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:136
-msgid "bluetooth"
-msgstr "bluetooth"
-
-#. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:142
-msgid "battery"
-msgstr "akku"
-
-#. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:144
-msgid "power"
-msgstr "virta"
-
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:148
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:4
 msgid "appearance"
 msgstr "ulkoasu"
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:150
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:6
 msgid "background"
 msgstr "taustakuva"
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:152
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:8
 msgid "wallpaper"
 msgstr "taustakuva"
 
+#. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:10
+msgid "art"
+msgstr "taide"
+
+#. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:12
+msgid "photo"
+msgstr "valokuva"
+
+#. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:14
+msgid "picture"
+msgstr "kuva"
+
+#. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:16
+msgid "image"
+msgstr "kuva"
+
+#. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:18
+msgid "Accessibility"
+msgstr "Esteettömyys"
+
+#. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:20
+msgid "accessibility"
+msgstr "esteettömyys"
+
+#. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:22
+msgid "a11y"
+msgstr "a11y"
+
+#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:26
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:174
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:216
+msgid "network"
+msgstr "verkko"
+
+#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:28
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:270
+msgid "wireless"
+msgstr "langaton"
+
+#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:30
+msgid "wifi"
+msgstr "wifi"
+
+#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:32
+msgid "wi-fi"
+msgstr "wi-fi"
+
+#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:34
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:272
+msgid "connect"
+msgstr "yhdistä"
+
+#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:36
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:274
+msgid "disconnect"
+msgstr "katkaise"
+
+#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:38
+msgid "hidden"
+msgstr "piilotettu"
+
+#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:40
+msgid "ip"
+msgstr "ip"
+
+#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:42
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:294
+msgid "address"
+msgstr "osoite"
+
+#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:46
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:302
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:330
+msgid "software"
+msgstr "ohjelmisto"
+
+#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:48
+msgid "notifications"
+msgstr "ilmoitukset"
+
+#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:50
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:252
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:334
+msgid "apps"
+msgstr "sovellukset"
+
+#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:52
+msgid "authorize"
+msgstr "valtuutus"
+
+#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:54
+msgid "alerts"
+msgstr "hälytykset"
+
+#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:56
+msgid "permissions"
+msgstr "oikeudet"
+
+#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:58
+msgid "badges"
+msgstr "merkinnät"
+
+#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:60
+msgid "facebook"
+msgstr "facebook"
+
+#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:62
+msgid "twitter"
+msgstr "twitter"
+
+#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:64
+msgid "flickr"
+msgstr "flickr"
+
+#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:66
+msgid "gmail"
+msgstr "gmail"
+
+#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:70
+msgid "sound"
+msgstr "ääni"
+
+#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:72
+msgid "silent"
+msgstr "hiljainen"
+
+#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:74
+msgid "ringtone"
+msgstr "soittoääni"
+
+#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:76
+msgid "vibrate"
+msgstr "värinä"
+
+#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:78
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:152
+msgid "dialpad"
+msgstr "numeronäppäimistö"
+
+#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:80
+msgid "message"
+msgstr "viesti"
+
+#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:82
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:118
+msgid "keyboard"
+msgstr "näppäimistö"
+
+#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:84
+msgid "volume"
+msgstr "voimakkuus"
+
+#. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:88
+msgid "reset"
+msgstr "palauta"
+
+#. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:90
+msgid "erase"
+msgstr "pyyhi"
+
+#. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:92
+msgid "factory"
+msgstr "tehdas"
+
+#. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:94
+msgid "clear"
+msgstr "tyhjennä"
+
+#. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:96
+msgid "restore"
+msgstr "palauta"
+
+#. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:100
+msgid "battery"
+msgstr "akku"
+
+#. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:102
+msgid "power"
+msgstr "virta"
+
+#. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:104
+msgid "charge"
+msgstr "lataus"
+
+#. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:106
+msgid "idle"
+msgstr "jouten"
+
+#. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:108
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:224
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:248
+msgid "lock"
+msgstr "lukitse"
+
+#. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:110
+msgid "disable"
+msgstr "pois"
+
+#. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:112
+msgid "enable"
+msgstr "päälle"
+
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:116
+msgid "language"
+msgstr "kieli"
+
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:120
+msgid "spellcheck"
+msgstr "oikoluku"
+
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:156
+#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:122
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:166
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:322
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:336
+msgid "automatic"
+msgstr "automaattinen"
+
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:124
+msgid "correct"
+msgstr "korjaus"
+
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:126
+msgid "suggestions"
+msgstr "ehdotukset"
+
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:128
+msgid "capitalization"
+msgstr "kirjainkoko"
+
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:130
+msgid "punctuation"
+msgstr "välimerkit"
+
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:132
+msgid "layout"
+msgstr "asettelu"
+
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:134
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:162
+msgid "display"
+msgstr "näyttö"
+
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:136
+msgid "words"
+msgstr "sanat"
+
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:138
+msgid "vibration"
+msgstr "värinä"
+
+#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:142
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:286
+msgid "phone"
+msgstr "puhelin"
+
+#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:144
+msgid "services"
+msgstr "palvelut"
+
+#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:146
+msgid "forwarding"
+msgstr "soitonsiirto"
+
+#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:148
+msgid "waiting"
+msgstr "odottaa"
+
+#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:150
+msgid "call"
+msgstr "puhelu"
+
+#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:154
+msgid "shortcuts"
+msgstr "oikotiet"
+
+#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:156
+msgid "numbers"
+msgstr "numerot"
+
+#. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:160
 msgid "brightness"
 msgstr "kirkkaus"
 
-#: ../plugins/about//click.cpp:134
-msgid "Unknown title"
-msgstr "Tuntematon nimi"
+#. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:164
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:250
+msgid "screen"
+msgstr "näyttö"
+
+#. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:168
+msgid "adjust"
+msgstr "säädä"
+
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:172
+msgid "cellular"
+msgstr "matkapuhelin"
+
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:176
+msgid "mobile"
+msgstr "mobiili"
+
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:178
+msgid "gsm"
+msgstr "gsm"
+
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:180
+msgid "data"
+msgstr "tiedot"
+
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:182
+msgid "carrier"
+msgstr "operaattori"
+
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:184
+msgid "4g"
+msgstr "4g"
+
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:186
+msgid "3g"
+msgstr "3g"
+
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:188
+msgid "2g"
+msgstr "2g"
+
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:190
+msgid "lte"
+msgstr "lte"
+
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:192
+msgid "apn"
+msgstr "apn"
+
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:194
+msgid "roam"
+msgstr "vierailu"
+
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:196
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:226
+msgid "sim"
+msgstr "sim"
+
+#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:198
+msgid "Example"
+msgstr "Esimerkki"
+
+#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:200
+msgid "example"
+msgstr "esimerkki"
+
+#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:202
+msgid "test"
+msgstr "testi"
+
+#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:204
+msgid "sample"
+msgstr "esimerkki"
+
+#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:206
+msgid "Flight Mode"
+msgstr "Lentotila"
+
+#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:208
+msgid "flight"
+msgstr "lento"
+
+#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:210
+msgid "plane"
+msgstr "lentokone"
+
+#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:212
+msgid "offline"
+msgstr "ei yhteyksiä"
+
+#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:214
+msgid "airplane"
+msgstr "lentotila"
+
+#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:220
+msgid "security"
+msgstr "turvallisuus"
+
+#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:222
+msgid "privacy"
+msgstr "yksityisyys"
+
+#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:228
+msgid "pin"
+msgstr "pin"
+
+#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:230
+msgid "code"
+msgstr "koodi"
+
+#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:232
+msgid "password"
+msgstr "salasana"
+
+#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:234
+msgid "passphrase"
+msgstr "salalause"
+
+#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:236
+msgid "swipe"
+msgstr "pyyhkäisy"
+
+#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:238
+msgid "allow"
+msgstr "salli"
+
+#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:240
+msgid "access"
+msgstr "pääsy"
+
+#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:242
+msgid "Orientation Lock"
+msgstr "Suunnan lukitus"
+
+#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:244
+msgid "rotation"
+msgstr "kierto"
+
+#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:246
+msgid "orientation"
+msgstr "suunta"
+
+#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:256
+msgid "bluetooth"
+msgstr "bluetooth"
+
+#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:258
+msgid "headset"
+msgstr "kuulokemikrofoni"
+
+#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:260
+msgid "pair"
+msgstr "paritus"
+
+#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:262
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:282
+msgid "device"
+msgstr "laite"
+
+#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:264
+msgid "discover"
+msgstr "löytäminen"
+
+#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:266
+msgid "car"
+msgstr "auto"
+
+#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:268
+msgid "handsfree"
+msgstr "handsfree"
+
+#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:276
+msgid "stereo"
+msgstr "stereo"
+
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:280
+msgid "about"
+msgstr "tietoa"
+
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:284
+msgid "info"
+msgstr "tiedot"
+
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:288
+msgid "number"
+msgstr "numero"
+
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:290
+msgid "imei"
+msgstr "imei"
+
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:292
+msgid "serial"
+msgstr "sarjanumero"
+
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:296
+msgid "mac"
+msgstr "mac"
+
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:298
+msgid "licenses"
+msgstr "lisenssit"
+
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:300
+msgid "developer"
+msgstr "kehittäjä"
+
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:304
+msgid "storage"
+msgstr "tallennustila"
+
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:306
+msgid "disk"
+msgstr "levy"
+
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:308
+msgid "space"
+msgstr "tila"
+
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:310
+msgid "version"
+msgstr "versio"
+
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:312
+msgid "revision"
+msgstr "versiotieto"
+
+#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:316
+msgid "time"
+msgstr "aika"
+
+#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:318
+msgid "date"
+msgstr "päivä"
+
+#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:320
+msgid "timezone"
+msgstr "aikavyöhyke"
+
+#. TRANSLATORS: This is a keyword or name for the update-notification plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:324
+msgid "Updates available"
+msgstr "Päivityksiä saatavilla"
+
+#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:328
+msgid "system"
+msgstr "järjestelmä"
+
+#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:332
+msgid "update"
+msgstr "päivitys"
+
+#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:338
+msgid "download"
+msgstr "lataa"
+
+#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:340
+msgid "upgrade"
+msgstr "päivitä"
+
+#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:342
+msgid "click"
+msgstr "click"
 
 #: ../plugins/security-privacy//securityprivacy.cpp:318
-msgid "Incorrect PIN code. Try again."
-msgstr "Virheellinen PIN-koodi, yritä uudelleen."
+msgid "Incorrect passcode. Try again."
+msgstr "Virheellinen suojakoodi, yritä uudelleen."
 
 #: ../plugins/security-privacy//securityprivacy.cpp:320
 msgid "Incorrect passphrase. Try again."
@@ -2203,32 +2948,61 @@ msgstr "Turvavinkin asettaminen ei onnistunut"
 msgid "Authentication token manipulation error"
 msgstr "Tunnistautumislipukkeen käsittelyvirhe"
 
-#: ../plugins/system-update//system_update.cpp:92
+#: ../plugins/about//click.cpp:171
+msgid "Unknown title"
+msgstr "Tuntematon nimi"
+
+#: ../plugins/system-update//system_update.cpp:96
 msgid "Can't cancel current request (can't contact service)"
 msgstr "Nykyistä pyyntöä ei voi perua (ei yhteyttä palveluun)"
 
-#: ../plugins/system-update//system_update.cpp:98
+#: ../plugins/system-update//system_update.cpp:102
 msgid "Can't pause current request (can't contact service)"
 msgstr "Nykyistä pyyntöä ei voi keskeyttää (ei yhteyttä palveluun)"
+
+#: ../push-helper/software_updates_helper.py:150
+msgid "There's an updated system image."
+msgstr "Päivitetty järjestelmäversio saatavilla."
+
+#: ../push-helper/software_updates_helper.py:151
+msgid "Tap to open the system updater."
+msgstr "Kosketa avataksesi järjestelmän päivityksen."
+
+#~ msgid "Searching"
+#~ msgstr "Etsitään"
+
+#~ msgid "Refresh"
+#~ msgstr "Päivitä"
 
 #~ msgid "Remove"
 #~ msgstr "Poista"
 
+#~ msgid "i18n"
+#~ msgstr "i18n"
+
+#~ msgid "settings"
+#~ msgstr "asetukset"
+
 #~ msgid "Connect to Wi-Fi"
 #~ msgstr "Yhdistä wifiin"
 
-#~ msgid "There's an updated system image."
-#~ msgstr "Päivitetty järjestelmäversio saatavilla."
+#~ msgid "Available networks"
+#~ msgstr "Saatavilla olevat verkot"
 
-#~ msgid "Tap to open the system updater."
-#~ msgstr "Kosketa avataksesi järjestelmän päivityksen."
+#~ msgid "Password visible"
+#~ msgstr "Salasana näkyviin"
 
-#, qt-format
-#~ msgid "%1"
-#~ msgstr "%1"
+#~ msgid "Other network"
+#~ msgstr "Muu verkko"
 
-#~ msgid ""
-#~ "I have read and agreed to the Ubuntu <a href='terms.qml'>terms and "
-#~ "conditions</a>"
-#~ msgstr ""
-#~ "Olen lukenut ja hyväksynyt Ubuntun <a href='terms.qml'>käyttöehdot</a>"
+#~ msgid "lang"
+#~ msgstr "kieli"
+
+#~ msgid "Set lock security"
+#~ msgstr "Aseta lukitusturva"
+
+#~ msgid "Those passphrases don't match."
+#~ msgstr "Salasanat eivät vastaa toisiaan."
+
+#~ msgid "Passphrase must be at least four characters long."
+#~ msgstr "Salasanan tulee olla vähintään neljä merkkiä."
