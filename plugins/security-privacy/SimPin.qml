@@ -21,6 +21,7 @@
 import GSettings 1.0
 import QtQuick 2.0
 import QtQuick.Layouts 1.1
+import QMenuModel 0.1
 import Ubuntu.Components 1.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 import Ubuntu.Components.Popups 0.1
@@ -298,6 +299,7 @@ ItemPage {
         anchors.right: parent.right
 
         Repeater {
+            id: rep
             model: sims.length
             Column {
                 id: sim
@@ -356,6 +358,38 @@ ItemPage {
                         }
                     }
                 }
+
+                QDBusActionGroup {
+                    /* It seems indicator-network is assigning modem.1 to
+                    ril_1 and modem.2 to ril_0.
+
+                    We will assume this means indicator-network sorts modems
+                    in reverse order, or by the inverser order of by which
+                    they appear – ril_1 appears last and is thus modem.1.
+
+                    @param i Number index of the current repeater model
+                    @return String in the format 'modem.n::locked'
+                    */
+                    function guesstimateActionString (idx) {
+                        var modemN;
+                        var s = [];
+                        var i;
+                        for (i = 1; i <= rep.model; i++) {
+                            s.push(i);
+                        }
+                        s.reverse();
+
+                        console.warn('returning', 'modem.' + s[idx] + '::locked');
+                        return 'modem.' + s[idx] + '::locked';
+                    }
+                    id: netActionGroup
+                    busType: DBus.SessionBus
+                    busName: "com.canonical.indicator.network"
+                    objectPath: "/com/canonical/indicator/network"
+                    property var unlock: action(guesstimateActionString(index))
+                    Component.onCompleted: start()
+                }
+
                 ListItem.Standard {
                     id: lockControl
                     visible: sim.state === "locked"
@@ -365,11 +399,11 @@ ItemPage {
                         text: i18n.tr("Unlock…")
                         color: UbuntuColors.green
                         onClicked: {
-                            curSim = sims[index].simMng;
-                            PopupUtils.open(dialogComponent);
+                            netActionGroup.unlock.activate();
                         }
                     }
                 }
+
                 ListItem.Divider {
                     visible: index < (sims.length - 1)
                 }
