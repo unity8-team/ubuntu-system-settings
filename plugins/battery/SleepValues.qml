@@ -71,10 +71,14 @@ ItemPage {
             anchors.left: parent.left
             anchors.right: parent.right
 
+            SettingsItemTitle {
+                text: lockOnSuspend ? i18n.tr("Lock the phone when it's not in use:") :
+                                      i18n.tr("Put the phone to sleep when it is not in use:")
+            }
+
             ListItem.ItemSelector {
                 id: sleepSelector
                 objectName: "sleepSelector"
-                text: lockOnSuspend ? i18n.tr("Lock the phone when it's not in use:") : i18n.tr("Put the phone to sleep when it is not in use:")
                 delegate: OptionSelectorDelegate {
                     text: modelData
                 }
@@ -111,6 +115,7 @@ ItemPage {
                   else
                     powerSettings.idleDelay = (index == 6) ? 0 : idleValues[index]
                 }
+                highlightWhenPressed: false
             }
 
             ListItem.Caption {

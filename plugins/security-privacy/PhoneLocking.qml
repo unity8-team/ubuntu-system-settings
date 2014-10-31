@@ -102,7 +102,7 @@ ItemPage {
             visible: showAllUI
         }
 
-        ListItem.Standard {
+        SettingsItemTitle {
             text: i18n.tr("When locked, allow:")
         }
 
