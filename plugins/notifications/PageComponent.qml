@@ -46,6 +46,7 @@ ItemPage {
                 margins: units.gu(1)
             }
         }
+        highlightWhenPressed: false
     }
 
     ListView {
