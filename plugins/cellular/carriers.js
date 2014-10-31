@@ -66,6 +66,24 @@ function getOpIndex (path) {
     return _allowedOps.indexOf(_pathToQml[path]);
 }
 
+
+/*
+Returns the current OfonoNetworkOperator qml object
+
+Returns null if there is no current operator
+
+@returns OfonoNetworkOperator or null
+*/
+function getCurrentOp () {
+    var path = sim.netReg.currentOperatorPath;
+    if (!_pathToQml.hasOwnProperty(path)) {
+        console.warn('getCurrentOp', null);
+        return null;
+    }
+    console.warn('getCurrentOp', _pathToQml[path]);
+    return _pathToQml[path];
+}
+
 /*
 Sets the current operator. It does this by calling
 registerOperator on the operator QML object.

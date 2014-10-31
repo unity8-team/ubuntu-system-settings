@@ -66,6 +66,7 @@ ItemPage {
         OfonoNetworkOperator {
             onRegisterComplete: {
                 if (error === OfonoNetworkOperator.InProgressError) {
+                    console.warn("Register failed, already one in progress.");
                     operatorsChanged()
                 } else if (error !== OfonoNetworkOperator.NoError) {
                     console.warn("Register complete:", errorString);
@@ -92,6 +93,12 @@ ItemPage {
                 right: parent.right
             }
             spacing: 0
+            Button {
+                text: "FOOBAR"
+                onClicked: {
+                    console.warn(sim.netReg.mode);
+                }
+            }
             ListItem.ItemSelector {
                 id: chooseCarrier
                 objectName: "mode"
