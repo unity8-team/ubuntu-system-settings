@@ -63,6 +63,9 @@ ItemPage {
             showDivider: false
         }
 
+        /* Use the SliderMenu component instead of the Slider to avoid binding 
+           issues on valueChanged until LP: #1388094 is fixed.
+        */
         Menus.SliderMenu {
             id: sliderMenu
             objectName: "sliderMenu"
