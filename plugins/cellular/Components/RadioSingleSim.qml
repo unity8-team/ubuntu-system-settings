@@ -18,6 +18,7 @@
  *
 */
 import QtQuick 2.0
+import SystemSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 
@@ -26,9 +27,10 @@ Column {
 
     property alias selector: selector
 
+    SettingsItemTitle { text: i18n.tr("Connection type:") }
+
     ListItem.ItemSelector {
         id: selector
-        text: i18n.tr("Connection type:")
         showDivider: false
         expanded: true
 
