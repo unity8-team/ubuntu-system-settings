@@ -121,7 +121,7 @@ ItemPage {
             anchors.left: parent.left
             anchors.right: parent.right
 
-            ListItem.Standard {
+            ListItem.Header {
                 id: securityTitle
                 text: i18n.tr("Security")
             }
@@ -181,7 +181,7 @@ ItemPage {
                         "Encryption protects against access to phone data when the phone is connected to a PC or other device.")
                 visible: showAllUI
             }
-            ListItem.Standard {
+            ListItem.Header {
                 text: i18n.tr("Privacy")
             }
             ListItem.Standard {

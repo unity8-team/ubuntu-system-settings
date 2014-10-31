@@ -34,6 +34,7 @@ Item {
         anchors.verticalCenter: parent.verticalCenter
         anchors.left: parent.left
         anchors.right: parent.right
+        color: enabled ? Theme.palette.selected.backgroundText : Qt.darker(Theme.palette.selected.backgroundText, 1.5)
         text: {
             if (backArrow) {
                 // Translators: This is the arrow for "Back" buttons
