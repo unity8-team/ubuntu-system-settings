@@ -1,4 +1,5 @@
 include_directories(${CMAKE_CURRENT_BINARY_DIR} ../src)
+include_directories(${GLIB_INCLUDE_DIRS})
 add_definitions(-DI18N_DOMAIN="ubuntu-system-settings")
 add_definitions(-DPLUGIN_PRIVATE_MODULE_DIR="${PLUGIN_PRIVATE_MODULE_DIR}")
 add_definitions(-DPLUGIN_MANIFEST_DIR="${CMAKE_CURRENT_SOURCE_DIR}/data")
@@ -36,6 +37,7 @@ add_test(tst-plugins tst-plugins)
 set_tests_properties(tst-plugins PROPERTIES ENVIRONMENT "QT_QPA_PLATFORM=minimal")
 
 qt5_use_modules(tst-arguments Core Test)
+target_link_libraries(tst-arguments ${GLIB_LDFLAGS})
 add_test(tst-arguments tst-arguments)
 
 add_executable(tst-pagelist tst_pagelist.cpp ../wizard/PageList.cpp)

@@ -142,7 +142,7 @@ ItemPage {
                 objectName: "storageItem"
                 text: i18n.tr("Storage")
                 /* TRANSLATORS: that's the free disk space, indicated in the most appropriate storage unit */
-                value: i18n.tr("%1 free").arg(backendInfos.formatSize(storageInfo.availableDiskSpace("/home")))
+                value: i18n.tr("%1 free").arg(Utilities.formatSize(storageInfo.availableDiskSpace("/home")))
                 progression: true
                 onClicked: pageStack.push(Qt.resolvedUrl("Storage.qml"))
             }
