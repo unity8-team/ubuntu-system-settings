@@ -17,6 +17,16 @@ function getFirstPresent () {
     return getPresent()[0];
 }
 
+function getFirstOnline () {
+    var online = null;
+    getPresent().forEach(function (sim) {
+        if (sim.connMan.powered === true) {
+            online = sim;
+        }
+    });
+    return online;
+}
+
 function getCount () {
     return getAll().length;
 }

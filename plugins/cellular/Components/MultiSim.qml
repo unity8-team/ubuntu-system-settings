@@ -23,20 +23,25 @@ import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 
 Column {
-
     objectName: "multiSim"
 
     property var sims
+    property var poweredSim: {
+        var s = null;
+        sims.forEach(function (sim) {
+            if (sim.connMan.powered === true) {
+                s = sim;
+            }
+        });
+        return s;
+    }
     property var modems
-
     // make settings available to all children of root
     property var settings: phoneSettings
 
-    CellularMultiSim {
-        anchors { left: parent.left; right: parent.right }
+    DataMultiSim {
+        anchors { left: parent.left; right: parent.right }
     }
-
-    ListItem.Divider {}
 
     ListItem.SingleValue {
         text : i18n.tr("Hotspot disabled because Wi-Fi is off.")
@@ -60,15 +65,14 @@ Column {
         visible: showAllUI
     }
 
-    ListItem.Divider {
-        visible: hotspotItem.visible || dataUsage.visible
-    }
+    ListItem.Divider {}
 
     ListItem.SingleValue {
         text: i18n.tr("Carriers")
         id: chooseCarrier
-        objectName: "chooseCarrier"
+        objectName: "carriers"
         progression: enabled
+        showDivider: false
         onClicked: {
             pageStack.push(Qt.resolvedUrl("../PageChooseCarriers.qml"), {
                 sims: sims
@@ -86,6 +90,44 @@ Column {
 
     DefaultSim {
         anchors { left: parent.left; right: parent.right }
+    }
+
+    ListItem.Divider {}
+
+    function techToString (tech) {
+        return {
+            'gsm': i18n.tr("2G only (saves battery)"),
+            'umts': i18n.tr("2G/3G (faster)"),
+            'lte': i18n.tr("2G/3G/4G (faster)")
+        }[tech]
+    }
+
+    ListItem.ItemSelector {
+        id: radio
+        expanded: true
+        text: i18n.tr("Connection type:")
+        model: poweredSim ? poweredSim.radioSettings.modemTechnologies : []
+        delegate: OptionSelectorDelegate {
+            objectName: poweredSim.path + "_radio_" + modelData
+            text: techToString(modelData)
+        }
+        enabled: poweredSim ?
+            (poweredSim.radioSettings.technologyPreference !== "") : false
+        visible: poweredSim
+        selectedIndex: poweredSim ?
+            model.indexOf(poweredSim.radioSettings.technologyPreference) : -1
+        onDelegateClicked: {
+            poweredSim.radioSettings.technologyPreference = model[index];
+        }
+    }
+
+    Connections {
+        target: poweredSim ? poweredSim.radioSettings : null
+        onTechnologyPreferenceChanged: {
+            radio.selectedIndex =
+                poweredSim.radioSettings.modemTechnologies.indexOf(preference)
+        }
+        ignoreUnknownSignals: true
     }
 
     GSettings {
