@@ -93,7 +93,7 @@ LocalComponents.Page {
                         desc = i18n.tr("No security")
                     } else if (method === UbuntuSecurityPrivacyPanel.Passcode) {
                         name = i18n.tr("Passcode")
-                        desc = i18n.tr("4 digits only")
+                        desc = i18n.tr("4 numbers")
                     } else {
                         name = i18n.tr("Passphrase")
                         desc = i18n.tr("Numbers and letters")
