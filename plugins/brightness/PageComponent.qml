@@ -70,8 +70,8 @@ ItemPage {
             live: true
             minimumValue: 0.0
             maximumValue: 100.0
-            minIcon: "image://theme/torch-off"
-            maxIcon: "image://theme/torch-on"
+            minIcon: "image://theme/display-brightness-min"
+            maxIcon: "image://theme/display-brightness-max"
             onUpdated: indicatorPower.action("brightness").updateState(value / 100.0)
         }
 
