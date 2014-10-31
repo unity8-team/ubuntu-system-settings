@@ -20,6 +20,7 @@
 */
 import QtQuick 2.0
 import GSettings 1.0
+import SystemSettings 1.0
 import Ubuntu.Components 1.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 
@@ -27,9 +28,7 @@ Column {
 
     property var sims
 
-    ListItem.Standard {
-        text: sims[0].title
-    }
+    SettingsItemTitle { text: sims[0].title }
 
     ListItem.Standard {
         objectName: "callFwdSim1"
@@ -65,9 +64,7 @@ Column {
 
     ListItem.Divider {}
 
-    ListItem.Standard {
-        text: sims[1].title
-    }
+    SettingsItemTitle { text: sims[1].title }
 
     ListItem.Standard {
         objectName: "callFwdSim2"
