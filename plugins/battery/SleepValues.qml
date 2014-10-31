@@ -111,6 +111,7 @@ ItemPage {
                   else
                     powerSettings.idleDelay = (index == 6) ? 0 : idleValues[index]
                 }
+                highlightWhenPressed: false
             }
 
             ListItem.Caption {
