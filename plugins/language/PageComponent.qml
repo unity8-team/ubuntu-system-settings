@@ -71,6 +71,7 @@ ItemPage {
             }
             onRevert: {
                 plugin.currentLanguage = to;
+                i18n.language = plugin.languageCodes[to]
             }
         }
     }
