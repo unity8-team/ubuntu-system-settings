@@ -25,7 +25,15 @@ LocalComponents.Page {
     title: i18n.tr("Location")
     forwardButtonSourceComponent: forwardButton
 
-    property bool hereInstalled: System.hereLicensePath !== "" && termsModel.count > 0
+    property bool pathSet: System.hereLicensePath !== " " // single space means it's unassigned
+    property bool countSet: false
+    skipValid: pathSet && (System.hereLicensePath === "" || countSet)
+    skip: skipValid && (System.hereLicensePath === "" || termsModel.count === 0)
+
+    Connections {
+        target: termsModel
+        onCountChanged: if (pathSet) countSet = true
+    }
 
     FolderListModel {
         id: termsModel
@@ -40,49 +48,79 @@ LocalComponents.Page {
         busType: QMenuModel.DBus.SessionBus
         busName: "com.canonical.indicator.location"
         objectPath: "/com/canonical/indicator/location"
-        property variant enabled: action("location-detection-enabled")
+        property variant location: action("location-detection-enabled")
+        property variant gps: action("gps-detection-enabled")
         Component.onCompleted: start()
     }
 
     Column {
         id: column
         anchors.fill: content
-        spacing: units.gu(2)
+        spacing: units.gu(3)
 
         Label {
             anchors.left: parent.left
             anchors.right: parent.right
-            visible: hereInstalled
             wrapMode: Text.Wrap
-            // TRANSLATORS: HERE is a trademark for Nokia's location service, you probably shouldn't translate it
-            text: i18n.tr("Ubuntu includes location services provided by HERE, enabling apps to pinpoint your location.")
+            text: i18n.tr("Let the phone detect your location:")
         }
 
         LocalComponents.CheckableSetting {
-            id: locationCheck
+            id: gpsCheck
             showDivider: false
-            text: i18n.tr("Allow apps to use your mobile and Wi-Fi networks to determine your location.")
-            checked: locationActionGroup.enabled.state
-            onTriggered: locationActionGroup.enabled.activate()
+            text: i18n.tr("Using GPS only (less accurate)")
+            onTriggered: {
+                gpsCheck.checked = true;
+                hereCheck.checked = false;
+                nopeCheck.checked = false;
+            }
+        }
+
+        Column {
+            anchors.left: parent.left
+            anchors.right: parent.right
+            height: childrenRect.height
+
+            LocalComponents.CheckableSetting {
+                id: hereCheck
+                showDivider: false
+                text: i18n.tr("Using GPS, anonymized Wi-Fi and cellular network info (recommended)")
+                checked: true
+                onTriggered: {
+                    gpsCheck.checked = false;
+                    hereCheck.checked = true;
+                    nopeCheck.checked = false;
+                }
+            }
+
+            Label {
+                anchors.left: parent.left
+                anchors.leftMargin: hereCheck.labelOffset
+                anchors.right: parent.right
+                wrapMode: Text.Wrap
+                linkColor: Theme.palette.normal.foregroundText
+                // TRANSLATORS: HERE is a trademark for Nokia's location service, you probably shouldn't translate it
+                text: i18n.tr("By selecting this option you agree to the Nokia HERE <a href='#'>terms and conditions</a>.")
+                onLinkActivated: pageStack.load(Qt.resolvedUrl("here-terms.qml"))
+            }
         }
 
         LocalComponents.CheckableSetting {
-            id: termsCheck
+            id: nopeCheck
             showDivider: false
-            visible: hereInstalled
-            // TRANSLATORS: HERE is a trademark for Nokia's location service, you probably shouldn't translate it
-            text: i18n.tr("Accept the HERE <a href='terms.qml'>terms and conditions</a> to enable these services.")
-            onLinkActivated: pageStack.load(Qt.resolvedUrl("here-terms.qml"))
-            checked: System.hereEnabled
-            onTriggered: System.hereEnabled = checked
+            text: i18n.tr("Not at all")
+            onTriggered: {
+                gpsCheck.checked = false;
+                hereCheck.checked = false;
+                nopeCheck.checked = true;
+            }
         }
 
         Label {
             anchors.left: parent.left
             anchors.right: parent.right
-            visible: hereInstalled
             wrapMode: Text.Wrap
-            text: i18n.tr("This service can be disabled at any time from the <b>System Settings</b> menu.")
+            text: i18n.tr("You can change your mind later in <b>System Settings</b>.")
         }
     }
 
@@ -90,7 +128,22 @@ LocalComponents.Page {
         id: forwardButton
         LocalComponents.StackButton {
             text: i18n.tr("Continue")
-            onClicked: pageStack.next()
+            onClicked: {
+                var locationOn = gpsCheck.checked || hereCheck.checked;
+                var gpsOn = gpsCheck.checked || hereCheck.checked;
+                var hereOn = hereCheck.checked;
+
+                // location service doesn't currently listen to updateState
+                // requests, so we activate the actions if needed.
+                if (locationActionGroup.location.state != locationOn) {
+                    locationActionGroup.location.activate();
+                }
+                if (locationActionGroup.gps.state != gpsOn) {
+                    locationActionGroup.gps.activate();
+                }
+                System.hereEnabled = hereOn;
+                pageStack.next()
+            }
         }
     }
 }
