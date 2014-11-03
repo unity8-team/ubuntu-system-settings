@@ -112,7 +112,7 @@ LocalComponents.Page {
             text: i18n.tr("Continue")
             onClicked: {
                 root.passwordMethod = indexToMethod(selector.selectedIndex)
-                pageStack.next()
+                pageStack.load(Qt.resolvedUrl("passwd-set.qml"))
             }
         }
     }
