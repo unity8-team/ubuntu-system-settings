@@ -39,13 +39,6 @@ Item {
         "unity.widgets.systemsettings.tablet.accesspoint" : accessPoint,
     }
 
-    function getExtendedProperty(object, propertyName, defaultValue) {
-        if (object && object.hasOwnProperty(propertyName)) {
-            return object[propertyName];
-        }
-        return defaultValue;
-    }
-
     Component { id: divMenu; DivMenuItem {} }
 
     Component {
