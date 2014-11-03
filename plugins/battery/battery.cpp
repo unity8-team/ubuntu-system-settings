@@ -66,10 +66,11 @@ void Battery::buildDeviceString() {
     GPtrArray *devices;
     UpDeviceKind kind;
 
+    client = up_client_new();
+
 #if !UP_CHECK_VERSION(0, 99, 0)
     gboolean returnIsOk;
 
-    client = up_client_new();
     returnIsOk = up_client_enumerate_devices_sync(client, nullptr, nullptr);
 
     if(!returnIsOk)
