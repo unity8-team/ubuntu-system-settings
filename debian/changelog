@@ -1,3 +1,25 @@
+ubuntu-system-settings (0.3+15.04.20141103-0ubuntu1) vivid; urgency=low
+
+  [ Ken VanDine ]
+  * Use the SliderMenu component instead of the Slider component, it
+    matches the design and doesn't flicker while changing the
+    brightness. (LP: #1289465)
+  * Need to create UpClient regardless of upower version
+
+  [ Sebastien Bacher ]
+  * [storage] build the correct ini name rather than guessing it (LP:
+    #1387834)
+  * [battery] don't use a colored icon (LP: #1351383)
+
+  [ Michael Terry ]
+  * Redesign location page according to latest design visuals / text.
+    Allows GPS-only, GPS+HERE, or nothing at all. (LP: #1384763)
+
+  [ Ubuntu daily release ]
+  * New rebuild forced
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Mon, 03 Nov 2014 17:30:03 +0000
+
 ubuntu-system-settings (0.3+15.04.20141031.2-0ubuntu1) vivid; urgency=low
 
   [ Sebastien Bacher ]
