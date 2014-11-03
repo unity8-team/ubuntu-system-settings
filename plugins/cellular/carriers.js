@@ -120,7 +120,7 @@ function getOpName (path) {
     if (_pathToQml.hasOwnProperty(path)) {
         name = _pathToQml[path].name;
     } else {
-        throw new TypeError('OperatorPath', path, 'not in cache');
+        throw new TypeError('OperatorPath ' + path + ' not in cache');
     }
     return name;
 }

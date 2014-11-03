@@ -45,14 +45,32 @@ ItemPage {
     }
 
     onOperatorsChanged: CHelper.operatorsChanged();
-    Component.onCompleted: operatorsChanged()
+    Component.onCompleted: {
+        console.warn('Scan start.')
+        scanTimer.start();
+    }
+
+    Timer {
+        id: scanTimer
+        interval: 1500
+        repeat: false
+        running: false
+        onTriggered: {
+            sim.netReg.scan();
+            scanning = true;
+            d.__suppressActivation = true;
+        }
+    }
 
     Connections {
         target: sim.netReg
         onNetworkOperatorsChanged: operatorsChanged()
         onScanFinished: {
-            scanning = false;
-            d.__suppressActivation = false;
+            if (scanning) {
+                console.warn('Scan done.')
+                scanning = false;
+                d.__suppressActivation = false;
+            }
         }
         onScanError: {
             scanning = false;
@@ -107,33 +125,23 @@ ItemPage {
                 // work around unfortunate ui
                 opacity: enabled ? 1.0 : 0.5
                 text: i18n.tr("Choose carrier:")
-                model: [i18n.tr("Automatically"), i18n.tr("Manually")]
+                model: [i18n.tr("Automatically")]
                 delegate: OptionSelectorDelegate { showDivider: false }
-                selectedIndex: sim.netReg.mode === "manual" ? 1 : 0
-                onDelegateClicked: {
-                    if (selectedIndex === -1 || d.__suppressActivation) {
-                        return;
-                    }
-                    if (index === 0) {
-                        sim.netReg.registration();
-                    } else if (index === 1) {
-                        if (sim.netReg.status !== "searching") {
-                            sim.netReg.scan();
-                            scanning = true;
-                            d.__suppressActivation = true;
-                            console.warn('Started search')
-                        }
-                    }
-                }
+                selectedIndex: sim.netReg.mode === "auto" ? 0 : -1
+                onDelegateClicked: sim.netReg.registration()
+            }
+
+            ListItem.Standard {
+                id: curOpLabel
+                enabled: false
+                text: i18n.tr("None")
             }
 
             ListItem.ItemSelector {
                 id: carrierSelector
                 objectName: "carriers"
-                expanded: enabled
-                enabled: chooseCarrier.selectedIndex === 1 && !scanning
-                // work around unfortunate ui
-                width: parent.width
+                visible: !root.scanning
+                expanded: true
                 delegate: OptionSelectorDelegate {
                     objectName: "carrier"
                     enabled: carrierSelector.enabled
@@ -158,10 +166,10 @@ ItemPage {
                         left: parent.left
                         right: parent.right
                     }
-                    opacity: scanning ? 1 : 0
+                    opacity: root.scanning ? 1 : 0
                     height: chooseCarrier.itemHeight - units.gu(0.15)
                     color: Theme.palette.normal.background
-
+                    z: 2
                     ActivityIndicator {
                         id: act
                         anchors {
@@ -169,7 +177,7 @@ ItemPage {
                             margins: units.gu(2)
                             verticalCenter: parent.verticalCenter
                         }
-                        running: scanning
+                        running: root.scanning
                     }
 
                     Label {
@@ -190,40 +198,6 @@ ItemPage {
                             duration: UbuntuAnimation.SnapDuration
                         }
                     }
-                }
-
-                Rectangle {
-                    property bool showName: chooseCarrier.selectedIndex !== 1
-                    color: Theme.palette.normal.background
-                    height: chooseCarrier.itemHeight
-                    opacity: showName ? 1 : 0
-                    anchors {
-                        top: parent.top
-                        left: parent.left
-                        right: parent.right
-                    }
-
-                    ListItem.Standard {
-                        id: curOpLabel
-                        anchors.fill: parent
-                        enabled: false
-                        text: i18n.tr("None")
-                    }
-
-                    Behavior on opacity {
-                        NumberAnimation {
-                            duration: UbuntuAnimation.SnapDuration
-                        }
-                    }
-                }
-            }
-
-            ListItem.Standard {
-                text: i18n.tr("APN")
-                progression: true
-                enabled: sim.connMan.powered
-                onClicked: {
-                    pageStack.push(Qt.resolvedUrl("PageChooseApn.qml"), {sim: sim})
                 }
             }
         }
