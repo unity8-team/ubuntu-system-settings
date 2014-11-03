@@ -1,3 +1,14 @@
+ubuntu-system-settings (0.3+14.10.20141103~rtm-0ubuntu1) 14.09; urgency=low
+
+  [ Michael Terry ]
+  * Add a Continue button when choosing a passphrase. And fix a few
+    other design nits with choosing a password.
+
+  [ Ubuntu daily release ]
+  * New rebuild forced
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Mon, 03 Nov 2014 19:58:15 +0000
+
 ubuntu-system-settings (0.3+14.10.20141029~rtm-0ubuntu1) 14.09; urgency=low
 
   [ Ken VanDine ]
