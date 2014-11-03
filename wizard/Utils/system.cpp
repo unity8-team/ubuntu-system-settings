@@ -20,6 +20,7 @@
 #include <QDBusInterface>
 #include <QDBusPendingCall>
 #include <QDBusPendingReply>
+#include <QFile>
 #include <QProcess>
 #include <unistd.h>
 
@@ -81,11 +82,14 @@ void System::getHereEnabledFinished(QDBusPendingCallWatcher *watcher)
 void System::getHereLicensePathFinished(QDBusPendingCallWatcher *watcher)
 {
     QDBusPendingReply<QVariant> reply = *watcher;
+
+    m_hereLicensePath = "";
+
     if (!reply.isError()) {
         QVariant value = reply.argumentAt<0>();
-        m_hereLicensePath = value.toString();
-    } else {
-        m_hereLicensePath = "";
+        if (QFile::exists(value.toString())) {
+            m_hereLicensePath = value.toString();
+        }
     }
 
     Q_EMIT hereLicensePathChanged();

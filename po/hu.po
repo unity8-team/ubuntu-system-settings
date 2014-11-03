@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-10-16 20:04-0600\n"
-"PO-Revision-Date: 2014-10-16 10:21+0000\n"
+"PO-Revision-Date: 2014-11-01 09:41+0000\n"
 "Last-Translator: Richard Somlói <ricsipontaz@gmail.com>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-10-18 07:10+0000\n"
-"X-Generator: Launchpad (build 17196)\n"
+"X-Launchpad-Export-Date: 2014-11-02 06:14+0000\n"
+"X-Generator: Launchpad (build 17211)\n"
 
 #: ubuntu-system-settings.desktop.in.in.h:1 ../src/qml/MainWindow.qml:112
 msgid "System Settings"
@@ -790,7 +790,7 @@ msgstr "Kézzel"
 
 #: ../plugins/cellular//PageChooseCarrier.qml:196
 msgid "Searching for carriers…"
-msgstr ""
+msgstr "Szolgáltatók keresése…"
 
 #: ../plugins/cellular//PageChooseCarrier.qml:229
 #: ../plugins/cellular//PageChooseApn.qml:31
@@ -800,36 +800,36 @@ msgstr "APN"
 
 #: ../plugins/cellular//PageChooseApn.qml:372
 msgid "Internet APN:"
-msgstr ""
+msgstr "Internet APN:"
 
 #: ../plugins/cellular//PageChooseApn.qml:449
 msgid "Custom Internet APN…"
-msgstr ""
+msgstr "Egyéni internet APN…"
 
 #: ../plugins/cellular//PageChooseApn.qml:460
 msgid "MMS APN:"
-msgstr ""
+msgstr "MMS APN:"
 
 #: ../plugins/cellular//PageChooseApn.qml:485
 #: ../plugins/cellular//CustomApnEditor.qml:143
 msgid "Same APN as for Internet"
-msgstr ""
+msgstr "Az internet APN-nel megegyező"
 
 #: ../plugins/cellular//PageChooseApn.qml:565
 msgid "Custom MMS APN…"
-msgstr ""
+msgstr "Egyéni MMS APN…"
 
 #: ../plugins/cellular//PageChooseApn.qml:591
 msgid "Reset APN Settings"
-msgstr ""
+msgstr "APN beállítások visszaállítása"
 
 #: ../plugins/cellular//PageChooseApn.qml:592
 msgid "Are you sure that you want to Reset APN Settings?"
-msgstr ""
+msgstr "Biztos benne, hogy visszaállítja az APN beállításait?"
 
 #: ../plugins/cellular//PageChooseApn.qml:598
 msgid "Reset"
-msgstr ""
+msgstr "Visszaállítás"
 
 #: ../plugins/cellular//PageChooseCarriers.qml:27
 #: ../plugins/cellular//Components//MultiSim.qml:68
@@ -838,43 +838,43 @@ msgstr "Szolgáltatók"
 
 #: ../plugins/cellular//CustomApnEditor.qml:42
 msgid "Internet"
-msgstr ""
+msgstr "Internet"
 
 #: ../plugins/cellular//CustomApnEditor.qml:42
 msgid "MMS"
-msgstr ""
+msgstr "MMS"
 
 #. TRANSLATORS: %1 is either i18n.tr("Internet") or i18n.tr("MMS")
 #: ../plugins/cellular//CustomApnEditor.qml:67
 #, qt-format
 msgid "Custom %1 APN"
-msgstr ""
+msgstr "Egyéni %1 APN"
 
 #. TRANSLATORS: %1 is either i18n.tr("Internet") or i18n.tr("MMS")
 #: ../plugins/cellular//CustomApnEditor.qml:171
 #, qt-format
 msgid "%1 APN"
-msgstr ""
+msgstr "%1 APN"
 
 #: ../plugins/cellular//CustomApnEditor.qml:181
 msgid "MMSC"
-msgstr ""
+msgstr "MMSC"
 
 #: ../plugins/cellular//CustomApnEditor.qml:191
 msgid "Proxy"
-msgstr ""
+msgstr "Proxy"
 
 #: ../plugins/cellular//CustomApnEditor.qml:213
 msgid "Username"
-msgstr ""
+msgstr "Felhasználónév"
 
 #: ../plugins/cellular//CustomApnEditor.qml:264
 msgid "Save"
-msgstr ""
+msgstr "Mentés"
 
 #: ../plugins/cellular//CustomApnEditor.qml:264
 msgid "Activate"
-msgstr ""
+msgstr "Aktiválás"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
 #: ../plugins/cellular//PageComponent.qml:32
@@ -1773,7 +1773,7 @@ msgstr "Telepítés"
 
 #: ../plugins/system-update//PageComponent.qml:152
 msgid "Installation failed"
-msgstr ""
+msgstr "A telepítés meghiúsult"
 
 #: ../plugins/system-update//PageComponent.qml:156
 #: ../plugins/cellular//Components//SimEditor.qml:200
@@ -1787,7 +1787,7 @@ msgstr "A szoftver naprakész"
 #: ../plugins/system-update//PageComponent.qml:235
 #: ../plugins/system-update//PageComponent.qml:241
 msgid "Sorry, the system update failed."
-msgstr ""
+msgstr "Sajnáljuk, a rendszer frissítés meghiúsult."
 
 #: ../plugins/system-update//PageComponent.qml:254
 msgid "Restarting…"
@@ -1799,7 +1799,7 @@ msgstr "Frissítések keresése…"
 
 #: ../plugins/system-update//PageComponent.qml:298
 msgid "Connect to the Internet to check for updates"
-msgstr ""
+msgstr "Csatlakozás az internethez a frissítések ellenőrzéséhez"
 
 #: ../plugins/system-update//PageComponent.qml:313
 #: ../plugins/system-update//PageComponent.qml:471
@@ -2116,7 +2116,7 @@ msgstr "Sajnáljuk, helytelen jelmondat."
 #: ../wizard/qml/Pages//passwd-confirm.qml:51
 #: ../wizard/qml/Pages//passwd-confirm.qml:52
 msgid "Please try again."
-msgstr "Kérem próbálja újra."
+msgstr "Próbálja újra."
 
 #: ../wizard/qml/Pages//passwd-confirm.qml:52
 msgid "Sorry, incorrect passcode."
@@ -2156,11 +2156,15 @@ msgid ""
 "Ubuntu includes location services provided by HERE, enabling apps to "
 "pinpoint your location."
 msgstr ""
+"Az Ubuntu tartalmazza a HERE helymeghatározó szolgáltatást, amely "
+"megállapítja az Ön pontos helyét az alkalmazások számára."
 
 #: ../wizard/qml/Pages//50-location.qml:64
 msgid ""
 "Allow apps to use your mobile and Wi-Fi networks to determine your location."
 msgstr ""
+"A mobilinternet és Wi-Fi használatának engedélyezése az alkalmazások számára "
+"az Ön pontos helyzetének megállapításához."
 
 #. TRANSLATORS: HERE is a trademark for Nokia's location service, you probably shouldn't translate it
 #: ../wizard/qml/Pages//50-location.qml:74
@@ -2168,16 +2172,18 @@ msgid ""
 "Accept the HERE <a href='terms.qml'>terms and conditions</a> to enable these "
 "services."
 msgstr ""
+"A HERE <a href='terms.qml'>felhasználási feltételeinek</a>  elfogadása a "
+"szolgáltatás engedélyezéséhez."
 
 #: ../wizard/qml/Pages//50-location.qml:85
 msgid ""
 "This service can be disabled at any time from the <b>System Settings</b> "
 "menu."
-msgstr ""
+msgstr "Ez később bármikor kikapcsolható a <b>Rendszerbeállításokban</b>."
 
 #: ../wizard/qml/Pages//60-reporting.qml:22
 msgid "Improving your experience"
-msgstr ""
+msgstr "Javítson az élményen"
 
 #: ../wizard/qml/Pages//60-reporting.qml:34
 msgid ""
@@ -2192,6 +2198,8 @@ msgid ""
 "This can be disabled in <b>System Settings</b> under <b>Security &amp; "
 "Privacy</b>"
 msgstr ""
+"Ezt kikapcsolhatja a <b>Rendszerbeállítások</b> alatt található <b>Biztonság "
+"és adatvédelem</b> alatt"
 
 #: ../wizard/qml/Components//Page.qml:89
 msgid "Back"
@@ -2964,61 +2972,3 @@ msgstr "Elérhető egy frissített rendszer képfájl."
 #: ../push-helper/software_updates_helper.py:151
 msgid "Tap to open the system updater."
 msgstr "Koppintson a rendszerfrissítő megnyitásához."
-
-#~ msgid "Refresh"
-#~ msgstr "Frissítés"
-
-#~ msgid "Searching"
-#~ msgstr "Keresés"
-
-#~ msgid "Remove"
-#~ msgstr "Eltávolítás"
-
-#~ msgid "settings"
-#~ msgstr "beállítások"
-
-#~ msgid "i18n"
-#~ msgstr "i18n"
-
-#~ msgid "lang"
-#~ msgstr "nyelv"
-
-#~ msgid "Password visible"
-#~ msgstr "A jelszó látható"
-
-#~ msgid "Available networks"
-#~ msgstr "Elérhető hálózatok"
-
-#~ msgid "Connect to Wi-Fi"
-#~ msgstr "Csatlakozás Wi-Fi hálózathoz"
-
-#~ msgid "Those passphrases don't match."
-#~ msgstr "A jelmondatok nem egyeznek."
-
-#~ msgid "Passphrase must be at least four characters long."
-#~ msgstr "A jelmondatnak legalább négy karakterből kell állnia."
-
-#~ msgid "Set lock security"
-#~ msgstr "Zárolás beállítása"
-
-#~ msgid "Other network"
-#~ msgstr "Egyéb hálózat"
-
-#~ msgid "Bug reporting"
-#~ msgstr "Hibajelentés"
-
-#~ msgid ""
-#~ "I have read and agreed to the HERE <a href='terms.qml'>Terms and "
-#~ "Conditions</a>"
-#~ msgstr ""
-#~ "Elolvastam és elfogadom a HERE <a href='terms.qml'>felhasználási "
-#~ "feltételeit</a>"
-
-#~ msgid "Use your mobile network and Wi-Fi to determine where you are"
-#~ msgstr "Mobilhálózat és Wi-Fi használata az Ön helyzetének megállapításához"
-
-#~ msgid "This can be disabled here:"
-#~ msgstr "Ez kikapcsolható itt:"
-
-#~ msgid "System Settings &gt; Security &amp; Privacy"
-#~ msgstr "Rendszerbeállítások &gt; Biztonság és adatvédelem"
