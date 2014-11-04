@@ -24,7 +24,6 @@ import SystemSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 import Ubuntu.SystemSettings.Brightness 1.0
-import Ubuntu.Settings.Components 0.1 as SettingsCompenents
 
 ItemPage {
     id: root
@@ -47,11 +46,12 @@ ItemPage {
             text: i18n.tr("Adjust automatically")
             visible: brightnessPanel.powerdRunning &&
                      brightnessPanel.autoBrightnessAvailable
-            control: SettingsCompenents.SyncCheckBox {
+            control: CheckBox {
                 id: autoAdjustCheck
-                dataTarget: gsettings
-                dataProperty: "autoBrightness"
-                bidirectional: true
+                property bool serverChecked: gsettings.autoBrightness
+                onServerCheckedChanged: checked = serverChecked
+                Component.onCompleted: checked = serverChecked
+                onTriggered: gsettings.autoBrightness = checked
             }
             showDivider: false
         }

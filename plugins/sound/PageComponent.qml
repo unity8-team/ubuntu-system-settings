@@ -25,7 +25,6 @@ import Ubuntu.Components.ListItems 0.1 as ListItem
 import SystemSettings 1.0
 import Ubuntu.SystemSettings.Sound 1.0
 import Ubuntu.Settings.Menus 0.1 as Menus
-import Ubuntu.Settings.Components 0.1 as SettingsCompenents
 import QMenuModel 0.1
 
 import "utilities.js" as Utilities
@@ -69,11 +68,12 @@ ItemPage {
             SilentModeWarning { visible: backendInfo.silentMode }
 
             ListItem.Standard {
-                control: SettingsCompenents.SyncSwitch {
+                control: Switch {
                     objectName: "silentMode"
-                    dataTarget: backendInfo
-                    dataProperty: "silentMode"
-                    bidirectional: true
+                    property bool serverChecked: backendInfo.silentMode
+                    onServerCheckedChanged: checked = serverChecked
+                    Component.onCompleted: checked = serverChecked
+                    onTriggered: backendInfo.silentMode = checked
                 }
                 text: i18n.tr("Silent Mode")
             }
@@ -129,31 +129,34 @@ ItemPage {
             }
 
             ListItem.Standard {
-                control: SettingsCompenents.SyncCheckBox {
+                control: CheckBox {
                     objectName: "callVibrate"
-                    dataTarget: backendInfo
-                    dataProperty: "incomingCallVibrate"
-                    bidirectional: true
+                    property bool serverChecked: backendInfo.incomingCallVibrate
+                    onServerCheckedChanged: checked = serverChecked
+                    Component.onCompleted: checked = serverChecked
+                    onTriggered: backendInfo.incomingCallVibrate = checked
                 }
                 text: i18n.tr("Vibrate when ringing")
             }
 
             ListItem.Standard {
-                control: SettingsCompenents.SyncCheckBox {
+                control: CheckBox {
                     objectName: "callVibrateSilentMode"
-                    dataTarget: backendInfo
-                    dataProperty: "incomingCallVibrateSilentMode"
-                    bidirectional: true
+                    property bool serverChecked: backendInfo.incomingCallVibrateSilentMode
+                    onServerCheckedChanged: checked = serverChecked
+                    Component.onCompleted: checked = serverChecked
+                    onTriggered: backendInfo.incomingCallVibrateSilentMode = checked
                 }
                 text: i18n.tr("Vibrate in Silent Mode")
             }
 
             ListItem.Standard {
-                control: SettingsCompenents.SyncSwitch {
+                control: Switch {
                     objectName: "dialpadSounds"
-                    dataTarget: backendInfo
-                    dataProperty: "dialpadSoundsEnabled"
-                    bidirectional: true
+                    property bool serverChecked: backendInfo.dialpadSoundsEnabled
+                    onServerCheckedChanged: checked = serverChecked
+                    Component.onCompleted: checked = serverChecked
+                    onTriggered: backendInfo.dialpadSoundsEnabled = checked
                 }
                 text: i18n.tr("Dialpad sounds")
             }
@@ -176,21 +179,23 @@ ItemPage {
             }
 
             ListItem.Standard {
-                control: SettingsCompenents.SyncCheckBox {
+                control: CheckBox {
                     objectName: "messageVibrate"
-                    dataTarget: backendInfo
-                    dataProperty: "incomingMessageVibrate"
-                    bidirectional: true
+                    property bool serverChecked: backendInfo.incomingMessageVibrate
+                    onServerCheckedChanged: checked = serverChecked
+                    Component.onCompleted: checked = serverChecked
+                    onTriggered: backendInfo.incomingMessageVibrate = checked
                 }
                 text: i18n.tr("Vibrate with message sound")
             }
 
             ListItem.Standard {
-                control: SettingsCompenents.SyncCheckBox {
+                control: CheckBox {
                     objectName: "messageVibrateSilentMode"
-                    dataTarget: backendInfo
-                    dataProperty: "incomingMessageVibrateSilentMode"
-                    bidirectional: true
+                    property bool serverChecked: backendInfo.incomingMessageVibrateSilentMode
+                    onServerCheckedChanged: checked = serverChecked
+                    Component.onCompleted: checked = serverChecked
+                    onTriggered: backendInfo.incomingMessageVibrateSilentMode = checked
                 }
                 text: i18n.tr("Vibrate in Silent Mode")
             }
@@ -202,11 +207,12 @@ ItemPage {
             ListItem.Standard {
                 text: i18n.tr("Keyboard sound")
 
-                control: SettingsCompenents.SyncSwitch {
+                control: Switch {
                     objectName: "keyboardSoundSwitch"
-                    dataTarget: keyboardSettings
-                    dataProperty: "keyPressFeedback"
-                    bidirectional: true
+                    property bool serverChecked: keyboardSettings.keyPressFeedback
+                    onServerCheckedChanged: checked = serverChecked
+                    Component.onCompleted: checked = serverChecked
+                    onTriggered: keyboardSettings.keyPressFeedback = checked
                 }
             }
 

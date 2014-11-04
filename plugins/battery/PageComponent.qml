@@ -27,7 +27,6 @@ import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 import Ubuntu.SystemSettings.Battery 1.0
 import Ubuntu.SystemSettings.SecurityPrivacy 1.0
-import Ubuntu.Settings.Components 0.1 as SettingsCompenents
 
 ItemPage {
     id: root
@@ -332,11 +331,12 @@ ItemPage {
             }
             ListItem.Standard {
                 text: i18n.tr("Wi-Fi")
-                control: SettingsCompenents.SyncSwitch {
+                control: Switch {
                     id: wifiSwitch
-                    dataTarget: batteryBackend
-                    dataProperty: "wifiEnabled"
-                    bidirectional: true
+                    property bool serverChecked: batteryBackend.wifiEnabled
+                    onServerCheckedChanged: checked = serverChecked
+                    Component.onCompleted: checked = serverChecked
+                    onTriggered: batteryBackend.wifiEnabled = checked
                 }
             }
 
@@ -357,11 +357,11 @@ ItemPage {
                 text: i18n.tr("Bluetooth")
                 control: Loader {
                     active: bluetoothActionGroup.enabled.state != null
-                    sourceComponent: SettingsCompenents.SyncSwitch {
+                    sourceComponent: Switch {
                         id: btSwitch
-                        dataTarget: bluetoothActionGroup.enabled
-                        dataProperty: "state"
-
+                        property bool serverChecked: bluetoothActionGroup.enabled.state
+                        onServerCheckedChanged: checked = serverChecked
+                        Component.onCompleted: checked = serverChecked
                         onTriggered: bluetoothActionGroup.enabled.activate()
                     }
                 }
@@ -385,11 +385,11 @@ ItemPage {
                 text: i18n.tr("GPS")
                 control: Loader {
                     active: locationActionGroup.enabled.state != null
-                    sourceComponent: SettingsCompenents.SyncSwitch {
+                    sourceComponent: Switch {
                         id: gpsSwitch
-                        dataTarget: locationActionGroup.enabled
-                        dataProperty: "state"
-
+                        property bool serverChecked: locationActionGroup.enabled.state
+                        onServerCheckedChanged: checked = serverChecked
+                        Component.onCompleted: checked = serverChecked
                         onTriggered: locationActionGroup.enabled.activate()
                     }
                 }

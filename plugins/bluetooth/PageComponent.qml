@@ -25,7 +25,6 @@ import Ubuntu.Components 0.1
 import Ubuntu.Components.Popups 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 import Ubuntu.SystemSettings.Bluetooth 1.0
-import Ubuntu.Settings.Components 0.1 as SettingsCompenents
 
 
 ItemPage {
@@ -146,11 +145,11 @@ ItemPage {
 
             ListItem.Standard {
                 text: i18n.tr("Bluetooth")
-                control: SettingsCompenents.SyncSwitch {
+                control: Switch {
                     id: btSwitch
-                    dataTarget: bluetoothActionGroup.enabled
-                    dataProperty: "state"
-
+                    property bool serverChecked: bluetoothActionGroup.enabled.state
+                    onServerCheckedChanged: checked = serverChecked
+                    Component.onCompleted: checked = serverChecked
                     onTriggered: bluetoothActionGroup.enabled.activate()
                 }
             }
@@ -390,10 +389,15 @@ ItemPage {
                 ListItem.Standard {
                     id: trustedCheck
                     text: i18n.tr("Connect automatically when detected:")
-                    control: SettingsCompenents.SyncCheckBox {
-                        dataTarget: backend.selectedDevice
-                        dataProperty: "trusted"
-                        bidirectional: true
+                    control: CheckBox {
+                        property bool serverChecked: backend.selectedDevice ? backend.selectedDevice.trusted : false
+                        onServerCheckedChanged: checked = serverChecked
+                        Component.onCompleted: checked = serverChecked
+                        onTriggered: {
+                            if (backend.selectedDevice) {
+                                backend.selectedDevice.trusted = checked;
+                            }
+                        }
                     }
                 }
                 ListItem.SingleControl {

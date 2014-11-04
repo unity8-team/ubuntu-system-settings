@@ -23,7 +23,6 @@ import QMenuModel 0.1
 import QtQuick 2.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
-import Ubuntu.Settings.Components 0.1 as SettingsCompenents
 import SystemSettings 1.0
 import Ubuntu.SystemSettings.Battery 1.0
 import Ubuntu.SystemSettings.Diagnostics 1.0
@@ -187,19 +186,21 @@ ItemPage {
             }
             ListItem.Standard {
                 text: i18n.tr("Stats on welcome screen")
-                control: SettingsCompenents.SyncSwitch {
-                    dataTarget: securityPrivacy
-                    dataProperty: "statsWelcomeScreen"
-                    bidirectional: true
+                control: Switch {
+                    property bool serverChecked: securityPrivacy.statsWelcomeScreen
+                    onServerCheckedChanged: checked = serverChecked
+                    Component.onCompleted: checked = serverChecked
+                    onTriggered: securityPrivacy.statsWelcomeScreen = checked
                 }
             }
 
             ListItem.Standard {
                 text: i18n.tr("Messages on welcome screen")
-                control: SettingsCompenents.SyncSwitch {
-                    dataTarget: securityPrivacy
-                    dataProperty: "messagesWelcomeScreen"
-                    bidirectional: true
+                control: Switch {
+                    property bool serverChecked: securityPrivacy.messagesWelcomeScreen
+                    onServerCheckedChanged: checked = serverChecked
+                    Component.onCompleted: checked = serverChecked
+                    onTriggered: securityPrivacy.messagesWelcomeScreen = checked
                 }
                 visible: showAllUI
             }

@@ -23,7 +23,6 @@ import QtQuick 2.0
 import QtQuick.Window 2.1
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
-import Ubuntu.Settings.Components 0.1 as SettingsCompenents
 
 
 ListItem.Standard {
@@ -31,11 +30,13 @@ ListItem.Standard {
     iconSource: model.icon
     iconFrame: false
     text: i18n.tr(model.displayName)
-    control: SettingsCompenents.SyncSwitch {
+    control: Switch {
         objectName: "orientationLockSwitch"
-        dataTarget: systemSettings
-        dataProperty: "rotationLock"
-        bidirectional: true
+
+        property bool serverChecked: systemSettings.rotationLock
+        onServerCheckedChanged: checked = serverChecked
+        Component.onCompleted: checked = serverChecked
+        onTriggered: systemSettings.rotationLock = checked
 
         GSettings {
             id: systemSettings

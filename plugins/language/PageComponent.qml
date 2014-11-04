@@ -25,7 +25,6 @@ import Ubuntu.Components 0.1
 import Ubuntu.Components.Popups 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 import Ubuntu.Settings.Menus 0.1 as SettingsMenus
-import Ubuntu.Settings.Components 0.1 as SettingsCompenents
 import Ubuntu.SystemSettings.LanguagePlugin 1.0
 
 ItemPage {
@@ -142,30 +141,33 @@ ItemPage {
             ListItem.Standard {
                 text: i18n.tr("Spell checking")
 
-                control: SettingsCompenents.SyncSwitch {
-                    dataTarget: settings
-                    dataProperty: "spellChecking"
-                    bidirectional: true
+                control: Switch {
+                    property bool serverChecked: settings.spellChecking
+                    onServerCheckedChanged: checked = serverChecked
+                    Component.onCompleted: checked = serverChecked
+                    onTriggered: settings.spellChecking = checked
                 }
             }
 
             ListItem.Standard {
                 text: i18n.tr("Auto correction")
 
-                control: SettingsCompenents.SyncSwitch {
-                    dataTarget: settings
-                    dataProperty: "autoCompletion"
-                    bidirectional: true
+                control: Switch {
+                    property bool serverChecked: settings.autoCompletion
+                    onServerCheckedChanged: checked = serverChecked
+                    Component.onCompleted: checked = serverChecked
+                    onTriggered: settings.autoCompletion = checked
                 }
             }
 
             ListItem.Standard {
                 text: i18n.tr("Word suggestions")
 
-                control: SettingsCompenents.SyncSwitch {
-                    dataTarget: settings
-                    dataProperty: "predictiveText"
-                    bidirectional: true
+                control: Switch {
+                    property bool serverChecked: settings.predictiveText
+                    onServerCheckedChanged: checked = serverChecked
+                    Component.onCompleted: checked = serverChecked
+                    onTriggered: settings.predictiveText = checked
                 }
             }
 
@@ -175,10 +177,11 @@ ItemPage {
             ListItem.Standard {
                 text: i18n.tr("Auto capitalization")
 
-                control: SettingsCompenents.SyncSwitch {
-                    dataTarget: settings
-                    dataProperty: "autoCapitalization"
-                    bidirectional: true
+                control: Switch {
+                    property bool serverChecked: settings.autoCapitalization
+                    onServerCheckedChanged: checked = serverChecked
+                    Component.onCompleted: checked = serverChecked
+                    onTriggered: settings.autoCapitalization = checked
                 }
             }
 
@@ -192,10 +195,11 @@ ItemPage {
             ListItem.Standard {
                 text: i18n.tr("Auto punctuation")
 
-                control: SettingsCompenents.SyncSwitch {
-                    dataTarget: settings
-                    dataProperty: "doubleSpaceFullStop"
-                    bidirectional: true
+                control: Switch {
+                    property bool serverChecked: settings.doubleSpaceFullStop
+                    onServerCheckedChanged: checked = serverChecked
+                    Component.onCompleted: checked = serverChecked
+                    onTriggered: settings.doubleSpaceFullStop = checked
                 }
             }
 
@@ -209,20 +213,22 @@ ItemPage {
             ListItem.Standard {
                 text: i18n.tr("Keyboard sound")
 
-                control: SettingsCompenents.SyncSwitch {
-                    dataTarget: settings
-                    dataProperty: "keyPressFeedback"
-                    bidirectional: true
+                control: Switch {
+                    property bool serverChecked: settings.keyPressFeedback
+                    onServerCheckedChanged: checked = serverChecked
+                    Component.onCompleted: checked = serverChecked
+                    onTriggered: settings.keyPressFeedback = checked
                 }
             }
 
             ListItem.Standard {
                 text: i18n.tr("Keyboard vibration")
 
-                control: SettingsCompenents.SyncSwitch {
-                    dataTarget: settings
-                    dataProperty: "keyPressHapticFeedback"
-                    bidirectional: true
+                control: Switch {
+                    property bool serverChecked: settings.keyPressHapticFeedback
+                    onServerCheckedChanged: checked = serverChecked
+                    Component.onCompleted: checked = serverChecked
+                    onTriggered: settings.keyPressHapticFeedback = checked
                 }
             }
         }
