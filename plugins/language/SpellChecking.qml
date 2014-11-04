@@ -18,6 +18,8 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import QtQuick 2.0
+import GSettings 1.0
 import SystemSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
@@ -30,16 +32,22 @@ ItemPage {
         id: plugin
     }
 
+    GSettings {
+        id: settings
+
+        schema.id: "com.canonical.keyboard.maliit"
+    }
+
     ListItem.Standard {
         id: item
 
         text: i18n.tr("Spell checking")
 
         control: Switch {
-            property bool serverChecked: plugin.spellChecking
+            property bool serverChecked: settings.spellChecking
             onServerCheckedChanged: checked = serverChecked
             Component.onCompleted: checked = serverChecked
-            onTriggered: plugin.spellChecking = checked
+            onTriggered: settings.spellChecking = checked
         }
     }
 
