@@ -31,6 +31,7 @@ ListItem.Standard {
     iconFrame: false
     text: i18n.tr(model.displayName)
     control: Switch {
+        id: control
         objectName: "orientationLockSwitch"
 
         property bool serverChecked: systemSettings.rotationLock

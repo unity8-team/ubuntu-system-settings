@@ -22,6 +22,7 @@ import SystemSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 import Ubuntu.SystemSettings.LanguagePlugin 1.0
+
 ItemPage {
     title: i18n.tr("Spell checking")
 
