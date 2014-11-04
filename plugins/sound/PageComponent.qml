@@ -78,7 +78,7 @@ ItemPage {
                 text: i18n.tr("Silent Mode")
             }
 
-            ListItem.Standard {
+            SettingsItemTitle {
                 text: i18n.tr("Ringer:")
             }
 
@@ -110,7 +110,7 @@ ItemPage {
                 onUpdated: soundActionGroup.volume.updateState(value);
             }
 
-            ListItem.Standard {
+            SettingsItemTitle {
                 text: i18n.tr("Phone calls:")
             }
 
@@ -161,7 +161,7 @@ ItemPage {
                 text: i18n.tr("Dialpad sounds")
             }
 
-            ListItem.Standard {
+            SettingsItemTitle {
                 text: i18n.tr("Messages:")
             }
 
@@ -200,7 +200,7 @@ ItemPage {
                 text: i18n.tr("Vibrate in Silent Mode")
             }
 
-            ListItem.Standard {
+            SettingsItemTitle {
                 text: i18n.tr("Other sounds:")
             }
 

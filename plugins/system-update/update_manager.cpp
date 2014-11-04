@@ -39,6 +39,16 @@ using namespace UbuntuOne;
 
 namespace UpdatePlugin {
 
+UpdateManager *UpdateManager::m_instance = 0;
+
+UpdateManager *UpdateManager::instance()
+{
+    if (!m_instance)
+        m_instance = new UpdateManager;
+
+    return m_instance;
+}
+
 UpdateManager::UpdateManager(QObject *parent):
     QObject(parent),
     m_systemCheckingUpdate(false),

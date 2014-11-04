@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-10-16 20:04-0600\n"
-"PO-Revision-Date: 2014-10-22 05:38+0000\n"
-"Last-Translator: CSRedRat <Unknown>\n"
+"PO-Revision-Date: 2014-10-30 09:09+0000\n"
+"Last-Translator: ☠Jay ZDLin☠ <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2014-10-23 07:26+0000\n"
-"X-Generator: Launchpad (build 17203)\n"
+"X-Launchpad-Export-Date: 2014-10-31 06:43+0000\n"
+"X-Generator: Launchpad (build 17211)\n"
 
 #: ubuntu-system-settings.desktop.in.in.h:1 ../src/qml/MainWindow.qml:112
 msgid "System Settings"
@@ -137,7 +137,7 @@ msgstr "Настройки IP-адреса не актуальны"
 
 #: ../plugins/wifi//Common.qml:50
 msgid "Your authentication details were incorrect"
-msgstr ""
+msgstr "Некорректные данные аутентификации"
 
 #: ../plugins/wifi//Common.qml:52
 msgid "802.1X supplicant disconnected"
@@ -798,7 +798,7 @@ msgstr "Вручную"
 
 #: ../plugins/cellular//PageChooseCarrier.qml:196
 msgid "Searching for carriers…"
-msgstr ""
+msgstr "Поиск оператора..."
 
 #: ../plugins/cellular//PageChooseCarrier.qml:229
 #: ../plugins/cellular//PageChooseApn.qml:31
@@ -808,7 +808,7 @@ msgstr "APN"
 
 #: ../plugins/cellular//PageChooseApn.qml:372
 msgid "Internet APN:"
-msgstr ""
+msgstr "Интернет APN:"
 
 #: ../plugins/cellular//PageChooseApn.qml:449
 msgid "Custom Internet APN…"
@@ -816,7 +816,7 @@ msgstr ""
 
 #: ../plugins/cellular//PageChooseApn.qml:460
 msgid "MMS APN:"
-msgstr ""
+msgstr "MMS APN:"
 
 #: ../plugins/cellular//PageChooseApn.qml:485
 #: ../plugins/cellular//CustomApnEditor.qml:143
@@ -829,15 +829,15 @@ msgstr ""
 
 #: ../plugins/cellular//PageChooseApn.qml:591
 msgid "Reset APN Settings"
-msgstr ""
+msgstr "Сброс настроек APN"
 
 #: ../plugins/cellular//PageChooseApn.qml:592
 msgid "Are you sure that you want to Reset APN Settings?"
-msgstr ""
+msgstr "Сбросить настройки APN?"
 
 #: ../plugins/cellular//PageChooseApn.qml:598
 msgid "Reset"
-msgstr ""
+msgstr "Сбросить"
 
 #: ../plugins/cellular//PageChooseCarriers.qml:27
 #: ../plugins/cellular//Components//MultiSim.qml:68
@@ -846,11 +846,11 @@ msgstr "Операторы"
 
 #: ../plugins/cellular//CustomApnEditor.qml:42
 msgid "Internet"
-msgstr ""
+msgstr "Интернет"
 
 #: ../plugins/cellular//CustomApnEditor.qml:42
 msgid "MMS"
-msgstr ""
+msgstr "MMS"
 
 #. TRANSLATORS: %1 is either i18n.tr("Internet") or i18n.tr("MMS")
 #: ../plugins/cellular//CustomApnEditor.qml:67
@@ -862,7 +862,7 @@ msgstr ""
 #: ../plugins/cellular//CustomApnEditor.qml:171
 #, qt-format
 msgid "%1 APN"
-msgstr ""
+msgstr "%1 APN"
 
 #: ../plugins/cellular//CustomApnEditor.qml:181
 msgid "MMSC"
@@ -870,19 +870,19 @@ msgstr ""
 
 #: ../plugins/cellular//CustomApnEditor.qml:191
 msgid "Proxy"
-msgstr ""
+msgstr "Прокси"
 
 #: ../plugins/cellular//CustomApnEditor.qml:213
 msgid "Username"
-msgstr ""
+msgstr "Имя пользователя"
 
 #: ../plugins/cellular//CustomApnEditor.qml:264
 msgid "Save"
-msgstr ""
+msgstr "Сохранить"
 
 #: ../plugins/cellular//CustomApnEditor.qml:264
 msgid "Activate"
-msgstr ""
+msgstr "Включить"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
 #: ../plugins/cellular//PageComponent.qml:32
@@ -952,7 +952,7 @@ msgstr "Защита блокировки"
 #: ../plugins/security-privacy//LockSecurity.qml:96
 #: ../plugins/security-privacy//LockSecurity.qml:384
 msgid "Change passcode…"
-msgstr ""
+msgstr "Изменение секретного кода..."
 
 #: ../plugins/security-privacy//LockSecurity.qml:98
 #: ../plugins/security-privacy//LockSecurity.qml:385
@@ -965,7 +965,7 @@ msgstr "Переключить на свайп"
 
 #: ../plugins/security-privacy//LockSecurity.qml:107
 msgid "Switch to passcode"
-msgstr ""
+msgstr "Перейти на код"
 
 #: ../plugins/security-privacy//LockSecurity.qml:109
 msgid "Switch to passphrase"
@@ -973,7 +973,7 @@ msgstr "Переключить на кодовую фразу"
 
 #: ../plugins/security-privacy//LockSecurity.qml:118
 msgid "Existing passcode"
-msgstr ""
+msgstr "Существующий код"
 
 #: ../plugins/security-privacy//LockSecurity.qml:120
 msgid "Existing passphrase"
@@ -981,7 +981,7 @@ msgstr "Текущая кодовая фраза"
 
 #: ../plugins/security-privacy//LockSecurity.qml:174
 msgid "Choose passcode"
-msgstr ""
+msgstr "Выбрать код"
 
 #: ../plugins/security-privacy//LockSecurity.qml:176
 msgid "Choose passphrase"
@@ -990,7 +990,7 @@ msgstr "Введите кодовую фразу"
 #: ../plugins/security-privacy//LockSecurity.qml:220
 #: ../wizard/qml/Pages//passwd-confirm.qml:48
 msgid "Confirm passcode"
-msgstr ""
+msgstr "Подтвердить код"
 
 #: ../plugins/security-privacy//LockSecurity.qml:222
 #: ../wizard/qml/Pages//passwd-confirm.qml:47
@@ -999,7 +999,7 @@ msgstr "Подтвердите кодовую фразу"
 
 #: ../plugins/security-privacy//LockSecurity.qml:265
 msgid "Those passcodes don't match. Try again."
-msgstr ""
+msgstr "Коды не совпадают. Попробуйте снова."
 
 #: ../plugins/security-privacy//LockSecurity.qml:268
 msgid "Those passphrases don't match. Try again."
@@ -1019,7 +1019,7 @@ msgstr "Свайп (небезопасно)"
 
 #: ../plugins/security-privacy//LockSecurity.qml:349
 msgid "4-digit passcode"
-msgstr ""
+msgstr "4-значный код"
 
 #: ../plugins/security-privacy//LockSecurity.qml:350
 #: ../plugins/security-privacy//PhoneLocking.qml:47
@@ -1033,7 +1033,7 @@ msgstr "Свайп (небезопасно)... "
 
 #: ../plugins/security-privacy//LockSecurity.qml:352
 msgid "4-digit passcode…"
-msgstr ""
+msgstr "4-значный код..."
 
 #: ../plugins/security-privacy//LockSecurity.qml:353
 msgid "Passphrase…"
@@ -1053,8 +1053,9 @@ msgstr "Сменить ПИН-код SIM-карты"
 #, qt-format
 msgid "Incorrect PIN. %1 attempt remaining."
 msgid_plural "Incorrect PIN. %1 attempts remaining."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Неверный ПИН. Осталась %1 попытка."
+msgstr[1] "Неверный ПИН. Осталось %1 попытки."
+msgstr[2] "Неверный ПИН. Осталось %1 попыток."
 
 #: ../plugins/security-privacy//SimPin.qml:81
 msgid "Current PIN:"
@@ -1064,8 +1065,9 @@ msgstr "Текущий ПИН-код:"
 #, qt-format
 msgid "%1 attempt allowed."
 msgid_plural "%1 attempts allowed."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Допускается %1 попытка."
+msgstr[1] "Допускается %1 попытки."
+msgstr[2] "Допускается %1 попыток."
 
 #: ../plugins/security-privacy//SimPin.qml:107
 msgid "Choose new PIN:"
@@ -1135,7 +1137,7 @@ msgstr ""
 #: ../plugins/security-privacy//PhoneLocking.qml:46
 #: ../wizard/qml/Pages//30-passwd-type.qml:95
 msgid "Passcode"
-msgstr ""
+msgstr "Секретный код"
 
 #. TRANSLATORS: %1 is the number of minutes
 #: ../plugins/security-privacy//PhoneLocking.qml:75
@@ -1153,11 +1155,11 @@ msgstr "Блокировка при выключении экрана"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:106
 msgid "When locked, allow:"
-msgstr ""
+msgstr "Разрешить на заблокированном:"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:110
 msgid "Launcher"
-msgstr ""
+msgstr "Панель запуска"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:120
 msgid "Notifications and quick settings"
@@ -1779,7 +1781,7 @@ msgstr "Установить"
 
 #: ../plugins/system-update//PageComponent.qml:152
 msgid "Installation failed"
-msgstr ""
+msgstr "Сбой установки"
 
 #: ../plugins/system-update//PageComponent.qml:156
 #: ../plugins/cellular//Components//SimEditor.qml:200
@@ -1793,7 +1795,7 @@ msgstr "Программное обеспечение актуально."
 #: ../plugins/system-update//PageComponent.qml:235
 #: ../plugins/system-update//PageComponent.qml:241
 msgid "Sorry, the system update failed."
-msgstr ""
+msgstr "К сожалению, не удалось обновить систему."
 
 #: ../plugins/system-update//PageComponent.qml:254
 msgid "Restarting…"
@@ -1805,7 +1807,7 @@ msgstr "Проверка обновлений..."
 
 #: ../plugins/system-update//PageComponent.qml:298
 msgid "Connect to the Internet to check for updates"
-msgstr ""
+msgstr "Подключитесь к интернету, чтобы проверить наличие обновлений"
 
 #: ../plugins/system-update//PageComponent.qml:313
 #: ../plugins/system-update//PageComponent.qml:471
@@ -2030,7 +2032,7 @@ msgstr "Предыдущие отчеты об ошибках"
 
 #: ../plugins/security-privacy//diagnostics//PageComponent.qml:90
 msgid "Includes info about what an app was doing when it failed."
-msgstr ""
+msgstr "Включает информацию о приложении на момент возникновения ошибки."
 
 #: ../src/qml/MainWindow.qml:133
 msgid "Search"
@@ -2046,23 +2048,23 @@ msgstr "Настройки системы"
 
 #: ../wizard/qml/Pages//30-passwd-type.qml:72
 msgid "Please select how you’d like to unlock your phone."
-msgstr ""
+msgstr "Выберите способ разблокировки телефона."
 
 #: ../wizard/qml/Pages//30-passwd-type.qml:92
 msgid "Swipe"
-msgstr ""
+msgstr "Смахивание"
 
 #: ../wizard/qml/Pages//30-passwd-type.qml:93
 msgid "No security"
-msgstr ""
+msgstr "Без пароля"
 
 #: ../wizard/qml/Pages//30-passwd-type.qml:96
 msgid "4 numbers"
-msgstr ""
+msgstr "4 цифры"
 
 #: ../wizard/qml/Pages//30-passwd-type.qml:99
 msgid "Numbers and letters"
-msgstr ""
+msgstr "Цифры и буквы"
 
 #: ../wizard/qml/Pages//30-passwd-type.qml:112
 #: ../wizard/qml/Pages//40-wifi.qml:196 ../wizard/qml/Pages//10-welcome.qml:85
@@ -2095,15 +2097,15 @@ msgstr "Условия использования"
 
 #: ../wizard/qml/Pages//31-passwd-set.qml:48
 msgid "Enter passphrase"
-msgstr ""
+msgstr "Введите кодовую фразу"
 
 #: ../wizard/qml/Pages//31-passwd-set.qml:49
 msgid "Choose your passcode"
-msgstr ""
+msgstr "Выберите секретный код"
 
 #: ../wizard/qml/Pages//31-passwd-set.qml:56
 msgid "Passphrase must be 4 characters long"
-msgstr ""
+msgstr "Кодовая фраза должна состоять из 4 символов"
 
 #: ../wizard/qml/Pages//20-sim.qml:23
 msgid "Add a SIM card and restart your device"
@@ -2116,7 +2118,7 @@ msgstr ""
 
 #: ../wizard/qml/Pages//passwd-confirm.qml:51
 msgid "Sorry, incorrect passphrase."
-msgstr ""
+msgstr "Неверная кодовая фраза."
 
 #: ../wizard/qml/Pages//passwd-confirm.qml:51
 #: ../wizard/qml/Pages//passwd-confirm.qml:52
@@ -2125,7 +2127,7 @@ msgstr "Пожалуйста, попробуйте ещё раз."
 
 #: ../wizard/qml/Pages//passwd-confirm.qml:52
 msgid "Sorry, incorrect passcode."
-msgstr ""
+msgstr "Неверный секретный код."
 
 #: ../wizard/qml/Pages//80-finished.qml:22
 msgid "All done"
@@ -2166,6 +2168,8 @@ msgstr ""
 msgid ""
 "Allow apps to use your mobile and Wi-Fi networks to determine your location."
 msgstr ""
+"Разрешить приложениям использовать мобильные и Wi-Fi сети для определения "
+"вашего местонахождения."
 
 #. TRANSLATORS: HERE is a trademark for Nokia's location service, you probably shouldn't translate it
 #: ../wizard/qml/Pages//50-location.qml:74
@@ -2189,12 +2193,16 @@ msgid ""
 "Your phone is set up to automatically report errors to Canonical and its "
 "partners, the makers of the operating system."
 msgstr ""
+"Ваш телефон настроен на автоматическую отправку отчётов об ошибках в "
+"компанию Canonical и её партнерам, производителям операционной системы."
 
 #: ../wizard/qml/Pages//60-reporting.qml:41
 msgid ""
 "This can be disabled in <b>System Settings</b> under <b>Security &amp; "
 "Privacy</b>"
 msgstr ""
+"Данную функцию можно отключить, перейдя в <b>Параметры системы</b>, раздел "
+"<b>Защита и приватность</b>"
 
 #: ../wizard/qml/Components//Page.qml:89
 msgid "Back"
@@ -2203,12 +2211,12 @@ msgstr "Назад"
 #: ../wizard/qml/Components//StackButton.qml:40
 #, qt-format
 msgid "〈  %1"
-msgstr ""
+msgstr "〈  %1"
 
 #: ../wizard/qml/Components//StackButton.qml:43
 #, qt-format
 msgid "%1  〉"
-msgstr ""
+msgstr "%1  〉"
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
 #: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:4
@@ -2303,19 +2311,19 @@ msgstr ""
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:38
 msgid "hidden"
-msgstr ""
+msgstr "скрытые"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:40
 msgid "ip"
-msgstr ""
+msgstr "ip"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:42
 #: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:294
 msgid "address"
-msgstr ""
+msgstr "адрес"
 
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
@@ -2363,22 +2371,22 @@ msgstr ""
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
 #: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:60
 msgid "facebook"
-msgstr ""
+msgstr "facebook"
 
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
 #: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:62
 msgid "twitter"
-msgstr ""
+msgstr "twitter"
 
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
 #: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:64
 msgid "flickr"
-msgstr ""
+msgstr "flickr"
 
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
 #: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:66
 msgid "gmail"
-msgstr ""
+msgstr "gmail"
 
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
 #: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:70
@@ -2388,7 +2396,7 @@ msgstr "звук"
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
 #: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:72
 msgid "silent"
-msgstr ""
+msgstr "в фоновом режиме"
 
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
 #: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:74
@@ -2417,7 +2425,7 @@ msgstr ""
 #: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:82
 #: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:118
 msgid "keyboard"
-msgstr ""
+msgstr "клавиатура"
 
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
 #: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:84
@@ -2527,12 +2535,12 @@ msgstr ""
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:130
 msgid "punctuation"
-msgstr ""
+msgstr "пунктуация"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:132
 msgid "layout"
-msgstr ""
+msgstr "раскладка"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
@@ -2544,12 +2552,12 @@ msgstr ""
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:136
 msgid "words"
-msgstr ""
+msgstr "слова"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:138
 msgid "vibration"
-msgstr ""
+msgstr "вибро"
 
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
@@ -2561,7 +2569,7 @@ msgstr "телефон"
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
 #: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:144
 msgid "services"
-msgstr ""
+msgstr "службы"
 
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
 #: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:146
@@ -2571,7 +2579,7 @@ msgstr ""
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
 #: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:148
 msgid "waiting"
-msgstr ""
+msgstr "ожидание"
 
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
 #: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:150
@@ -2633,27 +2641,27 @@ msgstr ""
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
 #: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:184
 msgid "4g"
-msgstr ""
+msgstr "4g"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
 #: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:186
 msgid "3g"
-msgstr ""
+msgstr "3g"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
 #: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:188
 msgid "2g"
-msgstr ""
+msgstr "2g"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
 #: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:190
 msgid "lte"
-msgstr ""
+msgstr "lte"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
 #: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:192
 msgid "apn"
-msgstr ""
+msgstr "apn"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
 #: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:194
@@ -2665,7 +2673,7 @@ msgstr ""
 #: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:196
 #: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:226
 msgid "sim"
-msgstr ""
+msgstr "sim"
 
 #. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
 #: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:198
@@ -2710,7 +2718,7 @@ msgstr "автономный режим"
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
 #: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:214
 msgid "airplane"
-msgstr ""
+msgstr "автономно"
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
 #: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:220
@@ -2725,22 +2733,22 @@ msgstr "конфиденциальность"
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
 #: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:228
 msgid "pin"
-msgstr ""
+msgstr "пин"
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
 #: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:230
 msgid "code"
-msgstr ""
+msgstr "код"
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
 #: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:232
 msgid "password"
-msgstr ""
+msgstr "пароль"
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
 #: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:234
 msgid "passphrase"
-msgstr ""
+msgstr "кодовая фраза"
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
 #: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:236
@@ -2750,7 +2758,7 @@ msgstr ""
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
 #: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:238
 msgid "allow"
-msgstr ""
+msgstr "разрешить"
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
 #: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:240
@@ -2812,7 +2820,7 @@ msgstr ""
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
 #: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:276
 msgid "stereo"
-msgstr ""
+msgstr "стерео"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:280
@@ -2832,27 +2840,27 @@ msgstr ""
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:290
 msgid "imei"
-msgstr ""
+msgstr "imei"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:292
 msgid "serial"
-msgstr ""
+msgstr "серийный номер"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:296
 msgid "mac"
-msgstr ""
+msgstr "mac"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:298
 msgid "licenses"
-msgstr ""
+msgstr "лицензии"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:300
 msgid "developer"
-msgstr ""
+msgstr "разработчик"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:304
@@ -2872,7 +2880,7 @@ msgstr ""
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:310
 msgid "version"
-msgstr ""
+msgstr "версия"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:312
@@ -2926,11 +2934,11 @@ msgstr ""
 
 #: ../plugins/security-privacy//securityprivacy.cpp:318
 msgid "Incorrect passcode. Try again."
-msgstr ""
+msgstr "Неправильный код. Попробуйте ещё раз."
 
 #: ../plugins/security-privacy//securityprivacy.cpp:320
 msgid "Incorrect passphrase. Try again."
-msgstr ""
+msgstr "Неправильная кодовая фраза. Попробуйте ещё раз."
 
 #: ../plugins/security-privacy//securityprivacy.cpp:323
 msgid "Could not set security mode"
@@ -2963,39 +2971,3 @@ msgstr "Имеется обновлённый образ системы."
 #: ../push-helper/software_updates_helper.py:151
 msgid "Tap to open the system updater."
 msgstr "Нажмите для открытия мастера обновления системы."
-
-#~ msgid "Searching"
-#~ msgstr "Поиск"
-
-#~ msgid "Refresh"
-#~ msgstr "Обновить"
-
-#~ msgid "Remove"
-#~ msgstr "Удалить"
-
-#~ msgid "settings"
-#~ msgstr "настройки"
-
-#~ msgid "i18n"
-#~ msgstr "i18n"
-
-#~ msgid "lang"
-#~ msgstr "язык"
-
-#~ msgid "Password visible"
-#~ msgstr "Отображать пароль"
-
-#~ msgid "Other network"
-#~ msgstr "Другая сеть"
-
-#~ msgid "Connect to Wi-Fi"
-#~ msgstr "Подключиться к Wi-Fi"
-
-#~ msgid "Available networks"
-#~ msgstr "Доступные сети"
-
-#~ msgid "Those passphrases don't match."
-#~ msgstr "Кодовые фразы не совпадают."
-
-#~ msgid "Passphrase must be at least four characters long."
-#~ msgstr "Кодовая фраза должна содержать не менее четырёх символов."

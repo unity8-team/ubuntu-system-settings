@@ -74,7 +74,7 @@ ItemPage {
             anchors.left: parent.left
             anchors.right: parent.right
 
-            ListItem.Base {
+            ListItem.Empty {
                 height: ubuntuLabel.height + deviceLabel.height + units.gu(6)
 
                 Column {
@@ -95,6 +95,7 @@ ItemPage {
                         text: deviceInfos.manufacturer() ? deviceInfos.manufacturer() + " " + deviceInfos.model() : backendInfos.vendorString
                     }
                 }
+                highlightWhenPressed: false
             }
 
             Loader {
@@ -142,12 +143,12 @@ ItemPage {
                 objectName: "storageItem"
                 text: i18n.tr("Storage")
                 /* TRANSLATORS: that's the free disk space, indicated in the most appropriate storage unit */
-                value: i18n.tr("%1 free").arg(backendInfos.formatSize(storageInfo.availableDiskSpace("/home")))
+                value: i18n.tr("%1 free").arg(Utilities.formatSize(storageInfo.availableDiskSpace("/home")))
                 progression: true
                 onClicked: pageStack.push(Qt.resolvedUrl("Storage.qml"))
             }
 
-            ListItem.Standard {
+            SettingsItemTitle {
                 objectName: "softwareItem"
                 text: i18n.tr("Software:")
             }
@@ -176,9 +177,10 @@ ItemPage {
                     onClicked:
                         pageStack.push(pluginManager.getByName("system-update").pageComponent)
                 }
+                showDivider: false
             }
 
-            ListItem.Standard {
+            SettingsItemTitle {
                 objectName: "legalItem"
                 text: i18n.tr("Legal:")
             }

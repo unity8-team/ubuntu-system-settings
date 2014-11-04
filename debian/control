@@ -99,7 +99,7 @@ Architecture: any
 Depends: ${misc:Depends},
          ${shlibs:Depends},
          ubuntu-system-settings (= ${binary:Version}),
-         unity8,
+         unity8 (>= 8.01),
 Recommends: qtdeclarative5-qtmir-plugin (>= 0.4)
 Conflicts: ubuntu-system-settings (<< 0.3)
 Breaks: ubuntu-system-settings (<< 0.3)
