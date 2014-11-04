@@ -1,3 +1,10 @@
+ubuntu-system-settings (0.3+14.10.20141104~rtm-0ubuntu1) 14.09; urgency=low
+
+  [ Ken VanDine ]
+  * [battery] don't use a colored icon (LP: #1351383)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 04 Nov 2014 14:38:52 +0000
+
 ubuntu-system-settings (0.3+14.10.20141103~rtm-0ubuntu1) 14.09; urgency=low
 
   [ Michael Terry ]
