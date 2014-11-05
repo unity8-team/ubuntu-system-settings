@@ -73,7 +73,6 @@ SheetBase {
 
         onCurrentIndexChanged: {
             i18n.language = plugin.languageCodes[currentIndex]
-            i18n.domain = i18n.domain
         }
     }
 
@@ -107,7 +106,6 @@ SheetBase {
 
             onClicked: {
                 i18n.language = initialLanguage
-                i18n.domain = i18n.domain
                 PopupUtils.close(root)
             }
         }

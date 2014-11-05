@@ -1,3 +1,5 @@
+include_directories(${GLIB_INCLUDE_DIRS})
+
 add_definitions(-DI18N_DIRECTORY="${CMAKE_INSTALL_PREFIX}/share/locale")
 add_definitions(-DI18N_DOMAIN="ubuntu-system-settings")
 add_definitions(-DPLUGIN_PRIVATE_MODULE_DIR="${PLUGIN_PRIVATE_MODULE_DIR}")
@@ -23,13 +25,14 @@ set(QML_SOURCES
     qml/MainWindow.qml
     qml/UncategorizedItemsView.qml
     SystemSettings/ItemPage.qml
+    SystemSettings/SettingsItemTitle.qml
 )
 
 QT5_ADD_RESOURCES(system-settings-resources ui.qrc)
 
 add_executable(system-settings ${USS_SOURCES} ${QML_SOURCES} ${system-settings-resources})
 qt5_use_modules(system-settings Core Gui Quick Qml)
-target_link_libraries(system-settings SystemSettings)
+target_link_libraries(system-settings SystemSettings ${GLIB_LDFLAGS})
 install(TARGETS system-settings RUNTIME DESTINATION bin)
 
 add_library(uss-accountsservice SHARED accountsservice.h accountsservice.cpp)

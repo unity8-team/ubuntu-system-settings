@@ -841,6 +841,40 @@ class WifiPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
                 return True
         return False
 
+    @autopilot.logging.log_action(logger.debug)
+    def enable_wireless(self):
+        self._set_wireless(True)
+
+    @autopilot.logging.log_action(logger.debug)
+    def disable_wireless(self):
+        self._set_wireless(False)
+
+    """
+    :returns: Whether or not WiFi can be used
+    """
+    @autopilot.logging.log_action(logger.debug)
+    def have_wireless(self):
+        try:
+            self.wait_select_single('SwitchMenuItem', text=_('Wi-Fi'))
+        except:
+            return False
+        return True
+
+    """Returns the current WiFi state
+
+    :returns: Whether or not WiFi is enabled
+    """
+    @autopilot.logging.log_action(logger.debug)
+    def get_wireless(self):
+        return self.wait_select_single(
+            'SwitchMenuItem', text=_('Wi-Fi')).checked
+
+    @autopilot.logging.log_action(logger.debug)
+    def _set_wireless(self, state):
+        obj = self.wait_select_single('SwitchMenuItem', text=_('Wi-Fi'))
+        if obj.checked != state:
+            self.pointing_device.click_object(obj)
+
     """Connects to hidden network
 
     :param name: Network name string (SSID)
