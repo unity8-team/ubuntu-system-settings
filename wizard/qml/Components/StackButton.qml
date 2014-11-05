@@ -17,14 +17,12 @@
 import QtQuick 2.3
 import Ubuntu.Components 1.1
 
-Item {
+AbstractButton {
     id: stackButton
 
     property string text
 
     property bool backArrow: false
-
-    signal clicked()
 
     width: label.width
     height: label.height + units.gu(4)
@@ -45,10 +43,5 @@ Item {
             }
         }
         horizontalAlignment: backArrow ? Text.AlignLeft : Text.AlignRight
-    }
-
-    MouseArea {
-        anchors.fill: parent
-        onClicked: stackButton.clicked()
     }
 }

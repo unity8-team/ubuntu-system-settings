@@ -37,7 +37,7 @@ ItemPage {
         height: labelSubtitle.height + units.gu(2)
         Label {
             id: labelSubtitle
-            text: i18n.tr("Selected apps can alert you using notification bubbles, sounds, vibrations, and the Notification Center.")
+            text: i18n.tr("Selected apps can alert you using notification bubbles, sounds, vibrations, and the Notifications list.")
             wrapMode: Text.WordWrap
             anchors {
                 top: parent.top
