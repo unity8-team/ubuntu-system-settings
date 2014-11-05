@@ -155,6 +155,7 @@ ItemPage {
 
             ListItem.ItemSelector {
                 id: allOperators
+                objectName: "allOperators"
                 expanded: true
                 enabled: !scanning
                 opacity: enabled ? 1 : 0.5
@@ -174,6 +175,7 @@ ItemPage {
 
             ListItem.ItemSelector {
                 id: otherOperators
+                objectName: "otherOperators"
                 expanded: true
                 visible: false
                 enabled: !scanning

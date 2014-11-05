@@ -283,7 +283,6 @@ class CellularPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
         else:
             carrierPage = self._click_carrier()
 
-        carrierPage.set_manual()
         carrierPage.set_carrier(carrier)
 
     @autopilot.logging.log_action(logger.debug)
@@ -361,11 +360,6 @@ class PageChooseCarrier(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
     """Autopilot helper for carrier selection page (singlesim)."""
 
     @autopilot.logging.log_action(logger.debug)
-    def set_manual(self):
-        item = self.select_single(text='Manually')
-        self.pointing_device.click_object(item)
-
-    @autopilot.logging.log_action(logger.debug)
     def set_automatic(self):
         item = self.select_single(text='Automatically')
         self.pointing_device.click_object(item)
@@ -374,7 +368,17 @@ class PageChooseCarrier(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
         # wait for animation, since page.animationRunning.wait_for(False)
         # does not work?
         sleep(0.5)
-        item = self.select_single(text=carrier, objectName="carrier")
+        allOperators = self.select_single(objectName="allOperators")
+        otherOperators = self.select_single(objectName="otherOperators")
+
+        if allOperators.visible:
+            opList = allOperators
+        elif otherOperators.visible:
+            opList = otherOperators
+        else:
+            raise Exception("No operator list visible.")
+
+        item = opList.select_single(text=carrier, objectName="carrier")
         self.pointing_device.click_object(item)
 
 
