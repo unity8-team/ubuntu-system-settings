@@ -120,10 +120,6 @@ ItemPage {
              }
             spacing: 0
 
-            Label{
-                text: "state:" + root.state + " status: " + sim.netReg.status
-            }
-
             ListItem.ItemSelector {
                 id: chooseCarrier
                 objectName: "mode"

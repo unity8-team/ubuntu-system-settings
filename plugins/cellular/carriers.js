@@ -24,7 +24,6 @@ function _garbageCollect (paths) {
             if (paths.indexOf(path) === -1) {
                 /* Found path that was not in the new operator list,
                 let's remove it */
-                console.warn('Destroyed path for path', _pathToQml[path].operatorPath, _pathToQml[path].name);
                 _pathToQml[path].destroy();
                 delete _pathToQml[path];
             }
@@ -39,7 +38,6 @@ function _createQml (paths) {
             _pathToQml[path] = netOp.createObject(root, {
                 'operatorPath': path
             });
-            console.warn('_createQml created', path);
         }
     });
 }
@@ -58,10 +56,8 @@ function getOps (paths, ignore) {
     paths.forEach(function (op) {
         var ofonoOp = getOrCreateOpQml(op);
         if (ignore.indexOf(op) >= 0) {
-            console.warn('ignored', ofonoOp.name);
             return;
         } else if (ofonoOp.status === "forbidden") {
-            console.warn('forbade', ofonoOp.name);
             return;
         }
         ret.push(ofonoOp);
