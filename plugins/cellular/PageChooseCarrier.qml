@@ -85,15 +85,29 @@ ItemPage {
     }
 
     Connections {
+        /* The following is a hack: If a scan is in progress and we call
+        scan() on netReg, it emits and scanError _and_ scanFinished.
+        We look at the scanError message, set this property to true if
+        it says a scan is in progress. This way we can ignore the bad
+        scanFinished signal. Filed bug against libqofono. */
+        property bool __scanInProgress: false
+
         target: sim.netReg
         onScanFinished: {
-            if (scanning) {
+            if (scanning && !__scanInProgress) {
                 scanning = false;
             }
+            __scanInProgress = false;
         }
         onScanError: {
-            scanning = false;
-            console.warn("onScanError: " + message);
+            if (message === "Operation already in progress") {
+                console.warn('A scan was already in progress.');
+                __scanInProgress = true;
+            } else {
+                scanning = false;
+                __scanInProgress = false;
+                console.warn("onScanError: " + message);
+            }
         }
         onModeChanged: chooseCarrier.selectedIndex = (mode === "auto") ? 0 : -1
     }
