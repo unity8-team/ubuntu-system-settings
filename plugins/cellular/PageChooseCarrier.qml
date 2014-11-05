@@ -24,60 +24,48 @@ import SystemSettings 1.0
 import Ubuntu.Components 1.1
 import Ubuntu.Components.ListItems 1.0 as ListItem
 import MeeGo.QOfono 0.2
+import "Components" as LocalComponents
 import "carriers.js" as CHelper
 
 ItemPage {
     id: root
     title: i18n.tr("Carrier")
-
     objectName: "chooseCarrierPage"
 
     property var sim
-    property bool scanning: false
+    property bool scanning: true
 
-    /* Signal that ofono bindings can use to
-    trigger an update of the UI */
-    signal operatorsChanged ()
-
-    QtObject {
-        id: d
-        property bool __suppressActivation: false
-    }
-
-    onOperatorsChanged: CHelper.operatorsChanged();
-    Component.onCompleted: {
-        console.warn('Scan start.')
-        scanTimer.start();
-    }
-
-    Timer {
-        id: scanTimer
-        interval: 1500
-        repeat: false
-        running: false
-        onTriggered: {
-            sim.netReg.scan();
-            scanning = true;
-            d.__suppressActivation = true;
-        }
-    }
-
-    Connections {
-        target: sim.netReg
-        onNetworkOperatorsChanged: operatorsChanged()
-        onScanFinished: {
-            if (scanning) {
-                console.warn('Scan done.')
-                scanning = false;
-                d.__suppressActivation = false;
+    states: [
+        State {
+            name: "auto"
+            when: sim.netReg.mode === "auto"
+            PropertyChanges {
+                target: otherOperators
+                visible: true
+                selectedIndex: -1
+            }
+            PropertyChanges {
+                target: curOpLabel
+                height: chooseCarrier.itemHeight
+            }
+        },
+        State {
+            name: "manual"
+            when: sim.netReg.mode === "manual"
+            PropertyChanges {
+                target: allOperators
+                visible: true
+            }
+        },
+        State {
+            name: "auto-only"
+            when: sim.netReg.mode === "auto-only"
+            PropertyChanges {
+                target: chooseCarrier
+                enabled: false
             }
         }
-        onScanError: {
-            scanning = false;
-            d.__suppressActivation = false;
-            console.warn("onScanError: " + message);
-        }
-    }
+    ]
 
     Component {
         id: netOp
@@ -85,18 +73,32 @@ ItemPage {
             onRegisterComplete: {
                 if (error === OfonoNetworkOperator.InProgressError) {
                     console.warn("Register failed, already one in progress.");
-                    operatorsChanged()
+                    console.warn("Falling back to default operator.");
+                    sim.netReg.registration();
                 } else if (error !== OfonoNetworkOperator.NoError) {
                     console.warn("Register complete:", errorString);
                     console.warn("Falling back to default operator.");
                     sim.netReg.registration();
-                    operatorsChanged();
                 }
             }
-            onNameChanged: operatorsChanged();
-            onStatusChanged: operatorsChanged();
         }
     }
+
+    Connections {
+        target: sim.netReg
+        onScanFinished: {
+            if (scanning) {
+                scanning = false;
+            }
+        }
+        onScanError: {
+            scanning = false;
+            console.warn("onScanError: " + message);
+        }
+        onModeChanged: chooseCarrier.selectedIndex = (mode === "auto") ? 0 : -1
+    }
+
+    Component.onCompleted: sim.netReg.scan()
 
     Flickable {
         id: scrollWidget
@@ -105,25 +107,29 @@ ItemPage {
         contentHeight: parent.height
         boundsBehavior: (contentHeight > parent.height) ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
 
-        ColumnLayout {
+        Column {
             anchors {
                 left: parent.left
                 right: parent.right
             }
+            move: Transition {
+                 NumberAnimation {
+                     properties: "y"
+                     duration: UbuntuAnimation.SnapDuration
+                 }
+             }
             spacing: 0
-            Button {
-                text: "FOOBAR"
-                onClicked: {
-                    console.warn(sim.netReg.mode);
-                }
+
+            Label{
+                text: "state:" + root.state + " status: " + sim.netReg.status
             }
+
             ListItem.ItemSelector {
                 id: chooseCarrier
                 objectName: "mode"
                 expanded: true
-                enabled: sim.netReg.mode !== "auto-only" && !scanning
-                // work around unfortunate ui
-                opacity: enabled ? 1.0 : 0.5
+                enabled: !scanning
+                opacity: enabled ? 1 : 0.5
                 text: i18n.tr("Choose carrier:")
                 model: [i18n.tr("Automatically")]
                 delegate: OptionSelectorDelegate { showDivider: false }
@@ -131,74 +137,53 @@ ItemPage {
                 onDelegateClicked: sim.netReg.registration()
             }
 
-            ListItem.Standard {
+
+            LocalComponents.OperatorLabel {
                 id: curOpLabel
-                enabled: false
-                text: i18n.tr("None")
+                operatorName: sim.netReg.name
             }
 
             ListItem.ItemSelector {
-                id: carrierSelector
-                objectName: "carriers"
-                visible: !root.scanning
+                id: allOperators
                 expanded: true
+                enabled: !scanning
+                opacity: enabled ? 1 : 0.5
+                visible: false
+                model: CHelper.getOps(sim.netReg.networkOperators)
                 delegate: OptionSelectorDelegate {
                     objectName: "carrier"
-                    enabled: carrierSelector.enabled
                     showDivider: false
                     text: modelData.name
                 }
-                onDelegateClicked: {
-                    if (selectedIndex === -1 || d.__suppressActivation) {
-                        console.warn('Ignored user request');
-                        return;
-                    }
-                    if (index === selectedIndex) {
-                        return;
-                    }
-                    CHelper.setCurrentOp(model[index].operatorPath);
+                onDelegateClicked: CHelper.setOp(model[index].operatorPath)
+                selectedIndex: {
+                    var curop = sim.netReg.currentOperatorPath;
+                    return model.indexOf(CHelper.getOrCreateOpQml(curop));
                 }
+            }
 
-                Rectangle {
-                    id: searchingOverlay
-                    anchors {
-                        top: parent.top
-                        left: parent.left
-                        right: parent.right
-                    }
-                    opacity: root.scanning ? 1 : 0
-                    height: chooseCarrier.itemHeight - units.gu(0.15)
-                    color: Theme.palette.normal.background
-                    z: 2
-                    ActivityIndicator {
-                        id: act
-                        anchors {
-                            left: parent.left
-                            margins: units.gu(2)
-                            verticalCenter: parent.verticalCenter
-                        }
-                        running: root.scanning
-                    }
-
-                    Label {
-                        anchors {
-                            left: act.right
-                            right: parent.right
-                            top: parent.top
-                            bottom: parent.bottom
-                            leftMargin: units.gu(1)
-                        }
-                        height: parent.height
-                        text: i18n.tr("Searching for carriers…")
-                        verticalAlignment: Text.AlignVCenter
-                    }
-
-                    Behavior on opacity {
-                        NumberAnimation {
-                            duration: UbuntuAnimation.SnapDuration
-                        }
-                    }
+            ListItem.ItemSelector {
+                id: otherOperators
+                expanded: true
+                visible: false
+                enabled: !scanning
+                opacity: enabled ? 1 : 0.5
+                model: CHelper.getOps(sim.netReg.networkOperators,
+                    [sim.netReg.currentOperatorPath])
+                delegate: OptionSelectorDelegate {
+                    objectName: "carrier"
+                    showDivider: false
+                    text: modelData.name
                 }
+                onDelegateClicked: CHelper.setOp(model[index].operatorPath)
+                selectedIndex: -1
+            }
+
+            LocalComponents.ListItemIndicator {
+                id: scanIndicator
+                running: scanning
+                text: i18n.tr("Searching for carriers…")
+                height: scanning ? chooseCarrier.itemHeight : 0
             }
         }
     }

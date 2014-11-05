@@ -1,8 +1,10 @@
 set(QML_SOURCES
     DataMultiSim.qml
     DefaultSim.qml
+    ListItemIndicator.qml
     MultiSim.qml
     NoSim.qml
+    OperatorLabel.qml
     RadioSingleSim.qml
     Sim.qml
     SimEditor.qml

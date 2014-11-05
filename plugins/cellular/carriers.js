@@ -1,15 +1,5 @@
+// Map of path to OfonoNetworkOperator objects
 var _pathToQml = {}
-var _allowedOps = []
-
-/*
-Returns an array of OfonoNetworkOperator objects,
-that has a non-forbidden status.
-
-@returns Array of OfonoNetworkOperator elements
-*/
-function getAllowedOps () {
-    return _allowedOps;
-}
 
 /*
 Given an array of paths, it will create a OfonoNetworkOperator
@@ -17,112 +7,29 @@ QML object for each unseen operator.
 
 It will also delete any QML objects that are not in operators.
 
-@operator Array of String
-@returns undefined
+@param paths Array of operator paths
+@return undefined
 */
-function updateOperatorQML (operators) {
-    d.__suppressActivation = true;
-    _garbageCollect(operators);
-    _createQml(operators);
-    _allowedOps = _getAllowedOps();
-    d.__suppressActivation = false;
+function updateOperatorQML (paths) {
+    _garbageCollect(paths);
+    _createQml(paths);
 }
 
-function _getAllowedOps () {
-    var allowed = [];
-    var path;
-
-    for (path in _pathToQml) {
-        if (_pathToQml.hasOwnProperty(path)) {
-            if (_pathToQml[path].status !== "forbidden") {
-                allowed.push(_pathToQml[path]);
-            }
-        }
-    }
-    // Sort all modems on modem network code before returning them
-    return allowed.sort(function (a, b) {
-        if (a.mnc < b.mnc) return -1;
-        if (a.mnc > b.mnc) return 1;
-        return 0;
-    });
-}
-
-/*
-Returns the index of path in our list of
-allowed operators.
-
-Returns a negative number if no current operator was found.
-
-@path String a operator path
-@returns Number index of the operator
-*/
-function getOpIndex (path) {
-    console.warn('getOpIndex arg', path);
-    if (!_pathToQml.hasOwnProperty(path)) {
-        console.warn('getOpIndex ret', -1);
-        return -1;
-    }
-    console.warn('getOpIndex ret (late)', _allowedOps.indexOf(_pathToQml[path]));
-    return _allowedOps.indexOf(_pathToQml[path]);
-}
-
-
-/*
-Returns the current OfonoNetworkOperator qml object
-
-Returns null if there is no current operator
-
-@returns OfonoNetworkOperator or null
-*/
-function getCurrentOp () {
-    var path = sim.netReg.currentOperatorPath;
-    if (!_pathToQml.hasOwnProperty(path)) {
-        console.warn('getCurrentOp', null);
-        return null;
-    }
-    console.warn('getCurrentOp', _pathToQml[path]);
-    return _pathToQml[path];
-}
-
-/*
-Sets the current operator. It does this by calling
-registerOperator on the operator QML object.
-
-@path String operator path of the new current operator
-@returns undefined
-*/
-function setCurrentOp (path) {
-    console.warn('Registering', _pathToQml[path].name);
-    _pathToQml[path].registerOperator();
-    root.operatorsChanged('setCurrentOp');
-}
-
-/* Call this to check and remove QML cache elements that
-do not appear in operator list, newOps. */
-function _garbageCollect (newOps) {
+/* Check and remove QML cache elements that
+do not appear in operator list, paths. */
+function _garbageCollect (paths) {
     var path;
     for (path in _pathToQml) {
         if (_pathToQml.hasOwnProperty(path)) {
-            /* Found path that was not in the new operator list,
-            let's remove it */
-            if (newOps.indexOf(path) === -1) {
+            if (paths.indexOf(path) === -1) {
+                /* Found path that was not in the new operator list,
+                let's remove it */
                 console.warn('Destroyed path for path', _pathToQml[path].operatorPath, _pathToQml[path].name);
                 _pathToQml[path].destroy();
                 delete _pathToQml[path];
             }
         }
     }
-}
-
-function getOpName (path) {
-    console.warn('getOpName', path);
-    var name = "";
-    if (_pathToQml.hasOwnProperty(path)) {
-        name = _pathToQml[path].name;
-    } else {
-        throw new TypeError('OperatorPath ' + path + ' not in cache');
-    }
-    return name;
 }
 
 /* Creates QML objects for each path in paths. */
@@ -137,15 +44,71 @@ function _createQml (paths) {
     });
 }
 
-function operatorsChanged () {
-    console.warn('operatorsChanged');
-    var curOp = sim.netReg.currentOperatorPath;
-    CHelper.updateOperatorQML(sim.netReg.networkOperators);
-    carrierSelector.model = CHelper.getAllowedOps();
-    if (curOp) {
-        carrierSelector.selectedIndex = CHelper.getOpIndex(curOp);
+/*
+Takes a list of paths and returns
+OfonoNetworkOperator objects for each path.
+
+@param paths Array of operator paths
+@param ignore Array of operator paths to ignore
+@return Array of OfonoNetworkOperators
+*/
+function getOps (paths, ignore) {
+    var ret = [];
+    ignore = ignore || [];
+    paths.forEach(function (op) {
+        var ofonoOp = getOrCreateOpQml(op);
+        if (ignore.indexOf(op) >= 0) {
+            console.warn('ignored', ofonoOp.name);
+            return;
+        } else if (ofonoOp.status === "forbidden") {
+            console.warn('forbade', ofonoOp.name);
+            return;
+        }
+        ret.push(ofonoOp);
+    });
+    return ret;
+}
+
+/*
+Safe to be called with an empty path
+@param path String an operator path
+@return OfonoNetworkOperator or null if no QML exist for path
+*/
+function getOp (path) {
+    if (_pathToQml.hasOwnProperty(path)) {
+        return _pathToQml[path];
+    } else {
+        return null;
     }
-    if (curOp) {
-        curOpLabel.text = CHelper.getOpName(curOp);
+}
+
+/*
+Returns an operator. Before returning it sees
+if we have created QML for this operator path
+before. QML is created if not.
+
+Since the OfonoNetworkOperator component is local
+we can guarantee that it will be returned.
+
+@param path String an operator path
+@return OfonoNetworkOperator
+*/
+function getOrCreateOpQml (path) {
+    if (getOp(path)) {
+        return getOp(path);
+    } else {
+        _createQml([path]);
+        return getOp(path);
     }
+}
+
+/*
+Registers operator on path
+
+@param path String operator to register
+@return undefined
+*/
+function setOp (path) {
+    var op = getOrCreateOpQml(path);
+    op.registerOperator();
 }
