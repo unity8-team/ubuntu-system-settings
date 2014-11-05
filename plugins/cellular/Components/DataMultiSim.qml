@@ -68,14 +68,16 @@ Column {
         control: Switch {
             id: dataRoamingControl
             objectName: "roaming"
-            onClicked: poweredSim.connMan.roamingAllowed = checked
+
+            property bool serverChecked: poweredSim && poweredSim.connMan.roamingAllowed
+            onServerCheckedChanged: checked = serverChecked
+            Component.onCompleted: checked = serverChecked
+            onTriggered: {
+                if (poweredSim) {
+                    poweredSim.connMan.roamingAllowed = checked;
+                }
+            }
         }
         showDivider: false
-    }
-
-    Binding {
-        target: dataRoamingControl
-        property: "checked"
-        value: poweredSim && poweredSim.connMan.roamingAllowed
     }
 }

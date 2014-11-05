@@ -143,9 +143,10 @@ ItemPage {
                 text: i18n.tr("Spell checking")
 
                 control: Switch {
-                    checked: settings.spellChecking
-
-                    onClicked: settings.spellChecking = checked
+                    property bool serverChecked: settings.spellChecking
+                    onServerCheckedChanged: checked = serverChecked
+                    Component.onCompleted: checked = serverChecked
+                    onTriggered: settings.spellChecking = checked
                 }
             }
 
@@ -153,9 +154,10 @@ ItemPage {
                 text: i18n.tr("Auto correction")
 
                 control: Switch {
-                    checked: settings.autoCompletion
-
-                    onClicked: settings.autoCompletion = checked
+                    property bool serverChecked: settings.autoCompletion
+                    onServerCheckedChanged: checked = serverChecked
+                    Component.onCompleted: checked = serverChecked
+                    onTriggered: settings.autoCompletion = checked
                 }
             }
 
@@ -163,9 +165,10 @@ ItemPage {
                 text: i18n.tr("Word suggestions")
 
                 control: Switch {
-                    checked: settings.predictiveText
-
-                    onClicked: settings.predictiveText = checked
+                    property bool serverChecked: settings.predictiveText
+                    onServerCheckedChanged: checked = serverChecked
+                    Component.onCompleted: checked = serverChecked
+                    onTriggered: settings.predictiveText = checked
                 }
             }
 
@@ -176,9 +179,10 @@ ItemPage {
                 text: i18n.tr("Auto capitalization")
 
                 control: Switch {
-                    checked: settings.autoCapitalization
-
-                    onClicked: settings.autoCapitalization = checked
+                    property bool serverChecked: settings.autoCapitalization
+                    onServerCheckedChanged: checked = serverChecked
+                    Component.onCompleted: checked = serverChecked
+                    onTriggered: settings.autoCapitalization = checked
                 }
             }
 
@@ -193,9 +197,10 @@ ItemPage {
                 text: i18n.tr("Auto punctuation")
 
                 control: Switch {
-                    checked: settings.doubleSpaceFullStop
-
-                    onClicked: settings.doubleSpaceFullStop = checked
+                    property bool serverChecked: settings.doubleSpaceFullStop
+                    onServerCheckedChanged: checked = serverChecked
+                    Component.onCompleted: checked = serverChecked
+                    onTriggered: settings.doubleSpaceFullStop = checked
                 }
             }
 
@@ -210,9 +215,10 @@ ItemPage {
                 text: i18n.tr("Keyboard sound")
 
                 control: Switch {
-                    checked: settings.keyPressFeedback
-
-                    onClicked: settings.keyPressFeedback = checked
+                    property bool serverChecked: settings.keyPressFeedback
+                    onServerCheckedChanged: checked = serverChecked
+                    Component.onCompleted: checked = serverChecked
+                    onTriggered: settings.keyPressFeedback = checked
                 }
             }
 
@@ -220,9 +226,10 @@ ItemPage {
                 text: i18n.tr("Keyboard vibration")
 
                 control: Switch {
-                    checked: settings.keyPressHapticFeedback
-
-                    onClicked: settings.keyPressHapticFeedback = checked
+                    property bool serverChecked: settings.keyPressHapticFeedback
+                    onServerCheckedChanged: checked = serverChecked
+                    Component.onCompleted: checked = serverChecked
+                    onTriggered: settings.keyPressHapticFeedback = checked
                 }
             }
         }
