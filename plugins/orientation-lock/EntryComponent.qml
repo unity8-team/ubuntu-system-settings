@@ -33,10 +33,12 @@ ListItem.Standard {
     control: Switch {
         id: control
         objectName: "orientationLockSwitch"
-        checked: systemSettings.rotationLock
-        onClicked: {
-            systemSettings.rotationLock = checked
-        }
+
+        property bool serverChecked: systemSettings.rotationLock
+        onServerCheckedChanged: checked = serverChecked
+        Component.onCompleted: checked = serverChecked
+        onTriggered: systemSettings.rotationLock = checked
+
         GSettings {
             id: systemSettings
             schema.id: "com.ubuntu.touch.system"
