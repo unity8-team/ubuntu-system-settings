@@ -33,7 +33,6 @@ Column {
         control: Switch {
             id: dataControl
             objectName: 'data'
-
             property bool serverChecked: sim.connMan.powered
             onServerCheckedChanged: checked = serverChecked
             Component.onCompleted: checked = serverChecked
@@ -49,7 +48,6 @@ Column {
         control: Switch {
             id: dataRoamingControl
             objectName: "roaming"
-
             property bool serverChecked: sim.connMan.roamingAllowed
             onServerCheckedChanged: checked = serverChecked
             Component.onCompleted: checked = serverChecked
