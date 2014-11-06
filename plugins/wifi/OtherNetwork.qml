@@ -151,6 +151,7 @@ Component {
             id : networkname
             objectName: "networkname"
             inputMethodHints: Qt.ImhNoPredictiveText
+            Component.onCompleted: forceActiveFocus()
         }
 
         Label {
