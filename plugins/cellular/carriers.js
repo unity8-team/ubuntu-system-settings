@@ -84,7 +84,7 @@ if we have created QML for this operator path
 before. QML is created if not.
 
 Since the OfonoNetworkOperator component is local
-we can guarantee that it will be returned.
+we can guarantee that one will be returned.
 
 @param path String an operator path
 @return OfonoNetworkOperator
