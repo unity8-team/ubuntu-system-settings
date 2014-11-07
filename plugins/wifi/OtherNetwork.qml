@@ -66,7 +66,7 @@ Component {
 
         Component.onCompleted: {
             dialogVisualsHeight =
-               __foreground.height - getVisibleChildrenHeight();
+                __foreground.height - getVisibleChildrenHeight();
         }
 
         Binding {
