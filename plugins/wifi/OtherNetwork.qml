@@ -190,8 +190,7 @@ Component {
             visible: securityList.selectedIndex !== 0
             echoMode: passwordVisibleSwitch.checked ?
                 TextInput.Normal : TextInput.Password
-            inputMethodHints: passwordVisibleSwitch.checked ?
-                Qt.ImhHiddenText : Qt.ImhNoPredictiveText;
+            inputMethodHints: Qt.ImhNoPredictiveText
             onAccepted: {
                 connectAction.trigger();
             }
@@ -205,6 +204,7 @@ Component {
 
             CheckBox {
                 id: passwordVisibleSwitch
+                activeFocusOnPress: false
             }
 
             Label {
