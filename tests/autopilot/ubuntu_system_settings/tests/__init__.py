@@ -75,7 +75,9 @@ class UbuntuSystemSettingsUpowerTestCase(UbuntuSystemSettingsTestCase,
         cls.dbus_con = cls.get_dbus(True)
         # Add a mock Upower environment so we get consistent results
         (cls.p_mock, cls.obj_upower) = cls.spawn_server_template(
-            'upower', {'OnBattery': True, 'DaemonVersion': '0.99'}, stdout=subprocess.PIPE)
+            'upower',
+            {'OnBattery': True, 'DaemonVersion': '0.99'},
+            stdout=subprocess.PIPE)
         cls.dbusmock = dbus.Interface(cls.obj_upower, dbusmock.MOCK_IFACE)
 
     def setUp(self, panel=None):
