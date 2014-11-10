@@ -184,8 +184,8 @@ def main():
     json.dump(obj, open(f2, "w"))
 
 if __name__ == '__main__':
-    logfile = os.path.join(xdg_cache_home, "upstart",
-                           "software_updates_helper.log")
+    logdir = save_cache_path("software_updates_helper")
+    logfile = os.path.join(logdir, "software_updates_helper.log")
     rothandler = logging.handlers.RotatingFileHandler(logfile, backupCount=10)
     rothandler.doRollover()
     logging.basicConfig(
