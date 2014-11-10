@@ -23,7 +23,7 @@ import time
 import gettext
 import logging
 import logging.handlers
-from xdg.BaseDirectory import xdg_cache_home
+from xdg.BaseDirectory import save_cache_path
 
 _ = gettext.translation('ubuntu-system-settings', fallback=True).gettext
 
@@ -184,10 +184,10 @@ def main():
     json.dump(obj, open(f2, "w"))
 
 if __name__ == '__main__':
-    logdir = save_cache_path("software_updates_helper")
+    logdir = save_cache_path("software-center")
     logfile = os.path.join(logdir, "software_updates_helper.log")
-    rothandler = logging.handlers.RotatingFileHandler(logfile, backupCount=10)
-    rothandler.doRollover()
+    rothandler = logging.handlers.TimedRotatingFileHandler(logfile, when="D",
+                                                           backupCount=10)
     logging.basicConfig(
         format="%(asctime)s %(levelname)8s [%(process)04x] %(message)s",
         datefmt="%Y-%m-%dT%H:%M:%S",
