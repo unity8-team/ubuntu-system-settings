@@ -27,7 +27,7 @@ ItemPage {
     title: i18n.tr("Carrier & APN")
     objectName: "chooseCarriersPage"
 
-    property var sims
+    property var sim
 
     Flickable {
         anchors.fill: parent
@@ -48,7 +48,7 @@ ItemPage {
                 onClicked: {
                     pageStack.push(Qt.resolvedUrl("PageChooseCarrier.qml"), {
                         sim: sim,
-                        title: sim.title
+                        title: i18n.tr("Carrier")
                     })
                 }
             }

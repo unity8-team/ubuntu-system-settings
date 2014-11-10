@@ -89,23 +89,12 @@ Column {
     ListItem.Divider {}
 
     ListItem.SingleValue {
-        text: i18n.tr("Carrier");
+        text: i18n.tr("Carrier & APN");
         id: chooseCarrier
         objectName: "carrier"
         progression: enabled
-        value: sim.netReg.name || i18n.tr("N/A")
-        enabled: sim.netReg.status !== ""
-        onClicked: {
-            pageStack.push(Qt.resolvedUrl("../PageChooseCarrier.qml"), {
-                sim: sim,
-                title: i18n.tr("Carrier")
-            })
-        }
-    }
-
-    ListItem.Standard {
-        text: i18n.tr("APN")
-        progression: true
-        visible: showAllUI
+        onClicked: pageStack.push(Qt.resolvedUrl("../PageCarrierAndApn.qml"), {
+            sim: sim
+        })
     }
 }
