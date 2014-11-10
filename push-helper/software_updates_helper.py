@@ -174,11 +174,11 @@ def main():
         logging.debug("Broadcast; forking.")
         if os.fork() == 0:
             os.setsid()
-            if os.fork() == 0:
-                logging.debug("Forked.")
-                s = SystemImage()
-                s.setup()
-                s.run()
+            os.closerange(0, 3)
+            logging.debug("Forked.")
+            s = SystemImage()
+            s.setup()
+            s.run()
             return
 
     json.dump(obj, open(f2, "w"))
