@@ -165,9 +165,9 @@ def main():
                 },
             },
         }
-    elif arg == "testing.":
+    elif arg == "testing":
         # for tests
-        logging.debug("testing")
+        logging.debug("Testing.")
         obj = {"testing": True}
     else:
         # assume it's a broadcast
