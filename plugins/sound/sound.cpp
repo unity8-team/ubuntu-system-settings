@@ -59,6 +59,8 @@ void Sound::slotChanged(QString interface,
         Q_EMIT incomingCallVibrateSilentModeChanged();
     } else if (property == "IncomingMessageVibrateSilentMode") {
         Q_EMIT incomingMessageVibrateSilentModeChanged();
+    } else if (property == "DialpadSoundsEnabled") {
+        Q_EMIT dialpadSoundsEnabledChanged();
     }
 }
 
@@ -72,6 +74,7 @@ void Sound::slotNameOwnerChanged()
     Q_EMIT incomingMessageVibrateChanged();
     Q_EMIT incomingCallVibrateSilentModeChanged();
     Q_EMIT incomingMessageVibrateSilentModeChanged();
+    Q_EMIT dialpadSoundsEnabledChanged();
 }
 
 QString Sound::getIncomingCallSound()

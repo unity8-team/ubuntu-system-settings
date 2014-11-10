@@ -73,8 +73,10 @@ Column {
         enabled: sim.connMan.powered
         control: Switch {
             id: dataRoamingControl
-            checked: sim.connMan.roamingAllowed
-            onClicked: sim.connMan.roamingAllowed = checked
+               property bool serverChecked: sim.connMan.roamingAllowed
+               onServerCheckedChanged: checked = serverChecked
+               Component.onCompleted: checked = serverChecked
+               onTriggered: sim.connMan.roamingAllowed = checked
         }
     }
 

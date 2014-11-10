@@ -147,17 +147,11 @@ ItemPage {
                 text: i18n.tr("Bluetooth")
                 control: Switch {
                     id: btSwitch
-                    // Cannot use onCheckedChanged as this triggers a loop
-                    onClicked: bluetoothActionGroup.enabled.activate()
-                    checked: backend.powered
+                    property bool serverChecked: bluetoothActionGroup.enabled.state
+                    onServerCheckedChanged: checked = serverChecked
+                    Component.onCompleted: checked = serverChecked
+                    onTriggered: bluetoothActionGroup.enabled.activate()
                 }
-                Component.onCompleted: clicked.connect(btSwitch.clicked)
-            }
-
-            Binding {
-                target: btSwitch
-                property: "checked"
-                value: bluetoothActionGroup.enabled.state
             }
 
             // Discoverability
@@ -396,15 +390,15 @@ ItemPage {
                     id: trustedCheck
                     text: i18n.tr("Connect automatically when detected:")
                     control: CheckBox {
-                        onClicked: {
+                        property bool serverChecked: backend.selectedDevice ? backend.selectedDevice.trusted : false
+                        onServerCheckedChanged: checked = serverChecked
+                        Component.onCompleted: checked = serverChecked
+                        onTriggered: {
                             if (backend.selectedDevice) {
-                                backend.selectedDevice.trusted = !backend.selectedDevice.trusted
+                                backend.selectedDevice.trusted = checked;
                             }
                         }
-                        checked: backend.selectedDevice ? backend.selectedDevice.trusted : false
                     }
-                    Component.onCompleted:
-                        clicked.connect(trustedCheck.clicked)
                 }
                 ListItem.SingleControl {
                     control: Button {
