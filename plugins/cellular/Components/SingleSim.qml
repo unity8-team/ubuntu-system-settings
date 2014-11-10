@@ -33,8 +33,10 @@ Column {
         control: Switch {
             id: dataControl
             objectName: 'data'
-            checked: sim.connMan.powered
-            onClicked: sim.connMan.powered = checked
+            property bool serverChecked: sim.connMan.powered
+            onServerCheckedChanged: checked = serverChecked
+            Component.onCompleted: checked = serverChecked
+            onTriggered: sim.connMan.powered = checked
         }
     }
 
@@ -46,8 +48,10 @@ Column {
         control: Switch {
             id: dataRoamingControl
             objectName: "roaming"
-            checked: sim.connMan.roamingAllowed
-            onClicked: sim.connMan.roamingAllowed = checked
+            property bool serverChecked: sim.connMan.roamingAllowed
+            onServerCheckedChanged: checked = serverChecked
+            Component.onCompleted: checked = serverChecked
+            onTriggered: sim.connMan.roamingAllowed = checked
         }
     }
 
@@ -72,17 +76,17 @@ Column {
         visible: showAllUI
     }
 
-    ListItem.Divider {
+    ListItem.Divider {
         visible: radio.selector.model.length
     }
 
     RadioSingleSim {
         id: radio
-        anchors { left: parent.left; right: parent.right }
+        anchors { left: parent.left; right: parent.right }
         visible: radio.selector.model.length
     }
 
-    ListItem.Divider {}
+    ListItem.Divider {}
 
     ListItem.SingleValue {
         text: i18n.tr("Carrier");

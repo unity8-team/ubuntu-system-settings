@@ -1,3 +1,34 @@
+ubuntu-system-settings (0.3+15.04.20141105.1-0ubuntu1) vivid; urgency=low
+
+  [ Ubuntu daily release ]
+  * New rebuild forced
+
+  [ Kevin Gunn ]
+  * fix white space issues
+
+  [ Nick Dedekind ]
+  * Fixed switches & check-boxes going out of sync with backends. (LP:
+    #1336715)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 05 Nov 2014 20:32:26 +0000
+
+ubuntu-system-settings (0.3+15.04.20141105-0ubuntu1) vivid; urgency=low
+
+  [ Ken VanDine ]
+  * [orientation] String change to Rotation Lock (LP: #1388888)
+
+  [ Sebastien Bacher ]
+  * [notifications] update strings to match the design (LP: #1377286)
+
+  [ Mathieu Trudel-Lapierre ]
+  * [bluetooth] make the bluetooth agent a notifyable property. (LP:
+    #1346483)
+
+  [ Albert Astals ]
+  * Use AbstractButton for haptic feedback (LP: #1389630)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 05 Nov 2014 14:51:49 +0000
+
 ubuntu-system-settings (0.3+15.04.20141103-0ubuntu1) vivid; urgency=low
 
   [ Ken VanDine ]

@@ -187,28 +187,22 @@ ItemPage {
             ListItem.Standard {
                 text: i18n.tr("Stats on welcome screen")
                 control: Switch {
-                    id: welcomeStatsSwitch
-                    checked: securityPrivacy.statsWelcomeScreen
+                    property bool serverChecked: securityPrivacy.statsWelcomeScreen
+                    onServerCheckedChanged: checked = serverChecked
+                    Component.onCompleted: checked = serverChecked
+                    onTriggered: securityPrivacy.statsWelcomeScreen = checked
                 }
-            }
-            Binding {
-                target: securityPrivacy
-                property: "statsWelcomeScreen"
-                value: welcomeStatsSwitch.checked
             }
 
             ListItem.Standard {
                 text: i18n.tr("Messages on welcome screen")
                 control: Switch {
-                    id: welcomeMessagesSwitch
-                    checked: securityPrivacy.messagesWelcomeScreen
+                    property bool serverChecked: securityPrivacy.messagesWelcomeScreen
+                    onServerCheckedChanged: checked = serverChecked
+                    Component.onCompleted: checked = serverChecked
+                    onTriggered: securityPrivacy.messagesWelcomeScreen = checked
                 }
                 visible: showAllUI
-            }
-            Binding {
-                target: securityPrivacy
-                property: "messagesWelcomeScreen"
-                value: welcomeMessagesSwitch.checked
             }
 
             ListItem.SingleValue {

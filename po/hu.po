@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-10-16 20:04-0600\n"
-"PO-Revision-Date: 2014-11-01 09:41+0000\n"
+"PO-Revision-Date: 2014-11-08 09:25+0000\n"
 "Last-Translator: Richard Somlói <ricsipontaz@gmail.com>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-11-02 06:14+0000\n"
-"X-Generator: Launchpad (build 17211)\n"
+"X-Launchpad-Export-Date: 2014-11-09 06:53+0000\n"
+"X-Generator: Launchpad (build 17231)\n"
 
 #: ubuntu-system-settings.desktop.in.in.h:1 ../src/qml/MainWindow.qml:112
 msgid "System Settings"
@@ -450,7 +450,7 @@ msgstr ""
 
 #: ../plugins/reset//EraseEverything.qml:44
 msgid "Erase & Reset Everything"
-msgstr "Minden visszaállítása és törlése"
+msgstr "Visszaállítás és törlés"
 
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
 #: ../plugins/battery//PageComponent.qml:34
@@ -1108,12 +1108,12 @@ msgid ""
 "restarting the phone or swapping the SIM."
 msgstr ""
 "Ha a SIM kód beállításra kerül, utána minden SIM csere vagy újraindítás után "
-"szükséges lesz a megadása a mobilszolgáltatások eléréséhez."
+"szükséges lesz a megadása, a mobilszolgáltatások eléréséhez."
 
 #: ../plugins/security-privacy//SimPin.qml:361
 msgid "Entering an incorrect PIN repeatedly may lock the SIM permanently."
 msgstr ""
-"Többszöri helytelen PIN kód megadás a SIM végleges zárolásához vezethet."
+"A PIN kód többszöri helytelen megadása a SIM végleges zárolásához vezethet."
 
 #: ../plugins/security-privacy//PhoneLocking.qml:31
 msgid "Phone locking"
@@ -2163,8 +2163,8 @@ msgstr ""
 msgid ""
 "Allow apps to use your mobile and Wi-Fi networks to determine your location."
 msgstr ""
-"A mobilinternet és Wi-Fi használatának engedélyezése az alkalmazások számára "
-"az Ön pontos helyzetének megállapításához."
+"A mobilinternet és a Wi-Fi használatának engedélyezése az alkalmazások "
+"számára, az Ön pontos helyzetének megállapításához."
 
 #. TRANSLATORS: HERE is a trademark for Nokia's location service, you probably shouldn't translate it
 #: ../wizard/qml/Pages//50-location.qml:74
