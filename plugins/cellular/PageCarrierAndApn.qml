@@ -24,7 +24,7 @@ import Ubuntu.Components.ListItems 0.1 as ListItem
 
 ItemPage {
     id: root
-    title: i18n.tr("Carriers")
+    title: i18n.tr("Carrier & APN")
     objectName: "chooseCarriersPage"
 
     property var sims
@@ -40,29 +40,26 @@ ItemPage {
             anchors.right: parent.right
 
             ListItem.SingleValue {
-                text: sims[0].title
-                objectName: sims[0].path + "_carriers"
-                value: sims[0].netReg.name ? sims[0].netReg.name : i18n.tr("N/A")
-                enabled: sims[0].netReg.status !== ""
+                text: i18n.tr("Carrier")
+                objectName: sim.path + "_carriers"
+                value: sim.netReg.name ? sim.netReg.name : i18n.tr("N/A")
+                enabled: sim.netReg.status !== ""
                 progression: enabled
                 onClicked: {
                     pageStack.push(Qt.resolvedUrl("PageChooseCarrier.qml"), {
-                        sim: sims[0],
-                        title: sims[0].title
+                        sim: sim,
+                        title: sim.title
                     })
                 }
             }
 
-            ListItem.SingleValue {
-                text: sims[1].title
-                objectName: sims[1].path + "_carriers"
-                value: sims[1].netReg.name ? sims[1].netReg.name : i18n.tr("N/A")
-                enabled: sims[1].netReg.status !== ""
-                progression: enabled
+            ListItem.Standard {
+                text: i18n.tr("APN")
+                progression: true
+                enabled: sim.connMan.powered
                 onClicked: {
-                    pageStack.push(Qt.resolvedUrl("PageChooseCarrier.qml"), {
-                        sim: sims[1],
-                        title: sims[1].title
+                    pageStack.push(Qt.resolvedUrl("PageChooseApn.qml"), {
+                        sim: sim
                     })
                 }
             }

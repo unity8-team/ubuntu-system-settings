@@ -68,13 +68,13 @@ Column {
     ListItem.Divider {}
 
     ListItem.SingleValue {
-        text: i18n.tr("Carriers")
+        text: i18n.tr("Carriers & APNs")
         id: chooseCarrier
         objectName: "carriers"
         progression: enabled
         showDivider: false
         onClicked: {
-            pageStack.push(Qt.resolvedUrl("../PageChooseCarriers.qml"), {
+            pageStack.push(Qt.resolvedUrl("../PageCarriersAndApns.qml"), {
                 sims: sims
             });
         }

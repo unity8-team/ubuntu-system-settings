@@ -44,10 +44,6 @@ ItemPage {
                 visible: true
                 selectedIndex: -1
             }
-            PropertyChanges {
-                target: curOpLabel
-                height: chooseCarrier.itemHeight
-            }
         },
         State {
             name: "manual"
@@ -122,6 +118,7 @@ ItemPage {
         boundsBehavior: (contentHeight > parent.height) ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
 
         Column {
+            id: col
             anchors {
                 left: parent.left
                 right: parent.right
@@ -142,15 +139,36 @@ ItemPage {
                 opacity: enabled ? 1 : 0.5
                 text: i18n.tr("Choose carrier:")
                 model: [i18n.tr("Automatically")]
-                delegate: OptionSelectorDelegate { showDivider: false }
+                delegate: OptionSelectorDelegate {
+                    text: {
+                        if (sim.netReg.mode === "auto") {
+                            return sim.netReg.name ?
+                                modelData + " [ " + sim.netReg.name + " ]" :
+                                    modelData
+                        } else {
+                            return modelData;
+                        }
+                    }
+                    showDivider: false
+                }
                 selectedIndex: sim.netReg.mode === "auto" ? 0 : -1
                 onDelegateClicked: sim.netReg.registration()
-            }
 
-
-            LocalComponents.OperatorLabel {
-                id: curOpLabel
-                operatorName: sim.netReg.name
+                ActivityIndicator {
+                    id: act
+                    anchors {
+                        right: parent.right
+                        top: parent.top
+                        margins: units.gu(1.5)
+                    }
+                    running: true
+                    opacity: scanning ? 1 : 0
+                    Behavior on opacity {
+                        NumberAnimation {
+                            duration: UbuntuAnimation.SnapDuration
+                        }
+                    }
+                }
             }
 
             ListItem.ItemSelector {
@@ -189,13 +207,6 @@ ItemPage {
                 }
                 onDelegateClicked: CHelper.setOp(model[index].operatorPath)
                 selectedIndex: -1
-            }
-
-            LocalComponents.ListItemIndicator {
-                id: scanIndicator
-                running: scanning
-                text: i18n.tr("Searching for carriers…")
-                height: scanning ? chooseCarrier.itemHeight : 0
             }
         }
     }

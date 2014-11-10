@@ -8,7 +8,8 @@ set(QML_SOURCES
     CustomApnEditor.qml
     PageChooseApn.qml
     PageChooseCarrier.qml
-    PageChooseCarriers.qml
+    PageCarrierAndApn.qml
+    PageCarriersAndApns.qml
     PageComponent.qml
     Hotspot.qml
     HotspotSetup.qml
