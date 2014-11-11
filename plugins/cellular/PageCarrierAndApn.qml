@@ -25,7 +25,7 @@ import Ubuntu.Components.ListItems 0.1 as ListItem
 ItemPage {
     id: root
     title: i18n.tr("Carrier & APN")
-    objectName: "chooseCarriersPage"
+    objectName: "carrierApnPage"
 
     property var sim
 
@@ -41,7 +41,7 @@ ItemPage {
 
             ListItem.SingleValue {
                 text: i18n.tr("Carrier")
-                objectName: sim.path + "_carriers"
+                objectName: "carrier"
                 value: sim.netReg.name ? sim.netReg.name : i18n.tr("N/A")
                 enabled: sim.netReg.status !== ""
                 progression: enabled
@@ -55,6 +55,7 @@ ItemPage {
 
             ListItem.Standard {
                 text: i18n.tr("APN")
+                objectName: "apn"
                 progression: true
                 enabled: sim.connMan.powered
                 onClicked: {

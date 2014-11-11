@@ -91,7 +91,7 @@ Column {
     ListItem.SingleValue {
         text: i18n.tr("Carrier & APN");
         id: chooseCarrier
-        objectName: "carrier"
+        objectName: "carrierApnEntry"
         progression: enabled
         onClicked: pageStack.push(Qt.resolvedUrl("../PageCarrierAndApn.qml"), {
             sim: sim

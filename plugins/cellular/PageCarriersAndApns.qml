@@ -25,7 +25,7 @@ import Ubuntu.Components.ListItems 0.1 as ListItem
 ItemPage {
     id: root
     title: i18n.tr("Carriers & APNs")
-    objectName: "chooseCarriersPage"
+    objectName: "carrierApnPage"
 
     property var sims
 
