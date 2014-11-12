@@ -184,7 +184,7 @@ def main():
     json.dump(obj, open(f2, "w"))
 
 if __name__ == '__main__':
-    logdir = save_cache_path("software-center")
+    logdir = save_cache_path("ubuntu-system-settings")
     logfile = os.path.join(logdir, "software_updates_helper.log")
     rothandler = logging.handlers.TimedRotatingFileHandler(logfile, when="D",
                                                            backupCount=10)
