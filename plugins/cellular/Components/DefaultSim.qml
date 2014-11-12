@@ -18,6 +18,7 @@
  *
 */
 import QtQuick 2.0
+import SystemSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 
@@ -31,9 +32,10 @@ Column {
         return [i18n.tr("Ask me each time"), sims[0].title, sims[1].title][index];
     }
 
+    SettingsItemTitle { text: i18n.tr("For outgoing calls, use:") }
+
     ListItem.ItemSelector {
         id: callsDefaultSim
-        text: i18n.tr("For outgoing calls, use:")
         expanded: true
         model: m
         delegate: OptionSelectorDelegate {
@@ -52,9 +54,10 @@ Column {
 
     ListItem.Divider {}
 
+    SettingsItemTitle { text: i18n.tr("For messages, use:") }
+
     ListItem.ItemSelector {
         id: messagesDefaultSim
-        text: i18n.tr("For messages, use:")
         expanded: true
         model: m
         delegate: OptionSelectorDelegate {

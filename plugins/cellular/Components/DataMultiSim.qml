@@ -18,6 +18,7 @@
  *
 */
 import QtQuick 2.0
+import SystemSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 
@@ -33,10 +34,11 @@ Column {
 
     height: childrenRect.height
 
+    SettingsItemTitle { text: i18n.tr("Cellular data:") }
+
     ListItem.ItemSelector {
         id: use
         objectName: "data"
-        text: i18n.tr("Cellular data:")
         expanded: true
         model: {
             // create a model of 'off' and all sim paths
