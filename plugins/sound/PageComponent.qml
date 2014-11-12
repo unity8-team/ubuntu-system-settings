@@ -72,13 +72,9 @@ ItemPage {
                     onCheckedChanged: soundActionGroup.silentMode.activate()
                 }
                 text: i18n.tr("Silent Mode")
-                showDivider: false
             }
 
-            ListItem.Divider {
-            }
-
-            ListItem.Header {
+            ListItem.Standard {
                 text: i18n.tr("Ringer:")
             }
 
@@ -117,13 +113,9 @@ ItemPage {
                 id: highVolumeWarning
                 visible: soundActionGroup.highVolume.state == true
                 text: i18n.tr("High volume can damage your hearing.")
-                showDivider: false
             }
 
-            ListItem.Divider {
-            }
-
-            ListItem.Header {
+            ListItem.Standard {
                 text: i18n.tr("Phone calls:")
             }
 
@@ -166,13 +158,9 @@ ItemPage {
                     onCheckedChanged: backendInfo.dialpadSoundsEnabled = checked
                 }
                 text: i18n.tr("Dialpad sounds")
-                showDivider: false
             }
 
-            ListItem.Divider {
-            }
-
-            ListItem.Header {
+            ListItem.Standard {
                 text: i18n.tr("Messages:")
             }
 
@@ -205,13 +193,9 @@ ItemPage {
                     onCheckedChanged: backendInfo.incomingMessageVibrateSilentMode = checked
                 }
                 text: i18n.tr("Vibrate in Silent Mode")
-                showDivider: false
             }
 
-            ListItem.Divider {
-            }
-
-            ListItem.Header {
+            ListItem.Standard {
                 text: i18n.tr("Other sounds:")
             }
 
