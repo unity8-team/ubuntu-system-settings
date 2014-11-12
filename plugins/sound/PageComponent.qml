@@ -98,7 +98,7 @@ ItemPage {
                 property: "value"
                 value: soundActionGroup.volume.state
             }
-
+ 
             Menus.SliderMenu {
                 id: sliderMenu
                 objectName: "sliderMenu"
@@ -106,7 +106,7 @@ ItemPage {
                 minimumValue: 0.0
                 maximumValue: 1.0
                 minIcon: "image://theme/audio-volume-low-zero"
-                maxIcon: "image://theme/audio-volume-high"
+                maxIcon: "image://theme/audio-volume-high" 
                 onUpdated: soundActionGroup.volume.updateState(value);
             }
 
@@ -206,6 +206,7 @@ ItemPage {
 
             ListItem.Standard {
                 text: i18n.tr("Keyboard sound")
+                showDivider: false
 
                 control: Switch {
                     objectName: "keyboardSoundSwitch"
@@ -224,10 +225,7 @@ ItemPage {
                 visible: showAllUI
             }
 
-            Item {
-                height: units.gu(2)
-                width: parent.width
-            }
+            ListItem.Divider {}
 
             ListItem.Standard {
                 text: i18n.tr("Other vibrations")
@@ -238,6 +236,7 @@ ItemPage {
 
                     onClicked: backendInfo.otherVibrate = checked
                 }
+                showDivider: false
             }
 
         }
