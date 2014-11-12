@@ -22,6 +22,7 @@ from fixtures import EnvironmentVariable
 from testtools.matchers import Equals, NotEquals, GreaterThan
 from time import sleep
 from ubuntu_system_settings import SystemSettings
+from gi.repository import UPowerGlib
 
 ACCOUNTS_IFACE = 'org.freedesktop.Accounts'
 ACCOUNTS_USER_IFACE = 'org.freedesktop.Accounts.User'
@@ -44,6 +45,8 @@ LM_IFACE = 'org.freedesktop.login1.Manager'
 NM_SERVICE = 'org.freedesktop.NetworkManager'
 NM_PATH = '/org/freedesktop/NetworkManager'
 NM_IFACE = 'org.freedesktop.NetworkManager'
+UPOWER_VERSION = str(UPowerGlib.MAJOR_VERSION)
+UPOWER_VERSION += '.' + str(UPowerGlib.MINOR_VERSION)
 
 
 class UbuntuSystemSettingsTestCase(
@@ -75,7 +78,9 @@ class UbuntuSystemSettingsUpowerTestCase(UbuntuSystemSettingsTestCase,
         cls.dbus_con = cls.get_dbus(True)
         # Add a mock Upower environment so we get consistent results
         (cls.p_mock, cls.obj_upower) = cls.spawn_server_template(
-            'upower', {'OnBattery': True}, stdout=subprocess.PIPE)
+            'upower',
+            {'OnBattery': True, 'DaemonVersion': UPOWER_VERSION},
+            stdout=subprocess.PIPE)
         cls.dbusmock = dbus.Interface(cls.obj_upower, dbusmock.MOCK_IFACE)
 
     def setUp(self, panel=None):
