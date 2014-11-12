@@ -45,24 +45,20 @@ ItemPage {
                 value: sim.netReg.name ? sim.netReg.name : i18n.tr("N/A")
                 enabled: sim.netReg.status !== ""
                 progression: enabled
-                onClicked: {
-                    pageStack.push(Qt.resolvedUrl("PageChooseCarrier.qml"), {
-                        sim: sim,
-                        title: i18n.tr("Carrier")
-                    })
-                }
+                onClicked: pageStack.push(Qt.resolvedUrl("PageChooseCarrier.qml"), {
+                    sim: sim,
+                    title: i18n.tr("Carrier")
+                })
             }
 
             ListItem.Standard {
                 text: i18n.tr("APN")
                 objectName: "apn"
-                progression: true
+                progression: enabled
                 enabled: sim.connMan.powered
-                onClicked: {
-                    pageStack.push(Qt.resolvedUrl("PageChooseApn.qml"), {
-                        sim: sim
-                    })
-                }
+                onClicked: pageStack.push(Qt.resolvedUrl("PageChooseApn.qml"), {
+                    sim: sim
+                })
             }
         }
     }

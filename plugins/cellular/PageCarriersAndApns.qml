@@ -49,23 +49,19 @@ ItemPage {
                 value: sims[0].netReg.name ? sims[0].netReg.name : i18n.tr("N/A")
                 enabled: sims[0].netReg.status !== ""
                 progression: enabled
-                onClicked: {
-                    pageStack.push(Qt.resolvedUrl("PageChooseCarrier.qml"), {
-                        sim: sims[0],
-                        title: sims[0].title
-                    })
-                }
+                onClicked: pageStack.push(Qt.resolvedUrl("PageChooseCarrier.qml"), {
+                    sim: sims[0],
+                    title: sims[0].title
+                })
             }
 
             ListItem.Standard {
                 text: i18n.tr("APN")
-                progression: true
+                progression: enabled
                 enabled: sims[0].connMan.powered
-                onClicked: {
-                    pageStack.push(Qt.resolvedUrl("PageChooseApn.qml"), {
-                        sim: sims[0]
-                    })
-                }
+                onClicked: pageStack.push(Qt.resolvedUrl("PageChooseApn.qml"), {
+                    sim: sims[0]
+                })
             }
 
             SettingsItemTitle {
@@ -78,23 +74,19 @@ ItemPage {
                 value: sims[1].netReg.name ? sims[1].netReg.name : i18n.tr("N/A")
                 enabled: sims[1].netReg.status !== ""
                 progression: enabled
-                onClicked: {
-                    pageStack.push(Qt.resolvedUrl("PageChooseCarrier.qml"), {
-                        sim: sims[1],
-                        title: sims[1].title
-                    })
-                }
+                onClicked: pageStack.push(Qt.resolvedUrl("PageChooseCarrier.qml"), {
+                    sim: sims[1],
+                    title: sims[1].title
+                })
             }
 
             ListItem.Standard {
                 text: i18n.tr("APN")
-                progression: true
+                progression: enabled
                 enabled: sims[1].connMan.powered
-                onClicked: {
-                    pageStack.push(Qt.resolvedUrl("PageChooseApn.qml"), {
-                        sim: sims[1]
-                    })
-                }
+                onClicked: pageStack.push(Qt.resolvedUrl("PageChooseApn.qml"), {
+                    sim: sims[1]
+                })
             }
         }
     }
