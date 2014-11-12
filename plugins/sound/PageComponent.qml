@@ -67,9 +67,8 @@ ItemPage {
 
             ListItem.Standard {
                 control: Switch {
+                    id: silentModeSwitch
                     objectName: "silentMode"
-                    checked: soundActionGroup.silentMode.state
-                    onCheckedChanged: soundActionGroup.silentMode.activate()
                 }
                 text: i18n.tr("Silent Mode")
             }
@@ -95,6 +94,12 @@ ItemPage {
                 target: sliderMenu
                 property: "value"
                 value: soundActionGroup.volume.state
+            }
+
+            Binding {
+                target: silentModeSwitch
+                property: "checked"
+                value: soundActionGroup.silentMode.state
             }
 
             Menus.SliderMenu {
