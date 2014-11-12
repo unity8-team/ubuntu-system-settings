@@ -288,7 +288,7 @@ ItemPage {
                 showDivider: false
             }
 
-            ListItem.Standard {
+            SettingsItemTitle {
                 text: i18n.tr("Ways to reduce battery use:")
             }
 
@@ -333,17 +333,11 @@ ItemPage {
                 text: i18n.tr("Wi-Fi")
                 control: Switch {
                     id: wifiSwitch
-                    checked: batteryBackend.wifiEnabled
-                    onClicked: batteryBackend.wifiEnabled = checked
+                    property bool serverChecked: batteryBackend.wifiEnabled
+                    onServerCheckedChanged: checked = serverChecked
+                    Component.onCompleted: checked = serverChecked
+                    onTriggered: batteryBackend.wifiEnabled = checked
                 }
-                Component.onCompleted:
-                    clicked.connect(wifiSwitch.clicked)
-            }
-
-            Binding {
-                target: wifiSwitch
-                property: "checked"
-                value: batteryBackend.wifiEnabled
             }
 
             QDBusActionGroup {
@@ -365,17 +359,14 @@ ItemPage {
                     active: bluetoothActionGroup.enabled.state != null
                     sourceComponent: Switch {
                         id: btSwitch
-                        // Cannot use onCheckedChanged as this triggers a loop
-                        onClicked: bluetoothActionGroup.enabled.activate()
-                        checked: bluetoothActionGroup.enabled.state
+                        property bool serverChecked: bluetoothActionGroup.enabled.state
+                        onServerCheckedChanged: checked = serverChecked
+                        Component.onCompleted: checked = serverChecked
+                        onTriggered: bluetoothActionGroup.enabled.activate()
                     }
-
-                    // ListItem forwards the 'clicked' signal to its control.
-                    // It needs to be forwarded again to the Loader's sourceComponent
-                    signal clicked
-                    onClicked: item.clicked()
                 }
                 visible: bluetoothActionGroup.visible
+                Component.onCompleted: clicked.connect(btSwitch.clicked)
             }
 
             QDBusActionGroup {
@@ -396,16 +387,14 @@ ItemPage {
                     active: locationActionGroup.enabled.state != null
                     sourceComponent: Switch {
                         id: gpsSwitch
-                        onClicked: locationActionGroup.enabled.activate()
-                        checked: locationActionGroup.enabled.state
+                        property bool serverChecked: locationActionGroup.enabled.state
+                        onServerCheckedChanged: checked = serverChecked
+                        Component.onCompleted: checked = serverChecked
+                        onTriggered: locationActionGroup.enabled.activate()
                     }
-
-                    // ListItem forwards the 'clicked' signal to its control.
-                    // It needs to be forwarded again to the Loader's sourceComponent
-                    signal clicked
-                    onClicked: item.clicked()
                 }
                 visible: locationActionGroup.enabled.state !== undefined
+                Component.onCompleted: clicked.connect(gpsSwitch.clicked)
             }
 
             ListItem.Caption {

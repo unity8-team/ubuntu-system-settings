@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-10-16 20:04-0600\n"
-"PO-Revision-Date: 2014-10-26 18:30+0000\n"
+"PO-Revision-Date: 2014-11-07 20:00+0000\n"
 "Last-Translator: Marcos Lans <Unknown>\n"
 "Language-Team: Galician <gl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-10-27 06:30+0000\n"
-"X-Generator: Launchpad (build 17203)\n"
+"X-Launchpad-Export-Date: 2014-11-08 06:15+0000\n"
+"X-Generator: Launchpad (build 17231)\n"
 "Language: Galician\n"
 
 #: ubuntu-system-settings.desktop.in.in.h:1 ../src/qml/MainWindow.qml:112
@@ -711,7 +711,7 @@ msgstr "Servizos %1"
 #: ../plugins/phone//MultiSim.qml:36 ../plugins/phone//MultiSim.qml:74
 #: ../plugins/phone//SingleSim.qml:33
 msgid "Call forwarding"
-msgstr "Redireccionamento de chamadas"
+msgstr "Redireccionar chamadas"
 
 #: ../plugins/phone//CallForwarding.qml:91
 msgid ""
@@ -954,15 +954,15 @@ msgstr "Cambiar a frase secreta..."
 
 #: ../plugins/security-privacy//LockSecurity.qml:105
 msgid "Switch to swipe"
-msgstr "Cambiar a esvarar o dedo"
+msgstr "Escoller esvarar o dedo"
 
 #: ../plugins/security-privacy//LockSecurity.qml:107
 msgid "Switch to passcode"
-msgstr "Cambiar para clave"
+msgstr "Escoller unha clave"
 
 #: ../plugins/security-privacy//LockSecurity.qml:109
 msgid "Switch to passphrase"
-msgstr "Cambiar a unha frase secreta"
+msgstr "Escoller unha frase secreta"
 
 #: ../plugins/security-privacy//LockSecurity.qml:118
 msgid "Existing passcode"
@@ -1012,7 +1012,7 @@ msgstr "Esvarar o dedo (non segura)"
 
 #: ../plugins/security-privacy//LockSecurity.qml:349
 msgid "4-digit passcode"
-msgstr "Clave de 4-díxitos"
+msgstr "Clave de 4 díxitos"
 
 #: ../plugins/security-privacy//LockSecurity.qml:350
 #: ../plugins/security-privacy//PhoneLocking.qml:47
@@ -1026,7 +1026,7 @@ msgstr "Esvarar o dedo (non segura)... "
 
 #: ../plugins/security-privacy//LockSecurity.qml:352
 msgid "4-digit passcode…"
-msgstr "Clave de 4-díxitos"
+msgstr "Clave de 4 díxitos..."
 
 #: ../plugins/security-privacy//LockSecurity.qml:353
 msgid "Passphrase…"
@@ -2967,42 +2967,3 @@ msgstr "Hai unha imaxe do sistema actualizada."
 #: ../push-helper/software_updates_helper.py:151
 msgid "Tap to open the system updater."
 msgstr "Toque para procesar a actualizacón."
-
-#~ msgid "Refresh"
-#~ msgstr "Actualizar"
-
-#~ msgid "Searching"
-#~ msgstr "Buscando"
-
-#~ msgid "i18n"
-#~ msgstr "i18n"
-
-#~ msgid "settings"
-#~ msgstr "axustes"
-
-#~ msgid "lang"
-#~ msgstr "idioma"
-
-#~ msgid "Available networks"
-#~ msgstr "Redes dispoñíbeis"
-
-#~ msgid "Password visible"
-#~ msgstr "Contrasinal visíbel"
-
-#~ msgid "Other network"
-#~ msgstr "Outra rede"
-
-#~ msgid "Remove"
-#~ msgstr "Eliminar"
-
-#~ msgid "Connect to Wi-Fi"
-#~ msgstr "Conectar a unha rede wifi"
-
-#~ msgid "Set lock security"
-#~ msgstr "Estabelecer o bloqueo"
-
-#~ msgid "Those passphrases don't match."
-#~ msgstr "As frases secretas non coinciden."
-
-#~ msgid "Passphrase must be at least four characters long."
-#~ msgstr "A frase secreta debe ter polo menos 4 caracteres."

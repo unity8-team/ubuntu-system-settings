@@ -27,6 +27,7 @@ import "file:///usr/share/unity8/Components" as UnityComponents
 
 LocalComponents.Page {
     id: passwdSetPage
+    forwardButtonSourceComponent: forwardButton
 
     skip: root.passwordMethod === UbuntuSecurityPrivacyPanel.Swipe
 
@@ -63,6 +64,16 @@ LocalComponents.Page {
             } else {
                 clear(true)
             }
+        }
+    }
+
+    Component {
+        id: forwardButton
+        LocalComponents.StackButton {
+            visible: root.passwordMethod === UbuntuSecurityPrivacyPanel.Passphrase
+            enabled: root.password === lockscreen.passphrase
+            text: i18n.tr("Continue")
+            onClicked: pageStack.next()
         }
     }
 }

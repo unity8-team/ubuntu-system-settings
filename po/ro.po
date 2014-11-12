@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-10-16 20:04-0600\n"
-"PO-Revision-Date: 2014-10-04 11:30+0000\n"
-"Last-Translator: Marian Vasile <marianvasile1972@gmail.com>\n"
+"PO-Revision-Date: 2014-11-10 17:48+0000\n"
+"Last-Translator: Meriuță Cornel <meriutacornel@neacornel.eu>\n"
 "Language-Team: Romanian <ro@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n == 1 ? 0: (((n % 100 > 19) || ((n % 100 "
 "== 0) && (n != 0))) ? 2: 1));\n"
-"X-Launchpad-Export-Date: 2014-10-18 07:11+0000\n"
-"X-Generator: Launchpad (build 17196)\n"
+"X-Launchpad-Export-Date: 2014-11-11 07:10+0000\n"
+"X-Generator: Launchpad (build 17241)\n"
 
 #: ubuntu-system-settings.desktop.in.in.h:1 ../src/qml/MainWindow.qml:112
 msgid "System Settings"
@@ -812,7 +812,7 @@ msgstr "APN"
 
 #: ../plugins/cellular//PageChooseApn.qml:372
 msgid "Internet APN:"
-msgstr ""
+msgstr "APN internet:"
 
 #: ../plugins/cellular//PageChooseApn.qml:449
 msgid "Custom Internet APN…"
@@ -820,12 +820,12 @@ msgstr ""
 
 #: ../plugins/cellular//PageChooseApn.qml:460
 msgid "MMS APN:"
-msgstr ""
+msgstr "MMS APN:"
 
 #: ../plugins/cellular//PageChooseApn.qml:485
 #: ../plugins/cellular//CustomApnEditor.qml:143
 msgid "Same APN as for Internet"
-msgstr ""
+msgstr "Același APN pentru internet"
 
 #: ../plugins/cellular//PageChooseApn.qml:565
 msgid "Custom MMS APN…"
@@ -833,15 +833,15 @@ msgstr ""
 
 #: ../plugins/cellular//PageChooseApn.qml:591
 msgid "Reset APN Settings"
-msgstr ""
+msgstr "Resetare configurări APN"
 
 #: ../plugins/cellular//PageChooseApn.qml:592
 msgid "Are you sure that you want to Reset APN Settings?"
-msgstr ""
+msgstr "Sunteți sigur că doriți să resetați configurarile APN?"
 
 #: ../plugins/cellular//PageChooseApn.qml:598
 msgid "Reset"
-msgstr ""
+msgstr "Resetare"
 
 #: ../plugins/cellular//PageChooseCarriers.qml:27
 #: ../plugins/cellular//Components//MultiSim.qml:68
@@ -850,11 +850,11 @@ msgstr "Rețele"
 
 #: ../plugins/cellular//CustomApnEditor.qml:42
 msgid "Internet"
-msgstr ""
+msgstr "Internet"
 
 #: ../plugins/cellular//CustomApnEditor.qml:42
 msgid "MMS"
-msgstr ""
+msgstr "MMS"
 
 #. TRANSLATORS: %1 is either i18n.tr("Internet") or i18n.tr("MMS")
 #: ../plugins/cellular//CustomApnEditor.qml:67
@@ -866,27 +866,27 @@ msgstr ""
 #: ../plugins/cellular//CustomApnEditor.qml:171
 #, qt-format
 msgid "%1 APN"
-msgstr ""
+msgstr "%1 APN"
 
 #: ../plugins/cellular//CustomApnEditor.qml:181
 msgid "MMSC"
-msgstr ""
+msgstr "MMSC"
 
 #: ../plugins/cellular//CustomApnEditor.qml:191
 msgid "Proxy"
-msgstr ""
+msgstr "Proxy"
 
 #: ../plugins/cellular//CustomApnEditor.qml:213
 msgid "Username"
-msgstr ""
+msgstr "Nume de utilizator"
 
 #: ../plugins/cellular//CustomApnEditor.qml:264
 msgid "Save"
-msgstr ""
+msgstr "Salvează"
 
 #: ../plugins/cellular//CustomApnEditor.qml:264
 msgid "Activate"
-msgstr ""
+msgstr "Activare"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
 #: ../plugins/cellular//PageComponent.qml:32
@@ -956,7 +956,7 @@ msgstr "Blocare de securitate"
 #: ../plugins/security-privacy//LockSecurity.qml:96
 #: ../plugins/security-privacy//LockSecurity.qml:384
 msgid "Change passcode…"
-msgstr ""
+msgstr "Modificare cod de acces..."
 
 #: ../plugins/security-privacy//LockSecurity.qml:98
 #: ../plugins/security-privacy//LockSecurity.qml:385
@@ -969,7 +969,7 @@ msgstr "Schimbă pe glisare"
 
 #: ../plugins/security-privacy//LockSecurity.qml:107
 msgid "Switch to passcode"
-msgstr ""
+msgstr "Comută la codul de acces"
 
 #: ../plugins/security-privacy//LockSecurity.qml:109
 msgid "Switch to passphrase"
@@ -977,7 +977,7 @@ msgstr "Schimbă pe frază secretă"
 
 #: ../plugins/security-privacy//LockSecurity.qml:118
 msgid "Existing passcode"
-msgstr ""
+msgstr "Cod de acces existent"
 
 #: ../plugins/security-privacy//LockSecurity.qml:120
 msgid "Existing passphrase"
@@ -985,7 +985,7 @@ msgstr "Frază secretă existentă"
 
 #: ../plugins/security-privacy//LockSecurity.qml:174
 msgid "Choose passcode"
-msgstr ""
+msgstr "Alegeți codul de acces"
 
 #: ../plugins/security-privacy//LockSecurity.qml:176
 msgid "Choose passphrase"
@@ -994,7 +994,7 @@ msgstr "Alegeți fraza secretă"
 #: ../plugins/security-privacy//LockSecurity.qml:220
 #: ../wizard/qml/Pages//passwd-confirm.qml:48
 msgid "Confirm passcode"
-msgstr ""
+msgstr "Confirmați codul de acces"
 
 #: ../plugins/security-privacy//LockSecurity.qml:222
 #: ../wizard/qml/Pages//passwd-confirm.qml:47
@@ -1003,7 +1003,7 @@ msgstr "Confirmare frază parolă"
 
 #: ../plugins/security-privacy//LockSecurity.qml:265
 msgid "Those passcodes don't match. Try again."
-msgstr ""
+msgstr "Aceste coduri de acces nu corespund. Încercați din nou."
 
 #: ../plugins/security-privacy//LockSecurity.qml:268
 msgid "Those passphrases don't match. Try again."
@@ -1023,7 +1023,7 @@ msgstr "Glisare (fără securizare)"
 
 #: ../plugins/security-privacy//LockSecurity.qml:349
 msgid "4-digit passcode"
-msgstr ""
+msgstr "Cod de acces din 4 cifre"
 
 #: ../plugins/security-privacy//LockSecurity.qml:350
 #: ../plugins/security-privacy//PhoneLocking.qml:47
@@ -1037,7 +1037,7 @@ msgstr "Glisare (fără securizare)… "
 
 #: ../plugins/security-privacy//LockSecurity.qml:352
 msgid "4-digit passcode…"
-msgstr ""
+msgstr "Codul de acces din 4 cifre..."
 
 #: ../plugins/security-privacy//LockSecurity.qml:353
 msgid "Passphrase…"
@@ -1141,7 +1141,7 @@ msgstr "Nimic"
 #: ../plugins/security-privacy//PhoneLocking.qml:46
 #: ../wizard/qml/Pages//30-passwd-type.qml:95
 msgid "Passcode"
-msgstr ""
+msgstr "Cod de acces"
 
 #. TRANSLATORS: %1 is the number of minutes
 #: ../plugins/security-privacy//PhoneLocking.qml:75
@@ -1789,7 +1789,7 @@ msgstr "Instalează"
 
 #: ../plugins/system-update//PageComponent.qml:152
 msgid "Installation failed"
-msgstr ""
+msgstr "Instalare nereușită"
 
 #: ../plugins/system-update//PageComponent.qml:156
 #: ../plugins/cellular//Components//SimEditor.qml:200
@@ -1807,7 +1807,7 @@ msgstr ""
 
 #: ../plugins/system-update//PageComponent.qml:254
 msgid "Restarting…"
-msgstr ""
+msgstr "Se repornește..."
 
 #: ../plugins/system-update//PageComponent.qml:298
 msgid "Checking for updates…"
@@ -1815,7 +1815,7 @@ msgstr "Căutare actualizări..."
 
 #: ../plugins/system-update//PageComponent.qml:298
 msgid "Connect to the Internet to check for updates"
-msgstr ""
+msgstr "Conectați-vă la internet pentru a verifica pentru actualizări"
 
 #: ../plugins/system-update//PageComponent.qml:313
 #: ../plugins/system-update//PageComponent.qml:471
@@ -1844,7 +1844,7 @@ msgstr "Pauză pentru toate"
 
 #: ../plugins/system-update//PageComponent.qml:474
 msgid "Install…"
-msgstr ""
+msgstr "Instalare..."
 
 #: ../plugins/system-update//PageComponent.qml:476
 msgid "Download"
@@ -1872,12 +1872,12 @@ msgstr "Instalată"
 
 #: ../plugins/system-update//PageComponent.qml:525
 msgid "Downloading"
-msgstr ""
+msgstr "Se descarcă"
 
 #: ../plugins/system-update//PageComponent.qml:536
 #, qt-format
 msgid "%1 of %2"
-msgstr ""
+msgstr "%1 din %2"
 
 #: ../plugins/system-update//PageComponent.qml:635
 msgid "Version: "
@@ -2060,7 +2060,7 @@ msgstr "Sistem"
 
 #: ../wizard/qml/Pages//30-passwd-type.qml:72
 msgid "Please select how you’d like to unlock your phone."
-msgstr ""
+msgstr "Alegeți cum doriți să vă deblocați telefonul."
 
 #: ../wizard/qml/Pages//30-passwd-type.qml:92
 msgid "Swipe"
@@ -2068,15 +2068,15 @@ msgstr "Glisare"
 
 #: ../wizard/qml/Pages//30-passwd-type.qml:93
 msgid "No security"
-msgstr ""
+msgstr "Fară securitate"
 
 #: ../wizard/qml/Pages//30-passwd-type.qml:96
 msgid "4 numbers"
-msgstr ""
+msgstr "4 numere"
 
 #: ../wizard/qml/Pages//30-passwd-type.qml:99
 msgid "Numbers and letters"
-msgstr ""
+msgstr "Numere și litere"
 
 #: ../wizard/qml/Pages//30-passwd-type.qml:112
 #: ../wizard/qml/Pages//40-wifi.qml:196 ../wizard/qml/Pages//10-welcome.qml:85
@@ -2091,11 +2091,11 @@ msgstr "Conectare la Wi-Fi"
 
 #: ../wizard/qml/Pages//40-wifi.qml:146
 msgid "Available networks…"
-msgstr ""
+msgstr "Rețele disponibile..."
 
 #: ../wizard/qml/Pages//40-wifi.qml:147
 msgid "No available networks."
-msgstr ""
+msgstr "Nu sunt rețele disponibile."
 
 #: ../wizard/qml/Pages//40-wifi.qml:196
 #: ../wizard/qml/Pages//31-passwd-set.qml:77
@@ -2109,11 +2109,11 @@ msgstr "Termeni și condiții"
 
 #: ../wizard/qml/Pages//31-passwd-set.qml:48
 msgid "Enter passphrase"
-msgstr ""
+msgstr "Introduceți fraza parolă"
 
 #: ../wizard/qml/Pages//31-passwd-set.qml:49
 msgid "Choose your passcode"
-msgstr ""
+msgstr "Alegeți codul dumneavoastră de acces"
 
 #: ../wizard/qml/Pages//31-passwd-set.qml:56
 msgid "Passphrase must be 4 characters long"
@@ -2121,7 +2121,7 @@ msgstr ""
 
 #: ../wizard/qml/Pages//20-sim.qml:23
 msgid "Add a SIM card and restart your device"
-msgstr ""
+msgstr "Adăugați un card SIM și reporniți dispozitivul dumneavoastră"
 
 #: ../wizard/qml/Pages//20-sim.qml:53
 msgid "Without it, you won’t be able to make calls or use text messaging."
@@ -2130,16 +2130,16 @@ msgstr ""
 
 #: ../wizard/qml/Pages//passwd-confirm.qml:51
 msgid "Sorry, incorrect passphrase."
-msgstr ""
+msgstr "Frază parolă greșită"
 
 #: ../wizard/qml/Pages//passwd-confirm.qml:51
 #: ../wizard/qml/Pages//passwd-confirm.qml:52
 msgid "Please try again."
-msgstr ""
+msgstr "Vă rugăm încercați din nou."
 
 #: ../wizard/qml/Pages//passwd-confirm.qml:52
 msgid "Sorry, incorrect passcode."
-msgstr ""
+msgstr "Cod de acces greșit"
 
 #: ../wizard/qml/Pages//80-finished.qml:22
 msgid "All done"
@@ -2180,6 +2180,8 @@ msgstr ""
 msgid ""
 "Allow apps to use your mobile and Wi-Fi networks to determine your location."
 msgstr ""
+"Permiteți aplicațiilor să vă utilizeze telefonul mobil și rețele Wi-Fi "
+"pentru a determina locația dumneavoastră."
 
 #. TRANSLATORS: HERE is a trademark for Nokia's location service, you probably shouldn't translate it
 #: ../wizard/qml/Pages//50-location.qml:74
@@ -2187,12 +2189,16 @@ msgid ""
 "Accept the HERE <a href='terms.qml'>terms and conditions</a> to enable these "
 "services."
 msgstr ""
+"Acceptați <a href='terms.qml'>termenii și condițiile</a>HERE pentru a activa "
+"aceste servicii."
 
 #: ../wizard/qml/Pages//50-location.qml:85
 msgid ""
 "This service can be disabled at any time from the <b>System Settings</b> "
 "menu."
 msgstr ""
+"Acest serviciu poate fi dezactivat oricând din meniul <b>Configurări "
+"sistem</b>."
 
 #: ../wizard/qml/Pages//60-reporting.qml:22
 msgid "Improving your experience"
@@ -2980,45 +2986,3 @@ msgstr "Există o imagine de sistem actualizată."
 #: ../push-helper/software_updates_helper.py:151
 msgid "Tap to open the system updater."
 msgstr "Atingeți pentru a deschide programul de actualizare a sistemului."
-
-#~ msgid "Other network"
-#~ msgstr "Altă rețea"
-
-#~ msgid "Password visible"
-#~ msgstr "Parolă vizibilă"
-
-#~ msgid "Remove"
-#~ msgstr "Șterge"
-
-#~ msgid "Refresh"
-#~ msgstr "Reîmprospătare"
-
-#~ msgid "Searching"
-#~ msgstr "Se caută"
-
-#~ msgid "Connect to Wi-Fi"
-#~ msgstr "Conectare la rețeaua fără fir"
-
-#~ msgid "Available networks"
-#~ msgstr "Rețele disponibile"
-
-#~ msgid "settings"
-#~ msgstr "configurări"
-
-#~ msgid "i18n"
-#~ msgstr "i18n"
-
-#~ msgid "lang"
-#~ msgstr "limbă"
-
-#~ msgid "Those passphrases don't match."
-#~ msgstr "Aceste fraze secrete nu se potrivesc."
-
-#~ msgid "Passphrase must be at least four characters long."
-#~ msgstr "Fraza secretă trebuie să fie formată din cel puțin patru caractere."
-
-#~ msgid "Bug reporting"
-#~ msgstr "Raportare defecțiune"
-
-#~ msgid "Set lock security"
-#~ msgstr "Configurare securitate blocare"

@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-10-16 20:04-0600\n"
-"PO-Revision-Date: 2014-10-18 13:31+0000\n"
+"PO-Revision-Date: 2014-11-01 09:36+0000\n"
 "Last-Translator: Ivo Xavier <ivofernandes12@gmail.com>\n"
 "Language-Team: Portuguese <pt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-10-19 07:05+0000\n"
-"X-Generator: Launchpad (build 17196)\n"
+"X-Launchpad-Export-Date: 2014-11-02 06:14+0000\n"
+"X-Generator: Launchpad (build 17211)\n"
 
 #: ubuntu-system-settings.desktop.in.in.h:1 ../src/qml/MainWindow.qml:112
 msgid "System Settings"
@@ -414,7 +414,7 @@ msgstr "Restaurar Launcher"
 
 #: ../plugins/reset//PageComponent.qml:87
 msgid "Reset all system settings…"
-msgstr "Repor todas as definições de sistema..."
+msgstr "Repor todas as definições do sistema..."
 
 #: ../plugins/reset//PageComponent.qml:101
 msgid "Erase & Reset Everything…"
@@ -430,7 +430,7 @@ msgstr ""
 
 #: ../plugins/reset//ResetAllSettings.qml:31
 msgid "Reset all system settings"
-msgstr "Repor todas as definições de sistema"
+msgstr "Repor todas as definições do sistema"
 
 #: ../plugins/reset//ResetLauncherHome.qml:40
 msgid "The Launcher will be returned to its original contents."
@@ -1753,12 +1753,12 @@ msgstr "Atualizar o Sistema"
 #: ../plugins/system-update//PageComponent.qml:118
 msgid "The phone needs to restart to install the system update."
 msgstr ""
-"O telefone tem de reiniciar para instalar as atualizações de sistema."
+"O telemóvel tem de reiniciar para instalar as atualizações do sistema."
 
 #: ../plugins/system-update//PageComponent.qml:118
 msgid "Connect the phone to power before installing the system update."
 msgstr ""
-"Ligue o telemóvel à energia antes de instalar as atualizações de sistema."
+"Ligue o telemóvel à energia antes de instalar as atualizações do sistema."
 
 #: ../plugins/system-update//PageComponent.qml:121
 msgid "Install & Restart"
@@ -1788,7 +1788,7 @@ msgstr "O software encontra-se atualizado"
 #: ../plugins/system-update//PageComponent.qml:235
 #: ../plugins/system-update//PageComponent.qml:241
 msgid "Sorry, the system update failed."
-msgstr "Desculpe, a atualização de sistema falhou."
+msgstr "Desculpe, a atualização do sistema falhou."
 
 #: ../plugins/system-update//PageComponent.qml:254
 msgid "Restarting…"
@@ -2966,47 +2966,8 @@ msgstr ""
 
 #: ../push-helper/software_updates_helper.py:150
 msgid "There's an updated system image."
-msgstr "Há uma nova imagem de sistema."
+msgstr "Há uma nova imagem do sistema."
 
 #: ../push-helper/software_updates_helper.py:151
 msgid "Tap to open the system updater."
-msgstr "Carregue para abrir o atualizador de sistema."
-
-#~ msgid "Other network"
-#~ msgstr "Outra rede"
-
-#~ msgid "Remove"
-#~ msgstr "Remover"
-
-#~ msgid "Searching"
-#~ msgstr "A procurar"
-
-#~ msgid "Available networks"
-#~ msgstr "Redes disponíveis"
-
-#~ msgid "Refresh"
-#~ msgstr "Atualizar"
-
-#~ msgid "settings"
-#~ msgstr "definições"
-
-#~ msgid "i18n"
-#~ msgstr "i18n"
-
-#~ msgid "lang"
-#~ msgstr "idioma"
-
-#~ msgid "Password visible"
-#~ msgstr "Palavra-passe visível"
-
-#~ msgid "Connect to Wi-Fi"
-#~ msgstr "Ligar a Wi-Fi"
-
-#~ msgid "Set lock security"
-#~ msgstr "Definir a segurança de bloqueio"
-
-#~ msgid "Those passphrases don't match."
-#~ msgstr "As frase-senha não correspondem."
-
-#~ msgid "Passphrase must be at least four characters long."
-#~ msgstr "A frase-senha deve ter pelo menos quatro caracteres."
+msgstr "Carregue para abrir o atualizador do sistema."

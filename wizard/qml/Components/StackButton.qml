@@ -17,14 +17,12 @@
 import QtQuick 2.3
 import Ubuntu.Components 1.1
 
-Item {
+AbstractButton {
     id: stackButton
 
     property string text
 
     property bool backArrow: false
-
-    signal clicked()
 
     width: label.width
     height: label.height + units.gu(4)
@@ -34,6 +32,7 @@ Item {
         anchors.verticalCenter: parent.verticalCenter
         anchors.left: parent.left
         anchors.right: parent.right
+        color: enabled ? Theme.palette.selected.backgroundText : Qt.darker(Theme.palette.selected.backgroundText, 1.5)
         text: {
             if (backArrow) {
                 // Translators: This is the arrow for "Back" buttons
@@ -44,10 +43,5 @@ Item {
             }
         }
         horizontalAlignment: backArrow ? Text.AlignLeft : Text.AlignRight
-    }
-
-    MouseArea {
-        anchors.fill: parent
-        onClicked: stackButton.clicked()
     }
 }

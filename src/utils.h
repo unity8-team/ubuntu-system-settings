@@ -29,6 +29,14 @@ namespace SystemSettings {
 void parsePluginOptions(const QStringList &arguments, QString &defaultPlugin,
                         QVariantMap &pluginOptions);
 
+class Utilities : public QObject {
+    Q_OBJECT
+
+public:
+    explicit Utilities(QObject *parent = 0);
+    Q_INVOKABLE QString formatSize(quint64) const;
+};
+
 } // namespace
 
 #endif // SYSTEM_SETTINGS_UTILS_H

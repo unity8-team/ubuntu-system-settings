@@ -1,3 +1,4 @@
+
 # -*- Mode: Python; coding: utf-8; indent-tabs-mode: nil; tab-width: 4 -*-
 #
 # Copyright (C) 2014 Canonical Ltd.
@@ -114,6 +115,10 @@ class MainWindow(ubuntuuitoolkit.MainView):
     def go_to_wifi_page(self):
         return self._go_to_page('entryComponent-wifi', 'wifiPage')
 
+    @autopilot.logging.log_action(logger.debug)
+    def go_to_cellular_page(self):
+        return self._go_to_page('entryComponent-cellular', 'cellularPage')
+
     def _go_to_page(self, item_object_name, page_object_name):
         self.click_item(item_object_name)
         page = self.wait_select_single(objectName=page_object_name)
@@ -202,7 +207,7 @@ class MainWindow(ubuntuuitoolkit.MainView):
         self._orientation_lock_switch.uncheck()
 
 
-class CelullarPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
+class CellularPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
 
     """Autopilot helper for the Sound page."""
 
@@ -213,6 +218,164 @@ class CelullarPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
             if state['objectName'][1] == 'cellularPage':
                 return True
         return False
+
+    @autopilot.logging.log_action(logger.debug)
+    def enable_data(self):
+        self._set_data(True)
+
+    @autopilot.logging.log_action(logger.debug)
+    def disable_data(self):
+        self._set_data(False)
+
+    def disable_datas(self):
+        self.select_sim_for_data('off')
+
+    @autopilot.logging.log_action(logger.debug)
+    def _set_data(self, data):
+        chk = self.select_single(objectName='data')
+        if data:
+            chk.check()
+        else:
+            chk.uncheck()
+
+    @autopilot.logging.log_action(logger.debug)
+    def get_data(self):
+        return self.select_single(objectName='data').checked
+
+    @autopilot.logging.log_action(logger.debug)
+    def enable_roaming(self, timeout=10):
+        self._set_roaming(True, timeout=timeout)
+
+    @autopilot.logging.log_action(logger.debug)
+    def disable_roaming(self, timeout=10):
+        self._set_roaming(False, timeout=timeout)
+
+    @autopilot.logging.log_action(logger.debug)
+    def _set_roaming(self, roaming, timeout):
+        chk = self.select_single(objectName='roaming')
+        if roaming:
+            chk.check(timeout=timeout)
+        else:
+            chk.uncheck(timeout=timeout)
+
+    @autopilot.logging.log_action(logger.debug)
+    def set_connection_type(self, radio_type, sim='/ril_0',
+                            scroll_to_and_click=None):
+        self._set_connection_type(radio_type, sim, scroll_to_and_click)
+
+    @autopilot.logging.log_action(logger.debug)
+    def _set_connection_type(self, radio_type, sim, scroll_to_and_click):
+        t = self.wait_select_single(
+            'OptionSelectorDelegate',
+            objectName='%s_radio_%s' % (sim, radio_type))
+        if scroll_to_and_click:
+            scroll_to_and_click(t)
+        else:
+            t.swipe_into_view()
+
+        self.pointing_device.click_object(t)
+
+    @autopilot.logging.log_action(logger.debug)
+    def change_carrier(self, carrier, sim=None):
+        if sim:
+            carriersPage = self._click_carriers()
+            carrierPage = carriersPage.select_sim(sim)
+        else:
+            carrierPage = self._click_carrier()
+
+        carrierPage.set_manual()
+        carrierPage.set_carrier(carrier)
+
+    @autopilot.logging.log_action(logger.debug)
+    def _click_carrier(self):
+        item = self.select_single(objectName='carrier')
+        self.pointing_device.click_object(item)
+        return self.get_root_instance().wait_select_single(
+            objectName='chooseCarrierPage')
+
+    @autopilot.logging.log_action(logger.debug)
+    def _click_carriers(self):
+        item = self.select_single(objectName='carriers')
+        self.pointing_device.click_object(item)
+        return self.get_root_instance().wait_select_single(
+            objectName='chooseCarriersPage')
+
+    @autopilot.logging.log_action(logger.debug)
+    def select_sim_for_data(self, sim):
+        self._select_sim_for_data(sim)
+
+    @autopilot.logging.log_action(logger.debug)
+    def _select_sim_for_data(self, sim):
+        item = self.select_single(objectName='use%s' % sim)
+        self.pointing_device.click_object(item)
+
+    @autopilot.logging.log_action(logger.debug)
+    def select_sim_for_calls(self, sim):
+        pass
+
+    @autopilot.logging.log_action(logger.debug)
+    def select_sim_for_messages(self):
+        pass
+
+    @autopilot.logging.log_action(logger.debug)
+    def set_name(self, sim, name):
+        self._set_name(sim, name)
+
+    def get_name(self, sim):
+        obj = self.select_single(
+            objectName="label_%s" % sim)
+        return obj.text
+
+    def _set_name(self, sim, name):
+        obj = self.select_single(
+            objectName="edit_name_%s" % sim)
+        self.pointing_device.click_object(obj)
+
+        # wait for animation
+        sleep(1)
+        ok = self.select_single('Button', objectName="doRename")
+
+        field = self.select_single('TextField', objectName="nameField")
+        field.write(name)
+        self.pointing_device.click_object(ok)
+
+
+class PageChooseCarriers(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
+
+    """Autopilot helper for carrier selection page (multisim)."""
+
+    @autopilot.logging.log_action(logger.debug)
+    def select_sim(self, sim):
+        return self._select_sim(sim)
+
+    @autopilot.logging.log_action(logger.debug)
+    def _select_sim(self, sim):
+        item = self.select_single(objectName='%s_carriers' % sim)
+        self.pointing_device.click_object(item)
+        return self.get_root_instance().wait_select_single(
+            objectName='chooseCarrierPage')
+
+
+class PageChooseCarrier(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
+
+    """Autopilot helper for carrier selection page (singlesim)."""
+
+    @autopilot.logging.log_action(logger.debug)
+    def set_manual(self):
+        item = self.select_single(text='Manually')
+        self.pointing_device.click_object(item)
+
+    @autopilot.logging.log_action(logger.debug)
+    def set_automatic(self):
+        item = self.select_single(text='Automatically')
+        self.pointing_device.click_object(item)
+
+    def set_carrier(self, carrier):
+        # wait for animation, since page.animationRunning.wait_for(False)
+        # does not work?
+        sleep(0.5)
+        item = self.select_single(text=carrier)
+        self.pointing_device.click_object(item)
 
 
 class TimeAndDatePage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
@@ -677,6 +840,40 @@ class WifiPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
             if state['objectName'][1] == 'wifiPage':
                 return True
         return False
+
+    @autopilot.logging.log_action(logger.debug)
+    def enable_wireless(self):
+        self._set_wireless(True)
+
+    @autopilot.logging.log_action(logger.debug)
+    def disable_wireless(self):
+        self._set_wireless(False)
+
+    """
+    :returns: Whether or not WiFi can be used
+    """
+    @autopilot.logging.log_action(logger.debug)
+    def have_wireless(self):
+        try:
+            self.wait_select_single('SwitchMenuItem', text=_('Wi-Fi'))
+        except:
+            return False
+        return True
+
+    """Returns the current WiFi state
+
+    :returns: Whether or not WiFi is enabled
+    """
+    @autopilot.logging.log_action(logger.debug)
+    def get_wireless(self):
+        return self.wait_select_single(
+            'SwitchMenuItem', text=_('Wi-Fi')).checked
+
+    @autopilot.logging.log_action(logger.debug)
+    def _set_wireless(self, state):
+        obj = self.wait_select_single('SwitchMenuItem', text=_('Wi-Fi'))
+        if obj.checked != state:
+            self.pointing_device.click_object(obj)
 
     """Connects to hidden network
 
