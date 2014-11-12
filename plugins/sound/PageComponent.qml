@@ -106,7 +106,6 @@ ItemPage {
                 minIcon: "image://theme/audio-volume-low" 
                 maxIcon: "image://theme/audio-volume-high" 
                 onUpdated: soundActionGroup.volume.updateState(value);
-                showDivider: highVolumeWarning.visible
             }
 
             ListItem.Standard {
@@ -208,8 +207,6 @@ ItemPage {
 
                     onClicked: keyboardSettings.keyPressFeedback = checked
                 }
-
-                showDivider: lockSound.visible
             }
 
             ListItem.Standard {
