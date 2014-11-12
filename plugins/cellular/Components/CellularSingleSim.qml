@@ -66,13 +66,6 @@ Column {
         }
     }
 
-    Binding {
-        target: dataRoamingControl
-        property: "serverChecked"
-        value: sim && sim.connMan.roamingAllowed
-        when: sim
-    }
-
     ListItem.Standard {
         id: dataRoamingItem
         objectName: "dataRoamingSwitch"

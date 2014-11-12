@@ -174,13 +174,6 @@ Column {
         }
     }
 
-    Binding {
-        target: dataRoamingControl
-        property: "serverChecked"
-        value: getOnlineSim() && getOnlineSim().connMan.roamingAllowed
-        when: getOnlineSim()
-    }
-
     ListItem.Standard {
         id: dataRoamingItem
         objectName: "dataRoamingSwitch"
