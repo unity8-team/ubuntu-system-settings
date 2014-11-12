@@ -147,12 +147,13 @@ ItemPage {
                 right: parent.right
             }
 
+            SettingsItemTitle { text: i18n.tr("Choose carrier:") }
+
             ListItem.ItemSelector {
                 id: chooseCarrier
                 objectName: "mode"
                 expanded: true
                 enabled: sim.netReg.mode !== "auto-only"
-                text: i18n.tr("Choose carrier:")
                 model: [i18n.tr("Automatically"), i18n.tr("Manually")]
 
                 delegate: OptionSelectorDelegate { showDivider: false }
