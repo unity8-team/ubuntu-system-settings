@@ -69,6 +69,7 @@ ItemPage {
                 control: Switch {
                     id: silentModeSwitch
                     objectName: "silentMode"
+                    onClicked: soundActionGroup.silentMode.activate()
                 }
                 text: i18n.tr("Silent Mode")
             }
