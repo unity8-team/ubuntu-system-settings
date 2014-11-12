@@ -288,7 +288,7 @@ ItemPage {
                 showDivider: false
             }
 
-            ListItem.Standard {
+            SettingsItemTitle {
                 text: i18n.tr("Ways to reduce battery use:")
             }
 

@@ -240,7 +240,7 @@ ItemPage {
 
             //  Disconnnected Headset(s)
 
-            ListItem.Standard {
+            SettingsItemTitle {
                 id: disconnectedHeader
                 text: connectedList.visible ? i18n.tr("Connect another device:") : i18n.tr("Connect a device:")
                 enabled: bluetoothActionGroup.enabled
@@ -282,7 +282,7 @@ ItemPage {
             }
 
             //  Devices that connect automatically
-            ListItem.Standard {
+            SettingsItemTitle {
                 id: autoconnectHeader
                 text: i18n.tr("Connect automatically when detected:")
                 visible: autoconnectList.visible
