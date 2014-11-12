@@ -174,6 +174,13 @@ Column {
         }
     }
 
+    Binding {
+        target: dataRoamingControl
+        property: "serverChecked"
+        value: getOnlineSim() && getOnlineSim().connMan.roamingAllowed
+        when: getOnlineSim()
+    }
+
     ListItem.Standard {
         id: dataRoamingItem
         objectName: "dataRoamingSwitch"
@@ -181,12 +188,12 @@ Column {
         enabled: use.selectedIndex !== 0
         control: Switch {
             id: dataRoamingControl
-            property bool serverChecked: poweredSim && poweredSim.connMan.roamingAllowed
+            property bool serverChecked: getOnlineSim() && getOnlineSim().connMan.roamingAllowed
             onServerCheckedChanged: checked = serverChecked
             Component.onCompleted: checked = serverChecked
             onTriggered: {
-                if (poweredSim) {
-                    poweredSim.connMan.roamingAllowed = checked;
+                if (getOnlineSim()) {
+                    getOnlineSim().connMan.roamingAllowed = checked;
                 }
             }
         }
