@@ -31,51 +31,6 @@ Component {
         objectName: "otherNetworkDialog"
         anchorToKeyboard: true
 
-        /* The following is a (bad) workaround for bugs
-            #1337556
-            #1337555
-
-            If the Dialog does not shrink after a user chooses e.g. WPA,
-            the anchorToKeyboard setting of OrientationHelper have no effect,
-            since the dialog never shrinks in size.
-
-            This workaround resizes the Dialog.
-        */
-
-        property int dialogVisualsHeight
-        function getVisibleChildren () {
-            var children = [feedback, networknameLabel, networkname,
-                securityListLabel, securityList, passwordListLabel,
-                password, passwordVisiblityRow, buttonRow];
-            var ret = [];
-            children.forEach(function (child) {
-                if (child.visible) {
-                    ret.push(child);
-                }
-            });
-            return ret;
-        }
-
-        function getVisibleChildrenHeight () {
-            var h = 0;
-            getVisibleChildren().forEach(function (child) {
-                h = h + child.height;
-            });
-            return h;
-        }
-
-        Component.onCompleted: {
-            dialogVisualsHeight =
-                __foreground.height - getVisibleChildrenHeight();
-        }
-
-        Binding {
-            target: __foreground
-            property: "height"
-            value: dialogVisualsHeight + getVisibleChildrenHeight()
-            when: dialogVisualsHeight
-        }
-
         function settingsValid() {
             if(networkname.length == 0) {
                 return false;
@@ -196,6 +151,7 @@ Component {
             id : networkname
             objectName: "networkname"
             inputMethodHints: Qt.ImhNoPredictiveText
+            Component.onCompleted: forceActiveFocus()
         }
 
         Label {
@@ -234,8 +190,7 @@ Component {
             visible: securityList.selectedIndex !== 0
             echoMode: passwordVisibleSwitch.checked ?
                 TextInput.Normal : TextInput.Password
-            inputMethodHints: passwordVisibleSwitch.checked ?
-                Qt.ImhHiddenText : Qt.ImhNoPredictiveText;
+            inputMethodHints: Qt.ImhNoPredictiveText
             onAccepted: {
                 connectAction.trigger();
             }
@@ -249,6 +204,7 @@ Component {
 
             CheckBox {
                 id: passwordVisibleSwitch
+                activeFocusOnPress: false
             }
 
             Label {

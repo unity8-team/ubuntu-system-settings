@@ -1,3 +1,31 @@
+ubuntu-system-settings (0.3+15.04.20141112.1-0ubuntu1) vivid; urgency=low
+
+  [ Sebastien Bacher ]
+  * Update the translations template during the build (LP: #1389786)
+
+  [ jonas-drange ]
+  * [cellular][phone] titles now using SettingsItemTitle (LP: #1389767)
+  * [wifi] fix multiple issues in the "Connect to other network" dialog
+    (LP: #1387656)
+
+  [ Andrea Cimitan ]
+  * Delay password set/confirm screens after entering the 4th digit,
+    fixing 1390557 (LP: #1390557)
+
+  [ CI bot ]
+  * Resync trunk
+
+  [ Ken VanDine ]
+  * Specify DaemonVersion for upower to support upower 0.99 on vivid
+    (LP: #1390629)
+  * [battery] don't control wifi state with libnm, use the
+    QDBusActionGroup from indicator-network (LP: #1391940)
+
+  [ Christian Dywan ]
+  * Remove the dialog internals resizing hack (LP: #1376763)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 12 Nov 2014 19:27:21 +0000
+
 ubuntu-system-settings (0.3+15.04.20141105.1-0ubuntu1) vivid; urgency=low
 
   [ Ubuntu daily release ]
