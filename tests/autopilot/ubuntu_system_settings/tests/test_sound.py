@@ -36,7 +36,11 @@ class SoundTestCase(SoundBaseTestCase):
         calls = self.dbus_mock_isound.GetCalls()
         self.assertThat(
             calls[0][1],
-            "Activate"
+            Equals('Activate')
+        )
+        self.assertThat(
+            calls[0][2][0],
+            Equals('silent-mode')
         )
 
     def test_call_vibrate_sound_switch(self):
