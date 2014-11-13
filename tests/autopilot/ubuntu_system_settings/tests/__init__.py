@@ -653,6 +653,8 @@ class SoundBaseTestCase(
     def tearDown(self):
         self.mock_server.terminate()
         self.mock_server.wait()
+        self.mock_isound.terminate()
+        self.mock_isound.wait()
         super(SoundBaseTestCase, self).tearDown()
 
 
