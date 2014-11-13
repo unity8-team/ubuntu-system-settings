@@ -19,6 +19,7 @@
 */
 import QtQuick 2.0
 import GSettings 1.0
+import SystemSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 
@@ -102,10 +103,11 @@ Column {
         }[tech]
     }
 
+    SettingsItemTitle { text: i18n.tr("Connection type:") }
+
     ListItem.ItemSelector {
         id: radio
         expanded: true
-        text: i18n.tr("Connection type:")
         model: poweredSim ? poweredSim.radioSettings.modemTechnologies : []
         delegate: OptionSelectorDelegate {
             objectName: poweredSim.path + "_radio_" + modelData

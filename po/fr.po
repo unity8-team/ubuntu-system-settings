@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-10-16 20:04-0600\n"
-"PO-Revision-Date: 2014-10-26 15:26+0000\n"
+"PO-Revision-Date: 2014-11-10 08:40+0000\n"
 "Last-Translator: Jean Marc <Unknown>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2014-10-27 06:30+0000\n"
-"X-Generator: Launchpad (build 17203)\n"
+"X-Launchpad-Export-Date: 2014-11-11 07:10+0000\n"
+"X-Generator: Launchpad (build 17241)\n"
 "Language: \n"
 
 #: ubuntu-system-settings.desktop.in.in.h:1 ../src/qml/MainWindow.qml:112
@@ -141,19 +141,19 @@ msgstr "Vos détails d'authentification étaient incorrects"
 
 #: ../plugins/wifi//Common.qml:52
 msgid "802.1X supplicant disconnected"
-msgstr ""
+msgstr "Le demandeur 802.1X est déconnecté"
 
 #: ../plugins/wifi//Common.qml:54
 msgid "802.1X supplicant configuration failed"
-msgstr ""
+msgstr "La configuration du demandeur 802.1X a échoué"
 
 #: ../plugins/wifi//Common.qml:56
 msgid "802.1X supplicant failed"
-msgstr ""
+msgstr "Le demandeur 802.1X a échoué"
 
 #: ../plugins/wifi//Common.qml:58
 msgid "802.1X supplicant took too long to authenticate"
-msgstr ""
+msgstr "Le délai d'authentification du demandeur 802.1X a expiré"
 
 #: ../plugins/wifi//Common.qml:60
 msgid "DHCP client failed to start"
@@ -202,7 +202,7 @@ msgstr "L'existence d'une connexion avec le périphérique a été supposée"
 
 #: ../plugins/wifi//Common.qml:82
 msgid "The supplicant is now available"
-msgstr ""
+msgstr "Le demandeur est maintenant disponible"
 
 #: ../plugins/wifi//Common.qml:84
 msgid "The modem could not be found"
@@ -2317,14 +2317,14 @@ msgstr "wi-fi"
 #: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:34
 #: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:272
 msgid "connect"
-msgstr ""
+msgstr "connecter"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
 #: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:36
 #: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:274
 msgid "disconnect"
-msgstr ""
+msgstr "déconnecter"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:38
@@ -2369,7 +2369,7 @@ msgstr "applications"
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
 #: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:52
 msgid "authorize"
-msgstr ""
+msgstr "autoriser"
 
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
 #: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:54
@@ -2424,7 +2424,7 @@ msgstr "sonnerie"
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
 #: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:76
 msgid "vibrate"
-msgstr ""
+msgstr "vibrer"
 
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
@@ -2493,7 +2493,7 @@ msgstr "charge"
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
 #: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:106
 msgid "idle"
-msgstr ""
+msgstr "inactif"
 
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
@@ -2538,7 +2538,7 @@ msgstr "automatique"
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:124
 msgid "correct"
-msgstr ""
+msgstr "corriger"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:126
@@ -2548,7 +2548,7 @@ msgstr "suggestions"
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:128
 msgid "capitalization"
-msgstr ""
+msgstr "majuscules"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:130
@@ -2592,7 +2592,7 @@ msgstr "services"
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
 #: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:146
 msgid "forwarding"
-msgstr ""
+msgstr "renvoi"
 
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
 #: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:148
@@ -2684,7 +2684,7 @@ msgstr "apn"
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
 #: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:194
 msgid "roam"
-msgstr ""
+msgstr "parcourir"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
@@ -2806,7 +2806,7 @@ msgstr "bluetooth"
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
 #: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:258
 msgid "headset"
-msgstr ""
+msgstr "écouteurs"
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
 #: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:260
@@ -2863,7 +2863,7 @@ msgstr "imei"
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:292
 msgid "serial"
-msgstr ""
+msgstr "série"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:296
@@ -2992,42 +2992,3 @@ msgstr "Il existe une image du système à jour."
 #: ../push-helper/software_updates_helper.py:151
 msgid "Tap to open the system updater."
 msgstr "Appuyez pour ouvrir le gestionnaire de mise à jour du système."
-
-#~ msgid "Searching"
-#~ msgstr "Recherche en cours"
-
-#~ msgid "Refresh"
-#~ msgstr "Rafraîchir"
-
-#~ msgid "settings"
-#~ msgstr "paramètres"
-
-#~ msgid "i18n"
-#~ msgstr "i18n"
-
-#~ msgid "lang"
-#~ msgstr "lang"
-
-#~ msgid "Remove"
-#~ msgstr "Supprimer"
-
-#~ msgid "Connect to Wi-Fi"
-#~ msgstr "Se connecter au Wi-Fi"
-
-#~ msgid "Available networks"
-#~ msgstr "Réseaux disponibles"
-
-#~ msgid "Password visible"
-#~ msgstr "Mot de passe visible"
-
-#~ msgid "Other network"
-#~ msgstr "Autre réseau"
-
-#~ msgid "Set lock security"
-#~ msgstr "Régler la sécurité de verrouillage"
-
-#~ msgid "Those passphrases don't match."
-#~ msgstr "Ces phrases secrètes ne correspondent pas."
-
-#~ msgid "Passphrase must be at least four characters long."
-#~ msgstr "La phrase secrète doit faire au moins quatre caractères de long."

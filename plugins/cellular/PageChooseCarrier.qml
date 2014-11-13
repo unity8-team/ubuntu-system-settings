@@ -131,13 +131,14 @@ ItemPage {
              }
             spacing: 0
 
+            SettingsItemTitle { text: i18n.tr("Choose carrier:") }
+
             ListItem.ItemSelector {
                 id: chooseCarrier
                 objectName: "mode"
                 expanded: true
                 enabled: !scanning
                 opacity: enabled ? 1 : 0.5
-                text: i18n.tr("Choose carrier:")
                 model: [i18n.tr("Automatically")]
                 delegate: OptionSelectorDelegate {
                     text: {
