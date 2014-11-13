@@ -45,7 +45,7 @@ NM_PATH = '/org/freedesktop/NetworkManager'
 NM_IFACE = 'org.freedesktop.NetworkManager'
 ISOUND_SERVICE = 'com.canonical.indicator.sound'
 ISOUND_ACTION_PATH = '/com/canonical/indicator/sound'
-GTK_ACTION_IFACE = 'org.gtk.Actions'
+GTK_ACTIONS_IFACE = 'org.gtk.Actions'
 
 
 class UbuntuSystemSettingsTestCase(
@@ -546,8 +546,10 @@ class SoundBaseTestCase(
                                              stdout=subprocess.PIPE)
 
         # start isound
-        self.mock_isound = self.spawn_servier(ISOUND_SERVICE, ISOUND_ACTION_PATH,
-                                              GTK_ACTION_IFACE, stdout=subprocess.PIPE)
+        self.mock_isound = self.spawn_server(ISOUND_SERVICE,
+                                             ISOUND_ACTION_PATH,
+                                             GTK_ACTIONS_IFACE,
+                                             stdout=subprocess.PIPE)
 
         sleep(2)
 
@@ -560,7 +562,7 @@ class SoundBaseTestCase(
         self.dbus_mock_isound = dbus.Interface(self.dbus_con.get_object(
                                                ISOUND_SERVICE,
                                                ISOUND_ACTION_PATH,
-                                               GTK_ACTION_IFACE),
+                                               GTK_ACTIONS_IFACE),
                                                dbusmock.MOCK_IFACE)
 
         # let accountservice find a user object path
@@ -631,7 +633,9 @@ class SoundBaseTestCase(
                 ),
                 (
                     'DescribeAll', 's', 'a{s(bsav)}',
-                    'ret = {"silent-mode": [True, "", [False]], "volume": [True, "i", [0.4]]}'
+                    'ret = {'
+                    '"silent-mode": [True, "", [False]],'
+                    '"volume": [True, "i", [0.4]]}'
                 ),
                 (
                     'List', '', 'as',
