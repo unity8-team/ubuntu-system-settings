@@ -43,6 +43,9 @@ LM_IFACE = 'org.freedesktop.login1.Manager'
 NM_SERVICE = 'org.freedesktop.NetworkManager'
 NM_PATH = '/org/freedesktop/NetworkManager'
 NM_IFACE = 'org.freedesktop.NetworkManager'
+ISOUND_SERVICE = 'com.canonical.indicator.sound'
+ISOUND_ACTION_PATH = '/com/canonical/indicator/sound'
+GTK_ACTION_IFACE = 'org.gtk.Actions'
 
 
 class UbuntuSystemSettingsTestCase(
@@ -542,6 +545,10 @@ class SoundBaseTestCase(
                                              ACCOUNTS_IFACE, system_bus=True,
                                              stdout=subprocess.PIPE)
 
+        # start isound
+        self.mock_isound = self.spawn_servier(ISOUND_SERVICE, ISOUND_ACTION_PATH,
+                                              GTK_ACTION_IFACE, stdout=subprocess.PIPE)
+
         sleep(2)
 
         self.dbus_mock = dbus.Interface(self.dbus_con.get_object(
@@ -549,6 +556,13 @@ class SoundBaseTestCase(
                                         ACCOUNTS_OBJ,
                                         ACCOUNTS_IFACE),
                                         dbusmock.MOCK_IFACE)
+
+        self.dbus_mock_isound = dbus.Interface(self.dbus_con.get_object(
+                                               ISOUND_SERVICE,
+                                               ISOUND_ACTION_PATH,
+                                               GTK_ACTION_IFACE),
+                                               dbusmock.MOCK_IFACE)
+
         # let accountservice find a user object path
         self.dbus_mock.AddMethod(ACCOUNTS_IFACE, 'FindUserById', 'x', 'o',
                                  'ret = "%s"' % user_obj)
@@ -600,6 +614,34 @@ class SoundBaseTestCase(
 
         self.obj_test = self.dbus_con.get_object(ACCOUNTS_IFACE, user_obj,
                                                  ACCOUNTS_IFACE)
+
+        self.dbus_mock_isound.AddMethods(
+            GTK_ACTIONS_IFACE,
+            [
+                (
+                    'Activate', 'sava{sv}', '',
+                    ''
+                ),
+                (
+                    'Describe', 's', '(bsav)',
+                    'if args[0] == "silent-mode":'
+                    '    ret = [True, "", [False]]'
+                    'if args[0] == "volume":'
+                    '    ret = [True, "i", [0.4]]'
+                ),
+                (
+                    'DescribeAll', 's', 'a{s(bsav)}',
+                    'ret = {"silent-mode": [True, "", [False]], "volume": [True, "i", [0.4]]}'
+                ),
+                (
+                    'List', '', 'as',
+                    'ret = ["silent-mode", "volume"]'
+                ),
+                (
+                    'SetState', 'sva{sv}', '',
+                    ''
+                )
+            ])
 
         super(SoundBaseTestCase, self).setUp(panel)
 
