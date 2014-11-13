@@ -524,6 +524,7 @@ class SoundBaseTestCase(
     def setUpClass(klass):
         klass.start_system_bus()
         klass.dbus_con = klass.get_dbus(True)
+        klass.dbus_con_session = klass.get_dbus(False)
 
     def setUp(self, panel='sound'):
 
@@ -559,7 +560,7 @@ class SoundBaseTestCase(
                                         ACCOUNTS_IFACE),
                                         dbusmock.MOCK_IFACE)
 
-        self.dbus_mock_isound = dbus.Interface(self.dbus_con.get_object(
+        self.dbus_mock_isound = dbus.Interface(self.dbus_con_session.get_object(
                                                ISOUND_SERVICE,
                                                ISOUND_ACTION_PATH,
                                                GTK_ACTIONS_IFACE),
