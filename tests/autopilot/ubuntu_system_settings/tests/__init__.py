@@ -527,7 +527,6 @@ class SoundBaseTestCase(
         user_obj = '/user/foo'
 
         self.accts_snd_props = {
-            'SilentMode': dbus.Boolean(False, variant_level=1),
             'IncomingCallVibrate': dbus.Boolean(False, variant_level=1),
             'IncomingCallVibrateSilentMode': dbus.Boolean(False,
                                                           variant_level=1),
@@ -575,10 +574,6 @@ class SoundBaseTestCase(
         self.dbus_mock.AddObject(
             user_obj, ACCOUNTS_SOUND_IFACE, self.accts_snd_props,
             [
-                (
-                    'GetSilentMode', '', 'v',
-                    'ret = self.Get("%s", "SilentMode")' %
-                    ACCOUNTS_SOUND_IFACE),
                 (
                     'GetIncomingCallVibrate', '', 'v',
                     'ret = self.Get("%s", "IncomingCallVibrate")' %
