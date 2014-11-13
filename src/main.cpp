@@ -29,6 +29,8 @@
 #include <QUrl>
 #include <QQuickView>
 #include <QtQml>
+#include <QtQml/QQmlDebuggingEnabler>
+static QQmlDebuggingEnabler debuggingEnabler(false);
 
 using namespace SystemSettings;
 
@@ -83,6 +85,7 @@ int main(int argc, char **argv)
                      Qt::QueuedConnection);
     qmlRegisterType<QAbstractItemModel>();
     qmlRegisterType<SystemSettings::PluginManager>("SystemSettings", 1, 0, "PluginManager");
+    view.engine()->rootContext()->setContextProperty("Utilities", new Utilities());
     view.setResizeMode(QQuickView::SizeRootObjectToView);
     view.engine()->addImportPath(PLUGIN_PRIVATE_MODULE_DIR);
     view.engine()->addImportPath(PLUGIN_QML_DIR);

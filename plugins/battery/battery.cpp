@@ -21,17 +21,7 @@
 #include "battery.h"
 #include <glib.h>
 #include <libupower-glib/upower.h>
-#include <nm-client.h>
 #include <QtCore/QDebug>
-
-static void wireless_enabled_changed (NMDevice *device G_GNUC_UNUSED,
-                                      GParamSpec *pspec G_GNUC_UNUSED,
-                                      gpointer user_data)
-{
-    auto object = static_cast<Battery *>(user_data);
-
-    Q_EMIT (object->wifiEnabledChanged());
-}
 
 Battery::Battery(QObject *parent) :
     QObject(parent),
@@ -43,12 +33,6 @@ Battery::Battery(QObject *parent) :
     m_deviceString("")
 {
     m_device = up_device_new();
-    m_nm_client = nm_client_new();
-
-    g_signal_connect (m_nm_client,
-                      "notify::wireless-enabled",
-                      G_CALLBACK (wireless_enabled_changed),
-                      this /* user_data */);
 
     buildDeviceString();
     getLastFullCharge();
@@ -63,15 +47,19 @@ bool Battery::powerdRunning() const
 
 void Battery::buildDeviceString() {
     UpClient *client;
-    gboolean returnIsOk;
     GPtrArray *devices;
     UpDeviceKind kind;
 
     client = up_client_new();
+
+#if !UP_CHECK_VERSION(0, 99, 0)
+    gboolean returnIsOk;
+
     returnIsOk = up_client_enumerate_devices_sync(client, nullptr, nullptr);
 
     if(!returnIsOk)
         return;
+#endif
 
     devices = up_client_get_devices(client);
 
@@ -92,17 +80,6 @@ QString Battery::deviceString() const
 {
     return m_deviceString;
 }
-
-bool Battery::getWifiEnabled()
-{
-    return nm_client_wireless_get_enabled (m_nm_client);
-}
-
-void Battery::setWifiEnabled(bool enabled)
-{
-    nm_client_wireless_set_enabled (m_nm_client, enabled);
-}
-
 
 int Battery::lastFullCharge() const
 {
@@ -214,5 +191,4 @@ QVariantList Battery::getHistory(const QString &deviceString, const int timespan
 
 Battery::~Battery() {
     g_object_unref(m_device);
-    g_object_unref(m_nm_client);
 }

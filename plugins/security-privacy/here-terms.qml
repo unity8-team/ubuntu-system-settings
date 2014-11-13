@@ -16,18 +16,21 @@
 
 import QtQuick 2.3
 import Qt.labs.folderlistmodel 2.1
+import SystemSettings 1.0
 import Ubuntu.Components 1.1
-import Ubuntu.SystemSettings.Wizard.Utils 0.1
-import Ubuntu.Web 0.2
-import "../Components" as LocalComponents
+import Ubuntu.SystemSettings.SecurityPrivacy 1.0
 
-LocalComponents.Page {
-    title: i18n.tr("Terms & Conditions")
-    customBack: true
+ItemPage {
+    title: i18n.tr("Nokia HERE")
+    id: termsPage
+
+    UbuntuSecurityPrivacyPanel {
+        id: securityPrivacy
+    }
 
     FolderListModel {
         id: termsModel
-        folder: System.hereLicensePath
+        folder: securityPrivacy.hereLicensePath
         nameFilters: ["*.html"]
         showDirs: false
         showOnlyReadable: true
@@ -73,7 +76,8 @@ LocalComponents.Page {
 
     function loadFileContent() {
         var xhr = new XMLHttpRequest
-        xhr.open("GET", System.hereLicensePath + "/" + determineFileName())
+        xhr.open("GET", securityPrivacy.hereLicensePath + "/" + determineFileName())
+        console.warn('opening', securityPrivacy.hereLicensePath + "/" + determineFileName())
         xhr.onreadystatechange = function() {
             if (xhr.readyState == XMLHttpRequest.DONE) {
                 termsLabel.text = xhr.responseText
@@ -81,37 +85,39 @@ LocalComponents.Page {
         }
         xhr.send()
     }
+    Flickable {
+        id: scrollWidget
+        anchors.fill: parent
+        contentHeight: contentItem.childrenRect.height
+        boundsBehavior: (contentHeight > termsPage.height) ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
+        /* Set the direction to workaround https://bugreports.qt-project.org/browse/QTBUG-31905
+           otherwise the UI might end up in a situation where scrolling doesn't work */
+        flickableDirection: Flickable.VerticalFlick
 
-    onBackClicked: {
-        if (webview.visible) {
-            termsLabel.visible = true
-        } else {
-            pageStack.prev()
-        }
-    }
+        Column {
+            width: scrollWidget.width
 
-    Column {
-        id: column
-        anchors.fill: content
-
-        Label {
-            id: termsLabel
-            anchors.left: parent.left
-            anchors.right: parent.right
-            wrapMode: Text.Wrap
-            linkColor: Theme.palette.normal.foregroundText
-            onLinkActivated: {
-                webview.url = link
-                termsLabel.visible = false
+            Item {
+                height: units.gu(2)
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                }
             }
-        }
 
-        WebView {
-            id: webview
-            anchors.left: parent.left
-            anchors.right: parent.right
-            height: parent.height
-            visible: !termsLabel.visible
+            Label {
+                id: termsLabel
+                anchors {
+                    margins: units.gu(2)
+                    left: parent.left
+                    right: parent.right
+                }
+                wrapMode: Text.Wrap
+                linkColor: Theme.palette.normal.backgroundText
+                onLinkActivated: {
+                    Qt.openUrlExternally(link)
+                }
+            }
         }
     }
 }

@@ -27,9 +27,11 @@ ListItem.Empty {
     property real leftMargin
     property real rightMargin
 
+    readonly property real labelOffset: label.x
+
     signal linkActivated(string link)
 
-    implicitHeight: label.height + units.gu(2)
+    implicitHeight: Math.max(label.height, checkBox.height)
 
     Item {
         anchors.fill: parent
@@ -39,7 +41,7 @@ ListItem.Empty {
 
             anchors {
                 left: parent.left
-                verticalCenter: parent.verticalCenter
+                top: parent.top
                 leftMargin: listItem.leftMargin
             }
 
@@ -59,7 +61,10 @@ ListItem.Empty {
 
             Connections {
                 target: listItem.__mouseArea
-                onClicked: listItem.checked = !listItem.checked
+                onClicked: {
+                    listItem.checked = !listItem.checked
+                    listItem.triggered(listItem.checked)
+                }
             }
         }
 

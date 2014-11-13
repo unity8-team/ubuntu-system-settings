@@ -30,23 +30,17 @@ ListItem.SingleValue {
     iconSource: Qt.resolvedUrl(model.icon)
     iconFrame: false
     progression: true
-
     value: updatesAvailable > 0 ? updatesAvailable : ""
 
     property int updatesAvailable: 0
-    property variant updateModel: UpdateManager.model
 
     function _updatesRefresh() {
         var _updatesAvailable = 0;
-        for (var i=0; i < updateModel.length; i++) {
-            if (updateModel[i].updateRequired)
+        for (var i=0; i < UpdateManager.model.length; i++) {
+            if (UpdateManager.model[i].updateRequired)
                 _updatesAvailable += 1;
         }
-        root.updatesAvailable = _updatesAvailable;
-        if (root.updatesAvailable > 0)
-            root.parent.visible = true;
-        else
-            root.parent.visible = false;
+        updatesAvailable =  _updatesAvailable;
     }
 
     Connections {
@@ -54,20 +48,8 @@ ListItem.SingleValue {
         objectName: "updateManager"
         target: UpdateManager
         onModelChanged: root._updatesRefresh()
+        onUpdateAvailableFound: root._updatesRefresh()
     }
 
     onClicked: main.loadPluginByName("system-update");
-
-    /* Don't check for updates immediately on startup */
-    Timer {
-        interval: 60000
-        // TODO: Disable the timer until we decide when to check
-        running: false
-        repeat: false
-        onTriggered: {
-            /* Only check for updates if the model isn't already populated */
-            if (root.updatesAvailable < 1)
-                UpdateManager.checkUpdates();
-        }
-    }
 }

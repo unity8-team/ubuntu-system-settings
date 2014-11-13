@@ -147,12 +147,13 @@ ItemPage {
                 right: parent.right
             }
 
+            SettingsItemTitle { text: i18n.tr("Choose carrier:") }
+
             ListItem.ItemSelector {
                 id: chooseCarrier
-                objectName: "autoChooseCarrierSelector"
+                objectName: "mode"
                 expanded: true
                 enabled: sim.netReg.mode !== "auto-only"
-                text: i18n.tr("Choose carrier:")
                 model: [i18n.tr("Automatically"), i18n.tr("Manually")]
 
                 delegate: OptionSelectorDelegate { showDivider: false }
@@ -171,6 +172,7 @@ ItemPage {
                     }
                 }
             }
+
             ListItem.SingleControl {
                 enabled: chooseCarrier.selectedIndex === 1
                 anchors {
@@ -198,7 +200,7 @@ ItemPage {
                     }
                     ListItem.ItemSelector {
                         id: carrierSelector
-                        objectName: "carrierSelector"
+                        objectName: "carriers"
                         expanded: true
                         enabled: sim.netReg.status !== "searching" && chooseCarrier.selectedIndex === 1
                         // work around ItemSelector not having a visual change depending on being disabled

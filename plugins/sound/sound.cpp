@@ -57,6 +57,8 @@ void Sound::slotChanged(QString interface,
         Q_EMIT incomingCallVibrateSilentModeChanged();
     } else if (property == "IncomingMessageVibrateSilentMode") {
         Q_EMIT incomingMessageVibrateSilentModeChanged();
+    } else if (property == "DialpadSoundsEnabled") {
+        Q_EMIT dialpadSoundsEnabledChanged();
     }
 }
 
@@ -69,6 +71,7 @@ void Sound::slotNameOwnerChanged()
     Q_EMIT incomingMessageVibrateChanged();
     Q_EMIT incomingCallVibrateSilentModeChanged();
     Q_EMIT incomingMessageVibrateSilentModeChanged();
+    Q_EMIT dialpadSoundsEnabledChanged();
 }
 
 QString Sound::getIncomingCallSound()
@@ -190,13 +193,39 @@ void Sound::setDialpadSoundsEnabled(bool enabled)
     Q_EMIT(dialpadSoundsEnabledChanged());
 }
 
-QStringList Sound::listSounds(const QString &dirString)
+QStringList soundsListFromDir(const QString &dirString)
 {
-    if (m_soundsList.isEmpty())
+    QDir soundsDir(dirString);
+
+    if (soundsDir.exists())
     {
-        QDir soundsDir(dirString);
+        QStringList soundsList;
+
         soundsDir.setFilter(QDir::Files | QDir::NoSymLinks);
-        m_soundsList = soundsDir.entryList();
+
+        for (uint i=0; i < soundsDir.count(); i++)
+            soundsList.append(soundsDir.absoluteFilePath(soundsDir[i])) ;
+        return soundsList;
     }
-    return m_soundsList;
+    return QStringList();
+}
+
+bool sortSoundsList(const QString &s1, const QString &s2)
+ {
+    return QFileInfo(s1).fileName() < QFileInfo(s2).fileName();
+}
+
+/* List soundfiles in a directory and the corresponding /custom one,
+ * which is what is used for oem customization, return a list of
+ * the fullpaths to those sounds, sorted by name */
+QStringList Sound::listSounds(const QStringList &dirs)
+{
+    QStringList sounds;
+
+    for (int i = 0; i < dirs.size(); ++i)
+        sounds.append(soundsListFromDir(dirs[i]));
+
+    qSort(sounds.begin(), sounds.end(), sortSoundsList);
+
+    return sounds;
 }

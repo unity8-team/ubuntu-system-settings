@@ -25,7 +25,6 @@
 #include <QObject>
 
 #include <libupower-glib/upower.h>
-#include <nm-client.h>
 
 class Battery : public QObject
 {
@@ -42,11 +41,6 @@ class Battery : public QObject
                 READ lastFullCharge
                 NOTIFY lastFullChargeChanged)
 
-    Q_PROPERTY( bool wifiEnabled
-                READ getWifiEnabled
-                WRITE setWifiEnabled
-                NOTIFY wifiEnabledChanged)
-
 public:
     explicit Battery(QObject *parent = 0);
     ~Battery();
@@ -54,12 +48,9 @@ public:
     QString deviceString() const;
     int lastFullCharge() const;
     Q_INVOKABLE QVariantList getHistory(const QString &deviceString, const int timespan, const int resolution);
-    bool getWifiEnabled();
-    void setWifiEnabled(bool enabled);
 
 Q_SIGNALS:
     void lastFullChargeChanged();
-    void wifiEnabledChanged();
 
 private:
     QDBusConnection m_systemBusConnection;
@@ -69,7 +60,6 @@ private:
     UpDevice *m_device;
     QString m_deviceString;
     int m_lastFullCharge;
-    NMClient *m_nm_client;
     void buildDeviceString();
     void getLastFullCharge();
     bool updateLastFullCharge(UpHistoryItem *item, int offset);

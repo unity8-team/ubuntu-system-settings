@@ -93,7 +93,7 @@ LocalComponents.Page {
                         desc = i18n.tr("No security")
                     } else if (method === UbuntuSecurityPrivacyPanel.Passcode) {
                         name = i18n.tr("Passcode")
-                        desc = i18n.tr("4 numbers")
+                        desc = i18n.tr("4 digits only")
                     } else {
                         name = i18n.tr("Passphrase")
                         desc = i18n.tr("Numbers and letters")
@@ -112,7 +112,7 @@ LocalComponents.Page {
             text: i18n.tr("Continue")
             onClicked: {
                 root.passwordMethod = indexToMethod(selector.selectedIndex)
-                pageStack.next()
+                pageStack.load(Qt.resolvedUrl("passwd-set.qml"))
             }
         }
     }

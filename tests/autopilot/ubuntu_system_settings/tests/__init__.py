@@ -22,6 +22,7 @@ from fixtures import EnvironmentVariable
 from testtools.matchers import Equals, NotEquals, GreaterThan
 from time import sleep
 from ubuntu_system_settings import SystemSettings
+from gi.repository import UPowerGlib
 
 ACCOUNTS_IFACE = 'org.freedesktop.Accounts'
 ACCOUNTS_USER_IFACE = 'org.freedesktop.Accounts.User'
@@ -36,6 +37,7 @@ CONNMAN_IFACE = 'org.ofono.ConnectionManager'
 RDO_IFACE = 'org.ofono.RadioSettings'
 SIM_IFACE = 'org.ofono.SimManager'
 NETREG_IFACE = 'org.ofono.NetworkRegistration'
+NETOP_IFACE = 'org.ofono.NetworkOperator'
 CALL_FWD_IFACE = 'org.ofono.CallForwarding'
 CALL_SETTINGS_IFACE = 'org.ofono.CallSettings'
 SYSTEM_IFACE = 'com.canonical.SystemImage'
@@ -46,6 +48,8 @@ LM_IFACE = 'org.freedesktop.login1.Manager'
 NM_SERVICE = 'org.freedesktop.NetworkManager'
 NM_PATH = '/org/freedesktop/NetworkManager'
 NM_IFACE = 'org.freedesktop.NetworkManager'
+UPOWER_VERSION = str(UPowerGlib.MAJOR_VERSION)
+UPOWER_VERSION += '.' + str(UPowerGlib.MINOR_VERSION)
 
 
 class UbuntuSystemSettingsTestCase(
@@ -77,7 +81,9 @@ class UbuntuSystemSettingsUpowerTestCase(UbuntuSystemSettingsTestCase,
         cls.dbus_con = cls.get_dbus(True)
         # Add a mock Upower environment so we get consistent results
         (cls.p_mock, cls.obj_upower) = cls.spawn_server_template(
-            'upower', {'OnBattery': True}, stdout=subprocess.PIPE)
+            'upower',
+            {'OnBattery': True, 'DaemonVersion': UPOWER_VERSION},
+            stdout=subprocess.PIPE)
         cls.dbusmock = dbus.Interface(cls.obj_upower, dbusmock.MOCK_IFACE)
 
     def setUp(self, panel=None):
@@ -153,7 +159,7 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
     def mock_carriers(self, name):
         self.dbusmock.AddObject(
             '/%s/operator/op2' % name,
-            'org.ofono.NetworkOperator',
+            NETOP_IFACE,
             {
                 'Name': 'my.cool.telco',
                 'Status': 'available',
@@ -170,7 +176,7 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
         # Add a forbidden carrier
         self.dbusmock.AddObject(
             '/%s/operator/op3' % name,
-            'org.ofono.NetworkOperator',
+            NETOP_IFACE,
             {
                 'Name': 'my.bad.telco',
                 'Status': 'forbidden',
@@ -314,9 +320,12 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
 
 
 class CellularBaseTestCase(UbuntuSystemSettingsOfonoTestCase):
+
     def setUp(self):
         """ Go to Cellular page """
-        super(CellularBaseTestCase, self).setUp('cellular')
+        super(CellularBaseTestCase, self).setUp()
+        self.cellular_page = self.system_settings.\
+            main_view.go_to_cellular_page()
 
 
 class PhoneOfonoBaseTestCase(UbuntuSystemSettingsOfonoTestCase):
@@ -667,32 +676,6 @@ class ResetBaseTestCase(UbuntuSystemSettingsTestCase,
                         dbusmock.DBusTestCase):
     """ Base class for reset settings tests"""
 
-    def mock_for_launcher_reset(self):
-        user_obj = '/user/foo'
-        # start dbus system bus
-        self.mock_server = self.spawn_server(ACCOUNTS_IFACE, ACCOUNTS_OBJ,
-                                             ACCOUNTS_IFACE, system_bus=True,
-                                             stdout=subprocess.PIPE)
-
-        # spawn_server does not wait properly
-        # Reported as bug here: http://pad.lv/1350833
-        sleep(2)
-        self.acc_proxy = dbus.Interface(self.dbus_con.get_object(
-            ACCOUNTS_IFACE, ACCOUNTS_OBJ), dbusmock.MOCK_IFACE)
-
-        self.acc_proxy.AddMethod(ACCOUNTS_IFACE, 'FindUserById', 'x', 'o',
-                                 'ret = "%s"' % user_obj)
-
-        self.acc_proxy.AddObject(
-            user_obj, ACCOUNTS_USER_IFACE, {}, [])
-
-        self.user_mock = dbus.Interface(self.dbus_con.get_object(
-            ACCOUNTS_IFACE, user_obj),
-            dbusmock.MOCK_IFACE)
-
-        self.user_mock.AddMethod(
-            'org.freedesktop.DBus.Properties', 'Set', 'ssaa{sv}', '', '')
-
     def mock_for_factory_reset(self):
         self.mock_server = self.spawn_server(SYSTEM_IFACE, SYSTEM_SERVICE_OBJ,
                                              SYSTEM_IFACE, system_bus=True,
@@ -711,9 +694,7 @@ class ResetBaseTestCase(UbuntuSystemSettingsTestCase,
         klass.dbus_con = klass.get_dbus(True)
 
     def setUp(self):
-        self.mock_for_launcher_reset()
         self.mock_for_factory_reset()
-
         super(ResetBaseTestCase, self).setUp()
         self.reset_page = self.system_settings.main_view.go_to_reset_phone()
 

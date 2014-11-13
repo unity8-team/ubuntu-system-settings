@@ -121,10 +121,10 @@ ItemPage {
             anchors.left: parent.left
             anchors.right: parent.right
 
-            ListItem.Standard {
+            ListItem.Header {
                 id: securityTitle
                 text: i18n.tr("Security")
-            }            
+            }
             ListItem.SingleValue {
                 id: lockingControl
                 objectName: "lockingControl"
@@ -181,34 +181,28 @@ ItemPage {
                         "Encryption protects against access to phone data when the phone is connected to a PC or other device.")
                 visible: showAllUI
             }
-            ListItem.Standard {
+            ListItem.Header {
                 text: i18n.tr("Privacy")
             }
             ListItem.Standard {
                 text: i18n.tr("Stats on welcome screen")
                 control: Switch {
-                    id: welcomeStatsSwitch
-                    checked: securityPrivacy.statsWelcomeScreen
+                    property bool serverChecked: securityPrivacy.statsWelcomeScreen
+                    onServerCheckedChanged: checked = serverChecked
+                    Component.onCompleted: checked = serverChecked
+                    onTriggered: securityPrivacy.statsWelcomeScreen = checked
                 }
-            }
-            Binding {
-                target: securityPrivacy
-                property: "statsWelcomeScreen"
-                value: welcomeStatsSwitch.checked
             }
 
             ListItem.Standard {
                 text: i18n.tr("Messages on welcome screen")
                 control: Switch {
-                    id: welcomeMessagesSwitch
-                    checked: securityPrivacy.messagesWelcomeScreen
+                    property bool serverChecked: securityPrivacy.messagesWelcomeScreen
+                    onServerCheckedChanged: checked = serverChecked
+                    Component.onCompleted: checked = serverChecked
+                    onTriggered: securityPrivacy.messagesWelcomeScreen = checked
                 }
                 visible: showAllUI
-            }
-            Binding {
-                target: securityPrivacy
-                property: "messagesWelcomeScreen"
-                value: welcomeMessagesSwitch.checked
             }
 
             ListItem.SingleValue {
@@ -232,6 +226,7 @@ ItemPage {
             }
             ListItem.SingleValue {
                 id: locationItem
+                objectName: "locationItem"
                 text: i18n.tr("Location access")
                 value: ""
                 progression: true

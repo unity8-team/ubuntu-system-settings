@@ -99,7 +99,7 @@ Architecture: any
 Depends: ${misc:Depends},
          ${shlibs:Depends},
          ubuntu-system-settings (= ${binary:Version}),
-         unity8,
+         unity8 (>= 8.01),
 Recommends: qtdeclarative5-qtmir-plugin (>= 0.4)
 Conflicts: ubuntu-system-settings (<< 0.3)
 Breaks: ubuntu-system-settings (<< 0.3)
@@ -135,6 +135,7 @@ Description: System Settings for Ubuntu Touch - development files
 Package: ubuntu-system-settings-autopilot
 Architecture: all
 Depends: ubuntu-system-settings,
+         gir1.2-upowerglib-1.0,
          python3-autopilot,
          python3-dbusmock (>= 0.10.1),
          python3-dateutil,

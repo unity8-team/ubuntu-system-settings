@@ -453,11 +453,12 @@ ItemPage {
                                 objectName: "labelTitle"
                                 anchors {
                                     left: parent.left
+                                    right: buttonAppUpdate.visible ? buttonAppUpdate.left : parent.right
                                     verticalCenter: parent.verticalCenter
                                 }
                                 text: modelData.title
                                 font.bold: true
-                                elide: buttonAppUpdate.visible ? Text.ElideRight : Text.ElideNone
+                                elide: Text.ElideMiddle
                             }
 
                             Button {
@@ -514,6 +515,8 @@ ItemPage {
                             Label {
                                 objectName: "labelUpdateStatus"
                                 anchors.left: parent.left
+                                anchors.right: updateStatusLabel.left
+                                elide: Text.ElideMiddle
                                 fontSize: "small"
                                 text: {
                                     if (retry)
@@ -526,16 +529,17 @@ ItemPage {
                                 }
                             }
                             Label {
+                                id: updateStatusLabel
                                 anchors.right: parent.right
                                 visible: !labelSize.visible && !installing && !installed
                                 fontSize: "small"
                                 text: {
                                     if (!labelUpdateStatus.visible)
-                                        return convert_bytes_to_size(modelData.binaryFilesize);
+                                        return Utilities.formatSize(modelData.binaryFilesize);
 
                                     return i18n.tr("%1 of %2").arg(
-                                        convert_bytes_to_size(modelData.binaryFilesize * (progress.value * 0.01))).arg(
-                                        convert_bytes_to_size(modelData.binaryFilesize)
+                                        Utilities.formatSize(modelData.binaryFilesize * (progress.value * 0.01))).arg(
+                                        Utilities.formatSize(modelData.binaryFilesize)
                                     );
                                 }
                             }
@@ -636,12 +640,12 @@ ItemPage {
                                 elide: Text.ElideRight
                                 fontSize: "small"
                             }
-                            
+
                             Label {
                                 id: labelSize
                                 objectName: "labelSize"
                                 anchors.right: parent.right
-                                text: convert_bytes_to_size(modelData.binaryFilesize)
+                                text: Utilities.formatSize(modelData.binaryFilesize)
                                 fontSize: "small"
                                 visible: !labelUpdateStatus.visible && !installing && !installed
                             }
@@ -768,28 +772,5 @@ ItemPage {
             progression: true
             onClicked: pageStack.push(Qt.resolvedUrl("Configuration.qml"))
         }
-    }
-
-    function convert_bytes_to_size(bytes) {
-        var SIZE_IN_GIB = 1024.0 * 1024.0 * 1024.0;
-        var SIZE_IN_MIB = 1024.0 * 1024.0;
-        var SIZE_IN_KIB = 1024.0;
-
-        var result = "";
-        var size = 0;
-        if (bytes < SIZE_IN_KIB) {
-            result = bytes + i18n.tr(" bytes");
-        } else if (bytes < SIZE_IN_MIB) {
-            size = (bytes / SIZE_IN_KIB).toFixed(1);
-            result = size + i18n.tr(" KiB");
-        } else if (bytes < SIZE_IN_GIB) {
-            size = (bytes / SIZE_IN_MIB).toFixed(1);
-            result = size + i18n.tr(" MiB");
-        } else {
-            size = (bytes / SIZE_IN_GIB).toFixed(1);
-            result = size + i18n.tr(" GiB");
-        }
-
-        return result;
     }
 }

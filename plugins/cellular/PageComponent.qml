@@ -69,12 +69,12 @@ ItemPage {
         Component.onCompleted: {
             var component = Qt.createComponent("Components/Sim.qml");
             modemsSorted.forEach(function (path) {
-                console.warn('creating sim object for', path)
                 var sim = component.createObject(root, {
                     path: path
                 });
                 if (sim === null) {
-                    console.warn('failed to create sim object');
+                    console.warn('Failed to create Sim qml:',
+                        component.errorString());
                 } else {
                     Sims.add(sim);
                 }
@@ -94,15 +94,15 @@ ItemPage {
             start()
         }
     }
+
     Flickable {
+        id: flick
         anchors.fill: parent
         contentWidth: parent.width
         contentHeight: contentItem.childrenRect.height
         boundsBehavior: (contentHeight > root.height) ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
-
         Column {
             anchors { left: parent.left; right: parent.right }
-
             Loader {
                 id: loader
                 anchors { left: parent.left; right: parent.right }

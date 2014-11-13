@@ -147,17 +147,11 @@ ItemPage {
                 text: i18n.tr("Bluetooth")
                 control: Switch {
                     id: btSwitch
-                    // Cannot use onCheckedChanged as this triggers a loop
-                    onClicked: bluetoothActionGroup.enabled.activate()
-                    checked: backend.powered
+                    property bool serverChecked: bluetoothActionGroup.enabled.state
+                    onServerCheckedChanged: checked = serverChecked
+                    Component.onCompleted: checked = serverChecked
+                    onTriggered: bluetoothActionGroup.enabled.activate()
                 }
-                Component.onCompleted: clicked.connect(btSwitch.clicked)
-            }
-
-            Binding {
-                target: btSwitch
-                property: "checked"
-                value: bluetoothActionGroup.enabled.state
             }
 
             // Discoverability
@@ -246,7 +240,7 @@ ItemPage {
 
             //  Disconnnected Headset(s)
 
-            ListItem.Standard {
+            SettingsItemTitle {
                 id: disconnectedHeader
                 text: connectedList.visible ? i18n.tr("Connect another device:") : i18n.tr("Connect a device:")
                 enabled: bluetoothActionGroup.enabled
@@ -288,7 +282,7 @@ ItemPage {
             }
 
             //  Devices that connect automatically
-            ListItem.Standard {
+            SettingsItemTitle {
                 id: autoconnectHeader
                 text: i18n.tr("Connect automatically when detected:")
                 visible: autoconnectList.visible
@@ -323,7 +317,11 @@ ItemPage {
 
     Page {
         id: connectedDevicePage
-        title: backend.selectedDevice ? backend.selectedDevice.name : i18n.tr("None")
+        title: backend.selectedDevice ?
+                  backend.selectedDevice.name.length > 0 ?
+                     backend.selectedDevice.name :
+                     backend.selectedDevice.address
+                  : i18n.tr("None")
         visible: false
 
         Flickable {
@@ -344,7 +342,10 @@ ItemPage {
 
                 ListItem.SingleValue {
                     text: i18n.tr("Name")
-                    value: backend.selectedDevice ? backend.selectedDevice.name : i18n.tr("None")
+                    value: backend.selectedDevice &&
+                           backend.selectedDevice.name.length > 0 ?
+                                 backend.selectedDevice.name :
+                                 i18n.tr("None")
                 }
                 ListItem.Standard {
                     Rectangle {
@@ -396,15 +397,15 @@ ItemPage {
                     id: trustedCheck
                     text: i18n.tr("Connect automatically when detected:")
                     control: CheckBox {
-                        onClicked: {
+                        property bool serverChecked: backend.selectedDevice ? backend.selectedDevice.trusted : false
+                        onServerCheckedChanged: checked = serverChecked
+                        Component.onCompleted: checked = serverChecked
+                        onTriggered: {
                             if (backend.selectedDevice) {
-                                backend.selectedDevice.trusted = !backend.selectedDevice.trusted
+                                backend.selectedDevice.trusted = checked;
                             }
                         }
-                        checked: backend.selectedDevice ? backend.selectedDevice.trusted : false
                     }
-                    Component.onCompleted:
-                        clicked.connect(trustedCheck.clicked)
                 }
                 ListItem.SingleControl {
                     control: Button {

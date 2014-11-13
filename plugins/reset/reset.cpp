@@ -19,40 +19,14 @@
 */
 
 #include "reset.h"
-#include <QEvent>
+
+#include <QDBusInterface>
 #include <QDBusReply>
 #include <QDebug>
-#include <unistd.h>
-#include <QDBusMetaType>
-
-typedef QList<QVariantMap> resetLauncherItemsArg;
-Q_DECLARE_METATYPE(resetLauncherItemsArg)
 
 Reset::Reset(QObject *parent)
     : QObject(parent)
 {
-    static bool isRegistered = false;
-    if(!isRegistered) {
-        qDBusRegisterMetaType<resetLauncherItemsArg>();
-        isRegistered = true;
-    }
-}
-
-bool Reset::resetLauncher()
-{
-    QList<QVariantMap> items;
-    QVariantMap defaults;
-    defaults.insert("defaults", true);
-    items << defaults;
-    QVariant answer = m_accountsService.setUserProperty(
-                "com.canonical.unity.AccountsService",
-                "launcher-items",
-                QVariant::fromValue(items));
-
-    if (answer.isValid())
-        return true;
-
-    return false;
 }
 
 bool Reset::factoryReset()

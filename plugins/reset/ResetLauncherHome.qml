@@ -46,7 +46,7 @@ Component {
             onClicked: {
                 dialog.state = "clicked";
                 unitySettings.schema.reset("favorites");
-                resetBackend.resetLauncher();
+                unitySettings.schema.reset("items");
                 root.done();
             }
         }
@@ -54,12 +54,6 @@ Component {
             id: cancel
             text: i18n.tr("Cancel")
             onClicked: PopupUtils.close(dialog)
-        }
-        Label {
-            text: i18n.tr("The phone needs to restart for changes to take effect.")
-            width: parent.width
-            wrapMode: Text.Wrap
-            horizontalAlignment: Text.AlignHCenter
         }
     }
 }

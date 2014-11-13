@@ -18,18 +18,13 @@
  *
 */
 import QtQuick 2.0
+import SystemSettings 1.0
 import Ubuntu.Components 1.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 
 Column {
-
     id: simList
     objectName: "simEditor"
-
-    anchors {
-        left: parent.left
-        right: parent.right
-    }
 
     states: [
         State {
@@ -73,9 +68,24 @@ Column {
         }
     ]
 
-    ListItem.Standard {
-        text: i18n.tr("Edit SIM Name")
+    NumberAnimation {
+        id: scrollerAnimation
+        duration: UbuntuAnimation.SnapDuration
+        easing: UbuntuAnimation.StandardEasing
+        target: root.flickable
+        property: "contentY"
     }
+
+    function openedEditor () {
+        var flickable = scrollerAnimation.target;
+        var maxFlick = Math.max(0, flickable.contentHeight - root.height);
+        scrollerAnimation.from = flickable.contentY;
+        scrollerAnimation.to = Math.min(y, maxFlick) - units.gu(9); // header
+        scrollerAnimation.start();
+        nameField.forceActiveFocus();
+    }
+
+    SettingsItemTitle { text: i18n.tr("Edit SIM Name") }
 
     ListItem.ExpandablesColumn {
         anchors {
@@ -83,12 +93,14 @@ Column {
             right: parent.right
         }
         height: expandedItem ?
-            childrenRect.height + editor.height : childrenRect.height
+            expandedItem.expandedHeight : childrenRect.height
+
+        boundsBehavior: Flickable.StopAtBounds
 
         ListItem.Expandable {
             id: sim1Exp
             expandedHeight: sim1Col.height
-            objectName: "editSim1"
+            objectName: "edit_name_" + sims[0].path
             Column {
                 id: sim1Col
                 anchors {
@@ -102,7 +114,7 @@ Column {
                     }
                     height: sim1Exp.collapsedHeight
                     Label {
-                        objectName: "simLabel1"
+                        objectName: "label_" + sims[0].path
                         anchors {
                             left: parent.left
                             right: parent.right
@@ -117,14 +129,15 @@ Column {
             }
             onClicked: {
                 simList.state = "editingSim1";
-                nameField.forceActiveFocus();
+                simList.openedEditor();
             }
         }
 
         ListItem.Expandable {
             id: sim2Exp
             expandedHeight: sim2Col.height
-            objectName: "editSim2"
+            objectName: "edit_name_" + sims[1].path
+            showDivider: false
             Column {
                 id: sim2Col
                 anchors {
@@ -138,7 +151,7 @@ Column {
                     }
                     height: sim2Exp.collapsedHeight
                     Label {
-                        objectName: "simLabel2"
+                        objectName: "label_" + sims[1].path
                         anchors {
                             left: parent.left
                             right: parent.right
@@ -153,7 +166,7 @@ Column {
             }
             onClicked: {
                 simList.state = "editingSim2";
-                nameField.forceActiveFocus();
+                simList.openedEditor();
             }
         }
     }
@@ -182,6 +195,8 @@ Column {
 
             spacing: units.gu(2)
 
+            height: cancel.height + rename.height
+
             Button {
                 id: cancel
                 objectName: "cancelRename"
@@ -204,7 +219,7 @@ Column {
         }
 
         Item {
-            height: units.gu(1)
+            height: units.gu(2)
             width: parent.width
         }
 
