@@ -560,11 +560,12 @@ class SoundBaseTestCase(
                                         ACCOUNTS_IFACE),
                                         dbusmock.MOCK_IFACE)
 
-        self.dbus_mock_isound = dbus.Interface(self.dbus_con_session.get_object(
-                                               ISOUND_SERVICE,
-                                               ISOUND_ACTION_PATH,
-                                               GTK_ACTIONS_IFACE),
-                                               dbusmock.MOCK_IFACE)
+        self.dbus_mock_isound = dbus.Interface(
+            self.dbus_con_session.get_object(
+                ISOUND_SERVICE,
+                ISOUND_ACTION_PATH,
+                GTK_ACTIONS_IFACE),
+            dbusmock.MOCK_IFACE)
 
         # let accountservice find a user object path
         self.dbus_mock.AddMethod(ACCOUNTS_IFACE, 'FindUserById', 'x', 'o',
