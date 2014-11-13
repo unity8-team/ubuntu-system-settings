@@ -55,15 +55,9 @@ void deviceChanged(UpClient *client,
                    gpointer user_data)
 {
     BatteryItem *item (static_cast<BatteryItem *> (user_data));
-
-    gboolean ret = up_client_enumerate_devices_sync (client, nullptr, nullptr);
-    if (!ret) {
-        item->setVisibility (false);
-    } else {
-        GPtrArray *devices = up_client_get_devices (client);
-        item->setVisibility (devices->len > 0);
-        g_ptr_array_unref (devices);
-    }
+    GPtrArray *devices = up_client_get_devices (client);
+    item->setVisibility (devices->len > 0);
+    g_ptr_array_unref (devices);
 }
 
 BatteryItem::BatteryItem(const QVariantMap &staticData, QObject *parent):
@@ -73,6 +67,13 @@ BatteryItem::BatteryItem(const QVariantMap &staticData, QObject *parent):
     m_addedHandler(0),
     m_removedHandler(0)
 {
+#if !UP_CHECK_VERSION(0, 99, 0)
+    gboolean ret = up_client_enumerate_devices_sync (m_client, nullptr, nullptr);
+    if (!ret) {
+        setVisibility (false);
+    }
+#endif
+
     deviceChanged(m_client, nullptr, this);
     connect(m_app, SIGNAL(applicationStateChanged(Qt::ApplicationState)), this, SLOT(onApplicationStateChanged(Qt::ApplicationState)));
     up_connect();
