@@ -20,6 +20,7 @@
 
 #include "battery-plugin.h"
 
+#include <QCoreApplication>
 #include <QDebug>
 #include <QStringList>
 #include <SystemSettings/ItemBase>
@@ -39,8 +40,14 @@ public:
     ~BatteryItem();
 
 private:
+    void up_connect();
+    void up_disconnect();
     UpClient *m_client;
+    QCoreApplication *m_app;
     gulong m_addedHandler, m_removedHandler;
+
+private Q_SLOTS:
+    void onApplicationStateChanged(Qt::ApplicationState st);
 };
 
 void deviceChanged(UpClient *client,
@@ -57,32 +64,46 @@ void deviceChanged(UpClient *client,
         item->setVisibility (devices->len > 0);
         g_ptr_array_unref (devices);
     }
-
 }
 
 BatteryItem::BatteryItem(const QVariantMap &staticData, QObject *parent):
     ItemBase(staticData, parent),
     m_client(up_client_new()),
+    m_app(QCoreApplication::instance()),
     m_addedHandler(0),
     m_removedHandler(0)
 {
     deviceChanged(m_client, nullptr, this);
-    m_addedHandler = g_signal_connect (m_client,
-                                      "device-added",
-                                      G_CALLBACK (::deviceChanged),
-                                      this /* user_data */);
-    m_removedHandler = g_signal_connect (m_client,
-                                        "device-removed",
-                                        G_CALLBACK (::deviceChanged),
-                                        this /* user_data */);
+    connect(m_app, SIGNAL(applicationStateChanged(Qt::ApplicationState)), this, SLOT(onApplicationStateChanged(Qt::ApplicationState)));
+    up_connect();
 }
 
-void BatteryItem::setVisibility(bool visible)
+void BatteryItem::onApplicationStateChanged(Qt::ApplicationState st)
 {
-    setVisible(visible);
+    if (st == Qt::ApplicationActive)
+        up_connect();
+    else
+        up_disconnect();
 }
 
-BatteryItem::~BatteryItem()
+void BatteryItem::up_connect()
+{
+    if (!m_addedHandler) {
+        m_addedHandler = g_signal_connect (m_client,
+                                          "device-added",
+                                          G_CALLBACK (::deviceChanged),
+                                          this /* user_data */);
+    }
+
+    if (!m_removedHandler) {
+        m_removedHandler = g_signal_connect (m_client,
+                                            "device-removed",
+                                            G_CALLBACK (::deviceChanged),
+                                            this /* user_data */);
+    }
+}
+
+void BatteryItem::up_disconnect()
 {
     if (m_addedHandler) {
         g_signal_handler_disconnect (m_client, m_addedHandler);
@@ -93,7 +114,16 @@ BatteryItem::~BatteryItem()
         g_signal_handler_disconnect (m_client, m_removedHandler);
         m_removedHandler = 0;
     }
+}
 
+void BatteryItem::setVisibility(bool visible)
+{
+    setVisible(visible);
+}
+
+BatteryItem::~BatteryItem()
+{
+    up_disconnect();
     g_object_unref (m_client);
 }
 
@@ -101,7 +131,6 @@ BatteryPlugin::BatteryPlugin():
     QObject()
 {
 }
-
 
 ItemBase *BatteryPlugin::createItem(const QVariantMap &staticData,
                                  QObject *parent)
