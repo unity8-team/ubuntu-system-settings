@@ -4,6 +4,7 @@
  * Copyright (C) 2013 Canonical Ltd.
  *
  * Contact: Iain Lane <iain.lane@canonical.com>
+ *          Jonas G. Drange <jonas.drange@canonical.com>
  *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License version 3, as published
@@ -30,7 +31,7 @@ import "carriers.js" as CHelper
 ItemPage {
     id: root
     title: i18n.tr("Carrier")
-    objectName: "chooseCarrierPage"
+    objectName: "modeSelectorPage"
 
     property var sim
     property bool scanning: true
@@ -57,7 +58,7 @@ ItemPage {
             name: "auto-only"
             when: sim.netReg.mode === "auto-only"
             PropertyChanges {
-                target: chooseCarrier
+                target: modeSelector
                 enabled: false
             }
         }
@@ -105,7 +106,10 @@ ItemPage {
                 console.warn("onScanError: " + message);
             }
         }
-        onModeChanged: chooseCarrier.selectedIndex = (mode === "auto") ? 0 : -1
+        onModeChanged: {
+            console.warn('netReg onModeChanged', mode);
+            modeSelector.selectedIndex = (mode === "auto") ? 0 : -1
+        }
     }
 
     Component.onCompleted: sim.netReg.scan()
@@ -123,37 +127,19 @@ ItemPage {
                 left: parent.left
                 right: parent.right
             }
-            move: Transition {
-                 NumberAnimation {
-                     properties: "y"
-                     duration: UbuntuAnimation.SnapDuration
-                 }
-             }
             spacing: 0
 
-            SettingsItemTitle { text: i18n.tr("Choose carrier:") }
-
-            ListItem.ItemSelector {
-                id: chooseCarrier
-                objectName: "mode"
-                expanded: true
-                enabled: !scanning
-                opacity: enabled ? 1 : 0.5
-                model: [i18n.tr("Automatically")]
-                delegate: OptionSelectorDelegate {
-                    text: {
-                        if (sim.netReg.mode === "auto") {
-                            return sim.netReg.name ?
-                                modelData + " [ " + sim.netReg.name + " ]" :
-                                    modelData
-                        } else {
-                            return modelData;
-                        }
-                    }
-                    showDivider: false
+            Button {
+                onClicked: {
+                    console.warn(
+                        'mode', sim.netReg.mode,
+                        'state', root.state
+                    )
                 }
-                selectedIndex: sim.netReg.mode === "auto" ? 0 : -1
-                onDelegateClicked: sim.netReg.registration()
+            }
+
+            SettingsItemTitle {
+                text: i18n.tr("Choose carrier:")
 
                 ActivityIndicator {
                     id: act
@@ -172,6 +158,34 @@ ItemPage {
                 }
             }
 
+            ListItem.ItemSelector {
+                id: modeSelector
+                objectName: "mode"
+                expanded: true
+                enabled: !scanning
+                opacity: enabled ? 1 : 0.5
+                model: [i18n.tr("Automatically")]
+                delegate: OptionSelectorDelegate {
+                    text: {
+                        if (sim.netReg.mode === "auto") {
+                            return sim.netReg.name ?
+                                modelData + " [ " + sim.netReg.name + " ]" :
+                                    modelData
+                        } else {
+                            return modelData;
+                        }
+                    }
+                    showDivider: false
+                }
+                selectedIndex: sim.netReg.mode === "auto" ? 0 : -1
+
+                /* When this fails, the UI state may end up in an undefined
+                state. Issue has been filed against libqofono. */
+                onDelegateClicked: sim.netReg.registration()
+            }
+
+            /* Shown when registration mode is Manual, all operators not
+            forbidden are shown. */
             ListItem.ItemSelector {
                 id: allOperators
                 objectName: "allOperators"
@@ -192,6 +206,9 @@ ItemPage {
                 }
             }
 
+            /* Shown when registration mode is Automatic/ this list contains all
+            operators except the current one. When the user taps one of the
+            elements in this selector, it will be hidden. */
             ListItem.ItemSelector {
                 id: otherOperators
                 objectName: "otherOperators"
@@ -206,8 +223,23 @@ ItemPage {
                     showDivider: false
                     text: modelData.name
                 }
-                onDelegateClicked: CHelper.setOp(model[index].operatorPath)
-                selectedIndex: -1
+                onDelegateClicked: {
+                    var clickedOp = model[index].operatorPath;
+                    CHelper.setOp(clickedOp);
+
+                    // Update immediately and do not wait for netReg
+                    allOperators.selectedIndex = allOperators.model.indexOf(
+                        CHelper.getOrCreateOpQml(clickedOp));
+                }
+                onSelectedIndexChanged: {
+                    /* When e.g. the model changes, the selectedIndex is set to
+                    0. Ignore this, since we never want the selectedIndex to be
+                    anything other than -1 – this component is shown only when
+                    registration is "Automatic". */
+                    if (selectedIndex >= 0) {
+                        selectedIndex = -1;
+                    }
+                }
             }
         }
     }

@@ -2,10 +2,10 @@
 var _pathToQml = {}
 
 /*
-Given an array of paths, it will create a OfonoNetworkOperator
-QML object for each unseen operator.
+Given an array of paths, it will create and associate
+a OfonoNetworkOperator QML object for each new path.
 
-It will also delete any QML objects that are not in operators.
+It will also delete any QML that are not in given list of paths.
 
 @param paths Array of operator paths
 @return undefined
@@ -15,15 +15,11 @@ function updateOperatorQML (paths) {
     _createQml(paths);
 }
 
-/* Check and remove QML cache elements that
-do not appear in operator list, paths. */
 function _garbageCollect (paths) {
     var path;
     for (path in _pathToQml) {
         if (_pathToQml.hasOwnProperty(path)) {
             if (paths.indexOf(path) === -1) {
-                /* Found path that was not in the new operator list,
-                let's remove it */
                 _pathToQml[path].destroy();
                 delete _pathToQml[path];
             }
@@ -31,7 +27,6 @@ function _garbageCollect (paths) {
     }
 }
 
-/* Creates QML objects for each path in paths. */
 function _createQml (paths) {
     paths.forEach(function (path, i) {
         if (!_pathToQml.hasOwnProperty(path)) {
@@ -45,6 +40,9 @@ function _createQml (paths) {
 /*
 Takes a list of paths and returns
 OfonoNetworkOperator objects for each path.
+
+Note: This function will create OfonoNetworkOperator
+objects for paths not associated with one.
 
 @param paths Array of operator paths
 @param ignore Array of operator paths to ignore
@@ -66,7 +64,6 @@ function getOps (paths, ignore) {
 }
 
 /*
-Safe to be called with an empty path
 @param path String an operator path
 @return OfonoNetworkOperator or null if no QML exist for path
 */
@@ -83,8 +80,7 @@ Returns an operator. Before returning it sees
 if we have created QML for this operator path
 before. QML is created if not.
 
-Since the OfonoNetworkOperator component is local
-we can guarantee that one will be returned.
+It is guaranteed that a QML object will be returned.
 
 @param path String an operator path
 @return OfonoNetworkOperator
