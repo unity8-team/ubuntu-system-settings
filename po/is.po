@@ -10,15 +10,15 @@ msgstr ""
 "Project-Id-Version: po_ubuntu-system-settings-is\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-10-16 20:04-0600\n"
-"PO-Revision-Date: 2014-10-14 11:31+0000\n"
+"PO-Revision-Date: 2014-11-14 02:30+0000\n"
 "Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
 "Language-Team: Icelandic <translation-team-is@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-10-18 07:10+0000\n"
-"X-Generator: Launchpad (build 17196)\n"
+"X-Launchpad-Export-Date: 2014-11-15 06:57+0000\n"
+"X-Generator: Launchpad (build 17241)\n"
 "Language: is\n"
 
 #: ubuntu-system-settings.desktop.in.in.h:1 ../src/qml/MainWindow.qml:112
@@ -1021,29 +1021,29 @@ msgstr "PIN fyrir SIM"
 
 #: ../plugins/security-privacy//SimPin.qml:44
 msgid "Change SIM PIN"
-msgstr ""
+msgstr "Breyta PIN-númeri SIM-korts"
 
 #: ../plugins/security-privacy//SimPin.qml:47
 #, qt-format
 msgid "Incorrect PIN. %1 attempt remaining."
 msgid_plural "Incorrect PIN. %1 attempts remaining."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Rangt PIN-númer. %1 tilraun eftir."
+msgstr[1] "Rangt PIN-númer. %1 tilraunir eftir."
 
 #: ../plugins/security-privacy//SimPin.qml:81
 msgid "Current PIN:"
-msgstr ""
+msgstr "Núverandi PIN-númer:"
 
 #: ../plugins/security-privacy//SimPin.qml:93
 #, qt-format
 msgid "%1 attempt allowed."
 msgid_plural "%1 attempts allowed."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1 tilraun heimil."
+msgstr[1] "%1 tilraunir heimilar."
 
 #: ../plugins/security-privacy//SimPin.qml:107
 msgid "Choose new PIN:"
-msgstr ""
+msgstr "Veldu nýtt PIN-númer:"
 
 #: ../plugins/security-privacy//SimPin.qml:118
 msgid "Confirm new PIN:"
@@ -1051,7 +1051,7 @@ msgstr "Staðfestu nýtt PIN-númer:"
 
 #: ../plugins/security-privacy//SimPin.qml:137
 msgid "PINs don't match. Try again."
-msgstr ""
+msgstr "PIN-númer samsvara ekki. Reyndu aftur."
 
 #: ../plugins/security-privacy//SimPin.qml:183
 msgid "Enter SIM PIN"
@@ -1064,7 +1064,7 @@ msgstr "Settu inn fyrra PIN-númer SIM-kortsins"
 #: ../plugins/security-privacy//SimPin.qml:187
 #, qt-format
 msgid "Incorrect PIN. %1 attempts remaining."
-msgstr ""
+msgstr "Rangt PIN-númer. %1 tilraunir eftir."
 
 #: ../plugins/security-privacy//SimPin.qml:246
 #, qt-format
@@ -1081,7 +1081,7 @@ msgstr "Læsa"
 
 #: ../plugins/security-privacy//SimPin.qml:340
 msgid "Change PIN…"
-msgstr ""
+msgstr "Breyta PIN-númeri..."
 
 #: ../plugins/security-privacy//SimPin.qml:357
 msgid ""
@@ -1160,7 +1160,7 @@ msgstr "Einungis sími"
 
 #: ../plugins/security-privacy//PageComponent.qml:131
 msgid "Lock phone"
-msgstr ""
+msgstr "Læsa síma"
 
 #: ../plugins/security-privacy//PageComponent.qml:161
 #: ../plugins/security-privacy//PageComponent.qml:244
@@ -1528,7 +1528,7 @@ msgstr "Eftir stærð"
 
 #: ../plugins/about//DevMode.qml:35 ../plugins/about//DevMode.qml:90
 msgid "Developer Mode"
-msgstr ""
+msgstr "Þróunarhamur"
 
 #: ../plugins/about//DevMode.qml:84
 msgid ""
@@ -1552,11 +1552,11 @@ msgstr "Raðnúmer"
 
 #: ../plugins/about//PageComponent.qml:124
 msgid "Wi-Fi address"
-msgstr ""
+msgstr "Þráðlaust vistfang"
 
 #: ../plugins/about//PageComponent.qml:132
 msgid "Bluetooth address"
-msgstr ""
+msgstr "Bluetooth vistfang"
 
 #: ../plugins/about//PageComponent.qml:144
 #, qt-format
@@ -1593,7 +1593,7 @@ msgstr "Lögfræðileg atriði"
 
 #: ../plugins/about//PageComponent.qml:203
 msgid "Developer mode"
-msgstr ""
+msgstr "Þróunarhamur"
 
 #: ../plugins/about//License.qml:30
 msgid "Sorry, this license could not be displayed."
@@ -2904,36 +2904,3 @@ msgstr ""
 #: ../push-helper/software_updates_helper.py:151
 msgid "Tap to open the system updater."
 msgstr ""
-
-#~ msgid "Other network"
-#~ msgstr "Annað netkerfi"
-
-#~ msgid "Password visible"
-#~ msgstr "Lykilorð sýnilegt"
-
-#~ msgid "Remove"
-#~ msgstr "Fjarlægja"
-
-#~ msgid "Refresh"
-#~ msgstr "Endurlesa"
-
-#~ msgid "Searching"
-#~ msgstr "Er að leita"
-
-#~ msgid "Connect to Wi-Fi"
-#~ msgstr "Tengjast þráðlausu neti"
-
-#~ msgid "Available networks"
-#~ msgstr "Tiltæk netkerfi"
-
-#~ msgid "settings"
-#~ msgstr "stillingar"
-
-#~ msgid "lang"
-#~ msgstr "tunga"
-
-#~ msgid "i18n"
-#~ msgstr "i18n"
-
-#~ msgid "Bug reporting"
-#~ msgstr "Villutilkynningar"
