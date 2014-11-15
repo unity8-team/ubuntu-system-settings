@@ -236,9 +236,7 @@ ItemPage {
 
                     onClicked: backendInfo.otherVibrate = checked
                 }
-                showDivider: false
             }
-
         }
     }
 }
