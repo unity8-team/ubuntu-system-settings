@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-11-14 06:33+0000\n"
+"X-Launchpad-Export-Date: 2014-11-15 06:57+0000\n"
 "X-Generator: Launchpad (build 17241)\n"
 "Language: is\n"
 
@@ -2904,24 +2904,3 @@ msgstr ""
 #: ../push-helper/software_updates_helper.py:151
 msgid "Tap to open the system updater."
 msgstr ""
-
-#~ msgid "PIN code"
-#~ msgstr "PIN kóði"
-
-#~ msgid "Refresh"
-#~ msgstr "Endurlesa"
-
-#~ msgid "Searching"
-#~ msgstr "Er að leita"
-
-#~ msgid "Bug reporting"
-#~ msgstr "Villutilkynningar"
-
-#~ msgid "Add a SIM card"
-#~ msgstr "Bæta við SIM-korti"
-
-#~ msgid "Available networks"
-#~ msgstr "Tiltæk netkerfi"
-
-#~ msgid "Incorrect PIN code. Try again."
-#~ msgstr "Rangur PIN-kóði. Reyndu aftur."
