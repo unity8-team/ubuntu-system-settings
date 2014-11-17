@@ -63,15 +63,18 @@ bool Battery::powerdRunning() const
 
 void Battery::buildDeviceString() {
     UpClient *client;
-    gboolean returnIsOk;
     GPtrArray *devices;
     UpDeviceKind kind;
+
+#if !UP_CHECK_VERSION(0, 99, 0)
+    gboolean returnIsOk;
 
     client = up_client_new();
     returnIsOk = up_client_enumerate_devices_sync(client, nullptr, nullptr);
 
     if(!returnIsOk)
         return;
+#endif
 
     devices = up_client_get_devices(client);
 

@@ -49,10 +49,13 @@ void deviceChanged(UpClient *client,
 {
     BatteryItem *item (static_cast<BatteryItem *> (user_data));
 
+#if !UP_CHECK_VERSION(0, 99, 0)
     gboolean ret = up_client_enumerate_devices_sync (client, nullptr, nullptr);
     if (!ret) {
         item->setVisibility (false);
-    } else {
+    } else
+#endif
+    {
         GPtrArray *devices = up_client_get_devices (client);
         item->setVisibility (devices->len > 0);
         g_ptr_array_unref (devices);
