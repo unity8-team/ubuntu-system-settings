@@ -1,7 +1,6 @@
 add_subdirectory(plugin)
 
 set(QML_SOURCES
-    BrightnessSlider.qml
     PageComponent.qml
 )
 
