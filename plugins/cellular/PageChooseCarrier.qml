@@ -106,10 +106,7 @@ ItemPage {
                 console.warn("onScanError: " + message);
             }
         }
-        onModeChanged: {
-            console.warn('netReg onModeChanged', mode);
-            modeSelector.selectedIndex = (mode === "auto") ? 0 : -1
-        }
+        onModeChanged: modeSelector.selectedIndex = (mode === "auto") ? 0 : -1
     }
 
     Component.onCompleted: sim.netReg.scan()
@@ -128,6 +125,18 @@ ItemPage {
                 right: parent.right
             }
             spacing: 0
+            move: Transition {
+                NumberAnimation {
+                    properties: "y,x,opacity,height";
+                    duration: UbuntuAnimation.SnapDuration
+                }
+            }
+            populate: Transition {
+                NumberAnimation {
+                    properties: "y,x,opacity,height";
+                    duration: UbuntuAnimation.SnapDuration
+                }
+            }
 
             SettingsItemTitle {
                 text: i18n.tr("Choose carrier:")
