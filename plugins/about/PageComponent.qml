@@ -19,6 +19,7 @@
  */
 
 import QtQuick 2.0
+import GSettings 1.0
 import QtSystemInfo 5.0
 import SystemSettings 1.0
 import Ubuntu.Components 0.1
@@ -33,6 +34,7 @@ ItemPage {
 
     title: i18n.tr("About this phone")
     flickable: scrollWidget
+    property var modemsSorted: manager.modems.slice(0).sort()
 
     UbuntuStorageAboutPanel {
         id: backendInfos
@@ -52,7 +54,7 @@ ItemPage {
             if (manager.modems.length === 1) {
                 phoneNumbers.setSource("PhoneNumber.qml", {path: manager.modems[0]})
             } else if (manager.modems.length > 1) {
-                phoneNumbers.setSource("PhoneNumbers.qml", {paths: manager.modems.slice(0).sort()})
+                phoneNumbers.setSource("PhoneNumbers.qml", {paths: modemsSorted})
             }
         }
     }
@@ -112,14 +114,26 @@ ItemPage {
                 visible: backendInfos.serialNumber
             }
 
-            ListItem.SingleValue {
-                objectName: "imeiItem"
-                property string imeiNumber
-                imeiNumber: deviceInfos.imei(0)
-                text: "IMEI"
-                value: imeiNumber
-                visible: imeiNumber
+            Repeater {
+                model: modemsSorted.length
+
+                ListItem.SingleValue {
+                    objectName: "imeiItem"
+                    property string imeiNumber
+                    imeiNumber: deviceInfos.imei(index)
+                    text: {
+                        if (modemsSorted.length > 1) {
+                            return "IMEI (" +
+                                phoneSettings.simNames[modemsSorted[index]] + ")";
+                        } else {
+                            return "IMEI";
+                        }
+                    }
+                    value: imeiNumber
+                    visible: imeiNumber
+                }
             }
+
 
             ListItem.SingleValue {
                 text: i18n.tr("Wi-Fi address")
@@ -209,4 +223,20 @@ ItemPage {
             }
         }
     }
+
+    GSettings {
+        id: phoneSettings
+        schema.id: "com.ubuntu.phone"
+        Component.onCompleted: {
+            // set default names
+            var simNames = phoneSettings.simNames;
+            modemsSorted.forEach(function (modem, i) {
+                if (!simNames[modem]) {
+                    simNames[modem] = "SIM " + i;
+                }
+            });
+            phoneSettings.simNames = simNames;
+        }
+    }
+
 }
