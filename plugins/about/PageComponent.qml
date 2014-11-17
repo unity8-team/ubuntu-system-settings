@@ -114,26 +114,34 @@ ItemPage {
                 visible: backendInfos.serialNumber
             }
 
-            Repeater {
-                model: modemsSorted.length
-
-                ListItem.SingleValue {
-                    objectName: "imeiItem"
-                    property string imeiNumber
-                    imeiNumber: deviceInfos.imei(index)
-                    text: {
-                        if (modemsSorted.length > 1) {
-                            return "IMEI (" +
-                                phoneSettings.simNames[modemsSorted[index]] + ")";
-                        } else {
-                            return "IMEI";
-                        }
-                    }
-                    value: imeiNumber
-                    visible: imeiNumber
-                }
+            ListItem.SingleValue {
+                objectName: "imeiItem"
+                property string imeiNumber
+                imeiNumber: deviceInfos.imei(0)
+                text: "IMEI"
+                value: imeiNumber
+                visible: modemsSorted.length === 1 && imeiNumber
             }
 
+            ListItem.MultiValue {
+                text: "IMEI"
+                objectName: "imeiItems"
+                values: {
+                    var imeis = [];
+                    modemsSorted.forEach(function (path, i) {
+                        imeis.push(deviceInfos.imei(i));
+                    });
+                    return imeis;
+                }
+                visible: modemsSorted.length > 1
+            }
+
+            ListItem.SingleValue {
+                objectName: "imeiItemEmpty"
+                text: "IMEI"
+                value: i18n.tr("None")
+                visible: modemsSorted.length === 0
+            }
 
             ListItem.SingleValue {
                 text: i18n.tr("Wi-Fi address")
