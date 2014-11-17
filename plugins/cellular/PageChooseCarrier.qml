@@ -31,7 +31,7 @@ import "carriers.js" as CHelper
 ItemPage {
     id: root
     title: i18n.tr("Carrier")
-    objectName: "modeSelectorPage"
+    objectName: "chooseCarrierPage"
 
     property var sim
     property bool scanning: true
@@ -128,15 +128,6 @@ ItemPage {
                 right: parent.right
             }
             spacing: 0
-
-            Button {
-                onClicked: {
-                    console.warn(
-                        'mode', sim.netReg.mode,
-                        'state', root.state
-                    )
-                }
-            }
 
             SettingsItemTitle {
                 text: i18n.tr("Choose carrier:")
