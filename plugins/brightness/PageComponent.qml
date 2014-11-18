@@ -41,12 +41,6 @@ ItemPage {
 
         BrightnessSlider {}
 
-        Binding {
-            target: autoAdjustCheck
-            property: "checked"
-            value: adjust.visible && gsettings.autoBrightness
-        }
-
         ListItem.Standard {
             id: adjust
             text: i18n.tr("Adjust automatically")
@@ -54,10 +48,11 @@ ItemPage {
                      brightnessPanel.autoBrightnessAvailable
             control: CheckBox {
                 id: autoAdjustCheck
-                checked: gsettings.autoBrightness
-                onClicked: gsettings.autoBrightness = checked
+                property bool serverChecked: gsettings.autoBrightness
+                onServerCheckedChanged: checked = serverChecked
+                Component.onCompleted: checked = serverChecked
+                onTriggered: gsettings.autoBrightness = checked
             }
-            Component.onCompleted: clicked.connect(autoAdjustCheck.clicked)
             showDivider: false
         }
         ListItem.Caption {

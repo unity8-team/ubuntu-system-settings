@@ -50,7 +50,7 @@ ItemPage {
     Column {
         anchors.fill: parent
 
-        ListItem.Standard { text: i18n.tr ("Time zone:") }
+        SettingsItemTitle { text: i18n.tr ("Time zone:") }
 
         ListItem.SingleValue {
             objectName: "timeZone"
@@ -62,10 +62,13 @@ ItemPage {
             onClicked: pageStack.push(Qt.resolvedUrl("ChooseTimeZone.qml"))
         }
 
+        SettingsItemTitle {
+            text: i18n.tr ("Set the time and date:")
+        }
+
         ListItem.ItemSelector {
             id: setTimeAutomatically
             objectName: "timeItemSelector"
-            text: i18n.tr ("Set the time and date:")
             model: [ i18n.tr("Automatically") , i18n.tr("Manually")]
             expanded: true
             onSelectedIndexChanged: {

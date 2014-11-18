@@ -1,3 +1,33 @@
+ubuntu-system-settings (0.3+15.04.20141112.1~rtm-0ubuntu1) 14.09; urgency=low
+
+  [ Ken VanDine ]
+  * Backport fix for Switch/Check binding (LP: #1336715) (LP: #1336715)
+
+  [ Sebastien Bacher ]
+  * Tweaks to try to make the section headers and titles closer to the
+    design. Use a custom component, with tweaked margins and disabled
+    tap effects, for that.
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 12 Nov 2014 16:28:25 +0000
+
+ubuntu-system-settings (0.3+14.10.20141104~rtm-0ubuntu1) 14.09; urgency=low
+
+  [ Ken VanDine ]
+  * [battery] don't use a colored icon (LP: #1351383)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 04 Nov 2014 14:38:52 +0000
+
+ubuntu-system-settings (0.3+14.10.20141103~rtm-0ubuntu1) 14.09; urgency=low
+
+  [ Michael Terry ]
+  * Add a Continue button when choosing a passphrase. And fix a few
+    other design nits with choosing a password.
+
+  [ Ubuntu daily release ]
+  * New rebuild forced
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Mon, 03 Nov 2014 19:58:15 +0000
+
 ubuntu-system-settings (0.3+14.10.20141029~rtm-0ubuntu1) 14.09; urgency=low
 
   [ Ken VanDine ]
