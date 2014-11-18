@@ -1,3 +1,14 @@
+ubuntu-system-settings (0.3+15.04.20141118-0ubuntu1) vivid; urgency=low
+
+  [ jonas-drange ]
+  * [about] use singlevaluestacked for all information bits in the
+    version panel (LP: #1390148)
+
+  [ John R. Lenton ]
+  * added debug logging to the software updates helper
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 18 Nov 2014 16:43:17 +0000
+
 ubuntu-system-settings (0.3+15.04.20141112.1-0ubuntu1) vivid; urgency=low
 
   [ Sebastien Bacher ]
