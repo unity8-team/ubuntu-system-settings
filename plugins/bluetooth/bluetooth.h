@@ -48,7 +48,8 @@ class Bluetooth : public QObject
                 NOTIFY selectedDeviceChanged)
 
     Q_PROPERTY (QObject * agent
-                READ getAgent)
+                READ getAgent
+                CONSTANT)
 
     Q_PROPERTY (bool powered
                 READ isPowered
