@@ -42,26 +42,25 @@ ItemPage {
             when: sim.netReg.mode === "auto"
             PropertyChanges {
                 target: otherOperators
-                visible: true
                 selectedIndex: -1
+            }
+            PropertyChanges {
+                target: allOperators
+                height: 0
+                opacity: 0
             }
         },
         State {
             name: "manual"
             when: sim.netReg.mode === "manual"
             PropertyChanges {
-                target: allOperators
-                visible: true
-            }
-        },
-        State {
-            name: "auto-only"
-            when: sim.netReg.mode === "auto-only"
-            PropertyChanges {
-                target: modeSelector
-                enabled: false
+                target: otherOperators
+                height: 0
+                opacity: 0
             }
         }
+        /* Note that we do not consider auto-only since this page is not
+        reachable in that case (see Carrier & APN page). */
     ]
 
     Component {
@@ -115,8 +114,8 @@ ItemPage {
         id: scrollWidget
         anchors.fill: parent
         contentWidth: parent.width
-        contentHeight: parent.height
-        boundsBehavior: (contentHeight > parent.height) ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
+        contentHeight: contentItem.childrenRect.height
+        boundsBehavior: (contentHeight > root.height) ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
 
         Column {
             id: col
@@ -125,18 +124,6 @@ ItemPage {
                 right: parent.right
             }
             spacing: 0
-            move: Transition {
-                NumberAnimation {
-                    properties: "y,x,opacity,height";
-                    duration: UbuntuAnimation.SnapDuration
-                }
-            }
-            populate: Transition {
-                NumberAnimation {
-                    properties: "y,x,opacity,height";
-                    duration: UbuntuAnimation.SnapDuration
-                }
-            }
 
             SettingsItemTitle {
                 text: i18n.tr("Choose carrier:")
@@ -169,7 +156,8 @@ ItemPage {
                     text: {
                         if (sim.netReg.mode === "auto") {
                             return sim.netReg.name ?
-                                modelData + " [ " + sim.netReg.name + " ]" :
+                                // TRANSLATORS: %1 is a (network) carrier
+                                i18n.tr("Automatically [ %1 ]").arg(sim.netReg.name) :
                                     modelData
                         } else {
                             return modelData;
@@ -192,7 +180,6 @@ ItemPage {
                 expanded: true
                 enabled: !scanning
                 opacity: enabled ? 1 : 0.5
-                visible: false
                 model: CHelper.getOps(sim.netReg.networkOperators)
                 delegate: OptionSelectorDelegate {
                     objectName: "carrier"
@@ -204,6 +191,18 @@ ItemPage {
                     var curop = sim.netReg.currentOperatorPath;
                     return model.indexOf(CHelper.getOrCreateOpQml(curop));
                 }
+
+                Behavior on height {
+                    NumberAnimation {
+                        duration: UbuntuAnimation.SnapDuration
+                    }
+                }
+
+                Behavior on opacity {
+                    NumberAnimation {
+                        duration: UbuntuAnimation.SnapDuration
+                    }
+                }
             }
 
             /* Shown when registration mode is Automatic/ this list contains all
@@ -213,7 +212,6 @@ ItemPage {
                 id: otherOperators
                 objectName: "otherOperators"
                 expanded: true
-                visible: false
                 enabled: !scanning
                 opacity: enabled ? 1 : 0.5
                 model: CHelper.getOps(sim.netReg.networkOperators,
@@ -238,6 +236,18 @@ ItemPage {
                     registration is "Automatic". */
                     if (selectedIndex >= 0) {
                         selectedIndex = -1;
+                    }
+                }
+
+                Behavior on height {
+                    NumberAnimation {
+                        duration: UbuntuAnimation.SnapDuration
+                    }
+                }
+
+                Behavior on opacity {
+                    NumberAnimation {
+                        duration: UbuntuAnimation.SnapDuration
                     }
                 }
             }

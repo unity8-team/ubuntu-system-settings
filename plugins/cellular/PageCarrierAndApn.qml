@@ -42,8 +42,9 @@ ItemPage {
             ListItem.SingleValue {
                 text: i18n.tr("Carrier")
                 objectName: "carrier"
-                value: sim.netReg.name ? sim.netReg.name : i18n.tr("N/A")
-                enabled: sim.netReg.status !== ""
+                value: sim.netReg.name ? sim.netReg.name : i18n.tr("No carrier")
+                enabled: (sim.netReg.status !== "") &&
+                    (sim.netReg.mode !== "auto-only")
                 progression: enabled
                 onClicked: pageStack.push(Qt.resolvedUrl("PageChooseCarrier.qml"), {
                     sim: sim,

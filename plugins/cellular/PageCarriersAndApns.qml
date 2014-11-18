@@ -46,8 +46,10 @@ ItemPage {
             ListItem.SingleValue {
                 text: i18n.tr("Carrier")
                 objectName: sims[0].path + "_carriers"
-                value: sims[0].netReg.name ? sims[0].netReg.name : i18n.tr("N/A")
-                enabled: sims[0].netReg.status !== ""
+                value: sims[0].netReg.name ? sims[0].netReg.name :
+                    i18n.tr("No carrier")
+                enabled: (sims[0].netReg.status !== "") &&
+                    (sims[0].netReg.mode !== "auto-only")
                 progression: enabled
                 onClicked: pageStack.push(Qt.resolvedUrl("PageChooseCarrier.qml"), {
                     sim: sims[0],
@@ -71,8 +73,10 @@ ItemPage {
             ListItem.SingleValue {
                 text: i18n.tr("Carrier")
                 objectName: sims[1].path + "_carriers"
-                value: sims[1].netReg.name ? sims[1].netReg.name : i18n.tr("N/A")
-                enabled: sims[1].netReg.status !== ""
+                value: sims[1].netReg.name ? sims[1].netReg.name :
+                    i18n.tr("No carrier")
+                enabled: (sims[1].netReg.status !== "") &&
+                    (sims[1].netReg.mode !== "auto-only")
                 progression: enabled
                 onClicked: pageStack.push(Qt.resolvedUrl("PageChooseCarrier.qml"), {
                     sim: sims[1],
