@@ -317,7 +317,11 @@ ItemPage {
 
     Page {
         id: connectedDevicePage
-        title: backend.selectedDevice ? backend.selectedDevice.name : i18n.tr("None")
+        title: backend.selectedDevice ?
+                  backend.selectedDevice.name.length > 0 ?
+                     backend.selectedDevice.name :
+                     backend.selectedDevice.address
+                  : i18n.tr("None")
         visible: false
 
         Flickable {
@@ -338,7 +342,10 @@ ItemPage {
 
                 ListItem.SingleValue {
                     text: i18n.tr("Name")
-                    value: backend.selectedDevice ? backend.selectedDevice.name : i18n.tr("None")
+                    value: backend.selectedDevice &&
+                           backend.selectedDevice.name.length > 0 ?
+                                 backend.selectedDevice.name :
+                                 i18n.tr("None")
                 }
                 ListItem.Standard {
                     Rectangle {
