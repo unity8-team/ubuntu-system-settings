@@ -138,6 +138,8 @@ ItemPage {
                 objectName: "connectToHiddenNetwork"
                 text: i18n.tr("Connect to hidden network…")
                 progression: true
+                visible : (actionGroup.actionObject.valid ?
+                           actionGroup.actionObject.state : false)
                 onClicked: {
                     otherNetworLoader.source = "OtherNetwork.qml";
                     PopupUtils.open(otherNetworLoader.item);
@@ -155,5 +157,4 @@ ItemPage {
                             Flickable.DragAndOvershootBounds :
                             Flickable.StopAtBounds
     }
-
 }

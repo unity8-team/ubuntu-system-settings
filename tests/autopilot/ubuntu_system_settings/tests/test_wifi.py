@@ -25,6 +25,11 @@ class WifiTestCase(WifiBaseTestCase):
             Equals(_('Wi-Fi')))
 
     def test_connect_to_hidden_network(self):
+        if not self.wifi_page.have_wireless():
+            self.skipTest('Cannot test wireless since it cannot be enabled')
+        self.addCleanup(
+            self.wifi_page._set_wireless, self.wifi_page.get_wireless())
+        self.wifi_page.enable_wireless()
         dialog = self.wifi_page.connect_to_hidden_network(
             'yeah',
             scroll_to_and_click=self.system_settings.main_view
@@ -47,7 +52,11 @@ class WifiTestCase(WifiBaseTestCase):
             dialog.wait_until_destroyed()
 
     def test_connect_to_nonexistant_hidden_network(self):
-
+        if not self.wifi_page.have_wireless():
+            self.skipTest('Cannot test wireless since it cannot be enabled')
+        self.addCleanup(
+            self.wifi_page._set_wireless, self.wifi_page.get_wireless())
+        self.wifi_page.enable_wireless()
         dialog = self.wifi_page.connect_to_hidden_network(
             'yeah',
             scroll_to_and_click=self.system_settings.main_view
@@ -72,6 +81,11 @@ class WifiTestCase(WifiBaseTestCase):
 
     @skip('skipped due to bug 1337556')
     def test_connect_to_hidden_network_using_secrets(self):
+        if not self.wifi_page.have_wireless():
+            self.skipTest('Cannot test wireless since it cannot be enabled')
+        self.addCleanup(
+            self.wifi_page._set_wireless, self.wifi_page.get_wireless())
+        self.wifi_page.enable_wireless()
         dialog = self.wifi_page.connect_to_hidden_network(
             'yeah', security='wpa', password='abcdefgh',
             scroll_to_and_click=self.system_settings.main_view
@@ -95,6 +109,11 @@ class WifiTestCase(WifiBaseTestCase):
 
     @skip('skipped due to bug 1337556')
     def test_connect_to_hidden_network_using_incorrect_secrets(self):
+        if not self.wifi_page.have_wireless():
+            self.skipTest('Cannot test wireless since it cannot be enabled')
+        self.addCleanup(
+            self.wifi_page._set_wireless, self.wifi_page.get_wireless())
+        self.wifi_page.enable_wireless()
         dialog = self.wifi_page.connect_to_hidden_network(
             'yeah', security='wpa', password='abcdefgh',
             scroll_to_and_click=self.system_settings.main_view
@@ -117,7 +136,11 @@ class WifiTestCase(WifiBaseTestCase):
                 _('Your authentication details were incorrect'))))
 
     def test_connect_to_hidden_network_then_cancel(self):
-
+        if not self.wifi_page.have_wireless():
+            self.skipTest('Cannot test wireless since it cannot be enabled')
+        self.addCleanup(
+            self.wifi_page._set_wireless, self.wifi_page.get_wireless())
+        self.wifi_page.enable_wireless()
         dialog = self.wifi_page.connect_to_hidden_network(
             'foo',
             scroll_to_and_click=self.system_settings.main_view
@@ -133,6 +156,18 @@ class WifiTestCase(WifiBaseTestCase):
             lambda:
                 len(self.device_mock.GetMethodCalls('Disconnect')),
             Eventually(Equals(1)))
+
+    def test_connect_to_hidden_network_dialog_visibility(self):
+        if not self.wifi_page.have_wireless():
+            self.skipTest('Cannot test wireless since it cannot be enabled')
+        self.addCleanup(
+            self.wifi_page._set_wireless, self.wifi_page.get_wireless())
+        self.wifi_page.disable_wireless()
+        self.assertThat(
+            lambda: bool(self.wifi_page.select_single(
+                '*',
+                objectName='connectToHiddenNetwork').visible),
+            Eventually(Equals(False)), 'other net dialog not hidden')
 
     """Note: this test does not actually remove previous networks from the UI.
     The NetworkManager dbusmock template does not currently support deletion
@@ -157,5 +192,7 @@ class WifiTestCase(WifiBaseTestCase):
 
         self.system_settings.main_view.go_back()
 
+        # wait for ui to update
+        sleep(2)
         self.wifi_page.remove_previous_network(
             previous_networks[2]['ssid'], scroll_to_and_click=click_method)
