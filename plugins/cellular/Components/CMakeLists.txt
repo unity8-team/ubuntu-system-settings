@@ -1,12 +1,12 @@
 set(QML_SOURCES
-    NoSim.qml
-    SingleSim.qml
-    MultiSim.qml
-    CellularSingleSim.qml
-    CellularMultiSim.qml
+    DataMultiSim.qml
     DefaultSim.qml
+    MultiSim.qml
+    NoSim.qml
+    RadioSingleSim.qml
     Sim.qml
     SimEditor.qml
+    SingleSim.qml
 )
 install(FILES ${QML_SOURCES} DESTINATION ${PLUGIN_QML_DIR}/cellular/Components)
 
