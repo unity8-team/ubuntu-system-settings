@@ -32,7 +32,7 @@ class Sound : public QObject
 
 public:
     explicit Sound(QObject *parent = 0);
-    Q_INVOKABLE QStringList listSounds(const QString &dirString);
+    Q_INVOKABLE QStringList listSounds(const QStringList &dirs);
     Q_PROPERTY (QString incomingCallSound
                 READ getIncomingCallSound
                 WRITE setIncomingCallSound
@@ -79,7 +79,6 @@ Q_SIGNALS:
 
 private:
     AccountsService m_accountsService;
-    QStringList m_soundsList;
 
     QString getIncomingCallSound();
     void setIncomingCallSound(QString sound);

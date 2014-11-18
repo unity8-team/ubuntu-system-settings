@@ -74,7 +74,7 @@ ItemPage {
                 text: i18n.tr("Silent Mode")
             }
 
-            ListItem.Standard {
+            SettingsItemTitle {
                 text: i18n.tr("Ringer:")
             }
 
@@ -109,7 +109,7 @@ ItemPage {
                 enabled: soundActionGroup.volume.state != null
                 minimumValue: 0.0
                 maximumValue: 1.0
-                minIcon: "image://theme/audio-volume-low" 
+                minIcon: "image://theme/audio-volume-low-zero"
                 maxIcon: "image://theme/audio-volume-high" 
                 onUpdated: soundActionGroup.volume.updateState(value);
             }
@@ -120,7 +120,7 @@ ItemPage {
                 text: i18n.tr("High volume can damage your hearing.")
             }
 
-            ListItem.Standard {
+            SettingsItemTitle {
                 text: i18n.tr("Phone calls:")
             }
 
@@ -141,8 +141,10 @@ ItemPage {
             ListItem.Standard {
                 control: CheckBox {
                     objectName: "callVibrate"
-                    checked: backendInfo.incomingCallVibrate
-                    onCheckedChanged: backendInfo.incomingCallVibrate = checked
+                    property bool serverChecked: backendInfo.incomingCallVibrate
+                    onServerCheckedChanged: checked = serverChecked
+                    Component.onCompleted: checked = serverChecked
+                    onTriggered: backendInfo.incomingCallVibrate = checked
                 }
                 text: i18n.tr("Vibrate when ringing")
             }
@@ -150,8 +152,10 @@ ItemPage {
             ListItem.Standard {
                 control: CheckBox {
                     objectName: "callVibrateSilentMode"
-                    checked: backendInfo.incomingCallVibrateSilentMode
-                    onCheckedChanged: backendInfo.incomingCallVibrateSilentMode = checked
+                    property bool serverChecked: backendInfo.incomingCallVibrateSilentMode
+                    onServerCheckedChanged: checked = serverChecked
+                    Component.onCompleted: checked = serverChecked
+                    onTriggered: backendInfo.incomingCallVibrateSilentMode = checked
                 }
                 text: i18n.tr("Vibrate in Silent Mode")
             }
@@ -159,13 +163,15 @@ ItemPage {
             ListItem.Standard {
                 control: Switch {
                     objectName: "dialpadSounds"
-                    checked: backendInfo.dialpadSoundsEnabled
-                    onCheckedChanged: backendInfo.dialpadSoundsEnabled = checked
+                    property bool serverChecked: backendInfo.dialpadSoundsEnabled
+                    onServerCheckedChanged: checked = serverChecked
+                    Component.onCompleted: checked = serverChecked
+                    onTriggered: backendInfo.dialpadSoundsEnabled = checked
                 }
                 text: i18n.tr("Dialpad sounds")
             }
 
-            ListItem.Standard {
+            SettingsItemTitle {
                 text: i18n.tr("Messages:")
             }
 
@@ -185,8 +191,10 @@ ItemPage {
             ListItem.Standard {
                 control: CheckBox {
                     objectName: "messageVibrate"
-                    checked: backendInfo.incomingMessageVibrate
-                    onCheckedChanged: backendInfo.incomingMessageVibrate = checked
+                    property bool serverChecked: backendInfo.incomingMessageVibrate
+                    onServerCheckedChanged: checked = serverChecked
+                    Component.onCompleted: checked = serverChecked
+                    onTriggered: backendInfo.incomingMessageVibrate = checked
                 }
                 text: i18n.tr("Vibrate with message sound")
             }
@@ -194,13 +202,15 @@ ItemPage {
             ListItem.Standard {
                 control: CheckBox {
                     objectName: "messageVibrateSilentMode"
-                    checked: backendInfo.incomingMessageVibrateSilentMode
-                    onCheckedChanged: backendInfo.incomingMessageVibrateSilentMode = checked
+                    property bool serverChecked: backendInfo.incomingMessageVibrateSilentMode
+                    onServerCheckedChanged: checked = serverChecked
+                    Component.onCompleted: checked = serverChecked
+                    onTriggered: backendInfo.incomingMessageVibrateSilentMode = checked
                 }
                 text: i18n.tr("Vibrate in Silent Mode")
             }
 
-            ListItem.Standard {
+            SettingsItemTitle {
                 text: i18n.tr("Other sounds:")
             }
 
@@ -209,9 +219,10 @@ ItemPage {
 
                 control: Switch {
                     objectName: "keyboardSoundSwitch"
-                    checked: keyboardSettings.keyPressFeedback
-
-                    onClicked: keyboardSettings.keyPressFeedback = checked
+                    property bool serverChecked: keyboardSettings.keyPressFeedback
+                    onServerCheckedChanged: checked = serverChecked
+                    Component.onCompleted: checked = serverChecked
+                    onTriggered: keyboardSettings.keyPressFeedback = checked
                 }
             }
 

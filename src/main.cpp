@@ -29,6 +29,8 @@
 #include <QUrl>
 #include <QQuickView>
 #include <QtQml>
+#include <QtQml/QQmlDebuggingEnabler>
+static QQmlDebuggingEnabler debuggingEnabler(false);
 
 using namespace SystemSettings;
 

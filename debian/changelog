@@ -1,3 +1,102 @@
+ubuntu-system-settings (0.3+15.04.20141112.1~rtm-0ubuntu1) 14.09; urgency=low
+
+  [ Ken VanDine ]
+  * Backport fix for Switch/Check binding (LP: #1336715) (LP: #1336715)
+
+  [ Sebastien Bacher ]
+  * Tweaks to try to make the section headers and titles closer to the
+    design. Use a custom component, with tweaked margins and disabled
+    tap effects, for that.
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 12 Nov 2014 16:28:25 +0000
+
+ubuntu-system-settings (0.3+14.10.20141104~rtm-0ubuntu1) 14.09; urgency=low
+
+  [ Ken VanDine ]
+  * [battery] don't use a colored icon (LP: #1351383)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 04 Nov 2014 14:38:52 +0000
+
+ubuntu-system-settings (0.3+14.10.20141103~rtm-0ubuntu1) 14.09; urgency=low
+
+  [ Michael Terry ]
+  * Add a Continue button when choosing a passphrase. And fix a few
+    other design nits with choosing a password.
+
+  [ Ubuntu daily release ]
+  * New rebuild forced
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Mon, 03 Nov 2014 19:58:15 +0000
+
+ubuntu-system-settings (0.3+14.10.20141029~rtm-0ubuntu1) 14.09; urgency=low
+
+  [ Ken VanDine ]
+  * Refactored to use a singleton for UpdateManager shared in both QML
+    and CPP. Don't load the dynamic visibility items while creating the
+    item model, defer that to the loader. (LP: #1317007)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 29 Oct 2014 13:31:03 +0000
+
+ubuntu-system-settings (0.3+14.10.20141028~rtm-0ubuntu1) 14.09; urgency=low
+
+  [ Ken VanDine ]
+  * Fix a typo in the HERE terms link.
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 28 Oct 2014 14:50:00 +0000
+
+ubuntu-system-settings (0.3+14.10.20141022-0ubuntu1) utopic; urgency=low
+
+  [ CI bot ]
+  * Resync trunk
+
+  [ Michael Zanetti ]
+  * update code to reset launcher after launcher backend implementation
+    was reworked (LP: #1376707)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 22 Oct 2014 21:34:27 +0000
+
+ubuntu-system-settings (0.3+14.10.20141021.1-0ubuntu1) utopic; urgency=low
+
+  [ Sebastien Bacher ]
+  * [storage] translator comment for the string "%1 free" (LP: #1377929)
+  * [system-update] ellipsize labels if needed (LP: #1376286)
+  * [sound] Use the correct low icon (LP: #1376286)
+
+  [ Lars Uebernickel ]
+  * notification-manager: fix issues with GVariant API usage
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 21 Oct 2014 15:24:55 +0000
+
+ubuntu-system-settings (0.3+14.10.20141021-0ubuntu1) utopic; urgency=low
+
+  [ jonas-drange ]
+  * [security/privacy] allow user to change HERE and location detection
+    settings. (LP: #1375322)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 21 Oct 2014 13:23:03 +0000
+
+ubuntu-system-settings (0.3+14.10.20141017~rtm-0ubuntu1) 14.09; urgency=low
+
+  [ Ken VanDine ]
+  * Updated the pot file.
+
+  [ jonas-drange ]
+  * [cellular] indirectly recreate ConnectionManager interface's dbus
+    proxy so it reports the true value of 'Powered' after flight mode
+    (LP: #1376957)
+
+  [ Iain Lane ]
+  * [sound] Make listSounds take a list of directories and list all of
+    the files in them, instead of assuming "/custom" all the time.
+
+  [ Ubuntu daily release ]
+  * New rebuild forced
+
+  [ Sebastien Bacher ]
+  * [sound] list custom ringtones as well (LP: #1381528)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 17 Oct 2014 14:57:51 +0000
+
 ubuntu-system-settings (0.3+14.10.20141014-0ubuntu1) utopic; urgency=low
 
   [ Ken VanDine ]

@@ -668,32 +668,6 @@ class ResetBaseTestCase(UbuntuSystemSettingsTestCase,
                         dbusmock.DBusTestCase):
     """ Base class for reset settings tests"""
 
-    def mock_for_launcher_reset(self):
-        user_obj = '/user/foo'
-        # start dbus system bus
-        self.mock_server = self.spawn_server(ACCOUNTS_IFACE, ACCOUNTS_OBJ,
-                                             ACCOUNTS_IFACE, system_bus=True,
-                                             stdout=subprocess.PIPE)
-
-        # spawn_server does not wait properly
-        # Reported as bug here: http://pad.lv/1350833
-        sleep(2)
-        self.acc_proxy = dbus.Interface(self.dbus_con.get_object(
-            ACCOUNTS_IFACE, ACCOUNTS_OBJ), dbusmock.MOCK_IFACE)
-
-        self.acc_proxy.AddMethod(ACCOUNTS_IFACE, 'FindUserById', 'x', 'o',
-                                 'ret = "%s"' % user_obj)
-
-        self.acc_proxy.AddObject(
-            user_obj, ACCOUNTS_USER_IFACE, {}, [])
-
-        self.user_mock = dbus.Interface(self.dbus_con.get_object(
-            ACCOUNTS_IFACE, user_obj),
-            dbusmock.MOCK_IFACE)
-
-        self.user_mock.AddMethod(
-            'org.freedesktop.DBus.Properties', 'Set', 'ssaa{sv}', '', '')
-
     def mock_for_factory_reset(self):
         self.mock_server = self.spawn_server(SYSTEM_IFACE, SYSTEM_SERVICE_OBJ,
                                              SYSTEM_IFACE, system_bus=True,
@@ -712,9 +686,7 @@ class ResetBaseTestCase(UbuntuSystemSettingsTestCase,
         klass.dbus_con = klass.get_dbus(True)
 
     def setUp(self):
-        self.mock_for_launcher_reset()
         self.mock_for_factory_reset()
-
         super(ResetBaseTestCase, self).setUp()
         self.reset_page = self.system_settings.main_view.go_to_reset_phone()
 

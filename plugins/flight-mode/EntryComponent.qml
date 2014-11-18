@@ -29,13 +29,13 @@ ListItem.Standard {
     iconFrame: false
     text: i18n.tr(model.displayName)
     control: Switch {
-        id: control
-        checked: helper.inFlightMode
+        property bool serverChecked: helper.inFlightMode
+        onServerCheckedChanged: checked = serverChecked
+        Component.onCompleted: checked = serverChecked
         onTriggered: helper.setFlightMode(checked)
     }
 
     FlightMode.Helper {
         id: helper
-        onInFlightModeChanged: control.checked = inFlightMode
     }
 }
