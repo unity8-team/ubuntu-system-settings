@@ -82,10 +82,12 @@ ItemPage {
 
     Connections {
         /* The following is a hack: If a scan is in progress and we call
-        scan() on netReg, it emits and scanError _and_ scanFinished.
+        scan() on netReg, it emits a scanError _and_ scanFinished.
         We look at the scanError message, set this property to true if
         it says a scan is in progress. This way we can ignore the bad
-        scanFinished signal. Filed bug against libqofono. */
+        scanFinished signal. Filed bug against libqofono[1].
+            [1] https://github.com/nemomobile/libqofono/issues/52
+        */
         property bool __scanInProgress: false
 
         target: sim.netReg
@@ -115,10 +117,10 @@ ItemPage {
         anchors.fill: parent
         contentWidth: parent.width
         contentHeight: contentItem.childrenRect.height
-        boundsBehavior: (contentHeight > root.height) ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
+        boundsBehavior: (contentHeight > root.height) ?
+            Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
 
         Column {
-            id: col
             anchors {
                 left: parent.left
                 right: parent.right
@@ -129,7 +131,6 @@ ItemPage {
                 text: i18n.tr("Choose carrier:")
 
                 ActivityIndicator {
-                    id: act
                     anchors {
                         right: parent.right
                         top: parent.top
@@ -154,6 +155,7 @@ ItemPage {
                 model: [i18n.tr("Automatically")]
                 delegate: OptionSelectorDelegate {
                     text: {
+                        // modelData is "Automatically"
                         if (sim.netReg.mode === "auto") {
                             return sim.netReg.name ?
                                 // TRANSLATORS: %1 is a (network) carrier
@@ -167,13 +169,14 @@ ItemPage {
                 }
                 selectedIndex: sim.netReg.mode === "auto" ? 0 : -1
 
-                /* When this fails, the UI state may end up in an undefined
-                state. Issue has been filed against libqofono. */
+                /* When registration() fails, the UI state may end up in an
+                undefined state. Issue[1] has been filed against libqofono.
+                    [1] https://github.com/nemomobile/libqofono/issues/54
+                */
                 onDelegateClicked: sim.netReg.registration()
             }
 
-            /* Shown when registration mode is Manual, all operators not
-            forbidden are shown. */
+            // In manual mode, all non-forbidden operators are shown.
             ListItem.ItemSelector {
                 id: allOperators
                 objectName: "allOperators"
@@ -205,9 +208,10 @@ ItemPage {
                 }
             }
 
-            /* Shown when registration mode is Automatic/ this list contains all
-            operators except the current one. When the user taps one of the
-            elements in this selector, it will be hidden. */
+            /* When registration mode is "Automatic", this list contains all
+            the non-forbidden operators except the current one. When the user
+            taps one of the elements in this selector, it will be hidden,
+            and the mode will switch to "Manual". */
             ListItem.ItemSelector {
                 id: otherOperators
                 objectName: "otherOperators"
@@ -232,7 +236,7 @@ ItemPage {
                 onSelectedIndexChanged: {
                     /* When e.g. the model changes, the selectedIndex is set to
                     0. Ignore this, since we never want the selectedIndex to be
-                    anything other than -1 – this component is shown only when
+                    anything other than -1. This component is shown only when
                     registration is "Automatic". */
                     if (selectedIndex >= 0) {
                         selectedIndex = -1;

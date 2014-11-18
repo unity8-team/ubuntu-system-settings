@@ -3,12 +3,12 @@ var _pathToQml = {}
 
 /*
 Given an array of paths, it will create and associate
-a OfonoNetworkOperator QML object for each new path.
+an OfonoNetworkOperator QML object for each new path.
 
-It will also delete any QML that are not in given list of paths.
+It will also delete any QML that is not in given list of paths.
 
-@param paths Array of operator paths
-@return undefined
+@param {Array} paths - Array of operator paths
+@return {undefined}
 */
 function updateOperatorQML (paths) {
     _garbageCollect(paths);
@@ -41,12 +41,12 @@ function _createQml (paths) {
 Takes a list of paths and returns
 OfonoNetworkOperator objects for each path.
 
-Note: This function will create OfonoNetworkOperator
-objects for paths not associated with one.
+This function will create OfonoNetworkOperator
+objects.
 
-@param paths Array of operator paths
-@param ignore Array of operator paths to ignore
-@return Array of OfonoNetworkOperators
+@param {Array} paths - Array of operator paths
+@param {Array} ignore - Array of operator paths to ignore
+@return {Array} of OfonoNetworkOperators
 */
 function getOps (paths, ignore) {
     var ret = [];
@@ -65,7 +65,7 @@ function getOps (paths, ignore) {
 
 /*
 @param path String an operator path
-@return OfonoNetworkOperator or null if no QML exist for path
+@return {Object|null} OfonoNetworkOperator|null - null if no QML exist for path
 */
 function getOp (path) {
     if (_pathToQml.hasOwnProperty(path)) {
@@ -82,8 +82,8 @@ before. QML is created if not.
 
 It is guaranteed that a QML object will be returned.
 
-@param path String an operator path
-@return OfonoNetworkOperator
+@param {String} path - an operator path
+@return {Object} OfonoNetworkOperator - the created qml
 */
 function getOrCreateOpQml (path) {
     if (getOp(path)) {
@@ -97,8 +97,8 @@ function getOrCreateOpQml (path) {
 /*
 Registers operator on path
 
-@param path String operator to register
-@return undefined
+@param {String} path - operator to register
+@return {undefined}
 */
 function setOp (path) {
     var op = getOrCreateOpQml(path);
