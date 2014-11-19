@@ -118,8 +118,9 @@ ItemPage {
                 property string imeiNumber
                 imeiNumber: deviceInfos.imei(0)
                 text: "IMEI"
-                value: imeiNumber
-                visible: modemsSorted.length === 1 && imeiNumber
+                value: modemsSorted.length ? (imeiNumber || i18n.tr("None")) :
+                    i18n.tr("None")
+                visible: modemsSorted.length <= 1
             }
 
             ListItem.MultiValue {
@@ -128,18 +129,12 @@ ItemPage {
                 values: {
                     var imeis = [];
                     modemsSorted.forEach(function (path, i) {
-                        imeis.push(deviceInfos.imei(i));
+                        var imei = deviceInfos.imei(i);
+                        imei ? imeis.push(imei) : imeis.push(i18n.tr("None"));
                     });
                     return imeis;
                 }
                 visible: modemsSorted.length > 1
-            }
-
-            ListItem.SingleValue {
-                objectName: "imeiItemEmpty"
-                text: "IMEI"
-                value: i18n.tr("None")
-                visible: modemsSorted.length === 0
             }
 
             ListItem.SingleValue {
