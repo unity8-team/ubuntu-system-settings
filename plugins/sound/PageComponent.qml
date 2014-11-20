@@ -69,7 +69,10 @@ ItemPage {
                 control: Switch {
                     id: silentModeSwitch
                     objectName: "silentMode"
-                    onClicked: soundActionGroup.silentMode.activate()
+                    property bool serverChecked: soundActionGroup.silentMode.state
+                    onServerCheckedChanged: checked = serverChecked
+                    Component.onCompleted: checked = serverChecked
+                    onTriggered: soundActionGroup.silentMode.activate()
                 }
                 text: i18n.tr("Silent Mode")
             }
@@ -95,12 +98,6 @@ ItemPage {
                 target: sliderMenu
                 property: "value"
                 value: soundActionGroup.volume.state
-            }
-
-            Binding {
-                target: silentModeSwitch
-                property: "checked"
-                value: soundActionGroup.silentMode.state
             }
 
             Menus.SliderMenu {
