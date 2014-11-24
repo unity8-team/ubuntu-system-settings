@@ -523,6 +523,7 @@ class SoundBaseTestCase(
     @classmethod
     def setUpClass(klass):
         klass.start_system_bus()
+        klass.start_session_bus()
         klass.dbus_con = klass.get_dbus(True)
         klass.dbus_con_session = klass.get_dbus(False)
 
