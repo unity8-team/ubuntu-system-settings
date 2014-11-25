@@ -1,3 +1,11 @@
+ubuntu-system-settings (0.3+15.04.20141125-0ubuntu1) vivid; urgency=low
+
+  [ Ted Gould ]
+  * Make silent mode use the action state in the sound user service (LP:
+    #1395709)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 25 Nov 2014 14:37:40 +0000
+
 ubuntu-system-settings (0.3+15.04.20141118-0ubuntu1) vivid; urgency=low
 
   [ jonas-drange ]
