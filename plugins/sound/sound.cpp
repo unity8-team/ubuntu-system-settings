@@ -45,9 +45,7 @@ void Sound::slotChanged(QString interface,
     if (interface != AS_INTERFACE)
         return;
 
-    if (property == "SilentMode") {
-        Q_EMIT silentModeChanged();
-    } else if (property == "IncomingCallSound") {
+    if (property == "IncomingCallSound") {
         Q_EMIT incomingCallSoundChanged();
     } else if (property == "IncomingMessageSound") {
         Q_EMIT incomingMessageSoundChanged();
@@ -69,7 +67,6 @@ void Sound::slotNameOwnerChanged()
     // Tell QML so that it refreshes its view of the property
     Q_EMIT incomingCallSoundChanged();
     Q_EMIT incomingMessageSoundChanged();
-    Q_EMIT silentModeChanged();
     Q_EMIT incomingCallVibrateChanged();
     Q_EMIT incomingMessageVibrateChanged();
     Q_EMIT incomingCallVibrateSilentModeChanged();
@@ -109,23 +106,6 @@ void Sound::setIncomingMessageSound(QString sound)
                                       "IncomingMessageSound",
                                       QVariant::fromValue(sound));
     Q_EMIT(incomingMessageSoundChanged());
-}
-
-bool Sound::getSilentMode()
-{
-    return m_accountsService.getUserProperty(AS_INTERFACE,
-                                             "SilentMode").toBool();
-}
-
-void Sound::setSilentMode(bool enabled)
-{
-    if (enabled == getSilentMode())
-        return;
-
-    m_accountsService.setUserProperty(AS_INTERFACE,
-                                      "SilentMode",
-                                      QVariant::fromValue(enabled));
-    Q_EMIT(silentModeChanged());
 }
 
 bool Sound::getIncomingCallVibrate()
