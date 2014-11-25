@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-10-16 20:04-0600\n"
-"PO-Revision-Date: 2014-11-07 20:00+0000\n"
+"PO-Revision-Date: 2014-11-21 19:20+0000\n"
 "Last-Translator: Marcos Lans <Unknown>\n"
 "Language-Team: Galician <gl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-11-08 06:15+0000\n"
-"X-Generator: Launchpad (build 17231)\n"
+"X-Launchpad-Export-Date: 2014-11-22 06:00+0000\n"
+"X-Generator: Launchpad (build 17252)\n"
 "Language: Galician\n"
 
 #: ubuntu-system-settings.desktop.in.in.h:1 ../src/qml/MainWindow.qml:112
@@ -1000,7 +1000,7 @@ msgstr "As frases secretas non coinciden. Ténteo de novo."
 
 #: ../plugins/security-privacy//LockSecurity.qml:299
 msgid "Unset"
-msgstr "Retirar"
+msgstr "Cambiar"
 
 #: ../plugins/security-privacy//LockSecurity.qml:344
 msgid "Unlock the phone using:"
