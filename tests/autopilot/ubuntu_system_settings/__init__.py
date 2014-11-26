@@ -119,6 +119,22 @@ class MainWindow(ubuntuuitoolkit.MainView):
     def go_to_cellular_page(self):
         return self._go_to_page('entryComponent-cellular', 'cellularPage')
 
+    @autopilot.logging.log_action(logger.debug)
+    def go_to_about_page(self):
+        return self._go_to_page('entryComponent-about', 'aboutPage')
+
+    @autopilot.logging.log_action(logger.debug)
+    def go_to_sound_page(self):
+        return self._go_to_page('entryComponent-sound', 'soundPage')
+
+    @autopilot.logging.log_action(logger.debug)
+    def go_to_security_page(self):
+        return self._go_to_page('entryComponent-security-privacy', 'securityPrivacyPage')
+
+    @autopilot.logging.log_action(logger.debug)
+    def go_to_datetime_page(self):
+        return self._go_to_page('entryComponent-time-date', 'timeDatePage')
+
     def _go_to_page(self, item_object_name, page_object_name):
         self.click_item(item_object_name)
         page = self.wait_select_single(objectName=page_object_name)
@@ -188,11 +204,6 @@ class MainWindow(ubuntuuitoolkit.MainView):
     def time_date_page(self):
         """ Return 'TimeDate' page """
         return self._go_to_page('entryComponent-time-date', 'timeDatePage')
-
-    @property
-    def about_page(self):
-        """ Return 'About' page """
-        return self.select_single(objectName='aboutPage')
 
     @property
     def wifi_page(self):
@@ -475,6 +486,10 @@ class AboutPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
             objectName='licensesPage')
         licenses_page.active.wait_for(True)
         return licenses_page
+
+    def get_number(self, obj):
+        number = self.select_single(objectName=obj)
+        return number.value
 
 
 class LicensesPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):

@@ -338,17 +338,17 @@ class PhoneOfonoBaseTestCase(UbuntuSystemSettingsOfonoTestCase):
 
 
 class AboutBaseTestCase(UbuntuSystemSettingsTestCase):
-    def setUp(self):
+    def setUp(self, panel=None):
         """Go to About page."""
-        super(AboutBaseTestCase, self).setUp('about')
-        self.about_page = self.system_settings.main_view.about_page
+        super(AboutBaseTestCase, self).setUp(panel)
+        self.about_page = self.system_settings.main_view.go_to_about_page()
 
 
 class AboutOfonoBaseTestCase(UbuntuSystemSettingsOfonoTestCase):
     def setUp(self):
         """Go to About page."""
-        super(AboutOfonoBaseTestCase, self).setUp('about')
-        self.about_page = self.system_settings.main_view.about_page
+        super(AboutOfonoBaseTestCase, self).setUp()
+        self.about_page = self.system_settings.main_view.go_to_about_page()
 
 
 class AboutSystemImageBaseTestCase(AboutBaseTestCase,
@@ -427,7 +427,7 @@ class LicenseBaseTestCase(AboutBaseTestCase):
 
     def setUp(self):
         """Go to License Page."""
-        super(LicenseBaseTestCase, self).setUp()
+        super(LicenseBaseTestCase, self).setUp('about')
         self.licenses_page = self.about_page.go_to_software_licenses()
 
 
@@ -702,7 +702,7 @@ class ResetBaseTestCase(UbuntuSystemSettingsTestCase,
         super(ResetBaseTestCase, self).tearDown()
 
 
-class SecurityBaseTestCase(UbuntuSystemSettingsOfonoTestCase):
+class SecurityBaseTestCase(UbuntuSystemSettingsTestCase):
     """ Base class for security and privacy settings tests"""
 
     def setUp(self):
