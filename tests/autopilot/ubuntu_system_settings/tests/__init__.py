@@ -341,18 +341,14 @@ class AboutBaseTestCase(UbuntuSystemSettingsTestCase):
     def setUp(self):
         """Go to About page."""
         super(AboutBaseTestCase, self).setUp('about')
-        self.about_page = self.system_settings.main_view.select_single(
-            objectName='aboutPage'
-        )
+        self.about_page = self.system_settings.main_view.about_page
 
 
 class AboutOfonoBaseTestCase(UbuntuSystemSettingsOfonoTestCase):
     def setUp(self):
         """Go to About page."""
         super(AboutOfonoBaseTestCase, self).setUp('about')
-        self.about_page = self.system_settings.main_view.select_single(
-            objectName='aboutPage'
-        )
+        self.about_page = self.system_settings.main_view.about_page
 
 
 class AboutSystemImageBaseTestCase(AboutBaseTestCase,

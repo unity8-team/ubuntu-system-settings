@@ -43,9 +43,7 @@ class TimeDateTestCase(UbuntuSystemSettingsTestCase,
 
     @property
     def time_date_page(self):
-        return self.system_settings.main_view.select_single(
-            objectName='timeDatePage'
-        )
+        return self.system_settings.main_view.time_date_page
 
     @property
     def tz_page(self):

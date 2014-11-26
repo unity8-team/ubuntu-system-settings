@@ -152,7 +152,7 @@ class MainWindow(ubuntuuitoolkit.MainView):
     @property
     def cellular_page(self):
         """ Return 'Cellular' page """
-        return self.select_single(objectName='cellularPage')
+        return self._go_to_page('entryComponent-cellular', 'cellularPage')
 
     @property
     def choose_page(self):
@@ -177,12 +177,17 @@ class MainWindow(ubuntuuitoolkit.MainView):
     @property
     def sound_page(self):
         """ Return 'Sound' page """
-        return self.select_single(objectName='soundPage')
+        return self._go_to_page('entryComponent-sound', 'soundPage')
 
     @property
     def security_page(self):
         """ Return 'Security' page """
-        return self.select_single(objectName='securityPrivacyPage')
+        return self._go_to_page('entryComponent-security-privacy',
+                                'securityPrivacyPage')
+    @property
+    def time_date_page(self):
+        """ Return 'TimeDate' page """
+        return self._go_to_page('entryComponent-time-date', 'timeDatePage')
 
     @property
     def about_page(self):
@@ -192,7 +197,7 @@ class MainWindow(ubuntuuitoolkit.MainView):
     @property
     def wifi_page(self):
         """ Return 'Wifi' page """
-        return self.select_single(objectName='wifiPage')
+        return self._go_to_page('entryComponent-wifi', 'wifiPage')
 
     @property
     def _orientation_lock_switch(self):
