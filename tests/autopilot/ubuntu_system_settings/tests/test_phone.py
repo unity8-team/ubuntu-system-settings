@@ -120,7 +120,7 @@ class PhoneSoundTestCase(PhoneSoundBaseTestCase):
 
     def test_dialpad_sounds_switch(self):
         """ Check that dialpad_sounds is present and clickable"""
-        snd = self.phone_page.select_single(
+        snd = self.system_settings.main_view.select_single(
             objectName="dialpadSounds")
         prev_value = self.obj_test.GetDialpadSoundsEnabled()
         self.system_settings.main_view.scroll_to_and_click(snd)

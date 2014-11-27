@@ -296,7 +296,7 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
         if self.use_sims == 2:
             self.add_sim2()
 
-        super(UbuntuSystemSettingsOfonoTestCase, self).setUp(panel)
+        super(UbuntuSystemSettingsOfonoTestCase, self).setUp()
 
     def set_default_for_calls(self, gsettings, default):
         gsettings.set_value('default-sim-for-calls', default)
@@ -309,12 +309,12 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
         sleep(1)
 
     def get_default_sim_for_calls_selector(self, text):
-        return self.system_settings.main_view.cellular_page.select_single(
+        return self.cellular_page.select_single(
             objectName="defaultForCalls" + text
         )
 
     def get_default_sim_for_messages_selector(self, text):
-        return self.system_settings.main_view.cellular_page.select_single(
+        return self.cellular_page.select_single(
             objectName="defaultForMessages" + text
         )
 
@@ -331,10 +331,8 @@ class CellularBaseTestCase(UbuntuSystemSettingsOfonoTestCase):
 class PhoneOfonoBaseTestCase(UbuntuSystemSettingsOfonoTestCase):
     def setUp(self):
         """ Go to Phone page """
-        super(PhoneOfonoBaseTestCase, self).setUp('phone')
-        self.phone_page = self.system_settings.main_view.select_single(
-            objectName='phonePage'
-        )
+        super(PhoneOfonoBaseTestCase, self).setUp()
+        self.phone_page = self.system_settings.main_view.go_to_phone_page()
 
 
 class AboutBaseTestCase(UbuntuSystemSettingsTestCase):
@@ -702,17 +700,14 @@ class ResetBaseTestCase(UbuntuSystemSettingsTestCase,
         super(ResetBaseTestCase, self).tearDown()
 
 
-class SecurityBaseTestCase(UbuntuSystemSettingsTestCase):
+class SecurityBaseTestCase(UbuntuSystemSettingsOfonoTestCase):
     """ Base class for security and privacy settings tests"""
 
     def setUp(self):
-        super(SecurityBaseTestCase, self).setUp('security-privacy')
+        super(SecurityBaseTestCase, self).setUp()
         """ Go to Security & Privacy page """
-        self.security_page = self.system_settings.main_view.select_single(
-            objectName='securityPrivacyPage'
-        )
-        self.assertThat(self.security_page.active,
-                        Eventually(Equals(True)))
+        self.security_page = self.system_settings.\
+            main_view.go_to_security_page()
 
     def tearDown(self):
         super(SecurityBaseTestCase, self).tearDown()
@@ -722,9 +717,6 @@ class PhoneSoundBaseTestCase(SoundBaseTestCase):
     def setUp(self):
         """ Go to Phone page """
         super(PhoneSoundBaseTestCase, self).setUp('phone')
-        self.phone_page = self.system_settings.main_view.select_single(
-            objectName='phonePage'
-        )
 
     def tearDown(self):
         super(PhoneSoundBaseTestCase, self).tearDown()

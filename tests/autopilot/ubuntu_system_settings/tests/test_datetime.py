@@ -39,11 +39,9 @@ class TimeDateTestCase(UbuntuSystemSettingsTestCase,
     def setUp(self):
         """ Go to Time & Date page """
         self.obj_timedate1.Reset()
-        super(TimeDateTestCase, self).setUp("time-date")
-
-    @property
-    def time_date_page(self):
-        return self.system_settings.main_view.time_date_page
+        super(TimeDateTestCase, self).setUp()
+        self.time_date_page = self.system_settings.\
+            main_view.go_to_datetime_page()
 
     @property
     def tz_page(self):

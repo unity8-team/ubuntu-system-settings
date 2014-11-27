@@ -120,6 +120,10 @@ class MainWindow(ubuntuuitoolkit.MainView):
         return self._go_to_page('entryComponent-cellular', 'cellularPage')
 
     @autopilot.logging.log_action(logger.debug)
+    def go_to_phone_page(self):
+        return self._go_to_page('entryComponent-phone', 'phonePage')
+
+    @autopilot.logging.log_action(logger.debug)
     def go_to_about_page(self):
         return self._go_to_page('entryComponent-about', 'aboutPage')
 
@@ -129,7 +133,8 @@ class MainWindow(ubuntuuitoolkit.MainView):
 
     @autopilot.logging.log_action(logger.debug)
     def go_to_security_page(self):
-        return self._go_to_page('entryComponent-security-privacy', 'securityPrivacyPage')
+        return self._go_to_page('entryComponent-security-privacy',
+                                'securityPrivacyPage')
 
     @autopilot.logging.log_action(logger.debug)
     def go_to_datetime_page(self):
@@ -166,11 +171,6 @@ class MainWindow(ubuntuuitoolkit.MainView):
         return self.select_single(objectName='systemSettingsPage')
 
     @property
-    def cellular_page(self):
-        """ Return 'Cellular' page """
-        return self._go_to_page('entryComponent-cellular', 'cellularPage')
-
-    @property
     def choose_page(self):
         """ Return 'Choose carrier' page """
         return self.select_single(objectName="chooseCarrierPage")
@@ -191,26 +191,6 @@ class MainWindow(ubuntuuitoolkit.MainView):
         return self.select_single(objectName='backgroundPage')
 
     @property
-    def sound_page(self):
-        """ Return 'Sound' page """
-        return self._go_to_page('entryComponent-sound', 'soundPage')
-
-    @property
-    def security_page(self):
-        """ Return 'Security' page """
-        return self._go_to_page('entryComponent-security-privacy',
-                                'securityPrivacyPage')
-    @property
-    def time_date_page(self):
-        """ Return 'TimeDate' page """
-        return self._go_to_page('entryComponent-time-date', 'timeDatePage')
-
-    @property
-    def wifi_page(self):
-        """ Return 'Wifi' page """
-        return self._go_to_page('entryComponent-wifi', 'wifiPage')
-
-    @property
     def _orientation_lock_switch(self):
         return self.wait_select_single(
             ubuntuuitoolkit.CheckBox,
@@ -225,7 +205,7 @@ class MainWindow(ubuntuuitoolkit.MainView):
 
 class CellularPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
 
-    """Autopilot helper for the Sound page."""
+    """Autopilot helper for the Cellular page."""
 
     @classmethod
     def validate_dbus_object(cls, path, state):
@@ -396,7 +376,7 @@ class PageChooseCarrier(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
 
 class TimeAndDatePage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
 
-    """Autopilot helper for the Sound page."""
+    """Autopilot helper for the TimeAndDate page."""
 
     @classmethod
     def validate_dbus_object(cls, path, state):

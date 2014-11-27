@@ -140,7 +140,8 @@ class AboutOfonoTestCase(AboutOfonoBaseTestCase):
             self.assertFalse(self.about_page.is_imei_visible())
 
     def test_phone_number(self):
-        self.assertEqual(str(self.about_page.get_number("numberItem")), "123456789")
+        self.assertEqual(str(self.about_page.get_number("numberItem")),
+                         "123456789")
 
 
 class AboutOfonoMultiSimTestCase(AboutOfonoBaseTestCase):
@@ -148,8 +149,10 @@ class AboutOfonoMultiSimTestCase(AboutOfonoBaseTestCase):
     use_sims = 2
 
     def test_phone_numbers(self):
-        self.assertEqual(str(self.about_page.get_number("numberItem1")), "123456789")
-        self.assertEqual(str(self.about_page.get_number("numberItem2")), "08123")
+        self.assertEqual(str(self.about_page.get_number("numberItem1")),
+                         "123456789")
+        self.assertEqual(str(self.about_page.get_number("numberItem2")),
+                         "08123")
 
 
 class AboutSystemImageTestCase(AboutSystemImageBaseTestCase):

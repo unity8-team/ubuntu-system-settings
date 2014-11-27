@@ -25,7 +25,7 @@ class SecurityTestCase(SecurityBaseTestCase):
     def setUp(self):
         super(SecurityTestCase, self).setUp()
         self.assertEqual(['pin'], self.modem_0.Get(SIM_IFACE, 'LockedPins'))
-        prps = self.system_settings.main_view.security_page.get_properties()
+        prps = self.security_page.get_properties()
         self.use_powerd = prps['usePowerd']
         if self.use_powerd:
             gsettings = Gio.Settings.new('com.ubuntu.touch.system')
@@ -100,11 +100,11 @@ class SecurityTestCase(SecurityBaseTestCase):
     def test_security_page(self):
         """ Checks whether Security page is available """
         self.assertThat(
-            self.system_settings.main_view.security_page,
+            self.security_page,
             NotEquals(None)
         )
         self.assertThat(
-            self.system_settings.main_view.security_page.title,
+            self.security_page.title,
             Equals(_('Security & Privacy'))
         )
 
