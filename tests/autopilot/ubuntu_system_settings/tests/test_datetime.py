@@ -40,8 +40,7 @@ class TimeDateTestCase(UbuntuSystemSettingsTestCase,
         """ Go to Time & Date page """
         self.obj_timedate1.Reset()
         super(TimeDateTestCase, self).setUp()
-        self.time_date_page = self.system_settings.\
-            main_view.go_to_datetime_page()
+        self.page = self.system_settings.main_view.go_to_datetime_page()
 
     @property
     def tz_page(self):
@@ -72,8 +71,8 @@ class TimeDateTestCase(UbuntuSystemSettingsTestCase,
 
     def test_time_date_page(self):
         """ Checks whether Time & Date page is available """
-        self.assertThat(self.time_date_page, NotEquals(None))
-        self.assertThat(self.time_date_page.title, Equals(_('Time & Date')))
+        self.assertThat(self.page, NotEquals(None))
+        self.assertThat(self.page.title, Equals(_('Time & Date')))
 
     def test_tz_list_initially_empty(self):
         """ Checks that no list is displayed initially """

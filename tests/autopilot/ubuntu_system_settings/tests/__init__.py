@@ -60,8 +60,9 @@ class UbuntuSystemSettingsTestCase(
     def setUp(self, panel=None):
         super(UbuntuSystemSettingsTestCase, self).setUp()
         self.system_settings = SystemSettings(self, panel=panel)
+        self.main_view = self.system_settings.main_view
         self.assertThat(
-            self.system_settings.main_view.visible,
+            self.main_view.visible,
             Eventually(Equals(True)))
 
     def set_orientation(self, gsettings, value):
@@ -109,10 +110,6 @@ class UbuntuSystemSettingsBatteryTestCase(UbuntuSystemSettingsUpowerTestCase):
     def setUp(self):
         super(UbuntuSystemSettingsBatteryTestCase, self).setUp()
         self.add_mock_battery()
-        self.system_settings = SystemSettings(self)
-        self.assertThat(
-            self.system_settings.main_view.visible,
-            Eventually(Equals(True)))
 
 
 class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
