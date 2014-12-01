@@ -1,3 +1,10 @@
+ubuntu-system-settings (0.3+15.04.20141201-0ubuntu1) vivid; urgency=low
+
+  [ Michał Sawicz ]
+  * Add missing dependency on qml-module-ubuntu-connectivity.
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Mon, 01 Dec 2014 12:35:25 +0000
+
 ubuntu-system-settings (0.3+15.04.20141125-0ubuntu1) vivid; urgency=low
 
   [ Ted Gould ]
