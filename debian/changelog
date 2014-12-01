@@ -1,3 +1,22 @@
+ubuntu-system-settings (0.3+15.04.20141125-0ubuntu1) vivid; urgency=low
+
+  [ Ted Gould ]
+  * Make silent mode use the action state in the sound user service (LP:
+    #1395709)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 25 Nov 2014 14:37:40 +0000
+
+ubuntu-system-settings (0.3+15.04.20141118-0ubuntu1) vivid; urgency=low
+
+  [ jonas-drange ]
+  * [about] use singlevaluestacked for all information bits in the
+    version panel (LP: #1390148)
+
+  [ John R. Lenton ]
+  * added debug logging to the software updates helper
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 18 Nov 2014 16:43:17 +0000
+
 ubuntu-system-settings (0.3+15.04.20141112.1-0ubuntu1) vivid; urgency=low
 
   [ Sebastien Bacher ]
