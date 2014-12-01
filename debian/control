@@ -88,7 +88,8 @@ Depends: ${misc:Depends},
          python3-gi,
          python3-dbus,
          python3-xdg,
-         gir1.2-glib-2.0
+         gir1.2-glib-2.0,
+         qml-module-ubuntu-connectivity
 Recommends: ubuntu-system-settings-online-accounts,
             ubuntu-touch-sounds,
 Conflicts: ubuntu-system-settings-example
