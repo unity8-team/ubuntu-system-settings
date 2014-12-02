@@ -40,11 +40,6 @@ qt5_use_modules(tst-arguments Core Test)
 target_link_libraries(tst-arguments ${GLIB_LDFLAGS})
 add_test(tst-arguments tst-arguments)
 
-add_executable(tst-pagelist tst_pagelist.cpp ../wizard/PageList.cpp)
-set_target_properties(tst-pagelist PROPERTIES
-                      INCLUDE_DIRECTORIES "${CMAKE_CURRENT_BINARY_DIR};${CMAKE_SOURCE_DIR}/wizard")
-qt5_use_modules(tst-pagelist Core Test)
-add_test(tst-pagelist tst-pagelist)
 configure_file (test_code.py.in test_code.py)
 configure_file (test_push_helper.py.in test_push_helper.py)
 add_test(NAME python3 COMMAND "${CMAKE_CURRENT_BINARY_DIR}/test_code.py")
