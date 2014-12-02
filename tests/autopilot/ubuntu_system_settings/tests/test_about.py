@@ -220,7 +220,7 @@ class StorageTestCase(StorageBaseTestCase):
 
     def test_disk(self):
         """ Checks whether disk item is available """
-        disk_item = self.system_settings.main_view.storage_page.select_single(
+        disk_item = self.storage_page.select_single(
             objectName='diskItem'
         )
         self.assertThat(disk_item.text, Equals('Total storage'))
@@ -287,8 +287,9 @@ class StorageTestCase(StorageBaseTestCase):
 
     def test_installed_apps(self):
         """ Checks whether Installed Apps list is available """
-        installed_apps_list_view = self.system_settings.main_view.\
-            storage_page.select_single(objectName='installedAppsListView')
+        installed_apps_list_view = self.storage_page.select_single(
+            objectName='installedAppsListView'
+        )
         self.assertThat(installed_apps_list_view, NotEquals(None))
 
 

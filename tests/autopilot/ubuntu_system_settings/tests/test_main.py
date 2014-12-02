@@ -26,8 +26,8 @@ class MainTestCase(UbuntuSystemSettingsTestCase):
         self.addCleanup(
             self.set_orientation, gsettings, GLib.Variant('b', current))
 
-        self.system_settings.main_view.disable_orientation_lock()
-        self.system_settings.main_view.enable_orientation_lock()
+        self.main_view.disable_orientation_lock()
+        self.main_view.enable_orientation_lock()
 
         self.assertThat(
             lambda: gsettings.get_value('rotation-lock').get_boolean(),
@@ -40,8 +40,8 @@ class MainTestCase(UbuntuSystemSettingsTestCase):
         self.addCleanup(
             self.set_orientation, gsettings, GLib.Variant('b', current))
 
-        self.system_settings.main_view.enable_orientation_lock()
-        self.system_settings.main_view.disable_orientation_lock()
+        self.main_view.enable_orientation_lock()
+        self.main_view.disable_orientation_lock()
 
         self.assertThat(
             lambda: gsettings.get_value('rotation-lock').get_boolean(),

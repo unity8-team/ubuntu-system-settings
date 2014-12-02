@@ -566,6 +566,18 @@ class PhonePage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
 
         return self._go_to_page(find, 'servicesPage')
 
+    @property
+    def _dialpad_sounds(self):
+        return self.wait_select_single(
+            ubuntuuitoolkit.CheckBox,
+            objectName='dialpadSounds')
+
+    def enable_dialpad_sounds(self):
+        self._dialpad_sounds.check()
+
+    def disable_dialpad_sounds(self):
+        self._dialpad_sounds.uncheck()
+
 
 class CallWaiting(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
 

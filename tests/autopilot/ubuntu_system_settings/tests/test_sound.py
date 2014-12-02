@@ -6,7 +6,6 @@
 # by the Free Software Foundation.
 
 from time import sleep
-from autopilot.matchers import Eventually
 from testtools.matchers import Equals, NotEquals
 
 from ubuntu_system_settings.tests import SoundBaseTestCase
@@ -16,22 +15,31 @@ from ubuntu_system_settings.utils.i18n import ugettext as _
 class SoundTestCase(SoundBaseTestCase):
     """ Tests for Sound Page """
 
+    def setUp(self):
+        super(SoundTestCase, self).setUp(panel=None)
+        self.obj_snd.Reset()
+        self.sound_page = self.main_view.go_to_sound_page()
+
+    def tearDown(self):
+        super(SoundTestCase, self).tearDown()
+
     def test_sound_page(self):
         """ Checks whether Sound page is available """
         self.assertThat(
-            self.system_settings.main_view.sound_page,
+            self.sound_page,
             NotEquals(None)
         )
         self.assertThat(
-            self.system_settings.main_view.sound_page.title,
+            self.sound_page.title,
             Equals(_('Sound'))
         )
 
     def test_silent_mode_sound_switch(self):
         """ Check that silent_mode is present and clickable"""
-        snd = self.system_settings.main_view.sound_page.select_single(
-            objectName="silentMode")
-        self.system_settings.main_view.scroll_to_and_click(snd)
+        snd = self.sound_page.select_single(
+            objectName="silentMode"
+        )
+        self.main_view.scroll_to_and_click(snd)
         sleep(0.2)
         calls = self.dbus_mock_isound.GetCalls()
         self.assertThat(
@@ -45,63 +53,70 @@ class SoundTestCase(SoundBaseTestCase):
 
     def test_call_vibrate_sound_switch(self):
         """ Check that call vibrate is present and clickable"""
-        snd = self.system_settings.main_view.sound_page.select_single(
-            objectName="callVibrate")
-        prev_value = self.obj_test.GetIncomingCallVibrate()
-        self.system_settings.main_view.scroll_to_and_click(snd)
+        snd = self.sound_page.select_single(
+            objectName="callVibrate"
+        )
+        prev_value = self.obj_snd.GetIncomingCallVibrate()
+        self.main_view.scroll_to_and_click(snd)
         sleep(0.2)
         self.assertNotEqual(
-            self.obj_test.GetIncomingCallVibrate(),
+            self.obj_snd.GetIncomingCallVibrate(),
             prev_value)
 
     def test_call_vibrate_silent_mode_sound_switch(self):
         """ Check that call vibrate silent mode is present and clickable"""
-        snd = self.system_settings.main_view.sound_page.select_single(
-            objectName="callVibrateSilentMode")
-        prev_value = self.obj_test.GetIncomingCallVibrateSilentMode()
-        self.system_settings.main_view.scroll_to_and_click(snd)
+        snd = self.sound_page.select_single(
+            objectName="callVibrateSilentMode"
+        )
+        prev_value = self.obj_snd.GetIncomingCallVibrateSilentMode()
+        self.main_view.scroll_to_and_click(snd)
         sleep(0.2)
         self.assertNotEqual(
-            self.obj_test.GetIncomingCallVibrateSilentMode(),
+            self.obj_snd.GetIncomingCallVibrateSilentMode(),
             prev_value)
 
     def test_message_vibrate_sound_switch(self):
         """ Check that message vibrate is present and clickable"""
-        snd = self.system_settings.main_view.sound_page.select_single(
-            objectName="messageVibrate")
-        prev_value = self.obj_test.GetIncomingMessageVibrate()
-        self.system_settings.main_view.scroll_to_and_click(snd)
+        snd = self.sound_page.select_single(
+            objectName="messageVibrate"
+        )
+        prev_value = self.obj_snd.GetIncomingMessageVibrate()
+        self.main_view.scroll_to_and_click(snd)
         sleep(0.2)
         self.assertNotEqual(
-            self.obj_test.GetIncomingMessageVibrate(),
+            self.obj_snd.GetIncomingMessageVibrate(),
             prev_value)
 
     def test_message_vibrate_silent_mode_sound_switch(self):
         """ Check that message vibrate silent mode is present and clickable"""
-        snd = self.system_settings.main_view.sound_page.select_single(
-            objectName="messageVibrateSilentMode")
-        prev_value = self.obj_test.GetIncomingMessageVibrateSilentMode()
-        self.system_settings.main_view.scroll_to_and_click(snd)
+        snd = self.sound_page.select_single(
+            objectName="messageVibrateSilentMode"
+        )
+        prev_value = self.obj_snd.GetIncomingMessageVibrateSilentMode()
+        self.main_view.scroll_to_and_click(snd)
         sleep(0.2)
         self.assertNotEqual(
-            self.obj_test.GetIncomingMessageVibrateSilentMode(),
+            self.obj_snd.GetIncomingMessageVibrateSilentMode(),
             prev_value)
 
     def test_keyboard_sound_switch(self):
         """ Check that keyboard sound is present and clickable"""
-        kbd_snd = self.system_settings.main_view.sound_page.select_single(
-            objectName="keyboardSoundSwitch")
+        kbd_snd = self.sound_page.select_single(
+            objectName="keyboardSoundSwitch"
+        )
         current_value = kbd_snd.get_properties()["checked"]
-        self.system_settings.main_view.scroll_to_and_click(kbd_snd)
+        self.main_view.scroll_to_and_click(kbd_snd)
         self.assertThat(
             kbd_snd.get_properties()["checked"], NotEquals(current_value))
 
+    """
     def test_dialpad_sounds_switch(self):
-        """ Check that dialpad_sounds is present and clickable"""
-        snd = self.system_settings.main_view.sound_page.select_single(
-            objectName="dialpadSounds")
-        prev_value = self.obj_test.GetDialpadSoundsEnabled()
-        self.system_settings.main_view.scroll_to_and_click(snd)
+        snd = self.sound_page.select_single(
+            objectName="dialpadSounds"
+        )
+        prev_value = self.obj_snd.GetDialpadSoundsEnabled()
+        self.main_view.scroll_to_and_click(snd)
         self.assertThat(
-            lambda: self.obj_test.GetDialpadSoundsEnabled(),
+            lambda: self.obj_snd.GetDialpadSoundsEnabled(),
             Eventually(NotEquals(prev_value)))
+    """

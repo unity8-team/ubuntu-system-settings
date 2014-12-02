@@ -8,22 +8,20 @@
 from __future__ import absolute_import
 
 from autopilot.matchers import Eventually
-from testtools.matchers import Contains, Equals, NotEquals
+from testtools.matchers import Contains, Equals
 
 from ubuntu_system_settings.tests import (
     PhoneOfonoBaseTestCase,
-    PhoneSoundBaseTestCase,
     CALL_FWD_IFACE,
     CALL_SETTINGS_IFACE
 )
 
 
 class PhoneTestCase(PhoneOfonoBaseTestCase):
-    """Tests for Phone Page"""
 
     def test_call_fwd(self):
         call_fwd_page = self.phone_page.go_to_call_forwarding()
-        call_fwd_page.set_forward("41444424")
+        call_fwd_page.set_forward('41444424')
 
         # Check that the forward has been set
         self.assertThat(
@@ -52,7 +50,6 @@ class PhoneTestCase(PhoneOfonoBaseTestCase):
 
 
 class PhoneDualSimTestCase(PhoneOfonoBaseTestCase):
-    """Tests for Phone Page"""
 
     use_sims = 2
 
@@ -73,7 +70,7 @@ class PhoneDualSimTestCase(PhoneOfonoBaseTestCase):
 
     def test_call_fwd_sim_2(self):
         call_fwd_page = self.phone_page.go_to_call_forwarding(sim=2)
-        call_fwd_page.set_forward("41444424")
+        call_fwd_page.set_forward('41444424')
 
         # Check that the forward has been set
         self.assertThat(
@@ -113,17 +110,3 @@ class PhoneDualSimTestCase(PhoneOfonoBaseTestCase):
             lambda: str(self.modem_1.Get(CALL_SETTINGS_IFACE,
                                          'VoiceCallWaiting')),
             Eventually(Contains('enabled')))
-
-
-class PhoneSoundTestCase(PhoneSoundBaseTestCase):
-    """Tests for Phone Page"""
-
-    def test_dialpad_sounds_switch(self):
-        """ Check that dialpad_sounds is present and clickable"""
-        snd = self.system_settings.main_view.select_single(
-            objectName="dialpadSounds")
-        prev_value = self.obj_test.GetDialpadSoundsEnabled()
-        self.system_settings.main_view.scroll_to_and_click(snd)
-        self.assertThat(
-            lambda: self.obj_test.GetDialpadSoundsEnabled(),
-            Eventually(NotEquals(prev_value)))

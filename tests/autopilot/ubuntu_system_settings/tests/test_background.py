@@ -24,7 +24,7 @@ class BackgroundTestCase(BackgroundBaseTestCase):
 
     def setUp(self):
         super(BackgroundTestCase, self).setUp()
-        self.background_page = self.system_settings.main_view.background_page
+        self.background_page = self.main_view.background_page
 
     def get_wallpapergrid(self, name):
         """Return a WallpaperGrid with given name, or
@@ -64,9 +64,9 @@ class BackgroundTestCase(BackgroundBaseTestCase):
 
     def save_wallpaper(self):
         """Click on Set/Save button when previewing a wallpaper"""
-        save = self.system_settings.main_view.wait_select_single(
+        save = self.main_view.wait_select_single(
             objectName='saveButton')
-        self.system_settings.main_view.scroll_to_and_click(save)
+        self.main_view.scroll_to_and_click(save)
 
     def test_background_page_title_is_correct(self):
         """ Checks whether Background page is available """
@@ -79,7 +79,7 @@ class BackgroundTestCase(BackgroundBaseTestCase):
         old = self.selected_wallpaper.source
 
         # click a wallpaper that is not selected
-        self.system_settings.main_view.scroll_to_and_click(
+        self.main_view.scroll_to_and_click(
             self.all_wallpapers[3])
 
         # click set/save
@@ -112,5 +112,5 @@ class BackgroundTestCase(BackgroundBaseTestCase):
             objectName='CustomHeader')
 
         self.assertEqual(custom.state, 'collapsed')
-        self.system_settings.main_view.scroll_to_and_click(custom_header)
+        self.main_view.scroll_to_and_click(custom_header)
         self.assertEqual(custom.state, '')
