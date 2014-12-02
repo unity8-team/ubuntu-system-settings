@@ -31,9 +31,11 @@ ItemPage {
     id: root
     title: i18n.tr("Carrier")
     objectName: "chooseCarrierPage"
+    flickable: null
 
     property var sim
     property bool scanning: true
+    property bool working: false
 
     states: [
         State {
@@ -66,15 +68,12 @@ ItemPage {
         id: netOp
         OfonoNetworkOperator {
             onRegisterComplete: {
-                if (error === OfonoNetworkOperator.InProgressError) {
-                    console.warn("Register failed, already one in progress.");
-                    console.warn("Falling back to default operator.");
-                    sim.netReg.registration();
-                } else if (error !== OfonoNetworkOperator.NoError) {
+                if (error !== OfonoNetworkOperator.NoError) {
                     console.warn("Register complete:", errorString);
                     console.warn("Falling back to default operator.");
                     sim.netReg.registration();
                 }
+                working = false;
             }
         }
     }
@@ -136,7 +135,7 @@ ItemPage {
                         margins: units.gu(1.5)
                     }
                     running: true
-                    opacity: scanning ? 1 : 0
+                    opacity: scanning || working ? 1 : 0
                     Behavior on opacity {
                         NumberAnimation {
                             duration: UbuntuAnimation.SnapDuration
@@ -149,7 +148,7 @@ ItemPage {
                 id: modeSelector
                 objectName: "mode"
                 expanded: true
-                enabled: !scanning
+                enabled: !scanning && !working
                 opacity: enabled ? 1 : 0.5
                 model: [i18n.tr("Automatically")]
                 delegate: OptionSelectorDelegate {
@@ -180,7 +179,7 @@ ItemPage {
                 id: allOperators
                 objectName: "allOperators"
                 expanded: true
-                enabled: !scanning
+                enabled: !scanning && !working
                 opacity: enabled ? 1 : 0.5
                 model: CHelper.getOps(sim.netReg.networkOperators)
                 delegate: OptionSelectorDelegate {
@@ -188,7 +187,10 @@ ItemPage {
                     showDivider: false
                     text: modelData.name
                 }
-                onDelegateClicked: CHelper.setOp(model[index].operatorPath)
+                onDelegateClicked: {
+                    CHelper.setOp(model[index].operatorPath);
+                    working = true;
+                }
                 selectedIndex: {
                     var curop = sim.netReg.currentOperatorPath;
                     return model.indexOf(CHelper.getOrCreateOpQml(curop));
@@ -215,7 +217,7 @@ ItemPage {
                 id: otherOperators
                 objectName: "otherOperators"
                 expanded: true
-                enabled: !scanning
+                enabled: !scanning && !working
                 opacity: enabled ? 1 : 0.5
                 model: CHelper.getOps(sim.netReg.networkOperators,
                     [sim.netReg.currentOperatorPath])
@@ -231,6 +233,7 @@ ItemPage {
                     // Update immediately and do not wait for netReg
                     allOperators.selectedIndex = allOperators.model.indexOf(
                         CHelper.getOrCreateOpQml(clickedOp));
+                    working = true;
                 }
                 onSelectedIndexChanged: {
                     /* When e.g. the model changes, the selectedIndex is set to

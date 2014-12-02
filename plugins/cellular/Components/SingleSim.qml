@@ -78,13 +78,13 @@ Column {
     }
 
     ListItem.Divider {
-        visible: radio.selector.model.length
+        visible: radio.visible
     }
 
     RadioSingleSim {
         id: radio
         anchors { left: parent.left; right: parent.right }
-        visible: radio.selector.model.length
+        visible: radio.enabled
     }
 
     ListItem.Divider {}

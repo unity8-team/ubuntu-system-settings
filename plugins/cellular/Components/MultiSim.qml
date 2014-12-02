@@ -40,9 +40,15 @@ Column {
     // make settings available to all children of root
     property var settings: phoneSettings
 
+    Label {
+        text: 'poweredsim: ' + poweredSim.radioSettings.modemTechnologies +", "+ poweredSim.radioSettings.technologyPreference
+        anchors { left: parent.left; right: parent.right }
+    }
+
     DataMultiSim {
         anchors { left: parent.left; right: parent.right }
     }
+
 
     ListItem.SingleValue {
         text : i18n.tr("Hotspot disabled because Wi-Fi is off.")

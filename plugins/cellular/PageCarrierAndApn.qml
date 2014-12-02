@@ -26,6 +26,7 @@ ItemPage {
     id: root
     title: i18n.tr("Carrier & APN")
     objectName: "carrierApnPage"
+    flickable: null
 
     property var sim
 
