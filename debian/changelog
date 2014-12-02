@@ -1,3 +1,14 @@
+ubuntu-system-settings (0.3+15.04.20141202~rtm-0ubuntu1) 14.09; urgency=low
+
+  [ Ken VanDine ]
+  * Refreshed ubuntu-system-settings.pot
+
+  [ Michael Terry ]
+  * When the power button is held down, show the shutdown dialog like we
+    do in the unity8 shell. (LP: #1381731)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 02 Dec 2014 19:41:37 +0000
+
 ubuntu-system-settings (0.3+15.04.20141112.1~rtm-0ubuntu1) 14.09; urgency=low
 
   [ Ken VanDine ]
