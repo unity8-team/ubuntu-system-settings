@@ -1,3 +1,13 @@
+ubuntu-system-settings (0.3+15.04.20141202-0ubuntu1) vivid; urgency=low
+
+  [ Michael Terry ]
+  * Drop wizard code from ubuntu-system-settings, moving it to unity8.
+
+  [ CI bot ]
+  * Resync trunk
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 02 Dec 2014 19:39:55 +0000
+
 ubuntu-system-settings (0.3+15.04.20141201-0ubuntu1) vivid; urgency=low
 
   [ Michał Sawicz ]
