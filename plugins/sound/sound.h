@@ -41,10 +41,6 @@ public:
                 READ getIncomingMessageSound
                 WRITE setIncomingMessageSound
                 NOTIFY incomingMessageSoundChanged)
-    Q_PROPERTY (bool silentMode
-                READ getSilentMode
-                WRITE setSilentMode
-                NOTIFY silentModeChanged)
     Q_PROPERTY (bool incomingCallVibrate
                 READ getIncomingCallVibrate
                 WRITE setIncomingCallVibrate
@@ -75,7 +71,6 @@ public Q_SLOTS:
 Q_SIGNALS:
     void incomingCallSoundChanged();
     void incomingMessageSoundChanged();
-    void silentModeChanged();
     void incomingCallVibrateChanged();
     void incomingMessageVibrateChanged();
     void incomingCallVibrateSilentModeChanged();
@@ -89,8 +84,6 @@ private:
     void setIncomingCallSound(QString sound);
     QString getIncomingMessageSound();
     void setIncomingMessageSound(QString sound);
-    bool getSilentMode();
-    void setSilentMode(bool enabled);
     bool getIncomingCallVibrate();
     void setIncomingCallVibrate(bool enabled);
     bool getIncomingMessageVibrate();

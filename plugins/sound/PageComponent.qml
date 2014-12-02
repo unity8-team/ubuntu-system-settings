@@ -65,15 +65,14 @@ ItemPage {
             anchors.left: parent.left
             anchors.right: parent.right
 
-            SilentModeWarning { visible: backendInfo.silentMode }
-
             ListItem.Standard {
                 control: Switch {
+                    id: silentModeSwitch
                     objectName: "silentMode"
-                    property bool serverChecked: backendInfo.silentMode
+                    property bool serverChecked: soundActionGroup.silentMode.state
                     onServerCheckedChanged: checked = serverChecked
                     Component.onCompleted: checked = serverChecked
-                    onTriggered: backendInfo.silentMode = checked
+                    onTriggered: soundActionGroup.silentMode.activate()
                 }
                 text: i18n.tr("Silent Mode")
             }
@@ -89,6 +88,8 @@ ItemPage {
                 objectPath: "/com/canonical/indicator/sound"
 
                 property variant volume: action("volume")
+                property variant silentMode: action("silent-mode")
+                property variant highVolume: action("high-volume")
 
                 Component.onCompleted: start()
             }
@@ -98,7 +99,7 @@ ItemPage {
                 property: "value"
                 value: soundActionGroup.volume.state
             }
- 
+
             Menus.SliderMenu {
                 id: sliderMenu
                 objectName: "sliderMenu"
@@ -108,6 +109,12 @@ ItemPage {
                 minIcon: "image://theme/audio-volume-low-zero"
                 maxIcon: "image://theme/audio-volume-high" 
                 onUpdated: soundActionGroup.volume.updateState(value);
+            }
+
+            ListItem.Standard {
+                id: highVolumeWarning
+                visible: soundActionGroup.highVolume.state == true
+                text: i18n.tr("High volume can damage your hearing.")
             }
 
             SettingsItemTitle {
@@ -217,6 +224,7 @@ ItemPage {
             }
 
             ListItem.Standard {
+                id: lockSound
                 control: Switch {
                     checked: false
                 }
