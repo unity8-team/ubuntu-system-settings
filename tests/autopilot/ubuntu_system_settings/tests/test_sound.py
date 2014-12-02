@@ -6,6 +6,7 @@
 # by the Free Software Foundation.
 
 from time import sleep
+from autopilot.matchers import Eventually
 from testtools.matchers import Equals, NotEquals
 
 from ubuntu_system_settings.tests import SoundBaseTestCase
@@ -14,14 +15,6 @@ from ubuntu_system_settings.utils.i18n import ugettext as _
 
 class SoundTestCase(SoundBaseTestCase):
     """ Tests for Sound Page """
-
-    def setUp(self):
-        super(SoundTestCase, self).setUp(panel=None)
-        self.obj_snd.Reset()
-        self.sound_page = self.main_view.go_to_sound_page()
-
-    def tearDown(self):
-        super(SoundTestCase, self).tearDown()
 
     def test_sound_page(self):
         """ Checks whether Sound page is available """
@@ -109,7 +102,6 @@ class SoundTestCase(SoundBaseTestCase):
         self.assertThat(
             kbd_snd.get_properties()["checked"], NotEquals(current_value))
 
-    """
     def test_dialpad_sounds_switch(self):
         snd = self.sound_page.select_single(
             objectName="dialpadSounds"
@@ -119,4 +111,3 @@ class SoundTestCase(SoundBaseTestCase):
         self.assertThat(
             lambda: self.obj_snd.GetDialpadSoundsEnabled(),
             Eventually(NotEquals(prev_value)))
-    """

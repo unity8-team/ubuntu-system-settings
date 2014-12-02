@@ -528,36 +528,6 @@ class SoundBaseTestCase(
         klass.dbus_con_session = klass.get_dbus(False)
 
     def setUp(self, panel='sound'):
-        # start dbus system bus
-        self.mock_server = self.spawn_server(ACCOUNTS_IFACE, ACCOUNTS_OBJ,
-                                             ACCOUNTS_IFACE, system_bus=True,
-                                             stdout=subprocess.PIPE)
-
-        # start isound
-        self.mock_isound = self.spawn_server(ISOUND_SERVICE,
-                                             ISOUND_ACTION_PATH,
-                                             GTK_ACTIONS_IFACE,
-                                             stdout=subprocess.PIPE)
-
-        self.dbus_mock = dbus.Interface(self.dbus_con.get_object(
-                                        ACCOUNTS_IFACE,
-                                        ACCOUNTS_OBJ,
-                                        ACCOUNTS_IFACE),
-                                        dbusmock.MOCK_IFACE)
-
-        self.wait_for_bus_object(ACCOUNTS_IFACE,
-                                 ACCOUNTS_OBJ,
-                                 system_bus=True)
-
-        self.dbus_mock_isound = dbus.Interface(
-            self.dbus_con_session.get_object(
-                ISOUND_SERVICE,
-                ISOUND_ACTION_PATH,
-                GTK_ACTIONS_IFACE),
-            dbusmock.MOCK_IFACE)
-
-        self.wait_for_bus_object(ISOUND_SERVICE,
-                                 ISOUND_ACTION_PATH)
 
         user_obj = '/user/foo'
 
@@ -571,6 +541,37 @@ class SoundBaseTestCase(
                                                              variant_level=1),
             'DialpadSoundsEnabled': dbus.Boolean(True,
                                                  variant_level=1)}
+
+        # start dbus system bus
+        self.mock_server = self.spawn_server(ACCOUNTS_IFACE, ACCOUNTS_OBJ,
+                                             ACCOUNTS_IFACE, system_bus=True,
+                                             stdout=subprocess.PIPE)
+
+        # start isound
+        self.mock_isound = self.spawn_server(ISOUND_SERVICE,
+                                             ISOUND_ACTION_PATH,
+                                             GTK_ACTIONS_IFACE,
+                                             stdout=subprocess.PIPE)
+
+        self.wait_for_bus_object(ACCOUNTS_IFACE,
+                                 ACCOUNTS_OBJ,
+                                 system_bus=True)
+
+        self.dbus_mock = dbus.Interface(self.dbus_con.get_object(
+                                        ACCOUNTS_IFACE,
+                                        ACCOUNTS_OBJ,
+                                        ACCOUNTS_IFACE),
+                                        dbusmock.MOCK_IFACE)
+
+        self.wait_for_bus_object(ISOUND_SERVICE,
+                                 ISOUND_ACTION_PATH)
+
+        self.dbus_mock_isound = dbus.Interface(
+            self.dbus_con_session.get_object(
+                ISOUND_SERVICE,
+                ISOUND_ACTION_PATH,
+                GTK_ACTIONS_IFACE),
+            dbusmock.MOCK_IFACE)
 
         # let accountservice find a user object path
         self.dbus_mock.AddMethod(ACCOUNTS_IFACE, 'FindUserById', 'x', 'o',
@@ -621,6 +622,9 @@ class SoundBaseTestCase(
                     ACCOUNTS_SOUND_IFACE)
             ])
 
+        self.obj_snd = self.dbus_con.get_object(ACCOUNTS_IFACE, user_obj,
+                                                ACCOUNTS_IFACE)
+
         self.dbus_mock_isound.AddMethods(
             GTK_ACTIONS_IFACE,
             [
@@ -650,9 +654,6 @@ class SoundBaseTestCase(
                     ''
                 )
             ])
-
-        self.obj_snd = self.dbus_con.get_object(ACCOUNTS_IFACE, user_obj,
-                                                ACCOUNTS_IFACE)
 
         super(SoundBaseTestCase, self).setUp(panel)
 
