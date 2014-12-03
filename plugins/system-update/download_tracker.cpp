@@ -18,22 +18,26 @@
  * Authored by: Diego Sarmentero <diego.sarmentero@canonical.com>
  */
 
-#include "download_tracker.h"
-#include "network/network.h"
-#include <ubuntu/download_manager/download_struct.h>
-#include <ubuntu/download_manager/error.h>
 #include <QProcessEnvironment>
 
-#define DOWNLOAD_COMMAND "post-download-command"
-#define APP_ID "app_id"
-#define PKCON_COMMAND "pkcon"
+#include <ubuntu/download_manager/download_struct.h>
+#include <ubuntu/download_manager/error.h>
+
+#include "download_tracker.h"
+#include "network/network.h"
+
+namespace {
+    const QString DOWNLOAD_COMMAND = "post-download-command";
+    const QString APP_ID = "app_id";
+    const QString PKCON_COMMAND = "pkcon";
+}
 
 namespace UpdatePlugin {
 
 DownloadTracker::DownloadTracker(QObject *parent) :
     QObject(parent),
-    m_clickToken(""),
-    m_downloadUrl(""),
+    m_clickToken(QString::null),
+    m_downloadUrl(QString::null),
     m_download(nullptr),
     m_manager(nullptr),
     m_progress(0)
@@ -42,7 +46,7 @@ DownloadTracker::DownloadTracker(QObject *parent) :
 
 void DownloadTracker::setDownload(const QString& url)
 {
-    if (url != "") {
+    if (!url.isEmpty()) {
         m_downloadUrl = url;
         startService();
     }
@@ -50,7 +54,7 @@ void DownloadTracker::setDownload(const QString& url)
 
 void DownloadTracker::setClickToken(const QString& token)
 {
-    if (token != "") {
+    if (!token.isEmpty()) {
         m_clickToken = token;
         startService();
     }
@@ -58,7 +62,7 @@ void DownloadTracker::setClickToken(const QString& token)
 
 void DownloadTracker::setPackageName(const QString& package)
 {
-    if (package != "") {
+    if (!package.isEmpty()) {
         m_packageName = package;
         startService();
     }
@@ -90,9 +94,9 @@ void DownloadTracker::bindDownload(Download* download)
 {
     m_download = download;
     connect(m_download, SIGNAL(finished(const QString &)), this,
-            SIGNAL(finished(const QString &)));
+            SIGNAL(onDownloadFinished(const QString &)));
     connect(m_download, SIGNAL(canceled(bool)), this,
-            SIGNAL(canceled(bool)));
+            SIGNAL(onDownloadCanceled(bool)));
     connect(m_download, SIGNAL(paused(bool)), this,
             SIGNAL(paused(bool)));
     connect(m_download, SIGNAL(resumed(bool)), this,
@@ -112,6 +116,27 @@ void DownloadTracker::bindDownload(Download* download)
 void DownloadTracker::registerError(Error* error)
 {
     Q_EMIT errorFound(error->errorString());
+
+    // we need to ensure that the resources are cleaned
+    delete m_download;
+    m_download = nullptr;
+}
+
+void DownloadTracker::onDownloadFinished(const QString& path)
+{
+    // once a download is finished we need to clean the resources
+    delete m_download;
+    m_download = nullptr;
+    Q_EMIT finished(path);
+}
+
+void DownloadTracker::onDownloadCanceled(bool wasCanceled)
+{
+    if (wasCanceled) {
+        delete m_download;
+        m_download = nullptr;
+    }
+    Q_EMIT canceled(wasCanceled);
 }
 
 void DownloadTracker::pause()
