@@ -265,7 +265,6 @@ ItemPage {
                         iconSource: iconPath
                         iconFrame: false
                         text: getDisplayName(type, displayName)
-                        enabled: backend.isSupportedType(type)
                         onClicked: {
                             backend.setSelectedDevice(addressName);
                             pageStack.push(connectedDevicePage);
