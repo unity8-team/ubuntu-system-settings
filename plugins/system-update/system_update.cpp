@@ -20,15 +20,30 @@
  *
 */
 
-#include "system_update.h"
 #include <QEvent>
 #include <QDateTime>
+#include <QDebug>
 #include <QDBusReply>
+
 #include <unistd.h>
 
 // FIXME: need to do this better including #include "../../src/i18n.h"
 // and linking to it
 #include <libintl.h>
+
+#include "system_update.h"
+
+namespace {
+    const QString SYSTEM_IMG_SERVICE = "com.canonical.SystemImage";
+    const QString SYSTEM_IMG_PATH = "/Service";
+    const QString SYSTEM_IMG_INTERFACE = "com.canonical.SystemImage";
+    const QString UBUNTU_APP_NAME = "Ubuntu";
+    const QString UBUNTU_LOGO_PATH = "file:///usr/share/ubuntu/settings/system/icons/distributor-logo.png";
+    const QString AUTO_DOWNLOAD_KEY = "auto_download";
+    const QString DEVICE_KEY = "device";
+    const QString UNAVAILABLE_VALUE = "Unavailable";
+}
+
 QString _(const char *text)
 {
     return QString::fromUtf8(dgettext(0, text));
@@ -42,11 +57,10 @@ SystemUpdate::SystemUpdate(QObject *parent) :
     m_detailedVersion(),
     m_lastUpdateDate(),
     m_downloadMode(-1),
-    m_systemBusConnection (QDBusConnection::systemBus()),
-    m_SystemServiceIface ("com.canonical.SystemImage",
-                         "/Service",
-                         "com.canonical.SystemImage",
-                         m_systemBusConnection)
+    m_SystemServiceIface (SYSTEM_IMG_SERVICE,
+                          SYSTEM_IMG_PATH,
+                          SYSTEM_IMG_INTERFACE, 
+                          QDBusConnection::systemBus())
 {
     update = nullptr;
 
@@ -83,21 +97,35 @@ void SystemUpdate::downloadUpdate() {
 }
 
 void SystemUpdate::applyUpdate() {
+    qDebug() <<  __PRETTY_FUNCTION__;
+
     QDBusReply<QString> reply = m_SystemServiceIface.call("ApplyUpdate");
-    if (!reply.isValid())
+    if (!reply.isValid()) {
+	auto error = reply.error();
+        qDebug() << error.name() << ":" << error.message();
+
         Q_EMIT updateProcessFailed(reply.value());
+    }
 }
 
 void SystemUpdate::cancelUpdate() {
     QDBusReply<QString> reply = m_SystemServiceIface.call("CancelUpdate");
-    if (!reply.isValid())
+    if (!reply.isValid()) {
+	auto error = reply.error();
+        qDebug() << error.name() << ":" << error.message();
+
         Q_EMIT updateProcessFailed(_("Can't cancel current request (can't contact service)"));
+    }
 }
 
 void SystemUpdate::pauseDownload() {
     QDBusReply<QString> reply = m_SystemServiceIface.call("PauseDownload");
-    if (!reply.isValid())
+    if (!reply.isValid()) {
+	auto error = reply.error();
+        qDebug() << error.name() << ":" << error.message();
+
         Q_EMIT updateProcessFailed(_("Can't pause current request (can't contact service)"));
+    }
 }
 
 void SystemUpdate::setCurrentDetailedVersion() {
@@ -148,21 +176,21 @@ QString SystemUpdate::currentUbuntuBuildNumber() {
     if (!m_detailedVersion.contains("ubuntu"))
         setCurrentDetailedVersion();
 
-    return m_detailedVersion.value("ubuntu", "Unavailable");
+    return m_detailedVersion.value("ubuntu", UNAVAILABLE_VALUE);
 }
 
 QString SystemUpdate::currentDeviceBuildNumber() {
-    if (!m_detailedVersion.contains("device"))
+    if (!m_detailedVersion.contains(DEVICE_KEY))
         setCurrentDetailedVersion();
 
-    return m_detailedVersion.value("device", "Unavailable");
+    return m_detailedVersion.value(DEVICE_KEY, UNAVAILABLE_VALUE);
 }
 
 int SystemUpdate::downloadMode() {
     if (m_downloadMode != -1)
         return m_downloadMode;
 
-    QDBusReply<QString> reply = m_SystemServiceIface.call("GetSetting", "auto_download");
+    QDBusReply<QString> reply = m_SystemServiceIface.call("GetSetting", AUTO_DOWNLOAD_KEY);
     int default_mode = 1;
     if (reply.isValid()) {
         bool ok;
@@ -183,11 +211,11 @@ void SystemUpdate::setDownloadMode(int value) {
         return;
 
     m_downloadMode = value;
-    m_SystemServiceIface.asyncCall("SetSetting", "auto_download", QString::number(value));
+    m_SystemServiceIface.asyncCall("SetSetting", AUTO_DOWNLOAD_KEY, QString::number(value));
 }
 
 void SystemUpdate::ProcessSettingChanged(QString key, QString newvalue) {
-    if(key == "auto_download") {
+    if(key == AUTO_DOWNLOAD_KEY) {
         bool ok;
         int newintValue;
         newintValue = newvalue.toInt(&ok);
@@ -205,9 +233,11 @@ void SystemUpdate::ProcessAvailableStatus(bool isAvailable,
                                           QString lastUpdateDate,
                                           QString errorReason)
 {
+    qDebug() <<  __PRETTY_FUNCTION__;
+
     update = new Update(this);
     QString packageName(UBUNTU_PACKAGE_NAME);
-    update->initializeApplication(packageName, "Ubuntu",
+    update->initializeApplication(packageName, UBUNTU_APP_NAME,
                                   QString::number(this->currentBuildNumber()));
 
     update->setSystemUpdate(true);
@@ -218,11 +248,13 @@ void SystemUpdate::ProcessAvailableStatus(bool isAvailable,
     update->setSelected(downloading);
     update->setUpdateAvailable(isAvailable);
     update->setLastUpdateDate(lastUpdateDate);
-    update->setIconUrl(QString("file:///usr/share/ubuntu/settings/system/icons/distributor-logo.png"));
+    update->setIconUrl(UBUNTU_LOGO_PATH);
 
     if (update->updateRequired()) {
+	qDebug() << "Update available";
         Q_EMIT updateAvailable(packageName, update);
     } else {
+	qDebug() << "Update not found";
         Q_EMIT updateNotFound();
     }
 
@@ -233,6 +265,7 @@ void SystemUpdate::ProcessAvailableStatus(bool isAvailable,
 
 void SystemUpdate::updateDownloadProgress(int percentage, double eta)
 {
+    qDebug() <<  __PRETTY_FUNCTION__ << percentage << eta;
     Q_UNUSED(eta);
     if (update != nullptr) {
         update->setDownloadProgress(percentage);

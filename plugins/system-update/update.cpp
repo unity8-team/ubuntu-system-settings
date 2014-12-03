@@ -18,31 +18,17 @@
  *
 */
 
-#include "update.h"
-#include <QStringList>
-#include <apt-pkg/debversion.h>
 #include <QProcessEnvironment>
+#include <QStringList>
+
+#include <apt-pkg/debversion.h>
+
+#include "update.h"
 
 namespace UpdatePlugin {
 
 Update::Update(QObject *parent) :
-    QObject(parent),
-    m_binary_filesize(0),
-    m_click_url(""),
-    m_downloadUrl(""),
-    m_download_progress(0),
-    m_error(""),
-    m_icon_url(""),
-    m_lastUpdateDate(""),
-    m_local_version(""),
-    m_packagename(""),
-    m_remote_version(""),
-    m_selected(false),
-    m_systemUpdate(false),
-    m_title(""),
-    m_update(false),
-    m_update_ready(false),
-    m_update_state(false)
+    QObject(parent)
 {
 }
 

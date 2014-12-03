@@ -18,6 +18,7 @@
  * Authored by: Diego Sarmentero <diego.sarmentero@canonical.com>
  */
 
+#include <QDebug>
 #include <QProcessEnvironment>
 
 #include <ubuntu/download_manager/download_struct.h>
@@ -70,8 +71,11 @@ void DownloadTracker::setPackageName(const QString& package)
 
 void DownloadTracker::startService()
 {
+    qDebug() <<  __PRETTY_FUNCTION__;
+
     if (!m_clickToken.isEmpty() && !m_downloadUrl.isEmpty() && !m_packageName.isEmpty()) {
         if (m_manager == nullptr) {
+	    qDebug() << "Manager is null, creating new instance";
             m_manager = Manager::createSessionManager("", this);
 
             QObject::connect(m_manager, SIGNAL(downloadCreated(Download*)),
@@ -92,6 +96,7 @@ void DownloadTracker::startService()
 
 void DownloadTracker::bindDownload(Download* download)
 {
+    qDebug() <<  __PRETTY_FUNCTION__;
     m_download = download;
     connect(m_download, SIGNAL(finished(const QString &)), this,
             SIGNAL(onDownloadFinished(const QString &)));
@@ -115,6 +120,8 @@ void DownloadTracker::bindDownload(Download* download)
 
 void DownloadTracker::registerError(Error* error)
 {
+    qDebug() <<  __PRETTY_FUNCTION__ << error->errorString();
+
     Q_EMIT errorFound(error->errorString());
 
     // we need to ensure that the resources are cleaned
@@ -124,6 +131,7 @@ void DownloadTracker::registerError(Error* error)
 
 void DownloadTracker::onDownloadFinished(const QString& path)
 {
+    qDebug() <<  __PRETTY_FUNCTION__ << path;
     // once a download is finished we need to clean the resources
     delete m_download;
     m_download = nullptr;
@@ -162,6 +170,7 @@ QString DownloadTracker::getPkconCommand()
 
 void DownloadTracker::setProgress(qulonglong received, qulonglong total)
 {
+    qDebug() <<  __PRETTY_FUNCTION__ << received << total;
     if (total > 0) {
         qulonglong result = (received * 100);
         m_progress = static_cast<int>(result / total);

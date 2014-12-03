@@ -76,15 +76,14 @@ private Q_SLOTS:
     void updateDownloadProgress(int percentage, double eta);
 
 private:
-    int m_currentBuildNumber;
+    int m_currentBuildNumber = -1;
     QMap<QString, QString> m_detailedVersion;
     QDateTime m_lastUpdateDate;
-    int m_downloadMode;
+    int m_downloadMode = -1;
 
-    QDBusConnection m_systemBusConnection;
-    QString m_objectPath;
+    QString m_objectPath = QString::null;
     QDBusInterface m_SystemServiceIface;
-    Update *update;
+    Update *update = nullptr;
 
     void setCurrentDetailedVersion();
 };

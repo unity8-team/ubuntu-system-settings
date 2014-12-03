@@ -117,23 +117,23 @@ public:
     void setClickToken(const QString &token) { m_clickToken = token; Q_EMIT clickTokenChanged(); }
 
 private:
-    int m_binary_filesize;
-    QString m_click_url;
-    QString m_clickToken;
-    QString m_downloadUrl;
-    int m_download_progress;
-    QString m_error;
-    QString m_icon_url;
-    QString m_lastUpdateDate;
-    QString m_local_version;
-    QString m_packagename;
-    QString m_remote_version;
-    bool m_selected;
-    bool m_systemUpdate;
-    QString m_title;
-    bool m_update;
-    bool m_update_ready;
-    bool m_update_state;
+    int m_binary_filesize = 0;
+    QString m_click_url = QString::null;
+    QString m_clickToken = QString::null;
+    QString m_downloadUrl = QString::null;
+    int m_download_progress = 0;
+    QString m_error = QString::null;
+    QString m_icon_url = QString::null;
+    QString m_lastUpdateDate = QString::null;
+    QString m_local_version = QString::null;
+    QString m_packagename = QString::null;
+    QString m_remote_version = QString::null;
+    bool m_selected = false;
+    bool m_systemUpdate = false;
+    QString m_title = QString::null;
+    bool m_update = false;
+    bool m_update_ready = false;
+    bool m_update_state = false;
 
     bool getIgnoreUpdates();
 };
