@@ -78,25 +78,24 @@ Q_SIGNALS:
 
 public:
     explicit Update(QObject *parent = 0);
-    virtual ~Update();
 
-    bool systemUpdate() { return m_systemUpdate; }
-    QString getPackageName() { return m_packagename; }
-    QString getTitle() { return m_title; }
-    QString getLocalVersion() { return m_local_version; }
-    QString getRemoteVersion() { return m_remote_version; }
-    QString iconUrl() { return m_icon_url; }
-    QString lastUpdateDate() { return m_lastUpdateDate; }
-    int binaryFilesize() { return m_binary_filesize; }
-    int downloadProgress() { return m_download_progress; }
-    bool updateRequired() { return m_update; }
-    bool updateState() { return m_update_state; }
-    bool updateReady() { return m_update_ready; }
-    bool selected() { return m_selected; }
-    QString getError() { return m_error; }
+    bool systemUpdate() const { return m_systemUpdate; }
+    QString getPackageName() const { return m_packagename; }
+    QString getTitle() const { return m_title; }
+    QString getLocalVersion() const { return m_local_version; }
+    QString getRemoteVersion() const { return m_remote_version; }
+    QString iconUrl() const { return m_icon_url; }
+    QString lastUpdateDate() const { return m_lastUpdateDate; }
+    int binaryFilesize() const { return m_binary_filesize; }
+    int downloadProgress() const { return m_download_progress; }
+    bool updateRequired() const { return m_update; }
+    bool updateState() const { return m_update_state; }
+    bool updateReady() const { return m_update_ready; }
+    bool selected() const { return m_selected; }
+    QString getError() const { return m_error; }
     const QString& getClickUrl() const { return m_click_url; }
-    QString downloadUrl() { return m_downloadUrl; }
-    QString clickToken() { return m_clickToken; }
+    QString downloadUrl() const { return m_downloadUrl; }
+    QString clickToken() const { return m_clickToken; }
 
     void setSystemUpdate(bool isSystem);
     void initializeApplication(QString packagename, QString title,
@@ -110,13 +109,13 @@ public:
     void setDownloadProgress(int progress);
     void setIconUrl(QString icon);
     void setError(QString error);
-    void setUpdateAvailable(bool available) { m_update = available; }
+    void setUpdateAvailable(bool available);
     void setLastUpdateDate(const QString date);
-    void setClickUrl(const QString &url) { m_click_url = url; }
+    void setClickUrl(const QString &url);
     void setDownloadUrl(const QString &url);
-    void setClickToken(const QString &token) { m_clickToken = token; Q_EMIT clickTokenChanged(); }
+    void setClickToken(const QString &token);
 
-private:
+protected:
     int m_binary_filesize;
     QString m_click_url;
     QString m_clickToken;

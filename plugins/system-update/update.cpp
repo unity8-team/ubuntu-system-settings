@@ -46,10 +46,6 @@ Update::Update(QObject *parent) :
 {
 }
 
-Update::~Update()
-{
-}
-
 void Update::initializeApplication(QString packagename, QString title,
                                    QString version)
 {
@@ -77,68 +73,108 @@ void Update::setRemoteVersion(QString& version)
 
 void Update::setError(QString error)
 {
-    m_error = error;
-    if (!m_error.isEmpty()) {
+    if (!error.isEmpty() && m_error != error) {
+        m_error = error;
         Q_EMIT errorChanged();
     }
 }
 
+void Update::setUpdateAvailable(bool available)
+{
+    m_update = available;
+}
+
 void Update::setSystemUpdate(bool isSystem)
 {
-    m_systemUpdate = isSystem;
-    Q_EMIT systemUpdateChanged();
+    if (m_systemUpdate != isSystem) {
+        m_systemUpdate = isSystem;
+        Q_EMIT systemUpdateChanged();
+    }
 }
 
 void Update::setUpdateRequired(bool state)
 {
-    m_update = state;
-    Q_EMIT updateRequiredChanged();
+    if (m_update != state) {
+        m_update = state;
+        Q_EMIT updateRequiredChanged();
+    }
 }
 
 void Update::setUpdateState(bool state)
 {
-    m_update_state = state;
-    Q_EMIT updateStateChanged();
+    if (m_update_state != state) {
+        m_update_state = state;
+        Q_EMIT updateStateChanged();
+    }
 }
 
 void Update::setUpdateReady(bool ready)
 {
-    m_update_ready = ready;
-    Q_EMIT updateReadyChanged();
+    if (m_update_ready != ready) {
+        m_update_ready = ready;
+        Q_EMIT updateReadyChanged();
+    }
 }
 
 void Update::setSelected(bool value)
 {
-    m_selected = value;
-    Q_EMIT selectedChanged();
+    if (m_selected != value) {
+        m_selected = value;
+        Q_EMIT selectedChanged();
+    }
 }
 
 void Update::setBinaryFilesize(int size)
 {
-    m_binary_filesize = size;
-    Q_EMIT binaryFilesizeChanged();
+    if (m_binary_filesize != size) {
+        m_binary_filesize = size;
+        Q_EMIT binaryFilesizeChanged();
+    }
 }
 
-void Update::setIconUrl(QString icon) {
-    m_icon_url = icon;
-    Q_EMIT iconUrlChanged();
+void Update::setIconUrl(QString icon)
+{
+    if (m_icon_url != icon) {
+        m_icon_url = icon;
+        Q_EMIT iconUrlChanged();
+    }
 }
 
 void Update::setLastUpdateDate(const QString date)
 {
-    m_lastUpdateDate = date;
-    Q_EMIT lastUpdateDateChanged();
+    if (m_lastUpdateDate != date) {
+        m_lastUpdateDate = date;
+        Q_EMIT lastUpdateDateChanged();
+    }
+}
+
+void Update::setClickUrl(const QString &url)
+{
+    m_click_url = url;
 }
 
 void Update::setDownloadProgress(int progress)
 {
-    m_download_progress = progress;
-    Q_EMIT downloadProgressChanged();
+    if (m_download_progress != progress) {
+        m_download_progress = progress;
+        Q_EMIT downloadProgressChanged();
+    }
 }
 
-void Update::setDownloadUrl(const QString &url) {
-    m_downloadUrl = url;
-    Q_EMIT downloadUrlChanged();
+void Update::setDownloadUrl(const QString &url)
+{
+    if (m_downloadUrl != url) {
+        m_downloadUrl = url;
+        Q_EMIT downloadUrlChanged();
+    }
+}
+
+void Update::setClickToken(const QString &token)
+{
+    if (m_clickToken != token) {
+        m_clickToken = token;
+        Q_EMIT clickTokenChanged();
+    }
 }
 
 bool Update::getIgnoreUpdates()
