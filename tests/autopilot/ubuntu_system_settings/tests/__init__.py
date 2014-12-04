@@ -330,6 +330,14 @@ class CellularBaseTestCase(UbuntuSystemSettingsOfonoTestCase):
         self.cellular_page = self.main_view.go_to_cellular_page()
 
 
+class BluetoothBaseTestCase(UbuntuSystemSettingsTestCase):
+
+    def setUp(self):
+        """ Go to Bluetooth page """
+        super(BluetoothBaseTestCase, self).setUp()
+        self.bluetooth_page = self.main_view.go_to_bluetooth_page()
+
+
 class PhoneOfonoBaseTestCase(UbuntuSystemSettingsOfonoTestCase):
     def setUp(self):
         """ Go to Phone page """

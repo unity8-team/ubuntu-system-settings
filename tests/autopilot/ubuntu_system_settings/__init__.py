@@ -120,6 +120,10 @@ class MainWindow(ubuntuuitoolkit.MainView):
         return self._go_to_page('entryComponent-cellular', 'cellularPage')
 
     @autopilot.logging.log_action(logger.debug)
+    def go_to_bluetooth_page(self):
+        return self._go_to_page('entryComponent-bluetooth', 'bluetoothPage')
+
+    @autopilot.logging.log_action(logger.debug)
     def go_to_phone_page(self):
         return self._go_to_page('entryComponent-phone', 'phonePage')
 
@@ -334,6 +338,33 @@ class CellularPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
         field = self.select_single('TextField', objectName="nameField")
         field.write(name)
         self.pointing_device.click_object(ok)
+
+
+class BluetoothPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
+
+    """Autopilot helper for Bluetooth page."""
+
+    @classmethod
+    def validate_dbus_object(cls, path, state):
+        name = introspection.get_classname_from_path(path)
+        if name == b'PageComponent':
+            if state['objectName'][1] == 'bluetoothPage':
+                return True
+        return False
+
+    def get_disconnected_list(self):
+        """Return the list of known disconnected devices.
+
+        :return: a list containing the text for each device
+
+        """
+        disconnected_list = self.select_single(
+            'QQuickColumn',
+            objectName='disconnectedList'
+        )
+        # NOTE: the UI design uses ellipses to be suggestive
+        return [device.text.strip('\u2026') for device in
+                disconnected_list.select_many('LabelVisual')]
 
 
 class PageChooseCarriers(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
