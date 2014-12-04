@@ -62,6 +62,8 @@ Q_SIGNALS:
 
 private Q_SLOTS:
     void onReply(QNetworkReply*);
+    void onError(QNetworkReply::NetworkError code);
+    void onSslErrors(const QList<QSslError>& errors);
 
 private:
     QNetworkAccessManager m_nam;

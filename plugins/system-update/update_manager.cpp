@@ -18,15 +18,17 @@
  *
 */
 
-#include "update_manager.h"
-#include <QString>
-#include <QStringList>
+#include <QDebug>
+#include <QDBusInterface>
+#include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
-#include <QJsonArray>
 #include <QJsonValue>
 #include <QProcessEnvironment>
-#include <QDBusInterface>
+#include <QString>
+#include <QStringList>
+
+#include "update_manager.h"
 
 using namespace UbuntuOne;
 
@@ -121,6 +123,7 @@ void UpdateManager::systemUpdateNotAvailable()
 
 void UpdateManager::updateNotAvailable()
 {
+    qDebug() <<  __PRETTY_FUNCTION__;
     m_checkingUpdates--;
     if (m_checkingUpdates == 0 && m_model.count() == 0) {
         Q_EMIT updatesNotFound();
@@ -129,6 +132,7 @@ void UpdateManager::updateNotAvailable()
 
 void UpdateManager::reportCheckState()
 {
+    qDebug() <<  __PRETTY_FUNCTION__;
     if (!m_clickCheckingUpdate && !m_systemCheckingUpdate) {
         Q_EMIT checkFinished();
     }
@@ -136,6 +140,7 @@ void UpdateManager::reportCheckState()
 
 void UpdateManager::checkUpdates()
 {
+    qDebug() <<  __PRETTY_FUNCTION__;
     m_systemCheckingUpdate = true;
     m_clickCheckingUpdate = true;
     m_checkingUpdates = 2;
@@ -210,6 +215,7 @@ void UpdateManager::processOutput()
 
 void UpdateManager::processUpdates()
 {
+    qDebug() <<  __PRETTY_FUNCTION__;
     m_clickCheckingUpdate = false;
     bool updateAvailable = false;
     foreach (QString id, m_apps.keys()) {
@@ -230,6 +236,7 @@ void UpdateManager::processUpdates()
 
 void UpdateManager::registerSystemUpdate(const QString& packageName, Update *update)
 {
+    qDebug() <<  __PRETTY_FUNCTION__;
     QString packagename(UBUNTU_PACKAGE_NAME);
     if (!m_apps.contains(packagename)) {
         m_apps[packageName] = update;
@@ -244,6 +251,7 @@ void UpdateManager::registerSystemUpdate(const QString& packageName, Update *upd
 
 void UpdateManager::updateDownloaded()
 {
+    qDebug() <<  __PRETTY_FUNCTION__;
     QString packagename(UBUNTU_PACKAGE_NAME);
     if (m_apps.contains(packagename)) {
         Update *update = m_apps[packagename];
@@ -255,6 +263,7 @@ void UpdateManager::updateDownloaded()
 }
 void UpdateManager::updateFailed(int consecutiveFailureCount, QString lastReason)
 {
+    qDebug() <<  __PRETTY_FUNCTION__;
     QString packagename(UBUNTU_PACKAGE_NAME);
     if (m_apps.contains(packagename)) {
         Update *update = m_apps[packagename];
@@ -267,6 +276,7 @@ void UpdateManager::updateFailed(int consecutiveFailureCount, QString lastReason
 
 void UpdateManager::systemUpdatePaused(int value)
 {
+    qDebug() <<  __PRETTY_FUNCTION__;
     QString packagename(UBUNTU_PACKAGE_NAME);
     if (m_apps.contains(packagename)) {
         Update *update = m_apps[packagename];
@@ -288,6 +298,7 @@ void UpdateManager::systemUpdateProgress(int value, double eta)
 
 void UpdateManager::startDownload(const QString &packagename)
 {
+    qDebug() <<  __PRETTY_FUNCTION__;
     m_apps[packagename]->setUpdateState(true);
     if (m_apps[packagename]->systemUpdate()) {
         m_systemUpdate.downloadUpdate();
@@ -298,6 +309,7 @@ void UpdateManager::startDownload(const QString &packagename)
 
 void UpdateManager::retryDownload(const QString &packagename)
 {
+    qDebug() <<  __PRETTY_FUNCTION__;
     if (m_apps[packagename]->systemUpdate()) {
         Update *update = m_apps.take(packagename);
         m_systemUpdate.cancelUpdate();
@@ -312,6 +324,7 @@ void UpdateManager::retryDownload(const QString &packagename)
 
 void UpdateManager::pauseDownload(const QString &packagename)
 {
+    qDebug() <<  __PRETTY_FUNCTION__;
     m_apps[packagename]->setUpdateState(false);
     m_systemUpdate.pauseDownload();
 }
@@ -329,6 +342,7 @@ void UpdateManager::downloadApp(Update *app)
 
 void UpdateManager::clickTokenReceived(Update *app, const QString &clickToken)
 {
+    qDebug() <<  __PRETTY_FUNCTION__;
     app->setError("");
     app->setClickToken(clickToken);
     app->setDownloadUrl(app->getClickUrl());
@@ -336,6 +350,7 @@ void UpdateManager::clickTokenReceived(Update *app, const QString &clickToken)
 
 void UpdateManager::updateClickScope()
 {
+    qDebug() <<  __PRETTY_FUNCTION__;
     // Refresh click scope
     QDBusMessage signal = QDBusMessage::createSignal(
                 "/com/canonical/unity/scopes",

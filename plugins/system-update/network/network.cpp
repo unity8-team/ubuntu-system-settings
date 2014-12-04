@@ -16,7 +16,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "network.h"
+#include <QDebug>
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QJsonArray>
@@ -25,9 +25,12 @@
 #include <QUrl>
 #include <QProcessEnvironment>
 
-#define URL_APPS "https://myapps.developer.ubuntu.com/dev/api/click-metadata/"
+#include "network.h"
 
-#define APPS_DATA "APPS_DATA"
+namespace {
+    const QString URL_APPS  = "https://myapps.developer.ubuntu.com/dev/api/click-metadata/";
+    const QString APPS_DATA = "APPS_DATA";
+}
 
 namespace UpdatePlugin {
 
@@ -35,12 +38,13 @@ Network::Network(QObject *parent) :
     QObject(parent),
     m_nam(this)
 {
-    QObject::connect(&m_nam, SIGNAL(finished(QNetworkReply*)),
-                     this, SLOT(onReply(QNetworkReply*)));
+    connect(&m_nam, SIGNAL(finished(QNetworkReply*)),
+            this, SLOT(onReply(QNetworkReply*)));
 }
 
 void Network::checkForNewVersions(QHash<QString, Update*> &apps)
 {
+    qDebug() <<  __PRETTY_FUNCTION__;
     m_apps = apps;
 
     QJsonObject serializer;
@@ -72,6 +76,7 @@ QString Network::getUrlApps()
 
 void Network::onReply(QNetworkReply *reply)
 {
+    qDebug() <<  __PRETTY_FUNCTION__;
     if (reply->error() == QNetworkReply::NoError) {
         QVariant statusAttr = reply->attribute(
                                 QNetworkRequest::HttpStatusCodeAttribute);
@@ -139,9 +144,20 @@ void Network::onReply(QNetworkReply *reply)
     reply->deleteLater();
 }
 
+void Network::onError(QNetworkReply::NetworkError code)
+{
+    qDebug() <<  __PRETTY_FUNCTION__ << code;
+}
+
+void Network::onSslErrors(const QList<QSslError>&)
+{
+    qDebug() <<  __PRETTY_FUNCTION__;
+}
+
 void Network::getClickToken(Update *app, const QString &url,
                             const QString &authHeader)
 {
+    qDebug() <<  __PRETTY_FUNCTION__;
     QProcessEnvironment environment = QProcessEnvironment::systemEnvironment();
     QString signUrl = environment.value("CLICK_TOKEN_URL", url);
     QUrl query(signUrl);

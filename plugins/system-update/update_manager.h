@@ -78,7 +78,7 @@ Q_SIGNALS:
     void systemUpdateFailed(int consecutiveFailureCount, QString lastReason);
     void versionChanged();
     void rebooting(bool status);
-    
+
 public:
     static UpdateManager *instance();
 
