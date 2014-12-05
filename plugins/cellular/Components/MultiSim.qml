@@ -123,9 +123,7 @@ Column {
             enabled: techPref !== ""
             visible: sim.connMan.powered
             selectedIndex: techPref !== "" ? model.indexOf(techPref) : -1
-            onDelegateClicked: {
-                rSettings.technologyPreference = model[index];
-            }
+            onDelegateClicked: rSettings.technologyPreference = model[index];
             Connections {
                 target: rSettings
                 onTechnologyPreferenceChanged: {
