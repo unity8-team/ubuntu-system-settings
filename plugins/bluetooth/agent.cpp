@@ -22,7 +22,6 @@
 
 #include <cassert>
 
-#include <QDebug>
 
 /***
 ****
@@ -78,7 +77,6 @@ void Agent::Release()
  */
 void Agent::RequestConfirmation(const QDBusObjectPath &objectPath, uint passkey)
 {
-    qWarning() << "*** requestconfirmation";
     auto device = m_devices.getDeviceFromPath(objectPath.path());
     if (device) {
         const uint tag = m_tag++;
@@ -103,7 +101,6 @@ void Agent::RequestConfirmation(const QDBusObjectPath &objectPath, uint passkey)
  */
 void Agent::confirmPasskey(uint tag, bool confirmed)
 {
-    qWarning() << "*** confirm passkey";
     if (m_delayedReplies.contains(tag)) {
         QDBusMessage message = m_delayedReplies[tag];
 
@@ -131,7 +128,6 @@ void Agent::confirmPasskey(uint tag, bool confirmed)
  */
 unsigned int Agent::RequestPasskey(const QDBusObjectPath &objectPath)
 {
-    qWarning() << "*** request passkey";
     auto device = m_devices.getDeviceFromPath(objectPath.path());
     if (device) {
         const uint tag = m_tag++;
@@ -159,7 +155,6 @@ unsigned int Agent::RequestPasskey(const QDBusObjectPath &objectPath)
  */
 void Agent::providePasskey(uint tag, bool provided, uint passkey)
 {
-    qWarning() << "*** providePassKey";
     if (m_delayedReplies.contains(tag)) {
         if (provided)
             m_connection.send(m_delayedReplies[tag].createReply(passkey));
@@ -186,7 +181,6 @@ void Agent::providePasskey(uint tag, bool provided, uint passkey)
  */
 QString Agent::RequestPinCode(const QDBusObjectPath &objectPath)
 {
-    qWarning() << "*** should request pin code";
     auto device = m_devices.getDeviceFromPath(objectPath.path());
     if (device) {
         const uint tag = m_tag++;
@@ -213,7 +207,6 @@ QString Agent::RequestPinCode(const QDBusObjectPath &objectPath)
  */
 void Agent::providePinCode(uint tag, bool confirmed, QString pinCode)
 {
-    qWarning() << "*** privide pin code" << pinCode;
     if (m_delayedReplies.contains(tag)) {
         QDBusMessage message = m_delayedReplies[tag];
 
@@ -236,7 +229,6 @@ void Agent::DisplayPasskey(const QDBusObjectPath &objectPath, uint passkey, ucha
     Q_UNUSED(passkey);
     Q_UNUSED(entered);
 
-    qWarning() << "*** should display pin code" << objectPath.path() << passkey << entered;
     // unimplemented -- unneeded for headsets
 }
 
