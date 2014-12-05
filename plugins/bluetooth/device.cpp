@@ -209,7 +209,7 @@ void Device::connect(ConnectionMode mode)
         interface = m_headsetInterface;
     else if (m_audioInterface && (mode == Audio))
         interface = m_audioInterface;
-    else if (m_audioInterface && (mode == Input))
+    else if (m_inputInterface && (mode == Input))
         interface = m_inputInterface;
     else {
         qWarning() << "Unhandled connection mode" << mode;
