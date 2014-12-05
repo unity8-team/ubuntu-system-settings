@@ -156,8 +156,7 @@ ItemPage {
                         // modelData is "Automatically"
                         if (sim.netReg.mode === "auto") {
                             return sim.netReg.name ?
-                                i18n.tr("Automatically") +
-                                " [ " + sim.netReg.name + " ]" :
+                                modelData + " [ " + sim.netReg.name + " ]" :
                                     modelData
                         } else {
                             return modelData;
