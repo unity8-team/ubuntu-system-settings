@@ -59,6 +59,7 @@ void Device::initDevice(const QString &path, QDBusConnection &bus)
     initInterface(m_audioSourceInterface, path, "org.bluez.AudioSource", bus);
     initInterface(m_audioSinkInterface,   path, "org.bluez.AudioSink",   bus);
     initInterface(m_headsetInterface,     path, "org.bluez.Headset",     bus);
+    initInterface(m_inputInterface,       path, "org.bluez.Input",       bus);
 
     Q_EMIT(pathChanged());
 }
@@ -190,6 +191,8 @@ void Device::disconnect(ConnectionMode mode)
         interface = m_headsetInterface;
     else if (m_audioInterface && (mode == Audio))
         interface = m_audioInterface;
+    else if (m_inputInterface && (mode == Input))
+        interface = m_inputInterface;
     else {
         qWarning() << "Unhandled connection mode" << mode;
         return;
@@ -206,6 +209,8 @@ void Device::connect(ConnectionMode mode)
         interface = m_headsetInterface;
     else if (m_audioInterface && (mode == Audio))
         interface = m_audioInterface;
+    else if (m_audioInterface && (mode == Input))
+        interface = m_inputInterface;
     else {
         qWarning() << "Unhandled connection mode" << mode;
         return;
