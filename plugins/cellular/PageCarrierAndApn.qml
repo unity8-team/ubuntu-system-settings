@@ -24,7 +24,7 @@ import Ubuntu.Components.ListItems 0.1 as ListItem
 
 ItemPage {
     id: root
-    title: i18n.tr("Carrier & APN")
+    title: i18n.tr("Carrier")
     objectName: "carrierApnPage"
     flickable: null
 
@@ -43,7 +43,7 @@ ItemPage {
             ListItem.SingleValue {
                 text: i18n.tr("Carrier")
                 objectName: "carrier"
-                value: sim.netReg.name ? sim.netReg.name : i18n.tr("No carrier")
+                value: sim.netReg.name ? sim.netReg.name : i18n.tr("None")
                 enabled: (sim.netReg.status !== "") &&
                     (sim.netReg.mode !== "auto-only")
                 progression: enabled

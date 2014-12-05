@@ -70,7 +70,7 @@ Column {
     ListItem.Divider {}
 
     ListItem.SingleValue {
-        text: i18n.tr("Carriers & APNs")
+        text: i18n.tr("Carriers")
         id: chooseCarrier
         objectName: "carrierApnEntry"
         progression: enabled

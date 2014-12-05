@@ -126,7 +126,7 @@ ItemPage {
             spacing: 0
 
             SettingsItemTitle {
-                text: i18n.tr("Choose carrier:")
+                text: i18n.tr("Carrier")
 
                 ActivityIndicator {
                     anchors {
@@ -156,8 +156,8 @@ ItemPage {
                         // modelData is "Automatically"
                         if (sim.netReg.mode === "auto") {
                             return sim.netReg.name ?
-                                // TRANSLATORS: %1 is a (network) carrier
-                                i18n.tr("Automatically [ %1 ]").arg(sim.netReg.name) :
+                                i18n.tr("Automatically") +
+                                " [ " + sim.netReg.name + " ]" :
                                     modelData
                         } else {
                             return modelData;
