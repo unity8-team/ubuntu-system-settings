@@ -145,7 +145,7 @@ void BluetoothTest::testToggleDiscovery()
 void BluetoothTest::testIsSupportedType()
 {
     QCOMPARE(Bluetooth::isSupportedType(Device::Type::Headset), true);
-    QCOMPARE(Bluetooth::isSupportedType(Device::Type::Mouse), false);
+    QCOMPARE(Bluetooth::isSupportedType(Device::Type::Mouse), true);
     QCOMPARE(Bluetooth::isSupportedType(Device::Type::Tablet), false);
 }
 
