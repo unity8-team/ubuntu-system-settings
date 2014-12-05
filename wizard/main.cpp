@@ -48,6 +48,23 @@ int main(int argc, const char *argv[])
     QGuiApplication::setApplicationName("System Settings Wizard");
     QGuiApplication *application = new QGuiApplication(argc, (char**)argv);
 
+    // The testability driver is only loaded by QApplication but not by QGuiApplication.
+    // However, QApplication depends on QWidget which would add some unneeded overhead => Let's load the testability driver on our own.
+    if (getenv("QT_LOAD_TESTABILITY")) {
+        QLibrary testLib(QLatin1String("qttestability"));
+        if (testLib.load()) {
+            typedef void (*TasInitialize)(void);
+            TasInitialize initFunction = (TasInitialize)testLib.resolve("qt_testability_init");
+            if (initFunction) {
+                initFunction();
+            } else {
+                qCritical("Library qttestability resolve failed!");
+            }
+        } else {
+            qCritical("Library qttestability load failed!");
+        }
+    }
+
     bindtextdomain(I18N_DOMAIN, NULL);
     textdomain(I18N_DOMAIN);
 
