@@ -29,6 +29,7 @@
 #include <iostream>
 TimeDate::TimeDate(QObject *parent) :
     QObject(parent),
+    m_useNTP(false),
     m_systemBusConnection (QDBusConnection::systemBus()),
     m_serviceWatcher ("org.freedesktop.timedate1",
                       m_systemBusConnection,
@@ -43,6 +44,8 @@ TimeDate::TimeDate(QObject *parent) :
              SIGNAL (serviceOwnerChanged (QString, QString, QString)),
              this,
              SLOT (slotNameOwnerChanged (QString, QString, QString)));
+
+    m_useNTP = getUseNTP();
 
     setUpInterface();
 }
@@ -76,6 +79,11 @@ QString TimeDate::getTimeZone()
     return QString();
 }
 
+bool TimeDate::useNTP()
+{
+    return m_useNTP;
+}
+
 bool TimeDate::getUseNTP()
 {
     QVariant useNTP(m_timeDateInterface.property("NTP"));
@@ -90,6 +98,7 @@ bool TimeDate::getUseNTP()
 void TimeDate::setUseNTP(bool enabled)
 {
     m_timeDateInterface.call("SetNTP", enabled, false);
+    m_useNTP = enabled;
 }
 
 void TimeDate::slotChanged(QString interface,
@@ -97,18 +106,22 @@ void TimeDate::slotChanged(QString interface,
                            QStringList invalidated_properties)
 {
     Q_UNUSED (interface);
-    Q_UNUSED (changed_properties);
+    Q_UNUSED (invalidated_properties);
 
-    if (invalidated_properties.contains("Timezone")) {
-        QString tz(getTimeZone());
+    if (changed_properties.contains("Timezone")) {
+        QString tz(changed_properties["Timezone"].toString());
         if (tz != m_currentTimeZone) {
             m_currentTimeZone = tz;
             Q_EMIT timeZoneChanged();
         }
     }
 
-    if (invalidated_properties.contains("NTP")) {
-        Q_EMIT useNTPChanged();
+    if (changed_properties.contains("NTP")) {
+        bool useNTP = changed_properties["NTP"].toBool();
+        if (useNTP != m_useNTP) {
+            m_useNTP = useNTP;
+            Q_EMIT useNTPChanged();
+        }
     }
 }
 
