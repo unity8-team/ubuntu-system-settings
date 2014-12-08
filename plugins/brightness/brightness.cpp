@@ -23,6 +23,7 @@
 #include <QDBusArgument>
 #include <QDBusReply>
 #include <QDBusMetaType>
+#include <QDebug>
 
 // Returned data from getBrightnessParams
 struct BrightnessParams {
@@ -58,13 +59,17 @@ Brightness::Brightness(QObject *parent) :
     m_powerdIface ("com.canonical.powerd",
                    "/com/canonical/powerd",
                    "com.canonical.powerd",
-                   m_systemBusConnection)
+                   m_systemBusConnection),
+    m_powerdRunning(false),
+    m_autoBrightnessAvailable(false)
 {
     qRegisterMetaType<BrightnessParams>();
     m_powerdRunning = m_powerdIface.isValid();
 
-    if (!m_powerdRunning)
+    if (!m_powerdRunning) {
+        qWarning() << m_powerdIface.interface() << "Isn't valid";
         return;
+    }
 
     QDBusMessage reply(m_powerdIface.call("getBrightnessParams"));
 
