@@ -103,8 +103,6 @@ Column {
         }[tech]
     }
 
-    SettingsItemTitle { text: i18n.tr("Connection type:") }
-
     Repeater {
         model: sims
 
@@ -115,6 +113,7 @@ Column {
             property string techPref: rSettings.technologyPreference
             property var modemTechs: rSettings.modemTechnologies
             expanded: true
+            text: i18n.tr("Connection type:")
             model: modemTechs || []
             delegate: OptionSelectorDelegate {
                 objectName: sim.path + "_radio_" + modelData
