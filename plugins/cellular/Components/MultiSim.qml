@@ -102,33 +102,37 @@ Column {
         }[tech]
     }
 
-    ListItem.ItemSelector {
-        id: radio
-        expanded: true
-        text: i18n.tr("Connection type:")
-        model: poweredSim ? poweredSim.radioSettings.modemTechnologies : []
-        delegate: OptionSelectorDelegate {
-            objectName: poweredSim.path + "_radio_" + modelData
-            text: techToString(modelData)
-        }
-        enabled: poweredSim ?
-            (poweredSim.radioSettings.technologyPreference !== "") : false
-        visible: poweredSim
-        selectedIndex: poweredSim ?
-            model.indexOf(poweredSim.radioSettings.technologyPreference) : -1
-        onDelegateClicked: {
-            poweredSim.radioSettings.technologyPreference = model[index];
+    Repeater {
+        model: sims
+
+        ListItem.ItemSelector {
+            id: radio
+            property var sim: modelData
+            property var rSettings: sim.radioSettings
+            property string techPref: rSettings.technologyPreference
+            property var modemTechs: rSettings.modemTechnologies
+            expanded: true
+            model: modemTechs || []
+            delegate: OptionSelectorDelegate {
+                objectName: sim.path + "_radio_" + modelData
+                text: techToString(modelData)
+            }
+            enabled: techPref !== ""
+            visible: sim.connMan.powered
+            selectedIndex: techPref !== "" ? model.indexOf(techPref) : -1
+            onDelegateClicked: {
+                rSettings.technologyPreference = model[index];
+            }
+            Connections {
+                target: rSettings
+                onTechnologyPreferenceChanged: {
+                    radio.selectedIndex = modemTechs.indexOf(preference)
+                }
+                ignoreUnknownSignals: true
+            }
         }
     }
 
-    Connections {
-        target: poweredSim ? poweredSim.radioSettings : null
-        onTechnologyPreferenceChanged: {
-            radio.selectedIndex =
-                poweredSim.radioSettings.modemTechnologies.indexOf(preference)
-        }
-        ignoreUnknownSignals: true
-    }
 
     GSettings {
         id: phoneSettings
