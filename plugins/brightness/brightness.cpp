@@ -67,7 +67,7 @@ Brightness::Brightness(QObject *parent) :
     m_powerdRunning = m_powerdIface.isValid();
 
     if (!m_powerdRunning) {
-        qWarning() << m_powerdIface.interface() << "Isn't valid";
+        qWarning() << m_powerdIface.interface() << m_powerdIface.lastError().message();
         return;
     }
 
