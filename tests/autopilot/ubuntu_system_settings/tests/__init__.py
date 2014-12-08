@@ -33,6 +33,7 @@ CONNMAN_IFACE = 'org.ofono.ConnectionManager'
 RDO_IFACE = 'org.ofono.RadioSettings'
 SIM_IFACE = 'org.ofono.SimManager'
 NETREG_IFACE = 'org.ofono.NetworkRegistration'
+NETOP_IFACE = 'org.ofono.NetworkOperator'
 CALL_FWD_IFACE = 'org.ofono.CallForwarding'
 CALL_SETTINGS_IFACE = 'org.ofono.CallSettings'
 SYSTEM_IFACE = 'com.canonical.SystemImage'
@@ -150,7 +151,7 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
     def mock_carriers(self, name):
         self.dbusmock.AddObject(
             '/%s/operator/op2' % name,
-            'org.ofono.NetworkOperator',
+            NETOP_IFACE,
             {
                 'Name': 'my.cool.telco',
                 'Status': 'available',
@@ -167,7 +168,7 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
         # Add a forbidden carrier
         self.dbusmock.AddObject(
             '/%s/operator/op3' % name,
-            'org.ofono.NetworkOperator',
+            NETOP_IFACE,
             {
                 'Name': 'my.bad.telco',
                 'Status': 'forbidden',
@@ -311,9 +312,12 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
 
 
 class CellularBaseTestCase(UbuntuSystemSettingsOfonoTestCase):
+
     def setUp(self):
         """ Go to Cellular page """
-        super(CellularBaseTestCase, self).setUp('cellular')
+        super(CellularBaseTestCase, self).setUp()
+        self.cellular_page = self.system_settings.\
+            main_view.go_to_cellular_page()
 
 
 class PhoneOfonoBaseTestCase(UbuntuSystemSettingsOfonoTestCase):
