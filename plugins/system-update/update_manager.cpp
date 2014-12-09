@@ -236,6 +236,8 @@ void UpdateManager::registerSystemUpdate(const QString& packageName, Update *upd
         m_model.insert(0, QVariant::fromValue(update));
         Q_EMIT modelChanged();
         Q_EMIT updateAvailableFound(update->updateState());
+        if (update->getRemoteVersion() == m_latestDownload)
+            updateDownloaded();
     }
     m_systemCheckingUpdate = false;
 
