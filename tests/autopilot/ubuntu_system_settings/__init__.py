@@ -378,6 +378,61 @@ class PageChooseCarrier(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
         self.pointing_device.click_object(item)
 
 
+class SecurityPage(ubuntuuitoolkit.QQuickFlickable):
+
+    """Autopilot helper for the Security page."""
+
+    @classmethod
+    def validate_dbus_object(cls, path, state):
+        name = introspection.get_classname_from_path(path)
+        if name == b'PageComponent':
+            if state['objectName'][1] == 'securityPrivacyPage':
+                return True
+        return False
+
+    @autopilot.logging.log_action(logger.debug)
+    def _go_to_sim_lock(self):
+        selector = self.select_single(objectName='simControl')
+        self.swipe_child_into_view(selector)
+        self.pointing_device.click_object(selector)
+        return self.get_root_instance().wait_select_single(
+            objectName='simPinPage'
+        )
+
+
+class SimPin(ubuntuuitoolkit.QQuickFlickable):
+
+    """Autopilot helper for the SimPin Page."""
+
+    def _get_sim_pin_switch(self):
+        """Return the SIM PIN switch."""
+        return self.select_single(objectName='simPinSwitch')
+
+    @autopilot.logging.log_action(logger.debug)
+    def _click_sim_pin_switch(self):
+        """Click on the SIM PIN switch, return the SIM PIN dialog."""
+        sim_pin_switch = self._get_sim_pin_switch()
+        self.pointing_device.click_object(sim_pin_switch)
+        return self.get_root_instance().wait_select_single(
+            objectName='lockDialogComponent'
+        )
+
+    @autopilot.logging.log_action(logger.debug)
+    def enter_lock_pin(self, pin):
+        """Enter the given pin into our dialog."""
+        root_instance = self.get_root_instance()
+        prev_input = root_instance.wait_select_single(
+            objectName='prevInput'
+        )
+        self.pointing_device.click_object(prev_input)
+        keyboard = Keyboard.create()
+        keyboard.type(pin)
+        lock_unlock_button = root_instance.select_single(
+            objectName='lockButton'
+        )
+        self.pointing_device.click_object(lock_unlock_button)
+
+
 class TimeAndDatePage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
 
     """Autopilot helper for the Sound page."""
