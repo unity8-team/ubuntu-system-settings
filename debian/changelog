@@ -1,3 +1,14 @@
+ubuntu-system-settings (0.3+15.04.20141209~rtm-0ubuntu1) 14.09; urgency=low
+
+  [ Ken VanDine ]
+  * [battery] don't control wifi state with libnm, use the
+    QDBusActionGroup from indicator-network (LP: #1391940)
+  * Update the translations template during the build (LP: #1399212)
+  * Use the SliderMenu component instead of the Slider component to
+    fixed value binding issues
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 09 Dec 2014 14:16:59 +0000
+
 ubuntu-system-settings (0.3+15.04.20141202~rtm-0ubuntu1) 14.09; urgency=low
 
   [ Ken VanDine ]
