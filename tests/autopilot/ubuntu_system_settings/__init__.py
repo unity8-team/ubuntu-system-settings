@@ -123,6 +123,27 @@ class MainWindow(ubuntuuitoolkit.MainView):
     def go_to_bluetooth_page(self):
         return self._go_to_page('entryComponent-bluetooth', 'bluetoothPage')
 
+    @autopilot.logging.log_action(logger.debug)
+    def go_to_phone_page(self):
+        return self._go_to_page('entryComponent-phone', 'phonePage')
+
+    @autopilot.logging.log_action(logger.debug)
+    def go_to_about_page(self):
+        return self._go_to_page('entryComponent-about', 'aboutPage')
+
+    @autopilot.logging.log_action(logger.debug)
+    def go_to_sound_page(self):
+        return self._go_to_page('entryComponent-sound', 'soundPage')
+
+    @autopilot.logging.log_action(logger.debug)
+    def go_to_security_page(self):
+        return self._go_to_page('entryComponent-security-privacy',
+                                'securityPrivacyPage')
+
+    @autopilot.logging.log_action(logger.debug)
+    def go_to_datetime_page(self):
+        return self._go_to_page('entryComponent-time-date', 'timeDatePage')
+
     def _go_to_page(self, item_object_name, page_object_name):
         self.click_item(item_object_name)
         page = self.wait_select_single(objectName=page_object_name)
@@ -154,11 +175,6 @@ class MainWindow(ubuntuuitoolkit.MainView):
         return self.select_single(objectName='systemSettingsPage')
 
     @property
-    def cellular_page(self):
-        """ Return 'Cellular' page """
-        return self.select_single(objectName='cellularPage')
-
-    @property
     def choose_page(self):
         """ Return 'Choose carrier' page """
         return self.select_single(objectName="chooseCarrierPage")
@@ -179,26 +195,6 @@ class MainWindow(ubuntuuitoolkit.MainView):
         return self.select_single(objectName='backgroundPage')
 
     @property
-    def sound_page(self):
-        """ Return 'Sound' page """
-        return self.select_single(objectName='soundPage')
-
-    @property
-    def security_page(self):
-        """ Return 'Security' page """
-        return self.select_single(objectName='securityPrivacyPage')
-
-    @property
-    def about_page(self):
-        """ Return 'About' page """
-        return self.select_single(objectName='aboutPage')
-
-    @property
-    def wifi_page(self):
-        """ Return 'Wifi' page """
-        return self.select_single(objectName='wifiPage')
-
-    @property
     def _orientation_lock_switch(self):
         return self.wait_select_single(
             ubuntuuitoolkit.CheckBox,
@@ -213,7 +209,7 @@ class MainWindow(ubuntuuitoolkit.MainView):
 
 class CellularPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
 
-    """Autopilot helper for the Sound page."""
+    """Autopilot helper for the Cellular page."""
 
     @classmethod
     def validate_dbus_object(cls, path, state):
@@ -412,7 +408,7 @@ class PageChooseCarrier(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
 
 class TimeAndDatePage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
 
-    """Autopilot helper for the Sound page."""
+    """Autopilot helper for the TimeAndDate page."""
 
     @classmethod
     def validate_dbus_object(cls, path, state):
@@ -502,6 +498,10 @@ class AboutPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
             objectName='licensesPage')
         licenses_page.active.wait_for(True)
         return licenses_page
+
+    def get_number(self, obj):
+        number = self.select_single(objectName=obj)
+        return number.value
 
 
 class LicensesPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
@@ -597,6 +597,18 @@ class PhonePage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
             find = "simServicesSim%d" % sim
 
         return self._go_to_page(find, 'servicesPage')
+
+    @property
+    def _dialpad_sounds(self):
+        return self.wait_select_single(
+            ubuntuuitoolkit.CheckBox,
+            objectName='dialpadSounds')
+
+    def enable_dialpad_sounds(self):
+        self._dialpad_sounds.check()
+
+    def disable_dialpad_sounds(self):
+        self._dialpad_sounds.uncheck()
 
 
 class CallWaiting(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):

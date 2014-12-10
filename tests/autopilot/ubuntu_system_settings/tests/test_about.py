@@ -132,18 +132,9 @@ class AboutOfonoTestCase(AboutOfonoBaseTestCase):
             displayed_imei = self.about_page.get_imei()
             self.assertThat(displayed_imei, Equals(device_imei))
 
-    def test_device_without_imei_must_not_display_it(self):
-        device_imei = self._get_imei_from_dbus()
-        if device_imei:
-            self.skipTest('The device has imei.')
-        else:
-            self.assertFalse(self.about_page.is_imei_visible())
-
     def test_phone_number(self):
-        number = self.system_settings.main_view.about_page.select_single(
-            objectName="numberItem"
-        )
-        self.assertEqual(str(number.value), "123456789")
+        self.assertEqual(str(self.about_page.get_number('numberItem')),
+                         '123456789')
 
 
 class AboutOfonoMultiSimTestCase(AboutOfonoBaseTestCase):
@@ -151,14 +142,10 @@ class AboutOfonoMultiSimTestCase(AboutOfonoBaseTestCase):
     use_sims = 2
 
     def test_phone_numbers(self):
-        number1 = self.system_settings.main_view.about_page.select_single(
-            objectName="numberItem1"
-        )
-        number2 = self.system_settings.main_view.about_page.select_single(
-            objectName="numberItem2"
-        )
-        self.assertEqual(str(number1.value), "123456789")
-        self.assertEqual(str(number2.value), "08123")
+        self.assertEqual(str(self.about_page.get_number('numberItem1')),
+                         '123456789')
+        self.assertEqual(str(self.about_page.get_number('numberItem2')),
+                         '08123')
 
 
 class AboutSystemImageTestCase(AboutSystemImageBaseTestCase):
@@ -226,7 +213,7 @@ class StorageTestCase(StorageBaseTestCase):
 
     def test_disk(self):
         """ Checks whether disk item is available """
-        disk_item = self.system_settings.main_view.storage_page.select_single(
+        disk_item = self.storage_page.select_single(
             objectName='diskItem'
         )
         self.assertThat(disk_item.text, Equals('Total storage'))
@@ -293,8 +280,9 @@ class StorageTestCase(StorageBaseTestCase):
 
     def test_installed_apps(self):
         """ Checks whether Installed Apps list is available """
-        installed_apps_list_view = self.system_settings.main_view.\
-            storage_page.select_single(objectName='installedAppsListView')
+        installed_apps_list_view = self.storage_page.select_single(
+            objectName='installedAppsListView'
+        )
         self.assertThat(installed_apps_list_view, NotEquals(None))
 
 
