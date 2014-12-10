@@ -391,7 +391,7 @@ class SecurityPage(ubuntuuitoolkit.QQuickFlickable):
         return False
 
     @autopilot.logging.log_action(logger.debug)
-    def _go_to_sim_lock(self):
+    def go_to_sim_lock(self):
         selector = self.select_single(objectName='simControl')
         self.swipe_child_into_view(selector)
         self.pointing_device.click_object(selector)
@@ -404,14 +404,14 @@ class SimPin(ubuntuuitoolkit.QQuickFlickable):
 
     """Autopilot helper for the SimPin Page."""
 
-    def _get_sim_pin_switch(self):
+    def get_sim_pin_switch(self):
         """Return the SIM PIN switch."""
         return self.select_single(objectName='simPinSwitch')
 
     @autopilot.logging.log_action(logger.debug)
-    def _click_sim_pin_switch(self):
+    def click_sim_pin_switch(self):
         """Click on the SIM PIN switch, return the SIM PIN dialog."""
-        sim_pin_switch = self._get_sim_pin_switch()
+        sim_pin_switch = self.get_sim_pin_switch()
         self.pointing_device.click_object(sim_pin_switch)
         return self.get_root_instance().wait_select_single(
             objectName='lockDialogComponent'
@@ -424,9 +424,7 @@ class SimPin(ubuntuuitoolkit.QQuickFlickable):
         prev_input = root_instance.wait_select_single(
             objectName='prevInput'
         )
-        self.pointing_device.click_object(prev_input)
-        keyboard = Keyboard.create()
-        keyboard.type(pin)
+        prev_input.write(pin)
         lock_unlock_button = root_instance.select_single(
             objectName='lockButton'
         )
