@@ -135,6 +135,10 @@ class MainWindow(ubuntuuitoolkit.MainView):
     def go_to_datetime_page(self):
         return self._go_to_page('entryComponent-time-date', 'timeDatePage')
 
+    @autopilot.logging.log_action(logger.debug)
+    def go_to_bluetooth_page(self):
+        return self._go_to_page('entryComponent-bluetooth', 'bluetoothPage')
+
     def _go_to_page(self, item_object_name, page_object_name):
         self.click_item(item_object_name)
         page = self.wait_select_single(objectName=page_object_name)
@@ -209,6 +213,34 @@ class CelullarPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
             if state['objectName'][1] == 'cellularPage':
                 return True
         return False
+
+
+class BluetoothPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
+
+    """Autopilot helper for Bluetooth page."""
+
+    @classmethod
+    def validate_dbus_object(cls, path, state):
+        name = introspection.get_classname_from_path(path)
+        if name == b'PageComponent':
+            if state['objectName'][1] == 'bluetoothPage':
+                return True
+        return False
+
+    def get_disconnected_devices(self):
+        """Return the list of known disconnected devices.
+
+        :return: a list containing the text for each device
+
+        """
+        disconnected_list = self.select_single(
+            'QQuickColumn',
+            objectName='disconnectedList'
+        )
+        # NOTE: the UI design uses ellipsis to be suggestive
+        ellipsis = '\u2026'
+        return [device.text.strip(ellipsis) for device in
+                disconnected_list.select_many('LabelVisual')]
 
 
 class SecurityPage(ubuntuuitoolkit.QQuickFlickable):
