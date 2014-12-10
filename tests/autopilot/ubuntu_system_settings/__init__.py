@@ -356,7 +356,7 @@ class BluetoothPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
                 return True
         return False
 
-    def get_disconnected_list(self):
+    def get_disconnected_devices(self):
         """Return the list of known disconnected devices.
 
         :return: a list containing the text for each device
