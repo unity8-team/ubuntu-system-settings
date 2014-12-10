@@ -141,6 +141,7 @@ private:
     int m_downloadMode;
     QVariantList m_model;
     Token m_token;
+    QString m_latestDownload;
 
 #ifdef TESTS
     FakeNetwork m_network;
