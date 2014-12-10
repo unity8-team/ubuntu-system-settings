@@ -118,14 +118,14 @@ void DownloadTracker::registerError(Error* error)
     Q_EMIT errorFound(error->errorString());
 
     // we need to ensure that the resources are cleaned
-    delete m_download;
+    m_download->deleteLater();
     m_download = nullptr;
 }
 
 void DownloadTracker::onDownloadFinished(const QString& path)
 {
     // once a download is finished we need to clean the resources
-    delete m_download;
+    m_download->deleteLater();
     m_download = nullptr;
     Q_EMIT finished(path);
 }
@@ -133,7 +133,7 @@ void DownloadTracker::onDownloadFinished(const QString& path)
 void DownloadTracker::onDownloadCanceled(bool wasCanceled)
 {
     if (wasCanceled) {
-        delete m_download;
+        m_download->deleteLater();
         m_download = nullptr;
     }
     Q_EMIT canceled(wasCanceled);
