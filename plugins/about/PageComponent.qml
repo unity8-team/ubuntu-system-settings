@@ -33,6 +33,7 @@ ItemPage {
 
     title: i18n.tr("About this phone")
     flickable: scrollWidget
+    property var modemsSorted: manager.modems.slice(0).sort()
 
     UbuntuStorageAboutPanel {
         id: backendInfos
@@ -52,7 +53,7 @@ ItemPage {
             if (manager.modems.length === 1) {
                 phoneNumbers.setSource("PhoneNumber.qml", {path: manager.modems[0]})
             } else if (manager.modems.length > 1) {
-                phoneNumbers.setSource("PhoneNumbers.qml", {paths: manager.modems.slice(0).sort()})
+                phoneNumbers.setSource("PhoneNumbers.qml", {paths: modemsSorted})
             }
         }
     }
@@ -117,8 +118,23 @@ ItemPage {
                 property string imeiNumber
                 imeiNumber: deviceInfos.imei(0)
                 text: "IMEI"
-                value: imeiNumber
-                visible: imeiNumber
+                value: modemsSorted.length ? (imeiNumber || i18n.tr("None")) :
+                    i18n.tr("None")
+                visible: modemsSorted.length <= 1
+            }
+
+            ListItem.MultiValue {
+                text: "IMEI"
+                objectName: "imeiItems"
+                values: {
+                    var imeis = [];
+                    modemsSorted.forEach(function (path, i) {
+                        var imei = deviceInfos.imei(i);
+                        imei ? imeis.push(imei) : imeis.push(i18n.tr("None"));
+                    });
+                    return imeis;
+                }
+                visible: modemsSorted.length > 1
             }
 
             ListItem.SingleValue {
