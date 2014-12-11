@@ -94,9 +94,9 @@ void DownloadTracker::bindDownload(Download* download)
 {
     m_download = download;
     connect(m_download, SIGNAL(finished(const QString &)), this,
-            SIGNAL(onDownloadFinished(const QString &)));
+            SLOT(onDownloadFinished(const QString &)));
     connect(m_download, SIGNAL(canceled(bool)), this,
-            SIGNAL(onDownloadCanceled(bool)));
+            SLOT(onDownloadCanceled(bool)));
     connect(m_download, SIGNAL(paused(bool)), this,
             SIGNAL(paused(bool)));
     connect(m_download, SIGNAL(resumed(bool)), this,
