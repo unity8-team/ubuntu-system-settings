@@ -31,7 +31,6 @@ ItemPage {
     id: root
     title: i18n.tr("Cellular")
     objectName: "cellularPage"
-    flickable: null
 
     property var modemsSorted: manager.modems.slice(0).sort()
     property int simsLoaded: 0
