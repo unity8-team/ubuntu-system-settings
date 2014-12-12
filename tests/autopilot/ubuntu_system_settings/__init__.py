@@ -277,28 +277,16 @@ class CellularPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
 
     @autopilot.logging.log_action(logger.debug)
     def change_carrier(self, carrier, sim=None):
-        if sim:
-            carriersPage = self._click_carriers()
-            carrierPage = carriersPage.select_sim(sim)
-        else:
-            carrierPage = self._click_carrier()
-
-        carrierPage.set_manual()
-        carrierPage.set_carrier(carrier)
+        carrierApnPage = self._click_carrier_apn()
+        chooseCarrierPage = carrierApnPage.open_carrier(sim)
+        chooseCarrierPage.set_carrier(carrier)
 
     @autopilot.logging.log_action(logger.debug)
-    def _click_carrier(self):
-        item = self.select_single(objectName='carrier')
+    def _click_carrier_apn(self):
+        item = self.select_single(objectName='carrierApnEntry')
         self.pointing_device.click_object(item)
         return self.get_root_instance().wait_select_single(
-            objectName='chooseCarrierPage')
-
-    @autopilot.logging.log_action(logger.debug)
-    def _click_carriers(self):
-        item = self.select_single(objectName='carriers')
-        self.pointing_device.click_object(item)
-        return self.get_root_instance().wait_select_single(
-            objectName='chooseCarriersPage')
+            objectName='carrierApnPage')
 
     @autopilot.logging.log_action(logger.debug)
     def select_sim_for_data(self, sim):
@@ -368,30 +356,42 @@ class BluetoothPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
                 disconnected_list.select_many('LabelVisual')]
 
 
-class PageChooseCarriers(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
+class PageCarrierAndApn(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
 
-    """Autopilot helper for carrier selection page (multisim)."""
+    """Autopilot helper for carrier/apn entry page (singlesim)."""
+    @autopilot.logging.log_action(logger.debug)
+    def open_carrier(self, sim):
+        return self._click_carrier(sim)
 
     @autopilot.logging.log_action(logger.debug)
-    def select_sim(self, sim):
-        return self._select_sim(sim)
+    def _click_carrier(self, sim):
+        obj = self.select_single(
+            objectName='carrier')
+        self.pointing_device.click_object(obj)
+        return self.get_root_instance().wait_select_single(
+            objectName='chooseCarrierPage')
+
+
+class PageCarriersAndApns(
+        ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
+    """Autopilot helper for carrier/apn entry page (multisim)."""
+    """Autopilot helper for carrier/apn entry page (singlesim)."""
+    @autopilot.logging.log_action(logger.debug)
+    def open_carrier(self, sim):
+        return self._click_carrier(sim)
 
     @autopilot.logging.log_action(logger.debug)
-    def _select_sim(self, sim):
-        item = self.select_single(objectName='%s_carriers' % sim)
-        self.pointing_device.click_object(item)
+    def _click_carrier(self, sim):
+        obj = self.select_single(
+            objectName='%s_carriers' % sim)
+        self.pointing_device.click_object(obj)
         return self.get_root_instance().wait_select_single(
             objectName='chooseCarrierPage')
 
 
 class PageChooseCarrier(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
 
-    """Autopilot helper for carrier selection page (singlesim)."""
-
-    @autopilot.logging.log_action(logger.debug)
-    def set_manual(self):
-        item = self.select_single(text='Manually')
-        self.pointing_device.click_object(item)
+    """Autopilot helper for carrier selection page"""
 
     @autopilot.logging.log_action(logger.debug)
     def set_automatic(self):
@@ -402,7 +402,17 @@ class PageChooseCarrier(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
         # wait for animation, since page.animationRunning.wait_for(False)
         # does not work?
         sleep(0.5)
-        item = self.select_single(text=carrier)
+        allOperators = self.select_single(objectName="allOperators")
+        otherOperators = self.select_single(objectName="otherOperators")
+
+        if allOperators.visible:
+            opList = allOperators
+        elif otherOperators.visible:
+            opList = otherOperators
+        else:
+            raise Exception("No operator list visible.")
+
+        item = opList.select_single(text=carrier, objectName="carrier")
         self.pointing_device.click_object(item)
 
 

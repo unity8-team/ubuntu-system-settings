@@ -44,6 +44,7 @@ Column {
         anchors { left: parent.left; right: parent.right }
     }
 
+
     ListItem.SingleValue {
         text : i18n.tr("Hotspot disabled because Wi-Fi is off.")
         visible: showAllUI && !hotspotItem.visible
@@ -71,11 +72,11 @@ Column {
     ListItem.SingleValue {
         text: i18n.tr("Carriers")
         id: chooseCarrier
-        objectName: "carriers"
+        objectName: "carrierApnEntry"
         progression: enabled
         showDivider: false
         onClicked: {
-            pageStack.push(Qt.resolvedUrl("../PageChooseCarriers.qml"), {
+            pageStack.push(Qt.resolvedUrl("../PageCarriersAndApns.qml"), {
                 sims: sims
             });
         }
