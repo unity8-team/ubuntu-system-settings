@@ -132,13 +132,6 @@ class AboutOfonoTestCase(AboutOfonoBaseTestCase):
             displayed_imei = self.about_page.get_imei()
             self.assertThat(displayed_imei, Equals(device_imei))
 
-    def test_device_without_imei_must_not_display_it(self):
-        device_imei = self._get_imei_from_dbus()
-        if device_imei:
-            self.skipTest('The device has imei.')
-        else:
-            self.assertFalse(self.about_page.is_imei_visible())
-
     def test_phone_number(self):
         number = self.system_settings.main_view.about_page.select_single(
             objectName="numberItem"
