@@ -6,7 +6,6 @@
 # by the Free Software Foundation.
 
 from time import sleep
-import unittest
 from autopilot.matchers import Eventually
 from testtools.matchers import Equals, NotEquals
 
@@ -55,19 +54,6 @@ class SoundTestCase(SoundBaseTestCase):
         sleep(0.2)
         self.assertNotEqual(
             self.obj_snd.GetIncomingCallVibrate(),
-            prev_value)
-
-    @unittest.skip('skipped due to failure in CI run, passes locally')
-    def test_call_vibrate_silent_mode_sound_switch(self):
-        """ Check that call vibrate silent mode is present and clickable"""
-        snd = self.sound_page.select_single(
-            objectName="callVibrateSilentMode"
-        )
-        prev_value = self.obj_snd.GetIncomingCallVibrateSilentMode()
-        self.main_view.scroll_to_and_click(snd)
-        sleep(0.2)
-        self.assertNotEqual(
-            self.obj_snd.GetIncomingCallVibrateSilentMode(),
             prev_value)
 
     def test_message_vibrate_sound_switch(self):
