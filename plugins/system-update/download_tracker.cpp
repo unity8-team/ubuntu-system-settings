@@ -19,7 +19,7 @@
  */
 
 #include "download_tracker.h"
-#include "network/network.h"
+#include "network.h"
 #include <ubuntu/download_manager/download_struct.h>
 #include <ubuntu/download_manager/error.h>
 #include <QProcessEnvironment>

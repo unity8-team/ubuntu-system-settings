@@ -44,7 +44,8 @@ Build-Depends: dbus-test-runner,
                python3-gi,
                python3-dbus,
                python3-xdg,
-               gir1.2-glib-2.0
+               gir1.2-glib-2.0,
+               google-mock
 Standards-Version: 3.9.6
 Homepage: https://launchpad.net/ubuntu-system-settings
 # If you aren't a member of ~system-settings-touch but need to upload packaging
@@ -89,7 +90,8 @@ Depends: ${misc:Depends},
          python3-dbus,
          python3-xdg,
          gir1.2-glib-2.0,
-         qml-module-ubuntu-connectivity
+         qml-module-ubuntu-connectivity,
+         google-mock
 Recommends: ubuntu-system-settings-online-accounts,
             ubuntu-touch-sounds,
 Conflicts: ubuntu-system-settings-example

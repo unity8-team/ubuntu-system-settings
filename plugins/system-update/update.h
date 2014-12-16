@@ -78,7 +78,7 @@ Q_SIGNALS:
 
 public:
     explicit Update(QObject *parent = 0);
-    virtual ~Update();
+    ~Update();
 
     bool systemUpdate() { return m_systemUpdate; }
     QString getPackageName() { return m_packagename; }
@@ -89,7 +89,7 @@ public:
     QString lastUpdateDate() { return m_lastUpdateDate; }
     int binaryFilesize() { return m_binary_filesize; }
     int downloadProgress() { return m_download_progress; }
-    bool updateRequired() { return m_update; }
+    virtual bool updateRequired() { return m_update; }
     bool updateState() { return m_update_state; }
     bool updateReady() { return m_update_ready; }
     bool selected() { return m_selected; }
@@ -101,19 +101,19 @@ public:
     void setSystemUpdate(bool isSystem);
     void initializeApplication(QString packagename, QString title,
                                QString version);
-    void setRemoteVersion(QString &version);
+    virtual void setRemoteVersion(QString &version);
     void setUpdateRequired(bool state);
     void setUpdateState(bool state);
     void setUpdateReady(bool ready);
     void setSelected(bool value);
-    void setBinaryFilesize(int size);
+    virtual void setBinaryFilesize(int size);
     void setDownloadProgress(int progress);
-    void setIconUrl(QString icon);
+    virtual void setIconUrl(QString icon);
     void setError(QString error);
     void setUpdateAvailable(bool available) { m_update = available; }
     void setLastUpdateDate(const QString date);
     void setClickUrl(const QString &url) { m_click_url = url; }
-    void setDownloadUrl(const QString &url);
+    virtual void setDownloadUrl(const QString &url);
     void setClickToken(const QString &token) { m_clickToken = token; Q_EMIT clickTokenChanged(); }
 
 private:
