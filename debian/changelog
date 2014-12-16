@@ -1,3 +1,27 @@
+ubuntu-system-settings (0.3+15.04.20141211~rtm-0ubuntu1) 14.09; urgency=low
+
+  [ Ken VanDine ]
+  * [cellular] split "Cellular Data" and "Connection type" into two
+    separate pieces in the UI for both single and multi SIM (LP:
+    #1378812, #1377455)
+
+  [ jonas-drange ]
+  * [cellular] Use a repeater to lay out two separate ItemSelectors for
+    modems, making sure it works well between connMan power cycles (LP:
+    #1377455)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 11 Dec 2014 14:24:35 +0000
+
+ubuntu-system-settings (0.3+15.04.20141210~rtm-0ubuntu1) 14.09; urgency=low
+
+  [ Ken VanDine ]
+  * Support UPower 0.99 (LP: #1337200, #1390629)
+
+  [ Ubuntu daily release ]
+  * New rebuild forced
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 10 Dec 2014 23:53:31 +0000
+
 ubuntu-system-settings (0.3+15.04.20141209~rtm-0ubuntu1) 14.09; urgency=low
 
   [ Ken VanDine ]
