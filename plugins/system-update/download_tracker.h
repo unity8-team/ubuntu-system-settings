@@ -63,6 +63,8 @@ public Q_SLOTS:
     void bindDownload(Download* download);
     void setProgress(qulonglong received, qulonglong total);
     void registerError(Ubuntu::DownloadManager::Error* error);
+    void onDownloadFinished(const QString& path);
+    void onDownloadCanceled(bool wasCanceled);
 
 Q_SIGNALS:
     void error(const QString &errorMessage);
@@ -76,12 +78,12 @@ Q_SIGNALS:
     void errorFound(const QString &error);
 
 private:
-    QString m_clickToken;
-    QString m_downloadUrl;
-    QString m_packageName;
-    Download* m_download;
-    Manager* m_manager;
-    int m_progress;
+    QString m_clickToken = QString::null;
+    QString m_downloadUrl = QString::null;
+    QString m_packageName = QString::null;
+    Download* m_download = nullptr;
+    Manager* m_manager = nullptr;
+    int m_progress = 0;
 
     void startService();
     QString getPkconCommand();

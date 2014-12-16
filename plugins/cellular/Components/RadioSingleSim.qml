@@ -25,7 +25,7 @@ import Ubuntu.Components.ListItems 0.1 as ListItem
 Column {
     height: childrenRect.height
 
-    property alias selector: selector
+    property bool enabled: sim.radioSettings.technologyPreference !== ""
 
     SettingsItemTitle { text: i18n.tr("Connection type:") }
 
@@ -36,8 +36,8 @@ Column {
 
         // an empty string is not a valid preference, which means
         // we disregard the interace and disable the selector
-        enabled: sim.radioSettings.technologyPreference !== ""
-        model: sim.radioSettings.modemTechnologies
+        enabled: parent.enabled
+        model: sim.radioSettings.modemTechnologies || []
 
         delegate: OptionSelectorDelegate {
             objectName: sim.path + "_radio_" + modelData
@@ -50,10 +50,10 @@ Column {
             }
             showDivider: false
         }
-        selectedIndex: model.indexOf(sim.radioSettings.technologyPreference)
+        selectedIndex: model.length ?
+            model.indexOf(sim.radioSettings.technologyPreference) : -1
         onDelegateClicked: {
             sim.radioSettings.technologyPreference = model[index];
         }
     }
-
 }
