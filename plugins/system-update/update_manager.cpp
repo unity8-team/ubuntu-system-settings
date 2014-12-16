@@ -252,6 +252,7 @@ void UpdateManager::updateDownloaded()
         update->setSelected(false);
         update->setUpdateState(false);
         update->setUpdateReady(true);
+        m_latestDownload = update->getRemoteVersion();
         Q_EMIT systemUpdateDownloaded();
     }
 }
