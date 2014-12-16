@@ -71,6 +71,8 @@ protected:
 private Q_SLOTS:
     void onRequestFinished();
     void onHeadRequestFinished();
+    void onError(QNetworkReply::NetworkError);
+    void onSslErrors(const QList<QSslError>&);
 
 private:
     QNetworkAccessManager m_nam;

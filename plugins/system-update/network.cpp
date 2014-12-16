@@ -80,6 +80,9 @@ void Network::checkForNewVersions(QHash<QString, Update*> &apps)
     auto reply = m_nam.post(request, content);
     connect(reply, &QNetworkReply::finished,
             this, &Network::onRequestFinished);
+    connect(reply, static_cast<void(QNetworkReply::*)
+                (QNetworkReply::NetworkError)>(&QNetworkReply::error),
+		    this, &Network::onError);
 }
 
 QUrl Network::getUrlApps()
@@ -163,55 +166,78 @@ void Network::onRequestFinished()
 {
     auto reply = qobject_cast<QNetworkReply*>(sender());
 
-    if (reply->error() == QNetworkReply::NoError) {
-        QVariant statusAttr = reply->attribute(
-                                QNetworkRequest::HttpStatusCodeAttribute);
-        if (!statusAttr.isValid()) {
-            Q_EMIT errorOccurred();
-            return;
-        }
-
-        int httpStatus = statusAttr.toInt();
-
-        if (httpStatus == 200 || httpStatus == 201) {
-            auto payload = reply->readAll();
-            auto document = QJsonDocument::fromJson(payload);
-
-            auto state = qobject_cast<RequestObject*>(
-                    reply->request().originatingObject());
-
-            if (state != nullptr
-                    && state->operation.contains(APPS_DATA)
-                    && document.isArray()) {
-
-                auto array = document.array();
-                bool updates = false;
-
-                foreach(const QJsonValue& value, array) {
-                    // parse the object and state if updates are needed
-                    updates = parseUpdateObject(value);
-                }
-
-                if (updates) {
-                    Q_EMIT updatesFound();
-                } else {
-                    Q_EMIT updatesNotFound();
-                }
-
-            } else {
-                Q_EMIT errorOccurred();
-            }
-        } else {
-            Q_EMIT errorOccurred();
-        }
-    } else if (reply->error() == QNetworkReply::TemporaryNetworkFailureError ||
-               reply->error() == QNetworkReply::UnknownNetworkError) {
+    if (reply->error() == QNetworkReply::TemporaryNetworkFailureError ||
+            reply->error() == QNetworkReply::UnknownNetworkError) {
         Q_EMIT networkError();
-    } else {
+        return;
+    }
+
+    // check if the reply is valid, it most have a status that is valid and
+    // a 200 or a 201 result
+    auto statusAttr = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute);
+
+    if (!statusAttr.isValid()) {
+        Q_EMIT errorOccurred();
+        return;
+    }
+
+    int httpStatus = statusAttr.toInt();
+
+    if (httpStatus != 200 && httpStatus != 201) {
         Q_EMIT serverError();
+        return;
+    }
+
+    auto payload = reply->readAll();
+    auto document = QJsonDocument::fromJson(payload);
+
+    auto state = qobject_cast<RequestObject*>(
+            reply->request().originatingObject());
+
+    if (state != nullptr
+            && state->operation.contains(APPS_DATA)
+            && document.isArray()) {
+
+        auto array = document.array();
+        bool updates = false;
+
+        foreach(const QJsonValue& value, array) {
+            // parse the object and state if updates are needed
+            updates = parseUpdateObject(value);
+        }
+
+        if (updates) {
+            Q_EMIT updatesFound();
+        } else {
+            Q_EMIT updatesNotFound();
+        }
+
+    } else {
+        Q_EMIT errorOccurred();
     }
 
     reply->deleteLater();
+}
+
+void Network::onError(QNetworkReply::NetworkError)
+{
+    auto reply = qobject_cast<QNetworkReply*>(sender());
+    // disconnect from all signals so that the finished slots are
+    // not executed
+    reply->disconnect();
+    reply->deleteLater();
+
+    Q_EMIT errorOccurred();
+}
+
+void Network::onSslErrors(const QList<QSslError>&)
+{
+    // same as with onError but for the ssl errors and we emit a serverError
+    auto reply = qobject_cast<QNetworkReply*>(sender());
+    reply->disconnect();
+    reply->deleteLater();
+
+    Q_EMIT serverError();
 }
 
 void Network::getClickToken(Update *app, const QString &url,
@@ -229,6 +255,9 @@ void Network::getClickToken(Update *app, const QString &url,
     auto reply = m_nam.head(request);
     connect(reply, &QNetworkReply::finished,
             this, &Network::onHeadRequestFinished);
+    connect(reply, static_cast<void(QNetworkReply::*)
+                (QNetworkReply::NetworkError)>(&QNetworkReply::error),
+		    this, &Network::onError);
 }
 
 }
