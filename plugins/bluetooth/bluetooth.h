@@ -48,7 +48,8 @@ class Bluetooth : public QObject
                 NOTIFY selectedDeviceChanged)
 
     Q_PROPERTY (QObject * agent
-                READ getAgent)
+                READ getAgent
+                CONSTANT)
 
     Q_PROPERTY (bool powered
                 READ isPowered
@@ -81,7 +82,6 @@ public:
     Q_INVOKABLE void toggleDiscovery();
     Q_INVOKABLE void startDiscovery();
     Q_INVOKABLE void stopDiscovery();
-    Q_INVOKABLE static bool isSupportedType(const int type);
 
 public:
     Agent * getAgent();

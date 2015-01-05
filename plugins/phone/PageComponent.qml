@@ -104,8 +104,10 @@ ItemPage {
             ListItem.Standard {
                 control: Switch {
                     objectName: "dialpadSounds"
-                    checked: soundPlugin.dialpadSoundsEnabled
-                    onCheckedChanged: soundPlugin.dialpadSoundsEnabled = checked
+                    property bool serverChecked: soundPlugin.dialpadSoundsEnabled
+                    onServerCheckedChanged: checked = serverChecked
+                    Component.onCompleted: checked = serverChecked
+                    onTriggered: soundPlugin.dialpadSoundsEnabled = checked
                 }
                 text: i18n.tr("Dialpad sounds")
             }

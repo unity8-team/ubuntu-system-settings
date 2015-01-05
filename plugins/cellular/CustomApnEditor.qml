@@ -198,7 +198,7 @@ ItemPage {
                     inputMethodHints: Qt.ImhUrlCharactersOnly | Qt.ImhNoAutoUppercase | Qt.ImhNoPredictiveText
                 }
                 Label {
-                    text: "Port"
+                    text: i18n.tr("Port")
                     visible: d.isMms
                 }
                 TextField {

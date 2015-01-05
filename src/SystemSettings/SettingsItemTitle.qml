@@ -3,8 +3,6 @@
  *
  * Copyright (C) 2013 Canonical Ltd.
  *
- * Contact: Alberto Mardegan <alberto.mardegan@canonical.com>
- *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License version 3, as published
  * by the Free Software Foundation.
@@ -18,30 +16,23 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import GSettings 1.0
 import QtQuick 2.0
-import QtQuick.Window 2.1
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 
-
 ListItem.Standard {
-    id: root
-    iconSource: model.icon
-    iconFrame: false
-    text: i18n.tr(model.displayName)
-    control: Switch {
-        id: control
-        objectName: "orientationLockSwitch"
-
-        property bool serverChecked: systemSettings.rotationLock
-        onServerCheckedChanged: checked = serverChecked
-        Component.onCompleted: checked = serverChecked
-        onTriggered: systemSettings.rotationLock = checked
-
-        GSettings {
-            id: systemSettings
-            schema.id: "com.ubuntu.touch.system"
+    id: itemEmpty
+    property string text
+    Label {
+        anchors {
+            left: parent.left
+            leftMargin: units.gu(2)
+            right: parent.right
+            rightMargin: units.gu(2)
+            top: parent.top
+            topMargin: units.gu(3)
         }
+        text: itemEmpty.text
     }
+    highlightWhenPressed: false
 }

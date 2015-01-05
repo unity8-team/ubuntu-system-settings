@@ -90,6 +90,10 @@ ItemPage {
             anchors.left: parent.left
             anchors.right: parent.right
 
+            SettingsItemTitle {
+                text: i18n.tr("Let the phone detect your location:")
+            }
+
             ListItem.ItemSelector {
                 id: detection
 
@@ -112,7 +116,6 @@ ItemPage {
                 }
                 property bool allow: selectedIndex !== (model.count - 1)
 
-                text: i18n.tr("Let the phone detect your location:")
                 expanded: true
                 model: optionsModel
                 delegate: optionsDelegate
@@ -220,9 +223,7 @@ ItemPage {
                 visible: showAllUI /* hide until the information is real */
             }
 
-            ListItem.Divider {}
-
-            ListItem.Standard {
+            SettingsItemTitle {
                 text: i18n.tr("Allow access to location:")
                 enabled: detection.allow
             }

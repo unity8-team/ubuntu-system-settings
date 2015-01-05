@@ -22,17 +22,22 @@ from fixtures import EnvironmentVariable
 from testtools.matchers import Equals, NotEquals, GreaterThan
 from time import sleep
 from ubuntu_system_settings import SystemSettings
+from gi.repository import UPowerGlib
 
 ACCOUNTS_IFACE = 'org.freedesktop.Accounts'
 ACCOUNTS_USER_IFACE = 'org.freedesktop.Accounts.User'
 ACCOUNTS_OBJ = '/org/freedesktop/Accounts'
 ACCOUNTS_SERVICE = 'com.canonical.unity.AccountsService'
 ACCOUNTS_SOUND_IFACE = 'com.ubuntu.touch.AccountsService.Sound'
+ISOUND_SERVICE = 'com.canonical.indicator.sound'
+ISOUND_ACTION_PATH = '/com/canonical/indicator/sound'
+GTK_ACTIONS_IFACE = 'org.gtk.Actions'
 MODEM_IFACE = 'org.ofono.Modem'
 CONNMAN_IFACE = 'org.ofono.ConnectionManager'
 RDO_IFACE = 'org.ofono.RadioSettings'
 SIM_IFACE = 'org.ofono.SimManager'
 NETREG_IFACE = 'org.ofono.NetworkRegistration'
+NETOP_IFACE = 'org.ofono.NetworkOperator'
 CALL_FWD_IFACE = 'org.ofono.CallForwarding'
 CALL_SETTINGS_IFACE = 'org.ofono.CallSettings'
 SYSTEM_IFACE = 'com.canonical.SystemImage'
@@ -43,6 +48,8 @@ LM_IFACE = 'org.freedesktop.login1.Manager'
 NM_SERVICE = 'org.freedesktop.NetworkManager'
 NM_PATH = '/org/freedesktop/NetworkManager'
 NM_IFACE = 'org.freedesktop.NetworkManager'
+UPOWER_VERSION = str(UPowerGlib.MAJOR_VERSION)
+UPOWER_VERSION += '.' + str(UPowerGlib.MINOR_VERSION)
 
 
 class UbuntuSystemSettingsTestCase(
@@ -74,7 +81,9 @@ class UbuntuSystemSettingsUpowerTestCase(UbuntuSystemSettingsTestCase,
         cls.dbus_con = cls.get_dbus(True)
         # Add a mock Upower environment so we get consistent results
         (cls.p_mock, cls.obj_upower) = cls.spawn_server_template(
-            'upower', {'OnBattery': True}, stdout=subprocess.PIPE)
+            'upower',
+            {'OnBattery': True, 'DaemonVersion': UPOWER_VERSION},
+            stdout=subprocess.PIPE)
         cls.dbusmock = dbus.Interface(cls.obj_upower, dbusmock.MOCK_IFACE)
 
     def setUp(self, panel=None):
@@ -150,7 +159,7 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
     def mock_carriers(self, name):
         self.dbusmock.AddObject(
             '/%s/operator/op2' % name,
-            'org.ofono.NetworkOperator',
+            NETOP_IFACE,
             {
                 'Name': 'my.cool.telco',
                 'Status': 'available',
@@ -167,7 +176,7 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
         # Add a forbidden carrier
         self.dbusmock.AddObject(
             '/%s/operator/op3' % name,
-            'org.ofono.NetworkOperator',
+            NETOP_IFACE,
             {
                 'Name': 'my.bad.telco',
                 'Status': 'forbidden',
@@ -311,9 +320,12 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
 
 
 class CellularBaseTestCase(UbuntuSystemSettingsOfonoTestCase):
+
     def setUp(self):
         """ Go to Cellular page """
-        super(CellularBaseTestCase, self).setUp('cellular')
+        super(CellularBaseTestCase, self).setUp()
+        self.cellular_page = self.system_settings.\
+            main_view.go_to_cellular_page()
 
 
 class PhoneOfonoBaseTestCase(UbuntuSystemSettingsOfonoTestCase):
@@ -520,14 +532,15 @@ class SoundBaseTestCase(
     @classmethod
     def setUpClass(klass):
         klass.start_system_bus()
+        klass.start_session_bus()
         klass.dbus_con = klass.get_dbus(True)
+        klass.dbus_con_session = klass.get_dbus(False)
 
     def setUp(self, panel='sound'):
 
         user_obj = '/user/foo'
 
         self.accts_snd_props = {
-            'SilentMode': dbus.Boolean(False, variant_level=1),
             'IncomingCallVibrate': dbus.Boolean(False, variant_level=1),
             'IncomingCallVibrateSilentMode': dbus.Boolean(False,
                                                           variant_level=1),
@@ -543,6 +556,12 @@ class SoundBaseTestCase(
                                              ACCOUNTS_IFACE, system_bus=True,
                                              stdout=subprocess.PIPE)
 
+        # start isound
+        self.mock_isound = self.spawn_server(ISOUND_SERVICE,
+                                             ISOUND_ACTION_PATH,
+                                             GTK_ACTIONS_IFACE,
+                                             stdout=subprocess.PIPE)
+
         sleep(2)
 
         self.dbus_mock = dbus.Interface(self.dbus_con.get_object(
@@ -550,6 +569,14 @@ class SoundBaseTestCase(
                                         ACCOUNTS_OBJ,
                                         ACCOUNTS_IFACE),
                                         dbusmock.MOCK_IFACE)
+
+        self.dbus_mock_isound = dbus.Interface(
+            self.dbus_con_session.get_object(
+                ISOUND_SERVICE,
+                ISOUND_ACTION_PATH,
+                GTK_ACTIONS_IFACE),
+            dbusmock.MOCK_IFACE)
+
         # let accountservice find a user object path
         self.dbus_mock.AddMethod(ACCOUNTS_IFACE, 'FindUserById', 'x', 'o',
                                  'ret = "%s"' % user_obj)
@@ -575,10 +602,6 @@ class SoundBaseTestCase(
         self.dbus_mock.AddObject(
             user_obj, ACCOUNTS_SOUND_IFACE, self.accts_snd_props,
             [
-                (
-                    'GetSilentMode', '', 'v',
-                    'ret = self.Get("%s", "SilentMode")' %
-                    ACCOUNTS_SOUND_IFACE),
                 (
                     'GetIncomingCallVibrate', '', 'v',
                     'ret = self.Get("%s", "IncomingCallVibrate")' %
@@ -606,6 +629,36 @@ class SoundBaseTestCase(
         self.obj_test = self.dbus_con.get_object(ACCOUNTS_IFACE, user_obj,
                                                  ACCOUNTS_IFACE)
 
+        self.dbus_mock_isound.AddMethods(
+            GTK_ACTIONS_IFACE,
+            [
+                (
+                    'Activate', 'sava{sv}', '',
+                    ''
+                ),
+                (
+                    'Describe', 's', '(bsav)',
+                    'if args[0] == "silent-mode":'
+                    '    ret = [True, "", [False]]'
+                    'if args[0] == "volume":'
+                    '    ret = [True, "i", [0.4]]'
+                ),
+                (
+                    'DescribeAll', 's', 'a{s(bsav)}',
+                    'ret = {'
+                    '"silent-mode": [True, "", [False]],'
+                    '"volume": [True, "i", [0.4]]}'
+                ),
+                (
+                    'List', '', 'as',
+                    'ret = ["silent-mode", "volume"]'
+                ),
+                (
+                    'SetState', 'sva{sv}', '',
+                    ''
+                )
+            ])
+
         super(SoundBaseTestCase, self).setUp(panel)
 
         """ Go to Sound page """
@@ -616,6 +669,8 @@ class SoundBaseTestCase(
     def tearDown(self):
         self.mock_server.terminate()
         self.mock_server.wait()
+        self.mock_isound.terminate()
+        self.mock_isound.wait()
         super(SoundBaseTestCase, self).tearDown()
 
 

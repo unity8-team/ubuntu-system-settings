@@ -21,6 +21,7 @@
 #include "utils.h"
 #include "debug.h"
 
+#include <glib.h>
 #include <QUrl>
 #include <QUrlQuery>
 
@@ -57,6 +58,22 @@ void parsePluginOptions(const QStringList &arguments, QString &defaultPlugin,
             pluginOptions.insert(option.at(0), option.value(1, ""));
         }
     }
+}
+
+Utilities::Utilities(QObject *parent) :
+    QObject(parent)
+{
+}
+
+QString Utilities::formatSize(quint64 size) const
+{
+    guint64 g_size = size;
+
+    gchar * formatted_size = g_format_size (g_size);
+    QString q_formatted_size = QString::fromLocal8Bit(formatted_size);
+    g_free (formatted_size);
+
+    return q_formatted_size;
 }
 
 } // namespace

@@ -102,7 +102,7 @@ ItemPage {
             visible: showAllUI
         }
 
-        ListItem.Standard {
+        SettingsItemTitle {
             text: i18n.tr("When locked, allow:")
         }
 
@@ -111,8 +111,11 @@ ItemPage {
             control: CheckBox {
                 id: launcherCheck
                 enabled: securityPrivacy.securityType !== UbuntuSecurityPrivacyPanel.Swipe
-                checked: securityPrivacy.enableLauncherWhileLocked || !enabled
-                onClicked: securityPrivacy.enableLauncherWhileLocked = checked
+
+                property bool serverChecked: securityPrivacy.enableLauncherWhileLocked || !enabled
+                onServerCheckedChanged: checked = serverChecked
+                Component.onCompleted: checked = serverChecked
+                onTriggered: securityPrivacy.enableLauncherWhileLocked = checked
             }
         }
 
@@ -121,8 +124,11 @@ ItemPage {
             control: CheckBox {
                 id: indicatorsCheck
                 enabled: securityPrivacy.securityType !== UbuntuSecurityPrivacyPanel.Swipe
-                checked: securityPrivacy.enableIndicatorsWhileLocked || !enabled
-                onClicked: securityPrivacy.enableIndicatorsWhileLocked = checked
+
+                property bool serverChecked: securityPrivacy.enableIndicatorsWhileLocked || !enabled
+                onServerCheckedChanged: checked = serverChecked
+                Component.onCompleted: checked = serverChecked
+                onTriggered: securityPrivacy.enableIndicatorsWhileLocked = checked
             }
         }
 

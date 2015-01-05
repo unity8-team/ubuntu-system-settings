@@ -340,7 +340,7 @@ ItemPage {
         anchors.left: parent.left
         anchors.right: parent.right
 
-        ListItem.Standard {
+        SettingsItemTitle {
             text: i18n.tr("Unlock the phone using:")
         }
 

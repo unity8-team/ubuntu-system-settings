@@ -25,7 +25,7 @@ Item {
         id: sizelabel
         objectName: "sizeLabel"
         anchors.right: parent.right
-        text: backendInfo.formatSize(value)
+        text: Utilities.formatSize(value)
         visible: ready
     }
     ActivityIndicator {

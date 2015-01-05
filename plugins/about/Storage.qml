@@ -138,7 +138,7 @@ ItemPage {
                 id: diskItem
                 objectName: "diskItem"
                 text: i18n.tr("Total storage")
-                value: backendInfo.formatSize(diskSpace)
+                value: Utilities.formatSize(diskSpace)
                 showDivider: false
             }
 
@@ -199,7 +199,7 @@ ItemPage {
                     iconFrame: iconPath // no frame for invalid icons, since these aren't app icons
                     text: displayName
                     value: installedSize ?
-                               backendInfo.formatSize(installedSize) :
+                               Utilities.formatSize(installedSize) :
                                i18n.tr("N/A")
                 }
             }

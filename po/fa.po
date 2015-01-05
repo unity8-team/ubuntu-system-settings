@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-10-16 20:04-0600\n"
-"PO-Revision-Date: 2014-10-17 22:43+0000\n"
+"PO-Revision-Date: 2014-11-15 07:18+0000\n"
 "Last-Translator: Danial Behzadi <dani.behzi@gmail.com>\n"
 "Language-Team: Persian <fa@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2014-10-18 07:11+0000\n"
-"X-Generator: Launchpad (build 17196)\n"
+"X-Launchpad-Export-Date: 2014-11-16 05:57+0000\n"
+"X-Generator: Launchpad (build 17241)\n"
 
 #: ubuntu-system-settings.desktop.in.in.h:1 ../src/qml/MainWindow.qml:112
 msgid "System Settings"
@@ -24,11 +24,11 @@ msgstr "تنظیمات سامانه"
 
 #: ubuntu-system-settings.desktop.in.in.h:2
 msgid "System;"
-msgstr "سامانه;"
+msgstr "System;"
 
 #: ubuntu-system-settings.desktop.in.in.h:3
 msgid "Preferences;Settings;"
-msgstr "ترجیحات;تنظیمات;"
+msgstr "Preferences;Settings;"
 
 #: ../plugins/background//Preview.qml:70
 msgid "Preview"
@@ -2950,60 +2950,3 @@ msgstr "یک تصویر سامانه‌ی به‌روز شده وجود دارد
 #: ../push-helper/software_updates_helper.py:151
 msgid "Tap to open the system updater."
 msgstr "برای گشودن به‌روز رسان سامانه فشار دهید."
-
-#~ msgid "Password visible"
-#~ msgstr "گذرواژه‌ی قابل نمایش"
-
-#~ msgid "Other network"
-#~ msgstr "شبکه‌ی دیگر"
-
-#~ msgid "Remove"
-#~ msgstr "برداشتن"
-
-#~ msgid "Refresh"
-#~ msgstr "تازه‌سازی"
-
-#~ msgid "Searching"
-#~ msgstr "در حال جست‌وجو"
-
-#~ msgid "Connect to Wi-Fi"
-#~ msgstr "اتّصال به بی‌سیم"
-
-#~ msgid "Available networks"
-#~ msgstr "شبکه‌های موجود"
-
-#~ msgid "settings"
-#~ msgstr "تنظیمات"
-
-#~ msgid "i18n"
-#~ msgstr "i18n"
-
-#~ msgid "lang"
-#~ msgstr "زبان"
-
-#~ msgid "Those passphrases don't match."
-#~ msgstr "آن عبارت‌عبورها مطابقت ندارند."
-
-#~ msgid "Passphrase must be at least four characters long."
-#~ msgstr "عبارت‌عبور باید خداقل چهار نویسه طول داشته باشد."
-
-#~ msgid "Set lock security"
-#~ msgstr "تنظیم امنیت قفل"
-
-#~ msgid "Bug reporting"
-#~ msgstr "گرازش اشکال"
-
-#~ msgid "Use your mobile network and Wi-Fi to determine where you are"
-#~ msgstr "استفاده از شبکه‌ی تلفن همراه و بی‌سیم برای تعیین مکانتان"
-
-#~ msgid ""
-#~ "I have read and agreed to the HERE <a href='terms.qml'>Terms and "
-#~ "Conditions</a>"
-#~ msgstr ""
-#~ "من  <a href='terms.qml'>شرایط و ضوابط</a> HERE را خوانده‌ام و با آن موافقم"
-
-#~ msgid "System Settings &gt; Security &amp; Privacy"
-#~ msgstr "تنظیمات سامانه&gt; امنیت&amp; محرمانگی"
-
-#~ msgid "This can be disabled here:"
-#~ msgstr "این امر می‌تواند در این‌جا غیرفعّال شود:"
