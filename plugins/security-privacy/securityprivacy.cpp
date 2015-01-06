@@ -505,4 +505,19 @@ void managerLoaded(GObject    *object,
     plugin->managerLoaded();
 }
 
+void SecurityPrivacy::unlockModem(QString path)
+{
+    QDBusInterface iface("com.ubuntu.connectivity1",
+                         "/com/ubuntu/connectivity1/Private",
+                         "com.ubuntu.connectivity1.Private",
+                         QDBusConnection::sessionBus());
+
+    auto reply = iface.call("UnlockModem", path);
+    qWarning() << reply.type() << reply.errorMessage();
+
+    if (reply.type() == 3) {
+        qWarning() << "Failed to unlock modem:" << reply.errorMessage();
+    }
+}
+
 #include "securityprivacy.moc"

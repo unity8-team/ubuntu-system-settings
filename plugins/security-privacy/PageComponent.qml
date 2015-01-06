@@ -171,7 +171,8 @@ ItemPage {
                 onClicked: {
                     if (enabled) {
                         pageStack.push(Qt.resolvedUrl("SimPin.qml"), {
-                            sims: simsPresent
+                            sims: simsPresent,
+                            securityPrivacy: securityPrivacy
                         });
                     }
                 }
