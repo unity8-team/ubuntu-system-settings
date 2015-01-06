@@ -31,24 +31,17 @@ class SoundTestCase(SoundBaseTestCase):
         """ Check that silent_mode is present and clickable"""
         snd = self.system_settings.main_view.sound_page.select_single(
             objectName="silentMode")
-        prev_value = self.obj_test.GetSilentMode()
         self.system_settings.main_view.scroll_to_and_click(snd)
         sleep(0.2)
-        self.assertNotEqual(
-            self.obj_test.GetSilentMode(),
-            prev_value)
-
-    def test_silent_mode_warning(self):
-        """ Check that silent_mode warning is shown"""
-        sndwarn = self.system_settings.main_view.sound_page.select_single(
-            objectName="silentModeWarning")
-        snd = self.system_settings.main_view.sound_page.select_single(
-            objectName="silentMode")
-        self.system_settings.main_view.scroll_to_and_click(snd)
-        sleep(0.2)
+        calls = self.dbus_mock_isound.GetCalls()
         self.assertThat(
-            sndwarn.get_properties()["visible"],
-            Eventually(Equals(True)))
+            calls[0][1],
+            Equals('Activate')
+        )
+        self.assertThat(
+            calls[0][2][0],
+            Equals('silent-mode')
+        )
 
     def test_call_vibrate_sound_switch(self):
         """ Check that call vibrate is present and clickable"""
