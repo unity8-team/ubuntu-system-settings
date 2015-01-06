@@ -1,3 +1,21 @@
+ubuntu-system-settings (0.3+15.04.20150106~rtm-0ubuntu1) 14.09; urgency=low
+
+  [ Ken VanDine ]
+  * [system-update] remember the latest SystemUpdate downloaded and
+    compare the version when checking again and set updateReady
+    appropriately. This fixes the handling of downloaded updates when
+    auto-download is false. (LP: #1392051)
+  * [orientation] String change to Rotation Lock
+
+  [ Ted Gould ]
+  * Make silent mode use the action state in the sound user service (LP:
+    #1382089, #1388804, #1395709)
+
+  [ Ubuntu daily release ]
+  * New rebuild forced
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 06 Jan 2015 21:41:04 +0000
+
 ubuntu-system-settings (0.3+15.04.20141211~rtm-0ubuntu1) 14.09; urgency=low
 
   [ Ken VanDine ]
