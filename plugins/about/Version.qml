@@ -56,13 +56,13 @@ ItemPage {
                 right: parent.right
             }
 
-            ListItem.SingleValue {
+            SingleValueStacked {
                 objectName: "versionBuildNumberItem"
                 text: i18n.tr("OS build number")
                 value: UpdateManager.currentBuildNumber ? UpdateManager.currentBuildNumber : "Non system image"
             }
 
-            ListItem.SingleValue {
+            SingleValueStacked {
                 objectName: "ubuntuVersionBuildNumberItem"
                 text: i18n.tr("Ubuntu Image part")
                 value: UpdateManager.currentUbuntuBuildNumber
@@ -90,7 +90,7 @@ ItemPage {
                 visible: storedInfo.deviceBuildDisplayID
             }
 
-            ListItem.SingleValue {
+            SingleValueStacked {
                 objectName: "customizationBuildNumberItem"
                 text: i18n.tr("Customization Image part")
                 value: storedInfo.customizationBuildID
