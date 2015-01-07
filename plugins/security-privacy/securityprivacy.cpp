@@ -513,8 +513,6 @@ void SecurityPrivacy::unlockModem(QString path)
                          QDBusConnection::sessionBus());
 
     auto reply = iface.call("UnlockModem", path);
-    qWarning() << reply.type() << reply.errorMessage();
-
     if (reply.type() == 3) {
         qWarning() << "Failed to unlock modem:" << reply.errorMessage();
     }

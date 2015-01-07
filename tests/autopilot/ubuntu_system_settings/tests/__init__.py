@@ -48,6 +48,9 @@ LM_IFACE = 'org.freedesktop.login1.Manager'
 NM_SERVICE = 'org.freedesktop.NetworkManager'
 NM_PATH = '/org/freedesktop/NetworkManager'
 NM_IFACE = 'org.freedesktop.NetworkManager'
+CON_SERVICE = 'com.ubuntu.connectivity1'
+CON_PATH = '/com/ubuntu/connectivity1/Private'
+CON_IFACE = 'com.ubuntu.connectivity1.Private'
 UPOWER_VERSION = str(UPowerGlib.MAJOR_VERSION)
 UPOWER_VERSION += '.' + str(UPowerGlib.MINOR_VERSION)
 
@@ -712,6 +715,7 @@ class SecurityBaseTestCase(UbuntuSystemSettingsOfonoTestCase):
     def setUp(self):
         super(SecurityBaseTestCase, self).setUp('security-privacy')
         """ Go to Security & Privacy page """
+
         self.security_page = self.system_settings.main_view.select_single(
             objectName='securityPrivacyPage'
         )
@@ -720,6 +724,29 @@ class SecurityBaseTestCase(UbuntuSystemSettingsOfonoTestCase):
 
     def tearDown(self):
         super(SecurityBaseTestCase, self).tearDown()
+
+    def mock_private_connectivity(self):
+        connection = self.get_dbus()
+        self.connectivity_server = self.spawn_server(CON_SERVICE,
+                                                     CON_PATH,
+                                                     CON_IFACE,
+                                                     system_bus=False,
+                                                     stdout=subprocess.PIPE)
+
+        self.wait_for_bus_object(CON_SERVICE,
+                                 CON_PATH,
+                                 system_bus=False)
+
+        self.con_mock = dbus.Interface(connection.get_object(
+                                       CON_SERVICE,
+                                       CON_PATH),
+                                       dbusmock.MOCK_IFACE)
+
+        self.con_mock.AddMethod('', 'UnlockModem', 's', '', '')
+
+    def teardown_private_connectivity(self):
+        self.connectivity_server.terminate()
+        self.connectivity_server.wait()
 
 
 class PhoneSoundBaseTestCase(SoundBaseTestCase):

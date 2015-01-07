@@ -388,3 +388,26 @@ class SecurityTestCase(SecurityBaseTestCase):
         self.assertFalse(
             len(self.modem_0.Get(SIM_IFACE, 'LockedPins')) > 0
         )
+
+    def test_sim_unlock(self):
+
+        self.mock_private_connectivity()
+        self.addCleanup(self.teardown_private_connectivity)
+
+        # lock sim
+        self.modem_0.Set(SIM_IFACE, 'PinRequired', 'pin')
+        self.modem_0.EmitSignal(
+            SIM_IFACE, 'PropertyChanged', 'sv', ['PinRequired', 'pin'])
+
+        self._go_to_sim_lock()
+        unlock = self.system_settings.main_view.select_single(
+            objectName='unlock')
+        self.system_settings.main_view.scroll_to_and_click(unlock)
+
+        self.assertThat(
+            lambda: len(self.con_mock.GetMethodCalls('UnlockModem')),
+            Eventually(Equals(1)))
+
+        # make sure the argument for the one call is the modem path
+        for d, args in self.con_mock.GetMethodCalls('UnlockModem'):
+            self.assertEqual(str(args[0]), '/ril_0')

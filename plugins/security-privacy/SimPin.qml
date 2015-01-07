@@ -365,6 +365,7 @@ ItemPage {
                     visible: sim.state === "locked"
                     text: i18n.tr("Locked")
                     control: Button {
+                        objectName: "unlock"
                         enabled: sims[index].simMng.pinRequired !== 'none'
                         text: i18n.tr("Unlock…")
                         color: UbuntuColors.green
