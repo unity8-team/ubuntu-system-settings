@@ -1,42 +1,42 @@
-# Hebrew translation for ubuntu-system-settings
-# Copyright (c) 2013 Rosetta Contributors and Canonical Ltd 2013
+# Malayalam translation for ubuntu-system-settings
+# Copyright (c) 2014 Rosetta Contributors and Canonical Ltd 2014
 # This file is distributed under the same license as the ubuntu-system-settings package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2013.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2014.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-10-16 20:04-0600\n"
-"PO-Revision-Date: 2014-12-23 13:14+0000\n"
-"Last-Translator: Yaron <sh.yaron@gmail.com>\n"
-"Language-Team: Hebrew <he@li.org>\n"
+"PO-Revision-Date: 2014-12-18 13:51+0000\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: Malayalam <ml@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-12-24 06:54+0000\n"
+"X-Launchpad-Export-Date: 2014-12-19 06:51+0000\n"
 "X-Generator: Launchpad (build 17286)\n"
 
 #: ubuntu-system-settings.desktop.in.in.h:1 ../src/qml/MainWindow.qml:112
 msgid "System Settings"
-msgstr "הגדרות מערכת"
+msgstr ""
 
 #: ubuntu-system-settings.desktop.in.in.h:2
 msgid "System;"
-msgstr "מערכת;"
+msgstr ""
 
 #: ubuntu-system-settings.desktop.in.in.h:3
 msgid "Preferences;Settings;"
-msgstr "העדפות;הגדרות;"
+msgstr ""
 
 #: ../plugins/background//Preview.qml:70
 msgid "Preview"
-msgstr "תצוגה מקדימה"
+msgstr ""
 
 #: ../plugins/background//Preview.qml:102
 msgid "Remove image"
-msgstr "הסרת תמונה"
+msgstr ""
 
 #: ../plugins/wifi//OtherNetwork.qml:288
 #: ../plugins/reset//EraseEverything.qml:54
@@ -59,69 +59,69 @@ msgstr "הסרת תמונה"
 #: ../plugins/cellular//Components//SimEditor.qml:189
 #: ../plugins/background//Components//AddRemove.qml:42
 msgid "Cancel"
-msgstr "ביטול"
+msgstr ""
 
 #: ../plugins/phone//CallForwarding.qml:152
 #: ../plugins/time-date//TimePicker.qml:182
 #: ../plugins/security-privacy//LockSecurity.qml:304
 #: ../plugins/background//Preview.qml:109
 msgid "Set"
-msgstr "הגדרה"
+msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
 #: ../plugins/background//MainPage.qml:35
 #: ../po/settings.js:316
 msgid "Background"
-msgstr "רקע"
+msgstr ""
 
 #: ../plugins/background//MainPage.qml:99
 msgid "Ubuntu Art"
-msgstr "אומנות של אובונטו"
+msgstr ""
 
 #: ../plugins/cellular//PageChooseApn.qml:409
 #: ../plugins/cellular//PageChooseApn.qml:488
 #: ../plugins/cellular//PageChooseApn.qml:496
 #: ../plugins/background//MainPage.qml:115
 msgid "Custom"
-msgstr "התאמה אישית"
+msgstr ""
 
 #: ../plugins/wifi//RemoveBackground.qml:28
 msgid "Clear"
-msgstr "ניקוי"
+msgstr ""
 
 #: ../plugins/wifi//NetworkDetailsBrief.qml:42
 #: ../plugins/bluetooth//PageComponent.qml:405
 msgid "Disconnect"
-msgstr "ניתוק"
+msgstr ""
 
 #: ../plugins/wifi//NetworkDetailsBrief.qml:58
 msgid "IP address"
-msgstr "כתובת IP"
+msgstr ""
 
 #: ../plugins/wifi//PageComponent.qml:132
 #: ../plugins/wifi//PreviousNetworks.qml:27
 msgid "Previous networks"
-msgstr "רשתות קודמות"
+msgstr ""
 
 #: ../plugins/wifi//Common.qml:36
 msgid "Unknown error"
-msgstr "שגיאה בלתי ידועה"
+msgstr ""
 
 #: ../plugins/wifi//Common.qml:38
 msgid "No reason given"
-msgstr "לא ניתנה סיבה"
+msgstr ""
 
 #: ../plugins/wifi//Common.qml:40
 msgid "Device is now managed"
-msgstr "ההתקן מנוהל כעת"
+msgstr ""
 
 #: ../plugins/wifi//Common.qml:42
 msgid "Device is now unmanaged"
-msgstr "ההתקן אינו מנוהל כעת"
+msgstr ""
 
 #: ../plugins/wifi//Common.qml:44
 msgid "The device could not be readied for configuration"
-msgstr "לא ניתן להכין את ההתקן לתצורה"
+msgstr ""
 
 #: ../plugins/wifi//Common.qml:46
 msgid ""
@@ -226,7 +226,7 @@ msgstr ""
 
 #: ../plugins/wifi//Common.qml:96 ../plugins/bluetooth//PageComponent.qml:86
 msgid "Unknown"
-msgstr "לא ידוע"
+msgstr ""
 
 #: ../plugins/wifi//OtherNetwork.qml:96
 msgid "Connect to Hidden Network"
@@ -234,50 +234,50 @@ msgstr ""
 
 #: ../plugins/wifi//OtherNetwork.qml:187
 msgid "Network name"
-msgstr "שם הרשת"
+msgstr ""
 
 #: ../plugins/wifi//OtherNetwork.qml:203
 #: ../plugins/security-privacy//PageComponent.qml:126
 msgid "Security"
-msgstr "אבטחה"
+msgstr ""
 
 #: ../plugins/wifi//OtherNetwork.qml:214
 #: ../plugins/bluetooth//PageComponent.qml:116
 #: ../plugins/bluetooth//PageComponent.qml:320
 #: ../plugins/bluetooth//PageComponent.qml:341
 msgid "None"
-msgstr "אין"
+msgstr ""
 
 #: ../plugins/wifi//OtherNetwork.qml:215
 msgid "WPA & WPA2 Personal"
-msgstr "‏WPA &‏ WPA2 אישי"
+msgstr ""
 
 #: ../plugins/wifi//OtherNetwork.qml:216
 msgid "WEP"
-msgstr "WEP"
+msgstr ""
 
 #: ../plugins/wifi//OtherNetwork.qml:222
 #: ../plugins/wifi//NetworkDetails.qml:64
 #: ../plugins/cellular//CustomApnEditor.qml:222
 msgid "Password"
-msgstr "ססמה"
+msgstr ""
 
 #: ../plugins/wifi//OtherNetwork.qml:256
 #: ../plugins/wifi//NetworkDetails.qml:77
 msgid "Show password"
-msgstr "הצגת הססמה"
+msgstr ""
 
 #: ../plugins/wifi//OtherNetwork.qml:304
 #: ../plugins/bluetooth//PageComponent.qml:405
 msgid "Connect"
-msgstr "התחברות"
+msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #: ../plugins/wifi//PageComponent.qml:28
 #: ../plugins/battery//PageComponent.qml:333
 #: ../po/settings.js:10
 msgid "Wi-Fi"
-msgstr "רשת אלחוטית"
+msgstr ""
 
 #: ../plugins/wifi//PageComponent.qml:139
 msgid "Connect to hidden network…"
@@ -285,16 +285,16 @@ msgstr ""
 
 #: ../plugins/wifi//NetworkDetails.qml:38
 msgid "Network details"
-msgstr "פרטי הרשת"
+msgstr ""
 
 #: ../plugins/wifi//NetworkDetails.qml:45
 #: ../plugins/bluetooth//PageComponent.qml:340
 msgid "Name"
-msgstr "שם"
+msgstr ""
 
 #: ../plugins/wifi//NetworkDetails.qml:53
 msgid "Last connected"
-msgstr "חיבור אחרון"
+msgstr ""
 
 #: ../plugins/wifi//NetworkDetails.qml:58
 #: ../plugins/about//PageComponent.qml:169
@@ -307,17 +307,17 @@ msgstr "חיבור אחרון"
 #: ../plugins/battery//PageComponent.qml:324
 #: ../plugins/battery//SleepValues.qml:110
 msgid "Never"
-msgstr "לעולם לא"
+msgstr ""
 
 #: ../plugins/wifi//NetworkDetails.qml:88
 msgid "Forget network"
-msgstr "התעלמות מהרשת"
+msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
 #: ../plugins/notifications//PageComponent.qml:29
 #: ../po/settings.js:198
 msgid "Notifications"
-msgstr "התרעות"
+msgstr ""
 
 #: ../plugins/notifications//PageComponent.qml:40
 msgid ""
@@ -327,39 +327,39 @@ msgstr ""
 
 #: ../plugins/sound//SoundsList.qml:58
 msgid "Stop playing"
-msgstr "להפסיק לנגן"
+msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
 #: ../plugins/sound//PageComponent.qml:37
 #: ../po/settings.js:102
 msgid "Sound"
-msgstr "שמע"
+msgstr ""
 
 #: ../plugins/sound//PageComponent.qml:78
 msgid "Silent Mode"
-msgstr "מצב שקט"
+msgstr ""
 
 #: ../plugins/sound//PageComponent.qml:82
 msgid "Ringer:"
-msgstr "צלצול:"
+msgstr ""
 
 #: ../plugins/sound//PageComponent.qml:114
 msgid "Phone calls:"
-msgstr "שיחות טלפון:"
+msgstr ""
 
 #: ../plugins/sound//PageComponent.qml:118
 #: ../plugins/sound//PageComponent.qml:124
 msgid "Ringtone"
-msgstr "צלצול"
+msgstr ""
 
 #: ../plugins/sound//PageComponent.qml:139
 msgid "Vibrate when ringing"
-msgstr "רטט עם הצלצול"
+msgstr ""
 
 #: ../plugins/sound//PageComponent.qml:150
 #: ../plugins/sound//PageComponent.qml:200
 msgid "Vibrate in Silent Mode"
-msgstr "לרטוט במצב שקט"
+msgstr ""
 
 #: ../plugins/sound//PageComponent.qml:161
 #: ../plugins/phone//PageComponent.qml:112
@@ -368,39 +368,39 @@ msgstr ""
 
 #: ../plugins/sound//PageComponent.qml:165
 msgid "Messages:"
-msgstr "הודעות:"
+msgstr ""
 
 #: ../plugins/sound//PageComponent.qml:169
 #: ../plugins/sound//PageComponent.qml:175
 msgid "Message received"
-msgstr "הודעה התקבלה"
+msgstr ""
 
 #: ../plugins/sound//PageComponent.qml:189
 msgid "Vibrate with message sound"
-msgstr "לרטוט עם צליל ההודעה"
+msgstr ""
 
 #: ../plugins/sound//PageComponent.qml:204
 msgid "Other sounds:"
-msgstr "צלילים אחרים:"
+msgstr ""
 
 #: ../plugins/language//PageComponent.qml:214
 #: ../plugins/sound//PageComponent.qml:208
 msgid "Keyboard sound"
-msgstr "צלילי המקלדת"
+msgstr ""
 
 #: ../plugins/sound//PageComponent.qml:223
 msgid "Lock sound"
-msgstr "צליל נעילה"
+msgstr ""
 
 #: ../plugins/sound//SilentModeWarning.qml:31
 msgid "The phone is in Silent Mode."
-msgstr "הטלפון במצב שקט."
+msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
 #: ../plugins/reset//PageComponent.qml:32
 #: ../po/settings.js:30
 msgid "Reset phone"
-msgstr "איפוס הטלפון"
+msgstr ""
 
 #: ../plugins/reset//PageComponent.qml:73
 #: ../plugins/reset//ResetLauncherHome.qml:44
@@ -409,7 +409,7 @@ msgstr ""
 
 #: ../plugins/reset//PageComponent.qml:87
 msgid "Reset all system settings…"
-msgstr "איפוס כל הגדרות המערכת…"
+msgstr ""
 
 #: ../plugins/reset//PageComponent.qml:101
 msgid "Erase & Reset Everything…"
@@ -420,11 +420,10 @@ msgid ""
 "The contents and layout of the launcher, and the filters in the home screen "
 "will be returned to their original settings."
 msgstr ""
-"התכנים והפריסה של המשגר לרבות המסננים במסך הבית יוחזרו להגדרותיהם במקור."
 
 #: ../plugins/reset//ResetAllSettings.qml:31
 msgid "Reset all system settings"
-msgstr "איפוס כל הגדרות המערכת"
+msgstr ""
 
 #: ../plugins/reset//ResetLauncherHome.qml:40
 msgid "The Launcher will be returned to its original contents."
@@ -433,71 +432,71 @@ msgstr ""
 #: ../plugins/reset//ResetLauncherHome.qml:59
 #: ../plugins/language//RebootNecessary.qml:34
 msgid "The phone needs to restart for changes to take effect."
-msgstr "על הטלפון להפעיל עצמו מחדש כדי שהשינויים יכנסו לתוקף."
+msgstr ""
 
 #: ../plugins/reset//EraseEverything.qml:41
 msgid ""
 "All documents, saved games, settings, and other items will be permanently "
 "deleted from this phone."
-msgstr "כל המסמכים, המשחקים שנשמרו ופריטים אחרים יימחקו לצמיתות מהטלפון הזה."
+msgstr ""
 
 #: ../plugins/reset//EraseEverything.qml:44
 msgid "Erase & Reset Everything"
-msgstr "מחיקה ואיפוס של הכול"
+msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
 #: ../plugins/battery//PageComponent.qml:34
 #: ../po/settings.js:300
 msgid "Battery"
-msgstr "סוללה"
+msgstr ""
 
 #. TRANSLATORS: %1 is the number of seconds
 #: ../plugins/battery//PageComponent.qml:46
 #, qt-format
 msgid "%1 second ago"
 msgid_plural "%1 seconds ago"
-msgstr[0] "לפני שנייה %1"
-msgstr[1] "לפני %1 שניות"
+msgstr[0] ""
+msgstr[1] ""
 
 #. TRANSLATORS: %1 is the number of minutes
 #: ../plugins/battery//PageComponent.qml:49
 #, qt-format
 msgid "%1 minute ago"
 msgid_plural "%1 minutes ago"
-msgstr[0] "לפני דקה %1"
-msgstr[1] "לפני %1 דקות"
+msgstr[0] ""
+msgstr[1] ""
 
 #. TRANSLATORS: %1 is the number of hours
 #: ../plugins/battery//PageComponent.qml:52
 #, qt-format
 msgid "%1 hour ago"
 msgid_plural "%1 hours ago"
-msgstr[0] "לפני שעה %1"
-msgstr[1] "לפני %1 שעות"
+msgstr[0] ""
+msgstr[1] ""
 
 #. TRANSLATORS: %1 is the number of days
 #: ../plugins/battery//PageComponent.qml:55
 #, qt-format
 msgid "%1 day ago"
 msgid_plural "%1 days ago"
-msgstr[0] "לפני יום %1"
-msgstr[1] "לפני %1 ימים"
+msgstr[0] ""
+msgstr[1] ""
 
 #: ../plugins/battery//PageComponent.qml:85
 msgid "Charging now"
-msgstr "בטעינה כעת"
+msgstr ""
 
 #: ../plugins/battery//PageComponent.qml:90
 msgid "Last full charge"
-msgstr "הטעינה המלאה האחרונה"
+msgstr ""
 
 #: ../plugins/battery//PageComponent.qml:95
 msgid "Fully charged"
-msgstr "טעינה מלאה"
+msgstr ""
 
 #: ../plugins/battery//PageComponent.qml:126
 msgid "Charge level"
-msgstr "רמת הטעינה"
+msgstr ""
 
 #: ../plugins/cellular//PageChooseCarriers.qml:48
 #: ../plugins/cellular//PageChooseCarriers.qml:65
@@ -506,42 +505,42 @@ msgstr "רמת הטעינה"
 #: ../plugins/cellular//Components//NoSim.qml:48
 #: ../plugins/cellular//Components//SingleSim.qml:62
 msgid "N/A"
-msgstr "לא זמין"
+msgstr ""
 
 #. TRANSLATORS: %1 refers to a percentage that indicates the charging level of the battery
 #: ../plugins/battery//PageComponent.qml:134
 #, qt-format
 msgid "%1%"
-msgstr "%1%"
+msgstr ""
 
 #: ../plugins/battery//PageComponent.qml:212
 #: ../plugins/battery//PageComponent.qml:214
 msgid "Yesterday"
-msgstr "אתמול"
+msgstr ""
 
 #: ../plugins/battery//PageComponent.qml:220
 #: ../plugins/battery//PageComponent.qml:222
 msgid "Today"
-msgstr "היום"
+msgstr ""
 
 #: ../plugins/battery//PageComponent.qml:292
 msgid "Ways to reduce battery use:"
-msgstr "דרכים להפחתת השימוש בסוללה:"
+msgstr ""
 
 #: ../plugins/battery//PageComponent.qml:296
 #: ../plugins/brightness//BrightnessSlider.qml:51
 msgid "Display brightness"
-msgstr "בהירות התצוגה"
+msgstr ""
 
 #: ../plugins/security-privacy//PhoneLocking.qml:68
 #: ../plugins/battery//PageComponent.qml:306
 msgid "Lock when idle"
-msgstr "לנעול בהעדר פעילות"
+msgstr ""
 
 #: ../plugins/security-privacy//PhoneLocking.qml:69
 #: ../plugins/battery//PageComponent.qml:306
 msgid "Sleep when idle"
-msgstr "מצב שינה בהעדר פעילות"
+msgstr ""
 
 #. TRANSLATORS: %1 is the number of minutes
 #: ../plugins/security-privacy//PageComponent.qml:137
@@ -557,8 +556,8 @@ msgstr "מצב שינה בהעדר פעילות"
 #, qt-format
 msgid "After %1 minute"
 msgid_plural "After %1 minutes"
-msgstr[0] "לאחר דקה %1"
-msgstr[1] "לאחר %1 דקות"
+msgstr[0] ""
+msgstr[1] ""
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
 #: ../plugins/bluetooth//PageComponent.qml:32
@@ -566,50 +565,48 @@ msgstr[1] "לאחר %1 דקות"
 #: ../plugins/battery//PageComponent.qml:357
 #: ../po/settings.js:276
 msgid "Bluetooth"
-msgstr "Bluetooth"
+msgstr ""
 
 #: ../plugins/battery//PageComponent.qml:385
 msgid "GPS"
-msgstr "איכון"
+msgstr ""
 
 #: ../plugins/battery//PageComponent.qml:401
 msgid "Accurate location detection requires GPS and/or Wi-Fi."
-msgstr "זיהוי מיקום מדויק דורש GPS ו/או רשת אלחוטית."
+msgstr ""
 
 #: ../plugins/battery//SleepValues.qml:75
 msgid "Lock the phone when it's not in use:"
-msgstr "נעילת הטלפון בהעדר פעילות:"
+msgstr ""
 
 #: ../plugins/battery//SleepValues.qml:76
 msgid "Put the phone to sleep when it is not in use:"
-msgstr "להעביר את הטלפון למצב שינה בהעדר פעילות:"
+msgstr ""
 
 #: ../plugins/battery//SleepValues.qml:122
 msgid ""
 "Shorter times are more secure. Phone won't lock during calls or video "
 "playback."
 msgstr ""
-"זמנים קצרים יותר מעניקים אבטחה טובה יותר. הטלפון לא יינעל במהלך שיחות או "
-"הצגת וידאו."
 
 #: ../plugins/battery//SleepValues.qml:122
 msgid "Phone won’t sleep during calls or video playback."
-msgstr "הטלפון לא יעבור למצב שינה במהלך שיחות או הצגת וידאו."
+msgstr ""
 
 #: ../plugins/language//PageComponent.qml:132
 #: ../plugins/language//PageComponent.qml:142
 #: ../plugins/language//SpellChecking.qml:29
 #: ../plugins/language//SpellChecking.qml:44
 msgid "Spell checking"
-msgstr "בדיקת איות"
+msgstr ""
 
 #: ../plugins/language//SpellChecking.qml:62
 msgid "Current spelling languages:"
-msgstr "שפות האיות הנוכחיות:"
+msgstr ""
 
 #: ../plugins/language//SpellChecking.qml:63
 msgid "All languages available:"
-msgstr "כל השפות הזמינות:"
+msgstr ""
 
 #: ../plugins/language//RebootNecessary.qml:38
 msgid "Restart Now"
@@ -617,108 +614,106 @@ msgstr ""
 
 #: ../plugins/language//DisplayLanguage.qml:36
 msgid "Display language"
-msgstr "שפת התצוגה"
+msgstr ""
 
 #: ../plugins/language//DisplayLanguage.qml:118
 msgid "Confirm"
-msgstr "אישור"
+msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #: ../plugins/language//PageComponent.qml:34
 #: ../po/settings.js:70
 msgid "Language & Text"
-msgstr "שפה וטקסט"
+msgstr ""
 
 #: ../plugins/language//PageComponent.qml:100
 msgid "Display language…"
-msgstr "שפת התצוגה…"
+msgstr ""
 
 #: ../plugins/language//PageComponent.qml:117
 #: ../plugins/language//KeyboardLayouts.qml:26
 msgid "Keyboard layouts"
-msgstr "פריסות מקלדת"
+msgstr ""
 
 #: ../plugins/language//PageComponent.qml:153
 msgid "Auto correction"
-msgstr "תיקון אוטומטי"
+msgstr ""
 
 #: ../plugins/language//PageComponent.qml:164
 msgid "Word suggestions"
-msgstr "הצעת מילים"
+msgstr ""
 
 #: ../plugins/language//PageComponent.qml:178
 msgid "Auto capitalization"
-msgstr "הגדלת אותיות אוטומטית"
+msgstr ""
 
 #: ../plugins/language//PageComponent.qml:189
 msgid "Turns on Shift to capitalize the first letter of each sentence."
-msgstr "הפעלת Shift להגדלת האות הראשונה של כל משפט."
+msgstr ""
 
 #: ../plugins/language//PageComponent.qml:196
 msgid "Auto punctuation"
-msgstr "פיסוק אוטומטי"
+msgstr ""
 
 #: ../plugins/language//PageComponent.qml:207
 msgid ""
 "Adds a period, and any missing quotes or brackets, when you tap Space twice."
-msgstr "הוספת נקודה וכל מרכאות או סוגריים חסרים בעת נגיעה כפולה ברווח."
+msgstr ""
 
 #: ../plugins/language//PageComponent.qml:225
 msgid "Keyboard vibration"
-msgstr "רטט מקלדת"
+msgstr ""
 
 #: ../plugins/language//KeyboardLayouts.qml:39
 msgid "Current layouts:"
-msgstr "הפריסות הנוכחיות:"
+msgstr ""
 
 #: ../plugins/language//KeyboardLayouts.qml:40
 msgid "All layouts available:"
-msgstr "כל הפריסות זמינות:"
+msgstr ""
 
 #: ../plugins/phone//MultiSim.qml:46 ../plugins/phone//MultiSim.qml:84
 #: ../plugins/phone//NoSims.qml:34 ../plugins/phone//SingleSim.qml:40
 #: ../plugins/phone//CallWaiting.qml:31 ../plugins/phone//CallWaiting.qml:74
 msgid "Call waiting"
-msgstr "שיחה ממתינה"
+msgstr ""
 
 #: ../plugins/phone//CallWaiting.qml:89
 msgid ""
 "Lets you answer or start a new call while on another call, and switch "
 "between them"
-msgstr "מאפשר לך לענות או לפתוח בשיחה חדש במהלך שיחה אחרת ולהחליף ביניהן."
+msgstr ""
 
 #. TRANSLATORS: %1 is the name of the (network) carrier
 #: ../plugins/phone//SingleSim.qml:51 ../plugins/phone//Services.qml:34
 #, qt-format
 msgid "%1 Services"
-msgstr "שירותי %1"
+msgstr ""
 
 #: ../plugins/phone//MultiSim.qml:36 ../plugins/phone//MultiSim.qml:74
 #: ../plugins/phone//NoSims.qml:28 ../plugins/phone//CallForwarding.qml:32
 #: ../plugins/phone//CallForwarding.qml:76 ../plugins/phone//SingleSim.qml:33
 msgid "Call forwarding"
-msgstr "הפניית שיחות"
+msgstr ""
 
 #: ../plugins/phone//CallForwarding.qml:91
 msgid ""
 "Redirects phone calls to another number whenever you don't answer, or your "
 "phone is busy, turned off, or out of range."
 msgstr ""
-"הפניית שיחות למספר אחר כשהשיחה אינה נענית או שהטלפון שלך תפוס, כבוי או באזור "
-"ללא קליטה."
 
 #: ../plugins/phone//CallForwarding.qml:101
 msgid "Forward to"
-msgstr "העברה אל"
+msgstr ""
 
 #: ../plugins/phone//ServiceInfo.qml:109
 #, qt-format
 msgid "Last called %1"
-msgstr "שיחה אחרונה: %1"
+msgstr ""
 
 #: ../plugins/phone//ServiceInfo.qml:119
 msgid "Call"
-msgstr "להתקשר"
+msgstr ""
 
 #: ../plugins/phone//MultiSim.qml:56 ../plugins/phone//MultiSim.qml:94
 #: ../plugins/phone//NoSims.qml:42
@@ -730,21 +725,21 @@ msgstr ""
 #: ../plugins/bluetooth//PageComponent.qml:93
 #: ../po/settings.js:120
 msgid "Phone"
-msgstr "טלפון"
+msgstr ""
 
 #: ../plugins/phone//SingleSim.qml:29
 msgid "SIM"
-msgstr "SIM"
+msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
 #: ../plugins/brightness//PageComponent.qml:32
 #: ../po/settings.js:332
 msgid "Brightness"
-msgstr "בהירות"
+msgstr ""
 
 #: ../plugins/brightness//PageComponent.qml:46
 msgid "Adjust automatically"
-msgstr "התאמה אוטומטית"
+msgstr ""
 
 #: ../plugins/brightness//PageComponent.qml:60
 msgid "Brightens and dims the display to suit the surroundings."
@@ -759,20 +754,20 @@ msgstr ""
 
 #: ../plugins/cellular//PageChooseCarrier.qml:155
 msgid "Choose carrier:"
-msgstr "נא לבחור בספק:"
+msgstr ""
 
 #: ../plugins/cellular//PageChooseCarrier.qml:156
 #: ../plugins/time-date//PageComponent.qml:72
 #: ../plugins/time-date//ChooseTimeZone.qml:47
 msgid "Automatically"
-msgstr "אוטומטית"
+msgstr ""
 
 #: ../plugins/cellular//PageChooseCarrier.qml:156
 #: ../plugins/time-date//PageComponent.qml:72
 #: ../plugins/time-date//ChooseTimeZone.qml:47
 #: ../plugins/security-privacy//PageComponent.qml:149
 msgid "Manually"
-msgstr "ידנית"
+msgstr ""
 
 #: ../plugins/cellular//PageChooseCarrier.qml:196
 msgid "Searching for carriers…"
@@ -782,7 +777,7 @@ msgstr ""
 #: ../plugins/cellular//PageChooseCarrier.qml:229
 #: ../plugins/cellular//Components//SingleSim.qml:73
 msgid "APN"
-msgstr "APN"
+msgstr ""
 
 #: ../plugins/cellular//PageChooseApn.qml:372
 msgid "Internet APN:"
@@ -820,7 +815,7 @@ msgstr ""
 #: ../plugins/cellular//PageChooseCarriers.qml:27
 #: ../plugins/cellular//Components//MultiSim.qml:68
 msgid "Carriers"
-msgstr "ספקים"
+msgstr ""
 
 #: ../plugins/cellular//CustomApnEditor.qml:42
 msgid "Internet"
@@ -866,17 +861,17 @@ msgstr ""
 #: ../plugins/cellular//PageComponent.qml:32
 #: ../po/settings.js:42
 msgid "Cellular"
-msgstr "סלולרי"
+msgstr ""
 
 #: ../plugins/cellular//Hotspot.qml:29
 #: ../plugins/cellular//Components//MultiSim.qml:48
 #: ../plugins/cellular//Components//SingleSim.qml:43
 msgid "Wi-Fi hotspot"
-msgstr "נקודת גישה Wi-Fi"
+msgstr ""
 
 #: ../plugins/cellular//Hotspot.qml:40
 msgid "Hotspot"
-msgstr "נקודת גישה"
+msgstr ""
 
 #: ../plugins/cellular//Hotspot.qml:60
 msgid ""
@@ -892,36 +887,36 @@ msgstr ""
 
 #: ../plugins/cellular//Hotspot.qml:65
 msgid "Set up hotspot"
-msgstr "הגדרת נקודת גישה"
+msgstr ""
 
 #: ../plugins/cellular//HotspotSetup.qml:29
 msgid "Change hotspot setup"
-msgstr "שינוי הגדרות נקודת הגישה"
+msgstr ""
 
 #: ../plugins/cellular//HotspotSetup.qml:40
 msgid "Hotspot name"
-msgstr "שם נקודת הגישה"
+msgstr ""
 
 #: ../plugins/cellular//HotspotSetup.qml:54
 msgid "Key (must be 8 characters or longer)"
-msgstr "קוד (חייב להיות מורכב מ־8 תווים או יותר)"
+msgstr ""
 
 #: ../plugins/cellular//HotspotSetup.qml:68
 msgid "Show key"
-msgstr "הצגת קוד"
+msgstr ""
 
 #: ../plugins/cellular//HotspotSetup.qml:94
 #: ../plugins/security-privacy//SimPin.qml:157
 #: ../plugins/security-privacy//LockSecurity.qml:302
 msgid "Change"
-msgstr "החלפה"
+msgstr ""
 
 #: ../plugins/about//DevMode.qml:116
 #: ../plugins/security-privacy//PhoneLocking.qml:49
 #: ../plugins/security-privacy//LockSecurity.qml:32
 #: ../wizard/qml/Pages//30-passwd-type.qml:37
 msgid "Lock security"
-msgstr "אבטחת נעילה"
+msgstr ""
 
 #: ../plugins/security-privacy//LockSecurity.qml:96
 #: ../plugins/security-privacy//LockSecurity.qml:384
@@ -931,11 +926,11 @@ msgstr ""
 #: ../plugins/security-privacy//LockSecurity.qml:98
 #: ../plugins/security-privacy//LockSecurity.qml:385
 msgid "Change passphrase…"
-msgstr "החלפת מילת הצופן…"
+msgstr ""
 
 #: ../plugins/security-privacy//LockSecurity.qml:105
 msgid "Switch to swipe"
-msgstr "מעבר לגלישה"
+msgstr ""
 
 #: ../plugins/security-privacy//LockSecurity.qml:107
 msgid "Switch to passcode"
@@ -943,7 +938,7 @@ msgstr ""
 
 #: ../plugins/security-privacy//LockSecurity.qml:109
 msgid "Switch to passphrase"
-msgstr "מעבר למילת צופן"
+msgstr ""
 
 #: ../plugins/security-privacy//LockSecurity.qml:118
 msgid "Existing passcode"
@@ -951,7 +946,7 @@ msgstr ""
 
 #: ../plugins/security-privacy//LockSecurity.qml:120
 msgid "Existing passphrase"
-msgstr "מילת צופן קיימת"
+msgstr ""
 
 #: ../plugins/security-privacy//LockSecurity.qml:174
 msgid "Choose passcode"
@@ -959,7 +954,7 @@ msgstr ""
 
 #: ../plugins/security-privacy//LockSecurity.qml:176
 msgid "Choose passphrase"
-msgstr "בחירת מילת צופן"
+msgstr ""
 
 #: ../plugins/security-privacy//LockSecurity.qml:220
 #: ../wizard/qml/Pages//passwd-confirm.qml:49
@@ -969,7 +964,7 @@ msgstr ""
 #: ../plugins/security-privacy//LockSecurity.qml:222
 #: ../wizard/qml/Pages//passwd-confirm.qml:48
 msgid "Confirm passphrase"
-msgstr "אישור מילת הצופן"
+msgstr ""
 
 #: ../plugins/security-privacy//LockSecurity.qml:265
 msgid "Those passcodes don't match. Try again."
@@ -977,19 +972,19 @@ msgstr ""
 
 #: ../plugins/security-privacy//LockSecurity.qml:268
 msgid "Those passphrases don't match. Try again."
-msgstr "מילות צופן אלה אינן תואמות. נא לנסות שוב."
+msgstr ""
 
 #: ../plugins/security-privacy//LockSecurity.qml:299
 msgid "Unset"
-msgstr "ביטול ההגדרה"
+msgstr ""
 
 #: ../plugins/security-privacy//LockSecurity.qml:344
 msgid "Unlock the phone using:"
-msgstr "שחרור הטלפוקן באמצעות:"
+msgstr ""
 
 #: ../plugins/security-privacy//LockSecurity.qml:348
 msgid "Swipe (no security)"
-msgstr "גלישה (ללא אבטחה)"
+msgstr ""
 
 #: ../plugins/security-privacy//LockSecurity.qml:349
 msgid "4-digit passcode"
@@ -999,11 +994,11 @@ msgstr ""
 #: ../plugins/security-privacy//LockSecurity.qml:350
 #: ../wizard/qml/Pages//30-passwd-type.qml:98
 msgid "Passphrase"
-msgstr "מילת צופן"
+msgstr ""
 
 #: ../plugins/security-privacy//LockSecurity.qml:351
 msgid "Swipe (no security)… "
-msgstr "גלישה (ללא אבטחה)… "
+msgstr ""
 
 #: ../plugins/security-privacy//LockSecurity.qml:352
 msgid "4-digit passcode…"
@@ -1011,13 +1006,13 @@ msgstr ""
 
 #: ../plugins/security-privacy//LockSecurity.qml:353
 msgid "Passphrase…"
-msgstr "מילת צופן…"
+msgstr ""
 
 #: ../plugins/security-privacy//PageComponent.qml:158
 #: ../plugins/security-privacy//SimPin.qml:34
 #: ../plugins/security-privacy//SimPin.qml:322
 msgid "SIM PIN"
-msgstr "קוד ה־SIM"
+msgstr ""
 
 #: ../plugins/security-privacy//SimPin.qml:44
 msgid "Change SIM PIN"
@@ -1095,7 +1090,7 @@ msgstr ""
 
 #: ../plugins/security-privacy//PhoneLocking.qml:31
 msgid "Phone locking"
-msgstr "נעילת הטלפון"
+msgstr ""
 
 #: ../plugins/security-privacy//PhoneLocking.qml:45
 msgctxt "Unlock with swipe"
@@ -1113,12 +1108,12 @@ msgstr ""
 #, qt-format
 msgid "%1 minute"
 msgid_plural "%1 minutes"
-msgstr[0] "דקה %1"
-msgstr[1] "%1 דקות"
+msgstr[0] ""
+msgstr[1] ""
 
 #: ../plugins/security-privacy//PhoneLocking.qml:101
 msgid "Sleep locks immediately"
-msgstr "נעילה עם מצב שינה"
+msgstr ""
 
 #: ../plugins/security-privacy//PhoneLocking.qml:106
 msgid "When locked, allow:"
@@ -1144,19 +1139,19 @@ msgstr ""
 #: ../plugins/security-privacy//PageComponent.qml:37
 #: ../po/settings.js:232
 msgid "Security & Privacy"
-msgstr "אבטחה ופרטיות"
+msgstr ""
 
 #: ../plugins/security-privacy//PageComponent.qml:100
 #: ../plugins/security-privacy//PageComponent.qml:212
 #: ../plugins/security-privacy//Dash.qml:46
 msgid "Phone and Internet"
-msgstr "הטלפון והאינטרנט"
+msgstr ""
 
 #: ../plugins/security-privacy//PageComponent.qml:102
 #: ../plugins/security-privacy//PageComponent.qml:213
 #: ../plugins/security-privacy//Dash.qml:46
 msgid "Phone only"
-msgstr "הטלפון בלבד"
+msgstr ""
 
 #: ../plugins/security-privacy//PageComponent.qml:131
 msgid "Lock phone"
@@ -1191,99 +1186,87 @@ msgstr ""
 
 #: ../plugins/security-privacy//PageComponent.qml:188
 msgid "Stats on welcome screen"
-msgstr "סטטיסטיקה במסך הפתיחה"
+msgstr ""
 
 #: ../plugins/security-privacy//PageComponent.qml:198
 msgid "Messages on welcome screen"
-msgstr "הודעות במסך הפתיחה"
+msgstr ""
 
 #: ../plugins/security-privacy//PageComponent.qml:210
 #: ../plugins/security-privacy//Dash.qml:29
 msgid "Dash search"
-msgstr "חיפוש בלוח"
+msgstr ""
 
 #: ../plugins/security-privacy//PageComponent.qml:230
 msgid "Location access"
-msgstr "גישה למיקום"
+msgstr ""
 
 #: ../plugins/security-privacy//AppAccess.qml:28
 #: ../plugins/security-privacy//PageComponent.qml:248
 msgid "Other app access"
-msgstr "גישה מיישומים אחרים"
+msgstr ""
 
 #: ../plugins/security-privacy//PageComponent.qml:253
 #: ../plugins/security-privacy//diagnostics//PageComponent.qml:30
 msgid "Diagnostics"
-msgstr "אבחון"
+msgstr ""
 
 #. TRANSLATORS: This string is shown when crash
 #. reports are to be sent by the system.
 #: ../plugins/security-privacy//PageComponent.qml:258
 msgid "Sent"
-msgstr "נשלחו"
+msgstr ""
 
 #. TRANSLATORS: This string is shown when crash
 #. reports are not to be sent by the system
 #: ../plugins/security-privacy//PageComponent.qml:261
 msgid "Not sent"
-msgstr "לא נשלחו"
+msgstr ""
 
 #: ../plugins/security-privacy//Location.qml:32
 #: ../wizard/qml/Pages//50-location.qml:25
 msgid "Location"
-msgstr "מיקום"
+msgstr ""
 
 #: ../plugins/security-privacy//Location.qml:59
 msgid "Location detection"
-msgstr "איתור מיקום"
+msgstr ""
 
 #: ../plugins/security-privacy//Location.qml:208
 msgid ""
 "Uses GPS to detect your rough location. When off, GPS turns off to save "
 "battery."
 msgstr ""
-"שימוש ב־GPS/התקן איכון כדי לזהות את מיקומך בקירוב. כאשר אפשרות זו כבויה, "
-"האיכון יכבה כדי לחסוך בסוללה."
 
 #: ../plugins/security-privacy//Location.qml:210
 msgid ""
 "Uses wi-fi and GPS to detect your rough location. Turning off location "
 "detection saves battery."
 msgstr ""
-"שימוש ב־WiFi/רשת אלחוטית וב־GPS/התקן איכון כדי לזהות את מיקומך בקירוב. כיבוי "
-"אפשרות זו יחסוך בסוללה."
 
 #: ../plugins/security-privacy//Location.qml:212
 msgid ""
 "Uses wi-fi (currently off) and GPS to detect your rough location. Turning "
 "off location detection saves battery."
 msgstr ""
-"שימוש ב־WiFi/רשת אלחוטית (כבוי כרגע) וב־GPS/התקן איכון כדי לזהות את מיקומך "
-"בקירוב. כיבוי אפשרות זו יחסוך בסוללה."
 
 #: ../plugins/security-privacy//Location.qml:214
 msgid ""
 "Uses wi-fi, cell tower locations, and GPS to detect your rough location. "
 "Turning off location detection saves battery."
 msgstr ""
-"שימוש ב־WiFi/רשת אלחוטית, מיקומי אנטנות סלולריות וב־GPS/התקן איכון כדי לזהות "
-"את מיקומך בקירוב. כיבוי אפשרות זו יחסוך בסוללה."
 
 #: ../plugins/security-privacy//Location.qml:216
 msgid ""
 "Uses wi-fi, cell tower locations (no current cellular connection), and GPS "
 "to detect your rough location. Turning off location detection saves battery."
 msgstr ""
-"שימוש ב־WiFi/רשת אלחוטית, מיקומי אנטנות סלולריות (אין חיבור סלולרי כרגע) "
-"וב־GPS/התקן איכון כדי לזהות את מיקומך בקירוב. כיבוי אפשרות זו יחסוך בסוללה."
 
 #: ../plugins/security-privacy//Location.qml:218
 msgid ""
 "Uses wi-fi (currently off), cell tower locations, and GPS to detect your "
 "rough location. Turning off location detection saves battery."
 msgstr ""
-"שימוש ב־WiFi/רשת אלחוטית (כבוי כרגע), מיקומי אנטנות סלולריות וב־GPS/התקן "
-"איכון כדי לזהות את מיקומך בקירוב. כיבוי אפשרות זו יחסוך בסוללה."
 
 #: ../plugins/security-privacy//Location.qml:220
 msgid ""
@@ -1291,74 +1274,71 @@ msgid ""
 "connection), and GPS to detect your rough location. Turning off location "
 "detection saves battery."
 msgstr ""
-"שימוש ב־WiFi/רשת אלחוטית (כבוי כרגע), מיקומי אנטנות סלולריות (אין חיבור "
-"סלולרי כרגע) וב־GPS/התקן איכון כדי לזהות את מיקומך בקירוב. כיבוי אפשרות זו "
-"יחסוך בסוללה."
 
 #: ../plugins/security-privacy//Location.qml:227
 msgid "Allow access to location:"
-msgstr "לאפשר גישה למיקום:"
+msgstr ""
 
 #: ../plugins/security-privacy//Dash.qml:45
 msgid "Return results from:"
-msgstr "החזרת תוצאות מ־:"
+msgstr ""
 
 #: ../plugins/security-privacy//AppAccess.qml:35
 msgid "Apps that you have granted and have requested access to:"
-msgstr "יישומים שאישרת וביקשו לגשת אל:"
+msgstr ""
 
 #: ../plugins/security-privacy//AppAccess.qml:41
 #: ../plugins/bluetooth//PageComponent.qml:105
 msgid "Camera"
-msgstr "מצלמה"
+msgstr ""
 
 #: ../plugins/security-privacy//AppAccess.qml:42
 msgid "Apps that have requested access to your camera"
-msgstr "יישומים שביקשו לגשת למצלמה שלך"
+msgstr ""
 
 #: ../plugins/security-privacy//AppAccess.qml:46
 msgid "Mic"
-msgstr "מיקרופון"
+msgstr ""
 
 #: ../plugins/security-privacy//AppAccess.qml:47
 msgid "Apps that have requested access to your mic"
-msgstr "יישומים שביקשו לגשת למצלמה שלך"
+msgstr ""
 
 #: ../plugins/security-privacy//AppAccess.qml:59
 #, qt-format
 msgid "%1/%2"
-msgstr "%1/%2"
+msgstr ""
 
 #: ../plugins/security-privacy//AppAccess.qml:60
 msgid "0"
-msgstr "0"
+msgstr ""
 
 #: ../plugins/bluetooth//ProvidePasskeyDialog.qml:28
 #: ../plugins/bluetooth//ProvidePinCodeDialog.qml:28
 #: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:28
 msgid "Bluetooth Pairing Request"
-msgstr "בקשת צימוד Bluetooth"
+msgstr ""
 
 #: ../plugins/bluetooth//ProvidePasskeyDialog.qml:36
 #: ../plugins/bluetooth//ProvidePinCodeDialog.qml:36
 #, qt-format
 msgid "PIN for '%1'"
-msgstr "קוד עבור ‚%1‘"
+msgstr ""
 
 #: ../plugins/bluetooth//ProvidePasskeyDialog.qml:62
 #: ../plugins/bluetooth//ProvidePinCodeDialog.qml:63
 msgid "Pair"
-msgstr "צימוד"
+msgstr ""
 
 #. TRANSLATORS: %1 is the name of the bluetooth device being paired
 #: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:37
 #, qt-format
 msgid "Please confirm that the PIN displayed on '%1' matches this one"
-msgstr "נא לאשר כי הקוד שמופיע ב־‚%1‘ תואם לזה"
+msgstr ""
 
 #: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:57
 msgid "Confirm PIN"
-msgstr "נא לאשר את הקוד"
+msgstr ""
 
 #: ../plugins/bluetooth//PageComponent.qml:82
 msgid "Connected"
@@ -1366,128 +1346,128 @@ msgstr ""
 
 #: ../plugins/bluetooth//PageComponent.qml:83
 msgid "Connecting…"
-msgstr "בהתחברות…"
+msgstr ""
 
 #: ../plugins/bluetooth//PageComponent.qml:84
 msgid "Disconnecting…"
-msgstr "מתבצע ניתוק…"
+msgstr ""
 
 #: ../plugins/bluetooth//PageComponent.qml:85
 msgid "Disconnected"
-msgstr "מנותק"
+msgstr ""
 
 #: ../plugins/bluetooth//PageComponent.qml:92
 msgid "Computer"
-msgstr "מחשב"
+msgstr ""
 
 #: ../plugins/bluetooth//PageComponent.qml:94
 msgid "Modem"
-msgstr "מודם"
+msgstr ""
 
 #: ../plugins/bluetooth//PageComponent.qml:95 ../src/qml/MainWindow.qml:147
 msgid "Network"
-msgstr "תקשורת"
+msgstr ""
 
 #: ../plugins/bluetooth//PageComponent.qml:96
 msgid "Headset"
-msgstr "אוזניות עם מיקרופון"
+msgstr ""
 
 #: ../plugins/bluetooth//PageComponent.qml:97
 msgid "Headphones"
-msgstr "אוזניות"
+msgstr ""
 
 #: ../plugins/bluetooth//PageComponent.qml:98
 msgid "Video"
-msgstr "וידאו"
+msgstr ""
 
 #: ../plugins/bluetooth//PageComponent.qml:99
 msgid "Other Audio"
-msgstr "שמע אחר"
+msgstr ""
 
 #: ../plugins/bluetooth//PageComponent.qml:100
 msgid "Joypad"
-msgstr "התקן משחק"
+msgstr ""
 
 #: ../plugins/bluetooth//PageComponent.qml:101
 msgid "Keyboard"
-msgstr "מקלדת"
+msgstr ""
 
 #: ../plugins/bluetooth//PageComponent.qml:102
 msgid "Tablet"
-msgstr "מחשב לוח"
+msgstr ""
 
 #: ../plugins/bluetooth//PageComponent.qml:103
 msgid "Mouse"
-msgstr "עכבר"
+msgstr ""
 
 #: ../plugins/bluetooth//PageComponent.qml:104
 msgid "Printer"
-msgstr "מדפסת"
+msgstr ""
 
 #: ../plugins/bluetooth//PageComponent.qml:106
 msgid "Other"
-msgstr "אחר"
+msgstr ""
 
 #: ../plugins/bluetooth//PageComponent.qml:112
 msgid "Excellent"
-msgstr "מצוינת"
+msgstr ""
 
 #: ../plugins/bluetooth//PageComponent.qml:113
 msgid "Good"
-msgstr "טובה"
+msgstr ""
 
 #: ../plugins/bluetooth//PageComponent.qml:114
 msgid "Fair"
-msgstr "סבירה"
+msgstr ""
 
 #: ../plugins/bluetooth//PageComponent.qml:115
 msgid "Poor"
-msgstr "עלובה"
+msgstr ""
 
 #: ../plugins/bluetooth//PageComponent.qml:176
 msgid "Discoverable"
-msgstr "ניתן לגילוי"
+msgstr ""
 
 #: ../plugins/bluetooth//PageComponent.qml:176
 msgid "Not discoverable"
-msgstr "בלתי ניתן לגילוי"
+msgstr ""
 
 #: ../plugins/bluetooth//PageComponent.qml:207
 msgid "Connected devices:"
-msgstr "התקנים מחוברים:"
+msgstr ""
 
 #: ../plugins/bluetooth//PageComponent.qml:245
 msgid "Connect another device:"
-msgstr "חיבור התקן נוסף:"
+msgstr ""
 
 #: ../plugins/bluetooth//PageComponent.qml:245
 msgid "Connect a device:"
-msgstr "חיבור התקן:"
+msgstr ""
 
 #: ../plugins/bluetooth//PageComponent.qml:279
 msgid "None detected"
-msgstr "לא זוהו"
+msgstr ""
 
 #: ../plugins/bluetooth//PageComponent.qml:287
 #: ../plugins/bluetooth//PageComponent.qml:391
 msgid "Connect automatically when detected:"
-msgstr "חיבור אוטומטי בעת הזיהוי:"
+msgstr ""
 
 #: ../plugins/bluetooth//PageComponent.qml:358
 msgid "Type"
-msgstr "סוג"
+msgstr ""
 
 #: ../plugins/bluetooth//PageComponent.qml:382
 msgid "Status"
-msgstr "מצב"
+msgstr ""
 
 #: ../plugins/bluetooth//PageComponent.qml:386
 msgid "Signal Strength"
-msgstr "עצמת האות"
+msgstr ""
 
 #: ../plugins/bluetooth//PageComponent.qml:423
 msgid "Forget this device"
-msgstr "התעלמות מהתקן זה"
+msgstr ""
 
 #: ../plugins/about//PhoneNumbers.qml:31
 msgid "Phone number:"
@@ -1495,55 +1475,55 @@ msgstr ""
 
 #: ../plugins/about//PhoneNumber.qml:36
 msgid "Phone number"
-msgstr "מספר טלפון"
+msgstr ""
 
 #: ../plugins/about//PageComponent.qml:144 ../plugins/about//Storage.qml:33
 msgid "Storage"
-msgstr "אחסון"
+msgstr ""
 
 #: ../plugins/about//Storage.qml:85
 msgid "Used by Ubuntu"
-msgstr "בשימוש על ידי אובונטו"
+msgstr ""
 
 #: ../plugins/about//Storage.qml:86
 msgid "Videos"
-msgstr "סרטונים"
+msgstr ""
 
 #: ../plugins/about//Storage.qml:87
 msgid "Audio"
-msgstr "שמע"
+msgstr ""
 
 #: ../plugins/about//Storage.qml:88
 msgid "Pictures"
-msgstr "תמונות"
+msgstr ""
 
 #: ../plugins/about//Storage.qml:89
 msgid "Other files"
-msgstr "קבצים אחרים"
+msgstr ""
 
 #: ../plugins/about//Storage.qml:90
 msgid "Used by apps"
-msgstr "בשימוש על ידי יישומים"
+msgstr ""
 
 #: ../plugins/about//Storage.qml:140
 msgid "Total storage"
-msgstr "סך כל שטח האחסון"
+msgstr ""
 
 #: ../plugins/about//Storage.qml:152
 msgid "Free space"
-msgstr "מקום פנוי"
+msgstr ""
 
 #: ../plugins/about//Storage.qml:172
 msgid "By name"
-msgstr "לפי שם"
+msgstr ""
 
 #: ../plugins/about//Storage.qml:172
 msgid "By size"
-msgstr "לפי גודל"
+msgstr ""
 
 #: ../plugins/about//DevMode.qml:35 ../plugins/about//DevMode.qml:90
 msgid "Developer Mode"
-msgstr "מצב פיתוח"
+msgstr ""
 
 #: ../plugins/about//DevMode.qml:84
 msgid ""
@@ -1559,11 +1539,11 @@ msgstr ""
 #: ../plugins/about//PageComponent.qml:34
 #: ../po/settings.js:138
 msgid "About this phone"
-msgstr "פרטים על הטלפון הזה"
+msgstr ""
 
 #: ../plugins/about//PageComponent.qml:110
 msgid "Serial"
-msgstr "מס׳ סידורי"
+msgstr ""
 
 #: ../plugins/about//PageComponent.qml:125
 msgid "Wi-Fi address"
@@ -1581,35 +1561,35 @@ msgstr ""
 
 #: ../plugins/about//PageComponent.qml:153
 msgid "Software:"
-msgstr "תכנה:"
+msgstr ""
 
 #: ../plugins/about//PageComponent.qml:158
 msgid "OS"
-msgstr "מערכת הפעלה"
+msgstr ""
 
 #: ../plugins/about//PageComponent.qml:167
 msgid "Last updated"
-msgstr "עדכון אחרון"
+msgstr ""
 
 #: ../plugins/about//PageComponent.qml:175
 msgid "Check for updates"
-msgstr "בדיקת עדכונים"
+msgstr ""
 
 #: ../plugins/about//PageComponent.qml:185
 msgid "Legal:"
-msgstr "משפטי:"
+msgstr ""
 
 #: ../plugins/about//PageComponent.qml:190 ../plugins/about//Software.qml:11
 msgid "Software licenses"
-msgstr "רישיונות התכנה"
+msgstr ""
 
 #: ../plugins/about//PageComponent.qml:198
 msgid "Regulatory info"
-msgstr "פרטים מנהליים"
+msgstr ""
 
 #: ../plugins/about//PageComponent.qml:206
 msgid "Developer mode"
-msgstr "מצב פיתוח"
+msgstr ""
 
 #: ../plugins/about//License.qml:30
 msgid "Sorry, this license could not be displayed."
@@ -1617,111 +1597,111 @@ msgstr ""
 
 #: ../plugins/about//Version.qml:36
 msgid "OS Build Details"
-msgstr "פרטי בניית מערכת ההפעלה"
+msgstr ""
 
 #: ../plugins/about//Version.qml:61
 msgid "OS build number"
-msgstr "מספר בניית מערכת ההפעלה"
+msgstr ""
 
 #: ../plugins/about//Version.qml:67
 msgid "Ubuntu Image part"
-msgstr "חלק תמונת אובונטו"
+msgstr ""
 
 #: ../plugins/about//Version.qml:75
 msgid "Ubuntu build description"
-msgstr "תיאור בניית האובונטו"
+msgstr ""
 
 #: ../plugins/about//Version.qml:81
 msgid "Device Image part"
-msgstr "חלק תמונת התקן"
+msgstr ""
 
 #: ../plugins/about//Version.qml:88
 msgid "Device build description"
-msgstr "תיאור בניית ההתקן"
+msgstr ""
 
 #: ../plugins/about//Version.qml:95
 msgid "Customization Image part"
-msgstr "חלק התאמת התמונה"
+msgstr ""
 
 #: ../plugins/time-date//ChooseTimeZone.qml:28
 msgid "Time zone"
-msgstr "אזור זמן"
+msgstr ""
 
 #: ../plugins/time-date//ChooseTimeZone.qml:46
 msgid "Set the time zone:"
-msgstr "הגדרת אזור הזמן:"
+msgstr ""
 
 #: ../plugins/time-date//ChooseTimeZone.qml:126
 msgid "Enter your current location."
-msgstr "נא להזין את המיקום הנוכחי."
+msgstr ""
 
 #: ../plugins/time-date//ChooseTimeZone.qml:127
 msgid "No matching place"
-msgstr "לא נמצא מיקום תואם"
+msgstr ""
 
 #: ../plugins/time-date//TimePicker.qml:26
 msgid "Set time & date"
-msgstr "הגדרת השעה והתאריך"
+msgstr ""
 
 #: ../plugins/time-date//TimePicker.qml:68
 msgid "Time"
-msgstr "זמן"
+msgstr ""
 
 #: ../plugins/time-date//TimePicker.qml:81
 msgid "Hour"
-msgstr "שעה"
+msgstr ""
 
 #: ../plugins/time-date//TimePicker.qml:95
 msgid "Minute"
-msgstr "דקה"
+msgstr ""
 
 #: ../plugins/time-date//TimePicker.qml:109
 msgid "Second"
-msgstr "שנייה"
+msgstr ""
 
 #: ../plugins/time-date//TimePicker.qml:118
 msgid "Date"
-msgstr "תאריך"
+msgstr ""
 
 #: ../plugins/time-date//TimePicker.qml:130
 msgid "Day"
-msgstr "יום"
+msgstr ""
 
 #: ../plugins/time-date//TimePicker.qml:144
 msgid "Month"
-msgstr "חודש"
+msgstr ""
 
 #: ../plugins/time-date//TimePicker.qml:162
 msgid "Year"
-msgstr "שנה"
+msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
 #: ../plugins/time-date//PageComponent.qml:29
 #: ../po/settings.js:222
 msgid "Time & Date"
-msgstr "שעה ותאריך"
+msgstr ""
 
 #: ../plugins/time-date//PageComponent.qml:53
 msgid "Time zone:"
-msgstr "אזור זמן:"
+msgstr ""
 
 #: ../plugins/time-date//PageComponent.qml:66
 msgid "Set the time and date:"
-msgstr "הגדרת השעה והתאריך:"
+msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
 #: ../plugins/system-update//PageComponent.qml:38
 #: ../po/settings.js:258
 msgid "Updates"
-msgstr "עדכונים"
+msgstr ""
 
 #: ../plugins/system-update//PageComponent.qml:117
 msgid "Update System"
-msgstr "עדכון המערכת"
+msgstr ""
 
 #: ../plugins/system-update//PageComponent.qml:118
 msgid "The phone needs to restart to install the system update."
-msgstr "על הטלפון להפעיל עצמו מחדש כדי להתקין את עדכון המערכת."
+msgstr ""
 
 #: ../plugins/system-update//PageComponent.qml:118
 msgid "Connect the phone to power before installing the system update."
@@ -1729,15 +1709,15 @@ msgstr ""
 
 #: ../plugins/system-update//PageComponent.qml:121
 msgid "Install & Restart"
-msgstr "התקנה והפעלה מחדש"
+msgstr ""
 
 #: ../plugins/system-update//PageComponent.qml:131
 msgid "Not Now"
-msgstr "לא כעת"
+msgstr ""
 
 #: ../plugins/system-update//PageComponent.qml:137
 msgid "Install"
-msgstr "להתקין"
+msgstr ""
 
 #: ../plugins/system-update//PageComponent.qml:152
 msgid "Installation failed"
@@ -1750,7 +1730,7 @@ msgstr ""
 
 #: ../plugins/system-update//PageComponent.qml:176
 msgid "Software is up to date"
-msgstr "התכנה עדכנית"
+msgstr ""
 
 #: ../plugins/system-update//PageComponent.qml:235
 #: ../plugins/system-update//PageComponent.qml:241
@@ -1763,7 +1743,7 @@ msgstr ""
 
 #: ../plugins/system-update//PageComponent.qml:298
 msgid "Checking for updates…"
-msgstr "מתבצעת בדיקה אחר עדכונים…"
+msgstr ""
 
 #: ../plugins/system-update//PageComponent.qml:298
 msgid "Connect to the Internet to check for updates"
@@ -1772,7 +1752,7 @@ msgstr ""
 #: ../plugins/system-update//PageComponent.qml:313
 #: ../plugins/system-update//PageComponent.qml:472
 msgid "Retry"
-msgstr "ניסיון חוזר"
+msgstr ""
 
 #: ../plugins/system-update//PageComponent.qml:338
 #, qt-format
@@ -1790,7 +1770,7 @@ msgstr[1] ""
 
 #: ../plugins/system-update//PageComponent.qml:340
 msgid "Pause All"
-msgstr "להפסיק הכול"
+msgstr ""
 
 #: ../plugins/system-update//PageComponent.qml:475
 msgid "Install…"
@@ -1798,27 +1778,27 @@ msgstr ""
 
 #: ../plugins/system-update//PageComponent.qml:477
 msgid "Download"
-msgstr "הורדה"
+msgstr ""
 
 #: ../plugins/system-update//PageComponent.qml:481
 msgid "Pause"
-msgstr "השהייה"
+msgstr ""
 
 #: ../plugins/system-update//PageComponent.qml:483
 msgid "Resume"
-msgstr "להמשיך"
+msgstr ""
 
 #: ../plugins/system-update//PageComponent.qml:485
 msgid "Update"
-msgstr "עדכון"
+msgstr ""
 
 #: ../plugins/system-update//PageComponent.qml:525
 msgid "Installing"
-msgstr "מתבצעת התקנה"
+msgstr ""
 
 #: ../plugins/system-update//PageComponent.qml:527
 msgid "Installed"
-msgstr "מותקנת"
+msgstr ""
 
 #: ../plugins/system-update//PageComponent.qml:528
 msgid "Downloading"
@@ -1831,7 +1811,7 @@ msgstr ""
 
 #: ../plugins/system-update//PageComponent.qml:639
 msgid "Version: "
-msgstr "גרסה: "
+msgstr ""
 
 #: ../plugins/system-update//PageComponent.qml:671
 msgid "Sign in to Ubuntu One to receive updates for apps."
@@ -1843,52 +1823,52 @@ msgstr ""
 
 #: ../plugins/system-update//PageComponent.qml:724
 msgid "Installing update…"
-msgstr "העדכון מותקן…"
+msgstr ""
 
 #: ../plugins/system-update//PageComponent.qml:763
 #: ../plugins/system-update//Configuration.qml:29
 msgid "Auto download"
-msgstr "הורדה אוטומטית"
+msgstr ""
 
 #: ../plugins/system-update//PageComponent.qml:768
 msgid "On wi-fi"
-msgstr "בעת חיבור לרשת אלחוטית"
+msgstr ""
 
 #: ../plugins/system-update//PageComponent.qml:770
 msgid "Always"
-msgstr "תמיד"
+msgstr ""
 
 #: ../plugins/system-update//PageComponent.qml:785
 msgid " bytes"
-msgstr " בתים"
+msgstr ""
 
 #: ../plugins/system-update//PageComponent.qml:788
 msgid " KiB"
-msgstr " KiB"
+msgstr ""
 
 #: ../plugins/system-update//PageComponent.qml:791
 msgid " MiB"
-msgstr " MiB"
+msgstr ""
 
 #: ../plugins/system-update//PageComponent.qml:794
 msgid " GiB"
-msgstr " GiB"
+msgstr ""
 
 #: ../plugins/system-update//Configuration.qml:34
 msgid "Download future updates automatically:"
-msgstr "הורדת עדכונים עתידיים אוטומטית:"
+msgstr ""
 
 #: ../plugins/system-update//Configuration.qml:53
 msgid "When on wi-fi"
-msgstr "בעת חיבור לרשת אלחוטית"
+msgstr ""
 
 #: ../plugins/system-update//Configuration.qml:54
 msgid "On any data connection"
-msgstr "דרך כל חיבור נתונים שהוא"
+msgstr ""
 
 #: ../plugins/system-update//Configuration.qml:55
 msgid "Data charges may apply."
-msgstr "יתכן חיוב בגין צריכת נתונים."
+msgstr ""
 
 #: ../plugins/background//Components//AddRemove.qml:52
 msgid "No images selected"
@@ -1963,12 +1943,12 @@ msgstr ""
 #: ../plugins/cellular//Components//MultiSim.qml:42
 #: ../plugins/cellular//Components//SingleSim.qml:37
 msgid "Hotspot disabled because Wi-Fi is off."
-msgstr "נקודת הגישה מנוטרלת כיוון שה־WiFi מנוטרל."
+msgstr ""
 
 #: ../plugins/cellular//Components//MultiSim.qml:58
 #: ../plugins/cellular//Components//SingleSim.qml:52
 msgid "Data usage statistics"
-msgstr "סטטיסטיקת שימוש בנתונים"
+msgstr ""
 
 #: ../plugins/security-privacy//diagnostics//PageComponent.qml:51
 msgid "Privacy policy"
@@ -1992,15 +1972,15 @@ msgstr ""
 
 #: ../src/qml/MainWindow.qml:133
 msgid "Search"
-msgstr "חיפוש"
+msgstr ""
 
 #: ../src/qml/MainWindow.qml:152
 msgid "Personal"
-msgstr "אישי"
+msgstr ""
 
 #: ../src/qml/MainWindow.qml:157
 msgid "System"
-msgstr "מערכת"
+msgstr ""
 
 #: ../wizard/qml/Pages//30-passwd-type.qml:72
 msgid "Please select how you’d like to unlock your phone."
@@ -2008,7 +1988,7 @@ msgstr ""
 
 #: ../wizard/qml/Pages//30-passwd-type.qml:92
 msgid "Swipe"
-msgstr "החלקה"
+msgstr ""
 
 #: ../wizard/qml/Pages//30-passwd-type.qml:93
 msgid "No security"
@@ -2029,7 +2009,7 @@ msgstr ""
 #: ../wizard/qml/Pages//passwd-confirm.qml:75
 #: ../wizard/qml/Pages//30-passwd-type.qml:112
 msgid "Continue"
-msgstr "המשך"
+msgstr ""
 
 #: ../wizard/qml/Pages//40-wifi.qml:27
 msgid "Connect to Wi‑Fi"
@@ -2045,7 +2025,7 @@ msgstr ""
 
 #: ../wizard/qml/Pages//40-wifi.qml:196 ../wizard/qml/Pages//20-sim.qml:67
 msgid "Skip"
-msgstr "דילוג"
+msgstr ""
 
 #: ../wizard/qml/Pages//here-terms.qml:25
 msgid "Terms & Conditions"
@@ -2098,7 +2078,7 @@ msgstr ""
 
 #: ../wizard/qml/Pages//80-finished.qml:51
 msgid "Finish"
-msgstr "סיום"
+msgstr ""
 
 #: ../wizard/qml/Pages//10-welcome.qml:25
 msgid "Hi!"
@@ -2155,7 +2135,7 @@ msgstr ""
 
 #: ../wizard/qml/Components//Page.qml:89
 msgid "Back"
-msgstr "חזרה"
+msgstr ""
 
 #: ../wizard/qml/Components//StackButton.qml:41
 #, qt-format
@@ -2170,17 +2150,17 @@ msgstr ""
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
 #: ../po/settings.js:318
 msgid "appearance"
-msgstr "מראה"
+msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
 #: ../po/settings.js:320
 msgid "background"
-msgstr "רקע"
+msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
 #: ../po/settings.js:322
 msgid "wallpaper"
-msgstr "טפט"
+msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
 #: ../po/settings.js:324
@@ -2205,17 +2185,17 @@ msgstr ""
 #. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
 #: ../po/settings.js:96
 msgid "Accessibility"
-msgstr "נגישות"
+msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
 #: ../po/settings.js:98
 msgid "accessibility"
-msgstr "נגישות"
+msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
 #: ../po/settings.js:100
 msgid "a11y"
-msgstr "נגישות"
+msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
@@ -2224,24 +2204,24 @@ msgstr "נגישות"
 #: ../po/settings.js:46
 #: ../po/settings.js:196
 msgid "network"
-msgstr "רשת"
+msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
 #: ../po/settings.js:14
 #: ../po/settings.js:292
 msgid "wireless"
-msgstr "אלחוטי"
+msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #: ../po/settings.js:16
 msgid "wifi"
-msgstr "אלחוט"
+msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #: ../po/settings.js:18
 msgid "wi-fi"
-msgstr "אלחוטית"
+msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
@@ -2281,12 +2261,12 @@ msgstr ""
 #: ../po/settings.js:200
 #: ../po/settings.js:262
 msgid "software"
-msgstr "תכנה"
+msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
 #: ../po/settings.js:202
 msgid "notifications"
-msgstr "התרעות"
+msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
@@ -2340,7 +2320,7 @@ msgstr ""
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
 #: ../po/settings.js:104
 msgid "sound"
-msgstr "קול"
+msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
 #: ../po/settings.js:106
@@ -2384,7 +2364,7 @@ msgstr ""
 #. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
 #: ../po/settings.js:32
 msgid "reset"
-msgstr "איפוס"
+msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
 #: ../po/settings.js:34
@@ -2409,12 +2389,12 @@ msgstr ""
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
 #: ../po/settings.js:302
 msgid "battery"
-msgstr "סוללה"
+msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
 #: ../po/settings.js:304
 msgid "power"
-msgstr "צריכת חשמל"
+msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
 #: ../po/settings.js:306
@@ -2433,7 +2413,7 @@ msgstr ""
 #: ../po/settings.js:238
 #: ../po/settings.js:310
 msgid "lock"
-msgstr "נעילה"
+msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
 #: ../po/settings.js:312
@@ -2448,7 +2428,7 @@ msgstr ""
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #: ../po/settings.js:72
 msgid "language"
-msgstr "שפה"
+msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #: ../po/settings.js:76
@@ -2513,7 +2493,7 @@ msgstr ""
 #: ../po/settings.js:122
 #: ../po/settings.js:146
 msgid "phone"
-msgstr "טלפון"
+msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
 #: ../po/settings.js:124
@@ -2548,14 +2528,14 @@ msgstr ""
 #. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
 #: ../po/settings.js:334
 msgid "brightness"
-msgstr "בהירות"
+msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
 #: ../po/settings.js:182
 #: ../po/settings.js:338
 msgid "screen"
-msgstr "מסך"
+msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
 #: ../po/settings.js:342
@@ -2565,17 +2545,17 @@ msgstr ""
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
 #: ../po/settings.js:44
 msgid "cellular"
-msgstr "סלולרי"
+msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
 #: ../po/settings.js:48
 msgid "mobile"
-msgstr "נייד"
+msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
 #: ../po/settings.js:50
 msgid "gsm"
-msgstr "gsm"
+msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
 #: ../po/settings.js:52
@@ -2627,42 +2607,42 @@ msgstr ""
 #. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
 #: ../po/settings.js:2
 msgid "Example"
-msgstr "דוגמה"
+msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
 #: ../po/settings.js:4
 msgid "example"
-msgstr "דוגמה"
+msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
 #: ../po/settings.js:6
 msgid "test"
-msgstr "בדיקה"
+msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
 #: ../po/settings.js:8
 msgid "sample"
-msgstr "דוגמית"
+msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
 #: ../po/settings.js:186
 msgid "Flight Mode"
-msgstr "מצב טיסה"
+msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
 #: ../po/settings.js:188
 msgid "flight"
-msgstr "טיסה"
+msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
 #: ../po/settings.js:190
 msgid "plane"
-msgstr "מטוס"
+msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
 #: ../po/settings.js:192
 msgid "offline"
-msgstr "לא מקוון"
+msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
 #: ../po/settings.js:194
@@ -2672,12 +2652,12 @@ msgstr ""
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
 #: ../po/settings.js:234
 msgid "security"
-msgstr "אבטחה"
+msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
 #: ../po/settings.js:236
 msgid "privacy"
-msgstr "פרטיות"
+msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
 #: ../po/settings.js:242
@@ -2717,22 +2697,22 @@ msgstr ""
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
 #: ../po/settings.js:174
 msgid "Orientation Lock"
-msgstr "נעילת סיבוב"
+msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
 #: ../po/settings.js:176
 msgid "rotation"
-msgstr "הטייה"
+msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
 #: ../po/settings.js:178
 msgid "orientation"
-msgstr "כיוון"
+msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
 #: ../po/settings.js:278
 msgid "bluetooth"
-msgstr "בלוטות׳"
+msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
 #: ../po/settings.js:280
@@ -2749,7 +2729,7 @@ msgstr ""
 #: ../po/settings.js:142
 #: ../po/settings.js:284
 msgid "device"
-msgstr "התקן"
+msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
 #: ../po/settings.js:286
@@ -2774,12 +2754,12 @@ msgstr ""
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: ../po/settings.js:140
 msgid "about"
-msgstr "על אודות"
+msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: ../po/settings.js:144
 msgid "info"
-msgstr "מידע"
+msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: ../po/settings.js:148
@@ -2839,32 +2819,32 @@ msgstr ""
 #. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
 #: ../po/settings.js:224
 msgid "time"
-msgstr "זמן"
+msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
 #: ../po/settings.js:226
 msgid "date"
-msgstr "תאריך"
+msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
 #: ../po/settings.js:228
 msgid "timezone"
-msgstr "אזור זמן"
+msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the update-notification plugin which is used while searching
 #: ../po/settings.js:256
 msgid "Updates available"
-msgstr "ישנם עדכונים זמינים"
+msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
 #: ../po/settings.js:260
 msgid "system"
-msgstr "מערכת"
+msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
 #: ../po/settings.js:264
 msgid "update"
-msgstr "עדכון"
+msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
 #: ../po/settings.js:270
@@ -2915,7 +2895,7 @@ msgstr ""
 
 #: ../push-helper/software_updates_helper.py:159
 msgid "There's an updated system image."
-msgstr "קיימת תמונת מערכת עדכנית יותר."
+msgstr ""
 
 #: ../push-helper/software_updates_helper.py:160
 msgid "Tap to open the system updater."

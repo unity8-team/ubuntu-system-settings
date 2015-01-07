@@ -28,25 +28,7 @@ NetworkAbout::NetworkAbout(QObject *parent)
     m_systemBusConnection(QDBusConnection::systemBus())
 {
 
-    setupNetworkMacAddresses();
     setupBluetoothMacAddress();
-}
-
-void NetworkAbout::setupNetworkMacAddresses()
-{
-    QList<QNetworkInterface> ifaces = QNetworkInterface::allInterfaces();
-    int count = ifaces.count();
-
-    QString str = QString();
-    for(int i=0;i<count;i++)
-    {
-        QNetworkInterface iface = ifaces.at(i);
-        str = iface.hardwareAddress();
-        // add interfaces that are not loopback
-        if (!iface.flags().testFlag(QNetworkInterface::IsLoopBack)) {
-            m_networkMacAddresses << str;
-        }
-    }
 }
 
 void NetworkAbout::setupBluetoothMacAddress()
@@ -82,11 +64,6 @@ void NetworkAbout::setupBluetoothMacAddress()
     }
 
     m_bluetoothMacAddress = props.value()["Address"].toString();
-}
-
-QStringList NetworkAbout::networkMacAddresses()
-{
-    return m_networkMacAddresses;
 }
 
 QString NetworkAbout::bluetoothMacAddress()
