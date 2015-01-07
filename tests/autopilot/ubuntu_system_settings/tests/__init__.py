@@ -715,7 +715,6 @@ class SecurityBaseTestCase(UbuntuSystemSettingsOfonoTestCase):
     def setUp(self):
         super(SecurityBaseTestCase, self).setUp('security-privacy')
         """ Go to Security & Privacy page """
-
         self.security_page = self.system_settings.main_view.select_single(
             objectName='securityPrivacyPage'
         )
