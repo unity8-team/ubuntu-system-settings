@@ -44,6 +44,7 @@ ItemPage {
     // we make simsPresent dynamic by adding a qml property to the mix
     property var simsPresent: Sims.getPresent(simQmlObjects)
     property int simQmlObjects: 0
+    property var simsPresentCount: simsPresent.length
     property int simsLockedCount: {
         var t = 0;
         simsPresent.forEach(function (sim) {
@@ -157,17 +158,17 @@ ItemPage {
                 objectName: "simControl"
                 text: i18n.tr("SIM PIN")
                 value: {
-                    if (simsPresent.length === 1 && simsLockedCount > 0)
+                    if (simsPresentCount === 1 && simsLockedCount > 0)
                         return i18n.tr("On");
-                    else if (simsPresent.length > 1 && simsLockedCount > 0)
-                        return simsLockedCount + "/" + simsPresent.length;
-                    else if (simsPresent.length === 0)
+                    else if (simsPresentCount > 1 && simsLockedCount > 0)
+                        return simsLockedCount + "/" + simsPresentCount;
+                    else if (simsPresentCount === 0)
                         return i18n.tr("No SIMs found")
                     else
                         return i18n.tr("Off");
                 }
                 progression: enabled
-                enabled: simsPresent.length > 0
+                enabled: simsPresentCount > 0
                 onClicked: {
                     if (enabled) {
                         pageStack.push(Qt.resolvedUrl("SimPin.qml"), {
