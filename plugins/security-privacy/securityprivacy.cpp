@@ -514,7 +514,7 @@ void SecurityPrivacy::unlockModem(QString path)
 
     auto reply = iface.call("UnlockModem", path);
     if (reply.type() == 3) {
-        qWarning() << "Failed to unlock modem:" << reply.errorMessage();
+        qWarning() << "Failed to unlock modem" << path << reply.errorMessage();
     }
 }
 
