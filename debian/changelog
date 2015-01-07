@@ -1,3 +1,11 @@
+ubuntu-system-settings (0.3+15.04.20150107~rtm-0ubuntu1) 14.09; urgency=low
+
+  [ Ken VanDine ]
+  * [about] use SingleValueStacked for all information bits in the
+    version panel
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 07 Jan 2015 15:07:19 +0000
+
 ubuntu-system-settings (0.3+15.04.20150106~rtm-0ubuntu1) 14.09; urgency=low
 
   [ Ken VanDine ]
