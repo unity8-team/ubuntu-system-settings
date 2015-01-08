@@ -523,11 +523,14 @@ class SoundBaseTestCase(
     @classmethod
     def setUpClass(klass):
         klass.start_system_bus()
-        klass.start_session_bus()
         klass.dbus_con = klass.get_dbus(True)
         klass.dbus_con_session = klass.get_dbus(False)
 
     def setUp(self, panel='sound'):
+        # TODO only do this if the sound indicator is running.
+        # --elopio - 2015-01-08
+        self.stop_sound_indicator()
+        self.addCleanup(self.start_sound_indicator)
 
         user_obj = '/user/foo'
 
@@ -670,6 +673,12 @@ class SoundBaseTestCase(
         self.mock_isound.terminate()
         self.mock_isound.wait()
         super(SoundBaseTestCase, self).tearDown()
+
+    def start_sound_indicator(self):
+        subprocess.call(['initctl', 'start', 'indicator-sound'])
+
+    def stop_sound_indicator(self):
+        subprocess.call(['initctl', 'stop', 'indicator-sound'])
 
 
 class ResetBaseTestCase(UbuntuSystemSettingsTestCase,
