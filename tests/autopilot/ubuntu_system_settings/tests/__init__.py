@@ -338,9 +338,9 @@ class PhoneOfonoBaseTestCase(UbuntuSystemSettingsOfonoTestCase):
 
 
 class AboutBaseTestCase(UbuntuSystemSettingsTestCase):
-    def setUp(self, panel=None):
+    def setUp(self):
         """Go to About page."""
-        super(AboutBaseTestCase, self).setUp(panel)
+        super(AboutBaseTestCase, self).setUp()
         self.about_page = self.main_view.go_to_about_page()
 
 
