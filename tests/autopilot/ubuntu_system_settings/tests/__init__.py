@@ -423,7 +423,7 @@ class LicenseBaseTestCase(AboutBaseTestCase):
 
     def setUp(self):
         """Go to License Page."""
-        super(LicenseBaseTestCase, self).setUp('about')
+        super(LicenseBaseTestCase, self).setUp()
         self.licenses_page = self.about_page.go_to_software_licenses()
 
 
