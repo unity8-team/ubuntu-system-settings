@@ -1,3 +1,26 @@
+ubuntu-system-settings (0.3+15.04.20150107-0ubuntu1) vivid; urgency=low
+
+  [ CI Train Bot ]
+  * Resync trunk
+
+  [ jonas-drange ]
+  * [about] use networkinfo to pull the wifi device MAC (LP: #1399723)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 07 Jan 2015 12:05:12 +0000
+
+ubuntu-system-settings (0.3+15.04.20141216-0ubuntu1) vivid; urgency=low
+
+  [ Ken VanDine ]
+  * [system-update] remember the latest SystemUpdate downloaded and
+    compare the version when checking again and set updateReady
+    appropriately. This fixes the handling of downloaded updates when
+    auto-download is false. (LP: #1392051)
+
+  [ Michael Zanetti ]
+  * Enable support for Bluetooth Input devices
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 16 Dec 2014 06:57:52 +0000
+
 ubuntu-system-settings (0.3+15.04.20141211-0ubuntu1) vivid; urgency=low
 
   [ jonas-drange ]
