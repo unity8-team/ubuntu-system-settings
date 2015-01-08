@@ -338,9 +338,9 @@ class PhoneOfonoBaseTestCase(UbuntuSystemSettingsOfonoTestCase):
 
 
 class AboutBaseTestCase(UbuntuSystemSettingsTestCase):
-    def setUp(self, panel=None):
+    def setUp(self):
         """Go to About page."""
-        super(AboutBaseTestCase, self).setUp(panel)
+        super(AboutBaseTestCase, self).setUp()
         self.about_page = self.main_view.go_to_about_page()
 
 
@@ -423,7 +423,7 @@ class LicenseBaseTestCase(AboutBaseTestCase):
 
     def setUp(self):
         """Go to License Page."""
-        super(LicenseBaseTestCase, self).setUp('about')
+        super(LicenseBaseTestCase, self).setUp()
         self.licenses_page = self.about_page.go_to_software_licenses()
 
 
@@ -523,11 +523,14 @@ class SoundBaseTestCase(
     @classmethod
     def setUpClass(klass):
         klass.start_system_bus()
-        klass.start_session_bus()
         klass.dbus_con = klass.get_dbus(True)
         klass.dbus_con_session = klass.get_dbus(False)
 
     def setUp(self, panel='sound'):
+        # TODO only do this if the sound indicator is running.
+        # --elopio - 2015-01-08
+        self.stop_sound_indicator()
+        self.addCleanup(self.start_sound_indicator)
 
         user_obj = '/user/foo'
 
@@ -670,6 +673,12 @@ class SoundBaseTestCase(
         self.mock_isound.terminate()
         self.mock_isound.wait()
         super(SoundBaseTestCase, self).tearDown()
+
+    def start_sound_indicator(self):
+        subprocess.call(['initctl', 'start', 'indicator-sound'])
+
+    def stop_sound_indicator(self):
+        subprocess.call(['initctl', 'stop', 'indicator-sound'])
 
 
 class ResetBaseTestCase(UbuntuSystemSettingsTestCase,

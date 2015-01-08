@@ -417,7 +417,7 @@ class AboutPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
     @classmethod
     def validate_dbus_object(cls, path, state):
         name = introspection.get_classname_from_path(path)
-        if name == b'ItemPage':
+        if name == b'PageComponent':
             if state['objectName'][1] == 'aboutPage':
                 return True
         return False
@@ -460,6 +460,7 @@ class AboutPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
     def go_to_check_for_updates(self):
         check_for_updates_button = self.select_single(
             objectName='updateButton')
+        check_for_updates_button.swipe_into_view()
         self.pointing_device.click_object(check_for_updates_button)
         system_updates_page = self.get_root_instance().wait_select_single(
             objectName='systemUpdatesPage')
