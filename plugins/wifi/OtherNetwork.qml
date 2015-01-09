@@ -248,7 +248,7 @@ Component {
                     // If this dialog created the connection,
                     // disconnect the device
                     if (otherNetworkDialog.state === "CONNECTING") {
-                        DbusHelper.disconnectDevice();
+                        DbusHelper.forgetActiveDevice();
                     }
                 }
             }
@@ -311,7 +311,7 @@ Component {
                     /* Disconnect the device if it tries to reconnect after a
                     connection failure */
                     if (newState === 40) { // 40 = NM_DEVICE_STATE_PREPARE
-                        DbusHelper.disconnectDevice();
+                        DbusHelper.forgetActiveDevice();
                     }
                 }
 
