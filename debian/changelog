@@ -1,3 +1,10 @@
+ubuntu-system-settings (0.3+15.04.20150109~rtm-0ubuntu1) 14.09; urgency=low
+
+  [ jonas-drange ]
+  * [about] use networkinfo to pull the wifi device MAC (LP: #1399723)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 09 Jan 2015 14:45:20 +0000
+
 ubuntu-system-settings (0.3+15.04.20150107~rtm-0ubuntu1) 14.09; urgency=low
 
   [ Ken VanDine ]
