@@ -61,6 +61,10 @@ ItemPage {
         id: network
     }
 
+    NetworkInfo {
+        id: wlinfo
+    }
+
     Flickable {
         id: scrollWidget
         anchors.fill: parent
@@ -122,9 +126,10 @@ ItemPage {
             }
 
             ListItem.SingleValue {
+                property string address: wlinfo.macAddress(NetworkInfo.WlanMode, 0)
                 text: i18n.tr("Wi-Fi address")
-                value: network.networkMacAddresses[0]
-                visible: network.networkMacAddresses.length > 0
+                value: address ? address.toUpperCase() : ""
+                visible: address
                 showDivider: bthwaddr.visible
             }
 
