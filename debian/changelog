@@ -1,3 +1,15 @@
+ubuntu-system-settings (0.3+15.04.20150110-0ubuntu1) vivid; urgency=low
+
+  [ Ken VanDine ]
+  * Tiny step towards improved use of the preferred page-object model,
+    hopefully making some tests more reliable.
+
+  [ Allan LeSage ]
+  * Add just a few helpers for a Bluetooth sanity test.
+  * Minimal helpers for a SIM PIN test.
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Sat, 10 Jan 2015 06:51:06 +0000
+
 ubuntu-system-settings (0.3+15.04.20150109-0ubuntu1) vivid; urgency=low
 
   [ Jussi Pakkanen ]
