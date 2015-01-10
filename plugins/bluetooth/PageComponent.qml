@@ -30,6 +30,7 @@ import Ubuntu.SystemSettings.Bluetooth 1.0
 ItemPage {
     id: root
     title: i18n.tr("Bluetooth")
+    objectName: "bluetoothPage"
 
     UbuntuBluetoothPanel { id: backend }
 
@@ -217,6 +218,7 @@ ItemPage {
                     right: parent.right
                 }
                 visible: bluetoothActionGroup.enabled && (connectedRepeater.count > 0)
+                objectName: "connectedList"
 
                 Repeater {
                     id: connectedRepeater
@@ -257,6 +259,7 @@ ItemPage {
                     right: parent.right
                 }
                 visible: bluetoothActionGroup.enabled && (disconnectedRepeater.count > 0)
+                objectName: "disconnectedList"
 
                 Repeater {
                     id: disconnectedRepeater
