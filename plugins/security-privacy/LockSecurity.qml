@@ -70,6 +70,11 @@ ItemPage {
         dlg.newMethod = newMethod
     }
 
+    RegExpValidator {
+        id: passcodeValidator
+        regExp: /\d{4}/
+    }
+
     Component {
         id: dialogComponent
 
@@ -158,7 +163,7 @@ ItemPage {
             Binding {
                 target: currentInput
                 property: "validator"
-                value:  IntValidator { bottom: 1000; top: 9999; }
+                value:  passcodeValidator
                 when: changeSecurityDialog.oldMethod ===
                     UbuntuSecurityPrivacyPanel.Passcode
             }
@@ -219,7 +224,7 @@ ItemPage {
             Binding {
                 target: newInput
                 property: "validator"
-                value: IntValidator { bottom: 1000; top: 9999; }
+                value: passcodeValidator
                 when: changeSecurityDialog.newMethod ===
                     UbuntuSecurityPrivacyPanel.Passcode
             }
@@ -273,7 +278,7 @@ ItemPage {
             Binding {
                 target: confirmInput
                 property: "validator"
-                value:  IntValidator { bottom: 0; top: 9999; }
+                value:  passcodeValidator
                 when: changeSecurityDialog.newMethod ===
                     UbuntuSecurityPrivacyPanel.Passcode
             }
