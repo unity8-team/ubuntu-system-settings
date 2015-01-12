@@ -70,6 +70,11 @@ ItemPage {
         dlg.newMethod = newMethod
     }
 
+    RegExpValidator {
+        id: passcodeValidator
+        regExp: /\d{4}/
+    }
+
     Component {
         id: dialogComponent
 
@@ -142,13 +147,6 @@ ItemPage {
                     else
                         return Qt.ImhNone
                 }
-                inputMask: {
-                    if (changeSecurityDialog.oldMethod ===
-                            UbuntuSecurityPrivacyPanel.Passcode)
-                        return "9999"
-                    else
-                        return ""
-                }
                 visible: changeSecurityDialog.oldMethod ===
                             UbuntuSecurityPrivacyPanel.Passphrase ||
                          changeSecurityDialog.oldMethod ===
@@ -158,6 +156,24 @@ ItemPage {
                             UbuntuSecurityPrivacyPanel.Swipe)
                         confirmButton.enabled = text.length > 0
                 }
+            }
+
+            /* Using bindings since it is, according to documentation,
+            impossible to unset both validator and maximumLength properties */
+            Binding {
+                target: currentInput
+                property: "validator"
+                value:  passcodeValidator
+                when: changeSecurityDialog.oldMethod ===
+                    UbuntuSecurityPrivacyPanel.Passcode
+            }
+
+            Binding {
+                target: currentInput
+                property: "maximumLength"
+                value:  4
+                when: changeSecurityDialog.oldMethod ===
+                    UbuntuSecurityPrivacyPanel.Passcode
             }
 
             Label {
@@ -197,20 +213,28 @@ ItemPage {
                     else
                         return Qt.ImhNone
                 }
-                inputMask: {
-                    if (changeSecurityDialog.newMethod ===
-                            UbuntuSecurityPrivacyPanel.Passcode)
-                        return "9999"
-                    else
-                        return ""
-                }
                 visible: changeSecurityDialog.newMethod ===
                             UbuntuSecurityPrivacyPanel.Passcode ||
                          changeSecurityDialog.newMethod ===
                             UbuntuSecurityPrivacyPanel.Passphrase
-                // Doesn't get updated if you set this in enabled of confirmButton
-                onTextChanged: confirmButton.enabled =
-                               (acceptableInput && (!visible || text.length > 0))
+            }
+
+            /* Using bindings since it is, according to documentation,
+            impossible to unset both validator and maximumLength properties */
+            Binding {
+                target: newInput
+                property: "validator"
+                value: passcodeValidator
+                when: changeSecurityDialog.newMethod ===
+                    UbuntuSecurityPrivacyPanel.Passcode
+            }
+
+            Binding {
+                target: newInput
+                property: "maximumLength"
+                value:  4
+                when: changeSecurityDialog.newMethod ===
+                    UbuntuSecurityPrivacyPanel.Passcode
             }
 
             Label {
@@ -243,17 +267,28 @@ ItemPage {
                     else
                         return Qt.ImhNone
                 }
-                inputMask: {
-                    if (changeSecurityDialog.newMethod ===
-                            UbuntuSecurityPrivacyPanel.Passcode)
-                        return "9999"
-                    else
-                        return ""
-                }
                 visible: changeSecurityDialog.newMethod ===
                             UbuntuSecurityPrivacyPanel.Passcode ||
                          changeSecurityDialog.newMethod ===
                             UbuntuSecurityPrivacyPanel.Passphrase
+            }
+
+            /* Using bindings since it is, according to documentation,
+            impossible to unset both validator and maximumLength properties */
+            Binding {
+                target: confirmInput
+                property: "validator"
+                value:  passcodeValidator
+                when: changeSecurityDialog.newMethod ===
+                    UbuntuSecurityPrivacyPanel.Passcode
+            }
+
+            Binding {
+                target: confirmInput
+                property: "maximumLength"
+                value:  4
+                when: changeSecurityDialog.newMethod ===
+                    UbuntuSecurityPrivacyPanel.Passcode
             }
 
             Label {
@@ -303,7 +338,7 @@ ItemPage {
                         else
                             return i18n.tr("Set")
                     }
-                    enabled: false
+                    enabled: newInput.acceptableInput
                     onClicked: {
                         changeSecurityDialog.enabled = false
 

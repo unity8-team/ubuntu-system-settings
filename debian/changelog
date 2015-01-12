@@ -1,3 +1,11 @@
+ubuntu-system-settings (0.3+15.04.20150112-0ubuntu1) vivid; urgency=low
+
+  [ jonas-drange ]
+  * [security] replace inputmask for validator and maximum length (LP:
+    #1357548)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Mon, 12 Jan 2015 16:43:30 +0000
+
 ubuntu-system-settings (0.3+15.04.20150110-0ubuntu1) vivid; urgency=low
 
   [ Ken VanDine ]
