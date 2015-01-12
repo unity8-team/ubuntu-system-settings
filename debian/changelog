@@ -1,3 +1,11 @@
+ubuntu-system-settings (0.3+15.04.20150112~rtm-0ubuntu1) 14.09; urgency=low
+
+  [ Ken VanDine ]
+  * [security] replace inputmask for validator and maximum length (LP:
+    #1357548)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Mon, 12 Jan 2015 21:51:55 +0000
+
 ubuntu-system-settings (0.3+15.04.20150109~rtm-0ubuntu1) 14.09; urgency=low
 
   [ jonas-drange ]
