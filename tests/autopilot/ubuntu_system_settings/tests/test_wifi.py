@@ -27,7 +27,7 @@ class WifiTestCase(WifiBaseTestCase):
     def test_connect_to_hidden_network(self):
         dialog = self.wifi_page.connect_to_hidden_network(
             'yeah',
-            scroll_to_and_click=self.system_settings.main_view
+            scroll_to_and_click=self.main_view
             .scroll_to_and_click)
 
         # allow backend to set up listeners
@@ -50,7 +50,7 @@ class WifiTestCase(WifiBaseTestCase):
 
         dialog = self.wifi_page.connect_to_hidden_network(
             'yeah',
-            scroll_to_and_click=self.system_settings.main_view
+            scroll_to_and_click=self.main_view
             .scroll_to_and_click)
 
         # allow backend to set up listeners
@@ -74,7 +74,7 @@ class WifiTestCase(WifiBaseTestCase):
     def test_connect_to_hidden_network_using_secrets(self):
         dialog = self.wifi_page.connect_to_hidden_network(
             'yeah', security='wpa', password='abcdefgh',
-            scroll_to_and_click=self.system_settings.main_view
+            scroll_to_and_click=self.main_view
             .scroll_to_and_click)
 
         # allow backend to set up listeners
@@ -97,7 +97,7 @@ class WifiTestCase(WifiBaseTestCase):
     def test_connect_to_hidden_network_using_incorrect_secrets(self):
         dialog = self.wifi_page.connect_to_hidden_network(
             'yeah', security='wpa', password='abcdefgh',
-            scroll_to_and_click=self.system_settings.main_view
+            scroll_to_and_click=self.main_view
             .scroll_to_and_click)
         # allow backend to set up listeners
         sleep(0.3)
@@ -120,7 +120,7 @@ class WifiTestCase(WifiBaseTestCase):
 
         dialog = self.wifi_page.connect_to_hidden_network(
             'foo',
-            scroll_to_and_click=self.system_settings.main_view
+            scroll_to_and_click=self.main_view
             .scroll_to_and_click)
 
         # allow backend to set up listeners
@@ -138,7 +138,7 @@ class WifiTestCase(WifiBaseTestCase):
     The NetworkManager dbusmock template does not currently support deletion
     of connections."""
     def test_remove_previous_network(self):
-        click_method = self.system_settings.main_view.scroll_to_and_click
+        click_method = self.main_view.scroll_to_and_click
         previous_networks = [{
             'ssid': 'Series of Tubes',
             'connection_name': 'conn_0'
@@ -155,7 +155,7 @@ class WifiTestCase(WifiBaseTestCase):
         self.wifi_page.remove_previous_network(
             previous_networks[0]['ssid'], scroll_to_and_click=click_method)
 
-        self.system_settings.main_view.go_back()
+        self.main_view.go_back()
 
         self.wifi_page.remove_previous_network(
             previous_networks[2]['ssid'], scroll_to_and_click=click_method)
