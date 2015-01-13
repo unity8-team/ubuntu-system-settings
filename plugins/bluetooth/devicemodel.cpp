@@ -194,6 +194,14 @@ void DeviceModel::setAdapterFromPath(const QString &path)
         connect(&m_discoverableTimer, SIGNAL(timeout()), this, SLOT(slotEnableDiscoverable()));
         m_discoverableTimer.start(1000);
 
+        // With the agent registered on the bus, make it known by the adapter
+        QString agent_path(DBUS_AGENT_PATH);
+        agent_path.append("/adapteragent");
+        QDBusReply<void > reply = m_bluezAdapter->call("RegisterAgent",
+                                                       qVariantFromValue(QDBusObjectPath(agent_path)),
+                                                       QString(DBUS_AGENT_CAPABILITY));
+        if (!reply.isValid())
+                qWarning() << "Error registering agent for the default adapter:" << reply.error();
     }
 }
 
@@ -465,9 +473,14 @@ void DeviceModel::slotCreateFinished(QDBusPendingCallWatcher *call)
 void DeviceModel::createDevice (const QString &address)
 {
     if (m_bluezAdapter) {
+        QString agent_path(DBUS_AGENT_PATH);
+        agent_path.append("/");
+        agent_path.append(address);
+        agent_path.replace(":", "_");
+
         QDBusPendingCall pcall = m_bluezAdapter->asyncCall("CreatePairedDevice",
                                                            address,
-                                                           qVariantFromValue(QDBusObjectPath(DBUS_AGENT_PATH)),
+                                                           qVariantFromValue(QDBusObjectPath(agent_path)),
                                                            QString(DBUS_AGENT_CAPABILITY));
 
         QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(pcall, this);
