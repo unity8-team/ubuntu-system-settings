@@ -112,7 +112,7 @@ void DownloadTracker::bindDownload(Download* download)
     if (!connected) {
         qWarning() << "Could not connect to Download::paused";
     }
-    connected = connect(m_download, &Download:resumed,
+    connected = connect(m_download, &Download::resumed,
 		    this, &DownloadTracker::resumed);
     if (!connected) {
         qWarning() << "Could not connect to Download::resumed";
@@ -122,16 +122,18 @@ void DownloadTracker::bindDownload(Download* download)
     if (!connected) {
         qWarning() << "Could not connect to Download::started";
     }
-    connected = connect(m_download, &Download::error,
+    connected = connect(m_download, static_cast<void(Download::*)(Error*)>(&Download::error),
 		    this, &DownloadTracker::registerError);
     if (!connected) {
         qWarning() << "Could not connect to Download::error";
     }
-    connected = connect(m_download, &Download::progress,
+
+    connected = connect(m_download, static_cast<void(Download::*)(qulonglong, qulonglong)>(&Download::progress),
 		    this, &DownloadTracker::setProgress);
     if (!connected) {
         qWarning() << "Could not connect to Download::progress";
     }
+
     connected = connect(m_download, &Download::processing,
 		    this, &DownloadTracker::processing);
     if (!connected) {
