@@ -195,10 +195,8 @@ void DeviceModel::setAdapterFromPath(const QString &path)
         m_discoverableTimer.start(1000);
 
         // With the agent registered on the bus, make it known by the adapter
-        QString agent_path(DBUS_AGENT_PATH);
-        agent_path.append("/adapteragent");
         QDBusReply<void > reply = m_bluezAdapter->call("RegisterAgent",
-                                                       qVariantFromValue(QDBusObjectPath(agent_path)),
+                                                       qVariantFromValue(QDBusObjectPath(DBUS_ADAPTER_AGENT_PATH)),
                                                        QString(DBUS_AGENT_CAPABILITY));
         if (!reply.isValid())
                 qWarning() << "Error registering agent for the default adapter:" << reply.error();
