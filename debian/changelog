@@ -1,3 +1,13 @@
+ubuntu-system-settings (0.3+15.04.20150114-0ubuntu1) vivid; urgency=low
+
+  [ jonas-drange ]
+  * Change the way we use OfonoManager.modems, since it is no longer
+    populated at creation time (in u-s-s)—use events instead. libqofono
+    bindings also require that the modem emits InterfacesChanged with
+    their name it it, to work at all. All modem mocks has been updated.
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 14 Jan 2015 15:17:36 +0000
+
 ubuntu-system-settings (0.3+15.04.20150112-0ubuntu1) vivid; urgency=low
 
   [ jonas-drange ]
