@@ -1,3 +1,11 @@
+ubuntu-system-settings (0.3+15.04.20150114.1~rtm-0ubuntu1) 14.09; urgency=low
+
+  [ Ken VanDine ]
+  * Added missing depends for qml-module-ubuntu-connectivity (LP:
+    #1410968)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 14 Jan 2015 21:01:31 +0000
+
 ubuntu-system-settings (0.3+15.04.20150114~rtm-0ubuntu1) 14.09; urgency=low
 
   [ Ken VanDine ]
