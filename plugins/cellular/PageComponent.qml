@@ -20,6 +20,7 @@
 
 import QtQuick 2.0
 import SystemSettings 1.0
+import Ubuntu.SystemSettings.Cellular 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 import MeeGo.QOfono 0.2
@@ -35,7 +36,22 @@ ItemPage {
     property var modemsSorted: []
     property int simsLoaded: 0
 
+    // waiting during modem reboots or for modems to come online
+    property bool waiting: true
+
     states: [
+        State {
+            name: "waiting"
+            when: waiting && (Sims.getPresentCount() === 0)
+            PropertyChanges {
+                target: waitIndicator
+                opacity: 1
+            }
+            PropertyChanges {
+                target: flick
+                opacity: 0
+            }
+        },
         State {
             name: "noSim"
             when: (simsLoaded === 0) || (Sims.getPresentCount() === 0)
@@ -69,6 +85,7 @@ ItemPage {
         onModemsChanged: {
             root.modemsSorted = modems.slice(0).sort();
             Sims.createQML();
+            root.waiting = false;
         }
     }
 
@@ -85,18 +102,67 @@ ItemPage {
         }
     }
 
+    Connectivity {
+        id: connectivity
+    }
+
+    Item {
+        id: waitIndicator
+        anchors.fill: parent
+        opacity: 0
+
+        ActivityIndicator {
+            anchors.centerIn: parent
+            running: true
+        }
+
+        Behavior on opacity {
+            PropertyAnimation {
+               duration: UbuntuAnimation.SleepyDuration
+            }
+        }
+    }
+
     Flickable {
         id: flick
         anchors.fill: parent
         contentWidth: parent.width
         contentHeight: contentItem.childrenRect.height
         boundsBehavior: (contentHeight > root.height) ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
+
         Column {
             anchors { left: parent.left; right: parent.right }
             Loader {
                 id: loader
                 anchors { left: parent.left; right: parent.right }
             }
+        }
+
+        Behavior on opacity {
+            PropertyAnimation {
+                duration: UbuntuAnimation.SleepyDuration
+            }
+        }
+
+        Connections {
+            target: loader.item
+
+            onUmtsModemChanged: {
+                var path = sim.path;
+                root.waiting = true;
+                console.warn('onUmtsModemChanged');
+
+                /* When the SIM comes back online, set waiting to false:
+                the modem reboot is done.*/
+                sim.simMng.presenceChanged.connect(function (ispresent) {
+                    if (ispresent) {
+                        root.waiting = false;
+                        console.warn('onUmtsModemChanged: presence on', path, 'changed to true');
+                        connectivity.unlockAllModems();
+                    }
+                });
+            }
+            ignoreUnknownSignals: true
         }
     }
 }

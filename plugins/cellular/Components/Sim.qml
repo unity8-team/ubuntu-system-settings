@@ -27,6 +27,7 @@ Item {
     property alias radioSettings: radioSettings
     property alias simMng: simMng
     property alias connMan: connMan
+    property alias mtkSettings: mtkSettings
 
     property alias present: simMng.present
     property string path
@@ -40,10 +41,10 @@ Item {
         id: modem
         modemPath: path
         onInterfacesChanged: {
-            if (interfaces.indexOf('org.ofono.ConnectionManager') >= 0) {
-                connMan._valid = true;
+            if (interfaces.indexOf('org.ofono.MtkSettings') >= 0) {
+                mtkSettings._valid = true;
             } else {
-                connMan._valid = false;
+                mtkSettings._valid = false;
             }
         }
     }
@@ -65,6 +66,11 @@ Item {
 
     OfonoConnMan {
         id: connMan
+        modemPath: path
+    }
+
+    OfonoMtkSettings {
+        id: mtkSettings
         property bool _valid: true
         modemPath: path
         on_ValidChanged: {

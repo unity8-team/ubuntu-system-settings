@@ -40,10 +40,12 @@ Column {
     // make settings available to all children of root
     property var settings: phoneSettings
 
+    // sim: a Sim.qml component representing the sim
+    signal umtsModemChanged (var sim)
+
     DataMultiSim {
         anchors { left: parent.left; right: parent.right }
     }
-
 
     ListItem.SingleValue {
         text : i18n.tr("Hotspot disabled because Wi-Fi is off.")
@@ -96,13 +98,7 @@ Column {
 
     ListItem.Divider {}
 
-    function techToString (tech) {
-        return {
-            'gsm': i18n.tr("2G only (saves battery)"),
-            'umts': i18n.tr("2G/3G (faster)"),
-            'lte': i18n.tr("2G/3G/4G (faster)")
-        }[tech]
-    }
+    SettingsItemTitle { text: i18n.tr("Connection type:") }
 
     Repeater {
         model: sims
@@ -110,26 +106,96 @@ Column {
         ListItem.ItemSelector {
             id: radio
             property var sim: modelData
-            property var rSettings: sim.radioSettings
-            property string techPref: rSettings.technologyPreference
-            property var modemTechs: rSettings.modemTechnologies
+
+            function techToString (tech) {
+                var strings = {
+                    'gsm': i18n.tr("2G only (saves battery)"),
+                    'umts': i18n.tr("2G/3G (faster)"),
+                    'lte': i18n.tr("2G/3G/4G (faster)")
+                };
+                strings['umts_enable'] = strings['umts'] + '*';
+                return strings[tech];
+            }
+
+            // adds umts_enable to an copy of model
+            function addUmtsEnableToModel (model) {
+                var newModel = model.slice(0);
+                newModel.push('umts_enable');
+                return newModel;
+            }
+
             expanded: true
-            text: i18n.tr("Connection type:")
-            model: modemTechs || []
+            text: sim.title
+            model: sim.radioSettings.modemTechnologies
             delegate: OptionSelectorDelegate {
                 objectName: sim.path + "_radio_" + modelData
                 text: techToString(modelData)
             }
-            enabled: techPref !== ""
-            visible: sim.connMan.powered
-            selectedIndex: techPref !== "" ? model.indexOf(techPref) : -1
-            onDelegateClicked: rSettings.technologyPreference = model[index];
+            enabled: sim.radioSettings.technologyPreference !== ""
+            selectedIndex: {
+                // console.warn(
+                //     'selectedIndex', sim.path,
+                //     'modemTechnologies:', sim.radioSettings.modemTechnologies,
+                //     'has3G', sim.mtkSettings.has3G,
+                //     'technologyPreference', sim.radioSettings.technologyPreference);
+
+                return sim.radioSettings.technologyPreference !== "" ?
+                    model.indexOf(sim.radioSettings.technologyPreference) : -1
+            }
+
+            onDelegateClicked: {
+                if (model[index] === 'umts_enable') {
+                    sim.radioSettings.technologyPreference = 'umts';
+                    umtsModemChanged(sim);
+                    sim.mtkSettings.has3G = true;
+                } else {
+                    sim.radioSettings.technologyPreference = model[index];
+                }
+            }
+
             Connections {
-                target: rSettings
+                target: sim.radioSettings
                 onTechnologyPreferenceChanged: {
-                    radio.selectedIndex = modemTechs.indexOf(preference)
+                    // console.warn(
+                    //     'technologyPreferenceChanged', sim.path,
+                    //     'modemTechnologies:', sim.radioSettings.modemTechnologies,
+                    //     'has3G', sim.mtkSettings.has3G,
+                    //     'technologyPreference', preference);
+
+                    radio.selectedIndex = sim.radioSettings.modemTechnologies.indexOf(preference)
+                }
+                onModemTechnologiesChanged: {
+                    // console.warn(
+                    //     'modemTechnologiesChanged', sim.path,
+                    //     'modemTechnologies:', technologies,
+                    //     'has3G', sim.mtkSettings.has3G,
+                    //     'technologyPreference', sim.radioSettings.technologyPreference);
+
+                    if ((technologies.indexOf('umts') === -1)
+                         && (sim.mtkSettings.has3G === false)) {
+                        radio.model = addUmtsEnableToModel(technologies);
+                    } else {
+                        radio.model = technologies;
+                    }
+                    radio.selectedIndex = sim.radioSettings.technologyPreference !== "" ?
+                        model.indexOf(sim.radioSettings.technologyPreference) : -1
                 }
                 ignoreUnknownSignals: true
+            }
+
+            Component.onCompleted: {
+                // console.warn(
+                //     'completed', sim.path,
+                //     'modemTechnologies:', sim.radioSettings.modemTechnologies,
+                //     'has3G', sim.mtkSettings.has3G,
+                //     'technologyPreference', sim.radioSettings.technologyPreference);
+
+                if ((sim.radioSettings.modemTechnologies.indexOf('umts') === -1)
+                     && (sim.mtkSettings.has3G === false)) {
+                    radio.model = addUmtsEnableToModel(sim.radioSettings.modemTechnologies);
+                } else {
+                    radio.model = sim.radioSettings.modemTechnologies;
+                }
             }
         }
     }

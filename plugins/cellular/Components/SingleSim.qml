@@ -28,6 +28,9 @@ Column {
 
     property var sim
 
+    // sim: a Sim.qml component representing the sim
+    signal umtsModemChanged (var sim)
+
     ListItem.Standard {
         id: selector
         text: i18n.tr("Cellular data:")
