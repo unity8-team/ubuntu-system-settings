@@ -32,7 +32,7 @@ ItemPage {
     title: i18n.tr("Cellular")
     objectName: "cellularPage"
 
-    property var modemsSorted: manager.modems.slice(0).sort()
+    property var modemsSorted: []
     property int simsLoaded: 0
 
     states: [
@@ -66,19 +66,9 @@ ItemPage {
 
     OfonoManager {
         id: manager
-        Component.onCompleted: {
-            var component = Qt.createComponent("Components/Sim.qml");
-            modemsSorted.forEach(function (path) {
-                var sim = component.createObject(root, {
-                    path: path
-                });
-                if (sim === null) {
-                    console.warn('Failed to create Sim qml:',
-                        component.errorString());
-                } else {
-                    Sims.add(sim);
-                }
-            });
+        onModemsChanged: {
+            root.modemsSorted = modems.slice(0).sort();
+            Sims.createQML();
         }
     }
 

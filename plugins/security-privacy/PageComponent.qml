@@ -39,9 +39,11 @@ ItemPage {
 
     property alias usePowerd: batteryBackend.powerdRunning
     property bool lockOnSuspend
-    property var modemsSorted: manager.modems.slice(0).sort()
-    property var sims
-    property int simsPresent: 0
+    property var modemsSorted: []
+    property var sims: []
+    /* glue to something that will emit change events
+    TODO: fix this so that the present count emits events of its own */
+    property int simsPresent: simsLoaded ? Sims.getPresentCount() : 0
     property int simsLoaded: 0
     property int simsLocked: {
         var t = 0;
@@ -66,23 +68,10 @@ ItemPage {
 
     OfonoManager {
         id: manager
-        Component.onCompleted: {
-            // create ofono bindings for all modem paths
-            var component = Qt.createComponent("Ofono.qml");
-            modemsSorted.forEach(function (path, index) {
-                var sim = component.createObject(root, {
-                    path: path,
-                    name: phoneSettings.simNames[path] ?
-                            phoneSettings.simNames[path] :
-                            "SIM " + (index + 1)
-                });
-                if (sim === null)
-                    console.warn('failed to create sim object');
-                else
-                    Sims.add(sim);
-            });
+        onModemsChanged: {
+            root.modemsSorted = modems.slice(0).sort();
+            Sims.createQML();
             root.sims = Sims.getAll();
-            root.simsPresent = Sims.getPresentCount();
         }
     }
 
