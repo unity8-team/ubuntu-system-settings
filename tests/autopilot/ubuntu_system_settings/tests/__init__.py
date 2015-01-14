@@ -60,8 +60,9 @@ class UbuntuSystemSettingsTestCase(
     def setUp(self, panel=None):
         super(UbuntuSystemSettingsTestCase, self).setUp()
         self.system_settings = SystemSettings(self, panel=panel)
+        self.main_view = self.system_settings.main_view
         self.assertThat(
-            self.system_settings.main_view.visible,
+            self.main_view.visible,
             Eventually(Equals(True)))
 
     def set_orientation(self, gsettings, value):
@@ -109,10 +110,6 @@ class UbuntuSystemSettingsBatteryTestCase(UbuntuSystemSettingsUpowerTestCase):
     def setUp(self):
         super(UbuntuSystemSettingsBatteryTestCase, self).setUp()
         self.add_mock_battery()
-        self.system_settings = SystemSettings(self)
-        self.assertThat(
-            self.system_settings.main_view.visible,
-            Eventually(Equals(True)))
 
 
 class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
@@ -124,14 +121,14 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
     @property
     def choose_carrier_page(self):
         """Return carrier selection page"""
-        return self.system_settings.main_view.select_single(
+        return self.main_view.select_single(
             objectName='chooseCarrierPage'
         )
 
     @property
     def choose_carriers_page(self):
         """Return carriers selection page"""
-        return self.system_settings.main_view.select_single(
+        return self.main_view.select_single(
             objectName='chooseCarriersPage'
         )
 
@@ -289,6 +286,12 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
             template, stdout=subprocess.PIPE)
         cls.dbusmock = dbus.Interface(cls.obj_ofono, dbusmock.MOCK_IFACE)
 
+    @classmethod
+    def tearDownClass(cls):
+        super(UbuntuSystemSettingsOfonoTestCase, cls).tearDownClass()
+        cls.p_mock.terminate()
+        cls.p_mock.wait()
+
     def setUp(self, panel=None):
         self.obj_ofono.Reset()
 
@@ -296,7 +299,7 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
         if self.use_sims == 2:
             self.add_sim2()
 
-        super(UbuntuSystemSettingsOfonoTestCase, self).setUp(panel)
+        super(UbuntuSystemSettingsOfonoTestCase, self).setUp()
 
     def set_default_for_calls(self, gsettings, default):
         gsettings.set_value('default-sim-for-calls', default)
@@ -309,12 +312,12 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
         sleep(1)
 
     def get_default_sim_for_calls_selector(self, text):
-        return self.system_settings.main_view.cellular_page.select_single(
+        return self.cellular_page.select_single(
             objectName="defaultForCalls" + text
         )
 
     def get_default_sim_for_messages_selector(self, text):
-        return self.system_settings.main_view.cellular_page.select_single(
+        return self.cellular_page.select_single(
             objectName="defaultForMessages" + text
         )
 
@@ -324,35 +327,28 @@ class CellularBaseTestCase(UbuntuSystemSettingsOfonoTestCase):
     def setUp(self):
         """ Go to Cellular page """
         super(CellularBaseTestCase, self).setUp()
-        self.cellular_page = self.system_settings.\
-            main_view.go_to_cellular_page()
+        self.cellular_page = self.main_view.go_to_cellular_page()
 
 
 class PhoneOfonoBaseTestCase(UbuntuSystemSettingsOfonoTestCase):
     def setUp(self):
         """ Go to Phone page """
-        super(PhoneOfonoBaseTestCase, self).setUp('phone')
-        self.phone_page = self.system_settings.main_view.select_single(
-            objectName='phonePage'
-        )
+        super(PhoneOfonoBaseTestCase, self).setUp()
+        self.phone_page = self.main_view.go_to_phone_page()
 
 
 class AboutBaseTestCase(UbuntuSystemSettingsTestCase):
     def setUp(self):
         """Go to About page."""
-        super(AboutBaseTestCase, self).setUp('about')
-        self.about_page = self.system_settings.main_view.select_single(
-            objectName='aboutPage'
-        )
+        super(AboutBaseTestCase, self).setUp()
+        self.about_page = self.main_view.go_to_about_page()
 
 
 class AboutOfonoBaseTestCase(UbuntuSystemSettingsOfonoTestCase):
     def setUp(self):
         """Go to About page."""
-        super(AboutOfonoBaseTestCase, self).setUp('about')
-        self.about_page = self.system_settings.main_view.select_single(
-            objectName='aboutPage'
-        )
+        super(AboutOfonoBaseTestCase, self).setUp()
+        self.about_page = self.main_view.go_to_about_page()
 
 
 class AboutSystemImageBaseTestCase(AboutBaseTestCase,
@@ -396,12 +392,15 @@ class StorageBaseTestCase(AboutBaseTestCase):
     def setUp(self):
         """Go to Storage Page."""
         super(StorageBaseTestCase, self).setUp()
-        self.system_settings.main_view.click_item('storageItem')
+        self.main_view.click_item('storageItem')
+        self.storage_page = self.main_view.select_single(
+            'Storage', objectName='storagePage'
+        )
         self.assertThat(self.storage_page.active, Eventually(Equals(True)))
 
     def assert_space_item(self, object_name, text):
         """ Checks whether an space item exists and returns a value """
-        item = self.system_settings.main_view.storage_page.select_single(
+        item = self.main_view.storage_page.select_single(
             objectName=object_name
         )
         self.assertThat(item, NotEquals(None))
@@ -416,13 +415,6 @@ class StorageBaseTestCase(AboutBaseTestCase):
     def get_storage_space_used_by_category(self, objectName):
         return self.main_view.wait_select_single(
             'StorageItem', objectName=objectName).value
-
-    @property
-    def storage_page(self):
-        """ Return 'Storage' page """
-        return self.system_settings.main_view.select_single(
-            'Storage', objectName='storagePage'
-        )
 
 
 class LicenseBaseTestCase(AboutBaseTestCase):
@@ -442,8 +434,7 @@ class SystemUpdatesBaseTestCase(UbuntuSystemSettingsTestCase):
     def setUp(self):
         """Go to SystemUpdates Page."""
         super(SystemUpdatesBaseTestCase, self).setUp()
-        self.system_settings.main_view.click_item(
-            'entryComponent-system-update')
+        self.main_view.click_item('entryComponent-system-update')
 
 
 class BackgroundBaseTestCase(
@@ -515,7 +506,7 @@ class BackgroundBaseTestCase(
             'SYSTEM_SETTINGS_UBUNTU_ART_DIR', art_dir))
 
         super(BackgroundBaseTestCase, self).setUp('background')
-        self.assertThat(self.system_settings.main_view.background_page.active,
+        self.assertThat(self.main_view.background_page.active,
                         Eventually(Equals(True)))
 
     def tearDown(self):
@@ -532,11 +523,14 @@ class SoundBaseTestCase(
     @classmethod
     def setUpClass(klass):
         klass.start_system_bus()
-        klass.start_session_bus()
         klass.dbus_con = klass.get_dbus(True)
         klass.dbus_con_session = klass.get_dbus(False)
 
     def setUp(self, panel='sound'):
+        # TODO only do this if the sound indicator is running.
+        # --elopio - 2015-01-08
+        self.stop_sound_indicator()
+        self.addCleanup(self.start_sound_indicator)
 
         user_obj = '/user/foo'
 
@@ -562,13 +556,18 @@ class SoundBaseTestCase(
                                              GTK_ACTIONS_IFACE,
                                              stdout=subprocess.PIPE)
 
-        sleep(2)
+        self.wait_for_bus_object(ACCOUNTS_IFACE,
+                                 ACCOUNTS_OBJ,
+                                 system_bus=True)
 
         self.dbus_mock = dbus.Interface(self.dbus_con.get_object(
                                         ACCOUNTS_IFACE,
                                         ACCOUNTS_OBJ,
                                         ACCOUNTS_IFACE),
                                         dbusmock.MOCK_IFACE)
+
+        self.wait_for_bus_object(ISOUND_SERVICE,
+                                 ISOUND_ACTION_PATH)
 
         self.dbus_mock_isound = dbus.Interface(
             self.dbus_con_session.get_object(
@@ -626,8 +625,8 @@ class SoundBaseTestCase(
                     ACCOUNTS_SOUND_IFACE)
             ])
 
-        self.obj_test = self.dbus_con.get_object(ACCOUNTS_IFACE, user_obj,
-                                                 ACCOUNTS_IFACE)
+        self.obj_snd = self.dbus_con.get_object(ACCOUNTS_IFACE, user_obj,
+                                                ACCOUNTS_IFACE)
 
         self.dbus_mock_isound.AddMethods(
             GTK_ACTIONS_IFACE,
@@ -661,9 +660,11 @@ class SoundBaseTestCase(
 
         super(SoundBaseTestCase, self).setUp(panel)
 
-        """ Go to Sound page """
         if panel == 'sound':
-            self.assertThat(self.system_settings.main_view.sound_page.active,
+            self.sound_page = self.main_view.select_single(
+                objectName='soundPage'
+            )
+            self.assertThat(self.sound_page.active,
                             Eventually(Equals(True)))
 
     def tearDown(self):
@@ -672,6 +673,12 @@ class SoundBaseTestCase(
         self.mock_isound.terminate()
         self.mock_isound.wait()
         super(SoundBaseTestCase, self).tearDown()
+
+    def start_sound_indicator(self):
+        subprocess.call(['initctl', 'start', 'indicator-sound'])
+
+    def stop_sound_indicator(self):
+        subprocess.call(['initctl', 'stop', 'indicator-sound'])
 
 
 class ResetBaseTestCase(UbuntuSystemSettingsTestCase,
@@ -698,7 +705,7 @@ class ResetBaseTestCase(UbuntuSystemSettingsTestCase,
     def setUp(self):
         self.mock_for_factory_reset()
         super(ResetBaseTestCase, self).setUp()
-        self.reset_page = self.system_settings.main_view.go_to_reset_phone()
+        self.reset_page = self.main_view.go_to_reset_phone()
 
     def tearDown(self):
         self.mock_server.terminate()
@@ -710,28 +717,11 @@ class SecurityBaseTestCase(UbuntuSystemSettingsOfonoTestCase):
     """ Base class for security and privacy settings tests"""
 
     def setUp(self):
-        super(SecurityBaseTestCase, self).setUp('security-privacy')
-        """ Go to Security & Privacy page """
-        self.security_page = self.system_settings.main_view.select_single(
-            objectName='securityPrivacyPage'
-        )
-        self.assertThat(self.security_page.active,
-                        Eventually(Equals(True)))
+        super(SecurityBaseTestCase, self).setUp()
+        self.security_page = self.main_view.go_to_security_page()
 
     def tearDown(self):
         super(SecurityBaseTestCase, self).tearDown()
-
-
-class PhoneSoundBaseTestCase(SoundBaseTestCase):
-    def setUp(self):
-        """ Go to Phone page """
-        super(PhoneSoundBaseTestCase, self).setUp('phone')
-        self.phone_page = self.system_settings.main_view.select_single(
-            objectName='phonePage'
-        )
-
-    def tearDown(self):
-        super(PhoneSoundBaseTestCase, self).tearDown()
 
 
 class LanguageBaseTestCase(UbuntuSystemSettingsTestCase,
@@ -759,8 +749,7 @@ class LanguageBaseTestCase(UbuntuSystemSettingsTestCase,
         self.mock_loginmanager()
 
         super(LanguageBaseTestCase, self).setUp()
-        self.language_page = self.system_settings.\
-            main_view.go_to_language_page()
+        self.language_page = self.main_view.go_to_language_page()
 
     def tearDown(self):
         self.mock_server.terminate()
@@ -799,8 +788,7 @@ class WifiBaseTestCase(UbuntuSystemSettingsTestCase,
             pass
 
         super(WifiBaseTestCase, self).setUp()
-        self.wifi_page = self.system_settings.\
-            main_view.go_to_wifi_page()
+        self.wifi_page = self.main_view.go_to_wifi_page()
 
     def add_previous_networks(self, networks):
         dev_path = str(self.obj_nm.GetDevices()[0])
