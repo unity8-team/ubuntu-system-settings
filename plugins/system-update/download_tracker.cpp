@@ -18,22 +18,27 @@
  * Authored by: Diego Sarmentero <diego.sarmentero@canonical.com>
  */
 
-#include "download_tracker.h"
-#include "network/network.h"
-#include <ubuntu/download_manager/download_struct.h>
-#include <ubuntu/download_manager/error.h>
+#include <QDebug>
 #include <QProcessEnvironment>
 
-#define DOWNLOAD_COMMAND "post-download-command"
-#define APP_ID "app_id"
-#define PKCON_COMMAND "pkcon"
+#include <ubuntu/download_manager/download_struct.h>
+#include <ubuntu/download_manager/error.h>
+
+#include "download_tracker.h"
+#include "network/network.h"
+
+namespace {
+    const QString DOWNLOAD_COMMAND = "post-download-command";
+    const QString APP_ID = "app_id";
+    const QString PKCON_COMMAND = "pkcon";
+}
 
 namespace UpdatePlugin {
 
 DownloadTracker::DownloadTracker(QObject *parent) :
     QObject(parent),
-    m_clickToken(""),
-    m_downloadUrl(""),
+    m_clickToken(QString::null),
+    m_downloadUrl(QString::null),
     m_download(nullptr),
     m_manager(nullptr),
     m_progress(0)
@@ -42,7 +47,7 @@ DownloadTracker::DownloadTracker(QObject *parent) :
 
 void DownloadTracker::setDownload(const QString& url)
 {
-    if (url != "") {
+    if (!url.isEmpty()) {
         m_downloadUrl = url;
         startService();
     }
@@ -50,7 +55,7 @@ void DownloadTracker::setDownload(const QString& url)
 
 void DownloadTracker::setClickToken(const QString& token)
 {
-    if (token != "") {
+    if (!token.isEmpty()) {
         m_clickToken = token;
         startService();
     }
@@ -58,7 +63,7 @@ void DownloadTracker::setClickToken(const QString& token)
 
 void DownloadTracker::setPackageName(const QString& package)
 {
-    if (package != "") {
+    if (!package.isEmpty()) {
         m_packageName = package;
         startService();
     }
@@ -70,8 +75,11 @@ void DownloadTracker::startService()
         if (m_manager == nullptr) {
             m_manager = Manager::createSessionManager("", this);
 
-            QObject::connect(m_manager, SIGNAL(downloadCreated(Download*)),
-                             this, SLOT(bindDownload(Download*)));
+            auto connected = connect(m_manager, &Manager::downloadCreated,
+                this, &DownloadTracker::bindDownload);
+	    if (!connected) {
+                qWarning() << "Could not connect to Manager::downloadCreated!";
+	    }
         }
         QVariantMap vmap;
         QStringList args;
@@ -89,22 +97,48 @@ void DownloadTracker::startService()
 void DownloadTracker::bindDownload(Download* download)
 {
     m_download = download;
-    connect(m_download, SIGNAL(finished(const QString &)), this,
-            SIGNAL(finished(const QString &)));
-    connect(m_download, SIGNAL(canceled(bool)), this,
-            SIGNAL(canceled(bool)));
-    connect(m_download, SIGNAL(paused(bool)), this,
-            SIGNAL(paused(bool)));
-    connect(m_download, SIGNAL(resumed(bool)), this,
-            SIGNAL(resumed(bool)));
-    connect(m_download, SIGNAL(started(bool)), this,
-            SIGNAL(started(bool)));
-    connect(m_download, SIGNAL(error(Error*)), this,
-            SLOT(registerError(Error*)));
-    connect(m_download, SIGNAL(progress(qulonglong, qulonglong)), this,
-            SLOT(setProgress(qulonglong, qulonglong)));
-    connect(m_download, SIGNAL(processing(const QString &)), this,
-            SIGNAL(processing(const QString &)));
+    auto connected = connect(m_download, &Download::finished,
+		    this, &DownloadTracker::onDownloadFinished);
+    if (!connected) {
+        qWarning() << "Could not connect to Download::finished";
+    }
+    connected = connect(m_download, &Download::canceled,
+		    this, &DownloadTracker::onDownloadCanceled);
+    if (!connected) {
+        qWarning() << "Could not connect to Download::canceled";
+    }
+    connected = connect(m_download, &Download::paused,
+		    this, &DownloadTracker::paused);
+    if (!connected) {
+        qWarning() << "Could not connect to Download::paused";
+    }
+    connected = connect(m_download, &Download::resumed,
+		    this, &DownloadTracker::resumed);
+    if (!connected) {
+        qWarning() << "Could not connect to Download::resumed";
+    }
+    connected = connect(m_download, &Download::started,
+		    this, &DownloadTracker::started);
+    if (!connected) {
+        qWarning() << "Could not connect to Download::started";
+    }
+    connected = connect(m_download, static_cast<void(Download::*)(Error*)>(&Download::error),
+		    this, &DownloadTracker::registerError);
+    if (!connected) {
+        qWarning() << "Could not connect to Download::error";
+    }
+
+    connected = connect(m_download, static_cast<void(Download::*)(qulonglong, qulonglong)>(&Download::progress),
+		    this, &DownloadTracker::setProgress);
+    if (!connected) {
+        qWarning() << "Could not connect to Download::progress";
+    }
+
+    connected = connect(m_download, &Download::processing,
+		    this, &DownloadTracker::processing);
+    if (!connected) {
+        qWarning() << "Could not connect to Download::processing";
+    }
 
     m_download->start();
 }
@@ -112,6 +146,27 @@ void DownloadTracker::bindDownload(Download* download)
 void DownloadTracker::registerError(Error* error)
 {
     Q_EMIT errorFound(error->errorString());
+
+    // we need to ensure that the resources are cleaned
+    m_download->deleteLater();
+    m_download = nullptr;
+}
+
+void DownloadTracker::onDownloadFinished(const QString& path)
+{
+    // once a download is finished we need to clean the resources
+    m_download->deleteLater();
+    m_download = nullptr;
+    Q_EMIT finished(path);
+}
+
+void DownloadTracker::onDownloadCanceled(bool wasCanceled)
+{
+    if (wasCanceled) {
+        m_download->deleteLater();
+        m_download = nullptr;
+    }
+    Q_EMIT canceled(wasCanceled);
 }
 
 void DownloadTracker::pause()
