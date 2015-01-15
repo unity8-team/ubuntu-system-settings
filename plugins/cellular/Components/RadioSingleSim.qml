@@ -39,7 +39,7 @@ Column {
                 'umts': i18n.tr("2G/3G (faster)"),
                 'lte': i18n.tr("2G/3G/4G (faster)")
             };
-            strings['umts_enable'] = strings['umts'] + '*';
+            strings['umts_enable'] = strings['umts'];
             return strings[tech];
         }
 
