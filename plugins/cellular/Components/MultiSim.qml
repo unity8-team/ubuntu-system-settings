@@ -132,7 +132,7 @@ Column {
                 text: techToString(modelData)
             }
             enabled: sim.radioSettings.technologyPreference !== ""
-            selectedIndex: return sim.radioSettings.technologyPreference !== "" ?
+            selectedIndex: sim.radioSettings.technologyPreference !== "" ?
                 model.indexOf(sim.radioSettings.technologyPreference) : -1
 
             onDelegateClicked: {
