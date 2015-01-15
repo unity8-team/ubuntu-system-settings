@@ -78,23 +78,9 @@ Column {
 
         Connections {
             target: sim.radioSettings
-            onTechnologyPreferenceChanged: {
-                // console.warn(
-                //     'technologyPreferenceChanged', sim.path,
-                //     'modemTechnologies:', sim.radioSettings.modemTechnologies,
-                //     'has3G', sim.mtkSettings.has3G,
-                //     'technologyPreference', preference);
-
-                selector.selectedIndex =
-                    sim.radioSettings.modemTechnologies.indexOf(preference)
-            }
+            onTechnologyPreferenceChanged: selector.selectedIndex =
+                sim.radioSettings.modemTechnologies.indexOf(preference)
             onModemTechnologiesChanged: {
-                // console.warn(
-                //     'modemTechnologiesChanged', sim.path,
-                //     'modemTechnologies:', technologies,
-                //     'has3G', sim.mtkSettings.has3G,
-                //     'technologyPreference', sim.radioSettings.technologyPreference);
-
                 if ((technologies.indexOf('umts') === -1)
                      && (sim.mtkSettings.has3G === false)) {
                     selector.model = selector.addUmtsEnableToModel(technologies);
@@ -108,12 +94,6 @@ Column {
         }
 
         Component.onCompleted: {
-            // console.warn(
-            //     'completed', sim.path,
-            //     'modemTechnologies:', sim.radioSettings.modemTechnologies,
-            //     'has3G', sim.mtkSettings.has3G,
-            //     'technologyPreference', sim.radioSettings.technologyPreference);
-
             if ((sim.radioSettings.modemTechnologies.indexOf('umts') === -1)
                  && (sim.mtkSettings.has3G === false)) {
                 selector.model = selector.addUmtsEnableToModel(sim.radioSettings.modemTechnologies);

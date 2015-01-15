@@ -40,7 +40,7 @@ Column {
     // make settings available to all children of root
     property var settings: phoneSettings
 
-    // sim: a Sim.qml component representing the sim
+    // sim: a Sim.qml component containing libqofono bindings
     signal umtsModemChanged (var sim)
 
     DataMultiSim {
@@ -132,16 +132,8 @@ Column {
                 text: techToString(modelData)
             }
             enabled: sim.radioSettings.technologyPreference !== ""
-            selectedIndex: {
-                // console.warn(
-                //     'selectedIndex', sim.path,
-                //     'modemTechnologies:', sim.radioSettings.modemTechnologies,
-                //     'has3G', sim.mtkSettings.has3G,
-                //     'technologyPreference', sim.radioSettings.technologyPreference);
-
-                return sim.radioSettings.technologyPreference !== "" ?
-                    model.indexOf(sim.radioSettings.technologyPreference) : -1
-            }
+            selectedIndex: return sim.radioSettings.technologyPreference !== "" ?
+                model.indexOf(sim.radioSettings.technologyPreference) : -1
 
             onDelegateClicked: {
                 if (model[index] === 'umts_enable') {
@@ -155,22 +147,9 @@ Column {
 
             Connections {
                 target: sim.radioSettings
-                onTechnologyPreferenceChanged: {
-                    // console.warn(
-                    //     'technologyPreferenceChanged', sim.path,
-                    //     'modemTechnologies:', sim.radioSettings.modemTechnologies,
-                    //     'has3G', sim.mtkSettings.has3G,
-                    //     'technologyPreference', preference);
-
-                    radio.selectedIndex = sim.radioSettings.modemTechnologies.indexOf(preference)
-                }
+                onTechnologyPreferenceChanged: radio.selectedIndex =
+                    sim.radioSettings.modemTechnologies.indexOf(preference)
                 onModemTechnologiesChanged: {
-                    // console.warn(
-                    //     'modemTechnologiesChanged', sim.path,
-                    //     'modemTechnologies:', technologies,
-                    //     'has3G', sim.mtkSettings.has3G,
-                    //     'technologyPreference', sim.radioSettings.technologyPreference);
-
                     if ((technologies.indexOf('umts') === -1)
                          && (sim.mtkSettings.has3G === false)) {
                         radio.model = addUmtsEnableToModel(technologies);
@@ -184,12 +163,6 @@ Column {
             }
 
             Component.onCompleted: {
-                // console.warn(
-                //     'completed', sim.path,
-                //     'modemTechnologies:', sim.radioSettings.modemTechnologies,
-                //     'has3G', sim.mtkSettings.has3G,
-                //     'technologyPreference', sim.radioSettings.technologyPreference);
-
                 if ((sim.radioSettings.modemTechnologies.indexOf('umts') === -1)
                      && (sim.mtkSettings.has3G === false)) {
                     radio.model = addUmtsEnableToModel(sim.radioSettings.modemTechnologies);

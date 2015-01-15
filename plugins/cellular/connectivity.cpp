@@ -42,8 +42,6 @@ void Connectivity::unlockAllModems() {
         QDBusConnection::sessionBus(),
         this);
 
-    // connectivityIface.call(UNLOCKALL_METHOD_NAME);
-    qWarning() << "com.ubuntu.connectivity1.Private.UnlockAllModems";
     auto reply = connectivityIface.call(UNLOCKALL_METHOD_NAME);
     if (reply.type() == 3) {
         qWarning() << "Failed to unlock modems" << reply.errorMessage();

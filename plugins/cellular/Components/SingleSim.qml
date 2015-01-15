@@ -28,7 +28,7 @@ Column {
 
     property var sim
 
-    // sim: a Sim.qml component representing the sim
+    // sim: a Sim.qml component containing libqofono bindings
     signal umtsModemChanged (var sim)
 
     ListItem.Standard {

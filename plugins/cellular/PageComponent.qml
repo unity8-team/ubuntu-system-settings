@@ -150,14 +150,12 @@ ItemPage {
             onUmtsModemChanged: {
                 var path = sim.path;
                 root.waiting = true;
-                console.warn('onUmtsModemChanged');
 
                 /* When the SIM comes back online, set waiting to false:
                 the modem reboot is done.*/
                 sim.simMng.presenceChanged.connect(function (ispresent) {
                     if (ispresent) {
                         root.waiting = false;
-                        console.warn('onUmtsModemChanged: presence on', path, 'changed to true');
                         connectivity.unlockAllModems();
                     }
                 });
