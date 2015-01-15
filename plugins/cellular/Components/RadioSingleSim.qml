@@ -78,8 +78,10 @@ Column {
 
         Connections {
             target: sim.radioSettings
+
             onTechnologyPreferenceChanged: selector.selectedIndex =
                 sim.radioSettings.modemTechnologies.indexOf(preference)
+
             onModemTechnologiesChanged: {
                 if ((technologies.indexOf('umts') === -1)
                      && (sim.mtkSettings.has3G === false)) {
