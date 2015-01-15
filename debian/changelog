@@ -1,3 +1,15 @@
+ubuntu-system-settings (0.3+15.04.20150115-0ubuntu1) vivid; urgency=low
+
+  [ Manuel de la Peña ]
+  * Fix pause issue ensuring that it does pause the download. (LP:
+    #1398310)
+
+  [ Manuel de la Pena ]
+  * Fix pause issue ensuring that it does pause the download. (LP:
+    #1398310)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 15 Jan 2015 15:32:30 +0000
+
 ubuntu-system-settings (0.3+15.04.20150114-0ubuntu1) vivid; urgency=low
 
   [ jonas-drange ]
