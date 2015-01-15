@@ -1,10 +1,3 @@
-ubuntu-system-settings (0.3+15.04.20150112-0ubuntu3) UNRELEASED; urgency=medium
-
-  [ Manuel de la Pena ]
-  * Ensure that downloads can be paused. 
-
- -- Manuel de la Pena <manuel.delapena@canonical.com>  Tue, 13 Jan 2015 17:13:39 +0100
-
 ubuntu-system-settings (0.3+15.04.20150112-0ubuntu1) vivid; urgency=low
 
   [ jonas-drange ]
