@@ -1,3 +1,14 @@
+ubuntu-system-settings (0.3+15.04.20150116-0ubuntu1) vivid; urgency=low
+
+  [ Ken VanDine ]
+  * Work around for the SDK's addition of a Dialog CPO, this fixes
+    matching in test_reset
+
+  [ CI Train Bot ]
+  * Resync trunk
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 16 Jan 2015 14:11:26 +0000
+
 ubuntu-system-settings (0.3+15.04.20150115-0ubuntu1) vivid; urgency=low
 
   [ Manuel de la Peña ]
