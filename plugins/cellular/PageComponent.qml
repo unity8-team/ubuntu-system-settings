@@ -42,7 +42,7 @@ ItemPage {
     states: [
         State {
             name: "waiting"
-            when: waiting && (Sims.getPresentCount() === 0)
+            when: waiting
             PropertyChanges {
                 target: waitIndicator
                 opacity: 1
