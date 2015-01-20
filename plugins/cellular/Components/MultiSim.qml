@@ -37,11 +37,12 @@ Column {
         return s;
     }
     property var modems
-    // make settings available to all children of root
     property var settings: phoneSettings
+    property string prevOnlineModem: ""
 
-    // sim: a Sim.qml component containing libqofono bindings
-    signal umtsModemChanged (var sim)
+    /*  @sim a Sim.qml component containing libqofono bindings
+        @prevOnlineModem path to modem that was online before modem reset */
+    signal umtsModemChanged (var sim, string prevOnlineModem);
 
     DataMultiSim {
         anchors { left: parent.left; right: parent.right }
@@ -138,7 +139,7 @@ Column {
             onDelegateClicked: {
                 if (model[index] === 'umts_enable') {
                     sim.radioSettings.technologyPreference = 'umts';
-                    umtsModemChanged(sim);
+                    umtsModemChanged(sim, poweredSim ? poweredSim.path : "");
                     sim.mtkSettings.has3G = true;
                 } else {
                     sim.radioSettings.technologyPreference = model[index];

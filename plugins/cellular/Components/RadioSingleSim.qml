@@ -69,7 +69,7 @@ Column {
         onDelegateClicked: {
             if (model[index] === 'umts_enable') {
                 sim.radioSettings.technologyPreference = 'umts';
-                radioSingleSim.parent.umtsModemChanged(sim);
+                radioSingleSim.parent.umtsModemChanged(sim, sim.connMan.powered ? sim.path : "");
                 sim.mtkSettings.has3G = true;
             } else {
                 sim.radioSettings.technologyPreference = model[index];

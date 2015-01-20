@@ -28,8 +28,9 @@ Column {
 
     property var sim
 
-    // sim: a Sim.qml component containing libqofono bindings
-    signal umtsModemChanged (var sim)
+    /*  @sim a Sim.qml component containing libqofono bindings
+        @prevOnlineModem path to modem that was online before this event */
+    signal umtsModemChanged (var sim, string prevOnlineModem);
 
     ListItem.Standard {
         id: selector

@@ -39,6 +39,11 @@ ItemPage {
     // waiting during modem reboots or for modems to come online
     property bool waiting: true
 
+    QtObject {
+        id: priv
+        property string prevOnlineModem: ""
+    }
+
     states: [
         State {
             name: "waiting"
@@ -63,7 +68,8 @@ ItemPage {
             name: "singleSim"
             StateChangeScript {
                 script: loader.setSource("Components/SingleSim.qml", {
-                    sim: Sims.getFirstPresent()
+                    sim: Sims.getFirstPresent(),
+                    prevOnlineModem: priv.prevOnlineModem
                 })
             }
             when: simsLoaded && (Sims.getPresentCount() === 1)
@@ -73,7 +79,8 @@ ItemPage {
             StateChangeScript {
                 script: loader.setSource("Components/MultiSim.qml", {
                     sims: Sims.getAll(),
-                    modems: modemsSorted
+                    modems: modemsSorted,
+                    prevOnlineModem: priv.prevOnlineModem
                 })
             }
             when: simsLoaded && (Sims.getPresentCount() > 1)
@@ -149,6 +156,8 @@ ItemPage {
 
             onUmtsModemChanged: {
                 var path = sim.path;
+                priv.prevOnlineModem = prevOnlineModem ?
+                    prevOnlineModem : "";
                 root.waiting = true;
 
                 /* When the SIM comes back online, set waiting to false:
