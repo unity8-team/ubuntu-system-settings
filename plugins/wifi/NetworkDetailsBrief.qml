@@ -39,7 +39,7 @@ ItemPage {
         ListItem.Divider {}
 
         Button {
-            text : i18n.tr("Forget network")
+            text : i18n.tr("Forget this network")
             anchors {
                 left: parent.left
                 right: parent.right
