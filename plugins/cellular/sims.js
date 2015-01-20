@@ -67,3 +67,20 @@ function createQML () {
         }
     });
 }
+
+function techToString (tech) {
+    var strings = {
+        'gsm': i18n.tr("2G only (saves battery)"),
+        'umts': i18n.tr("2G/3G (faster)"),
+        'lte': i18n.tr("2G/3G/4G (faster)")
+    };
+    strings['umts_enable'] = strings['umts'];
+    return strings[tech];
+}
+
+// adds umts_enable to an copy of model
+function addUmtsEnableToModel (model) {
+    var newModel = model.slice(0);
+    newModel.push('umts_enable');
+    return newModel;
+}

@@ -22,6 +22,7 @@ import GSettings 1.0
 import SystemSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
+import "../sims.js" as Sims
 
 Column {
     objectName: "multiSim"
@@ -108,29 +109,12 @@ Column {
             id: radio
             property var sim: modelData
 
-            function techToString (tech) {
-                var strings = {
-                    'gsm': i18n.tr("2G only (saves battery)"),
-                    'umts': i18n.tr("2G/3G (faster)"),
-                    'lte': i18n.tr("2G/3G/4G (faster)")
-                };
-                strings['umts_enable'] = strings['umts'];
-                return strings[tech];
-            }
-
-            // adds umts_enable to an copy of model
-            function addUmtsEnableToModel (model) {
-                var newModel = model.slice(0);
-                newModel.push('umts_enable');
-                return newModel;
-            }
-
             expanded: true
             text: sim.title
             model: sim.radioSettings.modemTechnologies
             delegate: OptionSelectorDelegate {
                 objectName: sim.path + "_radio_" + modelData
-                text: techToString(modelData)
+                text: Sims.techToString(modelData)
             }
             enabled: sim.radioSettings.technologyPreference !== ""
             selectedIndex: sim.radioSettings.technologyPreference !== "" ?
@@ -154,7 +138,7 @@ Column {
                 onModemTechnologiesChanged: {
                     if ((technologies.indexOf('umts') === -1)
                          && (sim.mtkSettings.has3G === false)) {
-                        radio.model = addUmtsEnableToModel(technologies);
+                        radio.model = Sims.addUmtsEnableToModel(technologies);
                     } else {
                         radio.model = technologies;
                     }
@@ -167,7 +151,7 @@ Column {
             Component.onCompleted: {
                 if ((sim.radioSettings.modemTechnologies.indexOf('umts') === -1)
                      && (sim.mtkSettings.has3G === false)) {
-                    radio.model = addUmtsEnableToModel(sim.radioSettings.modemTechnologies);
+                    radio.model = Sims.addUmtsEnableToModel(sim.radioSettings.modemTechnologies);
                 } else {
                     radio.model = sim.radioSettings.modemTechnologies;
                 }

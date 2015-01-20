@@ -21,6 +21,7 @@ import QtQuick 2.0
 import SystemSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
+import "../sims.js" as Sims
 
 Column {
     id: radioSingleSim
@@ -33,23 +34,6 @@ Column {
     ListItem.ItemSelector {
         id: selector
 
-        function techToString (tech) {
-            var strings = {
-                'gsm': i18n.tr("2G only (saves battery)"),
-                'umts': i18n.tr("2G/3G (faster)"),
-                'lte': i18n.tr("2G/3G/4G (faster)")
-            };
-            strings['umts_enable'] = strings['umts'];
-            return strings[tech];
-        }
-
-        // adds umts_enable to an copy of model
-        function addUmtsEnableToModel (model) {
-            var newModel = model.slice(0);
-            newModel.push('umts_enable');
-            return newModel;
-        }
-
         showDivider: false
         expanded: true
 
@@ -59,7 +43,7 @@ Column {
         model: sim.radioSettings.modemTechnologies
         delegate: OptionSelectorDelegate {
             objectName: sim.path + "_radio_" + modelData
-            text: selector.techToString(modelData)
+            text: Sims.techToString(modelData)
             showDivider: false
         }
         selectedIndex:
@@ -85,7 +69,7 @@ Column {
             onModemTechnologiesChanged: {
                 if ((technologies.indexOf('umts') === -1)
                      && (sim.mtkSettings.has3G === false)) {
-                    selector.model = selector.addUmtsEnableToModel(technologies);
+                    selector.model = Sims.addUmtsEnableToModel(technologies);
                 } else {
                     selector.model = technologies;
                 }
@@ -98,7 +82,7 @@ Column {
         Component.onCompleted: {
             if ((sim.radioSettings.modemTechnologies.indexOf('umts') === -1)
                  && (sim.mtkSettings.has3G === false)) {
-                selector.model = selector.addUmtsEnableToModel(sim.radioSettings.modemTechnologies);
+                selector.model = Sims.addUmtsEnableToModel(sim.radioSettings.modemTechnologies);
             } else {
                 selector.model = sim.radioSettings.modemTechnologies;
             }
