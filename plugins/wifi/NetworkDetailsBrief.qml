@@ -39,14 +39,14 @@ ItemPage {
         ListItem.Divider {}
 
         Button {
-            text : i18n.tr("Disconnect")
+            text : i18n.tr("Forget")
             anchors {
                 left: parent.left
                 right: parent.right
                 margins: units.gu(2)
             }
             onClicked: {
-                if (DbusHelper.disconnectDevice()) {
+                if (DbusHelper.forgetActiveDevice()) {
                     accessPoint.checked = false;
                     accessPoint.checkedChanged(false)
                 }
