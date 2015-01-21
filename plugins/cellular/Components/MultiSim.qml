@@ -22,7 +22,6 @@ import GSettings 1.0
 import SystemSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
-import "../sims.js" as Sims
 
 Column {
     objectName: "multiSim"
@@ -114,7 +113,7 @@ Column {
             model: sim.radioSettings.modemTechnologies
             delegate: OptionSelectorDelegate {
                 objectName: sim.path + "_radio_" + modelData
-                text: Sims.techToString(modelData)
+                text: sim.techToString(modelData)
             }
             enabled: sim.radioSettings.technologyPreference !== ""
             selectedIndex: sim.radioSettings.technologyPreference !== "" ?
@@ -138,7 +137,7 @@ Column {
                 onModemTechnologiesChanged: {
                     if ((technologies.indexOf('umts') === -1)
                          && (sim.mtkSettings.has3G === false)) {
-                        radio.model = Sims.addUmtsEnableToModel(technologies);
+                        radio.model = sim.addUmtsEnableToModel(technologies);
                     } else {
                         radio.model = technologies;
                     }
@@ -151,7 +150,7 @@ Column {
             Component.onCompleted: {
                 if ((sim.radioSettings.modemTechnologies.indexOf('umts') === -1)
                      && (sim.mtkSettings.has3G === false)) {
-                    radio.model = Sims.addUmtsEnableToModel(sim.radioSettings.modemTechnologies);
+                    radio.model = sim.addUmtsEnableToModel(sim.radioSettings.modemTechnologies);
                 } else {
                     radio.model = sim.radioSettings.modemTechnologies;
                 }

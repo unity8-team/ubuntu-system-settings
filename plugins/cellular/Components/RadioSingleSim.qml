@@ -21,7 +21,6 @@ import QtQuick 2.0
 import SystemSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
-import "../sims.js" as Sims
 
 Column {
     id: radioSingleSim
@@ -43,7 +42,7 @@ Column {
         model: sim.radioSettings.modemTechnologies
         delegate: OptionSelectorDelegate {
             objectName: sim.path + "_radio_" + modelData
-            text: Sims.techToString(modelData)
+            text: sim.techToString(modelData)
             showDivider: false
         }
         selectedIndex:
@@ -69,7 +68,7 @@ Column {
             onModemTechnologiesChanged: {
                 if ((technologies.indexOf('umts') === -1)
                      && (sim.mtkSettings.has3G === false)) {
-                    selector.model = Sims.addUmtsEnableToModel(technologies);
+                    selector.model = sim.addUmtsEnableToModel(technologies);
                 } else {
                     selector.model = technologies;
                 }
@@ -82,7 +81,8 @@ Column {
         Component.onCompleted: {
             if ((sim.radioSettings.modemTechnologies.indexOf('umts') === -1)
                  && (sim.mtkSettings.has3G === false)) {
-                selector.model = Sims.addUmtsEnableToModel(sim.radioSettings.modemTechnologies);
+                selector.model = sim.addUmtsEnableToModel(
+                    sim.radioSettings.modemTechnologies);
             } else {
                 selector.model = sim.radioSettings.modemTechnologies;
             }

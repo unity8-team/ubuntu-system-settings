@@ -109,10 +109,6 @@ ItemPage {
         }
     }
 
-    Connectivity {
-        id: connectivity
-    }
-
     Item {
         id: waitIndicator
         anchors.fill: parent
@@ -165,7 +161,7 @@ ItemPage {
                 sim.simMng.presenceChanged.connect(function (ispresent) {
                     if (ispresent) {
                         root.waiting = false;
-                        connectivity.unlockAllModems();
+                        Connectivity.unlockAllModems();
                     }
                 });
             }

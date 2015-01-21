@@ -26,7 +26,7 @@ namespace {
     const QString conn_service("com.ubuntu.connectivity1");
     const QString conn_object("/com/ubuntu/connectivity1/Private");
     const QString conn_interface("com.ubuntu.connectivity1.Private");
-    #define UNLOCKALL_METHOD_NAME "UnlockAllModems"
+    const QString conn_unlockall_method("UnlockAllModems");
 }
 
 Connectivity::Connectivity(QObject *parent) : QObject(parent)
@@ -42,8 +42,8 @@ void Connectivity::unlockAllModems() {
         QDBusConnection::sessionBus(),
         this);
 
-    auto reply = connectivityIface.call(UNLOCKALL_METHOD_NAME);
-    if (reply.type() == 3) {
+    auto reply = connectivityIface.call(conn_unlockall_method);
+    if (reply.type() == QDBusMessage::ErrorMessage) {
         qWarning() << "Failed to unlock modems" << reply.errorMessage();
     }
 }
