@@ -203,6 +203,16 @@ class MainWindow(ubuntuuitoolkit.MainView):
         self._orientation_lock_switch.uncheck()
 
 
+class Dialog(ubuntuuitoolkit.Dialog):
+    # XXX A new Dialog custom proxy object was added to the toolkit.
+    # Because of https://bugs.launchpad.net/autopilot-qt/+bug/1341671
+    # we need to make sure it does not match in any selection.
+
+    @classmethod
+    def validate_dbus_object(cls, path, state):
+        return False
+
+
 class CellularPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
 
     """Autopilot helper for the Cellular page."""
