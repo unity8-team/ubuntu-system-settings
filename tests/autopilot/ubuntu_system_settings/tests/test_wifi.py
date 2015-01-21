@@ -117,7 +117,6 @@ class WifiTestCase(WifiBaseTestCase):
                 _('Your authentication details were incorrect'))))
 
     def test_connect_to_hidden_network_then_cancel(self):
-
         dialog = self.wifi_page.connect_to_hidden_network(
             'foo',
             scroll_to_and_click=self.main_view
@@ -128,10 +127,9 @@ class WifiTestCase(WifiBaseTestCase):
 
         dialog.cancel()
 
-        # check that Disconnect was called once
         self.assertThat(
             lambda:
-                len(self.device_mock.GetMethodCalls('Disconnect')),
+                len(self.active_connection_mock.GetMethodCalls('Delete')),
             Eventually(Equals(1)))
 
     """Note: this test does not actually remove previous networks from the UI.
