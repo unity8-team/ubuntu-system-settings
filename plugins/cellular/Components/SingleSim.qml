@@ -18,6 +18,7 @@
  *
 */
 import QtQuick 2.0
+import SystemSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 
@@ -33,8 +34,10 @@ Column {
         control: Switch {
             id: dataControl
             objectName: 'data'
-            checked: sim.connMan.powered
-            onClicked: sim.connMan.powered = checked
+            property bool serverChecked: sim.connMan.powered
+            onServerCheckedChanged: checked = serverChecked
+            Component.onCompleted: checked = serverChecked
+            onTriggered: sim.connMan.powered = checked
         }
     }
 
@@ -46,8 +49,10 @@ Column {
         control: Switch {
             id: dataRoamingControl
             objectName: "roaming"
-            checked: sim.connMan.roamingAllowed
-            onClicked: sim.connMan.roamingAllowed = checked
+            property bool serverChecked: sim.connMan.roamingAllowed
+            onServerCheckedChanged: checked = serverChecked
+            Component.onCompleted: checked = serverChecked
+            onTriggered: sim.connMan.roamingAllowed = checked
         }
     }
 
@@ -72,36 +77,25 @@ Column {
         visible: showAllUI
     }
 
-    ListItem.Divider {
-        visible: radio.selector.model.length
+    ListItem.Divider {
+        visible: radio.visible
     }
 
     RadioSingleSim {
         id: radio
-        anchors { left: parent.left; right: parent.right }
-        visible: radio.selector.model.length
+        anchors { left: parent.left; right: parent.right }
+        visible: radio.enabled
     }
 
-    ListItem.Divider {}
+    ListItem.Divider {}
 
     ListItem.SingleValue {
         text: i18n.tr("Carrier");
         id: chooseCarrier
-        objectName: "carrier"
+        objectName: "carrierApnEntry"
         progression: enabled
-        value: sim.netReg.name || i18n.tr("N/A")
-        enabled: sim.netReg.status !== ""
-        onClicked: {
-            pageStack.push(Qt.resolvedUrl("../PageChooseCarrier.qml"), {
-                sim: sim,
-                title: i18n.tr("Carrier")
-            })
-        }
-    }
-
-    ListItem.Standard {
-        text: i18n.tr("APN")
-        progression: true
-        visible: showAllUI
+        onClicked: pageStack.push(Qt.resolvedUrl("../PageCarrierAndApn.qml"), {
+            sim: sim
+        })
     }
 }
