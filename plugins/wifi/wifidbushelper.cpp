@@ -32,6 +32,7 @@
 #define NM_SERVICE "org.freedesktop.NetworkManager"
 #define NM_PATH "/org/freedesktop/NetworkManager"
 #define NM_DEVICE_IFACE "org.freedesktop.NetworkManager.Device"
+#define NM_ACTIVE_CONNECTION_IFACE "org.freedesktop.NetworkManager.Connection.Active"
 
 typedef QMap<QString,QVariantMap> ConfigurationData;
 Q_DECLARE_METATYPE(ConfigurationData)
@@ -394,7 +395,7 @@ void WifiDbusHelper::forgetConnection(const QString dbus_path) {
     }
 }
 
-bool WifiDbusHelper::disconnectDevice() {
+bool WifiDbusHelper::forgetActiveDevice() {
     OrgFreedesktopNetworkManagerInterface mgr(NM_SERVICE,
                                               NM_PATH,
                                               m_systemBusConnection);
@@ -402,7 +403,7 @@ bool WifiDbusHelper::disconnectDevice() {
     auto reply1 = mgr.GetDevices();
     reply1.waitForFinished();
     if(!reply1.isValid()) {
-        qWarning() << "disconnectDevice: Could not get network device: " << reply1.error().message() << "\n";
+        qWarning() << __PRETTY_FUNCTION__ << ": Could not get network device: " << reply1.error().message() << "\n";
         return false;
     }
     auto devices = reply1.value();
@@ -415,11 +416,24 @@ bool WifiDbusHelper::disconnectDevice() {
         if (type_v.toUInt() == 2 /* NM_DEVICE_TYPE_WIFI */) {
             if (d.path().isEmpty()) {
                 // didn't find a wifi device
-                qWarning() << "disconnectDevice: Could not find wifi device\n";
+                qWarning() << __PRETTY_FUNCTION__ << ": Could not find wifi device\n";
                 return false;
             } else {
-                iface.call("Disconnect");
-                return true;
+                auto ac_path_var = iface.property("ActiveConnection");
+                if(!ac_path_var.isValid()) {
+                    qWarning() << __PRETTY_FUNCTION__ << ": Could not get active connection property from "
+                            << d.path() << ".\n";
+                    return true;
+                }
+                QString ac_path = ac_path_var.value<QDBusObjectPath>().path();
+                QDBusInterface ac_iface(NM_SERVICE, ac_path, NM_ACTIVE_CONNECTION_IFACE, m_systemBusConnection);
+                auto conn_path_var = ac_iface.property("Connection");
+                if(!conn_path_var.isValid()) {
+                    qWarning() << __PRETTY_FUNCTION__ << ": Could not get connection path property from "
+                            << ac_path << ".\n";
+                    return false;
+                }
+                forgetConnection(conn_path_var.value<QDBusObjectPath>().path());
             }
             break;
         }
