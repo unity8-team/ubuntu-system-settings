@@ -53,8 +53,15 @@ LocalComponents.Page {
         monitorNetworkName: true
         monitorNetworkStatus: true
 
-        onNetworkNameChanged: getAccessPointName()
-        onNetworkStatusChanged: if (status !== NetworkInfo.HomeNetwork) accessPointName = ""
+        onCurrentNetworkModeChanged: {
+            if (currentNetworkMode === NetworkInfo.WlanMode)
+                getAccessPointName();
+        }
+
+        onNetworkStatusChanged: {
+            if (status !== NetworkInfo.HomeNetwork) accessPointName = "";
+            else getAccessPointName();
+        }
 
         function getAccessPointName() {
             // 0 is the interface
