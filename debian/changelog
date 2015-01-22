@@ -1,3 +1,17 @@
+ubuntu-system-settings (0.3+15.04.20150122~rtm-0ubuntu1) 14.09; urgency=low
+
+  [ Ken VanDine ]
+  * [cellular/carriers] new Carrier & APN entry, as well as a major
+    refactor of carrier selection code warranted by the design change.
+    (LP: #1388044)
+  * [bluetooth] Show bluetooth address instead of name while it's not
+    detected; to be updated once available. (LP: #1382767)
+
+  [ jonas-drange ]
+  * Make currently active connection forgettable.
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 22 Jan 2015 01:39:48 +0000
+
 ubuntu-system-settings (0.3+15.04.20150120~rtm-0ubuntu1) 14.09; urgency=low
 
   [ Manuel de la Peña ]
