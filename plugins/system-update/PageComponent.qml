@@ -48,6 +48,11 @@ ItemPage {
     property var notificationAction;
     property string errorDialogText: ""
 
+    onUpdatesAvailableChanged: {
+        if (updatesAvailable < 1 && root.state != "SEARCHING")
+            root.state = "NOUPDATES";
+    }
+
     QDBusActionGroup {
         id: indicatorPower
         busType: 1
