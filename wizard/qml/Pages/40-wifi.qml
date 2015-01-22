@@ -47,30 +47,11 @@ LocalComponents.Page {
     NetworkInfo {
         id: networkInfo
 
-        property string accessPointName: getAccessPointName()
+        property string accessPointName: (networkStatus(NetworkInfo.WlanMode, 0) === NetworkInfo.HomeNetwork) && (currentNetworkMode === NetworkInfo.WlanMode) ? networkName(NetworkInfo.WlanMode, 0) : ""
 
         monitorCurrentNetworkMode: true
         monitorNetworkName: true
         monitorNetworkStatus: true
-
-        onCurrentNetworkModeChanged: {
-            if (currentNetworkMode === NetworkInfo.WlanMode)
-                getAccessPointName();
-        }
-
-        onNetworkStatusChanged: {
-            if (status !== NetworkInfo.HomeNetwork) accessPointName = "";
-            else getAccessPointName();
-        }
-
-        function getAccessPointName() {
-            // 0 is the interface
-            if (currentNetworkMode === NetworkInfo.WlanMode &&
-                networkStatus(NetworkInfo.WlanMode, 0) === NetworkInfo.HomeNetwork)
-                accessPointName = networkName(NetworkInfo.WlanMode, 0);
-            else
-                accessPointName = "";
-        }
     }
 
     Component {
