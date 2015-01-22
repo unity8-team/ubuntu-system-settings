@@ -1,3 +1,14 @@
+ubuntu-system-settings (0.3+15.04.20150122-0ubuntu1) vivid; urgency=low
+
+  [ Ken VanDine ]
+  * [system-updates] Don't show an empty list after updates are
+    completed (LP: #1392240, #1413369)
+
+  [ jonas-drange ]
+  * [wifi] use an already translated, sane string for consistency
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 22 Jan 2015 14:50:57 +0000
+
 ubuntu-system-settings (0.3+15.04.20150116-0ubuntu1) vivid; urgency=low
 
   [ Ken VanDine ]
