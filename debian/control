@@ -99,6 +99,7 @@ Package: ubuntu-system-settings-wizard
 Architecture: any
 Depends: ${misc:Depends},
          ${shlibs:Depends},
+         qml-module-qtsysteminfo,
          ubuntu-system-settings (= ${binary:Version}),
          unity8 (>= 8.01),
 Recommends: qtdeclarative5-qtmir-plugin (>= 0.4)
