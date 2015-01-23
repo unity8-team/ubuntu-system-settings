@@ -1,3 +1,13 @@
+ubuntu-system-settings (0.3+15.04.20150123-0ubuntu1) vivid; urgency=low
+
+  [ Manuel de la Peña ]
+  * Add support for checksum validation. (LP: #1330770)
+
+  [ Diego Sarmentero ]
+  * Add support for checksum validation. (LP: #1330770)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 23 Jan 2015 16:53:49 +0000
+
 ubuntu-system-settings (0.3+15.04.20150122-0ubuntu1) vivid; urgency=low
 
   [ Ken VanDine ]
