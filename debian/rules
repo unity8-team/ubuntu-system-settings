@@ -22,6 +22,7 @@ override_dh_install:
 		$$python setup.py install --root=$(CURDIR)/debian/tmp --install-layout=deb; \
 	done; \
 	cd $(CURDIR)
+	install -m 0644 debian/developer-mode-settings.conf debian/tmp/usr/share/upstart/sessions
 	dh_install -X'*.pyc' --fail-missing
 
 override_dh_makeshlibs:
