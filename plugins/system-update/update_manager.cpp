@@ -334,6 +334,7 @@ void UpdateManager::clickTokenReceived(Update *app, const QString &clickToken)
 {
     app->setError("");
     app->setClickToken(clickToken);
+    app->setDownloadUrl(app->getClickUrl());
 }
 
 void UpdateManager::updateClickScope()

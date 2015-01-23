@@ -88,7 +88,7 @@ void DownloadTracker::startService()
         vmap[APP_ID] = m_packageName;
         StringMap map;
         map[X_CLICK_TOKEN] = m_clickToken;
-        DownloadStruct dstruct = DownloadStruct(m_downloadUrl, m_download_sha512, DOWNLOAD_MANAGER_SHA512, vmap, map);
+        DownloadStruct dstruct(m_downloadUrl, m_download_sha512, DOWNLOAD_MANAGER_SHA512, vmap, map);
         m_manager->createDownload(dstruct);
     }
 }

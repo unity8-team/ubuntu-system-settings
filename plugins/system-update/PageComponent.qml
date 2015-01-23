@@ -425,18 +425,17 @@ ItemPage {
 
                     function resume () {
                         console.warn("RESUME: " + modelData.packageName);
-                        UpdateManager.startDownload(modelData.packageName);
+                        if (modelData.systemUpdate)
+                            return UpdateManager.startDownload(modelData.packageName);
+                        modelData.updateState = true;
+                        tracker.resume();
                     }
 
                     function start () {
                         console.warn("START: " + modelData.packageName);
-                        if (!modelData.selected || modelData.systemUpdate) {
-                            UpdateManager.startDownload(modelData.packageName);
-                        } else {
-                            tracker.resume();
-                        }
                         modelData.selected = true;
                         modelData.updateState = true;
+                        UpdateManager.startDownload(modelData.packageName);
                     }
                     Column {
                         id: textArea
