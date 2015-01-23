@@ -62,7 +62,7 @@ class TimeDateTestCase(UbuntuSystemSettingsTestCase,
                     raise e
 
     def click_tz_search_field(self):
-        self.main_view.scroll_to_and_click(self.tz_page)
+        self.main_view.pointing_device.click_object(self.tz_page)
         text_field = self.main_view.wait_select_single(
             objectName='selectTimeZoneField'
         )
