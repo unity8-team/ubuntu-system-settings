@@ -565,6 +565,7 @@ ItemPage {
                                 packageName: modelData.packageName
                                 clickToken: modelData.clickToken
                                 download: modelData.downloadUrl
+                                downloadSha512: modelData.downloadSha512
 
                                 onFinished: {
                                     progress.visible = false;

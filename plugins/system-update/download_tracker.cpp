@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 - Canonical Ltd.
+ * Copyright (C) 2014-2015 - Canonical Ltd.
  *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License, as
@@ -18,19 +18,19 @@
  * Authored by: Diego Sarmentero <diego.sarmentero@canonical.com>
  */
 
-#include <QDebug>
-#include <QProcessEnvironment>
-
 #include <ubuntu/download_manager/download_struct.h>
 #include <ubuntu/download_manager/error.h>
+#include <QProcessEnvironment>
 
 #include "download_tracker.h"
 #include "network/network.h"
+
 
 namespace {
     const QString DOWNLOAD_COMMAND = "post-download-command";
     const QString APP_ID = "app_id";
     const QString PKCON_COMMAND = "pkcon";
+    const QString DOWNLOAD_MANAGER_SHA512 = "sha512";
 }
 
 namespace UpdatePlugin {
@@ -88,7 +88,7 @@ void DownloadTracker::startService()
         vmap[APP_ID] = m_packageName;
         StringMap map;
         map[X_CLICK_TOKEN] = m_clickToken;
-        DownloadStruct dstruct = DownloadStruct(m_downloadUrl, vmap, map);
+        DownloadStruct dstruct(m_downloadUrl, m_download_sha512, DOWNLOAD_MANAGER_SHA512, vmap, map);
         m_manager->createDownload(dstruct);
     }
 }
