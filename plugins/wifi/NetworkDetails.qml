@@ -85,7 +85,7 @@ ItemPage {
 
         Button {
             objectName: "forgetNetwork"
-            text : i18n.tr("Forget network")
+            text : i18n.tr("Forget this network")
             anchors {
                 left: parent.left
                 right: parent.right

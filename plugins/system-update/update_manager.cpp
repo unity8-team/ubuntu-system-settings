@@ -39,6 +39,16 @@ using namespace UbuntuOne;
 
 namespace UpdatePlugin {
 
+UpdateManager *UpdateManager::m_instance = 0;
+
+UpdateManager *UpdateManager::instance()
+{
+    if (!m_instance)
+        m_instance = new UpdateManager;
+
+    return m_instance;
+}
+
 UpdateManager::UpdateManager(QObject *parent):
     QObject(parent),
     m_systemCheckingUpdate(false),
@@ -226,6 +236,8 @@ void UpdateManager::registerSystemUpdate(const QString& packageName, Update *upd
         m_model.insert(0, QVariant::fromValue(update));
         Q_EMIT modelChanged();
         Q_EMIT updateAvailableFound(update->updateState());
+        if (update->getRemoteVersion() == m_latestDownload)
+            updateDownloaded();
     }
     m_systemCheckingUpdate = false;
 
@@ -240,6 +252,7 @@ void UpdateManager::updateDownloaded()
         update->setSelected(false);
         update->setUpdateState(false);
         update->setUpdateReady(true);
+        m_latestDownload = update->getRemoteVersion();
         Q_EMIT systemUpdateDownloaded();
     }
 }

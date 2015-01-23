@@ -190,7 +190,8 @@ void NotificationsManager::checkUpdates(QString key, bool value)
         }
     }
     // Save the config settings
-    GVariantBuilder *builder = g_variant_builder_new(G_VARIANT_TYPE("a(ss)"));
+    GVariantBuilder builder;
+    g_variant_builder_init(&builder, G_VARIANT_TYPE("a(ss)"));
     QList<QString> keys = m_blacklist.keys();
     for (int j = 0; j < keys.size(); ++j) {
         // Keys are in the form package::::app for click or appid::::appid for legacy apps
@@ -201,12 +202,9 @@ void NotificationsManager::checkUpdates(QString key, bool value)
         }
         QString pkgname = splitted.at(0);
         QString appname = splitted.at(1);
-        g_variant_builder_add(builder, "(ss)", pkgname.toUtf8().constData(), appname.toUtf8().constData());
+        g_variant_builder_add(&builder, "(ss)", pkgname.toUtf8().constData(), appname.toUtf8().constData());
     }
-    GVariant *bl = g_variant_new("a(ss)", builder);
-    g_variant_builder_unref (builder);
-    g_settings_set_value(m_pushSettings, BLACKLIST_KEY, bl);
-    g_variant_unref (bl);
+    g_settings_set_value(m_pushSettings, BLACKLIST_KEY, g_variant_builder_end (&builder));
 }
 
 }

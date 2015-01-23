@@ -109,7 +109,6 @@ public:
     quint64 getAudioSize();
     quint64 getPicturesSize();
     quint64 getHomeSize();
-    Q_INVOKABLE QString formatSize (quint64 size) const;
     Q_INVOKABLE void populateSizes();
     Q_INVOKABLE QString getDevicePath (const QString mount_point);
     bool getDeveloperMode();

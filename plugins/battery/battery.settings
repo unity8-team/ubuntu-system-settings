@@ -1,6 +1,6 @@
 {
     "plugin": "battery-plugin",
-    "icon": "battery-080-charging",
+    "icon": "battery-080",
     "name": "Battery",
     "translations": "ubuntu-system-settings",
     "category": "system",

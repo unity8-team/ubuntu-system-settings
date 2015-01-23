@@ -38,6 +38,7 @@ private Q_SLOTS:
 
 private:
     Update* getUpdate();
+    UpdateManager* getManager();
 };
 
 Update* UpdateManagerTest::getUpdate()
@@ -54,26 +55,32 @@ Update* UpdateManagerTest::getUpdate()
 
     return update;
 }
+UpdateManager* UpdateManagerTest::getManager()
+{
+    UpdateManager *manager = UpdateManager::instance();
+    manager->get_model().clear();
+    manager->checkUpdates();
+    return manager;
+}
 
 void UpdateManagerTest::testRegisterSystemUpdateRequired()
 {
-    UpdateManager manager;
-    manager.checkUpdates();
-    QSignalSpy spy(&manager, SIGNAL(modelChanged()));
-    QSignalSpy spy2(&manager, SIGNAL(updateAvailableFound(bool)));
+    UpdateManager *manager = getManager();
+    QSignalSpy spy(manager, SIGNAL(modelChanged()));
+    QSignalSpy spy2(manager, SIGNAL(updateAvailableFound(bool)));
     QTRY_COMPARE(spy.count(), 0);
     QTRY_COMPARE(spy2.count(), 0);
-    QTRY_COMPARE(manager.get_apps().size(), 0);
+    QTRY_COMPARE(manager->get_apps().size(), 0);
 
     Update *update = getUpdate();
 
-    manager.setCheckSystemUpdates(true);
-    manager.registerSystemUpdate(update->getPackageName(), update);
+    manager->setCheckSystemUpdates(true);
+    manager->registerSystemUpdate(update->getPackageName(), update);
     QTRY_COMPARE(spy.count(), 1);
     QTRY_COMPARE(spy2.count(), 1);
-    QTRY_COMPARE(manager.get_apps().size(), 1);
-    QTRY_COMPARE(manager.get_model().size(), 1);
-    Update* app = manager.get_model()[0].value<Update*>();
+    QTRY_COMPARE(manager->get_apps().size(), 1);
+    QTRY_COMPARE(manager->get_model().size(), 1);
+    Update* app = manager->get_model()[0].value<Update*>();
     QCOMPARE(app->getTitle(), QString("Ubuntu"));
     QCOMPARE(app->updateRequired(), true);
     QCOMPARE(app->getPackageName(), QString("UbuntuImage"));
@@ -83,54 +90,54 @@ void UpdateManagerTest::testRegisterSystemUpdateRequired()
 
 void UpdateManagerTest::testRegisterSystemUpdateNotRequired()
 {
-    UpdateManager manager;
-    manager.setCheckintUpdates(1);
-    QSignalSpy spy(&manager, SIGNAL(modelChanged()));
-    QSignalSpy spy2(&manager, SIGNAL(updateAvailableFound(bool)));
-    QSignalSpy spy3(&manager, SIGNAL(updatesNotFound()));
+    UpdateManager *manager = getManager();
+    manager->setCheckintUpdates(1);
+    QSignalSpy spy(manager, SIGNAL(modelChanged()));
+    QSignalSpy spy2(manager, SIGNAL(updateAvailableFound(bool)));
+    QSignalSpy spy3(manager, SIGNAL(updatesNotFound()));
     QTRY_COMPARE(spy.count(), 0);
     QTRY_COMPARE(spy2.count(), 0);
     QTRY_COMPARE(spy3.count(), 0);
-    QTRY_COMPARE(manager.get_apps().size(), 0);
+    QTRY_COMPARE(manager->get_apps().size(), 0);
 
-    manager.systemUpdateNotAvailable();
+    manager->systemUpdateNotAvailable();
     QTRY_COMPARE(spy.count(), 0);
     QTRY_COMPARE(spy2.count(), 0);
     QTRY_COMPARE(spy3.count(), 1);
-    QTRY_COMPARE(manager.get_apps().size(), 0);
-    QTRY_COMPARE(manager.get_model().size(), 0);
+    QTRY_COMPARE(manager->get_apps().size(), 0);
+    QTRY_COMPARE(manager->get_model().size(), 0);
 }
 
 void UpdateManagerTest::testStartDownload()
 {
-    UpdateManager manager;
-    manager.setCheckSystemUpdates(true);
+    UpdateManager *manager = getManager();
+    manager->setCheckSystemUpdates(true);
     Update *update = getUpdate();
-    manager.registerSystemUpdate(update->getPackageName(), update);
-    manager.startDownload(update->getPackageName());
+    manager->registerSystemUpdate(update->getPackageName(), update);
+    manager->startDownload(update->getPackageName());
     QTRY_COMPARE(update->updateState(), true);
 }
 
 void UpdateManagerTest::testPauseDownload()
 {
-    UpdateManager manager;
-    manager.setCheckSystemUpdates(true);
+    UpdateManager *manager = getManager();
+    manager->setCheckSystemUpdates(true);
     Update *update = getUpdate();
-    manager.registerSystemUpdate(update->getPackageName(), update);
+    manager->registerSystemUpdate(update->getPackageName(), update);
     update->setUpdateState(true);
-    manager.pauseDownload(update->getPackageName());
+    manager->pauseDownload(update->getPackageName());
     QTRY_COMPARE(update->updateState(), false);
 }
 
 void UpdateManagerTest::testCheckUpdatesModelSignal()
 {
-    UpdateManager manager;
-    QSignalSpy spy(&manager, SIGNAL(modelChanged()));
-    QTRY_COMPARE(manager.get_apps().size(), 0);
-    manager.getService().getCredentials();
-    QTRY_COMPARE(manager.get_apps().size(), 4);
-    QTRY_COMPARE(manager.get_model().size(), 1);
-    Update* app = manager.get_model()[0].value<Update*>();
+    UpdateManager *manager = getManager();
+    QSignalSpy spy(manager, SIGNAL(modelChanged()));
+    QTRY_COMPARE(manager->get_apps().size(), 0);
+    manager->getService().getCredentials();
+    QTRY_COMPARE(manager->get_apps().size(), 4);
+    QTRY_COMPARE(manager->get_model().size(), 1);
+    Update* app = manager->get_model()[0].value<Update*>();
     QTRY_COMPARE(app->getTitle(), QString("XDA Developers App"));
     QTRY_COMPARE(app->updateRequired(), true);
     QTRY_COMPARE(app->getPackageName(), QString("com.ubuntu.developer.xda-app"));
@@ -138,13 +145,13 @@ void UpdateManagerTest::testCheckUpdatesModelSignal()
 
 void UpdateManagerTest::testCheckUpdatesUpdateSignal()
 {
-    UpdateManager manager;
-    QSignalSpy spy(&manager, SIGNAL(updateAvailableFound(bool)));
-    QTRY_COMPARE(manager.get_apps().size(), 0);
-    manager.getService().getCredentials();
-    QTRY_COMPARE(manager.get_apps().size(), 4);
-    QTRY_COMPARE(manager.get_model().size(), 1);
-    Update* app = manager.get_model()[0].value<Update*>();
+    UpdateManager *manager = getManager();
+    QSignalSpy spy(manager, SIGNAL(updateAvailableFound(bool)));
+    QTRY_COMPARE(manager->get_apps().size(), 0);
+    manager->getService().getCredentials();
+    QTRY_COMPARE(manager->get_apps().size(), 4);
+    QTRY_COMPARE(manager->get_model().size(), 1);
+    Update* app = manager->get_model()[0].value<Update*>();
     QTRY_COMPARE(app->getTitle(), QString("XDA Developers App"));
     QTRY_COMPARE(app->updateRequired(), true);
     QTRY_COMPARE(app->getPackageName(), QString("com.ubuntu.developer.xda-app"));

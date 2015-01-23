@@ -22,6 +22,7 @@ set(QML_SOURCES
     AppAccess.qml
     AppAccessControl.qml
     Dash.qml
+    here-terms.qml
     Location.qml
     LockSecurity.qml
     Ofono.qml

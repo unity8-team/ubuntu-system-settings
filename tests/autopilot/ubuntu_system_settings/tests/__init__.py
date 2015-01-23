@@ -22,17 +22,22 @@ from fixtures import EnvironmentVariable
 from testtools.matchers import Equals, NotEquals, GreaterThan
 from time import sleep
 from ubuntu_system_settings import SystemSettings
+from gi.repository import UPowerGlib
 
 ACCOUNTS_IFACE = 'org.freedesktop.Accounts'
 ACCOUNTS_USER_IFACE = 'org.freedesktop.Accounts.User'
 ACCOUNTS_OBJ = '/org/freedesktop/Accounts'
 ACCOUNTS_SERVICE = 'com.canonical.unity.AccountsService'
 ACCOUNTS_SOUND_IFACE = 'com.ubuntu.touch.AccountsService.Sound'
+ISOUND_SERVICE = 'com.canonical.indicator.sound'
+ISOUND_ACTION_PATH = '/com/canonical/indicator/sound'
+GTK_ACTIONS_IFACE = 'org.gtk.Actions'
 MODEM_IFACE = 'org.ofono.Modem'
 CONNMAN_IFACE = 'org.ofono.ConnectionManager'
 RDO_IFACE = 'org.ofono.RadioSettings'
 SIM_IFACE = 'org.ofono.SimManager'
 NETREG_IFACE = 'org.ofono.NetworkRegistration'
+NETOP_IFACE = 'org.ofono.NetworkOperator'
 CALL_FWD_IFACE = 'org.ofono.CallForwarding'
 CALL_SETTINGS_IFACE = 'org.ofono.CallSettings'
 SYSTEM_IFACE = 'com.canonical.SystemImage'
@@ -43,6 +48,8 @@ LM_IFACE = 'org.freedesktop.login1.Manager'
 NM_SERVICE = 'org.freedesktop.NetworkManager'
 NM_PATH = '/org/freedesktop/NetworkManager'
 NM_IFACE = 'org.freedesktop.NetworkManager'
+UPOWER_VERSION = str(UPowerGlib.MAJOR_VERSION)
+UPOWER_VERSION += '.' + str(UPowerGlib.MINOR_VERSION)
 
 
 class UbuntuSystemSettingsTestCase(
@@ -53,8 +60,9 @@ class UbuntuSystemSettingsTestCase(
     def setUp(self, panel=None):
         super(UbuntuSystemSettingsTestCase, self).setUp()
         self.system_settings = SystemSettings(self, panel=panel)
+        self.main_view = self.system_settings.main_view
         self.assertThat(
-            self.system_settings.main_view.visible,
+            self.main_view.visible,
             Eventually(Equals(True)))
 
     def set_orientation(self, gsettings, value):
@@ -74,7 +82,9 @@ class UbuntuSystemSettingsUpowerTestCase(UbuntuSystemSettingsTestCase,
         cls.dbus_con = cls.get_dbus(True)
         # Add a mock Upower environment so we get consistent results
         (cls.p_mock, cls.obj_upower) = cls.spawn_server_template(
-            'upower', {'OnBattery': True}, stdout=subprocess.PIPE)
+            'upower',
+            {'OnBattery': True, 'DaemonVersion': UPOWER_VERSION},
+            stdout=subprocess.PIPE)
         cls.dbusmock = dbus.Interface(cls.obj_upower, dbusmock.MOCK_IFACE)
 
     def setUp(self, panel=None):
@@ -100,10 +110,6 @@ class UbuntuSystemSettingsBatteryTestCase(UbuntuSystemSettingsUpowerTestCase):
     def setUp(self):
         super(UbuntuSystemSettingsBatteryTestCase, self).setUp()
         self.add_mock_battery()
-        self.system_settings = SystemSettings(self)
-        self.assertThat(
-            self.system_settings.main_view.visible,
-            Eventually(Equals(True)))
 
 
 class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
@@ -115,14 +121,14 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
     @property
     def choose_carrier_page(self):
         """Return carrier selection page"""
-        return self.system_settings.main_view.select_single(
+        return self.main_view.select_single(
             objectName='chooseCarrierPage'
         )
 
     @property
     def choose_carriers_page(self):
         """Return carriers selection page"""
-        return self.system_settings.main_view.select_single(
+        return self.main_view.select_single(
             objectName='chooseCarriersPage'
         )
 
@@ -133,7 +139,7 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
 
     def mock_connection_manager(self, modem):
         modem.AddProperty(CONNMAN_IFACE, 'Powered', dbus.Boolean(1))
-        modem.AddProperty(CONNMAN_IFACE, 'RoamingAllowed', False)
+        modem.AddProperty(CONNMAN_IFACE, 'RoamingAllowed', dbus.Boolean(0))
         modem.AddMethods(
             CONNMAN_IFACE,
             [
@@ -146,11 +152,14 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
                     'self.EmitSignal("IFACE", "PropertyChanged", "sv",\
                         [args[0], args[1]])'.replace("IFACE", CONNMAN_IFACE)),
             ])
+        interfaces = modem.GetProperties()['Interfaces']
+        interfaces.append(CONNMAN_IFACE)
+        modem.SetProperty('Interfaces', interfaces)
 
     def mock_carriers(self, name):
         self.dbusmock.AddObject(
             '/%s/operator/op2' % name,
-            'org.ofono.NetworkOperator',
+            NETOP_IFACE,
             {
                 'Name': 'my.cool.telco',
                 'Status': 'available',
@@ -167,7 +176,7 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
         # Add a forbidden carrier
         self.dbusmock.AddObject(
             '/%s/operator/op3' % name,
-            'org.ofono.NetworkOperator',
+            NETOP_IFACE,
             {
                 'Name': 'my.bad.telco',
                 'Status': 'forbidden',
@@ -198,6 +207,10 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
                  "PropertyChanged", "sv", [args[0], args[1]])'
                     .replace('IFACE', RDO_IFACE)), ])
 
+        interfaces = modem.GetProperties()['Interfaces']
+        interfaces.append(RDO_IFACE)
+        modem.SetProperty('Interfaces', interfaces)
+
     def mock_call_forwarding(self, modem):
         modem.AddProperty(
             CALL_FWD_IFACE, 'VoiceUnconditional', '')
@@ -210,6 +223,9 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
                  'self.EmitSignal("IFACE",\
                  "PropertyChanged", "sv", [args[0], args[1]])'
                     .replace('IFACE', CALL_FWD_IFACE)), ])
+        interfaces = modem.GetProperties()['Interfaces']
+        interfaces.append(CALL_FWD_IFACE)
+        modem.SetProperty('Interfaces', interfaces)
 
     def mock_call_settings(self, modem):
         modem.AddProperty(
@@ -223,6 +239,9 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
                  'self.EmitSignal("IFACE",\
                  "PropertyChanged", "sv", [args[0], args[1]])'
                     .replace('IFACE', CALL_SETTINGS_IFACE)), ])
+        interfaces = modem.GetProperties()['Interfaces']
+        interfaces.append(CALL_SETTINGS_IFACE)
+        modem.SetProperty('Interfaces', interfaces)
 
     def add_sim1(self):
         # create modem_0 proxy
@@ -280,6 +299,12 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
             template, stdout=subprocess.PIPE)
         cls.dbusmock = dbus.Interface(cls.obj_ofono, dbusmock.MOCK_IFACE)
 
+    @classmethod
+    def tearDownClass(cls):
+        super(UbuntuSystemSettingsOfonoTestCase, cls).tearDownClass()
+        cls.p_mock.terminate()
+        cls.p_mock.wait()
+
     def setUp(self, panel=None):
         self.obj_ofono.Reset()
 
@@ -287,7 +312,7 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
         if self.use_sims == 2:
             self.add_sim2()
 
-        super(UbuntuSystemSettingsOfonoTestCase, self).setUp(panel)
+        super(UbuntuSystemSettingsOfonoTestCase, self).setUp()
 
     def set_default_for_calls(self, gsettings, default):
         gsettings.set_value('default-sim-for-calls', default)
@@ -300,47 +325,51 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
         sleep(1)
 
     def get_default_sim_for_calls_selector(self, text):
-        return self.system_settings.main_view.cellular_page.select_single(
+        return self.cellular_page.select_single(
             objectName="defaultForCalls" + text
         )
 
     def get_default_sim_for_messages_selector(self, text):
-        return self.system_settings.main_view.cellular_page.select_single(
+        return self.cellular_page.select_single(
             objectName="defaultForMessages" + text
         )
 
 
 class CellularBaseTestCase(UbuntuSystemSettingsOfonoTestCase):
+
     def setUp(self):
         """ Go to Cellular page """
-        super(CellularBaseTestCase, self).setUp('cellular')
+        super(CellularBaseTestCase, self).setUp()
+        self.cellular_page = self.main_view.go_to_cellular_page()
+
+
+class BluetoothBaseTestCase(UbuntuSystemSettingsTestCase):
+
+    def setUp(self):
+        """ Go to Bluetooth page """
+        super(BluetoothBaseTestCase, self).setUp()
+        self.bluetooth_page = self.main_view.go_to_bluetooth_page()
 
 
 class PhoneOfonoBaseTestCase(UbuntuSystemSettingsOfonoTestCase):
     def setUp(self):
         """ Go to Phone page """
-        super(PhoneOfonoBaseTestCase, self).setUp('phone')
-        self.phone_page = self.system_settings.main_view.select_single(
-            objectName='phonePage'
-        )
+        super(PhoneOfonoBaseTestCase, self).setUp()
+        self.phone_page = self.main_view.go_to_phone_page()
 
 
 class AboutBaseTestCase(UbuntuSystemSettingsTestCase):
     def setUp(self):
         """Go to About page."""
-        super(AboutBaseTestCase, self).setUp('about')
-        self.about_page = self.system_settings.main_view.select_single(
-            objectName='aboutPage'
-        )
+        super(AboutBaseTestCase, self).setUp()
+        self.about_page = self.main_view.go_to_about_page()
 
 
 class AboutOfonoBaseTestCase(UbuntuSystemSettingsOfonoTestCase):
     def setUp(self):
         """Go to About page."""
-        super(AboutOfonoBaseTestCase, self).setUp('about')
-        self.about_page = self.system_settings.main_view.select_single(
-            objectName='aboutPage'
-        )
+        super(AboutOfonoBaseTestCase, self).setUp()
+        self.about_page = self.main_view.go_to_about_page()
 
 
 class AboutSystemImageBaseTestCase(AboutBaseTestCase,
@@ -384,12 +413,15 @@ class StorageBaseTestCase(AboutBaseTestCase):
     def setUp(self):
         """Go to Storage Page."""
         super(StorageBaseTestCase, self).setUp()
-        self.system_settings.main_view.click_item('storageItem')
+        self.main_view.click_item('storageItem')
+        self.storage_page = self.main_view.select_single(
+            'Storage', objectName='storagePage'
+        )
         self.assertThat(self.storage_page.active, Eventually(Equals(True)))
 
     def assert_space_item(self, object_name, text):
         """ Checks whether an space item exists and returns a value """
-        item = self.system_settings.main_view.storage_page.select_single(
+        item = self.main_view.storage_page.select_single(
             objectName=object_name
         )
         self.assertThat(item, NotEquals(None))
@@ -404,13 +436,6 @@ class StorageBaseTestCase(AboutBaseTestCase):
     def get_storage_space_used_by_category(self, objectName):
         return self.main_view.wait_select_single(
             'StorageItem', objectName=objectName).value
-
-    @property
-    def storage_page(self):
-        """ Return 'Storage' page """
-        return self.system_settings.main_view.select_single(
-            'Storage', objectName='storagePage'
-        )
 
 
 class LicenseBaseTestCase(AboutBaseTestCase):
@@ -430,8 +455,7 @@ class SystemUpdatesBaseTestCase(UbuntuSystemSettingsTestCase):
     def setUp(self):
         """Go to SystemUpdates Page."""
         super(SystemUpdatesBaseTestCase, self).setUp()
-        self.system_settings.main_view.click_item(
-            'entryComponent-system-update')
+        self.main_view.click_item('entryComponent-system-update')
 
 
 class BackgroundBaseTestCase(
@@ -503,7 +527,7 @@ class BackgroundBaseTestCase(
             'SYSTEM_SETTINGS_UBUNTU_ART_DIR', art_dir))
 
         super(BackgroundBaseTestCase, self).setUp('background')
-        self.assertThat(self.system_settings.main_view.background_page.active,
+        self.assertThat(self.main_view.background_page.active,
                         Eventually(Equals(True)))
 
     def tearDown(self):
@@ -521,13 +545,17 @@ class SoundBaseTestCase(
     def setUpClass(klass):
         klass.start_system_bus()
         klass.dbus_con = klass.get_dbus(True)
+        klass.dbus_con_session = klass.get_dbus(False)
 
     def setUp(self, panel='sound'):
+        # TODO only do this if the sound indicator is running.
+        # --elopio - 2015-01-08
+        self.stop_sound_indicator()
+        self.addCleanup(self.start_sound_indicator)
 
         user_obj = '/user/foo'
 
         self.accts_snd_props = {
-            'SilentMode': dbus.Boolean(False, variant_level=1),
             'IncomingCallVibrate': dbus.Boolean(False, variant_level=1),
             'IncomingCallVibrateSilentMode': dbus.Boolean(False,
                                                           variant_level=1),
@@ -543,13 +571,32 @@ class SoundBaseTestCase(
                                              ACCOUNTS_IFACE, system_bus=True,
                                              stdout=subprocess.PIPE)
 
-        sleep(2)
+        # start isound
+        self.mock_isound = self.spawn_server(ISOUND_SERVICE,
+                                             ISOUND_ACTION_PATH,
+                                             GTK_ACTIONS_IFACE,
+                                             stdout=subprocess.PIPE)
+
+        self.wait_for_bus_object(ACCOUNTS_IFACE,
+                                 ACCOUNTS_OBJ,
+                                 system_bus=True)
 
         self.dbus_mock = dbus.Interface(self.dbus_con.get_object(
                                         ACCOUNTS_IFACE,
                                         ACCOUNTS_OBJ,
                                         ACCOUNTS_IFACE),
                                         dbusmock.MOCK_IFACE)
+
+        self.wait_for_bus_object(ISOUND_SERVICE,
+                                 ISOUND_ACTION_PATH)
+
+        self.dbus_mock_isound = dbus.Interface(
+            self.dbus_con_session.get_object(
+                ISOUND_SERVICE,
+                ISOUND_ACTION_PATH,
+                GTK_ACTIONS_IFACE),
+            dbusmock.MOCK_IFACE)
+
         # let accountservice find a user object path
         self.dbus_mock.AddMethod(ACCOUNTS_IFACE, 'FindUserById', 'x', 'o',
                                  'ret = "%s"' % user_obj)
@@ -576,10 +623,6 @@ class SoundBaseTestCase(
             user_obj, ACCOUNTS_SOUND_IFACE, self.accts_snd_props,
             [
                 (
-                    'GetSilentMode', '', 'v',
-                    'ret = self.Get("%s", "SilentMode")' %
-                    ACCOUNTS_SOUND_IFACE),
-                (
                     'GetIncomingCallVibrate', '', 'v',
                     'ret = self.Get("%s", "IncomingCallVibrate")' %
                     ACCOUNTS_SOUND_IFACE),
@@ -603,51 +646,65 @@ class SoundBaseTestCase(
                     ACCOUNTS_SOUND_IFACE)
             ])
 
-        self.obj_test = self.dbus_con.get_object(ACCOUNTS_IFACE, user_obj,
-                                                 ACCOUNTS_IFACE)
+        self.obj_snd = self.dbus_con.get_object(ACCOUNTS_IFACE, user_obj,
+                                                ACCOUNTS_IFACE)
+
+        self.dbus_mock_isound.AddMethods(
+            GTK_ACTIONS_IFACE,
+            [
+                (
+                    'Activate', 'sava{sv}', '',
+                    ''
+                ),
+                (
+                    'Describe', 's', '(bsav)',
+                    'if args[0] == "silent-mode":'
+                    '    ret = [True, "", [False]]'
+                    'if args[0] == "volume":'
+                    '    ret = [True, "i", [0.4]]'
+                ),
+                (
+                    'DescribeAll', 's', 'a{s(bsav)}',
+                    'ret = {'
+                    '"silent-mode": [True, "", [False]],'
+                    '"volume": [True, "i", [0.4]]}'
+                ),
+                (
+                    'List', '', 'as',
+                    'ret = ["silent-mode", "volume"]'
+                ),
+                (
+                    'SetState', 'sva{sv}', '',
+                    ''
+                )
+            ])
 
         super(SoundBaseTestCase, self).setUp(panel)
 
-        """ Go to Sound page """
         if panel == 'sound':
-            self.assertThat(self.system_settings.main_view.sound_page.active,
+            self.sound_page = self.main_view.select_single(
+                objectName='soundPage'
+            )
+            self.assertThat(self.sound_page.active,
                             Eventually(Equals(True)))
 
     def tearDown(self):
         self.mock_server.terminate()
         self.mock_server.wait()
+        self.mock_isound.terminate()
+        self.mock_isound.wait()
         super(SoundBaseTestCase, self).tearDown()
+
+    def start_sound_indicator(self):
+        subprocess.call(['initctl', 'start', 'indicator-sound'])
+
+    def stop_sound_indicator(self):
+        subprocess.call(['initctl', 'stop', 'indicator-sound'])
 
 
 class ResetBaseTestCase(UbuntuSystemSettingsTestCase,
                         dbusmock.DBusTestCase):
     """ Base class for reset settings tests"""
-
-    def mock_for_launcher_reset(self):
-        user_obj = '/user/foo'
-        # start dbus system bus
-        self.mock_server = self.spawn_server(ACCOUNTS_IFACE, ACCOUNTS_OBJ,
-                                             ACCOUNTS_IFACE, system_bus=True,
-                                             stdout=subprocess.PIPE)
-
-        # spawn_server does not wait properly
-        # Reported as bug here: http://pad.lv/1350833
-        sleep(2)
-        self.acc_proxy = dbus.Interface(self.dbus_con.get_object(
-            ACCOUNTS_IFACE, ACCOUNTS_OBJ), dbusmock.MOCK_IFACE)
-
-        self.acc_proxy.AddMethod(ACCOUNTS_IFACE, 'FindUserById', 'x', 'o',
-                                 'ret = "%s"' % user_obj)
-
-        self.acc_proxy.AddObject(
-            user_obj, ACCOUNTS_USER_IFACE, {}, [])
-
-        self.user_mock = dbus.Interface(self.dbus_con.get_object(
-            ACCOUNTS_IFACE, user_obj),
-            dbusmock.MOCK_IFACE)
-
-        self.user_mock.AddMethod(
-            'org.freedesktop.DBus.Properties', 'Set', 'ssaa{sv}', '', '')
 
     def mock_for_factory_reset(self):
         self.mock_server = self.spawn_server(SYSTEM_IFACE, SYSTEM_SERVICE_OBJ,
@@ -667,11 +724,9 @@ class ResetBaseTestCase(UbuntuSystemSettingsTestCase,
         klass.dbus_con = klass.get_dbus(True)
 
     def setUp(self):
-        self.mock_for_launcher_reset()
         self.mock_for_factory_reset()
-
         super(ResetBaseTestCase, self).setUp()
-        self.reset_page = self.system_settings.main_view.go_to_reset_phone()
+        self.reset_page = self.main_view.go_to_reset_phone()
 
     def tearDown(self):
         self.mock_server.terminate()
@@ -683,28 +738,11 @@ class SecurityBaseTestCase(UbuntuSystemSettingsOfonoTestCase):
     """ Base class for security and privacy settings tests"""
 
     def setUp(self):
-        super(SecurityBaseTestCase, self).setUp('security-privacy')
-        """ Go to Security & Privacy page """
-        self.security_page = self.system_settings.main_view.select_single(
-            objectName='securityPrivacyPage'
-        )
-        self.assertThat(self.security_page.active,
-                        Eventually(Equals(True)))
+        super(SecurityBaseTestCase, self).setUp()
+        self.security_page = self.main_view.go_to_security_page()
 
     def tearDown(self):
         super(SecurityBaseTestCase, self).tearDown()
-
-
-class PhoneSoundBaseTestCase(SoundBaseTestCase):
-    def setUp(self):
-        """ Go to Phone page """
-        super(PhoneSoundBaseTestCase, self).setUp('phone')
-        self.phone_page = self.system_settings.main_view.select_single(
-            objectName='phonePage'
-        )
-
-    def tearDown(self):
-        super(PhoneSoundBaseTestCase, self).tearDown()
 
 
 class LanguageBaseTestCase(UbuntuSystemSettingsTestCase,
@@ -732,8 +770,7 @@ class LanguageBaseTestCase(UbuntuSystemSettingsTestCase,
         self.mock_loginmanager()
 
         super(LanguageBaseTestCase, self).setUp()
-        self.language_page = self.system_settings.\
-            main_view.go_to_language_page()
+        self.language_page = self.main_view.go_to_language_page()
 
     def tearDown(self):
         self.mock_server.terminate()
@@ -772,8 +809,7 @@ class WifiBaseTestCase(UbuntuSystemSettingsTestCase,
             pass
 
         super(WifiBaseTestCase, self).setUp()
-        self.wifi_page = self.system_settings.\
-            main_view.go_to_wifi_page()
+        self.wifi_page = self.main_view.go_to_wifi_page()
 
     def add_previous_networks(self, networks):
         dev_path = str(self.obj_nm.GetDevices()[0])

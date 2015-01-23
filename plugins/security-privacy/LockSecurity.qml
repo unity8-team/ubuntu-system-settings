@@ -70,6 +70,11 @@ ItemPage {
         dlg.newMethod = newMethod
     }
 
+    RegExpValidator {
+        id: passcodeValidator
+        regExp: /\d{4}/
+    }
+
     Component {
         id: dialogComponent
 
@@ -93,7 +98,7 @@ ItemPage {
                         changeSecurityDialog.oldMethod) { // Changing existing
                     switch (changeSecurityDialog.newMethod) {
                     case UbuntuSecurityPrivacyPanel.Passcode:
-                        return i18n.tr("Change PIN code…")
+                        return i18n.tr("Change passcode…")
                     case UbuntuSecurityPrivacyPanel.Passphrase:
                         return i18n.tr("Change passphrase…")
                     default: // To stop the runtime complaining
@@ -104,7 +109,7 @@ ItemPage {
                     case UbuntuSecurityPrivacyPanel.Swipe:
                         return i18n.tr("Switch to swipe")
                     case UbuntuSecurityPrivacyPanel.Passcode:
-                        return i18n.tr("Switch to PIN code")
+                        return i18n.tr("Switch to passcode")
                     case UbuntuSecurityPrivacyPanel.Passphrase:
                         return i18n.tr("Switch to passphrase")
                     }
@@ -115,7 +120,7 @@ ItemPage {
                 text: {
                     switch (changeSecurityDialog.oldMethod) {
                     case UbuntuSecurityPrivacyPanel.Passcode:
-                        return i18n.tr("Existing PIN code")
+                        return i18n.tr("Existing passcode")
                     case UbuntuSecurityPrivacyPanel.Passphrase:
                         return i18n.tr("Existing passphrase")
                     // Shouldn't be reached when visible but still evaluated
@@ -142,13 +147,6 @@ ItemPage {
                     else
                         return Qt.ImhNone
                 }
-                inputMask: {
-                    if (changeSecurityDialog.oldMethod ===
-                            UbuntuSecurityPrivacyPanel.Passcode)
-                        return "9999"
-                    else
-                        return ""
-                }
                 visible: changeSecurityDialog.oldMethod ===
                             UbuntuSecurityPrivacyPanel.Passphrase ||
                          changeSecurityDialog.oldMethod ===
@@ -158,6 +156,24 @@ ItemPage {
                             UbuntuSecurityPrivacyPanel.Swipe)
                         confirmButton.enabled = text.length > 0
                 }
+            }
+
+            /* Using bindings since it is, according to documentation,
+            impossible to unset both validator and maximumLength properties */
+            Binding {
+                target: currentInput
+                property: "validator"
+                value:  passcodeValidator
+                when: changeSecurityDialog.oldMethod ===
+                    UbuntuSecurityPrivacyPanel.Passcode
+            }
+
+            Binding {
+                target: currentInput
+                property: "maximumLength"
+                value:  4
+                when: changeSecurityDialog.oldMethod ===
+                    UbuntuSecurityPrivacyPanel.Passcode
             }
 
             Label {
@@ -171,7 +187,7 @@ ItemPage {
                 text: {
                     switch (changeSecurityDialog.newMethod) {
                     case UbuntuSecurityPrivacyPanel.Passcode:
-                        return i18n.tr("Choose PIN code")
+                        return i18n.tr("Choose passcode")
                     case UbuntuSecurityPrivacyPanel.Passphrase:
                         return i18n.tr("Choose passphrase")
                     // Shouldn't be reached when visible but still evaluated
@@ -197,27 +213,35 @@ ItemPage {
                     else
                         return Qt.ImhNone
                 }
-                inputMask: {
-                    if (changeSecurityDialog.newMethod ===
-                            UbuntuSecurityPrivacyPanel.Passcode)
-                        return "9999"
-                    else
-                        return ""
-                }
                 visible: changeSecurityDialog.newMethod ===
                             UbuntuSecurityPrivacyPanel.Passcode ||
                          changeSecurityDialog.newMethod ===
                             UbuntuSecurityPrivacyPanel.Passphrase
-                // Doesn't get updated if you set this in enabled of confirmButton
-                onTextChanged: confirmButton.enabled =
-                               (acceptableInput && (!visible || text.length > 0))
+            }
+
+            /* Using bindings since it is, according to documentation,
+            impossible to unset both validator and maximumLength properties */
+            Binding {
+                target: newInput
+                property: "validator"
+                value: passcodeValidator
+                when: changeSecurityDialog.newMethod ===
+                    UbuntuSecurityPrivacyPanel.Passcode
+            }
+
+            Binding {
+                target: newInput
+                property: "maximumLength"
+                value:  4
+                when: changeSecurityDialog.newMethod ===
+                    UbuntuSecurityPrivacyPanel.Passcode
             }
 
             Label {
                 text: {
                     switch (changeSecurityDialog.newMethod) {
                     case UbuntuSecurityPrivacyPanel.Passcode:
-                        return i18n.tr("Confirm PIN code")
+                        return i18n.tr("Confirm passcode")
                     case UbuntuSecurityPrivacyPanel.Passphrase:
                         return i18n.tr("Confirm passphrase")
                     // Shouldn't be reached when visible but still evaluated
@@ -243,17 +267,28 @@ ItemPage {
                     else
                         return Qt.ImhNone
                 }
-                inputMask: {
-                    if (changeSecurityDialog.newMethod ===
-                            UbuntuSecurityPrivacyPanel.Passcode)
-                        return "9999"
-                    else
-                        return ""
-                }
                 visible: changeSecurityDialog.newMethod ===
                             UbuntuSecurityPrivacyPanel.Passcode ||
                          changeSecurityDialog.newMethod ===
                             UbuntuSecurityPrivacyPanel.Passphrase
+            }
+
+            /* Using bindings since it is, according to documentation,
+            impossible to unset both validator and maximumLength properties */
+            Binding {
+                target: confirmInput
+                property: "validator"
+                value:  passcodeValidator
+                when: changeSecurityDialog.newMethod ===
+                    UbuntuSecurityPrivacyPanel.Passcode
+            }
+
+            Binding {
+                target: confirmInput
+                property: "maximumLength"
+                value:  4
+                when: changeSecurityDialog.newMethod ===
+                    UbuntuSecurityPrivacyPanel.Passcode
             }
 
             Label {
@@ -262,7 +297,7 @@ ItemPage {
                 text: {
                     if (changeSecurityDialog.newMethod ===
                             UbuntuSecurityPrivacyPanel.Passcode)
-                        return i18n.tr("Those PIN codes don't match. Try again.")
+                        return i18n.tr("Those passcodes don't match. Try again.")
                     if (changeSecurityDialog.newMethod ===
                             UbuntuSecurityPrivacyPanel.Passphrase)
                         return i18n.tr("Those passphrases don't match. Try again.")
@@ -303,7 +338,7 @@ ItemPage {
                         else
                             return i18n.tr("Set")
                     }
-                    enabled: false
+                    enabled: newInput.acceptableInput
                     onClicked: {
                         changeSecurityDialog.enabled = false
 
@@ -340,16 +375,16 @@ ItemPage {
         anchors.left: parent.left
         anchors.right: parent.right
 
-        ListItem.Standard {
+        SettingsItemTitle {
             text: i18n.tr("Unlock the phone using:")
         }
 
         ListItem.ItemSelector {
             property string swipe: i18n.tr("Swipe (no security)")
-            property string passcode: i18n.tr("4-digit PIN code")
+            property string passcode: i18n.tr("4-digit passcode")
             property string passphrase: i18n.tr("Passphrase")
             property string swipeAlt: i18n.tr("Swipe (no security)… ")
-            property string passcodeAlt: i18n.tr("4-digit PIN code…")
+            property string passcodeAlt: i18n.tr("4-digit passcode…")
             property string passphraseAlt: i18n.tr("Passphrase…")
 
             id: unlockMethod
@@ -381,7 +416,7 @@ ItemPage {
                         UbuntuSecurityPrivacyPanel.Swipe
 
             control: Button {
-                property string changePasscode: i18n.tr("Change PIN code…")
+                property string changePasscode: i18n.tr("Change passcode…")
                 property string changePassphrase: i18n.tr("Change passphrase…")
 
                 property bool passcode: securityPrivacy.securityType ===

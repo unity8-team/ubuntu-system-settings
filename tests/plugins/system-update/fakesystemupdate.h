@@ -45,6 +45,7 @@ public:
     void applyUpdate() {}
     void cancelUpdate() {}
     void pauseDownload() {}
+    bool checkTarget() { return true;}
 
 Q_SIGNALS:
     void updateAvailable(const QString& packageName, Update *update);
@@ -55,7 +56,7 @@ Q_SIGNALS:
     void updateFailed(int consecutiveFailureCount, QString lastReason);
     void downloadModeChanged();
     void updateProcessFailed(const QString& reason);
-    
+    void rebooting(bool status);
 };
 
 }

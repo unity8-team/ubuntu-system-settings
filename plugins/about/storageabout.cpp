@@ -290,17 +290,6 @@ quint64 StorageAbout::getHomeSize()
     return m_homeSize;
 }
 
-QString StorageAbout::formatSize(quint64 size) const
-{
-    guint64 g_size = size;
-
-    gchar * formatted_size = g_format_size (g_size);
-    QString q_formatted_size = QString::fromLocal8Bit(formatted_size);
-    g_free (formatted_size);
-
-    return q_formatted_size;
-}
-
 void StorageAbout::populateSizes()
 {
     quint32 *running = new quint32(0);

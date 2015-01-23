@@ -19,24 +19,31 @@
 */
 import QtQuick 2.0
 import GSettings 1.0
+import SystemSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 
 Column {
-
     objectName: "multiSim"
 
     property var sims
+    property var poweredSim: {
+        var s = null;
+        sims.forEach(function (sim) {
+            if (sim.connMan.powered === true) {
+                s = sim;
+            }
+        });
+        return s;
+    }
     property var modems
-
     // make settings available to all children of root
     property var settings: phoneSettings
 
-    CellularMultiSim {
+    DataMultiSim {
         anchors { left: parent.left; right: parent.right }
     }
 
-    ListItem.Divider {}
 
     ListItem.SingleValue {
         text : i18n.tr("Hotspot disabled because Wi-Fi is off.")
@@ -60,17 +67,16 @@ Column {
         visible: showAllUI
     }
 
-    ListItem.Divider {
-        visible: hotspotItem.visible || dataUsage.visible
-    }
+    ListItem.Divider {}
 
     ListItem.SingleValue {
         text: i18n.tr("Carriers")
         id: chooseCarrier
-        objectName: "chooseCarrier"
+        objectName: "carrierApnEntry"
         progression: enabled
+        showDivider: false
         onClicked: {
-            pageStack.push(Qt.resolvedUrl("../PageChooseCarriers.qml"), {
+            pageStack.push(Qt.resolvedUrl("../PageCarriersAndApns.qml"), {
                 sims: sims
             });
         }
@@ -79,14 +85,55 @@ Column {
     ListItem.Divider {}
 
     SimEditor {
-        anchors { left: parent.left; right: parent.right }
+        anchors { left: parent.left; right: parent.right }
     }
 
     ListItem.Divider {}
 
     DefaultSim {
-        anchors { left: parent.left; right: parent.right }
+        anchors { left: parent.left; right: parent.right }
     }
+
+    ListItem.Divider {}
+
+    function techToString (tech) {
+        return {
+            'gsm': i18n.tr("2G only (saves battery)"),
+            'umts': i18n.tr("2G/3G (faster)"),
+            'lte': i18n.tr("2G/3G/4G (faster)")
+        }[tech]
+    }
+
+    Repeater {
+        model: sims
+
+        ListItem.ItemSelector {
+            id: radio
+            property var sim: modelData
+            property var rSettings: sim.radioSettings
+            property string techPref: rSettings.technologyPreference
+            property var modemTechs: rSettings.modemTechnologies
+            expanded: true
+            text: i18n.tr("Connection type:")
+            model: modemTechs || []
+            delegate: OptionSelectorDelegate {
+                objectName: sim.path + "_radio_" + modelData
+                text: techToString(modelData)
+            }
+            enabled: techPref !== ""
+            visible: sim.connMan.powered
+            selectedIndex: techPref !== "" ? model.indexOf(techPref) : -1
+            onDelegateClicked: rSettings.technologyPreference = model[index];
+            Connections {
+                target: rSettings
+                onTechnologyPreferenceChanged: {
+                    radio.selectedIndex = modemTechs.indexOf(preference)
+                }
+                ignoreUnknownSignals: true
+            }
+        }
+    }
+
 
     GSettings {
         id: phoneSettings
@@ -99,7 +146,7 @@ Column {
             if (!simNames[m0]) {
                 simNames[m0] = "SIM 1";
             }
-            if (!simNames[m1]) {
+            if (!simNames[m1]) {
                 simNames[m1] = "SIM 2";
             }
             phoneSettings.simNames = simNames;

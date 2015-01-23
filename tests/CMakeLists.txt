@@ -1,4 +1,5 @@
 include_directories(${CMAKE_CURRENT_BINARY_DIR} ../src)
+include_directories(${GLIB_INCLUDE_DIRS})
 add_definitions(-DI18N_DOMAIN="ubuntu-system-settings")
 add_definitions(-DPLUGIN_PRIVATE_MODULE_DIR="${PLUGIN_PRIVATE_MODULE_DIR}")
 add_definitions(-DPLUGIN_MANIFEST_DIR="${CMAKE_CURRENT_SOURCE_DIR}/data")
@@ -36,13 +37,9 @@ add_test(tst-plugins tst-plugins)
 set_tests_properties(tst-plugins PROPERTIES ENVIRONMENT "QT_QPA_PLATFORM=minimal")
 
 qt5_use_modules(tst-arguments Core Test)
+target_link_libraries(tst-arguments ${GLIB_LDFLAGS})
 add_test(tst-arguments tst-arguments)
 
-add_executable(tst-pagelist tst_pagelist.cpp ../wizard/PageList.cpp)
-set_target_properties(tst-pagelist PROPERTIES
-                      INCLUDE_DIRECTORIES "${CMAKE_CURRENT_BINARY_DIR};${CMAKE_SOURCE_DIR}/wizard")
-qt5_use_modules(tst-pagelist Core Test)
-add_test(tst-pagelist tst-pagelist)
 configure_file (test_code.py.in test_code.py)
 configure_file (test_push_helper.py.in test_push_helper.py)
 add_test(NAME python3 COMMAND "${CMAKE_CURRENT_BINARY_DIR}/test_code.py")

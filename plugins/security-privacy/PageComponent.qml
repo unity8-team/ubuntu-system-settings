@@ -39,9 +39,11 @@ ItemPage {
 
     property alias usePowerd: batteryBackend.powerdRunning
     property bool lockOnSuspend
-    property var modemsSorted: manager.modems.slice(0).sort()
-    property var sims
-    property int simsPresent: 0
+    property var modemsSorted: []
+    property var sims: []
+    /* glue to something that will emit change events
+    TODO: fix this so that the present count emits events of its own */
+    property int simsPresent: simsLoaded ? Sims.getPresentCount() : 0
     property int simsLoaded: 0
     property int simsLocked: {
         var t = 0;
@@ -66,23 +68,10 @@ ItemPage {
 
     OfonoManager {
         id: manager
-        Component.onCompleted: {
-            // create ofono bindings for all modem paths
-            var component = Qt.createComponent("Ofono.qml");
-            modemsSorted.forEach(function (path, index) {
-                var sim = component.createObject(root, {
-                    path: path,
-                    name: phoneSettings.simNames[path] ?
-                            phoneSettings.simNames[path] :
-                            "SIM " + (index + 1)
-                });
-                if (sim === null)
-                    console.warn('failed to create sim object');
-                else
-                    Sims.add(sim);
-            });
+        onModemsChanged: {
+            root.modemsSorted = modems.slice(0).sort();
+            Sims.createQML();
             root.sims = Sims.getAll();
-            root.simsPresent = Sims.getPresentCount();
         }
     }
 
@@ -121,10 +110,10 @@ ItemPage {
             anchors.left: parent.left
             anchors.right: parent.right
 
-            ListItem.Standard {
+            ListItem.Header {
                 id: securityTitle
                 text: i18n.tr("Security")
-            }            
+            }
             ListItem.SingleValue {
                 id: lockingControl
                 objectName: "lockingControl"
@@ -181,34 +170,28 @@ ItemPage {
                         "Encryption protects against access to phone data when the phone is connected to a PC or other device.")
                 visible: showAllUI
             }
-            ListItem.Standard {
+            ListItem.Header {
                 text: i18n.tr("Privacy")
             }
             ListItem.Standard {
                 text: i18n.tr("Stats on welcome screen")
                 control: Switch {
-                    id: welcomeStatsSwitch
-                    checked: securityPrivacy.statsWelcomeScreen
+                    property bool serverChecked: securityPrivacy.statsWelcomeScreen
+                    onServerCheckedChanged: checked = serverChecked
+                    Component.onCompleted: checked = serverChecked
+                    onTriggered: securityPrivacy.statsWelcomeScreen = checked
                 }
-            }
-            Binding {
-                target: securityPrivacy
-                property: "statsWelcomeScreen"
-                value: welcomeStatsSwitch.checked
             }
 
             ListItem.Standard {
                 text: i18n.tr("Messages on welcome screen")
                 control: Switch {
-                    id: welcomeMessagesSwitch
-                    checked: securityPrivacy.messagesWelcomeScreen
+                    property bool serverChecked: securityPrivacy.messagesWelcomeScreen
+                    onServerCheckedChanged: checked = serverChecked
+                    Component.onCompleted: checked = serverChecked
+                    onTriggered: securityPrivacy.messagesWelcomeScreen = checked
                 }
                 visible: showAllUI
-            }
-            Binding {
-                target: securityPrivacy
-                property: "messagesWelcomeScreen"
-                value: welcomeMessagesSwitch.checked
             }
 
             ListItem.SingleValue {
@@ -232,6 +215,7 @@ ItemPage {
             }
             ListItem.SingleValue {
                 id: locationItem
+                objectName: "locationItem"
                 text: i18n.tr("Location access")
                 value: ""
                 progression: true

@@ -32,7 +32,7 @@ ItemPage {
     title: i18n.tr("Cellular")
     objectName: "cellularPage"
 
-    property var modemsSorted: manager.modems.slice(0).sort()
+    property var modemsSorted: []
     property int simsLoaded: 0
 
     states: [
@@ -66,19 +66,9 @@ ItemPage {
 
     OfonoManager {
         id: manager
-        Component.onCompleted: {
-            var component = Qt.createComponent("Components/Sim.qml");
-            modemsSorted.forEach(function (path) {
-                console.warn('creating sim object for', path)
-                var sim = component.createObject(root, {
-                    path: path
-                });
-                if (sim === null) {
-                    console.warn('failed to create sim object');
-                } else {
-                    Sims.add(sim);
-                }
-            });
+        onModemsChanged: {
+            root.modemsSorted = modems.slice(0).sort();
+            Sims.createQML();
         }
     }
 
@@ -94,15 +84,15 @@ ItemPage {
             start()
         }
     }
+
     Flickable {
+        id: flick
         anchors.fill: parent
         contentWidth: parent.width
         contentHeight: contentItem.childrenRect.height
         boundsBehavior: (contentHeight > root.height) ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
-
         Column {
             anchors { left: parent.left; right: parent.right }
-
             Loader {
                 id: loader
                 anchors { left: parent.left; right: parent.right }

@@ -4,6 +4,7 @@
  * Copyright (C) 2013 Canonical Ltd.
  *
  * Contact: Iain Lane <iain.lane@canonical.com>
+ *          Jonas G. Drange <jonas.drange@canonical.com>
  *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License version 3, as published
@@ -19,137 +20,242 @@
  */
 
 import QtQuick 2.0
+import QtQuick.Layouts 1.1
 import SystemSettings 1.0
-import Ubuntu.Components 0.1
-import Ubuntu.Components.ListItems 0.1 as ListItem
+import Ubuntu.Components 1.1
+import Ubuntu.Components.ListItems 1.0 as ListItem
 import MeeGo.QOfono 0.2
+import "carriers.js" as CHelper
 
 ItemPage {
-    title: title
+    id: root
+    title: i18n.tr("Carrier")
     objectName: "chooseCarrierPage"
+    flickable: null
 
-    property var netReg
-    property var operators: []
-    property bool scanning: false
-    property variant operatorNames
-    property variant operatorStatus
-    property int curOp
-    Component.onCompleted: buildLists();
+    property var sim
+    property bool scanning: true
+    property bool working: false
 
-    Connections {
-        target: netReg
-        onStatusChanged: {
-            if (netReg.status === "registered")
-                buildLists();
+    states: [
+        State {
+            name: "auto"
+            when: sim.netReg.mode === "auto"
+            PropertyChanges {
+                target: otherOperators
+                selectedIndex: -1
+            }
+            PropertyChanges {
+                target: allOperators
+                height: 0
+                opacity: 0
+            }
+        },
+        State {
+            name: "manual"
+            when: sim.netReg.mode === "manual"
+            PropertyChanges {
+                target: otherOperators
+                height: 0
+                opacity: 0
+            }
         }
-        onNetworkOperatorsChanged: buildLists();
-        onScanFinished: scanning = false;
-        onScanError: {
-            scanning = false;
-            console.warn ("onScanError: " + message);
-        }
-    }
-
-    function buildLists()
-    {
-        var ops = [];
-        var oN = new Array();
-        var oS = new Array();
-        for (var i = 0; i < netReg.networkOperators.length; i++) {
-            var tempOp = netOp.createObject(parent, {"operatorPath": netReg.networkOperators[i]});
-            if (tempOp.status === "forbidden")
-                continue
-            oN.push(tempOp.name);
-            oS.push(tempOp.status);
-            ops.push(tempOp)
-        }
-        curOp = oS.indexOf("current");
-        operatorNames = oN;
-        operatorStatus = oS;
-        operators = ops;
-        carrierSelector.selectedIndex = curOp;
-    }
+        /* Note that we do not consider auto-only since this page is not
+        reachable in that case (see Carrier & APN page). */
+    ]
 
     Component {
         id: netOp
         OfonoNetworkOperator {
             onRegisterComplete: {
-                if (error === OfonoNetworkOperator.InProgressError) {
-                    console.warn("registerComplete failed with error: " + errorString);
-                } else if (error !== OfonoNetworkOperator.NoError) {
-                    console.warn("registerComplete failed with error: " + errorString + " Falling back to default");
-                    netReg.registration();
+                if (error !== OfonoNetworkOperator.NoError) {
+                    console.warn("Register complete:", errorString);
+                    console.warn("Falling back to default operator.");
+                    sim.netReg.registration();
                 }
+                working = false;
             }
         }
     }
 
+    Connections {
+        /* The following is a hack: If a scan is in progress and we call
+        scan() on netReg, it emits a scanError _and_ scanFinished.
+        We look at the scanError message, set this property to true if
+        it says a scan is in progress. This way we can ignore the bad
+        scanFinished signal. Filed bug against libqofono[1].
+            [1] https://github.com/nemomobile/libqofono/issues/52
+        */
+        property bool __scanInProgress: false
+
+        target: sim.netReg
+        onScanFinished: {
+            if (scanning && !__scanInProgress) {
+                scanning = false;
+            }
+            __scanInProgress = false;
+        }
+        onScanError: {
+            if (message === "Operation already in progress") {
+                console.warn('A scan was already in progress.');
+                __scanInProgress = true;
+            } else {
+                scanning = false;
+                __scanInProgress = false;
+                console.warn("onScanError: " + message);
+            }
+        }
+        onModeChanged: modeSelector.selectedIndex = (mode === "auto") ? 0 : -1
+    }
+
+    Component.onCompleted: sim.netReg.scan()
+
     Flickable {
+        id: scrollWidget
         anchors.fill: parent
         contentWidth: parent.width
-        contentHeight: parent.height
-        boundsBehavior: (contentHeight > parent.height) ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
+        contentHeight: contentItem.childrenRect.height
+        boundsBehavior: (contentHeight > root.height) ?
+            Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
 
         Column {
-            anchors.left: parent.left
-            anchors.right: parent.right
-
-            ListItem.ItemSelector {
-                id: chooseCarrier
-                objectName: "autoChooseCarrierSelector"
-                expanded: true
-                enabled: netReg.mode !== "auto-only"
-                text: i18n.tr("Choose carrier:")
-                model: [i18n.tr("Automatically"), i18n.tr("Manually")]
-                selectedIndex: netReg.mode === "manual" ? 1 : 0
-                onSelectedIndexChanged: {
-                    if (selectedIndex === 0)
-                        netReg.registration();
-                }
+            anchors {
+                left: parent.left
+                right: parent.right
             }
+            spacing: 0
 
-            ListItem.ItemSelector {
-                id: carrierSelector
-                objectName: "carrierSelector"
-                expanded: enabled
-                enabled: chooseCarrier.selectedIndex === 1
-                model: operatorNames
-                onSelectedIndexChanged: {
-                    if ((selectedIndex !== curOp) && operators[selectedIndex]) {
-                        operators[selectedIndex].registerOperator();
+            SettingsItemTitle {
+                text: i18n.tr("Carrier")
+
+                ActivityIndicator {
+                    anchors {
+                        right: parent.right
+                        top: parent.top
+                        margins: units.gu(1.5)
+                    }
+                    running: true
+                    opacity: scanning || working ? 1 : 0
+                    Behavior on opacity {
+                        NumberAnimation {
+                            duration: UbuntuAnimation.SnapDuration
+                        }
                     }
                 }
             }
-        }
 
-        ListItem.SingleControl {
-            anchors.bottom: parent.bottom
-            control: Button {
-                objectName: "refreshButton"
-                width: parent.width - units.gu(4)
-                text: i18n.tr("Refresh")
-                enabled: (netReg.status !== "searching") && (netReg.status !== "denied")
-                onTriggered: {
-                    scanning = true;
-                    netReg.scan();
+            ListItem.ItemSelector {
+                id: modeSelector
+                objectName: "mode"
+                expanded: true
+                enabled: !scanning && !working
+                opacity: enabled ? 1 : 0.5
+                model: [i18n.tr("Automatically")]
+                delegate: OptionSelectorDelegate {
+                    text: {
+                        // modelData is "Automatically"
+                        if (sim.netReg.mode === "auto") {
+                            return sim.netReg.name ?
+                                modelData + " [ " + sim.netReg.name + " ]" :
+                                    modelData
+                        } else {
+                            return modelData;
+                        }
+                    }
+                    showDivider: false
+                }
+                selectedIndex: sim.netReg.mode === "auto" ? 0 : -1
+
+                /* When registration() fails, the UI state may end up in an
+                undefined state. Issue[1] has been filed against libqofono.
+                    [1] https://github.com/nemomobile/libqofono/issues/54
+                */
+                onDelegateClicked: sim.netReg.registration()
+            }
+
+            // In manual mode, all non-forbidden operators are shown.
+            ListItem.ItemSelector {
+                id: allOperators
+                objectName: "allOperators"
+                expanded: true
+                enabled: !scanning && !working
+                opacity: enabled ? 1 : 0.5
+                model: CHelper.getOps(sim.netReg.networkOperators)
+                delegate: OptionSelectorDelegate {
+                    objectName: "carrier"
+                    showDivider: false
+                    text: modelData.name
+                }
+                onDelegateClicked: {
+                    CHelper.setOp(model[index].operatorPath);
+                    working = true;
+                }
+                selectedIndex: {
+                    var curop = sim.netReg.currentOperatorPath;
+                    return model.indexOf(CHelper.getOrCreateOpQml(curop));
+                }
+
+                Behavior on height {
+                    NumberAnimation {
+                        duration: UbuntuAnimation.SnapDuration
+                    }
+                }
+
+                Behavior on opacity {
+                    NumberAnimation {
+                        duration: UbuntuAnimation.SnapDuration
+                    }
                 }
             }
-        }
 
-        ActivityIndicator {
-            id: activityIndicator
-            anchors.centerIn: parent
-            running: scanning
-        }
+            /* When registration mode is "Automatic", this list contains all
+            the non-forbidden operators except the current one. When the user
+            taps one of the elements in this selector, it will be hidden,
+            and the mode will switch to "Manual". */
+            ListItem.ItemSelector {
+                id: otherOperators
+                objectName: "otherOperators"
+                expanded: true
+                enabled: !scanning && !working
+                opacity: enabled ? 1 : 0.5
+                model: CHelper.getOps(sim.netReg.networkOperators,
+                    [sim.netReg.currentOperatorPath])
+                delegate: OptionSelectorDelegate {
+                    objectName: "carrier"
+                    showDivider: false
+                    text: modelData.name
+                }
+                onDelegateClicked: {
+                    var clickedOp = model[index].operatorPath;
+                    CHelper.setOp(clickedOp);
 
-        Label {
-            anchors {
-                top: activityIndicator.bottom
-                topMargin: units.gu(2)
-                horizontalCenter: activityIndicator.horizontalCenter
+                    // Update immediately and do not wait for netReg
+                    allOperators.selectedIndex = allOperators.model.indexOf(
+                        CHelper.getOrCreateOpQml(clickedOp));
+                    working = true;
+                }
+                onSelectedIndexChanged: {
+                    /* When e.g. the model changes, the selectedIndex is set to
+                    0. Ignore this, since we never want the selectedIndex to be
+                    anything other than -1. This component is shown only when
+                    registration is "Automatic". */
+                    if (selectedIndex >= 0) {
+                        selectedIndex = -1;
+                    }
+                }
+
+                Behavior on height {
+                    NumberAnimation {
+                        duration: UbuntuAnimation.SnapDuration
+                    }
+                }
+
+                Behavior on opacity {
+                    NumberAnimation {
+                        duration: UbuntuAnimation.SnapDuration
+                    }
+                }
             }
-            text: i18n.tr("Searching")
-            visible: activityIndicator.running
         }
     }
 }

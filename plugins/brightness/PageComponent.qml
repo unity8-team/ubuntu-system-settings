@@ -24,6 +24,8 @@ import SystemSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 import Ubuntu.SystemSettings.Brightness 1.0
+import Ubuntu.Settings.Menus 0.1 as Menus
+import QMenuModel 0.1
 
 ItemPage {
     id: root
@@ -39,12 +41,41 @@ ItemPage {
         anchors.left: parent.left
         anchors.right: parent.right
 
-        BrightnessSlider {}
+        QDBusActionGroup {
+            id: indicatorPower
+            busType: 1
+            busName: "com.canonical.indicator.power"
+            objectPath: "/com/canonical/indicator/power"
+
+            property variant brightness: action("brightness")
+
+            Component.onCompleted: start()
+        }
 
         Binding {
-            target: autoAdjustCheck
-            property: "checked"
-            value: adjust.visible && gsettings.autoBrightness
+            target: sliderMenu
+            property: "value"
+            value: sliderMenu.enabled ? indicatorPower.action("brightness").state * 100 : 0.0
+        }
+
+        ListItem.Standard {
+            text: i18n.tr("Display brightness")
+            showDivider: false
+        }
+
+        /* Use the SliderMenu component instead of the Slider to avoid binding 
+           issues on valueChanged until LP: #1388094 is fixed.
+        */
+        Menus.SliderMenu {
+            id: sliderMenu
+            objectName: "sliderMenu"
+            enabled: indicatorPower.action("brightness").state != null
+            live: true
+            minimumValue: 0.0
+            maximumValue: 100.0
+            minIcon: "image://theme/display-brightness-min"
+            maxIcon: "image://theme/display-brightness-max"
+            onUpdated: indicatorPower.action("brightness").updateState(value / 100.0)
         }
 
         ListItem.Standard {
@@ -54,10 +85,11 @@ ItemPage {
                      brightnessPanel.autoBrightnessAvailable
             control: CheckBox {
                 id: autoAdjustCheck
-                checked: gsettings.autoBrightness
-                onClicked: gsettings.autoBrightness = checked
+                property bool serverChecked: gsettings.autoBrightness
+                onServerCheckedChanged: checked = serverChecked
+                Component.onCompleted: checked = serverChecked
+                onTriggered: gsettings.autoBrightness = checked
             }
-            Component.onCompleted: clicked.connect(autoAdjustCheck.clicked)
             showDivider: false
         }
         ListItem.Caption {

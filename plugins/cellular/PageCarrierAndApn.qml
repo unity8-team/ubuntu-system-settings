@@ -21,14 +21,14 @@ import QtQuick 2.0
 import SystemSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
-import MeeGo.QOfono 0.2
 
 ItemPage {
     id: root
-    title: i18n.tr("Carriers")
-    objectName: "chooseCarriersPage"
+    title: i18n.tr("Carrier")
+    objectName: "carrierApnPage"
+    flickable: null
 
-    property var sims
+    property var sim
 
     Flickable {
         anchors.fill: parent
@@ -40,36 +40,27 @@ ItemPage {
             anchors.left: parent.left
             anchors.right: parent.right
 
-            ListItem.Standard {
-                text: sims[0].title
-            }
-
             ListItem.SingleValue {
-                objectName: "chooseCarrierSim1"
-                value: sims[0].netReg.name ? sims[0].netReg.name : i18n.tr("N/A")
-                progression: true
-                onClicked: {
-                    pageStack.push(Qt.resolvedUrl("PageChooseCarrier.qml"), {
-                        netReg: sims[0].netReg,
-                        title: sims[0].title
-                    })
-                }
+                text: i18n.tr("Carrier")
+                objectName: "carrier"
+                value: sim.netReg.name ? sim.netReg.name : i18n.tr("None")
+                enabled: (sim.netReg.status !== "") &&
+                    (sim.netReg.mode !== "auto-only")
+                progression: enabled
+                onClicked: pageStack.push(Qt.resolvedUrl("PageChooseCarrier.qml"), {
+                    sim: sim,
+                    title: i18n.tr("Carrier")
+                })
             }
 
             ListItem.Standard {
-                text: sims[1].title
-            }
-
-            ListItem.SingleValue {
-                objectName: "chooseCarrierSim2"
-                value: sims[1].netReg.name ? sims[1].netReg.name : i18n.tr("N/A")
-                progression: true
-                onClicked: {
-                    pageStack.push(Qt.resolvedUrl("PageChooseCarrier.qml"), {
-                        netReg: sims[1].netReg,
-                        title: sims[1].title
-                    })
-                }
+                text: i18n.tr("APN")
+                objectName: "apn"
+                progression: enabled
+                enabled: sim.connMan.powered
+                onClicked: pageStack.push(Qt.resolvedUrl("PageChooseApn.qml"), {
+                    sim: sim
+                })
             }
         }
     }

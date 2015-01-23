@@ -10,7 +10,7 @@ from __future__ import absolute_import
 from time import sleep
 
 from autopilot.matchers import Eventually
-from gi.repository import Gio
+from gi.repository import Gio, GLib
 from testtools.matchers import Contains, Equals
 
 from ubuntu_system_settings.tests import ResetBaseTestCase
@@ -20,8 +20,8 @@ from ubuntu_system_settings.utils.i18n import ugettext as _
 class ResetTestCase(ResetBaseTestCase):
     """Tests for Reset Page"""
 
-    def set_unity_launcher_favorites(self, gsettings, favorites):
-        gsettings.set_value('favorites', favorites)
+    def set_unity_launcher(self, gsettings, key, value):
+        gsettings.set_value(key, value)
         # wait for gsettings
         sleep(1)
 
@@ -33,15 +33,28 @@ class ResetTestCase(ResetBaseTestCase):
 
     def test_reset_launcher(self):
         gsettings = Gio.Settings.new('com.canonical.Unity.Launcher')
+
         favorites = gsettings.get_value('favorites')
+        gsettings.set_value(
+            'favorites',
+            GLib.Variant('as', ['application://nautilus.desktop']))
         self.addCleanup(
-            self.set_unity_launcher_favorites, gsettings, favorites)
+            self.set_unity_launcher, gsettings, 'favorites', favorites)
+
+        items = gsettings.get_value('items')
+        gsettings.set_value(
+            'items', GLib.Variant('as', ['application:///dialer-app.desktop']))
+        self.addCleanup(
+            self.set_unity_launcher, gsettings, 'items', items)
 
         self.reset_page.reset_launcher()
+        self.assertThat(
+            lambda: gsettings.get_value('favorites'),
+            Eventually(Equals(gsettings.get_default_value('favorites'))))
 
         self.assertThat(
-            lambda: str(self.user_mock.GetCalls()),
-            Eventually(Contains('com.canonical.unity.AccountsService')))
+            lambda: gsettings.get_value('items'),
+            Eventually(Equals(gsettings.get_default_value('items'))))
 
     def test_factory_reset(self):
         self.reset_page.erase_and_reset_everything()

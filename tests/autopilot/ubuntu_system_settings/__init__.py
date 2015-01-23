@@ -1,3 +1,4 @@
+
 # -*- Mode: Python; coding: utf-8; indent-tabs-mode: nil; tab-width: 4 -*-
 #
 # Copyright (C) 2014 Canonical Ltd.
@@ -114,6 +115,35 @@ class MainWindow(ubuntuuitoolkit.MainView):
     def go_to_wifi_page(self):
         return self._go_to_page('entryComponent-wifi', 'wifiPage')
 
+    @autopilot.logging.log_action(logger.debug)
+    def go_to_cellular_page(self):
+        return self._go_to_page('entryComponent-cellular', 'cellularPage')
+
+    @autopilot.logging.log_action(logger.debug)
+    def go_to_bluetooth_page(self):
+        return self._go_to_page('entryComponent-bluetooth', 'bluetoothPage')
+
+    @autopilot.logging.log_action(logger.debug)
+    def go_to_phone_page(self):
+        return self._go_to_page('entryComponent-phone', 'phonePage')
+
+    @autopilot.logging.log_action(logger.debug)
+    def go_to_about_page(self):
+        return self._go_to_page('entryComponent-about', 'aboutPage')
+
+    @autopilot.logging.log_action(logger.debug)
+    def go_to_sound_page(self):
+        return self._go_to_page('entryComponent-sound', 'soundPage')
+
+    @autopilot.logging.log_action(logger.debug)
+    def go_to_security_page(self):
+        return self._go_to_page('entryComponent-security-privacy',
+                                'securityPrivacyPage')
+
+    @autopilot.logging.log_action(logger.debug)
+    def go_to_datetime_page(self):
+        return self._go_to_page('entryComponent-time-date', 'timeDatePage')
+
     def _go_to_page(self, item_object_name, page_object_name):
         self.click_item(item_object_name)
         page = self.wait_select_single(objectName=page_object_name)
@@ -145,11 +175,6 @@ class MainWindow(ubuntuuitoolkit.MainView):
         return self.select_single(objectName='systemSettingsPage')
 
     @property
-    def cellular_page(self):
-        """ Return 'Cellular' page """
-        return self.select_single(objectName='cellularPage')
-
-    @property
     def choose_page(self):
         """ Return 'Choose carrier' page """
         return self.select_single(objectName="chooseCarrierPage")
@@ -170,26 +195,6 @@ class MainWindow(ubuntuuitoolkit.MainView):
         return self.select_single(objectName='backgroundPage')
 
     @property
-    def sound_page(self):
-        """ Return 'Sound' page """
-        return self.select_single(objectName='soundPage')
-
-    @property
-    def security_page(self):
-        """ Return 'Security' page """
-        return self.select_single(objectName='securityPrivacyPage')
-
-    @property
-    def about_page(self):
-        """ Return 'About' page """
-        return self.select_single(objectName='aboutPage')
-
-    @property
-    def wifi_page(self):
-        """ Return 'Wifi' page """
-        return self.select_single(objectName='wifiPage')
-
-    @property
     def _orientation_lock_switch(self):
         return self.wait_select_single(
             ubuntuuitoolkit.CheckBox,
@@ -202,9 +207,19 @@ class MainWindow(ubuntuuitoolkit.MainView):
         self._orientation_lock_switch.uncheck()
 
 
-class CelullarPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
+class Dialog(ubuntuuitoolkit.Dialog):
+    # XXX A new Dialog custom proxy object was added to the toolkit.
+    # Because of https://bugs.launchpad.net/autopilot-qt/+bug/1341671
+    # we need to make sure it does not match in any selection.
 
-    """Autopilot helper for the Sound page."""
+    @classmethod
+    def validate_dbus_object(cls, path, state):
+        return False
+
+
+class CellularPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
+
+    """Autopilot helper for the Cellular page."""
 
     @classmethod
     def validate_dbus_object(cls, path, state):
@@ -214,10 +229,259 @@ class CelullarPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
                 return True
         return False
 
+    @autopilot.logging.log_action(logger.debug)
+    def enable_data(self):
+        self._set_data(True)
+
+    @autopilot.logging.log_action(logger.debug)
+    def disable_data(self):
+        self._set_data(False)
+
+    def disable_datas(self):
+        self.select_sim_for_data('off')
+
+    @autopilot.logging.log_action(logger.debug)
+    def _set_data(self, data):
+        chk = self.select_single(objectName='data')
+        if data:
+            chk.check()
+        else:
+            chk.uncheck()
+
+    @autopilot.logging.log_action(logger.debug)
+    def get_data(self):
+        return self.select_single(objectName='data').checked
+
+    @autopilot.logging.log_action(logger.debug)
+    def enable_roaming(self, timeout=10):
+        self._set_roaming(True, timeout=timeout)
+
+    @autopilot.logging.log_action(logger.debug)
+    def disable_roaming(self, timeout=10):
+        self._set_roaming(False, timeout=timeout)
+
+    @autopilot.logging.log_action(logger.debug)
+    def _set_roaming(self, roaming, timeout):
+        chk = self.select_single(objectName='roaming')
+        if roaming:
+            chk.check(timeout=timeout)
+        else:
+            chk.uncheck(timeout=timeout)
+
+    @autopilot.logging.log_action(logger.debug)
+    def set_connection_type(self, radio_type, sim='/ril_0',
+                            scroll_to_and_click=None):
+        self._set_connection_type(radio_type, sim, scroll_to_and_click)
+
+    @autopilot.logging.log_action(logger.debug)
+    def _set_connection_type(self, radio_type, sim, scroll_to_and_click):
+        t = self.wait_select_single(
+            'OptionSelectorDelegate',
+            objectName='%s_radio_%s' % (sim, radio_type))
+        if scroll_to_and_click:
+            scroll_to_and_click(t)
+        else:
+            t.swipe_into_view()
+
+        self.pointing_device.click_object(t)
+
+    @autopilot.logging.log_action(logger.debug)
+    def change_carrier(self, carrier, sim=None):
+        carrierApnPage = self._click_carrier_apn()
+        chooseCarrierPage = carrierApnPage.open_carrier(sim)
+        chooseCarrierPage.set_carrier(carrier)
+
+    @autopilot.logging.log_action(logger.debug)
+    def _click_carrier_apn(self):
+        item = self.select_single(objectName='carrierApnEntry')
+        self.pointing_device.click_object(item)
+        return self.get_root_instance().wait_select_single(
+            objectName='carrierApnPage')
+
+    @autopilot.logging.log_action(logger.debug)
+    def select_sim_for_data(self, sim):
+        self._select_sim_for_data(sim)
+
+    @autopilot.logging.log_action(logger.debug)
+    def _select_sim_for_data(self, sim):
+        item = self.select_single(objectName='use%s' % sim)
+        self.pointing_device.click_object(item)
+
+    @autopilot.logging.log_action(logger.debug)
+    def select_sim_for_calls(self, sim):
+        pass
+
+    @autopilot.logging.log_action(logger.debug)
+    def select_sim_for_messages(self):
+        pass
+
+    @autopilot.logging.log_action(logger.debug)
+    def set_name(self, sim, name):
+        self._set_name(sim, name)
+
+    def get_name(self, sim):
+        obj = self.select_single(
+            objectName="label_%s" % sim)
+        return obj.text
+
+    def _set_name(self, sim, name):
+        obj = self.select_single(
+            objectName="edit_name_%s" % sim)
+        self.pointing_device.click_object(obj)
+
+        # wait for animation
+        sleep(1)
+        ok = self.select_single('Button', objectName="doRename")
+
+        field = self.select_single('TextField', objectName="nameField")
+        field.write(name)
+        self.pointing_device.click_object(ok)
+
+
+class BluetoothPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
+
+    """Autopilot helper for Bluetooth page."""
+
+    @classmethod
+    def validate_dbus_object(cls, path, state):
+        name = introspection.get_classname_from_path(path)
+        if name == b'PageComponent':
+            if state['objectName'][1] == 'bluetoothPage':
+                return True
+        return False
+
+    def get_disconnected_devices(self):
+        """Return the list of known disconnected devices.
+
+        :return: a list containing the text for each device
+
+        """
+        disconnected_list = self.select_single(
+            'QQuickColumn',
+            objectName='disconnectedList'
+        )
+        # NOTE: the UI design uses ellipsis to be suggestive
+        ellipsis = '\u2026'
+        return [device.text.strip(ellipsis) for device in
+                disconnected_list.select_many('LabelVisual')]
+
+
+class PageCarrierAndApn(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
+
+    """Autopilot helper for carrier/apn entry page (singlesim)."""
+    @autopilot.logging.log_action(logger.debug)
+    def open_carrier(self, sim):
+        return self._click_carrier(sim)
+
+    @autopilot.logging.log_action(logger.debug)
+    def _click_carrier(self, sim):
+        obj = self.select_single(
+            objectName='carrier')
+        self.pointing_device.click_object(obj)
+        return self.get_root_instance().wait_select_single(
+            objectName='chooseCarrierPage')
+
+
+class PageCarriersAndApns(
+        ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
+    """Autopilot helper for carrier/apn entry page (multisim)."""
+    """Autopilot helper for carrier/apn entry page (singlesim)."""
+    @autopilot.logging.log_action(logger.debug)
+    def open_carrier(self, sim):
+        return self._click_carrier(sim)
+
+    @autopilot.logging.log_action(logger.debug)
+    def _click_carrier(self, sim):
+        obj = self.select_single(
+            objectName='%s_carriers' % sim)
+        self.pointing_device.click_object(obj)
+        return self.get_root_instance().wait_select_single(
+            objectName='chooseCarrierPage')
+
+
+class PageChooseCarrier(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
+
+    """Autopilot helper for carrier selection page"""
+
+    @autopilot.logging.log_action(logger.debug)
+    def set_automatic(self):
+        item = self.select_single(text='Automatically')
+        self.pointing_device.click_object(item)
+
+    def set_carrier(self, carrier):
+        # wait for animation, since page.animationRunning.wait_for(False)
+        # does not work?
+        sleep(0.5)
+        allOperators = self.select_single(objectName="allOperators")
+        otherOperators = self.select_single(objectName="otherOperators")
+
+        if allOperators.visible:
+            opList = allOperators
+        elif otherOperators.visible:
+            opList = otherOperators
+        else:
+            raise Exception("No operator list visible.")
+
+        item = opList.select_single(text=carrier, objectName="carrier")
+        self.pointing_device.click_object(item)
+
+
+class SecurityPage(ubuntuuitoolkit.QQuickFlickable):
+
+    """Autopilot helper for the Security page."""
+
+    @classmethod
+    def validate_dbus_object(cls, path, state):
+        name = introspection.get_classname_from_path(path)
+        if name == b'PageComponent':
+            if state['objectName'][1] == 'securityPrivacyPage':
+                return True
+        return False
+
+    @autopilot.logging.log_action(logger.debug)
+    def go_to_sim_lock(self):
+        selector = self.select_single(objectName='simControl')
+        self.swipe_child_into_view(selector)
+        self.pointing_device.click_object(selector)
+        return self.get_root_instance().wait_select_single(
+            objectName='simPinPage'
+        )
+
+
+class SimPin(ubuntuuitoolkit.QQuickFlickable):
+
+    """Autopilot helper for the SimPin Page."""
+
+    def get_sim_pin_switch(self):
+        """Return the SIM PIN switch."""
+        return self.select_single(objectName='simPinSwitch')
+
+    @autopilot.logging.log_action(logger.debug)
+    def click_sim_pin_switch(self):
+        """Click on the SIM PIN switch, return the SIM PIN dialog."""
+        sim_pin_switch = self.get_sim_pin_switch()
+        self.pointing_device.click_object(sim_pin_switch)
+        return self.get_root_instance().wait_select_single(
+            objectName='lockDialogComponent'
+        )
+
+    @autopilot.logging.log_action(logger.debug)
+    def enter_lock_pin(self, pin):
+        """Enter the given pin into our dialog."""
+        root_instance = self.get_root_instance()
+        prev_input = root_instance.wait_select_single(
+            objectName='prevInput'
+        )
+        prev_input.write(pin)
+        lock_unlock_button = root_instance.select_single(
+            objectName='lockButton'
+        )
+        self.pointing_device.click_object(lock_unlock_button)
+
 
 class TimeAndDatePage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
 
-    """Autopilot helper for the Sound page."""
+    """Autopilot helper for the TimeAndDate page."""
 
     @classmethod
     def validate_dbus_object(cls, path, state):
@@ -248,7 +512,7 @@ class AboutPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
     @classmethod
     def validate_dbus_object(cls, path, state):
         name = introspection.get_classname_from_path(path)
-        if name == b'ItemPage':
+        if name == b'PageComponent':
             if state['objectName'][1] == 'aboutPage':
                 return True
         return False
@@ -291,6 +555,7 @@ class AboutPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
     def go_to_check_for_updates(self):
         check_for_updates_button = self.select_single(
             objectName='updateButton')
+        check_for_updates_button.swipe_into_view()
         self.pointing_device.click_object(check_for_updates_button)
         system_updates_page = self.get_root_instance().wait_select_single(
             objectName='systemUpdatesPage')
@@ -307,6 +572,10 @@ class AboutPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
             objectName='licensesPage')
         licenses_page.active.wait_for(True)
         return licenses_page
+
+    def get_number(self, obj):
+        number = self.select_single(objectName=obj)
+        return number.value
 
 
 class LicensesPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
@@ -402,6 +671,18 @@ class PhonePage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
             find = "simServicesSim%d" % sim
 
         return self._go_to_page(find, 'servicesPage')
+
+    @property
+    def _dialpad_sounds(self):
+        return self.wait_select_single(
+            ubuntuuitoolkit.CheckBox,
+            objectName='dialpadSounds')
+
+    def enable_dialpad_sounds(self):
+        self._dialpad_sounds.check()
+
+    def disable_dialpad_sounds(self):
+        self._dialpad_sounds.uncheck()
 
 
 class CallWaiting(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
@@ -677,6 +958,40 @@ class WifiPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
             if state['objectName'][1] == 'wifiPage':
                 return True
         return False
+
+    @autopilot.logging.log_action(logger.debug)
+    def enable_wireless(self):
+        self._set_wireless(True)
+
+    @autopilot.logging.log_action(logger.debug)
+    def disable_wireless(self):
+        self._set_wireless(False)
+
+    """
+    :returns: Whether or not WiFi can be used
+    """
+    @autopilot.logging.log_action(logger.debug)
+    def have_wireless(self):
+        try:
+            self.wait_select_single('SwitchMenuItem', text=_('Wi-Fi'))
+        except:
+            return False
+        return True
+
+    """Returns the current WiFi state
+
+    :returns: Whether or not WiFi is enabled
+    """
+    @autopilot.logging.log_action(logger.debug)
+    def get_wireless(self):
+        return self.wait_select_single(
+            'SwitchMenuItem', text=_('Wi-Fi')).checked
+
+    @autopilot.logging.log_action(logger.debug)
+    def _set_wireless(self, state):
+        obj = self.wait_select_single('SwitchMenuItem', text=_('Wi-Fi'))
+        if obj.checked != state:
+            self.pointing_device.click_object(obj)
 
     """Connects to hidden network
 

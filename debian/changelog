@@ -1,3 +1,402 @@
+ubuntu-system-settings (0.3+15.04.20150122-0ubuntu1) vivid; urgency=low
+
+  [ Ken VanDine ]
+  * [system-updates] Don't show an empty list after updates are
+    completed (LP: #1392240, #1413369)
+
+  [ jonas-drange ]
+  * [wifi] use an already translated, sane string for consistency
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 22 Jan 2015 14:50:57 +0000
+
+ubuntu-system-settings (0.3+15.04.20150116-0ubuntu1) vivid; urgency=low
+
+  [ Ken VanDine ]
+  * Work around for the SDK's addition of a Dialog CPO, this fixes
+    matching in test_reset
+
+  [ CI Train Bot ]
+  * Resync trunk
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 16 Jan 2015 14:11:26 +0000
+
+ubuntu-system-settings (0.3+15.04.20150115-0ubuntu1) vivid; urgency=low
+
+  [ Manuel de la Peña ]
+  * Fix pause issue ensuring that it does pause the download. (LP:
+    #1398310)
+
+  [ Manuel de la Pena ]
+  * Fix pause issue ensuring that it does pause the download. (LP:
+    #1398310)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 15 Jan 2015 15:32:30 +0000
+
+ubuntu-system-settings (0.3+15.04.20150114-0ubuntu1) vivid; urgency=low
+
+  [ jonas-drange ]
+  * Change the way we use OfonoManager.modems, since it is no longer
+    populated at creation time (in u-s-s)—use events instead. libqofono
+    bindings also require that the modem emits InterfacesChanged with
+    their name it it, to work at all. All modem mocks has been updated.
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 14 Jan 2015 15:17:36 +0000
+
+ubuntu-system-settings (0.3+15.04.20150112-0ubuntu1) vivid; urgency=low
+
+  [ jonas-drange ]
+  * [security] replace inputmask for validator and maximum length (LP:
+    #1357548)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Mon, 12 Jan 2015 16:43:30 +0000
+
+ubuntu-system-settings (0.3+15.04.20150110-0ubuntu1) vivid; urgency=low
+
+  [ Ken VanDine ]
+  * Tiny step towards improved use of the preferred page-object model,
+    hopefully making some tests more reliable.
+
+  [ Allan LeSage ]
+  * Add just a few helpers for a Bluetooth sanity test.
+  * Minimal helpers for a SIM PIN test.
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Sat, 10 Jan 2015 06:51:06 +0000
+
+ubuntu-system-settings (0.3+15.04.20150109-0ubuntu1) vivid; urgency=low
+
+  [ Jussi Pakkanen ]
+  * Make currently active connection forgettable.
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 09 Jan 2015 08:48:06 +0000
+
+ubuntu-system-settings (0.3+15.04.20150107-0ubuntu1) vivid; urgency=low
+
+  [ CI Train Bot ]
+  * Resync trunk
+
+  [ jonas-drange ]
+  * [about] use networkinfo to pull the wifi device MAC (LP: #1399723)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 07 Jan 2015 12:05:12 +0000
+
+ubuntu-system-settings (0.3+15.04.20141216-0ubuntu1) vivid; urgency=low
+
+  [ Ken VanDine ]
+  * [system-update] remember the latest SystemUpdate downloaded and
+    compare the version when checking again and set updateReady
+    appropriately. This fixes the handling of downloaded updates when
+    auto-download is false. (LP: #1392051)
+
+  [ Michael Zanetti ]
+  * Enable support for Bluetooth Input devices
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 16 Dec 2014 06:57:52 +0000
+
+ubuntu-system-settings (0.3+15.04.20141211-0ubuntu1) vivid; urgency=low
+
+  [ jonas-drange ]
+  * [cellular/carriers] new Carrier & APN entry, as well as a major
+    refactor of carrier selection code warranted by the design change.
+    (LP: #1388044)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 11 Dec 2014 21:15:06 +0000
+
+ubuntu-system-settings (0.3+15.04.20141210.1-0ubuntu1) vivid; urgency=low
+
+  [ jonas-drange ]
+  * [cellular] Use a repeater to lay out two separate ItemSelectors for
+    modems, making sure it works well between connMan power cycles (LP:
+    #1377455)
+  * [about] properly display IMEI values for no devices ("None"), one
+    device and multiple devices. Remove test now redundant. (LP:
+    #1205294)
+
+  [ Iain Lane ]
+  * Use changed_properties instead of invalidated_properties. timedated
+    no longer sends the latter. We also now get the new value for free
+    along with the change, so save it instead of doing another roundtrip
+    over the bus to ask for it again. (LP: #1400353)
+
+  [ Mathieu Trudel-Lapierre ]
+  * Re-enable all device types.
+
+  [ CI Train Bot ]
+  * Resync trunk
+
+  [ Ken VanDine ]
+  * [brightness] ensure properties are not use undefined (LP: #1385467)
+
+  [ Chris Gagnon ]
+  * wait for selectTimeZoneField in autopilot test (LP: #1396335)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 10 Dec 2014 16:01:14 +0000
+
+ubuntu-system-settings (0.3+15.04.20141202-0ubuntu1) vivid; urgency=low
+
+  [ Michael Terry ]
+  * Drop wizard code from ubuntu-system-settings, moving it to unity8.
+
+  [ CI bot ]
+  * Resync trunk
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 02 Dec 2014 19:39:55 +0000
+
+ubuntu-system-settings (0.3+15.04.20141201-0ubuntu2) UNRELEASED; urgency=medium
+
+  * Fix mem leak in the update page. 
+
+ -- Manuel de la Pena <manuel.delapena@canonical.com>  Wed, 03 Dec 2014 11:11:00 +0100
+
+ubuntu-system-settings (0.3+15.04.20141201-0ubuntu1) vivid; urgency=low
+
+  [ Michał Sawicz ]
+  * Add missing dependency on qml-module-ubuntu-connectivity.
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Mon, 01 Dec 2014 12:35:25 +0000
+
+ubuntu-system-settings (0.3+15.04.20141125-0ubuntu1) vivid; urgency=low
+
+  [ Ted Gould ]
+  * Make silent mode use the action state in the sound user service (LP:
+    #1395709)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 25 Nov 2014 14:37:40 +0000
+
+ubuntu-system-settings (0.3+15.04.20141118-0ubuntu1) vivid; urgency=low
+
+  [ jonas-drange ]
+  * [about] use singlevaluestacked for all information bits in the
+    version panel (LP: #1390148)
+
+  [ John R. Lenton ]
+  * added debug logging to the software updates helper
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 18 Nov 2014 16:43:17 +0000
+
+ubuntu-system-settings (0.3+15.04.20141112.1-0ubuntu1) vivid; urgency=low
+
+  [ Sebastien Bacher ]
+  * Update the translations template during the build (LP: #1389786)
+
+  [ jonas-drange ]
+  * [cellular][phone] titles now using SettingsItemTitle (LP: #1389767)
+  * [wifi] fix multiple issues in the "Connect to other network" dialog
+    (LP: #1387656)
+
+  [ Andrea Cimitan ]
+  * Delay password set/confirm screens after entering the 4th digit,
+    fixing 1390557 (LP: #1390557)
+
+  [ CI bot ]
+  * Resync trunk
+
+  [ Ken VanDine ]
+  * Specify DaemonVersion for upower to support upower 0.99 on vivid
+    (LP: #1390629)
+  * [battery] don't control wifi state with libnm, use the
+    QDBusActionGroup from indicator-network (LP: #1391940)
+
+  [ Christian Dywan ]
+  * Remove the dialog internals resizing hack (LP: #1376763)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 12 Nov 2014 19:27:21 +0000
+
+ubuntu-system-settings (0.3+15.04.20141105.1-0ubuntu1) vivid; urgency=low
+
+  [ Ubuntu daily release ]
+  * New rebuild forced
+
+  [ Kevin Gunn ]
+  * fix white space issues
+
+  [ Nick Dedekind ]
+  * Fixed switches & check-boxes going out of sync with backends. (LP:
+    #1336715)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 05 Nov 2014 20:32:26 +0000
+
+ubuntu-system-settings (0.3+15.04.20141105-0ubuntu1) vivid; urgency=low
+
+  [ Ken VanDine ]
+  * [orientation] String change to Rotation Lock (LP: #1388888)
+
+  [ Sebastien Bacher ]
+  * [notifications] update strings to match the design (LP: #1377286)
+
+  [ Mathieu Trudel-Lapierre ]
+  * [bluetooth] make the bluetooth agent a notifyable property. (LP:
+    #1346483)
+
+  [ Albert Astals ]
+  * Use AbstractButton for haptic feedback (LP: #1389630)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 05 Nov 2014 14:51:49 +0000
+
+ubuntu-system-settings (0.3+15.04.20141103-0ubuntu1) vivid; urgency=low
+
+  [ Ken VanDine ]
+  * Use the SliderMenu component instead of the Slider component, it
+    matches the design and doesn't flicker while changing the
+    brightness. (LP: #1289465)
+  * Need to create UpClient regardless of upower version
+
+  [ Sebastien Bacher ]
+  * [storage] build the correct ini name rather than guessing it (LP:
+    #1387834)
+  * [battery] don't use a colored icon (LP: #1351383)
+
+  [ Michael Terry ]
+  * Redesign location page according to latest design visuals / text.
+    Allows GPS-only, GPS+HERE, or nothing at all. (LP: #1384763)
+
+  [ Ubuntu daily release ]
+  * New rebuild forced
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Mon, 03 Nov 2014 17:30:03 +0000
+
+ubuntu-system-settings (0.3+15.04.20141031.2-0ubuntu1) vivid; urgency=low
+
+  [ Sebastien Bacher ]
+  * Tweaks to try to make the section headers and titles closer to the
+    design. Use a custom component, with tweaked margins and disabled
+    tap effects, for that.
+
+  [ Iain Lane ]
+  * Move formatSize into a new Utilities class in the qml context and
+    call this from the updates panel to consistently display sizes (LP:
+    #1385286)
+  * Update to work with UPower >= 0.99 as well as current versions (LP:
+    #1330037)
+
+  [ Albert Astals ]
+  * i18n++ (LP: #1386730)
+
+  [ William Hua ]
+  * Re-translate the UI when reboot is cancelled after language change.
+    (LP: #1377984)
+
+  [ jonas-drange ]
+  * [cellular] split "Cellular Data" and "Connection type" into two
+    separate pieces in the UI for both single and multi SIM (LP:
+    #1361226)
+  * [wifi] use actiongroup to hide "connect to other networks" (LP:
+    #1377076)
+
+  [ Michael Terry ]
+  * When the power button is held down, show the shutdown dialog like we
+    do in the unity8 shell. (LP: #1381731)
+  * Add a Continue button when choosing a passphrase. And fix a few
+    other design nits with choosing a password.
+
+  [ Michael Zanetti ]
+  * Drop reboot notification label on launcher reset. (LP: #1376707)
+
+  [ Mathieu Trudel-Lapierre ]
+  * [bluetooth] Show bluetooth address instead of name while it's not
+    detected; to be updated once available. (LP: #1382767)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 31 Oct 2014 14:53:52 +0000
+
+ubuntu-system-settings (0.3+15.04.20141028.1-0ubuntu1) vivid; urgency=low
+
+  [ Ken VanDine ]
+  * Refactored to use a singleton for UpdateManager shared in both QML
+    and CPP. Don't load the dynamic visibility items while creating the
+    item model, defer that to the loader. (LP: #1317007)
+
+  [ Florian Boucault ]
+  * Added QML debugging.
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 28 Oct 2014 20:44:34 +0000
+
+ubuntu-system-settings (0.3+15.04.20141028-0ubuntu1) vivid; urgency=low
+
+  [ Michael Terry ]
+  * Fix a typo in the HERE terms link.
+
+  [ CI bot ]
+  * Resync trunk
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 28 Oct 2014 14:15:45 +0000
+
+ubuntu-system-settings (0.3+14.10.20141022-0ubuntu1) utopic; urgency=low
+
+  [ CI bot ]
+  * Resync trunk
+
+  [ Michael Zanetti ]
+  * update code to reset launcher after launcher backend implementation
+    was reworked (LP: #1376707)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 22 Oct 2014 21:34:27 +0000
+
+ubuntu-system-settings (0.3+14.10.20141021.1-0ubuntu1) utopic; urgency=low
+
+  [ Sebastien Bacher ]
+  * [storage] translator comment for the string "%1 free" (LP: #1377929)
+  * [system-update] ellipsize labels if needed (LP: #1376286)
+  * [sound] Use the correct low icon (LP: #1376286)
+
+  [ Lars Uebernickel ]
+  * notification-manager: fix issues with GVariant API usage
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 21 Oct 2014 15:24:55 +0000
+
+ubuntu-system-settings (0.3+14.10.20141021-0ubuntu1) utopic; urgency=low
+
+  [ jonas-drange ]
+  * [security/privacy] allow user to change HERE and location detection
+    settings. (LP: #1375322)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 21 Oct 2014 13:23:03 +0000
+
+ubuntu-system-settings (0.3+14.10.20141017~rtm-0ubuntu1) 14.09; urgency=low
+
+  [ Ken VanDine ]
+  * Updated the pot file.
+
+  [ jonas-drange ]
+  * [cellular] indirectly recreate ConnectionManager interface's dbus
+    proxy so it reports the true value of 'Powered' after flight mode
+    (LP: #1376957)
+
+  [ Iain Lane ]
+  * [sound] Make listSounds take a list of directories and list all of
+    the files in them, instead of assuming "/custom" all the time.
+
+  [ Ubuntu daily release ]
+  * New rebuild forced
+
+  [ Sebastien Bacher ]
+  * [sound] list custom ringtones as well (LP: #1381528)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 17 Oct 2014 14:57:51 +0000
+
+ubuntu-system-settings (0.3+14.10.20141014-0ubuntu1) utopic; urgency=low
+
+  [ Ken VanDine ]
+  * Add an APN editor. (LP: #1225174)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 14 Oct 2014 07:52:12 +0000
+
+ubuntu-system-settings (0.3+14.10.20141010-0ubuntu1) utopic; urgency=low
+
+  [ Michael Terry ]
+  * Complete the unlock security screens and update a host of other
+    small design issues. (LP: #1365034, LP: #1348362) (LP: #1365034,
+    #1348362)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 10 Oct 2014 18:02:19 +0000
+
+ubuntu-system-settings (0.3+14.10.20141009-0ubuntu1) utopic; urgency=low
+
+  [ Diego Sarmentero ]
+  * Improves in network backend. Detect network connection and show
+    "Connect to the internet..." message or retry on netword detected. .
+  * Detect account added on online accounts (LP: #1362149)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 09 Oct 2014 15:09:57 +0000
+
 ubuntu-system-settings (0.3+14.10.20141007-0ubuntu1) utopic; urgency=low
 
   [ jonas-drange ]

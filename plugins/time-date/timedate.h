@@ -43,7 +43,7 @@ class TimeDate : public QObject
                 READ getFilter
                 WRITE setFilter)
     Q_PROPERTY(bool useNTP
-               READ getUseNTP
+               READ useNTP
                WRITE setUseNTP
                NOTIFY useNTPChanged)
     Q_PROPERTY (bool listUpdating
@@ -55,10 +55,10 @@ public:
     ~TimeDate();
     void setTimeZone (QString &time_zone);
     QString timeZone();
+    bool useNTP();
     QAbstractItemModel *getTimeZoneModel();
     QString getFilter();
     void setFilter (QString &filter);
-    bool getUseNTP();
     void setUseNTP(bool enabled);
     Q_INVOKABLE void setTime (qlonglong new_time);
     bool getListUpdating();
@@ -74,6 +74,7 @@ Q_SIGNALS:
     void listUpdatingChanged();
 
 private:
+    bool m_useNTP;
     QString m_currentTimeZone;
     QDBusConnection m_systemBusConnection;
     QDBusServiceWatcher m_serviceWatcher;
@@ -82,6 +83,7 @@ private:
     TimeZoneLocationModel m_timeZoneModel;
     QString m_filter;
     QString getTimeZone();
+    bool getUseNTP();
     void setUpInterface();
 
 };

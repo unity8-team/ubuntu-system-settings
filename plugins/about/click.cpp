@@ -45,7 +45,8 @@ ClickModel::ClickModel(QObject *parent):
  */
 void ClickModel::populateFromDesktopOrIniFile (Click *newClick,
                                                QVariantMap hooks,
-                                               QDir directory)
+                                               QDir directory,
+                                               QString name)
 {
     QVariantMap appHooks;
     GKeyFile *appinfo = g_key_file_new();
@@ -69,17 +70,13 @@ void ClickModel::populateFromDesktopOrIniFile (Click *newClick,
             {
                 keyGroup = "ScopeConfig";
                 keyName = "DisplayName";
+                QString scope(appHooks.value("scope", "").toString());
 
-                QDir scopeDirectory(
-                            directory.absoluteFilePath(appHooks.value("scope", "").toString()));
-                scopeDirectory.setNameFilters(QStringList()<<"*.ini");
+                QDir scopeDirectory(directory.absoluteFilePath(scope));
 
-                QStringList iniEntry(scopeDirectory.entryList());
-
-                if (iniEntry.isEmpty())
-                    goto out;
-
-                QFile desktopOrIniFile(scopeDirectory.absoluteFilePath(iniEntry[0]));
+                /* the config is 'name_scope.ini' */
+                QFile desktopOrIniFile(scopeDirectory.absoluteFilePath(
+                                           name + "_" + scope + ".ini"));
                 desktopOrIniFileName =
                         g_strdup(desktopOrIniFile.fileName().toLocal8Bit().constData());
                 if (!desktopOrIniFile.exists())
@@ -193,7 +190,8 @@ ClickModel::Click ClickModel::buildClick(QVariantMap manifest)
     if (hooks.isValid()) {
         QVariantMap allHooks(hooks.toMap());
         // The desktop or ini file contains an icon and the display name
-        populateFromDesktopOrIniFile(&newClick, allHooks, directory);
+        populateFromDesktopOrIniFile(&newClick, allHooks, directory,
+                                     manifest.value("name", "").toString());
    }
 
     newClick.installSize = manifest.value("installed-size",
