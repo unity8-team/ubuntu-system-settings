@@ -136,6 +136,7 @@ void DownloadTracker::bindDownload(Download* download)
 
 void DownloadTracker::registerError(Error* error)
 {
+    qWarning() << Q_FUNC_INFO << error->errorString();
     Q_EMIT errorFound(error->errorString());
 
     // we need to ensure that the resources are cleaned
