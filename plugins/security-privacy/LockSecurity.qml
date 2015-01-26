@@ -156,6 +156,7 @@ ItemPage {
                             UbuntuSecurityPrivacyPanel.Swipe)
                         confirmButton.enabled = text.length > 0
                 }
+                Component.onCompleted: forceActiveFocus()
             }
 
             /* Using bindings since it is, according to documentation,
