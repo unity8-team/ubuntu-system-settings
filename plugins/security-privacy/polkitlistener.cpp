@@ -104,7 +104,35 @@ bool uss_polkit_listener_register(UssPolkitListener *listener)
 {
     UssPolkitListenerPrivate *priv = listener->priv;
 
-    PolkitSubject *subject = polkit_unix_process_new_for_owner(priv->pid, 0, getuid());
+    // Use session subject rather than process subject because polkitd doesn't
+    // yet support revoking process subject authorizations yet.  Note that this
+    // means for a brief moment we will be answering authorization requests for
+    // everyone.  But that's OK.  It also means when we revoke authorization,
+    // we clear the whole session's cached auths.  But that's also OK because
+    // we are changing passwords here.  Not unreasonable to do so.  And they're
+    // only cached auths.  It's not critical that they are preserved.
+    PolkitSubject *subject = polkit_unix_session_new(getenv("XDG_SESSION_ID"));
+    if (!subject) {
+        return false;
+    }
+
+    // Revoke any authentication.  This is to ensure that policykit actually
+    // verifies the password we took from the user.  If policykit has a cached
+    // auth token, the user could have entered the wrong password and wonder
+    // why we asked for it if we don't check it.  We value a consistent
+    // interface over the rare times a user will be pleasantly surprised we
+    // kept track of the authorization (for only the swipe option really...).
+    // There will still be a tiny race between revokation and asking policykit,
+    // where the user could be granted authorization again.  But that seems
+    // vanishingly unlikely and to fix it, we'd need to pass the password
+    // prompt signal up to UI and back down again.  Let's just not worry
+    // about it.
+    PolkitAuthority *authority = polkit_authority_get_sync(nullptr, nullptr);
+    polkit_authority_revoke_temporary_authorizations_sync(authority, subject,
+                                                          nullptr, nullptr);
+    g_object_unref(authority);
+
+    // Now actually register ourselves
     priv->registration = polkit_agent_listener_register(POLKIT_AGENT_LISTENER(listener),
                                                         POLKIT_AGENT_REGISTER_FLAGS_RUN_IN_THREAD,
                                                         subject, nullptr, nullptr, nullptr);
