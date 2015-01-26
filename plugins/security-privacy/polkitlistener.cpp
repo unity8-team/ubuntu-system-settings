@@ -18,6 +18,7 @@
  */
 
 #include "polkitlistener.h"
+#include <stdlib.h>
 
 struct _UssPolkitListenerPrivate
 {
