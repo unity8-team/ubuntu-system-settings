@@ -25,6 +25,7 @@ import Ubuntu.Components 1.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 import Ubuntu.Components.Popups 0.1
 import SystemSettings 1.0
+import Ubuntu.SystemSettings.SecurityPrivacy 1.0
 import MeeGo.QOfono 0.2
 import "sims.js" as Sims
 
@@ -367,7 +368,7 @@ ItemPage {
                         enabled: sims[index].simMng.pinRequired !== 'none'
                         text: i18n.tr("Unlock…")
                         color: UbuntuColors.green
-                        onClicked: securityPrivacy.unlockModem(sims[index].path)
+                        onClicked: Connectivity.unlockModem(sims[index].path)
                     }
                 }
 

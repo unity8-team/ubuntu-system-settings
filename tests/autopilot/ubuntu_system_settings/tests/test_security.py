@@ -402,7 +402,7 @@ class SecurityTestCase(SecurityBaseTestCase):
         self._go_to_sim_lock()
         unlock = self.system_settings.main_view.select_single(
             objectName='unlock')
-        self.system_settings.main_view.scroll_to_and_click(unlock)
+        self.system_settings.main_view.pointing_device.click_object(unlock)
 
         self.assertThat(
             lambda: len(self.con_mock.GetMethodCalls('UnlockModem')),
