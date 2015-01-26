@@ -125,6 +125,7 @@ public:
     QSharedPointer<QDBusInterface> m_audioSourceInterface;
     QSharedPointer<QDBusInterface> m_audioSinkInterface;
     QSharedPointer<QDBusInterface> m_headsetInterface;
+    QSharedPointer<QDBusInterface> m_inputInterface;
     QList<ConnectionMode> m_connectAfterPairing;
 
   protected:

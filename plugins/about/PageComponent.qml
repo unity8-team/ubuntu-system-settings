@@ -33,7 +33,7 @@ ItemPage {
 
     title: i18n.tr("About this phone")
     flickable: scrollWidget
-    property var modemsSorted: manager.modems.slice(0).sort()
+    property var modemsSorted: []
 
     UbuntuStorageAboutPanel {
         id: backendInfos
@@ -49,17 +49,26 @@ ItemPage {
 
     OfonoManager {
         id: manager
-        Component.onCompleted: {
-            if (manager.modems.length === 1) {
-                phoneNumbers.setSource("PhoneNumber.qml", {path: manager.modems[0]})
-            } else if (manager.modems.length > 1) {
-                phoneNumbers.setSource("PhoneNumbers.qml", {paths: modemsSorted})
+        onModemsChanged: {
+            root.modemsSorted = modems.slice(0).sort();
+            if (modems.length === 1) {
+                phoneNumbers.setSource("PhoneNumber.qml", {
+                    path: manager.modems[0]
+                });
+            } else if (modems.length > 1) {
+                phoneNumbers.setSource("PhoneNumbers.qml", {
+                    paths: root.modemsSorted
+                });
             }
         }
     }
 
     NetworkAbout {
         id: network
+    }
+
+    NetworkInfo {
+        id: wlinfo
     }
 
     Flickable {
@@ -138,9 +147,10 @@ ItemPage {
             }
 
             ListItem.SingleValue {
+                property string address: wlinfo.macAddress(NetworkInfo.WlanMode, 0)
                 text: i18n.tr("Wi-Fi address")
-                value: network.networkMacAddresses[0]
-                visible: network.networkMacAddresses.length > 0
+                value: address ? address.toUpperCase() : ""
+                visible: address
                 showDivider: bthwaddr.visible
             }
 

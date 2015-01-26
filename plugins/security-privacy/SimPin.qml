@@ -32,6 +32,7 @@ import "sims.js" as Sims
 
 ItemPage {
     id: root
+    objectName: "simPinPage"
     title: i18n.tr("SIM PIN")
 
     property var sims

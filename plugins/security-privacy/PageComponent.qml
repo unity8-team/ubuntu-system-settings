@@ -39,15 +39,15 @@ ItemPage {
 
     property alias usePowerd: batteryBackend.powerdRunning
     property bool lockOnSuspend
-    property var modemsSorted: manager.modems.slice(0).sort()
-
-    // we make simsPresent dynamic by adding a qml property to the mix
-    property var simsPresent: Sims.getPresent(simQmlObjects)
-    property int simQmlObjects: 0
-    property var simsPresentCount: simsPresent.length
-    property int simsLockedCount: {
+    property var modemsSorted: []
+    property var sims: []
+    /* glue to something that will emit change events
+    TODO: fix this so that the present count emits events of its own */
+    property int simsPresent: simsLoaded ? Sims.getPresentCount() : 0
+    property int simsLoaded: 0
+    property int simsLocked: {
         var t = 0;
-        simsPresent.forEach(function (sim) {
+        sims.forEach(function (sim) {
             if (sim.simMng.lockedPins.length > 0)
                 t++;
         });
@@ -68,22 +68,10 @@ ItemPage {
 
     OfonoManager {
         id: manager
-        Component.onCompleted: {
-            // create ofono bindings for all modem paths
-            var component = Qt.createComponent("Ofono.qml");
-            modemsSorted.forEach(function (path, index) {
-                var sim = component.createObject(root, {
-                    path: path,
-                    name: phoneSettings.simNames[path] ?
-                            phoneSettings.simNames[path] :
-                            "SIM " + (index + 1)
-                });
-                if (sim === null)
-                    console.warn('failed to create sim object');
-                else {
-                    Sims.add(sim);
-                }
-            });
+        onModemsChanged: {
+            root.modemsSorted = modems.slice(0).sort();
+            Sims.createQML();
+            root.sims = Sims.getAll();
         }
     }
 
@@ -158,25 +146,16 @@ ItemPage {
                 objectName: "simControl"
                 text: i18n.tr("SIM PIN")
                 value: {
-                    if (simsPresentCount === 1 && simsLockedCount > 0)
+                    if (simsLoaded === 1 && simsLocked > 0)
                         return i18n.tr("On");
-                    else if (simsPresentCount > 1 && simsLockedCount > 0)
-                        return simsLockedCount + "/" + simsPresentCount;
-                    else if (simsPresentCount === 0)
-                        return i18n.tr("No SIMs found")
+                    else if (simsLoaded > 1 && simsLocked > 0)
+                        return simsLocked + "/" + simsLoaded;
                     else
                         return i18n.tr("Off");
                 }
-                progression: enabled
-                enabled: simsPresentCount > 0
-                onClicked: {
-                    if (enabled) {
-                        pageStack.push(Qt.resolvedUrl("SimPin.qml"), {
-                            sims: simsPresent,
-                            securityPrivacy: securityPrivacy
-                        });
-                    }
-                }
+                visible: simsPresent > 0
+                progression: true
+                onClicked: pageStack.push(Qt.resolvedUrl("SimPin.qml"), { sims: sims })
             }
             ListItem.Standard {
                 text: i18n.tr("Encryption")
