@@ -1,3 +1,11 @@
+ubuntu-system-settings (0.3+15.04.20150126-0ubuntu1) vivid; urgency=low
+
+  [ Sebastien Bacher ]
+  * security-privacy: give default focus to the first entry (LP:
+    #1412530)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Mon, 26 Jan 2015 15:20:31 +0000
+
 ubuntu-system-settings (0.3+15.04.20150123-0ubuntu1) vivid; urgency=low
 
   [ Manuel de la Peña ]
