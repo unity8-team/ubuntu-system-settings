@@ -151,10 +151,9 @@ class WifiTestCase(WifiBaseTestCase):
 
         dialog.cancel()
 
-        # check that Disconnect was called once
         self.assertThat(
             lambda:
-                len(self.device_mock.GetMethodCalls('Disconnect')),
+                len(self.active_connection_mock.GetMethodCalls('Delete')),
             Eventually(Equals(1)))
 
     def test_connect_to_hidden_network_dialog_visibility(self):
