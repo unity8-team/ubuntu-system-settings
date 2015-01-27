@@ -13,13 +13,14 @@ from autopilot.matchers import Eventually
 
 from ubuntu_system_settings.tests import (
     SecurityBaseTestCase,
+    ConnectivityMixin,
     SIM_IFACE)
 
 from ubuntu_system_settings.utils.i18n import ugettext as _
 from ubuntuuitoolkit import emulators as toolkit_emulators
 
 
-class SecurityTestCase(SecurityBaseTestCase):
+class SecurityTestCase(SecurityBaseTestCase, ConnectivityMixin):
     """ Tests for Security Page """
 
     def setUp(self):
@@ -411,10 +412,6 @@ class SecurityTestCase(SecurityBaseTestCase):
         )
 
     def test_sim_unlock(self):
-
-        self.mock_private_connectivity()
-        self.addCleanup(self.teardown_private_connectivity)
-
         # lock sim
         self.modem_0.Set(SIM_IFACE, 'PinRequired', 'pin')
         self.modem_0.EmitSignal(
@@ -426,9 +423,9 @@ class SecurityTestCase(SecurityBaseTestCase):
         self.system_settings.main_view.pointing_device.click_object(unlock)
 
         self.assertThat(
-            lambda: len(self.con_mock.GetMethodCalls('UnlockModem')),
+            lambda: len(self.connectivity_mock.GetMethodCalls('UnlockModem')),
             Eventually(Equals(1)))
 
         # make sure the argument for the one call is the modem path
-        for d, args in self.con_mock.GetMethodCalls('UnlockModem'):
+        for d, args in self.connectivity_mock.GetMethodCalls('UnlockModem'):
             self.assertEqual(str(args[0]), '/ril_0')
