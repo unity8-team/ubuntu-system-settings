@@ -31,6 +31,24 @@ ItemPage {
     id: page
     title: i18n.tr("Lock security")
 
+    // The user can still press the main "back" button or other buttons on the
+    // page while the "change password" dialog is up.  This is because the
+    // dialog is not guaranteed to cover the whole screen; consider the case of
+    // turning a phone to landscape mode.  We'd rather not have the password
+    // changing operation interrupted by destroying the dialog out from under
+    // it.  So we make sure the whole page and header back button are disabled
+    // while the dialog is working.
+    enabled: dialog === null
+    head.backAction: Action {
+        iconName: "back"
+        enabled: page.enabled
+        onTriggered: {
+            pageStack.pop();
+        }
+    }
+
+    property var dialog: null
+
     UbuntuSecurityPrivacyPanel {
         id: securityPrivacy
     }
@@ -58,16 +76,12 @@ ItemPage {
     }
 
     function openDialog() {
-        var newMethod = indexToMethod(unlockMethod.selectedIndex)
-        if (securityPrivacy.trySetSecurity(newMethod))
-            return // Oh, that was easy!  No need to prompt
-
-        var dlg = PopupUtils.open(dialogComponent)
+        dialog = PopupUtils.open(dialogComponent, page)
         // Set manually rather than have these be dynamically bound, since
         // the security type can change out from under us, but we don't
         // want dialog to change in that case.
-        dlg.oldMethod = securityPrivacy.securityType
-        dlg.newMethod = newMethod
+        dialog.oldMethod = securityPrivacy.securityType
+        dialog.newMethod = indexToMethod(unlockMethod.selectedIndex)
     }
 
     RegExpValidator {
@@ -342,6 +356,7 @@ ItemPage {
                     enabled: newInput.acceptableInput
                     onClicked: {
                         changeSecurityDialog.enabled = false
+                        incorrect.text = ""
 
                         var match = (newInput.text == confirmInput.text)
                         notMatching.visible = !match
@@ -356,16 +371,15 @@ ItemPage {
                             currentInput.visible ? currentInput.text : "",
                             newInput.text,
                             changeSecurityDialog.newMethod)
-                        incorrect.text = errorText
+
                         if (errorText !== "") {
-                            changeSecurityDialog.enabled = true
+                            incorrect.text = errorText
                             currentInput.forceActiveFocus()
                             currentInput.selectAll()
-                            return
+                            changeSecurityDialog.enabled = true
+                        } else {
+                            PopupUtils.close(changeSecurityDialog)
                         }
-
-                        changeSecurityDialog.enabled = true
-                        PopupUtils.close(changeSecurityDialog)
                     }
                 }
             }
