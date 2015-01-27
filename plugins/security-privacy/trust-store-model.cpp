@@ -35,6 +35,11 @@
 class Application
 {
 public:
+    struct GrantData {
+        bool granted{false};
+        std::chrono::system_clock::time_point timestamp; // initialized with the epoch
+    };
+
     Application() {}
 
     void setId(const QString &id) {
@@ -125,19 +130,25 @@ public:
     }
 
     void addRequest(const core::trust::Request &request) {
-        if (request.answer == core::trust::Request::Answer::granted) {
-            grantedFeatures.insert(request.feature.value);
-        } else {
-            grantedFeatures.remove(request.feature.value);
-        }
+        GrantData &data = grantedFeatures[request.feature.value];
+        /* Ignore older requests */
+        if (request.when <= data.timestamp) return;
+
+        data.granted = (request.answer == core::trust::Request::Answer::granted);
+        data.timestamp = request.when;
     }
 
-    bool hasGrants() const { return !grantedFeatures.isEmpty(); }
+    bool hasGrants() const {
+        Q_FOREACH(const GrantData &data, grantedFeatures) {
+            if (data.granted) return true;
+        }
+        return false;
+    }
 
     QString id;
     QString displayName;
     QString iconName;
-    QSet<std::uint64_t> grantedFeatures;
+    QHash<std::uint64_t,GrantData> grantedFeatures;
 };
 
 class TrustStoreModelPrivate: public QObject
@@ -355,7 +366,7 @@ void TrustStoreModel::setEnabled(int row, bool enabled)
 
     /* When disabling, we must disable all the features */
     if (!enabled) {
-        Q_FOREACH(std::int64_t feature, app.grantedFeatures) {
+        Q_FOREACH(std::int64_t feature, app.grantedFeatures.keys()) {
             /* Skip the default feature, we already disabled it */
             if (feature == core::trust::Request::default_feature) continue;
 
