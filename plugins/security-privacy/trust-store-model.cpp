@@ -36,8 +36,7 @@ class Application
 {
 public:
     struct GrantData {
-        GrantData(): granted(false) {}
-        bool granted;
+        bool granted{false};
         std::chrono::system_clock::time_point timestamp; // initialized with the epoch
     };
 
