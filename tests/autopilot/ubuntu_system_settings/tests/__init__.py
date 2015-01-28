@@ -741,6 +741,7 @@ class ResetBaseTestCase(UbuntuSystemSettingsTestCase,
 class ConnectivityMixin(dbusmock.DBusTestCase):
     @classmethod
     def setUpClass(cls):
+        cls.start_session_bus()
         cls.connectivity_dbus = cls.get_dbus()
         cls.connectivity_server = cls.spawn_server(CON_SERVICE,
                                                    CON_PATH,
