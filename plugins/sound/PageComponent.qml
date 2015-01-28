@@ -213,6 +213,7 @@ ItemPage {
 
             ListItem.Standard {
                 text: i18n.tr("Keyboard sound")
+                showDivider: false
 
                 control: Switch {
                     objectName: "keyboardSoundSwitch"
@@ -230,6 +231,19 @@ ItemPage {
                 }
                 text: i18n.tr("Lock sound")
                 visible: showAllUI
+            }
+
+            ListItem.Divider {}
+
+            ListItem.Standard {
+                text: i18n.tr("Other vibrations")
+
+                control: Switch {
+                    objectName: "otherVibrateSwitch"
+                    checked: backendInfo.otherVibrate
+
+                    onClicked: backendInfo.otherVibrate = checked
+                }
             }
         }
     }
