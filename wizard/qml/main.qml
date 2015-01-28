@@ -48,6 +48,8 @@ Item {
     }
 
     function quitWizard() {
+        pageStack.currentPage.enabled = false
+
         // Immediately go to black to give quick feedback
         blackCover.visible = true
 
