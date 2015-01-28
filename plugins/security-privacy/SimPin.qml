@@ -37,7 +37,6 @@ ItemPage {
 
     property var sims
     property var curSim
-    property var securityPrivacy
 
     Component {
         id: dialogComponent
