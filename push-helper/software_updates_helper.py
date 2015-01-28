@@ -21,6 +21,9 @@ import json
 import sys
 import time
 import gettext
+import logging
+import logging.handlers
+from xdg.BaseDirectory import save_cache_path
 
 _ = gettext.translation('ubuntu-system-settings', fallback=True).gettext
 
@@ -53,6 +56,7 @@ class SystemImage:
 
     def quit(self):
         if self.notify:
+            logging.debug("Notifying.")
             # remove any older notifications about this
             self.postal.ClearPersistent("_ubuntu-system-settings", SYS_UPDATE)
             # send ours. This will of course come back to this same script.
@@ -60,6 +64,7 @@ class SystemImage:
         self.loop.quit()
 
     def available_cb(self, available, downloading, *ignored):
+        logging.debug("Available: %s; downloading: %s", available, downloading)
         if available:
             if downloading:
                 # handled in the UpdateDownloaded or UpdateFailed handlers
@@ -73,15 +78,18 @@ class SystemImage:
         self.quit()
 
     def downloaded_cb(self):
+        logging.debug("Downloaded.")
         self.notify = True
         self.quit()
 
     def failed_cb(self, *ignored):
         # give up
+        logging.debug("Failed.")
         self.notify = False
         self.quit()
 
     def run(self):
+        logging.debug("Checking for update.")
         self.sysimg.connect_to_signal("UpdateAvailableStatus",
                                       self.available_cb)
         self.sysimg.connect_to_signal("UpdateDownloaded", self.downloaded_cb)
@@ -133,6 +141,7 @@ def main():
 
     obj = {}
     if arg == "system-image-update":
+        logging.debug("system-image-update; requesting regular notification.")
         icon = "/usr/share/ubuntu/settings/system/icons/" + \
                "settings-system-update.svg"
         obj = {
@@ -158,11 +167,15 @@ def main():
         }
     elif arg == "testing":
         # for tests
+        logging.debug("Testing.")
         obj = {"testing": True}
     else:
         # assume it's a broadcast
+        logging.debug("Broadcast; forking.")
         if os.fork() == 0:
             os.setsid()
+            os.closerange(0, 3)
+            logging.debug("Forked.")
             s = SystemImage()
             s.setup()
             s.run()
@@ -171,4 +184,19 @@ def main():
     json.dump(obj, open(f2, "w"))
 
 if __name__ == '__main__':
-    main()
+    logdir = save_cache_path("ubuntu-system-settings")
+    logfile = os.path.join(logdir, "software_updates_helper.log")
+    rothandler = logging.handlers.TimedRotatingFileHandler(logfile, when="D",
+                                                           backupCount=10)
+    logging.basicConfig(
+        format="%(asctime)s %(levelname)8s [%(process)04x] %(message)s",
+        datefmt="%Y-%m-%dT%H:%M:%S",
+        level=logging.DEBUG,
+        handlers=(rothandler,))
+    logging.debug("Starting.")
+    try:
+        main()
+    except Exception:
+        logging.exception("Died with exception:")
+    else:
+        logging.debug("Done.")

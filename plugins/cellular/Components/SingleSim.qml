@@ -18,6 +18,7 @@
  *
 */
 import QtQuick 2.0
+import SystemSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 
@@ -77,13 +78,13 @@ Column {
     }
 
     ListItem.Divider {
-        visible: radio.selector.model.length
+        visible: radio.visible
     }
 
     RadioSingleSim {
         id: radio
         anchors { left: parent.left; right: parent.right }
-        visible: radio.selector.model.length
+        visible: radio.enabled
     }
 
     ListItem.Divider {}
@@ -91,21 +92,10 @@ Column {
     ListItem.SingleValue {
         text: i18n.tr("Carrier");
         id: chooseCarrier
-        objectName: "carrier"
+        objectName: "carrierApnEntry"
         progression: enabled
-        value: sim.netReg.name || i18n.tr("N/A")
-        enabled: sim.netReg.status !== ""
-        onClicked: {
-            pageStack.push(Qt.resolvedUrl("../PageChooseCarrier.qml"), {
-                sim: sim,
-                title: i18n.tr("Carrier")
-            })
-        }
-    }
-
-    ListItem.Standard {
-        text: i18n.tr("APN")
-        progression: true
-        visible: showAllUI
+        onClicked: pageStack.push(Qt.resolvedUrl("../PageCarrierAndApn.qml"), {
+            sim: sim
+        })
     }
 }

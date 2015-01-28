@@ -33,6 +33,7 @@ ItemPage {
 
     title: i18n.tr("About this phone")
     flickable: scrollWidget
+    property var modemsSorted: []
 
     UbuntuStorageAboutPanel {
         id: backendInfos
@@ -48,17 +49,26 @@ ItemPage {
 
     OfonoManager {
         id: manager
-        Component.onCompleted: {
-            if (manager.modems.length === 1) {
-                phoneNumbers.setSource("PhoneNumber.qml", {path: manager.modems[0]})
-            } else if (manager.modems.length > 1) {
-                phoneNumbers.setSource("PhoneNumbers.qml", {paths: manager.modems.slice(0).sort()})
+        onModemsChanged: {
+            root.modemsSorted = modems.slice(0).sort();
+            if (modems.length === 1) {
+                phoneNumbers.setSource("PhoneNumber.qml", {
+                    path: manager.modems[0]
+                });
+            } else if (modems.length > 1) {
+                phoneNumbers.setSource("PhoneNumbers.qml", {
+                    paths: root.modemsSorted
+                });
             }
         }
     }
 
     NetworkAbout {
         id: network
+    }
+
+    NetworkInfo {
+        id: wlinfo
     }
 
     Flickable {
@@ -117,14 +127,30 @@ ItemPage {
                 property string imeiNumber
                 imeiNumber: deviceInfos.imei(0)
                 text: "IMEI"
-                value: imeiNumber
-                visible: imeiNumber
+                value: modemsSorted.length ? (imeiNumber || i18n.tr("None")) :
+                    i18n.tr("None")
+                visible: modemsSorted.length <= 1
+            }
+
+            ListItem.MultiValue {
+                text: "IMEI"
+                objectName: "imeiItems"
+                values: {
+                    var imeis = [];
+                    modemsSorted.forEach(function (path, i) {
+                        var imei = deviceInfos.imei(i);
+                        imei ? imeis.push(imei) : imeis.push(i18n.tr("None"));
+                    });
+                    return imeis;
+                }
+                visible: modemsSorted.length > 1
             }
 
             ListItem.SingleValue {
+                property string address: wlinfo.macAddress(NetworkInfo.WlanMode, 0)
                 text: i18n.tr("Wi-Fi address")
-                value: network.networkMacAddresses[0]
-                visible: network.networkMacAddresses.length > 0
+                value: address ? address.toUpperCase() : ""
+                visible: address
                 showDivider: bthwaddr.visible
             }
 

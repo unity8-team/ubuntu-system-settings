@@ -19,6 +19,7 @@
 */
 import QtQuick 2.0
 import GSettings 1.0
+import SystemSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 
@@ -42,6 +43,7 @@ Column {
     DataMultiSim {
         anchors { left: parent.left; right: parent.right }
     }
+
 
     ListItem.SingleValue {
         text : i18n.tr("Hotspot disabled because Wi-Fi is off.")
@@ -70,11 +72,11 @@ Column {
     ListItem.SingleValue {
         text: i18n.tr("Carriers")
         id: chooseCarrier
-        objectName: "carriers"
+        objectName: "carrierApnEntry"
         progression: enabled
         showDivider: false
         onClicked: {
-            pageStack.push(Qt.resolvedUrl("../PageChooseCarriers.qml"), {
+            pageStack.push(Qt.resolvedUrl("../PageCarriersAndApns.qml"), {
                 sims: sims
             });
         }
@@ -102,33 +104,36 @@ Column {
         }[tech]
     }
 
-    ListItem.ItemSelector {
-        id: radio
-        expanded: true
-        text: i18n.tr("Connection type:")
-        model: poweredSim ? poweredSim.radioSettings.modemTechnologies : []
-        delegate: OptionSelectorDelegate {
-            objectName: poweredSim.path + "_radio_" + modelData
-            text: techToString(modelData)
-        }
-        enabled: poweredSim ?
-            (poweredSim.radioSettings.technologyPreference !== "") : false
-        visible: poweredSim
-        selectedIndex: poweredSim ?
-            model.indexOf(poweredSim.radioSettings.technologyPreference) : -1
-        onDelegateClicked: {
-            poweredSim.radioSettings.technologyPreference = model[index];
+    Repeater {
+        model: sims
+
+        ListItem.ItemSelector {
+            id: radio
+            property var sim: modelData
+            property var rSettings: sim.radioSettings
+            property string techPref: rSettings.technologyPreference
+            property var modemTechs: rSettings.modemTechnologies
+            expanded: true
+            text: i18n.tr("Connection type:")
+            model: modemTechs || []
+            delegate: OptionSelectorDelegate {
+                objectName: sim.path + "_radio_" + modelData
+                text: techToString(modelData)
+            }
+            enabled: techPref !== ""
+            visible: sim.connMan.powered
+            selectedIndex: techPref !== "" ? model.indexOf(techPref) : -1
+            onDelegateClicked: rSettings.technologyPreference = model[index];
+            Connections {
+                target: rSettings
+                onTechnologyPreferenceChanged: {
+                    radio.selectedIndex = modemTechs.indexOf(preference)
+                }
+                ignoreUnknownSignals: true
+            }
         }
     }
 
-    Connections {
-        target: poweredSim ? poweredSim.radioSettings : null
-        onTechnologyPreferenceChanged: {
-            radio.selectedIndex =
-                poweredSim.radioSettings.modemTechnologies.indexOf(preference)
-        }
-        ignoreUnknownSignals: true
-    }
 
     GSettings {
         id: phoneSettings

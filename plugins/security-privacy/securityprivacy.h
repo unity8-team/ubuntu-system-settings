@@ -93,7 +93,6 @@ public:
 
     // Returns error text, if an error occurred
     Q_INVOKABLE QString setSecurity(QString oldValue, QString value, SecurityType type);
-    Q_INVOKABLE bool trySetSecurity(SecurityType type);
 
 public Q_SLOTS:
     void slotChanged(QString, QString);

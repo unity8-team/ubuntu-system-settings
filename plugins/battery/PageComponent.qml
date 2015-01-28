@@ -329,15 +329,30 @@ ItemPage {
                                Qt.resolvedUrl("SleepValues.qml"),
                                { title: text, lockOnSuspend: lockOnSuspend })
             }
+
+            QDBusActionGroup {
+                id: networkActionGroup
+                busType: 1
+                busName: "com.canonical.indicator.network"
+                objectPath: "/com/canonical/indicator/network"
+                property variant enabled: action("wifi.enable")
+                Component.onCompleted: start()
+            }
+
             ListItem.Standard {
                 text: i18n.tr("Wi-Fi")
-                control: Switch {
-                    id: wifiSwitch
-                    property bool serverChecked: batteryBackend.wifiEnabled
-                    onServerCheckedChanged: checked = serverChecked
-                    Component.onCompleted: checked = serverChecked
-                    onTriggered: batteryBackend.wifiEnabled = checked
+                control: Loader {
+                    active: networkActionGroup.enabled.state != null
+                    sourceComponent: Switch {
+                        id: wifiSwitch
+                        property bool serverChecked: networkActionGroup.enabled.state
+                        onServerCheckedChanged: checked = serverChecked
+                        Component.onCompleted: checked = serverChecked
+                        onTriggered: networkActionGroup.enabled.activate()
+                    }
                 }
+                visible: networkActionGroup.enabled.state !== undefined
+                Component.onCompleted: clicked.connect(wifiSwitch.clicked)
             }
 
             QDBusActionGroup {

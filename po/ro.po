@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-10-16 20:04-0600\n"
-"PO-Revision-Date: 2014-11-10 17:48+0000\n"
-"Last-Translator: Meriuță Cornel <meriutacornel@neacornel.eu>\n"
+"PO-Revision-Date: 2014-11-18 11:35+0000\n"
+"Last-Translator: Marian Vasile <marianvasile1972@gmail.com>\n"
 "Language-Team: Romanian <ro@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n == 1 ? 0: (((n % 100 > 19) || ((n % 100 "
 "== 0) && (n != 0))) ? 2: 1));\n"
-"X-Launchpad-Export-Date: 2014-11-11 07:10+0000\n"
-"X-Generator: Launchpad (build 17241)\n"
+"X-Launchpad-Export-Date: 2014-11-19 06:23+0000\n"
+"X-Generator: Launchpad (build 17252)\n"
 
 #: ubuntu-system-settings.desktop.in.in.h:1 ../src/qml/MainWindow.qml:112
 msgid "System Settings"
@@ -802,7 +802,7 @@ msgstr "Manual"
 
 #: ../plugins/cellular//PageChooseCarrier.qml:196
 msgid "Searching for carriers…"
-msgstr ""
+msgstr "Se caută rețele..."
 
 #: ../plugins/cellular//PageChooseCarrier.qml:229
 #: ../plugins/cellular//PageChooseApn.qml:31
@@ -816,7 +816,7 @@ msgstr "APN internet:"
 
 #: ../plugins/cellular//PageChooseApn.qml:449
 msgid "Custom Internet APN…"
-msgstr ""
+msgstr "APN Internet personalizat..."
 
 #: ../plugins/cellular//PageChooseApn.qml:460
 msgid "MMS APN:"
@@ -829,7 +829,7 @@ msgstr "Același APN pentru internet"
 
 #: ../plugins/cellular//PageChooseApn.qml:565
 msgid "Custom MMS APN…"
-msgstr ""
+msgstr "APN MMS personalizat..."
 
 #: ../plugins/cellular//PageChooseApn.qml:591
 msgid "Reset APN Settings"
@@ -860,7 +860,7 @@ msgstr "MMS"
 #: ../plugins/cellular//CustomApnEditor.qml:67
 #, qt-format
 msgid "Custom %1 APN"
-msgstr ""
+msgstr "APN personalizat %1"
 
 #. TRANSLATORS: %1 is either i18n.tr("Internet") or i18n.tr("MMS")
 #: ../plugins/cellular//CustomApnEditor.qml:171
@@ -1601,6 +1601,8 @@ msgstr ""
 #: ../plugins/about//DevMode.qml:110
 msgid "You need a passcode or passphrase set to use Developer Mode."
 msgstr ""
+"Pentru a utiliza Modul dezvoltator aveți nevoie de un cod de acces sau de o "
+"frază-parolă."
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: ../plugins/about//PageComponent.qml:34
@@ -1803,7 +1805,7 @@ msgstr "Programele sunt la zi"
 #: ../plugins/system-update//PageComponent.qml:235
 #: ../plugins/system-update//PageComponent.qml:241
 msgid "Sorry, the system update failed."
-msgstr ""
+msgstr "Actualizarea de sistem a eșuat."
 
 #: ../plugins/system-update//PageComponent.qml:254
 msgid "Restarting…"
@@ -2117,7 +2119,7 @@ msgstr "Alegeți codul dumneavoastră de acces"
 
 #: ../wizard/qml/Pages//31-passwd-set.qml:56
 msgid "Passphrase must be 4 characters long"
-msgstr ""
+msgstr "Fraza-parolă trebuie să conțină 4 caractere"
 
 #: ../wizard/qml/Pages//20-sim.qml:23
 msgid "Add a SIM card and restart your device"
@@ -2175,6 +2177,8 @@ msgid ""
 "Ubuntu includes location services provided by HERE, enabling apps to "
 "pinpoint your location."
 msgstr ""
+"Ubuntu include servicii de localizare furnizate de HERE, care permit "
+"aplicațiilor să marcheze localizarea geografică."
 
 #: ../wizard/qml/Pages//50-location.qml:64
 msgid ""
@@ -2202,19 +2206,24 @@ msgstr ""
 
 #: ../wizard/qml/Pages//60-reporting.qml:22
 msgid "Improving your experience"
-msgstr ""
+msgstr "Experiență în utilizare îmbunătățită"
 
 #: ../wizard/qml/Pages//60-reporting.qml:34
 msgid ""
 "Your phone is set up to automatically report errors to Canonical and its "
 "partners, the makers of the operating system."
 msgstr ""
+"Telefonul dumneavoastră este configurat să trimită în mod automat rapoarte "
+"de erori către Canonical și partenerii săi, producătorii sistemului de "
+"operare."
 
 #: ../wizard/qml/Pages//60-reporting.qml:41
 msgid ""
 "This can be disabled in <b>System Settings</b> under <b>Security &amp; "
 "Privacy</b>"
 msgstr ""
+"Acest comportament poate fi dezactivat din <b>Configurări de sistem</b> "
+"ramura <b>Securitate și confidențialitate</b>"
 
 #: ../wizard/qml/Components//Page.qml:89
 msgid "Back"
@@ -2946,7 +2955,7 @@ msgstr "clic"
 
 #: ../plugins/security-privacy//securityprivacy.cpp:318
 msgid "Incorrect passcode. Try again."
-msgstr ""
+msgstr "Cod de acces incorect. Încercați din nou."
 
 #: ../plugins/security-privacy//securityprivacy.cpp:320
 msgid "Incorrect passphrase. Try again."
