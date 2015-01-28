@@ -1,3 +1,33 @@
+ubuntu-system-settings (0.3+15.04.20150127.1-0ubuntu1) vivid; urgency=low
+
+  [ Michael Terry ]
+  * Revoke any cached authorizations before trying to change password
+    mode. This makes sure that we authenticate the user again even if we
+    just did so (for UX consistency).
+
+  [ jonas-drange ]
+  * [ap] avoid use of scroll_to_and_click where the element to be
+    clicked is visible without scrolling
+  * [wifi] updates AP test because of a new backend
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 27 Jan 2015 16:35:43 +0000
+
+ubuntu-system-settings (0.3+15.04.20150127-0ubuntu1) vivid; urgency=low
+
+  [ Alberto Mardegan ]
+  * Security: ignore older requests when building the applications'
+    grants
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 27 Jan 2015 10:04:19 +0000
+
+ubuntu-system-settings (0.3+15.04.20150126-0ubuntu1) vivid; urgency=low
+
+  [ Sebastien Bacher ]
+  * security-privacy: give default focus to the first entry (LP:
+    #1412530)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Mon, 26 Jan 2015 15:20:31 +0000
+
 ubuntu-system-settings (0.3+15.04.20150123-0ubuntu1) vivid; urgency=low
 
   [ Manuel de la Peña ]
