@@ -237,12 +237,12 @@ ItemPage {
 
             ListItem.Standard {
                 text: i18n.tr("Other vibrations")
-
                 control: Switch {
                     objectName: "otherVibrateSwitch"
-                    checked: backendInfo.otherVibrate
-
-                    onClicked: backendInfo.otherVibrate = checked
+                    property bool serverChecked: backendInfo.otherVibrate
+                    onServerCheckedChanged: checked = serverChecked
+                    Component.onCompleted: checked = serverChecked
+                    onTriggered: backendInfo.otherVibrate = checked
                 }
             }
         }
