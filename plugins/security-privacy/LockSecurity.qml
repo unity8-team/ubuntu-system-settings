@@ -353,7 +353,23 @@ ItemPage {
                         else
                             return i18n.tr("Set")
                     }
-                    enabled: newInput.acceptableInput
+                    /* see https://wiki.ubuntu.com/SecurityAndPrivacySettings#Phone for details */
+                    enabled: /* Validate the old method, it's either swipe or a secret which needs
+                                to be valid, 4 digits for the passcode or > 0 for a passphrase */
+                             (changeSecurityDialog.oldMethod === UbuntuSecurityPrivacyPanel.Swipe ||
+                              ((changeSecurityDialog.oldMethod === UbuntuSecurityPrivacyPanel.Passcode &&
+                                currentInput.text.length === 4) ||
+                               (changeSecurityDialog.oldMethod === UbuntuSecurityPrivacyPanel.Passphrase &&
+                                currentInput.text.length > 0))) &&
+                             /* Validate the new auth method, either it's a passcode and the code needs to be 4 digits */
+                             ((changeSecurityDialog.newMethod === UbuntuSecurityPrivacyPanel.Passcode &&
+                              newInput.text.length === 4 && confirmInput.text.length === 4) ||
+                             /* or a passphrase and then > 0 */
+                             (changeSecurityDialog.newMethod === UbuntuSecurityPrivacyPanel.Passphrase &&
+                              newInput.text.length > 0 && confirmInput.text.length > 0) ||
+                             /* or to be swipe */
+                             changeSecurityDialog.newMethod === UbuntuSecurityPrivacyPanel.Swipe)
+
                     onClicked: {
                         changeSecurityDialog.enabled = false
                         incorrect.text = ""
