@@ -29,7 +29,8 @@ class BackgroundTestCase(BackgroundBaseTestCase):
     def get_wallpapergrid(self, name):
         """Return a WallpaperGrid with given name, or
         all of them"""
-        return self.select_single('WallpaperGrid', objectName=name)
+        return self.main_view.wait_select_single(
+            'WallpaperGrid', objectName=name)
 
     def get_wallpapers(self, name=None):
         """Return individual wallpapers (QQuickImage) in given grid,
@@ -77,16 +78,17 @@ class BackgroundTestCase(BackgroundBaseTestCase):
 
         # wallpaper source that is selected now
         old = self.selected_wallpaper.source
+        new = None
 
-        # click a wallpaper that is not selected
-        self.main_view.scroll_to_and_click(
-            self.all_wallpapers[3])
-
-        # click set/save
-        self.save_wallpaper()
-
-        # the newly selected wallpaper source
-        new = self.selected_wallpaper.source
+        # Grid elements are produced by a repeater, and AP cannot
+        # AFAIK select specific children. We therefor click backgrounds
+        # until the selected wallpaper changes
+        for wp in self.get_wallpapers(name='UbuntuArtGrid'):
+            self.main_view.pointing_device.click_object(wp)
+            self.save_wallpaper()
+            new = self.selected_wallpaper.source
+            if old != new:
+                break
 
         # assert that UI is updated
         self.assertNotEqual(new, old)
