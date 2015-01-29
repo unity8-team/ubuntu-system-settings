@@ -1,3 +1,19 @@
+ubuntu-system-settings (0.3+15.04.20150129.2-0ubuntu1) vivid; urgency=low
+
+  [ Ken VanDine ]
+  * initialize m_lastFullCharge as NULL
+
+  [ Sebastien Bacher ]
+  * [sound] tweak strings following design recommendation (LP: #1410766)
+  * [security-privacy] enable the confirmation button only in the cases
+    described by the specification (LP: #1412523, #1412527)
+
+  [ jonas-drange ]
+  * [security/privacy] add connectivity binding and let user unlock a
+    given SIM (LP: #1378883)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 29 Jan 2015 18:32:13 +0000
+
 ubuntu-system-settings (0.3+15.04.20150127.1-0ubuntu1) vivid; urgency=low
 
   [ Michael Terry ]
