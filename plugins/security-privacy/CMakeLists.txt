@@ -33,6 +33,8 @@ set(QML_SOURCES
 )
 
 set(PANEL_SOURCES
+    connectivity.cpp
+    connectivity.h
     plugin.cpp
     plugin.h
     securityprivacy.cpp
