@@ -21,7 +21,6 @@
 
 import QMenuModel 0.1
 import QtQuick 2.0
-import QtSystemInfo 5.0
 import SystemSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
@@ -42,7 +41,7 @@ ItemPage {
     property bool includeSystemUpdate: false
     property bool systemUpdateInProgress: false
     property int updatesAvailable: 0
-    property bool isCharging: false
+    property bool isCharging: indicatorPower.deviceState === "charging"
     property bool batterySafeForUpdate: isCharging || chargeLevel > 25
     property var chargeLevel: indicatorPower.batteryLevel || 0
     property var notificationAction;
@@ -54,6 +53,7 @@ ItemPage {
         busName: "com.canonical.indicator.power"
         objectPath: "/com/canonical/indicator/power"
         property variant batteryLevel: action("battery-level").state
+        property variant deviceState: action("device-state").state
         Component.onCompleted: start()
     }
 
@@ -68,33 +68,6 @@ ItemPage {
             } else {
                 activity.running = false;
             }
-        }
-    }
-
-
-    DeviceInfo {
-        id: deviceInfo
-    }
-
-    BatteryInfo {
-        id: batteryInfo
-        monitorChargingState: true
-
-        onChargingStateChanged: {
-            if (state === BatteryInfo.Charging) {
-                isCharging = true
-            }
-            else if (state === BatteryInfo.Discharging &&
-                     batteryInfo.batteryStatus(0) !== BatteryInfo.BatteryFull) {
-                isCharging = false
-            }
-            else if (batteryInfo.batteryStatus(0) === BatteryInfo.BatteryFull ||
-                     state === BatteryInfo.NotCharging) {
-                isCharging = true
-            }
-        }
-        Component.onCompleted: {
-            onChargingStateChanged(0, chargingState(0))
         }
     }
 
