@@ -152,18 +152,23 @@ ItemPage {
 
             onUmtsModemChanged: {
                 var path = sim.path;
+                var e = sim.simMng.presenceChanged;
+
+                function presenceHandler (ispresent) {
+                    if (ispresent) {
+                        root.waiting = false;
+                        Connectivity.unlockAllModems();
+                        e.disconnect(presenceHandler);
+                    }
+                }
+
                 priv.prevOnlineModem = prevOnlineModem ?
                     prevOnlineModem : "";
                 root.waiting = true;
 
                 /* When the SIM comes back online, set waiting to false:
                 the modem reboot is done.*/
-                sim.simMng.presenceChanged.connect(function (ispresent) {
-                    if (ispresent) {
-                        root.waiting = false;
-                        Connectivity.unlockAllModems();
-                    }
-                });
+                sim.simMng.presenceChanged.connect(presenceHandler);
             }
             ignoreUnknownSignals: true
         }
