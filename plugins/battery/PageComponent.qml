@@ -34,8 +34,6 @@ ItemPage {
     title: i18n.tr("Battery")
     flickable: scrollWidget
 
-    property bool isCharging
-
     function timeDeltaString(timeDelta) {
         var sec = timeDelta,
             min = Math.round (timeDelta / 60),
@@ -71,34 +69,8 @@ ItemPage {
         objectPath: "/com/canonical/indicator/power"
         property variant brightness: action("brightness").state
         property variant batteryLevel: action("battery-level").state
+        property variant deviceState: action("device-state").state
         Component.onCompleted: start()
-    }
-
-    BatteryInfo {
-        id: batteryInfo
-
-        monitorChargingState: true
-        monitorBatteryStatus: true
-
-        onChargingStateChanged: {
-            if (state === BatteryInfo.Charging) {
-                chargingEntry.text = i18n.tr("Charging now")
-                isCharging = true
-            }
-            else if (state === BatteryInfo.Discharging &&
-                     batteryInfo.batteryStatus(0) !== BatteryInfo.BatteryFull) {
-                chargingEntry.text = i18n.tr("Last full charge")
-                isCharging = false
-            }
-            else if (batteryInfo.batteryStatus(0) === BatteryInfo.BatteryFull ||
-                     state === BatteryInfo.NotCharging) {
-                chargingEntry.text = i18n.tr("Fully charged")
-                isCharging = true
-            }
-        }
-        Component.onCompleted: {
-            onChargingStateChanged(0, chargingState(0))
-        }
     }
 
     UbuntuBatteryPanel {
@@ -283,8 +255,25 @@ ItemPage {
 
             ListItem.SingleValue {
                 id: chargingEntry
-                value: isCharging ?
-                           "" : (batteryBackend.lastFullCharge ? timeDeltaString(batteryBackend.lastFullCharge) : i18n.tr("N/A"))
+                text: {
+                    if (indicatorPower.deviceState === "charging")
+                        return i18n.tr("Charging now")
+                    else if (indicatorPower.deviceState === "discharging")
+                        return i18n.tr("Last full charge")
+                    else if (indicatorPower.deviceState === "fully-charged")
+                        return i18n.tr("Fully charged")
+                }
+
+                value: {
+                    if (indicatorPower.deviceState === "discharging") {
+                        if (batteryBackend.lastFullCharge)
+                            return timeDeltaString(batteryBackend.lastFullCharge)
+                        else
+                            return i18n.tr("N/A")
+                    }
+                    else
+                        return ""
+                }
                 showDivider: false
             }
 
