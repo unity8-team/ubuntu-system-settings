@@ -143,7 +143,7 @@ ItemPage {
                     Component.onCompleted: checked = serverChecked
                     onTriggered: backendInfo.incomingCallVibrate = checked
                 }
-                text: i18n.tr("Vibrate when ringing")
+                text: i18n.tr("Vibrate on ring")
             }
 
             ListItem.Standard {
@@ -165,7 +165,7 @@ ItemPage {
                     Component.onCompleted: checked = serverChecked
                     onTriggered: backendInfo.dialpadSoundsEnabled = checked
                 }
-                text: i18n.tr("Dialpad sounds")
+                text: i18n.tr("Dialpad tones")
             }
 
             SettingsItemTitle {

@@ -48,6 +48,11 @@ ItemPage {
     property var notificationAction;
     property string errorDialogText: ""
 
+    onUpdatesAvailableChanged: {
+        if (updatesAvailable < 1 && root.state != "SEARCHING")
+            root.state = "NOUPDATES";
+    }
+
     QDBusActionGroup {
         id: indicatorPower
         busType: 1
@@ -565,6 +570,7 @@ ItemPage {
                                 packageName: modelData.packageName
                                 clickToken: modelData.clickToken
                                 download: modelData.downloadUrl
+                                downloadSha512: modelData.downloadSha512
 
                                 onFinished: {
                                     progress.visible = false;

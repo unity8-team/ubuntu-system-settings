@@ -1,3 +1,93 @@
+ubuntu-system-settings (0.3+15.04.20150129.2-0ubuntu1) vivid; urgency=low
+
+  [ Ken VanDine ]
+  * initialize m_lastFullCharge as NULL
+
+  [ Sebastien Bacher ]
+  * [sound] tweak strings following design recommendation (LP: #1410766)
+  * [security-privacy] enable the confirmation button only in the cases
+    described by the specification (LP: #1412523, #1412527)
+
+  [ jonas-drange ]
+  * [security/privacy] add connectivity binding and let user unlock a
+    given SIM (LP: #1378883)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 29 Jan 2015 18:32:13 +0000
+
+ubuntu-system-settings (0.3+15.04.20150127.1-0ubuntu1) vivid; urgency=low
+
+  [ Michael Terry ]
+  * Revoke any cached authorizations before trying to change password
+    mode. This makes sure that we authenticate the user again even if we
+    just did so (for UX consistency).
+
+  [ jonas-drange ]
+  * [ap] avoid use of scroll_to_and_click where the element to be
+    clicked is visible without scrolling
+  * [wifi] updates AP test because of a new backend
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 27 Jan 2015 16:35:43 +0000
+
+ubuntu-system-settings (0.3+15.04.20150127-0ubuntu1) vivid; urgency=low
+
+  [ Alberto Mardegan ]
+  * Security: ignore older requests when building the applications'
+    grants
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 27 Jan 2015 10:04:19 +0000
+
+ubuntu-system-settings (0.3+15.04.20150126-0ubuntu1) vivid; urgency=low
+
+  [ Sebastien Bacher ]
+  * security-privacy: give default focus to the first entry (LP:
+    #1412530)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Mon, 26 Jan 2015 15:20:31 +0000
+
+ubuntu-system-settings (0.3+15.04.20150123-0ubuntu1) vivid; urgency=low
+
+  [ Manuel de la Peña ]
+  * Add support for checksum validation. (LP: #1330770)
+
+  [ Diego Sarmentero ]
+  * Add support for checksum validation. (LP: #1330770)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 23 Jan 2015 16:53:49 +0000
+
+ubuntu-system-settings (0.3+15.04.20150122-0ubuntu1) vivid; urgency=low
+
+  [ Ken VanDine ]
+  * [system-updates] Don't show an empty list after updates are
+    completed (LP: #1392240, #1413369)
+
+  [ jonas-drange ]
+  * [wifi] use an already translated, sane string for consistency
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 22 Jan 2015 14:50:57 +0000
+
+ubuntu-system-settings (0.3+15.04.20150116-0ubuntu1) vivid; urgency=low
+
+  [ Ken VanDine ]
+  * Work around for the SDK's addition of a Dialog CPO, this fixes
+    matching in test_reset
+
+  [ CI Train Bot ]
+  * Resync trunk
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 16 Jan 2015 14:11:26 +0000
+
+ubuntu-system-settings (0.3+15.04.20150115-0ubuntu1) vivid; urgency=low
+
+  [ Manuel de la Peña ]
+  * Fix pause issue ensuring that it does pause the download. (LP:
+    #1398310)
+
+  [ Manuel de la Pena ]
+  * Fix pause issue ensuring that it does pause the download. (LP:
+    #1398310)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 15 Jan 2015 15:32:30 +0000
+
 ubuntu-system-settings (0.3+15.04.20150114-0ubuntu1) vivid; urgency=low
 
   [ jonas-drange ]

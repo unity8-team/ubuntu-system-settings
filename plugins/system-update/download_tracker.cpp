@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 - Canonical Ltd.
+ * Copyright (C) 2014-2015 - Canonical Ltd.
  *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License, as
@@ -18,18 +18,19 @@
  * Authored by: Diego Sarmentero <diego.sarmentero@canonical.com>
  */
 
-#include <QProcessEnvironment>
-
 #include <ubuntu/download_manager/download_struct.h>
 #include <ubuntu/download_manager/error.h>
+#include <QProcessEnvironment>
 
 #include "download_tracker.h"
 #include "network/network.h"
+
 
 namespace {
     const QString DOWNLOAD_COMMAND = "post-download-command";
     const QString APP_ID = "app_id";
     const QString PKCON_COMMAND = "pkcon";
+    const QString DOWNLOAD_MANAGER_SHA512 = "sha512";
 }
 
 namespace UpdatePlugin {
@@ -74,8 +75,10 @@ void DownloadTracker::startService()
         if (m_manager == nullptr) {
             m_manager = Manager::createSessionManager("", this);
 
-            QObject::connect(m_manager, SIGNAL(downloadCreated(Download*)),
-                             this, SLOT(bindDownload(Download*)));
+            if (!connect(m_manager, &Manager::downloadCreated,
+                this, &DownloadTracker::bindDownload)) {
+                qWarning() << "Could not connect to Manager::downloadCreated!";
+	    }
         }
         QVariantMap vmap;
         QStringList args;
@@ -85,7 +88,7 @@ void DownloadTracker::startService()
         vmap[APP_ID] = m_packageName;
         StringMap map;
         map[X_CLICK_TOKEN] = m_clickToken;
-        DownloadStruct dstruct = DownloadStruct(m_downloadUrl, vmap, map);
+        DownloadStruct dstruct(m_downloadUrl, m_download_sha512, DOWNLOAD_MANAGER_SHA512, vmap, map);
         m_manager->createDownload(dstruct);
     }
 }
@@ -93,22 +96,40 @@ void DownloadTracker::startService()
 void DownloadTracker::bindDownload(Download* download)
 {
     m_download = download;
-    connect(m_download, SIGNAL(finished(const QString &)), this,
-            SLOT(onDownloadFinished(const QString &)));
-    connect(m_download, SIGNAL(canceled(bool)), this,
-            SLOT(onDownloadCanceled(bool)));
-    connect(m_download, SIGNAL(paused(bool)), this,
-            SIGNAL(paused(bool)));
-    connect(m_download, SIGNAL(resumed(bool)), this,
-            SIGNAL(resumed(bool)));
-    connect(m_download, SIGNAL(started(bool)), this,
-            SIGNAL(started(bool)));
-    connect(m_download, SIGNAL(error(Error*)), this,
-            SLOT(registerError(Error*)));
-    connect(m_download, SIGNAL(progress(qulonglong, qulonglong)), this,
-            SLOT(setProgress(qulonglong, qulonglong)));
-    connect(m_download, SIGNAL(processing(const QString &)), this,
-            SIGNAL(processing(const QString &)));
+    if (!connect(m_download, &Download::finished,
+            this, &DownloadTracker::onDownloadFinished)) {
+        qWarning() << "Could not connect to Download::finished";
+    }
+    if (!connect(m_download, &Download::canceled,
+            this, &DownloadTracker::onDownloadCanceled)) {
+        qWarning() << "Could not connect to Download::canceled";
+    }
+    if (!connect(m_download, &Download::paused,
+            this, &DownloadTracker::paused)) {
+        qWarning() << "Could not connect to Download::paused";
+    }
+    if (!connect(m_download, &Download::resumed,
+            this, &DownloadTracker::resumed)) {
+        qWarning() << "Could not connect to Download::resumed";
+    }
+    if (!connect(m_download, &Download::started,
+            this, &DownloadTracker::started)) {
+        qWarning() << "Could not connect to Download::started";
+    }
+    if (!connect(m_download, static_cast<void(Download::*)(Error*)>(&Download::error),
+            this, &DownloadTracker::registerError)) {
+        qWarning() << "Could not connect to Download::error";
+    }
+
+    if (!connect(m_download, static_cast<void(Download::*)(qulonglong, qulonglong)>(&Download::progress),
+            this, &DownloadTracker::setProgress)) {
+        qWarning() << "Could not connect to Download::progress";
+    }
+
+    if (!connect(m_download, &Download::processing,
+            this, &DownloadTracker::processing)) {
+        qWarning() << "Could not connect to Download::processing";
+    }
 
     m_download->start();
 }

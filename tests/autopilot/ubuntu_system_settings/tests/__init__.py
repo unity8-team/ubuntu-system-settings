@@ -48,6 +48,10 @@ LM_IFACE = 'org.freedesktop.login1.Manager'
 NM_SERVICE = 'org.freedesktop.NetworkManager'
 NM_PATH = '/org/freedesktop/NetworkManager'
 NM_IFACE = 'org.freedesktop.NetworkManager'
+NM_AC_CON_IFACE = 'org.freedesktop.NetworkManager.Connection.Active'
+CON_SERVICE = 'com.ubuntu.connectivity1'
+CON_PATH = '/com/ubuntu/connectivity1/Private'
+CON_IFACE = 'com.ubuntu.connectivity1.Private'
 UPOWER_VERSION = str(UPowerGlib.MAJOR_VERSION)
 UPOWER_VERSION += '.' + str(UPowerGlib.MINOR_VERSION)
 
@@ -298,12 +302,13 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
         (cls.p_mock, cls.obj_ofono) = cls.spawn_server_template(
             template, stdout=subprocess.PIPE)
         cls.dbusmock = dbus.Interface(cls.obj_ofono, dbusmock.MOCK_IFACE)
+        super(UbuntuSystemSettingsOfonoTestCase, cls).setUpClass()
 
     @classmethod
     def tearDownClass(cls):
-        super(UbuntuSystemSettingsOfonoTestCase, cls).tearDownClass()
         cls.p_mock.terminate()
         cls.p_mock.wait()
+        super(UbuntuSystemSettingsOfonoTestCase, cls).tearDownClass()
 
     def setUp(self, panel=None):
         self.obj_ofono.Reset()
@@ -734,6 +739,38 @@ class ResetBaseTestCase(UbuntuSystemSettingsTestCase,
         super(ResetBaseTestCase, self).tearDown()
 
 
+class ConnectivityMixin(dbusmock.DBusTestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.start_session_bus()
+        cls.connectivity_dbus = cls.get_dbus()
+        cls.connectivity_server = cls.spawn_server(CON_SERVICE,
+                                                   CON_PATH,
+                                                   CON_IFACE,
+                                                   system_bus=False,
+                                                   stdout=subprocess.PIPE)
+
+        cls.connectivity_mock = dbus.Interface(
+            cls.connectivity_dbus.get_object(CON_SERVICE,
+                                             CON_PATH),
+            dbusmock.MOCK_IFACE)
+
+        cls.connectivity_mock.AddMethod('', 'UnlockModem', 's', '', '')
+        super(ConnectivityMixin, cls).setUpClass()
+
+    def setUp(self):
+        self.wait_for_bus_object(CON_SERVICE,
+                                 CON_PATH,
+                                 system_bus=False)
+        super(ConnectivityMixin, self).setUp()
+
+    @classmethod
+    def tearDownClass(cls):
+        cls.connectivity_server.terminate()
+        cls.connectivity_server.wait()
+        super(ConnectivityMixin, cls).tearDownClass()
+
+
 class SecurityBaseTestCase(UbuntuSystemSettingsOfonoTestCase):
     """ Base class for security and privacy settings tests"""
 
@@ -795,18 +832,11 @@ class WifiBaseTestCase(UbuntuSystemSettingsTestCase,
         self.obj_nm.Reset()
         device_path = self.obj_nm.AddWiFiDevice('test0', 'Barbaz', 1)
         self.device_mock = dbus.Interface(self.dbus_con.get_object(
-            'org.freedesktop.NetworkManager', device_path),
+            NM_SERVICE, device_path),
             dbusmock.MOCK_IFACE)
 
-        """A device should not just implement Device.Wireless/Device.Wired
-        interfaces, but also the Device interface. Since we want to test
-        the Disconnect method, we add it."""
-
-        try:
-            self.device_mock.AddMethod(DEVICE_IFACE, 'Disconnect', '', '', '')
-        except:
-            # it was already added
-            pass
+        self.add_active_connection(
+            'activecon0', self.device_mock, device_path)
 
         super(WifiBaseTestCase, self).setUp()
         self.wifi_page = self.main_view.go_to_wifi_page()
@@ -817,3 +847,28 @@ class WifiBaseTestCase(UbuntuSystemSettingsTestCase,
             self.obj_nm.AddWiFiConnection(
                 dev_path, network['connection_name'],
                 network['ssid'], network.get('keymng', ''))
+
+    def add_active_connection(self, connection_name, device_mock, device_path):
+        """Add ActiveConnection object to device as well as the
+        Active.Connection object being referred to. Will add mocked
+        Connection object, active_connection_mock, to the test case."""
+
+        # Add a new Connection object
+        con_path = self.obj_nm.AddWiFiConnection(
+            device_path, connection_name, 'fake ssid', '')
+        self.active_connection_mock = dbus.Interface(self.dbus_con.get_object(
+            NM_SERVICE, con_path),
+            dbusmock.MOCK_IFACE)
+        # Set up the ActiveConnection object, which will have a
+        # Connection property pointing to the created Connection
+        ac_path = '/org/freedesktop/NetworkManager/ActiveConnection/%s' % (
+            connection_name)
+        self.dbusmock.AddObject(ac_path, NM_AC_CON_IFACE, {}, [])
+        ac_mock = dbus.Interface(self.dbus_con.get_object(
+            NM_SERVICE, ac_path),
+            dbusmock.MOCK_IFACE)
+        ac_mock.AddProperty(
+            NM_AC_CON_IFACE, 'Connection', dbus.ObjectPath(con_path))
+
+        device_mock.AddProperty(
+            DEVICE_IFACE, 'ActiveConnection', dbus.ObjectPath(ac_path))

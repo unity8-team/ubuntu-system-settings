@@ -99,7 +99,7 @@ ItemPage {
                     Component.onCompleted: checked = serverChecked
                     onTriggered: soundPlugin.dialpadSoundsEnabled = checked
                 }
-                text: i18n.tr("Dialpad sounds")
+                text: i18n.tr("Dialpad tones")
             }
         }
     }

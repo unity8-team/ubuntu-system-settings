@@ -32,11 +32,20 @@ namespace mock
 {
 struct Store: public core::trust::Store
 {
+    enum SortOrder {
+        Unsorted = 0,
+        TimeAsc,
+        TimeDesc,
+        LastSortOrder
+    };
+
     std::string m_name;
     std::list<core::trust::Request> m_allRequests;
+    SortOrder m_sortOrder;
     static std::shared_ptr<mock::Store> m_instance;
 
-    Store()
+    Store():
+        m_sortOrder(Unsorted)
     {
     }
 
@@ -46,6 +55,22 @@ struct Store: public core::trust::Store
 
     static void setInstance(std::shared_ptr<mock::Store> store) {
         m_instance = store;
+    }
+
+    void setSortOrder(SortOrder order) {
+        m_sortOrder = order;
+    }
+
+    static bool requestCompareTimeAsc(const core::trust::Request &left,
+                                      const core::trust::Request &right)
+    {
+        return left.when < right.when;
+    }
+
+    static bool requestCompareTimeDesc(const core::trust::Request &left,
+                                       const core::trust::Request &right)
+    {
+        return left.when > right.when;
     }
 
     struct Query: public core::trust::Store::Query
@@ -98,6 +123,12 @@ struct Store: public core::trust::Store
                     }
                 }
             }
+            // sort the results
+            if (m_store->m_sortOrder != Unsorted) {
+                m_requests.sort(m_store->m_sortOrder == TimeAsc ?
+                                requestCompareTimeAsc : requestCompareTimeDesc);
+            }
+
             m_it = m_requests.begin();
             m_status = (m_it == m_requests.end()) ?
                 core::trust::Store::Query::Status::eor :
@@ -263,13 +294,17 @@ void TrustStoreModelTest::testList()
     QFETCH(QStringList, expectedAppIds);
     QFETCH(QList<bool>, expectedAppGrants);
 
+    std::chrono::system_clock::time_point requestTime =
+        std::chrono::system_clock::now();
+
     for (int i = 0; i < appIds.count(); i++) {
         core::trust::Request r;
         r.from = appIds[i].toStdString();
         r.feature = core::trust::Feature(core::trust::Request::default_feature);
         r.answer = appGrants[i] ?
             core::trust::Request::Answer::granted : core::trust::Request::Answer::denied;
-        r.when = std::chrono::system_clock::now();
+        // make sure all times are monotonically increasing
+        r.when = requestTime + std::chrono::duration<int>(i);
         m_store->add(r);
     }
 
@@ -280,16 +315,22 @@ void TrustStoreModelTest::testList()
                       "  serviceName: \"storeTest\"\n"
                       "}",
                       QUrl());
-    QObject *object = component.create();
-    QVERIFY(object != 0);
-    QAbstractListModel *model = qobject_cast<QAbstractListModel*>(object);
-    QVERIFY(model != 0);
+    // Test unsorted, sorted asc and sorted desc
+    for (int i_order = 0; i_order < mock::Store::LastSortOrder; i_order++) {
+        m_store->setSortOrder(mock::Store::SortOrder(i_order));
+        QObject *object = component.create();
+        QVERIFY(object != 0);
+        QAbstractListModel *model = qobject_cast<QAbstractListModel*>(object);
+        QVERIFY(model != 0);
 
-    QCOMPARE(model->rowCount(), expectedAppIds.count());
+        QCOMPARE(model->rowCount(), expectedAppIds.count());
 
-    for (int i = 0; i < model->rowCount(); i++) {
-        QCOMPARE(get(model, i, "applicationId").toString(), expectedAppIds[i]);
-        QCOMPARE(get(model, i, "granted").toBool(), expectedAppGrants[i]);
+        for (int i = 0; i < model->rowCount(); i++) {
+            QCOMPARE(get(model, i, "applicationId").toString(), expectedAppIds[i]);
+            QCOMPARE(get(model, i, "granted").toBool(), expectedAppGrants[i]);
+        }
+
+        delete object;
     }
 }
 
