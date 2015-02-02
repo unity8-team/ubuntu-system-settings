@@ -95,6 +95,17 @@ ItemPage {
         Dialog {
             id: changeSecurityDialog
 
+            function displayMismatchWarning() {
+                /* If the entry have the same length and different content,
+                       display the non matching warning, if they do have the
+                       same value then don't display it*/
+                if (newInput.text.length === confirmInput.text.length)
+                    if (newInput.text !== confirmInput.text)
+                        notMatching.visible = true
+                    else
+                        notMatching.visible = false
+            }
+
             // This is a bit hacky, but the contents of this dialog get so tall
             // that on a mako device, they don't fit with the OSK also visible.
             // So we scrunch up spacing.
@@ -232,6 +243,7 @@ ItemPage {
                             UbuntuSecurityPrivacyPanel.Passcode ||
                          changeSecurityDialog.newMethod ===
                             UbuntuSecurityPrivacyPanel.Passphrase
+                onTextChanged: { displayMismatchWarning() }
             }
 
             /* Using bindings since it is, according to documentation,
@@ -286,6 +298,7 @@ ItemPage {
                             UbuntuSecurityPrivacyPanel.Passcode ||
                          changeSecurityDialog.newMethod ===
                             UbuntuSecurityPrivacyPanel.Passphrase
+                onTextChanged: { displayMismatchWarning() }
             }
 
             /* Using bindings since it is, according to documentation,
