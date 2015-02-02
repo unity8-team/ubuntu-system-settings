@@ -17,6 +17,7 @@ Column {
     ListItem.Standard {
         id: header
 
+        highlightWhenPressed: false
         showDivider: false
         text: categoryName
         visible: repeater.count > 0
