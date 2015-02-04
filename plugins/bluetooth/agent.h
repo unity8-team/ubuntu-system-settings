@@ -44,7 +44,7 @@ public:
 
 public Q_SLOTS: // received from the system's bluez service
     void Cancel();
-    void DisplayPasskey(const QDBusObjectPath &path, uint passkey, uchar entered);
+    void DisplayPasskey(const QDBusObjectPath &path, uint passkey, ushort entered);
     void Release();
     void RequestConfirmation(const QDBusObjectPath &path, uint passkey);
     uint RequestPasskey(const QDBusObjectPath &path);

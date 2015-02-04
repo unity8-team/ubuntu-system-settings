@@ -223,7 +223,7 @@ void Agent::providePinCode(uint tag, bool confirmed, QString pinCode)
 ****
 ***/
 
-void Agent::DisplayPasskey(const QDBusObjectPath &objectPath, uint passkey, uchar entered)
+void Agent::DisplayPasskey(const QDBusObjectPath &objectPath, uint passkey, ushort entered)
 {
     Q_UNUSED(objectPath);
     Q_UNUSED(passkey);
