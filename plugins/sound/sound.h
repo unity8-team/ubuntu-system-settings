@@ -57,6 +57,10 @@ public:
                 READ getIncomingMessageVibrateSilentMode
                 WRITE setIncomingMessageVibrateSilentMode
                 NOTIFY incomingMessageVibrateSilentModeChanged)
+    Q_PROPERTY (bool otherVibrate
+                READ getOtherVibrate
+                WRITE setOtherVibrate
+                NOTIFY otherVibrateChanged)
 
     Q_PROPERTY (bool dialpadSoundsEnabled
                 READ getDialpadSoundsEnabled
@@ -75,6 +79,7 @@ Q_SIGNALS:
     void incomingMessageVibrateChanged();
     void incomingCallVibrateSilentModeChanged();
     void incomingMessageVibrateSilentModeChanged();
+    void otherVibrateChanged();
     void dialpadSoundsEnabledChanged();
 
 private:
@@ -92,6 +97,8 @@ private:
     void setIncomingCallVibrateSilentMode(bool enabled);
     bool getIncomingMessageVibrateSilentMode();
     void setIncomingMessageVibrateSilentMode(bool enabled);
+    bool getOtherVibrate();
+    void setOtherVibrate(bool enabled);
     bool getDialpadSoundsEnabled();
     void setDialpadSoundsEnabled(bool enabled);
 
