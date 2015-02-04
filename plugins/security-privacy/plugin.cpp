@@ -19,12 +19,23 @@
 #include "plugin.h"
 #include "securityprivacy.h"
 #include "trust-store-model.h"
+#include "connectivity.h"
 
 #include <QtQml/QtQml>
+
+static QObject *connectivitySingeltonProvider(QQmlEngine *engine, QJSEngine *scriptEngine)
+{
+    Q_UNUSED(engine)
+    Q_UNUSED(scriptEngine)
+
+    Connectivity *connectivity = new Connectivity();
+    return connectivity;
+}
 
 void BackendPlugin::registerTypes(const char *uri)
 {
     Q_ASSERT(uri == QLatin1String("Ubuntu.SystemSettings.SecurityPrivacy"));
+    qmlRegisterSingletonType<Connectivity>(uri, 1, 0, "Connectivity", connectivitySingeltonProvider);
     qmlRegisterType<SecurityPrivacy>(uri, 1, 0, "UbuntuSecurityPrivacyPanel");
     qmlRegisterType<TrustStoreModel>(uri, 1, 0, "TrustStoreModel");
 }
