@@ -164,6 +164,10 @@ void Bluetooth::disconnectDevice()
         case Device::Type::Carkit:
             m_selectedDevice->disconnect(Device::ConnectionMode::Audio);
             break;
+        case Device::Type::Keyboard:
+        case Device::Type::Mouse:
+            m_selectedDevice->disconnect(Device::ConnectionMode::Input);
+            break;
         default:
             qWarning() << "Nothing to disconnect: Unsupported device type.";
             break;
@@ -192,6 +196,10 @@ void Bluetooth::connectDevice(const QString &address)
     case Device::Type::Speakers:
     case Device::Type::Carkit:
         connMode = Device::ConnectionMode::Audio;
+        break;
+    case Device::Type::Keyboard:
+    case Device::Type::Mouse:
+        connMode = Device::ConnectionMode::Input;
         break;
     default:
         qWarning() << "Nothing to connect: Unsupported device type.";
