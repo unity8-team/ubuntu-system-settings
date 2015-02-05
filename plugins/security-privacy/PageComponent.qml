@@ -191,7 +191,6 @@ ItemPage {
                     Component.onCompleted: checked = serverChecked
                     onTriggered: securityPrivacy.messagesWelcomeScreen = checked
                 }
-                visible: showAllUI
             }
 
             ListItem.SingleValue {
