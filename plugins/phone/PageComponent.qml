@@ -32,7 +32,7 @@ ItemPage {
     title: i18n.tr("Phone")
     flickable: flick
 
-    property var modemsSorted: manager.modems.slice(0).sort()
+    property var modemsSorted: []
     property var simsLoaded: 0
 
     states: [
@@ -65,19 +65,9 @@ ItemPage {
 
     OfonoManager {
         id: manager
-        Component.onCompleted: {
-            // create ofono bindings for all modem paths
-            var component = Qt.createComponent("Ofono.qml");
-            modemsSorted.forEach(function (path) {
-                var sim = component.createObject(root, {
-                    path: path
-                });
-                if (sim === null) {
-                    console.warn('failed to create sim object');
-                } else {
-                    Sims.add(sim);
-                }
-            });
+        onModemsChanged: {
+            root.modemsSorted = modems.slice(0).sort();
+            Sims.createQML();
         }
     }
 
