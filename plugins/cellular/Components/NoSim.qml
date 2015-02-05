@@ -18,27 +18,33 @@
  *
 */
 import QtQuick 2.0
-import Ubuntu.Components 0.1
-import Ubuntu.Components.ListItems 0.1 as ListItem
+import Ubuntu.Components 1.1
 
 Column {
 
-    objectName: "noSim"
-
-    ListItem.Standard {
-        text: i18n.tr("Cellular data:")
-        enabled: false
-        control: Switch {
-            checked: false
-        }
+    anchors {
+        top: parent.top
+        left: parent.left
+        right: parent.right
+        margins: units.gu(8)
     }
 
-    ListItem.Standard {
-        text: i18n.tr("Data roaming")
-        enabled: false
-        showDivider: false
-        control: Switch {
-            checked: false
-        }
+    spacing: units.gu(2)
+
+    Label {
+        anchors { left: parent.left; right: parent.right; }
+        text: i18n.tr("No SIM detected")
+        fontSize: "large"
+        horizontalAlignment: Text.AlignHCenter
+        color: UbuntuColors.lightGrey
+        wrapMode: Text.WordWrap
+    }
+
+    Label {
+        anchors { left: parent.left; right: parent.right; }
+        text: i18n.tr("Insert a SIM, then restart the phone")
+        horizontalAlignment: Text.AlignHCenter
+        color: UbuntuColors.lightGrey
+        wrapMode: Text.WordWrap
     }
 }
