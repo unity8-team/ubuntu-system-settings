@@ -31,6 +31,8 @@ ItemPage {
     id: root
     title: i18n.tr("Bluetooth")
 
+    property var dialogPopupId
+
     UbuntuBluetoothPanel { id: backend }
 
     Component {
@@ -46,6 +48,11 @@ ItemPage {
     Component {
         id: providePinCodeDialog
         ProvidePinCodeDialog { }
+    }
+
+    Component {
+        id: displayPasskeyDialog
+        DisplayPasskeyDialog { }
     }
 
     Connections {
@@ -67,6 +74,24 @@ ItemPage {
             var popup = PopupUtils.open(providePinCodeDialog, root, {name: device.name})
             popup.canceled.connect(function() {target.providePinCode(request_tag, false, "")})
             popup.provided.connect(function(pinCode) {target.providePinCode(request_tag, true, pinCode)})
+        }
+        onDisplayPasskeyNeeded: {
+            if (!root.dialogPopupId)
+            {
+                var request_tag = tag
+                root.dialogPopupId  = PopupUtils.open(displayPasskeyDialog, root, {passkey: passkey, name: device.name,
+                                                 entered: entered})
+                root.dialogPopupId.canceled.connect(function() {root.dialogPopupId = null;
+                    target.displayPasskeyCallback(request_tag)})
+            }
+            else
+            {
+                root.dialogPopupId.entered = entered
+            }
+        }
+        onPairingDone: {
+            if (root.dialogPopupId)
+                PopupUtils.close(root.dialogPopupId)
         }
     }
 
