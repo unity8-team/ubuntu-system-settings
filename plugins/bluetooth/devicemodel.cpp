@@ -537,10 +537,19 @@ QVariant DeviceModel::data(const QModelIndex &index, int role) const
     if ((0<=index.row()) && (index.row()<m_devices.size())) {
 
         auto device = m_devices[index.row()];
+        QString displayName;
 
         switch (role) {
         case Qt::DisplayRole:
-            ret = device->isPaired() ? device->getName() : device->getName() + "…";
+            displayName = device->getName();
+            
+            if (displayName.isEmpty())
+                displayName = device->getAddress();
+
+            if (device->isPaired())
+                displayName.append("…");
+
+            ret = displayName;
             break;
 
         case IconRole:
