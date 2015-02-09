@@ -22,7 +22,6 @@
 
 #include <cassert>
 
-
 /***
 ****
 ***/
@@ -54,7 +53,7 @@ void Agent::reject(QDBusMessage msg, const char *functionName)
  */
 void Agent::Release()
 {
-    Q_EMIT(onPairingDone());
+    Q_EMIT(pairingDone());
 }
 
 /***
@@ -219,20 +218,59 @@ void Agent::providePinCode(uint tag, bool confirmed, QString pinCode)
     }
 }
 
-/***
-****
-***/
+/** This method gets called when the service daemon
+ * needs to display a passkey for an authentication.
+ * The entered parameter indicates the number of already
+ * typed keys on the remote side.
+ * An empty reply should be returned. When the passkey
+ * needs no longer to be displayed, the Cancel method
+ * of the agent will be called.
+ * During the pairing process this method might be
+ * called multiple times to update the entered value.
+ * Note that the passkey will always be a 6-digit number,
+ * so the display should be zero-padded at the start if
+ * the value contains less than 6 digits.
+ */
 
 void Agent::DisplayPasskey(const QDBusObjectPath &objectPath, uint passkey, ushort entered)
 {
-    Q_UNUSED(objectPath);
-    Q_UNUSED(passkey);
-    Q_UNUSED(entered);
+    auto device = m_devices.getDeviceFromPath(objectPath.path());
+    if (device) {
+        const uint tag = m_tag++;
 
-    // unimplemented -- unneeded for headsets
+        setDelayedReply(true);
+        assert(!m_delayedReplies.contains(tag));
+        m_delayedReplies[tag] = message();
+
+        QString passkeyStr = QString("%1").arg(passkey, 6, 10, QChar('0'));
+        Q_EMIT(displayPasskeyNeeded(tag, device.data(), passkeyStr, entered));
+    } else { // confirmation requested for an unknown device..?!
+        reject(message(), __func__);
+    }
 }
 
+/**
+ * This method gets called to indicate that the agent
+ * request failed before a reply was returned.
+ */
 void Agent::Cancel()
 {
-    // unimplemented -- companion function for DisplayPasskey
+    qWarning() << "Cancel callback called";
+}
+
+/**
+ * Invoked by the user-facing code after it prompts the user to cancel
+ * the passkey passed from an Agent::displayPasskeyNeeded signal.
+ *
+ * @param tag: the tag from the Agent::displayPasskeyNeeded signal
+ */
+void Agent::displayPasskeyCallback(uint tag)
+{
+    if (m_delayedReplies.contains(tag)) {
+        QDBusMessage message = m_delayedReplies[tag];
+
+        cancel(message, __func__);
+
+        m_delayedReplies.remove(tag);
+    }
 }
