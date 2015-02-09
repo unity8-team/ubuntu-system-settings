@@ -3,6 +3,7 @@ include_directories(${CMAKE_CURRENT_BINARY_DIR})
 set(QML_SOURCES
 ProvidePinCodeDialog.qml
 ConfirmPasskeyDialog.qml
+DisplayPasskeyDialog.qml
 ProvidePasskeyDialog.qml
 PageComponent.qml 
 )
