@@ -18,6 +18,8 @@
  */
 
 #include "securityprivacy.h"
+#include <QtCore/QCoreApplication>
+#include <QtCore/QDateTime>
 #include <QtCore/QDebug>
 #include <QtCore/QProcess>
 #include <QtDBus/QDBusConnection>
@@ -256,7 +258,7 @@ bool SecurityPrivacy::setPasswordModeWithPolicykit(SecurityType type, QString pa
     // SetPasswordMode will involve a check with policykit to see
     // if we have admin authorization.  Since Touch doesn't have a general
     // policykit agent yet (and the design for this panel involves asking for
-    // the password up from anyway), we will spawn our own agent just for this
+    // the password directly anyway), we will spawn our own agent just for this
     // call.  It will only authorize one request for this pid and it will use
     // the password we pass it via stdin.  We can drop this helper code when
     // Touch has a real policykit agent and/or the design for this panel
@@ -267,10 +269,7 @@ bool SecurityPrivacy::setPasswordModeWithPolicykit(SecurityType type, QString pa
     // and QProcess's signal handling conflict.  They seem to get in each
     // other's way for the same signals.  So we just do this out-of-process.
 
-    // But first, see if we have cached authentication
-    if (setPasswordMode(type))
-        return true;
-    else if (password.isEmpty())
+    if (password.isEmpty())
         return false;
 
     QProcess polkitHelper;
@@ -279,15 +278,32 @@ bool SecurityPrivacy::setPasswordModeWithPolicykit(SecurityType type, QString pa
     polkitHelper.write(password.toUtf8() + "\n");
     polkitHelper.closeWriteChannel();
 
-    while (polkitHelper.canReadLine() || polkitHelper.waitForReadyRead()) {
-        QString output = polkitHelper.readLine();
-        if (output == "ready\n")
-            break;
+    qint64 endTime = QDateTime::currentMSecsSinceEpoch() + 10000;
+
+    while (polkitHelper.state() != QProcess::NotRunning) {
+        if (polkitHelper.canReadLine()) {
+            QString output = polkitHelper.readLine();
+            if (output == "ready\n")
+                break;
+        }
+        qint64 waitTime = endTime - QDateTime::currentMSecsSinceEpoch();
+        if (waitTime <= 0) {
+            polkitHelper.kill();
+            return false;
+        }
+        QCoreApplication::processEvents(QEventLoop::AllEvents, waitTime);
     }
 
     bool success = setPasswordMode(type);
 
-    polkitHelper.waitForFinished();
+    while (polkitHelper.state() != QProcess::NotRunning) {
+        qint64 waitTime = endTime - QDateTime::currentMSecsSinceEpoch();
+        if (waitTime <= 0) {
+            polkitHelper.kill();
+            return false;
+        }
+        QCoreApplication::processEvents(QEventLoop::AllEvents, waitTime);
+    }
 
     return success;
 }
@@ -335,30 +351,6 @@ QString SecurityPrivacy::badPasswordMessage(SecurityType type)
         case SecurityPrivacy::Swipe:
             return _("Could not set security mode");
     }
-}
-
-bool SecurityPrivacy::trySetSecurity(SecurityType type)
-{
-    if (m_user == NULL || !act_user_is_loaded(m_user))
-        return false;
-
-    // We only support setting swipe without more information
-    if (type != SecurityPrivacy::Swipe)
-        return false;
-
-    SecurityType oldType = getSecurityType();
-    if (type == oldType)
-        return true; // nothing to do
-
-    if (!setDisplayHint(type))
-        return false;
-
-    if (!setPasswordMode(type)) {
-        setDisplayHint(oldType);
-        return false;
-    }
-
-    return true;
 }
 
 QString SecurityPrivacy::setSecurity(QString oldValue, QString value, SecurityType type)

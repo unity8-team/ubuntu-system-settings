@@ -25,6 +25,7 @@ import Ubuntu.Components 1.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 import Ubuntu.Components.Popups 0.1
 import SystemSettings 1.0
+import Ubuntu.SystemSettings.SecurityPrivacy 1.0
 import MeeGo.QOfono 0.2
 import "sims.js" as Sims
 
@@ -300,10 +301,22 @@ ItemPage {
         Repeater {
             model: sims.length
             Column {
+                id: sim
                 anchors {
                     left: parent.left
                     right: parent.right
                 }
+
+                states: [
+                    State {
+                        name: "locked"
+                        when: sims[index].simMng.pinRequired !== OfonoSimManager.NoPin
+                    },
+                    State {
+                        name: "unlocked"
+                        when: sims[index].simMng.pinRequired === OfonoSimManager.NoPin
+                    }
+                ]
 
                 Connections {
                     target: sims[index].simMng
@@ -329,23 +342,35 @@ ItemPage {
                             PopupUtils.open(lockDialogComponent, simPinSwitch);
                         }
                     }
-                    showDivider: index < (sims.length - 1)  && simPinSwitch.checked
                 }
 
-                ListItem.SingleControl {
+                ListItem.Standard {
                     id: changeControl
-                    visible: sims[index].simMng.lockedPins.length > 0
+                    visible: sim.state === "unlocked"
+                    text: i18n.tr("Unlocked")
                     control: Button {
                         enabled: parent.visible
                         text: i18n.tr("Change PIN…")
-                        width: parent.width - units.gu(4)
                         onClicked: {
                             curSim = sims[index].simMng;
                             PopupUtils.open(dialogComponent);
                         }
                     }
-                    showDivider: false
                 }
+
+                ListItem.Standard {
+                    id: lockControl
+                    visible: sim.state === "locked"
+                    text: i18n.tr("Locked")
+                    control: Button {
+                        objectName: "unlock"
+                        enabled: sims[index].simMng.pinRequired !== 'none'
+                        text: i18n.tr("Unlock…")
+                        color: UbuntuColors.green
+                        onClicked: Connectivity.unlockModem(sims[index].path)
+                    }
+                }
+
                 ListItem.Divider {
                     visible: index < (sims.length - 1)
                 }
