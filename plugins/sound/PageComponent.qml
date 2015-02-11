@@ -231,6 +231,22 @@ ItemPage {
                 text: i18n.tr("Lock sound")
                 visible: showAllUI
             }
+
+            ListItem.Divider {
+                visible: showAllUI
+            }
+
+            ListItem.Standard {
+                text: i18n.tr("Other vibrations")
+                control: Switch {
+                    objectName: "otherVibrateSwitch"
+                    property bool serverChecked: backendInfo.otherVibrate
+                    onServerCheckedChanged: checked = serverChecked
+                    Component.onCompleted: checked = serverChecked
+                    onTriggered: backendInfo.otherVibrate = checked
+                }
+                visible: showAllUI
+            }
         }
     }
 }
