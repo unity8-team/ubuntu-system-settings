@@ -36,7 +36,7 @@ Dialog {
 
     Label {
         /* display the number of chars that remain to be typed */
-        text: root.passkey.slice(entered)+"⏎"
+        text: root.passkey+"⏎"
         fontSize: "x-large"
         verticalAlignment: Text.AlignVCenter
         horizontalAlignment: Text.AlignHCenter
