@@ -213,7 +213,6 @@ ItemPage {
 
             ListItem.Standard {
                 text: i18n.tr("Keyboard sound")
-                showDivider: false
 
                 control: Switch {
                     objectName: "keyboardSoundSwitch"
@@ -233,7 +232,9 @@ ItemPage {
                 visible: showAllUI
             }
 
-            ListItem.Divider {}
+            ListItem.Divider {
+                visible: showAllUI
+            }
 
             ListItem.Standard {
                 text: i18n.tr("Other vibrations")
@@ -244,6 +245,7 @@ ItemPage {
                     Component.onCompleted: checked = serverChecked
                     onTriggered: backendInfo.otherVibrate = checked
                 }
+                visible: showAllUI
             }
         }
     }
