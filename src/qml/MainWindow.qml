@@ -27,7 +27,7 @@ MainView {
     id: main
     width: units.gu(50)
     height: units.gu(90)
-    applicationName: "SystemSettings"
+    applicationName: "ubuntu-system-settings"
     objectName: "mainView"
     automaticOrientation: true
     useDeprecatedToolbar: false
