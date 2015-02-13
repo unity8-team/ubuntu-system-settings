@@ -36,7 +36,10 @@ Dialog {
 
     Label {
         /* display the number of chars that remain to be typed */
-        text: root.passkey.slice(entered)+"⏎"
+        /* TODO: workaround bluez bug #1421598, if the number of entered digit
+           doesn't make sense then just display the passkey without masking
+           chars as you type */
+        text: (entered <= 6) ? root.passkey.slice(entered)+"⏎" : root.passkey+"⏎"
         fontSize: "x-large"
         verticalAlignment: Text.AlignVCenter
         horizontalAlignment: Text.AlignHCenter
