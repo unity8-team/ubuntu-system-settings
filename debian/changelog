@@ -1,3 +1,19 @@
+ubuntu-system-settings (0.3+15.04.20150213-0ubuntu1) vivid; urgency=medium
+
+  [ Sebastien Bacher ]
+  * bluetooth: workaround for a bluez bug where the number of entered
+    digits in DisplayPasskey pairing doesn't make sense. Only update the
+    passkey hint while typing if the number is <= 6.
+  * change applicationName MainView's property to be "ubuntu-system-
+    settings" rather than "SystemSettings", the documentation says it
+    should match the desktop file name. The toolkit also sets the
+    textdomain to that value which leads to translation issues, even if
+    the domain is changed again later on, since glib does some init
+    based on the return value of the first call to g_dgettext for
+    example (LP: #1420404)
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Fri, 13 Feb 2015 18:43:07 +0000
+
 ubuntu-system-settings (0.3+15.04.20150211.1-0ubuntu1) vivid; urgency=medium
 
   [ jonas-drange ]
