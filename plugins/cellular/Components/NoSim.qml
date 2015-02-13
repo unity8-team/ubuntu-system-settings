@@ -42,7 +42,7 @@ Column {
 
     Label {
         anchors { left: parent.left; right: parent.right; }
-        text: i18n.tr("Insert a SIM, then restart the phone")
+        text: i18n.tr("Insert a SIM, then restart the phone.")
         horizontalAlignment: Text.AlignHCenter
         color: UbuntuColors.lightGrey
         wrapMode: Text.WordWrap
