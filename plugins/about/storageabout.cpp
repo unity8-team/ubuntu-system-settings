@@ -32,6 +32,7 @@
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <QtCore/QSharedPointer>
 #include <QProcess>
 #include <QVariant>
 #include <hybris/properties/properties.h>
