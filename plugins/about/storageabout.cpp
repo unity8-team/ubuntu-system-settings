@@ -344,6 +344,15 @@ QString StorageAbout::getDevicePath(const QString mount_point)
     return s_mount_point;
 }
 
+qint64 StorageAbout::getFreeSpace(const QString mount_point)
+{
+    QStorageInfo si(mount_point);
+    if (si.isValid())
+        return si.bytesFree();
+
+    return -1;
+}
+
 StorageAbout::~StorageAbout() {
     if (m_cancellable) {
         g_cancellable_cancel(m_cancellable);
