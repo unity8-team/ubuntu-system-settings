@@ -79,7 +79,6 @@ ItemPage {
 
         function updateContexts(contexts)
         {
-            console.warn('updateContexts');
             var tmp = contexts || sim.connMan.contexts.slice(0);
             var added = tmp.filter(function(i) {
                 return mContexts[i] === undefined;
@@ -120,7 +119,6 @@ ItemPage {
                                                    "contextPath": currentValue
                                                });
                 mContexts[currentValue] = ctx;
-                console.warn('created context for ', currentValue);
             });
 
             // just asserting to verify the logic
@@ -140,9 +138,7 @@ ItemPage {
 
         // expects updateContexts() to have ran before executing.
         function checkAndCreateCustomContexts() {
-            console.warn('checkAndCreateCustomContexts', mContexts);
             var customInternet = Object.keys(mContexts).filter(function (i) {
-                console.warn('checking context', i, mCustomContextNameInternet);
                 var ctx = mContexts[i];
                 return ctx.name === mCustomContextNameInternet ||
                        isEmptyCustom("internet", ctx);
@@ -170,7 +166,6 @@ ItemPage {
             }
 
             if (customInternet.length === 0) {
-                console.warn('saw 0 custom contexts, adding');
                 sim.connMan.addContext("internet");
             }
 
@@ -194,9 +189,7 @@ ItemPage {
 
             internet = Object.keys(mContexts).filter(function(i) {
                 var ctx = mContexts[i];
-                console.warn('enumerated', i, mContexts[i].type);
                 if (ctx.type === "internet") {
-                    console.warn('enumerated', i, 'was internet');
                     if (ctx.name === mCustomContextNameInternet) {
                         mCustomContextInternet = ctx
                         // don't add yet
@@ -311,7 +304,6 @@ ItemPage {
 
             onActiveChanged: if (type === "internet") internetApnSelector.updateSelectedIndex()
             onNameChanged: {
-                console.warn('onNameChanged', name, this.type);
                 if (name === "Internet") {
                     this.name = d.mCustomContextNameInternet;
                 } else if (name === "MMS") {

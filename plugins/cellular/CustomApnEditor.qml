@@ -300,7 +300,6 @@ ItemPage {
                             pageStack.pop();
                             return;
                         }
-                        console.warn('customApnEditor:', ctx);
                         ctx.accessPointName = apnName.text;
                         ctx.username = userName.text;
                         ctx.password = pword.text;
