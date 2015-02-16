@@ -50,6 +50,7 @@ ItemPage {
         // suppress any actions that we don't want to take
         // when updating selectedIndexes, etc
         property bool __suppressActivation : true;
+        property bool __haveCustomContexts : false;
 
         function isEmptyCustom (type, ctx)
         {
@@ -76,9 +77,9 @@ ItemPage {
             return false;
         }
 
-        function updateContexts()
+        function updateContexts(contexts)
         {
-            var tmp = sim.connMan.contexts.slice(0);
+            var tmp = contexts || sim.connMan.contexts.slice(0);
             var added = tmp.filter(function(i) {
                 return mContexts[i] === undefined;
             });
@@ -118,26 +119,6 @@ ItemPage {
                                                    "contextPath": currentValue
                                                });
                 mContexts[currentValue] = ctx;
-
-                if (isEmptyCustom("internet", ctx))
-                {
-                    ctx.name = mCustomContextNameInternet;
-                    // name updates async, so return here and
-                    // have the buildLists() called from Context::onNameChanged
-                    return;
-                } else if (isEmptyCustom("mms", ctx))
-                {
-                    ctx.name = mCustomContextNameMms;
-                    ctx.accessPointName = pendingCustomMmsData["accessPointName"];
-                    ctx.username = pendingCustomMmsData["username"];
-                    ctx.password = pendingCustomMmsData["password"];
-                    ctx.messageCenter = pendingCustomMmsData["messageCenter"];
-                    ctx.messageProxy = pendingCustomMmsData["messageProxy"];
-                    pendingCustomMmsData = ({});
-                    // values update async, so return here and
-                    // have the buildLists() called from Context::onNameChanged
-                    return;
-                }
             });
 
             // just asserting to verify the logic
@@ -156,8 +137,8 @@ ItemPage {
         }
 
         // expects updateContexts() to have ran before executing.
-        function checkAndCreateCustomContexts()
-        {
+        function checkAndCreateCustomContexts() {
+            console.warn('checkAndCreateCustomContexts');
             var customInternet = Object.keys(mContexts).filter(function (i) {
                 var ctx = mContexts[i];
                 return ctx.name === mCustomContextNameInternet ||
@@ -312,14 +293,28 @@ ItemPage {
 
             // add helper property to detect dual internet/MMS contexts
             property bool dual : false
-            Component.onCompleted:{
+            onTypeChanged:{
                 if (type == "internet")
                     if (messageCenter !== "")
                         dual = true
             }
 
             onActiveChanged: if (type === "internet") internetApnSelector.updateSelectedIndex()
-            onNameChanged: d.buildLists()
+            onNameChanged: {
+                console.warn('onNameChanged', name, this.type);
+                if (name === "Internet") {
+                    this.name = d.mCustomContextNameInternet;
+                } else if (name === "MMS") {
+                    this.name = d.mCustomContextNameMms;
+                    this.accessPointName = d.pendingCustomMmsData["accessPointName"];
+                    this.username = d.pendingCustomMmsData["username"];
+                    this.password = d.pendingCustomMmsData["password"];
+                    this.messageCenter = d.pendingCustomMmsData["messageCenter"];
+                    this.messageProxy = d.pendingCustomMmsData["messageProxy"];
+                    d.pendingCustomMmsData = ({});
+                }
+                d.buildLists();
+            }
             onAccessPointNameChanged: d.buildLists()
             onReportError: console.error("Context error on " + contextPath + ": " + errorString)
         }
@@ -327,12 +322,8 @@ ItemPage {
 
     Connections {
         target: sim.connMan
-        onContextsChanged: d.updateContexts()
-
+        onContextsChanged: d.updateContexts(contexts)
         Component.onCompleted: {
-            d.updateContexts();
-
-
             /// @todo workaround the work around that the UI currently only supports max. 1 MMS context
             ///       remove once nuntium stuff is implemented
             // remove all but one MMS context
@@ -346,10 +337,6 @@ ItemPage {
             mms.forEach(function(currentValue, index, array) {
                 sim.connMan.removeContext(currentValue);
             });
-
-
-            // do this once.
-            d.checkAndCreateCustomContexts();
         }
     }
 
@@ -448,7 +435,14 @@ ItemPage {
                     objectName: "customApnEdit"
                     text: i18n.tr("Custom Internet APN…")
                     width: parent.width - units.gu(4)
-                    onClicked: d.openApnEditor("internet")
+                    onClicked: {
+                        if (!d.__haveCustomContexts) {
+                            d.checkAndCreateCustomContexts();
+                            d.__haveCustomContexts = true;
+                        }
+
+                        d.openApnEditor("internet")
+                    }
                 }
             }
 
@@ -564,7 +558,13 @@ ItemPage {
                     objectName: "customApnEdit"
                     text: i18n.tr("Custom MMS APN…")
                     width: parent.width - units.gu(4)
-                    onClicked: d.openApnEditor("mms")
+                    onClicked: {
+                        if (!d.__haveCustomContexts) {
+                            d.checkAndCreateCustomContexts();
+                            d.__haveCustomContexts = true;
+                        }
+                        d.openApnEditor("mms");
+                    }
                 }
             }
 
