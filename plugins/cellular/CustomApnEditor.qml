@@ -139,7 +139,7 @@ ItemPage {
                 }
                 /// @todo disable for now
                 //visible: d.isMms
-                visible: false                
+                visible: false
                 text: i18n.tr("Same APN as for Internet")
                 control: Switch {
                     id: doBoth
@@ -300,7 +300,6 @@ ItemPage {
                             pageStack.pop();
                             return;
                         }
-
                         ctx.accessPointName = apnName.text;
                         ctx.username = userName.text;
                         ctx.password = pword.text;
