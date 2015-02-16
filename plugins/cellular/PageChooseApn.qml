@@ -79,6 +79,7 @@ ItemPage {
 
         function updateContexts(contexts)
         {
+            console.warn('updateContexts');
             var tmp = contexts || sim.connMan.contexts.slice(0);
             var added = tmp.filter(function(i) {
                 return mContexts[i] === undefined;
@@ -119,6 +120,7 @@ ItemPage {
                                                    "contextPath": currentValue
                                                });
                 mContexts[currentValue] = ctx;
+                console.warn('created context for ', currentValue);
             });
 
             // just asserting to verify the logic
@@ -138,8 +140,9 @@ ItemPage {
 
         // expects updateContexts() to have ran before executing.
         function checkAndCreateCustomContexts() {
-            console.warn('checkAndCreateCustomContexts');
+            console.warn('checkAndCreateCustomContexts', mContexts);
             var customInternet = Object.keys(mContexts).filter(function (i) {
+                console.warn('checking context', i, mCustomContextNameInternet);
                 var ctx = mContexts[i];
                 return ctx.name === mCustomContextNameInternet ||
                        isEmptyCustom("internet", ctx);
@@ -167,6 +170,7 @@ ItemPage {
             }
 
             if (customInternet.length === 0) {
+                console.warn('saw 0 custom contexts, adding');
                 sim.connMan.addContext("internet");
             }
 
@@ -190,7 +194,9 @@ ItemPage {
 
             internet = Object.keys(mContexts).filter(function(i) {
                 var ctx = mContexts[i];
+                console.warn('enumerated', i, mContexts[i].type);
                 if (ctx.type === "internet") {
+                    console.warn('enumerated', i, 'was internet');
                     if (ctx.name === mCustomContextNameInternet) {
                         mCustomContextInternet = ctx
                         // don't add yet
@@ -337,6 +343,8 @@ ItemPage {
             mms.forEach(function(currentValue, index, array) {
                 sim.connMan.removeContext(currentValue);
             });
+
+            d.updateContexts();
         }
     }
 
@@ -353,218 +361,213 @@ ItemPage {
                 right: parent.right
             }
 
-            ListItem.Standard {
+            spacing: units.gu(2)
+
+            SettingsItemTitle {
                 id: heading1
                 objectName: "internetapn"
                 text: i18n.tr("Internet APN:")
-                progression: false
             }
-            ListItem.ThinDivider {}
-            ListItem.SingleControl {
-                control: ListItem.ItemSelector {
-                    id: internetApnSelector
-                    width: parent.width - units.gu(4)
-                    model: d.mInternetApns
-                    expanded: true
-                    selectedIndex: -1
-                    onModelChanged: updateSelectedIndex()
 
-                    function updateSelectedIndex()
-                    {
-                        var tmp = d.__suppressActivation
-                        d.__suppressActivation = true;
-                        var idx = -1;
-                        if (model) {
-                            model.forEach(function(currentValue, index, array) {
-                                if (d.mContexts[currentValue].active)
-                                    idx = index;
-                            });
-                        }
-                        selectedIndex = idx;
-                        d.__suppressActivation = tmp;
+            ListItem.ItemSelector {
+                id: internetApnSelector
+                width: parent.width
+                model: d.mInternetApns
+                expanded: true
+                selectedIndex: -1
+                onModelChanged: updateSelectedIndex()
+
+                function updateSelectedIndex()
+                {
+                    var tmp = d.__suppressActivation
+                    d.__suppressActivation = true;
+                    var idx = -1;
+                    if (model) {
+                        model.forEach(function(currentValue, index, array) {
+                            if (d.mContexts[currentValue].active)
+                                idx = index;
+                        });
                     }
+                    selectedIndex = idx;
+                    d.__suppressActivation = tmp;
+                }
 
-                    delegate: OptionSelectorDelegate {
-                        showDivider: false
-                        text: {
-                            var ctx = d.mContexts[modelData];
-                            if (ctx.name !== "") {
-                                if (ctx.name !== d.mCustomContextNameInternet) {
-                                    return ctx.name
-                                } else {
-                                    //: user visible name of the custom Internet APN
-                                    return i18n.tr("Custom");
-                                }
+                delegate: OptionSelectorDelegate {
+                    showDivider: false
+                    text: {
+                        var ctx = d.mContexts[modelData];
+                        if (ctx.name !== "") {
+                            if (ctx.name !== d.mCustomContextNameInternet) {
+                                return ctx.name
                             } else {
-                                return ctx.accessPointName
+                                //: user visible name of the custom Internet APN
+                                return i18n.tr("Custom");
                             }
+                        } else {
+                            return ctx.accessPointName
                         }
                     }
-                    onSelectedIndexChanged: {
-                        if (selectedIndex === -1) {
-                            if (mmsApnSelector && mmsApnSelector.model[mmsApnSelector.selectedIndex] === "/same/as/internet")
-                                mmsApnSelector.selectedIndex = -1;
-                            return;
-                        }
-
-                        var ctx = d.mContexts[model[selectedIndex]];
-                        if(ctx.dual) {
-                            if (!d.mCustomContextMms)
-                                mmsApnSelector.selectedIndex = mmsApnSelector.model.indexOf("/same/as/internet");
-                        }
-                        else if (mmsApnSelector.model[mmsApnSelector.selectedIndex] === "/same/as/internet")
+                }
+                onSelectedIndexChanged: {
+                    if (selectedIndex === -1) {
+                        if (mmsApnSelector && mmsApnSelector.model[mmsApnSelector.selectedIndex] === "/same/as/internet")
                             mmsApnSelector.selectedIndex = -1;
+                        return;
+                    }
 
-                        if (d.__suppressActivation)
+                    var ctx = d.mContexts[model[selectedIndex]];
+                    if(ctx.dual) {
+                        if (!d.mCustomContextMms)
+                            mmsApnSelector.selectedIndex = mmsApnSelector.model.indexOf("/same/as/internet");
+                    }
+                    else if (mmsApnSelector.model[mmsApnSelector.selectedIndex] === "/same/as/internet")
+                        mmsApnSelector.selectedIndex = -1;
+
+                    if (d.__suppressActivation)
+                        return;
+
+                    if (d.mCustomContextInternet && model[selectedIndex] === d.mCustomContextInternet.contextPath) {
+                        if (d.mCustomContextInternet.accessPointName === "") {
+                            d.openApnEditor("internet");
+                            updateSelectedIndex();
                             return;
-
-                        if (d.mCustomContextInternet && model[selectedIndex] === d.mCustomContextInternet.contextPath) {
-                            if (d.mCustomContextInternet.accessPointName === "") {
-                                d.openApnEditor("internet");
-                                updateSelectedIndex();
-                                return;
-                            }
                         }
-
-                        d.activateHelper("internet", ctx.contextPath);
                     }
-                }
-            }
-            ListItem.SingleControl {
-                control: Button {
-                    objectName: "customApnEdit"
-                    text: i18n.tr("Custom Internet APN…")
-                    width: parent.width - units.gu(4)
-                    onClicked: {
-                        if (!d.__haveCustomContexts) {
-                            d.checkAndCreateCustomContexts();
-                            d.__haveCustomContexts = true;
-                        }
 
-                        d.openApnEditor("internet")
-                    }
+                    d.activateHelper("internet", ctx.contextPath);
                 }
             }
 
-            ListItem.Divider {}
 
-            ListItem.Standard {
+            Button {
+                anchors { horizontalCenter: parent.horizontalCenter }
+                objectName: "customApnEdit"
+                text: i18n.tr("Custom Internet APN…")
+                width: parent.width - units.gu(4)
+                onClicked: {
+                    if (!d.__haveCustomContexts) {
+                        d.checkAndCreateCustomContexts();
+                        d.__haveCustomContexts = true;
+                    }
+
+                    d.openApnEditor("internet")
+                }
+            }
+
+            SettingsItemTitle {
                 id: heading2
                 objectName: "mmsapn"
                 text: i18n.tr("MMS APN:")
-                progression: false
             }
-            ListItem.ThinDivider {}
-            ListItem.SingleControl {
-                control: ListItem.ItemSelector {
-                    id: mmsApnSelector
-                    width: parent.width - units.gu(4)
-                    model: d.mMmsApns
-                    expanded: true
-                    selectedIndex: -1
-                    delegate: OptionSelectorDelegate {
-                        showDivider: modelData === "/same/as/internet"
-                        enabled: {
-                            if (modelData !== "/same/as/internet")
-                                return true;
-                            else {
-                                var tmp = d.mContexts[internetApnSelector.model[internetApnSelector.selectedIndex]]
-                                return tmp === undefined ? false : tmp.dual
-                            }
+
+            ListItem.ItemSelector {
+                id: mmsApnSelector
+                width: parent.width
+                model: d.mMmsApns
+                expanded: true
+                selectedIndex: -1
+                delegate: OptionSelectorDelegate {
+                    showDivider: modelData === "/same/as/internet"
+                    enabled: {
+                        if (modelData !== "/same/as/internet")
+                            return true;
+                        else {
+                            var tmp = d.mContexts[internetApnSelector.model[internetApnSelector.selectedIndex]]
+                            return tmp === undefined ? false : tmp.dual
                         }
-                        // work around OptionSelectorDelegate not having a visual change depending on being disabled
-                        opacity: enabled ? 1.0 : 0.5
-                        text: {
-                            if (modelData === "/same/as/internet") {
-                                return i18n.tr("Same APN as for Internet");
-                            }
-                            if (modelData === "dummycustom") {
+                    }
+                    // work around OptionSelectorDelegate not having a visual change depending on being disabled
+                    opacity: enabled ? 1.0 : 0.5
+                    text: {
+                        if (modelData === "/same/as/internet") {
+                            return i18n.tr("Same APN as for Internet");
+                        }
+                        if (modelData === "dummycustom") {
+                            return i18n.tr("Custom");
+                        }
+                        var ctx = d.mContexts[modelData];
+                        if (ctx.name !== "") {
+                            if (ctx.name !== d.mCustomContextNameMms) {
+                                return ctx.name
+                            } else {
+                                //: user visible name of the custom MMS APN
                                 return i18n.tr("Custom");
                             }
-                            var ctx = d.mContexts[modelData];
-                            if (ctx.name !== "") {
-                                if (ctx.name !== d.mCustomContextNameMms) {
-                                    return ctx.name
-                                } else {
-                                    //: user visible name of the custom MMS APN
-                                    return i18n.tr("Custom");
-                                }
-                            } else {
-                                return ctx.accessPointName
-                            }
-                        }
-                    }
-                    onModelChanged: updateSelectedIndex();
-                    function updateSelectedIndex()
-                    {
-                        // if we have custom MMS context, it must be active.
-                        // @bug LP(#1361864)
-                        var tmp = d.__suppressActivation;
-                        d.__suppressActivation = true;
-                        if (d.mCustomContextMms) {
-                            selectedIndex = model.indexOf(d.mCustomContextMms.contextPath);
-                        } else if (model.length === 3) {
-                            /* meaning we have:
-                             * 0 - /same/as/internet
-                             * 1 - some provisioned one
-                             * 2 - dummycustom
-                             */
-                            selectedIndex = 1;
-                        } else if (internetApnSelector.model && internetApnSelector.selectedIndex !== -1) {
-                            if (d.mContexts[internetApnSelector.model[internetApnSelector.selectedIndex]].dual) {
-                                selectedIndex = model.indexOf("/same/as/internet");
-                            } else
-                                selectedIndex = -1;
                         } else {
-                            selectedIndex = -1;
+                            return ctx.accessPointName
                         }
-                        d.__suppressActivation = tmp;
-                    }
-
-                    onSelectedIndexChanged: {
-                        if (selectedIndex === -1 || d.__suppressActivation)
-                            return;
-
-                        if (model[selectedIndex] === "/same/as/internet") {
-                            // @bug delete _any_ actual MMS context
-                            //      LP:(#1362795)
-                            var remove = [];
-                            Object.keys(d.mContexts).forEach(function(currentValue, index, array) {
-                                var ctx = d.mContexts[currentValue];
-                                if (ctx.type === "mms")
-                                    remove = remove.concat([ctx.contextPath]);
-                            });
-                            remove.forEach(function(currentValue, index, array) {
-                                sim.connMan.removeContext(currentValue);
-                            });
-                            return;
-                        }
-
-                        if (model[selectedIndex] === "dummycustom") {
-                            d.openApnEditor("mms");
-                            updateSelectedIndex()
-                            return;
-                        }
-
-                        // no need to "activate" anything.
-                        // just fall through return here.
-                        // once we actually are able to suppport multiple MMS contexts
-                        // on the system, add some code here to set one of them active
                     }
                 }
-            }
-            ListItem.SingleControl {
-                control: Button {
-                    objectName: "customApnEdit"
-                    text: i18n.tr("Custom MMS APN…")
-                    width: parent.width - units.gu(4)
-                    onClicked: {
-                        if (!d.__haveCustomContexts) {
-                            d.checkAndCreateCustomContexts();
-                            d.__haveCustomContexts = true;
-                        }
-                        d.openApnEditor("mms");
+                onModelChanged: updateSelectedIndex();
+                function updateSelectedIndex()
+                {
+                    // if we have custom MMS context, it must be active.
+                    // @bug LP(#1361864)
+                    var tmp = d.__suppressActivation;
+                    d.__suppressActivation = true;
+                    if (d.mCustomContextMms) {
+                        selectedIndex = model.indexOf(d.mCustomContextMms.contextPath);
+                    } else if (model.length === 3) {
+                        /* meaning we have:
+                         * 0 - /same/as/internet
+                         * 1 - some provisioned one
+                         * 2 - dummycustom
+                         */
+                        selectedIndex = 1;
+                    } else if (internetApnSelector.model && internetApnSelector.selectedIndex !== -1) {
+                        if (d.mContexts[internetApnSelector.model[internetApnSelector.selectedIndex]].dual) {
+                            selectedIndex = model.indexOf("/same/as/internet");
+                        } else
+                            selectedIndex = -1;
+                    } else {
+                        selectedIndex = -1;
                     }
+                    d.__suppressActivation = tmp;
+                }
+
+                onSelectedIndexChanged: {
+                    if (selectedIndex === -1 || d.__suppressActivation)
+                        return;
+
+                    if (model[selectedIndex] === "/same/as/internet") {
+                        // @bug delete _any_ actual MMS context
+                        //      LP:(#1362795)
+                        var remove = [];
+                        Object.keys(d.mContexts).forEach(function(currentValue, index, array) {
+                            var ctx = d.mContexts[currentValue];
+                            if (ctx.type === "mms")
+                                remove = remove.concat([ctx.contextPath]);
+                        });
+                        remove.forEach(function(currentValue, index, array) {
+                            sim.connMan.removeContext(currentValue);
+                        });
+                        return;
+                    }
+
+                    if (model[selectedIndex] === "dummycustom") {
+                        d.openApnEditor("mms");
+                        updateSelectedIndex()
+                        return;
+                    }
+
+                    // no need to "activate" anything.
+                    // just fall through return here.
+                    // once we actually are able to suppport multiple MMS contexts
+                    // on the system, add some code here to set one of them active
+                }
+            }
+
+            Button {
+                anchors { horizontalCenter: parent.horizontalCenter }
+                objectName: "customApnEdit"
+                text: i18n.tr("Custom MMS APN…")
+                width: parent.width - units.gu(4)
+                onClicked: {
+                    if (!d.__haveCustomContexts) {
+                        d.checkAndCreateCustomContexts();
+                        d.__haveCustomContexts = true;
+                    }
+                    d.openApnEditor("mms");
                 }
             }
 
