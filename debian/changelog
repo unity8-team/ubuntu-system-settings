@@ -1,3 +1,12 @@
+ubuntu-system-settings (0.3+15.04.20150213-0ubuntu2) vivid; urgency=medium
+
+  * Disable StorageInfo use temporarily while a fix for the upstream class 
+    removal is being done.
+  * Adapt WIP lp:~laney/ubuntu-system-settings/storageinfo-5.4 to keep the 
+    entry and free space info visible while disabling the clickablity.
+
+ -- Timo Jyrinki <timo-jyrinki@ubuntu.com>  Mon, 16 Feb 2015 09:08:47 +0200
+
 ubuntu-system-settings (0.3+15.04.20150213-0ubuntu1) vivid; urgency=medium
 
   [ Sebastien Bacher ]
