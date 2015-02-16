@@ -32,6 +32,8 @@
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <QtCore/QStorageInfo>
+#include <QtCore/QSharedPointer>
 #include <QProcess>
 #include <QVariant>
 #include <hybris/properties/properties.h>
@@ -342,6 +344,15 @@ QString StorageAbout::getDevicePath(const QString mount_point)
     }
 
     return s_mount_point;
+}
+
+qint64 StorageAbout::getFreeSpace(const QString mount_point)
+{
+    QStorageInfo si(mount_point);
+    if (si.isValid())
+        return si.bytesFree();
+
+    return -1;
 }
 
 StorageAbout::~StorageAbout() {
