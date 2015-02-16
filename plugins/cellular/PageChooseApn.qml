@@ -237,6 +237,8 @@ ItemPage {
             mInternetApns = internet;
             mMmsApns = mms;
 
+            internetApnSelector.updateSelectedIndex();
+
             d.__suppressActivation = false;
         }
 
@@ -303,6 +305,8 @@ ItemPage {
                 if (type == "internet")
                     if (messageCenter !== "")
                         dual = true
+
+                d.buildLists();
             }
 
             onActiveChanged: if (type === "internet") internetApnSelector.updateSelectedIndex()
@@ -355,19 +359,11 @@ ItemPage {
         boundsBehavior: (contentHeight > root.height) ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
         flickableDirection: Flickable.VerticalFlick
 
+
         Column {
-            anchors {
-                left: parent.left
-                right: parent.right
-            }
+            anchors { left: parent.left; right: parent.right }
 
             spacing: units.gu(2)
-
-            SettingsItemTitle {
-                id: heading1
-                objectName: "internetapn"
-                text: i18n.tr("Internet APN:")
-            }
 
             ListItem.ItemSelector {
                 id: internetApnSelector
@@ -375,6 +371,7 @@ ItemPage {
                 model: d.mInternetApns
                 expanded: true
                 selectedIndex: -1
+                text: i18n.tr("Internet APN:")
                 onModelChanged: updateSelectedIndex()
 
                 function updateSelectedIndex()
@@ -454,18 +451,13 @@ ItemPage {
                 }
             }
 
-            SettingsItemTitle {
-                id: heading2
-                objectName: "mmsapn"
-                text: i18n.tr("MMS APN:")
-            }
-
             ListItem.ItemSelector {
                 id: mmsApnSelector
                 width: parent.width
                 model: d.mMmsApns
                 expanded: true
                 selectedIndex: -1
+                text: i18n.tr("MMS APN:")
                 delegate: OptionSelectorDelegate {
                     showDivider: modelData === "/same/as/internet"
                     enabled: {
