@@ -111,6 +111,7 @@ public:
     quint64 getHomeSize();
     Q_INVOKABLE void populateSizes();
     Q_INVOKABLE QString getDevicePath (const QString mount_point);
+    Q_INVOKABLE qint64 getFreeSpace (const QString mount_point);
     bool getDeveloperMode();
     void setDeveloperMode(bool newMode);
 
