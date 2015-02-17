@@ -19,6 +19,7 @@
 */
 import QtQuick 2.0
 import GSettings 1.0
+import SystemSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 
@@ -36,13 +37,16 @@ Column {
         return s;
     }
     property var modems
-    // make settings available to all children of root
     property var settings: phoneSettings
+    property string prevOnlineModem: ""
+
+    /*  @sim a Sim.qml component containing libqofono bindings
+        @prevOnlineModem path to modem that was online before modem reset */
+    signal umtsModemChanged (var sim, string prevOnlineModem);
 
     DataMultiSim {
         anchors { left: parent.left; right: parent.right }
     }
-
 
     ListItem.SingleValue {
         text : i18n.tr("Hotspot disabled because Wi-Fi is off.")
@@ -95,13 +99,7 @@ Column {
 
     ListItem.Divider {}
 
-    function techToString (tech) {
-        return {
-            'gsm': i18n.tr("2G only (saves battery)"),
-            'umts': i18n.tr("2G/3G (faster)"),
-            'lte': i18n.tr("2G/3G/4G (faster)")
-        }[tech]
-    }
+    SettingsItemTitle { text: i18n.tr("Connection type:") }
 
     Repeater {
         model: sims
@@ -109,26 +107,53 @@ Column {
         ListItem.ItemSelector {
             id: radio
             property var sim: modelData
-            property var rSettings: sim.radioSettings
-            property string techPref: rSettings.technologyPreference
-            property var modemTechs: rSettings.modemTechnologies
+
             expanded: true
-            text: i18n.tr("Connection type:")
-            model: modemTechs || []
+            text: sim.title
+            model: sim.radioSettings.modemTechnologies
             delegate: OptionSelectorDelegate {
                 objectName: sim.path + "_radio_" + modelData
-                text: techToString(modelData)
+                text: sim.techToString(modelData)
             }
-            enabled: techPref !== ""
-            visible: sim.connMan.powered
-            selectedIndex: techPref !== "" ? model.indexOf(techPref) : -1
-            onDelegateClicked: rSettings.technologyPreference = model[index];
+            enabled: sim.radioSettings.technologyPreference !== ""
+            selectedIndex: sim.radioSettings.technologyPreference !== "" ?
+                model.indexOf(sim.radioSettings.technologyPreference) : -1
+
+            onDelegateClicked: {
+                if (model[index] === 'umts_enable') {
+                    sim.radioSettings.technologyPreference = 'umts';
+                    umtsModemChanged(sim, poweredSim ? poweredSim.path : "");
+                    sim.mtkSettings.has3G = true;
+                } else {
+                    sim.radioSettings.technologyPreference = model[index];
+                }
+            }
+
             Connections {
-                target: rSettings
-                onTechnologyPreferenceChanged: {
-                    radio.selectedIndex = modemTechs.indexOf(preference)
+                target: sim.radioSettings
+                onTechnologyPreferenceChanged: radio.selectedIndex =
+                    sim.radioSettings.modemTechnologies.indexOf(preference)
+
+                onModemTechnologiesChanged: {
+                    if ((technologies.indexOf('umts') === -1)
+                         && (sim.mtkSettings.has3G === false)) {
+                        radio.model = sim.addUmtsEnableToModel(technologies);
+                    } else {
+                        radio.model = technologies;
+                    }
+                    radio.selectedIndex = sim.radioSettings.technologyPreference !== "" ?
+                        model.indexOf(sim.radioSettings.technologyPreference) : -1
                 }
                 ignoreUnknownSignals: true
+            }
+
+            Component.onCompleted: {
+                if ((sim.radioSettings.modemTechnologies.indexOf('umts') === -1)
+                     && (sim.mtkSettings.has3G === false)) {
+                    radio.model = sim.addUmtsEnableToModel(sim.radioSettings.modemTechnologies);
+                } else {
+                    radio.model = sim.radioSettings.modemTechnologies;
+                }
             }
         }
     }

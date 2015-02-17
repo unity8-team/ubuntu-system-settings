@@ -33,7 +33,7 @@ ItemPage {
 
     title: i18n.tr("About this phone")
     flickable: scrollWidget
-    property var modemsSorted: manager.modems.slice(0).sort()
+    property var modemsSorted: []
 
     UbuntuStorageAboutPanel {
         id: backendInfos
@@ -49,11 +49,16 @@ ItemPage {
 
     OfonoManager {
         id: manager
-        Component.onCompleted: {
-            if (manager.modems.length === 1) {
-                phoneNumbers.setSource("PhoneNumber.qml", {path: manager.modems[0]})
-            } else if (manager.modems.length > 1) {
-                phoneNumbers.setSource("PhoneNumbers.qml", {paths: modemsSorted})
+        onModemsChanged: {
+            root.modemsSorted = modems.slice(0).sort();
+            if (modems.length === 1) {
+                phoneNumbers.setSource("PhoneNumber.qml", {
+                    path: manager.modems[0]
+                });
+            } else if (modems.length > 1) {
+                phoneNumbers.setSource("PhoneNumbers.qml", {
+                    paths: root.modemsSorted
+                });
             }
         }
     }

@@ -23,6 +23,8 @@ import Ubuntu.Components.ListItems 0.1 as ListItem
 
 Column {
 
+    property string prevOnlineModem: parent.prevOnlineModem
+
     function getNameFromIndex (index) {
         if (index === 0) {
             return i18n.tr("Off");
@@ -50,8 +52,14 @@ Column {
             objectName: "use" + modelData
             text: getNameFromIndex(index)
         }
-        selectedIndex: [true, sims[0].connMan.powered, sims[1].connMan.powered]
-            .lastIndexOf(true)
+        selectedIndex: {
+            if (prevOnlineModem) {
+                return model.indexOf(prevOnlineModem);
+            } else {
+                return [true, sims[0].connMan.powered, sims[1].connMan.powered]
+                    .lastIndexOf(true);
+            }
+        }
 
         onDelegateClicked: {
             // power all sims on or off

@@ -22,36 +22,66 @@ import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 
 Column {
+    id: radioSingleSim
     height: childrenRect.height
 
     property bool enabled: sim.radioSettings.technologyPreference !== ""
 
     ListItem.ItemSelector {
         id: selector
-        text: i18n.tr("Connection type:")
         showDivider: false
         expanded: true
 
         // an empty string is not a valid preference, which means
         // we disregard the interace and disable the selector
         enabled: parent.enabled
-        model: sim.radioSettings.modemTechnologies || []
-
+        model: sim.radioSettings.modemTechnologies
         delegate: OptionSelectorDelegate {
             objectName: sim.path + "_radio_" + modelData
-            text: {
-                return {
-                    'gsm': i18n.tr("2G only (saves battery)"),
-                    'umts': i18n.tr("2G/3G (faster)"),
-                    'lte': i18n.tr("2G/3G/4G (faster)")
-                }[modelData]
-            }
+            text: sim.techToString(modelData)
             showDivider: false
         }
-        selectedIndex: model.length ?
-            model.indexOf(sim.radioSettings.technologyPreference) : -1
+        selectedIndex:
+            sim.radioSettings.technologyPreference !== "" ?
+                    model.indexOf(sim.radioSettings.technologyPreference) : -1
+
         onDelegateClicked: {
-            sim.radioSettings.technologyPreference = model[index];
+            if (model[index] === 'umts_enable') {
+                sim.radioSettings.technologyPreference = 'umts';
+                radioSingleSim.parent.umtsModemChanged(sim, sim.connMan.powered ? sim.path : "");
+                sim.mtkSettings.has3G = true;
+            } else {
+                sim.radioSettings.technologyPreference = model[index];
+            }
+        }
+
+        Connections {
+            target: sim.radioSettings
+
+            onTechnologyPreferenceChanged: selector.selectedIndex =
+                sim.radioSettings.modemTechnologies.indexOf(preference)
+
+            onModemTechnologiesChanged: {
+                if ((technologies.indexOf('umts') === -1)
+                     && (sim.mtkSettings.has3G === false)) {
+                    selector.model = sim.addUmtsEnableToModel(technologies);
+                } else {
+                    selector.model = technologies;
+                }
+                selector.selectedIndex = sim.radioSettings.technologyPreference !== "" ?
+                    selector.model.indexOf(sim.radioSettings.technologyPreference) : -1
+            }
+            ignoreUnknownSignals: true
+        }
+
+        Component.onCompleted: {
+            if ((sim.radioSettings.modemTechnologies.indexOf('umts') === -1)
+                 && (sim.mtkSettings.has3G === false)) {
+                selector.model = sim.addUmtsEnableToModel(
+                    sim.radioSettings.modemTechnologies);
+            } else {
+                selector.model = sim.radioSettings.modemTechnologies;
+            }
         }
     }
 }

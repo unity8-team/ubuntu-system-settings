@@ -20,6 +20,7 @@
 
 import QtQuick 2.0
 import SystemSettings 1.0
+import Ubuntu.SystemSettings.Cellular 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 import MeeGo.QOfono 0.2
@@ -32,10 +33,30 @@ ItemPage {
     title: i18n.tr("Cellular")
     objectName: "cellularPage"
 
-    property var modemsSorted: manager.modems.slice(0).sort()
+    property var modemsSorted: []
     property int simsLoaded: 0
 
+    // waiting during modem reboots or for modems to come online
+    property bool waiting: true
+
+    QtObject {
+        id: priv
+        property string prevOnlineModem: ""
+    }
+
     states: [
+        State {
+            name: "waiting"
+            when: waiting
+            PropertyChanges {
+                target: waitIndicator
+                opacity: 1
+            }
+            PropertyChanges {
+                target: flick
+                opacity: 0
+            }
+        },
         State {
             name: "noSim"
             when: (simsLoaded === 0) || (Sims.getPresentCount() === 0)
@@ -47,7 +68,8 @@ ItemPage {
             name: "singleSim"
             StateChangeScript {
                 script: loader.setSource("Components/SingleSim.qml", {
-                    sim: Sims.getFirstPresent()
+                    sim: Sims.getFirstPresent(),
+                    prevOnlineModem: priv.prevOnlineModem
                 })
             }
             when: simsLoaded && (Sims.getPresentCount() === 1)
@@ -57,7 +79,8 @@ ItemPage {
             StateChangeScript {
                 script: loader.setSource("Components/MultiSim.qml", {
                     sims: Sims.getAll(),
-                    modems: modemsSorted
+                    modems: modemsSorted,
+                    prevOnlineModem: priv.prevOnlineModem
                 })
             }
             when: simsLoaded && (Sims.getPresentCount() > 1)
@@ -66,19 +89,10 @@ ItemPage {
 
     OfonoManager {
         id: manager
-        Component.onCompleted: {
-            var component = Qt.createComponent("Components/Sim.qml");
-            modemsSorted.forEach(function (path) {
-                var sim = component.createObject(root, {
-                    path: path
-                });
-                if (sim === null) {
-                    console.warn('Failed to create Sim qml:',
-                        component.errorString());
-                } else {
-                    Sims.add(sim);
-                }
-            });
+        onModemsChanged: {
+            root.modemsSorted = modems.slice(0).sort();
+            Sims.createQML();
+            root.waiting = false;
         }
     }
 
@@ -95,18 +109,68 @@ ItemPage {
         }
     }
 
+    Item {
+        id: waitIndicator
+        anchors.fill: parent
+        opacity: 0
+
+        ActivityIndicator {
+            anchors.centerIn: parent
+            running: true
+        }
+
+        Behavior on opacity {
+            PropertyAnimation {
+               duration: UbuntuAnimation.SleepyDuration
+            }
+        }
+    }
+
     Flickable {
         id: flick
         anchors.fill: parent
         contentWidth: parent.width
         contentHeight: contentItem.childrenRect.height
         boundsBehavior: (contentHeight > root.height) ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
+
         Column {
             anchors { left: parent.left; right: parent.right }
             Loader {
                 id: loader
                 anchors { left: parent.left; right: parent.right }
             }
+        }
+
+        Behavior on opacity {
+            PropertyAnimation {
+                duration: UbuntuAnimation.SleepyDuration
+            }
+        }
+
+        Connections {
+            target: loader.item
+
+            onUmtsModemChanged: {
+                var path = sim.path;
+                var e = sim.simMng.presenceChanged;
+
+                function presenceHandler (ispresent) {
+                    if (ispresent) {
+                        root.waiting = false;
+                        Connectivity.unlockAllModems();
+                        e.disconnect(presenceHandler);
+                    }
+                }
+
+                priv.prevOnlineModem = prevOnlineModem ?
+                    prevOnlineModem : "";
+                root.waiting = true;
+
+                /* When the SIM comes back online, set waiting to false:
+                the modem reboot is done.*/
+                sim.simMng.presenceChanged.connect(presenceHandler);
+            }
+            ignoreUnknownSignals: true
         }
     }
 }
