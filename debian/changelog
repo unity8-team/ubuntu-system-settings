@@ -1,3 +1,15 @@
+ubuntu-system-settings (0.3+15.04.20150217-0ubuntu1) vivid; urgency=medium
+
+  [ jonas-drange ]
+  * [cellular] allow user to change 3g modem (LP: #1379850)
+  * [cellular] makes the apn editor somewhat compatible to libqofono 0.7
+    (LP: #1379850, #1415215)
+
+  [ CI Train Bot ]
+  * New rebuild forced.
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Tue, 17 Feb 2015 15:33:07 +0000
+
 ubuntu-system-settings (0.3+15.04.20150213-0ubuntu2) vivid; urgency=medium
 
   * Disable StorageInfo use temporarily while a fix for the upstream class 
