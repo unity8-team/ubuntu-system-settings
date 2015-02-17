@@ -1,3 +1,24 @@
+ubuntu-system-settings (0.3+15.04.20150217~rtm-0ubuntu1) 14.09; urgency=medium
+
+  [ CI Train Bot ]
+  * Resync trunk
+  * Resync trunk
+  * Resync trunk
+  * Resync trunk
+  * Resync trunk
+  * Resync trunk
+  * Resync trunk
+  * Resync trunk
+  * Resync trunk
+
+  [ jonas-drange ]
+  * [cellular] using libqofono-0.7 and including functionality for
+    enabling users to change what modem has 3G (LP: #1379850)
+  * [cellular] makes the apn editor somewhat compatible to libqofono 0.7
+    (LP: #1379850)
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Tue, 17 Feb 2015 12:55:31 +0000
+
 ubuntu-system-settings (0.3+15.04.20150204.1~rtm-0ubuntu1) 14.09; urgency=medium
 
   [ jonas-drange ]
