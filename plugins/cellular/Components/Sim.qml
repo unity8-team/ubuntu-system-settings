@@ -27,6 +27,7 @@ Item {
     property alias radioSettings: radioSettings
     property alias simMng: simMng
     property alias connMan: connMan
+    property alias mtkSettings: mtkSettings
 
     property alias present: simMng.present
     property string path
@@ -36,14 +37,31 @@ Item {
         return name + (number ? " (" + number + ")" : "");
     }
 
+    function techToString (tech) {
+        var strings = {
+            'gsm': i18n.tr("2G only (saves battery)"),
+            'umts': i18n.tr("2G/3G (faster)"),
+            'lte': i18n.tr("2G/3G/4G (faster)")
+        };
+        strings['umts_enable'] = strings['umts'];
+        return strings[tech];
+    }
+
+    // adds umts_enable to an copy of model
+    function addUmtsEnableToModel (model) {
+        var newModel = model.slice(0);
+        newModel.push('umts_enable');
+        return newModel;
+    }
+
     OfonoModem {
         id: modem
         modemPath: path
         onInterfacesChanged: {
-            if (interfaces.indexOf('org.ofono.ConnectionManager') >= 0) {
-                connMan._valid = true;
+            if (interfaces.indexOf('org.ofono.MtkSettings') >= 0) {
+                mtkSettings._valid = true;
             } else {
-                connMan._valid = false;
+                mtkSettings._valid = false;
             }
         }
     }
@@ -65,6 +83,11 @@ Item {
 
     OfonoConnMan {
         id: connMan
+        modemPath: path
+    }
+
+    OfonoMtkSettings {
+        id: mtkSettings
         property bool _valid: true
         modemPath: path
         on_ValidChanged: {

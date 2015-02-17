@@ -24,6 +24,8 @@ add_library(UbuntuCellularPanel MODULE
   hotspotmanager.h
   ofonoactivator.cpp
   ofonoactivator.h
+  connectivity.cpp
+  connectivity.h
   nm_manager_proxy.h
   nm_settings_proxy.h
   nm_settings_connection_proxy.h
