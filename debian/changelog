@@ -1,3 +1,21 @@
+ubuntu-system-settings (0.3+15.04.20150218-0ubuntu1) vivid; urgency=medium
+
+  [ Ken VanDine ]
+  * Fix logic error in check for Paired to know if we should add
+    ellipsis.
+
+  [ jonas-drange ]
+  * [cellular] better ux for no sims (LP: #1377182)
+
+  [ Iain Lane ]
+  * Reintroduce the functionality dropped in the Qt 5.4 transition -
+    expose the functions we need from QStorageInfo to QML, and copy over
+    a heuristic function to tell if a drive is "internal" or not.
+  * Make the developerMode property not CONSTANT - this was ignored as
+    it's writable.
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Wed, 18 Feb 2015 16:47:40 +0000
+
 ubuntu-system-settings (0.3+15.04.20150217-0ubuntu1) vivid; urgency=medium
 
   [ jonas-drange ]
