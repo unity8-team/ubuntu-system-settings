@@ -546,7 +546,7 @@ QVariant DeviceModel::data(const QModelIndex &index, int role) const
             if (displayName.isEmpty())
                 displayName = device->getAddress();
 
-            if (device->isPaired())
+            if (!device->isPaired())
                 displayName.append("…");
 
             ret = displayName;
