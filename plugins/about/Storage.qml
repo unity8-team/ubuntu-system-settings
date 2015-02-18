@@ -36,17 +36,17 @@ ItemPage {
     property var allDrives: {
         var drives = ["/"] // Always consider /
         var paths = [backendInfo.getDevicePath("/")]
-        var systemDrives = storageInfo.allLogicalDrives
+        var systemDrives = backendInfo.mountedVolumes
         for (var i = 0; i < systemDrives.length; i++) {
             var drive = systemDrives[i]
-            var type = storageInfo.driveType(drive)
             var path = backendInfo.getDevicePath(drive)
             /* only deal with the device's storage for now, external mounts
                handling would require being smarter on the categories
                computation as well and is not in the current design */
-            if ((type === StorageInfo.InternalDrive) &&
+            if (backendInfo.isInternal(drive) &&
                 paths.indexOf(path) == -1 && // Haven't seen this device before
                 path.charAt(0) === "/") { // Has a real mount point
+                console.warn("Adding " + drive + " (" + path + ")")
                 drives.push(drive)
                 paths.push(path)
             }
@@ -56,14 +56,15 @@ ItemPage {
     property real diskSpace: {
         var space = 0
         for (var i = 0; i < allDrives.length; i++) {
-            space += storageInfo.totalDiskSpace(allDrives[i])
+            space += backendInfo.getTotalSpace(allDrives[i])
         }
         return space
     }
     /* Limit the free space to the user available one (see bug #1374134) */
     property real freediskSpace: {
-        return storageInfo.availableDiskSpace("/home")
+        return backendInfo.getFreeSpace("/home")
     }
+
     property real usedByUbuntu: diskSpace -
                                 freediskSpace -
                                 backendInfo.homeSize -
@@ -118,10 +119,6 @@ ItemPage {
                       ClickRoles.DisplayNameRole :
                       ClickRoles.InstalledSizeRole
 
-    }
-
-    StorageInfo {
-        id: storageInfo
     }
 
     Flickable {

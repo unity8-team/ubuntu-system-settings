@@ -1,6 +1,8 @@
 /*
  * Copyright (C) 2013 Canonical Ltd
  *
+ * isInternal() is Copyright (C) 2012 Digia Plc and/or its subsidiary(-ies).
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as
  * published by the Free Software Foundation.
@@ -20,6 +22,9 @@
 #include "storageabout.h"
 
 #include <QDebug>
+
+#include <mntent.h>
+#include <sys/stat.h>
 
 #include <gio/gio.h>
 #include <gio/gunixmounts.h>
@@ -325,25 +330,141 @@ void StorageAbout::populateSizes()
                                 m_cancellable));
 }
 
+QStringList StorageAbout::getMountedVolumes() const
+{
+    QStringList out;
+
+    Q_FOREACH (const QStorageInfo &storage, QStorageInfo::mountedVolumes())
+        if (storage.isValid() && storage.isReady())
+            out.append(storage.rootPath());
+
+    return out;
+}
+
 QString StorageAbout::getDevicePath(const QString mount_point)
 {
     QString s_mount_point;
-
     GUnixMountEntry * g_mount_point = nullptr;
 
     if (!mount_point.isNull() && !mount_point.isEmpty()) {
-         g_mount_point = g_unix_mount_at(mount_point.toLocal8Bit(), nullptr);
+        g_mount_point = g_unix_mount_at(mount_point.toLocal8Bit(), nullptr);
     }
 
     if (g_mount_point) {
         const gchar * device_path =
-                g_unix_mount_get_device_path(g_mount_point);
+            g_unix_mount_get_device_path(g_mount_point);
         s_mount_point = QString::fromLocal8Bit(device_path);
 
         g_unix_mount_free (g_mount_point);
     }
 
     return s_mount_point;
+ }
+
+/* This function was copied from QtSystems, as it was removed when the
+ * QSystemInfo class moved to Qt 5.4.
+ * 
+ * The license terms state, in part:
+ *
+ * Copyright (C) 2012 Digia Plc and/or its subsidiary(-ies).
+ *
+ * GNU General Public License Usage
+ * Alternatively, this file may be used under the terms of the GNU
+ * General Public License version 3.0 as published by the Free Software
+ * Foundation and appearing in the file LICENSE.GPL included in the
+ * packaging of this file.  Please review the following information to
+ * ensure the GNU General Public License version 3.0 requirements will be
+ * met: http://www.gnu.org/copyleft/gpl.html.
+ *
+ */
+bool StorageAbout::isInternal(const QString &drive)
+{
+    bool ret = false;
+    FILE *fsDescription = setmntent(_PATH_MOUNTED, "r");
+    struct mntent entry;
+    char buffer[512];
+    while ((getmntent_r(fsDescription, &entry, buffer, sizeof(buffer))) != NULL) {
+        if (drive != QString::fromLatin1(entry.mnt_dir))
+            continue;
+
+        if (strcmp(entry.mnt_type, "binfmt_misc") == 0
+            || strcmp(entry.mnt_type, "debugfs") == 0
+            || strcmp(entry.mnt_type, "devpts") == 0
+            || strcmp(entry.mnt_type, "devtmpfs") == 0
+            || strcmp(entry.mnt_type, "fusectl") == 0
+            || strcmp(entry.mnt_type, "none") == 0
+            || strcmp(entry.mnt_type, "proc") == 0
+            || strcmp(entry.mnt_type, "ramfs") == 0
+            || strcmp(entry.mnt_type, "securityfs") == 0
+            || strcmp(entry.mnt_type, "sysfs") == 0
+            || strcmp(entry.mnt_type, "tmpfs") == 0
+            || strcmp(entry.mnt_type, "cifs") == 0
+            || strcmp(entry.mnt_type, "ncpfs") == 0
+            || strcmp(entry.mnt_type, "nfs") == 0
+            || strcmp(entry.mnt_type, "nfs4") == 0
+            || strcmp(entry.mnt_type, "smbfs") == 0
+            || strcmp(entry.mnt_type, "iso9660") == 0) {
+            ret = false;
+            break;
+        }
+
+        if (strcmp(entry.mnt_type, "rootfs") == 0) {
+            ret = true;
+            break;
+        }
+
+        // Now need to guess if it's InternalDrive or RemovableDrive
+        QString fsName(QString::fromLatin1(entry.mnt_fsname));
+        if (fsName.contains(QString(QStringLiteral("mapper")))) {
+            struct stat status;
+            stat(entry.mnt_fsname, &status);
+            fsName = QString(QStringLiteral("/sys/block/dm-%1/removable")).arg(status.st_rdev & 0377);
+        } else {
+            fsName = fsName.section(QString(QStringLiteral("/")), 2, 3);
+            if (!fsName.isEmpty()) {
+                if (fsName.length() > 3) {
+                    // only take the parent of the device
+                    if (fsName.at(fsName.size() -1).isDigit() && fsName.at(fsName.size() - 2) == QChar(QLatin1Char('p')))
+                        fsName.chop(2);
+                    if (fsName.startsWith(QString(QStringLiteral("mmc")))) {
+                        // "removable" attribute is set only for removable media, and we may have internal mmc cards
+                        fsName = QString(QStringLiteral("/sys/block/")) + fsName + QString(QStringLiteral("/device/uevent"));
+                        QFile file(fsName);
+                        if (file.open(QIODevice::ReadOnly)) {
+                            QByteArray buf = file.readLine();
+                            while (buf.size() > 0) {
+                                if (qstrncmp(buf.constData(), "MMC_TYPE=", 9) == 0) {
+                                    if (qstrncmp(buf.constData() + 9, "MMC", 3) == 0)
+                                        ret = true;
+                                    else if (qstrncmp(buf.constData() + 9, "SD", 2) == 0)
+                                        ret = false;
+                                    if (ret) {
+                                        endmntent(fsDescription);
+                                        return ret;
+                                    }
+                                    break;  // fall back to check the "removable" attribute
+                                }
+                                buf = file.readLine();
+                            }
+                        }
+                    }
+                }
+                fsName = QString(QStringLiteral("/sys/block/")) + fsName + QString(QStringLiteral("/removable"));
+            }
+        }
+        QFile removable(fsName);
+        char isRemovable;
+        if (!removable.open(QIODevice::ReadOnly) || 1 != removable.read(&isRemovable, 1))
+            break;
+        if (isRemovable == '0')
+            ret = true;
+        else
+            ret = false;
+        break;
+    }
+
+    endmntent(fsDescription);
+    return ret;
 }
 
 qint64 StorageAbout::getFreeSpace(const QString mount_point)
@@ -351,6 +472,15 @@ qint64 StorageAbout::getFreeSpace(const QString mount_point)
     QStorageInfo si(mount_point);
     if (si.isValid())
         return si.bytesFree();
+
+    return -1;
+}
+
+qint64 StorageAbout::getTotalSpace(const QString mount_point)
+{
+    QStorageInfo si(mount_point);
+    if (si.isValid())
+        return si.bytesTotal();
 
     return -1;
 }
