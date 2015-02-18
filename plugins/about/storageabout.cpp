@@ -1,6 +1,8 @@
 /*
  * Copyright (C) 2013 Canonical Ltd
  *
+ * isInternal() is Copyright (C) 2012 Digia Plc and/or its subsidiary(-ies).
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as
  * published by the Free Software Foundation.
@@ -359,6 +361,22 @@ QString StorageAbout::getDevicePath(const QString mount_point)
     return s_mount_point;
  }
 
+/* This function was copied from QtSystems, as it was removed when the
+ * QSystemInfo class moved to Qt 5.4.
+ * 
+ * The license terms state, in part:
+ *
+ * Copyright (C) 2012 Digia Plc and/or its subsidiary(-ies).
+ *
+ * GNU General Public License Usage
+ * Alternatively, this file may be used under the terms of the GNU
+ * General Public License version 3.0 as published by the Free Software
+ * Foundation and appearing in the file LICENSE.GPL included in the
+ * packaging of this file.  Please review the following information to
+ * ensure the GNU General Public License version 3.0 requirements will be
+ * met: http://www.gnu.org/copyleft/gpl.html.
+ *
+ */
 bool StorageAbout::isInternal(const QString &drive)
 {
     bool ret = false;
