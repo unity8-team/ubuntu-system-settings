@@ -689,7 +689,7 @@ class ResetPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
     def _click_reset_launcher(self):
         button = self.select_single(objectName='resetLauncher')
         self.pointing_device.click_object(button)
-        return self.get_root_instance().select_single(
+        return self.get_root_instance().wait_select_single(
             objectName='resetLauncherDialog')
 
     def _wait_and_return_main_system_settins_page(self):
