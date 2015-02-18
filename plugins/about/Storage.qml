@@ -46,7 +46,6 @@ ItemPage {
             if (backendInfo.isInternal(drive) &&
                 paths.indexOf(path) == -1 && // Haven't seen this device before
                 path.charAt(0) === "/") { // Has a real mount point
-                console.warn("Adding " + drive + " (" + path + ")")
                 drives.push(drive)
                 paths.push(path)
             }
