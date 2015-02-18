@@ -36,6 +36,19 @@ ItemPage {
 
     UbuntuBluetoothPanel { id: backend }
 
+    /* Disable bt visiblity when switching out */
+    Connections {
+        target: Qt.application
+        onActiveChanged: {
+            if (Qt.application.state === Qt.ApplicationSuspended) {
+                backend.trySetDiscoverable(false)
+            }
+            else {
+                backend.trySetDiscoverable(true)
+            }
+        }
+    }
+
     Component {
         id: confirmPasskeyDialog
         ConfirmPasskeyDialog { }

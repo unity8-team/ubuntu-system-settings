@@ -88,6 +88,11 @@ void Bluetooth::stopDiscovery()
     m_devices.stopDiscovery();
 }
 
+void Bluetooth::trySetDiscoverable(bool discoverable)
+{
+    m_devices.trySetDiscoverable(discoverable);
+}
+
 /***
 ****
 ***/

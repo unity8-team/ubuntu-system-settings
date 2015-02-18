@@ -82,6 +82,7 @@ public:
     Q_INVOKABLE void toggleDiscovery();
     Q_INVOKABLE void startDiscovery();
     Q_INVOKABLE void stopDiscovery();
+    Q_INVOKABLE void trySetDiscoverable(bool discoverable);
 
 public:
     Agent * getAgent();
