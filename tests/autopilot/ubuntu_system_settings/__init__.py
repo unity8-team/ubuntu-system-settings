@@ -1,7 +1,7 @@
 
 # -*- Mode: Python; coding: utf-8; indent-tabs-mode: nil; tab-width: 4 -*-
 #
-# Copyright (C) 2014 Canonical Ltd.
+# Copyright (C) 2014, 2015 Canonical Ltd.
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU Lesser General Public License as published by
@@ -86,11 +86,17 @@ class SystemSettings():
     @property
     def main_view(self):
         """Return main view"""
-        return self.app.select_single(MainWindow)
+        return self.app.select_single(objectName='systemSettingsMainView')
 
 
-class MainWindow(ubuntuuitoolkit.MainView):
+class SystemSettingsMainWindow(ubuntuuitoolkit.MainView):
     """An emulator class that makes it easy to interact with the UI."""
+
+    @classmethod
+    def validate_dbus_object(cls, path, state):
+        name = introspection.get_classname_from_path(path)
+        return (name == b'MainWindow' and
+                state['objectName'][1] == 'systemSettingsMainView')
 
     @autopilot.logging.log_action(logger.debug)
     def click_item(self, object_name):
@@ -788,7 +794,8 @@ class ResetPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
             objectName='resetLauncherDialog')
 
     def _wait_and_return_main_system_settins_page(self):
-        main_view = self.get_root_instance().select_single(MainWindow)
+        main_view = self.get_root_instance().select_single(
+            objectName='systemSettingsMainView')
         main_view.system_settings_page.active.wait_for(True)
         return main_view.system_settings_page
 
