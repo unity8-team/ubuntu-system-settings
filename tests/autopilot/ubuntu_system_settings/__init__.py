@@ -40,8 +40,11 @@ class SystemSettings(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
     @classmethod
     def validate_dbus_object(cls, path, state):
         name = introspection.get_classname_from_path(path)
-        return (name == b'SystemSettings' and
-                state['applicationName'][1] == 'SystemSettings')
+        application_name = state['applicationName'][1]
+        return ((name == b'SystemSettings' and
+                 application_name == 'SystemSettings') or
+                (name == b'ubuntu-system-settings' and
+                 application_name == 'ubuntu-system-settings'))
 
     @property
     def main_view(self):
