@@ -17,8 +17,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef CELLULAR_CONNECTIVITY_HELPER
-#define CELLULAR_CONNECTIVITY_HELPER
+#ifndef CONNECTIVITY_HELPER
+#define CONNECTIVITY_HELPER
 
 #include <QObject>
 
@@ -30,6 +30,7 @@ public:
     ~Connectivity() {};
 
     Q_INVOKABLE void unlockAllModems();
+    Q_INVOKABLE void unlockModem(QString path);
 };
 
 #endif

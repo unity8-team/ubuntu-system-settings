@@ -33,8 +33,6 @@ set(QML_SOURCES
 )
 
 set(PANEL_SOURCES
-    connectivity.cpp
-    connectivity.h
     plugin.cpp
     plugin.h
     securityprivacy.cpp
@@ -58,6 +56,7 @@ include_directories(
 set(PLUG_DIR ${PLUGIN_PRIVATE_MODULE_DIR}/Ubuntu/SystemSettings/SecurityPrivacy)
 target_link_libraries (UbuntuSecurityPrivacyPanel
     uss-accountsservice
+    uss-connectivity
     ${ACCOUNTSSERVICE_LDFLAGS}
     ${GOBJECT_LDFLAGS}
     ${TRUST_STORE_LDFLAGS}

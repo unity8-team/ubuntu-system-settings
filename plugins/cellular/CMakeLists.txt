@@ -24,14 +24,14 @@ add_library(UbuntuCellularPanel MODULE
   hotspotmanager.h
   ofonoactivator.cpp
   ofonoactivator.h
-  connectivity.cpp
-  connectivity.h
   nm_manager_proxy.h
   nm_settings_proxy.h
   nm_settings_connection_proxy.h
   ${QML_SOURCES}
 )
 qt5_use_modules(UbuntuCellularPanel Qml Quick DBus)
+
+target_link_libraries (UbuntuCellularPanel uss-connectivity)
 
 set(PLUG_DIR ${PLUGIN_PRIVATE_MODULE_DIR}/Ubuntu/SystemSettings/Cellular)
 install(TARGETS UbuntuCellularPanel DESTINATION ${PLUG_DIR})
