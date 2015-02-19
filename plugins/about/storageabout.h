@@ -54,6 +54,10 @@ class StorageAbout : public QObject
                READ getClickSize
                CONSTANT)
 
+    Q_PROPERTY(QStringList mountedVolumes
+               READ getMountedVolumes
+               CONSTANT)
+
     Q_PROPERTY(quint64 moviesSize
                READ getMoviesSize
                NOTIFY sizeReady)
@@ -110,8 +114,11 @@ public:
     quint64 getPicturesSize();
     quint64 getHomeSize();
     Q_INVOKABLE void populateSizes();
+    QStringList getMountedVolumes() const;
     Q_INVOKABLE QString getDevicePath (const QString mount_point);
     Q_INVOKABLE qint64 getFreeSpace (const QString mount_point);
+    Q_INVOKABLE qint64 getTotalSpace (const QString mount_point);
+    Q_INVOKABLE bool isInternal(const QString &drive);
     bool getDeveloperMode();
     void setDeveloperMode(bool newMode);
 

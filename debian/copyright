@@ -9,6 +9,12 @@ License: GPL-3
  On Debian systems, the complete text of the GNU General
  Public License version 3 can be found in `/usr/share/common-licenses/GPL-3'.
 
+Files: plugins/about/storageabout.cpp
+Copyright: 2013 Canonical Ltd, 2012 Digia Plc and/or its subsidiary(-ies).
+License: GPL-3
+ On Debian systems, the complete text of the GNU General
+ Public License version 3 can be found in `/usr/share/common-licenses/GPL-3'.
+
 Files: plugins/background/aeg.jpg
 Copyright: 2012 Tauno Erik
 License: CC-BY-SA-3.0
