@@ -1,3 +1,11 @@
+ubuntu-system-settings (0.3+15.04.20150219~rtm-0ubuntu1) 14.09; urgency=medium
+
+  [ Michael Terry ]
+  * Wait for libqofono to finish initializing before we decide whether
+    to skip the wizard's SIM page or not.
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Thu, 19 Feb 2015 17:21:09 +0000
+
 ubuntu-system-settings (0.3+15.04.20150218.1~rtm-0ubuntu1) 14.09; urgency=medium
 
   [ Ken VanDine ]
