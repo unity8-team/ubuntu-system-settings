@@ -93,8 +93,7 @@ class StorageAbout : public QObject
 
     Q_PROPERTY(bool developerMode
                READ getDeveloperMode
-               WRITE setDeveloperMode
-               CONSTANT)
+               WRITE setDeveloperMode)
 
 public:
     explicit StorageAbout(QObject *parent = 0);
