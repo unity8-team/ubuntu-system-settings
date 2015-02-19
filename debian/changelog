@@ -1,3 +1,13 @@
+ubuntu-system-settings (0.3+15.04.20150219.1-0ubuntu1) vivid; urgency=medium
+
+  [ Ken VanDine ]
+  * revert automatic translation merge
+  * Reapplied automatic translations import
+  * Removed conflicting ConnectivityMixin to fix smoke testing
+  * Use wait_select_single to fix test_reset_launcher failures
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Thu, 19 Feb 2015 15:25:00 +0000
+
 ubuntu-system-settings (0.3+15.04.20150219-0ubuntu1) vivid; urgency=medium
 
   [ Ken VanDine ]
