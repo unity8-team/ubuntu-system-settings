@@ -1,4 +1,14 @@
-ubuntu-system-settings (0.3+15.04.20150218-0ubuntu1) vivid; urgency=medium
+ubuntu-system-settings (0.3+15.04.20150219.1-0ubuntu1) vivid; urgency=medium
+
+  [ Ken VanDine ]
+  * revert automatic translation merge
+  * Reapplied automatic translations import
+  * Removed conflicting ConnectivityMixin to fix smoke testing
+  * Use wait_select_single to fix test_reset_launcher failures
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Thu, 19 Feb 2015 15:25:00 +0000
+
+ubuntu-system-settings (0.3+15.04.20150219-0ubuntu1) vivid; urgency=medium
 
   [ Ken VanDine ]
   * Fix logic error in check for Paired to know if we should add
@@ -14,7 +24,10 @@ ubuntu-system-settings (0.3+15.04.20150218-0ubuntu1) vivid; urgency=medium
   * Make the developerMode property not CONSTANT - this was ignored as
     it's writable.
 
- -- CI Train Bot <ci-train-bot@canonical.com>  Wed, 18 Feb 2015 16:47:40 +0000
+  [ CI Train Bot ]
+  * New rebuild forced.
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Thu, 19 Feb 2015 02:08:28 +0000
 
 ubuntu-system-settings (0.3+15.04.20150217-0ubuntu1) vivid; urgency=medium
 
