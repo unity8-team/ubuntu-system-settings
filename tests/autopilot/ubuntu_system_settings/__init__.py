@@ -33,15 +33,15 @@ from ubuntu_system_settings.utils.i18n import ugettext as _
 logger = logging.getLogger(__name__)
 
 
-class SystemSettings():
+class SystemSettings(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
 
     """Helper class for System Settings application"""
 
     @classmethod
     def validate_dbus_object(cls, path, state):
         name = introspection.get_classname_from_path(path)
-        return (name == b'SystemSettings' and
-                state['applicationName'][1] == 'SystemSettings')
+        return (name == b'ubuntu-system-settings' and
+                state['applicationName'][1] == 'ubuntu-system-settings')
 
     @property
     def main_view(self):
