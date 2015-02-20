@@ -63,6 +63,10 @@ UpdateManager::UpdateManager(QObject *parent):
                      this, SIGNAL(credentialsNotFound()));
     QObject::connect(&m_service, SIGNAL(credentialsNotFound()),
                   this, SLOT(clickUpdateNotAvailable()));
+    QObject::connect(&m_service, SIGNAL(credentialsDeleted()),
+                     this, SIGNAL(credentialsDeleted()));
+    QObject::connect(&m_service, SIGNAL(credentialsDeleted()),
+                  this, SLOT(clickUpdateNotAvailable()));
     // PROCESS
     QObject::connect(&m_process, SIGNAL(finished(int)),
                   this, SLOT(processOutput()));
