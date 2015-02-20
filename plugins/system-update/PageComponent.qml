@@ -284,7 +284,7 @@ ItemPage {
                     anchors {
                         left: activity.running ? activity.right : parent.left
                         top: parent.top
-                        right: btnRetry.left
+                        right: btnRetry.visible ? btnRetry.left : parent.right
                         rightMargin: units.gu(2)
                         leftMargin: units.gu(2)
                     }
