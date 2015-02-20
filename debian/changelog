@@ -1,3 +1,12 @@
+ubuntu-system-settings (0.3+15.04.20150220.1-0ubuntu1) vivid; urgency=medium
+
+  [ Sebastien Bacher ]
+  * bluetooth: disable pairing for unsupported device types, the current
+    UI let users click on the button but doesn't do anything out of
+    closing the page, better to show the button as unactive instead
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Fri, 20 Feb 2015 17:41:55 +0000
+
 ubuntu-system-settings (0.3+15.04.20150220-0ubuntu1) vivid; urgency=medium
 
   [ Sebastien Bacher ]
