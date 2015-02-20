@@ -204,6 +204,11 @@ ItemPage {
             credentialsNotification.visible = true;
         }
 
+        onCredentialsDeleted: {
+            credentialsNotification.visible = false;
+            uoaConfig.exec();
+        }
+
         onSystemUpdateDownloaded: {
             root.installAll = false;
         }
@@ -279,7 +284,7 @@ ItemPage {
                     anchors {
                         left: activity.running ? activity.right : parent.left
                         top: parent.top
-                        right: btnRetry.left
+                        right: btnRetry.visible ? btnRetry.left : parent.right
                         rightMargin: units.gu(2)
                         leftMargin: units.gu(2)
                     }

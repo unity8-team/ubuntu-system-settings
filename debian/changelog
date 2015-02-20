@@ -1,3 +1,18 @@
+ubuntu-system-settings (0.3+15.04.20150220-0ubuntu1) vivid; urgency=medium
+
+  [ Sebastien Bacher ]
+  * system-update: use the correct right-anchoring so the checking-for-
+    updates label is not cut, in some locales (LP: #1421967)
+
+  [ Iain Lane ]
+  * Drop old example images from debian/copyright - they aren't shipped
+    any more
+
+  [ Rodney Dawes ]
+  * Handle the credentialsDeleted signal appropriately. (LP: #1413655)
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Fri, 20 Feb 2015 14:40:43 +0000
+
 ubuntu-system-settings (0.3+15.04.20150219.1-0ubuntu1) vivid; urgency=medium
 
   [ Ken VanDine ]
