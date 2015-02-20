@@ -40,16 +40,15 @@ class SystemSettings(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
     @classmethod
     def validate_dbus_object(cls, path, state):
         name = introspection.get_classname_from_path(path)
-        application_name = state['applicationName'][1]
         return ((name == b'SystemSettings' and
-                 application_name == 'SystemSettings') or
+                 state['applicationName'][1] == 'SystemSettings') or
                 (name == b'ubuntu-system-settings' and
-                 application_name == 'ubuntu-system-settings'))
+                 state['applicationName'][1] == 'ubuntu-system-settings'))
 
     @property
     def main_view(self):
         """Return main view"""
-        return self.app.select_single(objectName='systemSettingsMainView')
+        return self.select_single(objectName='systemSettingsMainView')
 
 
 class SystemSettingsMainWindow(ubuntuuitoolkit.MainView):
