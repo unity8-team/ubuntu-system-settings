@@ -42,6 +42,7 @@ private Q_SLOTS:
     void testStartDiscovery();
     void testStopDiscovery();
     void testToggleDiscovery();
+    void testIsSupportedType();
     void testIsDiscovering();
     void cleanup();
 
@@ -139,6 +140,13 @@ void BluetoothTest::testToggleDiscovery()
                                       "org.bluez.Adapter",
                                       "Discovering");
     QCOMPARE(result.toBool(), false);
+}
+
+void BluetoothTest::testIsSupportedType()
+{
+    QCOMPARE(Bluetooth::isSupportedType(Device::Type::Headset), true);
+    QCOMPARE(Bluetooth::isSupportedType(Device::Type::Keyboard), true);
+    QCOMPARE(Bluetooth::isSupportedType(Device::Type::Tablet), false);
 }
 
 void BluetoothTest::testIsDiscovering()
