@@ -13,14 +13,13 @@ from autopilot.matchers import Eventually
 
 from ubuntu_system_settings.tests import (
     SecurityBaseTestCase,
-    ConnectivityMixin,
     SIM_IFACE)
 
 from ubuntu_system_settings.utils.i18n import ugettext as _
 from ubuntuuitoolkit import emulators as toolkit_emulators
 
 
-class SecurityTestCase(SecurityBaseTestCase, ConnectivityMixin):
+class SecurityTestCase(SecurityBaseTestCase):
     """ Tests for Security Page """
 
     def setUp(self):

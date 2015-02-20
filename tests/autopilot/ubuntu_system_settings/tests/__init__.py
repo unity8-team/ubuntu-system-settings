@@ -302,12 +302,29 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
         (cls.p_mock, cls.obj_ofono) = cls.spawn_server_template(
             template, stdout=subprocess.PIPE)
         cls.dbusmock = dbus.Interface(cls.obj_ofono, dbusmock.MOCK_IFACE)
+
+        cls.start_session_bus()
+        cls.connectivity_dbus = cls.get_dbus(False)
+        cls.connectivity_server = cls.spawn_server(CON_SERVICE,
+                                                   CON_PATH,
+                                                   CON_IFACE,
+                                                   system_bus=False,
+                                                   stdout=subprocess.PIPE)
+
+        cls.connectivity_mock = dbus.Interface(
+            cls.connectivity_dbus.get_object(CON_SERVICE, CON_PATH),
+            dbusmock.MOCK_IFACE)
+
+        cls.connectivity_mock.AddMethod('', 'UnlockModem', 's', '', '')
         super(UbuntuSystemSettingsOfonoTestCase, cls).setUpClass()
 
     @classmethod
     def tearDownClass(cls):
         cls.p_mock.terminate()
         cls.p_mock.wait()
+
+        cls.connectivity_server.terminate()
+        cls.connectivity_server.wait()
         super(UbuntuSystemSettingsOfonoTestCase, cls).tearDownClass()
 
     def setUp(self, panel=None):
@@ -316,6 +333,10 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
         self.add_sim1()
         if self.use_sims == 2:
             self.add_sim2()
+
+        self.wait_for_bus_object(CON_SERVICE,
+                                 CON_PATH,
+                                 system_bus=False)
 
         super(UbuntuSystemSettingsOfonoTestCase, self).setUp()
 
@@ -737,38 +758,6 @@ class ResetBaseTestCase(UbuntuSystemSettingsTestCase,
         self.mock_server.terminate()
         self.mock_server.wait()
         super(ResetBaseTestCase, self).tearDown()
-
-
-class ConnectivityMixin(dbusmock.DBusTestCase):
-    @classmethod
-    def setUpClass(cls):
-        cls.start_session_bus()
-        cls.connectivity_dbus = cls.get_dbus()
-        cls.connectivity_server = cls.spawn_server(CON_SERVICE,
-                                                   CON_PATH,
-                                                   CON_IFACE,
-                                                   system_bus=False,
-                                                   stdout=subprocess.PIPE)
-
-        cls.connectivity_mock = dbus.Interface(
-            cls.connectivity_dbus.get_object(CON_SERVICE,
-                                             CON_PATH),
-            dbusmock.MOCK_IFACE)
-
-        cls.connectivity_mock.AddMethod('', 'UnlockModem', 's', '', '')
-        super(ConnectivityMixin, cls).setUpClass()
-
-    def setUp(self):
-        self.wait_for_bus_object(CON_SERVICE,
-                                 CON_PATH,
-                                 system_bus=False)
-        super(ConnectivityMixin, self).setUp()
-
-    @classmethod
-    def tearDownClass(cls):
-        cls.connectivity_server.terminate()
-        cls.connectivity_server.wait()
-        super(ConnectivityMixin, cls).tearDownClass()
 
 
 class SecurityBaseTestCase(UbuntuSystemSettingsOfonoTestCase):
