@@ -1,7 +1,7 @@
 /*
  * This file is part of system-settings
  *
- * Copyright (C) 2013 Canonical Ltd.
+ * Copyright (C) 2013, 2014, 2015 Canonical Ltd.
  *
  * Contact: Alberto Mardegan <alberto.mardegan@canonical.com>
  *
@@ -28,7 +28,7 @@ MainView {
     width: units.gu(50)
     height: units.gu(90)
     applicationName: "ubuntu-system-settings"
-    objectName: "mainView"
+    objectName: "systemSettingsMainView"
     automaticOrientation: true
     useDeprecatedToolbar: false
     anchorToKeyboard: true

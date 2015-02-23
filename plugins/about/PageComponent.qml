@@ -38,11 +38,7 @@ ItemPage {
     UbuntuStorageAboutPanel {
         id: backendInfos
     }
-/*
-    StorageInfo {
-        id: storageInfo
-    }
-*/
+
     DeviceInfo {
         id: deviceInfos
     }

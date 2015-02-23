@@ -1,3 +1,15 @@
+ubuntu-system-settings (0.3+15.04.20150223-0ubuntu1) vivid; urgency=medium
+
+  [ Leo Arias ]
+  * On the autopilot tests, select the main window by object name. Added
+    a proxy object for the application. Cleaned up the launching
+    methods.
+
+  [ Timo Jyrinki ]
+  * Cleanup leftover commented out section from Qt 5.4 transition.
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Mon, 23 Feb 2015 19:58:56 +0000
+
 ubuntu-system-settings (0.3+15.04.20150220.1-0ubuntu1) vivid; urgency=medium
 
   [ Sebastien Bacher ]
