@@ -760,6 +760,38 @@ class ResetBaseTestCase(UbuntuSystemSettingsTestCase,
         super(ResetBaseTestCase, self).tearDown()
 
 
+class ConnectivityMixin(dbusmock.DBusTestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.start_session_bus()
+        cls.connectivity_dbus = cls.get_dbus()
+        cls.connectivity_server = cls.spawn_server(CON_SERVICE,
+                                                   CON_PATH,
+                                                   CON_IFACE,
+                                                   system_bus=False,
+                                                   stdout=subprocess.PIPE)
+
+        cls.connectivity_mock = dbus.Interface(
+            cls.connectivity_dbus.get_object(CON_SERVICE,
+                                             CON_PATH),
+            dbusmock.MOCK_IFACE)
+
+        cls.connectivity_mock.AddMethod('', 'UnlockModem', 's', '', '')
+        super(ConnectivityMixin, cls).setUpClass()
+
+    def setUp(self):
+        self.wait_for_bus_object(CON_SERVICE,
+                                 CON_PATH,
+                                 system_bus=False)
+        super(ConnectivityMixin, self).setUp()
+
+    @classmethod
+    def tearDownClass(cls):
+        cls.connectivity_server.terminate()
+        cls.connectivity_server.wait()
+        super(ConnectivityMixin, cls).tearDownClass()
+
+
 class SecurityBaseTestCase(UbuntuSystemSettingsOfonoTestCase):
     """ Base class for security and privacy settings tests"""
 
