@@ -69,7 +69,7 @@ public:
     bool isDiscovering() const { return m_isDiscovering; }
     bool isDiscoverable() const { return m_isDiscoverable; }
     void addConnectAfterPairing(const QString &address, Device::ConnectionMode mode);
-    void createDevice(const QString &address);
+    void createDevice(const QString &address, QObject *agent);
     void removeDevice(const QString &path);
     void stopDiscovery();
     void startDiscovery();
