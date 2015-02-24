@@ -7,8 +7,9 @@
 
 from gi.repository import Gio
 from time import sleep
+import subprocess
 import unittest
-from testtools.matchers import Equals, NotEquals
+from testtools.matchers import Equals, NotEquals, Contains
 from autopilot.matchers import Eventually
 
 from ubuntu_system_settings.tests import (
@@ -411,11 +412,47 @@ class SecurityTestCase(SecurityBaseTestCase):
         )
 
     def test_sim_unlock(self):
+
+        def mockUnlockMethod():
+            return subprocess.call([
+                'gdbus', 'call', '--session', '-d', 'com.ubuntu.connectivity1',
+                '-o', '/com/ubuntu/connectivity1/Private',
+                '-m', 'org.freedesktop.DBus.Mock.AddMethod',
+                'com.ubuntu.connectivity1.Private', 'UnlockModem',
+                's', '\"\"', '\"\"'])
+
+        def getUnlockMethodCalls():
+            return str(subprocess.check_output([
+                'gdbus', 'call', '--session', '-d', 'com.ubuntu.connectivity1',
+                '-o', '/com/ubuntu/connectivity1/Private',
+                '-m', 'org.freedesktop.DBus.Mock.GetMethodCalls', 'UnlockModem'
+                ]))
+
+        self.mock = subprocess.Popen([
+            'python3', '-m', 'dbusmock', 'com.ubuntu.connectivity1',
+            '/com/ubuntu/connectivity1/Private',
+            'com.ubuntu.connectivity1.Private'])
+        self.addCleanup(self.mock.terminate)
+
+        i = 0
+        while(mockUnlockMethod() != 0):
+            if (i < 10):
+                sleep(0.5)
+            else:
+                self.skip("Could not mock connectivity service.")
+                break
+            i = i + 1
+
         # lock sim
         self.modem_0.Set(SIM_IFACE, 'PinRequired', 'pin')
         self.modem_0.EmitSignal(
             SIM_IFACE, 'PropertyChanged', 'sv', ['PinRequired', 'pin'])
 
         self._go_to_sim_lock()
-        self.system_settings.main_view.select_single(
+        unlock = self.system_settings.main_view.select_single(
             objectName='unlock')
+        self.system_settings.main_view.pointing_device.click_object(unlock)
+
+        self.assertThat(
+            lambda: getUnlockMethodCalls(),
+            Eventually(Contains('ril_0')))
