@@ -463,6 +463,7 @@ ItemPage {
                             pageStack.pop();
                         }
                         visible: backend.selectedDevice ? true : false
+                        enabled: backend.isSupportedType(backend.selectedDevice.type)
                     }
                 }
                 ListItem.SingleControl {

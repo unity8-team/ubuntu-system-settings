@@ -1,7 +1,7 @@
 
 # -*- Mode: Python; coding: utf-8; indent-tabs-mode: nil; tab-width: 4 -*-
 #
-# Copyright (C) 2014 Canonical Ltd.
+# Copyright (C) 2014, 2015 Canonical Ltd.
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU Lesser General Public License as published by
@@ -27,70 +27,39 @@ from time import sleep
 from autopilot.input import Keyboard
 import autopilot.logging
 import ubuntuuitoolkit
-from autopilot import introspection, platform
+from autopilot import introspection
 from ubuntu_system_settings.utils.i18n import ugettext as _
 
 logger = logging.getLogger(__name__)
 
 
-class SystemSettings():
+class SystemSettings(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
+
     """Helper class for System Settings application"""
 
-    APP_PATH = '/usr/bin/system-settings'
-    DESKTOP_FILE = '/usr/share/applications/ubuntu-system-settings.desktop'
-
-    def __init__(self, testobj, panel=None):
-        """Constructor. Launches system settings application
-
-        :param testobj: An AutopilotTestCase object, needed to call
-        testobj.launch_test_application()
-
-        :param panel: Launch to a specific panel. Default None.
-        """
-        self.testobj = testobj
-        self.panel = panel
-        # Launches application
-        self.app = self.launch(
-            self.testobj,
-            self.APP_PATH,
-            self.DESKTOP_FILE,
-            panel=self.panel)
-
-    def launch(self, testobj, app_path, desktop_file, panel=None):
-        """Launch system settings application
-
-        :param testobj: An AutopilotTestCase object, needed to call
-        testobj.launch_test_application()
-
-        :param panel: Launch to a specific panel. Default None.
-
-        :returns: A proxy object that represents the application. Introspection
-        data is retrievable via this object.
-        """
-        params = [app_path]
-        if platform.model() != 'Desktop':
-            params.append('--desktop_file_hint={}'.format(desktop_file))
-
-        # Launch to a specific panel
-        if panel is not None:
-            params.append(panel)
-
-        app = testobj.launch_test_application(
-            *params,
-            app_type='qt',
-            emulator_base=ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase,
-            capture_output=True)
-
-        return app
+    @classmethod
+    def validate_dbus_object(cls, path, state):
+        name = introspection.get_classname_from_path(path)
+        return ((name == b'SystemSettings' and
+                 state['applicationName'][1] == 'SystemSettings') or
+                (name == b'ubuntu-system-settings' and
+                 state['applicationName'][1] == 'ubuntu-system-settings'))
 
     @property
     def main_view(self):
         """Return main view"""
-        return self.app.select_single(MainWindow)
+        return self.select_single(objectName='systemSettingsMainView')
 
 
-class MainWindow(ubuntuuitoolkit.MainView):
-    """An emulator class that makes it easy to interact with the UI."""
+class SystemSettingsMainWindow(ubuntuuitoolkit.MainView):
+
+    """Autopilot helper for the Main Window."""
+
+    @classmethod
+    def validate_dbus_object(cls, path, state):
+        name = introspection.get_classname_from_path(path)
+        return (name == b'MainWindow' and
+                state['objectName'][1] == 'systemSettingsMainView')
 
     @autopilot.logging.log_action(logger.debug)
     def click_item(self, object_name):
@@ -784,11 +753,12 @@ class ResetPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
     def _click_reset_launcher(self):
         button = self.select_single(objectName='resetLauncher')
         self.pointing_device.click_object(button)
-        return self.get_root_instance().select_single(
+        return self.get_root_instance().wait_select_single(
             objectName='resetLauncherDialog')
 
     def _wait_and_return_main_system_settins_page(self):
-        main_view = self.get_root_instance().select_single(MainWindow)
+        main_view = self.get_root_instance().select_single(
+            objectName='systemSettingsMainView')
         main_view.system_settings_page.active.wait_for(True)
         return main_view.system_settings_page
 

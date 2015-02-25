@@ -68,6 +68,7 @@ Q_SIGNALS:
     void modelChanged();
     void updatesNotFound();
     void credentialsNotFound();
+    void credentialsDeleted();
     void updateAvailableFound(bool downloading);
     void errorFound();
     void networkError();
