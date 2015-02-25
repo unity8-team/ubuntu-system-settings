@@ -394,9 +394,11 @@ void DeviceModel::slotDeviceRemoved(const QDBusObjectPath &path)
 
     auto device = getDeviceFromPath(path.path());
 
-    const int row = findRowFromAddress(device->getAddress());
-    if ((row >= 0))
-        removeRow(row);
+    if (device != nullptr) {
+        const int row = findRowFromAddress(device->getAddress());
+        if ((row >= 0))
+            removeRow(row);
+    }
 }
 
 void DeviceModel::slotDeviceDisappeared(const QString &address)
