@@ -36,6 +36,11 @@ ItemPage {
 
     UbuntuBluetoothPanel { id: backend }
 
+    Timer {
+        id: discoverableTimer
+        onTriggered: backend.trySetDiscoverable(true)
+    }
+
     /* Disable bt visiblity when switching out */
     Connections {
         target: Qt.application
@@ -44,7 +49,7 @@ ItemPage {
                 backend.trySetDiscoverable(false)
             }
             else {
-                backend.trySetDiscoverable(true)
+                discoverableTimer.start()
             }
         }
     }
@@ -463,7 +468,6 @@ ItemPage {
                             pageStack.pop();
                         }
                         visible: backend.selectedDevice ? true : false
-                        enabled: backend.isSupportedType(backend.selectedDevice.type)
                     }
                 }
                 ListItem.SingleControl {
