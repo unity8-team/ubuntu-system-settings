@@ -1,28 +1,39 @@
 # -*- Mode: Python; coding: utf-8; indent-tabs-mode: nil; tab-width: 4 -*-
-# Copyright 2013 Canonical
+# Copyright 2013, 2014, 2015 Canonical
 #
-# This program is free software: you can redistribute it and/or modify it
-# under the terms of the GNU General Public License version 3, as published
-# by the Free Software Foundation.
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU Lesser General Public License as published by
+# the Free Software Foundation; version 3.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU Lesser General Public License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public License
+# along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 """ Tests for Ubuntu System Settings """
-from __future__ import absolute_import
 
+from __future__ import absolute_import
 
 import dbus
 import dbusmock
 import os
 import subprocess
-import ubuntuuitoolkit
+from datetime import datetime
+from time import sleep
 
+import ubuntuuitoolkit
+from autopilot import platform
 from autopilot.matchers import Eventually
 from dbusmock.templates.networkmanager import DEVICE_IFACE
-from datetime import datetime
 from fixtures import EnvironmentVariable
-from testtools.matchers import Equals, NotEquals, GreaterThan
-from time import sleep
-from ubuntu_system_settings import SystemSettings
 from gi.repository import UPowerGlib
+from testtools.matchers import Equals, NotEquals, GreaterThan
+
+import ubuntu_system_settings
+
 
 ACCOUNTS_IFACE = 'org.freedesktop.Accounts'
 ACCOUNTS_USER_IFACE = 'org.freedesktop.Accounts.User'
@@ -61,9 +72,12 @@ class UbuntuSystemSettingsTestCase(
 
     """Base class for Ubuntu System Settings."""
 
+    APP_PATH = '/usr/bin/system-settings'
+    DESKTOP_FILE = '/usr/share/applications/ubuntu-system-settings.desktop'
+
     def setUp(self, panel=None):
         super(UbuntuSystemSettingsTestCase, self).setUp()
-        self.system_settings = SystemSettings(self, panel=panel)
+        self.system_settings = self.launch(panel)
         self.main_view = self.system_settings.main_view
         self.assertThat(
             self.main_view.visible,
@@ -74,6 +88,31 @@ class UbuntuSystemSettingsTestCase(
         self.assertThat(
             lambda: gsettings.get_value('rotation-lock').get_boolean(),
             Eventually(Equals(value.get_boolean())))
+
+    def launch(self, panel=None):
+        """Launch system settings application
+
+        :param testobj: An AutopilotTestCase object, needed to call
+        testobj.launch_test_application()
+
+        :param panel: Launch to a specific panel. Default None.
+
+        :returns: A proxy object that represents the application. Introspection
+        data is retrievable via this object.
+        """
+        params = [self.APP_PATH]
+        if platform.model() != 'Desktop':
+            params.append('--desktop_file_hint={}'.format(self.DESKTOP_FILE))
+
+        # Launch to a specific panel
+        if panel is not None:
+            params.append(panel)
+
+        return self.launch_test_application(
+            *params,
+            app_type='qt',
+            emulator_base=ubuntu_system_settings.SystemSettings,
+            capture_output=True)
 
 
 class UbuntuSystemSettingsUpowerTestCase(UbuntuSystemSettingsTestCase,
