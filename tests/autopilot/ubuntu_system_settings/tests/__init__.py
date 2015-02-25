@@ -49,6 +49,9 @@ NM_SERVICE = 'org.freedesktop.NetworkManager'
 NM_PATH = '/org/freedesktop/NetworkManager'
 NM_IFACE = 'org.freedesktop.NetworkManager'
 NM_AC_CON_IFACE = 'org.freedesktop.NetworkManager.Connection.Active'
+CON_SERVICE = 'com.ubuntu.connectivity1'
+CON_PATH = '/com/ubuntu/connectivity1/Private'
+CON_IFACE = 'com.ubuntu.connectivity1.Private'
 UPOWER_VERSION = str(UPowerGlib.MAJOR_VERSION)
 UPOWER_VERSION += '.' + str(UPowerGlib.MINOR_VERSION)
 
@@ -734,6 +737,36 @@ class ResetBaseTestCase(UbuntuSystemSettingsTestCase,
         self.mock_server.terminate()
         self.mock_server.wait()
         super(ResetBaseTestCase, self).tearDown()
+
+
+class ConnectivityMixin(dbusmock.DBusTestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.connectivity_server = cls.spawn_server(CON_SERVICE,
+                                                   CON_PATH,
+                                                   CON_IFACE,
+                                                   system_bus=False,
+                                                   stdout=subprocess.PIPE)
+        cls.connectivity_dbus = cls.get_dbus()
+        cls.connectivity_mock = dbus.Interface(
+            cls.connectivity_dbus.get_object(CON_SERVICE,
+                                             CON_PATH),
+            dbusmock.MOCK_IFACE)
+
+        cls.connectivity_mock.AddMethod('', 'UnlockModem', 's', '', '')
+        super(ConnectivityMixin, cls).setUpClass()
+
+    def setUp(self):
+        self.wait_for_bus_object(CON_SERVICE,
+                                 CON_PATH,
+                                 system_bus=False)
+        super(ConnectivityMixin, self).setUp()
+
+    @classmethod
+    def tearDownClass(cls):
+        cls.connectivity_server.terminate()
+        cls.connectivity_server.wait()
+        super(ConnectivityMixin, cls).tearDownClass()
 
 
 class SecurityBaseTestCase(UbuntuSystemSettingsOfonoTestCase):
