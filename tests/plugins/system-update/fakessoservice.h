@@ -17,13 +17,16 @@ public:
     void getCredentials();
 
     void setValidCredentials(bool value) { m_validCredentials = value; }
+    void setDeletedCredentials(bool value) { m_deletedCredentials = value; }
     
 signals:
     void credentialsFound(const Token&);
     void credentialsNotFound();
+    void credentialsDeleted();
 
 private:
     bool m_validCredentials;
+    bool m_deletedCredentials;
 };
 
 }

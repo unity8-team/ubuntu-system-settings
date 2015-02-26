@@ -199,6 +199,11 @@ ItemPage {
             credentialsNotification.visible = true;
         }
 
+        onCredentialsDeleted: {
+            credentialsNotification.visible = false;
+            uoaConfig.exec();
+        }
+
         onSystemUpdateDownloaded: {
             root.installAll = false;
         }

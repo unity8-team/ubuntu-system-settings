@@ -13,6 +13,8 @@ void FakeSsoService::getCredentials()
     if(m_validCredentials) {
         Token token("token_key", "token_secret", "consumer_key", "consumer_secret");
         emit this->credentialsFound(token);
+    } else if (m_deletedCredentials) {
+        emit this->credentialsDeleted();
     } else {
         emit this->credentialsNotFound();
     }
