@@ -24,7 +24,6 @@ import Ubuntu.Components.ListItems 0.1 as ListItem
 
 ItemPage {
     id: root
-    title: i18n.tr("Carrier")
     objectName: "carrierApnPage"
     flickable: null
 

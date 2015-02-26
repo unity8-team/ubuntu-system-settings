@@ -240,25 +240,27 @@ class CellularPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
     @autopilot.logging.log_action(logger.debug)
     def set_connection_type(self, radio_type, sim='/ril_0',
                             scroll_to_and_click=None):
-        self._set_connection_type(radio_type, sim, scroll_to_and_click)
+        type_page = self._click_connection_type_entry(scroll_to_and_click)
+        type_page._set_connection_type(radio_type, sim, scroll_to_and_click)
 
     @autopilot.logging.log_action(logger.debug)
-    def _set_connection_type(self, radio_type, sim, scroll_to_and_click):
+    def _click_connection_type_entry(self, scroll_to_and_click):
         t = self.wait_select_single(
-            'OptionSelectorDelegate',
-            objectName='%s_radio_%s' % (sim, radio_type))
+            objectName='connectionTypeEntry')
         if scroll_to_and_click:
             scroll_to_and_click(t)
         else:
             t.swipe_into_view()
 
         self.pointing_device.click_object(t)
+        return self.get_root_instance().wait_select_single(
+            objectName='connectionTypePage')
 
     @autopilot.logging.log_action(logger.debug)
     def change_carrier(self, carrier, sim=None):
-        carrierApnPage = self._click_carrier_apn()
-        chooseCarrierPage = carrierApnPage.open_carrier(sim)
-        chooseCarrierPage.set_carrier(carrier)
+        carrier_apn_page = self._click_carrier_apn()
+        choose_carrier_page = carrier_apn_page.open_carrier(sim)
+        choose_carrier_page.set_carrier(carrier)
 
     @autopilot.logging.log_action(logger.debug)
     def _click_carrier_apn(self):
@@ -335,6 +337,25 @@ class BluetoothPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
                 disconnected_list.select_many('LabelVisual')]
 
 
+class PageChooseConnectionType(
+        ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
+
+    """Autopilot helper for connection type selection page"""
+
+    @autopilot.logging.log_action(logger.debug)
+    def _set_connection_type(self, radio_type, sim, scroll_to_and_click):
+        t = self.wait_select_single(
+            'OptionSelectorDelegate',
+            objectName='%s_radio_%s' % (sim, radio_type))
+        if scroll_to_and_click:
+            scroll_to_and_click(t)
+            return
+        else:
+            t.swipe_into_view()
+
+        self.pointing_device.click_object(t)
+
+
 class PageCarrierAndApn(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
 
     """Autopilot helper for carrier/apn entry page (singlesim)."""
@@ -381,17 +402,17 @@ class PageChooseCarrier(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
         # wait for animation, since page.animationRunning.wait_for(False)
         # does not work?
         sleep(0.5)
-        allOperators = self.select_single(objectName="allOperators")
-        otherOperators = self.select_single(objectName="otherOperators")
+        all_operators = self.select_single(objectName="allOperators")
+        other_operators = self.select_single(objectName="otherOperators")
 
-        if allOperators.visible:
-            opList = allOperators
-        elif otherOperators.visible:
-            opList = otherOperators
+        if all_operators.visible:
+            op_list = all_operators
+        elif other_operators.visible:
+            op_list = other_operators
         else:
             raise Exception("No operator list visible.")
 
-        item = opList.select_single(text=carrier, objectName="carrier")
+        item = op_list.select_single(text=carrier, objectName="carrier")
         self.pointing_device.click_object(item)
 
 

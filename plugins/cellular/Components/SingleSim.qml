@@ -81,25 +81,29 @@ Column {
         visible: showAllUI
     }
 
-    ListItem.Divider {
-        visible: radio.visible
-    }
-
-    RadioSingleSim {
-        id: radio
-        anchors { left: parent.left; right: parent.right }
-        visible: radio.enabled
-    }
-
     ListItem.Divider {}
 
     ListItem.SingleValue {
-        text: i18n.tr("Carrier");
+        text: i18n.tr("Carrier & APN");
         id: chooseCarrier
         objectName: "carrierApnEntry"
         progression: enabled
+        value: sim.netReg.name
         onClicked: pageStack.push(Qt.resolvedUrl("../PageCarrierAndApn.qml"), {
-            sim: sim
+            sim: sim,
+            title: text
         })
+    }
+
+    ListItem.SingleValue {
+        text: i18n.tr("Connection type")
+        objectName: "connectionTypeEntry"
+        progression: enabled
+        value: sim.techToString(sim.radioSettings.technologyPreference)
+        onClicked: {
+            pageStack.push(Qt.resolvedUrl("../PageChooseConnectionType.qml"), {
+                sims: [sim]
+            });
+        }
     }
 }

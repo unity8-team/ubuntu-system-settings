@@ -73,13 +73,27 @@ Column {
     ListItem.Divider {}
 
     ListItem.SingleValue {
-        text: i18n.tr("Carriers")
+        text: i18n.tr("Carriers & APNs")
         id: chooseCarrier
         objectName: "carrierApnEntry"
         progression: enabled
-        showDivider: false
         onClicked: {
             pageStack.push(Qt.resolvedUrl("../PageCarriersAndApns.qml"), {
+                sims: sims,
+                title: text
+            });
+        }
+    }
+
+    ListItem.SingleValue {
+        text: i18n.tr("Connection type")
+        objectName: "connectionTypeEntry"
+        progression: enabled
+        showDivider: false
+        value: poweredSim ? poweredSim.techToString(
+            poweredSim.radioSettings.technologyPreference) : ""
+        onClicked: {
+            pageStack.push(Qt.resolvedUrl("../PageChooseConnectionType.qml"), {
                 sims: sims
             });
         }
@@ -96,68 +110,6 @@ Column {
     DefaultSim {
         anchors { left: parent.left; right: parent.right }
     }
-
-    ListItem.Divider {}
-
-    SettingsItemTitle { text: i18n.tr("Connection type:") }
-
-    Repeater {
-        model: sims
-
-        ListItem.ItemSelector {
-            id: radio
-            property var sim: modelData
-
-            expanded: true
-            text: sim.title
-            model: sim.radioSettings.modemTechnologies
-            delegate: OptionSelectorDelegate {
-                objectName: sim.path + "_radio_" + modelData
-                text: sim.techToString(modelData)
-            }
-            enabled: sim.radioSettings.technologyPreference !== ""
-            selectedIndex: sim.radioSettings.technologyPreference !== "" ?
-                model.indexOf(sim.radioSettings.technologyPreference) : -1
-
-            onDelegateClicked: {
-                if (model[index] === 'umts_enable') {
-                    sim.radioSettings.technologyPreference = 'umts';
-                    umtsModemChanged(sim, poweredSim ? poweredSim.path : "");
-                    sim.mtkSettings.has3G = true;
-                } else {
-                    sim.radioSettings.technologyPreference = model[index];
-                }
-            }
-
-            Connections {
-                target: sim.radioSettings
-                onTechnologyPreferenceChanged: radio.selectedIndex =
-                    sim.radioSettings.modemTechnologies.indexOf(preference)
-
-                onModemTechnologiesChanged: {
-                    if ((technologies.indexOf('umts') === -1)
-                         && (sim.mtkSettings.has3G === false)) {
-                        radio.model = sim.addUmtsEnableToModel(technologies);
-                    } else {
-                        radio.model = technologies;
-                    }
-                    radio.selectedIndex = sim.radioSettings.technologyPreference !== "" ?
-                        model.indexOf(sim.radioSettings.technologyPreference) : -1
-                }
-                ignoreUnknownSignals: true
-            }
-
-            Component.onCompleted: {
-                if ((sim.radioSettings.modemTechnologies.indexOf('umts') === -1)
-                     && (sim.mtkSettings.has3G === false)) {
-                    radio.model = sim.addUmtsEnableToModel(sim.radioSettings.modemTechnologies);
-                } else {
-                    radio.model = sim.radioSettings.modemTechnologies;
-                }
-            }
-        }
-    }
-
 
     GSettings {
         id: phoneSettings

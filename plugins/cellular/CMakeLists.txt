@@ -8,6 +8,7 @@ set(QML_SOURCES
     CustomApnEditor.qml
     PageChooseApn.qml
     PageChooseCarrier.qml
+    PageChooseConnectionType.qml
     PageCarrierAndApn.qml
     PageCarriersAndApns.qml
     PageComponent.qml
