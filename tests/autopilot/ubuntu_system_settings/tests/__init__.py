@@ -63,6 +63,9 @@ NM_AC_CON_IFACE = 'org.freedesktop.NetworkManager.Connection.Active'
 CON_SERVICE = 'com.ubuntu.connectivity1'
 CON_PATH = '/com/ubuntu/connectivity1/Private'
 CON_IFACE = 'com.ubuntu.connectivity1.Private'
+CON_SERVICE = 'com.ubuntu.connectivity1'
+CON_PATH = '/com/ubuntu/connectivity1/Private'
+CON_IFACE = 'com.ubuntu.connectivity1.Private'
 UPOWER_VERSION = str(UPowerGlib.MAJOR_VERSION)
 UPOWER_VERSION += '.' + str(UPowerGlib.MINOR_VERSION)
 
@@ -385,6 +388,26 @@ class CellularBaseTestCase(UbuntuSystemSettingsOfonoTestCase):
         """ Go to Cellular page """
         super(CellularBaseTestCase, self).setUp()
         self.cellular_page = self.main_view.go_to_cellular_page()
+
+
+class HotspotBaseTestCase(CellularBaseTestCase):
+
+    def setUp(self):
+        template = os.path.join(os.path.dirname(__file__), 'networkmanager.py')
+        (self.nm_mock, self.obj_nm) = self.spawn_server_template(
+            template, stdout=subprocess.PIPE)
+        self.nm_mock = dbus.Interface(self.obj_nm, dbusmock.MOCK_IFACE)
+
+        device_path = self.obj_nm.AddWiFiDevice('test0', 'Barbaz', 1)
+        self.device_mock = dbus.Interface(self.dbus_con.get_object(
+            NM_SERVICE, device_path),
+            dbusmock.MOCK_IFACE)
+
+        (self.urfkill_mock, self.obj_urf) = self.spawn_server_template(
+            'urfkill', stdout=subprocess.PIPE)
+        self.urfkill_mock = dbus.Interface(self.obj_urf, dbusmock.MOCK_IFACE)
+
+        super(HotspotBaseTestCase, self).setUp()
 
 
 class BluetoothBaseTestCase(UbuntuSystemSettingsTestCase):

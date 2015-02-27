@@ -13,7 +13,8 @@ from autopilot.matchers import Eventually
 from testtools.matchers import Equals, raises, StartsWith
 
 from ubuntu_system_settings.tests import (
-    CellularBaseTestCase, CONNMAN_IFACE, RDO_IFACE, NETREG_IFACE)
+    CellularBaseTestCase, HotspotBaseTestCase,
+    CONNMAN_IFACE, RDO_IFACE, NETREG_IFACE)
 
 
 class CellularTestCase(CellularBaseTestCase):
@@ -288,3 +289,15 @@ class DualSimCellularTestCase(CellularBaseTestCase):
             lambda:
                 gsettings.get_value('default-sim-for-messages').get_string(),
             Eventually(Equals('/ril_1')))
+
+
+class HotspotTestCase(HotspotBaseTestCase):
+
+    def test_foo(self):
+        # print(self.device_mock.GetCalls())
+        # print(self.nm_mock.GetCalls())
+        self.cellular_page.enable_hotspot()
+        self.cellular_page.disable_hotspot()
+        self.cellular_page.enable_hotspot()
+        # sleep(4)
+        self.assertFalse(True)

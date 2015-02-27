@@ -40,9 +40,20 @@ const QString nm_connection_interface("org.freedesktop.NetworkManager.Settings.C
 const QString nm_dbus_path("/org/freedesktop/NetworkManager");
 const QString nm_device_interface("org.freedesktop.NetworkManager.Device");
 
+const QString wpas_service("fi.w1.wpa_supplicant1");
+const QString wpas_interface("fi.w1.wpa_supplicant1");
+const QString wpas_path("/fi/w1/wpa_supplicant1");
+
+const QString urfkill_service("org.freedesktop.URfkill");
+const QString urfkill_interface("org.freedesktop.URfkill");
+const QString urfkill_path("/org/freedesktop/URfkill");
+
+const QByteArray default_ap_name("Ubuntu Wi-Fi");
+
 #define NM_METHOD_NAME "AddAndActivateConnection"
 
-void startAdhoc(const QByteArray &ssid, const QString &password, const QDBusObjectPath &devicePath) {
+void startHotspot(const QByteArray &ssid, const QString &password, const QDBusObjectPath &devicePath, HotspotMode mode) {
+
     nmConnectionArg connection;
 
     QDBusObjectPath specific("/");
@@ -50,7 +61,16 @@ void startAdhoc(const QByteArray &ssid, const QString &password, const QDBusObje
     QVariantMap wireless;
     wireless[QStringLiteral("security")] = QVariant(QStringLiteral("802-11-wireless-security"));
     wireless[QStringLiteral("ssid")] = QVariant(ssid);
-    wireless[QStringLiteral("mode")] = QVariant(QStringLiteral("adhoc"));
+
+    if (mode == HotspotMode::Adhoc) {
+        wireless[QStringLiteral("mode")] = QVariant(QStringLiteral("adhoc"));
+    } else if (mode == HotspotMode::Ap) {
+        wireless[QStringLiteral("mode")] = QVariant(QStringLiteral("ap"));
+    } else {
+        qWarning() << "Not supported.";
+        return;
+    }
+
     connection["802-11-wireless"] = wireless;
 
     QVariantMap connsettings;
@@ -80,13 +100,40 @@ void startAdhoc(const QByteArray &ssid, const QString &password, const QDBusObje
     auto reply = mgr.AddAndActivateConnection(connection, devicePath, specific);
     reply.waitForFinished();
     if(!reply.isValid()) {
-        qWarning() << "Failed to start adhoc network: " << reply.error().message() << "\n";
+        qWarning() << "Failed to start hotspot: " << reply.error().message() << "\n";
     }
+
 }
 
-bool detectAdhoc(QString &dbusPath, QByteArray &ssid, QString &password, bool &isActive) {
+
+void startAdhoc(const QByteArray &ssid, const QString &password, const QDBusObjectPath &devicePath) {
+    startHotspot(ssid, password, devicePath, HotspotMode::Adhoc);
+}
+
+void startAp(const QByteArray &ssid, const QString &password, const QDBusObjectPath &devicePath) {
+    startHotspot(ssid, password, devicePath, HotspotMode::Ap);
+}
+
+bool detectHotspot(QString &dbusPath, QByteArray &ssid, QString &password, bool &isActive, HotspotMode mode) {
+    qWarning() << "Detecting hotspot Step 0";
     static const QString activeIface("org.freedesktop.NetworkManager.Connection.Active");
     static const QString connProp("Connection");
+    QByteArray hotspotMode("");
+
+
+    if (mode == HotspotMode::Adhoc) {
+        hotspotMode.clear();
+        hotspotMode.append("adhoc");
+    } else if (mode == HotspotMode::Ap) {
+        hotspotMode.clear();
+        hotspotMode.append("ap");
+    } else {
+        // not supported
+        qWarning() << "Not supported.";
+        return false;
+    }
+    qWarning() << "Detecting hotspot Step 1: mode" << hotspotMode;
+
     OrgFreedesktopNetworkManagerInterface mgr(nm_service,
             nm_dbus_path,
             QDBusConnection::systemBus());
@@ -101,14 +148,19 @@ bool detectAdhoc(QString &dbusPath, QByteArray &ssid, QString &password, bool &i
                 QDBusConnection::systemBus());
         QDBusReply<QVariant> conname = iface.call("Get", activeIface, connProp);
         if(!conname.isValid()) {
-            qWarning() << "Error getting connamd: " << conname.error().message() << "\n";
+            qWarning() << "Error getting conname: " << conname.error().message() << "\n";
             continue;
         }
-        QDBusObjectPath mainConnection = qvariant_cast<QDBusObjectPath>(conname.value());
+        // QDBusObjectPath mainConnection = qvariant_cast<QDBusObjectPath>(conname.value());
+        QDBusObjectPath mainConnection = QDBusObjectPath(conname.value().toString());
+        qWarning() << "Adding to actives" << QDBusObjectPath(conname.value().toString()).path();
         actives.insert(mainConnection);
     }
     const char wifiKey[] = "802-11-wireless";
+    qWarning() << "Detecting hotspot Step 2: activeConnection size" << actives.size(), r.value();
+
     for(const auto &i : r.value()) {
+        qWarning() << "Detecting hotspot Step 2.1, checking" << i.path();
         OrgFreedesktopNetworkManagerSettingsConnectionInterface conn(nm_service,
                 i.path(),
                 QDBusConnection::systemBus());
@@ -116,8 +168,11 @@ bool detectAdhoc(QString &dbusPath, QByteArray &ssid, QString &password, bool &i
         reply.waitForFinished();
         auto s = reply.value();
         if(s.find(wifiKey) != s.end()) {
+            qWarning() << "Detecting hotspot Step 3: found wifi key";
             auto wsetup = s[wifiKey];
-            if(wsetup["mode"] == "adhoc") {
+            qWarning() << "Detecting hotspot Step 4: hotspotMode" << wsetup["mode"];
+            if(wsetup["mode"] == hotspotMode) {
+                qWarning() << "Detecting hotspot Step 5: found our hotspot";
                 dbusPath = i.path();
                 ssid = wsetup["ssid"].toByteArray();
                 auto pwdReply = conn.GetSecrets("802-11-wireless-security");
@@ -125,8 +180,10 @@ bool detectAdhoc(QString &dbusPath, QByteArray &ssid, QString &password, bool &i
                 password = pwdReply.value()["802-11-wireless-security"]["psk"].toString();
                 isActive = false;
                 for(const auto &ac : actives) {
+                    qWarning() << "Checking" << ac.path() << "against" << i.path();
                     if(i == ac) {
                         isActive = true;
+                        qWarning() << "Detecting hotspot Step 6: hotspot is also active";
                         break;
                     }
                 }
@@ -134,26 +191,46 @@ bool detectAdhoc(QString &dbusPath, QByteArray &ssid, QString &password, bool &i
             }
         }
     }
+    qWarning() << "Detecting hotspot Step 5: hotspot is not active";
     return false;
+
 }
+
+bool detectAdhoc(QString &dbusPath, QByteArray &ssid, QString &password, bool &isActive) {
+    return detectHotspot(dbusPath, ssid, password, isActive, HotspotMode::Adhoc);
+}
+
+bool detectAp(QString &dbusPath, QByteArray &ssid, QString &password, bool &isActive) {
+    return detectHotspot(dbusPath, ssid, password, isActive, HotspotMode::Ap);
+}
+
 
 QDBusObjectPath detectWirelessDevice() {
     OrgFreedesktopNetworkManagerInterface mgr(nm_service,
             nm_dbus_path,
             QDBusConnection::systemBus());
-    auto devices = mgr.GetDevices();
-    devices.waitForFinished();
-    for(const auto &dpath : devices.value()) {
-        QDBusInterface iface(nm_service, dpath.path(), "org.freedesktop.DBus.Properties",
-                QDBusConnection::systemBus());
-        QDBusReply<QVariant> typeReply = iface.call("Get", "org.freedesktop.NetworkManager.Device", "DeviceType");
-        auto typeInt = qvariant_cast<int>(typeReply.value());
-        if(typeInt == 2) {
-            return dpath; // Assumptions are that there is only one wifi device and it is not hotpluggable.
+    // find the first wlan adapter for now
+    auto reply1 = mgr.GetDevices();
+    reply1.waitForFinished();
+    if(!reply1.isValid()) {
+        qWarning() << "Could not get network device: " << reply1.error().message() << "\n";
+        return QDBusObjectPath();
+    }
+    auto devices = reply1.value();
+
+    QDBusObjectPath dev;
+    for (const auto &d : devices) {
+        QDBusInterface iface(nm_service, d.path(),
+            nm_device_interface,
+            QDBusConnection::systemBus());
+        auto type_v = iface.property("DeviceType");
+        if (type_v.toUInt() == 2 /* NM_DEVICE_TYPE_WIFI */) {
+            return d;
         }
     }
+
     qWarning() << "Wireless device not found, hotspot functionality is inoperative.\n";
-    return QDBusObjectPath();
+    return dev;
 }
 
 std::string generate_password() {
@@ -175,12 +252,32 @@ HotspotManager::HotspotManager(QObject *parent) : QObject(parent),
         qDBusRegisterMetaType<nmConnectionArg>();
         isRegistered = true;
     }
-    if(!detectAdhoc(m_settingsPath, m_ssid, m_password, m_isActive)) {
+
+    bool adhocActive = detectAdhoc(m_settingsPath, m_ssid, m_password, m_isActive);
+    bool apActive = detectAp(m_settingsPath, m_ssid, m_password, m_isActive);
+
+    if(!adhocActive && !apActive) {
+        qWarning() << "HotspotManager: No hotspots active";
         m_settingsPath = "";
-        m_ssid = "Ubuntu hotspot";
+        m_ssid = default_ap_name;
         m_password = generate_password().c_str();
         m_isActive = false;
+        m_mode = HotspotMode::Ap;
     }
+
+    OrgFreedesktopNetworkManagerSettingsInterface settings(nm_service, nm_settings_object,
+            QDBusConnection::systemBus());
+    settings.connection().connect(
+        settings.service(),
+        "/",
+        nm_settings_interface,
+        "NewConnection",
+        this,
+        SLOT(newConnection(QDBusObjectPath)));
+}
+
+void HotspotManager::newConnection(QDBusObjectPath path) {
+    qWarning() << "Saw new connection" << path.path();
 }
 
 QByteArray HotspotManager::getHotspotName() {
@@ -191,12 +288,35 @@ QString HotspotManager::getHotspotPassword() {
     return m_password;
 }
 
-void HotspotManager::setupHotspot(QByteArray ssid_, QString password_) {
+void HotspotManager::setupHotspot(QByteArray ssid_, QString password_, HotspotMode mode) {
     m_ssid = ssid_;
     m_password = password_;
+    m_mode = mode;
 }
 
 void HotspotManager::enableHotspot() {
+    setWifiBlock(true);
+    switch(m_mode) {
+        case HotspotMode::Unknown:
+            qWarning() << "Cannot provision unknown type hotspot.";
+            break;
+        case HotspotMode::Adhoc:
+            qWarning() << "Enabling adhoc hotspot.";
+            enableAdhocHotspot();
+            break;
+        case HotspotMode::Ap:
+            qWarning() << "Enabling ap hotspot.";
+
+            enableApHotspot();
+            break;
+        case HotspotMode::Infra:
+            qWarning() << "Not implemented";
+            break;
+    }
+    setWifiBlock(false);
+}
+
+void HotspotManager::enableAdhocHotspot() {
     if(!m_settingsPath.isEmpty()) {
         // Prints a warning message if the connection has disappeared already.
         destroyHotspot();
@@ -209,7 +329,23 @@ void HotspotManager::enableHotspot() {
     detectAdhoc(m_settingsPath, m_ssid, m_password, m_isActive);
 }
 
+void HotspotManager::enableApHotspot() {
+    if(!m_settingsPath.isEmpty()) {
+        qWarning() << "enableApHotspot m_settingsPath" << m_settingsPath;
+        // Prints a warning message if the connection has disappeared already.
+        destroyHotspot();
+        // NM returns from the dbus call immediately but only destroys the
+        // connection some time later. There is no callback for when this happens.
+        // So this is the best we can do with reasonable effort.
+        QThread::sleep(1);
+    }
+    setupWpas();
+    startAp(m_ssid, m_password, m_devicePath);
+    detectAp(m_settingsPath, m_ssid, m_password, m_isActive);
+}
+
 bool HotspotManager::isHotspotActive() {
+    qWarning() << "isHotspotActive" << m_isActive;
     return m_isActive;
 }
 
@@ -224,8 +360,10 @@ void HotspotManager::disableHotspot() {
         QDBusInterface iface(nm_service, aConn.path(), "org.freedesktop.DBus.Properties",
                 QDBusConnection::systemBus());
         QDBusReply<QVariant> conname = iface.call("Get", activeIface, connProp);
-        QDBusObjectPath backingConnection = qvariant_cast<QDBusObjectPath>(conname.value());
+        // QDBusObjectPath backingConnection = qvariant_cast<QDBusObjectPath>(conname.value());
+        QDBusObjectPath backingConnection = QDBusObjectPath(conname.value().toString());
         if(backingConnection.path() == m_settingsPath) {
+            qWarning() << "DeactivateConnection" << m_settingsPath;
             mgr.DeactivateConnection(aConn);
             return;
         }
@@ -234,6 +372,7 @@ void HotspotManager::disableHotspot() {
 }
 
 void HotspotManager::destroyHotspot() {
+    qWarning() << "destroyHotspot.\n";
     if(m_settingsPath.isEmpty()) {
         qWarning() << "Tried to destroy nonexisting hotspot.\n";
         return;
@@ -242,8 +381,52 @@ void HotspotManager::destroyHotspot() {
             QDBusConnection::systemBus());
     QDBusReply<void> reply = control.call("Delete");
     if(!reply.isValid()) {
-        qWarning() << "Could not disconnect adhoc network: " << reply.error().message() << "\n";
+        qWarning() << "Could not disconnect network: " << reply.error().message() << "\n";
     } else {
         m_isActive = false;
+    }
+}
+
+void HotspotManager::setupWpas() {
+    QString program("getprop");
+    QStringList arguments;
+    arguments << "urfkill.hybris.wlan";
+    QProcess *getprop = new QProcess(this);
+    getprop->start(program, arguments);
+
+    if (!getprop->waitForFinished())
+        qWarning() << "Failed to get prop:" << getprop->errorString();
+
+    if (getprop->readAllStandardOutput().indexOf("1") >= 0) {
+        qWarning() << "Had to slap wpas";
+        QDBusInterface wpasIface (
+            wpas_service,
+            wpas_path,
+            wpas_interface,
+            QDBusConnection::systemBus(),
+            this);
+
+        auto reply = wpasIface.call("SetInterfaceFirmware", "/", "ap");
+        if (reply.type() == QDBusMessage::ErrorMessage) {
+            qWarning() << "Failed to slap wpas" << reply.errorMessage();
+        }
+    } else {
+        qWarning() << "No need to slap wpas";
+    }
+
+}
+
+void HotspotManager::setWifiBlock(bool block) {
+
+    QDBusInterface urfkillIface (
+        urfkill_service,
+        urfkill_path,
+        urfkill_interface,
+        QDBusConnection::systemBus(),
+        this);
+
+    auto reply = urfkillIface.call("Block", 1, block);
+    if (reply.type() == QDBusMessage::ErrorMessage) {
+        qWarning() << "Failed to block wifi" << reply.errorMessage();
     }
 }

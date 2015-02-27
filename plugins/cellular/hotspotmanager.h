@@ -26,6 +26,15 @@
  * For exposing dbus data to Qml.
  */
 
+// NM 802.11 Mode
+enum class HotspotMode
+{
+    Unknown,
+    Adhoc,
+    Infra,
+    Ap
+};
+
 class HotspotManager : public QObject {
     Q_OBJECT
 
@@ -35,18 +44,28 @@ public:
 
     Q_INVOKABLE QByteArray getHotspotName();
     Q_INVOKABLE QString getHotspotPassword();
-    Q_INVOKABLE void setupHotspot(QByteArray ssid, QString password);
+    Q_INVOKABLE void setupHotspot(QByteArray ssid, QString password, HotspotMode mode = HotspotMode::Ap);
     Q_INVOKABLE bool isHotspotActive();
     Q_INVOKABLE void enableHotspot();
     Q_INVOKABLE void disableHotspot();
     void destroyHotspot();
 
+public Q_SLOTS:
+    void newConnection(QDBusObjectPath);
+
 private:
     QByteArray m_ssid;
     QString m_password;
     QString m_settingsPath;
+    HotspotMode m_mode;
     QDBusObjectPath m_devicePath;
     bool m_isActive;
+
+    void enableAdhocHotspot();
+    void enableApHotspot();
+
+    void setWifiBlock(bool block);
+    void setupWpas();
 };
 
 

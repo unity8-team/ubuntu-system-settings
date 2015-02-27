@@ -306,6 +306,58 @@ class CellularPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
         field.write(name)
         self.pointing_device.click_object(ok)
 
+    @autopilot.logging.log_action(logger.debug)
+    def enable_hotspot(self):
+        hotspot_page = self._enter_hotspot()
+        hotspot_page.enable_hotspot()
+
+    @autopilot.logging.log_action(logger.debug)
+    def disable_hotspot(self):
+        hotspot_page = self._enter_hotspot()
+        hotspot_page.disable_hotspot()
+
+    @autopilot.logging.log_action(logger.debug)
+    def _enter_hotspot(self):
+        obj = self.select_single(objectName="hotspotEntry")
+        self.pointing_device.click_object(obj)
+        return self.get_root_instance().wait_select_single(
+            objectName='hotspotPage')
+
+
+class Hotspot(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
+
+    """Autopilot helper for Hotspot page."""
+
+    @classmethod
+    def validate_dbus_object(cls, path, state):
+        name = introspection.get_classname_from_path(path)
+        if name == b'ItemPage':
+            if state['objectName'][1] == 'hotspotPage':
+                return True
+        return False
+
+    @property
+    def _switch(self):
+        return self.wait_select_single(
+            ubuntuuitoolkit.CheckBox,
+            objectName='hotspotSwitch')
+
+    @autopilot.logging.log_action(logger.debug)
+    def enable_hotspot(self):
+        self._switch.check()
+
+    @autopilot.logging.log_action(logger.debug)
+    def disable_hotspot(self):
+        self._switch.uncheck()
+
+    @autopilot.logging.log_action(logger.debug)
+    def setup_hotspot(self, config):
+        pass
+
+    @autopilot.logging.log_action(logger.debug)
+    def get_hotspot_status(self):
+        pass
+
 
 class BluetoothPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
 

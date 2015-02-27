@@ -25,6 +25,7 @@ import Ubuntu.SystemSettings.Cellular 1.0
 ItemPage {
 
     id: hotspot
+    objectName: "hotspotPage"
 
     title: i18n.tr("Wi-Fi hotspot")
 
@@ -40,6 +41,7 @@ ItemPage {
             text: i18n.tr("Hotspot")
             control: Switch {
                 id: hotspotSwitch
+                objectName: "hotspotSwitch"
                 checked: hotspotManager.isHotspotActive()
                 onTriggered: {
                     if(checked) {
@@ -58,7 +60,7 @@ ItemPage {
             anchors.rightMargin: units.gu(2)
             text : hotspotSwitch.enabled ?
               i18n.tr("When hotspot is on, other devices can use your cellular data connection over Wi-Fi. Normal data charges apply.")
-              : i18n.tr("Other devices can use your cellular data connection over the Wi-Fi network. Normal data charges apply.") 
+              : i18n.tr("Other devices can use your cellular data connection over the Wi-Fi network. Normal data charges apply.")
         }
 
         Button {
