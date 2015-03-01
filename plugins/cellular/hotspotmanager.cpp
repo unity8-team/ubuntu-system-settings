@@ -94,10 +94,10 @@ void startHotspot(const QByteArray &ssid, const QString &password, const QDBusOb
     security[QStringLiteral("psk")] = QVariant(password);
     connection["802-11-wireless-security"] = security;
 
-    OrgFreedesktopNetworkManagerInterface mgr(nm_service,
-            nm_dbus_path,
+
+    OrgFreedesktopNetworkManagerSettingsInterface settings(nm_service, nm_settings_object,
             QDBusConnection::systemBus());
-    auto reply = mgr.AddAndActivateConnection(connection, devicePath, specific);
+    auto reply = settings.AddConnection(connection);
     reply.waitForFinished();
     if(!reply.isValid()) {
         qWarning() << "Failed to start hotspot: " << reply.error().message() << "\n";

@@ -297,9 +297,9 @@ class HotspotTestCase(HotspotBaseTestCase):
         # print(self.device_mock.GetCalls())
         # print(self.nm_mock.GetCalls())
         self.cellular_page.enable_hotspot()
-        self.cellular_page.disable_hotspot()
-        self.cellular_page.enable_hotspot()
+        # self.cellular_page.disable_hotspot()
+        # self.cellular_page.enable_hotspot()
         # sleep(4)
-        target_block_calls = 4
+        target_block_calls = 5
         block_calls = len(self.urfkill_mock.GetMethodCalls('Block'))
         self.assertEqual(target_block_calls, block_calls)

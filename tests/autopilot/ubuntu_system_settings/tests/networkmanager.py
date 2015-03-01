@@ -106,7 +106,9 @@ def load(mock, parameters):
         ('ListConnections', '', 'ao',
             "ret = self.Get('%s', 'Connections')" % SETTINGS_IFACE),
         ('GetConnectionByUuid', 's', 'o', ''),
-        ('AddConnection', 'a{sa{sv}}', 'o', ''),
+        (
+            'AddConnection', 'a{sa{sv}}', 'o',
+            'ret = self.SAddConnection(args[0])'),
         ('SaveHostname', 's', '', '')]
     mock.AddObject(SETTINGS_OBJ,
                    SETTINGS_IFACE,
@@ -263,18 +265,6 @@ def AddAccessPoint(self, dev_path, ap_name, ssid, hw_address,
 @dbus.service.method(MOCK_IFACE,
                      in_signature='ssss', out_signature='s')
 def AddWiFiConnection(self, dev_path, connection_name, ssid_name, key_mgmt):
-    dev_obj = dbusmock.get_object(dev_path)
-    connection_path = SETTINGS_OBJ + '/' + connection_name
-    connections = dev_obj.Get(DEVICE_IFACE, 'AvailableConnections')
-
-    settings_obj = dbusmock.get_object(SETTINGS_OBJ)
-    main_connections = settings_obj.ListConnections()
-
-    if connection_path in connections or connection_path in main_connections:
-        raise dbus.exceptions.DBusException(
-            MAIN_IFACE + '.AlreadyExists',
-            'Connection %s on device %s already exists' % (
-                connection_name, dev_path))
 
     settings = dbus.Dictionary({
         '802-11-wireless': {
@@ -295,29 +285,10 @@ def AddWiFiConnection(self, dev_path, connection_name, ssid_name, key_mgmt):
             'auth-alg': 'open'
         }
     }, signature='sa{sv}')
+    connection_path = self.AddCon(connection_name, settings)
 
-    self.AddObject(
-        connection_path, CSETTINGS_IFACE,
-        {
-            'Settings': settings,
-            'Secrets': dbus.Dictionary({}, signature='sa{sv}'),
-        },
-        [
-            ('Delete', '', '', 'self.DeleteConnection(self)'),
-            (
-                'GetSettings', '', 'a{sa{sv}}',
-                "ret = self.Get('%s', 'Settings')" % CSETTINGS_IFACE),
-            (
-                'GetSecrets', 's', 'a{sa{sv}}',
-                "ret = self.Get('%s', 'Secrets')" % CSETTINGS_IFACE),
-            (
-                'Update', 'a{sa{sv}}', '',
-                "self.Set('%s', 'Settings', args[0])" % CSETTINGS_IFACE), ])
-    connections.append(dbus.ObjectPath(connection_path))
-    dev_obj.Set(DEVICE_IFACE, 'AvailableConnections', connections)
-
-    main_connections.append(connection_path)
-    settings_obj.Set(SETTINGS_IFACE, 'Connections', main_connections)
+    dev_obj = dbusmock.get_object(dev_path)
+    dev_obj.AddConnectionToDevice(connection_path)
     return connection_path
 
 
@@ -360,16 +331,32 @@ def DeactivateCon(mock, active_connection):
     mock.RemoveObject(active_connection)
 
 
+@dbus.service.method(SETTINGS_IFACE,
+                     in_signature='o', out_signature='')
+def DeleteConnection(self, connection_path):
+    main_connections = self.ListConnections()
+    main_connections.remove(connection_path)
+    self.Set(SETTINGS_IFACE, 'Connections', main_connections)
+
+
+@dbus.service.method(SETTINGS_IFACE,
+                     in_signature='a{sa{sv}}', out_signature='')
+def SAddConnection(self, connection):
+    mock = dbusmock.get_object(MAIN_OBJ)
+    new_con = mock.AddCon('', connection)
+    con_obj = dbusmock.get_object(str(new_con))
+    con_obj.Update(connection)
+    return dbus.ObjectPath(new_con)
+
+
 @dbus.service.method(CSETTINGS_IFACE,
                      in_signature='o', out_signature='')
-def DeleteConnection(self, connection):
-    syslog.syslog("DeleteConnection" + connection.path)
+def DeleteCon(self, connection):
+    syslog.syslog("DeleteCon" + connection.path)
 
     # Delete from settings
     settings_obj = dbusmock.get_object(SETTINGS_OBJ)
-    main_connections = settings_obj.ListConnections()
-    main_connections.remove(connection.path)
-    settings_obj.Set(SETTINGS_IFACE, 'Connections', main_connections)
+    settings_obj.DeleteConnection(connection.path)
 
     # Remove from NetworkManager
     mock = dbusmock.get_object(MAIN_OBJ)
@@ -379,6 +366,125 @@ def DeleteConnection(self, connection):
     devices = mock.GetDevices()
     for device in devices:
         dev = dbusmock.get_object(device)
-        dev_cons = dev.Get(DEVICE_IFACE, 'AvailableConnections')
-        dev_cons.remove(connection.path)
-        dev_cons = dev.Set(DEVICE_IFACE, 'AvailableConnections', dev_cons)
+        dev.RemoveConnection(connection.path)
+
+
+@dbus.service.method(MOCK_IFACE,
+                     in_signature='sa{sa{sv}}', out_signature='o')
+def AddCon(self, connection_name, settings):
+    settings_obj = dbusmock.get_object(SETTINGS_OBJ)
+    main_connections = settings_obj.ListConnections()
+
+    if connection_name == '':
+        connection_name = 'mock' + str(len(main_connections))
+    connection_path = SETTINGS_OBJ + '/' + connection_name
+
+    if connection_path in main_connections:
+        msg = 'Connection %s already exists' % connection_path
+        raise dbus.exceptions.DBusException(
+            MAIN_IFACE + '.AlreadyExists', msg)
+
+    self.AddObject(
+        connection_path, CSETTINGS_IFACE,
+        {
+            'Settings': settings,
+            'Secrets': dbus.Dictionary({}, signature='sa{sv}'),
+        },
+        [
+            ('Delete', '', '', 'self.DeleteCon(self)'),
+            (
+                'GetSettings', '', 'a{sa{sv}}',
+                "ret = self.Get('%s', 'Settings')" % CSETTINGS_IFACE),
+            (
+                'GetSecrets', 's', 'a{sa{sv}}',
+                "ret = self.Get('%s', 'Secrets')" % CSETTINGS_IFACE),
+            (
+                'Update', 'a{sa{sv}}', '',
+                "self.Set('%s', 'Settings', args[0])" % CSETTINGS_IFACE), ])
+
+    main_connections.append(connection_path)
+    settings_obj.Set(SETTINGS_IFACE, 'Connections', main_connections)
+    return dbus.ObjectPath(connection_path)
+
+
+@dbus.service.method(DEVICE_IFACE,
+                     in_signature='o', out_signature='')
+def AddConnectionToDevice(self, connection_path):
+    connections = self.Get(DEVICE_IFACE, 'AvailableConnections')
+
+    if connection_path in connections:
+        raise dbus.exceptions.DBusException(
+            MAIN_IFACE + '.AlreadyExists',
+            'Connection %s on device %s already exists' % (
+                connection_path, self.path))
+
+    connections.append(connection_path)
+    self.Set(DEVICE_IFACE, 'AvailableConnections', connections)
+
+
+@dbus.service.method(DEVICE_IFACE,
+                     in_signature='o', out_signature='')
+def RemoveConnection(self, connection_path):
+    connections = self.Get(DEVICE_IFACE, 'AvailableConnections')
+    connections.remove(dbus.ObjectPath(connection_path))
+    self.Set(DEVICE_IFACE, 'AvailableConnections', connections)
+
+
+# def add_connection(connection_name, ssid_name, key_mgmt, dev_path=None):
+
+
+#     if dev_path:
+#         dev_obj = dbusmock.get_object(dev_path)
+#         connections = dev_obj.Get(DEVICE_IFACE, 'AvailableConnections')
+
+#     if connection_path in connections or connection_path in main_connections:
+#         msg = 'Connection %s already exists' % connection_name
+#         if dev_path:
+#             msg += ' on %s' % dev_path
+
+#         raise dbus.exceptions.DBusException(
+#             MAIN_IFACE + '.AlreadyExists', msg)
+
+#     settings = dbus.Dictionary({
+#         '802-11-wireless': {
+#             'security': '802-11-wireless-security',
+#             'seen-bssids': ['11:22:33:44:55:66'],
+#             'ssid': dbus.ByteArray(ssid_name.encode()),
+#             'mac-address': dbus.ByteArray(b'\x11\x22\x33\x44\x55\x66'),
+#             'mode': "infrastructure"
+#         },
+#         'connection': {
+#             'timestamp': dbus.UInt64(1374828522),
+#             'type': '802-11-wireless',
+#             'id': ssid_name,
+#             'uuid': '68bdc83e-035c-491c-9fb9-b6c65e823689'
+#         },
+#         '802-11-wireless-security': {
+#             'key-mgmt': key_mgmt,
+#             'auth-alg': 'open'
+#         }
+#     }, signature='sa{sv}')
+
+#     self.AddObject(
+#         connection_path, CSETTINGS_IFACE,
+#         {
+#             'Settings': settings,
+#             'Secrets': dbus.Dictionary({}, signature='sa{sv}'),
+#         },
+#         [
+#             ('Delete', '', '', 'self.DeleteCon(self)'),
+#             (
+#                 'GetSettings', '', 'a{sa{sv}}',
+#                 "ret = self.Get('%s', 'Settings')" % CSETTINGS_IFACE),
+#             (
+#                 'GetSecrets', 's', 'a{sa{sv}}',
+#                 "ret = self.Get('%s', 'Secrets')" % CSETTINGS_IFACE),
+#             (
+#                 'Update', 'a{sa{sv}}', '',
+#                 "self.Set('%s', 'Settings', args[0])" % CSETTINGS_IFACE), ])
+
+#     connections.append(dbus.ObjectPath(connection_path))
+#     dev_obj.Set(DEVICE_IFACE, 'AvailableConnections', connections)
+
+#     main_connections.append(connection_path)
+#     settings_obj.Set(SETTINGS_IFACE, 'Connections', main_connections)
