@@ -253,6 +253,9 @@ HotspotManager::HotspotManager(QObject *parent) : QObject(parent),
         isRegistered = true;
     }
 
+    // Default mode is Ap.
+    m_mode = HotspotMode::Ap;
+
     bool adhocActive = detectAdhoc(m_settingsPath, m_ssid, m_password, m_isActive);
     bool apActive = detectAp(m_settingsPath, m_ssid, m_password, m_isActive);
 
@@ -262,7 +265,6 @@ HotspotManager::HotspotManager(QObject *parent) : QObject(parent),
         m_ssid = default_ap_name;
         m_password = generate_password().c_str();
         m_isActive = false;
-        m_mode = HotspotMode::Ap;
     }
 
     OrgFreedesktopNetworkManagerSettingsInterface settings(nm_service, nm_settings_object,
@@ -295,6 +297,7 @@ void HotspotManager::setupHotspot(QByteArray ssid_, QString password_, HotspotMo
 }
 
 void HotspotManager::enableHotspot() {
+    qWarning() << "enableHotspot: blocking wifi...";
     setWifiBlock(true);
     switch(m_mode) {
         case HotspotMode::Unknown:
@@ -313,6 +316,7 @@ void HotspotManager::enableHotspot() {
             qWarning() << "Not implemented";
             break;
     }
+    qWarning() << "enableHotspot: unblocking wifi...";
     setWifiBlock(false);
 }
 

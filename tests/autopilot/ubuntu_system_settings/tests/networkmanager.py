@@ -58,8 +58,6 @@ class DeviceState:
 
 
 def load(mock, parameters):
-    mock.AddAndActivateConnection = AddAndActivateConnection
-    mock.DeactivateConnection = DeactivateConnection
 
     mock.AddMethods(MAIN_IFACE, [
         ('GetDevices', '', 'ao',
@@ -69,10 +67,10 @@ def load(mock, parameters):
         ('ActivateConnection', 'ooo', 'o', "ret = args[0]"),
         (
             'DeactivateConnection', 'o', '',
-            "self.DeactivateConnection(self, args[0])"),
+            "self.DeactivateCon(args[0])"),
         (
             'AddAndActivateConnection', 'a{sa{sv}}oo', 'oo',
-            "ret = self.AddAndActivateConnection(self,\
+            "ret = self.AddActivateConnection(\
                 args[0], args[1], args[2])")
     ])
 
@@ -315,8 +313,6 @@ def AddWiFiConnection(self, dev_path, connection_name, ssid_name, key_mgmt):
             (
                 'Update', 'a{sa{sv}}', '',
                 "self.Set('%s', 'Settings', args[0])" % CSETTINGS_IFACE), ])
-    con = dbusmock.get_object(connection_path)
-    con.DeleteConnection = DeleteConnection
     connections.append(dbus.ObjectPath(connection_path))
     dev_obj.Set(DEVICE_IFACE, 'AvailableConnections', connections)
 
@@ -325,40 +321,38 @@ def AddWiFiConnection(self, dev_path, connection_name, ssid_name, key_mgmt):
     return connection_path
 
 
-# TODO: MAKE SERVICE METHOD
-def AddAndActivateConnection(mock, settings, dev_path, specific_path):
+@dbus.service.method(MOCK_IFACE,
+                     in_signature='a{sa{sv}}oo', out_signature='oo')
+def AddActivateConnection(self, settings, dev_path, specific_path):
     syslog.syslog("AddAndActivateConnection " + str(
-        mock.active_connections))
+        self.active_connections))
     settings_obj = dbusmock.get_object(SETTINGS_OBJ)
     main_connections = settings_obj.ListConnections()
 
     name = "mock" + str(len(main_connections))
 
-    # syslog.syslog("addAndActivateConnection " + dev_path + " " + name)
-    try:
-        path = mock.AddWiFiConnection(dev_path, name, 'foo', 'wpa')
-    except Exception as e:
-        syslog.syslog("Failed to add connection " + name + str(e))
+    path = self.AddWiFiConnection(dev_path, name, 'foo', 'wpa')
 
     con = dbusmock.get_object(path)
     con.Update(settings)
     active_con_path = ACTIVE_CON_OBJ + "/" + name
-    mock.AddObject(
+    self.AddObject(
         active_con_path, CON_ACTIVE_IFACE,
         {
             'Connection': path,
             'SpecificObject': specific_path,
         }, [])
 
-    mock.active_connections.append(active_con_path)
-    mock.Set(
+    self.active_connections.append(active_con_path)
+    self.Set(
         MAIN_IFACE, 'ActiveConnections',
-        dbus.Array(mock.active_connections, signature="o"))
+        dbus.Array(self.active_connections, signature="o"))
     return (dbus.ObjectPath(path), dbus.ObjectPath(active_con_path))
 
 
-# TODO: MAKE SERVICE METHOD
-def DeactivateConnection(mock, active_connection):
+@dbus.service.method(MOCK_IFACE,
+                     in_signature='o', out_signature='')
+def DeactivateCon(mock, active_connection):
     mock.active_connections.remove(active_connection)
     mock.Set(
         MAIN_IFACE, 'ActiveConnections',
@@ -366,23 +360,25 @@ def DeactivateConnection(mock, active_connection):
     mock.RemoveObject(active_connection)
 
 
-# TODO: MAKE SERVICE METHOD
-def DeleteConnection(connection):
+@dbus.service.method(CSETTINGS_IFACE,
+                     in_signature='o', out_signature='')
+def DeleteConnection(self, connection):
     syslog.syslog("DeleteConnection" + connection.path)
+
+    # Delete from settings
     settings_obj = dbusmock.get_object(SETTINGS_OBJ)
     main_connections = settings_obj.ListConnections()
-    syslog.syslog("Settings, " + str(main_connections))
     main_connections.remove(connection.path)
-    syslog.syslog("Settings, " + str(main_connections))
     settings_obj.Set(SETTINGS_IFACE, 'Connections', main_connections)
 
+    # Remove from NetworkManager
     mock = dbusmock.get_object(MAIN_OBJ)
     mock.RemoveObject(connection.path)
+
+    # Remove from all devices
     devices = mock.GetDevices()
     for device in devices:
         dev = dbusmock.get_object(device)
         dev_cons = dev.Get(DEVICE_IFACE, 'AvailableConnections')
-        syslog.syslog("Device: " + dev.path + ", " + str(dev_cons))
         dev_cons.remove(connection.path)
-        syslog.syslog("Device: " + dev.path + ", " + str(dev_cons))
         dev_cons = dev.Set(DEVICE_IFACE, 'AvailableConnections', dev_cons)
