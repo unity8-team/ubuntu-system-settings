@@ -325,6 +325,7 @@ def AddWiFiConnection(self, dev_path, connection_name, ssid_name, key_mgmt):
     return connection_path
 
 
+# TODO: MAKE SERVICE METHOD
 def AddAndActivateConnection(mock, settings, dev_path, specific_path):
     syslog.syslog("AddAndActivateConnection " + str(
         mock.active_connections))
@@ -356,6 +357,7 @@ def AddAndActivateConnection(mock, settings, dev_path, specific_path):
     return (dbus.ObjectPath(path), dbus.ObjectPath(active_con_path))
 
 
+# TODO: MAKE SERVICE METHOD
 def DeactivateConnection(mock, active_connection):
     mock.active_connections.remove(active_connection)
     mock.Set(
@@ -364,6 +366,7 @@ def DeactivateConnection(mock, active_connection):
     mock.RemoveObject(active_connection)
 
 
+# TODO: MAKE SERVICE METHOD
 def DeleteConnection(connection):
     syslog.syslog("DeleteConnection" + connection.path)
     settings_obj = dbusmock.get_object(SETTINGS_OBJ)

@@ -398,7 +398,7 @@ void HotspotManager::setupWpas() {
         qWarning() << "Failed to get prop:" << getprop->errorString();
 
     if (getprop->readAllStandardOutput().indexOf("1") >= 0) {
-        qWarning() << "Had to slap wpas";
+        qWarning() << "Had to poke wpa_supplicant.";
         QDBusInterface wpasIface (
             wpas_service,
             wpas_path,
@@ -408,10 +408,10 @@ void HotspotManager::setupWpas() {
 
         auto reply = wpasIface.call("SetInterfaceFirmware", "/", "ap");
         if (reply.type() == QDBusMessage::ErrorMessage) {
-            qWarning() << "Failed to slap wpas" << reply.errorMessage();
+            qCritical() << "Failed to poke wpa_supplicant" << reply.errorMessage();
         }
     } else {
-        qWarning() << "No need to slap wpas";
+        qWarning() << "No need to poke wpa_supplicant.";
     }
 
 }
@@ -425,8 +425,17 @@ void HotspotManager::setWifiBlock(bool block) {
         QDBusConnection::systemBus(),
         this);
 
-    auto reply = urfkillIface.call("Block", 1, block);
+
+    const unsigned int idx = 1;
+    auto reply = urfkillIface.call("Block", idx, block);
     if (reply.type() == QDBusMessage::ErrorMessage) {
-        qWarning() << "Failed to block wifi" << reply.errorMessage();
+        qCritical() << "Failed to block wifi" << reply.errorMessage();
+    }
+
+    if (reply.type() == QDBusMessage::ReplyMessage && reply.arguments().count() == 1) {
+        // returned false from call
+        if (!qdbus_cast<bool>(reply.arguments().at(0))) {
+           qCritical() << "URfkill Block call did not succeed";
+        }
     }
 }

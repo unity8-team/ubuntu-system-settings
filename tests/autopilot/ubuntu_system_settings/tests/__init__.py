@@ -394,7 +394,7 @@ class HotspotBaseTestCase(CellularBaseTestCase):
 
     def setUp(self):
         template = os.path.join(os.path.dirname(__file__), 'networkmanager.py')
-        (self.nm_mock, self.obj_nm) = self.spawn_server_template(
+        (self.n_mock, self.obj_nm) = self.spawn_server_template(
             template, stdout=subprocess.PIPE)
         self.nm_mock = dbus.Interface(self.obj_nm, dbusmock.MOCK_IFACE)
 
@@ -403,7 +403,7 @@ class HotspotBaseTestCase(CellularBaseTestCase):
             NM_SERVICE, device_path),
             dbusmock.MOCK_IFACE)
 
-        (self.urfkill_mock, self.obj_urf) = self.spawn_server_template(
+        (self.u_mock, self.obj_urf) = self.spawn_server_template(
             'urfkill', stdout=subprocess.PIPE)
         self.urfkill_mock = dbus.Interface(self.obj_urf, dbusmock.MOCK_IFACE)
 
