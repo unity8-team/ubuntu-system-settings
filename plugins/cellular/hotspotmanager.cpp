@@ -56,7 +56,6 @@ void startHotspot(const QByteArray &ssid, const QString &password, const QDBusOb
 
     nmConnectionArg connection;
 
-    QDBusObjectPath specific("/");
     QString s_ssid = QString::fromLatin1(ssid);
 
     QVariantMap wireless;
@@ -282,12 +281,26 @@ HotspotManager::HotspotManager(QObject *parent) : QObject(parent),
         SLOT(newConnection(QDBusObjectPath)));
 }
 
-void HotspotManager::newConnection(QDBusObjectPath path) {
+void HotspotManager::newConnection(const QDBusObjectPath path) {
     qWarning() << "Saw new connection" << path.path();
     if (path.path() == m_settingsPath) {
-        qWarning() << "The connection actually was path == m_settingsPath" << path.path() << m_settingsPath;
+
+        const QDBusObjectPath specific("/");
+        const QDBusObjectPath settings(m_settingsPath);
+        const QDBusObjectPath device(m_devicePath.path());
+
+        qWarning() << path.path() << m_settingsPath;
         qWarning() << "enableHotspot: unblocking wifi...";
         setWifiBlock(false);
+        OrgFreedesktopNetworkManagerInterface mgr(nm_service,
+                nm_dbus_path,
+                QDBusConnection::systemBus());
+        // QDBusInterface connection(nm_service, m_settingsPath, nm_connection_interface,
+        //         QDBusConnection::systemBus());
+        OrgFreedesktopNetworkManagerSettingsConnectionInterface con(
+            nm_service, m_settingsPath, QDBusConnection::systemBus());
+        mgr.ActivateConnection(settings, device, specific);
+
     }
 }
 

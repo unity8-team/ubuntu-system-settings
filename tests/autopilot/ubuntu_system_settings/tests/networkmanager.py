@@ -64,7 +64,9 @@ def load(mock, parameters):
          'ret = [k for k in objects.keys() if "/Devices" in k]'),
         ('GetPermissions', '', 'a{ss}', 'ret = {}'),
         ('state', '', 'u', "ret = self.Get('%s', 'State')" % MAIN_IFACE),
-        ('ActivateConnection', 'ooo', 'o', "ret = args[0]"),
+        (
+            'ActivateConnection', 'ooo', 'o',
+            "ret = self.ActivateCon(args[0], args[1], args[2])"),
         (
             'DeactivateConnection', 'o', '',
             "self.DeactivateCon(args[0])"),
@@ -145,6 +147,7 @@ def AddEthernetDevice(self, device_name, iface_name, state):
              'State': dbus.UInt32(state),
              'Interface': iface_name,
              'AvailableConnections': dbus.Array([], signature='o'),
+             'ActiveConnection': dbus.ObjectPath(""),
              'IpInterface': ''}
 
     obj = dbusmock.get_object(path)
@@ -322,6 +325,35 @@ def AddActivateConnection(self, settings, dev_path, specific_path):
 
 
 @dbus.service.method(MOCK_IFACE,
+                     in_signature='ooo', out_signature='o')
+def ActivateCon(self, connection_path, dev_path, specific_path):
+    syslog.syslog(
+        "ActivateConnection " + connection_path + " on device "
+        + dev_path + " (specific: " + specific_path + ")")
+
+    name = str(len(self.active_connections))
+    active_con_path = ACTIVE_CON_OBJ + "/" + name
+
+    self.AddObject(
+        active_con_path, CON_ACTIVE_IFACE,
+        {
+            'Connection': connection_path,
+            'SpecificObject': specific_path,
+        }, [])
+
+    self.active_connections.append(active_con_path)
+    self.Set(
+        MAIN_IFACE, 'ActiveConnections',
+        dbus.Array(self.active_connections, signature="o"))
+
+    dev_obj = dbusmock.get_object(dev_path)
+    dev_obj.AddConnectionToDevice(connection_path)
+    dev_obj.SetActiveConnection(active_con_path)
+
+    return dbus.ObjectPath(active_con_path)
+
+
+@dbus.service.method(MOCK_IFACE,
                      in_signature='o', out_signature='')
 def DeactivateCon(mock, active_connection):
     mock.active_connections.remove(active_connection)
@@ -337,6 +369,8 @@ def DeleteConnection(self, connection_path):
     main_connections = self.ListConnections()
     main_connections.remove(connection_path)
     self.Set(SETTINGS_IFACE, 'Connections', main_connections)
+    self.EmitSignal(SETTINGS_IFACE, 'ConnectionRemoved', 'o',
+                    [dbus.ObjectPath(connection_path)])
 
 
 @dbus.service.method(SETTINGS_IFACE,
@@ -346,9 +380,8 @@ def SAddConnection(self, connection):
     new_con = mock.AddCon('', connection)
     con_obj = dbusmock.get_object(str(new_con))
     con_obj.Update(connection)
-    self.EmitSignal(
-        SETTINGS_IFACE, 'NewConnection', 'o',
-        [dbus.ObjectPath(new_con)])
+    self.EmitSignal(SETTINGS_IFACE, 'NewConnection', 'o',
+                    [dbus.ObjectPath(new_con)])
     return dbus.ObjectPath(new_con)
 
 
@@ -356,10 +389,6 @@ def SAddConnection(self, connection):
                      in_signature='o', out_signature='')
 def DeleteCon(self, connection):
     syslog.syslog("DeleteCon" + connection.path)
-
-    # Delete from settings
-    settings_obj = dbusmock.get_object(SETTINGS_OBJ)
-    settings_obj.DeleteConnection(connection.path)
 
     # Remove from NetworkManager
     mock = dbusmock.get_object(MAIN_OBJ)
@@ -370,6 +399,13 @@ def DeleteCon(self, connection):
     for device in devices:
         dev = dbusmock.get_object(device)
         dev.RemoveConnection(connection.path)
+        if dev.Get(DEVICE_IFACE, 'ActiveConnection') == connection.path:
+            dev.Set(DEVICE_IFACE, 'ActiveConnection', dbus.ObjectPath(""))
+
+    # Delete from settings last, this emits the ConnectionRemoved
+    # event
+    settings_obj = dbusmock.get_object(SETTINGS_OBJ)
+    settings_obj.DeleteConnection(connection.path)
 
 
 @dbus.service.method(MOCK_IFACE,
@@ -423,6 +459,12 @@ def AddConnectionToDevice(self, connection_path):
 
     connections.append(connection_path)
     self.Set(DEVICE_IFACE, 'AvailableConnections', connections)
+
+
+@dbus.service.method(DEVICE_IFACE,
+                     in_signature='o', out_signature='')
+def SetActiveConnection(self, active_connection_path):
+    self.Set(DEVICE_IFACE, 'ActiveConnection', active_connection_path)
 
 
 @dbus.service.method(DEVICE_IFACE,
