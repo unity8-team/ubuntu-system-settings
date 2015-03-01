@@ -346,6 +346,9 @@ def SAddConnection(self, connection):
     new_con = mock.AddCon('', connection)
     con_obj = dbusmock.get_object(str(new_con))
     con_obj.Update(connection)
+    self.EmitSignal(
+        SETTINGS_IFACE, 'NewConnection', 'o',
+        [dbus.ObjectPath(new_con)])
     return dbus.ObjectPath(new_con)
 
 

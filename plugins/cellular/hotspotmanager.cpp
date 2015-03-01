@@ -57,6 +57,7 @@ void startHotspot(const QByteArray &ssid, const QString &password, const QDBusOb
     nmConnectionArg connection;
 
     QDBusObjectPath specific("/");
+    QString s_ssid = QString::fromLatin1(ssid);
 
     QVariantMap wireless;
     wireless[QStringLiteral("security")] = QVariant(QStringLiteral("802-11-wireless-security"));
@@ -75,6 +76,9 @@ void startHotspot(const QByteArray &ssid, const QString &password, const QDBusOb
 
     QVariantMap connsettings;
     connsettings[QStringLiteral("autoconnect")] = QVariant(false);
+
+
+    connsettings[QStringLiteral("id")] = QVariant(s_ssid);
     connsettings[QStringLiteral("uuid")] = QVariant(QStringLiteral("aab22b5d-7342-48dc-8920-1b7da31d6829"));
     connsettings[QStringLiteral("type")] = QVariant(QStringLiteral("802-11-wireless"));
     connection["connection"] = connsettings;
@@ -271,7 +275,7 @@ HotspotManager::HotspotManager(QObject *parent) : QObject(parent),
             QDBusConnection::systemBus());
     settings.connection().connect(
         settings.service(),
-        "/",
+        nm_settings_object,
         nm_settings_interface,
         "NewConnection",
         this,
@@ -280,6 +284,11 @@ HotspotManager::HotspotManager(QObject *parent) : QObject(parent),
 
 void HotspotManager::newConnection(QDBusObjectPath path) {
     qWarning() << "Saw new connection" << path.path();
+    if (path.path() == m_settingsPath) {
+        qWarning() << "The connection actually was path == m_settingsPath" << path.path() << m_settingsPath;
+        qWarning() << "enableHotspot: unblocking wifi...";
+        setWifiBlock(false);
+    }
 }
 
 QByteArray HotspotManager::getHotspotName() {
@@ -316,8 +325,6 @@ void HotspotManager::enableHotspot() {
             qWarning() << "Not implemented";
             break;
     }
-    qWarning() << "enableHotspot: unblocking wifi...";
-    setWifiBlock(false);
 }
 
 void HotspotManager::enableAdhocHotspot() {
