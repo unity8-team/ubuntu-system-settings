@@ -151,8 +151,8 @@ bool detectHotspot(QString &dbusPath, QByteArray &ssid, QString &password, bool 
             qWarning() << "Error getting conname: " << conname.error().message() << "\n";
             continue;
         }
-        // QDBusObjectPath mainConnection = qvariant_cast<QDBusObjectPath>(conname.value());
-        QDBusObjectPath mainConnection = QDBusObjectPath(conname.value().toString());
+        QDBusObjectPath mainConnection = qvariant_cast<QDBusObjectPath>(conname.value());
+        // QDBusObjectPath mainConnection = QDBusObjectPath(conname.value().toString());
         qWarning() << "Adding to actives" << QDBusObjectPath(conname.value().toString()).path();
         actives.insert(mainConnection);
     }
@@ -364,8 +364,8 @@ void HotspotManager::disableHotspot() {
         QDBusInterface iface(nm_service, aConn.path(), "org.freedesktop.DBus.Properties",
                 QDBusConnection::systemBus());
         QDBusReply<QVariant> conname = iface.call("Get", activeIface, connProp);
-        // QDBusObjectPath backingConnection = qvariant_cast<QDBusObjectPath>(conname.value());
-        QDBusObjectPath backingConnection = QDBusObjectPath(conname.value().toString());
+        QDBusObjectPath backingConnection = qvariant_cast<QDBusObjectPath>(conname.value());
+        // QDBusObjectPath backingConnection = QDBusObjectPath(conname.value().toString());
         if(backingConnection.path() == m_settingsPath) {
             qWarning() << "DeactivateConnection" << m_settingsPath;
             mgr.DeactivateConnection(aConn);
