@@ -297,7 +297,6 @@ void HotspotManager::newConnection(const QDBusObjectPath path) {
         setupWpas();
 
         qWarning() << "newConnection: unblocking wifi...";
-        setWifiBlock(false);
         OrgFreedesktopNetworkManagerInterface mgr(nm_service,
                 nm_dbus_path,
                 QDBusConnection::systemBus());
@@ -308,7 +307,7 @@ void HotspotManager::newConnection(const QDBusObjectPath path) {
 
         mgr.ActivateConnection(path, device, specific);
         qWarning() << "ActivateConnection:" << path.path() << device.path() << specific.path();
-
+        setWifiBlock(false);
     }
 }
 
