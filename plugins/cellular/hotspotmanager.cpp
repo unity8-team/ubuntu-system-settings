@@ -89,6 +89,10 @@ void startHotspot(const QByteArray &ssid, const QString &password, const QDBusOb
     ipv4[QStringLiteral("routes")] = QVariant(QStringList());
     connection["ipv4"] = ipv4;
 
+    QVariantMap ipv6;
+    ipv6[QStringLiteral("method")] = QVariant(QStringLiteral("ignored"));
+    connection["ipv6"] = ipv6;
+
     QVariantMap security;
     security[QStringLiteral("proto")] = QVariant(QStringList{"rsn"});
     security[QStringLiteral("pairwise")] = QVariant(QStringList{"ccmp"});
@@ -103,7 +107,7 @@ void startHotspot(const QByteArray &ssid, const QString &password, const QDBusOb
     auto reply = settings.AddConnection(connection);
     reply.waitForFinished();
     if(!reply.isValid()) {
-        qWarning() << "Failed to start hotspot: " << reply.error().message() << "\n";
+        qWarning() << "Failed to add hotspot connection: " << reply.error().message() << "\n";
     }
 
 }
@@ -289,8 +293,10 @@ void HotspotManager::newConnection(const QDBusObjectPath path) {
         const QDBusObjectPath settings(m_settingsPath);
         const QDBusObjectPath device(m_devicePath.path());
 
-        qWarning() << path.path() << m_settingsPath;
-        qWarning() << "enableHotspot: unblocking wifi...";
+        qWarning() << "newConnection: poking wpa_supplicant...";
+        setupWpas();
+
+        qWarning() << "newConnection: unblocking wifi...";
         setWifiBlock(false);
         OrgFreedesktopNetworkManagerInterface mgr(nm_service,
                 nm_dbus_path,
@@ -299,7 +305,9 @@ void HotspotManager::newConnection(const QDBusObjectPath path) {
         //         QDBusConnection::systemBus());
         OrgFreedesktopNetworkManagerSettingsConnectionInterface con(
             nm_service, m_settingsPath, QDBusConnection::systemBus());
-        mgr.ActivateConnection(settings, device, specific);
+
+        mgr.ActivateConnection(path, device, specific);
+        qWarning() << "ActivateConnection:" << path.path() << device.path() << specific.path();
 
     }
 }
@@ -363,7 +371,6 @@ void HotspotManager::enableApHotspot() {
         // So this is the best we can do with reasonable effort.
         QThread::sleep(1);
     }
-    setupWpas();
     startAp(m_ssid, m_password, m_devicePath);
     detectAp(m_settingsPath, m_ssid, m_password, m_isActive);
 }
