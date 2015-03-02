@@ -90,7 +90,7 @@ void startHotspot(const QByteArray &ssid, const QString &password, const QDBusOb
     connection["ipv4"] = ipv4;
 
     QVariantMap ipv6;
-    ipv6[QStringLiteral("method")] = QVariant(QStringLiteral("ignored"));
+    ipv6[QStringLiteral("method")] = QVariant(QStringLiteral("ignore"));
     connection["ipv6"] = ipv6;
 
     QVariantMap security;
