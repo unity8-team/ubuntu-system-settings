@@ -1,8 +1,9 @@
 /*
- * Copyright (C) 2014 Canonical, Ltd.
+ * Copyright (C) 2014, 2015 Canonical, Ltd.
  *
  * Authors:
  *    Jussi Pakkanen <jussi.pakkanen@canonical.com>
+ *    Jonas G. Drange <jonas.drange@canonical.com>
  *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License version 3, as published
@@ -32,40 +33,47 @@ enum class HotspotMode
     Unknown,
     Adhoc,
     Infra,
-    Ap
+    Ap,
+    P2p
 };
 
 class HotspotManager : public QObject {
     Q_OBJECT
+    Q_PROPERTY( bool active
+                READ active
+                WRITE setActive
+                NOTIFY activeChanged)
+    Q_INVOKABLE QByteArray getHotspotName();
+    Q_INVOKABLE QString getHotspotPassword();
+    Q_INVOKABLE void setupHotspot(QByteArray ssid, QString password, HotspotMode mode = HotspotMode::Ap);
 
 public:
     explicit HotspotManager(QObject *parent = nullptr);
     ~HotspotManager() {};
 
-    Q_INVOKABLE QByteArray getHotspotName();
-    Q_INVOKABLE QString getHotspotPassword();
-    Q_INVOKABLE void setupHotspot(QByteArray ssid, QString password, HotspotMode mode = HotspotMode::Ap);
-    Q_INVOKABLE bool isHotspotActive();
-    Q_INVOKABLE void enableHotspot();
-    Q_INVOKABLE void disableHotspot();
+    bool active() const;
+    void setActive(bool);
     void destroyHotspot();
+
+Q_SIGNALS:
+    void activeChanged(bool active);
+    void establishing();
+    void hotspotFailed(const QString &message);
 
 public Q_SLOTS:
     void newConnection(QDBusObjectPath);
+    void devicedAdded(QDBusObjectPath);
 
 private:
+    bool m_active;
     QByteArray m_ssid;
     QString m_password;
     QString m_settingsPath;
     HotspotMode m_mode;
     QDBusObjectPath m_devicePath;
-    bool m_isActive;
 
-    void enableAdhocHotspot();
-    void enableApHotspot();
-
-    void setWifiBlock(bool block);
-    void setupWpas();
+    bool enableHotspot();
+    bool disableHotspot();
 };
 
 

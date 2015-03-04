@@ -23,7 +23,7 @@ import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 import Ubuntu.SystemSettings.Cellular 1.0
 
-ItemPage {
+Dialog {
 
     id: hotspotSetup
     title: i18n.tr("Change hotspot setup")
@@ -78,7 +78,7 @@ ItemPage {
                 right: parent.right
                 margins: units.gu(2)
             }
-            
+
         Button {
             id: cancelButton
             Layout.fillWidth: true

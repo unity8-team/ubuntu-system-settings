@@ -393,9 +393,9 @@ class CellularBaseTestCase(UbuntuSystemSettingsOfonoTestCase):
 class HotspotBaseTestCase(CellularBaseTestCase):
 
     def setUp(self):
-        template = os.path.join(os.path.dirname(__file__), 'networkmanager.py')
+        nm_tmpl = os.path.join(os.path.dirname(__file__), 'networkmanager.py')
         (self.n_mock, self.obj_nm) = self.spawn_server_template(
-            template, stdout=subprocess.PIPE)
+            nm_tmpl, stdout=subprocess.PIPE)
         self.nm_mock = dbus.Interface(self.obj_nm, dbusmock.MOCK_IFACE)
 
         device_path = self.obj_nm.AddWiFiDevice('test0', 'Barbaz', 1)
@@ -403,8 +403,9 @@ class HotspotBaseTestCase(CellularBaseTestCase):
             NM_SERVICE, device_path),
             dbusmock.MOCK_IFACE)
 
+        urfkill_tmpl = os.path.join(os.path.dirname(__file__), 'urfkill.py')
         (self.u_mock, self.obj_urf) = self.spawn_server_template(
-            'urfkill', stdout=subprocess.PIPE)
+            urfkill_tmpl, stdout=subprocess.PIPE)
         self.urfkill_mock = dbus.Interface(self.obj_urf, dbusmock.MOCK_IFACE)
 
         super(HotspotBaseTestCase, self).setUp()

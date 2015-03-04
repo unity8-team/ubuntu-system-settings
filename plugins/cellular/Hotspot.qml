@@ -42,14 +42,10 @@ ItemPage {
             control: Switch {
                 id: hotspotSwitch
                 objectName: "hotspotSwitch"
-                checked: hotspotManager.isHotspotActive()
-                onTriggered: {
-                    if(checked) {
-                        hotspotManager.enableHotspot()
-                    } else {
-                        hotspotManager.disableHotspot()
-                    }
-                }
+                property bool serverChecked: hotspotManager.active
+                onServerCheckedChanged: checked = serverChecked
+                Component.onCompleted: checked = serverChecked
+                onTriggered: hotspotManager.active = checked
             }
         }
 
