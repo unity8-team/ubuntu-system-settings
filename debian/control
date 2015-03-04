@@ -25,7 +25,6 @@ Build-Depends: dbus-test-runner,
                pkg-config,
                qt5-default,
                qtbase5-dev,
-               qtbase5-private-dev,
                qtdeclarative5-dev,
                libapt-pkg-dev,
 # test-deps
