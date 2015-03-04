@@ -30,11 +30,11 @@
 // NM 802.11 Mode
 enum class HotspotMode
 {
-    Unknown,
-    Adhoc,
-    Infra,
-    Ap,
-    P2p
+    UNKNOWN,
+    ADHOC,
+    INFRA,
+    AP,
+    P2P
 };
 
 class HotspotManager : public QObject {
@@ -45,7 +45,7 @@ class HotspotManager : public QObject {
                 NOTIFY activeChanged)
     Q_INVOKABLE QByteArray getHotspotName();
     Q_INVOKABLE QString getHotspotPassword();
-    Q_INVOKABLE void setupHotspot(QByteArray ssid, QString password, HotspotMode mode = HotspotMode::Ap);
+    Q_INVOKABLE void setupHotspot(QByteArray ssid, QString password, HotspotMode mode = HotspotMode::AP);
 
 public:
     explicit HotspotManager(QObject *parent = nullptr);
@@ -68,9 +68,9 @@ private:
     bool m_active;
     QByteArray m_ssid;
     QString m_password;
-    QString m_settingsPath;
+    QString m_settings_path;
     HotspotMode m_mode;
-    QDBusObjectPath m_devicePath;
+    QDBusObjectPath m_device_path;
 
     bool enableHotspot();
     bool disableHotspot();
