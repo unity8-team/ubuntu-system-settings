@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-10-16 20:04-0600\n"
-"PO-Revision-Date: 2015-03-01 05:01+0000\n"
+"PO-Revision-Date: 2015-03-04 05:16+0000\n"
 "Last-Translator: Gursharnjit_Singh <ubuntuser13@gmail.com>\n"
 "Language-Team: Punjabi <pa@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2015-03-02 05:38+0000\n"
+"X-Launchpad-Export-Date: 2015-03-04 05:54+0000\n"
 "X-Generator: Launchpad (build 17361)\n"
 
 #: ubuntu-system-settings.desktop.in.in.h:1 ../src/qml/MainWindow.qml:112
@@ -1137,151 +1137,163 @@ msgstr[1] "%1 ਮਿੰਟਾਂ"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:101
 msgid "Sleep locks immediately"
-msgstr ""
+msgstr "ਨੀਂਦ ਲਾਕ ਹੁਣੇ"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:106
 msgid "When locked, allow:"
-msgstr ""
+msgstr "ਜਦੋਂ ਲਾਕ ਹੋਇਆ, ਪ੍ਰਵਾਨ:"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:110
 msgid "Launcher"
-msgstr ""
+msgstr "ਲਾਂਚਰ"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:123
 msgid "Notifications and quick settings"
-msgstr ""
+msgstr "ਸੂਚਨਾ ਅਤੇ ਜਲਦੀ ਸੈਟਿੰਗਾਂ"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:137
 msgid "Turn on lock security to restrict access when the phone is locked."
-msgstr ""
+msgstr "ਪਹੁੰਚ ਤੇ ਪਾਬੰਦੀ ਲਾਉਣ ਲਈ ਲਾਕ ਸੁਰੱਖਿਆ ਚਾਲੂ ਕਰੋ ਜਦੋਂ ਫ਼ੋਨ ਲਾਕ ਹੋਵੇ।"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:138
 msgid "Other apps and functions will prompt you to unlock."
-msgstr ""
+msgstr "ਹੋਰ ਐਪ ਅਤੇ ਕਾਰਜ ਤੁਹਾਨੂੰ ਅਣਲਾਕ ਕਰਨ ਲਈ ਕਹਿਣਗੇ।"
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
 #: ../plugins/security-privacy//PageComponent.qml:37
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:14
 msgid "Security & Privacy"
-msgstr ""
+msgstr "ਸੁਰੱਖਿਆ ਅਤੇ ਪਰਦੇਦਾਰੀ"
 
 #: ../plugins/security-privacy//Dash.qml:46
 #: ../plugins/security-privacy//PageComponent.qml:89
 #: ../plugins/security-privacy//PageComponent.qml:201
 msgid "Phone and Internet"
-msgstr ""
+msgstr "ਫ਼ੋਨ ਅਤੇ ਇੰਟਰਨੈੱਟ"
 
 #: ../plugins/security-privacy//Dash.qml:46
 #: ../plugins/security-privacy//PageComponent.qml:91
 #: ../plugins/security-privacy//PageComponent.qml:202
 msgid "Phone only"
-msgstr ""
+msgstr "ਕੇਵਲ ਫ਼ੋਨ"
 
 #: ../plugins/security-privacy//PageComponent.qml:120
 msgid "Lock phone"
-msgstr ""
+msgstr "ਫ਼ੋਨ ਲਾਕ ਕਰੋ"
 
 #: ../plugins/security-privacy//PageComponent.qml:150
 #: ../plugins/security-privacy//PageComponent.qml:228
 msgid "On"
-msgstr ""
+msgstr "ਚਾਲੂ"
 
 #: ../plugins/security-privacy//PageComponent.qml:154
 #: ../plugins/security-privacy//PageComponent.qml:228
 #: ../plugins/cellular//Components//DataMultiSim.qml:31
 msgid "Off"
-msgstr ""
+msgstr "ਬੰਦ"
 
 #: ../plugins/security-privacy//PageComponent.qml:161
 msgid "Encryption"
-msgstr ""
+msgstr "ਇਨਕ੍ਰਿਪਸ਼ਨ"
 
 #: ../plugins/security-privacy//PageComponent.qml:170
 msgid ""
 "Encryption protects against access to phone data when the phone is connected "
 "to a PC or other device."
 msgstr ""
+"ਇਨਕ੍ਰਿਪਸ਼ਨ ਫ਼ੋਨ ਡਾਟੇ ਨੂੰ ਪਹੁੰਚ ਤੋਂ ਬਚਾਉਣ ਲਈ ਸੁਰੱਖਿਆ ਮਹੁੱਈਆ ਕਰਵਾਉਂਦੀ ਹੈ ਜਦੋਂ "
+"ਫ਼ੋਨ ਇੱਕ ਪੀਸੀ ਜਾਂ ਹੋਰ ਜੰਤਰ ਨਾਲ ਜੁੜਿਆ ਹੋਵੇ।"
 
 #: ../plugins/security-privacy//PageComponent.qml:174
 msgid "Privacy"
-msgstr ""
+msgstr "ਪਰਦੇਦਾਰੀ"
 
 #: ../plugins/security-privacy//PageComponent.qml:177
 msgid "Stats on welcome screen"
-msgstr ""
+msgstr "ਸਵਾਗਤ ਸਕਰੀਨ ਤੇ ਅੰਕੜੇ"
 
 #: ../plugins/security-privacy//PageComponent.qml:187
 msgid "Messages on welcome screen"
-msgstr ""
+msgstr "ਸਵਾਗਤ ਸਕਰੀਨ ਤੇ ਸੁਨੇਹੇ"
 
 #: ../plugins/security-privacy//Dash.qml:29
 #: ../plugins/security-privacy//PageComponent.qml:199
 msgid "Dash search"
-msgstr ""
+msgstr "ਡੈਸ ਖੋਜ"
 
 #: ../plugins/security-privacy//PageComponent.qml:219
 msgid "Location access"
-msgstr ""
+msgstr "ਸਥਿਤੀ ਪਹੁੰਚ"
 
 #: ../plugins/security-privacy//PageComponent.qml:237
 #: ../plugins/security-privacy//AppAccess.qml:28
 msgid "Other app access"
-msgstr ""
+msgstr "ਹੋਰ ਐਪ ਪਹੁੰਚ"
 
 #: ../plugins/security-privacy//PageComponent.qml:242
 #: ../plugins/security-privacy//diagnostics//PageComponent.qml:30
 msgid "Diagnostics"
-msgstr ""
+msgstr "ਜਾਂਚ-ਪੜਤਾਲ"
 
 #. TRANSLATORS: This string is shown when crash
 #. reports are to be sent by the system.
 #: ../plugins/security-privacy//PageComponent.qml:247
 msgid "Sent"
-msgstr ""
+msgstr "ਭੇਜਿਆ"
 
 #. TRANSLATORS: This string is shown when crash
 #. reports are not to be sent by the system
 #: ../plugins/security-privacy//PageComponent.qml:250
 msgid "Not sent"
-msgstr ""
+msgstr "ਨਹੀਂ ਭੇਜਿਆ"
 
 #: ../plugins/security-privacy//Location.qml:32
 msgid "Location"
-msgstr ""
+msgstr "ਟਿਕਾਣਾ"
 
 #: ../plugins/security-privacy//Location.qml:59
 msgid "Location detection"
-msgstr ""
+msgstr "ਟਿਕਾਣਾ ਖੋਜ"
 
 #: ../plugins/security-privacy//Location.qml:208
 msgid ""
 "Uses GPS to detect your rough location. When off, GPS turns off to save "
 "battery."
 msgstr ""
+"ਤੁਹਾਡੀ ਸਥਿਤੀ ਜਾਨਣ ਲਈ ਜੀਪੀਐਸ ਦੀ ਵਰਤੋਂ ਕਰਦਾ। ਜਦੋਂ ਬੰਦ ਹੋਵੇ, ਬੈਟਰੀ ਬਚਾਉਣ ਲਈ GPS "
+"ਬੰਦ ਕਰੋ।"
 
 #: ../plugins/security-privacy//Location.qml:210
 msgid ""
 "Uses wi-fi and GPS to detect your rough location. Turning off location "
 "detection saves battery."
 msgstr ""
+"ਤੁਹਾਡੀ ਸਥਿਤੀ ਜਾਨਣ ਲਈ ਵਾਈ-ਫ਼ਾਈ ਅਤੇ ਜੀਪੀਐਸ ਦੀ ਵਰਤੋਂ ਕਰਦਾ। ਸਥਿਤੀ ਖੋਜ ਬੰਦ ਕਰਨਾ "
+"ਬੈਟਰੀ ਬਚਾਉਦਾ।"
 
 #: ../plugins/security-privacy//Location.qml:212
 msgid ""
 "Uses wi-fi (currently off) and GPS to detect your rough location. Turning "
 "off location detection saves battery."
 msgstr ""
+"ਤੁਹਾਡੀ ਸਥਿਤੀ ਜਾਨਣ ਲਈ ਵਾਈ-ਫ਼ਾਈ (ਮੌਜੂਦਾ ਤੌਰ ਤੇ ਬੰਦ) ਅਤੇ ਜੀਪੀਐਸ ਦੀ ਵਰਤੋਂ ਕਰਦਾ। "
+"ਸਥਿਤੀ ਖੋਜ ਬੰਦ ਕਰਨਾ ਬੈਟਰੀ ਦੀ ਬਚਾਉਦਾ।"
 
 #: ../plugins/security-privacy//Location.qml:214
 msgid ""
 "Uses wi-fi, cell tower locations, and GPS to detect your rough location. "
 "Turning off location detection saves battery."
 msgstr ""
+"ਤੁਹਾਡੀ ਸਥਿਤੀ ਜਾਨਣ ਲਈ ਵਾਈ-ਫ਼ਾਈ, ਸੈੱਲ ਟਾਵਰ ਸਥਿਤੀਆਂ, ਅਤੇ ਜੀਪੀਐਸ ਦੀ ਵਰਤੋਂ ਕਰਦਾ। "
+"ਸਥਿਤੀ ਖੋਜ ਬੰਦ ਕਰਨਾ ਬੈਟਰੀ ਬਚਾਉਦਾ।"
 
 #: ../plugins/security-privacy//Location.qml:216
 msgid ""
 "Uses wi-fi, cell tower locations (no current cellular connection), and GPS "
 "to detect your rough location. Turning off location detection saves battery."
 msgstr ""
+"ਤੁਹਾਡੀ ਸਥਿਤੀ ਜਾਨਣ ਲਈ ਵਾਈ-ਫ਼ਾਈ, ਸੈੱਲ ਟਾਵਰ ਸਥਿਤੀਆਂ (ਕੋਈ ਮੌਜੂਦਾ ਸੈਲੂਲਰ ਕੁਨੇਕਸ਼ਨ "
+"ਨਹੀਂ), ਅਤੇ ਜੀਪੀਐਸ ਦੀ ਵਰਤੋਂ ਕਰਦਾ। ਸਥਿਤੀ ਖੋਜ ਬੰਦ ਕਰਨਾ ਬੈਟਰੀ ਬਚਾਉਦਾ।"
 
 #: ../plugins/security-privacy//Location.qml:218
 msgid ""
