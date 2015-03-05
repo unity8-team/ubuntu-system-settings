@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-10-16 20:04-0600\n"
-"PO-Revision-Date: 2015-03-04 05:16+0000\n"
+"PO-Revision-Date: 2015-03-05 04:05+0000\n"
 "Last-Translator: Gursharnjit_Singh <ubuntuser13@gmail.com>\n"
 "Language-Team: Punjabi <pa@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2015-03-04 05:54+0000\n"
-"X-Generator: Launchpad (build 17361)\n"
+"X-Launchpad-Export-Date: 2015-03-05 06:02+0000\n"
+"X-Generator: Launchpad (build 17374)\n"
 
 #: ubuntu-system-settings.desktop.in.in.h:1 ../src/qml/MainWindow.qml:112
 msgid "System Settings"
@@ -36,7 +36,7 @@ msgstr "ਝਲਕ"
 
 #: ../plugins/background//Preview.qml:102
 msgid "Remove image"
-msgstr "ਈਮੇਜ਼ ਹਟਾਓ"
+msgstr "ਤਸਵੀਰ ਹਟਾਓ"
 
 #: ../plugins/security-privacy//LockSecurity.qml:346
 #: ../plugins/security-privacy//SimPin.qml:151
@@ -60,7 +60,7 @@ msgstr "ਈਮੇਜ਼ ਹਟਾਓ"
 #: ../plugins/background//Components//AddRemove.qml:42
 #: ../plugins/cellular//Components//SimEditor.qml:204
 msgid "Cancel"
-msgstr "ਰੱਦ ਕਰੋ"
+msgstr "ਰੱਦ"
 
 #: ../plugins/security-privacy//LockSecurity.qml:367
 #: ../plugins/time-date//TimePicker.qml:182
@@ -101,7 +101,7 @@ msgstr "IP ਐਡਰੈੱਸ"
 #: ../plugins/wifi//PageComponent.qml:132
 #: ../plugins/wifi//PreviousNetworks.qml:27
 msgid "Previous networks"
-msgstr "ਪਿਛਲਾ ਨੈੱਟਵਰਕ"
+msgstr "ਪਿਛਲੇ ਨੈੱਟਵਰਕ"
 
 #: ../plugins/wifi//Common.qml:36
 msgid "Unknown error"
@@ -109,7 +109,7 @@ msgstr "ਅਣਜਾਣ ਗਲਤੀ"
 
 #: ../plugins/wifi//Common.qml:38
 msgid "No reason given"
-msgstr "ਕੋਈ ਕਾਰਨ ਨਹੀਂ ਦਿੱਤਾ ਹੈ।"
+msgstr "ਕੋਈ ਕਾਰਨ ਨਹੀਂ ਦਿੱਤਾ"
 
 #: ../plugins/wifi//Common.qml:40
 msgid "Device is now managed"
@@ -117,7 +117,7 @@ msgstr "ਜੰਤਰ ਹੁਣ ਪ੍ਰਬੰਧ ਅਧੀਨ ਹੈ"
 
 #: ../plugins/wifi//Common.qml:42
 msgid "Device is now unmanaged"
-msgstr "ਜੰਤਰ ਹੁਣ ਪਰਬੰਧ ਅਧੀਨ ਨਹੀਂ ਹੈ"
+msgstr "ਜੰਤਰ ਹੁਣ ਪ੍ਰਬੰਧ ਅਧੀਨ ਨਹੀਂ ਹੈ"
 
 #: ../plugins/wifi//Common.qml:44
 msgid "The device could not be readied for configuration"
@@ -1276,8 +1276,8 @@ msgid ""
 "Uses wi-fi (currently off) and GPS to detect your rough location. Turning "
 "off location detection saves battery."
 msgstr ""
-"ਤੁਹਾਡੀ ਸਥਿਤੀ ਜਾਨਣ ਲਈ ਵਾਈ-ਫ਼ਾਈ (ਮੌਜੂਦਾ ਤੌਰ ਤੇ ਬੰਦ) ਅਤੇ ਜੀਪੀਐਸ ਦੀ ਵਰਤੋਂ ਕਰਦਾ। "
-"ਸਥਿਤੀ ਖੋਜ ਬੰਦ ਕਰਨਾ ਬੈਟਰੀ ਦੀ ਬਚਾਉਦਾ।"
+"ਤੁਹਾਡੀ ਸਥਿਤੀ ਜਾਨਣ ਲਈ ਵਾਈ-ਫ਼ਾਈ (ਇਸ ਵੇਲੇ ਬੰਦ) ਅਤੇ ਜੀਪੀਐਸ ਦੀ ਵਰਤੋਂ ਕਰਦਾ। ਸਥਿਤੀ "
+"ਖੋਜ ਬੰਦ ਕਰਨਾ ਬੈਟਰੀ ਦੀ ਬਚਾਉਦਾ।"
 
 #: ../plugins/security-privacy//Location.qml:214
 msgid ""
@@ -1292,7 +1292,7 @@ msgid ""
 "Uses wi-fi, cell tower locations (no current cellular connection), and GPS "
 "to detect your rough location. Turning off location detection saves battery."
 msgstr ""
-"ਤੁਹਾਡੀ ਸਥਿਤੀ ਜਾਨਣ ਲਈ ਵਾਈ-ਫ਼ਾਈ, ਸੈੱਲ ਟਾਵਰ ਸਥਿਤੀਆਂ (ਕੋਈ ਮੌਜੂਦਾ ਸੈਲੂਲਰ ਕੁਨੇਕਸ਼ਨ "
+"ਤੁਹਾਡੀ ਸਥਿਤੀ ਜਾਨਣ ਲਈ ਵਾਈ-ਫ਼ਾਈ, ਸੈੱਲ ਟਾਵਰ ਸਥਿਤੀਆਂ (ਇਸ ਵੇਲੇ ਕੋਈ ਸੈਲੂਲਰ ਕੁਨੇਕਸ਼ਨ "
 "ਨਹੀਂ), ਅਤੇ ਜੀਪੀਐਸ ਦੀ ਵਰਤੋਂ ਕਰਦਾ। ਸਥਿਤੀ ਖੋਜ ਬੰਦ ਕਰਨਾ ਬੈਟਰੀ ਬਚਾਉਦਾ।"
 
 #: ../plugins/security-privacy//Location.qml:218
