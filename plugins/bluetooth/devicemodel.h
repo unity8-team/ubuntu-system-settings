@@ -74,6 +74,7 @@ public:
     void stopDiscovery();
     void startDiscovery();
     void toggleDiscovery();
+    void trySetDiscoverable(bool discoverable);
 
 Q_SIGNALS: 
     void poweredChanged(bool powered);
@@ -96,7 +97,6 @@ private:
     QTimer m_timer;
     QTimer m_discoverableTimer;
     void restartTimer();
-    void trySetDiscoverable(bool discoverable);
     void setDiscoverable(bool discoverable);
     void setPowered(bool powered);
 
