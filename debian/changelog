@@ -1,3 +1,12 @@
+ubuntu-system-settings (0.3+15.04.20150305-0ubuntu1) vivid; urgency=medium
+
+  [ Sebastien Bacher ]
+  * bluetooth: disable device visiblity when switching out, that way
+    it's not staying on if the settings are closed from the switcher or
+    if the user switch to another software (LP: #1419874)
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Thu, 05 Mar 2015 20:53:03 +0000
+
 ubuntu-system-settings (0.3+15.04.20150224-0ubuntu1) vivid; urgency=medium
 
   [ Mathieu Trudel-Lapierre ]
