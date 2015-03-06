@@ -307,7 +307,7 @@ class CellularPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
         self.pointing_device.click_object(ok)
 
     @autopilot.logging.log_action(logger.debug)
-    def setup_hotspot(self, config):
+    def setup_hotspot(self, config=None):
         hotspot_page = self._enter_hotspot()
         hotspot_page.setup_hotspot(config)
 
@@ -361,10 +361,11 @@ class Hotspot(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
         self.pointing_device.click_object(obj)
         setup = self.get_root_instance().wait_select_single(
             objectName='hotspotSetup')
-        if config["ssid"]:
-            setup.set_ssid(config["ssid"])
-        if config["password"]:
-            setup.set_password(config["password"])
+        if config:
+            if config["ssid"]:
+                setup.set_ssid(config["ssid"])
+            if config["password"]:
+                setup.set_password(config["password"])
         setup.enable()
 
     @autopilot.logging.log_action(logger.debug)

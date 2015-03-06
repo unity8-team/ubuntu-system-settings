@@ -299,13 +299,10 @@ class HotspotTestCase(HotspotBaseTestCase):
         # self.cellular_page.enable_hotspot()
         # self.cellular_page.disable_hotspot()
         # self.cellular_page.enable_hotspot()
-        self.cellular_page.setup_hotspot({
-            "ssid": "Tst",
-            "password": "abcdabcd"
-        })
+        self.cellular_page.setup_hotspot()
         # target_block_calls = 5
         # block_calls = len(self.urfkill_mock.GetMethodCalls('Block'))
 
-        sleep(4)
+        sleep(5)
         self.assertEqual(1, 2)
         # self.assertEqual(target_block_calls, block_calls)

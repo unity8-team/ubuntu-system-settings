@@ -276,7 +276,7 @@ def AddWiFiConnection(self, dev_path, connection_name, ssid_name, key_mgmt):
             'seen-bssids': ['11:22:33:44:55:66'],
             'ssid': dbus.ByteArray(ssid_name.encode()),
             'mac-address': dbus.ByteArray(b'\x11\x22\x33\x44\x55\x66'),
-            'mode': "infrastructure"
+            'mode': 'infrastructure'
         },
         'connection': {
             'timestamp': dbus.UInt64(1374828522),
@@ -378,10 +378,17 @@ def NetworkManagerDeactivateConnection(self, active_connection):
 def SettingsDeleteConnection(self, connection_path):
     syslog.syslog('SettingsDeleteConnection' + connection_path)
     main_connections = self.ListConnections()
-    main_connections.remove(connection_path)
 
-    connection_obj = dbusmock.get_object(connection_path)
-    connection_obj.EmitSignal(CSETTINGS_IFACE, 'Removed')
+    try:
+        main_connections.remove(connection_path)
+    except:
+        pass
+
+    try:
+        connection_obj = dbusmock.get_object(connection_path)
+        connection_obj.EmitSignal(CSETTINGS_IFACE, 'Removed')
+    except:
+        pass
 
     self.Set(SETTINGS_IFACE, 'Connections', main_connections)
     self.EmitSignal(SETTINGS_IFACE, 'ConnectionRemoved', 'o',

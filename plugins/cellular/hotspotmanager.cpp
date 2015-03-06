@@ -124,6 +124,7 @@ namespace {
   const QString nm_connection_active_interface("org.freedesktop.NetworkManager.Connection.Active");
   const QString nm_device_interface("org.freedesktop.NetworkManager.Device");
   const QString dbus_properties_interface("org.freedesktop.DBus.Properties");
+  const QString connection_property("Connection");
 
   OrgFreedesktopNetworkManagerSettingsInterface nm_settings(
       nm_service,
@@ -149,7 +150,7 @@ namespace {
     QVariantMap wireless;
     wireless[QStringLiteral("security")] = QVariant(QStringLiteral("802-11-wireless-security"));
     wireless[QStringLiteral("ssid")] = QVariant(ssid);
-    // wireless[QStringLiteral("mode")] = QVariant(QStringLiteral(mode));
+    wireless[QStringLiteral("mode")] = QVariant(mode);
 
     connection["802-11-wireless"] = wireless;
 
@@ -238,9 +239,11 @@ namespace {
       auto connection_settings = getConnectionSettings(connection);
       if(connection_settings.find(wifi_key) != connection_settings.end()) {
         qWarning() << "getHotspot Step 3: found wifi key";
+        qWarning() << "connection_settings" << connection_settings;
         auto wifi_setup = connection_settings[wifi_key];
-        qWarning() << "getHotspot Step 4: hotspotMode" << wifi_setup["mode"];
-        if(wifi_setup["mode"] == mode) {
+        QString wifi_mode = wifi_setup["mode"].toString();
+        qWarning() << "getHotspot Step 4: hotspotMode" << wifi_mode;
+        if(wifi_mode == mode) {
           qWarning() << "getHotspot Step 5: found a hotspot matching our mode" << mode;
           return connection;
         }
@@ -277,7 +280,6 @@ namespace {
 }
 
 bool isHotspotActive (QDBusObjectPath hotspot_connection_path) {
-  static const QString connection_property("Connection");
 
   QSet<QDBusObjectPath> active_relevant_connections;
   auto active_connections = nm_manager.activeConnections();
@@ -293,7 +295,7 @@ bool isHotspotActive (QDBusObjectPath hotspot_connection_path) {
     QDBusReply<QVariant> connection_property = active_connection_dbus_interface.call(
         "Get",
         nm_connection_active_interface,
-        connection_property);
+        "Connection");
 
     if(!connection_property.isValid()) {
       qWarning() << "Error getting connection_property: " << connection_property.error().message() << "\n";
@@ -338,6 +340,8 @@ HotspotManager::HotspotManager(QObject *parent) :
   }
 
   m_hotspot_path = getHotspot(m_mode);
+
+  qWarning() << "HotspotManager constructor: m_hotspot_path" <<m_hotspot_path.path();
 
   // A bit hard to read, but sets stored to false if the
   // hotspot path is empty.
@@ -480,8 +484,11 @@ void HotspotManager::setMode(QString value) {
 }
 
 void HotspotManager::onCreateFinished(QDBusObjectPath path) {
+
   qWarning() << "onCreateFinished: called";
+
   if (path == m_hotspot_path) {
+
     qWarning() << "onCreateFinished: path == m_hotspot_path";
     bool unblocked = setWifiBlock(false);
 
@@ -489,7 +496,7 @@ void HotspotManager::onCreateFinished(QDBusObjectPath path) {
       qWarning() << "onCreateFinished: failed to unblock wifi";
       Q_EMIT reportError("Failed to block wifi");
     } else {
-      qWarning() << "onCreateFinished: successfully blocked wifi";
+      qWarning() << "onCreateFinished: successfully unblocked wifi";
       setStored(true);
     }
   }
@@ -553,35 +560,56 @@ void HotspotManager::destroyHotspot(QDBusObjectPath path) {
 
 void HotspotManager::onDeleteFinished() {
   qWarning() << "Saw delete event";
-  m_hotspot_path = QDBusObjectPath("");
-  setStored(false);
+  m_hotspot_path = addHotspot(m_ssid, m_password, m_device_path, m_mode);
 }
 
 
 void HotspotManager::onNetworkManagerPropertiesChanged(QVariantMap properties) {
   qWarning() << "onNetworkManagerPropertiesChanged: called";
-  for(QVariantMap::const_iterator iter = properties.begin(); iter != properties.end(); ++iter) {
-    qWarning() << iter.key() << iter.value();
-    if (iter.key() == "ActiveConnections") {
-      qWarning() << "This is ActiveConnections";
-      qWarning() << iter.value().toList();
 
+  // If we have no hotspot path, return.
+  if (m_hotspot_path.path().isEmpty()) {
+    return;
+  }
+
+  for(QVariantMap::const_iterator iter = properties.begin(); iter != properties.end(); ++iter) {
+    if (iter.key() == "ActiveConnections") {
+      QDBusArgument args = qvariant_cast<QDBusArgument>(iter.value());
+      if (args.currentType() == QDBusArgument::ArrayType) {
+        args.beginArray();
+        while (!args.atEnd()) {
+          QDBusObjectPath path = qdbus_cast<QDBusObjectPath>(args);
+
+          QDBusInterface active_connection_dbus_interface(
+              nm_service,
+              path.path(),
+              dbus_properties_interface,
+              QDBusConnection::systemBus());
+
+          QDBusReply<QVariant> connection_property = active_connection_dbus_interface.call(
+              "Get",
+              nm_connection_active_interface,
+              "Connection");
+
+          if(!connection_property.isValid()) {
+            qWarning() << "Error getting connection_property: " << connection_property.error().message() << "\n";
+            continue;
+          }
+          QDBusObjectPath connection_path = qvariant_cast<QDBusObjectPath>(connection_property.value());
+          qWarning() << "onNetworkManagerPropertiesChanged: looking at" << connection_path.path() << "vs" << m_hotspot_path.path();
+          if (connection_path == m_hotspot_path) {
+            qWarning() << "onNetworkManagerPropertiesChanged: Found that our hotspot was active";
+            m_enabled = true;
+            Q_EMIT enabledChanged(m_enabled);
+            return;
+          }
+        }
+        args.endArray();
+      }
     }
   }
-  // for (const auto &prop : properties) {
-  //   qWarning() << prop;
-  //   // QDBusObjectPath path = qvariant_cast<QDBusObjectPath>(active_connection);
-  //   // qWarning() << "onNetworkManagerPropertiesChanged: active_connection:" << path.path();
-  // }
 
-  // while (i.hasNext()) {
-  //   if (i.key() == "ActiveConnections") {
-  //     qWarning() << "Saw active connections change";
-  //     for(const auto &active_connection : i.value().toList()) {
-  //       qWarning() << "Saw active connections" << qvariant_cast<QDBusObjectPath>(active_connection).path();
-  //     }
-  //   }
-  //   i.next();
-  //   qWarning() << i.key() << ": " << i.value();
-  // }
+  m_enabled = false;
+  Q_EMIT enabledChanged(m_enabled);
+
 }
