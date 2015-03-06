@@ -678,12 +678,8 @@ ItemPage {
     Rectangle {
         id: updateNotification
         objectName: "updateNotification"
-        anchors {
-            bottom: configuration.top
-            left: parent.left
-            right: parent.right
-            top: parent.top
-        }
+        width: parent.width
+        height: parent.height - configuration.height
         visible: false
         property string text: ""
 
