@@ -307,6 +307,11 @@ class CellularPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
         self.pointing_device.click_object(ok)
 
     @autopilot.logging.log_action(logger.debug)
+    def setup_hotspot(self, config):
+        hotspot_page = self._enter_hotspot()
+        hotspot_page.setup_hotspot(config)
+
+    @autopilot.logging.log_action(logger.debug)
     def enable_hotspot(self):
         hotspot_page = self._enter_hotspot()
         hotspot_page.enable_hotspot()
@@ -352,11 +357,61 @@ class Hotspot(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
 
     @autopilot.logging.log_action(logger.debug)
     def setup_hotspot(self, config):
-        pass
+        obj = self.select_single(objectName="hotspotSetupEntry")
+        self.pointing_device.click_object(obj)
+        setup = self.get_root_instance().wait_select_single(
+            objectName='hotspotSetup')
+        if config["ssid"]:
+            setup.set_ssid(config["ssid"])
+        if config["password"]:
+            setup.set_password(config["password"])
+        setup.enable()
 
     @autopilot.logging.log_action(logger.debug)
     def get_hotspot_status(self):
         pass
+
+
+class HotspotSetup(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
+
+    """Autopilot helper for Hotspot setup."""
+
+    @classmethod
+    def validate_dbus_object(cls, path, state):
+        name = introspection.get_classname_from_path(path)
+        if name == b'Dialog':
+            if state['objectName'][1] == 'hotspotSetup':
+                return True
+        return False
+
+    @property
+    def _ssid_field(self):
+        return self.wait_select_single(
+            ubuntuuitoolkit.TextField,
+            objectName='ssidField')
+
+    @property
+    def _password_field(self):
+        return self.wait_select_single(
+            ubuntuuitoolkit.TextField,
+            objectName='passwordField')
+
+    @property
+    def _enable_button(self):
+        return self.wait_select_single(
+            'Button', objectName='enableButton')
+
+    @autopilot.logging.log_action(logger.debug)
+    def set_ssid(self, ssid):
+        self._ssid_field.write(ssid)
+
+    @autopilot.logging.log_action(logger.debug)
+    def set_password(self, password):
+        self._password_field.write(password)
+
+    @autopilot.logging.log_action(logger.debug)
+    def enable(self):
+        self.pointing_device.click_object(self._enable_button)
 
 
 class BluetoothPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):

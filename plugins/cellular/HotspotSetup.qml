@@ -22,46 +22,49 @@ import SystemSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 import Ubuntu.SystemSettings.Cellular 1.0
+import Ubuntu.Components.Popups 0.1
 
-Dialog {
 
+Component {
     id: hotspotSetup
-    title: i18n.tr("Change hotspot setup")
 
-    property var hotspotManager: null
+    Dialog {
+        id: hotspotSetupDialog
+        property var hotspotManager: null
+        objectName: "hotspotSetup"
+        title: hotspotManager.stored ?
+            i18n.tr("Change hotspot setup") : i18n.tr("Setup hotspot")
 
-
-    Column {
-
-        anchors.fill: parent
-
-        ListItem.Standard {
+        Label {
             id: ssidLabel
             text: i18n.tr("Hotspot name")
+            fontSize: "medium"
+            font.bold: true
+            color: Theme.palette.selected.backgroundText
+            elide: Text.ElideRight
         }
 
         TextField {
             id: ssidField
-            text: hotspotManager.getHotspotName()
-            anchors.left: parent.left
-            anchors.right: parent.right
-            anchors.leftMargin: units.gu(2)
-            anchors.rightMargin: units.gu(2)
+            objectName: "ssidField"
+            text: hotspotManager.ssid
         }
 
-        ListItem.Standard {
+        Label {
             id: passwordLabel
             text: i18n.tr("Key (must be 8 characters or longer)")
+            fontSize: "medium"
+            font.bold: true
+            color: Theme.palette.selected.backgroundText
+            elide: Text.ElideRight
         }
 
         TextField {
             id: passwordField
-            text: hotspotManager.getHotspotPassword()
-            echoMode: passwordVisibleSwitch.checked ? TextInput.Normal : TextInput.Password
-            anchors.left: parent.left
-            anchors.right: parent.right
-            anchors.leftMargin: units.gu(2)
-            anchors.rightMargin: units.gu(2)
+            objectName: "passwordField"
+            text: hotspotManager.password
+            echoMode: passwordVisibleSwitch.checked ?
+                TextInput.Normal : TextInput.Password
         }
 
         ListItem.Standard {
@@ -73,31 +76,50 @@ Dialog {
         }
 
         RowLayout {
-            anchors {
-                left: parent.left
-                right: parent.right
-                margins: units.gu(2)
+
+            anchors.margins: units.gu(2)
+
+            Button {
+                id: cancelButton
+                Layout.fillWidth: true
+                text: i18n.tr("Cancel")
+                onClicked: PopupUtils.close(hotspotSetupDialog)
             }
 
-        Button {
-            id: cancelButton
-            Layout.fillWidth: true
-            text: i18n.tr("Cancel")
-            onClicked: {
-                pageStack.pop()
+            Button {
+                id: enableButton
+                objectName: "enableButton"
+                visible: !hotspotManager.stored
+                Layout.fillWidth: true
+                text:  i18n.tr("Enable")
+                enabled: ssidField.text != "" && passwordField.length >= 8
+                onClicked: {
+                    hotspotManager.ssid = ssidField.text;
+                    hotspotManager.password = passwordField.text;
+                    hotspotManager.enabled = true;
+                    // hotspotManager.storedChanged.connect(function (stored) {
+                    //     console.warn('qml saw storedChanged');
+                    //     if (stored) {
+                    //         PopupUtils.close(hotspotSetupDialog);
+                    //     } else {
+                    //         console.warn('qml saw nack of storedChanged');
+                    //     }
+                    // });
+                }
             }
-        }
 
-        Button {
-            id: connectButton
-            Layout.fillWidth: true
-            text: i18n.tr("Change")
-            enabled: ssidField.text != "" && passwordField.length >= 8
-            onClicked: {
-                hotspotManager.setupHotspot(ssidField.text, passwordField.text)
-                pageStack.pop()
+            Button {
+                id: changeButton
+                visible: hotspotManager.stored
+                Layout.fillWidth: true
+                text: i18n.tr("Change")
+                enabled: enableButton.enabled
+                onClicked: {
+                    hotspotManager.ssid = ssidField.text;
+                    hotspotManager.password = passwordField.text;
+                    PopupUtils.close(hotspotSetupDialog);
+                }
             }
-        }
         }
     }
 }

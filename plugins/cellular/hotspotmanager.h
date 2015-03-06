@@ -23,58 +23,95 @@
 
 #include <QObject>
 #include <QDBusObjectPath>
+
+#include "nm_manager_proxy.h"
+#include "nm_settings_proxy.h"
+#include "nm_settings_connection_proxy.h"
+
 /**
  * For exposing dbus data to Qml.
  */
 
-// NM 802.11 Mode
-enum class HotspotMode
-{
-    UNKNOWN,
-    ADHOC,
-    INFRA,
-    AP,
-    P2P
-};
-
 class HotspotManager : public QObject {
-    Q_OBJECT
-    Q_PROPERTY( bool active
-                READ active
-                WRITE setActive
-                NOTIFY activeChanged)
-    Q_INVOKABLE QByteArray getHotspotName();
-    Q_INVOKABLE QString getHotspotPassword();
-    Q_INVOKABLE void setupHotspot(QByteArray ssid, QString password, HotspotMode mode = HotspotMode::AP);
+  Q_OBJECT
+  Q_PROPERTY( bool enabled
+    READ enabled
+    WRITE setEnabled
+    NOTIFY enabledChanged)
+  Q_PROPERTY( QByteArray ssid
+    READ ssid
+    WRITE setSsid
+    NOTIFY ssidChanged)
+  Q_PROPERTY( QString securityScheme
+    READ securityScheme
+    WRITE setSecurityScheme
+    NOTIFY securitySchemeChanged)
+  Q_PROPERTY( QString password
+    READ password
+    WRITE setPassword
+    NOTIFY passwordChanged)
+  Q_PROPERTY( QString mode
+    READ mode
+    WRITE setMode
+    NOTIFY modeChanged)
+  Q_PROPERTY( bool stored
+    READ stored
+    NOTIFY storedChanged)
 
 public:
-    explicit HotspotManager(QObject *parent = nullptr);
-    ~HotspotManager() {};
+  explicit HotspotManager(QObject *parent = nullptr);
+  ~HotspotManager() {};
 
-    bool active() const;
-    void setActive(bool);
-    void destroyHotspot();
+  bool enabled() const;
+  void setEnabled(bool);
+
+  bool stored() const;
+
+  QByteArray ssid() const;
+  void setSsid(QByteArray);
+
+  QString password() const;
+  void setPassword(QString);
+
+  QString mode() const;
+  void setMode(QString);
+
+  QString securityScheme() const;
+  void setSecurityScheme(QString);
+
+  void destroyHotspot(QDBusObjectPath);
 
 Q_SIGNALS:
-    void activeChanged(bool active);
-    void establishing();
-    void hotspotFailed(const QString &message);
+//   void hotspotChanged(Hotspot hotspot);
+  void enabledChanged(bool enabled);
+  void storedChanged(bool stored);
+  void pathChanged(QString path);
+  void ssidChanged(QByteArray ssid);
+  void passwordChanged(QString password);
+  void securitySchemeChanged(QString securityScheme);
+  void modeChanged(QString mode);
+  void reportError(const QString &message);
 
 public Q_SLOTS:
-    void newConnection(QDBusObjectPath);
-    void devicedAdded(QDBusObjectPath);
+  void onCreateFinished(QDBusObjectPath);
+  void onDeleteFinished();
+  void onNetworkManagerPropertiesChanged(QVariantMap);
+//   void hotspotEnabledChanged(bool);
 
 private:
-    bool m_active;
-    QByteArray m_ssid;
-    QString m_password;
-    QString m_settings_path;
-    HotspotMode m_mode;
-    QDBusObjectPath m_device_path;
+  QString m_mode;
+  bool m_enabled;
+  bool m_stored;
+  QString m_password;
+  QByteArray m_ssid;
 
-    bool enableHotspot();
-    bool disableHotspot();
+  QDBusObjectPath m_device_path;
+  QDBusObjectPath m_hotspot_path;
+
+  bool enable();
+  bool disable();
+  void setStored(bool);
+
 };
-
 
 #endif

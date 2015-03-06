@@ -154,7 +154,8 @@ def AddEthernetDevice(self, device_name, iface_name, state):
     devices = self.Get(MAIN_IFACE, 'Devices')
     devices.append(path)
     self.Set(MAIN_IFACE, 'Devices', devices)
-
+    self.EmitSignal(MAIN_IFACE, 'PropertiesChanged', 'a{sv}', [
+        self.GetAll(MAIN_IFACE)])
     return path
 
 
@@ -212,7 +213,8 @@ def AddWiFiDevice(self, device_name, iface_name, state):
     devices = self.Get(MAIN_IFACE, 'Devices')
     devices.append(path)
     self.Set(MAIN_IFACE, 'Devices', devices)
-
+    self.EmitSignal(MAIN_IFACE, 'PropertiesChanged', 'a{sv}', [
+        self.GetAll(MAIN_IFACE)])
     return path
 
 
@@ -312,12 +314,15 @@ def NetworkManagerAddAndActivateConnection(
     active_connections = self.Get(MAIN_IFACE, 'ActiveConnections')
     active_connections.append(active_con_path)
     self.Set(MAIN_IFACE, 'ActiveConnections', active_connections)
+    self.EmitSignal(MAIN_IFACE, 'PropertiesChanged', 'a{sv}', [
+        self.GetAll(MAIN_IFACE)])
 
     self.AddObject(
         active_con_path, CON_ACTIVE_IFACE,
         {
             'Connection': path,
             'SpecificObject': specific_path,
+            'State': dbus.UInt32(2)
         }, [])
 
     syslog.syslog(
@@ -338,12 +343,15 @@ def NetworkManagerActivateConnection(
     active_con_path = ACTIVE_CON_OBJ + "/" + name
     active_connections.append(active_con_path)
     self.Set(MAIN_IFACE, 'ActiveConnections', active_connections)
+    self.EmitSignal(MAIN_IFACE, 'PropertiesChanged', 'a{sv}', [
+        self.GetAll(MAIN_IFACE)])
 
     self.AddObject(
         active_con_path, CON_ACTIVE_IFACE,
         {
             'Connection': connection_path,
             'SpecificObject': specific_path,
+            'State': dbus.UInt32(0)
         }, [])
 
     dev_obj = dbusmock.get_object(dev_path)
@@ -360,6 +368,8 @@ def NetworkManagerDeactivateConnection(self, active_connection):
     active_connections = self.Get(MAIN_IFACE, 'ActiveConnections')
     active_connections.remove(active_connection)
     self.Set(MAIN_IFACE, 'ActiveConnections', active_connections)
+    self.EmitSignal(MAIN_IFACE, 'PropertiesChanged', 'a{sv}', [
+        self.GetAll(MAIN_IFACE)])
     self.RemoveObject(active_connection)
 
 
