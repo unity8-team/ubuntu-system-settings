@@ -25,8 +25,9 @@
 #include <QDBusInterface>
 #include <QDBusMetaType>
 
- typedef QMap<QString, QVariantMap> NetworkManagerProperties;
- Q_DECLARE_METATYPE(NetworkManagerProperties)
+
+typedef QMap<QString, QVariantMap> nmConnectionArg;
+Q_DECLARE_METATYPE(nmConnectionArg)
 
 // wpa_supplicant interaction
  namespace  {
@@ -134,14 +135,14 @@ namespace {
       nm_object,
       QDBusConnection::systemBus());
 
-  NetworkManagerProperties createConnectionArguments(
+  nmConnectionArg createConnectionArguments(
         const QByteArray &ssid,
         const QString &password,
         const QDBusObjectPath &devicePath,
         QString mode) {
 
     Q_UNUSED(devicePath);
-    NetworkManagerProperties connection;
+    nmConnectionArg connection;
 
     QString s_ssid = QString::fromLatin1(ssid);
 
@@ -181,7 +182,7 @@ namespace {
     return connection;
   }
 
-  NetworkManagerProperties getConnectionSettings (
+  nmConnectionArg getConnectionSettings (
       QDBusObjectPath connection) {
 
     OrgFreedesktopNetworkManagerSettingsConnectionInterface conn(
@@ -204,7 +205,7 @@ namespace {
 
     QDBusObjectPath invalid("");
 
-    NetworkManagerProperties connection = createConnectionArguments(ssid, password, devicePath, mode);
+    nmConnectionArg connection = createConnectionArguments(ssid, password, devicePath, mode);
 
     auto add_connection_reply = nm_settings.AddConnection(connection);
     add_connection_reply.waitForFinished();
@@ -333,7 +334,7 @@ HotspotManager::HotspotManager(QObject *parent) :
 
   static bool is_registered = false;
   if(!is_registered) {
-    qDBusRegisterMetaType<NetworkManagerProperties>();
+    qDBusRegisterMetaType<nmConnectionArg>();
     is_registered = true;
   }
 
