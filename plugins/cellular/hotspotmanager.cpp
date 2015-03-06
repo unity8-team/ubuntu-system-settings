@@ -387,6 +387,12 @@ void HotspotManager::setEnabled(bool value) {
 
   if (value) {
 
+    bool changed = changeInterfaceFirmware("/", m_mode);
+    if (!changed) {
+      Q_EMIT reportError("Failed to change firmware of device to ap.");
+      return;
+    }
+
     if (m_stored) {
       // we defer enabling until old hotspot is deleted
       destroyHotspot(m_hotspot_path);
@@ -416,11 +422,7 @@ void HotspotManager::setEnabled(bool value) {
 
 bool HotspotManager::enable() {
 
-    bool changed = changeInterfaceFirmware("/", m_mode);
-    if (!changed) {
-      Q_EMIT reportError("Failed to change firmware of device to ap.");
-      return false;
-    }
+
 }
 
 bool HotspotManager::disable() {
