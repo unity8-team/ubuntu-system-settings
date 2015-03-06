@@ -329,14 +329,15 @@ HotspotManager::HotspotManager(QObject *parent) :
       m_stored(false),
       m_password(""),
       m_ssid(""),
-      m_device_path(getWirelessDevice()),
-      m_hotspot_path(getHotspot(m_mode)) {
+      m_device_path(getWirelessDevice()) {
 
-  static bool is_registered = false;
-  if(!is_registered) {
+  static bool isRegistered = false;
+  if(!isRegistered) {
     qDBusRegisterMetaType<nmConnectionArg>();
-    is_registered = true;
+    isRegistered = true;
   }
+
+  m_hotspot_path = getHotspot(m_mode);
 
   // A bit hard to read, but sets stored to false if the
   // hotspot path is empty.
