@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-10-16 20:04-0600\n"
-"PO-Revision-Date: 2015-02-27 20:06+0000\n"
+"PO-Revision-Date: 2015-03-06 20:50+0000\n"
 "Last-Translator: Niklas Wenzel <nikwen.developer@gmail.com>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2015-02-28 06:15+0000\n"
-"X-Generator: Launchpad (build 17361)\n"
+"X-Launchpad-Export-Date: 2015-03-07 05:44+0000\n"
+"X-Generator: Launchpad (build 17383)\n"
 
 #: ubuntu-system-settings.desktop.in.in.h:1 ../src/qml/MainWindow.qml:112
 msgid "System Settings"
@@ -1886,7 +1886,7 @@ msgstr "Installiere Aktualisierung …"
 #: ../plugins/system-update//PageComponent.qml:747
 #: ../plugins/system-update//Configuration.qml:29
 msgid "Auto download"
-msgstr "Automatisch Herunterladen"
+msgstr "Automatisch herunterladen"
 
 #: ../plugins/system-update//PageComponent.qml:752
 msgid "On wi-fi"
