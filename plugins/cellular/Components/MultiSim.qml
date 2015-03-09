@@ -58,7 +58,7 @@ Column {
         text: i18n.tr("Wi-Fi hotspot")
         progression: true
         onClicked: {
-            pageStack.push(Qt.resolvedUrl("Hotspot.qml"))
+            pageStack.push(Qt.resolvedUrl("../Hotspot.qml"))
         }
         visible: showAllUI && (actionGroup.actionObject.valid ? actionGroup.actionObject.state : false)
     }

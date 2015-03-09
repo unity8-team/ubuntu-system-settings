@@ -72,7 +72,7 @@ Column {
         onClicked: {
             pageStack.push(Qt.resolvedUrl("../Hotspot.qml"))
         }
-        visible: true || (actionGroup.actionObject.valid ? actionGroup.actionObject.state : false)
+        visible: showAllUI && (actionGroup.actionObject.valid ? actionGroup.actionObject.state : false)
     }
 
     ListItem.Standard {
