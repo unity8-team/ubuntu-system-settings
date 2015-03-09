@@ -25,249 +25,274 @@
 #include <QDBusInterface>
 #include <QDBusMetaType>
 
-
 typedef QMap<QString, QVariantMap> nmConnectionArg;
 Q_DECLARE_METATYPE(nmConnectionArg)
 
 // wpa_supplicant interaction
- namespace  {
+namespace  {
 
-  const QString wpa_supplicant_service("fi.w1.wpa_supplicant1");
-  const QString wpa_supplicant_interface("fi.w1.wpa_supplicant1");
-  const QString wpa_supplicant_path("/fi/w1/wpa_supplicant1");
-  const QString property("urfkill.hybris.wlan");
+const QString wpa_supplicant_service("fi.w1.wpa_supplicant1");
+const QString wpa_supplicant_interface("fi.w1.wpa_supplicant1");
+const QString wpa_supplicant_path("/fi/w1/wpa_supplicant1");
+const QString property("urfkill.hybris.wlan");
 
 // True if changed successfully, or there was no need. Otherwise false
-  bool changeInterfaceFirmware(const QString interface, const QString mode) {
+bool changeInterfaceFirmware(const QString interface, const QString mode) {
 
-    QString program("getprop");
-    QStringList arguments;
-    arguments << property;
+  QString program("getprop");
+  QStringList arguments;
+  arguments << property;
 
-    QProcess *getprop = new QProcess();
-    getprop->start(program, arguments);
+  QProcess *getprop = new QProcess();
+  getprop->start(program, arguments);
 
-    if (!getprop->waitForFinished()) {
-      qCritical() << "getprop process failed:" << getprop->errorString();
-      delete getprop;
-      return false;
-    }
-
-    int is_hybris = getprop->readAllStandardOutput().indexOf("1");
+  if (!getprop->waitForFinished()) {
+    qCritical() << "getprop process failed:" << getprop->errorString();
     delete getprop;
-
-    // 1 means hybris, which means we have to change the
-    // interface driver.
-    if (is_hybris >= 0) {
-      QDBusInterface wpasIface (wpa_supplicant_service,
-        wpa_supplicant_path,
-        wpa_supplicant_interface,
-        QDBusConnection::systemBus());
-
-      const QDBusObjectPath interface_path(interface);
-
-      auto reply = wpasIface.call("SetInterfaceFirmware", QVariant::fromValue(interface_path), QVariant(mode));
-      if (reply.type() == QDBusMessage::ErrorMessage) {
-        qCritical() << "Failed to change interface firmware:" << reply.errorMessage();
-        return false;
-      } else {
-        return true;
-      }
-    }
-
-    // We had no need to change the firmware.
-    return true;
+    return false;
   }
 
+  int index = getprop->readAllStandardOutput().indexOf("1");
+  delete getprop;
+
+  // 1 means hybris, which means we have to change the
+  // interface driver.
+  if (index >= 0) {
+    QDBusInterface wpasIface (
+        wpa_supplicant_service, wpa_supplicant_path, wpa_supplicant_interface,
+        QDBusConnection::systemBus());
+
+    const QDBusObjectPath interface_path(interface);
+
+    auto set_interface = wpasIface.call("SetInterfaceFirmware",
+                                        QVariant::fromValue(interface_path),
+                                        QVariant(mode));
+
+    if (set_interface.type() == QDBusMessage::ErrorMessage) {
+      qCritical() << "Failed to change interface firmware:"
+          << set_interface.errorMessage();
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  // We had no need to change the firmware.
+  return true;
+}
 } // wpa_supplicant interaction
 
 // UrfKill interaction
 namespace  {
 
-  const QString urfkill_service("org.freedesktop.URfkill");
-  const QString urfkill_interface("org.freedesktop.URfkill");
-  const QString urfkill_path("/org/freedesktop/URfkill");
+const QString urfkill_service("org.freedesktop.URfkill");
+const QString urfkill_interface("org.freedesktop.URfkill");
+const QString urfkill_path("/org/freedesktop/URfkill");
 
 // True if call went through and returned true.
-  bool setWifiBlock(bool block) {
+bool setWifiBlock(bool block) {
 
-    QDBusInterface urfkill_dbus_interface (
-      urfkill_service,
-      urfkill_path,
-      urfkill_interface,
-      QDBusConnection::systemBus());
+  QDBusInterface urfkill_dbus_interface(urfkill_service, urfkill_path,
+                                        urfkill_interface, QDBusConnection::systemBus());
 
-    const unsigned int device_type = 1; /* wifi type */
-    auto reply = urfkill_dbus_interface.call("Block", device_type, block);
-    if (reply.type() == QDBusMessage::ErrorMessage) {
-      qCritical() << "Failed to block wifi" << reply.errorMessage();
-      return false;
-    }
+  const unsigned int device_type = 1; /* wifi type */
+  auto reply = urfkill_dbus_interface.call("Block", device_type, block);
 
-    if (reply.type() == QDBusMessage::ReplyMessage && reply.arguments().count() == 1) {
-        // returned false from call
-      if (!qdbus_cast<bool>(reply.arguments().at(0))) {
-       qCritical() << "URfkill Block call did not succeed";
-       return false;
-     }
+  if (reply.type() == QDBusMessage::ErrorMessage) {
+    qCritical() << "Failed to block wifi" << reply.errorMessage();
+    return false;
+  }
+
+  // We got exactly one argument back, and it's not an error.
+  if (reply.type() == QDBusMessage::ReplyMessage && reply.arguments().count() == 1) {
+
+    // returned false from call
+    if (!qdbus_cast<bool>(reply.arguments().at(0))) {
+     qCritical() << "URfkill Block call did not succeed";
+     return false;
    }
-   return true;
  }
-
+ return true;
+}
 } // UrfKill interaction
 
 // NetworkManager interaction
 namespace {
 
-  const QString nm_service("org.freedesktop.NetworkManager");
-  const QString nm_object("/org/freedesktop/NetworkManager");
-  const QString nm_settings_object("/org/freedesktop/NetworkManager/Settings");
-  const QString nm_settings_interface("org.freedesktop.NetworkManager.Settings");
-  const QString nm_connection_interface("org.freedesktop.NetworkManager.Settings.Connection");
-  const QString nm_connection_active_interface("org.freedesktop.NetworkManager.Connection.Active");
-  const QString nm_device_interface("org.freedesktop.NetworkManager.Device");
-  const QString dbus_properties_interface("org.freedesktop.DBus.Properties");
-  const QString connection_property("Connection");
+const QString nm_service("org.freedesktop.NetworkManager");
+const QString nm_object("/org/freedesktop/NetworkManager");
+const QString nm_settings_object("/org/freedesktop/NetworkManager/Settings");
+const QString nm_settings_interface("org.freedesktop.NetworkManager.Settings");
+const QString nm_connection_interface("org.freedesktop.NetworkManager.Settings.Connection");
+const QString nm_connection_active_interface("org.freedesktop.NetworkManager.Connection.Active");
+const QString nm_device_interface("org.freedesktop.NetworkManager.Device");
+const QString dbus_properties_interface("org.freedesktop.DBus.Properties");
+const QString connection_property("Connection");
 
-  OrgFreedesktopNetworkManagerSettingsInterface nm_settings(
-      nm_service,
-      nm_settings_object,
-      QDBusConnection::systemBus());
+// NetworkManager dbus interface proxy we will use to query
+// against NetworkManager. See
+// https://developer.gnome.org/NetworkManager/0.9/spec.html
+//     #org.freedesktop.NetworkManager
+OrgFreedesktopNetworkManagerInterface nm_manager(
+    nm_service, nm_object, QDBusConnection::systemBus());
 
-  OrgFreedesktopNetworkManagerInterface nm_manager(
-      nm_service,
-      nm_object,
-      QDBusConnection::systemBus());
+// NetworkManager Settings interface proxy we use to get
+// the list of connections, as well as adding connections.
+// See https://developer.gnome.org/NetworkManager/0.9/spec.html
+//     #org.freedesktop.NetworkManager.Settings
+OrgFreedesktopNetworkManagerSettingsInterface nm_settings(
+    nm_service, nm_settings_object, QDBusConnection::systemBus());
 
-  nmConnectionArg createConnectionArguments(
-        const QByteArray &ssid,
-        const QString &password,
-        const QDBusObjectPath &devicePath,
-        QString mode) {
+// Helper that maps QStrings to other QVariantMaps, i.e.
+// QMap<QString, QVariantMap>. QVariantMap is an alias for
+// QMap<QString, QVariant>.
+// See http://doc.qt.io/qt-5/qvariant.html#QVariantMap-typedef and
+// https://developer.gnome.org/NetworkManager/0.9/spec.html
+//     #type-String_String_Variant_Map_Map
+nmConnectionArg createConnectionArguments(
+    const QByteArray &ssid, const QString &password,
+    const QDBusObjectPath &devicePath, QString mode) {
 
-    Q_UNUSED(devicePath);
-    nmConnectionArg connection;
+  Q_UNUSED(devicePath);
+  nmConnectionArg connection;
 
-    QString s_ssid = QString::fromLatin1(ssid);
+  QString s_ssid = QString::fromLatin1(ssid);
 
-    QVariantMap wireless;
-    wireless[QStringLiteral("security")] = QVariant(QStringLiteral("802-11-wireless-security"));
-    wireless[QStringLiteral("ssid")] = QVariant(ssid);
-    wireless[QStringLiteral("mode")] = QVariant(mode);
+  QVariantMap wireless;
+  wireless[QStringLiteral("security")] = QVariant(QStringLiteral("802-11-wireless-security"));
+  wireless[QStringLiteral("ssid")] = QVariant(ssid);
+  wireless[QStringLiteral("mode")] = QVariant(mode);
 
-    connection["802-11-wireless"] = wireless;
+  connection["802-11-wireless"] = wireless;
 
-    QVariantMap connsettings;
-    connsettings[QStringLiteral("autoconnect")] = QVariant(true);
-    connsettings[QStringLiteral("id")] = QVariant(s_ssid);
-    connsettings[QStringLiteral("uuid")] = QVariant(QStringLiteral("aab22b5d-7342-48dc-8920-1b7da31d6829"));
-    connsettings[QStringLiteral("type")] = QVariant(QStringLiteral("802-11-wireless"));
-    connection["connection"] = connsettings;
+  QVariantMap connsettings;
+  connsettings[QStringLiteral("autoconnect")] = QVariant(true);
+  connsettings[QStringLiteral("id")] = QVariant(s_ssid);
+  connsettings[QStringLiteral("uuid")] = QVariant(QStringLiteral("aab22b5d-7342-48dc-8920-1b7da31d6829"));
+  connsettings[QStringLiteral("type")] = QVariant(QStringLiteral("802-11-wireless"));
+  connection["connection"] = connsettings;
 
-    QVariantMap ipv4;
-    ipv4[QStringLiteral("addressess")] = QVariant(QStringList());
-    ipv4[QStringLiteral("dns")] = QVariant(QStringList());
-    ipv4[QStringLiteral("method")] = QVariant(QStringLiteral("shared"));
-    ipv4[QStringLiteral("routes")] = QVariant(QStringList());
-    connection["ipv4"] = ipv4;
+  QVariantMap ipv4;
+  ipv4[QStringLiteral("addressess")] = QVariant(QStringList());
+  ipv4[QStringLiteral("dns")] = QVariant(QStringList());
+  ipv4[QStringLiteral("method")] = QVariant(QStringLiteral("shared"));
+  ipv4[QStringLiteral("routes")] = QVariant(QStringList());
+  connection["ipv4"] = ipv4;
 
-    QVariantMap ipv6;
-    ipv6[QStringLiteral("method")] = QVariant(QStringLiteral("ignore"));
-    connection["ipv6"] = ipv6;
+  QVariantMap ipv6;
+  ipv6[QStringLiteral("method")] = QVariant(QStringLiteral("ignore"));
+  connection["ipv6"] = ipv6;
 
-    QVariantMap security;
-    security[QStringLiteral("proto")] = QVariant(QStringList{"rsn"});
-    security[QStringLiteral("pairwise")] = QVariant(QStringList{"ccmp"});
-    security[QStringLiteral("group")] = QVariant(QStringList{"ccmp"});
-    security[QStringLiteral("key-mgmt")] = QVariant(QStringLiteral("wpa-psk"));
-    security[QStringLiteral("psk")] = QVariant(password);
-    connection["802-11-wireless-security"] = security;
+  QVariantMap security;
+  security[QStringLiteral("proto")] = QVariant(QStringList{"rsn"});
+  security[QStringLiteral("pairwise")] = QVariant(QStringList{"ccmp"});
+  security[QStringLiteral("group")] = QVariant(QStringList{"ccmp"});
+  security[QStringLiteral("key-mgmt")] = QVariant(QStringLiteral("wpa-psk"));
+  security[QStringLiteral("psk")] = QVariant(password);
+  connection["802-11-wireless-security"] = security;
 
-    return connection;
+  return connection;
+}
+
+// Helper that returns a QMap<QString, QVariantMap> given a QDBusObjectPath.
+// See https://developer.gnome.org/NetworkManager/0.9/spec.html
+//     #org.freedesktop.NetworkManager.Settings.Connection.GetSettings
+nmConnectionArg getConnectionSettings (QDBusObjectPath connection) {
+
+  OrgFreedesktopNetworkManagerSettingsConnectionInterface conn(
+      nm_service, connection.path(), QDBusConnection::systemBus());
+
+  auto connection_settings = conn.GetSettings();
+  connection_settings.waitForFinished();
+  return connection_settings.value();
+}
+
+// Helper that adds a connection and returns the QDBusObjectPath
+// of the newly created connection.
+// See https://developer.gnome.org/NetworkManager/0.9/spec.html
+//     #org.freedesktop.NetworkManager.Settings.AddConnection
+QDBusObjectPath addConnection(
+    const QByteArray &ssid, const QString &password,
+    const QDBusObjectPath &devicePath, QString mode) {
+
+  QDBusObjectPath invalid("");
+
+  nmConnectionArg connection = createConnectionArguments(ssid, password,
+                                                         devicePath, mode);
+
+  auto add_connection_reply = nm_settings.AddConnection(connection);
+  add_connection_reply.waitForFinished();
+
+  if(!add_connection_reply.isValid()) {
+    qCritical() << "Failed to add connection: "
+        << add_connection_reply.error().message();
+    return invalid;
   }
+  return add_connection_reply.argumentAt<0>();
+}
 
-  nmConnectionArg getConnectionSettings (
-      QDBusObjectPath connection) {
+// Returns a QDBusObjectPath of a hotspot given a mode.
+// Valid modes are 'p2p', 'ap' and 'adhoc'.
+QDBusObjectPath getHotspot(QString mode) {
+  const char wifi_key[] = "802-11-wireless";
 
+  auto listed_connections = nm_settings.ListConnections();
+  listed_connections.waitForFinished();
+
+  for(const auto &connection : listed_connections.value()) {
     OrgFreedesktopNetworkManagerSettingsConnectionInterface conn(
-        nm_service,
-        connection.path(),
-        QDBusConnection::systemBus());
+        nm_service, connection.path(), QDBusConnection::systemBus());
 
-    auto connection_settings = conn.GetSettings();
-    connection_settings.waitForFinished();
-    return connection_settings.value();
-  }
+    auto connection_settings = getConnectionSettings(connection);
 
-  QDBusObjectPath addConnection(
-        const QByteArray &ssid,
-        const QString &password,
-        const QDBusObjectPath &devicePath,
-        QString mode) {
+    if(connection_settings.find(wifi_key) != connection_settings.end()) {
+      auto wifi_setup = connection_settings[wifi_key];
+      QString wifi_mode = wifi_setup["mode"].toString();
 
-    QDBusObjectPath invalid("");
-
-    nmConnectionArg connection = createConnectionArguments(ssid, password, devicePath, mode);
-
-    auto add_connection_reply = nm_settings.AddConnection(connection);
-    add_connection_reply.waitForFinished();
-    if(!add_connection_reply.isValid()) {
-      qCritical() << "Failed to add connection: " << add_connection_reply.error().message() << "\n";
-      return invalid;
-    }
-
-    return add_connection_reply.argumentAt<0>();
-  }
-
-  QDBusObjectPath getHotspot(QString mode) {
-    const char wifi_key[] = "802-11-wireless";
-
-    auto listed_connections = nm_settings.ListConnections();
-    listed_connections.waitForFinished();
-    for(const auto &connection : listed_connections.value()) {
-      OrgFreedesktopNetworkManagerSettingsConnectionInterface conn(
-          nm_service,
-          connection.path(),
-          QDBusConnection::systemBus());
-
-      auto connection_settings = getConnectionSettings(connection);
-      if(connection_settings.find(wifi_key) != connection_settings.end()) {
-        auto wifi_setup = connection_settings[wifi_key];
-        QString wifi_mode = wifi_setup["mode"].toString();
-        if(wifi_mode == mode) {
-          return connection;
-        }
+      if(wifi_mode == mode) {
+        return connection;
       }
     }
+  }
+  return QDBusObjectPath();
+}
+
+// Returns a QDBusObjectPath of a wireless device. For now
+// it returns the first device.
+QDBusObjectPath getWirelessDevice () {
+
+  // find the first wlan adapter for now
+  auto reply1 = nm_manager.GetDevices();
+  reply1.waitForFinished();
+
+  if(!reply1.isValid()) {
+    qCritical() << "Could not get network device: "
+        << reply1.error().message();
     return QDBusObjectPath();
   }
+  auto devices = reply1.value();
 
-  QDBusObjectPath getWirelessDevice () {
+  QDBusObjectPath dev;
+  for (const auto &d : devices) {
+    QDBusInterface iface(nm_service, d.path(), nm_device_interface,
+                         QDBusConnection::systemBus());
+    auto type_v = iface.property("DeviceType");
 
-    // find the first wlan adapter for now
-    auto reply1 = nm_manager.GetDevices();
-    reply1.waitForFinished();
-    if(!reply1.isValid()) {
-      qCritical() << "Could not get network device: " << reply1.error().message() << "\n";
-      return QDBusObjectPath();
-    }
-    auto devices = reply1.value();
-
-    QDBusObjectPath dev;
-    for (const auto &d : devices) {
-      QDBusInterface iface(nm_service, d.path(),
-        nm_device_interface,
-        QDBusConnection::systemBus());
-      auto type_v = iface.property("DeviceType");
-        if (type_v.toUInt() == 2 /* NM_DEVICE_TYPE_WIFI */) {
+    if (type_v.toUInt() == 2 /* NM_DEVICE_TYPE_WIFI */) {
       return d;
     }
   }
-
-  qCritical() << "Wireless device not found, hotspot functionality is inoperative.\n";
+  qCritical() << "Wireless device not found, hotspot functionality is inoperative.";
   return dev;
 }
 
+// Helper to check if the hotspot on a given QDBusObjectPath is active
+// or not. It checks if the Connection.Active [1] for the given
+// path is in NetworkManager's ActiveConnections property [2].
+// [1] https://developer.gnome.org/NetworkManager/0.9/spec.html
+//     #org.freedesktop.NetworkManager.Connection.Active
+// [2] https://developer.gnome.org/NetworkManager/0.9/spec.html
+//     #org.freedesktop.NetworkManager
 bool isHotspotActive (QDBusObjectPath hotspot_connection_path) {
 
   QSet<QDBusObjectPath> active_relevant_connections;
@@ -275,21 +300,20 @@ bool isHotspotActive (QDBusObjectPath hotspot_connection_path) {
   for(const auto &active_connection : active_connections) {
 
     QDBusInterface active_connection_dbus_interface(
-        nm_service,
-        active_connection.path(),
-        dbus_properties_interface,
+        nm_service, active_connection.path(), dbus_properties_interface,
         QDBusConnection::systemBus());
 
-    QDBusReply<QVariant> connection_property = active_connection_dbus_interface.call(
-        "Get",
-        nm_connection_active_interface,
-        "Connection");
+    QDBusReply<QVariant> connection_property =
+        active_connection_dbus_interface.call(
+            "Get", nm_connection_active_interface, "Connection");
 
     if(!connection_property.isValid()) {
-      qWarning() << "Error getting connection_property: " << connection_property.error().message() << "\n";
+      qWarning() << "Error getting connection_property: "
+          << connection_property.error().message();
       continue;
     }
-    QDBusObjectPath connection_path = qvariant_cast<QDBusObjectPath>(connection_property.value());
+    QDBusObjectPath connection_path = qvariant_cast<QDBusObjectPath>(
+        connection_property.value());
 
     if (hotspot_connection_path == connection_path) {
       return true;
@@ -302,6 +326,7 @@ std::string generate_password() {
   static const std::string items("abcdefghijklmnopqrstuvwxyz01234567890");
   const int password_length = 8;
   std::string result;
+
   for(int i=0; i<password_length; i++) {
     result.push_back(items[std::rand() % items.length()]);
   }
@@ -310,22 +335,18 @@ std::string generate_password() {
 
 } // NetworkManager interaction
 
-
 HotspotManager::HotspotManager(QObject *parent) :
-      QObject(parent),
-      m_mode("ap"),
-      m_stored(false),
-      m_password(""),
-      m_ssid(""),
-      m_device_path(getWirelessDevice()) {
+      QObject(parent), m_mode("ap"), m_stored(false), m_password(""),
+      m_ssid(""), m_device_path(getWirelessDevice()) {
 
   static bool isRegistered = false;
+
   if(!isRegistered) {
     qDBusRegisterMetaType<nmConnectionArg>();
     isRegistered = true;
   }
 
-  // Stored is false if hotspot path is empty
+  // Stored is false if hotspot path is empty.
   m_hotspot_path = getHotspot(m_mode);
   setStored(!m_hotspot_path.path().isEmpty());
 
@@ -338,24 +359,16 @@ HotspotManager::HotspotManager(QObject *parent) :
   }
   Q_EMIT enabledChanged(m_enabled);
 
-  // Watch for hotspots
+  // Watches for new connections added to NetworkManager's Settings
+  // interface.
   nm_settings.connection().connect(
-    nm_settings.service(),
-    nm_settings_object,
-    nm_settings_interface,
-    "NewConnection",
-    this,
-    SLOT(onNewConnection(QDBusObjectPath)));
+      nm_settings.service(), nm_settings_object, nm_settings_interface,
+      "NewConnection", this, SLOT(onNewConnection(QDBusObjectPath)));
 
-  // Watch relevant changes in NetworkManager
+  // Watches changes in NetworkManager.
   nm_manager.connection().connect(
-    nm_manager.service(),
-    nm_object,
-    nm_service,
-    "PropertiesChanged",
-    this,
-    SLOT(onPropertiesChanged(QMap<QString, QVariant>)));
-
+      nm_manager.service(), nm_object, nm_service, "PropertiesChanged", this,
+      SLOT(onPropertiesChanged(QMap<QString, QVariant>)));
 }
 
 void HotspotManager::setEnabled(bool value) {
@@ -395,6 +408,7 @@ void HotspotManager::setEnabled(bool value) {
     }
 
   } else {
+
     // Disabling the hotspot.
     bool disabled = disable();
     if (!disabled) {
@@ -404,40 +418,41 @@ void HotspotManager::setEnabled(bool value) {
       m_enabled = false;
       Q_EMIT enabledChanged(m_enabled);
     }
+
+    bool unblocked = setWifiBlock(false);
+    if (!unblocked) {
+      Q_EMIT reportError("Failed to soft unblock Wi-Fi.");
+      return false;
+    }
   }
 }
 
+// Disables a hotspot.
 bool HotspotManager::disable() {
 
   QDBusObjectPath hotspot = getHotspot(m_mode);
   if (hotspot.path().isEmpty()) {
     qWarning() << "Could not find a hotspot setup to disable.\n";
-    return false;
+    return true;
   }
 
   auto active_connections = nm_manager.activeConnections();
   for(const auto &active_connection : active_connections) {
 
     QDBusInterface iface(
-        nm_service,
-        active_connection.path(),
-        "org.freedesktop.DBus.Properties",
-        QDBusConnection::systemBus());
+        nm_service, active_connection.path(),
+        "org.freedesktop.DBus.Properties", QDBusConnection::systemBus());
 
-    QDBusReply<QVariant> conname = iface.call("Get", nm_connection_active_interface, "Connection");
-    QDBusObjectPath backingConnection = qvariant_cast<QDBusObjectPath>(conname.value());
+    QDBusReply<QVariant> conname = iface.call(
+        "Get", nm_connection_active_interface, "Connection");
+
+    QDBusObjectPath backingConnection = qvariant_cast<QDBusObjectPath>(
+        conname.value());
 
     if(backingConnection == m_hotspot_path) {
-        nm_manager.DeactivateConnection(active_connection);
-        return true;
+      nm_manager.DeactivateConnection(active_connection);
+      return true;
     }
-  }
-
-  bool unblocked = setWifiBlock(false);
-
-  if (!unblocked) {
-    Q_EMIT reportError("Failed to soft unblock Wi-Fi.");
-    return false;
   }
 
   // Not having to disable a hotspot is a success.
@@ -488,8 +503,11 @@ void HotspotManager::onNewConnection(QDBusObjectPath path) {
 
   if (path == m_hotspot_path) {
 
+    // If a new hotspot was added, it is also given that
+    // Wi-Fi has been soft blocked. We can now unblock Wi-Fi
+    // and let NetworkManager pick up the newly created
+    // connection.
     bool unblocked = setWifiBlock(false);
-
     if (!unblocked) {
       Q_EMIT reportError("Failed to soft block Wi-Fi.");
     } else {
@@ -511,12 +529,12 @@ bool HotspotManager::destroy(QDBusObjectPath path) {
       QDBusConnection::systemBus());
 
   conn.connection().connect(
-    conn.service(),
-    path.path(),
-    conn.interface(),
-    "Removed",
-    this,
-    SLOT(onRemoved()));
+      conn.service(),
+      path.path(),
+      conn.interface(),
+      "Removed",
+      this,
+      SLOT(onRemoved()));
 
   auto del = conn.Delete();
   del.waitForFinished();
@@ -524,26 +542,32 @@ bool HotspotManager::destroy(QDBusObjectPath path) {
 }
 
 void HotspotManager::onRemoved() {
-  // If a hotspot was deleted, the next step is to create a new one.
+  // The UI does not support direct deletion of a hotspot, and given how
+  // hotspots currently work, every time we want to re-use a hotspot, we
+  // delete it an add a new one.
+  // Thus, if a hotspot was deleted, we now create a new one.
   m_hotspot_path = addConnection(m_ssid, m_password, m_device_path, m_mode);
 }
 
 
 void HotspotManager::onPropertiesChanged(QVariantMap properties) {
 
-  // If we have no hotspot path, return.
+  // If we have no hotspot path, ignore changes in NetworkManager.
   if (m_hotspot_path.path().isEmpty()) {
     return;
   }
 
-  // Set flag so we know that ActiveConnections changed
+  // Set flag so we know that ActiveConnections changed.
   bool active_connection_changed = false;
 
   for(QVariantMap::const_iterator iter = properties.begin(); iter != properties.end(); ++iter) {
+
     if (iter.key() == "ActiveConnections") {
+
       const QDBusArgument args = qvariant_cast<QDBusArgument>(iter.value());
       if (args.currentType() == QDBusArgument::ArrayType) {
         args.beginArray();
+
         while (!args.atEnd()) {
           QDBusObjectPath path = qdbus_cast<QDBusObjectPath>(args);
 
@@ -562,6 +586,7 @@ void HotspotManager::onPropertiesChanged(QVariantMap properties) {
             qWarning() << "Error getting connection_property: " << connection_property.error().message() << "\n";
             continue;
           }
+
           QDBusObjectPath connection_path = qvariant_cast<QDBusObjectPath>(connection_property.value());
           if (connection_path == m_hotspot_path) {
             m_enabled = true;
@@ -573,7 +598,6 @@ void HotspotManager::onPropertiesChanged(QVariantMap properties) {
       }
     }
   }
-
 
   // At this point ActiveConnections changed, but
   // our hotspot was not in that list.
