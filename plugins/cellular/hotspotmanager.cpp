@@ -44,7 +44,6 @@ Q_DECLARE_METATYPE(nmConnectionArg)
     QStringList arguments;
     arguments << property;
 
-    // TODO(jgdx): delete this later
     QProcess *getprop = new QProcess();
     getprop->start(program, arguments);
 
