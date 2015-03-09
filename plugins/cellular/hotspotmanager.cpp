@@ -381,7 +381,6 @@ void HotspotManager::setEnabled(bool value) {
       // we defer enabling until old hotspot is deleted
       // if we can delete the old one
       // If not, unset stored flag and call this method.
-      // Risky. TODO(jgdx): how insane is this?
       if (!destroy(m_hotspot_path)) {
         setStored(false);
         setEnabled(true);
