@@ -1,3 +1,15 @@
+ubuntu-system-settings (0.3+15.04.20150309~rtm-0ubuntu1) 14.09; urgency=medium
+
+  [ CI Train Bot ]
+  * New rebuild forced.
+
+  [ Michael Terry ]
+  * Don't accept multiple "Finish" clicks during the last step of the
+    wizard; doing so can cause password-setting to be left in an
+    inconsistent state. (LP: #1414762)
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Mon, 09 Mar 2015 14:22:46 +0000
+
 ubuntu-system-settings (0.3+15.04.20150306.1~rtm-0ubuntu1) 14.09; urgency=medium
 
   [ CI Train Bot ]
