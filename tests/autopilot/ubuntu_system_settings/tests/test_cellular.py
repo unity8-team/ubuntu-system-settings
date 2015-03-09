@@ -303,6 +303,6 @@ class HotspotTestCase(HotspotBaseTestCase):
         # target_block_calls = 5
         # block_calls = len(self.urfkill_mock.GetMethodCalls('Block'))
 
-        sleep(5)
+        sleep(10)
         self.assertEqual(1, 2)
         # self.assertEqual(target_block_calls, block_calls)

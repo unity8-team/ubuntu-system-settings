@@ -42,10 +42,10 @@ class HotspotManager : public QObject {
     READ ssid
     WRITE setSsid
     NOTIFY ssidChanged)
-  Q_PROPERTY( QString securityScheme
-    READ securityScheme
-    WRITE setSecurityScheme
-    NOTIFY securitySchemeChanged)
+  Q_PROPERTY( QString auth
+    READ auth
+    WRITE setAuth
+    NOTIFY authChanged)
   Q_PROPERTY( QString password
     READ password
     WRITE setPassword
@@ -64,7 +64,6 @@ public:
 
   bool enabled() const;
   void setEnabled(bool);
-
   bool stored() const;
 
   QByteArray ssid() const;
@@ -76,27 +75,22 @@ public:
   QString mode() const;
   void setMode(QString);
 
-  QString securityScheme() const;
-  void setSecurityScheme(QString);
-
-  void destroyHotspot(QDBusObjectPath);
+  QString auth() const;
+  void setAuth(QString);
 
 Q_SIGNALS:
-//   void hotspotChanged(Hotspot hotspot);
   void enabledChanged(bool enabled);
   void storedChanged(bool stored);
-  void pathChanged(QString path);
-  void ssidChanged(QByteArray ssid);
-  void passwordChanged(QString password);
-  void securitySchemeChanged(QString securityScheme);
-  void modeChanged(QString mode);
+  void ssidChanged(const QByteArray ssid);
+  void passwordChanged(const QString password);
+  void modeChanged(const QString mode);
+  void authChanged(const QString auth);
   void reportError(const QString &message);
 
 public Q_SLOTS:
-  void onCreateFinished(QDBusObjectPath);
-  void onDeleteFinished();
-  void onNetworkManagerPropertiesChanged(QVariantMap);
-//   void hotspotEnabledChanged(bool);
+  void onNewConnection(const QDBusObjectPath);
+  void onRemoved();
+  void onPropertiesChanged(const QVariantMap);
 
 private:
   QString m_mode;
@@ -108,10 +102,12 @@ private:
   QDBusObjectPath m_device_path;
   QDBusObjectPath m_hotspot_path;
 
-  bool enable();
   bool disable();
-  void setStored(bool);
 
+  bool destroy(QDBusObjectPath);
+
+  void setStored(bool);
+  void updateSettingsFromDbus(QDBusObjectPath);
 };
 
 #endif
