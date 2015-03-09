@@ -97,14 +97,6 @@ Component {
                     hotspotManager.ssid = ssidField.text;
                     hotspotManager.password = passwordField.text;
                     hotspotManager.enabled = true;
-                    // hotspotManager.storedChanged.connect(function (stored) {
-                    //     console.warn('qml saw storedChanged');
-                    //     if (stored) {
-                    //         PopupUtils.close(hotspotSetupDialog);
-                    //     } else {
-                    //         console.warn('qml saw nack of storedChanged');
-                    //     }
-                    // });
                 }
             }
 
