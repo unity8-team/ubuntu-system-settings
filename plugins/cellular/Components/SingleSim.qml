@@ -49,6 +49,7 @@ Column {
         id: dataRoamingItem
         text: i18n.tr("Data roaming")
         enabled: sim.connMan.powered
+        showDivider: false
         control: Switch {
             id: dataRoamingControl
             objectName: "roaming"
@@ -61,7 +62,7 @@ Column {
 
     ListItem.SingleValue {
         text : i18n.tr("Hotspot disabled because Wi-Fi is off.")
-        visible: !hotspotItem.visible
+        visible: showAllUI && !hotspotItem.visible
     }
 
     ListItem.SingleValue {
