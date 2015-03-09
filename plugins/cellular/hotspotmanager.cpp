@@ -422,7 +422,6 @@ void HotspotManager::setEnabled(bool value) {
     bool unblocked = setWifiBlock(false);
     if (!unblocked) {
       Q_EMIT reportError("Failed to soft unblock Wi-Fi.");
-      return false;
     }
   }
 }
