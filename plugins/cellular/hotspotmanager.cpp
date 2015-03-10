@@ -409,6 +409,7 @@ void HotspotManager::setEnabled(bool value) {
       // Necessary firmware for the device may be missing
       Q_EMIT reportError(35);
       Q_EMIT enabledChanged(false);
+      setWifiBlock(false);
       return;
     }
 
@@ -427,6 +428,7 @@ void HotspotManager::setEnabled(bool value) {
         // Emit "Unknown Error".
         Q_EMIT reportError(0);
         Q_EMIT enabledChanged(false);
+        setWifiBlock(false);
       }
     }
 
@@ -541,17 +543,10 @@ bool HotspotManager::destroy(QDBusObjectPath path) {
   }
 
   OrgFreedesktopNetworkManagerSettingsConnectionInterface conn(
-      nm_service,
-      path.path(),
-      QDBusConnection::systemBus());
+      nm_service, path.path(), QDBusConnection::systemBus());
 
-  conn.connection().connect(
-      conn.service(),
-      path.path(),
-      conn.interface(),
-      "Removed",
-      this,
-      SLOT(onRemoved()));
+  conn.connection().connect(conn.service(), path.path(), conn.interface(),
+                            "Removed", this, SLOT(onRemoved()));
 
   auto del = conn.Delete();
   del.waitForFinished();
@@ -589,9 +584,7 @@ void HotspotManager::onPropertiesChanged(QVariantMap properties) {
           QDBusObjectPath path = qdbus_cast<QDBusObjectPath>(args);
 
           QDBusInterface active_connection_dbus_interface(
-              nm_service,
-              path.path(),
-              dbus_properties_interface,
+              nm_service, path.path(), dbus_properties_interface,
               QDBusConnection::systemBus());
 
           QDBusReply<QVariant> connection_property = active_connection_dbus_interface.call(
@@ -600,11 +593,14 @@ void HotspotManager::onPropertiesChanged(QVariantMap properties) {
               "Connection");
 
           if(!connection_property.isValid()) {
-            qWarning() << "Error getting connection_property: " << connection_property.error().message() << "\n";
+            qWarning() << "Error getting connection_property: "
+                << connection_property.error().message() << "\n";
             continue;
           }
 
-          QDBusObjectPath connection_path = qvariant_cast<QDBusObjectPath>(connection_property.value());
+          QDBusObjectPath connection_path = qvariant_cast<QDBusObjectPath>(
+              connection_property.value());
+
           if (connection_path == m_hotspot_path) {
             m_enabled = true;
             Q_EMIT enabledChanged(m_enabled);
