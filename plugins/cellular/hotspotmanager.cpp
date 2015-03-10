@@ -72,6 +72,8 @@ bool changeInterfaceFirmware(const QString interface, const QString mode) {
 
     const QDBusObjectPath interface_path(interface);
 
+    // TODO(jgdx): We need to guard against calling this
+    // when the interface is not soft blocked.
     auto set_interface = wpasIface.call("SetInterfaceFirmware",
                                         QVariant::fromValue(interface_path),
                                         QVariant(mode));
