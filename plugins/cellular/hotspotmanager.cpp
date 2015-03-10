@@ -28,20 +28,17 @@
 typedef QMap<QString, QVariantMap> nmConnectionArg;
 Q_DECLARE_METATYPE(nmConnectionArg)
 
-// wpa_supplicant interaction
-namespace  {
+namespace  { // wpa_supplicant interaction
 
 const QString wpa_supplicant_service("fi.w1.wpa_supplicant1");
 const QString wpa_supplicant_interface("fi.w1.wpa_supplicant1");
 const QString wpa_supplicant_path("/fi/w1/wpa_supplicant1");
-const QString property("urfkill.hybris.wlan");
 
-// True if changed successfully, or there was no need. Otherwise false
-bool changeInterfaceFirmware(const QString interface, const QString mode) {
+bool isHybrisWlan() {
 
   QString program("getprop");
   QStringList arguments;
-  arguments << property;
+  arguments << "urfkill.hybris.wlan";
 
   QProcess *getprop = new QProcess();
   getprop->start(program, arguments);
@@ -55,9 +52,13 @@ bool changeInterfaceFirmware(const QString interface, const QString mode) {
   int index = getprop->readAllStandardOutput().indexOf("1");
   delete getprop;
 
-  // 1 means hybris, which means we have to change the
-  // interface driver.
-  if (index >= 0) {
+  // A non-negative integer means getprop returned 1
+  return index >= 0;
+}
+
+// True if changed successfully, or there was no need. Otherwise false.
+bool changeInterfaceFirmware(const QString interface, const QString mode) {
+  if (isHybrisWlan()) {
     QDBusInterface wpasIface (
         wpa_supplicant_service, wpa_supplicant_path, wpa_supplicant_interface,
         QDBusConnection::systemBus());
@@ -80,10 +81,10 @@ bool changeInterfaceFirmware(const QString interface, const QString mode) {
   // We had no need to change the firmware.
   return true;
 }
+
 } // wpa_supplicant interaction
 
-// UrfKill interaction
-namespace  {
+namespace  { // UrfKill interaction
 
 const QString urfkill_service("org.freedesktop.URfkill");
 const QString urfkill_interface("org.freedesktop.URfkill");
@@ -116,8 +117,7 @@ bool setWifiBlock(bool block) {
 }
 } // UrfKill interaction
 
-// NetworkManager interaction
-namespace {
+namespace { // NetworkManager interaction
 
 const QString nm_service("org.freedesktop.NetworkManager");
 const QString nm_object("/org/freedesktop/NetworkManager");
@@ -376,7 +376,8 @@ void HotspotManager::setEnabled(bool value) {
   bool blocked = setWifiBlock(true);
 
   if (!blocked) {
-    Q_EMIT reportError("Failed to soft block Wi-Fi.");
+    // "The device could not be readied for configuration"
+    Q_EMIT reportError(5);
     Q_EMIT enabledChanged(false);
     return;
   }
@@ -385,7 +386,8 @@ void HotspotManager::setEnabled(bool value) {
 
     bool changed = changeInterfaceFirmware("/", m_mode);
     if (!changed) {
-      Q_EMIT reportError("Failed to change interface firmware.");
+      // Necessary firmware for the device may be missing
+      Q_EMIT reportError(35);
       Q_EMIT enabledChanged(false);
       return;
     }
@@ -402,7 +404,8 @@ void HotspotManager::setEnabled(bool value) {
       // we defer enabling until new hotspot is created
       m_hotspot_path = addConnection(m_ssid, m_password, m_device_path, m_mode);
       if (m_hotspot_path.path().isEmpty()) {
-        Q_EMIT reportError("Failed to add connection.");
+        // Emit "Unknown Error", because AddConnection should not fail.
+        Q_EMIT reportError(0);
         Q_EMIT enabledChanged(false);
       }
     }
@@ -410,29 +413,25 @@ void HotspotManager::setEnabled(bool value) {
   } else {
 
     // Disabling the hotspot.
-    bool disabled = disable();
-    if (!disabled) {
-      Q_EMIT reportError("Failed to disable hotspot");
-      Q_EMIT enabledChanged(true);
-    } else {
-      m_enabled = false;
-      Q_EMIT enabledChanged(m_enabled);
-    }
+    disable();
+    m_enabled = false;
+    Q_EMIT enabledChanged(m_enabled);
 
     bool unblocked = setWifiBlock(false);
     if (!unblocked) {
-      Q_EMIT reportError("Failed to soft unblock Wi-Fi.");
+      // "The device could not be readied for configuration"
+      Q_EMIT reportError(5);
     }
   }
 }
 
 // Disables a hotspot.
-bool HotspotManager::disable() {
+void HotspotManager::disable() {
 
   QDBusObjectPath hotspot = getHotspot(m_mode);
   if (hotspot.path().isEmpty()) {
     qWarning() << "Could not find a hotspot setup to disable.\n";
-    return true;
+    return;
   }
 
   auto active_connections = nm_manager.activeConnections();
@@ -450,12 +449,10 @@ bool HotspotManager::disable() {
 
     if(backingConnection == m_hotspot_path) {
       nm_manager.DeactivateConnection(active_connection);
-      return true;
+      return;
     }
   }
-
-  // Not having to disable a hotspot is a success.
-  return true;
+  return;
 }
 
 bool HotspotManager::enabled() const {
@@ -508,7 +505,8 @@ void HotspotManager::onNewConnection(QDBusObjectPath path) {
     // connection.
     bool unblocked = setWifiBlock(false);
     if (!unblocked) {
-      Q_EMIT reportError("Failed to soft block Wi-Fi.");
+      // "The device could not be readied for configuration"
+      Q_EMIT reportError(5);
     } else {
       setStored(true);
     }

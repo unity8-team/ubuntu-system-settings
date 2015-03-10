@@ -85,7 +85,17 @@ Q_SIGNALS:
   void passwordChanged(const QString password);
   void modeChanged(const QString mode);
   void authChanged(const QString auth);
-  void reportError(const QString &message);
+
+
+  /*
+    The mapping of code to string is taken from
+    http://bazaar.launchpad.net/~vcs-imports/
+      network-manager/trunk/view/head:/cli/src/common.c
+
+    NetworkManager documentation: https://developer.gnome.org/
+      NetworkManager/0.9/spec.html#type-NM_DEVICE_STATE_REASON
+  */
+  void reportError(const int &reason);
 
 public Q_SLOTS:
   void onNewConnection(const QDBusObjectPath);
@@ -102,7 +112,7 @@ private:
   QDBusObjectPath m_device_path;
   QDBusObjectPath m_hotspot_path;
 
-  bool disable();
+  void disable();
 
   bool destroy(QDBusObjectPath);
 
