@@ -30,17 +30,21 @@
  *   storedChanged(bool stored)
  *     Signal that gets emitted when a hotspot was stored.
  *
- *   ssidChanged(const QByteArray ssid)
+ *   ssidChanged(QByteArray ssid)
  *     Signal that gets emitted when the ssid of the hotspot was changed.
  *
- *   passwordChanged(const QString password)
+ *   passwordChanged(QString password)
  *     Signal that gets emitted when the password of the hotspot was changed.
  *
- *   modeChanged(const QString mode)
+ *   modeChanged(QString mode)
  *     Signal that gets emitted when the mode was changed.
  *
- *   authChanged(const QString auth)
+ *   authChanged(QString auth)
  *     Signal that gets emitted when the authentication method was changed.
+ *
+ *   Note that none of these signal will be emitted if a change to the hotspot
+ *   was made by anyone else than the HotspotManager.
+ *   TODO: Emit changes to a hotspot made by the outside.
  *
  * Properties
  *   bool enabled [readwrite]
@@ -49,23 +53,23 @@
  *   bool stored [readonly]
  *     Whether or not a hotspot is known to the hotspotmanager.
  *
- *   string ssid [readwrite]
+ *   QByteArray ssid [readwrite]
  *     The current SSID of the hotspot.
  *
- *   string auth [readwrite]
+ *   QString auth [readwrite]
  *     The current authentication of the hotspot. The default for this property
  *     is "wpa-psk" and is currently the only supported scheme. WEP is unsupported
  *     by design, as is no scheme at all.
  *
  *     TODO: Check/add support for wpa-eap
  *
- *   string password [readwrite]
+ *   QString password [readwrite]
  *     The current Pre-Shared-Key for the hotspot. If the key is 64-characters
  *     long, it must contain only hexadecimal characters and is interpreted as a
  *     hexadecimal WPA key. Otherwise, the key must be between 8 and 63 ASCII
  *     characters and is interpreted as a WPA passphrase.
  *
- *   string mode [readwrite, optional]
+ *   QString mode [readwrite, optional]
  *     The current hotspot mode. The default of this value is "ap", but can be
  *     set to "p2p" or "adhoc". "p2p" and "adhoc" is currently not fully supported.
  *
