@@ -273,10 +273,10 @@ Component {
                 hotspotManager.password = passwordField.text;
 
                 if (hotspotManager.enabled) {
+                    hotspotSetupDialog.state = "STARTING";
                     hotspotManager.enabledChanged.connect(
                         hotspotDisabledHandler);
                     hotspotManager.enabled = false;
-                    hotspotSetupDialog.state = "STARTING";
                 } else {
                     PopupUtils.close(hotspotSetupDialog);
                 }
