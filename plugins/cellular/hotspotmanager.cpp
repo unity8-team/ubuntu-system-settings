@@ -358,7 +358,7 @@ std::string generate_password() {
 } // NetworkManager interaction
 
 HotspotManager::HotspotManager(QObject *parent) :
-      QObject(parent), m_mode("ap"), m_stored(false), m_enabled(false),
+      QObject(parent), m_mode("ap"), m_enabled(false), m_stored(false),
       m_password(generate_password().c_str()), m_ssid(QByteArray("Ubuntu")),
       m_device_path(getWirelessDevice()) {
 
