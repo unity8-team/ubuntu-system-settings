@@ -31,6 +31,10 @@ Component {
     Dialog {
         id: hotspotSetupDialog
         property var hotspotManager: null
+
+        property bool stored: false
+        Component.onCompleted: stored = hotspotManager.stored;
+
         objectName: "hotspotSetup"
         anchorToKeyboard: true
 
@@ -39,7 +43,7 @@ Component {
         }
 
 
-        title: hotspotManager.stored ?
+        title: stored ?
             i18n.tr("Change hotspot setup") : i18n.tr("Setup hotspot")
         text: feedback.enabled ? feedback.text : "";
 
@@ -75,11 +79,7 @@ Component {
                     enabled: true
                 }
                 PropertyChanges {
-                    target: enableButton
-                    enabled: false
-                }
-                PropertyChanges {
-                    target: changeButton
+                    target: confirmButton
                     enabled: false
                 }
             },
@@ -94,6 +94,10 @@ Component {
 
             State {
                 name: "SUCCEEDED"
+                PropertyChanges {
+                    target: successIcon
+                    visible: true
+                }
                 PropertyChanges {
                     target: successIndicator
                     running: true
@@ -115,11 +119,7 @@ Component {
                     enabled: false
                 }
                 PropertyChanges {
-                    target: enableButton
-                    enabled: false
-                }
-                PropertyChanges {
-                    target: changeButton
+                    target: confirmButton
                     enabled: false
                 }
             }
@@ -187,48 +187,40 @@ Component {
             }
 
             Button {
-                id: enableButton
-                objectName: "enableButton"
-                visible: !hotspotManager.stored
+                id: confirmButton
+                objectName: "confirmButton"
                 Layout.fillWidth: true
-                text: i18n.tr("Enable")
+                text: hotspotSetupDialog.stored ? i18n.tr("Change") :
+                    i18n.tr("Enable")
                 enabled: settingsValid()
-                onClicked: enableAction.trigger()
-            }
-
-            Button {
-                id: changeButton
-                visible: hotspotManager.stored
-                Layout.fillWidth: true
-                text: i18n.tr("Change")
-                enabled: enableButton.enabled
-                onClicked: changeAction.trigger()
-            }
-        }
-
-        Item {
-            anchors.centerIn: enableButton.visible ? enableButton : changeButton
-            width: childrenRect.width
-            height: childrenRect.height
-
-            Icon {
-                height: parent.height - units.gu(1.5)
-                width: parent.height - units.gu(1.5)
-                anchors {
-                    centerIn: parent
+                onClicked: {
+                    if (hotspotSetupDialog.stored) {
+                        changeAction.trigger()
+                    } else {
+                        enableAction.trigger();
+                    }
                 }
-                name: "tick"
-                color: "green"
-                visible: successIndicator.running
-            }
 
-            ActivityIndicator {
-                id: workingIndicator
-                running: false
-                visible: running
-                height: parent.height - units.gu(1.5)
-                anchors {
-                    centerIn: parent
+                Icon {
+                    id: successIcon
+                    height: parent.height - units.gu(1.5)
+                    width: parent.height - units.gu(1.5)
+                    anchors {
+                        centerIn: parent
+                    }
+                    name: "tick"
+                    color: "green"
+
+                }
+
+                ActivityIndicator {
+                    id: workingIndicator
+                    running: false
+                    visible: running
+                    height: parent.height - units.gu(1.5)
+                    anchors {
+                        centerIn: parent
+                    }
                 }
             }
         }
@@ -237,8 +229,18 @@ Component {
             id: enableAction
             enabled: settingsValid()
             onTriggered: {
+
+                function hotspotEnabledHandler (enabled) {
+                    if (enabled) {
+                        hotspotSetupDialog.state = "SUCCEEDED";
+                        hotspotManager.enabledChanged.disconnect(
+                            hotspotEnabledHandler);
+                    }
+                }
+
                 hotspotManager.ssid = ssidField.text;
                 hotspotManager.password = passwordField.text;
+                hotspotManager.enabledChanged.connect(hotspotEnabledHandler);
                 hotspotManager.enabled = true;
                 hotspotSetupDialog.state = "STARTING";
             }
@@ -249,10 +251,11 @@ Component {
             enabled: settingsValid()
             onTriggered: {
 
-                function hotspotDisabledHandler(enabled) {
+                function hotspotDisabledHandler (enabled) {
                     if (!enabled) {
                         hotspotManager.enabled = true;
-                        hotspotManager.enabled.disconnect(hotspotDisabledHandler);
+                        hotspotManager.enabledChanged.disconnect(
+                            hotspotDisabledHandler);
                     }
                 }
 
@@ -262,7 +265,8 @@ Component {
                 if (hotspotManager.enabled) {
                     hotspotManager.enabled = false;
                     hotspotSetupDialog.state = "STARTING";
-                    hotspotManager.enabled.connect(hotspotDisabledHandler);
+                    hotspotManager.enabledChanged.connect(
+                        hotspotDisabledHandler);
                 } else {
                     PopupUtils.close(hotspotSetupDialog);
                 }
