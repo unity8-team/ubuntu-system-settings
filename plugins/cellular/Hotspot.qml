@@ -57,11 +57,13 @@ ItemPage {
             }
         }
 
-        Label {
-            width: parent.width
-            wrapMode: Text.WordWrap
-            anchors.leftMargin: units.gu(2)
-            anchors.rightMargin: units.gu(2)
+        ListItem.Caption {
+            anchors {
+                left: parent.left
+                right: parent.right
+                leftMargin: units.gu(2)
+                rightMargin: units.gu(2)
+            }
             text : hotspotSwitch.stored ?
               i18n.tr("When hotspot is on, other devices can use your cellular data connection over Wi-Fi. Normal data charges apply.")
               : i18n.tr("Other devices can use your cellular data connection over the Wi-Fi network. Normal data charges apply.")
@@ -69,6 +71,8 @@ ItemPage {
 
         Button {
             objectName: "hotspotSetupEntry"
+            anchors.horizontalCenter: parent.horizontalCenter
+            width: parent.width - units.gu(4)
             text: hotspotManager.stored ?
                 i18n.tr("Change password/setup…") : i18n.tr("Set up hotspot…")
 
@@ -79,6 +83,5 @@ ItemPage {
                 });
             }
         }
-
     }
 }
