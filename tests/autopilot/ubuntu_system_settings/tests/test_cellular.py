@@ -13,8 +13,7 @@ from autopilot.matchers import Eventually
 from testtools.matchers import Equals, raises, StartsWith
 
 from ubuntu_system_settings.tests import (
-    CellularBaseTestCase,
-    CONNMAN_IFACE, RDO_IFACE, NETREG_IFACE)
+    CellularBaseTestCase, CONNMAN_IFACE, RDO_IFACE, NETREG_IFACE)
 
 
 class CellularTestCase(CellularBaseTestCase):
