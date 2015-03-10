@@ -57,7 +57,14 @@ bool isHybrisWlan() {
 }
 
 // True if changed successfully, or there was no need. Otherwise false.
+// Supported modes are 'p2p', 'sta' and 'ap'.
 bool changeInterfaceFirmware(const QString interface, const QString mode) {
+
+  // Not supported.
+  if (mode == "adhoc") {
+    return true;
+  }
+
   if (isHybrisWlan()) {
     QDBusInterface wpasIface (
         wpa_supplicant_service, wpa_supplicant_path, wpa_supplicant_interface,
