@@ -80,8 +80,10 @@ Component {
                 }
                 PropertyChanges {
                     target: changeButton
-                    enableD: false
+                    enabled: false
+                }
             },
+
             State {
                 name: "FAILED"
                 PropertyChanges {
@@ -89,6 +91,7 @@ Component {
                     enabled: true
                 }
             },
+
             State {
                 name: "SUCCEEDED"
                 PropertyChanges {
