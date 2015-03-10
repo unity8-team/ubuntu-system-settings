@@ -306,28 +306,6 @@ class CellularPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
         field.write(name)
         self.pointing_device.click_object(ok)
 
-    @autopilot.logging.log_action(logger.debug)
-    def setup_hotspot(self, config=None):
-        hotspot_page = self._enter_hotspot()
-        hotspot_page.setup_hotspot(config)
-
-    @autopilot.logging.log_action(logger.debug)
-    def enable_hotspot(self):
-        hotspot_page = self._enter_hotspot()
-        hotspot_page.enable_hotspot()
-
-    @autopilot.logging.log_action(logger.debug)
-    def disable_hotspot(self):
-        hotspot_page = self._enter_hotspot()
-        hotspot_page.disable_hotspot()
-
-    @autopilot.logging.log_action(logger.debug)
-    def _enter_hotspot(self):
-        obj = self.select_single(objectName="hotspotEntry")
-        self.pointing_device.click_object(obj)
-        return self.get_root_instance().wait_select_single(
-            objectName='hotspotPage')
-
 
 class BluetoothPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
 
