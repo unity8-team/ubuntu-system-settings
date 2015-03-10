@@ -207,6 +207,20 @@ nmConnectionArg getConnectionSettings (QDBusObjectPath connection) {
   return connection_settings.value();
 }
 
+
+// Helper that returns a QMap<QString, QVariantMap> given a QDBusObjectPath.
+// See https://developer.gnome.org/NetworkManager/0.9/spec.html
+//     #org.freedesktop.NetworkManager.Settings.Connection.GetSettings
+nmConnectionArg getConnectionSecrets (QDBusObjectPath connection) {
+
+  OrgFreedesktopNetworkManagerSettingsConnectionInterface conn(
+      nm_service, connection.path(), QDBusConnection::systemBus());
+  const QString setting("");
+  auto connection_secrets = conn.GetSecrets(setting);
+  connection_secrets.waitForFinished();
+  return connection_secrets.value();
+}
+
 // Helper that adds a connection and returns the QDBusObjectPath
 // of the newly created connection.
 // See https://developer.gnome.org/NetworkManager/0.9/spec.html
@@ -379,6 +393,7 @@ void HotspotManager::setEnabled(bool value) {
     return;
   }
 
+  // We are enabling a hotspot
   if (value) {
 
     bool changed = changeInterfaceFirmware("/", m_mode);
@@ -401,7 +416,7 @@ void HotspotManager::setEnabled(bool value) {
       // we defer enabling until new hotspot is created
       m_hotspot_path = addConnection(m_ssid, m_password, m_device_path, m_mode);
       if (m_hotspot_path.path().isEmpty()) {
-        // Emit "Unknown Error", because AddConnection should not fail.
+        // Emit "Unknown Error".
         Q_EMIT reportError(0);
         Q_EMIT enabledChanged(false);
       }
@@ -622,11 +637,15 @@ void HotspotManager::updateSettingsFromDbus(QDBusObjectPath path) {
     }
   }
 
-  if (settings.find(security_key) != settings.end()) {
+  nmConnectionArg secrets = getConnectionSecrets(path);
 
-    QString pwd = settings[security_key]["psk"].toString();
+  if (secrets.find(security_key) != secrets.end()) {
+    QString pwd = secrets[security_key]["psk"].toString();
+    qWarning() << "Found pwd" << pwd;
     if (!pwd.isEmpty()) {
       setPassword(pwd);
     }
+  } else {
+    qWarning() << "Did not find a pwd";
   }
 }

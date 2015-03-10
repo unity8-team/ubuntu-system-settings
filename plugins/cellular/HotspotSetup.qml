@@ -210,6 +210,7 @@ Component {
                     }
                     name: "tick"
                     color: "green"
+                    visible: false
 
                 }
 
