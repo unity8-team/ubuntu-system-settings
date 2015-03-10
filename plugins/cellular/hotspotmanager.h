@@ -16,10 +16,64 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ *
+ * HotspotManager API
+ * ==============================
+ *
+ * Methods
+ *
+ * Signals
+ *   enabledChanged(bool enabled)
+ *     Signal that gets emitted when the hotspot is disabled or enabled.
+ *
+ *   storedChanged(bool stored)
+ *     Signal that gets emitted when a hotspot was stored.
+ *
+ *   ssidChanged(const QByteArray ssid)
+ *     Signal that gets emitted when the ssid of the hotspot was changed.
+ *
+ *   passwordChanged(const QString password)
+ *     Signal that gets emitted when the password of the hotspot was changed.
+ *
+ *   modeChanged(const QString mode)
+ *     Signal that gets emitted when the mode was changed.
+ *
+ *   authChanged(const QString auth)
+ *     Signal that gets emitted when the authentication method was changed.
+ *
+ * Properties
+ *   bool enabled [readwrite]
+ *     Whether or not the hotspot is enabled.
+ *
+ *   bool stored [readonly]
+ *     Whether or not a hotspot is known to the hotspotmanager.
+ *
+ *   string ssid [readwrite]
+ *     The current SSID of the hotspot.
+ *
+ *   string auth [readwrite]
+ *     The current authentication of the hotspot. The default for this property
+ *     is "wpa-psk" and is currently the only supported scheme. WEP is unsupported
+ *     by design, as is no scheme at all.
+ *
+ *     TODO: Check/add support for wpa-eap
+ *
+ *   string password [readwrite]
+ *     The current Pre-Shared-Key for the hotspot. If the key is 64-characters
+ *     long, it must contain only hexadecimal characters and is interpreted as a
+ *     hexadecimal WPA key. Otherwise, the key must be between 8 and 63 ASCII
+ *     characters and is interpreted as a WPA passphrase.
+ *
+ *   string mode [readwrite, optional]
+ *     The current hotspot mode. The default of this value is "ap", but can be
+ *     set to "p2p" or "adhoc". "p2p" and "adhoc" is currently not fully supported.
+ *
+ *     TODO: Complete support for adhoc and p2p modes.
  */
 
-#ifndef CELLULAR_DBUS_HELPER
-#define CELLULAR_DBUS_HELPER
+#ifndef HOTSPOTMANAGER_H
+#define HOTSPOTMANAGER_H
 
 #include <QObject>
 #include <QDBusObjectPath>
@@ -28,9 +82,6 @@
 #include "nm_settings_proxy.h"
 #include "nm_settings_connection_proxy.h"
 
-/**
- * For exposing dbus data to Qml.
- */
 
 class HotspotManager : public QObject {
   Q_OBJECT
