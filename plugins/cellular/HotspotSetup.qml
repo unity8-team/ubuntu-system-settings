@@ -252,8 +252,17 @@ Component {
             enabled: settingsValid()
             onTriggered: {
 
+                function hotspotEnabledHandler (enabled) {
+                    if (enabled) {
+                        hotspotSetupDialog.state = "SUCCEEDED";
+                        hotspotManager.enabledChanged.disconnect(
+                            hotspotEnabledHandler);
+                    }
+                }
+
                 function hotspotDisabledHandler (enabled) {
                     if (!enabled) {
+                        hotspotManager.enabledChanged.connect(hotspotEnabledHandler);
                         hotspotManager.enabled = true;
                         hotspotManager.enabledChanged.disconnect(
                             hotspotDisabledHandler);
@@ -264,10 +273,10 @@ Component {
                 hotspotManager.password = passwordField.text;
 
                 if (hotspotManager.enabled) {
-                    hotspotManager.enabled = false;
-                    hotspotSetupDialog.state = "STARTING";
                     hotspotManager.enabledChanged.connect(
                         hotspotDisabledHandler);
+                    hotspotManager.enabled = false;
+                    hotspotSetupDialog.state = "STARTING";
                 } else {
                     PopupUtils.close(hotspotSetupDialog);
                 }

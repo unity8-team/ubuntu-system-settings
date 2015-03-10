@@ -641,12 +641,10 @@ void HotspotManager::updateSettingsFromDbus(QDBusObjectPath path) {
   nmConnectionArg secrets = getConnectionSecrets(path, security_key);
 
   if (secrets.find(security_key) != secrets.end()) {
+
     QString pwd = secrets[security_key]["psk"].toString();
-    qWarning() << "Found pwd" << pwd;
     if (!pwd.isEmpty()) {
       setPassword(pwd);
     }
-  } else {
-    qWarning() << "Did not find a pwd";
   }
 }
