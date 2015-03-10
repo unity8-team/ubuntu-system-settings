@@ -211,12 +211,12 @@ nmConnectionArg getConnectionSettings (QDBusObjectPath connection) {
 // Helper that returns a QMap<QString, QVariantMap> given a QDBusObjectPath.
 // See https://developer.gnome.org/NetworkManager/0.9/spec.html
 //     #org.freedesktop.NetworkManager.Settings.Connection.GetSettings
-nmConnectionArg getConnectionSecrets (QDBusObjectPath connection) {
+nmConnectionArg getConnectionSecrets (QDBusObjectPath connection,
+                                      const QString key) {
 
   OrgFreedesktopNetworkManagerSettingsConnectionInterface conn(
       nm_service, connection.path(), QDBusConnection::systemBus());
-  const QString setting("");
-  auto connection_secrets = conn.GetSecrets(setting);
+  auto connection_secrets = conn.GetSecrets(key);
   connection_secrets.waitForFinished();
   return connection_secrets.value();
 }
@@ -322,7 +322,8 @@ bool isHotspotActive (QDBusObjectPath hotspot_connection_path) {
             "Get", nm_connection_active_interface, "Connection");
 
     if(!connection_property.isValid()) {
-      qWarning() << "Error getting connection_property: "
+      qWarning() << "Failed to get Connection property from "
+          << active_connection.path() << ": "
           << connection_property.error().message();
       continue;
     }
@@ -637,7 +638,7 @@ void HotspotManager::updateSettingsFromDbus(QDBusObjectPath path) {
     }
   }
 
-  nmConnectionArg secrets = getConnectionSecrets(path);
+  nmConnectionArg secrets = getConnectionSecrets(path, security_key);
 
   if (secrets.find(security_key) != secrets.end()) {
     QString pwd = secrets[security_key]["psk"].toString();
