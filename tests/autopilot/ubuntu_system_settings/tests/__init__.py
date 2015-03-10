@@ -63,9 +63,6 @@ NM_AC_CON_IFACE = 'org.freedesktop.NetworkManager.Connection.Active'
 CON_SERVICE = 'com.ubuntu.connectivity1'
 CON_PATH = '/com/ubuntu/connectivity1/Private'
 CON_IFACE = 'com.ubuntu.connectivity1.Private'
-CON_SERVICE = 'com.ubuntu.connectivity1'
-CON_PATH = '/com/ubuntu/connectivity1/Private'
-CON_IFACE = 'com.ubuntu.connectivity1.Private'
 UPOWER_VERSION = str(UPowerGlib.MAJOR_VERSION)
 UPOWER_VERSION += '.' + str(UPowerGlib.MINOR_VERSION)
 
