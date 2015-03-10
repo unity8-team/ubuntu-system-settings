@@ -336,8 +336,9 @@ std::string generate_password() {
 } // NetworkManager interaction
 
 HotspotManager::HotspotManager(QObject *parent) :
-      QObject(parent), m_mode("ap"), m_stored(false), m_password(""),
-      m_ssid(""), m_device_path(getWirelessDevice()) {
+      QObject(parent), m_mode("ap"), m_stored(false), m_enabled(false),
+      m_password(generate_password().c_str()), m_ssid(QByteArray("Ubuntu")),
+      m_device_path(getWirelessDevice()) {
 
   static bool isRegistered = false;
 
@@ -352,10 +353,6 @@ HotspotManager::HotspotManager(QObject *parent) :
 
   if (m_stored) {
     updateSettingsFromDbus(m_hotspot_path);
-  } else {
-    m_enabled = false;
-    setSsid(QByteArray("Ubuntu"));
-    setPassword(generate_password().c_str());
   }
   Q_EMIT enabledChanged(m_enabled);
 
@@ -613,11 +610,23 @@ void HotspotManager::updateSettingsFromDbus(QDBusObjectPath path) {
   const char security_key[] = "802-11-wireless-security";
 
   if (settings.find(wifi_key) != settings.end()) {
-    setSsid(settings[wifi_key]["ssid"].toByteArray());
-    setMode(settings[wifi_key]["mode"].toString());
+
+    QByteArray ssid = settings[wifi_key]["ssid"].toByteArray();
+    if (!ssid.isEmpty()) {
+      setSsid(ssid);
+    }
+
+    QString mode = settings[wifi_key]["mode"].toString();
+    if (!mode.isEmpty()) {
+      setMode(mode);
+    }
   }
 
   if (settings.find(security_key) != settings.end()) {
-    setPassword(settings[security_key]["psk"].toString());
+
+    QString pwd = settings[security_key]["psk"].toString();
+    if (!pwd.isEmpty()) {
+      setPassword(pwd);
+    }
   }
 }
