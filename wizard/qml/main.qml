@@ -228,21 +228,11 @@ Item {
         }
     }
 
-    Keys.onPressed: {
-        if (event.key == Qt.Key_PowerOff || event.key == Qt.Key_PowerDown) {
-            dialogs.onPowerKeyPressed();
-            event.accepted = true;
-        } else {
-            event.accepted = false;
-        }
+    UnityComponents.PhysicalKeysMapper {
+        id: physicalKeysMapper
+        onPowerKeyLongPressed: dialogs.showPowerDialog()
     }
 
-    Keys.onReleased: {
-        if (event.key == Qt.Key_PowerOff || event.key == Qt.Key_PowerDown) {
-            dialogs.onPowerKeyReleased();
-            event.accepted = true;
-        } else {
-            event.accepted = false;
-        }
-    }
+    Keys.onPressed: physicalKeysMapper.onKeyPressed(event)
+    Keys.onReleased: physicalKeysMapper.onKeyReleased(event)    
 }
