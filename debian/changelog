@@ -1,3 +1,11 @@
+ubuntu-system-settings (0.3+15.04.20150311~rtm-0ubuntu1) 14.09; urgency=medium
+
+  [ Michael Terry ]
+  * Fix power dialog not appearing in the welcome wizard (LP: #1430942)
+    (LP: #1430942)
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Wed, 11 Mar 2015 19:02:53 +0000
+
 ubuntu-system-settings (0.3+15.04.20150309~rtm-0ubuntu1) 14.09; urgency=medium
 
   [ CI Train Bot ]
