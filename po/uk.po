@@ -17,8 +17,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2014-10-18 07:12+0000\n"
-"X-Generator: Launchpad (build 17196)\n"
+"X-Launchpad-Export-Date: 2015-03-13 05:33+0000\n"
+"X-Generator: Launchpad (build 17389)\n"
 "Language: uk\n"
 
 #: ubuntu-system-settings.desktop.in.in.h:1 ../src/qml/MainWindow.qml:112
@@ -41,39 +41,40 @@ msgstr "Перегляд"
 msgid "Remove image"
 msgstr "Вилучити образ"
 
-#: ../plugins/background//Preview.qml:102
-#: ../plugins/wifi//OtherNetwork.qml:288
-#: ../plugins/reset//ResetAllSettings.qml:38
-#: ../plugins/reset//ResetLauncherHome.qml:55
-#: ../plugins/reset//EraseEverything.qml:54
-#: ../plugins/language//RebootNecessary.qml:47
-#: ../plugins/language//DisplayLanguage.qml:98
-#: ../plugins/phone//CallForwarding.qml:139
-#: ../plugins/cellular//PageChooseApn.qml:594
+#: ../plugins/cellular//PageChooseApn.qml:581
 #: ../plugins/cellular//CustomApnEditor.qml:245
 #: ../plugins/cellular//HotspotSetup.qml:85
-#: ../plugins/security-privacy//LockSecurity.qml:283
-#: ../plugins/security-privacy//SimPin.qml:149
-#: ../plugins/security-privacy//SimPin.qml:266
-#: ../plugins/bluetooth//ProvidePasskeyDialog.qml:54
-#: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:49
-#: ../plugins/bluetooth//ProvidePinCodeDialog.qml:55
+#: ../plugins/background//Preview.qml:102
 #: ../plugins/time-date//TimePicker.qml:173
+#: ../plugins/phone//CallForwarding.qml:139
+#: ../plugins/security-privacy//SimPin.qml:151
+#: ../plugins/security-privacy//SimPin.qml:268
+#: ../plugins/security-privacy//LockSecurity.qml:346
+#: ../plugins/language//DisplayLanguage.qml:97
+#: ../plugins/language//RebootNecessary.qml:47
+#: ../plugins/reset//ResetAllSettings.qml:38
+#: ../plugins/reset//EraseEverything.qml:54
+#: ../plugins/reset//ResetLauncherHome.qml:55
+#: ../plugins/bluetooth//ProvidePasskeyDialog.qml:54
+#: ../plugins/bluetooth//DisplayPasskeyDialog.qml:51
+#: ../plugins/bluetooth//ProvidePinCodeDialog.qml:55
+#: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:49
+#: ../plugins/wifi//OtherNetwork.qml:244
+#: ../plugins/cellular//Components//SimEditor.qml:204
 #: ../plugins/background//Components//AddRemove.qml:42
-#: ../plugins/cellular//Components//SimEditor.qml:189
 msgid "Cancel"
 msgstr "Скасувати"
 
 #: ../plugins/background//Preview.qml:109
-#: ../plugins/phone//CallForwarding.qml:152
-#: ../plugins/security-privacy//LockSecurity.qml:304
 #: ../plugins/time-date//TimePicker.qml:182
+#: ../plugins/phone//CallForwarding.qml:152
+#: ../plugins/security-privacy//LockSecurity.qml:367
 msgid "Set"
 msgstr "Встановити"
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
 #: ../plugins/background//MainPage.qml:35
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:2
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:82
 msgid "Background"
 msgstr "Тло"
 
@@ -81,10 +82,10 @@ msgstr "Тло"
 msgid "Ubuntu Art"
 msgstr "Ubuntu Art"
 
+#: ../plugins/cellular//PageChooseApn.qml:393
+#: ../plugins/cellular//PageChooseApn.qml:470
+#: ../plugins/cellular//PageChooseApn.qml:478
 #: ../plugins/background//MainPage.qml:115
-#: ../plugins/cellular//PageChooseApn.qml:409
-#: ../plugins/cellular//PageChooseApn.qml:488
-#: ../plugins/cellular//PageChooseApn.qml:496
 msgid "Custom"
 msgstr "Нетипове"
 
@@ -92,8 +93,7 @@ msgstr "Нетипове"
 msgid "Clear"
 msgstr "Спорожнити"
 
-#: ../plugins/wifi//NetworkDetailsBrief.qml:42
-#: ../plugins/bluetooth//PageComponent.qml:411
+#: ../plugins/bluetooth//PageComponent.qml:457
 msgid "Disconnect"
 msgstr "Від'єднатися"
 
@@ -233,58 +233,64 @@ msgstr "Не вдалося виявити мережу Wi-Fi"
 msgid "A secondary connection of the base connection failed"
 msgstr "Не вдалося встановити вторинне щодо основного з’єднання"
 
-#: ../plugins/wifi//Common.qml:96 ../plugins/bluetooth//PageComponent.qml:86
+#: ../plugins/bluetooth//PageComponent.qml:130 ../plugins/wifi//Common.qml:96
 msgid "Unknown"
 msgstr "Невідомо"
 
-#: ../plugins/wifi//OtherNetwork.qml:96
+#: ../plugins/wifi//OtherNetwork.qml:51
 msgid "Connect to Hidden Network"
 msgstr "З’єднатися із прихованою мережею"
 
-#: ../plugins/wifi//OtherNetwork.qml:187
+#: ../plugins/wifi//OtherNetwork.qml:142
 msgid "Network name"
 msgstr "Назва мережі"
 
-#: ../plugins/wifi//OtherNetwork.qml:203
-#: ../plugins/security-privacy//PageComponent.qml:126
+#: ../plugins/security-privacy//PageComponent.qml:115
+#: ../plugins/wifi//OtherNetwork.qml:159
 msgid "Security"
 msgstr "Захист"
 
-#: ../plugins/wifi//OtherNetwork.qml:214
-#: ../plugins/bluetooth//PageComponent.qml:116
-#: ../plugins/bluetooth//PageComponent.qml:326
-#: ../plugins/bluetooth//PageComponent.qml:347
+#: ../plugins/cellular//PageCarrierAndApn.qml:46
+#: ../plugins/cellular//PageCarriersAndApns.qml:51
+#: ../plugins/cellular//PageCarriersAndApns.qml:78
+#: ../plugins/bluetooth//PageComponent.qml:160
+#: ../plugins/bluetooth//PageComponent.qml:369
+#: ../plugins/bluetooth//PageComponent.qml:393
+#: ../plugins/wifi//OtherNetwork.qml:170
+#: ../plugins/about//PageComponent.qml:126
+#: ../plugins/about//PageComponent.qml:127
+#: ../plugins/about//PageComponent.qml:138
 msgid "None"
 msgstr "Немає"
 
-#: ../plugins/wifi//OtherNetwork.qml:215
+#: ../plugins/wifi//OtherNetwork.qml:171
 msgid "WPA & WPA2 Personal"
 msgstr "Персональний WPA та WPA2"
 
-#: ../plugins/wifi//OtherNetwork.qml:216
+#: ../plugins/wifi//OtherNetwork.qml:172
 msgid "WEP"
 msgstr "WEP"
 
-#: ../plugins/wifi//OtherNetwork.qml:222
-#: ../plugins/wifi//NetworkDetails.qml:64
 #: ../plugins/cellular//CustomApnEditor.qml:222
+#: ../plugins/wifi//NetworkDetails.qml:64
+#: ../plugins/wifi//OtherNetwork.qml:178
 msgid "Password"
 msgstr "Пароль"
 
-#: ../plugins/wifi//OtherNetwork.qml:256
 #: ../plugins/wifi//NetworkDetails.qml:77
+#: ../plugins/wifi//OtherNetwork.qml:212
 msgid "Show password"
 msgstr "Показувати пароль"
 
-#: ../plugins/wifi//OtherNetwork.qml:304
-#: ../plugins/bluetooth//PageComponent.qml:411
+#: ../plugins/bluetooth//PageComponent.qml:457
+#: ../plugins/wifi//OtherNetwork.qml:260
 msgid "Connect"
 msgstr "З’єднатися"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
+#: ../plugins/battery//PageComponent.qml:332
 #: ../plugins/wifi//PageComponent.qml:28
-#: ../plugins/battery//PageComponent.qml:333
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:24
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:270
 msgid "Wi-Fi"
 msgstr "Wi-Fi"
 
@@ -296,8 +302,8 @@ msgstr "З’єднатися із прихованою мережею…"
 msgid "Network details"
 msgstr "Параметри мережі"
 
+#: ../plugins/bluetooth//PageComponent.qml:389
 #: ../plugins/wifi//NetworkDetails.qml:45
-#: ../plugins/bluetooth//PageComponent.qml:346
 msgid "Name"
 msgstr "Назва"
 
@@ -305,26 +311,27 @@ msgstr "Назва"
 msgid "Last connected"
 msgstr "Останнє з’єднання"
 
-#: ../plugins/wifi//NetworkDetails.qml:58
-#: ../plugins/battery//PageComponent.qml:315
-#: ../plugins/battery//PageComponent.qml:324
-#: ../plugins/battery//SleepValues.qml:106
+#: ../plugins/system-update//PageComponent.qml:750
+#: ../plugins/system-update//Configuration.qml:52
+#: ../plugins/battery//SleepValues.qml:109
+#: ../plugins/battery//PageComponent.qml:304
+#: ../plugins/battery//PageComponent.qml:313
+#: ../plugins/security-privacy//PageComponent.qml:129
 #: ../plugins/security-privacy//PhoneLocking.qml:78
 #: ../plugins/security-privacy//PhoneLocking.qml:87
-#: ../plugins/security-privacy//PageComponent.qml:140
-#: ../plugins/about//PageComponent.qml:167
-#: ../plugins/system-update//PageComponent.qml:762
-#: ../plugins/system-update//Configuration.qml:52
+#: ../plugins/wifi//NetworkDetails.qml:58
+#: ../plugins/about//PageComponent.qml:191
 msgid "Never"
 msgstr "Ніколи"
 
+#: ../plugins/wifi//NetworkDetailsBrief.qml:42
 #: ../plugins/wifi//NetworkDetails.qml:88
 msgid "Forget network"
 msgstr "Забути про мережу"
 
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
 #: ../plugins/notifications//PageComponent.qml:29
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:44
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:154
 msgid "Notifications"
 msgstr "Сповіщення"
 
@@ -336,70 +343,70 @@ msgstr ""
 "Виберіть програми, які зможуть сповіщати вас про події за допомогою панелей-"
 "вигульків, звуків, вібрації та Центру сповіщень."
 
-#: ../plugins/sound//SoundsList.qml:60
+#: ../plugins/sound//SoundsList.qml:70
 msgid "Stop playing"
 msgstr "Зупинити відтворення"
 
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
 #: ../plugins/sound//PageComponent.qml:37
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:68
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:326
 msgid "Sound"
 msgstr "Звук"
 
-#: ../plugins/sound//PageComponent.qml:76
+#: ../plugins/sound//PageComponent.qml:77
 msgid "Silent Mode"
 msgstr "Тихий режим"
 
-#: ../plugins/sound//PageComponent.qml:80
+#: ../plugins/sound//PageComponent.qml:81
 msgid "Ringer:"
 msgstr "Абонент:"
 
-#: ../plugins/sound//PageComponent.qml:112
+#: ../plugins/sound//PageComponent.qml:121
 msgid "Phone calls:"
 msgstr "Дзвінки:"
 
-#: ../plugins/sound//PageComponent.qml:116
-#: ../plugins/sound//PageComponent.qml:122
+#: ../plugins/sound//PageComponent.qml:125
+#: ../plugins/sound//PageComponent.qml:131
 msgid "Ringtone"
 msgstr "Мелодія дзвінка"
 
-#: ../plugins/sound//PageComponent.qml:135
+#: ../plugins/sound//PageComponent.qml:146
 msgid "Vibrate when ringing"
 msgstr "Вібрація з дзвінком"
 
-#: ../plugins/sound//PageComponent.qml:144
-#: ../plugins/sound//PageComponent.qml:188
+#: ../plugins/sound//PageComponent.qml:157
+#: ../plugins/sound//PageComponent.qml:207
 msgid "Vibrate in Silent Mode"
 msgstr "Вібрація у тихому режимі"
 
-#: ../plugins/sound//PageComponent.qml:153
-#: ../plugins/phone//PageComponent.qml:110
+#: ../plugins/sound//PageComponent.qml:168
+#: ../plugins/phone//PageComponent.qml:102
 msgid "Dialpad sounds"
 msgstr "Озвучення набирання"
 
-#: ../plugins/sound//PageComponent.qml:157
+#: ../plugins/sound//PageComponent.qml:172
 msgid "Messages:"
 msgstr "Повідомлення:"
 
-#: ../plugins/sound//PageComponent.qml:161
-#: ../plugins/sound//PageComponent.qml:167
+#: ../plugins/sound//PageComponent.qml:176
+#: ../plugins/sound//PageComponent.qml:182
 msgid "Message received"
 msgstr "Повідомлення отримано"
 
-#: ../plugins/sound//PageComponent.qml:179
+#: ../plugins/sound//PageComponent.qml:196
 msgid "Vibrate with message sound"
 msgstr "Вібрація зі звуком повідомлення"
 
-#: ../plugins/sound//PageComponent.qml:192
+#: ../plugins/sound//PageComponent.qml:211
 msgid "Other sounds:"
 msgstr "Інші звуки:"
 
-#: ../plugins/sound//PageComponent.qml:196
-#: ../plugins/language//PageComponent.qml:209
+#: ../plugins/language//PageComponent.qml:215
+#: ../plugins/sound//PageComponent.qml:215
 msgid "Keyboard sound"
 msgstr "Озвучення клавіатури"
 
-#: ../plugins/sound//PageComponent.qml:210
+#: ../plugins/sound//PageComponent.qml:231
 msgid "Lock sound"
 msgstr "Звук блокування"
 
@@ -409,7 +416,7 @@ msgstr "Телефон перебуває у тихому режимі."
 
 #. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
 #: ../plugins/reset//PageComponent.qml:32
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:86
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:234
 msgid "Reset phone"
 msgstr "Відновити початковий стан"
 
@@ -442,7 +449,6 @@ msgstr "Відновити початкові значення параметр�
 msgid "The Launcher will be returned to its original contents."
 msgstr "Засобу запуску буде повернуто його початковий вміст."
 
-#: ../plugins/reset//ResetLauncherHome.qml:59
 #: ../plugins/language//RebootNecessary.qml:34
 msgid "The phone needs to restart for changes to take effect."
 msgstr ""
@@ -462,12 +468,12 @@ msgstr "Витерти і скинути усе"
 
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
 #: ../plugins/battery//PageComponent.qml:34
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:98
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:98
 msgid "Battery"
 msgstr "Акумулятор"
 
 #. TRANSLATORS: %1 is the number of seconds
-#: ../plugins/battery//PageComponent.qml:46
+#: ../plugins/battery//PageComponent.qml:44
 #, qt-format
 msgid "%1 second ago"
 msgid_plural "%1 seconds ago"
@@ -476,7 +482,7 @@ msgstr[1] "%1 секунди тому"
 msgstr[2] "%1 секунд тому"
 
 #. TRANSLATORS: %1 is the number of minutes
-#: ../plugins/battery//PageComponent.qml:49
+#: ../plugins/battery//PageComponent.qml:47
 #, qt-format
 msgid "%1 minute ago"
 msgid_plural "%1 minutes ago"
@@ -485,7 +491,7 @@ msgstr[1] "%1 хвилини тому"
 msgstr[2] "%1 хвилин тому"
 
 #. TRANSLATORS: %1 is the number of hours
-#: ../plugins/battery//PageComponent.qml:52
+#: ../plugins/battery//PageComponent.qml:50
 #, qt-format
 msgid "%1 hour ago"
 msgid_plural "%1 hours ago"
@@ -494,7 +500,7 @@ msgstr[1] "%1 години тому"
 msgstr[2] "%1 годин тому"
 
 #. TRANSLATORS: %1 is the number of days
-#: ../plugins/battery//PageComponent.qml:55
+#: ../plugins/battery//PageComponent.qml:53
 #, qt-format
 msgid "%1 day ago"
 msgid_plural "%1 days ago"
@@ -502,78 +508,73 @@ msgstr[0] "%1 день тому"
 msgstr[1] "%1 дні тому"
 msgstr[2] "%1 днів тому"
 
-#: ../plugins/battery//PageComponent.qml:85
+#: ../plugins/battery//PageComponent.qml:260
 msgid "Charging now"
 msgstr "Заряджання"
 
-#: ../plugins/battery//PageComponent.qml:90
+#: ../plugins/battery//PageComponent.qml:262
 msgid "Last full charge"
 msgstr "Востаннє повністю заряджено"
 
-#: ../plugins/battery//PageComponent.qml:95
+#: ../plugins/battery//PageComponent.qml:264
 msgid "Fully charged"
 msgstr "Повністю заряджено"
 
-#: ../plugins/battery//PageComponent.qml:126
+#: ../plugins/battery//PageComponent.qml:98
 msgid "Charge level"
 msgstr "Рівень заряду"
 
-#: ../plugins/battery//PageComponent.qml:131
-#: ../plugins/battery//PageComponent.qml:287
-#: ../plugins/cellular//PageChooseCarriers.qml:48
-#: ../plugins/cellular//PageChooseCarriers.qml:65
-#: ../plugins/about//Storage.qml:203
-#: ../plugins/cellular//Components//SingleSim.qml:62
-#: ../plugins/cellular//Components//NoSim.qml:48
+#: ../plugins/battery//PageComponent.qml:103
+#: ../plugins/battery//PageComponent.qml:272 ../plugins/about//Storage.qml:199
 msgid "N/A"
 msgstr "н/д"
 
 #. TRANSLATORS: %1 refers to a percentage that indicates the charging level of the battery
-#: ../plugins/battery//PageComponent.qml:134
+#: ../plugins/battery//PageComponent.qml:106
 #, qt-format
 msgid "%1%"
 msgstr "%1%"
 
-#: ../plugins/battery//PageComponent.qml:212
-#: ../plugins/battery//PageComponent.qml:214
+#: ../plugins/battery//PageComponent.qml:184
+#: ../plugins/battery//PageComponent.qml:186
 msgid "Yesterday"
 msgstr "Вчора"
 
-#: ../plugins/battery//PageComponent.qml:220
-#: ../plugins/battery//PageComponent.qml:222
+#: ../plugins/battery//PageComponent.qml:192
+#: ../plugins/battery//PageComponent.qml:194
 msgid "Today"
 msgstr "Сьогодні"
 
-#: ../plugins/battery//PageComponent.qml:292
+#: ../plugins/battery//PageComponent.qml:281
 msgid "Ways to reduce battery use:"
 msgstr "Джерела заощадження енергії:"
 
-#: ../plugins/battery//PageComponent.qml:296
-#: ../plugins/brightness//BrightnessSlider.qml:51
+#: ../plugins/brightness//PageComponent.qml:62
+#: ../plugins/battery//PageComponent.qml:285
 msgid "Display brightness"
 msgstr "Яскравість дисплея"
 
-#: ../plugins/battery//PageComponent.qml:306
+#: ../plugins/battery//PageComponent.qml:295
 #: ../plugins/security-privacy//PhoneLocking.qml:68
 msgid "Lock when idle"
 msgstr "Блокування системи у режимі бездіяльності"
 
-#: ../plugins/battery//PageComponent.qml:306
+#: ../plugins/battery//PageComponent.qml:295
 #: ../plugins/security-privacy//PhoneLocking.qml:69
 msgid "Sleep when idle"
 msgstr "Присипляння у режимі бездіяльності"
 
 #. TRANSLATORS: %1 is the number of minutes
-#: ../plugins/battery//PageComponent.qml:312
-#: ../plugins/battery//PageComponent.qml:321
-#: ../plugins/battery//SleepValues.qml:83
-#: ../plugins/battery//SleepValues.qml:87
-#: ../plugins/battery//SleepValues.qml:91
-#: ../plugins/battery//SleepValues.qml:95
-#: ../plugins/battery//SleepValues.qml:99
-#: ../plugins/battery//SleepValues.qml:103
-#: ../plugins/security-privacy//PageComponent.qml:137
-#: ../plugins/security-privacy//PageComponent.qml:146
+#: ../plugins/battery//SleepValues.qml:86
+#: ../plugins/battery//SleepValues.qml:90
+#: ../plugins/battery//SleepValues.qml:94
+#: ../plugins/battery//SleepValues.qml:98
+#: ../plugins/battery//SleepValues.qml:102
+#: ../plugins/battery//SleepValues.qml:106
+#: ../plugins/battery//PageComponent.qml:301
+#: ../plugins/battery//PageComponent.qml:310
+#: ../plugins/security-privacy//PageComponent.qml:126
+#: ../plugins/security-privacy//PageComponent.qml:135
 #, qt-format
 msgid "After %1 minute"
 msgid_plural "After %1 minutes"
@@ -582,30 +583,30 @@ msgstr[1] "за %1 хвилини"
 msgstr[2] "за %1 хвилин"
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
-#: ../plugins/battery//PageComponent.qml:363
+#: ../plugins/battery//PageComponent.qml:361
 #: ../plugins/bluetooth//PageComponent.qml:32
-#: ../plugins/bluetooth//PageComponent.qml:147
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:254
+#: ../plugins/bluetooth//PageComponent.qml:191
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:246
 msgid "Bluetooth"
 msgstr "Bluetooth"
 
-#: ../plugins/battery//PageComponent.qml:394
+#: ../plugins/battery//PageComponent.qml:389
 msgid "GPS"
 msgstr "GPS"
 
-#: ../plugins/battery//PageComponent.qml:412
+#: ../plugins/battery//PageComponent.qml:405
 msgid "Accurate location detection requires GPS and/or Wi-Fi."
 msgstr "Точне визначення місця перебування потребує даних GPS і/або Wi-Fi."
 
-#: ../plugins/battery//SleepValues.qml:77
+#: ../plugins/battery//SleepValues.qml:74
 msgid "Lock the phone when it's not in use:"
 msgstr "Блокувати телефон, якщо ним не користуються:"
 
-#: ../plugins/battery//SleepValues.qml:77
+#: ../plugins/battery//SleepValues.qml:75
 msgid "Put the phone to sleep when it is not in use:"
 msgstr "Переводити телефон у стан очікування, якщо ним не користуються:"
 
-#: ../plugins/battery//SleepValues.qml:117
+#: ../plugins/battery//SleepValues.qml:121
 msgid ""
 "Shorter times are more secure. Phone won't lock during calls or video "
 "playback."
@@ -613,24 +614,24 @@ msgstr ""
 "Менші проміжки часу є безпечнішими. Телефон не переходитиме у стан "
 "блокування екрана під час дзвінків або відтворення відео."
 
-#: ../plugins/battery//SleepValues.qml:117
+#: ../plugins/battery//SleepValues.qml:121
 msgid "Phone won’t sleep during calls or video playback."
 msgstr ""
 "Телефон не переходитиме у стан очікування під час дзвінків або відтворення "
 "відео."
 
-#: ../plugins/language//SpellChecking.qml:27
-#: ../plugins/language//SpellChecking.qml:36
-#: ../plugins/language//PageComponent.qml:132
-#: ../plugins/language//PageComponent.qml:142
+#: ../plugins/language//PageComponent.qml:133
+#: ../plugins/language//PageComponent.qml:143
+#: ../plugins/language//SpellChecking.qml:29
+#: ../plugins/language//SpellChecking.qml:44
 msgid "Spell checking"
 msgstr "Перевірка правопису"
 
-#: ../plugins/language//SpellChecking.qml:53
+#: ../plugins/language//SpellChecking.qml:62
 msgid "Current spelling languages:"
 msgstr "Поточні мови перевірки правопису:"
 
-#: ../plugins/language//SpellChecking.qml:54
+#: ../plugins/language//SpellChecking.qml:63
 msgid "All languages available:"
 msgstr "Усі доступні мови:"
 
@@ -642,52 +643,52 @@ msgstr "Перезапустити зараз"
 msgid "Display language"
 msgstr "Мова перекладу"
 
-#: ../plugins/language//DisplayLanguage.qml:118
+#: ../plugins/language//DisplayLanguage.qml:116
 msgid "Confirm"
 msgstr "Підтвердити"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #: ../plugins/language//PageComponent.qml:34
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:114
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:208
 msgid "Language & Text"
 msgstr "Мова і текст"
 
-#: ../plugins/language//PageComponent.qml:100
+#: ../plugins/language//PageComponent.qml:101
 msgid "Display language…"
 msgstr "Мова показу…"
 
-#: ../plugins/language//PageComponent.qml:117
+#: ../plugins/language//PageComponent.qml:118
 #: ../plugins/language//KeyboardLayouts.qml:26
 msgid "Keyboard layouts"
 msgstr "Розкладки клавіатури"
 
-#: ../plugins/language//PageComponent.qml:152
+#: ../plugins/language//PageComponent.qml:154
 msgid "Auto correction"
 msgstr "Автовиправлення"
 
-#: ../plugins/language//PageComponent.qml:162
+#: ../plugins/language//PageComponent.qml:165
 msgid "Word suggestions"
 msgstr "Пропозиції слів"
 
-#: ../plugins/language//PageComponent.qml:175
+#: ../plugins/language//PageComponent.qml:179
 msgid "Auto capitalization"
 msgstr "Автоматичний регістр літер"
 
-#: ../plugins/language//PageComponent.qml:185
+#: ../plugins/language//PageComponent.qml:190
 msgid "Turns on Shift to capitalize the first letter of each sentence."
 msgstr "Вмикає верхній регістр на першій літері кожного речення."
 
-#: ../plugins/language//PageComponent.qml:192
+#: ../plugins/language//PageComponent.qml:197
 msgid "Auto punctuation"
 msgstr "Автопунктуація"
 
-#: ../plugins/language//PageComponent.qml:202
+#: ../plugins/language//PageComponent.qml:208
 msgid ""
 "Adds a period, and any missing quotes or brackets, when you tap Space twice."
 msgstr ""
 "Додає крапки, пропущені лапки та дужки після подвійного натискання Пробілу."
 
-#: ../plugins/language//PageComponent.qml:219
+#: ../plugins/language//PageComponent.qml:226
 msgid "Keyboard vibration"
 msgstr "Клавіатурна вібрація"
 
@@ -700,8 +701,8 @@ msgid "All layouts available:"
 msgstr "Усі доступні розкладки:"
 
 #: ../plugins/phone//CallWaiting.qml:31 ../plugins/phone//CallWaiting.qml:74
-#: ../plugins/phone//NoSims.qml:34 ../plugins/phone//MultiSim.qml:46
-#: ../plugins/phone//MultiSim.qml:84 ../plugins/phone//SingleSim.qml:40
+#: ../plugins/phone//NoSims.qml:34 ../plugins/phone//MultiSim.qml:45
+#: ../plugins/phone//MultiSim.qml:81 ../plugins/phone//SingleSim.qml:40
 msgid "Call waiting"
 msgstr "Очікування виклику"
 
@@ -719,10 +720,9 @@ msgstr ""
 msgid "%1 Services"
 msgstr "Служби %1"
 
-#: ../plugins/phone//CallForwarding.qml:32
-#: ../plugins/phone//CallForwarding.qml:76 ../plugins/phone//NoSims.qml:28
-#: ../plugins/phone//MultiSim.qml:36 ../plugins/phone//MultiSim.qml:74
-#: ../plugins/phone//SingleSim.qml:33
+#: ../plugins/phone//NoSims.qml:28 ../plugins/phone//CallForwarding.qml:32
+#: ../plugins/phone//CallForwarding.qml:76 ../plugins/phone//MultiSim.qml:35
+#: ../plugins/phone//MultiSim.qml:71 ../plugins/phone//SingleSim.qml:33
 msgid "Call forwarding"
 msgstr "Переадресація"
 
@@ -747,15 +747,15 @@ msgstr "Останній дзвінок: %1"
 msgid "Call"
 msgstr "Дзвінок"
 
-#: ../plugins/phone//NoSims.qml:42 ../plugins/phone//MultiSim.qml:56
-#: ../plugins/phone//MultiSim.qml:94
+#: ../plugins/phone//NoSims.qml:42 ../plugins/phone//MultiSim.qml:55
+#: ../plugins/phone//MultiSim.qml:91
 msgid "Services"
 msgstr "Служби"
 
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
 #: ../plugins/phone//PageComponent.qml:32
-#: ../plugins/bluetooth//PageComponent.qml:93
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:140
+#: ../plugins/bluetooth//PageComponent.qml:137
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:124
 msgid "Phone"
 msgstr "Телефон"
 
@@ -764,23 +764,27 @@ msgid "SIM"
 msgstr "SIM"
 
 #. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
-#: ../plugins/brightness//PageComponent.qml:32
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:158
+#: ../plugins/brightness//PageComponent.qml:34
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:22
 msgid "Brightness"
 msgstr "Яскравість"
 
-#: ../plugins/brightness//PageComponent.qml:52
+#: ../plugins/brightness//PageComponent.qml:83
 msgid "Adjust automatically"
 msgstr "Коригувати автоматично"
 
-#: ../plugins/brightness//PageComponent.qml:65
+#: ../plugins/brightness//PageComponent.qml:97
 msgid "Brightens and dims the display to suit the surroundings."
 msgstr "Коригує яскравість дисплея відповідно до зовнішнього освітлення."
 
-#: ../plugins/cellular//PageChooseCarrier.qml:30
-#: ../plugins/cellular//Components//SingleSim.qml:58
-#: ../plugins/cellular//Components//SingleSim.qml:67
-#: ../plugins/cellular//Components//NoSim.qml:47
+#: ../plugins/cellular//PageCarrierAndApn.qml:27
+#: ../plugins/cellular//PageCarrierAndApn.qml:44
+#: ../plugins/cellular//PageCarrierAndApn.qml:52
+#: ../plugins/cellular//PageCarriersAndApns.qml:48
+#: ../plugins/cellular//PageCarriersAndApns.qml:75
+#: ../plugins/cellular//PageChooseCarrier.qml:32
+#: ../plugins/cellular//PageChooseCarrier.qml:129
+#: ../plugins/cellular//Components//SingleSim.qml:97
 msgid "Carrier"
 msgstr "Носій сигналу"
 
@@ -788,116 +792,116 @@ msgstr "Носій сигналу"
 msgid "Choose carrier:"
 msgstr "Виберіть сигнал носія:"
 
-#: ../plugins/cellular//PageChooseCarrier.qml:156
+#: ../plugins/cellular//PageChooseCarrier.qml:153
 #: ../plugins/time-date//ChooseTimeZone.qml:47
-#: ../plugins/time-date//PageComponent.qml:69
+#: ../plugins/time-date//PageComponent.qml:72
 msgid "Automatically"
 msgstr "Автоматично"
 
-#: ../plugins/cellular//PageChooseCarrier.qml:156
-#: ../plugins/security-privacy//PageComponent.qml:149
 #: ../plugins/time-date//ChooseTimeZone.qml:47
-#: ../plugins/time-date//PageComponent.qml:69
+#: ../plugins/time-date//PageComponent.qml:72
+#: ../plugins/security-privacy//PageComponent.qml:138
 msgid "Manually"
 msgstr "Вручну"
 
-#: ../plugins/cellular//PageChooseCarrier.qml:196
+#: ../plugins/cellular//PageChooseCarrier.qml:197
 msgid "Searching for carriers…"
-msgstr ""
+msgstr "Шукаємо носії сигналу…"
 
-#: ../plugins/cellular//PageChooseCarrier.qml:229
 #: ../plugins/cellular//PageChooseApn.qml:31
-#: ../plugins/cellular//Components//SingleSim.qml:73
+#: ../plugins/cellular//PageCarrierAndApn.qml:57
+#: ../plugins/cellular//PageCarriersAndApns.qml:62
+#: ../plugins/cellular//PageCarriersAndApns.qml:89
 msgid "APN"
 msgstr "APN"
 
-#: ../plugins/cellular//PageChooseApn.qml:372
+#: ../plugins/cellular//PageChooseApn.qml:366
 msgid "Internet APN:"
-msgstr ""
+msgstr "Точка доступу інтернету:"
 
-#: ../plugins/cellular//PageChooseApn.qml:449
+#: ../plugins/cellular//PageChooseApn.qml:434
 msgid "Custom Internet APN…"
-msgstr ""
+msgstr "Нетипова точка доступу інтернету…"
 
-#: ../plugins/cellular//PageChooseApn.qml:460
+#: ../plugins/cellular//PageChooseApn.qml:452
 msgid "MMS APN:"
-msgstr ""
+msgstr "Точка доступу MMS:"
 
-#: ../plugins/cellular//PageChooseApn.qml:485
+#: ../plugins/cellular//PageChooseApn.qml:467
 #: ../plugins/cellular//CustomApnEditor.qml:143
 msgid "Same APN as for Internet"
-msgstr ""
+msgstr "Та сама точка доступу, що і для інтернету"
 
-#: ../plugins/cellular//PageChooseApn.qml:565
+#: ../plugins/cellular//PageChooseApn.qml:547
 msgid "Custom MMS APN…"
-msgstr ""
+msgstr "Нетипова точка доступу MMS…"
 
-#: ../plugins/cellular//PageChooseApn.qml:591
+#: ../plugins/cellular//PageChooseApn.qml:578
 msgid "Reset APN Settings"
-msgstr ""
+msgstr "Скинути параметри точки доступу"
 
-#: ../plugins/cellular//PageChooseApn.qml:592
+#: ../plugins/cellular//PageChooseApn.qml:579
 msgid "Are you sure that you want to Reset APN Settings?"
-msgstr ""
+msgstr "Ви справді хочете скинути параметри точки доступу?"
 
-#: ../plugins/cellular//PageChooseApn.qml:598
+#: ../plugins/cellular//PageChooseApn.qml:585
 msgid "Reset"
-msgstr ""
+msgstr "Скинути"
 
-#: ../plugins/cellular//PageChooseCarriers.qml:27
-#: ../plugins/cellular//Components//MultiSim.qml:68
+#: ../plugins/cellular//PageCarriersAndApns.qml:27
+#: ../plugins/cellular//Components//MultiSim.qml:76
 msgid "Carriers"
 msgstr "Носії сигналу"
 
 #: ../plugins/cellular//CustomApnEditor.qml:42
 msgid "Internet"
-msgstr ""
+msgstr "Інтернет"
 
 #: ../plugins/cellular//CustomApnEditor.qml:42
 msgid "MMS"
-msgstr ""
+msgstr "MMS"
 
 #. TRANSLATORS: %1 is either i18n.tr("Internet") or i18n.tr("MMS")
 #: ../plugins/cellular//CustomApnEditor.qml:67
 #, qt-format
 msgid "Custom %1 APN"
-msgstr ""
+msgstr "Назва нетипової точки доступу %1"
 
 #. TRANSLATORS: %1 is either i18n.tr("Internet") or i18n.tr("MMS")
 #: ../plugins/cellular//CustomApnEditor.qml:171
 #, qt-format
 msgid "%1 APN"
-msgstr ""
+msgstr "Точка доступу %1"
 
 #: ../plugins/cellular//CustomApnEditor.qml:181
 msgid "MMSC"
-msgstr ""
+msgstr "MMSC"
 
 #: ../plugins/cellular//CustomApnEditor.qml:191
 msgid "Proxy"
-msgstr ""
+msgstr "Проксі"
 
 #: ../plugins/cellular//CustomApnEditor.qml:213
 msgid "Username"
-msgstr ""
+msgstr "Користувач"
 
 #: ../plugins/cellular//CustomApnEditor.qml:264
 msgid "Save"
-msgstr ""
+msgstr "Зберегти"
 
 #: ../plugins/cellular//CustomApnEditor.qml:264
 msgid "Activate"
-msgstr ""
+msgstr "Задіяти"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: ../plugins/cellular//PageComponent.qml:32
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:170
+#: ../plugins/cellular//PageComponent.qml:33
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:54
 msgid "Cellular"
 msgstr "Мобільний"
 
 #: ../plugins/cellular//Hotspot.qml:29
-#: ../plugins/cellular//Components//MultiSim.qml:48
-#: ../plugins/cellular//Components//SingleSim.qml:43
+#: ../plugins/cellular//Components//MultiSim.qml:58
+#: ../plugins/cellular//Components//SingleSim.qml:70
 msgid "Wi-Fi hotspot"
 msgstr "Точка Wi-Fi"
 
@@ -944,119 +948,115 @@ msgid "Show key"
 msgstr "Показувати ключ"
 
 #: ../plugins/cellular//HotspotSetup.qml:94
-#: ../plugins/security-privacy//LockSecurity.qml:302
-#: ../plugins/security-privacy//SimPin.qml:157
+#: ../plugins/security-privacy//SimPin.qml:159
+#: ../plugins/security-privacy//LockSecurity.qml:365
 msgid "Change"
 msgstr "Змінити"
 
-#: ../plugins/security-privacy//LockSecurity.qml:32
 #: ../plugins/security-privacy//PhoneLocking.qml:49
+#: ../plugins/security-privacy//LockSecurity.qml:32
 #: ../plugins/about//DevMode.qml:116
-#: ../wizard/qml/Pages//30-passwd-type.qml:37
 msgid "Lock security"
 msgstr "Захист блокування"
 
-#: ../plugins/security-privacy//LockSecurity.qml:96
-#: ../plugins/security-privacy//LockSecurity.qml:384
+#: ../plugins/security-privacy//LockSecurity.qml:126
+#: ../plugins/security-privacy//LockSecurity.qml:463
 msgid "Change passcode…"
 msgstr "Змінити код-пароль…"
 
-#: ../plugins/security-privacy//LockSecurity.qml:98
-#: ../plugins/security-privacy//LockSecurity.qml:385
+#: ../plugins/security-privacy//LockSecurity.qml:128
+#: ../plugins/security-privacy//LockSecurity.qml:464
 msgid "Change passphrase…"
 msgstr "Змінити пароль…"
 
-#: ../plugins/security-privacy//LockSecurity.qml:105
+#: ../plugins/security-privacy//LockSecurity.qml:135
 msgid "Switch to swipe"
 msgstr "Перемкнутися на рух пальцем"
 
-#: ../plugins/security-privacy//LockSecurity.qml:107
+#: ../plugins/security-privacy//LockSecurity.qml:137
 msgid "Switch to passcode"
 msgstr "Перемкнутися на код-пароль"
 
-#: ../plugins/security-privacy//LockSecurity.qml:109
+#: ../plugins/security-privacy//LockSecurity.qml:139
 msgid "Switch to passphrase"
 msgstr "Перемкнутися на пароль"
 
-#: ../plugins/security-privacy//LockSecurity.qml:118
+#: ../plugins/security-privacy//LockSecurity.qml:148
 msgid "Existing passcode"
 msgstr "Наявний код-пароль"
 
-#: ../plugins/security-privacy//LockSecurity.qml:120
+#: ../plugins/security-privacy//LockSecurity.qml:150
 msgid "Existing passphrase"
 msgstr "Наявні паролі"
 
-#: ../plugins/security-privacy//LockSecurity.qml:174
+#: ../plugins/security-privacy//LockSecurity.qml:216
 msgid "Choose passcode"
 msgstr "Виберіть код-пароль"
 
-#: ../plugins/security-privacy//LockSecurity.qml:176
+#: ../plugins/security-privacy//LockSecurity.qml:218
 msgid "Choose passphrase"
 msgstr "Виберіть пароль"
 
-#: ../plugins/security-privacy//LockSecurity.qml:220
-#: ../wizard/qml/Pages//passwd-confirm.qml:48
+#: ../plugins/security-privacy//LockSecurity.qml:271
 msgid "Confirm passcode"
 msgstr "Підтвердіть код-пароль"
 
-#: ../plugins/security-privacy//LockSecurity.qml:222
-#: ../wizard/qml/Pages//passwd-confirm.qml:47
+#: ../plugins/security-privacy//LockSecurity.qml:273
 msgid "Confirm passphrase"
 msgstr "Підтвердіть пароль"
 
-#: ../plugins/security-privacy//LockSecurity.qml:265
+#: ../plugins/security-privacy//LockSecurity.qml:328
 msgid "Those passcodes don't match. Try again."
 msgstr "Введені коди-паролі не збігаються. Повторіть спробу"
 
-#: ../plugins/security-privacy//LockSecurity.qml:268
+#: ../plugins/security-privacy//LockSecurity.qml:331
 msgid "Those passphrases don't match. Try again."
 msgstr "Ці паролі не збігаються один з одним. Повторіть спробу."
 
-#: ../plugins/security-privacy//LockSecurity.qml:299
+#: ../plugins/security-privacy//LockSecurity.qml:362
 msgid "Unset"
 msgstr "Скасувати"
 
-#: ../plugins/security-privacy//LockSecurity.qml:344
+#: ../plugins/security-privacy//LockSecurity.qml:423
 msgid "Unlock the phone using:"
 msgstr "Розблокування телефону за допомогою:"
 
-#: ../plugins/security-privacy//LockSecurity.qml:348
+#: ../plugins/security-privacy//LockSecurity.qml:427
 msgid "Swipe (no security)"
 msgstr "рухом пальцем (без захисту)"
 
-#: ../plugins/security-privacy//LockSecurity.qml:349
+#: ../plugins/security-privacy//LockSecurity.qml:428
 msgid "4-digit passcode"
 msgstr "4-цифровий код-пароль"
 
-#: ../plugins/security-privacy//LockSecurity.qml:350
 #: ../plugins/security-privacy//PhoneLocking.qml:47
-#: ../wizard/qml/Pages//30-passwd-type.qml:98
+#: ../plugins/security-privacy//LockSecurity.qml:429
 msgid "Passphrase"
 msgstr "Пароль"
 
-#: ../plugins/security-privacy//LockSecurity.qml:351
+#: ../plugins/security-privacy//LockSecurity.qml:430
 msgid "Swipe (no security)… "
 msgstr "рухом пальцем (без захисту)… "
 
-#: ../plugins/security-privacy//LockSecurity.qml:352
+#: ../plugins/security-privacy//LockSecurity.qml:431
 msgid "4-digit passcode…"
 msgstr "4-цифровий код-пароль"
 
-#: ../plugins/security-privacy//LockSecurity.qml:353
+#: ../plugins/security-privacy//LockSecurity.qml:432
 msgid "Passphrase…"
 msgstr "Пароль…"
 
-#: ../plugins/security-privacy//SimPin.qml:34
-#: ../plugins/security-privacy//SimPin.qml:322
-#: ../plugins/security-privacy//PageComponent.qml:158
+#: ../plugins/security-privacy//SimPin.qml:36
+#: ../plugins/security-privacy//SimPin.qml:336
+#: ../plugins/security-privacy//PageComponent.qml:147
 msgid "SIM PIN"
 msgstr "Пінкод SIM"
 
-#: ../plugins/security-privacy//SimPin.qml:44
+#: ../plugins/security-privacy//SimPin.qml:46
 msgid "Change SIM PIN"
 msgstr "Зміна PIN-коду SIM-картки"
 
-#: ../plugins/security-privacy//SimPin.qml:47
+#: ../plugins/security-privacy//SimPin.qml:49
 #, qt-format
 msgid "Incorrect PIN. %1 attempt remaining."
 msgid_plural "Incorrect PIN. %1 attempts remaining."
@@ -1064,11 +1064,11 @@ msgstr[0] "Помилковий PIN-код. Лишилася %1 спроба."
 msgstr[1] "Помилковий PIN-код. Лишилося %1 спроби."
 msgstr[2] "Помилковий PIN-код. Лишилося %1 спроб."
 
-#: ../plugins/security-privacy//SimPin.qml:81
+#: ../plugins/security-privacy//SimPin.qml:83
 msgid "Current PIN:"
 msgstr "Поточний PIN-код:"
 
-#: ../plugins/security-privacy//SimPin.qml:93
+#: ../plugins/security-privacy//SimPin.qml:95
 #, qt-format
 msgid "%1 attempt allowed."
 msgid_plural "%1 attempts allowed."
@@ -1076,49 +1076,49 @@ msgstr[0] "Дозволено %1 спробу."
 msgstr[1] "Дозволено %1 спроби."
 msgstr[2] "Дозволено %1 спроб."
 
-#: ../plugins/security-privacy//SimPin.qml:107
+#: ../plugins/security-privacy//SimPin.qml:109
 msgid "Choose new PIN:"
 msgstr "Виберіть новий PIN-код:"
 
-#: ../plugins/security-privacy//SimPin.qml:118
+#: ../plugins/security-privacy//SimPin.qml:120
 msgid "Confirm new PIN:"
 msgstr "Підтвердіть новий PIN-код:"
 
-#: ../plugins/security-privacy//SimPin.qml:137
+#: ../plugins/security-privacy//SimPin.qml:139
 msgid "PINs don't match. Try again."
 msgstr "Значення PIN-кодів не збігаються. Повторіть спробу."
 
-#: ../plugins/security-privacy//SimPin.qml:183
+#: ../plugins/security-privacy//SimPin.qml:185
 msgid "Enter SIM PIN"
 msgstr "Введіть PIN-код SIM-картки"
 
-#: ../plugins/security-privacy//SimPin.qml:184
+#: ../plugins/security-privacy//SimPin.qml:186
 msgid "Enter Previous SIM PIN"
 msgstr "Введіть попередній PIN-код SIM-картки"
 
-#: ../plugins/security-privacy//SimPin.qml:187
+#: ../plugins/security-privacy//SimPin.qml:189
 #, qt-format
 msgid "Incorrect PIN. %1 attempts remaining."
 msgstr "Помилковий PIN-код. Лишилося %1 спроб."
 
-#: ../plugins/security-privacy//SimPin.qml:246
+#: ../plugins/security-privacy//SimPin.qml:248
 #, qt-format
 msgid "%1 attempts allowed."
 msgstr "Дозволено не більше %1 спроб."
 
-#: ../plugins/security-privacy//SimPin.qml:282
+#: ../plugins/security-privacy//SimPin.qml:284
 msgid "Unlock"
 msgstr "Розблокувати"
 
-#: ../plugins/security-privacy//SimPin.qml:282
+#: ../plugins/security-privacy//SimPin.qml:284
 msgid "Lock"
 msgstr "Заблокувати"
 
-#: ../plugins/security-privacy//SimPin.qml:340
+#: ../plugins/security-privacy//SimPin.qml:354
 msgid "Change PIN…"
 msgstr "Змінити PIN-код…"
 
-#: ../plugins/security-privacy//SimPin.qml:357
+#: ../plugins/security-privacy//SimPin.qml:383
 msgid ""
 "When a SIM PIN is set, it must be entered to access cellular services after "
 "restarting the phone or swapping the SIM."
@@ -1127,7 +1127,7 @@ msgstr ""
 "до послуг стільникової мережі після перезапуску системи телефону або заміни "
 "SIM-картки."
 
-#: ../plugins/security-privacy//SimPin.qml:361
+#: ../plugins/security-privacy//SimPin.qml:387
 msgid "Entering an incorrect PIN repeatedly may lock the SIM permanently."
 msgstr ""
 "Неможливість введення правильного PIN-коду протягом декількох спроб може "
@@ -1143,7 +1143,6 @@ msgid "None"
 msgstr "Нічого"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:46
-#: ../wizard/qml/Pages//30-passwd-type.qml:95
 msgid "Passcode"
 msgstr "Код-пароль"
 
@@ -1169,17 +1168,17 @@ msgstr "Після розблокування дозволити:"
 msgid "Launcher"
 msgstr "Засіб запуску"
 
-#: ../plugins/security-privacy//PhoneLocking.qml:120
+#: ../plugins/security-privacy//PhoneLocking.qml:123
 msgid "Notifications and quick settings"
 msgstr "Сповіщення та швидке налаштування"
 
-#: ../plugins/security-privacy//PhoneLocking.qml:131
+#: ../plugins/security-privacy//PhoneLocking.qml:137
 msgid "Turn on lock security to restrict access when the phone is locked."
 msgstr ""
 "Увімкніть захист блокуванням для обмеження доступу до телефону у режимі "
 "блокування."
 
-#: ../plugins/security-privacy//PhoneLocking.qml:132
+#: ../plugins/security-privacy//PhoneLocking.qml:138
 msgid "Other apps and functions will prompt you to unlock."
 msgstr ""
 "Для роботи інших програм та можливостей система проситиме вас розблокувати "
@@ -1187,44 +1186,42 @@ msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
 #: ../plugins/security-privacy//PageComponent.qml:37
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:218
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:184
 msgid "Security & Privacy"
 msgstr "Захист і конфіденційність"
 
-#: ../plugins/security-privacy//PageComponent.qml:100
-#: ../plugins/security-privacy//PageComponent.qml:218
 #: ../plugins/security-privacy//Dash.qml:46
+#: ../plugins/security-privacy//PageComponent.qml:89
+#: ../plugins/security-privacy//PageComponent.qml:201
 msgid "Phone and Internet"
 msgstr "телефон та інтернет"
 
-#: ../plugins/security-privacy//PageComponent.qml:102
-#: ../plugins/security-privacy//PageComponent.qml:219
 #: ../plugins/security-privacy//Dash.qml:46
+#: ../plugins/security-privacy//PageComponent.qml:91
+#: ../plugins/security-privacy//PageComponent.qml:202
 msgid "Phone only"
 msgstr "лише телефон"
 
-#: ../plugins/security-privacy//PageComponent.qml:131
+#: ../plugins/security-privacy//PageComponent.qml:120
 msgid "Lock phone"
 msgstr "Заблокувати телефон"
 
-#: ../plugins/security-privacy//PageComponent.qml:161
-#: ../plugins/security-privacy//PageComponent.qml:244
+#: ../plugins/security-privacy//PageComponent.qml:150
+#: ../plugins/security-privacy//PageComponent.qml:228
 msgid "On"
 msgstr "Увімкн."
 
-#: ../plugins/security-privacy//PageComponent.qml:165
-#: ../plugins/security-privacy//PageComponent.qml:244
-#: ../plugins/cellular//Components//CellularMultiSim.qml:30
-#: ../plugins/cellular//Components//NoSim.qml:32
-#: ../plugins/cellular//Components//CellularSingleSim.qml:50
+#: ../plugins/security-privacy//PageComponent.qml:154
+#: ../plugins/security-privacy//PageComponent.qml:228
+#: ../plugins/cellular//Components//DataMultiSim.qml:31
 msgid "Off"
 msgstr "Вимкн."
 
-#: ../plugins/security-privacy//PageComponent.qml:172
+#: ../plugins/security-privacy//PageComponent.qml:161
 msgid "Encryption"
 msgstr "Шифрування"
 
-#: ../plugins/security-privacy//PageComponent.qml:181
+#: ../plugins/security-privacy//PageComponent.qml:170
 msgid ""
 "Encryption protects against access to phone data when the phone is connected "
 "to a PC or other device."
@@ -1232,51 +1229,50 @@ msgstr ""
 "Шифрування захистить дані вашого телефону від небажаного доступу під час "
 "з’єднання з комп’ютером або іншим пристроєм."
 
-#: ../plugins/security-privacy//PageComponent.qml:185
+#: ../plugins/security-privacy//PageComponent.qml:174
 msgid "Privacy"
 msgstr "Конфіденційність"
 
-#: ../plugins/security-privacy//PageComponent.qml:188
+#: ../plugins/security-privacy//PageComponent.qml:177
 msgid "Stats on welcome screen"
 msgstr "Статистика на екрані вітання"
 
-#: ../plugins/security-privacy//PageComponent.qml:201
+#: ../plugins/security-privacy//PageComponent.qml:187
 msgid "Messages on welcome screen"
 msgstr "Повідомлення на екрані вітання"
 
-#: ../plugins/security-privacy//PageComponent.qml:216
 #: ../plugins/security-privacy//Dash.qml:29
+#: ../plugins/security-privacy//PageComponent.qml:199
 msgid "Dash search"
 msgstr "Пошук на панелі"
 
-#: ../plugins/security-privacy//PageComponent.qml:235
+#: ../plugins/security-privacy//PageComponent.qml:219
 msgid "Location access"
 msgstr "Доступ до даних щодо місця перебування"
 
-#: ../plugins/security-privacy//PageComponent.qml:253
+#: ../plugins/security-privacy//PageComponent.qml:237
 #: ../plugins/security-privacy//AppAccess.qml:28
 msgid "Other app access"
 msgstr "Доступ до інших програм"
 
-#: ../plugins/security-privacy//PageComponent.qml:258
+#: ../plugins/security-privacy//PageComponent.qml:242
 #: ../plugins/security-privacy//diagnostics//PageComponent.qml:30
 msgid "Diagnostics"
 msgstr "Діагностика"
 
 #. TRANSLATORS: This string is shown when crash
 #. reports are to be sent by the system.
-#: ../plugins/security-privacy//PageComponent.qml:263
+#: ../plugins/security-privacy//PageComponent.qml:247
 msgid "Sent"
 msgstr "Надіслано"
 
 #. TRANSLATORS: This string is shown when crash
 #. reports are not to be sent by the system
-#: ../plugins/security-privacy//PageComponent.qml:266
+#: ../plugins/security-privacy//PageComponent.qml:250
 msgid "Not sent"
 msgstr "Не надіслано"
 
-#: ../plugins/security-privacy//Location.qml:31
-#: ../wizard/qml/Pages//50-location.qml:25
+#: ../plugins/security-privacy//Location.qml:32
 msgid "Location"
 msgstr "Місце перебування"
 
@@ -1284,7 +1280,7 @@ msgstr "Місце перебування"
 msgid "Location detection"
 msgstr "Визначення місця перебування"
 
-#: ../plugins/security-privacy//Location.qml:81
+#: ../plugins/security-privacy//Location.qml:208
 msgid ""
 "Uses GPS to detect your rough location. When off, GPS turns off to save "
 "battery."
@@ -1292,7 +1288,7 @@ msgstr ""
 "Використовує дані GPS для приблизного визначення вашого місця перебування. "
 "Якщо вимкнено, GPS також буде вимкнено для економії заряду акумулятора."
 
-#: ../plugins/security-privacy//Location.qml:83
+#: ../plugins/security-privacy//Location.qml:210
 msgid ""
 "Uses wi-fi and GPS to detect your rough location. Turning off location "
 "detection saves battery."
@@ -1301,7 +1297,7 @@ msgstr ""
 "перебування. Вимикання визначення місця перебування економить заряд "
 "акумулятора."
 
-#: ../plugins/security-privacy//Location.qml:85
+#: ../plugins/security-privacy//Location.qml:212
 msgid ""
 "Uses wi-fi (currently off) and GPS to detect your rough location. Turning "
 "off location detection saves battery."
@@ -1310,7 +1306,7 @@ msgstr ""
 "вашого місця перебування. Вимикання визначення місця перебування економить "
 "заряд акумулятора."
 
-#: ../plugins/security-privacy//Location.qml:87
+#: ../plugins/security-privacy//Location.qml:214
 msgid ""
 "Uses wi-fi, cell tower locations, and GPS to detect your rough location. "
 "Turning off location detection saves battery."
@@ -1319,7 +1315,7 @@ msgstr ""
 "і GPS для приблизного визначення вашого місця перебування. Вимикання "
 "визначення місця перебування економить заряд акумулятора."
 
-#: ../plugins/security-privacy//Location.qml:89
+#: ../plugins/security-privacy//Location.qml:216
 msgid ""
 "Uses wi-fi, cell tower locations (no current cellular connection), and GPS "
 "to detect your rough location. Turning off location detection saves battery."
@@ -1329,7 +1325,7 @@ msgstr ""
 "вашого місця перебування. Вимикання визначення місця перебування економить "
 "заряд акумулятора."
 
-#: ../plugins/security-privacy//Location.qml:91
+#: ../plugins/security-privacy//Location.qml:218
 msgid ""
 "Uses wi-fi (currently off), cell tower locations, and GPS to detect your "
 "rough location. Turning off location detection saves battery."
@@ -1339,7 +1335,7 @@ msgstr ""
 "перебування. Вимикання визначення місця перебування економить заряд "
 "акумулятора."
 
-#: ../plugins/security-privacy//Location.qml:93
+#: ../plugins/security-privacy//Location.qml:220
 msgid ""
 "Uses wi-fi (currently off), cell tower locations (no current cellular "
 "connection), and GPS to detect your rough location. Turning off location "
@@ -1350,7 +1346,7 @@ msgstr ""
 "приблизного визначення вашого місця перебування. Вимикання визначення місця "
 "перебування економить заряд акумулятора."
 
-#: ../plugins/security-privacy//Location.qml:100
+#: ../plugins/security-privacy//Location.qml:227
 msgid "Allow access to location:"
 msgstr "Дозволити доступ до даних щодо розташування:"
 
@@ -1363,7 +1359,7 @@ msgid "Apps that you have granted and have requested access to:"
 msgstr "Програми, яким ви на запит надали доступ до:"
 
 #: ../plugins/security-privacy//AppAccess.qml:41
-#: ../plugins/bluetooth//PageComponent.qml:105
+#: ../plugins/bluetooth//PageComponent.qml:149
 msgid "Camera"
 msgstr "Відеокамера"
 
@@ -1389,8 +1385,9 @@ msgid "0"
 msgstr "0"
 
 #: ../plugins/bluetooth//ProvidePasskeyDialog.qml:28
-#: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:28
+#: ../plugins/bluetooth//DisplayPasskeyDialog.qml:26
 #: ../plugins/bluetooth//ProvidePinCodeDialog.qml:28
+#: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:28
 msgid "Bluetooth Pairing Request"
 msgstr "Запит щодо пов’язування за допомогою Bluetooth"
 
@@ -1416,132 +1413,132 @@ msgstr ""
 msgid "Confirm PIN"
 msgstr "Підтвердження пінкоду"
 
-#: ../plugins/bluetooth//PageComponent.qml:82
+#: ../plugins/bluetooth//PageComponent.qml:126
 msgid "Connected"
 msgstr "З'єднано"
 
-#: ../plugins/bluetooth//PageComponent.qml:83
+#: ../plugins/bluetooth//PageComponent.qml:127
 msgid "Connecting…"
 msgstr "З’єднуємося…"
 
-#: ../plugins/bluetooth//PageComponent.qml:84
+#: ../plugins/bluetooth//PageComponent.qml:128
 msgid "Disconnecting…"
 msgstr "Від’єднуємося…"
 
-#: ../plugins/bluetooth//PageComponent.qml:85
+#: ../plugins/bluetooth//PageComponent.qml:129
 msgid "Disconnected"
 msgstr "Від’єднано"
 
-#: ../plugins/bluetooth//PageComponent.qml:92
+#: ../plugins/bluetooth//PageComponent.qml:136
 msgid "Computer"
 msgstr "Комп’ютер"
 
-#: ../plugins/bluetooth//PageComponent.qml:94
+#: ../plugins/bluetooth//PageComponent.qml:138
 msgid "Modem"
 msgstr "Модем"
 
-#: ../plugins/bluetooth//PageComponent.qml:95 ../src/qml/MainWindow.qml:147
+#: ../plugins/bluetooth//PageComponent.qml:139 ../src/qml/MainWindow.qml:147
 msgid "Network"
 msgstr "Мережа"
 
-#: ../plugins/bluetooth//PageComponent.qml:96
+#: ../plugins/bluetooth//PageComponent.qml:140
 msgid "Headset"
 msgstr "Гарнітура"
 
-#: ../plugins/bluetooth//PageComponent.qml:97
+#: ../plugins/bluetooth//PageComponent.qml:141
 msgid "Headphones"
 msgstr "Навушники"
 
-#: ../plugins/bluetooth//PageComponent.qml:98
+#: ../plugins/bluetooth//PageComponent.qml:142
 msgid "Video"
 msgstr "Відео"
 
-#: ../plugins/bluetooth//PageComponent.qml:99
+#: ../plugins/bluetooth//PageComponent.qml:143
 msgid "Other Audio"
 msgstr "Інший звуковий пристрій"
 
-#: ../plugins/bluetooth//PageComponent.qml:100
+#: ../plugins/bluetooth//PageComponent.qml:144
 msgid "Joypad"
 msgstr "Ігровий пульт"
 
-#: ../plugins/bluetooth//PageComponent.qml:101
+#: ../plugins/bluetooth//PageComponent.qml:145
 msgid "Keyboard"
 msgstr "Клавіатура"
 
-#: ../plugins/bluetooth//PageComponent.qml:102
+#: ../plugins/bluetooth//PageComponent.qml:146
 msgid "Tablet"
 msgstr "Планшет"
 
-#: ../plugins/bluetooth//PageComponent.qml:103
+#: ../plugins/bluetooth//PageComponent.qml:147
 msgid "Mouse"
 msgstr "Миша"
 
-#: ../plugins/bluetooth//PageComponent.qml:104
+#: ../plugins/bluetooth//PageComponent.qml:148
 msgid "Printer"
 msgstr "Принтер"
 
-#: ../plugins/bluetooth//PageComponent.qml:106
+#: ../plugins/bluetooth//PageComponent.qml:150
 msgid "Other"
 msgstr "Інше"
 
-#: ../plugins/bluetooth//PageComponent.qml:112
+#: ../plugins/bluetooth//PageComponent.qml:156
 msgid "Excellent"
 msgstr "Відмінне"
 
-#: ../plugins/bluetooth//PageComponent.qml:113
+#: ../plugins/bluetooth//PageComponent.qml:157
 msgid "Good"
 msgstr "Добре"
 
-#: ../plugins/bluetooth//PageComponent.qml:114
+#: ../plugins/bluetooth//PageComponent.qml:158
 msgid "Fair"
 msgstr "Достатнє"
 
-#: ../plugins/bluetooth//PageComponent.qml:115
+#: ../plugins/bluetooth//PageComponent.qml:159
 msgid "Poor"
 msgstr "Погане"
 
-#: ../plugins/bluetooth//PageComponent.qml:182
+#: ../plugins/bluetooth//PageComponent.qml:220
 msgid "Discoverable"
 msgstr "Можна виявити"
 
-#: ../plugins/bluetooth//PageComponent.qml:182
+#: ../plugins/bluetooth//PageComponent.qml:220
 msgid "Not discoverable"
 msgstr "Не можна виявити"
 
-#: ../plugins/bluetooth//PageComponent.qml:213
+#: ../plugins/bluetooth//PageComponent.qml:251
 msgid "Connected devices:"
 msgstr "З’єднані пристрої:"
 
-#: ../plugins/bluetooth//PageComponent.qml:251
+#: ../plugins/bluetooth//PageComponent.qml:290
 msgid "Connect another device:"
 msgstr "З’єднатися з іншим пристроєм:"
 
-#: ../plugins/bluetooth//PageComponent.qml:251
+#: ../plugins/bluetooth//PageComponent.qml:290
 msgid "Connect a device:"
 msgstr "З’єднати пристрій:"
 
-#: ../plugins/bluetooth//PageComponent.qml:285
+#: ../plugins/bluetooth//PageComponent.qml:324
 msgid "None detected"
 msgstr "Не виявлено жодної"
 
-#: ../plugins/bluetooth//PageComponent.qml:293
-#: ../plugins/bluetooth//PageComponent.qml:397
+#: ../plugins/bluetooth//PageComponent.qml:332
+#: ../plugins/bluetooth//PageComponent.qml:443
 msgid "Connect automatically when detected:"
 msgstr "З’єднуватися автоматично, якщо виявлено:"
 
-#: ../plugins/bluetooth//PageComponent.qml:364
+#: ../plugins/bluetooth//PageComponent.qml:410
 msgid "Type"
 msgstr "Тип"
 
-#: ../plugins/bluetooth//PageComponent.qml:388
+#: ../plugins/bluetooth//PageComponent.qml:434
 msgid "Status"
 msgstr "Стан"
 
-#: ../plugins/bluetooth//PageComponent.qml:392
+#: ../plugins/bluetooth//PageComponent.qml:438
 msgid "Signal Strength"
 msgstr "Потужність сигналу"
 
-#: ../plugins/bluetooth//PageComponent.qml:429
+#: ../plugins/bluetooth//PageComponent.qml:476
 msgid "Forget this device"
 msgstr "Забути про цей пристрій"
 
@@ -1553,7 +1550,7 @@ msgstr "Номер телефону:"
 msgid "Phone number"
 msgstr "Номер телефону"
 
-#: ../plugins/about//Storage.qml:33 ../plugins/about//PageComponent.qml:143
+#: ../plugins/about//PageComponent.qml:166 ../plugins/about//Storage.qml:33
 msgid "Storage"
 msgstr "Сховище даних"
 
@@ -1581,19 +1578,19 @@ msgstr "Інші файли"
 msgid "Used by apps"
 msgstr "Використано програмами"
 
-#: ../plugins/about//Storage.qml:140
+#: ../plugins/about//Storage.qml:136
 msgid "Total storage"
 msgstr "Загальна місткість"
 
-#: ../plugins/about//Storage.qml:152
+#: ../plugins/about//Storage.qml:148
 msgid "Free space"
 msgstr "Вільне місце"
 
-#: ../plugins/about//Storage.qml:172
+#: ../plugins/about//Storage.qml:168
 msgid "By name"
 msgstr "За назвою"
 
-#: ../plugins/about//Storage.qml:172
+#: ../plugins/about//Storage.qml:168
 msgid "By size"
 msgstr "За розміром"
 
@@ -1617,56 +1614,57 @@ msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: ../plugins/about//PageComponent.qml:34
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:278
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:290
 msgid "About this phone"
 msgstr "Про цей телефон"
 
-#: ../plugins/about//PageComponent.qml:109
+#: ../plugins/about//PageComponent.qml:116
 msgid "Serial"
 msgstr "Серійний номер"
 
-#: ../plugins/about//PageComponent.qml:124
+#: ../plugins/about//PageComponent.qml:147
 msgid "Wi-Fi address"
 msgstr "Адреса Wi-Fi"
 
-#: ../plugins/about//PageComponent.qml:132
+#: ../plugins/about//PageComponent.qml:155
 msgid "Bluetooth address"
 msgstr "Адреса Bluetooth"
 
-#: ../plugins/about//PageComponent.qml:144
+#. TRANSLATORS: that's the free disk space, indicated in the most appropriate storage unit
+#: ../plugins/about//PageComponent.qml:168
 #, qt-format
 msgid "%1 free"
 msgstr "Вільно %1"
 
-#: ../plugins/about//PageComponent.qml:151
+#: ../plugins/about//PageComponent.qml:175
 msgid "Software:"
 msgstr "Програмне забезпечення:"
 
-#: ../plugins/about//PageComponent.qml:156
+#: ../plugins/about//PageComponent.qml:180
 msgid "OS"
 msgstr "ОС"
 
-#: ../plugins/about//PageComponent.qml:165
+#: ../plugins/about//PageComponent.qml:189
 msgid "Last updated"
 msgstr "Востаннє оновлено"
 
-#: ../plugins/about//PageComponent.qml:173
+#: ../plugins/about//PageComponent.qml:197
 msgid "Check for updates"
 msgstr "Перевірити наявність оновлень"
 
-#: ../plugins/about//PageComponent.qml:182
+#: ../plugins/about//PageComponent.qml:207
 msgid "Legal:"
 msgstr "Правовий статус:"
 
-#: ../plugins/about//PageComponent.qml:187 ../plugins/about//Software.qml:11
+#: ../plugins/about//PageComponent.qml:212 ../plugins/about//Software.qml:11
 msgid "Software licenses"
 msgstr "Ліцензування програмного забезпечення"
 
-#: ../plugins/about//PageComponent.qml:195
+#: ../plugins/about//PageComponent.qml:220
 msgid "Regulatory info"
 msgstr "Дані щодо обмежень"
 
-#: ../plugins/about//PageComponent.qml:203
+#: ../plugins/about//PageComponent.qml:228
 msgid "Developer mode"
 msgstr "Режим розробника"
 
@@ -1756,7 +1754,7 @@ msgstr "Рік"
 
 #. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
 #: ../plugins/time-date//PageComponent.qml:29
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:314
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:114
 msgid "Time & Date"
 msgstr "Час і дата"
 
@@ -1764,79 +1762,79 @@ msgstr "Час і дата"
 msgid "Time zone:"
 msgstr "Часовий пояс:"
 
-#: ../plugins/time-date//PageComponent.qml:68
+#: ../plugins/time-date//PageComponent.qml:66
 msgid "Set the time and date:"
 msgstr "Встановити час і дату:"
 
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#: ../plugins/system-update//PageComponent.qml:38
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:326
+#: ../plugins/system-update//PageComponent.qml:37
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:4
 msgid "Updates"
 msgstr "Оновлення"
 
-#: ../plugins/system-update//PageComponent.qml:117
+#: ../plugins/system-update//PageComponent.qml:95
 msgid "Update System"
 msgstr "Оновлення системи"
 
-#: ../plugins/system-update//PageComponent.qml:118
+#: ../plugins/system-update//PageComponent.qml:96
 msgid "The phone needs to restart to install the system update."
 msgstr ""
 "Для завершення встановлення оновленої системи телефон слід перезавантажити."
 
-#: ../plugins/system-update//PageComponent.qml:118
+#: ../plugins/system-update//PageComponent.qml:96
 msgid "Connect the phone to power before installing the system update."
 msgstr ""
 "Перш ніж встановлювати оновлення, з’єднайте телефон з мережею електричного "
 "живлення."
 
-#: ../plugins/system-update//PageComponent.qml:121
+#: ../plugins/system-update//PageComponent.qml:99
 msgid "Install & Restart"
 msgstr "Встановити і перезапустити"
 
-#: ../plugins/system-update//PageComponent.qml:131
+#: ../plugins/system-update//PageComponent.qml:109
 msgid "Not Now"
 msgstr "Не зараз"
 
-#: ../plugins/system-update//PageComponent.qml:137
+#: ../plugins/system-update//PageComponent.qml:115
 msgid "Install"
 msgstr "Встановити"
 
-#: ../plugins/system-update//PageComponent.qml:152
+#: ../plugins/system-update//PageComponent.qml:130
 msgid "Installation failed"
-msgstr ""
+msgstr "Не вдалося встановити"
 
-#: ../plugins/system-update//PageComponent.qml:156
-#: ../plugins/cellular//Components//SimEditor.qml:200
+#: ../plugins/system-update//PageComponent.qml:134
+#: ../plugins/cellular//Components//SimEditor.qml:215
 msgid "OK"
 msgstr "Гаразд"
 
-#: ../plugins/system-update//PageComponent.qml:176
+#: ../plugins/system-update//PageComponent.qml:154
 msgid "Software is up to date"
 msgstr "Програмне забезпечення не потребує оновлення"
 
-#: ../plugins/system-update//PageComponent.qml:235
-#: ../plugins/system-update//PageComponent.qml:241
+#: ../plugins/system-update//PageComponent.qml:218
+#: ../plugins/system-update//PageComponent.qml:224
 msgid "Sorry, the system update failed."
-msgstr ""
+msgstr "Вибачте, не вдалося оновити систему."
 
-#: ../plugins/system-update//PageComponent.qml:254
+#: ../plugins/system-update//PageComponent.qml:237
 msgid "Restarting…"
 msgstr "Перезавантаження…"
 
-#: ../plugins/system-update//PageComponent.qml:298
+#: ../plugins/system-update//PageComponent.qml:281
 msgid "Checking for updates…"
 msgstr "Перевірка наявності оновлень…"
 
-#: ../plugins/system-update//PageComponent.qml:298
+#: ../plugins/system-update//PageComponent.qml:281
 msgid "Connect to the Internet to check for updates"
-msgstr ""
+msgstr "Встановіть з’єднання з інтернетом, щоб перевірити наявність оновлень"
 
-#: ../plugins/system-update//PageComponent.qml:313
-#: ../plugins/system-update//PageComponent.qml:471
+#: ../plugins/system-update//PageComponent.qml:296
+#: ../plugins/system-update//PageComponent.qml:455
 msgid "Retry"
 msgstr "Повторити"
 
-#: ../plugins/system-update//PageComponent.qml:338
+#: ../plugins/system-update//PageComponent.qml:321
 #, qt-format
 msgid "Install %1 update…"
 msgid_plural "Install %1 updates…"
@@ -1844,7 +1842,7 @@ msgstr[0] "Встановити %1 оновлення…"
 msgstr[1] "Встановити %1 оновлення…"
 msgstr[2] "Встановити %1 оновлень…"
 
-#: ../plugins/system-update//PageComponent.qml:339
+#: ../plugins/system-update//PageComponent.qml:322
 #, qt-format
 msgid "Install %1 update"
 msgid_plural "Install %1 updates"
@@ -1852,89 +1850,89 @@ msgstr[0] "Встановити %1 оновлення"
 msgstr[1] "Встановити %1 оновлення"
 msgstr[2] "Встановити %1 оновлень"
 
-#: ../plugins/system-update//PageComponent.qml:340
+#: ../plugins/system-update//PageComponent.qml:323
 msgid "Pause All"
 msgstr "Призупинити всі"
 
-#: ../plugins/system-update//PageComponent.qml:474
+#: ../plugins/system-update//PageComponent.qml:458
 msgid "Install…"
 msgstr "Встановити…"
 
-#: ../plugins/system-update//PageComponent.qml:476
+#: ../plugins/system-update//PageComponent.qml:460
 msgid "Download"
 msgstr "Отримання"
 
-#: ../plugins/system-update//PageComponent.qml:480
+#: ../plugins/system-update//PageComponent.qml:464
 msgid "Pause"
 msgstr "Призупинити"
 
-#: ../plugins/system-update//PageComponent.qml:482
+#: ../plugins/system-update//PageComponent.qml:466
 msgid "Resume"
 msgstr "Продовжити"
 
-#: ../plugins/system-update//PageComponent.qml:484
+#: ../plugins/system-update//PageComponent.qml:468
 msgid "Update"
 msgstr "Оновити"
 
-#: ../plugins/system-update//PageComponent.qml:522
+#: ../plugins/system-update//PageComponent.qml:508
 msgid "Installing"
 msgstr "Встановлення"
 
-#: ../plugins/system-update//PageComponent.qml:524
+#: ../plugins/system-update//PageComponent.qml:510
 msgid "Installed"
 msgstr "Встановлено"
 
-#: ../plugins/system-update//PageComponent.qml:525
+#: ../plugins/system-update//PageComponent.qml:511
 msgid "Downloading"
 msgstr "Завантаження"
 
-#: ../plugins/system-update//PageComponent.qml:536
+#: ../plugins/system-update//PageComponent.qml:523
 #, qt-format
 msgid "%1 of %2"
 msgstr "%1 з %2"
 
-#: ../plugins/system-update//PageComponent.qml:635
+#: ../plugins/system-update//PageComponent.qml:623
 msgid "Version: "
 msgstr "Версія: "
 
-#: ../plugins/system-update//PageComponent.qml:667
+#: ../plugins/system-update//PageComponent.qml:655
 msgid "Sign in to Ubuntu One to receive updates for apps."
 msgstr "Увійдіть до Ubuntu One, щоб отримувати оновлення програм."
 
-#: ../plugins/system-update//PageComponent.qml:676
+#: ../plugins/system-update//PageComponent.qml:664
 msgid "Sign In…"
 msgstr "Увійти…"
 
-#: ../plugins/system-update//PageComponent.qml:720
+#: ../plugins/system-update//PageComponent.qml:708
 msgid "Installing update…"
 msgstr "Встановлюємо оновлення…"
 
-#: ../plugins/system-update//PageComponent.qml:759
+#: ../plugins/system-update//PageComponent.qml:747
 #: ../plugins/system-update//Configuration.qml:29
 msgid "Auto download"
 msgstr "Автоотримання"
 
-#: ../plugins/system-update//PageComponent.qml:764
+#: ../plugins/system-update//PageComponent.qml:752
 msgid "On wi-fi"
 msgstr "З wi-fi"
 
-#: ../plugins/system-update//PageComponent.qml:766
+#: ../plugins/system-update//PageComponent.qml:754
 msgid "Always"
 msgstr "Завжди"
 
-#: ../plugins/system-update//PageComponent.qml:781
+#: ../plugins/system-update//PageComponent.qml:758
 msgid " bytes"
 msgstr " байтів"
 
-#: ../plugins/system-update//PageComponent.qml:784
+#: ../plugins/system-update//PageComponent.qml:761
 msgid " KiB"
 msgstr " КіБ"
 
-#: ../plugins/system-update//PageComponent.qml:787
+#: ../plugins/system-update//PageComponent.qml:764
 msgid " MiB"
 msgstr " МіБ"
 
-#: ../plugins/system-update//PageComponent.qml:790
+#: ../plugins/system-update//PageComponent.qml:767
 msgid " GiB"
 msgstr " ГіБ"
 
@@ -1974,48 +1972,41 @@ msgstr "Додати зображення…"
 msgid "Remove images…"
 msgstr "Вилучити зображення…"
 
-#: ../plugins/cellular//Components//CellularMultiSim.qml:82
-#: ../plugins/cellular//Components//NoSim.qml:29
-#: ../plugins/cellular//Components//CellularSingleSim.qml:32
+#: ../plugins/cellular//Components//DataMultiSim.qml:39
+#: ../plugins/cellular//Components//SingleSim.qml:37
 msgid "Cellular data:"
 msgstr "Дані стільникового зв’язку:"
 
-#: ../plugins/cellular//Components//CellularMultiSim.qml:138
-#: ../plugins/cellular//Components//NoSim.qml:32
-#: ../plugins/cellular//Components//CellularSingleSim.qml:51
+#: ../plugins/cellular//Components//Sim.qml:42
 msgid "2G only (saves battery)"
 msgstr "лише 2G (економити енергію)"
 
-#: ../plugins/cellular//Components//CellularMultiSim.qml:139
-#: ../plugins/cellular//Components//CellularSingleSim.qml:52
+#: ../plugins/cellular//Components//Sim.qml:43
 msgid "2G/3G (faster)"
 msgstr "2G/3G (швидше)"
 
-#: ../plugins/cellular//Components//CellularMultiSim.qml:140
-#: ../plugins/cellular//Components//NoSim.qml:32
-#: ../plugins/cellular//Components//CellularSingleSim.qml:53
+#: ../plugins/cellular//Components//Sim.qml:44
 msgid "2G/3G/4G (faster)"
 msgstr "2G/3G/4G (швидше)"
 
-#: ../plugins/cellular//Components//CellularMultiSim.qml:182
-#: ../plugins/cellular//Components//NoSim.qml:37
-#: ../plugins/cellular//Components//CellularSingleSim.qml:72
+#: ../plugins/cellular//Components//DataMultiSim.qml:76
+#: ../plugins/cellular//Components//SingleSim.qml:50
 msgid "Data roaming"
 msgstr "Роумінґ даних"
 
-#: ../plugins/cellular//Components//SimEditor.qml:77
+#: ../plugins/cellular//Components//SimEditor.qml:88
 msgid "Edit SIM Name"
 msgstr "Змінити назву SIM"
 
-#: ../plugins/cellular//Components//DefaultSim.qml:31
+#: ../plugins/cellular//Components//DefaultSim.qml:32
 msgid "Ask me each time"
 msgstr "Завжди питати"
 
-#: ../plugins/cellular//Components//DefaultSim.qml:36
+#: ../plugins/cellular//Components//DefaultSim.qml:35
 msgid "For outgoing calls, use:"
 msgstr "Для вихідних дзвінків:"
 
-#: ../plugins/cellular//Components//DefaultSim.qml:50
+#: ../plugins/cellular//Components//DefaultSim.qml:52
 msgid ""
 "You can change the SIM for individual calls, or for contacts in the address "
 "book."
@@ -2027,13 +2018,13 @@ msgstr ""
 msgid "For messages, use:"
 msgstr "Для повідомлень:"
 
-#: ../plugins/cellular//Components//MultiSim.qml:42
-#: ../plugins/cellular//Components//SingleSim.qml:37
+#: ../plugins/cellular//Components//MultiSim.qml:52
+#: ../plugins/cellular//Components//SingleSim.qml:64
 msgid "Hotspot disabled because Wi-Fi is off."
 msgstr "Точку доступу вимкнено, оскільки вимкнено Wi-Fi."
 
-#: ../plugins/cellular//Components//MultiSim.qml:58
-#: ../plugins/cellular//Components//SingleSim.qml:52
+#: ../plugins/cellular//Components//MultiSim.qml:68
+#: ../plugins/cellular//Components//SingleSim.qml:79
 msgid "Data usage statistics"
 msgstr "Статистика щодо використання даних"
 
@@ -2090,28 +2081,29 @@ msgstr "4 цифри"
 msgid "Numbers and letters"
 msgstr "Цифри і літери"
 
-#: ../wizard/qml/Pages//30-passwd-type.qml:112
-#: ../wizard/qml/Pages//40-wifi.qml:196 ../wizard/qml/Pages//10-welcome.qml:85
-#: ../wizard/qml/Pages//50-location.qml:92
+#: ../wizard/qml/Pages//10-welcome.qml:85
 #: ../wizard/qml/Pages//60-reporting.qml:48
+#: ../wizard/qml/Pages//40-wifi.qml:212
+#: ../wizard/qml/Pages//30-passwd-type.qml:112
+#: ../wizard/qml/Pages//passwd-set.qml:83
+#: ../wizard/qml/Pages//passwd-confirm.qml:75
+#: ../wizard/qml/Pages//50-location.qml:92
 msgid "Continue"
 msgstr "Продовжити"
 
-#: ../wizard/qml/Pages//40-wifi.qml:27
+#: ../wizard/qml/Pages//40-wifi.qml:28
 msgid "Connect to Wi‑Fi"
 msgstr "З’єднатися із Wi‑Fi"
 
-#: ../wizard/qml/Pages//40-wifi.qml:146
+#: ../wizard/qml/Pages//40-wifi.qml:165
 msgid "Available networks…"
 msgstr "Доступні мережі…"
 
-#: ../wizard/qml/Pages//40-wifi.qml:147
+#: ../wizard/qml/Pages//40-wifi.qml:166
 msgid "No available networks."
 msgstr "Немає доступних мереж."
 
-#: ../wizard/qml/Pages//40-wifi.qml:196
-#: ../wizard/qml/Pages//31-passwd-set.qml:77
-#: ../wizard/qml/Pages//20-sim.qml:67
+#: ../wizard/qml/Pages//40-wifi.qml:212 ../wizard/qml/Pages//20-sim.qml:71
 msgid "Skip"
 msgstr "Пропустити"
 
@@ -2119,15 +2111,15 @@ msgstr "Пропустити"
 msgid "Terms & Conditions"
 msgstr "Умови користування"
 
-#: ../wizard/qml/Pages//31-passwd-set.qml:48
+#: ../wizard/qml/Pages//passwd-set.qml:53
 msgid "Enter passphrase"
 msgstr "Введіть пароль"
 
-#: ../wizard/qml/Pages//31-passwd-set.qml:49
+#: ../wizard/qml/Pages//passwd-set.qml:54
 msgid "Choose your passcode"
 msgstr "Виберіть ваш код-пароль"
 
-#: ../wizard/qml/Pages//31-passwd-set.qml:56
+#: ../wizard/qml/Pages//passwd-set.qml:61
 msgid "Passphrase must be 4 characters long"
 msgstr "Пароль має складатися принаймні з 4 символів"
 
@@ -2135,20 +2127,20 @@ msgstr "Пароль має складатися принаймні з 4 сим�
 msgid "Add a SIM card and restart your device"
 msgstr "Додайте SIM-картку і перезапустіть ваш пристрій"
 
-#: ../wizard/qml/Pages//20-sim.qml:53
+#: ../wizard/qml/Pages//20-sim.qml:57
 msgid "Without it, you won’t be able to make calls or use text messaging."
 msgstr "Без неї ви не зможете дзвонити або надсилати повідомлення."
 
-#: ../wizard/qml/Pages//passwd-confirm.qml:51
+#: ../wizard/qml/Pages//passwd-confirm.qml:52
 msgid "Sorry, incorrect passphrase."
 msgstr "Вибачте, помилковий пароль."
 
-#: ../wizard/qml/Pages//passwd-confirm.qml:51
 #: ../wizard/qml/Pages//passwd-confirm.qml:52
+#: ../wizard/qml/Pages//passwd-confirm.qml:53
 msgid "Please try again."
 msgstr "Будь ласка, спробуйте ще раз!"
 
-#: ../wizard/qml/Pages//passwd-confirm.qml:52
+#: ../wizard/qml/Pages//passwd-confirm.qml:53
 msgid "Sorry, incorrect passcode."
 msgstr "Вибачте, помилковий код-пароль."
 
@@ -2186,11 +2178,15 @@ msgid ""
 "Ubuntu includes location services provided by HERE, enabling apps to "
 "pinpoint your location."
 msgstr ""
+"До складу Ubuntu включено служби визначення місця перебування на основі "
+"HERE. За їхньою допомогою програми можут визначати місце, де ви перебуваєте."
 
 #: ../wizard/qml/Pages//50-location.qml:64
 msgid ""
 "Allow apps to use your mobile and Wi-Fi networks to determine your location."
 msgstr ""
+"Дозволити програмам використовувати мобільну мережу та мережу Wi-Fi для "
+"визначення вашого місця перебування."
 
 #. TRANSLATORS: HERE is a trademark for Nokia's location service, you probably shouldn't translate it
 #: ../wizard/qml/Pages//50-location.qml:74
@@ -2198,16 +2194,20 @@ msgid ""
 "Accept the HERE <a href='terms.qml'>terms and conditions</a> to enable these "
 "services."
 msgstr ""
+"Щоб уможливити ці служби, вам слід погодитися з <a href='terms.qml'>умовами "
+"надання послуг</a> HERE."
 
 #: ../wizard/qml/Pages//50-location.qml:85
 msgid ""
 "This service can be disabled at any time from the <b>System Settings</b> "
 "menu."
 msgstr ""
+"Цю службу можна будь-коли вимкнути за допомогою меню <b>Системних "
+"параметрів</b>."
 
 #: ../wizard/qml/Pages//60-reporting.qml:22
 msgid "Improving your experience"
-msgstr ""
+msgstr "Спрощення вашої роботи"
 
 #: ../wizard/qml/Pages//60-reporting.qml:34
 msgid ""
@@ -2222,833 +2222,775 @@ msgid ""
 "This can be disabled in <b>System Settings</b> under <b>Security &amp; "
 "Privacy</b>"
 msgstr ""
+"Це можна вимкнути у <b>Системних параметрах</b>, <b>Безпека &amp; "
+"конфіденційність</b>"
 
 #: ../wizard/qml/Components//Page.qml:89
 msgid "Back"
 msgstr "Назад"
 
-#: ../wizard/qml/Components//StackButton.qml:40
+#: ../wizard/qml/Components//StackButton.qml:41
 #, qt-format
 msgid "〈  %1"
 msgstr "〈  %1"
 
-#: ../wizard/qml/Components//StackButton.qml:43
+#: ../wizard/qml/Components//StackButton.qml:44
 #, qt-format
 msgid "%1  〉"
 msgstr "%1  〉"
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:4
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:84
 msgid "appearance"
 msgstr "вигляд"
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:6
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:86
 msgid "background"
 msgstr "тло"
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:8
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:88
 msgid "wallpaper"
 msgstr "шпалери"
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:10
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:90
 msgid "art"
 msgstr "зображення"
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:12
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:92
 msgid "photo"
 msgstr "фото"
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:14
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:94
 msgid "picture"
 msgstr "картинка"
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:16
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:96
 msgid "image"
 msgstr "знімок"
 
 #. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:18
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:178
 msgid "Accessibility"
 msgstr "Доступність"
 
 #. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:20
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:180
 msgid "accessibility"
 msgstr "доступність"
 
 #. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:22
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:182
 msgid "a11y"
 msgstr "доступність"
 
-#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:26
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:174
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:216
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:52
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:58
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:272
 msgid "network"
 msgstr "мережа"
 
-#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:28
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:270
+#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:262
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:274
 msgid "wireless"
 msgstr "бездротова"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:30
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:276
 msgid "wifi"
 msgstr "вайфай"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:32
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:278
 msgid "wi-fi"
 msgstr "wifi"
 
-#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:34
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:272
+#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:264
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:280
 msgid "connect"
 msgstr "з’єднати"
 
-#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:36
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:274
+#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:266
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:282
 msgid "disconnect"
 msgstr "від’єднати"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:38
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:284
 msgid "hidden"
 msgstr "приховане"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:40
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:286
 msgid "ip"
 msgstr "ip"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:42
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:294
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:288
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:306
 msgid "address"
 msgstr "адреса"
 
+#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:46
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:302
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:330
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:8
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:156
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:314
 msgid "software"
 msgstr "програми"
 
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:48
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:158
 msgid "notifications"
 msgstr "сповіщення"
 
-#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:50
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:252
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:334
+#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:12
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:152
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:160
 msgid "apps"
 msgstr "програми"
 
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:52
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:162
 msgid "authorize"
 msgstr "уповновання"
 
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:54
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:164
 msgid "alerts"
 msgstr "нагадування"
 
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:56
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:166
 msgid "permissions"
 msgstr "права доступу"
 
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:58
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:168
 msgid "badges"
 msgstr "значки"
 
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:60
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:170
 msgid "facebook"
 msgstr "фейсбук"
 
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:62
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:172
 msgid "twitter"
 msgstr "твіттер"
 
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:64
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:174
 msgid "flickr"
 msgstr "флікр"
 
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:66
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:176
 msgid "gmail"
 msgstr "жмейл"
 
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:70
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:328
 msgid "sound"
 msgstr "звук"
 
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:72
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:330
 msgid "silent"
 msgstr "заглушити"
 
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:74
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:332
 msgid "ringtone"
 msgstr "мелодія"
 
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:76
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:334
 msgid "vibrate"
 msgstr "вібрація"
 
-#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:78
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:152
+#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:136
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:336
 msgid "dialpad"
 msgstr "кнопки"
 
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:80
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:338
 msgid "message"
 msgstr "повідомлення"
 
-#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:82
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:118
+#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:212
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:340
 msgid "keyboard"
 msgstr "клавіатура"
 
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:84
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:342
 msgid "volume"
 msgstr "гучність"
 
 #. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:88
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:236
 msgid "reset"
 msgstr "скинути"
 
 #. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:90
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:238
 msgid "erase"
 msgstr "витерти"
 
 #. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:92
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:240
 msgid "factory"
 msgstr "початкові"
 
 #. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:94
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:242
 msgid "clear"
 msgstr "спорожнити"
 
 #. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:96
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:244
 msgid "restore"
 msgstr "відновити"
 
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:100
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:100
 msgid "battery"
 msgstr "акумулятор"
 
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:102
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:102
 msgid "power"
 msgstr "заряд"
 
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:104
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:104
 msgid "charge"
 msgstr "заряд"
 
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:106
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:106
 msgid "idle"
 msgstr "бездіяльність"
 
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:108
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:224
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:248
+#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:108
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:148
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:190
 msgid "lock"
 msgstr "блокування"
 
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:110
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:110
 msgid "disable"
 msgstr "вимкнути"
 
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:112
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:112
 msgid "enable"
 msgstr "увімкнути"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:116
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:210
 msgid "language"
 msgstr "мова"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:120
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:214
 msgid "spellcheck"
 msgstr "перевірка"
 
-#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:122
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:166
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:322
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:336
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:14
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:30
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:122
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:216
 msgid "automatic"
 msgstr "автоматично"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:124
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:218
 msgid "correct"
 msgstr "правопис"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:126
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:220
 msgid "suggestions"
 msgstr "пропозиції"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:128
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:222
 msgid "capitalization"
 msgstr "прописні"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:130
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:224
 msgid "punctuation"
 msgstr "пунктуація"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:132
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:226
 msgid "layout"
 msgstr "розкладка"
 
-#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:134
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:162
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:26
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:228
 msgid "display"
 msgstr "показ"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:136
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:230
 msgid "words"
 msgstr "слова"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:138
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:232
 msgid "vibration"
 msgstr "вібрація"
 
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:142
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:286
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:126
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:298
 msgid "phone"
 msgstr "телефон"
 
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:144
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:128
 msgid "services"
 msgstr "служби"
 
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:146
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:130
 msgid "forwarding"
 msgstr "переспрямовування"
 
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:148
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:132
 msgid "waiting"
 msgstr "очікування"
 
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:150
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:134
 msgid "call"
 msgstr "дзвінок"
 
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:154
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:138
 msgid "shortcuts"
 msgstr "скорочення"
 
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:156
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:140
 msgid "numbers"
 msgstr "номери"
 
 #. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:160
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:24
 msgid "brightness"
 msgstr "яскравість"
 
 #. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:164
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:250
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:28
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:150
 msgid "screen"
 msgstr "екран"
 
 #. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:168
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:32
 msgid "adjust"
 msgstr "скоригувати"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:172
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:56
 msgid "cellular"
 msgstr "мобільний"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:176
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:60
 msgid "mobile"
 msgstr "мобільний"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:178
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:62
 msgid "gsm"
 msgstr "gsm"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:180
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:64
 msgid "data"
 msgstr "дані"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:182
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:66
 msgid "carrier"
 msgstr "оператор"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:184
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:68
 msgid "4g"
 msgstr "4ж"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:186
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:70
 msgid "3g"
 msgstr "3ж"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:188
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:72
 msgid "2g"
 msgstr "2ж"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:190
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:74
 msgid "lte"
 msgstr "лтє"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:192
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:76
 msgid "apn"
 msgstr "апн"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:194
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:78
 msgid "roam"
 msgstr "роумінг"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:196
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:226
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:80
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:192
 msgid "sim"
 msgstr "сім"
 
 #. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:198
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:34
 msgid "Example"
 msgstr "Приклад"
 
 #. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:200
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:36
 msgid "example"
 msgstr "приклад"
 
 #. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:202
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:38
 msgid "test"
 msgstr "тест"
 
 #. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:204
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:40
 msgid "sample"
 msgstr "зразок"
 
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:206
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:42
 msgid "Flight Mode"
 msgstr "Режим польоту"
 
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:208
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:44
 msgid "flight"
 msgstr "політ"
 
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:210
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:46
 msgid "plane"
 msgstr "літак"
 
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:212
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:48
 msgid "offline"
 msgstr "автономний режим"
 
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:214
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:50
 msgid "airplane"
 msgstr "політ"
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:220
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:186
 msgid "security"
 msgstr "безпека"
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:222
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:188
 msgid "privacy"
 msgstr "конфідеційність"
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:228
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:194
 msgid "pin"
 msgstr "пін"
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:230
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:196
 msgid "code"
 msgstr "код"
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:232
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:198
 msgid "password"
 msgstr "пароль"
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:234
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:200
 msgid "passphrase"
 msgstr "код-пароль"
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:236
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:202
 msgid "swipe"
 msgstr "рух"
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:238
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:204
 msgid "allow"
 msgstr "дозволити"
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:240
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:206
 msgid "access"
 msgstr "доступ"
 
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:242
+#: ../po/settings.js:174
 msgid "Orientation Lock"
 msgstr "Блокування орієнтації"
 
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:244
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:144
 msgid "rotation"
 msgstr "обертання"
 
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:246
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:146
 msgid "orientation"
 msgstr "орієнтація"
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:256
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:248
 msgid "bluetooth"
 msgstr "bluetooth"
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:258
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:250
 msgid "headset"
 msgstr "гарнітура"
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:260
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:252
 msgid "pair"
 msgstr "пара"
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:262
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:282
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:254
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:294
 msgid "device"
 msgstr "пристрій"
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:264
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:256
 msgid "discover"
 msgstr "виявлення"
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:266
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:258
 msgid "car"
 msgstr "машина"
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:268
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:260
 msgid "handsfree"
 msgstr "навушник"
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:276
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:268
 msgid "stereo"
 msgstr "стерео"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:280
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:292
 msgid "about"
 msgstr "дані"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:284
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:296
 msgid "info"
 msgstr "інформація"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:288
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:300
 msgid "number"
 msgstr "номер"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:290
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:302
 msgid "imei"
 msgstr "імей"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:292
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:304
 msgid "serial"
 msgstr "серійний"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:296
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:308
 msgid "mac"
 msgstr "мак"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:298
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:310
 msgid "licenses"
 msgstr "ліцензії"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:300
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:312
 msgid "developer"
 msgstr "розробник"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:304
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:316
 msgid "storage"
 msgstr "сховище"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:306
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:318
 msgid "disk"
 msgstr "диск"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:308
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:320
 msgid "space"
 msgstr "місце"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:310
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:322
 msgid "version"
 msgstr "версія"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:312
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:324
 msgid "revision"
 msgstr "модифікація"
 
 #. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:316
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:116
 msgid "time"
 msgstr "час"
 
 #. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:318
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:118
 msgid "date"
 msgstr "дата"
 
 #. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:320
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:120
 msgid "timezone"
 msgstr "часовий пояс"
 
 #. TRANSLATORS: This is a keyword or name for the update-notification plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:324
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:2
 msgid "Updates available"
 msgstr "Доступні оновлення"
 
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:328
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:6
 msgid "system"
 msgstr "система"
 
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:332
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:10
 msgid "update"
 msgstr "оновлення"
 
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:338
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:16
 msgid "download"
 msgstr "завантаження"
 
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:340
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:18
 msgid "upgrade"
 msgstr "оновлення"
 
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:342
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:20
 msgid "click"
 msgstr "клацання"
 
-#: ../plugins/security-privacy//securityprivacy.cpp:318
+#: ../plugins/security-privacy//securityprivacy.cpp:347
 msgid "Incorrect passcode. Try again."
 msgstr "Неправильний пароль. Спробуйте ще раз."
 
-#: ../plugins/security-privacy//securityprivacy.cpp:320
+#: ../plugins/security-privacy//securityprivacy.cpp:349
 msgid "Incorrect passphrase. Try again."
 msgstr "Помилковий пароль. Повторіть спробу."
 
-#: ../plugins/security-privacy//securityprivacy.cpp:323
+#: ../plugins/security-privacy//securityprivacy.cpp:352
 msgid "Could not set security mode"
 msgstr "Не вдалося встановити режим захисту"
 
-#: ../plugins/security-privacy//securityprivacy.cpp:372
+#: ../plugins/security-privacy//securityprivacy.cpp:377
 msgid "Could not set security display hint"
 msgstr "Не вдалося встановити підказку щодо захисту"
 
-#: ../plugins/security-privacy//securityprivacy.cpp:383
+#: ../plugins/security-privacy//securityprivacy.cpp:388
 msgid "Authentication token manipulation error"
 msgstr "Помилка маніпуляції лексемою розпізнавання"
 
-#: ../plugins/about//click.cpp:171
+#: ../plugins/about//click.cpp:168
 msgid "Unknown title"
 msgstr "Невідомий заголовок"
 
-#: ../plugins/system-update//system_update.cpp:96
+#: ../plugins/system-update//system_update.cpp:94
 msgid "Can't cancel current request (can't contact service)"
 msgstr ""
 "Скасування поточного запиту неможливе (не вдалося з’єднатися зі службою)"
 
-#: ../plugins/system-update//system_update.cpp:102
+#: ../plugins/system-update//system_update.cpp:100
 msgid "Can't pause current request (can't contact service)"
 msgstr ""
 "Не вдалося призупити поточний запит (не вдалося з’єднатися зі службою)"
 
-#: ../push-helper/software_updates_helper.py:150
+#: ../push-helper/software_updates_helper.py:159
 msgid "There's an updated system image."
 msgstr "Випущено оновлений образ системи."
 
-#: ../push-helper/software_updates_helper.py:151
+#: ../push-helper/software_updates_helper.py:160
 msgid "Tap to open the system updater."
 msgstr "Натисніть, щоб відкрити засіб оновлення системи."
-
-#~ msgid "Refresh"
-#~ msgstr "Оновити"
-
-#~ msgid "Searching"
-#~ msgstr "Пошук"
-
-#~ msgid "Remove"
-#~ msgstr "Вилучити"
-
-#~ msgid "settings"
-#~ msgstr "параметри"
-
-#~ msgid "i18n"
-#~ msgstr "переклад"
-
-#~ msgid "lang"
-#~ msgstr "мова"
-
-#~ msgid "Connect to Wi-Fi"
-#~ msgstr "З’єднатися з Wi-Fi"
-
-#~ msgid "Available networks"
-#~ msgstr "Доступні мережі"
-
-#~ msgid "Password visible"
-#~ msgstr "Видимість пароля"
-
-#~ msgid "Other network"
-#~ msgstr "Інша мережа"
-
-#~ msgid "Those passphrases don't match."
-#~ msgstr "Паролі не збігаються."
-
-#~ msgid "Passphrase must be at least four characters long."
-#~ msgstr "Пароль має складатися принаймні з чотирьох символів."
-
-#~ msgid "Set lock security"
-#~ msgstr "Захист блокуванням"
-
-#~ msgid "Bug reporting"
-#~ msgstr "Звітування щодо вад"
-
-#~ msgid "System Settings &gt; Security &amp; Privacy"
-#~ msgstr "Системні параметри &gt; Безпека &amp; Конфіденційність"
-
-#~ msgid "This can be disabled here:"
-#~ msgstr "Вимкнути це можна тут:"
-
-#~ msgid ""
-#~ "I have read and agreed to the HERE <a href='terms.qml'>Terms and "
-#~ "Conditions</a>"
-#~ msgstr ""
-#~ "<a href='terms.qml'>Умови надання послуг</a> HERE прочитано. Погоджуюся з "
-#~ "ними."
-
-#~ msgid "Use your mobile network and Wi-Fi to determine where you are"
-#~ msgstr ""
-#~ "Використовувати вашу мобільну мережу та Wi-Fi для визначення вашого місця "
-#~ "перебування"
