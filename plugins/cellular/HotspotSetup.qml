@@ -32,6 +32,11 @@ Component {
         id: hotspotSetupDialog
         property var hotspotManager: null
 
+        /* hotspotManager.stored changes as soon as the user has added a
+        hotspot, and we use this value when we choose between e.g. "Change" and
+        "Setup". We'd like the narrative to be consistent, so we stick with
+        what the stored value was at component completion.
+        */
         property bool stored: false
         Component.onCompleted: stored = hotspotManager.stored;
 
@@ -203,25 +208,20 @@ Component {
 
                 Icon {
                     id: successIcon
+                    anchors.centerIn: parent
                     height: parent.height - units.gu(1.5)
                     width: parent.height - units.gu(1.5)
-                    anchors {
-                        centerIn: parent
-                    }
                     name: "tick"
                     color: "green"
                     visible: false
-
                 }
 
                 ActivityIndicator {
                     id: workingIndicator
+                    anchors.centerIn: parent
                     running: false
                     visible: running
                     height: parent.height - units.gu(1.5)
-                    anchors {
-                        centerIn: parent
-                    }
                 }
             }
         }

@@ -118,11 +118,14 @@ bool setWifiBlock(bool block) {
 
     // returned false from call
     if (!qdbus_cast<bool>(reply.arguments().at(0))) {
-     qCritical() << "URfkill Block call did not succeed";
-     return false;
-   }
- }
- return true;
+      qCritical() << "URfkill Block call did not succeed";
+      return false;
+    } else {
+      return true;
+    }
+  }
+  // We did not get what we wanted from dbus, so we treat that as failure.
+  return false;
 }
 } // UrfKill interaction
 
@@ -531,9 +534,8 @@ void HotspotManager::onNewConnection(QDBusObjectPath path) {
     if (!unblocked) {
       // "The device could not be readied for configuration"
       Q_EMIT reportError(5);
-    } else {
-      setStored(true);
     }
+  setStored(true);
   }
 }
 
@@ -578,6 +580,8 @@ void HotspotManager::onPropertiesChanged(QVariantMap properties) {
 
     if (iter.key() == "ActiveConnections") {
 
+      active_connection_changed = true;
+
       const QDBusArgument args = qvariant_cast<QDBusArgument>(iter.value());
       if (args.currentType() == QDBusArgument::ArrayType) {
         args.beginArray();
@@ -603,6 +607,8 @@ void HotspotManager::onPropertiesChanged(QVariantMap properties) {
           QDBusObjectPath connection_path = qvariant_cast<QDBusObjectPath>(
               connection_property.value());
 
+          // We see our connection as being active, so we emit that is
+          // enabled and return.
           if (connection_path == m_hotspot_path) {
             m_enabled = true;
             Q_EMIT enabledChanged(m_enabled);

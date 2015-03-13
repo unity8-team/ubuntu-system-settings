@@ -40,11 +40,16 @@
  *     Signal that gets emitted when the mode was changed.
  *
  *   authChanged(QString auth)
- *     Signal that gets emitted when the authentication method was changed.
  *
  *   Note that none of these signal will be emitted if a change to the hotspot
  *   was made by anyone else than the HotspotManager.
  *   TODO: Emit changes to a hotspot made by the outside.
+ *     Signal that gets emitted when the authentication method was changed. *
+ *
+ *
+ *   reportError(int reason)
+ *     The reasons correspond to https://developer.gnome.org/
+ *         NetworkManager/0.9/spec.html#type-NM_DEVICE_STATE_REASON
  *
  * Properties
  *   bool enabled [readwrite]
