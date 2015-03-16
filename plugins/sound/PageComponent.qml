@@ -232,9 +232,7 @@ ItemPage {
                 visible: showAllUI
             }
 
-            ListItem.Divider {
-                visible: showAllUI
-            }
+            ListItem.Divider {}
 
             ListItem.Standard {
                 text: i18n.tr("Other vibrations")
@@ -245,7 +243,6 @@ ItemPage {
                     Component.onCompleted: checked = serverChecked
                     onTriggered: backendInfo.otherVibrate = checked
                 }
-                visible: showAllUI
             }
         }
     }
