@@ -55,7 +55,7 @@ ItemPage {
     Action {
         id: selectPeer
         // when action has been activated, push the picker on the stack
-        onTriggered: {                        
+        onTriggered: {
             pageStack.push(picker);
         }
     }
@@ -139,7 +139,7 @@ ItemPage {
                 }
             }
         }
-    }    
+    }
 
     // set up connections
     Connections {

@@ -363,7 +363,7 @@ QString StorageAbout::getDevicePath(const QString mount_point)
 
 /* This function was copied from QtSystems, as it was removed when the
  * QSystemInfo class moved to Qt 5.4.
- * 
+ *
  * The license terms state, in part:
  *
  * Copyright (C) 2012 Digia Plc and/or its subsidiary(-ies).

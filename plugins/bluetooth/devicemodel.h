@@ -75,7 +75,7 @@ public:
     void startDiscovery();
     void toggleDiscovery();
 
-Q_SIGNALS: 
+Q_SIGNALS:
     void poweredChanged(bool powered);
     void discoveringChanged(bool isDiscovering);
     void discoverableChanged(bool isDiscoverable);

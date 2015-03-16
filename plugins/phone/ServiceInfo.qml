@@ -29,7 +29,7 @@ ItemPage {
     property string serviceName
     property string serviceNumber
     property string lastTimestamp
-    title: serviceName            
+    title: serviceName
 
     HistoryEventModel {
         id: historyEventModel
