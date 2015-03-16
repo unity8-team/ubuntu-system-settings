@@ -51,7 +51,10 @@ ItemPage {
                 id: hotspotSwitch
                 objectName: "hotspotSwitch"
                 property bool serverChecked: hotspotManager.enabled
-                onServerCheckedChanged: checked = serverChecked
+                onServerCheckedChanged: {
+                    console.warn('onServerCheckedChanged', serverChecked);
+                    checked = serverChecked
+                }
                 Component.onCompleted: checked = serverChecked
                 onTriggered: hotspotManager.enabled = checked
             }

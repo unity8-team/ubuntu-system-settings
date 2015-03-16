@@ -42,9 +42,8 @@
  *   authChanged(QString auth)
  *
  *   Note that none of these signal will be emitted if a change to the hotspot
- *   was made by anyone else than the HotspotManager.
- *   TODO: Emit changes to a hotspot made by the outside.
- *     Signal that gets emitted when the authentication method was changed. *
+ *   was made by anyone else than the HotspotManager. Right now, the canonical
+ *   way to edit a hotspot, is through the hotspot manager.
  *
  *
  *   reportError(int reason)

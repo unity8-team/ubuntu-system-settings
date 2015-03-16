@@ -410,6 +410,7 @@ void HotspotManager::setEnabled(bool value) {
   if (value) {
 
     bool changed = changeInterfaceFirmware("/", m_mode);
+    qWarning() << "setEnabled, changeInterfaceFirmware" << changed;
     if (!changed) {
       // Necessary firmware for the device may be missing
       Q_EMIT reportError(35);
@@ -491,8 +492,10 @@ bool HotspotManager::stored() const {
 }
 
 void HotspotManager::setStored(bool value) {
-  m_stored = value;
-  Q_EMIT storedChanged(value);
+  if (m_stored != value) {
+    m_stored = value;
+    Q_EMIT storedChanged(value);
+  }
 }
 
 QByteArray HotspotManager::ssid() const {
@@ -500,8 +503,10 @@ QByteArray HotspotManager::ssid() const {
 }
 
 void HotspotManager::setSsid(QByteArray value) {
-  m_ssid = value;
-  Q_EMIT ssidChanged(value);
+  if (m_ssid != value) {
+    m_ssid = value;
+    Q_EMIT ssidChanged(value);
+  }
 }
 
 QString HotspotManager::password() const {
@@ -509,8 +514,10 @@ QString HotspotManager::password() const {
 }
 
 void HotspotManager::setPassword(QString value) {
-  m_password = value;
-  Q_EMIT passwordChanged(value);
+  if (m_password != value) {
+    m_password = value;
+    Q_EMIT passwordChanged(value);
+  }
 }
 
 QString HotspotManager::mode() const {
@@ -518,8 +525,10 @@ QString HotspotManager::mode() const {
 }
 
 void HotspotManager::setMode(QString value) {
-  m_mode = value;
-  Q_EMIT modeChanged(value);
+  if (m_mode != value) {
+    m_mode = value;
+    Q_EMIT modeChanged(value);
+  }
 }
 
 void HotspotManager::onNewConnection(QDBusObjectPath path) {
@@ -610,8 +619,11 @@ void HotspotManager::onPropertiesChanged(QVariantMap properties) {
           // We see our connection as being active, so we emit that is
           // enabled and return.
           if (connection_path == m_hotspot_path) {
-            m_enabled = true;
-            Q_EMIT enabledChanged(m_enabled);
+            qWarning() << "onPropertiesChanged: will set enabled to  true";
+            if (!m_enabled) {
+              m_enabled = true;
+              Q_EMIT enabledChanged(m_enabled);
+            }
             return;
           }
         }
@@ -623,8 +635,11 @@ void HotspotManager::onPropertiesChanged(QVariantMap properties) {
   // At this point ActiveConnections changed, but
   // our hotspot was not in that list.
   if (active_connection_changed) {
-    m_enabled = false;
-    Q_EMIT enabledChanged(m_enabled);
+    if (m_enabled) {
+      qWarning() << "onPropertiesChanged: will set enabled to false";
+      m_enabled = false;
+      Q_EMIT enabledChanged(m_enabled);
+    }
   }
 }
 
