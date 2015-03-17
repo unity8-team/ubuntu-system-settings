@@ -85,11 +85,11 @@
 
 #include <QObject>
 #include <QDBusObjectPath>
+#include <QUuid>
 
 #include "nm_manager_proxy.h"
 #include "nm_settings_proxy.h"
 #include "nm_settings_connection_proxy.h"
-
 
 class HotspotManager : public QObject {
   Q_OBJECT
@@ -176,6 +176,7 @@ private:
   bool destroy(QDBusObjectPath);
 
   void setStored(bool);
+  void setEnable(bool);
   void updateSettingsFromDbus(QDBusObjectPath);
 };
 

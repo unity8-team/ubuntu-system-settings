@@ -169,6 +169,10 @@ nmConnectionArg createConnectionArguments(
   nmConnectionArg connection;
 
   QString s_ssid = QString::fromLatin1(ssid);
+  QString s_uuid = QUuid().createUuid().toString();
+  // Remove {} from the generated uuid.
+  s_uuid.remove(0, 1);
+  s_uuid.remove(s_uuid.size() - 1, 1);
 
   QVariantMap wireless;
   wireless[QStringLiteral("security")] = QVariant(QStringLiteral("802-11-wireless-security"));
@@ -180,7 +184,7 @@ nmConnectionArg createConnectionArguments(
   QVariantMap connsettings;
   connsettings[QStringLiteral("autoconnect")] = QVariant(true);
   connsettings[QStringLiteral("id")] = QVariant(s_ssid);
-  connsettings[QStringLiteral("uuid")] = QVariant(QStringLiteral("aab22b5d-7342-48dc-8920-1b7da31d6829"));
+  connsettings[QStringLiteral("uuid")] = QVariant(s_uuid);
   connsettings[QStringLiteral("type")] = QVariant(QStringLiteral("802-11-wireless"));
   connection["connection"] = connsettings;
 
@@ -333,10 +337,9 @@ bool isHotspotActive (QDBusObjectPath hotspot_connection_path) {
         active_connection_dbus_interface.call(
             "Get", nm_connection_active_interface, "Connection");
 
+    // The Connection property did not exist, so ignore this
+    // active connection.
     if(!connection_property.isValid()) {
-      qWarning() << "Failed to get Connection property from "
-          << active_connection.path() << ": "
-          << connection_property.error().message();
       continue;
     }
     QDBusObjectPath connection_path = qvariant_cast<QDBusObjectPath>(
@@ -381,7 +384,6 @@ HotspotManager::HotspotManager(QObject *parent) :
   if (m_stored) {
     updateSettingsFromDbus(m_hotspot_path);
   }
-  Q_EMIT enabledChanged(m_enabled);
 
   // Watches for new connections added to NetworkManager's Settings
   // interface.
@@ -397,12 +399,20 @@ HotspotManager::HotspotManager(QObject *parent) :
 
 void HotspotManager::setEnabled(bool value) {
 
+  if (m_ssid.isEmpty()) {
+    // If the SSID is empty, we report an error. The UI should strive
+    // to prevent us from reaching this part of the code.
+    Q_EMIT reportError(1);
+    setEnable(false);
+    return;
+  }
+
   bool blocked = setWifiBlock(true);
 
   if (!blocked) {
     // "The device could not be readied for configuration"
     Q_EMIT reportError(5);
-    Q_EMIT enabledChanged(false);
+    setEnable(false);
     return;
   }
 
@@ -410,11 +420,10 @@ void HotspotManager::setEnabled(bool value) {
   if (value) {
 
     bool changed = changeInterfaceFirmware("/", m_mode);
-    qWarning() << "setEnabled, changeInterfaceFirmware" << changed;
     if (!changed) {
       // Necessary firmware for the device may be missing
       Q_EMIT reportError(35);
-      Q_EMIT enabledChanged(false);
+      setEnable(false);
       setWifiBlock(false);
       return;
     }
@@ -426,6 +435,7 @@ void HotspotManager::setEnabled(bool value) {
       if (!destroy(m_hotspot_path)) {
         setStored(false);
         setEnabled(true);
+        setEnable(true);
       }
     } else {
       // we defer enabling until new hotspot is created
@@ -433,7 +443,7 @@ void HotspotManager::setEnabled(bool value) {
       if (m_hotspot_path.path().isEmpty()) {
         // Emit "Unknown Error".
         Q_EMIT reportError(0);
-        Q_EMIT enabledChanged(false);
+        setEnable(false);
         setWifiBlock(false);
       }
     }
@@ -442,8 +452,7 @@ void HotspotManager::setEnabled(bool value) {
 
     // Disabling the hotspot.
     disable();
-    m_enabled = false;
-    Q_EMIT enabledChanged(m_enabled);
+    setEnable(false);
 
     bool unblocked = setWifiBlock(false);
     if (!unblocked) {
@@ -485,6 +494,13 @@ void HotspotManager::disable() {
 
 bool HotspotManager::enabled() const {
   return m_enabled;
+}
+
+void HotspotManager::setEnable(bool value) {
+  if (m_enabled != value) {
+    m_enabled = value;
+    Q_EMIT enabledChanged(value);
+  }
 }
 
 bool HotspotManager::stored() const {
@@ -543,6 +559,8 @@ void HotspotManager::onNewConnection(QDBusObjectPath path) {
     if (!unblocked) {
       // "The device could not be readied for configuration"
       Q_EMIT reportError(5);
+    } else {
+      setEnable(true);
     }
   setStored(true);
   }
@@ -572,6 +590,13 @@ void HotspotManager::onRemoved() {
   // delete it an add a new one.
   // Thus, if a hotspot was deleted, we now create a new one.
   m_hotspot_path = addConnection(m_ssid, m_password, m_device_path, m_mode);
+  if (m_hotspot_path.path().isEmpty()) {
+    // Emit "Unknown Error".
+    Q_EMIT reportError(0);
+
+    setEnable(false);
+    setWifiBlock(false);
+  }
 }
 
 
@@ -607,9 +632,9 @@ void HotspotManager::onPropertiesChanged(QVariantMap properties) {
               nm_connection_active_interface,
               "Connection");
 
+          // Active connection did not have a connection property,
+          // so ignore it.
           if(!connection_property.isValid()) {
-            qWarning() << "Error getting connection_property: "
-                << connection_property.error().message() << "\n";
             continue;
           }
 
@@ -619,11 +644,7 @@ void HotspotManager::onPropertiesChanged(QVariantMap properties) {
           // We see our connection as being active, so we emit that is
           // enabled and return.
           if (connection_path == m_hotspot_path) {
-            qWarning() << "onPropertiesChanged: will set enabled to  true";
-            if (!m_enabled) {
-              m_enabled = true;
-              Q_EMIT enabledChanged(m_enabled);
-            }
+            setEnable(true);
             return;
           }
         }
@@ -635,17 +656,13 @@ void HotspotManager::onPropertiesChanged(QVariantMap properties) {
   // At this point ActiveConnections changed, but
   // our hotspot was not in that list.
   if (active_connection_changed) {
-    if (m_enabled) {
-      qWarning() << "onPropertiesChanged: will set enabled to false";
-      m_enabled = false;
-      Q_EMIT enabledChanged(m_enabled);
-    }
+    setEnable(false);
   }
 }
 
 void HotspotManager::updateSettingsFromDbus(QDBusObjectPath path) {
 
-  m_enabled = isHotspotActive(m_hotspot_path);
+  setEnable(isHotspotActive(m_hotspot_path));
 
   nmConnectionArg settings = getConnectionSettings(path);
   const char wifi_key[] = "802-11-wireless";

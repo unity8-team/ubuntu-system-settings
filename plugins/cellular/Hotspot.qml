@@ -32,6 +32,12 @@ ItemPage {
 
     HotspotManager {
         id: hotspotManager
+        // TODO(jgdx): Figure out why serverCheckedChanged is not fired
+        // automatically whenever hotspotManager.enabled changes.
+        onEnabledChanged: {
+            hotspotSwitch.serverChecked = enabled;
+            hotspotSwitch.serverCheckedChanged();
+        }
     }
 
     Loader {
@@ -51,10 +57,7 @@ ItemPage {
                 id: hotspotSwitch
                 objectName: "hotspotSwitch"
                 property bool serverChecked: hotspotManager.enabled
-                onServerCheckedChanged: {
-                    console.warn('onServerCheckedChanged', serverChecked);
-                    checked = serverChecked
-                }
+                onServerCheckedChanged: checked = serverChecked
                 Component.onCompleted: checked = serverChecked
                 onTriggered: hotspotManager.enabled = checked
             }

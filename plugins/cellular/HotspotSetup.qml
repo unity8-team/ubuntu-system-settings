@@ -95,6 +95,13 @@ Component {
                     target: feedback
                     enabled: true
                 }
+                PropertyChanges {
+                    target: ssidField
+                    errorHighlight: true
+                }
+                StateChangeScript {
+                    script: ssidField.forceActiveFocus()
+                }
             },
 
             State {
@@ -170,6 +177,11 @@ Component {
             text: hotspotManager.password
             echoMode: passwordVisibleSwitch.checked ?
                 TextInput.Normal : TextInput.Password
+
+            MouseArea {
+                anchors.fill: parent
+                onPressed: parent.forceActiveFocus()
+            }
         }
 
         ListItem.Standard {
@@ -230,6 +242,7 @@ Component {
             id: enableAction
             enabled: settingsValid()
             onTriggered: {
+                hotspotSetupDialog.state = "STARTING";
 
                 function hotspotEnabledHandler (enabled) {
                     if (enabled) {
@@ -243,7 +256,6 @@ Component {
                 hotspotManager.password = passwordField.text;
                 hotspotManager.enabledChanged.connect(hotspotEnabledHandler);
                 hotspotManager.enabled = true;
-                hotspotSetupDialog.state = "STARTING";
             }
         }
 
@@ -297,9 +309,9 @@ Component {
             target: hotspotManager
 
             onReportError: {
-                if (hotspotSetupDialog.state === "CONNECTING") {
+                if (hotspotSetupDialog.state === "STARTING") {
+                    hotspotSetupDialog.state = "FAILED";
                     feedback.text = common.reasonToString(reason);
-                    otherNetworkDialog.state = "FAILED";
                 }
             }
         }
