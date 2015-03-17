@@ -382,7 +382,7 @@ bool StorageAbout::isInternal(const QString &drive)
     bool ret = false;
     FILE *fsDescription = setmntent(_PATH_MOUNTED, "r");
     struct mntent entry;
-    char buffer[512];
+    char buffer[512], *real_file;
     while ((getmntent_r(fsDescription, &entry, buffer, sizeof(buffer))) != NULL) {
         if (drive != QString::fromLatin1(entry.mnt_dir))
             continue;
@@ -412,9 +412,15 @@ bool StorageAbout::isInternal(const QString &drive)
             ret = true;
             break;
         }
-
+        
         // Now need to guess if it's InternalDrive or RemovableDrive
-        QString fsName(QString::fromLatin1(entry.mnt_fsname));
+        QString fsName;
+        if (real_file = canonicalize_file_name(entry.mnt_fsname)){
+            fsName = QString::fromLatin1(real_file);
+            free(real_file);
+        } else {
+            fsName = QString::fromLatin1(entry.mnt_fsname);
+        }
         if (fsName.contains(QString(QStringLiteral("mapper")))) {
             struct stat status;
             stat(entry.mnt_fsname, &status);
@@ -424,11 +430,15 @@ bool StorageAbout::isInternal(const QString &drive)
             if (!fsName.isEmpty()) {
                 if (fsName.length() > 3) {
                     // only take the parent of the device
-                    if (fsName.at(fsName.size() -1).isDigit() && fsName.at(fsName.size() - 2) == QChar(QLatin1Char('p')))
-                        fsName.chop(2);
-                    if (fsName.startsWith(QString(QStringLiteral("mmc")))) {
+                    int index_mmc = fsName.indexOf("mmc",0,Qt::CaseInsensitive);
+                    QString mmcString;
+                    if (index_mmc != -1) {
+                        int index_p = fsName.indexOf('p',index_mmc,Qt::CaseInsensitive);
+                        mmcString = fsName.mid(index_mmc, index_p - index_mmc);
+                    }
+
                         // "removable" attribute is set only for removable media, and we may have internal mmc cards
-                        fsName = QString(QStringLiteral("/sys/block/")) + fsName + QString(QStringLiteral("/device/uevent"));
+                        fsName = QString(QStringLiteral("/sys/block/")) + mmcString + QString(QStringLiteral("/device/uevent"));
                         QFile file(fsName);
                         if (file.open(QIODevice::ReadOnly)) {
                             QByteArray buf = file.readLine();
@@ -450,7 +460,6 @@ bool StorageAbout::isInternal(const QString &drive)
                     }
                 }
                 fsName = QString(QStringLiteral("/sys/block/")) + fsName + QString(QStringLiteral("/removable"));
-            }
         }
         QFile removable(fsName);
         char isRemovable;
