@@ -1,3 +1,20 @@
+ubuntu-system-settings (0.3+15.04.20150317-0ubuntu1) vivid; urgency=medium
+
+  [ CI Train Bot ]
+  * Resync trunk.
+
+  [ Ken VanDine ]
+  * reorder includes to be alphabetical and removed a blank line
+
+  [ Timo Jyrinki ]
+  * Don't build-depend on Qt private header packages. (LP: #1427991)
+    (LP: #1427991)
+
+  [ jonas-drange ]
+  * [sound] show other vibrate setting
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Tue, 17 Mar 2015 18:02:08 +0000
+
 ubuntu-system-settings (0.3+15.04.20150305-0ubuntu1) vivid; urgency=medium
 
   [ Sebastien Bacher ]
