@@ -323,16 +323,20 @@ QDBusObjectPath getWirelessDevice () {
 //     #org.freedesktop.NetworkManager.Connection.Active
 // [2] https://developer.gnome.org/NetworkManager/0.9/spec.html
 //     #org.freedesktop.NetworkManager
-bool isHotspotActive (QDBusObjectPath hotspot_connection_path) {
+bool isHotspotActive (QDBusObjectPath path) {
 
   QSet<QDBusObjectPath> active_relevant_connections;
   auto active_connections = nm_manager.activeConnections();
   for(const auto &active_connection : active_connections) {
 
+    // Active connection interface proxy. It might have a connection
+    // property we can use to deduce if this active connection represents
+    // our active hotspot.
     QDBusInterface active_connection_dbus_interface(
         nm_service, active_connection.path(), dbus_properties_interface,
         QDBusConnection::systemBus());
 
+    // Get the Connection property, if any.
     QDBusReply<QVariant> connection_property =
         active_connection_dbus_interface.call(
             "Get", nm_connection_active_interface, "Connection");
@@ -342,13 +346,19 @@ bool isHotspotActive (QDBusObjectPath hotspot_connection_path) {
     if(!connection_property.isValid()) {
       continue;
     }
+
+    // It does exist, cast it to a object path.
     QDBusObjectPath connection_path = qvariant_cast<QDBusObjectPath>(
         connection_property.value());
 
-    if (hotspot_connection_path == connection_path) {
+    // The object path is the same as the given hotspot path.
+    if (path == connection_path) {
       return true;
     }
   }
+
+  // No active connection had a Connection property equal to the
+  // given path, so return false.
   return false;
 }
 
@@ -399,25 +409,26 @@ HotspotManager::HotspotManager(QObject *parent) :
 
 void HotspotManager::setEnabled(bool value) {
 
-  if (m_ssid.isEmpty()) {
-    // If the SSID is empty, we report an error. The UI should strive
-    // to prevent us from reaching this part of the code.
-    Q_EMIT reportError(1);
-    setEnable(false);
-    return;
-  }
-
   bool blocked = setWifiBlock(true);
 
+  // Failed to soft block, here we revert the enabled setting.
   if (!blocked) {
     // "The device could not be readied for configuration"
     Q_EMIT reportError(5);
-    setEnable(false);
+    setEnable(!m_enabled);
     return;
   }
 
   // We are enabling a hotspot
   if (value) {
+
+    // If the SSID is empty, we report an error. The UI should strive
+    // to prevent us from reaching this part of the code.
+    if (m_ssid.isEmpty()) {
+      Q_EMIT reportError(1);
+      setEnable(false);
+      return;
+    }
 
     bool changed = changeInterfaceFirmware("/", m_mode);
     if (!changed) {
@@ -474,16 +485,23 @@ void HotspotManager::disable() {
   auto active_connections = nm_manager.activeConnections();
   for(const auto &active_connection : active_connections) {
 
+    // DBus Properties interface proxy of the active connection. We use
+    // this proxy to get to the Connection property.
     QDBusInterface iface(
         nm_service, active_connection.path(),
         "org.freedesktop.DBus.Properties", QDBusConnection::systemBus());
 
+    // Call to get the Connection property.
     QDBusReply<QVariant> conname = iface.call(
         "Get", nm_connection_active_interface, "Connection");
 
+    // Cast the property to a object path.
     QDBusObjectPath backingConnection = qvariant_cast<QDBusObjectPath>(
         conname.value());
 
+    // This active connection's Connection property was our hotspot,
+    // so we will deactivate it. Note that we do not remove the hotspot,
+    // as we are storing the ssid, password and mode on the connection.
     if(backingConnection == m_hotspot_path) {
       nm_manager.DeactivateConnection(active_connection);
       return;
@@ -549,6 +567,7 @@ void HotspotManager::setMode(QString value) {
 
 void HotspotManager::onNewConnection(QDBusObjectPath path) {
 
+  // The new connection is the same as the stored hotspot path.
   if (path == m_hotspot_path) {
 
     // If a new hotspot was added, it is also given that
@@ -560,9 +579,13 @@ void HotspotManager::onNewConnection(QDBusObjectPath path) {
       // "The device could not be readied for configuration"
       Q_EMIT reportError(5);
     } else {
+      // We successfully unblocked the Wi-Fi, so set m_enable to true.
       setEnable(true);
     }
-  setStored(true);
+
+    // This also mean we have successfully created a hotspot connection
+    // object in NetworkManager, so m_stored should now be true.
+    setStored(true);
   }
 }
 
@@ -573,9 +596,12 @@ bool HotspotManager::destroy(QDBusObjectPath path) {
     return false;
   }
 
+  // Connection Settings interface proxy for the connection
+  // we are about to delete.
   OrgFreedesktopNetworkManagerSettingsConnectionInterface conn(
       nm_service, path.path(), QDBusConnection::systemBus());
 
+  // Subscribe to the connection proxy's Removed signal.
   conn.connection().connect(conn.service(), path.path(), conn.interface(),
                             "Removed", this, SLOT(onRemoved()));
 
@@ -590,10 +616,11 @@ void HotspotManager::onRemoved() {
   // delete it an add a new one.
   // Thus, if a hotspot was deleted, we now create a new one.
   m_hotspot_path = addConnection(m_ssid, m_password, m_device_path, m_mode);
+
+  // We could not add a connection, so report, disable and unblock.
   if (m_hotspot_path.path().isEmpty()) {
     // Emit "Unknown Error".
     Q_EMIT reportError(0);
-
     setEnable(false);
     setWifiBlock(false);
   }
