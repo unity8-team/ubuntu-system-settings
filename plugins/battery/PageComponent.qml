@@ -27,6 +27,7 @@ import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 import Ubuntu.SystemSettings.Battery 1.0
 import Ubuntu.SystemSettings.SecurityPrivacy 1.0
+import Ubuntu.Settings.Components 0.1 as USC
 
 ItemPage {
     id: root
@@ -335,9 +336,18 @@ ItemPage {
                     sourceComponent: Switch {
                         id: wifiSwitch
                         property bool serverChecked: networkActionGroup.enabled.state
-                        onServerCheckedChanged: checked = serverChecked
-                        Component.onCompleted: checked = serverChecked
-                        onTriggered: networkActionGroup.enabled.activate()
+                        onTriggered: wifiSwitchSync.activate()
+
+                        USC.ServerActivationSync {
+                            id: wifiSwitchSync
+
+                            userTarget: wifiSwitch
+                            userProperty: "checked"
+                            serverTarget: wifiSwitch
+                            serverProperty: "serverChecked"
+
+                            onActivated: networkActionGroup.enabled.activate()
+                        }
                     }
                 }
                 visible: networkActionGroup.enabled.state !== undefined
@@ -364,9 +374,18 @@ ItemPage {
                     sourceComponent: Switch {
                         id: btSwitch
                         property bool serverChecked: bluetoothActionGroup.enabled.state
-                        onServerCheckedChanged: checked = serverChecked
-                        Component.onCompleted: checked = serverChecked
-                        onTriggered: bluetoothActionGroup.enabled.activate()
+                        onTriggered: btSwitchSync.activate()
+
+                        USC.ServerActivationSync {
+                            id: btSwitchSync
+
+                            userTarget: btSwitch
+                            userProperty: "checked"
+                            serverTarget: btSwitch
+                            serverProperty: "serverChecked"
+
+                            onActivated: bluetoothActionGroup.enabled.activate()
+                        }
                     }
                 }
                 visible: bluetoothActionGroup.visible
@@ -392,9 +411,18 @@ ItemPage {
                     sourceComponent: Switch {
                         id: gpsSwitch
                         property bool serverChecked: locationActionGroup.enabled.state
-                        onServerCheckedChanged: checked = serverChecked
-                        Component.onCompleted: checked = serverChecked
-                        onTriggered: locationActionGroup.enabled.activate()
+                        onTriggered: gpsSwitchSync.activate()
+
+                        USC.ServerActivationSync {
+                            id: gpsSwitchSync
+
+                            userTarget: gpsSwitch
+                            userProperty: "checked"
+                            serverTarget: gpsSwitch
+                            serverProperty: "serverChecked"
+
+                            onActivated: locationActionGroup.enabled.activate()
+                        }
                     }
                 }
                 visible: locationActionGroup.enabled.state !== undefined

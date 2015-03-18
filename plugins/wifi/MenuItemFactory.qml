@@ -20,6 +20,7 @@
 import QtQuick 2.0
 import QMenuModel 0.1 as QMenuModel
 import Ubuntu.Settings.Menus 0.1 as Menus
+import Ubuntu.Settings.Components 0.1 as USC
 
 Item {
     id: menuFactory
@@ -68,6 +69,7 @@ Item {
     Component {
         id: switchMenu;
         Menus.SwitchMenu {
+            id: switchItem
             property QtObject menu: null
             property bool serverChecked: menu && menu.isToggled || false
 
@@ -76,9 +78,20 @@ Item {
             checked: serverChecked
             enabled: menu && menu.sensitive || false
 
-            onTriggered: model.activate(modelIndex);
-            // Fixes broken check state binding.
-            onServerCheckedChanged: checked = serverChecked;
+            onTriggered: switchMenuSync.activate()
+
+            USC.ServerActivationSync {
+                id: switchMenuSync
+
+                userTarget: switchItem
+                userProperty: "checked"
+                serverTarget: switchItem
+                serverProperty: "serverChecked"
+
+                onActivated: {
+                    model.activate(modelIndex);
+                }
+            }
         }
     }
 
@@ -99,6 +112,7 @@ Item {
     Component {
         id: accessPoint;
         AccessPoint {
+            id: apItem
             property QtObject menu: null
             property var strenthAction: QMenuModel.UnityMenuAction {
                 model: menuFactory.model ? menuFactory.model : null
@@ -118,9 +132,20 @@ Item {
                                                           'x-canonical-wifi-ap-is-secure': 'bool',
                                                           'x-canonical-wifi-ap-strength-action': 'string'});
             }
-            onActivate: model.activate(modelIndex);
-            // Fixes broken check state binding.
-            onServerCheckedChanged: checked = serverChecked;
+            onActivate: apMenuSync.activate();
+
+            USC.ServerActivationSync {
+                id: apMenuSync
+
+                userTarget: apItem
+                userProperty: "active"
+                serverTarget: apItem
+                serverProperty: "serverChecked"
+
+                onActivated: {
+                    model.activate(apItem.menuIndex);
+                }
+            }
         }
     }
 

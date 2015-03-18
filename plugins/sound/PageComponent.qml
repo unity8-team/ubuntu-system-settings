@@ -25,6 +25,7 @@ import Ubuntu.Components.ListItems 0.1 as ListItem
 import SystemSettings 1.0
 import Ubuntu.SystemSettings.Sound 1.0
 import Ubuntu.Settings.Menus 0.1 as Menus
+import Ubuntu.Settings.Components 0.1 as USC
 import QMenuModel 0.1
 
 import "utilities.js" as Utilities
@@ -70,9 +71,18 @@ ItemPage {
                     id: silentModeSwitch
                     objectName: "silentMode"
                     property bool serverChecked: soundActionGroup.silentMode.state
-                    onServerCheckedChanged: checked = serverChecked
-                    Component.onCompleted: checked = serverChecked
-                    onTriggered: soundActionGroup.silentMode.activate()
+                    onTriggered: silentModeSwitchSync.activate()
+
+                    USC.ServerActivationSync {
+                        id: silentModeSwitchSync
+
+                        userTarget: silentModeSwitch
+                        userProperty: "checked"
+                        serverTarget: silentModeSwitch
+                        serverProperty: "serverChecked"
+
+                        onActivated: soundActionGroup.silentMode.activate()
+                    }
                 }
                 text: i18n.tr("Silent Mode")
             }
@@ -94,21 +104,28 @@ ItemPage {
                 Component.onCompleted: start()
             }
 
-            Binding {
-                target: sliderMenu
-                property: "value"
-                value: soundActionGroup.volume.state
-            }
-
             Menus.SliderMenu {
-                id: sliderMenu
+                id: volumeSlider
                 objectName: "sliderMenu"
                 enabled: soundActionGroup.volume.state != null
                 minimumValue: 0.0
                 maximumValue: 1.0
                 minIcon: "image://theme/audio-volume-low-zero"
                 maxIcon: "image://theme/audio-volume-high" 
-                onUpdated: soundActionGroup.volume.updateState(value);
+                onUpdated: volumeSliderSync.activate()
+
+                property real serverValue: soundActionGroup.volume.state
+
+                USC.ServerActivationSync {
+                    id: volumeSliderSync
+
+                    userTarget: volumeSlider
+                    userProperty: "value"
+                    serverTarget: volumeSlider
+                    serverProperty: "serverValue"
+
+                    onActivated: soundActionGroup.volume.updateState(value);
+                }
             }
 
             ListItem.Standard {
