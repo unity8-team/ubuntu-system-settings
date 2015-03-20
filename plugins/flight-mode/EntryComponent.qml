@@ -31,17 +31,14 @@ ListItem.Standard {
     text: i18n.tr(model.displayName)
     control: Switch {
         id: switchItem
-        onTriggered: switchMenuSync.activate()
 
-        USC.ServerActivationSync {
-            id: switchMenuSync
-
+        USC.ServerPropertySynchroniser {
             userTarget: switchItem
             userProperty: "checked"
             serverTarget: helper
             serverProperty: "inFlightMode"
 
-            onActivated: helper.setFlightMode(value)
+            onSyncTriggered: helper.setFlightMode(value)
         }
     }
 

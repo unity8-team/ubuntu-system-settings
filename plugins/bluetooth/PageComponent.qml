@@ -193,17 +193,13 @@ ItemPage {
                 control: Switch {
                     id: btSwitch
                     property bool serverChecked: bluetoothActionGroup.enabled.state
-                    onTriggered: btSwitchSync.activate()
-
-                    USC.ServerActivationSync {
-                        id: btSwitchSync
-
+                    USC.ServerPropertySynchroniser {
                         userTarget: btSwitch
                         userProperty: "checked"
                         serverTarget: btSwitch
                         serverProperty: "serverChecked"
 
-                        onActivated: bluetoothActionGroup.enabled.activate()
+                        onSyncTriggered: bluetoothActionGroup.enabled.activate()
                     }
                 }
             }

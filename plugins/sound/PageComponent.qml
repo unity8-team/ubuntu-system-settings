@@ -71,17 +71,14 @@ ItemPage {
                     id: silentModeSwitch
                     objectName: "silentMode"
                     property bool serverChecked: soundActionGroup.silentMode.state
-                    onTriggered: silentModeSwitchSync.activate()
 
-                    USC.ServerActivationSync {
-                        id: silentModeSwitchSync
-
+                    USC.ServerPropertySynchroniser {
                         userTarget: silentModeSwitch
                         userProperty: "checked"
                         serverTarget: silentModeSwitch
                         serverProperty: "serverChecked"
 
-                        onActivated: soundActionGroup.silentMode.activate()
+                        onSyncTriggered: soundActionGroup.silentMode.activate()
                     }
                 }
                 text: i18n.tr("Silent Mode")
@@ -111,20 +108,17 @@ ItemPage {
                 minimumValue: 0.0
                 maximumValue: 1.0
                 minIcon: "image://theme/audio-volume-low-zero"
-                maxIcon: "image://theme/audio-volume-high" 
-                onUpdated: volumeSliderSync.activate()
+                maxIcon: "image://theme/audio-volume-high"
 
                 property real serverValue: soundActionGroup.volume.state
 
-                USC.ServerActivationSync {
-                    id: volumeSliderSync
-
+                USC.ServerPropertySynchroniser {
                     userTarget: volumeSlider
                     userProperty: "value"
                     serverTarget: volumeSlider
                     serverProperty: "serverValue"
 
-                    onActivated: soundActionGroup.volume.updateState(value);
+                    onSyncTriggered: soundActionGroup.volume.updateState(value);
                 }
             }
 

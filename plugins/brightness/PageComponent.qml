@@ -70,19 +70,16 @@ ItemPage {
             maximumValue: 100.0
             minIcon: "image://theme/display-brightness-min"
             maxIcon: "image://theme/display-brightness-max"
-            onUpdated: brightnessSliderSync.activate()
 
             property real serverValue: enabled ? indicatorPower.brightness.state * 100 : 0.0
 
-            USC.ServerActivationSync {
-                id: brightnessSliderSync
-
+            USC.ServerPropertySynchroniser {
                 userTarget: brightnessSlider
                 userProperty: "value"
                 serverTarget: brightnessSlider
                 serverProperty: "serverValue"
 
-                onActivated: indicatorPower.brightness.updateState(value / 100.0)
+                onSyncTriggered: indicatorPower.brightness.updateState(value / 100.0)
             }
         }
 

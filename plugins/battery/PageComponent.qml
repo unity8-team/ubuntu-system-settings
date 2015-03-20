@@ -336,17 +336,14 @@ ItemPage {
                     sourceComponent: Switch {
                         id: wifiSwitch
                         property bool serverChecked: networkActionGroup.enabled.state
-                        onTriggered: wifiSwitchSync.activate()
 
-                        USC.ServerActivationSync {
-                            id: wifiSwitchSync
-
+                        USC.ServerPropertySynchroniser {
                             userTarget: wifiSwitch
                             userProperty: "checked"
                             serverTarget: wifiSwitch
                             serverProperty: "serverChecked"
 
-                            onActivated: networkActionGroup.enabled.activate()
+                            onSyncTriggered: networkActionGroup.enabled.activate()
                         }
                     }
                 }
@@ -374,17 +371,14 @@ ItemPage {
                     sourceComponent: Switch {
                         id: btSwitch
                         property bool serverChecked: bluetoothActionGroup.enabled.state
-                        onTriggered: btSwitchSync.activate()
 
-                        USC.ServerActivationSync {
-                            id: btSwitchSync
-
+                        USC.ServerPropertySynchroniser {
                             userTarget: btSwitch
                             userProperty: "checked"
                             serverTarget: btSwitch
                             serverProperty: "serverChecked"
 
-                            onActivated: bluetoothActionGroup.enabled.activate()
+                            onSyncTriggered: bluetoothActionGroup.enabled.activate()
                         }
                     }
                 }
@@ -411,17 +405,14 @@ ItemPage {
                     sourceComponent: Switch {
                         id: gpsSwitch
                         property bool serverChecked: locationActionGroup.enabled.state
-                        onTriggered: gpsSwitchSync.activate()
 
-                        USC.ServerActivationSync {
-                            id: gpsSwitchSync
-
+                        USC.ServerPropertySynchroniser {
                             userTarget: gpsSwitch
                             userProperty: "checked"
                             serverTarget: gpsSwitch
                             serverProperty: "serverChecked"
 
-                            onActivated: locationActionGroup.enabled.activate()
+                            onSyncTriggered: locationActionGroup.enabled.activate()
                         }
                     }
                 }

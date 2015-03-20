@@ -78,19 +78,13 @@ Item {
             checked: serverChecked
             enabled: menu && menu.sensitive || false
 
-            onTriggered: switchMenuSync.activate()
-
-            USC.ServerActivationSync {
-                id: switchMenuSync
-
+            USC.ServerPropertySynchroniser {
                 userTarget: switchItem
                 userProperty: "checked"
                 serverTarget: switchItem
                 serverProperty: "serverChecked"
 
-                onActivated: {
-                    model.activate(modelIndex);
-                }
+                onSyncTriggered: model.activate(modelIndex)
             }
         }
     }
@@ -132,19 +126,15 @@ Item {
                                                           'x-canonical-wifi-ap-is-secure': 'bool',
                                                           'x-canonical-wifi-ap-strength-action': 'string'});
             }
-            onActivate: apMenuSync.activate();
 
-            USC.ServerActivationSync {
-                id: apMenuSync
-
+            USC.ServerPropertySynchroniser {
                 userTarget: apItem
                 userProperty: "active"
+                userTrigger: "onActivate"
                 serverTarget: apItem
                 serverProperty: "serverChecked"
 
-                onActivated: {
-                    model.activate(apItem.menuIndex);
-                }
+                onSyncTriggered: model.activate(apItem.menuIndex)
             }
         }
     }
