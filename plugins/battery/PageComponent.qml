@@ -83,6 +83,15 @@ ItemPage {
         onTriggered: canvas.requestPaint()
     }
 
+    Connections {
+        target: Qt.application
+        onActiveChanged: {
+            if (Qt.application.state === Qt.ApplicationActive) {
+                canvas.requestPaint()
+            }
+        }
+    }
+
     Flickable {
         id: scrollWidget
         anchors.fill: parent
