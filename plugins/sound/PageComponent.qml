@@ -117,6 +117,7 @@ ItemPage {
                     userProperty: "value"
                     serverTarget: volumeSlider
                     serverProperty: "serverValue"
+                    maximumWaitBufferInterval: 100
 
                     onSyncTriggered: soundActionGroup.volume.updateState(value);
                 }

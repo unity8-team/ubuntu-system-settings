@@ -348,7 +348,6 @@ ItemPage {
                     }
                 }
                 visible: networkActionGroup.enabled.state !== undefined
-                Component.onCompleted: clicked.connect(wifiSwitch.clicked)
             }
 
             QDBusActionGroup {
@@ -383,7 +382,6 @@ ItemPage {
                     }
                 }
                 visible: bluetoothActionGroup.visible
-                Component.onCompleted: clicked.connect(btSwitch.clicked)
             }
 
             QDBusActionGroup {
@@ -417,7 +415,6 @@ ItemPage {
                     }
                 }
                 visible: locationActionGroup.enabled.state !== undefined
-                Component.onCompleted: clicked.connect(gpsSwitch.clicked)
             }
 
             ListItem.Caption {
