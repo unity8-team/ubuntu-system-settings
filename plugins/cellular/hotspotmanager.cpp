@@ -161,9 +161,9 @@ OrgFreedesktopNetworkManagerSettingsInterface nm_settings(
 // See http://doc.qt.io/qt-5/qvariant.html#QVariantMap-typedef and
 // https://developer.gnome.org/NetworkManager/0.9/spec.html
 //     #type-String_String_Variant_Map_Map
-nmConnectionArg createConnectionArguments(
+nmConnectionArg createConnectionSettings(
     const QByteArray &ssid, const QString &password,
-    const QDBusObjectPath &devicePath, QString mode) {
+    const QDBusObjectPath &devicePath, QString mode, bool autoConnect = true) {
 
   Q_UNUSED(devicePath);
   nmConnectionArg connection;
@@ -182,7 +182,7 @@ nmConnectionArg createConnectionArguments(
   connection["802-11-wireless"] = wireless;
 
   QVariantMap connsettings;
-  connsettings[QStringLiteral("autoconnect")] = QVariant(true);
+  connsettings[QStringLiteral("autoconnect")] = QVariant(autoConnect);
   connsettings[QStringLiteral("id")] = QVariant(s_ssid);
   connsettings[QStringLiteral("uuid")] = QVariant(s_uuid);
   connsettings[QStringLiteral("type")] = QVariant(QStringLiteral("802-11-wireless"));
@@ -247,7 +247,7 @@ QDBusObjectPath addConnection(
 
   QDBusObjectPath invalid("");
 
-  nmConnectionArg connection = createConnectionArguments(ssid, password,
+  nmConnectionArg connection = createConnectionSettings(ssid, password,
                                                          devicePath, mode);
 
   auto add_connection_reply = nm_settings.AddConnection(connection);
@@ -408,7 +408,6 @@ HotspotManager::HotspotManager(QObject *parent) :
 }
 
 void HotspotManager::setEnabled(bool value) {
-
   bool blocked = setWifiBlock(true);
 
   // Failed to soft block, here we revert the enabled setting.
@@ -482,6 +481,20 @@ void HotspotManager::disable() {
     return;
   }
 
+  // Create Connection.Settings proxy for hotspot
+  OrgFreedesktopNetworkManagerSettingsConnectionInterface conn(
+      nm_service, hotspot.path(), QDBusConnection::systemBus());
+
+  // Get new settings
+  nmConnectionArg new_settings = createConnectionSettings(m_ssid, m_password,
+                                             m_device_path, m_mode, false);
+  auto updating = conn.Update(new_settings);
+  updating.waitForFinished();
+  if(!updating.isValid()) {
+    qCritical() << "Could not update connection with autoconnect=false: "
+        << updating.error().message();
+  }
+
   auto active_connections = nm_manager.activeConnections();
   for(const auto &active_connection : active_connections) {
 
@@ -503,7 +516,16 @@ void HotspotManager::disable() {
     // so we will deactivate it. Note that we do not remove the hotspot,
     // as we are storing the ssid, password and mode on the connection.
     if(backingConnection == m_hotspot_path) {
+
+      // Deactivate the connection.
       nm_manager.DeactivateConnection(active_connection);
+      auto deactivation = nm_manager.GetDevices();
+      deactivation.waitForFinished();
+
+      if(!deactivation.isValid()) {
+        qCritical() << "Could not get deactivate connection: "
+            << deactivation.error().message();
+      }
       return;
     }
   }

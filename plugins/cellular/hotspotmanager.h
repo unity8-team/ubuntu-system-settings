@@ -167,7 +167,6 @@ private:
   bool m_stored;
   QString m_password;
   QByteArray m_ssid;
-
   QDBusObjectPath m_device_path;
   QDBusObjectPath m_hotspot_path;
 
