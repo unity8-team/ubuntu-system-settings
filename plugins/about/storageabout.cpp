@@ -382,7 +382,7 @@ bool StorageAbout::isInternal(const QString &drive)
     bool ret = false;
     FILE *fsDescription = setmntent(_PATH_MOUNTED, "r");
     struct mntent entry;
-    char buffer[512], *real_file;
+    char buffer[512];
     while ((getmntent_r(fsDescription, &entry, buffer, sizeof(buffer))) != NULL) {
         if (drive != QString::fromLatin1(entry.mnt_dir))
             continue;
@@ -412,15 +412,10 @@ bool StorageAbout::isInternal(const QString &drive)
             ret = true;
             break;
         }
-        
+
         // Now need to guess if it's InternalDrive or RemovableDrive
-        QString fsName;
-        if (real_file = canonicalize_file_name(entry.mnt_fsname)){
-            fsName = QString::fromLatin1(real_file);
-            free(real_file);
-        } else {
-            fsName = QString::fromLatin1(entry.mnt_fsname);
-        }
+        QString fsName = QDir(entry.mnt_fsname).canonicalPath();
+        qWarning() << "fsName = " <<fsName;
         if (fsName.contains(QString(QStringLiteral("mapper")))) {
             struct stat status;
             stat(entry.mnt_fsname, &status);
@@ -457,9 +452,9 @@ bool StorageAbout::isInternal(const QString &drive)
                                 buf = file.readLine();
                             }
                         }
-                    }
                 }
                 fsName = QString(QStringLiteral("/sys/block/")) + fsName + QString(QStringLiteral("/removable"));
+            }
         }
         QFile removable(fsName);
         char isRemovable;
