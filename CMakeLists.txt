@@ -87,9 +87,13 @@ add_custom_target(${DESKTOP_FILE} ALL
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${DESKTOP_FILE}
         DESTINATION ${CMAKE_INSTALL_DATADIR}/applications)
 
+set(APP_ICONS
+    system-settings.png
+    system-settings-symbolic.png
+)
 install(FILES ubuntu-system-settings.url-dispatcher DESTINATION share/url-dispatcher/urls)
 install(FILES screenshot.png DESTINATION ${SETTINGS_SHARE_DIR})
-install(FILES system-settings.png DESTINATION ${SETTINGS_SHARE_DIR})
+install(FILES ${APP_ICONS} DESTINATION ${SETTINGS_SHARE_DIR})
 install(PROGRAMS push-helper/software_updates_helper.py DESTINATION ${PUSH_HELPER_DIR} RENAME ubuntu-system-settings)
 
 if(cmake_build_type_lower MATCHES coverage)
