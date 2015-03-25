@@ -78,7 +78,7 @@ ItemPage {
                 userProperty: "value"
                 serverTarget: brightnessSlider
                 serverProperty: "serverValue"
-                maximumWaitBufferInterval: 100
+                maximumWaitBufferInterval: 16
 
                 onSyncTriggered: indicatorPower.brightness.updateState(value / 100.0)
             }
