@@ -415,7 +415,6 @@ bool StorageAbout::isInternal(const QString &drive)
 
         // Now need to guess if it's InternalDrive or RemovableDrive
         QString fsName = QDir(entry.mnt_fsname).canonicalPath();
-        qWarning() << "fsName = " <<fsName;
         if (fsName.contains(QString(QStringLiteral("mapper")))) {
             struct stat status;
             stat(entry.mnt_fsname, &status);
