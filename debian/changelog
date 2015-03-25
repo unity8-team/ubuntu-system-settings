@@ -1,3 +1,14 @@
+ubuntu-system-settings (0.3+15.04.20150325-0ubuntu1) vivid; urgency=medium
+
+  [ CI Train Bot ]
+  * Resync trunk.
+
+  [ jonas-drange ]
+  * [cellular] apn page does not overwrite empty, provisioned contexts
+    (LP: #1415495)
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Wed, 25 Mar 2015 22:22:32 +0000
+
 ubuntu-system-settings (0.3+15.04.20150317-0ubuntu1) vivid; urgency=medium
 
   [ CI Train Bot ]
