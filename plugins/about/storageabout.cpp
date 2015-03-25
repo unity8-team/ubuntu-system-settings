@@ -429,7 +429,6 @@ bool StorageAbout::isInternal(const QString &drive)
                     if (index_mmc != -1) {
                         int index_p = fsName.indexOf('p',index_mmc,Qt::CaseInsensitive);
                         mmcString = fsName.mid(index_mmc, index_p - index_mmc);
-                    }
 
                         // "removable" attribute is set only for removable media, and we may have internal mmc cards
                         fsName = QString(QStringLiteral("/sys/block/")) + mmcString + QString(QStringLiteral("/device/uevent"));
@@ -451,6 +450,7 @@ bool StorageAbout::isInternal(const QString &drive)
                                 buf = file.readLine();
                             }
                         }
+                    }
                 }
                 fsName = QString(QStringLiteral("/sys/block/")) + fsName + QString(QStringLiteral("/removable"));
             }
