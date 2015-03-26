@@ -425,8 +425,8 @@ bool StorageAbout::isInternal(const QString &drive)
                 if (fsName.length() > 3) {
                     // only take the parent of the device
                     int index_mmc = fsName.indexOf("mmc",0,Qt::CaseInsensitive);
-                    QString mmcString;
                     if (index_mmc != -1) {
+                        QString mmcString;
                         int index_p = fsName.indexOf('p',index_mmc,Qt::CaseInsensitive);
                         mmcString = fsName.mid(index_mmc, index_p - index_mmc);
 
