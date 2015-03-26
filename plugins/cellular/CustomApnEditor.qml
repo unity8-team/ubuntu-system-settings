@@ -23,6 +23,7 @@ import QtQuick.Layouts 1.1
 import SystemSettings 1.0
 import Ubuntu.Components 1.1
 import Ubuntu.Components.ListItems 1.0 as ListItem
+import "apn.js" as APN
 
 ItemPage {
     objectName: "customapnPage"
@@ -36,6 +37,9 @@ ItemPage {
 
     /// work around LP(#1361919)
     property var activateCb;
+
+    // Sim qml object
+    property var sim
 
     QtObject {
         id: d
@@ -81,6 +85,12 @@ ItemPage {
             }
         } else {
             ctx = contexts["internet"]
+        }
+
+        // We do not have any context yet, we will create one, but not now.
+        // We create it once the user presses 'Activate'.
+        if (!ctx) {
+            return;
         }
 
         apnName.text = ctx.accessPointName;
@@ -277,6 +287,8 @@ ItemPage {
 
                     onClicked: {
                         var ctx;
+                        var values;
+
                         if (d.isMms)
                             ctx = contexts["mms"];
                         else
@@ -300,23 +312,73 @@ ItemPage {
                             pageStack.pop();
                             return;
                         }
-                        ctx.accessPointName = apnName.text;
-                        ctx.username = userName.text;
-                        ctx.password = pword.text;
+
+                        values = {
+                            'accessPointName': apnName.text,
+                            'username': userName.text,
+                            'password': pword.text
+                        };
+
                         if (d.isMms) {
-                            ctx.messageCenter = mmsc.text;
+                            values['messageCenter'] = mmsc.text;
                             var proxyValue = "";
                             if (proxy.text !== "") {
                                 proxyValue = proxy.text;
                                 if (port.text !== "")
                                     proxyValue = proxyValue + ":" + port.text;
                             }
-                            ctx.messageProxy = proxyValue
+                            values['messageProxy'] = proxyValue;
                         }
-                        /// @todo map protocol values
 
-                        activateCb(ctx.type, ctx.contextPath);
-                        pageStack.pop();
+                        // If we are editing an existing context, update
+                        // its values, activate and exit.
+                        if (ctx) {
+                            APN.updateContext(ctx, values);
+                            activateCb(ctx.type, ctx.contextPath);
+                            pageStack.pop();
+                        } else {
+
+                            // If we do not have a context, create one and defer
+                            // editing it to when it has been created—and we
+                            // will also wait until Ofono has given it a name.
+                            // This is all very async, so we will use connect()
+                            // and dynamic QML.
+
+                            // This is a handler for when we add a context
+                            // in the custom apn editor.
+                            function addedCustomContext (path) {
+
+                                // We create a temporary QML object for the
+                                // context like this, until we get the APN
+                                // editor refactored.
+                                // TODO(jgdx): create some kind of libqofono
+                                // objects framework in apn.js
+                                var newCtx = Qt.createQmlObject(
+                                    'import MeeGo.QOfono 0.2;'+
+                                    'OfonoContextConnection {'+
+                                    'contextPath: "'+path+'" }',
+                                    root, "apn.js");
+
+                                // Ofono sets a default name (Internet or MMS).
+                                // We are going to change it to our default name.
+                                newCtx.nameChanged.connect(function (name) {
+                                    if (name === "Internet") {
+                                        newCtx.name = APN.CUSTOM_INTERNET_CONTEXT_NAME();
+                                        APN.updateContext(newCtx, values);
+                                    } else if (name === "MMS") {
+                                        newCtx.name = APN.CUSTOM_MMS_CONTEXT_NAME();
+                                        APN.updateContext(newCtx, values);
+                                    } else {
+                                        newCtx.destroy(100);
+                                        activateCb(newCtx.type, newCtx.contextPath);
+                                        pageStack.pop();
+                                    }
+                                });
+                            }
+
+                            sim.connMan.addContext(root.type);
+                            sim.connMan.contextAdded.connect(addedCustomContext);
+                        }
                     }
                 }
             } // item for buttons
