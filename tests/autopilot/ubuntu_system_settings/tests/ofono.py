@@ -26,7 +26,6 @@ NOT_IMPLEMENTED = '''raise dbus.exceptions.DBusException(
 
 _parameters = {}
 
-
 def load(mock, parameters):
     global _parameters
     mock.modems = []  # object paths
@@ -37,6 +36,7 @@ def load(mock, parameters):
 
     if not parameters.get('no_modem', False):
         mock.AddModem(parameters.get('ModemName', 'ril_0'), {})
+
 
 
 @dbus.service.method(dbusmock.MOCK_IFACE,
@@ -81,6 +81,7 @@ def AddModem(self, name, properties):
         ])
     obj = dbusmock.mockobject.objects[path]
     obj.name = name
+    obj.sim_pin = "2468"
     add_simmanager_api(obj)
     add_voice_call_api(obj)
     add_netreg_api(obj)
@@ -110,17 +111,87 @@ def add_simmanager_api(mock):
         ('SetProperty', 'sv', '', 'self.Set("%(i)s", args[0], args[1]); '
          'self.EmitSignal("%(i)s", "PropertyChanged", "sv", [args[0], '
          'args[1]])' % {'i': iface}),
-        ('ChangePin', 'sss', '', ''),
-        ('EnterPin', 'ss', '', ''),
-        ('ResetPin', 'sss', '', ''),
-        ('LockPin', 'ss', '', 'if args[1] == "2468": self.Set("%(i)s",'
-         '"LockedPins", dbus.Array(["pin"])); self.EmitSignal("%(i)s",'
-         '"PropertyChanged", "sv", ["LockedPins", self.Get("%(i)s", '
-         '"LockedPins")])' % {'i': iface}),
-        ('UnlockPin', 'ss', '', 'if args[1] == "2468": self.Set("%(i)s",'
-         '"LockedPins", ""); self.EmitSignal("%(i)s", "PropertyChanged", "sv",'
-         ' ["LockedPins", self.Get("%(i)s", "LockedPins")])' % {'i': iface})
+        ('ResetPin', 'sss', '', '')
     ])
+
+
+@dbus.service.method('org.ofono.SimManager',
+                     in_signature='ss', out_signature='')
+def LockPin(self, pin_type, pin):
+    iface = 'org.ofono.SimManager'
+    print('XXX LockPin', pin_type, pin)
+
+    if (pin == self.sim_pin):
+        print('XXX LockPin pin matches')
+        self.Set(iface, "LockedPins", dbus.Array(["pin"]))
+        self.EmitSignal(iface, "PropertyChanged", "sv", ["LockedPins", self.Get(iface, "LockedPins")])
+        self.Set(iface, "Retries", {'pin': dbus.Byte(3)})
+        self.EmitSignal(iface, "PropertyChanged", "sv", ["Retries", self.Get(iface, "Retries")])
+    else:
+        retries = self.Get(iface, "Retries")['pin']
+        if (retries > 0):
+            self.Set(iface, "Retries", {'pin': dbus.Byte(retries - 1)})
+            self.EmitSignal(iface, "PropertyChanged", "sv", ["Retries", self.Get(iface, "Retries")])
+        raise dbus.exceptions.DBusException("", "Failed", name="org.ofono.Error.Failed")
+    print('XXX LockPin', self.Get(iface, "Retries")['pin'])
+
+
+@dbus.service.method('org.ofono.SimManager',
+                     in_signature='ss', out_signature='')
+def UnlockPin(self, pin_type, pin):
+    iface = 'org.ofono.SimManager'
+    print('XXX UnlockPin', pin_type, pin)
+
+    if (pin == self.sim_pin):
+        print('XXX UnlockPin pin matches')
+        self.Set(iface, "LockedPins", "")
+        self.EmitSignal(iface, "PropertyChanged", "sv", ["LockedPins", self.Get(iface, "LockedPins")])
+        self.Set(iface, "Retries", {'pin': dbus.Byte(3)})
+        self.EmitSignal(iface, "PropertyChanged", "sv", ["Retries", self.Get(iface, "Retries")])
+    else:
+        retries = self.Get(iface, "Retries")['pin']
+        if (retries > 0):
+            self.Set(iface, "Retries", {'pin': dbus.Byte(retries - 1)})
+            self.EmitSignal(iface, "PropertyChanged", "sv", ["Retries", self.Get(iface, "Retries")])
+        raise dbus.exceptions.DBusException("", "Failed", name="org.ofono.Error.Failed")
+    print('XXX UnlockPin', self.Get(iface, "Retries")['pin'])
+
+
+@dbus.service.method('org.ofono.SimManager',
+                     in_signature='sss', out_signature='')
+def ChangePin(self, pin_type, pin, pin2):
+    iface = 'org.ofono.SimManager'
+    print('XXX ChangePin', pin_type, pin, pin2)
+
+    if (pin == self.sim_pin):
+        print('XXX ChangePin pin matches')
+        self.sim_pin = pin2
+        self.Set(iface, "Retries", {'pin': dbus.Byte(3)})
+        self.EmitSignal(iface, "PropertyChanged", "sv", ["Retries", self.Get(iface, "Retries")])
+    else:
+        retries = self.Get(iface, "Retries")['pin']
+        if (retries > 0):
+            self.Set(iface, "Retries", {'pin': dbus.Byte(retries - 1)})
+            self.EmitSignal(iface, "PropertyChanged", "sv", ["Retries", self.Get(iface, "Retries")])
+        raise dbus.exceptions.DBusException("", "Failed", name="org.ofono.Error.Failed")
+
+
+@dbus.service.method('org.ofono.SimManager',
+                     in_signature='ss', out_signature='')
+def EnterPin(self, pin_type, pin):
+    iface = 'org.ofono.SimManager'
+    print('XXX EnterPin', pin)
+
+    if (pin == self.sim_pin):
+        print('XXX EnterPin pin matches')
+        self.Set(iface, "Retries", {'pin': dbus.Byte(3)})
+        self.EmitSignal(iface, "PropertyChanged", "sv", ["Retries", self.Get(iface, "Retries")])
+    else:
+        retries = self.Get(iface, "Retries")['pin']
+        if (retries > 0):
+            self.Set(iface, "Retries", {'pin': dbus.Byte(retries - 1)})
+            self.EmitSignal(iface, "PropertyChanged", "sv", ["Retries", self.Get(iface, "Retries")])
+        raise dbus.exceptions.DBusException("", "Failed", name="org.ofono.Error.Failed")
 
 
 def add_voice_call_api(mock):
