@@ -57,7 +57,6 @@ ItemPage {
                 text: i18n.tr("APN")
                 objectName: "apn"
                 progression: enabled
-                enabled: sim.connMan.powered
                 onClicked: pageStack.push(Qt.resolvedUrl("PageChooseApn.qml"), {
                     sim: sim
                 })
