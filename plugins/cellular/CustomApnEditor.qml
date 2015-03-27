@@ -337,17 +337,15 @@ ItemPage {
                             activateCb(ctx.type, ctx.contextPath);
                             pageStack.pop();
                         } else {
-
                             // If we do not have a context, create one and defer
                             // editing it to when it has been created—and we
                             // will also wait until Ofono has given it a name.
                             // This is all very async, so we will use connect()
                             // and dynamic QML.
 
-                            // This is a handler for when we add a context
-                            // in the custom apn editor.
                             function addedCustomContext (path) {
-
+                                // This is a handler for when we add a context
+                                // in the custom apn editor.
                                 // We create a temporary QML object for the
                                 // context like this, until we get the APN
                                 // editor refactored.

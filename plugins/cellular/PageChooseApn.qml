@@ -150,9 +150,7 @@ ItemPage {
                 });
             }
 
-            if (customInternet.length === 0) {
-
-            } else {
+            if (customInternet.length !== 0) {
                 d.__haveCustomContexts = true;
             }
 
