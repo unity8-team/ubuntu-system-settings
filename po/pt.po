@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-10-16 20:04-0600\n"
-"PO-Revision-Date: 2015-03-25 14:54+0000\n"
+"PO-Revision-Date: 2015-03-28 00:15+0000\n"
 "Last-Translator: Ivo Xavier <ivofernandes12@gmail.com>\n"
 "Language-Team: Portuguese <pt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2015-03-26 05:27+0000\n"
+"X-Launchpad-Export-Date: 2015-03-28 05:31+0000\n"
 "X-Generator: Launchpad (build 17413)\n"
 
 #: ubuntu-system-settings.desktop.in.in.h:1 ../src/qml/MainWindow.qml:112
@@ -1118,12 +1118,12 @@ msgstr ""
 
 #: ../plugins/security-privacy//PhoneLocking.qml:31
 msgid "Phone locking"
-msgstr "Bloquear telemóvel"
+msgstr "Bloqueio de telemóvel"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:45
 msgctxt "Unlock with swipe"
 msgid "None"
-msgstr "Nenhuma"
+msgstr "Nenhum"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:46
 msgid "Passcode"
@@ -1144,7 +1144,7 @@ msgstr "Hibernar bloqueia imediatamente"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:106
 msgid "When locked, allow:"
-msgstr "Quando bloqueado, permite:"
+msgstr "Quando bloqueado permite:"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:110
 msgid "Launcher"
@@ -1576,8 +1576,8 @@ msgid ""
 "In Developer Mode, anyone can access, change or delete anything on this "
 "phone by connecting it to another device."
 msgstr ""
-"No modo de programador, todos podem aceder, modificar ou apagar tudo neste "
-"telemóvel ao conecta-lo a outro dispositivo."
+"No modo de programador todos podem aceder, modificar ou apagar tudo neste "
+"telemóvel ao ligar a outro dispositivo."
 
 #: ../plugins/about//DevMode.qml:110
 msgid "You need a passcode or passphrase set to use Developer Mode."
@@ -1750,8 +1750,7 @@ msgstr "Atualizar o Sistema"
 
 #: ../plugins/system-update//PageComponent.qml:96
 msgid "The phone needs to restart to install the system update."
-msgstr ""
-"O telemóvel precisa de reiniciar para instalar as atualizações do sistema."
+msgstr "Precisa de reiniciar para instalar as atualizações do sistema."
 
 #: ../plugins/system-update//PageComponent.qml:96
 msgid "Connect the phone to power before installing the system update."
@@ -1794,7 +1793,7 @@ msgstr "A reiniciar..."
 
 #: ../plugins/system-update//PageComponent.qml:281
 msgid "Checking for updates…"
-msgstr "A verificar a existência de atualizações..."
+msgstr "A procurar atualizações..."
 
 #: ../plugins/system-update//PageComponent.qml:281
 msgid "Connect to the Internet to check for updates"
@@ -1972,7 +1971,7 @@ msgstr "Perguntar sempre"
 
 #: ../plugins/cellular//Components//DefaultSim.qml:35
 msgid "For outgoing calls, use:"
-msgstr "Para chamadas de saída, use:"
+msgstr "Para chamadas de saída use:"
 
 #: ../plugins/cellular//Components//DefaultSim.qml:52
 msgid ""
@@ -1984,7 +1983,7 @@ msgstr ""
 
 #: ../plugins/cellular//Components//DefaultSim.qml:57
 msgid "For messages, use:"
-msgstr "Para mensagens, use:"
+msgstr "Para mensagens use:"
 
 #: ../plugins/cellular//Components//SingleSim.qml:64
 #: ../plugins/cellular//Components//MultiSim.qml:52
