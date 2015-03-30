@@ -1,3 +1,14 @@
+ubuntu-system-settings (0.3+15.04.20150330~rtm-0ubuntu1) 14.09; urgency=medium
+
+  [ jonas-drange ]
+  * [cellular/apn] make apn entry enabled always (LP: #1388046)
+  * [cellular/apn] no creation of custom contexts on editor exit (LP:
+    #1433278)
+  * [cellular] apn page does not overwrite empty, provisioned contexts
+    (LP: #1415495)
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Mon, 30 Mar 2015 13:26:48 +0000
+
 ubuntu-system-settings (0.3+15.04.20150311~rtm-0ubuntu1) 14.09; urgency=medium
 
   [ Michael Terry ]
