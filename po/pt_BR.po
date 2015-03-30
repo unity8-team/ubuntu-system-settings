@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-10-16 20:04-0600\n"
-"PO-Revision-Date: 2015-03-18 13:01+0000\n"
-"Last-Translator: Salomão Carneiro de Brito <salomaocar@gmail.com>\n"
+"PO-Revision-Date: 2015-03-28 13:59+0000\n"
+"Last-Translator: Tiago Hillebrandt <tiagohillebrandt@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2015-03-20 05:19+0000\n"
-"X-Generator: Launchpad (build 17405)\n"
+"X-Launchpad-Export-Date: 2015-03-29 05:44+0000\n"
+"X-Generator: Launchpad (build 17413)\n"
 
 #: ubuntu-system-settings.desktop.in.in.h:1 ../src/qml/MainWindow.qml:112
 msgid "System Settings"
@@ -416,7 +416,7 @@ msgstr "Redefinir telefone"
 #: ../plugins/reset//PageComponent.qml:73
 #: ../plugins/reset//ResetLauncherHome.qml:44
 msgid "Reset Launcher"
-msgstr "Redefinir Lançador"
+msgstr "Redefinir lançador"
 
 #: ../plugins/reset//PageComponent.qml:87
 msgid "Reset all system settings…"
@@ -424,7 +424,7 @@ msgstr "Redefinir todas as configurações do sistema..."
 
 #: ../plugins/reset//PageComponent.qml:101
 msgid "Erase & Reset Everything…"
-msgstr "Apagar & Redefinir tudo..."
+msgstr "Apagar e redefinir tudo..."
 
 #: ../plugins/reset//ResetAllSettings.qml:29
 msgid ""
@@ -457,7 +457,7 @@ msgstr ""
 
 #: ../plugins/reset//EraseEverything.qml:44
 msgid "Erase & Reset Everything"
-msgstr "Apagar & Redefinir tudo"
+msgstr "Apagar e redefinir tudo"
 
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
 #: ../plugins/battery//PageComponent.qml:34
@@ -536,7 +536,7 @@ msgstr "Hoje"
 
 #: ../plugins/battery//PageComponent.qml:281
 msgid "Ways to reduce battery use:"
-msgstr "Maneiras de reduzir o uso da bateria:"
+msgstr "Formas de reduzir o uso da bateria:"
 
 #: ../plugins/brightness//PageComponent.qml:62
 #: ../plugins/battery//PageComponent.qml:285
@@ -673,8 +673,8 @@ msgstr "Pontuação automática"
 msgid ""
 "Adds a period, and any missing quotes or brackets, when you tap Space twice."
 msgstr ""
-"Adiciona um período, e qualquer aspas ou parênteses em falta, quando você "
-"toca Espaço duas vezes."
+"Adiciona um ponto, e quaisquer aspas ou parênteses em falta, quando você "
+"tocar Espaço duas vezes."
 
 #: ../plugins/language//PageComponent.qml:226
 msgid "Keyboard vibration"
@@ -1577,7 +1577,7 @@ msgid ""
 "phone by connecting it to another device."
 msgstr ""
 "No modo desenvolvedor, qualquer pessoa pode acessar, alterar ou excluir "
-"qualquer coisa deste telefone, ligando-o a outro dispositivo."
+"qualquer coisa deste telefone ao conectá-lo a outro dispositivo."
 
 #: ../plugins/about//DevMode.qml:110
 msgid "You need a passcode or passphrase set to use Developer Mode."
@@ -1663,11 +1663,11 @@ msgstr "Descrição da compilação do Ubuntu"
 
 #: ../plugins/about//Version.qml:81
 msgid "Device Image part"
-msgstr "Parte do dispositivo de imagem"
+msgstr "Parte da imagem do dispositivo"
 
 #: ../plugins/about//Version.qml:88
 msgid "Device build description"
-msgstr "Descrição do dispositivo de compilação"
+msgstr "Descrição da compilação para o dispositivo"
 
 #: ../plugins/about//Version.qml:95
 msgid "Customization Image part"
@@ -1908,7 +1908,7 @@ msgstr " GiB"
 
 #: ../plugins/system-update//Configuration.qml:34
 msgid "Download future updates automatically:"
-msgstr "Baixar atualizações automaticamente:"
+msgstr "Baixar novas atualizações automaticamente:"
 
 #: ../plugins/system-update//Configuration.qml:53
 msgid "When on wi-fi"
@@ -1961,7 +1961,7 @@ msgstr "2G/3G/4G (mais rápido)"
 #: ../plugins/cellular//Components//SingleSim.qml:50
 #: ../plugins/cellular//Components//DataMultiSim.qml:76
 msgid "Data roaming"
-msgstr "Dados em roaming"
+msgstr "Dados em roaming:"
 
 #: ../plugins/cellular//Components//SimEditor.qml:88
 msgid "Edit SIM Name"
@@ -2658,7 +2658,7 @@ msgstr "apn"
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150317/obj-x86_64-linux-gnu/po/settings.js:188
 msgid "roam"
-msgstr ""
+msgstr "roam"
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
@@ -2745,7 +2745,7 @@ msgstr "senha"
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150317/obj-x86_64-linux-gnu/po/settings.js:20
 msgid "swipe"
-msgstr ""
+msgstr "swipe"
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150317/obj-x86_64-linux-gnu/po/settings.js:22
@@ -2780,12 +2780,12 @@ msgstr "bluetooth"
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150317/obj-x86_64-linux-gnu/po/settings.js:138
 msgid "headset"
-msgstr ""
+msgstr "headset"
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150317/obj-x86_64-linux-gnu/po/settings.js:140
 msgid "pair"
-msgstr ""
+msgstr "par"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
@@ -2807,7 +2807,7 @@ msgstr "carro"
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150317/obj-x86_64-linux-gnu/po/settings.js:148
 msgid "handsfree"
-msgstr ""
+msgstr "handsfree"
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150317/obj-x86_64-linux-gnu/po/settings.js:156
