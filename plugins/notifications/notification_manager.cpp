@@ -82,6 +82,7 @@ void NotificationsManager::loadModel()
     gchar *pkg;
     gchar *app;
     m_blacklist.clear();
+    appnames_per_package.clear();
     while (g_variant_iter_loop (iter, "(ss)", &pkg, &app)) {
         m_blacklist[QString(pkg)+"::::"+app] = true;
     }
@@ -99,6 +100,7 @@ void NotificationsManager::loadModel()
             char *display_name;
             char *icon_fname;
             app_data_from_desktop_id(appid.toUtf8().constData(), &display_name, &icon_fname);
+            qDebug() << m_blacklist;
             bool blacklisted = m_blacklist.contains(key);
             if (!display_name || !icon_fname) {
                 continue; // Broken .desktop file
@@ -119,9 +121,9 @@ void NotificationsManager::loadModel()
     QJsonArray array = document.array();
 
 
-	// Iterate over all the installed click packages,
-	// and, for those packages that have a push-helper hook,
-	// list all apps (hooks entries with a desktop field)
+    // Iterate over all the installed click packages,
+    // and, list those packages that have a push-helper hook,
+    // and either an app or a scope hook
 
     for (int i = 0; i < array.size(); i++) { // This iterates over packages
         QJsonObject object = array.at(i).toObject();
@@ -145,50 +147,101 @@ void NotificationsManager::loadModel()
             continue;
         }
 
-        // It has a helper, so add items for all entries that have
-        // a "desktop" key.
+        // Check if package contains either a scope or an app
+        // and get information from it
+        bool has_app_or_scope = false;
+        bool is_blacklisted = false;
+        char *display_name = 0;
+        char *icon_fname = 0;
+        appnames_per_package[pkgname] = QStringList();
         for (int j = 0; j < keys.size(); ++j) {
             QString appname = keys.at(j);
             QVariantMap hook = hooks.value(appname).toMap();
             if (hook.contains("desktop") || hook.contains("scope")) {
+                has_app_or_scope = true;
+                // Check if it should be enabled or disabled.
+                // Because of bug #1434181 if any of the apps or scope is marked as blacklisted,
+                // blacklist the package
                 QString key = pkgname+"::::"+appname;
+                if (m_blacklist.contains(key)) {
+                    is_blacklisted = true;
+                }
                 QString appid = pkgname+"_"+appname+"_"+version+".desktop"; // Full versioned APP_ID + ".desktop"
-                char *display_name;
-                char *icon_fname;
-                app_data_from_desktop_id(appid.toUtf8().constData(), &display_name, &icon_fname);
-                // fall back to the manifest's title & icon if missing from .desktop
-                if (!display_name) {
-                    display_name = g_strdup(object.value("title").toString().toUtf8().data());
+                appnames_per_package[pkgname].append(appname);
+                // Get the icon and display name from the appid if possible
+                char *d_name;
+                char *i_fname;
+                app_data_from_desktop_id(appid.toUtf8().constData(), &d_name, &i_fname);
+                if (!display_name && d_name) {
+                    display_name = g_strdup(d_name);
                 }
-                if (!icon_fname) {
-                    icon_fname =  g_strdup(object.value("icon").toString().toUtf8().data());
+                if (!icon_fname && i_fname) {
+                    icon_fname = g_strdup(i_fname);
                 }
-                NotificationItem *item = new NotificationItem();
-                bool blacklisted = m_blacklist.contains(key);
-                item->setItemData(QString(display_name), QString(icon_fname), !blacklisted, key);
-                g_free(display_name);
-                g_free(icon_fname);
-                m_model.append(QVariant::fromValue(item));
-                connect(item, &NotificationItem::updateNotificationStatus,
-                        this, &NotificationsManager::checkUpdates);
+                g_free(d_name);
+                g_free(i_fname);
             }
         }
+
+        // Has app or scope and helper, show
+        if (has_app_or_scope) {
+            // If we still don't have icon or title, because no app or scope has them, 
+            // fallback to getting them from the package
+                    
+            if (!display_name) {
+                display_name = g_strdup(object.value("title").toString().toUtf8().data());
+            }
+            if (!icon_fname) {
+                icon_fname =  g_strdup(object.value("icon").toString().toUtf8().data());
+            }
+            NotificationItem *item = new NotificationItem();
+            item->setItemData(QString(display_name), QString(icon_fname), !is_blacklisted, pkgname);
+            g_free(display_name);
+            g_free(icon_fname);
+            m_model.append(QVariant::fromValue(item));
+            connect(item, &NotificationItem::updateNotificationStatus,
+                    this, &NotificationsManager::checkUpdates);
+        }        
     }
     Q_EMIT modelChanged();
 }
 
-void NotificationsManager::checkUpdates(QString key, bool value)
+void NotificationsManager::checkUpdates(QString pkgname, bool value)
 {
-    // Update the internal blacklist
-    if (!value) {
-        if (!m_blacklist.contains(key)) {
-            m_blacklist[key] = true;
-        }
-    } else {
-        if (m_blacklist.contains(key)) {
-            m_blacklist.remove(key);
+    // Update in internal blacklist all pkgname::appname for this
+    // package.
+    std::cout << "==>" << pkgname.toStdString() << value << "\n";
+    
+    // If pkgname starts with "::::" it's a legacy app
+    if (pkgname.startsWith("::::")) {
+        if (!value) {
+            if (!m_blacklist.contains(pkgname)) {
+                m_blacklist[pkgname] = true;
+            }
+        } else {
+            if (m_blacklist.contains(pkgname)) {
+                m_blacklist.remove(pkgname);
+            }
         }
     }
+    else {
+        // It's a click, need to set for all apps/scopes
+        for (int i = 0; i < appnames_per_package[pkgname].size(); ++i) {
+            QString appname = appnames_per_package[pkgname][i];
+            QString key = pkgname+"::::"+appname;
+            // Update the internal blacklist
+            if (!value) {
+                if (!m_blacklist.contains(key)) {
+                    m_blacklist[key] = true;
+                }
+            } else {
+                if (m_blacklist.contains(key)) {
+                    m_blacklist.remove(key);
+                }
+            }
+        }
+    }
+    
     // Save the config settings
     GVariantBuilder builder;
     g_variant_builder_init(&builder, G_VARIANT_TYPE("a(ss)"));
@@ -206,6 +259,4 @@ void NotificationsManager::checkUpdates(QString key, bool value)
     }
     g_settings_set_value(m_pushSettings, BLACKLIST_KEY, g_variant_builder_end (&builder));
 }
-
 }
-
