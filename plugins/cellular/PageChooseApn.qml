@@ -150,10 +150,7 @@ ItemPage {
                 });
             }
 
-            if (customInternet.length === 0) {
-                sim.connMan.addContext("internet");
-                sim.connMan.contextAdded.connect(addedCustomContext);
-            } else {
+            if (customInternet.length !== 0) {
                 d.__haveCustomContexts = true;
             }
 
@@ -239,7 +236,8 @@ ItemPage {
                                type: type,
                                contexts: {"internet": mCustomContextInternet,
                                           "mms":      mCustomContextMms},
-                               activateCb: activateHelper
+                               activateCb: activateHelper,
+                               sim: sim
                            });
         }
 
@@ -424,29 +422,7 @@ ItemPage {
                 objectName: "customApnEdit"
                 text: i18n.tr("Custom Internet APN…")
                 width: parent.width - units.gu(4)
-                onClicked: {
-
-                    function contextAdded (path) {
-                        d.updateContexts();
-
-                        if (d.mContexts[path]) {
-                            d.mCustomContextInternet = d.mContexts[path];
-                        }
-                        d.openApnEditor("internet")
-                        d.contextsChanged.disconnect(contextAdded);
-                    }
-
-                    if (d.__haveCustomContexts) {
-                        d.openApnEditor("internet")
-                    } else {
-                        d.checkAndCreateCustomContexts();
-                        d.__haveCustomContexts = true;
-
-                        // We defer opening the editor until we have
-                        // added the custom context to mContexts
-                        sim.connMan.contextAdded.connect(contextAdded);
-                    }
-                }
+                onClicked: d.openApnEditor("internet")
             }
 
             ListItem.ItemSelector {
