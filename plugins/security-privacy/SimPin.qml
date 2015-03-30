@@ -234,7 +234,6 @@ ItemPage {
                 onLockPinComplete: {
                     if (error === OfonoSimManager.FailedError) {
                         console.warn("Lock PIN failed with: " + error);
-                        console.warn("pinRetries: " + curSim.pinRetries[OfonoSimManager.SimPin]);
                         incorrect.visible = true;
                         lockPinDialog.enabled = true;
                         lockButton.enabled = false;
@@ -249,7 +248,6 @@ ItemPage {
                 onUnlockPinComplete: {
                     if (error === OfonoSimManager.FailedError) {
                         console.warn("Unlock PIN failed with: " + error);
-                        console.warn("pinRetries: " + curSim.pinRetries[OfonoSimManager.SimPin]);
                         incorrect.visible = true;
                         lockPinDialog.enabled = true;
                         lockButton.enabled = false;
@@ -260,9 +258,6 @@ ItemPage {
                     incorrect.visible = false;
                     lockPinDialog.enabled = true;
                     PopupUtils.close(lockPinDialog);
-                }
-                onPinRetriesChanged: {
-                    console.warn("onPinRetriesChanged: " + curSim.pinRetries[OfonoSimManager.SimPin]);
                 }
             }
 
