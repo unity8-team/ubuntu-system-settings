@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-10-16 20:04-0600\n"
-"PO-Revision-Date: 2015-03-28 00:15+0000\n"
+"PO-Revision-Date: 2015-03-30 01:25+0000\n"
 "Last-Translator: Ivo Xavier <ivofernandes12@gmail.com>\n"
 "Language-Team: Portuguese <pt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2015-03-29 05:44+0000\n"
+"X-Launchpad-Export-Date: 2015-03-30 05:44+0000\n"
 "X-Generator: Launchpad (build 17413)\n"
 
 #: ubuntu-system-settings.desktop.in.in.h:1 ../src/qml/MainWindow.qml:112
@@ -334,8 +334,8 @@ msgid ""
 "Selected apps can alert you using notification bubbles, sounds, vibrations, "
 "and the Notification Center."
 msgstr ""
-"Selecione as aplicações que podem emitir notificações, sons, vibrações e "
-"alertas na central de notificações."
+"Selecione as apps que podem emitir notificações, sons, vibrações e alertas "
+"na central de notificações."
 
 #: ../plugins/sound//SoundsList.qml:70
 msgid "Stop playing"
@@ -1162,7 +1162,7 @@ msgstr ""
 
 #: ../plugins/security-privacy//PhoneLocking.qml:138
 msgid "Other apps and functions will prompt you to unlock."
-msgstr "Outras aplicações e funções vão lhe pedir para desbloquear."
+msgstr "Outras apps e funções vão lhe pedir para desbloquear."
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
 #: ../plugins/security-privacy//PageComponent.qml:37
@@ -1330,7 +1330,7 @@ msgstr "Receber resultados de:"
 
 #: ../plugins/security-privacy//AppAccess.qml:35
 msgid "Apps that you have granted and have requested access to:"
-msgstr "Aplicações que garantiu acesso a:"
+msgstr "Apps que garantiu acesso a:"
 
 #: ../plugins/security-privacy//AppAccess.qml:41
 #: ../plugins/bluetooth//PageComponent.qml:149
@@ -1339,7 +1339,7 @@ msgstr "Câmara"
 
 #: ../plugins/security-privacy//AppAccess.qml:42
 msgid "Apps that have requested access to your camera"
-msgstr "Aplicações que requesitaram acesso à câmara"
+msgstr "Apps que requesitaram acesso à câmara"
 
 #: ../plugins/security-privacy//AppAccess.qml:46
 msgid "Mic"
@@ -1347,7 +1347,7 @@ msgstr "Mic"
 
 #: ../plugins/security-privacy//AppAccess.qml:47
 msgid "Apps that have requested access to your mic"
-msgstr "Aplicações que requesitaram acesso ao mic"
+msgstr "Apps que requesitaram acesso ao mic"
 
 #: ../plugins/security-privacy//AppAccess.qml:59
 #, qt-format
@@ -1549,7 +1549,7 @@ msgstr "Outros ficheiros"
 
 #: ../plugins/about//Storage.qml:90
 msgid "Used by apps"
-msgstr "Usado pelas aplicações"
+msgstr "Usado pelas apps"
 
 #: ../plugins/about//Storage.qml:136
 msgid "Total storage"
@@ -1865,7 +1865,7 @@ msgstr "Versão: "
 
 #: ../plugins/system-update//PageComponent.qml:655
 msgid "Sign in to Ubuntu One to receive updates for apps."
-msgstr "Entre com o Ubuntu One para receber atualizações para as aplicações."
+msgstr "Entre com o Ubuntu One para receber atualizações para as apps."
 
 #: ../plugins/system-update//PageComponent.qml:664
 msgid "Sign In…"
@@ -2147,14 +2147,14 @@ msgid ""
 "pinpoint your location."
 msgstr ""
 "O Ubuntu incluí um serviço de localização fornecido pela HERE, permitindo "
-"que as aplicações determinem a sua localização."
+"que as apps determinem a sua localização."
 
 #: ../wizard/qml/Pages//50-location.qml:64
 msgid ""
 "Allow apps to use your mobile and Wi-Fi networks to determine your location."
 msgstr ""
-"Permitir que as aplicações usem a sua rede móvel e Wi-Fi para determinar a "
-"sua localização."
+"Permitir que as apps usem a sua rede móvel e Wi-Fi para determinar a sua "
+"localização."
 
 #. TRANSLATORS: HERE is a trademark for Nokia's location service, you probably shouldn't translate it
 #: ../wizard/qml/Pages//50-location.qml:74
@@ -2335,7 +2335,7 @@ msgstr "notificações"
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150317/obj-x86_64-linux-gnu/po/settings.js:242
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150317/obj-x86_64-linux-gnu/po/settings.js:342
 msgid "apps"
-msgstr "aplicações"
+msgstr "apps"
 
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150317/obj-x86_64-linux-gnu/po/settings.js:200
