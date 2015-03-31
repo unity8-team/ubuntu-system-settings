@@ -11,19 +11,19 @@ import subprocess
 import time
 
 from testtools.matchers import Equals, NotEquals
-from autopilot.matchers import Eventually
 
 from ubuntu_system_settings.tests import UbuntuSystemSettingsTestCase
-from ubuntu_system_settings.utils.i18n import ugettext as _
 
 from ubuntuuitoolkit import emulators as toolkit_emulators
 
 """ Tests for Ubuntu System Settings """
 
+
 def has_helper(package):
     """Return True if  package['hooks']['foo']['push-helper'] exists"""
-    return any(package['hooks'][hook].get('push-helper', None) for hook in package['hooks'])
-    
+    return any(package['hooks'][hook].get('push-helper', None)
+               for hook in package['hooks'])
+
 
 class NotificationsTestCases(UbuntuSystemSettingsTestCase):
     """ Tests for Search """
@@ -51,8 +51,7 @@ class NotificationsTestCases(UbuntuSystemSettingsTestCase):
         self.main_view.pointing_device.click_object(notif)
         # Have to wait until the model loads
         time.sleep(1)
-        notif_page = self.main_view.select_single(objectName='systemNotificationsPage')
+        notif_page = self.main_view.select_single(
+            objectName='systemNotificationsPage')
         items = notif_page.select_many(toolkit_emulators.Standard)
         self.assertThat(len(items), Equals(click_count + legacy_count))
-
-        
