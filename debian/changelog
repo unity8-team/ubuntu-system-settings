@@ -1,3 +1,14 @@
+ubuntu-system-settings (0.3+15.04.20150331.2~rtm-0ubuntu1) 14.09; urgency=medium
+
+  [ CI Train Bot ]
+  * New rebuild forced.
+
+  [ Roberto Alsina ]
+  * Use per-package notification settings instead of per-app and per-
+    scope. (LP: #1434181)
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Tue, 31 Mar 2015 21:53:01 +0000
+
 ubuntu-system-settings (0.3+15.04.20150330~rtm-0ubuntu1) 14.09; urgency=medium
 
   [ jonas-drange ]
