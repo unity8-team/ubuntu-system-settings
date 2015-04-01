@@ -518,10 +518,8 @@ void HotspotManager::disable() {
     if(backingConnection == m_hotspot_path) {
 
       // Deactivate the connection.
-      nm_manager.DeactivateConnection(active_connection);
-      auto deactivation = nm_manager.GetDevices();
+      auto deactivation = nm_manager.DeactivateConnection(active_connection);
       deactivation.waitForFinished();
-
       if(!deactivation.isValid()) {
         qCritical() << "Could not get deactivate connection: "
             << deactivation.error().message();
