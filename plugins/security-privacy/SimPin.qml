@@ -53,7 +53,7 @@ ItemPage {
                         curSim.pinRetries[OfonoSimManager.SimPin] === 1
                         ).arg(curSim.pinRetries[OfonoSimManager.SimPin])
                 else if (curSim.pinRetries[OfonoSimManager.SimPin] === 0)
-                    return i18n.tr("Maximum attempts reached")
+                    return i18n.tr("No more attempts allowed")
             }
             property int simMin: curSim.minimumPinLength(OfonoSimManager.SimPin)
             property int simMax: curSim.maximumPinLength(OfonoSimManager.SimPin)
@@ -112,7 +112,7 @@ ItemPage {
                             curSim.pinRetries[OfonoSimManager.SimPin] === 1
                             ).arg(curSim.pinRetries[OfonoSimManager.SimPin])
                     else if (curSim.pinRetries[OfonoSimManager.SimPin] === 0)
-                        return i18n.tr("Maximum attempts reached")
+                        return i18n.tr("No more attempts allowed")
                 }
                 visible: !incorrect.visible
             }
@@ -214,7 +214,7 @@ ItemPage {
                         curSim.pinRetries[OfonoSimManager.SimPin] === 1
                         ).arg(curSim.pinRetries[OfonoSimManager.SimPin])
                 else if (curSim.pinRetries[OfonoSimManager.SimPin] === 0)
-                    return i18n.tr("Maximum retries reached")
+                    return i18n.tr("No more attempts allowed")
             }
 
             property int simMin: curSim.minimumPinLength(OfonoSimManager.SimPin)
@@ -283,7 +283,7 @@ ItemPage {
                             curSim.pinRetries[OfonoSimManager.SimPin] === 1
                             ).arg(curSim.pinRetries[OfonoSimManager.SimPin])
                     else if (curSim.pinRetries[OfonoSimManager.SimPin] === 0)
-                        return i18n.tr("Maximum attempts reached")
+                        return i18n.tr("No more attempts allowed")
                 }
                 visible: !incorrect.visible
                 width: parent.width
