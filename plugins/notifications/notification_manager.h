@@ -52,6 +52,7 @@ private:
     QProcess *m_process;
     GSettings *m_pushSettings;
     QMap <QString, bool> m_blacklist;
+    QMap <QString, QStringList> appnames_per_package;
 };
 
 }
