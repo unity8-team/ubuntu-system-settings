@@ -1,3 +1,15 @@
+ubuntu-system-settings (0.3+15.04.20150401.2-0ubuntu1) vivid; urgency=medium
+
+  [ CI Train Bot ]
+  * New rebuild forced.
+
+  [ Ken VanDine ]
+  * Fixed handling of pinRetries Improved dbusmock template for ofono to
+    support testing LockPin, UnlockPin, ChangePin and EnterPin (LP:
+    #1415850)
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Wed, 01 Apr 2015 18:30:16 +0000
+
 ubuntu-system-settings (0.3+15.04.20150401-0ubuntu1) vivid; urgency=medium
 
   [ CI Train Bot ]
