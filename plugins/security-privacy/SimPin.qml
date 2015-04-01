@@ -99,7 +99,8 @@ ItemPage {
                                 confirmInput.acceptableInput &&
                                 confirmInput.text.length >= simMin &&
                                 (confirmInput.text === newInput.text) &&
-                                (curSim.pinRetries[OfonoSimManager.SimPin] > 0))
+                                (!curSim.pinRetries[OfonoSimManager.SimPin] ||
+                                 (curSim.pinRetries[OfonoSimManager.SimPin] > 0)))
             }
 
             Label {
@@ -150,7 +151,8 @@ ItemPage {
                                (acceptableInput &&
                                 text.length >= simMin &&
                                 (text === newInput.text) &&
-                                (curSim.pinRetries[OfonoSimManager.SimPin] > 0))
+                                (!curSim.pinRetries[OfonoSimManager.SimPin] ||
+                                 (curSim.pinRetries[OfonoSimManager.SimPin] > 0)))
 
             }
 
@@ -270,7 +272,9 @@ ItemPage {
 
                 // Doesn't get updated if you set this in enabled of confirmButton
                 onTextChanged: lockButton.enabled =
-                               (acceptableInput && (text.length >= simMin) && (curSim.pinRetries[OfonoSimManager.SimPin] > 0))
+                               (acceptableInput && (text.length >= simMin) &&
+                               (!curSim.pinRetries[OfonoSimManager.SimPin] ||
+                               (curSim.pinRetries[OfonoSimManager.SimPin] > 0)))
             }
 
             Label {
