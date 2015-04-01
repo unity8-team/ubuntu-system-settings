@@ -1,3 +1,15 @@
+ubuntu-system-settings (0.3+15.04.20150401-0ubuntu1) vivid; urgency=medium
+
+  [ CI Train Bot ]
+  * New rebuild forced.
+
+  [ jonas-drange ]
+  * [cellular/apn] make apn entry enabled always (LP: #1388046)
+  * [cellular/apn] no creation of custom contexts on editor exit (LP:
+    #1433278)
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Wed, 01 Apr 2015 14:09:52 +0000
+
 ubuntu-system-settings (0.3+15.04.20150331.2-0ubuntu1) vivid; urgency=medium
 
   [ CI Train Bot ]
