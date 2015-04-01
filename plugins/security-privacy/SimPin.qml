@@ -54,6 +54,8 @@ ItemPage {
                         ).arg(curSim.pinRetries[OfonoSimManager.SimPin])
                 else if (curSim.pinRetries[OfonoSimManager.SimPin] === 0)
                     return i18n.tr("No more attempts allowed")
+                else
+                    return ""
             }
             property int simMin: curSim.minimumPinLength(OfonoSimManager.SimPin)
             property int simMax: curSim.maximumPinLength(OfonoSimManager.SimPin)
@@ -114,6 +116,8 @@ ItemPage {
                             ).arg(curSim.pinRetries[OfonoSimManager.SimPin])
                     else if (curSim.pinRetries[OfonoSimManager.SimPin] === 0)
                         return i18n.tr("No more attempts allowed")
+                    else
+                        return ""
                 }
                 visible: !incorrect.visible
             }
@@ -217,6 +221,8 @@ ItemPage {
                         ).arg(curSim.pinRetries[OfonoSimManager.SimPin])
                 else if (curSim.pinRetries[OfonoSimManager.SimPin] === 0)
                     return i18n.tr("No more attempts allowed")
+                else
+                    return ""
             }
 
             property int simMin: curSim.minimumPinLength(OfonoSimManager.SimPin)
@@ -288,6 +294,8 @@ ItemPage {
                             ).arg(curSim.pinRetries[OfonoSimManager.SimPin])
                     else if (curSim.pinRetries[OfonoSimManager.SimPin] === 0)
                         return i18n.tr("No more attempts allowed")
+                    else
+                        return ""
                 }
                 visible: !incorrect.visible
                 width: parent.width
