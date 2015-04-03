@@ -100,8 +100,8 @@ public:
             if (QDir::match(pattern, fileList[i])) {
                 return QString("%1/applications/%2").arg(localShare).arg(fileList[i]);
             }
-        } 
-        
+        }
+
         qWarning() << "No desktop file found for app id: " << id;
         return QString();
     }
