@@ -1,3 +1,14 @@
+ubuntu-system-settings (0.3+15.04.20150403-0ubuntu1) vivid; urgency=medium
+
+  [ CI Train Bot ]
+  * Resync trunk.
+
+  [ jonas-drange ]
+  * Removes trailing spaces, as well as spaces on empty lines.
+  * fix tests that uses the networkmanager template
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Fri, 03 Apr 2015 16:51:57 +0000
+
 ubuntu-system-settings (0.3+15.04.20150401.2-0ubuntu1) vivid; urgency=medium
 
   [ CI Train Bot ]
