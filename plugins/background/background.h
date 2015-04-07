@@ -44,7 +44,7 @@ class Background : public QObject
     Q_PROPERTY( QStringList ubuntuArt
                 READ ubuntuArt
                 NOTIFY ubuntuArtChanged )
-    
+
 public:
     explicit Background(QObject *parent = 0);
     ~Background();

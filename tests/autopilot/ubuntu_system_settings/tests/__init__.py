@@ -27,7 +27,6 @@ from time import sleep
 import ubuntuuitoolkit
 from autopilot import platform
 from autopilot.matchers import Eventually
-from dbusmock.templates.networkmanager import DEVICE_IFACE
 from fixtures import EnvironmentVariable
 from gi.repository import UPowerGlib
 from testtools.matchers import Equals, NotEquals, GreaterThan
@@ -869,45 +868,10 @@ class WifiBaseTestCase(UbuntuSystemSettingsTestCase,
 
     def setUp(self, panel=None):
         self.obj_nm.Reset()
-        device_path = self.obj_nm.AddWiFiDevice('test0', 'Barbaz', 1)
+        self.device_path = self.obj_nm.AddWiFiDevice('test0', 'Barbaz', 1)
         self.device_mock = dbus.Interface(self.dbus_con.get_object(
-            NM_SERVICE, device_path),
+            NM_SERVICE, self.device_path),
             dbusmock.MOCK_IFACE)
-
-        self.add_active_connection(
-            'activecon0', self.device_mock, device_path)
 
         super(WifiBaseTestCase, self).setUp()
         self.wifi_page = self.main_view.go_to_wifi_page()
-
-    def add_previous_networks(self, networks):
-        dev_path = str(self.obj_nm.GetDevices()[0])
-        for network in networks:
-            self.obj_nm.AddWiFiConnection(
-                dev_path, network['connection_name'],
-                network['ssid'], network.get('keymng', ''))
-
-    def add_active_connection(self, connection_name, device_mock, device_path):
-        """Add ActiveConnection object to device as well as the
-        Active.Connection object being referred to. Will add mocked
-        Connection object, active_connection_mock, to the test case."""
-
-        # Add a new Connection object
-        con_path = self.obj_nm.AddWiFiConnection(
-            device_path, connection_name, 'fake ssid', '')
-        self.active_connection_mock = dbus.Interface(self.dbus_con.get_object(
-            NM_SERVICE, con_path),
-            dbusmock.MOCK_IFACE)
-        # Set up the ActiveConnection object, which will have a
-        # Connection property pointing to the created Connection
-        ac_path = '/org/freedesktop/NetworkManager/ActiveConnection/%s' % (
-            connection_name)
-        self.dbusmock.AddObject(ac_path, NM_AC_CON_IFACE, {}, [])
-        ac_mock = dbus.Interface(self.dbus_con.get_object(
-            NM_SERVICE, ac_path),
-            dbusmock.MOCK_IFACE)
-        ac_mock.AddProperty(
-            NM_AC_CON_IFACE, 'Connection', dbus.ObjectPath(con_path))
-
-        device_mock.AddProperty(
-            DEVICE_IFACE, 'ActiveConnection', dbus.ObjectPath(ac_path))

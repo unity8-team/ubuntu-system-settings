@@ -69,11 +69,11 @@ ItemPage {
 
                     id: warningColumn
                     spacing: units.gu(2)
-                    Icon { 
+                    Icon {
                         id: warnIcon
                         width: parent.width/4
                         height: width
-                        name: "security-alert" 
+                        name: "security-alert"
                         anchors.horizontalCenter: parent.horizontalCenter
                     }
                     Label {

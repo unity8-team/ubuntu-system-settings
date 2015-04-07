@@ -170,13 +170,13 @@ void DeviceModel::setAdapterFromPath(const QString &path)
         const QString interface = "org.bluez.Adapter";
         auto i = new QDBusInterface(service, path, interface, m_dbus);
 
-        m_dbus.connect(service, path, interface, "DeviceCreated", 
+        m_dbus.connect(service, path, interface, "DeviceCreated",
                        this, SLOT(slotDeviceCreated(const QDBusObjectPath&)));
-        m_dbus.connect(service, path, interface, "DeviceRemoved", 
+        m_dbus.connect(service, path, interface, "DeviceRemoved",
                        this, SLOT(slotDeviceRemoved(const QDBusObjectPath&)));
-        m_dbus.connect(service, path, interface, "DeviceFound", 
+        m_dbus.connect(service, path, interface, "DeviceFound",
                        this, SLOT(slotDeviceFound(const QString&, const QMap<QString,QVariant>&)));
-        m_dbus.connect(service, path, interface, "DeviceDisappeared", 
+        m_dbus.connect(service, path, interface, "DeviceDisappeared",
                        this, SLOT(slotDeviceDisappeared(const QString&)));
         m_dbus.connect(service, path, interface, "PropertyChanged",
                        this, SLOT(slotPropertyChanged(const QString&, const QDBusVariant&)));
@@ -556,7 +556,7 @@ QVariant DeviceModel::data(const QModelIndex &index, int role) const
         switch (role) {
         case Qt::DisplayRole:
             displayName = device->getName();
-            
+
             if (displayName.isEmpty())
                 displayName = device->getAddress();
 

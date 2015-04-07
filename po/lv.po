@@ -16,8 +16,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2015-03-02 05:38+0000\n"
-"X-Generator: Launchpad (build 17361)\n"
+"X-Launchpad-Export-Date: 2015-03-13 05:32+0000\n"
+"X-Generator: Launchpad (build 17389)\n"
 "Language: lv\n"
 
 #: ubuntu-system-settings.desktop.in.in.h:1 ../src/qml/MainWindow.qml:112
@@ -40,40 +40,40 @@ msgstr "Priekšskatījums"
 msgid "Remove image"
 msgstr "Izņemt attēlu"
 
-#: ../plugins/security-privacy//LockSecurity.qml:346
+#: ../plugins/cellular//PageChooseApn.qml:581
+#: ../plugins/cellular//CustomApnEditor.qml:245
+#: ../plugins/cellular//HotspotSetup.qml:85
+#: ../plugins/background//Preview.qml:102
+#: ../plugins/time-date//TimePicker.qml:173
+#: ../plugins/phone//CallForwarding.qml:139
 #: ../plugins/security-privacy//SimPin.qml:151
 #: ../plugins/security-privacy//SimPin.qml:268
-#: ../plugins/bluetooth//DisplayPasskeyDialog.qml:51
-#: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:49
-#: ../plugins/bluetooth//ProvidePasskeyDialog.qml:54
-#: ../plugins/bluetooth//ProvidePinCodeDialog.qml:55
-#: ../plugins/time-date//TimePicker.qml:173
-#: ../plugins/background//Preview.qml:102
-#: ../plugins/language//RebootNecessary.qml:47
+#: ../plugins/security-privacy//LockSecurity.qml:346
 #: ../plugins/language//DisplayLanguage.qml:97
+#: ../plugins/language//RebootNecessary.qml:47
 #: ../plugins/reset//ResetAllSettings.qml:38
-#: ../plugins/reset//ResetLauncherHome.qml:55
 #: ../plugins/reset//EraseEverything.qml:54
-#: ../plugins/phone//CallForwarding.qml:139
+#: ../plugins/reset//ResetLauncherHome.qml:55
+#: ../plugins/bluetooth//ProvidePasskeyDialog.qml:54
+#: ../plugins/bluetooth//DisplayPasskeyDialog.qml:51
+#: ../plugins/bluetooth//ProvidePinCodeDialog.qml:55
+#: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:49
 #: ../plugins/wifi//OtherNetwork.qml:244
-#: ../plugins/cellular//HotspotSetup.qml:85
-#: ../plugins/cellular//CustomApnEditor.qml:245
-#: ../plugins/cellular//PageChooseApn.qml:581
-#: ../plugins/background//Components//AddRemove.qml:42
 #: ../plugins/cellular//Components//SimEditor.qml:204
+#: ../plugins/background//Components//AddRemove.qml:42
 msgid "Cancel"
 msgstr "Atcelt"
 
-#: ../plugins/security-privacy//LockSecurity.qml:367
-#: ../plugins/time-date//TimePicker.qml:182
 #: ../plugins/background//Preview.qml:109
+#: ../plugins/time-date//TimePicker.qml:182
 #: ../plugins/phone//CallForwarding.qml:152
+#: ../plugins/security-privacy//LockSecurity.qml:367
 msgid "Set"
 msgstr "Iestatīt"
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
 #: ../plugins/background//MainPage.qml:35
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:190
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:82
 msgid "Background"
 msgstr "Fons"
 
@@ -81,10 +81,10 @@ msgstr "Fons"
 msgid "Ubuntu Art"
 msgstr "Ubuntu māksla"
 
-#: ../plugins/background//MainPage.qml:115
 #: ../plugins/cellular//PageChooseApn.qml:393
 #: ../plugins/cellular//PageChooseApn.qml:470
 #: ../plugins/cellular//PageChooseApn.qml:478
+#: ../plugins/background//MainPage.qml:115
 msgid "Custom"
 msgstr "Pielāgots"
 
@@ -92,7 +92,7 @@ msgstr "Pielāgots"
 msgid "Clear"
 msgstr "Attīrīt"
 
-#: ../plugins/bluetooth//PageComponent.qml:439
+#: ../plugins/bluetooth//PageComponent.qml:457
 msgid "Disconnect"
 msgstr "Atvienot"
 
@@ -100,8 +100,8 @@ msgstr "Atvienot"
 msgid "IP address"
 msgstr "IP adrese"
 
-#: ../plugins/wifi//PageComponent.qml:132
 #: ../plugins/wifi//PreviousNetworks.qml:27
+#: ../plugins/wifi//PageComponent.qml:132
 msgid "Previous networks"
 msgstr "Iepriekšējie tīkli"
 
@@ -227,7 +227,7 @@ msgstr "Nevarēja atrast bezvadu (Wi-Fi) tīklu"
 msgid "A secondary connection of the base connection failed"
 msgstr "Neizdevās bāzes savienojuma sekundārais savienojums"
 
-#: ../plugins/bluetooth//PageComponent.qml:112 ../plugins/wifi//Common.qml:96
+#: ../plugins/bluetooth//PageComponent.qml:130 ../plugins/wifi//Common.qml:96
 msgid "Unknown"
 msgstr "Nezināms"
 
@@ -244,16 +244,16 @@ msgstr "Tīkla nosaukums"
 msgid "Security"
 msgstr "Drošība"
 
-#: ../plugins/about//PageComponent.qml:126
-#: ../plugins/about//PageComponent.qml:127
-#: ../plugins/about//PageComponent.qml:138
-#: ../plugins/bluetooth//PageComponent.qml:142
-#: ../plugins/bluetooth//PageComponent.qml:351
-#: ../plugins/bluetooth//PageComponent.qml:375
-#: ../plugins/wifi//OtherNetwork.qml:170
 #: ../plugins/cellular//PageCarrierAndApn.qml:46
 #: ../plugins/cellular//PageCarriersAndApns.qml:51
 #: ../plugins/cellular//PageCarriersAndApns.qml:78
+#: ../plugins/bluetooth//PageComponent.qml:160
+#: ../plugins/bluetooth//PageComponent.qml:369
+#: ../plugins/bluetooth//PageComponent.qml:393
+#: ../plugins/wifi//OtherNetwork.qml:170
+#: ../plugins/about//PageComponent.qml:126
+#: ../plugins/about//PageComponent.qml:127
+#: ../plugins/about//PageComponent.qml:138
 msgid "None"
 msgstr "Nav"
 
@@ -265,9 +265,9 @@ msgstr "WPA un WPA2 personālais"
 msgid "WEP"
 msgstr "WEP"
 
+#: ../plugins/cellular//CustomApnEditor.qml:222
 #: ../plugins/wifi//NetworkDetails.qml:64
 #: ../plugins/wifi//OtherNetwork.qml:178
-#: ../plugins/cellular//CustomApnEditor.qml:222
 msgid "Password"
 msgstr "Parole"
 
@@ -276,15 +276,15 @@ msgstr "Parole"
 msgid "Show password"
 msgstr "Rādīt paroli"
 
-#: ../plugins/bluetooth//PageComponent.qml:439
+#: ../plugins/bluetooth//PageComponent.qml:457
 #: ../plugins/wifi//OtherNetwork.qml:260
 msgid "Connect"
 msgstr "Savienoties"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: ../plugins/wifi//PageComponent.qml:28
 #: ../plugins/battery//PageComponent.qml:332
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:280
+#: ../plugins/wifi//PageComponent.qml:28
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:270
 msgid "Wi-Fi"
 msgstr "Bezvadu (Wi-Fi)"
 
@@ -296,7 +296,7 @@ msgstr "Savienoties ar slēptu tīklu…"
 msgid "Network details"
 msgstr "Informācija par tīklu"
 
-#: ../plugins/bluetooth//PageComponent.qml:371
+#: ../plugins/bluetooth//PageComponent.qml:389
 #: ../plugins/wifi//NetworkDetails.qml:45
 msgid "Name"
 msgstr "Nosaukums"
@@ -305,27 +305,27 @@ msgstr "Nosaukums"
 msgid "Last connected"
 msgstr "Pēdējo reizi savienojies"
 
+#: ../plugins/system-update//PageComponent.qml:750
+#: ../plugins/system-update//Configuration.qml:52
+#: ../plugins/battery//SleepValues.qml:109
+#: ../plugins/battery//PageComponent.qml:304
+#: ../plugins/battery//PageComponent.qml:313
 #: ../plugins/security-privacy//PageComponent.qml:129
 #: ../plugins/security-privacy//PhoneLocking.qml:78
 #: ../plugins/security-privacy//PhoneLocking.qml:87
-#: ../plugins/about//PageComponent.qml:191
-#: ../plugins/system-update//PageComponent.qml:750
-#: ../plugins/system-update//Configuration.qml:52
 #: ../plugins/wifi//NetworkDetails.qml:58
-#: ../plugins/battery//PageComponent.qml:304
-#: ../plugins/battery//PageComponent.qml:313
-#: ../plugins/battery//SleepValues.qml:109
+#: ../plugins/about//PageComponent.qml:191
 msgid "Never"
 msgstr "Nekad"
 
-#: ../plugins/wifi//NetworkDetails.qml:88
 #: ../plugins/wifi//NetworkDetailsBrief.qml:42
+#: ../plugins/wifi//NetworkDetails.qml:88
 msgid "Forget network"
 msgstr "Aizmirst tīklu"
 
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
 #: ../plugins/notifications//PageComponent.qml:29
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:92
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:154
 msgid "Notifications"
 msgstr "Paziņojumi"
 
@@ -343,7 +343,7 @@ msgstr "Apturēt atskaņošanu"
 
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
 #: ../plugins/sound//PageComponent.qml:37
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:38
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:326
 msgid "Sound"
 msgstr "Skaņa"
 
@@ -373,8 +373,8 @@ msgstr "Vibrēt, kad zvana"
 msgid "Vibrate in Silent Mode"
 msgstr "Vibrēt klusuma režīmā"
 
-#: ../plugins/phone//PageComponent.qml:102
 #: ../plugins/sound//PageComponent.qml:168
+#: ../plugins/phone//PageComponent.qml:102
 msgid "Dialpad sounds"
 msgstr "Ciparnīcas skaņas"
 
@@ -395,8 +395,8 @@ msgstr "Vibrēt ar īsziņas skaņu"
 msgid "Other sounds:"
 msgstr "Citas skaņas:"
 
-#: ../plugins/sound//PageComponent.qml:215
 #: ../plugins/language//PageComponent.qml:215
+#: ../plugins/sound//PageComponent.qml:215
 msgid "Keyboard sound"
 msgstr "Tastatūras skaņa"
 
@@ -410,7 +410,7 @@ msgstr "Tālrunis ir klusuma režīmā."
 
 #. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
 #: ../plugins/reset//PageComponent.qml:32
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:250
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:234
 msgid "Reset phone"
 msgstr "Atstatīt tālruni"
 
@@ -461,7 +461,7 @@ msgstr "Dzēst un atstatīt visu"
 
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
 #: ../plugins/battery//PageComponent.qml:34
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:328
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:98
 msgid "Battery"
 msgstr "Baterija"
 
@@ -517,8 +517,8 @@ msgstr "Pilnībā uzlādēts"
 msgid "Charge level"
 msgstr "Uzlādes līmenis"
 
-#: ../plugins/about//Storage.qml:199 ../plugins/battery//PageComponent.qml:103
-#: ../plugins/battery//PageComponent.qml:272
+#: ../plugins/battery//PageComponent.qml:103
+#: ../plugins/battery//PageComponent.qml:272 ../plugins/about//Storage.qml:199
 msgid "N/A"
 msgstr "Nav pieejams"
 
@@ -547,27 +547,27 @@ msgstr "Veidi, kā samazināt baterijas enerģijas patēriņu:"
 msgid "Display brightness"
 msgstr "Ekrāna gaišums"
 
-#: ../plugins/security-privacy//PhoneLocking.qml:68
 #: ../plugins/battery//PageComponent.qml:295
+#: ../plugins/security-privacy//PhoneLocking.qml:68
 msgid "Lock when idle"
 msgstr "Bloķēt, kad neaktīvs"
 
-#: ../plugins/security-privacy//PhoneLocking.qml:69
 #: ../plugins/battery//PageComponent.qml:295
+#: ../plugins/security-privacy//PhoneLocking.qml:69
 msgid "Sleep when idle"
 msgstr "Iesnausties, kad neaktīvs"
 
 #. TRANSLATORS: %1 is the number of minutes
-#: ../plugins/security-privacy//PageComponent.qml:126
-#: ../plugins/security-privacy//PageComponent.qml:135
-#: ../plugins/battery//PageComponent.qml:301
-#: ../plugins/battery//PageComponent.qml:310
 #: ../plugins/battery//SleepValues.qml:86
 #: ../plugins/battery//SleepValues.qml:90
 #: ../plugins/battery//SleepValues.qml:94
 #: ../plugins/battery//SleepValues.qml:98
 #: ../plugins/battery//SleepValues.qml:102
 #: ../plugins/battery//SleepValues.qml:106
+#: ../plugins/battery//PageComponent.qml:301
+#: ../plugins/battery//PageComponent.qml:310
+#: ../plugins/security-privacy//PageComponent.qml:126
+#: ../plugins/security-privacy//PageComponent.qml:135
 #, qt-format
 msgid "After %1 minute"
 msgid_plural "After %1 minutes"
@@ -576,10 +576,10 @@ msgstr[1] "Pēc %1 minūtēm"
 msgstr[2] "Pēc %1 minūtēm"
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
-#: ../plugins/bluetooth//PageComponent.qml:32
-#: ../plugins/bluetooth//PageComponent.qml:173
 #: ../plugins/battery//PageComponent.qml:361
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:116
+#: ../plugins/bluetooth//PageComponent.qml:32
+#: ../plugins/bluetooth//PageComponent.qml:191
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:246
 msgid "Bluetooth"
 msgstr "Bluetooth"
 
@@ -640,7 +640,7 @@ msgstr "Apstiprināt"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #: ../plugins/language//PageComponent.qml:34
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:224
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:208
 msgid "Language & Text"
 msgstr "Valoda un teksts"
 
@@ -648,8 +648,8 @@ msgstr "Valoda un teksts"
 msgid "Display language…"
 msgstr "Saskarnes valoda…"
 
-#: ../plugins/language//KeyboardLayouts.qml:26
 #: ../plugins/language//PageComponent.qml:118
+#: ../plugins/language//KeyboardLayouts.qml:26
 msgid "Keyboard layouts"
 msgstr "Tastatūras izkārtojumi"
 
@@ -692,9 +692,9 @@ msgstr "Pašreizējais izkārtojums:"
 msgid "All layouts available:"
 msgstr "Visi pieejamie izkārtojumi:"
 
-#: ../plugins/phone//MultiSim.qml:45 ../plugins/phone//MultiSim.qml:81
-#: ../plugins/phone//SingleSim.qml:40 ../plugins/phone//CallWaiting.qml:31
-#: ../plugins/phone//CallWaiting.qml:74 ../plugins/phone//NoSims.qml:34
+#: ../plugins/phone//CallWaiting.qml:31 ../plugins/phone//CallWaiting.qml:74
+#: ../plugins/phone//NoSims.qml:34 ../plugins/phone//MultiSim.qml:45
+#: ../plugins/phone//MultiSim.qml:81 ../plugins/phone//SingleSim.qml:40
 msgid "Call waiting"
 msgstr "Zvana gaidīšana"
 
@@ -712,10 +712,9 @@ msgstr ""
 msgid "%1 Services"
 msgstr "%1 pakalpojumi"
 
-#: ../plugins/phone//MultiSim.qml:35 ../plugins/phone//MultiSim.qml:71
-#: ../plugins/phone//CallForwarding.qml:32
-#: ../plugins/phone//CallForwarding.qml:76 ../plugins/phone//SingleSim.qml:33
-#: ../plugins/phone//NoSims.qml:28
+#: ../plugins/phone//NoSims.qml:28 ../plugins/phone//CallForwarding.qml:32
+#: ../plugins/phone//CallForwarding.qml:76 ../plugins/phone//MultiSim.qml:35
+#: ../plugins/phone//MultiSim.qml:71 ../plugins/phone//SingleSim.qml:33
 msgid "Call forwarding"
 msgstr "Zvanu pārsūtīšana"
 
@@ -740,15 +739,15 @@ msgstr "Pēdējais zvanītais %1"
 msgid "Call"
 msgstr "Zvanīt"
 
-#: ../plugins/phone//MultiSim.qml:55 ../plugins/phone//MultiSim.qml:91
-#: ../plugins/phone//NoSims.qml:42
+#: ../plugins/phone//NoSims.qml:42 ../plugins/phone//MultiSim.qml:55
+#: ../plugins/phone//MultiSim.qml:91
 msgid "Services"
 msgstr "Pakalpojumi"
 
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
-#: ../plugins/bluetooth//PageComponent.qml:119
 #: ../plugins/phone//PageComponent.qml:32
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:262
+#: ../plugins/bluetooth//PageComponent.qml:137
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:124
 msgid "Phone"
 msgstr "Tālrunis"
 
@@ -758,7 +757,7 @@ msgstr "SIM"
 
 #. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
 #: ../plugins/brightness//PageComponent.qml:34
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:206
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:22
 msgid "Brightness"
 msgstr "Gaišums"
 
@@ -785,15 +784,15 @@ msgstr "Operators"
 msgid "Choose carrier:"
 msgstr "Izvēlēties operatoru:"
 
+#: ../plugins/cellular//PageChooseCarrier.qml:153
 #: ../plugins/time-date//ChooseTimeZone.qml:47
 #: ../plugins/time-date//PageComponent.qml:72
-#: ../plugins/cellular//PageChooseCarrier.qml:153
 msgid "Automatically"
 msgstr "Automātiski"
 
-#: ../plugins/security-privacy//PageComponent.qml:138
 #: ../plugins/time-date//ChooseTimeZone.qml:47
 #: ../plugins/time-date//PageComponent.qml:72
+#: ../plugins/security-privacy//PageComponent.qml:138
 msgid "Manually"
 msgstr "Pašrocīgi"
 
@@ -801,10 +800,10 @@ msgstr "Pašrocīgi"
 msgid "Searching for carriers…"
 msgstr "Meklēt operatorus…"
 
+#: ../plugins/cellular//PageChooseApn.qml:31
 #: ../plugins/cellular//PageCarrierAndApn.qml:57
 #: ../plugins/cellular//PageCarriersAndApns.qml:62
 #: ../plugins/cellular//PageCarriersAndApns.qml:89
-#: ../plugins/cellular//PageChooseApn.qml:31
 msgid "APN"
 msgstr "APN"
 
@@ -820,8 +819,8 @@ msgstr "Pielāgots interneta APN…"
 msgid "MMS APN:"
 msgstr "MMS APN:"
 
-#: ../plugins/cellular//CustomApnEditor.qml:143
 #: ../plugins/cellular//PageChooseApn.qml:467
+#: ../plugins/cellular//CustomApnEditor.qml:143
 msgid "Same APN as for Internet"
 msgstr "Tāds pats APN kā internetam"
 
@@ -888,7 +887,7 @@ msgstr "Ieslēgt"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
 #: ../plugins/cellular//PageComponent.qml:33
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:300
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:54
 msgid "Cellular"
 msgstr "Mobilais"
 
@@ -938,14 +937,14 @@ msgstr "Atslēga (jābūt vismaz 8 rakstzīmēm)"
 msgid "Show key"
 msgstr "Rādīt atslēgu"
 
-#: ../plugins/security-privacy//LockSecurity.qml:365
-#: ../plugins/security-privacy//SimPin.qml:159
 #: ../plugins/cellular//HotspotSetup.qml:94
+#: ../plugins/security-privacy//SimPin.qml:159
+#: ../plugins/security-privacy//LockSecurity.qml:365
 msgid "Change"
 msgstr "Mainīt"
 
-#: ../plugins/security-privacy//LockSecurity.qml:32
 #: ../plugins/security-privacy//PhoneLocking.qml:49
+#: ../plugins/security-privacy//LockSecurity.qml:32
 #: ../plugins/about//DevMode.qml:116
 msgid "Lock security"
 msgstr "Bloķēšanas drošība"
@@ -1020,8 +1019,8 @@ msgstr "Vilkšana (nav drošības)"
 msgid "4-digit passcode"
 msgstr "4 ciparu piekļuves kods"
 
-#: ../plugins/security-privacy//LockSecurity.qml:429
 #: ../plugins/security-privacy//PhoneLocking.qml:47
+#: ../plugins/security-privacy//LockSecurity.qml:429
 msgid "Passphrase"
 msgstr "Parole"
 
@@ -1037,9 +1036,9 @@ msgstr "4 ciparu piekļuves kods…"
 msgid "Passphrase…"
 msgstr "Parole…"
 
-#: ../plugins/security-privacy//PageComponent.qml:147
 #: ../plugins/security-privacy//SimPin.qml:36
 #: ../plugins/security-privacy//SimPin.qml:336
+#: ../plugins/security-privacy//PageComponent.qml:147
 msgid "SIM PIN"
 msgstr "SIM PIN"
 
@@ -1171,7 +1170,7 @@ msgstr "Citas lietotnes un funkcijas jums prasīs atbloķēt."
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
 #: ../plugins/security-privacy//PageComponent.qml:37
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:14
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:184
 msgid "Security & Privacy"
 msgstr "Drošība un privātums"
 
@@ -1339,7 +1338,7 @@ msgid "Apps that you have granted and have requested access to:"
 msgstr "Lietotnes, kurām esat devis un kuras ir pieprasījušas piekļuvi pie:"
 
 #: ../plugins/security-privacy//AppAccess.qml:41
-#: ../plugins/bluetooth//PageComponent.qml:131
+#: ../plugins/bluetooth//PageComponent.qml:149
 msgid "Camera"
 msgstr "Kamera"
 
@@ -1364,10 +1363,10 @@ msgstr "%1/%2"
 msgid "0"
 msgstr "0"
 
-#: ../plugins/bluetooth//DisplayPasskeyDialog.qml:26
-#: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:28
 #: ../plugins/bluetooth//ProvidePasskeyDialog.qml:28
+#: ../plugins/bluetooth//DisplayPasskeyDialog.qml:26
 #: ../plugins/bluetooth//ProvidePinCodeDialog.qml:28
+#: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:28
 msgid "Bluetooth Pairing Request"
 msgstr "Bluetooth sapārošanas pieprasījums"
 
@@ -1392,132 +1391,132 @@ msgstr "Lūdzu, apstipriniet, ka uz “%1” redzamais PIN atbilst šim"
 msgid "Confirm PIN"
 msgstr "Apstiprināt PIN"
 
-#: ../plugins/bluetooth//PageComponent.qml:108
+#: ../plugins/bluetooth//PageComponent.qml:126
 msgid "Connected"
 msgstr "Savienots"
 
-#: ../plugins/bluetooth//PageComponent.qml:109
+#: ../plugins/bluetooth//PageComponent.qml:127
 msgid "Connecting…"
 msgstr "Savienojas…"
 
-#: ../plugins/bluetooth//PageComponent.qml:110
+#: ../plugins/bluetooth//PageComponent.qml:128
 msgid "Disconnecting…"
 msgstr "Atvienojas…"
 
-#: ../plugins/bluetooth//PageComponent.qml:111
+#: ../plugins/bluetooth//PageComponent.qml:129
 msgid "Disconnected"
 msgstr "Atvienots"
 
-#: ../plugins/bluetooth//PageComponent.qml:118
+#: ../plugins/bluetooth//PageComponent.qml:136
 msgid "Computer"
 msgstr "Dators"
 
-#: ../plugins/bluetooth//PageComponent.qml:120
+#: ../plugins/bluetooth//PageComponent.qml:138
 msgid "Modem"
 msgstr "Modems"
 
-#: ../plugins/bluetooth//PageComponent.qml:121 ../src/qml/MainWindow.qml:147
+#: ../plugins/bluetooth//PageComponent.qml:139 ../src/qml/MainWindow.qml:147
 msgid "Network"
 msgstr "Tīkls"
 
-#: ../plugins/bluetooth//PageComponent.qml:122
+#: ../plugins/bluetooth//PageComponent.qml:140
 msgid "Headset"
 msgstr "Austiņas ar mikrofonu"
 
-#: ../plugins/bluetooth//PageComponent.qml:123
+#: ../plugins/bluetooth//PageComponent.qml:141
 msgid "Headphones"
 msgstr "Austiņas"
 
-#: ../plugins/bluetooth//PageComponent.qml:124
+#: ../plugins/bluetooth//PageComponent.qml:142
 msgid "Video"
 msgstr "Video"
 
-#: ../plugins/bluetooth//PageComponent.qml:125
+#: ../plugins/bluetooth//PageComponent.qml:143
 msgid "Other Audio"
 msgstr "Cits audio"
 
-#: ../plugins/bluetooth//PageComponent.qml:126
+#: ../plugins/bluetooth//PageComponent.qml:144
 msgid "Joypad"
 msgstr "Spēļu vadierīce"
 
-#: ../plugins/bluetooth//PageComponent.qml:127
+#: ../plugins/bluetooth//PageComponent.qml:145
 msgid "Keyboard"
 msgstr "Tastatūra"
 
-#: ../plugins/bluetooth//PageComponent.qml:128
+#: ../plugins/bluetooth//PageComponent.qml:146
 msgid "Tablet"
 msgstr "Planšete"
 
-#: ../plugins/bluetooth//PageComponent.qml:129
+#: ../plugins/bluetooth//PageComponent.qml:147
 msgid "Mouse"
 msgstr "Pele"
 
-#: ../plugins/bluetooth//PageComponent.qml:130
+#: ../plugins/bluetooth//PageComponent.qml:148
 msgid "Printer"
 msgstr "Printeris"
 
-#: ../plugins/bluetooth//PageComponent.qml:132
+#: ../plugins/bluetooth//PageComponent.qml:150
 msgid "Other"
 msgstr "Cits"
 
-#: ../plugins/bluetooth//PageComponent.qml:138
+#: ../plugins/bluetooth//PageComponent.qml:156
 msgid "Excellent"
 msgstr "Teicami"
 
-#: ../plugins/bluetooth//PageComponent.qml:139
+#: ../plugins/bluetooth//PageComponent.qml:157
 msgid "Good"
 msgstr "Labi"
 
-#: ../plugins/bluetooth//PageComponent.qml:140
+#: ../plugins/bluetooth//PageComponent.qml:158
 msgid "Fair"
 msgstr "Mēreni"
 
-#: ../plugins/bluetooth//PageComponent.qml:141
+#: ../plugins/bluetooth//PageComponent.qml:159
 msgid "Poor"
 msgstr "Vāji"
 
-#: ../plugins/bluetooth//PageComponent.qml:202
+#: ../plugins/bluetooth//PageComponent.qml:220
 msgid "Discoverable"
 msgstr "Atklājams"
 
-#: ../plugins/bluetooth//PageComponent.qml:202
+#: ../plugins/bluetooth//PageComponent.qml:220
 msgid "Not discoverable"
 msgstr "Nav atklājams"
 
-#: ../plugins/bluetooth//PageComponent.qml:233
+#: ../plugins/bluetooth//PageComponent.qml:251
 msgid "Connected devices:"
 msgstr "Savienotās ierīces:"
 
-#: ../plugins/bluetooth//PageComponent.qml:272
+#: ../plugins/bluetooth//PageComponent.qml:290
 msgid "Connect another device:"
 msgstr "Pievienot citu ierīci:"
 
-#: ../plugins/bluetooth//PageComponent.qml:272
+#: ../plugins/bluetooth//PageComponent.qml:290
 msgid "Connect a device:"
 msgstr "Pievienot ierīci:"
 
-#: ../plugins/bluetooth//PageComponent.qml:306
+#: ../plugins/bluetooth//PageComponent.qml:324
 msgid "None detected"
 msgstr "Nav atrasta"
 
-#: ../plugins/bluetooth//PageComponent.qml:314
-#: ../plugins/bluetooth//PageComponent.qml:425
+#: ../plugins/bluetooth//PageComponent.qml:332
+#: ../plugins/bluetooth//PageComponent.qml:443
 msgid "Connect automatically when detected:"
 msgstr "Automātiski savienoties, kad atrod:"
 
-#: ../plugins/bluetooth//PageComponent.qml:392
+#: ../plugins/bluetooth//PageComponent.qml:410
 msgid "Type"
 msgstr "Veids"
 
-#: ../plugins/bluetooth//PageComponent.qml:416
+#: ../plugins/bluetooth//PageComponent.qml:434
 msgid "Status"
 msgstr "Statuss"
 
-#: ../plugins/bluetooth//PageComponent.qml:420
+#: ../plugins/bluetooth//PageComponent.qml:438
 msgid "Signal Strength"
 msgstr "Signāla stiprums"
 
-#: ../plugins/bluetooth//PageComponent.qml:458
+#: ../plugins/bluetooth//PageComponent.qml:476
 msgid "Forget this device"
 msgstr "Aizmirst šo ierīci"
 
@@ -1592,7 +1591,7 @@ msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: ../plugins/about//PageComponent.qml:34
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:56
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:290
 msgid "About this phone"
 msgstr "Par šo tālruni"
 
@@ -1634,7 +1633,7 @@ msgstr "Pārbaudīt atjauninājumus"
 msgid "Legal:"
 msgstr "Juridiskā informācija:"
 
-#: ../plugins/about//Software.qml:11 ../plugins/about//PageComponent.qml:212
+#: ../plugins/about//PageComponent.qml:212 ../plugins/about//Software.qml:11
 msgid "Software licenses"
 msgstr "Programmatūras licences"
 
@@ -1732,7 +1731,7 @@ msgstr "Gads"
 
 #. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
 #: ../plugins/time-date//PageComponent.qml:29
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:180
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:114
 msgid "Time & Date"
 msgstr "Laiks un datums"
 
@@ -1746,7 +1745,7 @@ msgstr "Iestatīt laiku un datumu"
 
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
 #: ../plugins/system-update//PageComponent.qml:37
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:142
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:4
 msgid "Updates"
 msgstr "Atjauninājumi"
 
@@ -2057,12 +2056,13 @@ msgstr "4 skaitļi"
 msgid "Numbers and letters"
 msgstr "Skaitļi un burti"
 
-#: ../wizard/qml/Pages//passwd-confirm.qml:75
-#: ../wizard/qml/Pages//passwd-set.qml:83 ../wizard/qml/Pages//40-wifi.qml:212
-#: ../wizard/qml/Pages//30-passwd-type.qml:112
-#: ../wizard/qml/Pages//60-reporting.qml:48
-#: ../wizard/qml/Pages//50-location.qml:92
 #: ../wizard/qml/Pages//10-welcome.qml:85
+#: ../wizard/qml/Pages//60-reporting.qml:48
+#: ../wizard/qml/Pages//40-wifi.qml:212
+#: ../wizard/qml/Pages//30-passwd-type.qml:112
+#: ../wizard/qml/Pages//passwd-set.qml:83
+#: ../wizard/qml/Pages//passwd-confirm.qml:75
+#: ../wizard/qml/Pages//50-location.qml:92
 msgid "Continue"
 msgstr "Turpināt"
 
@@ -2213,549 +2213,549 @@ msgid "%1  〉"
 msgstr "%1  〉"
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:192
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:84
 msgid "appearance"
 msgstr "izskats"
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:194
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:86
 msgid "background"
 msgstr "fons"
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:196
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:88
 msgid "wallpaper"
 msgstr "ekrāntapetes"
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:198
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:90
 msgid "art"
 msgstr "māksla"
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:200
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:92
 msgid "photo"
 msgstr "fotogrāfija"
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:202
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:94
 msgid "picture"
 msgstr "bilde"
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:204
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:96
 msgid "image"
 msgstr "attēls"
 
 #. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:218
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:178
 msgid "Accessibility"
 msgstr "Pieejamība"
 
 #. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:220
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:180
 msgid "accessibility"
 msgstr "pieejamība"
 
 #. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:222
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:182
 msgid "a11y"
 msgstr "a11y"
 
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:12
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:282
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:304
+#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:52
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:58
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:272
 msgid "network"
 msgstr "tīkls"
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:132
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:284
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:262
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:274
 msgid "wireless"
 msgstr "bezvadu"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:286
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:276
 msgid "wifi"
 msgstr "wifi"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:288
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:278
 msgid "wi-fi"
 msgstr "wi-fi"
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:134
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:290
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:264
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:280
 msgid "connect"
 msgstr "savienoties"
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:136
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:292
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:266
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:282
 msgid "disconnect"
 msgstr "atvienoties"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:294
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:284
 msgid "hidden"
 msgstr "slēpts"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:296
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:286
 msgid "ip"
 msgstr "ip"
 
-#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:72
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:298
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:288
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:306
 msgid "address"
 msgstr "adrese"
 
-#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:80
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:94
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:146
+#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:8
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:156
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:314
 msgid "software"
 msgstr "programmatūra"
 
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:96
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:158
 msgid "notifications"
 msgstr "paziņojumi"
 
-#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:98
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:150
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:170
+#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:12
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:152
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:160
 msgid "apps"
 msgstr "lietotnes"
 
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:100
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:162
 msgid "authorize"
 msgstr "pilnvarot"
 
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:102
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:164
 msgid "alerts"
 msgstr "trauksmes"
 
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:104
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:166
 msgid "permissions"
 msgstr "atļaujas"
 
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:106
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:168
 msgid "badges"
 msgstr "žetoni"
 
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:108
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:170
 msgid "facebook"
 msgstr "facebook"
 
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:110
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:172
 msgid "twitter"
 msgstr "twitter"
 
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:112
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:174
 msgid "flickr"
 msgstr "flickr"
 
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:114
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:176
 msgid "gmail"
 msgstr "gmail"
 
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:40
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:328
 msgid "sound"
 msgstr "skaņa"
 
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:42
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:330
 msgid "silent"
 msgstr "klusums"
 
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:44
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:332
 msgid "ringtone"
 msgstr "melodija"
 
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:46
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:334
 msgid "vibrate"
 msgstr "vibrēt"
 
-#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:48
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:274
+#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:136
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:336
 msgid "dialpad"
 msgstr "ciparnīca"
 
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:50
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:338
 msgid "message"
 msgstr "ziņojums"
 
-#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:52
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:228
+#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:212
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:340
 msgid "keyboard"
 msgstr "tastatūra"
 
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:54
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:342
 msgid "volume"
 msgstr "skaļums"
 
 #. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:252
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:236
 msgid "reset"
 msgstr "atiestatīt"
 
 #. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:254
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:238
 msgid "erase"
 msgstr "dzēst"
 
 #. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:256
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:240
 msgid "factory"
 msgstr "rūpnīca"
 
 #. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:258
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:242
 msgid "clear"
 msgstr "attīrīt"
 
 #. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:260
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:244
 msgid "restore"
 msgstr "atjaunot"
 
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:330
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:100
 msgid "battery"
 msgstr "baterija"
 
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:332
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:102
 msgid "power"
 msgstr "strāva"
 
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:334
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:104
 msgid "charge"
 msgstr "uzlāde"
 
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:336
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:106
 msgid "idle"
 msgstr "neaktīvs"
 
-#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:20
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:166
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:338
+#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:108
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:148
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:190
 msgid "lock"
 msgstr "bloķēt"
 
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:340
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:110
 msgid "disable"
 msgstr "izslēgt"
 
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:342
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:112
 msgid "enable"
 msgstr "ieslēgt"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:226
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:210
 msgid "language"
 msgstr "valoda"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:230
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:214
 msgid "spellcheck"
 msgstr "pareizrakstība"
 
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:152
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:188
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:214
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:232
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:14
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:30
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:122
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:216
 msgid "automatic"
 msgstr "automātiski"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:234
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:218
 msgid "correct"
 msgstr "pareizs"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:236
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:220
 msgid "suggestions"
 msgstr "ieteikumi"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:238
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:222
 msgid "capitalization"
 msgstr "lielie burti"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:240
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:224
 msgid "punctuation"
 msgstr "interpunkcija"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:242
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:226
 msgid "layout"
 msgstr "izkārtojums"
 
 #. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:210
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:244
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:26
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:228
 msgid "display"
 msgstr "ekrāns"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:246
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:230
 msgid "words"
 msgstr "vārdi"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:248
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:232
 msgid "vibration"
 msgstr "vibrācija"
 
-#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:64
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:264
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:126
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:298
 msgid "phone"
 msgstr "tālrunis"
 
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:266
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:128
 msgid "services"
 msgstr "pakalpojumi"
 
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:268
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:130
 msgid "forwarding"
 msgstr "pārsūtīšana"
 
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:270
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:132
 msgid "waiting"
 msgstr "gaidīšana"
 
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:272
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:134
 msgid "call"
 msgstr "zvans"
 
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:276
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:138
 msgid "shortcuts"
 msgstr "saīsnes"
 
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:278
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:140
 msgid "numbers"
 msgstr "numuri"
 
 #. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:208
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:24
 msgid "brightness"
 msgstr "gaišums"
 
-#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:168
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:212
+#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:28
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:150
 msgid "screen"
 msgstr "ekrāns"
 
 #. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:216
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:32
 msgid "adjust"
 msgstr "pielāgot"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:302
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:56
 msgid "cellular"
 msgstr "mobilais"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:306
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:60
 msgid "mobile"
 msgstr "mobilais"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:308
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:62
 msgid "gsm"
 msgstr "gsm"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:310
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:64
 msgid "data"
 msgstr "dati"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:312
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:66
 msgid "carrier"
 msgstr "operators"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:314
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:68
 msgid "4g"
 msgstr "4g"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:316
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:70
 msgid "3g"
 msgstr "3g"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:318
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:72
 msgid "2g"
 msgstr "2g"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:320
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:74
 msgid "lte"
 msgstr "lte"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:322
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:76
 msgid "apn"
 msgstr "apn"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:324
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:78
 msgid "roam"
 msgstr "viesabonēšana"
 
-#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:22
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:326
+#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:80
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:192
 msgid "sim"
 msgstr "sim"
 
 #. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:172
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:34
 msgid "Example"
 msgstr "Piemērs"
 
 #. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:174
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:36
 msgid "example"
 msgstr "piemērs"
 
 #. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:176
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:38
 msgid "test"
 msgstr "tests"
 
 #. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:178
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:40
 msgid "sample"
 msgstr "paraugs"
 
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:2
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:42
 msgid "Flight Mode"
 msgstr "Lidmašīnas režīms"
 
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:4
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:44
 msgid "flight"
 msgstr "lidmašīna"
 
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:6
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:46
 msgid "plane"
 msgstr "lidmašīna"
 
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:8
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:48
 msgid "offline"
 msgstr "nesaistē"
 
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:10
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:50
 msgid "airplane"
 msgstr "lidmašīna"
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:16
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:186
 msgid "security"
 msgstr "drošība"
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:18
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:188
 msgid "privacy"
 msgstr "privātums"
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:24
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:194
 msgid "pin"
 msgstr "pin"
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:26
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:196
 msgid "code"
 msgstr "kods"
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:28
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:198
 msgid "password"
 msgstr "parole"
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:30
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:200
 msgid "passphrase"
 msgstr "parole"
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:32
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:202
 msgid "swipe"
 msgstr "vilkt"
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:34
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:204
 msgid "allow"
 msgstr "atļaut"
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:36
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:206
 msgid "access"
 msgstr "pieeja"
 
@@ -2765,164 +2765,164 @@ msgid "Orientation Lock"
 msgstr "Orientācijas slēdzis"
 
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:162
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:144
 msgid "rotation"
 msgstr "rotācija"
 
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:164
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:146
 msgid "orientation"
 msgstr "orientācija"
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:118
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:248
 msgid "bluetooth"
 msgstr "bluetooth"
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:120
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:250
 msgid "headset"
 msgstr "austiņas un mikrofons"
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:122
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:252
 msgid "pair"
 msgstr "sapārot"
 
-#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:60
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:124
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:254
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:294
 msgid "device"
 msgstr "ierīce"
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:126
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:256
 msgid "discover"
 msgstr "atklāt"
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:128
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:258
 msgid "car"
 msgstr "auto"
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:130
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:260
 msgid "handsfree"
 msgstr "bezroku"
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:138
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:268
 msgid "stereo"
 msgstr "stereo"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:58
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:292
 msgid "about"
 msgstr "par"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:62
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:296
 msgid "info"
 msgstr "info"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:66
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:300
 msgid "number"
 msgstr "numurs"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:68
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:302
 msgid "imei"
 msgstr "imei"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:70
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:304
 msgid "serial"
 msgstr "seriālais"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:74
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:308
 msgid "mac"
 msgstr "mac"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:76
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:310
 msgid "licenses"
 msgstr "licences"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:78
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:312
 msgid "developer"
 msgstr "izstrādātājs"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:82
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:316
 msgid "storage"
 msgstr "krātuve"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:84
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:318
 msgid "disk"
 msgstr "disks"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:86
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:320
 msgid "space"
 msgstr "vieta"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:88
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:322
 msgid "version"
 msgstr "versija"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:90
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:324
 msgid "revision"
 msgstr "rediģējums"
 
 #. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:182
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:116
 msgid "time"
 msgstr "laiks"
 
 #. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:184
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:118
 msgid "date"
 msgstr "datums"
 
 #. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:186
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:120
 msgid "timezone"
 msgstr "laika josla"
 
 #. TRANSLATORS: This is a keyword or name for the update-notification plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:140
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:2
 msgid "Updates available"
 msgstr "Pieejami atjauninājumi"
 
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:144
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:6
 msgid "system"
 msgstr "sistēma"
 
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:148
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:10
 msgid "update"
 msgstr "atjaunināt"
 
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:154
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:16
 msgid "download"
 msgstr "lejupielādēt"
 
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:156
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:18
 msgid "upgrade"
 msgstr "uzlabot"
 
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150224/obj-x86_64-linux-gnu/po/settings.js:158
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:20
 msgid "click"
 msgstr "spiest"
 

@@ -28,7 +28,7 @@
 void BackendPlugin::registerTypes(const char *uri)
 {
     Q_ASSERT(uri == QLatin1String("Ubuntu.SystemSettings.Bluetooth"));
-    
+
     qmlRegisterType<Bluetooth>(uri, 1, 0, "UbuntuBluetoothPanel");
     qmlRegisterType<Device>(uri, 1, 0, "Device");
     qmlRegisterType<Device>(uri, 1, 0, "Agent");

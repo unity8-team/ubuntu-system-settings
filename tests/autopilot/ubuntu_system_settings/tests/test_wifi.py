@@ -7,7 +7,9 @@
 
 from __future__ import absolute_import
 from autopilot.matchers import Eventually
-from dbusmock.templates.networkmanager import DEVICE_IFACE
+from dbusmock.templates.networkmanager import (DEVICE_IFACE,
+                                               InfrastructureMode,
+                                               NM80211ApSecurityFlags)
 from testtools.matchers import Equals
 from time import sleep
 from ubuntu_system_settings.tests import WifiBaseTestCase
@@ -168,30 +170,27 @@ class WifiTestCase(WifiBaseTestCase):
                 objectName='connectToHiddenNetwork').visible),
             Eventually(Equals(False)), 'other net dialog not hidden')
 
-    """Note: this test does not actually remove previous networks from the UI.
-    The NetworkManager dbusmock template does not currently support deletion
-    of connections."""
     def test_remove_previous_network(self):
         click_method = self.main_view.scroll_to_and_click
-        previous_networks = [{
-            'ssid': 'Series of Tubes',
-            'connection_name': 'conn_0'
-        }, {
-            'ssid': 'Mi-Fi',
-            'connection_name': 'conn_1'
-        }, {
-            'ssid': 'dev/null',
-            'connection_name': 'conn_2'
-        }]
 
-        self.add_previous_networks(previous_networks)
+        access_points = ['Series of Tubes', 'dev/null', 'Mi-Fi',
+                         'MonkeySphere']
+
+        for idx, ap in enumerate(access_points):
+            self.dbusmock.AddAccessPoint(
+                self.device_path, 'Mock_AP%d' % idx, ap, '00:23:F8:7E:12:BB',
+                InfrastructureMode.NM_802_11_MODE_INFRA, 2425, 5400, 82,
+                NM80211ApSecurityFlags.NM_802_11_AP_SEC_KEY_MGMT_PSK)
+
+            self.dbusmock.AddWiFiConnection(
+                self.device_path, 'Mock_Con%d' % idx, ap, '')
 
         self.wifi_page.remove_previous_network(
-            previous_networks[0]['ssid'], scroll_to_and_click=click_method)
+            access_points[0], scroll_to_and_click=click_method)
 
         self.main_view.go_back()
 
         # wait for ui to update
         sleep(2)
         self.wifi_page.remove_previous_network(
-            previous_networks[2]['ssid'], scroll_to_and_click=click_method)
+            access_points[2], scroll_to_and_click=click_method)

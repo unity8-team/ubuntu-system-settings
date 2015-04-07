@@ -354,7 +354,7 @@ void Device::updateIcon()
     case Type::Computer:
         setIconName("image://theme/computer-symbolic");
         break;
-    default: 
+    default:
         setIconName(QString("image://theme/%1").arg(m_fallbackIconName));
     }
 }
@@ -362,7 +362,7 @@ void Device::updateIcon()
 void Device::updateConnection()
 {
     Connection c;
-  
+
     /* The "State" property is a little more useful this "Connected" bool
        because the former tells us Bluez *knows* a device is connecting.
        So use "Connected" only as a fallback */
