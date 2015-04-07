@@ -1,3 +1,18 @@
+ubuntu-system-settings (0.3+15.04.20150407-0ubuntu1) vivid; urgency=medium
+
+  [ Alex Tu ]
+  * for Arale device: fixed:LP#1417459 Storage size not correct (LP:
+    #1433024, #1417459)
+
+  [ CI Train Bot ]
+  * New rebuild forced.
+
+  [ alextu ]
+  * for Arale device: fixed:LP#1417459 Storage size not correct (LP:
+    #1433024, #1417459)
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Tue, 07 Apr 2015 21:11:26 +0000
+
 ubuntu-system-settings (0.3+15.04.20150403-0ubuntu1) vivid; urgency=medium
 
   [ CI Train Bot ]
