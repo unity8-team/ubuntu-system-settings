@@ -81,7 +81,6 @@ class WifiTestCase(WifiBaseTestCase):
             dialog.text, Eventually(Equals(
                 _('The Wi-Fi network could not be found'))))
 
-    @skip('skipped due to bug 1337556')
     def test_connect_to_hidden_network_using_secrets(self):
         if not self.wifi_page.have_wireless():
             self.skipTest('Cannot test wireless since it cannot be enabled')
@@ -109,7 +108,6 @@ class WifiTestCase(WifiBaseTestCase):
         if dialog:
             dialog.wait_until_destroyed()
 
-    @skip('skipped due to bug 1337556')
     def test_connect_to_hidden_network_using_incorrect_secrets(self):
         if not self.wifi_page.have_wireless():
             self.skipTest('Cannot test wireless since it cannot be enabled')
@@ -137,6 +135,7 @@ class WifiTestCase(WifiBaseTestCase):
             dialog.text, Eventually(Equals(
                 _('Your authentication details were incorrect'))))
 
+    @skip("networkmanager mock does not yet support deletion of cons")
     def test_connect_to_hidden_network_then_cancel(self):
         if not self.wifi_page.have_wireless():
             self.skipTest('Cannot test wireless since it cannot be enabled')
