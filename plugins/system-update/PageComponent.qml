@@ -259,7 +259,7 @@ ItemPage {
                 right: parent.right
             }
             height: childrenRect.height
-            
+
             ListItem.Base {
                 id: checkForUpdatesArea
                 objectName: "checkForUpdatesArea"
@@ -430,7 +430,7 @@ ItemPage {
                                 right: parent.right
                             }
                             height: buttonAppUpdate.height
-                            
+
                             Label {
                                 id: labelTitle
                                 objectName: "labelTitle"
@@ -449,7 +449,7 @@ ItemPage {
                                 objectName: "buttonAppUpdate"
                                 anchors.right: parent.right
                                 height: labelTitle.height + units.gu(1)
-                                enabled: !installing 
+                                enabled: !installing
                                 text: {
                                     if (retry)
                                         return i18n.tr("Retry");
@@ -483,8 +483,8 @@ ItemPage {
                                         PopupUtils.open(dialogInstallComponent);
                                 }
                             }
-                        } 
-                        
+                        }
+
                         Item {
                             id: labelUpdateStatus
                             anchors {

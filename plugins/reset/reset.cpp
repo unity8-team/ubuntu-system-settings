@@ -45,7 +45,7 @@ bool Reset::factoryReset()
 
     QDBusReply<QString> reply = iface.call("FactoryReset");
     if (!reply.isValid()) {
-         qWarning() << reply.error().message(); 
+         qWarning() << reply.error().message();
         return false;
     }
 

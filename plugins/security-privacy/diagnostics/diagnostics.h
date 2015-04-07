@@ -33,7 +33,7 @@ class Diagnostics : public QObject
                 READ canReportCrashes
                 WRITE setReportCrashes
                 NOTIFY reportCrashesChanged )
-    
+
 public:
     explicit Diagnostics(QObject *parent = 0);
     ~Diagnostics();

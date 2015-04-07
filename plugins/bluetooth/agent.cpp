@@ -83,7 +83,7 @@ void Agent::RequestConfirmation(const QDBusObjectPath &objectPath, uint passkey)
         setDelayedReply(true);
         assert(!m_delayedReplies.contains(tag));
         m_delayedReplies[tag] = message();
-      
+
         QString passkeyStr = QString("%1").arg(passkey, 6, 10, QChar('0'));
         Q_EMIT(passkeyConfirmationNeeded(tag, device.data(), passkeyStr));
     } else { // confirmation requested for an unknown device..?!

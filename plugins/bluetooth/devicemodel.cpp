@@ -170,13 +170,13 @@ void DeviceModel::setAdapterFromPath(const QString &path)
         const QString interface = "org.bluez.Adapter";
         auto i = new QDBusInterface(service, path, interface, m_dbus);
 
-        m_dbus.connect(service, path, interface, "DeviceCreated", 
+        m_dbus.connect(service, path, interface, "DeviceCreated",
                        this, SLOT(slotDeviceCreated(const QDBusObjectPath&)));
-        m_dbus.connect(service, path, interface, "DeviceRemoved", 
+        m_dbus.connect(service, path, interface, "DeviceRemoved",
                        this, SLOT(slotDeviceRemoved(const QDBusObjectPath&)));
-        m_dbus.connect(service, path, interface, "DeviceFound", 
+        m_dbus.connect(service, path, interface, "DeviceFound",
                        this, SLOT(slotDeviceFound(const QString&, const QMap<QString,QVariant>&)));
-        m_dbus.connect(service, path, interface, "DeviceDisappeared", 
+        m_dbus.connect(service, path, interface, "DeviceDisappeared",
                        this, SLOT(slotDeviceDisappeared(const QString&)));
         m_dbus.connect(service, path, interface, "PropertyChanged",
                        this, SLOT(slotPropertyChanged(const QString&, const QDBusVariant&)));
@@ -194,6 +194,12 @@ void DeviceModel::setAdapterFromPath(const QString &path)
         connect(&m_discoverableTimer, SIGNAL(timeout()), this, SLOT(slotEnableDiscoverable()));
         m_discoverableTimer.start(1000);
 
+        // With the agent registered on the bus, make it known by the adapter
+        QDBusReply<void > reply = m_bluezAdapter->call("RegisterAgent",
+                                                       qVariantFromValue(QDBusObjectPath(DBUS_ADAPTER_AGENT_PATH)),
+                                                       QString(DBUS_AGENT_CAPABILITY));
+        if (!reply.isValid())
+                qWarning() << "Error registering agent for the default adapter:" << reply.error();
     }
 }
 
@@ -462,12 +468,20 @@ void DeviceModel::slotCreateFinished(QDBusPendingCallWatcher *call)
     call->deleteLater();
 }
 
-void DeviceModel::createDevice (const QString &address)
+void DeviceModel::createDevice (const QString &address, QObject *agent)
 {
     if (m_bluezAdapter) {
+        QString agent_path(DBUS_AGENT_PATH);
+        agent_path.append("/");
+        agent_path.append(address);
+        agent_path.replace(":", "_");
+
+        if(!m_dbus.registerObject(agent_path, agent))
+            qCritical() << "Couldn't register agent at" << agent_path;
+
         QDBusPendingCall pcall = m_bluezAdapter->asyncCall("CreatePairedDevice",
                                                            address,
-                                                           qVariantFromValue(QDBusObjectPath(DBUS_AGENT_PATH)),
+                                                           qVariantFromValue(QDBusObjectPath(agent_path)),
                                                            QString(DBUS_AGENT_CAPABILITY));
 
         QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(pcall, this);
@@ -542,7 +556,7 @@ QVariant DeviceModel::data(const QModelIndex &index, int role) const
         switch (role) {
         case Qt::DisplayRole:
             displayName = device->getName();
-            
+
             if (displayName.isEmpty())
                 displayName = device->getAddress();
 

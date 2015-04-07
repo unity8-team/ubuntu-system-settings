@@ -52,31 +52,6 @@ ItemPage {
         property bool __suppressActivation : true;
         property bool __haveCustomContexts : false;
 
-        function isEmptyCustom (type, ctx)
-        {
-            /* OK, this sucks _hard_,
-             * QOfono does not return the added context, so instead we have to "figure it out"
-             * by looking for "contextAdded" for totally empty context with default Name values.
-             * LP(#1361864)
-             */
-
-            var targetName = "";
-            var targetAccessPointName = "";
-            if (type === "internet") {
-                targetName = "Internet";
-                targetAccessPointName = "";
-            } else if (type == "mms") {
-                targetName = "MMS";
-                targetAccessPointName = "";
-            }
-
-            if (ctx.type === type &&
-                ctx.name === targetName &&
-                ctx.accessPointName === targetAccessPointName)
-                return true;
-            return false;
-        }
-
         function updateContexts(contexts)
         {
             var tmp = contexts || sim.connMan.contexts.slice(0);
@@ -113,7 +88,6 @@ ItemPage {
                 if (mContexts[currentValue] !== undefined) {
                     throw "updateContexts: added is broken";
                 }
-
                 var ctx = connCtx.createObject(parent,
                                                {
                                                    "contextPath": currentValue
@@ -138,15 +112,26 @@ ItemPage {
 
         // expects updateContexts() to have ran before executing.
         function checkAndCreateCustomContexts() {
+
+            // When a context is added, we assume it is a custom one.
+            function addedCustomContext (path) {
+
+                // We do not have a QML object representing this context,
+                // so we ask updateContexts to create one.
+                if (!d.mContexts[path]) {
+                    d.updateContexts();
+                }
+                d.mContexts[path].name = mCustomContextNameInternet;
+                sim.connMan.contextAdded.disconnect(addedCustomContext);
+            }
+
             var customInternet = Object.keys(mContexts).filter(function (i) {
                 var ctx = mContexts[i];
-                return ctx.name === mCustomContextNameInternet ||
-                       isEmptyCustom("internet", ctx);
+                return ctx.name === mCustomContextNameInternet;
             });
             var customMms = Object.keys(mContexts).filter(function (i) {
                 var ctx = mContexts[i];
-                return ctx.name === mCustomContextNameMms ||
-                       isEmptyCustom("mms", ctx);
+                return ctx.name === mCustomContextNameMms;
             });
 
             // make sure there is only one context per type
@@ -165,8 +150,8 @@ ItemPage {
                 });
             }
 
-            if (customInternet.length === 0) {
-                sim.connMan.addContext("internet");
+            if (customInternet.length !== 0) {
+                d.__haveCustomContexts = true;
             }
 
             // @bug don't create the custom MMS context
@@ -251,7 +236,8 @@ ItemPage {
                                type: type,
                                contexts: {"internet": mCustomContextInternet,
                                           "mms":      mCustomContextMms},
-                               activateCb: activateHelper
+                               activateCb: activateHelper,
+                               sim: sim
                            });
         }
 
@@ -304,9 +290,12 @@ ItemPage {
 
             onActiveChanged: if (type === "internet") internetApnSelector.updateSelectedIndex()
             onNameChanged: {
-                if (name === "Internet") {
-                    this.name = d.mCustomContextNameInternet;
-                } else if (name === "MMS") {
+
+                if (name === d.mCustomContextNameInternet) {
+                    d.__haveCustomContexts = true;
+                }
+
+                if (name === "MMS") {
                     this.name = d.mCustomContextNameMms;
                     this.accessPointName = d.pendingCustomMmsData["accessPointName"];
                     this.username = d.pendingCustomMmsData["username"];
@@ -433,14 +422,7 @@ ItemPage {
                 objectName: "customApnEdit"
                 text: i18n.tr("Custom Internet APN…")
                 width: parent.width - units.gu(4)
-                onClicked: {
-                    if (!d.__haveCustomContexts) {
-                        d.checkAndCreateCustomContexts();
-                        d.__haveCustomContexts = true;
-                    }
-
-                    d.openApnEditor("internet")
-                }
+                onClicked: d.openApnEditor("internet")
             }
 
             ListItem.ItemSelector {

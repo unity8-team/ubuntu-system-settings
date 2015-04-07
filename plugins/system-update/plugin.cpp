@@ -32,7 +32,7 @@ using namespace UpdatePlugin;
 void BackendPlugin::registerTypes(const char *uri)
 {
     Q_ASSERT(uri == QLatin1String("Ubuntu.SystemSettings.Update"));
-    
+
     qmlRegisterType<SystemUpdate>(uri, 1, 0, "SystemUpdate");
     qmlRegisterType<Update>(uri, 1, 0, "Update");
     qmlRegisterType<DownloadTracker>(uri, 1, 0, "DownloadTracker");

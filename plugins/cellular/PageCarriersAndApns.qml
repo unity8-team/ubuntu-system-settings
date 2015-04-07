@@ -60,7 +60,6 @@ ItemPage {
             ListItem.Standard {
                 text: i18n.tr("APN")
                 progression: enabled
-                enabled: sims[0].connMan.powered
                 onClicked: pageStack.push(Qt.resolvedUrl("PageChooseApn.qml"), {
                     sim: sims[0]
                 })
@@ -87,7 +86,6 @@ ItemPage {
             ListItem.Standard {
                 text: i18n.tr("APN")
                 progression: enabled
-                enabled: sims[1].connMan.powered
                 onClicked: pageStack.push(Qt.resolvedUrl("PageChooseApn.qml"), {
                     sim: sims[1]
                 })

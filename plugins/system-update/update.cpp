@@ -73,7 +73,7 @@ void Update::setRemoteVersion(QString& version)
         if (!getIgnoreUpdates()) {
             int result = debVS.CmpVersion(m_local_version.toUtf8().data(),
                                           m_remote_version.toUtf8().data());
-    
+
             m_update = result < 0;
         } else {
             m_update = false;

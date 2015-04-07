@@ -45,11 +45,18 @@ ItemPage {
             id: changePinDialog
             title: i18n.tr("Change SIM PIN")
 
-            property string errorText: i18n.tr(
-                    "Incorrect PIN. %1 attempt remaining.",
-                    "Incorrect PIN. %1 attempts remaining.",
-                    curSim.pinRetries[OfonoSimManager.SimPin] || 3
-                    ).arg(curSim.pinRetries[OfonoSimManager.SimPin] || 3)
+            property string errorText: {
+                if (curSim.pinRetries[OfonoSimManager.SimPin] > 0)
+                    return i18n.tr(
+                        "Incorrect PIN. %1 attempt remaining.",
+                        "Incorrect PIN. %1 attempts remaining.",
+                        curSim.pinRetries[OfonoSimManager.SimPin] === 1
+                        ).arg(curSim.pinRetries[OfonoSimManager.SimPin])
+                else if (curSim.pinRetries[OfonoSimManager.SimPin] === 0)
+                    return i18n.tr("No more attempts allowed")
+                else
+                    return ""
+            }
             property int simMin: curSim.minimumPinLength(OfonoSimManager.SimPin)
             property int simMax: curSim.maximumPinLength(OfonoSimManager.SimPin)
 
@@ -69,6 +76,7 @@ ItemPage {
                         console.warn("Change PIN failed with: " + error);
                         incorrect.visible = true;
                         changePinDialog.enabled = true;
+                        confirmButton.enabled = false;
                         currentInput.forceActiveFocus();
                         currentInput.selectAll();
                         return;
@@ -88,13 +96,29 @@ ItemPage {
                 echoMode: TextInput.Password
                 inputMethodHints: Qt.ImhDialableCharactersOnly
                 maximumLength: simMax
+                onTextChanged: confirmButton.enabled =
+                               (acceptableInput &&
+                                confirmInput.acceptableInput &&
+                                confirmInput.text.length >= simMin &&
+                                (confirmInput.text === newInput.text) &&
+                                (!curSim.pinRetries[OfonoSimManager.SimPin] ||
+                                 (curSim.pinRetries[OfonoSimManager.SimPin] > 0)))
             }
 
             Label {
                 id: retries
-                text: i18n.tr("%1 attempt allowed.", "%1 attempts allowed.",
-                              curSim.pinRetries[OfonoSimManager.SimPin] || 3).arg(
-                          curSim.pinRetries[OfonoSimManager.SimPin] || 3)
+                text: {
+                    if (curSim.pinRetries[OfonoSimManager.SimPin] > 0)
+                        return i18n.tr(
+                            "%1 attempt allowed.",
+                            "%1 attempts allowed.",
+                            curSim.pinRetries[OfonoSimManager.SimPin] === 1
+                            ).arg(curSim.pinRetries[OfonoSimManager.SimPin])
+                    else if (curSim.pinRetries[OfonoSimManager.SimPin] === 0)
+                        return i18n.tr("No more attempts allowed")
+                    else
+                        return ""
+                }
                 visible: !incorrect.visible
             }
 
@@ -130,7 +154,10 @@ ItemPage {
                 onTextChanged: confirmButton.enabled =
                                (acceptableInput &&
                                 text.length >= simMin &&
-                                (text === newInput.text))
+                                (text === newInput.text) &&
+                                (!curSim.pinRetries[OfonoSimManager.SimPin] ||
+                                 (curSim.pinRetries[OfonoSimManager.SimPin] > 0)))
+
             }
 
             Label {
@@ -185,9 +212,18 @@ ItemPage {
                        i18n.tr("Enter SIM PIN") :
                        i18n.tr("Enter Previous SIM PIN")
 
-            property string errorText: i18n.tr(
-                    "Incorrect PIN. %1 attempts remaining."
-                    ).arg(curSim.pinRetries[OfonoSimManager.SimPin] || 3)
+            property string errorText: {
+                if (curSim.pinRetries[OfonoSimManager.SimPin] > 0)
+                    return i18n.tr(
+                        "Incorrect PIN. %1 attempt remaining.",
+                        "Incorrect PIN. %1 attempts remaining.",
+                        curSim.pinRetries[OfonoSimManager.SimPin] === 1
+                        ).arg(curSim.pinRetries[OfonoSimManager.SimPin])
+                else if (curSim.pinRetries[OfonoSimManager.SimPin] === 0)
+                    return i18n.tr("No more attempts allowed")
+                else
+                    return ""
+            }
 
             property int simMin: curSim.minimumPinLength(OfonoSimManager.SimPin)
             property int simMax: curSim.maximumPinLength(OfonoSimManager.SimPin)
@@ -208,6 +244,7 @@ ItemPage {
                         console.warn("Lock PIN failed with: " + error);
                         incorrect.visible = true;
                         lockPinDialog.enabled = true;
+                        lockButton.enabled = false;
                         prevInput.forceActiveFocus();
                         prevInput.selectAll();
                         return;
@@ -221,6 +258,7 @@ ItemPage {
                         console.warn("Unlock PIN failed with: " + error);
                         incorrect.visible = true;
                         lockPinDialog.enabled = true;
+                        lockButton.enabled = false;
                         prevInput.forceActiveFocus();
                         prevInput.selectAll();
                         return;
@@ -240,13 +278,25 @@ ItemPage {
 
                 // Doesn't get updated if you set this in enabled of confirmButton
                 onTextChanged: lockButton.enabled =
-                               (acceptableInput && text.length >= simMin)
+                               (acceptableInput && (text.length >= simMin) &&
+                               (!curSim.pinRetries[OfonoSimManager.SimPin] ||
+                               (curSim.pinRetries[OfonoSimManager.SimPin] > 0)))
             }
 
             Label {
                 horizontalAlignment: Text.AlignHCenter
-                text: i18n.tr("%1 attempts allowed.").arg(
-                          curSim.pinRetries[OfonoSimManager.SimPin] || 3)
+                text: {
+                    if (curSim.pinRetries[OfonoSimManager.SimPin] > 0)
+                        return i18n.tr(
+                            "%1 attempt allowed.",
+                            "%1 attempts allowed.",
+                            curSim.pinRetries[OfonoSimManager.SimPin] === 1
+                            ).arg(curSim.pinRetries[OfonoSimManager.SimPin])
+                    else if (curSim.pinRetries[OfonoSimManager.SimPin] === 0)
+                        return i18n.tr("No more attempts allowed")
+                    else
+                        return ""
+                }
                 visible: !incorrect.visible
                 width: parent.width
             }

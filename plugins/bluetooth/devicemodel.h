@@ -69,13 +69,14 @@ public:
     bool isDiscovering() const { return m_isDiscovering; }
     bool isDiscoverable() const { return m_isDiscoverable; }
     void addConnectAfterPairing(const QString &address, Device::ConnectionMode mode);
-    void createDevice(const QString &address);
+    void createDevice(const QString &address, QObject *agent);
     void removeDevice(const QString &path);
     void stopDiscovery();
     void startDiscovery();
     void toggleDiscovery();
+    void trySetDiscoverable(bool discoverable);
 
-Q_SIGNALS: 
+Q_SIGNALS:
     void poweredChanged(bool powered);
     void discoveringChanged(bool isDiscovering);
     void discoverableChanged(bool isDiscoverable);
@@ -96,7 +97,6 @@ private:
     QTimer m_timer;
     QTimer m_discoverableTimer;
     void restartTimer();
-    void trySetDiscoverable(bool discoverable);
     void setDiscoverable(bool discoverable);
     void setPowered(bool powered);
 

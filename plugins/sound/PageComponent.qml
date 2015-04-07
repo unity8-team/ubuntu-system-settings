@@ -107,7 +107,7 @@ ItemPage {
                 minimumValue: 0.0
                 maximumValue: 1.0
                 minIcon: "image://theme/audio-volume-low-zero"
-                maxIcon: "image://theme/audio-volume-high" 
+                maxIcon: "image://theme/audio-volume-high"
                 onUpdated: soundActionGroup.volume.updateState(value);
             }
 
@@ -232,9 +232,7 @@ ItemPage {
                 visible: showAllUI
             }
 
-            ListItem.Divider {
-                visible: showAllUI
-            }
+            ListItem.Divider {}
 
             ListItem.Standard {
                 text: i18n.tr("Other vibrations")
@@ -245,7 +243,6 @@ ItemPage {
                     Component.onCompleted: checked = serverChecked
                     onTriggered: backendInfo.otherVibrate = checked
                 }
-                visible: showAllUI
             }
         }
     }
