@@ -414,7 +414,7 @@ bool StorageAbout::isInternal(const QString &drive)
         }
 
         // Now need to guess if it's InternalDrive or RemovableDrive
-        QString fsName(QString::fromLatin1(entry.mnt_fsname));
+        QString fsName = QDir(entry.mnt_fsname).canonicalPath();
         if (fsName.contains(QString(QStringLiteral("mapper")))) {
             struct stat status;
             stat(entry.mnt_fsname, &status);
@@ -424,11 +424,14 @@ bool StorageAbout::isInternal(const QString &drive)
             if (!fsName.isEmpty()) {
                 if (fsName.length() > 3) {
                     // only take the parent of the device
-                    if (fsName.at(fsName.size() -1).isDigit() && fsName.at(fsName.size() - 2) == QChar(QLatin1Char('p')))
-                        fsName.chop(2);
-                    if (fsName.startsWith(QString(QStringLiteral("mmc")))) {
+                    int index_mmc = fsName.indexOf("mmc",0,Qt::CaseInsensitive);
+                    if (index_mmc != -1) {
+                        QString mmcString;
+                        int index_p = fsName.indexOf('p',index_mmc,Qt::CaseInsensitive);
+                        mmcString = fsName.mid(index_mmc, index_p - index_mmc);
+
                         // "removable" attribute is set only for removable media, and we may have internal mmc cards
-                        fsName = QString(QStringLiteral("/sys/block/")) + fsName + QString(QStringLiteral("/device/uevent"));
+                        fsName = QString(QStringLiteral("/sys/block/")) + mmcString + QString(QStringLiteral("/device/uevent"));
                         QFile file(fsName);
                         if (file.open(QIODevice::ReadOnly)) {
                             QByteArray buf = file.readLine();
