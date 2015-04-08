@@ -74,8 +74,8 @@ class WifiTestCase(WifiBaseTestCase):
             dialog.text, Eventually(Equals(
                 _('The Wi-Fi network could not be found'))))
 
-    # See https://github.com/martinpitt/python-dbusmock/issues/7
-    @skip('networkmanager mock does not support authentication')
+    @skip('skipped due to %s' % (
+        'https://github.com/martinpitt/python-dbusmock/issues/7'))
     def test_connect_to_hidden_network_using_secrets(self):
         if not self.wifi_page.have_wireless():
             self.skipTest('Cannot test wireless since it cannot be enabled')
@@ -93,8 +93,8 @@ class WifiTestCase(WifiBaseTestCase):
         if dialog:
             dialog.wait_until_destroyed()
 
-    # See https://github.com/martinpitt/python-dbusmock/issues/7
-    @skip('networkmanager mock does not support authentication')
+    @skip('skipped due to %s' % (
+        'https://github.com/martinpitt/python-dbusmock/issues/7'))
     def test_connect_to_hidden_network_using_incorrect_secrets(self):
         if not self.wifi_page.have_wireless():
             self.skipTest('Cannot test wireless since it cannot be enabled')
