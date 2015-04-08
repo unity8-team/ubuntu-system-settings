@@ -38,16 +38,6 @@ class WifiTestCase(WifiBaseTestCase):
         # allow backend to set up listeners
         sleep(0.3)
 
-        """Mock a StateChanged signal on the Device, using a likely
-        scenario of a not found SSID:
-            newState = 120 # NM_DEVICE_STATE_FAILED
-            oldState = 0 # does not matter
-            reason = 53 # NM_DEVICE_STATE_REASON_SSID_NOT_FOUND
-        """
-
-        self.device_mock.EmitSignal(
-            DEVICE_IFACE, 'StateChanged', 'uuu', [100, 0, 0])
-
         if dialog:
             dialog.wait_until_destroyed()
 
@@ -58,7 +48,7 @@ class WifiTestCase(WifiBaseTestCase):
             self.wifi_page._set_wireless, self.wifi_page.get_wireless())
         self.wifi_page.enable_wireless()
         dialog = self.wifi_page.connect_to_hidden_network(
-            'test_ap',
+            'n/a',
             scroll_to_and_click=self.main_view
             .scroll_to_and_click)
 
@@ -70,15 +60,22 @@ class WifiTestCase(WifiBaseTestCase):
             newState = 120 # NM_DEVICE_STATE_FAILED
             oldState = 0 # does not matter
             reason = 53 # NM_DEVICE_STATE_REASON_SSID_NOT_FOUND
+
+            We manually emit this signal, because the networkmanager mock
+            currently does not support this. See [1].
+
+            [1] https://github.com/martinpitt/python-dbusmock/issues/8
         """
 
         self.device_mock.EmitSignal(
             DEVICE_IFACE, 'StateChanged', 'uuu', [120, 0, 53])
-        self.assertTrue(False)
+
         self.assertThat(
             dialog.text, Eventually(Equals(
                 _('The Wi-Fi network could not be found'))))
 
+    # See https://github.com/martinpitt/python-dbusmock/issues/7
+    @skip('networkmanager mock does not support authentication')
     def test_connect_to_hidden_network_using_secrets(self):
         if not self.wifi_page.have_wireless():
             self.skipTest('Cannot test wireless since it cannot be enabled')
@@ -93,19 +90,11 @@ class WifiTestCase(WifiBaseTestCase):
         # allow backend to set up listeners
         sleep(0.3)
 
-        """Mock a StateChanged signal on the Device, which
-        lets the backend know it was the wrong secret:
-            newState = 100 # NM_DEVICE_STATE_ACTIVATED
-            oldState = 0 # does not matter
-            reason = 0 # does not matter
-        """
-
-        self.device_mock.EmitSignal(
-            DEVICE_IFACE, 'StateChanged', 'uuu', [100, 0, 0])
-
         if dialog:
             dialog.wait_until_destroyed()
 
+    # See https://github.com/martinpitt/python-dbusmock/issues/7
+    @skip('networkmanager mock does not support authentication')
     def test_connect_to_hidden_network_using_incorrect_secrets(self):
         if not self.wifi_page.have_wireless():
             self.skipTest('Cannot test wireless since it cannot be enabled')
@@ -116,24 +105,15 @@ class WifiTestCase(WifiBaseTestCase):
             'test_ap', security='wpa', password='abcdefgh',
             scroll_to_and_click=self.main_view
             .scroll_to_and_click)
+
         # allow backend to set up listeners
         sleep(0.3)
-
-        """Mock a StateChanged signal on the Device, which
-        lets the backend know it was the wrong secret:
-            newState = 120 # NM_DEVICE_STATE_FAILED
-            oldState = 0 # does not matter
-            reason = 7 # NM_DEVICE_STATE_REASON_NO_SECRETS
-        """
-
-        self.device_mock.EmitSignal(
-            DEVICE_IFACE, 'StateChanged', 'uuu', [120, 0, 7])
 
         self.assertThat(
             dialog.text, Eventually(Equals(
                 _('Your authentication details were incorrect'))))
 
-    @skip("networkmanager mock does not yet support deletion of cons")
+    @skip('networkmanager mock does not yet support deletion of cons')
     def test_connect_to_hidden_network_then_cancel(self):
         if not self.wifi_page.have_wireless():
             self.skipTest('Cannot test wireless since it cannot be enabled')
@@ -185,5 +165,9 @@ class WifiTestCase(WifiBaseTestCase):
 
         # wait for ui to update
         sleep(2)
+
         self.wifi_page.remove_previous_network(
             access_points[2], scroll_to_and_click=click_method)
+
+        # We cannot make any assertions, because connection deletion
+        # is currently not supported.
