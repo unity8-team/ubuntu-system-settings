@@ -7,9 +7,7 @@
 
 from __future__ import absolute_import
 from autopilot.matchers import Eventually
-from dbusmock.templates.networkmanager import (DEVICE_IFACE,
-                                               InfrastructureMode,
-                                               NM80211ApSecurityFlags)
+from dbusmock.templates.networkmanager import DEVICE_IFACE
 from testtools.matchers import Equals
 from time import sleep
 from ubuntu_system_settings.tests import WifiBaseTestCase
@@ -33,7 +31,7 @@ class WifiTestCase(WifiBaseTestCase):
             self.wifi_page._set_wireless, self.wifi_page.get_wireless())
         self.wifi_page.enable_wireless()
         dialog = self.wifi_page.connect_to_hidden_network(
-            'yeah',
+            'test_ap',
             scroll_to_and_click=self.main_view
             .scroll_to_and_click)
 
@@ -60,7 +58,7 @@ class WifiTestCase(WifiBaseTestCase):
             self.wifi_page._set_wireless, self.wifi_page.get_wireless())
         self.wifi_page.enable_wireless()
         dialog = self.wifi_page.connect_to_hidden_network(
-            'yeah',
+            'test_ap',
             scroll_to_and_click=self.main_view
             .scroll_to_and_click)
 
@@ -76,7 +74,7 @@ class WifiTestCase(WifiBaseTestCase):
 
         self.device_mock.EmitSignal(
             DEVICE_IFACE, 'StateChanged', 'uuu', [120, 0, 53])
-
+        self.assertTrue(False)
         self.assertThat(
             dialog.text, Eventually(Equals(
                 _('The Wi-Fi network could not be found'))))
@@ -88,7 +86,7 @@ class WifiTestCase(WifiBaseTestCase):
             self.wifi_page._set_wireless, self.wifi_page.get_wireless())
         self.wifi_page.enable_wireless()
         dialog = self.wifi_page.connect_to_hidden_network(
-            'yeah', security='wpa', password='abcdefgh',
+            'test_ap', security='wpa', password='abcdefgh',
             scroll_to_and_click=self.main_view
             .scroll_to_and_click)
 
@@ -115,7 +113,7 @@ class WifiTestCase(WifiBaseTestCase):
             self.wifi_page._set_wireless, self.wifi_page.get_wireless())
         self.wifi_page.enable_wireless()
         dialog = self.wifi_page.connect_to_hidden_network(
-            'yeah', security='wpa', password='abcdefgh',
+            'test_ap', security='wpa', password='abcdefgh',
             scroll_to_and_click=self.main_view
             .scroll_to_and_click)
         # allow backend to set up listeners
@@ -175,14 +173,10 @@ class WifiTestCase(WifiBaseTestCase):
         access_points = ['Series of Tubes', 'dev/null', 'Mi-Fi',
                          'MonkeySphere']
 
-        for idx, ap in enumerate(access_points):
-            self.dbusmock.AddAccessPoint(
-                self.device_path, 'Mock_AP%d' % idx, ap, '00:23:F8:7E:12:BB',
-                InfrastructureMode.NM_802_11_MODE_INFRA, 2425, 5400, 82,
-                NM80211ApSecurityFlags.NM_802_11_AP_SEC_KEY_MGMT_PSK)
-
+        for idx, ssid in enumerate(access_points):
+            self.create_access_point('Mock_AP%d' % idx, ssid)
             self.dbusmock.AddWiFiConnection(
-                self.device_path, 'Mock_Con%d' % idx, ap, '')
+                self.device_path, 'Mock_Con%d' % idx, ssid, '')
 
         self.wifi_page.remove_previous_network(
             access_points[0], scroll_to_and_click=click_method)
