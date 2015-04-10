@@ -35,6 +35,7 @@ ItemPage {
     objectName: "systemUpdatesPage"
 
     title: installingImageUpdate.visible ? "" : i18n.tr("Updates")
+    flickable: (installingImageUpdate.visible || appHeaderHeight === 0) ? null : scrollWidget
 
     property bool installAll: false
     property bool includeSystemUpdate: false
@@ -46,16 +47,8 @@ ItemPage {
     property var notificationAction;
     property string errorDialogText: ""
 
-    //Workaround to truly center the "No updates available" label in the free area, excluding the area covered by the header (see the Label definition)
-
+    //Needed for workaround to truly center the "No updates available" label in the free area, excluding the area covered by the header (see the updateNotification definition below)
     property real appHeaderHeight: 0
-
-    Binding {
-        target: root
-        property: "flickable"
-        value: installingImageUpdate.visible ? null : scrollWidget
-        when: appHeaderHeight !== 0
-    }
 
     onUpdatesAvailableChanged: {
         if (updatesAvailable < 1 && root.state != "SEARCHING")
