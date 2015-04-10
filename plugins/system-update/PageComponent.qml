@@ -35,7 +35,6 @@ ItemPage {
     objectName: "systemUpdatesPage"
 
     title: installingImageUpdate.visible ? "" : i18n.tr("Updates")
-    flickable: installingImageUpdate.visible ? null : scrollWidget
 
     property bool installAll: false
     property bool includeSystemUpdate: false
@@ -46,6 +45,17 @@ ItemPage {
     property var chargeLevel: indicatorPower.batteryLevel || 0
     property var notificationAction;
     property string errorDialogText: ""
+
+    //Workaround to truly center the "No updates available" label in the free area, excluding the area covered by the header (see the Label definition)
+
+    property real appHeaderHeight: 0
+
+    Binding {
+        target: root
+        property: "flickable"
+        value: installingImageUpdate.visible ? null : scrollWidget
+        when: appHeaderHeight !== 0
+    }
 
     onUpdatesAvailableChanged: {
         if (updatesAvailable < 1 && root.state != "SEARCHING")
@@ -690,11 +700,21 @@ ItemPage {
         color: "transparent"
 
         Label {
-            anchors.centerIn: updateNotification
             text: updateNotification.text
             width: updateNotification.width
             horizontalAlignment: Text.AlignHCenter
             wrapMode: Text.Wrap
+
+            //Workaround to truly center the label in the free area, excluding the area covered by the header
+
+            anchors {
+                centerIn: updateNotification
+                verticalCenterOffset: appHeaderHeight / 2
+            }
+
+            Component.onCompleted: { //Determines header height (needed for offset), which automatically sets the flickable above
+                appHeaderHeight = main.height - updateNotification.height //main is the MainView
+            }
         }
     }
 
