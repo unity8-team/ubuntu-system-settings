@@ -706,7 +706,7 @@ ItemPage {
             }
 
             Component.onCompleted: { //Determines header height (needed for offset), which automatically sets the flickable above
-                appHeaderHeight = main.height - updateNotification.height //main is the MainView
+                appHeaderHeight = main.height - root.height //main is the MainView
             }
         }
     }
