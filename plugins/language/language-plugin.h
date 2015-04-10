@@ -126,6 +126,7 @@ private:
     SubsetModel m_keyboardLayoutsModel;
     SubsetModel m_spellCheckingModel;
     SessionService m_sessionService;
+    QStringList m_layoutPaths;
 };
 
 #endif // LANGUAGE_PLUGIN_H
