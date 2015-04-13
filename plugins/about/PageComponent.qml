@@ -196,8 +196,17 @@ ItemPage {
                     objectName: "updateButton"
                     text: i18n.tr("Check for updates")
                     width: parent.width - units.gu(4)
-                    onClicked:
-                        pageStack.push(pluginManager.getByName("system-update").pageComponent)
+                    onClicked: {
+                        var upPlugin = pluginManager.getByName("system-update")
+                        console.warn("updatePlugin")
+                        if (upPlugin)
+                            console.warn("updatePlugin: defined")
+                        var updatePage = upPlugin.pageComponent
+                        console.warn("updatePage")
+                        if (updatePage)
+                            console.warn("updatePage: defined")
+                        pageStack.push(updatePage)
+                    }
                 }
                 showDivider: false
             }
