@@ -198,14 +198,15 @@ ItemPage {
                     width: parent.width - units.gu(4)
                     onClicked: {
                         var upPlugin = pluginManager.getByName("system-update")
-                        console.warn("updatePlugin")
-                        if (upPlugin)
-                            console.warn("updatePlugin: defined")
-                        var updatePage = upPlugin.pageComponent
-                        console.warn("updatePage")
-                        if (updatePage)
-                            console.warn("updatePage: defined")
-                        pageStack.push(updatePage)
+                        if (upPlugin) {
+                            var updatePage = upPlugin.pageComponent
+                            if (updatePage)
+                                pageStack.push(updatePage)
+                            else
+                                console.warn("Failed to get system-update pageComponent")
+                        } else {
+                            console.warn("Failed to get system-update plugin instance")
+                        }
                     }
                 }
                 showDivider: false
