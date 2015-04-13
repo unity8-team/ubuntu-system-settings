@@ -1,3 +1,21 @@
+ubuntu-system-settings (0.3+15.04.20150413-0ubuntu1) vivid; urgency=medium
+
+  [ CI Train Bot ]
+  * New rebuild forced.
+  * Resync trunk.
+
+  [ Sebastien Bacher ]
+  * [battery] refresh the canvas when getting focus to avoid outdated
+    info (LP: #1435424)
+  * [bluetooth, sim] Get some dialogs to focus their text entry by
+    default
+  * [security-privacy] give the focus to the right entry, if the current
+    unlock method is swipe then there is no "current password" so the
+    new input line should be the focussed one (LP: #1438049)
+  * bluetooth: check if the device is valid before getting details
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Mon, 13 Apr 2015 15:08:56 +0000
+
 ubuntu-system-settings (0.3+15.04.20150407-0ubuntu1) vivid; urgency=medium
 
   [ Alex Tu ]
