@@ -125,6 +125,8 @@ ItemPage {
                     color: "#DD4814"
                     visible: destNumberField.cursorVisible
                 }
+                onVisibleChanged:
+                    if (visible === true) forceActiveFocus()
             }
         }
 
