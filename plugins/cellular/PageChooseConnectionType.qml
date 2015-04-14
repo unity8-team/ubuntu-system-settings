@@ -60,21 +60,45 @@ ItemPage {
 
                     property var sim: modelData
 
-                    SettingsItemTitle {
+                    ListItem.Standard {
                         anchors { left: parent.left; right: parent.right }
-                        text: sim.title
                         visible: repeater.count > 1
 
-                        Label {
+                        Row {
                             anchors {
+                                left: parent.left
+                                leftMargin: units.gu(2)
                                 right: parent.right
                                 rightMargin: units.gu(2)
-                                top: parent.top
-                                topMargin: units.gu(3)
                             }
-                            text: sim.netReg.name
-                            opacity: 0.75
+                            height: simName.height
+                            spacing: units.gu(2)
+
+                            Label {
+                                id: simName
+                                anchors {
+                                    top: parent.top
+                                    topMargin: units.gu(3)
+                                }
+                                text: sim.title
+                                width: (parent.width / 2) - parent.spacing
+                                elide: Text.ElideRight
+                            }
+
+                            Label {
+                                id: simReg
+                                anchors {
+                                    top: parent.top
+                                    topMargin: units.gu(3)
+                                }
+                                text: sim.netReg.name
+                                width: (parent.width / 2) - parent.spacing
+                                elide: Text.ElideRight
+                                horizontalAlignment: Text.AlignRight
+                                opacity: 0.75
+                            }
                         }
+                        highlightWhenPressed: false
                     }
 
                     ListItem.ItemSelector {
