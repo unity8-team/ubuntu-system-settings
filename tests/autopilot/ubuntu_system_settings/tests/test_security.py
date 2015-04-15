@@ -157,7 +157,7 @@ class SecurityTestCase(SecurityBaseTestCase):
             objectName='changeSecurityDialog')
         text_input = dialog.wait_select_single(
             objectName='currentInput')
-        self.assertEquals(text_input.focus, True)
+        self.assertTrue(text_input.focus)
 
         # Note that we cannot test newInput focus without mocking
         # the stored passcode/passphrase. See lp:1444534
