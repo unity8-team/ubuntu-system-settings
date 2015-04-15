@@ -139,6 +139,30 @@ class SecurityTestCase(SecurityBaseTestCase):
             Equals(_('Phone locking'))
         )
 
+    def test_lock_security_focus_on_entry(self):
+        self._go_to_phone_lock()
+
+        phone_lock_page = self.main_view.select_single(
+            objectName='phoneLockingPage')
+        selector = phone_lock_page.select_single(objectName='lockSecurity')
+        self.main_view.scroll_to_and_click(selector)
+
+        lock_security_page = self.main_view.wait_select_single(
+            objectName='lockSecurityPage')
+        change_button = lock_security_page.select_single(
+            objectName='changePass')
+        self.main_view.scroll_to_and_click(change_button)
+
+        dialog = self.main_view.wait_select_single(
+            objectName='changeSecurityDialog')
+        text_input = dialog.wait_select_single(
+            objectName='currentInput')
+        self.assertEquals(text_input.focus, True)
+
+        # Note that we cannot test newInput focus without mocking
+        # the stored passcode/passphrase. See lp:1444534
+        # TODO: Test that newInput is focused as well
+
     def test_phone_lock_value(self):
         self._go_to_phone_lock()
         phone_lock_page = self.main_view.select_single(

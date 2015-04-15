@@ -29,6 +29,7 @@ import SystemSettings 1.0
 
 ItemPage {
     id: page
+    objectName: "lockSecurityPage"
     title: i18n.tr("Lock security")
 
     // The user can still press the main "back" button or other buttons on the
@@ -94,6 +95,7 @@ ItemPage {
 
         Dialog {
             id: changeSecurityDialog
+            objectName: "changeSecurityDialog"
 
             function displayMismatchWarning() {
                 /* If the entry have the same length and different content,
@@ -159,6 +161,7 @@ ItemPage {
 
             TextField {
                 id: currentInput
+                objectName: "currentInput"
                 echoMode: TextInput.Password
                 inputMethodHints: {
                     if (changeSecurityDialog.oldMethod ===
@@ -473,6 +476,7 @@ ItemPage {
                 property bool passcode: securityPrivacy.securityType ===
                                         UbuntuSecurityPrivacyPanel.Passcode
 
+                objectName: "changePass"
                 enabled: parent.visible
 
                 text: passcode ? changePasscode : changePassphrase
