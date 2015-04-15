@@ -232,6 +232,7 @@ ItemPage {
 
             TextField {
                 id: newInput
+                objectName: "newInput"
                 echoMode: TextInput.Password
                 inputMethodHints: {
                     if (changeSecurityDialog.newMethod ===
@@ -444,6 +445,18 @@ ItemPage {
             id: unlockMethod
             model: 3
             delegate: OptionSelectorDelegate {
+                objectName: {
+                    switch (index) {
+                        case 0:
+                            return "method_swipe";
+                        case 1:
+                            return "method_code";
+                        case 2:
+                            return "method_phrase";
+                        default:
+                            return "method_unknown";
+                    }
+                }
                 text: index == 0 ? (unlockMethod.selectedIndex == 0 ? unlockMethod.swipe : unlockMethod.swipeAlt) :
                      (index == 1 ? (unlockMethod.selectedIndex == 1 ? unlockMethod.passcode : unlockMethod.passcodeAlt) :
                                    (unlockMethod.selectedIndex == 2 ? unlockMethod.passphrase : unlockMethod.passphraseAlt))
