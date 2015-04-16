@@ -110,7 +110,7 @@ class UbuntuSystemSettingsTestCase(
         return self.launch_test_application(
             *params,
             app_type='qt',
-            emulator_base=ubuntu_system_settings.SystemSettings,
+            emulator_base=ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase,
             capture_output=True)
 
 
