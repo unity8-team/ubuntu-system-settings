@@ -31,8 +31,6 @@ from fixtures import EnvironmentVariable
 from gi.repository import UPowerGlib
 from testtools.matchers import Equals, NotEquals, GreaterThan
 
-import ubuntu_system_settings
-
 
 ACCOUNTS_IFACE = 'org.freedesktop.Accounts'
 ACCOUNTS_USER_IFACE = 'org.freedesktop.Accounts.User'
