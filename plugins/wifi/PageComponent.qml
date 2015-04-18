@@ -136,12 +136,12 @@ ItemPage {
 
             ListItem.SingleValue {
                 objectName: "connectToHiddenNetwork"
-                text: i18n.tr("Connect to hidden network…")
+                text: i18n.tr("Connect to hidden or encrypted network")
                 visible : (actionGroup.actionObject.valid ?
                            actionGroup.actionObject.state : false)
-                onClicked: {
-                    otherNetworLoader.source = "OtherNetwork.qml";
-                    PopupUtils.open(otherNetworLoader.item);
+                progression: true
+				onClicked: {
+                    pageStack.push(Qt.resolvedUrl("OtherNetwork.qml"))
                 }
             }
 

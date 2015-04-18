@@ -37,15 +37,29 @@
 typedef QMap<QString,QVariantMap> ConfigurationData;
 Q_DECLARE_METATYPE(ConfigurationData)
 
+
 WifiDbusHelper::WifiDbusHelper(QObject *parent) : QObject(parent),
       m_systemBusConnection(QDBusConnection::systemBus())
 {
     qDBusRegisterMetaType<ConfigurationData>();
 }
 
-void WifiDbusHelper::connect(QString ssid, int security, QString password)
+
+QByteArray WifiDbusHelper::getCertContent(QString filename){
+    QFile file(filename);
+      if (!file.open(QIODevice::ReadOnly)) {
+            qWarning() << "Could not resolve Cert-File (" << filename << "): File does not exist or is empty." ;
+            return QByteArray();
+      }
+      else {
+            return file.readAll();
+      }
+}
+
+
+void WifiDbusHelper::connect(QString ssid, int security, int auth, QString username, QString password, QStringList certs, int p2auth)
 {
-    if(security<0 || security>2) {
+    if((security<0 || security>4) || (auth<0 || auth>4) || (p2auth<0 || p2auth>5)) {
         qWarning() << "Qml and C++ have gotten out of sync. Can't connect.\n";
         return;
     }
@@ -66,8 +80,10 @@ void WifiDbusHelper::connect(QString ssid, int security, QString password)
     // security:
     // 0: None
     // 1: WPA & WPA2 Personal
-    // 2: WEP
-    if (security != 0) {
+    // 2: WPA Enterprise
+    // 3: WEP
+    // 4: Dynamic WEP
+    if (!(security == 0)) { // WPA Enterprise or Dynamic WEP
         wireless["security"] = QStringLiteral("802-11-wireless-security");
 
         QVariantMap wireless_security;
@@ -75,17 +91,119 @@ void WifiDbusHelper::connect(QString ssid, int security, QString password)
         if (security == 1) {
             wireless_security["key-mgmt"] = QStringLiteral("wpa-psk");
             wireless_security["psk"] = password;
-        } else if (security == 2) {
+        } else if (security == 3) {
             wireless_security["key-mgmt"] = QStringLiteral("none");
             wireless_security["auth-alg"] = QStringLiteral("open");
             wireless_security["wep-key0"] = password;
             wireless_security["wep-key-type"] = QVariant(uint(1));
+        } else if (security == 2) {
+            wireless_security["key-mgmt"] = QStringLiteral("wpa-eap");
+        } else if (security == 4) {
+            wireless_security["key-mgmt"] = QStringLiteral("ieee8021x");
+
+            /* leave disabled as hopefully not needed:
+            QStringList wep_pairwise, wep_group;
+            wep_pairwise[0] ="wep40"; wep_pairwise[1] ="wep104";
+            wep_group[0] ="wep40"; wep_group[1] ="wep104";
+            wireless_security["pairwise"] = wep_pairwise;
+            wireless_security["group"] = wep_group; */
         }
         configuration["802-11-wireless-security"] = wireless_security;
     }
 
     configuration["802-11-wireless"] = wireless;
 
+    if (security == 2 || security == 4){
+
+    QVariantMap wireless_802_1x;
+    // [802-1x]
+    /*TLS   // index: 0
+      TTLS  // index: 1
+      LEAP  // index: 2
+      FAST  // index: 3
+      PEAP  // index: 4 */
+
+    wireless_802_1x["identity"] = username;
+    if (!(auth == 0)) {
+        wireless_802_1x["password"] = password;
+    }
+
+    QByteArray cacert_a, clientcert, privatekey, pacFile;
+
+    if (certs[0].left(1) == "/"){
+        cacert_a = getCertContent(certs[0]);
+    }
+    else {
+        cacert_a.append(certs[0]);
+    }
+
+    if (auth == 0) { // TLS
+        wireless_802_1x["eap"] = QStringList("tls");
+        wireless_802_1x["ca-cert"]  = cacert_a;
+
+        if (certs[1].left(1) == "/"){
+            clientcert = getCertContent(certs[1]);
+        }
+        else {
+            clientcert.append(certs[1]);
+        }
+        wireless_802_1x["client-cert"]  = clientcert;
+        if (certs[2].left(1) == "/"){
+            privatekey = getCertContent(certs[2]);
+        }
+        else {
+            privatekey.append(certs[2]);
+        }
+        wireless_802_1x["private-key"]  = privatekey;
+        wireless_802_1x["private-key-password"] = password;
+    } else if (auth == 1) { // TTLS
+        wireless_802_1x["eap"] = QStringList("ttls");
+        wireless_802_1x["ca-cert"]  = cacert_a;
+    } else if (auth == 2) { // LEAP
+        wireless_802_1x["eap"] = QStringList("leap");
+    } else if (auth == 3) { // FAST
+        wireless_802_1x["eap"] = QStringList("fast");
+        wireless_802_1x["ca-cert"]  = cacert_a;
+
+        if (certs[3].left(1) == "/"){
+            pacFile = getCertContent(certs[3]);
+        }
+        else {
+            pacFile.append(certs[3]);
+        }
+        wireless_802_1x["pac-file"]  = pacFile;
+
+        // wireless_802_1x["phase1-fast-provisioning"] = QString("0");
+    } else if (auth == 4) { // PEAP
+        wireless_802_1x["eap"] = QStringList("peap");
+        wireless_802_1x["phase1-peaplabel"] = QString("1");
+       //wireless_802_1x["phase1-peapver"] = QString("0"); #jkb:let us unset this until problems are reported.
+    }
+
+    if (auth == 1 || auth == 3 || auth == 4 ){ // only for TTLS, FAST and PEAP
+        /* PAP      // index: 0
+           MSCHAPv2 // index: 1
+           MSCHAP   // index: 2
+           CHAP     // index: 3
+           GTC      // index: 4
+           MD5      // index: 5        */
+        if (p2auth == 0) {
+            wireless_802_1x["phase2-auth"] = QStringLiteral("pap");
+        } else if (p2auth == 1) {
+            wireless_802_1x["phase2-auth"] = QStringLiteral("mschapv2");
+        } else if (p2auth == 2) {
+            wireless_802_1x["phase2-auth"] = QStringLiteral("mschap");
+        } else if (p2auth == 3) {
+            wireless_802_1x["phase2-auth"] = QStringLiteral("chap");
+        } else if (p2auth == 4) {
+            wireless_802_1x["phase2-auth"] = QStringLiteral("gtc");
+        } else if (p2auth == 5) {
+            wireless_802_1x["phase2-auth"] = QStringLiteral("md5");
+        }
+
+    }
+    configuration["802-1x"] = wireless_802_1x;
+    }
 
     // find the first wlan adapter for now
     auto reply1 = mgr.GetDevices();
@@ -142,6 +260,7 @@ void WifiDbusHelper::connect(QString ssid, int security, QString password)
     }
 }
 
+
 void WifiDbusHelper::nmDeviceStateChanged(uint newState,
                                            uint oldState,
                                            uint reason)
@@ -149,6 +268,7 @@ void WifiDbusHelper::nmDeviceStateChanged(uint newState,
     Q_UNUSED (oldState);
     Q_EMIT (deviceStateChanged(newState, reason));
 }
+
 
 QString WifiDbusHelper::getWifiIpAddress()
 {
@@ -192,6 +312,7 @@ QString WifiDbusHelper::getWifiIpAddress()
     ip_addr.s_addr = ip4addr;
     return QString(inet_ntoa(ip_addr));
 }
+
 
 struct Network : public QObject
 {
@@ -345,6 +466,7 @@ struct Network : public QObject
     QMap<QString, QVariantMap> settings;
 };
 
+
 QList<QStringList> WifiDbusHelper::getPreviouslyConnectedWifiNetworks() {
     QList<QStringList> networks;
 
@@ -383,6 +505,7 @@ QList<QStringList> WifiDbusHelper::getPreviouslyConnectedWifiNetworks() {
     return networks;
 }
 
+
 void WifiDbusHelper::forgetConnection(const QString dbus_path) {
     OrgFreedesktopNetworkManagerSettingsConnectionInterface bar
             (NM_SERVICE,
@@ -394,6 +517,7 @@ void WifiDbusHelper::forgetConnection(const QString dbus_path) {
         qWarning() << "Error forgetting network: " << reply.error().message() << "\n";
     }
 }
+
 
 bool WifiDbusHelper::forgetActiveDevice() {
     OrgFreedesktopNetworkManagerInterface mgr(NM_SERVICE,

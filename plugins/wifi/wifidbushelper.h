@@ -37,7 +37,7 @@ public:
     explicit WifiDbusHelper(QObject *parent = nullptr);
     ~WifiDbusHelper() {};
 
-    Q_INVOKABLE void connect(QString ssid, int security, QString password);
+    Q_INVOKABLE void connect(QString ssid, int security, int auth, QString username, QString password, QStringList certs, int p2auth);//<#jkb: modified!!
     Q_INVOKABLE QList<QStringList> getPreviouslyConnectedWifiNetworks();
     Q_INVOKABLE void forgetConnection(const QString dbus_path);
     Q_INVOKABLE bool forgetActiveDevice();
@@ -52,6 +52,7 @@ Q_SIGNALS:
 private:
     QDBusConnection m_systemBusConnection;
     QString getWifiIpAddress();
+    QByteArray getCertContent(QString filename);
 };
 
 
