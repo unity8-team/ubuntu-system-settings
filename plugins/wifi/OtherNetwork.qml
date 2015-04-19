@@ -43,9 +43,9 @@ ItemPage {
         if(securityList.selectedIndex == 3) {
             // WEP
             return password.length === 5  ||
-                    password.length === 10 ||
-                    password.length === 13 ||
-                    password.length === 26;
+                   password.length === 10 ||
+                   password.length === 13 ||
+                   password.length === 26;
         }
         // WPAs
         return password.length >= 8
@@ -144,6 +144,7 @@ ItemPage {
             PropertyChanges {
                 target: feedback
                 enabled: true
+                visible: true
             }
         },
         State {
@@ -212,11 +213,11 @@ ItemPage {
                 id: securityList
                 objectName: "securityList"
                 model: [i18n.tr("None"),                 // index: 0
-                    i18n.tr("WPA & WPA2 Personal"),  // index: 1
-                    i18n.tr("WPA & WPA2 Enterprise"),// index: 2
-                    i18n.tr("WEP"),                  // index: 3
-                    i18n.tr("Dynamic WEP (802.1x)"), // index: 4
-                ]
+                        i18n.tr("WPA & WPA2 Personal"),  // index: 1
+                        i18n.tr("WPA & WPA2 Enterprise"),// index: 2
+                        i18n.tr("WEP"),                  // index: 3
+                        i18n.tr("Dynamic WEP (802.1x)"), // index: 4
+                       ]
             }
 
             Label {
@@ -234,11 +235,11 @@ ItemPage {
                 id: authList
                 objectName: "authList"
                 model: [i18n.tr("TLS"),   // index: 0
-                    i18n.tr("TTLS"),  // index: 1
-                    i18n.tr("LEAP"),  // index: 2
-                    i18n.tr("FAST"),  // index: 3
-                    i18n.tr("PEAP"),  // index: 4
-                ]
+                        i18n.tr("TTLS"),  // index: 1
+                        i18n.tr("LEAP"),  // index: 2
+                        i18n.tr("FAST"),  // index: 3
+                        i18n.tr("PEAP"),  // index: 4
+                       ]
                 visible: ( securityList.selectedIndex == 2 || securityList.selectedIndex == 4)
             }
 
@@ -251,9 +252,9 @@ ItemPage {
                 color: Theme.palette.selected.backgroundText
                 elide: Text.ElideRight
                 visible:    ( securityList.selectedIndex == 2 || securityList.selectedIndex == 4) // WPA or D-WEP
-                            && ( authList.selectedIndex == 1 || //
-                                authList.selectedIndex == 3 || //
-                                authList.selectedIndex == 4  ) //
+                         && ( authList.selectedIndex == 1 || //
+                              authList.selectedIndex == 3 || //
+                              authList.selectedIndex == 4  ) //
             }
 
             ListItem.ItemSelector {
@@ -261,16 +262,16 @@ ItemPage {
                 objectName: "p2authList"
                 width: parent.width
                 model: [i18n.tr("PAP"),      // index: 0
-                    i18n.tr("MSCHAPv2"), // index: 1
-                    i18n.tr("MSCHAP"),   // index: 2
-                    i18n.tr("CHAP"),     // index: 3
-                    i18n.tr("GTC"),      // index: 4
-                    i18n.tr("MD5")       // index: 5
-                ]
+                        i18n.tr("MSCHAPv2"), // index: 1
+                        i18n.tr("MSCHAP"),   // index: 2
+                        i18n.tr("CHAP"),     // index: 3
+                        i18n.tr("GTC"),      // index: 4
+                        i18n.tr("MD5")       // index: 5
+                       ]
                 visible:    ( securityList.selectedIndex == 2 || securityList.selectedIndex == 4) // WPA or D-WEP
-                            && ( authList.selectedIndex == 1 || //
-                                authList.selectedIndex == 3 || //
-                                authList.selectedIndex == 4  ) //
+                         && ( authList.selectedIndex == 1 || //
+                              authList.selectedIndex == 3 || //
+                              authList.selectedIndex == 4  ) //
             }
 
             Column{     // ca-cert
@@ -282,9 +283,9 @@ ItemPage {
                 spacing: parent.spacing
 
                 visible:    ( securityList.selectedIndex == 2 || securityList.selectedIndex == 4)
-                            && ( authList.selectedIndex == 0 ||
-                                authList.selectedIndex == 1 ||
-                                authList.selectedIndex == 4  )
+                         && ( authList.selectedIndex == 0 ||
+                              authList.selectedIndex == 1 ||
+                              authList.selectedIndex == 4  )
 
                 RowLayout{
                     spacing: units.gu(4)
@@ -301,21 +302,17 @@ ItemPage {
                         font.bold: false
                         color: Theme.palette.selected.backgroundText
                         //elide: Text.ElideRight
-                        anchors.bottom: addcacertButton.bottom
+                        //anchors.bottom: addcacertButton.bottom
                     }
 
-                    Button {
+                    /*Button { // Button action not implemented yet, so disabled:
                         id: addcacertButton
-                        //action: selectPeer
-                        // Button action not implemented yet, so disabled:
-                        enabled: false
-                        visible: false
-
+                        action: selectPeer
                         objectName: "addcacertButton"
                         anchors.right: parent.right
                         text: i18n.tr("Add file…")
                         //iconName: "add"
-                    }
+                    }*/
                 }
 
 
@@ -336,7 +333,7 @@ ItemPage {
                         right: parent.right
                     }
                     visible:    ( securityList.selectedIndex == 2 || securityList.selectedIndex == 4)
-                                && ( authList.selectedIndex == 0 ) // only for TLS
+                             && ( authList.selectedIndex == 0 ) // only for TLS
 
                     Label {
                         id: usercertLabel
@@ -346,28 +343,26 @@ ItemPage {
                         font.bold: false
                         color: Theme.palette.selected.backgroundText
                         //elide: Text.ElideRight
-                        anchors.bottom: addusercertButton.bottom
+                        //anchors.bottom: addusercertButton.bottom
                     }
 
-                    Button {
+                    /*Button {// Button action not implemented yet, so disabled:
                         id: addusercertButton
                         //action: selectPeer
-                        // Button action not implemented yet, so disabled:
                         enabled: false
                         visible: false
 
                         objectName: "addusercertButton"
                         anchors.right: parent.right
                         text: i18n.tr("Add file…")
-                    }
+                    }*/
                 }
 
                 TextArea{
                     id : usercert
                     objectName: "usercert"
-                    //readOnly: true
                     visible:    ( securityList.selectedIndex == 2 || securityList.selectedIndex == 4)
-                                && ( authList.selectedIndex == 0 )
+                             && ( authList.selectedIndex == 0 )
                     width: parent.width
                     autoSize: true
                     maximumLineCount: 4
@@ -382,7 +377,7 @@ ItemPage {
                         right: parent.right
                     }
                     visible:    ( securityList.selectedIndex == 2 || securityList.selectedIndex == 4)
-                                && ( authList.selectedIndex == 0 ) // only for TLS
+                             && ( authList.selectedIndex == 0 ) // only for TLS
 
                     Label {
                         id: userprivatekeyLabel
@@ -392,28 +387,23 @@ ItemPage {
                         font.bold: false
                         color: Theme.palette.selected.backgroundText
                         //elide: Text.ElideRight
-                        anchors.bottom: adduserprivatekeyButton.bottom
+                        //anchors.bottom: adduserprivatekeyButton.bottom
                     }
 
-                    Button {
+                    /*Button { // Button action not implemented yet, so disabled:
                         id: adduserprivatekeyButton
-                        //action: selectPeer
-                        // Button action not implemented yet, so disabled:
-                        enabled: false
-                        visible: false
-
+                        action: selectPeer
                         objectName: "adduserprivatekeyButton"
                         anchors.right: parent.right
                         text: i18n.tr("Add file…")
-                    }
+                    }*/
                 }
 
                 TextArea {
                     id : userprivatekey
                     objectName: "userprivatekey"
-                    //readOnly: true
                     visible:    ( securityList.selectedIndex == 2 || securityList.selectedIndex == 4)
-                                && ( authList.selectedIndex == 0 )
+                             && ( authList.selectedIndex == 0 )
                     width: parent.width
                     autoSize: true
                     maximumLineCount: 4
@@ -433,7 +423,7 @@ ItemPage {
                 spacing: parent.spacing
 
                 visible:    ( securityList.selectedIndex == 2 || securityList.selectedIndex == 4)
-                            && ( authList.selectedIndex == 3 )
+                         && ( authList.selectedIndex == 3 )
 
                 RowLayout{
                     spacing: units.gu(4)
@@ -450,26 +440,21 @@ ItemPage {
                         font.bold: false
                         color: Theme.palette.selected.backgroundText
                         //elide: Text.ElideRight
-                        anchors.bottom: adduserprivatekeyButton.bottom
+                        //anchors.bottom: adduserprivatekeyButton.bottom
                     }
 
-                    Button {
+                    /*Button {// Button action not implemented yet, so disabled:
                         id: addpacFileButton
-                        //action: selectPeer
-                        // Button action not implemented yet, so disabled:
-                        enabled: false
-                        visible: false
-
+                        action: selectPeer
                         objectName: "addpacFileButton"
                         anchors.right: parent.right
                         text: i18n.tr("Add file…")
-                    }
+                    }*/
                 }
 
                 TextArea {
                     id : pacFile
                     objectName: "pacFile"
-                    //readOnly: true
                     width: parent.width
                     autoSize: true
                     maximumLineCount: 4
@@ -483,13 +468,13 @@ ItemPage {
             Label {
                 id: usernameLabel
                 text : {
-                    if (( securityList.selectedIndex == 2 || securityList.selectedIndex == 4)
-                            && ( authList.selectedIndex == 0 )) {
-                        i18n.tr("Identity")
-                    }
-                    else {
-                        i18n.tr("Username")
-                    }
+                         if (     ( securityList.selectedIndex == 2 || securityList.selectedIndex == 4)
+                               && ( authList.selectedIndex == 0 )) {
+                             i18n.tr("Identity")
+                         }
+                         else {
+                             i18n.tr("Username")
+                         }
                 }
 
                 objectName: "usernameLabel"
@@ -515,13 +500,12 @@ ItemPage {
             Label {
                 id: passwordLabel
                 text: {
-                    if (( securityList.selectedIndex == 2 || securityList.selectedIndex == 4)
-                            && ( authList.selectedIndex == 0 )) {
-                        i18n.tr("Private Key Password")
-                    }
-                    else {
-                        i18n.tr("Password")
-                    }
+                         if (    ( securityList.selectedIndex == 2 || securityList.selectedIndex == 4)
+                             && ( authList.selectedIndex == 0 )) {
+                            i18n.tr("Private Key Password")
+                         } else {
+                            i18n.tr("Password")
+                         }
                 }
 
                 objectName: "passwordListLabel"
@@ -579,7 +563,7 @@ ItemPage {
             }
 
 
-        ListItem.ThinDivider {visible: securityList.selectedIndex !== 0}
+        ListItem.ThinDivider {visible: securityList.selectedIndex != 0}
 
         Label {
                 property bool enabled: false
@@ -676,7 +660,8 @@ ItemPage {
         }
 
         // #jkb: to be implemented for chosing file from content hub:
-        /*        Action {
+        /* from plugin background
+        Action {
                 id: selectPeer
                 // when action has been activated, push the picker on the stack
                 onTriggered: {
