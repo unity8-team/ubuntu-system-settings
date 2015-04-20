@@ -10,7 +10,7 @@ import subprocess
 from time import sleep
 
 from autopilot.matchers import Eventually
-from testtools.matchers import Equals, NotEquals, GreaterThan
+from testtools.matchers import Equals, GreaterThan
 
 from ubuntu_system_settings.tests import UbuntuSystemSettingsTestCase
 from ubuntu_system_settings.utils.i18n import ugettext as _
