@@ -161,7 +161,8 @@ ItemPage {
             onClicked: {
                 apnEditor = PopupUtils.open(editor, root, {
                     contextModel: modelData,
-                    apnLib: APN
+                    apnLib: APN,
+                    title: modelData.title
                 });
             }
         }
