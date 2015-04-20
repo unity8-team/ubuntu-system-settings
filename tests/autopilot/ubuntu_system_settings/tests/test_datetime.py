@@ -76,9 +76,9 @@ class TimeDateTestCase(UbuntuSystemSettingsTestCase,
     def test_tz_list_initially_empty(self):
         """ Checks that no list is displayed initially """
         self.main_view.scroll_to_and_click(self.tz_page)
-        label = self.main_view.wait_select_single(
-            objectName='nothingLabel')
-        self.assertThat(label.visible, Eventually(Equals(True)))
+        labelVisible = self.main_view.select_single(
+            objectName='nothingLabel').visible
+        self.assertThat(labelVisible, Equals(True))
 
     def test_searching_tz(self):
         """ Check that searching for a valid location shows something """
@@ -97,9 +97,9 @@ class TimeDateTestCase(UbuntuSystemSettingsTestCase,
             objectName='locationsListView'
         )
         self.assertThat(listview.count, Equals(0))
-        label = self.main_view.wait_select_single(
-            objectName='nothingLabel')
-        self.assertThat(label.visible, Eventually(Equals(True)))
+        labelVisible = self.main_view.select_single(
+            objectName='nothingLabel').visible
+        self.assertThat(labelVisible, Equals(True))
 
     def test_manual_tz_selection(self):
         """ Check that manually selecting a timezone sets it properly """
