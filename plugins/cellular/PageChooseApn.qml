@@ -3,7 +3,8 @@
  *
  * Copyright (C) 2014 Canonical Ltd.
  *
- * Contact: Pat McGowan <pat.mcgowan@canonical.com>
+ * Contact: Pat McGowan <pat.mcgowan@canonical.com>,
+ *          Jonas G. Drange <jonas.drange@canonical.com>
  *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License version 3, as published
@@ -40,9 +41,12 @@ ItemPage {
     }
 
     /**
-     * We use ListModel to represent APNs. The model consists of:
-     *  - path: the path of the context
-     *  - qml: the QML of the context
+     * We use ListModels to represent different types of APNs. We use
+     * OfonoConnectionContext qml objects to represents the contexts.
+     *
+     * Model objects:
+     *     path: the path of the context
+     *     qml: the QML of the context
      */
 
     ListModel {
@@ -158,13 +162,14 @@ ItemPage {
             text: modelData.label
             subText: modelData.current ?
                 modelData.current.accessPointName : i18n.tr('Not set')
-            onClicked: {
-                apnEditor = PopupUtils.open(editor, root, {
-                    contextModel: modelData,
-                    apnLib: APN,
-                    title: modelData.title
-                });
-            }
+            onClicked: apnEditor = PopupUtils.open(editor, root, {
+                contextModel:    modelData,
+                mmsModel:        mmsContexts,
+                internetModel:   internetContexts,
+                lteModel:        iaContexts,
+                apnLib:          APN,
+                title:           modelData.title
+            });
         }
     }
 

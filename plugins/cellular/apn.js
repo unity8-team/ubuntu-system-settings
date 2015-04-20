@@ -1,9 +1,25 @@
-/**
- * A collection of functions to help dynamic creation and deletion
+/*
+ * This file is part of system-settings
+ *
+ * Copyright (C) 2015 Canonical Ltd.
+ *
+ * Contact: Jonas G. Drange <jonas.drange@canonical.com>
+ *
+ * This program is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License version 3, as published
+ * by the Free Software Foundation.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranties of
+ * MERCHANTABILITY, SATISFACTORY QUALITY, or FITNESS FOR A PARTICULAR
+ * PURPOSE.  See the GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * This is a collection of functions to help dynamic creation and deletion
  * of ofono contexts.
- *
- *
-*/
+ */
 
 // Map of path to QOfonoConnectionContext objects
 var _pathToQml = {};
@@ -83,10 +99,8 @@ function _createQml (paths) {
     var ctx;
     paths.forEach(function (path, i) {
         if (!_pathToQml.hasOwnProperty(path)) {
-            ctx = contextComponent.createObject(root, {
-                'contextPath': path,
-                'modemPath': sim.path
-            });
+
+            ctx = createContextQml(path);
 
             ctx.nameChanged.connect(contextNameChanged.bind(ctx));
             ctx.activeChanged.connect(contextActiveChanged.bind(ctx));
@@ -101,6 +115,17 @@ function _createQml (paths) {
             _pathToQml[path] = ctx;
         }
     });
+}
+
+function createContextQml (path) {
+    if (!_pathToQml.hasOwnProperty(path)) {
+        return contextComponent.createObject(root, {
+            'contextPath': path,
+            'modemPath': sim.path
+        });
+    } else {
+        return _pathToQml[path];
+    }
 }
 
 function addContextToModel(context, type) {
@@ -329,6 +354,11 @@ function CUSTOM_MMS_CONTEXT_NAME () {
     return _CUSTOM_MMS_CONTEXT_NAME;
 }
 
+/**
+ * Checks if a name is of any custom kind.
+ *
+ * @return {Boolean} whether or not the name is custom
+ */
 function isNameCustom (name) {
     if (name === _CUSTOM_MMS_CONTEXT_NAME ||
         name === _CUSTOM_INTERNET_CONTEXT_NAME ||
@@ -337,29 +367,4 @@ function isNameCustom (name) {
     } else {
         return false;
     }
-}
-
-/**
- * Closes the editor
- */
-function closeEditor () {
-    PopupUtils.close(d.editor);
-    d.editor = null;
-    d.editorValues = null;
-}
-
-/**
- * Open the editor
- *
- * @param {String} type of editor we're about to edit
- * @param {QOfonoConnectionContext|Null} apn we're editing, null if new
- * @param {QOfonoConnectionContext|Null} activeInternetApn
- *     used when editing mms as apn to draw values from
- */
-function openEditor (apn, type, activeInternetApn) {
-    var data = {
-        'type': type,
-        'apn': apn
-    };
-    d.editor = PopupUtils.open(editor, root, data);
 }

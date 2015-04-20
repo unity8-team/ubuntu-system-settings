@@ -3,7 +3,8 @@
  *
  * Copyright (C) 2014 Canonical Ltd.
  *
- * Contact: Pat McGowan <pat.mcgowan@canonical.com>
+ * Contact: Pat McGowan <pat.mcgowan@canonical.com>,
+ *          Jonas G. Drange <jonas.drange@canonical.com>
  *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License version 3, as published
@@ -34,8 +35,13 @@ Dialog {
     // MMS, Internet or LTE model
     property var contextModel
 
+    // All models
+    property var mmsModel
+    property var internetModel
+    property var lteModel
+
     property bool isMms: contextModel.type === "mms"
-    property bool isIinternet: contextModel.type === "internet"
+    property bool isInternet: contextModel.type === "internet"
     property bool isLte: contextModel.type === "lte"
 
     // When user activates
@@ -82,24 +88,27 @@ Dialog {
         }
     ]
 
-    Component.onCompleted: {
-        console.warn('opened editor for type', contextModel.type)
-        // if (apn) {
-        //     d.populateInputs(apn);
-        // } else if (activeInternetApn) {
-        //     d.populateInputs(activeInternetApn);
-        // }
-    }
-
     // Main column, holding all controls and buttons.
     Column {
         anchors { left: parent.left; right: parent.right }
         spacing: units.gu(2)
 
+        // Suggestion controls
         Column {
+
+            function fill (context) {
+                accessPointName.text = context.accessPointName;
+                username.text = context.username;
+                password.text = context.password;
+
+                if (isMms) {
+                    messageCenter.text = context.messageCenter;
+                    messageProxy.text = context.messageProxy;
+                }
+            }
+
             anchors { left: parent.left; right: parent.right }
-            spacing: units.gu(0.5)
-            visible: contextModel.count
+            visible: isLte || isInternet || contextModel.count
 
             Label {
                 wrapMode: Text.WrapAnywhere
@@ -107,17 +116,71 @@ Dialog {
                 text: i18n.tr("Suggestions")
             }
 
+            // The default suggestion for LTE APNs, allowing the user
+            // to copy from Internet apns.
+            ListItem.ItemSelector {
+                id: copyFromInternet
+                visible: isLte && internetModel.count
+                expanded: true
+                model: 1
+                selectedIndex: -1
+                delegate: OptionSelectorDelegate {
+                    text: i18n.tr("Copy from Internet APN")
+                    showDivider: false
+                }
+
+                onDelegateClicked: {
+                    suggestions.selectedIndex = -1;
+                    parent.fill(internetModel.get(0).qml);
+                }
+
+                // Dirty hack to remove unavoidable line under an ItemSelector.
+                Rectangle {
+                    anchors.bottom: parent.bottom; anchors.bottomMargin: 1;
+                    width: parent.width; height: 1; color: "white";
+                }
+            }
+
+            // The default suggestion for Internet APNs, allowing the user
+            // to copy from MMS apns.
+            ListItem.ItemSelector {
+                id: copyFromMms
+                visible: isInternet && mmsModel.count
+                expanded: true
+                model: 1
+                selectedIndex: -1
+                delegate: OptionSelectorDelegate {
+                    text: i18n.tr("Copy from MMS APN")
+                    showDivider: false
+                }
+                onDelegateClicked: {
+                    suggestions.selectedIndex = -1;
+                    parent.fill(mmsModel.get(0).qml);
+                }
+
+                // Dirty hack to remove unavoidable line under an ItemSelector.
+                Rectangle {
+                    anchors.bottom: parent.bottom; anchors.bottomMargin: 1;
+                    width: parent.width; height: 1; color: "white";
+                }
+            }
+
             ListItem.ItemSelector {
                 id: suggestions
                 model: contextModel
                 visible: contextModel.count
                 expanded: true
+                selectedIndex: -1
                 delegate: OptionSelectorDelegate {
                     property string name: contextModel.get(index).qml.name
                     text: apnLib.isNameCustom(name) ? i18n.tr("Custom") : name
                     showDivider: false
                 }
-                //onDelegateClicked: APN.activateContext(model.get(index))
+                onDelegateClicked: {
+                    copyFromMms.selectedIndex = -1;
+                    copyFromInternet.selectedIndex = -1;
+                    parent.fill(model.get(index).qml);
+                }
             }
         }
 
@@ -270,7 +333,6 @@ Dialog {
             TextField {
                 id: username
                 width: parent.width
-                enabled: !doBoth.checked
                 inputMethodHints: Qt.ImhNoPredictiveText | Qt.ImhSensitiveData
             }
         }
