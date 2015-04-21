@@ -23,7 +23,7 @@ import QtQuick 2.0
 import QtQuick.Layouts 1.1
 import SystemSettings 1.0
 import Ubuntu.Components 1.1
-import Ubuntu.Components.Popups 0.1
+import Ubuntu.Components.Popups 1.0
 import Ubuntu.Components.ListItems 1.0 as ListItem
 
 Dialog {
@@ -32,23 +32,26 @@ Dialog {
     // Property that holds the APN (apn.js) module.
     property var apnLib
 
-    // MMS, Internet or ia model
+    // Easy access to the model we're working with.
     property var contextModel
 
-    // All models
+    // All models.
     property var mmsModel
     property var internetModel
     property var iaModel
 
+    // Flags that indicate what context we are editing.
     property bool isMms: contextModel.type === "mms"
     property bool isInternet: contextModel.type === "internet"
     property bool isIa: contextModel.type === "ia"
 
+    // This holds the suggested context, so we can compare form data.
     property var suggestion: null
 
-    property bool isValid: {
-        return accessPointName.text;
-    }
+    property bool isValid: accessPointName.text
+
+    // Asks if the data entered by the user is different from the suggestion,
+    // if any.
     property bool isChanged: {
 
         // We had no suggestion, so we have nothing to compare it to.
@@ -64,7 +67,7 @@ Dialog {
                         password.text];
         var i;
 
-        // If we are comparing mms, add some more data to ref and form arrays.
+        // If we are comparing mms, add more data.
         if (isMms) {
             refData.push(suggestion.messageCenter);
             formData.push(messageCenter.text);
@@ -82,19 +85,21 @@ Dialog {
     }
 
 
-    // When user activates
+    // When user activates.
     signal activated ()
 
-    // When activation failed
+    // When activation failed.
     signal failed ()
 
-    // When activation suceeds
+    // When activation suceeds.
     signal succeeded ()
 
-    // When user cancels
+    // When user cancels.
     signal canceled ()
 
     states: [
+
+        // State that deactivates all form controls.
         State {
             name: "deactivateEverything"
             PropertyChanges { target: copyFromInternet; enabled: false; }
@@ -171,7 +176,7 @@ Dialog {
 
         // Suggestion controls
         Column {
-
+            // Complete the form using the context param as reference.
             function fill (context) {
                 accessPointName.text = context.accessPointName;
                 username.text = context.username;
@@ -183,10 +188,10 @@ Dialog {
                 }
             }
 
+            anchors { left: parent.left; right: parent.right }
             visible: contextModel.count ||
                      (isIa && internetModel.count) ||
                      (isInternet && mmsModel.count)
-            anchors { left: parent.left; right: parent.right }
 
             Label {
                 wrapMode: Text.WrapAnywhere
@@ -194,10 +199,12 @@ Dialog {
                 text: i18n.tr("Suggestions")
             }
 
+            // Put some space between the title and suggestions.
             Item { width: parent.width; height: units.gu(1); }
 
             // The default suggestion for ia contexts, allowing the user
-            // to copy from Internet context.
+            // to copy from Internet context. Will only be visible if there are
+            // Internet contexts stored.
             ListItem.ItemSelector {
                 id: copyFromInternet
                 visible: isIa && internetModel.count
@@ -222,7 +229,8 @@ Dialog {
             }
 
             // The default suggestion for Internet APNs, allowing the user
-            // to copy from MMS contexts.
+            // to copy from MMS contexts. Will only be visible if there are
+            // MMS contexts stored.
             ListItem.ItemSelector {
                 id: copyFromMms
                 visible: isInternet && mmsModel.count
@@ -280,7 +288,9 @@ Dialog {
             TextField {
                 id: accessPointName
                 width: parent.width
-                inputMethodHints: Qt.ImhUrlCharactersOnly | Qt.ImhNoAutoUppercase | Qt.ImhNoPredictiveText
+                inputMethodHints: Qt.ImhUrlCharactersOnly |
+                                  Qt.ImhNoAutoUppercase |
+                                  Qt.ImhNoPredictiveText
                 Component.onCompleted: forceActiveFocus()
             }
         }
@@ -560,7 +570,9 @@ Dialog {
                         ctx.activeChanged.connect(apnLib.userTriedActivating.bind(ctx));
                         ctx.active = true;
                     } else {
-                        // We will create a new APN.
+                        // We will create a new context. This is async, so
+                        // in a Timer, we'll wait for the new context and
+                        // edit it there.
                         waitForCreatedContextTimer.start();
                         apnLib.createContext(contextModel.type);
                     }

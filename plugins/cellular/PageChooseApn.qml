@@ -26,8 +26,8 @@
 import QtQuick 2.0
 import SystemSettings 1.0
 import Ubuntu.Components 1.1
-import Ubuntu.Components.Popups 0.1
-import Ubuntu.Components.ListItems 0.1 as ListItem
+import Ubuntu.Components.Popups 1.0
+import Ubuntu.Components.ListItems 1.0 as ListItem
 import MeeGo.QOfono 0.2
 import Ubuntu.SystemSettings.Cellular 1.0
 import "apn.js" as APN
@@ -45,10 +45,18 @@ ItemPage {
     }
 
     /**
-     * We use ListModels to represent different types of APNs. We use
-     * OfonoConnectionContext qml objects to represents the contexts.
+     * We have three ListModels: one for Internet contexts, one for MMS
+     * contexts and one for ia contexts. We use OfonoConnectionContext qml
+     * objects to represents the contexts.
      *
-     * Model objects:
+     * The model will have helpful properties:
+     *     label: Label to put on the button that spawns the editor.
+     *     title: Title that goes in the editor.
+     *     type: A code that tells us what context type this model will have.
+     *     current: Falsy if no context is active, and a OfonoConnectionContext
+     *              if one is active.
+     *
+     * Model objects will have the following roles:
      *     path: the path of the context
      *     qml: the QML of the context
      */
