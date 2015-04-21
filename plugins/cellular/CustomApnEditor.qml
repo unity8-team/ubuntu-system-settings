@@ -25,6 +25,7 @@ import SystemSettings 1.0
 import Ubuntu.Components 1.1
 import Ubuntu.Components.Popups 1.0
 import Ubuntu.Components.ListItems 1.0 as ListItem
+import "apn_editor.js" as Editor
 
 Dialog {
     id: root
@@ -48,45 +49,14 @@ Dialog {
     // This holds the suggested context, so we can compare form data.
     property var suggestion: null
 
-    property bool isValid: accessPointName.text
+    property bool isValid: Editor.isValid()
 
     // Asks if the data entered by the user is different from the suggestion,
     // if any.
-    property bool isChanged: {
-
-        // We had no suggestion, so we have nothing to compare it to.
-        if (!suggestion) {
-            return true;
-        }
-
-        var refData = [suggestion.accessPointName,
-                       suggestion.username,
-                       suggestion.password];
-        var formData = [accessPointName.text,
-                        username.text,
-                        password.text];
-        var i;
-
-        // If we are comparing mms, add more data.
-        if (isMms) {
-            refData.push(suggestion.messageCenter);
-            formData.push(messageCenter.text);
-
-            refData.push(suggestion.messageProxy);
-            formData.push(messageProxy.text + (port.text ? ':' + port.text : ''));
-        }
-
-        // Compare the arrays.
-        i = refData.length;
-        while(i--) {
-            if (refData[i] !== formData[i]) return true;
-        }
-        return false;
-    }
-
+    property bool isChanged: Editor.isChanged()
 
     // When user activates.
-    signal activated ()
+    signal activated (string contextPath, string type)
 
     // When activation failed.
     signal failed ()
@@ -112,7 +82,7 @@ Dialog {
             PropertyChanges { target: messageProxy; enabled: false; }
             PropertyChanges { target: port; enabled: false; }
             PropertyChanges { target: passwordHiddenSwitch; enabled: false; }
-            PropertyChanges { target: confirmButton; enabled: false; }
+            PropertyChanges { target: activateButton; enabled: false; }
             PropertyChanges { target: cancelButton; enabled: false; }
         },
 
@@ -124,7 +94,7 @@ Dialog {
                 running: true
             }
             PropertyChanges {
-                target: confirmButton
+                target: activateButton
                 text: ""
                 enabled: false
             }
@@ -142,7 +112,7 @@ Dialog {
                 running: true
             }
             PropertyChanges {
-                target: confirmButton
+                target: activateButton
                 text: ""
                 enabled: false
             }
@@ -176,17 +146,8 @@ Dialog {
 
         // Suggestion controls
         Column {
+            id: suggestionColumn
             // Complete the form using the context param as reference.
-            function fill (context) {
-                accessPointName.text = context.accessPointName;
-                username.text = context.username;
-                password.text = context.password;
-
-                if (isMms) {
-                    messageCenter.text = context.messageCenter;
-                    messageProxy.text = context.messageProxy;
-                }
-            }
 
             anchors { left: parent.left; right: parent.right }
             visible: contextModel.count ||
@@ -208,7 +169,7 @@ Dialog {
             ListItem.ItemSelector {
                 id: copyFromInternet
                 visible: isIa && internetModel.count
-                expanded: true
+                expanded: visible
                 model: 1
                 selectedIndex: -1
                 delegate: OptionSelectorDelegate {
@@ -218,7 +179,7 @@ Dialog {
 
                 onDelegateClicked: {
                     suggestions.selectedIndex = -1;
-                    parent.fill(internetModel.get(0).qml);
+                    Editor.populate(internetModel.get(0).qml);
                 }
 
                 // Dirty hack to remove unavoidable line under an ItemSelector.
@@ -234,7 +195,7 @@ Dialog {
             ListItem.ItemSelector {
                 id: copyFromMms
                 visible: isInternet && mmsModel.count
-                expanded: true
+                expanded: visible
                 model: 1
                 selectedIndex: -1
                 delegate: OptionSelectorDelegate {
@@ -243,7 +204,7 @@ Dialog {
                 }
                 onDelegateClicked: {
                     suggestions.selectedIndex = -1;
-                    parent.fill(mmsModel.get(0).qml);
+                    Editor.populate(mmsModel.get(0).qml);
                 }
 
                 // Dirty hack to remove unavoidable line under an ItemSelector.
@@ -268,7 +229,7 @@ Dialog {
                     var context = model.get(index).qml;
                     copyFromMms.selectedIndex = -1;
                     copyFromInternet.selectedIndex = -1;
-                    parent.fill(context);
+                    Editor.populate(context);
                     suggestion = context;
                 }
             }
@@ -292,6 +253,7 @@ Dialog {
                                   Qt.ImhNoAutoUppercase |
                                   Qt.ImhNoPredictiveText
                 Component.onCompleted: forceActiveFocus()
+                KeyNavigation.tab: isMms ? messageCenter : username
             }
         }
 
@@ -310,25 +272,16 @@ Dialog {
             TextField {
                 id: messageCenter
 
-                function hasProtocol (link) {
-                    return link.search(/^http[s]?\:\/\//) == -1;
-                }
-
-                function setHttp(link) {
-                    if (hasProtocol(link)) {
-                        link = 'http://' + link;
-                    }
-                    return link;
-                }
                 width: parent.width
                 inputMethodHints: Qt.ImhUrlCharactersOnly |
                                   Qt.ImhNoAutoUppercase |
                                   Qt.ImhNoPredictiveText
                 onFocusChanged: {
                     if (!focus && text.length > 0) {
-                        text = setHttp(text);
+                        text = Editor.setHttp(text);
                     }
                 }
+                KeyNavigation.tab: messageProxy
             }
         }
 
@@ -356,6 +309,7 @@ Dialog {
                         movePortDelay.running = true;
                     }
                 }
+                KeyNavigation.tab: port
             }
 
             Timer {
@@ -408,6 +362,7 @@ Dialog {
                                   Qt.ImhNoAutoUppercase |
                                   Qt.ImhNoPredictiveText
                 validator: portValidator
+                KeyNavigation.tab: username
             }
 
             RegExpValidator {
@@ -431,6 +386,7 @@ Dialog {
                 id: username
                 width: parent.width
                 inputMethodHints: Qt.ImhNoPredictiveText | Qt.ImhSensitiveData
+                KeyNavigation.tab: password
             }
         }
 
@@ -453,6 +409,7 @@ Dialog {
                 inputMethodHints: Qt.ImhNoAutoUppercase |
                                   Qt.ImhNoPredictiveText |
                                   Qt.ImhSensitiveData
+                KeyNavigation.tab: activateButton
             }
 
             // FIXME: Use ListItem control?
@@ -542,73 +499,13 @@ Dialog {
             }
 
             Button {
-                id: confirmButton
+                id: activateButton
                 width: (parent.width / 2) - units.gu(1)
                 text: i18n.tr("Activate")
                 enabled: isValid && isChanged
                 activeFocusOnPress: false
 
-                onClicked: {
-
-                    activated();
-
-                    // Do we have a custom context?
-                    var ctx = apnLib.getCustomContext(contextModel.type);
-
-                    if (ctx) {
-                        // We have a custom context we want to change.
-                        // We cannot change it if it is active. If active,
-                        // we need to defer changing it until it has been
-                        // deactivated.
-                        if(ctx.active) {
-                            console.warn('Deactivating context before changing.');
-                            ctx.disconnect();
-                        }
-
-                        console.warn('Changing context');
-                        ctx.accessPointName = accessPointName.text
-                        ctx.activeChanged.connect(apnLib.userTriedActivating.bind(ctx));
-                        ctx.active = true;
-                    } else {
-                        // We will create a new context. This is async, so
-                        // in a Timer, we'll wait for the new context and
-                        // edit it there.
-                        waitForCreatedContextTimer.start();
-                        apnLib.createContext(contextModel.type);
-                    }
-                }
-
-                Timer {
-                    id: waitForCreatedContextTimer
-                    property int waited: 0
-                    interval: 300
-                    repeat: true
-                    running: false
-                    triggeredOnStart: true
-
-                    onTriggered: {
-                        var createdModel = apnLib.getCustomContext(contextModel.type);
-                        if (createdModel) {
-                            // The context should be deactivated here, but if
-                            // not, we deactivate it.
-                            if (createdModel.active) {
-                                createdModel.disconnect();
-                            }
-                            createdModel.accessPointName = accessPointName.text;
-                            createdModel.activeChanged.connect(apnLib.userTriedActivating.bind(createdModel));
-                            createdModel.active = true;
-                            running = false;
-                            console.warn('Saw new model, trying to activate.');
-                        } else {
-                            console.warn('No created model yet...');
-                        }
-
-                        if (waited > 30) {
-                            root.failed();
-                        }
-                        waited++;
-                    }
-                }
+                onClicked: Editor.activateButtonPressed()
 
                 Icon {
                     height: parent.height - units.gu(1.5)
@@ -634,6 +531,16 @@ Dialog {
         } // row for buttons
 
     } // main column holding all controls and buttons
+
+    Timer {
+        id: waitForCreatedContextTimer
+        property int waited: 0
+        interval: 300
+        repeat: true
+        running: false
+        triggeredOnStart: true
+        onTriggered: Editor.checkContextAppeared()
+    }
 
     Timer {
         id: activatingDoneTimer

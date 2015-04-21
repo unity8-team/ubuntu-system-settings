@@ -30,7 +30,7 @@ import Ubuntu.Components.Popups 1.0
 import Ubuntu.Components.ListItems 1.0 as ListItem
 import MeeGo.QOfono 0.2
 import Ubuntu.SystemSettings.Cellular 1.0
-import "apn.js" as APN
+import "apn_manager.js" as APN
 
 ItemPage {
     id: root
@@ -159,7 +159,15 @@ ItemPage {
             id: editorDialog
 
             onActivated: {
-                console.warn('activated in editor');
+                console.warn('activated in editor',
+                             contextPath,sim.simMng.subscriberIdentity,
+                             sim.path);
+
+                if (APN.activateContext(contextPath)) {
+                    apnEditor.succeeded();
+                } else {
+                    apnEditor.failed();
+                }
             }
 
             onCanceled: {
@@ -175,11 +183,11 @@ ItemPage {
             subText: modelData.current ?
                 modelData.current.accessPointName : i18n.tr('Not set')
             onClicked: apnEditor = PopupUtils.open(editor, root, {
+                apnLib:          APN,
                 contextModel:    modelData,
                 mmsModel:        mmsContexts,
                 internetModel:   internetContexts,
                 iaModel:         iaContexts,
-                apnLib:          APN,
                 title:           modelData.title
             });
         }

@@ -70,6 +70,14 @@ function getCustomContext (type) {
     return null;
 }
 
+function getContextQML (path) {
+    if (!_pathToQml.hasOwnProperty(path)) {
+        return null;
+    } else {
+        return _pathToQml[path];
+    }
+}
+
 /**
  * Given an array of paths, it will create and associate
  * an QOfonoConnectionContext QML object for each new path.
@@ -202,7 +210,7 @@ function addContextToModel(context, type) {
 
 function contextRemoved (path) {
     var paths = sim.connMan.contexts.slice(0);
-    updatedPaths = paths.filter(function (val) {
+    var updatedPaths = paths.filter(function (val) {
         return val !== path;
     });
     _garbageCollect(paths);
@@ -268,10 +276,10 @@ function contextNameChanged (name) {
     if (name === 'Internet') {
         newName = _CUSTOM_INTERNET_CONTEXT_NAME;
         isCustom = true;
-    } else if (name === "MMS") {
+    } else if (name === 'MMS') {
         newName = _CUSTOM_MMS_CONTEXT_NAME;
         isCustom = true;
-    } else if (name === "IA") {
+    } else if (name === 'IA') {
         newName = _CUSTOM_LTE_CONTEXT_NAME;
         isCustom = true;
     }
@@ -283,13 +291,12 @@ function contextNameChanged (name) {
     }
 }
 
-function userTriedActivating (active) {
-    if (active) {
-        console.warn('userTriedActivating', active);
-        apnEditor.succeeded();
-        this.activeChanged.disconnect(userTriedActivating);
-    }
-}
+// function userTriedActivating (active) {
+//     if (active) {
+//         console.warn('userTriedActivating', active);
+//         this.activeChanged.disconnect(userTriedActivating);
+//     }
+// }
 
 /**
  * Handler for activity changes in contexts.
@@ -312,12 +319,6 @@ function contextActiveChanged(active) {
             model.current = null;
         }
     }
-}
-
-function contextDeactivatedForEditing (newValues) {
-    console.warn('contextDeactivatedForEditing', newValues);
-    ctx.accessPointName = newValues;
-    this.activeChanged.disconnect(contextDeactivatedForEditing);
 }
 
 /**
@@ -425,5 +426,17 @@ function isNameCustom (name) {
         return true;
     } else {
         return false;
+    }
+}
+
+function activateContext (contextPath, type) {
+    var ctx = getContextQML(contextPath);
+    ctx.active = true;
+    if (type === 'mms') {
+
+    } else if (type === 'ia' || type === 'internet') {
+        return activator.activate(contextPath,
+                                  sim.simMng.subscriberIdentity,
+                                  sim.path);
     }
 }
