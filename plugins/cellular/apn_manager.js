@@ -26,7 +26,7 @@ var _pathToQml = {};
 
 var _CUSTOM_INTERNET_CONTEXT_NAME = '___ubuntu_custom_apn_internet';
 var _CUSTOM_MMS_CONTEXT_NAME = '___ubuntu_custom_apn_mms';
-var _CUSTOM_LTE_CONTEXT_NAME = '___ubuntu_custom_apn_ia';
+var _CUSTOM_IA_CONTEXT_NAME = '___ubuntu_custom_apn_ia';
 
 function _getModelFromType (type) {
     var model;
@@ -280,14 +280,14 @@ function contextNameChanged (name) {
         newName = _CUSTOM_MMS_CONTEXT_NAME;
         isCustom = true;
     } else if (name === 'IA') {
-        newName = _CUSTOM_LTE_CONTEXT_NAME;
+        newName = _CUSTOM_IA_CONTEXT_NAME;
         isCustom = true;
     }
 
     if (isCustom) {
         this.disconnect();
         this.name = newName;
-        console.warn('tried changing name of context to', newName);
+        console.warn('tried changing name of context to', newName, this.active);
     }
 }
 
@@ -413,6 +413,14 @@ function CUSTOM_INTERNET_CONTEXT_NAME () {
 function CUSTOM_MMS_CONTEXT_NAME () {
     return _CUSTOM_MMS_CONTEXT_NAME;
 }
+/**
+ * Exposes the custom ia context name.
+ *
+ * @return {String} custom ia context name
+ */
+function CUSTOM_IA_CONTEXT_NAME () {
+    return _CUSTOM_IA_CONTEXT_NAME;
+}
 
 /**
  * Checks if a name is of any custom kind.
@@ -422,7 +430,7 @@ function CUSTOM_MMS_CONTEXT_NAME () {
 function isNameCustom (name) {
     if (name === _CUSTOM_MMS_CONTEXT_NAME ||
         name === _CUSTOM_INTERNET_CONTEXT_NAME ||
-        name === _CUSTOM_LTE_CONTEXT_NAME) {
+        name === _CUSTOM_IA_CONTEXT_NAME) {
         return true;
     } else {
         return false;

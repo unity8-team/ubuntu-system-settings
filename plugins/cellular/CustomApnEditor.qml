@@ -534,15 +534,15 @@ Dialog {
 
     } // main column holding all controls and buttons
 
-    Timer {
-        id: waitForCreatedContextTimer
-        property int waited: 0
-        interval: 300
-        repeat: true
-        running: false
-        triggeredOnStart: true
-        onTriggered: Editor.checkContextAppeared()
-    }
+    // Timer {
+    //     id: waitForCreatedContextTimer
+    //     property int waited: 0
+    //     interval: 300
+    //     repeat: true
+    //     running: false
+    //     triggeredOnStart: true
+    //     onTriggered: Editor.checkContextAppeared()
+    // }
 
     Timer {
         id: activatingDoneTimer

@@ -43,48 +43,90 @@ function activateButtonPressed () {
         root.activated(ctx.contextPath, ctx.type);
     } else {
         // We will create a new context. This is async, so
-        // in a Timer, we'll wait for the new context and
-        // edit it there.
-        waitForCreatedContextTimer.start();
+        // we attach a one time event to addition of contexts.
+        // We can't guarantee that the context added is this
+        // we just created.
+
+        function updateCreatedContext () {
+            var ctx = contextModel.get(contextModel.count - 1).qml;
+            var i;
+            console.warn('updateCreatedContext', ctx.name, ctx);
+            ctx.disconnect();
+            updateContext(ctx);
+
+            // Update selected index of suggestions list
+            copyFromMms.selectedIndex = -1;
+            copyFromInternet.selectedIndex = -1;
+            for (i = 0; i < suggestions.model.count; i++) {
+                if (suggestions.model.get(i).qml === ctx) {
+                    suggestions.selectedIndex = i;
+                }
+            }
+
+            contextModel.countChanged.disconnect(updateCreatedContext);
+            root.activated(ctx.contextPath, ctx.type);
+        }
+
+        contextModel.countChanged.connect(updateCreatedContext);
         apnLib.createContext(contextModel.type);
     }
 }
 
-function checkContextAppeared () {
-    console.warn('checkContextAppeared');
-    var ctx = apnLib.getCustomContext(contextModel.type);
-    if (ctx) {
-        root.suggestion = ctx;
+// function checkContextAppeared () {
+//     console.warn('checkContextAppeared');
+//     var ctx = apnLib.getCustomContext(contextModel.type);
+//     var i;
+//     if (ctx) {
+//         root.suggestion = ctx;
 
-        // Update selected index of suggestions list
-        copyFromMms.selectedIndex = -1;
-        copyFromInternet.selectedIndex = -1;
-        for (var i = 0; i < suggestions.model.count; i++) {
-            if (suggestions.model.get(i).qml === ctx) {
-                suggestions.selectedIndex = i;
-            }
-        }
+//         // Update selected index of suggestions list
+//         copyFromMms.selectedIndex = -1;
+//         copyFromInternet.selectedIndex = -1;
+//         for (i = 0; i < suggestions.model.count; i++) {
+//             if (suggestions.model.get(i).qml === ctx) {
+//                 suggestions.selectedIndex = i;
+//             }
+//         }
 
 
-        // The context should be deactivated here, but if
-        // not, we deactivate it.
-        if (ctx.active) {
-            ctx.disconnect();
-        }
-        updateContext(ctx);
-        waitForCreatedContextTimer.stop();
-        console.warn('Saw new model, trying to activate.');
-        root.activated(ctx.contextPath, ctx.type);
-    } else {
-        console.warn('No created model yet...');
-    }
+//         // The context should be deactivated here, but if
+//         // not, we deactivate it.
+//         if (ctx.active) {
+//             ctx.disconnect();
+//         }
+//         updateContext(ctx);
+//         waitForCreatedContextTimer.stop();
+//         console.warn('Saw new model, trying to activate.');
+//         root.activated(ctx.contextPath, ctx.type);
+//     } else {
+//         console.warn('No created model yet...');
 
-    if (waitForCreatedContextTimer.waited > 30) {
-        root.failed();
-        waitForCreatedContextTimer.stop();
-    }
-    waitForCreatedContextTimer.waited++;
-}
+//         // If a we're waiting for a custom context, and it's
+//         // not created yet, maybe the manager failed to change
+//         // the name (which we use to identify custom contexts).
+//         // This currently only happens using ofono-phonesim.
+//         var defaultOfonoName;
+//         if (isMms) {
+//             defaultOfonoName = 'MMS';
+//         } else if (isInternet) {
+//             defaultOfonoName = 'Internet';
+//         } else if (isIa) {
+//             defaultOfonoName = 'IA';
+//         }
+//         for (i = 0; i < contextModel.count; i++) {
+//             if (contextModel.get(i).qml.name === defaultOfonoName) {
+//                 apnLib.contextNameChanged.call(contextModel.get(i).qml, defaultOfonoName);
+//                 break;
+//             }
+//         }
+//     }
+
+//     if (waitForCreatedContextTimer.waited > 30) {
+//         root.failed();
+//         waitForCreatedContextTimer.stop();
+//     }
+//     waitForCreatedContextTimer.waited++;
+// }
 
 function hasProtocol (link) {
     return link.search(/^http[s]?\:\/\//) == -1;
