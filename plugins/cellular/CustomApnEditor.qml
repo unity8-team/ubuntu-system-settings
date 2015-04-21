@@ -139,6 +139,8 @@ Dialog {
     onFailed: state = "activateFailed"
     onSucceeded: state = "activatingDone"
 
+    Component.onCompleted: Editor.prePopulate()
+
     // Main column, holding all controls and buttons.
     Column {
         anchors { left: parent.left; right: parent.right }
