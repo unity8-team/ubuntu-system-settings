@@ -32,27 +32,88 @@ Dialog {
     // Property that holds the APN (apn.js) module.
     property var apnLib
 
-    // MMS, Internet or LTE model
+    // MMS, Internet or ia model
     property var contextModel
 
     // All models
     property var mmsModel
     property var internetModel
-    property var lteModel
+    property var iaModel
 
     property bool isMms: contextModel.type === "mms"
     property bool isInternet: contextModel.type === "internet"
-    property bool isLte: contextModel.type === "lte"
+    property bool isIa: contextModel.type === "ia"
+
+    property var suggestion: null
+
+    property bool isValid: {
+        return accessPointName.text;
+    }
+    property bool isChanged: {
+
+        // We had no suggestion, so we have nothing to compare it to.
+        if (!suggestion) {
+            return true;
+        }
+
+        var refData = [suggestion.accessPointName,
+                       suggestion.username,
+                       suggestion.password];
+        var formData = [accessPointName.text,
+                        username.text,
+                        password.text];
+        var i;
+
+        // If we are comparing mms, add some more data to ref and form arrays.
+        if (isMms) {
+            refData.push(suggestion.messageCenter);
+            formData.push(messageCenter.text);
+
+            refData.push(suggestion.messageProxy);
+            formData.push(messageProxy.text + (port.text ? ':' + port.text : ''));
+        }
+
+        // Compare the arrays.
+        i = refData.length;
+        while(i--) {
+            if (refData[i] !== formData[i]) return true;
+        }
+        return false;
+    }
+
 
     // When user activates
-    signal activated (string contextPath)
+    signal activated ()
+
+    // When activation failed
+    signal failed ()
+
+    // When activation suceeds
+    signal succeeded ()
 
     // When user cancels
     signal canceled ()
 
     states: [
         State {
+            name: "deactivateEverything"
+            PropertyChanges { target: copyFromInternet; enabled: false; }
+            PropertyChanges { target: copyFromMms; enabled: false; }
+            PropertyChanges { target: suggestions; enabled: false; }
+            PropertyChanges { target: accessPointName; enabled: false; }
+            PropertyChanges { target: username; enabled: false; }
+            PropertyChanges { target: password; enabled: false; }
+            PropertyChanges { target: messageCenter; enabled: false; }
+            PropertyChanges { target: messageProxy; enabled: false; }
+            PropertyChanges { target: port; enabled: false; }
+            PropertyChanges { target: passwordHiddenSwitch; enabled: false; }
+            PropertyChanges { target: confirmButton; enabled: false; }
+            PropertyChanges { target: cancelButton; enabled: false; }
+        },
+
+        State {
             name: "activating"
+            extend: "deactivateEverything"
             PropertyChanges {
                 target: connectButtonIndicator
                 running: true
@@ -62,9 +123,15 @@ Dialog {
                 text: ""
                 enabled: false
             }
+            PropertyChanges {
+                target: cancelButton
+                enabled: true
+            }
         },
+
         State {
             name: "activatingDone"
+            extend: "deactivateEverything"
             PropertyChanges {
                 target: activatingDoneTimer
                 running: true
@@ -79,14 +146,23 @@ Dialog {
                 enabled: false
             }
         },
+
         State {
             name: "activateFailed"
             PropertyChanges {
                 target: root
                 text: i18n.tr("APN activation failed.")
             }
+            StateChangeScript {
+                name: "scroll"
+                script: accessPointName.forceActiveFocus();
+            }
         }
     ]
+
+    onActivated: state = "activating"
+    onFailed: state = "activateFailed"
+    onSucceeded: state = "activatingDone"
 
     // Main column, holding all controls and buttons.
     Column {
@@ -107,8 +183,10 @@ Dialog {
                 }
             }
 
+            visible: contextModel.count ||
+                     (isIa && internetModel.count) ||
+                     (isInternet && mmsModel.count)
             anchors { left: parent.left; right: parent.right }
-            visible: isLte || isInternet || contextModel.count
 
             Label {
                 wrapMode: Text.WrapAnywhere
@@ -116,11 +194,13 @@ Dialog {
                 text: i18n.tr("Suggestions")
             }
 
-            // The default suggestion for LTE APNs, allowing the user
-            // to copy from Internet apns.
+            Item { width: parent.width; height: units.gu(1); }
+
+            // The default suggestion for ia contexts, allowing the user
+            // to copy from Internet context.
             ListItem.ItemSelector {
                 id: copyFromInternet
-                visible: isLte && internetModel.count
+                visible: isIa && internetModel.count
                 expanded: true
                 model: 1
                 selectedIndex: -1
@@ -142,7 +222,7 @@ Dialog {
             }
 
             // The default suggestion for Internet APNs, allowing the user
-            // to copy from MMS apns.
+            // to copy from MMS contexts.
             ListItem.ItemSelector {
                 id: copyFromMms
                 visible: isInternet && mmsModel.count
@@ -177,9 +257,11 @@ Dialog {
                     showDivider: false
                 }
                 onDelegateClicked: {
+                    var context = model.get(index).qml;
                     copyFromMms.selectedIndex = -1;
                     copyFromInternet.selectedIndex = -1;
-                    parent.fill(model.get(index).qml);
+                    parent.fill(context);
+                    suggestion = context;
                 }
             }
         }
@@ -217,8 +299,13 @@ Dialog {
 
             TextField {
                 id: messageCenter
+
+                function hasProtocol (link) {
+                    return link.search(/^http[s]?\:\/\//) == -1;
+                }
+
                 function setHttp(link) {
-                    if (link.search(/^http[s]?\:\/\//) == -1) {
+                    if (hasProtocol(link)) {
                         link = 'http://' + link;
                     }
                     return link;
@@ -448,10 +535,68 @@ Dialog {
                 id: confirmButton
                 width: (parent.width / 2) - units.gu(1)
                 text: i18n.tr("Activate")
-                enabled: true // TODO: isValid && isDifferent
+                enabled: isValid && isChanged
                 activeFocusOnPress: false
 
-                onClicked: {}
+                onClicked: {
+
+                    activated();
+
+                    // Do we have a custom context?
+                    var ctx = apnLib.getCustomContext(contextModel.type);
+
+                    if (ctx) {
+                        // We have a custom context we want to change.
+                        // We cannot change it if it is active. If active,
+                        // we need to defer changing it until it has been
+                        // deactivated.
+                        if(ctx.active) {
+                            console.warn('Deactivating context before changing.');
+                            ctx.disconnect();
+                        }
+
+                        console.warn('Changing context');
+                        ctx.accessPointName = accessPointName.text
+                        ctx.activeChanged.connect(apnLib.userTriedActivating.bind(ctx));
+                        ctx.active = true;
+                    } else {
+                        // We will create a new APN.
+                        waitForCreatedContextTimer.start();
+                        apnLib.createContext(contextModel.type);
+                    }
+                }
+
+                Timer {
+                    id: waitForCreatedContextTimer
+                    property int waited: 0
+                    interval: 300
+                    repeat: true
+                    running: false
+                    triggeredOnStart: true
+
+                    onTriggered: {
+                        var createdModel = apnLib.getCustomContext(contextModel.type);
+                        if (createdModel) {
+                            // The context should be deactivated here, but if
+                            // not, we deactivate it.
+                            if (createdModel.active) {
+                                createdModel.disconnect();
+                            }
+                            createdModel.accessPointName = accessPointName.text;
+                            createdModel.activeChanged.connect(apnLib.userTriedActivating.bind(createdModel));
+                            createdModel.active = true;
+                            running = false;
+                            console.warn('Saw new model, trying to activate.');
+                        } else {
+                            console.warn('No created model yet...');
+                        }
+
+                        if (waited > 30) {
+                            root.failed();
+                        }
+                        waited++;
+                    }
+                }
 
                 Icon {
                     height: parent.height - units.gu(1.5)

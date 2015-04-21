@@ -26,7 +26,49 @@ var _pathToQml = {};
 
 var _CUSTOM_INTERNET_CONTEXT_NAME = '___ubuntu_custom_apn_internet';
 var _CUSTOM_MMS_CONTEXT_NAME = '___ubuntu_custom_apn_mms';
-var _CUSTOM_LTE_CONTEXT_NAME = '___ubuntu_custom_apn_lte';
+var _CUSTOM_LTE_CONTEXT_NAME = '___ubuntu_custom_apn_ia';
+
+function _getModelFromType (type) {
+    var model;
+    switch (type) {
+        case 'mms':
+            model = mmsContexts;
+            break;
+        case 'internet':
+            model = internetContexts;
+            break;
+        case 'ia':
+            model = iaContexts;
+            break;
+        default:
+            throw new Error('Unknown context type ' + type);
+    }
+    return model;
+}
+
+function getCustomMmsContext () {
+    return getCustomContext('mms');
+}
+
+function getCustomInternetContext () {
+    return getCustomContext('mms');
+}
+
+function getCustomLteContext () {
+    return getCustomContext('ia');
+}
+
+function getCustomContext (type) {
+    var model = _getModelFromType(type);
+    var i;
+
+    for (i=0; i < model.count; i++) {
+        if (isNameCustom(model.get(i).qml.name)) {
+            return model.get(i).qml;
+        }
+    }
+    return null;
+}
 
 /**
  * Given an array of paths, it will create and associate
@@ -105,7 +147,7 @@ function _createQml (paths) {
             ctx.nameChanged.connect(contextNameChanged.bind(ctx));
             ctx.activeChanged.connect(contextActiveChanged.bind(ctx));
 
-            // Some context come with a type, other not. Normalize this.
+            // Some context come with a type, others not. Normalize this.
             if (!ctx.type) {
                 ctx.typeChanged.connect(typeDetermined.bind(ctx));
             } else {
@@ -128,37 +170,42 @@ function createContextQml (path) {
     }
 }
 
+function createContext (type) {
+    sim.connMan.addContext(type);
+}
+
 function addContextToModel(context, type) {
     var data = {
         path: context.contextPath,
         qml: context
     };
-    console.warn(data, data.qml, data.path);
+    var model;
+    console.warn('addContextToModel', type, data.qml, data.path);
 
     if (typeof type === 'undefined') {
         type = context.type;
     }
 
-    switch (type) {
-        case 'mms':
-            mmsContexts.append(data);
-            if (context.active) { mmsContexts.current = context; }
-            break;
-        case 'internet':
-            internetContexts.append(data);
-            if (context.active) { internetContexts.current = context; }
-            break;
-        case 'ia':
-            iaContexts.append(data);
-            if (context.active) { iaContexts.current = context; }
-            break;
-        default:
-            throw new Error('Unknown context type ' + type);
+    model = _getModelFromType(type);
+
+    if (context.active) {
+        model.current = context;
+    }
+
+    // If custom, add it to the end of the list.
+    if (isNameCustom(context.name)) {
+        model.append(data);
+    } else {
+        model.insert(0, data);
     }
 }
 
 function contextRemoved (path) {
-    _garbageCollect();
+    var paths = sim.connMan.contexts.slice(0);
+    updatedPaths = paths.filter(function (val) {
+        return val !== path;
+    });
+    _garbageCollect(paths);
 }
 
 /**
@@ -215,13 +262,32 @@ function typeDetermined (type) {
  */
 function contextNameChanged (name) {
     console.warn('contextNameChanged', name, this.contextPath);
+    var isCustom = false;
+    var newName;
 
     if (name === 'Internet') {
-        this.name = _CUSTOM_INTERNET_CONTEXT_NAME;
+        newName = _CUSTOM_INTERNET_CONTEXT_NAME;
+        isCustom = true;
     } else if (name === "MMS") {
-        this.name = _CUSTOM_MMS_CONTEXT_NAME;
+        newName = _CUSTOM_MMS_CONTEXT_NAME;
+        isCustom = true;
     } else if (name === "IA") {
-        this.name = _CUSTOM_LTE_CONTEXT_NAME;
+        newName = _CUSTOM_LTE_CONTEXT_NAME;
+        isCustom = true;
+    }
+
+    if (isCustom) {
+        this.disconnect();
+        this.name = newName;
+        console.warn('tried changing name of context to', newName);
+    }
+}
+
+function userTriedActivating (active) {
+    if (active) {
+        console.warn('userTriedActivating', active);
+        apnEditor.succeeded();
+        this.activeChanged.disconnect(userTriedActivating);
     }
 }
 
@@ -237,20 +303,7 @@ function contextActiveChanged(active) {
         return;
     }
 
-    var model;
-    switch (this.type) {
-        case 'mms':
-            model = mmsContexts;
-            break;
-        case 'internet':
-            model = internetContexts;
-            break;
-        case 'ia':
-            model = iaContexts;
-            break;
-        default:
-            throw new Error('Unknown context type ' + this.type);
-    }
+    var model = _getModelFromType(this.type);
 
     if (active) {
         model.current = this;
@@ -259,6 +312,12 @@ function contextActiveChanged(active) {
             model.current = null;
         }
     }
+}
+
+function contextDeactivatedForEditing (newValues) {
+    console.warn('contextDeactivatedForEditing', newValues);
+    ctx.accessPointName = newValues;
+    this.activeChanged.disconnect(contextDeactivatedForEditing);
 }
 
 /**

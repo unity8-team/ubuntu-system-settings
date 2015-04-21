@@ -17,6 +17,10 @@
  *
  * You should have received a copy of the GNU General Public License along
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * Note: Everything user facing refers to APN and e.g. LTE, but in the
+ * code an APN configuration is a 'context' and LTE is 'ia'.
+ *
  */
 
 import QtQuick 2.0
@@ -69,7 +73,7 @@ ItemPage {
         id: iaContexts
         property string label: i18n.tr('LTE APN…')
         property string title: i18n.tr("LTE APN")
-        property string type: 'lte'
+        property string type: 'ia'
         property var current
     }
 
@@ -166,13 +170,12 @@ ItemPage {
                 contextModel:    modelData,
                 mmsModel:        mmsContexts,
                 internetModel:   internetContexts,
-                lteModel:        iaContexts,
+                iaModel:         iaContexts,
                 apnLib:          APN,
                 title:           modelData.title
             });
         }
     }
-
 
     Connections {
         target: sim.connMan
