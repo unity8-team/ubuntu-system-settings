@@ -30,8 +30,8 @@ import "apn_editor.js" as Editor
 Dialog {
     id: root
 
-    // Property that holds the APN (apn.js) module.
-    property var apnLib
+    // Property that holds the APN manager (apn_manager.js) module.
+    property var manager
 
     // Easy access to the model we're working with.
     property var contextModel
@@ -224,7 +224,7 @@ Dialog {
                 selectedIndex: -1
                 delegate: OptionSelectorDelegate {
                     property string name: contextModel.get(index).qml.name
-                    text: apnLib.isNameCustom(name) ? i18n.tr("Custom") : name
+                    text: manager.isNameCustom(name) ? i18n.tr("Custom") : name
                     showDivider: false
                 }
                 onDelegateClicked: {

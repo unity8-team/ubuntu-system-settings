@@ -1,3 +1,24 @@
+/*
+ * This file is part of system-settings
+ *
+ * Copyright (C) 2015 Canonical Ltd.
+ *
+ * Contact: Jonas G. Drange <jonas.drange@canonical.com>
+ *
+ * This program is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License version 3, as published
+ * by the Free Software Foundation.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranties of
+ * MERCHANTABILITY, SATISFACTORY QUALITY, or FITNESS FOR A PARTICULAR
+ * PURPOSE.  See the GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * This is a collection of functions to help the custom apn editor.
+ */
 
 function updateContext (ctx) {
     console.warn('updateContext', accessPointName.text, username.text, password.text);
@@ -6,27 +27,27 @@ function updateContext (ctx) {
     ctx.password = password.text;
 
     if (ctx.type === 'mms') {
-        context.messageCenter = messageCenter.text;
-        context.messageProxy = messageProxy.text + (port.text ? ':' + port.text : '');
+        ctx.messageCenter = messageCenter.text;
+        ctx.messageProxy = messageProxy.text + (port.text ? ':' + port.text : '');
     }
 }
 
-function populate (context) {
+function populate (ctx) {
     console.warn('populate');
-    accessPointName.text = context.accessPointName;
-    username.text = context.username;
-    password.text = context.password;
+    accessPointName.text = ctx.accessPointName;
+    username.text = ctx.username;
+    password.text = ctx.password;
 
     if (isMms) {
-        messageCenter.text = context.messageCenter;
-        messageProxy.text = context.messageProxy;
+        messageCenter.text = ctx.messageCenter;
+        messageProxy.text = ctx.messageProxy;
     }
 }
 
 function activateButtonPressed () {
     console.warn('activateButtonPressed');
     // Do we have a custom context?
-    var ctx = apnLib.getCustomContext(contextModel.type);
+    var ctx = manager.getCustomContext(contextModel.type);
 
     if (ctx) {
         // We have a custom context we want to change.
@@ -68,65 +89,9 @@ function activateButtonPressed () {
         }
 
         contextModel.countChanged.connect(updateCreatedContext);
-        apnLib.createContext(contextModel.type);
+        manager.createContext(contextModel.type);
     }
 }
-
-// function checkContextAppeared () {
-//     console.warn('checkContextAppeared');
-//     var ctx = apnLib.getCustomContext(contextModel.type);
-//     var i;
-//     if (ctx) {
-//         root.suggestion = ctx;
-
-//         // Update selected index of suggestions list
-//         copyFromMms.selectedIndex = -1;
-//         copyFromInternet.selectedIndex = -1;
-//         for (i = 0; i < suggestions.model.count; i++) {
-//             if (suggestions.model.get(i).qml === ctx) {
-//                 suggestions.selectedIndex = i;
-//             }
-//         }
-
-
-//         // The context should be deactivated here, but if
-//         // not, we deactivate it.
-//         if (ctx.active) {
-//             ctx.disconnect();
-//         }
-//         updateContext(ctx);
-//         waitForCreatedContextTimer.stop();
-//         console.warn('Saw new model, trying to activate.');
-//         root.activated(ctx.contextPath, ctx.type);
-//     } else {
-//         console.warn('No created model yet...');
-
-//         // If a we're waiting for a custom context, and it's
-//         // not created yet, maybe the manager failed to change
-//         // the name (which we use to identify custom contexts).
-//         // This currently only happens using ofono-phonesim.
-//         var defaultOfonoName;
-//         if (isMms) {
-//             defaultOfonoName = 'MMS';
-//         } else if (isInternet) {
-//             defaultOfonoName = 'Internet';
-//         } else if (isIa) {
-//             defaultOfonoName = 'IA';
-//         }
-//         for (i = 0; i < contextModel.count; i++) {
-//             if (contextModel.get(i).qml.name === defaultOfonoName) {
-//                 apnLib.contextNameChanged.call(contextModel.get(i).qml, defaultOfonoName);
-//                 break;
-//             }
-//         }
-//     }
-
-//     if (waitForCreatedContextTimer.waited > 30) {
-//         root.failed();
-//         waitForCreatedContextTimer.stop();
-//     }
-//     waitForCreatedContextTimer.waited++;
-// }
 
 function hasProtocol (link) {
     return link.search(/^http[s]?\:\/\//) == -1;

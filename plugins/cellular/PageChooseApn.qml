@@ -30,7 +30,7 @@ import Ubuntu.Components.Popups 1.0
 import Ubuntu.Components.ListItems 1.0 as ListItem
 import MeeGo.QOfono 0.2
 import Ubuntu.SystemSettings.Cellular 1.0
-import "apn_manager.js" as APN
+import "apn_manager.js" as Manager
 
 ItemPage {
     id: root
@@ -145,7 +145,7 @@ ItemPage {
                 text: i18n.tr("Reset")
                 color: UbuntuColors.orange
                 onClicked: {
-                    APN.reset();
+                    Manager.reset();
                     PopupUtils.close(dialogue);
                 }
             }
@@ -163,7 +163,7 @@ ItemPage {
                              contextPath,sim.simMng.subscriberIdentity,
                              sim.path);
 
-                if (APN.activateContext(contextPath)) {
+                if (Manager.activateContext(contextPath)) {
                     apnEditor.succeeded();
                 } else {
                     apnEditor.failed();
@@ -183,7 +183,7 @@ ItemPage {
             subText: modelData.current ?
                 modelData.current.accessPointName : i18n.tr('Not set')
             onClicked: apnEditor = PopupUtils.open(editor, root, {
-                apnLib:          APN,
+                manager:         Manager,
                 contextModel:    modelData,
                 mmsModel:        mmsContexts,
                 internetModel:   internetContexts,
@@ -196,10 +196,10 @@ ItemPage {
     Connections {
         target: sim.connMan
 
-        onReportError: APN.reportError(message)
-        onContextRemoved: APN.contextRemoved(path)
-        onContextAdded: APN.contextAdded(path)
-        onContextsChanged: APN.contextsChanged(contexts)
-        Component.onCompleted: APN.contextsChanged(sim.connMan.contexts)
+        onReportError: Manager.reportError(message)
+        onContextRemoved: Manager.contextRemoved(path)
+        onContextAdded: Manager.contextAdded(path)
+        onContextsChanged: Manager.contextsChanged(contexts)
+        Component.onCompleted: Manager.contextsChanged(sim.connMan.contexts)
     }
 }
