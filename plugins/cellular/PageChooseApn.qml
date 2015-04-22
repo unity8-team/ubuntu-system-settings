@@ -160,10 +160,10 @@ ItemPage {
 
             onActivated: {
                 console.warn('activated in editor',
-                             contextPath,sim.simMng.subscriberIdentity,
+                             context.path ,sim.simMng.subscriberIdentity,
                              sim.path);
 
-                if (Manager.activateContext(contextPath)) {
+                if (Manager.activateContext(context)) {
                     apnEditor.succeeded();
                 } else {
                     apnEditor.failed();

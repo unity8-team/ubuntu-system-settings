@@ -61,7 +61,7 @@ function activateButtonPressed () {
         console.warn('Changing context');
         updateContext(ctx);
 
-        root.activated(ctx.contextPath, ctx.type);
+        root.activated(ctx);
     } else {
         // We will create a new context. This is async, so
         // we attach a one time event to addition of contexts.
@@ -85,7 +85,7 @@ function activateButtonPressed () {
             }
 
             contextModel.countChanged.disconnect(updateCreatedContext);
-            root.activated(ctx.contextPath, ctx.type);
+            root.activated(ctx);
         }
 
         contextModel.countChanged.connect(updateCreatedContext);

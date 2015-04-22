@@ -182,13 +182,23 @@ function createContext (type) {
     sim.connMan.addContext(type);
 }
 
+function removeContext (path) {
+    var ctx = getContextQML(path);
+
+    if (ctx && ctx.active) {
+        ctx.disconnect();
+    }
+
+    sim.connMan.removeContext(path);
+}
+
 function addContextToModel(context, type) {
     var data = {
         path: context.contextPath,
         qml: context
     };
     var model;
-    console.warn('addContextToModel', type, data.qml, data.path);
+    console.warn('addContextToModel', type, context.name, data.qml, data.path);
 
     if (typeof type === 'undefined') {
         type = context.type;
@@ -201,9 +211,13 @@ function addContextToModel(context, type) {
     }
 
     // If custom, add it to the end of the list.
-    if (isNameCustom(context.name)) {
+    if ((type === 'mms' && context.name === 'MMS') ||
+        (type === 'internet' && context.name === 'Internet') ||
+        (type === 'ia' && context.name === 'IA')) {
+        console.warn('addContextToModel adding', context.name, 'to end');
         model.append(data);
     } else {
+        console.warn('addContextToModel adding', context.name, 'first');
         model.insert(0, data);
     }
 }
@@ -437,13 +451,26 @@ function isNameCustom (name) {
     }
 }
 
-function activateContext (contextPath, type) {
-    var ctx = getContextQML(contextPath);
-    ctx.active = true;
-    if (type === 'mms') {
+function activateContext (ctx) {
+    var i;
 
-    } else if (type === 'ia' || type === 'internet') {
-        return activator.activate(contextPath,
+    ctx.active = true;
+    console.warn('activateContext', ctx.name);
+    if (ctx.type === 'mms') {
+
+        // Activation of an MMS context is currently the
+        // removal of all other contexts. See lp:1361864 and
+        // lp:1361864.
+        for (i = 0; i < mmsContexts.count; i++) {
+            console.warn('activateContext', mmsContexts.get(i).path, ctx.contextPath);
+            if (mmsContexts.get(i).path !== ctx.contextPath) {
+                removeContext(mmsContexts.get(i).path);
+            }
+        }
+
+
+    } else if (ctx.type === 'ia' || ctx.type === 'internet') {
+        return activator.activate(ctx.contextPath,
                                   sim.simMng.subscriberIdentity,
                                   sim.path);
     }

@@ -56,7 +56,7 @@ Dialog {
     property bool isChanged: Editor.isChanged()
 
     // When user activates.
-    signal activated (string contextPath, string type)
+    signal activated (var context)
 
     // When activation failed.
     signal failed ()
