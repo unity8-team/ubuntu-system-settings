@@ -1,3 +1,14 @@
+ubuntu-system-settings (0.3+15.04.20150422.1-0ubuntu1) vivid; urgency=medium
+
+  [ CI Train Bot ]
+  * New rebuild forced.
+
+  [ Michael Sheldon ]
+  * Allow system settings to find keyboard plugins in additional
+    locations specified via gsettings. (LP: #1445532)
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Wed, 22 Apr 2015 20:23:14 +0000
+
 ubuntu-system-settings (0.3+15.04.20150422-0ubuntu1) vivid; urgency=medium
 
   [ Ken VanDine ]
