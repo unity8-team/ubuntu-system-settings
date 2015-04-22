@@ -1,3 +1,17 @@
+ubuntu-system-settings (0.3+15.04.20150420-0ubuntu1) vivid; urgency=medium
+
+  [ CI Train Bot ]
+  * New rebuild forced.
+  * Resync trunk.
+
+  [ Ken VanDine ]
+  * Error checking for plugin instance and pageComponent (LP: #1438633)
+
+  [ Nick Dedekind ]
+  * Fix for laggy backends (lp#1390136) (LP: #1390136)
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Mon, 20 Apr 2015 15:48:06 +0000
+
 ubuntu-system-settings (0.3+15.04.20150413-0ubuntu1) vivid; urgency=medium
 
   [ CI Train Bot ]
