@@ -1,3 +1,13 @@
+ubuntu-system-settings (0.3+15.04.20150422-0ubuntu1) vivid; urgency=medium
+
+  [ Ken VanDine ]
+  * Don't call a test from inside another test
+
+  [ Leonardo Arias Fonseca ]
+  * Fix the base class used when launching the app in autopilot tests.
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Wed, 22 Apr 2015 18:48:35 +0000
+
 ubuntu-system-settings (0.3+15.04.20150420-0ubuntu1) vivid; urgency=medium
 
   [ CI Train Bot ]
