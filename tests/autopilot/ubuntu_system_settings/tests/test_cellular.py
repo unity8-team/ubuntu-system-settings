@@ -288,3 +288,14 @@ class DualSimCellularTestCase(CellularBaseTestCase):
             lambda:
                 gsettings.get_value('default-sim-for-messages').get_string(),
             Eventually(Equals('/ril_1')))
+
+
+class ApnTestCase(CellularBaseTestCase):
+
+    def test_custom_mms(self):
+        self.add_connection_context(self.modem_0, Type='mms', Name='failed')
+        print(self.connMan.GetContexts())
+
+        editor = self.cellular_page.open_apn_editor('mms')
+        editor.set_access_point_name('canonical')
+        editor.activate()

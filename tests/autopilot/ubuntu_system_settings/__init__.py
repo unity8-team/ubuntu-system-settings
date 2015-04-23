@@ -261,6 +261,12 @@ class CellularPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
         chooseCarrierPage.set_carrier(carrier)
 
     @autopilot.logging.log_action(logger.debug)
+    def open_apn_editor(self, type, sim=None):
+        carrierApnPage = self._click_carrier_apn()
+        chooseApnPage = carrierApnPage.open_apn(sim)
+        return chooseApnPage.open_mms()
+
+    @autopilot.logging.log_action(logger.debug)
     def _click_carrier_apn(self):
         item = self.select_single(objectName='carrierApnEntry')
         self.pointing_device.click_object(item)
@@ -350,11 +356,22 @@ class PageCarrierAndApn(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
         return self.get_root_instance().wait_select_single(
             objectName='chooseCarrierPage')
 
+    @autopilot.logging.log_action(logger.debug)
+    def open_apn(self, sim):
+        return self._click_apn(sim)
+
+    @autopilot.logging.log_action(logger.debug)
+    def _click_apn(self, sim):
+        obj = self.select_single(
+            objectName='apn')
+        self.pointing_device.click_object(obj)
+        return self.get_root_instance().wait_select_single(
+            objectName='apnPage')
+
 
 class PageCarriersAndApns(
         ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
     """Autopilot helper for carrier/apn entry page (multisim)."""
-    """Autopilot helper for carrier/apn entry page (singlesim)."""
     @autopilot.logging.log_action(logger.debug)
     def open_carrier(self, sim):
         return self._click_carrier(sim)
@@ -377,6 +394,7 @@ class PageChooseCarrier(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
         item = self.select_single(text='Automatically')
         self.pointing_device.click_object(item)
 
+    @autopilot.logging.log_action(logger.debug)
     def set_carrier(self, carrier):
         # wait for animation, since page.animationRunning.wait_for(False)
         # does not work?
@@ -392,6 +410,48 @@ class PageChooseCarrier(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
             raise Exception("No operator list visible.")
 
         item = opList.select_single(text=carrier, objectName="carrier")
+        self.pointing_device.click_object(item)
+
+
+class PageChooseApn(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
+
+    """Autopilot helper for apn editor page"""
+
+    @autopilot.logging.log_action(logger.debug)
+    def open_mms(self):
+        return self._open_editor('mms')
+
+    @autopilot.logging.log_action(logger.debug)
+    def open_internet(self):
+        return self._open_editor('internet')
+
+    @autopilot.logging.log_action(logger.debug)
+    def open_ia(self):
+        return self._open_editor('ia')
+
+    @autopilot.logging.log_action(logger.debug)
+    def _open_editor(self, type):
+        item = self.select_single(objectName="edit_%s" % type)
+        self.pointing_device.click_object(item)
+        return self.get_root_instance().wait_select_single(
+            objectName='customApnEditor')
+
+
+class CustomApnEditor(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
+
+    """Autopilot helper for custom apn editor page"""
+
+    @autopilot.logging.log_action(logger.debug)
+    def set_access_point_name(self, new_name):
+        self._populate_field('accessPointName', new_name)
+
+    def _populate_field(self, field, text):
+        pwdfield = self.select_single('TextField', objectName=field)
+        pwdfield.write(text)
+
+    @autopilot.logging.log_action(logger.debug)
+    def activate(self):
+        item = self.select_single(objectName="activateButton")
         self.pointing_device.click_object(item)
 
 

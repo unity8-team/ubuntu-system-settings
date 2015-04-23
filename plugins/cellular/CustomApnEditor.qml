@@ -29,6 +29,7 @@ import "apn_editor.js" as Editor
 
 Dialog {
     id: root
+    objectName: "customApnEditor"
 
     // Property that holds the APN manager (apn_manager.js) module.
     property var manager
@@ -250,6 +251,7 @@ Dialog {
 
             TextField {
                 id: accessPointName
+                objectName: "accessPointName"
                 width: parent.width
                 inputMethodHints: Qt.ImhUrlCharactersOnly |
                                   Qt.ImhNoAutoUppercase |
@@ -502,6 +504,7 @@ Dialog {
 
             Button {
                 id: activateButton
+                objectName: "activateButton"
                 width: (parent.width / 2) - units.gu(1)
                 text: i18n.tr("Activate")
                 enabled: isValid && isChanged

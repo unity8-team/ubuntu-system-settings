@@ -179,25 +179,6 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
         return 'ret = [(m, objects[m].GetAll("org.ofono.NetworkOperator")) ' \
                'for m in objects if "%s/operator/" in m]' % name
 
-    def mock_connection_manager(self, modem):
-        modem.AddProperty(CONNMAN_IFACE, 'Powered', dbus.Boolean(1))
-        modem.AddProperty(CONNMAN_IFACE, 'RoamingAllowed', dbus.Boolean(0))
-        modem.AddMethods(
-            CONNMAN_IFACE,
-            [
-                (
-                    'GetProperties', '', 'a{sv}',
-                    'ret = self.GetAll("%s")' % CONNMAN_IFACE),
-                (
-                    'SetProperty', 'sv', '',
-                    'self.Set("IFACE", args[0], args[1]); '
-                    'self.EmitSignal("IFACE", "PropertyChanged", "sv",\
-                        [args[0], args[1]])'.replace("IFACE", CONNMAN_IFACE)),
-            ])
-        interfaces = modem.GetProperties()['Interfaces']
-        interfaces.append(CONNMAN_IFACE)
-        modem.SetProperty('Interfaces', interfaces)
-
     def mock_carriers(self, name):
         self.dbusmock.AddObject(
             '/%s/operator/op2' % name,
@@ -291,7 +272,6 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
 
         self.mock_carriers('ril_0')
         self.mock_radio_settings(self.modem_0)
-        self.mock_connection_manager(self.modem_0)
         self.mock_call_forwarding(self.modem_0)
         self.mock_call_settings(self.modem_0)
 
@@ -384,6 +364,20 @@ class CellularBaseTestCase(UbuntuSystemSettingsOfonoTestCase):
         """ Go to Cellular page """
         super(CellularBaseTestCase, self).setUp()
         self.cellular_page = self.main_view.go_to_cellular_page()
+
+    def add_connection_context(self, modem, **kwargs):
+        iface = 'org.ofono.ConnectionContext'
+        connMan = dbus.Interface(self.dbus_con.get_object(
+                                 'org.ofono', modem.__dbus_object_path__),
+                                 'org.ofono.ConnectionManager')
+        self.connMan = connMan
+        path = connMan.AddContext(kwargs.get('Type', 'internet'))
+        context = dbus.Interface(self.dbus_con.get_object(
+                                 'org.ofono', path),
+                                 iface)
+
+        for key, value in kwargs.items():
+            context.SetProperty(key, value)
 
 
 class BluetoothBaseTestCase(UbuntuSystemSettingsTestCase):

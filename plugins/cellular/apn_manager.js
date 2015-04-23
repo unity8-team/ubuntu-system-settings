@@ -179,10 +179,12 @@ function createContextQml (path) {
 }
 
 function createContext (type) {
+    console.warn('Adding context of type', type);
     sim.connMan.addContext(type);
 }
 
 function removeContext (path) {
+    console.warn('Removing context', path);
     var ctx = getContextQML(path);
 
     if (ctx && ctx.active) {
@@ -339,7 +341,7 @@ function contextActiveChanged(active) {
  * Handler for added contexts.
  */
 function contextAdded (path) {
-    console.warn('contextAdded');
+    console.warn('contextAdded', path);
     _createQml([path]);
 }
 
@@ -347,18 +349,18 @@ function contextAdded (path) {
  * Handler for when contexts change.
  */
 function contextsChanged (paths) {
-    console.warn('contextsChanged');
+    console.warn('contextsChanged', paths);
     updateQML(paths);
 }
 
 /**
  * Handler for when errors are reported from ofono.
  */
-function onReportError () {
+function reportError (message) {
     console.error(message);
-    if (d.editor) {
-        editor.failed(message);
-    }
+    // if (d.editor) {
+    //     editor.failed(message);
+    // }
 }
 
 /**

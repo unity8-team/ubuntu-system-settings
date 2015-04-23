@@ -179,6 +179,7 @@ ItemPage {
     Component {
         id: apnsDelegate
         ListItem.Subtitled {
+            objectName: "edit_" + modelData.type
             text: modelData.label
             subText: modelData.current ?
                 modelData.current.accessPointName : i18n.tr('Not set')
