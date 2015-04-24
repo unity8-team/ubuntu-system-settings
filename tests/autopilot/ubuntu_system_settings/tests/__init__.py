@@ -302,7 +302,6 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
         ])
         self.mock_carriers(second_modem)
         self.mock_radio_settings(self.modem_1, technologies=['gsm'])
-        self.mock_connection_manager(self.modem_1)
         self.mock_call_forwarding(self.modem_1)
         self.mock_call_settings(self.modem_1)
 
