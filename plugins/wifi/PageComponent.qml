@@ -136,7 +136,7 @@ ItemPage {
 
             ListItem.SingleValue {
                 objectName: "connectToHiddenNetwork"
-                text: i18n.tr("Connect to hidden or encrypted network")
+                text: i18n.tr("Connect to hidden network…")
                 visible : (actionGroup.actionObject.valid ?
                            actionGroup.actionObject.state : false)
                 progression: true

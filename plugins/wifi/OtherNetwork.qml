@@ -23,10 +23,6 @@ import Ubuntu.Components.Popups 0.1
 import Ubuntu.SystemSettings.Wifi 1.0
 import QMenuModel 0.1
 
-import GSettings 1.0
-import Ubuntu.Content 0.1
-//import "utilities.js" as Utilities
-
 ItemPage {
     id: otherNetworkItemPage
     objectName: "otherNetworkItemPage"
@@ -164,7 +160,7 @@ ItemPage {
     Flickable { //from about/PageComponents.qml
         id: scrollWidget
         anchors.fill: parent
-        contentHeight: units.gu(100) //contentItem.childrenRect.height
+        contentHeight: units.gu(100)
         boundsBehavior: (contentHeight > otherNetworkItemPage.height) ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
         /* Set the direction to workaround https://bugreports.qt-project.org/browse/QTBUG-31905
                otherwise the UI might end up in a situation where scrolling doesn't work */
@@ -252,9 +248,9 @@ ItemPage {
                 color: Theme.palette.selected.backgroundText
                 elide: Text.ElideRight
                 visible:    ( securityList.selectedIndex == 2 || securityList.selectedIndex == 4) // WPA or D-WEP
-                         && ( authList.selectedIndex == 1 || //
-                              authList.selectedIndex == 3 || //
-                              authList.selectedIndex == 4  ) //
+                         && ( authList.selectedIndex == 1 ||
+                              authList.selectedIndex == 3 ||
+                              authList.selectedIndex == 4  )
             }
 
             ListItem.ItemSelector {
@@ -269,9 +265,9 @@ ItemPage {
                         i18n.tr("MD5")       // index: 5
                        ]
                 visible:    ( securityList.selectedIndex == 2 || securityList.selectedIndex == 4) // WPA or D-WEP
-                         && ( authList.selectedIndex == 1 || //
-                              authList.selectedIndex == 3 || //
-                              authList.selectedIndex == 4  ) //
+                         && ( authList.selectedIndex == 1 ||
+                              authList.selectedIndex == 3 ||
+                              authList.selectedIndex == 4  )
             }
 
             Column{     // ca-cert
@@ -301,18 +297,17 @@ ItemPage {
                         fontSize: "medium"
                         font.bold: false
                         color: Theme.palette.selected.backgroundText
-                        //elide: Text.ElideRight
-                        //anchors.bottom: addcacertButton.bottom
+                        //anchors.bottom: addcacertButton.bottom // while button is disabled
                     }
 
-                    /*Button { // Button action not implemented yet, so disabled:
+                    Button {
                         id: addcacertButton
-                        action: selectPeer
+                        //action: selectPeer
+                        visible: showAllUI // Button action not implemented yet.
                         objectName: "addcacertButton"
                         anchors.right: parent.right
                         text: i18n.tr("Add file…")
-                        //iconName: "add"
-                    }*/
+                    }
                 }
 
 
@@ -322,7 +317,7 @@ ItemPage {
                     width: parent.width
                     autoSize: true
                     maximumLineCount: 4
-                    placeholderText: i18n.tr("Absolute path to cert file or copy content from clipboard.")
+                    placeholderText: i18n.tr("Absolute path to cert file or clipboard content")
 
                 }
 
@@ -342,20 +337,17 @@ ItemPage {
                         fontSize: "medium"
                         font.bold: false
                         color: Theme.palette.selected.backgroundText
-                        //elide: Text.ElideRight
                         //anchors.bottom: addusercertButton.bottom
                     }
 
-                    /*Button {// Button action not implemented yet, so disabled:
+                    Button {
                         id: addusercertButton
                         //action: selectPeer
-                        enabled: false
-                        visible: false
-
+                        visible: showAllUI // Button action not implemented yet.
                         objectName: "addusercertButton"
                         anchors.right: parent.right
                         text: i18n.tr("Add file…")
-                    }*/
+                    }
                 }
 
                 TextArea{
@@ -366,7 +358,7 @@ ItemPage {
                     width: parent.width
                     autoSize: true
                     maximumLineCount: 4
-                    placeholderText: i18n.tr("Absolute path to cert file")
+                    placeholderText: i18n.tr("Absolute path to cert file or clipboard content")
                 }
 
 
@@ -386,17 +378,17 @@ ItemPage {
                         fontSize: "medium"
                         font.bold: false
                         color: Theme.palette.selected.backgroundText
-                        //elide: Text.ElideRight
                         //anchors.bottom: adduserprivatekeyButton.bottom
                     }
 
-                    /*Button { // Button action not implemented yet, so disabled:
+                    Button {
                         id: adduserprivatekeyButton
-                        action: selectPeer
+                        //action: selectPeer
+                        visible: showAllUI // Button action not implemented yet
                         objectName: "adduserprivatekeyButton"
                         anchors.right: parent.right
                         text: i18n.tr("Add file…")
-                    }*/
+                    }
                 }
 
                 TextArea {
@@ -439,17 +431,17 @@ ItemPage {
                         fontSize: "medium"
                         font.bold: false
                         color: Theme.palette.selected.backgroundText
-                        //elide: Text.ElideRight
                         //anchors.bottom: adduserprivatekeyButton.bottom
                     }
 
-                    /*Button {// Button action not implemented yet, so disabled:
+                    Button {
                         id: addpacFileButton
-                        action: selectPeer
+                        //action: selectPeer
+                        visible: showAllUI // Button action not implemented yet
                         objectName: "addpacFileButton"
                         anchors.right: parent.right
                         text: i18n.tr("Add file…")
-                    }*/
+                    }
                 }
 
                 TextArea {
@@ -493,7 +485,7 @@ ItemPage {
                 inputMethodHints: Qt.ImhNoPredictiveText
                 Component.onCompleted: forceActiveFocus()
                 onAccepted: {
-                    connectAction.trigger()   //;
+                    connectAction.trigger()
                 }
             }
 
@@ -613,7 +605,7 @@ ItemPage {
                                 authList.selectedIndex,
                                 username.text,
                                 password.text,
-                                [cacert.text, usercert.text, userprivatekey.text] ,
+                                [cacert.text, usercert.text, userprivatekey.text, pacFile.text] ,
                                 p2authList.selectedIndex);
                     otherNetworkItemPage.state = "CONNECTING";
                 }
@@ -658,74 +650,6 @@ ItemPage {
                 }
             }
         }
-
-        // #jkb: to be implemented for chosing file from content hub:
-        /* from plugin background
-        Action {
-                id: selectPeer
-                // when action has been activated, push the picker on the stack
-                onTriggered: {
-                    pageStack.push(picker);
-                }
-        }
-
-        Connections {
-            id: contentHubConnection
-            property var imageCallback
-            target: activeTransfer ? activeTransfer : null
-            onStateChanged: {
-                if (activeTransfer.state === ContentTransfer.Charged) {
-                    if (activeTransfer.items.length > 0) {
-                        var imageUrl = activeTransfer.items[0].url;
-                        imageCallback(imageUrl);
-                    }
-                }
-            }
-        }
-
-        Page {
-            id: picker
-            visible: false
-
-            ContentStore {
-                id: appStore
-                scope: ContentScope.App
-            }
-
-            ContentPeerPicker {
-                id: peerPicker
-                visible: parent.visible
-                handler: ContentHandler.Source
-                contentType: ContentType.Documents
-
-                onPeerSelected: {
-                    pageStack.pop();
-                    // requests an active transfer from peer
-                    //#jkb: eigentlich brauch ich jetzt nur die URL
-                    function startContentTransfer(callback) {
-                        if (callback)
-                            contentHubConnection.imageCallback = callback
-                        var transfer = peer.request(appStore);
-                        if (transfer !== null) {
-                            mainPage.activeTransfer = transfer;
-                        }
-                    }
-                    peer.selectionType = ContentTransfer.Single;
-                    // when peer has been selected, request a transfer, providing
-                    // a callback that pushes the preview stack
-                    startContentTransfer(function(uri) {
-                       pageStack.push(Qt.resolvedUrl("Preview.qml"), {
-                            uri: uri, imported: true
-                        });
-                        // set Connection target
-                        selectedItemConnection.target = pageStack.currentPage;
-                    });
-
-                }
-
-                onCancelPressed: pageStack.pop();
-            }
-        }*/
 
     } //Flickable
 } //ItemPage
