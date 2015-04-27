@@ -145,7 +145,7 @@ Dialog {
     // Main column, holding all controls and buttons.
     Column {
         anchors { left: parent.left; right: parent.right }
-        spacing: units.gu(2)
+        spacing: units.gu(0.5)
 
         // Suggestion controls
         Column {
