@@ -293,9 +293,37 @@ class DualSimCellularTestCase(CellularBaseTestCase):
 class ApnTestCase(CellularBaseTestCase):
 
     def test_custom_mms(self):
-        self.add_connection_context(self.modem_0, Type='mms', Name='failed')
-        print(self.connMan.GetContexts())
+        """Adding a custom context and activating is the same as adding a
+        custom context and removing all the others."""
+        self.add_connection_context(self.modem_0, Type='mms', Name='Failed')
+        contexts = self.connMan.GetContexts()
+
+        # Assert there's a Failed mms context
+        self.assertEqual(1, len(contexts))
+        self.assertEqual('/ril_0/context0', contexts[0][0])
+        self.assertEqual('Failed', contexts[0][1]['Name'])
 
         editor = self.cellular_page.open_apn_editor('mms')
-        editor.set_access_point_name('canonical')
+        editor.set_access_point_name('Ubuntu')
+        editor.set_message_center('ubuntu.com')
+        editor.set_message_proxy('ubuntu:8080')
+        editor.set_username('user')
+        editor.set_password('pass')
         editor.activate()
+
+        # Wait for our new context to appear first.
+        self.assertThat(
+            lambda: self.connMan.GetContexts()[0][0],
+            Eventually(Equals('/ril_0/context1'))
+        )
+        contexts = self.connMan.GetContexts()
+        self.assertEqual(1, len(contexts))
+
+        new_ctx = contexts[0][1]
+        self.assertEqual('mms', new_ctx['Type'])
+        self.assertEqual('___ubuntu_custom_apn_mms', new_ctx['Name'])
+        self.assertEqual('Ubuntu', new_ctx['AccessPointName'])
+        self.assertEqual('http://ubuntu.com', new_ctx['MessageCenter'])
+        self.assertEqual('ubuntu:8080', new_ctx['MessageProxy'])
+        self.assertEqual('user', new_ctx['Username'])
+        self.assertEqual('pass', new_ctx['Password'])

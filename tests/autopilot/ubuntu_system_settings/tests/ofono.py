@@ -207,6 +207,8 @@ def AddConnectionContext(self, type):
 @dbus.service.method('org.ofono.ConnectionManager',
                      in_signature='o', out_signature='')
 def RemoveConnectionContext(self, path):
+    ctx_obj = dbusmock.get_object(path)
+    self.contexts.remove(ctx_obj)
     self.RemoveObject(path)
     self.EmitSignal('org.ofono.ConnectionManager',
                     'ContextRemoved', 'o', [path])

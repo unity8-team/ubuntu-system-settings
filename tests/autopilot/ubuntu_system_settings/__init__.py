@@ -445,6 +445,30 @@ class CustomApnEditor(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
     def set_access_point_name(self, new_name):
         self._populate_field('accessPointName', new_name)
 
+    @autopilot.logging.log_action(logger.debug)
+    def set_message_center(self, new_message_center):
+        self._populate_field('messageCenter', new_message_center)
+
+    @autopilot.logging.log_action(logger.debug)
+    def set_message_proxy(self, new_message_proxy):
+        self._populate_field('messageProxy', new_message_proxy)
+
+        # Sleep for the duration of the timer that will copy any
+        # port into the port field
+        sleep(1.5)
+
+    @autopilot.logging.log_action(logger.debug)
+    def set_port(self, new_port):
+        self._populate_field('port', new_port)
+
+    @autopilot.logging.log_action(logger.debug)
+    def set_username(self, new_username):
+        self._populate_field('username', new_username)
+
+    @autopilot.logging.log_action(logger.debug)
+    def set_password(self, new_password):
+        self._populate_field('password', new_password)
+
     def _populate_field(self, field, text):
         pwdfield = self.select_single('TextField', objectName=field)
         pwdfield.write(text)

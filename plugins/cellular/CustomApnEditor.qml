@@ -275,7 +275,7 @@ Dialog {
 
             TextField {
                 id: messageCenter
-
+                objectName: "messageCenter"
                 width: parent.width
                 inputMethodHints: Qt.ImhUrlCharactersOnly |
                                   Qt.ImhNoAutoUppercase |
@@ -303,6 +303,7 @@ Dialog {
 
             TextField {
                 id: messageProxy
+                objectName: "messageProxy"
                 width: parent.width
                 inputMethodHints: Qt.ImhUrlCharactersOnly |
                                   Qt.ImhNoAutoUppercase |
@@ -350,8 +351,8 @@ Dialog {
             visible: isMms
 
             Label {
-                wrapMode: Text.WrapAnywhere
                 id: portLabel
+                wrapMode: Text.WrapAnywhere
                 text: i18n.tr("Proxy port:")
                 width: contentWidth
                 height: parent.height
@@ -360,6 +361,7 @@ Dialog {
 
             TextField {
                 id: port
+                objectName: "port"
                 width: (parent.width - portLabel.width) - parent.spacing
                 maximumLength: 5
                 inputMethodHints: Qt.ImhDigitsOnly |
@@ -388,6 +390,7 @@ Dialog {
 
             TextField {
                 id: username
+                objectName: "username"
                 width: parent.width
                 inputMethodHints: Qt.ImhNoPredictiveText | Qt.ImhSensitiveData
                 KeyNavigation.tab: password
@@ -407,6 +410,7 @@ Dialog {
 
             TextField {
                 id: password
+                objectName: "password"
                 width: parent.width
                 echoMode: passwordHiddenSwitch.checked ?
                     TextInput.Password : TextInput.Normal
