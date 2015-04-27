@@ -120,6 +120,9 @@ ItemPage {
                             if (item.hasOwnProperty("menu")) {
                                 item.menu = Qt.binding(function() { return model; });
                             }
+                            if (item.hasOwnProperty("menuIndex")) {
+                                item.menuIndex = Qt.binding(function() { return modelIndex; });
+                            }
                         }
                     }
                 }
@@ -139,9 +142,9 @@ ItemPage {
                 text: i18n.tr("Connect to hidden network…")
                 visible : (actionGroup.actionObject.valid ?
                            actionGroup.actionObject.state : false)
-                progression: true
-				onClicked: {
-                    pageStack.push(Qt.resolvedUrl("OtherNetwork.qml"))
+                onClicked: {
+                    otherNetworLoader.source = "OtherNetwork.qml";
+                    PopupUtils.open(otherNetworLoader.item);
                 }
             }
 

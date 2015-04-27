@@ -23,35 +23,41 @@ import Ubuntu.Components.Popups 0.1
 import Ubuntu.SystemSettings.Wifi 1.0
 import QMenuModel 0.1
 
-ItemPage {
-    id: otherNetworkItemPage
-    objectName: "otherNetworkItemPage"
-    title: i18n.tr("Connect to Hidden Network")
-    flickable: scrollWidget
+Component {
 
-    function settingsValid() {//#jkb: maybe more checks for added alternatives...
-        if(networkname.length == 0) {
-            return false;
-        }
-        if(securityList.selectedIndex == 0) {
-            return true
-        }
-        if(securityList.selectedIndex == 3) {
+    Dialog {
+
+        id: otherNetworkDialog
+        objectName: "otherNetworkDialog"
+        anchorToKeyboard: true
+
+        function settingsValid() {
+            if(networkname.length == 0) {
+                return false;
+            }
+            if(securityList.selectedIndex == 0) {
+                return true
+            }
+            if(securityList.selectedIndex == 3) {
+                
             // WEP
             return password.length === 5  ||
                    password.length === 10 ||
                    password.length === 13 ||
                    password.length === 26;
+        	}
+		//WPA
+		return password.length >= 8
         }
-        // WPAs
-        return password.length >= 8
-    }
 
-    Common {
-        id: common
-    }
+        title: i18n.tr("Connect to Hidden Network")
+        text: feedback.enabled ? feedback.text : "";
 
-    states: [
+        Common {
+            id: common
+        }
+
+        states: [
         State {
             name: "CONNECTING"
             PropertyChanges {
@@ -155,26 +161,18 @@ ItemPage {
                 enabled: false
             }
         }
-    ]
+        ]
 
-    Flickable { //from about/PageComponents.qml
-        id: scrollWidget
-        anchors.fill: parent
-        contentHeight: units.gu(100)
-        boundsBehavior: (contentHeight > otherNetworkItemPage.height) ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
-        /* Set the direction to workaround https://bugreports.qt-project.org/browse/QTBUG-31905
-               otherwise the UI might end up in a situation where scrolling doesn't work */
-        flickableDirection: Flickable.VerticalFlick
+        Label {
+            property bool enabled: false
+            id: feedback
+            horizontalAlignment: Text.AlignHCenter
+            height: contentHeight
+            wrapMode: Text.Wrap
+            visible: false
+        }
 
-        Column{
-
-            spacing: units.gu(1)
-            anchors {
-                fill: parent
-                margins: units.gu(2)
-            }
-
-            Label {
+        Label {
                 id: networknameLabel
                 text : i18n.tr("Network name")
                 objectName: "networknameLabel"
@@ -303,7 +301,7 @@ ItemPage {
                     Button {
                         id: addcacertButton
                         //action: selectPeer
-                        visible: showAllUI // Button action not implemented yet.
+                        visible: false //showAllUI // Button action not implemented yet.
                         objectName: "addcacertButton"
                         anchors.right: parent.right
                         text: i18n.tr("Add file…")
@@ -343,7 +341,7 @@ ItemPage {
                     Button {
                         id: addusercertButton
                         //action: selectPeer
-                        visible: showAllUI // Button action not implemented yet.
+                        visible: false // Button action not implemented yet.
                         objectName: "addusercertButton"
                         anchors.right: parent.right
                         text: i18n.tr("Add file…")
@@ -384,7 +382,7 @@ ItemPage {
                     Button {
                         id: adduserprivatekeyButton
                         //action: selectPeer
-                        visible: showAllUI // Button action not implemented yet
+                        visible: false // Button action not implemented yet
                         objectName: "adduserprivatekeyButton"
                         anchors.right: parent.right
                         text: i18n.tr("Add file…")
@@ -437,7 +435,7 @@ ItemPage {
                     Button {
                         id: addpacFileButton
                         //action: selectPeer
-                        visible: showAllUI // Button action not implemented yet
+                        visible: false // Button action not implemented yet
                         objectName: "addpacFileButton"
                         anchors.right: parent.right
                         text: i18n.tr("Add file…")
@@ -557,16 +555,33 @@ ItemPage {
 
         ListItem.ThinDivider {visible: securityList.selectedIndex != 0}
 
-        Label {
-                property bool enabled: false
-                id: feedback
-                horizontalAlignment: Text.AlignHCenter
-                height: contentHeight
-                wrapMode: Text.Wrap
-                visible: false
+
+        RowLayout {
+            id: buttonRow
+            anchors {
+                left: parent.left
+                right: parent.right
+            }
+            spacing: units.gu(2)
+            height: cancelButton.height
+
+            Button {
+                id: cancelButton
+                objectName: "cancel"
+                Layout.fillWidth: true
+                text: i18n.tr("Cancel")
+                onClicked: {
+                    PopupUtils.close(otherNetworkDialog);
+
+                    // If this dialog created the connection,
+                    // disconnect the device
+                    if (otherNetworkDialog.state === "CONNECTING") {
+                        DbusHelper.forgetActiveDevice();
+                    }
+                }
             }
 
-        Button {
+            Button {
                 id: connectButton
                 objectName: "connect"
                 Layout.fillWidth: true
@@ -596,20 +611,20 @@ ItemPage {
         }
 
         Action {
-                id: connectAction
-                enabled: settingsValid()
-                onTriggered: {
-                    DbusHelper.connect(
-                                networkname.text,
-                                securityList.selectedIndex,
-                                authList.selectedIndex,
+            id: connectAction
+            enabled: settingsValid()
+            onTriggered: {
+                DbusHelper.connect(
+                    networkname.text,
+                    securityList.selectedIndex,
+                    authList.selectedIndex,
                                 username.text,
                                 password.text,
                                 [cacert.text, usercert.text, userprivatekey.text, pacFile.text] ,
                                 p2authList.selectedIndex);
-                    otherNetworkItemPage.state = "CONNECTING";
-                }
+                otherNetworkDialog.state = "CONNECTING";
             }
+        }
 
         /* Timer that shows a tick in the connect button once we have
         successfully connected. */
@@ -618,12 +633,13 @@ ItemPage {
             interval: 2000
             running: false
             repeat: false
+            onTriggered: PopupUtils.close(otherNetworkDialog)
         }
 
         Connections {
             target: DbusHelper
             onDeviceStateChanged: {
-                if (otherNetworkItemPage.state === "FAILED") {
+                if (otherNetworkDialog.state === "FAILED") {
                     /* Disconnect the device if it tries to reconnect after a
                     connection failure */
                     if (newState === 40) { // 40 = NM_DEVICE_STATE_PREPARE
@@ -635,22 +651,21 @@ ItemPage {
                 the CONNECTING state. This means that this Dialog will not
                 react to what other NetworkManager consumers do.
                 */
-                if (otherNetworkItemPage.state === "CONNECTING") {
+                if (otherNetworkDialog.state === "CONNECTING") {
                     switch (newState) {
-                    case 120:
-                        feedback.text = common.reasonToString(reason);
-                        otherNetworkItemPage.state = "FAILED";
-                        break;
-                    case 100:
-                        /* connection succeeded only if it was us that
+                        case 120:
+                            feedback.text = common.reasonToString(reason);
+                            otherNetworkDialog.state = "FAILED";
+                            break;
+                        case 100:
+                            /* connection succeeded only if it was us that
                             created it */
-                        otherNetworkItemPage.state = "SUCCEEDED";
-                        break;
+                            otherNetworkDialog.state = "SUCCEEDED";
+                            break;
                     }
                 }
             }
         }
-
-    } //Flickable
-} //ItemPage
+    }
+}
 
