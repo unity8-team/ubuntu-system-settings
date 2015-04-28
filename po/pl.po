@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-10-16 20:04-0600\n"
-"PO-Revision-Date: 2015-04-26 16:36+0000\n"
+"PO-Revision-Date: 2015-04-27 13:55+0000\n"
 "Last-Translator: GTriderXC <gtriderxc@yahoo.com>\n"
 "Language-Team: Polish <pl@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -16,8 +16,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2015-04-27 05:24+0000\n"
-"X-Generator: Launchpad (build 17430)\n"
+"X-Launchpad-Export-Date: 2015-04-28 05:32+0000\n"
+"X-Generator: Launchpad (build 17453)\n"
 
 #: ubuntu-system-settings.desktop.in.in.h:1 ../src/qml/MainWindow.qml:112
 msgid "System Settings"
@@ -590,7 +590,8 @@ msgstr "GPS"
 
 #: ../plugins/battery//PageComponent.qml:430
 msgid "Accurate location detection requires GPS and/or Wi-Fi."
-msgstr "Dokładna lokalizacja położenia wymaga włączenia GPS lub Wi-Fi."
+msgstr ""
+"Dokładne wykrywanie lokalizacji wymaga włączenia GPS, Wi-Fi, lub obu usług."
 
 #: ../plugins/battery//SleepValues.qml:74
 msgid "Lock the phone when it's not in use:"
@@ -1226,11 +1227,11 @@ msgstr "Prywatność"
 
 #: ../plugins/security-privacy//PageComponent.qml:177
 msgid "Stats on welcome screen"
-msgstr "Informacje ekranu powitalnego"
+msgstr "Statystyki na ekranie powitalnym"
 
 #: ../plugins/security-privacy//PageComponent.qml:187
 msgid "Messages on welcome screen"
-msgstr "Wiadomość na ekranie powitalnym"
+msgstr "Wiadomości na ekranie powitalnym"
 
 #: ../plugins/security-privacy//Dash.qml:29
 #: ../plugins/security-privacy//PageComponent.qml:199
@@ -1331,7 +1332,7 @@ msgstr ""
 
 #: ../plugins/security-privacy//Location.qml:227
 msgid "Allow access to location:"
-msgstr "Zezwól na dostęp dla lokalizacji:"
+msgstr "Zezwól na dostęp do lokalizacji:"
 
 #: ../plugins/security-privacy//Dash.qml:45
 msgid "Return results from:"
@@ -1764,8 +1765,8 @@ msgstr ""
 #: ../plugins/system-update//PageComponent.qml:96
 msgid "Connect the phone to power before installing the system update."
 msgstr ""
-"Przed dokonaniem aktualizacji systemu, należy podłączyć zewnętrzne zasilanie "
-"urządzenia."
+"Przed dokonaniem aktualizacji systemu, należy podłączyć urządzenie do źródła "
+"zasilania."
 
 #: ../plugins/system-update//PageComponent.qml:99
 msgid "Install & Restart"
@@ -2104,12 +2105,14 @@ msgstr "Hasło musi składać się z 4 znaków"
 
 #: ../wizard/qml/Pages//20-sim.qml:23
 msgid "Add a SIM card and restart your device"
-msgstr "Włóż kartę SIM i uruchom urządzenie ponownie"
+msgstr "Urządzenie nie wykryło karty SIM"
 
 #: ../wizard/qml/Pages//20-sim.qml:57
 msgid "Without it, you won’t be able to make calls or use text messaging."
 msgstr ""
-"Inaczej wykonywanie połączeń i wysyłanie wiadomości nie będzie możliwe."
+"Bez niej nie będzie można dzwonić, wysyłać wiadomości oraz korzystać wielu "
+"innych usług. Jeśli chcesz to naprawić, po włożeniu karty, uruchom ponownie "
+"urządzenie."
 
 #: ../wizard/qml/Pages//passwd-confirm.qml:52
 msgid "Sorry, incorrect passphrase."
@@ -2126,11 +2129,11 @@ msgstr "Niestety, błędny kod"
 
 #: ../wizard/qml/Pages//80-finished.qml:22
 msgid "All done"
-msgstr "Gotowe"
+msgstr "Zaczynajmy!"
 
 #: ../wizard/qml/Pages//80-finished.qml:37
 msgid "Nice work!"
-msgstr "Dobra robota!"
+msgstr "Same dobre wiadomości:"
 
 #: ../wizard/qml/Pages//80-finished.qml:44
 msgid "Your phone is now ready to use."
@@ -2146,11 +2149,11 @@ msgstr "Witaj!"
 
 #: ../wizard/qml/Pages//10-welcome.qml:42
 msgid "Welcome to your Ubuntu phone."
-msgstr "Witamy w telefonie z systemem Ubuntu."
+msgstr "Wspaniale, że należysz do społeczności Ubuntu."
 
 #: ../wizard/qml/Pages//10-welcome.qml:50
 msgid "Let’s get started."
-msgstr "Zaczynajmy."
+msgstr "Startujemy!"
 
 #. TRANSLATORS: HERE is a trademark for Nokia's location service, you probably shouldn't translate it
 #: ../wizard/qml/Pages//50-location.qml:58
@@ -2158,48 +2161,50 @@ msgid ""
 "Ubuntu includes location services provided by HERE, enabling apps to "
 "pinpoint your location."
 msgstr ""
-"Aplikacje i usługi Ubuntu otrzymują informacje o położeniu użytkownika, "
+"Aplikacje i system Ubuntu otrzymują informacje o położeniu użytkownika "
 "dzięki serwisowi HERE."
 
 #: ../wizard/qml/Pages//50-location.qml:64
 msgid ""
 "Allow apps to use your mobile and Wi-Fi networks to determine your location."
 msgstr ""
+"Zezwól aplikacjom na określanie położenia poprzez lokalizację względem sieci "
+"Wi-Fi oraz sieci komórkowej"
 
 #. TRANSLATORS: HERE is a trademark for Nokia's location service, you probably shouldn't translate it
 #: ../wizard/qml/Pages//50-location.qml:74
 msgid ""
 "Accept the HERE <a href='terms.qml'>terms and conditions</a> to enable these "
 "services."
-msgstr ""
+msgstr "Akceptacja <a href='terms.qml'>warunków</a> użytkowania usługi HERE"
 
 #: ../wizard/qml/Pages//50-location.qml:85
 msgid ""
 "This service can be disabled at any time from the <b>System Settings</b> "
 "menu."
 msgstr ""
-"Ta usługa może być wyłączona w dowolnym momencie poprzez menu <b>Ustawienia "
-"systemu</b>."
+"Zawsze można zmienić zdanie! Powyższy wybór można zmodyfikować poprzez menu "
+"<b>Ustawień systemu</b>."
 
 #: ../wizard/qml/Pages//60-reporting.qml:22
 msgid "Improving your experience"
-msgstr "Rozwój dostarczanych usług"
+msgstr "Codziennie coraz lepszy..."
 
 #: ../wizard/qml/Pages//60-reporting.qml:34
 msgid ""
 "Your phone is set up to automatically report errors to Canonical and its "
 "partners, the makers of the operating system."
 msgstr ""
-"To urządzenie jest domyślnie skonfigurowane, aby zgłaszać raporty błędów "
-"twórcom systemu operacyjnego: firmie Canonical oraz jej partnerom"
+"System jest domyślnie skonfigurowany, by zgłaszać raporty błędów swoim "
+"twórcom: firmie Canonical oraz jej partnerom."
 
 #: ../wizard/qml/Pages//60-reporting.qml:41
 msgid ""
 "This can be disabled in <b>System Settings</b> under <b>Security &amp; "
 "Privacy</b>"
 msgstr ""
-"Opcję tę można wyłączyć w <b>ustawieniach systemu</b> przez menu "
-"<b>Prywatność i zabezpieczenia</b>"
+"Można temu zapobiec poprzez zmianę <b>Ustawień systemowych</b>, otwierając "
+"menu <b>Prywatność i bezpieczeńswto</b>."
 
 #: ../wizard/qml/Components//Page.qml:89
 msgid "Back"
