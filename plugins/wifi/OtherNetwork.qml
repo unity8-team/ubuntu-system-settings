@@ -109,6 +109,14 @@ Component {
                 target: usernameLabel
                 opacity: 0.5
             }
+             PropertyChanges {
+                target: anonymousIdentity
+                enabled: false
+            }
+            PropertyChanges {
+                target: anonymousIdentityLabel
+                opacity: 0.5
+            }
             PropertyChanges {
                 target: authList
                 enabled: false
@@ -161,7 +169,7 @@ Component {
                 enabled: false
             }
         }
-        ]
+    ]
 
         Label {
             property bool enabled: false
@@ -191,7 +199,7 @@ Component {
                 Component.onCompleted: forceActiveFocus()
             }
 
-            ListItem.ThinDivider {}
+            //ListItem.ThinDivider {}
 
             Label {
                 id: securityListLabel
@@ -211,7 +219,9 @@ Component {
                         i18n.tr("WPA & WPA2 Enterprise"),// index: 2
                         i18n.tr("WEP"),                  // index: 3
                         i18n.tr("Dynamic WEP (802.1x)"), // index: 4
+                        i18n.tr("LEAP"),                 // index: 5
                        ]
+                selectedIndex: 1
             }
 
             Label {
@@ -239,7 +249,7 @@ Component {
 
             Label {
                 id: p2authListLabel
-                text : i18n.tr("Phase-2-Authentication")
+                text : i18n.tr("Inner authentication")
                 objectName: "p2authLabel"
                 fontSize: "medium"
                 font.bold: false
@@ -290,7 +300,7 @@ Component {
 
                     Label {
                         id: cacertLabel
-                        text : i18n.tr("CA-Certificate")
+                        text : i18n.tr("CA Certificate")
                         objectName: "cacertListLabel"
                         fontSize: "medium"
                         font.bold: false
@@ -304,7 +314,7 @@ Component {
                         visible: false //showAllUI // Button action not implemented yet.
                         objectName: "addcacertButton"
                         anchors.right: parent.right
-                        text: i18n.tr("Add file…")
+                        text: i18n.tr("Choose file…")
                     }
                 }
 
@@ -344,7 +354,7 @@ Component {
                         visible: false // Button action not implemented yet.
                         objectName: "addusercertButton"
                         anchors.right: parent.right
-                        text: i18n.tr("Add file…")
+                        text: i18n.tr("Choose file…")
                     }
                 }
 
@@ -385,7 +395,7 @@ Component {
                         visible: false // Button action not implemented yet
                         objectName: "adduserprivatekeyButton"
                         anchors.right: parent.right
-                        text: i18n.tr("Add file…")
+                        text: i18n.tr("Choose file…")
                     }
                 }
 
@@ -400,7 +410,7 @@ Component {
                     placeholderText: i18n.tr("Absolute path to key or clipboard content")
                 }
 
-                ListItem.ThinDivider {}
+                //ListItem.ThinDivider {}
 
             }
 
@@ -451,8 +461,31 @@ Component {
                     placeholderText: i18n.tr("Absolute path to Pac File or clipboard content")
                 }
 
-                ListItem.ThinDivider {}
+                //ListItem.ThinDivider {}
 
+            }
+
+            Label {
+                id: anonymousIdentityLabel
+                text : i18n.tr("Anonymous identity")
+                objectName: "anonymousIdentityLabel"
+                fontSize: "medium"
+                font.bold: false
+                color: Theme.palette.selected.backgroundText
+                elide: Text.ElideRight
+                visible: ( securityList.selectedIndex == 2  && authList.selectedIndex !== 2 )
+            }
+
+            TextField {
+                id : anonymousIdentity
+                objectName: "anonymousIdentity"
+                width: parent.width
+                visible: ( securityList.selectedIndex == 2  && authList.selectedIndex !== 2 )
+                inputMethodHints: Qt.ImhNoPredictiveText
+                Component.onCompleted: forceActiveFocus()
+                onAccepted: {
+                    connectAction.trigger()
+                }
             }
 
             Label {
@@ -466,20 +499,19 @@ Component {
                              i18n.tr("Username")
                          }
                 }
-
                 objectName: "usernameLabel"
                 fontSize: "medium"
                 font.bold: false
                 color: Theme.palette.selected.backgroundText
                 elide: Text.ElideRight
-                visible: ( securityList.selectedIndex == 2 || securityList.selectedIndex == 4)
+                visible: ( securityList.selectedIndex == 2 || securityList.selectedIndex == 4 || securityList.selectedIndex == 5)
             }
 
             TextField {
                 id : username
                 objectName: "username"
                 width: parent.width
-                visible: ( securityList.selectedIndex == 2 || securityList.selectedIndex == 4)
+                visible: ( securityList.selectedIndex == 2 || securityList.selectedIndex == 4 || securityList.selectedIndex == 5)
                 inputMethodHints: Qt.ImhNoPredictiveText
                 Component.onCompleted: forceActiveFocus()
                 onAccepted: {
@@ -549,13 +581,42 @@ Component {
                         }
                     }
                 }
+           }
 
-            }
+           Row {
+                    id: passwordRememberRow
+                    layoutDirection: Qt.LeftToRight
+                    spacing: units.gu(2)
+                    visible: false
+                             //( authList.selectedIndex == 1 || authList.selectedIndex == 3 || authList.selectedIndex == 4)
+                             //not implemented yet.
+                    CheckBox {
+                        id: passwordRememberSwitch
+                        //activeFocusOnPress: false
+                    }
 
+                    Label {
+                        id: passwordRememberLabel
+                        text : i18n.tr("Remember password")
+                        objectName: "passwordRememberLabel"
+                        fontSize: "medium"
+                        color: Theme.palette.selected.backgroundText
+                        elide: Text.ElideRight
+                        height: passwordRememberSwitch.height
+                        verticalAlignment: Text.AlignVCenter
+                        MouseArea {
+                            anchors {
+                                fill: parent
+                            }
+                            onClicked: {
+                                passwordRememberSwitch.checked =
+                                        !passwordRememberSwitch.checked
+                            }
+                        }
+                    }
 
-        ListItem.ThinDivider {visible: securityList.selectedIndex != 0}
-
-
+        }
+        //ListItem.ThinDivider {visible: securityList.selectedIndex != 0}
         RowLayout {
             id: buttonRow
             anchors {
@@ -618,7 +679,7 @@ Component {
                     networkname.text,
                     securityList.selectedIndex,
                     authList.selectedIndex,
-                                username.text,
+                                [username.text, anonymousIdentity.text],
                                 password.text,
                                 [cacert.text, usercert.text, userprivatekey.text, pacFile.text] ,
                                 p2authList.selectedIndex);
