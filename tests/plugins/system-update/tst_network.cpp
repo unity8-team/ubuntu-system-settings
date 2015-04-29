@@ -22,7 +22,6 @@
 #include <QObject>
 #include <QTest>
 #include <QString>
-#include <QJsonObject>
 #include "network/network.h"
 #include "update.h"
 
@@ -36,17 +35,23 @@ public:
     NetworkTest() {};
 
 private Q_SLOTS:
-    void testJson();
+    void testArch();
+    void testFrameworks();
 
 };
 
-void NetworkTest::testJson()
+void NetworkTest::testFrameworks()
 {
     Network net;
-    QJsonObject serializer = net.build_json();
-    
-    QCOMPARE(serializer.contains("X-Ubuntu-Frameworks"), true);
-    QCOMPARE(serializer.contains("X-Ubuntu-Architecture"), true);
+    auto frameworks = net.get_available_frameworks();
+    QCOMPARE(frameworks.empty(), false);
+}
+
+void NetworkTest::testArch()
+{
+    Network net;
+    auto arch = net.get_architecture();
+    QCOMPARE(arch.empty(), false);
 }
 
 QTEST_MAIN(NetworkTest)
