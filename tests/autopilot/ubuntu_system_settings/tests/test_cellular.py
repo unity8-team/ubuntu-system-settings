@@ -327,3 +327,32 @@ class ApnTestCase(CellularBaseTestCase):
         self.assertEqual('ubuntu:8080', new_ctx['MessageProxy'])
         self.assertEqual('user', new_ctx['Username'])
         self.assertEqual('pass', new_ctx['Password'])
+
+    def test_custom_internet(self):
+        self.add_connection_context(self.modem_0, Type='internet', Name='www')
+        contexts = self.connMan.GetContexts()
+
+        self.assertEqual(1, len(contexts))
+        self.assertEqual('/ril_0/context0', contexts[0][0])
+        self.assertEqual('www', contexts[0][1]['Name'])
+
+        editor = self.cellular_page.open_apn_editor('internet')
+        editor.set_access_point_name('Ubuntu')
+        editor.set_username('user')
+        editor.set_password('pass')
+        editor.activate()
+
+        # Wait for our new context to appear
+        self.assertThat(
+            lambda: self.connMan.GetContexts()[1][0],
+            Eventually(Equals('/ril_0/context1'))
+        )
+        contexts = self.connMan.GetContexts()
+        self.assertEqual(2, len(contexts))
+
+        new_ctx = contexts[1][0]
+        self.assertEqual('internet', new_ctx['Type'])
+        self.assertEqual('___ubuntu_custom_apn_internet', new_ctx['Name'])
+        self.assertEqual('Ubuntu', new_ctx['AccessPointName'])
+        self.assertEqual('user', new_ctx['Username'])
+        self.assertEqual('pass', new_ctx['Password'])

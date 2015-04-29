@@ -224,7 +224,8 @@ Dialog {
                 expanded: true
                 selectedIndex: -1
                 delegate: OptionSelectorDelegate {
-                    property string name: contextModel.get(index).qml.name
+                    property var data: contextModel.get(index)
+                    property string name: data ? data.qml.name : i18n.tr("Not set")
                     text: manager.isNameCustom(name) ? i18n.tr("Custom") : name
                     showDivider: false
                 }

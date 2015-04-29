@@ -28,6 +28,13 @@ var _CUSTOM_INTERNET_CONTEXT_NAME = '___ubuntu_custom_apn_internet';
 var _CUSTOM_MMS_CONTEXT_NAME = '___ubuntu_custom_apn_mms';
 var _CUSTOM_IA_CONTEXT_NAME = '___ubuntu_custom_apn_ia';
 
+/**
+ * Get the list model corresponding to a given type.
+ *
+ * @throws {Error} if the type was not mms|internet|ia
+ * @param {String} type of model to get
+ * @return {ListModel} model that matches type
+*/
 function _getModelFromType (type) {
     var model;
     switch (type) {
@@ -46,19 +53,44 @@ function _getModelFromType (type) {
     return model;
 }
 
-function getCustomMmsContext () {
-    return getCustomContext('mms');
+
+/**
+ * Get the custom MMS QML.
+ *
+ * @return {OfonoConnectionContext|null} qml or null if none found
+*/
+function getCustomMmsContextQML () {
+    return getCustomContextQML('mms');
 }
 
-function getCustomInternetContext () {
-    return getCustomContext('mms');
+
+/**
+ * Get the custom Internet QML.
+ *
+ * @return {OfonoConnectionContext|null} qml or null if none found
+*/
+function getCustomInternetContextQML () {
+    return getCustomContextQML('mms');
 }
 
-function getCustomLteContext () {
-    return getCustomContext('ia');
+
+/**
+ * Get the custom IA QML.
+ *
+ * @return {OfonoConnectionContext|null} qml or null if none found
+*/
+function getCustomLteContextQML () {
+    return getCustomContextQML('ia');
 }
 
-function getCustomContext (type) {
+
+/**
+ * Get the custom QML for a context of a given type.
+ *
+ * @param {String} type
+ * @return {OfonoConnectionContext|null} qml or null if none found
+*/
+function getCustomContextQML (type) {
     var model = _getModelFromType(type);
     var i;
 
@@ -70,6 +102,13 @@ function getCustomContext (type) {
     return null;
 }
 
+
+/**
+ * Get QML for a context path.
+ *
+ * @param {String} path of context
+ * @return {QOfonoConnectionContext|null} qml from path or null if none found
+*/
 function getContextQML (path) {
     if (!_pathToQml.hasOwnProperty(path)) {
         return null;
@@ -96,6 +135,7 @@ function updateQML (paths) {
  * Destroys QML and makes sure to remove from the
  * appropriate model.
  *
+ * @param {String} path of object to delete
  * @return {Boolean} deletion successful
  */
 function deleteQML (path) {
@@ -125,6 +165,8 @@ function deleteQML (path) {
 
 /**
  * Removes QML that no longer exists in list of paths.
+ *
+ * @param {Array:String} paths we use as reference.
  */
 function _garbageCollect (paths) {
     var path;
@@ -167,6 +209,13 @@ function _createQml (paths) {
     });
 }
 
+/**
+ * Creates a OfonoConnectionContext qml object from a given path.
+ * Since the components are all local, this will always return an object.
+ *
+ * @param {String} path of context
+ * @return {OfonoConnectionContext} qml that was created
+*/
 function createContextQml (path) {
     if (!_pathToQml.hasOwnProperty(path)) {
         return contextComponent.createObject(root, {
@@ -178,11 +227,23 @@ function createContextQml (path) {
     }
 }
 
+/**
+ * Creates a context of a certain type.
+ *
+ * @param {String} type of context to be created.
+*/
 function createContext (type) {
-    console.warn('Adding context of type', type);
+    console.warn('Creating context of type', type);
     sim.connMan.addContext(type);
 }
 
+
+/**
+ * Removes a context. We don't remove any QML until we receive signal from
+ * ofono that the context was removed, but we disconnect it if active.
+ *
+ * @param {String} path of context to be removed
+*/
 function removeContext (path) {
     console.warn('Removing context', path);
     var ctx = getContextQML(path);
@@ -194,36 +255,48 @@ function removeContext (path) {
     sim.connMan.removeContext(path);
 }
 
-function addContextToModel(context, type) {
+
+/**
+ * Adds a context to the appropriate model.
+ *
+ * @param {OfonoConnectionContext} ctx to be added
+ * @param {String} [optional] type of context
+*/
+function addContextToModel(ctx, type) {
     var data = {
-        path: context.contextPath,
-        qml: context
+        path: ctx.contextPath,
+        qml: ctx
     };
     var model;
-    console.warn('addContextToModel', type, context.name, data.qml, data.path);
+    console.warn('addContextToModel', type, ctx.name, data.qml, data.path);
 
     if (typeof type === 'undefined') {
-        type = context.type;
+        type = ctx.type;
     }
 
     model = _getModelFromType(type);
 
-    if (context.active) {
-        model.current = context;
+    if (ctx.active) {
+        model.current = ctx;
     }
 
     // If custom, add it to the end of the list.
-    if ((type === 'mms' && context.name === 'MMS') ||
-        (type === 'internet' && context.name === 'Internet') ||
-        (type === 'ia' && context.name === 'IA')) {
-        console.warn('addContextToModel adding', context.name, 'to end');
+    if ((type === 'mms' && ctx.name === 'MMS') ||
+        (type === 'internet' && ctx.name === 'Internet') ||
+        (type === 'ia' && ctx.name === 'IA')) {
+        console.warn('addContextToModel adding', ctx.name, 'to end');
         model.append(data);
     } else {
-        console.warn('addContextToModel adding', context.name, 'first');
+        console.warn('addContextToModel adding', ctx.name, 'first');
         model.insert(0, data);
     }
 }
 
+/**
+ * Handler for removed contexts.
+ *
+ * @param {String} path that was removed
+*/
 function contextRemoved (path) {
     var paths = sim.connMan.contexts.slice(0);
     var updatedPaths = paths.filter(function (val) {
@@ -241,48 +314,14 @@ function typeDetermined (type) {
     addContextToModel(this, type);
 }
 
-// /**
-//  * Handler for newly created contexts.
-//  * Also see https://github.com/rilmodem/ofono/blob/master/src/gprs.c#L148
-//  * @param {String} type
-//  */
-// function contextQMLCreated (defName) {
-//     console.warn('contextQMLCreated', type, this.contextPath);
-
-//     var data = {
-//         path: this.contextPath,
-//         qml: this
-//     };
-
-//     if (defName === 'Internet') {
-
-//     } else if (defName === "MMS") {
-
-//     } else if (defName === "IA") {
-
-//     }
-
-//     switch (type) {
-//         case 'mms':
-//             mmsContexts.append(data);
-//             break;
-//         case 'internet':
-//             internetContexts.append(data);
-//             break;
-//         case 'ia':
-//             iaContexts.append(data);
-//             break;
-//         default:
-//             throw new Error('Unknown context type.');
-//     }
-// }
-
 /**
  * Handler for when a name changes. If we find that the name is one of
  * the ofono defaults, see [1], we assume this has been created by the user,
  * and we treat it as a custom context.
  *
  * [1] https://github.com/rilmodem/ofono/blob/master/src/gprs.c#L148
+ *
+ * @param {String} name's new value
  */
 function contextNameChanged (name) {
     console.warn('contextNameChanged', name, this.contextPath);
@@ -303,25 +342,20 @@ function contextNameChanged (name) {
     if (isCustom) {
         this.disconnect();
         this.name = newName;
-        console.warn('tried changing name of context to', newName, this.active);
+        console.warn('Changing name of context to', newName, this.active);
     }
 }
-
-// function userTriedActivating (active) {
-//     if (active) {
-//         console.warn('userTriedActivating', active);
-//         this.activeChanged.disconnect(userTriedActivating);
-//     }
-// }
 
 /**
  * Handler for activity changes in contexts.
  * Sets itself as the 'current' value on the appropriate model, if active.
  * If deactivated, it nullifies the 'current' value.
+ *
+ * @param {Boolean} active's new value
 */
 function contextActiveChanged(active) {
 
-    // We can't do anything when the type is indeterminate.
+    // We can't do anything sensible when the type is undetermined.
     if (!this.type) {
         return;
     }
@@ -339,6 +373,8 @@ function contextActiveChanged(active) {
 
 /**
  * Handler for added contexts.
+ *
+ * @param {String} path which was added
  */
 function contextAdded (path) {
     console.warn('contextAdded', path);
@@ -347,6 +383,8 @@ function contextAdded (path) {
 
 /**
  * Handler for when contexts change.
+ *
+ * @param {Array:String} paths after change
  */
 function contextsChanged (paths) {
     console.warn('contextsChanged', paths);
@@ -355,61 +393,11 @@ function contextsChanged (paths) {
 
 /**
  * Handler for when errors are reported from ofono.
+ *
+ * @param {String} message from libqofono
  */
 function reportError (message) {
     console.error(message);
-    // if (d.editor) {
-    //     editor.failed(message);
-    // }
-}
-
-/**
- * Updates a context with new values.
- *
- * @param {QOfonoConnectionContext} context
- * @param {Object} values dict with new values
- */
-function updateContext (context, values) {
-    var messageProxy;
-
-    console.warn('updateContext', values.accessPointName, values.messageCenter,
-        values.messageProxy, values.port, values.useraccessPointName,
-        values.password, values.type);
-
-    if (typeof values.accessPointName !== 'undefined') {
-        context.accessPointName = values.accessPointName;
-    }
-
-    if (typeof values.messageCenter !== 'undefined') {
-        context.messageCenter = values.messageCenter;
-    }
-
-    if (typeof values.messageProxy !== 'undefined') {
-        messageProxy = values.messageProxy;
-
-        if (messageProxy !== '') {
-             messageProxy = messageProxy + ':' + values.port;
-        }
-        context.messageProxy = messageProxy;
-    }
-
-    if (typeof values.username !== 'undefined') {
-        context.username = values.username;
-    }
-
-    if (typeof values.password !== 'undefined') {
-        context.password = values.password;
-    }
-
-    if (typeof values.type !== 'undefined') {
-        context.type = values.type;
-    }
-
-    if (context.type === 'internet') {
-        context.name = CUSTOM_INTERNET_CONTEXT_NAME();
-    } else if (context.type === 'mms') {
-        context.name = CUSTOM_MMS_CONTEXT_NAME();
-    }
 }
 
 /**
@@ -453,7 +441,14 @@ function isNameCustom (name) {
     }
 }
 
-function activateContext (ctx) {
+/**
+ * Activates the given OfonoConnectionContext. If MMS, we delete all other
+ * contexts. If the context is IA or Internet, we use the OfonoActivator
+ * to create a connection.
+ *
+ * @param {OfonoConnectionContext} ctx to be activated
+*/
+function activateContextQML (ctx) {
     var i;
 
     ctx.active = true;
@@ -464,7 +459,10 @@ function activateContext (ctx) {
         // removal of all other contexts. See lp:1361864 and
         // lp:1361864.
         for (i = 0; i < mmsContexts.count; i++) {
-            console.warn('activateContext', mmsContexts.get(i).path, ctx.contextPath);
+
+            console.warn('activateContext',
+                         mmsContexts.get(i).path, ctx.contextPath);
+
             if (mmsContexts.get(i).path !== ctx.contextPath) {
                 removeContext(mmsContexts.get(i).path);
             }

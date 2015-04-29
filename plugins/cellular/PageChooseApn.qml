@@ -163,7 +163,7 @@ ItemPage {
                              context.path ,sim.simMng.subscriberIdentity,
                              sim.path);
 
-                if (Manager.activateContext(context)) {
+                if (Manager.activateContextQML(context)) {
                     apnEditor.succeeded();
                 } else {
                     apnEditor.failed();

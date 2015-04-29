@@ -20,7 +20,12 @@
  * This is a collection of functions to help the custom apn editor.
  */
 
-function updateContext (ctx) {
+/**
+ * Updates the given OfonoConnectionContext by using values from the editor.
+ *
+ * @param {OfonoConnectionContext} qml to be updated
+*/
+function updateContextQML (ctx) {
     console.warn('updateContext', accessPointName.text, username.text, password.text);
     ctx.accessPointName = accessPointName.text;
     ctx.username = username.text;
@@ -32,6 +37,11 @@ function updateContext (ctx) {
     }
 }
 
+/**
+ * Populates editor with values from a OfonoConnectionContext.
+ *
+ * @param {OfonoConnectionContext} qml to use as reference
+*/
 function populate (ctx) {
     console.warn('populate');
     accessPointName.text = ctx.accessPointName;
@@ -44,10 +54,20 @@ function populate (ctx) {
     }
 }
 
+/**
+ * Handler for when a user activates a context. We have to do two things:
+ *
+ *    1. If we have a custom context, we deactivate it, update it and
+ *       reactivate it.
+ *    2. If we have no custom context, we create one. We attach a handler
+ *       onto the model that is triggered when a context is added to it.
+ *       This handler will be changed as soon as it is ready, then activated.
+ *
+*/
 function activateButtonPressed () {
     console.warn('activateButtonPressed');
     // Do we have a custom context?
-    var ctx = manager.getCustomContext(contextModel.type);
+    var ctx = manager.getCustomContextQML(contextModel.type);
 
     if (ctx) {
         // We have a custom context we want to change.
@@ -59,7 +79,7 @@ function activateButtonPressed () {
             ctx.disconnect();
         }
         console.warn('Changing context');
-        updateContext(ctx);
+        updateContextQML(ctx);
 
         root.activated(ctx);
     } else {
@@ -73,7 +93,7 @@ function activateButtonPressed () {
             var i;
             console.warn('updateCreatedContext', ctx.name, ctx);
             ctx.disconnect();
-            updateContext(ctx);
+            updateContextQML(ctx);
 
             // Update selected index of suggestions list
             copyFromMms.selectedIndex = -1;
@@ -93,10 +113,21 @@ function activateButtonPressed () {
     }
 }
 
+/**
+ * Checks whether or not a link has a http protocol prefix.
+ *
+ * @param {String} link to check
+*/
 function hasProtocol (link) {
     return link.search(/^http[s]?\:\/\//) == -1;
 }
 
+/**
+ * Prepend http:// to a link if there isn't one.
+ *
+ * @param {String} link to add http:// to
+ * @return {String} changed link
+*/
 function setHttp(link) {
     if (hasProtocol(link)) {
         link = 'http://' + link;
@@ -104,6 +135,12 @@ function setHttp(link) {
     return link;
 }
 
+/**
+ * Asks whether or not the editor values have diverged from values
+ * of some suggestion.
+ *
+ * @return {Boolean} whether or not editor and suggestion have diverged
+*/
 function isChanged () {
     // We had no suggestion, so we have nothing to compare it to.
     if (!suggestion) {
@@ -135,10 +172,19 @@ function isChanged () {
     return false;
 }
 
+/**
+ * Asks whether or not the values in the editor is valid or not.
+ *
+ * @return {Boolean} whether or not the editor is valid
+*/
 function isValid () {
     return accessPointName.text;
 }
 
+/**
+ * If there's a 'current' OfonoConnectionContext, we populate
+ * the editor with values from it.
+*/
 function prePopulate () {
     if (contextModel.current) {
         suggestion = contextModel.current;
