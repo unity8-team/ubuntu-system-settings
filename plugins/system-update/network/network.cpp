@@ -17,6 +17,7 @@
  */
 
 #include "network.h"
+#include <sstream>
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QJsonArray>
@@ -39,6 +40,53 @@ Network::Network(QObject *parent) :
                      this, SLOT(onReply(QNetworkReply*)));
 }
 
+std::string Network::get_architecture()
+{
+    static const std::string deb_arch {architectureFromDpkg()};
+    return deb_arch;
+}
+
+std::vector<std::string> Network::get_available_frameworks()
+{
+    std::vector<std::string> result;
+    for (auto f: list_folder(FRAMEWORKS_FOLDER, FRAMEWORKS_PATTERN)) {
+        result.push_back(f.substr(0, f.size()-FRAMEWORKS_EXTENSION_LENGTH));
+    }
+    return result;
+}
+
+std::string Network::architectureFromDpkg()
+{
+    QString program("dpkg");
+    QStringList arguments;
+    arguments << "--print-architecture";
+    QProcess archDetector;
+    archDetector.start(program, arguments);
+    if(!archDetector.waitForFinished()) {
+        throw std::runtime_error("Architecture detection failed.");
+    }
+    auto output = archDetector.readAllStandardOutput();
+    auto ostr = QString::fromUtf8(output);
+    ostr.remove('\n');
+
+    return ostr.toStdString();
+}
+
+std::vector<std::string> Network::list_folder(const std::string& folder, const std::string& pattern)
+{
+    std::vector<std::string> result;
+
+    QDir dir(QString::fromStdString(folder), QString::fromStdString(pattern),
+                                    QDir::Unsorted, QDir::Readable | QDir::Files);
+    QStringList entries = dir.entryList();
+    for (int i = 0; i < entries.size(); ++i) {
+        QString filename = entries.at(i);
+        result.push_back(filename.toStdString());
+    }
+
+    return result;
+}
+
 void Network::checkForNewVersions(QHash<QString, Update*> &apps)
 {
     m_apps = apps;
@@ -49,10 +97,20 @@ void Network::checkForNewVersions(QHash<QString, Update*> &apps)
         array.append(QJsonValue(m_apps.value(id)->getPackageName()));
     }
 
+    std::stringstream frameworks;
+    for (auto f: get_available_frameworks()) {
+        frameworks << "," << f;
+    }
+    serializer.insert("X-Ubuntu-Frameworks", QJsonValue(QString::fromStdString(frameworks.str())));
+    serializer.insert("X-Ubuntu-Architecture", QJsonValue(QString::fromStdString(get_architecture())));
     serializer.insert("name", array);
+
     QJsonDocument doc(serializer);
 
     QByteArray content = doc.toJson();
+
+    // FIXME: debugging
+    qWarning() << Q_FUNC_INFO << QString(content);
 
     QString urlApps = getUrlApps();
     QNetworkRequest request;
