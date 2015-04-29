@@ -26,7 +26,7 @@
 #include <QUrl>
 #include <QProcessEnvironment>
 
-#define URL_APPS "https://myapps.developer.ubuntu.com/dev/api/click-metadata/"
+#define URL_APPS "https://search.apps.ubuntu.com/api/v1/click-metadata"
 
 #define APPS_DATA "APPS_DATA"
 
