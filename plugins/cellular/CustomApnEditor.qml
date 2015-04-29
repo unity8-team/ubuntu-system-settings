@@ -25,6 +25,7 @@ import SystemSettings 1.0
 import Ubuntu.Components 1.1
 import Ubuntu.Components.Popups 1.0
 import Ubuntu.Components.ListItems 1.0 as ListItem
+import MeeGo.QOfono 0.2
 import "apn_editor.js" as Editor
 
 Dialog {
@@ -34,208 +35,79 @@ Dialog {
     // Property that holds the APN manager (apn_manager.js) module.
     property var manager
 
-    // Easy access to the model we're working with.
-    property var contextModel
+    property OfonoContextConnection contextQML
 
     // All models.
-    property var mmsModel
-    property var internetModel
-    property var iaModel
+    property ListModel mmsModel
+    property ListModel internetModel
+    property ListModel iaModel
 
     // Flags that indicate what context we are editing.
-    property bool isMms: contextModel.type === "mms"
-    property bool isInternet: contextModel.type === "internet"
-    property bool isIa: contextModel.type === "ia"
-
-    // This holds the suggested context, so we can compare form data.
-    property var suggestion: null
+    property bool isCombo: Editor.indexToType(typeSel.selectedIndex) === 'internet+mms'
+    property bool isInternet: Editor.indexToType(typeSel.selectedIndex) === 'internet'
+    property bool isMms: Editor.indexToType(typeSel.selectedIndex) === 'mms'
+    property bool isIa: Editor.indexToType(typeSel.selectedIndex) === 'ia'
 
     property bool isValid: Editor.isValid()
 
-    // Asks if the data entered by the user is different from the suggestion,
-    // if any.
-    property bool isChanged: Editor.isChanged()
-
     // When user activates.
-    signal activated (var context)
-
-    // When activation failed.
-    signal failed ()
-
-    // When activation suceeds.
-    signal succeeded ()
+    signal saved (OfonoContextConnection context)
 
     // When user cancels.
     signal canceled ()
 
-    states: [
-
-        // State that deactivates all form controls.
-        State {
-            name: "deactivateEverything"
-            PropertyChanges { target: copyFromInternet; enabled: false; }
-            PropertyChanges { target: copyFromMms; enabled: false; }
-            PropertyChanges { target: suggestions; enabled: false; }
-            PropertyChanges { target: accessPointName; enabled: false; }
-            PropertyChanges { target: username; enabled: false; }
-            PropertyChanges { target: password; enabled: false; }
-            PropertyChanges { target: messageCenter; enabled: false; }
-            PropertyChanges { target: messageProxy; enabled: false; }
-            PropertyChanges { target: port; enabled: false; }
-            PropertyChanges { target: passwordHiddenSwitch; enabled: false; }
-            PropertyChanges { target: activateButton; enabled: false; }
-            PropertyChanges { target: cancelButton; enabled: false; }
-        },
-
-        State {
-            name: "activating"
-            extend: "deactivateEverything"
-            PropertyChanges {
-                target: connectButtonIndicator
-                running: true
-            }
-            PropertyChanges {
-                target: activateButton
-                text: ""
-                enabled: false
-            }
-            PropertyChanges {
-                target: cancelButton
-                enabled: true
-            }
-        },
-
-        State {
-            name: "activatingDone"
-            extend: "deactivateEverything"
-            PropertyChanges {
-                target: activatingDoneTimer
-                running: true
-            }
-            PropertyChanges {
-                target: activateButton
-                text: ""
-                enabled: false
-            }
-            PropertyChanges {
-                target: cancelButton
-                enabled: false
-            }
-        },
-
-        State {
-            name: "activateFailed"
-            PropertyChanges {
-                target: root
-                text: i18n.tr("APN activation failed.")
-            }
-            StateChangeScript {
-                name: "scroll"
-                script: accessPointName.forceActiveFocus();
-            }
+    Component.onCompleted: {
+        if (contextQML) {
+            Editor.populate(contextQML);
         }
-    ]
-
-    onActivated: state = "activating"
-    onFailed: state = "activateFailed"
-    onSucceeded: state = "activatingDone"
-
-    Component.onCompleted: Editor.prePopulate()
+    }
 
     // Main column, holding all controls and buttons.
     Column {
         anchors { left: parent.left; right: parent.right }
         spacing: units.gu(0.5)
 
-        // Suggestion controls
+        // Type controls
         Column {
-            id: suggestionColumn
-            // Complete the form using the context param as reference.
-
             anchors { left: parent.left; right: parent.right }
-            visible: contextModel.count ||
-                     (isIa && internetModel.count) ||
-                     (isInternet && mmsModel.count)
+            spacing: units.gu(0.5)
 
             Label {
                 wrapMode: Text.WrapAnywhere
                 width: parent.width
-                text: i18n.tr("Suggestions")
-            }
-
-            // Put some space between the title and suggestions.
-            Item { width: parent.width; height: units.gu(1); }
-
-            // The default suggestion for ia contexts, allowing the user
-            // to copy from Internet context. Will only be visible if there are
-            // Internet contexts stored.
-            ListItem.ItemSelector {
-                id: copyFromInternet
-                visible: isIa && internetModel.count
-                expanded: visible
-                model: 1
-                selectedIndex: -1
-                delegate: OptionSelectorDelegate {
-                    text: i18n.tr("Copy from Internet APN")
-                    showDivider: false
-                }
-
-                onDelegateClicked: {
-                    suggestions.selectedIndex = -1;
-                    Editor.populate(internetModel.get(0).qml);
-                }
-
-                // Dirty hack to remove unavoidable line under an ItemSelector.
-                Rectangle {
-                    anchors.bottom: parent.bottom; anchors.bottomMargin: 1;
-                    width: parent.width; height: 1; color: "white";
-                }
-            }
-
-            // The default suggestion for Internet APNs, allowing the user
-            // to copy from MMS contexts. Will only be visible if there are
-            // MMS contexts stored.
-            ListItem.ItemSelector {
-                id: copyFromMms
-                visible: isInternet && mmsModel.count
-                expanded: visible
-                model: 1
-                selectedIndex: -1
-                delegate: OptionSelectorDelegate {
-                    text: i18n.tr("Copy from MMS APN")
-                    showDivider: false
-                }
-                onDelegateClicked: {
-                    suggestions.selectedIndex = -1;
-                    Editor.populate(mmsModel.get(0).qml);
-                }
-
-                // Dirty hack to remove unavoidable line under an ItemSelector.
-                Rectangle {
-                    anchors.bottom: parent.bottom; anchors.bottomMargin: 1;
-                    width: parent.width; height: 1; color: "white";
-                }
+                text: i18n.tr("Used for:")
             }
 
             ListItem.ItemSelector {
-                id: suggestions
-                model: contextModel
-                visible: contextModel.count
-                expanded: true
-                selectedIndex: -1
-                delegate: OptionSelectorDelegate {
-                    property var data: contextModel.get(index)
-                    property string name: data ? data.qml.name : i18n.tr("Not set")
-                    text: manager.isNameCustom(name) ? i18n.tr("Custom") : name
-                    showDivider: false
-                }
-                onDelegateClicked: {
-                    var context = model.get(index).qml;
-                    copyFromMms.selectedIndex = -1;
-                    copyFromInternet.selectedIndex = -1;
-                    Editor.populate(context);
-                    suggestion = context;
-                }
+                model: [i18n.tr('Internet and MMS'),
+                        i18n.tr('Internet'),
+                        i18n.tr('MMS'),
+                        i18n.tr('IA'), ]
+                id: typeSel
+                objectName: "type"
+                width: parent.width
+                KeyNavigation.tab: name
+            }
+        }
+
+        // Name controls
+        Column {
+            anchors { left: parent.left; right: parent.right }
+            spacing: units.gu(0.5)
+
+            Label {
+                wrapMode: Text.WrapAnywhere
+                width: parent.width
+                text: i18n.tr("Name:")
+            }
+
+            TextField {
+                id: name
+                objectName: "name"
+                width: parent.width
+                inputMethodHints: Qt.ImhNoAutoUppercase | Qt.ImhNoPredictiveText
+                Component.onCompleted: forceActiveFocus()
+                KeyNavigation.tab: accessPointName
             }
         }
 
@@ -257,8 +129,7 @@ Dialog {
                 inputMethodHints: Qt.ImhUrlCharactersOnly |
                                   Qt.ImhNoAutoUppercase |
                                   Qt.ImhNoPredictiveText
-                Component.onCompleted: forceActiveFocus()
-                KeyNavigation.tab: isMms ? messageCenter : username
+                KeyNavigation.tab: isMms || isCombo ? messageCenter : username
             }
         }
 
@@ -266,7 +137,7 @@ Dialog {
         Column {
             anchors { left: parent.left; right: parent.right }
             spacing: units.gu(0.5)
-            visible: isMms
+            visible: isMms || isCombo
 
             Label {
                 wrapMode: Text.WrapAnywhere
@@ -294,7 +165,7 @@ Dialog {
         Column {
             anchors { left: parent.left; right: parent.right }
             spacing: units.gu(0.5)
-            visible: isMms
+            visible: isMms || isCombo
 
             Label {
                 wrapMode: Text.WrapAnywhere
@@ -349,7 +220,7 @@ Dialog {
         Row {
             anchors { left: parent.left; right: parent.right }
             spacing: units.gu(2)
-            visible: isMms
+            visible: isMms || isCombo
 
             Label {
                 id: portLabel
@@ -511,50 +382,13 @@ Dialog {
                 id: activateButton
                 objectName: "activateButton"
                 width: (parent.width / 2) - units.gu(1)
-                text: i18n.tr("Activate")
-                enabled: isValid && isChanged
+                text: i18n.tr("Save")
+                enabled: isValid
                 activeFocusOnPress: false
 
-                onClicked: Editor.activateButtonPressed()
-
-                Icon {
-                    height: parent.height - units.gu(1.5)
-                    width: parent.height - units.gu(1.5)
-                    anchors {
-                        centerIn: parent
-                    }
-                    name: "tick"
-                    color: "green"
-                    visible: activatingDoneTimer.running
-                }
-
-                ActivityIndicator {
-                    id: connectButtonIndicator
-                    running: false
-                    visible: running
-                    height: parent.height - units.gu(1.5)
-                    anchors {
-                        centerIn: parent
-                    }
-                }
+                onClicked: Editor.saving()
             }
         } // row for buttons
 
     } // main column holding all controls and buttons
-
-    // Timer {
-    //     id: waitForCreatedContextTimer
-    //     property int waited: 0
-    //     interval: 300
-    //     repeat: true
-    //     running: false
-    //     triggeredOnStart: true
-    //     onTriggered: Editor.checkContextAppeared()
-    // }
-
-    Timer {
-        id: activatingDoneTimer
-        interval: 2000
-        onTriggered: root.canceled()
-    }
 }

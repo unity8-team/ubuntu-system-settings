@@ -21,12 +21,8 @@
  * of ofono contexts.
  */
 
-// Map of path to QOfonoConnectionContext objects
+// Map of path to QOfonoContextConnection objects
 var _pathToQml = {};
-
-var _CUSTOM_INTERNET_CONTEXT_NAME = '___ubuntu_custom_apn_internet';
-var _CUSTOM_MMS_CONTEXT_NAME = '___ubuntu_custom_apn_mms';
-var _CUSTOM_IA_CONTEXT_NAME = '___ubuntu_custom_apn_ia';
 
 /**
  * Get the list model corresponding to a given type.
@@ -35,7 +31,7 @@ var _CUSTOM_IA_CONTEXT_NAME = '___ubuntu_custom_apn_ia';
  * @param {String} type of model to get
  * @return {ListModel} model that matches type
 */
-function _getModelFromType (type) {
+function getModelFromType (type) {
     var model;
     switch (type) {
         case 'mms':
@@ -53,61 +49,11 @@ function _getModelFromType (type) {
     return model;
 }
 
-
-/**
- * Get the custom MMS QML.
- *
- * @return {OfonoConnectionContext|null} qml or null if none found
-*/
-function getCustomMmsContextQML () {
-    return getCustomContextQML('mms');
-}
-
-
-/**
- * Get the custom Internet QML.
- *
- * @return {OfonoConnectionContext|null} qml or null if none found
-*/
-function getCustomInternetContextQML () {
-    return getCustomContextQML('mms');
-}
-
-
-/**
- * Get the custom IA QML.
- *
- * @return {OfonoConnectionContext|null} qml or null if none found
-*/
-function getCustomLteContextQML () {
-    return getCustomContextQML('ia');
-}
-
-
-/**
- * Get the custom QML for a context of a given type.
- *
- * @param {String} type
- * @return {OfonoConnectionContext|null} qml or null if none found
-*/
-function getCustomContextQML (type) {
-    var model = _getModelFromType(type);
-    var i;
-
-    for (i=0; i < model.count; i++) {
-        if (isNameCustom(model.get(i).qml.name)) {
-            return model.get(i).qml;
-        }
-    }
-    return null;
-}
-
-
 /**
  * Get QML for a context path.
  *
  * @param {String} path of context
- * @return {QOfonoConnectionContext|null} qml from path or null if none found
+ * @return {QOfonoContextConnection|null} qml from path or null if none found
 */
 function getContextQML (path) {
     if (!_pathToQml.hasOwnProperty(path)) {
@@ -119,7 +65,7 @@ function getContextQML (path) {
 
 /**
  * Given an array of paths, it will create and associate
- * an QOfonoConnectionContext QML object for each new path.
+ * an QOfonoContextConnection QML object for each new path.
  *
  * It will also delete any QML that is not in given list of paths.
  *
@@ -194,8 +140,7 @@ function _createQml (paths) {
 
             ctx = createContextQml(path);
 
-            ctx.nameChanged.connect(contextNameChanged.bind(ctx));
-            ctx.activeChanged.connect(contextActiveChanged.bind(ctx));
+            ctx.preferredChanged.connect(contextPreferredChanged.bind(ctx));
 
             // Some context come with a type, others not. Normalize this.
             if (!ctx.type) {
@@ -210,11 +155,11 @@ function _createQml (paths) {
 }
 
 /**
- * Creates a OfonoConnectionContext qml object from a given path.
+ * Creates a OfonoContextConnection qml object from a given path.
  * Since the components are all local, this will always return an object.
  *
  * @param {String} path of context
- * @return {OfonoConnectionContext} qml that was created
+ * @return {OfonoContextConnection} qml that was created
 */
 function createContextQml (path) {
     if (!_pathToQml.hasOwnProperty(path)) {
@@ -234,9 +179,9 @@ function createContextQml (path) {
 */
 function createContext (type) {
     console.warn('Creating context of type', type);
+    if (type === 'internet+mms') type = 'internet';
     sim.connMan.addContext(type);
 }
-
 
 /**
  * Removes a context. We don't remove any QML until we receive signal from
@@ -255,11 +200,10 @@ function removeContext (path) {
     sim.connMan.removeContext(path);
 }
 
-
 /**
  * Adds a context to the appropriate model.
  *
- * @param {OfonoConnectionContext} ctx to be added
+ * @param {OfonoContextConnection} ctx to be added
  * @param {String} [optional] type of context
 */
 function addContextToModel(ctx, type) {
@@ -274,22 +218,13 @@ function addContextToModel(ctx, type) {
         type = ctx.type;
     }
 
-    model = _getModelFromType(type);
+    model = getModelFromType(type);
 
     if (ctx.active) {
         model.current = ctx;
     }
 
-    // If custom, add it to the end of the list.
-    if ((type === 'mms' && ctx.name === 'MMS') ||
-        (type === 'internet' && ctx.name === 'Internet') ||
-        (type === 'ia' && ctx.name === 'IA')) {
-        console.warn('addContextToModel adding', ctx.name, 'to end');
-        model.append(data);
-    } else {
-        console.warn('addContextToModel adding', ctx.name, 'first');
-        model.insert(0, data);
-    }
+    model.append(data);
 }
 
 /**
@@ -315,38 +250,6 @@ function typeDetermined (type) {
 }
 
 /**
- * Handler for when a name changes. If we find that the name is one of
- * the ofono defaults, see [1], we assume this has been created by the user,
- * and we treat it as a custom context.
- *
- * [1] https://github.com/rilmodem/ofono/blob/master/src/gprs.c#L148
- *
- * @param {String} name's new value
- */
-function contextNameChanged (name) {
-    console.warn('contextNameChanged', name, this.contextPath);
-    var isCustom = false;
-    var newName;
-
-    if (name === 'Internet') {
-        newName = _CUSTOM_INTERNET_CONTEXT_NAME;
-        isCustom = true;
-    } else if (name === 'MMS') {
-        newName = _CUSTOM_MMS_CONTEXT_NAME;
-        isCustom = true;
-    } else if (name === 'IA') {
-        newName = _CUSTOM_IA_CONTEXT_NAME;
-        isCustom = true;
-    }
-
-    if (isCustom) {
-        this.disconnect();
-        this.name = newName;
-        console.warn('Changing name of context to', newName, this.active);
-    }
-}
-
-/**
  * Handler for activity changes in contexts.
  * Sets itself as the 'current' value on the appropriate model, if active.
  * If deactivated, it nullifies the 'current' value.
@@ -360,9 +263,34 @@ function contextActiveChanged(active) {
         return;
     }
 
-    var model = _getModelFromType(this.type);
+    var model = getModelFromType(this.type);
 
     if (active) {
+        model.current = this;
+    } else {
+        if (model.current === this) {
+            model.current = null;
+        }
+    }
+}
+
+/**
+ * Handler for preferred changes in contexts.
+ * Sets itself as the 'current' value on the appropriate model, if preferred.
+ * If deprefered, it nullifies the 'current' value.
+ *
+ * @param {Boolean} active's new value
+*/
+function contextPreferredChanged(preferred) {
+
+    // We can't do anything sensible when the type is undetermined.
+    if (!this.type) {
+        return;
+    }
+
+    var model = getModelFromType(this.type);
+
+    if (preferred) {
         model.current = this;
     } else {
         if (model.current === this) {
@@ -401,77 +329,59 @@ function reportError (message) {
 }
 
 /**
- * Exposes the custom internet context name.
+ * Checks to see if a internet context is a combo context.
  *
- * @return {String} custom internet context name
+ * @return {Boolean} whether or not context is combo type
  */
-function CUSTOM_INTERNET_CONTEXT_NAME () {
-    return _CUSTOM_INTERNET_CONTEXT_NAME;
+function isComboContext (ctx) {
+    return ctx && ctx.type === 'internet' && ctx.messageCenter && ctx.messageCenter !== "";
 }
 
 /**
- * Exposes the custom mms context name.
- *
- * @return {String} custom mms context name
- */
-function CUSTOM_MMS_CONTEXT_NAME () {
-    return _CUSTOM_MMS_CONTEXT_NAME;
-}
-/**
- * Exposes the custom ia context name.
- *
- * @return {String} custom ia context name
- */
-function CUSTOM_IA_CONTEXT_NAME () {
-    return _CUSTOM_IA_CONTEXT_NAME;
-}
-
-/**
- * Checks if a name is of any custom kind.
- *
- * @return {Boolean} whether or not the name is custom
- */
-function isNameCustom (name) {
-    if (name === _CUSTOM_MMS_CONTEXT_NAME ||
-        name === _CUSTOM_INTERNET_CONTEXT_NAME ||
-        name === _CUSTOM_IA_CONTEXT_NAME) {
-        return true;
-    } else {
-        return false;
-    }
-}
-
-/**
- * Activates the given OfonoConnectionContext. If MMS, we delete all other
+ * Activates the given OfonoContextConnection. If MMS, we delete all other
  * contexts. If the context is IA or Internet, we use the OfonoActivator
  * to create a connection.
  *
- * @param {OfonoConnectionContext} ctx to be activated
+ * @param {OfonoContextConnection} ctx to be activated
 */
-function activateContextQML (ctx) {
+// function activateContextQML (ctx) {
+//     var i;
+
+//     ctx.active = true;
+//     console.warn('activateContext', ctx.name);
+//     if (ctx.type === 'mms') {
+
+//         // Activation of an MMS context is currently the
+//         // removal of all other contexts. See lp:1361864 and
+//         // lp:1361864.
+//         for (i = 0; i < mmsContexts.count; i++) {
+
+//             console.warn('activateContext',
+//                          mmsContexts.get(i).path, ctx.contextPath);
+
+//             if (mmsContexts.get(i).path !== ctx.contextPath) {
+//                 removeContext(mmsContexts.get(i).path);
+//             }
+//         }
+
+
+//     } else if (ctx.type === 'ia' || ctx.type === 'internet') {
+//         return activator.activate(ctx.contextPath,
+//                                   sim.simMng.subscriberIdentity,
+//                                   sim.path);
+//     }
+// }
+
+function dePreferAll(type) {
+    var model = getModelFromType(type);
+    var ctx;
     var i;
-
-    ctx.active = true;
-    console.warn('activateContext', ctx.name);
-    if (ctx.type === 'mms') {
-
-        // Activation of an MMS context is currently the
-        // removal of all other contexts. See lp:1361864 and
-        // lp:1361864.
-        for (i = 0; i < mmsContexts.count; i++) {
-
-            console.warn('activateContext',
-                         mmsContexts.get(i).path, ctx.contextPath);
-
-            if (mmsContexts.get(i).path !== ctx.contextPath) {
-                removeContext(mmsContexts.get(i).path);
-            }
-        }
-
-
-    } else if (ctx.type === 'ia' || ctx.type === 'internet') {
-        return activator.activate(ctx.contextPath,
-                                  sim.simMng.subscriberIdentity,
-                                  sim.path);
+    for (i = 0; i < model.count; i++) {
+        ctx = model.get(i).qml;
+        console.warn('dePreferContext',
+                     ctx.contextPath);
+        ctx.preferred = false;
     }
+
+
 }

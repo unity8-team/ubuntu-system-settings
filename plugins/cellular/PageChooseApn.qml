@@ -90,6 +90,31 @@ ItemPage {
         OfonoContextConnection {}
     }
 
+    state: "default"
+    states: [
+        PageHeadState {
+            name: "default"
+            head: root.head
+            actions: [
+                Action {
+                    iconName: "reset"
+                    onTriggered: PopupUtils.open(resetDialog)
+                },
+                Action {
+                    iconName: "add"
+                    onTriggered: {
+                        apnEditor = PopupUtils.open(editor, root, {
+                            manager:         Manager,
+                            mmsModel:        mmsContexts,
+                            internetModel:   internetContexts,
+                            iaModel:         iaContexts
+                        });
+                    }
+                }
+            ]
+        }
+    ]
+
     Flickable {
         id: scrollWidget
         anchors.fill: parent
@@ -101,25 +126,14 @@ ItemPage {
         Column {
             anchors { left: parent.left; right: parent.right }
 
-            /* This repeater creates three list items: MMS, Internet and LTE. */
+            /* This repeater creates four list items: Combo, Internet,
+            MMS and LTE. */
             Repeater {
                 id: apns
                 anchors { left: parent.left; right: parent.right }
                 height: childrenRect.height
-                model: [mmsContexts, internetContexts, iaContexts]
+                model: [internetContexts, mmsContexts, iaContexts]
                 delegate: apnsDelegate
-            }
-
-            Item {
-                anchors { left: parent.left; right: parent.right; }
-                height: units.gu(2)
-            }
-
-            Button {
-                anchors.horizontalCenter: parent.horizontalCenter
-                width: parent.width - units.gu(4)
-                text: i18n.tr("Reset APN Settings")
-                onTriggered: PopupUtils.open(resetDialog)
             }
         }
     }
@@ -158,16 +172,11 @@ ItemPage {
         CustomApnEditor {
             id: editorDialog
 
-            onActivated: {
-                console.warn('activated in editor',
+            onSaved: {
+                console.warn('saved in editor',
                              context.path ,sim.simMng.subscriberIdentity,
                              sim.path);
-
-                if (Manager.activateContextQML(context)) {
-                    apnEditor.succeeded();
-                } else {
-                    apnEditor.failed();
-                }
+                PopupUtils.close(apnEditor);
             }
 
             onCanceled: {
@@ -178,19 +187,60 @@ ItemPage {
 
     Component {
         id: apnsDelegate
-        ListItem.Subtitled {
-            objectName: "edit_" + modelData.type
-            text: modelData.label
-            subText: modelData.current ?
-                modelData.current.accessPointName : i18n.tr('Not set')
-            onClicked: apnEditor = PopupUtils.open(editor, root, {
-                manager:         Manager,
-                contextModel:    modelData,
-                mmsModel:        mmsContexts,
-                internetModel:   internetContexts,
-                iaModel:         iaContexts,
-                title:           modelData.title
-            });
+
+        Repeater {
+            property ListModel typeModel: modelData
+            model: typeModel
+
+            ListItem.Subtitled {
+                property var data: typeModel.get(index)
+                property OfonoContextConnection ctx: data && data.qml
+                property string name: ctx ?
+                    ctx.accessPointName : i18n.tr('Not set')
+
+                objectName: "edit_" + typeModel.type
+                /* TRANSLATORS: %1 is the name of the access point name, see [1]
+                and will be e.g. "nternet.t-mobile" or "three.co.uk".
+                [1] https://en.wikipedia.org/wiki/Access_Point_Name */
+                text: i18n.tr("%1…").arg(name)
+                subText: Manager.isComboContext(ctx) ? 'internet+mms' : ctx.type
+                onClicked: apnEditor = PopupUtils.open(editor, root, {
+                    manager:         Manager,
+                    contextQML:      ctx,
+                    mmsModel:        mmsContexts,
+                    internetModel:   internetContexts,
+                    iaModel:         iaContexts,
+                    title:           typeModel.title
+                });
+
+                MouseArea {
+
+                    anchors {
+                        top: parent.top
+                        bottom: parent.bottom
+                        right: parent.right
+                    }
+                    width: units.gu(6)
+                    onClicked: preferred.trigger()
+
+                    CheckBox {
+                        id: preferred
+                        objectName: ctx.accessPointName + "_preferred"
+                        anchors.centerIn: parent
+                        property bool serverChecked: ctx.preferred
+                        onServerCheckedChanged: checked = serverChecked
+                        Component.onCompleted: checked = serverChecked
+                        onTriggered: {
+                            if (checked) {
+                                Manager.dePreferAll(ctx.type);
+
+                            }
+                            ctx.preferred = checked;
+                        }
+                    }
+                }
+            }
+
         }
     }
 
