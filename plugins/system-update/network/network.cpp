@@ -87,38 +87,28 @@ std::vector<std::string> Network::list_folder(const std::string& folder, const s
     return result;
 }
 
-QJsonObject Network::build_json()
-{
-    QJsonObject serializer;
-    std::stringstream frameworks;
-    for (auto f: get_available_frameworks()) {
-        frameworks << "," << f;
-    }
-    serializer.insert("X-Ubuntu-Frameworks", QJsonValue(QString::fromStdString(frameworks.str())));
-    serializer.insert("X-Ubuntu-Architecture", QJsonValue(QString::fromStdString(get_architecture())));
-    
-    return serializer;
-}
-
 void Network::checkForNewVersions(QHash<QString, Update*> &apps)
 {
     m_apps = apps;
-    QJsonObject serializer = build_json();
+    QJsonObject serializer;
     QJsonArray array;
     foreach(QString id, m_apps.keys()) {
         array.append(QJsonValue(m_apps.value(id)->getPackageName()));
     }
 
     serializer.insert("name", array);
+    std::stringstream frameworks;
+    for (auto f: get_available_frameworks()) {
+        frameworks << "," << f;
+    }
     QJsonDocument doc(serializer);
     QByteArray content = doc.toJson();
-
-    // FIXME: debugging
-    qWarning() << Q_FUNC_INFO << QString(content);
 
     QString urlApps = getUrlApps();
     QNetworkRequest request;
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
+    request.setRawHeader(QByteArray("X-Ubuntu-Frameworks"), QByteArray::fromStdString(frameworks.str()));
+    request.setRawHeader(QByteArray("X-Ubuntu-Architecture"), QByteArray::fromStdString(get_architecture()));
     request.setUrl(QUrl(urlApps));
     RequestObject* reqObject = new RequestObject(QString(APPS_DATA));
     request.setOriginatingObject(reqObject);
