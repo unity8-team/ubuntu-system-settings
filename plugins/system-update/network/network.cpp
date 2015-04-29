@@ -87,26 +87,30 @@ std::vector<std::string> Network::list_folder(const std::string& folder, const s
     return result;
 }
 
-void Network::checkForNewVersions(QHash<QString, Update*> &apps)
+QJsonObject Network::build_json()
 {
-    m_apps = apps;
-
     QJsonObject serializer;
-    QJsonArray array;
-    foreach(QString id, m_apps.keys()) {
-        array.append(QJsonValue(m_apps.value(id)->getPackageName()));
-    }
-
     std::stringstream frameworks;
     for (auto f: get_available_frameworks()) {
         frameworks << "," << f;
     }
     serializer.insert("X-Ubuntu-Frameworks", QJsonValue(QString::fromStdString(frameworks.str())));
     serializer.insert("X-Ubuntu-Architecture", QJsonValue(QString::fromStdString(get_architecture())));
+    
+    return serializer;
+}
+
+void Network::checkForNewVersions(QHash<QString, Update*> &apps)
+{
+    m_apps = apps;
+    QJsonObject serializer = build_json();
+    QJsonArray array;
+    foreach(QString id, m_apps.keys()) {
+        array.append(QJsonValue(m_apps.value(id)->getPackageName()));
+    }
+
     serializer.insert("name", array);
-
     QJsonDocument doc(serializer);
-
     QByteArray content = doc.toJson();
 
     // FIXME: debugging
