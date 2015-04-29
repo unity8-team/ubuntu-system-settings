@@ -51,6 +51,9 @@ public:
     void checkForNewVersions(QHash<QString, Update*> &apps);
     void getClickToken(Update *app, const QString &url,
                        const QString &authHeader);
+    constexpr static const char* FRAMEWORKS_FOLDER {"/usr/share/click/frameworks/"};
+    constexpr static const char* FRAMEWORKS_PATTERN {"*.framework"};
+    constexpr static const int FRAMEWORKS_EXTENSION_LENGTH = 10; // strlen(".framework")
 
 Q_SIGNALS:
     void updatesFound();
@@ -68,6 +71,13 @@ private:
     QHash<QString, Update*> m_apps;
 
     QString getUrlApps();
+
+protected:
+    virtual std::vector<std::string> get_available_frameworks();
+    virtual std::string get_architecture();
+    virtual std::string architectureFromDpkg();
+    virtual std::vector<std::string> list_folder(const std::string &folder, const std::string &pattern);
+
 };
 
 }
