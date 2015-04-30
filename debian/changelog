@@ -1,3 +1,15 @@
+ubuntu-system-settings (0.3+15.04.20150430.1-0ubuntu1) vivid; urgency=medium
+
+  [ CI Train Bot ]
+  * New rebuild forced.
+  * Resync trunk.
+
+  [ Ken VanDine ]
+  * Include supported frameworks and arch when checking for updates (LP:
+    #1449582)
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Thu, 30 Apr 2015 19:38:05 +0000
+
 ubuntu-system-settings (0.3+15.04.20150422.1-0ubuntu1) vivid; urgency=medium
 
   [ CI Train Bot ]
