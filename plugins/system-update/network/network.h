@@ -70,6 +70,7 @@ private:
     QHash<QString, Update*> m_apps;
 
     QString getUrlApps();
+    QString getFrameworksDir();
 
 protected:
     virtual std::string architectureFromDpkg();

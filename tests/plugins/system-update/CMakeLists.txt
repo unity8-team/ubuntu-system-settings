@@ -45,8 +45,15 @@ add_test(NAME tst-update COMMAND ${XVFB_CMD} ${CMAKE_CURRENT_BINARY_DIR}/tst-upd
 qt5_use_modules(tst-network Qml Quick Core DBus Xml Network Test)
 target_link_libraries(tst-network apt-pkg update-plugin)
 add_test(NAME tst-network COMMAND ${XVFB_CMD} ${CMAKE_CURRENT_BINARY_DIR}/tst-network)
+set_tests_properties(tst-network
+    PROPERTIES ENVIRONMENT "FRAMEWORKS_FOLDER=${CMAKE_CURRENT_BINARY_DIR}")
 
 add_custom_command(
     TARGET tst-update-manager
     COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_LIST_DIR}/click.result ${CMAKE_CURRENT_BINARY_DIR}/click.result
+)
+
+add_custom_command(
+    TARGET tst-network
+    COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_LIST_DIR}/ubuntu-sdk-15.04.framework ${CMAKE_CURRENT_BINARY_DIR}/ubuntu-sdk-15.04.framework
 )

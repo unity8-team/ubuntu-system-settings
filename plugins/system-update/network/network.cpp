@@ -53,7 +53,7 @@ std::string Network::getArchitecture()
 std::vector<std::string> Network::getAvailableFrameworks()
 {
     std::vector<std::string> result;
-    for (auto f: listFolder(FRAMEWORKS_FOLDER, FRAMEWORKS_PATTERN)) {
+    for (auto f: listFolder(getFrameworksDir().toStdString(), FRAMEWORKS_PATTERN)) {
         result.push_back(f.substr(0, f.size()-FRAMEWORKS_EXTENSION_LENGTH));
     }
     return result;
@@ -122,6 +122,13 @@ QString Network::getUrlApps()
 {
     QProcessEnvironment environment = QProcessEnvironment::systemEnvironment();
     QString command = environment.value("URL_APPS", QString(URL_APPS));
+    return command;
+}
+
+QString Network::getFrameworksDir()
+{
+    QProcessEnvironment environment = QProcessEnvironment::systemEnvironment();
+    QString command = environment.value("FRAMEWORKS_FOLDER", QString(FRAMEWORKS_FOLDER));
     return command;
 }
 
