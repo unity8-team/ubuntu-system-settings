@@ -111,7 +111,7 @@ void Network::checkForNewVersions(QHash<QString, Update*> &apps)
     QNetworkRequest request;
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
     request.setRawHeader(QByteArray("X-Ubuntu-Frameworks"), QByteArray(frameworks.str().c_str()));
-    request.setRawHeader(QByteArray("X-Ubuntu-Architecture"), QByteArray(get_architecture().c_str()));
+    request.setRawHeader(QByteArray("X-Ubuntu-Architecture"), QByteArray(getArchitecture().c_str()));
     request.setUrl(QUrl(urlApps));
     RequestObject* reqObject = new RequestObject(QString(APPS_DATA));
     request.setOriginatingObject(reqObject);
