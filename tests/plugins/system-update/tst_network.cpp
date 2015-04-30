@@ -43,14 +43,14 @@ private Q_SLOTS:
 void NetworkTest::testFrameworks()
 {
     Network net;
-    auto frameworks = net.get_available_frameworks();
+    auto frameworks = net.getAvailableFrameworks();
     QCOMPARE(frameworks.empty(), false);
 }
 
 void NetworkTest::testArch()
 {
     Network net;
-    auto arch = net.get_architecture();
+    auto arch = net.getArchitecture();
     QCOMPARE(arch.empty(), false);
 }
 

@@ -26,9 +26,13 @@
 #include <QUrl>
 #include <QProcessEnvironment>
 
-#define URL_APPS "https://search.apps.ubuntu.com/api/v1/click-metadata"
-
-#define APPS_DATA "APPS_DATA"
+namespace {
+    const QString URL_APPS = "https://search.apps.ubuntu.com/api/v1/click-metadata";
+    const QString APPS_DATA = "APPS_DATA";
+    constexpr static const char* FRAMEWORKS_FOLDER {"/usr/share/click/frameworks/"};
+    constexpr static const char* FRAMEWORKS_PATTERN {"*.framework"};
+    constexpr static const int FRAMEWORKS_EXTENSION_LENGTH = 10; // strlen(".framework")
+}
 
 namespace UpdatePlugin {
 
@@ -40,16 +44,16 @@ Network::Network(QObject *parent) :
                      this, SLOT(onReply(QNetworkReply*)));
 }
 
-std::string Network::get_architecture()
+std::string Network::getArchitecture()
 {
     static const std::string deb_arch {architectureFromDpkg()};
     return deb_arch;
 }
 
-std::vector<std::string> Network::get_available_frameworks()
+std::vector<std::string> Network::getAvailableFrameworks()
 {
     std::vector<std::string> result;
-    for (auto f: list_folder(FRAMEWORKS_FOLDER, FRAMEWORKS_PATTERN)) {
+    for (auto f: listFolder(FRAMEWORKS_FOLDER, FRAMEWORKS_PATTERN)) {
         result.push_back(f.substr(0, f.size()-FRAMEWORKS_EXTENSION_LENGTH));
     }
     return result;
@@ -63,16 +67,15 @@ std::string Network::architectureFromDpkg()
     QProcess archDetector;
     archDetector.start(program, arguments);
     if(!archDetector.waitForFinished()) {
-        throw std::runtime_error("Architecture detection failed.");
+        qWarning() << "Architecture detection failed.";
     }
     auto output = archDetector.readAllStandardOutput();
     auto ostr = QString::fromUtf8(output);
-    ostr.remove('\n');
 
-    return ostr.toStdString();
+    return ostr.trimmed().toStdString();
 }
 
-std::vector<std::string> Network::list_folder(const std::string& folder, const std::string& pattern)
+std::vector<std::string> Network::listFolder(const std::string& folder, const std::string& pattern)
 {
     std::vector<std::string> result;
 
@@ -98,7 +101,7 @@ void Network::checkForNewVersions(QHash<QString, Update*> &apps)
 
     serializer.insert("name", array);
     std::stringstream frameworks;
-    for (auto f: get_available_frameworks()) {
+    for (auto f: getAvailableFrameworks()) {
         frameworks << "," << f;
     }
     QJsonDocument doc(serializer);
@@ -108,7 +111,7 @@ void Network::checkForNewVersions(QHash<QString, Update*> &apps)
     QNetworkRequest request;
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
     request.setRawHeader(QByteArray("X-Ubuntu-Frameworks"), QByteArray::fromStdString(frameworks.str()));
-    request.setRawHeader(QByteArray("X-Ubuntu-Architecture"), QByteArray::fromStdString(get_architecture()));
+    request.setRawHeader(QByteArray("X-Ubuntu-Architecture"), QByteArray::fromStdString(getArchitecture()));
     request.setUrl(QUrl(urlApps));
     RequestObject* reqObject = new RequestObject(QString(APPS_DATA));
     request.setOriginatingObject(reqObject);
