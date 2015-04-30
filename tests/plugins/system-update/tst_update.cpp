@@ -35,7 +35,7 @@ class UpdateTest: public QObject
     Q_OBJECT
 
 public:
-    UpdateTest() {};
+    UpdateTest() : QObject() {};
 
 private Q_SLOTS:
     void testCompareVersion();

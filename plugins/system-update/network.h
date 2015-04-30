@@ -19,11 +19,12 @@
 #ifndef NETWORK_H
 #define NETWORK_H
 
-#include <QObject>
-#include <QtNetwork/QNetworkAccessManager>
-#include <QtNetwork/QNetworkReply>
 #include <QHash>
-#include "../update.h"
+#include <QObject>
+#include <QNetworkAccessManager>
+#include <QNetworkReply>
+
+#include "update.h"
 
 #define X_CLICK_TOKEN "X-Click-Token"
 
@@ -51,6 +52,9 @@ public:
     void checkForNewVersions(QHash<QString, Update*> &apps);
     void getClickToken(Update *app, const QString &url,
                        const QString &authHeader);
+protected:
+    // helper constructor that allows to set the hash map for testing purposes
+    Network(QHash<QString, Update*> apps, QObject *parent=0);
 
 Q_SIGNALS:
     void updatesFound();
@@ -60,14 +64,17 @@ Q_SIGNALS:
     void serverError();
     void clickTokenObtained(Update *app, const QString &clickToken);
 
+protected:
+    QUrl getUrlApps();
+    bool parseUpdateObject(const QJsonValue& value);
+
 private Q_SLOTS:
-    void onReply(QNetworkReply*);
+    void onRequestFinished();
+    void onHeadRequestFinished();
 
 private:
     QNetworkAccessManager m_nam;
     QHash<QString, Update*> m_apps;
-
-    QString getUrlApps();
 };
 
 }

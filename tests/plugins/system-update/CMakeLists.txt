@@ -25,16 +25,37 @@ add_executable(tst-update
     ../../../plugins/system-update/update.cpp
 )
 
+add_executable(tst-network
+    mock_update.h
+    tst_network.cpp
+    ../../../plugins/system-update/update.cpp
+    ../../../plugins/system-update/network.cpp
+)
+
 # set the path to the library folder
 include_directories(/usr/include/apt-pkg/)
 
-target_link_libraries(tst-update-manager apt-pkg update-plugin ${UBUNTUONEAUTH_LDFLAGS})
-qt5_use_modules(tst-update-manager Qml Quick Core DBus Xml Network Test)
-add_test(NAME tst-update-manager COMMAND ${XVFB_CMD} ${CMAKE_CURRENT_BINARY_DIR}/tst-update-manager)
+set(UNIT_TESTS
+    tst-update-manager 
+    tst-update 
+    tst-network
+)
 
-qt5_use_modules(tst-update Qml Quick Core DBus Xml Network Test)
-target_link_libraries(tst-update apt-pkg update-plugin)
-add_test(NAME tst-update COMMAND ${XVFB_CMD} ${CMAKE_CURRENT_BINARY_DIR}/tst-update)
+foreach(test ${UNIT_TESTS})
+    qt5_use_modules(${test} Qml Quick Core DBus Xml Network Test)
+
+    target_link_libraries(${test}
+        apt-pkg
+        update-plugin
+        ${UBUNTUONEAUTH_LDFLAGS}
+        ${UBUNTU_DOWNLOAD_MANAGER_CLIENT_LDFLAGS}
+        ${UBUNTU_DOWNLOAD_MANAGER_COMMON_LDFLAGS}
+        ${GMOCK_LIBRARY}
+        ${GTEST_BOTH_LIBRARIES}
+    )
+    add_test(NAME ${test}
+	     COMMAND ${XVFB_CMD} ${CMAKE_CURRENT_BINARY_DIR}/${test})
+endforeach(test)
 
 add_custom_command(
     TARGET tst-update-manager
