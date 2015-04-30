@@ -52,6 +52,9 @@ public:
     void checkForNewVersions(QHash<QString, Update*> &apps);
     void getClickToken(Update *app, const QString &url,
                        const QString &authHeader);
+    virtual std::vector<std::string> getAvailableFrameworks();
+    virtual std::string getArchitecture();
+
 protected:
     // helper constructor that allows to set the hash map for testing purposes
     Network(QHash<QString, Update*> apps, QObject *parent=0);
@@ -66,7 +69,10 @@ Q_SIGNALS:
 
 protected:
     QUrl getUrlApps();
+    QString getFrameworksDir();
     bool parseUpdateObject(const QJsonValue& value);
+    virtual std::string architectureFromDpkg();
+    virtual std::vector<std::string> listFolder(const std::string &folder, const std::string &pattern);
 
 private Q_SLOTS:
     void onRequestFinished();
@@ -75,6 +81,7 @@ private Q_SLOTS:
 private:
     QNetworkAccessManager m_nam;
     QHash<QString, Update*> m_apps;
+
 };
 
 }

@@ -16,6 +16,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
+#include <sstream>
 #include <QByteArray>
 #include <QDebug>
 #include <QJsonDocument>
@@ -30,8 +31,7 @@
 namespace {
     const QString CLICK_TOKEN_URL_ENV = "CLICK_TOKEN_URL";
     const QString URL_APPS_ENV = "URL_APPS";
-    const QString URL_APPS =
-        "https://myapps.developer.ubuntu.com/dev/api/click-metadata/";
+    const QString URL_APPS = "https://search.apps.ubuntu.com/api/v1/click-metadata";
     const QString APPS_DATA = "APPS_DATA";
     const QString NAME_KEY = "name";
     const QString VERSION_KEY = "version";
@@ -39,6 +39,9 @@ namespace {
     const QString DOWNLOAD_URL_KEY = "download_url";
     const QString DOWNLOAD_SHA512_KEY = "download_sha512";
     const QString BINARY_SIZE_KEY = "binary_filesize";
+    constexpr static const char* FRAMEWORKS_FOLDER {"/usr/share/click/frameworks/"};
+    constexpr static const char* FRAMEWORKS_PATTERN {"*.framework"};
+    constexpr static const int FRAMEWORKS_EXTENSION_LENGTH = 10; // strlen(".framework")
 }
 
 namespace UpdatePlugin {
@@ -55,10 +58,55 @@ Network::Network(QHash<QString, Update*> apps, QObject *parent) :
     m_apps = apps;
 }
 
+std::string Network::getArchitecture()
+{
+    static const std::string deb_arch {architectureFromDpkg()};
+    return deb_arch;
+}
+
+std::vector<std::string> Network::getAvailableFrameworks()
+{
+    std::vector<std::string> result;
+    for (auto f: listFolder(getFrameworksDir().toStdString(), FRAMEWORKS_PATTERN)) {
+        result.push_back(f.substr(0, f.size()-FRAMEWORKS_EXTENSION_LENGTH));
+    }
+    return result;
+}
+
+std::string Network::architectureFromDpkg()
+{
+    QString program("dpkg");
+    QStringList arguments;
+    arguments << "--print-architecture";
+    QProcess archDetector;
+    archDetector.start(program, arguments);
+    if(!archDetector.waitForFinished()) {
+        qWarning() << "Architecture detection failed.";
+    }
+    auto output = archDetector.readAllStandardOutput();
+    auto ostr = QString::fromUtf8(output);
+
+    return ostr.trimmed().toStdString();
+}
+
+std::vector<std::string> Network::listFolder(const std::string& folder, const std::string& pattern)
+{
+    std::vector<std::string> result;
+
+    QDir dir(QString::fromStdString(folder), QString::fromStdString(pattern),
+                                    QDir::Unsorted, QDir::Readable | QDir::Files);
+    QStringList entries = dir.entryList();
+    for (int i = 0; i < entries.size(); ++i) {
+        QString filename = entries.at(i);
+        result.push_back(filename.toStdString());
+    }
+
+    return result;
+}
+
 void Network::checkForNewVersions(QHash<QString, Update*> &apps)
 {
     m_apps = apps;
-
     QJsonObject serializer;
     QJsonArray array;
 
@@ -67,8 +115,12 @@ void Network::checkForNewVersions(QHash<QString, Update*> &apps)
     }
     serializer.insert(NAME_KEY, array);
 
+    serializer.insert("name", array);
+    std::stringstream frameworks;
+    for (auto f: getAvailableFrameworks()) {
+        frameworks << "," << f;
+    }
     QJsonDocument doc(serializer);
-
     auto content = doc.toJson();
     auto urlApps = getUrlApps();
 
@@ -76,6 +128,9 @@ void Network::checkForNewVersions(QHash<QString, Update*> &apps)
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
 
     auto reqObject = new RequestObject(APPS_DATA);
+    request.setRawHeader(QByteArray("X-Ubuntu-Frameworks"), QByteArray::fromStdString(frameworks.str()));
+    request.setRawHeader(QByteArray("X-Ubuntu-Architecture"), QByteArray::fromStdString(getArchitecture()));
+    request.setUrl(QUrl(urlApps));
     request.setOriginatingObject(reqObject);
 
     auto reply = m_nam.post(request, content);
@@ -162,10 +217,16 @@ void Network::onHeadRequestFinished()
     reply->deleteLater();
 }
 
+QString Network::getFrameworksDir()
+{
+    QProcessEnvironment environment = QProcessEnvironment::systemEnvironment();
+    QString command = environment.value("FRAMEWORKS_FOLDER", QString(FRAMEWORKS_FOLDER));
+    return command;
+}
+
 void Network::onRequestFinished()
 {
     auto reply = qobject_cast<QNetworkReply*>(sender());
-
     if (reply->error() == QNetworkReply::NoError) {
         QVariant statusAttr = reply->attribute(
                                 QNetworkRequest::HttpStatusCodeAttribute);

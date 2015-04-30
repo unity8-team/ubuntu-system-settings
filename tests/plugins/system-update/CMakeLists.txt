@@ -57,7 +57,15 @@ foreach(test ${UNIT_TESTS})
 	     COMMAND ${XVFB_CMD} ${CMAKE_CURRENT_BINARY_DIR}/${test})
 endforeach(test)
 
+set_tests_properties(tst-network
+    PROPERTIES ENVIRONMENT "FRAMEWORKS_FOLDER=${CMAKE_CURRENT_BINARY_DIR}")
+
 add_custom_command(
     TARGET tst-update-manager
     COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_LIST_DIR}/click.result ${CMAKE_CURRENT_BINARY_DIR}/click.result
+)
+
+add_custom_command(
+    TARGET tst-network
+    COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_LIST_DIR}/ubuntu-sdk-15.04.framework ${CMAKE_CURRENT_BINARY_DIR}/ubuntu-sdk-15.04.framework
 )

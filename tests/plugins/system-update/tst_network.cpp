@@ -43,6 +43,7 @@ namespace {
     const QString VERSION_KEY = "version";
     const QString ICON_KEY = "icon_url";
     const QString DOWNLOAD_URL_KEY = "download_url";
+    const QString DOWNLOAD_SHA512_KEY = "download_sha512";
     const QString BINARY_SIZE_KEY = "binary_filesize";
 }
 
@@ -72,7 +73,23 @@ private Q_SLOTS:
     void testParseUpdateRequired();
     void testParseUpdateNotRequired();
     void testParseUpdateMissingInHash();
+    void testArch();
+    void testFrameworks();
 };
+
+void NetworkTest::testFrameworks()
+{
+    Network net;
+    auto frameworks = net.getAvailableFrameworks();
+    QCOMPARE(frameworks.empty(), false);
+}
+
+void NetworkTest::testArch()
+{
+    Network net;
+    auto arch = net.getArchitecture();
+    QCOMPARE(arch.empty(), false);
+}
 
 void NetworkTest::testParseUpdateNotObject()
 {
