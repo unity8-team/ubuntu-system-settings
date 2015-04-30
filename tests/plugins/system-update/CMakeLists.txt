@@ -25,6 +25,12 @@ add_executable(tst-update
     ../../../plugins/system-update/update.cpp
 )
 
+add_executable(tst-network
+    tst_network.cpp
+    ../../../plugins/system-update/update.cpp
+    ../../../plugins/system-update/network/network.cpp
+)
+
 # set the path to the library folder
 include_directories(/usr/include/apt-pkg/)
 
@@ -35,6 +41,10 @@ add_test(NAME tst-update-manager COMMAND ${XVFB_CMD} ${CMAKE_CURRENT_BINARY_DIR}
 qt5_use_modules(tst-update Qml Quick Core DBus Xml Network Test)
 target_link_libraries(tst-update apt-pkg update-plugin)
 add_test(NAME tst-update COMMAND ${XVFB_CMD} ${CMAKE_CURRENT_BINARY_DIR}/tst-update)
+
+qt5_use_modules(tst-network Qml Quick Core DBus Xml Network Test)
+target_link_libraries(tst-network apt-pkg update-plugin)
+add_test(NAME tst-network COMMAND ${XVFB_CMD} ${CMAKE_CURRENT_BINARY_DIR}/tst-network)
 
 add_custom_command(
     TARGET tst-update-manager
