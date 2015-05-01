@@ -38,7 +38,6 @@ ItemPage {
     objectName: "apnPage"
 
     property var sim
-    property var apnEditor
 
     OfonoActivator {
         id: activator
@@ -63,7 +62,6 @@ ItemPage {
 
     ListModel {
         id: mmsContexts
-        property string label: i18n.tr('MMS APN…')
         property string title: i18n.tr("MMS APN")
         property string type: 'mms'
         property var current
@@ -71,7 +69,6 @@ ItemPage {
 
     ListModel {
         id: internetContexts
-        property string label: i18n.tr('Internet APN…')
         property string title: i18n.tr("Internet APN")
         property string type: 'internet'
         property var current
@@ -79,7 +76,6 @@ ItemPage {
 
     ListModel {
         id: iaContexts
-        property string label: i18n.tr('LTE APN…')
         property string title: i18n.tr("LTE APN")
         property string type: 'ia'
         property var current
@@ -87,7 +83,21 @@ ItemPage {
 
     Component {
         id: contextComponent
-        OfonoContextConnection {}
+        OfonoContextConnection {
+            property string typeString: {
+                if (type === 'internet' && messageCenter) {
+                    return i18n.tr("Internet and MMS");
+                } else if (type === 'internet' && !messageCenter) {
+                    return i18n.tr("Internet");
+                } else if (type === 'ia') {
+                    return i18n.tr("LTE");
+                } else if (type === 'mms') {
+                    return i18n.tr("MMS");
+                } else {
+                    return type;
+                }
+            }
+        }
     }
 
     state: "default"
@@ -103,7 +113,7 @@ ItemPage {
                 Action {
                     iconName: "add"
                     onTriggered: {
-                        apnEditor = PopupUtils.open(editor, root, {
+                        pageStack.push(Qt.resolvedUrl("PageApnEditor.qml"), {
                             manager:         Manager,
                             mmsModel:        mmsContexts,
                             internetModel:   internetContexts,
@@ -126,8 +136,6 @@ ItemPage {
         Column {
             anchors { left: parent.left; right: parent.right }
 
-            /* This repeater creates four list items: Combo, Internet,
-            MMS and LTE. */
             Repeater {
                 id: apns
                 anchors { left: parent.left; right: parent.right }
@@ -167,80 +175,69 @@ ItemPage {
     }
 
     Component {
-        id: editor
+        id: apnsDelegate
 
-        CustomApnEditor {
-            id: editorDialog
-
-            onSaved: {
-                console.warn('saved in editor',
-                             context.path ,sim.simMng.subscriberIdentity,
-                             sim.path);
-                PopupUtils.close(apnEditor);
-            }
-
-            onCanceled: {
-                PopupUtils.close(apnEditor);
-            }
+        Repeater {
+            anchors { left: parent.left; right: parent.right }
+            model: modelData
+            delegate: apnDelegate
         }
     }
 
     Component {
-        id: apnsDelegate
+        id: apnDelegate
 
-        Repeater {
-            property ListModel typeModel: modelData
-            model: typeModel
+        Item {
+            id: apnItem
+            anchors { left: parent.left; right: parent.right }
+            height: childrenRect.height
 
-            ListItem.Subtitled {
-                property var data: typeModel.get(index)
-                property OfonoContextConnection ctx: data && data.qml
-                property string name: ctx ?
-                    ctx.accessPointName : i18n.tr('Not set')
+            ListItem.Standard {
+                id: checkArea
+                width: units.gu(4.75)
+                highlightWhenPressed: false
+                onClicked: check.trigger()
 
-                objectName: "edit_" + typeModel.type
-                /* TRANSLATORS: %1 is the name of the access point name, see [1]
-                and will be e.g. "nternet.t-mobile" or "three.co.uk".
-                [1] https://en.wikipedia.org/wiki/Access_Point_Name */
-                text: i18n.tr("%1…").arg(name)
-                subText: Manager.isComboContext(ctx) ? 'internet+mms' : ctx.type
-                onClicked: apnEditor = PopupUtils.open(editor, root, {
-                    manager:         Manager,
-                    contextQML:      ctx,
-                    mmsModel:        mmsContexts,
-                    internetModel:   internetContexts,
-                    iaModel:         iaContexts,
-                    title:           typeModel.title
-                });
-
-                MouseArea {
-
+                CheckBox {
+                    id: check
+                    objectName: qml.accessPointName + "_preferred"
                     anchors {
-                        top: parent.top
-                        bottom: parent.bottom
+                        verticalCenter: parent.verticalCenter
                         right: parent.right
                     }
-                    width: units.gu(6)
-                    onClicked: preferred.trigger()
-
-                    CheckBox {
-                        id: preferred
-                        objectName: ctx.accessPointName + "_preferred"
-                        anchors.centerIn: parent
-                        property bool serverChecked: ctx.preferred
-                        onServerCheckedChanged: checked = serverChecked
-                        Component.onCompleted: checked = serverChecked
-                        onTriggered: {
-                            if (checked) {
-                                Manager.dePreferAll(ctx.type);
-
-                            }
-                            ctx.preferred = checked;
+                    property bool serverChecked: qml.preferred
+                    onServerCheckedChanged: checked = serverChecked
+                    Component.onCompleted: checked = serverChecked
+                    onTriggered: {
+                        if (checked) {
+                            Manager.dePreferAll(qml.type);
                         }
+                        qml.preferred = checked;
                     }
                 }
             }
 
+            ListItem.Subtitled {
+                id: listElement
+                anchors {
+                    left: checkArea.right
+                    right: apnItem.right
+                }
+                removable: true
+                confirmRemoval: true
+                progression: true
+                text: qml.name
+                subText: qml.typeString
+                onItemRemoved: Manager.removeContext(path);
+                onClicked: pageStack.push(Qt.resolvedUrl("PageApnEditor.qml"), {
+                    manager:         Manager,
+                    contextQML:      qml,
+                    mmsModel:        mmsContexts,
+                    internetModel:   internetContexts,
+                    iaModel:         iaContexts
+                });
+
+            }
         }
     }
 

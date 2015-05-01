@@ -1,6 +1,7 @@
 set(QML_SOURCES
     DataMultiSim.qml
     DefaultSim.qml
+    LabelTextField.qml
     MultiSim.qml
     NoSim.qml
     RadioSingleSim.qml

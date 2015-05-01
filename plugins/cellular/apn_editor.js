@@ -26,13 +26,21 @@
  * @param {OfonoContextConnection} qml to be updated
 */
 function updateContextQML (ctx) {
-    console.warn('updateContext', name.text, accessPointName.text, username.text, password.text);
+    var wasActive = ctx.active;
+    if (ctx.active) {
+        console.warn('updateContext: was active, disconnect...');
+        ctx.disconnect();
+    }
     ctx.name = name.text;
     ctx.accessPointName = accessPointName.text;
     ctx.username = username.text;
     ctx.password = password.text;
     ctx.messageCenter = messageCenter.text;
     ctx.messageProxy = messageProxy.text + (port.text ? ':' + port.text : '');
+    if (wasActive) {
+        console.warn('updateContext: we deactivated and it used to be active. Activating...');
+        ctx.active = wasActive;
+    }
 }
 
 /**
@@ -63,56 +71,32 @@ function saving () {
     console.warn('saving...', contextQML);
     var model;
     var type;
+    root.saving();
 
     // Edit or new?
     if (contextQML) {
         updateContextQML(contextQML);
         root.saved(contextQML);
     } else {
-
-        function createdContextDisconnected () {
-            console.warn('createdContextDisconnected');
-            this.activeChanged.disconnect(createdContextDisconnected);
-            updateContextQML(this);
-        }
-
-        // We will create a new context. This is async, so
-        // we attach a one time event to addition of contexts.
-        // We can't guarantee that the context added is this
-        // we just created.
-
-        function updateCreatedContext () {
-
-            var type = indexToType();
-            if (type === 'internet+mms') {
-                type = 'internet';
-            }
-
-            var model = manager.getModelFromType(type);
-            var ctx = model.get(model.count - 1).qml;
-            var i;
-            console.warn('updateCreatedContext', ctx.name, ctx);
-            if (ctx.active) {
-                ctx.disconnect();
-                ctx.activeChanged.connect(createdContextDisconnected.bind(ctx));
-            } else {
-                updateContextQML(ctx);
-                root.saved(ctx);
-                model.countChanged.disconnect(updateCreatedContext);
-            }
-
-        }
         type = indexToType();
-
-        if (type === 'internet+mms') {
-            type = 'internet';
-        }
-
         model = manager.getModelFromType(type);
+        model.countChanged.connect(updateCreatedContext.bind(model));
 
-        model.countChanged.connect(updateCreatedContext);
+        if (type === 'internet+mms') type = 'internet';
         manager.createContext(type);
+        updateNewContext.start();
     }
+}
+
+// We will create a new context. This is async, so
+// we attach a one time event to addition of contexts.
+// We can't guarantee that the context added is this
+// we just created.
+function updateCreatedContext (count) {
+    console.warn('updateCreatedContext', ctx, ctx.name, ctx.active);
+    var ctx = this.get(count - 1).qml;
+    contextQML = ctx;
+    this.countChanged.disconnect(updateCreatedContext);
 }
 
 /**
@@ -143,9 +127,23 @@ function setHttp(link) {
  * @return {Boolean} whether or not the editor is valid
 */
 function isValid () {
-    return name.text && accessPointName.text;
+    if (isMms || isCombo) {
+        return name.text &&
+               accessPointName.text &&
+               messageCenter.text;
+    } else {
+        return name.text &&
+               accessPointName.text;
+    }
 }
 
+/**
+ * Given a type, this asks what index of the type selector
+ * it corresponds to.
+ *
+ * @param {String} type to check
+ * @return {Number} of index
+*/
 function typeToIndex (type) {
     if (type === 'internet+mms') return 0;
     if (type === 'internet') return 1;
@@ -153,8 +151,16 @@ function typeToIndex (type) {
     if (type === 'ia') return 3;
 }
 
-function indexToType () {
-    var index = typeSel.selectedIndex;
+/**
+ * Given an index, we ask what type this index corresponds to.
+ *
+ * @param {Number} [optional] index to check
+ * @return {String} type it corresponds to
+*/
+function indexToType (index) {
+    if (typeof index === 'undefined') {
+        index = typeSel.selectedIndex;
+    }
     if (index === 0) return 'internet+mms';
     if (index === 1) return 'internet';
     if (index === 2) return 'mms';

@@ -38,6 +38,7 @@ function getModelFromType (type) {
             model = mmsContexts;
             break;
         case 'internet':
+        case 'internet+mms':
             model = internetContexts;
             break;
         case 'ia':
@@ -133,12 +134,13 @@ function _garbageCollect (paths) {
  * @param {String} path to the modem
  */
 function _createQml (paths) {
-    console.warn('_createQml', paths);
+    console.warn('_createQml...');
     var ctx;
     paths.forEach(function (path, i) {
         if (!_pathToQml.hasOwnProperty(path)) {
 
             ctx = createContextQml(path);
+            console.warn('_createQml created', path);
 
             ctx.preferredChanged.connect(contextPreferredChanged.bind(ctx));
 
@@ -179,7 +181,6 @@ function createContextQml (path) {
 */
 function createContext (type) {
     console.warn('Creating context of type', type);
-    if (type === 'internet+mms') type = 'internet';
     sim.connMan.addContext(type);
 }
 
@@ -225,6 +226,28 @@ function addContextToModel(ctx, type) {
     }
 
     model.append(data);
+}
+
+/**
+ * Removes a context from the appropriate model.
+ *
+ * @param {OfonoContextConnection} ctx to be removed
+ * @param {String} [optional] type of context
+*/
+function removeContextFromModel (ctx, type) {
+    var model = getModelFromType(type);
+    var i;
+
+    if (typeof type === 'undefined') {
+        type = ctx.type;
+    }
+
+    for (i = 0; i < model.count; i++) {
+        if (model.get(i).path === ctx.contextPath) {
+            model.remove(i);
+            return;
+        }
+    }
 }
 
 /**
@@ -329,49 +352,10 @@ function reportError (message) {
 }
 
 /**
- * Checks to see if a internet context is a combo context.
+ * Set Preferred on a batch of contexts to false.
  *
- * @return {Boolean} whether or not context is combo type
- */
-function isComboContext (ctx) {
-    return ctx && ctx.type === 'internet' && ctx.messageCenter && ctx.messageCenter !== "";
-}
-
-/**
- * Activates the given OfonoContextConnection. If MMS, we delete all other
- * contexts. If the context is IA or Internet, we use the OfonoActivator
- * to create a connection.
- *
- * @param {OfonoContextConnection} ctx to be activated
+ * @param {String} type of context to de-prefer
 */
-// function activateContextQML (ctx) {
-//     var i;
-
-//     ctx.active = true;
-//     console.warn('activateContext', ctx.name);
-//     if (ctx.type === 'mms') {
-
-//         // Activation of an MMS context is currently the
-//         // removal of all other contexts. See lp:1361864 and
-//         // lp:1361864.
-//         for (i = 0; i < mmsContexts.count; i++) {
-
-//             console.warn('activateContext',
-//                          mmsContexts.get(i).path, ctx.contextPath);
-
-//             if (mmsContexts.get(i).path !== ctx.contextPath) {
-//                 removeContext(mmsContexts.get(i).path);
-//             }
-//         }
-
-
-//     } else if (ctx.type === 'ia' || ctx.type === 'internet') {
-//         return activator.activate(ctx.contextPath,
-//                                   sim.simMng.subscriberIdentity,
-//                                   sim.path);
-//     }
-// }
-
 function dePreferAll(type) {
     var model = getModelFromType(type);
     var ctx;
@@ -382,6 +366,13 @@ function dePreferAll(type) {
                      ctx.contextPath);
         ctx.preferred = false;
     }
+}
 
-
+/**
+ * Checks to see if a internet context is a combo context.
+ *
+ * @return {Boolean} whether or not context is combo type
+ */
+function isComboContext (ctx) {
+    return ctx && ctx.type === 'internet' && ctx.messageCenter;
 }
