@@ -93,8 +93,8 @@ function saving () {
 // We can't guarantee that the context added is this
 // we just created.
 function updateCreatedContext (count) {
-    console.warn('updateCreatedContext', ctx, ctx.name, ctx.active);
     var ctx = this.get(count - 1).qml;
+    console.warn('updateCreatedContext', ctx, ctx.name, ctx.active);
     contextQML = ctx;
     this.countChanged.disconnect(updateCreatedContext);
 }
