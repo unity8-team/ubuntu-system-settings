@@ -35,6 +35,8 @@ add_library(UbuntuCellularPanel MODULE
 )
 qt5_use_modules(UbuntuCellularPanel Qml Quick DBus)
 
+target_link_libraries(UbuntuCellularPanel uss-sessionservice)
+
 set(PLUG_DIR ${PLUGIN_PRIVATE_MODULE_DIR}/Ubuntu/SystemSettings/Cellular)
 install(TARGETS UbuntuCellularPanel DESTINATION ${PLUG_DIR})
 install(FILES qmldir DESTINATION ${PLUG_DIR})

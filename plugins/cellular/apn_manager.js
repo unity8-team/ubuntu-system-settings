@@ -140,9 +140,15 @@ function _createQml (paths) {
         if (!_pathToQml.hasOwnProperty(path)) {
 
             ctx = createContextQml(path);
-            console.warn('_createQml created', path);
+            console.warn('_createQml created', path, ctx.name, ctx.type);
 
             ctx.preferredChanged.connect(contextPreferredChanged.bind(ctx));
+
+            if (!ctx.name) {
+                ctx.nameChanged.connect(contextNameChanged.bind(ctx));
+            } else {
+                contextNameChanged.bind(ctx)(ctx.name);
+            }
 
             // Some context come with a type, others not. Normalize this.
             if (!ctx.type) {
@@ -207,7 +213,7 @@ function removeContext (path) {
  * @param {OfonoContextConnection} ctx to be added
  * @param {String} [optional] type of context
 */
-function addContextToModel(ctx, type) {
+function addContextToModel (ctx, type) {
     var data = {
         path: ctx.contextPath,
         qml: ctx
@@ -279,7 +285,7 @@ function typeDetermined (type) {
  *
  * @param {Boolean} active's new value
 */
-function contextActiveChanged(active) {
+function contextActiveChanged (active) {
 
     // We can't do anything sensible when the type is undetermined.
     if (!this.type) {
@@ -304,7 +310,7 @@ function contextActiveChanged(active) {
  *
  * @param {Boolean} active's new value
 */
-function contextPreferredChanged(preferred) {
+function contextPreferredChanged (preferred) {
 
     // We can't do anything sensible when the type is undetermined.
     if (!this.type) {
@@ -320,6 +326,27 @@ function contextPreferredChanged(preferred) {
             model.current = null;
         }
     }
+}
+
+/**
+ * This is code that is supposed to identify new contexts that user creates.
+ * If we think the context is new, and the editor page is open, we notify it.
+ *
+ * @param {String} name's new value
+*/
+function contextNameChanged (name) {
+    console.warn('contextNameChanged', name);
+    switch (name) {
+        case 'Internet':
+        case 'IA':
+        case 'MMS':
+            if (editor) {
+                console.warn('We saw what we thought was ofono default. Notifying editor...');
+                editor.newContext(this);
+            }
+            break;
+    }
+    this.nameChanged.disconnect(contextNameChanged);
 }
 
 /**
@@ -356,7 +383,7 @@ function reportError (message) {
  *
  * @param {String} type of context to de-prefer
 */
-function dePreferAll(type) {
+function dePreferAll (type) {
     var model = getModelFromType(type);
     var ctx;
     var i;
@@ -375,4 +402,13 @@ function dePreferAll(type) {
  */
 function isComboContext (ctx) {
     return ctx && ctx.type === 'internet' && ctx.messageCenter;
+}
+
+/**
+ * Reset apn configuration.
+*/
+function reset () {
+    sim.connMan.deactivateAll();
+    sim.connMan.contexts.forEach(removeContext);
+    SessionService.reboot();
 }

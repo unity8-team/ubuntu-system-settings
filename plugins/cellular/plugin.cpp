@@ -22,6 +22,7 @@
 #include "connectivity.h"
 #include "hotspotmanager.h"
 #include "ofonoactivator.h"
+#include "sessionservice.h"
 
 static QObject *connectivitySingeltonProvider(QQmlEngine *engine, QJSEngine *scriptEngine)
 {
@@ -32,12 +33,22 @@ static QObject *connectivitySingeltonProvider(QQmlEngine *engine, QJSEngine *scr
     return connectivity;
 }
 
+static QObject *sessionserviceSingeltonProvider(QQmlEngine *engine, QJSEngine *scriptEngine)
+{
+    Q_UNUSED(engine)
+    Q_UNUSED(scriptEngine)
+
+    SessionService *sessionservice = new SessionService();
+    return sessionservice;
+}
+
 void BackendPlugin::registerTypes(const char *uri)
 {
     Q_ASSERT(uri == QLatin1String("Ubuntu.SystemSettings.Cellular"));
     qmlRegisterSingletonType<Connectivity>(uri, 1, 0, "Connectivity", connectivitySingeltonProvider);
     qmlRegisterType<HotspotManager>(uri, 1, 0, "HotspotManager");
     qmlRegisterType<OfonoActivator>(uri, 1, 0, "OfonoActivator");
+    qmlRegisterSingletonType<SessionService>(uri, 1, 0, "SessionService", sessionserviceSingeltonProvider);
 }
 
 void BackendPlugin::initializeEngine(QQmlEngine *engine, const char *uri)

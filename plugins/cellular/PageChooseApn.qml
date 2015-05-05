@@ -38,6 +38,7 @@ ItemPage {
     objectName: "apnPage"
 
     property var sim
+    property var editor
 
     OfonoActivator {
         id: activator
@@ -113,7 +114,7 @@ ItemPage {
                 Action {
                     iconName: "add"
                     onTriggered: {
-                        pageStack.push(Qt.resolvedUrl("PageApnEditor.qml"), {
+                        editor = pageStack.push(Qt.resolvedUrl("PageApnEditor.qml"), {
                             manager:         Manager,
                             mmsModel:        mmsContexts,
                             internetModel:   internetContexts,
@@ -229,13 +230,15 @@ ItemPage {
                 text: qml.name
                 subText: qml.typeString
                 onItemRemoved: Manager.removeContext(path);
-                onClicked: pageStack.push(Qt.resolvedUrl("PageApnEditor.qml"), {
-                    manager:         Manager,
-                    contextQML:      qml,
-                    mmsModel:        mmsContexts,
-                    internetModel:   internetContexts,
-                    iaModel:         iaContexts
-                });
+                onClicked: {
+                    editor = pageStack.push(Qt.resolvedUrl("PageApnEditor.qml"), {
+                        manager:         Manager,
+                        contextQML:      qml,
+                        mmsModel:        mmsContexts,
+                        internetModel:   internetContexts,
+                        iaModel:         iaContexts
+                    });
+                }
 
             }
         }

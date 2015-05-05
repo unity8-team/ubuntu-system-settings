@@ -29,7 +29,7 @@ class SessionService : public QObject
 
 public:
     explicit SessionService (QObject *parent = 0);
-    void reboot();
+    Q_INVOKABLE void reboot();
 
 private:
     QDBusConnection m_systemBusConnection;

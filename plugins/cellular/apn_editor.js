@@ -26,21 +26,14 @@
  * @param {OfonoContextConnection} qml to be updated
 */
 function updateContextQML (ctx) {
-    var wasActive = ctx.active;
-    if (ctx.active) {
-        console.warn('updateContext: was active, disconnect...');
-        ctx.disconnect();
-    }
+    console.warn('updateContextQML', ctx.contextPath);
+    ctx.disconnect();
     ctx.name = name.text;
     ctx.accessPointName = accessPointName.text;
     ctx.username = username.text;
     ctx.password = password.text;
     ctx.messageCenter = messageCenter.text;
     ctx.messageProxy = messageProxy.text + (port.text ? ':' + port.text : '');
-    if (wasActive) {
-        console.warn('updateContext: we deactivated and it used to be active. Activating...');
-        ctx.active = wasActive;
-    }
 }
 
 /**
@@ -68,35 +61,37 @@ function populate (ctx) {
  * Handler for when a user saves a context.
 */
 function saving () {
-    console.warn('saving...', contextQML);
+    console.warn('saving context...');
     var model;
     var type;
     root.saving();
 
-    // Edit or new?
+    // Edit or new? Create a context if it does not exist.
     if (contextQML) {
         updateContextQML(contextQML);
-        root.saved(contextQML);
+        root.saved();
     } else {
         type = indexToType();
-        model = manager.getModelFromType(type);
-        model.countChanged.connect(updateCreatedContext.bind(model));
-
         if (type === 'internet+mms') type = 'internet';
         manager.createContext(type);
-        updateNewContext.start();
     }
 }
 
-// We will create a new context. This is async, so
-// we attach a one time event to addition of contexts.
-// We can't guarantee that the context added is this
-// we just created.
-function updateCreatedContext (count) {
-    var ctx = this.get(count - 1).qml;
-    console.warn('updateCreatedContext', ctx, ctx.name, ctx.active);
-    contextQML = ctx;
-    this.countChanged.disconnect(updateCreatedContext);
+/**
+ * Handler for new contexts.
+ *
+ * @param {OfonoContextConnection} new context
+*/
+function newContext (context) {
+    console.warn('newContext');
+
+    // Start a timer that will update the context.
+    // Ofono and libqofono seems to be very unreliable
+    // when it comes to how a context is created,
+    // so we just wait a couple of seconds until we're
+    // sure the context exists and can be edited.
+    updateContext.ctx = context;
+    updateContext.start();
 }
 
 /**
@@ -114,7 +109,7 @@ function hasProtocol (link) {
  * @param {String} link to add http:// to
  * @return {String} changed link
 */
-function setHttp(link) {
+function setHttp (link) {
     if (hasProtocol(link)) {
         link = 'http://' + link;
     }

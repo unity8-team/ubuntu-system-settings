@@ -55,7 +55,10 @@ ItemPage {
     signal saving ()
 
     // When user has saved a context.
-    signal saved (OfonoContextConnection context)
+    signal saved ()
+
+    // Signal for new contexts.
+    signal newContext (OfonoContextConnection context)
 
     // When user cancels.
     signal canceled ()
@@ -100,6 +103,7 @@ ItemPage {
     onSaving: state = "busy"
     onSaved: pageStack.pop();
     onCanceled: pageStack.pop();
+    onNewContext: Editor.newContext(context);
 
     Component.onCompleted: {
         if (contextQML) {
@@ -361,11 +365,12 @@ ItemPage {
     } // main column holding all controls and buttons
 
     Timer {
-        id: updateNewContext
-        interval: 1000
+        id: updateContext
+        property OfonoContextConnection ctx
+        interval: 1500
         onTriggered: {
-            Editor.updateContextQML(contextQML);
-            root.saved(contextQML);
+            Editor.updateContextQML(ctx);
+            root.saved();
         }
     }
 }
