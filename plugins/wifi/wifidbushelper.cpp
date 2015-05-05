@@ -84,7 +84,7 @@ void WifiDbusHelper::connect(QString ssid, int security, int auth, QStringList u
     // 3: WEP
     // 4: Dynamic WEP
     // 5: LEAP
-    if (security !== 0) { // WPA Enterprise or Dynamic WEP
+    if (security != 0) { // WPA Enterprise or Dynamic WEP
         wireless["security"] = QStringLiteral("802-11-wireless-security");
 
         QVariantMap wireless_security;
@@ -129,7 +129,7 @@ void WifiDbusHelper::connect(QString ssid, int security, int auth, QStringList u
       PEAP  // index: 4 */
 
     wireless_802_1x["identity"] = usernames[0];
-    if (auth !== 0) {
+    if (auth != 0) {
         wireless_802_1x["password"] = password;
     }
 
@@ -179,7 +179,6 @@ void WifiDbusHelper::connect(QString ssid, int security, int auth, QStringList u
             pacFile.append(certs[3]);
         }
         wireless_802_1x["pac-file"]  = pacFile;
-
         // wireless_802_1x["phase1-fast-provisioning"] = QString("0");
     } else if (auth == 4) { // PEAP
         wireless_802_1x["eap"] = QStringList("peap");
@@ -208,7 +207,6 @@ void WifiDbusHelper::connect(QString ssid, int security, int auth, QStringList u
         } else if (p2auth == 5) {
             wireless_802_1x["phase2-auth"] = QStringLiteral("md5");
         }
-
     }
     configuration["802-1x"] = wireless_802_1x;
     }

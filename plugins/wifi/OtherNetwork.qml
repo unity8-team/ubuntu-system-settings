@@ -40,14 +40,14 @@ Component {
             }
             if(securityList.selectedIndex == 3) {
                 
-            // WEP
-            return password.length === 5  ||
-                   password.length === 10 ||
-                   password.length === 13 ||
-                   password.length === 26;
-        	}
-		//WPA
-		return password.length >= 8
+                // WEP
+                return password.length === 5  ||
+                        password.length === 10 ||
+                        password.length === 13 ||
+                        password.length === 26;
+            }
+            //WPA
+            return password.length >= 8
         }
 
         title: i18n.tr("Connect to Hidden Network")
@@ -58,118 +58,118 @@ Component {
         }
 
         states: [
-        State {
-            name: "CONNECTING"
-            PropertyChanges {
-                target: connectAction
-                enabled: false
-            }
-            PropertyChanges {
-                target: connectButtonIndicator
-                running: true
-            }
+            State {
+                name: "CONNECTING"
+                PropertyChanges {
+                    target: connectAction
+                    enabled: false
+                }
+                PropertyChanges {
+                    target: connectButtonIndicator
+                    running: true
+                }
 
-            PropertyChanges {
-                target: p2authList
-                enabled: false
-            }
-            PropertyChanges {
-                target: p2authListLabel
-                opacity: 0.5
-            }
-            PropertyChanges {
-                target: cacert
-                enabled: false
-            }
-            PropertyChanges {
-                target: cacertLabel
-                opacity: 0.5
-            }
-            PropertyChanges {
-                target: passwordVisibleSwitch
-                enabled: false
-            }
-            PropertyChanges {
-                target: passwordVisibleLabel
-                opacity: 0.5
-            }
-            PropertyChanges {
-                target: password
-                enabled: false
-            }
-            PropertyChanges {
-                target: passwordLabel
-                opacity: 0.5
-            }
-            PropertyChanges {
-                target: username
-                enabled: false
-            }
-            PropertyChanges {
-                target: usernameLabel
-                opacity: 0.5
-            }
-             PropertyChanges {
-                target: anonymousIdentity
-                enabled: false
-            }
-            PropertyChanges {
-                target: anonymousIdentityLabel
-                opacity: 0.5
-            }
-            PropertyChanges {
-                target: authList
-                enabled: false
-                opacity: 0.5
-            }
-            PropertyChanges {
-                target: authListLabel
-                opacity: 0.5
-            }
-            PropertyChanges {
-                target: securityList
-                enabled: false
-                opacity: 0.5
-            }
-            PropertyChanges {
-                target: securityListLabel
-                opacity: 0.5
-            }
-            PropertyChanges {
-                target: networkname
-                enabled: false
-            }
-            PropertyChanges {
-                target: networknameLabel
-                opacity: 0.5
-            }
-            PropertyChanges {
-                target: feedback
-                enabled: true
-                visible: true
-            }
-        },
-        State {
-            name: "FAILED"
-            PropertyChanges {
-                target: feedback
-                enabled: true
-                visible: true
-            }
-        },
-        State {
-            name: "SUCCEEDED"
-            PropertyChanges {
-                target: successIndicator
-                running: true
-            }
+                PropertyChanges {
+                    target: p2authList
+                    enabled: false
+                }
+                PropertyChanges {
+                    target: p2authListLabel
+                    opacity: 0.5
+                }
+                PropertyChanges {
+                    target: cacert
+                    enabled: false
+                }
+                PropertyChanges {
+                    target: cacertLabel
+                    opacity: 0.5
+                }
+                PropertyChanges {
+                    target: passwordVisibleSwitch
+                    enabled: false
+                }
+                PropertyChanges {
+                    target: passwordVisibleLabel
+                    opacity: 0.5
+                }
+                PropertyChanges {
+                    target: password
+                    enabled: false
+                }
+                PropertyChanges {
+                    target: passwordLabel
+                    opacity: 0.5
+                }
+                PropertyChanges {
+                    target: username
+                    enabled: false
+                }
+                PropertyChanges {
+                    target: usernameLabel
+                    opacity: 0.5
+                }
+                PropertyChanges {
+                    target: anonymousIdentity
+                    enabled: false
+                }
+                PropertyChanges {
+                    target: anonymousIdentityLabel
+                    opacity: 0.5
+                }
+                PropertyChanges {
+                    target: authList
+                    enabled: false
+                    opacity: 0.5
+                }
+                PropertyChanges {
+                    target: authListLabel
+                    opacity: 0.5
+                }
+                PropertyChanges {
+                    target: securityList
+                    enabled: false
+                    opacity: 0.5
+                }
+                PropertyChanges {
+                    target: securityListLabel
+                    opacity: 0.5
+                }
+                PropertyChanges {
+                    target: networkname
+                    enabled: false
+                }
+                PropertyChanges {
+                    target: networknameLabel
+                    opacity: 0.5
+                }
+                PropertyChanges {
+                    target: feedback
+                    enabled: true
+                    visible: true
+                }
+            },
+            State {
+                name: "FAILED"
+                PropertyChanges {
+                    target: feedback
+                    enabled: true
+                    visible: true
+                }
+            },
+            State {
+                name: "SUCCEEDED"
+                PropertyChanges {
+                    target: successIndicator
+                    running: true
+                }
 
-            PropertyChanges {
-                target: connectAction
-                enabled: false
+                PropertyChanges {
+                    target: connectAction
+                    enabled: false
+                }
             }
-        }
-    ]
+        ]
 
         Label {
             property bool enabled: false
@@ -181,439 +181,452 @@ Component {
         }
 
         Label {
-                id: networknameLabel
-                text : i18n.tr("Network name")
-                objectName: "networknameLabel"
-                fontSize: "medium"
-                font.bold: false
-                color: Theme.palette.selected.backgroundText
-                elide: Text.ElideRight
+            id: networknameLabel
+            text : i18n.tr("Network name")
+            objectName: "networknameLabel"
+            fontSize: "medium"
+            font.bold: false
+            color: Theme.palette.selected.backgroundText
+            elide: Text.ElideRight
+        }
+
+        TextField {
+            id : networkname
+            objectName: "networkname"
+            width: parent.width
+            placeholderText: i18n.tr("SSID")
+            inputMethodHints: Qt.ImhNoPredictiveText
+            Component.onCompleted: forceActiveFocus()
+        }
+
+        Label {
+            id: securityListLabel
+            text : i18n.tr("Security")
+            objectName: "securityListLabel"
+            fontSize: "medium"
+            font.bold: false
+            color: Theme.palette.selected.backgroundText
+            elide: Text.ElideRight
+        }
+
+        ListItem.ItemSelector {
+            id: securityList
+            objectName: "securityList"
+            model: [i18n.tr("None"),             // index: 0
+                i18n.tr("WPA & WPA2 Personal"),  // index: 1
+                i18n.tr("WPA & WPA2 Enterprise"),// index: 2
+                i18n.tr("WEP"),                  // index: 3
+                i18n.tr("Dynamic WEP (802.1x)"), // index: 4
+                i18n.tr("LEAP"),                 // index: 5
+            ]
+            selectedIndex: 1
+        }
+
+        Label {
+            id: authListLabel
+            text : i18n.tr("Authentication")
+            objectName: "authListLabel"
+            fontSize: "medium"
+            font.bold: false
+            color: Theme.palette.selected.backgroundText
+            elide: Text.ElideRight
+            visible: ( securityList.selectedIndex == 2 || securityList.selectedIndex == 4)
+        }
+
+        ListItem.ItemSelector {
+            id: authList
+            objectName: "authList"
+            model: [i18n.tr("TLS"),  // index: 0
+                i18n.tr("TTLS"),     // index: 1
+                i18n.tr("LEAP"),     // index: 2
+                i18n.tr("FAST"),     // index: 3
+                i18n.tr("PEAP"),     // index: 4
+            ]
+            visible: ( securityList.selectedIndex == 2 || securityList.selectedIndex == 4)
+        }
+
+        Label {
+            id: p2authListLabel
+            text : i18n.tr("Inner authentication")
+            objectName: "p2authLabel"
+            fontSize: "medium"
+            font.bold: false
+            color: Theme.palette.selected.backgroundText
+            elide: Text.ElideRight
+            visible:    ( securityList.selectedIndex == 2 || securityList.selectedIndex == 4) // WPA or D-WEP
+                        && ( authList.selectedIndex == 1 ||
+                             authList.selectedIndex == 3 ||
+                             authList.selectedIndex == 4  )
+        }
+
+        ListItem.ItemSelector {
+            id: p2authList
+            objectName: "p2authList"
+            width: parent.width
+            model: [i18n.tr("PAP"),      // index: 0
+                i18n.tr("MSCHAPv2"), // index: 1
+                i18n.tr("MSCHAP"),   // index: 2
+                i18n.tr("CHAP"),     // index: 3
+                i18n.tr("GTC"),      // index: 4
+                i18n.tr("MD5")       // index: 5
+            ]
+            visible:    ( securityList.selectedIndex == 2 || securityList.selectedIndex == 4) // WPA or D-WEP
+                        && ( authList.selectedIndex == 1 ||
+                            authList.selectedIndex == 3 ||
+                            authList.selectedIndex == 4  )
+        }
+
+        Column{     // ca-cert
+            id: cacertColumn
+            anchors {
+                left: parent.left
+                right: parent.right
             }
+            spacing: parent.spacing
 
-            TextField {
-                id : networkname
-                objectName: "networkname"
-                width: parent.width
-                placeholderText: i18n.tr("SSID")
-                inputMethodHints: Qt.ImhNoPredictiveText
-                Component.onCompleted: forceActiveFocus()
-            }
+            visible:    ( securityList.selectedIndex == 2 || securityList.selectedIndex == 4)
+                        && ( authList.selectedIndex == 0 ||
+                             authList.selectedIndex == 1 ||
+                             authList.selectedIndex == 4  )
 
-            //ListItem.ThinDivider {}
-
-            Label {
-                id: securityListLabel
-                text : i18n.tr("Security")
-                objectName: "securityListLabel"
-                fontSize: "medium"
-                font.bold: false
-                color: Theme.palette.selected.backgroundText
-                elide: Text.ElideRight
-            }
-
-            ListItem.ItemSelector {
-                id: securityList
-                objectName: "securityList"
-                model: [i18n.tr("None"),                 // index: 0
-                        i18n.tr("WPA & WPA2 Personal"),  // index: 1
-                        i18n.tr("WPA & WPA2 Enterprise"),// index: 2
-                        i18n.tr("WEP"),                  // index: 3
-                        i18n.tr("Dynamic WEP (802.1x)"), // index: 4
-                        i18n.tr("LEAP"),                 // index: 5
-                       ]
-                selectedIndex: 1
-            }
-
-            Label {
-                id: authListLabel
-                text : i18n.tr("Authentication")
-                objectName: "authListLabel"
-                fontSize: "medium"
-                font.bold: false
-                color: Theme.palette.selected.backgroundText
-                elide: Text.ElideRight
-                visible: ( securityList.selectedIndex == 2 || securityList.selectedIndex == 4)
-            }
-
-            ListItem.ItemSelector {
-                id: authList
-                objectName: "authList"
-                model: [i18n.tr("TLS"),   // index: 0
-                        i18n.tr("TTLS"),  // index: 1
-                        i18n.tr("LEAP"),  // index: 2
-                        i18n.tr("FAST"),  // index: 3
-                        i18n.tr("PEAP"),  // index: 4
-                       ]
-                visible: ( securityList.selectedIndex == 2 || securityList.selectedIndex == 4)
-            }
-
-            Label {
-                id: p2authListLabel
-                text : i18n.tr("Inner authentication")
-                objectName: "p2authLabel"
-                fontSize: "medium"
-                font.bold: false
-                color: Theme.palette.selected.backgroundText
-                elide: Text.ElideRight
-                visible:    ( securityList.selectedIndex == 2 || securityList.selectedIndex == 4) // WPA or D-WEP
-                         && ( authList.selectedIndex == 1 ||
-                              authList.selectedIndex == 3 ||
-                              authList.selectedIndex == 4  )
-            }
-
-            ListItem.ItemSelector {
-                id: p2authList
-                objectName: "p2authList"
-                width: parent.width
-                model: [i18n.tr("PAP"),      // index: 0
-                        i18n.tr("MSCHAPv2"), // index: 1
-                        i18n.tr("MSCHAP"),   // index: 2
-                        i18n.tr("CHAP"),     // index: 3
-                        i18n.tr("GTC"),      // index: 4
-                        i18n.tr("MD5")       // index: 5
-                       ]
-                visible:    ( securityList.selectedIndex == 2 || securityList.selectedIndex == 4) // WPA or D-WEP
-                         && ( authList.selectedIndex == 1 ||
-                              authList.selectedIndex == 3 ||
-                              authList.selectedIndex == 4  )
-            }
-
-            Column{     // ca-cert
-                id: cacertColumn
+            RowLayout{
+                spacing: units.gu(4)
                 anchors {
                     left: parent.left
                     right: parent.right
-                }
-                spacing: parent.spacing
-
-                visible:    ( securityList.selectedIndex == 2 || securityList.selectedIndex == 4)
-                         && ( authList.selectedIndex == 0 ||
-                              authList.selectedIndex == 1 ||
-                              authList.selectedIndex == 4  )
-
-                RowLayout{
-                    spacing: units.gu(4)
-                    anchors {
-                        left: parent.left
-                        right: parent.right
-                    }
-
-                    Label {
-                        id: cacertLabel
-                        text : i18n.tr("CA Certificate")
-                        objectName: "cacertListLabel"
-                        fontSize: "medium"
-                        font.bold: false
-                        color: Theme.palette.selected.backgroundText
-                        //anchors.bottom: addcacertButton.bottom // while button is disabled
-                    }
-
-                    Button {
-                        id: addcacertButton
-                        //action: selectPeer
-                        visible: false //showAllUI // Button action not implemented yet.
-                        objectName: "addcacertButton"
-                        anchors.right: parent.right
-                        text: i18n.tr("Choose file…")
-                    }
-                }
-
-
-                TextArea  {
-                    id : cacert
-                    objectName: "cacert"
-                    width: parent.width
-                    autoSize: true
-                    maximumLineCount: 4
-                    placeholderText: i18n.tr("Absolute path to cert file or clipboard content")
-
-                }
-
-                RowLayout{
-                    spacing: units.gu(4)
-                    anchors {
-                        left: parent.left
-                        right: parent.right
-                    }
-                    visible:    ( securityList.selectedIndex == 2 || securityList.selectedIndex == 4)
-                             && ( authList.selectedIndex == 0 ) // only for TLS
-
-                    Label {
-                        id: usercertLabel
-                        text : i18n.tr("User Certificate")
-                        objectName: "usercertListLabel"
-                        fontSize: "medium"
-                        font.bold: false
-                        color: Theme.palette.selected.backgroundText
-                        //anchors.bottom: addusercertButton.bottom
-                    }
-
-                    Button {
-                        id: addusercertButton
-                        //action: selectPeer
-                        visible: false // Button action not implemented yet.
-                        objectName: "addusercertButton"
-                        anchors.right: parent.right
-                        text: i18n.tr("Choose file…")
-                    }
-                }
-
-                TextArea{
-                    id : usercert
-                    objectName: "usercert"
-                    visible:    ( securityList.selectedIndex == 2 || securityList.selectedIndex == 4)
-                             && ( authList.selectedIndex == 0 )
-                    width: parent.width
-                    autoSize: true
-                    maximumLineCount: 4
-                    placeholderText: i18n.tr("Absolute path to cert file or clipboard content")
-                }
-
-
-                RowLayout{
-                    spacing: units.gu(4)
-                    anchors {
-                        left: parent.left
-                        right: parent.right
-                    }
-                    visible:    ( securityList.selectedIndex == 2 || securityList.selectedIndex == 4)
-                             && ( authList.selectedIndex == 0 ) // only for TLS
-
-                    Label {
-                        id: userprivatekeyLabel
-                        text : i18n.tr("User Private Key")
-                        objectName: "userprivatekeyLabel"
-                        fontSize: "medium"
-                        font.bold: false
-                        color: Theme.palette.selected.backgroundText
-                        //anchors.bottom: adduserprivatekeyButton.bottom
-                    }
-
-                    Button {
-                        id: adduserprivatekeyButton
-                        //action: selectPeer
-                        visible: false // Button action not implemented yet
-                        objectName: "adduserprivatekeyButton"
-                        anchors.right: parent.right
-                        text: i18n.tr("Choose file…")
-                    }
-                }
-
-                TextArea {
-                    id : userprivatekey
-                    objectName: "userprivatekey"
-                    visible:    ( securityList.selectedIndex == 2 || securityList.selectedIndex == 4)
-                             && ( authList.selectedIndex == 0 )
-                    width: parent.width
-                    autoSize: true
-                    maximumLineCount: 4
-                    placeholderText: i18n.tr("Absolute path to key or clipboard content")
-                }
-
-                //ListItem.ThinDivider {}
-
-            }
-
-            Column{     // pacFile
-                id: pacFileColumn
-                anchors {
-                    left: parent.left
-                    right: parent.right
-                }
-                spacing: parent.spacing
-
-                visible:    ( securityList.selectedIndex == 2 || securityList.selectedIndex == 4)
-                         && ( authList.selectedIndex == 3 )
-
-                RowLayout{
-                    spacing: units.gu(4)
-                    anchors {
-                        left: parent.left
-                        right: parent.right
-                    }
-
-                    Label {
-                        id: pacFileLabel
-                        text : i18n.tr("Pac File")
-                        objectName: "pacFileLabel"
-                        fontSize: "medium"
-                        font.bold: false
-                        color: Theme.palette.selected.backgroundText
-                        //anchors.bottom: adduserprivatekeyButton.bottom
-                    }
-
-                    Button {
-                        id: addpacFileButton
-                        //action: selectPeer
-                        visible: false // Button action not implemented yet
-                        objectName: "addpacFileButton"
-                        anchors.right: parent.right
-                        text: i18n.tr("Add file…")
-                    }
-                }
-
-                TextArea {
-                    id : pacFile
-                    objectName: "pacFile"
-                    width: parent.width
-                    autoSize: true
-                    maximumLineCount: 4
-                    placeholderText: i18n.tr("Absolute path to Pac File or clipboard content")
-                }
-
-                //ListItem.ThinDivider {}
-
-            }
-
-            Label {
-                id: anonymousIdentityLabel
-                text : i18n.tr("Anonymous identity")
-                objectName: "anonymousIdentityLabel"
-                fontSize: "medium"
-                font.bold: false
-                color: Theme.palette.selected.backgroundText
-                elide: Text.ElideRight
-                visible: ( securityList.selectedIndex == 2  && authList.selectedIndex !== 2 )
-            }
-
-            TextField {
-                id : anonymousIdentity
-                objectName: "anonymousIdentity"
-                width: parent.width
-                visible: ( securityList.selectedIndex == 2  && authList.selectedIndex !== 2 )
-                inputMethodHints: Qt.ImhNoPredictiveText
-                Component.onCompleted: forceActiveFocus()
-                onAccepted: {
-                    connectAction.trigger()
-                }
-            }
-
-            Label {
-                id: usernameLabel
-                text : {
-                         if (     ( securityList.selectedIndex == 2 || securityList.selectedIndex == 4)
-                               && ( authList.selectedIndex == 0 )) {
-                             i18n.tr("Identity")
-                         }
-                         else {
-                             i18n.tr("Username")
-                         }
-                }
-                objectName: "usernameLabel"
-                fontSize: "medium"
-                font.bold: false
-                color: Theme.palette.selected.backgroundText
-                elide: Text.ElideRight
-                visible: ( securityList.selectedIndex == 2 || securityList.selectedIndex == 4 || securityList.selectedIndex == 5)
-            }
-
-            TextField {
-                id : username
-                objectName: "username"
-                width: parent.width
-                visible: ( securityList.selectedIndex == 2 || securityList.selectedIndex == 4 || securityList.selectedIndex == 5)
-                inputMethodHints: Qt.ImhNoPredictiveText
-                Component.onCompleted: forceActiveFocus()
-                onAccepted: {
-                    connectAction.trigger()
-                }
-            }
-
-            Label {
-                id: passwordLabel
-                text: {
-                         if (    ( securityList.selectedIndex == 2 || securityList.selectedIndex == 4)
-                             && ( authList.selectedIndex == 0 )) {
-                            i18n.tr("Private Key Password")
-                         } else {
-                            i18n.tr("Password")
-                         }
-                }
-
-                objectName: "passwordListLabel"
-                fontSize: "medium"
-                font.bold: false
-                color: Theme.palette.selected.backgroundText
-                elide: Text.ElideRight
-                visible: securityList.selectedIndex !== 0
-            }
-
-            TextField {
-                id : password
-                objectName: "password"
-                width: parent.width
-                visible: securityList.selectedIndex !== 0
-                echoMode: passwordVisibleSwitch.checked ?
-                              TextInput.Normal : TextInput.Password
-                inputMethodHints: Qt.ImhNoPredictiveText
-                onAccepted: {
-                    connectAction.trigger();
-                }
-            }
-
-            Row {
-                id: passwordVisiblityRow
-                layoutDirection: Qt.LeftToRight
-                spacing: units.gu(2)
-                visible: securityList.selectedIndex !== 0
-
-                CheckBox {
-                    id: passwordVisibleSwitch
-                    //activeFocusOnPress: false
                 }
 
                 Label {
-                    id: passwordVisibleLabel
-                    text : i18n.tr("Show password")
-                    objectName: "passwordVisibleLabel"
+                    id: cacertLabel
+                    text : i18n.tr("CA Certificate")
+                    objectName: "cacertListLabel"
                     fontSize: "medium"
+                    font.bold: false
                     color: Theme.palette.selected.backgroundText
-                    elide: Text.ElideRight
-                    height: passwordVisibleSwitch.height
-                    verticalAlignment: Text.AlignVCenter
-                    MouseArea {
-                        anchors {
-                            fill: parent
-                        }
-                        onClicked: {
-                            passwordVisibleSwitch.checked =
-                                    !passwordVisibleSwitch.checked
-                        }
+                    anchors.bottom: addcacertButton.bottom
+                }
+
+                Button {
+                    id: addcacertButton
+                    visible: true
+                    objectName: "addcacertButton"
+                    anchors.right: parent.right
+                    text: i18n.tr("Choose file…")
+                    onClicked: {
+                        var pickerDialog = PopupUtils.open(Qt.resolvedUrl("./CertPicker.qml"));
+                        pickerDialog.fileImportSignal.connect(function(file){
+                                  cacert.text = file;
+                        });
                     }
                 }
-           }
+            }
 
-           Row {
-                    id: passwordRememberRow
-                    layoutDirection: Qt.LeftToRight
-                    spacing: units.gu(2)
-                    visible: false
-                             //( authList.selectedIndex == 1 || authList.selectedIndex == 3 || authList.selectedIndex == 4)
-                             //not implemented yet.
-                    CheckBox {
-                        id: passwordRememberSwitch
-                        //activeFocusOnPress: false
+            TextArea  {
+                id : cacert
+                objectName: "cacert"
+                width: parent.width
+                autoSize: true
+                maximumLineCount: 4
+                placeholderText: i18n.tr("Absolute path to cert file or clipboard content")
+
+            }
+
+            RowLayout{
+                spacing: units.gu(4)
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                }
+                visible:    ( securityList.selectedIndex == 2 || securityList.selectedIndex == 4)
+                            && ( authList.selectedIndex == 0 ) // only for TLS
+
+                Label {
+                    id: usercertLabel
+                    text : i18n.tr("User Certificate")
+                    objectName: "usercertListLabel"
+                    fontSize: "medium"
+                    font.bold: false
+                    color: Theme.palette.selected.backgroundText
+                    anchors.bottom: addusercertButton.bottom
+                }
+
+                Button {
+                    id: addusercertButton
+                    visible: true
+                    objectName: "addusercertButton"
+                    anchors.right: parent.right
+                    text: i18n.tr("Choose file…")
+                    onClicked: {
+                        var pickerDialog = PopupUtils.open(Qt.resolvedUrl("./CertPicker.qml"));
+                        pickerDialog.fileImportSignal.connect(function(file){
+                                  usercert.text = file;
+                        });
+                    }
+                }
+            }
+
+            TextArea{
+                id : usercert
+                objectName: "usercert"
+                visible:    ( securityList.selectedIndex == 2 || securityList.selectedIndex == 4)
+                            && ( authList.selectedIndex == 0 )
+                width: parent.width
+                autoSize: true
+                maximumLineCount: 4
+                placeholderText: i18n.tr("Absolute path to cert file or clipboard content")
+            }
+
+            RowLayout{
+                spacing: units.gu(4)
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                }
+                visible:    ( securityList.selectedIndex == 2 || securityList.selectedIndex == 4)
+                            && ( authList.selectedIndex == 0 ) // only for TLS
+
+                Label {
+                    id: userprivatekeyLabel
+                    text : i18n.tr("User Private Key")
+                    objectName: "userprivatekeyLabel"
+                    fontSize: "medium"
+                    font.bold: false
+                    color: Theme.palette.selected.backgroundText
+                    anchors.bottom: adduserprivatekeyButton.bottom
+                }
+
+                Button {
+                    id: adduserprivatekeyButton
+                    visible: true
+                    objectName: "adduserprivatekeyButton"
+                    anchors.right: parent.right
+                    text: i18n.tr("Choose file…")
+                    onClicked: {
+                        var pickerDialog = PopupUtils.open(Qt.resolvedUrl("./CertPicker.qml"));
+                        pickerDialog.fileImportSignal.connect(function(file){
+                                  userprivatekey.text = file;
+                        });
+                    }
+                }
+            }
+
+            TextArea {
+                id : userprivatekey
+                objectName: "userprivatekey"
+                visible:    ( securityList.selectedIndex == 2 || securityList.selectedIndex == 4)
+                            && ( authList.selectedIndex == 0 )
+                width: parent.width
+                autoSize: true
+                maximumLineCount: 4
+                placeholderText: i18n.tr("Absolute path to key or clipboard content")
+            }
+
+        }
+
+        Column{     // pacFile
+            id: pacFileColumn
+            anchors {
+                left: parent.left
+                right: parent.right
+            }
+            spacing: parent.spacing
+
+            visible:    ( securityList.selectedIndex == 2 || securityList.selectedIndex == 4)
+                        && ( authList.selectedIndex == 3 )
+
+            RowLayout{
+                spacing: units.gu(4)
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                }
+
+                Label {
+                    id: pacFileLabel
+                    text : i18n.tr("Pac File")
+                    objectName: "pacFileLabel"
+                    fontSize: "medium"
+                    font.bold: false
+                    color: Theme.palette.selected.backgroundText
+                    anchors.bottom: adduserprivatekeyButton.bottom
+                }
+
+                Button {
+                    id: addpacFileButton
+                    visible: true
+                    objectName: "addpacFileButton"
+                    anchors.right: parent.right
+                    text: i18n.tr("Choose file…")
+                    onClicked: {
+                        var pickerDialog = PopupUtils.open(Qt.resolvedUrl("./CertPicker.qml"));
+                        pickerDialog.fileImportSignal.connect(function(file){
+                                  pacFile.text = file;
+                        });
                     }
 
-                    Label {
-                        id: passwordRememberLabel
-                        text : i18n.tr("Remember password")
-                        objectName: "passwordRememberLabel"
-                        fontSize: "medium"
-                        color: Theme.palette.selected.backgroundText
-                        elide: Text.ElideRight
-                        height: passwordRememberSwitch.height
-                        verticalAlignment: Text.AlignVCenter
-                        MouseArea {
-                            anchors {
-                                fill: parent
-                            }
-                            onClicked: {
-                                passwordRememberSwitch.checked =
-                                        !passwordRememberSwitch.checked
-                            }
-                        }
+                }
+            }
+
+            TextArea {
+                id : pacFile
+                objectName: "pacFile"
+                width: parent.width
+                autoSize: true
+                maximumLineCount: 4
+                placeholderText: i18n.tr("Absolute path to Pac File or clipboard content")
+            }
+
+        }
+
+        Label {
+            id: anonymousIdentityLabel
+            text : i18n.tr("Anonymous identity")
+            objectName: "anonymousIdentityLabel"
+            fontSize: "medium"
+            font.bold: false
+            color: Theme.palette.selected.backgroundText
+            elide: Text.ElideRight
+            visible: ( securityList.selectedIndex == 2  && authList.selectedIndex !== 2 )
+        }
+
+        TextField {
+            id : anonymousIdentity
+            objectName: "anonymousIdentity"
+            width: parent.width
+            visible: ( securityList.selectedIndex == 2  && authList.selectedIndex !== 2 )
+            inputMethodHints: Qt.ImhNoPredictiveText
+            Component.onCompleted: forceActiveFocus()
+            onAccepted: {
+                connectAction.trigger()
+            }
+        }
+
+        Label {
+            id: usernameLabel
+            text : {
+                if (     ( securityList.selectedIndex == 2 || securityList.selectedIndex == 4)
+                        && ( authList.selectedIndex == 0 )) {
+                    i18n.tr("Identity")
+                }
+                else {
+                    i18n.tr("Username")
+                }
+            }
+            objectName: "usernameLabel"
+            fontSize: "medium"
+            font.bold: false
+            color: Theme.palette.selected.backgroundText
+            elide: Text.ElideRight
+            visible: ( securityList.selectedIndex == 2 || securityList.selectedIndex == 4 || securityList.selectedIndex == 5)
+        }
+
+        TextField {
+            id : username
+            objectName: "username"
+            width: parent.width
+            visible: ( securityList.selectedIndex == 2 || securityList.selectedIndex == 4 || securityList.selectedIndex == 5)
+            inputMethodHints: Qt.ImhNoPredictiveText
+            Component.onCompleted: forceActiveFocus()
+            onAccepted: {
+                connectAction.trigger()
+            }
+        }
+
+        Label {
+            id: passwordLabel
+            text: {
+                if (    ( securityList.selectedIndex == 2 || securityList.selectedIndex == 4)
+                        && ( authList.selectedIndex == 0 )) {
+                    i18n.tr("Private Key Password")
+                } else {
+                    i18n.tr("Password")
+                }
+            }
+
+            objectName: "passwordListLabel"
+            fontSize: "medium"
+            font.bold: false
+            color: Theme.palette.selected.backgroundText
+            elide: Text.ElideRight
+            visible: securityList.selectedIndex !== 0
+        }
+
+        TextField {
+            id : password
+            objectName: "password"
+            width: parent.width
+            visible: securityList.selectedIndex !== 0
+            echoMode: passwordVisibleSwitch.checked ?
+                          TextInput.Normal : TextInput.Password
+            inputMethodHints: Qt.ImhNoPredictiveText
+            onAccepted: {
+                connectAction.trigger();
+            }
+        }
+
+        Row {
+            id: passwordVisiblityRow
+            layoutDirection: Qt.LeftToRight
+            spacing: units.gu(2)
+            visible: securityList.selectedIndex !== 0
+
+            CheckBox {
+                id: passwordVisibleSwitch
+                //activeFocusOnPress: false
+            }
+
+            Label {
+                id: passwordVisibleLabel
+                text : i18n.tr("Show password")
+                objectName: "passwordVisibleLabel"
+                fontSize: "medium"
+                color: Theme.palette.selected.backgroundText
+                elide: Text.ElideRight
+                height: passwordVisibleSwitch.height
+                verticalAlignment: Text.AlignVCenter
+                MouseArea {
+                    anchors {
+                        fill: parent
                     }
+                    onClicked: {
+                        passwordVisibleSwitch.checked =
+                                !passwordVisibleSwitch.checked
+                    }
+                }
+            }
+        }
+
+        Row {
+            id: passwordRememberRow
+            layoutDirection: Qt.LeftToRight
+            spacing: units.gu(2)
+            visible: false
+            //( authList.selectedIndex == 1 || authList.selectedIndex == 3 || authList.selectedIndex == 4)
+            //not implemented yet.
+            CheckBox {
+                id: passwordRememberSwitch
+                //activeFocusOnPress: false
+            }
+
+            Label {
+                id: passwordRememberLabel
+                text : i18n.tr("Remember password")
+                objectName: "passwordRememberLabel"
+                fontSize: "medium"
+                color: Theme.palette.selected.backgroundText
+                elide: Text.ElideRight
+                height: passwordRememberSwitch.height
+                verticalAlignment: Text.AlignVCenter
+                MouseArea {
+                    anchors {
+                        fill: parent
+                    }
+                    onClicked: {
+                        passwordRememberSwitch.checked =
+                                !passwordRememberSwitch.checked
+                    }
+                }
+            }
 
         }
         //ListItem.ThinDivider {visible: securityList.selectedIndex != 0}
@@ -676,13 +689,13 @@ Component {
             enabled: settingsValid()
             onTriggered: {
                 DbusHelper.connect(
-                    networkname.text,
-                    securityList.selectedIndex,
-                    authList.selectedIndex,
-                                [username.text, anonymousIdentity.text],
-                                password.text,
-                                [cacert.text, usercert.text, userprivatekey.text, pacFile.text] ,
-                                p2authList.selectedIndex);
+                            networkname.text,
+                            securityList.selectedIndex,
+                            authList.selectedIndex,
+                            [username.text, anonymousIdentity.text],
+                            password.text,
+                            [cacert.text, usercert.text, userprivatekey.text, pacFile.text] ,
+                            p2authList.selectedIndex);
                 otherNetworkDialog.state = "CONNECTING";
             }
         }
@@ -714,15 +727,15 @@ Component {
                 */
                 if (otherNetworkDialog.state === "CONNECTING") {
                     switch (newState) {
-                        case 120:
-                            feedback.text = common.reasonToString(reason);
-                            otherNetworkDialog.state = "FAILED";
-                            break;
-                        case 100:
-                            /* connection succeeded only if it was us that
+                    case 120:
+                        feedback.text = common.reasonToString(reason);
+                        otherNetworkDialog.state = "FAILED";
+                        break;
+                    case 100:
+                        /* connection succeeded only if it was us that
                             created it */
-                            otherNetworkDialog.state = "SUCCEEDED";
-                            break;
+                        otherNetworkDialog.state = "SUCCEEDED";
+                        break;
                     }
                 }
             }
