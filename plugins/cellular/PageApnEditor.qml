@@ -136,7 +136,11 @@ ItemPage {
                             i18n.tr('MMS'),
                             i18n.tr('LTE'), ]
                     id: typeSel
-                    objectName: "type"
+                    objectName: "typeselector"
+                    delegate: OptionSelectorDelegate {
+                        showDivider: false
+                        objectName: "type_" + index
+                    }
                     width: parent.width
                     KeyNavigation.tab: name
                 }

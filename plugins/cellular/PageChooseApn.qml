@@ -188,23 +188,40 @@ ItemPage {
     Component {
         id: apnDelegate
 
-        Item {
-            id: apnItem
-            anchors { left: parent.left; right: parent.right }
-            height: childrenRect.height
+        ListItem.Base {
+            id: apnListItem
+            height: units.gu(6)
+            removable: true
+            confirmRemoval: true
+            progression: true
 
-            ListItem.Standard {
+            onItemRemoved: Manager.removeContext(path);
+            onClicked: {
+                editor = pageStack.push(Qt.resolvedUrl("PageApnEditor.qml"), {
+                    manager:         Manager,
+                    contextQML:      qml,
+                    mmsModel:        mmsContexts,
+                    internetModel:   internetContexts,
+                    iaModel:         iaContexts
+                });
+            }
+
+            MouseArea {
                 id: checkArea
-                width: units.gu(4.75)
-                highlightWhenPressed: false
+                anchors {
+                    left: parent.left
+                    verticalCenter: parent.verticalCenter
+                }
+                width: units.gu(5)
+                height: units.gu(6)
                 onClicked: check.trigger()
 
                 CheckBox {
                     id: check
                     objectName: qml.accessPointName + "_preferred"
                     anchors {
+                        left: parent.left
                         verticalCenter: parent.verticalCenter
-                        right: parent.right
                     }
                     property bool serverChecked: qml.preferred
                     onServerCheckedChanged: checked = serverChecked
@@ -218,30 +235,50 @@ ItemPage {
                 }
             }
 
-            ListItem.Subtitled {
-                id: listElement
+            Item  {
+                id: middleVisuals
                 anchors {
                     left: checkArea.right
-                    right: apnItem.right
-                }
-                removable: true
-                confirmRemoval: true
-                progression: true
-                text: qml.name
-                subText: qml.typeString
-                onItemRemoved: Manager.removeContext(path);
-                onClicked: {
-                    editor = pageStack.push(Qt.resolvedUrl("PageApnEditor.qml"), {
-                        manager:         Manager,
-                        contextQML:      qml,
-                        mmsModel:        mmsContexts,
-                        internetModel:   internetContexts,
-                        iaModel:         iaContexts
-                    });
+                    right: parent.right
+                    verticalCenter: parent.verticalCenter
                 }
 
+                height: childrenRect.height +
+                        apnItemName.anchors.topMargin +
+                        apnItemType.anchors.bottomMargin
+
+                Label {
+                    id: apnItemName
+                    anchors {
+                        top: parent.top
+                        left: parent.left
+                        right: parent.right
+                    }
+
+                    text: qml.name
+                    elide: Text.ElideRight
+                    opacity: apnListItem.enabled ? 1.0 : 0.5
+                }
+
+
+                Label {
+                    id: apnItemType
+                    anchors {
+
+                        left: parent.left
+                        right: parent.right
+                        top: apnItemName.bottom
+                    }
+
+                    text: qml.typeString
+                    color: Theme.palette.normal.backgroundText
+                    fontSize: "small"
+                    wrapMode: Text.Wrap
+                    maximumLineCount: 5
+                }
             }
         }
+
     }
 
     Connections {
