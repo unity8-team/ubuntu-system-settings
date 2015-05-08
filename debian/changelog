@@ -1,3 +1,9 @@
+ubuntu-system-settings (0.3+15.04.20150508-ppa2) vivid; urgency=medium
+
+  * tests and focus issues 
+
+ -- Jonas G. Drange <jonas.drange@canonical.com>  Fri, 08 May 2015 11:22:12 +0200
+
 ubuntu-system-settings (0.3+15.04.20150407-0ubuntu1) vivid; urgency=medium
 
   [ Alex Tu ]

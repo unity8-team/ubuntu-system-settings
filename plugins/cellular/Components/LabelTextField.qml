@@ -40,16 +40,15 @@ TextField {
             onErrorChanged: error ? UbuntuColors.orange : color
             color: Theme.palette.selected.background
             anchors.fill: parent
-            visible: !field.readOnly
+            visible: field.activeFocus
         }
         color: UbuntuColors.lightAubergine
     }
-    readOnly: !activeFocus
 
     // Ubuntu.Keyboard
     // TRANSLATORS: This is the text that will be used on the "return" key for the virtual keyboard,
     // this word must be less than 5 characters
     InputMethod.extensions: { "enterKeyText": i18n.tr("Next") }
     KeyNavigation.tab: next
-    Keys.onReturnPressed: next
+    Keys.onReturnPressed: next.forceActiveFocus()
 }

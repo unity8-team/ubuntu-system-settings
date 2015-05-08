@@ -173,23 +173,24 @@ function makeMeVisible(item) {
         return;
     }
 
-    activeItem = item;
-    var position = flickable.contentItem.mapFromItem(item, 0, activeItem.y);
+    root.activeItem = item;
+
+    var position = scrollArea.contentItem.mapFromItem(item, 0, root.activeItem.y);
 
     // check if the item is already visible
-    var bottomY = flickable.contentY + flickable.height;
+    var bottomY = scrollArea.contentY + scrollArea.height;
     var itemBottom = position.y + (item.height * 3); // extra margin
-    if (position.y >= flickable.contentY && itemBottom <= bottomY) {
+    if (position.y >= scrollArea.contentY && itemBottom <= bottomY) {
         return;
     }
 
     // if it is not, try to scroll and make it visible
-    var targetY = itemBottom - flickable.height;
+    var targetY = itemBottom - scrollArea.height;
     if (targetY >= 0 && position.y) {
-        flickable.contentY = targetY;
-    } else if (position.y < flickable.contentY) {
+        scrollArea.contentY = targetY;
+    } else if (position.y < scrollArea.contentY) {
         // if it is hidden at the top, also show it
-        flickable.contentY = position.y;
+        scrollArea.contentY = position.y;
     }
-    flickable.returnToBounds();
+    scrollArea.returnToBounds();
 }

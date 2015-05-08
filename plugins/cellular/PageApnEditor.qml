@@ -116,29 +116,35 @@ ItemPage {
         Editor.ready();
     }
 
-    NumberAnimation {
-        id: scrollerAnimation
-        duration: UbuntuAnimation.SnapDuration
-        easing: UbuntuAnimation.StandardEasing
-        target: flickable
-        property: "contentY"
+    // We need to disable keyboard anchoring because we implement the
+    // KeyboardRectangle pattern
+    Binding {
+        target: main
+        property: "anchorToKeyboard"
+        value: false
     }
 
-    // Main column, holding all controls and buttons.
+    flickable: null
     Flickable {
-        id: flickable
-        objectName: "flickable"
-        anchors.fill: parent
+        id: scrollArea
+        objectName: "scrollArea"
+
+        // this is necessary to avoid the page to appear below the header
+        clip: true
+        flickableDirection: Flickable.VerticalFlick
+        anchors {
+            fill: parent
+            bottomMargin: keyboard.height
+        }
+        contentHeight: contents.height + units.gu(2)
         contentWidth: parent.width
-        contentHeight: contentItem.childrenRect.height
-        boundsBehavior: (contentHeight > root.height) ?
-            Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
 
         //after add a new field we need to wait for the contentHeight to
         // change to scroll to the correct position
         onContentHeightChanged: Editor.makeMeVisible(root.activeItem)
 
         Column {
+            id: contents
             anchors { left: parent.left; right: parent.right; }
 
             // Type controls
@@ -177,9 +183,9 @@ ItemPage {
                 LocalComponents.LabelTextField {
                     id: name
                     objectName: "name"
-                    inputMethodHints: Qt.ImhNoAutoUppercase | Qt.ImhNoPredictiveText
-                    placeholderText: i18n.tr("Enter a name that describes this
-                    context")
+                    inputMethodHints: Qt.ImhNoAutoUppercase |
+                                      Qt.ImhNoPredictiveText
+                    placeholderText: i18n.tr("Enter a name describing the APN")
                     next: accessPointName
                     Component.onCompleted: forceActiveFocus()
                 }
@@ -202,7 +208,8 @@ ItemPage {
                                       Qt.ImhNoPredictiveText
                     placeholderText: i18n.tr("Enter the name of the access point")
                     next: isMms || isCombo ? messageCenter : username
-                    onActiveFocusChanged: if (activeFocus) Editor.makeMeVisible(parent)
+                    onActiveFocusChanged: if (activeFocus) Editor.makeMeVisible(
+                        accessPointName)
                 }
             }
 
@@ -228,7 +235,7 @@ ItemPage {
                         if (!focus && text.length > 0) {
                             text = Editor.setHttp(text);
                         }
-                        if (activeFocus) Editor.makeMeVisible(parent);
+                        if (activeFocus) Editor.makeMeVisible(messageCenter);
                     }
                 }
             }
@@ -257,7 +264,8 @@ ItemPage {
                             movePortDelay.running = true;
                         }
                     }
-                    onActiveFocusChanged: if (activeFocus) Editor.makeMeVisible(parent)
+                    onActiveFocusChanged: if (activeFocus) Editor.makeMeVisible(
+                        messageProxy)
                 }
 
                 Timer {
@@ -305,7 +313,8 @@ ItemPage {
                     validator: portValidator
                     placeholderText: i18n.tr("Enter message proxy port")
                     next: username
-                    onActiveFocusChanged: if (activeFocus) Editor.makeMeVisible(parent)
+                    onActiveFocusChanged: if (activeFocus) Editor.makeMeVisible(
+                        port)
                 }
 
                 RegExpValidator {
@@ -330,7 +339,8 @@ ItemPage {
                                       Qt.ImhSensitiveData
                     placeholderText: i18n.tr("Enter username")
                     next: password
-                    onActiveFocusChanged: if (activeFocus) Editor.makeMeVisible(parent)
+                    onActiveFocusChanged: if (activeFocus) Editor.makeMeVisible(
+                        username)
                 }
             }
 
@@ -353,7 +363,8 @@ ItemPage {
                                       Qt.ImhSensitiveData
                     placeholderText: i18n.tr("Enter password")
                     next: password
-                    onActiveFocusChanged: if (activeFocus) Editor.makeMeVisible(parent)
+                    onActiveFocusChanged: if (activeFocus) Editor.makeMeVisible(
+                        password)
                 }
             }
 
@@ -406,10 +417,12 @@ ItemPage {
 
     LocalComponents.KeyboardRectangle {
         id: keyboard
-
+        anchors.bottom: parent.bottom
         onHeightChanged: {
-            if (activeItem) {
-                Editor.makeMeVisible(root.activeItem)
+            console.warn('onHeightChanged...');
+            if (root.activeItem) {
+                console.warn('onHeightChanged will make visible', root.activeItem.objectName);
+                Editor.makeMeVisible(root.activeItem);
             }
         }
     }
