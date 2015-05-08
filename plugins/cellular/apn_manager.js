@@ -142,8 +142,6 @@ function _createQml (paths) {
             ctx = createContextQml(path);
             console.warn('_createQml created', path, ctx.name, ctx.type);
 
-            ctx.preferredChanged.connect(contextPreferredChanged.bind(ctx));
-
             if (!ctx.name) {
                 ctx.nameChanged.connect(contextNameChanged.bind(ctx));
             } else {
@@ -226,11 +224,6 @@ function addContextToModel (ctx, type) {
     }
 
     model = getModelFromType(type);
-
-    if (ctx.active) {
-        model.current = ctx;
-    }
-
     model.append(data);
 }
 
@@ -276,56 +269,6 @@ function contextRemoved (path) {
 function typeDetermined (type) {
     console.warn('typeDetermined', type, this.contextPath);
     addContextToModel(this, type);
-}
-
-/**
- * Handler for activity changes in contexts.
- * Sets itself as the 'current' value on the appropriate model, if active.
- * If deactivated, it nullifies the 'current' value.
- *
- * @param {Boolean} active's new value
-*/
-function contextActiveChanged (active) {
-
-    // We can't do anything sensible when the type is undetermined.
-    if (!this.type) {
-        return;
-    }
-
-    var model = getModelFromType(this.type);
-
-    if (active) {
-        model.current = this;
-    } else {
-        if (model.current === this) {
-            model.current = null;
-        }
-    }
-}
-
-/**
- * Handler for preferred changes in contexts.
- * Sets itself as the 'current' value on the appropriate model, if preferred.
- * If deprefered, it nullifies the 'current' value.
- *
- * @param {Boolean} active's new value
-*/
-function contextPreferredChanged (preferred) {
-
-    // We can't do anything sensible when the type is undetermined.
-    if (!this.type) {
-        return;
-    }
-
-    var model = getModelFromType(this.type);
-
-    if (preferred) {
-        model.current = this;
-    } else {
-        if (model.current === this) {
-            model.current = null;
-        }
-    }
 }
 
 /**

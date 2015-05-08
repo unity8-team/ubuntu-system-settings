@@ -20,7 +20,6 @@
  */
 
 import QtQuick 2.0
-import QtQuick.Layouts 1.1
 import SystemSettings 1.0
 import Ubuntu.Components 1.1
 import Ubuntu.Components.Popups 1.0
@@ -51,6 +50,10 @@ ItemPage {
 
     property bool isValid: Editor.isValid()
 
+    // priv
+    property bool _edgeReady: false
+    property QtObject activeItem: null
+
     // When a user has requested saving a context.
     signal saving ()
 
@@ -72,6 +75,7 @@ ItemPage {
             head: root.head
             actions: [
                 Action {
+                    objectName: "saveApn"
                     iconName: "ok"
                     enabled: isValid
                     onTriggered: Editor.saving()
@@ -109,15 +113,30 @@ ItemPage {
         if (contextQML) {
             Editor.populate(contextQML);
         }
+        Editor.ready();
+    }
+
+    NumberAnimation {
+        id: scrollerAnimation
+        duration: UbuntuAnimation.SnapDuration
+        easing: UbuntuAnimation.StandardEasing
+        target: flickable
+        property: "contentY"
     }
 
     // Main column, holding all controls and buttons.
     Flickable {
+        id: flickable
+        objectName: "flickable"
         anchors.fill: parent
         contentWidth: parent.width
         contentHeight: contentItem.childrenRect.height
         boundsBehavior: (contentHeight > root.height) ?
             Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
+
+        //after add a new field we need to wait for the contentHeight to
+        // change to scroll to the correct position
+        onContentHeightChanged: Editor.makeMeVisible(root.activeItem)
 
         Column {
             anchors { left: parent.left; right: parent.right; }
@@ -136,10 +155,10 @@ ItemPage {
                             i18n.tr('MMS'),
                             i18n.tr('LTE'), ]
                     id: typeSel
-                    objectName: "typeselector"
+                    objectName: "typeSelector"
                     delegate: OptionSelectorDelegate {
                         showDivider: false
-                        objectName: "type_" + index
+                        objectName: "type_" + Editor.indexToType(index)
                     }
                     width: parent.width
                     KeyNavigation.tab: name
@@ -161,7 +180,8 @@ ItemPage {
                     inputMethodHints: Qt.ImhNoAutoUppercase | Qt.ImhNoPredictiveText
                     placeholderText: i18n.tr("Enter a name that describes this
                     context")
-                    KeyNavigation.tab: accessPointName
+                    next: accessPointName
+                    Component.onCompleted: forceActiveFocus()
                 }
             }
 
@@ -181,7 +201,8 @@ ItemPage {
                                       Qt.ImhNoAutoUppercase |
                                       Qt.ImhNoPredictiveText
                     placeholderText: i18n.tr("Enter the name of the access point")
-                    KeyNavigation.tab: isMms || isCombo ? messageCenter : username
+                    next: isMms || isCombo ? messageCenter : username
+                    onActiveFocusChanged: if (activeFocus) Editor.makeMeVisible(parent)
                 }
             }
 
@@ -201,13 +222,14 @@ ItemPage {
                     inputMethodHints: Qt.ImhUrlCharactersOnly |
                                       Qt.ImhNoAutoUppercase |
                                       Qt.ImhNoPredictiveText
+                    placeholderText: i18n.tr("Enter message center")
+                    next: messageProxy
                     onFocusChanged: {
                         if (!focus && text.length > 0) {
                             text = Editor.setHttp(text);
                         }
+                        if (activeFocus) Editor.makeMeVisible(parent);
                     }
-                    placeholderText: i18n.tr("Enter message center")
-                    KeyNavigation.tab: messageProxy
                 }
             }
 
@@ -227,14 +249,15 @@ ItemPage {
                     inputMethodHints: Qt.ImhUrlCharactersOnly |
                                       Qt.ImhNoAutoUppercase |
                                       Qt.ImhNoPredictiveText
+                    placeholderText: i18n.tr("Enter message proxy")
+                    next: port
                     onTextChanged: {
                         movePortDelay.running = false;
                         if (text.search(/\:\d+$/) >= 0) {
                             movePortDelay.running = true;
                         }
                     }
-                    placeholderText: i18n.tr("Enter message proxy")
-                    KeyNavigation.tab: port
+                    onActiveFocusChanged: if (activeFocus) Editor.makeMeVisible(parent)
                 }
 
                 Timer {
@@ -258,7 +281,6 @@ ItemPage {
                         if (prt) {
                             messageProxy.text = textSansPort;
                             port.text = prt;
-                            port.forceActiveFocus();
                         }
                     }
                 }
@@ -278,12 +300,12 @@ ItemPage {
                     id: port
                     objectName: "port"
                     maximumLength: 5
-                    inputMethodHints: Qt.ImhDigitsOnly |
-                                      Qt.ImhNoAutoUppercase |
+                    inputMethodHints: Qt.ImhNoAutoUppercase |
                                       Qt.ImhNoPredictiveText
                     validator: portValidator
                     placeholderText: i18n.tr("Enter message proxy port")
-                    KeyNavigation.tab: username
+                    next: username
+                    onActiveFocusChanged: if (activeFocus) Editor.makeMeVisible(parent)
                 }
 
                 RegExpValidator {
@@ -304,9 +326,11 @@ ItemPage {
                 LocalComponents.LabelTextField {
                     id: username
                     objectName: "username"
-                    inputMethodHints: Qt.ImhNoPredictiveText | Qt.ImhSensitiveData
+                    inputMethodHints: Qt.ImhNoPredictiveText |
+                                      Qt.ImhSensitiveData
                     placeholderText: i18n.tr("Enter username")
-                    KeyNavigation.tab: password
+                    next: password
+                    onActiveFocusChanged: if (activeFocus) Editor.makeMeVisible(parent)
                 }
             }
 
@@ -328,6 +352,8 @@ ItemPage {
                                       Qt.ImhNoPredictiveText |
                                       Qt.ImhSensitiveData
                     placeholderText: i18n.tr("Enter password")
+                    next: password
+                    onActiveFocusChanged: if (activeFocus) Editor.makeMeVisible(parent)
                 }
             }
 
@@ -375,6 +401,16 @@ ItemPage {
         onTriggered: {
             Editor.updateContextQML(ctx);
             root.saved();
+        }
+    }
+
+    LocalComponents.KeyboardRectangle {
+        id: keyboard
+
+        onHeightChanged: {
+            if (activeItem) {
+                Editor.makeMeVisible(root.activeItem)
+            }
         }
     }
 }

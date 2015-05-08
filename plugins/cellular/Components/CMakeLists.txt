@@ -1,6 +1,7 @@
 set(QML_SOURCES
     DataMultiSim.qml
     DefaultSim.qml
+    KeyboardRectangle.qml
     LabelTextField.qml
     MultiSim.qml
     NoSim.qml
@@ -8,6 +9,7 @@ set(QML_SOURCES
     Sim.qml
     SimEditor.qml
     SingleSim.qml
+    StandardAnimation.qml
 )
 install(FILES ${QML_SOURCES} DESTINATION ${PLUGIN_QML_DIR}/cellular/Components)
 

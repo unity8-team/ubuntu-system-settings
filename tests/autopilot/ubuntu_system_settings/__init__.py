@@ -261,10 +261,16 @@ class CellularPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
         chooseCarrierPage.set_carrier(carrier)
 
     @autopilot.logging.log_action(logger.debug)
-    def open_apn_editor(self, type, sim=None):
+    def open_apn_editor(self, name, sim=None):
         carrierApnPage = self._click_carrier_apn()
         chooseApnPage = carrierApnPage.open_apn(sim)
-        return chooseApnPage.open_mms()
+        return chooseApnPage.open(name)
+
+    @autopilot.logging.log_action(logger.debug)
+    def delete_apn(self, name, sim=None):
+        carrierApnPage = self._click_carrier_apn()
+        chooseApnPage = carrierApnPage.open_apn(sim)
+        return chooseApnPage.delete(name)
 
     @autopilot.logging.log_action(logger.debug)
     def _click_carrier_apn(self):
@@ -418,28 +424,58 @@ class PageChooseApn(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
     """Autopilot helper for apn editor page"""
 
     @autopilot.logging.log_action(logger.debug)
-    def open_mms(self):
-        return self._open_editor('mms')
+    def open(self, name):
+        return self._open_editor(name)
 
     @autopilot.logging.log_action(logger.debug)
-    def open_internet(self):
-        return self._open_editor('internet')
+    def delete(self, name):
+        self._delete(name)
 
     @autopilot.logging.log_action(logger.debug)
-    def open_ia(self):
-        return self._open_editor('ia')
+    def _delete(self, name):
+        item = self.wait_select_single('Base', objectName='edit_%s' % name)
+        item.swipe_to_delete()
+        item.confirm_removal()
 
     @autopilot.logging.log_action(logger.debug)
-    def _open_editor(self, type):
-        item = self.select_single(objectName="edit_%s" % type)
-        self.pointing_device.click_object(item)
+    def _open_editor(self, name):
+        if name:
+            item = self.select_single(objectName='edit_%s' % name)
+            self.pointing_device.click_object(item)
+        else:
+            main_view = self.get_root_instance().select_single(
+                objectName='systemSettingsMainView')
+            header = main_view.select_single('AppHeader')
+            header.click_action_button('newApn')
         return self.get_root_instance().wait_select_single(
-            objectName='customApnEditor')
+            objectName='apnEditor')
 
 
-class CustomApnEditor(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
+class PageApnEditor(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
 
-    """Autopilot helper for custom apn editor page"""
+    """Autopilot helper for apn editor page"""
+
+    flickable = None
+
+    def __init__(self, *args):
+        super().__init__(*args)
+        self.flickable = self.select_single(objectName='flickable')
+
+    @autopilot.logging.log_action(logger.debug)
+    def set_type(self, t):
+        selector = self.select_single(
+            'ItemSelector', objectName='typeSelector')
+        self.pointing_device.click_object(selector)
+        selector.currentlyExpanded.wait_for(True)
+        item = self.select_single(objectName='type_%s' % t)
+
+        # A bit dirty
+        while selector.currentlyExpanded:
+            self.pointing_device.click_object(item)
+
+    @autopilot.logging.log_action(logger.debug)
+    def set_name(self, new_name):
+        self._populate_field('name', new_name)
 
     @autopilot.logging.log_action(logger.debug)
     def set_access_point_name(self, new_name):
@@ -470,13 +506,16 @@ class CustomApnEditor(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
         self._populate_field('password', new_password)
 
     def _populate_field(self, field, text):
-        pwdfield = self.select_single('TextField', objectName=field)
-        pwdfield.write(text)
+        f = self.select_single('TextField', objectName=field)
+        self.flickable.swipe_child_into_view(f)
+        f.write(text)
 
     @autopilot.logging.log_action(logger.debug)
-    def activate(self):
-        item = self.select_single(objectName="activateButton")
-        self.pointing_device.click_object(item)
+    def save(self):
+        main_view = self.get_root_instance().select_single(
+            objectName='systemSettingsMainView')
+        header = main_view.select_single('AppHeader')
+        header.click_action_button('saveApn')
 
 
 class SecurityPage(ubuntuuitoolkit.QQuickFlickable):

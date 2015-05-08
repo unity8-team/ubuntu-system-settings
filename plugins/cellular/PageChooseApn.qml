@@ -53,8 +53,6 @@ ItemPage {
      *     label: Label to put on the button that spawns the editor.
      *     title: Title that goes in the editor.
      *     type: A code that tells us what context type this model will have.
-     *     current: Falsy if no context is active, and a OfonoConnectionContext
-     *              if one is active.
      *
      * Model objects will have the following roles:
      *     path: the path of the context
@@ -65,21 +63,18 @@ ItemPage {
         id: mmsContexts
         property string title: i18n.tr("MMS APN")
         property string type: 'mms'
-        property var current
     }
 
     ListModel {
         id: internetContexts
         property string title: i18n.tr("Internet APN")
         property string type: 'internet'
-        property var current
     }
 
     ListModel {
         id: iaContexts
         property string title: i18n.tr("LTE APN")
         property string type: 'ia'
-        property var current
     }
 
     Component {
@@ -113,6 +108,7 @@ ItemPage {
                 },
                 Action {
                     iconName: "add"
+                    objectName: "newApn"
                     onTriggered: {
                         editor = pageStack.push(Qt.resolvedUrl("PageApnEditor.qml"), {
                             manager:         Manager,
@@ -190,6 +186,8 @@ ItemPage {
 
         ListItem.Base {
             id: apnListItem
+            property alias text: apnItemName.text
+            objectName: "edit_" + qml.name
             height: units.gu(6)
             removable: true
             confirmRemoval: true

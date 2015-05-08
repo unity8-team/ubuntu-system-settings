@@ -19,10 +19,12 @@
 import QtQuick 2.0
 import Ubuntu.Components 1.1
 import Ubuntu.Components.Themes.Ambiance 0.1
+import Ubuntu.Keyboard 0.1
 import SystemSettings 1.0
 
 TextField {
     id: field
+    property var next
     anchors {
         left: parent.left
         right: parent.right
@@ -43,4 +45,11 @@ TextField {
         color: UbuntuColors.lightAubergine
     }
     readOnly: !activeFocus
+
+    // Ubuntu.Keyboard
+    // TRANSLATORS: This is the text that will be used on the "return" key for the virtual keyboard,
+    // this word must be less than 5 characters
+    InputMethod.extensions: { "enterKeyText": i18n.tr("Next") }
+    KeyNavigation.tab: next
+    Keys.onReturnPressed: next
 }
