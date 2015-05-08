@@ -279,6 +279,13 @@ ItemPage {
 
     }
 
+    Timer {
+        id: preferredCheck
+        running: true
+        interval: 1000
+        onTriggered: Manager.checkPreferred();
+    }
+
     Connections {
         target: sim.connMan
 

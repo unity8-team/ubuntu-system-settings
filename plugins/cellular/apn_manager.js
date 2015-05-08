@@ -355,3 +355,32 @@ function reset () {
     sim.connMan.contexts.forEach(removeContext);
     SessionService.reboot();
 }
+
+function checkPreferred () {
+    var models = [internetContexts, iaContexts];
+
+    models.forEach(function (model) {
+        var i;
+        var havePreferred = false;
+        var active;
+        var ctx;
+        for (i = 0; i < model.count; i++) {
+            ctx = model.get(i).qml;
+            if (ctx.preferred) {
+                havePreferred = true;
+            }
+            if (ctx.active) {
+                active = ctx;
+            }
+        }
+
+        // We set the last active one as the preferred.
+        // TODO: Better logic to handle this?
+        if (!havePreferred && active) {
+            active.preferred = true;
+            console.warn('Setting', active.name, 'as preferred since we had no preferred from before.');
+        }
+
+    });
+}
+

@@ -52,6 +52,7 @@ ItemPage {
 
     // priv
     property bool _edgeReady: false
+
     property QtObject activeItem: null
 
     // When a user has requested saving a context.
