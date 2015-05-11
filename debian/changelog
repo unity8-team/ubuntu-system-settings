@@ -1,3 +1,166 @@
+ubuntu-system-settings (0.3+15.04.20150430.1-0ubuntu1) vivid; urgency=medium
+
+  [ CI Train Bot ]
+  * New rebuild forced.
+  * Resync trunk.
+
+  [ Ken VanDine ]
+  * Include supported frameworks and arch when checking for updates (LP:
+    #1449582)
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Thu, 30 Apr 2015 19:38:05 +0000
+
+ubuntu-system-settings (0.3+15.04.20150422.1-0ubuntu1) vivid; urgency=medium
+
+  [ CI Train Bot ]
+  * New rebuild forced.
+
+  [ Michael Sheldon ]
+  * Allow system settings to find keyboard plugins in additional
+    locations specified via gsettings. (LP: #1445532)
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Wed, 22 Apr 2015 20:23:14 +0000
+
+ubuntu-system-settings (0.3+15.04.20150422-0ubuntu1) vivid; urgency=medium
+
+  [ Ken VanDine ]
+  * Don't call a test from inside another test
+
+  [ Leonardo Arias Fonseca ]
+  * Fix the base class used when launching the app in autopilot tests.
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Wed, 22 Apr 2015 18:48:35 +0000
+
+ubuntu-system-settings (0.3+15.04.20150420-0ubuntu1) vivid; urgency=medium
+
+  [ CI Train Bot ]
+  * New rebuild forced.
+  * Resync trunk.
+
+  [ Ken VanDine ]
+  * Error checking for plugin instance and pageComponent (LP: #1438633)
+
+  [ Nick Dedekind ]
+  * Fix for laggy backends (lp#1390136) (LP: #1390136)
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Mon, 20 Apr 2015 15:48:06 +0000
+
+ubuntu-system-settings (0.3+15.04.20150413-0ubuntu1) vivid; urgency=medium
+
+  [ CI Train Bot ]
+  * New rebuild forced.
+  * Resync trunk.
+
+  [ Sebastien Bacher ]
+  * [battery] refresh the canvas when getting focus to avoid outdated
+    info (LP: #1435424)
+  * [bluetooth, sim] Get some dialogs to focus their text entry by
+    default
+  * [security-privacy] give the focus to the right entry, if the current
+    unlock method is swipe then there is no "current password" so the
+    new input line should be the focussed one (LP: #1438049)
+  * bluetooth: check if the device is valid before getting details
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Mon, 13 Apr 2015 15:08:56 +0000
+
+ubuntu-system-settings (0.3+15.04.20150407-0ubuntu1) vivid; urgency=medium
+
+  [ Alex Tu ]
+  * for Arale device: fixed:LP#1417459 Storage size not correct (LP:
+    #1433024, #1417459)
+
+  [ CI Train Bot ]
+  * New rebuild forced.
+
+  [ alextu ]
+  * for Arale device: fixed:LP#1417459 Storage size not correct (LP:
+    #1433024, #1417459)
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Tue, 07 Apr 2015 21:11:26 +0000
+
+ubuntu-system-settings (0.3+15.04.20150403-0ubuntu1) vivid; urgency=medium
+
+  [ CI Train Bot ]
+  * Resync trunk.
+
+  [ jonas-drange ]
+  * Removes trailing spaces, as well as spaces on empty lines.
+  * fix tests that uses the networkmanager template
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Fri, 03 Apr 2015 16:51:57 +0000
+
+ubuntu-system-settings (0.3+15.04.20150401.2-0ubuntu1) vivid; urgency=medium
+
+  [ CI Train Bot ]
+  * New rebuild forced.
+
+  [ Ken VanDine ]
+  * Fixed handling of pinRetries Improved dbusmock template for ofono to
+    support testing LockPin, UnlockPin, ChangePin and EnterPin (LP:
+    #1415850)
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Wed, 01 Apr 2015 18:30:16 +0000
+
+ubuntu-system-settings (0.3+15.04.20150401-0ubuntu1) vivid; urgency=medium
+
+  [ CI Train Bot ]
+  * New rebuild forced.
+
+  [ jonas-drange ]
+  * [cellular/apn] make apn entry enabled always (LP: #1388046)
+  * [cellular/apn] no creation of custom contexts on editor exit (LP:
+    #1433278)
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Wed, 01 Apr 2015 14:09:52 +0000
+
+ubuntu-system-settings (0.3+15.04.20150331.2-0ubuntu1) vivid; urgency=medium
+
+  [ CI Train Bot ]
+  * Resync trunk.
+
+  [ Roberto Alsina ]
+  * Use per-package notification settings instead of per-app and per-
+    scope. (LP: #1434181)
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Tue, 31 Mar 2015 19:39:17 +0000
+
+ubuntu-system-settings (0.3+15.04.20150325-0ubuntu1) vivid; urgency=medium
+
+  [ CI Train Bot ]
+  * Resync trunk.
+
+  [ jonas-drange ]
+  * [cellular] apn page does not overwrite empty, provisioned contexts
+    (LP: #1415495)
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Wed, 25 Mar 2015 22:22:32 +0000
+
+ubuntu-system-settings (0.3+15.04.20150317-0ubuntu1) vivid; urgency=medium
+
+  [ CI Train Bot ]
+  * Resync trunk.
+
+  [ Ken VanDine ]
+  * reorder includes to be alphabetical and removed a blank line
+
+  [ Timo Jyrinki ]
+  * Don't build-depend on Qt private header packages. (LP: #1427991)
+    (LP: #1427991)
+
+  [ jonas-drange ]
+  * [sound] show other vibrate setting
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Tue, 17 Mar 2015 18:02:08 +0000
+
+ubuntu-system-settings (0.3+15.04.20150305-0ubuntu1) vivid; urgency=medium
+
+  [ Sebastien Bacher ]
+  * bluetooth: disable device visiblity when switching out, that way
+    it's not staying on if the settings are closed from the switcher or
+    if the user switch to another software (LP: #1419874)
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Thu, 05 Mar 2015 20:53:03 +0000
+
 ubuntu-system-settings (0.3+15.04.20150224-0ubuntu1) vivid; urgency=medium
 
   [ Mathieu Trudel-Lapierre ]

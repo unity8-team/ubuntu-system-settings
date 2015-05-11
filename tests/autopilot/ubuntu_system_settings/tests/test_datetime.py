@@ -10,7 +10,7 @@ import subprocess
 from time import sleep
 
 from autopilot.matchers import Eventually
-from testtools.matchers import Equals, NotEquals, GreaterThan
+from testtools.matchers import Equals, GreaterThan
 
 from ubuntu_system_settings.tests import UbuntuSystemSettingsTestCase
 from ubuntu_system_settings.utils.i18n import ugettext as _
@@ -69,72 +69,61 @@ class TimeDateTestCase(UbuntuSystemSettingsTestCase,
         self.main_view.pointing_device.move_to_object(
             text_field)
 
+    def search_kb_type(self, kb_type):
+        self.click_tz_search_field()
+        self.keyboard.type(kb_type)
+        return self.main_view.wait_select_single(
+            objectName='locationsListView'
+        )
+
     def test_time_date_page(self):
         """ Checks whether Time & Date page is available """
-        self.assertThat(self.page, NotEquals(None))
-        self.assertThat(self.page.title, Equals(_('Time & Date')))
+        self.assertEqual(self.page.title, _('Time & Date'))
 
     def test_tz_list_initially_empty(self):
         """ Checks that no list is displayed initially """
         self.main_view.scroll_to_and_click(self.tz_page)
         labelVisible = self.main_view.wait_select_single(
             objectName='nothingLabel').visible
-        self.assertThat(labelVisible, Equals(True))
+        self.assertEqual(labelVisible, True)
 
     def test_searching_tz(self):
         """ Check that searching for a valid location shows something """
-        self.click_tz_search_field()
-        self.keyboard.type('London, United Kingdom')
-        listview = self.main_view.select_single(
-            objectName='locationsListView'
-        )
+        listview = self.search_kb_type('London, United Kingdom')
         self.assertThat(listview.count, Eventually(GreaterThan(0)))
 
     def test_searching_tz_not_found(self):
         """ Check that searching for an invalid location shows nothing """
-        self.click_tz_search_field()
-        self.keyboard.type('Oh no you don\'t!')
-        listview = self.main_view.select_single(
-            objectName='locationsListView'
-        )
-        self.assertThat(listview.count, Equals(0))
+        listview = self.search_kb_type('Oh no you don\'t!')
+        self.assertEqual(listview.count, 0)
         labelVisible = self.main_view.select_single(
             objectName='nothingLabel').visible
-        self.assertThat(labelVisible, Equals(True))
+        self.assertEqual(labelVisible, True)
 
     def test_manual_tz_selection(self):
         """ Check that manually selecting a timezone sets it properly """
-        self.click_tz_search_field()
-        self.keyboard.type('London, United Kingdom')
-        listview = self.main_view.select_single(
-            objectName='locationsListView'
-        )
+        listview = self.search_kb_type('London, United Kingdom')
         london = TimeDateTestCase.wait_select_listview_first(listview)
         self.main_view.pointing_device.click_object(london)
-        header = self.main_view.select_single(
-            objectName='MainView_Header'
-        )
-        self.assertThat(header.title, Eventually(Equals(_('Time & Date'))))
-        self.assertThat(self.tz_page.text, Equals('Europe/London'))
+        self.assertThat(self.tz_page.text, Eventually(Equals('Europe/London')))
 
     def test_same_tz_selection(self):
         """Check that manually setting a timezone then setting the same one
         doesn't take you back to the index.
         """
-        self.test_manual_tz_selection()
-        self.click_tz_search_field()
+        # Set tz to London
+        listview = self.search_kb_type('London, United Kingdom')
+        london = TimeDateTestCase.wait_select_listview_first(listview)
+        self.main_view.pointing_device.click_object(london)
+        sleep(2)
         # This is also in Europe/London
-        self.keyboard.type('Preston, United Kingdom')
-        listview = self.main_view.select_single(
-            objectName='locationsListView'
-        )
-
+        listview = self.search_kb_type('Preston, United Kingdom')
         preston = TimeDateTestCase.wait_select_listview_first(listview)
         self.main_view.pointing_device.click_object(preston)
 
         # The timer is 1 second, wait and see that we haven't moved pages
         sleep(2)
-        header = self.main_view.select_single(
+        header = self.main_view.wait_select_single(
             objectName='MainView_Header'
         )
         self.assertThat(header.title, Eventually(Equals(_('Time zone'))))

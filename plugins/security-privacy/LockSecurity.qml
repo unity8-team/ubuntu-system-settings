@@ -181,7 +181,10 @@ ItemPage {
                             UbuntuSecurityPrivacyPanel.Swipe)
                         confirmButton.enabled = text.length > 0
                 }
-                Component.onCompleted: forceActiveFocus()
+                Component.onCompleted: {
+                    if (securityPrivacy.securityType !== UbuntuSecurityPrivacyPanel.Swipe)
+                        forceActiveFocus()
+                }
             }
 
             /* Using bindings since it is, according to documentation,
@@ -244,6 +247,10 @@ ItemPage {
                          changeSecurityDialog.newMethod ===
                             UbuntuSecurityPrivacyPanel.Passphrase
                 onTextChanged: { displayMismatchWarning() }
+                Component.onCompleted: {
+                    if (securityPrivacy.securityType === UbuntuSecurityPrivacyPanel.Swipe)
+                        forceActiveFocus()
+                }
             }
 
             /* Using bindings since it is, according to documentation,

@@ -25,6 +25,7 @@ import Ubuntu.Components 0.1
 import Ubuntu.Components.Popups 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 import Ubuntu.SystemSettings.Bluetooth 1.0
+import Ubuntu.Settings.Components 0.1 as USC
 
 
 ItemPage {
@@ -35,6 +36,24 @@ ItemPage {
     property var dialogPopupId
 
     UbuntuBluetoothPanel { id: backend }
+
+    Timer {
+        id: discoverableTimer
+        onTriggered: backend.trySetDiscoverable(true)
+    }
+
+    /* Disable bt visiblity when switching out */
+    Connections {
+        target: Qt.application
+        onActiveChanged: {
+            if (Qt.application.state === Qt.ApplicationSuspended) {
+                backend.trySetDiscoverable(false)
+            }
+            else {
+                discoverableTimer.start()
+            }
+        }
+    }
 
     Component {
         id: confirmPasskeyDialog
@@ -174,9 +193,14 @@ ItemPage {
                 control: Switch {
                     id: btSwitch
                     property bool serverChecked: bluetoothActionGroup.enabled.state
-                    onServerCheckedChanged: checked = serverChecked
-                    Component.onCompleted: checked = serverChecked
-                    onTriggered: bluetoothActionGroup.enabled.activate()
+                    USC.ServerPropertySynchroniser {
+                        userTarget: btSwitch
+                        userProperty: "checked"
+                        serverTarget: btSwitch
+                        serverProperty: "serverChecked"
+
+                        onSyncTriggered: bluetoothActionGroup.enabled.activate()
+                    }
                 }
             }
 

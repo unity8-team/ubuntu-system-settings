@@ -17,8 +17,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 || n==11) ? 0 : (n==2 || n==12) ? 1 : "
 "(n > 2 && n < 20) ? 2 : 3;\n"
-"X-Launchpad-Export-Date: 2014-10-21 07:25+0000\n"
-"X-Generator: Launchpad (build 17203)\n"
+"X-Launchpad-Export-Date: 2015-05-08 05:28+0000\n"
+"X-Generator: Launchpad (build 17474)\n"
 "Language: gd\n"
 
 #: ubuntu-system-settings.desktop.in.in.h:1 ../src/qml/MainWindow.qml:112
@@ -42,38 +42,38 @@ msgid "Remove image"
 msgstr "Thoir an dealbh air falbh"
 
 #: ../plugins/background//Preview.qml:102
+#: ../plugins/phone//CallForwarding.qml:139
+#: ../plugins/bluetooth//ProvidePasskeyDialog.qml:54
+#: ../plugins/bluetooth//ProvidePinCodeDialog.qml:55
+#: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:49
+#: ../plugins/time-date//TimePicker.qml:173
 #: ../plugins/wifi//OtherNetwork.qml:288
-#: ../plugins/reset//ResetAllSettings.qml:38
+#: ../plugins/cellular//CustomApnEditor.qml:255
+#: ../plugins/cellular//HotspotSetup.qml:85
+#: ../plugins/cellular//PageChooseApn.qml:563
 #: ../plugins/reset//ResetLauncherHome.qml:55
 #: ../plugins/reset//EraseEverything.qml:54
+#: ../plugins/reset//ResetAllSettings.qml:38
+#: ../plugins/security-privacy//LockSecurity.qml:332
+#: ../plugins/security-privacy//SimPin.qml:150
+#: ../plugins/security-privacy//SimPin.qml:267
 #: ../plugins/language//RebootNecessary.qml:47
 #: ../plugins/language//DisplayLanguage.qml:98
-#: ../plugins/phone//CallForwarding.qml:139
-#: ../plugins/cellular//PageChooseApn.qml:594
-#: ../plugins/cellular//CustomApnEditor.qml:245
-#: ../plugins/cellular//HotspotSetup.qml:85
-#: ../plugins/security-privacy//LockSecurity.qml:283
-#: ../plugins/security-privacy//SimPin.qml:149
-#: ../plugins/security-privacy//SimPin.qml:266
-#: ../plugins/bluetooth//ProvidePasskeyDialog.qml:54
-#: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:49
-#: ../plugins/bluetooth//ProvidePinCodeDialog.qml:55
-#: ../plugins/time-date//TimePicker.qml:173
 #: ../plugins/background//Components//AddRemove.qml:42
-#: ../plugins/cellular//Components//SimEditor.qml:189
+#: ../plugins/cellular//Components//SimEditor.qml:206
 msgid "Cancel"
 msgstr "Sguir dheth"
 
 #: ../plugins/background//Preview.qml:109
 #: ../plugins/phone//CallForwarding.qml:152
-#: ../plugins/security-privacy//LockSecurity.qml:304
 #: ../plugins/time-date//TimePicker.qml:182
+#: ../plugins/security-privacy//LockSecurity.qml:353
 msgid "Set"
 msgstr "Suidhich"
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
 #: ../plugins/background//MainPage.qml:35
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:2
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:2
 msgid "Background"
 msgstr "Cùlaibh"
 
@@ -82,9 +82,9 @@ msgid "Ubuntu Art"
 msgstr "Ealan Ubuntu"
 
 #: ../plugins/background//MainPage.qml:115
-#: ../plugins/cellular//PageChooseApn.qml:409
-#: ../plugins/cellular//PageChooseApn.qml:488
-#: ../plugins/cellular//PageChooseApn.qml:496
+#: ../plugins/cellular//PageChooseApn.qml:382
+#: ../plugins/cellular//PageChooseApn.qml:452
+#: ../plugins/cellular//PageChooseApn.qml:460
 msgid "Custom"
 msgstr "Gnàthaichte"
 
@@ -92,8 +92,7 @@ msgstr "Gnàthaichte"
 msgid "Clear"
 msgstr "Falamhaich"
 
-#: ../plugins/wifi//NetworkDetailsBrief.qml:42
-#: ../plugins/bluetooth//PageComponent.qml:411
+#: ../plugins/bluetooth//PageComponent.qml:430
 msgid "Disconnect"
 msgstr "Dì-cheangail"
 
@@ -230,7 +229,7 @@ msgstr "Cha deach an lìonra Wi-Fi a lorg"
 msgid "A secondary connection of the base connection failed"
 msgstr "Dh'fhàillig le ceangal dàrnach a' cheangail thùsail"
 
-#: ../plugins/wifi//Common.qml:96 ../plugins/bluetooth//PageComponent.qml:86
+#: ../plugins/bluetooth//PageComponent.qml:104 ../plugins/wifi//Common.qml:96
 msgid "Unknown"
 msgstr "Neo-aithnichte"
 
@@ -243,14 +242,20 @@ msgid "Network name"
 msgstr "Ainm an lìonraidh"
 
 #: ../plugins/wifi//OtherNetwork.qml:203
-#: ../plugins/security-privacy//PageComponent.qml:126
+#: ../plugins/security-privacy//PageComponent.qml:115
 msgid "Security"
 msgstr "Tèarainteachd"
 
+#: ../plugins/bluetooth//PageComponent.qml:134
+#: ../plugins/bluetooth//PageComponent.qml:342
+#: ../plugins/bluetooth//PageComponent.qml:366
+#: ../plugins/about//PageComponent.qml:130
+#: ../plugins/about//PageComponent.qml:131
+#: ../plugins/about//PageComponent.qml:142
 #: ../plugins/wifi//OtherNetwork.qml:214
-#: ../plugins/bluetooth//PageComponent.qml:116
-#: ../plugins/bluetooth//PageComponent.qml:326
-#: ../plugins/bluetooth//PageComponent.qml:347
+#: ../plugins/cellular//PageCarrierAndApn.qml:46
+#: ../plugins/cellular//PageCarriersAndApns.qml:51
+#: ../plugins/cellular//PageCarriersAndApns.qml:77
 msgid "None"
 msgstr "Chan eil gin"
 
@@ -262,26 +267,26 @@ msgstr "WPA ⁊ WPA2 Personal"
 msgid "WEP"
 msgstr "WEP"
 
-#: ../plugins/wifi//OtherNetwork.qml:222
 #: ../plugins/wifi//NetworkDetails.qml:64
-#: ../plugins/cellular//CustomApnEditor.qml:222
+#: ../plugins/wifi//OtherNetwork.qml:222
+#: ../plugins/cellular//CustomApnEditor.qml:232
 msgid "Password"
 msgstr "Facal-faire"
 
-#: ../plugins/wifi//OtherNetwork.qml:256
 #: ../plugins/wifi//NetworkDetails.qml:77
+#: ../plugins/wifi//OtherNetwork.qml:256
 msgid "Show password"
 msgstr "Seall am facal-faire"
 
+#: ../plugins/bluetooth//PageComponent.qml:430
 #: ../plugins/wifi//OtherNetwork.qml:304
-#: ../plugins/bluetooth//PageComponent.qml:411
 msgid "Connect"
 msgstr "Ceangail"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
+#: ../plugins/battery//PageComponent.qml:332
 #: ../plugins/wifi//PageComponent.qml:28
-#: ../plugins/battery//PageComponent.qml:333
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:24
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:148
 msgid "Wi-Fi"
 msgstr "WiFi"
 
@@ -293,8 +298,8 @@ msgstr "Ceangail ri lìonra falaichte..."
 msgid "Network details"
 msgstr "Fiosrachadh an lìonraidh"
 
+#: ../plugins/bluetooth//PageComponent.qml:362
 #: ../plugins/wifi//NetworkDetails.qml:45
-#: ../plugins/bluetooth//PageComponent.qml:346
 msgid "Name"
 msgstr "Ainm"
 
@@ -302,26 +307,27 @@ msgstr "Ainm"
 msgid "Last connected"
 msgstr "An ceangal mu dheireadh"
 
+#: ../plugins/battery//SleepValues.qml:109
+#: ../plugins/battery//PageComponent.qml:304
+#: ../plugins/battery//PageComponent.qml:313
+#: ../plugins/about//PageComponent.qml:195
+#: ../plugins/system-update//Configuration.qml:52
+#: ../plugins/system-update//PageComponent.qml:739
 #: ../plugins/wifi//NetworkDetails.qml:58
-#: ../plugins/battery//PageComponent.qml:315
-#: ../plugins/battery//PageComponent.qml:324
-#: ../plugins/battery//SleepValues.qml:106
 #: ../plugins/security-privacy//PhoneLocking.qml:78
 #: ../plugins/security-privacy//PhoneLocking.qml:87
-#: ../plugins/security-privacy//PageComponent.qml:140
-#: ../plugins/about//PageComponent.qml:167
-#: ../plugins/system-update//PageComponent.qml:762
-#: ../plugins/system-update//Configuration.qml:52
+#: ../plugins/security-privacy//PageComponent.qml:129
 msgid "Never"
-msgstr "Chan robh gin"
+msgstr "Cha robh gin"
 
+#: ../plugins/wifi//NetworkDetailsBrief.qml:42
 #: ../plugins/wifi//NetworkDetails.qml:88
 msgid "Forget network"
 msgstr "Dìochuimhnich an lìonra"
 
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
 #: ../plugins/notifications//PageComponent.qml:29
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:44
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:244
 msgid "Notifications"
 msgstr "Brathan"
 
@@ -333,70 +339,70 @@ msgstr ""
 "'S urrainn do chuid dhe na h-aplacaidean agus do dh'aonad nam brathan "
 "builgean, fuaimean is crith a nochdadh mar rabhadh dhut."
 
-#: ../plugins/sound//SoundsList.qml:60
+#: ../plugins/sound//SoundsList.qml:70
 msgid "Stop playing"
 msgstr "Sguir dhen chluich"
 
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
 #: ../plugins/sound//PageComponent.qml:37
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:68
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:318
 msgid "Sound"
 msgstr "Fuaim"
 
-#: ../plugins/sound//PageComponent.qml:76
+#: ../plugins/sound//PageComponent.qml:77
 msgid "Silent Mode"
 msgstr "Am modh sàmhach"
 
-#: ../plugins/sound//PageComponent.qml:80
+#: ../plugins/sound//PageComponent.qml:81
 msgid "Ringer:"
 msgstr "Seirm:"
 
-#: ../plugins/sound//PageComponent.qml:112
+#: ../plugins/sound//PageComponent.qml:121
 msgid "Phone calls:"
 msgstr "Gairmean fòn:"
 
-#: ../plugins/sound//PageComponent.qml:116
-#: ../plugins/sound//PageComponent.qml:122
+#: ../plugins/sound//PageComponent.qml:125
+#: ../plugins/sound//PageComponent.qml:131
 msgid "Ringtone"
 msgstr "Fuaim seirme"
 
-#: ../plugins/sound//PageComponent.qml:135
+#: ../plugins/sound//PageComponent.qml:146
 msgid "Vibrate when ringing"
 msgstr "Air chrith nuair a sheirmeas e"
 
-#: ../plugins/sound//PageComponent.qml:144
-#: ../plugins/sound//PageComponent.qml:188
+#: ../plugins/sound//PageComponent.qml:157
+#: ../plugins/sound//PageComponent.qml:207
 msgid "Vibrate in Silent Mode"
 msgstr "Air chrith sa mhodh sàmhach"
 
-#: ../plugins/sound//PageComponent.qml:153
-#: ../plugins/phone//PageComponent.qml:110
+#: ../plugins/phone//PageComponent.qml:102
+#: ../plugins/sound//PageComponent.qml:168
 msgid "Dialpad sounds"
 msgstr "Fuaimean a' phada-daithealaidh"
 
-#: ../plugins/sound//PageComponent.qml:157
+#: ../plugins/sound//PageComponent.qml:172
 msgid "Messages:"
 msgstr "Teachdaireachdan:"
 
-#: ../plugins/sound//PageComponent.qml:161
-#: ../plugins/sound//PageComponent.qml:167
+#: ../plugins/sound//PageComponent.qml:176
+#: ../plugins/sound//PageComponent.qml:182
 msgid "Message received"
 msgstr "Teachdaireachd air fhaighinn"
 
-#: ../plugins/sound//PageComponent.qml:179
+#: ../plugins/sound//PageComponent.qml:196
 msgid "Vibrate with message sound"
 msgstr "Air chrith agus fuaim nan teachdaireachd"
 
-#: ../plugins/sound//PageComponent.qml:192
+#: ../plugins/sound//PageComponent.qml:211
 msgid "Other sounds:"
 msgstr "Fuaimean eile:"
 
-#: ../plugins/sound//PageComponent.qml:196
-#: ../plugins/language//PageComponent.qml:209
+#: ../plugins/language//PageComponent.qml:214
+#: ../plugins/sound//PageComponent.qml:215
 msgid "Keyboard sound"
 msgstr "Fuaimean a' mheur-chlàir"
 
-#: ../plugins/sound//PageComponent.qml:210
+#: ../plugins/sound//PageComponent.qml:232
 msgid "Lock sound"
 msgstr "Fuaim glasaidh"
 
@@ -406,12 +412,12 @@ msgstr "Tha am fòn sa mhodh sàmhach."
 
 #. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
 #: ../plugins/reset//PageComponent.qml:32
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:86
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:196
 msgid "Reset phone"
 msgstr "Ath-shuidhich am fòn"
 
-#: ../plugins/reset//PageComponent.qml:73
 #: ../plugins/reset//ResetLauncherHome.qml:44
+#: ../plugins/reset//PageComponent.qml:73
 msgid "Reset Launcher"
 msgstr "Ath-shuidhich an lòinsear"
 
@@ -459,12 +465,12 @@ msgstr "Sguab às ⁊ ath-shuidhich a h-uile rud"
 
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
 #: ../plugins/battery//PageComponent.qml:34
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:98
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:24
 msgid "Battery"
 msgstr "Bataraidh"
 
 #. TRANSLATORS: %1 is the number of seconds
-#: ../plugins/battery//PageComponent.qml:46
+#: ../plugins/battery//PageComponent.qml:44
 #, qt-format
 msgid "%1 second ago"
 msgid_plural "%1 seconds ago"
@@ -474,7 +480,7 @@ msgstr[2] "%1 diogan air ais"
 msgstr[3] "%1 diog air ais"
 
 #. TRANSLATORS: %1 is the number of minutes
-#: ../plugins/battery//PageComponent.qml:49
+#: ../plugins/battery//PageComponent.qml:47
 #, qt-format
 msgid "%1 minute ago"
 msgid_plural "%1 minutes ago"
@@ -484,7 +490,7 @@ msgstr[2] "%1 mionaidean air ais"
 msgstr[3] "%1 mionaid air ais"
 
 #. TRANSLATORS: %1 is the number of hours
-#: ../plugins/battery//PageComponent.qml:52
+#: ../plugins/battery//PageComponent.qml:50
 #, qt-format
 msgid "%1 hour ago"
 msgid_plural "%1 hours ago"
@@ -494,7 +500,7 @@ msgstr[2] "%1 uairean a thìde air ais"
 msgstr[3] "%1 uair a thìde air ais"
 
 #. TRANSLATORS: %1 is the number of days
-#: ../plugins/battery//PageComponent.qml:55
+#: ../plugins/battery//PageComponent.qml:53
 #, qt-format
 msgid "%1 day ago"
 msgid_plural "%1 days ago"
@@ -503,78 +509,73 @@ msgstr[1] "%1 latha air ais"
 msgstr[2] "%1 làithean air ais"
 msgstr[3] "%1 latha air ais"
 
-#: ../plugins/battery//PageComponent.qml:85
+#: ../plugins/battery//PageComponent.qml:260
 msgid "Charging now"
 msgstr "'Ga theairrdseadh an-dràsta"
 
-#: ../plugins/battery//PageComponent.qml:90
+#: ../plugins/battery//PageComponent.qml:262
 msgid "Last full charge"
 msgstr "An teairrds shlàn mu dheireadh"
 
-#: ../plugins/battery//PageComponent.qml:95
+#: ../plugins/battery//PageComponent.qml:264
 msgid "Fully charged"
 msgstr "Air a làn-teairrdseadh"
 
-#: ../plugins/battery//PageComponent.qml:126
+#: ../plugins/battery//PageComponent.qml:98
 msgid "Charge level"
 msgstr "Ìre na teairrdse"
 
-#: ../plugins/battery//PageComponent.qml:131
-#: ../plugins/battery//PageComponent.qml:287
-#: ../plugins/cellular//PageChooseCarriers.qml:48
-#: ../plugins/cellular//PageChooseCarriers.qml:65
-#: ../plugins/about//Storage.qml:203
-#: ../plugins/cellular//Components//SingleSim.qml:62
-#: ../plugins/cellular//Components//NoSim.qml:48
+#: ../plugins/battery//PageComponent.qml:103
+#: ../plugins/battery//PageComponent.qml:272 ../plugins/about//Storage.qml:203
 msgid "N/A"
 msgstr "Chan eil seo iomchaidh"
 
 #. TRANSLATORS: %1 refers to a percentage that indicates the charging level of the battery
-#: ../plugins/battery//PageComponent.qml:134
+#: ../plugins/battery//PageComponent.qml:106
 #, qt-format
 msgid "%1%"
 msgstr "%1%"
 
-#: ../plugins/battery//PageComponent.qml:212
-#: ../plugins/battery//PageComponent.qml:214
+#: ../plugins/battery//PageComponent.qml:184
+#: ../plugins/battery//PageComponent.qml:186
 msgid "Yesterday"
 msgstr "An-dè"
 
-#: ../plugins/battery//PageComponent.qml:220
-#: ../plugins/battery//PageComponent.qml:222
+#: ../plugins/battery//PageComponent.qml:192
+#: ../plugins/battery//PageComponent.qml:194
 msgid "Today"
 msgstr "An-diugh"
 
-#: ../plugins/battery//PageComponent.qml:292
+#: ../plugins/battery//PageComponent.qml:281
 msgid "Ways to reduce battery use:"
 msgstr "Mar a chaomhnas tu bataraidh:"
 
-#: ../plugins/battery//PageComponent.qml:296
-#: ../plugins/brightness//BrightnessSlider.qml:51
+#: ../plugins/battery//PageComponent.qml:285
+#: ../plugins/brightness//PageComponent.qml:62
 msgid "Display brightness"
 msgstr "Soilleireachd na sgrìn"
 
-#: ../plugins/battery//PageComponent.qml:306
+#: ../plugins/battery//PageComponent.qml:295
 #: ../plugins/security-privacy//PhoneLocking.qml:68
 msgid "Lock when idle"
 msgstr "Glais nuair a bhios e 'na thàmh"
 
-#: ../plugins/battery//PageComponent.qml:306
+#: ../plugins/battery//PageComponent.qml:295
 #: ../plugins/security-privacy//PhoneLocking.qml:69
 msgid "Sleep when idle"
 msgstr "Cuir 'na chadal nuair a bhios e 'na thàmh"
 
 #. TRANSLATORS: %1 is the number of minutes
-#: ../plugins/battery//PageComponent.qml:312
-#: ../plugins/battery//PageComponent.qml:321
-#: ../plugins/battery//SleepValues.qml:83
-#: ../plugins/battery//SleepValues.qml:87
-#: ../plugins/battery//SleepValues.qml:91
-#: ../plugins/battery//SleepValues.qml:95
-#: ../plugins/battery//SleepValues.qml:99
-#: ../plugins/battery//SleepValues.qml:103
-#: ../plugins/security-privacy//PageComponent.qml:137
-#: ../plugins/security-privacy//PageComponent.qml:146
+#: ../plugins/battery//SleepValues.qml:86
+#: ../plugins/battery//SleepValues.qml:90
+#: ../plugins/battery//SleepValues.qml:94
+#: ../plugins/battery//SleepValues.qml:98
+#: ../plugins/battery//SleepValues.qml:102
+#: ../plugins/battery//SleepValues.qml:106
+#: ../plugins/battery//PageComponent.qml:301
+#: ../plugins/battery//PageComponent.qml:310
+#: ../plugins/security-privacy//PageComponent.qml:126
+#: ../plugins/security-privacy//PageComponent.qml:135
 #, qt-format
 msgid "After %1 minute"
 msgid_plural "After %1 minutes"
@@ -584,30 +585,30 @@ msgstr[2] "An dèidh %1 mionaidean"
 msgstr[3] "An dèidh %1 mionaid"
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
-#: ../plugins/battery//PageComponent.qml:363
+#: ../plugins/battery//PageComponent.qml:361
 #: ../plugins/bluetooth//PageComponent.qml:32
-#: ../plugins/bluetooth//PageComponent.qml:147
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:254
+#: ../plugins/bluetooth//PageComponent.qml:165
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:58
 msgid "Bluetooth"
 msgstr "Bluetooth"
 
-#: ../plugins/battery//PageComponent.qml:394
+#: ../plugins/battery//PageComponent.qml:389
 msgid "GPS"
 msgstr "GPS"
 
-#: ../plugins/battery//PageComponent.qml:412
+#: ../plugins/battery//PageComponent.qml:405
 msgid "Accurate location detection requires GPS and/or Wi-Fi."
 msgstr "Feumar GPS no WiFi mus fhaighear greim air d' ionad gu pongail."
 
-#: ../plugins/battery//SleepValues.qml:77
+#: ../plugins/battery//SleepValues.qml:74
 msgid "Lock the phone when it's not in use:"
 msgstr "Glais am fòn mur eil mi 'ga chleachdadh:"
 
-#: ../plugins/battery//SleepValues.qml:77
+#: ../plugins/battery//SleepValues.qml:75
 msgid "Put the phone to sleep when it is not in use:"
 msgstr "Cuir am fòn 'na chadal mur eil mi 'ga chleachdadh:"
 
-#: ../plugins/battery//SleepValues.qml:117
+#: ../plugins/battery//SleepValues.qml:121
 msgid ""
 "Shorter times are more secure. Phone won't lock during calls or video "
 "playback."
@@ -615,22 +616,22 @@ msgstr ""
 "Mar is giorra an ùine, 's ann as tèarainte. Cha ghlais am fòn rè gairm no "
 "video."
 
-#: ../plugins/battery//SleepValues.qml:117
+#: ../plugins/battery//SleepValues.qml:121
 msgid "Phone won’t sleep during calls or video playback."
 msgstr "Cha chaidil am fòn rè gairm no video."
 
-#: ../plugins/language//SpellChecking.qml:27
-#: ../plugins/language//SpellChecking.qml:36
+#: ../plugins/language//SpellChecking.qml:29
+#: ../plugins/language//SpellChecking.qml:44
 #: ../plugins/language//PageComponent.qml:132
 #: ../plugins/language//PageComponent.qml:142
 msgid "Spell checking"
 msgstr "Dearbhadh-litreachaidh"
 
-#: ../plugins/language//SpellChecking.qml:53
+#: ../plugins/language//SpellChecking.qml:62
 msgid "Current spelling languages:"
 msgstr "Cànain làithreach an dearbhaidh-litreachaidh:"
 
-#: ../plugins/language//SpellChecking.qml:54
+#: ../plugins/language//SpellChecking.qml:63
 msgid "All languages available:"
 msgstr "Gach cànan a tha ri làimh:"
 
@@ -648,7 +649,7 @@ msgstr "Dearbhaich"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #: ../plugins/language//PageComponent.qml:34
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:114
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:268
 msgid "Language & Text"
 msgstr "Cànan ⁊ teacsa"
 
@@ -656,40 +657,40 @@ msgstr "Cànan ⁊ teacsa"
 msgid "Display language…"
 msgstr "Cànan an taisbeanaidh…"
 
-#: ../plugins/language//PageComponent.qml:117
 #: ../plugins/language//KeyboardLayouts.qml:26
+#: ../plugins/language//PageComponent.qml:117
 msgid "Keyboard layouts"
 msgstr "Co-dhealbhachdan a' mheur-chlàir"
 
-#: ../plugins/language//PageComponent.qml:152
+#: ../plugins/language//PageComponent.qml:153
 msgid "Auto correction"
 msgstr "Fèin-cheartachadh"
 
-#: ../plugins/language//PageComponent.qml:162
+#: ../plugins/language//PageComponent.qml:164
 msgid "Word suggestions"
 msgstr "Moladh fhaclan"
 
-#: ../plugins/language//PageComponent.qml:175
+#: ../plugins/language//PageComponent.qml:178
 msgid "Auto capitalization"
 msgstr "Tùs-litrichean mòra fèin-obrachail"
 
-#: ../plugins/language//PageComponent.qml:185
+#: ../plugins/language//PageComponent.qml:189
 msgid "Turns on Shift to capitalize the first letter of each sentence."
 msgstr ""
 "Cuiridh seo Shift air ach am faighear litir mhòr aig toiseach gach seantans."
 
-#: ../plugins/language//PageComponent.qml:192
+#: ../plugins/language//PageComponent.qml:196
 msgid "Auto punctuation"
 msgstr "Fèin-phuingeachadh"
 
-#: ../plugins/language//PageComponent.qml:202
+#: ../plugins/language//PageComponent.qml:207
 msgid ""
 "Adds a period, and any missing quotes or brackets, when you tap Space twice."
 msgstr ""
 "Cuiridh seo puing 's comharra-labhairt no camag a tha a dhìth nuair a bheir "
 "thu gnogag air space dà thuras."
 
-#: ../plugins/language//PageComponent.qml:219
+#: ../plugins/language//PageComponent.qml:225
 msgid "Keyboard vibration"
 msgstr "Crith a' mheur-chlàir"
 
@@ -701,9 +702,9 @@ msgstr "Co-dhealbhachdan làithreach:"
 msgid "All layouts available:"
 msgstr "Gach co-dhealbhachd a tha ri làimh:"
 
-#: ../plugins/phone//CallWaiting.qml:31 ../plugins/phone//CallWaiting.qml:74
 #: ../plugins/phone//NoSims.qml:34 ../plugins/phone//MultiSim.qml:46
 #: ../plugins/phone//MultiSim.qml:84 ../plugins/phone//SingleSim.qml:40
+#: ../plugins/phone//CallWaiting.qml:31 ../plugins/phone//CallWaiting.qml:74
 msgid "Call waiting"
 msgstr "Tha gairm a' feitheamh"
 
@@ -716,15 +717,15 @@ msgstr ""
 "tè eile agad agus leum a ghearradh eadar an dà dhiubh."
 
 #. TRANSLATORS: %1 is the name of the (network) carrier
-#: ../plugins/phone//Services.qml:34 ../plugins/phone//SingleSim.qml:51
+#: ../plugins/phone//SingleSim.qml:51 ../plugins/phone//Services.qml:34
 #, qt-format
 msgid "%1 Services"
 msgstr "Seirbheisean %1"
 
+#: ../plugins/phone//NoSims.qml:28 ../plugins/phone//MultiSim.qml:36
+#: ../plugins/phone//MultiSim.qml:74 ../plugins/phone//SingleSim.qml:33
 #: ../plugins/phone//CallForwarding.qml:32
-#: ../plugins/phone//CallForwarding.qml:76 ../plugins/phone//NoSims.qml:28
-#: ../plugins/phone//MultiSim.qml:36 ../plugins/phone//MultiSim.qml:74
-#: ../plugins/phone//SingleSim.qml:33
+#: ../plugins/phone//CallForwarding.qml:76
 msgid "Call forwarding"
 msgstr "Sìneadh air adhart ghairmean"
 
@@ -756,8 +757,8 @@ msgstr "Seirbheisean"
 
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
 #: ../plugins/phone//PageComponent.qml:32
-#: ../plugins/bluetooth//PageComponent.qml:93
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:140
+#: ../plugins/bluetooth//PageComponent.qml:111
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:40
 msgid "Phone"
 msgstr "Fòn"
 
@@ -766,25 +767,29 @@ msgid "SIM"
 msgstr "SIM"
 
 #. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
-#: ../plugins/brightness//PageComponent.qml:32
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:158
+#: ../plugins/brightness//PageComponent.qml:34
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:208
 msgid "Brightness"
 msgstr "Brightness;soilleireachd"
 
-#: ../plugins/brightness//PageComponent.qml:52
+#: ../plugins/brightness//PageComponent.qml:83
 msgid "Adjust automatically"
 msgstr "Gleus fèin-obrachail"
 
-#: ../plugins/brightness//PageComponent.qml:65
+#: ../plugins/brightness//PageComponent.qml:97
 msgid "Brightens and dims the display to suit the surroundings."
 msgstr ""
 "Nì seo an sgrìn nas soilleire no nas doilleire a-rèir an t-solais timcheall "
 "ort."
 
-#: ../plugins/cellular//PageChooseCarrier.qml:30
-#: ../plugins/cellular//Components//SingleSim.qml:58
-#: ../plugins/cellular//Components//SingleSim.qml:67
-#: ../plugins/cellular//Components//NoSim.qml:47
+#: ../plugins/cellular//PageCarrierAndApn.qml:27
+#: ../plugins/cellular//PageCarrierAndApn.qml:44
+#: ../plugins/cellular//PageCarrierAndApn.qml:52
+#: ../plugins/cellular//PageCarriersAndApns.qml:48
+#: ../plugins/cellular//PageCarriersAndApns.qml:74
+#: ../plugins/cellular//PageChooseCarrier.qml:32
+#: ../plugins/cellular//PageChooseCarrier.qml:129
+#: ../plugins/cellular//Components//SingleSim.qml:97
 msgid "Carrier"
 msgstr "Giùlanair"
 
@@ -792,118 +797,118 @@ msgstr "Giùlanair"
 msgid "Choose carrier:"
 msgstr "Tagh giùlanair:"
 
-#: ../plugins/cellular//PageChooseCarrier.qml:156
 #: ../plugins/time-date//ChooseTimeZone.qml:47
-#: ../plugins/time-date//PageComponent.qml:69
+#: ../plugins/time-date//PageComponent.qml:72
+#: ../plugins/cellular//PageChooseCarrier.qml:153
 msgid "Automatically"
 msgstr "Gu fèin-obrachail"
 
-#: ../plugins/cellular//PageChooseCarrier.qml:156
-#: ../plugins/security-privacy//PageComponent.qml:149
 #: ../plugins/time-date//ChooseTimeZone.qml:47
-#: ../plugins/time-date//PageComponent.qml:69
+#: ../plugins/time-date//PageComponent.qml:72
+#: ../plugins/security-privacy//PageComponent.qml:138
 msgid "Manually"
 msgstr "A làimh"
 
-#: ../plugins/cellular//PageChooseCarrier.qml:196
+#: ../plugins/cellular//PageChooseCarrier.qml:197
 msgid "Searching for carriers…"
 msgstr "A' lorg airson giùlanairean…"
 
-#: ../plugins/cellular//PageChooseCarrier.qml:229
+#: ../plugins/cellular//PageCarrierAndApn.qml:57
+#: ../plugins/cellular//PageCarriersAndApns.qml:62
+#: ../plugins/cellular//PageCarriersAndApns.qml:88
 #: ../plugins/cellular//PageChooseApn.qml:31
-#: ../plugins/cellular//Components//SingleSim.qml:73
 msgid "APN"
 msgstr "APN"
 
-#: ../plugins/cellular//PageChooseApn.qml:372
+#: ../plugins/cellular//PageChooseApn.qml:355
 msgid "Internet APN:"
 msgstr "Puing-inntrigidh an eadar-lìn:"
 
-#: ../plugins/cellular//PageChooseApn.qml:449
+#: ../plugins/cellular//PageChooseApn.qml:423
 msgid "Custom Internet APN…"
 msgstr "Puing-inntrigidh eadar-lìn ghnàthaichte:…"
 
-#: ../plugins/cellular//PageChooseApn.qml:460
+#: ../plugins/cellular//PageChooseApn.qml:434
 msgid "MMS APN:"
 msgstr "Puing-inntrigidh nan MMS:"
 
-#: ../plugins/cellular//PageChooseApn.qml:485
-#: ../plugins/cellular//CustomApnEditor.qml:143
+#: ../plugins/cellular//CustomApnEditor.qml:153
+#: ../plugins/cellular//PageChooseApn.qml:449
 msgid "Same APN as for Internet"
 msgstr "Tè an eadar-lìn"
 
-#: ../plugins/cellular//PageChooseApn.qml:565
+#: ../plugins/cellular//PageChooseApn.qml:529
 msgid "Custom MMS APN…"
 msgstr "Puing-inntrigidh MMS ghnàthaichte:"
 
-#: ../plugins/cellular//PageChooseApn.qml:591
+#: ../plugins/cellular//PageChooseApn.qml:560
 msgid "Reset APN Settings"
 msgstr "Ath-shuidhich roghainnean nam puingean-inntrigidh"
 
-#: ../plugins/cellular//PageChooseApn.qml:592
+#: ../plugins/cellular//PageChooseApn.qml:561
 msgid "Are you sure that you want to Reset APN Settings?"
 msgstr ""
 "A bheil thu cinnteach gu bheil thu airson roghainnean nam puingean-"
 "inntrigidh ath-shuidheachadh?"
 
-#: ../plugins/cellular//PageChooseApn.qml:598
+#: ../plugins/cellular//PageChooseApn.qml:567
 msgid "Reset"
 msgstr "Ath-shuidhich"
 
-#: ../plugins/cellular//PageChooseCarriers.qml:27
-#: ../plugins/cellular//Components//MultiSim.qml:68
+#: ../plugins/cellular//PageCarriersAndApns.qml:27
+#: ../plugins/cellular//Components//MultiSim.qml:76
 msgid "Carriers"
 msgstr "Giùlanairean"
 
-#: ../plugins/cellular//CustomApnEditor.qml:42
+#: ../plugins/cellular//CustomApnEditor.qml:46
 msgid "Internet"
 msgstr "Eadar-lìon"
 
-#: ../plugins/cellular//CustomApnEditor.qml:42
+#: ../plugins/cellular//CustomApnEditor.qml:46
 msgid "MMS"
 msgstr "MMS"
 
 #. TRANSLATORS: %1 is either i18n.tr("Internet") or i18n.tr("MMS")
-#: ../plugins/cellular//CustomApnEditor.qml:67
+#: ../plugins/cellular//CustomApnEditor.qml:71
 #, qt-format
 msgid "Custom %1 APN"
 msgstr "Puing-inntrigidh %1 ghnàthaichte"
 
 #. TRANSLATORS: %1 is either i18n.tr("Internet") or i18n.tr("MMS")
-#: ../plugins/cellular//CustomApnEditor.qml:171
+#: ../plugins/cellular//CustomApnEditor.qml:181
 #, qt-format
 msgid "%1 APN"
 msgstr "Puing-inntrigidh %1"
 
-#: ../plugins/cellular//CustomApnEditor.qml:181
+#: ../plugins/cellular//CustomApnEditor.qml:191
 msgid "MMSC"
 msgstr "MMSC"
 
-#: ../plugins/cellular//CustomApnEditor.qml:191
+#: ../plugins/cellular//CustomApnEditor.qml:201
 msgid "Proxy"
 msgstr "Progsaidh"
 
-#: ../plugins/cellular//CustomApnEditor.qml:213
+#: ../plugins/cellular//CustomApnEditor.qml:223
 msgid "Username"
 msgstr "Ainm-cleachdaiche"
 
-#: ../plugins/cellular//CustomApnEditor.qml:264
+#: ../plugins/cellular//CustomApnEditor.qml:274
 msgid "Save"
 msgstr "Sàbhail"
 
-#: ../plugins/cellular//CustomApnEditor.qml:264
+#: ../plugins/cellular//CustomApnEditor.qml:274
 msgid "Activate"
 msgstr "Gnìomhaich"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: ../plugins/cellular//PageComponent.qml:32
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:170
+#: ../plugins/cellular//PageComponent.qml:33
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:168
 msgid "Cellular"
 msgstr "Mobile"
 
 #: ../plugins/cellular//Hotspot.qml:29
-#: ../plugins/cellular//Components//MultiSim.qml:48
-#: ../plugins/cellular//Components//SingleSim.qml:43
+#: ../plugins/cellular//Components//MultiSim.qml:58
+#: ../plugins/cellular//Components//SingleSim.qml:70
 msgid "Wi-Fi hotspot"
 msgstr "Hotspot WiFi"
 
@@ -949,119 +954,119 @@ msgid "Show key"
 msgstr "Seall an iuchair"
 
 #: ../plugins/cellular//HotspotSetup.qml:94
-#: ../plugins/security-privacy//LockSecurity.qml:302
-#: ../plugins/security-privacy//SimPin.qml:157
+#: ../plugins/security-privacy//LockSecurity.qml:351
+#: ../plugins/security-privacy//SimPin.qml:158
 msgid "Change"
 msgstr "Atharraich"
 
+#: ../plugins/about//DevMode.qml:116
 #: ../plugins/security-privacy//LockSecurity.qml:32
 #: ../plugins/security-privacy//PhoneLocking.qml:49
-#: ../plugins/about//DevMode.qml:116
 #: ../wizard/qml/Pages//30-passwd-type.qml:37
 msgid "Lock security"
 msgstr "Glas tèarainteachd"
 
-#: ../plugins/security-privacy//LockSecurity.qml:96
-#: ../plugins/security-privacy//LockSecurity.qml:384
+#: ../plugins/security-privacy//LockSecurity.qml:115
+#: ../plugins/security-privacy//LockSecurity.qml:433
 msgid "Change passcode…"
 msgstr "Atharraich an còd-faire…"
 
-#: ../plugins/security-privacy//LockSecurity.qml:98
-#: ../plugins/security-privacy//LockSecurity.qml:385
+#: ../plugins/security-privacy//LockSecurity.qml:117
+#: ../plugins/security-privacy//LockSecurity.qml:434
 msgid "Change passphrase…"
 msgstr "Atharraich an abairt-fhaire…"
 
-#: ../plugins/security-privacy//LockSecurity.qml:105
+#: ../plugins/security-privacy//LockSecurity.qml:124
 msgid "Switch to swipe"
 msgstr "Cleachd grad-shlaighdeadh"
 
-#: ../plugins/security-privacy//LockSecurity.qml:107
+#: ../plugins/security-privacy//LockSecurity.qml:126
 msgid "Switch to passcode"
 msgstr "Gearr leum gu còd-faire"
 
-#: ../plugins/security-privacy//LockSecurity.qml:109
+#: ../plugins/security-privacy//LockSecurity.qml:128
 msgid "Switch to passphrase"
 msgstr "Cleachd abairt-fhaire"
 
-#: ../plugins/security-privacy//LockSecurity.qml:118
+#: ../plugins/security-privacy//LockSecurity.qml:137
 msgid "Existing passcode"
 msgstr "Còd-faire a tha ann"
 
-#: ../plugins/security-privacy//LockSecurity.qml:120
+#: ../plugins/security-privacy//LockSecurity.qml:139
 msgid "Existing passphrase"
 msgstr "An abairt-fhaire làithreach"
 
-#: ../plugins/security-privacy//LockSecurity.qml:174
+#: ../plugins/security-privacy//LockSecurity.qml:204
 msgid "Choose passcode"
 msgstr "Tagh còd-faire"
 
-#: ../plugins/security-privacy//LockSecurity.qml:176
+#: ../plugins/security-privacy//LockSecurity.qml:206
 msgid "Choose passphrase"
 msgstr "Tagh abairt-fhaire"
 
-#: ../plugins/security-privacy//LockSecurity.qml:220
-#: ../wizard/qml/Pages//passwd-confirm.qml:48
+#: ../plugins/security-privacy//LockSecurity.qml:258
+#: ../wizard/qml/Pages//passwd-confirm.qml:49
 msgid "Confirm passcode"
 msgstr "Dearbhaich an còd-faire"
 
-#: ../plugins/security-privacy//LockSecurity.qml:222
-#: ../wizard/qml/Pages//passwd-confirm.qml:47
+#: ../plugins/security-privacy//LockSecurity.qml:260
+#: ../wizard/qml/Pages//passwd-confirm.qml:48
 msgid "Confirm passphrase"
 msgstr "Dearbh an abairt-fhaire"
 
-#: ../plugins/security-privacy//LockSecurity.qml:265
+#: ../plugins/security-privacy//LockSecurity.qml:314
 msgid "Those passcodes don't match. Try again."
 msgstr "Chan eil an dà chòd-faire co-ionnann. feuch ris a-rithist."
 
-#: ../plugins/security-privacy//LockSecurity.qml:268
+#: ../plugins/security-privacy//LockSecurity.qml:317
 msgid "Those passphrases don't match. Try again."
 msgstr "Chan eil an dà abairt-fhaire co-ionnann. Feuch ris a-rithist."
 
-#: ../plugins/security-privacy//LockSecurity.qml:299
+#: ../plugins/security-privacy//LockSecurity.qml:348
 msgid "Unset"
 msgstr "Dì-shuidhich"
 
-#: ../plugins/security-privacy//LockSecurity.qml:344
+#: ../plugins/security-privacy//LockSecurity.qml:393
 msgid "Unlock the phone using:"
 msgstr "Thoir a' ghlas far an fhòn slighe:"
 
-#: ../plugins/security-privacy//LockSecurity.qml:348
+#: ../plugins/security-privacy//LockSecurity.qml:397
 msgid "Swipe (no security)"
 msgstr "Grad-shlaighdeadh (gun tèarainteachd)"
 
-#: ../plugins/security-privacy//LockSecurity.qml:349
+#: ../plugins/security-privacy//LockSecurity.qml:398
 msgid "4-digit passcode"
 msgstr "Còd-faire de 4 àireamhan"
 
-#: ../plugins/security-privacy//LockSecurity.qml:350
+#: ../plugins/security-privacy//LockSecurity.qml:399
 #: ../plugins/security-privacy//PhoneLocking.qml:47
 #: ../wizard/qml/Pages//30-passwd-type.qml:98
 msgid "Passphrase"
 msgstr "Abairt-fhaire"
 
-#: ../plugins/security-privacy//LockSecurity.qml:351
+#: ../plugins/security-privacy//LockSecurity.qml:400
 msgid "Swipe (no security)… "
 msgstr "Grad-shlaighdeadh (gun tèarainteachd)… "
 
-#: ../plugins/security-privacy//LockSecurity.qml:352
+#: ../plugins/security-privacy//LockSecurity.qml:401
 msgid "4-digit passcode…"
 msgstr "Còd-faire de 4 àireamhan…"
 
-#: ../plugins/security-privacy//LockSecurity.qml:353
+#: ../plugins/security-privacy//LockSecurity.qml:402
 msgid "Passphrase…"
 msgstr "Abairt-fhaire…"
 
-#: ../plugins/security-privacy//SimPin.qml:34
-#: ../plugins/security-privacy//SimPin.qml:322
-#: ../plugins/security-privacy//PageComponent.qml:158
+#: ../plugins/security-privacy//PageComponent.qml:147
+#: ../plugins/security-privacy//SimPin.qml:35
+#: ../plugins/security-privacy//SimPin.qml:335
 msgid "SIM PIN"
 msgstr "SIM PIN"
 
-#: ../plugins/security-privacy//SimPin.qml:44
+#: ../plugins/security-privacy//SimPin.qml:45
 msgid "Change SIM PIN"
 msgstr "Atharraich PIN an t-SIM"
 
-#: ../plugins/security-privacy//SimPin.qml:47
+#: ../plugins/security-privacy//SimPin.qml:48
 #, qt-format
 msgid "Incorrect PIN. %1 attempt remaining."
 msgid_plural "Incorrect PIN. %1 attempts remaining."
@@ -1070,11 +1075,11 @@ msgstr[1] "Seo PIN cearr. %1 oidhirp air a fàgail."
 msgstr[2] "Seo PIN cearr. %1 oidhirpean air am fàgail."
 msgstr[3] "Seo PIN cearr. %1 oidhirp air a fàgail."
 
-#: ../plugins/security-privacy//SimPin.qml:81
+#: ../plugins/security-privacy//SimPin.qml:82
 msgid "Current PIN:"
 msgstr "PIN làithreach:"
 
-#: ../plugins/security-privacy//SimPin.qml:93
+#: ../plugins/security-privacy//SimPin.qml:94
 #, qt-format
 msgid "%1 attempt allowed."
 msgid_plural "%1 attempts allowed."
@@ -1083,49 +1088,49 @@ msgstr[1] "Tha %1 oidhirp ceadaichte dhut."
 msgstr[2] "Tha %1 oidhirpean ceadaichte dhut."
 msgstr[3] "Tha %1 oidhirp ceadaichte dhut."
 
-#: ../plugins/security-privacy//SimPin.qml:107
+#: ../plugins/security-privacy//SimPin.qml:108
 msgid "Choose new PIN:"
 msgstr "Tagh PIN ùr:"
 
-#: ../plugins/security-privacy//SimPin.qml:118
+#: ../plugins/security-privacy//SimPin.qml:119
 msgid "Confirm new PIN:"
 msgstr "Dearbhaich a' PIN ùr:"
 
-#: ../plugins/security-privacy//SimPin.qml:137
+#: ../plugins/security-privacy//SimPin.qml:138
 msgid "PINs don't match. Try again."
 msgstr "Chan eil an dà chòd PIN co-ionnann. Feuch ris a-rithist."
 
-#: ../plugins/security-privacy//SimPin.qml:183
+#: ../plugins/security-privacy//SimPin.qml:184
 msgid "Enter SIM PIN"
 msgstr "Cuir a-steach PIN an t-SIM"
 
-#: ../plugins/security-privacy//SimPin.qml:184
+#: ../plugins/security-privacy//SimPin.qml:185
 msgid "Enter Previous SIM PIN"
 msgstr "Cuir a-steach PIN roimhe an t-SIM"
 
-#: ../plugins/security-privacy//SimPin.qml:187
+#: ../plugins/security-privacy//SimPin.qml:188
 #, qt-format
 msgid "Incorrect PIN. %1 attempts remaining."
 msgstr "PIN cearr. %1 oidhirp(ean) air fhàgail."
 
-#: ../plugins/security-privacy//SimPin.qml:246
+#: ../plugins/security-privacy//SimPin.qml:247
 #, qt-format
 msgid "%1 attempts allowed."
 msgstr "Tha %1 oidhirp(ean) ceadaichte."
 
-#: ../plugins/security-privacy//SimPin.qml:282
+#: ../plugins/security-privacy//SimPin.qml:283
 msgid "Unlock"
 msgstr "Thoir a' ghlas dheth"
 
-#: ../plugins/security-privacy//SimPin.qml:282
+#: ../plugins/security-privacy//SimPin.qml:283
 msgid "Lock"
 msgstr "Glais"
 
-#: ../plugins/security-privacy//SimPin.qml:340
+#: ../plugins/security-privacy//SimPin.qml:353
 msgid "Change PIN…"
 msgstr "Atharraich a' PIN…"
 
-#: ../plugins/security-privacy//SimPin.qml:357
+#: ../plugins/security-privacy//SimPin.qml:382
 msgid ""
 "When a SIM PIN is set, it must be entered to access cellular services after "
 "restarting the phone or swapping the SIM."
@@ -1134,7 +1139,7 @@ msgstr ""
 "gus seirbheisean fòn-làimhe fhaighinn nuair a bhios am fòn air tòiseachadh "
 "às ùr no a' SIM air a chur ann an uidheam eile."
 
-#: ../plugins/security-privacy//SimPin.qml:361
+#: ../plugins/security-privacy//SimPin.qml:386
 msgid "Entering an incorrect PIN repeatedly may lock the SIM permanently."
 msgstr ""
 "Ma chuireas tu PIN cearr a-steach iomadh turas, dh'fhaoidte gun tèid a' SIM "
@@ -1163,7 +1168,7 @@ msgid_plural "%1 minutes"
 msgstr[0] "%1 mhionaid"
 msgstr[1] "%1 mhionaid"
 msgstr[2] "%1 mionaidean"
-msgstr[3] "%1 mhionaid"
+msgstr[3] "%1 mionaid"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:101
 msgid "Sleep locks immediately"
@@ -1177,60 +1182,58 @@ msgstr "Nuair a bhios e glaiste, ceadaich seo:"
 msgid "Launcher"
 msgstr "Lòinsear"
 
-#: ../plugins/security-privacy//PhoneLocking.qml:120
+#: ../plugins/security-privacy//PhoneLocking.qml:123
 msgid "Notifications and quick settings"
 msgstr "Brathan 's grad-roghainnean"
 
-#: ../plugins/security-privacy//PhoneLocking.qml:131
+#: ../plugins/security-privacy//PhoneLocking.qml:137
 msgid "Turn on lock security to restrict access when the phone is locked."
 msgstr ""
 "Cuir tèarainteachd na glaise air gus inntrigeadh a chuingeachadh nuair a "
 "bhios am fòn glaiste."
 
-#: ../plugins/security-privacy//PhoneLocking.qml:132
+#: ../plugins/security-privacy//PhoneLocking.qml:138
 msgid "Other apps and functions will prompt you to unlock."
 msgstr "Iarraidh aplacaidean 's feartan eile ort a' ghlas a thoirt dheth."
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
 #: ../plugins/security-privacy//PageComponent.qml:37
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:218
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:220
 msgid "Security & Privacy"
 msgstr "Tèarainteachd ⁊ prìobhaideachd"
 
-#: ../plugins/security-privacy//PageComponent.qml:100
-#: ../plugins/security-privacy//PageComponent.qml:218
 #: ../plugins/security-privacy//Dash.qml:46
+#: ../plugins/security-privacy//PageComponent.qml:89
+#: ../plugins/security-privacy//PageComponent.qml:201
 msgid "Phone and Internet"
 msgstr "Am fòn 's an t-eadar-lìon"
 
-#: ../plugins/security-privacy//PageComponent.qml:102
-#: ../plugins/security-privacy//PageComponent.qml:219
 #: ../plugins/security-privacy//Dash.qml:46
+#: ../plugins/security-privacy//PageComponent.qml:91
+#: ../plugins/security-privacy//PageComponent.qml:202
 msgid "Phone only"
 msgstr "Fòn a-mhàin"
 
-#: ../plugins/security-privacy//PageComponent.qml:131
+#: ../plugins/security-privacy//PageComponent.qml:120
 msgid "Lock phone"
 msgstr "Glais am fòn"
 
-#: ../plugins/security-privacy//PageComponent.qml:161
-#: ../plugins/security-privacy//PageComponent.qml:244
+#: ../plugins/security-privacy//PageComponent.qml:150
+#: ../plugins/security-privacy//PageComponent.qml:228
 msgid "On"
 msgstr "Air"
 
-#: ../plugins/security-privacy//PageComponent.qml:165
-#: ../plugins/security-privacy//PageComponent.qml:244
-#: ../plugins/cellular//Components//CellularMultiSim.qml:30
-#: ../plugins/cellular//Components//NoSim.qml:32
-#: ../plugins/cellular//Components//CellularSingleSim.qml:50
+#: ../plugins/security-privacy//PageComponent.qml:154
+#: ../plugins/security-privacy//PageComponent.qml:228
+#: ../plugins/cellular//Components//DataMultiSim.qml:30
 msgid "Off"
 msgstr "Dheth"
 
-#: ../plugins/security-privacy//PageComponent.qml:172
+#: ../plugins/security-privacy//PageComponent.qml:161
 msgid "Encryption"
 msgstr "Crioptachadh"
 
-#: ../plugins/security-privacy//PageComponent.qml:181
+#: ../plugins/security-privacy//PageComponent.qml:170
 msgid ""
 "Encryption protects against access to phone data when the phone is connected "
 "to a PC or other device."
@@ -1238,50 +1241,50 @@ msgstr ""
 "Dìonaidh crioptachadh an aghaidh inntrigeadh do dhàta an fhòn nuair a bhios "
 "am fòn ceangailte ri PC no uidheam eile."
 
-#: ../plugins/security-privacy//PageComponent.qml:185
+#: ../plugins/security-privacy//PageComponent.qml:174
 msgid "Privacy"
 msgstr "Prìobhaideachd"
 
-#: ../plugins/security-privacy//PageComponent.qml:188
+#: ../plugins/security-privacy//PageComponent.qml:177
 msgid "Stats on welcome screen"
 msgstr "Stats air sgrìn na fàilte"
 
-#: ../plugins/security-privacy//PageComponent.qml:201
+#: ../plugins/security-privacy//PageComponent.qml:187
 msgid "Messages on welcome screen"
 msgstr "Teachdaireachdan air sgrìn na fàilte"
 
-#: ../plugins/security-privacy//PageComponent.qml:216
 #: ../plugins/security-privacy//Dash.qml:29
+#: ../plugins/security-privacy//PageComponent.qml:199
 msgid "Dash search"
 msgstr "Lorg leis an deas-bhòrd"
 
-#: ../plugins/security-privacy//PageComponent.qml:235
+#: ../plugins/security-privacy//PageComponent.qml:219
 msgid "Location access"
 msgstr "Cothrom air d' ionad"
 
-#: ../plugins/security-privacy//PageComponent.qml:253
 #: ../plugins/security-privacy//AppAccess.qml:28
+#: ../plugins/security-privacy//PageComponent.qml:237
 msgid "Other app access"
 msgstr "Inntrigeadh le aplacaidean eile"
 
-#: ../plugins/security-privacy//PageComponent.qml:258
+#: ../plugins/security-privacy//PageComponent.qml:242
 #: ../plugins/security-privacy//diagnostics//PageComponent.qml:30
 msgid "Diagnostics"
 msgstr "Diagnosachd"
 
 #. TRANSLATORS: This string is shown when crash
 #. reports are to be sent by the system.
-#: ../plugins/security-privacy//PageComponent.qml:263
+#: ../plugins/security-privacy//PageComponent.qml:247
 msgid "Sent"
 msgstr "Air a chur"
 
 #. TRANSLATORS: This string is shown when crash
 #. reports are not to be sent by the system
-#: ../plugins/security-privacy//PageComponent.qml:266
+#: ../plugins/security-privacy//PageComponent.qml:250
 msgid "Not sent"
 msgstr "Gun chur fhathast"
 
-#: ../plugins/security-privacy//Location.qml:31
+#: ../plugins/security-privacy//Location.qml:32
 #: ../wizard/qml/Pages//50-location.qml:25
 msgid "Location"
 msgstr "Ionad"
@@ -1290,7 +1293,7 @@ msgstr "Ionad"
 msgid "Location detection"
 msgstr "Mothachadh dha d' ionad"
 
-#: ../plugins/security-privacy//Location.qml:81
+#: ../plugins/security-privacy//Location.qml:208
 msgid ""
 "Uses GPS to detect your rough location. When off, GPS turns off to save "
 "battery."
@@ -1298,7 +1301,7 @@ msgstr ""
 "Cleachdaidh seo GPS airson d' ionad a dh'fhiosrachadh mu thuaiream. Ma bhios "
 "seo dheth, bidh GPS dheth gus dealan a chaomhnadh."
 
-#: ../plugins/security-privacy//Location.qml:83
+#: ../plugins/security-privacy//Location.qml:210
 msgid ""
 "Uses wi-fi and GPS to detect your rough location. Turning off location "
 "detection saves battery."
@@ -1307,7 +1310,7 @@ msgstr ""
 "thuaiream. 'S urrainn dhut mothachadh dha d' ionad a chur dheth gus dealan a "
 "chaomhnadh."
 
-#: ../plugins/security-privacy//Location.qml:85
+#: ../plugins/security-privacy//Location.qml:212
 msgid ""
 "Uses wi-fi (currently off) and GPS to detect your rough location. Turning "
 "off location detection saves battery."
@@ -1316,7 +1319,7 @@ msgstr ""
 "dh'fhiosrachadh mu thuaiream. 'S urrainn dhut mothachadh dha d' ionad a chur "
 "dheth gus dealan a chaomhnadh."
 
-#: ../plugins/security-privacy//Location.qml:87
+#: ../plugins/security-privacy//Location.qml:214
 msgid ""
 "Uses wi-fi, cell tower locations, and GPS to detect your rough location. "
 "Turning off location detection saves battery."
@@ -1325,7 +1328,7 @@ msgstr ""
 "dh'fhiosrachadh mu thuaiream. 'S urrainn dhut mothachadh dha d' ionad a chur "
 "dheth gus dealan a chaomhnadh."
 
-#: ../plugins/security-privacy//Location.qml:89
+#: ../plugins/security-privacy//Location.qml:216
 msgid ""
 "Uses wi-fi, cell tower locations (no current cellular connection), and GPS "
 "to detect your rough location. Turning off location detection saves battery."
@@ -1334,7 +1337,7 @@ msgstr ""
 "fhèin) agus GPS airson d' ionad a dh'fhiosrachadh mu thuaiream. 'S urrainn "
 "dhut mothachadh dha d' ionad a chur dheth gus dealan a chaomhnadh."
 
-#: ../plugins/security-privacy//Location.qml:91
+#: ../plugins/security-privacy//Location.qml:218
 msgid ""
 "Uses wi-fi (currently off), cell tower locations, and GPS to detect your "
 "rough location. Turning off location detection saves battery."
@@ -1343,7 +1346,7 @@ msgstr ""
 "d' ionad a dh'fhiosrachadh mu thuaiream. 'S urrainn dhut mothachadh dha d' "
 "ionad a chur dheth gus dealan a chaomhnadh."
 
-#: ../plugins/security-privacy//Location.qml:93
+#: ../plugins/security-privacy//Location.qml:220
 msgid ""
 "Uses wi-fi (currently off), cell tower locations (no current cellular "
 "connection), and GPS to detect your rough location. Turning off location "
@@ -1354,7 +1357,7 @@ msgstr ""
 "thuaiream. 'S urrainn dhut mothachadh dha d' ionad a chur dheth gus dealan a "
 "chaomhnadh."
 
-#: ../plugins/security-privacy//Location.qml:100
+#: ../plugins/security-privacy//Location.qml:227
 msgid "Allow access to location:"
 msgstr "Ceadaich cothrom air m' ionad:"
 
@@ -1367,8 +1370,8 @@ msgid "Apps that you have granted and have requested access to:"
 msgstr ""
 "Aplacaidean a dh'fhaodas inntrigeadh 's a dh'iarr thu inntrigeadh dhaibh:"
 
+#: ../plugins/bluetooth//PageComponent.qml:123
 #: ../plugins/security-privacy//AppAccess.qml:41
-#: ../plugins/bluetooth//PageComponent.qml:105
 msgid "Camera"
 msgstr "Camara"
 
@@ -1394,8 +1397,8 @@ msgid "0"
 msgstr "0"
 
 #: ../plugins/bluetooth//ProvidePasskeyDialog.qml:28
-#: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:28
 #: ../plugins/bluetooth//ProvidePinCodeDialog.qml:28
+#: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:28
 msgid "Bluetooth Pairing Request"
 msgstr "Iarrtas airson paidhreachadh Bluetooth"
 
@@ -1421,132 +1424,132 @@ msgstr ""
 msgid "Confirm PIN"
 msgstr "Dearbh am PIN"
 
-#: ../plugins/bluetooth//PageComponent.qml:82
+#: ../plugins/bluetooth//PageComponent.qml:100
 msgid "Connected"
 msgstr "Ceangailte"
 
-#: ../plugins/bluetooth//PageComponent.qml:83
+#: ../plugins/bluetooth//PageComponent.qml:101
 msgid "Connecting…"
 msgstr "A' dèanamh ceangal…"
 
-#: ../plugins/bluetooth//PageComponent.qml:84
+#: ../plugins/bluetooth//PageComponent.qml:102
 msgid "Disconnecting…"
 msgstr "A' dì-cheangal..."
 
-#: ../plugins/bluetooth//PageComponent.qml:85
+#: ../plugins/bluetooth//PageComponent.qml:103
 msgid "Disconnected"
 msgstr "Air a dhì-cheangal"
 
-#: ../plugins/bluetooth//PageComponent.qml:92
+#: ../plugins/bluetooth//PageComponent.qml:110
 msgid "Computer"
 msgstr "Coimpiutair"
 
-#: ../plugins/bluetooth//PageComponent.qml:94
+#: ../plugins/bluetooth//PageComponent.qml:112
 msgid "Modem"
 msgstr "Mòdam"
 
-#: ../plugins/bluetooth//PageComponent.qml:95 ../src/qml/MainWindow.qml:147
+#: ../plugins/bluetooth//PageComponent.qml:113 ../src/qml/MainWindow.qml:147
 msgid "Network"
 msgstr "Lìonra"
 
-#: ../plugins/bluetooth//PageComponent.qml:96
+#: ../plugins/bluetooth//PageComponent.qml:114
 msgid "Headset"
 msgstr "Headset"
 
-#: ../plugins/bluetooth//PageComponent.qml:97
+#: ../plugins/bluetooth//PageComponent.qml:115
 msgid "Headphones"
 msgstr "Headphones"
 
-#: ../plugins/bluetooth//PageComponent.qml:98
+#: ../plugins/bluetooth//PageComponent.qml:116
 msgid "Video"
 msgstr "Video"
 
-#: ../plugins/bluetooth//PageComponent.qml:99
+#: ../plugins/bluetooth//PageComponent.qml:117
 msgid "Other Audio"
 msgstr "Fuaim eile"
 
-#: ../plugins/bluetooth//PageComponent.qml:100
+#: ../plugins/bluetooth//PageComponent.qml:118
 msgid "Joypad"
 msgstr "Joypad"
 
-#: ../plugins/bluetooth//PageComponent.qml:101
+#: ../plugins/bluetooth//PageComponent.qml:119
 msgid "Keyboard"
 msgstr "Meur-chlàr"
 
-#: ../plugins/bluetooth//PageComponent.qml:102
+#: ../plugins/bluetooth//PageComponent.qml:120
 msgid "Tablet"
 msgstr "Tablaid"
 
-#: ../plugins/bluetooth//PageComponent.qml:103
+#: ../plugins/bluetooth//PageComponent.qml:121
 msgid "Mouse"
 msgstr "Luchag"
 
-#: ../plugins/bluetooth//PageComponent.qml:104
+#: ../plugins/bluetooth//PageComponent.qml:122
 msgid "Printer"
 msgstr "Clò-bhualadair"
 
-#: ../plugins/bluetooth//PageComponent.qml:106
+#: ../plugins/bluetooth//PageComponent.qml:124
 msgid "Other"
 msgstr "Eile"
 
-#: ../plugins/bluetooth//PageComponent.qml:112
+#: ../plugins/bluetooth//PageComponent.qml:130
 msgid "Excellent"
 msgstr "Fìor-mhath"
 
-#: ../plugins/bluetooth//PageComponent.qml:113
+#: ../plugins/bluetooth//PageComponent.qml:131
 msgid "Good"
 msgstr "Math"
 
-#: ../plugins/bluetooth//PageComponent.qml:114
+#: ../plugins/bluetooth//PageComponent.qml:132
 msgid "Fair"
 msgstr "Ceart gu leòr"
 
-#: ../plugins/bluetooth//PageComponent.qml:115
+#: ../plugins/bluetooth//PageComponent.qml:133
 msgid "Poor"
 msgstr "Bochd"
 
-#: ../plugins/bluetooth//PageComponent.qml:182
+#: ../plugins/bluetooth//PageComponent.qml:194
 msgid "Discoverable"
 msgstr "Gabhaidh a lorg"
 
-#: ../plugins/bluetooth//PageComponent.qml:182
+#: ../plugins/bluetooth//PageComponent.qml:194
 msgid "Not discoverable"
 msgstr "Cha ghabh a lorg"
 
-#: ../plugins/bluetooth//PageComponent.qml:213
+#: ../plugins/bluetooth//PageComponent.qml:225
 msgid "Connected devices:"
 msgstr "Uidheaman ceangailte:"
 
-#: ../plugins/bluetooth//PageComponent.qml:251
+#: ../plugins/bluetooth//PageComponent.qml:263
 msgid "Connect another device:"
 msgstr "Ceangail uidheam eile:"
 
-#: ../plugins/bluetooth//PageComponent.qml:251
+#: ../plugins/bluetooth//PageComponent.qml:263
 msgid "Connect a device:"
 msgstr "Ceangail uidheam ris:"
 
-#: ../plugins/bluetooth//PageComponent.qml:285
+#: ../plugins/bluetooth//PageComponent.qml:297
 msgid "None detected"
 msgstr "Cha do mhothaich sinn do ghin"
 
-#: ../plugins/bluetooth//PageComponent.qml:293
-#: ../plugins/bluetooth//PageComponent.qml:397
+#: ../plugins/bluetooth//PageComponent.qml:305
+#: ../plugins/bluetooth//PageComponent.qml:416
 msgid "Connect automatically when detected:"
 msgstr "Dèan ceangal gu fèin-obrachail ma mhothaichear ris:"
 
-#: ../plugins/bluetooth//PageComponent.qml:364
+#: ../plugins/bluetooth//PageComponent.qml:383
 msgid "Type"
 msgstr "Seòrsa"
 
-#: ../plugins/bluetooth//PageComponent.qml:388
+#: ../plugins/bluetooth//PageComponent.qml:407
 msgid "Status"
 msgstr "Staid"
 
-#: ../plugins/bluetooth//PageComponent.qml:392
+#: ../plugins/bluetooth//PageComponent.qml:411
 msgid "Signal Strength"
 msgstr "Neart an t-siognail"
 
-#: ../plugins/bluetooth//PageComponent.qml:429
+#: ../plugins/bluetooth//PageComponent.qml:448
 msgid "Forget this device"
 msgstr "Dìochuimhnich an t-uidheam seo"
 
@@ -1558,7 +1561,7 @@ msgstr "Àireamh fòn:"
 msgid "Phone number"
 msgstr "Àireamh fòn"
 
-#: ../plugins/about//Storage.qml:33 ../plugins/about//PageComponent.qml:143
+#: ../plugins/about//Storage.qml:33 ../plugins/about//PageComponent.qml:170
 msgid "Storage"
 msgstr "Stòras"
 
@@ -1623,56 +1626,57 @@ msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: ../plugins/about//PageComponent.qml:34
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:278
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:92
 msgid "About this phone"
 msgstr "Mun fhòn seo"
 
-#: ../plugins/about//PageComponent.qml:109
+#: ../plugins/about//PageComponent.qml:120
 msgid "Serial"
 msgstr "Àireamh shreathach"
 
-#: ../plugins/about//PageComponent.qml:124
+#: ../plugins/about//PageComponent.qml:151
 msgid "Wi-Fi address"
 msgstr "Seòladh Wi-Fi"
 
-#: ../plugins/about//PageComponent.qml:132
+#: ../plugins/about//PageComponent.qml:159
 msgid "Bluetooth address"
 msgstr "Soladh bluetooth"
 
-#: ../plugins/about//PageComponent.qml:144
+#. TRANSLATORS: that's the free disk space, indicated in the most appropriate storage unit
+#: ../plugins/about//PageComponent.qml:172
 #, qt-format
 msgid "%1 free"
 msgstr "%1 saor"
 
-#: ../plugins/about//PageComponent.qml:151
+#: ../plugins/about//PageComponent.qml:179
 msgid "Software:"
 msgstr "Bathar-bog:"
 
-#: ../plugins/about//PageComponent.qml:156
+#: ../plugins/about//PageComponent.qml:184
 msgid "OS"
 msgstr "OS"
 
-#: ../plugins/about//PageComponent.qml:165
+#: ../plugins/about//PageComponent.qml:193
 msgid "Last updated"
 msgstr "Ùrachadh mu dheireadh"
 
-#: ../plugins/about//PageComponent.qml:173
+#: ../plugins/about//PageComponent.qml:201
 msgid "Check for updates"
 msgstr "Thoir sùil airson ùrachaidhean"
 
-#: ../plugins/about//PageComponent.qml:182
+#: ../plugins/about//PageComponent.qml:211
 msgid "Legal:"
 msgstr "Nòtaichean laghail:"
 
-#: ../plugins/about//PageComponent.qml:187 ../plugins/about//Software.qml:11
+#: ../plugins/about//Software.qml:11 ../plugins/about//PageComponent.qml:216
 msgid "Software licenses"
 msgstr "Ceadachasan bathair-bhog"
 
-#: ../plugins/about//PageComponent.qml:195
+#: ../plugins/about//PageComponent.qml:224
 msgid "Regulatory info"
 msgstr "Fiosrachadh riaghladaireachd"
 
-#: ../plugins/about//PageComponent.qml:203
+#: ../plugins/about//PageComponent.qml:232
 msgid "Developer mode"
 msgstr "Modh an luchd-leasachaidh"
 
@@ -1762,7 +1766,7 @@ msgstr "Bliadhna"
 
 #. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
 #: ../plugins/time-date//PageComponent.qml:29
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:314
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:82
 msgid "Time & Date"
 msgstr "An t-àm ⁊ ceann-là"
 
@@ -1770,79 +1774,79 @@ msgstr "An t-àm ⁊ ceann-là"
 msgid "Time zone:"
 msgstr "Roinn-tìde:"
 
-#: ../plugins/time-date//PageComponent.qml:68
+#: ../plugins/time-date//PageComponent.qml:66
 msgid "Set the time and date:"
 msgstr "Suidhich an t-àm agus an ceann-là:"
 
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#: ../plugins/system-update//PageComponent.qml:38
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:326
+#: ../plugins/system-update//PageComponent.qml:37
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:128
 msgid "Updates"
 msgstr "Ùrachaidhean"
 
-#: ../plugins/system-update//PageComponent.qml:117
+#: ../plugins/system-update//PageComponent.qml:90
 msgid "Update System"
 msgstr "Ùraich an siostam"
 
-#: ../plugins/system-update//PageComponent.qml:118
+#: ../plugins/system-update//PageComponent.qml:91
 msgid "The phone needs to restart to install the system update."
 msgstr ""
 "Feumaidh am fòn tòiseachadh as ùr gus ùrachadh an t-siostaim a chur an sàs."
 
-#: ../plugins/system-update//PageComponent.qml:118
+#: ../plugins/system-update//PageComponent.qml:91
 msgid "Connect the phone to power before installing the system update."
 msgstr ""
 "Ceangail am fòn ris a' chumhachd mus tòisich thu air ùrachadh an t-siostaim "
 "a stàladh."
 
-#: ../plugins/system-update//PageComponent.qml:121
+#: ../plugins/system-update//PageComponent.qml:94
 msgid "Install & Restart"
 msgstr "Stàlaich ⁊ ath-thòisich"
 
-#: ../plugins/system-update//PageComponent.qml:131
+#: ../plugins/system-update//PageComponent.qml:104
 msgid "Not Now"
 msgstr "Chan ann an-dràsta"
 
-#: ../plugins/system-update//PageComponent.qml:137
+#: ../plugins/system-update//PageComponent.qml:110
 msgid "Install"
 msgstr "Stàlaich"
 
-#: ../plugins/system-update//PageComponent.qml:152
+#: ../plugins/system-update//PageComponent.qml:125
 msgid "Installation failed"
 msgstr "Dh'fhàillig an stàladh"
 
-#: ../plugins/system-update//PageComponent.qml:156
-#: ../plugins/cellular//Components//SimEditor.qml:200
+#: ../plugins/system-update//PageComponent.qml:129
+#: ../plugins/cellular//Components//SimEditor.qml:217
 msgid "OK"
 msgstr "Ceart ma-thà"
 
-#: ../plugins/system-update//PageComponent.qml:176
+#: ../plugins/system-update//PageComponent.qml:149
 msgid "Software is up to date"
 msgstr "Tha am bathar-bog cho ùr 's a ghabhas"
 
-#: ../plugins/system-update//PageComponent.qml:235
-#: ../plugins/system-update//PageComponent.qml:241
+#: ../plugins/system-update//PageComponent.qml:208
+#: ../plugins/system-update//PageComponent.qml:214
 msgid "Sorry, the system update failed."
 msgstr "Duilich ach dh'fhàillig le ùrachadh an t-siostaim."
 
-#: ../plugins/system-update//PageComponent.qml:254
+#: ../plugins/system-update//PageComponent.qml:227
 msgid "Restarting…"
 msgstr "'Ga thòiseachadh às ùr…"
 
-#: ../plugins/system-update//PageComponent.qml:298
+#: ../plugins/system-update//PageComponent.qml:271
 msgid "Checking for updates…"
 msgstr "A' lorg ùrachaidhean…"
 
-#: ../plugins/system-update//PageComponent.qml:298
+#: ../plugins/system-update//PageComponent.qml:271
 msgid "Connect to the Internet to check for updates"
 msgstr "Ceangail ris an eadar-lìon gus sùil a thoirt airson ùrachaidhean"
 
-#: ../plugins/system-update//PageComponent.qml:313
-#: ../plugins/system-update//PageComponent.qml:471
+#: ../plugins/system-update//PageComponent.qml:286
+#: ../plugins/system-update//PageComponent.qml:445
 msgid "Retry"
 msgstr "Feuch ris a-rithist"
 
-#: ../plugins/system-update//PageComponent.qml:338
+#: ../plugins/system-update//PageComponent.qml:311
 #, qt-format
 msgid "Install %1 update…"
 msgid_plural "Install %1 updates…"
@@ -1851,7 +1855,7 @@ msgstr[1] "Stàlaich %1 ùrachadh…"
 msgstr[2] "Stàlaich %1 ùrachaidhean…"
 msgstr[3] "Stàlaich %1 ùrachadh…"
 
-#: ../plugins/system-update//PageComponent.qml:339
+#: ../plugins/system-update//PageComponent.qml:312
 #, qt-format
 msgid "Install %1 update"
 msgid_plural "Install %1 updates"
@@ -1860,91 +1864,91 @@ msgstr[1] "Stàlaich %1 ùrachadh"
 msgstr[2] "Stàlaich %1 ùrachaidhean"
 msgstr[3] "Stàlaich %1 ùrachadh"
 
-#: ../plugins/system-update//PageComponent.qml:340
+#: ../plugins/system-update//PageComponent.qml:313
 msgid "Pause All"
 msgstr "Cuir gach aon 'na stad"
 
-#: ../plugins/system-update//PageComponent.qml:474
+#: ../plugins/system-update//PageComponent.qml:448
 msgid "Install…"
 msgstr "Stàlaich…"
 
-#: ../plugins/system-update//PageComponent.qml:476
+#: ../plugins/system-update//PageComponent.qml:450
 msgid "Download"
 msgstr "Luchdaich a-nuas"
 
-#: ../plugins/system-update//PageComponent.qml:480
+#: ../plugins/system-update//PageComponent.qml:454
 msgid "Pause"
 msgstr "Cuir 'na stad"
 
-#: ../plugins/system-update//PageComponent.qml:482
+#: ../plugins/system-update//PageComponent.qml:456
 msgid "Resume"
 msgstr "Lean air"
 
-#: ../plugins/system-update//PageComponent.qml:484
+#: ../plugins/system-update//PageComponent.qml:458
 msgid "Update"
 msgstr "Ùraich"
 
-#: ../plugins/system-update//PageComponent.qml:522
+#: ../plugins/system-update//PageComponent.qml:498
 msgid "Installing"
 msgstr "'Ga stàladh"
 
-#: ../plugins/system-update//PageComponent.qml:524
+#: ../plugins/system-update//PageComponent.qml:500
 msgid "Installed"
 msgstr "Air a stàladh"
 
-#: ../plugins/system-update//PageComponent.qml:525
+#: ../plugins/system-update//PageComponent.qml:501
 msgid "Downloading"
 msgstr "'Ga luchdadh a-nuas"
 
-#: ../plugins/system-update//PageComponent.qml:536
+#: ../plugins/system-update//PageComponent.qml:513
 #, qt-format
 msgid "%1 of %2"
 msgstr "%1 à %2"
 
-#: ../plugins/system-update//PageComponent.qml:635
+#: ../plugins/system-update//PageComponent.qml:612
 msgid "Version: "
 msgstr "Tionndadh: "
 
-#: ../plugins/system-update//PageComponent.qml:667
+#: ../plugins/system-update//PageComponent.qml:644
 msgid "Sign in to Ubuntu One to receive updates for apps."
 msgstr ""
 "Clàraich a-steach air Ubuntu One gus ùrachaidhean airson aplacaidean "
 "fhaighinn."
 
-#: ../plugins/system-update//PageComponent.qml:676
+#: ../plugins/system-update//PageComponent.qml:653
 msgid "Sign In…"
 msgstr "Clàraich a-steach…"
 
-#: ../plugins/system-update//PageComponent.qml:720
+#: ../plugins/system-update//PageComponent.qml:697
 msgid "Installing update…"
 msgstr "A' stàladh an ùrachaidh…"
 
-#: ../plugins/system-update//PageComponent.qml:759
 #: ../plugins/system-update//Configuration.qml:29
+#: ../plugins/system-update//PageComponent.qml:736
 msgid "Auto download"
 msgstr "Luchdadh a-nuas fèin-obrachail"
 
-#: ../plugins/system-update//PageComponent.qml:764
+#: ../plugins/system-update//PageComponent.qml:741
 msgid "On wi-fi"
 msgstr "Air WiFi"
 
-#: ../plugins/system-update//PageComponent.qml:766
+#: ../plugins/system-update//PageComponent.qml:743
 msgid "Always"
 msgstr "An-còmhnaidh"
 
-#: ../plugins/system-update//PageComponent.qml:781
+#: ../plugins/system-update//PageComponent.qml:758
 msgid " bytes"
 msgstr " bytes"
 
-#: ../plugins/system-update//PageComponent.qml:784
+#: ../plugins/system-update//PageComponent.qml:761
 msgid " KiB"
 msgstr " KiB"
 
-#: ../plugins/system-update//PageComponent.qml:787
+#: ../plugins/system-update//PageComponent.qml:764
 msgid " MiB"
 msgstr " MiB"
 
-#: ../plugins/system-update//PageComponent.qml:790
+#: ../plugins/system-update//PageComponent.qml:767
 msgid " GiB"
 msgstr " GiB"
 
@@ -1985,36 +1989,31 @@ msgstr "Cuir dealbh ris…"
 msgid "Remove images…"
 msgstr "Thoir dealbhan air falbh…"
 
-#: ../plugins/cellular//Components//CellularMultiSim.qml:82
+#: ../plugins/cellular//Components//SingleSim.qml:37
 #: ../plugins/cellular//Components//NoSim.qml:29
-#: ../plugins/cellular//Components//CellularSingleSim.qml:32
+#: ../plugins/cellular//Components//DataMultiSim.qml:41
 msgid "Cellular data:"
 msgstr "Dàta fòn-làimhe:"
 
-#: ../plugins/cellular//Components//CellularMultiSim.qml:138
-#: ../plugins/cellular//Components//NoSim.qml:32
-#: ../plugins/cellular//Components//CellularSingleSim.qml:51
+#: ../plugins/cellular//Components//Sim.qml:42
 msgid "2G only (saves battery)"
 msgstr "2G a-mhàin (sàbhail cumhachd a' bhataraidh)"
 
-#: ../plugins/cellular//Components//CellularMultiSim.qml:139
-#: ../plugins/cellular//Components//CellularSingleSim.qml:52
+#: ../plugins/cellular//Components//Sim.qml:43
 msgid "2G/3G (faster)"
 msgstr "2G/3G (nas luaithe)"
 
-#: ../plugins/cellular//Components//CellularMultiSim.qml:140
-#: ../plugins/cellular//Components//NoSim.qml:32
-#: ../plugins/cellular//Components//CellularSingleSim.qml:53
+#: ../plugins/cellular//Components//Sim.qml:44
 msgid "2G/3G/4G (faster)"
 msgstr "2G/3G/4G (nas luaithe)"
 
-#: ../plugins/cellular//Components//CellularMultiSim.qml:182
+#: ../plugins/cellular//Components//SingleSim.qml:50
 #: ../plugins/cellular//Components//NoSim.qml:37
-#: ../plugins/cellular//Components//CellularSingleSim.qml:72
+#: ../plugins/cellular//Components//DataMultiSim.qml:74
 msgid "Data roaming"
 msgstr "Dàta air fàrsan"
 
-#: ../plugins/cellular//Components//SimEditor.qml:77
+#: ../plugins/cellular//Components//SimEditor.qml:89
 msgid "Edit SIM Name"
 msgstr "Deasaich ainm an t-SIM"
 
@@ -2038,13 +2037,13 @@ msgstr ""
 msgid "For messages, use:"
 msgstr "Airson teachdaireachdan, cleachd:"
 
-#: ../plugins/cellular//Components//MultiSim.qml:42
-#: ../plugins/cellular//Components//SingleSim.qml:37
+#: ../plugins/cellular//Components//MultiSim.qml:52
+#: ../plugins/cellular//Components//SingleSim.qml:64
 msgid "Hotspot disabled because Wi-Fi is off."
 msgstr "Tha an Hotspot à comas a chionn 's gu bheil a' WiFi dheth."
 
-#: ../plugins/cellular//Components//MultiSim.qml:58
-#: ../plugins/cellular//Components//SingleSim.qml:52
+#: ../plugins/cellular//Components//MultiSim.qml:68
+#: ../plugins/cellular//Components//SingleSim.qml:79
 msgid "Data usage statistics"
 msgstr "Stats cleachdadh dàta"
 
@@ -2102,44 +2101,44 @@ msgstr "4 àireamhan"
 msgid "Numbers and letters"
 msgstr "Àireamhan 's litrichean"
 
+#: ../wizard/qml/Pages//passwd-set.qml:83
 #: ../wizard/qml/Pages//30-passwd-type.qml:112
-#: ../wizard/qml/Pages//40-wifi.qml:196 ../wizard/qml/Pages//10-welcome.qml:85
+#: ../wizard/qml/Pages//passwd-confirm.qml:75
 #: ../wizard/qml/Pages//50-location.qml:92
 #: ../wizard/qml/Pages//60-reporting.qml:48
+#: ../wizard/qml/Pages//10-welcome.qml:85 ../wizard/qml/Pages//40-wifi.qml:212
 msgid "Continue"
 msgstr "Lean air adhart"
 
-#: ../wizard/qml/Pages//40-wifi.qml:27
+#: ../wizard/qml/Pages//40-wifi.qml:28
 msgid "Connect to Wi‑Fi"
 msgstr "Ceangail ri Wi-Fi"
 
-#: ../wizard/qml/Pages//40-wifi.qml:146
+#: ../wizard/qml/Pages//40-wifi.qml:165
 msgid "Available networks…"
 msgstr "Lìonraidhean ri làimh…"
 
-#: ../wizard/qml/Pages//40-wifi.qml:147
+#: ../wizard/qml/Pages//40-wifi.qml:166
 msgid "No available networks."
 msgstr "Chan eil lìonra ri làimh."
 
-#: ../wizard/qml/Pages//40-wifi.qml:196
-#: ../wizard/qml/Pages//31-passwd-set.qml:77
-#: ../wizard/qml/Pages//20-sim.qml:67
+#: ../wizard/qml/Pages//20-sim.qml:71 ../wizard/qml/Pages//40-wifi.qml:212
 msgid "Skip"
-msgstr "Gearr leum"
+msgstr "Leum thairis air"
 
 #: ../wizard/qml/Pages//here-terms.qml:25
 msgid "Terms & Conditions"
 msgstr "Teirmichean ⁊ cumhaichean"
 
-#: ../wizard/qml/Pages//31-passwd-set.qml:48
+#: ../wizard/qml/Pages//passwd-set.qml:53
 msgid "Enter passphrase"
 msgstr "Cuir abairt-fhaire a-steach"
 
-#: ../wizard/qml/Pages//31-passwd-set.qml:49
+#: ../wizard/qml/Pages//passwd-set.qml:54
 msgid "Choose your passcode"
 msgstr "Tagh an còd-faire agad"
 
-#: ../wizard/qml/Pages//31-passwd-set.qml:56
+#: ../wizard/qml/Pages//passwd-set.qml:61
 msgid "Passphrase must be 4 characters long"
 msgstr "Feumaidh an abairt-fhaire a bhith 4 caractaran a dh'fhaid"
 
@@ -2147,20 +2146,20 @@ msgstr "Feumaidh an abairt-fhaire a bhith 4 caractaran a dh'fhaid"
 msgid "Add a SIM card and restart your device"
 msgstr "Cuir cairt SIM ris 's tòisich an uidheam agad às ùr"
 
-#: ../wizard/qml/Pages//20-sim.qml:53
+#: ../wizard/qml/Pages//20-sim.qml:57
 msgid "Without it, you won’t be able to make calls or use text messaging."
 msgstr "Chan urrainn dhut gairm no teachdaireachd a chur às a h-aonais."
 
-#: ../wizard/qml/Pages//passwd-confirm.qml:51
+#: ../wizard/qml/Pages//passwd-confirm.qml:52
 msgid "Sorry, incorrect passphrase."
 msgstr "Duilich ach tha an abairt-fhaire cearr."
 
-#: ../wizard/qml/Pages//passwd-confirm.qml:51
 #: ../wizard/qml/Pages//passwd-confirm.qml:52
+#: ../wizard/qml/Pages//passwd-confirm.qml:53
 msgid "Please try again."
 msgstr "Feuch ris a-rithist."
 
-#: ../wizard/qml/Pages//passwd-confirm.qml:52
+#: ../wizard/qml/Pages//passwd-confirm.qml:53
 msgid "Sorry, incorrect passcode."
 msgstr "Duilich ach tha an còd-faire cearr."
 
@@ -2250,747 +2249,747 @@ msgstr ""
 msgid "Back"
 msgstr "Air ais"
 
-#: ../wizard/qml/Components//StackButton.qml:40
+#: ../wizard/qml/Components//StackButton.qml:41
 #, qt-format
 msgid "〈  %1"
 msgstr "〈  %1"
 
-#: ../wizard/qml/Components//StackButton.qml:43
+#: ../wizard/qml/Components//StackButton.qml:44
 #, qt-format
 msgid "%1  〉"
 msgstr "%1  〉"
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:4
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:4
 msgid "appearance"
 msgstr "appearance;coltas"
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:6
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:6
 msgid "background"
 msgstr "background;cùlaibh"
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:8
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:8
 msgid "wallpaper"
 msgstr "wallpaper;pàipear-balla"
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:10
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:10
 msgid "art"
 msgstr "ealain"
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:12
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:12
 msgid "photo"
 msgstr "dealbh-camara"
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:14
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:14
 msgid "picture"
 msgstr "dealbh"
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:16
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:16
 msgid "image"
 msgstr "image;dealbh;deilbh;dealbhan-camara;deilbh"
 
 #. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:18
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:18
 msgid "Accessibility"
 msgstr "Accessibility;So-inntrigeachd"
 
 #. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:20
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:20
 msgid "accessibility"
 msgstr "accessibility;so-inntrigeachd"
 
 #. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:22
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:22
 msgid "a11y"
 msgstr "a11y"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:26
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:174
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:216
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:150
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:172
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:316
 msgid "network"
 msgstr "network;lìonra"
 
-#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:28
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:270
+#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:74
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:152
 msgid "wireless"
 msgstr "wireless;uèirleas"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:30
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:154
 msgid "wifi"
 msgstr "wifi"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:32
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:156
 msgid "wi-fi"
 msgstr "wi-fi"
 
-#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:34
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:272
+#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:76
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:158
 msgid "connect"
 msgstr "connect;ceangail;ceangal"
 
-#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:36
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:274
+#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:78
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:160
 msgid "disconnect"
 msgstr "disconnect;dì-cheangail;dì-cheangal"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:38
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:162
 msgid "hidden"
 msgstr "hidden;falaichte"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:40
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:164
 msgid "ip"
 msgstr "ip"
 
-#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:42
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:294
+#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:108
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:166
 msgid "address"
 msgstr "address;seòladh"
 
-#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:46
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:302
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:330
+#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:116
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:132
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:246
 msgid "software"
 msgstr "software;bathar-bog"
 
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:48
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:248
 msgid "notifications"
 msgstr "brathan"
 
+#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:50
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:252
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:334
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:136
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:250
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:304
 msgid "apps"
 msgstr "aplacaidean"
 
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:52
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:252
 msgid "authorize"
 msgstr "authorize;dearbhaidh;dearbhadh"
 
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:54
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:254
 msgid "alerts"
 msgstr "alerts;rabhadh;rabhaidhean"
 
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:56
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:256
 msgid "permissions"
 msgstr "permissions;ceadaich;ceadachadh"
 
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:58
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:258
 msgid "badges"
 msgstr "badges;suaicheantasan"
 
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:60
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:260
 msgid "facebook"
 msgstr "facebook"
 
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:62
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:262
 msgid "twitter"
 msgstr "twitter"
 
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:64
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:264
 msgid "flickr"
 msgstr "flickr"
 
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:66
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:266
 msgid "gmail"
 msgstr "gmail"
 
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:70
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:320
 msgid "sound"
 msgstr "sound;fuaim"
 
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:72
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:322
 msgid "silent"
 msgstr "silent;sàmhach"
 
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:74
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:324
 msgid "ringtone"
 msgstr "ringtone;seirm;fuaim seirme"
 
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:76
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:326
 msgid "vibrate"
 msgstr "vibrate;crith"
 
-#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:78
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:152
+#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:52
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:328
 msgid "dialpad"
 msgstr "dialpad;daitheal;pada-deitheil;àireamhan"
 
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:80
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:330
 msgid "message"
 msgstr "message;teachdaireachdan"
 
-#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:82
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:118
+#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:272
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:332
 msgid "keyboard"
 msgstr "keyboard;cànan;cànain"
 
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:84
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:334
 msgid "volume"
 msgstr "volume;fuaim;àirde fuaime;àirde na fuaime"
 
 #. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:88
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:198
 msgid "reset"
 msgstr "reset;ath-shuidhich"
 
 #. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:90
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:200
 msgid "erase"
 msgstr "erase;suathadh;sguabadh;sgudal"
 
 #. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:92
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:202
 msgid "factory"
 msgstr "factory;factaraidh"
 
 #. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:94
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:204
 msgid "clear"
 msgstr "clear;falamhaich;falamhachadh;bànaich;bànachadh"
 
 #. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:96
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:206
 msgid "restore"
 msgstr "restore;aisig;aiseag"
 
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:100
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:26
 msgid "battery"
 msgstr "battery;bataraidh"
 
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:102
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:28
 msgid "power"
 msgstr "power;cumhachd;dealan"
 
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:104
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:30
 msgid "charge"
 msgstr "charge;teairrds;teàirrds;cumhachd;dealan"
 
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:106
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:32
 msgid "idle"
 msgstr "idle;tàmh;na thàmh"
 
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:108
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:224
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:248
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:34
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:226
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:300
 msgid "lock"
 msgstr "lock;glais;glas"
 
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:110
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:36
 msgid "disable"
 msgstr "disable;comas;à comas;cuir à comas;cur à comas"
 
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:112
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:38
 msgid "enable"
 msgstr "disable;comas;an comas;cuir an comas;cur an comas"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:116
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:270
 msgid "language"
 msgstr "cànan;language"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:120
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:274
 msgid "spellcheck"
 msgstr "spellcheck;dearbhair-litreachaidh;dearbhadh;litreachadh"
 
-#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:122
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:166
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:322
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:336
+#. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:90
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:138
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:216
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:276
 msgid "automatic"
 msgstr "fèin-obrachail"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:124
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:278
 msgid "correct"
 msgstr "correct;ceartaich;ceartachadh"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:126
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:280
 msgid "suggestions"
 msgstr "suggestions;moladh;molaidhean"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:128
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:282
 msgid "capitalization"
 msgstr "capitalization;cèis;litrichean;mòra;beaga"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:130
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:284
 msgid "punctuation"
 msgstr "punctuation;puingeachadh;puingich;pungadh;comharran"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:132
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:286
 msgid "layout"
 msgstr "layout;co-dhealbhachd"
 
-#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:134
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:162
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:212
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:288
 msgid "display"
 msgstr "display;sealladh;sgrìn;monatar;taisbeanadh;uidheam-taisbeanaidh"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:136
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:290
 msgid "words"
 msgstr "words;facal;facail;faclan"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:138
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:292
 msgid "vibration"
 msgstr "vibration;crith"
 
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:142
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:286
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:42
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:100
 msgid "phone"
 msgstr "phone;fòn"
 
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:144
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:44
 msgid "services"
 msgstr "seirbheisean"
 
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:146
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:46
 msgid "forwarding"
 msgstr "sìneadh air adhart"
 
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:148
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:48
 msgid "waiting"
 msgstr "feitheamh"
 
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:150
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:50
 msgid "call"
 msgstr "gairm"
 
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:154
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:54
 msgid "shortcuts"
 msgstr "ath-ghoiridean"
 
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:156
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:56
 msgid "numbers"
 msgstr "àireamhan"
 
 #. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:160
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:210
 msgid "brightness"
 msgstr "Brightness;soilleireachd"
 
 #. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:164
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:250
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:214
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:302
 msgid "screen"
 msgstr "screen;sgrìn"
 
 #. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:168
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:218
 msgid "adjust"
 msgstr "adjust;gleusadh"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:172
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:170
 msgid "cellular"
 msgstr "cellular;fòn-làimhe"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:176
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:174
 msgid "mobile"
 msgstr "mobile;fòn-làimhe"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:178
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:176
 msgid "gsm"
 msgstr "gsm"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:180
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:178
 msgid "data"
 msgstr "data;dàta"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:182
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:180
 msgid "carrier"
 msgstr "carrier;giùlanair;solaraiche"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:184
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:182
 msgid "4g"
 msgstr "4g"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:186
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:184
 msgid "3g"
 msgstr "3g"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:188
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:186
 msgid "2g"
 msgstr "2g"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:190
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:188
 msgid "lte"
 msgstr "lte"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:192
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:190
 msgid "apn"
 msgstr "apn"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:194
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:192
 msgid "roam"
 msgstr "roam;fàrsan;air fàrsan"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:196
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:226
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:194
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:228
 msgid "sim"
 msgstr "sim"
 
 #. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:198
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:336
 msgid "Example"
 msgstr "example;ball-eisimpleir"
 
 #. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:200
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:338
 msgid "example"
 msgstr "example;ball-eisimpleir"
 
 #. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:202
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:340
 msgid "test"
 msgstr "test;deuchainn"
 
 #. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:204
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:342
 msgid "sample"
 msgstr "sample;ball-sampaill"
 
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:206
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:306
 msgid "Flight Mode"
 msgstr "Flight Mode;modh itealain"
 
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:208
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:308
 msgid "flight"
 msgstr "flight;iteal;itealan"
 
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:210
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:310
 msgid "plane"
 msgstr "plèana;plane"
 
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:212
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:312
 msgid "offline"
 msgstr "offline;far loidhne"
 
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:214
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:314
 msgid "airplane"
 msgstr "airplane;itealan;itealain;plèana"
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:220
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:222
 msgid "security"
 msgstr "security;tèarainteachd"
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:222
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:224
 msgid "privacy"
 msgstr "privacy;prìobhaideachd"
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:228
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:230
 msgid "pin"
 msgstr "pin"
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:230
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:232
 msgid "code"
 msgstr "code;còd"
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:232
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:234
 msgid "password"
 msgstr "password;facal-faire"
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:234
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:236
 msgid "passphrase"
 msgstr "passphrase;abairt-fhaire;abairt-faire"
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:236
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:238
 msgid "swipe"
 msgstr "swipe;grad-shlaighdeadh"
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:238
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:240
 msgid "allow"
 msgstr "allow;ceadaich;ceadachadh"
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:240
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:242
 msgid "access"
 msgstr "access;inntrigeadh"
 
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:242
+#: ../po/settings.js:174
 msgid "Orientation Lock"
 msgstr "Glais na comhair"
 
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:244
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:296
 msgid "rotation"
 msgstr "rotation;cuairteachadh"
 
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:246
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:298
 msgid "orientation"
 msgstr "orientation;comhair"
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:256
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:60
 msgid "bluetooth"
 msgstr "bluetooth"
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:258
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:62
 msgid "headset"
 msgstr "headset"
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:260
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:64
 msgid "pair"
 msgstr "pair;paidhrich;paidhreachadh;ceangail;ceangal"
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:262
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:282
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:66
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:96
 msgid "device"
 msgstr "device;uidheam"
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:264
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:68
 msgid "discover"
 msgstr "discover;lorg;mothaich;mothachadh"
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:266
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:70
 msgid "car"
 msgstr "car;càraichean"
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:268
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:72
 msgid "handsfree"
 msgstr "handsfree;làmhan saora;làmh shaor"
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:276
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:80
 msgid "stereo"
 msgstr "stereo"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:280
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:94
 msgid "about"
 msgstr "about;mu dhèidhinn"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:284
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:98
 msgid "info"
 msgstr "fiosrachadh;info"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:288
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:102
 msgid "number"
 msgstr "number;àireamh"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:290
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:104
 msgid "imei"
 msgstr "imei"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:292
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:106
 msgid "serial"
 msgstr "serial;àireamh shreathach;sreathach"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:296
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:110
 msgid "mac"
 msgstr "mac"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:298
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:112
 msgid "licenses"
 msgstr "licenses;ceadachasan"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:300
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:114
 msgid "developer"
 msgstr "developer;leasaichear;luchd-leasachaidh;neach-leasachaidh"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:304
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:118
 msgid "storage"
 msgstr "storage;stòras;glèidheadh"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:306
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:120
 msgid "disk"
 msgstr "disk;diosg;clàr"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:308
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:122
 msgid "space"
 msgstr "space;rum;àite"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:310
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:124
 msgid "version"
 msgstr "version;tionndadh"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:312
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:126
 msgid "revision"
 msgstr "revision;lèirmheas;tionndadh"
 
 #. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:316
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:84
 msgid "time"
 msgstr "time;àm"
 
 #. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:318
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:86
 msgid "date"
 msgstr "date;ceann-là;ceann-latha"
 
 #. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:320
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:88
 msgid "timezone"
 msgstr "timezone;roinn-tìde;roinn-ama"
 
 #. TRANSLATORS: This is a keyword or name for the update-notification plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:324
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:146
 msgid "Updates available"
 msgstr "Tha ùrachaidhean ri fhaighinn"
 
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:328
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:130
 msgid "system"
 msgstr "system;siostam"
 
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:332
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:134
 msgid "update"
 msgstr "update;ùrachadh"
 
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:338
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:140
 msgid "download"
 msgstr "luchdadh a-nuas"
 
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:340
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:142
 msgid "upgrade"
 msgstr "ùrachadh"
 
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/experimental/update-pot/builddir/po/settings.js:342
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:144
 msgid "click"
 msgstr "briogadh"
 
-#: ../plugins/security-privacy//securityprivacy.cpp:318
+#: ../plugins/security-privacy//securityprivacy.cpp:347
 msgid "Incorrect passcode. Try again."
 msgstr "Tha an còd-faire cearr. Feuch ris a-rithist."
 
-#: ../plugins/security-privacy//securityprivacy.cpp:320
+#: ../plugins/security-privacy//securityprivacy.cpp:349
 msgid "Incorrect passphrase. Try again."
 msgstr "Abairt-fhaire chearr. Feuch ris a-rithist."
 
-#: ../plugins/security-privacy//securityprivacy.cpp:323
+#: ../plugins/security-privacy//securityprivacy.cpp:352
 msgid "Could not set security mode"
 msgstr "Cha b' urrainn dhuinn am modh tèarainteachd a shuidheachadh"
 
-#: ../plugins/security-privacy//securityprivacy.cpp:372
+#: ../plugins/security-privacy//securityprivacy.cpp:377
 msgid "Could not set security display hint"
 msgstr "Cha b' urrainn dhuinn gliocas na tèarainteachd a shuidheachadh"
 
-#: ../plugins/security-privacy//securityprivacy.cpp:383
+#: ../plugins/security-privacy//securityprivacy.cpp:388
 msgid "Authentication token manipulation error"
 msgstr "Mearachd le beantainn ri tòcan an dearbhaidh"
 
@@ -2998,13 +2997,13 @@ msgstr "Mearachd le beantainn ri tòcan an dearbhaidh"
 msgid "Unknown title"
 msgstr "Tiotal nach aithne dhuinn"
 
-#: ../plugins/system-update//system_update.cpp:96
+#: ../plugins/system-update//system_update.cpp:94
 msgid "Can't cancel current request (can't contact service)"
 msgstr ""
 "Cha ghabh sgur dhen iarrtas làithreach (dh'fhàillig le conaltradh ris an t-"
 "seirbheis)"
 
-#: ../plugins/system-update//system_update.cpp:102
+#: ../plugins/system-update//system_update.cpp:100
 msgid "Can't pause current request (can't contact service)"
 msgstr ""
 "Cha ghabh an t-iarrtas làithreach cur 'na stad (dh'fhàillig le conaltradh "
@@ -3017,43 +3016,3 @@ msgstr "Seo ìomhaigh ùr an t-siostaim."
 #: ../push-helper/software_updates_helper.py:151
 msgid "Tap to open the system updater."
 msgstr "Thoir gnogag gus ùraichear an t-siostaim fhosgladh."
-
-#~ msgid "Refresh"
-#~ msgstr "Ath-nuadhaich"
-
-#~ msgid "Searching"
-#~ msgstr "'Ga lorg"
-
-#~ msgid "Remove"
-#~ msgstr "Thoir air falbh"
-
-#~ msgid "lang"
-#~ msgstr "lang;cànan"
-
-#~ msgid "i18n"
-#~ msgstr "i18n"
-
-#~ msgid "settings"
-#~ msgstr "settings;roghainnean"
-
-#~ msgid "Other network"
-#~ msgstr "Lìonra eile"
-
-#~ msgid "Password visible"
-#~ msgstr "Nochdaidh am facal-faire"
-
-#~ msgid "Connect to Wi-Fi"
-#~ msgstr "Ceangail ri Wi-Fi"
-
-#~ msgid "Available networks"
-#~ msgstr "Lìonraidhean ri làimh"
-
-#~ msgid "Set lock security"
-#~ msgstr "Suidhich tèarainteachd na glaise"
-
-#~ msgid "Those passphrases don't match."
-#~ msgstr "Chan eil an dà abairt-fhaire seo co-ionnann."
-
-#~ msgid "Passphrase must be at least four characters long."
-#~ msgstr ""
-#~ "Feumaidh ceithir caractaran a bhith ann an abairt-fhaire air a char as lugha."

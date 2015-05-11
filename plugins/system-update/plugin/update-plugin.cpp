@@ -52,7 +52,7 @@ UpdateItem::UpdateItem(const QVariantMap &staticData, QObject *parent):
     ItemBase(staticData, parent)
 {
     setVisibility(false);
-    m_updateManager = UpdateManager::instance();    
+    m_updateManager = UpdateManager::instance();
     QObject::connect(m_updateManager, SIGNAL(updateAvailableFound(bool)),
                   this, SLOT(onUpdateAvailableFound(bool)));
     QObject::connect(m_updateManager, SIGNAL(modelChanged()),
@@ -75,7 +75,7 @@ void UpdateItem::onModelChanged()
 {
     if (m_updateManager->model().count() > 0)
         setVisibility(true);
-    else 
+    else
         setVisibility(false);
 }
 
