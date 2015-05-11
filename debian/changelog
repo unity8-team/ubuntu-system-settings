@@ -1,3 +1,21 @@
+ubuntu-system-settings (0.3+15.04.20150511-0ubuntu1) vivid; urgency=medium
+
+  [ Ken VanDine ]
+  * Removed the spacing from the updates ListView and use margins
+    instead. This fixes the extra space left as updates are installed.
+    (LP: #1450866)
+
+  [ Sebastien Bacher ]
+  * [battery] display last charge info in hours rather than days (LP:
+    #1438535)
+
+  [ jonas-drange ]
+  * [security-privacy] give the focus to the right entry, if the current
+    unlock method is swipe then there is no "current password" so the
+    new input line should be the focussed one (LP: #1438049)
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Mon, 11 May 2015 20:43:06 +0000
+
 ubuntu-system-settings (0.3+15.04.20150430.1-0ubuntu1) vivid; urgency=medium
 
   [ CI Train Bot ]
