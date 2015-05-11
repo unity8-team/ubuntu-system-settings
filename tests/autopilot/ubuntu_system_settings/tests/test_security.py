@@ -139,6 +139,47 @@ class SecurityTestCase(SecurityBaseTestCase):
             Equals(_('Phone locking'))
         )
 
+    def test_lock_security_focus_on_entry(self):
+        self._go_to_phone_lock()
+
+        phone_lock_page = self.main_view.select_single(
+            objectName='phoneLockingPage')
+        selector = phone_lock_page.select_single(objectName='lockSecurity')
+        self.main_view.scroll_to_and_click(selector)
+
+        lock_security_page = self.main_view.wait_select_single(
+            objectName='lockSecurityPage')
+
+        # Find the selected security method.
+        unlock_methods = ['method_swipe', 'method_code', 'method_phrase']
+        selected_method = None
+        for m in unlock_methods:
+            if lock_security_page.select_single(objectName=m).selected:
+                selected_method = m
+
+        # If swipe is the selected security, we trigger the dialog by
+        # changing the security to method_code
+        if selected_method == 'method_swipe':
+            dialog_trigger = lock_security_page.select_single(
+                objectName='method_code')
+            input_selector = 'newInput'
+        else:
+            # If the security is anything besides swipe, we trigger the dialog
+            # by changing the code/phrase.
+            dialog_trigger = lock_security_page.select_single(
+                objectName='changePass')
+            input_selector = 'currentInput'
+
+        # Trigger dialog.
+        self.main_view.scroll_to_and_click(dialog_trigger)
+
+        # Find the text input.
+        dialog = self.main_view.wait_select_single(
+            objectName='changeSecurityDialog')
+        text_input = dialog.wait_select_single(
+            objectName=input_selector)
+        self.assertTrue(text_input.focus)
+
     def test_phone_lock_value(self):
         self._go_to_phone_lock()
         phone_lock_page = self.main_view.select_single(
