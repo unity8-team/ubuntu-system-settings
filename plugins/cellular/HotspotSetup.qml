@@ -189,6 +189,7 @@ Component {
             id: passwordVisible
             control: Switch {
                 id: passwordVisibleSwitch
+                activeFocusOnPress: false
             }
         }
 
@@ -200,6 +201,7 @@ Component {
                 id: cancelButton
                 Layout.fillWidth: true
                 text: i18n.tr("Cancel")
+                activeFocusOnPress: false
                 onClicked: PopupUtils.close(hotspotSetupDialog)
             }
 
@@ -210,6 +212,7 @@ Component {
                 text: hotspotSetupDialog.stored ? i18n.tr("Change") :
                     i18n.tr("Enable")
                 enabled: settingsValid()
+                activeFocusOnPress: false
                 onClicked: {
                     if (hotspotSetupDialog.stored) {
                         changeAction.trigger()

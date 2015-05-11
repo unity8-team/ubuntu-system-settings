@@ -414,7 +414,7 @@ void HotspotManager::setEnabled(bool value) {
   if (!blocked) {
     // "The device could not be readied for configuration"
     Q_EMIT reportError(5);
-    setEnable(!m_enabled);
+    setEnable(false);
     return;
   }
 
