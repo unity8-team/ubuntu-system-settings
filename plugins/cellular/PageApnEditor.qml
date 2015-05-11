@@ -189,6 +189,8 @@ ItemPage {
                     placeholderText: i18n.tr("Enter a name describing the APN")
                     next: accessPointName
                     Component.onCompleted: forceActiveFocus()
+                    onActiveFocusChanged: if (activeFocus) Editor.makeMeVisible(
+                        name)
                 }
             }
 
