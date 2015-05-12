@@ -396,7 +396,7 @@ class HotspotBaseTestCase(CellularBaseTestCase):
         device_path = self.obj_nm.AddWiFiDevice('test0', 'Barbaz', 1)
         self.device_mock = dbus.Interface(self.dbus_con.get_object(
             NM_SERVICE, device_path),
-            dbusmock.MOCK_IFACE)
+            'org.freedesktop.DBus.Properties')
 
         (self.u_mock, self.obj_urf) = self.spawn_server_template(
             'urfkill', stdout=subprocess.PIPE)

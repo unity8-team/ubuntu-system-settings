@@ -310,16 +310,19 @@ class CellularPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
     def setup_hotspot(self, config=None):
         hotspot_page = self._enter_hotspot()
         hotspot_page.setup_hotspot(config)
+        return hotspot_page
 
     @autopilot.logging.log_action(logger.debug)
     def enable_hotspot(self):
         hotspot_page = self._enter_hotspot()
         hotspot_page.enable_hotspot()
+        return hotspot_page
 
     @autopilot.logging.log_action(logger.debug)
     def disable_hotspot(self):
         hotspot_page = self._enter_hotspot()
         hotspot_page.disable_hotspot()
+        return hotspot_page
 
     @autopilot.logging.log_action(logger.debug)
     def _enter_hotspot(self):
@@ -357,20 +360,22 @@ class Hotspot(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
 
     @autopilot.logging.log_action(logger.debug)
     def setup_hotspot(self, config):
-        obj = self.select_single(objectName="hotspotSetupEntry")
+        obj = self.select_single(objectName='hotspotSetupEntry')
         self.pointing_device.click_object(obj)
         setup = self.get_root_instance().wait_select_single(
             objectName='hotspotSetup')
         if config:
-            if config["ssid"]:
-                setup.set_ssid(config["ssid"])
-            if config["password"]:
-                setup.set_password(config["password"])
+            if 'ssid' in config:
+                setup.set_ssid(config['ssid'])
+            if 'password' in config:
+                setup.set_password(config['password'])
         setup.enable()
+        if setup:
+            setup.wait_until_destroyed()
 
     @autopilot.logging.log_action(logger.debug)
     def get_hotspot_status(self):
-        pass
+        return self._switch.checked
 
 
 class HotspotSetup(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
@@ -400,7 +405,7 @@ class HotspotSetup(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
     @property
     def _enable_button(self):
         return self.wait_select_single(
-            'Button', objectName='enableButton')
+            'Button', objectName='confirmButton')
 
     @autopilot.logging.log_action(logger.debug)
     def set_ssid(self, ssid):

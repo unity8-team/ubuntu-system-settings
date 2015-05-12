@@ -137,109 +137,124 @@ Component {
             }
         ]
 
-        Label {
-            property bool enabled: false
-            id: feedback
-            horizontalAlignment: Text.AlignHCenter
-            height: contentHeight
-            wrapMode: Text.Wrap
-            visible: false
-        }
-
-        Label {
-            id: ssidLabel
-            text: i18n.tr("Hotspot name")
-            fontSize: "medium"
-            font.bold: true
-            color: Theme.palette.selected.backgroundText
-            elide: Text.ElideRight
-        }
-
-        TextField {
-            id: ssidField
-            objectName: "ssidField"
-            text: hotspotManager.ssid
-            Component.onCompleted: forceActiveFocus()
-        }
-
-        Label {
-            id: passwordLabel
-            text: i18n.tr("Key (must be 8 characters or longer)")
-            fontSize: "medium"
-            font.bold: true
-            color: Theme.palette.selected.backgroundText
-            elide: Text.ElideRight
-        }
-
-        TextField {
-            id: passwordField
-            objectName: "passwordField"
-            text: hotspotManager.password
-            echoMode: passwordVisibleSwitch.checked ?
-                TextInput.Normal : TextInput.Password
-
-            MouseArea {
-                anchors.fill: parent
-                onPressed: parent.forceActiveFocus()
+        Column {
+            anchors {
+                left: parent.left
+                right: parent.right
             }
-        }
+            spacing: units.gu(1)
 
-        ListItem.Standard {
-            text: i18n.tr("Show key")
-            id: passwordVisible
-            control: Switch {
-                id: passwordVisibleSwitch
-                activeFocusOnPress: false
-            }
-        }
-
-        RowLayout {
-
-            anchors.margins: units.gu(2)
-
-            Button {
-                id: cancelButton
-                Layout.fillWidth: true
-                text: i18n.tr("Cancel")
-                activeFocusOnPress: false
-                onClicked: PopupUtils.close(hotspotSetupDialog)
+            Label {
+                property bool enabled: false
+                id: feedback
+                horizontalAlignment: Text.AlignHCenter
+                height: contentHeight
+                wrapMode: Text.WordWrap
+                visible: false
             }
 
-            Button {
-                id: confirmButton
-                objectName: "confirmButton"
-                Layout.fillWidth: true
-                text: hotspotSetupDialog.stored ? i18n.tr("Change") :
-                    i18n.tr("Enable")
-                enabled: settingsValid()
-                activeFocusOnPress: false
-                onClicked: {
-                    if (hotspotSetupDialog.stored) {
-                        changeAction.trigger()
-                    } else {
-                        enableAction.trigger();
+            Label {
+                id: ssidLabel
+                text: i18n.tr("Hotspot name")
+                fontSize: "medium"
+                font.bold: true
+                color: Theme.palette.selected.backgroundText
+                elide: Text.ElideRight
+            }
+
+            TextField {
+                id: ssidField
+                objectName: "ssidField"
+                text: hotspotManager.ssid
+                inputMethodHints: Qt.ImhNoAutoUppercase | Qt.ImhNoPredictiveText
+                Component.onCompleted: forceActiveFocus()
+                width: parent.width
+            }
+
+            Label {
+                id: passwordLabel
+                text: i18n.tr("Key (must be 8 characters or longer)")
+                fontSize: "medium"
+                font.bold: true
+                color: Theme.palette.selected.backgroundText
+                wrapMode: Text.WordWrap
+                width: parent.width
+            }
+
+            TextField {
+                id: passwordField
+                objectName: "passwordField"
+                text: hotspotManager.password
+                echoMode: passwordVisibleSwitch.checked ?
+                    TextInput.Normal : TextInput.Password
+                inputMethodHints: Qt.ImhNoAutoUppercase | Qt.ImhNoPredictiveText
+                width: parent.width
+            }
+
+            ListItem.Standard {
+                text: i18n.tr("Show key")
+                id: passwordVisible
+                onClicked: passwordVisibleSwitch.trigger()
+                control: Switch {
+                    id: passwordVisibleSwitch
+                    activeFocusOnPress: false
+                }
+            }
+
+            Row {
+
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                }
+                width: parent.width
+                spacing: units.gu(2)
+
+                Button {
+                    id: cancelButton
+                    width: (parent.width / 2) - units.gu(1)
+                    text: i18n.tr("Cancel")
+                    activeFocusOnPress: false
+                    onClicked: PopupUtils.close(hotspotSetupDialog)
+                }
+
+                Button {
+                    id: confirmButton
+                    objectName: "confirmButton"
+                    width: (parent.width / 2) - units.gu(1)
+                    text: hotspotSetupDialog.stored ? i18n.tr("Change") :
+                        i18n.tr("Enable")
+                    enabled: settingsValid()
+                    activeFocusOnPress: false
+                    onClicked: {
+                        if (hotspotSetupDialog.stored) {
+                            changeAction.trigger()
+                        } else {
+                            enableAction.trigger();
+                        }
+                    }
+
+                    Icon {
+                        id: successIcon
+                        anchors.centerIn: parent
+                        height: parent.height - units.gu(1.5)
+                        width: parent.height - units.gu(1.5)
+                        name: "tick"
+                        color: "green"
+                        visible: false
+                    }
+
+                    ActivityIndicator {
+                        id: workingIndicator
+                        anchors.centerIn: parent
+                        running: false
+                        visible: running
+                        height: parent.height - units.gu(1.5)
                     }
                 }
-
-                Icon {
-                    id: successIcon
-                    anchors.centerIn: parent
-                    height: parent.height - units.gu(1.5)
-                    width: parent.height - units.gu(1.5)
-                    name: "tick"
-                    color: "green"
-                    visible: false
-                }
-
-                ActivityIndicator {
-                    id: workingIndicator
-                    anchors.centerIn: parent
-                    running: false
-                    visible: running
-                    height: parent.height - units.gu(1.5)
-                }
             }
         }
+
 
         Action {
             id: enableAction
