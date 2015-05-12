@@ -4,7 +4,6 @@ import Ubuntu.Components 0.1
 import Ubuntu.Components.Popups 0.1
 import Ubuntu.Content 0.1
 
-
 /* with a little help by looking into dekko mail client (lp:dekko) :*/
 PopupBase  {
     //visible: false
@@ -66,8 +65,9 @@ PopupBase  {
                     picker.fileImportSignal(fileUrl.toString().replace("file://", ""));
                     PopupUtils.close(picker);
                 }
+
             } else if (picker.activeTransfer.state === ContentTransfer.Aborted){
-                    PopupUtils.close(picker);
+                PopupUtils.close(picker);
             }
         }
     }

@@ -22,6 +22,7 @@
 #include "unitymenumodelstack.h"
 #include "wifidbushelper.h"
 #include "previousnetworkmodel.h"
+#include "certhandler.h"
 
 namespace {
 
@@ -45,6 +46,8 @@ void BackendPlugin::registerTypes(const char *uri)
     qmlRegisterType<UnityMenuModelStack>(uri, 1, 0, "UnityMenuModelStack");
     qmlRegisterSingletonType<WifiDbusHelper>(uri, 1, 0, "DbusHelper", dbusProvider);
     qmlRegisterType<PreviousNetworkModel>(uri, 1, 0, "PreviousNetworkModel");
+    qmlRegisterType<CertificateListModel>(uri, 1, 0, "CertificateListModel");
+    qmlRegisterType<CertificateHandler>(uri, 1, 0, "CertificateHandler");
 }
 
 void BackendPlugin::initializeEngine(QQmlEngine *engine, const char *uri)

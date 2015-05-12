@@ -78,10 +78,6 @@ Component {
                     opacity: 0.5
                 }
                 PropertyChanges {
-                    target: cacert
-                    enabled: false
-                }
-                PropertyChanges {
                     target: cacertLabel
                     opacity: 0.5
                 }
@@ -124,6 +120,10 @@ Component {
                 }
                 PropertyChanges {
                     target: authListLabel
+                    opacity: 0.5
+                }
+                PropertyChanges {
+                    target: wepInsecureLabel
                     opacity: 0.5
                 }
                 PropertyChanges {
@@ -223,6 +223,14 @@ Component {
         }
 
         Label {
+            id: wepInsecureLabel
+            objectName: "wepInsecureLabel"
+            color: "red"
+            text: i18n.tr("This network is insecure.")
+            visible: ( securityList.selectedIndex == 3)
+        }
+
+        Label {
             id: authListLabel
             text : i18n.tr("Authentication")
             objectName: "authListLabel"
@@ -255,8 +263,8 @@ Component {
             elide: Text.ElideRight
             visible:    ( securityList.selectedIndex == 2 || securityList.selectedIndex == 4) // WPA or D-WEP
                         && ( authList.selectedIndex == 1 ||
-                             authList.selectedIndex == 3 ||
-                             authList.selectedIndex == 4  )
+                            authList.selectedIndex == 3 ||
+                            authList.selectedIndex == 4  )
         }
 
         ListItem.ItemSelector {
@@ -276,151 +284,153 @@ Component {
                             authList.selectedIndex == 4  )
         }
 
-        Column{     // ca-cert
-            id: cacertColumn
+        Label {
+            id: cacertLabel
+            text : i18n.tr("CA Certificate")
+            objectName: "cacertListLabel"
+            fontSize: "medium"
+            font.bold: false
+            color: Theme.palette.selected.backgroundText
+            visible:    ( securityList.selectedIndex == 2 || securityList.selectedIndex == 4) // WPA or D-WEP
+                        && ( authList.selectedIndex == 0 ||
+                            authList.selectedIndex == 1 ||
+                            authList.selectedIndex == 3  )
+        }
+
+        ListItem.ItemSelector {
+            id: cacertSelector
             anchors {
                 left: parent.left
                 right: parent.right
             }
-            spacing: parent.spacing
-
-            visible:    ( securityList.selectedIndex == 2 || securityList.selectedIndex == 4)
+            visible:    ( securityList.selectedIndex == 2 || securityList.selectedIndex == 4) // WPA or D-WEP
                         && ( authList.selectedIndex == 0 ||
-                             authList.selectedIndex == 1 ||
-                             authList.selectedIndex == 4  )
-
-            RowLayout{
-                spacing: units.gu(4)
-                anchors {
-                    left: parent.left
-                    right: parent.right
-                }
-
-                Label {
-                    id: cacertLabel
-                    text : i18n.tr("CA Certificate")
-                    objectName: "cacertListLabel"
-                    fontSize: "medium"
-                    font.bold: false
-                    color: Theme.palette.selected.backgroundText
-                    anchors.bottom: addcacertButton.bottom
-                }
-
-                Button {
-                    id: addcacertButton
-                    visible: true
-                    objectName: "addcacertButton"
-                    anchors.right: parent.right
-                    text: i18n.tr("Choose file…")
-                    onClicked: {
-                        var pickerDialog = PopupUtils.open(Qt.resolvedUrl("./CertPicker.qml"));
-                        pickerDialog.fileImportSignal.connect(function(file){
-                                  cacert.text = file;
-                        });
-                    }
+                            authList.selectedIndex == 1 ||
+                            authList.selectedIndex == 3  )
+            model: cacertListModel
+            expanded: false
+            delegate: certSelectorDelegate
+            selectedIndex: 0
+            property string cacertFileName : { if(cacertSelector.selectedIndex !== 0 &&
+                                                  cacertSelector.selectedIndex !== (certListModel.rowCount()-1)){
+                                                  certListModel.getfileName(cacertSelector.selectedIndex)
+                                                } else {"";}
+                                              }
+            onSelectedIndexChanged: {
+                cacertListModel.dataupdate();
+                if (cacertSelector.selectedIndex === cacertListModel.rowCount()-1){
+                    var pickerDialog = PopupUtils.open(Qt.resolvedUrl("./CertPicker.qml"));
+                    pickerDialog.fileImportSignal.connect(function(file){
+                        certDialogLoader.source = "./CertDialog.qml";
+                        PopupUtils.open(certDialogLoader.item, cacertSelector, {certFileName: file});
+                    });
                 }
             }
 
-            TextArea  {
-                id : cacert
-                objectName: "cacert"
-                width: parent.width
-                autoSize: true
-                maximumLineCount: 4
-                placeholderText: i18n.tr("Absolute path to cert file or clipboard content")
 
+        }
+
+        Component{
+            id: certSelectorDelegate
+            OptionSelectorDelegate { text: CommonName;
+                                     subText:(CommonName != "None" && CommonName != "Choose file…") ?
+                                             (Organization +", Exp.date: " + expiryDate) : ""
             }
+        }
+        CertificateListModel {
+            id: cacertListModel
+        }
 
-            RowLayout{
-                spacing: units.gu(4)
-                anchors {
-                    left: parent.left
-                    right: parent.right
-                }
-                visible:    ( securityList.selectedIndex == 2 || securityList.selectedIndex == 4)
-                            && ( authList.selectedIndex == 0 ) // only for TLS
+        Loader{
+            id: certDialogLoader
+            asynchronous: false
+        }
 
-                Label {
-                    id: usercertLabel
-                    text : i18n.tr("User Certificate")
-                    objectName: "usercertListLabel"
-                    fontSize: "medium"
-                    font.bold: false
-                    color: Theme.palette.selected.backgroundText
-                    anchors.bottom: addusercertButton.bottom
-                }
+        Label {
+            id: usercertLabel
+            text : i18n.tr("Client Certificate")
+            objectName: "usercertLabel"
+            fontSize: "medium"
+            font.bold: false
+            color: Theme.palette.selected.backgroundText
+            visible:    ( securityList.selectedIndex == 2 || securityList.selectedIndex == 4)
+                        && ( authList.selectedIndex == 0 ) // only for TLS
 
-                Button {
-                    id: addusercertButton
-                    visible: true
-                    objectName: "addusercertButton"
-                    anchors.right: parent.right
-                    text: i18n.tr("Choose file…")
-                    onClicked: {
-                        var pickerDialog = PopupUtils.open(Qt.resolvedUrl("./CertPicker.qml"));
-                        pickerDialog.fileImportSignal.connect(function(file){
-                                  usercert.text = file;
-                        });
-                    }
-                }
+        }
+
+        ListItem.ItemSelector {
+            id: usercertSelector
+            anchors {
+                left: parent.left
+                right: parent.right
             }
-
-            TextArea{
-                id : usercert
-                objectName: "usercert"
-                visible:    ( securityList.selectedIndex == 2 || securityList.selectedIndex == 4)
-                            && ( authList.selectedIndex == 0 )
-                width: parent.width
-                autoSize: true
-                maximumLineCount: 4
-                placeholderText: i18n.tr("Absolute path to cert file or clipboard content")
-            }
-
-            RowLayout{
-                spacing: units.gu(4)
-                anchors {
-                    left: parent.left
-                    right: parent.right
-                }
-                visible:    ( securityList.selectedIndex == 2 || securityList.selectedIndex == 4)
-                            && ( authList.selectedIndex == 0 ) // only for TLS
-
-                Label {
-                    id: userprivatekeyLabel
-                    text : i18n.tr("User Private Key")
-                    objectName: "userprivatekeyLabel"
-                    fontSize: "medium"
-                    font.bold: false
-                    color: Theme.palette.selected.backgroundText
-                    anchors.bottom: adduserprivatekeyButton.bottom
-                }
-
-                Button {
-                    id: adduserprivatekeyButton
-                    visible: true
-                    objectName: "adduserprivatekeyButton"
-                    anchors.right: parent.right
-                    text: i18n.tr("Choose file…")
-                    onClicked: {
-                        var pickerDialog = PopupUtils.open(Qt.resolvedUrl("./CertPicker.qml"));
-                        pickerDialog.fileImportSignal.connect(function(file){
-                                  userprivatekey.text = file;
-                        });
-                    }
+            visible:    ( securityList.selectedIndex == 2 || securityList.selectedIndex == 4)
+                        && ( authList.selectedIndex == 0 ) // only for TLS
+            model: cacertListModel
+            expanded: false
+            delegate: certSelectorDelegate
+            selectedIndex: 0
+            property string usercertFileName: { if(usercertFileName.selectedIndex !== 0 &&
+                                                   usercertFileName.selectedIndex !== (certListModel.rowCount()-1)){
+                                                   certListModel.getfileName(usercertFileName.selectedIndex)
+                                                 } else {"";}
+                                               }
+            onSelectedIndexChanged: {
+                if (usercertSelector.selectedIndex === cacertListModel.rowCount()-1){
+                    var pickerDialog = PopupUtils.open(Qt.resolvedUrl("./CertPicker.qml"));
+                    pickerDialog.fileImportSignal.connect(function(file){
+                    });
                 }
             }
+        }
 
-            TextArea {
-                id : userprivatekey
-                objectName: "userprivatekey"
-                visible:    ( securityList.selectedIndex == 2 || securityList.selectedIndex == 4)
-                            && ( authList.selectedIndex == 0 )
-                width: parent.width
-                autoSize: true
-                maximumLineCount: 4
-                placeholderText: i18n.tr("Absolute path to key or clipboard content")
+        /*CertificateListModel {
+                id: usercertListModel
+            }*/
+
+        RowLayout{
+            spacing: units.gu(4)
+            anchors {
+                left: parent.left
+                right: parent.right
+            }
+            visible:    ( securityList.selectedIndex == 2 || securityList.selectedIndex == 4)
+                        && ( authList.selectedIndex == 0 ) // only for TLS
+
+            Label {
+                id: userprivatekeyLabel
+                text : i18n.tr("User Private Key")
+                objectName: "userprivatekeyLabel"
+                fontSize: "medium"
+                font.bold: false
+                color: Theme.palette.selected.backgroundText
+                anchors.bottom: adduserprivatekeyButton.bottom
             }
 
+            Button {
+                id: adduserprivatekeyButton
+                visible: true
+                objectName: "adduserprivatekeyButton"
+                anchors.right: parent.right
+                text: i18n.tr("Choose file…")
+                onClicked: {
+                    var pickerDialog = PopupUtils.open(Qt.resolvedUrl("./CertPicker.qml"));
+                    pickerDialog.fileImportSignal.connect(function(file){
+                        userprivatekey.text = file;
+                    });
+                }
+            }
+        }
+
+        TextArea {
+            id : userprivatekey
+            objectName: "userprivatekey"
+            visible:    ( securityList.selectedIndex == 2 || securityList.selectedIndex == 4)
+                        && ( authList.selectedIndex == 0 )
+            width: parent.width
+            autoSize: true
+            maximumLineCount: 4
+            placeholderText: i18n.tr("Absolute path to key or clipboard content")
         }
 
         Column{     // pacFile
@@ -460,10 +470,9 @@ Component {
                     onClicked: {
                         var pickerDialog = PopupUtils.open(Qt.resolvedUrl("./CertPicker.qml"));
                         pickerDialog.fileImportSignal.connect(function(file){
-                                  pacFile.text = file;
+                        PopupUtils.open(Qt.resolvedUrl("./CertDialog.qml"), {certContentText: file}); //         pacFile.text = file;
                         });
                     }
-
                 }
             }
 
@@ -485,15 +494,14 @@ Component {
             fontSize: "medium"
             font.bold: false
             color: Theme.palette.selected.backgroundText
-            elide: Text.ElideRight
-            visible: ( securityList.selectedIndex == 2  && authList.selectedIndex !== 2 )
+            visible: ( securityList.selectedIndex == 2  && authList.selectedIndex != 2 )
         }
 
         TextField {
             id : anonymousIdentity
             objectName: "anonymousIdentity"
             width: parent.width
-            visible: ( securityList.selectedIndex == 2  && authList.selectedIndex !== 2 )
+            visible: ( securityList.selectedIndex == 2  && authList.selectedIndex != 2 )
             inputMethodHints: Qt.ImhNoPredictiveText
             Component.onCompleted: forceActiveFocus()
             onAccepted: {
@@ -629,7 +637,7 @@ Component {
             }
 
         }
-        //ListItem.ThinDivider {visible: securityList.selectedIndex != 0}
+
         RowLayout {
             id: buttonRow
             anchors {
@@ -694,7 +702,7 @@ Component {
                             authList.selectedIndex,
                             [username.text, anonymousIdentity.text],
                             password.text,
-                            [cacert.text, usercert.text, userprivatekey.text, pacFile.text] ,
+                            [cacertSelector.cacertFileName, usercertSelector.usercertFileName, userprivatekey.text, pacFile.text] ,
                             p2authList.selectedIndex);
                 otherNetworkDialog.state = "CONNECTING";
             }
