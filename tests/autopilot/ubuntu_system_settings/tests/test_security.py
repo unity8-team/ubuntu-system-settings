@@ -357,7 +357,6 @@ class SecurityTestCase(SecurityBaseTestCase):
     def test_sim_pin_lock_control_lock_fail(self):
         self.modem_0.Set(SIM_IFACE, 'LockedPins', "")
         sim_pin_page = self.security_page.go_to_sim_lock()
-        switch = sim_pin_page.get_sim_pin_switch(0)
 
         self.assertFalse(
             len(self.modem_0.Get(SIM_IFACE, 'LockedPins')) > 0
