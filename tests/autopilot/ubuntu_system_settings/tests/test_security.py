@@ -199,22 +199,19 @@ class SecurityTestCase(SecurityBaseTestCase):
         )
 
     def test_sim_pin_lock_control(self):
-        self._go_to_sim_lock()
-        sim_lock_control = self.main_view.select_single(
-            objectName='simPinSwitch'
-        )
+        sim_pin_page = self.security_page.go_to_sim_lock()
+
+        switch = sim_pin_page.get_sim_pin_switch(0)
         locked = len(self.modem_0.Get(SIM_IFACE, 'LockedPins')) > 0
-        self.assertEquals(locked, sim_lock_control.checked)
+        self.assertEquals(locked, switch.checked)
 
     def test_sim_pin_lock_control_unlock(self):
-        self._go_to_sim_lock()
-        sim_lock_control = self.main_view.select_single(
-            objectName='simPinSwitch'
-        )
+        sim_pin_page = self.security_page.go_to_sim_lock()
+        switch = sim_pin_page.get_sim_pin_switch(0)
 
-        self.assertTrue(sim_lock_control.checked)
+        self.assertTrue(switch.checked)
 
-        self.main_view.scroll_to_and_click(sim_lock_control)
+        sim_pin_page.click_sim_pin_switch(0)
 
         lock_dialog = self.main_view.select_single(
             objectName='lockDialogComponent'
@@ -252,22 +249,20 @@ class SecurityTestCase(SecurityBaseTestCase):
 
         self.main_view.scroll_to_and_click(submit_button)
 
-        self.assertFalse(sim_lock_control.checked)
+        self.assertFalse(switch.checked)
 
         locked = len(self.modem_0.Get(SIM_IFACE, 'LockedPins')) > 0
-        self.assertEquals(locked, sim_lock_control.checked)
+        self.assertEquals(locked, switch.checked)
 
     @unittest.skip('skipped because the simPinSwitch state fails to update')
     def test_sim_pin_lock_control_lock(self):
         self.modem_0.Set(SIM_IFACE, 'LockedPins', "")
-        self._go_to_sim_lock()
-        sim_lock_control = self.main_view.select_single(
-            objectName='simPinSwitch'
-        )
+        sim_pin_page = self.security_page.go_to_sim_lock()
+        switch = sim_pin_page.get_sim_pin_switch(0)
 
-        self.assertFalse(sim_lock_control.checked)
+        self.assertFalse(switch.checked)
 
-        self.main_view.scroll_to_and_click(sim_lock_control)
+        sim_pin_page.click_sim_pin_switch(0)
 
         lock_dialog = self.main_view.select_single(
             objectName='lockDialogComponent'
@@ -305,24 +300,22 @@ class SecurityTestCase(SecurityBaseTestCase):
 
         self.main_view.scroll_to_and_click(submit_button)
 
-        self.assertTrue(sim_lock_control.checked)
+        self.assertTrue(switch.checked)
 
         self.assertEqual(['pin'], self.modem_0.Get(SIM_IFACE, 'LockedPins'))
         locked = len(self.modem_0.Get(SIM_IFACE, 'LockedPins')) > 0
-        self.assertEquals(locked, sim_lock_control.checked)
+        self.assertEquals(locked, switch.checked)
 
     def test_sim_pin_lock_control_unlock_fail(self):
-        self._go_to_sim_lock()
-        sim_lock_control = self.main_view.select_single(
-            objectName='simPinSwitch'
-        )
+        sim_pin_page = self.security_page.go_to_sim_lock()
+        switch = sim_pin_page.get_sim_pin_switch(0)
 
         self.assertTrue(
             len(self.modem_0.Get(SIM_IFACE, 'LockedPins')) > 0
         )
-        self.assertTrue(sim_lock_control.checked)
+        self.assertTrue(switch.checked)
 
-        self.main_view.scroll_to_and_click(sim_lock_control)
+        sim_pin_page.click_sim_pin_switch(0)
 
         lock_dialog = self.main_view.select_single(
             objectName='lockDialogComponent'
@@ -363,16 +356,14 @@ class SecurityTestCase(SecurityBaseTestCase):
     @unittest.skip('skipped because the simPinSwitch state fails to update')
     def test_sim_pin_lock_control_lock_fail(self):
         self.modem_0.Set(SIM_IFACE, 'LockedPins', "")
-        self._go_to_sim_lock()
-        sim_lock_control = self.main_view.select_single(
-            objectName='simPinSwitch'
-        )
+        sim_pin_page = self.security_page.go_to_sim_lock()
+        switch = sim_pin_page.get_sim_pin_switch(0)
 
         self.assertFalse(
             len(self.modem_0.Get(SIM_IFACE, 'LockedPins')) > 0
         )
 
-        self.main_view.scroll_to_and_click(sim_lock_control)
+        sim_pin_page.click_sim_pin_switch(0)
 
         lock_dialog = self.main_view.select_single(
             objectName='lockDialogComponent'
