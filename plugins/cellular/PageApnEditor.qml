@@ -338,7 +338,8 @@ ItemPage {
                 LocalComponents.LabelTextField {
                     id: username
                     objectName: "username"
-                    inputMethodHints: Qt.ImhNoPredictiveText |
+                    inputMethodHints: Qt.ImhNoAutoUppercase |
+                                      Qt.ImhNoPredictiveText |
                                       Qt.ImhSensitiveData
                     placeholderText: i18n.tr("Enter username")
                     next: password
@@ -365,7 +366,7 @@ ItemPage {
                                       Qt.ImhNoPredictiveText |
                                       Qt.ImhSensitiveData
                     placeholderText: i18n.tr("Enter password")
-                    next: password
+                    next: name
                     onActiveFocusChanged: if (activeFocus) Editor.makeMeVisible(
                         password)
                 }
