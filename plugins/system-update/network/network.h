@@ -51,6 +51,8 @@ public:
     void checkForNewVersions(QHash<QString, Update*> &apps);
     void getClickToken(Update *app, const QString &url,
                        const QString &authHeader);
+    virtual std::vector<std::string> getAvailableFrameworks();
+    virtual std::string getArchitecture();
 
 Q_SIGNALS:
     void updatesFound();
@@ -68,6 +70,12 @@ private:
     QHash<QString, Update*> m_apps;
 
     QString getUrlApps();
+    QString getFrameworksDir();
+
+protected:
+    virtual std::string architectureFromDpkg();
+    virtual std::vector<std::string> listFolder(const std::string &folder, const std::string &pattern);
+
 };
 
 }

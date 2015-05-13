@@ -27,6 +27,7 @@ import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 import Ubuntu.SystemSettings.Battery 1.0
 import Ubuntu.SystemSettings.SecurityPrivacy 1.0
+import Ubuntu.Settings.Components 0.1 as USC
 
 ItemPage {
     id: root
@@ -81,6 +82,15 @@ ItemPage {
     Timer {
         interval: 60000; running: true; repeat: true
         onTriggered: canvas.requestPaint()
+    }
+
+    Connections {
+        target: Qt.application
+        onActiveChanged: {
+            if (Qt.application.state === Qt.ApplicationActive) {
+                canvas.requestPaint()
+            }
+        }
     }
 
     Flickable {
@@ -335,13 +345,18 @@ ItemPage {
                     sourceComponent: Switch {
                         id: wifiSwitch
                         property bool serverChecked: networkActionGroup.enabled.state
-                        onServerCheckedChanged: checked = serverChecked
-                        Component.onCompleted: checked = serverChecked
-                        onTriggered: networkActionGroup.enabled.activate()
+
+                        USC.ServerPropertySynchroniser {
+                            userTarget: wifiSwitch
+                            userProperty: "checked"
+                            serverTarget: wifiSwitch
+                            serverProperty: "serverChecked"
+
+                            onSyncTriggered: networkActionGroup.enabled.activate()
+                        }
                     }
                 }
                 visible: networkActionGroup.enabled.state !== undefined
-                Component.onCompleted: clicked.connect(wifiSwitch.clicked)
             }
 
             QDBusActionGroup {
@@ -364,13 +379,18 @@ ItemPage {
                     sourceComponent: Switch {
                         id: btSwitch
                         property bool serverChecked: bluetoothActionGroup.enabled.state
-                        onServerCheckedChanged: checked = serverChecked
-                        Component.onCompleted: checked = serverChecked
-                        onTriggered: bluetoothActionGroup.enabled.activate()
+
+                        USC.ServerPropertySynchroniser {
+                            userTarget: btSwitch
+                            userProperty: "checked"
+                            serverTarget: btSwitch
+                            serverProperty: "serverChecked"
+
+                            onSyncTriggered: bluetoothActionGroup.enabled.activate()
+                        }
                     }
                 }
                 visible: bluetoothActionGroup.visible
-                Component.onCompleted: clicked.connect(btSwitch.clicked)
             }
 
             QDBusActionGroup {
@@ -392,13 +412,18 @@ ItemPage {
                     sourceComponent: Switch {
                         id: gpsSwitch
                         property bool serverChecked: locationActionGroup.enabled.state
-                        onServerCheckedChanged: checked = serverChecked
-                        Component.onCompleted: checked = serverChecked
-                        onTriggered: locationActionGroup.enabled.activate()
+
+                        USC.ServerPropertySynchroniser {
+                            userTarget: gpsSwitch
+                            userProperty: "checked"
+                            serverTarget: gpsSwitch
+                            serverProperty: "serverChecked"
+
+                            onSyncTriggered: locationActionGroup.enabled.activate()
+                        }
                     }
                 }
                 visible: locationActionGroup.enabled.state !== undefined
-                Component.onCompleted: clicked.connect(gpsSwitch.clicked)
             }
 
             ListItem.Caption {

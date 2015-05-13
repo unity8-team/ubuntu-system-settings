@@ -1,3 +1,68 @@
+ubuntu-system-settings (0.3+15.04.20150430.1-0ubuntu1) vivid; urgency=medium
+
+  [ CI Train Bot ]
+  * New rebuild forced.
+  * Resync trunk.
+
+  [ Ken VanDine ]
+  * Include supported frameworks and arch when checking for updates (LP:
+    #1449582)
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Thu, 30 Apr 2015 19:38:05 +0000
+
+ubuntu-system-settings (0.3+15.04.20150422.1-0ubuntu1) vivid; urgency=medium
+
+  [ CI Train Bot ]
+  * New rebuild forced.
+
+  [ Michael Sheldon ]
+  * Allow system settings to find keyboard plugins in additional
+    locations specified via gsettings. (LP: #1445532)
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Wed, 22 Apr 2015 20:23:14 +0000
+
+ubuntu-system-settings (0.3+15.04.20150422-0ubuntu1) vivid; urgency=medium
+
+  [ Ken VanDine ]
+  * Don't call a test from inside another test
+
+  [ Leonardo Arias Fonseca ]
+  * Fix the base class used when launching the app in autopilot tests.
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Wed, 22 Apr 2015 18:48:35 +0000
+
+ubuntu-system-settings (0.3+15.04.20150420-0ubuntu1) vivid; urgency=medium
+
+  [ CI Train Bot ]
+  * New rebuild forced.
+  * Resync trunk.
+
+  [ Ken VanDine ]
+  * Error checking for plugin instance and pageComponent (LP: #1438633)
+
+  [ Nick Dedekind ]
+  * Fix for laggy backends (lp#1390136) (LP: #1390136)
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Mon, 20 Apr 2015 15:48:06 +0000
+
+ubuntu-system-settings (0.3+15.04.20150413-0ubuntu1) vivid; urgency=medium
+
+  [ CI Train Bot ]
+  * New rebuild forced.
+  * Resync trunk.
+
+  [ Sebastien Bacher ]
+  * [battery] refresh the canvas when getting focus to avoid outdated
+    info (LP: #1435424)
+  * [bluetooth, sim] Get some dialogs to focus their text entry by
+    default
+  * [security-privacy] give the focus to the right entry, if the current
+    unlock method is swipe then there is no "current password" so the
+    new input line should be the focussed one (LP: #1438049)
+  * bluetooth: check if the device is valid before getting details
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Mon, 13 Apr 2015 15:08:56 +0000
+
 ubuntu-system-settings (0.3+15.04.20150407-0ubuntu1) vivid; urgency=medium
 
   [ Alex Tu ]

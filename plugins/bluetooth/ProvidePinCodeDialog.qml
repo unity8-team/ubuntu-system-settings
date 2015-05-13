@@ -44,7 +44,7 @@ Dialog {
         }
         text: "0000"
         focus: true
-        Component.onCompleted: selectAll()
+        Component.onCompleted: { selectAll(); forceActiveFocus() }
         maximumLength: 16
         inputMethodHints: Qt.ImhNoPredictiveText
     }
