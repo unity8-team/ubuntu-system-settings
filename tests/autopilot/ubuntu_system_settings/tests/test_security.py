@@ -235,17 +235,17 @@ class SecuritySimPinLockedTestCase(SecurityBaseTestCase):
         )
 
         self.assertFalse(
-            submit_button.get_properties()['enabled']
+            submit_button.enabled
         )
         self.main_view.scroll_to_and_click(prev_input)
         self.keyboard.type("246")
         self.assertFalse(
-            submit_button.get_properties()['enabled']
+            submit_button.enabled
         )
         self.keyboard.type("8")
 
         self.assertTrue(
-            submit_button.get_properties()['enabled']
+            submit_button.enabled
         )
 
         self.main_view.scroll_to_and_click(submit_button)
@@ -287,13 +287,13 @@ class SecuritySimPinLockedTestCase(SecurityBaseTestCase):
         )
 
         self.assertFalse(
-            submit_button.get_properties()['enabled']
+            submit_button.enabled
         )
         self.main_view.scroll_to_and_click(prev_input)
         self.keyboard.type("1234")
 
         self.assertTrue(
-            submit_button.get_properties()['enabled']
+            submit_button.enabled
         )
 
         self.main_view.scroll_to_and_click(submit_button)
@@ -340,17 +340,17 @@ class SecuritySimPinUnlockedTestCase(SecurityBaseTestCase):
         )
 
         self.assertFalse(
-            submit_button.get_properties()['enabled']
+            submit_button.enabled
         )
         self.main_view.scroll_to_and_click(prev_input)
         self.keyboard.type("246")
         self.assertFalse(
-            submit_button.get_properties()['enabled']
+            submit_button.enabled
         )
         self.keyboard.type("8")
 
         self.assertTrue(
-            submit_button.get_properties()['enabled']
+            submit_button.enabled
         )
 
         self.main_view.scroll_to_and_click(submit_button)
@@ -391,13 +391,13 @@ class SecuritySimPinUnlockedTestCase(SecurityBaseTestCase):
         )
 
         self.assertFalse(
-            submit_button.get_properties()['enabled']
+            submit_button.enabled
         )
         self.main_view.scroll_to_and_click(prev_input)
         self.keyboard.type("1234")
 
         self.assertTrue(
-            submit_button.get_properties()['enabled']
+            submit_button.enabled
         )
 
         self.main_view.scroll_to_and_click(submit_button)
