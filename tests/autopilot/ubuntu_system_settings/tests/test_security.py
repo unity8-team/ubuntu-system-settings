@@ -24,7 +24,6 @@ class SecurityTestCase(SecurityBaseTestCase):
 
     def setUp(self):
         super(SecurityTestCase, self).setUp()
-        self.assertEqual(['pin'], self.modem_0.Get(SIM_IFACE, 'LockedPins'))
         prps = self.security_page.get_properties()
         self.use_powerd = prps['usePowerd']
         if self.use_powerd:
@@ -65,12 +64,6 @@ class SecurityTestCase(SecurityBaseTestCase):
     def _go_to_phone_lock(self):
         selector = self.security_page.select_single(
             objectName='lockingControl'
-        )
-        self.main_view.scroll_to_and_click(selector)
-
-    def _go_to_sim_lock(self):
-        selector = self.security_page.select_single(
-            objectName='simControl'
         )
         self.main_view.scroll_to_and_click(selector)
 
@@ -198,6 +191,15 @@ class SecurityTestCase(SecurityBaseTestCase):
             Equals(_('On'))
         )
 
+
+class SecuritySimPinLockedTestCase(SecurityBaseTestCase):
+    """ Tests for Security Page with Locked SIM Pin """
+
+    def setUp(self):
+        super(SecuritySimPinLockedTestCase, self).setUp()
+        self.modem_0.LockPin('pin', '2468')
+        self.assertEqual(['pin'], self.modem_0.Get(SIM_IFACE, 'LockedPins'))
+
     def test_sim_pin_lock_control(self):
         sim_pin_page = self.security_page.go_to_sim_lock()
 
@@ -254,9 +256,63 @@ class SecurityTestCase(SecurityBaseTestCase):
         locked = len(self.modem_0.Get(SIM_IFACE, 'LockedPins')) > 0
         self.assertEquals(locked, switch.checked)
 
-    @unittest.skip('skipped because the simPinSwitch state fails to update')
+    def test_sim_pin_lock_control_unlock_fail(self):
+        sim_pin_page = self.security_page.go_to_sim_lock()
+        switch = sim_pin_page.get_sim_pin_switch(0)
+
+        self.assertTrue(
+            len(self.modem_0.Get(SIM_IFACE, 'LockedPins')) > 0
+        )
+        self.assertTrue(switch.checked)
+
+        sim_pin_page.click_sim_pin_switch(0)
+
+        lock_dialog = self.main_view.select_single(
+            objectName='lockDialogComponent'
+        )
+        self.assertEqual(
+            lock_dialog.title,
+            _("Enter SIM PIN")
+        )
+
+        prev_input = self.main_view.select_single(
+            objectName='prevInput'
+        )
+        submit_button = self.main_view.select_single(
+            objectName='lockButton'
+        )
+
+        self.assertThat(
+            submit_button.text,
+            Eventually(Equals(_("Unlock")))
+        )
+
+        self.assertFalse(
+            submit_button.get_properties()['enabled']
+        )
+        self.main_view.scroll_to_and_click(prev_input)
+        self.keyboard.type("1234")
+
+        self.assertTrue(
+            submit_button.get_properties()['enabled']
+        )
+
+        self.main_view.scroll_to_and_click(submit_button)
+
+        self.assertTrue(
+            len(self.modem_0.Get(SIM_IFACE, 'LockedPins')) > 0
+        )
+
+
+class SecuritySimPinUnlockedTestCase(SecurityBaseTestCase):
+    """ Tests for Security Page with Unlocked SIM Pin """
+
+    def setUp(self):
+        super(SecuritySimPinUnlockedTestCase, self).setUp()
+        self.modem_0.UnlockPin('pin', '2468')
+        self.assertFalse(len(self.modem_0.Get(SIM_IFACE, 'LockedPins')) > 0)
+
     def test_sim_pin_lock_control_lock(self):
-        self.modem_0.Set(SIM_IFACE, 'LockedPins', "")
         sim_pin_page = self.security_page.go_to_sim_lock()
         switch = sim_pin_page.get_sim_pin_switch(0)
 
@@ -269,7 +325,7 @@ class SecurityTestCase(SecurityBaseTestCase):
         )
         self.assertEqual(
             lock_dialog.title,
-            _("Enter SIM PIN")
+            _("Enter Previous SIM PIN")
         )
 
         prev_input = self.main_view.select_single(
@@ -306,56 +362,7 @@ class SecurityTestCase(SecurityBaseTestCase):
         locked = len(self.modem_0.Get(SIM_IFACE, 'LockedPins')) > 0
         self.assertEquals(locked, switch.checked)
 
-    def test_sim_pin_lock_control_unlock_fail(self):
-        sim_pin_page = self.security_page.go_to_sim_lock()
-        switch = sim_pin_page.get_sim_pin_switch(0)
-
-        self.assertTrue(
-            len(self.modem_0.Get(SIM_IFACE, 'LockedPins')) > 0
-        )
-        self.assertTrue(switch.checked)
-
-        sim_pin_page.click_sim_pin_switch(0)
-
-        lock_dialog = self.main_view.select_single(
-            objectName='lockDialogComponent'
-        )
-        self.assertEqual(
-            lock_dialog.title,
-            _("Enter SIM PIN")
-        )
-
-        prev_input = self.main_view.select_single(
-            objectName='prevInput'
-        )
-        submit_button = self.main_view.select_single(
-            objectName='lockButton'
-        )
-
-        self.assertEqual(
-            submit_button.text,
-            _("Unlock")
-        )
-
-        self.assertFalse(
-            submit_button.get_properties()['enabled']
-        )
-        self.main_view.scroll_to_and_click(prev_input)
-        self.keyboard.type("1234")
-
-        self.assertTrue(
-            submit_button.get_properties()['enabled']
-        )
-
-        self.main_view.scroll_to_and_click(submit_button)
-
-        self.assertTrue(
-            len(self.modem_0.Get(SIM_IFACE, 'LockedPins')) > 0
-        )
-
-    @unittest.skip('skipped because the simPinSwitch state fails to update')
     def test_sim_pin_lock_control_lock_fail(self):
-        self.modem_0.Set(SIM_IFACE, 'LockedPins', "")
         sim_pin_page = self.security_page.go_to_sim_lock()
 
         self.assertFalse(
@@ -369,7 +376,7 @@ class SecurityTestCase(SecurityBaseTestCase):
         )
         self.assertEqual(
             lock_dialog.title,
-            _("Enter SIM PIN")
+            _("Enter Previous SIM PIN")
         )
 
         prev_input = self.main_view.select_single(
@@ -379,9 +386,9 @@ class SecurityTestCase(SecurityBaseTestCase):
             objectName='lockButton'
         )
 
-        self.assertEqual(
+        self.assertThat(
             submit_button.text,
-            _("Lock")
+            Eventually(Equals(_("Lock")))
         )
 
         self.assertFalse(
