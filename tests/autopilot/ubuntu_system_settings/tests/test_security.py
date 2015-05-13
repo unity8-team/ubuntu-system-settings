@@ -7,7 +7,6 @@
 
 from gi.repository import Gio
 from time import sleep
-import unittest
 from testtools.matchers import Equals, NotEquals
 from autopilot.matchers import Eventually
 
