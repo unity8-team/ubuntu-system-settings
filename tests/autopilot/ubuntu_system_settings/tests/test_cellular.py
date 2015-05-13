@@ -15,7 +15,10 @@ from testtools.matchers import Equals, raises, StartsWith
 
 from ubuntu_system_settings.tests import (
     CellularBaseTestCase, HotspotBaseTestCase, CONNMAN_IFACE, RDO_IFACE,
-    NETREG_IFACE)
+    NETREG_IFACE, NM_IFACE, NM_AC_CON_IFACE, NM_PATH)
+
+SETTINGS_CON_IFACE = 'org.freedesktop.NetworkManager.Settings.Connection'
+DEV_IFACE = 'org.freedesktop.NetworkManager.Device'
 
 
 class CellularTestCase(CellularBaseTestCase):
@@ -299,56 +302,56 @@ class HotspotTestCase(HotspotBaseTestCase):
         password = 'abcdefgh'
         config = {'password': password}
         hotspot_page = self.cellular_page.setup_hotspot(config)
+        active_connection = NM_PATH + 'ActiveConnection/0'
 
+        # Assert that the switch is on.
         self.assertTrue(hotspot_page.get_hotspot_status())
 
         # Assert that Block on Urfkill is called twice.
-        target_block_calls = 2
         self.assertThat(
             lambda: len(self.urfkill_mock.GetMethodCalls('Block')),
-            Eventually(Equals(target_block_calls)))
+            Eventually(Equals(2))
+        )
 
-        # Assert that we get one active connection
+        # Assert that we get one active connection.
         self.assertThat(
-            lambda: len(self.obj_nm.GetAll(
-                'org.freedesktop.NetworkManager')['ActiveConnections']),
-            Eventually(Equals(1)))
+            lambda: len(self.obj_nm.GetAll(NM_IFACE)['ActiveConnections']),
+            Eventually(Equals(1))
+        )
 
         # Assert that the active connection has a certain path.
-        active_connection = ('/org/freedesktop/NetworkManager/'
-                             'ActiveConnection/0')
         self.assertThat(
-            lambda: self.obj_nm.GetAll('org.freedesktop.NetworkManager')[
-                'ActiveConnections'][0],
-            Eventually(Equals(active_connection)))
+            lambda: self.obj_nm.GetAll(NM_IFACE)['ActiveConnections'][0],
+            Eventually(Equals(active_connection))
+        )
 
         # Assert the device's active connection
         self.assertThat(
-            lambda: self.device_mock.Get(
-                'org.freedesktop.NetworkManager.Device', 'ActiveConnection'),
-            Eventually(Equals(active_connection)))
+            lambda: self.device_mock.Get(DEV_IFACE, 'ActiveConnection'),
+            Eventually(Equals(active_connection))
+        )
 
         active_connection_mock = dbus.Interface(self.dbus_con.get_object(
-            'org.freedesktop.NetworkManager', active_connection),
+            NM_IFACE, active_connection),
             'org.freedesktop.DBus.Properties')
 
-        connection_path = active_connection_mock.Get(
-            'org.freedesktop.NetworkManager.Connection.Active', 'Connection')
+        connection_path = active_connection_mock.Get(NM_AC_CON_IFACE,
+                                                     'Connection')
 
         connection_mock = dbus.Interface(self.dbus_con.get_object(
-            'org.freedesktop.NetworkManager', connection_path),
-            'org.freedesktop.NetworkManager.Settings.Connection')
+            NM_IFACE, connection_path), SETTINGS_CON_IFACE)
 
         settings = connection_mock.GetSettings()
 
         # Assert that autoconnect is true, that ssid and password is what we
         # expect them to be.
         self.assertTrue(settings['connection']['autoconnect'])
-        self.assertEqual(bytearray(
-            settings['802-11-wireless']['ssid']).decode('utf-8'), ssid)
+
+        s_ssid = bytearray(settings['802-11-wireless']['ssid']).decode('utf-8')
+        self.assertEqual(s_ssid, ssid)
         self.assertEqual(settings['802-11-wireless-security']['psk'], password)
 
-        # Now we change the settings
+        # Now we change the settings.
         ssid = 'Bar'
         password = 'zomgzomg'
         config = {'ssid': ssid, 'password': password}
@@ -359,15 +362,16 @@ class HotspotTestCase(HotspotBaseTestCase):
         # Assert that the ssid changed
         self.assertThat(
             lambda: bytearray(
-                connection_mock.GetSettings()[
-                    '802-11-wireless']['ssid']).decode('utf-8'),
-            Eventually(Equals(ssid)))
+                connection_mock.GetSettings()['802-11-wireless']
+                                             ['ssid']).decode('utf-8'),
+            Eventually(Equals(ssid))
+        )
 
         self.cellular_page.disable_hotspot()
         self.assertFalse(hotspot_page.get_hotspot_status())
 
-        # Assert that the active connection is removed
+        # Assert that the active connection is removed.
         self.assertThat(
-            lambda: len(self.obj_nm.GetAll(
-                'org.freedesktop.NetworkManager')['ActiveConnections']),
-            Eventually(Equals(0)))
+            lambda: len(self.obj_nm.GetAll(NM_IFACE)['ActiveConnections']),
+            Eventually(Equals(0))
+        )
