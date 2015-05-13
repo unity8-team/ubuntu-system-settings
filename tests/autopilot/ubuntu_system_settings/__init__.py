@@ -306,18 +306,37 @@ class CellularPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
         field.write(name)
         self.pointing_device.click_object(ok)
 
+    """
+    :returns: Whether or not hotspot can be used.
+    """
+    @autopilot.logging.log_action(logger.debug)
+    def have_hotspot(self):
+        return self.wait_select_single(objectName='hotspotEntry').visible
+
+    """
+    :param: Configuration with keys ssid and password.
+    :returns: Hotspot page.
+    """
     @autopilot.logging.log_action(logger.debug)
     def setup_hotspot(self, config=None):
         hotspot_page = self._enter_hotspot()
         hotspot_page.setup_hotspot(config)
         return hotspot_page
 
+    """
+    Enables hotspot.
+    :returns: Hotspot page.
+    """
     @autopilot.logging.log_action(logger.debug)
     def enable_hotspot(self):
         hotspot_page = self._enter_hotspot()
         hotspot_page.enable_hotspot()
         return hotspot_page
 
+    """
+    Disables hotspot.
+    :returns: Hotspot page.
+    """
     @autopilot.logging.log_action(logger.debug)
     def disable_hotspot(self):
         hotspot_page = self._enter_hotspot()

@@ -298,11 +298,15 @@ class DualSimCellularTestCase(CellularBaseTestCase):
 class HotspotTestCase(HotspotBaseTestCase):
 
     def test_configuring_enabling_and_disabling(self):
+
+        if not self.cellular_page.have_hotspot():
+            self.skipTest('Cannot test hotspot since wifi is disabled.')
+
         ssid = 'Ubuntu'
         password = 'abcdefgh'
         config = {'password': password}
         hotspot_page = self.cellular_page.setup_hotspot(config)
-        active_connection = NM_PATH + 'ActiveConnection/0'
+        active_connection = NM_PATH + '/ActiveConnection/0'
 
         # Assert that the switch is on.
         self.assertTrue(hotspot_page.get_hotspot_status())
