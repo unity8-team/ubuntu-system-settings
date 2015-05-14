@@ -1,3 +1,16 @@
+ubuntu-system-settings (0.3+15.04.20150514-0ubuntu1) vivid; urgency=medium
+
+  [ CI Train Bot ]
+  * Resync trunk.
+
+  [ Ken VanDine ]
+  * Re-factored SIM Pin related tests into separate classes to properly
+    ensure the LockedPins property is properly setup for each test.
+  * incorporate SimPin helper from ubuntu-sanity-tests and refactor a
+    few tests to utilize them
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Thu, 14 May 2015 16:06:15 +0000
+
 ubuntu-system-settings (0.3+15.04.20150511-0ubuntu1) vivid; urgency=medium
 
   [ Ken VanDine ]
