@@ -34,7 +34,7 @@ from fixtures import EnvironmentVariable
 from gi.repository import UPowerGlib
 from testtools.matchers import Equals, NotEquals, GreaterThan
 
-import ubuntu_system_settings
+
 ACCOUNTS_IFACE = 'org.freedesktop.Accounts'
 ACCOUNTS_USER_IFACE = 'org.freedesktop.Accounts.User'
 ACCOUNTS_OBJ = '/org/freedesktop/Accounts'
@@ -111,7 +111,7 @@ class UbuntuSystemSettingsTestCase(
         return self.launch_test_application(
             *params,
             app_type='qt',
-            emulator_base=ubuntu_system_settings.SystemSettings,
+            emulator_base=ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase,
             capture_output=True)
 
 

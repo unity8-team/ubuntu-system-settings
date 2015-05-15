@@ -44,7 +44,7 @@ Dialog {
         }
         text: "000000"
         focus: true
-        Component.onCompleted: selectAll()
+        Component.onCompleted: { selectAll(); forceActiveFocus() }
         inputMethodHints: Qt.ImhDigitsOnly | Qt.ImhNoPredictiveText
     }
 

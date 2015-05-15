@@ -120,6 +120,9 @@ ItemPage {
                             if (item.hasOwnProperty("menu")) {
                                 item.menu = Qt.binding(function() { return model; });
                             }
+                            if (item.hasOwnProperty("menuIndex")) {
+                                item.menuIndex = Qt.binding(function() { return modelIndex; });
+                            }
                         }
                     }
                 }
