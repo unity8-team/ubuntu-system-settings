@@ -20,8 +20,6 @@
 import QtQuick 2.0
 
 Item {
-
-
     /*
         The mapping of code to string is taken from
         http://bazaar.launchpad.net/~vcs-imports/

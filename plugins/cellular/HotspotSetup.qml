@@ -24,7 +24,6 @@ import Ubuntu.Components.ListItems 0.1 as ListItem
 import Ubuntu.SystemSettings.Cellular 1.0
 import Ubuntu.Components.Popups 0.1
 
-
 Component {
     id: hotspotSetup
 
@@ -46,7 +45,6 @@ Component {
         function settingsValid() {
             return ssidField.text != "" && passwordField.length >= 8;
         }
-
 
         title: stored ?
             i18n.tr("Change hotspot setup") : i18n.tr("Setup hotspot")
@@ -254,7 +252,6 @@ Component {
                 }
             }
         }
-
 
         Action {
             id: enableAction

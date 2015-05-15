@@ -404,6 +404,10 @@ class HotspotBaseTestCase(CellularBaseTestCase):
 
         super(HotspotBaseTestCase, self).setUp()
 
+    # def add_hotspot(self, name, password):
+    #     self.obj_nm.AddAccessPoint(device_path, 'ap1', "MiFi", hw_address,
+    #                mode, frequency, rate, strength, security)
+
 
 class BluetoothBaseTestCase(UbuntuSystemSettingsTestCase):
 
