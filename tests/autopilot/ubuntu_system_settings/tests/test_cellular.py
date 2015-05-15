@@ -301,6 +301,9 @@ class ApnTestCase(CellularBaseTestCase):
         self.assertEqual('/ril_0/context0', contexts[0][0])
         self.assertEqual('Failed', contexts[0][1]['Name'])
 
+        # We delete the failed context
+        self.cellular_page.delete_apn('Failed')
+
         editor = self.cellular_page.open_apn_editor(None)
         editor.set_type('mms')
         editor.set_name('Ubuntu')
@@ -313,18 +316,18 @@ class ApnTestCase(CellularBaseTestCase):
 
         # Wait for our new context to appear.
         self.assertThat(
-            lambda: self.connMan.GetContexts()[1][0],
-            Eventually(Equals('/ril_0/context1'))
+            lambda: self.connMan.GetContexts()[0][0],
+            Eventually(Equals('/ril_0/context0'))
         )
         # Wait for our context to be renamed from the default
-        # ofono name
+        # ofono name.
         self.assertThat(
-            lambda: self.connMan.GetContexts()[1][1]['Name'],
+            lambda: self.connMan.GetContexts()[0][1]['Name'],
             Eventually(Equals('Ubuntu'))
         )
         contexts = self.connMan.GetContexts()
-        new_ctx = contexts[1][1]
-        self.assertEqual(2, len(contexts))
+        new_ctx = contexts[0][1]
+        self.assertEqual(1, len(contexts))
         self.assertEqual('mms', new_ctx['Type'])
         self.assertEqual('ubuntu.ap', new_ctx['AccessPointName'])
         self.assertEqual('http://ubuntu.com', new_ctx['MessageCenter'])
@@ -332,5 +335,10 @@ class ApnTestCase(CellularBaseTestCase):
         self.assertEqual('user', new_ctx['Username'])
         self.assertEqual('pass', new_ctx['Password'])
 
-        # Now we delete the failed context
-        self.cellular_page.delete_apn('Failed')
+        self.cellular_page.prefer_apn('Ubuntu')
+
+        # Asser that Preferred becomes true.
+        self.assertThat(
+            lambda: self.connMan.GetContexts()[0][1]['Preferred'],
+            Eventually(Equals(True))
+        )

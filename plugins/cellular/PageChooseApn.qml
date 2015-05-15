@@ -216,7 +216,7 @@ ItemPage {
 
                 CheckBox {
                     id: check
-                    objectName: qml.accessPointName + "_preferred"
+                    objectName: qml.name + "_preferred"
                     anchors {
                         left: parent.left
                         verticalCenter: parent.verticalCenter

@@ -186,6 +186,12 @@ class Dialog(ubuntuuitoolkit.Dialog):
         return False
 
 
+class LabelTextField(ubuntuuitoolkit.TextField):
+    """LabelTextField is a component local to the APN Editor in the cellular
+    plugin."""
+    pass
+
+
 class CellularPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
 
     """Autopilot helper for the Cellular page."""
@@ -271,6 +277,12 @@ class CellularPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
         carrierApnPage = self._click_carrier_apn()
         chooseApnPage = carrierApnPage.open_apn(sim)
         return chooseApnPage.delete(name)
+
+    @autopilot.logging.log_action(logger.debug)
+    def prefer_apn(self, name, sim=None):
+        carrierApnPage = self._click_carrier_apn()
+        chooseApnPage = carrierApnPage.open_apn(sim)
+        return chooseApnPage.check(name)
 
     @autopilot.logging.log_action(logger.debug)
     def _click_carrier_apn(self):
@@ -438,6 +450,17 @@ class PageChooseApn(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
         item.confirm_removal()
 
     @autopilot.logging.log_action(logger.debug)
+    def check(self, name):
+        self._check(name)
+
+    @autopilot.logging.log_action(logger.debug)
+    def _check(self, name):
+        item = self.wait_select_single(
+            'CheckBox', objectName='%s_preferred' % name
+        )
+        item.check()
+
+    @autopilot.logging.log_action(logger.debug)
     def _open_editor(self, name):
         if name:
             item = self.select_single(objectName='edit_%s' % name)
@@ -459,7 +482,7 @@ class PageApnEditor(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
 
     def __init__(self, *args):
         super().__init__(*args)
-        self.flickable = self.select_single(objectName='flickable')
+        self.flickable = self.select_single(objectName='scrollArea')
 
     @autopilot.logging.log_action(logger.debug)
     def set_type(self, t):
@@ -506,7 +529,7 @@ class PageApnEditor(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
         self._populate_field('password', new_password)
 
     def _populate_field(self, field, text):
-        f = self.select_single('TextField', objectName=field)
+        f = self.select_single(LabelTextField, objectName=field)
         self.flickable.swipe_child_into_view(f)
         f.write(text)
 
