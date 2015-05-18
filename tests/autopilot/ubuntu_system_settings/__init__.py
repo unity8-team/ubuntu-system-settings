@@ -345,7 +345,7 @@ class CellularPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
 
     @autopilot.logging.log_action(logger.debug)
     def _enter_hotspot(self):
-        obj = self.select_single(objectName="hotspotEntry")
+        obj = self.wait_select_single(objectName="hotspotEntry")
         self.pointing_device.click_object(obj)
         return self.get_root_instance().wait_select_single(
             objectName='hotspotPage')
