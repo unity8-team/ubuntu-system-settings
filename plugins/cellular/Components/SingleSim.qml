@@ -22,6 +22,11 @@ import SystemSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 
+/* This is a temporary solution to the issue of Hotspots failing on mako. If
+the device is mako, we hide the hotspot entry. Will be removed once lp:1434591
+has been resolved. */
+import Ubuntu.SystemSettings.Update 1.0
+
 Column {
 
     objectName: "singleSim"
