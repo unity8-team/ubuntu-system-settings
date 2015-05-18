@@ -22,6 +22,7 @@ import GSettings 1.0
 import SystemSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
+import Ubuntu.SystemSettings.Update 1.0
 
 Column {
     objectName: "multiSim"
@@ -60,7 +61,11 @@ Column {
         onClicked: {
             pageStack.push(Qt.resolvedUrl("../Hotspot.qml"))
         }
-        visible: showAllUI && (actionGroup.actionObject.valid ? actionGroup.actionObject.state : false)
+        visible: (showAllUI &&
+                 (actionGroup.actionObject.valid ?
+                     actionGroup.actionObject.state : false) &&
+                 UpdateManager.deviceName !== "mako")
+
     }
 
     ListItem.Standard {

@@ -73,7 +73,10 @@ Column {
         onClicked: {
             pageStack.push(Qt.resolvedUrl("../Hotspot.qml"))
         }
-        visible: showAllUI && (actionGroup.actionObject.valid ? actionGroup.actionObject.state : false)
+        visible: (showAllUI &&
+                 (actionGroup.actionObject.valid ?
+                     actionGroup.actionObject.state : false) &&
+                 UpdateManager.deviceName !== "mako")
     }
 
     ListItem.Standard {
