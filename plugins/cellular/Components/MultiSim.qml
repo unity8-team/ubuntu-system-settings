@@ -55,7 +55,9 @@ Column {
 
     ListItem.SingleValue {
         text : i18n.tr("Hotspot disabled because Wi-Fi is off.")
-        visible: showAllUI && !hotspotItem.visible
+        visible: showAllUI &&
+                 !hotspotItem.visible &&
+                 UpdateManager.deviceName !== "mako"
     }
 
     ListItem.SingleValue {
@@ -65,10 +67,10 @@ Column {
         onClicked: {
             pageStack.push(Qt.resolvedUrl("../Hotspot.qml"))
         }
-        visible: (showAllUI &&
+        visible: showAllUI &&
                  (actionGroup.actionObject.valid ?
                      actionGroup.actionObject.state : false) &&
-                 UpdateManager.deviceName !== "mako")
+                 UpdateManager.deviceName !== "mako"
 
     }
 
