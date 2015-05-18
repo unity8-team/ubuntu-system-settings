@@ -78,7 +78,7 @@
  *     set to "p2p" or "adhoc". "p2p" and "adhoc" is currently not fully supported.
  *
  *     TODO: Complete support for adhoc and p2p modes.
- */
+*/
 
 #ifndef HOTSPOTMANAGER_H
 #define HOTSPOTMANAGER_H
@@ -92,91 +92,90 @@
 #include "nm_settings_connection_proxy.h"
 
 class HotspotManager : public QObject {
-  Q_OBJECT
-  Q_PROPERTY( bool enabled
-    READ enabled
-    WRITE setEnabled
-    NOTIFY enabledChanged)
-  Q_PROPERTY( QByteArray ssid
-    READ ssid
-    WRITE setSsid
-    NOTIFY ssidChanged)
-  Q_PROPERTY( QString auth
-    READ auth
-    WRITE setAuth
-    NOTIFY authChanged)
-  Q_PROPERTY( QString password
-    READ password
-    WRITE setPassword
-    NOTIFY passwordChanged)
-  Q_PROPERTY( QString mode
-    READ mode
-    WRITE setMode
-    NOTIFY modeChanged)
-  Q_PROPERTY( bool stored
-    READ stored
-    NOTIFY storedChanged)
+    Q_OBJECT
+    Q_PROPERTY( bool enabled
+        READ enabled
+        WRITE setEnabled
+        NOTIFY enabledChanged)
+    Q_PROPERTY( QByteArray ssid
+        READ ssid
+        WRITE setSsid
+        NOTIFY ssidChanged)
+    Q_PROPERTY( QString auth
+        READ auth
+        WRITE setAuth
+        NOTIFY authChanged)
+    Q_PROPERTY( QString password
+        READ password
+        WRITE setPassword
+        NOTIFY passwordChanged)
+    Q_PROPERTY( QString mode
+        READ mode
+        WRITE setMode
+        NOTIFY modeChanged)
+    Q_PROPERTY( bool stored
+        READ stored
+        NOTIFY storedChanged)
 
 public:
-  explicit HotspotManager(QObject *parent = nullptr);
-  ~HotspotManager() {};
+    explicit HotspotManager(QObject *parent = nullptr);
+    ~HotspotManager() {};
 
-  bool enabled() const;
-  void setEnabled(bool);
-  bool stored() const;
+    bool enabled() const;
+    void setEnabled(bool);
+    bool stored() const;
 
-  QByteArray ssid() const;
-  void setSsid(QByteArray);
+    QByteArray ssid() const;
+    void setSsid(QByteArray);
 
-  QString password() const;
-  void setPassword(QString);
+    QString password() const;
+    void setPassword(QString);
 
-  QString mode() const;
-  void setMode(QString);
+    QString mode() const;
+    void setMode(QString);
 
-  QString auth() const;
-  void setAuth(QString);
+    QString auth() const;
+    void setAuth(QString);
 
 Q_SIGNALS:
-  void enabledChanged(bool enabled);
-  void storedChanged(bool stored);
-  void ssidChanged(const QByteArray ssid);
-  void passwordChanged(const QString password);
-  void modeChanged(const QString mode);
-  void authChanged(const QString auth);
+    void enabledChanged(bool enabled);
+    void storedChanged(bool stored);
+    void ssidChanged(const QByteArray ssid);
+    void passwordChanged(const QString password);
+    void modeChanged(const QString mode);
+    void authChanged(const QString auth);
 
-
-  /*
+    /*
     The mapping of code to string is taken from
     http://bazaar.launchpad.net/~vcs-imports/
       network-manager/trunk/view/head:/cli/src/common.c
 
     NetworkManager documentation: https://developer.gnome.org/
       NetworkManager/0.9/spec.html#type-NM_DEVICE_STATE_REASON
-  */
-  void reportError(const int &reason);
+    */
+    void reportError(const int &reason);
 
 public Q_SLOTS:
-  void onNewConnection(const QDBusObjectPath);
-  void onRemoved();
-  void onPropertiesChanged(const QVariantMap);
+    void onNewConnection(const QDBusObjectPath);
+    void onRemoved();
+    void onPropertiesChanged(const QVariantMap);
 
 private:
-  QString m_mode;
-  bool m_enabled;
-  bool m_stored;
-  QString m_password;
-  QByteArray m_ssid;
-  QDBusObjectPath m_device_path;
-  QDBusObjectPath m_hotspot_path;
+    QString m_mode;
+    bool m_enabled;
+    bool m_stored;
+    QString m_password;
+    QByteArray m_ssid;
+    QDBusObjectPath m_device_path;
+    QDBusObjectPath m_hotspot_path;
 
-  void disable();
+    void disable();
 
-  bool destroy(QDBusObjectPath);
+    bool destroy(QDBusObjectPath);
 
-  void setStored(bool);
-  void setEnable(bool);
-  void updateSettingsFromDbus(QDBusObjectPath);
+    void setStored(bool);
+    void setEnable(bool);
+    void updateSettingsFromDbus(QDBusObjectPath);
 };
 
 #endif

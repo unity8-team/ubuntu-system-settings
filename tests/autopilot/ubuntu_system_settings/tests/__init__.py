@@ -404,6 +404,7 @@ class HotspotBaseTestCase(CellularBaseTestCase):
 
     def tearDown(self):
         self.obj_nm.Reset()
+        self.urfkill_mock.ClearCalls()
         super(HotspotBaseTestCase, self).tearDown()
 
     def setUp(self):

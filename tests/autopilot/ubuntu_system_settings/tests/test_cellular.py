@@ -15,9 +15,12 @@ from testtools.matchers import Equals, raises, StartsWith
 
 from ubuntu_system_settings.tests import (
     CellularBaseTestCase, HotspotBaseTestCase, CONNMAN_IFACE, RDO_IFACE,
-    NETREG_IFACE, NM_IFACE, NM_PATH)
+    NETREG_IFACE)
 
-SETTINGS_CON_IFACE = 'org.freedesktop.NetworkManager.Settings.Connection'
+from ubuntu_system_settings.tests.networkmanager import (
+    CSETTINGS_IFACE, MAIN_OBJ as NM_PATH, MAIN_IFACE as NM_IFACE,
+)
+
 DEV_IFACE = 'org.freedesktop.NetworkManager.Device'
 
 
@@ -337,7 +340,7 @@ class HotspotTestCase(HotspotBaseTestCase):
         )
 
         connection_mock = dbus.Interface(self.dbus_con.get_object(
-            NM_IFACE, con_path), SETTINGS_CON_IFACE)
+            NM_IFACE, con_path), CSETTINGS_IFACE)
 
         settings = connection_mock.GetSettings()
 
@@ -399,7 +402,7 @@ class HotspotTestCase(HotspotBaseTestCase):
         con_path = NM_PATH + '/Settings/0'
 
         con_mock = dbus.Interface(self.dbus_con.get_object(
-            NM_IFACE, con_path), SETTINGS_CON_IFACE)
+            NM_IFACE, con_path), CSETTINGS_IFACE)
 
         settings = con_mock.GetSettings()
 
