@@ -8,15 +8,16 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-10-16 20:04-0600\n"
-"PO-Revision-Date: 2015-05-07 08:54+0000\n"
+"PO-Revision-Date: 2015-05-11 16:39+0000\n"
 "Last-Translator: Ondra Kadlec <o.kadlec@seznam.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2015-05-08 05:28+0000\n"
-"X-Generator: Launchpad (build 17474)\n"
+"X-Launchpad-Export-Date: 2015-05-14 04:59+0000\n"
+"X-Generator: Launchpad (build 17493)\n"
+"Language: cs\n"
 
 #: ubuntu-system-settings.desktop.in.in.h:1 ../src/qml/MainWindow.qml:112
 msgid "System Settings"
@@ -351,7 +352,7 @@ msgstr "Tichý režim"
 
 #: ../plugins/sound//PageComponent.qml:81
 msgid "Ringer:"
-msgstr ""
+msgstr "Vyzvánění:"
 
 #: ../plugins/sound//PageComponent.qml:121
 msgid "Phone calls:"
@@ -374,7 +375,7 @@ msgstr "Vibrace v tichém režimu"
 #: ../plugins/phone//PageComponent.qml:102
 #: ../plugins/sound//PageComponent.qml:168
 msgid "Dialpad sounds"
-msgstr ""
+msgstr "Zvuky číselníku"
 
 #: ../plugins/sound//PageComponent.qml:172
 msgid "Messages:"
@@ -415,7 +416,7 @@ msgstr "Resetovat telefon"
 #: ../plugins/reset//ResetLauncherHome.qml:44
 #: ../plugins/reset//PageComponent.qml:73
 msgid "Reset Launcher"
-msgstr ""
+msgstr "Resetovat launcher"
 
 #: ../plugins/reset//PageComponent.qml:87
 msgid "Reset all system settings…"
@@ -544,7 +545,7 @@ msgstr "Možnosti snížení spotřeby energie:"
 #: ../plugins/battery//PageComponent.qml:285
 #: ../plugins/brightness//PageComponent.qml:62
 msgid "Display brightness"
-msgstr ""
+msgstr "Jas obrazovky"
 
 #: ../plugins/battery//PageComponent.qml:295
 #: ../plugins/security-privacy//PhoneLocking.qml:68
@@ -676,6 +677,8 @@ msgstr "Automatická interpunkce"
 msgid ""
 "Adds a period, and any missing quotes or brackets, when you tap Space twice."
 msgstr ""
+"Přidá tečku, chybějící uvozovky nebo závorky, když klepnete dvakrát na "
+"mezeru."
 
 #: ../plugins/language//PageComponent.qml:225
 msgid "Keyboard vibration"
@@ -730,7 +733,7 @@ msgstr "Přeposlat"
 #: ../plugins/phone//ServiceInfo.qml:109
 #, qt-format
 msgid "Last called %1"
-msgstr ""
+msgstr "Poslední volaní %1"
 
 #: ../plugins/phone//ServiceInfo.qml:119
 msgid "Call"
@@ -760,7 +763,7 @@ msgstr "Jas"
 
 #: ../plugins/brightness//PageComponent.qml:83
 msgid "Adjust automatically"
-msgstr ""
+msgstr "Přizpůsobit automaticky"
 
 #: ../plugins/brightness//PageComponent.qml:97
 msgid "Brightens and dims the display to suit the surroundings."
@@ -806,32 +809,32 @@ msgstr "APN"
 
 #: ../plugins/cellular//PageChooseApn.qml:355
 msgid "Internet APN:"
-msgstr ""
+msgstr "Internetový APN:"
 
 #: ../plugins/cellular//PageChooseApn.qml:423
 msgid "Custom Internet APN…"
-msgstr ""
+msgstr "Vlastní internetový APN..."
 
 #: ../plugins/cellular//PageChooseApn.qml:434
 msgid "MMS APN:"
-msgstr ""
+msgstr "MMS APN:"
 
 #: ../plugins/cellular//CustomApnEditor.qml:153
 #: ../plugins/cellular//PageChooseApn.qml:449
 msgid "Same APN as for Internet"
-msgstr ""
+msgstr "Stejné APN jako pro Internet"
 
 #: ../plugins/cellular//PageChooseApn.qml:529
 msgid "Custom MMS APN…"
-msgstr ""
+msgstr "Vlastní MMS APN…"
 
 #: ../plugins/cellular//PageChooseApn.qml:560
 msgid "Reset APN Settings"
-msgstr ""
+msgstr "Resetovat nastavení APN"
 
 #: ../plugins/cellular//PageChooseApn.qml:561
 msgid "Are you sure that you want to Reset APN Settings?"
-msgstr ""
+msgstr "Jste si jistí, že chcete resetovat nastavení APN?"
 
 #: ../plugins/cellular//PageChooseApn.qml:567
 msgid "Reset"
@@ -854,17 +857,17 @@ msgstr "MMS"
 #: ../plugins/cellular//CustomApnEditor.qml:71
 #, qt-format
 msgid "Custom %1 APN"
-msgstr ""
+msgstr "Vlastní %1 APN"
 
 #. TRANSLATORS: %1 is either i18n.tr("Internet") or i18n.tr("MMS")
 #: ../plugins/cellular//CustomApnEditor.qml:181
 #, qt-format
 msgid "%1 APN"
-msgstr ""
+msgstr "%1 APN"
 
 #: ../plugins/cellular//CustomApnEditor.qml:191
 msgid "MMSC"
-msgstr ""
+msgstr "MMSC"
 
 #: ../plugins/cellular//CustomApnEditor.qml:201
 msgid "Proxy"
@@ -892,35 +895,39 @@ msgstr "Mobilní"
 #: ../plugins/cellular//Components//MultiSim.qml:58
 #: ../plugins/cellular//Components//SingleSim.qml:70
 msgid "Wi-Fi hotspot"
-msgstr ""
+msgstr "Wi-Fi hotspot"
 
 #: ../plugins/cellular//Hotspot.qml:40
 msgid "Hotspot"
-msgstr "Přístupový bod"
+msgstr "Hotspot"
 
 #: ../plugins/cellular//Hotspot.qml:60
 msgid ""
 "When hotspot is on, other devices can use your cellular data connection over "
 "Wi-Fi. Normal data charges apply."
 msgstr ""
+"Pokud je Hotspot aktivní, ostatní zařízení mohou používat vaše mobilní "
+"internetové připojení pomocí Wi-Fi. Data jsou počítany dle vašeho tarifu."
 
 #: ../plugins/cellular//Hotspot.qml:61
 msgid ""
 "Other devices can use your cellular data connection over the Wi-Fi network. "
 "Normal data charges apply."
 msgstr ""
+"Ostatní zařízení mohou využívat vašeho mobilního internetového připojení. "
+"Data jsou počítany dle vašeho tarifu."
 
 #: ../plugins/cellular//Hotspot.qml:65
 msgid "Set up hotspot"
-msgstr "Nastavení přístupového bodu"
+msgstr "Nastavení hotspotu"
 
 #: ../plugins/cellular//HotspotSetup.qml:29
 msgid "Change hotspot setup"
-msgstr "Změnit nastavení přístupového bodu"
+msgstr "Změnit nastavení hotspotu"
 
 #: ../plugins/cellular//HotspotSetup.qml:40
 msgid "Hotspot name"
-msgstr "Název přístupového bodu"
+msgstr "Název hotspotu"
 
 #: ../plugins/cellular//HotspotSetup.qml:54
 msgid "Key (must be 8 characters or longer)"
@@ -946,7 +953,7 @@ msgstr "Bepečnostní zámek"
 #: ../plugins/security-privacy//LockSecurity.qml:115
 #: ../plugins/security-privacy//LockSecurity.qml:433
 msgid "Change passcode…"
-msgstr ""
+msgstr "Změnit číselný kód..."
 
 #: ../plugins/security-privacy//LockSecurity.qml:117
 #: ../plugins/security-privacy//LockSecurity.qml:434
@@ -959,7 +966,7 @@ msgstr "Přepnout na přejetí prstem"
 
 #: ../plugins/security-privacy//LockSecurity.qml:126
 msgid "Switch to passcode"
-msgstr ""
+msgstr "Přepnout na číselný kód"
 
 #: ../plugins/security-privacy//LockSecurity.qml:128
 msgid "Switch to passphrase"
@@ -967,15 +974,15 @@ msgstr "Přepnout na přístupové heslo."
 
 #: ../plugins/security-privacy//LockSecurity.qml:137
 msgid "Existing passcode"
-msgstr ""
+msgstr "Existující číselný kód"
 
 #: ../plugins/security-privacy//LockSecurity.qml:139
 msgid "Existing passphrase"
-msgstr "Existující přístupové heslo."
+msgstr "Existující přístupové heslo"
 
 #: ../plugins/security-privacy//LockSecurity.qml:204
 msgid "Choose passcode"
-msgstr ""
+msgstr "Vyberte číselný kód"
 
 #: ../plugins/security-privacy//LockSecurity.qml:206
 msgid "Choose passphrase"
@@ -984,7 +991,7 @@ msgstr "Vyberte přístupové heslo"
 #: ../plugins/security-privacy//LockSecurity.qml:258
 #: ../wizard/qml/Pages//passwd-confirm.qml:49
 msgid "Confirm passcode"
-msgstr ""
+msgstr "Potvrďte číselný kód"
 
 #: ../plugins/security-privacy//LockSecurity.qml:260
 #: ../wizard/qml/Pages//passwd-confirm.qml:48
@@ -993,7 +1000,7 @@ msgstr "Potvrďte přístupové heslo"
 
 #: ../plugins/security-privacy//LockSecurity.qml:314
 msgid "Those passcodes don't match. Try again."
-msgstr ""
+msgstr "Tyto číselné heslo jsou nesprávná. Zkuste to znovu."
 
 #: ../plugins/security-privacy//LockSecurity.qml:317
 msgid "Those passphrases don't match. Try again."
@@ -1013,7 +1020,7 @@ msgstr "Přepnout (žádné zabezpečení)"
 
 #: ../plugins/security-privacy//LockSecurity.qml:398
 msgid "4-digit passcode"
-msgstr ""
+msgstr "čtyř číselné heslo"
 
 #: ../plugins/security-privacy//LockSecurity.qml:399
 #: ../plugins/security-privacy//PhoneLocking.qml:47
@@ -1027,7 +1034,7 @@ msgstr "Přepnout (žádné zabezpečení)... "
 
 #: ../plugins/security-privacy//LockSecurity.qml:401
 msgid "4-digit passcode…"
-msgstr ""
+msgstr "čtyř číselné heslo..."
 
 #: ../plugins/security-privacy//LockSecurity.qml:402
 msgid "Passphrase…"
@@ -1041,77 +1048,82 @@ msgstr "PIN karty SIM"
 
 #: ../plugins/security-privacy//SimPin.qml:45
 msgid "Change SIM PIN"
-msgstr ""
+msgstr "Změnit SIM PIN"
 
 #: ../plugins/security-privacy//SimPin.qml:48
 #, qt-format
 msgid "Incorrect PIN. %1 attempt remaining."
 msgid_plural "Incorrect PIN. %1 attempts remaining."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Špatný PIN. Zbývá %1 pokus."
+msgstr[1] "Špatný PIN. Zbývají %1 pokusy."
+msgstr[2] "Špatný PIN. Zbývá %1 pokusů."
 
 #: ../plugins/security-privacy//SimPin.qml:82
 msgid "Current PIN:"
-msgstr ""
+msgstr "Současný PIN:"
 
 #: ../plugins/security-privacy//SimPin.qml:94
 #, qt-format
 msgid "%1 attempt allowed."
 msgid_plural "%1 attempts allowed."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1 povolený pokus"
+msgstr[1] "%1 povolené pokusy"
+msgstr[2] "%1 povolených pokusů"
 
 #: ../plugins/security-privacy//SimPin.qml:108
 msgid "Choose new PIN:"
-msgstr ""
+msgstr "Zvolte nový PIN:"
 
 #: ../plugins/security-privacy//SimPin.qml:119
 msgid "Confirm new PIN:"
-msgstr ""
+msgstr "Potvrďte nový PIN:"
 
 #: ../plugins/security-privacy//SimPin.qml:138
 msgid "PINs don't match. Try again."
-msgstr ""
+msgstr "PIN kódy nesouhlasí. Zkuste to znovu."
 
 #: ../plugins/security-privacy//SimPin.qml:184
 msgid "Enter SIM PIN"
-msgstr ""
+msgstr "Vložte SIM PIN"
 
 #: ../plugins/security-privacy//SimPin.qml:185
 msgid "Enter Previous SIM PIN"
-msgstr ""
+msgstr "Vložte předcházející SIM PIN"
 
 #: ../plugins/security-privacy//SimPin.qml:188
 #, qt-format
 msgid "Incorrect PIN. %1 attempts remaining."
-msgstr ""
+msgstr "Nesprávný PIN. Zbývá %1 pokusů."
 
 #: ../plugins/security-privacy//SimPin.qml:247
 #, qt-format
 msgid "%1 attempts allowed."
-msgstr ""
+msgstr "%1 povolených pokusů."
 
 #: ../plugins/security-privacy//SimPin.qml:283
 msgid "Unlock"
-msgstr ""
+msgstr "Odemknout"
 
 #: ../plugins/security-privacy//SimPin.qml:283
 msgid "Lock"
-msgstr ""
+msgstr "Uzamknout"
 
 #: ../plugins/security-privacy//SimPin.qml:353
 msgid "Change PIN…"
-msgstr ""
+msgstr "Změnit PIN..."
 
 #: ../plugins/security-privacy//SimPin.qml:382
 msgid ""
 "When a SIM PIN is set, it must be entered to access cellular services after "
 "restarting the phone or swapping the SIM."
 msgstr ""
+"Je-li nastaven PIN kód pro SIM kartu, je potřeba jej zadat při každém "
+"restartování nebo výměne SIM karty."
 
 #: ../plugins/security-privacy//SimPin.qml:386
 msgid "Entering an incorrect PIN repeatedly may lock the SIM permanently."
 msgstr ""
+"Opakované zadání nesprávného PIN kódu může natrvalo zablokovat SIM kartu."
 
 #: ../plugins/security-privacy//PhoneLocking.qml:31
 msgid "Phone locking"
@@ -1120,12 +1132,12 @@ msgstr "Zamykání telefonu"
 #: ../plugins/security-privacy//PhoneLocking.qml:45
 msgctxt "Unlock with swipe"
 msgid "None"
-msgstr ""
+msgstr "Žádné"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:46
 #: ../wizard/qml/Pages//30-passwd-type.qml:95
 msgid "Passcode"
-msgstr ""
+msgstr "Číselné heslo"
 
 #. TRANSLATORS: %1 is the number of minutes
 #: ../plugins/security-privacy//PhoneLocking.qml:75
@@ -1143,23 +1155,24 @@ msgstr "Okamžitý zámek spánku"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:106
 msgid "When locked, allow:"
-msgstr ""
+msgstr "Při zamčení, povolit:"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:110
 msgid "Launcher"
-msgstr ""
+msgstr "Launcher"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:123
 msgid "Notifications and quick settings"
-msgstr ""
+msgstr "Upozornění a rychlé nastavení"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:137
 msgid "Turn on lock security to restrict access when the phone is locked."
 msgstr ""
+"Zapnout bezpečnostní zámek omezeného přístupu, když je telefon zamčený."
 
 #: ../plugins/security-privacy//PhoneLocking.qml:138
 msgid "Other apps and functions will prompt you to unlock."
-msgstr ""
+msgstr "Ostatní aplikace a funkce budou povolený po odemčení."
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
 #: ../plugins/security-privacy//PageComponent.qml:37
@@ -1181,32 +1194,34 @@ msgstr "Pouze telefon"
 
 #: ../plugins/security-privacy//PageComponent.qml:120
 msgid "Lock phone"
-msgstr ""
+msgstr "Uzamknout telefon"
 
 #: ../plugins/security-privacy//PageComponent.qml:150
 #: ../plugins/security-privacy//PageComponent.qml:228
 msgid "On"
-msgstr ""
+msgstr "Zapnuto"
 
 #: ../plugins/security-privacy//PageComponent.qml:154
 #: ../plugins/security-privacy//PageComponent.qml:228
 #: ../plugins/cellular//Components//DataMultiSim.qml:30
 msgid "Off"
-msgstr ""
+msgstr "Vypnuto"
 
 #: ../plugins/security-privacy//PageComponent.qml:161
 msgid "Encryption"
-msgstr ""
+msgstr "Šifrování"
 
 #: ../plugins/security-privacy//PageComponent.qml:170
 msgid ""
 "Encryption protects against access to phone data when the phone is connected "
 "to a PC or other device."
 msgstr ""
+"Šifrování chrání zneužití dat, pokud je telefon připojen k počítači nebo "
+"jinému zařízení."
 
 #: ../plugins/security-privacy//PageComponent.qml:174
 msgid "Privacy"
-msgstr ""
+msgstr "Soukromí"
 
 #: ../plugins/security-privacy//PageComponent.qml:177
 msgid "Stats on welcome screen"
@@ -1325,7 +1340,7 @@ msgstr "Výsledky z:"
 
 #: ../plugins/security-privacy//AppAccess.qml:35
 msgid "Apps that you have granted and have requested access to:"
-msgstr ""
+msgstr "Aplikace, které mají oprávnění a přístup do:"
 
 #: ../plugins/bluetooth//PageComponent.qml:123
 #: ../plugins/security-privacy//AppAccess.qml:41
@@ -1334,24 +1349,24 @@ msgstr "Fotoaparát"
 
 #: ../plugins/security-privacy//AppAccess.qml:42
 msgid "Apps that have requested access to your camera"
-msgstr ""
+msgstr "Aplikace, která potřebuje přístup ke fotoaparátu"
 
 #: ../plugins/security-privacy//AppAccess.qml:46
 msgid "Mic"
-msgstr ""
+msgstr "Mikrofon"
 
 #: ../plugins/security-privacy//AppAccess.qml:47
 msgid "Apps that have requested access to your mic"
-msgstr ""
+msgstr "Aplikace, která potřebuje přístup k mikrofonu"
 
 #: ../plugins/security-privacy//AppAccess.qml:59
 #, qt-format
 msgid "%1/%2"
-msgstr ""
+msgstr "%1/%2"
 
 #: ../plugins/security-privacy//AppAccess.qml:60
 msgid "0"
-msgstr ""
+msgstr "0"
 
 #: ../plugins/bluetooth//ProvidePasskeyDialog.qml:28
 #: ../plugins/bluetooth//ProvidePinCodeDialog.qml:28
@@ -1382,19 +1397,19 @@ msgstr "Potvrdit PIN"
 
 #: ../plugins/bluetooth//PageComponent.qml:100
 msgid "Connected"
-msgstr ""
+msgstr "Připojeno"
 
 #: ../plugins/bluetooth//PageComponent.qml:101
 msgid "Connecting…"
-msgstr ""
+msgstr "Připojování..."
 
 #: ../plugins/bluetooth//PageComponent.qml:102
 msgid "Disconnecting…"
-msgstr ""
+msgstr "Odpojování..."
 
 #: ../plugins/bluetooth//PageComponent.qml:103
 msgid "Disconnected"
-msgstr ""
+msgstr "Odpojeno"
 
 #: ../plugins/bluetooth//PageComponent.qml:110
 msgid "Computer"
@@ -1466,23 +1481,23 @@ msgstr "Slabý"
 
 #: ../plugins/bluetooth//PageComponent.qml:194
 msgid "Discoverable"
-msgstr ""
+msgstr "Objevitelný"
 
 #: ../plugins/bluetooth//PageComponent.qml:194
 msgid "Not discoverable"
-msgstr ""
+msgstr "Neobjevitelný"
 
 #: ../plugins/bluetooth//PageComponent.qml:225
 msgid "Connected devices:"
-msgstr ""
+msgstr "Připojená zařízení:"
 
 #: ../plugins/bluetooth//PageComponent.qml:263
 msgid "Connect another device:"
-msgstr ""
+msgstr "Připojit další zařízení:"
 
 #: ../plugins/bluetooth//PageComponent.qml:263
 msgid "Connect a device:"
-msgstr ""
+msgstr "Připojit zařízení:"
 
 #: ../plugins/bluetooth//PageComponent.qml:297
 msgid "None detected"
@@ -1491,7 +1506,7 @@ msgstr "Žádná detekována"
 #: ../plugins/bluetooth//PageComponent.qml:305
 #: ../plugins/bluetooth//PageComponent.qml:416
 msgid "Connect automatically when detected:"
-msgstr ""
+msgstr "Připojit automaticky po detekování:"
 
 #: ../plugins/bluetooth//PageComponent.qml:383
 msgid "Type"
@@ -1499,7 +1514,7 @@ msgstr "Typ"
 
 #: ../plugins/bluetooth//PageComponent.qml:407
 msgid "Status"
-msgstr ""
+msgstr "Stav"
 
 #: ../plugins/bluetooth//PageComponent.qml:411
 msgid "Signal Strength"
@@ -1507,15 +1522,15 @@ msgstr "Síla signálu"
 
 #: ../plugins/bluetooth//PageComponent.qml:448
 msgid "Forget this device"
-msgstr ""
+msgstr "Zapomenout toto zařízení"
 
 #: ../plugins/about//PhoneNumbers.qml:31
 msgid "Phone number:"
-msgstr ""
+msgstr "Telefonní číslo:"
 
 #: ../plugins/about//PhoneNumber.qml:36
 msgid "Phone number"
-msgstr ""
+msgstr "Telefonní číslo"
 
 #: ../plugins/about//Storage.qml:33 ../plugins/about//PageComponent.qml:170
 msgid "Storage"
@@ -1563,17 +1578,20 @@ msgstr "Podle velikosti"
 
 #: ../plugins/about//DevMode.qml:35 ../plugins/about//DevMode.qml:90
 msgid "Developer Mode"
-msgstr ""
+msgstr "Režim vývojáře"
 
 #: ../plugins/about//DevMode.qml:84
 msgid ""
 "In Developer Mode, anyone can access, change or delete anything on this "
 "phone by connecting it to another device."
 msgstr ""
+"V režimu vývojáře má každý přístup ke všem souborům, které může měnit nebo "
+"mazat po připojení telefonu k jinému zařízení."
 
 #: ../plugins/about//DevMode.qml:110
 msgid "You need a passcode or passphrase set to use Developer Mode."
 msgstr ""
+"Potřebujete číselné heslo nebo přístupový kód k využívání Režimu vývojáře."
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: ../plugins/about//PageComponent.qml:34
@@ -1587,17 +1605,17 @@ msgstr "Sériové číslo"
 
 #: ../plugins/about//PageComponent.qml:151
 msgid "Wi-Fi address"
-msgstr ""
+msgstr "Adresa Wi-Fi"
 
 #: ../plugins/about//PageComponent.qml:159
 msgid "Bluetooth address"
-msgstr ""
+msgstr "Adresa Bluetooth"
 
 #. TRANSLATORS: that's the free disk space, indicated in the most appropriate storage unit
 #: ../plugins/about//PageComponent.qml:172
 #, qt-format
 msgid "%1 free"
-msgstr ""
+msgstr "%1 zdarma"
 
 #: ../plugins/about//PageComponent.qml:179
 msgid "Software:"
@@ -1629,39 +1647,39 @@ msgstr "Regulační informace:"
 
 #: ../plugins/about//PageComponent.qml:232
 msgid "Developer mode"
-msgstr ""
+msgstr "Režim vývojáře"
 
 #: ../plugins/about//License.qml:30
 msgid "Sorry, this license could not be displayed."
-msgstr ""
+msgstr "Tato licence nemohla být zobrazena."
 
 #: ../plugins/about//Version.qml:36
 msgid "OS Build Details"
-msgstr ""
+msgstr "OS Build podrobnosti"
 
 #: ../plugins/about//Version.qml:61
 msgid "OS build number"
-msgstr ""
+msgstr "OS Build číslo"
 
 #: ../plugins/about//Version.qml:67
 msgid "Ubuntu Image part"
-msgstr ""
+msgstr "Část obrazu Ubuntu"
 
 #: ../plugins/about//Version.qml:75
 msgid "Ubuntu build description"
-msgstr ""
+msgstr "Popis Ubuntu build"
 
 #: ../plugins/about//Version.qml:81
 msgid "Device Image part"
-msgstr ""
+msgstr "Část obrazu zařízení"
 
 #: ../plugins/about//Version.qml:88
 msgid "Device build description"
-msgstr ""
+msgstr "Popis buildu zařízení"
 
 #: ../plugins/about//Version.qml:95
 msgid "Customization Image part"
-msgstr ""
+msgstr "Část obrazu přizpůsobení"
 
 #: ../plugins/time-date//ChooseTimeZone.qml:28
 msgid "Time zone"
@@ -1745,7 +1763,7 @@ msgstr "Telefon musí být restartován pro instalaci systémových aktualizací
 
 #: ../plugins/system-update//PageComponent.qml:91
 msgid "Connect the phone to power before installing the system update."
-msgstr ""
+msgstr "Před instalací systémové aktualizace připojte telefon k nabíječce."
 
 #: ../plugins/system-update//PageComponent.qml:94
 msgid "Install & Restart"
@@ -1761,12 +1779,12 @@ msgstr "Instalovat"
 
 #: ../plugins/system-update//PageComponent.qml:125
 msgid "Installation failed"
-msgstr ""
+msgstr "Instalace se nezdařila"
 
 #: ../plugins/system-update//PageComponent.qml:129
 #: ../plugins/cellular//Components//SimEditor.qml:217
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 #: ../plugins/system-update//PageComponent.qml:149
 msgid "Software is up to date"
@@ -1775,11 +1793,11 @@ msgstr "Software je aktuální"
 #: ../plugins/system-update//PageComponent.qml:208
 #: ../plugins/system-update//PageComponent.qml:214
 msgid "Sorry, the system update failed."
-msgstr ""
+msgstr "Aktualizace systému se nezdařila."
 
 #: ../plugins/system-update//PageComponent.qml:227
 msgid "Restarting…"
-msgstr ""
+msgstr "Resetování..."
 
 #: ../plugins/system-update//PageComponent.qml:271
 msgid "Checking for updates…"
@@ -1787,7 +1805,7 @@ msgstr "Ověřuje se dostupnost aktualizací..."
 
 #: ../plugins/system-update//PageComponent.qml:271
 msgid "Connect to the Internet to check for updates"
-msgstr ""
+msgstr "Připojit k internetu a zkontrolovat aktualizace"
 
 #: ../plugins/system-update//PageComponent.qml:286
 #: ../plugins/system-update//PageComponent.qml:445
@@ -1798,15 +1816,17 @@ msgstr "Opakovat"
 #, qt-format
 msgid "Install %1 update…"
 msgid_plural "Install %1 updates…"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Instalovat %1 aktualizaci..."
+msgstr[1] "Instalovat %1 aktualizace..."
+msgstr[2] "Instalovat %1 aktualizací..."
 
 #: ../plugins/system-update//PageComponent.qml:312
 #, qt-format
 msgid "Install %1 update"
 msgid_plural "Install %1 updates"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Instalovat %1 aktualizaci"
+msgstr[1] "Instalovat %1 aktualizace"
+msgstr[2] "Instalovat %1 aktualizací"
 
 #: ../plugins/system-update//PageComponent.qml:313
 msgid "Pause All"
@@ -1814,7 +1834,7 @@ msgstr "Pozastavit vše"
 
 #: ../plugins/system-update//PageComponent.qml:448
 msgid "Install…"
-msgstr ""
+msgstr "Instalovat..."
 
 #: ../plugins/system-update//PageComponent.qml:450
 msgid "Download"
@@ -1838,16 +1858,16 @@ msgstr "Instalace"
 
 #: ../plugins/system-update//PageComponent.qml:500
 msgid "Installed"
-msgstr ""
+msgstr "Nainstalováno"
 
 #: ../plugins/system-update//PageComponent.qml:501
 msgid "Downloading"
-msgstr ""
+msgstr "Stahování"
 
 #: ../plugins/system-update//PageComponent.qml:513
 #, qt-format
 msgid "%1 of %2"
-msgstr ""
+msgstr "%1 z %2"
 
 #: ../plugins/system-update//PageComponent.qml:612
 msgid "Version: "
@@ -1855,11 +1875,11 @@ msgstr "Verze: "
 
 #: ../plugins/system-update//PageComponent.qml:644
 msgid "Sign in to Ubuntu One to receive updates for apps."
-msgstr ""
+msgstr "Přihlaste se k Ubuntu One pro získání aktualizaci aplikací."
 
 #: ../plugins/system-update//PageComponent.qml:653
 msgid "Sign In…"
-msgstr ""
+msgstr "Přihlásit se..."
 
 #: ../plugins/system-update//PageComponent.qml:697
 msgid "Installing update…"
@@ -1912,73 +1932,76 @@ msgstr "Přenos dat může být zpoplatněn."
 
 #: ../plugins/background//Components//AddRemove.qml:52
 msgid "No images selected"
-msgstr ""
+msgstr "Nebyl zvolen žádný obraz"
 
 #: ../plugins/background//Components//AddRemove.qml:65
 #, qt-format
 msgid "Remove %1 image"
 msgid_plural "Remove %1 images"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Smazat %1 obraz"
+msgstr[1] "Smazat %1 obrazy"
+msgstr[2] "Smazat %1 obrazů"
 
 #: ../plugins/background//Components//AddRemove.qml:80
 msgid "Add an image…"
-msgstr ""
+msgstr "Přidat obraz..."
 
 #: ../plugins/background//Components//AddRemove.qml:91
 msgid "Remove images…"
-msgstr ""
+msgstr "Odebrat obrazy..."
 
 #: ../plugins/cellular//Components//SingleSim.qml:37
 #: ../plugins/cellular//Components//NoSim.qml:29
 #: ../plugins/cellular//Components//DataMultiSim.qml:41
 msgid "Cellular data:"
-msgstr ""
+msgstr "Mobilní data:"
 
 #: ../plugins/cellular//Components//Sim.qml:42
 msgid "2G only (saves battery)"
-msgstr ""
+msgstr "Pouze 2G (šetří baterii)"
 
 #: ../plugins/cellular//Components//Sim.qml:43
 msgid "2G/3G (faster)"
-msgstr ""
+msgstr "2G/3G (rychlejší)"
 
 #: ../plugins/cellular//Components//Sim.qml:44
 msgid "2G/3G/4G (faster)"
-msgstr ""
+msgstr "2G/3G/4G (rychlejší)"
 
 #: ../plugins/cellular//Components//SingleSim.qml:50
 #: ../plugins/cellular//Components//NoSim.qml:37
 #: ../plugins/cellular//Components//DataMultiSim.qml:74
 msgid "Data roaming"
-msgstr ""
+msgstr "Datový roaming"
 
 #: ../plugins/cellular//Components//SimEditor.qml:89
 msgid "Edit SIM Name"
-msgstr ""
+msgstr "Upravit název SIM"
 
 #: ../plugins/cellular//Components//DefaultSim.qml:31
 msgid "Ask me each time"
-msgstr ""
+msgstr "Pokaždé se zeptat."
 
 #: ../plugins/cellular//Components//DefaultSim.qml:36
 msgid "For outgoing calls, use:"
-msgstr ""
+msgstr "Pro odchozí hovory použít:"
 
 #: ../plugins/cellular//Components//DefaultSim.qml:50
 msgid ""
 "You can change the SIM for individual calls, or for contacts in the address "
 "book."
 msgstr ""
+"Můžete změnit SIM kartu pro jednotlivé hovory nebo kontakty v adresáři "
+"kontaktů."
 
 #: ../plugins/cellular//Components//DefaultSim.qml:57
 msgid "For messages, use:"
-msgstr ""
+msgstr "Pro zprávy použít:"
 
 #: ../plugins/cellular//Components//MultiSim.qml:52
 #: ../plugins/cellular//Components//SingleSim.qml:64
 msgid "Hotspot disabled because Wi-Fi is off."
-msgstr ""
+msgstr "Hospot byl deaktivován, protože Wi-Fi je vypnutá."
 
 #: ../plugins/cellular//Components//MultiSim.qml:68
 #: ../plugins/cellular//Components//SingleSim.qml:79
@@ -1987,23 +2010,23 @@ msgstr "Statistika využití dat"
 
 #: ../plugins/security-privacy//diagnostics//PageComponent.qml:51
 msgid "Privacy policy"
-msgstr ""
+msgstr "Ochrana osobních údajů"
 
 #: ../plugins/security-privacy//diagnostics//PageComponent.qml:59
 msgid "Report to Canonical:"
-msgstr ""
+msgstr "Nahlásit Canonicalu:"
 
 #: ../plugins/security-privacy//diagnostics//PageComponent.qml:73
 msgid "App crashes and errors"
-msgstr ""
+msgstr "Chyba a problémy s aplikací"
 
 #: ../plugins/security-privacy//diagnostics//PageComponent.qml:79
 msgid "Previous error reports"
-msgstr ""
+msgstr "Přechozí hlášení chyb"
 
 #: ../plugins/security-privacy//diagnostics//PageComponent.qml:90
 msgid "Includes info about what an app was doing when it failed."
-msgstr ""
+msgstr "Obrasuje informace o tom, co aplikace dělala, když selhala."
 
 #: ../src/qml/MainWindow.qml:133
 msgid "Search"
@@ -2019,23 +2042,23 @@ msgstr "Systém"
 
 #: ../wizard/qml/Pages//30-passwd-type.qml:72
 msgid "Please select how you’d like to unlock your phone."
-msgstr ""
+msgstr "Zvolte, prosím, jak chcete svůj telefon odemykat."
 
 #: ../wizard/qml/Pages//30-passwd-type.qml:92
 msgid "Swipe"
-msgstr ""
+msgstr "Potažením prstu"
 
 #: ../wizard/qml/Pages//30-passwd-type.qml:93
 msgid "No security"
-msgstr ""
+msgstr "Bez zabezpečení"
 
 #: ../wizard/qml/Pages//30-passwd-type.qml:96
 msgid "4 numbers"
-msgstr ""
+msgstr "4 čísla"
 
 #: ../wizard/qml/Pages//30-passwd-type.qml:99
 msgid "Numbers and letters"
-msgstr ""
+msgstr "Čísla a písmena"
 
 #: ../wizard/qml/Pages//passwd-set.qml:83
 #: ../wizard/qml/Pages//30-passwd-type.qml:112
@@ -2048,84 +2071,84 @@ msgstr "Pokračovat"
 
 #: ../wizard/qml/Pages//40-wifi.qml:28
 msgid "Connect to Wi‑Fi"
-msgstr ""
+msgstr "Připojte se k Wi-Fi"
 
 #: ../wizard/qml/Pages//40-wifi.qml:165
 msgid "Available networks…"
-msgstr ""
+msgstr "Dostupné sítě..."
 
 #: ../wizard/qml/Pages//40-wifi.qml:166
 msgid "No available networks."
-msgstr ""
+msgstr "Žádná dostupná síť."
 
 #: ../wizard/qml/Pages//20-sim.qml:71 ../wizard/qml/Pages//40-wifi.qml:212
 msgid "Skip"
-msgstr ""
+msgstr "Přeskočit"
 
 #: ../wizard/qml/Pages//here-terms.qml:25
 msgid "Terms & Conditions"
-msgstr ""
+msgstr "Pravidla a podmínky"
 
 #: ../wizard/qml/Pages//passwd-set.qml:53
 msgid "Enter passphrase"
-msgstr ""
+msgstr "Vložte heslo"
 
 #: ../wizard/qml/Pages//passwd-set.qml:54
 msgid "Choose your passcode"
-msgstr ""
+msgstr "Zvolte své heslo"
 
 #: ../wizard/qml/Pages//passwd-set.qml:61
 msgid "Passphrase must be 4 characters long"
-msgstr ""
+msgstr "Heslo musí být alespoň 4 znaky dlouhé"
 
 #: ../wizard/qml/Pages//20-sim.qml:23
 msgid "Add a SIM card and restart your device"
-msgstr ""
+msgstr "Vložte SIM kartu a restartujte své zařízení"
 
 #: ../wizard/qml/Pages//20-sim.qml:57
 msgid "Without it, you won’t be able to make calls or use text messaging."
-msgstr ""
+msgstr "Bez ni nebudete moci telefonovat nebo posílat textové zprávy."
 
 #: ../wizard/qml/Pages//passwd-confirm.qml:52
 msgid "Sorry, incorrect passphrase."
-msgstr ""
+msgstr "Zadali jste špatné heslo."
 
 #: ../wizard/qml/Pages//passwd-confirm.qml:52
 #: ../wizard/qml/Pages//passwd-confirm.qml:53
 msgid "Please try again."
-msgstr ""
+msgstr "Zkuste to, prosím, znovu."
 
 #: ../wizard/qml/Pages//passwd-confirm.qml:53
 msgid "Sorry, incorrect passcode."
-msgstr ""
+msgstr "Zadali jste špatné heslo."
 
 #: ../wizard/qml/Pages//80-finished.qml:22
 msgid "All done"
-msgstr ""
+msgstr "Vše je hotovo"
 
 #: ../wizard/qml/Pages//80-finished.qml:37
 msgid "Nice work!"
-msgstr ""
+msgstr "Skvělá práce!"
 
 #: ../wizard/qml/Pages//80-finished.qml:44
 msgid "Your phone is now ready to use."
-msgstr ""
+msgstr "Váš telefon je nyní připraven k použití."
 
 #: ../wizard/qml/Pages//80-finished.qml:51
 msgid "Finish"
-msgstr ""
+msgstr "Dokončit"
 
 #: ../wizard/qml/Pages//10-welcome.qml:25
 msgid "Hi!"
-msgstr ""
+msgstr "Ahoj!"
 
 #: ../wizard/qml/Pages//10-welcome.qml:42
 msgid "Welcome to your Ubuntu phone."
-msgstr ""
+msgstr "Vítejte ve vašem Ubuntu telefonu."
 
 #: ../wizard/qml/Pages//10-welcome.qml:50
 msgid "Let’s get started."
-msgstr ""
+msgstr "Začněme."
 
 #. TRANSLATORS: HERE is a trademark for Nokia's location service, you probably shouldn't translate it
 #: ../wizard/qml/Pages//50-location.qml:58
@@ -2133,11 +2156,14 @@ msgid ""
 "Ubuntu includes location services provided by HERE, enabling apps to "
 "pinpoint your location."
 msgstr ""
+"Ubuntu includes location services provided by HERE, enabling apps to "
+"pinpoint your location."
 
 #: ../wizard/qml/Pages//50-location.qml:64
 msgid ""
 "Allow apps to use your mobile and Wi-Fi networks to determine your location."
 msgstr ""
+"Povolit aplikacím používání mobilních a Wi-Fi sítí pro určení vaší polohy."
 
 #. TRANSLATORS: HERE is a trademark for Nokia's location service, you probably shouldn't translate it
 #: ../wizard/qml/Pages//50-location.qml:74
@@ -2145,42 +2171,48 @@ msgid ""
 "Accept the HERE <a href='terms.qml'>terms and conditions</a> to enable these "
 "services."
 msgstr ""
+"Accept the HERE <a href='terms.qml'>terms and conditions</a> to enable these "
+"services."
 
 #: ../wizard/qml/Pages//50-location.qml:85
 msgid ""
 "This service can be disabled at any time from the <b>System Settings</b> "
 "menu."
-msgstr ""
+msgstr "Tato funkce může být kdykoli vypnuta v <b>Nastavení systému</b>."
 
 #: ../wizard/qml/Pages//60-reporting.qml:22
 msgid "Improving your experience"
-msgstr ""
+msgstr "Zlepšete své zkušenosti"
 
 #: ../wizard/qml/Pages//60-reporting.qml:34
 msgid ""
 "Your phone is set up to automatically report errors to Canonical and its "
 "partners, the makers of the operating system."
 msgstr ""
+"Váš telefon je nastaven tak, aby automaticky odesílal informace o chybách "
+"společnosti Canonical a partnerům, kteří stvořili tento operační systém."
 
 #: ../wizard/qml/Pages//60-reporting.qml:41
 msgid ""
 "This can be disabled in <b>System Settings</b> under <b>Security &amp; "
 "Privacy</b>"
 msgstr ""
+"To může být vypnuto v <b>Nastavení systému</b> v <b>Zabezpečení a "
+"soukromí</b>"
 
 #: ../wizard/qml/Components//Page.qml:89
 msgid "Back"
-msgstr ""
+msgstr "Zpět"
 
 #: ../wizard/qml/Components//StackButton.qml:41
 #, qt-format
 msgid "〈  %1"
-msgstr ""
+msgstr "〈  %1"
 
 #: ../wizard/qml/Components//StackButton.qml:44
 #, qt-format
 msgid "%1  〉"
-msgstr ""
+msgstr "%1  〉"
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:4
@@ -2200,22 +2232,22 @@ msgstr "tapeta"
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:10
 msgid "art"
-msgstr ""
+msgstr "umění"
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:12
 msgid "photo"
-msgstr ""
+msgstr "fotka"
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:14
 msgid "picture"
-msgstr ""
+msgstr "obrázek"
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:16
 msgid "image"
-msgstr ""
+msgstr "obraz"
 
 #. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:18
@@ -2263,31 +2295,31 @@ msgstr "wi-fi"
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:76
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:158
 msgid "connect"
-msgstr ""
+msgstr "připojit"
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:78
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:160
 msgid "disconnect"
-msgstr ""
+msgstr "odpojit"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:162
 msgid "hidden"
-msgstr ""
+msgstr "skrytý"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:164
 msgid "ip"
-msgstr ""
+msgstr "ip"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:108
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:166
 msgid "address"
-msgstr ""
+msgstr "adresa"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
@@ -2301,7 +2333,7 @@ msgstr "software"
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:248
 msgid "notifications"
-msgstr ""
+msgstr "oznámení"
 
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
@@ -2310,47 +2342,47 @@ msgstr ""
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:250
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:304
 msgid "apps"
-msgstr ""
+msgstr "aplikace"
 
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:252
 msgid "authorize"
-msgstr ""
+msgstr "autorizovat"
 
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:254
 msgid "alerts"
-msgstr ""
+msgstr "alarmy"
 
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:256
 msgid "permissions"
-msgstr ""
+msgstr "oprávnění"
 
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:258
 msgid "badges"
-msgstr ""
+msgstr "odznaky"
 
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:260
 msgid "facebook"
-msgstr ""
+msgstr "facebook"
 
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:262
 msgid "twitter"
-msgstr ""
+msgstr "twitter"
 
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:264
 msgid "flickr"
-msgstr ""
+msgstr "flickr"
 
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:266
 msgid "gmail"
-msgstr ""
+msgstr "gmail"
 
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:320
@@ -2360,41 +2392,41 @@ msgstr "zvuk"
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:322
 msgid "silent"
-msgstr ""
+msgstr "tichý"
 
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:324
 msgid "ringtone"
-msgstr ""
+msgstr "vyzvánění"
 
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:326
 msgid "vibrate"
-msgstr ""
+msgstr "vibrace"
 
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:52
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:328
 msgid "dialpad"
-msgstr ""
+msgstr "číselník"
 
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:330
 msgid "message"
-msgstr ""
+msgstr "zpráva"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:272
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:332
 msgid "keyboard"
-msgstr ""
+msgstr "klávesnice"
 
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:334
 msgid "volume"
-msgstr ""
+msgstr "hlasitost"
 
 #. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:198
@@ -2404,22 +2436,22 @@ msgstr "reset"
 #. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:200
 msgid "erase"
-msgstr ""
+msgstr "vymazat"
 
 #. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:202
 msgid "factory"
-msgstr ""
+msgstr "tovární"
 
 #. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:204
 msgid "clear"
-msgstr ""
+msgstr "vyčistit"
 
 #. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:206
 msgid "restore"
-msgstr ""
+msgstr "obnovit"
 
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:26
@@ -2434,12 +2466,12 @@ msgstr "napájení"
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:30
 msgid "charge"
-msgstr ""
+msgstr "nabít"
 
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:32
 msgid "idle"
-msgstr ""
+msgstr "nečinost"
 
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
@@ -2453,12 +2485,12 @@ msgstr "zámek"
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:36
 msgid "disable"
-msgstr ""
+msgstr "zakázání"
 
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:38
 msgid "enable"
-msgstr ""
+msgstr "povolení"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:270
@@ -2468,7 +2500,7 @@ msgstr "jazyk"
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:274
 msgid "spellcheck"
-msgstr ""
+msgstr "kontrola"
 
 #. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
@@ -2479,49 +2511,49 @@ msgstr ""
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:216
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:276
 msgid "automatic"
-msgstr ""
+msgstr "automatické"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:278
 msgid "correct"
-msgstr ""
+msgstr "korektní"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:280
 msgid "suggestions"
-msgstr ""
+msgstr "návrhy"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:282
 msgid "capitalization"
-msgstr ""
+msgstr "kapitalizace"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:284
 msgid "punctuation"
-msgstr ""
+msgstr "interpunkce"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:286
 msgid "layout"
-msgstr ""
+msgstr "dispozice"
 
 #. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:212
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:288
 msgid "display"
-msgstr ""
+msgstr "zobrazit"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:290
 msgid "words"
-msgstr ""
+msgstr "slova"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:292
 msgid "vibration"
-msgstr ""
+msgstr "vibrace"
 
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
@@ -2533,32 +2565,32 @@ msgstr "telefon"
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:44
 msgid "services"
-msgstr ""
+msgstr "služby"
 
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:46
 msgid "forwarding"
-msgstr ""
+msgstr "přesměrování"
 
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:48
 msgid "waiting"
-msgstr ""
+msgstr "čekání"
 
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:50
 msgid "call"
-msgstr ""
+msgstr "Volání"
 
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:54
 msgid "shortcuts"
-msgstr ""
+msgstr "odkazy"
 
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:56
 msgid "numbers"
-msgstr ""
+msgstr "čísla"
 
 #. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:210
@@ -2575,7 +2607,7 @@ msgstr "obrazovka"
 #. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:218
 msgid "adjust"
-msgstr ""
+msgstr "přizpůsobení"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:170
@@ -2595,49 +2627,49 @@ msgstr "gsm"
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:178
 msgid "data"
-msgstr ""
+msgstr "data"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:180
 msgid "carrier"
-msgstr ""
+msgstr "operátor"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:182
 msgid "4g"
-msgstr ""
+msgstr "4g"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:184
 msgid "3g"
-msgstr ""
+msgstr "3g"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:186
 msgid "2g"
-msgstr ""
+msgstr "2g"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:188
 msgid "lte"
-msgstr ""
+msgstr "lte"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:190
 msgid "apn"
-msgstr ""
+msgstr "apn"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:192
 msgid "roam"
-msgstr ""
+msgstr "roam"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:194
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:228
 msgid "sim"
-msgstr ""
+msgstr "sim"
 
 #. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:336
@@ -2682,7 +2714,7 @@ msgstr "offline"
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:314
 msgid "airplane"
-msgstr ""
+msgstr "letadlo"
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:222
@@ -2697,37 +2729,37 @@ msgstr "soukromí"
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:230
 msgid "pin"
-msgstr ""
+msgstr "pin"
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:232
 msgid "code"
-msgstr ""
+msgstr "kód"
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:234
 msgid "password"
-msgstr ""
+msgstr "heslo"
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:236
 msgid "passphrase"
-msgstr ""
+msgstr "heslo"
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:238
 msgid "swipe"
-msgstr ""
+msgstr "potažení"
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:240
 msgid "allow"
-msgstr ""
+msgstr "povolit"
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:242
 msgid "access"
-msgstr ""
+msgstr "přístup"
 
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
 #: ../po/settings.js:174
@@ -2752,12 +2784,12 @@ msgstr "bluetooth"
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:62
 msgid "headset"
-msgstr ""
+msgstr "sluchátka"
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:64
 msgid "pair"
-msgstr ""
+msgstr "spárovat"
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
@@ -2769,22 +2801,22 @@ msgstr "zařízení"
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:68
 msgid "discover"
-msgstr ""
+msgstr "objevit"
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:70
 msgid "car"
-msgstr ""
+msgstr "auto"
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:72
 msgid "handsfree"
-msgstr ""
+msgstr "handsfree"
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:80
 msgid "stereo"
-msgstr ""
+msgstr "stereo"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:94
@@ -2799,57 +2831,57 @@ msgstr "info"
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:102
 msgid "number"
-msgstr ""
+msgstr "číslo"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:104
 msgid "imei"
-msgstr ""
+msgstr "imei"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:106
 msgid "serial"
-msgstr ""
+msgstr "serial"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:110
 msgid "mac"
-msgstr ""
+msgstr "mac"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:112
 msgid "licenses"
-msgstr ""
+msgstr "licence"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:114
 msgid "developer"
-msgstr ""
+msgstr "developer vývojář"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:118
 msgid "storage"
-msgstr ""
+msgstr "úložiště"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:120
 msgid "disk"
-msgstr ""
+msgstr "disk"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:122
 msgid "space"
-msgstr ""
+msgstr "místo"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:124
 msgid "version"
-msgstr ""
+msgstr "verze"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:126
 msgid "revision"
-msgstr ""
+msgstr "revize"
 
 #. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:84
@@ -2869,7 +2901,7 @@ msgstr "časové pásmo"
 #. TRANSLATORS: This is a keyword or name for the update-notification plugin which is used while searching
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:146
 msgid "Updates available"
-msgstr ""
+msgstr "dostupné aktualizace"
 
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:130
@@ -2884,54 +2916,54 @@ msgstr "aktualizace"
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:140
 msgid "download"
-msgstr ""
+msgstr "stažení"
 
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:142
 msgid "upgrade"
-msgstr ""
+msgstr "aktualizace"
 
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:144
 msgid "click"
-msgstr ""
+msgstr "klik"
 
 #: ../plugins/security-privacy//securityprivacy.cpp:347
 msgid "Incorrect passcode. Try again."
-msgstr ""
+msgstr "Nesprávné číselné heslo. Zkuste to znovu."
 
 #: ../plugins/security-privacy//securityprivacy.cpp:349
 msgid "Incorrect passphrase. Try again."
-msgstr ""
+msgstr "Nesprávné heslo. Zkuste to znovu."
 
 #: ../plugins/security-privacy//securityprivacy.cpp:352
 msgid "Could not set security mode"
-msgstr ""
+msgstr "Nelze nastavit režim zabezpečení"
 
 #: ../plugins/security-privacy//securityprivacy.cpp:377
 msgid "Could not set security display hint"
-msgstr ""
+msgstr "Nelze nastavit řežim zabežpečení obrazovky"
 
 #: ../plugins/security-privacy//securityprivacy.cpp:388
 msgid "Authentication token manipulation error"
-msgstr ""
+msgstr "Chyba manipulace autentizačního tokenu"
 
 #: ../plugins/about//click.cpp:171
 msgid "Unknown title"
-msgstr ""
+msgstr "Neznámý titul"
 
 #: ../plugins/system-update//system_update.cpp:94
 msgid "Can't cancel current request (can't contact service)"
-msgstr ""
+msgstr "Nelze zrušit aktuální požadavek (nelze kontaktovat službu)"
 
 #: ../plugins/system-update//system_update.cpp:100
 msgid "Can't pause current request (can't contact service)"
-msgstr ""
+msgstr "Nelze pozastavit aktuální požadavek (nelze kontaktovat službu)"
 
 #: ../push-helper/software_updates_helper.py:150
 msgid "There's an updated system image."
-msgstr ""
+msgstr "Je k dispozici aktualizační systémový obraz."
 
 #: ../push-helper/software_updates_helper.py:151
 msgid "Tap to open the system updater."
-msgstr ""
+msgstr "Klepněte k otevření systémové aktualizace."
