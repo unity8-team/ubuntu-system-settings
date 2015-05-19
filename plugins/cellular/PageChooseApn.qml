@@ -50,7 +50,6 @@ ItemPage {
      * objects to represents the contexts.
      *
      * The model will have helpful properties:
-     *     label: Label to put on the button that spawns the editor.
      *     title: Title that goes in the editor.
      *     type: A code that tells us what context type this model will have.
      *
@@ -279,7 +278,6 @@ ItemPage {
                 Label {
                     id: apnItemType
                     anchors {
-
                         left: parent.left
                         right: parent.right
                         top: apnItemName.bottom

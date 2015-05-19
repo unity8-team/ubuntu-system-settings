@@ -140,7 +140,7 @@ ItemPage {
         contentHeight: contents.height + units.gu(2)
         contentWidth: parent.width
 
-        //after add a new field we need to wait for the contentHeight to
+        // after add a new field we need to wait for the contentHeight to
         // change to scroll to the correct position
         onContentHeightChanged: Editor.makeMeVisible(root.activeItem)
 
