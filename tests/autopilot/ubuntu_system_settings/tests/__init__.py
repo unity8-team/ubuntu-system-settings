@@ -312,7 +312,7 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
         )
 
         self.modem_1.connMan = dbus.Interface(self.dbus_con.get_object(
-                                              'org.ofono', second_modem),
+                                              'org.ofono', '/' + second_modem),
                                               'org.ofono.ConnectionManager')
 
     @classmethod
