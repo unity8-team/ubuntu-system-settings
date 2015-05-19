@@ -280,6 +280,9 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
             ('GetOperators', '', 'a(oa{sv})', self.get_all_operators('ril_0')),
             ('Scan', '', 'a(oa{sv})', self.get_all_operators('ril_0')),
         ])
+        self.modem_0.connMan = dbus.Interface(self.dbus_con.get_object(
+                                              'org.ofono', '/ril_0'),
+                                              'org.ofono.ConnectionManager')
 
     def add_sim2(self):
         '''Mock two modems/sims for the dual sim story'''
@@ -307,6 +310,10 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
             SIM_IFACE,
             'SubscriberNumbers', ['08123', '938762783']
         )
+
+        self.modem_1.connMan = dbus.Interface(self.dbus_con.get_object(
+                                              'org.ofono', second_modem),
+                                              'org.ofono.ConnectionManager')
 
     @classmethod
     def setUpClass(cls):
@@ -364,11 +371,7 @@ class CellularBaseTestCase(UbuntuSystemSettingsOfonoTestCase):
 
     def add_connection_context(self, modem, **kwargs):
         iface = 'org.ofono.ConnectionContext'
-        connMan = dbus.Interface(self.dbus_con.get_object(
-                                 'org.ofono', modem.__dbus_object_path__),
-                                 'org.ofono.ConnectionManager')
-        self.connMan = connMan
-        path = connMan.AddContext(kwargs.get('Type', 'internet'))
+        path = modem.connMan.AddContext(kwargs.get('Type', 'internet'))
         context = dbus.Interface(self.dbus_con.get_object(
                                  'org.ofono', path),
                                  iface)

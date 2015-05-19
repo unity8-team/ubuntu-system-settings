@@ -179,7 +179,7 @@ function makeMeVisible(item) {
 
     // check if the item is already visible
     var bottomY = scrollArea.contentY + scrollArea.height;
-    var itemBottom = position.y + (item.height * 3); // extra margin
+    var itemBottom = position.y; // extra margin
     if (position.y >= scrollArea.contentY && itemBottom <= bottomY) {
         return;
     }
