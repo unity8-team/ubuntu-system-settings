@@ -63,23 +63,30 @@ ItemPage {
         id: mmsContexts
         property string title: i18n.tr("MMS APN")
         property string type: 'mms'
+        property bool havePreferred: false
     }
 
     ListModel {
         id: internetContexts
         property string title: i18n.tr("Internet APN")
         property string type: 'internet'
+        property bool havePreferred: false
     }
 
     ListModel {
         id: iaContexts
         property string title: i18n.tr("LTE APN")
         property string type: 'ia'
+        property bool havePreferred: false
     }
 
     Component {
         id: contextComponent
         OfonoContextConnection {
+            // Context can appear preferred if there are no preferred contexts
+            // of its type, and it it active. This property is changed
+            // by the manager.
+            property bool shouldAppearPreferred: false
             property string typeString: {
                 if (type === 'internet' && messageCenter) {
                     return i18n.tr("Internet and MMS");
@@ -221,6 +228,17 @@ ItemPage {
                         left: parent.left
                         verticalCenter: parent.verticalCenter
                     }
+                    states: [
+                        State {
+                            name: "shouldAppearPreferred"
+                            PropertyChanges {
+                                target: check
+                                enabled: false
+                                checked: true
+                            }
+                            when: qml.shouldAppearPreferred
+                        }
+                    ]
                     property bool serverChecked: qml.preferred
                     onServerCheckedChanged: checked = serverChecked
                     Component.onCompleted: checked = serverChecked
@@ -258,7 +276,6 @@ ItemPage {
                     opacity: apnListItem.enabled ? 1.0 : 0.5
                 }
 
-
                 Label {
                     id: apnItemType
                     anchors {
@@ -276,7 +293,6 @@ ItemPage {
                 }
             }
         }
-
     }
 
     Timer {

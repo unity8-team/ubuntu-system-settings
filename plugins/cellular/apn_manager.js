@@ -155,6 +155,9 @@ function _createQml (paths) {
                 addContextToModel(ctx);
             }
 
+            // We want to track preferred updates
+            ctx.preferredChanged.connect(contextPreferredChanged.bind(ctx));
+
             _pathToQml[path] = ctx;
         }
     });
@@ -272,6 +275,15 @@ function typeDetermined (type) {
 }
 
 /**
+ * Handler for when preferred changes on context.
+ * @param {Boolean} preferred
+ */
+function contextPreferredChanged (preferred) {
+    console.warn('contextPreferredChanged', preferred, this.contextPath);
+    checkPreferred();
+}
+
+/**
  * This is code that is supposed to identify new contexts that user creates.
  * If we think the context is new, and the editor page is open, we notify it.
  *
@@ -310,6 +322,7 @@ function contextAdded (path) {
 function contextsChanged (paths) {
     console.warn('contextsChanged', paths);
     updateQML(paths);
+    checkPreferred();
 }
 
 /**
@@ -349,38 +362,49 @@ function isComboContext (ctx) {
 
 /**
  * Reset apn configuration.
-*/
+ */
 function reset () {
     sim.connMan.deactivateAll();
     sim.connMan.contexts.forEach(removeContext);
     SessionService.reboot();
 }
 
+/**
+ * Checks if there are preferred contexts. If there are none,
+ * we set the active one to appear as preferred.
+ */
 function checkPreferred () {
     var models = [internetContexts, iaContexts];
 
     models.forEach(function (model) {
         var i;
         var havePreferred = false;
-        var active;
         var ctx;
+        var activeCtx;
+        var appearingActiveCtx;
         for (i = 0; i < model.count; i++) {
             ctx = model.get(i).qml;
             if (ctx.preferred) {
                 havePreferred = true;
             }
+
             if (ctx.active) {
-                active = ctx;
+                activeCtx = ctx;
+            }
+
+            if (ctx.shouldAppearPreferred) {
+                appearingActiveCtx = ctx;
             }
         }
 
-        // We set the last active one as the preferred.
-        // TODO: Better logic to handle this?
-        if (!havePreferred && active) {
-            active.preferred = true;
-            console.warn('Setting', active.name, 'as preferred since we had no preferred from before.');
+        if (havePreferred) {
+            appearingActiveCtx.shouldAppearPreferred = false;
+            console.warn(appearingActiveCtx.name, 'was made not to appear active in', model.title);
+        } else if (activeCtx) {
+            activeCtx.shouldAppearPreferred = true;
+            console.warn(activeCtx.name, 'will now appear active in', model.title);
         }
 
+        console.warn(model.title, 'havePreferred', havePreferred);
     });
 }
-
