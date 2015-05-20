@@ -40,6 +40,10 @@ ItemPage {
     property var sim
     property var editor
 
+    // Signal that indicates that we have all our contexts.
+    signal ready()
+    Component.onCompleted: root.ready.connect(Manager.ready)
+
     OfonoActivator {
         id: activator
     }
@@ -62,21 +66,18 @@ ItemPage {
         id: mmsContexts
         property string title: i18n.tr("MMS APN")
         property string type: 'mms'
-        property bool havePreferred: false
     }
 
     ListModel {
         id: internetContexts
         property string title: i18n.tr("Internet APN")
         property string type: 'internet'
-        property bool havePreferred: false
     }
 
     ListModel {
         id: iaContexts
         property string title: i18n.tr("LTE APN")
         property string type: 'ia'
-        property bool havePreferred: false
     }
 
     Component {
@@ -291,13 +292,6 @@ ItemPage {
                 }
             }
         }
-    }
-
-    Timer {
-        id: preferredCheck
-        running: true
-        interval: 1000
-        onTriggered: Manager.checkPreferred();
     }
 
     Connections {

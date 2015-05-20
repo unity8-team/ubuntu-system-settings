@@ -23,6 +23,8 @@
 
 // Map of path to QOfonoContextConnection objects
 var _pathToQml = {};
+var _totalContext = 0;
+var _validContexts = 0;
 
 /**
  * Get the list model corresponding to a given type.
@@ -122,6 +124,7 @@ function _garbageCollect (paths) {
             if (paths.indexOf(path) === -1) {
                 console.warn('_garbageCollect', path);
                 deleteQML(path);
+                _totalContext--;
             }
         }
     }
@@ -142,6 +145,7 @@ function _createQml (paths) {
             ctx = createContextQml(path);
             console.warn('_createQml created', path, ctx.name, ctx.type);
 
+            // Some contexts have a name, others do not. Normalize this.
             if (!ctx.name) {
                 ctx.nameChanged.connect(contextNameChanged.bind(ctx));
             } else {
@@ -155,10 +159,11 @@ function _createQml (paths) {
                 addContextToModel(ctx);
             }
 
-            // We want to track preferred updates
+            ctx.validChanged.connect(contextValidChanged.bind(ctx));
             ctx.preferredChanged.connect(contextPreferredChanged.bind(ctx));
 
             _pathToQml[path] = ctx;
+            _totalContext++;
         }
     });
 }
@@ -279,8 +284,26 @@ function typeDetermined (type) {
  * @param {Boolean} preferred
  */
 function contextPreferredChanged (preferred) {
-    console.warn('contextPreferredChanged', preferred, this.contextPath);
+    console.warn('contextPreferredChanged', this.preferred, preferred, this.contextPath);
     checkPreferred();
+}
+
+/**
+ * Handler for when validity of context changes.
+ * @param {Boolean} valid
+ */
+function contextValidChanged (valid) {
+    console.warn('contextValidChanged', this.valid, valid, this.contextPath);
+    if (valid) {
+        _validContexts++;
+    } else {
+        _validContexts--;
+    }
+
+    if (_validContexts === _totalContext) {
+        console.warn('_validContexts === _totalContext, firing ready...');
+        root.ready();
+    }
 }
 
 /**
@@ -384,7 +407,9 @@ function checkPreferred () {
         var appearingActiveCtx;
         for (i = 0; i < model.count; i++) {
             ctx = model.get(i).qml;
+            console.warn('checking if', ctx.contextPath, 'is preferred...');
             if (ctx.preferred) {
+                console.warn(ctx.contextPath, 'was preferred');
                 havePreferred = true;
             }
 
@@ -397,14 +422,22 @@ function checkPreferred () {
             }
         }
 
-        if (havePreferred) {
+        if (havePreferred && appearingActiveCtx) {
             appearingActiveCtx.shouldAppearPreferred = false;
             console.warn(appearingActiveCtx.name, 'was made not to appear active in', model.title);
-        } else if (activeCtx) {
+        }
+
+        if (!havePreferred && activeCtx) {
             activeCtx.shouldAppearPreferred = true;
             console.warn(activeCtx.name, 'will now appear active in', model.title);
         }
 
         console.warn(model.title, 'havePreferred', havePreferred);
     });
+}
+
+function ready() {
+    console.warn('fired ready');
+    checkPreferred();
+    root.ready.disconnect(ready);
 }
