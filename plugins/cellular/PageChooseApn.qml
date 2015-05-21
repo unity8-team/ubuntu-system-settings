@@ -288,10 +288,17 @@ ItemPage {
     Connections {
         target: sim.connMan
 
-        onReportError: Manager.reportError(message)
-        onContextRemoved: Manager.contextRemoved(path)
         onContextAdded: Manager.contextAdded(path)
+        onContextRemoved: Manager.contextRemoved(path)
         onContextsChanged: Manager.contextsChanged(contexts)
+        onReportError: Manager.reportError(message)
         Component.onCompleted: Manager.contextsChanged(sim.connMan.contexts)
+    }
+
+    Connections {
+        id: restorePowered
+        target: null
+        ignoreUnknownSignals: true
+        onPoweredChanged: Manager.connManPoweredChanged(powered)
     }
 }

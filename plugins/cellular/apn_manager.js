@@ -395,11 +395,16 @@ function isComboContext (ctx) {
  * Reset apn configuration.
  */
 function reset () {
-    sim.connMan.poweredChanged.connect(poweredChangedForReset.bind(sim.connMan));
-
-    // We turn off cellular data, and when cellular data is turned off,
-    // poweredChangedForReset does the reset.
-    sim.connMan.powered = false;
+    // If cellular data is on, we need to turn it off. The reset itself,
+    // as well as turning cellular data back on, is done by the use of a
+    // Connection component and connManPoweredChanged.
+    if (sim.connMan.powered) {
+        console.warn('sat restorePowered target');
+        restorePowered.target = sim.connMan;
+        sim.connMan.powered = false;
+    } else {
+        connManPoweredChanged(sim.connMan.powered);
+    }
 }
 
 
@@ -408,12 +413,19 @@ function reset () {
  * Note that 'this' refers to connMan on the SIM.
  *
  */
-function poweredChangedForReset (powered) {
-    console.warn('poweredChangedForReset', powered);
+function connManPoweredChanged (powered) {
+    console.warn('poweredChangedForReset', powered, this);
     if (!powered) {
-        this.resetContexts();
+        sim.connMan.resetContexts();
+
+        // If restorePowered had a target, we know to turn cellular
+        // data back on.
+        if (restorePowered.target) {
+            console.warn('had restorePowered target, powering up..');
+            sim.connMan.powered = true;
+        }
     }
-    this.poweredChanged.disconnect(poweredChangedForReset);
+    restorePowered.target = null;
 }
 
 /**
@@ -460,7 +472,7 @@ function checkPreferred () {
     });
 }
 
-function ready() {
+function ready () {
     console.warn('fired ready');
     checkPreferred();
     root.ready.disconnect(ready);
