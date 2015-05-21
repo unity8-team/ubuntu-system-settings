@@ -100,7 +100,7 @@ function deleteQML (path) {
             for (i = 0; i < model.count; i++) {
                 if (ctx.contextPath == model.get(i).path) {
                     model.remove(i);
-                    console.warn('Found QML in ListModel, removing', path, 'in', model.label);
+                    console.warn('Found QML in ListModel, removing', path, 'in', model.title);
                     break;
                 }
             }
@@ -154,7 +154,7 @@ function _createQml (paths) {
 
             // Some context come with a type, others not. Normalize this.
             if (!ctx.type) {
-                ctx.typeChanged.connect(typeDetermined.bind(ctx));
+                ctx.typeChanged.connect(contextTypeChanged.bind(ctx));
             } else {
                 addContextToModel(ctx);
             }
@@ -214,7 +214,9 @@ function removeContext (path) {
 }
 
 /**
- * Adds a context to the appropriate model.
+ * Adds a context to the appropriate model. If the context to be added is found
+ * in another model, which will happen if the user changes type of the context,
+ * we remove it from the old model and add it to the new.
  *
  * @param {OfonoContextConnection} ctx to be added
  * @param {String} [optional] type of context
@@ -225,10 +227,29 @@ function addContextToModel (ctx, type) {
         qml: ctx
     };
     var model;
+    var oldModel;
+    var haveContext;
     console.warn('addContextToModel', type, ctx.name, data.qml, data.path);
+
+    // We will move a model if it already exist.
+    [mmsContexts, internetContexts, iaContexts].forEach(function (m) {
+        var i;
+        for (i = 0; i < m.count && !haveContext; i++) {
+            if (ctx.contextPath == m.get(i).path) {
+                haveContext = m.get(i);
+                oldModel = m;
+                console.warn('addContextToModel: Found existing context in ListModel, moving...', haveContext.path, 'in', m.title);
+                break;
+            }
+        }
+    });
 
     if (typeof type === 'undefined') {
         type = ctx.type;
+    }
+
+    if (haveContext && oldModel) {
+        oldModel.remove(haveContext);
     }
 
     model = getModelFromType(type);
@@ -271,13 +292,14 @@ function contextRemoved (path) {
 }
 
 /**
- * Handler for when a type has been determined.
+ * Handler for when a type has been determined. If a contex changes type,
+ * we need to move it to the correct model.
  * Note that 'this' refers to the context on which type changed.
  *
  * @param {String} type
  */
-function typeDetermined (type) {
-    console.warn('typeDetermined', type, this.contextPath);
+function contextTypeChanged (type) {
+    console.warn('contextTypeChanged', type, this.contextPath);
     addContextToModel(this, type);
 }
 

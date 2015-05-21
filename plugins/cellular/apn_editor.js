@@ -26,9 +26,12 @@
  * @param {OfonoContextConnection} qml to be updated
 */
 function updateContextQML (ctx) {
+    var toType = indexToType(typeSel.selectedIndex);
+    toType = toType === 'internet+mms' ? 'internet' : toType;
     console.warn('updateContextQML', ctx.contextPath);
     ctx.disconnect();
     ctx.name = name.text;
+    ctx.type = toType;
     ctx.accessPointName = accessPointName.text;
     ctx.username = username.text;
     ctx.password = password.text;
