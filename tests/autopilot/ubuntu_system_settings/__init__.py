@@ -421,14 +421,16 @@ class SimPin(ubuntuuitoolkit.QQuickFlickable):
 
     """Autopilot helper for the SimPin Page."""
 
-    def get_sim_pin_switch(self):
+    def get_sim_pin_switch(self, sim_number):
         """Return the SIM PIN switch."""
-        return self.select_single(objectName='simPinSwitch')
+        switches = self.select_many(objectName='simPinSwitch')
+        switches = sorted(switches, key=lambda switch: (switch.globalRect.y))
+        return switches[sim_number]
 
     @autopilot.logging.log_action(logger.debug)
-    def click_sim_pin_switch(self):
+    def click_sim_pin_switch(self, sim_number):
         """Click on the SIM PIN switch, return the SIM PIN dialog."""
-        sim_pin_switch = self.get_sim_pin_switch()
+        sim_pin_switch = self.get_sim_pin_switch(sim_number)
         self.pointing_device.click_object(sim_pin_switch)
         return self.get_root_instance().wait_select_single(
             objectName='lockDialogComponent'

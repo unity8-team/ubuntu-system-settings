@@ -38,20 +38,16 @@ ItemPage {
     function timeDeltaString(timeDelta) {
         var sec = timeDelta,
             min = Math.round (timeDelta / 60),
-            hr = Math.round (timeDelta / 3600),
-            day = Math.round (timeDelta / 86400);
+            hr = Math.round (timeDelta / 3600);
         if (sec < 60)
             // TRANSLATORS: %1 is the number of seconds
             return i18n.tr("%1 second ago", "%1 seconds ago", sec).arg(sec)
         else if (min < 60)
             // TRANSLATORS: %1 is the number of minutes
             return i18n.tr("%1 minute ago", "%1 minutes ago", min).arg(min)
-        else if (hr < 24)
+        else
             // TRANSLATORS: %1 is the number of hours
             return i18n.tr("%1 hour ago", "%1 hours ago", hr).arg(hr)
-        else
-            // TRANSLATORS: %1 is the number of days
-            return i18n.tr("%1 day ago", "%1 days ago", day).arg(day)
     }
 
     GSettings {

@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-10-16 20:04-0600\n"
-"PO-Revision-Date: 2015-04-19 11:53+0000\n"
+"PO-Revision-Date: 2015-05-13 06:56+0000\n"
 "Last-Translator: Richard Somlói <ricsipontaz@gmail.com>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2015-05-08 05:29+0000\n"
-"X-Generator: Launchpad (build 17474)\n"
+"X-Launchpad-Export-Date: 2015-05-14 04:59+0000\n"
+"X-Generator: Launchpad (build 17493)\n"
 
 #: ubuntu-system-settings.desktop.in.in.h:1 ../src/qml/MainWindow.qml:112
 msgid "System Settings"
@@ -2965,8 +2965,8 @@ msgstr ""
 
 #: ../push-helper/software_updates_helper.py:150
 msgid "There's an updated system image."
-msgstr "Elérhető egy frissített rendszer képfájl."
+msgstr "Elérhető új rendszerfrissítés."
 
 #: ../push-helper/software_updates_helper.py:151
 msgid "Tap to open the system updater."
-msgstr "Koppintson a rendszerfrissítő megnyitásához."
+msgstr "Koppintson a frissítő indításához."
