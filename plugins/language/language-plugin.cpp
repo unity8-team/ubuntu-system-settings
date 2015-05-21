@@ -291,6 +291,9 @@ LanguagePlugin::updateLanguageNamesAndCodes()
     QHash<QString, QString> likelyLocaleForLanguage;
     QList<LanguageLocale> languageLocales;
 
+    QStringList installedTranslations(QDir("/usr/share/locale-langpack").
+                                      entryList(QDir::Dirs | QDir::NoDotAndDotDot));
+
     // Remove blacklisted locales.
     for (unsigned int
          i(0); i < sizeof(LOCALE_BLACKLIST) / sizeof(const char *); i++)
@@ -323,7 +326,14 @@ LanguagePlugin::updateLanguageNamesAndCodes()
 
         languageLocale.likely = likelyLocaleForLanguage[language] ==
                                 i->left(i->indexOf('.'));
-        languageLocales += languageLocale;
+
+        /* Only list locales that are the main ones (=likely) for a language,
+           or that are a variant of the language which has translations on disk
+           (by looking if the langpack directories include the locale, without its '.utf-8') */
+        if (languageLocale.likely ||
+                installedTranslations.contains(languageLocale.localeName.split(".utf8")[0])) {
+            languageLocales += languageLocale;
+        }
     }
 
     qSort(languageLocales);
