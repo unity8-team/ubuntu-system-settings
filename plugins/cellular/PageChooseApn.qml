@@ -44,10 +44,6 @@ ItemPage {
     signal ready()
     Component.onCompleted: root.ready.connect(Manager.ready)
 
-    OfonoActivator {
-        id: activator
-    }
-
     /**
      * We have three ListModels: one for Internet contexts, one for MMS
      * contexts and one for ia contexts. We use OfonoConnectionContext qml
@@ -157,11 +153,6 @@ ItemPage {
             title: i18n.tr("Reset APN Settings")
             text: i18n.tr("Are you sure that you want to Reset APN Settings?")
 
-            Label {
-                text: i18n.tr("The phone needs to restart for changes to take effect.")
-                wrapMode: Text.WordWrap
-            }
-
             Button {
                 text: i18n.tr("Cancel")
                 onClicked: PopupUtils.close(dialogue)
@@ -239,7 +230,7 @@ ItemPage {
                             when: qml.shouldAppearPreferred
                         }
                     ]
-                    property bool serverChecked: qml.preferred
+                    property bool serverChecked: qml && qml.preferred
                     onServerCheckedChanged: checked = serverChecked
                     Component.onCompleted: checked = serverChecked
                     onTriggered: {

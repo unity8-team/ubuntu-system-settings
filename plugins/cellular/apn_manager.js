@@ -272,6 +272,8 @@ function contextRemoved (path) {
 
 /**
  * Handler for when a type has been determined.
+ * Note that 'this' refers to the context on which type changed.
+ *
  * @param {String} type
  */
 function typeDetermined (type) {
@@ -281,6 +283,8 @@ function typeDetermined (type) {
 
 /**
  * Handler for when preferred changes on context.
+ * Note that 'this' refers to the context on which preferred changed.
+ *
  * @param {Boolean} preferred
  */
 function contextPreferredChanged (preferred) {
@@ -290,6 +294,8 @@ function contextPreferredChanged (preferred) {
 
 /**
  * Handler for when validity of context changes.
+ * Note that 'this' refers to the context on which valid changed.
+ *
  * @param {Boolean} valid
  */
 function contextValidChanged (valid) {
@@ -309,6 +315,8 @@ function contextValidChanged (valid) {
 /**
  * This is code that is supposed to identify new contexts that user creates.
  * If we think the context is new, and the editor page is open, we notify it.
+ *
+ * Note that 'this' refers to the context on which name changed.
  *
  * @param {String} name's new value
 */
@@ -387,9 +395,25 @@ function isComboContext (ctx) {
  * Reset apn configuration.
  */
 function reset () {
-    sim.connMan.deactivateAll();
-    sim.connMan.contexts.forEach(removeContext);
-    SessionService.reboot();
+    sim.connMan.poweredChanged.connect(poweredChangedForReset.bind(sim.connMan));
+
+    // We turn off cellular data, and when cellular data is turned off,
+    // poweredChangedForReset does the reset.
+    sim.connMan.powered = false;
+}
+
+
+/**
+ * Handler for when powered changed.
+ * Note that 'this' refers to connMan on the SIM.
+ *
+ */
+function poweredChangedForReset (powered) {
+    console.warn('poweredChangedForReset', powered);
+    if (!powered) {
+        this.resetContexts();
+    }
+    this.poweredChanged.disconnect(poweredChangedForReset);
 }
 
 /**
