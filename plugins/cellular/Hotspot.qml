@@ -33,6 +33,11 @@ ItemPage {
 
     HotspotManager {
         id: hotspotManager
+                // TODO(jgdx): Figure out why serverCheckedChanged is not fired
+        // automatically whenever hotspotManager.enabled changes.
+        onEnabledChanged: {
+            console.warn('onEnabledChanged', enabled);
+        }
     }
 
     Loader {
@@ -53,17 +58,20 @@ ItemPage {
                 id: hotspotSwitch
                 objectName: "hotspotSwitch"
 
-                property bool serverChecked: hotspotManager.enabled
-                USC.ServerPropertySynchroniser {
-                    id: switchSync
-                    userTarget: hotspotSwitch
-                    userProperty: "checked"
-                    serverTarget: hotspotSwitch
-                    serverProperty: "serverChecked"
-                    useWaitBuffer: true
+                checked: hotspotManager.enabled
+                onTriggered: hotspotManager.enabled = checked
 
-                    onSyncTriggered: hotspotManager.enabled = value
-                }
+                // USC.ServerPropertySynchroniser {
+                //     id: switchSync
+                //     userTarget: hotspotSwitch
+                //     userProperty: "checked"
+                //     serverTarget: hotspotManager
+                //     serverProperty: "enabled"
+
+                //     //useWaitBuffer: true
+
+                //     //onSyncTriggered: activate()
+                // }
             }
         }
 

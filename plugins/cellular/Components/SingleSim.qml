@@ -54,7 +54,6 @@ Column {
         id: dataRoamingItem
         text: i18n.tr("Data roaming")
         enabled: sim.connMan.powered
-        showDivider: showAllUI
         control: Switch {
             id: dataRoamingControl
             objectName: "roaming"
