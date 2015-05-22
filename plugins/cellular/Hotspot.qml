@@ -20,8 +20,9 @@ import QtQuick 2.0
 import SystemSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
-import Ubuntu.SystemSettings.Cellular 1.0
 import Ubuntu.Components.Popups 0.1
+import Ubuntu.Settings.Components 0.1 as USC
+import Ubuntu.SystemSettings.Cellular 1.0
 
 ItemPage {
 
@@ -45,15 +46,24 @@ ItemPage {
         spacing: units.gu(2)
 
         ListItem.Standard {
-            text: i18n.tr("Hotspot")
+            text: switchSync.syncWaiting ? 'Hotspot (waiting)' : 'Hotspot'
+            //text: i18n.tr("Hotspot")
             enabled: hotspotManager.stored
             control: Switch {
                 id: hotspotSwitch
                 objectName: "hotspotSwitch"
+
                 property bool serverChecked: hotspotManager.enabled
-                onServerCheckedChanged: checked = serverChecked
-                Component.onCompleted: checked = serverChecked
-                onTriggered: hotspotManager.enabled = checked
+                USC.ServerPropertySynchroniser {
+                    id: switchSync
+                    userTarget: hotspotSwitch
+                    userProperty: "checked"
+                    serverTarget: hotspotSwitch
+                    serverProperty: "serverChecked"
+                    useWaitBuffer: true
+
+                    onSyncTriggered: hotspotManager.enabled = value
+                }
             }
         }
 
