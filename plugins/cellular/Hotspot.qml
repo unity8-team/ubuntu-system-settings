@@ -32,12 +32,6 @@ ItemPage {
 
     HotspotManager {
         id: hotspotManager
-        // TODO(jgdx): Figure out why serverCheckedChanged is not fired
-        // automatically whenever hotspotManager.enabled changes.
-        onEnabledChanged: {
-            hotspotSwitch.serverChecked = enabled;
-            hotspotSwitch.serverCheckedChanged();
-        }
     }
 
     Loader {
