@@ -57,7 +57,7 @@ QByteArray WifiDbusHelper::getCertContent(QString filename){
 }
 
 
-void WifiDbusHelper::connect(QString ssid, int security, int auth, QStringList usernames, QString password, QStringList certs, int p2auth)
+void WifiDbusHelper::connect(QString ssid, int security, int auth, QStringList usernames, QStringList password, QStringList certs, int p2auth)
 {
     if((security<0 || security>5) || (auth<0 || auth>4) || (p2auth<0 || p2auth>5)) {
         qWarning() << "Qml and C++ have gotten out of sync. Can't connect.\n";
@@ -91,11 +91,11 @@ void WifiDbusHelper::connect(QString ssid, int security, int auth, QStringList u
 
         if (security == 1) {
             wireless_security["key-mgmt"] = QStringLiteral("wpa-psk");
-            wireless_security["psk"] = password;
+            wireless_security["psk"] = password[0];
         } else if (security == 3) {
             wireless_security["key-mgmt"] = QStringLiteral("none");
             wireless_security["auth-alg"] = QStringLiteral("open");
-            wireless_security["wep-key0"] = password;
+            wireless_security["wep-key0"] = password[0];
             wireless_security["wep-key-type"] = QVariant(uint(1));
         } else if (security == 2) {
             wireless_security["key-mgmt"] = QStringLiteral("wpa-eap");
@@ -111,7 +111,7 @@ void WifiDbusHelper::connect(QString ssid, int security, int auth, QStringList u
             wireless_security["key-mgmt"] = QStringLiteral("ieee8021x");
             wireless_security["auth-alg"] = QStringLiteral("leap");
             wireless_security["leap-username"] = usernames[0];
-            wireless_security["leap-password"] = password;
+            wireless_security["leap-password"] = password[0];
         }
         configuration["802-11-wireless-security"] = wireless_security;
     }
@@ -130,47 +130,34 @@ void WifiDbusHelper::connect(QString ssid, int security, int auth, QStringList u
 
     wireless_802_1x["identity"] = usernames[0];
     if (auth != 0) {
-        wireless_802_1x["password"] = password;
+        wireless_802_1x["password"] = password[0];
     }
 
     QByteArray cacert_a, clientcert, privatekey, pacFile;
-
-    if (certs[0].left(1) == "/"){
-        cacert_a = getCertContent(certs[0]);
-    }
-    else {
-        cacert_a.append(certs[0]);
-    }
+    cacert_a = getCertContent(certs[0]);
 
     if (auth == 0) { // TLS
         wireless_802_1x["eap"] = QStringList("tls");
         wireless_802_1x["ca-cert"]  = cacert_a;
 
-        if (certs[1].left(1) == "/"){
-            clientcert = getCertContent(certs[1]);
-        }
-        else {
-            clientcert.append(certs[1]);
-        }
+        clientcert = getCertContent(certs[1]);
         wireless_802_1x["client-cert"]  = clientcert;
-        if (certs[2].left(1) == "/"){
-            privatekey = getCertContent(certs[2]);
-        }
-        else {
-            privatekey.append(certs[2]);
-        }
+
+        privatekey = getCertContent(certs[2]);
         wireless_802_1x["private-key"]  = privatekey;
-        wireless_802_1x["private-key-password"] = password;
+        wireless_802_1x["private-key-password"] = password[0];
     } else if (auth == 1) { // TTLS
         wireless_802_1x["eap"] = QStringList("ttls");
         wireless_802_1x["ca-cert"]  = cacert_a;
         wireless_802_1x["anonymous-identity"]  = usernames[1];
+        if (!password[1].toInt()) {wireless_802_1x["password-flags"] = QString("2");}
     } else if (auth == 2) { // LEAP
         wireless_802_1x["eap"] = QStringList("leap");
     } else if (auth == 3) { // FAST
         wireless_802_1x["eap"] = QStringList("fast");
         wireless_802_1x["ca-cert"]  = cacert_a;
         wireless_802_1x["anonymous-identity"]  = usernames[1];
+        if (!password[1].toInt()) {wireless_802_1x["password-flags"] = QString("2");}
 
         if (certs[3].left(1) == "/"){
             pacFile = getCertContent(certs[3]);
@@ -179,12 +166,13 @@ void WifiDbusHelper::connect(QString ssid, int security, int auth, QStringList u
             pacFile.append(certs[3]);
         }
         wireless_802_1x["pac-file"]  = pacFile;
-        // wireless_802_1x["phase1-fast-provisioning"] = QString("0");
+        wireless_802_1x["phase1-fast-provisioning"] = QString(certs[3].toInt()+1);
     } else if (auth == 4) { // PEAP
         wireless_802_1x["eap"] = QStringList("peap");
         wireless_802_1x["phase1-peaplabel"] = QString("1");
         wireless_802_1x["anonymous-identity"]  = usernames[1];
-       //wireless_802_1x["phase1-peapver"] = QString("0"); #jkb:let us unset this until problems are reported.
+        if (!password[1].toInt()) {wireless_802_1x["password-flags"] = QString("2");}
+         //wireless_802_1x["phase1-peapver"] = QString("0"); #jkb:let us unset this until problems are reported.
     }
 
     if (auth == 1 || auth == 3 || auth == 4 ){ // only for TTLS, FAST and PEAP

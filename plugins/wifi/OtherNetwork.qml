@@ -68,15 +68,6 @@ Component {
                     target: connectButtonIndicator
                     running: true
                 }
-
-                PropertyChanges {
-                    target: p2authList
-                    enabled: false
-                }
-                PropertyChanges {
-                    target: p2authListLabel
-                    opacity: 0.5
-                }
                 PropertyChanges {
                     target: cacertLabel
                     opacity: 0.5
@@ -110,7 +101,43 @@ Component {
                     enabled: false
                 }
                 PropertyChanges {
-                    target: anonymousIdentityLabel
+                    target: privatekeyLabel
+                    opacity: 0.5
+                }
+                PropertyChanges {
+                    target: privateKeySelector
+                    enabled: false
+                    opacity: 0.5
+                }
+                PropertyChanges {
+                    target: usecertLabel
+                    opacity: 0.5
+                }
+                PropertyChanges {
+                    target: usercertSelector
+                    enabled: false
+                    opacity: 0.5
+                }
+                PropertyChanges {
+                    target: cacertLabel
+                    opacity: 0.5
+                }
+                PropertyChanges {
+                    target: cacertSelector
+                    enabled: false
+                    opacity: 0.5
+                }
+                PropertyChanges {
+                    target: p2authListLabel
+                    opacity: 0.5
+                }
+                PropertyChanges {
+                    target: p2authList
+                    enabled: false
+                    opacity: 0.5
+                }
+                PropertyChanges {
+                    target: p2authListLabel
                     opacity: 0.5
                 }
                 PropertyChanges {
@@ -322,7 +349,7 @@ Component {
                     var pickerDialog = PopupUtils.open(Qt.resolvedUrl("./CertPicker.qml"));
                     pickerDialog.fileImportSignal.connect(function(file){
                         certDialogLoader.source = "./CertDialog.qml";
-                        PopupUtils.open(certDialogLoader.item, cacertSelector, {certFileName: file});
+                        PopupUtils.open(certDialogLoader.item, cacertSelector, {fileName: file, certType: 0});
                     });
                 }
             }
@@ -333,10 +360,11 @@ Component {
         Component{
             id: certSelectorDelegate
             OptionSelectorDelegate { text: CommonName;
-                                     subText:(CommonName != "None" && CommonName != "Choose file…") ?
+                                     subText:(CommonName !== i18n.tr("None") && CommonName !== i18n.tr("Choose file…")) ?
                                              (Organization +", Exp.date: " + expiryDate) : ""
             }
         }
+
         CertificateListModel {
             id: cacertListModel
         }
@@ -370,67 +398,74 @@ Component {
             expanded: false
             delegate: certSelectorDelegate
             selectedIndex: 0
-            property string usercertFileName: { if(usercertFileName.selectedIndex !== 0 &&
-                                                   usercertFileName.selectedIndex !== (certListModel.rowCount()-1)){
-                                                   certListModel.getfileName(usercertFileName.selectedIndex)
+            property string usercertFileName: { if(usercertSelector.selectedIndex !== 0 &&
+                                                   usercertSelector.selectedIndex !== (cacertListModel.rowCount()-1)){
+                                                   cacertListModel.getfileName(usercertSelector.selectedIndex)
                                                  } else {"";}
                                                }
             onSelectedIndexChanged: {
+                cacertListModel.dataupdate();
                 if (usercertSelector.selectedIndex === cacertListModel.rowCount()-1){
                     var pickerDialog = PopupUtils.open(Qt.resolvedUrl("./CertPicker.qml"));
                     pickerDialog.fileImportSignal.connect(function(file){
+                        certDialogLoader.source = "./CertDialog.qml";
+                        PopupUtils.open(certDialogLoader.item, usercertSelector, {fileName: file, certType: 0});
                     });
                 }
             }
         }
 
-        /*CertificateListModel {
-                id: usercertListModel
-            }*/
+        Label {
+            id: privatekeyLabel
+            text : i18n.tr("User Private Key")
+            objectName: "userprivatekeyLabel"
+            fontSize: "medium"
+            font.bold: false
+            color: Theme.palette.selected.backgroundText
+            visible:    ( securityList.selectedIndex == 2 || securityList.selectedIndex == 4)
+                        && ( authList.selectedIndex == 0 ) // only for TLS
+        }
 
-        RowLayout{
-            spacing: units.gu(4)
+        PrivatekeyListModel {
+            id: privatekeyListModel
+        }
+
+        Component{
+            id: privatekeySelectorDelegate
+            OptionSelectorDelegate { text: KeyName;
+                                     subText:(KeyName !== i18n.tr("None") && KeyName !== i18n.tr("Choose file…")) ?
+                                             (KeyType + ", " + KeyAlgorithm +", " + KeyLength + " bit" ) : ""
+            }
+
+        }
+
+        ListItem.ItemSelector {
+            id: privateKeySelector
             anchors {
                 left: parent.left
                 right: parent.right
             }
             visible:    ( securityList.selectedIndex == 2 || securityList.selectedIndex == 4)
-                        && ( authList.selectedIndex == 0 ) // only for TLS
-
-            Label {
-                id: userprivatekeyLabel
-                text : i18n.tr("User Private Key")
-                objectName: "userprivatekeyLabel"
-                fontSize: "medium"
-                font.bold: false
-                color: Theme.palette.selected.backgroundText
-                anchors.bottom: adduserprivatekeyButton.bottom
-            }
-
-            Button {
-                id: adduserprivatekeyButton
-                visible: true
-                objectName: "adduserprivatekeyButton"
-                anchors.right: parent.right
-                text: i18n.tr("Choose file…")
-                onClicked: {
+                     && ( authList.selectedIndex == 0 ) // only for TLS
+            model: privatekeyListModel
+            expanded: false
+            delegate: privatekeySelectorDelegate
+            selectedIndex: 0
+            property string privateKeyFileName: { if(privateKeySelector.selectedIndex !== 0 &&
+                                                     privateKeySelector.selectedIndex !== (privatekeyListModel.rowCount()-1)){
+                                                     privatekeyListModel.getfileName(privateKeySelector.selectedIndex)
+                                                   } else {"";}
+                                                }
+            onSelectedIndexChanged: {
+                privatekeyListModel.dataupdate();
+                if (privateKeySelector.selectedIndex === privatekeyListModel.rowCount()-1){
                     var pickerDialog = PopupUtils.open(Qt.resolvedUrl("./CertPicker.qml"));
                     pickerDialog.fileImportSignal.connect(function(file){
-                        userprivatekey.text = file;
+                        certDialogLoader.source = "./CertDialog.qml";
+                        PopupUtils.open(certDialogLoader.item, privateKeySelector, {fileName: file, certType: 1});
                     });
                 }
             }
-        }
-
-        TextArea {
-            id : userprivatekey
-            objectName: "userprivatekey"
-            visible:    ( securityList.selectedIndex == 2 || securityList.selectedIndex == 4)
-                        && ( authList.selectedIndex == 0 )
-            width: parent.width
-            autoSize: true
-            maximumLineCount: 4
-            placeholderText: i18n.tr("Absolute path to key or clipboard content")
         }
 
         Column{     // pacFile
@@ -443,6 +478,28 @@ Component {
 
             visible:    ( securityList.selectedIndex == 2 || securityList.selectedIndex == 4)
                         && ( authList.selectedIndex == 3 )
+
+            Label {
+                id: pacProvisioningListLabel
+                text : i18n.tr("Pac provisioning")
+                objectName: "pacProvisioningListLabel"
+                fontSize: "medium"
+                font.bold: false
+                color: Theme.palette.selected.backgroundText
+                elide: Text.ElideRight
+
+            }
+
+            ListItem.ItemSelector {
+                id: pacProvisioningList
+                objectName: "pacProvisioningList"
+                model: [i18n.tr("Anonymous"),         // index: 0
+                        i18n.tr("Authenticated"),     // index: 1
+                        i18n.tr("Both"),              // index: 2
+                ]
+
+            }
+
 
             RowLayout{
                 spacing: units.gu(4)
@@ -470,7 +527,7 @@ Component {
                     onClicked: {
                         var pickerDialog = PopupUtils.open(Qt.resolvedUrl("./CertPicker.qml"));
                         pickerDialog.fileImportSignal.connect(function(file){
-                        PopupUtils.open(Qt.resolvedUrl("./CertDialog.qml"), {certContentText: file}); //         pacFile.text = file;
+                            pacFile.text = file;
                         });
                     }
                 }
@@ -513,7 +570,7 @@ Component {
             id: usernameLabel
             text : {
                 if (     ( securityList.selectedIndex == 2 || securityList.selectedIndex == 4)
-                        && ( authList.selectedIndex == 0 )) {
+                      && ( authList.selectedIndex == 0 )) {
                     i18n.tr("Identity")
                 }
                 else {
@@ -544,8 +601,8 @@ Component {
             id: passwordLabel
             text: {
                 if (    ( securityList.selectedIndex == 2 || securityList.selectedIndex == 4)
-                        && ( authList.selectedIndex == 0 )) {
-                    i18n.tr("Private Key Password")
+                     && ( authList.selectedIndex == 0 )) {
+                    i18n.tr("Private key password")
                 } else {
                     i18n.tr("Password")
                 }
@@ -608,9 +665,9 @@ Component {
             id: passwordRememberRow
             layoutDirection: Qt.LeftToRight
             spacing: units.gu(2)
-            visible: false
-            //( authList.selectedIndex == 1 || authList.selectedIndex == 3 || authList.selectedIndex == 4)
-            //not implemented yet.
+            visible: (    ( securityList.selectedIndex == 2 || securityList.selectedIndex == 4)
+                       && ( authList.selectedIndex == 1 || authList.selectedIndex == 3 || authList.selectedIndex == 4) )
+
             CheckBox {
                 id: passwordRememberSwitch
                 //activeFocusOnPress: false
@@ -701,8 +758,8 @@ Component {
                             securityList.selectedIndex,
                             authList.selectedIndex,
                             [username.text, anonymousIdentity.text],
-                            password.text,
-                            [cacertSelector.cacertFileName, usercertSelector.usercertFileName, userprivatekey.text, pacFile.text] ,
+                            [password.text, passwordRememberSwitch.checked]
+                            [cacertSelector.cacertFileName, usercertSelector.usercertFileName, privatekeySelector.privateKeyFileName, pacFile.text, pacProvisioningList.selectedIndex] ,
                             p2authList.selectedIndex);
                 otherNetworkDialog.state = "CONNECTING";
             }

@@ -10,14 +10,29 @@ Component  {
     Dialog {
         id: certDialog
 
-        property var certFileName;
+        property var certType;
+        property var fileName;
 
         anchors.fill: parent
 
-        title: i18n.tr("Add Certificate?")
+        title: { if (certType === 0){ // certificate
+                {i18n.tr("Add certificate")+"?"};
+            } else if (certType === 1){ // privatekey
+                {i18n.tr("Add key")+"?"};
+            }
 
-        CertificateHandler {
-            id: certificateHandler
+        }
+
+        FileHandler {
+            id: fileHandler
+        }
+
+        Label {
+            id: certContentLabel
+            text : {i18n.tr("Content")+":"}
+            objectName: "certContentLabel"
+            fontSize: "medium"
+            font.bold: false
         }
 
         TextArea {
@@ -28,7 +43,8 @@ Component  {
             autoSize: true
             maximumLineCount: 7
             placeholderText: i18n.tr("No data available.")
-            text: {certificateHandler.getCertContent(certDialog.certFileName).toString()}
+            text: { fileHandler.getCertContent(certDialog.fileName).toString() }
+
         }
 
         RowLayout {
@@ -43,7 +59,7 @@ Component  {
             Button {
                 id: cancelButton
                 text: i18n.tr("Cancel")
-                onClicked: { certificateHandler.removeFile(certDialog.certFileName);
+                onClicked: { fileHandler.removeFile(certDialog.fileName);
                              PopupUtils.close(certDialog);
                 }
             }
@@ -51,11 +67,16 @@ Component  {
             Button {
                 id: saveButton
                 text: i18n.tr("Add Certificate")
-                enabled: (certDialog.certContent.text !== [])
-                onClicked: { certificateHandler.moveCertFile(certDialog.certFileName);
-                             // just to be sure source file will be deleted if move was not successfull:
-                             certificateHandler.removeFile(certDialog.certFileName);
-                             PopupUtils.close(certDialog);
+                enabled: (certDialog.certContent.text !== "")
+                onClicked: { if (certType === 0){ // certificate
+                                 fileHandler.moveCertFile(certDialog.fileName);
+                             } else if (certType === 1){ // privatekey
+                                 fileHandler.moveKeyFile(certDialog.fileName);
+                             }
+
+                            // just to be sure source file will be deleted if move was not successfull:
+                            fileHandler.removeFile(certDialog.fileName);
+                            PopupUtils.close(certDialog);
                 }
             }
         }
