@@ -31,6 +31,16 @@ ItemPage {
 
     title: i18n.tr("Wi-Fi hotspot")
 
+    // We disable the back action while a hotspot is in the process of either
+    // being enabled or disabled.
+    head.backAction: Action {
+        iconName: "back"
+        enabled: hotspotSwitch.enabled
+        onTriggered: {
+            pageStack.pop();
+        }
+    }
+
     HotspotManager {
         id: hotspotManager
     }
@@ -60,7 +70,6 @@ ItemPage {
                     serverTarget: hotspotManager
                     serverProperty: "enabled"
                     useWaitBuffer: true
-                    bufferedSyncTimeout: true
 
                     // Since this blocks the UI thread, we wait until
                     // the UI has completed the checkbox animation before we
