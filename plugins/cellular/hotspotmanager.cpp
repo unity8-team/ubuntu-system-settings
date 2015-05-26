@@ -235,7 +235,6 @@ nmConnectionArg getConnectionSecrets (QDBusObjectPath connection,
 QDBusObjectPath addConnection(
     const QByteArray &ssid, const QString &password,
     const QDBusObjectPath &devicePath, QString mode) {
-    QDBusObjectPath invalid("");
 
     nmConnectionArg connection = createConnectionSettings(ssid, password,
         devicePath, mode);
@@ -246,7 +245,7 @@ QDBusObjectPath addConnection(
     if(!add_connection_reply.isValid()) {
         qCritical() << "Failed to add connection: "
             << add_connection_reply.error().message();
-        return invalid;
+        return QDBusObjectPath();
     }
     return add_connection_reply.argumentAt<0>();
 }
@@ -406,8 +405,7 @@ void HotspotManager::setEnabled(bool value) {
 
     // We are enabling a hotspot
     if (value) {
-        // If the SSID is empty, we report an error. The UI should strive
-        // to prevent us from reaching this part of the code.
+        // If the SSID is empty, we report an error.
         if (m_ssid.isEmpty()) {
             Q_EMIT reportError(1);
             setEnable(false);

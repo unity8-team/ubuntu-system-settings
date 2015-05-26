@@ -33,11 +33,6 @@ ItemPage {
 
     HotspotManager {
         id: hotspotManager
-                // TODO(jgdx): Figure out why serverCheckedChanged is not fired
-        // automatically whenever hotspotManager.enabled changes.
-        onEnabledChanged: {
-            console.warn('onEnabledChanged', enabled);
-        }
     }
 
     Loader {
@@ -51,27 +46,37 @@ ItemPage {
         spacing: units.gu(2)
 
         ListItem.Standard {
-            text: switchSync.syncWaiting ? 'Hotspot (waiting)' : 'Hotspot'
-            //text: i18n.tr("Hotspot")
+            text: i18n.tr("Hotspot")
             enabled: hotspotManager.stored
             control: Switch {
                 id: hotspotSwitch
                 objectName: "hotspotSwitch"
+                enabled: !switchSync.syncWaiting
 
-                checked: hotspotManager.enabled
-                onTriggered: hotspotManager.enabled = checked
+                USC.ServerPropertySynchroniser {
+                    id: switchSync
+                    userTarget: hotspotSwitch
+                    userProperty: "checked"
+                    serverTarget: hotspotManager
+                    serverProperty: "enabled"
+                    useWaitBuffer: true
+                    bufferedSyncTimeout: true
 
-                // USC.ServerPropertySynchroniser {
-                //     id: switchSync
-                //     userTarget: hotspotSwitch
-                //     userProperty: "checked"
-                //     serverTarget: hotspotManager
-                //     serverProperty: "enabled"
+                    // Since this blocks the UI thread, we wait until
+                    // the UI has completed the checkbox animation before we
+                    // ask the server to uipdate.
+                    onSyncTriggered: {
+                        triggerTimer.value = value;
+                        triggerTimer.start();
+                    }
+                }
 
-                //     //useWaitBuffer: true
-
-                //     //onSyncTriggered: activate()
-                // }
+                Timer {
+                    id: triggerTimer
+                    property bool value
+                    interval: 250; repeat: false
+                    onTriggered: hotspotManager.enabled = value
+                }
             }
         }
 
