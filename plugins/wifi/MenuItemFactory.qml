@@ -20,6 +20,7 @@
 import QtQuick 2.0
 import QMenuModel 0.1 as QMenuModel
 import Ubuntu.Settings.Menus 0.1 as Menus
+import Ubuntu.Settings.Components 0.1 as USC
 
 Item {
     id: menuFactory
@@ -54,6 +55,7 @@ Item {
         id: standardMenu;
         StandardMenuItem {
             property QtObject menu: null
+            property int menuIndex: -1
 
             text: menu && menu.label ? menu.label : ""
             icon: menu ? menu.icon : ""
@@ -61,14 +63,16 @@ Item {
             checked: checkable ? menu.isToggled : false
             enabled: menu ? menu.sensitive : false
 
-            onActivate: model.activate(modelIndex);
+            onActivate: model.activate(menuIndex);
         }
     }
 
     Component {
         id: switchMenu;
         Menus.SwitchMenu {
+            id: switchItem
             property QtObject menu: null
+            property int menuIndex: -1
             property bool serverChecked: menu && menu.isToggled || false
 
             text: menu && menu.label || ""
@@ -76,9 +80,14 @@ Item {
             checked: serverChecked
             enabled: menu && menu.sensitive || false
 
-            onTriggered: model.activate(modelIndex);
-            // Fixes broken check state binding.
-            onServerCheckedChanged: checked = serverChecked;
+            USC.ServerPropertySynchroniser {
+                userTarget: switchItem
+                userProperty: "checked"
+                serverTarget: switchItem
+                serverProperty: "serverChecked"
+
+                onSyncTriggered: model.activate(switchItem.menuIndex)
+            }
         }
     }
 
@@ -86,12 +95,13 @@ Item {
         id: wifiSection;
         SectionMenuItem {
             property QtObject menu: null
+            property int menuIndex: -1
 
             text: menu && menu.label ? menu.label : ""
             busy: menu ? menu.ext.xCanonicalBusyAction : false
 
             Component.onCompleted: {
-                model.loadExtendedAttributes(modelIndex, {'x-canonical-busy-action': 'bool'});
+                model.loadExtendedAttributes(menuIndex, {'x-canonical-busy-action': 'bool'});
             }
         }
     }
@@ -99,7 +109,9 @@ Item {
     Component {
         id: accessPoint;
         AccessPoint {
+            id: apItem
             property QtObject menu: null
+            property int menuIndex: -1
             property var strenthAction: QMenuModel.UnityMenuAction {
                 model: menuFactory.model ? menuFactory.model : null
                 name: menu ? menu.ext.xCanonicalWifiApStrengthAction : ""
@@ -114,13 +126,20 @@ Item {
             enabled: menu ? menu.sensitive : false
 
             Component.onCompleted: {
-                model.loadExtendedAttributes(modelIndex, {'x-canonical-wifi-ap-is-adhoc': 'bool',
-                                                          'x-canonical-wifi-ap-is-secure': 'bool',
-                                                          'x-canonical-wifi-ap-strength-action': 'string'});
+                model.loadExtendedAttributes(menuIndex, {'x-canonical-wifi-ap-is-adhoc': 'bool',
+                                                         'x-canonical-wifi-ap-is-secure': 'bool',
+                                                         'x-canonical-wifi-ap-strength-action': 'string'});
             }
-            onActivate: model.activate(modelIndex);
-            // Fixes broken check state binding.
-            onServerCheckedChanged: checked = serverChecked;
+
+            USC.ServerPropertySynchroniser {
+                userTarget: apItem
+                userProperty: "active"
+                userTrigger: "onActivate"
+                serverTarget: apItem
+                serverProperty: "serverChecked"
+
+                onSyncTriggered: model.activate(apItem.menuIndex)
+            }
         }
     }
 
