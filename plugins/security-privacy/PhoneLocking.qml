@@ -46,6 +46,7 @@ ItemPage {
             property string passcode: i18n.tr("Passcode")
             property string passphrase: i18n.tr("Passphrase")
 
+            objectName: "lockSecurity"
             text: i18n.tr("Lock security")
             value: {
                 switch (securityPrivacy.securityType) {
