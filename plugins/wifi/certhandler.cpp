@@ -55,7 +55,6 @@ QString FileHandler::moveKeyFile(QString filename){
     QFile file(filename);
     QFileInfo fileInfo(file);
     QString modFileName = KEYS_PATH + fileInfo.fileName().replace(" ", "_");
-    qWarning() << modFileName;
     if(file.rename(modFileName)){
         return file.fileName();
     } else {

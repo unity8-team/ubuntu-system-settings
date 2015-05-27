@@ -338,11 +338,11 @@ Component {
             expanded: false
             delegate: certSelectorDelegate
             selectedIndex: 0
-            property string cacertFileName : { if(cacertSelector.selectedIndex !== 0 &&
-                                                  cacertSelector.selectedIndex !== (certListModel.rowCount()-1)){
-                                                  certListModel.getfileName(cacertSelector.selectedIndex)
-                                                } else {"";}
-                                              }
+            property string cacertFileName: { if( cacertSelector.selectedIndex !== 0 &&
+                                                  cacertSelector.selectedIndex !== (cacertListModel.rowCount()-1)){
+                                                  cacertListModel.getfileName(cacertSelector.selectedIndex)
+                                              } else {"";}
+            }
             onSelectedIndexChanged: {
                 cacertListModel.dataupdate();
                 if (cacertSelector.selectedIndex === cacertListModel.rowCount()-1){
@@ -401,8 +401,8 @@ Component {
             property string usercertFileName: { if(usercertSelector.selectedIndex !== 0 &&
                                                    usercertSelector.selectedIndex !== (cacertListModel.rowCount()-1)){
                                                    cacertListModel.getfileName(usercertSelector.selectedIndex)
-                                                 } else {"";}
-                                               }
+                                                } else {"";}
+            }
             onSelectedIndexChanged: {
                 cacertListModel.dataupdate();
                 if (usercertSelector.selectedIndex === cacertListModel.rowCount()-1){
@@ -454,8 +454,8 @@ Component {
             property string privateKeyFileName: { if(privateKeySelector.selectedIndex !== 0 &&
                                                      privateKeySelector.selectedIndex !== (privatekeyListModel.rowCount()-1)){
                                                      privatekeyListModel.getfileName(privateKeySelector.selectedIndex)
-                                                   } else {"";}
-                                                }
+                                                  } else {"";}
+            }
             onSelectedIndexChanged: {
                 privatekeyListModel.dataupdate();
                 if (privateKeySelector.selectedIndex === privatekeyListModel.rowCount()-1){
@@ -758,8 +758,8 @@ Component {
                             securityList.selectedIndex,
                             authList.selectedIndex,
                             [username.text, anonymousIdentity.text],
-                            [password.text, passwordRememberSwitch.checked]
-                            [cacertSelector.cacertFileName, usercertSelector.usercertFileName, privatekeySelector.privateKeyFileName, pacFile.text, pacProvisioningList.selectedIndex] ,
+                            [password.text, passwordRememberSwitch.checked],
+                            [cacertSelector.cacertFileName, usercertSelector.usercertFileName, privateKeySelector.privateKeyFileName, pacFile.text, pacProvisioningList.selectedIndex] ,
                             p2authList.selectedIndex);
                 otherNetworkDialog.state = "CONNECTING";
             }

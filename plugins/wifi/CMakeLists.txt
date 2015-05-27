@@ -30,7 +30,7 @@ add_library(UbuntuWifiPanel MODULE
   plugin.h
   unitymenumodelstack.h
   previousnetworkmodel.h
-  certhandler.cpp
+  certhandler.h
   nm_manager_proxy.h
   nm_settings_proxy.h
   nm_settings_connection_proxy.h
