@@ -133,30 +133,34 @@ void WifiDbusHelper::connect(QString ssid, int security, int auth, QStringList u
         wireless_802_1x["password"] = password[0];
     }
 
-    QByteArray cacert_a, clientcert, privatekey, pacFile;
-    cacert_a = getCertContent(certs[0]);
+    QByteArray cacert_a("file://");
+    QByteArray clientcert("file://");
+    QByteArray privatekey("file://");
+    QByteArray pacFile;
 
+    cacert_a.append( certs[0] );
     if (auth == 0) { // TLS
         wireless_802_1x["eap"] = QStringList("tls");
         wireless_802_1x["ca-cert"]  = cacert_a;
 
-        clientcert = getCertContent(certs[1]);
-        wireless_802_1x["client-cert"]  = clientcert;
+        clientcert.append( certs[1] );
+        wireless_802_1x["client-cert"] = clientcert;
 
-        privatekey = getCertContent(certs[2]);
-        wireless_802_1x["private-key"]  = privatekey;
+        privatekey.append( certs [2]);
+        wireless_802_1x["private-key"] = privatekey;
+
         wireless_802_1x["private-key-password"] = password[0];
     } else if (auth == 1) { // TTLS
         wireless_802_1x["eap"] = QStringList("ttls");
         wireless_802_1x["ca-cert"]  = cacert_a;
-        wireless_802_1x["anonymous-identity"]  = usernames[1];
+        if (usernames[1] != "") {wireless_802_1x["anonymous-identity"]  = usernames[1];}
         if (!password[1].toInt()) {wireless_802_1x["password-flags"] = QString("2");}
     } else if (auth == 2) { // LEAP
         wireless_802_1x["eap"] = QStringList("leap");
     } else if (auth == 3) { // FAST
         wireless_802_1x["eap"] = QStringList("fast");
         wireless_802_1x["ca-cert"]  = cacert_a;
-        wireless_802_1x["anonymous-identity"]  = usernames[1];
+        if (usernames[1] != "") {wireless_802_1x["anonymous-identity"]  = usernames[1];}
         if (!password[1].toInt()) {wireless_802_1x["password-flags"] = QString("2");}
 
         if (certs[3].left(1) == "/"){
@@ -170,7 +174,7 @@ void WifiDbusHelper::connect(QString ssid, int security, int auth, QStringList u
     } else if (auth == 4) { // PEAP
         wireless_802_1x["eap"] = QStringList("peap");
         wireless_802_1x["phase1-peaplabel"] = QString("1");
-        wireless_802_1x["anonymous-identity"]  = usernames[1];
+        if (usernames[1] != "") {wireless_802_1x["anonymous-identity"]  = usernames[1];}
         if (!password[1].toInt()) {wireless_802_1x["password-flags"] = QString("2");}
          //wireless_802_1x["phase1-peapver"] = QString("0"); #jkb:let us unset this until problems are reported.
     }

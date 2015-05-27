@@ -51,7 +51,7 @@ Component {
         }
 
         title: i18n.tr("Connect to Hidden Network")
-        text: feedback.enabled ? feedback.text : "";
+        //text: feedback.enabled ? feedback.text : "";
 
         Common {
             id: common
@@ -110,7 +110,7 @@ Component {
                     opacity: 0.5
                 }
                 PropertyChanges {
-                    target: usecertLabel
+                    target: usercertLabel
                     opacity: 0.5
                 }
                 PropertyChanges {
@@ -198,14 +198,6 @@ Component {
             }
         ]
 
-        Label {
-            property bool enabled: false
-            id: feedback
-            horizontalAlignment: Text.AlignHCenter
-            height: contentHeight
-            wrapMode: Text.Wrap
-            visible: false
-        }
 
         Label {
             id: networknameLabel
@@ -515,7 +507,7 @@ Component {
                     fontSize: "medium"
                     font.bold: false
                     color: Theme.palette.selected.backgroundText
-                    anchors.bottom: adduserprivatekeyButton.bottom
+                    anchors.bottom: addpacFileButton.bottom
                 }
 
                 Button {
@@ -693,6 +685,15 @@ Component {
                 }
             }
 
+        }
+
+        Label {
+            property bool enabled: false
+            id: feedback
+            horizontalAlignment: Text.AlignHCenter
+            height: contentHeight
+            wrapMode: Text.Wrap
+            visible: false
         }
 
         RowLayout {
