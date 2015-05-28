@@ -28,6 +28,7 @@ from autopilot.input import Keyboard
 import autopilot.logging
 import ubuntuuitoolkit
 from autopilot import introspection
+from autopilot.exceptions import StateNotFoundError
 from ubuntu_system_settings.utils.i18n import ugettext as _
 
 logger = logging.getLogger(__name__)
@@ -946,7 +947,7 @@ class WifiPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
     def have_wireless(self):
         try:
             self.wait_select_single('SwitchMenu', text=_('Wi-Fi'))
-        except:
+        except StateNotFoundError:
             return False
         return True
 
