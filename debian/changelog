@@ -1,3 +1,38 @@
+ubuntu-system-settings (0.3+15.10.20150527-0ubuntu1) wily; urgency=medium
+
+  [ CI Train Bot ]
+  * New rebuild forced.
+
+  [ Iain Lane ]
+  * Improve filtering in main page and timezone filters. (LP: #1454186,
+    #1446086)
+
+  [ Ken VanDine ]
+  * Ensure dim-timeout is 10 seconds less than activity-timeout (LP:
+    #1437510)
+  * debian/control: bumped depends on ubuntu-keyboard-data to >=
+    0.99.trunk.phablet2+15.04.20150421 to get gsettings schema changes
+    (LP: #1454230)
+  * expose deviceName to QML
+
+  [ Lukáš Tinkl ]
+  * compare the language and kbd layout names in a locale-aware manner
+
+  [ Sebastien Bacher ]
+  * Translate push_helper expected strings to avoid failure in non C
+    locales (LP: #1456941)
+  * [battery] use the correct height value for the first point of the
+    graph, that fixes the initial point often starting to high and the
+    curve starting with an almost vertical line (LP: #1439122)
+  * [language] update auto punctuation description to match the osk
+    behaviour (LP: #1385288)
+  * [security-privacy] remove obsolete dash search option (LP: #1422700)
+
+  [ jonas-drange ]
+  * New icon as per lp:1457424 (LP: #1457424)
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Wed, 27 May 2015 09:23:37 +0000
+
 ubuntu-system-settings (0.3+15.04.20150514-0ubuntu1) vivid; urgency=medium
 
   [ CI Train Bot ]

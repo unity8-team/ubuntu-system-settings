@@ -82,7 +82,7 @@ bool LanguageLocale::operator<(const LanguageLocale &l) const
             return likely && !l.likely;
     }
 
-    return displayName.compare(l.displayName, Qt::CaseInsensitive) < 0;
+    return QString::localeAwareCompare(displayName, l.displayName) < 0;
 }
 
 void managerLoaded(GObject    *object,
@@ -271,7 +271,7 @@ compareLayouts(const KeyboardLayout *layout0,
         }
     }
 
-    return name0 < name1;
+    return QString::localeAwareCompare(name0, name1) < 0;
 }
 
 void
