@@ -27,6 +27,7 @@ import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 import Ubuntu.SystemSettings.Battery 1.0
 import Ubuntu.SystemSettings.SecurityPrivacy 1.0
+import Ubuntu.Settings.Components 0.1 as USC
 
 ItemPage {
     id: root
@@ -37,20 +38,16 @@ ItemPage {
     function timeDeltaString(timeDelta) {
         var sec = timeDelta,
             min = Math.round (timeDelta / 60),
-            hr = Math.round (timeDelta / 3600),
-            day = Math.round (timeDelta / 86400);
+            hr = Math.round (timeDelta / 3600);
         if (sec < 60)
             // TRANSLATORS: %1 is the number of seconds
             return i18n.tr("%1 second ago", "%1 seconds ago", sec).arg(sec)
         else if (min < 60)
             // TRANSLATORS: %1 is the number of minutes
             return i18n.tr("%1 minute ago", "%1 minutes ago", min).arg(min)
-        else if (hr < 24)
+        else
             // TRANSLATORS: %1 is the number of hours
             return i18n.tr("%1 hour ago", "%1 hours ago", hr).arg(hr)
-        else
-            // TRANSLATORS: %1 is the number of days
-            return i18n.tr("%1 day ago", "%1 days ago", day).arg(day)
     }
 
     GSettings {
@@ -81,6 +78,15 @@ ItemPage {
     Timer {
         interval: 60000; running: true; repeat: true
         onTriggered: canvas.requestPaint()
+    }
+
+    Connections {
+        target: Qt.application
+        onActiveChanged: {
+            if (Qt.application.state === Qt.ApplicationActive) {
+                canvas.requestPaint()
+            }
+        }
     }
 
     Flickable {
@@ -243,7 +249,7 @@ ItemPage {
                     /* time is the offset in seconds compared to the current time (negative value)
                        we display the charge on a day, which is 86400 seconds, the value is the % */
                     ctx.moveTo((86400 - chargeDatas[0].time) / 86400 * width,
-                               (chargeDatas[0].value / 100) * width)
+                               (chargeDatas[0].value / 100) * height)
                     for (var i = 1; i < chargeDatas.length; i++) {
                         ctx.lineTo((86400-chargeDatas[i].time) / 86400 * width,
                                    (chargeDatas[i].value / 100) * height)
@@ -335,13 +341,18 @@ ItemPage {
                     sourceComponent: Switch {
                         id: wifiSwitch
                         property bool serverChecked: networkActionGroup.enabled.state
-                        onServerCheckedChanged: checked = serverChecked
-                        Component.onCompleted: checked = serverChecked
-                        onTriggered: networkActionGroup.enabled.activate()
+
+                        USC.ServerPropertySynchroniser {
+                            userTarget: wifiSwitch
+                            userProperty: "checked"
+                            serverTarget: wifiSwitch
+                            serverProperty: "serverChecked"
+
+                            onSyncTriggered: networkActionGroup.enabled.activate()
+                        }
                     }
                 }
                 visible: networkActionGroup.enabled.state !== undefined
-                Component.onCompleted: clicked.connect(wifiSwitch.clicked)
             }
 
             QDBusActionGroup {
@@ -364,13 +375,18 @@ ItemPage {
                     sourceComponent: Switch {
                         id: btSwitch
                         property bool serverChecked: bluetoothActionGroup.enabled.state
-                        onServerCheckedChanged: checked = serverChecked
-                        Component.onCompleted: checked = serverChecked
-                        onTriggered: bluetoothActionGroup.enabled.activate()
+
+                        USC.ServerPropertySynchroniser {
+                            userTarget: btSwitch
+                            userProperty: "checked"
+                            serverTarget: btSwitch
+                            serverProperty: "serverChecked"
+
+                            onSyncTriggered: bluetoothActionGroup.enabled.activate()
+                        }
                     }
                 }
                 visible: bluetoothActionGroup.visible
-                Component.onCompleted: clicked.connect(btSwitch.clicked)
             }
 
             QDBusActionGroup {
@@ -392,13 +408,18 @@ ItemPage {
                     sourceComponent: Switch {
                         id: gpsSwitch
                         property bool serverChecked: locationActionGroup.enabled.state
-                        onServerCheckedChanged: checked = serverChecked
-                        Component.onCompleted: checked = serverChecked
-                        onTriggered: locationActionGroup.enabled.activate()
+
+                        USC.ServerPropertySynchroniser {
+                            userTarget: gpsSwitch
+                            userProperty: "checked"
+                            serverTarget: gpsSwitch
+                            serverProperty: "serverChecked"
+
+                            onSyncTriggered: locationActionGroup.enabled.activate()
+                        }
                     }
                 }
                 visible: locationActionGroup.enabled.state !== undefined
-                Component.onCompleted: clicked.connect(gpsSwitch.clicked)
             }
 
             ListItem.Caption {

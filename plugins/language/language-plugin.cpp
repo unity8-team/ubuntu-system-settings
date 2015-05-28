@@ -28,6 +28,7 @@
 
 #define KEY_ENABLED_LAYOUTS "enabled-languages"
 #define KEY_CURRENT_LAYOUT  "active-language"
+#define KEY_PLUGIN_PATHS "plugin-paths"
 
 #define LANGUAGE2LOCALE "/usr/share/language-tools/language2locale"
 #define LAYOUTS_DIR "/usr/share/maliit/plugins/com/ubuntu/lib"
@@ -81,7 +82,7 @@ bool LanguageLocale::operator<(const LanguageLocale &l) const
             return likely && !l.likely;
     }
 
-    return displayName.compare(l.displayName, Qt::CaseInsensitive) < 0;
+    return QString::localeAwareCompare(displayName, l.displayName) < 0;
 }
 
 void managerLoaded(GObject    *object,
@@ -96,6 +97,9 @@ LanguagePlugin::LanguagePlugin(QObject *parent) :
     m_user(nullptr),
     m_maliitSettings(g_settings_new(UBUNTU_KEYBOARD_SCHEMA_ID))
 {
+    GVariantIter *iter;
+    const gchar *path;
+
     if (m_manager != nullptr) {
         g_object_ref(m_manager);
 
@@ -109,6 +113,11 @@ LanguagePlugin::LanguagePlugin(QObject *parent) :
                              G_CALLBACK(::managerLoaded), this);
     }
 
+    m_layoutPaths.append(LAYOUTS_DIR);
+    g_settings_get(m_maliitSettings, KEY_PLUGIN_PATHS, "as", &iter);
+    for (int i(0); g_variant_iter_next(iter, "&s", &path); i++) {
+        m_layoutPaths.append(path);
+    }
     updateLanguageNamesAndCodes();
     updateCurrentLanguage();
     updateEnabledLayouts();
@@ -262,7 +271,7 @@ compareLayouts(const KeyboardLayout *layout0,
         }
     }
 
-    return name0 < name1;
+    return QString::localeAwareCompare(name0, name1) < 0;
 }
 
 void
@@ -353,13 +362,15 @@ LanguagePlugin::updateCurrentLanguage()
 
             icu::Locale locale(qPrintable(formatsLocale));
             const char *code(locale.getLanguage());
-            QFileInfo fileInfo(QDir(LAYOUTS_DIR), code);
+            for (int i = 0; i < m_layoutPaths.count(); i++) {
+                QFileInfo fileInfo(QDir(m_layoutPaths.at(i)), code);
 
-            if (fileInfo.exists() && fileInfo.isDir()) {
-                g_settings_set_string(m_maliitSettings,
-                                      KEY_CURRENT_LAYOUT, code);
+                if (fileInfo.exists() && fileInfo.isDir()) {
+                    g_settings_set_string(m_maliitSettings,
+                                          KEY_CURRENT_LAYOUT, code);
 
-                updateEnabledLayouts();
+                    updateEnabledLayouts();
+                }
             }
         } else {
             QString formatsLocale(act_user_get_formats_locale(m_user));
@@ -415,20 +426,22 @@ LanguagePlugin::updateKeyboardLayouts()
 {
     m_keyboardLayouts.clear();
 
-    QDir layoutsDir(LAYOUTS_DIR);
-    layoutsDir.setFilter(QDir::Dirs);
-    layoutsDir.setSorting(QDir::Name);
+    for (int i = 0; i < m_layoutPaths.count(); i++) {
+        QDir layoutsDir(m_layoutPaths.at(i));
+        layoutsDir.setFilter(QDir::Dirs);
+        layoutsDir.setSorting(QDir::Name);
 
-    QFileInfoList fileInfoList(layoutsDir.entryInfoList());
+        QFileInfoList fileInfoList(layoutsDir.entryInfoList());
 
-    for (QFileInfoList::const_iterator
-         i(fileInfoList.begin()); i != fileInfoList.end(); ++i) {
-        KeyboardLayout *layout(new KeyboardLayout(*i));
+        for (QFileInfoList::const_iterator
+             i(fileInfoList.begin()); i != fileInfoList.end(); ++i) {
+            KeyboardLayout *layout(new KeyboardLayout(*i));
 
-        if (!layout->language().isEmpty())
-            m_keyboardLayouts += layout;
-        else
-            delete layout;
+            if (!layout->language().isEmpty())
+                m_keyboardLayouts += layout;
+            else
+                delete layout;
+        }
     }
 
     qSort(m_keyboardLayouts.begin(), m_keyboardLayouts.end(), compareLayouts);
