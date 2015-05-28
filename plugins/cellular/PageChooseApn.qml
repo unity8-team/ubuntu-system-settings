@@ -79,12 +79,9 @@ ItemPage {
     Component {
         id: contextComponent
         OfonoContextConnection {
-            // Context can appear preferred if there are no preferred contexts
-            // of its type, and it it active. This property is changed
-            // by the manager.
-            property bool shouldAppearPreferred: false
+            property bool isCombined: type === 'internet' && messageCenter
             property string typeString: {
-                if (type === 'internet' && messageCenter) {
+                if (isCombined) {
                     return i18n.tr("Internet and MMS");
                 } else if (type === 'internet' && !messageCenter) {
                     return i18n.tr("Internet");
@@ -154,17 +151,17 @@ ItemPage {
             text: i18n.tr("Are you sure that you want to Reset APN Settings?")
 
             Button {
-                text: i18n.tr("Cancel")
-                onClicked: PopupUtils.close(dialogue)
-            }
-
-            Button {
                 text: i18n.tr("Reset")
                 color: UbuntuColors.orange
                 onClicked: {
                     Manager.reset();
                     PopupUtils.close(dialogue);
                 }
+            }
+
+            Button {
+                text: i18n.tr("Cancel")
+                onClicked: PopupUtils.close(dialogue)
             }
         }
     }
@@ -182,7 +179,7 @@ ItemPage {
     Component {
         id: apnDelegate
 
-        ListItem.Base {
+        ListItem.Standard {
             id: apnListItem
             property alias text: apnItemName.text
             objectName: "edit_" + qml.name
@@ -202,61 +199,28 @@ ItemPage {
                 });
             }
 
-            MouseArea {
-                id: checkArea
-                anchors {
-                    left: parent.left
-                    verticalCenter: parent.verticalCenter
-                }
-                width: units.gu(5)
-                height: units.gu(6)
-                onClicked: check.trigger()
-
-                CheckBox {
-                    id: check
-                    objectName: qml.name + "_preferred"
-                    anchors {
-                        left: parent.left
-                        verticalCenter: parent.verticalCenter
-                    }
-                    states: [
-                        State {
-                            name: "shouldAppearPreferred"
-                            PropertyChanges {
-                                target: check
-                                enabled: false
-                                checked: true
-                            }
-                            when: qml.shouldAppearPreferred
-                        }
-                    ]
-                    property bool serverChecked: qml && qml.preferred
-                    onServerCheckedChanged: checked = serverChecked
-                    Component.onCompleted: checked = serverChecked
-                    onTriggered: {
-                        if (checked) {
-                            Manager.dePreferAll(qml.type);
-                        }
-                        qml.preferred = checked;
-                    }
-                }
+            control: CheckBox {
+                id: check
+                objectName: qml.name + "_preferred"
+                property bool serverChecked: qml && qml.preferred
+                onServerCheckedChanged: checked = serverChecked
+                Component.onCompleted: checked = serverChecked
+                onTriggered: Manager.setPreferred(qml, checked)
             }
 
             Item  {
-                id: middleVisuals
                 anchors {
-                    left: checkArea.right
+                    top: parent.top
+                    bottom: parent.bottom
+                    left: parent.left
+                    leftMargin: units.gu(2)
                     right: parent.right
-                    verticalCenter: parent.verticalCenter
                 }
-
-                height: childrenRect.height +
-                        apnItemName.anchors.topMargin +
-                        apnItemType.anchors.bottomMargin
 
                 Label {
                     id: apnItemName
                     anchors {
+                        topMargin: units.gu(1)
                         top: parent.top
                         left: parent.left
                         right: parent.right
@@ -295,6 +259,11 @@ ItemPage {
         Component.onCompleted: Manager.contextsChanged(sim.connMan.contexts)
     }
 
+    // We set the target to be ConnMan before we want to call 'ResetContexts' on
+    // ConnMan. When ConnMan powers down, the connManPoweredChanged handler is
+    // called and call 'ResetContexts'. This is because we can't make this call
+    // while ConnMan is 'Powered'. After the 'ResetContexts' call is done,
+    // the target is reset to null.
     Connections {
         id: restorePowered
         target: null

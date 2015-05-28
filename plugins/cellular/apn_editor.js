@@ -35,8 +35,8 @@ function updateContextQML (ctx) {
     ctx.accessPointName = accessPointName.text;
     ctx.username = username.text;
     ctx.password = password.text;
-    ctx.messageCenter = messageCenter.text;
-    ctx.messageProxy = messageProxy.text + (port.text ? ':' + port.text : '');
+    ctx.messageCenter = messageCenter.visible ? messageCenter.text : '';
+    ctx.messageProxy = messageProxy.visible ? messageProxy.text + (port.text ? ':' + port.text : '') : '';
 }
 
 /**
@@ -53,7 +53,7 @@ function populate (ctx) {
     messageCenter.text = ctx.messageCenter;
     messageProxy.text = ctx.messageProxy;
 
-    if (manager.isComboContext(ctx)) {
+    if (ctx.isCombined) {
         typeSel.selectedIndex = typeToIndex('internet+mms');
     } else {
         typeSel.selectedIndex = typeToIndex(ctx.type);

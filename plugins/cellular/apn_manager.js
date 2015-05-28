@@ -160,7 +160,6 @@ function _createQml (paths) {
             }
 
             ctx.validChanged.connect(contextValidChanged.bind(ctx));
-            ctx.preferredChanged.connect(contextPreferredChanged.bind(ctx));
 
             _pathToQml[path] = ctx;
             _totalContext++;
@@ -304,17 +303,6 @@ function contextTypeChanged (type) {
 }
 
 /**
- * Handler for when preferred changes on context.
- * Note that 'this' refers to the context on which preferred changed.
- *
- * @param {Boolean} preferred
- */
-function contextPreferredChanged (preferred) {
-    console.warn('contextPreferredChanged', this.preferred, preferred, this.contextPath);
-    checkPreferred();
-}
-
-/**
  * Handler for when validity of context changes.
  * Note that 'this' refers to the context on which valid changed.
  *
@@ -388,29 +376,39 @@ function reportError (message) {
 }
 
 /**
- * Set Preferred on a batch of contexts to false.
+ * Set Preferred on a context.
  *
- * @param {String} type of context to de-prefer
+ * @param {OfonoContextConnection} context to prefer
+ * @param {Boolean} new preferred value
 */
-function dePreferAll (type) {
-    var model = getModelFromType(type);
+function setPreferred (context, value) {
+    console.warn('setPreferred...', context.name);
+    var models = [];
     var ctx;
     var i;
-    for (i = 0; i < model.count; i++) {
-        ctx = model.get(i).qml;
-        console.warn('dePreferContext',
-                     ctx.contextPath);
-        ctx.preferred = false;
-    }
-}
 
-/**
- * Checks to see if a internet context is a combo context.
- *
- * @return {Boolean} whether or not context is combo type
- */
-function isComboContext (ctx) {
-    return ctx && ctx.type === 'internet' && ctx.messageCenter;
+    if (!value) {
+        context.preferred = false;
+        return;
+    }
+
+    // If the context is combined (internet+mms), we also want to
+    // 'deprefer' all MMS contexts if any.
+    models.push(getModelFromType(context.type));
+    if (context.isCombined) {
+        models.push(mmsContexts);
+    }
+
+    models.forEach(function (model) {
+        for (i = 0; i < model.count; i++) {
+            ctx = model.get(i).qml;
+            console.warn('dePreferContext',
+                         ctx.contextPath);
+            ctx.preferred = false;
+        }
+    });
+
+    context.preferred = true;
 }
 
 /**
@@ -431,13 +429,19 @@ function reset () {
 
 
 /**
- * Handler for when powered changed.
- * Note that 'this' refers to connMan on the SIM.
- *
+ * Handler for when powered changed. This handler is attached to a signal by
+ * a Connections component in PageChooseApn.qml.
  */
 function connManPoweredChanged (powered) {
-    console.warn('poweredChangedForReset', powered, this);
+    console.warn('poweredChangedForReset', powered);
     if (!powered) {
+
+        // We want to fire the ready signal again, once we've reset, but
+        // the reset contexts won't necessarily fire 'validChanged' signals,
+        // so we manually set valid contexts to 0.
+        _validContexts = 0;
+        root.ready.connect(ready);
+
         sim.connMan.resetContexts();
 
         // If restorePowered had a target, we know to turn cellular
@@ -452,17 +456,16 @@ function connManPoweredChanged (powered) {
 
 /**
  * Checks if there are preferred contexts. If there are none,
- * we set the active one to appear as preferred.
+ * we prefer the active one.
  */
 function checkPreferred () {
-    var models = [internetContexts, iaContexts];
+    var models = [internetContexts, iaContexts, mmsContexts];
 
     models.forEach(function (model) {
         var i;
         var havePreferred = false;
         var ctx;
         var activeCtx;
-        var appearingActiveCtx;
         for (i = 0; i < model.count; i++) {
             ctx = model.get(i).qml;
             console.warn('checking if', ctx.contextPath, 'is preferred...');
@@ -474,20 +477,14 @@ function checkPreferred () {
             if (ctx.active) {
                 activeCtx = ctx;
             }
-
-            if (ctx.shouldAppearPreferred) {
-                appearingActiveCtx = ctx;
-            }
-        }
-
-        if (havePreferred && appearingActiveCtx) {
-            appearingActiveCtx.shouldAppearPreferred = false;
-            console.warn(appearingActiveCtx.name, 'was made not to appear active in', model.title);
         }
 
         if (!havePreferred && activeCtx) {
-            activeCtx.shouldAppearPreferred = true;
-            console.warn(activeCtx.name, 'will now appear active in', model.title);
+            activeCtx.preferred = true;
+            console.warn(activeCtx.name, 'is now preferred in', model.title);
+        } else if (!havePreferred && model.count === 1) {
+            model.get(0).qml.preferred = true;
+            console.warn(model.get(0).qml.name, 'was alone, is now preferred in', model.title);
         }
 
         console.warn(model.title, 'havePreferred', havePreferred);
