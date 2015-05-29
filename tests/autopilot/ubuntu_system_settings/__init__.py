@@ -445,7 +445,7 @@ class PageChooseApn(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
 
     @autopilot.logging.log_action(logger.debug)
     def _delete(self, name):
-        item = self.wait_select_single('Base', objectName='edit_%s' % name)
+        item = self.wait_select_single('Standard', objectName='edit_%s' % name)
         item.swipe_to_delete()
         item.confirm_removal()
 
