@@ -81,7 +81,7 @@ Depends: ${misc:Depends},
          libsystemsettings1 (= ${binary:Version}),
          system-image-dbus (>= 2.5),
          click,
-         ubuntu-keyboard-data (>= 0.99.trunk.phablet2+13.10.20131001),
+         ubuntu-keyboard-data (>= 0.99.trunk.phablet2+15.04.20150421),
          urfkill,
 # for the session-migration script (python3 itself also for the push helper)
          python3,

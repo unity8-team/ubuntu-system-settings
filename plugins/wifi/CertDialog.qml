@@ -13,6 +13,8 @@ Component  {
         property var certType;
         property var fileName;
 
+        signal updateSignal(var update);
+
         anchors.fill: parent
 
         title: { if (certType === 0){ // certificate
@@ -76,6 +78,7 @@ Component  {
 
                             // just to be sure source file will be deleted if move was not successfull:
                             fileHandler.removeFile(certDialog.fileName);
+                            certDialog.updateSignal(true);
                             PopupUtils.close(certDialog);
                 }
             }

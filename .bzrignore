@@ -20,3 +20,6 @@ system-settings.pro.user
 .project
 .settings
 __pycache__
+./CMakeLists.txt_testingjkb
+./plugins/CMakeLists.txt_testing
+./plugins/CMakeLists.txt_testingjkb

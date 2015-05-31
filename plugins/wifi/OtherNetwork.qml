@@ -198,7 +198,6 @@ Component {
             }
         ]
 
-
         Label {
             id: networknameLabel
             text : i18n.tr("Network name")
@@ -336,12 +335,14 @@ Component {
                                               } else {"";}
             }
             onSelectedIndexChanged: {
-                cacertListModel.dataupdate();
                 if (cacertSelector.selectedIndex === cacertListModel.rowCount()-1){
                     var pickerDialog = PopupUtils.open(Qt.resolvedUrl("./CertPicker.qml"));
                     pickerDialog.fileImportSignal.connect(function(file){
                         certDialogLoader.source = "./CertDialog.qml";
-                        PopupUtils.open(certDialogLoader.item, cacertSelector, {fileName: file, certType: 0});
+                        var cacertDialog = PopupUtils.open(certDialogLoader.item, cacertSelector, {fileName: file, certType: 0});
+                        cacertDialog.updateSignal.connect(function(update){
+                            if (update) {cacertListModel.dataupdate();}
+                        });
                     });
                 }
             }
@@ -352,7 +353,7 @@ Component {
         Component{
             id: certSelectorDelegate
             OptionSelectorDelegate { text: CommonName;
-                                     subText:(CommonName !== i18n.tr("None") && CommonName !== i18n.tr("Choose file…")) ?
+                                     subText:(CommonName !== i18n.tr("None") && CommonName !== i18n.tr("Choose…")) ?
                                              (Organization +", Exp.date: " + expiryDate) : ""
             }
         }
@@ -396,13 +397,15 @@ Component {
                                                 } else {"";}
             }
             onSelectedIndexChanged: {
-                cacertListModel.dataupdate();
-                if (usercertSelector.selectedIndex === cacertListModel.rowCount()-1){
+               if (usercertSelector.selectedIndex === cacertListModel.rowCount()-1){
                     var pickerDialog = PopupUtils.open(Qt.resolvedUrl("./CertPicker.qml"));
                     pickerDialog.fileImportSignal.connect(function(file){
                         certDialogLoader.source = "./CertDialog.qml";
-                        PopupUtils.open(certDialogLoader.item, usercertSelector, {fileName: file, certType: 0});
-                    });
+                        var usercertDialog = PopupUtils.open(certDialogLoader.item, usercertSelector, {fileName: file, certType: 0});
+                        usercertDialog.updateSignal.connect(function(update){
+                            if (update) {cacertListModel.dataupdate();}
+                        });                    
+					});
                 }
             }
         }
@@ -425,7 +428,7 @@ Component {
         Component{
             id: privatekeySelectorDelegate
             OptionSelectorDelegate { text: KeyName;
-                                     subText:(KeyName !== i18n.tr("None") && KeyName !== i18n.tr("Choose file…")) ?
+                                     subText:(KeyName !== i18n.tr("None") && KeyName !== i18n.tr("Choose…")) ?
                                              (KeyType + ", " + KeyAlgorithm +", " + KeyLength + " bit" ) : ""
             }
 
@@ -449,13 +452,15 @@ Component {
                                                   } else {"";}
             }
             onSelectedIndexChanged: {
-                privatekeyListModel.dataupdate();
                 if (privateKeySelector.selectedIndex === privatekeyListModel.rowCount()-1){
                     var pickerDialog = PopupUtils.open(Qt.resolvedUrl("./CertPicker.qml"));
                     pickerDialog.fileImportSignal.connect(function(file){
                         certDialogLoader.source = "./CertDialog.qml";
-                        PopupUtils.open(certDialogLoader.item, privateKeySelector, {fileName: file, certType: 1});
-                    });
+					    var cacertDialog = PopupUtils.open(certDialogLoader.item, privateKeySelector, {fileName: file, certType: 1});
+                        cacertDialog.updateSignal.connect(function(update){
+                            if (update) {privatekeyListModel.dataupdate();}
+                        });               
+					});
                 }
             }
         }
@@ -515,7 +520,7 @@ Component {
                     visible: true
                     objectName: "addpacFileButton"
                     anchors.right: parent.right
-                    text: i18n.tr("Choose file…")
+                    text: i18n.tr("Choose…")
                     onClicked: {
                         var pickerDialog = PopupUtils.open(Qt.resolvedUrl("./CertPicker.qml"));
                         pickerDialog.fileImportSignal.connect(function(file){

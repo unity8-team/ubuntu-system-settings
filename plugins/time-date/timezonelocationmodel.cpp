@@ -174,9 +174,12 @@ void TimeZoneLocationModel::filter(const QString& pattern)
                 list,
                 [pattern] (const TzLocation& tz) {
         QString display("%1, %2");
-        return display.arg(tz.city)
-                .arg(tz.full_country.isEmpty() ? tz.country : tz.full_country)
-                .contains(pattern, Qt::CaseInsensitive);
+        return g_str_match_string (pattern.toStdString().c_str(),
+                display.arg(tz.city)
+                    .arg(tz.full_country.isEmpty() ? tz.country
+                                                   : tz.full_country)
+                    .toStdString().c_str(),
+                TRUE);
     }));
 
     Q_EMIT (filterBegin());

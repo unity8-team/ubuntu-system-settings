@@ -37,14 +37,17 @@ QString FileHandler::moveCertFile(QString filename){
     }
     QFile file(filename);
     QByteArray certificate = getCertContent(filename);
-    QList<QSslCertificate> SslCertificate = QSslCertificate::fromData(certificate, QSsl::Pem);
-    QStringList subject = SslCertificate[0].subjectInfo(QSslCertificate::CommonName);
-    QString modFileName = CERTS_PATH+subject[0]+".pem";
-    if(file.rename(modFileName.replace(" ", "_"))){
-        return file.fileName();
-    } else {
-        return "" ;
+    QList<QSslCertificate> SslCertificateList = QSslCertificate::fromData(certificate, QSsl::Pem);
+    if ( !SslCertificateList.isEmpty() ){
+        QStringList subject = SslCertificateList[0].subjectInfo(QSslCertificate::CommonName);
+        QString modFileName = CERTS_PATH+subject[0]+".pem";
+        if(file.rename(modFileName.replace(" ", "_"))){
+            return file.fileName();
+        } else {
+            return "";
+        }
     }
+    return "";
 }
 
 QString FileHandler::moveKeyFile(QString filename){
@@ -53,13 +56,19 @@ QString FileHandler::moveKeyFile(QString filename){
         keyPath.mkpath(KEYS_PATH);
     }
     QFile file(filename);
-    QFileInfo fileInfo(file);
-    QString modFileName = KEYS_PATH + fileInfo.fileName().replace(" ", "_");
-    if(file.rename(modFileName)){
+    file.open(QIODevice::ReadOnly);
+    QSslKey checkKey(file.readAll(),  QSsl::Rsa);
+    file.close();
+    if ( !checkKey.isNull() ){
+        QFileInfo fileInfo(file);
+        QString modFileName = KEYS_PATH + fileInfo.fileName().replace(" ", "_");
+        if(file.rename(modFileName)){
         return file.fileName();
-    } else {
+        } else {
         return "" ;
+        }
     }
+    return "";
 }
 
 bool FileHandler::removeFile(QString filename){
@@ -80,7 +89,7 @@ CertificateListModel::CertificateListModel(QObject *parent) : QAbstractListModel
     QStringList files = directory.entryList(nameFilter);
     files.sort(Qt::CaseInsensitive);
     files.insert(0, _("None") );
-    files.append( _("Choose file…") );
+    files.append( _("Choose…") );
     p->data = files;
 }
 
@@ -115,7 +124,7 @@ void CertificateListModel::dataupdate(){
         QStringList files = directory.entryList(nameFilter);
         files.sort(Qt::CaseInsensitive);
         files.insert(0, _("None") );
-        files.append( _("Choose file…") );
+        files.append( _("Choose…") );
         p->data = files;
         endResetModel();
 }
@@ -169,7 +178,7 @@ PrivatekeyListModel::PrivatekeyListModel(QObject *parent) : QAbstractListModel(p
     QStringList files = directory.entryList(QDir::Files, QDir::Name);
     files.sort(Qt::CaseInsensitive);
     files.insert(0, _("None") );
-    files.append( _("Choose file…") );
+    files.append( _("Choose…") );
     p->data = files;
 }
 
@@ -201,7 +210,7 @@ void PrivatekeyListModel::dataupdate(){
         QStringList files = directory.entryList(QDir::Files, QDir::Name);
         files.sort(Qt::CaseInsensitive);
         files.insert(0, _("None") );
-        files.append( _("Choose file…") );
+        files.append( _("Choose…") );
         p->data = files;
         endResetModel();
 }
