@@ -103,10 +103,6 @@ ItemPage {
             head: root.head
             actions: [
                 Action {
-                    iconName: "reset"
-                    onTriggered: PopupUtils.open(resetDialog)
-                },
-                Action {
                     iconName: "add"
                     objectName: "newApn"
                     onTriggered: {
@@ -131,6 +127,7 @@ ItemPage {
             Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
 
         Column {
+            id: apnsCol
             anchors { left: parent.left; right: parent.right }
 
             Repeater {
@@ -140,6 +137,17 @@ ItemPage {
                 model: [internetContexts, mmsContexts, iaContexts]
                 delegate: apnsDelegate
             }
+        }
+
+        Button {
+            anchors {
+                top: apnsCol.bottom
+                right: parent.right
+                left: parent.left
+                margins: units.gu(2)
+            }
+            text: i18n.tr("Reset All APN Settings…")
+            onClicked: PopupUtils.open(resetDialog)
         }
     }
 
