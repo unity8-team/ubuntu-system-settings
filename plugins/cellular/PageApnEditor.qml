@@ -200,6 +200,8 @@ ItemPage {
 
                 SettingsItemTitle {
                     anchors { left: parent.left; right: parent.right }
+                    /* TRANSLATORS: This string is a description of a text
+                    field and should thus be concise. */
                     text: i18n.tr("APN")
                 }
 
