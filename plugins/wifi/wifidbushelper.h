@@ -52,7 +52,6 @@ Q_SIGNALS:
 private:
     QDBusConnection m_systemBusConnection;
     QString getWifiIpAddress();
-    QByteArray getCertContent(QString filename);
 };
 
 

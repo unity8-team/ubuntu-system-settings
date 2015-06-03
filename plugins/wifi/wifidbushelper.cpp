@@ -45,18 +45,6 @@ WifiDbusHelper::WifiDbusHelper(QObject *parent) : QObject(parent),
 }
 
 
-QByteArray WifiDbusHelper::getCertContent(QString filename){
-    QFile file(filename);
-      if (!file.open(QIODevice::ReadOnly)) {
-            qWarning() << "Could not resolve Cert-File (" << filename << "): File does not exist or is empty." ;
-            return QByteArray();
-      }
-      else {
-            return file.readAll();
-      }
-}
-
-
 void WifiDbusHelper::connect(QString ssid, int security, int auth, QStringList usernames, QStringList password, QStringList certs, int p2auth)
 {
     if((security<0 || security>5) || (auth<0 || auth>4) || (p2auth<0 || p2auth>5)) {
@@ -136,7 +124,7 @@ void WifiDbusHelper::connect(QString ssid, int security, int auth, QStringList u
     QByteArray cacert_a("file://");
     QByteArray clientcert("file://");
     QByteArray privatekey("file://");
-    QByteArray pacFile;
+    QString pacFile;
 
     cacert_a.append( certs[0] );
     if (auth == 0) { // TLS
@@ -163,12 +151,7 @@ void WifiDbusHelper::connect(QString ssid, int security, int auth, QStringList u
         if (usernames[1] != "") {wireless_802_1x["anonymous-identity"]  = usernames[1];}
         if (!password[1].toInt()) {wireless_802_1x["password-flags"] = QString("2");}
 
-        if (certs[3].left(1) == "/"){
-            pacFile = getCertContent(certs[3]);
-        }
-        else {
-            pacFile.append(certs[3]);
-        }
+        pacFile.append(certs[3]);
         wireless_802_1x["pac-file"]  = pacFile;
         wireless_802_1x["phase1-fast-provisioning"] = QString(certs[3].toInt()+1);
     } else if (auth == 4) { // PEAP

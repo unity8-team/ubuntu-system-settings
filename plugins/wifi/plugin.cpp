@@ -48,6 +48,7 @@ void BackendPlugin::registerTypes(const char *uri)
     qmlRegisterType<PreviousNetworkModel>(uri, 1, 0, "PreviousNetworkModel");
     qmlRegisterType<CertificateListModel>(uri, 1, 0, "CertificateListModel");
     qmlRegisterType<PrivatekeyListModel>(uri, 1, 0, "PrivatekeyListModel");
+    qmlRegisterType<PacFileListModel>(uri, 1, 0, "PacFileListModel");
     qmlRegisterType<FileHandler>(uri, 1, 0, "FileHandler");
 }
 

@@ -21,6 +21,8 @@ Component  {
                 {i18n.tr("Add certificate")+"?"};
             } else if (certType === 1){ // privatekey
                 {i18n.tr("Add key")+"?"};
+            } else if (certType === 2){ // pacFile
+                {i18n.tr("Add pac file")+"?"};
             }
 
         }
@@ -60,6 +62,7 @@ Component  {
 
             Button {
                 id: cancelButton
+                Layout.fillWidth: true
                 text: i18n.tr("Cancel")
                 onClicked: { fileHandler.removeFile(certDialog.fileName);
                              PopupUtils.close(certDialog);
@@ -68,12 +71,15 @@ Component  {
 
             Button {
                 id: saveButton
-                text: i18n.tr("Add Certificate")
+                text: i18n.tr("Save")
+                Layout.fillWidth: true
                 enabled: (certDialog.certContent.text !== "")
                 onClicked: { if (certType === 0){ // certificate
                                  fileHandler.moveCertFile(certDialog.fileName);
                              } else if (certType === 1){ // privatekey
                                  fileHandler.moveKeyFile(certDialog.fileName);
+                             } else if (certType === 2){ // pacFile
+                                 fileHandler.movePacFile(certDialog.fileName);
                              }
 
                             // just to be sure source file will be deleted if move was not successfull:

@@ -12,6 +12,7 @@
 
 #define CERTS_PATH "/home/phablet/.local/share/ubuntu-system-settings/wifi/ssl/certs/"
 #define KEYS_PATH "/home/phablet/.local/share/ubuntu-system-settings/wifi/ssl/private/"
+#define PACS_PATH "/home/phablet/.local/share/ubuntu-system-settings/wifi/ssl/pac/"
 
 #include <libintl.h>
 QString _(const char *text){
@@ -69,6 +70,20 @@ QString FileHandler::moveKeyFile(QString filename){
         }
     }
     return "";
+}
+
+QString FileHandler::movePacFile(QString filename){
+    QDir keyPath(PACS_PATH);
+    if (!keyPath.exists(PACS_PATH)){
+        keyPath.mkpath(PACS_PATH);
+    }
+    QFile file(filename);
+    QFileInfo fileInfo(file);
+    QString modFileName = PACS_PATH + fileInfo.baseName().replace(" ", "_") + ".pac";
+    if(file.rename(modFileName)){
+      return file.fileName();
+    }
+    return "" ;
 }
 
 bool FileHandler::removeFile(QString filename){
@@ -259,6 +274,81 @@ QVariant PrivatekeyListModel::data(const QModelIndex &index, int role) const {
     case keyType : return type;
     case keyAlgorithm : return algorithm;
     case keyLength : return privateKey.length();
+
+    default : return QVariant();
+
+    }
+}
+
+/***************************************/
+
+struct PacFileListModel::Private {
+    QStringList data;
+};
+
+PacFileListModel::PacFileListModel(QObject *parent) : QAbstractListModel(parent) {
+    p = new PacFileListModel::Private();
+    QDir directory(PACS_PATH);
+    QStringList files = directory.entryList(QDir::Files, QDir::Name);
+    files.sort(Qt::CaseInsensitive);
+    files.insert(0, _("None") );
+    files.append( _("Choose…") );
+    p->data = files;
+}
+
+PacFileListModel::~PacFileListModel() {
+    delete p;
+}
+
+QHash<int, QByteArray> PacFileListModel::roleNames() const {
+    QHash<int, QByteArray> roles;
+    roles[pacFileName] = "pacFileName";
+    return roles;
+}
+
+int PacFileListModel::rowCount(const QModelIndex &/*parent*/) const {
+   return p->data.size();
+}
+
+QString PacFileListModel::getfileName(const int selectedIndex) const {
+    return  PACS_PATH + p->data[selectedIndex];
+}
+
+void PacFileListModel::dataupdate(){
+        beginResetModel();
+        p->data.clear();
+        QDir directory(PACS_PATH);
+        QStringList files = directory.entryList(QDir::Files, QDir::Name);
+        files.sort(Qt::CaseInsensitive);
+        files.insert(0, _("None") );
+        files.append( _("Choose…") );
+        p->data = files;
+        endResetModel();
+}
+
+QVariant PacFileListModel::data(const QModelIndex &index, int role) const {
+    if(!index.isValid() || index.row() >= ( p->data.size()) ) {
+        return QVariant();
+    } else if (index.row() == 0){
+        const QString &row0 = p->data[index.row()];
+
+        switch(role) {
+            case pacFileName : return row0; // returns "None"
+
+        }
+    } else if (index.row() == p->data.size()-1){
+        const QString &rowend = p->data[index.row()];
+
+        switch(role) {
+            case pacFileName : return rowend; // returns "Choose file...
+
+        }
+    }
+
+    const QString &name = p->data[index.row()];
+    switch(role) {
+
+    case pacFileName : return name;
 
     default : return QVariant();
 

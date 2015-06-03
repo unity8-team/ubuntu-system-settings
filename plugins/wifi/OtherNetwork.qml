@@ -101,6 +101,15 @@ Component {
                     enabled: false
                 }
                 PropertyChanges {
+                    target: pacFileLabel
+                    opacity: 0.5
+                }
+                PropertyChanges {
+                    target: pacFileSelector
+                    enabled: false
+                    opacity: 0.5
+                }
+                PropertyChanges {
                     target: privatekeyLabel
                     opacity: 0.5
                 }
@@ -352,9 +361,10 @@ Component {
 
         Component{
             id: certSelectorDelegate
-            OptionSelectorDelegate { text: CommonName;
+            OptionSelectorDelegate { text: (CommonName.length > 32) ? CommonName.substr(0,30).concat("…") : CommonName
                                      subText:(CommonName !== i18n.tr("None") && CommonName !== i18n.tr("Choose…")) ?
-                                             (Organization +", Exp.date: " + expiryDate) : ""
+                                             ( ( (Organization.length > 15) ? Organization.substr(0,13).concat("…") : Organization)
+                                               + ", Exp.date: " + expiryDate) : ""
             }
         }
 
@@ -456,8 +466,8 @@ Component {
                     var pickerDialog = PopupUtils.open(Qt.resolvedUrl("./CertPicker.qml"));
                     pickerDialog.fileImportSignal.connect(function(file){
                         certDialogLoader.source = "./CertDialog.qml";
-					    var cacertDialog = PopupUtils.open(certDialogLoader.item, privateKeySelector, {fileName: file, certType: 1});
-                        cacertDialog.updateSignal.connect(function(update){
+                        var privatekeyDialog = PopupUtils.open(certDialogLoader.item, privateKeySelector, {fileName: file, certType: 1});
+                        privatekeyDialog.updateSignal.connect(function(update){
                             if (update) {privatekeyListModel.dataupdate();}
                         });               
 					});
@@ -465,80 +475,81 @@ Component {
             }
         }
 
-        Column{     // pacFile
-            id: pacFileColumn
+        Label {
+            id: pacFileLabel
+            text : i18n.tr("Pac file")
+            objectName: "pacFileLabel"
+            fontSize: "medium"
+            font.bold: false
+            color: Theme.palette.selected.backgroundText
+            visible:    ( securityList.selectedIndex == 2 || securityList.selectedIndex == 4) // WPA or D-WEP
+                     && ( authList.selectedIndex == 3  )
+        }
+
+
+        PacFileListModel {
+            id: pacFileListModel
+        }
+
+        Component{
+            id: pacFileSelectorDelegate
+            OptionSelectorDelegate { text: pacFileName; }
+
+        }
+
+        ListItem.ItemSelector {
+            id: pacFileSelector
             anchors {
                 left: parent.left
                 right: parent.right
             }
-            spacing: parent.spacing
+            visible:    ( securityList.selectedIndex == 2 || securityList.selectedIndex == 4)
+                     && ( authList.selectedIndex == 3 ) // only for FAST
+            model: pacFileListModel
+            expanded: false
+            delegate: pacFileSelectorDelegate
+            selectedIndex: 0
+            property string pacFileName: { if(pacFileSelector.selectedIndex !== 0 &&
+                                                     pacFileSelector.selectedIndex !== (pacFileListModel.rowCount()-1)){
+                                                     pacFileListModel.getfileName(pacFileSelector.selectedIndex)
+                                                  } else {"";}
+            }
+            onSelectedIndexChanged: {
+                if (pacFileSelector.selectedIndex === pacFileListModel.rowCount()-1){
+                    var pickerDialog = PopupUtils.open(Qt.resolvedUrl("./CertPicker.qml"));
+                    pickerDialog.fileImportSignal.connect(function(file){
+                        certDialogLoader.source = "./CertDialog.qml";
+                        var pacDialog = PopupUtils.open(certDialogLoader.item, pacFileSelector, {fileName: file, certType: 2});
+                        pacDialog.updateSignal.connect(function(update){
+                            if (update) {pacFileListModel.dataupdate();}
+                        });
+                    });
+                }
+            }
+        }
 
+        Label {
+            id: pacProvisioningListLabel
+            text : i18n.tr("Pac provisioning")
+            objectName: "pacProvisioningListLabel"
+            fontSize: "medium"
+            font.bold: false
+            color: Theme.palette.selected.backgroundText
+            elide: Text.ElideRight
             visible:    ( securityList.selectedIndex == 2 || securityList.selectedIndex == 4)
                         && ( authList.selectedIndex == 3 )
 
-            Label {
-                id: pacProvisioningListLabel
-                text : i18n.tr("Pac provisioning")
-                objectName: "pacProvisioningListLabel"
-                fontSize: "medium"
-                font.bold: false
-                color: Theme.palette.selected.backgroundText
-                elide: Text.ElideRight
+        }
 
-            }
-
-            ListItem.ItemSelector {
-                id: pacProvisioningList
-                objectName: "pacProvisioningList"
-                model: [i18n.tr("Anonymous"),         // index: 0
-                        i18n.tr("Authenticated"),     // index: 1
-                        i18n.tr("Both"),              // index: 2
-                ]
-
-            }
-
-
-            RowLayout{
-                spacing: units.gu(4)
-                anchors {
-                    left: parent.left
-                    right: parent.right
-                }
-
-                Label {
-                    id: pacFileLabel
-                    text : i18n.tr("Pac File")
-                    objectName: "pacFileLabel"
-                    fontSize: "medium"
-                    font.bold: false
-                    color: Theme.palette.selected.backgroundText
-                    anchors.bottom: addpacFileButton.bottom
-                }
-
-                Button {
-                    id: addpacFileButton
-                    visible: true
-                    objectName: "addpacFileButton"
-                    anchors.right: parent.right
-                    text: i18n.tr("Choose…")
-                    onClicked: {
-                        var pickerDialog = PopupUtils.open(Qt.resolvedUrl("./CertPicker.qml"));
-                        pickerDialog.fileImportSignal.connect(function(file){
-                            pacFile.text = file;
-                        });
-                    }
-                }
-            }
-
-            TextArea {
-                id : pacFile
-                objectName: "pacFile"
-                width: parent.width
-                autoSize: true
-                maximumLineCount: 4
-                placeholderText: i18n.tr("Absolute path to Pac File or clipboard content")
-            }
-
+        ListItem.ItemSelector {
+            id: pacProvisioningList
+            objectName: "pacProvisioningList"
+            model: [i18n.tr("Anonymous"),         // index: 0
+                i18n.tr("Authenticated"),     // index: 1
+                i18n.tr("Both"),              // index: 2
+            ]
+            visible:    ( securityList.selectedIndex == 2 || securityList.selectedIndex == 4)
+                        && ( authList.selectedIndex == 3 )
         }
 
         Label {
@@ -698,6 +709,7 @@ Component {
             horizontalAlignment: Text.AlignHCenter
             height: contentHeight
             wrapMode: Text.Wrap
+            color: "orange"
             visible: false
         }
 
