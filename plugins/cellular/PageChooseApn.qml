@@ -46,7 +46,7 @@ ItemPage {
 
     /**
      * We have three ListModels: one for Internet contexts, one for MMS
-     * contexts and one for ia contexts. We use OfonoConnectionContext qml
+     * contexts and one for ia contexts. We use OfonoContextConnection qml
      * objects to represents the contexts.
      *
      * The model will have helpful properties:
@@ -175,6 +175,68 @@ ItemPage {
     }
 
     Component {
+        id: disablesInternetWarning
+        Dialog {
+            id: dialogue
+            property OfonoContextConnection mms
+            property OfonoContextConnection combined
+            /* TRANSLATORS: %1 is the MMS APN that the user has chosen to be
+            “preferred”. */
+            title: i18n.tr("Prefer %1").arg(mms.name)
+            /* TRANSLATORS: %1 is the MMS APN that the user has chosen to be
+            “preferred”, i.e. used to retrieve MMS messages. %2 is the Internet
+            APN that will be “de-preferred” as a result of this action. */
+            text: i18n.tr("You have chosen %1 as your preferred MMS APN. " +
+                          "This disconnects an Internet connection provided " +
+                          "by %2.").arg(mms.name).arg(combined.name)
+
+            Button {
+                text: i18n.tr("Disconnect")
+                onClicked: {
+                    Manager.setPreferred(mms, true, true);
+                    PopupUtils.close(dialogue);
+                }
+            }
+
+            Button {
+                text: i18n.tr("Cancel")
+                onClicked: PopupUtils.close(dialogue)
+            }
+        }
+    }
+
+    Component {
+        id: disablesMMSWarning
+        Dialog {
+            id: dialogue
+            property OfonoContextConnection internet
+            property OfonoContextConnection combined
+            /* TRANSLATORS: %1 is the Internet APN that the user has chosen to
+            be “preferred”. */
+            title: i18n.tr("Prefer %1").arg(internet.name)
+            /* TRANSLATORS: %1 is the Internet APN that the user has chosen to
+            be “preferred”, i.e. used to connect to the Internet. %2 is the MMS
+            APN that will be “de-preferred” as a result of this action. */
+            text: i18n.tr("You have chosen %1 as your preferred Internet APN. " +
+                          "This disables the MMS configuration provided " +
+                          "by %2.").arg(internet.name).arg(combined.name)
+
+            Button {
+                text: i18n.tr("Disable")
+                onClicked: {
+                    Manager.setPreferred(internet, true, true);
+                    PopupUtils.close(dialogue);
+                }
+            }
+
+            Button {
+                text: i18n.tr("Cancel")
+                onClicked: PopupUtils.close(dialogue)
+            }
+        }
+    }
+
+    Component {
         id: apnsDelegate
 
         Repeater {
@@ -213,7 +275,7 @@ ItemPage {
                 property bool serverChecked: qml && qml.preferred
                 onServerCheckedChanged: checked = serverChecked
                 Component.onCompleted: checked = serverChecked
-                onTriggered: Manager.setPreferred(qml, checked)
+                onTriggered: Manager.setPreferred.call(this, qml, checked)
             }
 
             Item  {

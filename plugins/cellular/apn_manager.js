@@ -160,6 +160,7 @@ function _createQml (paths) {
             }
 
             ctx.validChanged.connect(contextValidChanged.bind(ctx));
+            ctx.activeChanged.connect(contextActiveChanged.bind(ctx));
 
             _pathToQml[path] = ctx;
             _totalContext++;
@@ -293,7 +294,7 @@ function contextRemoved (path) {
 /**
  * Handler for when a type has been determined. If a contex changes type,
  * we need to move it to the correct model.
- * Note that 'this' refers to the context on which type changed.
+ * Note that “this' refers to the context on which type changed.
  *
  * @param {String} type
  */
@@ -304,7 +305,7 @@ function contextTypeChanged (type) {
 
 /**
  * Handler for when validity of context changes.
- * Note that 'this' refers to the context on which valid changed.
+ * Note that “this' refers to the context on which valid changed.
  *
  * @param {Boolean} valid
  */
@@ -323,10 +324,23 @@ function contextValidChanged (valid) {
 }
 
 /**
+ * Handler for when active changes.
+ * Note that “this' refers to the context on which active changed.
+ *
+ * @param {Boolean} active
+ */
+function contextActiveChanged (active) {
+    console.warn('contextActiveChanged', this.active, active, this.contextPath);
+    if (active) {
+        checkPreferred();
+    }
+}
+
+/**
  * This is code that is supposed to identify new contexts that user creates.
  * If we think the context is new, and the editor page is open, we notify it.
  *
- * Note that 'this' refers to the context on which name changed.
+ * Note that “this' refers to the context on which name changed.
  *
  * @param {String} name's new value
 */
@@ -376,38 +390,67 @@ function reportError (message) {
 }
 
 /**
- * Set Preferred on a context.
+ * Set Preferred on a context. A side effect of this, if value is true, is
+ * that all other contexts of the same type will get de-preferred. If an
+ * MMS context is preferred, all other MMS contexts are de-preferred.
+ *
+ * There is also a case where if you prefer an MMS context when there already
+ * is a preferred Internet+MMS (combined) context. In this case we prompt the
+ * user what to do.
+ *
+ * Note: If triggered by a CheckBox, the “this” argument will be the CheckBox.
  *
  * @param {OfonoContextConnection} context to prefer
  * @param {Boolean} new preferred value
+ * @param {Boolean} whether or not to force this action, even though it may
+ *                  decrease the level of connectivity of the user.
 */
-function setPreferred (context, value) {
-    console.warn('setPreferred...', context.name);
-    var models = [];
-    var ctx;
-    var i;
+function setPreferred (context, value, force) {
+    console.warn('setPreferred...', this, context.name);
+    var conflictingContexts = getConflictingContexts(context);
+    var mmsPreferralCausesCombinedDePreferral;
+    var internetPreferralCausesCombinedDePreferral;
 
     if (!value) {
         context.preferred = false;
         return;
     }
 
-    // If the context is combined (internet+mms), we also want to
-    // 'deprefer' all MMS contexts if any.
-    models.push(getModelFromType(context.type));
-    if (context.isCombined) {
-        models.push(mmsContexts);
-    }
+    // If user is preferring standalone Internet or standalone MMS context,
+    // we will give a warning, if not forced.
+    conflictingContexts.forEach(function (ctxC) {
+        if (ctxC.isCombined) {
+            if (context.type === 'mms') {
+                mmsPreferralCausesCombinedDePreferral = ctxC;
+            }
 
-    models.forEach(function (model) {
-        for (i = 0; i < model.count; i++) {
-            ctx = model.get(i).qml;
-            console.warn('dePreferContext',
-                         ctx.contextPath);
-            ctx.preferred = false;
+            if (context.type === 'internet') {
+                internetPreferralCausesCombinedDePreferral = ctxC;
+            }
         }
     });
 
+    if (mmsPreferralCausesCombinedDePreferral && !force) {
+        PopupUtils.open(disablesInternetWarning, root, {
+            combined: mmsPreferralCausesCombinedDePreferral,
+            mms: context
+        });
+        this.checked = false;
+        return;
+    } else if (internetPreferralCausesCombinedDePreferral && !force) {
+        PopupUtils.open(disablesMMSWarning, root, {
+            combined: internetPreferralCausesCombinedDePreferral,
+            internet: context
+        });
+        this.checked = false;
+        return;
+    }
+
+    conflictingContexts.forEach(function (ctx) {
+        ctx.preferred = false;
+    });
+
+    console.warn('Setting', context.name, 'as preferred');
     context.preferred = true;
 }
 
@@ -463,32 +506,100 @@ function checkPreferred () {
 
     models.forEach(function (model) {
         var i;
-        var havePreferred = false;
         var ctx;
         var activeCtx;
+
+        // Find active contexts in model.
         for (i = 0; i < model.count; i++) {
             ctx = model.get(i).qml;
             console.warn('checking if', ctx.contextPath, 'is preferred...');
-            if (ctx.preferred) {
-                console.warn(ctx.contextPath, 'was preferred');
-                havePreferred = true;
-            }
 
             if (ctx.active) {
                 activeCtx = ctx;
             }
         }
 
-        if (!havePreferred && activeCtx) {
+        if (activeCtx && getConflictingContexts(activeCtx).length === 0) {
             activeCtx.preferred = true;
             console.warn(activeCtx.name, 'is now preferred in', model.title);
-        } else if (!havePreferred && model.count === 1) {
-            model.get(0).qml.preferred = true;
-            console.warn(model.get(0).qml.name, 'was alone, is now preferred in', model.title);
         }
-
-        console.warn(model.title, 'havePreferred', havePreferred);
     });
+}
+
+/**
+ * Gives a list of conflicting contexts, i.e. contexts that are preferred
+ * and will create problems† if preferred at the same time as the given
+ * context.
+ *
+ * † Multiple preferred contexts of the same type will cause undefined
+ * Nuntium and NetworkManager behaviour.
+ *
+ * @param {OfonoContextConnection|String} context to be preferred and to check
+                                          conflicts against, or type as string
+ * @return {Array:OfonoContextConnection} list of OfonoContextConnection that
+ *                                        are in conflict, excluding itself
+ *
+ */
+function getConflictingContexts (context) {
+    var type;
+    var conflicts = [];
+    var i;
+    var ctxI;
+    var typeModel;
+
+    if (typeof context === 'string') {
+        type = context;
+    } else {
+        type = context.isCombined ? 'internet+mms' : context.type;
+    }
+
+    switch (type) {
+        // A combined context will conflict with internet contexts and MMS
+        // contexts.
+        case 'internet+mms':
+            [internetContexts, mmsContexts].forEach(function (model) {
+                var i;
+                for (i = 0; i < model.count; i++) {
+                    ctxI = model.get(i).qml;
+                    if (ctxI.preferred) {
+                        conflicts.push(ctxI);
+                    }
+                }
+            });
+            break;
+        // An MMS context will conflict with other MMS contexts, as well as
+        // combined contexts.
+        case 'mms':
+            for (i = 0; i < mmsContexts.count; i++) {
+                ctxI = mmsContexts.get(i).qml;
+                if (ctxI.preferred) {
+                    conflicts.push(ctxI);
+                }
+            }
+            for (i = 0; i < internetContexts.count; i++) {
+                ctxI = internetContexts.get(i).qml;
+                if (ctxI.isCombined && ctxI.preferred) {
+                    conflicts.push(ctxI);
+                }
+            }
+            break;
+        case 'internet':
+        case 'ia':
+            typeModel = getModelFromType(type);
+            for (i = 0; i < typeModel.count; i++) {
+                ctxI = typeModel.get(i).qml;
+                if (ctxI.preferred) {
+                    conflicts.push(ctxI);
+                }
+            }
+            break;
+        default:
+            throw new Error('Can\'t resolve conflicts for type' + type);
+    }
+    console.warn('Conflicting contexts...');
+
+    conflicts.forEach(function (c) {console.warn("\t" + c.name);});
+    return conflicts;
 }
 
 function ready () {
