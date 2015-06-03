@@ -777,7 +777,7 @@ Component {
                             authList.selectedIndex,
                             [username.text, anonymousIdentity.text],
                             [password.text, passwordRememberSwitch.checked],
-                            [cacertSelector.cacertFileName, usercertSelector.usercertFileName, privateKeySelector.privateKeyFileName, pacFile.text, pacProvisioningList.selectedIndex] ,
+                            [cacertSelector.cacertFileName, usercertSelector.usercertFileName, privateKeySelector.privateKeyFileName, pacFileSelector.pacFileName, pacProvisioningList.selectedIndex] ,
                             p2authList.selectedIndex);
                 otherNetworkDialog.state = "CONNECTING";
             }
