@@ -69,7 +69,11 @@ Component {
                     running: true
                 }
                 PropertyChanges {
-                    target: cacertLabel
+                    target: passwordRememberSwitch
+                    enabled: false
+                }
+                PropertyChanges {
+                    target: passwordRememberLabel
                     opacity: 0.5
                 }
                 PropertyChanges {
@@ -101,7 +105,16 @@ Component {
                     enabled: false
                 }
                 PropertyChanges {
-                    target: pacFileLabel
+                    target: anonymousIdentityLabel
+                    opacity: 0.5
+                }
+                PropertyChanges {
+                    target: pacProvisioningList
+                    enabled: false
+                    opacity: 0.5
+                }
+                PropertyChanges {
+                    target: pacProvisioningListLabel
                     opacity: 0.5
                 }
                 PropertyChanges {
@@ -110,7 +123,7 @@ Component {
                     opacity: 0.5
                 }
                 PropertyChanges {
-                    target: privatekeyLabel
+                    target: pacFileLabel
                     opacity: 0.5
                 }
                 PropertyChanges {
@@ -119,7 +132,7 @@ Component {
                     opacity: 0.5
                 }
                 PropertyChanges {
-                    target: usercertLabel
+                    target: privatekeyLabel
                     opacity: 0.5
                 }
                 PropertyChanges {
@@ -128,7 +141,7 @@ Component {
                     opacity: 0.5
                 }
                 PropertyChanges {
-                    target: cacertLabel
+                    target: usercertLabel
                     opacity: 0.5
                 }
                 PropertyChanges {
@@ -137,7 +150,7 @@ Component {
                     opacity: 0.5
                 }
                 PropertyChanges {
-                    target: p2authListLabel
+                    target: cacertLabel
                     opacity: 0.5
                 }
                 PropertyChanges {
@@ -156,6 +169,10 @@ Component {
                 }
                 PropertyChanges {
                     target: authListLabel
+                    opacity: 0.5
+                }
+                PropertyChanges {
+                    target: wepInsecureLabel
                     opacity: 0.5
                 }
                 PropertyChanges {
@@ -313,7 +330,7 @@ Component {
 
         Label {
             id: cacertLabel
-            text : i18n.tr("CA Certificate")
+            text : i18n.tr("CA certificate")
             objectName: "cacertListLabel"
             fontSize: "medium"
             font.bold: false
@@ -379,7 +396,7 @@ Component {
 
         Label {
             id: usercertLabel
-            text : i18n.tr("Client Certificate")
+            text : i18n.tr("Client certificate")
             objectName: "usercertLabel"
             fontSize: "medium"
             font.bold: false
@@ -422,7 +439,7 @@ Component {
 
         Label {
             id: privatekeyLabel
-            text : i18n.tr("User Private Key")
+            text : i18n.tr("User private key")
             objectName: "userprivatekeyLabel"
             fontSize: "medium"
             font.bold: false
@@ -544,10 +561,12 @@ Component {
         ListItem.ItemSelector {
             id: pacProvisioningList
             objectName: "pacProvisioningList"
-            model: [i18n.tr("Anonymous"),         // index: 0
-                i18n.tr("Authenticated"),     // index: 1
-                i18n.tr("Both"),              // index: 2
+            model: [i18n.tr("Disabled"),      // index: 0
+                i18n.tr("Anonymous"),         // index: 1
+                i18n.tr("Authenticated"),     // index: 2
+                i18n.tr("Both"),              // index: 3
             ]
+            selectedIndex: 1
             visible:    ( securityList.selectedIndex == 2 || securityList.selectedIndex == 4)
                         && ( authList.selectedIndex == 3 )
         }
@@ -777,7 +796,7 @@ Component {
                             authList.selectedIndex,
                             [username.text, anonymousIdentity.text],
                             [password.text, passwordRememberSwitch.checked],
-                            [cacertSelector.cacertFileName, usercertSelector.usercertFileName, privateKeySelector.privateKeyFileName, pacFileSelector.pacFileName, pacProvisioningList.selectedIndex] ,
+                            [cacertSelector.cacertFileName, usercertSelector.usercertFileName, privateKeySelector.privateKeyFileName, pacFileSelector.pacFileName, pacProvisioningList.selectedIndex.toString()] ,
                             p2authList.selectedIndex);
                 otherNetworkDialog.state = "CONNECTING";
             }
