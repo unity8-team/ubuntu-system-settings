@@ -226,6 +226,9 @@ ItemPage {
 
                     ctx.lineWidth = units.dp(2)
 
+                    /* Needed to avoid rendering glitches with point with the same x value
+                       (#1461624/QTBUG-34339) */
+                    ctx.lineJoin = "round"
 
                     ctx.translate(0, height)
                     // Invert the y axis so we draw from the bottom left
