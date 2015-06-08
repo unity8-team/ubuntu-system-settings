@@ -11,24 +11,23 @@
 #include <QFile>
 
 #define CERTS_PATH "/home/phablet/.local/share/ubuntu-system-settings/wifi/ssl/certs/"
-#define KEYS_PATH "/home/phablet/.local/share/ubuntu-system-settings/wifi/ssl/private/"
-#define PACS_PATH "/home/phablet/.local/share/ubuntu-system-settings/wifi/ssl/pac/"
+#define KEYS_PATH  "/home/phablet/.local/share/ubuntu-system-settings/wifi/ssl/private/"
+#define PACS_PATH  "/home/phablet/.local/share/ubuntu-system-settings/wifi/ssl/pac/"
 
 #include <libintl.h>
 QString _(const char *text){
     return QString::fromUtf8(dgettext(0, text));
 }
 
-
 QByteArray FileHandler::getCertContent(QString filename){
     QFile file(filename);
-      if (!file.open(QIODevice::ReadOnly)) {
-            qWarning() << "Could not resolve File (" << filename << "): File does not exist or is empty." ;
-            return QByteArray();
-      }
-      else {
-            return file.readAll();
-      }
+    if (!file.open(QIODevice::ReadOnly)) {
+        qWarning() << "Could not resolve File (" << filename << "): File does not exist or is empty." ;
+        return QByteArray();
+    }
+    else {
+        return file.readAll();
+    }
 }
 
 QString FileHandler::moveCertFile(QString filename){
@@ -64,9 +63,9 @@ QString FileHandler::moveKeyFile(QString filename){
         QFileInfo fileInfo(file);
         QString modFileName = KEYS_PATH + fileInfo.fileName().replace(" ", "_");
         if(file.rename(modFileName)){
-        return file.fileName();
+            return file.fileName();
         } else {
-        return "" ;
+            return "" ;
         }
     }
     return "";
@@ -81,7 +80,7 @@ QString FileHandler::movePacFile(QString filename){
     QFileInfo fileInfo(file);
     QString modFileName = PACS_PATH + fileInfo.baseName().replace(" ", "_") + ".pac";
     if(file.rename(modFileName)){
-      return file.fileName();
+        return file.fileName();
     }
     return "" ;
 }
@@ -90,8 +89,6 @@ bool FileHandler::removeFile(QString filename){
     QFile file(filename);
     return file.remove();
 }
-
-
 
 struct CertificateListModel::Private {
     QStringList data;
@@ -124,7 +121,7 @@ QHash<int, QByteArray> CertificateListModel::roleNames() const {
 }
 
 int CertificateListModel::rowCount(const QModelIndex &/*parent*/) const {
-   return p->data.size();
+    return p->data.size();
 }
 
 QString CertificateListModel::getfileName(const int selectedIndex) const {
@@ -132,16 +129,16 @@ QString CertificateListModel::getfileName(const int selectedIndex) const {
 }
 
 void CertificateListModel::dataupdate(){
-        beginResetModel();
-        p->data.clear();
-        QStringList nameFilter("*.pem");
-        QDir directory(CERTS_PATH);
-        QStringList files = directory.entryList(nameFilter);
-        files.sort(Qt::CaseInsensitive);
-        files.insert(0, _("None") );
-        files.append( _("Choose…") );
-        p->data = files;
-        endResetModel();
+    beginResetModel();
+    p->data.clear();
+    QStringList nameFilter("*.pem");
+    QDir directory(CERTS_PATH);
+    QStringList files = directory.entryList(nameFilter);
+    files.sort(Qt::CaseInsensitive);
+    files.insert(0, _("None") );
+    files.append( _("Choose…") );
+    p->data = files;
+    endResetModel();
 }
 
 QVariant CertificateListModel::data(const QModelIndex &index, int role) const {
@@ -151,19 +148,18 @@ QVariant CertificateListModel::data(const QModelIndex &index, int role) const {
         const QString &row0 = p->data[index.row()];
 
         switch(role) {
-            case CNRole : return row0;
-            case ORole : return "";
-            case expDateRole : return "";
+        case CNRole : return row0;
+        case ORole : return "";
+        case expDateRole : return "";
 
         }
     } else if (index.row() == p->data.size()-1){
         const QString &rowend = p->data[index.row()];
 
         switch(role) {
-            case CNRole : return rowend;
-            case ORole : return "";
-            case expDateRole : return "";
-
+        case CNRole : return rowend;
+        case ORole : return "";
+        case expDateRole : return "";
         }
     }
 
@@ -175,9 +171,8 @@ QVariant CertificateListModel::data(const QModelIndex &index, int role) const {
     case CNRole : return certificate[0].subjectInfo(QSslCertificate::CommonName)[0];
     case ORole : return certificate[0].subjectInfo(QSslCertificate::Organization)[0];
     case expDateRole : return certificate[0].expiryDate().toString("dd.MM.yyyy");
-    
-    default : return QVariant();
 
+    default : return QVariant();
     }
 }
 
@@ -211,7 +206,7 @@ QHash<int, QByteArray> PrivatekeyListModel::roleNames() const {
 }
 
 int PrivatekeyListModel::rowCount(const QModelIndex &/*parent*/) const {
-   return p->data.size();
+    return p->data.size();
 }
 
 QString PrivatekeyListModel::getfileName(const int selectedIndex) const {
@@ -219,15 +214,15 @@ QString PrivatekeyListModel::getfileName(const int selectedIndex) const {
 }
 
 void PrivatekeyListModel::dataupdate(){
-        beginResetModel();
-        p->data.clear();
-        QDir directory(KEYS_PATH);
-        QStringList files = directory.entryList(QDir::Files, QDir::Name);
-        files.sort(Qt::CaseInsensitive);
-        files.insert(0, _("None") );
-        files.append( _("Choose…") );
-        p->data = files;
-        endResetModel();
+    beginResetModel();
+    p->data.clear();
+    QDir directory(KEYS_PATH);
+    QStringList files = directory.entryList(QDir::Files, QDir::Name);
+    files.sort(Qt::CaseInsensitive);
+    files.insert(0, _("None") );
+    files.append( _("Choose…") );
+    p->data = files;
+    endResetModel();
 }
 
 QVariant PrivatekeyListModel::data(const QModelIndex &index, int role) const {
@@ -237,20 +232,19 @@ QVariant PrivatekeyListModel::data(const QModelIndex &index, int role) const {
         const QString &row0 = p->data[index.row()];
 
         switch(role) {
-            case keyName : return row0; // returns "None"
-            case keyType : return "";
-            case keyAlgorithm : return "";
-            case keyLength : return "";
+        case keyName : return row0; // returns "None"
+        case keyType : return "";
+        case keyAlgorithm : return "";
+        case keyLength : return "";
         }
     } else if (index.row() == p->data.size()-1){
         const QString &rowend = p->data[index.row()];
 
         switch(role) {
-            case keyName : return rowend; // returns "Choose file...
-            case keyType : return "";
-            case keyAlgorithm : return "";
-            case keyLength : return "";
-
+        case keyName : return rowend; // returns "Choose file...
+        case keyType : return "";
+        case keyAlgorithm : return "";
+        case keyLength : return "";
         }
     }
 
@@ -276,7 +270,6 @@ QVariant PrivatekeyListModel::data(const QModelIndex &index, int role) const {
     case keyLength : return privateKey.length();
 
     default : return QVariant();
-
     }
 }
 
@@ -307,7 +300,7 @@ QHash<int, QByteArray> PacFileListModel::roleNames() const {
 }
 
 int PacFileListModel::rowCount(const QModelIndex &/*parent*/) const {
-   return p->data.size();
+    return p->data.size();
 }
 
 QString PacFileListModel::getfileName(const int selectedIndex) const {
@@ -315,15 +308,15 @@ QString PacFileListModel::getfileName(const int selectedIndex) const {
 }
 
 void PacFileListModel::dataupdate(){
-        beginResetModel();
-        p->data.clear();
-        QDir directory(PACS_PATH);
-        QStringList files = directory.entryList(QDir::Files, QDir::Name);
-        files.sort(Qt::CaseInsensitive);
-        files.insert(0, _("None") );
-        files.append( _("Choose…") );
-        p->data = files;
-        endResetModel();
+    beginResetModel();
+    p->data.clear();
+    QDir directory(PACS_PATH);
+    QStringList files = directory.entryList(QDir::Files, QDir::Name);
+    files.sort(Qt::CaseInsensitive);
+    files.insert(0, _("None") );
+    files.append( _("Choose…") );
+    p->data = files;
+    endResetModel();
 }
 
 QVariant PacFileListModel::data(const QModelIndex &index, int role) const {
@@ -333,15 +326,13 @@ QVariant PacFileListModel::data(const QModelIndex &index, int role) const {
         const QString &row0 = p->data[index.row()];
 
         switch(role) {
-            case pacFileName : return row0; // returns "None"
-
+        case pacFileName : return row0; // returns "None"
         }
     } else if (index.row() == p->data.size()-1){
         const QString &rowend = p->data[index.row()];
 
         switch(role) {
-            case pacFileName : return rowend; // returns "Choose file...
-
+        case pacFileName : return rowend; // returns "Choose file...
         }
     }
 
@@ -351,6 +342,5 @@ QVariant PacFileListModel::data(const QModelIndex &index, int role) const {
     case pacFileName : return name;
 
     default : return QVariant();
-
     }
 }

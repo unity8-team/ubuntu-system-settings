@@ -42,9 +42,9 @@ Component {
                 
                 // WEP
                 return password.length === 5  ||
-                        password.length === 10 ||
-                        password.length === 13 ||
-                        password.length === 26;
+                       password.length === 10 ||
+                       password.length === 13 ||
+                       password.length === 26;
             }
             //WPA
             return password.length >= 8
@@ -306,9 +306,9 @@ Component {
             color: Theme.palette.selected.backgroundText
             elide: Text.ElideRight
             visible:    ( securityList.selectedIndex == 2 || securityList.selectedIndex == 4) // WPA or D-WEP
-                        && ( authList.selectedIndex == 1 ||
-                            authList.selectedIndex == 3 ||
-                            authList.selectedIndex == 4  )
+                     && ( authList.selectedIndex == 1 ||
+                          authList.selectedIndex == 3 ||
+                          authList.selectedIndex == 4   )
         }
 
         ListItem.ItemSelector {
@@ -323,9 +323,9 @@ Component {
                 i18n.tr("MD5")       // index: 5
             ]
             visible:    ( securityList.selectedIndex == 2 || securityList.selectedIndex == 4) // WPA or D-WEP
-                        && ( authList.selectedIndex == 1 ||
-                            authList.selectedIndex == 3 ||
-                            authList.selectedIndex == 4  )
+                     && ( authList.selectedIndex == 1 ||
+                          authList.selectedIndex == 3 ||
+                          authList.selectedIndex == 4   )
         }
 
         Label {
@@ -336,9 +336,9 @@ Component {
             font.bold: false
             color: Theme.palette.selected.backgroundText
             visible:    ( securityList.selectedIndex == 2 || securityList.selectedIndex == 4) // WPA or D-WEP
-                        && ( authList.selectedIndex == 0 ||
-                            authList.selectedIndex == 1 ||
-                            authList.selectedIndex == 3  )
+                     && ( authList.selectedIndex == 0 ||
+                          authList.selectedIndex == 1 ||
+                          authList.selectedIndex == 3  )
         }
 
         ListItem.ItemSelector {
@@ -348,40 +348,42 @@ Component {
                 right: parent.right
             }
             visible:    ( securityList.selectedIndex == 2 || securityList.selectedIndex == 4) // WPA or D-WEP
-                        && ( authList.selectedIndex == 0 ||
-                            authList.selectedIndex == 1 ||
-                            authList.selectedIndex == 3  )
+                     && ( authList.selectedIndex == 0 ||
+                          authList.selectedIndex == 1 ||
+                          authList.selectedIndex == 3  )
             model: cacertListModel
             expanded: false
             delegate: certSelectorDelegate
             selectedIndex: 0
-            property string cacertFileName: { if( cacertSelector.selectedIndex !== 0 &&
-                                                  cacertSelector.selectedIndex !== (cacertListModel.rowCount()-1)){
-                                                  cacertListModel.getfileName(cacertSelector.selectedIndex)
-                                              } else {"";}
+            property string cacertFileName: {
+                if( cacertSelector.selectedIndex !== 0 &&
+                    cacertSelector.selectedIndex !== (cacertListModel.rowCount()-1)){
+                    cacertListModel.getfileName(cacertSelector.selectedIndex)
+                } else {"";}
             }
             onSelectedIndexChanged: {
                 if (cacertSelector.selectedIndex === cacertListModel.rowCount()-1){
+                    cacertSelector.selectedIndex = 0
                     var pickerDialog = PopupUtils.open(Qt.resolvedUrl("./CertPicker.qml"));
                     pickerDialog.fileImportSignal.connect(function(file){
-                        certDialogLoader.source = "./CertDialog.qml";
-                        var cacertDialog = PopupUtils.open(certDialogLoader.item, cacertSelector, {fileName: file, certType: 0});
-                        cacertDialog.updateSignal.connect(function(update){
-                            if (update) {cacertListModel.dataupdate();}
-                        });
+                        if (!file === false){
+                            certDialogLoader.source = "./CertDialog.qml";
+                            var cacertDialog = PopupUtils.open(certDialogLoader.item, cacertSelector, {fileName: file, certType: 0});
+                            cacertDialog.updateSignal.connect(function(update){
+                                if (update) {cacertListModel.dataupdate();}
+                            });
+                        }
                     });
                 }
             }
-
-
         }
 
         Component{
             id: certSelectorDelegate
             OptionSelectorDelegate { text: (CommonName.length > 32) ? CommonName.substr(0,30).concat("…") : CommonName
-                                     subText:(CommonName !== i18n.tr("None") && CommonName !== i18n.tr("Choose…")) ?
-                                             ( ( (Organization.length > 15) ? Organization.substr(0,13).concat("…") : Organization)
-                                               + ", Exp.date: " + expiryDate) : ""
+                subText:(CommonName !== i18n.tr("None") && CommonName !== i18n.tr("Choose…")) ?
+                ( ( (Organization.length > 15) ? Organization.substr(0,13).concat("…") : Organization)
+                + ", Exp.date: " + expiryDate) : ""
             }
         }
 
@@ -389,7 +391,7 @@ Component {
             id: cacertListModel
         }
 
-        Loader{
+        Loader {
             id: certDialogLoader
             asynchronous: false
         }
@@ -402,7 +404,7 @@ Component {
             font.bold: false
             color: Theme.palette.selected.backgroundText
             visible:    ( securityList.selectedIndex == 2 || securityList.selectedIndex == 4)
-                        && ( authList.selectedIndex == 0 ) // only for TLS
+                     && ( authList.selectedIndex == 0 ) // only for TLS
 
         }
 
@@ -413,26 +415,30 @@ Component {
                 right: parent.right
             }
             visible:    ( securityList.selectedIndex == 2 || securityList.selectedIndex == 4)
-                        && ( authList.selectedIndex == 0 ) // only for TLS
+                     && ( authList.selectedIndex == 0 ) // only for TLS
             model: cacertListModel
             expanded: false
             delegate: certSelectorDelegate
             selectedIndex: 0
-            property string usercertFileName: { if(usercertSelector.selectedIndex !== 0 &&
-                                                   usercertSelector.selectedIndex !== (cacertListModel.rowCount()-1)){
-                                                   cacertListModel.getfileName(usercertSelector.selectedIndex)
-                                                } else {"";}
+            property string usercertFileName: {
+                if( usercertSelector.selectedIndex !== 0 &&
+                    usercertSelector.selectedIndex !== (cacertListModel.rowCount()-1)){
+                      cacertListModel.getfileName(usercertSelector.selectedIndex)
+                } else {"";}
             }
             onSelectedIndexChanged: {
-               if (usercertSelector.selectedIndex === cacertListModel.rowCount()-1){
+                if (usercertSelector.selectedIndex === cacertListModel.rowCount()-1){
+                    usercertSelector.selectedIndex = 0;
                     var pickerDialog = PopupUtils.open(Qt.resolvedUrl("./CertPicker.qml"));
                     pickerDialog.fileImportSignal.connect(function(file){
-                        certDialogLoader.source = "./CertDialog.qml";
-                        var usercertDialog = PopupUtils.open(certDialogLoader.item, usercertSelector, {fileName: file, certType: 0});
-                        usercertDialog.updateSignal.connect(function(update){
-                            if (update) {cacertListModel.dataupdate();}
-                        });                    
-					});
+                        if (!file === false){
+                            certDialogLoader.source = "./CertDialog.qml";
+                            var usercertDialog = PopupUtils.open(certDialogLoader.item, usercertSelector, {fileName: file, certType: 0});
+                            usercertDialog.updateSignal.connect(function(update){
+                                if (update) {cacertListModel.dataupdate();}
+                            });
+                        }
+                    });
                 }
             }
         }
@@ -445,7 +451,7 @@ Component {
             font.bold: false
             color: Theme.palette.selected.backgroundText
             visible:    ( securityList.selectedIndex == 2 || securityList.selectedIndex == 4)
-                        && ( authList.selectedIndex == 0 ) // only for TLS
+                     && ( authList.selectedIndex == 0 ) // only for TLS
         }
 
         PrivatekeyListModel {
@@ -454,11 +460,11 @@ Component {
 
         Component{
             id: privatekeySelectorDelegate
-            OptionSelectorDelegate { text: KeyName;
-                                     subText:(KeyName !== i18n.tr("None") && KeyName !== i18n.tr("Choose…")) ?
-                                             (KeyType + ", " + KeyAlgorithm +", " + KeyLength + " bit" ) : ""
+            OptionSelectorDelegate {
+                text: KeyName;
+                subText:(KeyName !== i18n.tr("None") && KeyName !== i18n.tr("Choose…")) ?
+                        (KeyType + ", " + KeyAlgorithm +", " + KeyLength + " bit" ) : ""
             }
-
         }
 
         ListItem.ItemSelector {
@@ -473,21 +479,25 @@ Component {
             expanded: false
             delegate: privatekeySelectorDelegate
             selectedIndex: 0
-            property string privateKeyFileName: { if(privateKeySelector.selectedIndex !== 0 &&
-                                                     privateKeySelector.selectedIndex !== (privatekeyListModel.rowCount()-1)){
-                                                     privatekeyListModel.getfileName(privateKeySelector.selectedIndex)
-                                                  } else {"";}
+            property string privateKeyFileName: {
+                if(privateKeySelector.selectedIndex !== 0 &&
+                   privateKeySelector.selectedIndex !== (privatekeyListModel.rowCount()-1)){
+                      privatekeyListModel.getfileName(privateKeySelector.selectedIndex)
+                } else {"";}
             }
             onSelectedIndexChanged: {
                 if (privateKeySelector.selectedIndex === privatekeyListModel.rowCount()-1){
+                    privateKeySelector.selectedIndex = 0;
                     var pickerDialog = PopupUtils.open(Qt.resolvedUrl("./CertPicker.qml"));
                     pickerDialog.fileImportSignal.connect(function(file){
-                        certDialogLoader.source = "./CertDialog.qml";
-                        var privatekeyDialog = PopupUtils.open(certDialogLoader.item, privateKeySelector, {fileName: file, certType: 1});
-                        privatekeyDialog.updateSignal.connect(function(update){
-                            if (update) {privatekeyListModel.dataupdate();}
-                        });               
-					});
+                        if (!file === false){
+                            certDialogLoader.source = "./CertDialog.qml";
+                            var privatekeyDialog = PopupUtils.open(certDialogLoader.item, privateKeySelector, {fileName: file, certType: 1});
+                            privatekeyDialog.updateSignal.connect(function(update){
+                                if (update) {privatekeyListModel.dataupdate();}
+                            });
+                        }
+                    });
                 }
             }
         }
@@ -503,7 +513,6 @@ Component {
                      && ( authList.selectedIndex == 3  )
         }
 
-
         PacFileListModel {
             id: pacFileListModel
         }
@@ -511,7 +520,6 @@ Component {
         Component{
             id: pacFileSelectorDelegate
             OptionSelectorDelegate { text: pacFileName; }
-
         }
 
         ListItem.ItemSelector {
@@ -526,20 +534,25 @@ Component {
             expanded: false
             delegate: pacFileSelectorDelegate
             selectedIndex: 0
-            property string pacFileName: { if(pacFileSelector.selectedIndex !== 0 &&
-                                                     pacFileSelector.selectedIndex !== (pacFileListModel.rowCount()-1)){
-                                                     pacFileListModel.getfileName(pacFileSelector.selectedIndex)
-                                                  } else {"";}
+            property string pacFileName: {
+                if(pacFileSelector.selectedIndex !== 0 &&
+                   pacFileSelector.selectedIndex !== (pacFileListModel.rowCount()-1)){
+                       pacFileListModel.getfileName(pacFileSelector.selectedIndex)
+                } else {"";}
             }
             onSelectedIndexChanged: {
                 if (pacFileSelector.selectedIndex === pacFileListModel.rowCount()-1){
+                    pacFileSelector.selectedIndex = 0;
                     var pickerDialog = PopupUtils.open(Qt.resolvedUrl("./CertPicker.qml"));
                     pickerDialog.fileImportSignal.connect(function(file){
-                        certDialogLoader.source = "./CertDialog.qml";
-                        var pacDialog = PopupUtils.open(certDialogLoader.item, pacFileSelector, {fileName: file, certType: 2});
-                        pacDialog.updateSignal.connect(function(update){
-                            if (update) {pacFileListModel.dataupdate();}
-                        });
+                        if (!file === false){
+                            certDialogLoader.source = "./CertDialog.qml";
+                            var pacDialog = PopupUtils.open(certDialogLoader.item, pacFileSelector, {fileName: file, certType: 2});
+                            pacDialog.updateSignal.connect(function(update){
+                                if (update) {pacFileListModel.dataupdate();}
+                            });
+                        }
+
                     });
                 }
             }
@@ -554,8 +567,7 @@ Component {
             color: Theme.palette.selected.backgroundText
             elide: Text.ElideRight
             visible:    ( securityList.selectedIndex == 2 || securityList.selectedIndex == 4)
-                        && ( authList.selectedIndex == 3 )
-
+                     && ( authList.selectedIndex == 3 )
         }
 
         ListItem.ItemSelector {
@@ -568,7 +580,7 @@ Component {
             ]
             selectedIndex: 1
             visible:    ( securityList.selectedIndex == 2 || securityList.selectedIndex == 4)
-                        && ( authList.selectedIndex == 3 )
+                     && ( authList.selectedIndex == 3 )
         }
 
         Label {
@@ -596,8 +608,8 @@ Component {
         Label {
             id: usernameLabel
             text : {
-                if (     ( securityList.selectedIndex == 2 || securityList.selectedIndex == 4)
-                      && ( authList.selectedIndex == 0 )) {
+                if (    ( securityList.selectedIndex == 2 || securityList.selectedIndex == 4)
+                     && ( authList.selectedIndex == 0 )) {
                     i18n.tr("Identity")
                 }
                 else {
@@ -634,7 +646,6 @@ Component {
                     i18n.tr("Password")
                 }
             }
-
             objectName: "passwordListLabel"
             fontSize: "medium"
             font.bold: false
@@ -693,7 +704,7 @@ Component {
             layoutDirection: Qt.LeftToRight
             spacing: units.gu(2)
             visible: (    ( securityList.selectedIndex == 2 || securityList.selectedIndex == 4)
-                       && ( authList.selectedIndex == 1 || authList.selectedIndex == 3 || authList.selectedIndex == 4) )
+                      && ( authList.selectedIndex == 1 || authList.selectedIndex == 3 || authList.selectedIndex == 4) )
 
             CheckBox {
                 id: passwordRememberSwitch
@@ -719,7 +730,6 @@ Component {
                     }
                 }
             }
-
         }
 
         Label {
@@ -791,13 +801,13 @@ Component {
             enabled: settingsValid()
             onTriggered: {
                 DbusHelper.connect(
-                            networkname.text,
-                            securityList.selectedIndex,
-                            authList.selectedIndex,
-                            [username.text, anonymousIdentity.text],
-                            [password.text, passwordRememberSwitch.checked],
-                            [cacertSelector.cacertFileName, usercertSelector.usercertFileName, privateKeySelector.privateKeyFileName, pacFileSelector.pacFileName, pacProvisioningList.selectedIndex.toString()] ,
-                            p2authList.selectedIndex);
+                    networkname.text,
+                    securityList.selectedIndex,
+                    authList.selectedIndex,
+                    [username.text, anonymousIdentity.text],
+                    [password.text, passwordRememberSwitch.checked],
+                    [cacertSelector.cacertFileName, usercertSelector.usercertFileName, privateKeySelector.privateKeyFileName, pacFileSelector.pacFileName, pacProvisioningList.selectedIndex.toString()] ,
+                    p2authList.selectedIndex);
                 otherNetworkDialog.state = "CONNECTING";
             }
         }
@@ -844,4 +854,3 @@ Component {
         }
     }
 }
-

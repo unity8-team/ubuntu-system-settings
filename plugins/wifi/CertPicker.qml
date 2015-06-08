@@ -49,11 +49,10 @@ PopupBase  {
                     picker.fileImportSignal(fileUrl.toString().replace("file://", ""));
                     PopupUtils.close(picker);
                 }
-
             } else if (picker.activeTransfer.state === ContentTransfer.Aborted){
+                picker.fileImportSignal(false);
                 PopupUtils.close(picker);
             }
         }
     }
-
 }

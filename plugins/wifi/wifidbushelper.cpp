@@ -37,13 +37,11 @@
 typedef QMap<QString,QVariantMap> ConfigurationData;
 Q_DECLARE_METATYPE(ConfigurationData)
 
-
 WifiDbusHelper::WifiDbusHelper(QObject *parent) : QObject(parent),
-      m_systemBusConnection(QDBusConnection::systemBus())
+    m_systemBusConnection(QDBusConnection::systemBus())
 {
     qDBusRegisterMetaType<ConfigurationData>();
 }
-
 
 void WifiDbusHelper::connect(QString ssid, int security, int auth, QStringList usernames, QStringList password, QStringList certs, int p2auth)
 {
@@ -108,78 +106,77 @@ void WifiDbusHelper::connect(QString ssid, int security, int auth, QStringList u
 
     if (security == 2 || security == 4){
 
-    QVariantMap wireless_802_1x;
-    // [802-1x]
-    /*TLS   // index: 0
-      TTLS  // index: 1
-      LEAP  // index: 2
-      FAST  // index: 3
-      PEAP  // index: 4 */
-
-    wireless_802_1x["identity"] = usernames[0];
-    if (auth != 0) {
-        wireless_802_1x["password"] = password[0];
-    }
-
-    QByteArray cacert("file://");
-    QByteArray clientcert("file://");
-    QByteArray privatekey("file://");
-    QString pacFile;
-
-    cacert.append( certs[0] );
-    if (auth == 0) { // TLS
-        wireless_802_1x["eap"] = QStringList("tls");
-        wireless_802_1x["ca-cert"]  = cacert;
-        clientcert.append( certs[1] );
-        wireless_802_1x["client-cert"] = clientcert;
-        privatekey.append( certs [2]);
-        wireless_802_1x["private-key"] = privatekey;
-        wireless_802_1x["private-key-password"] = password[0];
-    } else if (auth == 1) { // TTLS
-        wireless_802_1x["eap"] = QStringList("ttls");
-        wireless_802_1x["ca-cert"]  = cacert;
-        if (usernames[1] != "") {wireless_802_1x["anonymous-identity"]  = usernames[1];}
-        if (!password[1].toInt()) {wireless_802_1x["password-flags"] = QStringLiteral("2");}
-    } else if (auth == 2) { // LEAP
-        wireless_802_1x["eap"] = QStringList("leap");
-    } else if (auth == 3) { // FAST
-        wireless_802_1x["eap"] = QStringList("fast");
-        wireless_802_1x["ca-cert"]  = cacert;
-        if (usernames[1] != "") {wireless_802_1x["anonymous-identity"]  = usernames[1];}
-        if (!password[1].toInt()) {wireless_802_1x["password-flags"] = QStringLiteral("2");}
-        pacFile.append( certs[3] );
-        wireless_802_1x["pac-file"]  = pacFile;
-        wireless_802_1x["phase1-fast-provisioning"] = certs[4];
-    } else if (auth == 4) { // PEAP
-        wireless_802_1x["eap"] = QStringList("peap");
-        wireless_802_1x["phase1-peaplabel"] = QString("1");
-        if (usernames[1] != "") {wireless_802_1x["anonymous-identity"]  = usernames[1];}
-        if (!password[1].toInt()) {wireless_802_1x["password-flags"] = QStringLiteral("2");}
-         //wireless_802_1x["phase1-peapver"] = QString("0"); #jkb:let us unset this until problems are reported.
-    }
-
-    if (auth == 1 || auth == 3 || auth == 4 ){ // only for TTLS, FAST and PEAP
-        /* PAP      // index: 0
-           MSCHAPv2 // index: 1
-           MSCHAP   // index: 2
-           CHAP     // index: 3
-           GTC      // index: 4
-           MD5      // index: 5        */
-        if (p2auth == 0) {
-            wireless_802_1x["phase2-auth"] = QStringLiteral("pap");
-        } else if (p2auth == 1) {
-            wireless_802_1x["phase2-auth"] = QStringLiteral("mschapv2");
-        } else if (p2auth == 2) {
-            wireless_802_1x["phase2-auth"] = QStringLiteral("mschap");
-        } else if (p2auth == 3) {
-            wireless_802_1x["phase2-auth"] = QStringLiteral("chap");
-        } else if (p2auth == 4) {
-            wireless_802_1x["phase2-auth"] = QStringLiteral("gtc");
-        } else if (p2auth == 5) {
-            wireless_802_1x["phase2-auth"] = QStringLiteral("md5");
+        QVariantMap wireless_802_1x;
+        // [802-1x]
+        /*TLS   // index: 0
+          TTLS  // index: 1
+          LEAP  // index: 2
+          FAST  // index: 3
+          PEAP  // index: 4 */
+        wireless_802_1x["identity"] = usernames[0];
+        if (auth != 0) {
+            wireless_802_1x["password"] = password[0];
         }
-    }
-    configuration["802-1x"] = wireless_802_1x;
+
+        QByteArray cacert("file://");
+        QByteArray clientcert("file://");
+        QByteArray privatekey("file://");
+        QString pacFile;
+
+        cacert.append( certs[0] );
+        if (auth == 0) { // TLS
+            wireless_802_1x["eap"] = QStringList("tls");
+            wireless_802_1x["ca-cert"]  = cacert;
+            clientcert.append( certs[1] );
+            wireless_802_1x["client-cert"] = clientcert;
+            privatekey.append( certs [2]);
+            wireless_802_1x["private-key"] = privatekey;
+            wireless_802_1x["private-key-password"] = password[0];
+        } else if (auth == 1) { // TTLS
+            wireless_802_1x["eap"] = QStringList("ttls");
+            wireless_802_1x["ca-cert"]  = cacert;
+            if (usernames[1] != "") {wireless_802_1x["anonymous-identity"]  = usernames[1];}
+            if (!password[1].toInt()) {wireless_802_1x["password-flags"] = QStringLiteral("2");}
+        } else if (auth == 2) { // LEAP
+            wireless_802_1x["eap"] = QStringList("leap");
+        } else if (auth == 3) { // FAST
+            wireless_802_1x["eap"] = QStringList("fast");
+            wireless_802_1x["ca-cert"]  = cacert;
+            if (usernames[1] != "") {wireless_802_1x["anonymous-identity"]  = usernames[1];}
+            if (!password[1].toInt()) {wireless_802_1x["password-flags"] = QStringLiteral("2");}
+            pacFile.append( certs[3] );
+            wireless_802_1x["pac-file"]  = pacFile;
+            wireless_802_1x["phase1-fast-provisioning"] = certs[4];
+        } else if (auth == 4) { // PEAP
+            wireless_802_1x["eap"] = QStringList("peap");
+            wireless_802_1x["phase1-peaplabel"] = QString("1");
+            if (usernames[1] != "") {wireless_802_1x["anonymous-identity"]  = usernames[1];}
+            if (!password[1].toInt()) {wireless_802_1x["password-flags"] = QStringLiteral("2");}
+            //wireless_802_1x["phase1-peapver"] = QString("0"); #jkb:let us unset this until problems are reported.
+        }
+
+        if (auth == 1 || auth == 3 || auth == 4 ){ // only for TTLS, FAST and PEAP
+            /* PAP      // index: 0
+               MSCHAPv2 // index: 1
+               MSCHAP   // index: 2
+               CHAP     // index: 3
+               GTC      // index: 4
+               MD5      // index: 5 */
+            if (p2auth == 0) {
+                wireless_802_1x["phase2-auth"] = QStringLiteral("pap");
+            } else if (p2auth == 1) {
+                wireless_802_1x["phase2-auth"] = QStringLiteral("mschapv2");
+            } else if (p2auth == 2) {
+                wireless_802_1x["phase2-auth"] = QStringLiteral("mschap");
+            } else if (p2auth == 3) {
+                wireless_802_1x["phase2-auth"] = QStringLiteral("chap");
+            } else if (p2auth == 4) {
+                wireless_802_1x["phase2-auth"] = QStringLiteral("gtc");
+            } else if (p2auth == 5) {
+                wireless_802_1x["phase2-auth"] = QStringLiteral("md5");
+            }
+        }
+        configuration["802-1x"] = wireless_802_1x;
     }
 
     // find the first wlan adapter for now
@@ -212,20 +209,20 @@ void WifiDbusHelper::connect(QString ssid, int security, int auth, QStringList u
     }
 
     mgr.connection().disconnect(
-        mgr.service(),
-        dev.path(),
-        NM_DEVICE_IFACE,
-        "StateChanged",
-        this,
-        SLOT(nmDeviceStateChanged(uint, uint, uint)));
+                mgr.service(),
+                dev.path(),
+                NM_DEVICE_IFACE,
+                "StateChanged",
+                this,
+                SLOT(nmDeviceStateChanged(uint, uint, uint)));
 
     mgr.connection().connect(
-        mgr.service(),
-        dev.path(),
-        NM_DEVICE_IFACE,
-        "StateChanged",
-        this,
-        SLOT(nmDeviceStateChanged(uint, uint, uint)));
+                mgr.service(),
+                dev.path(),
+                NM_DEVICE_IFACE,
+                "StateChanged",
+                this,
+                SLOT(nmDeviceStateChanged(uint, uint, uint)));
 
     QDBusObjectPath tmp;
     auto reply2 = mgr.AddAndActivateConnection(configuration,
@@ -239,13 +236,12 @@ void WifiDbusHelper::connect(QString ssid, int security, int auth, QStringList u
 
 
 void WifiDbusHelper::nmDeviceStateChanged(uint newState,
-                                           uint oldState,
-                                           uint reason)
+                                          uint oldState,
+                                          uint reason)
 {
     Q_UNUSED (oldState);
     Q_EMIT (deviceStateChanged(newState, reason));
 }
-
 
 QString WifiDbusHelper::getWifiIpAddress()
 {
@@ -289,7 +285,6 @@ QString WifiDbusHelper::getWifiIpAddress()
     ip_addr.s_addr = ip4addr;
     return QString(inet_ntoa(ip_addr));
 }
-
 
 struct Network : public QObject
 {
@@ -443,11 +438,10 @@ struct Network : public QObject
     QMap<QString, QVariantMap> settings;
 };
 
-
 QList<QStringList> WifiDbusHelper::getPreviouslyConnectedWifiNetworks() {
     QList<QStringList> networks;
 
-   OrgFreedesktopNetworkManagerSettingsInterface foo
+    OrgFreedesktopNetworkManagerSettingsInterface foo
             (NM_SERVICE,
              "/org/freedesktop/NetworkManager/Settings",
              QDBusConnection::systemBus());
@@ -482,7 +476,6 @@ QList<QStringList> WifiDbusHelper::getPreviouslyConnectedWifiNetworks() {
     return networks;
 }
 
-
 void WifiDbusHelper::forgetConnection(const QString dbus_path) {
     OrgFreedesktopNetworkManagerSettingsConnectionInterface bar
             (NM_SERVICE,
@@ -494,7 +487,6 @@ void WifiDbusHelper::forgetConnection(const QString dbus_path) {
         qWarning() << "Error forgetting network: " << reply.error().message() << "\n";
     }
 }
-
 
 bool WifiDbusHelper::forgetActiveDevice() {
     OrgFreedesktopNetworkManagerInterface mgr(NM_SERVICE,
@@ -523,7 +515,7 @@ bool WifiDbusHelper::forgetActiveDevice() {
                 auto ac_path_var = iface.property("ActiveConnection");
                 if(!ac_path_var.isValid()) {
                     qWarning() << __PRETTY_FUNCTION__ << ": Could not get active connection property from "
-                            << d.path() << ".\n";
+                               << d.path() << ".\n";
                     return true;
                 }
                 QString ac_path = ac_path_var.value<QDBusObjectPath>().path();
@@ -531,7 +523,7 @@ bool WifiDbusHelper::forgetActiveDevice() {
                 auto conn_path_var = ac_iface.property("Connection");
                 if(!conn_path_var.isValid()) {
                     qWarning() << __PRETTY_FUNCTION__ << ": Could not get connection path property from "
-                            << ac_path << ".\n";
+                               << ac_path << ".\n";
                     return false;
                 }
                 forgetConnection(conn_path_var.value<QDBusObjectPath>().path());
