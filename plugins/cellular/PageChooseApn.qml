@@ -237,6 +237,40 @@ ItemPage {
     }
 
     Component {
+        id: disableContextWarning
+        Dialog {
+            id: dialogue
+            property OfonoContextConnection context
+            /* TRANSLATORS: %1 is the APN that the user has disconnected or
+            disabled. */
+            title: context.type === 'internet' ?
+                i18n.tr("Disconnect %1").arg(context.name) :
+                i18n.tr("Disable %1").arg(context.name)
+
+            /* TRANSLATORS: %1 is the APN that the user has disconnected or
+            disabled. */
+            text: context.type === 'internet' ?
+                i18n.tr("This disconnects %1.").arg(context.name) :
+                i18n.tr("This disables %1.").arg(context.name)
+
+            Button {
+                text: context.type === 'mms' ?
+                    i18n.tr("Disable") :
+                    i18n.tr("Disconnect")
+                onClicked: {
+                    Manager.setPreferred(context, false, true);
+                    PopupUtils.close(dialogue);
+                }
+            }
+
+            Button {
+                text: i18n.tr("Cancel")
+                onClicked: PopupUtils.close(dialogue)
+            }
+        }
+    }
+
+    Component {
         id: apnsDelegate
 
         Repeater {

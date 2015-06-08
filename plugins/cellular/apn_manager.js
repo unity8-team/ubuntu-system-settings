@@ -411,13 +411,21 @@ function setPreferred (context, value, force) {
     var mmsPreferralCausesCombinedDePreferral;
     var internetPreferralCausesCombinedDePreferral;
 
+    // The context is about to be de-preferred.
     if (!value) {
-        context.preferred = false;
+        if (force) {
+            context.preferred = false;
+        } else {
+            PopupUtils.open(disableContextWarning, root, {
+                context: context
+            });
+            this.checked = true;
+        }
         return;
     }
 
     // If user is preferring standalone Internet or standalone MMS context,
-    // we will give a warning, if not forced.
+    // over a combined context, we will give a warning, if not forced.
     conflictingContexts.forEach(function (ctxC) {
         if (ctxC.isCombined) {
             if (context.type === 'mms') {
