@@ -205,7 +205,8 @@ ItemPage {
             }
 
             ListItem.Caption {
-                text: i18n.tr("Adds a period, and any missing quotes or brackets, when you tap Space twice.")
+                /* TODO: update the string to mention quotes/brackets once the osk does that */
+                text: i18n.tr("Inserts a period when you tap Space twice.")
             }
 
             ListItem.ThinDivider {
