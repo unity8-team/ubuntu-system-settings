@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-10-16 20:04-0600\n"
-"PO-Revision-Date: 2015-05-13 13:45+0000\n"
+"PO-Revision-Date: 2015-06-01 08:16+0000\n"
 "Last-Translator: Ivo Xavier <ivofernandes12@gmail.com>\n"
 "Language-Team: Portuguese <pt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2015-05-14 04:59+0000\n"
-"X-Generator: Launchpad (build 17493)\n"
+"X-Launchpad-Export-Date: 2015-06-02 05:36+0000\n"
+"X-Generator: Launchpad (build 17532)\n"
 
 #: ubuntu-system-settings.desktop.in.in.h:1 ../src/qml/MainWindow.qml:112
 msgid "System Settings"
@@ -112,7 +112,7 @@ msgstr "Não foi dada uma razão"
 
 #: ../plugins/wifi//Common.qml:40
 msgid "Device is now managed"
-msgstr "O dispositivo está agora a ser gerido"
+msgstr "O dispositivo é agora gerido"
 
 #: ../plugins/wifi//Common.qml:42
 msgid "Device is now unmanaged"
@@ -175,8 +175,7 @@ msgstr "Falha no serviço de partilha de ligação"
 
 #: ../plugins/wifi//Common.qml:70
 msgid "Necessary firmware for the device may be missing"
-msgstr ""
-"O \"firmware\" necessário para o dispositivo pode não estar instalado"
+msgstr "O firmware necessário para o dispositivo pode não estar instalado"
 
 #: ../plugins/wifi//Common.qml:72
 msgid "The device was removed"
@@ -224,7 +223,7 @@ msgstr "A rede Wi-Fi não foi encontrada"
 
 #: ../plugins/wifi//Common.qml:94
 msgid "A secondary connection of the base connection failed"
-msgstr "A ligaçãosecundária da ligação base falhou"
+msgstr "A ligação secundária da ligação base falhou"
 
 #: ../plugins/bluetooth//PageComponent.qml:104 ../plugins/wifi//Common.qml:96
 msgid "Unknown"
@@ -420,7 +419,7 @@ msgstr "Restaurar Launcher"
 
 #: ../plugins/reset//PageComponent.qml:87
 msgid "Reset all system settings…"
-msgstr "Repor todas as definições do sistema..."
+msgstr "Repor todas as definições..."
 
 #: ../plugins/reset//PageComponent.qml:101
 msgid "Erase & Reset Everything…"
@@ -436,7 +435,7 @@ msgstr ""
 
 #: ../plugins/reset//ResetAllSettings.qml:31
 msgid "Reset all system settings"
-msgstr "Repor todas as definições do sistema"
+msgstr "Repor todas as definições"
 
 #: ../plugins/reset//ResetLauncherHome.qml:40
 msgid "The Launcher will be returned to its original contents."
@@ -1742,7 +1741,7 @@ msgstr "Fuso horário:"
 
 #: ../plugins/time-date//PageComponent.qml:66
 msgid "Set the time and date:"
-msgstr "Defina a data e a hora:"
+msgstr "Definir data e hora:"
 
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
 #: ../plugins/system-update//PageComponent.qml:37
@@ -1756,7 +1755,7 @@ msgstr "Atualizar o Sistema"
 
 #: ../plugins/system-update//PageComponent.qml:91
 msgid "The phone needs to restart to install the system update."
-msgstr "Precisa de reiniciar para instalar as atualizações do sistema."
+msgstr "Precisa de reiniciar para instalar a atualização do sistema."
 
 #: ../plugins/system-update//PageComponent.qml:91
 msgid "Connect the phone to power before installing the system update."
@@ -1826,7 +1825,7 @@ msgstr[1] "Instalar %1 atualizações"
 
 #: ../plugins/system-update//PageComponent.qml:313
 msgid "Pause All"
-msgstr "Pausar Tudo"
+msgstr "Pausar tudo"
 
 #: ../plugins/system-update//PageComponent.qml:448
 msgid "Install…"

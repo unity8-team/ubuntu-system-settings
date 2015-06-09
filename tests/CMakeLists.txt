@@ -32,7 +32,7 @@ add_executable(tst-arguments
 )
 
 qt5_use_modules(tst-plugins Core Qml Test)
-target_link_libraries(tst-plugins SystemSettings)
+target_link_libraries(tst-plugins SystemSettings ${GLIB_LDFLAGS})
 add_test(tst-plugins tst-plugins)
 set_tests_properties(tst-plugins PROPERTIES ENVIRONMENT "QT_QPA_PLATFORM=minimal")
 

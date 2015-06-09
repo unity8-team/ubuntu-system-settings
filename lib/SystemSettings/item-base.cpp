@@ -40,6 +40,7 @@ const QLatin1String keyPageComponent("page-component");
 const QLatin1String keyHasDynamicKeywords("has-dynamic-keywords");
 const QLatin1String keyHasDynamicVisibility("has-dynamic-visibility");
 const QLatin1String keyHideByDefault("hide-by-default");
+const QLatin1String keyVisibleIfFileExists("visible-if-file-exists");
 
 class ItemBasePrivate
 {

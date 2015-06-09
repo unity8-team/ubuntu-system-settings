@@ -194,15 +194,6 @@ ItemPage {
                 visible: showAllUI
             }
 
-            ListItem.SingleValue {
-                id: dashSearchId
-                text: i18n.tr("Dash search")
-                value: (unitySettings.remoteContentSearch === 'all') ?
-                           i18n.tr("Phone and Internet") :
-                           i18n.tr("Phone only")
-                progression: true
-                onClicked: pageStack.push(Qt.resolvedUrl("Dash.qml"))
-            }
             QDBusActionGroup {
                 id: locationActionGroup
                 busType: DBus.SessionBus

@@ -60,6 +60,14 @@ class SecurityTestCase(SecurityBaseTestCase):
             prev = gsettings.get_uint('idle-delay')
             return prev
 
+    def _get_dim_timeout(self):
+        if self.use_powerd:
+            gsettings = Gio.Settings.new('com.ubuntu.touch.system')
+            prev = gsettings.get_uint('dim-timeout')
+            return prev
+        else:
+            return None
+
     def _go_to_phone_lock(self):
         selector = self.security_page.select_single(
             objectName='lockingControl'
@@ -104,6 +112,7 @@ class SecurityTestCase(SecurityBaseTestCase):
 
     def test_locking_control_value(self):
         actTimeout = self._get_activity_timeout()
+        dimTimeout = self._get_dim_timeout()
         activityTimeout = self.security_page.select_single(
             objectName='lockingControl').value
         if actTimeout is 0:
@@ -112,10 +121,14 @@ class SecurityTestCase(SecurityBaseTestCase):
             self.assertEquals(
                 activityTimeout,
                 ('After {:d} minute').format(int(actTimeout/60)))
+            if dimTimeout:
+                self.assertEquals(dimTimeout, actTimeout - 10)
         else:
             self.assertEquals(
                 activityTimeout,
                 ('After {:d} minutes').format(int(actTimeout/60)))
+            if dimTimeout:
+                self.assertEquals(dimTimeout, actTimeout - 10)
 
     def test_phone_lock_page(self):
         self._go_to_phone_lock()

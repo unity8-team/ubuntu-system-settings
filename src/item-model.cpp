@@ -20,6 +20,7 @@
 
 #include "item-model.h"
 
+#include <glib.h>
 #include <libintl.h>
 
 #include "debug.h"
@@ -189,17 +190,27 @@ bool ItemModelSortProxy::filterAcceptsRow(
         int source_row, const QModelIndex &source_parent) const
 {
     QStringList keywords;
+    gchar * pattern = nullptr;
+    bool ret = false;
     QModelIndex index = sourceModel()->index(source_row, 0, source_parent);
 
     QVariant data(sourceModel()->data(index, filterRole()));
+    pattern = g_strdup(filterRegExp().pattern().toStdString().c_str());
 
     switch (filterRole()) {
     case ItemModel::KeywordRole:
         keywords = data.value<QStringList>();
-        return keywords.filter(filterRegExp()).length() > 0;
+
+        foreach (const QString& s, keywords)
+            if (g_str_match_string (pattern, s.toStdString().c_str(), TRUE)) {
+                ret = true;
+                goto out;
+            }
     default:
-        return false;
+        ret = false;
     }
 
-    return true;
+out:
+    g_free (pattern);
+    return ret;
 }
