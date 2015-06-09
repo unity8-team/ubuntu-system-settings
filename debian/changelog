@@ -1,3 +1,26 @@
+ubuntu-system-settings (0.3+15.04.20150609-0ubuntu1) vivid; urgency=medium
+
+  [ Iain Lane ]
+  * Improve filtering in main page and timezone filters. (LP: #1454186,
+    #1446086)
+
+  [ Lukáš Tinkl ]
+  * compare the language and kbd layout names in a locale-aware manner
+
+  [ Sebastien Bacher ]
+  * Translate push_helper expected strings to avoid failure in non C
+    locales
+  * [battery] use round linejoin style to workaround rendering glitches
+    (LP: #1461624)
+  * [battery] use the correct height value for the first point of the
+    graph, that fixes the initial point often starting to high and the
+    curve starting with an almost vertical line
+  * [language] update auto punctuation description to match the osk
+    behaviour
+  * [security-privacy] remove obsolete dash search option
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Tue, 09 Jun 2015 18:18:58 +0000
+
 ubuntu-system-settings (0.3+15.04.20150514-0ubuntu1) vivid; urgency=medium
 
   [ CI Train Bot ]
