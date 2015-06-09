@@ -220,6 +220,12 @@ QStringList Plugin::keywords() const
 bool Plugin::isVisible() const
 {
     Q_D(const Plugin);
+    if (!d->m_data.value(keyVisibleIfFileExists).isNull()) {
+        QFile KeyFile(d->m_data.value(keyVisibleIfFileExists).toString());
+        if (!KeyFile.exists())
+                return false;
+    }
+
     // TODO: visibility check depending on form-factor
     if (d->m_data.value(keyHasDynamicVisibility).toBool()) {
         if (!d->ensureLoaded()) return false;
