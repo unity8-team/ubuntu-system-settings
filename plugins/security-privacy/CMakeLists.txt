@@ -21,7 +21,6 @@ add_definitions(-DHELPER_EXEC="${PLUG_DIR}/UbuntuSecurityPrivacyHelper" -DQT_NO_
 set(QML_SOURCES
     AppAccess.qml
     AppAccessControl.qml
-    Dash.qml
     here-terms.qml
     Location.qml
     LockSecurity.qml
