@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-10-16 20:04-0600\n"
-"PO-Revision-Date: 2015-06-01 08:16+0000\n"
+"PO-Revision-Date: 2015-06-11 09:55+0000\n"
 "Last-Translator: Ivo Xavier <ivofernandes12@gmail.com>\n"
 "Language-Team: Portuguese <pt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2015-06-02 05:36+0000\n"
-"X-Generator: Launchpad (build 17532)\n"
+"X-Launchpad-Export-Date: 2015-06-12 05:29+0000\n"
+"X-Generator: Launchpad (build 17557)\n"
 
 #: ubuntu-system-settings.desktop.in.in.h:1 ../src/qml/MainWindow.qml:112
 msgid "System Settings"
@@ -671,7 +671,7 @@ msgstr "Pontuação automática"
 msgid ""
 "Adds a period, and any missing quotes or brackets, when you tap Space twice."
 msgstr ""
-"Quando carregar duas vezes no espaço adiciona um ponto final, aspas ou "
+"Quando tocar duas vezes no espaço adiciona um ponto final, aspas ou "
 "parênteses em falta."
 
 #: ../plugins/language//PageComponent.qml:225
@@ -1573,7 +1573,7 @@ msgstr "Por tamanho"
 
 #: ../plugins/about//DevMode.qml:35 ../plugins/about//DevMode.qml:90
 msgid "Developer Mode"
-msgstr "Modo de Programador"
+msgstr "Modo de programador"
 
 #: ../plugins/about//DevMode.qml:84
 msgid ""
@@ -2967,4 +2967,4 @@ msgstr "Há uma nova imagem do sistema."
 
 #: ../push-helper/software_updates_helper.py:151
 msgid "Tap to open the system updater."
-msgstr "Carregue para abrir o atualizador do sistema."
+msgstr "Toque para abrir o atualizador do sistema."
