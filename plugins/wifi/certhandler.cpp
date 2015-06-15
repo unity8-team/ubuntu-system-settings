@@ -10,9 +10,11 @@
 #include <QDir>
 #include <QFile>
 
-#define CERTS_PATH "/home/phablet/.local/share/ubuntu-system-settings/wifi/ssl/certs/"
-#define KEYS_PATH  "/home/phablet/.local/share/ubuntu-system-settings/wifi/ssl/private/"
-#define PACS_PATH  "/home/phablet/.local/share/ubuntu-system-settings/wifi/ssl/pac/"
+
+QString appPath = QStandardPaths::writableLocation(QStandardPaths::DataLocation);
+#define CERTS_PATH appPath +"/wifi/ssl/certs/"
+#define KEYS_PATH  appPath +"/wifi/ssl/private/"
+#define PACS_PATH  appPath +"/wifi/ssl/pac/"
 
 #include <libintl.h>
 QString _(const char *text){

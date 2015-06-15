@@ -376,15 +376,22 @@ struct Network : public QObject
         // If the connection has never been activated succesfully there is a
         // high chance that it has no stored secrects.
         if (timestamp != 0) {
-            auto reply = m_iface.GetSecrets("802-11-wireless-security");
+
+            QString secretsType;
+            if (keymgmt == "wpa-psk" && authalg == "open") {
+                secretsType = "802-11-wireless-security";
+            } else if (keymgmt == "wpa-eap" || keymgmt == "ieee8021x") {
+                secretsType = "802-1x";
+            }
+
+            auto reply = m_iface.GetSecrets( secretsType );
             reply.waitForFinished();
             if(!reply.isValid()) {
                 qWarning() << "Error querying secrects: " << reply.error().message() << "\n";
                 return;
             }
             auto secrects = reply.value();
-
-            auto match = secrects.find("802-11-wireless-security");
+            auto match = secrects.find( secretsType );
             if (match != secrects.end()) {
                 auto secrects_security = *match;
 
@@ -392,6 +399,8 @@ struct Network : public QObject
                     password = secrects_security["wep-key0"].toString();
                 } else if (keymgmt == "wpa-psk" && authalg == "open") {
                     password = secrects_security["psk"].toString();
+                } else if (keymgmt == "wpa-eap" || keymgmt == "ieee8021x") {
+                    password = secrects_security["password"].toString();
                 } else {
                 }
             }
