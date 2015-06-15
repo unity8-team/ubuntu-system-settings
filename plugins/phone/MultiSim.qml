@@ -28,76 +28,53 @@ Column {
 
     property var sims
 
-    SettingsItemTitle { text: sims[0].title }
+    spacing: units.gu(2)
 
-    ListItem.Standard {
-        objectName: "callFwdSim1"
-        text: i18n.tr("Call forwarding")
-        progression: true
-        onClicked: pageStack.push(Qt.resolvedUrl("CallForwarding.qml"), {
-            sim: sims[0],
-            headerTitle: sims[0].title
-        })
+    Repeater {
+        model: sims
+
+        SettingsItemTitle { text: sims[index].title }
+
+        ListItem.Standard {
+            objectName: "callFwdSim" + index
+            text: i18n.tr("Call forwarding")
+            progression: true
+            onClicked: pageStack.push(Qt.resolvedUrl("CallForwarding.qml"), {
+                sim: sims[index],
+                headerTitle: sims[index].title
+            })
+        }
+
+        ListItem.Standard {
+            objectName: "callWaitSim" + index
+            text: i18n.tr("Call waiting")
+            progression: true
+            onClicked: pageStack.push(Qt.resolvedUrl("CallWaiting.qml"), {
+                sim: sims[index],
+                headerTitle: sims[index].title
+            })
+        }
+
+        ListItem.Standard {
+            objectName: "simServicesSim" + index
+            text: i18n.tr("Services")
+            progression: true
+            enabled: sims[index].simMng.present
+            onClicked: pageStack.push(Qt.resolvedUrl("Services.qml"), {
+                carrierString: sims[index].netReg.name,
+                sim: sims[index].simMng,
+                headerTitle: sims[index].title
+            })
+        }
+
+        ListItem.Divider {}
+
+        Binding {
+            target: sims[index]
+            property: "name"
+            value: phoneSettings.simNames[modemsSorted[index]]
+        }
     }
-
-    ListItem.Standard {
-        objectName: "callWaitSim1"
-        text: i18n.tr("Call waiting")
-        progression: true
-        onClicked: pageStack.push(Qt.resolvedUrl("CallWaiting.qml"), {
-            sim: sims[0],
-            headerTitle: sims[0].title
-        })
-    }
-
-    ListItem.Standard {
-        objectName: "simServicesSim1"
-        text: i18n.tr("Services")
-        progression: true
-        enabled: sims[0].simMng.present
-        onClicked: pageStack.push(Qt.resolvedUrl("Services.qml"), {
-            carrierString: sims[0].netReg.name,
-            sim: sims[0].simMng,
-            headerTitle: sims[0].title
-        })
-    }
-
-    ListItem.Divider {}
-
-    SettingsItemTitle { text: sims[1].title }
-
-    ListItem.Standard {
-        objectName: "callFwdSim2"
-        text: i18n.tr("Call forwarding")
-        progression: true
-        onClicked: pageStack.push(Qt.resolvedUrl("CallForwarding.qml"), {
-            sim: sims[1],
-            headerTitle: sims[1].title
-        })
-    }
-
-    ListItem.Standard {
-        objectName: "callWaitSim2"
-        text: i18n.tr("Call waiting")
-        progression: true
-        onClicked: pageStack.push(Qt.resolvedUrl("CallWaiting.qml"), {
-            sim: sims[1],
-            headerTitle: sims[1].title
-        })
-    }
-
-    ListItem.Standard {
-        objectName: "simServicesSim2"
-        text: i18n.tr("Services")
-        progression: true
-        enabled: sims[1].simMng.present
-        onClicked: pageStack.push(Qt.resolvedUrl("Services.qml"), {
-            carrierString: sims[1].netReg.name,
-            sim: sims[1].simMng,
-            headerTitle: sims[1].title
-        })
-    }
-
 
     GSettings {
         id: phoneSettings
@@ -116,17 +93,4 @@ Column {
             phoneSettings.simNames = simNames;
         }
     }
-
-    Binding {
-        target: sims[0]
-        property: "name"
-        value: phoneSettings.simNames[modemsSorted[0]]
-    }
-
-    Binding {
-        target: sims[1]
-        property: "name"
-        value: phoneSettings.simNames[modemsSorted[1]]
-    }
-
 }

@@ -1,6 +1,8 @@
 set(QML_SOURCES
     CallForwarding.qml
+    CallForwardItem.qml
     CallWaiting.qml
+    KeyboardRectangle.qml
     MultiSim.qml
     NoSims.qml
     Ofono.qml
@@ -8,6 +10,7 @@ set(QML_SOURCES
     ServiceInfo.qml
     Services.qml
     SingleSim.qml
+    callForwardingUtils.js
     dateUtils.js
     sims.js
 )

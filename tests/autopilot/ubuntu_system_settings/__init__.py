@@ -24,7 +24,6 @@ logging.basicConfig(filename='warning.log', level=logging.WARNING)
 
 from time import sleep
 
-from autopilot.input import Keyboard
 import autopilot.logging
 import ubuntuuitoolkit
 from autopilot import introspection
@@ -587,21 +586,6 @@ class PhonePage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
                 return True
         return False
 
-    @autopilot.logging.log_action(logger.info)
-    def go_to_call_forwarding(self, sim=None):
-        """Open the Call Forwarding settings page.
-
-        :param sim: Number of what SIM to use, either 1 or 2.
-            Required parameter in dual SIM setups
-        :returns: The Call Forwarding settings page.
-
-        """
-        find = "callFwd"
-        if sim:
-            find = "callFwdSim%d" % sim
-
-        return self._go_to_page(find, 'callForwardingPage')
-
     def _go_to_page(self, item_object_name, page_object_name):
         self._click_item(item_object_name)
         page = self.get_root_instance().wait_select_single(
@@ -613,20 +597,6 @@ class PhonePage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
         item = self.select_single(objectName=object_name)
         item.swipe_into_view()
         self.pointing_device.click_object(item)
-
-    @autopilot.logging.log_action(logger.info)
-    def go_to_call_waiting(self, sim=None):
-        """Open the Call Waiting settings page.
-
-        :param sim: Number of what SIM to use, either 1 or 2.
-            Required parameter in dual SIM setups
-        :returns: The Call Waiting settings page.
-
-        """
-        find = "callWait"
-        if sim:
-            find = "callWaitSim%d" % sim
-        return self._go_to_page(find, 'callWaitingPage')
 
     @autopilot.logging.log_action(logger.info)
     def go_to_sim_services(self, sim=None):
@@ -645,15 +615,89 @@ class PhonePage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
 
     @property
     def _dialpad_sounds(self):
+        """The dialpad sounds switch."""
         return self.wait_select_single(
             ubuntuuitoolkit.CheckBox,
             objectName='dialpadSounds')
 
+    @autopilot.logging.log_action(logger.info)
     def enable_dialpad_sounds(self):
+        """Enable dialpad sounds."""
         self._dialpad_sounds.check()
 
+    @autopilot.logging.log_action(logger.info)
     def disable_dialpad_sounds(self):
+        """Disable dialpad sounds."""
         self._dialpad_sounds.uncheck()
+
+    @autopilot.logging.log_action(logger.info)
+    def _enter_call_waiting(self, sim):
+        """Open the Call Waiting settings page.
+
+        :param sim: Number of what SIM to use, either 1 or 2.
+            Required parameter in dual SIM setups
+        :returns: The Call Waiting settings page.
+
+        """
+        find = "callWait"
+        if sim:
+            find = "callWaitSim%d" % sim
+        return self._go_to_page(find, 'callWaitingPage')
+
+    @autopilot.logging.log_action(logger.info)
+    def enable_call_waiting(self, sim):
+        self._enter_call_waiting(sim).enable_call_waiting()
+
+    @autopilot.logging.log_action(logger.info)
+    def disable_call_waiting(self, sim):
+        self._enter_call_waiting(sim).disable_call_waiting()
+
+    @autopilot.logging.log_action(logger.info)
+    def _enter_call_forwarding(self, sim=None):
+        """Open the Call Forwarding settings page.
+
+        :param sim: Number of what SIM to use, either 1 or 2.
+            Required parameter in dual SIM setups
+        :returns: The Call Forwarding settings page.
+
+        """
+        find = "callFwd"
+        if sim:
+            find = "callFwdSim%d" % sim
+
+        return self._go_to_page(find, 'callForwardingPage')
+
+    @autopilot.logging.log_action(logger.info)
+    def set_forward_every_call(self, sim, number):
+        pass
+
+    @autopilot.logging.log_action(logger.info)
+    def unset_forward_every_call(self, sim):
+        pass
+
+    @autopilot.logging.log_action(logger.info)
+    def set_forward_when_other_call(self, sim, number):
+        pass
+
+    @autopilot.logging.log_action(logger.info)
+    def unset_forward_when_other_call(self, sim):
+        pass
+
+    @autopilot.logging.log_action(logger.info)
+    def set_forward_whn_no_answer(self, sim, number):
+        pass
+
+    @autopilot.logging.log_action(logger.info)
+    def unset_forward_whn_no_answer(self, sim):
+        pass
+
+    @autopilot.logging.log_action(logger.info)
+    def set_forward_when_unreachable(self, sim, number):
+        pass
+
+    @autopilot.logging.log_action(logger.info)
+    def unset_forward_when_unreachable(self, sim):
+        pass
 
 
 class CallWaiting(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
@@ -677,44 +721,76 @@ class CallForwarding(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
 
     """Autopilot helper for the Call forwarding page."""
 
-    @property
-    def _switch(self):
-        return self.wait_select_single(
-            ubuntuuitoolkit.CheckBox,
-            objectName='callForwardingSwitch')
+    # @property
+    # def _switch(self):
+    #     return self.wait_select_single(
+    #         ubuntuuitoolkit.CheckBox,
+    #         objectName='callForwardingSwitch')
 
-    @property
-    def _number_field(self):
-        return self.wait_select_single(
-            objectName='destNumberField')
+    # @property
+    # def _number_field(self):
+    #     return self.wait_select_single(
+    #         objectName='destNumberField')
 
-    def _click_set(self):
-        button = self.wait_select_single(
-            objectName='set')
-        self.pointing_device.click_object(button)
+    # def _click_set(self):
+    #     button = self.wait_select_single(
+    #         objectName='set')
+    #     self.pointing_device.click_object(button)
 
-    def _click_cancel(self):
-        button = self.wait_select_single(
-            objectName='cancel')
-        self.pointing_device.click_object(button)
+    # def _click_cancel(self):
+    #     button = self.wait_select_single(
+    #         objectName='cancel')
+    #     self.pointing_device.click_object(button)
 
-    @property
-    def current_forwarding(self):
-        return self.wait_select_single(
-            objectName='destNumberField').text
+    # @property
+    # def current_forwarding(self):
+    #     return self.wait_select_single(
+    #         objectName='destNumberField').text
 
-    def enable_call_forwarding(self):
-        self._switch.check()
+    # def enable_call_forwarding(self):
+    #     self._switch.check()
 
-    def disable_call_forwarding(self):
-        self._switch.uncheck()
+    # def disable_call_forwarding(self):
+    #     self._switch.uncheck()
 
-    def set_forward(self, number):
-        input_method = Keyboard.create()
-        self.enable_call_forwarding()
-        self.pointing_device.click_object(self._number_field)
-        input_method.type(number)
-        self._click_set()
+    # def set_forward(self, number):
+    #     input_method = Keyboard.create()
+    #     self.enable_call_forwarding()
+    #     self.pointing_device.click_object(self._number_field)
+    #     input_method.type(number)
+    #     self._click_set()
+
+    # @autopilot.logging.log_action(logger.info)
+    # def set_forward_every_call(self, sim, number):
+    #     pass
+
+    # @autopilot.logging.log_action(logger.info)
+    # def unset_forward_every_call(self, sim):
+    #     pass
+
+    # @autopilot.logging.log_action(logger.info)
+    # def set_forward_when_other_call(self, sim, number):
+    #     pass
+
+    # @autopilot.logging.log_action(logger.info)
+    # def unset_forward_when_other_call(self, sim):
+    #     pass
+
+    # @autopilot.logging.log_action(logger.info)
+    # def set_forward_whn_no_answer(self, sim, number):
+    #     pass
+
+    # @autopilot.logging.log_action(logger.info)
+    # def unset_forward_whn_no_answer(self, sim):
+    #     pass
+
+    # @autopilot.logging.log_action(logger.info)
+    # def set_forward_when_unreachable(self, sim, number):
+    #     pass
+
+    # @autopilot.logging.log_action(logger.info)
+    # def unset_forward_when_unreachable(self, sim):
+    #     pass
 
 
 class Services(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
