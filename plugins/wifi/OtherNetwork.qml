@@ -51,7 +51,6 @@ Component {
         }
 
         title: i18n.tr("Connect to Hidden Network")
-        //text: feedback.enabled ? feedback.text : "";
 
         Common {
             id: common
@@ -198,8 +197,7 @@ Component {
                 }
                 PropertyChanges {
                     target: feedback
-                    enabled: true
-                    visible: true
+                    visible: false
                 }
             },
             State {
@@ -552,7 +550,6 @@ Component {
                                 if (update) {pacFileListModel.dataupdate();}
                             });
                         }
-
                     });
                 }
             }
@@ -675,7 +672,7 @@ Component {
 
             CheckBox {
                 id: passwordVisibleSwitch
-                //activeFocusOnPress: false
+                activeFocusOnPress: false
             }
 
             Label {
@@ -708,7 +705,7 @@ Component {
 
             CheckBox {
                 id: passwordRememberSwitch
-                //activeFocusOnPress: false
+                activeFocusOnPress: false
             }
 
             Label {

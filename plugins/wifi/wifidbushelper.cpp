@@ -118,40 +118,36 @@ void WifiDbusHelper::connect(QString ssid, int security, int auth, QStringList u
             wireless_802_1x["password"] = password[0];
         }
 
-        QByteArray cacert("file://");
-        QByteArray clientcert("file://");
-        QByteArray privatekey("file://");
-        QString pacFile;
+        QByteArray cacert(    "file://" + certs[0].toUtf8() + '\0');
+        QByteArray clientcert("file://" + certs[1].toUtf8() + '\0');
+        QByteArray privatekey("file://" + certs[2].toUtf8() + '\0');
+        QString pacFile( certs[3] );
 
-        cacert.append( certs[0] );
         if (auth == 0) { // TLS
             wireless_802_1x["eap"] = QStringList("tls");
-            wireless_802_1x["ca-cert"]  = cacert;
-            clientcert.append( certs[1] );
-            wireless_802_1x["client-cert"] = clientcert;
-            privatekey.append( certs [2]);
-            wireless_802_1x["private-key"] = privatekey;
+            if (certs[0] != "") {wireless_802_1x["ca-cert"] = cacert;}
+            if (certs[1] != "") {wireless_802_1x["client-cert"] = clientcert;}
+            if (certs[2] != "") {wireless_802_1x["private-key"] = privatekey;}
             wireless_802_1x["private-key-password"] = password[0];
         } else if (auth == 1) { // TTLS
             wireless_802_1x["eap"] = QStringList("ttls");
-            wireless_802_1x["ca-cert"]  = cacert;
+            if (certs[0] != "") {wireless_802_1x["ca-cert"] = cacert;}
             if (usernames[1] != "") {wireless_802_1x["anonymous-identity"]  = usernames[1];}
-            if (!password[1].toInt()) {wireless_802_1x["password-flags"] = QStringLiteral("2");}
+            if (password[1] == "false") {wireless_802_1x["password-flags"]  = uint(2);}
         } else if (auth == 2) { // LEAP
             wireless_802_1x["eap"] = QStringList("leap");
         } else if (auth == 3) { // FAST
             wireless_802_1x["eap"] = QStringList("fast");
-            wireless_802_1x["ca-cert"]  = cacert;
+            if (certs[0] != "") {wireless_802_1x["ca-cert"] = cacert;}
             if (usernames[1] != "") {wireless_802_1x["anonymous-identity"]  = usernames[1];}
-            if (!password[1].toInt()) {wireless_802_1x["password-flags"] = QStringLiteral("2");}
-            pacFile.append( certs[3] );
-            wireless_802_1x["pac-file"]  = pacFile;
+            if (password[1] == "false") {wireless_802_1x["password-flags"]  = uint(2);}
+            if (certs[3] != "" ) {wireless_802_1x["pac-file"]  = pacFile;}
             wireless_802_1x["phase1-fast-provisioning"] = certs[4];
         } else if (auth == 4) { // PEAP
             wireless_802_1x["eap"] = QStringList("peap");
             wireless_802_1x["phase1-peaplabel"] = QString("1");
             if (usernames[1] != "") {wireless_802_1x["anonymous-identity"]  = usernames[1];}
-            if (!password[1].toInt()) {wireless_802_1x["password-flags"] = QStringLiteral("2");}
+            if (password[1] == "false") {wireless_802_1x["password-flags"]  = uint(2);}
             //wireless_802_1x["phase1-peapver"] = QString("0"); #jkb:let us unset this until problems are reported.
         }
 
@@ -209,20 +205,20 @@ void WifiDbusHelper::connect(QString ssid, int security, int auth, QStringList u
     }
 
     mgr.connection().disconnect(
-                mgr.service(),
-                dev.path(),
-                NM_DEVICE_IFACE,
-                "StateChanged",
-                this,
-                SLOT(nmDeviceStateChanged(uint, uint, uint)));
+        mgr.service(),
+        dev.path(),
+        NM_DEVICE_IFACE,
+        "StateChanged",
+        this,
+        SLOT(nmDeviceStateChanged(uint, uint, uint)));
 
     mgr.connection().connect(
-                mgr.service(),
-                dev.path(),
-                NM_DEVICE_IFACE,
-                "StateChanged",
-                this,
-                SLOT(nmDeviceStateChanged(uint, uint, uint)));
+        mgr.service(),
+        dev.path(),
+        NM_DEVICE_IFACE,
+        "StateChanged",
+        this,
+        SLOT(nmDeviceStateChanged(uint, uint, uint)));
 
     QDBusObjectPath tmp;
     auto reply2 = mgr.AddAndActivateConnection(configuration,
@@ -236,8 +232,8 @@ void WifiDbusHelper::connect(QString ssid, int security, int auth, QStringList u
 
 
 void WifiDbusHelper::nmDeviceStateChanged(uint newState,
-                                          uint oldState,
-                                          uint reason)
+                                         uint oldState,
+                                         uint reason)
 {
     Q_UNUSED (oldState);
     Q_EMIT (deviceStateChanged(newState, reason));
