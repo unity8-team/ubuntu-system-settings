@@ -45,12 +45,16 @@ ItemPage {
         id: powerSettings
         schema.id: usePowerd ? "com.ubuntu.touch.system" : "org.gnome.desktop.session"
         onChanged: {
-            if (key == "activityTimeout" || key == "idleDelay")
+            if (key == "activityTimeout" || key == "idleDelay") {
                 var curIndex = idleValues.indexOf(value)
                 if( curIndex != -1)
                     sleepSelector.selectedIndex = curIndex
                 else if(value === 0)
                     sleepSelector.selectedIndex = 6
+                // ensure dimTimeout is 10 seconds less than activityTimeout
+                if (usePowerd)
+                    dimTimeout = Math.max(activityTimeout - 10, 50)
+            }
         }
         Component.onCompleted: {
             if (usePowerd)
