@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-10-16 20:04-0600\n"
-"PO-Revision-Date: 2015-06-11 09:55+0000\n"
+"PO-Revision-Date: 2015-06-15 09:17+0000\n"
 "Last-Translator: Ivo Xavier <ivofernandes12@gmail.com>\n"
 "Language-Team: Portuguese <pt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2015-06-12 05:29+0000\n"
+"X-Launchpad-Export-Date: 2015-06-16 11:18+0000\n"
 "X-Generator: Launchpad (build 17557)\n"
 
 #: ubuntu-system-settings.desktop.in.in.h:1 ../src/qml/MainWindow.qml:112
@@ -1751,7 +1751,7 @@ msgstr "Atualizações"
 
 #: ../plugins/system-update//PageComponent.qml:90
 msgid "Update System"
-msgstr "Atualizar o Sistema"
+msgstr "Atualizar o sistema"
 
 #: ../plugins/system-update//PageComponent.qml:91
 msgid "The phone needs to restart to install the system update."
@@ -2189,7 +2189,7 @@ msgid ""
 "partners, the makers of the operating system."
 msgstr ""
 "O seu telemóvel está pré-definido para reportar erros para a Canonical e "
-"seus parceiros, criadores do sistema operativo"
+"seus parceiros, criadores do sistema operativo."
 
 #: ../wizard/qml/Pages//60-reporting.qml:41
 msgid ""
