@@ -75,6 +75,8 @@ FramedMenuItem {
         if (checked) {
             pageStack.push(Qt.resolvedUrl("NetworkDetailsBrief.qml"),
             {networkName : text, accessPoint: accessPoint})
+        } else {
+            accessPoint.activate();
         }
     }
 }
