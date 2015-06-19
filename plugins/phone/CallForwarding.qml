@@ -23,52 +23,69 @@ import SystemSettings 1.0
 import Ubuntu.Components 1.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 import Ubuntu.Components.Themes.Ambiance 0.1
+import Ubuntu.Content 0.1
 
 ItemPage {
     id: page
     objectName: "callForwardingPage"
     title: headerTitle
     property var sim
-    property bool forwarding: sim.callForwarding.voiceUnconditional !== ""
     property string headerTitle: i18n.tr("Call forwarding")
-    property real faded: 0.6
-
     // Holds the forwarding item we're currently editing.
     property var editing: null
+    property list<ContentItem> importItems
+    property var activeTransfer
 
     states: [
         // State {
         //     name: "forwardCheck"
-        //     PropertyChanges { target: fwdAll; opacity: faded; control: allAct }
-        //     PropertyChanges { target: fwdSomeTitle; opacity: faded }
+        //     PropertyChanges { target: fwdAll; control: allAct }
+        //     PropertyChanges { target: fwdSomeTitle; }
 
-        //     PropertyChanges { target: fwdBusy; opacity: faded; control: busyAct }
+        //     PropertyChanges { target: fwdBusy; control: busyAct }
 
-        //     PropertyChanges { target: fwdLost; opacity: faded; control: lostAct }
+        //     PropertyChanges { target: fwdLost; control: lostAct }
 
-        //     PropertyChanges { target: fwdUnreachable; opacity: faded; control: unreachableAct }
-        // },
-        // State {
-        //     name: "forwardFailed"
-        //     PropertyChanges { target: fwdSomeTitle; opacity: faded }
-        //     PropertyChanges { target: fwdFailedLabel; visible: true }
-
-        //     PropertyChanges { target: fwdAll; failed: true }
-        //     PropertyChanges { target: fwdBusy; failed: true }
-        //     PropertyChanges { target: fwdLost; failed: true }
-        //     PropertyChanges { target: fwdUnreachable; failed: true }
+        //     PropertyChanges { target: fwdUnreachable; control: unreachableAct }
         // },
         State {
+            name: "forwardFailed"
+            PropertyChanges { target: fwdSomeTitle; }
+            PropertyChanges { target: fwdFailedLabel; visible: true }
+            PropertyChanges { target: fwdAllCaption; }
+
+            PropertyChanges { target: fwdAll; enabled: false; }
+            PropertyChanges { target: fwdBusy; enabled: false; }
+            PropertyChanges { target: fwdLost; enabled: false; }
+            PropertyChanges { target: fwdUnreachable; enabled: false; }
+        },
+        State {
+            name: "editing"
+            PropertyChanges { target: fwdAll; enabled: false; explicit: true }
+            PropertyChanges { target: fwdBusy; enabled: false; explicit: true }
+            PropertyChanges { target: fwdLost; enabled: false; explicit: true }
+            PropertyChanges { target: fwdUnreachable; enabled: false; explicit: true }
+            PropertyChanges { target: fwdSomeTitle; }
+            StateChangeScript {
+                name: "editingEnabled"
+                script: {
+                    editing.opacity = 1;
+                    editing.enabled = true;
+                }
+            }
+            when: editing !== null
+        },
+        State {
             name: "forwardAll"
-            PropertyChanges { target: fwdSomeTitle; opacity: faded }
-            PropertyChanges { target: fwdBusy; opacity: faded; enabled: false }
-            PropertyChanges { target: fwdLost; opacity: faded; enabled: false }
-            PropertyChanges { target: fwdUnreachable; opacity: faded; enabled: false }
-            when: fwdAll.clientRule && fwdAll.clientRule !== ""
+            PropertyChanges { target: fwdSomeTitle; }
+            PropertyChanges { target: fwdBusy; enabled: false; value: ""; checked: false }
+            PropertyChanges { target: fwdLost; enabled: false; value: ""; checked: false }
+            PropertyChanges { target: fwdUnreachable; enabled: false; value: ""; checked: false }
+            when: fwdAll.value !== ""
         }
         // State {
         //     name: "forwardSome"
-        //     // PropertyChanges { target: fwdAll; opacity: faded; }
+        //     // PropertyChanges { target: fwdAll; }
         //     // PropertyChanges { target: fwdAllCheck; enabled: false }
         // }
     ]
@@ -81,18 +98,18 @@ ItemPage {
         value: false
     }
 
-    onEditingChanged: {
-        console.warn('onEditingChanged', editing);
-        [fwdAll, fwdBusy, fwdLost, fwdUnreachable].forEach(function (n) {
-            if (editing) {
-                if (n !== editing) {
-                    n.enabled = false;
-                }
-            } else {
-                n.enabled = true;
-            }
-        });
-    }
+    // onEditingChanged: {
+    //     console.warn('onEditingChanged', editing);
+    //     [fwdAll, fwdBusy, fwdLost, fwdUnreachable].forEach(function (n) {
+    //         if (editing) {
+    //             if (n !== editing) {
+    //                 n.enabled = false;
+    //             }
+    //         } else {
+    //             n.enabled = true;
+    //         }
+    //     });
+    // }
 
     flickable: null
     Flickable {
@@ -116,19 +133,20 @@ ItemPage {
             CallForwardItem {
                 id: fwdAll
                 anchors { left: parent.left; right: parent.right }
-                ruleName: "voiceUnconditional"
+                rule: "voiceUnconditional"
                 callForwarding: sim.callForwarding
                 text: i18n.tr("Forward every incoming call")
-                onEditing: page.editing = fwdAll
-                onStoppedEditing: page.editing = null
-                Component.onCompleted: console.warn(ruleName)
+                onEnteredEditMode: page.editing = fwdAll
+                onLeftEditMode: page.editing = null
             }
 
             Label {
                 id: fwdAllCaption
                 anchors {
-                    left: parent.left; right: parent.right; margins: units.gu(1);
+                    left: parent.left; right: parent.right; margins: units.gu(1)
                 }
+                width: parent.width
+                wrapMode: Text.WordWrap
                 fontSize: "small"
                 horizontalAlignment: Text.AlignHCenter
                 verticalAlignment: Text.AlignVCenter
@@ -138,6 +156,11 @@ ItemPage {
 
             Label {
                 id: fwdFailedLabel
+                anchors {
+                    left: parent.left; right: parent.right; margins: units.gu(2)
+                }
+                width: parent.width
+                wrapMode: Text.WordWrap
                 visible: false
                 text: i18n.tr("Call forwarding status can’t be checked " +
                               "now. Try again later.")
@@ -154,31 +177,74 @@ ItemPage {
             CallForwardItem {
                 id: fwdBusy
                 anchors { left: parent.left; right: parent.right }
-                ruleName: "voiceBusy"
                 callForwarding: sim.callForwarding
+                rule: "voiceBusy"
                 text: i18n.tr("I’m on another call")
-                onEditing: page.editing = fwdBusy
-                onStoppedEditing: page.editing = null
+                onEnteredEditMode: page.editing = fwdBusy
+                onLeftEditMode: page.editing = null
+                // onEditing: page.editing = fwdBusy
+                // onStoppedEditing: page.editing = null
+                // onRequestRuleChange: sim.callForwarding.voiceBusy = value
+                // Component.onCompleted: value = sim.callForwarding.voiceBusy
             }
 
             CallForwardItem {
                 id: fwdLost
                 anchors { left: parent.left; right: parent.right }
-                ruleName: "voiceNoReply"
                 callForwarding: sim.callForwarding
+                rule: "voiceNoReply"
                 text: i18n.tr("I don’t answer")
-                onEditing: page.editing = fwdLost
-                onStoppedEditing: page.editing = null
+                onEnteredEditMode: page.editing = fwdLost
+                onLeftEditMode: page.editing = null
+                // onEditing: page.editing = fwdLost
+                // onStoppedEditing: page.editing = null
+                // onRequestRuleChange: sim.callForwarding.voiceNoReply = value
+                // Component.onCompleted: value = sim.callForwarding.voiceNoReply
             }
 
             CallForwardItem {
                 id: fwdUnreachable
                 anchors { left: parent.left; right: parent.right }
-                ruleName: "voiceNotReachable"
                 callForwarding: sim.callForwarding
+                rule: "voiceNotReachable"
                 text: i18n.tr("My phone is unreachable")
-                onEditing: page.editing = fwdUnreachable
-                onStoppedEditing: page.editing = null
+                onEnteredEditMode: page.editing = fwdUnreachable
+                onLeftEditMode: page.editing = null
+                // onEditing: page.editing = fwdUnreachable
+                // onStoppedEditing: page.editing = null
+                // onRequestRuleChange: sim.callForwarding.voiceNotReachable = value
+                // Component.onCompleted: value = sim.callForwarding.voiceNotReachable
+            }
+
+            Label {
+                property string forwardFlag: sim.callForwarding.forwardingFlagOnSim ? 'ON' : 'OFF'
+                property string voiceUnconditional: sim.callForwarding.voiceUnconditional ?
+                                            sim.callForwarding.voiceUnconditional : '(empty)'
+                property string voiceBusy: sim.callForwarding.voiceBusy ?
+                                            sim.callForwarding.voiceBusy : '(empty)'
+                property string voiceNoReply: sim.callForwarding.voiceNoReply ?
+                                            sim.callForwarding.voiceNoReply : '(empty)'
+                property string voiceNotReachable: sim.callForwarding.voiceNotReachable ?
+                                            sim.callForwarding.voiceNotReachable : '(empty)'
+                anchors { left: parent.left; right: parent.right; }
+                wrapMode: Text.WrapAnywhere
+                text: "forwardingFlagOnSim: " + forwardFlag +
+                      "\nvoiceUnconditional: " + voiceUnconditional +
+                      "\nvoiceBusy: " + voiceBusy +
+                      "\nvoiceNoReply: " + voiceNoReply +
+                      "\nvoiceNotReachable: " + voiceNotReachable +
+                      "\n\nfwdAll = " + fwdAll.enabled.toString() +
+                      "\nfwdBusy.enabled = " + fwdBusy.enabled.toString() +
+                      "\nfwdLost.enabled = " + fwdLost.enabled.toString() +
+                      "\nfwdUnreachable.enabled = " + fwdUnreachable.enabled.toString() +
+                      "\nfwdAll.opacity = " + fwdAll.opacity.toString() +
+                      "\nfwdBusy.opacity = " + fwdBusy.opacity.toString() +
+                      "\nfwdLost.opacity = " + fwdLost.opacity.toString() +
+                      "\nfwdUnreachable.opacity = " + fwdUnreachable.opacity.toString() +
+                      "\n\nstate: " + page.state +
+                      "\nediting: " + page.editing +
+                      "\ncontent hub items: " + page.importItems +
+                      "\ncontent hub items len: " + page.importItems.length
             }
         }
     } // Flickable
@@ -200,7 +266,9 @@ ItemPage {
                 leftMargin: units.gu(1)
                 verticalCenter: parent.verticalCenter
             }
+            enabled: editing && !editing.busy
             text: i18n.tr("Contacts…")
+            onClicked: activeTransfer = contactPicker.request()
         }
 
         Button {
@@ -210,6 +278,7 @@ ItemPage {
                 rightMargin: units.gu(1)
                 verticalCenter: parent.verticalCenter
             }
+            enabled: editing && !editing.busy
             text: i18n.tr("Cancel")
             onClicked: editing.cancel()
         }
@@ -221,8 +290,9 @@ ItemPage {
                 rightMargin: units.gu(1)
                 verticalCenter: parent.verticalCenter
             }
+            enabled: editing && !editing.busy
             text: i18n.tr("Set")
-            onClicked: editing.setRule()
+            onClicked: editing.save()
         }
     }
 
@@ -234,148 +304,34 @@ ItemPage {
         }
     }
 
-    // onForwardingChanged: {
-    //     if (callForwardingSwitch.checked !== forwarding)
-    //         callForwardingSwitch.checked = forwarding;
-    // }
+    ContentTransferHint {
+        id: importHint
+        anchors.fill: parent
+        activeTransfer: page.activeTransfer
+    }
 
-    // Connections {
-    //     target: sim.callForwarding
-    //     onVoiceUnconditionalChanged: {
-    //         destNumberField.text = voiceUnconditional;
-    //     }
-    //     onVoiceUnconditionalComplete: {
-    //         callForwardingIndicator.running = false;
-    //         if (callForwardingSwitch.checked !== forwarding)
-    //             callForwardingSwitch.checked = forwarding;
-    //     }
-    // }
+    ContentPeer {
+        id: contactPicker
+        contentType: ContentType.Contacts
+        handler: ContentHandler.Source
+        selectionType: ContentTransfer.Single
+    }
 
-    // Column {
-    //     anchors.fill: parent
-
-
-    //     ListItem.Standard {
-    //         id: forwardToItem
-    //         text: i18n.tr("Forward to")
-    //         visible: callForwardingSwitch.checked
-    //         control: TextInput {
-    //             id: destNumberField
-    //             objectName: "destNumberField"
-    //             horizontalAlignment: TextInput.AlignRight
-    //             width: forwardToItem.width/2
-    //             inputMethodHints: Qt.ImhDialableCharactersOnly
-    //             text: sim.callForwarding.voiceUnconditional
-    //             font.pixelSize: units.dp(18)
-    //             font.weight: Font.Light
-    //             font.family: "Ubuntu"
-    //             color: "#AAAAAA"
-    //             maximumLength: 20
-    //             focus: true
-    //             cursorVisible: text !== sim.callForwarding.voiceUnconditional ||
-    //                            text === ""
-    //             clip: true
-    //             opacity: 0.9
-
-    //             cursorDelegate: Rectangle {
-    //                 anchors.top: parent.top
-    //                 anchors.bottom: parent.bottom
-    //                 width: units.dp(1)
-    //                 color: "#DD4814"
-    //                 visible: destNumberField.cursorVisible
-    //             }
-    //             onVisibleChanged:
-    //                 if (visible === true) forceActiveFocus()
-    //         }
-    //     }
-
-    //     ListItem.Base {
-    //         id: buttonsRowId
-    //         Row {
-    //             anchors.centerIn: parent
-    //             spacing: units.gu(2)
-
-    //             Button {
-    //                 objectName: "cancel"
-    //                 text: i18n.tr("Cancel")
-    //                 width: (buttonsRowId.width-units.gu(2)*4)/3
-    //                 enabled: !callForwardingIndicator.running
-    //                 onClicked: {
-    //                     destNumberField.text =
-    //                             sim.callForwarding.voiceUnconditional;
-    //                     if (forwarding !== callForwardingSwitch.checked)
-    //                         callForwardingSwitch.checked = forwarding;
-    //                 }
-    //             }
-
-    //             Button {
-    //                 objectName: "set"
-    //                 text: i18n.tr("Set")
-    //                 width: (buttonsRowId.width-units.gu(2)*4)/3
-    //                 enabled: !callForwardingIndicator.running
-    //                 onClicked: {
-    //                     callForwardingIndicator.running = true;
-    //                     sim.callForwarding.voiceUnconditional = destNumberField.text;
-    //                 }
-    //             }
-    //         }
-    //         visible: callForwardingSwitch.checked &&
-    //                  (destNumberField.text !==
-    //                   sim.callForwarding.voiceUnconditional)
-    //     }
-    // }
-
+    Connections {
+        target: activeTransfer ? activeTransfer : null
+        onStateChanged: {
+            if (page.activeTransfer.state === ContentTransfer.Charged) {
+                console.warn('ContentTransfer.Charged');
+                editing.importContact(page.activeTransfer.items[0]);
+            }
+        }
+    }
 
     Connections {
         target: sim.callForwarding
-
         onGetPropertiesFailed: {
             console.warn('failed');
             root.state = "forwardFailed";
-        }
-
-        onReadyChanged: {
-            console.warn('ready');
-        }
-
-        // All.
-        onVoiceUnconditionalChanged: {
-            fwdAll.clientRule = property;
-            console.warn('voiceUnconditional changed', property);
-        }
-        onVoiceUnconditionalComplete: {
-            console.warn('voiceUnconditional complete', success);
-            fwdAll.serverResponse(success);
-        }
-
-        // Busy.
-        onVoiceBusyChanged: {
-            console.warn('voiceBusy changed', property);
-            fwdBusy.clientRule = property;
-        }
-        onVoiceBusyComplete: {
-            console.warn('onVoiceBusyComplete complete', success);
-            fwdBusy.serverResponse(success)
-        }
-
-        // Lost.
-        onVoiceNoReplyChanged: {
-            console.warn('voiceNoReply changed', property);
-            fwdLost.clientRule = property;
-        }
-        onVoiceNoReplyComplete: {
-            console.warn('onVoiceNoReplyComplete complete', success);
-            fwdLost.serverResponse(success);
-        }
-
-        // Unreachable.
-        onVoiceNotReachableChanged: {
-            console.warn('voiceNotReachableChanged changed', property);
-            fwdUnreachable.clientRule = property;
-        }
-        onVoiceNotReachableComplete: {
-            console.warn('voiceNotReachableComplete complete', success);
-            fwdUnreachable.serverResponse(success);
         }
     }
 }

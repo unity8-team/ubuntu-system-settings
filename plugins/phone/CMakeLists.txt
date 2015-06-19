@@ -10,6 +10,7 @@ set(QML_SOURCES
     ServiceInfo.qml
     Services.qml
     SingleSim.qml
+    VCardParser.qml
     callForwardingUtils.js
     dateUtils.js
     sims.js
