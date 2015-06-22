@@ -153,6 +153,7 @@ Column {
         id: input
         visible: false
         height: visible ? units.gu(6) : 0
+        /* TRANSLATORS: This string will be truncated On smaller displays. */
         text: i18n.tr("Forward to")
         control: TextField {
             id: field
@@ -199,6 +200,7 @@ Column {
     ListItem.SingleValue {
         id: current
         visible: value
+        /* TRANSLATORS: This string will be truncated On smaller displays. */
         text: i18n.tr("Forward to")
         value: callForwarding[rule]
         onClicked: d._editing = true
