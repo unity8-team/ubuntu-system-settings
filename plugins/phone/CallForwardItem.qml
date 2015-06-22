@@ -39,6 +39,7 @@ Column {
     property alias busy: d._pending
     property alias text: control.text
     property alias value: current.value
+    property alias field: field
 
     signal checked ()
     signal failed ()
@@ -46,6 +47,9 @@ Column {
     signal leftEditMode ()
     signal serverResponse (bool success)
 
+   /**
+     * Saves the rule.
+     */
     function save () {
         console.warn('save');
         d._pending = true;
@@ -56,14 +60,22 @@ Column {
         }
     }
 
+   /**
+     * Cancels editing the rule.
+     */
     function cancel () {
         console.warn('cancel')
         d._editing = false;
         check.checked = callForwarding[rule] !== "";
     }
 
+    /**
+     * Sets a contact on this forwarding item.
+     *
+     * @param {QDeclarativeContact} contact to set
+     */
     function setContact (contact) {
-        var number = contact.forwardToNumber;
+        var number = contact.forwardToNumber.number;
         number = number.replace(/\s+/g, '');
         console.warn('contact', contact, number);
         field.text = number;
@@ -138,12 +150,6 @@ Column {
         }
     ]
 
-    // Component.onCompleted: {
-    //     if (rule || rule === "") {
-    //         d._pending = false;
-    //     }
-    // }
-
     ListItem.ThinDivider { anchors { left: parent.left; right: parent.right }}
 
     ListItem.Standard {
@@ -166,12 +172,34 @@ Column {
             horizontalAlignment: TextInput.AlignRight
             inputMethodHints: Qt.ImhDialableCharactersOnly
             text: callForwarding[rule]
+            font.pixelSize: units.dp(18)
+            font.weight: Font.Light
+            font.family: "Ubuntu"
+            color: "#AAAAAA"
             maximumLength: 20
-            Binding {
-                target: field
-                property: "cursorVisible"
-                value: true
+            focus: true
+            cursorVisible: text === "" || text !== callForwarding[rule]
+            placeholderText: i18n.tr("Phone number")
+            style: TextFieldStyle {
+                overlaySpacing: units.gu(0.5)
+                frameSpacing: 0
+                background: Rectangle {
+                    property bool error: (field.hasOwnProperty("errorHighlight") &&
+                                          field.errorHighlight &&
+                                          !field.acceptableInput)
+                    onErrorChanged: error ? UbuntuColors.orange : color
+                    color: Theme.palette.normal.background
+                    anchors.fill: parent
+                    visible: field.activeFocus
+                }
             }
+
+            cursorDelegate: Rectangle {
+                width: units.dp(1)
+                color: "#DD4814"
+            }
+            onVisibleChanged:
+                if (visible === true) forceActiveFocus()
         }
 
         Behavior on height {

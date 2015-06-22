@@ -47,7 +47,6 @@ QtObject {
     }
 
     onVCardUrlChanged: {
-        console.warn('onVCardUrlChanged', vCardUrl);
         if (vCardUrl.length > 0) {
             clearModel()
             contactsModel.importContacts(vCardUrl)

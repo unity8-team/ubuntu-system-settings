@@ -3,7 +3,9 @@
  *
  * Copyright (C) 2013 Canonical Ltd.
  *
- * Contact: Sebastien Bacher <sebastien.bacher@canonical.com>
+ * Contact:
+ *     Sebastien Bacher <sebastien.bacher@canonical.com>
+ *     Jonas G. Drange <jonas.drange@canonical.com>
  *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License version 3, as published
@@ -26,6 +28,7 @@ import Ubuntu.Components.ListItems 0.1 as ListItem
 import Ubuntu.Components.Popups 0.1
 import Ubuntu.Components.Themes.Ambiance 0.1
 import Ubuntu.Content 0.1
+import "callForwardingUtils.js" as Utils
 
 ItemPage {
     id: page
@@ -33,23 +36,11 @@ ItemPage {
     title: headerTitle
     property var sim
     property string headerTitle: i18n.tr("Call forwarding")
-    // Holds the forwarding item we're currently editing.
-    property var editing: null
-    property list<ContentItem> importItems
+    property QtObject editing: null
+    property QtObject activeItem: null
     property var activeTransfer
 
     states: [
-        // State {
-        //     name: "forwardCheck"
-        //     PropertyChanges { target: fwdAll; control: allAct }
-        //     PropertyChanges { target: fwdSomeTitle; }
-
-        //     PropertyChanges { target: fwdBusy; control: busyAct }
-
-        //     PropertyChanges { target: fwdLost; control: lostAct }
-
-        //     PropertyChanges { target: fwdUnreachable; control: unreachableAct }
-        // },
         State {
             name: "forwardFailed"
             PropertyChanges { target: fwdSomeTitle; }
@@ -85,11 +76,6 @@ ItemPage {
             PropertyChanges { target: fwdUnreachable; enabled: false; value: ""; checked: false }
             when: fwdAll.value !== ""
         }
-        // State {
-        //     name: "forwardSome"
-        //     // PropertyChanges { target: fwdAll; }
-        //     // PropertyChanges { target: fwdAllCheck; enabled: false }
-        // }
     ]
 
     // We need to disable keyboard anchoring because we implement the
@@ -99,19 +85,6 @@ ItemPage {
         property: "anchorToKeyboard"
         value: false
     }
-
-    // onEditingChanged: {
-    //     console.warn('onEditingChanged', editing);
-    //     [fwdAll, fwdBusy, fwdLost, fwdUnreachable].forEach(function (n) {
-    //         if (editing) {
-    //             if (n !== editing) {
-    //                 n.enabled = false;
-    //             }
-    //         } else {
-    //             n.enabled = true;
-    //         }
-    //     });
-    // }
 
     flickable: null
     Flickable {
@@ -127,6 +100,10 @@ ItemPage {
         contentHeight: contents.height + units.gu(2)
         contentWidth: parent.width
 
+        // after add a new field we need to wait for the contentHeight to
+        // change to scroll to the correct position
+        onContentHeightChanged: Utils.show(page.activeItem)
+
         Column {
             id: contents
             anchors { left: parent.left; right: parent.right }
@@ -138,7 +115,7 @@ ItemPage {
                 rule: "voiceUnconditional"
                 callForwarding: sim.callForwarding
                 text: i18n.tr("Forward every incoming call")
-                onEnteredEditMode: page.editing = fwdAll
+                onEnteredEditMode: {page.editing = fwdAll; Utils.show(field)}
                 onLeftEditMode: page.editing = null
             }
 
@@ -182,12 +159,8 @@ ItemPage {
                 callForwarding: sim.callForwarding
                 rule: "voiceBusy"
                 text: i18n.tr("I’m on another call")
-                onEnteredEditMode: page.editing = fwdBusy
+                onEnteredEditMode: {page.editing = fwdBusy; Utils.show(field)}
                 onLeftEditMode: page.editing = null
-                // onEditing: page.editing = fwdBusy
-                // onStoppedEditing: page.editing = null
-                // onRequestRuleChange: sim.callForwarding.voiceBusy = value
-                // Component.onCompleted: value = sim.callForwarding.voiceBusy
             }
 
             CallForwardItem {
@@ -196,12 +169,8 @@ ItemPage {
                 callForwarding: sim.callForwarding
                 rule: "voiceNoReply"
                 text: i18n.tr("I don’t answer")
-                onEnteredEditMode: page.editing = fwdLost
+                onEnteredEditMode: {page.editing = fwdLost; Utils.show(field)}
                 onLeftEditMode: page.editing = null
-                // onEditing: page.editing = fwdLost
-                // onStoppedEditing: page.editing = null
-                // onRequestRuleChange: sim.callForwarding.voiceNoReply = value
-                // Component.onCompleted: value = sim.callForwarding.voiceNoReply
             }
 
             CallForwardItem {
@@ -210,43 +179,11 @@ ItemPage {
                 callForwarding: sim.callForwarding
                 rule: "voiceNotReachable"
                 text: i18n.tr("My phone is unreachable")
-                onEnteredEditMode: page.editing = fwdUnreachable
+                onEnteredEditMode: {
+                    page.editing = fwdUnreachable;
+                    Utils.show(field);
+                }
                 onLeftEditMode: page.editing = null
-                // onEditing: page.editing = fwdUnreachable
-                // onStoppedEditing: page.editing = null
-                // onRequestRuleChange: sim.callForwarding.voiceNotReachable = value
-                // Component.onCompleted: value = sim.callForwarding.voiceNotReachable
-            }
-
-            Label {
-                property string forwardFlag: sim.callForwarding.forwardingFlagOnSim ? 'ON' : 'OFF'
-                property string voiceUnconditional: sim.callForwarding.voiceUnconditional ?
-                                            sim.callForwarding.voiceUnconditional : '(empty)'
-                property string voiceBusy: sim.callForwarding.voiceBusy ?
-                                            sim.callForwarding.voiceBusy : '(empty)'
-                property string voiceNoReply: sim.callForwarding.voiceNoReply ?
-                                            sim.callForwarding.voiceNoReply : '(empty)'
-                property string voiceNotReachable: sim.callForwarding.voiceNotReachable ?
-                                            sim.callForwarding.voiceNotReachable : '(empty)'
-                anchors { left: parent.left; right: parent.right; }
-                wrapMode: Text.WrapAnywhere
-                text: "forwardingFlagOnSim: " + forwardFlag +
-                      "\nvoiceUnconditional: " + voiceUnconditional +
-                      "\nvoiceBusy: " + voiceBusy +
-                      "\nvoiceNoReply: " + voiceNoReply +
-                      "\nvoiceNotReachable: " + voiceNotReachable +
-                      "\n\nfwdAll = " + fwdAll.enabled.toString() +
-                      "\nfwdBusy.enabled = " + fwdBusy.enabled.toString() +
-                      "\nfwdLost.enabled = " + fwdLost.enabled.toString() +
-                      "\nfwdUnreachable.enabled = " + fwdUnreachable.enabled.toString() +
-                      "\nfwdAll.opacity = " + fwdAll.opacity.toString() +
-                      "\nfwdBusy.opacity = " + fwdBusy.opacity.toString() +
-                      "\nfwdLost.opacity = " + fwdLost.opacity.toString() +
-                      "\nfwdUnreachable.opacity = " + fwdUnreachable.opacity.toString() +
-                      "\n\nstate: " + page.state +
-                      "\nediting: " + page.editing +
-                      "\ncontent hub items: " + page.importItems +
-                      "\ncontent hub items len: " + page.importItems.length
             }
         }
     } // Flickable
@@ -303,10 +240,11 @@ ItemPage {
         id: keyboard
         anchors.bottom: parent.bottom
         onHeightChanged: {
-            console.warn('onHeightChanged...');
+            if (page.activeItem) {
+                Utils.show(page.activeItem);
+            }
         }
     }
-
 
     Component {
         id: forwardContact
@@ -337,7 +275,6 @@ ItemPage {
                     activeFocusOnPress: false
                 }
                 onDelegateClicked: {
-                    console.warn('selected number', index, contact.phoneNumbers[index]);
                     contact.forwardToNumber = contact.phoneNumbers[index];
                     onClicked: {
                         editing.setContact(contact);
@@ -362,45 +299,30 @@ ItemPage {
         }
     }
 
-
     VCardParser {
         id: contactParser
 
-        signal addContactsAnswer(var id, var contactIds, var retryList, var urserList);
-
-        property int importedContactCount: 0
-        property string dialogTitle: ""
-        property string dialogText: ""
-
         function parseContact(vcardContact) {
-            console.warn('parseContact', vcardContact);
             return vcardContact;
         }
 
         onVcardParsed: {
-            console.warn('onVcardParsed', contacts);
             var contact;
             if (contacts.length === 0) {
                 console.warn('no contacts parsed');
                 return;
             } else {
-                console.warn('onVcardParsed parsing contact...');
                 contact = parseContact(contacts[0]);
-                console.warn('onVcardParsed parsed contact', contact);
                 if (contact.phoneNumbers.length === 0) {
-                    console.log("telling user there was no number", contact);
                     PopupUtils.open(hadNoNumberDialog);
                 } else if (contact.phoneNumbers.length > 1) {
-                    console.log("prompting for selection of number", contact);
                     PopupUtils.open(chooseNumberDialog, page, {
                         'contact': contact
                     });
                 } else {
-                    console.log("using contact", contact);
                     contact.forwardToNumber = contact.PhoneNumber;
                     editing.setContact(contact);
                 }
-                console.log("Parsed contact", contact);
             }
         }
     }
@@ -422,7 +344,6 @@ ItemPage {
         target: page.activeTransfer ? page.activeTransfer : null
         onStateChanged: {
             if (page.activeTransfer.state === ContentTransfer.Charged) {
-                console.warn('ContentTransfer.Charged');
                 contactParser.vCardUrl = page.activeTransfer.items[0].url;
             }
         }
@@ -430,9 +351,6 @@ ItemPage {
 
     Connections {
         target: sim.callForwarding
-        onGetPropertiesFailed: {
-            console.warn('failed');
-            root.state = "forwardFailed";
-        }
+        onGetPropertiesFailed: root.state = "forwardFailed";
     }
 }

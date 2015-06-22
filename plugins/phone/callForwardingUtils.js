@@ -1,26 +1,31 @@
+
+/**
+ * Handle the user's intention when it checks the check mark
+ * associated with this forwarding item.
+ *
+ * @param {Boolean} Value of check
+*/
 function checked (value) {
-    console.warn('checking...', value);
     if (value) {
         if (item.cachedRuleValue) {
-            console.warn('\t had cached rule, requesting change...');
             requestRule(item.cachedRuleValue);
         } else {
             d._editing = true;
-            console.warn('\t editing...');
         }
     } else {
         if (d._editing) {
-            console.warn('\t was editing. Stopping editing.');
             d._editing = false;
         } else {
-            console.warn('\t disabling rule..');
             requestRule('');
         }
     }
 }
 
 /**
- * @return {Boolean} whether or not value passes client side verification.
+ * Request that the rule be changed on the backend.
+ *
+ * @param {String} new rule value
+ * @return {Boolean} whether or not we requested a change
  */
 function requestRule (value) {
     if (value === item.callForwarding[item.rule]) {
@@ -28,36 +33,72 @@ function requestRule (value) {
         return false;
     }
 
-    console.warn('requesting rule', value, '...');
     item.callForwarding[item.rule] = value;
     d._pending = true;
     return true;
 }
 
+/**
+ * Handler for when the component enter or leaves editing mode.
+ */
 function editingChanged () {
-{
-    console.warn('editingChanged');
-    if (d._editing) {
+     if (d._editing) {
         item.enteredEditMode();
-        field.forceActiveFocus();
-        console.warn('firing editing');
-    } else {
-        console.warn('firing stoppedEditing');
-        item.leftEditMode();
-    }
-}
+     } else {
+         item.leftEditMode();
+     }
 }
 
+/**
+ * Handler for when the rule changes on the backend.
+ *
+ * @param {String} the new property
+ */
 function ruleChanged (property) {
-    console.warn(item.rule + 'Changed', property);
     check.checked = callForwarding[rule] !== "";
 }
 
+/**
+ * Handler for when the backend responds.
+ *
+ * @param {Boolean} whether or not the backend succeeded
+ */
 function ruleComplete (success) {
-    console.warn(item.rule + 'Complete', success);
     d._pending = false;
     d._editing = false;
     if (!success) {
         d._failed = true;
     }
 }
+
+/**
+ * Scroll something into view.
+ *
+ * @param {QtObject} item to scroll to.
+ */
+function show(item) {
+    if (!item) {
+        return;
+    }
+    page.activeItem = item;
+
+    var position = flick.contentItem.mapFromItem(item, 0, page.activeItem.y);
+
+    // check if the item is already visible
+    var bottomY = flick.contentY + flick.height;
+    var itemBottom = position.y + item.height; // extra margin
+    if (position.y >= flick.contentY && itemBottom <= bottomY) {
+        return;
+    }
+
+    // if it is not, try to scroll and make it visible
+    var targetY = itemBottom - flick.height;
+    if (targetY >= 0 && position.y) {
+        flick.contentY = targetY;
+    } else if (position.y < flick.contentY) {
+        // if it is hidden at the top, also show it
+        flick.contentY = position.y;
+    }
+    flick.returnToBounds();
+}
+
