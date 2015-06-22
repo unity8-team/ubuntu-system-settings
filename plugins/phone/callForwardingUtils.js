@@ -34,28 +34,12 @@ function requestRule (value) {
     return true;
 }
 
-// /**
-//  * The parent page will receive the signals from OfonoCallForwarding and
-//  * subsequently call this function.
-//  *
-//  * @param {Boolean} whether or not the server response indicated success
-//  */
-// function serverResponse (success) {
-//     if (success) {
-//         d._pending = false;
-//         item.stoppedEditing();
-//         check.checked = item.value !== "";
-//         console.warn('serverResponse', item.value !== "");
-//     } else {
-//         item.failed();
-//     }
-// }
-
 function editingChanged () {
 {
     console.warn('editingChanged');
     if (d._editing) {
         item.enteredEditMode();
+        field.forceActiveFocus();
         console.warn('firing editing');
     } else {
         console.warn('firing stoppedEditing');

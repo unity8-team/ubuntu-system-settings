@@ -19,9 +19,11 @@
  */
 
 import QtQuick 2.0
+import QtContacts 5.0
 import SystemSettings 1.0
 import Ubuntu.Components 1.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
+import Ubuntu.Components.Popups 0.1
 import Ubuntu.Components.Themes.Ambiance 0.1
 import Ubuntu.Content 0.1
 
@@ -266,9 +268,10 @@ ItemPage {
                 leftMargin: units.gu(1)
                 verticalCenter: parent.verticalCenter
             }
+            activeFocusOnPress: false
             enabled: editing && !editing.busy
             text: i18n.tr("Contacts…")
-            onClicked: activeTransfer = contactPicker.request()
+            onClicked: page.activeTransfer = contactPicker.request()
         }
 
         Button {
@@ -304,6 +307,104 @@ ItemPage {
         }
     }
 
+
+    Component {
+        id: forwardContact
+        Contact {
+            id: contct
+            property PhoneNumber forwardToNumber
+        }
+    }
+
+
+    Component {
+        id: chooseNumberDialog
+        Dialog {
+            id: dialog
+            property var contact
+            title: i18n.tr('Please select a phone number')
+
+            ListItem.ItemSelector {
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                }
+                expanded: true
+                text: i18n.tr("Numbers")
+                model: contact.phoneNumbers
+                delegate: OptionSelectorDelegate {
+                    text: modelData.number
+                    activeFocusOnPress: false
+                }
+                onDelegateClicked: {
+                    console.warn('selected number', index, contact.phoneNumbers[index]);
+                    contact.forwardToNumber = contact.phoneNumbers[index];
+                    onClicked: {
+                        editing.setContact(contact);
+                        PopupUtils.close(dialog)
+                    }
+                }
+            }
+        }
+    }
+
+    Component {
+        id: hadNoNumberDialog
+        Dialog {
+            id: dialog
+            title: i18n.tr("Could not forward to this contact")
+            text: i18n.tr("Contact not associated with any phone number.")
+            Button {
+                text: i18n.tr("OK")
+                activeFocusOnPress: false
+                onClicked: PopupUtils.close(dialog)
+            }
+        }
+    }
+
+
+    VCardParser {
+        id: contactParser
+
+        signal addContactsAnswer(var id, var contactIds, var retryList, var urserList);
+
+        property int importedContactCount: 0
+        property string dialogTitle: ""
+        property string dialogText: ""
+
+        function parseContact(vcardContact) {
+            console.warn('parseContact', vcardContact);
+            return vcardContact;
+        }
+
+        onVcardParsed: {
+            console.warn('onVcardParsed', contacts);
+            var contact;
+            if (contacts.length === 0) {
+                console.warn('no contacts parsed');
+                return;
+            } else {
+                console.warn('onVcardParsed parsing contact...');
+                contact = parseContact(contacts[0]);
+                console.warn('onVcardParsed parsed contact', contact);
+                if (contact.phoneNumbers.length === 0) {
+                    console.log("telling user there was no number", contact);
+                    PopupUtils.open(hadNoNumberDialog);
+                } else if (contact.phoneNumbers.length > 1) {
+                    console.log("prompting for selection of number", contact);
+                    PopupUtils.open(chooseNumberDialog, page, {
+                        'contact': contact
+                    });
+                } else {
+                    console.log("using contact", contact);
+                    contact.forwardToNumber = contact.PhoneNumber;
+                    editing.setContact(contact);
+                }
+                console.log("Parsed contact", contact);
+            }
+        }
+    }
+
     ContentTransferHint {
         id: importHint
         anchors.fill: parent
@@ -318,11 +419,11 @@ ItemPage {
     }
 
     Connections {
-        target: activeTransfer ? activeTransfer : null
+        target: page.activeTransfer ? page.activeTransfer : null
         onStateChanged: {
             if (page.activeTransfer.state === ContentTransfer.Charged) {
                 console.warn('ContentTransfer.Charged');
-                editing.importContact(page.activeTransfer.items[0]);
+                contactParser.vCardUrl = page.activeTransfer.items[0].url;
             }
         }
     }

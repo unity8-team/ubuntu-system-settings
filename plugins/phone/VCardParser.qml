@@ -38,8 +38,6 @@ QtObject {
         contactsModel.removeContacts(ids)
     }
 
-
-
     _model: ContactModel {
         id: contactsModel
 
@@ -49,6 +47,7 @@ QtObject {
     }
 
     onVCardUrlChanged: {
+        console.warn('onVCardUrlChanged', vCardUrl);
         if (vCardUrl.length > 0) {
             clearModel()
             contactsModel.importContacts(vCardUrl)

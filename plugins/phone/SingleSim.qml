@@ -28,10 +28,21 @@ Column {
     property string carrierName: sim.netReg.name
     property string carrierString: carrierName ? carrierName : i18n.tr("SIM")
 
-    ListItem.Standard {
+    ListItem.SingleValue {
         objectName: "callFwd"
         text: i18n.tr("Call forwarding")
         progression: true
+        value: {
+            if (sim.callForwarding.forwardingFlagOnSim) {
+                return i18n.tr("All calls");
+            } else if (sim.callForwarding.voiceBusy ||
+                       sim.callForwarding.voiceNoReply ||
+                       sim.callForwarding.voiceNotReachable) {
+                return i18n.tr("Some calls")
+            } else {
+                return i18n.tr("Off")
+            }
+        }
         onClicked: pageStack.push(Qt.resolvedUrl("CallForwarding.qml"), {sim: sim})
     }
 

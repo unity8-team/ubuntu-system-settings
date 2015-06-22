@@ -23,7 +23,6 @@ import Ubuntu.Components 1.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 import Ubuntu.Components.Themes.Ambiance 0.1
 import MeeGo.QOfono 0.2
-import QtContacts 5.0
 import "callForwardingUtils.js" as Utils
 
 Column {
@@ -60,11 +59,14 @@ Column {
     function cancel () {
         console.warn('cancel')
         d._editing = false;
+        check.checked = callForwarding[rule] !== "";
     }
 
-    function importContact (contentItem) {
-        console.warn('importing contact', contentItem.url);
-        contactParser.vCardUrl = contentItem.url;
+    function setContact (contact) {
+        var number = contact.forwardToNumber;
+        number = number.replace(/\s+/g, '');
+        console.warn('contact', contact, number);
+        field.text = number;
     }
 
     QtObject {
@@ -164,35 +166,12 @@ Column {
             horizontalAlignment: TextInput.AlignRight
             inputMethodHints: Qt.ImhDialableCharactersOnly
             text: callForwarding[rule]
-            font.pixelSize: units.dp(18)
-            font.weight: Font.Light
-            font.family: "Ubuntu"
-            color: "#AAAAAA"
             maximumLength: 20
-            focus: true
-            // cursorVisible: text !== serverProperty || text === ""
-            cursorVisible: true
-            style: TextFieldStyle {
-                overlaySpacing: units.gu(0.5)
-                frameSpacing: 0
-                background: Rectangle {
-                    property bool error: (field.hasOwnProperty("errorHighlight") &&
-                                         field.errorHighlight &&
-                                         !field.acceptableInput)
-                    onErrorChanged: error ? UbuntuColors.orange : color
-                    color: Theme.palette.normal.background
-                    anchors.fill: parent
-                    visible: field.activeFocus
-                }
-                color: UbuntuColors.lightAubergine
+            Binding {
+                target: field
+                property: "cursorVisible"
+                value: true
             }
-
-            cursorDelegate: Rectangle {
-                width: units.dp(1)
-                color: "#DD4814"
-
-            }
-            onVisibleChanged: if (visible === true) forceActiveFocus()
         }
 
         Behavior on height {
@@ -202,8 +181,6 @@ Column {
         }
     }
 
-    /* This will show either the number of the rule, or the contact assigned
-    the rule. */
     ListItem.SingleValue {
         id: current
         visible: value
@@ -237,95 +214,10 @@ Column {
         Component.onCompleted: {
             item.callForwarding[item.rule + 'Changed'].connect(Utils.ruleChanged);
             item.callForwarding[item.rule + 'Complete'].connect(Utils.ruleComplete);
-                    // onVoiceUnconditionalChanged: {
-                    //     parent.value = property;
-                    //     console.warn('voiceUnconditional changed', property);
-                    // }
-                    // onVoiceUnconditionalComplete: {
-                    //     console.warn('voiceUnconditional complete', success);
-                    //     if (success) {
-                    //         // worked
-                    //     } else {
-                    //         // failed
-                    //     }
-                    // }
         }
         Component.onDestruction: {
             item.callForwarding[item.rule + 'Changed'].disconnect(Utils.ruleChanged);
             item.callForwarding[item.rule + 'Complete'].disconnect(Utils.ruleComplete);
-        }
-    }
-
-    Component {
-        id: forwardContact
-        Contact {
-            id: contct
-        }
-    }
-
-
-    VCardParser {
-        id: contactParser
-
-        signal addContactsAnswer(var id, var contactIds, var retryList, var urserList);
-
-        property int importedContactCount: 0
-        property string dialogTitle: ""
-        property string dialogText: ""
-
-        function parseContact(vcardContact) {
-            console.warn('parseContact', vcardContact);
-            var contact = forwardContact.createObject(contactParser);
-
-            contact.name.firstName = vcardContact.name.firstName;
-            contact.name.lastName = vcardContact.name.lastName;
-            if (contact.name.firstName === "") {
-                var labelName = vcardContact.displayLabel.label.split(" ");
-                contact.firstName = labelName[0];
-                if (labelName.length >1) {
-                    //removes the first name
-                    labelName.shift();
-                    contact.lastName = labelName.toString().replace(",","");
-                } else {
-                    contact.lastName = "";
-                }
-            }
-            contact.phone = vcardContact.phoneNumber.number;
-            return contact;
-        }
-
-        // onAddContactsAnswer: {
-        //     telegramClient.contactsImportContactsAnswer.disconnect(contactParser.addContactsAnswer);
-        //     busy = false;
-
-        //     console.log("Imported " + contactIds.length + " contacts out of " + importedContactCount);
-        //     dialogTitle = contactIds.length > 0 ? i18n.tr("Contacts imported") : i18n.tr("No contacts imported");
-        //     dialogText = i18n.tr("This contact is on Telegram.",
-        //                          "%1 out of %2 contacts are on Telegram.",
-        //                          importedContactCount).arg(contactIds.length).arg(importedContactCount);
-        //     PopupUtils.open(contactImportDialogComponent);
-        // }
-
-        onVcardParsed: {
-            if (contacts.length === 0) {
-                console.warn('no contacts parsed');
-                return;
-            }
-            console.log("Parsed " + contacts.length + " contacts.");
-            if (contacts.length === 1) {
-                var singleContact = parseContact(contacts[0]);
-                // showAddContactPage(true, -1, singleContact);
-                console.warn('parsed single contact', singleContact)
-            } else {
-                var contactList = [];
-                for (var i = 0; i < contacts.length; i++) {
-                    var contact = parseContact(contacts[i]);
-                    if (contact.phone !== "" && contact.firstName !== "") {
-                        contactList.push(contact);
-                    }
-                }
-                console.warn('parsed multiple contacts', contacts.length, contactList)
-            }
         }
     }
 }
