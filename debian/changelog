@@ -1,3 +1,14 @@
+ubuntu-system-settings (0.3+15.10.20150622-0ubuntu1) wily; urgency=medium
+
+  [ CI Train Bot ]
+  * New rebuild forced.
+
+  [ jonas-drange ]
+  * [wifi] skip some tests that cannot be mocked and use specific object
+    when found during connection (LP: #1441192)
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Mon, 22 Jun 2015 13:01:01 +0000
+
 ubuntu-system-settings (0.3+15.10.20150615-0ubuntu1) wily; urgency=medium
 
   [ CI Train Bot ]
