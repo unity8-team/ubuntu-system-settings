@@ -33,7 +33,7 @@ Column {
         text: i18n.tr("Call forwarding")
         progression: true
         value: {
-            if (sim.callForwarding.forwardingFlagOnSim) {
+            if (sim.callForwarding.voiceUnconditional) {
                 return i18n.tr("All calls");
             } else if (sim.callForwarding.voiceBusy ||
                        sim.callForwarding.voiceNoReply ||

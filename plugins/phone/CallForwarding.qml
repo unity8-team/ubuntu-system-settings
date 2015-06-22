@@ -42,11 +42,18 @@ ItemPage {
 
     states: [
         State {
+            name: "forwardBusy"
+            PropertyChanges { target: fwdSomeTitle; enabled: false }
+            PropertyChanges { target: fwdAll; enabled: false; }
+            PropertyChanges { target: fwdBusy; enabled: false; }
+            PropertyChanges { target: fwdLost; enabled: false; }
+            PropertyChanges { target: fwdUnreachable; enabled: false; }
+            when: fwdAll.busy || fwdBusy.busy || fwdLost.busy || fwdUnreachable.busy
+        },
+        State {
             name: "forwardFailed"
-            PropertyChanges { target: fwdSomeTitle; }
+            PropertyChanges { target: fwdSomeTitle; enabled: false }
             PropertyChanges { target: fwdFailedLabel; visible: true }
-            PropertyChanges { target: fwdAllCaption; }
-
             PropertyChanges { target: fwdAll; enabled: false; }
             PropertyChanges { target: fwdBusy; enabled: false; }
             PropertyChanges { target: fwdLost; enabled: false; }
@@ -58,7 +65,7 @@ ItemPage {
             PropertyChanges { target: fwdBusy; enabled: false; explicit: true }
             PropertyChanges { target: fwdLost; enabled: false; explicit: true }
             PropertyChanges { target: fwdUnreachable; enabled: false; explicit: true }
-            PropertyChanges { target: fwdSomeTitle; }
+            PropertyChanges { target: fwdSomeTitle; enabled: false }
             StateChangeScript {
                 name: "editingEnabled"
                 script: {
@@ -232,6 +239,7 @@ ItemPage {
             }
             enabled: editing && !editing.busy
             text: i18n.tr("Set")
+            activeFocusOnPress: false
             onClicked: editing.save()
         }
     }
@@ -245,15 +253,6 @@ ItemPage {
             }
         }
     }
-
-    Component {
-        id: forwardContact
-        Contact {
-            id: contct
-            property PhoneNumber forwardToNumber
-        }
-    }
-
 
     Component {
         id: chooseNumberDialog
@@ -270,16 +269,14 @@ ItemPage {
                 expanded: true
                 text: i18n.tr("Numbers")
                 model: contact.phoneNumbers
+                selectedIndex: -1
                 delegate: OptionSelectorDelegate {
                     text: modelData.number
                     activeFocusOnPress: false
                 }
                 onDelegateClicked: {
-                    contact.forwardToNumber = contact.phoneNumbers[index];
-                    onClicked: {
-                        editing.setContact(contact);
-                        PopupUtils.close(dialog)
-                    }
+                    editing.field.text = contact.phoneNumbers[index].number;
+                    PopupUtils.close(dialog);
                 }
             }
         }
@@ -313,15 +310,14 @@ ItemPage {
                 return;
             } else {
                 contact = parseContact(contacts[0]);
-                if (contact.phoneNumbers.length === 0) {
+                if (contact.phoneNumbers.length < 1) {
                     PopupUtils.open(hadNoNumberDialog);
                 } else if (contact.phoneNumbers.length > 1) {
                     PopupUtils.open(chooseNumberDialog, page, {
                         'contact': contact
                     });
                 } else {
-                    contact.forwardToNumber = contact.PhoneNumber;
-                    editing.setContact(contact);
+                    editing.field.text = contact.phoneNumber.number;
                 }
             }
         }

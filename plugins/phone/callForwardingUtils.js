@@ -28,6 +28,7 @@ function checked (value) {
  * @return {Boolean} whether or not we requested a change
  */
 function requestRule (value) {
+    value = value.replace(/\s+/g, '');
     if (value === item.callForwarding[item.rule]) {
         console.warn('Value did not change.');
         return false;
@@ -86,7 +87,7 @@ function show(item) {
 
     // check if the item is already visible
     var bottomY = flick.contentY + flick.height;
-    var itemBottom = position.y + item.height; // extra margin
+    var itemBottom = position.y + item.height + units.gu(2); // extra margin
     if (position.y >= flick.contentY && itemBottom <= bottomY) {
         return;
     }
@@ -101,4 +102,3 @@ function show(item) {
     }
     flick.returnToBounds();
 }
-

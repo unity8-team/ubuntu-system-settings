@@ -51,7 +51,6 @@ Column {
      * Saves the rule.
      */
     function save () {
-        console.warn('save');
         d._pending = true;
         if (!Utils.requestRule(field.text)) {
             d._pending = false;
@@ -64,21 +63,8 @@ Column {
      * Cancels editing the rule.
      */
     function cancel () {
-        console.warn('cancel')
         d._editing = false;
         check.checked = callForwarding[rule] !== "";
-    }
-
-    /**
-     * Sets a contact on this forwarding item.
-     *
-     * @param {QDeclarativeContact} contact to set
-     */
-    function setContact (contact) {
-        var number = contact.forwardToNumber.number;
-        number = number.replace(/\s+/g, '');
-        console.warn('contact', contact, number);
-        field.text = number;
     }
 
     QtObject {
@@ -159,6 +145,7 @@ Column {
             id: check
             checked: callForwarding[rule] !== ""
             onTriggered: Utils.checked(checked)
+            visible: !activity.running
         }
     }
 

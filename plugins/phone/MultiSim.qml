@@ -40,7 +40,7 @@ Column {
             text: i18n.tr("Call forwarding")
             progression: true
             value: {
-                if (sims[index].callForwarding.forwardingFlagOnSim) {
+                if (sims[index].callForwarding.voiceUnconditional) {
                     return i18n.tr("All calls");
                 } else if (sims[index].callForwarding.voiceBusy ||
                            sims[index].callForwarding.voiceNoReply ||
