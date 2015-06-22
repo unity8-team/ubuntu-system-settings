@@ -20,6 +20,7 @@ from __future__ import absolute_import
 import dbus
 import dbusmock
 import os
+import random
 import subprocess
 from datetime import datetime
 from time import sleep
@@ -27,6 +28,8 @@ from time import sleep
 import ubuntuuitoolkit
 from autopilot import platform
 from autopilot.matchers import Eventually
+from dbusmock.templates.networkmanager import (InfrastructureMode,
+                                               NM80211ApSecurityFlags)
 from fixtures import EnvironmentVariable
 from gi.repository import UPowerGlib
 from testtools.matchers import Equals, NotEquals, GreaterThan
@@ -871,5 +874,24 @@ class WifiBaseTestCase(UbuntuSystemSettingsTestCase,
             NM_SERVICE, self.device_path),
             dbusmock.MOCK_IFACE)
 
+        self.ap_mock = self.create_access_point('test_ap', 'test_ap')
+
         super(WifiBaseTestCase, self).setUp()
         self.wifi_page = self.main_view.go_to_wifi_page()
+
+    def create_access_point(self, name, ssid, secured=True):
+
+        if secured:
+            security = NM80211ApSecurityFlags.NM_802_11_AP_SEC_KEY_MGMT_PSK
+        else:
+            security = NM80211ApSecurityFlags.NM_802_11_AP_SEC_NONE
+
+        return self.dbusmock.AddAccessPoint(
+            self.device_path, name, ssid, self.random_mac_address(),
+            InfrastructureMode.NM_802_11_MODE_INFRA, 2425, 5400, 82, security)
+
+    def random_mac_address(self):
+        """Returns a random Mac Address"""
+        mac = [0x00, 0x16, 0x3e, random.randint(0x00, 0x7f),
+               random.randint(0x00, 0xff), random.randint(0x00, 0xff)]
+        return ':'.join(map(lambda x: "%02x" % x, mac))
