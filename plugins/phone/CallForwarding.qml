@@ -18,6 +18,12 @@
  *
  * You should have received a copy of the GNU General Public License along
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * TODO: Add centrally stored setting for each call forwarding that describes a
+ *       contact. lp:1467816
+ *
+ * TODO: If a setting failed to be set, the error text should be followed by
+ *       “Contact {carrier name} for more information.”.
  */
 
 import QtQuick 2.0
