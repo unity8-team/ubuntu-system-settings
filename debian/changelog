@@ -1,3 +1,13 @@
+ubuntu-system-settings (0.3+15.10.20150615-0ubuntu1) wily; urgency=medium
+
+  [ CI Train Bot ]
+  * New rebuild forced.
+
+  [ Ken VanDine ]
+  * Activate the accessPoint on click
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Mon, 15 Jun 2015 13:41:16 +0000
+
 ubuntu-system-settings (0.3+15.10.20150604-0ubuntu1) wily; urgency=medium
 
   [ Sebastien Bacher ]
