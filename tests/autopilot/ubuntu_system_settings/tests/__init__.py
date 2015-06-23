@@ -252,8 +252,13 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
         modem.SetProperty('Interfaces', interfaces)
 
     def mock_call_forwarding(self, modem):
-        modem.AddProperty(
-            CALL_FWD_IFACE, 'VoiceUnconditional', '')
+        modem.AddProperties(CALL_FWD_IFACE,
+                            {
+                                'VoiceUnconditional': '',
+                                'VoiceBusy': '',
+                                'VoiceNoReply': '',
+                                'VoiceNotReachable': '',
+                            })
         modem.AddMethods(
             CALL_FWD_IFACE,
             [('GetProperties', '', 'a{sv}',

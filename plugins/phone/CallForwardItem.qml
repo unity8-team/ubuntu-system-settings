@@ -143,6 +143,7 @@ Column {
         onClicked: check.trigger(!check.checked)
         control: CheckBox {
             id: check
+            objectName: "check_" + rule
             checked: callForwarding[rule] !== ""
             onTriggered: Utils.checked(checked)
             visible: !activity.running
@@ -153,10 +154,11 @@ Column {
         id: input
         visible: false
         height: visible ? units.gu(6) : 0
-        /* TRANSLATORS: This string will be truncated On smaller displays. */
+        /* TRANSLATORS: This string will be truncated on smaller displays. */
         text: i18n.tr("Forward to")
         control: TextField {
             id: field
+            objectName: "field_" + rule
             horizontalAlignment: TextInput.AlignRight
             inputMethodHints: Qt.ImhDialableCharactersOnly
             text: callForwarding[rule]
@@ -199,8 +201,9 @@ Column {
 
     ListItem.SingleValue {
         id: current
+        objectName: "current_" + rule
         visible: value
-        /* TRANSLATORS: This string will be truncated On smaller displays. */
+        /* TRANSLATORS: This string will be truncated on smaller displays. */
         text: i18n.tr("Forward to")
         value: callForwarding[rule]
         onClicked: d._editing = true

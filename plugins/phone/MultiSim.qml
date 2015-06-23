@@ -28,62 +28,66 @@ Column {
 
     property var sims
 
-    spacing: units.gu(2)
-
     Repeater {
         model: sims
 
-        SettingsItemTitle { text: sims[index].title }
+        Column {
 
-        ListItem.SingleValue {
-            objectName: "callFwdSim" + index
-            text: i18n.tr("Call forwarding")
-            progression: true
-            value: {
-                if (sims[index].callForwarding.voiceUnconditional) {
-                    return i18n.tr("All calls");
-                } else if (sims[index].callForwarding.voiceBusy ||
-                           sims[index].callForwarding.voiceNoReply ||
-                           sims[index].callForwarding.voiceNotReachable) {
-                    return i18n.tr("Some calls")
-                } else {
-                    return i18n.tr("Off")
+            anchors { left: parent.left; right: parent.right }
+
+            SettingsItemTitle { text: sims[index].title }
+
+            ListItem.SingleValue {
+                objectName: "callFwdSim" + index
+                text: i18n.tr("Call forwarding")
+                progression: true
+                value: {
+                    if (sims[index].callForwarding.voiceUnconditional) {
+                        return i18n.tr("All calls");
+                    } else if (sims[index].callForwarding.voiceBusy ||
+                               sims[index].callForwarding.voiceNoReply ||
+                               sims[index].callForwarding.voiceNotReachable) {
+                        return i18n.tr("Some calls")
+                    } else {
+                        return i18n.tr("Off")
+                    }
                 }
+                onClicked: pageStack.push(Qt.resolvedUrl("CallForwarding.qml"), {
+                    sim: sims[index],
+                    headerTitle: sims[index].title
+                })
             }
-            onClicked: pageStack.push(Qt.resolvedUrl("CallForwarding.qml"), {
-                sim: sims[index],
-                headerTitle: sims[index].title
-            })
-        }
 
-        ListItem.Standard {
-            objectName: "callWaitSim" + index
-            text: i18n.tr("Call waiting")
-            progression: true
-            onClicked: pageStack.push(Qt.resolvedUrl("CallWaiting.qml"), {
-                sim: sims[index],
-                headerTitle: sims[index].title
-            })
-        }
+            ListItem.Standard {
+                objectName: "callWaitSim" + index
+                text: i18n.tr("Call waiting")
+                progression: true
+                onClicked: pageStack.push(Qt.resolvedUrl("CallWaiting.qml"), {
+                    sim: sims[index],
+                    headerTitle: sims[index].title
+                })
+            }
 
-        ListItem.Standard {
-            objectName: "simServicesSim" + index
-            text: i18n.tr("Services")
-            progression: true
-            enabled: sims[index].simMng.present
-            onClicked: pageStack.push(Qt.resolvedUrl("Services.qml"), {
-                carrierString: sims[index].netReg.name,
-                sim: sims[index].simMng,
-                headerTitle: sims[index].title
-            })
-        }
+            ListItem.Standard {
+                objectName: "simServicesSim" + index
+                text: i18n.tr("Services")
+                progression: true
+                enabled: sims[index].simMng.present
+                showDivider: false
+                onClicked: pageStack.push(Qt.resolvedUrl("Services.qml"), {
+                    carrierString: sims[index].netReg.name,
+                    sim: sims[index].simMng,
+                    headerTitle: sims[index].title
+                })
+            }
 
-        ListItem.Divider {}
+            ListItem.Divider {}
 
-        Binding {
-            target: sims[index]
-            property: "name"
-            value: phoneSettings.simNames[modemsSorted[index]]
+            Binding {
+                target: sims[index]
+                property: "name"
+                value: phoneSettings.simNames[modemsSorted[index]]
+            }
         }
     }
 

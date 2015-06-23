@@ -168,6 +168,7 @@ ItemPage {
 
             CallForwardItem {
                 id: fwdBusy
+                objectName: "fwdBusy"
                 anchors { left: parent.left; right: parent.right }
                 callForwarding: sim.callForwarding
                 rule: "voiceBusy"
@@ -178,6 +179,7 @@ ItemPage {
 
             CallForwardItem {
                 id: fwdLost
+                objectName: "fwdLost"
                 anchors { left: parent.left; right: parent.right }
                 callForwarding: sim.callForwarding
                 rule: "voiceNoReply"
@@ -188,6 +190,7 @@ ItemPage {
 
             CallForwardItem {
                 id: fwdUnreachable
+                objectName: "fwdUnreachable"
                 anchors { left: parent.left; right: parent.right }
                 callForwarding: sim.callForwarding
                 rule: "voiceNotReachable"
@@ -213,6 +216,7 @@ ItemPage {
         height: units.gu(6)
         Button {
             id: kbdContacts
+            objectName: "contactsButton"
             anchors {
                 left: parent.left
                 leftMargin: units.gu(1)
@@ -226,6 +230,7 @@ ItemPage {
 
         Button {
             id: kbdCancel
+            objectName: "cancelButton"
             anchors {
                 right: kbdSet.left
                 rightMargin: units.gu(1)
@@ -238,6 +243,7 @@ ItemPage {
 
         Button {
             id: kbdSet
+            objectName: "setButton"
             anchors {
                 right: parent.right
                 rightMargin: units.gu(1)
