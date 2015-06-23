@@ -28,9 +28,6 @@ import "callForwardingUtils.js" as Utils
 Column {
     id: item
 
-    /**
-     * Rule.
-     */
     property OfonoCallForwarding callForwarding
     property bool enabled: true
     property string rule
@@ -45,7 +42,6 @@ Column {
     signal failed ()
     signal enteredEditMode ()
     signal leftEditMode ()
-    signal serverResponse (bool success)
 
    /**
      * Saves the rule.
@@ -67,6 +63,9 @@ Column {
         check.checked = callForwarding[rule] !== "";
     }
 
+    /**
+     * Private object that keeps track of state of the UI.
+     */
     QtObject {
         id: d
 
