@@ -31,15 +31,14 @@ Component {
         objectName: "otherNetworkDialog"
         anchorToKeyboard: true
 
-        function settingsValid() {
-            if(networkname.length == 0) {
+        function settingsValid () {
+            if (networkname.length === 0) {
                 return false;
             }
-            if(securityList.selectedIndex == 0) {
+            if (securityList.selectedIndex === 0) {
                 return true
             }
-            if(securityList.selectedIndex == 3) {
-                
+            if (securityList.selectedIndex === 3) {
                 // WEP
                 return password.length === 5  ||
                        password.length === 10 ||
@@ -269,7 +268,7 @@ Component {
             objectName: "wepInsecureLabel"
             color: "red"
             text: i18n.tr("This network is insecure.")
-            visible: ( securityList.selectedIndex == 3)
+            visible: securityList.selectedIndex === 3
         }
 
         Label {
@@ -280,7 +279,8 @@ Component {
             font.bold: false
             color: Theme.palette.selected.backgroundText
             elide: Text.ElideRight
-            visible: ( securityList.selectedIndex == 2 || securityList.selectedIndex == 4)
+            visible: securityList.selectedIndex === 2 ||
+                     securityList.selectedIndex === 4
         }
 
         ListItem.ItemSelector {
@@ -292,7 +292,8 @@ Component {
                 i18n.tr("FAST"),     // index: 3
                 i18n.tr("PEAP"),     // index: 4
             ]
-            visible: ( securityList.selectedIndex == 2 || securityList.selectedIndex == 4)
+            visible: securityList.selectedIndex === 2 ||
+                     securityList.selectedIndex === 4
         }
 
         Label {
@@ -303,27 +304,29 @@ Component {
             font.bold: false
             color: Theme.palette.selected.backgroundText
             elide: Text.ElideRight
-            visible:    ( securityList.selectedIndex == 2 || securityList.selectedIndex == 4) // WPA or D-WEP
-                     && ( authList.selectedIndex == 1 ||
-                          authList.selectedIndex == 3 ||
-                          authList.selectedIndex == 4   )
+            visible: (securityList.selectedIndex === 2 ||
+                      securityList.selectedIndex === 4 /* WPA or D-WEP */) &&
+                     (authList.selectedIndex === 1 ||
+                      authList.selectedIndex === 3 ||
+                      authList.selectedIndex === 4)
         }
 
         ListItem.ItemSelector {
             id: p2authList
             objectName: "p2authList"
             width: parent.width
-            model: [i18n.tr("PAP"),      // index: 0
+            model: [i18n.tr("PAP"),  // index: 0
                 i18n.tr("MSCHAPv2"), // index: 1
                 i18n.tr("MSCHAP"),   // index: 2
                 i18n.tr("CHAP"),     // index: 3
                 i18n.tr("GTC"),      // index: 4
                 i18n.tr("MD5")       // index: 5
             ]
-            visible:    ( securityList.selectedIndex == 2 || securityList.selectedIndex == 4) // WPA or D-WEP
-                     && ( authList.selectedIndex == 1 ||
-                          authList.selectedIndex == 3 ||
-                          authList.selectedIndex == 4   )
+            visible: (securityList.selectedIndex === 2 ||
+                      securityList.selectedIndex === 4 /* WPA or D-WEP */) &&
+                     (authList.selectedIndex === 1 ||
+                      authList.selectedIndex === 3 ||
+                      authList.selectedIndex === 4)
         }
 
         Label {
@@ -333,10 +336,11 @@ Component {
             fontSize: "medium"
             font.bold: false
             color: Theme.palette.selected.backgroundText
-            visible:    ( securityList.selectedIndex == 2 || securityList.selectedIndex == 4) // WPA or D-WEP
-                     && ( authList.selectedIndex == 0 ||
-                          authList.selectedIndex == 1 ||
-                          authList.selectedIndex == 3  )
+            visible: (securityList.selectedIndex === 2 ||
+                      securityList.selectedIndex === 4 /* WPA or D-WEP */) &&
+                     (authList.selectedIndex === 0 ||
+                      authList.selectedIndex === 1 ||
+                      authList.selectedIndex === 3)
         }
 
         ListItem.ItemSelector {
@@ -345,30 +349,49 @@ Component {
                 left: parent.left
                 right: parent.right
             }
-            visible:    ( securityList.selectedIndex == 2 || securityList.selectedIndex == 4) // WPA or D-WEP
-                     && ( authList.selectedIndex == 0 ||
-                          authList.selectedIndex == 1 ||
-                          authList.selectedIndex == 3  )
+            visible: (securityList.selectedIndex === 2 ||
+                      securityList.selectedIndex === 4 /* WPA or D-WEP */) &&
+                     (authList.selectedIndex === 0 ||
+                      authList.selectedIndex === 1 ||
+                      authList.selectedIndex === 3)
             model: cacertListModel
             expanded: false
             delegate: certSelectorDelegate
             selectedIndex: 0
             property string cacertFileName: {
-                if( cacertSelector.selectedIndex !== 0 &&
-                    cacertSelector.selectedIndex !== (cacertListModel.rowCount()-1)){
-                    cacertListModel.getfileName(cacertSelector.selectedIndex)
-                } else {"";}
+                if (selectedIndex !== 0 &&
+                    selectedIndex !== (cacertListModel.rowCount()-1)) {
+                    return cacertListModel.getfileName(selectedIndex);
+                } else {
+                    return "";
+                }
             }
+
+            /* FIXME: All subsequent onSelectedIndex event handlers that are
+            similar to this one should be moved into a function, preferably a
+            JavaScript file called 'otherNetworksHelpers.js'. This will reduce
+            code duplication and increase readability. */
             onSelectedIndexChanged: {
-                if (cacertSelector.selectedIndex === cacertListModel.rowCount()-1){
-                    cacertSelector.selectedIndex = 0
-                    var pickerDialog = PopupUtils.open(Qt.resolvedUrl("./CertPicker.qml"));
-                    pickerDialog.fileImportSignal.connect(function(file){
-                        if (!file === false){
-                            certDialogLoader.source = "./CertDialog.qml";
-                            var cacertDialog = PopupUtils.open(certDialogLoader.item, cacertSelector, {fileName: file, certType: 0});
-                            cacertDialog.updateSignal.connect(function(update){
-                                if (update) {cacertListModel.dataupdate();}
+                var pickerDialog;
+                var cacertDialog;
+                if (selectedIndex === cacertListModel.rowCount()-1) {
+                    selectedIndex = 0;
+                    pickerDialog = PopupUtils.open(
+                        Qt.resolvedUrl("./CertPicker.qml")
+                    );
+                    pickerDialog.fileImportSignal.connect(function (file) {
+                        if (!file === false) {
+                            certDialogLoader.source = Qt.resolvedUrl(
+                                "./CertDialog.qml"
+                            );
+                            cacertDialog = PopupUtils.open(
+                                certDialogLoader.item, cacertSelector, {
+                                    fileName: file,
+                                    certType: 0
+                                }
+                            );
+                            cacertDialog.updateSignal.connect(function (update) {
+                                if (update) cacertListModel.dataupdate();
                             });
                         }
                     });
@@ -378,10 +401,22 @@ Component {
 
         Component{
             id: certSelectorDelegate
-            OptionSelectorDelegate { text: (CommonName.length > 32) ? CommonName.substr(0,30).concat("…") : CommonName
-                subText:(CommonName !== i18n.tr("None") && CommonName !== i18n.tr("Choose…")) ?
-                ( ( (Organization.length > 15) ? Organization.substr(0,13).concat("…") : Organization)
-                + ", Exp.date: " + expiryDate) : ""
+            OptionSelectorDelegate {
+
+                /* FIXME: This should be dealt with by the ui toolkit. We can
+                not be sure that ellipsis translates well into other languages.
+                */
+                text: CommonName.length > 32 ?
+                      CommonName.substr(0,30).concat("…") :
+                      CommonName
+                // FIXME: See above comment.
+                // FIXME: Increase readability by using conditionals in a block.
+                subText: (CommonName !== i18n.tr("None") &&
+                          CommonName !== i18n.tr("Choose…")) ?
+                          (((Organization.length > 15) ?
+                             Organization.substr(0,13).concat("…") :
+                             Organization)
+                          + ", Exp.date: " + expiryDate) : ""
             }
         }
 
@@ -401,8 +436,9 @@ Component {
             fontSize: "medium"
             font.bold: false
             color: Theme.palette.selected.backgroundText
-            visible:    ( securityList.selectedIndex == 2 || securityList.selectedIndex == 4)
-                     && ( authList.selectedIndex == 0 ) // only for TLS
+            visible: (securityList.selectedIndex === 2 ||
+                      securityList.selectedIndex === 4) &&
+                      authList.selectedIndex === 0 // only for TLS
 
         }
 
@@ -412,28 +448,42 @@ Component {
                 left: parent.left
                 right: parent.right
             }
-            visible:    ( securityList.selectedIndex == 2 || securityList.selectedIndex == 4)
-                     && ( authList.selectedIndex == 0 ) // only for TLS
+            visible: (securityList.selectedIndex === 2 ||
+                      securityList.selectedIndex === 4) &&
+                      authList.selectedIndex === 0 // only for TLS
             model: cacertListModel
             expanded: false
             delegate: certSelectorDelegate
             selectedIndex: 0
             property string usercertFileName: {
-                if( usercertSelector.selectedIndex !== 0 &&
-                    usercertSelector.selectedIndex !== (cacertListModel.rowCount()-1)){
-                      cacertListModel.getfileName(usercertSelector.selectedIndex)
-                } else {"";}
+                if (selectedIndex !== 0 &&
+                    selectedIndex !== (model.rowCount()-1)) {
+                      return model.getfileName(selectedIndex);
+                } else {
+                    return "";
+                }
             }
             onSelectedIndexChanged: {
-                if (usercertSelector.selectedIndex === cacertListModel.rowCount()-1){
-                    usercertSelector.selectedIndex = 0;
-                    var pickerDialog = PopupUtils.open(Qt.resolvedUrl("./CertPicker.qml"));
-                    pickerDialog.fileImportSignal.connect(function(file){
-                        if (!file === false){
-                            certDialogLoader.source = "./CertDialog.qml";
-                            var usercertDialog = PopupUtils.open(certDialogLoader.item, usercertSelector, {fileName: file, certType: 0});
-                            usercertDialog.updateSignal.connect(function(update){
-                                if (update) {cacertListModel.dataupdate();}
+                var pickerDialog;
+                var usercertDialog;
+                if (selectedIndex === model.rowCount()-1) {
+                    selectedIndex = 0;
+                    pickerDialog = PopupUtils.open(
+                        Qt.resolvedUrl("./CertPicker.qml")
+                    );
+                    pickerDialog.fileImportSignal.connect(function (file) {
+                        if (!file === false) {
+                            certDialogLoader.source = Qt.resolvedUrl(
+                                "./CertDialog.qml"
+                            );
+                            usercertDialog = PopupUtils.open(
+                                certDialogLoader.item, usercertSelector, {
+                                    fileName: file,
+                                    certType: 0
+                                }
+                            );
+                            usercertDialog.updateSignal.connect(function (update) {
+                                if (update) model.dataupdate();
                             });
                         }
                     });
@@ -448,8 +498,9 @@ Component {
             fontSize: "medium"
             font.bold: false
             color: Theme.palette.selected.backgroundText
-            visible:    ( securityList.selectedIndex == 2 || securityList.selectedIndex == 4)
-                     && ( authList.selectedIndex == 0 ) // only for TLS
+            visible: (securityList.selectedIndex === 2 ||
+                      securityList.selectedIndex === 4) &&
+                     (authList.selectedIndex === 0) // only for TLS
         }
 
         PrivatekeyListModel {
@@ -460,8 +511,14 @@ Component {
             id: privatekeySelectorDelegate
             OptionSelectorDelegate {
                 text: KeyName;
-                subText:(KeyName !== i18n.tr("None") && KeyName !== i18n.tr("Choose…")) ?
-                        (KeyType + ", " + KeyAlgorithm +", " + KeyLength + " bit" ) : ""
+
+                /* FIXME: Translate using i18n.tr("%1, %1, %1 bit").arg().…
+                and add comment to translators about what each argument
+                represents. */
+                subText: (KeyName !== i18n.tr("None") &&
+                          KeyName !== i18n.tr("Choose…")) ?
+                          (KeyType + ", " + KeyAlgorithm +", " + KeyLength + " bit" ) :
+                          ""
             }
         }
 
@@ -471,28 +528,45 @@ Component {
                 left: parent.left
                 right: parent.right
             }
-            visible:    ( securityList.selectedIndex == 2 || securityList.selectedIndex == 4)
-                     && ( authList.selectedIndex == 0 ) // only for TLS
+            visible: (securityList.selectedIndex === 2 ||
+                      securityList.selectedIndex === 4) &&
+                     (authList.selectedIndex === 0) // only for TLS
             model: privatekeyListModel
             expanded: false
             delegate: privatekeySelectorDelegate
             selectedIndex: 0
             property string privateKeyFileName: {
-                if(privateKeySelector.selectedIndex !== 0 &&
-                   privateKeySelector.selectedIndex !== (privatekeyListModel.rowCount()-1)){
-                      privatekeyListModel.getfileName(privateKeySelector.selectedIndex)
-                } else {"";}
+                if (selectedIndex !== 0 &&
+                    selectedIndex !==
+                    (model.rowCount()-1)) {
+                    return model.getfileName(
+                        selectedIndex
+                    );
+                } else {
+                    return "";
+                }
             }
             onSelectedIndexChanged: {
-                if (privateKeySelector.selectedIndex === privatekeyListModel.rowCount()-1){
-                    privateKeySelector.selectedIndex = 0;
-                    var pickerDialog = PopupUtils.open(Qt.resolvedUrl("./CertPicker.qml"));
-                    pickerDialog.fileImportSignal.connect(function(file){
+                var pickerDialog;
+                var privatekeyDialog;
+                if (selectedIndex === privatekeyListModel.rowCount()-1) {
+                    selectedIndex = 0;
+                    pickerDialog = PopupUtils.open(
+                        Qt.resolvedUrl("./CertPicker.qml")
+                    );
+                    pickerDialog.fileImportSignal.connect(function (file) {
                         if (!file === false){
-                            certDialogLoader.source = "./CertDialog.qml";
-                            var privatekeyDialog = PopupUtils.open(certDialogLoader.item, privateKeySelector, {fileName: file, certType: 1});
-                            privatekeyDialog.updateSignal.connect(function(update){
-                                if (update) {privatekeyListModel.dataupdate();}
+                            certDialogLoader.source = Qt.resolvedUrl(
+                                "./CertDialog.qml"
+                            );
+                            privatekeyDialog = PopupUtils.open(
+                                certDialogLoader.item, privateKeySelector, {
+                                    fileName: file,
+                                    certType: 1
+                                }
+                            );
+                            privatekeyDialog.updateSignal.connect(function (update) {
+                                if (update) privatekeyListModel.dataupdate();
                             });
                         }
                     });
@@ -507,8 +581,9 @@ Component {
             fontSize: "medium"
             font.bold: false
             color: Theme.palette.selected.backgroundText
-            visible:    ( securityList.selectedIndex == 2 || securityList.selectedIndex == 4) // WPA or D-WEP
-                     && ( authList.selectedIndex == 3  )
+            visible: (securityList.selectedIndex === 2 ||
+                      securityList.selectedIndex === 4 /* WPA or D-WEP */) &&
+                      (authList.selectedIndex === 3)
         }
 
         PacFileListModel {
@@ -526,28 +601,42 @@ Component {
                 left: parent.left
                 right: parent.right
             }
-            visible:    ( securityList.selectedIndex == 2 || securityList.selectedIndex == 4)
-                     && ( authList.selectedIndex == 3 ) // only for FAST
+            visible: (securityList.selectedIndex === 2 ||
+                      securityList.selectedIndex === 4) &&
+                     (authList.selectedIndex === 3) // only for FAST
             model: pacFileListModel
             expanded: false
             delegate: pacFileSelectorDelegate
             selectedIndex: 0
             property string pacFileName: {
-                if(pacFileSelector.selectedIndex !== 0 &&
-                   pacFileSelector.selectedIndex !== (pacFileListModel.rowCount()-1)){
-                       pacFileListModel.getfileName(pacFileSelector.selectedIndex)
-                } else {"";}
+                if (selectedIndex !== 0 &&
+                    selectedIndex !== (model.rowCount()-1)) {
+                       return model.getfileName(selectedIndex);
+                } else {
+                    return "";
+                }
             }
             onSelectedIndexChanged: {
-                if (pacFileSelector.selectedIndex === pacFileListModel.rowCount()-1){
-                    pacFileSelector.selectedIndex = 0;
-                    var pickerDialog = PopupUtils.open(Qt.resolvedUrl("./CertPicker.qml"));
-                    pickerDialog.fileImportSignal.connect(function(file){
-                        if (!file === false){
-                            certDialogLoader.source = "./CertDialog.qml";
-                            var pacDialog = PopupUtils.open(certDialogLoader.item, pacFileSelector, {fileName: file, certType: 2});
-                            pacDialog.updateSignal.connect(function(update){
-                                if (update) {pacFileListModel.dataupdate();}
+                var pickerDialog;
+                var pacDialog;
+                if (selectedIndex === model.rowCount()-1) {
+                    selectedIndex = 0;
+                    pickerDialog = PopupUtils.open(
+                        Qt.resolvedUrl("./CertPicker.qml")
+                    );
+                    pickerDialog.fileImportSignal.connect(function (file) {
+                        if (!file === false) {
+                            certDialogLoader.source = Qt.resolvedUrl(
+                                "./CertDialog.qml"
+                            );
+                            pacDialog = PopupUtils.open(
+                                certDialogLoader.item, pacFileSelector, {
+                                    fileName: file,
+                                    certType: 2
+                                }
+                            );
+                            pacDialog.updateSignal.connect(function (update) {
+                                if (update) model.dataupdate();
                             });
                         }
                     });
@@ -563,8 +652,9 @@ Component {
             font.bold: false
             color: Theme.palette.selected.backgroundText
             elide: Text.ElideRight
-            visible:    ( securityList.selectedIndex == 2 || securityList.selectedIndex == 4)
-                     && ( authList.selectedIndex == 3 )
+            visible: (securityList.selectedIndex === 2 ||
+                      securityList.selectedIndex === 4) &&
+                      (authList.selectedIndex === 3)
         }
 
         ListItem.ItemSelector {
@@ -576,8 +666,9 @@ Component {
                 i18n.tr("Both"),              // index: 3
             ]
             selectedIndex: 1
-            visible:    ( securityList.selectedIndex == 2 || securityList.selectedIndex == 4)
-                     && ( authList.selectedIndex == 3 )
+            visible: (securityList.selectedIndex === 2 ||
+                      securityList.selectedIndex === 4) &&
+                     (authList.selectedIndex === 3)
         }
 
         Label {
@@ -587,15 +678,20 @@ Component {
             fontSize: "medium"
             font.bold: false
             color: Theme.palette.selected.backgroundText
-            visible: ( securityList.selectedIndex == 2  && authList.selectedIndex != 2 )
+            visible: (securityList.selectedIndex === 2 &&
+                      authList.selectedIndex !== 2)
         }
 
         TextField {
             id : anonymousIdentity
             objectName: "anonymousIdentity"
             width: parent.width
-            visible: ( securityList.selectedIndex == 2  && authList.selectedIndex != 2 )
+            visible: (securityList.selectedIndex === 2 &&
+                      authList.selectedIndex !== 2)
             inputMethodHints: Qt.ImhNoPredictiveText
+
+            /* FIXME: When this component completes, it should not steal focus
+            from network name input, which per the spec needs the focus. */
             Component.onCompleted: forceActiveFocus()
             onAccepted: {
                 connectAction.trigger()
@@ -605,8 +701,8 @@ Component {
         Label {
             id: usernameLabel
             text : {
-                if (    ( securityList.selectedIndex == 2 || securityList.selectedIndex == 4)
-                     && ( authList.selectedIndex == 0 )) {
+                if (    ( securityList.selectedIndex === 2 || securityList.selectedIndex === 4)
+                     && ( authList.selectedIndex === 0 )) {
                     i18n.tr("Identity")
                 }
                 else {
@@ -618,29 +714,28 @@ Component {
             font.bold: false
             color: Theme.palette.selected.backgroundText
             elide: Text.ElideRight
-            visible: ( securityList.selectedIndex == 2 || securityList.selectedIndex == 4 || securityList.selectedIndex == 5)
+            visible: ( securityList.selectedIndex === 2 || securityList.selectedIndex === 4 || securityList.selectedIndex === 5)
         }
 
         TextField {
             id : username
             objectName: "username"
             width: parent.width
-            visible: ( securityList.selectedIndex == 2 || securityList.selectedIndex == 4 || securityList.selectedIndex == 5)
+            visible: ( securityList.selectedIndex === 2 || securityList.selectedIndex === 4 || securityList.selectedIndex === 5)
             inputMethodHints: Qt.ImhNoPredictiveText
             Component.onCompleted: forceActiveFocus()
-            onAccepted: {
-                connectAction.trigger()
-            }
+            onAccepted: connectAction.trigger()
         }
 
         Label {
             id: passwordLabel
             text: {
-                if (    ( securityList.selectedIndex == 2 || securityList.selectedIndex == 4)
-                     && ( authList.selectedIndex == 0 )) {
-                    i18n.tr("Private key password")
+                if ((securityList.selectedIndex === 2 ||
+                     securityList.selectedIndex === 4) &&
+                    (authList.selectedIndex === 0)) {
+                    return i18n.tr("Private key password");
                 } else {
-                    i18n.tr("Password")
+                    return i18n.tr("Password");
                 }
             }
             objectName: "passwordListLabel"
@@ -657,11 +752,9 @@ Component {
             width: parent.width
             visible: securityList.selectedIndex !== 0
             echoMode: passwordVisibleSwitch.checked ?
-                          TextInput.Normal : TextInput.Password
+                      TextInput.Normal : TextInput.Password
             inputMethodHints: Qt.ImhNoPredictiveText
-            onAccepted: {
-                connectAction.trigger();
-            }
+            onAccepted: connectAction.trigger()
         }
 
         Row {
@@ -700,8 +793,11 @@ Component {
             id: passwordRememberRow
             layoutDirection: Qt.LeftToRight
             spacing: units.gu(2)
-            visible: (    ( securityList.selectedIndex == 2 || securityList.selectedIndex == 4)
-                      && ( authList.selectedIndex == 1 || authList.selectedIndex == 3 || authList.selectedIndex == 4) )
+            visible: ((securityList.selectedIndex === 2 ||
+                       securityList.selectedIndex === 4) &&
+                      (authList.selectedIndex === 1 ||
+                       authList.selectedIndex === 3 ||
+                       authList.selectedIndex === 4))
 
             CheckBox {
                 id: passwordRememberSwitch
@@ -801,9 +897,21 @@ Component {
                     networkname.text,
                     securityList.selectedIndex,
                     authList.selectedIndex,
-                    [username.text, anonymousIdentity.text],
-                    [password.text, passwordRememberSwitch.checked],
-                    [cacertSelector.cacertFileName, usercertSelector.usercertFileName, privateKeySelector.privateKeyFileName, pacFileSelector.pacFileName, pacProvisioningList.selectedIndex.toString()] ,
+                    [
+                        username.text,
+                        anonymousIdentity.text
+                    ],
+                    [
+                        password.text,
+                        passwordRememberSwitch.checked
+                    ],
+                    [
+                        cacertSelector.cacertFileName,
+                        usercertSelector.usercertFileName,
+                        privateKeySelector.privateKeyFileName,
+                        pacFileSelector.pacFileName,
+                        pacProvisioningList.selectedIndex.toString()
+                    ],
                     p2authList.selectedIndex);
                 otherNetworkDialog.state = "CONNECTING";
             }
