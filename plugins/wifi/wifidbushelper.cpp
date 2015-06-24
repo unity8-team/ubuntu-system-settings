@@ -31,7 +31,9 @@
 
 #define NM_SERVICE "org.freedesktop.NetworkManager"
 #define NM_PATH "/org/freedesktop/NetworkManager"
+#define NM_AP_IFACE "org.freedesktop.NetworkManager.AccessPoint"
 #define NM_DEVICE_IFACE "org.freedesktop.NetworkManager.Device"
+#define NM_DEVICE_WIRELESS_IFACE "org.freedesktop.NetworkManager.Device.Wireless"
 #define NM_ACTIVE_CONNECTION_IFACE "org.freedesktop.NetworkManager.Connection.Active"
 
 typedef QMap<QString,QVariantMap> ConfigurationData;
@@ -185,6 +187,7 @@ void WifiDbusHelper::connect(QString ssid, int security, int auth, QStringList u
     auto devices = reply1.value();
 
     QDBusObjectPath dev;
+    QDBusObjectPath access_point("/");
     for (const auto &d : devices) {
         QDBusInterface iface(NM_SERVICE,
                              d.path(),
@@ -193,7 +196,47 @@ void WifiDbusHelper::connect(QString ssid, int security, int auth, QStringList u
 
         auto type_v = iface.property("DeviceType");
         if (type_v.toUInt() == 2 /* NM_DEVICE_TYPE_WIFI */) {
+
+            // We found the device we want to connect.
             dev = d;
+
+            // Create a proxy for Device.Wireless.
+            QDBusInterface wiface(NM_SERVICE,
+                                  d.path(),
+                                  NM_DEVICE_WIRELESS_IFACE,
+                                  QDBusConnection::systemBus());
+
+            // Get a list of access points and use ssid to find the
+            // one we're trying to connect to.
+            QDBusMessage ap_msg = wiface.call("GetAllAccessPoints");
+            if (ap_msg.type() == QDBusMessage::ReplyMessage && ap_msg.arguments().count() == 1) {
+
+                // Get arguments.
+                QList<QVariant> ap_variant = ap_msg.arguments();
+
+                // Cast the first QVariant argument as QDBusArgument.
+                QDBusArgument ap_argument = ap_variant.at(0).value<QDBusArgument>();
+
+                // Cast the argument to a list of DBus object paths.
+                QList<QDBusObjectPath> ap_list = qdbus_cast<QList<QDBusObjectPath>>(ap_argument);
+
+                // Loop through the list of paths looking for our ssid.
+                for(int i=0; i<ap_list.size(); ++i){
+
+                    // Proxy for AccessPoint.
+                    QDBusInterface aiface(NM_SERVICE,
+                                          ap_list[i].path(),
+                                          NM_AP_IFACE,
+                                          QDBusConnection::systemBus());
+
+                    auto ssid_v = aiface.property("Ssid");
+
+                    if (QString::compare(ssid.toLatin1(), ssid_v.toString(), Qt::CaseSensitive) == 0) {
+                        access_point = ap_list[i];
+                        break;
+                    }
+                }
+            }
             break;
         }
     }
@@ -223,7 +266,7 @@ void WifiDbusHelper::connect(QString ssid, int security, int auth, QStringList u
     QDBusObjectPath tmp;
     auto reply2 = mgr.AddAndActivateConnection(configuration,
                                                dev,
-                                               QDBusObjectPath("/"),
+                                               access_point,
                                                tmp);
     if(!reply2.isValid()) {
         qWarning() << "Could not connect: " << reply2.error().message() << "\n";

@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-10-16 20:04-0600\n"
-"PO-Revision-Date: 2014-10-29 14:53+0000\n"
-"Last-Translator: Víctor R. Ruiz <Unknown>\n"
+"PO-Revision-Date: 2015-06-19 05:44+0000\n"
+"Last-Translator: Adolfo Jayme <fitoschido@gmail.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2015-05-08 05:30+0000\n"
-"X-Generator: Launchpad (build 17474)\n"
+"X-Launchpad-Export-Date: 2015-06-20 05:33+0000\n"
+"X-Generator: Launchpad (build 17572)\n"
 
 #: ubuntu-system-settings.desktop.in.in.h:1 ../src/qml/MainWindow.qml:112
 msgid "System Settings"
@@ -28,7 +28,7 @@ msgstr "Sistema;"
 
 #: ubuntu-system-settings.desktop.in.in.h:3
 msgid "Preferences;Settings;"
-msgstr "Preferencias;Configuraciones;"
+msgstr "Preferencias;Configuración;Ajustes;"
 
 #: ../plugins/background//Preview.qml:70
 msgid "Preview"
@@ -36,7 +36,7 @@ msgstr "Previsualizar"
 
 #: ../plugins/background//Preview.qml:102
 msgid "Remove image"
-msgstr "Eliminar imagen"
+msgstr "Quitar imagen"
 
 #: ../plugins/background//Preview.qml:102
 #: ../plugins/phone//CallForwarding.qml:139

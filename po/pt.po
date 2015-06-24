@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-10-16 20:04-0600\n"
-"PO-Revision-Date: 2015-06-01 08:16+0000\n"
+"PO-Revision-Date: 2015-06-19 22:36+0000\n"
 "Last-Translator: Ivo Xavier <ivofernandes12@gmail.com>\n"
 "Language-Team: Portuguese <pt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2015-06-02 05:36+0000\n"
-"X-Generator: Launchpad (build 17532)\n"
+"X-Launchpad-Export-Date: 2015-06-20 05:33+0000\n"
+"X-Generator: Launchpad (build 17572)\n"
 
 #: ubuntu-system-settings.desktop.in.in.h:1 ../src/qml/MainWindow.qml:112
 msgid "System Settings"
@@ -671,7 +671,7 @@ msgstr "Pontuação automática"
 msgid ""
 "Adds a period, and any missing quotes or brackets, when you tap Space twice."
 msgstr ""
-"Quando carregar duas vezes no espaço adiciona um ponto final, aspas ou "
+"Quando tocar duas vezes no espaço adiciona um ponto final, aspas ou "
 "parênteses em falta."
 
 #: ../plugins/language//PageComponent.qml:225
@@ -1573,7 +1573,7 @@ msgstr "Por tamanho"
 
 #: ../plugins/about//DevMode.qml:35 ../plugins/about//DevMode.qml:90
 msgid "Developer Mode"
-msgstr "Modo de Programador"
+msgstr "Modo de programador"
 
 #: ../plugins/about//DevMode.qml:84
 msgid ""
@@ -1751,7 +1751,7 @@ msgstr "Atualizações"
 
 #: ../plugins/system-update//PageComponent.qml:90
 msgid "Update System"
-msgstr "Atualizar o Sistema"
+msgstr "Atualizar o sistema"
 
 #: ../plugins/system-update//PageComponent.qml:91
 msgid "The phone needs to restart to install the system update."
@@ -1938,11 +1938,11 @@ msgstr[1] "Remover %1 imagens"
 
 #: ../plugins/background//Components//AddRemove.qml:80
 msgid "Add an image…"
-msgstr "Adicionar uma imagem..."
+msgstr "Adicionar imagem"
 
 #: ../plugins/background//Components//AddRemove.qml:91
 msgid "Remove images…"
-msgstr "Remover imagens..."
+msgstr "Remover imagens"
 
 #: ../plugins/cellular//Components//SingleSim.qml:37
 #: ../plugins/cellular//Components//NoSim.qml:29
@@ -2189,7 +2189,7 @@ msgid ""
 "partners, the makers of the operating system."
 msgstr ""
 "O seu telemóvel está pré-definido para reportar erros para a Canonical e "
-"seus parceiros, criadores do sistema operativo"
+"seus parceiros, criadores do sistema operativo."
 
 #: ../wizard/qml/Pages//60-reporting.qml:41
 msgid ""
@@ -2967,4 +2967,4 @@ msgstr "Há uma nova imagem do sistema."
 
 #: ../push-helper/software_updates_helper.py:151
 msgid "Tap to open the system updater."
-msgstr "Carregue para abrir o atualizador do sistema."
+msgstr "Toque para abrir o atualizador do sistema."

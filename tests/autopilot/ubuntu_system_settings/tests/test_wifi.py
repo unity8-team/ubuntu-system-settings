@@ -7,9 +7,7 @@
 
 from __future__ import absolute_import
 from autopilot.matchers import Eventually
-from dbusmock.templates.networkmanager import (DEVICE_IFACE,
-                                               InfrastructureMode,
-                                               NM80211ApSecurityFlags)
+from dbusmock.templates.networkmanager import DEVICE_IFACE
 from testtools.matchers import Equals
 from time import sleep
 from ubuntu_system_settings.tests import WifiBaseTestCase
@@ -33,22 +31,12 @@ class WifiTestCase(WifiBaseTestCase):
             self.wifi_page._set_wireless, self.wifi_page.get_wireless())
         self.wifi_page.enable_wireless()
         dialog = self.wifi_page.connect_to_hidden_network(
-            'yeah',
+            'test_ap',
             scroll_to_and_click=self.main_view
             .scroll_to_and_click)
 
         # allow backend to set up listeners
         sleep(0.3)
-
-        """Mock a StateChanged signal on the Device, using a likely
-        scenario of a not found SSID:
-            newState = 120 # NM_DEVICE_STATE_FAILED
-            oldState = 0 # does not matter
-            reason = 53 # NM_DEVICE_STATE_REASON_SSID_NOT_FOUND
-        """
-
-        self.device_mock.EmitSignal(
-            DEVICE_IFACE, 'StateChanged', 'uuu', [100, 0, 0])
 
         if dialog:
             dialog.wait_until_destroyed()
@@ -60,7 +48,7 @@ class WifiTestCase(WifiBaseTestCase):
             self.wifi_page._set_wireless, self.wifi_page.get_wireless())
         self.wifi_page.enable_wireless()
         dialog = self.wifi_page.connect_to_hidden_network(
-            'yeah',
+            'n/a',
             scroll_to_and_click=self.main_view
             .scroll_to_and_click)
 
@@ -72,6 +60,11 @@ class WifiTestCase(WifiBaseTestCase):
             newState = 120 # NM_DEVICE_STATE_FAILED
             oldState = 0 # does not matter
             reason = 53 # NM_DEVICE_STATE_REASON_SSID_NOT_FOUND
+
+            We manually emit this signal, because the networkmanager mock
+            currently does not support this. See [1].
+
+            [1] https://github.com/martinpitt/python-dbusmock/issues/8
         """
 
         self.device_mock.EmitSignal(
@@ -81,7 +74,8 @@ class WifiTestCase(WifiBaseTestCase):
             dialog.text, Eventually(Equals(
                 _('The Wi-Fi network could not be found'))))
 
-    @skip('skipped due to bug 1337556')
+    @skip('skipped due to %s' % (
+        'https://github.com/martinpitt/python-dbusmock/issues/7'))
     def test_connect_to_hidden_network_using_secrets(self):
         if not self.wifi_page.have_wireless():
             self.skipTest('Cannot test wireless since it cannot be enabled')
@@ -89,27 +83,18 @@ class WifiTestCase(WifiBaseTestCase):
             self.wifi_page._set_wireless, self.wifi_page.get_wireless())
         self.wifi_page.enable_wireless()
         dialog = self.wifi_page.connect_to_hidden_network(
-            'yeah', security='wpa', password='abcdefgh',
+            'test_ap', security='wpa', password='abcdefgh',
             scroll_to_and_click=self.main_view
             .scroll_to_and_click)
 
         # allow backend to set up listeners
         sleep(0.3)
 
-        """Mock a StateChanged signal on the Device, which
-        lets the backend know it was the wrong secret:
-            newState = 100 # NM_DEVICE_STATE_ACTIVATED
-            oldState = 0 # does not matter
-            reason = 0 # does not matter
-        """
-
-        self.device_mock.EmitSignal(
-            DEVICE_IFACE, 'StateChanged', 'uuu', [100, 0, 0])
-
         if dialog:
             dialog.wait_until_destroyed()
 
-    @skip('skipped due to bug 1337556')
+    @skip('skipped due to %s' % (
+        'https://github.com/martinpitt/python-dbusmock/issues/7'))
     def test_connect_to_hidden_network_using_incorrect_secrets(self):
         if not self.wifi_page.have_wireless():
             self.skipTest('Cannot test wireless since it cannot be enabled')
@@ -117,26 +102,18 @@ class WifiTestCase(WifiBaseTestCase):
             self.wifi_page._set_wireless, self.wifi_page.get_wireless())
         self.wifi_page.enable_wireless()
         dialog = self.wifi_page.connect_to_hidden_network(
-            'yeah', security='wpa', password='abcdefgh',
+            'test_ap', security='wpa', password='abcdefgh',
             scroll_to_and_click=self.main_view
             .scroll_to_and_click)
+
         # allow backend to set up listeners
         sleep(0.3)
-
-        """Mock a StateChanged signal on the Device, which
-        lets the backend know it was the wrong secret:
-            newState = 120 # NM_DEVICE_STATE_FAILED
-            oldState = 0 # does not matter
-            reason = 7 # NM_DEVICE_STATE_REASON_NO_SECRETS
-        """
-
-        self.device_mock.EmitSignal(
-            DEVICE_IFACE, 'StateChanged', 'uuu', [120, 0, 7])
 
         self.assertThat(
             dialog.text, Eventually(Equals(
                 _('Your authentication details were incorrect'))))
 
+    @skip('networkmanager mock does not yet support deletion of cons')
     def test_connect_to_hidden_network_then_cancel(self):
         if not self.wifi_page.have_wireless():
             self.skipTest('Cannot test wireless since it cannot be enabled')
@@ -176,14 +153,10 @@ class WifiTestCase(WifiBaseTestCase):
         access_points = ['Series of Tubes', 'dev/null', 'Mi-Fi',
                          'MonkeySphere']
 
-        for idx, ap in enumerate(access_points):
-            self.dbusmock.AddAccessPoint(
-                self.device_path, 'Mock_AP%d' % idx, ap, '00:23:F8:7E:12:BB',
-                InfrastructureMode.NM_802_11_MODE_INFRA, 2425, 5400, 82,
-                NM80211ApSecurityFlags.NM_802_11_AP_SEC_KEY_MGMT_PSK)
-
+        for idx, ssid in enumerate(access_points):
+            self.create_access_point('Mock_AP%d' % idx, ssid)
             self.dbusmock.AddWiFiConnection(
-                self.device_path, 'Mock_Con%d' % idx, ap, '')
+                self.device_path, 'Mock_Con%d' % idx, ssid, '')
 
         self.wifi_page.remove_previous_network(
             access_points[0], scroll_to_and_click=click_method)
@@ -192,5 +165,9 @@ class WifiTestCase(WifiBaseTestCase):
 
         # wait for ui to update
         sleep(2)
+
         self.wifi_page.remove_previous_network(
             access_points[2], scroll_to_and_click=click_method)
+
+        # We cannot make any assertions, because connection deletion
+        # is currently not supported.
