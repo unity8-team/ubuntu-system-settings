@@ -50,6 +50,14 @@ Component {
         }
 
         title: i18n.tr("Connect to Hidden Network")
+        text: feedback.enabled ? feedback.text : "";
+
+        Label {
+            property bool enabled: false
+            id: feedback
+            visible: false
+        }
+
 
         Common {
             id: common
@@ -196,7 +204,7 @@ Component {
                 }
                 PropertyChanges {
                     target: feedback
-                    visible: false
+                    enabled: false
                 }
             },
             State {
@@ -204,7 +212,6 @@ Component {
                 PropertyChanges {
                     target: feedback
                     enabled: true
-                    visible: true
                 }
             },
             State {
@@ -701,12 +708,12 @@ Component {
         Label {
             id: usernameLabel
             text : {
-                if (    ( securityList.selectedIndex === 2 || securityList.selectedIndex === 4)
-                     && ( authList.selectedIndex === 0 )) {
-                    i18n.tr("Identity")
-                }
-                else {
-                    i18n.tr("Username")
+                if ((securityList.selectedIndex === 2 ||
+                    securityList.selectedIndex === 4) &&
+                    (authList.selectedIndex === 0 )) {
+                    return i18n.tr("Identity");
+                } else {
+                    return i18n.tr("Username");
                 }
             }
             objectName: "usernameLabel"
@@ -714,14 +721,18 @@ Component {
             font.bold: false
             color: Theme.palette.selected.backgroundText
             elide: Text.ElideRight
-            visible: ( securityList.selectedIndex === 2 || securityList.selectedIndex === 4 || securityList.selectedIndex === 5)
+            visible: (securityList.selectedIndex === 2 ||
+                      securityList.selectedIndex === 4 ||
+                      securityList.selectedIndex === 5)
         }
 
         TextField {
             id : username
             objectName: "username"
             width: parent.width
-            visible: ( securityList.selectedIndex === 2 || securityList.selectedIndex === 4 || securityList.selectedIndex === 5)
+            visible: (securityList.selectedIndex === 2 ||
+                      securityList.selectedIndex === 4 ||
+                      securityList.selectedIndex === 5)
             inputMethodHints: Qt.ImhNoPredictiveText
             Component.onCompleted: forceActiveFocus()
             onAccepted: connectAction.trigger()
@@ -823,16 +834,6 @@ Component {
                     }
                 }
             }
-        }
-
-        Label {
-            property bool enabled: false
-            id: feedback
-            horizontalAlignment: Text.AlignHCenter
-            height: contentHeight
-            wrapMode: Text.Wrap
-            color: "orange"
-            visible: false
         }
 
         RowLayout {

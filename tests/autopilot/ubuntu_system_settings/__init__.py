@@ -978,15 +978,18 @@ class WifiPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
 
     """
     @autopilot.logging.log_action(logger.debug)
-    def connect_to_hidden_network(self, name, security="none", password=None,
-                                  cancel=False, scroll_to_and_click=None):
-        dialog = self._click_connect_to_hidden_network(scroll_to_and_click)
+    def connect_to_hidden_network(self, name, security='none', username=None,
+                                  password=None, cancel=False,):
+        dialog = self._click_connect_to_hidden_network()
+        dialog._scroll_to_and_click = self._scroll_to_and_click
         dialog.enter_name(name)
+
         if security:
             dialog.set_security(security)
+        if username:
+            dialog.enter_username(username)
         if password:
             dialog.enter_password(password)
-
         if cancel:
             dialog.cancel()
             return self
@@ -995,7 +998,7 @@ class WifiPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
             return dialog
 
     @autopilot.logging.log_action(logger.debug)
-    def _click_connect_to_hidden_network(self, scroll_to_and_click):
+    def _click_connect_to_hidden_network(self):
 
         # we can't mock the qunitymenu items, so we
         # have to wait for them to be built
@@ -1003,16 +1006,13 @@ class WifiPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
 
         button = self.select_single('*',
                                     objectName='connectToHiddenNetwork')
-        if (scroll_to_and_click):
-            scroll_to_and_click(button)
-        else:
-            self.pointing_device.click_object(button)
+        self._scroll_to_and_click(button)
         return self.get_root_instance().wait_select_single(
             objectName='otherNetworkDialog')
 
     @autopilot.logging.log_action(logger.debug)
-    def go_to_previous_networks(self, scroll_to_and_click=None):
-        return self._click_previous_network(scroll_to_and_click)
+    def go_to_previous_networks(self):
+        return self._click_previous_network()
 
     """Removes previous network
 
@@ -1022,14 +1022,14 @@ class WifiPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
 
     """
     @autopilot.logging.log_action(logger.debug)
-    def remove_previous_network(self, ssid, scroll_to_and_click=None):
-        page = self.go_to_previous_networks(scroll_to_and_click)
+    def remove_previous_network(self, ssid):
+        page = self.go_to_previous_networks()
         details = page.select_network(ssid)
         details.forget_network()
         return page
 
     @autopilot.logging.log_action(logger.debug)
-    def _click_previous_network(self, scroll_to_and_click):
+    def _click_previous_network(self):
 
         # we can't mock the qunitymenu items, so we
         # have to wait for them to be built
@@ -1037,10 +1037,7 @@ class WifiPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
 
         button = self.select_single('*',
                                     objectName='previousNetwork')
-        if (scroll_to_and_click):
-            scroll_to_and_click(button)
-        else:
-            self.pointing_device.click_object(button)
+        self._scroll_to_and_click(button)
         return self.get_root_instance().wait_select_single(
             objectName='previousNetworksPage')
 
@@ -1066,16 +1063,27 @@ class OtherNetwork(
     def _enter_name(self, name):
         namefield = self.select_single('TextField',
                                        objectName='networkname')
+        self._scroll_to_and_click(namefield)
         namefield.write(name)
+
+    @autopilot.logging.log_action(logger.debug)
+    def enter_username(self, username):
+        self._enter_username(username)
+
+    @autopilot.logging.log_action(logger.debug)
+    def _enter_username(self, username):
+        namefield = self.select_single('TextField',
+                                       objectName='username')
+        self._scroll_to_and_click(namefield)
+        namefield.write(username)
 
     @autopilot.logging.log_action(logger.debug)
     def set_security(self, security):
         """Sets the hidden network's security
 
-        :param security: Either "none", "wpa" or "wep
+        :param security: Either 'none', 'wpa', 'wep', 'wpa-ep', 'dewp', 'leap'
 
         :returns: None
-
         """
 
         # We only set security if not none, since none is default
@@ -1095,23 +1103,27 @@ class OtherNetwork(
 
     @autopilot.logging.log_action(logger.debug)
     def _set_security(self, security):
+        s_list = self._expand_security_list()
+        item = None
         if security == 'none':
-            sec_list = self._expand_security_list()
-            item = sec_list.wait_select_single('*',
-                                               text=_('None'))
-            self.pointing_device.click_object(item)
+            item = s_list.wait_select_single('*', text=_('None'))
         elif security == 'wpa':
-            sec_list = self._expand_security_list()
-            item = sec_list.wait_select_single('*',
-                                               text=_('WPA & WPA2 Personal'))
-            self.pointing_device.click_object(item)
+            item = s_list.wait_select_single('*',
+                                             text=_('WPA & WPA2 Personal'))
         elif security == 'wep':
-            sec_list = self._expand_security_list()
-            item = sec_list.wait_select_single('*',
-                                               text=_('WEP'))
-            self.pointing_device.click_object(item)
+            item = s_list.wait_select_single('*', text=_('WEP'))
+        elif security == 'wpa-ep':
+            item = s_list.wait_select_single('*',
+                                             text=_('WPA & WPA2 Enterprise'))
+        elif security == 'dwep':
+            item = s_list.wait_select_single('*',
+                                             text=_('Dynamic WEP (802.1x)'))
+        elif security == 'leap':
+            item = s_list.wait_select_single('*', text=_('LEAP'))
         elif security is not None:
             raise ValueError('security type %s is not valid' % security)
+
+        self.pointing_device.click_object(item)
         # wait for ui to change
         sleep(0.5)
 
@@ -1123,6 +1135,7 @@ class OtherNetwork(
     def _enter_password(self, password):
         pwdfield = self.select_single('TextField',
                                       objectName='password')
+        self._scroll_to_and_click(pwdfield)
         pwdfield.write(password)
 
     @autopilot.logging.log_action(logger.debug)

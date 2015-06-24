@@ -7,7 +7,8 @@
 
 from __future__ import absolute_import
 from autopilot.matchers import Eventually
-from dbusmock.templates.networkmanager import DEVICE_IFACE
+from dbusmock.templates.networkmanager import (DEVICE_IFACE,
+                                               NM80211ApSecurityFlags)
 from testtools.matchers import Equals
 from time import sleep
 from ubuntu_system_settings.tests import WifiBaseTestCase
@@ -17,6 +18,12 @@ from unittest import skip
 
 class WifiTestCase(WifiBaseTestCase):
     """Tests for Language Page"""
+
+    def setUp(self):
+        super(WifiTestCase, self).setUp()
+
+        self.wifi_page._scroll_to_and_click = \
+            self.main_view.scroll_to_and_click
 
     def test_wifi_page_title_is_correct(self):
         """Checks whether Wifi page is available"""
@@ -32,8 +39,30 @@ class WifiTestCase(WifiBaseTestCase):
         self.wifi_page.enable_wireless()
         dialog = self.wifi_page.connect_to_hidden_network(
             'test_ap',
-            scroll_to_and_click=self.main_view
-            .scroll_to_and_click)
+            password='abcdefgh',)
+
+        # allow backend to set up listeners
+        sleep(0.3)
+
+        if dialog:
+            dialog.wait_until_destroyed()
+
+    def test_connect_to_eduroam(self):
+        if not self.wifi_page.have_wireless():
+            self.skipTest('Cannot test wireless since it cannot be enabled')
+        self.addCleanup(
+            self.wifi_page._set_wireless, self.wifi_page.get_wireless())
+        self.wifi_page.enable_wireless()
+        self.create_access_point(
+            'eduroam', 'eduroam',
+            security=NM80211ApSecurityFlags.NM_802_11_AP_SEC_KEY_MGMT_802_1X
+        )
+        dialog = self.wifi_page.connect_to_hidden_network(
+            'eduroam',
+            username='student',
+            password='abcdefgh',
+            security='wpa-ep',
+        )
 
         # allow backend to set up listeners
         sleep(0.3)
@@ -49,8 +78,8 @@ class WifiTestCase(WifiBaseTestCase):
         self.wifi_page.enable_wireless()
         dialog = self.wifi_page.connect_to_hidden_network(
             'n/a',
-            scroll_to_and_click=self.main_view
-            .scroll_to_and_click)
+            password='abcdefgh',
+        )
 
         # allow backend to set up listeners
         sleep(0.3)
@@ -84,8 +113,7 @@ class WifiTestCase(WifiBaseTestCase):
         self.wifi_page.enable_wireless()
         dialog = self.wifi_page.connect_to_hidden_network(
             'test_ap', security='wpa', password='abcdefgh',
-            scroll_to_and_click=self.main_view
-            .scroll_to_and_click)
+        )
 
         # allow backend to set up listeners
         sleep(0.3)
@@ -102,9 +130,10 @@ class WifiTestCase(WifiBaseTestCase):
             self.wifi_page._set_wireless, self.wifi_page.get_wireless())
         self.wifi_page.enable_wireless()
         dialog = self.wifi_page.connect_to_hidden_network(
-            'test_ap', security='wpa', password='abcdefgh',
-            scroll_to_and_click=self.main_view
-            .scroll_to_and_click)
+            'test_ap',
+            security='wpa',
+            password='abcdefgh',
+        )
 
         # allow backend to set up listeners
         sleep(0.3)
@@ -120,10 +149,7 @@ class WifiTestCase(WifiBaseTestCase):
         self.addCleanup(
             self.wifi_page._set_wireless, self.wifi_page.get_wireless())
         self.wifi_page.enable_wireless()
-        dialog = self.wifi_page.connect_to_hidden_network(
-            'foo',
-            scroll_to_and_click=self.main_view
-            .scroll_to_and_click)
+        dialog = self.wifi_page.connect_to_hidden_network('foo',)
 
         # allow backend to set up listeners
         sleep(0.3)
@@ -131,8 +157,7 @@ class WifiTestCase(WifiBaseTestCase):
         dialog.cancel()
 
         self.assertThat(
-            lambda:
-                len(self.active_connection_mock.GetMethodCalls('Delete')),
+            lambda: len(self.active_connection_mock.GetMethodCalls('Delete')),
             Eventually(Equals(1)))
 
     def test_connect_to_hidden_network_dialog_visibility(self):
@@ -148,8 +173,6 @@ class WifiTestCase(WifiBaseTestCase):
             Eventually(Equals(False)), 'other net dialog not hidden')
 
     def test_remove_previous_network(self):
-        click_method = self.main_view.scroll_to_and_click
-
         access_points = ['Series of Tubes', 'dev/null', 'Mi-Fi',
                          'MonkeySphere']
 
@@ -158,16 +181,14 @@ class WifiTestCase(WifiBaseTestCase):
             self.dbusmock.AddWiFiConnection(
                 self.device_path, 'Mock_Con%d' % idx, ssid, '')
 
-        self.wifi_page.remove_previous_network(
-            access_points[0], scroll_to_and_click=click_method)
+        self.wifi_page.remove_previous_network(access_points[0],)
 
         self.main_view.go_back()
 
         # wait for ui to update
         sleep(2)
 
-        self.wifi_page.remove_previous_network(
-            access_points[2], scroll_to_and_click=click_method)
+        self.wifi_page.remove_previous_network(access_points[2],)
 
         # We cannot make any assertions, because connection deletion
         # is currently not supported.
