@@ -7,7 +7,7 @@ import Ubuntu.Content 0.1
 PopupBase  {
     id: picker
 
-    signal fileImportSignal(var file)
+    signal fileImportSignal (var file)
     property var activeTransfer
 
     Rectangle {
@@ -34,9 +34,7 @@ PopupBase  {
                 peer.selectionType = ContentTransfer.Single;
                 picker.activeTransfer = peer.request(appStore);
             }
-            onCancelPressed: {
-                PopupUtils.close(picker)
-            }
+            onCancelPressed: PopupUtils.close(picker)
         }
     }
 
@@ -46,7 +44,9 @@ PopupBase  {
             if (picker.activeTransfer.state === ContentTransfer.Charged) {
                 if (picker.activeTransfer.items.length > 0) {
                     var fileUrl = picker.activeTransfer.items[0].url;
-                    picker.fileImportSignal(fileUrl.toString().replace("file://", ""));
+                    picker.fileImportSignal(
+                        fileUrl.toString().replace("file://", "")
+                    );
                     PopupUtils.close(picker);
                 }
             } else if (picker.activeTransfer.state === ContentTransfer.Aborted){
