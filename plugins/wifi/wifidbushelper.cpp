@@ -31,7 +31,9 @@
 
 #define NM_SERVICE "org.freedesktop.NetworkManager"
 #define NM_PATH "/org/freedesktop/NetworkManager"
+#define NM_AP_IFACE "org.freedesktop.NetworkManager.AccessPoint"
 #define NM_DEVICE_IFACE "org.freedesktop.NetworkManager.Device"
+#define NM_DEVICE_WIRELESS_IFACE "org.freedesktop.NetworkManager.Device.Wireless"
 #define NM_ACTIVE_CONNECTION_IFACE "org.freedesktop.NetworkManager.Connection.Active"
 
 typedef QMap<QString,QVariantMap> ConfigurationData;
@@ -447,7 +449,7 @@ struct Network : public QObject
 QList<QStringList> WifiDbusHelper::getPreviouslyConnectedWifiNetworks() {
     QList<QStringList> networks;
 
-    OrgFreedesktopNetworkManagerSettingsInterface foo
+   OrgFreedesktopNetworkManagerSettingsInterface foo
             (NM_SERVICE,
              "/org/freedesktop/NetworkManager/Settings",
              QDBusConnection::systemBus());
@@ -521,7 +523,7 @@ bool WifiDbusHelper::forgetActiveDevice() {
                 auto ac_path_var = iface.property("ActiveConnection");
                 if(!ac_path_var.isValid()) {
                     qWarning() << __PRETTY_FUNCTION__ << ": Could not get active connection property from "
-                               << d.path() << ".\n";
+                            << d.path() << ".\n";
                     return true;
                 }
                 QString ac_path = ac_path_var.value<QDBusObjectPath>().path();
@@ -529,7 +531,7 @@ bool WifiDbusHelper::forgetActiveDevice() {
                 auto conn_path_var = ac_iface.property("Connection");
                 if(!conn_path_var.isValid()) {
                     qWarning() << __PRETTY_FUNCTION__ << ": Could not get connection path property from "
-                               << ac_path << ".\n";
+                            << ac_path << ".\n";
                     return false;
                 }
                 forgetConnection(conn_path_var.value<QDBusObjectPath>().path());

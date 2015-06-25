@@ -28,6 +28,7 @@ from autopilot.input import Keyboard
 import autopilot.logging
 import ubuntuuitoolkit
 from autopilot import introspection
+from autopilot.exceptions import StateNotFoundError
 from ubuntu_system_settings.utils.i18n import ugettext as _
 
 logger = logging.getLogger(__name__)
@@ -945,8 +946,8 @@ class WifiPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
     @autopilot.logging.log_action(logger.debug)
     def have_wireless(self):
         try:
-            self.wait_select_single('SwitchMenuItem', text=_('Wi-Fi'))
-        except:
+            self.wait_select_single('SwitchMenu', text=_('Wi-Fi'))
+        except StateNotFoundError:
             return False
         return True
 
@@ -957,11 +958,11 @@ class WifiPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
     @autopilot.logging.log_action(logger.debug)
     def get_wireless(self):
         return self.wait_select_single(
-            'SwitchMenuItem', text=_('Wi-Fi')).checked
+            'SwitchMenu', text=_('Wi-Fi')).checked
 
     @autopilot.logging.log_action(logger.debug)
     def _set_wireless(self, state):
-        obj = self.wait_select_single('SwitchMenuItem', text=_('Wi-Fi'))
+        obj = self.wait_select_single('SwitchMenu', text=_('Wi-Fi'))
         if obj.checked != state:
             self.pointing_device.click_object(obj)
 
@@ -1076,7 +1077,10 @@ class OtherNetwork(
         :returns: None
 
         """
-        self._set_security(security)
+
+        # We only set security if not none, since none is default
+        if security != 'none':
+            self._set_security(security)
 
     @autopilot.logging.log_action(logger.debug)
     def _expand_security_list(self):
