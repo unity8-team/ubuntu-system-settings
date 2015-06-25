@@ -49,8 +49,38 @@ Component {
             return password.length >= 8
         }
 
+        function filePicker (type) {
+            var pickerDialog;
+            var certDialog;
+
+            pickerDialog = PopupUtils.open(
+                Qt.resolvedUrl("./CertPicker.qml")
+            );
+            pickerDialog.fileImportSignal.connect(function (file) {
+                if (!file === false) {
+                    certDialogLoader.source = Qt.resolvedUrl(
+                        "./CertDialog.qml"
+                    );
+                    certDialog = PopupUtils.open(
+                        certDialogLoader.item, authListLabel, {
+                            fileName: file,
+                            certType: type
+                        }
+                    );
+                    certDialog.updateSignal.connect(function (update) {
+                        if (update && type === 0) {
+                            cacertListModel.dataupdate();
+                        } else if (update && type === 1) {
+                            privatekeyListModel.dataupdate();
+                        } else if (update && type === 2) {
+                            pacFileListModeL.dataupdate();
+                        }
+                    });
+                }
+            });
+        }
+
         title: i18n.tr("Connect to Hidden Network")
-        text: feedback.enabled ? feedback.text : "";
 
         Label {
             property bool enabled: false
@@ -212,6 +242,7 @@ Component {
                 PropertyChanges {
                     target: feedback
                     enabled: true
+                    visible: true
                 }
             },
             State {
@@ -373,35 +404,10 @@ Component {
                     return "";
                 }
             }
-
-            /* FIXME: All subsequent onSelectedIndex event handlers that are
-            similar to this one should be moved into a function, preferably a
-            JavaScript file called 'otherNetworksHelpers.js'. This will reduce
-            code duplication and increase readability. */
             onSelectedIndexChanged: {
-                var pickerDialog;
-                var cacertDialog;
                 if (selectedIndex === cacertListModel.rowCount()-1) {
                     selectedIndex = 0;
-                    pickerDialog = PopupUtils.open(
-                        Qt.resolvedUrl("./CertPicker.qml")
-                    );
-                    pickerDialog.fileImportSignal.connect(function (file) {
-                        if (!file === false) {
-                            certDialogLoader.source = Qt.resolvedUrl(
-                                "./CertDialog.qml"
-                            );
-                            cacertDialog = PopupUtils.open(
-                                certDialogLoader.item, cacertSelector, {
-                                    fileName: file,
-                                    certType: 0
-                                }
-                            );
-                            cacertDialog.updateSignal.connect(function (update) {
-                                if (update) cacertListModel.dataupdate();
-                            });
-                        }
-                    });
+                    otherNetworkDialog.filePicker(0); //Certificate
                 }
             }
         }
@@ -416,6 +422,7 @@ Component {
                 text: CommonName.length > 32 ?
                       CommonName.substr(0,30).concat("…") :
                       CommonName
+
                 // FIXME: See above comment.
                 // FIXME: Increase readability by using conditionals in a block.
                 subText: (CommonName !== i18n.tr("None") &&
@@ -423,7 +430,7 @@ Component {
                           (((Organization.length > 15) ?
                              Organization.substr(0,13).concat("…") :
                              Organization)
-                          + ", Exp.date: " + expiryDate) : ""
+                          + ", " + i18n.tr("Exp.date: ") + expiryDate) : ""
             }
         }
 
@@ -471,29 +478,9 @@ Component {
                 }
             }
             onSelectedIndexChanged: {
-                var pickerDialog;
-                var usercertDialog;
-                if (selectedIndex === model.rowCount()-1) {
+                if (selectedIndex === cacertListModel.rowCount()-1) {
                     selectedIndex = 0;
-                    pickerDialog = PopupUtils.open(
-                        Qt.resolvedUrl("./CertPicker.qml")
-                    );
-                    pickerDialog.fileImportSignal.connect(function (file) {
-                        if (!file === false) {
-                            certDialogLoader.source = Qt.resolvedUrl(
-                                "./CertDialog.qml"
-                            );
-                            usercertDialog = PopupUtils.open(
-                                certDialogLoader.item, usercertSelector, {
-                                    fileName: file,
-                                    certType: 0
-                                }
-                            );
-                            usercertDialog.updateSignal.connect(function (update) {
-                                if (update) model.dataupdate();
-                            });
-                        }
-                    });
+                    otherNetworkDialog.filePicker(0); //Certificate
                 }
             }
         }
@@ -517,7 +504,7 @@ Component {
         Component{
             id: privatekeySelectorDelegate
             OptionSelectorDelegate {
-                text: KeyName;
+                text: KeyName
 
                 /* FIXME: Translate using i18n.tr("%1, %1, %1 bit").arg().…
                 and add comment to translators about what each argument
@@ -554,29 +541,9 @@ Component {
                 }
             }
             onSelectedIndexChanged: {
-                var pickerDialog;
-                var privatekeyDialog;
                 if (selectedIndex === privatekeyListModel.rowCount()-1) {
                     selectedIndex = 0;
-                    pickerDialog = PopupUtils.open(
-                        Qt.resolvedUrl("./CertPicker.qml")
-                    );
-                    pickerDialog.fileImportSignal.connect(function (file) {
-                        if (!file === false){
-                            certDialogLoader.source = Qt.resolvedUrl(
-                                "./CertDialog.qml"
-                            );
-                            privatekeyDialog = PopupUtils.open(
-                                certDialogLoader.item, privateKeySelector, {
-                                    fileName: file,
-                                    certType: 1
-                                }
-                            );
-                            privatekeyDialog.updateSignal.connect(function (update) {
-                                if (update) privatekeyListModel.dataupdate();
-                            });
-                        }
-                    });
+                    otherNetworkDialog.filePicker(1); //Key
                 }
             }
         }
@@ -617,36 +584,16 @@ Component {
             selectedIndex: 0
             property string pacFileName: {
                 if (selectedIndex !== 0 &&
-                    selectedIndex !== (model.rowCount()-1)) {
-                       return model.getfileName(selectedIndex);
+                    selectedIndex !== (pacFileListModel.rowCount()-1)) {
+                       return pacFileListModel.getfileName(selectedIndex);
                 } else {
                     return "";
                 }
             }
             onSelectedIndexChanged: {
-                var pickerDialog;
-                var pacDialog;
-                if (selectedIndex === model.rowCount()-1) {
+                if (selectedIndex === pacFileListModel.rowCount()-1) {
                     selectedIndex = 0;
-                    pickerDialog = PopupUtils.open(
-                        Qt.resolvedUrl("./CertPicker.qml")
-                    );
-                    pickerDialog.fileImportSignal.connect(function (file) {
-                        if (!file === false) {
-                            certDialogLoader.source = Qt.resolvedUrl(
-                                "./CertDialog.qml"
-                            );
-                            pacDialog = PopupUtils.open(
-                                certDialogLoader.item, pacFileSelector, {
-                                    fileName: file,
-                                    certType: 2
-                                }
-                            );
-                            pacDialog.updateSignal.connect(function (update) {
-                                if (update) model.dataupdate();
-                            });
-                        }
-                    });
+                    otherNetworkDialog.filePicker(2); //PacFile
                 }
             }
         }
@@ -696,10 +643,6 @@ Component {
             visible: (securityList.selectedIndex === 2 &&
                       authList.selectedIndex !== 2)
             inputMethodHints: Qt.ImhNoPredictiveText
-
-            /* FIXME: When this component completes, it should not steal focus
-            from network name input, which per the spec needs the focus. */
-            Component.onCompleted: forceActiveFocus()
             onAccepted: {
                 connectAction.trigger()
             }
@@ -734,7 +677,6 @@ Component {
                       securityList.selectedIndex === 4 ||
                       securityList.selectedIndex === 5)
             inputMethodHints: Qt.ImhNoPredictiveText
-            Component.onCompleted: forceActiveFocus()
             onAccepted: connectAction.trigger()
         }
 
