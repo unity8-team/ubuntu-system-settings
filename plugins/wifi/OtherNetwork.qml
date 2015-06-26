@@ -82,6 +82,12 @@ Component {
 
         title: i18n.tr("Connect to Hidden Network")
 
+        Label {
+            property bool enabled: false
+            id: feedback
+            visible: false
+        }
+
         Common {
             id: common
         }
@@ -236,7 +242,7 @@ Component {
                 }
                 PropertyChanges {
                     target: feedback
-                    visible: false
+                    enabled: false
                 }
             },
             State {
@@ -326,11 +332,11 @@ Component {
         ListItem.ItemSelector {
             id: authList
             objectName: "authList"
-            model: [i18n.tr("TLS"),  // index: 0
-                i18n.tr("TTLS"),     // index: 1
-                i18n.tr("LEAP"),     // index: 2
-                i18n.tr("FAST"),     // index: 3
-                i18n.tr("PEAP"),     // index: 4
+            model: ["TLS",  // index: 0
+                    "TTLS", // index: 1
+                    "LEAP", // index: 2
+                    "FAST", // index: 3
+                    "PEAP", // index: 4
             ]
             visible: securityList.selectedIndex === 2 ||
                      securityList.selectedIndex === 4
@@ -355,12 +361,12 @@ Component {
             id: p2authList
             objectName: "p2authList"
             width: parent.width
-            model: [i18n.tr("PAP"),  // index: 0
-                i18n.tr("MSCHAPv2"), // index: 1
-                i18n.tr("MSCHAP"),   // index: 2
-                i18n.tr("CHAP"),     // index: 3
-                i18n.tr("GTC"),      // index: 4
-                i18n.tr("MD5")       // index: 5
+            model: ["PAP",      // index: 0
+                    "MSCHAPv2", // index: 1
+                    "MSCHAP",   // index: 2
+                    "CHAP",     // index: 3
+                    "GTC",      // index: 4
+                    "MD5"       // index: 5
             ]
             visible: (securityList.selectedIndex === 2 ||
                       securityList.selectedIndex === 4 /* WPA or D-WEP */) &&
@@ -527,6 +533,10 @@ Component {
             id: privatekeySelectorDelegate
             OptionSelectorDelegate {
                 text: KeyName
+
+                /* FIXME: Translate using i18n.tr("%1, %1, %1 bit").arg().…
+                and add comment to translators about what each argument
+                represents. */
                 subText: (KeyName !== i18n.tr("None") &&
                           KeyName !== i18n.tr("Choose…")) ?
                           (KeyType + ", " + KeyAlgorithm +", " + KeyLength + " bit" ) :
@@ -695,12 +705,12 @@ Component {
         Label {
             id: usernameLabel
             text : {
-                if (    ( securityList.selectedIndex === 2 || securityList.selectedIndex === 4)
-                     && ( authList.selectedIndex === 0 )) {
-                    i18n.tr("Identity")
-                }
-                else {
-                    i18n.tr("Username")
+                if ((securityList.selectedIndex === 2 ||
+                    securityList.selectedIndex === 4) &&
+                    (authList.selectedIndex === 0 )) {
+                    return i18n.tr("Identity");
+                } else {
+                    return i18n.tr("Username");
                 }
             }
             objectName: "usernameLabel"
@@ -708,14 +718,18 @@ Component {
             font.bold: false
             color: Theme.palette.selected.backgroundText
             elide: Text.ElideRight
-            visible: ( securityList.selectedIndex === 2 || securityList.selectedIndex === 4 || securityList.selectedIndex === 5)
+            visible: (securityList.selectedIndex === 2 ||
+                      securityList.selectedIndex === 4 ||
+                      securityList.selectedIndex === 5)
         }
 
         TextField {
             id : username
             objectName: "username"
             width: parent.width
-            visible: ( securityList.selectedIndex === 2 || securityList.selectedIndex === 4 || securityList.selectedIndex === 5)
+            visible: (securityList.selectedIndex === 2 ||
+                      securityList.selectedIndex === 4 ||
+                      securityList.selectedIndex === 5)
             inputMethodHints: Qt.ImhNoPredictiveText
             onAccepted: connectAction.trigger()
         }
@@ -816,16 +830,6 @@ Component {
                     }
                 }
             }
-        }
-
-        Label {
-            property bool enabled: false
-            id: feedback
-            horizontalAlignment: Text.AlignHCenter
-            height: contentHeight
-            wrapMode: Text.Wrap
-            color: "orange"
-            visible: false
         }
 
         RowLayout {
