@@ -866,7 +866,6 @@ class WifiBaseTestCase(UbuntuSystemSettingsTestCase,
         template = os.path.join(os.path.dirname(__file__), 'networkmanager.py')
         (cls.p_mock, cls.obj_nm) = cls.spawn_server_template(
             template, stdout=subprocess.PIPE)
-        cls.dbusmock = dbus.Interface(cls.obj_nm, dbusmock.MOCK_IFACE)
 
     def setUp(self, panel=None):
         self.obj_nm.Reset()
@@ -896,7 +895,7 @@ class WifiBaseTestCase(UbuntuSystemSettingsTestCase,
         if security is None:
             security = NM80211ApSecurityFlags.NM_802_11_AP_SEC_NONE
 
-        return self.dbusmock.AddAccessPoint(
+        return self.obj_nm.AddAccessPoint(
             self.device_path, name, ssid, self.random_mac_address(),
             InfrastructureMode.NM_802_11_MODE_INFRA, 2425, 5400, 82, security)
 

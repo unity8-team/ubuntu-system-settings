@@ -6,9 +6,13 @@
 # by the Free Software Foundation.
 
 from __future__ import absolute_import
+
+import dbus
+
 from autopilot.matchers import Eventually
-from dbusmock.templates.networkmanager import (DEVICE_IFACE,
-                                               NM80211ApSecurityFlags)
+from dbusmock.templates.networkmanager import (
+    DEVICE_IFACE, NM80211ApSecurityFlags
+)
 from testtools.matchers import Equals
 from time import sleep
 from ubuntu_system_settings.tests import WifiBaseTestCase
@@ -57,6 +61,7 @@ class WifiTestCase(WifiBaseTestCase):
             'eduroam', 'eduroam',
             security=NM80211ApSecurityFlags.NM_802_11_AP_SEC_KEY_MGMT_802_1X
         )
+
         dialog = self.wifi_page.connect_to_hidden_network(
             'eduroam',
             username='student',
@@ -71,6 +76,29 @@ class WifiTestCase(WifiBaseTestCase):
 
         if dialog:
             dialog.wait_until_destroyed()
+
+        dev = dbus.Interface(self.dbus_con.get_object(
+            'org.freedesktop.NetworkManager', self.device_path),
+            'org.freedesktop.DBus.Properties')
+
+        conn_obj = dev.Get(
+            'org.freedesktop.NetworkManager.Device', 'AvailableConnections'
+        )[0]
+        conn = dbus.Interface(self.dbus_con.get_object(
+            'org.freedesktop.NetworkManager', conn_obj),
+            'org.freedesktop.NetworkManager.Settings.Connection')
+
+        conn_settings = conn.GetSettings()
+        wconn = conn_settings['connection']
+        w802_11_sec = conn_settings['802-11-wireless-security']
+        w802_1x = conn_settings['802-1x']
+
+        self.assertEquals(wconn['type'], '802-11-wireless')
+        self.assertEquals(w802_11_sec['key-mgmt'], 'wpa-eap')
+        self.assertIn('peap', w802_1x['eap'])
+        self.assertEquals(w802_1x['identity'], 'student')
+        self.assertEquals(w802_1x['password'], 'abcdefgh')
+        self.assertEquals(w802_1x['phase2-auth'], 'mschapv2')
 
     def test_connect_to_nonexistant_hidden_network(self):
         if not self.wifi_page.have_wireless():
