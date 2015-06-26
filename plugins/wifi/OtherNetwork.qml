@@ -324,11 +324,11 @@ Component {
         ListItem.ItemSelector {
             id: authList
             objectName: "authList"
-            model: [i18n.tr("TLS"),  // index: 0
-                i18n.tr("TTLS"),     // index: 1
-                i18n.tr("LEAP"),     // index: 2
-                i18n.tr("FAST"),     // index: 3
-                i18n.tr("PEAP"),     // index: 4
+            model: ["TLS",  // index: 0
+                    "TTLS", // index: 1
+                    "LEAP", // index: 2
+                    "FAST", // index: 3
+                    "PEAP", // index: 4
             ]
             visible: securityList.selectedIndex === 2 ||
                      securityList.selectedIndex === 4
@@ -353,12 +353,12 @@ Component {
             id: p2authList
             objectName: "p2authList"
             width: parent.width
-            model: [i18n.tr("PAP"),  // index: 0
-                i18n.tr("MSCHAPv2"), // index: 1
-                i18n.tr("MSCHAP"),   // index: 2
-                i18n.tr("CHAP"),     // index: 3
-                i18n.tr("GTC"),      // index: 4
-                i18n.tr("MD5")       // index: 5
+            model: ["PAP",      // index: 0
+                    "MSCHAPv2", // index: 1
+                    "MSCHAP",   // index: 2
+                    "CHAP",     // index: 3
+                    "GTC",      // index: 4
+                    "MD5"       // index: 5
             ]
             visible: (securityList.selectedIndex === 2 ||
                       securityList.selectedIndex === 4 /* WPA or D-WEP */) &&

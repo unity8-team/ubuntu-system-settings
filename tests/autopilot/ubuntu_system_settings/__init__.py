@@ -979,18 +979,24 @@ class WifiPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
     """
     @autopilot.logging.log_action(logger.debug)
     def connect_to_hidden_network(self, name, security='none', username=None,
-                                  password=None, cancel=False,):
+                                  password=None, auth=None, protocol=None,
+                                  cancel=False):
         dialog = self._click_connect_to_hidden_network()
         dialog._scroll_to_and_click = self._scroll_to_and_click
         dialog.enter_name(name)
 
         if security:
             dialog.set_security(security)
+        if auth:
+            dialog.set_auth(auth)
+        if protocol:
+            dialog.set_protocol(protocol)
         if username:
             dialog.enter_username(username)
         if password:
             dialog.enter_password(password)
         if cancel:
+            # FIXME: remove this and all tests dependent on it.
             dialog.cancel()
             return self
         else:
@@ -1055,6 +1061,18 @@ class OtherNetwork(
                 return True
         return False
 
+    # FIXME: Use ListItem methods instead.
+    @autopilot.logging.log_action(logger.debug)
+    def _expand_list(self, list_name):
+        item_list = self.select_single(
+            '*', objectName=list_name)
+        active_child = item_list.select_single(
+            '*', objectName='listContainer')
+        self._scroll_to_and_click(active_child)
+        # wait for it to expand
+        sleep(0.5)
+        return item_list
+
     @autopilot.logging.log_action(logger.debug)
     def enter_name(self, name):
         self._enter_name(name)
@@ -1091,19 +1109,8 @@ class OtherNetwork(
             self._set_security(security)
 
     @autopilot.logging.log_action(logger.debug)
-    def _expand_security_list(self):
-        sec_list = self.select_single(
-            '*', objectName='securityList')
-        active_child = sec_list.select_single(
-            '*', objectName='listContainer')
-        self.pointing_device.click_object(active_child)
-        # wait for it to expand
-        sleep(0.5)
-        return sec_list
-
-    @autopilot.logging.log_action(logger.debug)
     def _set_security(self, security):
-        s_list = self._expand_security_list()
+        s_list = self._expand_list('securityList')
         item = None
         if security == 'none':
             item = s_list.wait_select_single('*', text=_('None'))
@@ -1139,13 +1146,74 @@ class OtherNetwork(
         pwdfield.write(password)
 
     @autopilot.logging.log_action(logger.debug)
+    def set_protocol(self, protocol):
+        """Sets the hidden network's protocol.
+
+        :param protocol: Either 'pap', 'mschapv2', 'mschap', 'chap', 'gtc',
+                         or 'md5'.
+        """
+        self._set_protocol(protocol)
+
+    @autopilot.logging.log_action(logger.debug)
+    def _set_protocol(self, protocol):
+        p_list = self._expand_list('p2authList')
+        item = None
+        if protocol == 'pap':
+            item = p_list.wait_select_single(text='PAP')
+        elif protocol == 'mschapv2':
+            item = p_list.wait_select_single(text='MSCHAPv2')
+        elif protocol == 'mschap':
+            item = p_list.wait_select_single(text='MSCHAP')
+        elif protocol == 'chap':
+            item = p_list.wait_select_single(text='CHAP')
+        elif protocol == 'gtc':
+            item = p_list.wait_select_single(text='GTC')
+        elif protocol == 'md5':
+            item = p_list.wait_select_single(text='MD5')
+        elif protocol is not None:
+            raise ValueError('protocol type %s is not valid' % protocol)
+
+        self.pointing_device.click_object(item)
+        # wait for ui to change
+        sleep(0.5)
+
+    @autopilot.logging.log_action(logger.debug)
+    def set_auth(self, auth):
+        """Sets the hidden network's protocol.
+
+        :param auth: Either 'tls', 'ttls', 'leap', 'fast' or 'peap'.
+        """
+        self._set_auth(auth)
+
+    @autopilot.logging.log_action(logger.debug)
+    def _set_auth(self, auth):
+        a_list = self._expand_list('authList')
+        item = None
+        if auth == 'tls':
+            item = a_list.wait_select_single(text='TLS')
+        elif auth == 'ttls':
+            item = a_list.wait_select_single(text='TTLS')
+        elif auth == 'leap':
+            item = a_list.wait_select_single(text='LEAP')
+        elif auth == 'fast':
+            item = a_list.wait_select_single(text='FAST')
+        elif auth == 'peap':
+            item = a_list.wait_select_single(text='PEAP')
+        elif auth is not None:
+            raise ValueError('auth type %s is not valid' % auth)
+
+        self.pointing_device.click_object(item)
+        # wait for ui to change
+        sleep(0.5)
+
+    @autopilot.logging.log_action(logger.debug)
     def cancel(self):
         self._click_cancel()
 
     @autopilot.logging.log_action(logger.debug)
     def _click_cancel(self):
         button = self.select_single('Button', objectName='cancel')
-        self.pointing_device.click_object(button)
+        self._scroll_to_and_click(button)
 
     @autopilot.logging.log_action(logger.debug)
     def connect(self):
@@ -1154,7 +1222,7 @@ class OtherNetwork(
     @autopilot.logging.log_action(logger.debug)
     def _click_connect(self):
         button = self.select_single('Button', objectName='connect')
-        self.pointing_device.click_object(button)
+        self._scroll_to_and_click(button)
 
 
 class PreviousNetworks(

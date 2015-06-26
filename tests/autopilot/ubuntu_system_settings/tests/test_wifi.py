@@ -62,6 +62,8 @@ class WifiTestCase(WifiBaseTestCase):
             username='student',
             password='abcdefgh',
             security='wpa-ep',
+            auth='peap',
+            protocol='mschapv2',
         )
 
         # allow backend to set up listeners
