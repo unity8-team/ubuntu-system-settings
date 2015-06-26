@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-10-16 20:04-0600\n"
-"PO-Revision-Date: 2015-04-28 20:52+0000\n"
-"Last-Translator: Aron Xu <Unknown>\n"
+"PO-Revision-Date: 2015-06-26 02:24+0000\n"
+"Last-Translator: Wen Qiang <dev@wenqiang.li>\n"
 "Language-Team: Chinese (Simplified) <zh_CN@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2015-05-08 05:30+0000\n"
-"X-Generator: Launchpad (build 17474)\n"
+"X-Launchpad-Export-Date: 2015-06-26 05:00+0000\n"
+"X-Generator: Launchpad (build 17578)\n"
 
 #: ubuntu-system-settings.desktop.in.in.h:1 ../src/qml/MainWindow.qml:112
 msgid "System Settings"
@@ -36,7 +36,7 @@ msgstr "预览"
 
 #: ../plugins/background//Preview.qml:102
 msgid "Remove image"
-msgstr ""
+msgstr "移除图片"
 
 #: ../plugins/background//Preview.qml:102
 #: ../plugins/phone//CallForwarding.qml:139
@@ -108,11 +108,11 @@ msgstr "未知错误"
 
 #: ../plugins/wifi//Common.qml:38
 msgid "No reason given"
-msgstr ""
+msgstr "[沒有說明原因]"
 
 #: ../plugins/wifi//Common.qml:40
 msgid "Device is now managed"
-msgstr ""
+msgstr "设备已接管"
 
 #: ../plugins/wifi//Common.qml:42
 msgid "Device is now unmanaged"
@@ -120,12 +120,12 @@ msgstr "设备未被托管"
 
 #: ../plugins/wifi//Common.qml:44
 msgid "The device could not be readied for configuration"
-msgstr ""
+msgstr "设备未做好配置准备"
 
 #: ../plugins/wifi//Common.qml:46
 msgid ""
 "IP configuration could not be reserved (no available address, timeout, etc.)"
-msgstr ""
+msgstr "IP设置无法保存（无效地址，响应超时等）"
 
 #: ../plugins/wifi//Common.qml:48
 msgid "The IP configuration is no longer valid"
@@ -133,7 +133,7 @@ msgstr "IP 设置已经失效"
 
 #: ../plugins/wifi//Common.qml:50
 msgid "Your authentication details were incorrect"
-msgstr ""
+msgstr "您的认证信息有误"
 
 #: ../plugins/wifi//Common.qml:52
 msgid "802.1X supplicant disconnected"
@@ -181,23 +181,23 @@ msgstr "设备已被移除"
 
 #: ../plugins/wifi//Common.qml:74
 msgid "NetworkManager went to sleep"
-msgstr ""
+msgstr "网络管理器已休眠"
 
 #: ../plugins/wifi//Common.qml:76
 msgid "The device's active connection disappeared"
-msgstr ""
+msgstr "该设备的有效连接消失"
 
 #: ../plugins/wifi//Common.qml:78
 msgid "Device disconnected by user or client"
-msgstr ""
+msgstr "设备由用户或客户端断开连接"
 
 #: ../plugins/wifi//Common.qml:80
 msgid "The device's existing connection was assumed"
-msgstr ""
+msgstr "设备现有连接已指定"
 
 #: ../plugins/wifi//Common.qml:82
 msgid "The supplicant is now available"
-msgstr ""
+msgstr "客户端现已可用"
 
 #: ../plugins/wifi//Common.qml:84
 msgid "The modem could not be found"
@@ -209,11 +209,11 @@ msgstr "蓝牙连接失败或超时"
 
 #: ../plugins/wifi//Common.qml:88
 msgid "A dependency of the connection failed"
-msgstr ""
+msgstr "缺乏连接依赖"
 
 #: ../plugins/wifi//Common.qml:90
 msgid "ModemManager is unavailable"
-msgstr ""
+msgstr "Modem管理器不可用"
 
 #: ../plugins/wifi//Common.qml:92
 msgid "The Wi-Fi network could not be found"
@@ -221,7 +221,7 @@ msgstr "无法找到 Wi-Fi 网络"
 
 #: ../plugins/wifi//Common.qml:94
 msgid "A secondary connection of the base connection failed"
-msgstr ""
+msgstr "基本连接的辅助连接失败"
 
 #: ../plugins/bluetooth//PageComponent.qml:104 ../plugins/wifi//Common.qml:96
 msgid "Unknown"
@@ -229,7 +229,7 @@ msgstr "未知"
 
 #: ../plugins/wifi//OtherNetwork.qml:96
 msgid "Connect to Hidden Network"
-msgstr ""
+msgstr "连接到隐藏网络"
 
 #: ../plugins/wifi//OtherNetwork.qml:187
 msgid "Network name"
@@ -286,7 +286,7 @@ msgstr "Wi-Fi"
 
 #: ../plugins/wifi//PageComponent.qml:139
 msgid "Connect to hidden network…"
-msgstr ""
+msgstr "连接到隐藏网络..."
 
 #: ../plugins/wifi//NetworkDetails.qml:38
 msgid "Network details"
@@ -329,7 +329,7 @@ msgstr "通知"
 msgid ""
 "Selected apps can alert you using notification bubbles, sounds, vibrations, "
 "and the Notification Center."
-msgstr ""
+msgstr "选中的应用会通过气泡、声音、振动和通知中心来提醒你"
 
 #: ../plugins/sound//SoundsList.qml:70
 msgid "Stop playing"
@@ -433,12 +433,12 @@ msgstr "重置全部系统设置"
 
 #: ../plugins/reset//ResetLauncherHome.qml:40
 msgid "The Launcher will be returned to its original contents."
-msgstr ""
+msgstr "启动器会恢复到它的初始内容。"
 
 #: ../plugins/reset//ResetLauncherHome.qml:59
 #: ../plugins/language//RebootNecessary.qml:34
 msgid "The phone needs to restart for changes to take effect."
-msgstr ""
+msgstr "本手机需要重启以使改动生效。"
 
 #: ../plugins/reset//EraseEverything.qml:41
 msgid ""
@@ -655,11 +655,11 @@ msgstr "自动标点"
 #: ../plugins/language//PageComponent.qml:207
 msgid ""
 "Adds a period, and any missing quotes or brackets, when you tap Space twice."
-msgstr ""
+msgstr "双击空格键，自动输入句号，和缺少的引号或括号。"
 
 #: ../plugins/language//PageComponent.qml:225
 msgid "Keyboard vibration"
-msgstr ""
+msgstr "按键振动"
 
 #: ../plugins/language//KeyboardLayouts.qml:39
 msgid "Current layouts:"
@@ -716,7 +716,7 @@ msgstr "呼叫"
 #: ../plugins/phone//NoSims.qml:42 ../plugins/phone//MultiSim.qml:56
 #: ../plugins/phone//MultiSim.qml:94
 msgid "Services"
-msgstr ""
+msgstr "服务"
 
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
 #: ../plugins/phone//PageComponent.qml:32
@@ -741,7 +741,7 @@ msgstr "自动调节"
 
 #: ../plugins/brightness//PageComponent.qml:97
 msgid "Brightens and dims the display to suit the surroundings."
-msgstr ""
+msgstr "自动调节屏幕亮度"
 
 #: ../plugins/cellular//PageCarrierAndApn.qml:27
 #: ../plugins/cellular//PageCarrierAndApn.qml:44
@@ -772,7 +772,7 @@ msgstr "手动"
 
 #: ../plugins/cellular//PageChooseCarrier.qml:197
 msgid "Searching for carriers…"
-msgstr ""
+msgstr "搜索运营商……"
 
 #: ../plugins/cellular//PageCarrierAndApn.qml:57
 #: ../plugins/cellular//PageCarriersAndApns.qml:62
@@ -783,28 +783,28 @@ msgstr "APN"
 
 #: ../plugins/cellular//PageChooseApn.qml:355
 msgid "Internet APN:"
-msgstr ""
+msgstr "互联网APN:"
 
 #: ../plugins/cellular//PageChooseApn.qml:423
 msgid "Custom Internet APN…"
-msgstr ""
+msgstr "自定义互联网APN..."
 
 #: ../plugins/cellular//PageChooseApn.qml:434
 msgid "MMS APN:"
-msgstr ""
+msgstr "MMS APN:"
 
 #: ../plugins/cellular//CustomApnEditor.qml:153
 #: ../plugins/cellular//PageChooseApn.qml:449
 msgid "Same APN as for Internet"
-msgstr ""
+msgstr "使用互联网APN"
 
 #: ../plugins/cellular//PageChooseApn.qml:529
 msgid "Custom MMS APN…"
-msgstr ""
+msgstr "自定义MMS APN..."
 
 #: ../plugins/cellular//PageChooseApn.qml:560
 msgid "Reset APN Settings"
-msgstr ""
+msgstr "重置APN设置"
 
 #: ../plugins/cellular//PageChooseApn.qml:561
 msgid "Are you sure that you want to Reset APN Settings?"
@@ -821,7 +821,7 @@ msgstr "运营商"
 
 #: ../plugins/cellular//CustomApnEditor.qml:46
 msgid "Internet"
-msgstr ""
+msgstr "互联网"
 
 #: ../plugins/cellular//CustomApnEditor.qml:46
 msgid "MMS"
@@ -831,7 +831,7 @@ msgstr "MMS"
 #: ../plugins/cellular//CustomApnEditor.qml:71
 #, qt-format
 msgid "Custom %1 APN"
-msgstr ""
+msgstr "自定义 %1 APN"
 
 #. TRANSLATORS: %1 is either i18n.tr("Internet") or i18n.tr("MMS")
 #: ../plugins/cellular//CustomApnEditor.qml:181
@@ -857,7 +857,7 @@ msgstr "保存"
 
 #: ../plugins/cellular//CustomApnEditor.qml:274
 msgid "Activate"
-msgstr ""
+msgstr "启用"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
 #: ../plugins/cellular//PageComponent.qml:33
@@ -879,13 +879,13 @@ msgstr "热点"
 msgid ""
 "When hotspot is on, other devices can use your cellular data connection over "
 "Wi-Fi. Normal data charges apply."
-msgstr ""
+msgstr "热点开启时，其它设备可以通过 Wi-Fi 来使用您的蜂窝数据连接。运营商的数据资费标准将被使用。"
 
 #: ../plugins/cellular//Hotspot.qml:61
 msgid ""
 "Other devices can use your cellular data connection over the Wi-Fi network. "
 "Normal data charges apply."
-msgstr ""
+msgstr "其它设备可以通过 Wi-Fi 网络来使用您的蜂窝数据连接。运营商的数据资费标准将被使用。"
 
 #: ../plugins/cellular//Hotspot.qml:65
 msgid "Set up hotspot"
@@ -923,12 +923,12 @@ msgstr "锁屏安全设定"
 #: ../plugins/security-privacy//LockSecurity.qml:115
 #: ../plugins/security-privacy//LockSecurity.qml:433
 msgid "Change passcode…"
-msgstr ""
+msgstr "修改密码..."
 
 #: ../plugins/security-privacy//LockSecurity.qml:117
 #: ../plugins/security-privacy//LockSecurity.qml:434
 msgid "Change passphrase…"
-msgstr "更改密码短语…"
+msgstr "更改口令短语…"
 
 #: ../plugins/security-privacy//LockSecurity.qml:124
 msgid "Switch to swipe"
@@ -936,49 +936,49 @@ msgstr "切换至滑动"
 
 #: ../plugins/security-privacy//LockSecurity.qml:126
 msgid "Switch to passcode"
-msgstr ""
+msgstr "切换到密码"
 
 #: ../plugins/security-privacy//LockSecurity.qml:128
 msgid "Switch to passphrase"
-msgstr "切换至密码短语"
+msgstr "切换至口令短语"
 
 #: ../plugins/security-privacy//LockSecurity.qml:137
 msgid "Existing passcode"
-msgstr ""
+msgstr "已存在的密码"
 
 #: ../plugins/security-privacy//LockSecurity.qml:139
 msgid "Existing passphrase"
-msgstr "当前密码短语"
+msgstr "当前口令短语"
 
 #: ../plugins/security-privacy//LockSecurity.qml:204
 msgid "Choose passcode"
-msgstr ""
+msgstr "选择新密码"
 
 #: ../plugins/security-privacy//LockSecurity.qml:206
 msgid "Choose passphrase"
-msgstr "选择密码短语"
+msgstr "选择口令短语"
 
 #: ../plugins/security-privacy//LockSecurity.qml:258
 #: ../wizard/qml/Pages//passwd-confirm.qml:49
 msgid "Confirm passcode"
-msgstr ""
+msgstr "确认新密码"
 
 #: ../plugins/security-privacy//LockSecurity.qml:260
 #: ../wizard/qml/Pages//passwd-confirm.qml:48
 msgid "Confirm passphrase"
-msgstr "确认密码短语"
+msgstr "确认口令短语"
 
 #: ../plugins/security-privacy//LockSecurity.qml:314
 msgid "Those passcodes don't match. Try again."
-msgstr ""
+msgstr "密码不一致，请重试"
 
 #: ../plugins/security-privacy//LockSecurity.qml:317
 msgid "Those passphrases don't match. Try again."
-msgstr "密码短语不一致，请重新输入。"
+msgstr "口令短语不一致，请重新输入。"
 
 #: ../plugins/security-privacy//LockSecurity.qml:348
 msgid "Unset"
-msgstr "取消设置"
+msgstr "清除设置"
 
 #: ../plugins/security-privacy//LockSecurity.qml:393
 msgid "Unlock the phone using:"
@@ -990,13 +990,13 @@ msgstr "滑动（无安全保护）"
 
 #: ../plugins/security-privacy//LockSecurity.qml:398
 msgid "4-digit passcode"
-msgstr ""
+msgstr "四位数字的密码"
 
 #: ../plugins/security-privacy//LockSecurity.qml:399
 #: ../plugins/security-privacy//PhoneLocking.qml:47
 #: ../wizard/qml/Pages//30-passwd-type.qml:98
 msgid "Passphrase"
-msgstr "密码"
+msgstr "口令"
 
 #: ../plugins/security-privacy//LockSecurity.qml:400
 msgid "Swipe (no security)… "
@@ -1004,11 +1004,11 @@ msgstr "滑动（无安全保护）… "
 
 #: ../plugins/security-privacy//LockSecurity.qml:401
 msgid "4-digit passcode…"
-msgstr ""
+msgstr "四位数字的密码..."
 
 #: ../plugins/security-privacy//LockSecurity.qml:402
 msgid "Passphrase…"
-msgstr "密码短语…"
+msgstr "口令短语"
 
 #: ../plugins/security-privacy//PageComponent.qml:147
 #: ../plugins/security-privacy//SimPin.qml:35
@@ -1018,77 +1018,75 @@ msgstr "SIM 卡 PIN 码"
 
 #: ../plugins/security-privacy//SimPin.qml:45
 msgid "Change SIM PIN"
-msgstr ""
+msgstr "修改SIM卡PIN码"
 
 #: ../plugins/security-privacy//SimPin.qml:48
 #, qt-format
 msgid "Incorrect PIN. %1 attempt remaining."
 msgid_plural "Incorrect PIN. %1 attempts remaining."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "不正确的PIN。尚有 %1 次尝试机会。"
 
 #: ../plugins/security-privacy//SimPin.qml:82
 msgid "Current PIN:"
-msgstr ""
+msgstr "当前PIN码："
 
 #: ../plugins/security-privacy//SimPin.qml:94
 #, qt-format
 msgid "%1 attempt allowed."
 msgid_plural "%1 attempts allowed."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "尚可尝试 %1 次。"
 
 #: ../plugins/security-privacy//SimPin.qml:108
 msgid "Choose new PIN:"
-msgstr ""
+msgstr "选择新PIN码："
 
 #: ../plugins/security-privacy//SimPin.qml:119
 msgid "Confirm new PIN:"
-msgstr ""
+msgstr "确认新PIN码："
 
 #: ../plugins/security-privacy//SimPin.qml:138
 msgid "PINs don't match. Try again."
-msgstr ""
+msgstr "PIN码不一致。请重试。"
 
 #: ../plugins/security-privacy//SimPin.qml:184
 msgid "Enter SIM PIN"
-msgstr ""
+msgstr "输入SIM卡PIN码"
 
 #: ../plugins/security-privacy//SimPin.qml:185
 msgid "Enter Previous SIM PIN"
-msgstr ""
+msgstr "输入旧PIN码"
 
 #: ../plugins/security-privacy//SimPin.qml:188
 #, qt-format
 msgid "Incorrect PIN. %1 attempts remaining."
-msgstr ""
+msgstr "PIN码错误。剩余 %1 次修改机会。"
 
 #: ../plugins/security-privacy//SimPin.qml:247
 #, qt-format
 msgid "%1 attempts allowed."
-msgstr ""
+msgstr "剩余 %1 尝试机会。"
 
 #: ../plugins/security-privacy//SimPin.qml:283
 msgid "Unlock"
-msgstr ""
+msgstr "解锁"
 
 #: ../plugins/security-privacy//SimPin.qml:283
 msgid "Lock"
-msgstr ""
+msgstr "锁定"
 
 #: ../plugins/security-privacy//SimPin.qml:353
 msgid "Change PIN…"
-msgstr ""
+msgstr "更改PIN码..."
 
 #: ../plugins/security-privacy//SimPin.qml:382
 msgid ""
 "When a SIM PIN is set, it must be entered to access cellular services after "
 "restarting the phone or swapping the SIM."
-msgstr ""
+msgstr "当SIM卡设置了PIN码后，您在重启手机或切换SIM卡后需要输入PIN码以使用通信服务。"
 
 #: ../plugins/security-privacy//SimPin.qml:386
 msgid "Entering an incorrect PIN repeatedly may lock the SIM permanently."
-msgstr ""
+msgstr "多次输入错误的PIN码可能使SIM卡永久锁定。"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:31
 msgid "Phone locking"
@@ -1097,12 +1095,12 @@ msgstr "锁定手机"
 #: ../plugins/security-privacy//PhoneLocking.qml:45
 msgctxt "Unlock with swipe"
 msgid "None"
-msgstr ""
+msgstr "无安全保护"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:46
 #: ../wizard/qml/Pages//30-passwd-type.qml:95
 msgid "Passcode"
-msgstr ""
+msgstr "密码"
 
 #. TRANSLATORS: %1 is the number of minutes
 #: ../plugins/security-privacy//PhoneLocking.qml:75
@@ -1118,23 +1116,23 @@ msgstr "休眠立即锁定"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:106
 msgid "When locked, allow:"
-msgstr ""
+msgstr "当锁定时，允许："
 
 #: ../plugins/security-privacy//PhoneLocking.qml:110
 msgid "Launcher"
-msgstr ""
+msgstr "启动器"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:123
 msgid "Notifications and quick settings"
-msgstr ""
+msgstr "通知和快速设置"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:137
 msgid "Turn on lock security to restrict access when the phone is locked."
-msgstr ""
+msgstr "手机屏幕关闭时，开启锁定限制。"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:138
 msgid "Other apps and functions will prompt you to unlock."
-msgstr ""
+msgstr "其他应用程序和功能会提示你进行解锁。"
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
 #: ../plugins/security-privacy//PageComponent.qml:37
@@ -1156,32 +1154,32 @@ msgstr "仅手机"
 
 #: ../plugins/security-privacy//PageComponent.qml:120
 msgid "Lock phone"
-msgstr ""
+msgstr "锁定手机"
 
 #: ../plugins/security-privacy//PageComponent.qml:150
 #: ../plugins/security-privacy//PageComponent.qml:228
 msgid "On"
-msgstr ""
+msgstr "开启"
 
 #: ../plugins/security-privacy//PageComponent.qml:154
 #: ../plugins/security-privacy//PageComponent.qml:228
 #: ../plugins/cellular//Components//DataMultiSim.qml:30
 msgid "Off"
-msgstr ""
+msgstr "关闭"
 
 #: ../plugins/security-privacy//PageComponent.qml:161
 msgid "Encryption"
-msgstr ""
+msgstr "加密"
 
 #: ../plugins/security-privacy//PageComponent.qml:170
 msgid ""
 "Encryption protects against access to phone data when the phone is connected "
 "to a PC or other device."
-msgstr ""
+msgstr "加密措施可在手机连接到电脑或其他设备时，防止未经授权的数据访问。"
 
 #: ../plugins/security-privacy//PageComponent.qml:174
 msgid "Privacy"
-msgstr ""
+msgstr "隐私设置"
 
 #: ../plugins/security-privacy//PageComponent.qml:177
 msgid "Stats on welcome screen"
@@ -1284,7 +1282,7 @@ msgstr "回传结果来于："
 
 #: ../plugins/security-privacy//AppAccess.qml:35
 msgid "Apps that you have granted and have requested access to:"
-msgstr ""
+msgstr "下列应用已通过您的授权以访问："
 
 #: ../plugins/bluetooth//PageComponent.qml:123
 #: ../plugins/security-privacy//AppAccess.qml:41
@@ -1293,15 +1291,15 @@ msgstr "相机"
 
 #: ../plugins/security-privacy//AppAccess.qml:42
 msgid "Apps that have requested access to your camera"
-msgstr ""
+msgstr "已请求使用您手机上相机的应用"
 
 #: ../plugins/security-privacy//AppAccess.qml:46
 msgid "Mic"
-msgstr ""
+msgstr "麦克风"
 
 #: ../plugins/security-privacy//AppAccess.qml:47
 msgid "Apps that have requested access to your mic"
-msgstr ""
+msgstr "已请求使用您手机上麦克风的应用"
 
 #: ../plugins/security-privacy//AppAccess.qml:59
 #, qt-format
@@ -1341,19 +1339,19 @@ msgstr "确认 PIN 码"
 
 #: ../plugins/bluetooth//PageComponent.qml:100
 msgid "Connected"
-msgstr ""
+msgstr "已连接"
 
 #: ../plugins/bluetooth//PageComponent.qml:101
 msgid "Connecting…"
-msgstr ""
+msgstr "正在连接…"
 
 #: ../plugins/bluetooth//PageComponent.qml:102
 msgid "Disconnecting…"
-msgstr ""
+msgstr "正在断开连接..."
 
 #: ../plugins/bluetooth//PageComponent.qml:103
 msgid "Disconnected"
-msgstr ""
+msgstr "已断开"
 
 #: ../plugins/bluetooth//PageComponent.qml:110
 msgid "Computer"
@@ -1441,7 +1439,7 @@ msgstr "连接另一个设备："
 
 #: ../plugins/bluetooth//PageComponent.qml:263
 msgid "Connect a device:"
-msgstr ""
+msgstr "连接一个设备:"
 
 #: ../plugins/bluetooth//PageComponent.qml:297
 msgid "None detected"
@@ -1450,7 +1448,7 @@ msgstr "侦测不到任何设备"
 #: ../plugins/bluetooth//PageComponent.qml:305
 #: ../plugins/bluetooth//PageComponent.qml:416
 msgid "Connect automatically when detected:"
-msgstr ""
+msgstr "当检测到时自动连接:"
 
 #: ../plugins/bluetooth//PageComponent.qml:383
 msgid "Type"
@@ -1458,7 +1456,7 @@ msgstr "类型"
 
 #: ../plugins/bluetooth//PageComponent.qml:407
 msgid "Status"
-msgstr ""
+msgstr "状态"
 
 #: ../plugins/bluetooth//PageComponent.qml:411
 msgid "Signal Strength"
@@ -1466,11 +1464,11 @@ msgstr "信号强度"
 
 #: ../plugins/bluetooth//PageComponent.qml:448
 msgid "Forget this device"
-msgstr ""
+msgstr "忘记此设备"
 
 #: ../plugins/about//PhoneNumbers.qml:31
 msgid "Phone number:"
-msgstr ""
+msgstr "电话号码："
 
 #: ../plugins/about//PhoneNumber.qml:36
 msgid "Phone number"
@@ -1528,11 +1526,11 @@ msgstr "开发者模式"
 msgid ""
 "In Developer Mode, anyone can access, change or delete anything on this "
 "phone by connecting it to another device."
-msgstr ""
+msgstr "在开发者模式下，任何人都可以通过将本手机与其他设备连接来访问、修改或者删除本手机内的任何内容。"
 
 #: ../plugins/about//DevMode.qml:110
 msgid "You need a passcode or passphrase set to use Developer Mode."
-msgstr ""
+msgstr "您需要设置密码或者口令短语来开启开发模式。"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: ../plugins/about//PageComponent.qml:34
@@ -1546,17 +1544,17 @@ msgstr "序列号"
 
 #: ../plugins/about//PageComponent.qml:151
 msgid "Wi-Fi address"
-msgstr ""
+msgstr "Wi-Fi地址"
 
 #: ../plugins/about//PageComponent.qml:159
 msgid "Bluetooth address"
-msgstr ""
+msgstr "蓝牙地址"
 
 #. TRANSLATORS: that's the free disk space, indicated in the most appropriate storage unit
 #: ../plugins/about//PageComponent.qml:172
 #, qt-format
 msgid "%1 free"
-msgstr ""
+msgstr "%1 空闲"
 
 #: ../plugins/about//PageComponent.qml:179
 msgid "Software:"
@@ -1592,7 +1590,7 @@ msgstr "开发者模式"
 
 #: ../plugins/about//License.qml:30
 msgid "Sorry, this license could not be displayed."
-msgstr ""
+msgstr "很抱歉，无法显示该许可证。"
 
 #: ../plugins/about//Version.qml:36
 msgid "OS Build Details"
@@ -1704,7 +1702,7 @@ msgstr "手机需要重新启动来安装系统更新"
 
 #: ../plugins/system-update//PageComponent.qml:91
 msgid "Connect the phone to power before installing the system update."
-msgstr ""
+msgstr "安装系统更新之前，请将手机连接到电源。"
 
 #: ../plugins/system-update//PageComponent.qml:94
 msgid "Install & Restart"
@@ -1720,12 +1718,12 @@ msgstr "安装"
 
 #: ../plugins/system-update//PageComponent.qml:125
 msgid "Installation failed"
-msgstr ""
+msgstr "安装失败"
 
 #: ../plugins/system-update//PageComponent.qml:129
 #: ../plugins/cellular//Components//SimEditor.qml:217
 msgid "OK"
-msgstr ""
+msgstr "确定"
 
 #: ../plugins/system-update//PageComponent.qml:149
 msgid "Software is up to date"
@@ -1734,11 +1732,11 @@ msgstr "软件已是最新"
 #: ../plugins/system-update//PageComponent.qml:208
 #: ../plugins/system-update//PageComponent.qml:214
 msgid "Sorry, the system update failed."
-msgstr ""
+msgstr "抱歉，系统更新失败。"
 
 #: ../plugins/system-update//PageComponent.qml:227
 msgid "Restarting…"
-msgstr ""
+msgstr "重启中..."
 
 #: ../plugins/system-update//PageComponent.qml:271
 msgid "Checking for updates…"
@@ -1746,7 +1744,7 @@ msgstr "正在检查更新…"
 
 #: ../plugins/system-update//PageComponent.qml:271
 msgid "Connect to the Internet to check for updates"
-msgstr ""
+msgstr "连接到互联网以检查更新"
 
 #: ../plugins/system-update//PageComponent.qml:286
 #: ../plugins/system-update//PageComponent.qml:445
@@ -1757,15 +1755,13 @@ msgstr "重试"
 #, qt-format
 msgid "Install %1 update…"
 msgid_plural "Install %1 updates…"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "安装 %1 更新…"
 
 #: ../plugins/system-update//PageComponent.qml:312
 #, qt-format
 msgid "Install %1 update"
 msgid_plural "Install %1 updates"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "安装 %1 更新"
 
 #: ../plugins/system-update//PageComponent.qml:313
 msgid "Pause All"
@@ -1773,7 +1769,7 @@ msgstr "全部暂停"
 
 #: ../plugins/system-update//PageComponent.qml:448
 msgid "Install…"
-msgstr ""
+msgstr "安装..."
 
 #: ../plugins/system-update//PageComponent.qml:450
 msgid "Download"
@@ -1801,12 +1797,12 @@ msgstr "已安装"
 
 #: ../plugins/system-update//PageComponent.qml:501
 msgid "Downloading"
-msgstr ""
+msgstr "正在下载"
 
 #: ../plugins/system-update//PageComponent.qml:513
 #, qt-format
 msgid "%1 of %2"
-msgstr ""
+msgstr "第 %1 项，共 %2 项"
 
 #: ../plugins/system-update//PageComponent.qml:612
 msgid "Version: "
@@ -1814,11 +1810,11 @@ msgstr "版本： "
 
 #: ../plugins/system-update//PageComponent.qml:644
 msgid "Sign in to Ubuntu One to receive updates for apps."
-msgstr ""
+msgstr "登录 Ubuntu One 以接收应用的更新"
 
 #: ../plugins/system-update//PageComponent.qml:653
 msgid "Sign In…"
-msgstr ""
+msgstr "登录..."
 
 #: ../plugins/system-update//PageComponent.qml:697
 msgid "Installing update…"
@@ -1871,68 +1867,67 @@ msgstr "可能会产生数据费"
 
 #: ../plugins/background//Components//AddRemove.qml:52
 msgid "No images selected"
-msgstr ""
+msgstr "未选择图片"
 
 #: ../plugins/background//Components//AddRemove.qml:65
 #, qt-format
 msgid "Remove %1 image"
 msgid_plural "Remove %1 images"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "删除 %1 图片"
 
 #: ../plugins/background//Components//AddRemove.qml:80
 msgid "Add an image…"
-msgstr ""
+msgstr "添加一张图片..."
 
 #: ../plugins/background//Components//AddRemove.qml:91
 msgid "Remove images…"
-msgstr ""
+msgstr "删除图片..."
 
 #: ../plugins/cellular//Components//SingleSim.qml:37
 #: ../plugins/cellular//Components//NoSim.qml:29
 #: ../plugins/cellular//Components//DataMultiSim.qml:41
 msgid "Cellular data:"
-msgstr ""
+msgstr "蜂窝数据"
 
 #: ../plugins/cellular//Components//Sim.qml:42
 msgid "2G only (saves battery)"
-msgstr ""
+msgstr "仅使用2G (节省电量)"
 
 #: ../plugins/cellular//Components//Sim.qml:43
 msgid "2G/3G (faster)"
-msgstr ""
+msgstr "2G/3G (更快)"
 
 #: ../plugins/cellular//Components//Sim.qml:44
 msgid "2G/3G/4G (faster)"
-msgstr ""
+msgstr "2G/3G/4G (更快)"
 
 #: ../plugins/cellular//Components//SingleSim.qml:50
 #: ../plugins/cellular//Components//NoSim.qml:37
 #: ../plugins/cellular//Components//DataMultiSim.qml:74
 msgid "Data roaming"
-msgstr ""
+msgstr "数据漫游"
 
 #: ../plugins/cellular//Components//SimEditor.qml:89
 msgid "Edit SIM Name"
-msgstr ""
+msgstr "编辑 SIM 卡名称"
 
 #: ../plugins/cellular//Components//DefaultSim.qml:31
 msgid "Ask me each time"
-msgstr ""
+msgstr "每次都询问"
 
 #: ../plugins/cellular//Components//DefaultSim.qml:36
 msgid "For outgoing calls, use:"
-msgstr ""
+msgstr "呼出时使用："
 
 #: ../plugins/cellular//Components//DefaultSim.qml:50
 msgid ""
 "You can change the SIM for individual calls, or for contacts in the address "
 "book."
-msgstr ""
+msgstr "您可以为某一号码或者联系人设置拨打电话时使用的 SIM 卡"
 
 #: ../plugins/cellular//Components//DefaultSim.qml:57
 msgid "For messages, use:"
-msgstr ""
+msgstr "发送信息时使用："
 
 #: ../plugins/cellular//Components//MultiSim.qml:52
 #: ../plugins/cellular//Components//SingleSim.qml:64
@@ -1946,23 +1941,23 @@ msgstr "数据用量统计"
 
 #: ../plugins/security-privacy//diagnostics//PageComponent.qml:51
 msgid "Privacy policy"
-msgstr ""
+msgstr "隐私权政策"
 
 #: ../plugins/security-privacy//diagnostics//PageComponent.qml:59
 msgid "Report to Canonical:"
-msgstr ""
+msgstr "反馈给 Canonical："
 
 #: ../plugins/security-privacy//diagnostics//PageComponent.qml:73
 msgid "App crashes and errors"
-msgstr ""
+msgstr "应用的崩溃和错误"
 
 #: ../plugins/security-privacy//diagnostics//PageComponent.qml:79
 msgid "Previous error reports"
-msgstr ""
+msgstr "之前的错误报告"
 
 #: ../plugins/security-privacy//diagnostics//PageComponent.qml:90
 msgid "Includes info about what an app was doing when it failed."
-msgstr ""
+msgstr "包含上关于应用崩溃时的正在执行的信息"
 
 #: ../src/qml/MainWindow.qml:133
 msgid "Search"
@@ -1978,23 +1973,23 @@ msgstr "系统"
 
 #: ../wizard/qml/Pages//30-passwd-type.qml:72
 msgid "Please select how you’d like to unlock your phone."
-msgstr ""
+msgstr "请选择您喜欢的解锁方式"
 
 #: ../wizard/qml/Pages//30-passwd-type.qml:92
 msgid "Swipe"
-msgstr ""
+msgstr "滑动"
 
 #: ../wizard/qml/Pages//30-passwd-type.qml:93
 msgid "No security"
-msgstr ""
+msgstr "不启用安全设置"
 
 #: ../wizard/qml/Pages//30-passwd-type.qml:96
 msgid "4 numbers"
-msgstr ""
+msgstr "4位数字"
 
 #: ../wizard/qml/Pages//30-passwd-type.qml:99
 msgid "Numbers and letters"
-msgstr ""
+msgstr "数字和字母"
 
 #: ../wizard/qml/Pages//passwd-set.qml:83
 #: ../wizard/qml/Pages//30-passwd-type.qml:112
@@ -2007,15 +2002,15 @@ msgstr "继续"
 
 #: ../wizard/qml/Pages//40-wifi.qml:28
 msgid "Connect to Wi‑Fi"
-msgstr ""
+msgstr "连接 Wi-Fi"
 
 #: ../wizard/qml/Pages//40-wifi.qml:165
 msgid "Available networks…"
-msgstr ""
+msgstr "可用的网络..."
 
 #: ../wizard/qml/Pages//40-wifi.qml:166
 msgid "No available networks."
-msgstr ""
+msgstr "没有可用的网络。"
 
 #: ../wizard/qml/Pages//20-sim.qml:71 ../wizard/qml/Pages//40-wifi.qml:212
 msgid "Skip"
@@ -2023,52 +2018,52 @@ msgstr "跳过"
 
 #: ../wizard/qml/Pages//here-terms.qml:25
 msgid "Terms & Conditions"
-msgstr ""
+msgstr "条款和条件"
 
 #: ../wizard/qml/Pages//passwd-set.qml:53
 msgid "Enter passphrase"
-msgstr ""
+msgstr "输入口令短语"
 
 #: ../wizard/qml/Pages//passwd-set.qml:54
 msgid "Choose your passcode"
-msgstr ""
+msgstr "选择您的密码"
 
 #: ../wizard/qml/Pages//passwd-set.qml:61
 msgid "Passphrase must be 4 characters long"
-msgstr ""
+msgstr "口令短语必须为4个字符长度"
 
 #: ../wizard/qml/Pages//20-sim.qml:23
 msgid "Add a SIM card and restart your device"
-msgstr ""
+msgstr "插入 SIM 卡并重启你的设备"
 
 #: ../wizard/qml/Pages//20-sim.qml:57
 msgid "Without it, you won’t be able to make calls or use text messaging."
-msgstr ""
+msgstr "没有它，您将不能拨打电话或者发送短信。"
 
 #: ../wizard/qml/Pages//passwd-confirm.qml:52
 msgid "Sorry, incorrect passphrase."
-msgstr ""
+msgstr "对不起，口令短语错误"
 
 #: ../wizard/qml/Pages//passwd-confirm.qml:52
 #: ../wizard/qml/Pages//passwd-confirm.qml:53
 msgid "Please try again."
-msgstr ""
+msgstr "请再试一次。"
 
 #: ../wizard/qml/Pages//passwd-confirm.qml:53
 msgid "Sorry, incorrect passcode."
-msgstr ""
+msgstr "对不起，密码错误"
 
 #: ../wizard/qml/Pages//80-finished.qml:22
 msgid "All done"
-msgstr ""
+msgstr "大功告成"
 
 #: ../wizard/qml/Pages//80-finished.qml:37
 msgid "Nice work!"
-msgstr ""
+msgstr "干得好！"
 
 #: ../wizard/qml/Pages//80-finished.qml:44
 msgid "Your phone is now ready to use."
-msgstr ""
+msgstr "您的手机现在可以使用了。"
 
 #: ../wizard/qml/Pages//80-finished.qml:51
 msgid "Finish"
@@ -2076,56 +2071,56 @@ msgstr "完成"
 
 #: ../wizard/qml/Pages//10-welcome.qml:25
 msgid "Hi!"
-msgstr ""
+msgstr "Hi！"
 
 #: ../wizard/qml/Pages//10-welcome.qml:42
 msgid "Welcome to your Ubuntu phone."
-msgstr ""
+msgstr "欢迎使用您的 Ubuntu 手机。"
 
 #: ../wizard/qml/Pages//10-welcome.qml:50
 msgid "Let’s get started."
-msgstr ""
+msgstr "让我们开始吧。"
 
 #. TRANSLATORS: HERE is a trademark for Nokia's location service, you probably shouldn't translate it
 #: ../wizard/qml/Pages//50-location.qml:58
 msgid ""
 "Ubuntu includes location services provided by HERE, enabling apps to "
 "pinpoint your location."
-msgstr ""
+msgstr "Ubuntu 使用了 HERE 定位服务，应用程序可以通过它来定位您的位置。"
 
 #: ../wizard/qml/Pages//50-location.qml:64
 msgid ""
 "Allow apps to use your mobile and Wi-Fi networks to determine your location."
-msgstr ""
+msgstr "允许运用程序通过您的移动和 Wi-Fi 网络信息来确定你的位置。"
 
 #. TRANSLATORS: HERE is a trademark for Nokia's location service, you probably shouldn't translate it
 #: ../wizard/qml/Pages//50-location.qml:74
 msgid ""
 "Accept the HERE <a href='terms.qml'>terms and conditions</a> to enable these "
 "services."
-msgstr ""
+msgstr "接受 HERE 的<a href='terms.qml'>服务条款和条件</a> 以使用这些服务。"
 
 #: ../wizard/qml/Pages//50-location.qml:85
 msgid ""
 "This service can be disabled at any time from the <b>System Settings</b> "
 "menu."
-msgstr ""
+msgstr "在任何时候都能通过<b>系统设置</b>菜单来禁用本项服务。"
 
 #: ../wizard/qml/Pages//60-reporting.qml:22
 msgid "Improving your experience"
-msgstr ""
+msgstr "改善您的体验"
 
 #: ../wizard/qml/Pages//60-reporting.qml:34
 msgid ""
 "Your phone is set up to automatically report errors to Canonical and its "
 "partners, the makers of the operating system."
-msgstr ""
+msgstr "您的手机设置为自动向操作系统的制造商，Canonical 及其合作伙伴发送错误报告。"
 
 #: ../wizard/qml/Pages//60-reporting.qml:41
 msgid ""
 "This can be disabled in <b>System Settings</b> under <b>Security &amp; "
 "Privacy</b>"
-msgstr ""
+msgstr "这个可以在<b>系统设置</b>下的 <b>安全 &amp; 隐私</b>里被禁用。"
 
 #: ../wizard/qml/Components//Page.qml:89
 msgid "Back"
@@ -2857,40 +2852,40 @@ msgstr ""
 
 #: ../plugins/security-privacy//securityprivacy.cpp:347
 msgid "Incorrect passcode. Try again."
-msgstr ""
+msgstr "不正确的密码。再试一次。"
 
 #: ../plugins/security-privacy//securityprivacy.cpp:349
 msgid "Incorrect passphrase. Try again."
-msgstr ""
+msgstr "不正确的口令短语。再试一次。"
 
 #: ../plugins/security-privacy//securityprivacy.cpp:352
 msgid "Could not set security mode"
-msgstr ""
+msgstr "无法设置安全模式"
 
 #: ../plugins/security-privacy//securityprivacy.cpp:377
 msgid "Could not set security display hint"
-msgstr ""
+msgstr "无法设置安全提示"
 
 #: ../plugins/security-privacy//securityprivacy.cpp:388
 msgid "Authentication token manipulation error"
-msgstr ""
+msgstr "认证令牌操作错误"
 
 #: ../plugins/about//click.cpp:171
 msgid "Unknown title"
-msgstr ""
+msgstr "未知标题"
 
 #: ../plugins/system-update//system_update.cpp:94
 msgid "Can't cancel current request (can't contact service)"
-msgstr ""
+msgstr "无法取消当前请求（无法连接服务）"
 
 #: ../plugins/system-update//system_update.cpp:100
 msgid "Can't pause current request (can't contact service)"
-msgstr ""
+msgstr "无法暂停当前请求（无法连接服务）"
 
 #: ../push-helper/software_updates_helper.py:150
 msgid "There's an updated system image."
-msgstr ""
+msgstr "有一个更新的系统映像。"
 
 #: ../push-helper/software_updates_helper.py:151
 msgid "Tap to open the system updater."
-msgstr ""
+msgstr "点击打开系统更新器。"
