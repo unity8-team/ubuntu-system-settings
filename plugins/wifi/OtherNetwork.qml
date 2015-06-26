@@ -88,7 +88,6 @@ Component {
             visible: false
         }
 
-
         Common {
             id: common
         }
@@ -142,6 +141,15 @@ Component {
                 }
                 PropertyChanges {
                     target: anonymousIdentityLabel
+                    opacity: 0.5
+                }
+                PropertyChanges {
+                    target: peapVersionList
+                    enabled: false
+                    opacity: 0.5
+                }
+                PropertyChanges {
+                    target: peapVersionListLabel
                     opacity: 0.5
                 }
                 PropertyChanges {
@@ -378,7 +386,8 @@ Component {
                       securityList.selectedIndex === 4 /* WPA or D-WEP */) &&
                      (authList.selectedIndex === 0 ||
                       authList.selectedIndex === 1 ||
-                      authList.selectedIndex === 3)
+                      authList.selectedIndex === 3 ||
+                      authList.selectedIndex === 4)
         }
 
         ListItem.ItemSelector {
@@ -391,7 +400,8 @@ Component {
                       securityList.selectedIndex === 4 /* WPA or D-WEP */) &&
                      (authList.selectedIndex === 0 ||
                       authList.selectedIndex === 1 ||
-                      authList.selectedIndex === 3)
+                      authList.selectedIndex === 3 ||
+                      authList.selectedIndex === 4)
             model: cacertListModel
             expanded: false
             delegate: certSelectorDelegate
@@ -404,6 +414,7 @@ Component {
                     return "";
                 }
             }
+
             onSelectedIndexChanged: {
                 if (selectedIndex === cacertListModel.rowCount()-1) {
                     selectedIndex = 0;
@@ -441,6 +452,23 @@ Component {
         Loader {
             id: certDialogLoader
             asynchronous: false
+        }
+
+        Label {
+            id: cacertHintLabel
+            text : i18n.tr("Using certificates is recommend as it increases security.")
+            wrapMode: Text.WordWrap
+            opacity: 0.5
+            objectName: "cacertHintLabel"
+            fontSize: "small"
+            font.bold: false
+            color: Theme.palette.selected.backgroundText
+            visible: (securityList.selectedIndex === 2 ||
+                      securityList.selectedIndex === 4 /* WPA or D-WEP */) &&
+                     (authList.selectedIndex === 0 ||
+                      authList.selectedIndex === 1 ||
+                      authList.selectedIndex === 3 ||
+                      authList.selectedIndex === 4)
         }
 
         Label {
@@ -623,6 +651,32 @@ Component {
             visible: (securityList.selectedIndex === 2 ||
                       securityList.selectedIndex === 4) &&
                      (authList.selectedIndex === 3)
+        }
+
+        Label {
+            id: peapVersionListLabel
+            text : i18n.tr("PEAP version")
+            objectName: "peapVersionListLabel"
+            fontSize: "medium"
+            font.bold: false
+            color: Theme.palette.selected.backgroundText
+            elide: Text.ElideRight
+            visible: (securityList.selectedIndex === 2 ||
+                      securityList.selectedIndex === 4) &&
+                      (authList.selectedIndex === 4)
+        }
+
+        ListItem.ItemSelector {
+            id: peapVersionList
+            objectName: "peapVersionList"
+            model: [i18n.tr("Version 0"),  // index: 0
+                i18n.tr("Version 1"),      // index: 1
+                i18n.tr("Automatic"),      // index: 2
+            ]
+            visible: (securityList.selectedIndex === 2 ||
+                      securityList.selectedIndex === 4) &&
+                     (authList.selectedIndex === 4)
+            selectedIndex: 2
         }
 
         Label {
@@ -853,7 +907,8 @@ Component {
                         usercertSelector.usercertFileName,
                         privateKeySelector.privateKeyFileName,
                         pacFileSelector.pacFileName,
-                        pacProvisioningList.selectedIndex.toString()
+                        pacProvisioningList.selectedIndex.toString(),
+                        peapVersionList.selectedIndex.toString()
                     ],
                     p2authList.selectedIndex);
                 otherNetworkDialog.state = "CONNECTING";

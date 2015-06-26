@@ -147,10 +147,11 @@ void WifiDbusHelper::connect(QString ssid, int security, int auth, QStringList u
             wireless_802_1x["phase1-fast-provisioning"] = certs[4];
         } else if (auth == 4) { // PEAP
             wireless_802_1x["eap"] = QStringList("peap");
-            wireless_802_1x["phase1-peaplabel"] = QString("1");
+            if (certs[0] != "") {wireless_802_1x["ca-cert"] = cacert;}
             if (usernames[1] != "") {wireless_802_1x["anonymous-identity"]  = usernames[1];}
             if (password[1] == "false") {wireless_802_1x["password-flags"]  = uint(2);}
-            //wireless_802_1x["phase1-peapver"] = QString("0"); #jkb:let us unset this until problems are reported.
+            if (certs[5] != "2") {wireless_802_1x["phase1-peapver"] = certs[5]; }
+            // wireless_802_1x["phase1-peaplabel"] = QString("1"); #jkb:let us unset this until problems are reported.
         }
 
         if (auth == 1 || auth == 3 || auth == 4 ){ // only for TTLS, FAST and PEAP
