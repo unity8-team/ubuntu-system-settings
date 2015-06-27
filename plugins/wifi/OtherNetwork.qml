@@ -81,12 +81,7 @@ Component {
         }
 
         title: i18n.tr("Connect to Hidden Network")
-
-        Label {
-            property bool enabled: false
-            id: feedback
-            visible: false
-        }
+        text: feedback.enabled ? feedback.text : "";
 
         Common {
             id: common
@@ -242,7 +237,7 @@ Component {
                 }
                 PropertyChanges {
                     target: feedback
-                    enabled: false
+                    enabled: true
                 }
             },
             State {
@@ -250,7 +245,6 @@ Component {
                 PropertyChanges {
                     target: feedback
                     enabled: true
-                    visible: true
                 }
             },
             State {
@@ -266,6 +260,15 @@ Component {
                 }
             }
         ]
+        
+        Label {
+            property bool enabled: false
+            id: feedback
+            horizontalAlignment: Text.AlignHCenter
+            height: contentHeight
+            wrapMode: Text.Wrap
+            visible: false
+        }
 
         Label {
             id: networknameLabel
