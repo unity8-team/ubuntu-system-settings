@@ -260,7 +260,7 @@ Component {
                 }
             }
         ]
-        
+
         Label {
             property bool enabled: false
             id: feedback
@@ -426,25 +426,46 @@ Component {
             }
         }
 
-        Component{
+        Component {
             id: certSelectorDelegate
             OptionSelectorDelegate {
+                text: {
+                    if (CommonName.length > 32) {
+                        /* TRANSLATORS: %1 is the name of a certificate file.
+                        The ellipsis indicates that the file name has been
+                        truncated to 30 characters. */
+                        return i18n.tr("%1…").arg(CommonName.substr(0,30));
+                    } else {
+                        return CommonName;
+                    }
+                }
 
-                /* FIXME: This should be dealt with by the ui toolkit. We can
-                not be sure that ellipsis translates well into other languages.
-                */
-                text: CommonName.length > 32 ?
-                      CommonName.substr(0,30).concat("…") :
-                      CommonName
+                subText: {
+                    if (CommonName !== i18n.tr("None") &&
+                        CommonName !== i18n.tr("Choose…")) {
+                        if (Organization.length > 15) {
+                            /* TRANSLATORS: The first position is the name of
+                            the organization that has issued the certificate.
+                            The organization name has been truncated, as
+                            indicated by the ellipsis. The latter position is
+                            the expiry date of the certificate. */
+                            return i18n.tr("%1…, Exp.: %1").arg(
+                                Organization.substr(0,13)
+                            ).arg(expiryDate);
+                        } else {
+                            /* TRANSLATORS: The first position is the name of
+                            the organization that has issued the certificate.
+                            The latter position is the expiry date of the
+                            certificate. */
+                            return i18n.tr("%1, Exp.: %1").arg(Organization)
+                                .arg(expiryDate);
+                        }
+                    } else {
+                        return "";
+                    }
 
-                // FIXME: See above comment.
-                // FIXME: Increase readability by using conditionals in a block.
-                subText: (CommonName !== i18n.tr("None") &&
-                          CommonName !== i18n.tr("Choose…")) ?
-                          (((Organization.length > 15) ?
-                             Organization.substr(0,13).concat("…") :
-                             Organization)
-                          + ", " + i18n.tr("Exp.date: ") + expiryDate) : ""
+
+                }
             }
         }
 
@@ -537,13 +558,18 @@ Component {
             OptionSelectorDelegate {
                 text: KeyName
 
-                /* FIXME: Translate using i18n.tr("%1, %1, %1 bit").arg().…
-                and add comment to translators about what each argument
-                represents. */
-                subText: (KeyName !== i18n.tr("None") &&
-                          KeyName !== i18n.tr("Choose…")) ?
-                          (KeyType + ", " + KeyAlgorithm +", " + KeyLength + " bit" ) :
-                          ""
+                subText: {
+                    if (KeyName !== i18n.tr("None") &&
+                        KeyName !== i18n.tr("Choose…")) {
+                        /* TRANSLATORS: The first position is the type of
+                        private key, second the key algorithm, and third the
+                        length of the key in bits. */
+                        return i18n.tr("%1, %1, %1 bit").arg(KeyType)
+                            .arg(KeyAlgorithm).arg(KeyLength);
+                    } else {
+                        return "";
+                    }
+                }
             }
         }
 
