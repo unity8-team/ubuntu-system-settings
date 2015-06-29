@@ -185,7 +185,7 @@ Column {
 
             cursorDelegate: Rectangle {
                 width: units.dp(1)
-                color: "#DD4814"
+                color: UbuntuColors.orange
             }
             onVisibleChanged:
                 if (visible === true) forceActiveFocus()
