@@ -996,7 +996,6 @@ class WifiPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
         if password:
             dialog.enter_password(password)
         if cancel:
-            # FIXME: remove this and all tests dependent on it.
             dialog.cancel()
             return self
         else:
