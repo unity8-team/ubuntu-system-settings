@@ -28,9 +28,18 @@ Column {
     property string carrierName: sim.netReg.name
     property string carrierString: carrierName ? carrierName : i18n.tr("SIM")
 
+
+    ListItem.Standard {
+        objectName: "callWait"
+        text: i18n.tr("Call waiting")
+        progression: true
+        onClicked: pageStack.push(Qt.resolvedUrl("CallWaiting.qml"), {sim: sim})
+    }
+
     ListItem.SingleValue {
         objectName: "callFwd"
         text: i18n.tr("Call forwarding")
+        showDivider: false
         progression: true
         value: {
             if (sim.callForwarding.voiceUnconditional) {
@@ -44,14 +53,6 @@ Column {
             }
         }
         onClicked: pageStack.push(Qt.resolvedUrl("CallForwarding.qml"), {sim: sim})
-    }
-
-    ListItem.Standard {
-        objectName: "callWait"
-        text: i18n.tr("Call waiting")
-        progression: true
-        onClicked: pageStack.push(Qt.resolvedUrl("CallWaiting.qml"), {sim: sim})
-        showDivider: false
     }
 
     ListItem.Divider {}

@@ -168,7 +168,7 @@ Column {
             maximumLength: 20
             focus: true
             cursorVisible: text === "" || text !== callForwarding[rule]
-            placeholderText: i18n.tr("Phone number")
+            placeholderText: i18n.tr("Enter a number")
             style: TextFieldStyle {
                 overlaySpacing: units.gu(0.5)
                 frameSpacing: 0

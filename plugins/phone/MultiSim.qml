@@ -37,6 +37,16 @@ Column {
 
             SettingsItemTitle { text: sims[index].title }
 
+            ListItem.Standard {
+                objectName: "callWaitSim" + index
+                text: i18n.tr("Call waiting")
+                progression: true
+                onClicked: pageStack.push(Qt.resolvedUrl("CallWaiting.qml"), {
+                    sim: sims[index],
+                    headerTitle: sims[index].title
+                })
+            }
+
             ListItem.SingleValue {
                 objectName: "callFwdSim" + index
                 text: i18n.tr("Call forwarding")
@@ -53,16 +63,6 @@ Column {
                     }
                 }
                 onClicked: pageStack.push(Qt.resolvedUrl("CallForwarding.qml"), {
-                    sim: sims[index],
-                    headerTitle: sims[index].title
-                })
-            }
-
-            ListItem.Standard {
-                objectName: "callWaitSim" + index
-                text: i18n.tr("Call waiting")
-                progression: true
-                onClicked: pageStack.push(Qt.resolvedUrl("CallWaiting.qml"), {
                     sim: sims[index],
                     headerTitle: sims[index].title
                 })
