@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-10-16 20:04-0600\n"
-"PO-Revision-Date: 2015-06-26 05:34+0000\n"
-"Last-Translator: Ian Li <Unknown>\n"
+"PO-Revision-Date: 2015-06-29 07:56+0000\n"
+"Last-Translator: Erikshui <startmenu11@gmail.com>\n"
 "Language-Team: Chinese (Simplified) <zh_CN@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2015-06-27 05:37+0000\n"
+"X-Launchpad-Export-Date: 2015-06-30 05:51+0000\n"
 "X-Generator: Launchpad (build 17578)\n"
 
 #: ubuntu-system-settings.desktop.in.in.h:1 ../src/qml/MainWindow.qml:112
@@ -28,7 +28,7 @@ msgstr "系统;"
 
 #: ubuntu-system-settings.desktop.in.in.h:3
 msgid "Preferences;Settings;"
-msgstr "Preferences;Settings;首选项;设置;"
+msgstr "首选项；设置；"
 
 #: ../plugins/background//Preview.qml:70
 msgid "Preview"
@@ -66,7 +66,7 @@ msgstr "取消"
 #: ../plugins/time-date//TimePicker.qml:182
 #: ../plugins/security-privacy//LockSecurity.qml:353
 msgid "Set"
-msgstr "设置"
+msgstr "设定"
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
 #: ../plugins/background//MainPage.qml:35
@@ -379,7 +379,7 @@ msgstr "信息："
 #: ../plugins/sound//PageComponent.qml:176
 #: ../plugins/sound//PageComponent.qml:182
 msgid "Message received"
-msgstr "收到訊息时"
+msgstr "收到短信时"
 
 #: ../plugins/sound//PageComponent.qml:196
 msgid "Vibrate with message sound"
@@ -928,7 +928,7 @@ msgstr "修改密码..."
 #: ../plugins/security-privacy//LockSecurity.qml:117
 #: ../plugins/security-privacy//LockSecurity.qml:434
 msgid "Change passphrase…"
-msgstr "更改口令短语…"
+msgstr "更改口令密语…"
 
 #: ../plugins/security-privacy//LockSecurity.qml:124
 msgid "Switch to swipe"
@@ -940,7 +940,7 @@ msgstr "切换到密码"
 
 #: ../plugins/security-privacy//LockSecurity.qml:128
 msgid "Switch to passphrase"
-msgstr "切换至口令短语"
+msgstr "切换至口令密语"
 
 #: ../plugins/security-privacy//LockSecurity.qml:137
 msgid "Existing passcode"
@@ -948,7 +948,7 @@ msgstr "已存在的密码"
 
 #: ../plugins/security-privacy//LockSecurity.qml:139
 msgid "Existing passphrase"
-msgstr "当前口令短语"
+msgstr "当前口令密语"
 
 #: ../plugins/security-privacy//LockSecurity.qml:204
 msgid "Choose passcode"
@@ -956,7 +956,7 @@ msgstr "选择新密码"
 
 #: ../plugins/security-privacy//LockSecurity.qml:206
 msgid "Choose passphrase"
-msgstr "选择口令短语"
+msgstr "选择口令密语"
 
 #: ../plugins/security-privacy//LockSecurity.qml:258
 #: ../wizard/qml/Pages//passwd-confirm.qml:49
@@ -966,7 +966,7 @@ msgstr "确认新密码"
 #: ../plugins/security-privacy//LockSecurity.qml:260
 #: ../wizard/qml/Pages//passwd-confirm.qml:48
 msgid "Confirm passphrase"
-msgstr "确认口令短语"
+msgstr "确认口令密语"
 
 #: ../plugins/security-privacy//LockSecurity.qml:314
 msgid "Those passcodes don't match. Try again."
@@ -974,7 +974,7 @@ msgstr "密码不一致，请重试"
 
 #: ../plugins/security-privacy//LockSecurity.qml:317
 msgid "Those passphrases don't match. Try again."
-msgstr "口令短语不一致，请重新输入。"
+msgstr "口令密语不一致，请重新输入。"
 
 #: ../plugins/security-privacy//LockSecurity.qml:348
 msgid "Unset"
@@ -1008,7 +1008,7 @@ msgstr "四位数字的密码..."
 
 #: ../plugins/security-privacy//LockSecurity.qml:402
 msgid "Passphrase…"
-msgstr "口令短语"
+msgstr "口令密语"
 
 #: ../plugins/security-privacy//PageComponent.qml:147
 #: ../plugins/security-privacy//SimPin.qml:35
@@ -1308,7 +1308,7 @@ msgstr ""
 
 #: ../plugins/security-privacy//AppAccess.qml:60
 msgid "0"
-msgstr ""
+msgstr "0"
 
 #: ../plugins/bluetooth//ProvidePasskeyDialog.qml:28
 #: ../plugins/bluetooth//ProvidePinCodeDialog.qml:28
@@ -1530,7 +1530,7 @@ msgstr "在开发者模式下，任何人都可以通过将本手机与其他设
 
 #: ../plugins/about//DevMode.qml:110
 msgid "You need a passcode or passphrase set to use Developer Mode."
-msgstr "您需要设置密码或者口令短语来开启开发模式。"
+msgstr "您需要设置密码或者口令密语来开启开发模式。"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: ../plugins/about//PageComponent.qml:34
@@ -2018,11 +2018,11 @@ msgstr "跳过"
 
 #: ../wizard/qml/Pages//here-terms.qml:25
 msgid "Terms & Conditions"
-msgstr "条款和条件"
+msgstr "条款与条件"
 
 #: ../wizard/qml/Pages//passwd-set.qml:53
 msgid "Enter passphrase"
-msgstr "输入口令短语"
+msgstr "输入口令密语"
 
 #: ../wizard/qml/Pages//passwd-set.qml:54
 msgid "Choose your passcode"
@@ -2030,7 +2030,7 @@ msgstr "选择您的密码"
 
 #: ../wizard/qml/Pages//passwd-set.qml:61
 msgid "Passphrase must be 4 characters long"
-msgstr "口令短语必须为4个字符长度"
+msgstr "口令密语必须为4个字符长度"
 
 #: ../wizard/qml/Pages//20-sim.qml:23
 msgid "Add a SIM card and restart your device"
@@ -2042,7 +2042,7 @@ msgstr "没有它，您将不能拨打电话或者发送短信。"
 
 #: ../wizard/qml/Pages//passwd-confirm.qml:52
 msgid "Sorry, incorrect passphrase."
-msgstr "对不起，口令短语错误"
+msgstr "对不起，口令密语错误。"
 
 #: ../wizard/qml/Pages//passwd-confirm.qml:52
 #: ../wizard/qml/Pages//passwd-confirm.qml:53
@@ -2098,7 +2098,7 @@ msgstr "允许运用程序通过您的移动和 Wi-Fi 网络信息来确定你�
 msgid ""
 "Accept the HERE <a href='terms.qml'>terms and conditions</a> to enable these "
 "services."
-msgstr "接受 HERE 的<a href='terms.qml'>服务条款和条件</a> 以使用这些服务。"
+msgstr "接受 HERE 的<a href='terms.qml'>条款与条件</a> 以使用这些服务。"
 
 #: ../wizard/qml/Pages//50-location.qml:85
 msgid ""
@@ -2129,12 +2129,12 @@ msgstr "后退"
 #: ../wizard/qml/Components//StackButton.qml:41
 #, qt-format
 msgid "〈  %1"
-msgstr ""
+msgstr "〈  %1"
 
 #: ../wizard/qml/Components//StackButton.qml:44
 #, qt-format
 msgid "%1  〉"
-msgstr ""
+msgstr "%1  〉"
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:4
@@ -2856,7 +2856,7 @@ msgstr "不正确的密码。再试一次。"
 
 #: ../plugins/security-privacy//securityprivacy.cpp:349
 msgid "Incorrect passphrase. Try again."
-msgstr "不正确的口令短语。再试一次。"
+msgstr "不正确的口令密语。再试一次。"
 
 #: ../plugins/security-privacy//securityprivacy.cpp:352
 msgid "Could not set security mode"
