@@ -26,6 +26,11 @@ ItemPage {
     id: wifibase
     objectName: "wifiPage"
     title: i18n.tr("Wi-Fi")
+    property var pluginOptions
+
+    Component.onCompleted: {
+        console.warn('pluginOptions:', pluginOptions['ssid'], '(EOL)');
+    }
 
     UnityMenuModel {
         id: menuModel
@@ -53,13 +58,6 @@ ItemPage {
         Component.onCompleted: {
             start()
         }
-    }
-
-    // workaround of getting the following error on startup:
-    // WARNING - file:///usr/..../wifi/PageComponent.qml:24:1: QML Page: Binding loop detected for property "flickable"
-    flickable: null
-    Component.onCompleted: {
-        flickable = pageFlickable
     }
 
     Flickable {
