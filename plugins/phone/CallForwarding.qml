@@ -359,6 +359,6 @@ ItemPage {
 
     Connections {
         target: sim.callForwarding
-        onGetPropertiesFailed: root.state = "forwardFailed";
+        onGetPropertiesFailed: page.state = "forwardFailed";
     }
 }
