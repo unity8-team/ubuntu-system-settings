@@ -249,7 +249,7 @@ ItemPage {
                 rightMargin: units.gu(1)
                 verticalCenter: parent.verticalCenter
             }
-            enabled: editing && !editing.busy
+            enabled: editing && !editing.busy && editing.field.text
             text: i18n.tr("Set")
             activeFocusOnPress: false
             onClicked: editing.save()
