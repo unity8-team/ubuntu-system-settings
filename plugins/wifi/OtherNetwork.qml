@@ -490,7 +490,8 @@ Component {
                      (authList.selectedIndex === 0 ||
                       authList.selectedIndex === 1 ||
                       authList.selectedIndex === 3 ||
-                      authList.selectedIndex === 4)
+                      authList.selectedIndex === 4) &&
+                     cacertSelector.selectedIndex === 0
         }
 
         Label {
