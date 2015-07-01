@@ -26,11 +26,9 @@ ItemPage {
     id: wifibase
     objectName: "wifiPage"
     title: i18n.tr("Wi-Fi")
+    property bool wifiEnabled: actionGroup.actionObject.valid ?
+                               actionGroup.actionObject.state : false
     property var pluginOptions
-
-    Component.onCompleted: {
-        console.warn('pluginOptions:', pluginOptions['ssid'], '(EOL)');
-    }
 
     UnityMenuModel {
         id: menuModel
@@ -138,8 +136,7 @@ ItemPage {
             ListItem.SingleValue {
                 objectName: "connectToHiddenNetwork"
                 text: i18n.tr("Connect to hidden network…")
-                visible : (actionGroup.actionObject.valid ?
-                           actionGroup.actionObject.state : false)
+                visible : wifibase.wifiEnabled
                 onClicked: {
                     otherNetworLoader.source = "OtherNetwork.qml";
                     PopupUtils.open(otherNetworLoader.item);
@@ -156,5 +153,20 @@ ItemPage {
         boundsBehavior: (contentHeight > wifibase.height) ?
                             Flickable.DragAndOvershootBounds :
                             Flickable.StopAtBounds
+    }
+
+    Connections {
+        target: wifibase
+        onWifiEnabledChanged: {
+            console.warn('ssid', pluginOptions['ssid'], 'wifi', wifiEnabled);
+            if (wifiEnabled && pluginOptions['ssid']) {
+                console.warn('have wifi and ssid option.', pluginOptions['ssid']);
+                otherNetworLoader.source = "OtherNetwork.qml";
+                PopupUtils.open(otherNetworLoader.item, wifibase, {
+                    'ssid': pluginOptions['ssid'],
+                    'bssid': pluginOptions['bssid']
+                });
+            }
+        }
     }
 }

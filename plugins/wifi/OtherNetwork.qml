@@ -31,6 +31,9 @@ Component {
         objectName: "otherNetworkDialog"
         anchorToKeyboard: true
 
+        property string ssid
+        property string bssid
+
         function settingsValid() {
             if(networkname.length == 0) {
                 return false;
@@ -48,7 +51,10 @@ Component {
                    password.length === 26;
         }
 
-        title: i18n.tr("Connect to Hidden Network")
+        title: ssid ?
+               // TRANSLATORS: %1 is the wireless network name (ssid).
+               i18n.tr("Connect to %1").arg(ssid) :
+               i18n.tr("Connect to Hidden Network")
         text: feedback.enabled ? feedback.text : "";
 
         Common {
@@ -145,12 +151,14 @@ Component {
             font.bold: true
             color: Theme.palette.selected.backgroundText
             elide: Text.ElideRight
+            visible: !ssid
         }
 
         TextField {
             id : networkname
             objectName: "networkname"
             inputMethodHints: Qt.ImhNoPredictiveText
+            visible: !ssid
             Component.onCompleted: forceActiveFocus()
         }
 
