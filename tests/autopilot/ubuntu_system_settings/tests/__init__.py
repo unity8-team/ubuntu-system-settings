@@ -89,20 +89,18 @@ class UbuntuSystemSettingsTestCase(
             lambda: gsettings.get_value('rotation-lock').get_boolean(),
             Eventually(Equals(value.get_boolean())))
 
-    def launch(self, panel=None, extra_params=[]):
+    def launch(self, panel=None):
         """Launch system settings application
 
         :param testobj: An AutopilotTestCase object, needed to call
         testobj.launch_test_application()
 
         :param panel: Launch to a specific panel. Default None.
-        :param extra_params: Extra params provided to the application.
-        Default [].
 
         :returns: A proxy object that represents the application. Introspection
         data is retrievable via this object.
         """
-        params = extra_params + [self.APP_PATH]
+        params = [self.APP_PATH]
         if platform.model() != 'Desktop':
             params.append('--desktop_file_hint={}'.format(self.DESKTOP_FILE))
 
@@ -881,8 +879,13 @@ class WifiBaseTestCase(UbuntuSystemSettingsTestCase,
             security=NM80211ApSecurityFlags.NM_802_11_AP_SEC_KEY_MGMT_PSK
         )
 
-        super(WifiBaseTestCase, self).setUp()
-        self.wifi_page = self.main_view.go_to_wifi_page()
+        super(WifiBaseTestCase, self).setUp(panel)
+        if panel:
+            self.wifi_page = self.main_view.wait_select_single(
+                objectName='wifiPage'
+            )
+        else:
+            self.wifi_page = self.main_view.go_to_wifi_page()
 
     def create_access_point(self, name, ssid, security=None):
         """Creates access point.
@@ -906,3 +909,14 @@ class WifiBaseTestCase(UbuntuSystemSettingsTestCase,
         mac = [0x00, 0x16, 0x3e, random.randint(0x00, 0x7f),
                random.randint(0x00, 0xff), random.randint(0x00, 0xff)]
         return ':'.join(map(lambda x: "%02x" % x, mac))
+
+
+class WifiLaunchedWithSSIDTestCase(WifiBaseTestCase):
+    """ Class for wifi settings tests launches with an ssid."""
+
+    ssid = None
+
+    def setUp(self, panel=None):
+        super(WifiLaunchedWithSSIDTestCase, self).setUp(
+            panel='settings:///wifi/?ssid=%s' % self.ssid
+        )

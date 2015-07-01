@@ -15,7 +15,8 @@ from dbusmock.templates.networkmanager import (
 )
 from testtools.matchers import Equals
 from time import sleep
-from ubuntu_system_settings.tests import WifiBaseTestCase
+from ubuntu_system_settings.tests import (WifiBaseTestCase,
+                                          WifiLaunchedWithSSIDTestCase)
 from ubuntu_system_settings.utils.i18n import ugettext as _
 from unittest import skip
 
@@ -223,12 +224,27 @@ class WifiTestCase(WifiBaseTestCase):
         # We cannot make any assertions, because connection deletion
         # is currently not supported.
 
+
+class WifiWithSSIDTestCase(WifiLaunchedWithSSIDTestCase):
+
+    ssid = 'test_ap'
+
     def test_handle_wifi_url_with_ssid(self):
         if not self.wifi_page.have_wireless():
             self.skipTest('Cannot test wireless since it cannot be enabled')
         self.addCleanup(
             self.wifi_page._set_wireless, self.wifi_page.get_wireless())
 
-        self.launch(panel='wifi', extra_params=[
-            'settings://wifi/?ssid=FooBar'
-        ])
+        self.wifi_page.enable_wireless()
+        dialog = self.main_view.wait_select_single(
+            objectName='otherNetworkDialog'
+        )
+        dialog._scroll_to_and_click = self.main_view.scroll_to_and_click
+        dialog.enter_password('abcdefgh')
+        dialog.connect()
+
+        # allow backend to set up listeners
+        sleep(0.3)
+
+        if dialog:
+            dialog.wait_until_destroyed()
