@@ -459,7 +459,7 @@ Component {
                             The organization name has been truncated, as
                             indicated by the ellipsis. The latter position is
                             the expiry date of the certificate. */
-                            return i18n.tr("%1…, Exp.: %1").arg(
+                            return i18n.tr("%1…, Exp.: %2").arg(
                                 Organization.substr(0,13)
                             ).arg(expiryDate);
                         } else {
@@ -467,7 +467,7 @@ Component {
                             the organization that has issued the certificate.
                             The latter position is the expiry date of the
                             certificate. */
-                            return i18n.tr("%1, Exp.: %1").arg(Organization)
+                            return i18n.tr("%1, Exp.: %2").arg(Organization)
                                 .arg(expiryDate);
                         }
                     } else {
@@ -572,7 +572,7 @@ Component {
                         /* TRANSLATORS: The first position is the type of
                         private key, second the key algorithm, and third the
                         length of the key in bits. */
-                        return i18n.tr("%1, %1, %1 bit").arg(KeyType)
+                        return i18n.tr("%1, %2, %3 bit").arg(KeyType)
                             .arg(KeyAlgorithm).arg(KeyLength);
                     } else {
                         return "";
