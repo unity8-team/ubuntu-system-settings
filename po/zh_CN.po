@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-10-16 20:04-0600\n"
-"PO-Revision-Date: 2015-06-29 07:56+0000\n"
-"Last-Translator: Erikshui <startmenu11@gmail.com>\n"
+"PO-Revision-Date: 2015-06-30 08:11+0000\n"
+"Last-Translator: Ian Li <Unknown>\n"
 "Language-Team: Chinese (Simplified) <zh_CN@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2015-06-30 05:51+0000\n"
+"X-Launchpad-Export-Date: 2015-07-01 05:52+0000\n"
 "X-Generator: Launchpad (build 17578)\n"
 
 #: ubuntu-system-settings.desktop.in.in.h:1 ../src/qml/MainWindow.qml:112
@@ -837,11 +837,11 @@ msgstr "自定义 %1 APN"
 #: ../plugins/cellular//CustomApnEditor.qml:181
 #, qt-format
 msgid "%1 APN"
-msgstr ""
+msgstr "%1 APN"
 
 #: ../plugins/cellular//CustomApnEditor.qml:191
 msgid "MMSC"
-msgstr ""
+msgstr "MMSC"
 
 #: ../plugins/cellular//CustomApnEditor.qml:201
 msgid "Proxy"
@@ -1304,7 +1304,7 @@ msgstr "已请求使用您手机上麦克风的应用"
 #: ../plugins/security-privacy//AppAccess.qml:59
 #, qt-format
 msgid "%1/%2"
-msgstr ""
+msgstr "%1/%2"
 
 #: ../plugins/security-privacy//AppAccess.qml:60
 msgid "0"
