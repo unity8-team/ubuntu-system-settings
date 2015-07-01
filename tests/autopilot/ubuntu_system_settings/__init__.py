@@ -922,7 +922,7 @@ class RebootNecessary(
 
 class WifiPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
 
-    """Autopilot helper for the Sound page."""
+    """Autopilot helper for the WiFi page."""
 
     @classmethod
     def validate_dbus_object(cls, path, state):

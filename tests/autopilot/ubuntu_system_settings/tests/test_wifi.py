@@ -222,3 +222,13 @@ class WifiTestCase(WifiBaseTestCase):
 
         # We cannot make any assertions, because connection deletion
         # is currently not supported.
+
+    def test_handle_wifi_url_with_ssid(self):
+        if not self.wifi_page.have_wireless():
+            self.skipTest('Cannot test wireless since it cannot be enabled')
+        self.addCleanup(
+            self.wifi_page._set_wireless, self.wifi_page.get_wireless())
+
+        self.launch(panel='wifi', extra_params=[
+            'settings://wifi/?ssid=FooBar'
+        ])

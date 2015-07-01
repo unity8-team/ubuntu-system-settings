@@ -89,18 +89,20 @@ class UbuntuSystemSettingsTestCase(
             lambda: gsettings.get_value('rotation-lock').get_boolean(),
             Eventually(Equals(value.get_boolean())))
 
-    def launch(self, panel=None):
+    def launch(self, panel=None, extra_params=[]):
         """Launch system settings application
 
         :param testobj: An AutopilotTestCase object, needed to call
         testobj.launch_test_application()
 
         :param panel: Launch to a specific panel. Default None.
+        :param extra_params: Extra params provided to the application.
+        Default [].
 
         :returns: A proxy object that represents the application. Introspection
         data is retrievable via this object.
         """
-        params = [self.APP_PATH]
+        params = extra_params + [self.APP_PATH]
         if platform.model() != 'Desktop':
             params.append('--desktop_file_hint={}'.format(self.DESKTOP_FILE))
 
