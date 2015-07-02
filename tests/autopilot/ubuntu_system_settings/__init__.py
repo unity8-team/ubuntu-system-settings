@@ -24,7 +24,6 @@ logging.basicConfig(filename='warning.log', level=logging.WARNING)
 
 from time import sleep
 
-from autopilot.input import Keyboard
 import autopilot.logging
 import ubuntuuitoolkit
 from autopilot import introspection
@@ -588,21 +587,6 @@ class PhonePage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
                 return True
         return False
 
-    @autopilot.logging.log_action(logger.info)
-    def go_to_call_forwarding(self, sim=None):
-        """Open the Call Forwarding settings page.
-
-        :param sim: Number of what SIM to use, either 1 or 2.
-            Required parameter in dual SIM setups
-        :returns: The Call Forwarding settings page.
-
-        """
-        find = "callFwd"
-        if sim:
-            find = "callFwdSim%d" % sim
-
-        return self._go_to_page(find, 'callForwardingPage')
-
     def _go_to_page(self, item_object_name, page_object_name):
         self._click_item(item_object_name)
         page = self.get_root_instance().wait_select_single(
@@ -616,20 +600,6 @@ class PhonePage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
         self.pointing_device.click_object(item)
 
     @autopilot.logging.log_action(logger.info)
-    def go_to_call_waiting(self, sim=None):
-        """Open the Call Waiting settings page.
-
-        :param sim: Number of what SIM to use, either 1 or 2.
-            Required parameter in dual SIM setups
-        :returns: The Call Waiting settings page.
-
-        """
-        find = "callWait"
-        if sim:
-            find = "callWaitSim%d" % sim
-        return self._go_to_page(find, 'callWaitingPage')
-
-    @autopilot.logging.log_action(logger.info)
     def go_to_sim_services(self, sim=None):
         """Open the SIM Services settings page.
 
@@ -639,22 +609,207 @@ class PhonePage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
 
         """
         find = "simServices"
-        if sim:
+        if sim is not None:
             find = "simServicesSim%d" % sim
 
         return self._go_to_page(find, 'servicesPage')
 
     @property
     def _dialpad_sounds(self):
+        """The dialpad sounds switch."""
         return self.wait_select_single(
             ubuntuuitoolkit.CheckBox,
             objectName='dialpadSounds')
 
+    @autopilot.logging.log_action(logger.info)
     def enable_dialpad_sounds(self):
+        """Enable dialpad sounds."""
         self._dialpad_sounds.check()
 
+    @autopilot.logging.log_action(logger.info)
     def disable_dialpad_sounds(self):
+        """Disable dialpad sounds."""
         self._dialpad_sounds.uncheck()
+
+    @autopilot.logging.log_action(logger.info)
+    def _enter_call_waiting(self, sim=None):
+        """Open the Call Waiting settings page.
+
+        :param sim: Number of what SIM to use, either 1 or 2.
+            Required parameter in dual SIM setups
+        :returns: The Call Waiting settings page.
+
+        """
+        find = "callWait"
+        if sim is not None:
+            find = "callWaitSim%d" % sim
+        return self._go_to_page(find, 'callWaitingPage')
+
+    @autopilot.logging.log_action(logger.info)
+    def enable_call_waiting(self, sim):
+        self._enter_call_waiting(sim).enable_call_waiting()
+
+    @autopilot.logging.log_action(logger.info)
+    def disable_call_waiting(self, sim):
+        self._enter_call_waiting(sim).disable_call_waiting()
+
+    @autopilot.logging.log_action(logger.info)
+    def _enter_call_forwarding(self, sim=None):
+        """Open the Call Forwarding settings page.
+
+        :param sim: Number of what SIM to use, either 1 or 2.
+            Required parameter in dual SIM setups
+        :returns: The Call Forwarding settings page.
+
+        """
+        find = "callFwd"
+        if sim is not None:
+            find = "callFwdSim%d" % sim
+
+        return self._go_to_page(find, 'callForwardingPage')
+
+    @autopilot.logging.log_action(logger.info)
+    def set_forward_unconditionally(self, number, sim=None):
+        """Sets forwarding unconditionally to number on a sim.
+
+        :param sim: Number of what SIM to use, either 1 or 2.
+            Required parameter in dual SIM setups
+        :param number: Number to which we want to forward.
+        :returns: The Call Forwarding settings page.
+        """
+        fwd_page = self._enter_call_forwarding(sim)
+        fwd_page.set_forward_unconditionally(number)
+        return fwd_page
+
+    @autopilot.logging.log_action(logger.info)
+    def unset_forward_unconditionally(self, sim=None):
+        """Disables forwarding unconditionally on a sim.
+
+        :param sim: Number of what SIM to use, either 1 or 2.
+            Required parameter in dual SIM setups
+        :returns: The Call Forwarding settings page.
+        """
+        fwd_page = self._enter_call_forwarding(sim)
+        fwd_page.unset_forward_unconditionally()
+        return fwd_page
+
+    @autopilot.logging.log_action(logger.info)
+    def get_forward_unconditionally(self, sim=None):
+        """Return forwarding unconditionally value on sim.
+
+        :param sim: Number of what SIM to use, either 1 or 2.
+            Required parameter in dual SIM setups
+        :returns: The forward unconditionally value.
+        """
+        fwd_page = self._enter_call_forwarding(sim)
+        return fwd_page.get_forward_unconditionally()
+
+    @autopilot.logging.log_action(logger.info)
+    def set_forward_on_busy(self, number, sim=None):
+        """Sets forwarding when busy to number on a sim.
+
+        :param sim: Number of what SIM to use, either 1 or 2.
+            Required parameter in dual SIM setups
+        :param number: Number to which we want to forward.
+        :returns: The Call Forwarding settings page.
+        """
+        fwd_page = self._enter_call_forwarding(sim)
+        fwd_page.set_forward_on_busy(number)
+        return fwd_page
+
+    @autopilot.logging.log_action(logger.info)
+    def unset_forward_on_busy(self, sim=None):
+        """Disables forwarding when busy on a sim.
+
+        :param sim: Number of what SIM to use, either 1 or 2.
+            Required parameter in dual SIM setups
+        :returns: The Call Forwarding settings page.
+        """
+        fwd_page = self._enter_call_forwarding(sim)
+        fwd_page.unset_forward_on_busy()
+        return fwd_page
+
+    @autopilot.logging.log_action(logger.info)
+    def get_forward_on_busy(self, sim=None):
+        """Return forwarding on busy value on sim.
+
+        :param sim: Number of what SIM to use, either 1 or 2.
+            Required parameter in dual SIM setups
+        :returns: The forward on busy value.
+        """
+        fwd_page = self._enter_call_forwarding(sim)
+        return fwd_page.get_forward_on_busy()
+
+    @autopilot.logging.log_action(logger.info)
+    def set_forward_when_no_answer(self, number, sim=None):
+        """Sets forwarding when no answer to number on a sim.
+
+        :param sim: Number of what SIM to use, either 1 or 2.
+            Required parameter in dual SIM setups
+        :param number: Number to which we want to forward.
+        :returns: The Call Forwarding settings page.
+        """
+        fwd_page = self._enter_call_forwarding(sim)
+        fwd_page.set_forward_when_no_answer(number)
+        return fwd_page
+
+    @autopilot.logging.log_action(logger.info)
+    def unset_forward_when_no_answer(self, sim=None):
+        """Disables forwarding when no answer on a sim.
+
+        :param sim: Number of what SIM to use, either 1 or 2.
+            Required parameter in dual SIM setups
+        :returns: The Call Forwarding settings page.
+        """
+        fwd_page = self._enter_call_forwarding(sim)
+        fwd_page.unset_forward_when_no_answer()
+        return fwd_page
+
+    @autopilot.logging.log_action(logger.info)
+    def get_forward_when_no_answer(self, sim=None):
+        """Return forwarding when no answer value on sim.
+
+        :param sim: Number of what SIM to use, either 1 or 2.
+            Required parameter in dual SIM setups
+        :returns: The forward when no answer value.
+        """
+        fwd_page = self._enter_call_forwarding(sim)
+        return fwd_page.get_forward_when_no_answer()
+
+    @autopilot.logging.log_action(logger.info)
+    def set_forward_when_unreachable(self, number, sim=None):
+        """Sets forwarding when unreachable to number on a sim.
+
+        :param sim: Number of what SIM to use, either 1 or 2.
+            Required parameter in dual SIM setups
+        :param number: Number to which we want to forward.
+        :returns: The Call Forwarding settings page.
+        """
+        fwd_page = self._enter_call_forwarding(sim)
+        fwd_page.set_forward_when_unreachable(number)
+        return fwd_page
+
+    @autopilot.logging.log_action(logger.info)
+    def unset_forward_when_unreachable(self, sim=None):
+        """Disables forwarding when unreachable on a sim.
+
+        :param sim: Number of what SIM to use, either 1 or 2.
+            Required parameter in dual SIM setups
+        """
+        fwd_page = self._enter_call_forwarding(sim)
+        fwd_page.unset_forward_when_unreachable()
+        return fwd_page
+
+    @autopilot.logging.log_action(logger.info)
+    def get_forward_when_unreachable(self, sim=None):
+        """Return forwarding when unreachable value on sim.
+
+        :param sim: Number of what SIM to use, either 1 or 2.
+            Required parameter in dual SIM setups
+        :returns: The forward when unreachable value.
+        """
+        fwd_page = self._enter_call_forwarding(sim)
+        return fwd_page.get_forward_when_unreachable()
 
 
 class CallWaiting(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
@@ -678,44 +833,141 @@ class CallForwarding(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
 
     """Autopilot helper for the Call forwarding page."""
 
-    @property
-    def _switch(self):
-        return self.wait_select_single(
-            ubuntuuitoolkit.CheckBox,
-            objectName='callForwardingSwitch')
-
-    @property
-    def _number_field(self):
-        return self.wait_select_single(
-            objectName='destNumberField')
-
-    def _click_set(self):
-        button = self.wait_select_single(
-            objectName='set')
+    @autopilot.logging.log_action(logger.info)
+    def _set_rule(self):
+        """Saves rule."""
+        button = self.wait_select_single('Button',
+                                         objectName='setButton')
         self.pointing_device.click_object(button)
 
-    def _click_cancel(self):
-        button = self.wait_select_single(
-            objectName='cancel')
-        self.pointing_device.click_object(button)
+    @autopilot.logging.log_action(logger.info)
+    def _check_rule(self, rule, value):
+        """Checks a rule's associated CheckBox with value.
 
-    @property
-    def current_forwarding(self):
-        return self.wait_select_single(
-            objectName='destNumberField').text
+        :param rule: The string representation of the rule.
+        :param value: The new value of the CheckBox.
+        """
+        check = self.wait_select_single(ubuntuuitoolkit.CheckBox,
+                                        objectName='check_%s' % rule)
+        if value:
+            check.check()
+        else:
+            check.uncheck()
 
-    def enable_call_forwarding(self):
-        self._switch.check()
+    @autopilot.logging.log_action(logger.info)
+    def enable_rule(self, rule):
+        """Enables a rule.
 
-    def disable_call_forwarding(self):
-        self._switch.uncheck()
+        :param rule: The string representation of the rule.
+        """
+        self._check_rule(rule, True)
 
-    def set_forward(self, number):
-        input_method = Keyboard.create()
-        self.enable_call_forwarding()
-        self.pointing_device.click_object(self._number_field)
-        input_method.type(number)
-        self._click_set()
+    @autopilot.logging.log_action(logger.info)
+    def disable_rule(self, rule):
+        """Disables a rule.
+
+        :param rule: The string representation of the rule.
+        """
+        self._check_rule(rule, False)
+
+    @autopilot.logging.log_action(logger.info)
+    def _enter_rule(self, rule, number):
+        """Enters a number into a rule's associated TextField.
+
+        :param rule: The string representation of the rule.
+        :param number: Number to enter into field.
+        """
+        field = self.wait_select_single('TextField',
+                                        objectName='field_%s' % rule)
+        field.write(number)
+
+    @autopilot.logging.log_action(logger.info)
+    def _get_rule(self, rule):
+        """Returns the value of the rule.
+
+        :param rule: The string representation of the rule.
+        """
+        return self.wait_select_single(objectName='current_%s' % rule).value
+
+    @autopilot.logging.log_action(logger.info)
+    def set_forward_unconditionally(self, number):
+        """Sets forward unconditionally.
+
+        :param number: Number to forward to.
+        """
+        self.enable_rule('voiceUnconditional')
+        self._enter_rule('voiceUnconditional', number)
+        self._set_rule()
+
+    @autopilot.logging.log_action(logger.info)
+    def unset_forward_unconditionally(self):
+        """Disables forward unconditionally."""
+        self.disable_rule('voiceUnconditional')
+
+    @autopilot.logging.log_action(logger.info)
+    def get_forward_unconditionally(self):
+        """Returns value of forward unconditionally."""
+        return self._get_rule('voiceUnconditional')
+
+    @autopilot.logging.log_action(logger.info)
+    def set_forward_on_busy(self, number):
+        """Sets forward on busy.
+
+        :param number: Number to forward to.
+        """
+        self.enable_rule('voiceBusy')
+        self._enter_rule('voiceBusy', number)
+        self._set_rule()
+
+    @autopilot.logging.log_action(logger.info)
+    def unset_forward_on_busy(self):
+        """Disables forward on busy."""
+        self.disable_rule('voiceBusy')
+
+    @autopilot.logging.log_action(logger.info)
+    def get_forward_on_busy(self):
+        """Returns value of forward on busy."""
+        return self._get_rule('voiceBusy')
+
+    @autopilot.logging.log_action(logger.info)
+    def set_forward_when_no_answer(self, number):
+        """Sets forward on no answer.
+
+        :param number: Number to forward to.
+        """
+        self.enable_rule('voiceNoReply')
+        self._enter_rule('voiceNoReply', number)
+        self._set_rule()
+
+    @autopilot.logging.log_action(logger.info)
+    def unset_forward_when_no_answer(self):
+        """Disables forward when no answer."""
+        self.disable_rule('voiceNoReply')
+
+    @autopilot.logging.log_action(logger.info)
+    def get_forward_when_no_answer(self):
+        """Returns value of forward on no answer."""
+        return self._get_rule('voiceNoReply')
+
+    @autopilot.logging.log_action(logger.info)
+    def set_forward_when_unreachable(self, number):
+        """Sets forward when unreachable.
+
+        :param number: Number to forward to.
+        """
+        self.enable_rule('voiceNotReachable')
+        self._enter_rule('voiceNotReachable', number)
+        self._set_rule()
+
+    @autopilot.logging.log_action(logger.info)
+    def unset_forward_when_unreachable(self):
+        """Disables forward when unreachable."""
+        self.disable_rule('voiceNotReachable')
+
+    @autopilot.logging.log_action(logger.info)
+    def get_forward_when_unreachable(self):
+        """Returns value of forward when unreachable."""
+        return self._get_rule('voiceNotReachable')
 
 
 class Services(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
