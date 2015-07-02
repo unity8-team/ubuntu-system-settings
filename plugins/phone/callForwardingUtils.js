@@ -28,7 +28,7 @@ function checked (value) {
  * @return {Boolean} whether or not we requested a change
  */
 function requestRule (value) {
-    value = value.replace(/\s+/g, '');
+    value = normalizePhoneNumber(value);
     if (value === item.callForwarding[item.rule]) {
         console.warn('Value did not change.');
         return false;
@@ -101,4 +101,19 @@ function show(item) {
         flick.contentY = position.y;
     }
     flick.returnToBounds();
+}
+
+/**
+ * Normalizes a phone number.
+ *
+ * TODO(jgdx): Remove this and replace it with libphonenumber
+ *
+ * @param {String} number to normalize
+ * @return {String} normalized number
+ */
+function normalizePhoneNumber(identifier) {
+    var regexp = new RegExp('[()/-]', 'g');
+    var finalNumber = identifier.replace(/\s+/g, '');
+    finalNumber = finalNumber.replace(regexp, '');
+    return finalNumber;
 }
