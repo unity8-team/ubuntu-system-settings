@@ -1,3 +1,13 @@
+ubuntu-system-settings (0.3+15.10.20150622-0ubuntu2) wily; urgency=medium
+
+  * debian/control:
+    - don't have an alternative depends on system-image-snappy-cli,
+      it's deprecated
+    - have ubuntu-snappy-cli as an alternative to click, that's not the 
+      right solution but a workaround to unblock snappy image build
+
+ -- Sebastien Bacher <seb128@ubuntu.com>  Thu, 02 Jul 2015 10:30:10 +0200
+
 ubuntu-system-settings (0.3+15.10.20150622-0ubuntu1) wily; urgency=medium
 
   [ CI Train Bot ]
