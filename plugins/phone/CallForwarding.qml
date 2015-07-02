@@ -278,6 +278,7 @@ ItemPage {
                     left: parent.left
                     right: parent.right
                 }
+                activeFocusOnPress: false
                 expanded: true
                 text: i18n.tr("Numbers")
                 model: contact.phoneNumbers
