@@ -868,9 +868,9 @@ class WifiBaseTestCase(UbuntuSystemSettingsTestCase,
         cls.start_system_bus()
         cls.dbus_con = cls.get_dbus(True)
         # Add a mock NetworkManager environment so we get consistent results
+        template = os.path.join(os.path.dirname(__file__), 'networkmanager.py')
         (cls.p_mock, cls.obj_nm) = cls.spawn_server_template(
-            'networkmanager', stdout=subprocess.PIPE)
-        cls.dbusmock = dbus.Interface(cls.obj_nm, dbusmock.MOCK_IFACE)
+            template, stdout=subprocess.PIPE)
 
     def setUp(self, panel=None):
         self.obj_nm.Reset()
@@ -879,19 +879,28 @@ class WifiBaseTestCase(UbuntuSystemSettingsTestCase,
             NM_SERVICE, self.device_path),
             dbusmock.MOCK_IFACE)
 
-        self.ap_mock = self.create_access_point('test_ap', 'test_ap')
+        self.ap_mock = self.create_access_point(
+            'test_ap', 'test_ap',
+            security=NM80211ApSecurityFlags.NM_802_11_AP_SEC_KEY_MGMT_PSK
+        )
 
         super(WifiBaseTestCase, self).setUp()
         self.wifi_page = self.main_view.go_to_wifi_page()
 
-    def create_access_point(self, name, ssid, secured=True):
+    def create_access_point(self, name, ssid, security=None):
+        """Creates access point.
 
-        if secured:
-            security = NM80211ApSecurityFlags.NM_802_11_AP_SEC_KEY_MGMT_PSK
-        else:
+        :param name: Name of access point
+        :param ssid: SSID of access point
+        :param security: Either None, or a NM80211ApSecurityFlags
+
+        :returns: Access point
+
+        """
+        if security is None:
             security = NM80211ApSecurityFlags.NM_802_11_AP_SEC_NONE
 
-        return self.dbusmock.AddAccessPoint(
+        return self.obj_nm.AddAccessPoint(
             self.device_path, name, ssid, self.random_mac_address(),
             InfrastructureMode.NM_802_11_MODE_INFRA, 2425, 5400, 82, security)
 
