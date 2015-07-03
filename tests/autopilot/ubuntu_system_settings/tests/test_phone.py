@@ -13,7 +13,8 @@ from testtools.matchers import Contains, Equals
 from ubuntu_system_settings.tests import (
     PhoneOfonoBaseTestCase,
     CALL_FWD_IFACE,
-    CALL_SETTINGS_IFACE
+    CALL_SETTINGS_IFACE,
+    CONNMAN_IFACE
 )
 
 
@@ -47,6 +48,18 @@ class PhoneTestCase(PhoneOfonoBaseTestCase):
             lambda: str(self.modem_0.Get(CALL_SETTINGS_IFACE,
                                          'VoiceCallWaiting')),
             Eventually(Contains('enabled')))
+
+    def test_call_waiting_switch_not_attached(self):
+        self.phone_page.go_to_call_waiting()
+        self.modem_0.EmitSignal(
+            CONNMAN_IFACE, 'PropertyChanged', 'sv',
+            ['Attached', 'false'])
+        call_wait_switch = self.main_view.wait_select_single(
+            objectName='callWaitingSwitch')
+        self.assertThat(
+            call_wait_switch.enabled,
+            Eventually(Equals(False))
+        )
 
 
 class PhoneDualSimTestCase(PhoneOfonoBaseTestCase):
@@ -110,3 +123,27 @@ class PhoneDualSimTestCase(PhoneOfonoBaseTestCase):
             lambda: str(self.modem_1.Get(CALL_SETTINGS_IFACE,
                                          'VoiceCallWaiting')),
             Eventually(Contains('enabled')))
+
+    def test_call_waiting_switch_not_attached_sim_1(self):
+        self.phone_page.go_to_call_waiting(sim=1)
+        self.modem_0.EmitSignal(
+            CONNMAN_IFACE, 'PropertyChanged', 'sv',
+            ['Attached', 'false'])
+        call_wait_switch = self.main_view.wait_select_single(
+            objectName='callWaitingSwitch')
+        self.assertThat(
+            call_wait_switch.enabled,
+            Eventually(Equals(False))
+        )
+
+    def test_call_waiting_switch_not_attached_sim_2(self):
+        self.phone_page.go_to_call_waiting(sim=2)
+        self.modem_1.EmitSignal(
+            CONNMAN_IFACE, 'PropertyChanged', 'sv',
+            ['Attached', 'false'])
+        call_wait_switch = self.main_view.wait_select_single(
+            objectName='callWaitingSwitch')
+        self.assertThat(
+            call_wait_switch.enabled,
+            Eventually(Equals(False))
+        )
