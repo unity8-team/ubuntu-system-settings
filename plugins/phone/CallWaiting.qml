@@ -30,6 +30,11 @@ ItemPage {
     property var sim
     property string headerTitle: i18n.tr("Call waiting")
 
+    OfonoConnMan {
+        id: connMan
+        modemPath: sim.path
+    }
+
     OfonoCallSettings {
         id: callSettings
         modemPath: sim.path
@@ -41,6 +46,9 @@ ItemPage {
             callWaitingIndicator.running = false;
         }
         onVoiceCallWaitingComplete: {
+            //When the property change is complete, the value of checked should always be in sync with serverChecked 
+            callWaitingSwitch.checked = callWaitingSwitch.serverChecked
+            console.warn('callSettings, onVoiceCallWaitingComplete modem: ' + modemPath + ' success: ' + success + ' ' + voiceCallWaiting);
             callWaitingIndicator.running = false;
         }
     }
@@ -48,16 +56,18 @@ ItemPage {
     ActivityIndicator {
         id: callWaitingIndicator
         running: true
-        visible: running
+        visible: running && connMan.attached
     }
 
     Switch {
         id: callWaitingSwitch
         objectName: "callWaitingSwitch"
         visible: !callWaitingIndicator.running
-        enabled: callSettings.ready
-        checked: callSettings.voiceCallWaiting !== "disabled"
-        onClicked: {
+        enabled: callSettings.ready && connMan.attached
+        property bool serverChecked: callSettings.voiceCallWaiting !== "disabled"
+        onServerCheckedChanged: checked = serverChecked
+        Component.onCompleted: checked = serverChecked
+        onTriggered: {
             callWaitingIndicator.running = true;
             if (checked)
                 callSettings.voiceCallWaiting = "enabled";
