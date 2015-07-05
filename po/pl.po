@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-10-16 20:04-0600\n"
-"PO-Revision-Date: 2015-04-29 14:14+0000\n"
+"PO-Revision-Date: 2015-07-04 12:14+0000\n"
 "Last-Translator: GTriderXC <gtriderxc@yahoo.com>\n"
 "Language-Team: Polish <pl@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -16,8 +16,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2015-05-08 05:29+0000\n"
-"X-Generator: Launchpad (build 17474)\n"
+"X-Launchpad-Export-Date: 2015-07-05 05:53+0000\n"
+"X-Generator: Launchpad (build 17597)\n"
 
 #: ubuntu-system-settings.desktop.in.in.h:1 ../src/qml/MainWindow.qml:112
 msgid "System Settings"
@@ -148,7 +148,7 @@ msgstr "Konfiguracja suplikanta 802.1X się nie powiodła"
 
 #: ../plugins/wifi//Common.qml:56
 msgid "802.1X supplicant failed"
-msgstr "Błąd suplikantu 802.1X"
+msgstr "Błąd suplikanta 802.1X"
 
 #: ../plugins/wifi//Common.qml:58
 msgid "802.1X supplicant took too long to authenticate"
@@ -168,7 +168,7 @@ msgstr "Błąd klienta DHCP"
 
 #: ../plugins/wifi//Common.qml:66
 msgid "Shared connection service failed to start"
-msgstr "Uruchomienie usługi współdzielonego połączenia nie powiodło się"
+msgstr "Uruchomienie współdzielonego połączenia nie powiodło się"
 
 #: ../plugins/wifi//Common.qml:68
 msgid "Shared connection service failed"
@@ -258,7 +258,7 @@ msgstr "Brak"
 
 #: ../plugins/wifi//OtherNetwork.qml:215
 msgid "WPA & WPA2 Personal"
-msgstr "WPA & WPA2 Personal"
+msgstr "WPA i WPA2 Personal"
 
 #: ../plugins/wifi//OtherNetwork.qml:216
 msgid "WEP"
@@ -338,7 +338,7 @@ msgstr ""
 
 #: ../plugins/sound//SoundsList.qml:70
 msgid "Stop playing"
-msgstr "Zatrzymanie odwarzania"
+msgstr "Zatrzymaj odtwarzanie"
 
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
 #: ../plugins/sound//PageComponent.qml:37
@@ -405,7 +405,7 @@ msgstr "Dźwięk blokady"
 
 #: ../plugins/sound//SilentModeWarning.qml:31
 msgid "The phone is in Silent Mode."
-msgstr "Telefon wyciszony"
+msgstr "Telefon jest w trybie wyciszonym."
 
 #. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
 #: ../plugins/reset//PageComponent.qml:32
@@ -420,7 +420,7 @@ msgstr "Zresetuj pasek uruchamiania."
 
 #: ../plugins/reset//PageComponent.qml:87
 msgid "Reset all system settings…"
-msgstr "Resetuj wszystkie ustawienia systemu..."
+msgstr "Resetuj wszystkie ustawienia systemowe..."
 
 #: ../plugins/reset//PageComponent.qml:101
 msgid "Erase & Reset Everything…"
@@ -458,7 +458,7 @@ msgstr ""
 
 #: ../plugins/reset//EraseEverything.qml:44
 msgid "Erase & Reset Everything"
-msgstr "Wyczyść i zresetuj wszystko..."
+msgstr "Wyczyść i zresetuj wszystko"
 
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
 #: ../plugins/battery//PageComponent.qml:34
@@ -473,7 +473,7 @@ msgid "%1 second ago"
 msgid_plural "%1 seconds ago"
 msgstr[0] "Przed %1 sekundą"
 msgstr[1] "Przed %1 sekundami"
-msgstr[2] "Przed %1 sekundami"
+msgstr[2] "%1 sekund temu"
 
 #. TRANSLATORS: %1 is the number of minutes
 #: ../plugins/battery//PageComponent.qml:47
@@ -541,7 +541,7 @@ msgstr "Dziś"
 
 #: ../plugins/battery//PageComponent.qml:281
 msgid "Ways to reduce battery use:"
-msgstr "Sposoby na spowolnienie rozładowania baterii"
+msgstr "Sposoby na oszczędzanie baterii:"
 
 #: ../plugins/battery//PageComponent.qml:285
 #: ../plugins/brightness//PageComponent.qml:62
@@ -590,29 +590,28 @@ msgstr "GPS"
 
 #: ../plugins/battery//PageComponent.qml:405
 msgid "Accurate location detection requires GPS and/or Wi-Fi."
-msgstr ""
-"Dokładne wykrywanie lokalizacji wymaga włączenia GPS, Wi-Fi, lub obu usług."
+msgstr "Dokładne wykrywanie lokalizacji wymaga włączenia GPS lub Wi-Fi."
 
 #: ../plugins/battery//SleepValues.qml:74
 msgid "Lock the phone when it's not in use:"
-msgstr "Blokada telefonu gdy nie jest używany:"
+msgstr "Blokowanie telefonu, gdy nie jest używany:"
 
 #: ../plugins/battery//SleepValues.qml:75
 msgid "Put the phone to sleep when it is not in use:"
-msgstr "Uśpienie telefonu gdy nie jest używany:"
+msgstr "Uśpij telefon, gdy nie jest używany:"
 
 #: ../plugins/battery//SleepValues.qml:121
 msgid ""
 "Shorter times are more secure. Phone won't lock during calls or video "
 "playback."
 msgstr ""
-"Krótsze czasy są bezpieczniejsze. Telefon nie zostanie zablokowany podczas "
-"rozmowy lub odtwarzania filmu."
+"Krótsze czasy są bezpieczniejsze. Telefon nie będzie zablokowywany podczas "
+"rozmów lub odtwarzania filmów."
 
 #: ../plugins/battery//SleepValues.qml:121
 msgid "Phone won’t sleep during calls or video playback."
 msgstr ""
-"Telefon nie zostanie zablokowany podczas rozmowy lub odtwarzania filmu."
+"Telefon nie będzie zablokowywany podczas rozmów lub odtwarzania filmów."
 
 #: ../plugins/language//SpellChecking.qml:29
 #: ../plugins/language//SpellChecking.qml:44
@@ -623,7 +622,7 @@ msgstr "Sprawdzanie pisowni"
 
 #: ../plugins/language//SpellChecking.qml:62
 msgid "Current spelling languages:"
-msgstr "Bieżące języki"
+msgstr "Bieżące języki sprawdzania pisowni:"
 
 #: ../plugins/language//SpellChecking.qml:63
 msgid "All languages available:"
@@ -635,7 +634,7 @@ msgstr "Uruchom ponownie"
 
 #: ../plugins/language//DisplayLanguage.qml:36
 msgid "Display language"
-msgstr "Język wyświetlacza"
+msgstr "Język wyświetlania"
 
 #: ../plugins/language//DisplayLanguage.qml:118
 msgid "Confirm"
@@ -670,7 +669,7 @@ msgstr "Automatyczne wielkie litery"
 
 #: ../plugins/language//PageComponent.qml:189
 msgid "Turns on Shift to capitalize the first letter of each sentence."
-msgstr "\"Wciska\" Shift, by rozpocząć każde nowe zdanie wielką literą"
+msgstr "\"Wciska\" Shift, aby rozpoczynać każde zdanie wielką literą"
 
 #: ../plugins/language//PageComponent.qml:196
 msgid "Auto punctuation"
@@ -680,8 +679,8 @@ msgstr "Automatyczna interpunkcja"
 msgid ""
 "Adds a period, and any missing quotes or brackets, when you tap Space twice."
 msgstr ""
-"Dodaje kropkę oraz wszelkie brakujące cudzysłowy lub nawiasy po podwójnym "
-"kliknięciu spacji."
+"Dodaje kropkę, brakujące cudzysłowy lub nawiasy po podwójnym naciśnięciu "
+"spacji."
 
 #: ../plugins/language//PageComponent.qml:225
 msgid "Keyboard vibration"
@@ -689,7 +688,7 @@ msgstr "Wibracje kliknięć klawiatury"
 
 #: ../plugins/language//KeyboardLayouts.qml:39
 msgid "Current layouts:"
-msgstr "Bieżący układ:"
+msgstr "Bieżące układy:"
 
 #: ../plugins/language//KeyboardLayouts.qml:40
 msgid "All layouts available:"
@@ -699,14 +698,14 @@ msgstr "Wszystkie dostępne układy:"
 #: ../plugins/phone//MultiSim.qml:84 ../plugins/phone//SingleSim.qml:40
 #: ../plugins/phone//CallWaiting.qml:31 ../plugins/phone//CallWaiting.qml:74
 msgid "Call waiting"
-msgstr "Usługa połączeń oczekujących"
+msgstr "Połączenia oczekujące"
 
 #: ../plugins/phone//CallWaiting.qml:89
 msgid ""
 "Lets you answer or start a new call while on another call, and switch "
 "between them"
 msgstr ""
-"Pozwala na odebranie drugiego połączenia podczas prowadzenia rozmowy i "
+"Pozwala na odebranie drugiego połączenia podczas prowadzenia rozmowy, oraz "
 "przełączanie pomiędzy nimi."
 
 #. TRANSLATORS: %1 is the name of the (network) carrier
@@ -983,20 +982,20 @@ msgstr "Obecny kod"
 
 #: ../plugins/security-privacy//LockSecurity.qml:139
 msgid "Existing passphrase"
-msgstr "Obecne hasło"
+msgstr "Aktualne hasło"
 
 #: ../plugins/security-privacy//LockSecurity.qml:204
 msgid "Choose passcode"
-msgstr "Nowy kod"
+msgstr "Wprowadź kod"
 
 #: ../plugins/security-privacy//LockSecurity.qml:206
 msgid "Choose passphrase"
-msgstr "Ustal hasło"
+msgstr "Wprowadź hasło"
 
 #: ../plugins/security-privacy//LockSecurity.qml:258
 #: ../wizard/qml/Pages//passwd-confirm.qml:49
 msgid "Confirm passcode"
-msgstr "Potwierdź nowy kod"
+msgstr "Potwierdź kod"
 
 #: ../plugins/security-privacy//LockSecurity.qml:260
 #: ../wizard/qml/Pages//passwd-confirm.qml:48
@@ -1005,7 +1004,7 @@ msgstr "Potwierdź hasło"
 
 #: ../plugins/security-privacy//LockSecurity.qml:314
 msgid "Those passcodes don't match. Try again."
-msgstr "Niepoprane potwierdzenie nowego kodu. Spróbuj ponownie."
+msgstr "Kody nie zgadzają się. Spróbuj ponownie."
 
 #: ../plugins/security-privacy//LockSecurity.qml:317
 msgid "Those passphrases don't match. Try again."
@@ -1013,7 +1012,7 @@ msgstr "Hasła nie zgadzają się. Spróbuj ponownie."
 
 #: ../plugins/security-privacy//LockSecurity.qml:348
 msgid "Unset"
-msgstr "Nieustawione"
+msgstr "Nie ustawiono"
 
 #: ../plugins/security-privacy//LockSecurity.qml:393
 msgid "Unlock the phone using:"
@@ -1129,8 +1128,7 @@ msgstr ""
 #: ../plugins/security-privacy//SimPin.qml:386
 msgid "Entering an incorrect PIN repeatedly may lock the SIM permanently."
 msgstr ""
-"Wielokrotne wprowadzanie błędnego kodu PIN, może spowodować trwałe "
-"zablokowanie karty SIM."
+"Wpisywanie niepoprawnego kodu PIN może zablokować na stałe kartę SIM."
 
 #: ../plugins/security-privacy//PhoneLocking.qml:31
 msgid "Phone locking"
@@ -1166,7 +1164,7 @@ msgstr "Gdy zablokowany, zezwalaj na:"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:110
 msgid "Launcher"
-msgstr "Aktywator"
+msgstr "Panel uruchamiania"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:123
 msgid "Notifications and quick settings"
@@ -1184,19 +1182,19 @@ msgstr "Pozostałe aplikacje i funkcje będą prosiły o odblokowanie."
 #: ../plugins/security-privacy//PageComponent.qml:37
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:220
 msgid "Security & Privacy"
-msgstr "Prywatność i bezpieczeństwo"
+msgstr "Prywatność i zabezpieczenia"
 
 #: ../plugins/security-privacy//Dash.qml:46
 #: ../plugins/security-privacy//PageComponent.qml:89
 #: ../plugins/security-privacy//PageComponent.qml:201
 msgid "Phone and Internet"
-msgstr "Telefon i Internet:"
+msgstr "Z telefonu i Internetu"
 
 #: ../plugins/security-privacy//Dash.qml:46
 #: ../plugins/security-privacy//PageComponent.qml:91
 #: ../plugins/security-privacy//PageComponent.qml:202
 msgid "Phone only"
-msgstr "Tylko telefon"
+msgstr "Tylko z telefonu"
 
 #: ../plugins/security-privacy//PageComponent.qml:120
 msgid "Lock phone"
@@ -1240,7 +1238,7 @@ msgstr "Wiadomości na ekranie powitalnym"
 #: ../plugins/security-privacy//Dash.qml:29
 #: ../plugins/security-privacy//PageComponent.qml:199
 msgid "Dash search"
-msgstr "Wyszukiwanie Dash"
+msgstr "Wyszukiwanie z panelu"
 
 #: ../plugins/security-privacy//PageComponent.qml:219
 msgid "Location access"
@@ -1275,55 +1273,58 @@ msgstr "Lokalizacja"
 
 #: ../plugins/security-privacy//Location.qml:59
 msgid "Location detection"
-msgstr "Detekcja lokalizacji"
+msgstr "Wykrywanie lokalizacji"
 
 #: ../plugins/security-privacy//Location.qml:208
 msgid ""
 "Uses GPS to detect your rough location. When off, GPS turns off to save "
 "battery."
 msgstr ""
-"Użycie GPS do określenia przybliżonej lokalizacji. Wyłączenie oszczędza "
-"energię baterii."
+"Używa GPS do określenia przybliżonej lokalizacji. Gdy jest nieaktywne, GPS "
+"jest wyłączany aby oszczędzać baterię."
 
 #: ../plugins/security-privacy//Location.qml:210
 msgid ""
 "Uses wi-fi and GPS to detect your rough location. Turning off location "
 "detection saves battery."
 msgstr ""
-"Użycie Wi-Fi i GPS do określenia przybliżonej lokalizacji. Wyłączenie "
-"oszczędza energię baterii."
+"Używa Wi-Fi oraz GPS do określenia przybliżonej lokalizacji. Wyłączenie "
+"wykrywania lokalizacji oszczędza baterię."
 
 #: ../plugins/security-privacy//Location.qml:212
 msgid ""
 "Uses wi-fi (currently off) and GPS to detect your rough location. Turning "
 "off location detection saves battery."
 msgstr ""
-"Użycie Wi-Fi (obecnie wyłączone) i GPS do wykrywania przybliżonej "
-"lokalizacji. Wyłączenie tej funkcji oszczędza energię."
+"Używa Wi-Fi (obecnie wyłączone) oraz GPS do określenia przybliżonej "
+"lokalizacji. Wyłączenie wykrywania lokalizacji oszczędza baterię."
 
 #: ../plugins/security-privacy//Location.qml:214
 msgid ""
 "Uses wi-fi, cell tower locations, and GPS to detect your rough location. "
 "Turning off location detection saves battery."
 msgstr ""
-"Użycie Wi-Fi, nadajników sieci GSM oraz GPS do ustalania przybliżonej "
-"pozycji. Wyłączenie tej funkcji oszczędza energię."
+"Używa Wi-Fi, lokalizacji z przekaźników GSM oraz GPS do określenia "
+"przybliżonej lokalizacji. Wyłączenie wykrywania lokalizacji oszczędza "
+"baterię."
 
 #: ../plugins/security-privacy//Location.qml:216
 msgid ""
 "Uses wi-fi, cell tower locations (no current cellular connection), and GPS "
 "to detect your rough location. Turning off location detection saves battery."
 msgstr ""
-"Użycie Wi-Fi, nadajników sieci GSM (obecnie brak łączności) oraz GPS do "
-"ustalania przybliżonej pozycji. Wyłączenie tej funkcji oszczędza energię."
+"Używa Wi-Fi, lokalizacji z przekaźników GSM (obecnie brak łączności) oraz "
+"GPS do określenia przybliżonej lokalizacji. Wyłączenie wykrywania "
+"lokalizacji oszczędza baterię."
 
 #: ../plugins/security-privacy//Location.qml:218
 msgid ""
 "Uses wi-fi (currently off), cell tower locations, and GPS to detect your "
 "rough location. Turning off location detection saves battery."
 msgstr ""
-"Użycie Wi-Fi (obecnie wyłączone), nadajników sieci GSM oraz GPS do ustalania "
-"przybliżonej pozycji. Wyłączenie tej funkcji oszczędza energię."
+"Używa Wi-Fi (obecnie wyłączone), lokalizacje przekaźników GSM oraz GPS do "
+"określenia przybliżonej lokalizacji. Wyłączenie wykrywania lokalizacji "
+"oszczędza baterię."
 
 #: ../plugins/security-privacy//Location.qml:220
 msgid ""
@@ -1331,9 +1332,9 @@ msgid ""
 "connection), and GPS to detect your rough location. Turning off location "
 "detection saves battery."
 msgstr ""
-"Użycie Wi-Fi (obecnie wyłączone), nadajników sieci GSM (obecnie brak "
-"łączności) oraz GPS do ustalania przybliżonej pozycji. Wyłączenie tej "
-"funkcji oszczędza energię."
+"Używa Wi-Fi (obecnie wyłączone), lokalizacji z przekaźników GSM  (obecnie "
+"brak łączności) oraz GPS do określenia przybliżonej lokalizacji. Wyłączenie "
+"wykrywania lokalizacji oszczędza baterię."
 
 #: ../plugins/security-privacy//Location.qml:227
 msgid "Allow access to location:"
@@ -1341,7 +1342,7 @@ msgstr "Zezwól na dostęp do lokalizacji:"
 
 #: ../plugins/security-privacy//Dash.qml:45
 msgid "Return results from:"
-msgstr "Wyniki z:"
+msgstr "Pokaż wyniki z:"
 
 #: ../plugins/security-privacy//AppAccess.qml:35
 msgid "Apps that you have granted and have requested access to:"
@@ -1350,15 +1351,15 @@ msgstr "Aplikacje, które otrzymały zezwolenie na dostęp do:"
 #: ../plugins/bluetooth//PageComponent.qml:123
 #: ../plugins/security-privacy//AppAccess.qml:41
 msgid "Camera"
-msgstr "Aparat/kamera"
+msgstr "Aparatu"
 
 #: ../plugins/security-privacy//AppAccess.qml:42
 msgid "Apps that have requested access to your camera"
-msgstr "Aplikacje, które poprosiły o dostęp do kamery"
+msgstr "Aplikacje, które poprosiły o dostęp do aparatu"
 
 #: ../plugins/security-privacy//AppAccess.qml:46
 msgid "Mic"
-msgstr "Mikrofon"
+msgstr "Mikrofonu"
 
 #: ../plugins/security-privacy//AppAccess.qml:47
 msgid "Apps that have requested access to your mic"
@@ -1547,7 +1548,7 @@ msgstr "Użyte przez Ubuntu"
 
 #: ../plugins/about//Storage.qml:86
 msgid "Videos"
-msgstr "Wideo"
+msgstr "Filmy"
 
 #: ../plugins/about//Storage.qml:87
 msgid "Audio"
@@ -1631,7 +1632,7 @@ msgstr "OS"
 
 #: ../plugins/about//PageComponent.qml:193
 msgid "Last updated"
-msgstr "Ostatnia aktualizacja:"
+msgstr "Ostatnia aktualizacja"
 
 #: ../plugins/about//PageComponent.qml:201
 msgid "Check for updates"
@@ -1651,7 +1652,7 @@ msgstr "Informacje o nadzorze"
 
 #: ../plugins/about//PageComponent.qml:232
 msgid "Developer mode"
-msgstr "Tryb dewelopera"
+msgstr "Tryb programisty"
 
 #: ../plugins/about//License.qml:30
 msgid "Sorry, this license could not be displayed."
@@ -1683,7 +1684,7 @@ msgstr "Opis wersji urządzenia"
 
 #: ../plugins/about//Version.qml:95
 msgid "Customization Image part"
-msgstr "Część obrazu kustomizacji"
+msgstr "Część obrazu personalizacji"
 
 #: ../plugins/time-date//ChooseTimeZone.qml:28
 msgid "Time zone"
@@ -1695,11 +1696,11 @@ msgstr "Podaj strefę czasową:"
 
 #: ../plugins/time-date//ChooseTimeZone.qml:126
 msgid "Enter your current location."
-msgstr "Bieżące położenie"
+msgstr "Podaj swoje bieżące położenie."
 
 #: ../plugins/time-date//ChooseTimeZone.qml:127
 msgid "No matching place"
-msgstr "Dopasowanie lokalizacji niemożliwe"
+msgstr "Nic nie znaleziono"
 
 #: ../plugins/time-date//TimePicker.qml:26
 msgid "Set time & date"
@@ -1715,11 +1716,11 @@ msgstr "Godzina"
 
 #: ../plugins/time-date//TimePicker.qml:95
 msgid "Minute"
-msgstr "Minuty"
+msgstr "Minuta"
 
 #: ../plugins/time-date//TimePicker.qml:109
 msgid "Second"
-msgstr "Sekundy"
+msgstr "Sekunda"
 
 #: ../plugins/time-date//TimePicker.qml:118
 msgid "Date"
@@ -1774,7 +1775,7 @@ msgstr ""
 
 #: ../plugins/system-update//PageComponent.qml:94
 msgid "Install & Restart"
-msgstr "Instalacja i ponowne uruchomienie"
+msgstr "Instaluj i uruchom ponownie"
 
 #: ../plugins/system-update//PageComponent.qml:104
 msgid "Not Now"
@@ -1782,7 +1783,7 @@ msgstr "Nie teraz"
 
 #: ../plugins/system-update//PageComponent.qml:110
 msgid "Install"
-msgstr "Zainstaluj"
+msgstr "Instaluj"
 
 #: ../plugins/system-update//PageComponent.qml:125
 msgid "Installation failed"
@@ -1845,7 +1846,7 @@ msgstr "Instaluj..."
 
 #: ../plugins/system-update//PageComponent.qml:450
 msgid "Download"
-msgstr "Pobieranie"
+msgstr "Pobierz"
 
 #: ../plugins/system-update//PageComponent.qml:454
 msgid "Pause"
@@ -1890,7 +1891,7 @@ msgstr "Zaloguj się..."
 
 #: ../plugins/system-update//PageComponent.qml:697
 msgid "Installing update…"
-msgstr "Instalacja aktualizacji..."
+msgstr "Instalowanie aktualizacji..."
 
 #: ../plugins/system-update//Configuration.qml:29
 #: ../plugins/system-update//PageComponent.qml:736
@@ -1899,7 +1900,7 @@ msgstr "Auto pobieranie"
 
 #: ../plugins/system-update//PageComponent.qml:741
 msgid "On wi-fi"
-msgstr "Przy połączeniu Wi-Fi"
+msgstr "Gdy podłączony do Wi-Fi"
 
 #: ../plugins/system-update//PageComponent.qml:743
 msgid "Always"
@@ -1927,7 +1928,7 @@ msgstr "Automatyczne pobieranie aktualizacji:"
 
 #: ../plugins/system-update//Configuration.qml:53
 msgid "When on wi-fi"
-msgstr "Podczas połączenia Wi-Fi"
+msgstr "Gdy podłączony do Wi-Fi"
 
 #: ../plugins/system-update//Configuration.qml:54
 msgid "On any data connection"
@@ -1935,7 +1936,7 @@ msgstr "Dla każdego rodzaju połączenia sieciowego"
 
 #: ../plugins/system-update//Configuration.qml:55
 msgid "Data charges may apply."
-msgstr "Ryzyko wysokich opłat za transfer danych."
+msgstr "Transfer danych może być płatny."
 
 #: ../plugins/background//Components//AddRemove.qml:52
 msgid "No images selected"
@@ -2555,7 +2556,7 @@ msgstr "Układ"
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:212
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:288
 msgid "display"
-msgstr ""
+msgstr "Wyświetlacz"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:290
