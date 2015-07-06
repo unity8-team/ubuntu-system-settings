@@ -14,7 +14,7 @@ from ubuntu_system_settings.tests import (
     PhoneOfonoBaseTestCase,
     CALL_FWD_IFACE,
     CALL_SETTINGS_IFACE,
-    CONNMAN_IFACE
+    NETREG_IFACE
 )
 
 
@@ -52,8 +52,8 @@ class PhoneTestCase(PhoneOfonoBaseTestCase):
     def test_call_waiting_switch_not_attached(self):
         self.phone_page.go_to_call_waiting()
         self.modem_0.EmitSignal(
-            CONNMAN_IFACE, 'PropertyChanged', 'sv',
-            ['Attached', 'false'])
+            NETREG_IFACE, 'PropertyChanged', 'sv',
+            ['Status', 'unregistered'])
         call_wait_switch = self.main_view.wait_select_single(
             objectName='callWaitingSwitch')
         self.assertThat(
@@ -127,8 +127,8 @@ class PhoneDualSimTestCase(PhoneOfonoBaseTestCase):
     def test_call_waiting_switch_not_attached_sim_1(self):
         self.phone_page.go_to_call_waiting(sim=1)
         self.modem_0.EmitSignal(
-            CONNMAN_IFACE, 'PropertyChanged', 'sv',
-            ['Attached', 'false'])
+            NETREG_IFACE, 'PropertyChanged', 'sv',
+            ['Status', 'unregistered'])
         call_wait_switch = self.main_view.wait_select_single(
             objectName='callWaitingSwitch')
         self.assertThat(
@@ -139,8 +139,8 @@ class PhoneDualSimTestCase(PhoneOfonoBaseTestCase):
     def test_call_waiting_switch_not_attached_sim_2(self):
         self.phone_page.go_to_call_waiting(sim=2)
         self.modem_1.EmitSignal(
-            CONNMAN_IFACE, 'PropertyChanged', 'sv',
-            ['Attached', 'false'])
+            NETREG_IFACE, 'PropertyChanged', 'sv',
+            ['Status', 'unregistered'])
         call_wait_switch = self.main_view.wait_select_single(
             objectName='callWaitingSwitch')
         self.assertThat(
