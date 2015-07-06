@@ -30,9 +30,10 @@ ItemPage {
     property var sim
     property string headerTitle: i18n.tr("Call waiting")
 
-    OfonoConnMan {
-        id: connMan
+    OfonoNetworkRegistration {
+        id: netreg
         modemPath: sim.path
+        property bool attached: status === "registered" || status === "roaming"
     }
 
     OfonoCallSettings {
@@ -57,14 +58,14 @@ ItemPage {
     ActivityIndicator {
         id: callWaitingIndicator
         running: true
-        visible: running && connMan.attached
+        visible: running && netreg.attached
     }
 
     Switch {
         id: callWaitingSwitch
         objectName: "callWaitingSwitch"
         visible: !callWaitingIndicator.running
-        enabled: callSettings.ready && connMan.attached
+        enabled: callSettings.ready && netreg.attached
         property bool serverChecked: callSettings.voiceCallWaiting !== "disabled"
         onServerCheckedChanged: checked = serverChecked
         Component.onCompleted: checked = serverChecked
