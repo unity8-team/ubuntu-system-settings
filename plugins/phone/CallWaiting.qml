@@ -48,6 +48,7 @@ ItemPage {
         onVoiceCallWaitingComplete: {
             //When the property change is complete, the value of checked should always be in sync with serverChecked 
             callWaitingSwitch.checked = callWaitingSwitch.serverChecked
+            /* Log some additional output to help debug when things don't work */
             console.warn('callSettings, onVoiceCallWaitingComplete modem: ' + modemPath + ' success: ' + success + ' ' + voiceCallWaiting);
             callWaitingIndicator.running = false;
         }
