@@ -31,21 +31,53 @@ Component {
         objectName: "otherNetworkDialog"
         anchorToKeyboard: true
 
-        function settingsValid() {
-            if(networkname.length == 0) {
+        function settingsValid () {
+            if (networkname.length === 0) {
                 return false;
             }
-            if(securityList.selectedIndex == 0) {
+            if (securityList.selectedIndex === 0) {
                 return true
             }
-            if(securityList.selectedIndex == 1) {
-                return password.length >= 8
+            if (securityList.selectedIndex === 3) {
+                // WEP
+                return password.length === 5  ||
+                       password.length === 10 ||
+                       password.length === 13 ||
+                       password.length === 26;
             }
-            // WEP
-            return password.length === 5  ||
-                   password.length === 10 ||
-                   password.length === 13 ||
-                   password.length === 26;
+            //WPA
+            return password.length >= 8
+        }
+
+        function filePicker (type) {
+            var pickerDialog;
+            var certDialog;
+
+            pickerDialog = PopupUtils.open(
+                Qt.resolvedUrl("./CertPicker.qml")
+            );
+            pickerDialog.fileImportSignal.connect(function (file) {
+                if (!file === false) {
+                    certDialogLoader.source = Qt.resolvedUrl(
+                        "./CertDialog.qml"
+                    );
+                    certDialog = PopupUtils.open(
+                        certDialogLoader.item, authListLabel, {
+                            fileName: file,
+                            certType: type
+                        }
+                    );
+                    certDialog.updateSignal.connect(function (update) {
+                        if (update && type === 0) {
+                            cacertListModel.dataupdate();
+                        } else if (update && type === 1) {
+                            privatekeyListModel.dataupdate();
+                        } else if (update && type === 2) {
+                            pacFileListModeL.dataupdate();
+                        }
+                    });
+                }
+            });
         }
 
         title: i18n.tr("Connect to Hidden Network")
@@ -67,6 +99,14 @@ Component {
                     running: true
                 }
                 PropertyChanges {
+                    target: passwordRememberSwitch
+                    enabled: false
+                }
+                PropertyChanges {
+                    target: passwordRememberLabel
+                    opacity: 0.5
+                }
+                PropertyChanges {
                     target: passwordVisibleSwitch
                     enabled: false
                 }
@@ -79,7 +119,103 @@ Component {
                     enabled: false
                 }
                 PropertyChanges {
-                    target: passwordListLabel
+                    target: passwordLabel
+                    opacity: 0.5
+                }
+                PropertyChanges {
+                    target: username
+                    enabled: false
+                }
+                PropertyChanges {
+                    target: usernameLabel
+                    opacity: 0.5
+                }
+                PropertyChanges {
+                    target: anonymousIdentity
+                    enabled: false
+                }
+                PropertyChanges {
+                    target: anonymousIdentityLabel
+                    opacity: 0.5
+                }
+                PropertyChanges {
+                    target: peapVersionList
+                    enabled: false
+                    opacity: 0.5
+                }
+                PropertyChanges {
+                    target: peapVersionListLabel
+                    opacity: 0.5
+                }
+                PropertyChanges {
+                    target: pacProvisioningList
+                    enabled: false
+                    opacity: 0.5
+                }
+                PropertyChanges {
+                    target: pacProvisioningListLabel
+                    opacity: 0.5
+                }
+                PropertyChanges {
+                    target: pacFileSelector
+                    enabled: false
+                    opacity: 0.5
+                }
+                PropertyChanges {
+                    target: pacFileLabel
+                    opacity: 0.5
+                }
+                PropertyChanges {
+                    target: privateKeySelector
+                    enabled: false
+                    opacity: 0.5
+                }
+                PropertyChanges {
+                    target: privatekeyLabel
+                    opacity: 0.5
+                }
+                PropertyChanges {
+                    target: usercertSelector
+                    enabled: false
+                    opacity: 0.5
+                }
+                PropertyChanges {
+                    target: usercertLabel
+                    opacity: 0.5
+                }
+                PropertyChanges {
+                    target: cacertSelector
+                    enabled: false
+                    opacity: 0.5
+                }
+                PropertyChanges {
+                    target: cacertLabel
+                    opacity: 0.5
+                }
+                PropertyChanges {
+                    target: p2authList
+                    enabled: false
+                    opacity: 0.5
+                }
+                PropertyChanges {
+                    target: p2authListLabel
+                    opacity: 0.5
+                }
+                PropertyChanges {
+                    target: authList
+                    enabled: false
+                    opacity: 0.5
+                }
+                PropertyChanges {
+                    target: authListLabel
+                    opacity: 0.5
+                }
+                PropertyChanges {
+                    target: wepInsecureLabel
+                    opacity: 0.5
+                }
+                PropertyChanges {
+                    target: wepInsecureLabel
                     opacity: 0.5
                 }
                 PropertyChanges {
@@ -117,10 +253,7 @@ Component {
                     target: successIndicator
                     running: true
                 }
-                PropertyChanges {
-                    target: cancelButton
-                    enabled: false
-                }
+
                 PropertyChanges {
                     target: connectAction
                     enabled: false
@@ -142,7 +275,7 @@ Component {
             text : i18n.tr("Network name")
             objectName: "networknameLabel"
             fontSize: "medium"
-            font.bold: true
+            font.bold: false
             color: Theme.palette.selected.backgroundText
             elide: Text.ElideRight
         }
@@ -150,6 +283,8 @@ Component {
         TextField {
             id : networkname
             objectName: "networkname"
+            width: parent.width
+            placeholderText: i18n.tr("SSID")
             inputMethodHints: Qt.ImhNoPredictiveText
             Component.onCompleted: forceActiveFocus()
         }
@@ -159,7 +294,7 @@ Component {
             text : i18n.tr("Security")
             objectName: "securityListLabel"
             fontSize: "medium"
-            font.bold: true
+            font.bold: false
             color: Theme.palette.selected.backgroundText
             elide: Text.ElideRight
         }
@@ -167,18 +302,480 @@ Component {
         ListItem.ItemSelector {
             id: securityList
             objectName: "securityList"
-            model: [i18n.tr("None"),                 // index: 0
-                    i18n.tr("WPA & WPA2 Personal"),  // index: 1
-                    i18n.tr("WEP"),                  // index: 2
-                    ]
+            model: [i18n.tr("None"),             // index: 0
+                i18n.tr("WPA & WPA2 Personal"),  // index: 1
+                i18n.tr("WPA & WPA2 Enterprise"),// index: 2
+                i18n.tr("WEP"),                  // index: 3
+                i18n.tr("Dynamic WEP (802.1x)"), // index: 4
+                i18n.tr("LEAP"),                 // index: 5
+            ]
+            selectedIndex: 1
         }
 
         Label {
-            id: passwordListLabel
-            text : i18n.tr("Password")
+            id: wepInsecureLabel
+            objectName: "wepInsecureLabel"
+            color: "red"
+            text: i18n.tr("This network is insecure.")
+            visible: securityList.selectedIndex === 3
+        }
+
+        Label {
+            id: authListLabel
+            text : i18n.tr("Authentication")
+            objectName: "authListLabel"
+            fontSize: "medium"
+            font.bold: false
+            color: Theme.palette.selected.backgroundText
+            elide: Text.ElideRight
+            visible: securityList.selectedIndex === 2 ||
+                     securityList.selectedIndex === 4
+        }
+
+        ListItem.ItemSelector {
+            id: authList
+            objectName: "authList"
+            model: ["TLS",  // index: 0
+                    "TTLS", // index: 1
+                    "LEAP", // index: 2
+                    "FAST", // index: 3
+                    "PEAP", // index: 4
+            ]
+            visible: securityList.selectedIndex === 2 ||
+                     securityList.selectedIndex === 4
+        }
+
+        Label {
+            id: p2authListLabel
+            text : i18n.tr("Inner authentication")
+            objectName: "p2authLabel"
+            fontSize: "medium"
+            font.bold: false
+            color: Theme.palette.selected.backgroundText
+            elide: Text.ElideRight
+            visible: (securityList.selectedIndex === 2 ||
+                      securityList.selectedIndex === 4 /* WPA or D-WEP */) &&
+                     (authList.selectedIndex === 1 ||
+                      authList.selectedIndex === 3 ||
+                      authList.selectedIndex === 4)
+        }
+
+        ListItem.ItemSelector {
+            id: p2authList
+            objectName: "p2authList"
+            width: parent.width
+            model: ["PAP",      // index: 0
+                    "MSCHAPv2", // index: 1
+                    "MSCHAP",   // index: 2
+                    "CHAP",     // index: 3
+                    "GTC",      // index: 4
+                    "MD5"       // index: 5
+            ]
+            visible: (securityList.selectedIndex === 2 ||
+                      securityList.selectedIndex === 4 /* WPA or D-WEP */) &&
+                     (authList.selectedIndex === 1 ||
+                      authList.selectedIndex === 3 ||
+                      authList.selectedIndex === 4)
+        }
+
+        Label {
+            id: cacertLabel
+            text : i18n.tr("CA certificate")
+            objectName: "cacertListLabel"
+            fontSize: "medium"
+            font.bold: false
+            color: Theme.palette.selected.backgroundText
+            visible: (securityList.selectedIndex === 2 ||
+                      securityList.selectedIndex === 4 /* WPA or D-WEP */) &&
+                     (authList.selectedIndex === 0 ||
+                      authList.selectedIndex === 1 ||
+                      authList.selectedIndex === 3 ||
+                      authList.selectedIndex === 4)
+        }
+
+        ListItem.ItemSelector {
+            id: cacertSelector
+            anchors {
+                left: parent.left
+                right: parent.right
+            }
+            visible: (securityList.selectedIndex === 2 ||
+                      securityList.selectedIndex === 4 /* WPA or D-WEP */) &&
+                     (authList.selectedIndex === 0 ||
+                      authList.selectedIndex === 1 ||
+                      authList.selectedIndex === 3 ||
+                      authList.selectedIndex === 4)
+            model: cacertListModel
+            expanded: false
+            delegate: certSelectorDelegate
+            selectedIndex: 0
+            property string cacertFileName: {
+                if (selectedIndex !== 0 &&
+                    selectedIndex !== (cacertListModel.rowCount()-1)) {
+                    return cacertListModel.getfileName(selectedIndex);
+                } else {
+                    return "";
+                }
+            }
+
+            onSelectedIndexChanged: {
+                if (selectedIndex === cacertListModel.rowCount()-1) {
+                    selectedIndex = 0;
+                    otherNetworkDialog.filePicker(0); //Certificate
+                }
+            }
+        }
+
+        Component {
+            id: certSelectorDelegate
+            OptionSelectorDelegate {
+                text: {
+                    if (CommonName.length > 32) {
+                        /* TRANSLATORS: %1 is the name of a certificate file.
+                        The ellipsis indicates that the file name has been
+                        truncated to 30 characters. */
+                        return i18n.tr("%1…").arg(CommonName.substr(0,30));
+                    } else {
+                        return CommonName;
+                    }
+                }
+
+                subText: {
+                    if (CommonName !== i18n.tr("None") &&
+                        CommonName !== i18n.tr("Choose…")) {
+                        if (Organization.length > 15) {
+                            /* TRANSLATORS: The first position is the name of
+                            the organization that has issued the certificate.
+                            The organization name has been truncated, as
+                            indicated by the ellipsis. The latter position is
+                            the expiry date of the certificate. */
+                            return i18n.tr("%1…, Exp.: %2").arg(
+                                Organization.substr(0,13)
+                            ).arg(expiryDate);
+                        } else {
+                            /* TRANSLATORS: The first position is the name of
+                            the organization that has issued the certificate.
+                            The latter position is the expiry date of the
+                            certificate. */
+                            return i18n.tr("%1, Exp.: %2").arg(Organization)
+                                .arg(expiryDate);
+                        }
+                    } else {
+                        return "";
+                    }
+                }
+            }
+        }
+
+        CertificateListModel {
+            id: cacertListModel
+        }
+
+        Loader {
+            id: certDialogLoader
+            asynchronous: false
+        }
+
+        Label {
+            id: cacertHintLabel
+            text : i18n.tr("Using certificates is recommend as it increases security.")
+            wrapMode: Text.WordWrap
+            opacity: 0.5
+            objectName: "cacertHintLabel"
+            fontSize: "small"
+            font.bold: false
+            color: Theme.palette.selected.backgroundText
+            visible: (securityList.selectedIndex === 2 ||
+                      securityList.selectedIndex === 4 /* WPA or D-WEP */) &&
+                     (authList.selectedIndex === 0 ||
+                      authList.selectedIndex === 1 ||
+                      authList.selectedIndex === 3 ||
+                      authList.selectedIndex === 4) &&
+                     cacertSelector.selectedIndex === 0
+        }
+
+        Label {
+            id: usercertLabel
+            text : i18n.tr("Client certificate")
+            objectName: "usercertLabel"
+            fontSize: "medium"
+            font.bold: false
+            color: Theme.palette.selected.backgroundText
+            visible: (securityList.selectedIndex === 2 ||
+                      securityList.selectedIndex === 4) &&
+                      authList.selectedIndex === 0 // only for TLS
+
+        }
+
+        ListItem.ItemSelector {
+            id: usercertSelector
+            anchors {
+                left: parent.left
+                right: parent.right
+            }
+            visible: (securityList.selectedIndex === 2 ||
+                      securityList.selectedIndex === 4) &&
+                      authList.selectedIndex === 0 // only for TLS
+            model: cacertListModel
+            expanded: false
+            delegate: certSelectorDelegate
+            selectedIndex: 0
+            property string usercertFileName: {
+                if (selectedIndex !== 0 &&
+                    selectedIndex !== (model.rowCount()-1)) {
+                      return model.getfileName(selectedIndex);
+                } else {
+                    return "";
+                }
+            }
+            onSelectedIndexChanged: {
+                if (selectedIndex === cacertListModel.rowCount()-1) {
+                    selectedIndex = 0;
+                    otherNetworkDialog.filePicker(0); //Certificate
+                }
+            }
+        }
+
+        Label {
+            id: privatekeyLabel
+            text : i18n.tr("User private key")
+            objectName: "userprivatekeyLabel"
+            fontSize: "medium"
+            font.bold: false
+            color: Theme.palette.selected.backgroundText
+            visible: (securityList.selectedIndex === 2 ||
+                      securityList.selectedIndex === 4) &&
+                     (authList.selectedIndex === 0) // only for TLS
+        }
+
+        PrivatekeyListModel {
+            id: privatekeyListModel
+        }
+
+        Component{
+            id: privatekeySelectorDelegate
+            OptionSelectorDelegate {
+                text: KeyName
+
+                subText: {
+                    if (KeyName !== i18n.tr("None") &&
+                        KeyName !== i18n.tr("Choose…")) {
+                        /* TRANSLATORS: The first position is the type of
+                        private key, second the key algorithm, and third the
+                        length of the key in bits. */
+                        return i18n.tr("%1, %2, %3 bit").arg(KeyType)
+                            .arg(KeyAlgorithm).arg(KeyLength);
+                    } else {
+                        return "";
+                    }
+                }
+            }
+        }
+
+        ListItem.ItemSelector {
+            id: privateKeySelector
+            anchors {
+                left: parent.left
+                right: parent.right
+            }
+            visible: (securityList.selectedIndex === 2 ||
+                      securityList.selectedIndex === 4) &&
+                     (authList.selectedIndex === 0) // only for TLS
+            model: privatekeyListModel
+            expanded: false
+            delegate: privatekeySelectorDelegate
+            selectedIndex: 0
+            property string privateKeyFileName: {
+                if (selectedIndex !== 0 &&
+                    selectedIndex !==
+                    (model.rowCount()-1)) {
+                    return model.getfileName(
+                        selectedIndex
+                    );
+                } else {
+                    return "";
+                }
+            }
+            onSelectedIndexChanged: {
+                if (selectedIndex === privatekeyListModel.rowCount()-1) {
+                    selectedIndex = 0;
+                    otherNetworkDialog.filePicker(1); //Key
+                }
+            }
+        }
+
+        Label {
+            id: pacFileLabel
+            text : i18n.tr("Pac file")
+            objectName: "pacFileLabel"
+            fontSize: "medium"
+            font.bold: false
+            color: Theme.palette.selected.backgroundText
+            visible: (securityList.selectedIndex === 2 ||
+                      securityList.selectedIndex === 4 /* WPA or D-WEP */) &&
+                      (authList.selectedIndex === 3)
+        }
+
+        PacFileListModel {
+            id: pacFileListModel
+        }
+
+        Component{
+            id: pacFileSelectorDelegate
+            OptionSelectorDelegate { text: pacFileName; }
+        }
+
+        ListItem.ItemSelector {
+            id: pacFileSelector
+            anchors {
+                left: parent.left
+                right: parent.right
+            }
+            visible: (securityList.selectedIndex === 2 ||
+                      securityList.selectedIndex === 4) &&
+                     (authList.selectedIndex === 3) // only for FAST
+            model: pacFileListModel
+            expanded: false
+            delegate: pacFileSelectorDelegate
+            selectedIndex: 0
+            property string pacFileName: {
+                if (selectedIndex !== 0 &&
+                    selectedIndex !== (pacFileListModel.rowCount()-1)) {
+                       return pacFileListModel.getfileName(selectedIndex);
+                } else {
+                    return "";
+                }
+            }
+            onSelectedIndexChanged: {
+                if (selectedIndex === pacFileListModel.rowCount()-1) {
+                    selectedIndex = 0;
+                    otherNetworkDialog.filePicker(2); //PacFile
+                }
+            }
+        }
+
+        Label {
+            id: pacProvisioningListLabel
+            text : i18n.tr("Pac provisioning")
+            objectName: "pacProvisioningListLabel"
+            fontSize: "medium"
+            font.bold: false
+            color: Theme.palette.selected.backgroundText
+            elide: Text.ElideRight
+            visible: (securityList.selectedIndex === 2 ||
+                      securityList.selectedIndex === 4) &&
+                      (authList.selectedIndex === 3)
+        }
+
+        ListItem.ItemSelector {
+            id: pacProvisioningList
+            objectName: "pacProvisioningList"
+            model: [i18n.tr("Disabled"),      // index: 0
+                i18n.tr("Anonymous"),         // index: 1
+                i18n.tr("Authenticated"),     // index: 2
+                i18n.tr("Both"),              // index: 3
+            ]
+            selectedIndex: 1
+            visible: (securityList.selectedIndex === 2 ||
+                      securityList.selectedIndex === 4) &&
+                     (authList.selectedIndex === 3)
+        }
+
+        Label {
+            id: peapVersionListLabel
+            text : i18n.tr("PEAP version")
+            objectName: "peapVersionListLabel"
+            fontSize: "medium"
+            font.bold: false
+            color: Theme.palette.selected.backgroundText
+            elide: Text.ElideRight
+            visible: (securityList.selectedIndex === 2 ||
+                      securityList.selectedIndex === 4) &&
+                      (authList.selectedIndex === 4)
+        }
+
+        ListItem.ItemSelector {
+            id: peapVersionList
+            objectName: "peapVersionList"
+            model: [i18n.tr("Version 0"),  // index: 0
+                i18n.tr("Version 1"),      // index: 1
+                i18n.tr("Automatic"),      // index: 2
+            ]
+            visible: (securityList.selectedIndex === 2 ||
+                      securityList.selectedIndex === 4) &&
+                     (authList.selectedIndex === 4)
+            selectedIndex: 2
+        }
+
+        Label {
+            id: anonymousIdentityLabel
+            text : i18n.tr("Anonymous identity")
+            objectName: "anonymousIdentityLabel"
+            fontSize: "medium"
+            font.bold: false
+            color: Theme.palette.selected.backgroundText
+            visible: (securityList.selectedIndex === 2 &&
+                      authList.selectedIndex !== 2)
+        }
+
+        TextField {
+            id : anonymousIdentity
+            objectName: "anonymousIdentity"
+            width: parent.width
+            visible: (securityList.selectedIndex === 2 &&
+                      authList.selectedIndex !== 2)
+            inputMethodHints: Qt.ImhNoPredictiveText
+            onAccepted: {
+                connectAction.trigger()
+            }
+        }
+
+        Label {
+            id: usernameLabel
+            text : {
+                if ((securityList.selectedIndex === 2 ||
+                    securityList.selectedIndex === 4) &&
+                    (authList.selectedIndex === 0 )) {
+                    return i18n.tr("Identity");
+                } else {
+                    return i18n.tr("Username");
+                }
+            }
+            objectName: "usernameLabel"
+            fontSize: "medium"
+            font.bold: false
+            color: Theme.palette.selected.backgroundText
+            elide: Text.ElideRight
+            visible: (securityList.selectedIndex === 2 ||
+                      securityList.selectedIndex === 4 ||
+                      securityList.selectedIndex === 5)
+        }
+
+        TextField {
+            id : username
+            objectName: "username"
+            width: parent.width
+            visible: (securityList.selectedIndex === 2 ||
+                      securityList.selectedIndex === 4 ||
+                      securityList.selectedIndex === 5)
+            inputMethodHints: Qt.ImhNoPredictiveText
+            onAccepted: connectAction.trigger()
+        }
+
+        Label {
+            id: passwordLabel
+            text: {
+                if ((securityList.selectedIndex === 2 ||
+                     securityList.selectedIndex === 4) &&
+                    (authList.selectedIndex === 0)) {
+                    return i18n.tr("Private key password");
+                } else {
+                    return i18n.tr("Password");
+                }
+            }
             objectName: "passwordListLabel"
             fontSize: "medium"
-            font.bold: true
+            font.bold: false
             color: Theme.palette.selected.backgroundText
             elide: Text.ElideRight
             visible: securityList.selectedIndex !== 0
@@ -187,16 +784,15 @@ Component {
         TextField {
             id : password
             objectName: "password"
+            width: parent.width
             visible: securityList.selectedIndex !== 0
             echoMode: passwordVisibleSwitch.checked ?
-                TextInput.Normal : TextInput.Password
+                      TextInput.Normal : TextInput.Password
             inputMethodHints: Qt.ImhNoPredictiveText
-            onAccepted: {
-                connectAction.trigger();
-            }
+            onAccepted: connectAction.trigger()
         }
 
-        Row {
+        Row {
             id: passwordVisiblityRow
             layoutDirection: Qt.LeftToRight
             spacing: units.gu(2)
@@ -222,7 +818,43 @@ Component {
                     }
                     onClicked: {
                         passwordVisibleSwitch.checked =
-                            !passwordVisibleSwitch.checked
+                                !passwordVisibleSwitch.checked
+                    }
+                }
+            }
+        }
+
+        Row {
+            id: passwordRememberRow
+            layoutDirection: Qt.LeftToRight
+            spacing: units.gu(2)
+            visible: ((securityList.selectedIndex === 2 ||
+                       securityList.selectedIndex === 4) &&
+                      (authList.selectedIndex === 1 ||
+                       authList.selectedIndex === 3 ||
+                       authList.selectedIndex === 4))
+
+            CheckBox {
+                id: passwordRememberSwitch
+                activeFocusOnPress: false
+            }
+
+            Label {
+                id: passwordRememberLabel
+                text : i18n.tr("Remember password")
+                objectName: "passwordRememberLabel"
+                fontSize: "medium"
+                color: Theme.palette.selected.backgroundText
+                elide: Text.ElideRight
+                height: passwordRememberSwitch.height
+                verticalAlignment: Text.AlignVCenter
+                MouseArea {
+                    anchors {
+                        fill: parent
+                    }
+                    onClicked: {
+                        passwordRememberSwitch.checked =
+                                !passwordRememberSwitch.checked
                     }
                 }
             }
@@ -289,7 +921,24 @@ Component {
                 DbusHelper.connect(
                     networkname.text,
                     securityList.selectedIndex,
-                    password.text);
+                    authList.selectedIndex,
+                    [
+                        username.text,
+                        anonymousIdentity.text
+                    ],
+                    [
+                        password.text,
+                        passwordRememberSwitch.checked
+                    ],
+                    [
+                        cacertSelector.cacertFileName,
+                        usercertSelector.usercertFileName,
+                        privateKeySelector.privateKeyFileName,
+                        pacFileSelector.pacFileName,
+                        pacProvisioningList.selectedIndex.toString(),
+                        peapVersionList.selectedIndex.toString()
+                    ],
+                    p2authList.selectedIndex);
                 otherNetworkDialog.state = "CONNECTING";
             }
         }
@@ -321,19 +970,18 @@ Component {
                 */
                 if (otherNetworkDialog.state === "CONNECTING") {
                     switch (newState) {
-                        case 120:
-                            feedback.text = common.reasonToString(reason);
-                            otherNetworkDialog.state = "FAILED";
-                            break;
-                        case 100:
-                            /* connection succeeded only if it was us that
+                    case 120:
+                        feedback.text = common.reasonToString(reason);
+                        otherNetworkDialog.state = "FAILED";
+                        break;
+                    case 100:
+                        /* connection succeeded only if it was us that
                             created it */
-                            otherNetworkDialog.state = "SUCCEEDED";
-                            break;
+                        otherNetworkDialog.state = "SUCCEEDED";
+                        break;
                     }
                 }
             }
         }
     }
 }
-
