@@ -209,8 +209,10 @@ class WifiTestCase(WifiBaseTestCase):
 
         for idx, ssid in enumerate(access_points):
             self.create_access_point('Mock_AP%d' % idx, ssid)
-            self.dbusmock.AddWiFiConnection(
-                self.device_path, 'Mock_Con%d' % idx, ssid, '')
+            self.obj_nm.AddWiFiConnection(
+                self.device_path, 'Mock_Con%d' % idx, ssid, '',
+                dbus.Dictionary(signature='sa{sv}')
+            )
 
         self.wifi_page.remove_previous_network(access_points[0],)
 
