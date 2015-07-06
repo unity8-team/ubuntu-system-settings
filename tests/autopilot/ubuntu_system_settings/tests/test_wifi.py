@@ -16,7 +16,7 @@ from dbusmock.templates.networkmanager import (
 from testtools.matchers import Equals
 from time import sleep
 from ubuntu_system_settings.tests import (WifiBaseTestCase,
-                                          WifiLaunchedWithSSIDTestCase)
+                                          WifiWithSSIDBaseTestCase)
 from ubuntu_system_settings.utils.i18n import ugettext as _
 from unittest import skip
 
@@ -225,7 +225,7 @@ class WifiTestCase(WifiBaseTestCase):
         # is currently not supported.
 
 
-class WifiWithSSIDTestCase(WifiLaunchedWithSSIDTestCase):
+class WifiWithTestSSIDTestCase(WifiWithSSIDBaseTestCase):
 
     ssid = 'test_ap'
 

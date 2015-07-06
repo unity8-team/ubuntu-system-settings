@@ -916,12 +916,12 @@ class WifiBaseTestCase(UbuntuSystemSettingsTestCase,
         return ':'.join(map(lambda x: "%02x" % x, mac))
 
 
-class WifiLaunchedWithSSIDTestCase(WifiBaseTestCase):
-    """ Class for wifi settings tests launches with an ssid."""
+class WifiWithSSIDBaseTestCase(WifiBaseTestCase):
+    """ Class for Wi-Fi settings tests launches with an SSID."""
 
     ssid = None
 
     def setUp(self, panel=None):
-        super(WifiLaunchedWithSSIDTestCase, self).setUp(
+        super(WifiWithSSIDBaseTestCase, self).setUp(
             panel='settings:///wifi/?ssid=%s' % self.ssid
         )
