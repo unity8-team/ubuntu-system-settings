@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-10-16 20:04-0600\n"
-"PO-Revision-Date: 2015-06-19 05:44+0000\n"
+"PO-Revision-Date: 2015-07-05 07:01+0000\n"
 "Last-Translator: Adolfo Jayme <fitoschido@gmail.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2015-06-20 05:33+0000\n"
-"X-Generator: Launchpad (build 17572)\n"
+"X-Launchpad-Export-Date: 2015-07-06 05:36+0000\n"
+"X-Generator: Launchpad (build 17597)\n"
 
 #: ubuntu-system-settings.desktop.in.in.h:1 ../src/qml/MainWindow.qml:112
 msgid "System Settings"
@@ -829,7 +829,7 @@ msgstr "Restablecer la configuración de APN"
 
 #: ../plugins/cellular//PageChooseApn.qml:561
 msgid "Are you sure that you want to Reset APN Settings?"
-msgstr "¿Está seguro de que desea restablecer la configuración de APN?"
+msgstr "¿Confirma que quiere restablecer la confirmación de APN?"
 
 #: ../plugins/cellular//PageChooseApn.qml:567
 msgid "Reset"

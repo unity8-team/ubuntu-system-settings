@@ -86,7 +86,7 @@ Component {
         title: ssid ?
                /* TODO(jgdx): Hack to avoid breaking string freeze. This will be
                changed to i18n.tr("Connect to %1").arg(ssid) per spec. */
-               i18n.tr("Connect to Wi‑Fi ") + ssid :
+               i18n.tr("Connect to Wi‑Fi") + " " + ssid :
                i18n.tr("Connect to Hidden Network")
         text: feedback.enabled ? feedback.text : "";
 
@@ -500,7 +500,8 @@ Component {
                      (authList.selectedIndex === 0 ||
                       authList.selectedIndex === 1 ||
                       authList.selectedIndex === 3 ||
-                      authList.selectedIndex === 4)
+                      authList.selectedIndex === 4) &&
+                      cacertSelector.selectedIndex === 0
         }
 
         Label {

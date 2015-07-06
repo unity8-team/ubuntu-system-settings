@@ -1,3 +1,43 @@
+ubuntu-system-settings (0.3+15.10.20150703-0ubuntu1) wily; urgency=medium
+
+  [ CI Train Bot ]
+  * New rebuild forced.
+
+  [ Joerg Berroth ]
+  * Added support for 802-1x wireless network configurations. (LP:
+    #1241986)
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Fri, 03 Jul 2015 16:09:00 +0000
+
+ubuntu-system-settings (0.3+15.10.20150702.3-0ubuntu1) wily; urgency=medium
+
+  [ CI Train Bot ]
+  * New rebuild forced.
+
+  [ Ken VanDine ]
+  * Test searching for WiFi instead of Sound, online-accounts now has a
+    soundcloud account type (LP: #1468029)
+
+  [ Matthew Paul Thomas ]
+  * Changes "Install & Restart" to "Restart & Install" and "Not Now" to
+    "Cancel". lp:1359344 (LP: #1359344)
+
+  [ jonas-drange ]
+  * implement CFB, CFNRy and CFNRc as well as autopilot tests (LP:
+    #1463828)
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Thu, 02 Jul 2015 22:48:32 +0000
+
+ubuntu-system-settings (0.3+15.10.20150622-0ubuntu2) wily; urgency=medium
+
+  * debian/control:
+    - don't have an alternative depends on system-image-snappy-cli,
+      it's deprecated
+    - have ubuntu-snappy-cli as an alternative to click, that's not the 
+      right solution but a workaround to unblock snappy image build
+
+ -- Sebastien Bacher <seb128@ubuntu.com>  Thu, 02 Jul 2015 10:30:10 +0200
+
 ubuntu-system-settings (0.3+15.10.20150622-0ubuntu1) wily; urgency=medium
 
   [ CI Train Bot ]

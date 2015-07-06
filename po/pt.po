@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-10-16 20:04-0600\n"
-"PO-Revision-Date: 2015-06-19 22:36+0000\n"
+"PO-Revision-Date: 2015-07-03 12:33+0000\n"
 "Last-Translator: Ivo Xavier <ivofernandes12@gmail.com>\n"
 "Language-Team: Portuguese <pt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2015-06-20 05:33+0000\n"
-"X-Generator: Launchpad (build 17572)\n"
+"X-Launchpad-Export-Date: 2015-07-04 05:36+0000\n"
+"X-Generator: Launchpad (build 17597)\n"
 
 #: ubuntu-system-settings.desktop.in.in.h:1 ../src/qml/MainWindow.qml:112
 msgid "System Settings"
@@ -535,7 +535,7 @@ msgstr "Hoje"
 
 #: ../plugins/battery//PageComponent.qml:281
 msgid "Ways to reduce battery use:"
-msgstr "Formas de reduzir o consumo de bateria:"
+msgstr "Meios de reduzir o consumo de bateria:"
 
 #: ../plugins/battery//PageComponent.qml:285
 #: ../plugins/brightness//PageComponent.qml:62
@@ -762,7 +762,7 @@ msgstr "Ajustar automaticamente"
 
 #: ../plugins/brightness//PageComponent.qml:97
 msgid "Brightens and dims the display to suit the surroundings."
-msgstr "Clareia e escurece o ecrã para se ajustar aos arredores."
+msgstr "Altera o brilho do ecrã para se ajustar ao ambiente."
 
 #: ../plugins/cellular//PageCarrierAndApn.qml:27
 #: ../plugins/cellular//PageCarrierAndApn.qml:44
@@ -1065,11 +1065,11 @@ msgstr[1] "%1 tentativas permitidas."
 
 #: ../plugins/security-privacy//SimPin.qml:108
 msgid "Choose new PIN:"
-msgstr "Escolher novo PIN:"
+msgstr "Escolher o novo PIN:"
 
 #: ../plugins/security-privacy//SimPin.qml:119
 msgid "Confirm new PIN:"
-msgstr "Confirmar novo PIN:"
+msgstr "Confirmar o novo PIN:"
 
 #: ../plugins/security-privacy//SimPin.qml:138
 msgid "PINs don't match. Try again."
@@ -1110,14 +1110,12 @@ msgid ""
 "When a SIM PIN is set, it must be entered to access cellular services after "
 "restarting the phone or swapping the SIM."
 msgstr ""
-"Quando um PIN é definido, deve ser introduzido para ter acesso aos dados "
-"móveis, depois de reiniciar o telemóvel ou mudar de SIM."
+"Se definir um PIN, após reiniciar ou mudar de SIM, este tem que ser "
+"introduzido para ter acesso aos serviços móveis."
 
 #: ../plugins/security-privacy//SimPin.qml:386
 msgid "Entering an incorrect PIN repeatedly may lock the SIM permanently."
-msgstr ""
-"Introduzir um PIN incorreto repetidamente, pode bloquear o SIM "
-"permanentemente."
+msgstr "Introduzir o PIN incorreto sistematicamente pode bloquear o SIM."
 
 #: ../plugins/security-privacy//PhoneLocking.qml:31
 msgid "Phone locking"
@@ -1927,7 +1925,7 @@ msgstr "Podem ser aplicadas taxas de dados"
 
 #: ../plugins/background//Components//AddRemove.qml:52
 msgid "No images selected"
-msgstr "Nenhuma imagem selecionada"
+msgstr "Sem imagens selecionadas"
 
 #: ../plugins/background//Components//AddRemove.qml:65
 #, qt-format
@@ -1985,7 +1983,7 @@ msgid ""
 "You can change the SIM for individual calls, or for contacts in the address "
 "book."
 msgstr ""
-"Pode modificar o cartão SIM para chamadas individuais, ou para contactos na "
+"Pode modificar o cartão SIM para chamadas individuais ou para contactos na "
 "lista de contactos."
 
 #: ../plugins/cellular//Components//DefaultSim.qml:57
