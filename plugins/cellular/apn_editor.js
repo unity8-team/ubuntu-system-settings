@@ -28,7 +28,6 @@
 function updateContextQML (ctx) {
     var toType = indexToType(typeSel.selectedIndex);
     toType = toType === 'internet+mms' ? 'internet' : toType;
-    console.warn('updateContextQML', ctx.contextPath);
     ctx.disconnect();
     ctx.name = name.text;
     ctx.type = toType;
@@ -45,7 +44,6 @@ function updateContextQML (ctx) {
  * @param {OfonoContextConnection} qml to use as reference
 */
 function populate (ctx) {
-    console.warn('populate');
     name.text = ctx.name;
     accessPointName.text = ctx.accessPointName;
     username.text = ctx.username;
@@ -64,7 +62,6 @@ function populate (ctx) {
  * Handler for when a user saves a context.
 */
 function saving () {
-    console.warn('saving context...');
     var model;
     var type;
     root.saving();
@@ -86,8 +83,6 @@ function saving () {
  * @param {OfonoContextConnection} new context
 */
 function newContext (context) {
-    console.warn('newContext');
-
     // Start a timer that will update the context.
     // Ofono and libqofono seems to be very unreliable
     // when it comes to how a context is created,
@@ -166,12 +161,10 @@ function indexToType (index) {
 }
 
 function ready () {
-    console.warn('Ready...');
     _edgeReady = true;
 }
 
 function makeMeVisible(item) {
-    console.warn('makeMeVisible', _edgeReady, item);
     if (!_edgeReady || !item) {
         return;
     }

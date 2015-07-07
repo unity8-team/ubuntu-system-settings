@@ -425,9 +425,7 @@ ItemPage {
         id: keyboard
         anchors.bottom: parent.bottom
         onHeightChanged: {
-            console.warn('onHeightChanged...');
             if (root.activeItem) {
-                console.warn('onHeightChanged will make visible', root.activeItem.objectName);
                 Editor.makeMeVisible(root.activeItem);
             }
         }

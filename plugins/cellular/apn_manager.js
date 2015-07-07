@@ -75,7 +75,6 @@ function getContextQML (path) {
  * @param {Array} paths, array of operator paths
  */
 function updateQML (paths) {
-    console.warn('updateQML', paths);
     _garbageCollect(paths);
     _createQml(paths);
 }
@@ -93,14 +92,12 @@ function deleteQML (path) {
     if (!_pathToQml.hasOwnProperty(path)) {
         return false;
     } else {
-        console.warn('Deleting QML for path', path);
         ctx = _pathToQml[path];
 
         [mmsContexts, internetContexts, iaContexts].forEach(function (model) {
             for (i = 0; i < model.count; i++) {
                 if (ctx.contextPath == model.get(i).path) {
                     model.remove(i);
-                    console.warn('Found QML in ListModel, removing', path, 'in', model.title);
                     break;
                 }
             }
@@ -122,7 +119,6 @@ function _garbageCollect (paths) {
     for (path in _pathToQml) {
         if (_pathToQml.hasOwnProperty(path)) {
             if (paths.indexOf(path) === -1) {
-                console.warn('_garbageCollect', path);
                 deleteQML(path);
                 _totalContext--;
             }
@@ -137,13 +133,11 @@ function _garbageCollect (paths) {
  * @param {String} path to the modem
  */
 function _createQml (paths) {
-    console.warn('_createQml...');
     var ctx;
     paths.forEach(function (path, i) {
         if (!_pathToQml.hasOwnProperty(path)) {
 
             ctx = createContextQml(path);
-            console.warn('_createQml created', path, ctx.name, ctx.type);
 
             // Some contexts have a name, others do not. Normalize this.
             if (!ctx.name) {
@@ -192,7 +186,6 @@ function createContextQml (path) {
  * @param {String} type of context to be created.
 */
 function createContext (type) {
-    console.warn('Creating context of type', type);
     sim.connMan.addContext(type);
 }
 
@@ -203,7 +196,6 @@ function createContext (type) {
  * @param {String} path of context to be removed
 */
 function removeContext (path) {
-    console.warn('Removing context', path);
     var ctx = getContextQML(path);
 
     if (ctx && ctx.active) {
@@ -229,7 +221,6 @@ function addContextToModel (ctx, type) {
     var model;
     var oldModel;
     var haveContext;
-    console.warn('addContextToModel', type, ctx.name, data.qml, data.path);
 
     // We will move a model if it already exist.
     [mmsContexts, internetContexts, iaContexts].forEach(function (m) {
@@ -238,7 +229,6 @@ function addContextToModel (ctx, type) {
             if (ctx.contextPath == m.get(i).path) {
                 haveContext = m.get(i);
                 oldModel = m;
-                console.warn('addContextToModel: Found existing context in ListModel, moving...', haveContext.path, 'in', m.title);
                 break;
             }
         }
@@ -299,7 +289,6 @@ function contextRemoved (path) {
  * @param {String} type
  */
 function contextTypeChanged (type) {
-    console.warn('contextTypeChanged', type, this.contextPath);
     addContextToModel(this, type);
 }
 
@@ -310,7 +299,6 @@ function contextTypeChanged (type) {
  * @param {Boolean} valid
  */
 function contextValidChanged (valid) {
-    console.warn('contextValidChanged', this.valid, valid, this.contextPath);
     if (valid) {
         _validContexts++;
     } else {
@@ -318,7 +306,6 @@ function contextValidChanged (valid) {
     }
 
     if (_validContexts === _totalContext) {
-        console.warn('_validContexts === _totalContext, firing ready...');
         root.ready();
     }
 }
@@ -330,7 +317,6 @@ function contextValidChanged (valid) {
  * @param {Boolean} active
  */
 function contextActiveChanged (active) {
-    console.warn('contextActiveChanged', this.active, active, this.contextPath);
     if (active) {
         checkPreferred();
     }
@@ -345,13 +331,11 @@ function contextActiveChanged (active) {
  * @param {String} name's new value
 */
 function contextNameChanged (name) {
-    console.warn('contextNameChanged', name);
     switch (name) {
         case 'Internet':
         case 'IA':
         case 'MMS':
             if (editor) {
-                console.warn('We saw what we thought was ofono default. Notifying editor...');
                 editor.newContext(this);
             }
             break;
@@ -365,7 +349,6 @@ function contextNameChanged (name) {
  * @param {String} path which was added
  */
 function contextAdded (path) {
-    console.warn('contextAdded', path);
     _createQml([path]);
 }
 
@@ -375,7 +358,6 @@ function contextAdded (path) {
  * @param {Array:String} paths after change
  */
 function contextsChanged (paths) {
-    console.warn('contextsChanged', paths);
     updateQML(paths);
     checkPreferred();
 }
@@ -406,7 +388,6 @@ function reportError (message) {
  *                  decrease the level of connectivity of the user.
 */
 function setPreferred (context, value, force) {
-    console.warn('setPreferred...', this, context.name);
     var conflictingContexts = getConflictingContexts(context);
     var mmsPreferralCausesCombinedDePreferral;
     var internetPreferralCausesCombinedDePreferral;
@@ -458,7 +439,6 @@ function setPreferred (context, value, force) {
         ctx.preferred = false;
     });
 
-    console.warn('Setting', context.name, 'as preferred');
     context.preferred = true;
 }
 
@@ -470,7 +450,6 @@ function reset () {
     // as well as turning cellular data back on, is done by the use of a
     // Connection component and connManPoweredChanged.
     if (sim.connMan.powered) {
-        console.warn('sat restorePowered target');
         restorePowered.target = sim.connMan;
         sim.connMan.powered = false;
     } else {
@@ -484,7 +463,6 @@ function reset () {
  * a Connections component in PageChooseApn.qml.
  */
 function connManPoweredChanged (powered) {
-    console.warn('poweredChangedForReset', powered);
     if (!powered) {
 
         // We want to fire the ready signal again, once we've reset, but
@@ -498,7 +476,6 @@ function connManPoweredChanged (powered) {
         // If restorePowered had a target, we know to turn cellular
         // data back on.
         if (restorePowered.target) {
-            console.warn('had restorePowered target, powering up..');
             sim.connMan.powered = true;
         }
     }
@@ -520,7 +497,6 @@ function checkPreferred () {
         // Find active contexts in model.
         for (i = 0; i < model.count; i++) {
             ctx = model.get(i).qml;
-            console.warn('checking if', ctx.contextPath, 'is preferred...');
 
             if (ctx.active) {
                 activeCtx = ctx;
@@ -529,7 +505,6 @@ function checkPreferred () {
 
         if (activeCtx && getConflictingContexts(activeCtx).length === 0) {
             activeCtx.preferred = true;
-            console.warn(activeCtx.name, 'is now preferred in', model.title);
         }
     });
 }
@@ -604,14 +579,11 @@ function getConflictingContexts (context) {
         default:
             throw new Error('Can\'t resolve conflicts for type' + type);
     }
-    console.warn('Conflicting contexts...');
 
-    conflicts.forEach(function (c) {console.warn("\t" + c.name);});
     return conflicts;
 }
 
 function ready () {
-    console.warn('fired ready');
     checkPreferred();
     root.ready.disconnect(ready);
 }
