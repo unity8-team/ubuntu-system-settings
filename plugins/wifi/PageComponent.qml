@@ -157,7 +157,8 @@ ItemPage {
 
     Connections {
         target: wifibase
-        onWifiEnabledChanged: {
+
+        function invokeWiFiConfigurationDialog () {
             if (wifiEnabled && pluginOptions && pluginOptions['ssid']) {
                 otherNetworLoader.source = "OtherNetwork.qml";
                 PopupUtils.open(otherNetworLoader.item, wifibase, {
@@ -166,5 +167,8 @@ ItemPage {
                 });
             }
         }
+
+        onWifiEnabledChanged: invokeWiFiConfigurationDialog()
+        onPluginOptionsChanged: invokeWiFiConfigurationDialog()
     }
 }
