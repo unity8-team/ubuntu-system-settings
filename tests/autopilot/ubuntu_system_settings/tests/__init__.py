@@ -884,8 +884,13 @@ class WifiBaseTestCase(UbuntuSystemSettingsTestCase,
             security=NM80211ApSecurityFlags.NM_802_11_AP_SEC_KEY_MGMT_PSK
         )
 
-        super(WifiBaseTestCase, self).setUp()
-        self.wifi_page = self.main_view.go_to_wifi_page()
+        super(WifiBaseTestCase, self).setUp(panel)
+        if panel:
+            self.wifi_page = self.main_view.wait_select_single(
+                objectName='wifiPage'
+            )
+        else:
+            self.wifi_page = self.main_view.go_to_wifi_page()
 
     def create_access_point(self, name, ssid, security=None):
         """Creates access point.
@@ -909,3 +914,14 @@ class WifiBaseTestCase(UbuntuSystemSettingsTestCase,
         mac = [0x00, 0x16, 0x3e, random.randint(0x00, 0x7f),
                random.randint(0x00, 0xff), random.randint(0x00, 0xff)]
         return ':'.join(map(lambda x: "%02x" % x, mac))
+
+
+class WifiWithSSIDBaseTestCase(WifiBaseTestCase):
+    """ Class for Wi-Fi settings tests launches with an SSID."""
+
+    ssid = None
+
+    def setUp(self, panel=None):
+        super(WifiWithSSIDBaseTestCase, self).setUp(
+            panel='settings:///wifi/?ssid=%s' % self.ssid
+        )
