@@ -35,7 +35,7 @@ ItemPage {
 
     property alias usePowerd: batteryBackend.powerdRunning
     property bool lockOnSuspend
-    property variant idleValues: [60,120,180,240,300,600]
+    property variant idleValues: [15,30,60,120,300,600]
 
     UbuntuBatteryPanel {
         id: batteryBackend
@@ -86,6 +86,14 @@ ItemPage {
                     text: modelData
                 }
                 model: [
+                    // TRANSLATORS: %1 is the number of seconds
+                    i18n.tr("After %1 second",
+                            "After %1 seconds",
+                            1).arg(15),
+                    // TRANSLATORS: %1 is the number of seconds
+                    i18n.tr("After %1 second",
+                            "After %1 seconds",
+                            2).arg(30),
                     // TRANSLATORS: %1 is the number of minutes
                     i18n.tr("After %1 minute",
                             "After %1 minutes",
@@ -94,14 +102,6 @@ ItemPage {
                     i18n.tr("After %1 minute",
                             "After %1 minutes",
                             2).arg(2),
-                    // TRANSLATORS: %1 is the number of minutes
-                    i18n.tr("After %1 minute",
-                            "After %1 minutes",
-                            3).arg(3),
-                    // TRANSLATORS: %1 is the number of minutes
-                    i18n.tr("After %1 minute",
-                            "After %1 minutes",
-                            4).arg(4),
                     // TRANSLATORS: %1 is the number of minutes
                     i18n.tr("After %1 minute",
                             "After %1 minutes",
