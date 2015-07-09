@@ -77,7 +77,10 @@ Column {
                     var map = sims[index].simMng.serviceNumbers;
                     var nums = false;
                     for(num in map) {
-                        if (map.hasOwnProperty(num)) nums = true;
+                        if (map.hasOwnProperty(num)) {
+                            nums = true;
+                            break;
+                        }
                     }
                     return sims[index].simMng.present && nums;
                 }
