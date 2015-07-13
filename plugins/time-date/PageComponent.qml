@@ -26,6 +26,7 @@ import Ubuntu.Components.Popups 0.1
 import Ubuntu.SystemSettings.TimeDate 1.0
 
 ItemPage {
+    id: root
     title: i18n.tr("Time & Date")
     objectName: "timeDatePage"
 
@@ -47,76 +48,89 @@ ItemPage {
         }
     }
 
-    Column {
+    Flickable {
         anchors.fill: parent
+        contentHeight: contentItem.childrenRect.height
+        boundsBehavior: (contentHeight > root.height) ?
+                            Flickable.DragAndOvershootBounds :
+                            Flickable.StopAtBounds
+        /* Set the direction to workaround
+           https://bugreports.qt-project.org/browse/QTBUG-31905 otherwise the UI
+           might end up in a situation where scrolling doesn't work */
+        flickableDirection: Flickable.VerticalFlick
 
-        SettingsItemTitle { text: i18n.tr ("Time zone:") }
+        Column {
+            anchors.left: parent.left
+            anchors.right: parent.right
 
-        ListItem.SingleValue {
-            objectName: "timeZone"
-            id: timeZone
-            //e.g. America/New_York -> America/New York
-            text: timeDatePanel.timeZone.replace("_", " ")
-            value: getUTCOffset()
-            progression: true
-            onClicked: pageStack.push(Qt.resolvedUrl("ChooseTimeZone.qml"))
-        }
+            SettingsItemTitle { text: i18n.tr ("Time zone:") }
 
-        SettingsItemTitle {
-            text: i18n.tr ("Set the time and date:")
-        }
-
-        ListItem.ItemSelector {
-            id: setTimeAutomatically
-            objectName: "timeItemSelector"
-            model: [ i18n.tr("Automatically") , i18n.tr("Manually")]
-            expanded: true
-            onSelectedIndexChanged: {
-                var useNTP = (selectedIndex === 0) // 0 = Automatically
-                timeDatePanel.useNTP = useNTP
+            ListItem.SingleValue {
+                objectName: "timeZone"
+                id: timeZone
+                //e.g. America/New_York -> America/New York
+                text: timeDatePanel.timeZone.replace("_", " ")
+                value: getUTCOffset()
+                progression: true
+                onClicked: pageStack.push(Qt.resolvedUrl("ChooseTimeZone.qml"))
             }
-        }
 
-        Binding {
-            target: setTimeAutomatically
-            property: "selectedIndex"
-            value: timeDatePanel.useNTP ? 0 : 1
-        }
+            SettingsItemTitle {
+                text: i18n.tr ("Set the time and date:")
+            }
 
-        Timer {
-            onTriggered: currentTime.text = Qt.formatDateTime(
-                            new Date(),
-                            Qt.DefaultLocaleLongDate)
-            triggeredOnStart: true
-            repeat: true
-            running: true
-        }
+            ListItem.ItemSelector {
+                id: setTimeAutomatically
+                objectName: "timeItemSelector"
+                model: [ i18n.tr("Automatically") , i18n.tr("Manually")]
+                expanded: true
+                onSelectedIndexChanged: {
+                    var useNTP = (selectedIndex === 0) // 0 = Automatically
+                    timeDatePanel.useNTP = useNTP
+                }
+            }
 
-        Component {
-            id: timePicker
-            TimePicker {}
-        }
+            Binding {
+                target: setTimeAutomatically
+                property: "selectedIndex"
+                value: timeDatePanel.useNTP ? 0 : 1
+            }
 
-        ListItem.Standard {
-            id: currentTime
-            objectName: "currentTime"
-            progression: setTimeAutomatically.selectedIndex === 1 // Manually
-            enabled: progression
-            onClicked: {
-                Qt.inputMethod.hide()
-                var popupObj = PopupUtils.open(timePicker);
-                popupObj.accepted.connect(
-                            function(hour, minute, second,
-                                     day, month, year) {
-                                var newDate =  new Date(year,
-                                                        month,
-                                                        day,
-                                                        hour,
-                                                        minute,
-                                                        second)
-                                // Milliseconds to microseconds
-                                timeDatePanel.setTime(newDate.getTime() * 1000)
-                })
+            Timer {
+                onTriggered: currentTime.text = Qt.formatDateTime(
+                                new Date(),
+                                Qt.DefaultLocaleLongDate)
+                triggeredOnStart: true
+                repeat: true
+                running: true
+            }
+
+            Component {
+                id: timePicker
+                TimePicker {}
+            }
+
+            ListItem.Standard {
+                id: currentTime
+                objectName: "currentTime"
+                progression: setTimeAutomatically.selectedIndex === 1 // Manually
+                enabled: progression
+                onClicked: {
+                    Qt.inputMethod.hide()
+                    var popupObj = PopupUtils.open(timePicker);
+                    popupObj.accepted.connect(
+                                function(hour, minute, second,
+                                         day, month, year) {
+                                    var newDate =  new Date(year,
+                                                            month,
+                                                            day,
+                                                            hour,
+                                                            minute,
+                                                            second)
+                                    // Milliseconds to microseconds
+                                    timeDatePanel.setTime(newDate.getTime() * 1000)
+                    })
+                }
             }
         }
     }
