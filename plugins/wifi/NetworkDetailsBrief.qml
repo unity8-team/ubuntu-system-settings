@@ -45,12 +45,10 @@ ItemPage {
 
         Column {
 
-            anchors {
-                top: parent.top
-                left: parent.left
-                right: parent.right
-                topMargin: units.gu(2)
-            }
+            anchors.left: parent.left
+            anchors.right: parent.right
+
+            ListItem.Divider {}
 
             Button {
                 text : i18n.tr("Forget this network")

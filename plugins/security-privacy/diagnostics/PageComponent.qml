@@ -62,7 +62,7 @@ ItemPage {
                 }
             }
 
-            SettingsItemTitle {
+            ListItem.Standard {
                 text: i18n.tr("Report to Canonical:")
             }
 
