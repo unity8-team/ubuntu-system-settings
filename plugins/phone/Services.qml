@@ -24,6 +24,7 @@ import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 
 ItemPage {
+    id: root
     objectName: "servicesPage"
     title: headerTitle
     property string carrierString
@@ -42,16 +43,28 @@ ItemPage {
         names = keys;
     }
 
-    Column {
-        anchors.left: parent.left
-        anchors.right: parent.right
-        Repeater {
-            model: names
+    Flickable {
+        anchors.fill: parent
+        contentHeight: contentItem.childrenRect.height
+        boundsBehavior: (contentHeight > root.height) ?
+                            Flickable.DragAndOvershootBounds :
+                            Flickable.StopAtBounds
+        /* Set the direction to workaround
+           https://bugreports.qt-project.org/browse/QTBUG-31905 otherwise the UI
+           might end up in a situation where scrolling doesn't work */
+        flickableDirection: Flickable.VerticalFlick
 
-            ListItem.Standard {
-                progression: true
-                text: modelData
-                onClicked: pageStack.push(Qt.resolvedUrl("ServiceInfo.qml"), {serviceName: modelData, serviceNumber: sim.serviceNumbers[modelData]})
+        Column {
+            anchors.left: parent.left
+            anchors.right: parent.right
+            Repeater {
+                model: names
+
+                ListItem.Standard {
+                    progression: true
+                    text: modelData
+                    onClicked: pageStack.push(Qt.resolvedUrl("ServiceInfo.qml"), {serviceName: modelData, serviceNumber: sim.serviceNumbers[modelData]})
+                }
             }
         }
     }
