@@ -615,11 +615,11 @@ class PhonePage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
         return self._go_to_page(find, 'servicesPage')
 
     def get_sim_services_enabled(self, sim=None):
-        """Return Sim Services availability.
+        """Return whether or not Sim Services is enabled.
 
         :param sim: Number of what SIM to use, either 1 or 2.
             Required parameter in dual SIM setups
-        :returns: Whether or not Sim Services is available.
+        :returns: Whether or not Sim Services is enabled.
 
         """
         find = "simServices"
