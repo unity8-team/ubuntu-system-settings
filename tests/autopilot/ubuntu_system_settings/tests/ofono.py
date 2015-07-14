@@ -101,6 +101,13 @@ def add_simmanager_api(mock):
         'SubscriberNumbers': _parameters.get('SubscriberNumbers',
                                              ['123456789', '234567890']),
         'SubscriberIdentity': _parameters.get('SubscriberIdentity', 23456),
+        'ServiceNumbers': _parameters.get('ServiceNumbers', dbus.Dictionary(
+            {
+                'Fake Service': dbus.String('555-555', variant_level=1),
+                'Faker Service': dbus.String('555-321', variant_level=1),
+                'Fakest Service': dbus.String('555-123', variant_level=1)
+            }, signature='sv'
+        )),
         'LockedPins': _parameters.get('LockedPins', ['pin']),
         'Retries': _parameters.get('Retries', {'pin': dbus.Byte(3)}),
         'PinRequired': _parameters.get('PinRequired', 'none')
