@@ -29,6 +29,7 @@ import SystemSettings 1.0
 
 ItemPage {
     id: page
+    objectName: "lockSecurityPage"
     title: i18n.tr("Lock security")
 
     // The user can still press the main "back" button or other buttons on the
@@ -94,6 +95,7 @@ ItemPage {
 
         Dialog {
             id: changeSecurityDialog
+            objectName: "changeSecurityDialog"
 
             function displayMismatchWarning() {
                 /* If the entry have the same length and different content,
@@ -159,6 +161,7 @@ ItemPage {
 
             TextField {
                 id: currentInput
+                objectName: "currentInput"
                 echoMode: TextInput.Password
                 inputMethodHints: {
                     if (changeSecurityDialog.oldMethod ===
@@ -229,6 +232,7 @@ ItemPage {
 
             TextField {
                 id: newInput
+                objectName: "newInput"
                 echoMode: TextInput.Password
                 inputMethodHints: {
                     if (changeSecurityDialog.newMethod ===
@@ -441,6 +445,18 @@ ItemPage {
             id: unlockMethod
             model: 3
             delegate: OptionSelectorDelegate {
+                objectName: {
+                    switch (index) {
+                        case 0:
+                            return "method_swipe";
+                        case 1:
+                            return "method_code";
+                        case 2:
+                            return "method_phrase";
+                        default:
+                            return "method_unknown";
+                    }
+                }
                 text: index == 0 ? (unlockMethod.selectedIndex == 0 ? unlockMethod.swipe : unlockMethod.swipeAlt) :
                      (index == 1 ? (unlockMethod.selectedIndex == 1 ? unlockMethod.passcode : unlockMethod.passcodeAlt) :
                                    (unlockMethod.selectedIndex == 2 ? unlockMethod.passphrase : unlockMethod.passphraseAlt))
@@ -473,6 +489,7 @@ ItemPage {
                 property bool passcode: securityPrivacy.securityType ===
                                         UbuntuSecurityPrivacyPanel.Passcode
 
+                objectName: "changePass"
                 enabled: parent.visible
 
                 text: passcode ? changePasscode : changePassphrase

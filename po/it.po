@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-10-16 20:04-0600\n"
-"PO-Revision-Date: 2015-01-28 12:39+0000\n"
-"Last-Translator: Milo Casagrande <milo.casagrande@gmail.com>\n"
+"PO-Revision-Date: 2015-06-17 13:32+0000\n"
+"Last-Translator: Alberto Mardegan <Unknown>\n"
 "Language-Team: Italian <it@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2015-03-13 05:32+0000\n"
-"X-Generator: Launchpad (build 17389)\n"
+"X-Launchpad-Export-Date: 2015-06-18 05:06+0000\n"
+"X-Generator: Launchpad (build 17570)\n"
 
 #: ubuntu-system-settings.desktop.in.in.h:1 ../src/qml/MainWindow.qml:112
 msgid "System Settings"
@@ -38,40 +38,39 @@ msgstr "Anteprima"
 msgid "Remove image"
 msgstr "Rimuovi immagine"
 
-#: ../plugins/cellular//PageChooseApn.qml:581
-#: ../plugins/cellular//CustomApnEditor.qml:245
-#: ../plugins/cellular//HotspotSetup.qml:85
 #: ../plugins/background//Preview.qml:102
-#: ../plugins/time-date//TimePicker.qml:173
 #: ../plugins/phone//CallForwarding.qml:139
-#: ../plugins/security-privacy//SimPin.qml:151
-#: ../plugins/security-privacy//SimPin.qml:268
-#: ../plugins/security-privacy//LockSecurity.qml:346
-#: ../plugins/language//DisplayLanguage.qml:97
-#: ../plugins/language//RebootNecessary.qml:47
-#: ../plugins/reset//ResetAllSettings.qml:38
-#: ../plugins/reset//EraseEverything.qml:54
-#: ../plugins/reset//ResetLauncherHome.qml:55
 #: ../plugins/bluetooth//ProvidePasskeyDialog.qml:54
-#: ../plugins/bluetooth//DisplayPasskeyDialog.qml:51
 #: ../plugins/bluetooth//ProvidePinCodeDialog.qml:55
 #: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:49
-#: ../plugins/wifi//OtherNetwork.qml:244
-#: ../plugins/cellular//Components//SimEditor.qml:204
+#: ../plugins/time-date//TimePicker.qml:173
+#: ../plugins/wifi//OtherNetwork.qml:288
+#: ../plugins/cellular//CustomApnEditor.qml:255
+#: ../plugins/cellular//HotspotSetup.qml:85
+#: ../plugins/cellular//PageChooseApn.qml:563
+#: ../plugins/reset//ResetLauncherHome.qml:55
+#: ../plugins/reset//EraseEverything.qml:54
+#: ../plugins/reset//ResetAllSettings.qml:38
+#: ../plugins/security-privacy//LockSecurity.qml:332
+#: ../plugins/security-privacy//SimPin.qml:150
+#: ../plugins/security-privacy//SimPin.qml:267
+#: ../plugins/language//RebootNecessary.qml:47
+#: ../plugins/language//DisplayLanguage.qml:98
 #: ../plugins/background//Components//AddRemove.qml:42
+#: ../plugins/cellular//Components//SimEditor.qml:206
 msgid "Cancel"
 msgstr "Annulla"
 
 #: ../plugins/background//Preview.qml:109
-#: ../plugins/time-date//TimePicker.qml:182
 #: ../plugins/phone//CallForwarding.qml:152
-#: ../plugins/security-privacy//LockSecurity.qml:367
+#: ../plugins/time-date//TimePicker.qml:182
+#: ../plugins/security-privacy//LockSecurity.qml:353
 msgid "Set"
 msgstr "Imposta"
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
 #: ../plugins/background//MainPage.qml:35
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:82
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:2
 msgid "Background"
 msgstr "Sfondo"
 
@@ -79,10 +78,10 @@ msgstr "Sfondo"
 msgid "Ubuntu Art"
 msgstr "Ubuntu Art"
 
-#: ../plugins/cellular//PageChooseApn.qml:393
-#: ../plugins/cellular//PageChooseApn.qml:470
-#: ../plugins/cellular//PageChooseApn.qml:478
 #: ../plugins/background//MainPage.qml:115
+#: ../plugins/cellular//PageChooseApn.qml:382
+#: ../plugins/cellular//PageChooseApn.qml:452
+#: ../plugins/cellular//PageChooseApn.qml:460
 msgid "Custom"
 msgstr "Personalizzato"
 
@@ -90,7 +89,7 @@ msgstr "Personalizzato"
 msgid "Clear"
 msgstr "Pulisci"
 
-#: ../plugins/bluetooth//PageComponent.qml:457
+#: ../plugins/bluetooth//PageComponent.qml:430
 msgid "Disconnect"
 msgstr "Disconnetti"
 
@@ -228,64 +227,64 @@ msgid "A secondary connection of the base connection failed"
 msgstr ""
 "Si è verificato un errore in una connessione secondaria di quella di base"
 
-#: ../plugins/bluetooth//PageComponent.qml:130 ../plugins/wifi//Common.qml:96
+#: ../plugins/bluetooth//PageComponent.qml:104 ../plugins/wifi//Common.qml:96
 msgid "Unknown"
 msgstr "Sconosciuto"
 
-#: ../plugins/wifi//OtherNetwork.qml:51
+#: ../plugins/wifi//OtherNetwork.qml:96
 msgid "Connect to Hidden Network"
 msgstr "Connessione a rete nascosta"
 
-#: ../plugins/wifi//OtherNetwork.qml:142
+#: ../plugins/wifi//OtherNetwork.qml:187
 msgid "Network name"
 msgstr "Nome della rete"
 
+#: ../plugins/wifi//OtherNetwork.qml:203
 #: ../plugins/security-privacy//PageComponent.qml:115
-#: ../plugins/wifi//OtherNetwork.qml:159
 msgid "Security"
 msgstr "Sicurezza"
 
+#: ../plugins/bluetooth//PageComponent.qml:134
+#: ../plugins/bluetooth//PageComponent.qml:342
+#: ../plugins/bluetooth//PageComponent.qml:366
+#: ../plugins/about//PageComponent.qml:130
+#: ../plugins/about//PageComponent.qml:131
+#: ../plugins/about//PageComponent.qml:142
+#: ../plugins/wifi//OtherNetwork.qml:214
 #: ../plugins/cellular//PageCarrierAndApn.qml:46
 #: ../plugins/cellular//PageCarriersAndApns.qml:51
-#: ../plugins/cellular//PageCarriersAndApns.qml:78
-#: ../plugins/bluetooth//PageComponent.qml:160
-#: ../plugins/bluetooth//PageComponent.qml:369
-#: ../plugins/bluetooth//PageComponent.qml:393
-#: ../plugins/wifi//OtherNetwork.qml:170
-#: ../plugins/about//PageComponent.qml:126
-#: ../plugins/about//PageComponent.qml:127
-#: ../plugins/about//PageComponent.qml:138
+#: ../plugins/cellular//PageCarriersAndApns.qml:77
 msgid "None"
 msgstr "Nessuna"
 
-#: ../plugins/wifi//OtherNetwork.qml:171
+#: ../plugins/wifi//OtherNetwork.qml:215
 msgid "WPA & WPA2 Personal"
 msgstr "WPA e WPA2 Personal"
 
-#: ../plugins/wifi//OtherNetwork.qml:172
+#: ../plugins/wifi//OtherNetwork.qml:216
 msgid "WEP"
 msgstr "WEP"
 
-#: ../plugins/cellular//CustomApnEditor.qml:222
 #: ../plugins/wifi//NetworkDetails.qml:64
-#: ../plugins/wifi//OtherNetwork.qml:178
+#: ../plugins/wifi//OtherNetwork.qml:222
+#: ../plugins/cellular//CustomApnEditor.qml:232
 msgid "Password"
 msgstr "Password"
 
 #: ../plugins/wifi//NetworkDetails.qml:77
-#: ../plugins/wifi//OtherNetwork.qml:212
+#: ../plugins/wifi//OtherNetwork.qml:256
 msgid "Show password"
 msgstr "Mostra password"
 
-#: ../plugins/bluetooth//PageComponent.qml:457
-#: ../plugins/wifi//OtherNetwork.qml:260
+#: ../plugins/bluetooth//PageComponent.qml:430
+#: ../plugins/wifi//OtherNetwork.qml:304
 msgid "Connect"
 msgstr "Connetti"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #: ../plugins/battery//PageComponent.qml:332
 #: ../plugins/wifi//PageComponent.qml:28
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:270
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:148
 msgid "Wi-Fi"
 msgstr "Wi-Fi"
 
@@ -297,7 +296,7 @@ msgstr "Connetti a una rete nascosta…"
 msgid "Network details"
 msgstr "Dettagli rete"
 
-#: ../plugins/bluetooth//PageComponent.qml:389
+#: ../plugins/bluetooth//PageComponent.qml:362
 #: ../plugins/wifi//NetworkDetails.qml:45
 msgid "Name"
 msgstr "Nome"
@@ -306,16 +305,16 @@ msgstr "Nome"
 msgid "Last connected"
 msgstr "Ultima rete connessa"
 
-#: ../plugins/system-update//PageComponent.qml:750
-#: ../plugins/system-update//Configuration.qml:52
 #: ../plugins/battery//SleepValues.qml:109
 #: ../plugins/battery//PageComponent.qml:304
 #: ../plugins/battery//PageComponent.qml:313
-#: ../plugins/security-privacy//PageComponent.qml:129
+#: ../plugins/about//PageComponent.qml:195
+#: ../plugins/system-update//Configuration.qml:52
+#: ../plugins/system-update//PageComponent.qml:739
+#: ../plugins/wifi//NetworkDetails.qml:58
 #: ../plugins/security-privacy//PhoneLocking.qml:78
 #: ../plugins/security-privacy//PhoneLocking.qml:87
-#: ../plugins/wifi//NetworkDetails.qml:58
-#: ../plugins/about//PageComponent.qml:191
+#: ../plugins/security-privacy//PageComponent.qml:129
 msgid "Never"
 msgstr "Mai"
 
@@ -326,7 +325,7 @@ msgstr "Dimentica rete"
 
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
 #: ../plugins/notifications//PageComponent.qml:29
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:154
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:244
 msgid "Notifications"
 msgstr "Notifiche"
 
@@ -344,7 +343,7 @@ msgstr "Ferma la riproduzione"
 
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
 #: ../plugins/sound//PageComponent.qml:37
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:326
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:318
 msgid "Sound"
 msgstr "Audio"
 
@@ -374,8 +373,8 @@ msgstr "Vibra e suona"
 msgid "Vibrate in Silent Mode"
 msgstr "Vibra in modalità silenziosa"
 
-#: ../plugins/sound//PageComponent.qml:168
 #: ../plugins/phone//PageComponent.qml:102
+#: ../plugins/sound//PageComponent.qml:168
 msgid "Dialpad sounds"
 msgstr "Suoni tastiera"
 
@@ -396,12 +395,12 @@ msgstr "Vibra con il suono messaggio"
 msgid "Other sounds:"
 msgstr "Altri suoni:"
 
-#: ../plugins/language//PageComponent.qml:215
+#: ../plugins/language//PageComponent.qml:214
 #: ../plugins/sound//PageComponent.qml:215
 msgid "Keyboard sound"
 msgstr "Suono tastiera"
 
-#: ../plugins/sound//PageComponent.qml:231
+#: ../plugins/sound//PageComponent.qml:232
 msgid "Lock sound"
 msgstr "Suono di blocco"
 
@@ -411,12 +410,12 @@ msgstr "Il telefono è in modalità silenziosa."
 
 #. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
 #: ../plugins/reset//PageComponent.qml:32
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:234
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:196
 msgid "Reset phone"
 msgstr "Ripristino del telefono"
 
-#: ../plugins/reset//PageComponent.qml:73
 #: ../plugins/reset//ResetLauncherHome.qml:44
+#: ../plugins/reset//PageComponent.qml:73
 msgid "Reset Launcher"
 msgstr "Ripristina il Launcher"
 
@@ -444,6 +443,7 @@ msgstr "Ripristina tutte le impostazioni di sistema"
 msgid "The Launcher will be returned to its original contents."
 msgstr "Il Launcher verrà ripristinato ai contenuti iniziali."
 
+#: ../plugins/reset//ResetLauncherHome.qml:59
 #: ../plugins/language//RebootNecessary.qml:34
 msgid "The phone needs to restart for changes to take effect."
 msgstr ""
@@ -463,7 +463,7 @@ msgstr "Cancella e ripristina tutto"
 
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
 #: ../plugins/battery//PageComponent.qml:34
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:98
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:24
 msgid "Battery"
 msgstr "Batteria"
 
@@ -516,7 +516,7 @@ msgid "Charge level"
 msgstr "Livello di carica"
 
 #: ../plugins/battery//PageComponent.qml:103
-#: ../plugins/battery//PageComponent.qml:272 ../plugins/about//Storage.qml:199
+#: ../plugins/battery//PageComponent.qml:272 ../plugins/about//Storage.qml:203
 msgid "N/A"
 msgstr "N/D"
 
@@ -540,8 +540,8 @@ msgstr "Oggi"
 msgid "Ways to reduce battery use:"
 msgstr "Metodi per ridurre l'uso della batteria:"
 
-#: ../plugins/brightness//PageComponent.qml:62
 #: ../plugins/battery//PageComponent.qml:285
+#: ../plugins/brightness//PageComponent.qml:62
 msgid "Display brightness"
 msgstr "Luminosità display"
 
@@ -575,8 +575,8 @@ msgstr[1] "Dopo %1 minuti"
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
 #: ../plugins/battery//PageComponent.qml:361
 #: ../plugins/bluetooth//PageComponent.qml:32
-#: ../plugins/bluetooth//PageComponent.qml:191
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:246
+#: ../plugins/bluetooth//PageComponent.qml:165
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:58
 msgid "Bluetooth"
 msgstr "Bluetooth"
 
@@ -609,10 +609,10 @@ msgid "Phone won’t sleep during calls or video playback."
 msgstr ""
 "Non sospendere il telefono durante le chiamate e la riproduzione video."
 
-#: ../plugins/language//PageComponent.qml:133
-#: ../plugins/language//PageComponent.qml:143
 #: ../plugins/language//SpellChecking.qml:29
 #: ../plugins/language//SpellChecking.qml:44
+#: ../plugins/language//PageComponent.qml:132
+#: ../plugins/language//PageComponent.qml:142
 msgid "Spell checking"
 msgstr "Controllo ortografico"
 
@@ -632,54 +632,54 @@ msgstr "Riavvia adesso"
 msgid "Display language"
 msgstr "Lingua"
 
-#: ../plugins/language//DisplayLanguage.qml:116
+#: ../plugins/language//DisplayLanguage.qml:118
 msgid "Confirm"
 msgstr "Conferma"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #: ../plugins/language//PageComponent.qml:34
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:208
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:268
 msgid "Language & Text"
 msgstr "Lingua e testo"
 
-#: ../plugins/language//PageComponent.qml:101
+#: ../plugins/language//PageComponent.qml:100
 msgid "Display language…"
 msgstr "Lingua di sistema…"
 
-#: ../plugins/language//PageComponent.qml:118
 #: ../plugins/language//KeyboardLayouts.qml:26
+#: ../plugins/language//PageComponent.qml:117
 msgid "Keyboard layouts"
 msgstr "Disposizioni tastiera"
 
-#: ../plugins/language//PageComponent.qml:154
+#: ../plugins/language//PageComponent.qml:153
 msgid "Auto correction"
 msgstr "Correzione automatica"
 
-#: ../plugins/language//PageComponent.qml:165
+#: ../plugins/language//PageComponent.qml:164
 msgid "Word suggestions"
 msgstr "Suggerimenti parole"
 
-#: ../plugins/language//PageComponent.qml:179
+#: ../plugins/language//PageComponent.qml:178
 msgid "Auto capitalization"
 msgstr "Maiuscolo automatico"
 
-#: ../plugins/language//PageComponent.qml:190
+#: ../plugins/language//PageComponent.qml:189
 msgid "Turns on Shift to capitalize the first letter of each sentence."
 msgstr ""
 "Attiva «Maiusc» per usare la maiuscola come prima lettera di ogni frase."
 
-#: ../plugins/language//PageComponent.qml:197
+#: ../plugins/language//PageComponent.qml:196
 msgid "Auto punctuation"
 msgstr "Punteggiatura automatica"
 
-#: ../plugins/language//PageComponent.qml:208
+#: ../plugins/language//PageComponent.qml:207
 msgid ""
 "Adds a period, and any missing quotes or brackets, when you tap Space twice."
 msgstr ""
 "Aggiunge un punto, le virgolette o qualunque parentesi mancante, quando "
-"viene toccata due volte lo la barra spaziatrice."
+"viene toccata due volte la barra spaziatrice."
 
-#: ../plugins/language//PageComponent.qml:226
+#: ../plugins/language//PageComponent.qml:225
 msgid "Keyboard vibration"
 msgstr "Vibrazione tastiera"
 
@@ -691,9 +691,9 @@ msgstr "Disposizione attuale:"
 msgid "All layouts available:"
 msgstr "Tutte le disposizioni disponibili:"
 
+#: ../plugins/phone//NoSims.qml:34 ../plugins/phone//MultiSim.qml:46
+#: ../plugins/phone//MultiSim.qml:84 ../plugins/phone//SingleSim.qml:40
 #: ../plugins/phone//CallWaiting.qml:31 ../plugins/phone//CallWaiting.qml:74
-#: ../plugins/phone//NoSims.qml:34 ../plugins/phone//MultiSim.qml:45
-#: ../plugins/phone//MultiSim.qml:81 ../plugins/phone//SingleSim.qml:40
 msgid "Call waiting"
 msgstr "Chiamata in attesa"
 
@@ -706,14 +706,15 @@ msgstr ""
 "di passare da una all'altra"
 
 #. TRANSLATORS: %1 is the name of the (network) carrier
-#: ../plugins/phone//Services.qml:34 ../plugins/phone//SingleSim.qml:51
+#: ../plugins/phone//SingleSim.qml:51 ../plugins/phone//Services.qml:34
 #, qt-format
 msgid "%1 Services"
 msgstr "Servizi %1"
 
-#: ../plugins/phone//NoSims.qml:28 ../plugins/phone//CallForwarding.qml:32
-#: ../plugins/phone//CallForwarding.qml:76 ../plugins/phone//MultiSim.qml:35
-#: ../plugins/phone//MultiSim.qml:71 ../plugins/phone//SingleSim.qml:33
+#: ../plugins/phone//NoSims.qml:28 ../plugins/phone//MultiSim.qml:36
+#: ../plugins/phone//MultiSim.qml:74 ../plugins/phone//SingleSim.qml:33
+#: ../plugins/phone//CallForwarding.qml:32
+#: ../plugins/phone//CallForwarding.qml:76
 msgid "Call forwarding"
 msgstr "Deviazione chiamata"
 
@@ -738,15 +739,15 @@ msgstr "Ultima chiamata %1"
 msgid "Call"
 msgstr "Chiama"
 
-#: ../plugins/phone//NoSims.qml:42 ../plugins/phone//MultiSim.qml:55
-#: ../plugins/phone//MultiSim.qml:91
+#: ../plugins/phone//NoSims.qml:42 ../plugins/phone//MultiSim.qml:56
+#: ../plugins/phone//MultiSim.qml:94
 msgid "Services"
 msgstr "Servizi"
 
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
 #: ../plugins/phone//PageComponent.qml:32
-#: ../plugins/bluetooth//PageComponent.qml:137
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:124
+#: ../plugins/bluetooth//PageComponent.qml:111
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:40
 msgid "Phone"
 msgstr "Telefono"
 
@@ -756,7 +757,7 @@ msgstr "SIM"
 
 #. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
 #: ../plugins/brightness//PageComponent.qml:34
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:22
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:208
 msgid "Brightness"
 msgstr "Luminosità"
 
@@ -772,7 +773,7 @@ msgstr "Illumina e attenua lo schermo adattandolo all'ambiente circostante."
 #: ../plugins/cellular//PageCarrierAndApn.qml:44
 #: ../plugins/cellular//PageCarrierAndApn.qml:52
 #: ../plugins/cellular//PageCarriersAndApns.qml:48
-#: ../plugins/cellular//PageCarriersAndApns.qml:75
+#: ../plugins/cellular//PageCarriersAndApns.qml:74
 #: ../plugins/cellular//PageChooseCarrier.qml:32
 #: ../plugins/cellular//PageChooseCarrier.qml:129
 #: ../plugins/cellular//Components//SingleSim.qml:97
@@ -783,9 +784,9 @@ msgstr "Operatore"
 msgid "Choose carrier:"
 msgstr "Scegli operatore:"
 
-#: ../plugins/cellular//PageChooseCarrier.qml:153
 #: ../plugins/time-date//ChooseTimeZone.qml:47
 #: ../plugins/time-date//PageComponent.qml:72
+#: ../plugins/cellular//PageChooseCarrier.qml:153
 msgid "Automatically"
 msgstr "Automaticamente"
 
@@ -799,43 +800,43 @@ msgstr "Manualmente"
 msgid "Searching for carriers…"
 msgstr "Ricerca operatori…"
 
-#: ../plugins/cellular//PageChooseApn.qml:31
 #: ../plugins/cellular//PageCarrierAndApn.qml:57
 #: ../plugins/cellular//PageCarriersAndApns.qml:62
-#: ../plugins/cellular//PageCarriersAndApns.qml:89
+#: ../plugins/cellular//PageCarriersAndApns.qml:88
+#: ../plugins/cellular//PageChooseApn.qml:31
 msgid "APN"
 msgstr "Punti di accesso"
 
-#: ../plugins/cellular//PageChooseApn.qml:366
+#: ../plugins/cellular//PageChooseApn.qml:355
 msgid "Internet APN:"
 msgstr "Punti di accesso Internet:"
 
-#: ../plugins/cellular//PageChooseApn.qml:434
+#: ../plugins/cellular//PageChooseApn.qml:423
 msgid "Custom Internet APN…"
 msgstr "Punto di accesso Internet personalizzato…"
 
-#: ../plugins/cellular//PageChooseApn.qml:452
+#: ../plugins/cellular//PageChooseApn.qml:434
 msgid "MMS APN:"
 msgstr "Punti di accesso MMS:"
 
-#: ../plugins/cellular//PageChooseApn.qml:467
-#: ../plugins/cellular//CustomApnEditor.qml:143
+#: ../plugins/cellular//CustomApnEditor.qml:153
+#: ../plugins/cellular//PageChooseApn.qml:449
 msgid "Same APN as for Internet"
 msgstr "Stesso punto di accesso di Internet"
 
-#: ../plugins/cellular//PageChooseApn.qml:547
+#: ../plugins/cellular//PageChooseApn.qml:529
 msgid "Custom MMS APN…"
 msgstr "Punto di accesso MMS personalizzato…"
 
-#: ../plugins/cellular//PageChooseApn.qml:578
+#: ../plugins/cellular//PageChooseApn.qml:560
 msgid "Reset APN Settings"
 msgstr "Ripristina punti di accesso"
 
-#: ../plugins/cellular//PageChooseApn.qml:579
+#: ../plugins/cellular//PageChooseApn.qml:561
 msgid "Are you sure that you want to Reset APN Settings?"
 msgstr "Ripristinare i punti di accesso?"
 
-#: ../plugins/cellular//PageChooseApn.qml:585
+#: ../plugins/cellular//PageChooseApn.qml:567
 msgid "Reset"
 msgstr "Ripristina"
 
@@ -844,49 +845,49 @@ msgstr "Ripristina"
 msgid "Carriers"
 msgstr "Operatori"
 
-#: ../plugins/cellular//CustomApnEditor.qml:42
+#: ../plugins/cellular//CustomApnEditor.qml:46
 msgid "Internet"
 msgstr "Internet"
 
-#: ../plugins/cellular//CustomApnEditor.qml:42
+#: ../plugins/cellular//CustomApnEditor.qml:46
 msgid "MMS"
 msgstr "MMS"
 
 #. TRANSLATORS: %1 is either i18n.tr("Internet") or i18n.tr("MMS")
-#: ../plugins/cellular//CustomApnEditor.qml:67
+#: ../plugins/cellular//CustomApnEditor.qml:71
 #, qt-format
 msgid "Custom %1 APN"
 msgstr "Punto di accesso %1 personale"
 
 #. TRANSLATORS: %1 is either i18n.tr("Internet") or i18n.tr("MMS")
-#: ../plugins/cellular//CustomApnEditor.qml:171
+#: ../plugins/cellular//CustomApnEditor.qml:181
 #, qt-format
 msgid "%1 APN"
 msgstr "Punto di accesso %1"
 
-#: ../plugins/cellular//CustomApnEditor.qml:181
+#: ../plugins/cellular//CustomApnEditor.qml:191
 msgid "MMSC"
 msgstr "MMSC"
 
-#: ../plugins/cellular//CustomApnEditor.qml:191
+#: ../plugins/cellular//CustomApnEditor.qml:201
 msgid "Proxy"
 msgstr "Proxy"
 
-#: ../plugins/cellular//CustomApnEditor.qml:213
+#: ../plugins/cellular//CustomApnEditor.qml:223
 msgid "Username"
 msgstr "Nome utente"
 
-#: ../plugins/cellular//CustomApnEditor.qml:264
+#: ../plugins/cellular//CustomApnEditor.qml:274
 msgid "Save"
 msgstr "Salva"
 
-#: ../plugins/cellular//CustomApnEditor.qml:264
+#: ../plugins/cellular//CustomApnEditor.qml:274
 msgid "Activate"
 msgstr "Attiva"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
 #: ../plugins/cellular//PageComponent.qml:33
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:54
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:168
 msgid "Cellular"
 msgstr "Rete mobile"
 
@@ -938,175 +939,179 @@ msgid "Show key"
 msgstr "Mostra chiave"
 
 #: ../plugins/cellular//HotspotSetup.qml:94
-#: ../plugins/security-privacy//SimPin.qml:159
-#: ../plugins/security-privacy//LockSecurity.qml:365
+#: ../plugins/security-privacy//LockSecurity.qml:351
+#: ../plugins/security-privacy//SimPin.qml:158
 msgid "Change"
 msgstr "Modifica"
 
-#: ../plugins/security-privacy//PhoneLocking.qml:49
-#: ../plugins/security-privacy//LockSecurity.qml:32
 #: ../plugins/about//DevMode.qml:116
+#: ../plugins/security-privacy//LockSecurity.qml:32
+#: ../plugins/security-privacy//PhoneLocking.qml:49
+#: ../wizard/qml/Pages//30-passwd-type.qml:37
 msgid "Lock security"
 msgstr "Sicurezza di blocco"
 
-#: ../plugins/security-privacy//LockSecurity.qml:126
-#: ../plugins/security-privacy//LockSecurity.qml:463
+#: ../plugins/security-privacy//LockSecurity.qml:115
+#: ../plugins/security-privacy//LockSecurity.qml:433
 msgid "Change passcode…"
 msgstr "Cambia codice…"
 
-#: ../plugins/security-privacy//LockSecurity.qml:128
-#: ../plugins/security-privacy//LockSecurity.qml:464
+#: ../plugins/security-privacy//LockSecurity.qml:117
+#: ../plugins/security-privacy//LockSecurity.qml:434
 msgid "Change passphrase…"
 msgstr "Cambia passphrase…"
 
-#: ../plugins/security-privacy//LockSecurity.qml:135
+#: ../plugins/security-privacy//LockSecurity.qml:124
 msgid "Switch to swipe"
 msgstr "Usa scorrimento"
 
-#: ../plugins/security-privacy//LockSecurity.qml:137
+#: ../plugins/security-privacy//LockSecurity.qml:126
 msgid "Switch to passcode"
 msgstr "Usa codice"
 
-#: ../plugins/security-privacy//LockSecurity.qml:139
+#: ../plugins/security-privacy//LockSecurity.qml:128
 msgid "Switch to passphrase"
 msgstr "Usa passphrase"
 
-#: ../plugins/security-privacy//LockSecurity.qml:148
+#: ../plugins/security-privacy//LockSecurity.qml:137
 msgid "Existing passcode"
 msgstr "Codice esistente"
 
-#: ../plugins/security-privacy//LockSecurity.qml:150
+#: ../plugins/security-privacy//LockSecurity.qml:139
 msgid "Existing passphrase"
 msgstr "Passphrase esistente"
 
-#: ../plugins/security-privacy//LockSecurity.qml:216
+#: ../plugins/security-privacy//LockSecurity.qml:204
 msgid "Choose passcode"
 msgstr "Scegli codice"
 
-#: ../plugins/security-privacy//LockSecurity.qml:218
+#: ../plugins/security-privacy//LockSecurity.qml:206
 msgid "Choose passphrase"
 msgstr "Scegli passphrase"
 
-#: ../plugins/security-privacy//LockSecurity.qml:271
+#: ../plugins/security-privacy//LockSecurity.qml:258
+#: ../wizard/qml/Pages//passwd-confirm.qml:49
 msgid "Confirm passcode"
 msgstr "Conferma codice"
 
-#: ../plugins/security-privacy//LockSecurity.qml:273
+#: ../plugins/security-privacy//LockSecurity.qml:260
+#: ../wizard/qml/Pages//passwd-confirm.qml:48
 msgid "Confirm passphrase"
 msgstr "Conferma passphrase"
 
-#: ../plugins/security-privacy//LockSecurity.qml:328
+#: ../plugins/security-privacy//LockSecurity.qml:314
 msgid "Those passcodes don't match. Try again."
 msgstr "I codici inseriti non corrispondono. Provare di nuovo."
 
-#: ../plugins/security-privacy//LockSecurity.qml:331
+#: ../plugins/security-privacy//LockSecurity.qml:317
 msgid "Those passphrases don't match. Try again."
 msgstr "Le passphrase non corrispondono. Provare di nuovo."
 
-#: ../plugins/security-privacy//LockSecurity.qml:362
+#: ../plugins/security-privacy//LockSecurity.qml:348
 msgid "Unset"
 msgstr "Azzera"
 
-#: ../plugins/security-privacy//LockSecurity.qml:423
+#: ../plugins/security-privacy//LockSecurity.qml:393
 msgid "Unlock the phone using:"
 msgstr "Sblocca il telefono usando:"
 
-#: ../plugins/security-privacy//LockSecurity.qml:427
+#: ../plugins/security-privacy//LockSecurity.qml:397
 msgid "Swipe (no security)"
 msgstr "Scorrimento (nessuna sicurezza)"
 
-#: ../plugins/security-privacy//LockSecurity.qml:428
+#: ../plugins/security-privacy//LockSecurity.qml:398
 msgid "4-digit passcode"
 msgstr "Codice a 4 cifre"
 
+#: ../plugins/security-privacy//LockSecurity.qml:399
 #: ../plugins/security-privacy//PhoneLocking.qml:47
-#: ../plugins/security-privacy//LockSecurity.qml:429
+#: ../wizard/qml/Pages//30-passwd-type.qml:98
 msgid "Passphrase"
 msgstr "Passphrase"
 
-#: ../plugins/security-privacy//LockSecurity.qml:430
+#: ../plugins/security-privacy//LockSecurity.qml:400
 msgid "Swipe (no security)… "
 msgstr "Scorrimento (nessuna sicurezza)… "
 
-#: ../plugins/security-privacy//LockSecurity.qml:431
+#: ../plugins/security-privacy//LockSecurity.qml:401
 msgid "4-digit passcode…"
 msgstr "Codice a 4 cifre…"
 
-#: ../plugins/security-privacy//LockSecurity.qml:432
+#: ../plugins/security-privacy//LockSecurity.qml:402
 msgid "Passphrase…"
 msgstr "Passphrase…"
 
-#: ../plugins/security-privacy//SimPin.qml:36
-#: ../plugins/security-privacy//SimPin.qml:336
 #: ../plugins/security-privacy//PageComponent.qml:147
+#: ../plugins/security-privacy//SimPin.qml:35
+#: ../plugins/security-privacy//SimPin.qml:335
 msgid "SIM PIN"
 msgstr "PIN della SIM"
 
-#: ../plugins/security-privacy//SimPin.qml:46
+#: ../plugins/security-privacy//SimPin.qml:45
 msgid "Change SIM PIN"
 msgstr "Cambia PIN SIM"
 
-#: ../plugins/security-privacy//SimPin.qml:49
+#: ../plugins/security-privacy//SimPin.qml:48
 #, qt-format
 msgid "Incorrect PIN. %1 attempt remaining."
 msgid_plural "Incorrect PIN. %1 attempts remaining."
 msgstr[0] "PIN errato. %1 tentativo rimasto."
 msgstr[1] "PIN errato. %1 tentativi rimasti."
 
-#: ../plugins/security-privacy//SimPin.qml:83
+#: ../plugins/security-privacy//SimPin.qml:82
 msgid "Current PIN:"
 msgstr "PIN attuale:"
 
-#: ../plugins/security-privacy//SimPin.qml:95
+#: ../plugins/security-privacy//SimPin.qml:94
 #, qt-format
 msgid "%1 attempt allowed."
 msgid_plural "%1 attempts allowed."
 msgstr[0] "%1 tentativo consentito."
 msgstr[1] "%1 tentativi consentiti."
 
-#: ../plugins/security-privacy//SimPin.qml:109
+#: ../plugins/security-privacy//SimPin.qml:108
 msgid "Choose new PIN:"
 msgstr "Scegliere il nuovo PIN:"
 
-#: ../plugins/security-privacy//SimPin.qml:120
+#: ../plugins/security-privacy//SimPin.qml:119
 msgid "Confirm new PIN:"
 msgstr "Confermare il nuovo PIN:"
 
-#: ../plugins/security-privacy//SimPin.qml:139
+#: ../plugins/security-privacy//SimPin.qml:138
 msgid "PINs don't match. Try again."
 msgstr "I PIN non corrispondono. Riprovare."
 
-#: ../plugins/security-privacy//SimPin.qml:185
+#: ../plugins/security-privacy//SimPin.qml:184
 msgid "Enter SIM PIN"
 msgstr "Inserire il PIN della SIM"
 
-#: ../plugins/security-privacy//SimPin.qml:186
+#: ../plugins/security-privacy//SimPin.qml:185
 msgid "Enter Previous SIM PIN"
 msgstr "Inserire il precedente PIN della SIM"
 
-#: ../plugins/security-privacy//SimPin.qml:189
+#: ../plugins/security-privacy//SimPin.qml:188
 #, qt-format
 msgid "Incorrect PIN. %1 attempts remaining."
 msgstr "PIN errato. %1 tentativo rimasto."
 
-#: ../plugins/security-privacy//SimPin.qml:248
+#: ../plugins/security-privacy//SimPin.qml:247
 #, qt-format
 msgid "%1 attempts allowed."
 msgstr "%1 tentativi rimasti."
 
-#: ../plugins/security-privacy//SimPin.qml:284
+#: ../plugins/security-privacy//SimPin.qml:283
 msgid "Unlock"
 msgstr "Sblocca"
 
-#: ../plugins/security-privacy//SimPin.qml:284
+#: ../plugins/security-privacy//SimPin.qml:283
 msgid "Lock"
 msgstr "Blocca"
 
-#: ../plugins/security-privacy//SimPin.qml:354
+#: ../plugins/security-privacy//SimPin.qml:353
 msgid "Change PIN…"
 msgstr "Modifica PIN…"
 
-#: ../plugins/security-privacy//SimPin.qml:383
+#: ../plugins/security-privacy//SimPin.qml:382
 msgid ""
 "When a SIM PIN is set, it must be entered to access cellular services after "
 "restarting the phone or swapping the SIM."
@@ -1114,7 +1119,7 @@ msgstr ""
 "Quando è impostato un PIN, è necessario inserirlo per accedere ai servizi "
 "del cellulare dopo il riavvio del telefono o il cambio della SIM."
 
-#: ../plugins/security-privacy//SimPin.qml:387
+#: ../plugins/security-privacy//SimPin.qml:386
 msgid "Entering an incorrect PIN repeatedly may lock the SIM permanently."
 msgstr ""
 "L'inserimento ripetuto di un PIN non corretto può bloccare in modo "
@@ -1130,6 +1135,7 @@ msgid "None"
 msgstr "Nessuno"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:46
+#: ../wizard/qml/Pages//30-passwd-type.qml:95
 msgid "Passcode"
 msgstr "Codice"
 
@@ -1170,7 +1176,7 @@ msgstr "Altre applicazioni e funzioni richiederanno lo sblocco."
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
 #: ../plugins/security-privacy//PageComponent.qml:37
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:184
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:220
 msgid "Security & Privacy"
 msgstr "Sicurezza e privacy"
 
@@ -1197,7 +1203,7 @@ msgstr "On"
 
 #: ../plugins/security-privacy//PageComponent.qml:154
 #: ../plugins/security-privacy//PageComponent.qml:228
-#: ../plugins/cellular//Components//DataMultiSim.qml:31
+#: ../plugins/cellular//Components//DataMultiSim.qml:30
 msgid "Off"
 msgstr "Off"
 
@@ -1234,8 +1240,8 @@ msgstr "Ricerche dalla Dash"
 msgid "Location access"
 msgstr "Accesso alla posizione"
 
-#: ../plugins/security-privacy//PageComponent.qml:237
 #: ../plugins/security-privacy//AppAccess.qml:28
+#: ../plugins/security-privacy//PageComponent.qml:237
 msgid "Other app access"
 msgstr "Accesso altre app"
 
@@ -1257,6 +1263,7 @@ msgid "Not sent"
 msgstr "Non inviate"
 
 #: ../plugins/security-privacy//Location.qml:32
+#: ../wizard/qml/Pages//50-location.qml:25
 msgid "Location"
 msgstr "Posizione"
 
@@ -1339,8 +1346,8 @@ msgid "Apps that you have granted and have requested access to:"
 msgstr ""
 "App che hanno richiesto e alle quali è stato consentito di accedere a:"
 
+#: ../plugins/bluetooth//PageComponent.qml:123
 #: ../plugins/security-privacy//AppAccess.qml:41
-#: ../plugins/bluetooth//PageComponent.qml:149
 msgid "Camera"
 msgstr "Fotocamera"
 
@@ -1366,7 +1373,6 @@ msgid "0"
 msgstr "0"
 
 #: ../plugins/bluetooth//ProvidePasskeyDialog.qml:28
-#: ../plugins/bluetooth//DisplayPasskeyDialog.qml:26
 #: ../plugins/bluetooth//ProvidePinCodeDialog.qml:28
 #: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:28
 msgid "Bluetooth Pairing Request"
@@ -1393,132 +1399,132 @@ msgstr "Confermare che il PIN mostrato su  «%1» corrisponda a questo"
 msgid "Confirm PIN"
 msgstr "Conferma PIN"
 
-#: ../plugins/bluetooth//PageComponent.qml:126
+#: ../plugins/bluetooth//PageComponent.qml:100
 msgid "Connected"
 msgstr "Connessi"
 
-#: ../plugins/bluetooth//PageComponent.qml:127
+#: ../plugins/bluetooth//PageComponent.qml:101
 msgid "Connecting…"
 msgstr "Connessione…"
 
-#: ../plugins/bluetooth//PageComponent.qml:128
+#: ../plugins/bluetooth//PageComponent.qml:102
 msgid "Disconnecting…"
 msgstr "Disconnessione…"
 
-#: ../plugins/bluetooth//PageComponent.qml:129
+#: ../plugins/bluetooth//PageComponent.qml:103
 msgid "Disconnected"
 msgstr "Disconnessi"
 
-#: ../plugins/bluetooth//PageComponent.qml:136
+#: ../plugins/bluetooth//PageComponent.qml:110
 msgid "Computer"
 msgstr "Computer"
 
-#: ../plugins/bluetooth//PageComponent.qml:138
+#: ../plugins/bluetooth//PageComponent.qml:112
 msgid "Modem"
 msgstr "Modem"
 
-#: ../plugins/bluetooth//PageComponent.qml:139 ../src/qml/MainWindow.qml:147
+#: ../plugins/bluetooth//PageComponent.qml:113 ../src/qml/MainWindow.qml:147
 msgid "Network"
 msgstr "Rete"
 
-#: ../plugins/bluetooth//PageComponent.qml:140
+#: ../plugins/bluetooth//PageComponent.qml:114
 msgid "Headset"
 msgstr "Auricolare"
 
-#: ../plugins/bluetooth//PageComponent.qml:141
+#: ../plugins/bluetooth//PageComponent.qml:115
 msgid "Headphones"
 msgstr "Cuffie"
 
-#: ../plugins/bluetooth//PageComponent.qml:142
+#: ../plugins/bluetooth//PageComponent.qml:116
 msgid "Video"
 msgstr "Dispositivo video"
 
-#: ../plugins/bluetooth//PageComponent.qml:143
+#: ../plugins/bluetooth//PageComponent.qml:117
 msgid "Other Audio"
 msgstr "Altri dispositivi audio"
 
-#: ../plugins/bluetooth//PageComponent.qml:144
+#: ../plugins/bluetooth//PageComponent.qml:118
 msgid "Joypad"
 msgstr "Joypad"
 
-#: ../plugins/bluetooth//PageComponent.qml:145
+#: ../plugins/bluetooth//PageComponent.qml:119
 msgid "Keyboard"
 msgstr "Tastiera"
 
-#: ../plugins/bluetooth//PageComponent.qml:146
+#: ../plugins/bluetooth//PageComponent.qml:120
 msgid "Tablet"
 msgstr "Tablet"
 
-#: ../plugins/bluetooth//PageComponent.qml:147
+#: ../plugins/bluetooth//PageComponent.qml:121
 msgid "Mouse"
 msgstr "Mouse"
 
-#: ../plugins/bluetooth//PageComponent.qml:148
+#: ../plugins/bluetooth//PageComponent.qml:122
 msgid "Printer"
 msgstr "Stampante"
 
-#: ../plugins/bluetooth//PageComponent.qml:150
+#: ../plugins/bluetooth//PageComponent.qml:124
 msgid "Other"
 msgstr "Altro"
 
-#: ../plugins/bluetooth//PageComponent.qml:156
+#: ../plugins/bluetooth//PageComponent.qml:130
 msgid "Excellent"
 msgstr "Eccellente"
 
-#: ../plugins/bluetooth//PageComponent.qml:157
+#: ../plugins/bluetooth//PageComponent.qml:131
 msgid "Good"
 msgstr "Buona"
 
-#: ../plugins/bluetooth//PageComponent.qml:158
+#: ../plugins/bluetooth//PageComponent.qml:132
 msgid "Fair"
 msgstr "Discreta"
 
-#: ../plugins/bluetooth//PageComponent.qml:159
+#: ../plugins/bluetooth//PageComponent.qml:133
 msgid "Poor"
 msgstr "Scarsa"
 
-#: ../plugins/bluetooth//PageComponent.qml:220
+#: ../plugins/bluetooth//PageComponent.qml:194
 msgid "Discoverable"
 msgstr "Visibile"
 
-#: ../plugins/bluetooth//PageComponent.qml:220
+#: ../plugins/bluetooth//PageComponent.qml:194
 msgid "Not discoverable"
 msgstr "Non visibile"
 
-#: ../plugins/bluetooth//PageComponent.qml:251
+#: ../plugins/bluetooth//PageComponent.qml:225
 msgid "Connected devices:"
 msgstr "Dispositivi connessi:"
 
-#: ../plugins/bluetooth//PageComponent.qml:290
+#: ../plugins/bluetooth//PageComponent.qml:263
 msgid "Connect another device:"
 msgstr "Connetti un altro dispositivo:"
 
-#: ../plugins/bluetooth//PageComponent.qml:290
+#: ../plugins/bluetooth//PageComponent.qml:263
 msgid "Connect a device:"
 msgstr "Connettere un dispositivo:"
 
-#: ../plugins/bluetooth//PageComponent.qml:324
+#: ../plugins/bluetooth//PageComponent.qml:297
 msgid "None detected"
 msgstr "Nessuno rilevato"
 
-#: ../plugins/bluetooth//PageComponent.qml:332
-#: ../plugins/bluetooth//PageComponent.qml:443
+#: ../plugins/bluetooth//PageComponent.qml:305
+#: ../plugins/bluetooth//PageComponent.qml:416
 msgid "Connect automatically when detected:"
 msgstr "Connettere automaticamente quando rilevato:"
 
-#: ../plugins/bluetooth//PageComponent.qml:410
+#: ../plugins/bluetooth//PageComponent.qml:383
 msgid "Type"
 msgstr "Tipo"
 
-#: ../plugins/bluetooth//PageComponent.qml:434
+#: ../plugins/bluetooth//PageComponent.qml:407
 msgid "Status"
 msgstr "Stato"
 
-#: ../plugins/bluetooth//PageComponent.qml:438
+#: ../plugins/bluetooth//PageComponent.qml:411
 msgid "Signal Strength"
 msgstr "Potenza segnale"
 
-#: ../plugins/bluetooth//PageComponent.qml:476
+#: ../plugins/bluetooth//PageComponent.qml:448
 msgid "Forget this device"
 msgstr "Dimentica questo dispositivo"
 
@@ -1530,7 +1536,7 @@ msgstr "Numero di telefono:"
 msgid "Phone number"
 msgstr "Numero di telefono"
 
-#: ../plugins/about//PageComponent.qml:166 ../plugins/about//Storage.qml:33
+#: ../plugins/about//Storage.qml:33 ../plugins/about//PageComponent.qml:170
 msgid "Storage"
 msgstr "Memoria"
 
@@ -1558,19 +1564,19 @@ msgstr "Altri file"
 msgid "Used by apps"
 msgstr "Usata dalle app"
 
-#: ../plugins/about//Storage.qml:136
+#: ../plugins/about//Storage.qml:140
 msgid "Total storage"
 msgstr "Memoria totale"
 
-#: ../plugins/about//Storage.qml:148
+#: ../plugins/about//Storage.qml:152
 msgid "Free space"
 msgstr "Spazio libero"
 
-#: ../plugins/about//Storage.qml:168
+#: ../plugins/about//Storage.qml:172
 msgid "By name"
 msgstr "Per nome"
 
-#: ../plugins/about//Storage.qml:168
+#: ../plugins/about//Storage.qml:172
 msgid "By size"
 msgstr "Per dimensione"
 
@@ -1594,57 +1600,57 @@ msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: ../plugins/about//PageComponent.qml:34
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:290
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:92
 msgid "About this phone"
 msgstr "Info sul telefono"
 
-#: ../plugins/about//PageComponent.qml:116
+#: ../plugins/about//PageComponent.qml:120
 msgid "Serial"
 msgstr "Numero di serie"
 
-#: ../plugins/about//PageComponent.qml:147
+#: ../plugins/about//PageComponent.qml:151
 msgid "Wi-Fi address"
 msgstr "Indirizzo Wi-Fi"
 
-#: ../plugins/about//PageComponent.qml:155
+#: ../plugins/about//PageComponent.qml:159
 msgid "Bluetooth address"
 msgstr "Indirizzo Bluetooth"
 
 #. TRANSLATORS: that's the free disk space, indicated in the most appropriate storage unit
-#: ../plugins/about//PageComponent.qml:168
+#: ../plugins/about//PageComponent.qml:172
 #, qt-format
 msgid "%1 free"
 msgstr "%1 liberi"
 
-#: ../plugins/about//PageComponent.qml:175
+#: ../plugins/about//PageComponent.qml:179
 msgid "Software:"
 msgstr "Software:"
 
-#: ../plugins/about//PageComponent.qml:180
+#: ../plugins/about//PageComponent.qml:184
 msgid "OS"
 msgstr "Sistema operativo"
 
-#: ../plugins/about//PageComponent.qml:189
+#: ../plugins/about//PageComponent.qml:193
 msgid "Last updated"
 msgstr "Ultimo aggiornamento"
 
-#: ../plugins/about//PageComponent.qml:197
+#: ../plugins/about//PageComponent.qml:201
 msgid "Check for updates"
 msgstr "Controlla aggiornamenti"
 
-#: ../plugins/about//PageComponent.qml:207
+#: ../plugins/about//PageComponent.qml:211
 msgid "Legal:"
 msgstr "Note legali:"
 
-#: ../plugins/about//PageComponent.qml:212 ../plugins/about//Software.qml:11
+#: ../plugins/about//Software.qml:11 ../plugins/about//PageComponent.qml:216
 msgid "Software licenses"
 msgstr "Licenze software"
 
-#: ../plugins/about//PageComponent.qml:220
+#: ../plugins/about//PageComponent.qml:224
 msgid "Regulatory info"
 msgstr "Informazioni normative"
 
-#: ../plugins/about//PageComponent.qml:228
+#: ../plugins/about//PageComponent.qml:232
 msgid "Developer mode"
 msgstr "Modalità sviluppatore"
 
@@ -1734,7 +1740,7 @@ msgstr "Anno"
 
 #. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
 #: ../plugins/time-date//PageComponent.qml:29
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:114
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:82
 msgid "Time & Date"
 msgstr "Ora e data"
 
@@ -1748,154 +1754,154 @@ msgstr "Imposta ora e data:"
 
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
 #: ../plugins/system-update//PageComponent.qml:37
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:4
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:128
 msgid "Updates"
 msgstr "Aggiornamenti"
 
-#: ../plugins/system-update//PageComponent.qml:95
+#: ../plugins/system-update//PageComponent.qml:90
 msgid "Update System"
 msgstr "Aggiorna sistema"
 
-#: ../plugins/system-update//PageComponent.qml:96
+#: ../plugins/system-update//PageComponent.qml:91
 msgid "The phone needs to restart to install the system update."
 msgstr ""
 "Il telefono deve essere riavviato per installare l'aggiornamento di sistema."
 
-#: ../plugins/system-update//PageComponent.qml:96
+#: ../plugins/system-update//PageComponent.qml:91
 msgid "Connect the phone to power before installing the system update."
 msgstr ""
 "Collegare il telefono all'alimentazione prima di installare l'aggiornamento "
 "di sistema."
 
-#: ../plugins/system-update//PageComponent.qml:99
+#: ../plugins/system-update//PageComponent.qml:94
 msgid "Install & Restart"
 msgstr "Installa e riavvia"
 
-#: ../plugins/system-update//PageComponent.qml:109
+#: ../plugins/system-update//PageComponent.qml:104
 msgid "Not Now"
 msgstr "Non ora"
 
-#: ../plugins/system-update//PageComponent.qml:115
+#: ../plugins/system-update//PageComponent.qml:110
 msgid "Install"
 msgstr "Installa"
 
-#: ../plugins/system-update//PageComponent.qml:130
+#: ../plugins/system-update//PageComponent.qml:125
 msgid "Installation failed"
 msgstr "Installazione non riuscita"
 
-#: ../plugins/system-update//PageComponent.qml:134
-#: ../plugins/cellular//Components//SimEditor.qml:215
+#: ../plugins/system-update//PageComponent.qml:129
+#: ../plugins/cellular//Components//SimEditor.qml:217
 msgid "OK"
 msgstr "OK"
 
-#: ../plugins/system-update//PageComponent.qml:154
+#: ../plugins/system-update//PageComponent.qml:149
 msgid "Software is up to date"
 msgstr "Il software è aggiornato"
 
-#: ../plugins/system-update//PageComponent.qml:218
-#: ../plugins/system-update//PageComponent.qml:224
+#: ../plugins/system-update//PageComponent.qml:208
+#: ../plugins/system-update//PageComponent.qml:214
 msgid "Sorry, the system update failed."
 msgstr "Aggiornamento di sistema non riuscito."
 
-#: ../plugins/system-update//PageComponent.qml:237
+#: ../plugins/system-update//PageComponent.qml:227
 msgid "Restarting…"
 msgstr "Riavvio…"
 
-#: ../plugins/system-update//PageComponent.qml:281
+#: ../plugins/system-update//PageComponent.qml:271
 msgid "Checking for updates…"
 msgstr "Verifica aggiornamenti…"
 
-#: ../plugins/system-update//PageComponent.qml:281
+#: ../plugins/system-update//PageComponent.qml:271
 msgid "Connect to the Internet to check for updates"
 msgstr "Connettersi a Internet per cercare aggiornamenti"
 
-#: ../plugins/system-update//PageComponent.qml:296
-#: ../plugins/system-update//PageComponent.qml:455
+#: ../plugins/system-update//PageComponent.qml:286
+#: ../plugins/system-update//PageComponent.qml:445
 msgid "Retry"
 msgstr "Riprova"
 
-#: ../plugins/system-update//PageComponent.qml:321
+#: ../plugins/system-update//PageComponent.qml:311
 #, qt-format
 msgid "Install %1 update…"
 msgid_plural "Install %1 updates…"
 msgstr[0] "Installa %1 aggiornamento…"
 msgstr[1] "Installa %1 aggiornamenti…"
 
-#: ../plugins/system-update//PageComponent.qml:322
+#: ../plugins/system-update//PageComponent.qml:312
 #, qt-format
 msgid "Install %1 update"
 msgid_plural "Install %1 updates"
 msgstr[0] "Installa %1 aggiornamento"
 msgstr[1] "Installa %1 aggiornamenti"
 
-#: ../plugins/system-update//PageComponent.qml:323
+#: ../plugins/system-update//PageComponent.qml:313
 msgid "Pause All"
 msgstr "Sospendi tutto"
 
-#: ../plugins/system-update//PageComponent.qml:458
+#: ../plugins/system-update//PageComponent.qml:448
 msgid "Install…"
 msgstr "Installazione…"
 
-#: ../plugins/system-update//PageComponent.qml:460
+#: ../plugins/system-update//PageComponent.qml:450
 msgid "Download"
 msgstr "Scarica"
 
-#: ../plugins/system-update//PageComponent.qml:464
+#: ../plugins/system-update//PageComponent.qml:454
 msgid "Pause"
 msgstr "Sospendi"
 
-#: ../plugins/system-update//PageComponent.qml:466
+#: ../plugins/system-update//PageComponent.qml:456
 msgid "Resume"
 msgstr "Riprendi"
 
-#: ../plugins/system-update//PageComponent.qml:468
+#: ../plugins/system-update//PageComponent.qml:458
 msgid "Update"
 msgstr "Aggiorna"
 
-#: ../plugins/system-update//PageComponent.qml:508
+#: ../plugins/system-update//PageComponent.qml:498
 msgid "Installing"
 msgstr "Installazione"
 
-#: ../plugins/system-update//PageComponent.qml:510
+#: ../plugins/system-update//PageComponent.qml:500
 msgid "Installed"
 msgstr "Installato"
 
-#: ../plugins/system-update//PageComponent.qml:511
+#: ../plugins/system-update//PageComponent.qml:501
 msgid "Downloading"
 msgstr "Scaricamento"
 
-#: ../plugins/system-update//PageComponent.qml:523
+#: ../plugins/system-update//PageComponent.qml:513
 #, qt-format
 msgid "%1 of %2"
 msgstr "%1 su %2"
 
-#: ../plugins/system-update//PageComponent.qml:623
+#: ../plugins/system-update//PageComponent.qml:612
 msgid "Version: "
 msgstr "Versione: "
 
-#: ../plugins/system-update//PageComponent.qml:655
+#: ../plugins/system-update//PageComponent.qml:644
 msgid "Sign in to Ubuntu One to receive updates for apps."
 msgstr ""
 "Accedere a Ubuntu One per ricevere gli aggiornamenti delle applicazioni."
 
-#: ../plugins/system-update//PageComponent.qml:664
+#: ../plugins/system-update//PageComponent.qml:653
 msgid "Sign In…"
 msgstr "Accedi…"
 
-#: ../plugins/system-update//PageComponent.qml:708
+#: ../plugins/system-update//PageComponent.qml:697
 msgid "Installing update…"
 msgstr "Installazione aggiornamento…"
 
-#: ../plugins/system-update//PageComponent.qml:747
 #: ../plugins/system-update//Configuration.qml:29
+#: ../plugins/system-update//PageComponent.qml:736
 msgid "Auto download"
 msgstr "Scaricamento automatico"
 
-#: ../plugins/system-update//PageComponent.qml:752
+#: ../plugins/system-update//PageComponent.qml:741
 msgid "On wi-fi"
 msgstr "Su rete Wi-Fi"
 
-#: ../plugins/system-update//PageComponent.qml:754
+#: ../plugins/system-update//PageComponent.qml:743
 msgid "Always"
 msgstr "Sempre"
 
@@ -1950,8 +1956,9 @@ msgstr "Aggiungi immagine…"
 msgid "Remove images…"
 msgstr "Rimuovi immagini…"
 
-#: ../plugins/cellular//Components//DataMultiSim.qml:39
 #: ../plugins/cellular//Components//SingleSim.qml:37
+#: ../plugins/cellular//Components//NoSim.qml:29
+#: ../plugins/cellular//Components//DataMultiSim.qml:41
 msgid "Cellular data:"
 msgstr "Dati mobili:"
 
@@ -1967,24 +1974,25 @@ msgstr "2G/3G (più veloce)"
 msgid "2G/3G/4G (faster)"
 msgstr "2G/3G/4G (più veloce)"
 
-#: ../plugins/cellular//Components//DataMultiSim.qml:76
 #: ../plugins/cellular//Components//SingleSim.qml:50
+#: ../plugins/cellular//Components//NoSim.qml:37
+#: ../plugins/cellular//Components//DataMultiSim.qml:74
 msgid "Data roaming"
 msgstr "Roaming dati"
 
-#: ../plugins/cellular//Components//SimEditor.qml:88
+#: ../plugins/cellular//Components//SimEditor.qml:89
 msgid "Edit SIM Name"
 msgstr "Modifica nome SIM"
 
-#: ../plugins/cellular//Components//DefaultSim.qml:32
+#: ../plugins/cellular//Components//DefaultSim.qml:31
 msgid "Ask me each time"
 msgstr "Chiedi ogni volta"
 
-#: ../plugins/cellular//Components//DefaultSim.qml:35
+#: ../plugins/cellular//Components//DefaultSim.qml:36
 msgid "For outgoing calls, use:"
 msgstr "Per le chiamate in uscita, usa:"
 
-#: ../plugins/cellular//Components//DefaultSim.qml:52
+#: ../plugins/cellular//Components//DefaultSim.qml:50
 msgid ""
 "You can change the SIM for individual calls, or for contacts in the address "
 "book."
@@ -2060,13 +2068,12 @@ msgstr "4 numeri"
 msgid "Numbers and letters"
 msgstr "Numeri e lettere"
 
-#: ../wizard/qml/Pages//10-welcome.qml:85
-#: ../wizard/qml/Pages//60-reporting.qml:48
-#: ../wizard/qml/Pages//40-wifi.qml:212
-#: ../wizard/qml/Pages//30-passwd-type.qml:112
 #: ../wizard/qml/Pages//passwd-set.qml:83
+#: ../wizard/qml/Pages//30-passwd-type.qml:112
 #: ../wizard/qml/Pages//passwd-confirm.qml:75
 #: ../wizard/qml/Pages//50-location.qml:92
+#: ../wizard/qml/Pages//60-reporting.qml:48
+#: ../wizard/qml/Pages//10-welcome.qml:85 ../wizard/qml/Pages//40-wifi.qml:212
 msgid "Continue"
 msgstr "Continua"
 
@@ -2082,7 +2089,7 @@ msgstr "Reti disponibili…"
 msgid "No available networks."
 msgstr "Nessuna rete disponibile."
 
-#: ../wizard/qml/Pages//40-wifi.qml:212 ../wizard/qml/Pages//20-sim.qml:71
+#: ../wizard/qml/Pages//20-sim.qml:71 ../wizard/qml/Pages//40-wifi.qml:212
 msgid "Skip"
 msgstr "Salta"
 
@@ -2221,549 +2228,549 @@ msgid "%1  〉"
 msgstr "%1  〉"
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:84
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:4
 msgid "appearance"
 msgstr "aspetto"
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:86
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:6
 msgid "background"
 msgstr "sfondo"
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:88
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:8
 msgid "wallpaper"
 msgstr "wallpaper"
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:90
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:10
 msgid "art"
 msgstr "arte"
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:92
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:12
 msgid "photo"
 msgstr "foto"
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:94
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:14
 msgid "picture"
 msgstr "disegno"
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:96
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:16
 msgid "image"
 msgstr "immagine"
 
 #. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:178
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:18
 msgid "Accessibility"
 msgstr "Accessibilità"
 
 #. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:180
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:20
 msgid "accessibility"
 msgstr "accessibilità"
 
 #. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:182
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:22
 msgid "a11y"
 msgstr "a11y"
 
-#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:52
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:58
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:272
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:150
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:172
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:316
 msgid "network"
 msgstr "rete"
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:262
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:274
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:74
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:152
 msgid "wireless"
 msgstr "senza fili"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:276
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:154
 msgid "wifi"
 msgstr "wifi"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:278
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:156
 msgid "wi-fi"
 msgstr "wi-fi"
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:264
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:280
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:76
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:158
 msgid "connect"
 msgstr "connettere"
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:266
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:282
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:78
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:160
 msgid "disconnect"
 msgstr "disconnettere"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:284
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:162
 msgid "hidden"
 msgstr "nascosto"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:286
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:164
 msgid "ip"
 msgstr "ip"
 
-#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:288
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:306
+#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:108
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:166
 msgid "address"
 msgstr "indirizzo"
 
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:8
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:156
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:314
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:116
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:132
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:246
 msgid "software"
 msgstr "sotfware"
 
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:158
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:248
 msgid "notifications"
 msgstr "notifiche"
 
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:12
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:152
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:160
+#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:136
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:250
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:304
 msgid "apps"
 msgstr "app"
 
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:162
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:252
 msgid "authorize"
 msgstr "autorizzare"
 
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:164
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:254
 msgid "alerts"
 msgstr "avvisi"
 
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:166
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:256
 msgid "permissions"
 msgstr "permessi"
 
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:168
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:258
 msgid "badges"
 msgstr "badge"
 
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:170
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:260
 msgid "facebook"
 msgstr "facebook"
 
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:172
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:262
 msgid "twitter"
 msgstr "twitter"
 
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:174
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:264
 msgid "flickr"
 msgstr "flickr"
 
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:176
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:266
 msgid "gmail"
 msgstr "gmail"
 
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:328
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:320
 msgid "sound"
 msgstr "audio"
 
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:330
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:322
 msgid "silent"
 msgstr "silenzioso"
 
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:332
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:324
 msgid "ringtone"
 msgstr "suoneria"
 
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:334
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:326
 msgid "vibrate"
 msgstr "vibrazione"
 
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:136
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:336
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:52
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:328
 msgid "dialpad"
 msgstr "tastierino"
 
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:338
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:330
 msgid "message"
 msgstr "messaggio"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:212
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:340
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:272
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:332
 msgid "keyboard"
 msgstr "tastiera"
 
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:342
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:334
 msgid "volume"
 msgstr "volume"
 
 #. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:236
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:198
 msgid "reset"
 msgstr "ripristino"
 
 #. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:238
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:200
 msgid "erase"
 msgstr "elimina"
 
 #. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:240
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:202
 msgid "factory"
 msgstr "fabbrica"
 
 #. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:242
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:204
 msgid "clear"
 msgstr "pulisci"
 
 #. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:244
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:206
 msgid "restore"
 msgstr "ripristina"
 
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:100
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:26
 msgid "battery"
 msgstr "batteria"
 
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:102
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:28
 msgid "power"
 msgstr "alimentazione"
 
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:104
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:30
 msgid "charge"
 msgstr "carica"
 
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:106
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:32
 msgid "idle"
 msgstr "inattivo"
 
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:108
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:148
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:190
+#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:34
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:226
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:300
 msgid "lock"
 msgstr "blocco"
 
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:110
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:36
 msgid "disable"
 msgstr "disattivare"
 
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:112
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:38
 msgid "enable"
 msgstr "attivare"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:210
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:270
 msgid "language"
 msgstr "lingua"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:214
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:274
 msgid "spellcheck"
 msgstr "controllo ortografico"
 
+#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:14
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:30
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:122
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:216
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:90
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:138
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:216
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:276
 msgid "automatic"
 msgstr "automatico"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:218
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:278
 msgid "correct"
 msgstr "corretto"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:220
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:280
 msgid "suggestions"
 msgstr "suggerimenti"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:222
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:282
 msgid "capitalization"
 msgstr "maiuscolo"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:224
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:284
 msgid "punctuation"
 msgstr "punteggiatura"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:226
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:286
 msgid "layout"
 msgstr "disposizione"
 
 #. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:26
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:228
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:212
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:288
 msgid "display"
 msgstr "schermo"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:230
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:290
 msgid "words"
 msgstr "parole"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:232
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:292
 msgid "vibration"
 msgstr "vibrazione"
 
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:126
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:298
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:42
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:100
 msgid "phone"
 msgstr "telefono"
 
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:128
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:44
 msgid "services"
 msgstr "servizi"
 
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:130
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:46
 msgid "forwarding"
 msgstr "inoltro"
 
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:132
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:48
 msgid "waiting"
 msgstr "attesa"
 
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:134
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:50
 msgid "call"
 msgstr "chiamata"
 
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:138
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:54
 msgid "shortcuts"
 msgstr "scorciatoie"
 
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:140
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:56
 msgid "numbers"
 msgstr "numeri"
 
 #. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:24
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:210
 msgid "brightness"
 msgstr "luminosità"
 
 #. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:28
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:150
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:214
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:302
 msgid "screen"
 msgstr "schermo"
 
 #. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:32
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:218
 msgid "adjust"
 msgstr "regola"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:56
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:170
 msgid "cellular"
 msgstr "cellulare"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:60
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:174
 msgid "mobile"
 msgstr "mobile"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:62
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:176
 msgid "gsm"
 msgstr "gsm"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:64
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:178
 msgid "data"
 msgstr "dati"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:66
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:180
 msgid "carrier"
 msgstr "operatore"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:68
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:182
 msgid "4g"
 msgstr "4g"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:70
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:184
 msgid "3g"
 msgstr "3g"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:72
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:186
 msgid "2g"
 msgstr "2g"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:74
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:188
 msgid "lte"
 msgstr "lte"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:76
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:190
 msgid "apn"
 msgstr "apn"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:78
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:192
 msgid "roam"
 msgstr "roam"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:80
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:192
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:194
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:228
 msgid "sim"
 msgstr "sim"
 
 #. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:34
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:336
 msgid "Example"
 msgstr "Esempio"
 
 #. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:36
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:338
 msgid "example"
 msgstr "esempio"
 
 #. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:38
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:340
 msgid "test"
 msgstr "prova"
 
 #. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:40
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:342
 msgid "sample"
 msgstr "esempio"
 
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:42
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:306
 msgid "Flight Mode"
 msgstr "Modalità aereo"
 
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:44
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:308
 msgid "flight"
 msgstr "volo"
 
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:46
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:310
 msgid "plane"
 msgstr "aereo"
 
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:48
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:312
 msgid "offline"
 msgstr "non in linea"
 
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:50
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:314
 msgid "airplane"
 msgstr "aereo"
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:186
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:222
 msgid "security"
 msgstr "sicurezza"
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:188
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:224
 msgid "privacy"
 msgstr "privacy"
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:194
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:230
 msgid "pin"
 msgstr "pin"
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:196
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:232
 msgid "code"
 msgstr "codice"
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:198
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:234
 msgid "password"
 msgstr "password"
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:200
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:236
 msgid "passphrase"
 msgstr "passphrase"
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:202
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:238
 msgid "swipe"
 msgstr "scorrere"
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:204
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:240
 msgid "allow"
 msgstr "consentire"
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:206
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:242
 msgid "access"
 msgstr "accesso"
 
@@ -2773,164 +2780,164 @@ msgid "Orientation Lock"
 msgstr "Blocco orientazione"
 
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:144
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:296
 msgid "rotation"
 msgstr "rotazione"
 
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:146
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:298
 msgid "orientation"
 msgstr "orientazione"
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:248
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:60
 msgid "bluetooth"
 msgstr "bluetooth"
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:250
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:62
 msgid "headset"
 msgstr "auricolare"
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:252
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:64
 msgid "pair"
 msgstr "associare"
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:254
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:294
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:66
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:96
 msgid "device"
 msgstr "dispositivo"
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:256
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:68
 msgid "discover"
 msgstr "scoprire"
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:258
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:70
 msgid "car"
 msgstr "automobile"
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:260
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:72
 msgid "handsfree"
 msgstr "vivavoce"
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:268
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:80
 msgid "stereo"
 msgstr "stereo"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:292
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:94
 msgid "about"
 msgstr "informazioni"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:296
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:98
 msgid "info"
 msgstr "informazioni"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:300
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:102
 msgid "number"
 msgstr "numero"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:302
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:104
 msgid "imei"
 msgstr "imei"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:304
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:106
 msgid "serial"
 msgstr "seriale"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:308
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:110
 msgid "mac"
 msgstr "mac"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:310
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:112
 msgid "licenses"
 msgstr "licenze"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:312
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:114
 msgid "developer"
 msgstr "sviluppatore"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:316
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:118
 msgid "storage"
 msgstr "memoria"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:318
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:120
 msgid "disk"
 msgstr "disco"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:320
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:122
 msgid "space"
 msgstr "spazio"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:322
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:124
 msgid "version"
 msgstr "versione"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:324
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:126
 msgid "revision"
 msgstr "revisione"
 
 #. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:116
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:84
 msgid "time"
 msgstr "orario"
 
 #. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:118
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:86
 msgid "date"
 msgstr "data"
 
 #. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:120
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:88
 msgid "timezone"
 msgstr "fuso orario"
 
 #. TRANSLATORS: This is a keyword or name for the update-notification plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:2
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:146
 msgid "Updates available"
 msgstr "Aggiornamenti disponibili"
 
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:6
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:130
 msgid "system"
 msgstr "sistema"
 
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:10
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:134
 msgid "update"
 msgstr "aggiornamento"
 
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:16
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:140
 msgid "download"
 msgstr "scaricamento"
 
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:18
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:142
 msgid "upgrade"
 msgstr "aggiornamento"
 
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150305/obj-powerpc-linux-gnu/po/settings.js:20
+#: /build/buildd/ubuntu-system-settings-0.3+15.04.20150430.1~rtm/obj-arm-linux-gnueabihf/po/settings.js:144
 msgid "click"
 msgstr "click"
 
@@ -2955,7 +2962,7 @@ msgstr ""
 msgid "Authentication token manipulation error"
 msgstr "Errore di manipolazione del token di autenticazione"
 
-#: ../plugins/about//click.cpp:168
+#: ../plugins/about//click.cpp:171
 msgid "Unknown title"
 msgstr "Titolo sconosciuto"
 
@@ -2971,10 +2978,10 @@ msgstr ""
 "Impossibile sospendere la richiesta corrente (impossibile contattare il "
 "servizio)"
 
-#: ../push-helper/software_updates_helper.py:159
+#: ../push-helper/software_updates_helper.py:150
 msgid "There's an updated system image."
 msgstr "È disponibile un aggiornamento di sistema."
 
-#: ../push-helper/software_updates_helper.py:160
+#: ../push-helper/software_updates_helper.py:151
 msgid "Tap to open the system updater."
 msgstr "Tocca per aprire gli aggiornamenti di sistema."

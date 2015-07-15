@@ -96,7 +96,7 @@ ItemPage {
              text: root.batterySafeForUpdate ? i18n.tr("The phone needs to restart to install the system update.") : i18n.tr("Connect the phone to power before installing the system update.")
 
              Button {
-                 text: i18n.tr("Install & Restart")
+                 text: i18n.tr("Restart & Install")
                  visible: root.batterySafeForUpdate ? true : false
                  color: UbuntuColors.orange
                  onClicked: {
@@ -106,7 +106,7 @@ ItemPage {
                  }
              }
              Button {
-                 text: i18n.tr("Not Now")
+                 text: i18n.tr("Cancel")
                  color: UbuntuColors.warmGrey
                  onClicked: {
                      updateList.currentIndex = 0;
@@ -370,17 +370,19 @@ ItemPage {
                 model: UpdateManager.model
                 height: childrenRect.height
                 interactive: false
-                spacing: units.gu(2)
+                spacing: 0
 
                 delegate: ListItem.Subtitled {
                     id: listItem
                     anchors {
                         left: parent.left
                         right: parent.right
+                        topMargin: units.gu(1)
+                        bottomMargin: units.gu(1)
                     }
                     iconSource: Qt.resolvedUrl(modelData.iconUrl)
                     iconFrame: modelData.systemUpdate ? false : true
-                    height: visible ? textArea.height : 0
+                    height: visible ? textArea.height + units.gu(2) : 0
                     highlightWhenPressed: false
                     showDivider: false
                     visible: opacity > 0

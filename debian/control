@@ -43,7 +43,7 @@ Build-Depends: dbus-test-runner,
                python3-gi,
                python3-dbus,
                python3-xdg,
-               gir1.2-glib-2.0
+               gir1.2-glib-2.0,
 Standards-Version: 3.9.6
 Homepage: https://launchpad.net/ubuntu-system-settings
 # If you aren't a member of ~system-settings-touch but need to upload packaging
@@ -60,6 +60,7 @@ Depends: ${misc:Depends},
          accountsservice,
          accountsservice-ubuntu-schemas (>= 0.0.3+14.10.20140829~),
          bluez (>= 4.36),
+         click | ubuntu-snappy-cli,
          dbus-property-service [amd64 armhf i386],
          gsettings-desktop-schemas,
          gsettings-ubuntu-schemas (>= 0.0.4),
@@ -80,8 +81,7 @@ Depends: ${misc:Depends},
          whoopsie-preferences (>= 0.9),
          libsystemsettings1 (= ${binary:Version}),
          system-image-dbus (>= 2.5),
-         click,
-         ubuntu-keyboard-data (>= 0.99.trunk.phablet2+13.10.20131001),
+         ubuntu-keyboard-data (>= 0.99.trunk.phablet2+15.04.20150421),
          urfkill,
 # for the session-migration script (python3 itself also for the push helper)
          python3,

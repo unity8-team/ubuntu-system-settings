@@ -40,10 +40,10 @@ class SearchTestCases(UbuntuSystemSettingsTestCase):
 
     def test_search_filter_results(self):
         """ Checks whether Search box actually filters the results """
-        self._type_into_search_box('Sound')
-        sound_icon = self._get_entry_component('sound')
+        self._type_into_search_box('WiFi')
+        wifi_icon = self._get_entry_component('wifi')
 
-        self.assertThat(sound_icon.visible, Eventually(Equals(True)))
+        self.assertThat(wifi_icon.visible, Eventually(Equals(True)))
         self.assertThat(
             lambda: len(self._get_all_entry_components()),
             Eventually(Equals(1)))
