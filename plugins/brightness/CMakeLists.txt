@@ -2,13 +2,20 @@ add_subdirectory(plugin)
 
 set(QML_SOURCES
     PageComponent.qml
+    PageResolution.qml
+    PageRotation.qml
+    displays.js
 )
 
 add_library(UbuntuBrightnessPanel MODULE
-                plugin.h
                 brightness.h
-                plugin.cpp
                 brightness.cpp
+                display.h
+                display.cpp
+                displays.h
+                displays.cpp
+                plugin.h
+                plugin.cpp
                 ${QML_SOURCES})
 qt5_use_modules(UbuntuBrightnessPanel Quick Qml DBus)
 

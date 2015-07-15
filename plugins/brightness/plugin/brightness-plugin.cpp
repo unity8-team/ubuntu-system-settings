@@ -47,7 +47,8 @@ BrightnessItem::BrightnessItem(const QVariantMap &staticData, QObject *parent):
                                   QDBusConnection::systemBus());
 
     // Hide the plugin if powerd isn't running; it's redundant currentlys
-    setVisibility(m_powerdIface.isValid());
+    //setVisibility(m_powerdIface.isValid());
+    setVisibility(true);
 }
 
 void BrightnessItem::setVisibility(bool visible)
