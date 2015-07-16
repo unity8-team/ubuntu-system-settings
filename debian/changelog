@@ -1,3 +1,22 @@
+ubuntu-system-settings (0.3+15.10.20150709-0ubuntu1) wily; urgency=medium
+
+  [ Ken VanDine ]
+  * Fixed property binding for voiceCallWaiting and don't enable the
+    switch if the SIM isn't registered on the network (LP: #1463841)
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Thu, 09 Jul 2015 02:29:12 +0000
+
+ubuntu-system-settings (0.3+15.10.20150708-0ubuntu1) wily; urgency=medium
+
+  [ CI Train Bot ]
+  * New rebuild forced.
+
+  [ jonas-drange ]
+  * Lets the Wi-Fi panel respond to an SSID provided by dispatcher by
+    launching a "Connect to" dialogue. (LP: #1241986)
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Wed, 08 Jul 2015 20:07:33 +0000
+
 ubuntu-system-settings (0.3+15.10.20150703-0ubuntu1) wily; urgency=medium
 
   [ CI Train Bot ]

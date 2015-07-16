@@ -31,6 +31,9 @@ Component {
         objectName: "otherNetworkDialog"
         anchorToKeyboard: true
 
+        property string ssid
+        property string bssid
+
         function settingsValid () {
             if (networkname.length === 0) {
                 return false;
@@ -80,7 +83,11 @@ Component {
             });
         }
 
-        title: i18n.tr("Connect to Hidden Network")
+        title: ssid ?
+               /* TODO(jgdx): Hack to avoid breaking string freeze. This will be
+               changed to i18n.tr("Connect to %1").arg(ssid) per spec. */
+               i18n.tr("Connect to Wi‑Fi") + " " + ssid :
+               i18n.tr("Connect to Hidden Network")
         text: feedback.enabled ? feedback.text : "";
 
         Common {
@@ -278,6 +285,7 @@ Component {
             font.bold: false
             color: Theme.palette.selected.backgroundText
             elide: Text.ElideRight
+            visible: !ssid
         }
 
         TextField {
@@ -286,6 +294,8 @@ Component {
             width: parent.width
             placeholderText: i18n.tr("SSID")
             inputMethodHints: Qt.ImhNoPredictiveText
+            visible: !ssid
+            text: ssid ? ssid : ""
             Component.onCompleted: forceActiveFocus()
         }
 
@@ -491,7 +501,7 @@ Component {
                       authList.selectedIndex === 1 ||
                       authList.selectedIndex === 3 ||
                       authList.selectedIndex === 4) &&
-                     cacertSelector.selectedIndex === 0
+                      cacertSelector.selectedIndex === 0
         }
 
         Label {
