@@ -28,6 +28,9 @@ import Ubuntu.Settings.Menus 0.1 as Menus
 Column {
     anchors.left: parent.left
     anchors.right: parent.right
+    property bool tappablePad: true
+    property bool scrollTwoSupported: true
+    property int numberOfButtons: 3
     
     ListItem.Header {
         text: i18n.tr("Mouse")
@@ -50,7 +53,6 @@ Column {
         function formatValue(v) { return v.toFixed(2) }
         minimumValue: 0.0
         maximumValue: 1.0
-        
     }
 
     SettingsItemTitle {
@@ -187,6 +189,7 @@ Column {
     }
 
     OptionSelector {
+        visible: numberOfButtons > 1
         anchors { 
             left: parent.left
             right: parent.right
@@ -200,12 +203,14 @@ Column {
     }
 
     ListItem.Standard {
+        visible: tappablePad
         text: i18n.tr("Tap to click")
         control: CheckBox {}
         showDivider: false
     }
 
     ListItem.Standard {
+        visible: scrollTwoSupported
         text: i18n.tr("Scroll with two fingers")
         control: CheckBox {}
         showDivider: false
