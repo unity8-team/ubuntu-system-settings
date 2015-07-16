@@ -21,6 +21,7 @@ import QtQuick.Layouts 1.1
 import SystemSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
+import Ubuntu.Connectivity 1.0
 import Ubuntu.SystemSettings.Cellular 1.0
 import Ubuntu.Components.Popups 0.1
 
@@ -29,15 +30,14 @@ Component {
 
     Dialog {
         id: hotspotSetupDialog
-        property var hotspotManager: null
 
-        /* hotspotManager.stored changes as soon as the user has added a
+        /* Connectivity.hotspotStored changes as soon as the user has added a
         hotspot, and we use this value when we choose between e.g. "Change" and
         "Setup". We'd like the narrative to be consistent, so we stick with
         what the stored value was at component completion.
         */
         property bool stored: false
-        Component.onCompleted: stored = hotspotManager.stored;
+        Component.onCompleted: stored = Connectivity.hotspotStored;
 
         objectName: "hotspotSetup"
         anchorToKeyboard: true
@@ -163,7 +163,7 @@ Component {
             TextField {
                 id: ssidField
                 objectName: "ssidField"
-                text: hotspotManager.ssid
+                text: Connectivity.hotspotSsid
                 inputMethodHints: Qt.ImhNoAutoUppercase | Qt.ImhNoPredictiveText
                 Component.onCompleted: forceActiveFocus()
                 width: parent.width
@@ -182,7 +182,7 @@ Component {
             TextField {
                 id: passwordField
                 objectName: "passwordField"
-                text: hotspotManager.password
+                text: Connectivity.hotspotPassword
                 echoMode: passwordVisibleSwitch.checked ?
                     TextInput.Normal : TextInput.Password
                 inputMethodHints: Qt.ImhNoAutoUppercase | Qt.ImhNoPredictiveText
@@ -262,15 +262,15 @@ Component {
                 function hotspotEnabledHandler (enabled) {
                     if (enabled) {
                         hotspotSetupDialog.state = "SUCCEEDED";
-                        hotspotManager.enabledChanged.disconnect(
+                        Connectivity.hotspotEnabledUpdated.disconnect(
                             hotspotEnabledHandler);
                     }
                 }
 
-                hotspotManager.ssid = ssidField.text;
-                hotspotManager.password = passwordField.text;
-                hotspotManager.enabledChanged.connect(hotspotEnabledHandler);
-                hotspotManager.enabled = true;
+                Connectivity.hotspotSsid = ssidField.text;
+                Connectivity.hotspotPassword = passwordField.text;
+                Connectivity.hotspotEnabledUpdated.connect(hotspotEnabledHandler);
+                Connectivity.hotspotEnabled = true;
             }
         }
 
@@ -282,28 +282,28 @@ Component {
                 function hotspotEnabledHandler (enabled) {
                     if (enabled) {
                         hotspotSetupDialog.state = "SUCCEEDED";
-                        hotspotManager.enabledChanged.disconnect(
+                        Connectivity.hotspotEnabledUpdated.disconnect(
                             hotspotEnabledHandler);
                     }
                 }
 
                 function hotspotDisabledHandler (enabled) {
                     if (!enabled) {
-                        hotspotManager.enabledChanged.connect(hotspotEnabledHandler);
-                        hotspotManager.enabled = true;
-                        hotspotManager.enabledChanged.disconnect(
+                        Connectivity.hotspotEnabledUpdated.connect(hotspotEnabledHandler);
+                        Connectivity.hotspotEnabled = true;
+                        Connectivity.hotspotEnabledUpdated.disconnect(
                             hotspotDisabledHandler);
                     }
                 }
 
-                hotspotManager.ssid = ssidField.text;
-                hotspotManager.password = passwordField.text;
+                Connectivity.hotspotSsid = ssidField.text;
+                Connectivity.hotspotPassword = passwordField.text;
 
-                if (hotspotManager.enabled) {
+                if (Connectivity.hotspotEnabled) {
                     hotspotSetupDialog.state = "STARTING";
-                    hotspotManager.enabledChanged.connect(
+                    Connectivity.hotspotEnabledUpdated.connect(
                         hotspotDisabledHandler);
-                    hotspotManager.enabled = false;
+                    Connectivity.hotspotEnabled = false;
                 } else {
                     PopupUtils.close(hotspotSetupDialog);
                 }
@@ -321,7 +321,7 @@ Component {
         }
 
         Connections {
-            target: hotspotManager
+            target: Connectivity
 
             onReportError: {
                 if (hotspotSetupDialog.state === "STARTING") {
