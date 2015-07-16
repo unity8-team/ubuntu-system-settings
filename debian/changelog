@@ -1,3 +1,130 @@
+ubuntu-system-settings (0.3+15.10.20150709-0ubuntu1) wily; urgency=medium
+
+  [ Ken VanDine ]
+  * Fixed property binding for voiceCallWaiting and don't enable the
+    switch if the SIM isn't registered on the network (LP: #1463841)
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Thu, 09 Jul 2015 02:29:12 +0000
+
+ubuntu-system-settings (0.3+15.10.20150708-0ubuntu1) wily; urgency=medium
+
+  [ CI Train Bot ]
+  * New rebuild forced.
+
+  [ jonas-drange ]
+  * Lets the Wi-Fi panel respond to an SSID provided by dispatcher by
+    launching a "Connect to" dialogue. (LP: #1241986)
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Wed, 08 Jul 2015 20:07:33 +0000
+
+ubuntu-system-settings (0.3+15.10.20150703-0ubuntu1) wily; urgency=medium
+
+  [ CI Train Bot ]
+  * New rebuild forced.
+
+  [ Joerg Berroth ]
+  * Added support for 802-1x wireless network configurations. (LP:
+    #1241986)
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Fri, 03 Jul 2015 16:09:00 +0000
+
+ubuntu-system-settings (0.3+15.10.20150702.3-0ubuntu1) wily; urgency=medium
+
+  [ CI Train Bot ]
+  * New rebuild forced.
+
+  [ Ken VanDine ]
+  * Test searching for WiFi instead of Sound, online-accounts now has a
+    soundcloud account type (LP: #1468029)
+
+  [ Matthew Paul Thomas ]
+  * Changes "Install & Restart" to "Restart & Install" and "Not Now" to
+    "Cancel". lp:1359344 (LP: #1359344)
+
+  [ jonas-drange ]
+  * implement CFB, CFNRy and CFNRc as well as autopilot tests (LP:
+    #1463828)
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Thu, 02 Jul 2015 22:48:32 +0000
+
+ubuntu-system-settings (0.3+15.10.20150622-0ubuntu2) wily; urgency=medium
+
+  * debian/control:
+    - don't have an alternative depends on system-image-snappy-cli,
+      it's deprecated
+    - have ubuntu-snappy-cli as an alternative to click, that's not the 
+      right solution but a workaround to unblock snappy image build
+
+ -- Sebastien Bacher <seb128@ubuntu.com>  Thu, 02 Jul 2015 10:30:10 +0200
+
+ubuntu-system-settings (0.3+15.10.20150622-0ubuntu1) wily; urgency=medium
+
+  [ CI Train Bot ]
+  * New rebuild forced.
+
+  [ jonas-drange ]
+  * [wifi] skip some tests that cannot be mocked and use specific object
+    when found during connection (LP: #1441192)
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Mon, 22 Jun 2015 13:01:01 +0000
+
+ubuntu-system-settings (0.3+15.10.20150615-0ubuntu1) wily; urgency=medium
+
+  [ CI Train Bot ]
+  * New rebuild forced.
+
+  [ Ken VanDine ]
+  * Activate the accessPoint on click
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Mon, 15 Jun 2015 13:41:16 +0000
+
+ubuntu-system-settings (0.3+15.10.20150604-0ubuntu1) wily; urgency=medium
+
+  [ Sebastien Bacher ]
+  * [battery] use round linejoin style to workaround rendering glitches
+    (LP: #1461624)
+  * define a way for plugin to be visible if a file exists, use that
+    capability to enable the updates panel on system-image systems and
+    not snappy one, which allows us to not have a strong depends on
+    system image components
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Thu, 04 Jun 2015 15:45:14 +0000
+
+ubuntu-system-settings (0.3+15.10.20150527-0ubuntu1) wily; urgency=medium
+
+  [ CI Train Bot ]
+  * New rebuild forced.
+
+  [ Iain Lane ]
+  * Improve filtering in main page and timezone filters. (LP: #1454186,
+    #1446086)
+
+  [ Ken VanDine ]
+  * Ensure dim-timeout is 10 seconds less than activity-timeout (LP:
+    #1437510)
+  * debian/control: bumped depends on ubuntu-keyboard-data to >=
+    0.99.trunk.phablet2+15.04.20150421 to get gsettings schema changes
+    (LP: #1454230)
+  * expose deviceName to QML
+
+  [ Lukáš Tinkl ]
+  * compare the language and kbd layout names in a locale-aware manner
+
+  [ Sebastien Bacher ]
+  * Translate push_helper expected strings to avoid failure in non C
+    locales (LP: #1456941)
+  * [battery] use the correct height value for the first point of the
+    graph, that fixes the initial point often starting to high and the
+    curve starting with an almost vertical line (LP: #1439122)
+  * [language] update auto punctuation description to match the osk
+    behaviour (LP: #1385288)
+  * [security-privacy] remove obsolete dash search option (LP: #1422700)
+
+  [ jonas-drange ]
+  * New icon as per lp:1457424 (LP: #1457424)
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Wed, 27 May 2015 09:23:37 +0000
+
 ubuntu-system-settings (0.3+15.04.20150514-0ubuntu1) vivid; urgency=medium
 
   [ CI Train Bot ]
