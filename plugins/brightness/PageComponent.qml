@@ -273,6 +273,24 @@ ItemPage {
                     Button {
                         anchors { left: parent.left; right: parent.right }
                         text: i18n.tr("Sound settings…")
+                        onClicked: {
+                            var sPlugin = pluginManager.getByName("sound")
+                            if (sPlugin) {
+                                var soundPage = sPlugin.pageComponent;
+                                if (soundPage)
+                                    pageStack.push(soundPage);
+                                else
+                                    console.warn(
+                                        "Failed to get system-update " +
+                                        "pageComponent"
+                                    );
+                            } else {
+                                console.warn(
+                                    "Failed to get system-update plugin " +
+                                    "instance"
+                                )
+                            }
+                        }
                     }
 
                     Button {
