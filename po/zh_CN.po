@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-10-16 20:04-0600\n"
-"PO-Revision-Date: 2015-06-30 08:11+0000\n"
-"Last-Translator: Ian Li <Unknown>\n"
+"PO-Revision-Date: 2015-07-16 06:24+0000\n"
+"Last-Translator: xiaoxiao <golden.freeman.china@gmail.com>\n"
 "Language-Team: Chinese (Simplified) <zh_CN@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2015-07-16 05:42+0000\n"
+"X-Launchpad-Export-Date: 2015-07-17 05:36+0000\n"
 "X-Generator: Launchpad (build 17628)\n"
 
 #: ubuntu-system-settings.desktop.in.in.h:1 ../src/qml/MainWindow.qml:112
@@ -1874,7 +1874,7 @@ msgstr[0] "删除 %1 图片"
 
 #: ../plugins/background/Components/AddRemove.qml:80
 msgid "Add an image…"
-msgstr "添加一张图片..."
+msgstr "添加图片..."
 
 #: ../plugins/background/Components/AddRemove.qml:91
 msgid "Remove images…"
