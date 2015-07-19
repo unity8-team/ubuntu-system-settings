@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-10-16 20:04-0600\n"
-"PO-Revision-Date: 2015-06-05 21:49+0000\n"
+"PO-Revision-Date: 2015-07-19 00:16+0000\n"
 "Last-Translator: Charif AYFARAH <ayfarah@ymail.com>\n"
 "Language-Team: Afar <aa@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2015-07-16 05:39+0000\n"
+"X-Launchpad-Export-Date: 2015-07-19 05:05+0000\n"
 "X-Generator: Launchpad (build 17628)\n"
 
 #: ubuntu-system-settings.desktop.in.in.h:1 ../src/qml/MainWindow.qml:112
@@ -320,13 +320,13 @@ msgstr "Inkinnah"
 #: ../plugins/wifi//NetworkDetailsBrief.qml:42
 #: ../plugins/wifi//NetworkDetails.qml:88
 msgid "Forget network"
-msgstr ""
+msgstr "Retta hawwen"
 
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
 #: ../plugins/notifications/PageComponent.qml:29
 #: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:118
 msgid "Notifications"
-msgstr ""
+msgstr "Mascassoosi"
 
 #: ../plugins/notifications//PageComponent.qml:40
 msgid ""
@@ -336,93 +336,93 @@ msgstr ""
 
 #: ../plugins/sound/SoundsList.qml:70
 msgid "Stop playing"
-msgstr ""
+msgstr "Digir eysed"
 
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
 #: ../plugins/sound/PageComponent.qml:38
 #: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:100
 msgid "Sound"
-msgstr ""
+msgstr "Xongolo"
 
 #: ../plugins/sound/PageComponent.qml:84
 msgid "Silent Mode"
-msgstr ""
+msgstr "Tibbâ Gurra"
 
 #: ../plugins/sound/PageComponent.qml:88
 msgid "Ringer:"
-msgstr ""
+msgstr "Kalluwye"
 
 #: ../plugins/sound/PageComponent.qml:133
 msgid "Phone calls:"
-msgstr ""
+msgstr "Telefoon seecooca:"
 
 #: ../plugins/sound/PageComponent.qml:137
 #: ../plugins/sound/PageComponent.qml:143
 msgid "Ringtone"
-msgstr ""
+msgstr "kalluw-kaaya"
 
 #: ../plugins/sound//PageComponent.qml:146
 msgid "Vibrate when ringing"
-msgstr ""
+msgstr "Kalluw iyyek araris"
 
 #: ../plugins/sound/PageComponent.qml:169
 #: ../plugins/sound/PageComponent.qml:219
 msgid "Vibrate in Silent Mode"
-msgstr ""
+msgstr "Tibbâ Gurral araris"
 
 #: ../plugins/phone//PageComponent.qml:102
 #: ../plugins/sound//PageComponent.qml:168
 msgid "Dialpad sounds"
-msgstr ""
+msgstr "Kalluuwus-beytâ xongoloola"
 
 #: ../plugins/sound/PageComponent.qml:184
 msgid "Messages:"
-msgstr ""
+msgstr "Farmooma:"
 
 #: ../plugins/sound/PageComponent.qml:188
 #: ../plugins/sound/PageComponent.qml:194
 msgid "Message received"
-msgstr ""
+msgstr "Farmo Temeete"
 
 #: ../plugins/sound/PageComponent.qml:208
 msgid "Vibrate with message sound"
-msgstr ""
+msgstr "Farmô xongolol araris"
 
 #: ../plugins/sound/PageComponent.qml:223
 msgid "Other sounds:"
-msgstr ""
+msgstr "Gersi xongoloola:"
 
 #: ../plugins/sound/PageComponent.qml:227
 #: ../plugins/language/PageComponent.qml:216
 msgid "Keyboard sound"
-msgstr ""
+msgstr "Miftacî xongolo"
 
 #: ../plugins/sound/PageComponent.qml:243
 msgid "Lock sound"
-msgstr ""
+msgstr "Kofli  xongolo"
 
 #: ../plugins/sound/SilentModeWarning.qml:31
 msgid "The phone is in Silent Mode."
-msgstr ""
+msgstr "Telefoone Tibbâ Gurral yan."
 
 #. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
 #: ../plugins/reset/PageComponent.qml:32
 #: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:296
 msgid "Reset phone"
-msgstr ""
+msgstr "Telefoon wadir-qagis"
 
 #: ../plugins/reset/PageComponent.qml:73
 #: ../plugins/reset/ResetLauncherHome.qml:44
 msgid "Reset Launcher"
-msgstr ""
+msgstr "Gasye wadir-qagis"
 
 #: ../plugins/reset/PageComponent.qml:87
 msgid "Reset all system settings…"
-msgstr ""
+msgstr "Siirâ massoswa inkih Wadir-qagis..."
 
 #: ../plugins/reset/PageComponent.qml:101
 msgid "Erase & Reset Everything…"
-msgstr ""
+msgstr "Kullim Kal & Wadir-qagis..."
 
 #: ../plugins/reset/ResetAllSettings.qml:29
 msgid ""
@@ -432,15 +432,15 @@ msgstr ""
 
 #: ../plugins/reset/ResetAllSettings.qml:31
 msgid "Reset all system settings"
-msgstr ""
+msgstr "Siirâ massoswa inkih Wadir-qagis"
 
 #: ../plugins/reset/ResetLauncherHome.qml:40
 msgid "The Launcher will be returned to its original contents."
-msgstr ""
+msgstr "Gasye qimbok luk suge addattinoh andabbele"
 
 #: ../plugins/language/RebootNecessary.qml:34
 msgid "The phone needs to restart for changes to take effect."
-msgstr ""
+msgstr "Korsitte oggoluh telefoon wadir-ugus faxa"
 
 #: ../plugins/reset/EraseEverything.qml:41
 msgid ""
@@ -450,21 +450,21 @@ msgstr ""
 
 #: ../plugins/reset/EraseEverything.qml:44
 msgid "Erase & Reset Everything"
-msgstr ""
+msgstr "Kullim Kal & Wadir-qagis"
 
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
 #: ../plugins/battery/PageComponent.qml:35
 #: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:162
 msgid "Battery"
-msgstr ""
+msgstr "Beetari"
 
 #. TRANSLATORS: %1 is the number of seconds
 #: ../plugins/battery/PageComponent.qml:44
 #, qt-format
 msgid "%1 second ago"
 msgid_plural "%1 seconds ago"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Tatre  %1 nammayye"
+msgstr[1] "Tatre  %1 nammayye"
 
 #. TRANSLATORS: %1 is the number of minutes
 #: ../plugins/battery/PageComponent.qml:47
@@ -472,7 +472,7 @@ msgstr[1] ""
 msgid "%1 minute ago"
 msgid_plural "%1 minutes ago"
 msgstr[0] ""
-msgstr[1] ""
+msgstr[1] "Tatre %1 miniti"
 
 #. TRANSLATORS: %1 is the number of hours
 #: ../plugins/battery/PageComponent.qml:50
@@ -480,7 +480,7 @@ msgstr[1] ""
 msgid "%1 hour ago"
 msgid_plural "%1 hours ago"
 msgstr[0] ""
-msgstr[1] ""
+msgstr[1] "Tatre %1 saaqata"
 
 #. TRANSLATORS: %1 is the number of days
 #: ../plugins/battery//PageComponent.qml:53
@@ -488,44 +488,44 @@ msgstr[1] ""
 msgid "%1 day ago"
 msgid_plural "%1 days ago"
 msgstr[0] ""
-msgstr[1] ""
+msgstr[1] "Taturte %1 ayro"
 
 #: ../plugins/battery/PageComponent.qml:269
 msgid "Charging now"
-msgstr ""
+msgstr "Away kibbiimah"
 
 #: ../plugins/battery/PageComponent.qml:271
 msgid "Last full charge"
-msgstr ""
+msgstr "Ellacabô nagay kibne"
 
 #: ../plugins/battery/PageComponent.qml:273
 msgid "Fully charged"
-msgstr ""
+msgstr "Nagay Kibbiime"
 
 #: ../plugins/battery/PageComponent.qml:104
 msgid "Charge level"
-msgstr ""
+msgstr "Kibnê caddabna"
 
 #: ../plugins/about/Storage.qml:199 ../plugins/battery/PageComponent.qml:109
 #: ../plugins/battery/PageComponent.qml:281
 msgid "N/A"
-msgstr ""
+msgstr "N/A"
 
 #. TRANSLATORS: %1 refers to a percentage that indicates the charging level of the battery
 #: ../plugins/battery/PageComponent.qml:112
 #, qt-format
 msgid "%1%"
-msgstr ""
+msgstr "%1%"
 
 #: ../plugins/battery/PageComponent.qml:190
 #: ../plugins/battery/PageComponent.qml:192
 msgid "Yesterday"
-msgstr ""
+msgstr "Kimaala"
 
 #: ../plugins/battery/PageComponent.qml:198
 #: ../plugins/battery/PageComponent.qml:200
 msgid "Today"
-msgstr ""
+msgstr "Asaaku"
 
 #: ../plugins/battery/PageComponent.qml:290
 msgid "Ways to reduce battery use:"
@@ -559,8 +559,8 @@ msgstr ""
 #, qt-format
 msgid "After %1 minute"
 msgid_plural "After %1 minutes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1 minitih lakal"
+msgstr[1] "%1 minitih lakal"
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
 #: ../plugins/battery/PageComponent.qml:375
@@ -568,11 +568,11 @@ msgstr[1] ""
 #: ../plugins/bluetooth/PageComponent.qml:192
 #: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:178
 msgid "Bluetooth"
-msgstr ""
+msgstr "Blutuus"
 
 #: ../plugins/battery/PageComponent.qml:408
 msgid "GPS"
-msgstr ""
+msgstr "GPS"
 
 #: ../plugins/battery/PageComponent.qml:429
 msgid "Accurate location detection requires GPS and/or Wi-Fi."
@@ -609,34 +609,34 @@ msgstr ""
 
 #: ../plugins/language/SpellChecking.qml:63
 msgid "All languages available:"
-msgstr ""
+msgstr "Tan afitte:"
 
 #: ../plugins/language/RebootNecessary.qml:38
 msgid "Restart Now"
-msgstr ""
+msgstr "Away wadir-ugus"
 
 #: ../plugins/language/DisplayLanguage.qml:36
 msgid "Display language"
-msgstr ""
+msgstr "Af uybulluy"
 
 #: ../plugins/language/DisplayLanguage.qml:116
 msgid "Confirm"
-msgstr ""
+msgstr "Diggos"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #: ../plugins/language/PageComponent.qml:34
 #: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:308
 msgid "Language & Text"
-msgstr ""
+msgstr "Af & Kawsenta"
 
 #: ../plugins/language/PageComponent.qml:101
 msgid "Display language…"
-msgstr ""
+msgstr "Af uybulluy..."
 
 #: ../plugins/language/KeyboardLayouts.qml:26
 #: ../plugins/language/PageComponent.qml:118
 msgid "Keyboard layouts"
-msgstr ""
+msgstr "Miftacî rakitte"
 
 #: ../plugins/language/PageComponent.qml:154
 msgid "Auto correction"
