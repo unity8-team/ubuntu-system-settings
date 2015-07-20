@@ -29,6 +29,7 @@ import ubuntuuitoolkit
 from autopilot import introspection
 from autopilot.exceptions import StateNotFoundError
 from ubuntu_system_settings.utils.i18n import ugettext as _
+import ubuntu_system_settings.utils as utils
 
 logger = logging.getLogger(__name__)
 
@@ -1248,9 +1249,11 @@ class WifiPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
         if password:
             dialog.enter_password(password)
         if cancel:
+            utils.dismiss_osk()
             dialog.cancel()
             return self
         else:
+            utils.dismiss_osk()
             dialog.connect()
             return dialog
 
