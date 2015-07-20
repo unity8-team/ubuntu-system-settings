@@ -1,3 +1,11 @@
+ubuntu-system-settings (0.3+15.10.20150709-0ubuntu1) wily; urgency=medium
+
+  [ Ken VanDine ]
+  * Fixed property binding for voiceCallWaiting and don't enable the
+    switch if the SIM isn't registered on the network (LP: #1463841)
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Thu, 09 Jul 2015 02:29:12 +0000
+
 ubuntu-system-settings (0.3+15.10.20150708-0ubuntu1) wily; urgency=medium
 
   [ CI Train Bot ]
