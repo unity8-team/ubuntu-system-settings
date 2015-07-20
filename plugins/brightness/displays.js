@@ -18,6 +18,10 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+/********************************************************************
+NOTE: This will will be removed and replaced by code in displays.cpp.
+********************************************************************/
+
 var _pathToQml = {};
 
 
