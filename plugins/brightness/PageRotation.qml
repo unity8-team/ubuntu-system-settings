@@ -73,7 +73,6 @@ ItemPage {
                             break;
                     }
                     orientationChanged(orientation);
-                    pageStack.pop();
                 }
                 Component.onCompleted: {
                     switch (display.orientation) {

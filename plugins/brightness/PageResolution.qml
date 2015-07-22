@@ -54,10 +54,7 @@ ItemPage {
                 model: display.availableResolutions
                 expanded: true
                 highlightWhenPressed: false
-                onDelegateClicked: {
-                    resolutionChanged(model[index]);
-                    pageStack.pop();
-                }
+                onDelegateClicked: resolutionChanged(model[index])
                 Component.onCompleted: selectedIndex = display.availableResolutions.indexOf(display.resolution)
             }
         }
