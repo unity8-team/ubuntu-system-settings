@@ -20,7 +20,6 @@
 #include <QtQml>
 #include <QtQml/QQmlContext>
 #include "connectivity.h"
-#include "hotspotmanager.h"
 #include "ofonoactivator.h"
 
 static QObject *connectivitySingeltonProvider(QQmlEngine *engine, QJSEngine *scriptEngine)
@@ -36,7 +35,6 @@ void BackendPlugin::registerTypes(const char *uri)
 {
     Q_ASSERT(uri == QLatin1String("Ubuntu.SystemSettings.Cellular"));
     qmlRegisterSingletonType<Connectivity>(uri, 1, 0, "Connectivity", connectivitySingeltonProvider);
-    qmlRegisterType<HotspotManager>(uri, 1, 0, "HotspotManager");
     qmlRegisterType<OfonoActivator>(uri, 1, 0, "OfonoActivator");
 }
 

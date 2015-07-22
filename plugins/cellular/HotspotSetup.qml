@@ -21,83 +21,314 @@ import QtQuick.Layouts 1.1
 import SystemSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
+import Ubuntu.Connectivity 1.0
 import Ubuntu.SystemSettings.Cellular 1.0
+import Ubuntu.Components.Popups 0.1
 
-ItemPage {
-
+Component {
     id: hotspotSetup
-    title: i18n.tr("Change hotspot setup")
 
-    property var hotspotManager: null
+    Dialog {
+        id: hotspotSetupDialog
 
+        /* Connectivity.hotspotStored changes as soon as the user has added a
+        hotspot, and we use this value when we choose between e.g. "Change" and
+        "Setup". We'd like the narrative to be consistent, so we stick with
+        what the stored value was at component completion.
+        */
+        property bool stored: false
+        Component.onCompleted: stored = Connectivity.hotspotStored;
 
-    Column {
+        objectName: "hotspotSetup"
+        anchorToKeyboard: true
 
-        anchors.fill: parent
-
-        ListItem.Standard {
-            id: ssidLabel
-            text: i18n.tr("Hotspot name")
+        function settingsValid() {
+            return ssidField.text != "" && passwordField.length >= 8;
         }
 
-        TextField {
-            id: ssidField
-            text: hotspotManager.getHotspotName()
-            anchors.left: parent.left
-            anchors.right: parent.right
-            anchors.leftMargin: units.gu(2)
-            anchors.rightMargin: units.gu(2)
+        title: stored ?
+            i18n.tr("Change hotspot setup") : i18n.tr("Setup hotspot")
+        text: feedback.enabled ? feedback.text : "";
+
+        Common {
+            id: common
         }
 
-        ListItem.Standard {
-            id: passwordLabel
-            text: i18n.tr("Key (must be 8 characters or longer)")
-        }
+        states: [
+            State {
+                name: "STARTING"
+                PropertyChanges {
+                    target: workingIndicator
+                    running: true
+                }
+                PropertyChanges {
+                    target: ssidLabel
+                    opacity: 0.5
+                }
+                PropertyChanges {
+                    target: ssidField
+                    enabled: false
+                }
+                PropertyChanges {
+                    target: passwordLabel
+                    opacity: 0.5
+                }
+                PropertyChanges {
+                    target: passwordField
+                    enabled: false
+                }
+                PropertyChanges {
+                    target: feedback
+                    enabled: true
+                }
+                PropertyChanges {
+                    target: confirmButton
+                    enabled: false
+                }
+            },
 
-        TextField {
-            id: passwordField
-            text: hotspotManager.getHotspotPassword()
-            echoMode: passwordVisibleSwitch.checked ? TextInput.Normal : TextInput.Password
-            anchors.left: parent.left
-            anchors.right: parent.right
-            anchors.leftMargin: units.gu(2)
-            anchors.rightMargin: units.gu(2)
-        }
+            State {
+                name: "FAILED"
+                PropertyChanges {
+                    target: feedback
+                    enabled: true
+                }
+                PropertyChanges {
+                    target: ssidField
+                    errorHighlight: true
+                }
+                StateChangeScript {
+                    script: ssidField.forceActiveFocus()
+                }
+            },
 
-        ListItem.Standard {
-            text: i18n.tr("Show key")
-            id: passwordVisible
-            control: Switch {
-                id: passwordVisibleSwitch
+            State {
+                name: "SUCCEEDED"
+                PropertyChanges {
+                    target: successIcon
+                    visible: true
+                }
+                PropertyChanges {
+                    target: successIndicator
+                    running: true
+                }
+                PropertyChanges {
+                    target: ssidLabel
+                    opacity: 0.5
+                }
+                PropertyChanges {
+                    target: ssidField
+                    enabled: false
+                }
+                PropertyChanges {
+                    target: passwordLabel
+                    opacity: 0.5
+                }
+                PropertyChanges {
+                    target: passwordField
+                    enabled: false
+                }
+                PropertyChanges {
+                    target: confirmButton
+                    enabled: false
+                }
             }
-        }
+        ]
 
-        RowLayout {
+        Column {
             anchors {
                 left: parent.left
                 right: parent.right
-                margins: units.gu(2)
             }
-            
-        Button {
-            id: cancelButton
-            Layout.fillWidth: true
-            text: i18n.tr("Cancel")
-            onClicked: {
-                pageStack.pop()
+            spacing: units.gu(1)
+
+            Label {
+                property bool enabled: false
+                id: feedback
+                horizontalAlignment: Text.AlignHCenter
+                height: contentHeight
+                wrapMode: Text.WordWrap
+                visible: false
+            }
+
+            Label {
+                id: ssidLabel
+                text: i18n.tr("Hotspot name")
+                fontSize: "medium"
+                font.bold: true
+                color: Theme.palette.selected.backgroundText
+                elide: Text.ElideRight
+            }
+
+            TextField {
+                id: ssidField
+                objectName: "ssidField"
+                text: Connectivity.hotspotSsid
+                inputMethodHints: Qt.ImhNoAutoUppercase | Qt.ImhNoPredictiveText
+                Component.onCompleted: forceActiveFocus()
+                width: parent.width
+            }
+
+            Label {
+                id: passwordLabel
+                text: i18n.tr("Key (must be 8 characters or longer)")
+                fontSize: "medium"
+                font.bold: true
+                color: Theme.palette.selected.backgroundText
+                wrapMode: Text.WordWrap
+                width: parent.width
+            }
+
+            TextField {
+                id: passwordField
+                objectName: "passwordField"
+                text: Connectivity.hotspotPassword
+                echoMode: passwordVisibleSwitch.checked ?
+                    TextInput.Normal : TextInput.Password
+                inputMethodHints: Qt.ImhNoAutoUppercase | Qt.ImhNoPredictiveText
+                width: parent.width
+            }
+
+            ListItem.Standard {
+                text: i18n.tr("Show key")
+                id: passwordVisible
+                onClicked: passwordVisibleSwitch.trigger()
+                control: Switch {
+                    id: passwordVisibleSwitch
+                    activeFocusOnPress: false
+                }
+            }
+
+            Row {
+
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                }
+                width: parent.width
+                spacing: units.gu(2)
+
+                Button {
+                    id: cancelButton
+                    width: (parent.width / 2) - units.gu(1)
+                    text: i18n.tr("Cancel")
+                    activeFocusOnPress: false
+                    onClicked: PopupUtils.close(hotspotSetupDialog)
+                }
+
+                Button {
+                    id: confirmButton
+                    objectName: "confirmButton"
+                    width: (parent.width / 2) - units.gu(1)
+                    text: hotspotSetupDialog.stored ? i18n.tr("Change") :
+                        i18n.tr("Enable")
+                    enabled: settingsValid()
+                    activeFocusOnPress: false
+                    onClicked: {
+                        if (hotspotSetupDialog.stored) {
+                            changeAction.trigger()
+                        } else {
+                            enableAction.trigger();
+                        }
+                    }
+
+                    Icon {
+                        id: successIcon
+                        anchors.centerIn: parent
+                        height: parent.height - units.gu(1.5)
+                        width: parent.height - units.gu(1.5)
+                        name: "tick"
+                        color: "green"
+                        visible: false
+                    }
+
+                    ActivityIndicator {
+                        id: workingIndicator
+                        anchors.centerIn: parent
+                        running: false
+                        visible: running
+                        height: parent.height - units.gu(1.5)
+                    }
+                }
             }
         }
 
-        Button {
-            id: connectButton
-            Layout.fillWidth: true
-            text: i18n.tr("Change")
-            enabled: ssidField.text != "" && passwordField.length >= 8
-            onClicked: {
-                hotspotManager.setupHotspot(ssidField.text, passwordField.text)
-                pageStack.pop()
+        Action {
+            id: enableAction
+            enabled: settingsValid()
+            onTriggered: {
+                hotspotSetupDialog.state = "STARTING";
+
+                function hotspotEnabledHandler (enabled) {
+                    if (enabled) {
+                        hotspotSetupDialog.state = "SUCCEEDED";
+                        Connectivity.hotspotEnabledUpdated.disconnect(
+                            hotspotEnabledHandler);
+                    }
+                }
+
+                Connectivity.hotspotSsid = ssidField.text;
+                Connectivity.hotspotPassword = passwordField.text;
+                Connectivity.hotspotEnabledUpdated.connect(hotspotEnabledHandler);
+                Connectivity.hotspotEnabled = true;
             }
         }
+
+        Action {
+            id: changeAction
+            enabled: settingsValid()
+            onTriggered: {
+
+                function hotspotEnabledHandler (enabled) {
+                    if (enabled) {
+                        hotspotSetupDialog.state = "SUCCEEDED";
+                        Connectivity.hotspotEnabledUpdated.disconnect(
+                            hotspotEnabledHandler);
+                    }
+                }
+
+                function hotspotDisabledHandler (enabled) {
+                    if (!enabled) {
+                        Connectivity.hotspotEnabledUpdated.connect(hotspotEnabledHandler);
+                        Connectivity.hotspotEnabled = true;
+                        Connectivity.hotspotEnabledUpdated.disconnect(
+                            hotspotDisabledHandler);
+                    }
+                }
+
+                Connectivity.hotspotSsid = ssidField.text;
+                Connectivity.hotspotPassword = passwordField.text;
+
+                if (Connectivity.hotspotEnabled) {
+                    hotspotSetupDialog.state = "STARTING";
+                    Connectivity.hotspotEnabledUpdated.connect(
+                        hotspotDisabledHandler);
+                    Connectivity.hotspotEnabled = false;
+                } else {
+                    PopupUtils.close(hotspotSetupDialog);
+                }
+            }
+        }
+
+        /* Timer that shows a tick in the connect button once we have
+        successfully changed/started a hotspot. */
+        Timer {
+            id: successIndicator
+            interval: 2000
+            running: false
+            repeat: false
+            onTriggered: PopupUtils.close(hotspotSetupDialog)
+        }
+
+        Connections {
+            target: Connectivity
+
+            onReportError: {
+                if (hotspotSetupDialog.state === "STARTING") {
+                    hotspotSetupDialog.state = "FAILED";
+                    feedback.text = common.reasonToString(reason);
+                }
+            }
         }
     }
 }
