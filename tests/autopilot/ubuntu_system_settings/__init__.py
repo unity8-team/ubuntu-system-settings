@@ -134,7 +134,7 @@ class SystemSettingsMainWindow(ubuntuuitoolkit.MainView):
                 page_center_y - obj.height * 2
             )
             # avoid a flick
-            sleep(0.5)
+            sleep(1.0)
 
     def scroll_to_and_click(self, obj):
         self.scroll_to(obj)
@@ -303,7 +303,7 @@ class CellularPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
         sleep(1)
         ok = self.select_single('Button', objectName="doRename")
 
-        field = self.select_single('TextField', objectName="nameField")
+        field = self.wait_select_single('TextField', objectName="nameField")
         field.write(name)
         self.pointing_device.click_object(ok)
 
@@ -1346,8 +1346,8 @@ class OtherNetwork(
 
     @autopilot.logging.log_action(logger.debug)
     def _enter_name(self, name):
-        namefield = self.select_single('TextField',
-                                       objectName='networkname')
+        namefield = self.wait_select_single('TextField',
+                                            objectName='networkname')
         self._scroll_to_and_click(namefield)
         namefield.write(name)
 
@@ -1357,8 +1357,8 @@ class OtherNetwork(
 
     @autopilot.logging.log_action(logger.debug)
     def _enter_username(self, username):
-        namefield = self.select_single('TextField',
-                                       objectName='username')
+        namefield = self.wait_select_single('TextField',
+                                            objectName='username')
         self._scroll_to_and_click(namefield)
         namefield.write(username)
 
@@ -1407,8 +1407,8 @@ class OtherNetwork(
 
     @autopilot.logging.log_action(logger.debug)
     def _enter_password(self, password):
-        pwdfield = self.select_single('TextField',
-                                      objectName='password')
+        pwdfield = self.wait_select_single('TextField',
+                                           objectName='password')
         self._scroll_to_and_click(pwdfield)
         pwdfield.write(password)
 
