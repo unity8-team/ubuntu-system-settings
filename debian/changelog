@@ -1,3 +1,18 @@
+ubuntu-system-settings (0.3+15.10.20150722-0ubuntu1) wily; urgency=medium
+
+  [ CI Train Bot ]
+  * Resync trunk.
+
+  [ Ken VanDine ]
+  * Use TextField.write to properly use the OSK Added helper to dismiss
+    OSK
+
+  [ jonas-drange ]
+  * [tests] avoids setting Interfaces property after the
+    Cellular/Phone/About plugins have loaded.
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Wed, 22 Jul 2015 12:55:01 +0000
+
 ubuntu-system-settings (0.3+15.10.20150716-0ubuntu1) wily; urgency=medium
 
   [ CI Train Bot ]
