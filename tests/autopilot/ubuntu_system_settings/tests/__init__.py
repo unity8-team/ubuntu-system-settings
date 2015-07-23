@@ -194,9 +194,6 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
                     'self.EmitSignal("IFACE", "PropertyChanged", "sv",\
                         [args[0], args[1]])'.replace("IFACE", CONNMAN_IFACE)),
             ])
-        interfaces = modem.GetProperties()['Interfaces']
-        interfaces.append(CONNMAN_IFACE)
-        modem.SetProperty('Interfaces', interfaces)
 
     def mock_carriers(self, name):
         self.dbusmock.AddObject(
@@ -249,10 +246,6 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
                  "PropertyChanged", "sv", [args[0], args[1]])'
                     .replace('IFACE', RDO_IFACE)), ])
 
-        interfaces = modem.GetProperties()['Interfaces']
-        interfaces.append(RDO_IFACE)
-        modem.SetProperty('Interfaces', interfaces)
-
     def mock_call_forwarding(self, modem):
         modem.AddProperties(CALL_FWD_IFACE,
                             {
@@ -270,9 +263,6 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
                  'self.EmitSignal("IFACE",\
                  "PropertyChanged", "sv", [args[0], args[1]])'
                     .replace('IFACE', CALL_FWD_IFACE)), ])
-        interfaces = modem.GetProperties()['Interfaces']
-        interfaces.append(CALL_FWD_IFACE)
-        modem.SetProperty('Interfaces', interfaces)
 
     def mock_call_settings(self, modem):
         modem.AddProperty(
@@ -286,9 +276,6 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
                  'self.EmitSignal("IFACE",\
                  "PropertyChanged", "sv", [args[0], args[1]])'
                     .replace('IFACE', CALL_SETTINGS_IFACE)), ])
-        interfaces = modem.GetProperties()['Interfaces']
-        interfaces.append(CALL_SETTINGS_IFACE)
-        modem.SetProperty('Interfaces', interfaces)
 
     def add_sim1(self):
         # create modem_0 proxy

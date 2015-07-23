@@ -14,6 +14,7 @@ from ubuntu_system_settings.tests import (
     PhoneOfonoBaseTestCase,
     CALL_FWD_IFACE,
     CALL_SETTINGS_IFACE,
+    SIM_IFACE,
     NETREG_IFACE
 )
 
@@ -167,6 +168,20 @@ class PhoneTestCase(PhoneOfonoBaseTestCase):
             call_wait_switch.enabled,
             Eventually(Equals(False))
         )
+
+    # TODO: Test the Services page itself.
+    def test_sim_services(self):
+        self.assertThat(
+            self.phone_page.get_sim_services_enabled(),
+            Eventually(Equals(True)))
+        self.phone_page.go_to_sim_services()
+        self.main_view.go_back()
+        self.modem_0.EmitSignal(
+            SIM_IFACE, 'PropertyChanged', 'sv',
+            ['ServiceNumbers', ''])
+        self.assertThat(
+            self.phone_page.get_sim_services_enabled(),
+            Eventually(Equals(False)))
 
 
 class PhoneDualSimTestCase(PhoneOfonoBaseTestCase):
@@ -472,3 +487,31 @@ class PhoneDualSimTestCase(PhoneOfonoBaseTestCase):
             call_wait_switch.enabled,
             Eventually(Equals(False))
         )
+
+    # TODO: Test the Services page itself.
+    def test_sim_services_sim_1(self):
+        self.assertThat(
+            self.phone_page.get_sim_services_enabled(sim=0),
+            Eventually(Equals(True)))
+        self.phone_page.go_to_sim_services(sim=0)
+        self.main_view.go_back()
+        self.modem_0.EmitSignal(
+            SIM_IFACE, 'PropertyChanged', 'sv',
+            ['ServiceNumbers', ''])
+        self.assertThat(
+            self.phone_page.get_sim_services_enabled(sim=0),
+            Eventually(Equals(False)))
+
+    # TODO: Test the Services page itself.
+    def test_sim_services_sim_2(self):
+        self.assertThat(
+            self.phone_page.get_sim_services_enabled(sim=1),
+            Eventually(Equals(True)))
+        self.phone_page.go_to_sim_services(sim=1)
+        self.main_view.go_back()
+        self.modem_1.EmitSignal(
+            SIM_IFACE, 'PropertyChanged', 'sv',
+            ['ServiceNumbers', ''])
+        self.assertThat(
+            self.phone_page.get_sim_services_enabled(sim=1),
+            Eventually(Equals(False)))
