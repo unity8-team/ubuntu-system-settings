@@ -114,6 +114,18 @@ class UbuntuSystemSettingsTestCase(
             emulator_base=ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase,
             capture_output=True)
 
+    @classmethod
+    def tearDownClass(cls):
+        if dbusmock.DBusTestCase.system_bus_pid is not None:
+            cls.stop_dbus(dbusmock.DBusTestCase.system_bus_pid)
+            del os.environ['DBUS_SYSTEM_BUS_ADDRESS']
+            dbusmock.DBusTestCase.system_bus_pid = None
+        if dbusmock.DBusTestCase.session_bus_pid is not None:
+            cls.stop_dbus(dbusmock.DBusTestCase.session_bus_pid)
+            del os.environ['DBUS_SESSION_BUS_ADDRESS']
+            dbusmock.DBusTestCase.session_bus_pid = None
+        super(UbuntuSystemSettingsTestCase, cls).tearDownClass()
+
 
 class UbuntuSystemSettingsUpowerTestCase(UbuntuSystemSettingsTestCase,
                                          dbusmock.DBusTestCase):
@@ -123,14 +135,14 @@ class UbuntuSystemSettingsUpowerTestCase(UbuntuSystemSettingsTestCase,
     def setUpClass(cls):
         cls.start_system_bus()
         cls.dbus_con = cls.get_dbus(True)
+
+    def setUp(self, panel=None):
         # Add a mock Upower environment so we get consistent results
-        (cls.p_mock, cls.obj_upower) = cls.spawn_server_template(
+        (self.p_mock, self.obj_upower) = self.spawn_server_template(
             'upower',
             {'OnBattery': True, 'DaemonVersion': UPOWER_VERSION},
             stdout=subprocess.PIPE)
-        cls.dbusmock = dbus.Interface(cls.obj_upower, dbusmock.MOCK_IFACE)
-
-    def setUp(self, panel=None):
+        self.dbusmock = dbus.Interface(self.obj_upower, dbusmock.MOCK_IFACE)
         self.obj_upower.Reset()
         super(UbuntuSystemSettingsUpowerTestCase, self).setUp()
 
@@ -140,15 +152,10 @@ class UbuntuSystemSettingsUpowerTestCase(UbuntuSystemSettingsTestCase,
             'mock_BATTERY', 'Battery', 50.0, 10
         )
 
-    @classmethod
-    def tearDownClass(cls):
-        cls.p_mock.terminate()
-        cls.p_mock.wait()
-        if dbusmock.DBusTestCase.system_bus_pid is not None:
-            cls.stop_dbus(dbusmock.DBusTestCase.system_bus_pid)
-            del os.environ['DBUS_SYSTEM_BUS_ADDRESS']
-            dbusmock.DBusTestCase.system_bus_pid = None
-        super(UbuntuSystemSettingsUpowerTestCase, cls).tearDownClass()
+    def tearDown(self):
+        self.p_mock.terminate()
+        self.p_mock.wait()
+        super(UbuntuSystemSettingsUpowerTestCase, self).tearDown()
 
 
 class UbuntuSystemSettingsBatteryTestCase(UbuntuSystemSettingsUpowerTestCase):
@@ -332,24 +339,19 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
     def setUpClass(cls):
         cls.start_system_bus()
         cls.dbus_con = cls.get_dbus(True)
-        template = os.path.join(os.path.dirname(__file__), 'ofono.py')
-        # Add a mock Ofono environment so we get consistent results
-        (cls.p_mock, cls.obj_ofono) = cls.spawn_server_template(
-            template, stdout=subprocess.PIPE)
-        cls.dbusmock = dbus.Interface(cls.obj_ofono, dbusmock.MOCK_IFACE)
         super(UbuntuSystemSettingsOfonoTestCase, cls).setUpClass()
 
-    @classmethod
-    def tearDownClass(cls):
-        cls.p_mock.terminate()
-        cls.p_mock.wait()
-        if dbusmock.DBusTestCase.system_bus_pid is not None:
-            cls.stop_dbus(dbusmock.DBusTestCase.system_bus_pid)
-            del os.environ['DBUS_SYSTEM_BUS_ADDRESS']
-            dbusmock.DBusTestCase.system_bus_pid = None
-        super(UbuntuSystemSettingsOfonoTestCase, cls).tearDownClass()
+    def tearDown(self):
+        self.p_mock.terminate()
+        self.p_mock.wait()
+        super(UbuntuSystemSettingsOfonoTestCase, self).tearDown()
 
     def setUp(self, panel=None):
+        template = os.path.join(os.path.dirname(__file__), 'ofono.py')
+        # Add a mock Ofono environment so we get consistent results
+        (self.p_mock, self.obj_ofono) = self.spawn_server_template(
+            template, stdout=subprocess.PIPE)
+        self.dbusmock = dbus.Interface(self.obj_ofono, dbusmock.MOCK_IFACE)
         self.obj_ofono.Reset()
 
         self.add_sim1()
@@ -422,36 +424,34 @@ class AboutSystemImageBaseTestCase(AboutBaseTestCase,
     def setUpClass(cls):
         cls.start_system_bus()
         cls.dbus_con = cls.get_dbus(True)
-        cls.p_mock = cls.spawn_server('com.canonical.SystemImage',
-                                      '/Service',
-                                      'com.canonical.SystemImage',
-                                      system_bus=True,
-                                      stdout=subprocess.PIPE)
-        cls.dbusmock = dbus.Interface(cls.dbus_con.get_object(
-                                      'com.canonical.SystemImage',
-                                      '/Service'),
-                                      dbusmock.MOCK_IFACE)
-
-        date = datetime.now().replace(microsecond=0).isoformat()
-
-        cls.dbusmock.AddMethod('', 'Info', '', 'isssa{ss}',
-                               'ret = (0, "", "", "%s", [])' % date)
 
     def setUp(self):
+        self.p_mock = self.spawn_server('com.canonical.SystemImage',
+                                       '/Service',
+                                       'com.canonical.SystemImage',
+                                       system_bus=True,
+                                       stdout=subprocess.PIPE)
+
         self.wait_for_bus_object('com.canonical.SystemImage',
                                  '/Service',
                                  system_bus=True)
+
+        self.dbusmock = dbus.Interface(self.dbus_con.get_object(
+                                       'com.canonical.SystemImage',
+                                       '/Service'),
+                                       dbusmock.MOCK_IFACE)
+
+        date = datetime.now().replace(microsecond=0).isoformat()
+
+        self.dbusmock.AddMethod('', 'Info', '', 'isssa{ss}',
+                                'ret = (0, "", "", "%s", [])' % date)
+
         super(AboutSystemImageBaseTestCase, self).setUp()
 
-    @classmethod
-    def tearDownClass(cls):
-        cls.p_mock.terminate()
-        cls.p_mock.wait()
-        if dbusmock.DBusTestCase.system_bus_pid is not None:
-            cls.stop_dbus(dbusmock.DBusTestCase.system_bus_pid)
-            del os.environ['DBUS_SYSTEM_BUS_ADDRESS']
-            dbusmock.DBusTestCase.system_bus_pid = None
-        super(AboutSystemImageBaseTestCase, cls).tearDownClass()
+    def tearDown(self):
+        self.p_mock.terminate()
+        self.p_mock.wait()
+        super(AboutSystemImageBaseTestCase, self).tearDown()
 
 
 class StorageBaseTestCase(AboutBaseTestCase):
@@ -582,14 +582,6 @@ class BackgroundBaseTestCase(
         self.mock_server.terminate()
         self.mock_server.wait()
         super(BackgroundBaseTestCase, self).tearDown()
-
-    @classmethod
-    def tearDownClass(cls):
-        if dbusmock.DBusTestCase.system_bus_pid is not None:
-            cls.stop_dbus(dbusmock.DBusTestCase.system_bus_pid)
-            del os.environ['DBUS_SYSTEM_BUS_ADDRESS']
-            dbusmock.DBusTestCase.system_bus_pid = None
-        super(BackgroundBaseTestCase, cls).tearDownClass()
 
 
 class SoundBaseTestCase(
@@ -751,14 +743,6 @@ class SoundBaseTestCase(
         self.mock_isound.wait()
         super(SoundBaseTestCase, self).tearDown()
 
-    @classmethod
-    def tearDownClass(cls):
-        if dbusmock.DBusTestCase.system_bus_pid is not None:
-            cls.stop_dbus(dbusmock.DBusTestCase.system_bus_pid)
-            del os.environ['DBUS_SYSTEM_BUS_ADDRESS']
-            dbusmock.DBusTestCase.system_bus_pid = None
-        super(SoundBaseTestCase, cls).tearDownClass()
-
     def start_sound_indicator(self):
         subprocess.call(['initctl', 'start', 'indicator-sound'])
 
@@ -803,35 +787,32 @@ class ConnectivityMixin(dbusmock.DBusTestCase):
     def setUpClass(cls):
         cls.start_session_bus()
         cls.connectivity_dbus = cls.get_dbus()
-        cls.connectivity_server = cls.spawn_server(CON_SERVICE,
-                                                   CON_PATH,
-                                                   CON_IFACE,
-                                                   system_bus=False,
-                                                   stdout=subprocess.PIPE)
-
-        cls.connectivity_mock = dbus.Interface(
-            cls.connectivity_dbus.get_object(CON_SERVICE,
-                                             CON_PATH),
-            dbusmock.MOCK_IFACE)
-
-        cls.connectivity_mock.AddMethod('', 'UnlockModem', 's', '', '')
         super(ConnectivityMixin, cls).setUpClass()
 
     def setUp(self):
+        self.connectivity_server = self.spawn_server(CON_SERVICE,
+                                                    CON_PATH,
+                                                    CON_IFACE,
+                                                    system_bus=False,
+                                                    stdout=subprocess.PIPE)
+
         self.wait_for_bus_object(CON_SERVICE,
                                  CON_PATH,
                                  system_bus=False)
+
+        self.connectivity_mock = dbus.Interface(
+            self.connectivity_dbus.get_object(CON_SERVICE,
+                                              CON_PATH),
+            dbusmock.MOCK_IFACE)
+
+        self.connectivity_mock.AddMethod('', 'UnlockModem', 's', '', '')
+
         super(ConnectivityMixin, self).setUp()
 
-    @classmethod
-    def tearDownClass(cls):
-        cls.connectivity_server.terminate()
-        cls.connectivity_server.wait()
-        if dbusmock.DBusTestCase.session_bus_pid is not None:
-            cls.stop_dbus(dbusmock.DBusTestCase.session_bus_pid)
-            del os.environ['DBUS_SESSION_BUS_ADDRESS']
-            dbusmock.DBusTestCase.session_bus_pid = None
-        super(ConnectivityMixin, cls).tearDownClass()
+    def tearDown(self):
+        self.connectivity_server.terminate()
+        self.connectivity_server.wait()
+        super(ConnectivityMixin, self).tearDown()
 
 
 class SecurityBaseTestCase(UbuntuSystemSettingsOfonoTestCase):
@@ -886,12 +867,12 @@ class WifiBaseTestCase(UbuntuSystemSettingsTestCase,
     def setUpClass(cls):
         cls.start_system_bus()
         cls.dbus_con = cls.get_dbus(True)
-        # Add a mock NetworkManager environment so we get consistent results
-        template = os.path.join(os.path.dirname(__file__), 'networkmanager.py')
-        (cls.p_mock, cls.obj_nm) = cls.spawn_server_template(
-            template, stdout=subprocess.PIPE)
 
     def setUp(self, panel=None):
+        # Add a mock NetworkManager environment so we get consistent results
+        template = os.path.join(os.path.dirname(__file__), 'networkmanager.py')
+        (self.p_mock, self.obj_nm) = self.spawn_server_template(
+            template, stdout=subprocess.PIPE)
         self.obj_nm.Reset()
         self.device_path = self.obj_nm.AddWiFiDevice('test0', 'Barbaz', 1)
         self.device_mock = dbus.Interface(self.dbus_con.get_object(
@@ -934,15 +915,10 @@ class WifiBaseTestCase(UbuntuSystemSettingsTestCase,
                random.randint(0x00, 0xff), random.randint(0x00, 0xff)]
         return ':'.join(map(lambda x: "%02x" % x, mac))
 
-    @classmethod
-    def tearDownClass(cls):
-        cls.p_mock.terminate()
-        cls.p_mock.wait()
-        if dbusmock.DBusTestCase.system_bus_pid is not None:
-            cls.stop_dbus(dbusmock.DBusTestCase.system_bus_pid)
-            del os.environ['DBUS_SYSTEM_BUS_ADDRESS']
-            dbusmock.DBusTestCase.system_bus_pid = None
-        super(WifiBaseTestCase, cls).tearDownClass()
+    def tearDown(self):
+        self.p_mock.terminate()
+        self.p_mock.wait()
+        super(WifiBaseTestCase, self).tearDown()
 
 
 class WifiWithSSIDBaseTestCase(WifiBaseTestCase):
