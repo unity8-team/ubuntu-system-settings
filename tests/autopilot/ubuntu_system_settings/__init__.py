@@ -120,13 +120,15 @@ class SystemSettingsMainWindow(ubuntuuitoolkit.MainView):
         page.active.wait_for(True)
         return page
 
+    @autopilot.logging.log_action(logger.debug)
     def scroll_to(self, obj):
         page = self.system_settings_page
+        get_page_bottom = lambda: page.globalRect[1] + page.globalRect[3]
         page_right = page.globalRect[0] + page.globalRect[2]
-        page_bottom = page.globalRect[1] + page.globalRect[3]
+        page_bottom = get_page_bottom()
         page_center_x = int(page_right / 2)
         page_center_y = int(page_bottom / 2)
-        while obj.globalRect[1] + obj.height > page_bottom:
+        while obj.globalRect[1] + obj.height > get_page_bottom():
             self.pointing_device.drag(
                 page_center_x,
                 page_center_y,
