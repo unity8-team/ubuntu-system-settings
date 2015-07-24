@@ -35,6 +35,7 @@ _parameters = {}
 def set_hotspot_enabled(self, value):
     self.SetProperty(NETS_OBJ, NETS_IFACE, 'HotspotEnabled', value)
 
+    # Set HotspotStored = True if not stored and we're enabling it.
     stored = dbusmock.get_object(NETS_OBJ).Get(NETS_IFACE, 'HotspotStored')
     if value and not bool(stored):
         self.SetProperty(NETS_OBJ, NETS_IFACE, 'HotspotStored', True)

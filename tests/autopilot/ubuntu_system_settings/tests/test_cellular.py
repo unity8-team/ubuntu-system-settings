@@ -300,7 +300,13 @@ class DualSimCellularTestCase(CellularBaseTestCase):
 
 class HotspotFirstRun(HotspotBaseTestCase):
 
+    connectivity_parameters = {
+        'HotspotEnabled': False,
+        'HotspotStored': False
+    }
+
     def test_setup(self):
+        sleep(10)
         ssid = 'bar'
         password = 'zomgzomg'
         config = {'ssid': ssid, 'password': password}
@@ -325,6 +331,11 @@ class HotspotFirstRun(HotspotBaseTestCase):
         self.assertThat(
             lambda: self.ctv_private.Get(CTV_PRIV_IFACE, 'HotspotPassword'),
             Eventually(Equals(password))
+        )
+
+        self.assertThat(
+            lambda: self.ctv_nets.Get(CTV_NETS_IFACE, 'HotspotStored'),
+            Eventually(Equals(True))
         )
 
 
