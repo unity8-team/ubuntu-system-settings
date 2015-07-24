@@ -583,6 +583,14 @@ class BackgroundBaseTestCase(
         self.mock_server.wait()
         super(BackgroundBaseTestCase, self).tearDown()
 
+    @classmethod
+    def tearDownClass(cls):
+        if dbusmock.DBusTestCase.system_bus_pid is not None:
+            cls.stop_dbus(dbusmock.DBusTestCase.system_bus_pid)
+            del os.environ['DBUS_SYSTEM_BUS_ADDRESS']
+            dbusmock.DBusTestCase.system_bus_pid = None
+        super(BackgroundBaseTestCase, cls).tearDownClass()
+
 
 class SoundBaseTestCase(
         UbuntuSystemSettingsTestCase,
@@ -742,6 +750,14 @@ class SoundBaseTestCase(
         self.mock_isound.terminate()
         self.mock_isound.wait()
         super(SoundBaseTestCase, self).tearDown()
+
+    @classmethod
+    def tearDownClass(cls):
+        if dbusmock.DBusTestCase.system_bus_pid is not None:
+            cls.stop_dbus(dbusmock.DBusTestCase.system_bus_pid)
+            del os.environ['DBUS_SYSTEM_BUS_ADDRESS']
+            dbusmock.DBusTestCase.system_bus_pid = None
+        super(SoundBaseTestCase, cls).tearDownClass()
 
     def start_sound_indicator(self):
         subprocess.call(['initctl', 'start', 'indicator-sound'])
@@ -917,6 +933,16 @@ class WifiBaseTestCase(UbuntuSystemSettingsTestCase,
         mac = [0x00, 0x16, 0x3e, random.randint(0x00, 0x7f),
                random.randint(0x00, 0xff), random.randint(0x00, 0xff)]
         return ':'.join(map(lambda x: "%02x" % x, mac))
+
+    @classmethod
+    def tearDownClass(cls):
+        cls.p_mock.terminate()
+        cls.p_mock.wait()
+        if dbusmock.DBusTestCase.system_bus_pid is not None:
+            cls.stop_dbus(dbusmock.DBusTestCase.system_bus_pid)
+            del os.environ['DBUS_SYSTEM_BUS_ADDRESS']
+            dbusmock.DBusTestCase.system_bus_pid = None
+        super(WifiBaseTestCase, cls).tearDownClass()
 
 
 class WifiWithSSIDBaseTestCase(WifiBaseTestCase):
