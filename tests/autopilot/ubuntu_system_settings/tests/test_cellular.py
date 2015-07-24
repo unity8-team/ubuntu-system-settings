@@ -5,7 +5,6 @@
 # under the terms of the GNU General Public License version 3, as published
 # by the Free Software Foundation.
 
-import dbus
 from gi.repository import Gio, GLib
 from time import sleep
 
@@ -17,9 +16,6 @@ from ubuntu_system_settings.tests import (
     CellularBaseTestCase, HotspotBaseTestCase, CONNMAN_IFACE, RDO_IFACE,
     NETREG_IFACE)
 
-from ubuntu_system_settings.tests.networkmanager import (
-    CSETTINGS_IFACE, MAIN_OBJ as NM_PATH, MAIN_IFACE as NM_IFACE,
-)
 
 from ubuntu_system_settings.tests.connectivity import (
     PRIV_IFACE as CTV_PRIV_IFACE, NETS_IFACE as CTV_NETS_IFACE
@@ -305,56 +301,31 @@ class DualSimCellularTestCase(CellularBaseTestCase):
 class HotspotFirstRun(HotspotBaseTestCase):
 
     def test_setup(self):
-        if not self.cellular_page.have_hotspot():
-            self.skipTest('Cannot test hotspot since wifi is disabled.')
-
-        ssid = 'Ubuntu'
-        password = 'abcdefgh'
-        config = {'password': password}
-        active_con_path = NM_PATH + '/ActiveConnection/0'
-        con_path = NM_PATH + '/Settings/0'
+        ssid = 'bar'
+        password = 'zomgzomg'
+        config = {'ssid': ssid, 'password': password}
 
         hotspot_page = self.cellular_page.setup_hotspot(config)
 
         # Assert that the switch is on.
         self.assertTrue(hotspot_page.get_hotspot_status())
 
-        # Assert that Block on Urfkill is called twice.
         self.assertThat(
-            lambda: len(self.urfkill_mock.GetMethodCalls('Block')),
-            Eventually(Equals(2))
+            lambda: self.ctv_nets.Get(CTV_NETS_IFACE, 'HotspotEnabled'),
+            Eventually(Equals(True))
         )
 
-        # Assert that we get one active connection.
         self.assertThat(
-            lambda: len(self.obj_nm.GetAll(NM_IFACE)['ActiveConnections']),
-            Eventually(Equals(1))
+            lambda: bytearray(
+                self.ctv_nets.Get(CTV_NETS_IFACE, 'HotspotSsid')
+            ).decode('UTF-8'),
+            Eventually(Equals(ssid))
         )
 
-        # Assert that the active connection has a certain path.
         self.assertThat(
-            lambda: self.obj_nm.GetAll(NM_IFACE)['ActiveConnections'][0],
-            Eventually(Equals(active_con_path))
+            lambda: self.ctv_private.Get(CTV_PRIV_IFACE, 'HotspotPassword'),
+            Eventually(Equals(password))
         )
-
-        # Assert the device's active connection
-        self.assertThat(
-            lambda: self.device_mock.Get(DEV_IFACE, 'ActiveConnection'),
-            Eventually(Equals(active_con_path))
-        )
-
-        connection_mock = dbus.Interface(self.dbus_con.get_object(
-            NM_IFACE, con_path), CSETTINGS_IFACE)
-
-        settings = connection_mock.GetSettings()
-
-        # Assert that autoconnect is true, that ssid and password is what we
-        # expect them to be.
-        self.assertTrue(settings['connection']['autoconnect'])
-
-        s_ssid = bytearray(settings['802-11-wireless']['ssid']).decode('utf-8')
-        self.assertEqual(s_ssid, ssid)
-        self.assertEqual(settings['802-11-wireless-security']['psk'], password)
 
 
 class HotspotExistsTestCase(HotspotBaseTestCase):
@@ -364,58 +335,54 @@ class HotspotExistsTestCase(HotspotBaseTestCase):
     }
 
     def test_enabling(self):
+        self.assertThat(
+            lambda: self.ctv_nets.Get(CTV_NETS_IFACE, 'HotspotEnabled'),
+            Eventually(Equals(False))
+        )
 
-        self.assertThat(
-            lambda: self.obj_ctv.Get(CTV_PRIV_IFACE, 'HotspotEnabled'),
-            Eventually(Equals(False))
-        )
-        self.assertThat(
-            lambda: self.obj_ctv.Get(CTV_NETS_IFACE, 'HotspotEnabled'),
-            Eventually(Equals(False))
-        )
         self.cellular_page.enable_hotspot()
 
         self.assertThat(
-            lambda: self.obj_ctv.Get(CTV_NETS_IFACE, 'HotspotEnabled'),
+            lambda: self.ctv_nets.Get(CTV_NETS_IFACE, 'HotspotEnabled'),
             Eventually(Equals(True))
         )
 
-    def test_disabling(self):
-        if not self.cellular_page.have_hotspot():
-            self.skipTest('Cannot test hotspot since wifi is disabled.')
-
-        self.add_hotspot('foo', 'abcdefgh', enabled=True)
-
-        self.assertThat(
-            lambda: len(self.obj_nm.GetAll(NM_IFACE)['ActiveConnections']),
-            Eventually(Equals(1))
-        )
-
-        self.cellular_page.disable_hotspot()
-
-        self.assertThat(
-            lambda: len(self.obj_nm.GetAll(NM_IFACE)['ActiveConnections']),
-            Eventually(Equals(0))
-        )
-
     def test_changing(self):
-        if not self.cellular_page.have_hotspot():
-            self.skipTest('Cannot test hotspot since wifi is disabled.')
-
-        con_path = self.add_hotspot('foo', 'abcdefgh', enabled=True)
-
         ssid = 'bar'
         password = 'zomgzomg'
         config = {'ssid': ssid, 'password': password}
         self.cellular_page.setup_hotspot(config)
 
-        con_path = NM_PATH + '/Settings/0'
+        self.assertThat(
+            lambda: bytearray(
+                self.ctv_nets.Get(CTV_NETS_IFACE, 'HotspotSsid')
+            ).decode('UTF-8'),
+            Eventually(Equals(ssid))
+        )
 
-        con_mock = dbus.Interface(self.dbus_con.get_object(
-            NM_IFACE, con_path), CSETTINGS_IFACE)
+        self.assertThat(
+            lambda: self.ctv_private.Get(CTV_PRIV_IFACE, 'HotspotPassword'),
+            Eventually(Equals(password))
+        )
 
-        settings = con_mock.GetSettings()
 
-        s_ssid = bytearray(settings['802-11-wireless']['ssid']).decode('utf-8')
-        self.assertEqual(s_ssid, ssid)
-        self.assertEqual(settings['802-11-wireless-security']['psk'], password)
+class HotspotEnabledTestCase(HotspotBaseTestCase):
+
+    connectivity_parameters = {
+        'HotspotStored': True,
+        'HotspotEnabled': True
+    }
+
+    def test_disabling(self):
+
+        self.assertThat(
+            lambda: self.ctv_nets.Get(CTV_NETS_IFACE, 'HotspotEnabled'),
+            Eventually(Equals(True))
+        )
+
+        self.cellular_page.disable_hotspot()
+
+        self.assertThat(
+            lambda: self.ctv_nets.Get(CTV_NETS_IFACE, 'HotspotEnabled'),
+            Eventually(Equals(False))
+        )

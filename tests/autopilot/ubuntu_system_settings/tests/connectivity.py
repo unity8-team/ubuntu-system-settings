@@ -16,15 +16,15 @@ import dbus
 import dbusmock
 
 BUS_NAME = 'com.ubuntu.connectivity1'
-MAIN_IFACE = 'com.ubuntu.connectivity1.NetworkingStatus'
-MAIN_OBJ = '/com/ubuntu/connectivity1/NetworkingStatus'
+MAIN_IFACE = 'com.ubuntu.connectivity1'
+MAIN_OBJ = '/'
 SYSTEM_BUS = False
 
 PRIV_IFACE = 'com.ubuntu.connectivity1.Private'
 PRIV_OBJ = '/com/ubuntu/connectivity1/Private'
 
-NETS_IFACE = MAIN_IFACE
-NETS_OBJ = MAIN_OBJ
+NETS_IFACE = 'com.ubuntu.connectivity1.NetworkingStatus'
+NETS_OBJ = '/com/ubuntu/connectivity1/NetworkingStatus'
 
 NOT_IMPLEMENTED = '''raise dbus.exceptions.DBusException(
     "org.ofono.Error.NotImplemented")'''
@@ -32,86 +32,99 @@ NOT_IMPLEMENTED = '''raise dbus.exceptions.DBusException(
 _parameters = {}
 
 
+def set_hotspot_enabled(self, value):
+    self.SetProperty(NETS_OBJ, NETS_IFACE, 'HotspotEnabled', value)
+
+    stored = dbusmock.get_object(NETS_OBJ).Get(NETS_IFACE, 'HotspotStored')
+    if value and not bool(stored):
+        self.SetProperty(NETS_OBJ, NETS_IFACE, 'HotspotStored', True)
+
+
+def set_hotspot_ssid(self, value):
+    self.SetProperty(NETS_OBJ, NETS_IFACE, 'HotspotSsid', value)
+
+
+def set_hotspot_password(self, value):
+    self.SetProperty(PRIV_OBJ, PRIV_IFACE, 'HotspotPassword', value)
+
+
 def load(mock, parameters):
     global _parameters
+    _parameters = parameters
+
+    mock.set_hotspot_enabled = set_hotspot_enabled
+    mock.set_hotspot_ssid = set_hotspot_ssid
+    mock.set_hotspot_password = set_hotspot_password
+
     mock.modems = []  # path to boolean e.g. ril_0: False
     mock.flight_mode = False
     mock.wifi_enabled = False
-    _parameters = parameters
 
-    nets = dbusmock.get_object(NETS_OBJ)
-    nets.AddProperties(NETS_IFACE, {
-        'HotspotSsid': _parameters.get(
-            'HotspotSsid', dbus.ByteArray('Ubuntu'.encode('UTF-8'))),
-        'HotspotEnabled': _parameters.get(
-            'HotspotEnabled', dbus.Boolean(False)),
-        'HotspotMode': _parameters.get('HotspotMode', dbus.String('ap')),
-        'HotspotStored': _parameters.get('HotspotStored', dbus.Boolean(False)),
-        'UnstoppableOperationHappening': dbus.Boolean(False),
-    })
+    mock.AddObject(
+        NETS_OBJ,
+        NETS_IFACE,
+        {
+            'HotspotSsid': _parameters.get(
+                'HotspotSsid', dbus.ByteArray('Ubuntu'.encode('UTF-8'))),
+            'HotspotEnabled': _parameters.get(
+                'HotspotEnabled', dbus.Boolean(False)),
+            'HotspotMode': _parameters.get('HotspotMode', dbus.String('ap')),
+            'HotspotStored': _parameters.get(
+                'HotspotStored', dbus.Boolean(False)
+            ),
+            'UnstoppableOperationHappening': dbus.Boolean(False),
+        },
+        []
+    )
 
-    mock.AddObject(PRIV_OBJ, PRIV_IFACE, {
-        'HotspotPassword': _parameters.get(
-            'HotspotPassword', dbus.String('abcdefgh')
-        )
-    }, [])
+    mock.AddObject(
+        PRIV_OBJ,
+        PRIV_IFACE,
+        {
+            'HotspotPassword': _parameters.get(
+                'HotspotPassword', dbus.String('abcdefgh')
+            )
+        },
+        [
+            (
+                'UnlockAllModems', '', '',
+                ''
+            ),
+            (
+                'UnlockModem', 's', '',
+                ''
+            ),
+            (
+                'SetFlightMode', 'b', '',
+                ''
+            ),
+            (
+                'SetWifiEnabled', 'b', '',
+                ''
+            ),
+            (
+                'SetHotspotSsid', 'ay', '',
+                'objects["/"].set_hotspot_ssid(self, args[0])'
+            ),
+            (
+                'SetHotspotPassword', 's', '',
+                'objects["/"].set_hotspot_password(self, args[0])'
+            ),
+            (
+                'SetHotspotEnabled', 'b', '',
+                'objects["/"].set_hotspot_enabled(self, args[0])'
+            ),
+            (
+                'SetHotspotMode', 's', '',
+                ''
+            )
+        ]
+    )
 
 
-@dbus.service.method(NETS_IFACE,
+@dbus.service.method(dbusmock.MOCK_IFACE,
                      in_signature='sssv', out_signature='')
 def SetProperty(self, path, iface, name, value):
-    import syslog
-    syslog.syslog("Set prop %s %s %s %s" % (path, iface, name, value))
     obj = dbusmock.get_object(path)
     obj.Set(iface, name, value)
     obj.EmitSignal(iface, 'PropertiesChanged', 'a{sv}', [{name: value}])
-
-
-@dbus.service.method(PRIV_IFACE, in_signature='', out_signature='')
-def UnlockAllModems(self):
-    '''Unlocks all modems.'''
-    pass
-
-
-@dbus.service.method(PRIV_IFACE, in_signature='s', out_signature='')
-def UnlockModem(self, modem):
-    '''Unlocks a modem.'''
-    pass
-
-
-@dbus.service.method(PRIV_IFACE, in_signature='b', out_signature='')
-def SetFlightMode(self, enabled):
-    '''Sets flight mode.'''
-    pass
-
-
-@dbus.service.method(PRIV_IFACE, in_signature='b', out_signature='')
-def SetWifiEnabled(self, enabled):
-    '''Sets wifi enabled.'''
-    pass
-
-
-@dbus.service.method(PRIV_IFACE, in_signature='ay', out_signature='')
-def SetHotspotSsid(self, ssid):
-    '''Sets the hotspot ssid.'''
-    pass
-
-
-@dbus.service.method(PRIV_IFACE, in_signature='s', out_signature='')
-def SetHotspotPassword(self, password):
-    '''Sets hotspot password.'''
-    pass
-
-
-@dbus.service.method(PRIV_IFACE, in_signature='b', out_signature='')
-def SetHotspotEnabled(self, enabled):
-    '''Sets hotspot enabled.'''
-    import syslog
-    syslog.syslog("foo: sat enabled" + str(enabled) + " - " + enabled)
-    self.SetProperty(NETS_OBJ, NETS_IFACE, 'HotspotEnabled', True)
-
-
-@dbus.service.method(PRIV_IFACE, in_signature='s', out_signature='')
-def SetHotspotMode(self, mode):
-    '''Sets the hotspot mode.'''
-    pass

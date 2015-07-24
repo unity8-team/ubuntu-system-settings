@@ -33,6 +33,10 @@ from dbusmock.templates.networkmanager import (InfrastructureMode,
 from fixtures import EnvironmentVariable
 from gi.repository import UPowerGlib
 from testtools.matchers import Equals, NotEquals, GreaterThan
+from ubuntu_system_settings.tests.connectivity import (
+    PRIV_OBJ as CTV_PRIV_OBJ, NETS_OBJ as CTV_NETS_OBJ,
+    MAIN_IFACE as CTV_IFACE
+)
 
 ACCOUNTS_IFACE = 'org.freedesktop.Accounts'
 ACCOUNTS_USER_IFACE = 'org.freedesktop.Accounts.User'
@@ -407,11 +411,23 @@ class HotspotBaseTestCase(CellularBaseTestCase):
     def setUpClass(cls):
         stop_network_indicator()
         cls.start_session_bus()
-
+        cls.dbus_con = cls.get_dbus(False)
         ctv_tmpl = os.path.join(os.path.dirname(__file__), 'connectivity.py')
         (cls.ctv_mock, cls.obj_ctv) = cls.spawn_server_template(
             ctv_tmpl, parameters=cls.connectivity_parameters,
             stdout=subprocess.PIPE)
+
+        cls.ctv_private = dbus.Interface(
+            cls.dbus_con.get_object(CTV_IFACE, CTV_PRIV_OBJ),
+            'org.freedesktop.DBus.Properties')
+
+        cls.ctv_private_mock = dbus.Interface(
+            cls.dbus_con.get_object(CTV_IFACE, CTV_PRIV_OBJ),
+            dbusmock.MOCK_IFACE)
+
+        cls.ctv_nets = dbus.Interface(
+            cls.dbus_con.get_object(CTV_IFACE, CTV_NETS_OBJ),
+            'org.freedesktop.DBus.Properties')
 
         inetwork = os.path.join(
             os.path.dirname(__file__), 'indicatornetwork.py'
@@ -420,6 +436,14 @@ class HotspotBaseTestCase(CellularBaseTestCase):
             inetwork, stdout=subprocess.PIPE)
 
         super(HotspotBaseTestCase, cls).setUpClass()
+
+    def tearDown(self):
+        super(HotspotBaseTestCase, self).tearDown()
+        import pprint
+        pp = pprint.PrettyPrinter(indent=4)
+        print('\n\n\n\n\n\nCalls to connectivity.Private:\n')
+        pp.pprint(self.ctv_private_mock.GetCalls())
+        print('\n\n\n\n\n\n\n\n')
 
     # def setUp(self):
     #     self.stop_network_indicator()

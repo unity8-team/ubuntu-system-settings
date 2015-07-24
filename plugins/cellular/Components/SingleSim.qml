@@ -46,19 +46,7 @@ Column {
 
         property variant actionObject: action("wifi.enable")
 
-        Component.onCompleted: {
-            start()
-            // console.warn('started actionGroup')
-            // console.warn(actionObject, actionObject.valid, actionObject.state)
-        }
-        // onActionStateChanged: console.warn('state changed', name, state)
-        onStatusChanged: console.warn('status changed', status)
-        // onActionObjectChanged: console.warn('state', state)
-    }
-
-    Connections {
-        target: actionGroup.actionObject
-        onStateChanged: console.warn('actionObject state changed', state);
+        Component.onCompleted: start()
     }
 
     ListItem.Standard {

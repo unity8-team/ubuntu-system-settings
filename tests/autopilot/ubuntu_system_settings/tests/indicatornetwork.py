@@ -24,8 +24,6 @@ _parameters = {}
 
 
 def load(mock, parameters):
-    import syslog
-    syslog.syslog("inetwork: was called")
     global _parameters
     _parameters = parameters
 
