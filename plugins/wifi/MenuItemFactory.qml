@@ -40,6 +40,13 @@ Item {
         "unity.widgets.systemsettings.tablet.accesspoint" : accessPoint,
     }
 
+    function getExtendedProperty(object, propertyName, defaultValue) {
+        if (object && object.hasOwnProperty(propertyName)) {
+            return object[propertyName];
+        }
+        return defaultValue;
+    }
+
     Component { id: divMenu; DivMenuItem {} }
 
     Component {
@@ -95,13 +102,22 @@ Item {
         id: wifiSection;
         SectionMenuItem {
             property QtObject menu: null
+            property var menuModel: menuFactory.menuModel
             property int menuIndex: -1
-
+            property var extendedData: menu && menu.ext || undefined
             text: menu && menu.label ? menu.label : ""
-            busy: menu ? menu.ext.xCanonicalBusyAction : false
+            busy: getExtendedProperty(extendedData, "xCanonicalBusyAction", false)
 
-            Component.onCompleted: {
-                model.loadExtendedAttributes(menuIndex, {'x-canonical-busy-action': 'bool'});
+            onMenuModelChanged: {
+                loadAttributes();
+            }
+            onMenuIndexChanged: {
+                loadAttributes();
+            }
+
+            function loadAttributes() {
+                if (!menuModel || menuIndex == undefined) return;
+                menuModel.loadExtendedAttributes(menuIndex, {'x-canonical-busy-action': 'bool'})
             }
         }
     }
@@ -111,24 +127,27 @@ Item {
         AccessPoint {
             id: apItem
             property QtObject menu: null
+            property var menuModel: menuFactory.model
             property int menuIndex: -1
+            property var extendedData: menu && menu.ext || undefined
             property var strenthAction: QMenuModel.UnityMenuAction {
-                model: menuFactory.model ? menuFactory.model : null
-                name: menu ? menu.ext.xCanonicalWifiApStrengthAction : ""
+                model: menuModel ? menuModel : null
+                name: getExtendedProperty(extendedData, "xCanonicalWifiApStrengthAction", "")
             }
             property bool serverChecked: menu && menu.isToggled || false
 
             text: menu && menu.label ? menu.label : ""
-            secure: menu ? menu.ext.xCanonicalWifiApIsSecure : false
-            adHoc: menu ? menu.ext.xCanonicalWifiApIsAdhoc : false
+            secure: getExtendedProperty(extendedData, "xCanonicalWifiApIsSecure", false)
+            adHoc: getExtendedProperty(extendedData, "xCanonicalWifiApIsAdhoc", false)
             checked: serverChecked
             signalStrength: strenthAction.valid ? strenthAction.state : 0
             enabled: menu ? menu.sensitive : false
 
-            Component.onCompleted: {
-                model.loadExtendedAttributes(menuIndex, {'x-canonical-wifi-ap-is-adhoc': 'bool',
-                                                         'x-canonical-wifi-ap-is-secure': 'bool',
-                                                         'x-canonical-wifi-ap-strength-action': 'string'});
+            onMenuModelChanged: {
+                loadAttributes();
+            }
+            onMenuIndexChanged: {
+                loadAttributes();
             }
 
             USC.ServerPropertySynchroniser {
@@ -139,6 +158,13 @@ Item {
                 serverProperty: "serverChecked"
 
                 onSyncTriggered: model.activate(apItem.menuIndex)
+            }
+
+            function loadAttributes() {
+                if (!model || menuIndex == undefined) return;
+                model.loadExtendedAttributes(menuIndex, {'x-canonical-wifi-ap-is-adhoc': 'bool',
+                                                         'x-canonical-wifi-ap-is-secure': 'bool',
+                                                         'x-canonical-wifi-ap-strength-action': 'string'});
             }
         }
     }

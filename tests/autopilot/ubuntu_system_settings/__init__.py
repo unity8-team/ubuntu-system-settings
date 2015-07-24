@@ -29,6 +29,7 @@ import ubuntuuitoolkit
 from autopilot import introspection
 from autopilot.exceptions import StateNotFoundError
 from ubuntu_system_settings.utils.i18n import ugettext as _
+import ubuntu_system_settings.utils as utils
 
 logger = logging.getLogger(__name__)
 
@@ -614,6 +615,19 @@ class PhonePage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
 
         return self._go_to_page(find, 'servicesPage')
 
+    def get_sim_services_enabled(self, sim=None):
+        """Return whether or not Sim Services is enabled.
+
+        :param sim: Number of what SIM to use, either 1 or 2.
+            Required parameter in dual SIM setups
+        :returns: Whether or not Sim Services is enabled.
+
+        """
+        find = "simServices"
+        if sim is not None:
+            find = "simServicesSim%d" % sim
+        return self.select_single(objectName=find).enabled
+
     @property
     def _dialpad_sounds(self):
         """The dialpad sounds switch."""
@@ -972,7 +986,7 @@ class CallForwarding(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
 
 class Services(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
 
-    """Autopilot helper for the Call waiting page."""
+    """Autopilot helper for the Sim Services page."""
 
     # TODO: add pages for each relevant sim services page
     def open_sim_service(self, service):
@@ -1248,9 +1262,11 @@ class WifiPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
         if password:
             dialog.enter_password(password)
         if cancel:
+            utils.dismiss_osk()
             dialog.cancel()
             return self
         else:
+            utils.dismiss_osk()
             dialog.connect()
             return dialog
 

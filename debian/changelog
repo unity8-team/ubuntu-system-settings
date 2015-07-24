@@ -1,3 +1,36 @@
+ubuntu-system-settings (0.3+15.10.20150722-0ubuntu1) wily; urgency=medium
+
+  [ CI Train Bot ]
+  * Resync trunk.
+
+  [ Ken VanDine ]
+  * Use TextField.write to properly use the OSK Added helper to dismiss
+    OSK
+
+  [ jonas-drange ]
+  * [tests] avoids setting Interfaces property after the
+    Cellular/Phone/About plugins have loaded.
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Wed, 22 Jul 2015 12:55:01 +0000
+
+ubuntu-system-settings (0.3+15.10.20150716-0ubuntu1) wily; urgency=medium
+
+  [ CI Train Bot ]
+  * Resync trunk.
+
+  [ Ken VanDine ]
+  * [wifi] Fixed handling of loading extended attributes from the
+    MenuModel (LP: #1472505)
+
+  [ handsome_feng<445865575@qq.com> ]
+  * Add flickable in time/date page. (LP: #1469076)
+
+  [ jonas-drange ]
+  * [phone] make services insensitive when there are no services as well
+    as adding autopilot tests for sim services. (LP: #1470779)
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Thu, 16 Jul 2015 13:40:14 +0000
+
 ubuntu-system-settings (0.3+15.10.20150708-0ubuntu1) wily; urgency=medium
 
   [ CI Train Bot ]
