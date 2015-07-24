@@ -8,7 +8,6 @@
 import dbusmock
 import subprocess
 from time import sleep
-import os
 
 from autopilot.matchers import Eventually
 from testtools.matchers import Equals, GreaterThan
@@ -27,22 +26,17 @@ class TimeDateTestCase(UbuntuSystemSettingsTestCase,
     def setUpClass(cls):
         cls.start_system_bus()
         cls.dbus_con = cls.get_dbus(True)
-        (cls.p_mock, cls.obj_timedate1) = cls.spawn_server_template(
-            'timedated', {}, stdout=subprocess.PIPE
-        )
 
-    @classmethod
-    def tearDownClass(cls):
-        cls.p_mock.terminate()
-        cls.p_mock.wait()
-        if dbusmock.DBusTestCase.system_bus_pid is not None:
-            cls.stop_dbus(dbusmock.DBusTestCase.system_bus_pid)
-            del os.environ['DBUS_SYSTEM_BUS_ADDRESS']
-            dbusmock.DBusTestCase.system_bus_pid = None
-        super(TimeDateTestCase, cls).tearDownClass()
+    def tearDown(self):
+        self.p_mock.terminate()
+        self.p_mock.wait()
+        super(TimeDateTestCase, self).tearDown()
 
     def setUp(self):
         """ Go to Time & Date page """
+        (self.p_mock, self.obj_timedate1) = self.spawn_server_template(
+            'timedated', {}, stdout=subprocess.PIPE
+        )
         self.obj_timedate1.Reset()
         super(TimeDateTestCase, self).setUp()
         self.page = self.main_view.go_to_datetime_page()
