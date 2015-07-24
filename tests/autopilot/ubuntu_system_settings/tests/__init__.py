@@ -144,6 +144,10 @@ class UbuntuSystemSettingsUpowerTestCase(UbuntuSystemSettingsTestCase,
     def tearDownClass(cls):
         cls.p_mock.terminate()
         cls.p_mock.wait()
+        if dbusmock.DBusTestCase.system_bus_pid is not None:
+            cls.stop_dbus(dbusmock.DBusTestCase.system_bus_pid)
+            del os.environ['DBUS_SYSTEM_BUS_ADDRESS']
+            dbusmock.DBusTestCase.system_bus_pid = None
         super(UbuntuSystemSettingsUpowerTestCase, cls).tearDownClass()
 
 
@@ -339,6 +343,10 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
     def tearDownClass(cls):
         cls.p_mock.terminate()
         cls.p_mock.wait()
+        if dbusmock.DBusTestCase.system_bus_pid is not None:
+            cls.stop_dbus(dbusmock.DBusTestCase.system_bus_pid)
+            del os.environ['DBUS_SYSTEM_BUS_ADDRESS']
+            dbusmock.DBusTestCase.system_bus_pid = None
         super(UbuntuSystemSettingsOfonoTestCase, cls).tearDownClass()
 
     def setUp(self, panel=None):
@@ -439,6 +447,10 @@ class AboutSystemImageBaseTestCase(AboutBaseTestCase,
     def tearDownClass(cls):
         cls.p_mock.terminate()
         cls.p_mock.wait()
+        if dbusmock.DBusTestCase.system_bus_pid is not None:
+            cls.stop_dbus(dbusmock.DBusTestCase.system_bus_pid)
+            del os.environ['DBUS_SYSTEM_BUS_ADDRESS']
+            dbusmock.DBusTestCase.system_bus_pid = None
         super(AboutSystemImageBaseTestCase, cls).tearDownClass()
 
 
@@ -799,6 +811,10 @@ class ConnectivityMixin(dbusmock.DBusTestCase):
     def tearDownClass(cls):
         cls.connectivity_server.terminate()
         cls.connectivity_server.wait()
+        if dbusmock.DBusTestCase.session_bus_pid is not None:
+            cls.stop_dbus(dbusmock.DBusTestCase.session_bus_pid)
+            del os.environ['DBUS_SESSION_BUS_ADDRESS']
+            dbusmock.DBusTestCase.session_bus_pid = None
         super(ConnectivityMixin, cls).tearDownClass()
 
 
