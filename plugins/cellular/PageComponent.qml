@@ -96,6 +96,19 @@ ItemPage {
         }
     }
 
+    QDBusActionGroup {
+        id: actionGroup
+        busType: 1
+        busName: "com.canonical.indicator.network"
+        objectPath: "/com/canonical/indicator/network"
+
+        property variant actionObject: action("wifi.enable")
+
+        Component.onCompleted: {
+            start()
+        }
+    }
+
     Item {
         id: waitIndicator
         anchors.fill: parent
