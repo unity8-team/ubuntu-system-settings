@@ -298,7 +298,7 @@ class DualSimCellularTestCase(CellularBaseTestCase):
             Eventually(Equals('/ril_1')))
 
 
-class HotspotFirstRun(HotspotBaseTestCase):
+class HotspotNonExistantTestCase(HotspotBaseTestCase):
 
     connectivity_parameters = {
         'HotspotEnabled': False,
