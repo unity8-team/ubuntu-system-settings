@@ -8,6 +8,7 @@
 import dbusmock
 import subprocess
 from time import sleep
+import os
 
 from autopilot.matchers import Eventually
 from testtools.matchers import Equals, GreaterThan
@@ -32,9 +33,13 @@ class TimeDateTestCase(UbuntuSystemSettingsTestCase,
 
     @classmethod
     def tearDownClass(cls):
-        super(TimeDateTestCase, cls).tearDownClass()
         cls.p_mock.terminate()
         cls.p_mock.wait()
+        if dbusmock.DBusTestCase.system_bus_pid is not None:
+            cls.stop_dbus(dbusmock.DBusTestCase.system_bus_pid)
+            del os.environ['DBUS_SYSTEM_BUS_ADDRESS']
+            dbusmock.DBusTestCase.system_bus_pid = None
+        super(TimeDateTestCase, cls).tearDownClass()
 
     def setUp(self):
         """ Go to Time & Date page """
