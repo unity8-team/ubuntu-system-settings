@@ -395,23 +395,16 @@ class CellularBaseTestCase(UbuntuSystemSettingsOfonoTestCase):
         self.cellular_page = self.main_view.go_to_cellular_page()
 
 
-def start_network_indicator():
-    subprocess.call(['initctl', 'start', 'indicator-network'])
-
-
-def stop_network_indicator():
-    subprocess.call(['initctl', 'stop', 'indicator-network'])
-
-
 class HotspotBaseTestCase(CellularBaseTestCase):
 
     connectivity_parameters = {}
 
     @classmethod
     def setUpClass(cls):
-        stop_network_indicator()
         cls.start_session_bus()
         cls.dbus_con = cls.get_dbus(False)
+
+        # Connectivity API Mock
         ctv_tmpl = os.path.join(os.path.dirname(__file__), 'connectivity.py')
         (cls.ctv_mock, cls.obj_ctv) = cls.spawn_server_template(
             ctv_tmpl, parameters=cls.connectivity_parameters,
@@ -421,14 +414,11 @@ class HotspotBaseTestCase(CellularBaseTestCase):
             cls.dbus_con.get_object(CTV_IFACE, CTV_PRIV_OBJ),
             'org.freedesktop.DBus.Properties')
 
-        cls.ctv_private_mock = dbus.Interface(
-            cls.dbus_con.get_object(CTV_IFACE, CTV_PRIV_OBJ),
-            dbusmock.MOCK_IFACE)
-
         cls.ctv_nets = dbus.Interface(
             cls.dbus_con.get_object(CTV_IFACE, CTV_NETS_OBJ),
             'org.freedesktop.DBus.Properties')
 
+        # indicator-network mock
         inetwork = os.path.join(
             os.path.dirname(__file__), 'indicatornetwork.py'
         )
@@ -437,18 +427,16 @@ class HotspotBaseTestCase(CellularBaseTestCase):
 
         super(HotspotBaseTestCase, cls).setUpClass()
 
-    def tearDown(self):
-        super(HotspotBaseTestCase, self).tearDown()
-        import pprint
-        pp = pprint.PrettyPrinter(indent=4)
-        print('\n\n\n\n\n\nCalls to connectivity.Private:\n')
-        pp.pprint(self.ctv_private_mock.GetCalls())
-        print('\n\n\n\n\n\n\n\n')
+    def start_network_indicator(self):
+        subprocess.call(['initctl', 'start', 'indicator-network'])
 
-    # def setUp(self):
-    #     self.stop_network_indicator()
-    #     self.addCleanup(self.start_network_indicator)
-    #     super(HotspotBaseTestCase, self).setUp()
+    def stop_network_indicator(self):
+        subprocess.call(['initctl', 'stop', 'indicator-network'])
+
+    def setUp(self):
+        self.stop_network_indicator()
+        self.addCleanup(self.start_network_indicator)
+        super(HotspotBaseTestCase, self).setUp()
 
 
 class BluetoothBaseTestCase(UbuntuSystemSettingsTestCase):

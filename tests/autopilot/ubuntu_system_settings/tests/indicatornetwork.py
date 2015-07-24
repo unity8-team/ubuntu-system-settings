@@ -31,8 +31,7 @@ def load(mock, parameters):
         MAIN_IFACE,
         [
             (
-                'Activate', 'sava{sv}', '',
-                ''
+                'Activate', 'sava{sv}', '', ''
             ),
             (
                 'Describe', 's', '(bgav)',
@@ -48,7 +47,6 @@ def load(mock, parameters):
                 'ret = ["wifi.enable"]'
             ),
             (
-                'SetState', 'sva{sv}', '',
-                ''
+                'SetState', 'sva{sv}', '', ''
             )
         ])
