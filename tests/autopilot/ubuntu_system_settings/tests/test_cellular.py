@@ -365,12 +365,6 @@ class HotspotExistsTestCase(HotspotBaseTestCase):
 
     def test_enabling(self):
 
-        sleep(2)
-        print('CALLS TO INETWORK mock', self.obj_inetwork.GetCalls())
-        self.inetwork_mock.terminate()
-        self.inetwork_mock.wait()
-
-        self.assertTrue(False)
         self.assertThat(
             lambda: self.obj_ctv.Get(CTV_PRIV_IFACE, 'HotspotEnabled'),
             Eventually(Equals(False))

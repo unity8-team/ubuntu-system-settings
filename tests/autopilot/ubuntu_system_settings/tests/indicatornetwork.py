@@ -1,4 +1,4 @@
-'''indicator network D-BUS mock template'''
+'''indicator-network D-BUS mock template'''
 
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU Lesser General Public License as published by the Free
@@ -11,8 +11,6 @@ __email__ = 'jonas.drange@canonical.com'
 __copyright__ = '(c) 2015 Canonical Ltd.'
 __license__ = 'LGPL 3+'
 
-
-import dbus
 
 BUS_NAME = 'com.canonical.indicator.network'
 MAIN_IFACE = 'org.gtk.Actions'
@@ -30,8 +28,7 @@ def load(mock, parameters):
     syslog.syslog("inetwork: was called")
     global _parameters
     _parameters = parameters
-    # syslog.syslog('inetwork path: %s, interface: %s, bus name: %s' % (
-    #     mock.path, indicator.interface, indicator.bus_name))
+
     mock.AddMethods(
         MAIN_IFACE,
         [
@@ -40,33 +37,20 @@ def load(mock, parameters):
                 ''
             ),
             (
-                'Describe', 's', '(bsav)',
-                'ret = [True, "", [True]]'
+                'Describe', 's', '(bgav)',
+                'if args[0] == "wifi.enable":'
+                '   ret = (True, "", [True])'
             ),
             (
-                'DescribeAll', 's', 'a{s(bsav)}',
-                'ret = {"indicator.wifi.enable": [True, "", [True]]}'
+                'DescribeAll', '', 'a{s(bgav)}',
+                'ret = {"wifi.enable": (True, "", [True])}'
             ),
             (
                 'List', '', 'as',
-                'ret = ["indicator.wifi.enable"]'
+                'ret = ["wifi.enable"]'
             ),
             (
                 'SetState', 'sva{sv}', '',
                 ''
             )
-        ])
-
-    mock.EmitSignal(
-        MAIN_IFACE, 'Changed', 'asa{sb}a{sv}a{s(bgav)}',
-        [
-            dbus.Array([], signature='s'),
-            {'wifi.enable': dbus.Boolean(True)},
-            {'wifi.enable': dbus.Boolean(True, variant_level=1)},
-            dbus.Dictionary({
-                'wifi.enable': dbus.Struct(
-                    (True, '',
-                        dbus.Array([dbus.Boolean(True, variant_level=1)]))
-                )
-            })
         ])
