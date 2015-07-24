@@ -21,6 +21,10 @@ from ubuntu_system_settings.tests.networkmanager import (
     CSETTINGS_IFACE, MAIN_OBJ as NM_PATH, MAIN_IFACE as NM_IFACE,
 )
 
+from ubuntu_system_settings.tests.connectivity import (
+    PRIV_IFACE as CTV_PRIV_IFACE, NETS_IFACE as CTV_NETS_IFACE
+)
+
 DEV_IFACE = 'org.freedesktop.NetworkManager.Device'
 
 
@@ -298,7 +302,7 @@ class DualSimCellularTestCase(CellularBaseTestCase):
             Eventually(Equals('/ril_1')))
 
 
-class HotspotTestCase(HotspotBaseTestCase):
+class HotspotFirstRun(HotspotBaseTestCase):
 
     def test_setup(self):
         if not self.cellular_page.have_hotspot():
@@ -352,22 +356,34 @@ class HotspotTestCase(HotspotBaseTestCase):
         self.assertEqual(s_ssid, ssid)
         self.assertEqual(settings['802-11-wireless-security']['psk'], password)
 
+
+class HotspotExistsTestCase(HotspotBaseTestCase):
+
+    connectivity_parameters = {
+        'HotspotStored': True
+    }
+
     def test_enabling(self):
-        if not self.cellular_page.have_hotspot():
-            self.skipTest('Cannot test hotspot since wifi is disabled.')
 
-        self.add_hotspot('foo', 'abcdefgh', enabled=False)
+        sleep(2)
+        print('CALLS TO INETWORK mock', self.obj_inetwork.GetCalls())
+        self.inetwork_mock.terminate()
+        self.inetwork_mock.wait()
 
+        self.assertTrue(False)
         self.assertThat(
-            lambda: len(self.obj_nm.GetAll(NM_IFACE)['ActiveConnections']),
-            Eventually(Equals(0))
+            lambda: self.obj_ctv.Get(CTV_PRIV_IFACE, 'HotspotEnabled'),
+            Eventually(Equals(False))
         )
-
+        self.assertThat(
+            lambda: self.obj_ctv.Get(CTV_NETS_IFACE, 'HotspotEnabled'),
+            Eventually(Equals(False))
+        )
         self.cellular_page.enable_hotspot()
 
         self.assertThat(
-            lambda: len(self.obj_nm.GetAll(NM_IFACE)['ActiveConnections']),
-            Eventually(Equals(1))
+            lambda: self.obj_ctv.Get(CTV_NETS_IFACE, 'HotspotEnabled'),
+            Eventually(Equals(True))
         )
 
     def test_disabling(self):

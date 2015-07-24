@@ -22,6 +22,7 @@ import GSettings 1.0
 import SystemSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
+import QMenuModel 0.1
 
 /* This is a temporary solution to the issue of Hotspots failing on mako. If
 the device is mako, we hide the hotspot entry. Will be removed once lp:1434591
@@ -48,6 +49,19 @@ Column {
     /*  @sim a Sim.qml component containing libqofono bindings
         @prevOnlineModem path to modem that was online before modem reset */
     signal umtsModemChanged (var sim, string prevOnlineModem);
+
+    QDBusActionGroup {
+        id: actionGroup
+        busType: 1
+        busName: "com.canonical.indicator.network"
+        objectPath: "/com/canonical/indicator/network"
+
+        property variant actionObject: action("wifi.enable")
+
+        Component.onCompleted: {
+            start()
+        }
+    }
 
     DataMultiSim {
         anchors { left: parent.left; right: parent.right }
