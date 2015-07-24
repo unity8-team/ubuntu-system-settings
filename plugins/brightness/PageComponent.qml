@@ -52,250 +52,262 @@ ItemPage {
         id: displaysModel
     }
 
-    Column {
-        anchors.left: parent.left
-        anchors.right: parent.right
+    Flickable {
+        anchors.fill: parent
+        contentHeight: contentItem.childrenRect.height
+        boundsBehavior: (contentHeight > root.height) ?
+                            Flickable.DragAndOvershootBounds :
+                            Flickable.StopAtBounds
+        /* Set the direction to workaround
+           https://bugreports.qt-project.org/browse/QTBUG-31905 otherwise the UI
+           might end up in a situation where scrolling doesn't work */
+        flickableDirection: Flickable.VerticalFlick
 
-        QDBusActionGroup {
-            id: indicatorPower
-            busType: 1
-            busName: "com.canonical.indicator.power"
-            objectPath: "/com/canonical/indicator/power"
+        Column {
+            anchors.left: parent.left
+            anchors.right: parent.right
 
-            property variant brightness: action("brightness")
+            QDBusActionGroup {
+                id: indicatorPower
+                busType: 1
+                busName: "com.canonical.indicator.power"
+                objectPath: "/com/canonical/indicator/power"
 
-            Component.onCompleted: start()
-        }
+                property variant brightness: action("brightness")
 
-        SettingsItemTitle {
-            text: i18n.tr("Display brightness")
-            showDivider: false
-        }
-
-        /* Use the SliderMenu component instead of the Slider to avoid binding
-           issues on valueChanged until LP: #1388094 is fixed.
-        */
-        Menus.SliderMenu {
-            id: brightnessSlider
-            objectName: "sliderMenu"
-            enabled: indicatorPower.brightness.state != null
-            live: true
-            minimumValue: 0.0
-            maximumValue: 100.0
-            minIcon: "image://theme/display-brightness-min"
-            maxIcon: "image://theme/display-brightness-max"
-
-            property real serverValue: enabled ? indicatorPower.brightness.state * 100 : 0.0
-
-            USC.ServerPropertySynchroniser {
-                userTarget: brightnessSlider
-                userProperty: "value"
-                serverTarget: brightnessSlider
-                serverProperty: "serverValue"
-                maximumWaitBufferInterval: 16
-
-                onSyncTriggered: indicatorPower.brightness.updateState(value / 100.0)
+                Component.onCompleted: start()
             }
-        }
 
-        ListItem.Standard {
-            id: adjust
-            text: i18n.tr("Adjust automatically")
-            visible: brightnessPanel.powerdRunning &&
-                     brightnessPanel.autoBrightnessAvailable
-            control: CheckBox {
-                id: autoAdjustCheck
-                property bool serverChecked: gsettings.autoBrightness
-                onServerCheckedChanged: checked = serverChecked
-                Component.onCompleted: checked = serverChecked
-                onTriggered: gsettings.autoBrightness = checked
+            SettingsItemTitle {
+                text: i18n.tr("Display brightness")
+                showDivider: false
             }
-            showDivider: false
-        }
 
-        ListItem.Caption {
-            text: i18n.tr(
-                    "Brightens and dims the display to suit the surroundings.")
-            visible: adjust.visible
-        }
+            /* Use the SliderMenu component instead of the Slider to avoid binding
+               issues on valueChanged until LP: #1388094 is fixed.
+            */
+            Menus.SliderMenu {
+                id: brightnessSlider
+                objectName: "sliderMenu"
+                enabled: indicatorPower.brightness.state != null
+                live: true
+                minimumValue: 0.0
+                maximumValue: 100.0
+                minIcon: "image://theme/display-brightness-min"
+                maxIcon: "image://theme/display-brightness-max"
+                showDivider: adjust.visible
+                property real serverValue: enabled ? indicatorPower.brightness.state * 100 : 0.0
 
-        ListItem.Divider {
-            visible: displaysModel.count > 0
-        }
+                USC.ServerPropertySynchroniser {
+                    userTarget: brightnessSlider
+                    userProperty: "value"
+                    serverTarget: brightnessSlider
+                    serverProperty: "serverValue"
+                    maximumWaitBufferInterval: 16
 
-        Repeater {
-            model: displaysModel
-
-            Column {
-                anchors { left: parent.left; right: parent.right }
-
-                property var localOrientation: null
-                property string localResolution: ""
-                property double localScale: -1
-
-                SettingsItemTitle {
-                    text: path
-                    visible: model.count > 1
+                    onSyncTriggered: indicatorPower.brightness.updateState(value / 100.0)
                 }
+            }
 
-                ListItem.Standard {
-                    text: i18n.tr("External display")
-                    enabled: display.connected
-                    onClicked: enabledCheck.trigger()
-                    control: CheckBox {
-                        id: enabledCheck
-                        property bool serverChecked: display.enabled
-                        onServerCheckedChanged: checked = serverChecked
-                        Component.onCompleted: checked = serverChecked
-                        onTriggered: display.enabled = checked
-                    }
+            ListItem.Standard {
+                id: adjust
+                text: i18n.tr("Adjust automatically")
+                visible: brightnessPanel.powerdRunning &&
+                         brightnessPanel.autoBrightnessAvailable
+                control: CheckBox {
+                    id: autoAdjustCheck
+                    property bool serverChecked: gsettings.autoBrightness
+                    onServerCheckedChanged: checked = serverChecked
+                    Component.onCompleted: checked = serverChecked
+                    onTriggered: gsettings.autoBrightness = checked
                 }
+                showDivider: false
+            }
 
-                ListItem.SingleValue {
-                    text: i18n.tr("Rotation")
-                    value: {
-                        console.warn('display.orientation', display.orientation);
-                        switch (localOrientation || display.orientation) {
-                            case Display.AnyMode:
-                                return i18n.tr("None");
-                                break;
-                            case Display.PortraitMode:
-                            case Display.PortraitAnyMode:
-                                return i18n.tr("90° clockwise");
-                                break;
-                            case Display.LandscapeMode:
-                            case Display.LandscapeInvertedMode:
-                            case Display.LandscapeAnyMode:
-                                return i18n.tr("180° clockwise");
-                                break;
-                            case Display.PortraitInvertedMode:
-                                return i18n.tr("270° clockwise");
-                                break;
-                            default:
-                                throw "Unable to determine orientation type.";
-                        }
-                    }
-                    visible: enabledCheck.checked
-                    progression: true
-                    onClicked: {
-                        var rotationPage = pageStack.push(
-                            Qt.resolvedUrl("PageRotation.qml"), {
-                                display: display
-                            }
-                        );
-                        rotationPage.orientationChanged.connect(
-                            function (orientation) {
-                                console.warn('locally setting orientation', orientation);
-                                localOrientation = orientation;
-                            }
-                        );
-                    }
-                }
+            ListItem.Caption {
+                text: i18n.tr(
+                        "Brightens and dims the display to suit the surroundings.")
+                visible: adjust.visible
+            }
 
-                ListItem.SingleValue {
-                    text: i18n.tr("Resolution")
-                    value: localResolution || display.resolution
-                    visible: enabledCheck.checked
-                    progression: true
-                    onClicked: {
-                        var resPage = pageStack.push(
-                            Qt.resolvedUrl("PageResolution.qml"), {
-                                display: display
-                            }
-                        );
-                        resPage.resolutionChanged.connect(
-                            function (resolution) {
-                                console.warn('locally setting resolution', resolution);
-                                localResolution = resolution;
-                            }
-                        );
-                    }
-                }
+            ListItem.Divider {
+                visible: displaysModel.count > 0
+            }
 
-                SettingsItemTitle {
-                    text: i18n.tr("Scale UI elements")
-                    visible: enabledCheck.checked
-                    showDivider: false
-                }
-
-                /* Use the SliderMenu component instead of the Slider to avoid binding
-                   issues on valueChanged until LP: #1388094 is fixed.
-                */
-                Menus.SliderMenu {
-                    id: scaleSlider
-                    objectName: "scaleSlider"
-                    visible: enabledCheck.checked
-                    live: true
-                    minimumValue: 0.0
-                    maximumValue: 100.0
-                    value: localScale >= 0 ? localScale : display.scale
-                    onUpdated: localScale = value
-                }
+            Repeater {
+                model: displaysModel
 
                 Column {
-                    anchors {
-                        left: parent.left;
-                        right: parent.right
-                        leftMargin: spacing
-                        rightMargin: spacing
+                    anchors { left: parent.left; right: parent.right }
+
+                    property var localOrientation: null
+                    property string localResolution: ""
+                    property double localScale: -1
+
+                    SettingsItemTitle {
+                        text: path
+                        visible: model.count > 1
                     }
-                    visible: enabledCheck.checked
-                    spacing: units.gu(2)
 
-                    ListItem.Divider { opacity: 0 }
-
-                    Button {
-                        anchors { left: parent.left; right: parent.right }
-                        text: i18n.tr("Apply changes")
-                        enabled: localOrientation ||
-                                 localResolution ||
-                                 localScale >= 0
-                        onClicked: {
-                            if (localOrientation) {
-                                display.orientation = localOrientation;
-                                localOrientation = null;
-                            }
-
-                            if (localResolution) {
-                                display.resolution = localResolution;
-                                localResolution = "";
-                            }
-
-                            if (localScale >= 0) {
-                                display.scale = localScale;
-                                localScale = -1;
-                            }
+                    ListItem.Standard {
+                        text: i18n.tr("External display")
+                        enabled: display.connected
+                        onClicked: enabledCheck.trigger()
+                        control: CheckBox {
+                            id: enabledCheck
+                            property bool serverChecked: display.enabled
+                            onServerCheckedChanged: checked = serverChecked
+                            Component.onCompleted: checked = serverChecked
+                            onTriggered: display.enabled = checked
                         }
                     }
 
+                    ListItem.SingleValue {
+                        text: i18n.tr("Rotation")
+                        value: {
+                            console.warn('display.orientation', display.orientation);
+                            switch (localOrientation || display.orientation) {
+                                case Display.AnyMode:
+                                    return i18n.tr("None");
+                                    break;
+                                case Display.PortraitMode:
+                                case Display.PortraitAnyMode:
+                                    return i18n.tr("90° clockwise");
+                                    break;
+                                case Display.LandscapeMode:
+                                case Display.LandscapeInvertedMode:
+                                case Display.LandscapeAnyMode:
+                                    return i18n.tr("180° clockwise");
+                                    break;
+                                case Display.PortraitInvertedMode:
+                                    return i18n.tr("270° clockwise");
+                                    break;
+                                default:
+                                    throw "Unable to determine orientation type.";
+                            }
+                        }
+                        visible: enabledCheck.checked
+                        progression: true
+                        onClicked: {
+                            var rotationPage = pageStack.push(
+                                Qt.resolvedUrl("PageRotation.qml"), {
+                                    display: display
+                                }
+                            );
+                            rotationPage.orientationChanged.connect(
+                                function (orientation) {
+                                    console.warn('locally setting orientation', orientation);
+                                    localOrientation = orientation;
+                                }
+                            );
+                        }
+                    }
+
+                    ListItem.SingleValue {
+                        text: i18n.tr("Resolution")
+                        value: localResolution || display.resolution
+                        visible: enabledCheck.checked
+                        progression: true
+                        onClicked: {
+                            var resPage = pageStack.push(
+                                Qt.resolvedUrl("PageResolution.qml"), {
+                                    display: display
+                                }
+                            );
+                            resPage.resolutionChanged.connect(
+                                function (resolution) {
+                                    console.warn('locally setting resolution', resolution);
+                                    localResolution = resolution;
+                                }
+                            );
+                        }
+                    }
+
+                    SettingsItemTitle {
+                        text: i18n.tr("Scale UI elements")
+                        visible: enabledCheck.checked
+                        showDivider: false
+                    }
+
+                    /* Use the SliderMenu component instead of the Slider to avoid binding
+                       issues on valueChanged until LP: #1388094 is fixed.
+                    */
+                    Menus.SliderMenu {
+                        id: scaleSlider
+                        objectName: "scaleSlider"
+                        visible: enabledCheck.checked
+                        live: true
+                        minimumValue: 0.0
+                        maximumValue: 100.0
+                        value: localScale >= 0 ? localScale : display.scale
+                        onUpdated: localScale = value
+                    }
+
                     ListItem.Divider { opacity: 0 }
 
-                    Button {
-                        anchors { left: parent.left; right: parent.right }
-                        text: i18n.tr("Sound settings…")
-                        onClicked: {
-                            var sPlugin = pluginManager.getByName("sound")
-                            if (sPlugin) {
-                                var soundPage = sPlugin.pageComponent;
-                                if (soundPage)
-                                    pageStack.push(soundPage);
-                                else
+                    Column {
+                        anchors {
+                            left: parent.left;
+                            right: parent.right
+                            leftMargin: spacing
+                            rightMargin: spacing
+                        }
+                        visible: enabledCheck.checked
+                        spacing: units.gu(1)
+
+                        Button {
+                            anchors { left: parent.left; right: parent.right }
+                            text: i18n.tr("Apply changes")
+                            enabled: localOrientation ||
+                                     localResolution ||
+                                     localScale >= 0
+                            onClicked: {
+                                if (localOrientation) {
+                                    display.orientation = localOrientation;
+                                    localOrientation = null;
+                                }
+
+                                if (localResolution) {
+                                    display.resolution = localResolution;
+                                    localResolution = "";
+                                }
+
+                                if (localScale >= 0) {
+                                    display.scale = localScale;
+                                    localScale = -1;
+                                }
+                            }
+                        }
+
+                        ListItem.ThinDivider { opacity: 0 }
+
+                        Button {
+                            anchors { left: parent.left; right: parent.right }
+                            text: i18n.tr("Sound settings…")
+                            onClicked: {
+                                var sPlugin = pluginManager.getByName("sound")
+                                if (sPlugin) {
+                                    var soundPage = sPlugin.pageComponent;
+                                    if (soundPage)
+                                        pageStack.push(soundPage);
+                                    else
+                                        console.warn(
+                                            "Failed to get system-update " +
+                                            "pageComponent"
+                                        );
+                                } else {
                                     console.warn(
-                                        "Failed to get system-update " +
-                                        "pageComponent"
-                                    );
-                            } else {
-                                console.warn(
-                                    "Failed to get system-update plugin " +
-                                    "instance"
-                                )
+                                        "Failed to get system-update plugin " +
+                                        "instance"
+                                    )
+                                }
                             }
                         }
-                    }
 
-                    Button {
-                        anchors { left: parent.left; right: parent.right }
-                        text: i18n.tr("External keyboard…")
+                        Button {
+                            anchors { left: parent.left; right: parent.right }
+                            text: i18n.tr("External keyboard…")
+                        }
                     }
                 }
             }
