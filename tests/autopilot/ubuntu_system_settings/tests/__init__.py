@@ -427,10 +427,10 @@ class AboutSystemImageBaseTestCase(AboutBaseTestCase,
 
     def setUp(self):
         self.p_mock = self.spawn_server('com.canonical.SystemImage',
-                                       '/Service',
-                                       'com.canonical.SystemImage',
-                                       system_bus=True,
-                                       stdout=subprocess.PIPE)
+                                        '/Service',
+                                        'com.canonical.SystemImage',
+                                        system_bus=True,
+                                        stdout=subprocess.PIPE)
 
         self.wait_for_bus_object('com.canonical.SystemImage',
                                  '/Service',
@@ -791,10 +791,10 @@ class ConnectivityMixin(dbusmock.DBusTestCase):
 
     def setUp(self):
         self.connectivity_server = self.spawn_server(CON_SERVICE,
-                                                    CON_PATH,
-                                                    CON_IFACE,
-                                                    system_bus=False,
-                                                    stdout=subprocess.PIPE)
+                                                     CON_PATH,
+                                                     CON_IFACE,
+                                                     system_bus=False,
+                                                     stdout=subprocess.PIPE)
 
         self.wait_for_bus_object(CON_SERVICE,
                                  CON_PATH,
