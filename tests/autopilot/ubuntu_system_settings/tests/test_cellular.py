@@ -288,3 +288,144 @@ class DualSimCellularTestCase(CellularBaseTestCase):
             lambda:
                 gsettings.get_value('default-sim-for-messages').get_string(),
             Eventually(Equals('/ril_1')))
+
+
+class ApnTestCase(CellularBaseTestCase):
+
+    def test_remove_apn(self):
+        self.add_connection_context(self.modem_0, Type='mms', Name='Failed')
+        contexts = self.modem_0.connMan.GetContexts()
+
+        # Assert there's a Failed mms context
+        self.assertEqual(1, len(contexts))
+        self.assertEqual('/ril_0/context0', contexts[0][0])
+        self.assertEqual('Failed', contexts[0][1]['Name'])
+
+        # We delete the failed context
+        self.cellular_page.delete_apn('Failed')
+
+    def test_create_internet_apn(self):
+        editor = self.cellular_page.open_apn_editor(None)
+        editor.set_type('internet')
+        editor.set_name('Ubuntu')
+        editor.set_access_point_name('ubuntu.ap')
+        editor.set_username('user')
+        editor.set_password('pass')
+        editor.save()
+
+        # Wait for our new context to appear.
+        self.assertThat(
+            lambda: self.modem_0.connMan.GetContexts()[0][0],
+            Eventually(Equals('/ril_0/context0'))
+        )
+        # Wait for our context to be renamed from the default ofono name.
+        self.assertThat(
+            lambda: self.modem_0.connMan.GetContexts()[0][1]['Name'],
+            Eventually(Equals('Ubuntu'))
+        )
+        contexts = self.modem_0.connMan.GetContexts()
+        new_ctx = contexts[0][1]
+        self.assertEqual(1, len(contexts))
+        self.assertEqual('internet', new_ctx['Type'])
+        self.assertEqual('user', new_ctx['Username'])
+        self.assertEqual('pass', new_ctx['Password'])
+
+    def test_create_mms_apn(self):
+        editor = self.cellular_page.open_apn_editor(None)
+        editor.set_type('mms')
+        editor.set_name('Ubuntu')
+        editor.set_access_point_name('ubuntu.ap')
+        editor.set_message_center('ubuntu.com')
+        editor.set_message_proxy('ubuntu:8080')
+        editor.set_username('user')
+        editor.set_password('pass')
+        editor.save()
+
+        # Wait for our new context to appear.
+        self.assertThat(
+            lambda: self.modem_0.connMan.GetContexts()[0][0],
+            Eventually(Equals('/ril_0/context0'))
+        )
+        # Wait for our context to be renamed from the default ofono name.
+        self.assertThat(
+            lambda: self.modem_0.connMan.GetContexts()[0][1]['Name'],
+            Eventually(Equals('Ubuntu'))
+        )
+        contexts = self.modem_0.connMan.GetContexts()
+        new_ctx = contexts[0][1]
+        self.assertEqual(1, len(contexts))
+        self.assertEqual('mms', new_ctx['Type'])
+        self.assertEqual('ubuntu.ap', new_ctx['AccessPointName'])
+        self.assertEqual('http://ubuntu.com', new_ctx['MessageCenter'])
+        self.assertEqual('ubuntu:8080', new_ctx['MessageProxy'])
+        self.assertEqual('user', new_ctx['Username'])
+        self.assertEqual('pass', new_ctx['Password'])
+
+    def test_create_mms_and_internet_apn(self):
+        editor = self.cellular_page.open_apn_editor(None)
+        editor.set_type('internet+mms')
+        editor.set_name('Ubuntu')
+        editor.set_access_point_name('ubuntu.ap')
+        editor.set_message_center('ubuntu.com')
+        editor.set_message_proxy('ubuntu:8080')
+        editor.set_username('user')
+        editor.set_password('pass')
+        editor.save()
+
+        # Wait for our new context to appear.
+        self.assertThat(
+            lambda: self.modem_0.connMan.GetContexts()[0][0],
+            Eventually(Equals('/ril_0/context0'))
+        )
+        # Wait for our context to be renamed from the default ofono name.
+        self.assertThat(
+            lambda: self.modem_0.connMan.GetContexts()[0][1]['Name'],
+            Eventually(Equals('Ubuntu'))
+        )
+        contexts = self.modem_0.connMan.GetContexts()
+        new_ctx = contexts[0][1]
+        self.assertEqual(1, len(contexts))
+        self.assertEqual('internet', new_ctx['Type'])
+        self.assertEqual('ubuntu.ap', new_ctx['AccessPointName'])
+        self.assertEqual('http://ubuntu.com', new_ctx['MessageCenter'])
+        self.assertEqual('ubuntu:8080', new_ctx['MessageProxy'])
+        self.assertEqual('user', new_ctx['Username'])
+        self.assertEqual('pass', new_ctx['Password'])
+
+    def create_lte_apn(self):
+        editor = self.cellular_page.open_apn_editor(None)
+        editor.set_type('ia')
+        editor.set_name('Ubuntu')
+        editor.set_access_point_name('ubuntu.ap')
+        editor.set_username('user')
+        editor.set_password('pass')
+        editor.save()
+
+        # Wait for our new context to appear.
+        self.assertThat(
+            lambda: self.modem_0.connMan.GetContexts()[0][0],
+            Eventually(Equals('/ril_0/context0'))
+        )
+        # Wait for our context to be renamed from the default ofono name.
+        self.assertThat(
+            lambda: self.modem_0.connMan.GetContexts()[0][1]['Name'],
+            Eventually(Equals('Ubuntu'))
+        )
+        contexts = self.modem_0.connMan.GetContexts()
+        new_ctx = contexts[0][1]
+        self.assertEqual(1, len(contexts))
+        self.assertEqual('ia', new_ctx['Type'])
+        self.assertEqual('user', new_ctx['Username'])
+        self.assertEqual('pass', new_ctx['Password'])
+
+    def select_apn(self):
+        self.add_connection_context(self.modem_0,
+                                    Type='internet', Name='Provisioned')
+
+        self.cellular_page.prefer_apn('Provisioned')
+
+        # Assert that Preferred becomes true.
+        self.assertThat(
+            lambda: self.modem_0.connMan.GetContexts()[0][1]['Preferred'],
+            Eventually(Equals(True))
+        )
