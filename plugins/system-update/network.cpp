@@ -237,7 +237,7 @@ void Network::onRequestFinished()
         return;
     }
 
-    // check if the reply is valid, it most have a status that is valid and
+    // check if the reply is valid, it must have a status that is valid and
     // a 200 or a 201 result
     auto statusAttr = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute);
 
@@ -247,6 +247,11 @@ void Network::onRequestFinished()
     }
 
     int httpStatus = statusAttr.toInt();
+
+    if (httpStatus == 401 || httpStatus == 403) {
+        Q_EMIT credentialError();
+        return;
+    }
 
     if (httpStatus != 200 && httpStatus != 201) {
         Q_EMIT serverError();

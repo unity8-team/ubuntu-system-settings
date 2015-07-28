@@ -81,6 +81,8 @@ UpdateManager::UpdateManager(QObject *parent):
                   this, SIGNAL(networkError()));
     QObject::connect(&m_network, SIGNAL(serverError()),
                   this, SIGNAL(serverError()));
+    QObject::connect(&m_network, SIGNAL(credentialError()),
+                  this, SIGNAL(credentialsDeleted()));
     QObject::connect(&m_network,
                      SIGNAL(clickTokenObtained(Update*, const QString&)),
                      this, SLOT(clickTokenReceived(Update*, const QString&)));

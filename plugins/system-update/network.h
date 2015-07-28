@@ -65,6 +65,7 @@ Q_SIGNALS:
     void errorOccurred();
     void networkError();
     void serverError();
+    void credentialError();
     void clickTokenObtained(Update *app, const QString &clickToken);
 
 protected:

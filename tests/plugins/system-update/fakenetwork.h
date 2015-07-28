@@ -42,6 +42,7 @@ signals:
     void errorOccurred();
     void networkError();
     void serverError();
+    void credentialError();
     void downloadUrlFound(const QString& packagename, const QString& url);
     void clickTokenObtained(Update* app, const QString& clickToken);
 };
