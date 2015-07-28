@@ -19,11 +19,12 @@
 #ifndef NETWORK_H
 #define NETWORK_H
 
-#include <QObject>
-#include <QtNetwork/QNetworkAccessManager>
-#include <QtNetwork/QNetworkReply>
 #include <QHash>
-#include "../update.h"
+#include <QObject>
+#include <QNetworkAccessManager>
+#include <QNetworkReply>
+
+#include "update.h"
 
 #define X_CLICK_TOKEN "X-Click-Token"
 
@@ -54,6 +55,10 @@ public:
     virtual std::vector<std::string> getAvailableFrameworks();
     virtual std::string getArchitecture();
 
+protected:
+    // helper constructor that allows to set the hash map for testing purposes
+    Network(QHash<QString, Update*> apps, QObject *parent=0);
+
 Q_SIGNALS:
     void updatesFound();
     void updatesNotFound();
@@ -62,19 +67,22 @@ Q_SIGNALS:
     void serverError();
     void clickTokenObtained(Update *app, const QString &clickToken);
 
+protected:
+    QUrl getUrlApps();
+    QString getFrameworksDir();
+    bool parseUpdateObject(const QJsonValue& value);
+    virtual std::string architectureFromDpkg();
+    virtual std::vector<std::string> listFolder(const std::string &folder, const std::string &pattern);
+
 private Q_SLOTS:
-    void onReply(QNetworkReply*);
+    void onRequestFinished();
+    void onHeadRequestFinished();
+    void onError(QNetworkReply::NetworkError);
+    void onSslErrors(const QList<QSslError>&);
 
 private:
     QNetworkAccessManager m_nam;
     QHash<QString, Update*> m_apps;
-
-    QString getUrlApps();
-    QString getFrameworksDir();
-
-protected:
-    virtual std::string architectureFromDpkg();
-    virtual std::vector<std::string> listFolder(const std::string &folder, const std::string &pattern);
 
 };
 

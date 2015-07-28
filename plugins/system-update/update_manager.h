@@ -40,7 +40,7 @@
 #else
 #include <ssoservice.h>
 #include <QProcess>
-#include "network/network.h"
+#include "network.h"
 #include "system_update.h"
 #endif
 

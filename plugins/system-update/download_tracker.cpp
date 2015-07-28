@@ -22,8 +22,8 @@
 #include <ubuntu/download_manager/download_struct.h>
 #include <ubuntu/download_manager/error.h>
 
+#include "network.h"
 #include "download_tracker.h"
-#include "network/network.h"
 
 namespace {
     const QString DOWNLOAD_COMMAND = "post-download-command";

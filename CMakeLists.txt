@@ -27,8 +27,12 @@ if(cmake_build_type_lower MATCHES coverage)
 endif()
 
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x -fno-permissive -pedantic -Wall -Wextra")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x -fno-permissive -pedantic -Wall -Wextra -fPIC -pthread")
 find_package(Qt5Widgets REQUIRED)
+
+find_package(Gtest REQUIRED)
+include_directories(${GMOCK_INCLUDE_DIR} ${GTEST_INCLUDE_DIR})
+
 # Workaround for https://bugreports.qt-project.org/browse/QTBUG-29987
 set(QT_IMPORTS_DIR "${CMAKE_INSTALL_LIBDIR}/qt5/qml")
 set(CMAKE_AUTOMOC ON)
