@@ -1,6 +1,8 @@
 set(QML_SOURCES
 AccessPoint.qml
 BaseMenuItem.qml
+CertPicker.qml
+CertDialog.qml
 Common.qml
 DivMenuItem.qml
 FramedMenuItem.qml
@@ -23,10 +25,12 @@ add_library(UbuntuWifiPanel MODULE
   plugin.cpp
   unitymenumodelstack.cpp
   previousnetworkmodel.cpp
+  certhandler.cpp
   wifidbushelper.h
   plugin.h
   unitymenumodelstack.h
   previousnetworkmodel.h
+  certhandler.h
   nm_manager_proxy.h
   nm_settings_proxy.h
   nm_settings_connection_proxy.h

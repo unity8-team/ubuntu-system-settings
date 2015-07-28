@@ -26,6 +26,9 @@ ItemPage {
     id: wifibase
     objectName: "wifiPage"
     title: i18n.tr("Wi-Fi")
+    property bool wifiEnabled: actionGroup.actionObject.valid ?
+                               actionGroup.actionObject.state : false
+    property var pluginOptions
 
     UnityMenuModel {
         id: menuModel
@@ -53,13 +56,6 @@ ItemPage {
         Component.onCompleted: {
             start()
         }
-    }
-
-    // workaround of getting the following error on startup:
-    // WARNING - file:///usr/..../wifi/PageComponent.qml:24:1: QML Page: Binding loop detected for property "flickable"
-    flickable: null
-    Component.onCompleted: {
-        flickable = pageFlickable
     }
 
     Flickable {
@@ -140,8 +136,7 @@ ItemPage {
             ListItem.SingleValue {
                 objectName: "connectToHiddenNetwork"
                 text: i18n.tr("Connect to hidden network…")
-                visible : (actionGroup.actionObject.valid ?
-                           actionGroup.actionObject.state : false)
+                visible : wifibase.wifiEnabled
                 onClicked: {
                     otherNetworLoader.source = "OtherNetwork.qml";
                     PopupUtils.open(otherNetworLoader.item);
@@ -158,5 +153,22 @@ ItemPage {
         boundsBehavior: (contentHeight > wifibase.height) ?
                             Flickable.DragAndOvershootBounds :
                             Flickable.StopAtBounds
+    }
+
+    Connections {
+        target: wifibase
+
+        function invokeWiFiConfigurationDialog () {
+            if (wifiEnabled && pluginOptions && pluginOptions['ssid']) {
+                otherNetworLoader.source = "OtherNetwork.qml";
+                PopupUtils.open(otherNetworLoader.item, wifibase, {
+                    'ssid': pluginOptions['ssid'],
+                    'bssid': pluginOptions['bssid']
+                });
+            }
+        }
+
+        onWifiEnabledChanged: invokeWiFiConfigurationDialog()
+        onPluginOptionsChanged: invokeWiFiConfigurationDialog()
     }
 }

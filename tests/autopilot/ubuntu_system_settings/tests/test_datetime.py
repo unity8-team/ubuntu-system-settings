@@ -68,10 +68,11 @@ class TimeDateTestCase(UbuntuSystemSettingsTestCase,
         )
         self.main_view.pointing_device.move_to_object(
             text_field)
+        return text_field
 
     def search_kb_type(self, kb_type):
-        self.click_tz_search_field()
-        self.keyboard.type(kb_type)
+        search_field = self.click_tz_search_field()
+        search_field.write(kb_type)
         return self.main_view.wait_select_single(
             objectName='locationsListView'
         )

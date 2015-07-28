@@ -226,6 +226,9 @@ ItemPage {
 
                     ctx.lineWidth = units.dp(2)
 
+                    /* Needed to avoid rendering glitches with point with the same x value
+                       (#1461624/QTBUG-34339) */
+                    ctx.lineJoin = "round"
 
                     ctx.translate(0, height)
                     // Invert the y axis so we draw from the bottom left
@@ -249,7 +252,7 @@ ItemPage {
                     /* time is the offset in seconds compared to the current time (negative value)
                        we display the charge on a day, which is 86400 seconds, the value is the % */
                     ctx.moveTo((86400 - chargeDatas[0].time) / 86400 * width,
-                               (chargeDatas[0].value / 100) * width)
+                               (chargeDatas[0].value / 100) * height)
                     for (var i = 1; i < chargeDatas.length; i++) {
                         ctx.lineTo((86400-chargeDatas[i].time) / 86400 * width,
                                    (chargeDatas[i].value / 100) * height)
