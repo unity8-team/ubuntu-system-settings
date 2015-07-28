@@ -105,6 +105,7 @@ void SystemUpdate::setCurrentDetailedVersion() {
     reply.waitForFinished();
     if (reply.isValid()) {
         m_currentBuildNumber = reply.argumentAt<0>();
+        m_deviceName = reply.argumentAt<2>();
         m_lastUpdateDate = QDateTime::fromString(reply.argumentAt<3>(), Qt::ISODate);
         m_detailedVersion = reply.argumentAt<4>();
         Q_EMIT versionChanged();
@@ -129,6 +130,12 @@ bool SystemUpdate::checkTarget() {
     return target > current;
 }
 
+QString SystemUpdate::deviceName() {
+        if (m_deviceName.isNull())
+            setCurrentDetailedVersion();
+
+        return m_deviceName;
+}
 
 QDateTime SystemUpdate::lastUpdateDate() {
     if (!m_lastUpdateDate.isValid())

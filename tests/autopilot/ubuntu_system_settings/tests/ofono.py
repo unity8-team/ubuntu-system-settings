@@ -64,10 +64,15 @@ def AddModem(self, name, properties):
             'Revision': dbus.String('0815.42', variant_level=1),
             'Type': dbus.String('hardware', variant_level=1),
             'Interfaces': [
+                'org.ofono.CallForwarding',
+                'org.ofono.CallSettings',
                 'org.ofono.CallVolume',
-                'org.ofono.VoiceCallManager',
+                'org.ofono.ConnectionManager',
                 'org.ofono.NetworkRegistration',
-                'org.ofono.SimManager'],
+                'org.ofono.RadioSettings',
+                'org.ofono.SimManager',
+                'org.ofono.VoiceCallManager',
+                ],
             'Features': ['gprs', 'net'],
         },
         [
@@ -101,6 +106,13 @@ def add_simmanager_api(mock):
         'SubscriberNumbers': _parameters.get('SubscriberNumbers',
                                              ['123456789', '234567890']),
         'SubscriberIdentity': _parameters.get('SubscriberIdentity', 23456),
+        'ServiceNumbers': _parameters.get('ServiceNumbers', dbus.Dictionary(
+            {
+                'Fake Service': dbus.String('555-555', variant_level=1),
+                'Faker Service': dbus.String('555-321', variant_level=1),
+                'Fakest Service': dbus.String('555-123', variant_level=1)
+            }, signature='sv'
+        )),
         'LockedPins': _parameters.get('LockedPins', ['pin']),
         'Retries': _parameters.get('Retries', {'pin': dbus.Byte(3)}),
         'PinRequired': _parameters.get('PinRequired', 'none')

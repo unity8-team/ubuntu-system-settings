@@ -62,6 +62,8 @@ class UpdateManager : public QObject
                NOTIFY versionChanged)
     Q_PROPERTY(QString currentDeviceBuildNumber READ currentDeviceBuildNumber
                NOTIFY versionChanged)
+    Q_PROPERTY(QString deviceName READ deviceName
+               NOTIFY deviceNameChanged)
 
 Q_SIGNALS:
     void checkFinished();
@@ -78,6 +80,7 @@ Q_SIGNALS:
     void updateProcessFailed(QString message);
     void systemUpdateFailed(int consecutiveFailureCount, QString lastReason);
     void versionChanged();
+    void deviceNameChanged();
     void rebooting(bool status);
 
 public:
@@ -97,6 +100,7 @@ public:
     QDateTime lastUpdateDate() { return m_systemUpdate.lastUpdateDate(); }
     QString currentUbuntuBuildNumber() { return m_systemUpdate.currentUbuntuBuildNumber(); }
     QString currentDeviceBuildNumber() { return m_systemUpdate.currentDeviceBuildNumber(); }
+    QString deviceName() { return m_systemUpdate.deviceName(); }
     bool checkTarget() { return m_systemUpdate.checkTarget(); }
 
 

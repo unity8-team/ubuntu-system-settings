@@ -15,6 +15,9 @@ import tempfile
 import unittest
 from unittest import mock
 
+import gettext
+_ = gettext.translation('ubuntu-system-settings', fallback=True).gettext
+
 HELPER_DIR = '@CMAKE_CURRENT_SOURCE_DIR@/../push-helper/'
 sys.path.append(HELPER_DIR)
 import software_updates_helper
@@ -53,10 +56,10 @@ class PushHelperTests(unittest.TestCase):
         self.assertIn('emblem-counter', notif['notification'])
         self.assertIn('vibrate', notif['notification'])
         card = notif['notification']['card']
-        self.assertEqual(card['summary'], "There's an updated system image.")
+        self.assertEqual(card['summary'], _("There's an updated system image."))
         self.assertEqual(card['actions'], ['settings:///system/system-update'])
         self.assertEqual(card['persist'], True)
-        self.assertEqual(card['body'], 'Tap to open the system updater.')
+        self.assertEqual(card['body'], _('Tap to open the system updater.'))
         self.assertEqual(card.get('popup', False), False)
         emblem_counter = notif['notification']['emblem-counter']
         self.assertEqual(emblem_counter, {'visible': True, 'count': 1})

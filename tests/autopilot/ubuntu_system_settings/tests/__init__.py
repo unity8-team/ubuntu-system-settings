@@ -20,6 +20,7 @@ from __future__ import absolute_import
 import dbus
 import dbusmock
 import os
+import random
 import subprocess
 from datetime import datetime
 from time import sleep
@@ -27,6 +28,8 @@ from time import sleep
 import ubuntuuitoolkit
 from autopilot import platform
 from autopilot.matchers import Eventually
+from dbusmock.templates.networkmanager import (InfrastructureMode,
+                                               NM80211ApSecurityFlags)
 from fixtures import EnvironmentVariable
 from gi.repository import UPowerGlib
 from testtools.matchers import Equals, NotEquals, GreaterThan
@@ -192,9 +195,6 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
                     'self.EmitSignal("IFACE", "PropertyChanged", "sv",\
                         [args[0], args[1]])'.replace("IFACE", CONNMAN_IFACE)),
             ])
-        interfaces = modem.GetProperties()['Interfaces']
-        interfaces.append(CONNMAN_IFACE)
-        modem.SetProperty('Interfaces', interfaces)
 
     def mock_carriers(self, name):
         self.dbusmock.AddObject(
@@ -247,13 +247,14 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
                  "PropertyChanged", "sv", [args[0], args[1]])'
                     .replace('IFACE', RDO_IFACE)), ])
 
-        interfaces = modem.GetProperties()['Interfaces']
-        interfaces.append(RDO_IFACE)
-        modem.SetProperty('Interfaces', interfaces)
-
     def mock_call_forwarding(self, modem):
-        modem.AddProperty(
-            CALL_FWD_IFACE, 'VoiceUnconditional', '')
+        modem.AddProperties(CALL_FWD_IFACE,
+                            {
+                                'VoiceUnconditional': '',
+                                'VoiceBusy': '',
+                                'VoiceNoReply': '',
+                                'VoiceNotReachable': '',
+                            })
         modem.AddMethods(
             CALL_FWD_IFACE,
             [('GetProperties', '', 'a{sv}',
@@ -263,9 +264,6 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
                  'self.EmitSignal("IFACE",\
                  "PropertyChanged", "sv", [args[0], args[1]])'
                     .replace('IFACE', CALL_FWD_IFACE)), ])
-        interfaces = modem.GetProperties()['Interfaces']
-        interfaces.append(CALL_FWD_IFACE)
-        modem.SetProperty('Interfaces', interfaces)
 
     def mock_call_settings(self, modem):
         modem.AddProperty(
@@ -279,9 +277,6 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
                  'self.EmitSignal("IFACE",\
                  "PropertyChanged", "sv", [args[0], args[1]])'
                     .replace('IFACE', CALL_SETTINGS_IFACE)), ])
-        interfaces = modem.GetProperties()['Interfaces']
-        interfaces.append(CALL_SETTINGS_IFACE)
-        modem.SetProperty('Interfaces', interfaces)
 
     def add_sim1(self):
         # create modem_0 proxy
@@ -860,9 +855,9 @@ class WifiBaseTestCase(UbuntuSystemSettingsTestCase,
         cls.start_system_bus()
         cls.dbus_con = cls.get_dbus(True)
         # Add a mock NetworkManager environment so we get consistent results
+        template = os.path.join(os.path.dirname(__file__), 'networkmanager.py')
         (cls.p_mock, cls.obj_nm) = cls.spawn_server_template(
-            'networkmanager', stdout=subprocess.PIPE)
-        cls.dbusmock = dbus.Interface(cls.obj_nm, dbusmock.MOCK_IFACE)
+            template, stdout=subprocess.PIPE)
 
     def setUp(self, panel=None):
         self.obj_nm.Reset()
@@ -871,5 +866,49 @@ class WifiBaseTestCase(UbuntuSystemSettingsTestCase,
             NM_SERVICE, self.device_path),
             dbusmock.MOCK_IFACE)
 
-        super(WifiBaseTestCase, self).setUp()
-        self.wifi_page = self.main_view.go_to_wifi_page()
+        self.ap_mock = self.create_access_point(
+            'test_ap', 'test_ap',
+            security=NM80211ApSecurityFlags.NM_802_11_AP_SEC_KEY_MGMT_PSK
+        )
+
+        super(WifiBaseTestCase, self).setUp(panel)
+        if panel:
+            self.wifi_page = self.main_view.wait_select_single(
+                objectName='wifiPage'
+            )
+        else:
+            self.wifi_page = self.main_view.go_to_wifi_page()
+
+    def create_access_point(self, name, ssid, security=None):
+        """Creates access point.
+
+        :param name: Name of access point
+        :param ssid: SSID of access point
+        :param security: Either None, or a NM80211ApSecurityFlags
+
+        :returns: Access point
+
+        """
+        if security is None:
+            security = NM80211ApSecurityFlags.NM_802_11_AP_SEC_NONE
+
+        return self.obj_nm.AddAccessPoint(
+            self.device_path, name, ssid, self.random_mac_address(),
+            InfrastructureMode.NM_802_11_MODE_INFRA, 2425, 5400, 82, security)
+
+    def random_mac_address(self):
+        """Returns a random Mac Address"""
+        mac = [0x00, 0x16, 0x3e, random.randint(0x00, 0x7f),
+               random.randint(0x00, 0xff), random.randint(0x00, 0xff)]
+        return ':'.join(map(lambda x: "%02x" % x, mac))
+
+
+class WifiWithSSIDBaseTestCase(WifiBaseTestCase):
+    """ Class for Wi-Fi settings tests launches with an SSID."""
+
+    ssid = None
+
+    def setUp(self, panel=None):
+        super(WifiWithSSIDBaseTestCase, self).setUp(
+            panel='settings:///wifi/?ssid=%s' % self.ssid
+        )
