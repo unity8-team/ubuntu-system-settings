@@ -147,7 +147,6 @@ public:
     Device(const QMap<QString,QVariant> &properties);
     void initDevice(const QString &path, QDBusConnection &bus);
     bool isValid() const { return getType() != Type::Other; }
-    void callInterface(const QSharedPointer<QDBusInterface> &interface, const QString &method);
     void connect(ConnectionMode);
     void connectPending();
     void makeTrusted(bool trusted);
@@ -162,6 +161,8 @@ public:
     void slotPropertyChanged(const QString &key, const QDBusVariant &value);
     void slotServiceDiscoveryDone(QDBusPendingCallWatcher *call);
     void slotMakeTrustedDone(QDBusPendingCallWatcher *call);
+    void slotConnectDone(QDBusPendingCallWatcher *watcher);
+    void slotDisconnectDone(QDBusPendingCallWatcher *watcher);
 
   private:
     void updateProperties(QSharedPointer<QDBusInterface>);
