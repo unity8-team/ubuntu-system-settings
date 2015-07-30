@@ -20,10 +20,11 @@
 
 import QtQuick 2.0
 import SystemSettings 1.0
-import Ubuntu.Components 1.1
-import Ubuntu.Components.ListItems 1.1 as ListItem
+import Ubuntu.Components 1.2
+import Ubuntu.Components.ListItems 1.2 as ListItem
 import Ubuntu.Settings.Menus 0.1 as Menus
-
+import Ubuntu.SystemSettings.Mouse 1.0
+import Ubuntu.Settings.Components 0.1 as USC
 
 Column {
     anchors.left: parent.left
@@ -32,6 +33,9 @@ Column {
     property bool scrollTwoSupported: true
     property int numberOfButtons: 3
     
+    Mouse { id: mouse }
+    TouchPad { id: touchPad }
+
     ListItem.Header {
         text: i18n.tr("Mouse")
     }
@@ -41,7 +45,7 @@ Column {
         showDivider: false
     }
 
-    Slider {
+        Menus.SliderMenu {
         anchors { 
             left: parent.left
             right: parent.right
@@ -53,6 +57,18 @@ Column {
         function formatValue(v) { return v.toFixed(2) }
         minimumValue: 0.0
         maximumValue: 1.0
+        value: mouse.cursorSpeed
+        live: true
+        property real serverValue: enabled ? mouse.cursorSpeed : 0.0
+        USC.ServerPropertySynchroniser {
+            userTarget: mouseMoveSpeed
+            userProperty: "value"
+            serverTarget: mouseMoveSpeed
+            serverProperty: "serverValue"
+            maximumWaitBufferInterval: 16
+            
+            onSyncTriggered: mouse.cursorSpeed = value
+        }
     }
 
     SettingsItemTitle {
@@ -60,7 +76,7 @@ Column {
         showDivider: false
     }
 
-    Slider {
+    Menus.SliderMenu {
         anchors { 
             left: parent.left
             right: parent.right
@@ -68,18 +84,29 @@ Column {
             rightMargin: units.gu(2)
         }
         id: mouseScrollSpeed
-        objectName: "mouseScrollSpeed"
+        objectName: "mouseMoveSpeed"
         function formatValue(v) { return v.toFixed(2) }
         minimumValue: 0.0
         maximumValue: 1.0
+        value: mouse.scrollSpeed
+        live: true
+        property real serverValue: enabled ? mouse.scrollSpeed : 0.0
+        USC.ServerPropertySynchroniser {
+            userTarget: mouseScrollSpeed
+            userProperty: "value"
+            serverTarget: mouseScrollSpeed
+            serverProperty: "serverValue"
+            maximumWaitBufferInterval: 16
+            
+            onSyncTriggered: mouse.scrollSpeed = value
+        }
     }
-
     SettingsItemTitle {
         text: i18n.tr("Double-click:")
         showDivider: false
     }
 
-    Slider {
+    Menus.SliderMenu {
         anchors { 
             left: parent.left
             right: parent.right
@@ -89,8 +116,20 @@ Column {
         id: mouseClickSpeed
         objectName: "mouseClickSpeed"
         function formatValue(v) { return v.toFixed(2) }
-        minimumValue: 0.0
-        maximumValue: 1.0
+        minimumValue: 100
+        maximumValue: 1000
+        value: mouse.clickSpeed
+        live: true
+        property real serverValue: enabled ? mouse.clickSpeed : 0.0
+        USC.ServerPropertySynchroniser {
+            userTarget: mouseClickSpeed
+            userProperty: "value"
+            serverTarget: mouseClickSpeed
+            serverProperty: "serverValue"
+            maximumWaitBufferInterval: 16
+            
+            onSyncTriggered: mouse.clickSpeed = value
+        }
     }
 
     SettingsItemTitle {
@@ -106,6 +145,7 @@ Column {
             rightMargin: units.gu(2)
         }
         height: units.gu(5)
+        doubleTapSpeed: mouse.clickSpeed
     }
 
     OptionSelector {
@@ -130,7 +170,7 @@ Column {
         showDivider: false
     }
 
-    Slider {
+    Menus.SliderMenu {
         anchors { 
             left: parent.left
             right: parent.right
@@ -142,7 +182,18 @@ Column {
         function formatValue(v) { return v.toFixed(2) }
         minimumValue: 0.0
         maximumValue: 1.0
-        
+        value: touchPad.cursorSpeed
+        live: true
+        property real serverValue: enabled ? touchPad.cursorSpeed : 0.0
+        USC.ServerPropertySynchroniser {
+            userTarget: touchMoveSpeed
+            userProperty: "value"
+            serverTarget: touchMoveSpeed
+            serverProperty: "serverValue"
+            maximumWaitBufferInterval: 16
+            
+            onSyncTriggered: touchPad.cursorSpeed = value
+        }
     }
 
     SettingsItemTitle {
@@ -150,7 +201,7 @@ Column {
         showDivider: false
     }
 
-    Slider {
+    Menus.SliderMenu {
         anchors { 
             left: parent.left
             right: parent.right
@@ -162,6 +213,18 @@ Column {
         function formatValue(v) { return v.toFixed(2) }
         minimumValue: 0.0
         maximumValue: 1.0
+        value: touchPad.scrollSpeed
+        live: true
+        property real serverValue: enabled ? touchPad.scrollSpeed : 0.0
+        USC.ServerPropertySynchroniser {
+            userTarget: touchScrollSpeed
+            userProperty: "value"
+            serverTarget: touchScrollSpeed
+            serverProperty: "serverValue"
+            maximumWaitBufferInterval: 16
+            
+            onSyncTriggered: touchPad.scrollSpeed = value
+        }
     }
 
     SettingsItemTitle {
@@ -169,7 +232,7 @@ Column {
         showDivider: false
     }
 
-    Slider {
+    Menus.SliderMenu {
         anchors { 
             left: parent.left
             right: parent.right
@@ -179,8 +242,20 @@ Column {
         id: touchClickSpeed
         objectName: "touchClickSpeed"
         function formatValue(v) { return v.toFixed(2) }
-        minimumValue: 0.0
-        maximumValue: 1.0
+        minimumValue: 100
+        maximumValue: 1000
+        value: touchPad.clickSpeed
+        live: true
+        property real serverValue: enabled ? touchPad.clickSpeed : 0.0
+        USC.ServerPropertySynchroniser {
+            userTarget: touchClickSpeed
+            userProperty: "value"
+            serverTarget: touchClickSpeed
+            serverProperty: "serverValue"
+            maximumWaitBufferInterval: 16
+            
+            onSyncTriggered: touchPad.clickSpeed = value
+        }
     }
 
     SettingsItemTitle {
@@ -196,6 +271,7 @@ Column {
             rightMargin: units.gu(2)
         }
         height: units.gu(5)
+        doubleTapSpeed: touchPad.clickSpeed
     }
 
     OptionSelector {
@@ -213,16 +289,26 @@ Column {
     }
 
     ListItem.Standard {
-        visible: tappablePad
+        id: tapToClick
         text: i18n.tr("Tap to click")
-        control: CheckBox {}
+        control: CheckBox {
+            property bool serverChecked: touchPad.tapToClick
+            onServerCheckedChanged: checked = serverChecked
+            Component.onCompleted: checked = serverChecked
+            onTriggered: touchPad.tapToClick = checked
+        }
         showDivider: false
     }
 
     ListItem.Standard {
         visible: scrollTwoSupported
         text: i18n.tr("Scroll with two fingers")
-        control: CheckBox {}
+        control: CheckBox {
+            property bool serverChecked: touchPad.twoFingerScroll
+            onServerCheckedChanged: checked = serverChecked
+            Component.onCompleted: checked = serverChecked
+            onTriggered: touchPad.twoFingerScroll = checked
+        }
         showDivider: false
     }
 
