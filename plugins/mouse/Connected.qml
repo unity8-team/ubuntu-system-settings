@@ -98,9 +98,14 @@ Column {
         showDivider: false
     }
 
-    ListItem.SingleControl {
-        control: UbuntuShape { anchors.left: parent.left; width: 48; height: 48 }
-        showDivider: false
+    TapArea {
+        anchors { 
+            left: parent.left
+            right: parent.right
+            leftMargin: units.gu(2)
+            rightMargin: units.gu(2)
+        }
+        height: units.gu(5)
     }
 
     OptionSelector {
@@ -183,9 +188,14 @@ Column {
         showDivider: false
     }
 
-    ListItem.SingleControl {
-        control: UbuntuShape { anchors.left: parent.left; width: 48; height: 48 }
-        showDivider: false
+    TapArea {
+        anchors { 
+            left: parent.left
+            right: parent.right
+            leftMargin: units.gu(2)
+            rightMargin: units.gu(2)
+        }
+        height: units.gu(5)
     }
 
     OptionSelector {

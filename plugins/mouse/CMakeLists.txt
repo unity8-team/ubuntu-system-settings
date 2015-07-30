@@ -1,10 +1,6 @@
-set(QML_SOURCES PageComponent.qml)
+set(QML_SOURCES PageComponent.qml TapArea.qml None.qml Connected.qml)
 
-# We need a dummy target so the QML files show up in Qt Creator
-# If this plugin gets some C++ sources, remove this.
-add_custom_target(mouse-holder
-COMMAND echo This is just a dummy.
-SOURCES ${QML_SOURCES})
+add_custom_target(mouse SOURCES ${QML_SOURCES})
 
 
 install(FILES mouse.settings DESTINATION ${PLUGIN_MANIFEST_DIR})
