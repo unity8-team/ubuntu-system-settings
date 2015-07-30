@@ -72,7 +72,18 @@ Column {
                 objectName: "simServicesSim" + index
                 text: i18n.tr("Services")
                 progression: true
-                enabled: sims[index].simMng.present
+                enabled: {
+                    var num;
+                    var map = sims[index].simMng.serviceNumbers;
+                    var nums = false;
+                    for(num in map) {
+                        if (map.hasOwnProperty(num)) {
+                            nums = true;
+                            break;
+                        }
+                    }
+                    return sims[index].simMng.present && nums;
+                }
                 showDivider: false
                 onClicked: pageStack.push(Qt.resolvedUrl("Services.qml"), {
                     carrierString: sims[index].netReg.name,
@@ -81,7 +92,9 @@ Column {
                 })
             }
 
-            ListItem.Divider {}
+            ListItem.Divider {
+                visible: index !== (sims.length - 1)
+            }
 
             Binding {
                 target: sims[index]

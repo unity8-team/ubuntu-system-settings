@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-10-16 20:04-0600\n"
-"PO-Revision-Date: 2014-12-23 13:14+0000\n"
-"Last-Translator: Yaron <sh.yaron@gmail.com>\n"
+"PO-Revision-Date: 2015-07-23 06:49+0000\n"
+"Last-Translator: guy <guyluz11@gmail.com>\n"
 "Language-Team: Hebrew <he@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2015-07-16 05:40+0000\n"
+"X-Launchpad-Export-Date: 2015-07-24 05:41+0000\n"
 "X-Generator: Launchpad (build 17628)\n"
 
 #: ubuntu-system-settings.desktop.in.in.h:1 ../src/qml/MainWindow.qml:112
@@ -38,41 +38,41 @@ msgstr "תצוגה מקדימה"
 msgid "Remove image"
 msgstr "הסרת תמונה"
 
-#: ../plugins/background/Preview.qml:102
-#: ../plugins/system-update/PageComponent.qml:109
-#: ../plugins/wifi/OtherNetwork.qml:886 ../plugins/wifi/CertDialog.qml:65
-#: ../plugins/bluetooth/ProvidePinCodeDialog.qml:55
-#: ../plugins/bluetooth/ConfirmPasskeyDialog.qml:49
+#: ../plugins/time-date/TimePicker.qml:173
+#: ../plugins/reset/ResetAllSettings.qml:38
+#: ../plugins/reset/EraseEverything.qml:54
+#: ../plugins/reset/ResetLauncherHome.qml:55
 #: ../plugins/bluetooth/DisplayPasskeyDialog.qml:51
+#: ../plugins/bluetooth/ProvidePinCodeDialog.qml:55
 #: ../plugins/bluetooth/ProvidePasskeyDialog.qml:54
+#: ../plugins/bluetooth/ConfirmPasskeyDialog.qml:49
 #: ../plugins/cellular/PageChooseApn.qml:563
-#: ../plugins/cellular/CustomApnEditor.qml:255
 #: ../plugins/cellular/HotspotSetup.qml:85
+#: ../plugins/cellular/CustomApnEditor.qml:255
+#: ../plugins/system-update/PageComponent.qml:109
 #: ../plugins/security-privacy/SimPin.qml:178
 #: ../plugins/security-privacy/SimPin.qml:318
 #: ../plugins/security-privacy/LockSecurity.qml:357
-#: ../plugins/time-date/TimePicker.qml:173
-#: ../plugins/phone/CallForwarding.qml:240
-#: ../plugins/reset/ResetAllSettings.qml:38
-#: ../plugins/reset/ResetLauncherHome.qml:55
-#: ../plugins/reset/EraseEverything.qml:54
-#: ../plugins/language/RebootNecessary.qml:47
 #: ../plugins/language/DisplayLanguage.qml:97
-#: ../plugins/background/Components/AddRemove.qml:42
+#: ../plugins/language/RebootNecessary.qml:47
+#: ../plugins/wifi/OtherNetwork.qml:886 ../plugins/wifi/CertDialog.qml:65
+#: ../plugins/background/Preview.qml:102
+#: ../plugins/phone/CallForwarding.qml:240
 #: ../plugins/cellular/Components/SimEditor.qml:204
+#: ../plugins/background/Components/AddRemove.qml:42
 msgid "Cancel"
 msgstr "ביטול"
 
-#: ../plugins/background/Preview.qml:109
-#: ../plugins/security-privacy/LockSecurity.qml:378
 #: ../plugins/time-date/TimePicker.qml:182
+#: ../plugins/security-privacy/LockSecurity.qml:378
+#: ../plugins/background/Preview.qml:109
 #: ../plugins/phone/CallForwarding.qml:253
 msgid "Set"
 msgstr "הגדרה"
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
 #: ../plugins/background/MainPage.qml:35
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:50
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:312
 msgid "Background"
 msgstr "רקע"
 
@@ -80,10 +80,10 @@ msgstr "רקע"
 msgid "Ubuntu Art"
 msgstr "אומנות של אובונטו"
 
-#: ../plugins/background/MainPage.qml:115
 #: ../plugins/cellular/PageChooseApn.qml:382
 #: ../plugins/cellular/PageChooseApn.qml:452
 #: ../plugins/cellular/PageChooseApn.qml:460
+#: ../plugins/background/MainPage.qml:115
 msgid "Custom"
 msgstr "התאמה אישית"
 
@@ -225,7 +225,7 @@ msgstr ""
 msgid "A secondary connection of the base connection failed"
 msgstr ""
 
-#: ../plugins/wifi/Common.qml:96 ../plugins/bluetooth/PageComponent.qml:131
+#: ../plugins/bluetooth/PageComponent.qml:131 ../plugins/wifi/Common.qml:96
 msgid "Unknown"
 msgstr "לא ידוע"
 
@@ -237,21 +237,21 @@ msgstr ""
 msgid "Network name"
 msgstr "שם הרשת"
 
-#: ../plugins/wifi/OtherNetwork.qml:304
 #: ../plugins/security-privacy/PageComponent.qml:115
+#: ../plugins/wifi/OtherNetwork.qml:304
 msgid "Security"
 msgstr "אבטחה"
 
-#: ../plugins/about/PageComponent.qml:126
-#: ../plugins/about/PageComponent.qml:127
-#: ../plugins/about/PageComponent.qml:138 ../plugins/wifi/OtherNetwork.qml:315
-#: ../plugins/wifi/OtherNetwork.qml:454 ../plugins/wifi/OtherNetwork.qml:571
 #: ../plugins/bluetooth/PageComponent.qml:161
 #: ../plugins/bluetooth/PageComponent.qml:375
 #: ../plugins/bluetooth/PageComponent.qml:399
 #: ../plugins/cellular/PageCarriersAndApns.qml:51
 #: ../plugins/cellular/PageCarriersAndApns.qml:77
 #: ../plugins/cellular/PageCarrierAndApn.qml:46
+#: ../plugins/about/PageComponent.qml:126
+#: ../plugins/about/PageComponent.qml:127
+#: ../plugins/about/PageComponent.qml:138 ../plugins/wifi/OtherNetwork.qml:315
+#: ../plugins/wifi/OtherNetwork.qml:454 ../plugins/wifi/OtherNetwork.qml:571
 #: ../plugins/wifi/certhandler.cpp:105 ../plugins/wifi/certhandler.cpp:140
 #: ../plugins/wifi/certhandler.cpp:192 ../plugins/wifi/certhandler.cpp:224
 #: ../plugins/wifi/certhandler.cpp:289 ../plugins/wifi/certhandler.cpp:318
@@ -266,8 +266,8 @@ msgstr "‏WPA &‏ WPA2 אישי"
 msgid "WEP"
 msgstr "WEP"
 
-#: ../plugins/wifi/OtherNetwork.qml:783 ../plugins/wifi/NetworkDetails.qml:64
 #: ../plugins/cellular/CustomApnEditor.qml:232
+#: ../plugins/wifi/OtherNetwork.qml:783 ../plugins/wifi/NetworkDetails.qml:64
 msgid "Password"
 msgstr "ססמה"
 
@@ -275,15 +275,15 @@ msgstr "ססמה"
 msgid "Show password"
 msgstr "הצגת הססמה"
 
-#: ../plugins/wifi/OtherNetwork.qml:902
 #: ../plugins/bluetooth/PageComponent.qml:463
+#: ../plugins/wifi/OtherNetwork.qml:902
 msgid "Connect"
 msgstr "התחברות"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: ../plugins/wifi/PageComponent.qml:28
 #: ../plugins/battery/PageComponent.qml:341
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:142
+#: ../plugins/wifi/PageComponent.qml:28
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:292
 msgid "Wi-Fi"
 msgstr "רשת אלחוטית"
 
@@ -295,8 +295,8 @@ msgstr ""
 msgid "Network details"
 msgstr "פרטי הרשת"
 
-#: ../plugins/wifi/NetworkDetails.qml:45
 #: ../plugins/bluetooth/PageComponent.qml:395
+#: ../plugins/wifi/NetworkDetails.qml:45
 msgid "Name"
 msgstr "שם"
 
@@ -304,16 +304,16 @@ msgstr "שם"
 msgid "Last connected"
 msgstr "חיבור אחרון"
 
-#: ../plugins/about/PageComponent.qml:191
-#: ../plugins/system-update/PageComponent.qml:752
 #: ../plugins/system-update/Configuration.qml:52
-#: ../plugins/wifi/NetworkDetails.qml:58
+#: ../plugins/system-update/PageComponent.qml:752
+#: ../plugins/battery/SleepValues.qml:113
 #: ../plugins/battery/PageComponent.qml:313
 #: ../plugins/battery/PageComponent.qml:322
-#: ../plugins/battery/SleepValues.qml:113
 #: ../plugins/security-privacy/PageComponent.qml:129
 #: ../plugins/security-privacy/PhoneLocking.qml:79
 #: ../plugins/security-privacy/PhoneLocking.qml:88
+#: ../plugins/about/PageComponent.qml:191
+#: ../plugins/wifi/NetworkDetails.qml:58
 msgid "Never"
 msgstr "לעולם לא"
 
@@ -324,7 +324,7 @@ msgstr "התעלמות מהרשת"
 
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
 #: ../plugins/notifications/PageComponent.qml:29
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:118
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:164
 msgid "Notifications"
 msgstr "התרעות"
 
@@ -340,7 +340,7 @@ msgstr "להפסיק לנגן"
 
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
 #: ../plugins/sound/PageComponent.qml:38
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:100
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:88
 msgid "Sound"
 msgstr "שמע"
 
@@ -407,7 +407,7 @@ msgstr "הטלפון במצב שקט."
 
 #. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
 #: ../plugins/reset/PageComponent.qml:32
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:296
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:24
 msgid "Reset phone"
 msgstr "איפוס הטלפון"
 
@@ -422,7 +422,7 @@ msgstr "איפוס כל הגדרות המערכת…"
 
 #: ../plugins/reset/PageComponent.qml:101
 msgid "Erase & Reset Everything…"
-msgstr ""
+msgstr "מחיקה ואיפוס של הכול…"
 
 #: ../plugins/reset/ResetAllSettings.qml:29
 msgid ""
@@ -455,7 +455,7 @@ msgstr "מחיקה ואיפוס של הכול"
 
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
 #: ../plugins/battery/PageComponent.qml:35
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:162
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:148
 msgid "Battery"
 msgstr "סוללה"
 
@@ -507,8 +507,8 @@ msgstr "טעינה מלאה"
 msgid "Charge level"
 msgstr "רמת הטעינה"
 
-#: ../plugins/about/Storage.qml:199 ../plugins/battery/PageComponent.qml:109
-#: ../plugins/battery/PageComponent.qml:281
+#: ../plugins/battery/PageComponent.qml:109
+#: ../plugins/battery/PageComponent.qml:281 ../plugins/about/Storage.qml:199
 msgid "N/A"
 msgstr "לא זמין"
 
@@ -532,8 +532,8 @@ msgstr "היום"
 msgid "Ways to reduce battery use:"
 msgstr "דרכים להפחתת השימוש בסוללה:"
 
-#: ../plugins/brightness/PageComponent.qml:57
 #: ../plugins/battery/PageComponent.qml:294
+#: ../plugins/brightness/PageComponent.qml:57
 msgid "Display brightness"
 msgstr "בהירות התצוגה"
 
@@ -548,13 +548,13 @@ msgid "Sleep when idle"
 msgstr "מצב שינה בהעדר פעילות"
 
 #. TRANSLATORS: %1 is the number of minutes
-#: ../plugins/battery/PageComponent.qml:310
-#: ../plugins/battery/PageComponent.qml:319
 #: ../plugins/battery/SleepValues.qml:90 ../plugins/battery/SleepValues.qml:94
 #: ../plugins/battery/SleepValues.qml:98
 #: ../plugins/battery/SleepValues.qml:102
 #: ../plugins/battery/SleepValues.qml:106
 #: ../plugins/battery/SleepValues.qml:110
+#: ../plugins/battery/PageComponent.qml:310
+#: ../plugins/battery/PageComponent.qml:319
 #: ../plugins/security-privacy/PageComponent.qml:126
 #: ../plugins/security-privacy/PageComponent.qml:135
 #, qt-format
@@ -564,10 +564,10 @@ msgstr[0] "לאחר דקה %1"
 msgstr[1] "לאחר %1 דקות"
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
-#: ../plugins/battery/PageComponent.qml:375
 #: ../plugins/bluetooth/PageComponent.qml:33
 #: ../plugins/bluetooth/PageComponent.qml:192
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:178
+#: ../plugins/battery/PageComponent.qml:375
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:36
 msgid "Bluetooth"
 msgstr "Bluetooth"
 
@@ -628,7 +628,7 @@ msgstr "אישור"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #: ../plugins/language/PageComponent.qml:34
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:308
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:230
 msgid "Language & Text"
 msgstr "שפה וטקסט"
 
@@ -679,8 +679,8 @@ msgid "All layouts available:"
 msgstr "כל הפריסות זמינות:"
 
 #: ../plugins/phone/NoSims.qml:34 ../plugins/phone/SingleSim.qml:34
-#: ../plugins/phone/MultiSim.qml:42 ../plugins/phone/CallWaiting.qml:31
-#: ../plugins/phone/CallWaiting.qml:81
+#: ../plugins/phone/CallWaiting.qml:31 ../plugins/phone/CallWaiting.qml:81
+#: ../plugins/phone/MultiSim.qml:42
 msgid "Call waiting"
 msgstr "שיחה ממתינה"
 
@@ -696,8 +696,8 @@ msgstr "מאפשר לך לענות או לפתוח בשיחה חדש במהלך 
 msgid "%1 Services"
 msgstr "שירותי %1"
 
-#: ../plugins/phone/NoSims.qml:28 ../plugins/phone/SingleSim.qml:41
-#: ../plugins/phone/MultiSim.qml:52 ../plugins/phone/CallForwarding.qml:44
+#: ../plugins/phone/CallForwarding.qml:44 ../plugins/phone/NoSims.qml:28
+#: ../plugins/phone/SingleSim.qml:41 ../plugins/phone/MultiSim.qml:52
 msgid "Call forwarding"
 msgstr "הפניית שיחות"
 
@@ -731,7 +731,7 @@ msgstr ""
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
 #: ../plugins/bluetooth/PageComponent.qml:138
 #: ../plugins/phone/PageComponent.qml:32
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:278
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:328
 msgid "Phone"
 msgstr "טלפון"
 
@@ -741,7 +741,7 @@ msgstr "SIM"
 
 #. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
 #: ../plugins/brightness/PageComponent.qml:35
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:38
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:188
 msgid "Brightness"
 msgstr "בהירות"
 
@@ -751,12 +751,12 @@ msgstr "התאמה אוטומטית"
 
 #: ../plugins/brightness/PageComponent.qml:103
 msgid "Brightens and dims the display to suit the surroundings."
-msgstr ""
+msgstr "הבהרה ועמעום של המסך לצורך התאמה לסביבה."
 
-#: ../plugins/cellular/PageCarriersAndApns.qml:48
-#: ../plugins/cellular/PageCarriersAndApns.qml:74
 #: ../plugins/cellular/PageChooseCarrier.qml:32
 #: ../plugins/cellular/PageChooseCarrier.qml:129
+#: ../plugins/cellular/PageCarriersAndApns.qml:48
+#: ../plugins/cellular/PageCarriersAndApns.qml:74
 #: ../plugins/cellular/PageCarrierAndApn.qml:27
 #: ../plugins/cellular/PageCarrierAndApn.qml:44
 #: ../plugins/cellular/PageCarrierAndApn.qml:52
@@ -768,15 +768,15 @@ msgstr ""
 msgid "Choose carrier:"
 msgstr "נא לבחור בספק:"
 
-#: ../plugins/cellular/PageChooseCarrier.qml:153
+#: ../plugins/time-date/PageComponent.qml:82
 #: ../plugins/time-date/ChooseTimeZone.qml:47
-#: ../plugins/time-date/PageComponent.qml:72
+#: ../plugins/cellular/PageChooseCarrier.qml:153
 msgid "Automatically"
 msgstr "אוטומטית"
 
-#: ../plugins/security-privacy/PageComponent.qml:138
+#: ../plugins/time-date/PageComponent.qml:82
 #: ../plugins/time-date/ChooseTimeZone.qml:47
-#: ../plugins/time-date/PageComponent.qml:72
+#: ../plugins/security-privacy/PageComponent.qml:138
 msgid "Manually"
 msgstr "ידנית"
 
@@ -857,13 +857,13 @@ msgstr ""
 msgid "Proxy"
 msgstr ""
 
-#: ../plugins/wifi/OtherNetwork.qml:751
 #: ../plugins/cellular/CustomApnEditor.qml:223
+#: ../plugins/wifi/OtherNetwork.qml:751
 msgid "Username"
 msgstr ""
 
-#: ../plugins/wifi/CertDialog.qml:74
 #: ../plugins/cellular/CustomApnEditor.qml:274
+#: ../plugins/wifi/CertDialog.qml:74
 msgid "Save"
 msgstr ""
 
@@ -873,7 +873,7 @@ msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
 #: ../plugins/cellular/PageComponent.qml:33
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:202
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:60
 msgid "Cellular"
 msgstr "סלולרי"
 
@@ -925,9 +925,9 @@ msgstr "הצגת קוד"
 msgid "Change"
 msgstr "החלפה"
 
-#: ../plugins/about/DevMode.qml:116
 #: ../plugins/security-privacy/LockSecurity.qml:33
 #: ../plugins/security-privacy/PhoneLocking.qml:50
+#: ../plugins/about/DevMode.qml:116
 msgid "Lock security"
 msgstr "אבטחת נעילה"
 
@@ -1148,7 +1148,7 @@ msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
 #: ../plugins/security-privacy/PageComponent.qml:37
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:238
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:200
 msgid "Security & Privacy"
 msgstr "אבטחה ופרטיות"
 
@@ -1178,7 +1178,7 @@ msgstr ""
 
 #: ../plugins/security-privacy/PageComponent.qml:161
 msgid "Encryption"
-msgstr ""
+msgstr "הצפנה"
 
 #: ../plugins/security-privacy/PageComponent.qml:170
 msgid ""
@@ -1188,7 +1188,7 @@ msgstr ""
 
 #: ../plugins/security-privacy/PageComponent.qml:174
 msgid "Privacy"
-msgstr ""
+msgstr "פרטיות"
 
 #: ../plugins/security-privacy/PageComponent.qml:177
 msgid "Stats on welcome screen"
@@ -1207,8 +1207,8 @@ msgstr "חיפוש בלוח"
 msgid "Location access"
 msgstr "גישה למיקום"
 
-#: ../plugins/security-privacy/PageComponent.qml:228
 #: ../plugins/security-privacy/AppAccess.qml:28
+#: ../plugins/security-privacy/PageComponent.qml:228
 msgid "Other app access"
 msgstr "גישה מיישומים אחרים"
 
@@ -1333,10 +1333,10 @@ msgstr "%1/%2"
 msgid "0"
 msgstr "0"
 
-#: ../plugins/bluetooth/ProvidePinCodeDialog.qml:28
-#: ../plugins/bluetooth/ConfirmPasskeyDialog.qml:28
 #: ../plugins/bluetooth/DisplayPasskeyDialog.qml:26
+#: ../plugins/bluetooth/ProvidePinCodeDialog.qml:28
 #: ../plugins/bluetooth/ProvidePasskeyDialog.qml:28
+#: ../plugins/bluetooth/ConfirmPasskeyDialog.qml:28
 msgid "Bluetooth Pairing Request"
 msgstr "בקשת צימוד Bluetooth"
 
@@ -1558,7 +1558,7 @@ msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: ../plugins/about/PageComponent.qml:34
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:2
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:256
 msgid "About this phone"
 msgstr "פרטים על הטלפון הזה"
 
@@ -1697,22 +1697,22 @@ msgid "Year"
 msgstr "שנה"
 
 #. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
-#: ../plugins/time-date/PageComponent.qml:29
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:268
+#: ../plugins/time-date/PageComponent.qml:30
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:14
 msgid "Time & Date"
 msgstr "שעה ותאריך"
 
-#: ../plugins/time-date/PageComponent.qml:53
+#: ../plugins/time-date/PageComponent.qml:63
 msgid "Time zone:"
 msgstr "אזור זמן:"
 
-#: ../plugins/time-date/PageComponent.qml:66
+#: ../plugins/time-date/PageComponent.qml:76
 msgid "Set the time and date:"
 msgstr "הגדרת השעה והתאריך:"
 
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
 #: ../plugins/system-update/PageComponent.qml:37
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:80
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:128
 msgid "Updates"
 msgstr "עדכונים"
 
@@ -1748,7 +1748,7 @@ msgstr ""
 #: ../plugins/phone/CallForwarding.qml:305
 #: ../plugins/cellular/Components/SimEditor.qml:215
 msgid "OK"
-msgstr ""
+msgstr "אישור"
 
 #: ../plugins/system-update/PageComponent.qml:154
 msgid "Software is up to date"
@@ -1841,14 +1841,14 @@ msgstr ""
 
 #: ../plugins/system-update/PageComponent.qml:666
 msgid "Sign In…"
-msgstr ""
+msgstr "כניסה…"
 
 #: ../plugins/system-update/PageComponent.qml:710
 msgid "Installing update…"
 msgstr "העדכון מותקן…"
 
-#: ../plugins/system-update/PageComponent.qml:749
 #: ../plugins/system-update/Configuration.qml:29
+#: ../plugins/system-update/PageComponent.qml:749
 msgid "Auto download"
 msgstr "הורדה אוטומטית"
 
@@ -1894,7 +1894,7 @@ msgstr "יתכן חיוב בגין צריכת נתונים."
 
 #: ../plugins/background/Components/AddRemove.qml:52
 msgid "No images selected"
-msgstr ""
+msgstr "לא נבחרו תמונות"
 
 #: ../plugins/background/Components/AddRemove.qml:65
 #, qt-format
@@ -1905,11 +1905,11 @@ msgstr[1] ""
 
 #: ../plugins/background/Components/AddRemove.qml:80
 msgid "Add an image…"
-msgstr ""
+msgstr "הוספת תמונה…"
 
 #: ../plugins/background/Components/AddRemove.qml:91
 msgid "Remove images…"
-msgstr ""
+msgstr "הסרת תמונות…"
 
 #: ../plugins/cellular/Components/SingleSim.qml:37
 #: ../plugins/cellular/Components/DataMultiSim.qml:39
@@ -1935,7 +1935,7 @@ msgstr ""
 
 #: ../plugins/cellular/Components/SimEditor.qml:88
 msgid "Edit SIM Name"
-msgstr ""
+msgstr "עריכת שם ה־SIM"
 
 #: ../plugins/cellular/Components/DefaultSim.qml:32
 msgid "Ask me each time"
@@ -1943,7 +1943,7 @@ msgstr ""
 
 #: ../plugins/cellular/Components/DefaultSim.qml:35
 msgid "For outgoing calls, use:"
-msgstr ""
+msgstr "לשיחות יוצאות יש להשתמש ב־:"
 
 #: ../plugins/cellular/Components/DefaultSim.qml:52
 msgid ""
@@ -1953,7 +1953,7 @@ msgstr ""
 
 #: ../plugins/cellular/Components/DefaultSim.qml:57
 msgid "For messages, use:"
-msgstr ""
+msgstr "להודעות יש להשתמש ב־:"
 
 #: ../plugins/cellular/Components/SingleSim.qml:64
 #: ../plugins/cellular/Components/MultiSim.qml:52
@@ -1967,11 +1967,11 @@ msgstr "סטטיסטיקת שימוש בנתונים"
 
 #: ../plugins/security-privacy/diagnostics/PageComponent.qml:51
 msgid "Privacy policy"
-msgstr ""
+msgstr "מדיניות פרטיות"
 
 #: ../plugins/security-privacy/diagnostics/PageComponent.qml:59
 msgid "Report to Canonical:"
-msgstr ""
+msgstr "דיווח ל־Canonical:"
 
 #: ../plugins/security-privacy/diagnostics/PageComponent.qml:73
 msgid "App crashes and errors"
@@ -1979,7 +1979,7 @@ msgstr ""
 
 #: ../plugins/security-privacy/diagnostics/PageComponent.qml:79
 msgid "Previous error reports"
-msgstr ""
+msgstr "דיווחי שגיאות קודמים"
 
 #: ../plugins/security-privacy/diagnostics/PageComponent.qml:90
 msgid "Includes info about what an app was doing when it failed."
@@ -2044,7 +2044,7 @@ msgstr "דילוג"
 
 #: ../wizard/qml/Pages//here-terms.qml:25
 msgid "Terms & Conditions"
-msgstr ""
+msgstr "תנאי שימוש"
 
 #: ../wizard/qml/Pages//passwd-set.qml:53
 msgid "Enter passphrase"
@@ -2081,7 +2081,7 @@ msgstr ""
 
 #: ../wizard/qml/Pages//80-finished.qml:22
 msgid "All done"
-msgstr ""
+msgstr "הכול בוצע"
 
 #: ../wizard/qml/Pages//80-finished.qml:37
 msgid "Nice work!"
@@ -2163,549 +2163,549 @@ msgid "%1  〉"
 msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:52
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:314
 msgid "appearance"
 msgstr "מראה"
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:54
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:316
 msgid "background"
 msgstr "רקע"
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:56
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:318
 msgid "wallpaper"
 msgstr "טפט"
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:58
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:320
 msgid "art"
 msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:60
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:322
 msgid "photo"
 msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:62
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:324
 msgid "picture"
 msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:64
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:326
 msgid "image"
 msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:262
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:224
 msgid "Accessibility"
 msgstr "נגישות"
 
 #. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:264
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:226
 msgid "accessibility"
 msgstr "נגישות"
 
 #. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:266
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:228
 msgid "a11y"
 msgstr "נגישות"
 
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:76
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:144
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:206
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:64
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:116
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:294
 msgid "network"
 msgstr "רשת"
 
-#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:146
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:194
+#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:52
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:296
 msgid "wireless"
 msgstr "אלחוטי"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:148
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:298
 msgid "wifi"
 msgstr "אלחוט"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:150
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:300
 msgid "wi-fi"
 msgstr "אלחוטית"
 
-#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:152
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:196
+#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:54
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:302
 msgid "connect"
 msgstr ""
 
-#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:154
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:198
+#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:56
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:304
 msgid "disconnect"
 msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:156
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:306
 msgid "hidden"
 msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:158
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:308
 msgid "ip"
 msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:18
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:160
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:272
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:310
 msgid "address"
 msgstr ""
 
-#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:26
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:84
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:120
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:132
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:166
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:280
 msgid "software"
 msgstr "תכנה"
 
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:122
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:168
 msgid "notifications"
 msgstr "התרעות"
 
+#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:88
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:124
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:344
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:12
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:136
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:170
 msgid "apps"
 msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:126
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:172
 msgid "authorize"
 msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:128
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:174
 msgid "alerts"
 msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:130
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:176
 msgid "permissions"
 msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:132
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:178
 msgid "badges"
 msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:134
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:180
 msgid "facebook"
 msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:136
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:182
 msgid "twitter"
 msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:138
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:184
 msgid "flickr"
 msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:140
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:186
 msgid "gmail"
 msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:102
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:90
 msgid "sound"
 msgstr "קול"
 
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:104
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:92
 msgid "silent"
 msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:106
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:94
 msgid "ringtone"
 msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:108
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:96
 msgid "vibrate"
 msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:110
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:290
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:98
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:340
 msgid "dialpad"
 msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:112
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:100
 msgid "message"
 msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:114
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:312
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:102
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:234
 msgid "keyboard"
 msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:116
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:104
 msgid "volume"
 msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:298
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:26
 msgid "reset"
 msgstr "איפוס"
 
 #. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:300
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:28
 msgid "erase"
 msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:302
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:30
 msgid "factory"
 msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:304
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:32
 msgid "clear"
 msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:306
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:34
 msgid "restore"
 msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:164
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:150
 msgid "battery"
 msgstr "סוללה"
 
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:166
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:152
 msgid "power"
 msgstr "צריכת חשמל"
 
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:168
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:154
 msgid "charge"
 msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:170
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:156
 msgid "idle"
 msgstr ""
 
+#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:172
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:244
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:340
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:8
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:158
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:206
 msgid "lock"
 msgstr "נעילה"
 
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:174
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:160
 msgid "disable"
 msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:176
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:162
 msgid "enable"
 msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:310
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:232
 msgid "language"
 msgstr "שפה"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:314
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:236
 msgid "spellcheck"
 msgstr ""
 
-#. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:46
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:92
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:276
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:316
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:22
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:140
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:196
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:238
 msgid "automatic"
 msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:318
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:240
 msgid "correct"
 msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:320
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:242
 msgid "suggestions"
 msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:322
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:244
 msgid "capitalization"
 msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:324
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:246
 msgid "punctuation"
 msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:326
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:248
 msgid "layout"
 msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:42
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:328
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:192
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:250
 msgid "display"
 msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:330
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:252
 msgid "words"
 msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:332
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:254
 msgid "vibration"
 msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:10
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:280
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:264
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:330
 msgid "phone"
 msgstr "טלפון"
 
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:282
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:332
 msgid "services"
 msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:284
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:334
 msgid "forwarding"
 msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:286
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:336
 msgid "waiting"
 msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:288
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:338
 msgid "call"
 msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:292
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:342
 msgid "shortcuts"
 msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:294
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:344
 msgid "numbers"
 msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:40
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:190
 msgid "brightness"
 msgstr "בהירות"
 
-#. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:44
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:342
+#. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:10
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:194
 msgid "screen"
 msgstr "מסך"
 
 #. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:48
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:198
 msgid "adjust"
 msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:204
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:62
 msgid "cellular"
 msgstr "סלולרי"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:208
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:66
 msgid "mobile"
 msgstr "נייד"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:210
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:68
 msgid "gsm"
 msgstr "gsm"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:212
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:70
 msgid "data"
 msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:214
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:72
 msgid "carrier"
 msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:216
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:74
 msgid "4g"
 msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:218
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:76
 msgid "3g"
 msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:220
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:78
 msgid "2g"
 msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:222
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:80
 msgid "lte"
 msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:224
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:82
 msgid "apn"
 msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:226
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:84
 msgid "roam"
 msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:228
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:246
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:86
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:208
 msgid "sim"
 msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:230
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:118
 msgid "Example"
 msgstr "דוגמה"
 
 #. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:232
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:120
 msgid "example"
 msgstr "דוגמה"
 
 #. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:234
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:122
 msgid "test"
 msgstr "בדיקה"
 
 #. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:236
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:124
 msgid "sample"
 msgstr "דוגמית"
 
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:66
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:106
 msgid "Flight Mode"
 msgstr "מצב טיסה"
 
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:68
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:108
 msgid "flight"
 msgstr "טיסה"
 
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:70
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:110
 msgid "plane"
 msgstr "מטוס"
 
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:72
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:112
 msgid "offline"
 msgstr "לא מקוון"
 
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:74
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:114
 msgid "airplane"
 msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:240
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:202
 msgid "security"
 msgstr "אבטחה"
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:242
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:204
 msgid "privacy"
 msgstr "פרטיות"
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:248
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:210
 msgid "pin"
 msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:250
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:212
 msgid "code"
 msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:252
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:214
 msgid "password"
 msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:254
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:216
 msgid "passphrase"
 msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:256
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:218
 msgid "swipe"
 msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:258
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:220
 msgid "allow"
 msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:260
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:222
 msgid "access"
 msgstr ""
 
@@ -2715,164 +2715,164 @@ msgid "Orientation Lock"
 msgstr "נעילת סיבוב"
 
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:336
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:4
 msgid "rotation"
 msgstr "הטייה"
 
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:338
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:6
 msgid "orientation"
 msgstr "כיוון"
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:180
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:38
 msgid "bluetooth"
 msgstr "בלוטות׳"
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:182
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:40
 msgid "headset"
 msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:184
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:42
 msgid "pair"
 msgstr ""
 
-#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:6
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:186
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:44
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:260
 msgid "device"
 msgstr "התקן"
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:188
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:46
 msgid "discover"
 msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:190
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:48
 msgid "car"
 msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:192
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:50
 msgid "handsfree"
 msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:200
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:58
 msgid "stereo"
 msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:4
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:258
 msgid "about"
 msgstr "על אודות"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:8
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:262
 msgid "info"
 msgstr "מידע"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:12
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:266
 msgid "number"
 msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:14
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:268
 msgid "imei"
 msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:16
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:270
 msgid "serial"
 msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:20
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:274
 msgid "mac"
 msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:22
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:276
 msgid "licenses"
 msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:24
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:278
 msgid "developer"
 msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:28
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:282
 msgid "storage"
 msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:30
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:284
 msgid "disk"
 msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:32
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:286
 msgid "space"
 msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:34
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:288
 msgid "version"
 msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:36
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:290
 msgid "revision"
 msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:270
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:16
 msgid "time"
 msgstr "זמן"
 
 #. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:272
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:18
 msgid "date"
 msgstr "תאריך"
 
 #. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:274
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:20
 msgid "timezone"
 msgstr "אזור זמן"
 
 #. TRANSLATORS: This is a keyword or name for the update-notification plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:78
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:126
 msgid "Updates available"
 msgstr "ישנם עדכונים זמינים"
 
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:82
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:130
 msgid "system"
 msgstr "מערכת"
 
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:86
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:134
 msgid "update"
 msgstr "עדכון"
 
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:94
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:142
 msgid "download"
 msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:96
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:144
 msgid "upgrade"
 msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#: /build/ubuntu-system-settings-nzmZzo/ubuntu-system-settings-0.3+15.10.20150709/obj-x86_64-linux-gnu/po/settings.js:98
+#: /build/ubuntu-system-settings-RfNSuF/ubuntu-system-settings-0.3+15.10.20150723/obj-arm-linux-gnueabihf/po/settings.js:146
 msgid "click"
 msgstr ""
 
@@ -2882,11 +2882,11 @@ msgstr ""
 
 #: ../plugins/security-privacy/securityprivacy.cpp:349
 msgid "Incorrect passphrase. Try again."
-msgstr ""
+msgstr "מילת הצופן שגויה. נא לנסות שוב."
 
 #: ../plugins/security-privacy/securityprivacy.cpp:352
 msgid "Could not set security mode"
-msgstr ""
+msgstr "לא ניתן להגדיר מצב מאובטח"
 
 #: ../plugins/security-privacy/securityprivacy.cpp:377
 msgid "Could not set security display hint"

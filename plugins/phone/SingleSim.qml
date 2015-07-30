@@ -62,7 +62,19 @@ Column {
         // TRANSLATORS: %1 is the name of the (network) carrier
         text: i18n.tr("%1 Services").arg(carrierString)
         progression: true
-        enabled: sim.simMng.present
+        showDivider: false
+        enabled: {
+            var num;
+            var map = sim.simMng.serviceNumbers;
+            var nums = false;
+            for(num in map) {
+                if (map.hasOwnProperty(num)) {
+                    nums = true;
+                    break;
+                }
+            }
+            return sim.simMng.present && nums;
+        }
         onClicked: pageStack.push(Qt.resolvedUrl("Services.qml"),
                                   {carrierString: carrierString, sim: sim.simMng})
     }
