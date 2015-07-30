@@ -148,17 +148,20 @@ Column {
         doubleTapSpeed: mouse.clickSpeed
     }
 
-    OptionSelector {
-        anchors { 
+    ListItem.ItemSelector {
+        anchors {
             left: parent.left
             right: parent.right
-            topMargin: units.gu(2)
-            leftMargin: units.gu(2)
-            rightMargin: units.gu(2)
         }
+        activeFocusOnPress: false
         text: i18n.tr("Primary button:")
         model: [i18n.tr("Left"),
                 i18n.tr("Right")]
+        onDelegateClicked: {
+            for (var item in model) {
+                console.warn(item);
+            }
+        }
     }
 
     ListItem.Header {
@@ -274,18 +277,20 @@ Column {
         doubleTapSpeed: touchPad.clickSpeed
     }
 
-    OptionSelector {
-        visible: numberOfButtons > 1
-        anchors { 
+    ListItem.ItemSelector {
+        anchors {
             left: parent.left
             right: parent.right
-            topMargin: units.gu(2)
-            leftMargin: units.gu(2)
-            rightMargin: units.gu(2)
         }
+        activeFocusOnPress: false
         text: i18n.tr("Primary button:")
         model: [i18n.tr("Left"),
                 i18n.tr("Right")]
+        onDelegateClicked: {
+            for (var item in model) {
+                console.warn(item);
+            }
+        }
     }
 
     ListItem.Standard {
@@ -312,18 +317,22 @@ Column {
         showDivider: false
     }
 
-    OptionSelector {
-        anchors { 
+    ListItem.ItemSelector {
+        anchors {
             left: parent.left
             right: parent.right
-            topMargin: units.gu(2)
-            leftMargin: units.gu(2)
-            rightMargin: units.gu(2)
         }
+        activeFocusOnPress: false
+        //expanded: true
         text: i18n.tr("Ignore touchpad when:")
-        expanded: true
-        multiSelection: true
         model: [i18n.tr("Typing"),
                 i18n.tr("A mouse is connected")]
+        multiSelection: true
+        onDelegateClicked: {
+            console.warn("selected: " + ViewItems.selectedIndices);
+            for (var item in model) {
+                console.warn(item);
+             }
+        }
     }
 }
