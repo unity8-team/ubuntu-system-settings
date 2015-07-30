@@ -1,3 +1,18 @@
+ubuntu-system-settings (0.3+15.10.20150729.1-0ubuntu1) wily; urgency=medium
+
+  [ Christopher Lee ]
+  * Update AP helper so it doesn't attempt to use an unreachable value
+    when scrolling.
+
+  [ Ken VanDine ]
+  * Added a sleep to give set_forward_on_busy time to finish
+  * Use wait_select_single in the wifi dialog and bump the sleep to 1
+    second
+  * We need to explicitly stop dbus in tearDownClass, fixes lingering
+    dbus processes
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Wed, 29 Jul 2015 18:06:23 +0000
+
 ubuntu-system-settings (0.3+15.10.20150724-0ubuntu1) wily; urgency=medium
 
   [ CI Train Bot ]
