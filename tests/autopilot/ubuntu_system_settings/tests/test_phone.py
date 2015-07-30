@@ -10,6 +10,8 @@ from __future__ import absolute_import
 from autopilot.matchers import Eventually
 from testtools.matchers import Contains, Equals
 
+from time import sleep
+
 from ubuntu_system_settings.tests import (
     PhoneOfonoBaseTestCase,
     CALL_FWD_IFACE,
@@ -192,6 +194,7 @@ class PhoneDualSimTestCase(PhoneOfonoBaseTestCase):
         # Set busy so we can assert that busy is eventually unset.
         call_fwd_page = self.phone_page.set_forward_on_busy('41444424',
                                                             sim=0)
+        sleep(1)
         call_fwd_page.set_forward_unconditionally('41444424',)
 
         # Check that the forward has been set
@@ -316,6 +319,7 @@ class PhoneDualSimTestCase(PhoneOfonoBaseTestCase):
         # Set busy so we can assert that busy is eventually unset.
         call_fwd_page = self.phone_page.set_forward_on_busy('41444424',
                                                             sim=1)
+        sleep(1)
         call_fwd_page.set_forward_unconditionally('41444424',)
 
         # Check that the forward has been set
