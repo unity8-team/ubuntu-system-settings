@@ -120,13 +120,15 @@ class SystemSettingsMainWindow(ubuntuuitoolkit.MainView):
         page.active.wait_for(True)
         return page
 
+    @autopilot.logging.log_action(logger.debug)
     def scroll_to(self, obj):
         page = self.system_settings_page
+        get_page_bottom = lambda: page.globalRect[1] + page.globalRect[3]
         page_right = page.globalRect[0] + page.globalRect[2]
-        page_bottom = page.globalRect[1] + page.globalRect[3]
+        page_bottom = get_page_bottom()
         page_center_x = int(page_right / 2)
         page_center_y = int(page_bottom / 2)
-        while obj.globalRect[1] + obj.height > page_bottom:
+        while obj.globalRect[1] + obj.height > get_page_bottom():
             self.pointing_device.drag(
                 page_center_x,
                 page_center_y,
@@ -134,7 +136,7 @@ class SystemSettingsMainWindow(ubuntuuitoolkit.MainView):
                 page_center_y - obj.height * 2
             )
             # avoid a flick
-            sleep(0.5)
+            sleep(1.0)
 
     def scroll_to_and_click(self, obj):
         self.scroll_to(obj)
@@ -303,7 +305,7 @@ class CellularPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
         sleep(1)
         ok = self.select_single('Button', objectName="doRename")
 
-        field = self.select_single('TextField', objectName="nameField")
+        field = self.wait_select_single('TextField', objectName="nameField")
         field.write(name)
         self.pointing_device.click_object(ok)
 
@@ -1478,8 +1480,8 @@ class OtherNetwork(
 
     @autopilot.logging.log_action(logger.debug)
     def _enter_name(self, name):
-        namefield = self.select_single('TextField',
-                                       objectName='networkname')
+        namefield = self.wait_select_single('TextField',
+                                            objectName='networkname')
         self._scroll_to_and_click(namefield)
         namefield.write(name)
 
@@ -1489,8 +1491,8 @@ class OtherNetwork(
 
     @autopilot.logging.log_action(logger.debug)
     def _enter_username(self, username):
-        namefield = self.select_single('TextField',
-                                       objectName='username')
+        namefield = self.wait_select_single('TextField',
+                                            objectName='username')
         self._scroll_to_and_click(namefield)
         namefield.write(username)
 
@@ -1539,8 +1541,8 @@ class OtherNetwork(
 
     @autopilot.logging.log_action(logger.debug)
     def _enter_password(self, password):
-        pwdfield = self.select_single('TextField',
-                                      objectName='password')
+        pwdfield = self.wait_select_single('TextField',
+                                           objectName='password')
         self._scroll_to_and_click(pwdfield)
         pwdfield.write(password)
 
