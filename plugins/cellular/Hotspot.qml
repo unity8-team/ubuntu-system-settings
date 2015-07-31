@@ -21,6 +21,7 @@ import SystemSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 import Ubuntu.Components.Popups 0.1
+import Ubuntu.Connectivity 1.0
 import Ubuntu.Settings.Components 0.1 as USC
 import Ubuntu.SystemSettings.Cellular 1.0
 
@@ -41,10 +42,6 @@ ItemPage {
         }
     }
 
-    HotspotManager {
-        id: hotspotManager
-    }
-
     Loader {
         id: setup
         asynchronous: false
@@ -57,7 +54,7 @@ ItemPage {
 
         ListItem.Standard {
             text: i18n.tr("Hotspot")
-            enabled: hotspotManager.stored
+            enabled: Connectivity.hotspotStored
             control: Switch {
                 id: hotspotSwitch
                 objectName: "hotspotSwitch"
@@ -67,8 +64,8 @@ ItemPage {
                     id: switchSync
                     userTarget: hotspotSwitch
                     userProperty: "checked"
-                    serverTarget: hotspotManager
-                    serverProperty: "enabled"
+                    serverTarget: Connectivity
+                    serverProperty: "hotspotEnabled"
                     useWaitBuffer: true
 
                     // Since this blocks the UI thread, we wait until
@@ -84,7 +81,7 @@ ItemPage {
                     id: triggerTimer
                     property bool value
                     interval: 250; repeat: false
-                    onTriggered: hotspotManager.enabled = value
+                    onTriggered: Connectivity.hotspotEnabled = value
                 }
             }
         }
@@ -105,13 +102,12 @@ ItemPage {
             objectName: "hotspotSetupEntry"
             anchors.horizontalCenter: parent.horizontalCenter
             width: parent.width - units.gu(4)
-            text: hotspotManager.stored ?
+            text: Connectivity.hotspotStored ?
                 i18n.tr("Change password/setup…") : i18n.tr("Set up hotspot…")
 
             onClicked: {
                 setup.setSource(Qt.resolvedUrl("HotspotSetup.qml"));
                 PopupUtils.open(setup.item, hotspot, {
-                    hotspotManager: hotspotManager
                 });
             }
         }

@@ -22,8 +22,6 @@ set(QML_SOURCES
 add_library(UbuntuCellularPanel MODULE
   plugin.cpp
   plugin.h
-  hotspotmanager.cpp
-  hotspotmanager.h
   ofonoactivator.cpp
   ofonoactivator.h
   connectivity.cpp
