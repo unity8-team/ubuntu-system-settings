@@ -306,7 +306,6 @@ class HotspotNonExistantTestCase(HotspotBaseTestCase):
     }
 
     def test_setup(self):
-        sleep(10)
         ssid = 'bar'
         password = 'zomgzomg'
         config = {'ssid': ssid, 'password': password}
