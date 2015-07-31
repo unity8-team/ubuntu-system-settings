@@ -36,7 +36,7 @@ ItemPage {
     // being enabled or disabled.
     head.backAction: Action {
         iconName: "back"
-        enabled: hotspotSwitch.enabled
+        enabled: !Connectivity.unstoppableOperationHappening
         onTriggered: {
             pageStack.pop();
         }
