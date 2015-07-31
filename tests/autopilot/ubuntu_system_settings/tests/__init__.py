@@ -38,6 +38,7 @@ from ubuntu_system_settings.tests.connectivity import (
     MAIN_IFACE as CTV_IFACE
 )
 
+
 ACCOUNTS_IFACE = 'org.freedesktop.Accounts'
 ACCOUNTS_USER_IFACE = 'org.freedesktop.Accounts.User'
 ACCOUNTS_OBJ = '/org/freedesktop/Accounts'
