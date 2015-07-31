@@ -33,6 +33,11 @@ from dbusmock.templates.networkmanager import (InfrastructureMode,
 from fixtures import EnvironmentVariable
 from gi.repository import UPowerGlib
 from testtools.matchers import Equals, NotEquals, GreaterThan
+from ubuntu_system_settings.tests.connectivity import (
+    PRIV_OBJ as CTV_PRIV_OBJ, NETS_OBJ as CTV_NETS_OBJ,
+    MAIN_IFACE as CTV_IFACE
+)
+
 
 ACCOUNTS_IFACE = 'org.freedesktop.Accounts'
 ACCOUNTS_USER_IFACE = 'org.freedesktop.Accounts.User'
@@ -390,64 +395,46 @@ class CellularBaseTestCase(UbuntuSystemSettingsOfonoTestCase):
 
 class HotspotBaseTestCase(CellularBaseTestCase):
 
+    connectivity_parameters = {}
+
     @classmethod
     def setUpClass(cls):
+        cls.start_session_bus()
+        cls.dbus_con = cls.get_dbus(False)
+
+        # Connectivity API Mock
+        ctv_tmpl = os.path.join(os.path.dirname(__file__), 'connectivity.py')
+        (cls.ctv_mock, cls.obj_ctv) = cls.spawn_server_template(
+            ctv_tmpl, parameters=cls.connectivity_parameters,
+            stdout=subprocess.PIPE)
+
+        cls.ctv_private = dbus.Interface(
+            cls.dbus_con.get_object(CTV_IFACE, CTV_PRIV_OBJ),
+            'org.freedesktop.DBus.Properties')
+
+        cls.ctv_nets = dbus.Interface(
+            cls.dbus_con.get_object(CTV_IFACE, CTV_NETS_OBJ),
+            'org.freedesktop.DBus.Properties')
+
+        # indicator-network mock
+        inetwork = os.path.join(
+            os.path.dirname(__file__), 'indicatornetwork.py'
+        )
+        (cls.inetwork_mock, cls.obj_inetwork) = cls.spawn_server_template(
+            inetwork, stdout=subprocess.PIPE)
+
         super(HotspotBaseTestCase, cls).setUpClass()
-        nm_tmpl = os.path.join(os.path.dirname(__file__), 'networkmanager.py')
-        (cls.n_mock, cls.obj_nm) = cls.spawn_server_template(
-            nm_tmpl, stdout=subprocess.PIPE)
-        (cls.u_mock, cls.obj_urf) = cls.spawn_server_template(
-            'urfkill', stdout=subprocess.PIPE)
 
-    @classmethod
-    def tearDownClass(cls):
-        cls.n_mock.terminate()
-        cls.n_mock.wait()
-        cls.u_mock.terminate()
-        cls.u_mock.wait()
-        super(HotspotBaseTestCase, cls).tearDownClass()
+    def start_network_indicator(self):
+        subprocess.call(['initctl', 'start', 'indicator-network'])
 
-    def tearDown(self):
-        self.obj_nm.Reset()
-        self.urfkill_mock.ClearCalls()
-        super(HotspotBaseTestCase, self).tearDown()
+    def stop_network_indicator(self):
+        subprocess.call(['initctl', 'stop', 'indicator-network'])
 
     def setUp(self):
-        self.patch_environment("USS_SHOW_ALL_UI", "1")
-        self.nm_mock = dbus.Interface(self.obj_nm, dbusmock.MOCK_IFACE)
-        self.device_path = self.obj_nm.AddWiFiDevice('test0', 'Barbaz', 1)
-        self.device_mock = dbus.Interface(self.dbus_con.get_object(
-            NM_SERVICE, self.device_path),
-            'org.freedesktop.DBus.Properties')
-        self.urfkill_mock = dbus.Interface(self.obj_urf, dbusmock.MOCK_IFACE)
+        self.stop_network_indicator()
+        self.addCleanup(self.start_network_indicator)
         super(HotspotBaseTestCase, self).setUp()
-
-    def add_hotspot(self, name, password, secured=True, enabled=False):
-        settings = {
-            'connection': {
-                'id': dbus.String('Test AP', variant_level=1),
-                'type': dbus.String('802-11-wireless', variant_level=1), },
-            '802-11-wireless': {
-                'mode': dbus.String('ap', variant_level=1),
-                'ssid': dbus.String(name, variant_level=1),
-            }
-        }
-
-        if secured:
-            settings['802-11-wireless']['security'] = dbus.String(
-                '802-11-wireless-security', variant_level=1)
-            settings['802-11-wireless-security'] = {
-                'auth-alg': dbus.String('shared', variant_level=1),
-                'key-mgmt': dbus.String('wpa-psk', variant_level=1),
-                'psk': dbus.String(password, variant_level=1),
-            }
-
-        if enabled:
-            settings['connection']['autoconnect'] = True
-
-        connection_path = self.obj_nm.SettingsAddConnection(settings)
-
-        return connection_path
 
 
 class BluetoothBaseTestCase(UbuntuSystemSettingsTestCase):
@@ -841,39 +828,6 @@ class ResetBaseTestCase(UbuntuSystemSettingsTestCase,
         self.mock_server.terminate()
         self.mock_server.wait()
         super(ResetBaseTestCase, self).tearDown()
-
-
-class ConnectivityMixin(dbusmock.DBusTestCase):
-    @classmethod
-    def setUpClass(cls):
-        cls.start_session_bus()
-        cls.connectivity_dbus = cls.get_dbus()
-        super(ConnectivityMixin, cls).setUpClass()
-
-    def setUp(self):
-        self.connectivity_server = self.spawn_server(CON_SERVICE,
-                                                     CON_PATH,
-                                                     CON_IFACE,
-                                                     system_bus=False,
-                                                     stdout=subprocess.PIPE)
-
-        self.wait_for_bus_object(CON_SERVICE,
-                                 CON_PATH,
-                                 system_bus=False)
-
-        self.connectivity_mock = dbus.Interface(
-            self.connectivity_dbus.get_object(CON_SERVICE,
-                                              CON_PATH),
-            dbusmock.MOCK_IFACE)
-
-        self.connectivity_mock.AddMethod('', 'UnlockModem', 's', '', '')
-
-        super(ConnectivityMixin, self).setUp()
-
-    def tearDown(self):
-        self.connectivity_server.terminate()
-        self.connectivity_server.wait()
-        super(ConnectivityMixin, self).tearDown()
 
 
 class SecurityBaseTestCase(UbuntuSystemSettingsOfonoTestCase):
