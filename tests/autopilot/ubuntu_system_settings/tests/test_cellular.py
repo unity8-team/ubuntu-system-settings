@@ -5,6 +5,7 @@
 # under the terms of the GNU General Public License version 3, as published
 # by the Free Software Foundation.
 
+import dbus
 from gi.repository import Gio, GLib
 from time import sleep
 
@@ -13,7 +14,14 @@ from autopilot.matchers import Eventually
 from testtools.matchers import Equals, raises, StartsWith
 
 from ubuntu_system_settings.tests import (
-    CellularBaseTestCase, CONNMAN_IFACE, RDO_IFACE, NETREG_IFACE)
+    CellularBaseTestCase, HotspotBaseTestCase, CONNMAN_IFACE, RDO_IFACE,
+    NETREG_IFACE)
+
+from ubuntu_system_settings.tests.networkmanager import (
+    CSETTINGS_IFACE, MAIN_OBJ as NM_PATH, MAIN_IFACE as NM_IFACE,
+)
+
+DEV_IFACE = 'org.freedesktop.NetworkManager.Device'
 
 
 class CellularTestCase(CellularBaseTestCase):
@@ -288,3 +296,116 @@ class DualSimCellularTestCase(CellularBaseTestCase):
             lambda:
                 gsettings.get_value('default-sim-for-messages').get_string(),
             Eventually(Equals('/ril_1')))
+
+
+class HotspotTestCase(HotspotBaseTestCase):
+
+    def test_setup(self):
+        if not self.cellular_page.have_hotspot():
+            self.skipTest('Cannot test hotspot since wifi is disabled.')
+
+        ssid = 'Ubuntu'
+        password = 'abcdefgh'
+        config = {'password': password}
+        active_con_path = NM_PATH + '/ActiveConnection/0'
+        con_path = NM_PATH + '/Settings/0'
+
+        hotspot_page = self.cellular_page.setup_hotspot(config)
+
+        # Assert that the switch is on.
+        self.assertTrue(hotspot_page.get_hotspot_status())
+
+        # Assert that Block on Urfkill is called twice.
+        self.assertThat(
+            lambda: len(self.urfkill_mock.GetMethodCalls('Block')),
+            Eventually(Equals(2))
+        )
+
+        # Assert that we get one active connection.
+        self.assertThat(
+            lambda: len(self.obj_nm.GetAll(NM_IFACE)['ActiveConnections']),
+            Eventually(Equals(1))
+        )
+
+        # Assert that the active connection has a certain path.
+        self.assertThat(
+            lambda: self.obj_nm.GetAll(NM_IFACE)['ActiveConnections'][0],
+            Eventually(Equals(active_con_path))
+        )
+
+        # Assert the device's active connection
+        self.assertThat(
+            lambda: self.device_mock.Get(DEV_IFACE, 'ActiveConnection'),
+            Eventually(Equals(active_con_path))
+        )
+
+        connection_mock = dbus.Interface(self.dbus_con.get_object(
+            NM_IFACE, con_path), CSETTINGS_IFACE)
+
+        settings = connection_mock.GetSettings()
+
+        # Assert that autoconnect is true, that ssid and password is what we
+        # expect them to be.
+        self.assertTrue(settings['connection']['autoconnect'])
+
+        s_ssid = bytearray(settings['802-11-wireless']['ssid']).decode('utf-8')
+        self.assertEqual(s_ssid, ssid)
+        self.assertEqual(settings['802-11-wireless-security']['psk'], password)
+
+    def test_enabling(self):
+        if not self.cellular_page.have_hotspot():
+            self.skipTest('Cannot test hotspot since wifi is disabled.')
+
+        self.add_hotspot('foo', 'abcdefgh', enabled=False)
+
+        self.assertThat(
+            lambda: len(self.obj_nm.GetAll(NM_IFACE)['ActiveConnections']),
+            Eventually(Equals(0))
+        )
+
+        self.cellular_page.enable_hotspot()
+
+        self.assertThat(
+            lambda: len(self.obj_nm.GetAll(NM_IFACE)['ActiveConnections']),
+            Eventually(Equals(1))
+        )
+
+    def test_disabling(self):
+        if not self.cellular_page.have_hotspot():
+            self.skipTest('Cannot test hotspot since wifi is disabled.')
+
+        self.add_hotspot('foo', 'abcdefgh', enabled=True)
+
+        self.assertThat(
+            lambda: len(self.obj_nm.GetAll(NM_IFACE)['ActiveConnections']),
+            Eventually(Equals(1))
+        )
+
+        self.cellular_page.disable_hotspot()
+
+        self.assertThat(
+            lambda: len(self.obj_nm.GetAll(NM_IFACE)['ActiveConnections']),
+            Eventually(Equals(0))
+        )
+
+    def test_changing(self):
+        if not self.cellular_page.have_hotspot():
+            self.skipTest('Cannot test hotspot since wifi is disabled.')
+
+        con_path = self.add_hotspot('foo', 'abcdefgh', enabled=True)
+
+        ssid = 'bar'
+        password = 'zomgzomg'
+        config = {'ssid': ssid, 'password': password}
+        self.cellular_page.setup_hotspot(config)
+
+        con_path = NM_PATH + '/Settings/0'
+
+        con_mock = dbus.Interface(self.dbus_con.get_object(
+            NM_IFACE, con_path), CSETTINGS_IFACE)
+
+        settings = con_mock.GetSettings()
+
+        s_ssid = bytearray(settings['802-11-wireless']['ssid']).decode('utf-8')
+        self.assertEqual(s_ssid, ssid)
+        self.assertEqual(settings['802-11-wireless-security']['psk'], password)

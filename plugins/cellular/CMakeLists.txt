@@ -6,6 +6,7 @@ install(FILES settings-cellular.svg DESTINATION ${PLUGIN_MANIFEST_DIR}/icons)
 set(QML_SOURCES
     apn.js
     carriers.js
+    Common.qml
     CustomApnEditor.qml
     PageChooseApn.qml
     PageChooseCarrier.qml
