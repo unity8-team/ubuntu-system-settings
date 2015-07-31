@@ -1,3 +1,9 @@
+ubuntu-system-settings (0.3+15.10.20150729.1-0ubuntu2~gcc5.1) wily; urgency=medium
+
+  * No change upload, build with GCC 5.
+
+ -- Matthias Klose <doko@ubuntu.com>  Thu, 30 Jul 2015 11:56:52 +0200
+
 ubuntu-system-settings (0.3+15.10.20150729.1-0ubuntu1) wily; urgency=medium
 
   [ Christopher Lee ]
