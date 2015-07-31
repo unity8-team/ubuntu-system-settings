@@ -1,3 +1,43 @@
+ubuntu-system-settings (0.3+15.10.20150729.1-0ubuntu1) wily; urgency=medium
+
+  [ Christopher Lee ]
+  * Update AP helper so it doesn't attempt to use an unreachable value
+    when scrolling.
+
+  [ Ken VanDine ]
+  * Added a sleep to give set_forward_on_busy time to finish
+  * Use wait_select_single in the wifi dialog and bump the sleep to 1
+    second
+  * We need to explicitly stop dbus in tearDownClass, fixes lingering
+    dbus processes
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Wed, 29 Jul 2015 18:06:23 +0000
+
+ubuntu-system-settings (0.3+15.10.20150724-0ubuntu1) wily; urgency=medium
+
+  [ CI Train Bot ]
+  * New rebuild forced.
+
+  [ Manuel de la Pena ]
+  * Recompile with the new udm to avoid ABI issues.
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Fri, 24 Jul 2015 17:17:31 +0000
+
+ubuntu-system-settings (0.3+15.10.20150722-0ubuntu1) wily; urgency=medium
+
+  [ CI Train Bot ]
+  * Resync trunk.
+
+  [ Ken VanDine ]
+  * Use TextField.write to properly use the OSK Added helper to dismiss
+    OSK
+
+  [ jonas-drange ]
+  * [tests] avoids setting Interfaces property after the
+    Cellular/Phone/About plugins have loaded.
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Wed, 22 Jul 2015 12:55:01 +0000
+
 ubuntu-system-settings (0.3+15.10.20150716-0ubuntu1) wily; urgency=medium
 
   [ CI Train Bot ]

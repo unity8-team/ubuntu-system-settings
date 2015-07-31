@@ -64,10 +64,15 @@ def AddModem(self, name, properties):
             'Revision': dbus.String('0815.42', variant_level=1),
             'Type': dbus.String('hardware', variant_level=1),
             'Interfaces': [
+                'org.ofono.CallForwarding',
+                'org.ofono.CallSettings',
                 'org.ofono.CallVolume',
-                'org.ofono.VoiceCallManager',
+                'org.ofono.ConnectionManager',
                 'org.ofono.NetworkRegistration',
-                'org.ofono.SimManager'],
+                'org.ofono.RadioSettings',
+                'org.ofono.SimManager',
+                'org.ofono.VoiceCallManager',
+                ],
             'Features': ['gprs', 'net'],
         },
         [

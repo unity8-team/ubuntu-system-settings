@@ -35,7 +35,7 @@ class SearchTestCases(UbuntuSystemSettingsTestCase):
             objectName='searchTextField'
         )
         self.main_view.scroll_to_and_click(search_box)
-        self.keyboard.type(_(text))
+        search_box.write(_(text))
         self.assertThat(search_box.text, Eventually(Equals(text)))
 
     def test_search_filter_results(self):
