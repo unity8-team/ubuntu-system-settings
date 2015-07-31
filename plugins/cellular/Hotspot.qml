@@ -20,57 +20,100 @@ import QtQuick 2.0
 import SystemSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
+import Ubuntu.Components.Popups 0.1
+import Ubuntu.Settings.Components 0.1 as USC
 import Ubuntu.SystemSettings.Cellular 1.0
 
 ItemPage {
 
     id: hotspot
+    objectName: "hotspotPage"
 
     title: i18n.tr("Wi-Fi hotspot")
+
+    // We disable the back action while a hotspot is in the process of either
+    // being enabled or disabled.
+    head.backAction: Action {
+        iconName: "back"
+        enabled: hotspotSwitch.enabled
+        onTriggered: {
+            pageStack.pop();
+        }
+    }
 
     HotspotManager {
         id: hotspotManager
     }
 
+    Loader {
+        id: setup
+        asynchronous: false
+    }
+
     Column {
 
         anchors.fill: parent
+        spacing: units.gu(2)
 
         ListItem.Standard {
             text: i18n.tr("Hotspot")
+            enabled: hotspotManager.stored
             control: Switch {
                 id: hotspotSwitch
-                checked: hotspotManager.isHotspotActive()
-                onTriggered: {
-                    if(checked) {
-                        hotspotManager.enableHotspot()
-                    } else {
-                        hotspotManager.disableHotspot()
+                objectName: "hotspotSwitch"
+                enabled: !switchSync.syncWaiting
+
+                USC.ServerPropertySynchroniser {
+                    id: switchSync
+                    userTarget: hotspotSwitch
+                    userProperty: "checked"
+                    serverTarget: hotspotManager
+                    serverProperty: "enabled"
+                    useWaitBuffer: true
+
+                    // Since this blocks the UI thread, we wait until
+                    // the UI has completed the checkbox animation before we
+                    // ask the server to uipdate.
+                    onSyncTriggered: {
+                        triggerTimer.value = value;
+                        triggerTimer.start();
                     }
+                }
+
+                Timer {
+                    id: triggerTimer
+                    property bool value
+                    interval: 250; repeat: false
+                    onTriggered: hotspotManager.enabled = value
                 }
             }
         }
 
-        Label {
-            width: parent.width
-            wrapMode: Text.WordWrap
-            anchors.leftMargin: units.gu(2)
-            anchors.rightMargin: units.gu(2)
-            text : hotspotSwitch.enabled ?
+        ListItem.Caption {
+            anchors {
+                left: parent.left
+                right: parent.right
+                leftMargin: units.gu(2)
+                rightMargin: units.gu(2)
+            }
+            text : hotspotSwitch.stored ?
               i18n.tr("When hotspot is on, other devices can use your cellular data connection over Wi-Fi. Normal data charges apply.")
-              : i18n.tr("Other devices can use your cellular data connection over the Wi-Fi network. Normal data charges apply.") 
+              : i18n.tr("Other devices can use your cellular data connection over the Wi-Fi network. Normal data charges apply.")
         }
 
         Button {
-            text: i18n.tr("Set up hotspot")
-            anchors.left: parent.left
-            anchors.right: parent.right
-            anchors.leftMargin: units.gu(2)
-            anchors.rightMargin: units.gu(2)
+            objectName: "hotspotSetupEntry"
+            anchors.horizontalCenter: parent.horizontalCenter
+            width: parent.width - units.gu(4)
+            text: hotspotManager.stored ?
+                i18n.tr("Change password/setup…") : i18n.tr("Set up hotspot…")
+
             onClicked: {
-                pageStack.push(Qt.resolvedUrl("HotspotSetup.qml"), {hotspotManager: hotspotManager})
+                setup.setSource(Qt.resolvedUrl("HotspotSetup.qml"));
+                PopupUtils.open(setup.item, hotspot, {
+                    hotspotManager: hotspotManager
+                });
             }
         }
-
     }
 }

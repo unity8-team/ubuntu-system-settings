@@ -34,7 +34,6 @@ from fixtures import EnvironmentVariable
 from gi.repository import UPowerGlib
 from testtools.matchers import Equals, NotEquals, GreaterThan
 
-
 ACCOUNTS_IFACE = 'org.freedesktop.Accounts'
 ACCOUNTS_USER_IFACE = 'org.freedesktop.Accounts.User'
 ACCOUNTS_OBJ = '/org/freedesktop/Accounts'
@@ -387,6 +386,68 @@ class CellularBaseTestCase(UbuntuSystemSettingsOfonoTestCase):
         """ Go to Cellular page """
         super(CellularBaseTestCase, self).setUp()
         self.cellular_page = self.main_view.go_to_cellular_page()
+
+
+class HotspotBaseTestCase(CellularBaseTestCase):
+
+    @classmethod
+    def setUpClass(cls):
+        super(HotspotBaseTestCase, cls).setUpClass()
+        nm_tmpl = os.path.join(os.path.dirname(__file__), 'networkmanager.py')
+        (cls.n_mock, cls.obj_nm) = cls.spawn_server_template(
+            nm_tmpl, stdout=subprocess.PIPE)
+        (cls.u_mock, cls.obj_urf) = cls.spawn_server_template(
+            'urfkill', stdout=subprocess.PIPE)
+
+    @classmethod
+    def tearDownClass(cls):
+        cls.n_mock.terminate()
+        cls.n_mock.wait()
+        cls.u_mock.terminate()
+        cls.u_mock.wait()
+        super(HotspotBaseTestCase, cls).tearDownClass()
+
+    def tearDown(self):
+        self.obj_nm.Reset()
+        self.urfkill_mock.ClearCalls()
+        super(HotspotBaseTestCase, self).tearDown()
+
+    def setUp(self):
+        self.patch_environment("USS_SHOW_ALL_UI", "1")
+        self.nm_mock = dbus.Interface(self.obj_nm, dbusmock.MOCK_IFACE)
+        self.device_path = self.obj_nm.AddWiFiDevice('test0', 'Barbaz', 1)
+        self.device_mock = dbus.Interface(self.dbus_con.get_object(
+            NM_SERVICE, self.device_path),
+            'org.freedesktop.DBus.Properties')
+        self.urfkill_mock = dbus.Interface(self.obj_urf, dbusmock.MOCK_IFACE)
+        super(HotspotBaseTestCase, self).setUp()
+
+    def add_hotspot(self, name, password, secured=True, enabled=False):
+        settings = {
+            'connection': {
+                'id': dbus.String('Test AP', variant_level=1),
+                'type': dbus.String('802-11-wireless', variant_level=1), },
+            '802-11-wireless': {
+                'mode': dbus.String('ap', variant_level=1),
+                'ssid': dbus.String(name, variant_level=1),
+            }
+        }
+
+        if secured:
+            settings['802-11-wireless']['security'] = dbus.String(
+                '802-11-wireless-security', variant_level=1)
+            settings['802-11-wireless-security'] = {
+                'auth-alg': dbus.String('shared', variant_level=1),
+                'key-mgmt': dbus.String('wpa-psk', variant_level=1),
+                'psk': dbus.String(password, variant_level=1),
+            }
+
+        if enabled:
+            settings['connection']['autoconnect'] = True
+
+        connection_path = self.obj_nm.SettingsAddConnection(settings)
+
+        return connection_path
 
 
 class BluetoothBaseTestCase(UbuntuSystemSettingsTestCase):
