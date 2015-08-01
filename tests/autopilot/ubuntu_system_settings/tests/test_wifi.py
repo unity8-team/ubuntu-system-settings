@@ -21,11 +21,11 @@ from ubuntu_system_settings.utils.i18n import ugettext as _
 from unittest import skip
 
 
-class WifiTestCase(WifiBaseTestCase):
+class WifiEnabledTestCase(WifiBaseTestCase):
     """Tests for Language Page"""
 
     def setUp(self):
-        super(WifiTestCase, self).setUp()
+        super(WifiEnabledTestCase, self).setUp()
 
         self.wifi_page._scroll_to_and_click = \
             self.main_view.scroll_to_and_click
@@ -37,11 +37,6 @@ class WifiTestCase(WifiBaseTestCase):
             Equals(_('Wi-Fi')))
 
     def test_connect_to_hidden_network(self):
-        if not self.wifi_page.have_wireless():
-            self.skipTest('Cannot test wireless since it cannot be enabled')
-        self.addCleanup(
-            self.wifi_page._set_wireless, self.wifi_page.get_wireless())
-        self.wifi_page.enable_wireless()
         dialog = self.wifi_page.connect_to_hidden_network(
             'test_ap',
             password='abcdefgh',)
@@ -53,11 +48,6 @@ class WifiTestCase(WifiBaseTestCase):
             dialog.wait_until_destroyed()
 
     def test_connect_to_eduroam(self):
-        if not self.wifi_page.have_wireless():
-            self.skipTest('Cannot test wireless since it cannot be enabled')
-        self.addCleanup(
-            self.wifi_page._set_wireless, self.wifi_page.get_wireless())
-        self.wifi_page.enable_wireless()
         self.create_access_point(
             'eduroam', 'eduroam',
             security=NM80211ApSecurityFlags.NM_802_11_AP_SEC_KEY_MGMT_802_1X
@@ -102,11 +92,6 @@ class WifiTestCase(WifiBaseTestCase):
         self.assertEquals(w802_1x['phase2-auth'], 'mschapv2')
 
     def test_connect_to_nonexistant_hidden_network(self):
-        if not self.wifi_page.have_wireless():
-            self.skipTest('Cannot test wireless since it cannot be enabled')
-        self.addCleanup(
-            self.wifi_page._set_wireless, self.wifi_page.get_wireless())
-        self.wifi_page.enable_wireless()
         dialog = self.wifi_page.connect_to_hidden_network(
             'n/a',
             password='abcdefgh',
@@ -137,11 +122,6 @@ class WifiTestCase(WifiBaseTestCase):
     @skip('skipped due to %s' % (
         'https://github.com/martinpitt/python-dbusmock/issues/7'))
     def test_connect_to_hidden_network_using_secrets(self):
-        if not self.wifi_page.have_wireless():
-            self.skipTest('Cannot test wireless since it cannot be enabled')
-        self.addCleanup(
-            self.wifi_page._set_wireless, self.wifi_page.get_wireless())
-        self.wifi_page.enable_wireless()
         dialog = self.wifi_page.connect_to_hidden_network(
             'test_ap', security='wpa', password='abcdefgh',
         )
@@ -155,11 +135,6 @@ class WifiTestCase(WifiBaseTestCase):
     @skip('skipped due to %s' % (
         'https://github.com/martinpitt/python-dbusmock/issues/7'))
     def test_connect_to_hidden_network_using_incorrect_secrets(self):
-        if not self.wifi_page.have_wireless():
-            self.skipTest('Cannot test wireless since it cannot be enabled')
-        self.addCleanup(
-            self.wifi_page._set_wireless, self.wifi_page.get_wireless())
-        self.wifi_page.enable_wireless()
         dialog = self.wifi_page.connect_to_hidden_network(
             'test_ap',
             security='wpa',
@@ -175,11 +150,6 @@ class WifiTestCase(WifiBaseTestCase):
 
     @skip('networkmanager mock does not yet support deletion of cons')
     def test_connect_to_hidden_network_then_cancel(self):
-        if not self.wifi_page.have_wireless():
-            self.skipTest('Cannot test wireless since it cannot be enabled')
-        self.addCleanup(
-            self.wifi_page._set_wireless, self.wifi_page.get_wireless())
-        self.wifi_page.enable_wireless()
         dialog = self.wifi_page.connect_to_hidden_network('foo',)
 
         # allow backend to set up listeners
@@ -190,18 +160,6 @@ class WifiTestCase(WifiBaseTestCase):
         self.assertThat(
             lambda: len(self.active_connection_mock.GetMethodCalls('Delete')),
             Eventually(Equals(1)))
-
-    def test_connect_to_hidden_network_dialog_visibility(self):
-        if not self.wifi_page.have_wireless():
-            self.skipTest('Cannot test wireless since it cannot be enabled')
-        self.addCleanup(
-            self.wifi_page._set_wireless, self.wifi_page.get_wireless())
-        self.wifi_page.disable_wireless()
-        self.assertThat(
-            lambda: bool(self.wifi_page.select_single(
-                '*',
-                objectName='connectToHiddenNetwork').visible),
-            Eventually(Equals(False)), 'other net dialog not hidden')
 
     def test_remove_previous_network(self):
         access_points = ['Series of Tubes', 'dev/null', 'Mi-Fi',
@@ -227,17 +185,25 @@ class WifiTestCase(WifiBaseTestCase):
         # is currently not supported.
 
 
+class WifiDisabledTestCase(WifiBaseTestCase):
+
+    indicatornetwork_parameters = {'actions': {
+        'wifi.enable': (False, '', [False]),
+    }}
+
+    def test_connect_to_hidden_network_dialog_visibility(self):
+        self.assertThat(
+            lambda: bool(self.wifi_page.select_single(
+                '*',
+                objectName='connectToHiddenNetwork').visible),
+            Eventually(Equals(False)), 'other net dialog not hidden')
+
+
 class WifiWithTestSSIDTestCase(WifiWithSSIDBaseTestCase):
 
     ssid = 'test_ap'
 
     def test_handle_wifi_url_with_ssid(self):
-        if not self.wifi_page.have_wireless():
-            self.skipTest('Cannot test wireless since it cannot be enabled')
-        self.addCleanup(
-            self.wifi_page._set_wireless, self.wifi_page.get_wireless())
-
-        self.wifi_page.enable_wireless()
         dialog = self.main_view.wait_select_single(
             objectName='otherNetworkDialog'
         )
