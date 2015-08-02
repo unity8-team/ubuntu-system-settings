@@ -862,8 +862,7 @@ class LanguageBaseTestCase(UbuntuSystemSettingsTestCase,
         super(LanguageBaseTestCase, self).tearDown()
 
 
-class UbuntuSystemSettingsIndicatorNetworkTestCase(
-        UbuntuSystemSettingsTestCase, dbusmock.DBusTestCase):
+class IndicatorNetworkBaseTestCase(dbusmock.DBusTestCase):
 
     indicatornetwork_parameters = {}
 
@@ -879,7 +878,7 @@ class UbuntuSystemSettingsIndicatorNetworkTestCase(
             inetwork, parameters=cls.indicatornetwork_parameters,
             stdout=subprocess.PIPE)
 
-        super(UbuntuSystemSettingsIndicatorNetworkTestCase, cls).setUpClass()
+        super(IndicatorNetworkBaseTestCase, cls).setUpClass()
 
     def start_network_indicator(self):
         subprocess.call(['initctl', 'start', INDICATOR_NETWORK])
@@ -887,14 +886,15 @@ class UbuntuSystemSettingsIndicatorNetworkTestCase(
     def stop_network_indicator(self):
         subprocess.call(['initctl', 'stop', INDICATOR_NETWORK])
 
-    def setUp(self, panel=None):
+    def setUp(self):
         if is_process_running(INDICATOR_NETWORK):
             self.stop_network_indicator()
             self.addCleanup(self.start_network_indicator)
-        super(UbuntuSystemSettingsIndicatorNetworkTestCase, self).setUp(panel)
+        super(IndicatorNetworkBaseTestCase, self).setUp()
 
 
-class WifiBaseTestCase(UbuntuSystemSettingsIndicatorNetworkTestCase):
+class WifiBaseTestCase(UbuntuSystemSettingsTestCase,
+                       IndicatorNetworkBaseTestCase):
     """ Base class for wifi settings tests"""
 
     @classmethod
