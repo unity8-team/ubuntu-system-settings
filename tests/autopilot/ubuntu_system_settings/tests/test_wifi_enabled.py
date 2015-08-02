@@ -15,20 +15,13 @@ from dbusmock.templates.networkmanager import (
 )
 from testtools.matchers import Equals
 from time import sleep
-from ubuntu_system_settings.tests import (WifiBaseTestCase,
-                                          WifiWithSSIDBaseTestCase)
+from ubuntu_system_settings.tests import WifiBaseTestCase
 from ubuntu_system_settings.utils.i18n import ugettext as _
 from unittest import skip
 
 
 class WifiEnabledTestCase(WifiBaseTestCase):
     """Tests for Language Page"""
-
-    def setUp(self):
-        super(WifiEnabledTestCase, self).setUp()
-
-        self.wifi_page._scroll_to_and_click = \
-            self.main_view.scroll_to_and_click
 
     def test_wifi_page_title_is_correct(self):
         """Checks whether Wifi page is available"""
@@ -183,36 +176,3 @@ class WifiEnabledTestCase(WifiBaseTestCase):
 
         # We cannot make any assertions, because connection deletion
         # is currently not supported.
-
-
-class WifiDisabledTestCase(WifiBaseTestCase):
-
-    indicatornetwork_parameters = {'actions': {
-        'wifi.enable': (False, '', [False]),
-    }}
-
-    def test_connect_to_hidden_network_dialog_visibility(self):
-        self.assertThat(
-            lambda: bool(self.wifi_page.select_single(
-                '*',
-                objectName='connectToHiddenNetwork').visible),
-            Eventually(Equals(False)), 'other net dialog not hidden')
-
-
-class WifiWithTestSSIDTestCase(WifiWithSSIDBaseTestCase):
-
-    ssid = 'test_ap'
-
-    def test_handle_wifi_url_with_ssid(self):
-        dialog = self.main_view.wait_select_single(
-            objectName='otherNetworkDialog'
-        )
-        dialog._scroll_to_and_click = self.main_view.scroll_to_and_click
-        dialog.enter_password('abcdefgh')
-        dialog.connect()
-
-        # allow backend to set up listeners
-        sleep(0.3)
-
-        if dialog:
-            dialog.wait_until_destroyed()

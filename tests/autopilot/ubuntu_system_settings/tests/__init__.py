@@ -862,13 +862,17 @@ class LanguageBaseTestCase(UbuntuSystemSettingsTestCase,
         super(LanguageBaseTestCase, self).tearDown()
 
 
-class IndicatorNetworkBaseTestCase(dbusmock.DBusTestCase):
+class WifiBaseTestCase(UbuntuSystemSettingsTestCase,
+                       dbusmock.DBusTestCase):
+    """ Base class for wifi settings tests"""
 
     indicatornetwork_parameters = {}
 
     @classmethod
     def setUpClass(cls):
+        cls.start_system_bus()
         cls.start_session_bus()
+        cls.dbus_con = cls.get_dbus(True)
 
         # indicator-network mock
         inetwork = os.path.join(
@@ -878,7 +882,10 @@ class IndicatorNetworkBaseTestCase(dbusmock.DBusTestCase):
             inetwork, parameters=cls.indicatornetwork_parameters,
             stdout=subprocess.PIPE)
 
-        super(IndicatorNetworkBaseTestCase, cls).setUpClass()
+        template = os.path.join(os.path.dirname(__file__), 'networkmanager.py')
+        (cls.p_mock, cls.obj_nm) = cls.spawn_server_template(
+            template, stdout=subprocess.PIPE)
+        super(WifiBaseTestCase, cls).setUpClass()
 
     def start_network_indicator(self):
         subprocess.call(['initctl', 'start', INDICATOR_NETWORK])
@@ -886,29 +893,14 @@ class IndicatorNetworkBaseTestCase(dbusmock.DBusTestCase):
     def stop_network_indicator(self):
         subprocess.call(['initctl', 'stop', INDICATOR_NETWORK])
 
-    def setUp(self):
+    def setUp(self, panel=None):
         if is_process_running(INDICATOR_NETWORK):
             self.stop_network_indicator()
             self.addCleanup(self.start_network_indicator)
-        super(IndicatorNetworkBaseTestCase, self).setUp()
 
-
-class WifiBaseTestCase(UbuntuSystemSettingsTestCase,
-                       IndicatorNetworkBaseTestCase):
-    """ Base class for wifi settings tests"""
-
-    @classmethod
-    def setUpClass(cls):
-        cls.start_system_bus()
-        cls.dbus_con = cls.get_dbus(True)
-        super(WifiBaseTestCase, cls).setUpClass()
-
-    def setUp(self, panel=None):
-        # Add a mock NetworkManager environment so we get consistent results
-        template = os.path.join(os.path.dirname(__file__), 'networkmanager.py')
-        (self.p_mock, self.obj_nm) = self.spawn_server_template(
-            template, stdout=subprocess.PIPE)
         self.obj_nm.Reset()
+
+        # Add a mock NetworkManager environment so we get consistent results
         self.device_path = self.obj_nm.AddWiFiDevice('test0', 'Barbaz', 1)
         self.device_mock = dbus.Interface(self.dbus_con.get_object(
             NM_SERVICE, self.device_path),
@@ -926,6 +918,9 @@ class WifiBaseTestCase(UbuntuSystemSettingsTestCase,
             )
         else:
             self.wifi_page = self.main_view.go_to_wifi_page()
+
+        self.wifi_page._scroll_to_and_click = \
+            self.main_view.scroll_to_and_click
 
     def create_access_point(self, name, ssid, security=None):
         """Creates access point.
@@ -950,11 +945,6 @@ class WifiBaseTestCase(UbuntuSystemSettingsTestCase,
                random.randint(0x00, 0xff), random.randint(0x00, 0xff)]
         return ':'.join(map(lambda x: "%02x" % x, mac))
 
-    def tearDown(self):
-        self.p_mock.terminate()
-        self.p_mock.wait()
-        super(WifiBaseTestCase, self).tearDown()
-
 
 class WifiWithSSIDBaseTestCase(WifiBaseTestCase):
     """ Class for Wi-Fi settings tests launches with an SSID."""
@@ -963,5 +953,5 @@ class WifiWithSSIDBaseTestCase(WifiBaseTestCase):
 
     def setUp(self, panel=None):
         super(WifiWithSSIDBaseTestCase, self).setUp(
-            panel='settings:///wifi/?ssid=%s' % self.ssid
+            panel='settings:///system/wifi/?ssid=%s' % self.ssid
         )
