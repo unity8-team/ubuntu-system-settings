@@ -24,11 +24,11 @@ from unittest import skip
 class WifiEnabledTestCase(WifiBaseTestCase):
     """Tests for Language Page"""
 
-    # def test_wifi_page_title_is_correct(self):
-    #     """Checks whether Wifi page is available"""
-    #     self.assertThat(
-    #         self.wifi_page.title,
-    #         Equals(_('Wi-Fi')))
+    def test_wifi_page_title_is_correct(self):
+        """Checks whether Wifi page is available"""
+        self.assertThat(
+            self.wifi_page.title,
+            Equals(_('Wi-Fi')))
 
     def test_connect_to_hidden_network(self):
         dialog = self.wifi_page.connect_to_hidden_network(

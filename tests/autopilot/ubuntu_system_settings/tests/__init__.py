@@ -26,8 +26,6 @@ from datetime import datetime
 from time import sleep
 
 import ubuntuuitoolkit
-from ubuntuuitoolkit._custom_proxy_objects._common import (
-    is_process_running)
 from autopilot import platform
 from autopilot.matchers import Eventually
 from dbusmock.templates.networkmanager import (InfrastructureMode,
@@ -35,6 +33,8 @@ from dbusmock.templates.networkmanager import (InfrastructureMode,
 from fixtures import EnvironmentVariable
 from gi.repository import UPowerGlib
 from testtools.matchers import Equals, NotEquals, GreaterThan
+from ubuntuuitoolkit._custom_proxy_objects._common import (
+    is_process_running, _start_process, _stop_process)
 
 
 ACCOUNTS_IFACE = 'org.freedesktop.Accounts'
@@ -872,28 +872,17 @@ class WifiBaseTestCase(UbuntuSystemSettingsTestCase,
     def setUpClass(cls):
         cls.start_system_bus()
         cls.dbus_con = cls.get_dbus(True)
+        cls.session_con = cls.get_dbus(False)
 
         template = os.path.join(os.path.dirname(__file__), 'networkmanager.py')
         (cls.p_mock, cls.obj_nm) = cls.spawn_server_template(
             template, stdout=subprocess.PIPE)
         super(WifiBaseTestCase, cls).setUpClass()
 
-    def start_network_indicator(self):
-        subprocess.call(['initctl', 'start', INDICATOR_NETWORK])
-
-    def stop_network_indicator(self):
-        subprocess.call(['initctl', 'stop', INDICATOR_NETWORK])
-
-    @classmethod
-    def tearDownClass(cls):
-        cls.p_mock.terminate()
-        cls.p_mock.wait()
-        super(WifiBaseTestCase, cls).tearDownClass()
-
     def setUp(self, panel=None):
         if is_process_running(INDICATOR_NETWORK):
-            self.stop_network_indicator()
-            self.addCleanup(self.start_network_indicator)
+            _stop_process(INDICATOR_NETWORK)
+            self.addCleanup(_start_process, INDICATOR_NETWORK)
 
         inetwork = os.path.join(
             os.path.dirname(__file__), 'indicatornetwork.py'
