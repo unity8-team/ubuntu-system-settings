@@ -871,16 +871,7 @@ class WifiBaseTestCase(UbuntuSystemSettingsTestCase,
     @classmethod
     def setUpClass(cls):
         cls.start_system_bus()
-        cls.start_session_bus()
         cls.dbus_con = cls.get_dbus(True)
-
-        # indicator-network mock
-        inetwork = os.path.join(
-            os.path.dirname(__file__), 'indicatornetwork.py'
-        )
-        (cls.inetwork_mock, cls.obj_inetwork) = cls.spawn_server_template(
-            inetwork, parameters=cls.indicatornetwork_parameters,
-            stdout=subprocess.PIPE)
 
         template = os.path.join(os.path.dirname(__file__), 'networkmanager.py')
         (cls.p_mock, cls.obj_nm) = cls.spawn_server_template(
@@ -893,10 +884,23 @@ class WifiBaseTestCase(UbuntuSystemSettingsTestCase,
     def stop_network_indicator(self):
         subprocess.call(['initctl', 'stop', INDICATOR_NETWORK])
 
+    @classmethod
+    def tearDownClass(cls):
+        cls.p_mock.terminate()
+        cls.p_mock.wait()
+        super(WifiBaseTestCase, cls).tearDownClass()
+
     def setUp(self, panel=None):
         if is_process_running(INDICATOR_NETWORK):
             self.stop_network_indicator()
             self.addCleanup(self.start_network_indicator)
+
+        inetwork = os.path.join(
+            os.path.dirname(__file__), 'indicatornetwork.py'
+        )
+        (self.inetwork_mock, self.obj_inetwork) = self.spawn_server_template(
+            inetwork, parameters=self.indicatornetwork_parameters,
+            stdout=subprocess.PIPE)
 
         self.obj_nm.Reset()
 
@@ -921,6 +925,11 @@ class WifiBaseTestCase(UbuntuSystemSettingsTestCase,
 
         self.wifi_page._scroll_to_and_click = \
             self.main_view.scroll_to_and_click
+
+    def tearDown(self):
+        self.inetwork_mock.terminate()
+        self.inetwork_mock.wait()
+        super(WifiBaseTestCase, self).tearDown()
 
     def create_access_point(self, name, ssid, security=None):
         """Creates access point.
