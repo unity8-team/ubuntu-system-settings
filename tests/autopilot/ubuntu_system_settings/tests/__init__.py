@@ -951,5 +951,5 @@ class WifiWithSSIDBaseTestCase(WifiBaseTestCase):
 
     def setUp(self, panel=None):
         super(WifiWithSSIDBaseTestCase, self).setUp(
-            panel='settings:///system/wifi/?ssid=%s' % self.ssid
+            panel='settings:///wifi/?ssid=%s' % self.ssid
         )
