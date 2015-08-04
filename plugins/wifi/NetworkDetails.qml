@@ -37,63 +37,76 @@ ItemPage {
 
     title: i18n.tr("Network details")
 
-    Column {
-
+    Flickable {
         anchors.fill: parent
+        contentHeight: contentItem.childrenRect.height
+        boundsBehavior: (contentHeight > networkDetails.height) ?
+                            Flickable.DragAndOvershootBounds :
+                            Flickable.StopAtBounds
+        /* Set the direction to workaround
+           https://bugreports.qt-project.org/browse/QTBUG-31905 otherwise the UI
+           might end up in a situation where scrolling doesn't work */
+        flickableDirection: Flickable.VerticalFlick
 
-        ListItem.Standard {
-            text: i18n.tr("Name")
-            control: Label {
-                text: networkName
+        Column {
+
+            anchors.left: parent.left
+            anchors.right: parent.right
+
+            ListItem.Standard {
+                text: i18n.tr("Name")
+                control: Label {
+                    text: networkName
+                }
             }
-        }
 
-        ListItem.Standard {
-            id: lastLabel
-            text: i18n.tr("Last connected")
-            control: Label {
-                id: lastField
+            ListItem.Standard {
+                id: lastLabel
+                text: i18n.tr("Last connected")
+                control: Label {
+                    id: lastField
 
-                text: networkDetails.lastUsed.length !== 0 ?
-                    networkDetails.lastUsed : i18n.tr("Never")
+                    text: networkDetails.lastUsed.length !== 0 ?
+                        networkDetails.lastUsed : i18n.tr("Never")
+                }
             }
-        }
 
-        ListItem.Standard {
-            id: passwordLabel
-            text: i18n.tr("Password")
-            visible: networkDetails.password.length !== 0
-            control: TextInput {
-                id: passwordField
-                readOnly: true
-                text: networkDetails.password
-                echoMode: passwordVisibleSwitch.checked ?
-                    TextInput.Normal : TextInput.Password
+            ListItem.Standard {
+                id: passwordLabel
+                text: i18n.tr("Password")
+                visible: networkDetails.password.length !== 0
+                control: TextInput {
+                    id: passwordField
+                    readOnly: true
+                    text: networkDetails.password
+                    echoMode: passwordVisibleSwitch.checked ?
+                        TextInput.Normal : TextInput.Password
+                }
             }
-        }
 
-        ListItem.Standard {
-            id: passwordVisible
-            text: i18n.tr("Show password")
-            visible: networkDetails.password.length !== 0
-            control: Switch {
-                id: passwordVisibleSwitch
+            ListItem.Standard {
+                id: passwordVisible
+                text: i18n.tr("Show password")
+                visible: networkDetails.password.length !== 0
+                control: Switch {
+                    id: passwordVisibleSwitch
+                }
             }
-        }
 
-        ListItem.Divider {}
+            ListItem.Divider {}
 
-        Button {
-            objectName: "forgetNetwork"
-            text : i18n.tr("Forget this network")
-            anchors {
-                left: parent.left
-                right: parent.right
-                margins: units.gu(2)
-            }
-            onClicked : {
-                DbusHelper.forgetConnection(dbusPath);
-                pageStack.pop();
+            Button {
+                objectName: "forgetNetwork"
+                text : i18n.tr("Forget this network")
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                    margins: units.gu(2)
+                }
+                onClicked : {
+                    DbusHelper.forgetConnection(dbusPath);
+                    pageStack.pop();
+                }
             }
         }
     }
