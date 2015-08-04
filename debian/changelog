@@ -1,3 +1,19 @@
+ubuntu-system-settings (0.3+15.10.20150804-0ubuntu1) wily; urgency=medium
+
+  [ Sebastien Bacher ]
+  * [system-update] get the custom build information from the s-i
+    service (LP: #1393413)
+
+  [ jonas-drange ]
+  * Adds Flickables to many pages. (LP: #1470782)
+
+  [ simon.busch@canonical.com ]
+  * Convert Bluetooth connect/disconnect operations to async ones to not
+    block the UI when the backend takes a little bit longer to perform
+    those.
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Tue, 04 Aug 2015 18:14:23 +0000
+
 ubuntu-system-settings (0.3+15.10.20150731-0ubuntu1) wily; urgency=medium
 
   [ Ken VanDine ]
