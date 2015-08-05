@@ -14,6 +14,7 @@ from autopilot.matchers import Eventually
 from testtools.matchers import Equals, NotEquals, raises
 
 from ubuntu_system_settings.tests import SystemUpdatesBaseTestCase
+from unittest import skip
 
 
 """ Tests for Ubuntu System Settings """
@@ -63,6 +64,7 @@ class SystemUpdatesTestCases(SystemUpdatesBaseTestCase):
         self.assertThat(checkForUpdatesArea.visible,
                         Eventually(NotEquals(True)))
 
+    @skip('skipped due to lp:1481664')
     def test_searching_state(self):
         """Check how the ui reacts to searching state."""
         updates = self.system_settings.main_view.updates_page
