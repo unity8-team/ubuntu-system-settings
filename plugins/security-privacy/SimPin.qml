@@ -345,96 +345,108 @@ ItemPage {
         }
     }
 
-    Column {
-        anchors.left: parent.left
-        anchors.right: parent.right
+    Flickable {
+        anchors.fill: parent
+        contentHeight: contentItem.childrenRect.height
+        boundsBehavior: (contentHeight > root.height) ?
+                            Flickable.DragAndOvershootBounds :
+                            Flickable.StopAtBounds
+        /* Set the direction to workaround
+           https://bugreports.qt-project.org/browse/QTBUG-31905 otherwise the UI
+           might end up in a situation where scrolling doesn't work */
+        flickableDirection: Flickable.VerticalFlick
 
-        Repeater {
-            model: sims.length
-            Column {
-                id: sim
-                anchors {
-                    left: parent.left
-                    right: parent.right
-                }
+        Column {
+            anchors.left: parent.left
+            anchors.right: parent.right
 
-                states: [
-                    State {
-                        name: "locked"
-                        when: sims[index].simMng.pinRequired !== OfonoSimManager.NoPin
-                    },
-                    State {
-                        name: "unlocked"
-                        when: sims[index].simMng.pinRequired === OfonoSimManager.NoPin
+            Repeater {
+                model: sims.length
+                Column {
+                    id: sim
+                    anchors {
+                        left: parent.left
+                        right: parent.right
                     }
-                ]
 
-                Connections {
-                    target: sims[index].simMng
-                    onLockedPinsChanged: {
-                        simPinSwitch.checked =
-                                sims[index].simMng.lockedPins.length > 0;
-                    }
-                }
+                    states: [
+                        State {
+                            name: "locked"
+                            when: sims[index].simMng.pinRequired !== OfonoSimManager.NoPin
+                        },
+                        State {
+                            name: "unlocked"
+                            when: sims[index].simMng.pinRequired === OfonoSimManager.NoPin
+                        }
+                    ]
 
-                ListItem.Standard {
-                    text: sims[index].title
-                    visible: sims.length > 1
-                }
-
-                ListItem.Standard {
-                    text: i18n.tr("SIM PIN")
-                    control: Switch {
-                        id: simPinSwitch
-                        objectName: "simPinSwitch"
-                        checked: sims[index].simMng.lockedPins.length > 0
-                        onClicked: {
-                            curSim = sims[index].simMng;
-                            PopupUtils.open(lockDialogComponent, simPinSwitch);
+                    Connections {
+                        target: sims[index].simMng
+                        onLockedPinsChanged: {
+                            simPinSwitch.checked =
+                                    sims[index].simMng.lockedPins.length > 0;
                         }
                     }
-                }
 
-                ListItem.Standard {
-                    id: changeControl
-                    visible: sim.state === "unlocked"
-                    text: i18n.tr("Unlocked")
-                    control: Button {
-                        enabled: parent.visible
-                        text: i18n.tr("Change PIN…")
-                        onClicked: {
-                            curSim = sims[index].simMng;
-                            PopupUtils.open(dialogComponent);
+                    ListItem.Standard {
+                        text: sims[index].title
+                        visible: sims.length > 1
+                    }
+
+                    ListItem.Standard {
+                        text: i18n.tr("SIM PIN")
+                        control: Switch {
+                            id: simPinSwitch
+                            objectName: "simPinSwitch"
+                            checked: sims[index].simMng.lockedPins.length > 0
+                            onClicked: {
+                                curSim = sims[index].simMng;
+                                PopupUtils.open(lockDialogComponent, simPinSwitch);
+                            }
                         }
                     }
-                }
 
-                ListItem.Standard {
-                    id: lockControl
-                    visible: sim.state === "locked"
-                    text: i18n.tr("Locked")
-                    control: Button {
-                        objectName: "unlock"
-                        enabled: sims[index].simMng.pinRequired !== 'none'
-                        text: i18n.tr("Unlock…")
-                        color: UbuntuColors.green
-                        onClicked: Connectivity.unlockModem(sims[index].path)
+                    ListItem.Standard {
+                        id: changeControl
+                        visible: sim.state === "unlocked"
+                        text: i18n.tr("Unlocked")
+                        control: Button {
+                            enabled: parent.visible
+                            text: i18n.tr("Change PIN…")
+                            onClicked: {
+                                curSim = sims[index].simMng;
+                                PopupUtils.open(dialogComponent);
+                            }
+                        }
                     }
-                }
 
-                ListItem.Divider {
-                    visible: index < (sims.length - 1)
-                }
+                    ListItem.Standard {
+                        id: lockControl
+                        visible: sim.state === "locked"
+                        text: i18n.tr("Locked")
+                        control: Button {
+                            objectName: "unlock"
+                            enabled: sims[index].simMng.pinRequired !== 'none'
+                            text: i18n.tr("Unlock…")
+                            color: UbuntuColors.green
+                            onClicked: Connectivity.unlockModem(sims[index].path)
+                        }
+                    }
 
+                    ListItem.Divider {
+                        visible: index < (sims.length - 1)
+                    }
+
+                }
             }
-        }
 
-        ListItem.Caption {
-            text: i18n.tr("When a SIM PIN is set, it must be entered to access cellular services after restarting the phone or swapping the SIM.")
-        }
+            ListItem.Caption {
+                text: i18n.tr("When a SIM PIN is set, it must be entered to access cellular services after restarting the phone or swapping the SIM.")
+            }
 
-        ListItem.Caption {
-            text: i18n.tr("Entering an incorrect PIN repeatedly may lock the SIM permanently.")
+            ListItem.Caption {
+                text: i18n.tr("Entering an incorrect PIN repeatedly may lock the SIM permanently.")
+            }
         }
     }
 }
