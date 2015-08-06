@@ -57,10 +57,6 @@ def load(mock, parameters):
     mock.set_hotspot_ssid = set_hotspot_ssid
     mock.set_hotspot_password = set_hotspot_password
 
-    mock.modems = []  # path to boolean e.g. ril_0: False
-    mock.flight_mode = False
-    mock.wifi_enabled = False
-
     mock.AddObject(
         NETS_OBJ,
         NETS_IFACE,
@@ -74,6 +70,9 @@ def load(mock, parameters):
                 'HotspotStored', dbus.Boolean(False)
             ),
             'UnstoppableOperationHappening': dbus.Boolean(False),
+            'WifiEnabled': _parameters.get('WifiEnabled', dbus.Boolean(False)),
+            # One of online, offline and connecting.
+            'Status': _parameters.get('Status', 'offline')
         },
         []
     )

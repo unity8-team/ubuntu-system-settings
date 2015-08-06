@@ -548,14 +548,37 @@ class LicenseBaseTestCase(AboutBaseTestCase):
         self.licenses_page = self.about_page.go_to_software_licenses()
 
 
-class SystemUpdatesBaseTestCase(UbuntuSystemSettingsTestCase):
-
+class SystemUpdatesBaseTestCase(UbuntuSystemSettingsTestCase,
+                                dbusmock.DBusTestCase):
     """Base class for SystemUpdates page tests."""
+
+    connectivity_parameters = {
+        'Status': 'online'
+    }
 
     def setUp(self):
         """Go to SystemUpdates Page."""
+        self.session_con = self.get_dbus(False)
+        if is_process_running(INDICATOR_NETWORK):
+            _stop_process(INDICATOR_NETWORK)
+            self.addCleanup(_start_process, INDICATOR_NETWORK)
+
+        ctv_tmpl = os.path.join(os.path.dirname(__file__), 'connectivity.py')
+        (self.ctv_mock, self.obj_ctv) = self.spawn_server_template(
+            ctv_tmpl, parameters=self.connectivity_parameters,
+            stdout=subprocess.PIPE)
+
+        self.ctv_nets = dbus.Interface(
+            self.session_con.get_object(CTV_IFACE, CTV_NETS_OBJ),
+            'org.freedesktop.DBus.Properties')
+
         super(SystemUpdatesBaseTestCase, self).setUp()
         self.main_view.click_item('entryComponent-system-update')
+
+    def tearDown(self):
+        self.ctv_mock.terminate()
+        self.ctv_mock.wait()
+        super(SystemUpdatesBaseTestCase, self).tearDown()
 
 
 class BackgroundBaseTestCase(
@@ -882,17 +905,34 @@ class WifiBaseTestCase(UbuntuSystemSettingsTestCase,
                        dbusmock.DBusTestCase):
     """ Base class for wifi settings tests"""
 
+    indicatornetwork_parameters = {}
+
     @classmethod
     def setUpClass(cls):
         cls.start_system_bus()
         cls.dbus_con = cls.get_dbus(True)
+        cls.session_con = cls.get_dbus(False)
+
+        template = os.path.join(os.path.dirname(__file__), 'networkmanager.py')
+        (cls.p_mock, cls.obj_nm) = cls.spawn_server_template(
+            template, stdout=subprocess.PIPE)
+        super(WifiBaseTestCase, cls).setUpClass()
 
     def setUp(self, panel=None):
-        # Add a mock NetworkManager environment so we get consistent results
-        template = os.path.join(os.path.dirname(__file__), 'networkmanager.py')
-        (self.p_mock, self.obj_nm) = self.spawn_server_template(
-            template, stdout=subprocess.PIPE)
+        if is_process_running(INDICATOR_NETWORK):
+            _stop_process(INDICATOR_NETWORK)
+            self.addCleanup(_start_process, INDICATOR_NETWORK)
+
+        inetwork = os.path.join(
+            os.path.dirname(__file__), 'indicatornetwork.py'
+        )
+        (self.inetwork_mock, self.obj_inetwork) = self.spawn_server_template(
+            inetwork, parameters=self.indicatornetwork_parameters,
+            stdout=subprocess.PIPE)
+
         self.obj_nm.Reset()
+
+        # Add a mock NetworkManager environment so we get consistent results
         self.device_path = self.obj_nm.AddWiFiDevice('test0', 'Barbaz', 1)
         self.device_mock = dbus.Interface(self.dbus_con.get_object(
             NM_SERVICE, self.device_path),
@@ -910,6 +950,14 @@ class WifiBaseTestCase(UbuntuSystemSettingsTestCase,
             )
         else:
             self.wifi_page = self.main_view.go_to_wifi_page()
+
+        self.wifi_page._scroll_to_and_click = \
+            self.main_view.scroll_to_and_click
+
+    def tearDown(self):
+        self.inetwork_mock.terminate()
+        self.inetwork_mock.wait()
+        super(WifiBaseTestCase, self).tearDown()
 
     def create_access_point(self, name, ssid, security=None):
         """Creates access point.
@@ -933,11 +981,6 @@ class WifiBaseTestCase(UbuntuSystemSettingsTestCase,
         mac = [0x00, 0x16, 0x3e, random.randint(0x00, 0x7f),
                random.randint(0x00, 0xff), random.randint(0x00, 0xff)]
         return ':'.join(map(lambda x: "%02x" % x, mac))
-
-    def tearDown(self):
-        self.p_mock.terminate()
-        self.p_mock.wait()
-        super(WifiBaseTestCase, self).tearDown()
 
 
 class WifiWithSSIDBaseTestCase(WifiBaseTestCase):
