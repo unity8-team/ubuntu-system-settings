@@ -113,3 +113,41 @@ class HotspotEnabledTestCase(HotspotBaseTestCase):
             lambda: self.ctv_nets.Get(CTV_NETS_IFACE, 'HotspotEnabled'),
             Eventually(Equals(False))
         )
+
+
+class HotspotWifiDisabledTestCase(HotspotBaseTestCase):
+
+    connectivity_parameters = {
+        'HotspotStored': True,
+        'HotspotEnabled': False
+    }
+
+    indicatornetwork_parameters = {
+        'actions': {
+            'wifi.enable': (True, '', [False])
+        }
+    }
+
+    def test_enabling(self):
+
+        self.assertThat(
+            lambda: self.ctv_nets.Get(CTV_NETS_IFACE, 'HotspotEnabled'),
+            Eventually(Equals(False))
+        )
+
+        self.assertThat(
+            lambda: self.obj_inetwork.Describe('wifi.enable'),
+            Eventually(Equals((True, '', [False])))
+        )
+
+        self.hotspot_page.enable_hotspot()
+
+        self.assertThat(
+            lambda: self.ctv_nets.Get(CTV_NETS_IFACE, 'HotspotEnabled'),
+            Eventually(Equals(True))
+        )
+
+        self.assertThat(
+            lambda: self.obj_inetwork.Describe('wifi.enable'),
+            Eventually(Equals((True, '', [True])))
+        )

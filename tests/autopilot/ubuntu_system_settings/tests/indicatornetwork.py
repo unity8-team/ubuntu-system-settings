@@ -26,7 +26,16 @@ _parameters = {}
 
 
 def activate(self, action_name, parameters, platform_data):
-    pass
+
+    if action_name == 'wifi.enable':
+        enabled, sig, states = self.actions[action_name]
+        state = dbus.Boolean(not states[0], variant_level=1)
+        new_struct = (enabled, sig, [state])
+        self.actions[action_name] = new_struct
+        self.Changes(dbus.Array([], signature='s'),
+                     dbus.Dictionary({}, signature='sb'),
+                     dbus.Dictionary({action_name: state}, signature='sv'),
+                     dbus.Dictionary({}, signature='s(bgav)'))
 
 
 def describe(self, action_name):
@@ -52,19 +61,19 @@ def Changes(self, removals, enable_changes, state_changes, additions):
     obj.EmitSignal(MAIN_IFACE, 'Changed', 'asa{sb}a{sv}a{s(bgav)}', [
         removals, enable_changes, state_changes, additions
     ])
-    pass
 
 
 def load(mock, parameters):
     global _parameters
     _parameters = parameters
 
+    mock.activate = activate
     mock.describe = describe
     mock.describe_all = describe_all
     mock.list_actions = list_actions
     mock.set_state = set_state
 
-    mock.actions = parameters.get('actions', {
+    mock.actions = _parameters.get('actions', {
         'wifi.enable': (True, '', [True]),
     })
 
@@ -72,7 +81,8 @@ def load(mock, parameters):
         MAIN_IFACE,
         [
             (
-                'Activate', 'sava{sv}', '', ''
+                'Activate', 'sava{sv}', '',
+                'self.activate(self, args[0], args[1], args[2])'
             ),
             (
                 'Describe', 's', '(bgav)',

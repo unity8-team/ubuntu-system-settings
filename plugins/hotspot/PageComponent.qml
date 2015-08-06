@@ -19,6 +19,7 @@
  */
 
 import QtQuick 2.0
+import QMenuModel 0.1
 import SystemSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
@@ -43,15 +44,13 @@ ItemPage {
     head.backAction: Action {
         iconName: "back"
         enabled: !Connectivity.unstoppableOperationHappening
-        onTriggered: {
-            pageStack.pop();
-        }
+        onTriggered: pageStack.pop()
     }
 
     states: [
         State {
             name: "disabled"
-            when: (!actionGroup.actionObject.valid &&
+            when: (!inetwork.wifi.valid &&
                    UpdateManager.deviceName !== "mako")
             PropertyChanges {
                 target: hotspotItem
@@ -65,37 +64,16 @@ ItemPage {
     ]
 
     QDBusActionGroup {
-        id: actionGroup
+        id: inetwork
         busType: 1
         busName: "com.canonical.indicator.network"
         objectPath: "/com/canonical/indicator/network"
 
-        property variant actionObject: action("wifi.enable")
+        property variant wifi: action("wifi.enable")
 
-        Component.onCompleted: {
-            start()
-        }
+        Component.onCompleted: start()
     }
 
-    ListItem.SingleValue {
-        text : i18n.tr("Hotspot disabled because Wi-Fi is off.")
-        visible: !hotspotItem.visible &&
-                 UpdateManager.deviceName !== "mako"
-    }
-
-    ListItem.SingleValue {
-        id: hotspotItem
-        objectName: "hotspotEntry"
-        text: i18n.tr("Wi-Fi hotspot")
-        progression: true
-        onClicked: {
-            pageStack.push(Qt.resolvedUrl("../Hotspot.qml"))
-        }
-        visible: (actionGroup.actionObject.valid ?
-                      : false) &&
-
-    }
-    // actionGroup.actionObject.state
     Loader {
         id: setup
         asynchronous: false
@@ -139,8 +117,13 @@ ItemPage {
                         // the UI has completed the checkbox animation before we
                         // ask the server to uipdate.
                         onSyncTriggered: {
-                            triggerTimer.value = value;
-                            triggerTimer.start();
+                            console.warn('triggered sync', inetwork.wifi.state);
+                            if (inetwork.wifi.state) {
+                                triggerTimer.value = value;
+                                triggerTimer.start();
+                            } else {
+                                PopupUtils.open(enableWifiDialog);
+                            }
                         }
                     }
 
@@ -168,7 +151,6 @@ ItemPage {
             Button {
                 id: hotspotSetupButton
                 objectName: "hotspotSetupButton"
-                objectName: "hotspotSetupEntry"
                 anchors.horizontalCenter: parent.horizontalCenter
                 width: parent.width - units.gu(4)
                 text: Connectivity.hotspotStored ?
@@ -176,8 +158,49 @@ ItemPage {
 
                 onClicked: {
                     setup.setSource(Qt.resolvedUrl("HotspotSetup.qml"));
-                    PopupUtils.open(setup.item, root, {
-                    });
+                    PopupUtils.open(setup.item, root, {});
+                }
+            }
+        }
+    }
+
+    Component {
+        id: enableWifiDialog
+        Dialog {
+            id: dialogue
+            objectName: "enableWifiDialog"
+            title: i18n.tr("Wi-Fi is off")
+            text: i18n.tr("In order to create a hotspot, you need to turn Wi-Fi on.")
+
+            Button {
+                text: i18n.tr("Cancel")
+                onClicked: PopupUtils.close(dialogue)
+            }
+
+            Button {
+                objectName: "confirmEnable"
+                text: i18n.tr("Turn on Wi-Fi")
+                onClicked: {
+                    function wifiEnabledCallback () {
+                        inetwork.wifi.stateChanged.disconnect(
+                            wifiEnabledCallback
+                        );
+
+                        if (inetwork.wifi.state) {
+                            triggerTimer.value = true;
+                            triggerTimer.start();
+                            PopupUtils.close(dialogue);
+                        } else {
+                            console.warn('Failed to enable Wi-Fi.');
+                        }
+                    }
+
+                    if (!inetwork.wifi.state) {
+                        inetwork.wifi.stateChanged.connect(
+                            wifiEnabledCallback
+                        );
+                        inetwork.wifi.activate();
+                    }
                 }
             }
         }

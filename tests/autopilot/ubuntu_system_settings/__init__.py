@@ -360,6 +360,16 @@ class HotspotPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
     def enable_hotspot(self):
         self._switch.check()
 
+        try:
+            prompt = self.get_root_instance().wait_select_single(
+                objectName='enableWifiDialog')
+        except StateNotFoundError:
+            prompt = None
+
+        if prompt:
+            prompt.confirm_enable()
+            prompt.wait_until_destroyed()
+
     @autopilot.logging.log_action(logger.debug)
     def disable_hotspot(self):
         self._switch.uncheck()
@@ -382,6 +392,24 @@ class HotspotPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
     @autopilot.logging.log_action(logger.debug)
     def get_hotspot_status(self):
         return self._switch.checked
+
+
+class HotspotEnableWifiDialog(
+        ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
+    """Autopilot helper for the 'Turn on Wi-Fi' dialog in hotspot panel."""
+
+    @classmethod
+    def validate_dbus_object(cls, path, state):
+        name = introspection.get_classname_from_path(path)
+        if name == b'Dialog':
+            if state['objectName'][1] == 'enableWifiDialog':
+                return True
+        return False
+
+    @autopilot.logging.log_action(logger.debug)
+    def confirm_enable(self):
+        button = self.select_single('Button', objectName='confirmEnable')
+        self.pointing_device.click_object(button)
 
 
 class HotspotSetup(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
