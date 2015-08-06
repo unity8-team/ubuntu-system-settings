@@ -26,6 +26,11 @@ import Ubuntu.Components.Popups 0.1
 import Ubuntu.Connectivity 1.0
 import Ubuntu.Settings.Components 0.1 as USC
 
+/* This is a temporary solution to the issue of Hotspots failing on mako. If
+the device is mako, we hide the hotspot entry. Will be removed once lp:1434591
+has been resolved. */
+import Ubuntu.SystemSettings.Update 1.0
+
 ItemPage {
 
     id: root
@@ -43,6 +48,54 @@ ItemPage {
         }
     }
 
+    states: [
+        State {
+            name: "disabled"
+            when: (!actionGroup.actionObject.valid &&
+                   UpdateManager.deviceName !== "mako")
+            PropertyChanges {
+                target: hotspotItem
+                enabled: false
+            }
+            PropertyChanges {
+                target: hotspotSetupButton
+                enabled: false
+            }
+        }
+    ]
+
+    QDBusActionGroup {
+        id: actionGroup
+        busType: 1
+        busName: "com.canonical.indicator.network"
+        objectPath: "/com/canonical/indicator/network"
+
+        property variant actionObject: action("wifi.enable")
+
+        Component.onCompleted: {
+            start()
+        }
+    }
+
+    ListItem.SingleValue {
+        text : i18n.tr("Hotspot disabled because Wi-Fi is off.")
+        visible: !hotspotItem.visible &&
+                 UpdateManager.deviceName !== "mako"
+    }
+
+    ListItem.SingleValue {
+        id: hotspotItem
+        objectName: "hotspotEntry"
+        text: i18n.tr("Wi-Fi hotspot")
+        progression: true
+        onClicked: {
+            pageStack.push(Qt.resolvedUrl("../Hotspot.qml"))
+        }
+        visible: (actionGroup.actionObject.valid ?
+                      : false) &&
+
+    }
+    // actionGroup.actionObject.state
     Loader {
         id: setup
         asynchronous: false
@@ -65,6 +118,8 @@ ItemPage {
             spacing: units.gu(2)
 
             ListItem.Standard {
+                id: hotspotItem
+                objectName: "hotspotItem"
                 text: i18n.tr("Hotspot")
                 enabled: Connectivity.hotspotStored
                 control: Switch {
@@ -111,6 +166,8 @@ ItemPage {
             }
 
             Button {
+                id: hotspotSetupButton
+                objectName: "hotspotSetupButton"
                 objectName: "hotspotSetupEntry"
                 anchors.horizontalCenter: parent.horizontalCenter
                 width: parent.width - units.gu(4)

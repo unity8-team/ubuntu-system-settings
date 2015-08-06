@@ -22,11 +22,6 @@ import SystemSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 
-/* This is a temporary solution to the issue of Hotspots failing on mako. If
-the device is mako, we hide the hotspot entry. Will be removed once lp:1434591
-has been resolved. */
-import Ubuntu.SystemSettings.Update 1.0
-
 Column {
 
     objectName: "singleSim"
@@ -62,25 +57,6 @@ Column {
             Component.onCompleted: checked = serverChecked
             onTriggered: sim.connMan.roamingAllowed = checked
         }
-    }
-
-    ListItem.SingleValue {
-        text : i18n.tr("Hotspot disabled because Wi-Fi is off.")
-        visible: !hotspotItem.visible &&
-                 UpdateManager.deviceName !== "mako"
-    }
-
-    ListItem.SingleValue {
-        id: hotspotItem
-        objectName: "hotspotEntry"
-        text: i18n.tr("Wi-Fi hotspot")
-        progression: true
-        onClicked: {
-            pageStack.push(Qt.resolvedUrl("../Hotspot.qml"))
-        }
-        visible: (actionGroup.actionObject.valid ?
-                     actionGroup.actionObject.state : false) &&
-                 UpdateManager.deviceName !== "mako"
     }
 
     ListItem.Standard {
