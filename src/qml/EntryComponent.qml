@@ -19,8 +19,8 @@
  */
 
 import QtQuick 2.0
-import Ubuntu.Components 1.1
-import Ubuntu.Settings.Components 0.1
+import Ubuntu.Components 1.3
+import Ubuntu.Settings.Components 1.3
 
 Item {
     id: root
@@ -70,7 +70,7 @@ Item {
             fill: root
             margins: -units.gu(0.25)
         }
-        color: UbuntuColors.darkGrey
+        backgroundColor: UbuntuColors.darkGrey
         opacity: 0.15
     }
 }
