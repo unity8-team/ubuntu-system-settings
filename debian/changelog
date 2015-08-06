@@ -1,3 +1,18 @@
+ubuntu-system-settings (0.3+15.10.20150731-0ubuntu1) wily; urgency=medium
+
+  [ Ken VanDine ]
+  * [cellular/apn] new APN panel made for the new 'Preferred' property,
+    as well as the 'ResetContext' method. (LP: #1435360, #1361864,
+    #1376714, #1457676, #1424149, #1442646, #1388222)
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Fri, 31 Jul 2015 18:19:18 +0000
+
+ubuntu-system-settings (0.3+15.10.20150729.1-0ubuntu2~gcc5.1) wily; urgency=medium
+
+  * No change upload, build with GCC 5.
+
+ -- Matthias Klose <doko@ubuntu.com>  Thu, 30 Jul 2015 11:56:52 +0200
+
 ubuntu-system-settings (0.3+15.10.20150729.1-0ubuntu1) wily; urgency=medium
 
   [ Christopher Lee ]
