@@ -1,5 +1,5 @@
 import QtQuick 2.0
-import Ubuntu.Components 0.1
+import Ubuntu.Components 1.3
 
 Item {
     property string label
@@ -17,7 +17,7 @@ Item {
             anchors.verticalCenter: parent.verticalCenter
             width: units.gu(3)
             height: units.gu(2)
-            color: colorName
+            backgroundColor: colorName
         }
         Label { text: label }
     }

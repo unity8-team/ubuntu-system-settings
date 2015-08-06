@@ -1,5 +1,5 @@
 import QtQuick 2.0
-import Ubuntu.Components 0.1
+import Ubuntu.Components 1.3
 
 Item {
     property bool ready: false
@@ -9,11 +9,11 @@ Item {
 
     UbuntuShape {
         //border.width: 1
-        color: "white"
+        backgroundColor: "white"
         clip: true
         height: units.gu(3)
         width: parent.width
-        image: ses
+        source: ses
     }
 
     ShaderEffectSource {
