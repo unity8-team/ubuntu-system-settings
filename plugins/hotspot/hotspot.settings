@@ -1,5 +1,4 @@
 {
-    "plugin": "hotspot-plugin",
     "icon": "nm-adhoc",
     "name": "Hotspot",
     "translations": "ubuntu-system-settings",
@@ -16,6 +15,6 @@
         "tethering"
     ],
     "has-dynamic-keywords": false,
-    "has-dynamic-visibility": true,
+    "has-dynamic-visibility": false,
     "page-component": "PageComponent.qml"
 }

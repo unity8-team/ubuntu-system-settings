@@ -31,7 +31,7 @@ ItemPage {
     id: root
     objectName: "hotspotPage"
 
-    title: i18n.tr("Wi-Fi hotspot")
+    title: i18n.tr("Hotspot")
 
     // We disable the back action while a hotspot is in the process of either
     // being enabled or disabled.
