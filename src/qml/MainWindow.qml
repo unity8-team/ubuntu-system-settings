@@ -30,7 +30,6 @@ MainView {
     applicationName: "ubuntu-system-settings"
     objectName: "systemSettingsMainView"
     automaticOrientation: true
-    useDeprecatedToolbar: false
     anchorToKeyboard: true
 
     function loadPluginByName(pluginName, pluginOptions) {
