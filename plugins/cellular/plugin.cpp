@@ -20,7 +20,6 @@
 #include <QtQml>
 #include <QtQml/QQmlContext>
 #include "connectivity.h"
-#include "hotspotmanager.h"
 
 static QObject *connectivitySingeltonProvider(QQmlEngine *engine, QJSEngine *scriptEngine)
 {
@@ -35,7 +34,6 @@ void BackendPlugin::registerTypes(const char *uri)
 {
     Q_ASSERT(uri == QLatin1String("Ubuntu.SystemSettings.Cellular"));
     qmlRegisterSingletonType<Connectivity>(uri, 1, 0, "Connectivity", connectivitySingeltonProvider);
-    qmlRegisterType<HotspotManager>(uri, 1, 0, "HotspotManager");
 }
 
 void BackendPlugin::initializeEngine(QQmlEngine *engine, const char *uri)

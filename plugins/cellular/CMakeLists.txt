@@ -23,8 +23,6 @@ set(QML_SOURCES
 add_library(UbuntuCellularPanel MODULE
   plugin.cpp
   plugin.h
-  hotspotmanager.cpp
-  hotspotmanager.h
   connectivity.cpp
   connectivity.h
   nm_manager_proxy.h
