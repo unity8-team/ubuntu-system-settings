@@ -7,15 +7,12 @@ set(QML_SOURCES
     apn_manager.js
     apn_editor.js
     carriers.js
-    Common.qml
     PageApnEditor.qml
     PageChooseApn.qml
     PageChooseCarrier.qml
     PageCarrierAndApn.qml
     PageCarriersAndApns.qml
     PageComponent.qml
-    Hotspot.qml
-    HotspotSetup.qml
     sims.js
 )
 
