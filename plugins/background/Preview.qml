@@ -35,7 +35,6 @@ ItemPage {
     property Item headerStyle: header.__styleInstance ?
                                    header.__styleInstance : null
 
-    tools: null
     Component.onCompleted: {
         /* change the header text color to make it more readable over the background */
         if (headerStyle.hasOwnProperty("textColor"))
