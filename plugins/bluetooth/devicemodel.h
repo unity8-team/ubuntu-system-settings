@@ -113,6 +113,7 @@ private:
     void emitRowChanged(int row);
 
 private Q_SLOTS:
+    void slotDefaultAdapter(QDBusPendingCallWatcher *watcher);
     void slotCreateFinished(QDBusPendingCallWatcher *call);
     void slotRemoveFinished(QDBusPendingCallWatcher *call);
     void slotPropertyChanged(const QString &key, const QDBusVariant &value);

@@ -95,9 +95,15 @@ void Device::initInterface(QSharedPointer<QDBusInterface> &setme,
     setme.reset(i);
 
     if (setme && setme->isValid()) {
-        QDBusReply<QMap<QString,QVariant> > properties = setme->call("GetProperties");
-        if (properties.isValid())
-            setProperties(properties.value());
+        QDBusPendingCall call = setme->asyncCall("GetProperties");
+
+        QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(call, this);
+        QObject::connect(watcher, &QDBusPendingCallWatcher::finished, [=](QDBusPendingCallWatcher *watcher) {
+            QDBusReply<QMap<QString,QVariant> > reply = *watcher;
+
+            if (reply.isValid())
+                setProperties(reply.value());
+        });
     }
 }
 
@@ -143,6 +149,7 @@ void Device::slotServiceDiscoveryDone(QDBusPendingCallWatcher *call)
         qWarning() << "Could not initiate service discovery:"
                    << reply.error().message();
     }
+
     call->deleteLater();
 }
 

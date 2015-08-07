@@ -43,9 +43,11 @@ DeviceModel::DeviceModel(QDBusConnection &dbus, QObject *parent):
 {
     if (m_bluezManager.isValid()) {
 
-        QDBusReply<QDBusObjectPath> qObjectPath = m_bluezManager.call("DefaultAdapter");
-        if (qObjectPath.isValid())
-            setAdapterFromPath(qObjectPath.value().path());
+        // QDBusReply<QDBusObjectPath> qObjectPath =
+        QDBusPendingCall call = m_bluezManager.asyncCall("DefaultAdapter");
+        QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(call, this);
+        QObject::connect(watcher, SIGNAL(finished(QDBusPendingCallWatcher*)),
+                         this, SLOT(slotDefaultAdapter(QDBusPendingCallWatcher*)));
 
         m_dbus.connect (m_bluezManager.service(),
                         m_bluezManager.path(),
@@ -216,12 +218,18 @@ void DeviceModel::slotDefaultAdapterChanged(const QDBusObjectPath &objectPath)
 
 void DeviceModel::updateDevices()
 {
-    if (m_bluezAdapter && m_bluezAdapter->isValid()) {
-        QDBusReply<QList<QDBusObjectPath> > reply = m_bluezAdapter->call("ListDevices");
+    if (!m_bluezAdapter || !m_bluezAdapter->isValid())
+        return;
+
+    QDBusPendingCall call = m_bluezAdapter->asyncCall("ListDevices");
+
+    QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(call, this);
+    connect(watcher, &QDBusPendingCallWatcher::finished, [=](QDBusPendingCallWatcher *watcher) {
+        QDBusReply<QList<QDBusObjectPath> > reply = *watcher;
         if (reply.isValid())
             for (auto path : reply.value())
                 addDevice(path.path());
-    }
+    });
 }
 
 void DeviceModel::setProperties(const QMap<QString,QVariant> &properties)
@@ -280,9 +288,14 @@ void DeviceModel::trySetDiscoverable(bool discoverable)
     value.setValue(disc);
 
     if (m_bluezAdapter && m_bluezAdapter->isValid() && m_isPowered) {
-        reply = m_bluezAdapter->call("SetProperty", "Discoverable", value);
-        if (!reply.isValid())
-            qWarning() << "Error setting device discoverable:" << reply.error();
+        QDBusPendingCall call = m_bluezAdapter->asyncCall("SetProperty", "Discoverable", value);
+
+        QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(call, this);
+        connect(watcher, &QDBusPendingCallWatcher::finished, [=](QDBusPendingCallWatcher *watcher) {
+            QDBusPendingReply<void> reply = *watcher;
+            if (!reply.isValid())
+                qWarning() << "Error setting device discoverable:" << reply.error();
+        });
     }
 }
 
@@ -341,6 +354,20 @@ void DeviceModel::emitRowChanged(int row)
 /***
 ****
 ***/
+
+void DeviceModel::slotDefaultAdapter(QDBusPendingCallWatcher *watcher)
+{
+    QDBusPendingReply<QDBusObjectPath> reply = *watcher;
+
+    if (!reply.isError()) {
+        QDBusObjectPath adapterObjectPath = reply.argumentAt<0>();
+        setAdapterFromPath(adapterObjectPath.path());
+    } else {
+        qWarning() << "Could not retrieve default adapter from BlueZ";
+    }
+
+    watcher->deleteLater();
+}
 
 void DeviceModel::slotDeviceCreated(const QDBusObjectPath &path)
 {
@@ -501,6 +528,7 @@ void DeviceModel::slotRemoveFinished(QDBusPendingCallWatcher *call)
     if (reply.isError()) {
         qWarning() << "Could not remove device:" << reply.error().message();
     }
+
     call->deleteLater();
 }
 
