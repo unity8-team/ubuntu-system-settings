@@ -349,6 +349,9 @@ void DeviceModel::slotDeviceCreated(const QDBusObjectPath &path)
     QScopedPointer<QDBusInterface> bluezDevice(
         new QDBusInterface(service, path.path(), interface, m_dbus));
 
+    addDevice(path.path());
+
+#if 0
     // A device was created. Now, we likely already have it, so let's find it
     // again and finish the initialization.
     QDBusReply<QMap<QString,QVariant> > properties
@@ -374,6 +377,7 @@ void DeviceModel::slotDeviceCreated(const QDBusObjectPath &path)
     } else {
         qWarning() << "Invalid device properties for" << path.path();
     }
+#endif
 }
 
 void DeviceModel::slotDeviceFound(const QString                &address,

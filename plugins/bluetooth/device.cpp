@@ -408,7 +408,7 @@ void Device::updateProperty(const QString &key, const QVariant &value)
         setType(getTypeFromClass(value.toUInt()));
     } else if (key == "Paired") { // org.bluez.Device
         setPaired(value.toBool());
-        connectPending();
+        // connectPending();
         updateConnection();
     } else if (key == "Trusted") { // org.bluez.Device
         setTrusted(value.toBool());
