@@ -62,7 +62,7 @@ ItemPage {
         },
         State {
             name: "nowifi"
-            when: inetwork.wifi.valid && !Connectivity.wifiEnabled
+            when: inetwork.wifi.valid && !Connectivity.WifiEnabled
             PropertyChanges {
                 target: hotspotSwitchWhenWifiDisabled
                 visible: true

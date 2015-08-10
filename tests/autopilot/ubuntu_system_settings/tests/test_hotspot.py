@@ -19,7 +19,8 @@ class HotspotNonExistantTestCase(HotspotBaseTestCase):
 
     connectivity_parameters = {
         'HotspotEnabled': False,
-        'HotspotStored': False
+        'HotspotStored': False,
+        'WifiEnabled': True
     }
 
     def test_setup(self):
@@ -58,7 +59,8 @@ class HotspotNonExistantTestCase(HotspotBaseTestCase):
 class HotspotExistsTestCase(HotspotBaseTestCase):
 
     connectivity_parameters = {
-        'HotspotStored': True
+        'HotspotStored': True,
+        'WifiEnabled': True
     }
 
     def test_enabling(self):
@@ -97,7 +99,8 @@ class HotspotEnabledTestCase(HotspotBaseTestCase):
 
     connectivity_parameters = {
         'HotspotStored': True,
-        'HotspotEnabled': True
+        'HotspotEnabled': True,
+        'WifiEnabled': True
     }
 
     def test_disabling(self):
