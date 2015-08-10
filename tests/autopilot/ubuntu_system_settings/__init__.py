@@ -124,7 +124,6 @@ class SystemSettingsMainWindow(ubuntuuitoolkit.MainView):
             return page.globalRect[1] + page.globalRect[3]
 
         page = self.system_settings_page
-        get_page_bottom = get_page_bottom()
         page_right = page.globalRect[0] + page.globalRect[2]
         page_bottom = get_page_bottom()
         page_center_x = int(page_right / 2)
