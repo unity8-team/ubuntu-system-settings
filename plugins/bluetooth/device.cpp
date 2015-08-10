@@ -112,6 +112,10 @@ void Device::setProperties(const QMap<QString,QVariant> &properties)
 
 void Device::connectPending()
 {
+    /* Don't do anything if we don't have just paired */
+    if (m_connectAfterPairing.isEmpty())
+        return;
+
     if (m_paired && !m_trusted) {
         /* Give the device a bit of time to settle.
          * Once service discovery is done, it will call connect() on the
