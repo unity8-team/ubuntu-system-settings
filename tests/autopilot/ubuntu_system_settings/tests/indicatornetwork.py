@@ -6,13 +6,13 @@
 # later version.  See http://www.gnu.org/copyleft/lgpl.html for the full text
 # of the license.
 
+import dbus
+import dbusmock
+
 __author__ = 'Jonas G. Drange'
 __email__ = 'jonas.drange@canonical.com'
 __copyright__ = '(c) 2015 Canonical Ltd.'
 __license__ = 'LGPL 3+'
-
-import dbus
-import dbusmock
 
 BUS_NAME = 'com.canonical.indicator.network'
 MAIN_IFACE = 'org.gtk.Actions'
