@@ -30,6 +30,7 @@ ItemPage {
     id: hotspot
     objectName: "hotspotPage"
 
+    // TRANSLATORS: “Hotspot” is hidden.
     title: showAllUI ? i18n.tr("Hotspot") : i18n.tr("Wi-Fi hotspot")
 
     // We disable the back action while a hotspot is in the process of either
@@ -118,7 +119,9 @@ ItemPage {
         Dialog {
             id: dialogue
             objectName: "enableWifiDialog"
+            // TRANSLATORS: This string is hidden.
             title: i18n.tr("Wi-Fi is off")
+            // TRANSLATORS: This string is hidden.
             text: i18n.tr("In order to create a hotspot, you need to turn Wi-Fi on.")
             visible: showAllUI
 
@@ -129,6 +132,7 @@ ItemPage {
 
             Button {
                 objectName: "confirmEnable"
+                // TRANSLATORS: This string is hidden.
                 text: i18n.tr("Turn on Wi-Fi")
             }
         }

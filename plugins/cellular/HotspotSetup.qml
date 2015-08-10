@@ -171,6 +171,7 @@ Component {
 
             Label {
                 id: passwordLabel
+                // TRANSLATORS: “Password (optional)” is hidden.
                 text: showAllUI ? i18n.tr("Password (optional)") :
                                   i18n.tr("Key (must be 8 characters or longer)")
                 fontSize: "medium"
@@ -182,6 +183,7 @@ Component {
 
             Label {
                 visible: showAllUI
+                // TRANSLATORS: This string is hidden.
                 text: i18n.tr("If you do not enter a password, the hotspot will be insecure.")
             }
 
@@ -196,6 +198,7 @@ Component {
             }
 
             ListItem.Standard {
+                // TRANSLATORS: “Show password” is hidden.
                 text: showAllUI ? i18n.tr("Show password") : i18n.tr("Show key")
                 id: passwordVisible
                 onClicked: passwordVisibleSwitch.trigger()
@@ -259,6 +262,7 @@ Component {
 
                 Button {
                     visible: showAllUI
+                    // TRANSLATORS: This string is hidden.
                     text: i18n.tr("Start")
                 }
             }
