@@ -227,7 +227,7 @@ Component {
                     objectName: "confirmButton"
                     width: (parent.width / 2) - units.gu(1)
                     text: hotspotSetupDialog.stored ? i18n.tr("Change") :
-                        i18n.tr("Enable")
+                        i18n.tr("Start")
                     enabled: settingsValid()
                     activeFocusOnPress: false
                     onClicked: {
@@ -255,11 +255,6 @@ Component {
                         visible: running
                         height: parent.height - units.gu(1.5)
                     }
-                }
-
-                Button {
-                    visible: showAllUI
-                    text: i18n.tr("Start")
                 }
             }
         }

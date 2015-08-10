@@ -358,7 +358,13 @@ class HotspotPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
 
     @autopilot.logging.log_action(logger.debug)
     def enable_hotspot(self):
-        self._switch.check()
+        # We assume that the following AssertionError is due to the panel
+        # instantly setting checked to False, prompting the user to turn on
+        # Wi-Fi instead.
+        try:
+            self._switch.check()
+        except AssertionError:
+            pass
 
         try:
             prompt = self.get_root_instance().wait_select_single(

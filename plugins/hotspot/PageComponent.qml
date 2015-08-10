@@ -62,7 +62,7 @@ ItemPage {
         },
         State {
             name: "nowifi"
-            when: inetwork.wifi.valid && !inetwork.wifi.state
+            when: inetwork.wifi.valid && !Connectivity.wifiEnabled
             PropertyChanges {
                 target: hotspotSwitchWhenWifiDisabled
                 visible: true
@@ -75,9 +75,7 @@ ItemPage {
         busType: 1
         busName: "com.canonical.indicator.network"
         objectPath: "/com/canonical/indicator/network"
-
         property variant wifi: action("wifi.enable")
-
         Component.onCompleted: start()
     }
 
@@ -124,7 +122,6 @@ ItemPage {
                         // the UI has completed the checkbox animation before we
                         // ask the server to uipdate.
                         onSyncTriggered: {
-                            console.warn('triggered sync', inetwork.wifi.state, value);
                             triggerTimer.value = value;
                             triggerTimer.start();
                         }
@@ -193,21 +190,20 @@ ItemPage {
                 objectName: "confirmEnable"
                 text: i18n.tr("Turn on Wi-Fi")
                 onClicked: {
-                    function wifiEnabledCallback () {
-                        inetwork.wifi.stateChanged.disconnect(
-                            wifiEnabledCallback
-                        );
+                    // As soon as Wi-Fi has been turned on, activate the USC
+                    // synchroniser.
+                    function wifiUpdated (updated) {
+                        console.warn('wifiUpdated', updated);
+                        Connectivity.wifiEnabledUpdated.disconnect(wifiUpdated);
 
-                        switchSync.activate()
+                        switchSync.activate();
                         PopupUtils.close(dialogue);
                     }
 
-                    if (!inetwork.wifi.state) {
-                        inetwork.wifi.stateChanged.connect(
-                            wifiEnabledCallback
-                        );
+                    if (!Connectivity.wifiEnabled) {
+                        Connectivity.wifiEnabledUpdated.connect(wifiUpdated);
                         hotspotSwitch.checked = true;
-                        inetwork.wifi.activate();
+                        Connectivity.setwifiEnabled(true);
                     }
                 }
             }
