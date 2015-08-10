@@ -1,5 +1,5 @@
 {
-    "icon": "nm-adhoc",
+    "icon": "preferences-network-hotspot-symbolic",
     "name": "Hotspot",
     "translations": "ubuntu-system-settings",
     "category": "network",

@@ -21,8 +21,8 @@
 import QtQuick 2.0
 import QMenuModel 0.1
 import SystemSettings 1.0
-import Ubuntu.Components 0.1
-import Ubuntu.Components.ListItems 0.1 as ListItem
+import Ubuntu.Components 1.3
+import Ubuntu.Components.ListItems 1.3 as ListItem
 import Ubuntu.Components.Popups 0.1
 import Ubuntu.Connectivity 1.0
 import Ubuntu.Settings.Components 0.1 as USC
@@ -59,6 +59,14 @@ ItemPage {
             PropertyChanges {
                 target: hotspotSetupButton
                 enabled: false
+            }
+        },
+        State {
+            name: "nowifi"
+            when: inetwork.wifi.valid && !inetwork.wifi.state
+            PropertyChanges {
+                target: hotspotSwitchWhenWifiDisabled
+                visible: true
             }
         }
     ]
@@ -117,21 +125,18 @@ ItemPage {
                         // the UI has completed the checkbox animation before we
                         // ask the server to uipdate.
                         onSyncTriggered: {
-                            console.warn('triggered sync', inetwork.wifi.state);
-                            if (inetwork.wifi.state) {
-                                triggerTimer.value = value;
-                                triggerTimer.start();
-                            } else {
-                                PopupUtils.open(enableWifiDialog);
-                            }
+                            console.warn('triggered sync', inetwork.wifi.state, value);
+                            triggerTimer.value = value;
+                            triggerTimer.start();
                         }
                     }
 
-                    Timer {
-                        id: triggerTimer
-                        property bool value
-                        interval: 250; repeat: false
-                        onTriggered: Connectivity.hotspotEnabled = value
+                    // Catch taps if Wi-Fi is disable and prompt user.
+                    MouseArea {
+                        id: hotspotSwitchWhenWifiDisabled
+                        anchors.fill: parent
+                        visible: false
+                        onClicked: PopupUtils.open(enableWifiDialog)
                     }
                 }
             }
@@ -143,7 +148,7 @@ ItemPage {
                     leftMargin: units.gu(2)
                     rightMargin: units.gu(2)
                 }
-                text : hotspotSwitch.stored ?
+                text : Connectivity.hotspotStored ?
                   i18n.tr("When hotspot is on, other devices can use your cellular data connection over Wi-Fi. Normal data charges apply.")
                   : i18n.tr("Other devices can use your cellular data connection over the Wi-Fi network. Normal data charges apply.")
             }
@@ -186,23 +191,26 @@ ItemPage {
                             wifiEnabledCallback
                         );
 
-                        if (inetwork.wifi.state) {
-                            triggerTimer.value = true;
-                            triggerTimer.start();
-                            PopupUtils.close(dialogue);
-                        } else {
-                            console.warn('Failed to enable Wi-Fi.');
-                        }
+                        switchSync.activate()
+                        PopupUtils.close(dialogue);
                     }
 
                     if (!inetwork.wifi.state) {
                         inetwork.wifi.stateChanged.connect(
                             wifiEnabledCallback
                         );
+                        hotspotSwitch.checked = true;
                         inetwork.wifi.activate();
                     }
                 }
             }
         }
+    }
+
+    Timer {
+        id: triggerTimer
+        property bool value
+        interval: 250; repeat: false
+        onTriggered: Connectivity.hotspotEnabled = value
     }
 }
