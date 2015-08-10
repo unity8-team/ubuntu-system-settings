@@ -376,7 +376,7 @@ class HotspotPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
 
     @autopilot.logging.log_action(logger.debug)
     def setup_hotspot(self, config):
-        obj = self.select_single(objectName='hotspotSetupEntry')
+        obj = self.select_single(objectName='hotspotSetupButton')
         self.pointing_device.click_object(obj)
         setup = self.get_root_instance().wait_select_single(
             objectName='hotspotSetup')
