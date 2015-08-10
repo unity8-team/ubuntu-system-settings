@@ -80,6 +80,7 @@ Q_SIGNALS:
     void poweredChanged(bool powered);
     void discoveringChanged(bool isDiscovering);
     void discoverableChanged(bool isDiscoverable);
+    void deviceRemoved(const QString &path);
 
 private:
     QDBusConnection m_dbus;

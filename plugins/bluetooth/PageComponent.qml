@@ -375,6 +375,15 @@ ItemPage {
                   : i18n.tr("None")
         visible: false
 
+        Connections {
+            target: backend
+            onSelectedDeviceChanged: {
+                console.log("selected device changed to " + backend.selectedDevice);
+                if (backend.selectedDevice == null)
+                    pageStack.pop();
+            }
+        }
+
         Flickable {
             anchors.fill: parent
             contentHeight: contentItem.childrenRect.height

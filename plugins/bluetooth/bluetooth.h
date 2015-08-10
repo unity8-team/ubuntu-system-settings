@@ -96,6 +96,9 @@ public:
     bool isDiscovering() const { return m_devices.isDiscovering(); }
     bool isDiscoverable() const { return m_devices.isDiscoverable(); }
 
+private Q_SLOTS:
+    void slotDeviceRemoved(const QString &path);
+
 private:
     QDBusConnection m_dbus;
     DeviceModel m_devices;

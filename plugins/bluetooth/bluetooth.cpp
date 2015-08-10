@@ -63,6 +63,9 @@ Bluetooth::Bluetooth(const QDBusConnection &dbus, QObject *parent):
 
     QObject::connect(&m_devices, SIGNAL(discoverableChanged(bool)),
                      this, SIGNAL(discoverableChanged(bool)));
+
+    QObject::connect(&m_devices, SIGNAL(deviceRemoved(QString)),
+                     this, SLOT(slotDeviceRemoved(QString)));
 }
 
 void Bluetooth::setSelectedDevice(const QString &address)
@@ -226,8 +229,21 @@ void Bluetooth::removeDevice()
     if (m_selectedDevice) {
         QString path = m_selectedDevice->getPath();
         m_devices.removeDevice(path);
+        m_selectedDevice.reset();
     } else {
         qWarning() << "No selected device to remove.";
     }
+}
+
+/***
+****
+***/
+
+void Bluetooth::slotDeviceRemoved(const QString &path)
+{
+    if (m_selectedDevice.isNull() || m_selectedDevice->getPath() != path)
+        return;
+
+    m_selectedDevice.reset();
 }
 

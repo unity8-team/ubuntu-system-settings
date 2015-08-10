@@ -404,6 +404,8 @@ void DeviceModel::slotDeviceRemoved(const QDBusObjectPath &path)
         const int row = findRowFromAddress(device->getAddress());
         if ((row >= 0))
             removeRow(row);
+
+        emit deviceRemoved(path.path());
     }
 }
 
