@@ -22,7 +22,7 @@
  *
  */
 
-import QtQuick 2.0
+import QtQuick 2.4
 import Qt.labs.folderlistmodel 1.0
 import SystemSettings 1.0
 import Ubuntu.Components 1.3

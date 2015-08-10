@@ -18,7 +18,7 @@
  *
 */
 
-import QtQuick 2.0
+import QtQuick 2.4
 
 Image {
     anchors.right: parent.right
