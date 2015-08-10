@@ -171,12 +171,18 @@ Component {
 
             Label {
                 id: passwordLabel
-                text: i18n.tr("Key (must be 8 characters or longer)")
+                text: showAllUI ? i18n.tr("Password (optional)") :
+                                  i18n.tr("Key (must be 8 characters or longer)")
                 fontSize: "medium"
                 font.bold: true
                 color: Theme.palette.selected.backgroundText
                 wrapMode: Text.WordWrap
                 width: parent.width
+            }
+
+            Label {
+                visible: showAllUI
+                text: i18n.tr("If you do not enter a password, the hotspot will be insecure.")
             }
 
             TextField {
@@ -190,7 +196,7 @@ Component {
             }
 
             ListItem.Standard {
-                text: i18n.tr("Show key")
+                text: showAllUI ? i18n.tr("Show password") : i18n.tr("Show key")
                 id: passwordVisible
                 onClicked: passwordVisibleSwitch.trigger()
                 control: Switch {
@@ -249,6 +255,11 @@ Component {
                         visible: running
                         height: parent.height - units.gu(1.5)
                     }
+                }
+
+                Button {
+                    visible: showAllUI
+                    text: i18n.tr("Start")
                 }
             }
         }

@@ -36,7 +36,6 @@ ItemPage {
 
     id: root
     objectName: "hotspotPage"
-
     title: i18n.tr("Hotspot")
 
     // We disable the back action while a hotspot is in the process of either
@@ -212,5 +211,26 @@ ItemPage {
         property bool value
         interval: 250; repeat: false
         onTriggered: Connectivity.hotspotEnabled = value
+    }
+
+    Component {
+        id: enableWifiDialog
+        Dialog {
+            id: dialogue
+            objectName: "enableWifiDialog"
+            title: i18n.tr("Wi-Fi is off")
+            text: i18n.tr("In order to create a hotspot, you need to turn Wi-Fi on.")
+            visible: showAllUI
+
+            Button {
+                text: i18n.tr("Cancel")
+                onClicked: PopupUtils.close(dialogue)
+            }
+
+            Button {
+                objectName: "confirmEnable"
+                text: i18n.tr("Turn on Wi-Fi")
+            }
+        }
     }
 }
