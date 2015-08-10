@@ -66,7 +66,10 @@ class CellularTestCase(CellularBaseTestCase):
         )
 
     def test_connection_type(self):
-        get_pref = lambda: self.modem_0.Get(RDO_IFACE, 'TechnologyPreference')
+
+        def get_pref():
+            return self.modem_0.Get(RDO_IFACE, 'TechnologyPreference')
+
         for pref in ['lte', 'umts', 'gsm']:
             self.cellular_page.set_connection_type(pref)
             self.assertThat(get_pref, Eventually(Equals(pref)))
@@ -124,20 +127,26 @@ class DualSimCellularTestCase(CellularBaseTestCase):
         )
 
     def test_connection_type_on_sim1(self):
+
+        def get_pref():
+            return self.modem_0.Get(RDO_IFACE, 'TechnologyPreference')
+
         sim = '/ril_0'
         stac = self.system_settings.main_view.scroll_to_and_click
         self.cellular_page.select_sim_for_data(sim)
-        get_pref = lambda: self.modem_0.Get(RDO_IFACE, 'TechnologyPreference')
         for pref in ['lte', 'umts', 'gsm']:
             self.cellular_page.set_connection_type(
                 pref, sim=sim, scroll_to_and_click=stac)
             self.assertThat(get_pref, Eventually(Equals(pref)))
 
     def test_connection_type_on_sim2(self):
+
+        def get_pref():
+            return self.modem_1.Get(RDO_IFACE, 'TechnologyPreference')
+
         sim = '/ril_1'
         stac = self.system_settings.main_view.scroll_to_and_click
         self.cellular_page.select_sim_for_data(sim)
-        get_pref = lambda: self.modem_1.Get(RDO_IFACE, 'TechnologyPreference')
         for pref in ['gsm']:
             self.cellular_page.set_connection_type(
                 pref, sim=sim, scroll_to_and_click=stac)

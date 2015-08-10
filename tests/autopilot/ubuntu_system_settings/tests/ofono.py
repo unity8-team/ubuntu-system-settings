@@ -5,16 +5,13 @@
 # Software Foundation; either version 3 of the License, or (at your option) any
 # later version.  See http://www.gnu.org/copyleft/lgpl.html for the full text
 # of the license.
+import dbus
+import dbusmock
 
 __author__ = 'Martin Pitt'
 __email__ = 'martin.pitt@ubuntu.com'
 __copyright__ = '(c) 2013 Canonical Ltd.'
 __license__ = 'LGPL 3+'
-
-
-import dbus
-
-import dbusmock
 
 BUS_NAME = 'org.ofono'
 MAIN_OBJ = '/'

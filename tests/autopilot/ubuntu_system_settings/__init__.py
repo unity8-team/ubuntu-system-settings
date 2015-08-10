@@ -15,22 +15,19 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
+from time import sleep
+from autopilot import introspection
+from autopilot.exceptions import StateNotFoundError
+from ubuntu_system_settings.utils.i18n import ugettext as _
+
 import logging
+import autopilot.logging
+import ubuntuuitoolkit
+import ubuntu_system_settings.utils as utils
 
 # TODO This is a workaround for bug #1327325 that will make phabet-test-run
 # fail if something is printed to stdout.
 logging.basicConfig(filename='warning.log', level=logging.WARNING)
-
-
-from time import sleep
-
-import autopilot.logging
-import ubuntuuitoolkit
-from autopilot import introspection
-from autopilot.exceptions import StateNotFoundError
-from ubuntu_system_settings.utils.i18n import ugettext as _
-import ubuntu_system_settings.utils as utils
-
 logger = logging.getLogger(__name__)
 
 
@@ -122,8 +119,11 @@ class SystemSettingsMainWindow(ubuntuuitoolkit.MainView):
 
     @autopilot.logging.log_action(logger.debug)
     def scroll_to(self, obj):
+
+        def get_page_bottom():
+            return page.globalRect[1] + page.globalRect[3]
+
         page = self.system_settings_page
-        get_page_bottom = lambda: page.globalRect[1] + page.globalRect[3]
         page_right = page.globalRect[0] + page.globalRect[2]
         page_bottom = get_page_bottom()
         page_center_x = int(page_right / 2)
