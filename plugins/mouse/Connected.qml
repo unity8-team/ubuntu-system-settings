@@ -293,46 +293,85 @@ Column {
         }
     }
 
-    ListItem.Standard {
-        id: tapToClick
-        text: i18n.tr("Tap to click")
-        control: CheckBox {
-            property bool serverChecked: touchPad.tapToClick
-            onServerCheckedChanged: checked = serverChecked
-            Component.onCompleted: checked = serverChecked
-            onTriggered: touchPad.tapToClick = checked
-        }
-        showDivider: false
+    ListItem.Header {
+        text: i18n.tr("Primary button:")
     }
 
-    ListItem.Standard {
-        visible: scrollTwoSupported
-        text: i18n.tr("Scroll with two fingers")
-        control: CheckBox {
-            property bool serverChecked: touchPad.twoFingerScroll
-            onServerCheckedChanged: checked = serverChecked
-            Component.onCompleted: checked = serverChecked
-            onTriggered: touchPad.twoFingerScroll = checked
-        }
-        showDivider: false
+    OptionSelector {
+        model: [i18n.tr("Left"),
+                i18n.tr("Right")]
     }
 
-    ListItem.ItemSelector {
+    Column {
         anchors {
             left: parent.left
             right: parent.right
+            leftMargin: units.gu(2)
+            rightMargin: units.gu(2)
+            topMargin: units.gu(2)
+            bottomMargin: units.gu(2)
         }
-        activeFocusOnPress: false
-        //expanded: true
+        spacing: units.gu(1)
+        Row {
+            visible: scrollTwoSupported
+            spacing: units.gu(1)
+            CheckBox {
+                property bool serverChecked: touchPad.tapToClick
+                onServerCheckedChanged: checked = serverChecked
+                Component.onCompleted: checked = serverChecked
+                onTriggered: touchPad.tapToClick = checked
+            }
+            Label {
+                text: i18n.tr("Tap to click")
+            }
+        }
+        Row {
+            visible: scrollTwoSupported
+            spacing: units.gu(1)
+            CheckBox {
+                property bool serverChecked: touchPad.twoFingerScroll
+                onServerCheckedChanged: checked = serverChecked
+                Component.onCompleted: checked = serverChecked
+                onTriggered: touchPad.twoFingerScroll = checked
+            }
+            Label {
+                text: i18n.tr("Scroll with two fingers")
+            }
+        }
+    }
+
+    ListItem.Header {
         text: i18n.tr("Ignore touchpad when:")
-        model: [i18n.tr("Typing"),
-                i18n.tr("A mouse is connected")]
-        multiSelection: true
-        onDelegateClicked: {
-            console.warn("selected: " + ViewItems.selectedIndices);
-            for (var item in model) {
-                console.warn(item);
-             }
+    }
+    Column {
+        anchors {
+            left: parent.left
+            right: parent.right
+            leftMargin: units.gu(2)
+            rightMargin: units.gu(2)
+            topMargin: units.gu(2)
+            bottomMargin: units.gu(2)
+        }
+        spacing: units.gu(1)
+        Row {
+            spacing: units.gu(1)
+            CheckBox {
+                property bool serverChecked: touchPad.disableTouchWhileTyping
+                onServerCheckedChanged: checked = serverChecked
+                Component.onCompleted: checked = serverChecked
+                onTriggered: touchPad.disableTouchWhileTyping = checked
+            }
+            Label { text: i18n.tr("Typing") }
+        }
+        Row {
+            spacing: units.gu(1)
+            CheckBox {
+                property bool serverChecked: touchPad.disableTouchWhileMouseConnected
+                onServerCheckedChanged: checked = serverChecked
+                Component.onCompleted: checked = serverChecked
+                onTriggered: touchPad.disableTouchWhileMouseConnected = checked
+            }
+            Label { text: i18n.tr("A mouse is connected") }
         }
     }
 }

@@ -22,13 +22,19 @@ import QtQuick 2.0
 import SystemSettings 1.0
 import Ubuntu.Components 1.1
 import Ubuntu.Components.ListItems 1.1 as ListItem
+import "Components/UnityInputInfo"
 
 ItemPage {
     id: root
     title: i18n.tr("Mouse & Touchpad")
     objectName: "mousePage"
     flickable: scrollWidget
-    property bool connected: true
+    property bool connected: UnityInputInfo.mice > 0 || UnityInputInfo.touchpads > 0
+
+    Component.onCompleted: {
+        console.warn("MICE: " + UnityInputInfo.mice);
+        console.warn("TOUCHPADS: " + UnityInputInfo.touchpads);
+    }
     
     states: [
         State {
