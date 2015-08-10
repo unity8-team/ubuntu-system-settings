@@ -30,7 +30,7 @@ ItemPage {
     id: hotspot
     objectName: "hotspotPage"
 
-    title: i18n.tr("Wi-Fi hotspot")
+    title: showAllUI ? i18n.tr("Hotspot") : i18n.tr("Wi-Fi hotspot")
 
     // We disable the back action while a hotspot is in the process of either
     // being enabled or disabled.
@@ -109,6 +109,27 @@ ItemPage {
                 setup.setSource(Qt.resolvedUrl("HotspotSetup.qml"));
                 PopupUtils.open(setup.item, hotspot, {
                 });
+            }
+        }
+    }
+
+    Component {
+        id: enableWifiDialog
+        Dialog {
+            id: dialogue
+            objectName: "enableWifiDialog"
+            title: i18n.tr("Wi-Fi is off")
+            text: i18n.tr("In order to create a hotspot, you need to turn Wi-Fi on.")
+            visible: showAllUI
+
+            Button {
+                text: i18n.tr("Cancel")
+                onClicked: PopupUtils.close(dialogue)
+            }
+
+            Button {
+                objectName: "confirmEnable"
+                text: i18n.tr("Turn on Wi-Fi")
             }
         }
     }
