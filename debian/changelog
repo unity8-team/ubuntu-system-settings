@@ -1,3 +1,17 @@
+ubuntu-system-settings (0.3+15.10.20150810-0ubuntu1) wily; urgency=medium
+
+  [ Ken VanDine ]
+  * Set dimTimeout to 0 when activityTimeout is 0 (LP: #1476372)
+
+  [ Sebastien Bacher ]
+  * [bluetooth] turn off discovery if inactive, not only suspended (LP:
+    #1482235)
+
+  [ jonas-drange ]
+  * [python] fix pep8 warnings from new pep8 1.6
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Mon, 10 Aug 2015 13:20:25 +0000
+
 ubuntu-system-settings (0.3+15.10.20150806-0ubuntu1) wily; urgency=medium
 
   [ jonas-drange ]
