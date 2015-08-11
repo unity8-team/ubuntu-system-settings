@@ -205,6 +205,17 @@ Component {
                 }
             }
 
+            ListItem.Caption {
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                    leftMargin: units.gu(1)
+                    rightMargin: units.gu(1)
+                }
+                text: i18n.tr("In order to create a hotspot, you need to turn Wi-Fi on.")
+                visible: !Connectivity.WifiEnabled
+            }
+
             Row {
 
                 anchors {
@@ -231,7 +242,10 @@ Component {
                     enabled: settingsValid()
                     activeFocusOnPress: false
                     onClicked: {
-                        if (hotspotSetupDialog.stored) {
+                        if (!Connectivity.WifiEnabled &&
+                                !hotspotSetupDialog.stored) {
+                            enableWifiAction.trigger();
+                        } else if (hotspotSetupDialog.stored) {
                             changeAction.trigger()
                         } else {
                             enableAction.trigger();
@@ -256,6 +270,22 @@ Component {
                         height: parent.height - units.gu(1.5)
                     }
                 }
+            }
+        }
+
+        Action {
+            id: enableWifiAction
+            onTriggered: {
+                hotspotSetupDialog.state = "STARTING";
+
+                // As soon as Wi-Fi has been turned on, trigger enableAction.
+                function wifiUpdated (updated) {
+                    Connectivity.wifiEnabledUpdated.disconnect(wifiUpdated);
+                    enableAction.trigger();
+                }
+
+                Connectivity.wifiEnabledUpdated.connect(wifiUpdated);
+                Connectivity.setwifiEnabled(true);
             }
         }
 

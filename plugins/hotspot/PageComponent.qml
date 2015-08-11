@@ -49,7 +49,8 @@ ItemPage {
     states: [
         State {
             name: "disabled"
-            when: (!inetwork.wifi.valid &&
+            // Undefined WifiEnabled means Connectivity is unavailable.
+            when: (typeof Connectivity.WifiEnabled === "undefined" &&
                    UpdateManager.deviceName !== "mako")
             PropertyChanges {
                 target: hotspotItem
@@ -62,22 +63,14 @@ ItemPage {
         },
         State {
             name: "nowifi"
-            when: inetwork.wifi.valid && !Connectivity.WifiEnabled
+            when: (typeof Connectivity.WifiEnabled === "boolean" &&
+                   !Connectivity.WifiEnabled)
             PropertyChanges {
                 target: hotspotSwitchWhenWifiDisabled
                 visible: true
             }
         }
     ]
-
-    QDBusActionGroup {
-        id: inetwork
-        busType: 1
-        busName: "com.canonical.indicator.network"
-        objectPath: "/com/canonical/indicator/network"
-        property variant wifi: action("wifi.enable")
-        Component.onCompleted: start()
-    }
 
     Loader {
         id: setup
@@ -172,6 +165,26 @@ ItemPage {
         onTriggered: Connectivity.hotspotEnabled = value
     }
 
+
+    Action {
+        id: enableWifiAction
+        onTriggered: {
+            // As soon as Wi-Fi has been turned on, activate the USC
+            // synchroniser.
+            function wifiUpdated (updated) {
+                Connectivity.wifiEnabledUpdated.disconnect(wifiUpdated);
+                switchSync.activate();
+                PopupUtils.close(dialogue);
+            }
+
+            if (!Connectivity.wifiEnabled) {
+                Connectivity.wifiEnabledUpdated.connect(wifiUpdated);
+                hotspotSwitch.checked = true;
+                Connectivity.setwifiEnabled(true);
+            }
+        }
+    }
+
     Component {
         id: enableWifiDialog
         Dialog {
@@ -189,23 +202,7 @@ ItemPage {
             Button {
                 objectName: "confirmEnable"
                 text: i18n.tr("Turn on Wi-Fi")
-                onClicked: {
-                    // As soon as Wi-Fi has been turned on, activate the USC
-                    // synchroniser.
-                    function wifiUpdated (updated) {
-                        console.warn('wifiUpdated', updated);
-                        Connectivity.wifiEnabledUpdated.disconnect(wifiUpdated);
-
-                        switchSync.activate();
-                        PopupUtils.close(dialogue);
-                    }
-
-                    if (!Connectivity.wifiEnabled) {
-                        Connectivity.wifiEnabledUpdated.connect(wifiUpdated);
-                        hotspotSwitch.checked = true;
-                        Connectivity.setwifiEnabled(true);
-                    }
-                }
+                onClicked: enableWifiAction.trigger();
             }
         }
     }
