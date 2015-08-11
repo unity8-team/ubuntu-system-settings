@@ -17,13 +17,13 @@
  * You should have received a copy of the GNU General Public License along
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
+ 
+import GSettings 1.0
 import QtQuick 2.0
 import SystemSettings 1.0
 import Ubuntu.Components 1.2
 import Ubuntu.Components.ListItems 1.2 as ListItem
 import Ubuntu.Settings.Menus 0.1 as Menus
-import Ubuntu.SystemSettings.Mouse 1.0
 import Ubuntu.Settings.Components 0.1 as USC
 
 Column {
@@ -33,9 +33,11 @@ Column {
     property bool scrollTwoSupported: true
     property int numberOfButtons: 3
     
-    Mouse { id: mouse }
-    TouchPad { id: touchPad }
-
+    GSettings {
+        id: settings
+        schema.id: "com.ubuntu.touch.system-settings"
+    }
+    
     ListItem.Header {
         text: i18n.tr("Mouse")
     }
@@ -57,9 +59,9 @@ Column {
         function formatValue(v) { return v.toFixed(2) }
         minimumValue: 0.0
         maximumValue: 1.0
-        value: mouse.cursorSpeed
+        value: settings.mouseCursorSpeed
         live: true
-        property real serverValue: enabled ? mouse.cursorSpeed : 0.0
+        property real serverValue: enabled ? settings.mouseCursorSpeed : 0.0
         USC.ServerPropertySynchroniser {
             userTarget: mouseMoveSpeed
             userProperty: "value"
@@ -67,7 +69,7 @@ Column {
             serverProperty: "serverValue"
             maximumWaitBufferInterval: 16
             
-            onSyncTriggered: mouse.cursorSpeed = value
+            onSyncTriggered: settings.mouseCursorSpeed = value
         }
     }
 
@@ -88,9 +90,9 @@ Column {
         function formatValue(v) { return v.toFixed(2) }
         minimumValue: 0.0
         maximumValue: 1.0
-        value: mouse.scrollSpeed
+        value: settings.mouseScrollSpeed
         live: true
-        property real serverValue: enabled ? mouse.scrollSpeed : 0.0
+        property real serverValue: enabled ? settings.mouseScrollSpeed : 0.0
         USC.ServerPropertySynchroniser {
             userTarget: mouseScrollSpeed
             userProperty: "value"
@@ -98,7 +100,7 @@ Column {
             serverProperty: "serverValue"
             maximumWaitBufferInterval: 16
             
-            onSyncTriggered: mouse.scrollSpeed = value
+            onSyncTriggered: settings.mouseScrollSpeed = value
         }
     }
     SettingsItemTitle {
@@ -113,22 +115,22 @@ Column {
             leftMargin: units.gu(2)
             rightMargin: units.gu(2)
         }
-        id: mouseClickSpeed
-        objectName: "mouseClickSpeed"
+        id: mouseDoubleClickSpeed
+        objectName: "mouseDoubleClickSpeed"
         function formatValue(v) { return v.toFixed(2) }
         minimumValue: 100
         maximumValue: 1000
-        value: mouse.clickSpeed
+        value: settings.mouseDoubleClickSpeed
         live: true
-        property real serverValue: enabled ? mouse.clickSpeed : 0.0
+        property real serverValue: enabled ? settings.mouseDoubleClickSpeed : 0.0
         USC.ServerPropertySynchroniser {
-            userTarget: mouseClickSpeed
+            userTarget: mouseDoubleClickSpeed
             userProperty: "value"
-            serverTarget: mouseClickSpeed
+            serverTarget: mouseDoubleClickSpeed
             serverProperty: "serverValue"
             maximumWaitBufferInterval: 16
             
-            onSyncTriggered: mouse.clickSpeed = value
+            onSyncTriggered: settings.mouseDoubleClickSpeed = value
         }
     }
 
@@ -145,7 +147,7 @@ Column {
             rightMargin: units.gu(2)
         }
         height: units.gu(5)
-        doubleTapSpeed: mouse.clickSpeed
+        doubleTapSpeed: settings.mouseDoubleClickSpeed
     }
 
     ListItem.ItemSelector {
@@ -185,9 +187,9 @@ Column {
         function formatValue(v) { return v.toFixed(2) }
         minimumValue: 0.0
         maximumValue: 1.0
-        value: touchPad.cursorSpeed
+        value: settings.touchpadCursorSpeed
         live: true
-        property real serverValue: enabled ? touchPad.cursorSpeed : 0.0
+        property real serverValue: enabled ? settings.touchpadCursorSpeed : 0.0
         USC.ServerPropertySynchroniser {
             userTarget: touchMoveSpeed
             userProperty: "value"
@@ -195,7 +197,7 @@ Column {
             serverProperty: "serverValue"
             maximumWaitBufferInterval: 16
             
-            onSyncTriggered: touchPad.cursorSpeed = value
+            onSyncTriggered: settings.touchpadCursorSpeed = value
         }
     }
 
@@ -216,9 +218,9 @@ Column {
         function formatValue(v) { return v.toFixed(2) }
         minimumValue: 0.0
         maximumValue: 1.0
-        value: touchPad.scrollSpeed
+        value: settings.touchpadScrollSpeed
         live: true
-        property real serverValue: enabled ? touchPad.scrollSpeed : 0.0
+        property real serverValue: enabled ? settings.touchpadScrollSpeed : 0.0
         USC.ServerPropertySynchroniser {
             userTarget: touchScrollSpeed
             userProperty: "value"
@@ -226,7 +228,7 @@ Column {
             serverProperty: "serverValue"
             maximumWaitBufferInterval: 16
             
-            onSyncTriggered: touchPad.scrollSpeed = value
+            onSyncTriggered: settings.touchpadScrollSpeed = value
         }
     }
 
@@ -247,9 +249,9 @@ Column {
         function formatValue(v) { return v.toFixed(2) }
         minimumValue: 100
         maximumValue: 1000
-        value: touchPad.clickSpeed
+        value: settings.touchpadDoubleClickSpeed
         live: true
-        property real serverValue: enabled ? touchPad.clickSpeed : 0.0
+        property real serverValue: enabled ? settings.touchpadDoubleClickSpeed : 0.0
         USC.ServerPropertySynchroniser {
             userTarget: touchClickSpeed
             userProperty: "value"
@@ -257,7 +259,7 @@ Column {
             serverProperty: "serverValue"
             maximumWaitBufferInterval: 16
             
-            onSyncTriggered: touchPad.clickSpeed = value
+            onSyncTriggered: settings.touchpadDoubleClickSpeed = value
         }
     }
 
@@ -274,7 +276,7 @@ Column {
             rightMargin: units.gu(2)
         }
         height: units.gu(5)
-        doubleTapSpeed: touchPad.clickSpeed
+        doubleTapSpeed: settings.touchpadDoubleClickSpeed
     }
 
     ListItem.ItemSelector {
@@ -316,10 +318,10 @@ Column {
             visible: scrollTwoSupported
             spacing: units.gu(1)
             CheckBox {
-                property bool serverChecked: touchPad.tapToClick
+                property bool serverChecked: settings.touchpadTapToClick
                 onServerCheckedChanged: checked = serverChecked
                 Component.onCompleted: checked = serverChecked
-                onTriggered: touchPad.tapToClick = checked
+                onTriggered: settings.touchpadTapToClick = checked
             }
             Label {
                 text: i18n.tr("Tap to click")
@@ -329,10 +331,10 @@ Column {
             visible: scrollTwoSupported
             spacing: units.gu(1)
             CheckBox {
-                property bool serverChecked: touchPad.twoFingerScroll
+                property bool serverChecked: settings.touchpadTwoFingerScroll
                 onServerCheckedChanged: checked = serverChecked
                 Component.onCompleted: checked = serverChecked
-                onTriggered: touchPad.twoFingerScroll = checked
+                onTriggered: settings.touchpadTwoFingerScroll = checked
             }
             Label {
                 text: i18n.tr("Scroll with two fingers")
@@ -356,20 +358,20 @@ Column {
         Row {
             spacing: units.gu(1)
             CheckBox {
-                property bool serverChecked: touchPad.disableTouchWhileTyping
+                property bool serverChecked: settings.touchpadDisableWhileTyping
                 onServerCheckedChanged: checked = serverChecked
                 Component.onCompleted: checked = serverChecked
-                onTriggered: touchPad.disableTouchWhileTyping = checked
+                onTriggered: settings.touchpadDisableWhileTyping = checked
             }
             Label { text: i18n.tr("Typing") }
         }
         Row {
             spacing: units.gu(1)
             CheckBox {
-                property bool serverChecked: touchPad.disableTouchWhileMouseConnected
+                property bool serverChecked: settings.touchpadDisableWithMouse
                 onServerCheckedChanged: checked = serverChecked
                 Component.onCompleted: checked = serverChecked
-                onTriggered: touchPad.disableTouchWhileMouseConnected = checked
+                onTriggered: settings.touchpadDisableWithMouse = checked
             }
             Label { text: i18n.tr("A mouse is connected") }
         }
