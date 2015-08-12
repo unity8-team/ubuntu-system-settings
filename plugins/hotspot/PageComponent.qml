@@ -87,7 +87,6 @@ ItemPage {
             Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
 
         Column {
-
             anchors {
                 left: parent.left
                 right: parent.right
@@ -182,6 +181,7 @@ ItemPage {
                 Connectivity.wifiEnabledUpdated.connect(wifiUpdated);
                 hotspotSwitch.checked = true;
                 Connectivity.setwifiEnabled(true);
+            }
         }
     }
 

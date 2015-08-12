@@ -4,11 +4,8 @@ set(QML_SOURCES
     PageComponent.qml
 )
 
-#add_library(UbuntuHotspotPanel STATIC ${QML_SOURCES})
-#qt5_use_modules(UbuntuHotspotPanel Quick Qml)
-
 set(PLUG_DIR ${PLUGIN_PRIVATE_MODULE_DIR}/Ubuntu/SystemSettings/Hotspot)
-#install(TARGETS UbuntuHotspotPanel DESTINATION ${PLUG_DIR})
+
 install(FILES qmldir DESTINATION ${PLUG_DIR})
 install(FILES hotspot.settings DESTINATION ${PLUGIN_MANIFEST_DIR})
 install(FILES settings-hotspot.svg DESTINATION ${PLUGIN_MANIFEST_DIR}/icons)
