@@ -125,7 +125,9 @@ ItemPage {
                         id: hotspotSwitchWhenWifiDisabled
                         anchors.fill: parent
                         visible: false
-                        onClicked: PopupUtils.open(enableWifiDialog)
+                        onClicked: enableWifiAction.diag = PopupUtils.open(
+                            enableWifiDialog
+                        );
                     }
                 }
             }
@@ -168,13 +170,14 @@ ItemPage {
 
     Action {
         id: enableWifiAction
+        property var diag
         onTriggered: {
             // As soon as Wi-Fi has been turned on, activate the USC
             // synchroniser.
             function wifiUpdated (updated) {
                 Connectivity.wifiEnabledUpdated.disconnect(wifiUpdated);
                 switchSync.activate();
-                PopupUtils.close(dialogue);
+                PopupUtils.close(diag);
             }
 
             if (!Connectivity.wifiEnabled) {
@@ -188,7 +191,7 @@ ItemPage {
     Component {
         id: enableWifiDialog
         Dialog {
-            id: dialogue
+            id: dialog
             objectName: "enableWifiDialog"
             title: i18n.tr("Wi-Fi is off")
             text: i18n.tr("In order to create a hotspot, you need to turn Wi-Fi on.")
@@ -196,13 +199,13 @@ ItemPage {
 
             Button {
                 text: i18n.tr("Cancel")
-                onClicked: PopupUtils.close(dialogue)
+                onClicked: PopupUtils.close(dialog)
             }
 
             Button {
                 objectName: "confirmEnable"
                 text: i18n.tr("Turn on Wi-Fi")
-                onClicked: enableWifiAction.trigger();
+                onClicked: enableWifiAction.trigger()
             }
         }
     }

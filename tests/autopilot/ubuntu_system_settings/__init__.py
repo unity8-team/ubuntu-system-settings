@@ -362,7 +362,7 @@ class HotspotPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
         # instantly setting checked to False, prompting the user to turn on
         # Wi-Fi instead.
         try:
-            self._switch.check()
+            self._switch.check(timeout=2)
         except AssertionError:
             pass
 
@@ -374,7 +374,7 @@ class HotspotPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
 
         if prompt:
             prompt.confirm_enable()
-            prompt.wait_until_destroyed()
+            prompt.wait_until_destroyed(timeout=5)
 
     @autopilot.logging.log_action(logger.debug)
     def disable_hotspot(self):
