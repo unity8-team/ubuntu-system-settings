@@ -79,6 +79,7 @@ ItemPage {
 
     Flickable {
         id: flick
+
         anchors.fill: parent
         contentWidth: parent.width
         contentHeight: contentItem.childrenRect.height
@@ -94,8 +95,6 @@ ItemPage {
             spacing: units.gu(2)
 
             ListItem.Standard {
-                id: hotspotItem
-                objectName: "hotspotItem"
                 text: i18n.tr("Hotspot")
                 enabled: Connectivity.hotspotStored
                 control: Switch {
@@ -129,6 +128,13 @@ ItemPage {
                             enableWifiDialog
                         );
                     }
+
+                    Timer {
+                        id: triggerTimer
+                        property bool value
+                        interval: 250; repeat: false
+                        onTriggered: Connectivity.hotspotEnabled = value
+                    }
                 }
             }
 
@@ -160,14 +166,6 @@ ItemPage {
         }
     }
 
-    Timer {
-        id: triggerTimer
-        property bool value
-        interval: 250; repeat: false
-        onTriggered: Connectivity.hotspotEnabled = value
-    }
-
-
     Action {
         id: enableWifiAction
         property var diag
@@ -184,7 +182,6 @@ ItemPage {
                 Connectivity.wifiEnabledUpdated.connect(wifiUpdated);
                 hotspotSwitch.checked = true;
                 Connectivity.setwifiEnabled(true);
-            }
         }
     }
 
@@ -195,7 +192,6 @@ ItemPage {
             objectName: "enableWifiDialog"
             title: i18n.tr("Wi-Fi is off")
             text: i18n.tr("In order to create a hotspot, you need to turn Wi-Fi on.")
-            visible: showAllUI
 
             Button {
                 text: i18n.tr("Cancel")

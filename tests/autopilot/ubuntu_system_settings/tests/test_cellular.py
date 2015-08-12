@@ -16,6 +16,7 @@ from ubuntu_system_settings.tests import (
     CellularBaseTestCase, CONNMAN_IFACE, RDO_IFACE,
     NETREG_IFACE)
 
+
 DEV_IFACE = 'org.freedesktop.NetworkManager.Device'
 
 
