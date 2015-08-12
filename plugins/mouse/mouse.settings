@@ -1,5 +1,5 @@
 {
-    "icon": "orientation-lock",
+    "icon": "input-mouse-symbolic",
     "name": "Mouse & Touchpad",
     "translations": "ubuntu-system-settings",
     "category": "system",
@@ -12,7 +12,8 @@
         "touchpad",
         "tap",
         "touch",
-        "click"
+        "click",
+        "input"
     ],
     "has-dynamic-keywords": false,
     "has-dynamic-visibility": false,
