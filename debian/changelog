@@ -1,3 +1,11 @@
+ubuntu-system-settings (0.3+15.10.20150812-0ubuntu1) wily; urgency=medium
+
+  [ jonas-drange ]
+  * [cellular] add hotspot support by use of the Connectivity API (LP:
+    #1477300, #1421583)
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Wed, 12 Aug 2015 12:20:19 +0000
+
 ubuntu-system-settings (0.3+15.10.20150810-0ubuntu1) wily; urgency=medium
 
   [ Ken VanDine ]
