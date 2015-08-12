@@ -13,7 +13,15 @@ from autopilot.matchers import Eventually
 from testtools.matchers import Equals, raises, StartsWith
 
 from ubuntu_system_settings.tests import (
-    CellularBaseTestCase, CONNMAN_IFACE, RDO_IFACE, NETREG_IFACE)
+    CellularBaseTestCase, HotspotBaseTestCase, CONNMAN_IFACE, RDO_IFACE,
+    NETREG_IFACE)
+
+
+from ubuntu_system_settings.tests.connectivity import (
+    PRIV_IFACE as CTV_PRIV_IFACE, NETS_IFACE as CTV_NETS_IFACE
+)
+
+DEV_IFACE = 'org.freedesktop.NetworkManager.Device'
 
 
 class CellularTestCase(CellularBaseTestCase):
@@ -297,6 +305,106 @@ class DualSimCellularTestCase(CellularBaseTestCase):
             lambda:
                 gsettings.get_value('default-sim-for-messages').get_string(),
             Eventually(Equals('/ril_1')))
+
+
+class HotspotNonExistantTestCase(HotspotBaseTestCase):
+
+    connectivity_parameters = {
+        'HotspotEnabled': False,
+        'HotspotStored': False
+    }
+
+    def test_setup(self):
+        ssid = 'bar'
+        password = 'zomgzomg'
+        config = {'ssid': ssid, 'password': password}
+
+        hotspot_page = self.cellular_page.setup_hotspot(config)
+
+        # Assert that the switch is on.
+        self.assertTrue(hotspot_page.get_hotspot_status())
+
+        self.assertThat(
+            lambda: self.ctv_nets.Get(CTV_NETS_IFACE, 'HotspotEnabled'),
+            Eventually(Equals(True))
+        )
+
+        self.assertThat(
+            lambda: bytearray(
+                self.ctv_nets.Get(CTV_NETS_IFACE, 'HotspotSsid')
+            ).decode('UTF-8'),
+            Eventually(Equals(ssid))
+        )
+
+        self.assertThat(
+            lambda: self.ctv_private.Get(CTV_PRIV_IFACE, 'HotspotPassword'),
+            Eventually(Equals(password))
+        )
+
+        self.assertThat(
+            lambda: self.ctv_nets.Get(CTV_NETS_IFACE, 'HotspotStored'),
+            Eventually(Equals(True))
+        )
+
+
+class HotspotExistsTestCase(HotspotBaseTestCase):
+
+    connectivity_parameters = {
+        'HotspotStored': True
+    }
+
+    def test_enabling(self):
+        self.assertThat(
+            lambda: self.ctv_nets.Get(CTV_NETS_IFACE, 'HotspotEnabled'),
+            Eventually(Equals(False))
+        )
+
+        self.cellular_page.enable_hotspot()
+
+        self.assertThat(
+            lambda: self.ctv_nets.Get(CTV_NETS_IFACE, 'HotspotEnabled'),
+            Eventually(Equals(True))
+        )
+
+    def test_changing(self):
+        ssid = 'bar'
+        password = 'zomgzomg'
+        config = {'ssid': ssid, 'password': password}
+        self.cellular_page.setup_hotspot(config)
+
+        self.assertThat(
+            lambda: bytearray(
+                self.ctv_nets.Get(CTV_NETS_IFACE, 'HotspotSsid')
+            ).decode('UTF-8'),
+            Eventually(Equals(ssid))
+        )
+
+        self.assertThat(
+            lambda: self.ctv_private.Get(CTV_PRIV_IFACE, 'HotspotPassword'),
+            Eventually(Equals(password))
+        )
+
+
+class HotspotEnabledTestCase(HotspotBaseTestCase):
+
+    connectivity_parameters = {
+        'HotspotStored': True,
+        'HotspotEnabled': True
+    }
+
+    def test_disabling(self):
+
+        self.assertThat(
+            lambda: self.ctv_nets.Get(CTV_NETS_IFACE, 'HotspotEnabled'),
+            Eventually(Equals(True))
+        )
+
+        self.cellular_page.disable_hotspot()
+
+        self.assertThat(
+            lambda: self.ctv_nets.Get(CTV_NETS_IFACE, 'HotspotEnabled'),
+            Eventually(Equals(False))
+        )
 
 
 class ApnTestCase(CellularBaseTestCase):

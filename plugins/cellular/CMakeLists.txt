@@ -7,6 +7,7 @@ set(QML_SOURCES
     apn_manager.js
     apn_editor.js
     carriers.js
+    Common.qml
     PageApnEditor.qml
     PageChooseApn.qml
     PageChooseCarrier.qml
@@ -22,8 +23,6 @@ set(QML_SOURCES
 add_library(UbuntuCellularPanel MODULE
   plugin.cpp
   plugin.h
-  hotspotmanager.cpp
-  hotspotmanager.h
   connectivity.cpp
   connectivity.h
   nm_manager_proxy.h
