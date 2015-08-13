@@ -47,13 +47,12 @@ TestItem::TestItem(const QVariantMap &staticData, QObject *parent):
     ItemBase(staticData, parent),
     m_pageComponent(0)
 {
-    if (staticData["name"].toString() == "Wireless") {
+    QString name = staticData["name"].toString();
+    if (name == "Wireless") {
         QStringList keywords;
         keywords << "one" << "two" << "three";
         setKeywords(keywords);
-    }
-
-    if (staticData["name"].toString() == "Brightness") {
+    } else if (name == "Brightness") {
         setName("Brightness & Display");
     }
 }
