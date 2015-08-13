@@ -129,10 +129,10 @@ bool PluginPrivate::ensureLoaded() const
 
     QObject::connect(m_item, SIGNAL(iconChanged()),
                      q, SIGNAL(iconChanged()));
-    QObject::connect(m_item, SIGNAL(nameChanged()),
-                     q, SIGNAL(nameChanged()));
     QObject::connect(m_item, SIGNAL(keywordsChanged()),
                      q, SIGNAL(keywordsChanged()));
+    QObject::connect(m_item, SIGNAL(nameChanged()),
+                     q, SIGNAL(displayNameChanged()));
     QObject::connect(m_item, SIGNAL(visibilityChanged()),
                      q, SIGNAL(visibilityChanged()));
     return true;
@@ -167,7 +167,12 @@ Plugin::~Plugin()
 QString Plugin::displayName() const
 {
     Q_D(const Plugin);
-    return d->m_data.value(keyName).toString();
+    QString ret = d->m_data.value(keyName).toString();
+    if (d->m_data.value(keyHasDynamicName).toBool()) {
+        if (!d->ensureLoaded()) return ret;
+        ret = d->m_item->name();
+    }
+    return ret;
 }
 
 QString Plugin::baseName() const

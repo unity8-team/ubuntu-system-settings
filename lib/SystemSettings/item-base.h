@@ -37,8 +37,8 @@ extern const QLatin1String keyKeywords;
 extern const QLatin1String keyPlugin;
 extern const QLatin1String keyEntryComponent;
 extern const QLatin1String keyPageComponent;
-extern const QLatin1String keyHasDynamicName;
 extern const QLatin1String keyHasDynamicKeywords;
+extern const QLatin1String keyHasDynamicName;
 extern const QLatin1String keyHasDynamicVisibility;
 extern const QLatin1String keyHideByDefault;
 extern const QLatin1String keyVisibleIfFileExists;
@@ -53,8 +53,8 @@ public:
     ~ItemBase();
 
     QUrl icon() const;
-    QString name() const;
     QStringList keywords() const;
+    QString name() const;
     bool isVisible() const;
     virtual QQmlComponent *entryComponent(QQmlEngine *engine,
                                           QObject *parent = 0);
@@ -63,15 +63,15 @@ public:
 
 protected:
     void setIcon(const QUrl &icon);
-    void setName(const QString &name);
     void setKeywords(const QStringList &keywords);
+    void setName(const QString &name);
     void setVisible(bool visible);
     const QVariantMap &staticData() const;
 
 Q_SIGNALS:
     void iconChanged();
-    void nameChanged();
     void keywordsChanged();
+    void nameChanged();
     void visibilityChanged();
 
 private:

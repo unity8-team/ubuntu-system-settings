@@ -38,6 +38,7 @@ public:
                                           QObject *parent = 0);
     virtual QQmlComponent *pageComponent(QQmlEngine *engine,
                                          QObject *parent = 0);
+    QString name() const;
 private:
     QQmlComponent *m_pageComponent;
 };
@@ -46,9 +47,15 @@ TestItem::TestItem(const QVariantMap &staticData, QObject *parent):
     ItemBase(staticData, parent),
     m_pageComponent(0)
 {
-    QStringList keywords;
-    keywords << "one" << "two" << "three";
-    setKeywords(keywords);
+    if (staticData["name"].toString() == "Wireless") {
+        QStringList keywords;
+        keywords << "one" << "two" << "three";
+        setKeywords(keywords);
+    }
+
+    if (staticData["name"].toString() == "Brightness") {
+        setName("Brightness & Display");
+    }
 }
 
 TestItem::~TestItem()

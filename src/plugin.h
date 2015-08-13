@@ -66,8 +66,8 @@ public:
     QQmlComponent *pageComponent();
 
 Q_SIGNALS:
-    void iconChanged();
     void displayNameChanged();
+    void iconChanged();
     void keywordsChanged();
     void visibilityChanged();
 
