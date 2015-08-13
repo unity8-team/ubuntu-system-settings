@@ -34,7 +34,8 @@ from fixtures import EnvironmentVariable
 from gi.repository import UPowerGlib
 from testtools.matchers import Equals, NotEquals, GreaterThan
 from ubuntu_system_settings.tests.connectivity import (
-    NETS_OBJ as CTV_NETS_OBJ, MAIN_IFACE as CTV_IFACE
+    PRIV_OBJ as CTV_PRIV_OBJ, NETS_OBJ as CTV_NETS_OBJ,
+    MAIN_IFACE as CTV_IFACE
 )
 from ubuntuuitoolkit._custom_proxy_objects._common import (
     is_process_running, _start_process, _stop_process)
@@ -392,6 +393,51 @@ class CellularBaseTestCase(UbuntuSystemSettingsOfonoTestCase):
 
         for key, value in kwargs.items():
             context.SetProperty(key, value)
+
+
+class HotspotBaseTestCase(CellularBaseTestCase):
+
+    connectivity_parameters = {}
+    indicatornetwork_parameters = {}
+
+    @classmethod
+    def setUpClass(cls):
+        cls.session_con = cls.get_dbus(False)
+        super(HotspotBaseTestCase, cls).setUpClass()
+
+    def setUp(self):
+        if is_process_running(INDICATOR_NETWORK):
+            _stop_process(INDICATOR_NETWORK)
+            self.addCleanup(_start_process, INDICATOR_NETWORK)
+
+        ctv_tmpl = os.path.join(os.path.dirname(__file__), 'connectivity.py')
+        (self.ctv_mock, self.obj_ctv) = self.spawn_server_template(
+            ctv_tmpl, parameters=self.connectivity_parameters,
+            stdout=subprocess.PIPE)
+
+        self.ctv_private = dbus.Interface(
+            self.session_con.get_object(CTV_IFACE, CTV_PRIV_OBJ),
+            'org.freedesktop.DBus.Properties')
+
+        self.ctv_nets = dbus.Interface(
+            self.session_con.get_object(CTV_IFACE, CTV_NETS_OBJ),
+            'org.freedesktop.DBus.Properties')
+
+        inetwork = os.path.join(
+            os.path.dirname(__file__), 'indicatornetwork.py'
+        )
+        (self.inetwork_mock, self.obj_inetwork) = self.spawn_server_template(
+            inetwork, parameters=self.indicatornetwork_parameters,
+            stdout=subprocess.PIPE)
+
+        super(HotspotBaseTestCase, self).setUp()
+
+    def tearDown(self):
+        self.ctv_mock.terminate()
+        self.ctv_mock.wait()
+        self.inetwork_mock.terminate()
+        self.inetwork_mock.wait()
+        super(HotspotBaseTestCase, self).tearDown()
 
 
 class BluetoothBaseTestCase(UbuntuSystemSettingsTestCase):
@@ -808,39 +854,6 @@ class ResetBaseTestCase(UbuntuSystemSettingsTestCase,
         self.mock_server.terminate()
         self.mock_server.wait()
         super(ResetBaseTestCase, self).tearDown()
-
-
-class ConnectivityMixin(dbusmock.DBusTestCase):
-    @classmethod
-    def setUpClass(cls):
-        cls.start_session_bus()
-        cls.connectivity_dbus = cls.get_dbus()
-        super(ConnectivityMixin, cls).setUpClass()
-
-    def setUp(self):
-        self.connectivity_server = self.spawn_server(CON_SERVICE,
-                                                     CON_PATH,
-                                                     CON_IFACE,
-                                                     system_bus=False,
-                                                     stdout=subprocess.PIPE)
-
-        self.wait_for_bus_object(CON_SERVICE,
-                                 CON_PATH,
-                                 system_bus=False)
-
-        self.connectivity_mock = dbus.Interface(
-            self.connectivity_dbus.get_object(CON_SERVICE,
-                                              CON_PATH),
-            dbusmock.MOCK_IFACE)
-
-        self.connectivity_mock.AddMethod('', 'UnlockModem', 's', '', '')
-
-        super(ConnectivityMixin, self).setUp()
-
-    def tearDown(self):
-        self.connectivity_server.terminate()
-        self.connectivity_server.wait()
-        super(ConnectivityMixin, self).tearDown()
 
 
 class SecurityBaseTestCase(UbuntuSystemSettingsOfonoTestCase):

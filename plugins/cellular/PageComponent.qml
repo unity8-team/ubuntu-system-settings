@@ -121,7 +121,7 @@ ItemPage {
 
         Behavior on opacity {
             PropertyAnimation {
-               duration: UbuntuAnimation.SleepyDuration
+               duration: UbuntuAnimation.SlowDuration
             }
         }
     }
@@ -143,7 +143,7 @@ ItemPage {
 
         Behavior on opacity {
             PropertyAnimation {
-                duration: UbuntuAnimation.SleepyDuration
+                duration: UbuntuAnimation.SlowDuration
             }
         }
 

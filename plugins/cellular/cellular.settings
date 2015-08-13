@@ -20,7 +20,9 @@
         "lte",
         "apn",
         "roam",
-        "sim"
+        "sim",
+        "hotspot",
+        "tethering"
     ],
     "has-dynamic-keywords": false,
     "has-dynamic-visibility": false,

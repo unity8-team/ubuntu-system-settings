@@ -338,7 +338,8 @@ ItemPage {
             }
 
             ListItem.Standard {
-                text: i18n.tr("Wi-Fi")
+                // TRANSLATORS: “Wi-Fi used for hotspot” is hidden.
+                text: showAllUI ? i18n.tr("Wi-Fi used for hotspot") : i18n.tr("Wi-Fi")
                 control: Loader {
                     active: networkActionGroup.enabled.state != null
                     sourceComponent: Switch {
