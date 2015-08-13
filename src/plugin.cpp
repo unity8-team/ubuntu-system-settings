@@ -129,6 +129,8 @@ bool PluginPrivate::ensureLoaded() const
 
     QObject::connect(m_item, SIGNAL(iconChanged()),
                      q, SIGNAL(iconChanged()));
+    QObject::connect(m_item, SIGNAL(nameChanged()),
+                     q, SIGNAL(nameChanged()));
     QObject::connect(m_item, SIGNAL(keywordsChanged()),
                      q, SIGNAL(keywordsChanged()));
     QObject::connect(m_item, SIGNAL(visibilityChanged()),

@@ -36,7 +36,7 @@ class Plugin: public QObject
     Q_OBJECT
     Q_PROPERTY(QQmlComponent *entryComponent READ entryComponent CONSTANT)
     Q_PROPERTY(QQmlComponent *pageComponent READ pageComponent CONSTANT)
-    Q_PROPERTY(QString displayName READ displayName CONSTANT)
+    Q_PROPERTY(QString displayName READ displayName NOTIFY displayNameChanged)
     Q_PROPERTY(QString baseName READ baseName CONSTANT)
     Q_PROPERTY(QUrl icon READ icon NOTIFY iconChanged)
     Q_PROPERTY(QString category READ category CONSTANT)
@@ -67,6 +67,7 @@ public:
 
 Q_SIGNALS:
     void iconChanged();
+    void displayNameChanged();
     void keywordsChanged();
     void visibilityChanged();
 

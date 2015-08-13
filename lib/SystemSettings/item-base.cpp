@@ -52,6 +52,7 @@ class ItemBasePrivate
 private:
     QVariantMap m_data;
     QUrl m_icon;
+    QString m_name;
     QStringList m_keywords;
     bool m_isVisible;
 };
@@ -87,6 +88,20 @@ QUrl ItemBase::icon() const
 {
     Q_D(const ItemBase);
     return d->m_icon;
+}
+
+void ItemBase::setName(const QString &name)
+{
+    Q_D(ItemBase);
+    if (name == d->m_name) return;
+    d->m_name = name;
+    Q_EMIT nameChanged();
+}
+
+QString ItemBase::name() const
+{
+    Q_D(const ItemBase);
+    return d->m_name;
 }
 
 void ItemBase::setKeywords(const QStringList &keywords)
