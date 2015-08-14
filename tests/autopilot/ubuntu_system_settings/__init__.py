@@ -1530,6 +1530,7 @@ class WifiPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
         dialog = self._click_connect_to_hidden_network()
         dialog._scroll_to_and_click = self._scroll_to_and_click
         dialog.enter_name(name)
+        utils.dismiss_osk()
 
         if security:
             dialog.set_security(security)
@@ -1539,8 +1540,10 @@ class WifiPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
             dialog.set_protocol(protocol)
         if username:
             dialog.enter_username(username)
+            utils.dismiss_osk()
         if password:
             dialog.enter_password(password)
+            utils.dismiss_osk()
         if cancel:
             utils.dismiss_osk()
             dialog.cancel()
