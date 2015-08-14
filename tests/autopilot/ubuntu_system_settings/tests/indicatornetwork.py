@@ -26,16 +26,7 @@ _parameters = {}
 
 
 def activate(self, action_name, parameters, platform_data):
-
-    if action_name == 'wifi.enable':
-        enabled, sig, states = self.actions[action_name]
-        state = dbus.Boolean(not states[0], variant_level=1)
-        new_struct = (enabled, sig, [state])
-        self.actions[action_name] = new_struct
-        self.Changes(dbus.Array([], signature='s'),
-                     dbus.Dictionary({}, signature='sb'),
-                     dbus.Dictionary({action_name: state}, signature='sv'),
-                     dbus.Dictionary({}, signature='s(bgav)'))
+    pass
 
 
 def describe(self, action_name):
