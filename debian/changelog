@@ -1,3 +1,10 @@
+ubuntu-system-settings (0.3+15.10.20150814-0ubuntu1) wily; urgency=medium
+
+  [ Ken VanDine ]
+  * dismiss_osk after entering text
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Fri, 14 Aug 2015 19:59:01 +0000
+
 ubuntu-system-settings (0.3+15.10.20150812-0ubuntu1) wily; urgency=medium
 
   [ jonas-drange ]
