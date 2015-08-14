@@ -38,14 +38,6 @@ ItemPage {
     objectName: "hotspotPage"
     title: i18n.tr("Hotspot")
 
-    // We disable the back action while a hotspot is in the process of either
-    // being enabled or disabled.
-    head.backAction: Action {
-        iconName: "back"
-        enabled: !Connectivity.unstoppableOperationHappening
-        onTriggered: pageStack.pop()
-    }
-
     states: [
         State {
             name: "disabled"
