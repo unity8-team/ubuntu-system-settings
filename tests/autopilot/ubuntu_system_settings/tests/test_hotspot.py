@@ -15,12 +15,13 @@ from ubuntu_system_settings.tests.connectivity import (
 )
 
 
-class HotspotNonExistantTestCase(HotspotBaseTestCase):
+class HotspotSetupTestCase(HotspotBaseTestCase):
 
     connectivity_parameters = {
         'HotspotEnabled': False,
         'HotspotStored': False,
-        'WifiEnabled': True
+        'WifiEnabled': True,
+        'HotspotSwitchEnabled': True
     }
 
     def test_setup(self):
@@ -60,7 +61,8 @@ class HotspotExistsTestCase(HotspotBaseTestCase):
 
     connectivity_parameters = {
         'HotspotStored': True,
-        'WifiEnabled': True
+        'WifiEnabled': True,
+        'HotspotSwitchEnabled': True
     }
 
     def test_enabling(self):
@@ -95,12 +97,13 @@ class HotspotExistsTestCase(HotspotBaseTestCase):
         )
 
 
-class HotspotEnabledTestCase(HotspotBaseTestCase):
+class HotspotRunningTestCase(HotspotBaseTestCase):
 
     connectivity_parameters = {
         'HotspotStored': True,
         'HotspotEnabled': True,
-        'WifiEnabled': True
+        'WifiEnabled': True,
+        'HotspotSwitchEnabled': True
     }
 
     def test_disabling(self):
@@ -118,12 +121,13 @@ class HotspotEnabledTestCase(HotspotBaseTestCase):
         )
 
 
-class HotspotWifiDisabledTestCase(HotspotBaseTestCase):
+class HotspotChangeNoWiFiTestCase(HotspotBaseTestCase):
 
     connectivity_parameters = {
         'HotspotStored': True,
         'HotspotEnabled': False,
-        'WifiEnabled': False
+        'WifiEnabled': False,
+        'HotspotSwitchEnabled': True
     }
 
     def test_enabling(self):
@@ -151,12 +155,13 @@ class HotspotWifiDisabledTestCase(HotspotBaseTestCase):
         )
 
 
-class HotspotNonExistantWifiDisabledTestCase(HotspotBaseTestCase):
+class HotspotSetupNoWiFiTestCase(HotspotBaseTestCase):
 
     connectivity_parameters = {
         'HotspotStored': False,
         'HotspotEnabled': False,
-        'WifiEnabled': False
+        'WifiEnabled': False,
+        'HotspotSwitchEnabled': True
     }
 
     def test_setup(self):
@@ -190,3 +195,34 @@ class HotspotNonExistantWifiDisabledTestCase(HotspotBaseTestCase):
             lambda: self.ctv_nets.Get(CTV_NETS_IFACE, 'WifiEnabled'),
             Eventually(Equals(True))
         )
+
+
+class HotspotChangeInFlightModeTestCase(HotspotBaseTestCase):
+
+    connectivity_parameters = {
+        'HotspotStored': True,
+        'HotspotEnabled': False,
+        'WifiEnabled': True,
+        'HotspotSwitchEnabled': False
+    }
+
+    def test_switch_disabled(self):
+        self.assertFalse(self.hotspot_page.get_hotspot_possible())
+
+
+class HotspotSetupInFlightModeTestCase(
+        HotspotBaseTestCase):
+
+    connectivity_parameters = {
+        'HotspotStored': False,
+        'HotspotEnabled': False,
+        'WifiEnabled': True,
+        'HotspotSwitchEnabled': False
+    }
+
+    def test_setup_disabled(self):
+        setup = self.hotspot_page.select_single(
+            objectName='hotspotSetupButton'
+        )
+        self.assertFalse(setup.enabled)
+        self.assertFalse(self.hotspot_page.get_hotspot_possible())

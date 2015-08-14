@@ -95,11 +95,12 @@ ItemPage {
 
             ListItem.Standard {
                 text: i18n.tr("Hotspot")
-                enabled: Connectivity.hotspotStored
+                enabled: (Connectivity.hotspotStored &&
+                          Connectivity.HotspotSwitchEnabled)
                 control: Switch {
                     id: hotspotSwitch
                     objectName: "hotspotSwitch"
-                    enabled: !switchSync.syncWaiting
+                    enabled: Connectivity.HotspotSwitchEnabled
 
                     USC.ServerPropertySynchroniser {
                         id: switchSync
@@ -154,6 +155,12 @@ ItemPage {
                 objectName: "hotspotSetupButton"
                 anchors.horizontalCenter: parent.horizontalCenter
                 width: parent.width - units.gu(4)
+
+                // If the hotspot is stored, we allow it to be changed. If it's
+                // non-existent, we only allow setup if it can be turned on.
+                // This is a by product of the current design.
+                enabled: (Connectivity.hotspotStored ||
+                          Connectivity.HotspotSwitchEnabled)
                 text: Connectivity.hotspotStored ?
                     i18n.tr("Change password/setup…") : i18n.tr("Set up hotspot…")
 

@@ -399,6 +399,10 @@ class HotspotPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
     def get_hotspot_status(self):
         return self._switch.checked
 
+    @autopilot.logging.log_action(logger.debug)
+    def get_hotspot_possible(self):
+        return self._switch.enabled
+
 
 class HotspotEnableWifiDialog(
         ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
