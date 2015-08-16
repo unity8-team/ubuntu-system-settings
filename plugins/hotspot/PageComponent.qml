@@ -24,7 +24,6 @@ import Ubuntu.Components 1.3
 import Ubuntu.Components.ListItems 1.3 as ListItem
 import Ubuntu.Components.Popups 0.1
 import Ubuntu.Connectivity 1.0
-import Ubuntu.Settings.Components 0.1 as USC
 
 /* This is a temporary solution to the issue of Hotspots failing on mako. If
 the device is mako, we hide the hotspot entry. Will be removed once lp:1434591
@@ -41,7 +40,7 @@ ItemPage {
         State {
             name: "disabled"
             // Undefined WifiEnabled means Connectivity is unavailable.
-            when: (typeof Connectivity.WifiEnabled === "undefined" &&
+            when: (typeof Connectivity.wifiEnabled === "undefined" &&
                    UpdateManager.deviceName !== "mako")
             PropertyChanges {
                 target: hotspotItem
@@ -54,8 +53,8 @@ ItemPage {
         },
         State {
             name: "nowifi"
-            when: (typeof Connectivity.WifiEnabled === "boolean" &&
-                   !Connectivity.WifiEnabled)
+            when: (typeof Connectivity.wifiEnabled === "boolean" &&
+                   !Connectivity.wifiEnabled)
             PropertyChanges {
                 target: hotspotSwitchWhenWifiDisabled
                 visible: true
@@ -87,28 +86,13 @@ ItemPage {
             ListItem.Standard {
                 text: i18n.tr("Hotspot")
                 enabled: (Connectivity.hotspotStored &&
-                          Connectivity.HotspotSwitchEnabled)
+                          Connectivity.hotspotSwitchEnabled)
                 control: Switch {
                     id: hotspotSwitch
                     objectName: "hotspotSwitch"
-                    enabled: Connectivity.HotspotSwitchEnabled
-
-                    USC.ServerPropertySynchroniser {
-                        id: switchSync
-                        userTarget: hotspotSwitch
-                        userProperty: "checked"
-                        serverTarget: Connectivity
-                        serverProperty: "hotspotEnabled"
-                        useWaitBuffer: true
-
-                        // Since this blocks the UI thread, we wait until
-                        // the UI has completed the checkbox animation before we
-                        // ask the server to uipdate.
-                        onSyncTriggered: {
-                            triggerTimer.value = value;
-                            triggerTimer.start();
-                        }
-                    }
+                    enabled: Connectivity.hotspotSwitchEnabled
+                    checked: Connectivity.hotspotEnabled
+                    onTriggered: Connectivity.hotspotEnabled = checked
 
                     // Catch taps if Wi-Fi is disable and prompt user.
                     MouseArea {
@@ -118,13 +102,6 @@ ItemPage {
                         onClicked: enableWifiAction.diag = PopupUtils.open(
                             enableWifiDialog
                         );
-                    }
-
-                    Timer {
-                        id: triggerTimer
-                        property bool value
-                        interval: 250; repeat: false
-                        onTriggered: Connectivity.hotspotEnabled = value
                     }
                 }
             }
@@ -149,7 +126,6 @@ ItemPage {
 
                 // If the hotspot is stored, we allow it to be changed. If it's
                 // non-existent, we only allow setup if it can be turned on.
-                // This is a by product of the current design.
                 enabled: (Connectivity.hotspotStored ||
                           Connectivity.HotspotSwitchEnabled)
                 text: Connectivity.hotspotStored ?
@@ -167,19 +143,16 @@ ItemPage {
         id: enableWifiAction
         property var diag
         onTriggered: {
-            // As soon as Wi-Fi has been turned on, activate the USC
-            // synchroniser.
+            // As soon as Wi-Fi has been turned on, enable the hotspot.
             function wifiUpdated (updated) {
                 Connectivity.wifiEnabledUpdated.disconnect(wifiUpdated);
-                switchSync.activate();
+                Connectivity.hotspotEnabled = true;
                 PopupUtils.close(diag);
             }
 
-            if (!Connectivity.wifiEnabled) {
-                Connectivity.wifiEnabledUpdated.connect(wifiUpdated);
-                hotspotSwitch.checked = true;
-                Connectivity.setwifiEnabled(true);
-            }
+            Connectivity.wifiEnabledUpdated.connect(wifiUpdated);
+            hotspotSwitch.checked = true;
+            Connectivity.wifiEnabled = true;
         }
     }
 
