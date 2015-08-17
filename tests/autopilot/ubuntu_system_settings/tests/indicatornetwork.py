@@ -52,19 +52,19 @@ def Changes(self, removals, enable_changes, state_changes, additions):
     obj.EmitSignal(MAIN_IFACE, 'Changed', 'asa{sb}a{sv}a{s(bgav)}', [
         removals, enable_changes, state_changes, additions
     ])
+    pass
 
 
 def load(mock, parameters):
     global _parameters
     _parameters = parameters
 
-    mock.activate = activate
     mock.describe = describe
     mock.describe_all = describe_all
     mock.list_actions = list_actions
     mock.set_state = set_state
 
-    mock.actions = _parameters.get('actions', {
+    mock.actions = parameters.get('actions', {
         'wifi.enable': (True, '', [True]),
     })
 
@@ -72,8 +72,7 @@ def load(mock, parameters):
         MAIN_IFACE,
         [
             (
-                'Activate', 'sava{sv}', '',
-                'self.activate(self, args[0], args[1], args[2])'
+                'Activate', 'sava{sv}', '', ''
             ),
             (
                 'Describe', 's', '(bgav)',
