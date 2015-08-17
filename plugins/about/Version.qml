@@ -93,8 +93,8 @@ ItemPage {
             SingleValueStacked {
                 objectName: "customizationBuildNumberItem"
                 text: i18n.tr("Customization Image part")
-                value: storedInfo.customizationBuildID
-                visible: storedInfo.customizationBuildID
+                value: UpdateManager.currentCustomBuildNumber
+                visible: UpdateManager.currentCustomBuildNumber
             }
         }
     }

@@ -1,3 +1,57 @@
+ubuntu-system-settings (0.3+15.10.20150814-0ubuntu1) wily; urgency=medium
+
+  [ Ken VanDine ]
+  * dismiss_osk after entering text
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Fri, 14 Aug 2015 19:59:01 +0000
+
+ubuntu-system-settings (0.3+15.10.20150812-0ubuntu1) wily; urgency=medium
+
+  [ jonas-drange ]
+  * [cellular] add hotspot support by use of the Connectivity API (LP:
+    #1477300, #1421583)
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Wed, 12 Aug 2015 12:20:19 +0000
+
+ubuntu-system-settings (0.3+15.10.20150810-0ubuntu1) wily; urgency=medium
+
+  [ Ken VanDine ]
+  * Set dimTimeout to 0 when activityTimeout is 0 (LP: #1476372)
+
+  [ Sebastien Bacher ]
+  * [bluetooth] turn off discovery if inactive, not only suspended (LP:
+    #1482235)
+
+  [ jonas-drange ]
+  * [python] fix pep8 warnings from new pep8 1.6
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Mon, 10 Aug 2015 13:20:25 +0000
+
+ubuntu-system-settings (0.3+15.10.20150806-0ubuntu1) wily; urgency=medium
+
+  [ jonas-drange ]
+  * [autopilot/phone] stops calling the method passed to assertThat
+  * [autopilot] change Wi-Fi and System Update tests to use a mocked
+    indicator-network (org.gtk.Actions and com.ubuntu.connectivity1).
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Thu, 06 Aug 2015 15:10:13 +0000
+
+ubuntu-system-settings (0.3+15.10.20150804-0ubuntu1) wily; urgency=medium
+
+  [ Sebastien Bacher ]
+  * [system-update] get the custom build information from the s-i
+    service (LP: #1393413)
+
+  [ jonas-drange ]
+  * Adds Flickables to many pages. (LP: #1470782)
+
+  [ simon.busch@canonical.com ]
+  * Convert Bluetooth connect/disconnect operations to async ones to not
+    block the UI when the backend takes a little bit longer to perform
+    those.
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Tue, 04 Aug 2015 18:14:23 +0000
+
 ubuntu-system-settings (0.3+15.10.20150731-0ubuntu1) wily; urgency=medium
 
   [ Ken VanDine ]
