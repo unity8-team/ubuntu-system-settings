@@ -25,6 +25,8 @@ class HotspotSetupTestCase(HotspotBaseTestCase):
     }
 
     def test_setup(self):
+        from time import sleep
+        sleep(60)
         ssid = 'bar'
         password = 'zomgzomg'
         config = {'ssid': ssid, 'password': password}

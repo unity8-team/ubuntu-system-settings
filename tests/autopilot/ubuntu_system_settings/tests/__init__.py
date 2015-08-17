@@ -450,6 +450,43 @@ class BluetoothBaseTestCase(UbuntuSystemSettingsTestCase):
         self.bluetooth_page = self.main_view.go_to_bluetooth_page()
 
 
+class BatteryBaseTestCase(UbuntuSystemSettingsTestCase,
+                          dbusmock.DBusTestCase):
+
+    connectivity_parameters = {}
+
+    @classmethod
+    def setUpClass(cls):
+        cls.session_con = cls.get_dbus(False)
+        super(BatteryBaseTestCase, cls).setUpClass()
+
+    def setUp(self):
+        if is_process_running(INDICATOR_NETWORK):
+            _stop_process(INDICATOR_NETWORK)
+            self.addCleanup(_start_process, INDICATOR_NETWORK)
+
+        ctv_tmpl = os.path.join(os.path.dirname(__file__), 'connectivity.py')
+        (self.ctv_mock, self.obj_ctv) = self.spawn_server_template(
+            ctv_tmpl, parameters=self.connectivity_parameters,
+            stdout=subprocess.PIPE)
+
+        self.ctv_private = dbus.Interface(
+            self.session_con.get_object(CTV_IFACE, CTV_PRIV_OBJ),
+            'org.freedesktop.DBus.Properties')
+
+        self.ctv_nets = dbus.Interface(
+            self.session_con.get_object(CTV_IFACE, CTV_NETS_OBJ),
+            'org.freedesktop.DBus.Properties')
+
+        super(BatteryBaseTestCase, self).setUp()
+        self.battery_page = self.main_view.go_to_battery_page()
+
+    def tearDown(self):
+        self.ctv_mock.terminate()
+        self.ctv_mock.wait()
+        super(BatteryBaseTestCase, self).tearDown()
+
+
 class PhoneOfonoBaseTestCase(UbuntuSystemSettingsOfonoTestCase):
     def setUp(self):
         """ Go to Phone page """

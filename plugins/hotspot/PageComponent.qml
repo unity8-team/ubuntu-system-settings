@@ -81,7 +81,6 @@ ItemPage {
                 left: parent.left
                 right: parent.right
             }
-            spacing: units.gu(2)
 
             ListItem.Standard {
                 text: i18n.tr("Hotspot")
@@ -106,13 +105,12 @@ ItemPage {
                 }
             }
 
-
             ListItem.Caption {
                 anchors {
                     left: parent.left
                     right: parent.right
-                    leftMargin: units.gu(2)
-                    rightMargin: units.gu(2)
+                    leftMargin: units.gu(1)
+                    rightMargin: units.gu(1)
                 }
                 text : Connectivity.hotspotStored ?
                   i18n.tr("When hotspot is on, other devices can use your cellular data connection over Wi-Fi. Normal data charges apply.")

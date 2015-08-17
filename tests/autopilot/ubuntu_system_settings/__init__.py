@@ -95,6 +95,10 @@ class SystemSettingsMainWindow(ubuntuuitoolkit.MainView):
         return self._go_to_page('entryComponent-bluetooth', 'bluetoothPage')
 
     @autopilot.logging.log_action(logger.debug)
+    def go_to_battery_page(self):
+        return self._go_to_page('entryComponent-battery', 'batteryPage')
+
+    @autopilot.logging.log_action(logger.debug)
     def go_to_phone_page(self):
         return self._go_to_page('entryComponent-phone', 'phonePage')
 
@@ -490,6 +494,34 @@ class BluetoothPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
         ellipsis = '\u2026'
         return [device.text.strip(ellipsis) for device in
                 disconnected_list.select_many('LabelVisual')]
+
+
+class BatteryPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
+
+    """Autopilot helper for Battery page."""
+
+    @classmethod
+    def validate_dbus_object(cls, path, state):
+        name = introspection.get_classname_from_path(path)
+        if name == b'ItemPage':
+            if state['objectName'][1] == 'batteryPage':
+                return True
+        return False
+
+    @property
+    @autopilot.logging.log_action(logger.debug)
+    def _switch(self):
+        return self.wait_select_single(
+            ubuntuuitoolkit.CheckBox,
+            objectName='wifiSwitch')
+
+    @autopilot.logging.log_action(logger.debug)
+    def enable_call_waiting(self):
+        self._switch.check()
+
+    @autopilot.logging.log_action(logger.debug)
+    def disable_call_waiting(self):
+        self._switch.uncheck()
 
 
 class PageCarrierAndApn(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):

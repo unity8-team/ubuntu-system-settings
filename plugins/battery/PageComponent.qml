@@ -25,6 +25,7 @@ import QtSystemInfo 5.0
 import SystemSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
+import Ubuntu.Connectivity 1.0
 import Ubuntu.SystemSettings.Battery 1.0
 import Ubuntu.SystemSettings.SecurityPrivacy 1.0
 import Ubuntu.Settings.Components 0.1 as USC
@@ -33,6 +34,7 @@ ItemPage {
     id: root
 
     title: i18n.tr("Battery")
+    objectName: "batteryPage"
     flickable: scrollWidget
 
     function timeDeltaString(timeDelta) {
@@ -328,23 +330,16 @@ ItemPage {
                                { title: text, lockOnSuspend: lockOnSuspend })
             }
 
-            QDBusActionGroup {
-                id: networkActionGroup
-                busType: 1
-                busName: "com.canonical.indicator.network"
-                objectPath: "/com/canonical/indicator/network"
-                property variant enabled: action("wifi.enable")
-                Component.onCompleted: start()
-            }
-
             ListItem.Standard {
-                // TRANSLATORS: “Wi-Fi used for hotspot” is hidden.
-                text: showAllUI ? i18n.tr("Wi-Fi used for hotspot") : i18n.tr("Wi-Fi")
+                text: Connectivity.hotspotEnabled ?
+                      i18n.tr("Wi-Fi used for hotspot") :
+                      i18n.tr("Wi-Fi")
                 control: Loader {
-                    active: networkActionGroup.enabled.state != null
+                    active: typeof Connectivity.wifiEnabled !== "undefined"
                     sourceComponent: Switch {
                         id: wifiSwitch
-                        property bool serverChecked: networkActionGroup.enabled.state
+                        objectName: "wifiSwitch"
+                        property bool serverChecked: Connectivity.wifiEnabled
 
                         USC.ServerPropertySynchroniser {
                             userTarget: wifiSwitch
@@ -352,11 +347,11 @@ ItemPage {
                             serverTarget: wifiSwitch
                             serverProperty: "serverChecked"
 
-                            onSyncTriggered: networkActionGroup.enabled.activate()
+                            onSyncTriggered: Connectivity.wifiEnabled = value
                         }
                     }
                 }
-                visible: networkActionGroup.enabled.state !== undefined
+                visible: typeof Connectivity.wifiEnabled !== "undefined"
             }
 
             QDBusActionGroup {
