@@ -90,7 +90,7 @@ ItemPage {
                 control: Switch {
                     id: hotspotSwitch
                     objectName: "hotspotSwitch"
-                    enabled: Connectivity.hotspotSwitchEnabled
+                    enabled: parent.enabled
                     checked: Connectivity.hotspotEnabled
                     onTriggered: Connectivity.hotspotEnabled = checked
 
@@ -105,6 +105,7 @@ ItemPage {
                     }
                 }
             }
+
 
             ListItem.Caption {
                 anchors {
@@ -151,7 +152,6 @@ ItemPage {
             }
 
             Connectivity.wifiEnabledUpdated.connect(wifiUpdated);
-            hotspotSwitch.checked = true;
             Connectivity.wifiEnabled = true;
         }
     }
@@ -176,4 +176,10 @@ ItemPage {
             }
         }
     }
+
+    Connections {
+        target: Connectivity
+        onHotspotEnabledUpdated: hotspotSwitch.checked = target.hotspotEnabled
+    }
+
 }
