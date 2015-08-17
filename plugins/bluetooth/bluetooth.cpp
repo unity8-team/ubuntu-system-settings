@@ -176,6 +176,9 @@ void Bluetooth::disconnectDevice()
         case Device::Type::Mouse:
             m_selectedDevice->disconnect(Device::ConnectionMode::Input);
             break;
+        case Device::Type::Tablet:
+            m_selectedDevice->disconnect(Device::ConnectionMode::Input);
+            break;
         default:
             qWarning() << "Nothing to disconnect: Unsupported device type.";
             break;
@@ -207,6 +210,9 @@ void Bluetooth::connectDevice(const QString &address)
         break;
     case Device::Type::Keyboard:
     case Device::Type::Mouse:
+        connMode = Device::ConnectionMode::Input;
+        break;
+    case Device::Type::Tablet:
         connMode = Device::ConnectionMode::Input;
         break;
     default:
