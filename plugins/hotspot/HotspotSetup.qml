@@ -219,7 +219,7 @@ Component {
                     right: parent.right
                 }
                 text: i18n.tr("In order to create a hotspot, you need to turn Wi-Fi on.")
-                visible: !Connectivity.wifiEnabled
+                visible: !Connectivity.wifiEnabled && !hotspotSetupDialog.stored
             }
 
             Row {

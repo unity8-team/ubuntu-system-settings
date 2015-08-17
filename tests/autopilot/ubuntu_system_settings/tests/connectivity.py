@@ -81,6 +81,7 @@ def load(mock, parameters):
             'HotspotSwitchEnabled': _parameters.get(
                 'HotspotSwitchEnabled', dbus.Boolean(False)
             ),
+            'FlightMode': _parameters.get('FlightMode', dbus.Boolean(False)),
             'WifiEnabled': _parameters.get('WifiEnabled', dbus.Boolean(False)),
             # One of online, offline and connecting.
             'Status': _parameters.get('Status', 'offline')

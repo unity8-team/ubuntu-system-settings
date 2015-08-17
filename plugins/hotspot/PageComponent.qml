@@ -42,7 +42,8 @@ ItemPage {
             // Undefined WifiEnabled means Connectivity is unavailable.
             // Disable for mako (see lp:1434591).
             when: (typeof Connectivity.wifiEnabled === "undefined" ||
-                   UpdateManager.deviceName === "mako")
+                   UpdateManager.deviceName === "mako") ||
+                   Connectivity.FlightMode
             PropertyChanges {
                 target: hotspotItem
                 enabled: false
@@ -84,9 +85,10 @@ ItemPage {
             spacing: units.gu(1)
 
             ListItem.Standard {
+                id: hotspotItem
                 text: i18n.tr("Hotspot")
-                enabled: (Connectivity.hotspotStored &&
-                          Connectivity.hotspotSwitchEnabled)
+                enabled: Connectivity.hotspotStored
+                onClicked: hotspotSwitch.trigger()
                 control: Switch {
                     id: hotspotSwitch
                     objectName: "hotspotSwitch"
@@ -106,7 +108,6 @@ ItemPage {
                 }
             }
 
-
             ListItem.Caption {
                 anchors {
                     left: parent.left
@@ -122,14 +123,8 @@ ItemPage {
                 objectName: "hotspotSetupButton"
                 anchors.horizontalCenter: parent.horizontalCenter
                 width: parent.width - units.gu(4)
-
-                // If the hotspot is stored, we allow it to be changed. If it's
-                // non-existent, we only allow setup if it can be turned on.
-                enabled: (Connectivity.hotspotStored ||
-                          Connectivity.hotspotSwitchEnabled)
                 text: Connectivity.hotspotStored ?
                     i18n.tr("Change password/setup…") : i18n.tr("Set up hotspot…")
-
                 onClicked: {
                     setup.setSource(Qt.resolvedUrl("HotspotSetup.qml"));
                     PopupUtils.open(setup.item, root, {});
@@ -150,6 +145,7 @@ ItemPage {
             }
 
             Connectivity.wifiEnabledUpdated.connect(wifiUpdated);
+            hotspotSwitch.checked = true;
             Connectivity.wifiEnabled = true;
         }
     }

@@ -203,6 +203,7 @@ class HotspotChangeInFlightModeTestCase(HotspotBaseTestCase):
         'HotspotStored': True,
         'HotspotEnabled': False,
         'WifiEnabled': True,
+        'FlightMode': True,
         'HotspotSwitchEnabled': False
     }
 
@@ -217,6 +218,7 @@ class HotspotSetupInFlightModeTestCase(
         'HotspotStored': False,
         'HotspotEnabled': False,
         'WifiEnabled': True,
+        'FlightMode': True,
         'HotspotSwitchEnabled': False
     }
 
