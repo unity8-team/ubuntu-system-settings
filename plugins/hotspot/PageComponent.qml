@@ -153,14 +153,14 @@ ItemPage {
     Component {
         id: enableWifiDialog
         Dialog {
-            id: dialog
+            id: dialogue
             objectName: "enableWifiDialog"
             title: i18n.tr("Wi-Fi is off")
             text: i18n.tr("In order to create a hotspot, you need to turn Wi-Fi on.")
 
             Button {
                 text: i18n.tr("Cancel")
-                onClicked: PopupUtils.close(dialog)
+                onClicked: PopupUtils.close(dialogue)
             }
 
             Button {
