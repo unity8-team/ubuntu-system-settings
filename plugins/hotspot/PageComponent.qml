@@ -40,8 +40,9 @@ ItemPage {
         State {
             name: "disabled"
             // Undefined WifiEnabled means Connectivity is unavailable.
-            when: (typeof Connectivity.wifiEnabled === "undefined" &&
-                   UpdateManager.deviceName !== "mako")
+            // Disable for mako (see lp:1434591).
+            when: (typeof Connectivity.wifiEnabled === "undefined" ||
+                   UpdateManager.deviceName === "mako")
             PropertyChanges {
                 target: hotspotItem
                 enabled: false
@@ -53,8 +54,7 @@ ItemPage {
         },
         State {
             name: "nowifi"
-            when: (typeof Connectivity.wifiEnabled === "boolean" &&
-                   !Connectivity.wifiEnabled)
+            when: Connectivity.wifiEnabled === false
             PropertyChanges {
                 target: hotspotSwitchWhenWifiDisabled
                 visible: true
@@ -181,5 +181,4 @@ ItemPage {
         target: Connectivity
         onHotspotEnabledUpdated: hotspotSwitch.checked = target.hotspotEnabled
     }
-
 }
