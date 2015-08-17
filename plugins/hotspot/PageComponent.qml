@@ -81,7 +81,7 @@ ItemPage {
                 left: parent.left
                 right: parent.right
             }
-            spacing: units.gu(2)
+            spacing: units.gu(1)
 
             ListItem.Standard {
                 text: i18n.tr("Hotspot")
@@ -111,8 +111,6 @@ ItemPage {
                 anchors {
                     left: parent.left
                     right: parent.right
-                    leftMargin: units.gu(2)
-                    rightMargin: units.gu(2)
                 }
                 text : Connectivity.hotspotStored ?
                   i18n.tr("When hotspot is on, other devices can use your cellular data connection over Wi-Fi. Normal data charges apply.")
@@ -128,7 +126,7 @@ ItemPage {
                 // If the hotspot is stored, we allow it to be changed. If it's
                 // non-existent, we only allow setup if it can be turned on.
                 enabled: (Connectivity.hotspotStored ||
-                          Connectivity.HotspotSwitchEnabled)
+                          Connectivity.hotspotSwitchEnabled)
                 text: Connectivity.hotspotStored ?
                     i18n.tr("Change password/setup…") : i18n.tr("Set up hotspot…")
 

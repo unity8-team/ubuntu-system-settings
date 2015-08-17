@@ -132,6 +132,10 @@ Component {
                     target: confirmButton
                     enabled: false
                 }
+                PropertyChanges {
+                    target: enableWifiCaption
+                    visible: false
+                }
             }
         ]
 
@@ -209,14 +213,13 @@ Component {
             }
 
             ListItem.Caption {
+                id: enableWifiCaption
                 anchors {
                     left: parent.left
                     right: parent.right
-                    leftMargin: units.gu(1)
-                    rightMargin: units.gu(1)
                 }
                 text: i18n.tr("In order to create a hotspot, you need to turn Wi-Fi on.")
-                visible: !Connectivity.WifiEnabled
+                visible: !Connectivity.wifiEnabled
             }
 
             Row {
@@ -245,7 +248,7 @@ Component {
                     enabled: settingsValid()
                     activeFocusOnPress: false
                     onClicked: {
-                        if (!Connectivity.WifiEnabled &&
+                        if (!Connectivity.wifiEnabled &&
                                 !hotspotSetupDialog.stored) {
                             enableWifiAction.trigger();
                         } else if (hotspotSetupDialog.stored) {
@@ -288,7 +291,7 @@ Component {
                 }
 
                 Connectivity.wifiEnabledUpdated.connect(wifiUpdated);
-                Connectivity.setwifiEnabled(true);
+                Connectivity.wifiEnabled = true;
             }
         }
 
