@@ -395,7 +395,8 @@ class CellularBaseTestCase(UbuntuSystemSettingsOfonoTestCase):
             context.SetProperty(key, value)
 
 
-class HotspotBaseTestCase(CellularBaseTestCase):
+class HotspotBaseTestCase(UbuntuSystemSettingsTestCase,
+                          dbusmock.DBusTestCase):
 
     connectivity_parameters = {}
     indicatornetwork_parameters = {}
@@ -431,6 +432,7 @@ class HotspotBaseTestCase(CellularBaseTestCase):
             stdout=subprocess.PIPE)
 
         super(HotspotBaseTestCase, self).setUp()
+        self.hotspot_page = self.main_view.go_to_hotspot_page()
 
     def tearDown(self):
         self.ctv_mock.terminate()
