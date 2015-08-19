@@ -37,106 +37,118 @@ ItemPage {
         id: securityPrivacy
     }
 
-    Column {
-        anchors.left: parent.left
-        anchors.right: parent.right
+    Flickable {
+        anchors.fill: parent
+        contentHeight: contentItem.childrenRect.height
+        boundsBehavior: (contentHeight > root.height) ?
+                            Flickable.DragAndOvershootBounds :
+                            Flickable.StopAtBounds
+        /* Set the direction to workaround
+           https://bugreports.qt-project.org/browse/QTBUG-31905 otherwise the UI
+           might end up in a situation where scrolling doesn't work */
+        flickableDirection: Flickable.VerticalFlick
 
-        ListItem.SingleValue {
-            property string swipe: i18n.ctr("Unlock with swipe", "None")
-            property string passcode: i18n.tr("Passcode")
-            property string passphrase: i18n.tr("Passphrase")
+        Column {
+            anchors.left: parent.left
+            anchors.right: parent.right
 
-            objectName: "lockSecurity"
-            text: i18n.tr("Lock security")
-            value: {
-                switch (securityPrivacy.securityType) {
-                    case UbuntuSecurityPrivacyPanel.Swipe:
-                        return swipe
-                    case UbuntuSecurityPrivacyPanel.Passcode:
-                        return passcode
-                    case UbuntuSecurityPrivacyPanel.Passphrase:
-                        return passphrase
+            ListItem.SingleValue {
+                property string swipe: i18n.ctr("Unlock with swipe", "None")
+                property string passcode: i18n.tr("Passcode")
+                property string passphrase: i18n.tr("Passphrase")
+
+                objectName: "lockSecurity"
+                text: i18n.tr("Lock security")
+                value: {
+                    switch (securityPrivacy.securityType) {
+                        case UbuntuSecurityPrivacyPanel.Swipe:
+                            return swipe
+                        case UbuntuSecurityPrivacyPanel.Passcode:
+                            return passcode
+                        case UbuntuSecurityPrivacyPanel.Passphrase:
+                            return passphrase
+                    }
+                }
+                progression: true
+                onClicked: pageStack.push(Qt.resolvedUrl("LockSecurity.qml"))
+            }
+
+            ListItem.SingleValue {
+                objectName: "lockTimeout"
+                property bool lockOnSuspend: securityPrivacy.securityType !==
+                                                UbuntuSecurityPrivacyPanel.Swipe
+                text: lockOnSuspend ? i18n.tr("Lock when idle")
+                                    : i18n.tr("Sleep when idle")
+                value: {
+                    if (usePowerd) {
+                        var timeout = Math.round(powerSettings.activityTimeout/60)
+                        return (powerSettings.activityTimeout != 0) ?
+                                    // TRANSLATORS: %1 is the number of minutes
+                                    i18n.tr("%1 minute",
+                                            "%1 minutes",
+                                            timeout).arg(timeout) :
+                                    i18n.tr("Never")
+                    }
+                    else {
+                        var timeout = Math.round(powerSettings.idleDelay/60)
+                        return (powerSettings.idleDelay != 0) ?
+                                    // TRANSLATORS: %1 is the number of minutes
+                                    i18n.tr("%1 minute",
+                                            "%1 minutes",
+                                            timeout).arg(timeout) :
+                                    i18n.tr("Never")
+                    }
+                }
+                progression: true
+                onClicked:
+                    pageStack.push(
+                        Qt.resolvedUrl("../battery/SleepValues.qml"),
+                        { title: text, lockOnSuspend: lockOnSuspend } )
+            }
+
+            ListItem.Standard {
+                control: CheckBox {
+                    checked: true
+                }
+                text: i18n.tr("Sleep locks immediately")
+                visible: showAllUI
+            }
+
+            SettingsItemTitle {
+                text: i18n.tr("When locked, allow:")
+            }
+
+            ListItem.Standard {
+                text: i18n.tr("Launcher")
+                control: CheckBox {
+                    id: launcherCheck
+                    enabled: securityPrivacy.securityType !== UbuntuSecurityPrivacyPanel.Swipe
+
+                    property bool serverChecked: securityPrivacy.enableLauncherWhileLocked || !enabled
+                    onServerCheckedChanged: checked = serverChecked
+                    Component.onCompleted: checked = serverChecked
+                    onTriggered: securityPrivacy.enableLauncherWhileLocked = checked
                 }
             }
-            progression: true
-            onClicked: pageStack.push(Qt.resolvedUrl("LockSecurity.qml"))
-        }
 
-        ListItem.SingleValue {
-            objectName: "lockTimeout"
-            property bool lockOnSuspend: securityPrivacy.securityType !==
-                                            UbuntuSecurityPrivacyPanel.Swipe
-            text: lockOnSuspend ? i18n.tr("Lock when idle")
-                                : i18n.tr("Sleep when idle")
-            value: {
-                if (usePowerd) {
-                    var timeout = Math.round(powerSettings.activityTimeout/60)
-                    return (powerSettings.activityTimeout != 0) ?
-                                // TRANSLATORS: %1 is the number of minutes
-                                i18n.tr("%1 minute",
-                                        "%1 minutes",
-                                        timeout).arg(timeout) :
-                                i18n.tr("Never")
-                }
-                else {
-                    var timeout = Math.round(powerSettings.idleDelay/60)
-                    return (powerSettings.idleDelay != 0) ?
-                                // TRANSLATORS: %1 is the number of minutes
-                                i18n.tr("%1 minute",
-                                        "%1 minutes",
-                                        timeout).arg(timeout) :
-                                i18n.tr("Never")
+            ListItem.Standard {
+                text: i18n.tr("Notifications and quick settings")
+                control: CheckBox {
+                    id: indicatorsCheck
+                    enabled: securityPrivacy.securityType !== UbuntuSecurityPrivacyPanel.Swipe
+
+                    property bool serverChecked: securityPrivacy.enableIndicatorsWhileLocked || !enabled
+                    onServerCheckedChanged: checked = serverChecked
+                    Component.onCompleted: checked = serverChecked
+                    onTriggered: securityPrivacy.enableIndicatorsWhileLocked = checked
                 }
             }
-            progression: true
-            onClicked:
-                pageStack.push(
-                    Qt.resolvedUrl("../battery/SleepValues.qml"),
-                    { title: text, lockOnSuspend: lockOnSuspend } )
-        }
 
-        ListItem.Standard {
-            control: CheckBox {
-                checked: true
+            ListItem.Caption {
+                text: securityPrivacy.securityType === UbuntuSecurityPrivacyPanel.Swipe ?
+                      i18n.tr("Turn on lock security to restrict access when the phone is locked.") :
+                      i18n.tr("Other apps and functions will prompt you to unlock.")
             }
-            text: i18n.tr("Sleep locks immediately")
-            visible: showAllUI
-        }
-
-        SettingsItemTitle {
-            text: i18n.tr("When locked, allow:")
-        }
-
-        ListItem.Standard {
-            text: i18n.tr("Launcher")
-            control: CheckBox {
-                id: launcherCheck
-                enabled: securityPrivacy.securityType !== UbuntuSecurityPrivacyPanel.Swipe
-
-                property bool serverChecked: securityPrivacy.enableLauncherWhileLocked || !enabled
-                onServerCheckedChanged: checked = serverChecked
-                Component.onCompleted: checked = serverChecked
-                onTriggered: securityPrivacy.enableLauncherWhileLocked = checked
-            }
-        }
-
-        ListItem.Standard {
-            text: i18n.tr("Notifications and quick settings")
-            control: CheckBox {
-                id: indicatorsCheck
-                enabled: securityPrivacy.securityType !== UbuntuSecurityPrivacyPanel.Swipe
-
-                property bool serverChecked: securityPrivacy.enableIndicatorsWhileLocked || !enabled
-                onServerCheckedChanged: checked = serverChecked
-                Component.onCompleted: checked = serverChecked
-                onTriggered: securityPrivacy.enableIndicatorsWhileLocked = checked
-            }
-        }
-
-        ListItem.Caption {
-            text: securityPrivacy.securityType === UbuntuSecurityPrivacyPanel.Swipe ?
-                  i18n.tr("Turn on lock security to restrict access when the phone is locked.") :
-                  i18n.tr("Other apps and functions will prompt you to unlock.")
         }
     }
 }

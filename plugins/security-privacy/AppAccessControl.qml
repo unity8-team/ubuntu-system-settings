@@ -28,24 +28,36 @@ ItemPage {
     property alias model: repeater.model
     property alias caption: captionLabel.text
 
-    Column {
-        anchors.left: parent.left
-        anchors.right: parent.right
+    Flickable {
+        anchors.fill: parent
+        contentHeight: contentItem.childrenRect.height
+        boundsBehavior: (contentHeight > root.height) ?
+                            Flickable.DragAndOvershootBounds :
+                            Flickable.StopAtBounds
+        /* Set the direction to workaround
+           https://bugreports.qt-project.org/browse/QTBUG-31905 otherwise the UI
+           might end up in a situation where scrolling doesn't work */
+        flickableDirection: Flickable.VerticalFlick
 
-        ListItem.Caption {
-            id: captionLabel
-        }
+        Column {
+            anchors.left: parent.left
+            anchors.right: parent.right
 
-        Repeater {
-            id: repeater
+            ListItem.Caption {
+                id: captionLabel
+            }
 
-            ListItem.Standard {
-                text: model.applicationName
-                iconSource: model.iconName
-                control: Switch {
-                    id: welcomeStatsSwitch
-                    checked: model.granted
-                    onClicked: root.model.setEnabled(index, !model.granted)
+            Repeater {
+                id: repeater
+
+                ListItem.Standard {
+                    text: model.applicationName
+                    iconSource: model.iconName
+                    control: Switch {
+                        id: welcomeStatsSwitch
+                        checked: model.granted
+                        onClicked: root.model.setEnabled(index, !model.granted)
+                    }
                 }
             }
         }

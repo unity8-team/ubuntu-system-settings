@@ -26,53 +26,65 @@ import Ubuntu.Components.ListItems 0.1 as ListItem
 import Ubuntu.SystemSettings.Wifi 1.0
 
 ItemPage {
-
+    id: root
     property string networkName
     property var accessPoint
 
     title: networkName
 
-    Column {
-
+    Flickable {
         anchors.fill: parent
+        contentHeight: contentItem.childrenRect.height
+        boundsBehavior: (contentHeight > root.height) ?
+                            Flickable.DragAndOvershootBounds :
+                            Flickable.StopAtBounds
+        /* Set the direction to workaround
+           https://bugreports.qt-project.org/browse/QTBUG-31905 otherwise the UI
+           might end up in a situation where scrolling doesn't work */
+        flickableDirection: Flickable.VerticalFlick
 
-        ListItem.Divider {}
+        Column {
 
-        Button {
-            text : i18n.tr("Forget this network")
-            anchors {
-                left: parent.left
-                right: parent.right
-                margins: units.gu(2)
-            }
-            onClicked: {
-                if (DbusHelper.forgetActiveDevice()) {
-                    accessPoint.checked = false;
-                    accessPoint.checkedChanged(false)
+            anchors.left: parent.left
+            anchors.right: parent.right
+
+            ListItem.Divider {}
+
+            Button {
+                text : i18n.tr("Forget this network")
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                    margins: units.gu(2)
                 }
-
+                onClicked: {
+                    if (DbusHelper.forgetActiveDevice()) {
+                        accessPoint.checked = false;
+                        accessPoint.checkedChanged(false)
+                    }
+                }
             }
-        }
 
-        ListItem.Standard {
-            text: i18n.tr("IP address")
-            id: addressItem
-            control: TextField {
-                text: DbusHelper.wifiIp4Address
-                readOnly: true
-                horizontalAlignment: TextInput.AlignRight
-                width: addressItem.width/2
-                persistentSelection: true
-                font.pixelSize: units.dp(16)
-                font.weight: Font.Light
-                font.family: "Ubuntu"
-                color: "#AAAAAA"
-                maximumLength: 20
-                focus: true
-                clip: true
-                opacity: 0.9
-                cursorVisible: false
-                hasClearButton: false
+            ListItem.Standard {
+                text: i18n.tr("IP address")
+                id: addressItem
+                control: TextField {
+                    text: DbusHelper.wifiIp4Address
+                    readOnly: true
+                    horizontalAlignment: TextInput.AlignRight
+                    width: addressItem.width/2
+                    persistentSelection: true
+                    font.pixelSize: units.dp(16)
+                    font.weight: Font.Light
+                    font.family: "Ubuntu"
+                    color: "#AAAAAA"
+                    maximumLength: 20
+                    focus: true
+                    clip: true
+                    opacity: 0.9
+                    cursorVisible: false
+                    hasClearButton: false
+                }
             }
         }
     }

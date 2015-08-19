@@ -12,18 +12,16 @@ property such as 'NetworkingEnabled', or 'WirelessEnabled' etc. in
 # later version.  See http://www.gnu.org/copyleft/lgpl.html for the full text
 # of the license.
 
+from dbusmock import MOCK_IFACE
+import binascii
+import dbus
+import dbusmock
+import uuid
+
 __author__ = 'Iftikhar Ahmad'
 __email__ = 'iftikhar.ahmad@canonical.com'
 __copyright__ = '(c) 2012 Canonical Ltd.'
 __license__ = 'LGPL 3+'
-
-import dbus
-import uuid
-import binascii
-
-from dbusmock import MOCK_IFACE
-import dbusmock
-
 
 BUS_NAME = 'org.freedesktop.NetworkManager'
 MAIN_OBJ = '/org/freedesktop/NetworkManager'

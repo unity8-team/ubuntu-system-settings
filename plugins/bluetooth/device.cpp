@@ -163,24 +163,16 @@ void Device::discoverServices()
     }
 }
 
-void Device::callInterface(const QSharedPointer<QDBusInterface> &interface, const QString &method)
+void Device::slotDisconnectDone(QDBusPendingCallWatcher *watcher)
 {
-    QDBusReply<void> reply;
-    constexpr int maxTries = 4;
-    int retryCount = 0;
+    QDBusPendingReply<void> reply = *watcher;
 
-    while (retryCount < maxTries) {
-        reply = interface->call(method);
-        if (reply.isValid())
-            break;
-        QThread::msleep(500);
-        retryCount++;
+    if (reply.isError()) {
+        qWarning() << "Could not disconnect device:"
+                   << reply.error().message();
     }
 
-    if (retryCount >= maxTries && !reply.isValid()) {
-        qWarning() << "Could not" << method << "the interface" << interface->interface()
-                   << ":" << reply.error().message();
-    }
+    watcher->deleteLater();
 }
 
 void Device::disconnect(ConnectionMode mode)
@@ -198,7 +190,22 @@ void Device::disconnect(ConnectionMode mode)
         return;
     }
 
-    callInterface(interface, "Disconnect");
+    QDBusPendingCall call = interface->asyncCall("Disconnect");
+    QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(call, this);
+    QObject::connect(watcher, SIGNAL(finished(QDBusPendingCallWatcher*)),
+                     this, SLOT(slotDisconnectDone(QDBusPendingCallWatcher*)));
+}
+
+void Device::slotConnectDone(QDBusPendingCallWatcher *watcher)
+{
+    QDBusPendingReply<void> reply = *watcher;
+
+    if (reply.isError()) {
+        qWarning() << "Could not connect device:"
+                   << reply.error().message();
+    }
+
+    watcher->deleteLater();
 }
 
 void Device::connect(ConnectionMode mode)
@@ -216,7 +223,10 @@ void Device::connect(ConnectionMode mode)
         return;
     }
 
-    callInterface(interface, "Connect");
+    QDBusPendingCall call = interface->asyncCall("Connect");
+    QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(call, this);
+    QObject::connect(watcher, SIGNAL(finished(QDBusPendingCallWatcher*)),
+                     this, SLOT(slotConnectDone(QDBusPendingCallWatcher*)));
 }
 
 void Device::slotMakeTrustedDone(QDBusPendingCallWatcher *call)
