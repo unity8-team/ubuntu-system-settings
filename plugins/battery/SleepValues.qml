@@ -53,7 +53,7 @@ ItemPage {
                     sleepSelector.selectedIndex = 6
                 // ensure dimTimeout is 10 seconds less than activityTimeout
                 if (usePowerd)
-                    dimTimeout = Math.max(activityTimeout - 10, 50)
+                    dimTimeout = Math.max(activityTimeout - 10, 0)
             }
         }
         Component.onCompleted: {
