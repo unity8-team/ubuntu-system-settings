@@ -317,7 +317,6 @@ Column {
                 right: parent.right
                 leftMargin: units.gu(2)
                 rightMargin: units.gu(2)
-                topMargin: units.gu(2)
                 bottomMargin: units.gu(2)
             }
             spacing: units.gu(1)
@@ -330,6 +329,8 @@ Column {
                     onTriggered: settings.touchpadTapToClick = checked
                 }
                 Label {
+                    height: parent.height
+                    verticalAlignment: Text.AlignVCenter
                     text: i18n.tr("Tap to click")
                 }
             }
@@ -342,6 +343,8 @@ Column {
                     onTriggered: settings.touchpadTwoFingerScroll = checked
                 }
                 Label {
+                    height: parent.height
+                    verticalAlignment: Text.AlignVCenter
                     text: i18n.tr("Scroll with two fingers")
                 }
             }
@@ -368,7 +371,11 @@ Column {
                     Component.onCompleted: checked = serverChecked
                     onTriggered: settings.touchpadDisableWhileTyping = checked
                 }
-                Label { text: i18n.tr("Typing") }
+                Label {
+                    height: parent.height
+                    verticalAlignment: Text.AlignVCenter
+                    text: i18n.tr("Typing")
+                }
             }
             Row {
                 spacing: units.gu(1)
@@ -378,7 +385,11 @@ Column {
                     Component.onCompleted: checked = serverChecked
                     onTriggered: settings.touchpadDisableWithMouse = checked
                 }
-                Label { text: i18n.tr("A mouse is connected") }
+                Label {
+                    height: parent.height
+                    verticalAlignment: Text.AlignVCenter
+                    text: i18n.tr("A mouse is connected")
+                }
             }
         }
     }
