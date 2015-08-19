@@ -153,19 +153,23 @@ Column {
             doubleTapSpeed: settings.mouseDoubleClickSpeed
         }
 
-        ListItem.ItemSelector {
-            anchors {
+
+        PrimaryButtonSelector {
+            id: mousePrimarySelector
+            anchors { 
                 left: parent.left
                 right: parent.right
             }
-            activeFocusOnPress: false
-            text: i18n.tr("Primary button:")
-            model: [i18n.tr("Left"),
-                    i18n.tr("Right")]
-            onDelegateClicked: {
-                for (var item in model) {
-                    console.warn(item);
-                }
+            height: childrenRect.height
+            buttonEnum: settings.mousePrimaryButton
+            onButtonEnumChanged: {
+                console.warn("buttonEnum: " + buttonEnum);
+                settings.mousePrimaryButton = buttonEnum;
+            }
+            Binding {
+                target: mousePrimarySelector
+                property: "buttonEnum"
+                value: settings.mousePrimaryButton
             }
         }
     }
@@ -288,29 +292,23 @@ Column {
             doubleTapSpeed: settings.touchpadDoubleClickSpeed
         }
 
-        ListItem.ItemSelector {
-            anchors {
+        PrimaryButtonSelector {
+            id: touchpadPrimarySelector
+            anchors { 
                 left: parent.left
                 right: parent.right
             }
-            activeFocusOnPress: false
-            text: i18n.tr("Primary button:")
-            model: [i18n.tr("Left"),
-                    i18n.tr("Right")]
-            onDelegateClicked: {
-                for (var item in model) {
-                    console.warn(item);
-                }
+            height: childrenRect.height
+            buttonEnum: settings.touchpadPrimaryButton
+            onButtonEnumChanged: {
+                console.warn("buttonEnum: " + buttonEnum);
+                settings.touchpadPrimaryButton = buttonEnum;
             }
-        }
-
-        ListItem.Header {
-            text: i18n.tr("Primary button:")
-        }
-
-        OptionSelector {
-            model: [i18n.tr("Left"),
-                    i18n.tr("Right")]
+            Binding {
+                target: touchpadPrimarySelector
+                property: "buttonEnum"
+                value: settings.touchpadPrimaryButton
+            }
         }
 
         Column {

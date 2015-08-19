@@ -7,6 +7,7 @@ set(QML_SOURCES
     None.qml
     Connected.qml
     TapArea.qml
+    PrimaryButtonSelector.qml
 )
 
 install(FILES mouse.settings DESTINATION ${PLUGIN_MANIFEST_DIR})
