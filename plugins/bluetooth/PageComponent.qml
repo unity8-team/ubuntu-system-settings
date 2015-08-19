@@ -46,7 +46,7 @@ ItemPage {
     Connections {
         target: Qt.application
         onActiveChanged: {
-            if (Qt.application.state === Qt.ApplicationSuspended) {
+            if (Qt.application.state !== Qt.ApplicationActive) {
                 backend.trySetDiscoverable(false)
             }
             else {
