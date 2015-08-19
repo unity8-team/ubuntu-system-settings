@@ -51,11 +51,13 @@ Column {
             rightMargin: units.gu(2)
         }
         showDivider: false
+        highlightWhenPressed: false
         height: itemRow.height
         Row {
             id: itemRow
             spacing: units.gu(2)
             Row {
+                spacing: units.gu(1)
                 CheckBox {
                     id: primaryLeftCheck
                     onTriggered: {
@@ -70,6 +72,7 @@ Column {
                 }
             }
             Row {
+                spacing: units.gu(1)
                 CheckBox {
                     id: primaryRightCheck
                     onTriggered: {

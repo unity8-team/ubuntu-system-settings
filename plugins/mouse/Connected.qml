@@ -160,7 +160,7 @@ Column {
                 left: parent.left
                 right: parent.right
             }
-            height: childrenRect.height
+            height: childrenRect.height + units.gu(2)
             buttonEnum: settings.mousePrimaryButton
             onButtonEnumChanged: {
                 console.warn("buttonEnum: " + buttonEnum);
@@ -175,8 +175,11 @@ Column {
     }
 
     Column {
-        anchors.left: parent.left
-        anchors.right: parent.right
+        anchors {
+            left: parent.left
+            right: parent.right
+            topMargin: units.gu(2)
+        }
         visible: UnityInputInfo.touchpads > 0
 
         ListItem.Header {
@@ -351,6 +354,7 @@ Column {
         }
 
         ListItem.Header {
+            anchors.topMargin: units.gu(2)
             text: i18n.tr("Ignore touchpad when:")
         }
         Column {
