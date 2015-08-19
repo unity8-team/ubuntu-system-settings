@@ -51,7 +51,9 @@ Column {
             rightMargin: units.gu(2)
         }
         showDivider: false
+        height: itemRow.height
         Row {
+            id: itemRow
             spacing: units.gu(2)
             Row {
                 CheckBox {

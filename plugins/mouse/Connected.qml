@@ -298,7 +298,7 @@ Column {
                 left: parent.left
                 right: parent.right
             }
-            height: childrenRect.height
+            height: childrenRect.height + units.gu(1)
             buttonEnum: settings.touchpadPrimaryButton
             onButtonEnumChanged: {
                 console.warn("buttonEnum: " + buttonEnum);
@@ -317,7 +317,7 @@ Column {
                 right: parent.right
                 leftMargin: units.gu(2)
                 rightMargin: units.gu(2)
-                bottomMargin: units.gu(2)
+                topMargin: units.gu(2)
             }
             spacing: units.gu(1)
             Row {
