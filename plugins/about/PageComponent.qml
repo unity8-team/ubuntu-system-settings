@@ -45,18 +45,7 @@ ItemPage {
 
     OfonoManager {
         id: manager
-        onModemsChanged: {
-            root.modemsSorted = modems.slice(0).sort();
-            if (modems.length === 1) {
-                phoneNumbers.setSource("PhoneNumber.qml", {
-                    path: manager.modems[0]
-                });
-            } else if (modems.length > 1) {
-                phoneNumbers.setSource("PhoneNumbers.qml", {
-                    paths: root.modemsSorted
-                });
-            }
-        }
+        onModemsChanged: root.modemsSorted = modems.slice(0).sort()
     }
 
     NetworkAbout {
@@ -102,12 +91,6 @@ ItemPage {
                     }
                 }
                 highlightWhenPressed: false
-            }
-
-            Loader {
-                id: phoneNumbers
-                anchors.left: parent.left
-                anchors.right: parent.right
             }
 
             ListItem.SingleValue {
