@@ -63,7 +63,9 @@ Q_SIGNALS:
     void clickTokenObtained(Update *app, const QString &clickToken);
 
 private Q_SLOTS:
-    void onReply(QNetworkReply*);
+    void onReplyFinished();
+    void onReplySslErrors(const QList<QSslError> & errors);
+    void onReplyError(QNetworkReply::NetworkError code);
 
 private:
     QNetworkAccessManager m_nam;
