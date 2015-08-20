@@ -43,7 +43,7 @@ ItemPage {
             anchors.right: parent.right
 
             ListItem.Caption {
-                text: i18n.tr("Apps that you have granted and have requested access to:")
+                text: i18n.tr("Apps that you have granted access to:")
             }
 
             ListModel {
@@ -64,7 +64,7 @@ ItemPage {
                 model: appsModel
 
                 ListItem.SingleValue {
-                    text: model.name
+                    text: i18n.tr(model.name)
                     enabled: trustStoreModel.count > 0
                     value: trustStoreModel.count > 0 ?
                         i18n.tr("%1/%2").arg(trustStoreModel.grantedCount).arg(trustStoreModel.count) :
@@ -80,6 +80,30 @@ ItemPage {
                         serviceName: model.trustStoreService
                     }
                 }
+            }
+
+            ListItem.Caption {
+                    text: i18n.tr("Apps may also request access to online accounts.")
+            }
+
+            ListItem.SingleControl {
+                control: Button {
+                    text: i18n.tr("Online Accounts…")
+                    width: parent.width - units.gu(4)
+                    onClicked: {
+                        var upPlugin = pluginManager.getByName("online-accounts")
+                        if (upPlugin) {
+                            var updatePage = upPlugin.pageComponent
+                            if (updatePage)
+                                pageStack.push(updatePage)
+                            else
+                                console.warn("online-accounts")
+                        } else {
+                            console.warn("online-accounts")
+                        }
+                    }
+                }
+                showDivider: false
             }
         }
     }
