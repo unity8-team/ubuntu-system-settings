@@ -53,25 +53,6 @@ Column {
         anchors { left: parent.left; right: parent.right }
     }
 
-    ListItem.SingleValue {
-        text : i18n.tr("Hotspot disabled because Wi-Fi is off.")
-        visible: !hotspotItem.visible &&
-                 UpdateManager.deviceName !== "mako"
-    }
-
-    ListItem.SingleValue {
-        id: hotspotItem
-        text: i18n.tr("Wi-Fi hotspot")
-        progression: true
-        onClicked: {
-            pageStack.push(Qt.resolvedUrl("../Hotspot.qml"))
-        }
-        visible: (actionGroup.actionObject.valid ?
-                     actionGroup.actionObject.state : false) &&
-                 UpdateManager.deviceName !== "mako"
-
-    }
-
     ListItem.Standard {
         id: dataUsage
         text: i18n.tr("Data usage statistics")
