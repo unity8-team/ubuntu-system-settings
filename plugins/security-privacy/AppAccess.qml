@@ -54,8 +54,8 @@ ItemPage {
                     trustStoreService: "CameraService"
                 }
                 ListElement {
-                    name: QT_TR_NOOP("Mic")
-                    caption: QT_TR_NOOP("Apps that have requested access to your mic")
+                    name: QT_TR_NOOP("Microphone")
+                    caption: QT_TR_NOOP("Apps that have requested access to your microphone")
                     trustStoreService: "PulseAudio"
                 }
             }
