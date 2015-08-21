@@ -132,6 +132,10 @@ Component {
                     target: confirmButton
                     enabled: false
                 }
+                PropertyChanges {
+                    target: enableWifiCaption
+                    visible: false
+                }
             }
         ]
 
@@ -208,6 +212,16 @@ Component {
                 }
             }
 
+            ListItem.Caption {
+                id: enableWifiCaption
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                }
+                text: i18n.tr("In order to create a hotspot, you need to turn Wi-Fi on.")
+                visible: !Connectivity.wifiEnabled && !hotspotSetupDialog.stored
+            }
+
             Row {
 
                 anchors {
@@ -230,11 +244,14 @@ Component {
                     objectName: "confirmButton"
                     width: (parent.width / 2) - units.gu(1)
                     text: hotspotSetupDialog.stored ? i18n.tr("Change") :
-                        i18n.tr("Enable")
+                        i18n.tr("Start")
                     enabled: settingsValid()
                     activeFocusOnPress: false
                     onClicked: {
-                        if (hotspotSetupDialog.stored) {
+                        if (!Connectivity.wifiEnabled &&
+                                !hotspotSetupDialog.stored) {
+                            enableWifiAction.trigger();
+                        } else if (hotspotSetupDialog.stored) {
                             changeAction.trigger()
                         } else {
                             enableAction.trigger();
@@ -259,12 +276,22 @@ Component {
                         height: parent.height - units.gu(1.5)
                     }
                 }
+            }
+        }
 
-                Button {
-                    visible: showAllUI
-                    // TRANSLATORS: This string is hidden.
-                    text: i18n.tr("Start")
+        Action {
+            id: enableWifiAction
+            onTriggered: {
+                hotspotSetupDialog.state = "STARTING";
+
+                // As soon as Wi-Fi has been turned on, trigger enableAction.
+                function wifiUpdated (updated) {
+                    Connectivity.wifiEnabledUpdated.disconnect(wifiUpdated);
+                    enableAction.trigger();
                 }
+
+                Connectivity.wifiEnabledUpdated.connect(wifiUpdated);
+                Connectivity.wifiEnabled = true;
             }
         }
 

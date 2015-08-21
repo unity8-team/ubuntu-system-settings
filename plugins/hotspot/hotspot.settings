@@ -1,26 +1,16 @@
 {
-    "icon": "gsm-3g-high",
-    "name": "Cellular",
+    "icon": "preferences-network-hotspot-symbolic",
+    "name": "Hotspot",
     "translations": "ubuntu-system-settings",
     "category": "network",
-    "priority": 1,
+    "priority": 2,
     "form-factors": [
         "phone"
     ],
     "keywords": [
-        "cellular",
         "network",
-        "mobile",
-        "gsm",
-        "data",
-        "carrier",
-        "4g",
-        "3g",
-        "2g",
-        "lte",
-        "apn",
-        "roam",
-        "sim"
+        "hotspot",
+        "tethering"
     ],
     "has-dynamic-keywords": false,
     "has-dynamic-visibility": false,
