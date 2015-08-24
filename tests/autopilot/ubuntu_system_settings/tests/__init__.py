@@ -33,6 +33,12 @@ from dbusmock.templates.networkmanager import (InfrastructureMode,
 from fixtures import EnvironmentVariable
 from gi.repository import UPowerGlib
 from testtools.matchers import Equals, NotEquals, GreaterThan
+from ubuntu_system_settings.tests.connectivity import (
+    PRIV_OBJ as CTV_PRIV_OBJ, NETS_OBJ as CTV_NETS_OBJ,
+    MAIN_IFACE as CTV_IFACE
+)
+from ubuntuuitoolkit._custom_proxy_objects._common import (
+    is_process_running, _start_process, _stop_process)
 
 
 ACCOUNTS_IFACE = 'org.freedesktop.Accounts'
@@ -40,6 +46,7 @@ ACCOUNTS_USER_IFACE = 'org.freedesktop.Accounts.User'
 ACCOUNTS_OBJ = '/org/freedesktop/Accounts'
 ACCOUNTS_SERVICE = 'com.canonical.unity.AccountsService'
 ACCOUNTS_SOUND_IFACE = 'com.ubuntu.touch.AccountsService.Sound'
+INDICATOR_NETWORK = 'indicator-network'
 ISOUND_SERVICE = 'com.canonical.indicator.sound'
 ISOUND_ACTION_PATH = '/com/canonical/indicator/sound'
 GTK_ACTIONS_IFACE = 'org.gtk.Actions'
@@ -114,6 +121,18 @@ class UbuntuSystemSettingsTestCase(
             emulator_base=ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase,
             capture_output=True)
 
+    @classmethod
+    def tearDownClass(cls):
+        if dbusmock.DBusTestCase.system_bus_pid is not None:
+            cls.stop_dbus(dbusmock.DBusTestCase.system_bus_pid)
+            del os.environ['DBUS_SYSTEM_BUS_ADDRESS']
+            dbusmock.DBusTestCase.system_bus_pid = None
+        if dbusmock.DBusTestCase.session_bus_pid is not None:
+            cls.stop_dbus(dbusmock.DBusTestCase.session_bus_pid)
+            del os.environ['DBUS_SESSION_BUS_ADDRESS']
+            dbusmock.DBusTestCase.session_bus_pid = None
+        super(UbuntuSystemSettingsTestCase, cls).tearDownClass()
+
 
 class UbuntuSystemSettingsUpowerTestCase(UbuntuSystemSettingsTestCase,
                                          dbusmock.DBusTestCase):
@@ -123,14 +142,14 @@ class UbuntuSystemSettingsUpowerTestCase(UbuntuSystemSettingsTestCase,
     def setUpClass(cls):
         cls.start_system_bus()
         cls.dbus_con = cls.get_dbus(True)
+
+    def setUp(self, panel=None):
         # Add a mock Upower environment so we get consistent results
-        (cls.p_mock, cls.obj_upower) = cls.spawn_server_template(
+        (self.p_mock, self.obj_upower) = self.spawn_server_template(
             'upower',
             {'OnBattery': True, 'DaemonVersion': UPOWER_VERSION},
             stdout=subprocess.PIPE)
-        cls.dbusmock = dbus.Interface(cls.obj_upower, dbusmock.MOCK_IFACE)
-
-    def setUp(self, panel=None):
+        self.dbusmock = dbus.Interface(self.obj_upower, dbusmock.MOCK_IFACE)
         self.obj_upower.Reset()
         super(UbuntuSystemSettingsUpowerTestCase, self).setUp()
 
@@ -140,11 +159,10 @@ class UbuntuSystemSettingsUpowerTestCase(UbuntuSystemSettingsTestCase,
             'mock_BATTERY', 'Battery', 50.0, 10
         )
 
-    @classmethod
-    def tearDownClass(cls):
-        cls.p_mock.terminate()
-        cls.p_mock.wait()
-        super(UbuntuSystemSettingsUpowerTestCase, cls).tearDownClass()
+    def tearDown(self):
+        self.p_mock.terminate()
+        self.p_mock.wait()
+        super(UbuntuSystemSettingsUpowerTestCase, self).tearDown()
 
 
 class UbuntuSystemSettingsBatteryTestCase(UbuntuSystemSettingsUpowerTestCase):
@@ -179,22 +197,6 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
     def get_all_operators(self, name):
         return 'ret = [(m, objects[m].GetAll("org.ofono.NetworkOperator")) ' \
                'for m in objects if "%s/operator/" in m]' % name
-
-    def mock_connection_manager(self, modem):
-        modem.AddProperty(CONNMAN_IFACE, 'Powered', dbus.Boolean(1))
-        modem.AddProperty(CONNMAN_IFACE, 'RoamingAllowed', dbus.Boolean(0))
-        modem.AddMethods(
-            CONNMAN_IFACE,
-            [
-                (
-                    'GetProperties', '', 'a{sv}',
-                    'ret = self.GetAll("%s")' % CONNMAN_IFACE),
-                (
-                    'SetProperty', 'sv', '',
-                    'self.Set("IFACE", args[0], args[1]); '
-                    'self.EmitSignal("IFACE", "PropertyChanged", "sv",\
-                        [args[0], args[1]])'.replace("IFACE", CONNMAN_IFACE)),
-            ])
 
     def mock_carriers(self, name):
         self.dbusmock.AddObject(
@@ -284,7 +286,6 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
 
         self.mock_carriers('ril_0')
         self.mock_radio_settings(self.modem_0)
-        self.mock_connection_manager(self.modem_0)
         self.mock_call_forwarding(self.modem_0)
         self.mock_call_settings(self.modem_0)
 
@@ -295,6 +296,9 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
             ('GetOperators', '', 'a(oa{sv})', self.get_all_operators('ril_0')),
             ('Scan', '', 'a(oa{sv})', self.get_all_operators('ril_0')),
         ])
+        self.modem_0.connMan = dbus.Interface(self.dbus_con.get_object(
+                                              'org.ofono', '/ril_0'),
+                                              'org.ofono.ConnectionManager')
 
     def add_sim2(self):
         '''Mock two modems/sims for the dual sim story'''
@@ -315,7 +319,6 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
         ])
         self.mock_carriers(second_modem)
         self.mock_radio_settings(self.modem_1, technologies=['gsm'])
-        self.mock_connection_manager(self.modem_1)
         self.mock_call_forwarding(self.modem_1)
         self.mock_call_settings(self.modem_1)
 
@@ -324,24 +327,27 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
             'SubscriberNumbers', ['08123', '938762783']
         )
 
+        self.modem_1.connMan = dbus.Interface(self.dbus_con.get_object(
+                                              'org.ofono', '/' + second_modem),
+                                              'org.ofono.ConnectionManager')
+
     @classmethod
     def setUpClass(cls):
         cls.start_system_bus()
         cls.dbus_con = cls.get_dbus(True)
-        template = os.path.join(os.path.dirname(__file__), 'ofono.py')
-        # Add a mock Ofono environment so we get consistent results
-        (cls.p_mock, cls.obj_ofono) = cls.spawn_server_template(
-            template, stdout=subprocess.PIPE)
-        cls.dbusmock = dbus.Interface(cls.obj_ofono, dbusmock.MOCK_IFACE)
         super(UbuntuSystemSettingsOfonoTestCase, cls).setUpClass()
 
-    @classmethod
-    def tearDownClass(cls):
-        cls.p_mock.terminate()
-        cls.p_mock.wait()
-        super(UbuntuSystemSettingsOfonoTestCase, cls).tearDownClass()
+    def tearDown(self):
+        self.p_mock.terminate()
+        self.p_mock.wait()
+        super(UbuntuSystemSettingsOfonoTestCase, self).tearDown()
 
     def setUp(self, panel=None):
+        template = os.path.join(os.path.dirname(__file__), 'ofono.py')
+        # Add a mock Ofono environment so we get consistent results
+        (self.p_mock, self.obj_ofono) = self.spawn_server_template(
+            template, stdout=subprocess.PIPE)
+        self.dbusmock = dbus.Interface(self.obj_ofono, dbusmock.MOCK_IFACE)
         self.obj_ofono.Reset()
 
         self.add_sim1()
@@ -377,6 +383,63 @@ class CellularBaseTestCase(UbuntuSystemSettingsOfonoTestCase):
         """ Go to Cellular page """
         super(CellularBaseTestCase, self).setUp()
         self.cellular_page = self.main_view.go_to_cellular_page()
+
+    def add_connection_context(self, modem, **kwargs):
+        iface = 'org.ofono.ConnectionContext'
+        path = modem.connMan.AddContext(kwargs.get('Type', 'internet'))
+        context = dbus.Interface(self.dbus_con.get_object(
+                                 'org.ofono', path),
+                                 iface)
+
+        for key, value in kwargs.items():
+            context.SetProperty(key, value)
+
+
+class HotspotBaseTestCase(UbuntuSystemSettingsTestCase,
+                          dbusmock.DBusTestCase):
+
+    connectivity_parameters = {}
+    indicatornetwork_parameters = {}
+
+    @classmethod
+    def setUpClass(cls):
+        cls.session_con = cls.get_dbus(False)
+        super(HotspotBaseTestCase, cls).setUpClass()
+
+    def setUp(self):
+        if is_process_running(INDICATOR_NETWORK):
+            _stop_process(INDICATOR_NETWORK)
+            self.addCleanup(_start_process, INDICATOR_NETWORK)
+
+        ctv_tmpl = os.path.join(os.path.dirname(__file__), 'connectivity.py')
+        (self.ctv_mock, self.obj_ctv) = self.spawn_server_template(
+            ctv_tmpl, parameters=self.connectivity_parameters,
+            stdout=subprocess.PIPE)
+
+        self.ctv_private = dbus.Interface(
+            self.session_con.get_object(CTV_IFACE, CTV_PRIV_OBJ),
+            'org.freedesktop.DBus.Properties')
+
+        self.ctv_nets = dbus.Interface(
+            self.session_con.get_object(CTV_IFACE, CTV_NETS_OBJ),
+            'org.freedesktop.DBus.Properties')
+
+        inetwork = os.path.join(
+            os.path.dirname(__file__), 'indicatornetwork.py'
+        )
+        (self.inetwork_mock, self.obj_inetwork) = self.spawn_server_template(
+            inetwork, parameters=self.indicatornetwork_parameters,
+            stdout=subprocess.PIPE)
+
+        super(HotspotBaseTestCase, self).setUp()
+        self.hotspot_page = self.main_view.go_to_hotspot_page()
+
+    def tearDown(self):
+        self.ctv_mock.terminate()
+        self.ctv_mock.wait()
+        self.inetwork_mock.terminate()
+        self.inetwork_mock.wait()
+        super(HotspotBaseTestCase, self).tearDown()
 
 
 class BluetoothBaseTestCase(UbuntuSystemSettingsTestCase):
@@ -414,32 +477,34 @@ class AboutSystemImageBaseTestCase(AboutBaseTestCase,
     def setUpClass(cls):
         cls.start_system_bus()
         cls.dbus_con = cls.get_dbus(True)
-        cls.p_mock = cls.spawn_server('com.canonical.SystemImage',
-                                      '/Service',
-                                      'com.canonical.SystemImage',
-                                      system_bus=True,
-                                      stdout=subprocess.PIPE)
-        cls.dbusmock = dbus.Interface(cls.dbus_con.get_object(
-                                      'com.canonical.SystemImage',
-                                      '/Service'),
-                                      dbusmock.MOCK_IFACE)
-
-        date = datetime.now().replace(microsecond=0).isoformat()
-
-        cls.dbusmock.AddMethod('', 'Info', '', 'isssa{ss}',
-                               'ret = (0, "", "", "%s", [])' % date)
 
     def setUp(self):
+        self.p_mock = self.spawn_server('com.canonical.SystemImage',
+                                        '/Service',
+                                        'com.canonical.SystemImage',
+                                        system_bus=True,
+                                        stdout=subprocess.PIPE)
+
         self.wait_for_bus_object('com.canonical.SystemImage',
                                  '/Service',
                                  system_bus=True)
+
+        self.dbusmock = dbus.Interface(self.dbus_con.get_object(
+                                       'com.canonical.SystemImage',
+                                       '/Service'),
+                                       dbusmock.MOCK_IFACE)
+
+        date = datetime.now().replace(microsecond=0).isoformat()
+
+        self.dbusmock.AddMethod('', 'Info', '', 'isssa{ss}',
+                                'ret = (0, "", "", "%s", [])' % date)
+
         super(AboutSystemImageBaseTestCase, self).setUp()
 
-    @classmethod
-    def tearDownClass(cls):
-        cls.p_mock.terminate()
-        cls.p_mock.wait()
-        super(AboutSystemImageBaseTestCase, cls).tearDownClass()
+    def tearDown(self):
+        self.p_mock.terminate()
+        self.p_mock.wait()
+        super(AboutSystemImageBaseTestCase, self).tearDown()
 
 
 class StorageBaseTestCase(AboutBaseTestCase):
@@ -484,14 +549,37 @@ class LicenseBaseTestCase(AboutBaseTestCase):
         self.licenses_page = self.about_page.go_to_software_licenses()
 
 
-class SystemUpdatesBaseTestCase(UbuntuSystemSettingsTestCase):
-
+class SystemUpdatesBaseTestCase(UbuntuSystemSettingsTestCase,
+                                dbusmock.DBusTestCase):
     """Base class for SystemUpdates page tests."""
+
+    connectivity_parameters = {
+        'Status': 'online'
+    }
 
     def setUp(self):
         """Go to SystemUpdates Page."""
+        self.session_con = self.get_dbus(False)
+        if is_process_running(INDICATOR_NETWORK):
+            _stop_process(INDICATOR_NETWORK)
+            self.addCleanup(_start_process, INDICATOR_NETWORK)
+
+        ctv_tmpl = os.path.join(os.path.dirname(__file__), 'connectivity.py')
+        (self.ctv_mock, self.obj_ctv) = self.spawn_server_template(
+            ctv_tmpl, parameters=self.connectivity_parameters,
+            stdout=subprocess.PIPE)
+
+        self.ctv_nets = dbus.Interface(
+            self.session_con.get_object(CTV_IFACE, CTV_NETS_OBJ),
+            'org.freedesktop.DBus.Properties')
+
         super(SystemUpdatesBaseTestCase, self).setUp()
         self.main_view.click_item('entryComponent-system-update')
+
+    def tearDown(self):
+        self.ctv_mock.terminate()
+        self.ctv_mock.wait()
+        super(SystemUpdatesBaseTestCase, self).tearDown()
 
 
 class BackgroundBaseTestCase(
@@ -770,38 +858,6 @@ class ResetBaseTestCase(UbuntuSystemSettingsTestCase,
         super(ResetBaseTestCase, self).tearDown()
 
 
-class ConnectivityMixin(dbusmock.DBusTestCase):
-    @classmethod
-    def setUpClass(cls):
-        cls.start_session_bus()
-        cls.connectivity_dbus = cls.get_dbus()
-        cls.connectivity_server = cls.spawn_server(CON_SERVICE,
-                                                   CON_PATH,
-                                                   CON_IFACE,
-                                                   system_bus=False,
-                                                   stdout=subprocess.PIPE)
-
-        cls.connectivity_mock = dbus.Interface(
-            cls.connectivity_dbus.get_object(CON_SERVICE,
-                                             CON_PATH),
-            dbusmock.MOCK_IFACE)
-
-        cls.connectivity_mock.AddMethod('', 'UnlockModem', 's', '', '')
-        super(ConnectivityMixin, cls).setUpClass()
-
-    def setUp(self):
-        self.wait_for_bus_object(CON_SERVICE,
-                                 CON_PATH,
-                                 system_bus=False)
-        super(ConnectivityMixin, self).setUp()
-
-    @classmethod
-    def tearDownClass(cls):
-        cls.connectivity_server.terminate()
-        cls.connectivity_server.wait()
-        super(ConnectivityMixin, cls).tearDownClass()
-
-
 class SecurityBaseTestCase(UbuntuSystemSettingsOfonoTestCase):
     """ Base class for security and privacy settings tests"""
 
@@ -850,17 +906,34 @@ class WifiBaseTestCase(UbuntuSystemSettingsTestCase,
                        dbusmock.DBusTestCase):
     """ Base class for wifi settings tests"""
 
+    indicatornetwork_parameters = {}
+
     @classmethod
     def setUpClass(cls):
         cls.start_system_bus()
         cls.dbus_con = cls.get_dbus(True)
-        # Add a mock NetworkManager environment so we get consistent results
+        cls.session_con = cls.get_dbus(False)
+
         template = os.path.join(os.path.dirname(__file__), 'networkmanager.py')
         (cls.p_mock, cls.obj_nm) = cls.spawn_server_template(
             template, stdout=subprocess.PIPE)
+        super(WifiBaseTestCase, cls).setUpClass()
 
     def setUp(self, panel=None):
+        if is_process_running(INDICATOR_NETWORK):
+            _stop_process(INDICATOR_NETWORK)
+            self.addCleanup(_start_process, INDICATOR_NETWORK)
+
+        inetwork = os.path.join(
+            os.path.dirname(__file__), 'indicatornetwork.py'
+        )
+        (self.inetwork_mock, self.obj_inetwork) = self.spawn_server_template(
+            inetwork, parameters=self.indicatornetwork_parameters,
+            stdout=subprocess.PIPE)
+
         self.obj_nm.Reset()
+
+        # Add a mock NetworkManager environment so we get consistent results
         self.device_path = self.obj_nm.AddWiFiDevice('test0', 'Barbaz', 1)
         self.device_mock = dbus.Interface(self.dbus_con.get_object(
             NM_SERVICE, self.device_path),
@@ -878,6 +951,14 @@ class WifiBaseTestCase(UbuntuSystemSettingsTestCase,
             )
         else:
             self.wifi_page = self.main_view.go_to_wifi_page()
+
+        self.wifi_page._scroll_to_and_click = \
+            self.main_view.scroll_to_and_click
+
+    def tearDown(self):
+        self.inetwork_mock.terminate()
+        self.inetwork_mock.wait()
+        super(WifiBaseTestCase, self).tearDown()
 
     def create_access_point(self, name, ssid, security=None):
         """Creates access point.

@@ -165,6 +165,13 @@ QString SystemUpdate::currentDeviceBuildNumber() {
     return m_detailedVersion.value("device", "Unavailable");
 }
 
+QString SystemUpdate::currentCustomBuildNumber() {
+    if (!m_detailedVersion.contains("custom"))
+        setCurrentDetailedVersion();
+
+    return m_detailedVersion.value("custom", "Unavailable");
+}
+
 int SystemUpdate::downloadMode() {
     if (m_downloadMode != -1)
         return m_downloadMode;

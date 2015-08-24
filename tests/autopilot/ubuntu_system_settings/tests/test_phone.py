@@ -10,6 +10,8 @@ from __future__ import absolute_import
 from autopilot.matchers import Eventually
 from testtools.matchers import Contains, Equals
 
+from time import sleep
+
 from ubuntu_system_settings.tests import (
     PhoneOfonoBaseTestCase,
     CALL_FWD_IFACE,
@@ -29,7 +31,7 @@ class PhoneTestCase(PhoneOfonoBaseTestCase):
 
         # Check that the forward has been set
         self.assertThat(
-            call_fwd_page.get_forward_unconditionally(),
+            call_fwd_page.get_forward_unconditionally,
             Eventually(Equals('41444424')))
 
         # Check that dbus properties have been updated
@@ -51,7 +53,7 @@ class PhoneTestCase(PhoneOfonoBaseTestCase):
 
         # Check that the forward has been unset
         self.assertThat(
-            call_fwd_page.get_forward_unconditionally(),
+            call_fwd_page.get_forward_unconditionally,
             Eventually(Equals('')))
 
         # Check that dbus properties have been updated
@@ -65,7 +67,7 @@ class PhoneTestCase(PhoneOfonoBaseTestCase):
 
         # Check that the forward has been set
         self.assertThat(
-            call_fwd_page.get_forward_on_busy(),
+            call_fwd_page.get_forward_on_busy,
             Eventually(Equals('41444424')))
 
         # Check that dbus properties have been updated
@@ -78,7 +80,7 @@ class PhoneTestCase(PhoneOfonoBaseTestCase):
 
         # Check that the forward has been unset
         self.assertThat(
-            call_fwd_page.get_forward_on_busy(),
+            call_fwd_page.get_forward_on_busy,
             Eventually(Equals('')))
 
         # Check that dbus properties have been updated
@@ -92,7 +94,7 @@ class PhoneTestCase(PhoneOfonoBaseTestCase):
 
         # Check that the forward has been set
         self.assertThat(
-            call_fwd_page.get_forward_when_no_answer(),
+            call_fwd_page.get_forward_when_no_answer,
             Eventually(Equals('41444424')))
 
         # Check that dbus properties have been updated
@@ -105,7 +107,7 @@ class PhoneTestCase(PhoneOfonoBaseTestCase):
 
         # Check that the forward has been unset
         self.assertThat(
-            call_fwd_page.get_forward_when_no_answer(),
+            call_fwd_page.get_forward_when_no_answer,
             Eventually(Equals('')))
 
         # Check that dbus properties have been updated
@@ -121,7 +123,7 @@ class PhoneTestCase(PhoneOfonoBaseTestCase):
 
         # Check that the forward has been set
         self.assertThat(
-            call_fwd_page.get_forward_when_unreachable(),
+            call_fwd_page.get_forward_when_unreachable,
             Eventually(Equals('41444424')))
 
         # Check that dbus properties have been updated
@@ -134,7 +136,7 @@ class PhoneTestCase(PhoneOfonoBaseTestCase):
 
         # Check that the forward has been unset
         self.assertThat(
-            call_fwd_page.get_forward_when_unreachable(),
+            call_fwd_page.get_forward_when_unreachable,
             Eventually(Equals('')))
 
         # Check that dbus properties have been updated
@@ -172,7 +174,7 @@ class PhoneTestCase(PhoneOfonoBaseTestCase):
     # TODO: Test the Services page itself.
     def test_sim_services(self):
         self.assertThat(
-            self.phone_page.get_sim_services_enabled(),
+            self.phone_page.get_sim_services_enabled,
             Eventually(Equals(True)))
         self.phone_page.go_to_sim_services()
         self.main_view.go_back()
@@ -180,7 +182,7 @@ class PhoneTestCase(PhoneOfonoBaseTestCase):
             SIM_IFACE, 'PropertyChanged', 'sv',
             ['ServiceNumbers', ''])
         self.assertThat(
-            self.phone_page.get_sim_services_enabled(),
+            self.phone_page.get_sim_services_enabled,
             Eventually(Equals(False)))
 
 
@@ -192,11 +194,12 @@ class PhoneDualSimTestCase(PhoneOfonoBaseTestCase):
         # Set busy so we can assert that busy is eventually unset.
         call_fwd_page = self.phone_page.set_forward_on_busy('41444424',
                                                             sim=0)
+        sleep(1)
         call_fwd_page.set_forward_unconditionally('41444424',)
 
         # Check that the forward has been set
         self.assertThat(
-            call_fwd_page.get_forward_unconditionally(),
+            call_fwd_page.get_forward_unconditionally,
             Eventually(Equals('41444424')))
 
         # Check that dbus properties have been updated
@@ -218,7 +221,7 @@ class PhoneDualSimTestCase(PhoneOfonoBaseTestCase):
 
         # Check that the forward has been unset
         self.assertThat(
-            call_fwd_page.get_forward_unconditionally(),
+            call_fwd_page.get_forward_unconditionally,
             Eventually(Equals('')))
 
         # Check that dbus properties have been updated
@@ -233,7 +236,7 @@ class PhoneDualSimTestCase(PhoneOfonoBaseTestCase):
 
         # Check that the forward has been set
         self.assertThat(
-            call_fwd_page.get_forward_on_busy(),
+            call_fwd_page.get_forward_on_busy,
             Eventually(Equals('41444424')))
 
         # Check that dbus properties have been updated
@@ -246,7 +249,7 @@ class PhoneDualSimTestCase(PhoneOfonoBaseTestCase):
 
         # Check that the forward has been unset
         self.assertThat(
-            call_fwd_page.get_forward_on_busy(),
+            call_fwd_page.get_forward_on_busy,
             Eventually(Equals('')))
 
         # Check that dbus properties have been updated
@@ -261,7 +264,7 @@ class PhoneDualSimTestCase(PhoneOfonoBaseTestCase):
 
         # Check that the forward has been set
         self.assertThat(
-            call_fwd_page.get_forward_when_no_answer(),
+            call_fwd_page.get_forward_when_no_answer,
             Eventually(Equals('41444424')))
 
         # Check that dbus properties have been updated
@@ -274,7 +277,7 @@ class PhoneDualSimTestCase(PhoneOfonoBaseTestCase):
 
         # Check that the forward has been unset
         self.assertThat(
-            call_fwd_page.get_forward_when_no_answer(),
+            call_fwd_page.get_forward_when_no_answer,
             Eventually(Equals('')))
 
         # Check that dbus properties have been updated
@@ -290,7 +293,7 @@ class PhoneDualSimTestCase(PhoneOfonoBaseTestCase):
 
         # Check that the forward has been set
         self.assertThat(
-            call_fwd_page.get_forward_when_unreachable(),
+            call_fwd_page.get_forward_when_unreachable,
             Eventually(Equals('41444424')))
 
         # Check that dbus properties have been updated
@@ -303,7 +306,7 @@ class PhoneDualSimTestCase(PhoneOfonoBaseTestCase):
 
         # Check that the forward has been unset
         self.assertThat(
-            call_fwd_page.get_forward_when_unreachable(),
+            call_fwd_page.get_forward_when_unreachable,
             Eventually(Equals('')))
 
         # Check that dbus properties have been updated
@@ -316,11 +319,12 @@ class PhoneDualSimTestCase(PhoneOfonoBaseTestCase):
         # Set busy so we can assert that busy is eventually unset.
         call_fwd_page = self.phone_page.set_forward_on_busy('41444424',
                                                             sim=1)
+        sleep(1)
         call_fwd_page.set_forward_unconditionally('41444424',)
 
         # Check that the forward has been set
         self.assertThat(
-            call_fwd_page.get_forward_unconditionally(),
+            call_fwd_page.get_forward_unconditionally,
             Eventually(Equals('41444424')))
 
         # Check that dbus properties have been updated
@@ -342,7 +346,7 @@ class PhoneDualSimTestCase(PhoneOfonoBaseTestCase):
 
         # Check that the forward has been unset
         self.assertThat(
-            call_fwd_page.get_forward_unconditionally(),
+            call_fwd_page.get_forward_unconditionally,
             Eventually(Equals('')))
 
         # Check that dbus properties have been updated
@@ -357,7 +361,7 @@ class PhoneDualSimTestCase(PhoneOfonoBaseTestCase):
 
         # Check that the forward has been set
         self.assertThat(
-            call_fwd_page.get_forward_on_busy(),
+            call_fwd_page.get_forward_on_busy,
             Eventually(Equals('41444424')))
 
         # Check that dbus properties have been updated
@@ -370,7 +374,7 @@ class PhoneDualSimTestCase(PhoneOfonoBaseTestCase):
 
         # Check that the forward has been unset
         self.assertThat(
-            call_fwd_page.get_forward_on_busy(),
+            call_fwd_page.get_forward_on_busy,
             Eventually(Equals('')))
 
         # Check that dbus properties have been updated
@@ -385,7 +389,7 @@ class PhoneDualSimTestCase(PhoneOfonoBaseTestCase):
 
         # Check that the forward has been set
         self.assertThat(
-            call_fwd_page.get_forward_when_no_answer(),
+            call_fwd_page.get_forward_when_no_answer,
             Eventually(Equals('41444424')))
 
         # Check that dbus properties have been updated
@@ -398,7 +402,7 @@ class PhoneDualSimTestCase(PhoneOfonoBaseTestCase):
 
         # Check that the forward has been unset
         self.assertThat(
-            call_fwd_page.get_forward_when_no_answer(),
+            call_fwd_page.get_forward_when_no_answer,
             Eventually(Equals('')))
 
         # Check that dbus properties have been updated
@@ -414,7 +418,7 @@ class PhoneDualSimTestCase(PhoneOfonoBaseTestCase):
 
         # Check that the forward has been set
         self.assertThat(
-            call_fwd_page.get_forward_when_unreachable(),
+            call_fwd_page.get_forward_when_unreachable,
             Eventually(Equals('41444424')))
 
         # Check that dbus properties have been updated
@@ -427,7 +431,7 @@ class PhoneDualSimTestCase(PhoneOfonoBaseTestCase):
 
         # Check that the forward has been unset
         self.assertThat(
-            call_fwd_page.get_forward_when_unreachable(),
+            call_fwd_page.get_forward_when_unreachable,
             Eventually(Equals('')))
 
         # Check that dbus properties have been updated
@@ -491,7 +495,7 @@ class PhoneDualSimTestCase(PhoneOfonoBaseTestCase):
     # TODO: Test the Services page itself.
     def test_sim_services_sim_1(self):
         self.assertThat(
-            self.phone_page.get_sim_services_enabled(sim=0),
+            lambda: self.phone_page.get_sim_services_enabled(sim=0),
             Eventually(Equals(True)))
         self.phone_page.go_to_sim_services(sim=0)
         self.main_view.go_back()
@@ -499,13 +503,13 @@ class PhoneDualSimTestCase(PhoneOfonoBaseTestCase):
             SIM_IFACE, 'PropertyChanged', 'sv',
             ['ServiceNumbers', ''])
         self.assertThat(
-            self.phone_page.get_sim_services_enabled(sim=0),
+            lambda: self.phone_page.get_sim_services_enabled(sim=0),
             Eventually(Equals(False)))
 
     # TODO: Test the Services page itself.
     def test_sim_services_sim_2(self):
         self.assertThat(
-            self.phone_page.get_sim_services_enabled(sim=1),
+            lambda: self.phone_page.get_sim_services_enabled(sim=1),
             Eventually(Equals(True)))
         self.phone_page.go_to_sim_services(sim=1)
         self.main_view.go_back()
@@ -513,5 +517,5 @@ class PhoneDualSimTestCase(PhoneOfonoBaseTestCase):
             SIM_IFACE, 'PropertyChanged', 'sv',
             ['ServiceNumbers', ''])
         self.assertThat(
-            self.phone_page.get_sim_services_enabled(sim=1),
+            lambda: self.phone_page.get_sim_services_enabled(sim=1),
             Eventually(Equals(False)))
