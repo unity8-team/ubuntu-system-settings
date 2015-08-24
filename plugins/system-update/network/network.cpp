@@ -151,6 +151,11 @@ void Network::onReplyFinished()
 
     int httpStatus = statusAttr.toInt();
 
+    if (httpStatus == 401 || httpStatus == 403) {
+        Q_EMIT credentialError();
+        return;
+    }
+
     if (httpStatus == 200 || httpStatus == 201) {
         if (reply->hasRawHeader(X_CLICK_TOKEN)) {
             auto app = qobject_cast<Update*>(reply->request().originatingObject());

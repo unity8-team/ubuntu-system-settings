@@ -61,6 +61,7 @@ Q_SIGNALS:
     void networkError();
     void serverError();
     void clickTokenObtained(Update *app, const QString &clickToken);
+    void credentialError();
 
 private Q_SLOTS:
     void onReplyFinished();
