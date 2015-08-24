@@ -54,6 +54,11 @@ ItemPage {
                     trustStoreService: "CameraService"
                 }
                 ListElement {
+                    name: QT_TR_NOOP("Location")
+                    caption: QT_TR_NOOP("Apps that have requested access to your location")
+                    trustStoreService: "UbuntuLocationService"
+                }
+                ListElement {
                     name: QT_TR_NOOP("Microphone")
                     caption: QT_TR_NOOP("Apps that have requested access to your microphone")
                     trustStoreService: "PulseAudio"
