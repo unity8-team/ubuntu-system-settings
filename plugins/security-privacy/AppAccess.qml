@@ -25,7 +25,7 @@ import SystemSettings 1.0
 
 ItemPage {
     id: root
-    title: i18n.tr("Other app access")
+    title: i18n.tr("App permissions")
 
     Flickable {
         anchors.fill: parent
