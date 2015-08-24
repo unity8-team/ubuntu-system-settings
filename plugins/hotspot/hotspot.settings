@@ -1,0 +1,18 @@
+{
+    "icon": "preferences-network-hotspot-symbolic",
+    "name": "Hotspot",
+    "translations": "ubuntu-system-settings",
+    "category": "network",
+    "priority": 2,
+    "form-factors": [
+        "phone"
+    ],
+    "keywords": [
+        "network",
+        "hotspot",
+        "tethering"
+    ],
+    "has-dynamic-keywords": false,
+    "has-dynamic-visibility": false,
+    "page-component": "PageComponent.qml"
+}

@@ -191,21 +191,6 @@ QString StorageAbout::deviceBuildDisplayID()
     return m_deviceBuildDisplayID;
 }
 
-QString StorageAbout::customizationBuildID()
-{
-    if (m_customizationBuildID.isEmpty() || m_customizationBuildID.isNull())
-    {
-        QFile file("/custom/build_id");
-        if (!file.exists())
-            return "";
-        file.open(QIODevice::ReadOnly | QIODevice::Text);
-        m_customizationBuildID = QString(file.readAll().trimmed());
-        file.close();
-    }
-
-    return m_customizationBuildID;
-}
-
 QString StorageAbout::ubuntuBuildID()
 {
     if (m_ubuntuBuildID.isEmpty() || m_ubuntuBuildID.isNull())

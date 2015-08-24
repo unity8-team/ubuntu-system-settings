@@ -87,6 +87,13 @@ class SystemSettingsTestCases(UbuntuSystemSettingsTestCase):
         )
         self.assertThat(plugin, NotEquals(None))
 
+    def test_hotspot_plugin(self):
+        """ Checks whether the Hotspot plugin is available """
+        plugin = self.main_view.select_single(
+            objectName='entryComponent-hotspot'
+        )
+        self.assertThat(plugin, NotEquals(None))
+
     def test_background_plugin(self):
         """ Checks whether the Background plugin is available """
         plugin = self.main_view.select_single(

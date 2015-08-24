@@ -426,78 +426,90 @@ ItemPage {
         }
     }
 
-    Column {
-        anchors.left: parent.left
-        anchors.right: parent.right
+    Flickable {
+        anchors.fill: parent
+        contentHeight: contentItem.childrenRect.height
+        boundsBehavior: (contentHeight > page.height) ?
+                            Flickable.DragAndOvershootBounds :
+                            Flickable.StopAtBounds
+        /* Set the direction to workaround
+           https://bugreports.qt-project.org/browse/QTBUG-31905 otherwise the UI
+           might end up in a situation where scrolling doesn't work */
+        flickableDirection: Flickable.VerticalFlick
 
-        SettingsItemTitle {
-            text: i18n.tr("Unlock the phone using:")
-        }
+        Column {
+            anchors.left: parent.left
+            anchors.right: parent.right
 
-        ListItem.ItemSelector {
-            property string swipe: i18n.tr("Swipe (no security)")
-            property string passcode: i18n.tr("4-digit passcode")
-            property string passphrase: i18n.tr("Passphrase")
-            property string swipeAlt: i18n.tr("Swipe (no security)… ")
-            property string passcodeAlt: i18n.tr("4-digit passcode…")
-            property string passphraseAlt: i18n.tr("Passphrase…")
+            SettingsItemTitle {
+                text: i18n.tr("Unlock the phone using:")
+            }
 
-            id: unlockMethod
-            model: 3
-            delegate: OptionSelectorDelegate {
-                objectName: {
-                    switch (index) {
-                        case 0:
-                            return "method_swipe";
-                        case 1:
-                            return "method_code";
-                        case 2:
-                            return "method_phrase";
-                        default:
-                            return "method_unknown";
+            ListItem.ItemSelector {
+                property string swipe: i18n.tr("Swipe (no security)")
+                property string passcode: i18n.tr("4-digit passcode")
+                property string passphrase: i18n.tr("Passphrase")
+                property string swipeAlt: i18n.tr("Swipe (no security)… ")
+                property string passcodeAlt: i18n.tr("4-digit passcode…")
+                property string passphraseAlt: i18n.tr("Passphrase…")
+
+                id: unlockMethod
+                model: 3
+                delegate: OptionSelectorDelegate {
+                    objectName: {
+                        switch (index) {
+                            case 0:
+                                return "method_swipe";
+                            case 1:
+                                return "method_code";
+                            case 2:
+                                return "method_phrase";
+                            default:
+                                return "method_unknown";
+                        }
                     }
+                    text: index == 0 ? (unlockMethod.selectedIndex == 0 ? unlockMethod.swipe : unlockMethod.swipeAlt) :
+                         (index == 1 ? (unlockMethod.selectedIndex == 1 ? unlockMethod.passcode : unlockMethod.passcodeAlt) :
+                                       (unlockMethod.selectedIndex == 2 ? unlockMethod.passphrase : unlockMethod.passphraseAlt))
                 }
-                text: index == 0 ? (unlockMethod.selectedIndex == 0 ? unlockMethod.swipe : unlockMethod.swipeAlt) :
-                     (index == 1 ? (unlockMethod.selectedIndex == 1 ? unlockMethod.passcode : unlockMethod.passcodeAlt) :
-                                   (unlockMethod.selectedIndex == 2 ? unlockMethod.passphrase : unlockMethod.passphraseAlt))
+                expanded: true
+                onDelegateClicked: {
+                    if (selectedIndex === index && !changeControl.visible)
+                        return // nothing to do
+
+                    selectedIndex = index
+                    openDialog()
+                }
             }
-            expanded: true
-            onDelegateClicked: {
-                if (selectedIndex === index && !changeControl.visible)
-                    return // nothing to do
-
-                selectedIndex = index
-                openDialog()
+            Binding {
+                target: unlockMethod
+                property: "selectedIndex"
+                value: methodToIndex(securityPrivacy.securityType)
             }
-        }
-        Binding {
-            target: unlockMethod
-            property: "selectedIndex"
-            value: methodToIndex(securityPrivacy.securityType)
-        }
 
-        ListItem.SingleControl {
+            ListItem.SingleControl {
 
-            id: changeControl
-            visible: securityPrivacy.securityType !==
-                        UbuntuSecurityPrivacyPanel.Swipe
+                id: changeControl
+                visible: securityPrivacy.securityType !==
+                            UbuntuSecurityPrivacyPanel.Swipe
 
-            control: Button {
-                property string changePasscode: i18n.tr("Change passcode…")
-                property string changePassphrase: i18n.tr("Change passphrase…")
+                control: Button {
+                    property string changePasscode: i18n.tr("Change passcode…")
+                    property string changePassphrase: i18n.tr("Change passphrase…")
 
-                property bool passcode: securityPrivacy.securityType ===
-                                        UbuntuSecurityPrivacyPanel.Passcode
+                    property bool passcode: securityPrivacy.securityType ===
+                                            UbuntuSecurityPrivacyPanel.Passcode
 
-                objectName: "changePass"
-                enabled: parent.visible
+                    objectName: "changePass"
+                    enabled: parent.visible
 
-                text: passcode ? changePasscode : changePassphrase
-                width: parent.width - units.gu(4)
+                    text: passcode ? changePasscode : changePassphrase
+                    width: parent.width - units.gu(4)
 
-                onClicked: openDialog()
+                    onClicked: openDialog()
+                }
+                showDivider: false
             }
-            showDivider: false
         }
     }
 }

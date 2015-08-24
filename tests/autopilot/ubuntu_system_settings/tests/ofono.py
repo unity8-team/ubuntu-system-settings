@@ -5,16 +5,13 @@
 # Software Foundation; either version 3 of the License, or (at your option) any
 # later version.  See http://www.gnu.org/copyleft/lgpl.html for the full text
 # of the license.
+import dbus
+import dbusmock
 
 __author__ = 'Martin Pitt'
 __email__ = 'martin.pitt@ubuntu.com'
 __copyright__ = '(c) 2013 Canonical Ltd.'
 __license__ = 'LGPL 3+'
-
-
-import dbus
-
-import dbusmock
 
 BUS_NAME = 'org.ofono'
 MAIN_OBJ = '/'
@@ -88,6 +85,7 @@ def AddModem(self, name, properties):
     obj.name = name
     obj.sim_pin = "2468"
     add_simmanager_api(obj)
+    add_connectionmanager_api(obj)
     add_voice_call_api(obj)
     add_netreg_api(obj)
     self.modems.append(path)
@@ -125,6 +123,104 @@ def add_simmanager_api(mock):
          'args[1]])' % {'i': iface}),
         ('ResetPin', 'sss', '', '')
     ])
+
+
+def add_connectionmanager_api(mock):
+    '''Add org.ofono.ConnectionManager API to a mock'''
+
+    iface = 'org.ofono.ConnectionManager'
+    mock.contexts = []
+    mock.AddProperties(iface, {
+        'Attached': _parameters.get('Attached', True),
+        'Bearer': _parameters.get('Bearer', 'gprs'),
+        'RoamingAllowed': _parameters.get('RoamingAllowed', False),
+        'Powered': _parameters.get('ConnectionPowered', True),
+    })
+    mock.AddMethods(iface, [
+        ('GetProperties', '', 'a{sv}', 'ret = self.GetAll("%s")' % iface),
+        ('SetProperty', 'sv', '', 'self.Set("%(i)s", args[0], args[1]); '
+         'self.EmitSignal("%(i)s", "PropertyChanged", "sv", ['
+         'args[0], args[1]])' % {'i': iface}),
+        ('AddContext', 's', 'o', 'ret = self.AddConnectionContext(args[0])'),
+        ('RemoveContext', 'o', '', 'self.RemoveConnectionContext(args[0])'),
+        ('DeactivateAll', '', '', ''),
+        ('GetContexts', '', 'a(oa{sv})', 'ret = self.GetConnectionContexts()'),
+    ])
+
+    interfaces = mock.GetProperties()['Interfaces']
+    interfaces.append(iface)
+    mock.SetProperty('Interfaces', interfaces)
+
+
+@dbus.service.method('org.ofono.ConnectionManager',
+                     in_signature='', out_signature='a(oa{sv})')
+def GetConnectionContexts(self):
+    contexts = dbus.Array([], signature='a(oa{sv})')
+    for ctx in self.contexts:
+        contexts.append(dbus.Struct(
+            (ctx.__dbus_object_path__, ctx.GetProperties())))
+    return contexts
+
+
+@dbus.service.method('org.ofono.ConnectionManager',
+                     in_signature='s', out_signature='o')
+def AddConnectionContext(self, type):
+    name = 'context%s' % str(len(self.contexts))
+    path = '%s/%s' % (self.__dbus_object_path__, name)
+    iface = 'org.ofono.ConnectionContext'
+
+    # We give the context a name, just like ofono does.
+    # See https://github.com/rilmodem/ofono/blob/master/src/gprs.c#L148
+    ofono_default_accesspointname = {
+        'internet': 'Internet',
+        'mms': 'MMS',
+        'ai': 'AI',
+        'ims': 'IMS',
+        'wap': 'WAP'
+    }
+
+    self.AddObject(
+        path,
+        iface,
+        {
+            'Active': False,
+            'AccessPointName': '',
+            'Type': type,
+            'Username': '',
+            'Password': '',
+            'Protocol': 'ip',
+            'Name': ofono_default_accesspointname[type],
+            'Preferred': False,
+            'Settings': dbus.Dictionary({}, signature='sv'),
+            'IPv6.Settings': dbus.Dictionary({}, signature='sv'),
+            'MessageProxy': '',
+            'MessageCenter': '',
+        },
+        [
+            ('GetProperties', '', 'a{sv}',
+                'ret = self.GetAll("org.ofono.ConnectionContext")'),
+            (
+                'SetProperty', 'sv', '',
+                'self.Set("%s", args[0], args[1]); '
+                'self.EmitSignal("%s", "PropertyChanged",'
+                '"sv", [args[0], args[1]])' % (iface, iface)),
+        ])
+    ctx_obj = dbusmock.get_object(path)
+    self.contexts.append(ctx_obj)
+    self.EmitSignal('org.ofono.ConnectionManager',
+                    'ContextAdded', 'oa{sv}', [path, ctx_obj.GetProperties()])
+
+    return path
+
+
+@dbus.service.method('org.ofono.ConnectionManager',
+                     in_signature='o', out_signature='')
+def RemoveConnectionContext(self, path):
+    ctx_obj = dbusmock.get_object(path)
+    self.contexts.remove(ctx_obj)
+    self.RemoveObject(path)
+    self.EmitSignal('org.ofono.ConnectionManager',
+                    'ContextRemoved', 'o', [path])
 
 
 @dbus.service.method('org.ofono.SimManager',

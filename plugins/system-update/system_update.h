@@ -48,6 +48,7 @@ public:
     int currentBuildNumber();
     QString currentUbuntuBuildNumber();
     QString currentDeviceBuildNumber();
+    QString currentCustomBuildNumber();
     QString deviceName();
 
     void checkForUpdate();
