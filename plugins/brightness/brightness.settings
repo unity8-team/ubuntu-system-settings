@@ -1,7 +1,7 @@
 {
     "plugin": "brightness-plugin",
     "icon": "display-brightness-symbolic",
-    "name": "Brightness",
+    "name": "Brightness & Displays",
     "translations": "ubuntu-system-settings",
     "category": "system",
     "priority": 1,

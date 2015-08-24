@@ -311,6 +311,12 @@ ItemPage {
                     }
                 }
             }
+
+            ListItem.Divider {
+                anchors { left: parent.left; right: parent.right; }
+                height: units.gu(10)
+                opacity: 0
+            }
         }
     }
 
