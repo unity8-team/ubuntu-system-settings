@@ -164,11 +164,15 @@ void UpdateManager::checkUpdates()
 
 void UpdateManager::handleCredentialsFound(Token token)
 {
-    m_token = token;
-    QStringList args("list");
-    args << "--manifest";
-    QString command = getClickCommand();
-    m_process.start(command, args);
+    if (token.isValid()) {
+        m_token = token;
+        QStringList args("list");
+        args << "--manifest";
+        QString command = getClickCommand();
+        m_process.start(command, args);
+    } else {
+        m_service.invalidateCredentials();
+    }
 }
 
 QString UpdateManager::getClickCommand()
@@ -210,8 +214,6 @@ void UpdateManager::processOutput()
         app->initializeApplication(name, title, version);
         m_apps[app->getPackageName()] = app;
     }
-
-    m_network.checkForNewVersions(m_apps);
 }
 
 void UpdateManager::processUpdates()
