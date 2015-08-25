@@ -8,9 +8,10 @@
 import json
 import os
 import subprocess
-import time
 
-from testtools.matchers import Equals, NotEquals
+from autopilot.matchers import Eventually
+
+from testtools.matchers import Equals
 
 from ubuntu_system_settings.tests import UbuntuSystemSettingsTestCase
 
@@ -31,6 +32,7 @@ class NotificationsTestCases(UbuntuSystemSettingsTestCase):
     def setUp(self):
         # Check legacy items: one for each file in legacy-helpers
         super(NotificationsTestCases, self).setUp()
+        self.notification_page = self.main_view.go_to_notification_page()
 
     def test_item_counts(self):
         """ Checks whether the Notificatins category is available """
@@ -45,13 +47,9 @@ class NotificationsTestCases(UbuntuSystemSettingsTestCase):
                 ['click', 'list', '--manifest']).decode('utf8'))
         click_count = len([x for x in packages if has_helper(x)])
 
-        notif = self.main_view.select_single(
-            objectName='entryComponent-notifications')
-        self.assertThat(notif, NotEquals(None))
-        self.main_view.pointing_device.click_object(notif)
-        # Have to wait until the model loads
-        time.sleep(1)
-        notif_page = self.main_view.wait_select_single(
-            objectName='systemNotificationsPage')
-        items = notif_page.select_many(toolkit_emulators.Standard)
-        self.assertThat(len(items), Equals(click_count + legacy_count))
+        self.assertThat(
+            lambda: len(
+                self.notification_page.select_many(toolkit_emulators.Standard)
+            ),
+            Eventually(Equals(click_count + legacy_count))
+        )

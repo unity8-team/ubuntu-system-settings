@@ -112,6 +112,11 @@ class SystemSettingsMainWindow(ubuntuuitoolkit.MainView):
                                 'securityPrivacyPage')
 
     @autopilot.logging.log_action(logger.debug)
+    def go_to_notification_page(self):
+        return self._go_to_page('entryComponent-notifications',
+                                'systemNotificationsPage')
+
+    @autopilot.logging.log_action(logger.debug)
     def go_to_datetime_page(self):
         return self._go_to_page('entryComponent-time-date', 'timeDatePage')
 
