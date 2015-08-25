@@ -73,6 +73,12 @@ void Bluetooth::setSelectedDevice(const QString &address)
     }
 }
 
+void Bluetooth::resetSelectedDevice()
+{
+    m_selectedDevice.reset(0);
+    Q_EMIT(selectedDeviceChanged());
+}
+
 void Bluetooth::toggleDiscovery()
 {
     m_devices.toggleDiscovery();

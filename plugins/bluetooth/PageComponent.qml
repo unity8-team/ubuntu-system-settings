@@ -471,6 +471,8 @@ ItemPage {
                                 backend.stopDiscovery()
                                 backend.connectDevice(backend.selectedDevice.address);
                             }
+
+                            backend.resetSelectedDevice();
                             pageStack.pop();
                         }
                         visible: backend.selectedDevice ? true : false
@@ -483,6 +485,7 @@ ItemPage {
                         width: parent.width - units.gu(8)
                         onClicked: {
                             backend.removeDevice();
+                            backend.resetSelectedDevice();
                             pageStack.pop();
                         }
                         enabled: backend.selectedDevice && backend.selectedDevice.path.length > 0 ? true : false

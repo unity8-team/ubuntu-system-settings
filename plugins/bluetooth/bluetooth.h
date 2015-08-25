@@ -84,6 +84,7 @@ public:
     Q_INVOKABLE void stopDiscovery();
     Q_INVOKABLE static bool isSupportedType(const int type);
     Q_INVOKABLE void trySetDiscoverable(bool discoverable);
+    Q_INVOKABLE void resetSelectedDevice();
 
 public:
     Agent * getAgent();
