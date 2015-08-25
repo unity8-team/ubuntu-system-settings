@@ -214,6 +214,8 @@ void UpdateManager::processOutput()
         app->initializeApplication(name, title, version);
         m_apps[app->getPackageName()] = app;
     }
+
+    m_network.checkForNewVersions(m_apps);
 }
 
 void UpdateManager::processUpdates()
