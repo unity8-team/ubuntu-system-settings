@@ -51,7 +51,7 @@ class NotificationsTestCases(UbuntuSystemSettingsTestCase):
         self.main_view.pointing_device.click_object(notif)
         # Have to wait until the model loads
         time.sleep(1)
-        notif_page = self.main_view.select_single(
+        notif_page = self.main_view.wait_select_single(
             objectName='systemNotificationsPage')
         items = notif_page.select_many(toolkit_emulators.Standard)
         self.assertThat(len(items), Equals(click_count + legacy_count))
