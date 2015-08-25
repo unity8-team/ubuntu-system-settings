@@ -138,7 +138,6 @@ private Q_SLOTS:
     void processUpdates();
     void downloadApp(Update *app);
     void handleCredentialsFound(Token token);
-    void handleCredentialsFailed();
     void clickTokenReceived(Update *app, const QString &clickToken);
 
 private:
