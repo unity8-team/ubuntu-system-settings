@@ -24,13 +24,16 @@ import Ubuntu.Components 1.1
 Item {
     /* this property will come from Mir */
     property int doubleTapSpeed: 1000
+    property var message
+    property bool lastStatus
     Timer {
         id: clickTimer
         triggeredOnStart: false
         repeat: false
         interval: doubleTapSpeed
         onTriggered: {
-            label.text = i18n.tr("Not fast enough")
+            message = i18n.tr("Not fast enough")
+            lastStatus = false;
             doubleTapButton.text = "😌";
             safetyDelayTimer.start();
         }
@@ -69,7 +72,8 @@ Item {
                 clickTimer.stop();
                 safetyDelayTimer.start();
                 text = "😀";
-                label.text = i18n.tr("Double-clicked");
+                message = i18n.tr("Double-clicked");
+                lastStatus = true;
                 return;
             } else {
                 clickTimer.start()
