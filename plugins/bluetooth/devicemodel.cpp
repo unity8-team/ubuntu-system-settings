@@ -298,6 +298,7 @@ void DeviceModel::slotPropertyChanged(const QString      &key,
 
 void DeviceModel::addDevice(const QString &path)
 {
+    qWarning() << "DeviceModel::addDevice: path=" << path;
     QSharedPointer<Device> device(new Device(path, m_dbus));
     if (device->isValid()) {
         QObject::connect(device.data(), SIGNAL(deviceChanged()),
@@ -465,6 +466,8 @@ void DeviceModel::slotCreateFinished(QDBusPendingCallWatcher *call)
 
     if (reply.isError()) {
         qWarning() << "Could not create device:" << reply.error().message();
+    } else {
+
     }
 
     call->deleteLater();
@@ -487,8 +490,20 @@ void DeviceModel::createDevice (const QString &address, QObject *agent)
                                                            QString(DBUS_AGENT_CAPABILITY));
 
         QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(pcall, this);
-        QObject::connect(watcher, SIGNAL(finished(QDBusPendingCallWatcher*)),
-                         this, SLOT(slotCreateFinished(QDBusPendingCallWatcher*)));
+        QObject::connect(watcher, &QDBusPendingCallWatcher::finished, [this, address](QDBusPendingCallWatcher *watcher) {
+            QDBusPendingReply<QDBusObjectPath> reply = *watcher;
+
+            if (reply.isError()) {
+                qWarning() << "Could not create device:" << reply.error().message();
+            } else {
+                qWarning() << "Paired successfully with device " << address;
+
+                QSharedPointer<Device> device = getDeviceFromAddress(address);
+                device->connectPending();
+            }
+
+            watcher->deleteLater();
+        });
     } else {
         qWarning() << "Default adapter is not available for device creation";
     }

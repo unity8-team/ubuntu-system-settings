@@ -141,28 +141,24 @@ public:
     void updateConnection();
 
   public:
-    Device() {}
+    Device() { }
     ~Device() {}
     Device(const QString &path, QDBusConnection &bus);
     Device(const QMap<QString,QVariant> &properties);
     void initDevice(const QString &path, QDBusConnection &bus);
     bool isValid() const { return getType() != Type::Other; }
     void connect(ConnectionMode);
-    void connectPending();
     void makeTrusted(bool trusted);
     void disconnect(ConnectionMode);
     void setProperties(const QMap<QString,QVariant> &properties);
     void addConnectAfterPairing(const ConnectionMode mode);
 
   public Q_SLOTS:
-    void discoverServices();
+    void connectPending();
 
   private Q_SLOTS:
     void slotPropertyChanged(const QString &key, const QDBusVariant &value);
-    void slotServiceDiscoveryDone(QDBusPendingCallWatcher *call);
     void slotMakeTrustedDone(QDBusPendingCallWatcher *call);
-    void slotConnectDone(QDBusPendingCallWatcher *watcher);
-    void slotDisconnectDone(QDBusPendingCallWatcher *watcher);
 
   private:
     void updateProperties(QSharedPointer<QDBusInterface>);
