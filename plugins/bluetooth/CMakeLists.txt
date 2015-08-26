@@ -5,7 +5,8 @@ ProvidePinCodeDialog.qml
 ConfirmPasskeyDialog.qml
 DisplayPasskeyDialog.qml
 ProvidePasskeyDialog.qml
-PageComponent.qml 
+DevicePage.qml
+PageComponent.qml
 )
 
 add_library(UbuntuBluetoothPanel MODULE
