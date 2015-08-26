@@ -714,8 +714,10 @@ ItemPage {
             spacing: units.gu(2)
 
             Image {
-                source: Qt.resolvedUrl("file:///usr/share/ubuntu/settings/system/icons/distributor-logo.png")
+                source: Qt.resolvedUrl("file:///usr/share/icons/suru/places/scalable/distributor-logo.svg")
                 anchors.horizontalCenter: parent.horizontalCenter
+                height: width
+                width: 96
                 NumberAnimation on rotation {
                     from: 0
                     to: 360
