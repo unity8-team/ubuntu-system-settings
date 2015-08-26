@@ -82,7 +82,7 @@ UpdateManager::UpdateManager(QObject *parent):
     QObject::connect(&m_network, SIGNAL(serverError()),
                   this, SIGNAL(serverError()));
     QObject::connect(&m_network, SIGNAL(credentialError()),
-                     this, SLOT(m_service.invalidateCredentials()));
+                     this, SLOT(handleCredentialsFailed()));
     QObject::connect(&m_network,
                      SIGNAL(clickTokenObtained(Update*, const QString&)),
                      this, SLOT(clickTokenReceived(Update*, const QString&)));
@@ -169,6 +169,11 @@ void UpdateManager::handleCredentialsFound(Token token)
     args << "--manifest";
     QString command = getClickCommand();
     m_process.start(command, args);
+}
+
+void UpdateManager::handleCredentialsFailed()
+{
+    m_service.invalidateCredentials();
 }
 
 QString UpdateManager::getClickCommand()
