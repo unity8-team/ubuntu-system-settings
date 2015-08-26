@@ -6,6 +6,7 @@ set(QML_SOURCES
     PageComponent.qml
     None.qml
     Connected.qml
+    ItemTitle.qml
     TapArea.qml
     PrimaryButtonSelector.qml
 )

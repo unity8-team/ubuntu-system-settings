@@ -30,6 +30,7 @@ import "Components/UnityInputInfo"
 Column {
     anchors.left: parent.left
     anchors.right: parent.right
+    height: childrenRect.height + units.gu(5)
     
     GSettings {
         id: settings
@@ -40,119 +41,142 @@ Column {
         anchors.left: parent.left
         anchors.right: parent.right
         visible: UnityInputInfo.mice > 0
+        spacing: units.gu(0.1)
         
         ListItem.Header {
             text: i18n.tr("Mouse")
         }
 
-        SettingsItemTitle {
-            text: i18n.tr("Move:")
-            showDivider: false
-        }
+        Column {
+            anchors.left: parent.left
+            anchors.right: parent.right
+            spacing: 0
+            height: childrenRect.height
+            ItemTitle {
+                text: i18n.tr("Move:")
+                showDivider: false
+            }
 
             Menus.SliderMenu {
-            anchors { 
-                left: parent.left
-                right: parent.right
-                leftMargin: units.gu(2)
-                rightMargin: units.gu(2)
-            }
-            id: mouseMoveSpeed
-            objectName: "mouseMoveSpeed"
-            function formatValue(v) { return v.toFixed(2) }
-            minimumValue: 0.0
-            maximumValue: 1.0
-            value: settings.mouseCursorSpeed
-            live: true
-            property real serverValue: enabled ? settings.mouseCursorSpeed : 0.0
-            USC.ServerPropertySynchroniser {
-                userTarget: mouseMoveSpeed
-                userProperty: "value"
-                serverTarget: mouseMoveSpeed
-                serverProperty: "serverValue"
-                maximumWaitBufferInterval: 16
-                
-                onSyncTriggered: settings.mouseCursorSpeed = value
-            }
-        }
-
-        SettingsItemTitle {
-            text: i18n.tr("Scroll:")
-            showDivider: false
-        }
-
-        Menus.SliderMenu {
-            anchors { 
-                left: parent.left
-                right: parent.right
-                leftMargin: units.gu(2)
-                rightMargin: units.gu(2)
-            }
-            id: mouseScrollSpeed
-            objectName: "mouseMoveSpeed"
-            function formatValue(v) { return v.toFixed(2) }
-            minimumValue: 0.0
-            maximumValue: 1.0
-            value: settings.mouseScrollSpeed
-            live: true
-            property real serverValue: enabled ? settings.mouseScrollSpeed : 0.0
-            USC.ServerPropertySynchroniser {
-                userTarget: mouseScrollSpeed
-                userProperty: "value"
-                serverTarget: mouseScrollSpeed
-                serverProperty: "serverValue"
-                maximumWaitBufferInterval: 16
-                
-                onSyncTriggered: settings.mouseScrollSpeed = value
-            }
-        }
-        SettingsItemTitle {
-            text: i18n.tr("Double-click:")
-            showDivider: false
-        }
-
-        Menus.SliderMenu {
-            anchors { 
-                left: parent.left
-                right: parent.right
-                leftMargin: units.gu(2)
-                rightMargin: units.gu(2)
-            }
-            id: mouseDoubleClickSpeed
-            objectName: "mouseDoubleClickSpeed"
-            function formatValue(v) { return v.toFixed(2) }
-            minimumValue: 100
-            maximumValue: 1000
-            value: settings.mouseDoubleClickSpeed
-            live: true
-            property real serverValue: enabled ? settings.mouseDoubleClickSpeed : 0.0
-            USC.ServerPropertySynchroniser {
-                userTarget: mouseDoubleClickSpeed
-                userProperty: "value"
-                serverTarget: mouseDoubleClickSpeed
-                serverProperty: "serverValue"
-                maximumWaitBufferInterval: 16
-                
-                onSyncTriggered: settings.mouseDoubleClickSpeed = value
+                anchors { 
+                    left: parent.left
+                    right: parent.right
+                }
+                id: mouseMoveSpeed
+                objectName: "mouseMoveSpeed"
+                showDivider: false
+                function formatValue(v) { return v.toFixed(2) }
+                minimumValue: 0.0
+                maximumValue: 1.0
+                value: settings.mouseCursorSpeed
+                live: true
+                property real serverValue: enabled ? settings.mouseCursorSpeed : 0.0
+                USC.ServerPropertySynchroniser {
+                    userTarget: mouseMoveSpeed
+                    userProperty: "value"
+                    serverTarget: mouseMoveSpeed
+                    serverProperty: "serverValue"
+                    maximumWaitBufferInterval: 16
+                    
+                    onSyncTriggered: settings.mouseCursorSpeed = value
+                }
             }
         }
 
-        SettingsItemTitle {
-            text: i18n.tr("Test double-click:")
-            showDivider: false
-        }
+        Column {
+            anchors.left: parent.left
+            anchors.right: parent.right
+            spacing: 0
+            height: childrenRect.height
 
-        TapArea {
-            anchors { 
-                left: parent.left
-                right: parent.right
-                leftMargin: units.gu(2)
-                rightMargin: units.gu(2)
+            ItemTitle {
+                text: i18n.tr("Scroll:")
+                showDivider: false
             }
-            height: units.gu(5)
-            doubleTapSpeed: settings.mouseDoubleClickSpeed
-        }
 
+            Menus.SliderMenu {
+                anchors { 
+                    left: parent.left
+                    right: parent.right
+                }
+                id: mouseScrollSpeed
+                objectName: "mouseMoveSpeed"
+                showDivider: false
+                function formatValue(v) { return v.toFixed(2) }
+                minimumValue: 0.0
+                maximumValue: 1.0
+                value: settings.mouseScrollSpeed
+                live: true
+                property real serverValue: enabled ? settings.mouseScrollSpeed : 0.0
+                USC.ServerPropertySynchroniser {
+                    userTarget: mouseScrollSpeed
+                    userProperty: "value"
+                    serverTarget: mouseScrollSpeed
+                    serverProperty: "serverValue"
+                    maximumWaitBufferInterval: 16
+                    
+                    onSyncTriggered: settings.mouseScrollSpeed = value
+                }
+            }
+        }
+        Column {
+            anchors.left: parent.left
+            anchors.right: parent.right
+            spacing: 0
+            height: childrenRect.height
+            ItemTitle {
+                text: i18n.tr("Double-click:")
+                showDivider: false
+            }
+
+            Menus.SliderMenu {
+                anchors { 
+                    left: parent.left
+                    right: parent.right
+                }
+                id: mouseDoubleClickSpeed
+                objectName: "mouseDoubleClickSpeed"
+                showDivider: false
+                function formatValue(v) { return v.toFixed(2) }
+                minimumValue: 100
+                maximumValue: 1000
+                value: settings.mouseDoubleClickSpeed
+                live: true
+                property real serverValue: enabled ? settings.mouseDoubleClickSpeed : 0.0
+                USC.ServerPropertySynchroniser {
+                    userTarget: mouseDoubleClickSpeed
+                    userProperty: "value"
+                    serverTarget: mouseDoubleClickSpeed
+                    serverProperty: "serverValue"
+                    maximumWaitBufferInterval: 16
+                    
+                    onSyncTriggered: settings.mouseDoubleClickSpeed = value
+                }
+            }
+        }
+        Column {
+            anchors.left: parent.left
+            anchors.right: parent.right
+            spacing: units.gu(2)
+            height: childrenRect.height
+
+            ItemTitle {
+                text: i18n.tr("Test double-click:")
+                showDivider: false
+            }
+
+            TapArea {
+                anchors { 
+                    left: parent.left
+                    right: parent.right
+                    leftMargin: units.gu(2)
+                    rightMargin: units.gu(2)
+                    topMargin: units.gu(2)
+                }
+                height: units.gu(5)
+                doubleTapSpeed: settings.mouseDoubleClickSpeed
+            }    
+        }
 
         PrimaryButtonSelector {
             id: mousePrimarySelector
@@ -180,118 +204,140 @@ Column {
             topMargin: units.gu(2)
         }
         visible: UnityInputInfo.touchpads > 0
+        spacing: units.gu(0.1)
 
         ListItem.Header {
             text: i18n.tr("Touchpad")
         }
                     
-        SettingsItemTitle {
-            text: i18n.tr("Move:")
-            showDivider: false
-        }
-
-        Menus.SliderMenu {
-            anchors { 
-                left: parent.left
-                right: parent.right
-                leftMargin: units.gu(2)
-                rightMargin: units.gu(2)
+        Column {
+            anchors.left: parent.left
+            anchors.right: parent.right
+            spacing: 0
+            height: childrenRect.height
+            ItemTitle {
+                text: i18n.tr("Move:")
+                showDivider: false
             }
-            id: touchMoveSpeed
-            objectName: "touchMoveSpeed"
-            function formatValue(v) { return v.toFixed(2) }
-            minimumValue: 0.0
-            maximumValue: 1.0
-            value: settings.touchpadCursorSpeed
-            live: true
-            property real serverValue: enabled ? settings.touchpadCursorSpeed : 0.0
-            USC.ServerPropertySynchroniser {
-                userTarget: touchMoveSpeed
-                userProperty: "value"
-                serverTarget: touchMoveSpeed
-                serverProperty: "serverValue"
-                maximumWaitBufferInterval: 16
-                
-                onSyncTriggered: settings.touchpadCursorSpeed = value
-            }
-        }
 
-        SettingsItemTitle {
-            text: i18n.tr("Scroll:")
-            showDivider: false
-        }
-
-        Menus.SliderMenu {
-            anchors { 
-                left: parent.left
-                right: parent.right
-                leftMargin: units.gu(2)
-                rightMargin: units.gu(2)
-            }
-            id: touchScrollSpeed
-            objectName: "touchScrollSpeed"
-            function formatValue(v) { return v.toFixed(2) }
-            minimumValue: 0.0
-            maximumValue: 1.0
-            value: settings.touchpadScrollSpeed
-            live: true
-            property real serverValue: enabled ? settings.touchpadScrollSpeed : 0.0
-            USC.ServerPropertySynchroniser {
-                userTarget: touchScrollSpeed
-                userProperty: "value"
-                serverTarget: touchScrollSpeed
-                serverProperty: "serverValue"
-                maximumWaitBufferInterval: 16
-                
-                onSyncTriggered: settings.touchpadScrollSpeed = value
+            Menus.SliderMenu {
+                anchors { 
+                    left: parent.left
+                    right: parent.right
+                }
+                id: touchMoveSpeed
+                objectName: "touchMoveSpeed"
+                showDivider: false
+                function formatValue(v) { return v.toFixed(2) }
+                minimumValue: 0.0
+                maximumValue: 1.0
+                value: settings.touchpadCursorSpeed
+                live: true
+                property real serverValue: enabled ? settings.touchpadCursorSpeed : 0.0
+                USC.ServerPropertySynchroniser {
+                    userTarget: touchMoveSpeed
+                    userProperty: "value"
+                    serverTarget: touchMoveSpeed
+                    serverProperty: "serverValue"
+                    maximumWaitBufferInterval: 16
+                    
+                    onSyncTriggered: settings.touchpadCursorSpeed = value
+                }
             }
         }
 
-        SettingsItemTitle {
-            text: i18n.tr("Double-click:")
-            showDivider: false
+        Column {
+            anchors.left: parent.left
+            anchors.right: parent.right
+            spacing: units.gu(2)
+            height: childrenRect.height
+            ItemTitle {
+                text: i18n.tr("Scroll:")
+                showDivider: false
+            }
+
+            Menus.SliderMenu {
+                anchors { 
+                    left: parent.left
+                    right: parent.right
+                }
+                id: touchScrollSpeed
+                objectName: "touchScrollSpeed"
+                showDivider: false
+                function formatValue(v) { return v.toFixed(2) }
+                minimumValue: 0.0
+                maximumValue: 1.0
+                value: settings.touchpadScrollSpeed
+                live: true
+                property real serverValue: enabled ? settings.touchpadScrollSpeed : 0.0
+                USC.ServerPropertySynchroniser {
+                    userTarget: touchScrollSpeed
+                    userProperty: "value"
+                    serverTarget: touchScrollSpeed
+                    serverProperty: "serverValue"
+                    maximumWaitBufferInterval: 16
+                    
+                    onSyncTriggered: settings.touchpadScrollSpeed = value
+                }
+            }
         }
 
-        Menus.SliderMenu {
-            anchors { 
-                left: parent.left
-                right: parent.right
-                leftMargin: units.gu(2)
-                rightMargin: units.gu(2)
+        Column {
+            anchors.left: parent.left
+            anchors.right: parent.right
+            spacing: units.gu(2)
+            height: childrenRect.height
+            ItemTitle {
+                text: i18n.tr("Double-click:")
+                showDivider: false
             }
-            id: touchClickSpeed
-            objectName: "touchClickSpeed"
-            function formatValue(v) { return v.toFixed(2) }
-            minimumValue: 100
-            maximumValue: 1000
-            value: settings.touchpadDoubleClickSpeed
-            live: true
-            property real serverValue: enabled ? settings.touchpadDoubleClickSpeed : 0.0
-            USC.ServerPropertySynchroniser {
-                userTarget: touchClickSpeed
-                userProperty: "value"
-                serverTarget: touchClickSpeed
-                serverProperty: "serverValue"
-                maximumWaitBufferInterval: 16
-                
-                onSyncTriggered: settings.touchpadDoubleClickSpeed = value
+
+            Menus.SliderMenu {
+                anchors { 
+                    left: parent.left
+                    right: parent.right
+                }
+                id: touchClickSpeed
+                objectName: "touchClickSpeed"
+                showDivider: false
+                function formatValue(v) { return v.toFixed(2) }
+                minimumValue: 100
+                maximumValue: 1000
+                value: settings.touchpadDoubleClickSpeed
+                live: true
+                property real serverValue: enabled ? settings.touchpadDoubleClickSpeed : 0.0
+                USC.ServerPropertySynchroniser {
+                    userTarget: touchClickSpeed
+                    userProperty: "value"
+                    serverTarget: touchClickSpeed
+                    serverProperty: "serverValue"
+                    maximumWaitBufferInterval: 16
+                    
+                    onSyncTriggered: settings.touchpadDoubleClickSpeed = value
+                }
             }
         }
 
-        SettingsItemTitle {
-            text: i18n.tr("Test double-click:")
-            showDivider: false
-        }
-
-        TapArea {
-            anchors { 
-                left: parent.left
-                right: parent.right
-                leftMargin: units.gu(2)
-                rightMargin: units.gu(2)
+        Column {
+            anchors.left: parent.left
+            anchors.right: parent.right
+            spacing: units.gu(2)
+            height: childrenRect.height
+            ItemTitle {
+                text: i18n.tr("Test double-click:")
+                showDivider: false
             }
-            height: units.gu(5)
-            doubleTapSpeed: settings.touchpadDoubleClickSpeed
+
+            TapArea {
+                anchors { 
+                    left: parent.left
+                    right: parent.right
+                    leftMargin: units.gu(2)
+                    rightMargin: units.gu(2)
+                }
+                height: units.gu(5)
+                doubleTapSpeed: settings.touchpadDoubleClickSpeed
+            }
         }
 
         PrimaryButtonSelector {

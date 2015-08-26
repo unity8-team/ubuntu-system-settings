@@ -92,5 +92,6 @@ Item {
             verticalCenter: parent.verticalCenter
         }
         visible: safetyDelayTimer.running
+        text: message
     }
 }
