@@ -298,7 +298,6 @@ void DeviceModel::slotPropertyChanged(const QString      &key,
 
 void DeviceModel::addDevice(const QString &path)
 {
-    qWarning() << "DeviceModel::addDevice: path=" << path;
     QSharedPointer<Device> device(new Device(path, m_dbus));
     if (device->isValid()) {
         QObject::connect(device.data(), SIGNAL(deviceChanged()),
