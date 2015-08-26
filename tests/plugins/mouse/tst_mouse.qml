@@ -35,7 +35,7 @@ TapArea {
         when: windowShown
 
         function init() {
-            tryCompare(area.button, "enabled", true, 2010);
+            tryCompare(area.button, "enabled", true);
         }
         function test_double_click_success() {
             mouseClick(area);
