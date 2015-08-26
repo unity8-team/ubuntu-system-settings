@@ -118,7 +118,7 @@ public:
     bool m_paired = false;
     bool m_trusted = false;
     Connection m_connection = Connection::Disconnected;
-    Strength m_strength = Strength::Fair;
+    Strength m_strength = Strength::None;
     bool m_isConnected = false;
     QSharedPointer<QDBusInterface> m_deviceInterface;
     QSharedPointer<QDBusInterface> m_audioInterface;
@@ -165,6 +165,7 @@ public:
     void initInterface(QSharedPointer<QDBusInterface>&, const QString &path, const QString &name, QDBusConnection&);
     void updateProperty(const QString &key, const QVariant &value);
     static Type getTypeFromClass(quint32 bluetoothClass);
+    Device::Strength getStrengthFromRssi(int rssi);
 };
 
 Q_DECLARE_METATYPE(Device*)

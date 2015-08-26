@@ -380,6 +380,9 @@ void Device::updateProperty(const QString &key, const QVariant &value)
     } else if (key == "Icon") { // org.bluez.Device
         m_fallbackIconName = value.toString();
         updateIcon ();
+    } else if (key == "RSSI") {
+        m_strength = getStrengthFromRssi(value.toInt());
+        Q_EMIT(strengthChanged());
     }
 }
 
@@ -468,5 +471,22 @@ Device::Type Device::getTypeFromClass (quint32 c)
     }
 
     return Type::Other;
+}
+
+Device::Strength Device::getStrengthFromRssi(int rssi)
+{
+    /* Modelled similar to what Mac OS X does.
+     * See http://www.cnet.com/how-to/how-to-check-bluetooth-connection-strength-in-os-x/ */
+
+    if (rssi >= -60)
+        return Excellent;
+    else if (rssi < -60 && rssi >= -70)
+        return Good;
+    else if (rssi < -70 && rssi >= -90)
+        return Fair;
+    else if (rssi < -90)
+        return Poor;
+
+    return None;
 }
 

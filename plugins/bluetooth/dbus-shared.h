@@ -22,6 +22,6 @@
 
 #define DBUS_AGENT_PATH "/com/canonical/SettingsBluetoothAgent"
 #define DBUS_ADAPTER_AGENT_PATH "/com/canonical/SettingsBluetoothAgent/adapteragent"
-#define DBUS_AGENT_CAPABILITY "DisplayYesNo"
+#define DBUS_AGENT_CAPABILITY "KeyboardDisplay"
 
 #endif // USS_DBUS_SHARED_H
