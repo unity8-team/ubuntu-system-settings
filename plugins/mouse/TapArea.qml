@@ -26,6 +26,8 @@ Item {
     property int doubleTapSpeed: 1000
     property var message
     property bool lastStatus
+    property var button: doubleTapButton
+
     Timer {
         id: clickTimer
         triggeredOnStart: false

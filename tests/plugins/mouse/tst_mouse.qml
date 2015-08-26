@@ -36,14 +36,26 @@ TapArea {
         id: test1
         when: windowShown
 
-        function test_double_click() {
-            waitForRendering(area, 1000)
+        function init() {
+            tryCompare(area.button, "enabled", true, 2010);
+        }
+        function test_double_click_success() {
             mouseClick(area);
             wait(10);
             mouseClick(area);
-            verify(area.lastStatus)
-
+            compare(area.message, i18n.tr("Double-clicked"));
+        }
+        function test_double_click_fail() {
+            mouseClick(area);
+            wait(210);
+            mouseClick(area);
+            compare(area.message, i18n.tr("Not fast enough"));
+        }
+        function test_double_click_safety() {
+            mouseClick(area);
+            wait(210);
+            mouseClick(area);
+            verify(!area.button.enabled);
         }
     }
-
 }
