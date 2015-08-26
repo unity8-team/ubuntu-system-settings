@@ -63,6 +63,8 @@ Column {
                     onTriggered: {
                         if (checked)
                             buttonEnum = "Left"
+                        else
+                            checked = true;
                     }
                 }
                 Label {
@@ -78,6 +80,8 @@ Column {
                     onTriggered: {
                         if (checked)
                             buttonEnum = "Right"
+                        else
+                            checked = true;
                     }
                 }
                 Label {

@@ -163,7 +163,6 @@ Column {
             height: childrenRect.height + units.gu(2)
             buttonEnum: settings.mousePrimaryButton
             onButtonEnumChanged: {
-                console.warn("buttonEnum: " + buttonEnum);
                 settings.mousePrimaryButton = buttonEnum;
             }
             Binding {
@@ -304,7 +303,6 @@ Column {
             height: childrenRect.height + units.gu(1)
             buttonEnum: settings.touchpadPrimaryButton
             onButtonEnumChanged: {
-                console.warn("buttonEnum: " + buttonEnum);
                 settings.touchpadPrimaryButton = buttonEnum;
             }
             Binding {
