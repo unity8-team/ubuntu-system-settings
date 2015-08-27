@@ -55,7 +55,11 @@ ItemPage {
 
     Flickable {
         id: scrollWidget
-        anchors.fill: parent
+        anchors {
+            fill: parent
+            topMargin: units.gu(1)
+            bottomMargin: units.gu(1)
+        }
         contentHeight: contentItem.childrenRect.height
         boundsBehavior: (contentHeight > root.height) ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
 

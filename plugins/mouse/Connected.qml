@@ -28,9 +28,11 @@ import Ubuntu.Settings.Components 0.1 as USC
 import "Components/UnityInputInfo"
 
 Column {
-    anchors.left: parent.left
-    anchors.right: parent.right
-    height: childrenRect.height + units.gu(5)
+    anchors {
+        left: parent.left
+        right: parent.right
+    }
+    height: childrenRect.height
     
     GSettings {
         id: settings
@@ -38,18 +40,21 @@ Column {
     }
     
     Column {
-        anchors.left: parent.left
-        anchors.right: parent.right
+        anchors {
+            left: parent.left
+            right: parent.right
+        }
         visible: UnityInputInfo.mice > 0
-        //spacing: units.gu(0.1)
 
         SectionHeader {
             text: i18n.tr("Mouse")
         }
 
         Column {
-            anchors.left: parent.left
-            anchors.right: parent.right
+            anchors {
+                left: parent.left
+                right: parent.right
+            }
             spacing: 0
             height: childrenRect.height
             ItemTitle {
@@ -84,8 +89,10 @@ Column {
         }
 
         Column {
-            anchors.left: parent.left
-            anchors.right: parent.right
+            anchors {
+                left: parent.left
+                right: parent.right
+            }
             spacing: 0
             height: childrenRect.height
 
@@ -120,8 +127,10 @@ Column {
             }
         }
         Column {
-            anchors.left: parent.left
-            anchors.right: parent.right
+            anchors {
+                left: parent.left
+                right: parent.right
+            }
             spacing: 0
             height: childrenRect.height
             ItemTitle {
@@ -155,8 +164,10 @@ Column {
             }
         }
         Column {
-            anchors.left: parent.left
-            anchors.right: parent.right
+            anchors {
+                left: parent.left
+                right: parent.right
+            }
             spacing: units.gu(3)
             height: childrenRect.height
 
@@ -211,8 +222,10 @@ Column {
         }
 
         Column {
-            anchors.left: parent.left
-            anchors.right: parent.right
+            anchors {
+                left: parent.left
+                right: parent.right
+            }
             spacing: 0
             height: childrenRect.height
             ItemTitle {
@@ -247,8 +260,10 @@ Column {
         }
 
         Column {
-            anchors.left: parent.left
-            anchors.right: parent.right
+            anchors {
+                left: parent.left
+                right: parent.right
+            }
             spacing: 0
             height: childrenRect.height
             ItemTitle {
@@ -283,8 +298,10 @@ Column {
         }
 
         Column {
-            anchors.left: parent.left
-            anchors.right: parent.right
+            anchors {
+                left: parent.left
+                right: parent.right
+            }
             spacing: 0
             height: childrenRect.height
             ItemTitle {
@@ -319,8 +336,10 @@ Column {
         }
 
         Column {
-            anchors.left: parent.left
-            anchors.right: parent.right
+            anchors {
+                left: parent.left
+                right: parent.right
+            }
             spacing: units.gu(3)
             height: childrenRect.height
             ItemTitle {
@@ -408,7 +427,6 @@ Column {
                 leftMargin: units.gu(2)
                 rightMargin: units.gu(2)
                 topMargin: units.gu(2)
-                bottomMargin: units.gu(2)
             }
             spacing: units.gu(1)
             Row {
