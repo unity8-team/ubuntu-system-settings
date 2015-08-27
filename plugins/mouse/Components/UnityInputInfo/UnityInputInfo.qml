@@ -80,15 +80,11 @@ Item {
         objectName: "inputDeviceInfo"
 
         onNewDevice: {
-            console.warn("onNewDevice: " + devicePath);
-            console.warn("onNewDevice index: " + inputInfo.indexOf(devicePath));
             var device = inputInfo.get(inputInfo.indexOf(devicePath));
-            console.warn("onNewDevice types: " + device.types);
             if (device === null) {
                 return;
             }
 
-            console.warn("onNewDevice types: " + device.types);
             var hasMouse = (device.types & InputInfo.Mouse) == InputInfo.Mouse
             var hasTouchpad = (device.types & InputInfo.TouchPad) == InputInfo.TouchPad
             var hasKeyboard = (device.types & InputInfo.Keyboard) == InputInfo.Keyboard
