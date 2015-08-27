@@ -29,7 +29,6 @@
 
 namespace {
     const QString URL_APPS = "https://search.apps.ubuntu.com/api/v1/click-metadata";
-    const QString APPS_DATA = "APPS_DATA";
     constexpr static const char* FRAMEWORKS_FOLDER {"/usr/share/click/frameworks/"};
     constexpr static const char* FRAMEWORKS_PATTERN {"*.framework"};
     constexpr static const int FRAMEWORKS_EXTENSION_LENGTH = 10; // strlen(".framework")
@@ -134,6 +133,7 @@ std::vector<std::string> Network::listFolder(const std::string& folder, const st
 
 void Network::checkForNewVersions(QHash<QString, Update*> &apps)
 {
+    qWarning() << __PRETTY_FUNCTION__;
     m_apps = apps;
     QJsonObject serializer;
     QJsonArray array;
@@ -158,6 +158,7 @@ void Network::checkForNewVersions(QHash<QString, Update*> &apps)
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
     request.setRawHeader(QByteArray("X-Ubuntu-Frameworks"), QByteArray::fromStdString(frameworks.str()));
     request.setRawHeader(QByteArray("X-Ubuntu-Architecture"), QByteArray::fromStdString(getArchitecture()));
+    request.setUrl(url);
 
     auto reply = m_nam.post(request, content);
 
@@ -189,6 +190,7 @@ void Network::onUpdatesCheckFinished()
 
     // check for http error status and emit all the required signals
     if (!replyIsValid(r)) {
+        qWarning() << "Reply is not valid.";
         return;
     }
 
@@ -256,6 +258,7 @@ void Network::onReplyError(QNetworkReply::NetworkError code)
 
 void Network::getClickToken(Update *app, const QString &url)
 {
+    qWarning() << __PRETTY_FUNCTION__;
     if (!m_token.isValid()) {
         app->setError("Invalid User Token");
         return;
