@@ -1,3 +1,29 @@
+ubuntu-system-settings (0.3+15.10.20150827-0ubuntu1) wily; urgency=medium
+
+  [ Ken VanDine ]
+  * Don't show the phone number in the about page, that is now provided
+    by address-book-app (LP: #1364452)
+
+  [ Robert Ancell ]
+  * Use new QML package names for qml-module-qt-labs-folderlistmodel,
+    qml-module-qtsysteminfo.
+
+  [ Sebastien Bacher ]
+  * [security-privacy] rename the "Lock phone" item to "Locking and
+    unlocking" and do not include the screen delay as a value, it
+    misleads users to think that the section is only about that where it
+    also includes security options (LP: #1361127)
+  * [security-privacy] use the correct access to location string (LP:
+    #1388184)
+
+  [ jonas-drange ]
+  * Use wait_select_single instead of select_single to make the test
+    less flaky
+  * [plugin] add has-dynamic-name to allow for dynamic renaming of a
+    plugin. (LP: #1475629)
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Thu, 27 Aug 2015 07:47:59 +0000
+
 ubuntu-system-settings (0.3+15.10.20150818-0ubuntu1) wily; urgency=medium
 
   [ CI Train Bot ]
