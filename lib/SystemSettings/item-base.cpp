@@ -38,6 +38,7 @@ const QLatin1String keyPlugin("plugin");
 const QLatin1String keyEntryComponent("entry-component");
 const QLatin1String keyPageComponent("page-component");
 const QLatin1String keyHasDynamicKeywords("has-dynamic-keywords");
+const QLatin1String keyHasDynamicName("has-dynamic-name");
 const QLatin1String keyHasDynamicVisibility("has-dynamic-visibility");
 const QLatin1String keyHideByDefault("hide-by-default");
 const QLatin1String keyVisibleIfFileExists("visible-if-file-exists");
@@ -52,6 +53,7 @@ class ItemBasePrivate
 private:
     QVariantMap m_data;
     QUrl m_icon;
+    QString m_name;
     QStringList m_keywords;
     bool m_isVisible;
 };
@@ -87,6 +89,20 @@ QUrl ItemBase::icon() const
 {
     Q_D(const ItemBase);
     return d->m_icon;
+}
+
+void ItemBase::setName(const QString &name)
+{
+    Q_D(ItemBase);
+    if (name == d->m_name) return;
+    d->m_name = name;
+    Q_EMIT nameChanged();
+}
+
+QString ItemBase::name() const
+{
+    Q_D(const ItemBase);
+    return d->m_name;
 }
 
 void ItemBase::setKeywords(const QStringList &keywords)
