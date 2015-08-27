@@ -28,7 +28,7 @@ add_executable(tst-update
 add_executable(tst-network
     tst_network.cpp
     ../../../plugins/system-update/update.cpp
-    ../../../plugins/system-update/network/network.cpp
+    ../../../plugins/system-update/network.cpp
 )
 
 # set the path to the library folder

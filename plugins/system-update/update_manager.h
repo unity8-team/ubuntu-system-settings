@@ -18,8 +18,7 @@
  *
 */
 
-#ifndef UPDATEMANAGER_H
-#define UPDATEMANAGER_H
+#pragma once
 
 #include <QObject>
 #include <QtQml>
@@ -40,7 +39,7 @@
 #else
 #include <ssoservice.h>
 #include <QProcess>
-#include "network/network.h"
+#include "network.h"
 #include "system_update.h"
 #endif
 
@@ -112,8 +111,8 @@ public:
     QHash<QString, Update*> get_apps() { return m_apps; }
     QVariantList get_model() { return m_model; }
     int get_downloadMode() { return m_downloadMode; }
-    void set_token(Token& t) { m_token = t; }
-    Token get_token() { return m_token; }
+    void set_token(Token& t) { m_network.setUbuntuOneToken(t); }
+    Token get_token() { return m_network.getUbuntuOneToken(); }
     void setCheckintUpdates(int value) { m_checkingUpdates = value; }
     void setCheckSystemUpdates(int value) { m_systemCheckingUpdate = value; }
     void setCheckClickUpdates(int value) { m_clickCheckingUpdate = value; }
@@ -149,7 +148,6 @@ private:
     QHash<QString, Update*> m_apps;
     int m_downloadMode;
     QVariantList m_model;
-    Token m_token;
     QString m_latestDownload;
 
 #ifdef TESTS
@@ -174,5 +172,3 @@ private:
 };
 
 }
-
-#endif // UPDATEMANAGER_H

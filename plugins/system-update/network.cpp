@@ -29,7 +29,6 @@
 
 namespace {
     const QString URL_APPS = "https://search.apps.ubuntu.com/api/v1/click-metadata";
-    const QString APPS_DATA = "APPS_DATA";
     constexpr static const char* FRAMEWORKS_FOLDER {"/usr/share/click/frameworks/"};
     constexpr static const char* FRAMEWORKS_PATTERN {"*.framework"};
     constexpr static const int FRAMEWORKS_EXTENSION_LENGTH = 10; // strlen(".framework")
@@ -56,6 +55,49 @@ std::vector<std::string> Network::getAvailableFrameworks()
         result.push_back(f.substr(0, f.size()-FRAMEWORKS_EXTENSION_LENGTH));
     }
     return result;
+}
+
+bool Network::replyIsValid(QNetworkReply *reply)
+{
+    auto statusAttr = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute);
+    if (!statusAttr.isValid()) {
+        Q_EMIT errorOccurred();
+        return false;
+    }
+
+    int httpStatus = statusAttr.toInt();
+    qWarning() << "HTTP Status: " << httpStatus;
+
+    if (httpStatus == 401 || httpStatus == 403) {
+        qWarning() << "Emitting credetials error.";
+        Q_EMIT credentialError();
+        return false;
+    }
+
+    return true;
+}
+
+void Network::onTokenRequestFinished(Update* app, QNetworkReply* r)
+{
+    // the scoped pointer will take care of calling the deleteLater when leaving the slot
+    QScopedPointer<QNetworkReply, QScopedPointerDeleteLater> reply(r);
+
+    // check if the reply is valid, this method will emit all the required signals to propagate errors to the rest
+    // of the plugin
+    if (!replyIsValid(r)) {
+        qWarning() << "Reply is not valid.";
+        return;
+    }
+
+    if (reply->hasRawHeader(X_CLICK_TOKEN)) {
+        if (app != nullptr) {
+            QString header(reply->rawHeader(X_CLICK_TOKEN));
+            Q_EMIT clickTokenObtained(app, header);
+        }
+        return;
+    }
+
+    Q_EMIT errorOccurred();
 }
 
 std::string Network::architectureFromDpkg()
@@ -91,6 +133,7 @@ std::vector<std::string> Network::listFolder(const std::string& folder, const st
 
 void Network::checkForNewVersions(QHash<QString, Update*> &apps)
 {
+    qWarning() << __PRETTY_FUNCTION__;
     m_apps = apps;
     QJsonObject serializer;
     QJsonArray array;
@@ -107,18 +150,19 @@ void Network::checkForNewVersions(QHash<QString, Update*> &apps)
     QByteArray content = doc.toJson();
 
     QString urlApps = getUrlApps();
+    QString authHeader = m_token.signUrl(urlApps, QStringLiteral("POST"), true);
+    QUrl url(urlApps);
+    url.setQuery(authHeader);
+
     QNetworkRequest request;
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
     request.setRawHeader(QByteArray("X-Ubuntu-Frameworks"), QByteArray::fromStdString(frameworks.str()));
     request.setRawHeader(QByteArray("X-Ubuntu-Architecture"), QByteArray::fromStdString(getArchitecture()));
-    request.setUrl(QUrl(urlApps));
-
-    RequestObject* reqObject = new RequestObject(QString(APPS_DATA));
-    request.setOriginatingObject(reqObject);
+    request.setUrl(url);
 
     auto reply = m_nam.post(request, content);
 
-    connect(reply, &QNetworkReply::finished, this, &Network::onReplyFinished);
+    connect(reply, &QNetworkReply::finished, this, &Network::onUpdatesCheckFinished);
     connect(reply, &QNetworkReply::sslErrors, this, &Network::onReplySslErrors);
     connect(reply, static_cast<void(QNetworkReply::*)
             (QNetworkReply::NetworkError)>(&QNetworkReply::error),
@@ -139,66 +183,49 @@ QString Network::getFrameworksDir()
     return command;
 }
 
-void Network::onReplyFinished()
+void Network::onUpdatesCheckFinished()
 {
     // the scoped pointer will take care of calling the deleteLater when leaving the slot
-    QScopedPointer<QNetworkReply, QScopedPointerDeleteLater> reply(qobject_cast<QNetworkReply*>(sender()));
-    auto statusAttr = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute);
-    if (!statusAttr.isValid()) {
-        Q_EMIT errorOccurred();
+    auto r = qobject_cast<QNetworkReply*>(sender());
+
+    // check for http error status and emit all the required signals
+    if (!replyIsValid(r)) {
+        qWarning() << "Reply is not valid.";
         return;
     }
 
-    int httpStatus = statusAttr.toInt();
+    QScopedPointer<QNetworkReply, QScopedPointerDeleteLater> reply(r);
 
-    if (httpStatus == 401 || httpStatus == 403) {
-        Q_EMIT credentialError();
-        return;
-    }
+    auto document = QJsonDocument::fromJson(reply->readAll());
 
-    if (httpStatus == 200 || httpStatus == 201) {
-        if (reply->hasRawHeader(X_CLICK_TOKEN)) {
-            auto app = qobject_cast<Update*>(reply->request().originatingObject());
-            if (app != nullptr) {
-                QString header(reply->rawHeader(X_CLICK_TOKEN));
-                Q_EMIT clickTokenObtained(app, header);
-            }
-            return;
-        }
-
-        QByteArray payload = reply->readAll();
-        QJsonDocument document = QJsonDocument::fromJson(payload);
-
-        auto state = qobject_cast<RequestObject*>(reply->request().originatingObject());
-        if (state != nullptr && state->operation.contains(APPS_DATA) && document.isArray()) {
-            QJsonArray array = document.array();
-            bool updates = false;
-            for (int i = 0; i < array.size(); i++) {
-                auto object = array.at(i).toObject();
-                auto name = object["name"].toString();
-                auto version = object["version"].toString();
-                auto icon_url = object["icon_url"].toString();
-                auto url = object["download_url"].toString();
-                auto download_sha512 = object["download_sha512"].toString();
-                auto size = object["binary_filesize"].toInt();
-                if (m_apps.contains(name)) {
-                    m_apps[name]->setRemoteVersion(version);
-                    if (m_apps[name]->updateRequired()) {
-                        m_apps[name]->setIconUrl(icon_url);
-                        m_apps[name]->setDownloadUrl(url);
-                        m_apps[name]->setBinaryFilesize(size);
-                        m_apps[name]->setDownloadSha512(download_sha512);
-                        updates = true;
-                    }
+    if (document.isArray()) {
+        QJsonArray array = document.array();
+        bool updates = false;
+        for (int i = 0; i < array.size(); i++) {
+            auto object = array.at(i).toObject();
+            auto name = object["name"].toString();
+            auto version = object["version"].toString();
+            auto icon_url = object["icon_url"].toString();
+            auto url = object["download_url"].toString();
+            auto download_sha512 = object["download_sha512"].toString();
+            auto size = object["binary_filesize"].toInt();
+            if (m_apps.contains(name)) {
+                m_apps[name]->setRemoteVersion(version);
+                if (m_apps[name]->updateRequired()) {
+                    m_apps[name]->setIconUrl(icon_url);
+                    m_apps[name]->setDownloadUrl(url);
+                    m_apps[name]->setBinaryFilesize(size);
+                    m_apps[name]->setDownloadSha512(download_sha512);
+                    updates = true;
                 }
             }
-            if (updates) {
-                Q_EMIT updatesFound();
-                return;
-            } else {
-                Q_EMIT updatesNotFound();
-                return;
-            }
+        }
+        if (updates) {
+            Q_EMIT updatesFound();
+            return;
+        } else {
+            Q_EMIT updatesNotFound();
+            return;
         }
     }
 
@@ -229,20 +256,31 @@ void Network::onReplyError(QNetworkReply::NetworkError code)
     reply->deleteLater();
 }
 
-void Network::getClickToken(Update *app, const QString &url,
-                            const QString &authHeader)
+void Network::getClickToken(Update *app, const QString &url)
 {
+    qWarning() << __PRETTY_FUNCTION__;
+    if (!m_token.isValid()) {
+        app->setError("Invalid User Token");
+        return;
+    }
+
+    QString authHeader = m_token.signUrl(app->downloadUrl(), QStringLiteral("HEAD"), true);
+    app->setClickUrl(app->downloadUrl());
+
     QProcessEnvironment environment = QProcessEnvironment::systemEnvironment();
     QString signUrl = environment.value("CLICK_TOKEN_URL", url);
     QUrl query(signUrl);
     query.setQuery(authHeader);
     QNetworkRequest request;
     request.setUrl(query);
-    request.setOriginatingObject(app);
 
     auto reply = m_nam.head(request);
 
-    connect(reply, &QNetworkReply::finished, this, &Network::onReplyFinished);
+    connect(reply, &QNetworkReply::finished, this, [=](){
+        auto reply = qobject_cast<QNetworkReply*>(sender());
+        onTokenRequestFinished(app, reply);
+    });
+
     connect(reply, &QNetworkReply::sslErrors, this, &Network::onReplySslErrors);
     connect(reply, static_cast<void(QNetworkReply::*)
                     (QNetworkReply::NetworkError)>(&QNetworkReply::error),
