@@ -234,6 +234,7 @@ ItemPage {
 
         onRebooting: {
             installingImageUpdate.message = i18n.tr("Restarting…");
+            rebootTimer.start();
         }
     }
     Flickable {
@@ -707,6 +708,15 @@ ItemPage {
         z: 10
         color: "#221e1c"
         property string message: i18n.tr("Installing update…")
+
+        Timer {
+            id: rebootTimer
+            onTriggered: UpdateManager.applySystemUpdate();
+            triggeredOnStart: false
+            repeat: false
+            running: false
+            interval: 30000
+        }
 
         Column {
             anchors.centerIn: parent
