@@ -41,9 +41,9 @@ Column {
         anchors.left: parent.left
         anchors.right: parent.right
         visible: UnityInputInfo.mice > 0
-        spacing: units.gu(0.1)
-        
-        ListItem.Header {
+        //spacing: units.gu(0.1)
+
+        SectionHeader {
             text: i18n.tr("Mouse")
         }
 
@@ -157,7 +157,7 @@ Column {
         Column {
             anchors.left: parent.left
             anchors.right: parent.right
-            spacing: units.gu(2)
+            spacing: units.gu(3)
             height: childrenRect.height
 
             ItemTitle {
@@ -206,10 +206,10 @@ Column {
         visible: UnityInputInfo.touchpads > 0
         spacing: units.gu(0.1)
 
-        ListItem.Header {
+        SectionHeader {
             text: i18n.tr("Touchpad")
         }
-                    
+
         Column {
             anchors.left: parent.left
             anchors.right: parent.right
@@ -249,7 +249,7 @@ Column {
         Column {
             anchors.left: parent.left
             anchors.right: parent.right
-            spacing: units.gu(2)
+            spacing: 0
             height: childrenRect.height
             ItemTitle {
                 text: i18n.tr("Scroll:")
@@ -285,7 +285,7 @@ Column {
         Column {
             anchors.left: parent.left
             anchors.right: parent.right
-            spacing: units.gu(2)
+            spacing: 0
             height: childrenRect.height
             ItemTitle {
                 text: i18n.tr("Double-click:")
@@ -321,7 +321,7 @@ Column {
         Column {
             anchors.left: parent.left
             anchors.right: parent.right
-            spacing: units.gu(2)
+            spacing: units.gu(3)
             height: childrenRect.height
             ItemTitle {
                 text: i18n.tr("Test double-click:")
