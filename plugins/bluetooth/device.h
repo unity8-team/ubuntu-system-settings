@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 Canonical Ltd
+ * Copyright (C) 2013-2015 Canonical Ltd
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as
@@ -141,7 +141,7 @@ public:
     void updateConnection();
 
   public:
-    Device() { }
+    Device() {}
     ~Device() {}
     Device(const QString &path, QDBusConnection &bus);
     Device(const QMap<QString,QVariant> &properties);
