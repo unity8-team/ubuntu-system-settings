@@ -1,4 +1,5 @@
 {
+    "plugin": "cellular-plugin",
     "icon": "gsm-3g-high",
     "name": "Cellular",
     "translations": "ubuntu-system-settings",

@@ -20,6 +20,8 @@
 
 #include "cellular-plugin.h"
 
+#include "qofonomanager.h"
+
 #include <QDebug>
 #include <QDBusInterface>
 #include <QDBusReply>
@@ -42,20 +44,10 @@ public:
 CellularItem::CellularItem(const QVariantMap &staticData, QObject *parent):
     ItemBase(staticData, parent)
 {
-    QDBusInterface m_ofonoIface ("org.ofono.Manager",
-                                  "/",
-                                  "org.ofono.Manager",
-                                  QDBusConnection::systemBus());
-
-    QDBusReply<QStringList> reply = m_ofonoIface.call("GetModems");
-    if (reply.isValid()) {
-        if (reply.value().length() > 0) {
-            setVisibility(true);
-            return;
-        }
-    }
+    QOfonoManager *mm = new QOfonoManager(this);
+    qWarning() << Q_FUNC_INFO << mm->modems().length();
     // Hide the plugin if there are no modems present
-    setVisibility(false);
+    setVisibility(mm->modems().length() > 0);
 }
 
 void CellularItem::setVisibility(bool visible)
