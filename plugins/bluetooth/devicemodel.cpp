@@ -465,8 +465,6 @@ void DeviceModel::slotCreateFinished(QDBusPendingCallWatcher *call)
 
     if (reply.isError()) {
         qWarning() << "Could not create device:" << reply.error().message();
-    } else {
-
     }
 
     call->deleteLater();
