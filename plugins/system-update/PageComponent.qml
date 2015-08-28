@@ -204,7 +204,16 @@ ItemPage {
             credentialsNotification.visible = true;
         }
 
+        function _purgeClickUpdates() {
+            for (var i=0; i < UpdateManager.model.length; i++) {
+                if (!UpdateManager.model[i].systemUpdate)
+                    UpdateManager.model[i].updateRequired = false;
+            }
+        }
+
         onCredentialsDeleted: {
+            _purgeClickUpdates();
+            activity.running = false;
             credentialsNotification.visible = true;
         }
 
