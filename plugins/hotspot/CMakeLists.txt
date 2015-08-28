@@ -1,3 +1,5 @@
+add_subdirectory(plugin)
+
 set(QML_SOURCES
     Common.qml
     HotspotSetup.qml

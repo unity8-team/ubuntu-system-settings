@@ -18,7 +18,7 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "cellular-plugin.h"
+#include "hotspot-plugin.h"
 
 #include <QDebug>
 #include <SystemSettings/ItemBase>
@@ -26,12 +26,12 @@
 
 using namespace SystemSettings;
 
-class CellularItem: public ItemBase
+class HotspotItem: public ItemBase
 {
     Q_OBJECT
 
 public:
-    explicit CellularItem(const QVariantMap &staticData, QObject *parent = 0);
+    explicit HotspotItem(const QVariantMap &staticData, QObject *parent = 0);
     void setVisibility(bool visible);
 
 private Q_SLOTS:
@@ -39,7 +39,7 @@ private Q_SLOTS:
 };
 
 
-CellularItem::CellularItem(const QVariantMap &staticData, QObject *parent):
+HotspotItem::HotspotItem(const QVariantMap &staticData, QObject *parent):
     ItemBase(staticData, parent)
 {
     QOfonoManager *mm = new QOfonoManager(this);
@@ -50,20 +50,20 @@ CellularItem::CellularItem(const QVariantMap &staticData, QObject *parent):
 
 }
 
-void CellularItem::shouldShow(QStringList modems)
+void HotspotItem::shouldShow(QStringList modems)
 {
     setVisibility(modems.length() > 0);
 }
 
-void CellularItem::setVisibility(bool visible)
+void HotspotItem::setVisibility(bool visible)
 {
     setVisible(visible);
 }
 
-ItemBase *CellularPlugin::createItem(const QVariantMap &staticData,
+ItemBase *HotspotPlugin::createItem(const QVariantMap &staticData,
                                  QObject *parent)
 {
-    return new CellularItem(staticData, parent);
+    return new HotspotItem(staticData, parent);
 }
 
-#include "cellular-plugin.moc"
+#include "hotspot-plugin.moc"

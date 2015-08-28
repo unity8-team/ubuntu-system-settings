@@ -18,13 +18,13 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef SYSTEM_SETTINGS_CELLULAR_PLUGIN_H
-#define SYSTEM_SETTINGS_CELLULAR_PLUGIN_H
+#ifndef SYSTEM_SETTINGS_PHONE_PLUGIN_H
+#define SYSTEM_SETTINGS_PHONE_PLUGIN_H
 
 #include <QObject>
 #include <SystemSettings/PluginInterface>
 
-class CellularPlugin: public QObject, public SystemSettings::PluginInterface2
+class PhonePlugin: public QObject, public SystemSettings::PluginInterface2
 {
     Q_OBJECT
     Q_PLUGIN_METADATA(IID "com.ubuntu.SystemSettings.PluginInterface/2.0")
@@ -35,4 +35,4 @@ public:
                                          QObject *parent = 0);
 };
 
-#endif // SYSTEM_SETTINGS_CELLULAR_PLUGIN_H
+#endif // SYSTEM_SETTINGS_PHONE_PLUGIN_H
