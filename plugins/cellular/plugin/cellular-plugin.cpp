@@ -20,13 +20,9 @@
 
 #include "cellular-plugin.h"
 
-#include "qofonomanager.h"
-
 #include <QDebug>
-#include <QDBusInterface>
-#include <QDBusReply>
-#include <QStringList>
 #include <SystemSettings/ItemBase>
+#include <qofonomanager.h>
 
 using namespace SystemSettings;
 
@@ -38,6 +34,8 @@ public:
     explicit CellularItem(const QVariantMap &staticData, QObject *parent = 0);
     void setVisibility(bool visible);
 
+private Q_SLOTS:
+    void shouldShow(QStringList);
 };
 
 
@@ -48,6 +46,15 @@ CellularItem::CellularItem(const QVariantMap &staticData, QObject *parent):
     qWarning() << Q_FUNC_INFO << mm->modems().length();
     // Hide the plugin if there are no modems present
     setVisibility(mm->modems().length() > 0);
+    QObject::connect(mm, SIGNAL(modemsChanged(QStringList)),
+                     this, SLOT(shouldShow(QStringList)));
+
+}
+
+void CellularItem::shouldShow(QStringList modems)
+{
+    qWarning() << Q_FUNC_INFO << modems;
+    setVisibility(modems.length() > 0);
 }
 
 void CellularItem::setVisibility(bool visible)
