@@ -50,7 +50,6 @@ private Q_SLOTS:
     void testGetStrength();
     void testGetPath();
     void testMakeTrusted();
-    void testDiscoverServices();
     
     void cleanup();
 
@@ -150,15 +149,6 @@ void DeviceTest::checkAudioState(const QString &expected)
 
     QVERIFY(state.type() == QMetaType::QString);
     QCOMPARE(state.toString(), expected);
-}
-
-void DeviceTest::testDiscoverServices()
-{
-    m_device->discoverServices();
-
-    QVariant state = m_bluezMock->getProperty("org.bluez.Audio", "State");
-
-    checkAudioState("disconnected");
 }
 
 void DeviceTest::testConnect()

@@ -1,7 +1,7 @@
 /*
  * This file is part of ubuntu-system-settings
  *
- * Copyright (C) 2013 Canonical Ltd.
+ * Copyright (C) 2013-2015 Canonical Ltd.
  *
  * Contact: Charles Kerr <charles.kerr@canonical.com>
  *
