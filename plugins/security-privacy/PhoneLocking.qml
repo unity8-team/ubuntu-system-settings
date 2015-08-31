@@ -28,7 +28,7 @@ import Ubuntu.SystemSettings.SecurityPrivacy 1.0
 ItemPage {
     id: root
     objectName: "phoneLockingPage"
-    title: i18n.tr("Phone locking")
+    title: i18n.tr("Locking and unlocking")
 
     property bool usePowerd
     property variant powerSettings

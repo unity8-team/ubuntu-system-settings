@@ -132,21 +132,6 @@ class AboutOfonoTestCase(AboutOfonoBaseTestCase):
             displayed_imei = self.about_page.get_imei()
             self.assertThat(displayed_imei, Equals(device_imei))
 
-    def test_phone_number(self):
-        self.assertEqual(str(self.about_page.get_number('numberItem')),
-                         '123456789')
-
-
-class AboutOfonoMultiSimTestCase(AboutOfonoBaseTestCase):
-
-    use_sims = 2
-
-    def test_phone_numbers(self):
-        self.assertEqual(str(self.about_page.get_number('numberItem1')),
-                         '123456789')
-        self.assertEqual(str(self.about_page.get_number('numberItem2')),
-                         '08123')
-
 
 class AboutSystemImageTestCase(AboutSystemImageBaseTestCase):
 
