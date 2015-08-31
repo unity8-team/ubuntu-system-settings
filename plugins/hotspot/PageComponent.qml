@@ -25,11 +25,6 @@ import Ubuntu.Components.ListItems 0.1 as ListItem
 import Ubuntu.Components.Popups 0.1
 import Ubuntu.Connectivity 1.0
 
-/* This is a temporary solution to the issue of Hotspots failing on mako. If
-the device is mako, we hide the hotspot entry. Will be removed once lp:1434591
-has been resolved. */
-import Ubuntu.SystemSettings.Update 1.0
-
 ItemPage {
 
     id: root
@@ -40,10 +35,8 @@ ItemPage {
         State {
             name: "disabled"
             // Undefined WifiEnabled means Connectivity is unavailable.
-            // Disable for mako (see lp:1434591).
-            when: (typeof Connectivity.wifiEnabled === "undefined" ||
-                   UpdateManager.deviceName === "mako") ||
-                   Connectivity.FlightMode
+            when: typeof Connectivity.wifiEnabled === "undefined" ||
+                  Connectivity.FlightMode
             PropertyChanges {
                 target: hotspotItem
                 enabled: false

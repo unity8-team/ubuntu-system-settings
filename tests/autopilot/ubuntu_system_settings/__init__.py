@@ -394,6 +394,8 @@ class HotspotPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
         if config:
             if 'ssid' in config:
                 setup.set_ssid(config['ssid'])
+            if 'auth' in config:
+                setup.set_auth(config['auth'])
             if 'password' in config:
                 setup.set_password(config['password'])
         setup.enable()
@@ -456,6 +458,11 @@ class HotspotSetup(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
         return self.wait_select_single(
             'Button', objectName='confirmButton')
 
+    @property
+    def _password_required_check(self):
+        return self.wait_select_single(
+            'CheckBox', objectName='passwordRequiredSwitch')
+
     @autopilot.logging.log_action(logger.debug)
     def set_ssid(self, ssid):
         self._ssid_field.write(ssid)
@@ -463,6 +470,13 @@ class HotspotSetup(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
     @autopilot.logging.log_action(logger.debug)
     def set_password(self, password):
         self._password_field.write(password)
+
+    @autopilot.logging.log_action(logger.debug)
+    def set_auth(self, auth):
+        if auth == 'wpa-psk':
+            self._password_required_check.check()
+        else:
+            self._password_required_check.uncheck()
 
     @autopilot.logging.log_action(logger.debug)
     def enable(self):

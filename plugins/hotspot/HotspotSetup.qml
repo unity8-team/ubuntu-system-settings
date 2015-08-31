@@ -25,6 +25,11 @@ import Ubuntu.Connectivity 1.0
 import Ubuntu.SystemSettings.Cellular 1.0
 import Ubuntu.Components.Popups 0.1
 
+/* This is a temporary solution to the issue of Hotspots failing on mako. If
+the device is mako, we enforce an insecure hotspot. Will be removed once
+lp:1434591 has been resolved. */
+import Ubuntu.SystemSettings.Update 1.0
+
 Component {
     id: hotspotSetup
 
@@ -43,7 +48,13 @@ Component {
         anchorToKeyboard: true
 
         function settingsValid() {
-            return ssidField.text != "" && passwordField.length >= 8;
+            if (ssidField.text === "") {
+                return false;
+            } else if (passwordRequiredSwitch.checked &&
+                       passwordField.length < 8) {
+                return false;
+            }
+            return true;
         }
 
         title: stored ?
@@ -67,6 +78,10 @@ Component {
                 }
                 PropertyChanges {
                     target: ssidField
+                    enabled: false
+                }
+                PropertyChanges {
+                    target: passwordRequired
                     enabled: false
                 }
                 PropertyChanges {
@@ -115,6 +130,10 @@ Component {
                 PropertyChanges {
                     target: ssidLabel
                     opacity: 0.5
+                }
+                PropertyChanges {
+                    target: passwordRequired
+                    enabled: false
                 }
                 PropertyChanges {
                     target: ssidField
@@ -173,22 +192,35 @@ Component {
                 width: parent.width
             }
 
-            Label {
-                id: passwordLabel
-                // TRANSLATORS: “Password (optional)” is hidden.
-                text: showAllUI ? i18n.tr("Password (optional)") :
-                                  i18n.tr("Key (must be 8 characters or longer)")
-                fontSize: "medium"
-                font.bold: true
-                color: Theme.palette.selected.backgroundText
-                wrapMode: Text.WordWrap
-                width: parent.width
-            }
 
-            Label {
-                visible: showAllUI
-                // TRANSLATORS: This string is hidden.
-                text: i18n.tr("If you do not enter a password, the hotspot will be insecure.")
+            ListItem.Empty {
+                id: passwordRequired
+                onClicked: passwordRequiredSwitch.trigger()
+
+                CheckBox {
+                    id: passwordRequiredSwitch
+                    objectName: "passwordRequiredSwitch"
+                    enabled: parent.enabled
+                    checked: Connectivity.hotspotAuth === "wpa-psk"
+                    anchors {
+                        left: parent.left
+                        verticalCenter: parent.verticalCenter
+                    }
+                    activeFocusOnPress: false
+                }
+
+                Label {
+                    id: passwordRequiredLabel
+                    anchors {
+                        left: passwordRequiredSwitch.right
+                        leftMargin: units.gu(1)
+                        right: parent.right
+                        verticalCenter: parent.verticalCenter
+                    }
+                    text: i18n.tr("Require password (recommended):")
+                    elide: Text.ElideRight
+                    fontSize: "small"
+                }
             }
 
             TextField {
@@ -201,14 +233,27 @@ Component {
                 width: parent.width
             }
 
-            ListItem.Standard {
-                // TRANSLATORS: “Show password” is hidden.
-                text: showAllUI ? i18n.tr("Show password") : i18n.tr("Show key")
+            ListItem.Empty {
                 id: passwordVisible
                 onClicked: passwordVisibleSwitch.trigger()
-                control: Switch {
+
+                CheckBox {
                     id: passwordVisibleSwitch
+                    anchors {
+                        left: parent.left
+                        verticalCenter: parent.verticalCenter
+                    }
                     activeFocusOnPress: false
+                }
+
+                Label {
+                    id: passwordVisibleLabel
+                    anchors {
+                        left: passwordVisibleSwitch.right
+                        leftMargin: units.gu(2)
+                        verticalCenter: parent.verticalCenter
+                    }
+                    text: i18n.tr("Show password")
                 }
             }
 
@@ -311,6 +356,8 @@ Component {
 
                 Connectivity.hotspotSsid = ssidField.text;
                 Connectivity.hotspotPassword = passwordField.text;
+                Connectivity.hotspotAuth = passwordRequiredSwitch.checked ?
+                                           "wpa-psk" : "none";
                 Connectivity.hotspotEnabledUpdated.connect(hotspotEnabledHandler);
                 Connectivity.hotspotEnabled = true;
             }
@@ -340,6 +387,8 @@ Component {
 
                 Connectivity.hotspotSsid = ssidField.text;
                 Connectivity.hotspotPassword = passwordField.text;
+                Connectivity.hotspotAuth = passwordRequiredSwitch.checked ?
+                                           "wpa-psk" : "none";
 
                 if (Connectivity.hotspotEnabled) {
                     hotspotSetupDialog.state = "STARTING";
@@ -371,6 +420,20 @@ Component {
                     feedback.text = common.reasonToString(reason);
                 }
             }
+        }
+
+        Binding {
+            target: passwordRequired
+            property: "enabled"
+            value: false
+            when: 1 || UpdateManager.deviceName === "mako"
+        }
+
+        Binding {
+            target: passwordRequiredSwitch
+            property: "checked"
+            value: false
+            when: 1 || UpdateManager.deviceName === "mako"
         }
     }
 }
