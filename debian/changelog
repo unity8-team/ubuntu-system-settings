@@ -1,3 +1,18 @@
+ubuntu-system-settings (0.3+15.10.20150831-0ubuntu1) wily; urgency=medium
+
+  [ simon.busch@canonical.com ]
+  * Reworking bluetooth support in settings a bit to work as it should:
+    devices are now correctly connected after they got paired which
+    wasn't the case before due to timing reasons
+    (org.bluez.Audio/Input/... interface wasn't registered yet)
+    DevicePage is now created on the fly to avoid it displaying
+    information for a moment from a previously selected device
+    DevicePage is now split out of the PageComponent.qml file Discover
+    service functionality is dropped as bluez does this on its own and
+    we don't need to care (LP: #1488836)
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Mon, 31 Aug 2015 13:22:00 +0000
+
 ubuntu-system-settings (0.3+15.10.20150827-0ubuntu1) wily; urgency=medium
 
   [ Ken VanDine ]
