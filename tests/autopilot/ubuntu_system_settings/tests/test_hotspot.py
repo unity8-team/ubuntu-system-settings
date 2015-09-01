@@ -56,22 +56,6 @@ class HotspotSetupTestCase(HotspotBaseTestCase):
             Eventually(Equals(True))
         )
 
-    def test_setup_insecure(self):
-        ssid = 'bar'
-        password = 'zomgzomg'
-        auth = 'none'
-        config = {'ssid': ssid, 'password': password, 'auth': auth}
-
-        self.hotspot_page.setup_hotspot(config)
-
-        # Assert that the switch is on.
-        self.assertTrue(self.hotspot_page.get_hotspot_status())
-
-        self.assertThat(
-            lambda: self.ctv_private.Get(CTV_PRIV_IFACE, 'HotspotAuth'),
-            Eventually(Equals(auth))
-        )
-
 
 class HotspotExistsTestCase(HotspotBaseTestCase):
 

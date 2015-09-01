@@ -85,7 +85,7 @@ Component {
                     enabled: false
                 }
                 PropertyChanges {
-                    target: passwordLabel
+                    target: passwordRequiredLabel
                     opacity: 0.5
                 }
                 PropertyChanges {
@@ -136,12 +136,12 @@ Component {
                     enabled: false
                 }
                 PropertyChanges {
-                    target: ssidField
-                    enabled: false
+                    target: passwordRequiredLabel
+                    opacity: 0.5
                 }
                 PropertyChanges {
-                    target: passwordLabel
-                    opacity: 0.5
+                    target: ssidField
+                    enabled: false
                 }
                 PropertyChanges {
                     target: passwordField
@@ -250,7 +250,7 @@ Component {
                     id: passwordVisibleLabel
                     anchors {
                         left: passwordVisibleSwitch.right
-                        leftMargin: units.gu(2)
+                        leftMargin: units.gu(1)
                         verticalCenter: parent.verticalCenter
                     }
                     text: i18n.tr("Show password")
@@ -426,14 +426,14 @@ Component {
             target: passwordRequired
             property: "enabled"
             value: false
-            when: 1 || UpdateManager.deviceName === "mako"
+            when: UpdateManager.deviceName === "mako"
         }
 
         Binding {
             target: passwordRequiredSwitch
             property: "checked"
             value: false
-            when: 1 || UpdateManager.deviceName === "mako"
+            when: UpdateManager.deviceName === "mako"
         }
     }
 }
