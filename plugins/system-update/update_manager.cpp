@@ -18,15 +18,19 @@
  *
 */
 
-#include "update_manager.h"
-#include <QString>
-#include <QStringList>
+
+#include <QDBusInterface>
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QJsonArray>
 #include <QJsonValue>
 #include <QProcessEnvironment>
-#include <QDBusInterface>
+#include <QString>
+#include <QStringList>
+#include <ssoservice.h>
+
+#include "update_manager.h"
+#include "network.h"
 
 using namespace UbuntuOne;
 
@@ -164,7 +168,7 @@ void UpdateManager::checkUpdates()
 
 void UpdateManager::handleCredentialsFound(Token token)
 {
-    m_token = token;
+    m_network.setUbuntuOneToken(token);
     QStringList args("list");
     args << "--manifest";
     QString command = getClickCommand();
@@ -332,13 +336,7 @@ void UpdateManager::pauseDownload(const QString &packagename)
 
 void UpdateManager::downloadApp(Update *app)
 {
-    if (m_token.isValid()) {
-        QString authHeader = m_token.signUrl(app->downloadUrl(), QStringLiteral("HEAD"), true);
-        app->setClickUrl(app->downloadUrl());
-        m_network.getClickToken(app, app->downloadUrl(), authHeader);
-    } else {
-        app->setError("Invalid User Token");
-    }
+    m_network.getClickToken(app, app->downloadUrl());
 }
 
 void UpdateManager::clickTokenReceived(Update *app, const QString &clickToken)

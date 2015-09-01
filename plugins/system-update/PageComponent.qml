@@ -205,8 +205,7 @@ ItemPage {
         }
 
         onCredentialsDeleted: {
-            credentialsNotification.visible = false;
-            uoaConfig.exec();
+            credentialsNotification.visible = true;
         }
 
         onSystemUpdateDownloaded: {
