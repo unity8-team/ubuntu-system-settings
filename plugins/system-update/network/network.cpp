@@ -25,6 +25,7 @@
 #include <QByteArray>
 #include <QUrl>
 #include <QProcessEnvironment>
+#include <QScopedPointer>
 
 namespace {
     const QString URL_APPS = "https://search.apps.ubuntu.com/api/v1/click-metadata";
@@ -40,8 +41,6 @@ Network::Network(QObject *parent) :
     QObject(parent),
     m_nam(this)
 {
-    QObject::connect(&m_nam, SIGNAL(finished(QNetworkReply*)),
-                     this, SLOT(onReply(QNetworkReply*)));
 }
 
 std::string Network::getArchitecture()
@@ -113,9 +112,17 @@ void Network::checkForNewVersions(QHash<QString, Update*> &apps)
     request.setRawHeader(QByteArray("X-Ubuntu-Frameworks"), QByteArray::fromStdString(frameworks.str()));
     request.setRawHeader(QByteArray("X-Ubuntu-Architecture"), QByteArray::fromStdString(getArchitecture()));
     request.setUrl(QUrl(urlApps));
+
     RequestObject* reqObject = new RequestObject(QString(APPS_DATA));
     request.setOriginatingObject(reqObject);
-    m_nam.post(request, content);
+
+    auto reply = m_nam.post(request, content);
+
+    connect(reply, &QNetworkReply::finished, this, &Network::onReplyFinished);
+    connect(reply, &QNetworkReply::sslErrors, this, &Network::onReplySslErrors);
+    connect(reply, static_cast<void(QNetworkReply::*)
+            (QNetworkReply::NetworkError)>(&QNetworkReply::error),
+        this, &Network::onReplyError);
 }
 
 QString Network::getUrlApps()
@@ -132,74 +139,88 @@ QString Network::getFrameworksDir()
     return command;
 }
 
-void Network::onReply(QNetworkReply *reply)
+void Network::onReplyFinished()
 {
-    if (reply->error() == QNetworkReply::NoError) {
-        QVariant statusAttr = reply->attribute(
-                                QNetworkRequest::HttpStatusCodeAttribute);
-        if (!statusAttr.isValid()) {
-            Q_EMIT errorOccurred();
+    // the scoped pointer will take care of calling the deleteLater when leaving the slot
+    QScopedPointer<QNetworkReply, QScopedPointerDeleteLater> reply(qobject_cast<QNetworkReply*>(sender()));
+    auto statusAttr = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute);
+    if (!statusAttr.isValid()) {
+        Q_EMIT errorOccurred();
+        return;
+    }
+
+    int httpStatus = statusAttr.toInt();
+
+    if (httpStatus == 200 || httpStatus == 201) {
+        if (reply->hasRawHeader(X_CLICK_TOKEN)) {
+            auto app = qobject_cast<Update*>(reply->request().originatingObject());
+            if (app != nullptr) {
+                QString header(reply->rawHeader(X_CLICK_TOKEN));
+                Q_EMIT clickTokenObtained(app, header);
+            }
             return;
         }
 
-        int httpStatus = statusAttr.toInt();
+        QByteArray payload = reply->readAll();
+        QJsonDocument document = QJsonDocument::fromJson(payload);
 
-        if (httpStatus == 200 || httpStatus == 201) {
-            if (reply->hasRawHeader(X_CLICK_TOKEN)) {
-                Update* app = qobject_cast<Update*>(
-                            reply->request().originatingObject());
-                if (app != nullptr) {
-                    QString header(reply->rawHeader(X_CLICK_TOKEN));
-                    Q_EMIT clickTokenObtained(app, header);
-                }
-                reply->deleteLater();
-                return;
-            }
-
-            QByteArray payload = reply->readAll();
-            QJsonDocument document = QJsonDocument::fromJson(payload);
-
-            RequestObject* state = qobject_cast<RequestObject*>(reply->request().originatingObject());
-            if (state != nullptr && state->operation.contains(APPS_DATA) && document.isArray()) {
-                QJsonArray array = document.array();
-                bool updates = false;
-                for (int i = 0; i < array.size(); i++) {
-                    QJsonObject object = array.at(i).toObject();
-                    QString name = object.value("name").toString();
-                    QString version = object.value("version").toString();
-                    QString icon_url = object.value("icon_url").toString();
-                    QString url = object.value("download_url").toString();
-                    QString download_sha512 = object.value("download_sha512").toString();
-                    int size = object.value("binary_filesize").toVariant().toInt();
-                    if (m_apps.contains(name)) {
-                        m_apps[name]->setRemoteVersion(version);
-                        if (m_apps[name]->updateRequired()) {
-                            m_apps[name]->setIconUrl(icon_url);
-                            m_apps[name]->setDownloadUrl(url);
-                            m_apps[name]->setBinaryFilesize(size);
-                            m_apps[name]->setDownloadSha512(download_sha512);
-                            updates = true;
-                        }
+        auto state = qobject_cast<RequestObject*>(reply->request().originatingObject());
+        if (state != nullptr && state->operation.contains(APPS_DATA) && document.isArray()) {
+            QJsonArray array = document.array();
+            bool updates = false;
+            for (int i = 0; i < array.size(); i++) {
+                auto object = array.at(i).toObject();
+                auto name = object["name"].toString();
+                auto version = object["version"].toString();
+                auto icon_url = object["icon_url"].toString();
+                auto url = object["download_url"].toString();
+                auto download_sha512 = object["download_sha512"].toString();
+                auto size = object["binary_filesize"].toInt();
+                if (m_apps.contains(name)) {
+                    m_apps[name]->setRemoteVersion(version);
+                    if (m_apps[name]->updateRequired()) {
+                        m_apps[name]->setIconUrl(icon_url);
+                        m_apps[name]->setDownloadUrl(url);
+                        m_apps[name]->setBinaryFilesize(size);
+                        m_apps[name]->setDownloadSha512(download_sha512);
+                        updates = true;
                     }
                 }
-                if (updates) {
-                    Q_EMIT updatesFound();
-                } else {
-                    Q_EMIT updatesNotFound();
-                }
-            } else {
-                Q_EMIT errorOccurred();
             }
-        } else {
-            Q_EMIT errorOccurred();
+            if (updates) {
+                Q_EMIT updatesFound();
+                return;
+            } else {
+                Q_EMIT updatesNotFound();
+                return;
+            }
         }
-    } else if (reply->error() == QNetworkReply::TemporaryNetworkFailureError ||
-               reply->error() == QNetworkReply::UnknownNetworkError) {
-        Q_EMIT networkError();
-    } else {
-        Q_EMIT serverError();
     }
 
+    Q_EMIT errorOccurred();
+}
+
+void Network::onReplySslErrors(const QList<QSslError>&)
+{
+    auto reply = sender();
+    // Should this be a server or a network error??
+    Q_EMIT serverError();
+    reply->deleteLater();
+}
+
+void Network::onReplyError(QNetworkReply::NetworkError code)
+{
+    auto reply = sender();
+    switch (code) {
+        case QNetworkReply::TemporaryNetworkFailureError:
+        case QNetworkReply::UnknownNetworkError:
+        case QNetworkReply::UnknownProxyError:
+        case QNetworkReply::UnknownServerError:
+            Q_EMIT networkError();
+            break;
+        default:
+            Q_EMIT serverError();
+    }
     reply->deleteLater();
 }
 
@@ -213,7 +234,14 @@ void Network::getClickToken(Update *app, const QString &url,
     QNetworkRequest request;
     request.setUrl(query);
     request.setOriginatingObject(app);
-    m_nam.head(request);
+
+    auto reply = m_nam.head(request);
+
+    connect(reply, &QNetworkReply::finished, this, &Network::onReplyFinished);
+    connect(reply, &QNetworkReply::sslErrors, this, &Network::onReplySslErrors);
+    connect(reply, static_cast<void(QNetworkReply::*)
+                    (QNetworkReply::NetworkError)>(&QNetworkReply::error),
+            this, &Network::onReplyError);
 }
 
 }
