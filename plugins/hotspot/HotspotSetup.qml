@@ -48,13 +48,10 @@ Component {
         anchorToKeyboard: true
 
         function settingsValid() {
-            if (ssidField.text === "") {
-                return false;
-            } else if (passwordRequiredSwitch.checked &&
-                       passwordField.length < 8) {
-                return false;
-            }
-            return true;
+            var ssidValid = ssidField.text !== "";
+            var passwordValid = passwordRequiredSwitch.checked ?
+                                passwordField.length >= 8 : true;
+            return ssidValid && passwordValid;
         }
 
         title: stored ?
