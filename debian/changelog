@@ -1,3 +1,17 @@
+ubuntu-system-settings (0.3+15.10.20150901-0ubuntu1) wily; urgency=medium
+
+  [ Ken VanDine ]
+  * emit credentialsDeleted when the U1 token expired (LP: #1378678)
+
+  [ Manuel de la Pena ]
+  * Sign the query in order to get a possible auth error from the server
+    and stop the user from trying to do updates with invalid creds.
+  * The updates page is leaking objects when we have a successful update
+    and when we do have errors. The following branch ensures that no
+    memory is wasted.
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Tue, 01 Sep 2015 13:59:12 +0000
+
 ubuntu-system-settings (0.3+15.10.20150831-0ubuntu1) wily; urgency=medium
 
   [ simon.busch@canonical.com ]
