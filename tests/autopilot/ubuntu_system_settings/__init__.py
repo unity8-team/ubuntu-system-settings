@@ -398,6 +398,7 @@ class HotspotPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
                 setup.set_auth(config['auth'])
             if 'password' in config:
                 setup.set_password(config['password'])
+        utils.dismiss_osk()
         setup.enable()
         if setup:
             setup.wait_until_destroyed()

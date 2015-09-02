@@ -148,10 +148,6 @@ Component {
                     target: confirmButton
                     enabled: false
                 }
-                PropertyChanges {
-                    target: enableWifiCaption
-                    visible: false
-                }
             }
         ]
 
@@ -173,7 +169,8 @@ Component {
 
             Label {
                 id: ssidLabel
-                text: i18n.tr("Hotspot name")
+                text: hotspotSetupDialog.stored ? i18n.tr("Hotspot name") :
+                                                  i18n.tr("Choose a name")
                 fontSize: "medium"
                 font.bold: true
                 color: Theme.palette.selected.backgroundText
@@ -214,7 +211,7 @@ Component {
                         right: parent.right
                         verticalCenter: parent.verticalCenter
                     }
-                    text: i18n.tr("Require password (recommended):")
+                    text: i18n.tr("Required password (recommended):")
                     elide: Text.ElideRight
                     fontSize: "small"
                 }
@@ -223,6 +220,7 @@ Component {
             TextField {
                 id: passwordField
                 objectName: "passwordField"
+                enabled: passwordRequiredSwitch.checked
                 text: Connectivity.hotspotPassword
                 echoMode: passwordVisibleSwitch.checked ?
                     TextInput.Normal : TextInput.Password
@@ -232,10 +230,12 @@ Component {
 
             ListItem.Empty {
                 id: passwordVisible
+                enabled: passwordRequiredSwitch.checked
                 onClicked: passwordVisibleSwitch.trigger()
 
                 CheckBox {
                     id: passwordVisibleSwitch
+                    enabled: parent.enabled
                     anchors {
                         left: parent.left
                         verticalCenter: parent.verticalCenter
@@ -245,6 +245,7 @@ Component {
 
                 Label {
                     id: passwordVisibleLabel
+                    opacity: passwordRequiredSwitch.checked ? 1 : 0.5
                     anchors {
                         left: passwordVisibleSwitch.right
                         leftMargin: units.gu(1)
@@ -260,8 +261,10 @@ Component {
                     left: parent.left
                     right: parent.right
                 }
-                text: i18n.tr("In order to create a hotspot, you need to turn Wi-Fi on.")
-                visible: !Connectivity.wifiEnabled && !hotspotSetupDialog.stored
+                text: i18n.tr("Starting the hotspot will turn on Wi-Fi.")
+                visible: !Connectivity.wifiEnabled &&
+                         !hotspotSetupDialog.stored &&
+                         hotspotSetupDialog.state !== "SUCCEEDED"
             }
 
             Row {
