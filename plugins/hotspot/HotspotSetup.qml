@@ -211,6 +211,7 @@ Component {
                         right: parent.right
                         verticalCenter: parent.verticalCenter
                     }
+                    opacity: passwordRequiredSwitch.checked ? 1 : 0.5
                     text: i18n.tr("Required password (recommended):")
                     elide: Text.ElideRight
                     fontSize: "small"
