@@ -49,9 +49,22 @@ Component {
 
         function settingsValid() {
             var ssidValid = ssidField.text !== "";
-            var passwordValid = passwordRequiredSwitch.checked ?
+            var passwordValid = passwordRequiredToggle.checked ?
                                 passwordField.length >= 8 : true;
             return ssidValid && passwordValid;
+        }
+
+        function updateHotspotSettings () {
+            Connectivity.hotspotSsid = ssidField.text;
+            Connectivity.hotspotPassword = passwordField.text;
+
+            // FIXME: Workaround for lp:1434591.
+            if (UpdateManager.deviceName === "mako") {
+                Connectivity.hotspotAuth = "none";
+            } else {
+                Connectivity.hotspotAuth = passwordRequiredToggle.checked ?
+                                           "wpa-psk" : "none";
+            }
         }
 
         title: stored ?
@@ -171,7 +184,6 @@ Component {
                 id: ssidLabel
                 text: hotspotSetupDialog.stored ? i18n.tr("Hotspot name") :
                                                   i18n.tr("Choose a name")
-                fontSize: "medium"
                 font.bold: true
                 color: Theme.palette.selected.backgroundText
                 elide: Text.ElideRight
@@ -186,44 +198,47 @@ Component {
                 width: parent.width
             }
 
-
             ListItem.Empty {
                 id: passwordRequired
-                onClicked: passwordRequiredSwitch.trigger()
+                onClicked: passwordRequiredToggle.trigger()
+
+                // FIXME: Workaround for lp:1434591.
+                visible: UpdateManager.deviceName !== "mako"
 
                 CheckBox {
-                    id: passwordRequiredSwitch
-                    objectName: "passwordRequiredSwitch"
-                    enabled: parent.enabled
+                    id: passwordRequiredToggle
+                    objectName: "passwordRequiredToggle"
                     checked: Connectivity.hotspotAuth === "wpa-psk"
                     anchors {
                         left: parent.left
                         verticalCenter: parent.verticalCenter
                     }
+                    // FIXME: Workaround for lp:1415023
                     activeFocusOnPress: false
                 }
 
                 Label {
                     id: passwordRequiredLabel
                     anchors {
-                        left: passwordRequiredSwitch.right
+                        left: passwordRequiredToggle.right
                         leftMargin: units.gu(1)
                         right: parent.right
                         verticalCenter: parent.verticalCenter
                     }
-                    opacity: passwordRequiredSwitch.checked ? 1 : 0.5
-                    text: i18n.tr("Required password (recommended):")
-                    elide: Text.ElideRight
-                    fontSize: "small"
+
+                    // FIXME: Workaround for label not wrapping (lp:1442851)
+                    wrapMode: Text.Wrap
+                    text: i18n.tr("Require a password (recommended):")
                 }
             }
 
             TextField {
                 id: passwordField
                 objectName: "passwordField"
-                enabled: passwordRequiredSwitch.checked
+                enabled: passwordRequiredToggle.checked
+                visible: passwordRequired.visible
                 text: Connectivity.hotspotPassword
-                echoMode: passwordVisibleSwitch.checked ?
+                echoMode: passwordVisibleToggle.checked ?
                     TextInput.Normal : TextInput.Password
                 inputMethodHints: Qt.ImhNoAutoUppercase | Qt.ImhNoPredictiveText
                 width: parent.width
@@ -231,24 +246,30 @@ Component {
 
             ListItem.Empty {
                 id: passwordVisible
-                enabled: passwordRequiredSwitch.checked
-                onClicked: passwordVisibleSwitch.trigger()
+                enabled: passwordRequiredToggle.checked
+                visible: passwordRequired.visible
+                onClicked: passwordVisibleToggle.trigger()
 
                 CheckBox {
-                    id: passwordVisibleSwitch
+                    id: passwordVisibleToggle
                     enabled: parent.enabled
                     anchors {
                         left: parent.left
                         verticalCenter: parent.verticalCenter
                     }
+
+                    // FIXME: Workaround for lp:1415023
                     activeFocusOnPress: false
                 }
 
                 Label {
                     id: passwordVisibleLabel
-                    opacity: passwordRequiredSwitch.checked ? 1 : 0.5
+
+                    /* FIXME: use enabled when lp:1491802 is fixed, or use
+                    CheckBox.text once lp:1323238 is fixed. */
+                    opacity: passwordRequiredToggle.checked ? 1 : 0.5
                     anchors {
-                        left: passwordVisibleSwitch.right
+                        left: passwordVisibleToggle.right
                         leftMargin: units.gu(1)
                         verticalCenter: parent.verticalCenter
                     }
@@ -281,6 +302,8 @@ Component {
                     id: cancelButton
                     width: (parent.width / 2) - units.gu(1)
                     text: i18n.tr("Cancel")
+
+                    // FIXME: Workaround for lp:1415023
                     activeFocusOnPress: false
                     onClicked: PopupUtils.close(hotspotSetupDialog)
                 }
@@ -292,6 +315,8 @@ Component {
                     text: hotspotSetupDialog.stored ? i18n.tr("Change") :
                         i18n.tr("Start")
                     enabled: settingsValid()
+
+                    // FIXME: Workaround for lp:1415023
                     activeFocusOnPress: false
                     onClicked: {
                         if (!Connectivity.wifiEnabled &&
@@ -355,10 +380,7 @@ Component {
                     }
                 }
 
-                Connectivity.hotspotSsid = ssidField.text;
-                Connectivity.hotspotPassword = passwordField.text;
-                Connectivity.hotspotAuth = passwordRequiredSwitch.checked ?
-                                           "wpa-psk" : "none";
+                hotspotSetupDialog.updateHotspotSettings();
                 Connectivity.hotspotEnabledUpdated.connect(hotspotEnabledHandler);
                 Connectivity.hotspotEnabled = true;
             }
@@ -386,10 +408,7 @@ Component {
                     }
                 }
 
-                Connectivity.hotspotSsid = ssidField.text;
-                Connectivity.hotspotPassword = passwordField.text;
-                Connectivity.hotspotAuth = passwordRequiredSwitch.checked ?
-                                           "wpa-psk" : "none";
+                hotspotSetupDialog.updateHotspotSettings();
 
                 if (Connectivity.hotspotEnabled) {
                     hotspotSetupDialog.state = "STARTING";
@@ -421,20 +440,6 @@ Component {
                     feedback.text = common.reasonToString(reason);
                 }
             }
-        }
-
-        Binding {
-            target: passwordRequired
-            property: "enabled"
-            value: false
-            when: UpdateManager.deviceName === "mako"
-        }
-
-        Binding {
-            target: passwordRequiredSwitch
-            property: "checked"
-            value: false
-            when: UpdateManager.deviceName === "mako"
         }
     }
 }

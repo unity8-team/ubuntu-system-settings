@@ -462,7 +462,7 @@ class HotspotSetup(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
     @property
     def _password_required_check(self):
         return self.wait_select_single(
-            'CheckBox', objectName='passwordRequiredSwitch')
+            'CheckBox', objectName='passwordRequiredToggle')
 
     @autopilot.logging.log_action(logger.debug)
     def set_ssid(self, ssid):
@@ -470,14 +470,18 @@ class HotspotSetup(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
 
     @autopilot.logging.log_action(logger.debug)
     def set_password(self, password):
-        self._password_field.write(password)
+        # NOTE: visibility check due to ui on mako (see lp:1434591)
+        if self._password_field.visible:
+            self._password_field.write(password)
 
     @autopilot.logging.log_action(logger.debug)
     def set_auth(self, auth):
-        if auth == 'wpa-psk':
-            self._password_required_check.check()
-        else:
-            self._password_required_check.uncheck()
+        # NOTE: visibility check due to ui on mako (see lp:1434591)
+        if self._password_required_check.visible:
+            if auth == 'wpa-psk':
+                self._password_required_check.check()
+            else:
+                self._password_required_check.uncheck()
 
     @autopilot.logging.log_action(logger.debug)
     def enable(self):
