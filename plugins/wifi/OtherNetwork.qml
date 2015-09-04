@@ -38,18 +38,24 @@ Component {
             if (networkname.length === 0) {
                 return false;
             }
-            if (securityList.selectedIndex === 0) {
-                return true
+            switch (securityList.selectedIndex) {
+                case 1: //WPA
+                    return password.length === 8 || password.length === 64;
+                case 2: // LEAP
+                case 5: // WPA Enterprise
+                    return password.length > 0 && username.length > 0;
+                case 3: // WEP
+                    return password.length === 5  ||
+                           password.length === 10 ||
+                           password.length === 13 ||
+                           password.length === 26;
+                case 0: // None
+                case 4: // Dynamic WEP
+                    /* TODO: Look at the authentication scheme used by Dynamic
+                    WEP to determine if the settings are valid */
+                default:
+                    return true;
             }
-            if (securityList.selectedIndex === 3) {
-                // WEP
-                return password.length === 5  ||
-                       password.length === 10 ||
-                       password.length === 13 ||
-                       password.length === 26;
-            }
-            //WPA
-            return password.length >= 8
         }
 
         function filePicker (type) {
