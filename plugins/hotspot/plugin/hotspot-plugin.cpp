@@ -61,7 +61,7 @@ HotspotItem::HotspotItem(const QVariantMap &staticData, QObject *parent):
 
     bool supportedDevice(true);
 
-    // FIXME: Checks whether device is mako or flo. See lp:1434591.
+    // TODO: Remove check for mako (lp:1434591).
     QDBusInterface m_SystemServiceIface("com.canonical.SystemImage",
                                         "/Service",
                                         "com.canonical.SystemImage",
