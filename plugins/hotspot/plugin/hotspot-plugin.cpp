@@ -53,8 +53,6 @@ HotspotItem::HotspotItem(const QVariantMap &staticData, QObject *parent):
     if (env.contains(QLatin1String("USS_SHOW_ALL_UI"))) {
         QString showAllS = env.value("USS_SHOW_ALL_UI", QString());
 
-        // If showAll is set, show and immediately return to avoid
-        // check for bad devices.
         if(!showAllS.isEmpty()) {
             setVisibility(true);
             return;
