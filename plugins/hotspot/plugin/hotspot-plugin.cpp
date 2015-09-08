@@ -26,6 +26,7 @@
 #include <QDBusPendingReply>
 #include <QProcessEnvironment>
 #include <QStringList>
+#include <QtDBus>
 #include <SystemSettings/ItemBase>
 
 using namespace SystemSettings;
@@ -40,7 +41,6 @@ class HotspotItem: public ItemBase
 public:
     explicit HotspotItem(const QVariantMap &staticData, QObject *parent = 0);
     void setVisibility(bool visible);
-
 };
 
 

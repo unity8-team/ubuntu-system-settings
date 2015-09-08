@@ -22,27 +22,27 @@ def load(mock, parameters):
     global _parameters
     _parameters = parameters
 
-    mock.config = {
+    mock.props = {
         'build_number': _parameters.get('build_number', 0),
         'device': _parameters.get('device', ''),
-        'channel': _parameters.get('channel', '')
+        'channel': _parameters.get('channel', ''),
+        'last_update_date': _parameters.get('last_update_date', ''),
+        'last_check_date': _parameters.get('last_check_date', ''),
+        'target_build_number': _parameters.get('target_build_number', -1),
+        'target_version_detail': _parameters.get('target_version_detail', ''),
+        'version_detail': _parameters.get(
+            'version_detail', dbus.Dictionary({}, signature='ss')
+        )
     }
-    mock.last_update_date = _parameters.get('last_update_date', '')
-    mock.version_detail = _parameters.get(
-        'version_detail', dbus.Dictionary({}, signature='ss')
-    )
-    mock.last_check_date = _parameters.get('last_check_date', '')
-    mock.target_build_number = _parameters.get('target_build_number', -1)
-    mock.target_version_detail = _parameters.get('target_version_detail', '')
 
 
 @dbus.service.method(MAIN_IFACE,
                      in_signature='', out_signature='isssa{ss}')
 def Info(self):
     return (
-        self.config['build_number'],
-        self.config['device'],
-        self.config['channel'],
-        self.last_update_date,
-        self.version_detail
+        self.props['build_number'],
+        self.props['device'],
+        self.props['channel'],
+        self.props['last_update_date'],
+        self.props['version_detail']
     )

@@ -17,15 +17,12 @@
  * You should have received a copy of the GNU General Public License along
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * FIXME: This plugin exists because hotspot does not work on mako. See lp:1434591.
- *
  */
 
 #ifndef SYSTEM_SETTINGS_HOTSPOT_PLUGIN_H
 #define SYSTEM_SETTINGS_HOTSPOT_PLUGIN_H
 
 #include <QObject>
-#include <QtDBus>
 #include <SystemSettings/PluginInterface>
 
 class HotspotPlugin: public QObject, public SystemSettings::PluginInterface2
