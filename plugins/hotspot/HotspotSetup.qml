@@ -25,11 +25,6 @@ import Ubuntu.Connectivity 1.0
 import Ubuntu.SystemSettings.Cellular 1.0
 import Ubuntu.Components.Popups 0.1
 
-/* This is a temporary solution to the issue of Hotspots failing on mako. If
-the device is mako, we enforce an insecure hotspot. Will be removed once
-lp:1434591 has been resolved. */
-import Ubuntu.SystemSettings.Update 1.0
-
 Component {
     id: hotspotSetup
 
@@ -57,14 +52,8 @@ Component {
         function updateHotspotSettings () {
             Connectivity.hotspotSsid = ssidField.text;
             Connectivity.hotspotPassword = passwordField.text;
-
-            // FIXME: Workaround for lp:1434591.
-            if (UpdateManager.deviceName === "mako") {
-                Connectivity.hotspotAuth = "none";
-            } else {
-                Connectivity.hotspotAuth = passwordRequiredToggle.checked ?
-                                           "wpa-psk" : "none";
-            }
+            Connectivity.hotspotAuth = passwordRequiredToggle.checked ?
+                                       "wpa-psk" : "none";
         }
 
         title: stored ?
@@ -202,9 +191,6 @@ Component {
                 id: passwordRequired
                 onClicked: passwordRequiredToggle.trigger()
 
-                // FIXME: Workaround for lp:1434591.
-                visible: UpdateManager.deviceName !== "mako"
-
                 CheckBox {
                     id: passwordRequiredToggle
                     objectName: "passwordRequiredToggle"
@@ -236,7 +222,6 @@ Component {
                 id: passwordField
                 objectName: "passwordField"
                 enabled: passwordRequiredToggle.checked
-                visible: passwordRequired.visible
                 text: Connectivity.hotspotPassword
                 echoMode: passwordVisibleToggle.checked ?
                     TextInput.Normal : TextInput.Password
@@ -247,7 +232,6 @@ Component {
             ListItem.Empty {
                 id: passwordVisible
                 enabled: passwordRequiredToggle.checked
-                visible: passwordRequired.visible
                 onClicked: passwordVisibleToggle.trigger()
 
                 CheckBox {
