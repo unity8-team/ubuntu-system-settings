@@ -5,8 +5,7 @@
 # Software Foundation; either version 3 of the License, or (at your option) any
 # later version.  See http://www.gnu.org/copyleft/lgpl.html for the full text
 # of the license.
-# import dbus
-# import dbusmock
+import dbus
 
 __author__ = 'Jonas G. Drange'
 __email__ = 'jonas.drange@canonical.com'
@@ -15,5 +14,35 @@ __license__ = 'LGPL 3+'
 
 BUS_NAME = 'com.canonical.SystemImage'
 MAIN_IFACE = 'com.canonical.SystemImage'
-MAIN_OBJ = '/'
-SYSTEM_BUS = False
+MAIN_OBJ = '/Service'
+SYSTEM_BUS = True
+
+
+def load(mock, parameters):
+    global _parameters
+    _parameters = parameters
+
+    mock.config = {
+        'build_number': _parameters.get('build_number', 0),
+        'device': _parameters.get('device', ''),
+        'channel': _parameters.get('channel', '')
+    }
+    mock.last_update_date = _parameters.get('last_update_date', '')
+    mock.version_detail = _parameters.get(
+        'version_detail', dbus.Dictionary({}, signature='ss')
+    )
+    mock.last_check_date = _parameters.get('last_check_date', '')
+    mock.target_build_number = _parameters.get('target_build_number', -1)
+    mock.target_version_detail = _parameters.get('target_version_detail', '')
+
+
+@dbus.service.method(MAIN_IFACE,
+                     in_signature='', out_signature='isssa{ss}')
+def Info(self):
+    return (
+        self.config['build_number'],
+        self.config['device'],
+        self.config['channel'],
+        self.last_update_date,
+        self.version_detail
+    )

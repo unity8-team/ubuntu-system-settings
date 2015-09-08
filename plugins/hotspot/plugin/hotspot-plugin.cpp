@@ -17,8 +17,6 @@
  * You should have received a copy of the GNU General Public License along
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * FIXME: This plugin exists because hotspot does not work on mako. See lp:1434591.
- *
  */
 
 #include "hotspot-plugin.h"
@@ -31,6 +29,9 @@
 #include <SystemSettings/ItemBase>
 
 using namespace SystemSettings;
+
+typedef QMap<QString,QString> VersionDetail;
+Q_DECLARE_METATYPE(VersionDetail)
 
 class HotspotItem: public ItemBase
 {
@@ -46,26 +47,35 @@ public:
 HotspotItem::HotspotItem(const QVariantMap &staticData, QObject *parent):
     ItemBase(staticData, parent)
 {
-    QDBusInterface m_SystemServiceIface ("com.canonical.SystemImage",
-                                         "/Service",
-                                         "com.canonical.SystemImage",
-                                         QDBusConnection::systemBus());
+    qDBusRegisterMetaType<VersionDetail>();
 
-    bool showAll(false);
     QProcessEnvironment env = QProcessEnvironment::systemEnvironment();
     if (env.contains(QLatin1String("USS_SHOW_ALL_UI"))) {
         QString showAllS = env.value("USS_SHOW_ALL_UI", QString());
-        showAll = !showAllS.isEmpty();
+
+        // If showAll is set, show and immediately return to avoid
+        // check for bad devices.
+        if(!showAllS.isEmpty()) {
+            setVisibility(true);
+            return;
+        }
     }
 
-    bool isNotMako(false);
+    bool supportedDevice(true);
+
+    // FIXME: Checks whether device is mako or flo. See lp:1434591.
+    QDBusInterface m_SystemServiceIface("com.canonical.SystemImage",
+                                        "/Service",
+                                        "com.canonical.SystemImage",
+                                        QDBusConnection::systemBus());
     QDBusPendingReply<int, QString, QString, QString, QMap<QString, QString> > reply = m_SystemServiceIface.call("Info");
     reply.waitForFinished();
     if (reply.isValid()) {
-        isNotMako = reply.argumentAt<1>() != "mako";
+        QString device = reply.argumentAt<1>();
+        supportedDevice = !(device == "mako" || device == "flo");
     }
 
-    setVisibility(isNotMako || showAll);
+    setVisibility(supportedDevice);
 }
 
 void HotspotItem::setVisibility(bool visible)

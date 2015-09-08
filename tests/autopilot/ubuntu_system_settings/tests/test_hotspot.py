@@ -13,7 +13,6 @@ from ubuntu_system_settings.tests import HotspotBaseTestCase
 from ubuntu_system_settings.tests.connectivity import (
     PRIV_IFACE as CTV_PRIV_IFACE, NETS_IFACE as CTV_NETS_IFACE
 )
-from unittest import skip
 
 
 class HotspotSetupTestCase(HotspotBaseTestCase):
@@ -25,7 +24,6 @@ class HotspotSetupTestCase(HotspotBaseTestCase):
         'HotspotSwitchEnabled': True
     }
 
-    @skip('skipped due to lp:1434591')
     def test_setup(self):
         ssid = 'bar'
         password = 'zomgzomg'

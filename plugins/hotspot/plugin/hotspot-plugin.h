@@ -25,6 +25,7 @@
 #define SYSTEM_SETTINGS_HOTSPOT_PLUGIN_H
 
 #include <QObject>
+#include <QtDBus>
 #include <SystemSettings/PluginInterface>
 
 class HotspotPlugin: public QObject, public SystemSettings::PluginInterface2
