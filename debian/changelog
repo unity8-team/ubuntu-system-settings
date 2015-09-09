@@ -1,3 +1,19 @@
+ubuntu-system-settings (0.3+15.10.20150909-0ubuntu1) wily; urgency=medium
+
+  [ Ken VanDine ]
+  * Don't initialize and int as NULL
+  * Fixed test to match string change
+  * Pass some args when pushing the online-accounts panel page
+
+  [ Sebastien Bacher ]
+  * [security-privacy] small bugfixes and ui tweaks update some strings
+    to match the design translate the list items names include online
+    accounts button (LP: #1488016, #1487382)
+  * [system-update] use scalable distributor-logo icon from the theme
+    (LP: #1367137)
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Wed, 09 Sep 2015 15:08:25 +0000
+
 ubuntu-system-settings (0.3+15.10.20150901-0ubuntu1) wily; urgency=medium
 
   [ Ken VanDine ]
