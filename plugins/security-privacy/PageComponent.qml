@@ -187,7 +187,7 @@ ItemPage {
             ListItem.SingleValue {
                 id: locationItem
                 objectName: "locationItem"
-                text: i18n.tr("Location access")
+                text: i18n.tr("Location")
                 value: ""
                 progression: true
                 onClicked: pageStack.push(Qt.resolvedUrl("Location.qml"))
@@ -205,9 +205,9 @@ ItemPage {
                 value: locationActionGroup.enabled.state
             }
             ListItem.SingleValue {
-                text: i18n.tr("Other app access")
+                text: i18n.tr("App permissions")
                 progression: true
-                onClicked: pageStack.push(Qt.resolvedUrl("AppAccess.qml"))
+                onClicked: pageStack.push(Qt.resolvedUrl("AppAccess.qml"), {pluginManager: pluginManager})
             }
             ListItem.SingleValue {
                 text: i18n.tr("Diagnostics")
