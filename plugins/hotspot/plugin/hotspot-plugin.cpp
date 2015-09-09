@@ -21,11 +21,9 @@
 
 #include "hotspot-plugin.h"
 
-#include <QDebug>
 #include <QDBusInterface>
 #include <QDBusPendingReply>
 #include <QProcessEnvironment>
-#include <QStringList>
 #include <QtDBus>
 #include <SystemSettings/ItemBase>
 
