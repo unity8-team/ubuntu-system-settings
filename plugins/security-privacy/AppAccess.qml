@@ -101,7 +101,7 @@ ItemPage {
                         if (upPlugin) {
                             var updatePage = upPlugin.pageComponent
                             if (updatePage)
-                                pageStack.push(updatePage)
+                                pageStack.push(updatePage, {plugin: upPlugin, pluginManager: pluginManager})
                             else
                                 console.warn("online-accounts")
                         } else {
