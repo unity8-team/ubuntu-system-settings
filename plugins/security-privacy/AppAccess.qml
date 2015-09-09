@@ -97,11 +97,11 @@ ItemPage {
                     text: i18n.tr("Online Accounts…")
                     width: parent.width - units.gu(4)
                     onClicked: {
-                        var upPlugin = pluginManager.getByName("online-accounts")
-                        if (upPlugin) {
-                            var updatePage = upPlugin.pageComponent
-                            if (updatePage)
-                                pageStack.push(updatePage)
+                        var oaPlugin = pluginManager.getByName("online-accounts")
+                        if (oaPlugin) {
+                            var accountsPage = oaPlugin.pageComponent
+                            if (accountsPage)
+                                pageStack.push(accountsPage, {plugin: oaPlugin, pluginManager: pluginManager})
                             else
                                 console.warn("online-accounts")
                         } else {
