@@ -173,6 +173,75 @@ class UbuntuSystemSettingsBatteryTestCase(UbuntuSystemSettingsUpowerTestCase):
         self.add_mock_battery()
 
 
+class UbuntuSystemSettingsHotspotTestCase(UbuntuSystemSettingsTestCase,
+                                          dbusmock.DBusTestCase):
+    """Base class for tests that tests the hotspot functionality."""
+    connectivity_parameters = {}
+    indicatornetwork_parameters = {}
+    systemimage_parameters = {'device': 'ideal'}
+
+    @classmethod
+    def setUpClass(cls):
+        cls.session_con = cls.get_dbus(False)
+
+        cls.start_system_bus()
+
+        si_tmpl = os.path.join(os.path.dirname(__file__), 'systemimage.py')
+        (cls.si_mock, cls.si_obj) = cls.spawn_server_template(
+            si_tmpl, parameters=cls.systemimage_parameters,
+            stdout=subprocess.PIPE)
+
+        super(UbuntuSystemSettingsHotspotTestCase, cls).setUpClass()
+
+    def setUp(self):
+        if is_process_running(INDICATOR_NETWORK):
+            _stop_process(INDICATOR_NETWORK)
+            self.addCleanup(_start_process, INDICATOR_NETWORK)
+
+        ctv_tmpl = os.path.join(os.path.dirname(__file__), 'connectivity.py')
+        (self.ctv_mock, self.obj_ctv) = self.spawn_server_template(
+            ctv_tmpl, parameters=self.connectivity_parameters,
+            stdout=subprocess.PIPE)
+
+        self.ctv_private = dbus.Interface(
+            self.session_con.get_object(CTV_IFACE, CTV_PRIV_OBJ),
+            'org.freedesktop.DBus.Properties')
+
+        self.ctv_nets = dbus.Interface(
+            self.session_con.get_object(CTV_IFACE, CTV_NETS_OBJ),
+            'org.freedesktop.DBus.Properties')
+
+        inetwork = os.path.join(
+            os.path.dirname(__file__), 'indicatornetwork.py'
+        )
+        (self.inetwork_mock, self.obj_inetwork) = self.spawn_server_template(
+            inetwork, parameters=self.indicatornetwork_parameters,
+            stdout=subprocess.PIPE)
+
+        super(UbuntuSystemSettingsHotspotTestCase, self).setUp()
+
+    def tearDown(self):
+        self.ctv_mock.terminate()
+        self.ctv_mock.wait()
+        self.inetwork_mock.terminate()
+        self.inetwork_mock.wait()
+        super(UbuntuSystemSettingsHotspotTestCase, self).tearDown()
+
+    @classmethod
+    def tearDownClass(cls):
+        cls.si_mock.terminate()
+        cls.si_mock.wait()
+        if dbusmock.DBusTestCase.system_bus_pid is not None:
+            cls.stop_dbus(dbusmock.DBusTestCase.system_bus_pid)
+            del os.environ['DBUS_SYSTEM_BUS_ADDRESS']
+            dbusmock.DBusTestCase.system_bus_pid = None
+        if dbusmock.DBusTestCase.session_bus_pid is not None:
+            cls.stop_dbus(dbusmock.DBusTestCase.session_bus_pid)
+            del os.environ['DBUS_SESSION_BUS_ADDRESS']
+            dbusmock.DBusTestCase.session_bus_pid = None
+        super(UbuntuSystemSettingsHotspotTestCase, cls).tearDownClass()
+
+
 class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
                                         dbusmock.DBusTestCase):
     """Class for cellular tests which sets up an Ofono mock """
@@ -395,51 +464,11 @@ class CellularBaseTestCase(UbuntuSystemSettingsOfonoTestCase):
             context.SetProperty(key, value)
 
 
-class HotspotBaseTestCase(UbuntuSystemSettingsTestCase,
-                          dbusmock.DBusTestCase):
-
-    connectivity_parameters = {}
-    indicatornetwork_parameters = {}
-
-    @classmethod
-    def setUpClass(cls):
-        cls.session_con = cls.get_dbus(False)
-        super(HotspotBaseTestCase, cls).setUpClass()
+class HotspotBaseTestCase(UbuntuSystemSettingsHotspotTestCase):
 
     def setUp(self):
-        if is_process_running(INDICATOR_NETWORK):
-            _stop_process(INDICATOR_NETWORK)
-            self.addCleanup(_start_process, INDICATOR_NETWORK)
-
-        ctv_tmpl = os.path.join(os.path.dirname(__file__), 'connectivity.py')
-        (self.ctv_mock, self.obj_ctv) = self.spawn_server_template(
-            ctv_tmpl, parameters=self.connectivity_parameters,
-            stdout=subprocess.PIPE)
-
-        self.ctv_private = dbus.Interface(
-            self.session_con.get_object(CTV_IFACE, CTV_PRIV_OBJ),
-            'org.freedesktop.DBus.Properties')
-
-        self.ctv_nets = dbus.Interface(
-            self.session_con.get_object(CTV_IFACE, CTV_NETS_OBJ),
-            'org.freedesktop.DBus.Properties')
-
-        inetwork = os.path.join(
-            os.path.dirname(__file__), 'indicatornetwork.py'
-        )
-        (self.inetwork_mock, self.obj_inetwork) = self.spawn_server_template(
-            inetwork, parameters=self.indicatornetwork_parameters,
-            stdout=subprocess.PIPE)
-
         super(HotspotBaseTestCase, self).setUp()
         self.hotspot_page = self.main_view.go_to_hotspot_page()
-
-    def tearDown(self):
-        self.ctv_mock.terminate()
-        self.ctv_mock.wait()
-        self.inetwork_mock.terminate()
-        self.inetwork_mock.wait()
-        super(HotspotBaseTestCase, self).tearDown()
 
 
 class BluetoothBaseTestCase(UbuntuSystemSettingsTestCase):
