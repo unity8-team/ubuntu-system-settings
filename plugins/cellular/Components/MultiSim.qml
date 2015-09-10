@@ -100,7 +100,7 @@ Column {
 
             expanded: true
             text: sim.title
-            model: sim.radioSettings.modemTechnologies
+            model: sim.radioSettings.availableTechnologies
             delegate: OptionSelectorDelegate {
                 objectName: sim.path + "_radio_" + modelData
                 text: sim.techToString(modelData)
@@ -122,9 +122,9 @@ Column {
             Connections {
                 target: sim.radioSettings
                 onTechnologyPreferenceChanged: radio.selectedIndex =
-                    sim.radioSettings.modemTechnologies.indexOf(preference)
+                    sim.radioSettings.availableTechnologies.indexOf(preference)
 
-                onModemTechnologiesChanged: {
+                onAvailableTechnologiesChanged: {
                     if ((technologies.indexOf('umts') === -1)
                          && (sim.mtkSettings.has3G === false)) {
                         radio.model = sim.addUmtsEnableToModel(technologies);
@@ -138,11 +138,11 @@ Column {
             }
 
             Component.onCompleted: {
-                if ((sim.radioSettings.modemTechnologies.indexOf('umts') === -1)
+                if ((sim.radioSettings.availableTechnologies.indexOf('umts') === -1)
                      && (sim.mtkSettings.has3G === false)) {
-                    radio.model = sim.addUmtsEnableToModel(sim.radioSettings.modemTechnologies);
+                    radio.model = sim.addUmtsEnableToModel(sim.radioSettings.availableTechnologies);
                 } else {
-                    radio.model = sim.radioSettings.modemTechnologies;
+                    radio.model = sim.radioSettings.availableTechnologies;
                 }
             }
         }
