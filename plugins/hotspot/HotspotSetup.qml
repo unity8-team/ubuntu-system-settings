@@ -57,7 +57,7 @@ Component {
         }
 
         title: stored ?
-            i18n.tr("Change hotspot setup") : i18n.tr("Setup hotspot")
+            i18n.tr("Change Hotspot Setup") : i18n.tr("Set Up Hotspot")
         text: feedback.enabled ? feedback.text : "";
 
         Common {

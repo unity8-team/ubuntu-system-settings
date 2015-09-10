@@ -117,7 +117,7 @@ ItemPage {
                 anchors.horizontalCenter: parent.horizontalCenter
                 width: parent.width - units.gu(4)
                 text: Connectivity.hotspotStored ?
-                    i18n.tr("Change password/setup…") : i18n.tr("Set up hotspot…")
+                    i18n.tr("Change Password/Setup…") : i18n.tr("Set Up Hotspot…")
                 onClicked: {
                     setup.setSource(Qt.resolvedUrl("HotspotSetup.qml"));
                     PopupUtils.open(setup.item, root, {});
