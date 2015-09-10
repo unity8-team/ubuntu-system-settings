@@ -1,3 +1,14 @@
+ubuntu-system-settings (0.3+15.10.20150910.1-0ubuntu1) wily; urgency=medium
+
+  [ jonas-drange ]
+  * [hotspot] allow insecure hotspot, hide hotspot for mako, make
+    autopilot tests run on mako, and change packaging so we get a newer
+    Connectivity API (provided by indicator-network). (LP: #1431876)
+  * [system-update] deviceName now uses correct argument returned from
+    system image backend. (LP: #1487432)
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Thu, 10 Sep 2015 19:01:48 +0000
+
 ubuntu-system-settings (0.3+15.10.20150909-0ubuntu1) wily; urgency=medium
 
   [ Ken VanDine ]
