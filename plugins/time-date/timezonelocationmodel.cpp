@@ -52,10 +52,6 @@ TimeZoneLocationModel::TimeZoneLocationModel(QObject *parent):
             SIGNAL(finished()),
             m_populateWorker,
             SLOT(deleteLater()));
-    QObject::connect(m_workerThread,
-            SIGNAL(finished()),
-            this,
-            SLOT(modelUpdated()));
 
     m_populateWorker->moveToThread(m_workerThread);
     m_workerThread->start(QThread::IdlePriority);
