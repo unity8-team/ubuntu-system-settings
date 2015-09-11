@@ -59,7 +59,6 @@ TimeZoneLocationModel::TimeZoneLocationModel(QObject *parent):
 
 void TimeZoneLocationModel::store(QList<TzLocation> sortedLocations)
 {
-    qWarning() << "model:store()";
     m_originalLocations = sortedLocations;
     Q_EMIT (modelUpdated());
     m_workerThread = nullptr;
@@ -72,7 +71,6 @@ void TimeZoneLocationModel::store(QList<TzLocation> sortedLocations)
 
     if (!m_pattern.isEmpty())
         filter(m_pattern);
-    qWarning() << "model:store() ends";
 }
 
 void TimeZoneLocationModel::setModel(QList<TzLocation> locations)
@@ -152,7 +150,6 @@ QHash<int, QByteArray> TimeZoneLocationModel::roleNames() const
 
 void TimeZoneLocationModel::filter(const QString& pattern)
 {
-    qWarning() << "model:filter()";
     QList<TzLocation> list;
 
     if (m_watcher.isRunning())
@@ -162,11 +159,9 @@ void TimeZoneLocationModel::filter(const QString& pattern)
             (m_workerThread && m_workerThread->isRunning())) {
         setModel(QList<TzLocation>());
         m_pattern = pattern;
-        qWarning() << "model:filter() had something running, exits early";
         return;
     }
 
-    qWarning() << "model:filter() continues..";
 
     if (!m_pattern.isEmpty() && !m_locations.isEmpty() &&
             pattern.startsWith(m_pattern))
@@ -191,21 +186,17 @@ void TimeZoneLocationModel::filter(const QString& pattern)
     Q_EMIT (filterBegin());
 
     m_watcher.setFuture(future);
-    qWarning() << "model:filter() completed";
 }
 
 void TimeZonePopulateWorker::doBuild()
 {
-    qWarning() << "TimeZonePopulateWorker doBuild()";
     buildCityMap();
     Q_EMIT (buildCompleted());
-    qWarning() << "TimeZonePopulateWorker doBuild() ends";
 }
 
 void TimeZonePopulateWorker::buildCityMap()
 {
     QList<TimeZoneLocationModel::TzLocation> locations;
-    qWarning() << "populateworker:buildCityMap()";
     TzDB *tzdb = tz_load_db();
     GPtrArray *tz_locations = tz_get_locations(tzdb);
 
@@ -239,7 +230,6 @@ void TimeZonePopulateWorker::buildCityMap()
 
     qSort(locations.begin(), locations.end());
     Q_EMIT (resultReady(locations));
-    qWarning() << "populateworker:buildCityMap() ends";
     g_ptr_array_free (tz_locations, TRUE);
 }
 
