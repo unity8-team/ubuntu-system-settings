@@ -28,7 +28,6 @@
 #include <QtConcurrent>
 
 class TimeZonePopulateWorker;
-class TimeZoneSortWorker;
 
 class TimeZoneLocationModel : public QAbstractTableModel
 {
