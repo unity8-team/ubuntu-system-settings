@@ -32,7 +32,8 @@ TimeZoneLocationModel::TimeZoneLocationModel(QObject *parent):
     m_workerThread(new TimeZonePopulateWorker()),
     m_watcher()
 {
-    qRegisterMetaType<TzLocation>();
+    qRegisterMetaType<TzLocation>("TzLocation");
+    qRegisterMetaType<QList<TimeZoneLocationModel::TzLocation> >();
 
     QObject::connect(m_workerThread,
             &TimeZonePopulateWorker::resultReady,
@@ -41,7 +42,7 @@ TimeZoneLocationModel::TimeZoneLocationModel(QObject *parent):
     QObject::connect(m_workerThread,
             &TimeZonePopulateWorker::finished,
             this,
-            &TimeZoneLocationModel::startSort);
+            &TimeZoneLocationModel::prepareSort);
     QObject::connect(m_workerThread,
             &TimeZonePopulateWorker::finished,
             m_workerThread,
@@ -54,16 +55,17 @@ TimeZoneLocationModel::TimeZoneLocationModel(QObject *parent):
     m_workerThread->start();
 }
 
-void TimeZoneLocationModel::startSort()
+void TimeZoneLocationModel::prepareSort()
 {
-    qWarning() << "model::startSort()";
+    qWarning() << "model::prepareSort()";
     TimeZoneSortWorker *worker = new TimeZoneSortWorker;
     worker->moveToThread(&sortWorkerThread);
     connect(&sortWorkerThread, &QThread::finished, worker, &QObject::deleteLater);
     connect(worker, &TimeZoneSortWorker::resultReady, this, &TimeZoneLocationModel::store);
+    connect(this, &TimeZoneLocationModel::startSort, worker, &TimeZoneSortWorker::doSort);
     sortWorkerThread.start();
-    worker->doSort(m_originalLocations);
-    qWarning() << "model::startSort() ends";
+    Q_EMIT startSort(m_originalLocations);
+    qWarning() << "model::prepareSort() ends";
 }
 
 void TimeZoneLocationModel::store()
