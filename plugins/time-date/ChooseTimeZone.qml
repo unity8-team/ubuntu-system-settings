@@ -27,13 +27,15 @@ import Ubuntu.SystemSettings.TimeDate 1.0
 ItemPage {
     title: i18n.tr("Time zone")
 
+    property UbuntuTimeDatePanel plugin
+
     Timer {
         id: goBackTimer
         onTriggered: pageStack.pop()
     }
 
-    UbuntuTimeDatePanel {
-        id: timeDatePanel
+    Connections {
+        target: plugin
         onTimeZoneChanged: {
             // Protect against the tz being changed externally
             if (locationsListView.manuallySelected !== "")
@@ -52,7 +54,7 @@ ItemPage {
 
     ListItem.Standard {
         anchors.top: setTimeZoneSelector.bottom
-        text: timeDatePanel.timeZone
+        text: plugin.timeZone
         enabled: false
         visible: showAllUI && setTimeZoneSelector.selectedIndex == 0 // Automatically
     }
@@ -66,7 +68,7 @@ ItemPage {
         }
         id: filterCities
         objectName: "selectTimeZoneField"
-        onTextChanged: timeDatePanel.filter = text
+        onTextChanged: plugin.filter = text
         visible: setTimeZoneSelector.selectedIndex == 1 // Manually
         Component.onCompleted: forceActiveFocus()
         inputMethodHints: Qt.ImhNoPredictiveText
@@ -92,7 +94,7 @@ ItemPage {
 
         property string manuallySelected: ""
 
-        model: timeDatePanel.timeZoneModel
+        model: plugin.timeZoneModel
         visible: setTimeZoneSelector.selectedIndex == 1 && count > 0
         delegate: ListItem.Standard {
             text: displayName
@@ -101,10 +103,10 @@ ItemPage {
             // are highlighted.
             onClicked: {
                 locationsListView.manuallySelected = displayName
-                timeDatePanel.timeZone = timeZone
+                plugin.timeZone = timeZone
             }
             selected: locationsListView.manuallySelected === "" ?
-                          timeDatePanel.timeZone == timeZone :
+                          plugin.timeZone == timeZone :
                           locationsListView.manuallySelected == displayName
         }
     }
@@ -114,7 +116,7 @@ ItemPage {
         running: setTimeZoneSelector.selectedIndex == 1 &&
                  locationsListView.count == 0 &&
                  filterCities.length > 0 &&
-                 timeDatePanel.listUpdating
+                 plugin.listUpdating
     }
 
     Label {
@@ -122,7 +124,7 @@ ItemPage {
         anchors.centerIn: parent
         visible: setTimeZoneSelector.selectedIndex == 1 &&
                  locationsListView.count == 0 &&
-                 (filterCities.length == 0 || !timeDatePanel.listUpdating)
+                 (filterCities.length == 0 || !plugin.listUpdating)
         text: (filterCities.length == 0) ? i18n.tr("Enter your current location.")
                                          : i18n.tr("No matching place")
     }
