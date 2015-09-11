@@ -61,7 +61,7 @@ void TimeZoneLocationModel::startSort()
     worker->moveToThread(&sortWorkerThread);
     connect(&sortWorkerThread, &QThread::finished, worker, &QObject::deleteLater);
     connect(worker, &TimeZoneSortWorker::resultReady, this, &TimeZoneLocationModel::store);
-    sortWorkerThread.start();
+    sortWorkerThread.start(QThread::LowestPriority);
     worker->doSort(m_originalLocations);
     qWarning() << "model::startSort() ends";
 }
