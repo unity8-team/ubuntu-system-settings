@@ -78,8 +78,7 @@ Q_SIGNALS:
     void startSort(QList<TimeZoneLocationModel::TzLocation>);
 
 public Q_SLOTS:
-    void processModelResult(TzLocation);
-    void store();
+    void store(QList<TzLocation> sortedLocations);
     void prepareSort();
     void filterFinished();
 
@@ -90,7 +89,6 @@ private:
 
     QThread *m_workerThread;
     TimeZonePopulateWorker *m_populateWorker;
-    TimeZoneSortWorker *m_sortWorker;
 
     bool substringFilter(const QString& input);
     QFutureWatcher<TzLocation> m_watcher;
@@ -107,24 +105,12 @@ public slots:
     void doBuild();
 
 Q_SIGNALS:
-    void resultReady(TimeZoneLocationModel::TzLocation);
-    void buildComplete();
+    void resultReady(const QList<TimeZoneLocationModel::TzLocation> &sortedList);
+    void buildCompleted();
 
 private:
     void buildCityMap();
 
-};
-
-class TimeZoneSortWorker : public QObject
-{
-    Q_OBJECT
-
-public slots:
-    void doSort(QList<TimeZoneLocationModel::TzLocation>);
-
-signals:
-    void resultReady(const QList<TimeZoneLocationModel::TzLocation> &sortedList);
-    void sortComplete();
 };
 
 #endif // TIMEZONELOCATIONMODEL_H
