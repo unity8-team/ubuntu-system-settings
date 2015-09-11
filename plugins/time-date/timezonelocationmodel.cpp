@@ -48,6 +48,14 @@ TimeZoneLocationModel::TimeZoneLocationModel(QObject *parent):
             SIGNAL(finished()),
             m_workerThread,
             SLOT(deleteLater()));
+    QObject::connect(m_populateWorker,
+            SIGNAL(finished()),
+            m_populateWorker,
+            SLOT(deleteLater()));
+    QObject::connect(m_workerThread,
+            SIGNAL(finished()),
+            this,
+            SLOT(modelUpdated()));
 
     m_populateWorker->moveToThread(m_workerThread);
     m_workerThread->start(QThread::IdlePriority);
@@ -56,7 +64,6 @@ TimeZoneLocationModel::TimeZoneLocationModel(QObject *parent):
 void TimeZoneLocationModel::store(QList<TzLocation> sortedLocations)
 {
     m_originalLocations = sortedLocations;
-    Q_EMIT (modelUpdated());
     m_workerThread = nullptr;
     modelUpdating = false;
 
@@ -186,6 +193,7 @@ void TimeZoneLocationModel::filter(const QString& pattern)
 void TimeZonePopulateWorker::run()
 {
     buildCityMap();
+    emit finished();
 }
 
 void TimeZonePopulateWorker::buildCityMap()

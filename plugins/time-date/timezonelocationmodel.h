@@ -103,6 +103,7 @@ public slots:
 
 Q_SIGNALS:
     void resultReady(const QList<TimeZoneLocationModel::TzLocation> &sortedList);
+    void finished();
 
 private:
     void buildCityMap();
