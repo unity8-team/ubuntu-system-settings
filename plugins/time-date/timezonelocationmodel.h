@@ -32,6 +32,7 @@ class TimeZonePopulateWorker;
 class TimeZoneLocationModel : public QAbstractTableModel
 {
     Q_OBJECT
+    QThread sortWorkerThread;
 
 public:
     explicit TimeZoneLocationModel(QObject *parent = 0);
@@ -78,6 +79,7 @@ Q_SIGNALS:
 public Q_SLOTS:
     void processModelResult(TzLocation);
     void store();
+    void startSort();
     void filterFinished();
 
 private:
@@ -107,6 +109,17 @@ Q_SIGNALS:
 private:
     void buildCityMap();
 
+};
+
+class TimeZoneSortWorker : public QObject
+{
+    Q_OBJECT
+
+public slots:
+    void doSort(QList<TimeZoneLocationModel::TzLocation>);
+
+signals:
+    void resultReady(const QList<TimeZoneLocationModel::TzLocation> &sortedList);
 };
 
 #endif // TIMEZONELOCATIONMODEL_H
