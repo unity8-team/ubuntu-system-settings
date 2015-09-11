@@ -39,15 +39,11 @@ TimeZoneLocationModel::TimeZoneLocationModel(QObject *parent):
     QObject::connect(m_workerThread,
             SIGNAL(started()),
             m_populateWorker,
-            SLOT(doBuild()));
+            SLOT(run()));
     QObject::connect(m_populateWorker,
             &TimeZonePopulateWorker::resultReady,
             this,
             &TimeZoneLocationModel::store);
-    QObject::connect(m_populateWorker,
-            SIGNAL(finished()),
-            this,
-            SLOT(deleteLater()));
     QObject::connect(m_workerThread,
             SIGNAL(finished()),
             m_workerThread,
@@ -68,6 +64,7 @@ void TimeZoneLocationModel::store(QList<TzLocation> sortedLocations)
                      &QFutureWatcher<TzLocation>::finished,
                      this,
                      &TimeZoneLocationModel::filterFinished);
+
     if (!m_pattern.isEmpty())
         filter(m_pattern);
 }
@@ -161,7 +158,6 @@ void TimeZoneLocationModel::filter(const QString& pattern)
         return;
     }
 
-
     if (!m_pattern.isEmpty() && !m_locations.isEmpty() &&
             pattern.startsWith(m_pattern))
         list = m_locations; // search in the smaller list
@@ -187,10 +183,9 @@ void TimeZoneLocationModel::filter(const QString& pattern)
     m_watcher.setFuture(future);
 }
 
-void TimeZonePopulateWorker::doBuild()
+void TimeZonePopulateWorker::run()
 {
     buildCityMap();
-    Q_EMIT (buildCompleted());
 }
 
 void TimeZonePopulateWorker::buildCityMap()

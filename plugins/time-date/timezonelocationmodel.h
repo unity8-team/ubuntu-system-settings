@@ -100,11 +100,10 @@ class TimeZonePopulateWorker : public QObject
     Q_OBJECT
 
 public slots:
-    void doBuild();
+    void run();
 
 Q_SIGNALS:
     void resultReady(const QList<TimeZoneLocationModel::TzLocation> &sortedList);
-    void buildCompleted();
 
 private:
     void buildCityMap();
