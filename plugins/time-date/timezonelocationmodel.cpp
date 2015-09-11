@@ -68,7 +68,6 @@ void TimeZoneLocationModel::store(QList<TzLocation> sortedLocations)
                      &QFutureWatcher<TzLocation>::finished,
                      this,
                      &TimeZoneLocationModel::filterFinished);
-
     if (!m_pattern.isEmpty())
         filter(m_pattern);
 }

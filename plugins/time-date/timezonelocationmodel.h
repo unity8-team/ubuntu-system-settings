@@ -75,11 +75,9 @@ Q_SIGNALS:
     void filterBegin();
     void filterComplete();
     void modelUpdated();
-    void startSort(QList<TimeZoneLocationModel::TzLocation>);
 
 public Q_SLOTS:
     void store(QList<TzLocation> sortedLocations);
-    void prepareSort();
     void filterFinished();
 
 private:

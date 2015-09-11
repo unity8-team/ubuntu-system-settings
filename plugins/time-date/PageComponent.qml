@@ -70,7 +70,7 @@ ItemPage {
                 value: getUTCOffset()
                 progression: true
                 onClicked: pageStack.push(Qt.resolvedUrl("ChooseTimeZone.qml"), {
-                    plugin: timeDatePanel
+                    timeDatePanel: timeDatePanel
                 })
             }
 
