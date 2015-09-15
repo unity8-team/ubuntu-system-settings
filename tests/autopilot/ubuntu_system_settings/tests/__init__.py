@@ -307,7 +307,7 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
         modem.AddProperty(
             RDO_IFACE, 'TechnologyPreference', preference)
         modem.AddProperty(
-            RDO_IFACE, 'ModemTechnologies', technologies)
+            RDO_IFACE, 'AvailableTechnologies', technologies)
         modem.AddMethods(
             RDO_IFACE,
             [('GetProperties', '', 'a{sv}',
