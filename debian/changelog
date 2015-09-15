@@ -1,3 +1,11 @@
+ubuntu-system-settings (0.3+15.10.20150915-0ubuntu1) wily; urgency=medium
+
+  [ Ken VanDine ]
+  * ported to libqofono 0.82 (modemTechnologies now
+    availableTechnologies)
+
+ -- Tony Espy <ci-train-bot@canonical.com>  Tue, 15 Sep 2015 00:23:13 +0000
+
 ubuntu-system-settings (0.3+15.10.20150910.1-0ubuntu1) wily; urgency=medium
 
   [ jonas-drange ]
