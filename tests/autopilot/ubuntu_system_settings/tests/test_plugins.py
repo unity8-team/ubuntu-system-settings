@@ -179,12 +179,14 @@ class SystemSettingsBatteryTestCases(UbuntuSystemSettingsBatteryTestCase):
 
 
 class SystemSettingsHotspotTestCases(UbuntuSystemSettingsHotspotTestCase):
-    systemimage_parameters = {'device': 'mako'}
 
-    # TODO: remove once lp:1434591 has been resolved.
+    # TODO: remove device parameter once lp:1434591 has been resolved.
+    systemimage_parameters = {'device': 'mako'}
+    connectivity_parameters = {'ModemAvailable': False}
+
     def test_hotspot_plugin(self):
         """ Checks that the Hotspot plugin is not available
-        as it is broken on mako."""
+        as it is broken on mako, and when there are no modems available."""
         self.assertThat(lambda: self.main_view.select_single(
             objectName='entryComponent-hotspot'),
             raises(StateNotFoundError)
