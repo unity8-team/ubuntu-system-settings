@@ -40,7 +40,7 @@ Component {
             }
             switch (securityList.selectedIndex) {
                 case 1: // WPA
-                    return password.length === 8 || password.length === 64;
+                    return password.length >= 8 || password.length >= 64;
                 case 2: // WPA Enterprise
                 case 4: // Dynamic WEP
                 case 5: // LEAP
