@@ -39,10 +39,11 @@ Component {
                 return false;
             }
             switch (securityList.selectedIndex) {
-                case 1: //WPA
+                case 1: // WPA
                     return password.length === 8 || password.length === 64;
-                case 2: // LEAP
-                case 5: // WPA Enterprise
+                case 2: // WPA Enterprise
+                case 4: // Dynamic WEP
+                case 5: // LEAP
                     return password.length > 0 && username.length > 0;
                 case 3: // WEP
                     return password.length === 5  ||
@@ -50,9 +51,6 @@ Component {
                            password.length === 13 ||
                            password.length === 26;
                 case 0: // None
-                case 4: // Dynamic WEP
-                    /* TODO: Look at the authentication scheme used by Dynamic
-                    WEP to determine if the settings are valid */
                 default:
                     return true;
             }
