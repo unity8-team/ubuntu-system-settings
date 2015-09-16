@@ -88,13 +88,6 @@ class SystemSettingsTestCases(UbuntuSystemSettingsTestCase):
         )
         self.assertThat(plugin, NotEquals(None))
 
-    def test_hotspot_plugin(self):
-        """ Checks whether the Hotspot plugin is available """
-        plugin = self.main_view.select_single(
-            objectName='entryComponent-hotspot'
-        )
-        self.assertThat(plugin, NotEquals(None))
-
     def test_background_plugin(self):
         """ Checks whether the Background plugin is available """
         plugin = self.main_view.select_single(
@@ -180,11 +173,23 @@ class SystemSettingsBatteryTestCases(UbuntuSystemSettingsBatteryTestCase):
 
 class SystemSettingsHotspotTestCases(UbuntuSystemSettingsHotspotTestCase):
 
+    def test_hotspot_plugin(self):
+        """ Checks whether the Hotspot plugin is available for supported device
+        """
+        plugin = self.main_view.select_single(
+            objectName='entryComponent-hotspot'
+        )
+        self.assertThat(plugin, NotEquals(None))
+
+
+class SystemSettingsHotspotUnsupportedTestCases(
+        UbuntuSystemSettingsHotspotTestCase):
+
     # TODO: remove device parameter once lp:1434591 has been resolved.
     systemimage_parameters = {'device': 'mako'}
     connectivity_parameters = {'ModemAvailable': False}
 
-    def test_hotspot_plugin(self):
+    def test_hotspot_plugin_hidden(self):
         """ Checks that the Hotspot plugin is not available
         as it is broken on mako, and when there are no modems available."""
         self.assertThat(lambda: self.main_view.select_single(
