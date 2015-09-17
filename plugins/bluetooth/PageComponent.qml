@@ -225,7 +225,7 @@ ItemPage {
                     left: parent.left
                     right: parent.right
                 }
-                visible: bluetoothActionGroup.enabled && (connectedRepeater.count > 0)
+                visible: bluetoothActionGroup.enabled.state && (connectedRepeater.count > 0)
                 objectName: "connectedList"
 
                 Repeater {
@@ -253,7 +253,7 @@ ItemPage {
             SettingsItemTitle {
                 id: disconnectedHeader
                 text: connectedList.visible ? i18n.tr("Connect another device:") : i18n.tr("Connect a device:")
-                enabled: bluetoothActionGroup.enabled
+                enabled: bluetoothActionGroup.enabled.state
                 control: ActivityIndicator {
                     visible: backend.powered && backend.discovering
                     running: true
@@ -266,7 +266,7 @@ ItemPage {
                     left: parent.left
                     right: parent.right
                 }
-                visible: bluetoothActionGroup.enabled && (disconnectedRepeater.count > 0)
+                visible: bluetoothActionGroup.enabled.state && (disconnectedRepeater.count > 0)
                 objectName: "disconnectedList"
 
                 Repeater {
@@ -287,7 +287,7 @@ ItemPage {
             ListItem.Standard {
                 id: disconnectedNone
                 text: i18n.tr("None detected")
-                visible: !disconnectedList.visible
+                visible: !disconnectedList.visible && disconnectedHeader.visible
                 enabled: false
             }
 
