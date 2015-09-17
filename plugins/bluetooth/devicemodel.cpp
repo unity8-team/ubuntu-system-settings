@@ -96,6 +96,26 @@ DeviceModel::DeviceModel(QDBusConnection &dbus, QObject *parent):
     connect(&m_timer, SIGNAL(timeout()), this, SLOT(slotTimeout()));
 }
 
+DeviceModel::~DeviceModel()
+{
+    clearAdapter();
+
+    if (m_bluezAgentManager.isValid()) {
+        auto call = m_bluezAgentManager.UnregisterAgent(QDBusObjectPath(DBUS_ADAPTER_AGENT_PATH));
+        watchCall(call, [=](QDBusPendingCallWatcher *watcher) {
+            QDBusPendingReply<void> reply = *watcher;
+
+            if (reply.isError()) {
+                qWarning() << "Failed to unregister our agent with BlueZ:"
+                           << reply.error().message();
+            }
+
+            watcher->deleteLater();
+        });
+    }
+}
+
+
 void DeviceModel::slotInterfacesAdded(const QDBusObjectPath &objectPath, InterfaceList ifacesAndProps)
 {
     Q_UNUSED(ifacesAndProps);
@@ -150,11 +170,6 @@ void DeviceModel::slotInterfacesRemoved(const QDBusObjectPath &objectPath, const
     const int row = findRowFromAddress(device->getAddress());
     if ((row >= 0))
         removeRow(row);
-}
-
-DeviceModel::~DeviceModel()
-{
-    clearAdapter();
 }
 
 int DeviceModel::findRowFromAddress(const QString &address) const
