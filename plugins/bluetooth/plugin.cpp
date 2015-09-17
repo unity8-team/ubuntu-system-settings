@@ -24,11 +24,17 @@
 #include <QtQml/QQmlContext>
 #include "bluetooth.h"
 #include "device.h"
+#include "bluez_helper.h"
 
 void BackendPlugin::registerTypes(const char *uri)
 {
     Q_ASSERT(uri == QLatin1String("Ubuntu.SystemSettings.Bluetooth"));
 
+    // Register additional QtDBus types we need
+    qDBusRegisterMetaType<InterfaceList>();
+    qDBusRegisterMetaType<ManagedObjectList>();
+
+    // .. now register our real QML types
     qmlRegisterType<Bluetooth>(uri, 1, 0, "UbuntuBluetoothPanel");
     qmlRegisterType<Device>(uri, 1, 0, "Device");
     qmlRegisterType<Device>(uri, 1, 0, "Agent");

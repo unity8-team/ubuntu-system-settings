@@ -34,6 +34,9 @@
 #include <QSortFilterProxyModel>
 
 #include "device.h"
+#include "objectmanager.h"
+#include "adapter1.h"
+#include "properties.h"
 
 class DeviceModel: public QAbstractListModel
 {
@@ -83,7 +86,7 @@ Q_SIGNALS:
 
 private:
     QDBusConnection m_dbus;
-    QDBusInterface m_bluezManager;
+    DBusObjectManagerInterface m_bluezManager;
 
     void setProperties(const QMap<QString,QVariant> &properties);
     void updateProperty(const QString &key, const QVariant &value);
@@ -100,7 +103,9 @@ private:
     void setDiscoverable(bool discoverable);
     void setPowered(bool powered);
 
-    QScopedPointer<QDBusInterface> m_bluezAdapter;
+    QScopedPointer<BluezAdapter1> m_bluezAdapter;
+    QScopedPointer<FreeDesktopProperties> m_bluezAdapterProperties;
+
     void clearAdapter();
     void setAdapterFromPath(const QString &objectPath);
 
@@ -112,7 +117,14 @@ private:
     int findRowFromAddress(const QString &address) const;
     void emitRowChanged(int row);
 
+    void setDiscovering(bool value);
+
 private Q_SLOTS:
+    void slotInterfacesAdded(const QDBusObjectPath &path, InterfaceList ifacesAndProps);
+    void slotInterfacesRemoved(const QDBusObjectPath &path, const QStringList &interfaces);
+    void slotAdapterPropertiesChanged(const QString &interface, const QVariantMap &changedProperties,
+                                      const QStringList &invalidatedProperties);
+
     void slotCreateFinished(QDBusPendingCallWatcher *call);
     void slotRemoveFinished(QDBusPendingCallWatcher *call);
     void slotPropertyChanged(const QString &key, const QDBusVariant &value);
@@ -123,8 +135,6 @@ private Q_SLOTS:
     void slotDeviceRemoved(const QDBusObjectPath &);
     void slotDeviceFound(const QString &, const QMap<QString,QVariant>&);
     void slotDeviceDisappeared(const QString&);
-    void slotDefaultAdapterChanged(const QDBusObjectPath&);
-    void slotAdapterRemoved(const QDBusObjectPath& path);
 };
 
 class DeviceFilter: public QSortFilterProxyModel

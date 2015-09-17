@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013-2015 Canonical Ltd
+ * Copyright (C) 2015 Canonical Ltd
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as
@@ -13,20 +13,17 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * Authors:
- * Charles Kerr <charles.kerr@canonical.com>
- */
+*/
 
-#ifndef USS_DBUS_SHARED_H
-#define USS_DBUS_SHARED_H
+#ifndef BLUEZ_HELPER_H_
+#define BLUEZ_HELPER_H_
 
-#define DBUS_AGENT_PATH "/com/canonical/SettingsBluetoothAgent"
-#define DBUS_ADAPTER_AGENT_PATH "/com/canonical/SettingsBluetoothAgent/adapteragent"
-#define DBUS_AGENT_CAPABILITY "KeyboardDisplay"
+#include <QObject>
 
-#define BLUEZ_SERVICE "org.bluez"
+typedef QMap<QString, QVariantMap> InterfaceList;
+typedef QMap<QDBusObjectPath, InterfaceList> ManagedObjectList;
 
-#define BLUEZ_ADAPTER_IFACE "org.bluez.Adapter1"
-#define BLUEZ_DEVICE_IFACE "org.bluez.Device1"
+Q_DECLARE_METATYPE(InterfaceList)
+Q_DECLARE_METATYPE(ManagedObjectList)
 
-#endif // USS_DBUS_SHARED_H
+#endif
