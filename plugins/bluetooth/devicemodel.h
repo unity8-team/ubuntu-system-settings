@@ -36,6 +36,7 @@
 #include "device.h"
 #include "objectmanager.h"
 #include "adapter1.h"
+#include "agentmanager1.h"
 #include "properties.h"
 
 class DeviceModel: public QAbstractListModel
@@ -71,8 +72,6 @@ public:
     bool isPowered() const { return m_isPowered; }
     bool isDiscovering() const { return m_isDiscovering; }
     bool isDiscoverable() const { return m_isDiscoverable; }
-    void addConnectAfterPairing(const QString &address, Device::ConnectionMode mode);
-    void createDevice(const QString &address, QObject *agent);
     void removeDevice(const QString &path);
     void stopDiscovery();
     void startDiscovery();
@@ -87,6 +86,7 @@ Q_SIGNALS:
 private:
     QDBusConnection m_dbus;
     DBusObjectManagerInterface m_bluezManager;
+    BluezAgentManager1 m_bluezAgentManager;
 
     void setProperties(const QMap<QString,QVariant> &properties);
     void updateProperty(const QString &key, const QVariant &value);
@@ -112,7 +112,7 @@ private:
     QList<QSharedPointer<Device> > m_devices;
     void updateDevices();
     void addDevice(QSharedPointer<Device> &device);
-    void addDevice(const QString &objectPath);
+    void addDevice(const QString &objectPath, const QVariantMap &properties);
     void removeRow(int i);
     int findRowFromAddress(const QString &address) const;
     void emitRowChanged(int row);
@@ -120,21 +120,15 @@ private:
     void setDiscovering(bool value);
 
 private Q_SLOTS:
-    void slotInterfacesAdded(const QDBusObjectPath &path, InterfaceList ifacesAndProps);
-    void slotInterfacesRemoved(const QDBusObjectPath &path, const QStringList &interfaces);
+    void slotInterfacesAdded(const QDBusObjectPath &objectPath, InterfaceList ifacesAndProps);
+    void slotInterfacesRemoved(const QDBusObjectPath &objectPath, const QStringList &interfaces);
     void slotAdapterPropertiesChanged(const QString &interface, const QVariantMap &changedProperties,
                                       const QStringList &invalidatedProperties);
-
-    void slotCreateFinished(QDBusPendingCallWatcher *call);
     void slotRemoveFinished(QDBusPendingCallWatcher *call);
     void slotPropertyChanged(const QString &key, const QDBusVariant &value);
     void slotTimeout();
     void slotEnableDiscoverable();
     void slotDeviceChanged();
-    void slotDeviceCreated(const QDBusObjectPath &);
-    void slotDeviceRemoved(const QDBusObjectPath &);
-    void slotDeviceFound(const QString &, const QMap<QString,QVariant>&);
-    void slotDeviceDisappeared(const QString&);
 };
 
 class DeviceFilter: public QSortFilterProxyModel

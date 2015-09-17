@@ -26,6 +26,9 @@
 #include <QSharedPointer>
 #include <QString>
 
+#include "device1.h"
+#include "properties.h"
+
 struct Device: QObject
 {
     Q_OBJECT
@@ -78,10 +81,7 @@ public:
     enum Connection { Disconnected=1, Connecting=2,
                       Connected=4, Disconnecting=8 };
 
-    enum ConnectionMode { Audio, AudioSource, AudioSink, HandsfreeGateway,
-                          HeadsetMode, Input };
-
-    Q_ENUMS(Type Strength Connection ConnectionMode)
+    Q_ENUMS(Type Strength Connection)
 
     Q_DECLARE_FLAGS(Connections, Connection)
 
@@ -106,7 +106,7 @@ public:
     bool isTrusted() const { return m_trusted; }
     Connection getConnection() const { return m_connection; }
     Strength getStrength() const { return m_strength; }
-    QString getPath() const { return m_deviceInterface ? m_deviceInterface->path() : QString(); }
+    QString getPath() const { return m_bluezDevice ? m_bluezDevice->path() : QString(); }
 
   private:
     QString m_name;
@@ -120,13 +120,9 @@ public:
     Connection m_connection = Connection::Disconnected;
     Strength m_strength = Strength::None;
     bool m_isConnected = false;
-    QSharedPointer<QDBusInterface> m_deviceInterface;
-    QSharedPointer<QDBusInterface> m_audioInterface;
-    QSharedPointer<QDBusInterface> m_audioSourceInterface;
-    QSharedPointer<QDBusInterface> m_audioSinkInterface;
-    QSharedPointer<QDBusInterface> m_headsetInterface;
-    QSharedPointer<QDBusInterface> m_inputInterface;
-    QList<ConnectionMode> m_connectAfterPairing;
+    bool m_connectAfterPairing;
+    QScopedPointer<BluezDevice1> m_bluezDevice;
+    QScopedPointer<FreeDesktopProperties> m_bluezDeviceProperties;
 
   protected:
     void setName(const QString &name);
@@ -142,27 +138,26 @@ public:
 
   public:
     Device() {}
-    ~Device() {}
     Device(const QString &path, QDBusConnection &bus);
-    Device(const QMap<QString,QVariant> &properties);
-    void initDevice(const QString &path, QDBusConnection &bus);
-    bool isValid() const { return getType() != Type::Other; }
-    void connect(ConnectionMode);
+    ~Device() {}
+    bool isValid() const { /* return getType() != Type::Other; */ return true; }
+    void connect();
     void makeTrusted(bool trusted);
-    void disconnect(ConnectionMode);
+    void disconnect();
     void setProperties(const QMap<QString,QVariant> &properties);
-    void addConnectAfterPairing(const ConnectionMode mode);
+    void setConnectAfterPairing(bool value);
 
   public Q_SLOTS:
     void connectPending();
 
   private Q_SLOTS:
-    void slotPropertyChanged(const QString &key, const QDBusVariant &value);
+    void slotPropertiesChanged(const QString &interface, const QVariantMap &changedProperties,
+                               const QStringList &invalidatedProperties);
     void slotMakeTrustedDone(QDBusPendingCallWatcher *call);
 
   private:
+    void initDevice(const QString &path, QDBusConnection &bus);
     void updateProperties(QSharedPointer<QDBusInterface>);
-    void initInterface(QSharedPointer<QDBusInterface>&, const QString &path, const QString &name, QDBusConnection&);
     void updateProperty(const QString &key, const QVariant &value);
     static Type getTypeFromClass(quint32 bluetoothClass);
     Device::Strength getStrengthFromRssi(int rssi);

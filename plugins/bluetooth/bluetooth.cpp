@@ -167,73 +167,32 @@ QAbstractItemModel * Bluetooth::getAutoconnectDevices()
 
 void Bluetooth::disconnectDevice()
 {
-    if (m_selectedDevice) {
-        auto type = m_selectedDevice->getType();
-        switch ((Device::Type)type) {
-        case Device::Type::Headset:
-        case Device::Type::Headphones:
-        case Device::Type::OtherAudio:
-        case Device::Type::Speakers:
-        case Device::Type::Carkit:
-            m_selectedDevice->disconnect(Device::ConnectionMode::Audio);
-            break;
-        case Device::Type::Keyboard:
-        case Device::Type::Mouse:
-            m_selectedDevice->disconnect(Device::ConnectionMode::Input);
-            break;
-        default:
-            qWarning() << "Nothing to disconnect: Unsupported device type.";
-            break;
-        }
-    } else {
-        qWarning() << "No selected device to disconnect";
-    }
+    if (!m_selectedDevice)
+        return;
+
+    m_selectedDevice->disconnect();
 }
 
 void Bluetooth::connectDevice(const QString &address)
 {
-    Device::ConnectionMode connMode;
     auto device = m_devices.getDeviceFromAddress(address);
-    Device::Type type;
 
     if (!device) {
         qWarning() << "No device to connect.";
         return;
     }
 
-    type = device->getType();
-    switch (type) {
-    case Device::Type::Headset:
-    case Device::Type::Headphones:
-    case Device::Type::OtherAudio:
-    case Device::Type::Speakers:
-    case Device::Type::Carkit:
-        connMode = Device::ConnectionMode::Audio;
-        break;
-    case Device::Type::Keyboard:
-    case Device::Type::Mouse:
-        connMode = Device::ConnectionMode::Input;
-        break;
-    default:
-        qWarning() << "Nothing to connect: Unsupported device type.";
-        return;
-    }
-
-    if (device->isTrusted()) {
-        device->connect(connMode);
-    } else {
-        m_devices.addConnectAfterPairing(address, connMode);
-        m_devices.createDevice(address, &m_agent);
-    }
+    device->connect();
 }
 
 void Bluetooth::removeDevice()
 {
-    if (m_selectedDevice) {
-        QString path = m_selectedDevice->getPath();
-        m_devices.removeDevice(path);
-    } else {
+    if (!m_selectedDevice) {
         qWarning() << "No selected device to remove.";
+        return;
     }
+
+    QString path = m_selectedDevice->getPath();
+    m_devices.removeDevice(path);
 }
 

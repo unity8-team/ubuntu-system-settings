@@ -11,6 +11,8 @@ PageComponent.qml
 
 add_library(UbuntuBluetoothPanel MODULE
   adapter1.cpp
+  agentmanager1.cpp
+  device1.cpp
   properties.cpp
   objectmanager.cpp
   agent.cpp
@@ -18,6 +20,11 @@ add_library(UbuntuBluetoothPanel MODULE
   bluetooth.cpp
   device.cpp
   devicemodel.cpp
+  adapter1.h
+  agentmanager1.h
+  device1.h
+  properties.h
+  objectmanager.h
   plugin.cpp
   bluez_helper.h
   agent.h

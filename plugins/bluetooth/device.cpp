@@ -26,16 +26,8 @@
 
 #include "dbus-shared.h"
 
-/***
-****
-***/
-
-Device::Device(const QMap<QString,QVariant> &properties)
-{
-    setProperties(properties);
-}
-
-Device::Device(const QString &path, QDBusConnection &bus)
+Device::Device(const QString &path, QDBusConnection &bus) :
+    m_connectAfterPairing(false)
 {
     initDevice(path, bus);
 }
@@ -53,53 +45,39 @@ void Device::initDevice(const QString &path, QDBusConnection &bus)
     QObject::connect(this, SIGNAL(connectionChanged()), this, SIGNAL(deviceChanged()));
     QObject::connect(this, SIGNAL(strengthChanged()), this, SIGNAL(deviceChanged()));
 
-    // init the interfaces that we're supporting.
-    initInterface(m_deviceInterface,      path, "org.bluez.Device",      bus);
-    initInterface(m_audioInterface,       path, "org.bluez.Audio",       bus);
-    initInterface(m_audioSourceInterface, path, "org.bluez.AudioSource", bus);
-    initInterface(m_audioSinkInterface,   path, "org.bluez.AudioSink",   bus);
-    initInterface(m_headsetInterface,     path, "org.bluez.Headset",     bus);
-    initInterface(m_inputInterface,       path, "org.bluez.Input",       bus);
+    m_bluezDevice.reset(new BluezDevice1(BLUEZ_SERVICE, path, bus));
+    m_bluezDeviceProperties.reset(new FreeDesktopProperties(BLUEZ_SERVICE, path, bus));
+
+    QObject::connect(m_bluezDeviceProperties.data(), SIGNAL(PropertiesChanged(const QString&, const QVariantMap&, const QStringList&)),
+                     this, SLOT(slotPropertiesChanged(const QString&, const QVariantMap&, const QStringList&)));
 
     Q_EMIT(pathChanged());
+
+    watchCall(m_bluezDeviceProperties->GetAll(BLUEZ_DEVICE_IFACE), [=](QDBusPendingCallWatcher *watcher) {
+        QDBusPendingReply<QVariantMap> reply = *watcher;
+
+        if (reply.isError()) {
+            qWarning() << "Failed to retrieve properties for device" << m_bluezDevice->path();
+            watcher->deleteLater();
+            return;
+        }
+
+        auto properties = reply.argumentAt<0>();
+        setProperties(properties);
+
+        watcher->deleteLater();
+    });
 }
 
-/***
-****
-***/
-
-void Device::slotPropertyChanged(const QString      &key,
-                                 const QDBusVariant &value)
+void Device::slotPropertiesChanged(const QString &interface, const QVariantMap &changedProperties,
+                                   const QStringList &invalidatedProperties)
 {
-  updateProperty (key, value.variant());
-}
+    Q_UNUSED(invalidatedProperties);
 
-void Device::initInterface(QSharedPointer<QDBusInterface> &setme,
-                           const QString                  &path,
-                           const QString                  &interfaceName,
-                           QDBusConnection                &bus)
-{
-    const QString service = "org.bluez";
+   if (interface != BLUEZ_DEVICE_IFACE)
+      return;
 
-    auto i = new QDBusInterface(service, path, interfaceName, bus);
-
-    if (!i->isValid()) {
-        delete i;
-        i = 0;
-        qWarning() << "Couldn't add proxy for" << interfaceName;
-    } else {
-        if (!bus.connect(service, path, interfaceName, "PropertyChanged",
-                         this, SLOT(slotPropertyChanged(const QString&, const QDBusVariant&))))
-            qWarning() << "Unable to connect to " << interfaceName << "::PropertyChanged on" << path;
-    }
-
-    setme.reset(i);
-
-    if (setme && setme->isValid()) {
-        QDBusReply<QMap<QString,QVariant> > properties = setme->call("GetProperties");
-        if (properties.isValid())
-            setProperties(properties.value());
-    }
+   setProperties(changedProperties);
 }
 
 void Device::setProperties(const QMap<QString,QVariant> &properties)
@@ -111,52 +89,24 @@ void Device::setProperties(const QMap<QString,QVariant> &properties)
     }
 }
 
-void Device::connectPending()
+void Device::setConnectAfterPairing(bool value)
 {
-    if (m_paired && !m_trusted) {
-        while (!m_connectAfterPairing.isEmpty()) {
-            ConnectionMode mode = m_connectAfterPairing.takeFirst();
-            connect(mode);
-        }
-    }
-}
-
-/***
-****
-***/
-
-void Device::addConnectAfterPairing(ConnectionMode mode)
-{
-    m_connectAfterPairing.append(mode);
-}
-
-void Device::disconnect(ConnectionMode mode)
-{
-    QSharedPointer<QDBusInterface> interface;
-
-    switch (mode) {
-    case HeadsetMode:
-        interface = m_headsetInterface;
-        break;
-    case Audio:
-        interface = m_audioInterface;
-        break;
-    case Input:
-        interface = m_inputInterface;
-        break;
-    default:
-        qWarning() << "Unhandled connection mode" << mode;
+    if (m_connectAfterPairing == value)
         return;
-    }
 
-    QDBusPendingCall call = interface->asyncCall("Disconnect");
+    m_connectAfterPairing = value;
+}
+
+void Device::disconnect()
+{
+    QDBusPendingCall call = m_bluezDevice->Disconnect();
 
     QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(call, this);
     QObject::connect(watcher, &QDBusPendingCallWatcher::finished, [this](QDBusPendingCallWatcher *watcher) {
         QDBusPendingReply<void> reply = *watcher;
 
         if (reply.isError()) {
-            qWarning() << "Could not connect device:"
+            qWarning() << "Could not disconnect device:"
                        << reply.error().message();
         }
 
@@ -164,26 +114,9 @@ void Device::disconnect(ConnectionMode mode)
     });
 }
 
-void Device::connect(ConnectionMode mode)
+void Device::connect()
 {
-    QSharedPointer<QDBusInterface> interface;
-
-    switch (mode) {
-    case HeadsetMode:
-        interface = m_headsetInterface;
-        break;
-    case Audio:
-        interface = m_audioInterface;
-        break;
-    case Input:
-        interface = m_inputInterface;
-        break;
-    default:
-        qWarning() << "Unhandled connection mode" << mode;
-        return;
-    }
-
-    QDBusPendingCall call = interface->asyncCall("Connect");
+    QDBusPendingCall call = m_bluezDevice->asyncCall("Connect");
 
     QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(call, this);
     QObject::connect(watcher, &QDBusPendingCallWatcher::finished, [this](QDBusPendingCallWatcher *watcher) {
@@ -205,35 +138,21 @@ void Device::slotMakeTrustedDone(QDBusPendingCallWatcher *call)
     QDBusPendingReply<void> reply = *call;
 
     if (reply.isError()) {
-        qWarning() << "Could not set device as trusted:"
+        qWarning() << "Could not mark device as trusted:"
                    << reply.error().message();
     }
+
     call->deleteLater();
 }
 
 void Device::makeTrusted(bool trusted)
 {
-    QVariant value;
-    QDBusVariant variant(trusted);
+    auto call = m_bluezDeviceProperties->Set(BLUEZ_DEVICE_IFACE, "Trusted", QDBusVariant(trusted));
 
-    value.setValue(variant);
-
-    if (m_deviceInterface) {
-        QDBusPendingCall pcall
-            = m_deviceInterface->asyncCall("SetProperty", "Trusted", value);
-
-        QDBusPendingCallWatcher *watcher
-            = new QDBusPendingCallWatcher(pcall, this);
-        QObject::connect(watcher, SIGNAL(finished(QDBusPendingCallWatcher*)),
-                         this, SLOT(slotMakeTrustedDone(QDBusPendingCallWatcher*)));
-    } else {
-        qWarning() << "Can't set device trusted before it is added in BlueZ";
-    }
+    auto watcher = new QDBusPendingCallWatcher(call, this);
+    QObject::connect(watcher, SIGNAL(finished(QDBusPendingCallWatcher*)),
+                     this, SLOT(slotMakeTrustedDone(QDBusPendingCallWatcher*)));
 }
-
-/***
-****
-***/
 
 void Device::setName(const QString &name)
 {
@@ -360,9 +279,9 @@ void Device::updateConnection()
 
 void Device::updateProperty(const QString &key, const QVariant &value)
 {
-    if (key == "Name") { // org.bluez.Device
+    if (key == "Name") {
         setName(value.toString());
-    } else if (key == "Address") { // org.bluez.Device
+    } else if (key == "Address") {
         setAddress(value.toString());
     } else if (key == "State") { // org.bluez.Audio, org.bluez.Headset
         m_state = value.toString();
@@ -370,14 +289,14 @@ void Device::updateProperty(const QString &key, const QVariant &value)
     } else if (key == "Connected") {
         m_isConnected = value.toBool();
         updateConnection();
-    } else if (key == "Class") { // org.bluez.Device
+    } else if (key == "Class") {
         setType(getTypeFromClass(value.toUInt()));
-    } else if (key == "Paired") { // org.bluez.Device
+    } else if (key == "Paired") {
         setPaired(value.toBool());
         updateConnection();
-    } else if (key == "Trusted") { // org.bluez.Device
+    } else if (key == "Trusted") {
         setTrusted(value.toBool());
-    } else if (key == "Icon") { // org.bluez.Device
+    } else if (key == "Icon") {
         m_fallbackIconName = value.toString();
         updateIcon ();
     } else if (key == "RSSI") {
@@ -385,10 +304,6 @@ void Device::updateProperty(const QString &key, const QVariant &value)
         Q_EMIT(strengthChanged());
     }
 }
-
-/***
-****
-***/
 
 /* Determine the Type from the bits in the Class of Device (CoD) field.
    https://www.bluetooth.org/en-us/specification/assigned-numbers/baseband */
@@ -489,4 +404,3 @@ Device::Strength Device::getStrengthFromRssi(int rssi)
 
     return None;
 }
-

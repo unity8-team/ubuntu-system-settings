@@ -29,4 +29,8 @@
 #define BLUEZ_ADAPTER_IFACE "org.bluez.Adapter1"
 #define BLUEZ_DEVICE_IFACE "org.bluez.Device1"
 
+#define watchCall(call, func) \
+    QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(call, this); \
+    QObject::connect(watcher, &QDBusPendingCallWatcher::finished, func)
+
 #endif // USS_DBUS_SHARED_H
