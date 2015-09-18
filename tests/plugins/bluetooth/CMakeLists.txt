@@ -9,12 +9,12 @@ set(PLUGIN_SOURCES
     ${CMAKE_SOURCE_DIR}/plugins/bluetooth/devicemodel.cpp
     ${CMAKE_SOURCE_DIR}/plugins/bluetooth/device.cpp
     ${CMAKE_SOURCE_DIR}/plugins/bluetooth/agent.cpp
-    ${CMAKE_SOURCE_DIR}/plugins/bluetooth/agentadaptor.cpp
-    ${CMAKE_SOURCE_DIR}/plugins/bluetooth/agentmanager1.cpp
-    ${CMAKE_SOURCE_DIR}/plugins/bluetooth/objectmanager.cpp
-    ${CMAKE_SOURCE_DIR}/plugins/bluetooth/properties.cpp
-    ${CMAKE_SOURCE_DIR}/plugins/bluetooth/device1.cpp
-    ${CMAKE_SOURCE_DIR}/plugins/bluetooth/adapter1.cpp
+    ${CMAKE_SOURCE_DIR}/plugins/bluetooth/bluez_agent1adaptor.cpp
+    ${CMAKE_SOURCE_DIR}/plugins/bluetooth/bluez_agentmanager1.cpp
+    ${CMAKE_SOURCE_DIR}/plugins/bluetooth/bluez_device1.cpp
+    ${CMAKE_SOURCE_DIR}/plugins/bluetooth/bluez_adapter1.cpp
+    ${CMAKE_SOURCE_DIR}/plugins/bluetooth/freedesktop_objectmanager.cpp
+    ${CMAKE_SOURCE_DIR}/plugins/bluetooth/freedesktop_properties.cpp
 )
 
 add_executable(tst-bluetooth

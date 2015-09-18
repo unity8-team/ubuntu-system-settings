@@ -24,8 +24,9 @@
 #include <QObject>
 
 #include "agent.h"
-#include "agentadaptor.h"
 #include "devicemodel.h"
+
+#include "bluez_agent1adaptor.h"
 
 class Bluetooth : public QObject
 {

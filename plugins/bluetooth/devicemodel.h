@@ -34,10 +34,11 @@
 #include <QSortFilterProxyModel>
 
 #include "device.h"
-#include "objectmanager.h"
-#include "adapter1.h"
-#include "agentmanager1.h"
-#include "properties.h"
+
+#include "freedesktop_objectmanager.h"
+#include "freedesktop_properties.h"
+#include "bluez_adapter1.h"
+#include "bluez_agentmanager1.h"
 
 class DeviceModel: public QAbstractListModel
 {

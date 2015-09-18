@@ -23,7 +23,6 @@
 #include <QQmlEngine>
 
 #include "agent.h"
-#include "agentadaptor.h"
 #include "dbus-shared.h"
 
 Bluetooth::Bluetooth(QObject *parent):

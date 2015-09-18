@@ -26,8 +26,8 @@
 #include <QSharedPointer>
 #include <QString>
 
-#include "device1.h"
-#include "properties.h"
+#include "freedesktop_properties.h"
+#include "bluez_device1.h"
 
 struct Device: QObject
 {
