@@ -23,6 +23,7 @@
 #include "bluetooth.h"
 #include "device.h"
 #include "agent.h"
+#include "bluez_helper.h"
 #include "fakebluez.h"
 
 using namespace Bluez;
@@ -36,6 +37,9 @@ private:
     Bluetooth *m_bluetooth;
     QDBusConnection *m_dbus;
 
+    void processEvents(unsigned int msecs = 1);
+    void setDiscovering(bool value);
+
 private Q_SLOTS:
     void init();
     void testGotAdapter();
@@ -48,16 +52,38 @@ private Q_SLOTS:
 
 };
 
+void BluetoothTest::processEvents(unsigned int msecs)
+{
+    QTimer::singleShot(msecs, [=]() { QCoreApplication::instance()->exit(); });
+    QCoreApplication::instance()->exec();
+}
+
+void BluetoothTest::setDiscovering(bool value)
+{
+    m_bluezMock->setProperty(m_bluezMock->currentAdapterPath(),
+                             BLUEZ_ADAPTER_IFACE,
+                             "Discovering",
+                             QVariant(value));
+}
+
 void BluetoothTest::init()
 {
+    qWarning() << "init test";
+
+    qDBusRegisterMetaType<InterfaceList>();
+    qDBusRegisterMetaType<ManagedObjectList>();
+
     m_bluezMock = new FakeBluez();
     m_bluezMock->addAdapter("new0", "bluetoothTest");
     m_dbus = new QDBusConnection(m_bluezMock->dbus());
     m_bluetooth = new Bluetooth(*m_dbus);
+
+    processEvents();
 }
 
 void BluetoothTest::cleanup()
 {
+    qWarning() << "cleanup";
     delete m_bluezMock;
     delete m_bluetooth;
 }
@@ -67,6 +93,8 @@ void BluetoothTest::testGotAdapter()
     QString expected = "bluetoothTest";
     QString result;
 
+    processEvents();
+
     result = m_bluetooth->adapterName();
 
     QCOMPARE(result, expected);
@@ -74,70 +102,100 @@ void BluetoothTest::testGotAdapter()
 
 void BluetoothTest::testStartDiscovery()
 {
-    bool expected = true;
     QVariant result;
 
-    QSKIP("Fails due to a bug in bluez4 dbusmock template", SkipAll);
+    // This is what our test expects the adapter to have set
+    setDiscovering(false);
+    processEvents();
 
-    result = m_bluezMock->getProperty(m_bluezMock->currentAdapter(),
-                                      "org.bluez.Adapter",
+    result = m_bluezMock->getProperty(m_bluezMock->currentAdapterPath(),
+                                      BLUEZ_ADAPTER_IFACE,
                                       "Discovering");
     qWarning() << result;
-    QCOMPARE(result.toBool(), !expected);
+    QCOMPARE(result.toBool(), false);
 
     m_bluetooth->startDiscovery();
+    setDiscovering(true);
 
-    result = m_bluezMock->getProperty(m_bluezMock->currentAdapter(),
-                                      "org.bluez.Adapter",
+    processEvents();
+
+    result = m_bluezMock->getProperty(m_bluezMock->currentAdapterPath(),
+                                      BLUEZ_ADAPTER_IFACE,
                                       "Discovering");
     qWarning() << result;
-    QCOMPARE(result.toBool(), expected);
+    QCOMPARE(result.toBool(), true);
 }
 
 void BluetoothTest::testStopDiscovery()
 {
-    bool expected = false;
     QVariant result;
 
-    QSKIP("Fails due to a bug in bluez4 dbusmock template", SkipAll);
+    // This is what our test expects the adapter to have set
+    setDiscovering(true);
+    processEvents();
 
-    result = m_bluezMock->getProperty(m_bluezMock->currentAdapter(),
-                                      "org.bluez.Adapter",
+    result = m_bluezMock->getProperty(m_bluezMock->currentAdapterPath(),
+                                      BLUEZ_ADAPTER_IFACE,
                                       "Discovering");
-    QCOMPARE(result.toBool(), !expected);
+    QCOMPARE(result.toBool(), true);
 
     m_bluetooth->stopDiscovery();
+    setDiscovering(false);
 
-    result = m_bluezMock->getProperty(m_bluezMock->currentAdapter(),
-                                      "org.bluez.Adapter",
+    processEvents();
+
+    result = m_bluezMock->getProperty(m_bluezMock->currentAdapterPath(),
+                                      BLUEZ_ADAPTER_IFACE,
                                       "Discovering");
-    QCOMPARE(result.toBool(), expected);
+    QCOMPARE(result.toBool(), false);
 }
+
+/*
+ * NOTE: The bluez5 mock template currently doesn't send PropertiesChanged
+ * events when StartDiscovery/StopDiscovery is called on the adapter interface.
+ * To accomondate this we're calling the org.freedesktop.DBus.Properties.Set
+ * method here manually to simulate a property change. However this means
+ * that other than doing a dumb call to StartDiscovery/StopDiscovery nothing
+ * else will happen when those methods are called of the Bluetooth class we're
+ * testing here.
+ *
+ * This affects the following tested methods:
+ * - Bluetooth::startDiscovering
+ * - Bluetooth::stopDiscovery
+ * - Bluetooth::toggleDiscovery
+ */
 
 void BluetoothTest::testToggleDiscovery()
 {
     QVariant result;
 
-    QSKIP("Fails due to a bug in bluez4 dbusmock template", SkipAll);
-
     m_bluetooth->stopDiscovery();
+    setDiscovering(false);
 
-    result = m_bluezMock->getProperty(m_bluezMock->currentAdapter(),
-                                      "org.bluez.Adapter",
+    processEvents();
+
+    result = m_bluezMock->getProperty(m_bluezMock->currentAdapterPath(),
+                                      BLUEZ_ADAPTER_IFACE,
                                       "Discovering");
     QCOMPARE(result.toBool(), false);
 
     m_bluetooth->toggleDiscovery();
+    setDiscovering(true);
 
-    result = m_bluezMock->getProperty(m_bluezMock->currentAdapter(),
-                                      "org.bluez.Adapter",
+    processEvents();
+
+    result = m_bluezMock->getProperty(m_bluezMock->currentAdapterPath(),
+                                      BLUEZ_ADAPTER_IFACE,
                                       "Discovering");
     QCOMPARE(result.toBool(), true);
 
     m_bluetooth->toggleDiscovery();
+    setDiscovering(false);
 
-    result = m_bluezMock->getProperty(m_bluezMock->currentAdapter(),
-                                      "org.bluez.Adapter",
+    processEvents();
+
+    result = m_bluezMock->getProperty(m_bluezMock->currentAdapterPath(),
+                                      BLUEZ_ADAPTER_IFACE,
                                       "Discovering");
     QCOMPARE(result.toBool(), false);
 }
@@ -149,21 +207,34 @@ void BluetoothTest::testIsSupportedType()
     QCOMPARE(Bluetooth::isSupportedType(Device::Type::Tablet), false);
 }
 
+
 void BluetoothTest::testIsDiscovering()
 {
     m_bluetooth->stopDiscovery();
+    setDiscovering(false);
+
+    processEvents();
 
     QCOMPARE(m_bluetooth->isDiscovering(), false);
 
     m_bluetooth->startDiscovery();
+    setDiscovering(true);
+
+    processEvents();
 
     QCOMPARE(m_bluetooth->isDiscovering(), true);
 
     m_bluetooth->toggleDiscovery();
+    setDiscovering(false);
+
+    processEvents();
 
     QCOMPARE(m_bluetooth->isDiscovering(), false);
 
     m_bluetooth->toggleDiscovery();
+    setDiscovering(true);
+
+    processEvents();
 
     QCOMPARE(m_bluetooth->isDiscovering(), true);
 }

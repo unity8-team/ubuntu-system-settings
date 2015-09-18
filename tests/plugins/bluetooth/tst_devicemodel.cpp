@@ -35,6 +35,9 @@ private:
     DeviceModel *m_devicemodel;
     QDBusConnection *m_dbus;
 
+private:
+    void processEvents(unsigned int msecs = 1);
+
 private Q_SLOTS:
     void init();
     void testDeviceFoundOnStart();
@@ -45,8 +48,17 @@ private Q_SLOTS:
 
 };
 
+void DeviceModelTest::processEvents(unsigned int msecs)
+{
+    QTimer::singleShot(msecs, [=]() { QCoreApplication::instance()->exit(); });
+    QCoreApplication::instance()->exec();
+}
+
 void DeviceModelTest::init()
 {
+    qDBusRegisterMetaType<InterfaceList>();
+    qDBusRegisterMetaType<ManagedObjectList>();
+
     m_bluezMock = new FakeBluez();
 
     m_bluezMock->addAdapter("new0", "bluetoothTest");
@@ -54,6 +66,8 @@ void DeviceModelTest::init()
 
     m_dbus = new QDBusConnection(m_bluezMock->dbus());
     m_devicemodel = new DeviceModel(*m_dbus);
+
+    processEvents(5);
 }
 
 void DeviceModelTest::cleanup()

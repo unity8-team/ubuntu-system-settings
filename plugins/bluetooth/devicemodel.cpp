@@ -35,7 +35,11 @@ DeviceModel::DeviceModel(QDBusConnection &dbus, QObject *parent):
     QAbstractListModel(parent),
     m_dbus(dbus),
     m_bluezManager("org.bluez", "/", m_dbus),
-    m_bluezAgentManager("org.bluez", "/org/bluez", m_dbus)
+    m_bluezAgentManager("org.bluez", "/org/bluez", m_dbus),
+    m_isPowered(false),
+    m_isPairable(false),
+    m_isDiscovering(false),
+    m_isDiscoverable(false)
 {
     if (m_bluezManager.isValid()) {
 
@@ -65,7 +69,7 @@ DeviceModel::DeviceModel(QDBusConnection &dbus, QObject *parent):
 
                 // Ok, here we've found an adapter. As we don't expect multiple at the
                 // moment we just take the first one we find.
-                setAdapterFromPath(path.path());
+                setAdapterFromPath(path.path(), ifaces.value(BLUEZ_ADAPTER_IFACE));
                 break;
             }
 
@@ -122,12 +126,10 @@ void DeviceModel::slotInterfacesAdded(const QDBusObjectPath &objectPath, Interfa
 
     auto candidatedPath = objectPath.path();
 
-    qDebug() << "InterfacesAdded: path" << candidatedPath;
-
     if (!m_bluezAdapter) {
         // Maybe we have a new adapter we can start to use?
         if (ifacesAndProps.contains(BLUEZ_ADAPTER_IFACE))
-            setAdapterFromPath(candidatedPath);
+            setAdapterFromPath(candidatedPath, ifacesAndProps.value(BLUEZ_ADAPTER_IFACE));
 
         return;
     }
@@ -145,8 +147,6 @@ void DeviceModel::slotInterfacesAdded(const QDBusObjectPath &objectPath, Interfa
 void DeviceModel::slotInterfacesRemoved(const QDBusObjectPath &objectPath, const QStringList &interfaces)
 {
     auto candidatedPath = objectPath.path();
-
-    qDebug() << "InterfacesRemoved: path" << candidatedPath;
 
     if (!m_bluezAdapter)
         return;
@@ -198,16 +198,34 @@ void DeviceModel::setDiscovering(bool value)
 
 void DeviceModel::stopDiscovery()
 {
-    if (m_isDiscovering && m_bluezAdapter)
-        // FIXME check call for errors
-        m_bluezAdapter->asyncCall("StopDiscovery");
+    if (m_bluezAdapter && m_isPowered && m_isDiscovering) {
+
+         watchCall(m_bluezAdapter->StopDiscovery(), [=](QDBusPendingCallWatcher *watcher) {
+            QDBusPendingReply<void> reply = *watcher;
+            if (reply.isError()) {
+                qWarning() << "Failed to stop device discovery:"
+                           << reply.error().message();
+            }
+
+            watcher->deleteLater();
+        });
+    }
 }
 
 void DeviceModel::startDiscovery()
 {
-    if (m_bluezAdapter && m_isPowered && !m_isDiscovering)
-        // FIXME check call for errors
-        m_bluezAdapter->asyncCall("StartDiscovery");
+    if (m_bluezAdapter && m_isPowered && !m_isDiscovering) {
+
+        watchCall(m_bluezAdapter->StartDiscovery(), [=](QDBusPendingCallWatcher *watcher) {
+            QDBusPendingReply<void> reply = *watcher;
+            if (reply.isError()) {
+                qWarning() << "Failed to start device discovery:"
+                           << reply.error().message();
+            }
+
+            watcher->deleteLater();
+        });
+    }
 }
 
 void DeviceModel::toggleDiscovery()
@@ -241,7 +259,7 @@ void DeviceModel::clearAdapter()
     }
 }
 
-void DeviceModel::setAdapterFromPath(const QString &path)
+void DeviceModel::setAdapterFromPath(const QString &path, const QVariantMap &properties)
 {
     clearAdapter();
 
@@ -256,9 +274,7 @@ void DeviceModel::setAdapterFromPath(const QString &path)
         startDiscovery();
         updateDevices();
 
-        QDBusReply<QVariantMap> properties = m_bluezAdapterProperties->call("GetAll", QVariant(BLUEZ_ADAPTER_IFACE));
-        if (properties.isValid())
-            setProperties(properties.value());
+        setProperties(properties);
 
         connect(adapterProperties, SIGNAL(PropertiesChanged(const QString&, const QVariantMap&, const QStringList&)),
                 this, SLOT(slotAdapterPropertiesChanged(const QString&, const QVariantMap&, const QStringList&)));
@@ -283,8 +299,6 @@ void DeviceModel::slotAdapterPropertiesChanged(const QString &interface, const Q
 
 void DeviceModel::updateDevices()
 {
-    qWarning() << "Updating devices ...";
-
     watchCall(m_bluezManager.GetManagedObjects(), [=](QDBusPendingCallWatcher *watcher) {
         QDBusPendingReply<ManagedObjectList> reply = *watcher;
 
@@ -300,20 +314,13 @@ void DeviceModel::updateDevices()
         for (auto objectPath : objectList.keys()) {
             auto candidatePath = objectPath.path();
 
-            qWarning() << "Looking at object" << candidatePath;
-
             if (!candidatePath.startsWith(m_bluezAdapter->path()))
                 continue;
 
             InterfaceList ifaces = objectList.value(objectPath);
 
-            for (auto ifname : ifaces.keys())
-                qWarning() << "interface" << ifname;
-
             if (!ifaces.contains(BLUEZ_DEVICE_IFACE))
                 continue;
-
-            qWarning() << "Found device" << candidatePath;
 
             auto properties = ifaces.value(BLUEZ_DEVICE_IFACE);
 

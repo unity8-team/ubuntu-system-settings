@@ -147,9 +147,6 @@ public:
     void setProperties(const QMap<QString,QVariant> &properties);
     void setConnectAfterPairing(bool value);
 
-  public Q_SLOTS:
-    void connectPending();
-
   private Q_SLOTS:
     void slotPropertiesChanged(const QString &interface, const QVariantMap &changedProperties,
                                const QStringList &invalidatedProperties);

@@ -29,7 +29,7 @@ FakeBluez::FakeBluez(QObject *parent) :
 {
     DBusMock::registerMetaTypes();
 
-    m_dbusMock.registerTemplate(BLUEZ_SERVICE, "bluez4",
+    m_dbusMock.registerTemplate(BLUEZ_SERVICE, "bluez5",
                                 QDBusConnection::SystemBus);
     m_dbusTestRunner.startServices();
 
@@ -81,7 +81,7 @@ FakeBluez::getProperty(const QString &path,
                        const QString &property)
 {
     QDBusInterface iface(BLUEZ_SERVICE, path,
-                         "org.freedesktop.DBus.Properties",
+                         FREEDESKTOP_PROPERTIES_IFACE,
                          m_dbusTestRunner.systemConnection());
 
     QDBusReply<QVariant> reply = iface.call("Get", interface, property);
@@ -103,10 +103,11 @@ FakeBluez::setProperty(const QString &path,
                        const QVariant &value)
 {
     QDBusInterface iface(BLUEZ_SERVICE, path,
-                         interface,
+                         FREEDESKTOP_PROPERTIES_IFACE,
                          m_dbusTestRunner.systemConnection());
 
-    QDBusReply<void> reply = iface.call("SetProperty",
+    QDBusReply<void> reply = iface.call("Set",
+                                        interface,
                                         property, value);
 
     if (!reply.isValid()) {

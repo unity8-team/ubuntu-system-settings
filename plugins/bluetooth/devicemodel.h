@@ -107,7 +107,7 @@ private:
     QScopedPointer<FreeDesktopProperties> m_bluezAdapterProperties;
 
     void clearAdapter();
-    void setAdapterFromPath(const QString &objectPath);
+    void setAdapterFromPath(const QString &objectPath, const QVariantMap &properties);
 
     QList<QSharedPointer<Device> > m_devices;
     void updateDevices();
