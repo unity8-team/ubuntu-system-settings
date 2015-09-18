@@ -18,8 +18,7 @@
  *
 */
 
-#ifndef UPDATE_H
-#define UPDATE_H
+#pragma once
 
 #include <QObject>
 #include <QtQml>
@@ -144,5 +143,3 @@ private:
 };
 
 }
-
-#endif // UPDATE_H

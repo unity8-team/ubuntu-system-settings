@@ -224,7 +224,7 @@ ItemPage {
             }
 
             SettingsItemTitle {
-                text: i18n.tr("Allow access to location:")
+                text: i18n.tr("Let apps access this location:")
                 enabled: detection.allow
             }
 

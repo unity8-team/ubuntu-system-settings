@@ -59,7 +59,7 @@ private:
     bool m_powerdRunning;
     UpDevice *m_device;
     QString m_deviceString;
-    int m_lastFullCharge = NULL;
+    int m_lastFullCharge = 0;
     void buildDeviceString();
     void getLastFullCharge();
     bool updateLastFullCharge(UpHistoryItem *item, int offset);

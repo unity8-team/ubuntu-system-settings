@@ -141,7 +141,7 @@ class SecurityTestCase(SecurityBaseTestCase):
         )
         self.assertThat(
             phone_lock_page.title,
-            Equals(_('Phone locking'))
+            Equals(_('Locking and unlocking'))
         )
 
     def test_lock_security_focus_on_entry(self):

@@ -12,7 +12,8 @@ from testtools.matchers import Equals, NotEquals, raises
 from ubuntu_system_settings.tests import (
     UbuntuSystemSettingsTestCase,
     UbuntuSystemSettingsUpowerTestCase,
-    UbuntuSystemSettingsBatteryTestCase
+    UbuntuSystemSettingsBatteryTestCase,
+    UbuntuSystemSettingsHotspotTestCase
 )
 from ubuntu_system_settings.utils.i18n import ugettext as _
 
@@ -175,3 +176,16 @@ class SystemSettingsBatteryTestCases(UbuntuSystemSettingsBatteryTestCase):
             objectName='entryComponent-battery'
         )
         self.assertThat(plugin, NotEquals(None))
+
+
+class SystemSettingsHotspotTestCases(UbuntuSystemSettingsHotspotTestCase):
+    systemimage_parameters = {'device': 'mako'}
+
+    # TODO: remove once lp:1434591 has been resolved.
+    def test_hotspot_plugin(self):
+        """ Checks that the Hotspot plugin is not available
+        as it is broken on mako."""
+        self.assertThat(lambda: self.main_view.select_single(
+            objectName='entryComponent-hotspot'),
+            raises(StateNotFoundError)
+        )

@@ -105,7 +105,7 @@ void SystemUpdate::setCurrentDetailedVersion() {
     reply.waitForFinished();
     if (reply.isValid()) {
         m_currentBuildNumber = reply.argumentAt<0>();
-        m_deviceName = reply.argumentAt<2>();
+        m_deviceName = reply.argumentAt<1>();
         m_lastUpdateDate = QDateTime::fromString(reply.argumentAt<3>(), Qt::ISODate);
         m_detailedVersion = reply.argumentAt<4>();
         Q_EMIT versionChanged();
@@ -232,7 +232,7 @@ void SystemUpdate::ProcessAvailableStatus(bool isAvailable,
     update->setSelected(downloading);
     update->setUpdateAvailable(isAvailable);
     update->setLastUpdateDate(lastUpdateDate);
-    update->setIconUrl(QString("file:///usr/share/ubuntu/settings/system/icons/distributor-logo.png"));
+    update->setIconUrl(QString("file:///usr/share/icons/suru/places/scalable/distributor-logo.svg"));
 
     if (update->updateRequired()) {
         Q_EMIT updateAvailable(packageName, update);

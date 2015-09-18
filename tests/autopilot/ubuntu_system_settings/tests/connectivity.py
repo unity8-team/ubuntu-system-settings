@@ -47,6 +47,10 @@ def set_hotspot_password(self, value):
     self.SetProperty(PRIV_OBJ, PRIV_IFACE, 'HotspotPassword', value)
 
 
+def set_hotspot_auth(self, value):
+    self.SetProperty(PRIV_OBJ, PRIV_IFACE, 'HotspotAuth', value)
+
+
 def set_wifi_enabled(self, value):
     self.SetProperty(NETS_OBJ, NETS_IFACE, 'WifiEnabled', value)
 
@@ -59,6 +63,7 @@ def load(mock, parameters):
     mock.set_hotspot_ssid = set_hotspot_ssid
     mock.set_hotspot_password = set_hotspot_password
     mock.set_wifi_enabled = set_wifi_enabled
+    mock.set_hotspot_auth = set_hotspot_auth
 
     mock.AddObject(
         NETS_OBJ,
@@ -95,6 +100,9 @@ def load(mock, parameters):
         {
             'HotspotPassword': _parameters.get(
                 'HotspotPassword', dbus.String('abcdefgh')
+            ),
+            'HotspotAuth': _parameters.get(
+                'HotspotAuth', dbus.String('wpa-psk')
             )
         },
         [
@@ -121,6 +129,10 @@ def load(mock, parameters):
             (
                 'SetHotspotPassword', 's', '',
                 'objects["/"].set_hotspot_password(self, args[0])'
+            ),
+            (
+                'SetHotspotAuth', 's', '',
+                'objects["/"].set_hotspot_auth(self, args[0])'
             ),
             (
                 'SetHotspotEnabled', 'b', '',
