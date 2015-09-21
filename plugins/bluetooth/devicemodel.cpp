@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 Canonical Ltd
+ * Copyright (C) 2013-2015 Canonical Ltd
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as
@@ -31,10 +31,6 @@ namespace
 
   const int SCANNING_IDLE_DURATION_MSEC = (10 * 1000);
 }
-
-/***
-****
-***/
 
 DeviceModel::DeviceModel(QDBusConnection &dbus, QObject *parent):
     QAbstractListModel(parent),
@@ -77,10 +73,6 @@ int DeviceModel::findRowFromAddress(const QString &address) const
     return -1;
 }
 
-/***
-****
-***/
-
 void DeviceModel::restartTimer()
 {
     m_timer.start (m_isDiscovering ? SCANNING_ACTIVE_DURATION_MSEC
@@ -122,10 +114,6 @@ void DeviceModel::slotTimeout()
 {
     toggleDiscovery ();
 }
-
-/***
-****
-***/
 
 void DeviceModel::clearAdapter()
 {
@@ -292,10 +280,6 @@ void DeviceModel::slotPropertyChanged(const QString      &key,
     updateProperty (key, value.variant());
 }
 
-/***
-****
-***/
-
 void DeviceModel::addDevice(const QString &path)
 {
     QSharedPointer<Device> device(new Device(path, m_dbus));
@@ -337,10 +321,6 @@ void DeviceModel::emitRowChanged(int row)
         Q_EMIT(dataChanged(qmi, qmi));
     }
 }
-
-/***
-****
-***/
 
 void DeviceModel::slotDeviceCreated(const QDBusObjectPath &path)
 {
@@ -487,8 +467,18 @@ void DeviceModel::createDevice (const QString &address, QObject *agent)
                                                            QString(DBUS_AGENT_CAPABILITY));
 
         QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(pcall, this);
-        QObject::connect(watcher, SIGNAL(finished(QDBusPendingCallWatcher*)),
-                         this, SLOT(slotCreateFinished(QDBusPendingCallWatcher*)));
+        QObject::connect(watcher, &QDBusPendingCallWatcher::finished, [this, address](QDBusPendingCallWatcher *watcher) {
+            QDBusPendingReply<QDBusObjectPath> reply = *watcher;
+
+            if (reply.isError()) {
+                qWarning() << "Could not create device:" << reply.error().message();
+            } else {
+                QSharedPointer<Device> device = getDeviceFromAddress(address);
+                device->connectPending();
+            }
+
+            watcher->deleteLater();
+        });
     } else {
         qWarning() << "Default adapter is not available for device creation";
     }
@@ -516,10 +506,6 @@ void DeviceModel::removeDevice (const QString &path)
         qWarning() << "Default adapter is not available for device removal";
     }
 }
-
-/***
-****
-***/
 
 int
 DeviceModel::rowCount(const QModelIndex &parent) const

@@ -117,27 +117,7 @@ ItemPage {
             ListItem.SingleValue {
                 id: lockingControl
                 objectName: "lockingControl"
-                text: i18n.tr("Lock phone")
-                value: {
-                    if (batteryBackend.powerdRunning ) {
-                        var timeout = Math.round(powerSettings.activityTimeout/60)
-                        return (powerSettings.activityTimeout != 0) ?
-                                    // TRANSLATORS: %1 is the number of minutes
-                                    i18n.tr("After %1 minute",
-                                            "After %1 minutes",
-                                            timeout).arg(timeout) :
-                                    i18n.tr("Never")
-                    }
-                    else {
-                        var timeout = Math.round(powerSettings.idleDelay/60)
-                        return (powerSettings.idleDelay != 0) ?
-                                    // TRANSLATORS: %1 is the number of minutes
-                                    i18n.tr("After %1 minute",
-                                            "After %1 minutes",
-                                            timeout).arg(timeout) :
-                                    i18n.tr("Manually")
-                    }
-                }
+                text: i18n.tr("Locking and unlocking")
                 progression: true
                 onClicked: pageStack.push(Qt.resolvedUrl("PhoneLocking.qml"), {usePowerd: usePowerd, powerSettings: powerSettings})
             }
@@ -207,7 +187,7 @@ ItemPage {
             ListItem.SingleValue {
                 id: locationItem
                 objectName: "locationItem"
-                text: i18n.tr("Location access")
+                text: i18n.tr("Location")
                 value: ""
                 progression: true
                 onClicked: pageStack.push(Qt.resolvedUrl("Location.qml"))
@@ -225,9 +205,9 @@ ItemPage {
                 value: locationActionGroup.enabled.state
             }
             ListItem.SingleValue {
-                text: i18n.tr("Other app access")
+                text: i18n.tr("App permissions")
                 progression: true
-                onClicked: pageStack.push(Qt.resolvedUrl("AppAccess.qml"))
+                onClicked: pageStack.push(Qt.resolvedUrl("AppAccess.qml"), {pluginManager: pluginManager})
             }
             ListItem.SingleValue {
                 text: i18n.tr("Diagnostics")

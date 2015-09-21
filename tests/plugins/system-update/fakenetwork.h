@@ -19,9 +19,12 @@
 #ifndef FAKENETWORK_H
 #define FAKENETWORK_H
 
+#include <token.h>
+
 #include <QObject>
 #include <QHash>
 #include <QString>
+
 #include "update.h"
 
 namespace UpdatePlugin {
@@ -34,16 +37,22 @@ public:
 
     void checkForNewVersions(QHash<QString, Update*> &apps);
     void getResourceUrl(const QString& packagename);
-    void getClickToken(Update* app, const QString& url, const QString& authHeader);
-    
+    void getClickToken(Update* app, const QString& url);
+    void setUbuntuOneToken(UbuntuOne::Token t) { m_token = t; }
+    UbuntuOne::Token getUbuntuOneToken() { return m_token; }
+
 signals:
     void updatesFound();
     void updatesNotFound();
     void errorOccurred();
     void networkError();
     void serverError();
+    void credentialError();
     void downloadUrlFound(const QString& packagename, const QString& url);
     void clickTokenObtained(Update* app, const QString& clickToken);
+
+private:
+    UbuntuOne::Token m_token;
 };
 
 }

@@ -1,3 +1,365 @@
+ubuntu-system-settings (0.3+15.10.20150918-0ubuntu1) wily; urgency=medium
+
+  [ jonas-drange ]
+  * [hotspot] hide/show based on modem availability from Connectivity
+    (which also requires a bumped dep). (LP: #1487157)
+  * [time-date] Migrate threaded code to worker-object pattern, move
+    sorting to a worker thread from the GUI thread, and only instantiate
+    UbuntuTimeDatePanel plugin once. (LP: #1492260)
+  * [wifi/wpa2ep] allow passwords of length 1 for wpa enterprise
+    authentication schemes. (LP: #1490417)
+
+ -- Jonas G. Drange <ci-train-bot@canonical.com>  Fri, 18 Sep 2015 14:20:27 +0000
+
+ubuntu-system-settings (0.3+15.10.20150915-0ubuntu1) wily; urgency=medium
+
+  [ Ken VanDine ]
+  * ported to libqofono 0.82 (modemTechnologies now
+    availableTechnologies)
+
+ -- Tony Espy <ci-train-bot@canonical.com>  Tue, 15 Sep 2015 00:23:13 +0000
+
+ubuntu-system-settings (0.3+15.10.20150910.1-0ubuntu1) wily; urgency=medium
+
+  [ jonas-drange ]
+  * [hotspot] allow insecure hotspot, hide hotspot for mako, make
+    autopilot tests run on mako, and change packaging so we get a newer
+    Connectivity API (provided by indicator-network). (LP: #1431876)
+  * [system-update] deviceName now uses correct argument returned from
+    system image backend. (LP: #1487432)
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Thu, 10 Sep 2015 19:01:48 +0000
+
+ubuntu-system-settings (0.3+15.10.20150909-0ubuntu1) wily; urgency=medium
+
+  [ Ken VanDine ]
+  * Don't initialize and int as NULL
+  * Fixed test to match string change
+  * Pass some args when pushing the online-accounts panel page
+
+  [ Sebastien Bacher ]
+  * [security-privacy] small bugfixes and ui tweaks update some strings
+    to match the design translate the list items names include online
+    accounts button (LP: #1488016, #1487382)
+  * [system-update] use scalable distributor-logo icon from the theme
+    (LP: #1367137)
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Wed, 09 Sep 2015 15:08:25 +0000
+
+ubuntu-system-settings (0.3+15.10.20150901-0ubuntu1) wily; urgency=medium
+
+  [ Ken VanDine ]
+  * emit credentialsDeleted when the U1 token expired (LP: #1378678)
+
+  [ Manuel de la Pena ]
+  * Sign the query in order to get a possible auth error from the server
+    and stop the user from trying to do updates with invalid creds.
+  * The updates page is leaking objects when we have a successful update
+    and when we do have errors. The following branch ensures that no
+    memory is wasted.
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Tue, 01 Sep 2015 13:59:12 +0000
+
+ubuntu-system-settings (0.3+15.10.20150831-0ubuntu1) wily; urgency=medium
+
+  [ simon.busch@canonical.com ]
+  * Reworking bluetooth support in settings a bit to work as it should:
+    devices are now correctly connected after they got paired which
+    wasn't the case before due to timing reasons
+    (org.bluez.Audio/Input/... interface wasn't registered yet)
+    DevicePage is now created on the fly to avoid it displaying
+    information for a moment from a previously selected device
+    DevicePage is now split out of the PageComponent.qml file Discover
+    service functionality is dropped as bluez does this on its own and
+    we don't need to care (LP: #1488836)
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Mon, 31 Aug 2015 13:22:00 +0000
+
+ubuntu-system-settings (0.3+15.10.20150827-0ubuntu1) wily; urgency=medium
+
+  [ Ken VanDine ]
+  * Don't show the phone number in the about page, that is now provided
+    by address-book-app (LP: #1364452)
+
+  [ Robert Ancell ]
+  * Use new QML package names for qml-module-qt-labs-folderlistmodel,
+    qml-module-qtsysteminfo.
+
+  [ Sebastien Bacher ]
+  * [security-privacy] rename the "Lock phone" item to "Locking and
+    unlocking" and do not include the screen delay as a value, it
+    misleads users to think that the section is only about that where it
+    also includes security options (LP: #1361127)
+  * [security-privacy] use the correct access to location string (LP:
+    #1388184)
+
+  [ jonas-drange ]
+  * Use wait_select_single instead of select_single to make the test
+    less flaky
+  * [plugin] add has-dynamic-name to allow for dynamic renaming of a
+    plugin. (LP: #1475629)
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Thu, 27 Aug 2015 07:47:59 +0000
+
+ubuntu-system-settings (0.3+15.10.20150818-0ubuntu1) wily; urgency=medium
+
+  [ CI Train Bot ]
+  * New rebuild forced.
+
+  [ jonas-drange ]
+  * [hotspot] fixes ui bugs. Depends on suru-icon-theme
+    14.04+15.04.20150813~ to get the new hotspot icon. Depends on qml-
+    module-ubuntu-connectivity (>= 0.5.3) to get new connectivity
+    bindings. (LP: #1459701)
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Tue, 18 Aug 2015 13:20:14 +0000
+
+ubuntu-system-settings (0.3+15.10.20150814-0ubuntu1) wily; urgency=medium
+
+  [ Ken VanDine ]
+  * dismiss_osk after entering text
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Fri, 14 Aug 2015 19:59:01 +0000
+
+ubuntu-system-settings (0.3+15.10.20150812-0ubuntu1) wily; urgency=medium
+
+  [ jonas-drange ]
+  * [cellular] add hotspot support by use of the Connectivity API (LP:
+    #1477300, #1421583)
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Wed, 12 Aug 2015 12:20:19 +0000
+
+ubuntu-system-settings (0.3+15.10.20150810-0ubuntu1) wily; urgency=medium
+
+  [ Ken VanDine ]
+  * Set dimTimeout to 0 when activityTimeout is 0 (LP: #1476372)
+
+  [ Sebastien Bacher ]
+  * [bluetooth] turn off discovery if inactive, not only suspended (LP:
+    #1482235)
+
+  [ jonas-drange ]
+  * [python] fix pep8 warnings from new pep8 1.6
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Mon, 10 Aug 2015 13:20:25 +0000
+
+ubuntu-system-settings (0.3+15.10.20150806-0ubuntu1) wily; urgency=medium
+
+  [ jonas-drange ]
+  * [autopilot/phone] stops calling the method passed to assertThat
+  * [autopilot] change Wi-Fi and System Update tests to use a mocked
+    indicator-network (org.gtk.Actions and com.ubuntu.connectivity1).
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Thu, 06 Aug 2015 15:10:13 +0000
+
+ubuntu-system-settings (0.3+15.10.20150804-0ubuntu1) wily; urgency=medium
+
+  [ Sebastien Bacher ]
+  * [system-update] get the custom build information from the s-i
+    service (LP: #1393413)
+
+  [ jonas-drange ]
+  * Adds Flickables to many pages. (LP: #1470782)
+
+  [ simon.busch@canonical.com ]
+  * Convert Bluetooth connect/disconnect operations to async ones to not
+    block the UI when the backend takes a little bit longer to perform
+    those.
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Tue, 04 Aug 2015 18:14:23 +0000
+
+ubuntu-system-settings (0.3+15.10.20150731-0ubuntu1) wily; urgency=medium
+
+  [ Ken VanDine ]
+  * [cellular/apn] new APN panel made for the new 'Preferred' property,
+    as well as the 'ResetContext' method. (LP: #1435360, #1361864,
+    #1376714, #1457676, #1424149, #1442646, #1388222)
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Fri, 31 Jul 2015 18:19:18 +0000
+
+ubuntu-system-settings (0.3+15.10.20150729.1-0ubuntu2~gcc5.1) wily; urgency=medium
+
+  * No change upload, build with GCC 5.
+
+ -- Matthias Klose <doko@ubuntu.com>  Thu, 30 Jul 2015 11:56:52 +0200
+
+ubuntu-system-settings (0.3+15.10.20150729.1-0ubuntu1) wily; urgency=medium
+
+  [ Christopher Lee ]
+  * Update AP helper so it doesn't attempt to use an unreachable value
+    when scrolling.
+
+  [ Ken VanDine ]
+  * Added a sleep to give set_forward_on_busy time to finish
+  * Use wait_select_single in the wifi dialog and bump the sleep to 1
+    second
+  * We need to explicitly stop dbus in tearDownClass, fixes lingering
+    dbus processes
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Wed, 29 Jul 2015 18:06:23 +0000
+
+ubuntu-system-settings (0.3+15.10.20150724-0ubuntu1) wily; urgency=medium
+
+  [ CI Train Bot ]
+  * New rebuild forced.
+
+  [ Manuel de la Pena ]
+  * Recompile with the new udm to avoid ABI issues.
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Fri, 24 Jul 2015 17:17:31 +0000
+
+ubuntu-system-settings (0.3+15.10.20150722-0ubuntu1) wily; urgency=medium
+
+  [ CI Train Bot ]
+  * Resync trunk.
+
+  [ Ken VanDine ]
+  * Use TextField.write to properly use the OSK Added helper to dismiss
+    OSK
+
+  [ jonas-drange ]
+  * [tests] avoids setting Interfaces property after the
+    Cellular/Phone/About plugins have loaded.
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Wed, 22 Jul 2015 12:55:01 +0000
+
+ubuntu-system-settings (0.3+15.10.20150716-0ubuntu1) wily; urgency=medium
+
+  [ CI Train Bot ]
+  * Resync trunk.
+
+  [ Ken VanDine ]
+  * [wifi] Fixed handling of loading extended attributes from the
+    MenuModel (LP: #1472505)
+
+  [ handsome_feng<445865575@qq.com> ]
+  * Add flickable in time/date page. (LP: #1469076)
+
+  [ jonas-drange ]
+  * [phone] make services insensitive when there are no services as well
+    as adding autopilot tests for sim services. (LP: #1470779)
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Thu, 16 Jul 2015 13:40:14 +0000
+
+ubuntu-system-settings (0.3+15.10.20150708-0ubuntu1) wily; urgency=medium
+
+  [ CI Train Bot ]
+  * New rebuild forced.
+
+  [ jonas-drange ]
+  * Lets the Wi-Fi panel respond to an SSID provided by dispatcher by
+    launching a "Connect to" dialogue. (LP: #1241986)
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Wed, 08 Jul 2015 20:07:33 +0000
+
+ubuntu-system-settings (0.3+15.10.20150703-0ubuntu1) wily; urgency=medium
+
+  [ CI Train Bot ]
+  * New rebuild forced.
+
+  [ Joerg Berroth ]
+  * Added support for 802-1x wireless network configurations. (LP:
+    #1241986)
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Fri, 03 Jul 2015 16:09:00 +0000
+
+ubuntu-system-settings (0.3+15.10.20150702.3-0ubuntu1) wily; urgency=medium
+
+  [ CI Train Bot ]
+  * New rebuild forced.
+
+  [ Ken VanDine ]
+  * Test searching for WiFi instead of Sound, online-accounts now has a
+    soundcloud account type (LP: #1468029)
+
+  [ Matthew Paul Thomas ]
+  * Changes "Install & Restart" to "Restart & Install" and "Not Now" to
+    "Cancel". lp:1359344 (LP: #1359344)
+
+  [ jonas-drange ]
+  * implement CFB, CFNRy and CFNRc as well as autopilot tests (LP:
+    #1463828)
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Thu, 02 Jul 2015 22:48:32 +0000
+
+ubuntu-system-settings (0.3+15.10.20150622-0ubuntu2) wily; urgency=medium
+
+  * debian/control:
+    - don't have an alternative depends on system-image-snappy-cli,
+      it's deprecated
+    - have ubuntu-snappy-cli as an alternative to click, that's not the 
+      right solution but a workaround to unblock snappy image build
+
+ -- Sebastien Bacher <seb128@ubuntu.com>  Thu, 02 Jul 2015 10:30:10 +0200
+
+ubuntu-system-settings (0.3+15.10.20150622-0ubuntu1) wily; urgency=medium
+
+  [ CI Train Bot ]
+  * New rebuild forced.
+
+  [ jonas-drange ]
+  * [wifi] skip some tests that cannot be mocked and use specific object
+    when found during connection (LP: #1441192)
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Mon, 22 Jun 2015 13:01:01 +0000
+
+ubuntu-system-settings (0.3+15.10.20150615-0ubuntu1) wily; urgency=medium
+
+  [ CI Train Bot ]
+  * New rebuild forced.
+
+  [ Ken VanDine ]
+  * Activate the accessPoint on click
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Mon, 15 Jun 2015 13:41:16 +0000
+
+ubuntu-system-settings (0.3+15.10.20150604-0ubuntu1) wily; urgency=medium
+
+  [ Sebastien Bacher ]
+  * [battery] use round linejoin style to workaround rendering glitches
+    (LP: #1461624)
+  * define a way for plugin to be visible if a file exists, use that
+    capability to enable the updates panel on system-image systems and
+    not snappy one, which allows us to not have a strong depends on
+    system image components
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Thu, 04 Jun 2015 15:45:14 +0000
+
+ubuntu-system-settings (0.3+15.10.20150527-0ubuntu1) wily; urgency=medium
+
+  [ CI Train Bot ]
+  * New rebuild forced.
+
+  [ Iain Lane ]
+  * Improve filtering in main page and timezone filters. (LP: #1454186,
+    #1446086)
+
+  [ Ken VanDine ]
+  * Ensure dim-timeout is 10 seconds less than activity-timeout (LP:
+    #1437510)
+  * debian/control: bumped depends on ubuntu-keyboard-data to >=
+    0.99.trunk.phablet2+15.04.20150421 to get gsettings schema changes
+    (LP: #1454230)
+  * expose deviceName to QML
+
+  [ Lukáš Tinkl ]
+  * compare the language and kbd layout names in a locale-aware manner
+
+  [ Sebastien Bacher ]
+  * Translate push_helper expected strings to avoid failure in non C
+    locales (LP: #1456941)
+  * [battery] use the correct height value for the first point of the
+    graph, that fixes the initial point often starting to high and the
+    curve starting with an almost vertical line (LP: #1439122)
+  * [language] update auto punctuation description to match the osk
+    behaviour (LP: #1385288)
+  * [security-privacy] remove obsolete dash search option (LP: #1422700)
+
+  [ jonas-drange ]
+  * New icon as per lp:1457424 (LP: #1457424)
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Wed, 27 May 2015 09:23:37 +0000
+
 ubuntu-system-settings (0.3+15.04.20150616-0ubuntu1) vivid; urgency=medium
 
   [ CI Train Bot ]

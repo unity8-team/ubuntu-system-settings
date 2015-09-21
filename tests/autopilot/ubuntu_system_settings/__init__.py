@@ -15,21 +15,19 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
+from time import sleep
+from autopilot import introspection
+from autopilot.exceptions import StateNotFoundError
+from ubuntu_system_settings.utils.i18n import ugettext as _
+
 import logging
+import autopilot.logging
+import ubuntuuitoolkit
+import ubuntu_system_settings.utils as utils
 
 # TODO This is a workaround for bug #1327325 that will make phabet-test-run
 # fail if something is printed to stdout.
 logging.basicConfig(filename='warning.log', level=logging.WARNING)
-
-
-from time import sleep
-
-from autopilot.input import Keyboard
-import autopilot.logging
-import ubuntuuitoolkit
-from autopilot import introspection
-from ubuntu_system_settings.utils.i18n import ugettext as _
-
 logger = logging.getLogger(__name__)
 
 
@@ -89,6 +87,10 @@ class SystemSettingsMainWindow(ubuntuuitoolkit.MainView):
         return self._go_to_page('entryComponent-cellular', 'cellularPage')
 
     @autopilot.logging.log_action(logger.debug)
+    def go_to_hotspot_page(self):
+        return self._go_to_page('entryComponent-hotspot', 'hotspotPage')
+
+    @autopilot.logging.log_action(logger.debug)
     def go_to_bluetooth_page(self):
         return self._go_to_page('entryComponent-bluetooth', 'bluetoothPage')
 
@@ -110,6 +112,11 @@ class SystemSettingsMainWindow(ubuntuuitoolkit.MainView):
                                 'securityPrivacyPage')
 
     @autopilot.logging.log_action(logger.debug)
+    def go_to_notification_page(self):
+        return self._go_to_page('entryComponent-notifications',
+                                'systemNotificationsPage')
+
+    @autopilot.logging.log_action(logger.debug)
     def go_to_datetime_page(self):
         return self._go_to_page('entryComponent-time-date', 'timeDatePage')
 
@@ -119,13 +126,18 @@ class SystemSettingsMainWindow(ubuntuuitoolkit.MainView):
         page.active.wait_for(True)
         return page
 
+    @autopilot.logging.log_action(logger.debug)
     def scroll_to(self, obj):
+
+        def get_page_bottom():
+            return page.globalRect[1] + page.globalRect[3]
+
         page = self.system_settings_page
         page_right = page.globalRect[0] + page.globalRect[2]
-        page_bottom = page.globalRect[1] + page.globalRect[3]
+        page_bottom = get_page_bottom()
         page_center_x = int(page_right / 2)
         page_center_y = int(page_bottom / 2)
-        while obj.globalRect[1] + obj.height > page_bottom:
+        while obj.globalRect[1] + obj.height > get_page_bottom():
             self.pointing_device.drag(
                 page_center_x,
                 page_center_y,
@@ -133,7 +145,7 @@ class SystemSettingsMainWindow(ubuntuuitoolkit.MainView):
                 page_center_y - obj.height * 2
             )
             # avoid a flick
-            sleep(0.5)
+            sleep(1.0)
 
     def scroll_to_and_click(self, obj):
         self.scroll_to(obj)
@@ -184,6 +196,12 @@ class Dialog(ubuntuuitoolkit.Dialog):
     @classmethod
     def validate_dbus_object(cls, path, state):
         return False
+
+
+class LabelTextField(ubuntuuitoolkit.TextField):
+    """LabelTextField is a component local to the APN Editor in the cellular
+    plugin."""
+    pass
 
 
 class CellularPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
@@ -261,6 +279,24 @@ class CellularPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
         chooseCarrierPage.set_carrier(carrier)
 
     @autopilot.logging.log_action(logger.debug)
+    def open_apn_editor(self, name, sim=None):
+        carrierApnPage = self._click_carrier_apn()
+        chooseApnPage = carrierApnPage.open_apn(sim)
+        return chooseApnPage.open(name)
+
+    @autopilot.logging.log_action(logger.debug)
+    def delete_apn(self, name, sim=None):
+        carrierApnPage = self._click_carrier_apn()
+        chooseApnPage = carrierApnPage.open_apn(sim)
+        return chooseApnPage.delete(name)
+
+    @autopilot.logging.log_action(logger.debug)
+    def prefer_apn(self, name, sim=None):
+        carrierApnPage = self._click_carrier_apn()
+        chooseApnPage = carrierApnPage.open_apn(sim)
+        return chooseApnPage.check(name)
+
+    @autopilot.logging.log_action(logger.debug)
     def _click_carrier_apn(self):
         item = self.select_single(objectName='carrierApnEntry')
         self.pointing_device.click_object(item)
@@ -302,9 +338,150 @@ class CellularPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
         sleep(1)
         ok = self.select_single('Button', objectName="doRename")
 
-        field = self.select_single('TextField', objectName="nameField")
+        field = self.wait_select_single('TextField', objectName="nameField")
         field.write(name)
         self.pointing_device.click_object(ok)
+
+
+class HotspotPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
+
+    """Autopilot helper for Hotspot page."""
+
+    @classmethod
+    def validate_dbus_object(cls, path, state):
+        name = introspection.get_classname_from_path(path)
+        if name == b'ItemPage':
+            if state['objectName'][1] == 'hotspotPage':
+                return True
+        return False
+
+    @property
+    def _switch(self):
+        return self.wait_select_single(
+            ubuntuuitoolkit.CheckBox,
+            objectName='hotspotSwitch')
+
+    @autopilot.logging.log_action(logger.debug)
+    def enable_hotspot(self):
+        # We assume that the following AssertionError is due to the panel
+        # instantly setting checked to False, prompting the user to turn on
+        # Wi-Fi instead.
+        try:
+            self._switch.check(timeout=2)
+        except AssertionError:
+            pass
+
+        try:
+            prompt = self.get_root_instance().wait_select_single(
+                objectName='enableWifiDialog')
+        except StateNotFoundError:
+            prompt = None
+
+        if prompt:
+            prompt.confirm_enable()
+            prompt.wait_until_destroyed(timeout=5)
+
+    @autopilot.logging.log_action(logger.debug)
+    def disable_hotspot(self):
+        self._switch.uncheck()
+
+    @autopilot.logging.log_action(logger.debug)
+    def setup_hotspot(self, config):
+        obj = self.select_single(objectName='hotspotSetupButton')
+        self.pointing_device.click_object(obj)
+        setup = self.get_root_instance().wait_select_single(
+            objectName='hotspotSetup')
+        if config:
+            if 'ssid' in config:
+                setup.set_ssid(config['ssid'])
+            if 'auth' in config:
+                setup.set_auth(config['auth'])
+            if 'password' in config:
+                setup.set_password(config['password'])
+        utils.dismiss_osk()
+        setup.enable()
+        if setup:
+            setup.wait_until_destroyed()
+
+    @autopilot.logging.log_action(logger.debug)
+    def get_hotspot_status(self):
+        return self._switch.checked
+
+    @autopilot.logging.log_action(logger.debug)
+    def get_hotspot_possible(self):
+        return self._switch.enabled
+
+
+class HotspotEnableWifiDialog(
+        ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
+    """Autopilot helper for the 'Turn on Wi-Fi' dialog in hotspot panel."""
+
+    @classmethod
+    def validate_dbus_object(cls, path, state):
+        name = introspection.get_classname_from_path(path)
+        if name == b'Dialog':
+            if state['objectName'][1] == 'enableWifiDialog':
+                return True
+        return False
+
+    @autopilot.logging.log_action(logger.debug)
+    def confirm_enable(self):
+        button = self.select_single('Button', objectName='confirmEnable')
+        self.pointing_device.click_object(button)
+
+
+class HotspotSetup(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
+
+    """Autopilot helper for Hotspot setup."""
+
+    @classmethod
+    def validate_dbus_object(cls, path, state):
+        name = introspection.get_classname_from_path(path)
+        if name == b'Dialog':
+            if state['objectName'][1] == 'hotspotSetup':
+                return True
+        return False
+
+    @property
+    def _ssid_field(self):
+        return self.wait_select_single(
+            ubuntuuitoolkit.TextField,
+            objectName='ssidField')
+
+    @property
+    def _password_field(self):
+        return self.wait_select_single(
+            ubuntuuitoolkit.TextField,
+            objectName='passwordField')
+
+    @property
+    def _enable_button(self):
+        return self.wait_select_single(
+            'Button', objectName='confirmButton')
+
+    @property
+    def _password_required_check(self):
+        return self.wait_select_single(
+            'CheckBox', objectName='passwordRequiredToggle')
+
+    @autopilot.logging.log_action(logger.debug)
+    def set_ssid(self, ssid):
+        self._ssid_field.write(ssid)
+
+    @autopilot.logging.log_action(logger.debug)
+    def set_password(self, password):
+        self._password_field.write(password)
+
+    @autopilot.logging.log_action(logger.debug)
+    def set_auth(self, auth):
+        if auth == 'wpa-psk':
+            self._password_required_check.check()
+        else:
+            self._password_required_check.uncheck()
+
+    @autopilot.logging.log_action(logger.debug)
+    def enable(self):
+        self.pointing_device.click_object(self._enable_button)
 
 
 class BluetoothPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
@@ -350,11 +527,22 @@ class PageCarrierAndApn(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
         return self.get_root_instance().wait_select_single(
             objectName='chooseCarrierPage')
 
+    @autopilot.logging.log_action(logger.debug)
+    def open_apn(self, sim):
+        return self._click_apn(sim)
+
+    @autopilot.logging.log_action(logger.debug)
+    def _click_apn(self, sim):
+        obj = self.select_single(
+            objectName='apn')
+        self.pointing_device.click_object(obj)
+        return self.get_root_instance().wait_select_single(
+            objectName='apnPage')
+
 
 class PageCarriersAndApns(
         ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
     """Autopilot helper for carrier/apn entry page (multisim)."""
-    """Autopilot helper for carrier/apn entry page (singlesim)."""
     @autopilot.logging.log_action(logger.debug)
     def open_carrier(self, sim):
         return self._click_carrier(sim)
@@ -377,6 +565,7 @@ class PageChooseCarrier(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
         item = self.select_single(text='Automatically')
         self.pointing_device.click_object(item)
 
+    @autopilot.logging.log_action(logger.debug)
     def set_carrier(self, carrier):
         # wait for animation, since page.animationRunning.wait_for(False)
         # does not work?
@@ -393,6 +582,116 @@ class PageChooseCarrier(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
 
         item = opList.select_single(text=carrier, objectName="carrier")
         self.pointing_device.click_object(item)
+
+
+class PageChooseApn(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
+
+    """Autopilot helper for apn editor page"""
+
+    @autopilot.logging.log_action(logger.debug)
+    def open(self, name):
+        return self._open_editor(name)
+
+    @autopilot.logging.log_action(logger.debug)
+    def delete(self, name):
+        self._delete(name)
+
+    @autopilot.logging.log_action(logger.debug)
+    def _delete(self, name):
+        item = self.wait_select_single('Standard', objectName='edit_%s' % name)
+        item.swipe_to_delete()
+        item.confirm_removal()
+
+    @autopilot.logging.log_action(logger.debug)
+    def check(self, name):
+        self._check(name)
+
+    @autopilot.logging.log_action(logger.debug)
+    def _check(self, name):
+        item = self.wait_select_single(
+            'CheckBox', objectName='%s_preferred' % name
+        )
+        item.check()
+
+    @autopilot.logging.log_action(logger.debug)
+    def _open_editor(self, name):
+        if name:
+            item = self.select_single(objectName='edit_%s' % name)
+            self.pointing_device.click_object(item)
+        else:
+            main_view = self.get_root_instance().select_single(
+                objectName='systemSettingsMainView')
+            header = main_view.select_single('AppHeader')
+            header.click_action_button('newApn')
+        return self.get_root_instance().wait_select_single(
+            objectName='apnEditor')
+
+
+class PageApnEditor(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
+
+    """Autopilot helper for apn editor page"""
+
+    flickable = None
+
+    def __init__(self, *args):
+        super().__init__(*args)
+        self.flickable = self.select_single(objectName='scrollArea')
+
+    @autopilot.logging.log_action(logger.debug)
+    def set_type(self, t):
+        selector = self.select_single(
+            'ItemSelector', objectName='typeSelector')
+        self.pointing_device.click_object(selector)
+        selector.currentlyExpanded.wait_for(True)
+        item = self.select_single(objectName='type_%s' % t)
+
+        # A bit dirty
+        while selector.currentlyExpanded:
+            self.pointing_device.click_object(item)
+
+    @autopilot.logging.log_action(logger.debug)
+    def set_name(self, new_name):
+        self._populate_field('name', new_name)
+
+    @autopilot.logging.log_action(logger.debug)
+    def set_access_point_name(self, new_name):
+        self._populate_field('accessPointName', new_name)
+
+    @autopilot.logging.log_action(logger.debug)
+    def set_message_center(self, new_message_center):
+        self._populate_field('messageCenter', new_message_center)
+
+    @autopilot.logging.log_action(logger.debug)
+    def set_message_proxy(self, new_message_proxy):
+        self._populate_field('messageProxy', new_message_proxy)
+
+        # Sleep for the duration of the timer that will copy any
+        # port into the port field
+        sleep(1.5)
+
+    @autopilot.logging.log_action(logger.debug)
+    def set_port(self, new_port):
+        self._populate_field('port', new_port)
+
+    @autopilot.logging.log_action(logger.debug)
+    def set_username(self, new_username):
+        self._populate_field('username', new_username)
+
+    @autopilot.logging.log_action(logger.debug)
+    def set_password(self, new_password):
+        self._populate_field('password', new_password)
+
+    def _populate_field(self, field, text):
+        f = self.select_single(LabelTextField, objectName=field)
+        self.flickable.swipe_child_into_view(f)
+        f.write(text)
+
+    @autopilot.logging.log_action(logger.debug)
+    def save(self):
+        main_view = self.get_root_instance().select_single(
+            objectName='systemSettingsMainView')
+        header = main_view.select_single('AppHeader')
+        header.click_action_button('saveApn')
 
 
 class SecurityPage(ubuntuuitoolkit.QQuickFlickable):
@@ -587,21 +886,6 @@ class PhonePage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
                 return True
         return False
 
-    @autopilot.logging.log_action(logger.info)
-    def go_to_call_forwarding(self, sim=None):
-        """Open the Call Forwarding settings page.
-
-        :param sim: Number of what SIM to use, either 1 or 2.
-            Required parameter in dual SIM setups
-        :returns: The Call Forwarding settings page.
-
-        """
-        find = "callFwd"
-        if sim:
-            find = "callFwdSim%d" % sim
-
-        return self._go_to_page(find, 'callForwardingPage')
-
     def _go_to_page(self, item_object_name, page_object_name):
         self._click_item(item_object_name)
         page = self.get_root_instance().wait_select_single(
@@ -615,20 +899,6 @@ class PhonePage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
         self.pointing_device.click_object(item)
 
     @autopilot.logging.log_action(logger.info)
-    def go_to_call_waiting(self, sim=None):
-        """Open the Call Waiting settings page.
-
-        :param sim: Number of what SIM to use, either 1 or 2.
-            Required parameter in dual SIM setups
-        :returns: The Call Waiting settings page.
-
-        """
-        find = "callWait"
-        if sim:
-            find = "callWaitSim%d" % sim
-        return self._go_to_page(find, 'callWaitingPage')
-
-    @autopilot.logging.log_action(logger.info)
     def go_to_sim_services(self, sim=None):
         """Open the SIM Services settings page.
 
@@ -638,22 +908,220 @@ class PhonePage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
 
         """
         find = "simServices"
-        if sim:
+        if sim is not None:
             find = "simServicesSim%d" % sim
 
         return self._go_to_page(find, 'servicesPage')
 
+    def get_sim_services_enabled(self, sim=None):
+        """Return whether or not Sim Services is enabled.
+
+        :param sim: Number of what SIM to use, either 1 or 2.
+            Required parameter in dual SIM setups
+        :returns: Whether or not Sim Services is enabled.
+
+        """
+        find = "simServices"
+        if sim is not None:
+            find = "simServicesSim%d" % sim
+        return self.select_single(objectName=find).enabled
+
     @property
     def _dialpad_sounds(self):
+        """The dialpad sounds switch."""
         return self.wait_select_single(
             ubuntuuitoolkit.CheckBox,
             objectName='dialpadSounds')
 
+    @autopilot.logging.log_action(logger.info)
     def enable_dialpad_sounds(self):
+        """Enable dialpad sounds."""
         self._dialpad_sounds.check()
 
+    @autopilot.logging.log_action(logger.info)
     def disable_dialpad_sounds(self):
+        """Disable dialpad sounds."""
         self._dialpad_sounds.uncheck()
+
+    @autopilot.logging.log_action(logger.info)
+    def _enter_call_waiting(self, sim=None):
+        """Open the Call Waiting settings page.
+
+        :param sim: Number of what SIM to use, either 1 or 2.
+            Required parameter in dual SIM setups
+        :returns: The Call Waiting settings page.
+
+        """
+        find = "callWait"
+        if sim is not None:
+            find = "callWaitSim%d" % sim
+        return self._go_to_page(find, 'callWaitingPage')
+
+    @autopilot.logging.log_action(logger.info)
+    def enable_call_waiting(self, sim):
+        self._enter_call_waiting(sim).enable_call_waiting()
+
+    @autopilot.logging.log_action(logger.info)
+    def disable_call_waiting(self, sim):
+        self._enter_call_waiting(sim).disable_call_waiting()
+
+    @autopilot.logging.log_action(logger.info)
+    def _enter_call_forwarding(self, sim=None):
+        """Open the Call Forwarding settings page.
+
+        :param sim: Number of what SIM to use, either 1 or 2.
+            Required parameter in dual SIM setups
+        :returns: The Call Forwarding settings page.
+
+        """
+        find = "callFwd"
+        if sim is not None:
+            find = "callFwdSim%d" % sim
+
+        return self._go_to_page(find, 'callForwardingPage')
+
+    @autopilot.logging.log_action(logger.info)
+    def set_forward_unconditionally(self, number, sim=None):
+        """Sets forwarding unconditionally to number on a sim.
+
+        :param sim: Number of what SIM to use, either 1 or 2.
+            Required parameter in dual SIM setups
+        :param number: Number to which we want to forward.
+        :returns: The Call Forwarding settings page.
+        """
+        fwd_page = self._enter_call_forwarding(sim)
+        fwd_page.set_forward_unconditionally(number)
+        return fwd_page
+
+    @autopilot.logging.log_action(logger.info)
+    def unset_forward_unconditionally(self, sim=None):
+        """Disables forwarding unconditionally on a sim.
+
+        :param sim: Number of what SIM to use, either 1 or 2.
+            Required parameter in dual SIM setups
+        :returns: The Call Forwarding settings page.
+        """
+        fwd_page = self._enter_call_forwarding(sim)
+        fwd_page.unset_forward_unconditionally()
+        return fwd_page
+
+    @autopilot.logging.log_action(logger.info)
+    def get_forward_unconditionally(self, sim=None):
+        """Return forwarding unconditionally value on sim.
+
+        :param sim: Number of what SIM to use, either 1 or 2.
+            Required parameter in dual SIM setups
+        :returns: The forward unconditionally value.
+        """
+        fwd_page = self._enter_call_forwarding(sim)
+        return fwd_page.get_forward_unconditionally()
+
+    @autopilot.logging.log_action(logger.info)
+    def set_forward_on_busy(self, number, sim=None):
+        """Sets forwarding when busy to number on a sim.
+
+        :param sim: Number of what SIM to use, either 1 or 2.
+            Required parameter in dual SIM setups
+        :param number: Number to which we want to forward.
+        :returns: The Call Forwarding settings page.
+        """
+        fwd_page = self._enter_call_forwarding(sim)
+        fwd_page.set_forward_on_busy(number)
+        return fwd_page
+
+    @autopilot.logging.log_action(logger.info)
+    def unset_forward_on_busy(self, sim=None):
+        """Disables forwarding when busy on a sim.
+
+        :param sim: Number of what SIM to use, either 1 or 2.
+            Required parameter in dual SIM setups
+        :returns: The Call Forwarding settings page.
+        """
+        fwd_page = self._enter_call_forwarding(sim)
+        fwd_page.unset_forward_on_busy()
+        return fwd_page
+
+    @autopilot.logging.log_action(logger.info)
+    def get_forward_on_busy(self, sim=None):
+        """Return forwarding on busy value on sim.
+
+        :param sim: Number of what SIM to use, either 1 or 2.
+            Required parameter in dual SIM setups
+        :returns: The forward on busy value.
+        """
+        fwd_page = self._enter_call_forwarding(sim)
+        return fwd_page.get_forward_on_busy()
+
+    @autopilot.logging.log_action(logger.info)
+    def set_forward_when_no_answer(self, number, sim=None):
+        """Sets forwarding when no answer to number on a sim.
+
+        :param sim: Number of what SIM to use, either 1 or 2.
+            Required parameter in dual SIM setups
+        :param number: Number to which we want to forward.
+        :returns: The Call Forwarding settings page.
+        """
+        fwd_page = self._enter_call_forwarding(sim)
+        fwd_page.set_forward_when_no_answer(number)
+        return fwd_page
+
+    @autopilot.logging.log_action(logger.info)
+    def unset_forward_when_no_answer(self, sim=None):
+        """Disables forwarding when no answer on a sim.
+
+        :param sim: Number of what SIM to use, either 1 or 2.
+            Required parameter in dual SIM setups
+        :returns: The Call Forwarding settings page.
+        """
+        fwd_page = self._enter_call_forwarding(sim)
+        fwd_page.unset_forward_when_no_answer()
+        return fwd_page
+
+    @autopilot.logging.log_action(logger.info)
+    def get_forward_when_no_answer(self, sim=None):
+        """Return forwarding when no answer value on sim.
+
+        :param sim: Number of what SIM to use, either 1 or 2.
+            Required parameter in dual SIM setups
+        :returns: The forward when no answer value.
+        """
+        fwd_page = self._enter_call_forwarding(sim)
+        return fwd_page.get_forward_when_no_answer()
+
+    @autopilot.logging.log_action(logger.info)
+    def set_forward_when_unreachable(self, number, sim=None):
+        """Sets forwarding when unreachable to number on a sim.
+
+        :param sim: Number of what SIM to use, either 1 or 2.
+            Required parameter in dual SIM setups
+        :param number: Number to which we want to forward.
+        :returns: The Call Forwarding settings page.
+        """
+        fwd_page = self._enter_call_forwarding(sim)
+        fwd_page.set_forward_when_unreachable(number)
+        return fwd_page
+
+    @autopilot.logging.log_action(logger.info)
+    def unset_forward_when_unreachable(self, sim=None):
+        """Disables forwarding when unreachable on a sim.
+
+        :param sim: Number of what SIM to use, either 1 or 2.
+            Required parameter in dual SIM setups
+        """
+        fwd_page = self._enter_call_forwarding(sim)
+        fwd_page.unset_forward_when_unreachable()
+        return fwd_page
+
+    @autopilot.logging.log_action(logger.info)
+    def get_forward_when_unreachable(self, sim=None):
+        """Return forwarding when unreachable value on sim.
+
+        :param sim: Number of what SIM to use, either 1 or 2.
+            Required parameter in dual SIM setups
+        :returns: The forward when unreachable value.
+        """
+        fwd_page = self._enter_call_forwarding(sim)
+        return fwd_page.get_forward_when_unreachable()
 
 
 class CallWaiting(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
@@ -677,49 +1145,146 @@ class CallForwarding(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
 
     """Autopilot helper for the Call forwarding page."""
 
-    @property
-    def _switch(self):
-        return self.wait_select_single(
-            ubuntuuitoolkit.CheckBox,
-            objectName='callForwardingSwitch')
-
-    @property
-    def _number_field(self):
-        return self.wait_select_single(
-            objectName='destNumberField')
-
-    def _click_set(self):
-        button = self.wait_select_single(
-            objectName='set')
+    @autopilot.logging.log_action(logger.info)
+    def _set_rule(self):
+        """Saves rule."""
+        button = self.wait_select_single('Button',
+                                         objectName='setButton')
         self.pointing_device.click_object(button)
 
-    def _click_cancel(self):
-        button = self.wait_select_single(
-            objectName='cancel')
-        self.pointing_device.click_object(button)
+    @autopilot.logging.log_action(logger.info)
+    def _check_rule(self, rule, value):
+        """Checks a rule's associated CheckBox with value.
 
-    @property
-    def current_forwarding(self):
-        return self.wait_select_single(
-            objectName='destNumberField').text
+        :param rule: The string representation of the rule.
+        :param value: The new value of the CheckBox.
+        """
+        check = self.wait_select_single(ubuntuuitoolkit.CheckBox,
+                                        objectName='check_%s' % rule)
+        if value:
+            check.check()
+        else:
+            check.uncheck()
 
-    def enable_call_forwarding(self):
-        self._switch.check()
+    @autopilot.logging.log_action(logger.info)
+    def enable_rule(self, rule):
+        """Enables a rule.
 
-    def disable_call_forwarding(self):
-        self._switch.uncheck()
+        :param rule: The string representation of the rule.
+        """
+        self._check_rule(rule, True)
 
-    def set_forward(self, number):
-        input_method = Keyboard.create()
-        self.enable_call_forwarding()
-        self.pointing_device.click_object(self._number_field)
-        input_method.type(number)
-        self._click_set()
+    @autopilot.logging.log_action(logger.info)
+    def disable_rule(self, rule):
+        """Disables a rule.
+
+        :param rule: The string representation of the rule.
+        """
+        self._check_rule(rule, False)
+
+    @autopilot.logging.log_action(logger.info)
+    def _enter_rule(self, rule, number):
+        """Enters a number into a rule's associated TextField.
+
+        :param rule: The string representation of the rule.
+        :param number: Number to enter into field.
+        """
+        field = self.wait_select_single('TextField',
+                                        objectName='field_%s' % rule)
+        field.write(number)
+
+    @autopilot.logging.log_action(logger.info)
+    def _get_rule(self, rule):
+        """Returns the value of the rule.
+
+        :param rule: The string representation of the rule.
+        """
+        return self.wait_select_single(objectName='current_%s' % rule).value
+
+    @autopilot.logging.log_action(logger.info)
+    def set_forward_unconditionally(self, number):
+        """Sets forward unconditionally.
+
+        :param number: Number to forward to.
+        """
+        self.enable_rule('voiceUnconditional')
+        self._enter_rule('voiceUnconditional', number)
+        self._set_rule()
+
+    @autopilot.logging.log_action(logger.info)
+    def unset_forward_unconditionally(self):
+        """Disables forward unconditionally."""
+        self.disable_rule('voiceUnconditional')
+
+    @autopilot.logging.log_action(logger.info)
+    def get_forward_unconditionally(self):
+        """Returns value of forward unconditionally."""
+        return self._get_rule('voiceUnconditional')
+
+    @autopilot.logging.log_action(logger.info)
+    def set_forward_on_busy(self, number):
+        """Sets forward on busy.
+
+        :param number: Number to forward to.
+        """
+        self.enable_rule('voiceBusy')
+        self._enter_rule('voiceBusy', number)
+        self._set_rule()
+
+    @autopilot.logging.log_action(logger.info)
+    def unset_forward_on_busy(self):
+        """Disables forward on busy."""
+        self.disable_rule('voiceBusy')
+
+    @autopilot.logging.log_action(logger.info)
+    def get_forward_on_busy(self):
+        """Returns value of forward on busy."""
+        return self._get_rule('voiceBusy')
+
+    @autopilot.logging.log_action(logger.info)
+    def set_forward_when_no_answer(self, number):
+        """Sets forward on no answer.
+
+        :param number: Number to forward to.
+        """
+        self.enable_rule('voiceNoReply')
+        self._enter_rule('voiceNoReply', number)
+        self._set_rule()
+
+    @autopilot.logging.log_action(logger.info)
+    def unset_forward_when_no_answer(self):
+        """Disables forward when no answer."""
+        self.disable_rule('voiceNoReply')
+
+    @autopilot.logging.log_action(logger.info)
+    def get_forward_when_no_answer(self):
+        """Returns value of forward on no answer."""
+        return self._get_rule('voiceNoReply')
+
+    @autopilot.logging.log_action(logger.info)
+    def set_forward_when_unreachable(self, number):
+        """Sets forward when unreachable.
+
+        :param number: Number to forward to.
+        """
+        self.enable_rule('voiceNotReachable')
+        self._enter_rule('voiceNotReachable', number)
+        self._set_rule()
+
+    @autopilot.logging.log_action(logger.info)
+    def unset_forward_when_unreachable(self):
+        """Disables forward when unreachable."""
+        self.disable_rule('voiceNotReachable')
+
+    @autopilot.logging.log_action(logger.info)
+    def get_forward_when_unreachable(self):
+        """Returns value of forward when unreachable."""
+        return self._get_rule('voiceNotReachable')
 
 
 class Services(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
 
-    """Autopilot helper for the Call waiting page."""
+    """Autopilot helper for the Sim Services page."""
 
     # TODO: add pages for each relevant sim services page
     def open_sim_service(self, service):
@@ -921,12 +1486,12 @@ class RebootNecessary(
 
 class WifiPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
 
-    """Autopilot helper for the Sound page."""
+    """Autopilot helper for the WiFi page."""
 
     @classmethod
     def validate_dbus_object(cls, path, state):
         name = introspection.get_classname_from_path(path)
-        if name == b'ItemPage':
+        if name == b'PageComponent':
             if state['objectName'][1] == 'wifiPage':
                 return True
         return False
@@ -945,8 +1510,8 @@ class WifiPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
     @autopilot.logging.log_action(logger.debug)
     def have_wireless(self):
         try:
-            self.wait_select_single('SwitchMenuItem', text=_('Wi-Fi'))
-        except:
+            self.wait_select_single('SwitchMenu', text=_('Wi-Fi'))
+        except StateNotFoundError:
             return False
         return True
 
@@ -957,11 +1522,11 @@ class WifiPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
     @autopilot.logging.log_action(logger.debug)
     def get_wireless(self):
         return self.wait_select_single(
-            'SwitchMenuItem', text=_('Wi-Fi')).checked
+            'SwitchMenu', text=_('Wi-Fi')).checked
 
     @autopilot.logging.log_action(logger.debug)
     def _set_wireless(self, state):
-        obj = self.wait_select_single('SwitchMenuItem', text=_('Wi-Fi'))
+        obj = self.wait_select_single('SwitchMenu', text=_('Wi-Fi'))
         if obj.checked != state:
             self.pointing_device.click_object(obj)
 
@@ -977,24 +1542,37 @@ class WifiPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
 
     """
     @autopilot.logging.log_action(logger.debug)
-    def connect_to_hidden_network(self, name, security="none", password=None,
-                                  cancel=False, scroll_to_and_click=None):
-        dialog = self._click_connect_to_hidden_network(scroll_to_and_click)
+    def connect_to_hidden_network(self, name, security='none', username=None,
+                                  password=None, auth=None, protocol=None,
+                                  cancel=False):
+        dialog = self._click_connect_to_hidden_network()
+        dialog._scroll_to_and_click = self._scroll_to_and_click
         dialog.enter_name(name)
+        utils.dismiss_osk()
+
         if security:
             dialog.set_security(security)
+        if auth:
+            dialog.set_auth(auth)
+        if protocol:
+            dialog.set_protocol(protocol)
+        if username:
+            dialog.enter_username(username)
+            utils.dismiss_osk()
         if password:
             dialog.enter_password(password)
-
+            utils.dismiss_osk()
         if cancel:
+            utils.dismiss_osk()
             dialog.cancel()
             return self
         else:
+            utils.dismiss_osk()
             dialog.connect()
             return dialog
 
     @autopilot.logging.log_action(logger.debug)
-    def _click_connect_to_hidden_network(self, scroll_to_and_click):
+    def _click_connect_to_hidden_network(self):
 
         # we can't mock the qunitymenu items, so we
         # have to wait for them to be built
@@ -1002,16 +1580,13 @@ class WifiPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
 
         button = self.select_single('*',
                                     objectName='connectToHiddenNetwork')
-        if (scroll_to_and_click):
-            scroll_to_and_click(button)
-        else:
-            self.pointing_device.click_object(button)
+        self._scroll_to_and_click(button)
         return self.get_root_instance().wait_select_single(
             objectName='otherNetworkDialog')
 
     @autopilot.logging.log_action(logger.debug)
-    def go_to_previous_networks(self, scroll_to_and_click=None):
-        return self._click_previous_network(scroll_to_and_click)
+    def go_to_previous_networks(self):
+        return self._click_previous_network()
 
     """Removes previous network
 
@@ -1021,14 +1596,14 @@ class WifiPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
 
     """
     @autopilot.logging.log_action(logger.debug)
-    def remove_previous_network(self, ssid, scroll_to_and_click=None):
-        page = self.go_to_previous_networks(scroll_to_and_click)
+    def remove_previous_network(self, ssid):
+        page = self.go_to_previous_networks()
         details = page.select_network(ssid)
         details.forget_network()
         return page
 
     @autopilot.logging.log_action(logger.debug)
-    def _click_previous_network(self, scroll_to_and_click):
+    def _click_previous_network(self):
 
         # we can't mock the qunitymenu items, so we
         # have to wait for them to be built
@@ -1036,10 +1611,7 @@ class WifiPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
 
         button = self.select_single('*',
                                     objectName='previousNetwork')
-        if (scroll_to_and_click):
-            scroll_to_and_click(button)
-        else:
-            self.pointing_device.click_object(button)
+        self._scroll_to_and_click(button)
         return self.get_root_instance().wait_select_single(
             objectName='previousNetworksPage')
 
@@ -1057,57 +1629,76 @@ class OtherNetwork(
                 return True
         return False
 
+    # FIXME: Use ListItem methods instead.
+    @autopilot.logging.log_action(logger.debug)
+    def _expand_list(self, list_name):
+        item_list = self.select_single(
+            '*', objectName=list_name)
+        active_child = item_list.select_single(
+            '*', objectName='listContainer')
+        self._scroll_to_and_click(active_child)
+        # wait for it to expand
+        sleep(0.5)
+        return item_list
+
     @autopilot.logging.log_action(logger.debug)
     def enter_name(self, name):
         self._enter_name(name)
 
     @autopilot.logging.log_action(logger.debug)
     def _enter_name(self, name):
-        namefield = self.select_single('TextField',
-                                       objectName='networkname')
+        namefield = self.wait_select_single('TextField',
+                                            objectName='networkname')
+        self._scroll_to_and_click(namefield)
         namefield.write(name)
+
+    @autopilot.logging.log_action(logger.debug)
+    def enter_username(self, username):
+        self._enter_username(username)
+
+    @autopilot.logging.log_action(logger.debug)
+    def _enter_username(self, username):
+        namefield = self.wait_select_single('TextField',
+                                            objectName='username')
+        self._scroll_to_and_click(namefield)
+        namefield.write(username)
 
     @autopilot.logging.log_action(logger.debug)
     def set_security(self, security):
         """Sets the hidden network's security
 
-        :param security: Either "none", "wpa" or "wep
+        :param security: Either 'none', 'wpa', 'wep', 'wpa-ep', 'dewp', 'leap'
 
         :returns: None
-
         """
-        self._set_security(security)
 
-    @autopilot.logging.log_action(logger.debug)
-    def _expand_security_list(self):
-        sec_list = self.select_single(
-            '*', objectName='securityList')
-        active_child = sec_list.select_single(
-            '*', objectName='listContainer')
-        self.pointing_device.click_object(active_child)
-        # wait for it to expand
-        sleep(0.5)
-        return sec_list
+        # We only set security if not none, since none is default
+        if security != 'none':
+            self._set_security(security)
 
     @autopilot.logging.log_action(logger.debug)
     def _set_security(self, security):
+        s_list = self._expand_list('securityList')
+        item = None
         if security == 'none':
-            sec_list = self._expand_security_list()
-            item = sec_list.wait_select_single('*',
-                                               text=_('None'))
-            self.pointing_device.click_object(item)
+            item = s_list.wait_select_single('*', text=_('None'))
         elif security == 'wpa':
-            sec_list = self._expand_security_list()
-            item = sec_list.wait_select_single('*',
-                                               text=_('WPA & WPA2 Personal'))
-            self.pointing_device.click_object(item)
+            item = s_list.wait_select_single('*',
+                                             text=_('WPA & WPA2 Personal'))
         elif security == 'wep':
-            sec_list = self._expand_security_list()
-            item = sec_list.wait_select_single('*',
-                                               text=_('WEP'))
-            self.pointing_device.click_object(item)
+            item = s_list.wait_select_single('*', text=_('WEP'))
+        elif security == 'wpa-ep':
+            item = s_list.wait_select_single('*',
+                                             text=_('WPA & WPA2 Enterprise'))
+        elif security == 'dwep':
+            item = s_list.wait_select_single('*',
+                                             text=_('Dynamic WEP (802.1x)'))
+        elif security == 'leap':
+            item = s_list.wait_select_single('*', text=_('LEAP'))
         elif security is not None:
             raise ValueError('security type %s is not valid' % security)
+
+        self.pointing_device.click_object(item)
         # wait for ui to change
         sleep(0.5)
 
@@ -1117,9 +1708,71 @@ class OtherNetwork(
 
     @autopilot.logging.log_action(logger.debug)
     def _enter_password(self, password):
-        pwdfield = self.select_single('TextField',
-                                      objectName='password')
+        pwdfield = self.wait_select_single('TextField',
+                                           objectName='password')
+        self._scroll_to_and_click(pwdfield)
         pwdfield.write(password)
+
+    @autopilot.logging.log_action(logger.debug)
+    def set_protocol(self, protocol):
+        """Sets the hidden network's protocol.
+
+        :param protocol: Either 'pap', 'mschapv2', 'mschap', 'chap', 'gtc',
+                         or 'md5'.
+        """
+        self._set_protocol(protocol)
+
+    @autopilot.logging.log_action(logger.debug)
+    def _set_protocol(self, protocol):
+        p_list = self._expand_list('p2authList')
+        item = None
+        if protocol == 'pap':
+            item = p_list.wait_select_single(text='PAP')
+        elif protocol == 'mschapv2':
+            item = p_list.wait_select_single(text='MSCHAPv2')
+        elif protocol == 'mschap':
+            item = p_list.wait_select_single(text='MSCHAP')
+        elif protocol == 'chap':
+            item = p_list.wait_select_single(text='CHAP')
+        elif protocol == 'gtc':
+            item = p_list.wait_select_single(text='GTC')
+        elif protocol == 'md5':
+            item = p_list.wait_select_single(text='MD5')
+        elif protocol is not None:
+            raise ValueError('protocol type %s is not valid' % protocol)
+
+        self.pointing_device.click_object(item)
+        # wait for ui to change
+        sleep(0.5)
+
+    @autopilot.logging.log_action(logger.debug)
+    def set_auth(self, auth):
+        """Sets the hidden network's protocol.
+
+        :param auth: Either 'tls', 'ttls', 'leap', 'fast' or 'peap'.
+        """
+        self._set_auth(auth)
+
+    @autopilot.logging.log_action(logger.debug)
+    def _set_auth(self, auth):
+        a_list = self._expand_list('authList')
+        item = None
+        if auth == 'tls':
+            item = a_list.wait_select_single(text='TLS')
+        elif auth == 'ttls':
+            item = a_list.wait_select_single(text='TTLS')
+        elif auth == 'leap':
+            item = a_list.wait_select_single(text='LEAP')
+        elif auth == 'fast':
+            item = a_list.wait_select_single(text='FAST')
+        elif auth == 'peap':
+            item = a_list.wait_select_single(text='PEAP')
+        elif auth is not None:
+            raise ValueError('auth type %s is not valid' % auth)
+
+        self.pointing_device.click_object(item)
+        # wait for ui to change
+        sleep(0.5)
 
     @autopilot.logging.log_action(logger.debug)
     def cancel(self):
@@ -1128,7 +1781,7 @@ class OtherNetwork(
     @autopilot.logging.log_action(logger.debug)
     def _click_cancel(self):
         button = self.select_single('Button', objectName='cancel')
-        self.pointing_device.click_object(button)
+        self._scroll_to_and_click(button)
 
     @autopilot.logging.log_action(logger.debug)
     def connect(self):
@@ -1137,7 +1790,7 @@ class OtherNetwork(
     @autopilot.logging.log_action(logger.debug)
     def _click_connect(self):
         button = self.select_single('Button', objectName='connect')
-        self.pointing_device.click_object(button)
+        self._scroll_to_and_click(button)
 
 
 class PreviousNetworks(

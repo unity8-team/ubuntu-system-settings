@@ -83,10 +83,6 @@ class StorageAbout : public QObject
                 READ deviceBuildDisplayID
                 CONSTANT)
 
-    Q_PROPERTY( QString customizationBuildID
-                READ customizationBuildID
-                CONSTANT)
-
     Q_PROPERTY( QString ubuntuBuildID
                 READ ubuntuBuildID
                 CONSTANT)
@@ -102,7 +98,6 @@ public:
     QString serialNumber();
     QString vendorString();
     QString deviceBuildDisplayID();
-    QString customizationBuildID();
     QString ubuntuBuildID();
     Q_INVOKABLE QString licenseInfo(const QString &subdir) const;
     ClickModel::Roles getSortRole();
@@ -130,7 +125,6 @@ private:
     QString m_vendorString;
     QString m_deviceBuildDisplayID;
     QString m_ubuntuBuildID;
-    QString m_customizationBuildID;
     ClickModel m_clickModel;
     ClickFilterProxy m_clickFilterProxy;
     quint64 m_moviesSize;

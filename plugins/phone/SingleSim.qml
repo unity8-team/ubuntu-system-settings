@@ -28,19 +28,31 @@ Column {
     property string carrierName: sim.netReg.name
     property string carrierString: carrierName ? carrierName : i18n.tr("SIM")
 
-    ListItem.Standard {
-        objectName: "callFwd"
-        text: i18n.tr("Call forwarding")
-        progression: true
-        onClicked: pageStack.push(Qt.resolvedUrl("CallForwarding.qml"), {sim: sim})
-    }
 
     ListItem.Standard {
         objectName: "callWait"
         text: i18n.tr("Call waiting")
         progression: true
         onClicked: pageStack.push(Qt.resolvedUrl("CallWaiting.qml"), {sim: sim})
+    }
+
+    ListItem.SingleValue {
+        objectName: "callFwd"
+        text: i18n.tr("Call forwarding")
         showDivider: false
+        progression: true
+        value: {
+            if (sim.callForwarding.voiceUnconditional) {
+                return i18n.tr("All calls");
+            } else if (sim.callForwarding.voiceBusy ||
+                       sim.callForwarding.voiceNoReply ||
+                       sim.callForwarding.voiceNotReachable) {
+                return i18n.tr("Some calls")
+            } else {
+                return i18n.tr("Off")
+            }
+        }
+        onClicked: pageStack.push(Qt.resolvedUrl("CallForwarding.qml"), {sim: sim})
     }
 
     ListItem.Divider {}
@@ -50,7 +62,19 @@ Column {
         // TRANSLATORS: %1 is the name of the (network) carrier
         text: i18n.tr("%1 Services").arg(carrierString)
         progression: true
-        enabled: sim.simMng.present
+        showDivider: false
+        enabled: {
+            var num;
+            var map = sim.simMng.serviceNumbers;
+            var nums = false;
+            for(num in map) {
+                if (map.hasOwnProperty(num)) {
+                    nums = true;
+                    break;
+                }
+            }
+            return sim.simMng.present && nums;
+        }
         onClicked: pageStack.push(Qt.resolvedUrl("Services.qml"),
                                   {carrierString: carrierString, sim: sim.simMng})
     }

@@ -141,7 +141,7 @@ class SecurityTestCase(SecurityBaseTestCase):
         )
         self.assertThat(
             phone_lock_page.title,
-            Equals(_('Phone locking'))
+            Equals(_('Locking and unlocking'))
         )
 
     def test_lock_security_focus_on_entry(self):
@@ -292,11 +292,11 @@ class SecuritySimPinLockedTestCase(SecurityBaseTestCase):
             submit_button.enabled
         )
         self.main_view.scroll_to_and_click(prev_input)
-        self.keyboard.type("246")
+        prev_input.write("246")
         self.assertFalse(
             submit_button.enabled
         )
-        self.keyboard.type("8")
+        prev_input.write("2468")
 
         self.assertTrue(
             submit_button.enabled
@@ -343,8 +343,9 @@ class SecuritySimPinLockedTestCase(SecurityBaseTestCase):
         self.assertFalse(
             submit_button.enabled
         )
+
         self.main_view.scroll_to_and_click(prev_input)
-        self.keyboard.type("1234")
+        prev_input.write("1234")
 
         self.assertTrue(
             submit_button.enabled
@@ -397,11 +398,11 @@ class SecuritySimPinUnlockedTestCase(SecurityBaseTestCase):
             submit_button.enabled
         )
         self.main_view.scroll_to_and_click(prev_input)
-        self.keyboard.type("246")
+        prev_input.write("246")
         self.assertFalse(
             submit_button.enabled
         )
-        self.keyboard.type("8")
+        prev_input.write("2468")
 
         self.assertTrue(
             submit_button.enabled
@@ -448,7 +449,7 @@ class SecuritySimPinUnlockedTestCase(SecurityBaseTestCase):
             submit_button.enabled
         )
         self.main_view.scroll_to_and_click(prev_input)
-        self.keyboard.type("1234")
+        prev_input.write("1234")
 
         self.assertTrue(
             submit_button.enabled

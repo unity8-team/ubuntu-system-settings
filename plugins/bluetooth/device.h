@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 Canonical Ltd
+ * Copyright (C) 2013-2015 Canonical Ltd
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as
@@ -118,7 +118,7 @@ public:
     bool m_paired = false;
     bool m_trusted = false;
     Connection m_connection = Connection::Disconnected;
-    Strength m_strength = Strength::Fair;
+    Strength m_strength = Strength::None;
     bool m_isConnected = false;
     QSharedPointer<QDBusInterface> m_deviceInterface;
     QSharedPointer<QDBusInterface> m_audioInterface;
@@ -147,20 +147,17 @@ public:
     Device(const QMap<QString,QVariant> &properties);
     void initDevice(const QString &path, QDBusConnection &bus);
     bool isValid() const { return getType() != Type::Other; }
-    void callInterface(const QSharedPointer<QDBusInterface> &interface, const QString &method);
     void connect(ConnectionMode);
-    void connectPending();
     void makeTrusted(bool trusted);
     void disconnect(ConnectionMode);
     void setProperties(const QMap<QString,QVariant> &properties);
     void addConnectAfterPairing(const ConnectionMode mode);
 
   public Q_SLOTS:
-    void discoverServices();
+    void connectPending();
 
   private Q_SLOTS:
     void slotPropertyChanged(const QString &key, const QDBusVariant &value);
-    void slotServiceDiscoveryDone(QDBusPendingCallWatcher *call);
     void slotMakeTrustedDone(QDBusPendingCallWatcher *call);
 
   private:
@@ -168,6 +165,7 @@ public:
     void initInterface(QSharedPointer<QDBusInterface>&, const QString &path, const QString &name, QDBusConnection&);
     void updateProperty(const QString &key, const QVariant &value);
     static Type getTypeFromClass(quint32 bluetoothClass);
+    Device::Strength getStrengthFromRssi(int rssi);
 };
 
 Q_DECLARE_METATYPE(Device*)

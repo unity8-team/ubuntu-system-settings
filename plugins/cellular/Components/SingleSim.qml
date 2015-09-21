@@ -49,7 +49,6 @@ Column {
         id: dataRoamingItem
         text: i18n.tr("Data roaming")
         enabled: sim.connMan.powered
-        showDivider: false
         control: Switch {
             id: dataRoamingControl
             objectName: "roaming"
@@ -58,21 +57,6 @@ Column {
             Component.onCompleted: checked = serverChecked
             onTriggered: sim.connMan.roamingAllowed = checked
         }
-    }
-
-    ListItem.SingleValue {
-        text : i18n.tr("Hotspot disabled because Wi-Fi is off.")
-        visible: showAllUI && !hotspotItem.visible
-    }
-
-    ListItem.SingleValue {
-        id: hotspotItem
-        text: i18n.tr("Wi-Fi hotspot")
-        progression: true
-        onClicked: {
-            pageStack.push(Qt.resolvedUrl("Hotspot.qml"))
-        }
-        visible: showAllUI && (actionGroup.actionObject.valid ? actionGroup.actionObject.state : false)
     }
 
     ListItem.Standard {

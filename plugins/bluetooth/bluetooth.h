@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 Canonical Ltd
+ * Copyright (C) 2013-2015 Canonical Ltd
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as
@@ -84,6 +84,7 @@ public:
     Q_INVOKABLE void stopDiscovery();
     Q_INVOKABLE static bool isSupportedType(const int type);
     Q_INVOKABLE void trySetDiscoverable(bool discoverable);
+    Q_INVOKABLE void resetSelectedDevice();
 
 public:
     Agent * getAgent();

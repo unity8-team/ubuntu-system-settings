@@ -96,7 +96,7 @@ ItemPage {
              text: root.batterySafeForUpdate ? i18n.tr("The phone needs to restart to install the system update.") : i18n.tr("Connect the phone to power before installing the system update.")
 
              Button {
-                 text: i18n.tr("Install & Restart")
+                 text: i18n.tr("Restart & Install")
                  visible: root.batterySafeForUpdate ? true : false
                  color: UbuntuColors.orange
                  onClicked: {
@@ -106,7 +106,7 @@ ItemPage {
                  }
              }
              Button {
-                 text: i18n.tr("Not Now")
+                 text: i18n.tr("Cancel")
                  color: UbuntuColors.warmGrey
                  onClicked: {
                      updateList.currentIndex = 0;
@@ -205,8 +205,7 @@ ItemPage {
         }
 
         onCredentialsDeleted: {
-            credentialsNotification.visible = false;
-            uoaConfig.exec();
+            credentialsNotification.visible = true;
         }
 
         onSystemUpdateDownloaded: {
@@ -714,8 +713,10 @@ ItemPage {
             spacing: units.gu(2)
 
             Image {
-                source: Qt.resolvedUrl("file:///usr/share/ubuntu/settings/system/icons/distributor-logo.png")
+                source: Qt.resolvedUrl("file:///usr/share/icons/suru/places/scalable/distributor-logo.svg")
                 anchors.horizontalCenter: parent.horizontalCenter
+                height: width
+                width: 96
                 NumberAnimation on rotation {
                     from: 0
                     to: 360
