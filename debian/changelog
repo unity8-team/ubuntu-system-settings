@@ -1,8 +1,15 @@
-ubuntu-system-settings (0.3+15.04.20150918-0ubuntu2) UNRELEASED; urgency=medium
+ubuntu-system-settings (0.3+15.04.20150922.2-0ubuntu1) vivid; urgency=medium
 
+  [ Ken VanDine ]
   * Updated version for 15.04
 
- -- Ken VanDine <ken.vandine@canonical.com>  Mon, 21 Sep 2015 10:33:56 -0400
+  [ CI Train Bot ]
+  * New rebuild forced.
+
+  [ Manuel de la Pena ]
+  * No changes, just recompile with the new udm.
+
+ -- Bill Filler <ci-train-bot@canonical.com>  Tue, 22 Sep 2015 16:04:19 +0000
 
 ubuntu-system-settings (0.3+15.10.20150918-0ubuntu1) wily; urgency=medium
 
