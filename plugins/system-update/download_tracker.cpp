@@ -27,7 +27,7 @@
 
 namespace {
     const QString DOWNLOAD_COMMAND = "post-download-command";
-    const QString APP_ID = "app_id";
+    const QString APP_ID = "app-id";
     const QString PKCON_COMMAND = "pkcon";
     const QString DOWNLOAD_MANAGER_SHA512 = "sha512";
 }
