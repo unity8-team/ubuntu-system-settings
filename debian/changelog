@@ -1,3 +1,15 @@
+ubuntu-system-settings (0.3+15.10.20150924-0ubuntu1) wily; urgency=medium
+
+  [ CI Train Bot ]
+  * New rebuild forced.
+
+  [ jonas-drange ]
+  * [autopilot] use wait_select_single instead of select_single for all
+    click_item
+  * [security-privacy] fix test broken by recent ui changes
+
+ -- Jonas G. Drange <ci-train-bot@canonical.com>  Thu, 24 Sep 2015 09:54:48 +0000
+
 ubuntu-system-settings (0.3+15.10.20150918-0ubuntu1) wily; urgency=medium
 
   [ jonas-drange ]
