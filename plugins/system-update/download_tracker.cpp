@@ -29,6 +29,7 @@ namespace {
     const QString DOWNLOAD_COMMAND = "post-download-command";
     const QString PACKAGE_NAME = "package-name";
     const QString TITLE = "title";
+    const QString SHOW_IN_INDICATOR = "indicator-shown";
     const QString PKCON_COMMAND = "pkcon";
     const QString DOWNLOAD_MANAGER_SHA512 = "sha512";
 }
@@ -95,6 +96,7 @@ void DownloadTracker::startService()
         vmap[DOWNLOAD_COMMAND] = args;
         vmap[PACKAGE_NAME] = m_packageName;
         vmap[TITLE] = m_title;
+        vmap[SHOW_IN_INDICATOR] = m_show_in_indicator;
         StringMap map;
         map[X_CLICK_TOKEN] = m_clickToken;
         DownloadStruct dstruct(m_downloadUrl, m_download_sha512, DOWNLOAD_MANAGER_SHA512, vmap, map);
