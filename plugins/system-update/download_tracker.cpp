@@ -28,6 +28,7 @@
 namespace {
     const QString DOWNLOAD_COMMAND = "post-download-command";
     const QString APP_ID = "app-id";
+    const QString TITLE = "title";
     const QString PKCON_COMMAND = "pkcon";
     const QString DOWNLOAD_MANAGER_SHA512 = "sha512";
 }
@@ -68,9 +69,17 @@ void DownloadTracker::setPackageName(const QString& package)
     }
 }
 
+void DownloadTracker::setTitle(const QString& title)
+{
+    if (!title.isEmpty()) {
+        m_title = title;
+        startService();
+    }
+}
+
 void DownloadTracker::startService()
 {
-    if (!m_clickToken.isEmpty() && !m_downloadUrl.isEmpty() && !m_packageName.isEmpty()) {
+    if (!m_clickToken.isEmpty() && !m_downloadUrl.isEmpty() && !m_packageName.isEmpty() && !m_title.isEmpty()) {
         if (m_manager == nullptr) {
             m_manager = Manager::createSessionManager("", this);
 
@@ -85,6 +94,7 @@ void DownloadTracker::startService()
         args << command << "-p" << "install-local" << "$file";
         vmap[DOWNLOAD_COMMAND] = args;
         vmap[APP_ID] = m_packageName;
+        vmap[TITLE] = m_title;
         StringMap map;
         map[X_CLICK_TOKEN] = m_clickToken;
         DownloadStruct dstruct(m_downloadUrl, m_download_sha512, DOWNLOAD_MANAGER_SHA512, vmap, map);

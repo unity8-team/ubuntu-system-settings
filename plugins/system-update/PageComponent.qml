@@ -547,6 +547,7 @@ ItemPage {
                                 id: tracker
                                 objectName: "tracker"
                                 packageName: modelData.packageName
+                                title: modelData.title
                                 clickToken: modelData.clickToken
                                 download: modelData.downloadUrl
                                 downloadSha512: modelData.downloadSha512

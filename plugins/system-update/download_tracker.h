@@ -42,6 +42,7 @@ class DownloadTracker : public QObject
     Q_PROPERTY(QString clickToken READ clickToken WRITE setClickToken)
     Q_PROPERTY(QString download READ download WRITE setDownload)
     Q_PROPERTY(QString packageName READ packageName WRITE setPackageName)
+    Q_PROPERTY(QString title READ title WRITE setTitle)
     Q_PROPERTY(QString downloadSha512 READ downloadSha512 WRITE setDownloadSha512)
     Q_PROPERTY(int progress READ progress NOTIFY progressChanged)
 
@@ -55,11 +56,13 @@ public:
     QString download() { return m_downloadUrl; }
     QString clickToken() { return m_clickToken; }
     QString packageName() { return m_packageName; }
+    QString title() { return m_title; }
     QString downloadSha512() { return m_download_sha512; }
     int progress() { return m_progress; }
     void setDownload(const QString& url);
     void setClickToken(const QString& token);
     void setPackageName(const QString& package);
+    void setTitle(const QString& title);
     void setDownloadSha512(const QString &sha512) { m_download_sha512 = sha512; }
 
 public Q_SLOTS:
@@ -84,6 +87,7 @@ private:
     QString m_clickToken = QString::null;
     QString m_downloadUrl = QString::null;
     QString m_packageName = QString::null;
+    QString m_title = QString::null;
     Download* m_download = nullptr;
     Manager* m_manager = nullptr;
     int m_progress = 0;
