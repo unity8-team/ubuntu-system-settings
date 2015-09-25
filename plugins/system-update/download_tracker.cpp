@@ -27,7 +27,7 @@
 
 namespace {
     const QString DOWNLOAD_COMMAND = "post-download-command";
-    const QString APP_ID = "app-id";
+    const QString PACKAGE_NAME = "package-name";
     const QString TITLE = "title";
     const QString PKCON_COMMAND = "pkcon";
     const QString DOWNLOAD_MANAGER_SHA512 = "sha512";
@@ -93,7 +93,7 @@ void DownloadTracker::startService()
         QString command = getPkconCommand();
         args << command << "-p" << "install-local" << "$file";
         vmap[DOWNLOAD_COMMAND] = args;
-        vmap[APP_ID] = m_packageName;
+        vmap[PACKAGE_NAME] = m_packageName;
         vmap[TITLE] = m_title;
         StringMap map;
         map[X_CLICK_TOKEN] = m_clickToken;
