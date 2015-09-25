@@ -77,6 +77,9 @@ def load(mock, parameters):
             'HotspotStored': _parameters.get(
                 'HotspotStored', dbus.Boolean(False)
             ),
+            'ModemAvailable': _parameters.get(
+                'ModemAvailable', dbus.Boolean(True)
+            ),
             'FlightModeSwitchEnabled': _parameters.get(
                 'FlightModeSwitchEnabled', dbus.Boolean(False)
             ),

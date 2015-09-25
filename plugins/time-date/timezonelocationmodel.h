@@ -76,8 +76,7 @@ Q_SIGNALS:
     void modelUpdated();
 
 public Q_SLOTS:
-    void processModelResult(TzLocation);
-    void store();
+    void store(QList<TzLocation> sortedLocations);
     void filterFinished();
 
 private:
@@ -85,7 +84,8 @@ private:
     QList<TzLocation> m_originalLocations;
     QString m_pattern;
 
-    TimeZonePopulateWorker *m_workerThread;
+    QThread *m_workerThread;
+    TimeZonePopulateWorker *m_populateWorker;
 
     bool substringFilter(const QString& input);
     QFutureWatcher<TzLocation> m_watcher;
@@ -94,15 +94,16 @@ private:
 
 Q_DECLARE_METATYPE (TimeZoneLocationModel::TzLocation)
 
-class TimeZonePopulateWorker : public QThread
+class TimeZonePopulateWorker : public QObject
 {
     Q_OBJECT
 
-public:
+public slots:
     void run();
 
 Q_SIGNALS:
-    void resultReady(TimeZoneLocationModel::TzLocation);
+    void resultReady(const QList<TimeZoneLocationModel::TzLocation> &sortedList);
+    void finished();
 
 private:
     void buildCityMap();

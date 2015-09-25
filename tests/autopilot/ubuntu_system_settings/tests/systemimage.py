@@ -46,3 +46,9 @@ def Info(self):
         self.props['last_update_date'],
         self.props['version_detail']
     )
+
+
+@dbus.service.method(MAIN_IFACE,
+                     in_signature='', out_signature='a{ss}')
+def Information(self):
+    return dbus.Dictionary({}, signature='ss')

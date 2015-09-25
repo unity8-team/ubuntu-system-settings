@@ -68,7 +68,22 @@ HotspotItem::HotspotItem(const QVariantMap &staticData, QObject *parent):
     reply.waitForFinished();
     if (reply.isValid()) {
         QString device = reply.argumentAt<1>();
-        supportedDevice = !(device == "mako" || device == "flo");
+        if (device == "mako" || device == "flo") {
+            setVisibility(false);
+            return;
+        }
+    }
+
+    QDBusInterface m_NetStatusPropertiesIface(
+            "com.ubuntu.connectivity1",
+            "/com/ubuntu/connectivity1/NetworkingStatus",
+            "org.freedesktop.DBus.Properties",
+            QDBusConnection::sessionBus());
+    QDBusPendingReply<QVariant> modemReply = m_NetStatusPropertiesIface.call(
+        "Get", "com.ubuntu.connectivity1.NetworkingStatus", "ModemAvailable");
+    modemReply.waitForFinished();
+    if (modemReply.isValid()) {
+        supportedDevice = modemReply.argumentAt<0>().toBool();
     }
 
     setVisibility(supportedDevice);
