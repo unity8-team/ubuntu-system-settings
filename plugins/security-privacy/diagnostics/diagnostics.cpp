@@ -71,10 +71,10 @@ void Diagnostics::slotChanged()
     Q_EMIT reportCrashesChanged();
 }
 
-bool Diagnostics::canReportCrashes()
+bool Diagnostics::reportCrashes()
 {
     if (m_whoopsieInterface.isValid()) {
-        return m_whoopsieInterface.property("ReportCrashes").toBool();
+        return m_whoopsieInterface.property("AutomaticallyReportCrashes").toBool();
     }
     return false;
 }
