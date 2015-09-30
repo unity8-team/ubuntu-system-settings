@@ -31,6 +31,7 @@
 #include <core/trust/store.h>
 
 #include <glib.h>
+#include <ubuntu-app-launch.h>
 
 class Application
 {
@@ -83,27 +84,20 @@ public:
     }
 
     QString resolveDesktopFilename(const QString &id) {
-        QString localShare =
-            QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation);
-        QString desktopFilename(QString("%1/applications/%2.desktop").
-                                arg(localShare).arg(id));
-        if (QFile(desktopFilename).exists())
-            return desktopFilename;
+        char * dir = nullptr;
+        char * file = nullptr;
 
-        /* search the directory for a matching filename */
-        QDir dir(QString("%1/applications").arg(localShare));
-        dir.setFilter(QDir::Files);
-        QStringList fileList = dir.entryList();
-        QString pattern = QString("%1*.desktop").arg(id);
-        for (int i = 0; i < fileList.count(); i++) {
-            /* stop at the first match */
-            if (QDir::match(pattern, fileList[i])) {
-                return QString("%1/applications/%2").arg(localShare).arg(fileList[i]);
-            }
+        QString fileName;
+
+        if (ubuntu_app_launch_application_info(id.toStdString().c_str(), &dir, &file)) {
+            fileName = QString::fromUtf8(g_strjoin("/", dir, file, NULL));
+        } else {
+            qWarning() << "No desktop file found for app id: " << id;
         }
 
-        qWarning() << "No desktop file found for app id: " << id;
-        return QString();
+        g_free (dir);
+        g_free (file);
+        return fileName;
     }
 
     QString resolveIcon(const QString &iconName, const QString &basePath) {

@@ -47,10 +47,12 @@ add_library(UbuntuSecurityPrivacyPanel MODULE ${PANEL_SOURCES} ${QML_SOURCES})
 qt5_use_modules(UbuntuSecurityPrivacyPanel Qml Quick DBus)
 
 pkg_check_modules(TRUST_STORE REQUIRED trust-store)
+pkg_check_modules(UBUNTU_LAUNCH REQUIRED ubuntu-app-launch-2)
 
 include_directories(
     ${CMAKE_CURRENT_BINARY_DIR}
     ${TRUST_STORE_INCLUDE_DIRS}
+    ${UBUNTU_LAUNCH_INCLUDE_DIRS}
     ${GLIB_INCLUDE_DIRS}
 )
 
@@ -60,6 +62,7 @@ target_link_libraries (UbuntuSecurityPrivacyPanel
     ${ACCOUNTSSERVICE_LDFLAGS}
     ${GOBJECT_LDFLAGS}
     ${TRUST_STORE_LDFLAGS}
+    ${UBUNTU_LAUNCH_LDFLAGS}
     ${GLIB_LDFLAGS}
 )
 install(TARGETS UbuntuSecurityPrivacyPanel UbuntuSecurityPrivacyHelper DESTINATION ${PLUG_DIR})
