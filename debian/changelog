@@ -1,3 +1,10 @@
+ubuntu-system-settings (0.3+15.10.20150930-0ubuntu1) wily; urgency=medium
+
+  * Used the correct property to determine if whoopsie will
+    automatically report crashes (LP: #1494442)
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Wed, 30 Sep 2015 15:23:14 +0000
+
 ubuntu-system-settings (0.3+15.10.20150924-0ubuntu1) wily; urgency=medium
 
   [ CI Train Bot ]
