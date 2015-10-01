@@ -88,8 +88,13 @@ public:
         char * file = nullptr;
 
         QString fileName;
+        std::string appId;
 
-        if (ubuntu_app_launch_application_info(id.toStdString().c_str(), &dir, &file)) {
+        appId = std::string(ubuntu_app_launch_triplet_to_app_id(id.toStdString().c_str(),
+                                                                "first-listed-app",
+                                                                "current-user-version"));
+
+        if (ubuntu_app_launch_application_info(appId.c_str(), &dir, &file)) {
             fileName = QString::fromUtf8(g_strjoin("/", dir, file, NULL));
         } else {
             qWarning() << "No desktop file found for app id: " << id;
