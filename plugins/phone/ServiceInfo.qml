@@ -117,7 +117,8 @@ ItemPage {
         control: Button {
             width: parent.width - units.gu(4)
             text: i18n.tr("Call")
-            onClicked: Qt.openUrlExternally("tel:///" + serviceNumber)
+            onClicked: Qt.openUrlExternally("tel:///" + encodeURIComponent(
+                serviceNumber))
         }
     }
 }
