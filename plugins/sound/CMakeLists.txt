@@ -1,6 +1,5 @@
 set(QML_SOURCES
     PageComponent.qml
-    SilentModeWarning.qml
     SoundsList.qml
 )
 
