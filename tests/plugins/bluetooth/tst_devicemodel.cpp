@@ -78,6 +78,9 @@ void DeviceModelTest::cleanup()
 
 void DeviceModelTest::testDeviceFoundOnStart()
 {
+    // FIXME needs to take a bit more time especially on i386
+    processEvents(5);
+
     QCOMPARE(m_devicemodel->rowCount(), 1);
 }
 
