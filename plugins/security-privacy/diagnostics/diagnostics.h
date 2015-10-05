@@ -29,15 +29,15 @@
 class Diagnostics : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY( bool canReportCrashes
-                READ canReportCrashes
+    Q_PROPERTY( bool reportCrashes
+                READ reportCrashes
                 WRITE setReportCrashes
                 NOTIFY reportCrashesChanged )
 
 public:
     explicit Diagnostics(QObject *parent = 0);
     ~Diagnostics();
-    bool canReportCrashes();
+    bool reportCrashes();
     Q_INVOKABLE void setReportCrashes(bool report);
     Q_INVOKABLE QString systemIdentifier();
 
