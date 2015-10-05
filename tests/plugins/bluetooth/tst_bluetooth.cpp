@@ -213,28 +213,28 @@ void BluetoothTest::testIsDiscovering()
     m_bluetooth->stopDiscovery();
     setDiscovering(false);
 
-    processEvents();
+    processEvents(5);
 
     QCOMPARE(m_bluetooth->isDiscovering(), false);
 
     m_bluetooth->startDiscovery();
     setDiscovering(true);
 
-    processEvents();
+    processEvents(5);
 
     QCOMPARE(m_bluetooth->isDiscovering(), true);
 
     m_bluetooth->toggleDiscovery();
     setDiscovering(false);
 
-    processEvents();
+    processEvents(5);
 
     QCOMPARE(m_bluetooth->isDiscovering(), false);
 
     m_bluetooth->toggleDiscovery();
     setDiscovering(true);
 
-    processEvents();
+    processEvents(5);
 
     QCOMPARE(m_bluetooth->isDiscovering(), true);
 }
