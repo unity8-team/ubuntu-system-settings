@@ -159,10 +159,17 @@ ItemPage {
             }
 
             ListItem.SingleValue {
+                property string versionIdentifier: {
+                    var num = UpdateManager.currentBuildNumber;
+                    var ota = UpdateManager.detailedVersionDetails['ota'];
+                    num = num ? num : "";
+                    return ota ? ota : num.toString();
+                }
                 objectName: "osItem"
                 text: i18n.tr("OS")
-                value: "Ubuntu " + deviceInfos.version(DeviceInfo.Os) +
-                       (UpdateManager.currentBuildNumber ? " (r%1)".arg(UpdateManager.currentBuildNumber) : "")
+                value: "Ubuntu %1%2"
+                    .arg(deviceInfos.version(DeviceInfo.Os))
+                    .arg(versionIdentifier ? " (%1)".arg(versionIdentifier) : "")
                 progression: true
                 onClicked: pageStack.push(Qt.resolvedUrl("Version.qml"))
             }

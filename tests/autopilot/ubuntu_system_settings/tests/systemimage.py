@@ -49,6 +49,23 @@ def Info(self):
 
 
 @dbus.service.method(MAIN_IFACE,
-                     in_signature='', out_signature='a{ss}')
+                     in_signature='',
+                     out_signature='a{ss}')
 def Information(self):
-    return dbus.Dictionary({}, signature='ss')
+    vd_dict = self.props['version_detail']
+    vd_str = ''
+    for i, k in enumerate(vd_dict):
+        cmma = ','
+        if (i == len(vd_dict) - 1):
+            cmma = ''
+        vd_str += '%s=%s%s' % (k, str(vd_dict[k]), cmma)
+
+    return dbus.Dictionary({
+        'target_build_number': str(self.props['target_build_number']),
+        'device_name': self.props['device'],
+        'last_check_date': self.props['last_check_date'],
+        'version_detail': vd_str,
+        'channel_name': self.props['channel'],
+        'last_update_date': self.props['last_update_date'],
+        'current_build_number': str(self.props['build_number'])
+    }, signature='ss')

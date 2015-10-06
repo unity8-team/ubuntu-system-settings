@@ -15,7 +15,7 @@ from gi.repository import GLib
 from autopilot.matchers import Eventually
 from autopilot.platform import model
 from testtools import skipIf
-from testtools.matchers import Equals, NotEquals
+from testtools.matchers import Equals, NotEquals, Contains
 
 from ubuntu_system_settings.tests import (
     AboutBaseTestCase,
@@ -157,6 +157,11 @@ class AboutSystemImageTestCase(AboutSystemImageBaseTestCase):
         self.assertEquals(
             last_updated_date_displayed, self._get_last_updated_date())
 
+    def test_normal_version(self):
+        """Checks whether a non-ota release gets an rev number."""
+        os_item = self.about_page.wait_select_single(objectName='osItem')
+        self.assertThat(os_item.value, Contains(' (42)'))
+
     def test_check_for_updates(self):
         """
         Checks whether clicking on Check for Updates brings us
@@ -165,6 +170,23 @@ class AboutSystemImageTestCase(AboutSystemImageBaseTestCase):
         system_updates_page = self.about_page.go_to_check_for_updates()
         self.assertThat(
             system_updates_page.visible, Eventually(Equals(True)))
+
+
+class AboutOtaTestCase(AboutSystemImageBaseTestCase):
+    systemimage_parameters = {
+        'version_detail': {
+            'ubuntu': '20150123.1',
+            'device': '20153344.1',
+            'custom': '201594834.1',
+            'version': '257',
+            'ota': 'OTA-7'
+        }
+    }
+
+    def test_ota_binding(self):
+        """Checks whether a stable release gets an OTA number."""
+        os_item = self.about_page.wait_select_single(objectName='osItem')
+        self.assertThat(os_item.value, Contains(' (OTA-7)'))
 
 
 class StorageTestCase(StorageBaseTestCase):
