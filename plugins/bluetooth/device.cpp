@@ -99,6 +99,8 @@ void Device::setConnectAfterPairing(bool value)
 
 void Device::disconnect()
 {
+    setConnection(Device::Disconnecting);
+
     QDBusPendingCall call = m_bluezDevice->Disconnect();
 
     QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(call, this);
@@ -108,14 +110,33 @@ void Device::disconnect()
         if (reply.isError()) {
             qWarning() << "Could not disconnect device:"
                        << reply.error().message();
+
+            // Make sure we switch the connection indicator back to
+            // a sane state
+            updateConnection();
         }
 
         watcher->deleteLater();
     });
 }
 
+void Device::connectAfterPairing()
+{
+    if (!m_connectAfterPairing)
+        return;
+
+    connect();
+}
+
 void Device::pair()
 {
+    if (m_paired) {
+        // If we are already paired we just have to make sure we
+        // trigger the connection process if we have to
+        connectAfterPairing();
+        return;
+    }
+
     auto call = m_bluezDevice->asyncCall("Pair");
 
     QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(call, this);
@@ -125,10 +146,9 @@ void Device::pair()
         if (reply.isError()) {
            qWarning() << "Failed to pair with device:"
                       << reply.error().message();
-        } else if (m_connectAfterPairing) {
-            m_connectAfterPairing = false;
-            connect();
         }
+
+        connectAfterPairing();
 
         watcher->deleteLater();
     });
@@ -136,6 +156,11 @@ void Device::pair()
 
 void Device::connect()
 {
+    if (m_isConnected)
+       return;
+
+    setConnection(Device::Connecting);
+
     QDBusPendingCall call = m_bluezDevice->asyncCall("Connect");
 
     QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(call, this);
@@ -145,6 +170,10 @@ void Device::connect()
         if (reply.isError()) {
             qWarning() << "Could not connect device:"
                        << reply.error().message();
+
+            // Make sure we switch the connection indicator back to
+            // a correct state
+            updateConnection();
         } else {
             makeTrusted(true);
         }
@@ -281,18 +310,7 @@ void Device::updateConnection()
 {
     Connection c;
 
-    /* The "State" property is a little more useful this "Connected" bool
-       because the former tells us Bluez *knows* a device is connecting.
-       So use "Connected" only as a fallback */
-
-    if ((m_state == "connected") || (m_state == "playing"))
-        c = Connection::Connected;
-    else if (m_state == "connecting")
-        c = Connection::Connecting;
-    else if (m_state == "disconnected")
-        c = Connection::Disconnected;
-    else
-        c = m_isConnected ? Connection::Connected : Connection::Disconnected;
+    c = m_isConnected ? Connection::Connected : Connection::Disconnected;
 
     setConnection(c);
 }
@@ -303,9 +321,6 @@ void Device::updateProperty(const QString &key, const QVariant &value)
         setName(value.toString());
     } else if (key == "Address") {
         setAddress(value.toString());
-    } else if (key == "State") { // org.bluez.Audio, org.bluez.Headset
-        m_state = value.toString();
-        updateConnection();
     } else if (key == "Connected") {
         m_isConnected = value.toBool();
         updateConnection();
