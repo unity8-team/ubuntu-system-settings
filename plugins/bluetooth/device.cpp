@@ -114,6 +114,26 @@ void Device::disconnect()
     });
 }
 
+void Device::pair()
+{
+    auto call = m_bluezDevice->asyncCall("Pair");
+
+    QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(call, this);
+    QObject::connect(watcher, &QDBusPendingCallWatcher::finished, [this](QDBusPendingCallWatcher *watcher) {
+        QDBusPendingReply<void> reply = *watcher;
+
+        if (reply.isError()) {
+           qWarning() << "Failed to pair with device:"
+                      << reply.error().message();
+        } else if (m_connectAfterPairing) {
+            m_connectAfterPairing = false;
+            connect();
+        }
+
+        watcher->deleteLater();
+    });
+}
+
 void Device::connect()
 {
     QDBusPendingCall call = m_bluezDevice->asyncCall("Connect");

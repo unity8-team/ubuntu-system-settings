@@ -181,7 +181,13 @@ void Bluetooth::connectDevice(const QString &address)
         return;
     }
 
-    device->connect();
+    if (!device->isPaired()) {
+        device->setConnectAfterPairing(true);
+        device->pair();
+    }
+    else {
+        device->connect();
+    }
 }
 
 void Bluetooth::removeDevice()
