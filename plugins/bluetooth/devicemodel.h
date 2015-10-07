@@ -119,6 +119,7 @@ private:
     void emitRowChanged(int row);
 
     void setDiscovering(bool value);
+    void setupAsDefaultAgent();
 
 private Q_SLOTS:
     void slotInterfacesAdded(const QDBusObjectPath &objectPath, InterfaceList ifacesAndProps);

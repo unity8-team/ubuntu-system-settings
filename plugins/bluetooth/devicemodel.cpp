@@ -92,9 +92,16 @@ DeviceModel::DeviceModel(QDBusConnection &dbus, QObject *parent):
                 qWarning() << "Failed to register our agent with BlueZ:"
                            << reply.error().message();
             }
+            else {
+                setupAsDefaultAgent();
+            }
 
             watcher->deleteLater();
         });
+    }
+    else {
+        qWarning() << "Could not register agent with BlueZ service as "
+                   << "the agent manager is not available!";
     }
 
     connect(&m_timer, SIGNAL(timeout()), this, SLOT(slotTimeout()));
@@ -103,6 +110,8 @@ DeviceModel::DeviceModel(QDBusConnection &dbus, QObject *parent):
 DeviceModel::~DeviceModel()
 {
     clearAdapter();
+
+    qWarning() << "Releasing device model ..";
 
     if (m_bluezAgentManager.isValid()) {
         auto call = m_bluezAgentManager.UnregisterAgent(QDBusObjectPath(DBUS_ADAPTER_AGENT_PATH));
@@ -119,6 +128,20 @@ DeviceModel::~DeviceModel()
     }
 }
 
+void DeviceModel::setupAsDefaultAgent()
+{
+    auto call = m_bluezAgentManager.RequestDefaultAgent(QDBusObjectPath(DBUS_ADAPTER_AGENT_PATH));
+    watchCall(call, [=](QDBusPendingCallWatcher *watcher) {
+        QDBusPendingReply<void> reply = *watcher;
+
+        if (reply.isError()) {
+            qWarning() << "Failed to setup ourself as default agent: "
+                       << reply.error().message();
+        }
+
+        watcher->deleteLater();
+    });
+}
 
 void DeviceModel::slotInterfacesAdded(const QDBusObjectPath &objectPath, InterfaceList ifacesAndProps)
 {

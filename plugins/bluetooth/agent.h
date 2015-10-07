@@ -41,22 +41,29 @@ public:
     Q_INVOKABLE void confirmPasskey(uint tag, bool confirmed);
     Q_INVOKABLE void providePasskey(uint tag, bool provided, uint passkey);
     Q_INVOKABLE void providePinCode(uint tag, bool provided, QString pinCode);
+    Q_INVOKABLE void displayPinCodeCallback(uint tag);
     Q_INVOKABLE void displayPasskeyCallback(uint tag);
+    Q_INVOKABLE void authorizationRequestCallback(uint tag, bool allow);
 
 public Q_SLOTS: // received from the system's bluez service
     void Cancel();
+    void DisplayPinCode(const QDBusObjectPath &path, QString pincode);
     void DisplayPasskey(const QDBusObjectPath &path, uint passkey, ushort entered);
     void Release();
     void RequestConfirmation(const QDBusObjectPath &path, uint passkey);
     uint RequestPasskey(const QDBusObjectPath &path);
     QString RequestPinCode(const QDBusObjectPath &path);
+    void RequestAuthorization(const QDBusObjectPath &path);
 
 Q_SIGNALS:
     void pinCodeNeeded(int tag, Device* device);
     void passkeyNeeded(int tag, Device* device);
     void passkeyConfirmationNeeded(int tag, Device* device, QString passkey);
+    void displayPinCodeNeeded(int tag, Device* device, QString pincode);
     void displayPasskeyNeeded(int tag, Device* device, QString passkey, ushort entered);
-    void pairingDone();
+    void releaseNeeded();
+    void cancelNeeded();
+    void authorizationRequested(int tag, Device* device);
 
 private:
     Q_DISABLE_COPY(Agent)

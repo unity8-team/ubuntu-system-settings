@@ -71,12 +71,28 @@ ItemPage {
     }
 
     Component {
+       id: displayPinCodeDialog
+       DisplayPinCodeDialog { }
+    }
+
+    Component {
         id: displayPasskeyDialog
         DisplayPasskeyDialog { }
     }
 
+    Component {
+        id: displayAuthorizationRequestDialog
+        DisplayAuthorizationRequestDialog { }
+    }
+
     Connections {
         target: backend.agent
+        onCancelNeeded: {
+            if (!root.dialogPopupId)
+                return;
+
+            PopupUtils.close(root.dialogPopupId);
+        }
         onPasskeyConfirmationNeeded: {
             var request_tag = tag
             var popup = PopupUtils.open(confirmPasskeyDialog, root, {passkey: passkey, name: device.name})
@@ -95,6 +111,15 @@ ItemPage {
             popup.canceled.connect(function() {target.providePinCode(request_tag, false, "")})
             popup.provided.connect(function(pinCode) {target.providePinCode(request_tag, true, pinCode)})
         }
+        onDisplayPinCodeNeeded: {
+            if (!root.dialogPopupId)
+            {
+                var request_tag = tag
+                root.dialogPopupId  = PopupUtils.open(displayPinCodeDialog, root, {pincode: passkey, name: device.name})
+                root.dialogPopupId.canceled.connect(function() {root.dialogPopupId = null;
+                    target.displayPinCodeCallback(request_tag)})
+            }
+        }
         onDisplayPasskeyNeeded: {
             if (!root.dialogPopupId)
             {
@@ -109,9 +134,24 @@ ItemPage {
                 root.dialogPopupId.entered = entered
             }
         }
-        onPairingDone: {
+        onReleaseNeeded: {
             if (root.dialogPopupId)
                 PopupUtils.close(root.dialogPopupId)
+        }
+        onAuthorizationRequested: {
+            if (!root.dialogPopupId)
+            {
+                var request_tag = tag
+                root.dialogPopupId  = PopupUtils.open(displayAuthorizationRequestDialog, root, {name: device.name})
+                root.dialogPopupId.accepted.connect(function() {
+                    root.dialogPopupId = null;
+                    target.authorizationRequestCallback(request_tag, true)
+                })
+                root.dialogPopupId.declined.connect(function() {
+                    root.dialogPopupId = null;
+                    target.authorizationRequestCallback(request_tag, false)
+                })
+            }
         }
     }
 
@@ -210,7 +250,6 @@ ItemPage {
                 }
             }
 
-            //  Connnected Headset(s)
             ListItem.Standard {
                 id: connectedHeader
                 text: i18n.tr("Connected devices:")
@@ -247,8 +286,6 @@ ItemPage {
                     }
                 }
             }
-
-            //  Disconnnected Headset(s)
 
             SettingsItemTitle {
                 id: disconnectedHeader
@@ -291,7 +328,6 @@ ItemPage {
                 enabled: false
             }
 
-            //  Devices that connect automatically
             SettingsItemTitle {
                 id: autoconnectHeader
                 text: i18n.tr("Connect automatically when detected:")
