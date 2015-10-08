@@ -161,7 +161,7 @@ ItemPage {
             ListItem.SingleValue {
                 property string versionIdentifier: {
                     var num = UpdateManager.currentBuildNumber;
-                    var ota = UpdateManager.detailedVersionDetails['ota'];
+                    var ota = UpdateManager.detailedVersionDetails['tag'];
                     num = num ? num : "";
                     return ota ? ota : num.toString();
                 }
