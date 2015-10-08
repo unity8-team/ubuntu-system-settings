@@ -120,9 +120,10 @@ public:
     Connection m_connection = Connection::Disconnected;
     Strength m_strength = Strength::None;
     bool m_isConnected = false;
-    bool m_connectAfterPairing;
+    bool m_connectAfterPairing = false;
     QScopedPointer<BluezDevice1> m_bluezDevice;
     QScopedPointer<FreeDesktopProperties> m_bluezDeviceProperties;
+    bool m_isPairing = false;
 
   protected:
     void setName(const QString &name);

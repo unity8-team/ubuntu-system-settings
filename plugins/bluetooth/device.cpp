@@ -26,8 +26,7 @@
 
 #include "dbus-shared.h"
 
-Device::Device(const QString &path, QDBusConnection &bus) :
-    m_connectAfterPairing(false)
+Device::Device(const QString &path, QDBusConnection &bus)
 {
     initDevice(path, bus);
 }
@@ -137,6 +136,10 @@ void Device::pair()
         return;
     }
 
+    setConnection(Device::Connecting);
+
+    m_isPairing = true;
+
     auto call = m_bluezDevice->asyncCall("Pair");
 
     QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(call, this);
@@ -144,11 +147,12 @@ void Device::pair()
         QDBusPendingReply<void> reply = *watcher;
 
         if (reply.isError()) {
-           qWarning() << "Failed to pair with device:"
-                      << reply.error().message();
+            qWarning() << "Failed to pair with device:"
+                       << reply.error().message();
+            updateConnection();
         }
 
-        connectAfterPairing();
+        m_isPairing = false;
 
         watcher->deleteLater();
     });
@@ -156,7 +160,13 @@ void Device::pair()
 
 void Device::connect()
 {
-    if (m_isConnected)
+    // If we have just paired then the device switched to connected = true for
+    // a short moment as BlueZ opened up a RFCOMM channel to perform SDP. If
+    // we should connect with the device on specific profiles now we go ahead
+    // here even if we're marked as connected as this still doesn't mean we're
+    // connected on any profile. Calling org.bluez.Device1.Connect multiple
+    // times doesn't hurt an will not fail.
+    if (m_isConnected && !m_connectAfterPairing)
        return;
 
     setConnection(Device::Connecting);
@@ -170,13 +180,15 @@ void Device::connect()
         if (reply.isError()) {
             qWarning() << "Could not connect device:"
                        << reply.error().message();
-
-            // Make sure we switch the connection indicator back to
-            // a correct state
-            updateConnection();
         } else {
             makeTrusted(true);
         }
+
+        // Regardless if the Connected property has changed or not we update
+        // the connection state here as the connection process is over now
+        // and we should have received any state change already at this
+        // point.
+        updateConnection();
 
         watcher->deleteLater();
     });
@@ -328,6 +340,12 @@ void Device::updateProperty(const QString &key, const QVariant &value)
         setType(getTypeFromClass(value.toUInt()));
     } else if (key == "Paired") {
         setPaired(value.toBool());
+
+        if (m_paired && m_connectAfterPairing) {
+           connectAfterPairing();
+           return;
+        }
+
         updateConnection();
     } else if (key == "Trusted") {
         setTrusted(value.toBool());
