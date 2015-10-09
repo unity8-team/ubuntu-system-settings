@@ -81,8 +81,8 @@ ItemPage {
     }
 
     Component {
-        id: displayAuthorizationRequestDialog
-        DisplayAuthorizationRequestDialog { }
+        id: authorizationRequestDialog
+        AuthorizationRequestDialog { }
     }
 
     Connections {
@@ -142,7 +142,7 @@ ItemPage {
             if (!root.dialogPopupId)
             {
                 var request_tag = tag
-                root.dialogPopupId  = PopupUtils.open(displayAuthorizationRequestDialog, root, {name: device.name})
+                root.dialogPopupId  = PopupUtils.open(authorizationRequestDialog, root, {name: device.name})
                 root.dialogPopupId.accepted.connect(function() {
                     root.dialogPopupId = null;
                     target.authorizationRequestCallback(request_tag, true)
