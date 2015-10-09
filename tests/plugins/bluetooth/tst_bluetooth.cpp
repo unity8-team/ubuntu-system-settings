@@ -37,7 +37,7 @@ private:
     Bluetooth *m_bluetooth;
     QDBusConnection *m_dbus;
 
-    void processEvents(unsigned int msecs = 1);
+    void processEvents(unsigned int msecs = 100);
     void setDiscovering(bool value);
 
 private Q_SLOTS:
@@ -213,28 +213,28 @@ void BluetoothTest::testIsDiscovering()
     m_bluetooth->stopDiscovery();
     setDiscovering(false);
 
-    processEvents(5);
+    processEvents();
 
     QCOMPARE(m_bluetooth->isDiscovering(), false);
 
     m_bluetooth->startDiscovery();
     setDiscovering(true);
 
-    processEvents(5);
+    processEvents();
 
     QCOMPARE(m_bluetooth->isDiscovering(), true);
 
     m_bluetooth->toggleDiscovery();
     setDiscovering(false);
 
-    processEvents(5);
+    processEvents();
 
     QCOMPARE(m_bluetooth->isDiscovering(), false);
 
     m_bluetooth->toggleDiscovery();
     setDiscovering(true);
 
-    processEvents(5);
+    processEvents();
 
     QCOMPARE(m_bluetooth->isDiscovering(), true);
 }

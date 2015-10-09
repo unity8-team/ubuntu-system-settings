@@ -36,7 +36,7 @@ private:
     QDBusConnection *m_dbus;
 
 private:
-    void processEvents(unsigned int msecs = 1);
+    void processEvents(unsigned int msecs = 100);
 
 private Q_SLOTS:
     void init();
@@ -67,7 +67,7 @@ void DeviceModelTest::init()
     m_dbus = new QDBusConnection(m_bluezMock->dbus());
     m_devicemodel = new DeviceModel(*m_dbus);
 
-    processEvents(5);
+    processEvents();
 }
 
 void DeviceModelTest::cleanup()
@@ -79,7 +79,7 @@ void DeviceModelTest::cleanup()
 void DeviceModelTest::testDeviceFoundOnStart()
 {
     // FIXME needs to take a bit more time especially on i386
-    processEvents(5);
+    processEvents();
 
     QCOMPARE(m_devicemodel->rowCount(), 1);
 }

@@ -37,7 +37,7 @@ private:
 
 private:
     void checkAudioState(const QString &expected);
-    void processEvents(unsigned int msecs = 1);
+    void processEvents(unsigned int msecs = 100);
 
 private Q_SLOTS:
     void init();
@@ -78,7 +78,7 @@ void DeviceTest::init()
 
     m_device = new Device(devices.first(), *m_dbus);
 
-    processEvents(5);
+    processEvents();
 }
 
 void DeviceTest::cleanup()
