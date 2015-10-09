@@ -4,6 +4,22 @@ ubuntu-system-settings (0.3+15.10.20151005-0ubuntu1) UNRELEASED; urgency=medium
 
  -- Simon Fels <simon.fels@canonical.com>  Thu, 17 Sep 2015 15:12:21 +0200
 
+ubuntu-system-settings (0.3+15.10.20151002-0ubuntu1) wily; urgency=medium
+
+  [ Sebastien Bacher ]
+  * [hospot] include cmakefile hack to get files listed in qtcreator
+  * [security-privacy] use the system location as well to look for trust
+    store items, that's needed at least for unity8-dash which is not
+    distributed as a click and doesn't a .local entry (LP: #1501428)
+  * [sound] don't display silent mode warnings, sounds should just be
+    played when user selected (LP: #1391502)
+
+  [ jonas-drange ]
+  * [phone] encode numbers before passing them to url-dispatcher (LP:
+    #1496845)
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Fri, 02 Oct 2015 17:52:49 +0000
+
 ubuntu-system-settings (0.3+15.10.20150930-0ubuntu1) wily; urgency=medium
 
   * Used the correct property to determine if whoopsie will
