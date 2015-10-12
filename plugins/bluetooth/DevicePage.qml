@@ -180,7 +180,7 @@ Page {
                         pageStack.pop();
                     }
                     visible: backend.selectedDevice ? true : false
-                    enabled: backend.selectedDevice && backend.powered ? backend.isSupportedType(backend.selectedDevice.type) : false
+                    enabled: backend.selectedDevice && backend.powered ? (backend.isSupportedType(backend.selectedDevice.type) || backend.selectedDevice.connection != Device.Disconnected) : false
                 }
             }
             ListItem.SingleControl {
