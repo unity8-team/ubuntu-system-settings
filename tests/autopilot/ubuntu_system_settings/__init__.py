@@ -894,7 +894,7 @@ class PhonePage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
         return page
 
     def _click_item(self, object_name):
-        item = self.select_single(objectName=object_name)
+        item = self.wait_select_single(objectName=object_name)
         item.swipe_into_view()
         self.pointing_device.click_object(item)
 
