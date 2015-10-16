@@ -111,22 +111,23 @@ class SecurityTestCase(SecurityBaseTestCase):
         )
 
     def test_locking_control_value(self):
+        self._go_to_phone_lock()
         actTimeout = self._get_activity_timeout()
         dimTimeout = self._get_dim_timeout()
-        activityTimeout = self.security_page.select_single(
-            objectName='lockingControl').value
+        activityTimeout = self.main_view.select_single(
+            objectName='lockTimeout').value
         if actTimeout is 0:
             self.assertEquals(activityTimeout, ('Manually'))
         elif actTimeout is 60:
             self.assertEquals(
                 activityTimeout,
-                ('After {:d} minute').format(int(actTimeout/60)))
+                ('{:d} minute').format(int(actTimeout/60)))
             if dimTimeout:
                 self.assertEquals(dimTimeout, actTimeout - 10)
         else:
             self.assertEquals(
                 activityTimeout,
-                ('After {:d} minutes').format(int(actTimeout/60)))
+                ('{:d} minutes').format(int(actTimeout/60)))
             if dimTimeout:
                 self.assertEquals(dimTimeout, actTimeout - 10)
 

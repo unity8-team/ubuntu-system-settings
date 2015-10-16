@@ -50,7 +50,7 @@ class WifiEnabledTestCase(WifiBaseTestCase):
         dialog = self.wifi_page.connect_to_hidden_network(
             'eduroam',
             username='student',
-            password='abcdefgh',
+            password='a',
             security='wpa-ep',
             auth='peap',
             protocol='mschapv2',
@@ -82,7 +82,7 @@ class WifiEnabledTestCase(WifiBaseTestCase):
         self.assertEquals(w802_11_sec['key-mgmt'], 'wpa-eap')
         self.assertIn('peap', w802_1x['eap'])
         self.assertEquals(w802_1x['identity'], 'student')
-        self.assertEquals(w802_1x['password'], 'abcdefgh')
+        self.assertEquals(w802_1x['password'], 'a')
         self.assertEquals(w802_1x['phase2-auth'], 'mschapv2')
 
     def test_connect_to_nonexistant_hidden_network(self):

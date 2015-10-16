@@ -27,13 +27,15 @@ import Ubuntu.SystemSettings.TimeDate 1.0
 ItemPage {
     title: i18n.tr("Time zone")
 
+    property UbuntuTimeDatePanel timeDatePanel
+
     Timer {
         id: goBackTimer
         onTriggered: pageStack.pop()
     }
 
-    UbuntuTimeDatePanel {
-        id: timeDatePanel
+    Connections {
+        target: timeDatePanel
         onTimeZoneChanged: {
             // Protect against the tz being changed externally
             if (locationsListView.manuallySelected !== "")

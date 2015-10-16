@@ -33,7 +33,7 @@ ItemPage {
     UbuntuDiagnostics {
         id: diagnosticsWidget
         function maybeUpdate() {
-            reportCrashesCheck.checked = diagnosticsWidget.canReportCrashes
+            reportCrashesCheck.checked = diagnosticsWidget.reportCrashes
         }
         onReportCrashesChanged: maybeUpdate()
     }
@@ -68,11 +68,11 @@ ItemPage {
 
             DiagnosticsCheckEntry {
                 id: reportCrashesCheck
-                checked: diagnosticsWidget.canReportCrashes
+                checked: diagnosticsWidget.reportCrashes
                 onCheckedChanged: {
-                    diagnosticsWidget.canReportCrashes = checked;
+                    diagnosticsWidget.reportCrashes = checked;
                     /* Confirm the setting stuck and reflect it in the UI. */
-                    if (checked != diagnosticsWidget.canReportCrashes) {
+                    if (checked != diagnosticsWidget.reportCrashes) {
                         checked = !checked;
                     }
 

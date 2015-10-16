@@ -29,36 +29,40 @@ TimeZoneLocationModel::TimeZoneLocationModel(QObject *parent):
     QAbstractTableModel(parent),
     modelUpdating(true),
     m_pattern(),
-    m_workerThread(new TimeZonePopulateWorker()),
+    m_workerThread(new QThread()),
+    m_populateWorker(new TimeZonePopulateWorker()),
     m_watcher()
 {
     qRegisterMetaType<TzLocation>();
+    qRegisterMetaType<QList<TimeZoneLocationModel::TzLocation> >();
 
     QObject::connect(m_workerThread,
+            SIGNAL(started()),
+            m_populateWorker,
+            SLOT(run()));
+    QObject::connect(m_populateWorker,
             &TimeZonePopulateWorker::resultReady,
-            this,
-            &TimeZoneLocationModel::processModelResult);
-    QObject::connect(m_workerThread,
-            &TimeZonePopulateWorker::finished,
             this,
             &TimeZoneLocationModel::store);
     QObject::connect(m_workerThread,
-            &TimeZonePopulateWorker::finished,
+            SIGNAL(finished()),
             m_workerThread,
-            &QObject::deleteLater);
-    QObject::connect(m_workerThread,
-            &TimeZonePopulateWorker::finished,
-            this,
-            &TimeZoneLocationModel::modelUpdated);
+            SLOT(deleteLater()));
+    QObject::connect(m_populateWorker,
+            SIGNAL(finished()),
+            m_populateWorker,
+            SLOT(deleteLater()));
 
-    m_workerThread->start();
+    m_populateWorker->moveToThread(m_workerThread);
+    m_workerThread->start(QThread::IdlePriority);
 }
 
-void TimeZoneLocationModel::store()
+void TimeZoneLocationModel::store(QList<TzLocation> sortedLocations)
 {
+    m_originalLocations = sortedLocations;
     m_workerThread = nullptr;
     modelUpdating = false;
-    qSort(m_originalLocations.begin(), m_originalLocations.end());
+
     QObject::connect(&m_watcher,
                      &QFutureWatcher<TzLocation>::finished,
                      this,
@@ -66,11 +70,6 @@ void TimeZoneLocationModel::store()
 
     if (!m_pattern.isEmpty())
         filter(m_pattern);
-}
-
-void TimeZoneLocationModel::processModelResult(TzLocation location)
-{
-    m_originalLocations.append(location);
 }
 
 void TimeZoneLocationModel::setModel(QList<TzLocation> locations)
@@ -190,10 +189,12 @@ void TimeZoneLocationModel::filter(const QString& pattern)
 void TimeZonePopulateWorker::run()
 {
     buildCityMap();
+    emit finished();
 }
 
 void TimeZonePopulateWorker::buildCityMap()
 {
+    QList<TimeZoneLocationModel::TzLocation> locations;
     TzDB *tzdb = tz_load_db();
     GPtrArray *tz_locations = tz_get_locations(tzdb);
 
@@ -222,9 +223,11 @@ void TimeZonePopulateWorker::buildCityMap()
         g_free (state);
         g_free (full_country);
 
-        Q_EMIT (resultReady(tmpTz));
+        locations.append(tmpTz);
     }
 
+    qSort(locations.begin(), locations.end());
+    Q_EMIT (resultReady(locations));
     g_ptr_array_free (tz_locations, TRUE);
 }
 
