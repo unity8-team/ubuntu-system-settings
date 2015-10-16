@@ -141,7 +141,7 @@ public:
     Device() {}
     Device(const QString &path, QDBusConnection &bus);
     ~Device() {}
-    bool isValid() const { /* return getType() != Type::Other; */ return true; }
+    bool isValid() const { return getType() != Type::Other; }
     void pair();
     void connect();
     void makeTrusted(bool trusted);
