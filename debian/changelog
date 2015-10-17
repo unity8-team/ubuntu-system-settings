@@ -12,7 +12,11 @@ ubuntu-system-settings (0.3+15.10.20151002-0ubuntu1) wily; urgency=medium
   * [phone] encode numbers before passing them to url-dispatcher (LP:
     #1496845)
 
- -- Ken VanDine <ken.vandine@canonical.com>  Fri, 02 Oct 2015 17:52:49 +0000
+  [ Bartosz Kosiorek ]
+  * Updated README file with information about building and running (LP: #1350687)
+ 
+ -- Bartosz Kosiorek <gang65@poczta.onet.pl>  Sun, 18 Oct 2015 00:10:12 +0200
+
 
 ubuntu-system-settings (0.3+15.10.20150930-0ubuntu1) wily; urgency=medium
 
