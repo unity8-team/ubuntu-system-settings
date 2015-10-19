@@ -40,10 +40,9 @@ void FakeNetwork::getResourceUrl(const QString& packagename)
     emit this->downloadUrlFound(packagename, "http://canonical.com");
 }
 
-void FakeNetwork::getClickToken(Update* app, const QString& url, const QString& authHeader)
+void FakeNetwork::getClickToken(Update* app, const QString& url)
 {
     Q_UNUSED(url);
-    Q_UNUSED(authHeader);
     QString fakeHeader("x-click-token-header");
     emit this->clickTokenObtained(app, fakeHeader);
 }

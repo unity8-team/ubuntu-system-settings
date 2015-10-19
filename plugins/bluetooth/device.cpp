@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 Canonical Ltd
+ * Copyright (C) 2013-2015 Canonical Ltd
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as
@@ -86,6 +86,7 @@ void Device::initInterface(QSharedPointer<QDBusInterface> &setme,
     if (!i->isValid()) {
         delete i;
         i = 0;
+        qWarning() << "Couldn't add proxy for" << interfaceName;
     } else {
         if (!bus.connect(service, path, interfaceName, "PropertyChanged",
                          this, SLOT(slotPropertyChanged(const QString&, const QDBusVariant&))))
@@ -113,11 +114,10 @@ void Device::setProperties(const QMap<QString,QVariant> &properties)
 void Device::connectPending()
 {
     if (m_paired && !m_trusted) {
-        /* Give the device a bit of time to settle.
-         * Once service discovery is done, it will call connect() on the
-         * pending interfaces.
-         */
-        QTimer::singleShot(1, this, SLOT(discoverServices()));
+        while (!m_connectAfterPairing.isEmpty()) {
+            ConnectionMode mode = m_connectAfterPairing.takeFirst();
+            connect(mode);
+        }
     }
 }
 
@@ -130,103 +130,74 @@ void Device::addConnectAfterPairing(ConnectionMode mode)
     m_connectAfterPairing.append(mode);
 }
 
-void Device::slotServiceDiscoveryDone(QDBusPendingCallWatcher *call)
-{
-    QDBusPendingReply<void> reply = *call;
-
-    if (!reply.isError()) {
-        while (!m_connectAfterPairing.isEmpty()) {
-            ConnectionMode mode = m_connectAfterPairing.takeFirst();
-            connect(mode);
-        }
-    } else {
-        qWarning() << "Could not initiate service discovery:"
-                   << reply.error().message();
-    }
-    call->deleteLater();
-}
-
-void Device::discoverServices()
-{
-    if (m_deviceInterface) {
-        QDBusPendingCall pcall
-            = m_deviceInterface->asyncCall("DiscoverServices",
-                                           QLatin1String(""));
-
-        QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(pcall,
-                                                                       this);
-        QObject::connect(watcher, SIGNAL(finished(QDBusPendingCallWatcher*)),
-                         this,
-                         SLOT(slotServiceDiscoveryDone(QDBusPendingCallWatcher*)));
-    } else {
-        qWarning() << "Can't do service discovery: the device interface is not ready.";
-    }
-}
-
-void Device::slotDisconnectDone(QDBusPendingCallWatcher *watcher)
-{
-    QDBusPendingReply<void> reply = *watcher;
-
-    if (reply.isError()) {
-        qWarning() << "Could not disconnect device:"
-                   << reply.error().message();
-    }
-
-    watcher->deleteLater();
-}
-
 void Device::disconnect(ConnectionMode mode)
 {
     QSharedPointer<QDBusInterface> interface;
 
-    if (m_headsetInterface && (mode == HeadsetMode))
+    switch (mode) {
+    case HeadsetMode:
         interface = m_headsetInterface;
-    else if (m_audioInterface && (mode == Audio))
+        break;
+    case Audio:
         interface = m_audioInterface;
-    else if (m_inputInterface && (mode == Input))
+        break;
+    case Input:
         interface = m_inputInterface;
-    else {
+        break;
+    default:
         qWarning() << "Unhandled connection mode" << mode;
         return;
     }
 
     QDBusPendingCall call = interface->asyncCall("Disconnect");
+
     QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(call, this);
-    QObject::connect(watcher, SIGNAL(finished(QDBusPendingCallWatcher*)),
-                     this, SLOT(slotDisconnectDone(QDBusPendingCallWatcher*)));
-}
+    QObject::connect(watcher, &QDBusPendingCallWatcher::finished, [this](QDBusPendingCallWatcher *watcher) {
+        QDBusPendingReply<void> reply = *watcher;
 
-void Device::slotConnectDone(QDBusPendingCallWatcher *watcher)
-{
-    QDBusPendingReply<void> reply = *watcher;
+        if (reply.isError()) {
+            qWarning() << "Could not connect device:"
+                       << reply.error().message();
+        }
 
-    if (reply.isError()) {
-        qWarning() << "Could not connect device:"
-                   << reply.error().message();
-    }
-
-    watcher->deleteLater();
+        watcher->deleteLater();
+    });
 }
 
 void Device::connect(ConnectionMode mode)
 {
     QSharedPointer<QDBusInterface> interface;
 
-    if (m_headsetInterface && (mode == HeadsetMode))
+    switch (mode) {
+    case HeadsetMode:
         interface = m_headsetInterface;
-    else if (m_audioInterface && (mode == Audio))
+        break;
+    case Audio:
         interface = m_audioInterface;
-    else if (m_inputInterface && (mode == Input))
+        break;
+    case Input:
         interface = m_inputInterface;
-    else {
+        break;
+    default:
         qWarning() << "Unhandled connection mode" << mode;
         return;
     }
 
     QDBusPendingCall call = interface->asyncCall("Connect");
+
     QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(call, this);
-    QObject::connect(watcher, SIGNAL(finished(QDBusPendingCallWatcher*)),
-                     this, SLOT(slotConnectDone(QDBusPendingCallWatcher*)));
+    QObject::connect(watcher, &QDBusPendingCallWatcher::finished, [this](QDBusPendingCallWatcher *watcher) {
+        QDBusPendingReply<void> reply = *watcher;
+
+        if (reply.isError()) {
+            qWarning() << "Could not connect device:"
+                       << reply.error().message();
+        } else {
+            makeTrusted(true);
+        }
+
+        watcher->deleteLater();
+    });
 }
 
 void Device::slotMakeTrustedDone(QDBusPendingCallWatcher *call)
@@ -253,10 +224,8 @@ void Device::makeTrusted(bool trusted)
 
         QDBusPendingCallWatcher *watcher
             = new QDBusPendingCallWatcher(pcall, this);
-        QObject::connect(watcher,
-                         SIGNAL(finished(QDBusPendingCallWatcher*)),
-                         this,
-                         SLOT(slotServiceDiscoveryDone(QDBusPendingCallWatcher*)));
+        QObject::connect(watcher, SIGNAL(finished(QDBusPendingCallWatcher*)),
+                         this, SLOT(slotMakeTrustedDone(QDBusPendingCallWatcher*)));
     } else {
         qWarning() << "Can't set device trusted before it is added in BlueZ";
     }
@@ -386,9 +355,6 @@ void Device::updateConnection()
     else
         c = m_isConnected ? Connection::Connected : Connection::Disconnected;
 
-    if (m_isConnected && m_paired && !m_trusted)
-        makeTrusted(true);
-
     setConnection(c);
 }
 
@@ -408,13 +374,15 @@ void Device::updateProperty(const QString &key, const QVariant &value)
         setType(getTypeFromClass(value.toUInt()));
     } else if (key == "Paired") { // org.bluez.Device
         setPaired(value.toBool());
-        connectPending();
         updateConnection();
     } else if (key == "Trusted") { // org.bluez.Device
         setTrusted(value.toBool());
     } else if (key == "Icon") { // org.bluez.Device
         m_fallbackIconName = value.toString();
         updateIcon ();
+    } else if (key == "RSSI") {
+        m_strength = getStrengthFromRssi(value.toInt());
+        Q_EMIT(strengthChanged());
     }
 }
 
@@ -503,5 +471,22 @@ Device::Type Device::getTypeFromClass (quint32 c)
     }
 
     return Type::Other;
+}
+
+Device::Strength Device::getStrengthFromRssi(int rssi)
+{
+    /* Modelled similar to what Mac OS X does.
+     * See http://www.cnet.com/how-to/how-to-check-bluetooth-connection-strength-in-os-x/ */
+
+    if (rssi >= -60)
+        return Excellent;
+    else if (rssi < -60 && rssi >= -70)
+        return Good;
+    else if (rssi < -70 && rssi >= -90)
+        return Fair;
+    else if (rssi < -90)
+        return Poor;
+
+    return None;
 }
 

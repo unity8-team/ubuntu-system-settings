@@ -3,6 +3,8 @@
  *
  * Copyright (C) 2015 Canonical Ltd.
  *
+ * Contact: Jonas G. Drange <jonas.drange@canonical.com>
+ *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License version 3, as published
  * by the Free Software Foundation.
@@ -14,45 +16,24 @@
  *
  * You should have received a copy of the GNU General Public License along
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
  */
 
-#include <QDebug>
-#include <QtQml>
-#include <QtQml/QQmlContext>
+#ifndef SYSTEM_SETTINGS_HOTSPOT_PLUGIN_H
+#define SYSTEM_SETTINGS_HOTSPOT_PLUGIN_H
+
 #include <QObject>
-#include <QTest>
-#include <QString>
-#include "network.h"
-#include "update.h"
+#include <SystemSettings/PluginInterface>
 
-using namespace UpdatePlugin;
-
-class NetworkTest: public QObject
+class HotspotPlugin: public QObject, public SystemSettings::PluginInterface2
 {
     Q_OBJECT
+    Q_PLUGIN_METADATA(IID "com.ubuntu.SystemSettings.PluginInterface/2.0")
+    Q_INTERFACES(SystemSettings::PluginInterface2)
 
 public:
-    NetworkTest() {};
-
-private Q_SLOTS:
-    void testArch();
-    void testFrameworks();
-
+    SystemSettings::ItemBase *createItem(const QVariantMap &staticData,
+                                         QObject *parent = 0);
 };
 
-void NetworkTest::testFrameworks()
-{
-    Network net;
-    auto frameworks = net.getAvailableFrameworks();
-    QCOMPARE(frameworks.empty(), false);
-}
-
-void NetworkTest::testArch()
-{
-    Network net;
-    auto arch = net.getArchitecture();
-    QCOMPARE(arch.empty(), false);
-}
-
-QTEST_MAIN(NetworkTest)
-#include "tst_network.moc"
+#endif // SYSTEM_SETTINGS_HOTSPOT_PLUGIN_H

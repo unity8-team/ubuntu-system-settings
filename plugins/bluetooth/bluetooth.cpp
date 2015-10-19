@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 Canonical Ltd
+ * Copyright (C) 2013-2015 Canonical Ltd
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as
@@ -71,6 +71,12 @@ void Bluetooth::setSelectedDevice(const QString &address)
         m_selectedDevice = m_devices.getDeviceFromAddress(address);
         Q_EMIT(selectedDeviceChanged());
     }
+}
+
+void Bluetooth::resetSelectedDevice()
+{
+    m_selectedDevice.reset(0);
+    Q_EMIT(selectedDeviceChanged());
 }
 
 void Bluetooth::toggleDiscovery()

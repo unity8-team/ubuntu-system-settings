@@ -39,7 +39,7 @@ Column {
         // an empty string is not a valid preference, which means
         // we disregard the interace and disable the selector
         enabled: parent.enabled
-        model: sim.radioSettings.modemTechnologies
+        model: sim.radioSettings.availableTechnologies
         delegate: OptionSelectorDelegate {
             objectName: sim.path + "_radio_" + modelData
             text: sim.techToString(modelData)
@@ -63,9 +63,9 @@ Column {
             target: sim.radioSettings
 
             onTechnologyPreferenceChanged: selector.selectedIndex =
-                sim.radioSettings.modemTechnologies.indexOf(preference)
+                sim.radioSettings.availableTechnologies.indexOf(preference)
 
-            onModemTechnologiesChanged: {
+            onAvailableTechnologiesChanged: {
                 if ((technologies.indexOf('umts') === -1)
                      && (sim.mtkSettings.has3G === false)) {
                     selector.model = sim.addUmtsEnableToModel(technologies);
@@ -79,12 +79,12 @@ Column {
         }
 
         Component.onCompleted: {
-            if ((sim.radioSettings.modemTechnologies.indexOf('umts') === -1)
+            if ((sim.radioSettings.availableTechnologies.indexOf('umts') === -1)
                  && (sim.mtkSettings.has3G === false)) {
                 selector.model = sim.addUmtsEnableToModel(
-                    sim.radioSettings.modemTechnologies);
+                    sim.radioSettings.availableTechnologies);
             } else {
-                selector.model = sim.radioSettings.modemTechnologies;
+                selector.model = sim.radioSettings.availableTechnologies;
             }
         }
     }

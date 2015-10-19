@@ -1,6 +1,7 @@
 {
     "icon": "preferences-network-hotspot-symbolic",
     "name": "Hotspot",
+    "plugin": "hotspot-plugin",
     "translations": "ubuntu-system-settings",
     "category": "network",
     "priority": 2,
@@ -13,6 +14,6 @@
         "tethering"
     ],
     "has-dynamic-keywords": false,
-    "has-dynamic-visibility": false,
+    "has-dynamic-visibility": true,
     "page-component": "PageComponent.qml"
 }
