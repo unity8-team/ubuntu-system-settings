@@ -44,7 +44,6 @@ To speed up generation and compilation, you could use Ninja generator instead of
 
 Unit Tests help with testing the internal working of components while
 autopilot tests help with testing the UI workflow as experience by the user.
-By using ctest we have some level of abstraction, and we could 
 Running unit tests is quite simple and very fast.
 
 If you want to run all tests, then run the following command from the builddir,
@@ -76,3 +75,4 @@ For Ninja generator:
 Then from builddir run command:
 
    $ ./src/system-settings
+
