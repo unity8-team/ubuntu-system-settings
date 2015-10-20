@@ -1400,8 +1400,8 @@ class LanguagePage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
         return False
 
     def get_current_language(self):
-        return self.select_single(
-            'Label', objectName='currentLanguage').currentLanguage
+        return self.wait_select_single(
+            objectName='currentLanguage').currentLanguage
 
     def _click_change_display_language(self):
         item = self.select_single(objectName='displayLanguage')
