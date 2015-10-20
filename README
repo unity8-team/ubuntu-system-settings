@@ -4,6 +4,7 @@ The upstream project is hosted on launchpad, the design on the Ubuntu wiki:
 https://launchpad.net/ubuntu-system-settings
 https://wiki.ubuntu.com/SystemSettings
 
+
 = Preparing environment =
 
 You need to download source code with using command:
@@ -23,11 +24,12 @@ You could install missing packages by using apt-get command. For example:
    $ sudo apt-get install libubuntu-download-manager-client-dev libubuntuoneauth-2.0-dev \
      libtrust-store-dev libupower-glib-dev libaccountsservice-dev libtimezonemap1-dev
 
+
 = Building =
 
-The build system uses CMake.
-To compile, create "builddir" directory (to separate build artefacts from source code), 
-invoke cmake generation process and start build :
+The build system uses CMake. To compile, create "builddir" directory 
+(to separate build artefacts from source code). Then invoke cmake generation 
+process and start build :
 
    $ mkdir builddir && cd builddir
    $ cmake .. && cmake --build . -- -j 3
@@ -37,9 +39,32 @@ To speed up generation and compilation, you could use Ninja generator instead of
    $ mkdir builddir && cd builddir
    $ cmake .. -G Ninja && cmake --build .
 
-= Running =
 
-To run application you need to install System Settings application first.
+= Running Unit Tests =
+
+Unit Tests help with testing the internal working of components while
+autopilot tests help with testing the UI workflow as experience by the user.
+By using ctest we have some level of abstraction, and we could 
+Running unit tests is quite simple and very fast.
+
+If you want to run all tests, then run the following command from the builddir,
+
+   $ ctest --output-on-failure
+   
+If you want more verbose output, then run,
+
+   $ ctest -VV
+
+You could filter individual tests by using "-R <regex>" or "--tests-regex <regex>" parameter.
+For example to run only tests which contains "bluetooth" word you could specify:
+
+   $ ctest --tests-regex bluetooth
+
+
+= Running application =
+
+To run application you need to type command:
+
 For Make generator:
 
    $ sudo make install
@@ -48,6 +73,6 @@ For Ninja generator:
 
    $ sudo ninja install
 
-To run:
+Then from builddir run command:
 
-   $ system-settings
+   $ ./src/system-settings
