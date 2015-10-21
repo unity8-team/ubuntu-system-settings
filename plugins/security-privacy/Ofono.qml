@@ -17,7 +17,7 @@
  * Jonas G. Drange <jonas.drange@canonical.com>
  *
 */
-import QtQuick 2.0
+import QtQuick 2.4
 import MeeGo.QOfono 0.2
 
 Item {
