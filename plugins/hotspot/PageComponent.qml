@@ -77,28 +77,28 @@ ItemPage {
             }
             spacing: units.gu(1)
 
-            ListItem.Standard {
+            ListItemStandard {
                 id: hotspotItem
-                text: i18n.tr("Hotspot")
-                enabled: Connectivity.hotspotStored
-                onClicked: hotspotSwitch.trigger()
-                control: Switch {
-                    id: hotspotSwitch
-                    objectName: "hotspotSwitch"
-                    enabled: parent.enabled
-                    checked: Connectivity.hotspotEnabled
-                    onTriggered: Connectivity.hotspotEnabled = checked
+                // text: i18n.tr("Hotspot")
+                // enabled: Connectivity.hotspotStored
+                // onClicked: hotspotSwitch.trigger()
+                // control: Switch {
+                //     id: hotspotSwitch
+                //     objectName: "hotspotSwitch"
+                //     enabled: parent.enabled
+                //     checked: Connectivity.hotspotEnabled
+                //     onTriggered: Connectivity.hotspotEnabled = checked
 
-                    // Catch taps if Wi-Fi is disable and prompt user.
-                    MouseArea {
-                        id: hotspotSwitchWhenWifiDisabled
-                        anchors.fill: parent
-                        visible: false
-                        onClicked: enableWifiAction.diag = PopupUtils.open(
-                            enableWifiDialog
-                        );
-                    }
-                }
+                //     // Catch taps if Wi-Fi is disable and prompt user.
+                //     MouseArea {
+                //         id: hotspotSwitchWhenWifiDisabled
+                //         anchors.fill: parent
+                //         visible: false
+                //         onClicked: enableWifiAction.diag = PopupUtils.open(
+                //             enableWifiDialog
+                //         );
+                //     }
+                // }
             }
 
             ListItem.Caption {
