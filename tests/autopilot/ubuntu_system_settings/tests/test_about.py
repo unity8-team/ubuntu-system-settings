@@ -179,14 +179,14 @@ class AboutOtaTestCase(AboutSystemImageBaseTestCase):
             'device': '20153344.1',
             'custom': '201594834.1',
             'version': '257',
-            'ota': 'OTA-7'
+            'tag': 'OTA-100'
         }
     }
 
     def test_ota_binding(self):
         """Checks whether a stable release gets an OTA number."""
         os_item = self.about_page.wait_select_single(objectName='osItem')
-        self.assertThat(os_item.value, Contains(' (OTA-7)'))
+        self.assertThat(os_item.value, Contains(' (OTA-100)'))
 
 
 class StorageTestCase(StorageBaseTestCase):
