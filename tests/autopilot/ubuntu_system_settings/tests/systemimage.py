@@ -49,9 +49,10 @@ def Info(self):
 
 
 @dbus.service.method(MAIN_IFACE,
-                     in_signature='',
-                     out_signature='a{ss}')
+                     in_signature='', out_signature='a{ss}')
 def Information(self):
+
+    # Build a version_details key=value string
     vd_dict = self.props['version_detail']
     vd_str = ''
     for i, k in enumerate(vd_dict):
