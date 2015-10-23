@@ -18,10 +18,10 @@
  *
 */
 
-import QtQuick 2.0
+import QtQuick 2.4
 import SystemSettings 1.0
-import Ubuntu.Components 0.1
-import Ubuntu.Components.ListItems 0.1 as ListItem
+import Ubuntu.Components 1.3
+import Ubuntu.Components.ListItems 1.3 as ListItem
 
 ItemPage {
     id: preview
@@ -35,7 +35,6 @@ ItemPage {
     property Item headerStyle: header.__styleInstance ?
                                    header.__styleInstance : null
 
-    tools: null
     Component.onCompleted: {
         /* change the header text color to make it more readable over the background */
         if (headerStyle.hasOwnProperty("textColor"))
