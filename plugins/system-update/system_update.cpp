@@ -110,11 +110,9 @@ void SystemUpdate::setCurrentDetailedVersion() {
         m_lastUpdateDate = QDateTime::fromString(result["last_update_date"], Qt::ISODate);
 
         QMap<QString, QVariant> details;
-        QString kvsep(",");
-        QString eqsep("=");
-        QStringList keyvalue = result["version_detail"].split(kvsep, QString::SkipEmptyParts);
+        QStringList keyvalue = result["version_detail"].split(",", QString::SkipEmptyParts);
         for (int i = 0; i < keyvalue.size(); ++i) {
-            QStringList pair = keyvalue.at(i).split(eqsep);
+            QStringList pair = keyvalue.at(i).split("=");
             details[pair[0]] = QVariant(pair[1]);
         }
         m_detailedVersion = details;
