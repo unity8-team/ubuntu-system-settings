@@ -289,25 +289,6 @@ ItemPage {
                     }
                     height: parent.height
                 }
-
-                Button {
-                    id: btnRetry
-                    text: i18n.tr("Retry")
-                    color: UbuntuColors.orange
-                    anchors {
-                        right: parent.right
-                        top: parent.top
-                        bottom: parent.bottom
-                        margins: units.gu(1)
-                    }
-                    visible: !activity.visible
-
-                    onClicked: {
-                        activity.running = true;
-                        root.state = "SEARCHING";
-                        UpdateManager.checkUpdates();
-                    }
-                }
             }
 
             ListItem.SingleControl {
