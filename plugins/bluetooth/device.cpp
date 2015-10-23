@@ -26,7 +26,8 @@
 
 #include "dbus-shared.h"
 
-Device::Device(const QString &path, QDBusConnection &bus)
+Device::Device(const QString &path, QDBusConnection &bus) :
+   m_strength(Device::None)
 {
     initDevice(path, bus);
 }

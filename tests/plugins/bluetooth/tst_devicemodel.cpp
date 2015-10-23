@@ -63,6 +63,8 @@ void DeviceModelTest::init()
 
     m_bluezMock->addAdapter("new0", "bluetoothTest");
     m_bluezMock->addDevice("My Phone", "00:00:de:ad:be:ef");
+    // Only this will set the 'Class' and 'Icon' properties for the device ...
+    m_bluezMock->pairDevice("00:00:de:ad:be:ef");
 
     m_dbus = new QDBusConnection(m_bluezMock->dbus());
     m_devicemodel = new DeviceModel(*m_dbus);

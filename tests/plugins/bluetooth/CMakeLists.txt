@@ -40,7 +40,7 @@ target_link_libraries(tst-bluetooth-devicemodel
 )
 
 add_executable(tst-bluetooth-device
-    tst_devicemodel.cpp
+    tst_device.cpp
     fakebluez.cpp
     ${PLUGIN_SOURCES}
 )

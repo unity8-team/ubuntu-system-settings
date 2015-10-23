@@ -67,11 +67,14 @@ public:
 
     QString addAdapter(const QString &name, const QString &system_name);
     QString addDevice(const QString &name, const QString &address);
+    void pairDevice(const QString &address);
+    void connectDevice(const QString &address);
+    void disconnectDevice(const QString &address);
 
     QVariant getProperty(const QString &path,
                          const QString &interface,
                          const QString &property);
-    
+
     void setProperty(const QString &path,
                      const QString &interface,
                      const QString &property,
