@@ -21,8 +21,8 @@
 import GSettings 1.0
 import QtQuick 2.4
 import Ubuntu.Components 1.3
-import Ubuntu.Components.ListItems 1.3 as ListItem
 import SystemSettings 1.0
+import SystemSettings.ListItems 1.0 as OldListItem
 import Ubuntu.SystemSettings.Sound 1.0
 import Ubuntu.Settings.Menus 0.1 as Menus
 import Ubuntu.Settings.Components 0.1 as USC
@@ -66,22 +66,28 @@ ItemPage {
             anchors.left: parent.left
             anchors.right: parent.right
 
-            ListItem.Standard {
-                control: Switch {
-                    id: silentModeSwitch
-                    objectName: "silentMode"
-                    property bool serverChecked: soundActionGroup.silentMode.state
+            ListItem {
+                height: silentLayout.height
+                SlotsLayout {
+                    id: silentLayout
+                    Label {
+                        text: i18n.tr("Silent Mode")
+                    }
+                    Switch {
+                        id: silentModeSwitch
+                        objectName: "silentMode"
+                        property bool serverChecked: soundActionGroup.silentMode.state
 
-                    USC.ServerPropertySynchroniser {
-                        userTarget: silentModeSwitch
-                        userProperty: "checked"
-                        serverTarget: silentModeSwitch
-                        serverProperty: "serverChecked"
+                        USC.ServerPropertySynchroniser {
+                            userTarget: silentModeSwitch
+                            userProperty: "checked"
+                            serverTarget: silentModeSwitch
+                            serverProperty: "serverChecked"
 
-                        onSyncTriggered: soundActionGroup.silentMode.activate()
+                            onSyncTriggered: soundActionGroup.silentMode.activate()
+                        }
                     }
                 }
-                text: i18n.tr("Silent Mode")
             }
 
             SettingsItemTitle {
@@ -122,31 +128,42 @@ ItemPage {
                 }
             }
 
-            ListItem.Standard {
+            ListItem {
                 id: highVolumeWarning
+                height: highVolumeLayout.height
                 visible: soundActionGroup.highVolume.state == true
-                text: i18n.tr("High volume can damage your hearing.")
+                SlotsLayout {
+                    id: highVolumeLayout
+                    Label {
+                        text: i18n.tr("High volume can damage your hearing.")
+                    }
+                }
             }
 
             SettingsItemTitle {
                 text: i18n.tr("Phone calls:")
             }
 
-            ListItem.SingleValue {
-                text: i18n.tr("Ringtone")
-                value: Utilities.buildDisplayName(
-                           backendInfo.incomingCallSound)
-                progression: true
+            ListItem {
+                height: ringtoneLayout.height
+                ListItemLayout {
+                    id: ringtoneLayout
+                    title.text: i18n.tr("Ringtone")
+                    Label { text: Utilities.buildDisplayName(backendInfo.incomingCallSound) }
+                    ProgressionSlot {}
+                }
+
                 onClicked: pageStack.push(
-                               Qt.resolvedUrl("SoundsList.qml"),
-                               { title: i18n.tr("Ringtone"),
-                                 showStopButton: true,
-                                 soundType: 0,
-                                 soundsDir:
-                                   "/usr/share/sounds/ubuntu/ringtones/" })
+                    Qt.resolvedUrl("SoundsList.qml"), {
+                        title: i18n.tr("Ringtone"),
+                        showStopButton: true,
+                        soundType: 0,
+                        soundsDir: "/usr/share/sounds/ubuntu/ringtones/"
+                    }
+                )
             }
 
-            ListItem.Standard {
+            OldListItem.Standard {
                 control: CheckBox {
                     objectName: "callVibrate"
                     property bool serverChecked: backendInfo.incomingCallVibrate
@@ -157,7 +174,7 @@ ItemPage {
                 text: i18n.tr("Vibrate on ring")
             }
 
-            ListItem.Standard {
+            OldListItem.Standard {
                 control: CheckBox {
                     objectName: "callVibrateSilentMode"
                     property bool serverChecked: backendInfo.incomingCallVibrateSilentMode
@@ -168,7 +185,7 @@ ItemPage {
                 text: i18n.tr("Vibrate in Silent Mode")
             }
 
-            ListItem.Standard {
+            OldListItem.Standard {
                 control: Switch {
                     objectName: "dialpadSounds"
                     property bool serverChecked: backendInfo.dialpadSoundsEnabled
@@ -183,7 +200,7 @@ ItemPage {
                 text: i18n.tr("Messages:")
             }
 
-            ListItem.SingleValue {
+            OldListItem.SingleValue {
                 text: i18n.tr("Message received")
                 value:Utilities.buildDisplayName(
                           backendInfo.incomingMessageSound)
@@ -196,7 +213,7 @@ ItemPage {
                                    "/usr/share/sounds/ubuntu/notifications/" })
             }
 
-            ListItem.Standard {
+            OldListItem.Standard {
                 control: CheckBox {
                     objectName: "messageVibrate"
                     property bool serverChecked: backendInfo.incomingMessageVibrate
@@ -207,7 +224,7 @@ ItemPage {
                 text: i18n.tr("Vibrate with message sound")
             }
 
-            ListItem.Standard {
+            OldListItem.Standard {
                 control: CheckBox {
                     objectName: "messageVibrateSilentMode"
                     property bool serverChecked: backendInfo.incomingMessageVibrateSilentMode
@@ -222,7 +239,7 @@ ItemPage {
                 text: i18n.tr("Other sounds:")
             }
 
-            ListItem.Standard {
+            OldListItem.Standard {
                 text: i18n.tr("Keyboard sound")
 
                 control: Switch {
@@ -234,7 +251,7 @@ ItemPage {
                 }
             }
 
-            ListItem.Standard {
+            OldListItem.Standard {
                 id: lockSound
                 control: Switch {
                     checked: false
@@ -243,9 +260,9 @@ ItemPage {
                 visible: showAllUI
             }
 
-            ListItem.Divider {}
+            OldListItem.Divider {}
 
-            ListItem.Standard {
+            OldListItem.Standard {
                 text: i18n.tr("Other vibrations")
                 control: Switch {
                     objectName: "otherVibrateSwitch"
