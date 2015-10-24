@@ -20,8 +20,8 @@
 
 import QtQuick 2.4
 import SystemSettings 1.0
+import SystemSettings.ListItems 1.0 as ListItem
 import Ubuntu.Components 1.3
-import Ubuntu.Components.ListItems 1.3 as ListItem
 import Ubuntu.Components.Popups 1.3
 import Ubuntu.Connectivity 1.0
 
@@ -77,39 +77,39 @@ ItemPage {
             }
             spacing: units.gu(1)
 
-            ListItemStandard {
+            ListItem.Standard {
                 id: hotspotItem
-                // text: i18n.tr("Hotspot")
-                // enabled: Connectivity.hotspotStored
-                // onClicked: hotspotSwitch.trigger()
-                // control: Switch {
-                //     id: hotspotSwitch
-                //     objectName: "hotspotSwitch"
-                //     enabled: parent.enabled
-                //     checked: Connectivity.hotspotEnabled
-                //     onTriggered: Connectivity.hotspotEnabled = checked
+                text: i18n.tr("Hotspot")
+                enabled: Connectivity.hotspotStored
+                onClicked: hotspotSwitch.trigger()
+                control: Switch {
+                    id: hotspotSwitch
+                    objectName: "hotspotSwitch"
+                    enabled: parent.enabled
+                    checked: Connectivity.hotspotEnabled
+                    onTriggered: Connectivity.hotspotEnabled = checked
 
-                //     // Catch taps if Wi-Fi is disable and prompt user.
-                //     MouseArea {
-                //         id: hotspotSwitchWhenWifiDisabled
-                //         anchors.fill: parent
-                //         visible: false
-                //         onClicked: enableWifiAction.diag = PopupUtils.open(
-                //             enableWifiDialog
-                //         );
-                //     }
-                // }
-            }
-
-            ListItem.Caption {
-                anchors {
-                    left: parent.left
-                    right: parent.right
+                    // Catch taps if Wi-Fi is disable and prompt user.
+                    MouseArea {
+                        id: hotspotSwitchWhenWifiDisabled
+                        anchors.fill: parent
+                        visible: false
+                        onClicked: enableWifiAction.diag = PopupUtils.open(
+                            enableWifiDialog
+                        );
+                    }
                 }
-                text : Connectivity.hotspotStored ?
-                  i18n.tr("When hotspot is on, other devices can use your cellular data connection over Wi-Fi. Normal data charges apply.")
-                  : i18n.tr("Other devices can use your cellular data connection over the Wi-Fi network. Normal data charges apply.")
             }
+
+            // ListItem.Caption {
+            //     anchors {
+            //         left: parent.left
+            //         right: parent.right
+            //     }
+            //     text : Connectivity.hotspotStored ?
+            //       i18n.tr("When hotspot is on, other devices can use your cellular data connection over Wi-Fi. Normal data charges apply.")
+            //       : i18n.tr("Other devices can use your cellular data connection over the Wi-Fi network. Normal data charges apply.")
+            // }
 
             Button {
                 id: hotspotSetupButton
