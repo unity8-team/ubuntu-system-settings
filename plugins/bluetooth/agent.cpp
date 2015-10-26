@@ -208,45 +208,19 @@ void Agent::DisplayPinCode(const QDBusObjectPath &objectPath, QString pincode)
 {
     auto device = m_devices.getDeviceFromPath(objectPath.path());
     if (device) {
-        const uint tag = m_tag++;
-
-        setDelayedReply(true);
-        assert(!m_delayedReplies.contains(tag));
-        m_delayedReplies[tag] = message();
-
-        Q_EMIT(displayPinCodeNeeded(tag, device.data(), pincode));
+        Q_EMIT(displayPinCodeNeeded(device.data(), pincode));
     } else {
         reject(message(), __func__);
     }
 }
 
-/** This method gets called when the service daemon
- * needs to display a passkey for an authentication.
- * The entered parameter indicates the number of already
- * typed keys on the remote side.
- * An empty reply should be returned. When the passkey
- * needs no longer to be displayed, the Cancel method
- * of the agent will be called.
- * During the pairing process this method might be
- * called multiple times to update the entered value.
- * Note that the passkey will always be a 6-digit number,
- * so the display should be zero-padded at the start if
- * the value contains less than 6 digits.
- */
-
 void Agent::DisplayPasskey(const QDBusObjectPath &objectPath, uint passkey, ushort entered)
 {
     auto device = m_devices.getDeviceFromPath(objectPath.path());
     if (device) {
-        const uint tag = m_tag++;
-
-        setDelayedReply(true);
-        assert(!m_delayedReplies.contains(tag));
-        m_delayedReplies[tag] = message();
-
         QString passkeyStr = QString("%1").arg(passkey, 6, 10, QChar('0'));
-        Q_EMIT(displayPasskeyNeeded(tag, device.data(), passkeyStr, entered));
-    } else { // confirmation requested for an unknown device..?!
+        Q_EMIT(displayPasskeyNeeded(device.data(), passkeyStr, entered));
+    } else {
         reject(message(), __func__);
     }
 }

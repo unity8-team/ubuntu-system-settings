@@ -96,6 +96,7 @@ Q_SIGNALS:
     void connectionChanged();
     void strengthChanged();
     void deviceChanged(); // catchall for any change
+    void pairingDone(bool success);
 
 public:
     const QString& getName() const { return m_name; }
@@ -143,6 +144,7 @@ public:
     ~Device() {}
     bool isValid() const { return getType() != Type::Other; }
     void pair();
+    Q_INVOKABLE void cancelPairing();
     void connect();
     void makeTrusted(bool trusted);
     void disconnect();

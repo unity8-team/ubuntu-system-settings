@@ -69,6 +69,7 @@ Q_SIGNALS:
     void poweredChanged(bool powered);
     void discoveringChanged(bool isActive);
     void discoverableChanged(bool isActive);
+    void devicePairingDone(Device *device, bool success);
 
 public:
     explicit Bluetooth(QObject *parent = nullptr);

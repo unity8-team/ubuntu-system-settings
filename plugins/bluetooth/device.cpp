@@ -146,14 +146,42 @@ void Device::pair()
     QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(call, this);
     QObject::connect(watcher, &QDBusPendingCallWatcher::finished, [this](QDBusPendingCallWatcher *watcher) {
         QDBusPendingReply<void> reply = *watcher;
+        bool success = true;
 
         if (reply.isError()) {
             qWarning() << "Failed to pair with device:"
                        << reply.error().message();
             updateConnection();
+            success = false;
         }
 
         m_isPairing = false;
+
+        Q_EMIT(pairingDone(success));
+
+        watcher->deleteLater();
+    });
+}
+
+void Device::cancelPairing()
+{
+   if (!m_isPairing)
+      return;
+
+    auto call = m_bluezDevice->asyncCall("CancelPairing");
+
+    QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(call, this);
+    QObject::connect(watcher, &QDBusPendingCallWatcher::finished, [this](QDBusPendingCallWatcher *watcher) {
+        QDBusPendingReply<void> reply = *watcher;
+
+        if (reply.isError()) {
+            qWarning() << "Failed to cancel pairing attempt with device:"
+                       << reply.error().message();
+            updateConnection();
+        } else {
+            // Only mark us a not pairing when call succeeded
+            m_isPairing = false;
+        }
 
         watcher->deleteLater();
     });

@@ -426,6 +426,12 @@ void DeviceModel::slotPropertyChanged(const QString      &key,
     updateProperty (key, value.variant());
 }
 
+void DeviceModel::slotDevicePairingDone(bool success)
+{
+    Device *device = static_cast<Device*>(sender());
+
+    Q_EMIT(devicePairingDone(device, success));
+}
 
 void DeviceModel::addDevice(const QString &path, const QVariantMap &properties)
 {
@@ -435,6 +441,8 @@ void DeviceModel::addDevice(const QString &path, const QVariantMap &properties)
     if (device->isValid()) {
         QObject::connect(device.data(), SIGNAL(deviceChanged()),
                          this, SLOT(slotDeviceChanged()));
+        QObject::connect(device.data(), SIGNAL(pairingDone(bool)),
+                         this, SLOT(slotDevicePairingDone(bool)));
         addDevice(device);
     }
 }

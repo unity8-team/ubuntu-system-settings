@@ -34,8 +34,28 @@ ItemPage {
     objectName: "bluetoothPage"
 
     property var dialogPopupId
+    property var currentDevice
 
-    UbuntuBluetoothPanel { id: backend }
+    function finishDevicePairing() {
+        if (root.dialogPopupId)
+            PopupUtils.close(root.dialogPopupId)
+
+        root.dialogPopupId = null
+        root.currentDevice = null
+    }
+
+    UbuntuBluetoothPanel {
+        id: backend
+
+        onDevicePairingDone: {
+            console.log("Got pairing status notification for device " + device.address)
+
+            if (device != root.currentDevice)
+                return
+
+            finishDevicePairing()
+        }
+    }
 
     Timer {
         id: discoverableTimer
@@ -87,12 +107,7 @@ ItemPage {
 
     Connections {
         target: backend.agent
-        onCancelNeeded: {
-            if (!root.dialogPopupId)
-                return;
-
-            PopupUtils.close(root.dialogPopupId);
-        }
+        onCancelNeeded: finishDevicePairing()
         onPasskeyConfirmationNeeded: {
             var request_tag = tag
             var popup = PopupUtils.open(confirmPasskeyDialog, root, {passkey: passkey, name: device.name})
@@ -114,20 +129,34 @@ ItemPage {
         onDisplayPinCodeNeeded: {
             if (!root.dialogPopupId)
             {
-                var request_tag = tag
+                root.currentDevice = device
                 root.dialogPopupId  = PopupUtils.open(displayPinCodeDialog, root, {pincode: passkey, name: device.name})
-                root.dialogPopupId.canceled.connect(function() {root.dialogPopupId = null;
-                    target.displayPinCodeCallback(request_tag)})
+                root.dialogPopupId.canceled.connect(function() {
+                    root.dialogPopupId = null
+                    if (root.currentDevice) {
+                        root.currentDevice.cancelPairing()
+                        root.currentDevice = null
+                    }
+                })
+            }
+            else
+            {
+                console.warn("Unhandled PIN code request for device " + device.name);
             }
         }
         onDisplayPasskeyNeeded: {
             if (!root.dialogPopupId)
             {
-                var request_tag = tag
+                root.currentDevice = device
                 root.dialogPopupId  = PopupUtils.open(displayPasskeyDialog, root, {passkey: passkey, name: device.name,
                                                  entered: entered})
-                root.dialogPopupId.canceled.connect(function() {root.dialogPopupId = null;
-                    target.displayPasskeyCallback(request_tag)})
+                root.dialogPopupId.canceled.connect(function() {
+                    root.dialogPopupId = null
+                    if (root.currentDevice) {
+                        root.currentDevice.cancelPairing()
+                        root.currentDevice = null
+                    }
+                })
             }
             else
             {
@@ -135,8 +164,7 @@ ItemPage {
             }
         }
         onReleaseNeeded: {
-            if (root.dialogPopupId)
-                PopupUtils.close(root.dialogPopupId)
+            finishDevicePairing()
         }
         onAuthorizationRequested: {
             if (!root.dialogPopupId)
@@ -144,11 +172,11 @@ ItemPage {
                 var request_tag = tag
                 root.dialogPopupId  = PopupUtils.open(authorizationRequestDialog, root, {name: device.name})
                 root.dialogPopupId.accepted.connect(function() {
-                    root.dialogPopupId = null;
+                    root.dialogPopupId = null
                     target.authorizationRequestCallback(request_tag, true)
                 })
                 root.dialogPopupId.declined.connect(function() {
-                    root.dialogPopupId = null;
+                    root.dialogPopupId = null
                     target.authorizationRequestCallback(request_tag, false)
                 })
             }

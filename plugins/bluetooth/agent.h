@@ -59,8 +59,8 @@ Q_SIGNALS:
     void pinCodeNeeded(int tag, Device* device);
     void passkeyNeeded(int tag, Device* device);
     void passkeyConfirmationNeeded(int tag, Device* device, QString passkey);
-    void displayPinCodeNeeded(int tag, Device* device, QString pincode);
-    void displayPasskeyNeeded(int tag, Device* device, QString passkey, ushort entered);
+    void displayPinCodeNeeded(Device* device, QString pincode);
+    void displayPasskeyNeeded(Device* device, QString passkey, ushort entered);
     void releaseNeeded();
     void cancelNeeded();
     void authorizationRequested(int tag, Device* device);

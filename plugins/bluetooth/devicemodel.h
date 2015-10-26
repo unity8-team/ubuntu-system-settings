@@ -83,6 +83,7 @@ Q_SIGNALS:
     void poweredChanged(bool powered);
     void discoveringChanged(bool isDiscovering);
     void discoverableChanged(bool isDiscoverable);
+    void devicePairingDone(Device *device, bool success);
 
 private:
     QDBusConnection m_dbus;
@@ -131,6 +132,7 @@ private Q_SLOTS:
     void slotTimeout();
     void slotEnableDiscoverable();
     void slotDeviceChanged();
+    void slotDevicePairingDone(bool success);
 };
 
 class DeviceFilter: public QSortFilterProxyModel
