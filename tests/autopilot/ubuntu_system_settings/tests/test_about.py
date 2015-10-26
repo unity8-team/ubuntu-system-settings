@@ -157,10 +157,10 @@ class AboutSystemImageTestCase(AboutSystemImageBaseTestCase):
         self.assertEquals(
             last_updated_date_displayed, self._get_last_updated_date())
 
-    def test_normal_version(self):
+    def test_non_ota_version(self):
         """Checks whether a non-ota release gets an rev number."""
         os_item = self.about_page.wait_select_single(objectName='osItem')
-        self.assertThat(os_item.value, Contains(' (42)'))
+        self.assertThat(os_item.value, Contains(' (r42)'))
 
     def test_check_for_updates(self):
         """
@@ -183,7 +183,7 @@ class AboutOtaTestCase(AboutSystemImageBaseTestCase):
         }
     }
 
-    def test_ota_binding(self):
+    def test_ota_version(self):
         """Checks whether a stable release gets an OTA number."""
         os_item = self.about_page.wait_select_single(objectName='osItem')
         self.assertThat(os_item.value, Contains(' (OTA-100)'))

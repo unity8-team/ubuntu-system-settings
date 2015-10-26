@@ -162,8 +162,8 @@ ItemPage {
                 property string versionIdentifier: {
                     var num = UpdateManager.currentBuildNumber;
                     var ota = UpdateManager.detailedVersionDetails['tag'];
-                    num = num ? num : "";
-                    return ota ? ota : num.toString();
+                    num = num ? "r%1".arg(num.toString()) : "";
+                    return ota ? ota : num;
                 }
                 objectName: "osItem"
                 text: i18n.tr("OS")
