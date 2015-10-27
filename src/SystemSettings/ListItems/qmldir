@@ -1,2 +1,3 @@
 module SystemSettings.ListItems
 Standard 1.0 Standard.qml
+SingleValue 1.0 SingleValue.qml

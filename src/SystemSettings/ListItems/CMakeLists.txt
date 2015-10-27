@@ -1,4 +1,5 @@
 set(QML_SOURCES
+    SingleValue.qml
     Standard.qml
 )
 

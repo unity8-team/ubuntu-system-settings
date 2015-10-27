@@ -21,8 +21,9 @@
 import QtQuick 2.4
 import QtSystemInfo 5.0
 import SystemSettings 1.0
+import SystemSettings.ListItems 1.0 as ListItem
 import Ubuntu.Components 1.3
-import Ubuntu.Components.ListItems 1.3 as ListItem
+import Ubuntu.Components.ListItems 1.3 as UuitkListItem
 import Ubuntu.SystemSettings.StorageAbout 1.0
 import Ubuntu.SystemSettings.Update 1.0
 import MeeGo.QOfono 0.2
@@ -69,28 +70,27 @@ ItemPage {
             anchors.left: parent.left
             anchors.right: parent.right
 
-            ListItem.Empty {
-                height: ubuntuLabel.height + deviceLabel.height + units.gu(6)
-
-                Column {
-                    anchors.left: parent.left
-                    anchors.right: parent.right
-                    anchors.centerIn: parent
-                    spacing: units.gu(2)
-                    Label {
-                        id: ubuntuLabel
-                        anchors.horizontalCenter: parent.horizontalCenter
-                        text: ""
-                        fontSize: "x-large"
+            Column {
+                anchors.left: parent.left
+                anchors.right: parent.right
+                Label {
+                    id: ubuntuLabel
+                    anchors {
+                        left: parent.left
+                        right: parent.right
                     }
-                    Label {
-                        id: deviceLabel
-                        objectName: "deviceLabel"
-                        anchors.horizontalCenter: parent.horizontalCenter
-                        text: deviceInfos.manufacturer() ? deviceInfos.manufacturer() + " " + deviceInfos.model() : backendInfos.vendorString
-                    }
+                    height: contentHeight + units.gu(2)
+                    horizontalAlignment: Text.AlignHCenter
+                    verticalAlignment: Text.AlignVCenter
+                    text: ""
+                    fontSize: "x-large"
                 }
-                highlightWhenPressed: false
+                Label {
+                    id: deviceLabel
+                    objectName: "deviceLabel"
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    text: deviceInfos.manufacturer() ? deviceInfos.manufacturer() + " " + deviceInfos.model() : backendInfos.vendorString
+                }
             }
 
             ListItem.SingleValue {
@@ -111,19 +111,19 @@ ItemPage {
                 visible: modemsSorted.length <= 1
             }
 
-            ListItem.MultiValue {
-                text: "IMEI"
-                objectName: "imeiItems"
-                values: {
-                    var imeis = [];
-                    modemsSorted.forEach(function (path, i) {
-                        var imei = deviceInfos.imei(i);
-                        imei ? imeis.push(imei) : imeis.push(i18n.tr("None"));
-                    });
-                    return imeis;
-                }
-                visible: modemsSorted.length > 1
-            }
+            // ListItem.MultiValue {
+            //     text: "IMEI"
+            //     objectName: "imeiItems"
+            //     values: {
+            //         var imeis = [];
+            //         modemsSorted.forEach(function (path, i) {
+            //             var imei = deviceInfos.imei(i);
+            //             imei ? imeis.push(imei) : imeis.push(i18n.tr("None"));
+            //         });
+            //         return imeis;
+            //     }
+            //     visible: modemsSorted.length > 1
+            // }
 
             ListItem.SingleValue {
                 property string address: wlinfo.macAddress(NetworkInfo.WlanMode, 0)
@@ -141,7 +141,7 @@ ItemPage {
                 showDivider: false
             }
 
-            ListItem.Divider {}
+            UuitkListItem.Divider {}
 
             ListItem.SingleValue {
                 id: storageItem
@@ -174,26 +174,26 @@ ItemPage {
                     Qt.formatDate(UpdateManager.lastUpdateDate) : i18n.tr("Never")
             }
 
-            ListItem.SingleControl {
-                control: Button {
-                    objectName: "updateButton"
-                    text: i18n.tr("Check for updates")
-                    width: parent.width - units.gu(4)
-                    onClicked: {
-                        var upPlugin = pluginManager.getByName("system-update")
-                        if (upPlugin) {
-                            var updatePage = upPlugin.pageComponent
-                            if (updatePage)
-                                pageStack.push(updatePage)
-                            else
-                                console.warn("Failed to get system-update pageComponent")
-                        } else {
-                            console.warn("Failed to get system-update plugin instance")
-                        }
-                    }
-                }
-                showDivider: false
-            }
+            // ListItem.SingleControl {
+            //     control: Button {
+            //         objectName: "updateButton"
+            //         text: i18n.tr("Check for updates")
+            //         width: parent.width - units.gu(4)
+            //         onClicked: {
+            //             var upPlugin = pluginManager.getByName("system-update")
+            //             if (upPlugin) {
+            //                 var updatePage = upPlugin.pageComponent
+            //                 if (updatePage)
+            //                     pageStack.push(updatePage)
+            //                 else
+            //                     console.warn("Failed to get system-update pageComponent")
+            //             } else {
+            //                 console.warn("Failed to get system-update plugin instance")
+            //             }
+            //         }
+            //     }
+            //     showDivider: false
+            // }
 
             SettingsItemTitle {
                 objectName: "legalItem"

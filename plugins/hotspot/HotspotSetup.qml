@@ -19,8 +19,9 @@
 import QtQuick 2.4
 import QtQuick.Layouts 1.1
 import SystemSettings 1.0
+import SystemSettings.ListItems 1.0 as ListItem
+import Ubuntu.Components.ListItems 1.3 as UuitkListItem
 import Ubuntu.Components 1.3
-import Ubuntu.Components.ListItems 1.3 as ListItem
 import Ubuntu.Components.Popups 1.3
 import Ubuntu.Connectivity 1.0
 import Ubuntu.SystemSettings.Cellular 1.0
@@ -187,35 +188,20 @@ Component {
                 width: parent.width
             }
 
-            ListItem.Empty {
+            ListItem.Standard {
                 id: passwordRequired
-                onClicked: passwordRequiredToggle.trigger()
-
-                CheckBox {
+                text: i18n.tr("Require a password (recommended):")
+                leadWithControl: true
+                showDivider: false
+                control: CheckBox {
                     id: passwordRequiredToggle
                     objectName: "passwordRequiredToggle"
                     checked: Connectivity.hotspotAuth === "wpa-psk"
-                    anchors {
-                        left: parent.left
-                        verticalCenter: parent.verticalCenter
-                    }
+
                     // FIXME: Workaround for lp:1415023
                     activeFocusOnPress: false
                 }
-
-                Label {
-                    id: passwordRequiredLabel
-                    anchors {
-                        left: passwordRequiredToggle.right
-                        leftMargin: units.gu(1)
-                        right: parent.right
-                        verticalCenter: parent.verticalCenter
-                    }
-
-                    // FIXME: Workaround for label not wrapping (lp:1442851)
-                    wrapMode: Text.Wrap
-                    text: i18n.tr("Require a password (recommended):")
-                }
+                onClicked: passwordRequiredToggle.trigger()
             }
 
             TextField {
@@ -229,12 +215,12 @@ Component {
                 width: parent.width
             }
 
-            ListItem.Empty {
+            ListItem.Standard {
                 id: passwordVisible
                 enabled: passwordRequiredToggle.checked
-                onClicked: passwordVisibleToggle.trigger()
-
-                CheckBox {
+                leadWithControl: true
+                text: i18n.tr("Show password")
+                control: CheckBox {
                     id: passwordVisibleToggle
                     enabled: parent.enabled
                     anchors {
@@ -245,23 +231,10 @@ Component {
                     // FIXME: Workaround for lp:1415023
                     activeFocusOnPress: false
                 }
-
-                Label {
-                    id: passwordVisibleLabel
-
-                    /* FIXME: use enabled when lp:1491802 is fixed, or use
-                    CheckBox.text once lp:1323238 is fixed. */
-                    opacity: passwordRequiredToggle.checked ? 1 : 0.5
-                    anchors {
-                        left: passwordVisibleToggle.right
-                        leftMargin: units.gu(1)
-                        verticalCenter: parent.verticalCenter
-                    }
-                    text: i18n.tr("Show password")
-                }
+                onClicked: passwordVisibleToggle.trigger()
             }
 
-            ListItem.Caption {
+            UuitkListItem.Caption {
                 id: enableWifiCaption
                 anchors {
                     left: parent.left
