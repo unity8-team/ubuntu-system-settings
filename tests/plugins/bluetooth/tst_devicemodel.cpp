@@ -36,7 +36,7 @@ private:
     QDBusConnection *m_dbus;
 
 private:
-    void processEvents(unsigned int msecs = 100);
+    void processEvents(unsigned int msecs = 500);
 
 private Q_SLOTS:
     void init();

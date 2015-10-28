@@ -37,7 +37,7 @@ private:
     Bluetooth *m_bluetooth;
     QDBusConnection *m_dbus;
 
-    void processEvents(unsigned int msecs = 100);
+    void processEvents(unsigned int msecs = 500);
     void setDiscovering(bool value);
 
 private Q_SLOTS:
