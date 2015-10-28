@@ -79,7 +79,7 @@ class UbuntuSystemSettingsTestCase(
 
     """Base class for Ubuntu System Settings."""
 
-    APP_PATH = '/usr/bin/system-settings'
+    APP_FILENAME = 'system-settings'
     DESKTOP_FILE = '/usr/share/applications/ubuntu-system-settings.desktop'
 
     def setUp(self, panel=None):
@@ -107,7 +107,7 @@ class UbuntuSystemSettingsTestCase(
         :returns: A proxy object that represents the application. Introspection
         data is retrievable via this object.
         """
-        params = [self.APP_PATH]
+        params = [self.APP_FILENAME]
         if platform.model() != 'Desktop':
             params.append('--desktop_file_hint={}'.format(self.DESKTOP_FILE))
 

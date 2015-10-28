@@ -40,6 +40,23 @@ To speed up generation and compilation, you could use Ninja generator instead of
    $ cmake .. -G Ninja && cmake --build .
 
 
+= Running application =
+
+To run application you need to type command:
+
+For Make generator:
+
+   $ sudo make install
+
+For Ninja generator:
+
+   $ sudo ninja install
+
+Then from builddir run command:
+
+   $ ./src/system-settings
+
+
 = Running Unit Tests =
 
 Unit Tests help with testing the internal working of components while
@@ -60,19 +77,20 @@ For example to run only tests which contains "bluetooth" word you could specify:
    $ ctest --tests-regex bluetooth
 
 
-= Running application =
+= Running autopilot tests
 
-To run application you need to type command:
+Autopilot tests are functional tests, which emulate using application by touch.
 
-For Make generator:
+To run autopilot tests, you need following packages:
 
-   $ sudo make install
+   $ sudo apt-get install ubuntu-ui-toolkit-autopilot python3-autopilot
 
-For Ninja generator:
+To run all tests type commands:
 
-   $ sudo ninja install
+   $ cd tests/autopilot
+   $ autopilot3 run ubuntu_system_settings
 
-Then from builddir run command:
-
-   $ ./src/system-settings
+To see what test cases a test suite has, and selectively run only some of them, use:
+   $ autopilot3 list ubuntu_system_settings
+   
 
