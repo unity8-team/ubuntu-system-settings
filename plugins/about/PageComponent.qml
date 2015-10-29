@@ -171,7 +171,9 @@ ItemPage {
                     .arg(deviceInfos.version(DeviceInfo.Os))
                     .arg(versionIdentifier ? " (%1)".arg(versionIdentifier) : "")
                 progression: true
-                onClicked: pageStack.push(Qt.resolvedUrl("Version.qml"))
+                onClicked: pageStack.push(Qt.resolvedUrl("Version.qml"), {
+                    version: versionIdentifier
+                })
             }
 
             ListItem.SingleValue {
