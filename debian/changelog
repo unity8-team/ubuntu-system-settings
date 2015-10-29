@@ -1,3 +1,18 @@
+ubuntu-system-settings (0.3+16.04.20151029-0ubuntu1) xenial; urgency=medium
+
+  [ CI Train Bot ]
+  * New rebuild forced.
+
+  [ jonas-drange ]
+  * Deprecated the use of Info endpoint in system_update.cpp and
+    hotspot. Exposed detailed version details on UpdateManager. Used
+    this to get to a 'tag' key which includes the ota string. Because of
+    more advanced system-image testing, about tests now use the
+    systemimage dbusmock template. debian/control, s-i-dbus changed to
+    3.0.2 because that's where the ota string is. (LP: #1475568)
+
+ -- Jonas G. Drange <ci-train-bot@canonical.com>  Thu, 29 Oct 2015 15:48:09 +0000
+
 ubuntu-system-settings (0.3+16.04.20151023.1-0ubuntu1) xenial; urgency=medium
 
   [ CI Train Bot ]
