@@ -286,31 +286,11 @@ ItemPage {
                     anchors {
                         left: activity.running ? activity.right : parent.left
                         top: parent.top
-                        right: btnRetry.visible ? btnRetry.left : parent.right
+                        right: parent.right
                         rightMargin: units.gu(2)
                         leftMargin: units.gu(2)
                     }
                     height: parent.height
-                }
-
-                Button {
-                    id: btnRetry
-                    text: i18n.tr("Retry")
-                    color: UbuntuColors.orange
-                    anchors {
-                        right: parent.right
-                        top: parent.top
-                        bottom: parent.bottom
-                        margins: units.gu(1)
-                    }
-                    visible: !activity.visible && NetworkingStatus.online
-
-                    onClicked: {
-                        activity.running = true;
-                        root.state = "SEARCHING";
-                        if (NetworkingStatus.online)
-                            UpdateManager.checkUpdates();
-                    }
                 }
             }
 
