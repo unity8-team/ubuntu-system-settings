@@ -64,10 +64,11 @@ HotspotItem::HotspotItem(const QVariantMap &staticData, QObject *parent):
                                         "/Service",
                                         "com.canonical.SystemImage",
                                         QDBusConnection::systemBus());
-    QDBusPendingReply<int, QString, QString, QString, QMap<QString, QString> > reply = m_SystemServiceIface.call("Info");
+    QDBusPendingReply<QMap<QString, QString> > reply = m_SystemServiceIface.call("Information");
     reply.waitForFinished();
     if (reply.isValid()) {
-        QString device = reply.argumentAt<1>();
+        QMap<QString, QString> result = reply.argumentAt<0>();
+        QString device = result["device_name"];
         if (device == "mako" || device == "flo") {
             setVisibility(false);
             return;
