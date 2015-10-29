@@ -66,7 +66,6 @@ ItemPage {
         id: networkingStatus
         target: NetworkingStatus
         onOnlineChanged: {
-            console.warn("Online: " + NetworkingStatus.online);
             if (NetworkingStatus.online) {
                 activity.running = true;
                 root.state = "SEARCHING";
