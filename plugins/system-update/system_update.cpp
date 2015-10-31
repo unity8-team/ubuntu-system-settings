@@ -164,21 +164,21 @@ QString SystemUpdate::currentUbuntuBuildNumber() {
     if (!m_detailedVersion.contains("ubuntu"))
         setCurrentDetailedVersion();
     QString val = m_detailedVersion.value("ubuntu").toString();
-    return val.isEmpty() ? "Unavailable" : val;
+    return val.isEmpty() ? _("Unavailable") : val;
 }
 
 QString SystemUpdate::currentDeviceBuildNumber() {
     if (!m_detailedVersion.contains("device"))
         setCurrentDetailedVersion();
     QString val = m_detailedVersion.value("device").toString();
-    return val.isEmpty() ? "Unavailable" : val;
+    return val.isEmpty() ? _("Unavailable") : val;
 }
 
 QString SystemUpdate::currentCustomBuildNumber() {
     if (!m_detailedVersion.contains("custom"))
         setCurrentDetailedVersion();
     QString val = m_detailedVersion.value("custom").toString();
-    return val.isEmpty() ? "Unavailable" : val;
+    return val.isEmpty() ? _("Unavailable") : val;
 }
 
 QMap<QString, QVariant> SystemUpdate::detailedVersionDetails() {
