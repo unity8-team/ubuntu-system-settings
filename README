@@ -32,7 +32,7 @@ The build system uses CMake. To compile, create "builddir" directory
 process and start build :
 
    $ mkdir builddir && cd builddir
-   $ cmake .. && cmake --build . -- -j 3
+   $ cmake .. && cmake --build . -- -j 5
 
 To speed up generation and compilation, you could use Ninja generator instead of Make:
 
@@ -80,6 +80,8 @@ For example to run only tests which contains "bluetooth" word you could specify:
 = Running autopilot tests
 
 Autopilot tests are functional tests, which emulate using application by touch.
+Remember to setup language to US before running autopilot tests,
+to pass tests successfully.
 
 To run autopilot tests, you need following packages:
 
@@ -88,7 +90,7 @@ To run autopilot tests, you need following packages:
 To run all tests type commands:
 
    $ cd tests/autopilot
-   $ autopilot3 run ubuntu_system_settings
+   $ autopilot3 run ubuntu_system_settings -v
 
 To see what test cases a test suite has, and selectively run only some of them, use:
    $ autopilot3 list ubuntu_system_settings
