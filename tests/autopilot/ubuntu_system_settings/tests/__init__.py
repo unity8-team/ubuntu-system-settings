@@ -502,38 +502,27 @@ class AboutOfonoBaseTestCase(UbuntuSystemSettingsOfonoTestCase):
 
 class AboutSystemImageBaseTestCase(AboutBaseTestCase,
                                    dbusmock.DBusTestCase):
+    systemimage_parameters = {
+        'last_update_date': datetime.now().replace(microsecond=0).isoformat(),
+        'channel': 'daily',
+        'build_number': 42,
+        'device': ''
+    }
+
     @classmethod
     def setUpClass(cls):
         cls.start_system_bus()
         cls.dbus_con = cls.get_dbus(True)
+        si_tmpl = os.path.join(os.path.dirname(__file__), 'systemimage.py')
+        (cls.si_mock, cls.si_obj) = cls.spawn_server_template(
+            si_tmpl, parameters=cls.systemimage_parameters,
+            stdout=subprocess.PIPE)
 
-    def setUp(self):
-        self.p_mock = self.spawn_server('com.canonical.SystemImage',
-                                        '/Service',
-                                        'com.canonical.SystemImage',
-                                        system_bus=True,
-                                        stdout=subprocess.PIPE)
-
-        self.wait_for_bus_object('com.canonical.SystemImage',
-                                 '/Service',
-                                 system_bus=True)
-
-        self.dbusmock = dbus.Interface(self.dbus_con.get_object(
-                                       'com.canonical.SystemImage',
-                                       '/Service'),
-                                       dbusmock.MOCK_IFACE)
-
-        date = datetime.now().replace(microsecond=0).isoformat()
-
-        self.dbusmock.AddMethod('', 'Info', '', 'isssa{ss}',
-                                'ret = (0, "", "", "%s", [])' % date)
-
-        super(AboutSystemImageBaseTestCase, self).setUp()
-
-    def tearDown(self):
-        self.p_mock.terminate()
-        self.p_mock.wait()
-        super(AboutSystemImageBaseTestCase, self).tearDown()
+    @classmethod
+    def tearDownClass(cls):
+        cls.si_mock.terminate()
+        cls.si_mock.wait()
+        super(AboutSystemImageBaseTestCase, cls).tearDownClass()
 
 
 class StorageBaseTestCase(AboutBaseTestCase):

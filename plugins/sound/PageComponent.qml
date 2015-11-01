@@ -19,9 +19,9 @@
  */
 
 import GSettings 1.0
-import QtQuick 2.0
-import Ubuntu.Components 0.1
-import Ubuntu.Components.ListItems 0.1 as ListItem
+import QtQuick 2.4
+import Ubuntu.Components 1.3
+import Ubuntu.Components.ListItems 1.3 as ListItem
 import SystemSettings 1.0
 import Ubuntu.SystemSettings.Sound 1.0
 import Ubuntu.Settings.Menus 0.1 as Menus
@@ -95,6 +95,7 @@ ItemPage {
                 objectPath: "/com/canonical/indicator/sound"
 
                 property variant volume: action("volume")
+                property variant silentMode: action("silent-mode")
                 property variant highVolume: action("high-volume")
 
                 Component.onCompleted: start()

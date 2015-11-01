@@ -1,3 +1,32 @@
+ubuntu-system-settings (0.3+16.04.20151029-0ubuntu1) xenial; urgency=medium
+
+  [ CI Train Bot ]
+  * New rebuild forced.
+
+  [ jonas-drange ]
+  * Deprecated the use of Info endpoint in system_update.cpp and
+    hotspot. Exposed detailed version details on UpdateManager. Used
+    this to get to a 'tag' key which includes the ota string. Because of
+    more advanced system-image testing, about tests now use the
+    systemimage dbusmock template. debian/control, s-i-dbus changed to
+    3.0.2 because that's where the ota string is. (LP: #1475568)
+
+ -- Jonas G. Drange <ci-train-bot@canonical.com>  Thu, 29 Oct 2015 15:48:09 +0000
+
+ubuntu-system-settings (0.3+16.04.20151023.1-0ubuntu1) xenial; urgency=medium
+
+  [ CI Train Bot ]
+  * New rebuild forced.
+
+  [ Ken VanDine ]
+  * Bump Ubuntu.Components imports to 1.3 and fixed UbuntuShape
+    deprecations (LP: #1508363)
+
+  [ jonas-drange ]
+  * re-add silentMode property to repair the silent mode switch
+
+ -- Jonas G. Drange <ci-train-bot@canonical.com>  Fri, 23 Oct 2015 14:57:29 +0000
+
 ubuntu-system-settings (0.3+15.10.20151002-0ubuntu1) wily; urgency=medium
 
   [ Sebastien Bacher ]
