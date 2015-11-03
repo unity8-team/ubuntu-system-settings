@@ -1,5 +1,4 @@
 {
-    "plugin": "hotspot-plugin",
     "icon": "preferences-network-hotspot-symbolic",
     "name": "Hotspot",
     "plugin": "hotspot-plugin",
