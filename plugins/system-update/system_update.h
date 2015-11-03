@@ -49,6 +49,7 @@ public:
     QString currentUbuntuBuildNumber();
     QString currentDeviceBuildNumber();
     QString currentCustomBuildNumber();
+    QMap<QString, QVariant> detailedVersionDetails();
     QString deviceName();
 
     void checkForUpdate();
@@ -79,7 +80,7 @@ private Q_SLOTS:
 
 private:
     int m_currentBuildNumber;
-    QMap<QString, QString> m_detailedVersion;
+    QMap<QString, QVariant> m_detailedVersion;
     QDateTime m_lastUpdateDate;
     int m_downloadMode;
     QString m_deviceName;

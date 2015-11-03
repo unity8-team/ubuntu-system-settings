@@ -1,9 +1,9 @@
 import GSettings 1.0
-import QtQuick 2.0
+import QtQuick 2.4
 import QtMultimedia 5.0
 import SystemSettings 1.0
-import Ubuntu.Components 0.1
-import Ubuntu.Components.ListItems 0.1 as ListItem
+import Ubuntu.Components 1.3
+import Ubuntu.Components.ListItems 1.3 as ListItem
 import Ubuntu.SystemSettings.Sound 1.0
 import QMenuModel 0.1
 
@@ -47,8 +47,6 @@ ItemPage {
         busName: "com.canonical.indicator.sound"
         objectPath: "/com/canonical/indicator/sound"
 
-        property variant silentMode: action("silent-mode")
-
         Component.onCompleted: start()
     }
 
@@ -62,8 +60,6 @@ ItemPage {
         anchors.left: parent.left
         anchors.right: parent.right
 
-        SilentModeWarning { visible: soundActionGroup.silentMode.state }
-
         ListItem.SingleControl {
             id: listId
             control: Button {
@@ -73,7 +69,7 @@ ItemPage {
                     soundEffect.stop()
             }
             enabled: soundEffect.playbackState == Audio.PlayingState
-            visible: showStopButton && !soundActionGroup.silentMode.state
+            visible: showStopButton
         }
     }
 
@@ -103,11 +99,8 @@ ItemPage {
                 soundSettings.incomingMessageSound = soundFileNames[index]
                 backendInfo.incomingMessageSound = soundFileNames[index]
             }
-            /* Only preview the file if not in silent mode */
-            if (!soundActionGroup.silentMode.state) {
-                soundEffect.source = soundFileNames[index]
-                soundEffect.play()
-            }
+            soundEffect.source = soundFileNames[index]
+            soundEffect.play()
         }
     }
 }

@@ -101,13 +101,22 @@ void SystemUpdate::pauseDownload() {
 }
 
 void SystemUpdate::setCurrentDetailedVersion() {
-    QDBusPendingReply<int, QString, QString, QString, QMap<QString, QString> > reply = m_SystemServiceIface.call("Info");
+    QDBusPendingReply<QMap<QString, QString> > reply = m_SystemServiceIface.call("Information");
     reply.waitForFinished();
     if (reply.isValid()) {
-        m_currentBuildNumber = reply.argumentAt<0>();
-        m_deviceName = reply.argumentAt<2>();
-        m_lastUpdateDate = QDateTime::fromString(reply.argumentAt<3>(), Qt::ISODate);
-        m_detailedVersion = reply.argumentAt<4>();
+        QMap<QString, QString> result = reply.argumentAt<0>();
+        m_currentBuildNumber = result["current_build_number"].toInt();
+        m_deviceName = result["device_name"];
+        m_lastUpdateDate = QDateTime::fromString(result["last_update_date"], Qt::ISODate);
+
+        QMap<QString, QVariant> details;
+        QStringList keyvalue = result["version_detail"].split(",", QString::SkipEmptyParts);
+        for (int i = 0; i < keyvalue.size(); ++i) {
+            QStringList pair = keyvalue.at(i).split("=");
+            details[pair[0]] = QVariant(pair[1]);
+        }
+        m_detailedVersion = details;
+
         Q_EMIT versionChanged();
     } else {
         qWarning() << "Error when retrieving version information: " << reply.error();
@@ -154,22 +163,30 @@ int SystemUpdate::currentBuildNumber() {
 QString SystemUpdate::currentUbuntuBuildNumber() {
     if (!m_detailedVersion.contains("ubuntu"))
         setCurrentDetailedVersion();
-
-    return m_detailedVersion.value("ubuntu", "Unavailable");
+    QString val = m_detailedVersion.value("ubuntu").toString();
+    return val.isEmpty() ? "Unavailable" : val;
 }
 
 QString SystemUpdate::currentDeviceBuildNumber() {
     if (!m_detailedVersion.contains("device"))
         setCurrentDetailedVersion();
-
-    return m_detailedVersion.value("device", "Unavailable");
+    QString val = m_detailedVersion.value("device").toString();
+    return val.isEmpty() ? "Unavailable" : val;
 }
 
 QString SystemUpdate::currentCustomBuildNumber() {
     if (!m_detailedVersion.contains("custom"))
         setCurrentDetailedVersion();
+    QString val = m_detailedVersion.value("custom").toString();
+    return val.isEmpty() ? "Unavailable" : val;
+}
 
-    return m_detailedVersion.value("custom", "Unavailable");
+QMap<QString, QVariant> SystemUpdate::detailedVersionDetails() {
+     if (m_detailedVersion.empty()) {
+        setCurrentDetailedVersion();
+     }
+
+    return m_detailedVersion;
 }
 
 int SystemUpdate::downloadMode() {
@@ -232,7 +249,7 @@ void SystemUpdate::ProcessAvailableStatus(bool isAvailable,
     update->setSelected(downloading);
     update->setUpdateAvailable(isAvailable);
     update->setLastUpdateDate(lastUpdateDate);
-    update->setIconUrl(QString("file:///usr/share/ubuntu/settings/system/icons/distributor-logo.png"));
+    update->setIconUrl(QString("file:///usr/share/icons/suru/places/scalable/distributor-logo.svg"));
 
     if (update->updateRequired()) {
         Q_EMIT updateAvailable(packageName, update);

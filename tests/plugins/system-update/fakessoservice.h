@@ -15,6 +15,7 @@ public:
     explicit FakeSsoService(QObject *parent = 0);
 
     void getCredentials();
+    void invalidateCredentials();
 
     void setValidCredentials(bool value) { m_validCredentials = value; }
     void setDeletedCredentials(bool value) { m_deletedCredentials = value; }

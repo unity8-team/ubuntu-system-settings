@@ -26,12 +26,12 @@
  *       “Contact {carrier name} for more information.”.
  */
 
-import QtQuick 2.0
+import QtQuick 2.4
 import QtContacts 5.0
 import SystemSettings 1.0
-import Ubuntu.Components 1.1
-import Ubuntu.Components.ListItems 0.1 as ListItem
-import Ubuntu.Components.Popups 0.1
+import Ubuntu.Components 1.3
+import Ubuntu.Components.ListItems 1.3 as ListItem
+import Ubuntu.Components.Popups 1.3
 import Ubuntu.Components.Themes.Ambiance 0.1
 import Ubuntu.Content 0.1
 import "callForwardingUtils.js" as Utils

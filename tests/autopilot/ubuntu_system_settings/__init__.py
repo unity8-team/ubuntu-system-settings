@@ -394,8 +394,11 @@ class HotspotPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
         if config:
             if 'ssid' in config:
                 setup.set_ssid(config['ssid'])
+            if 'auth' in config:
+                setup.set_auth(config['auth'])
             if 'password' in config:
                 setup.set_password(config['password'])
+        utils.dismiss_osk()
         setup.enable()
         if setup:
             setup.wait_until_destroyed()
@@ -456,6 +459,11 @@ class HotspotSetup(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
         return self.wait_select_single(
             'Button', objectName='confirmButton')
 
+    @property
+    def _password_required_check(self):
+        return self.wait_select_single(
+            'CheckBox', objectName='passwordRequiredToggle')
+
     @autopilot.logging.log_action(logger.debug)
     def set_ssid(self, ssid):
         self._ssid_field.write(ssid)
@@ -463,6 +471,13 @@ class HotspotSetup(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
     @autopilot.logging.log_action(logger.debug)
     def set_password(self, password):
         self._password_field.write(password)
+
+    @autopilot.logging.log_action(logger.debug)
+    def set_auth(self, auth):
+        if auth == 'wpa-psk':
+            self._password_required_check.check()
+        else:
+            self._password_required_check.uncheck()
 
     @autopilot.logging.log_action(logger.debug)
     def enable(self):
@@ -879,7 +894,7 @@ class PhonePage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
         return page
 
     def _click_item(self, object_name):
-        item = self.select_single(objectName=object_name)
+        item = self.wait_select_single(objectName=object_name)
         item.swipe_into_view()
         self.pointing_device.click_object(item)
 
@@ -1385,8 +1400,8 @@ class LanguagePage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
         return False
 
     def get_current_language(self):
-        return self.select_single(
-            'Label', objectName='currentLanguage').currentLanguage
+        return self.wait_select_single(
+            objectName='currentLanguage').currentLanguage
 
     def _click_change_display_language(self):
         item = self.select_single(objectName='displayLanguage')

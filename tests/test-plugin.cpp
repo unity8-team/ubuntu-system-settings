@@ -38,6 +38,7 @@ public:
                                           QObject *parent = 0);
     virtual QQmlComponent *pageComponent(QQmlEngine *engine,
                                          QObject *parent = 0);
+    QString name() const;
 private:
     QQmlComponent *m_pageComponent;
 };
@@ -46,9 +47,14 @@ TestItem::TestItem(const QVariantMap &staticData, QObject *parent):
     ItemBase(staticData, parent),
     m_pageComponent(0)
 {
-    QStringList keywords;
-    keywords << "one" << "two" << "three";
-    setKeywords(keywords);
+    QString name = staticData["name"].toString();
+    if (name == "Wireless") {
+        QStringList keywords;
+        keywords << "one" << "two" << "three";
+        setKeywords(keywords);
+    } else if (name == "Brightness") {
+        setName("Brightness & Display");
+    }
 }
 
 TestItem::~TestItem()
@@ -67,7 +73,7 @@ QQmlComponent *TestItem::pageComponent(QQmlEngine *engine, QObject *parent)
 {
     if (m_pageComponent == NULL) {
         QQmlComponent *page = new QQmlComponent(engine, parent);
-        page->setData("import QtQuick 2.0\n"
+        page->setData("import QtQuick 2.4\n"
                       "Rectangle {\n"
                       "  function reset() { console.log('Hello') }\n"
                       "  width: 200; height: 200;\n"
