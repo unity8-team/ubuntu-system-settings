@@ -1,3 +1,19 @@
+ubuntu-system-settings (0.3+16.04.20151103.1-0ubuntu1) xenial; urgency=medium
+
+  [ Bartosz Kosiorek ]
+  * Remove "Retry" button, when no internet connection is available. It
+    will automatically retry after establishing connection (LP:
+    #1479447) (LP: #1479447)
+
+  [ Ken VanDine ]
+  * Don't elide connect to internet label (LP: #1512768)
+  * Ensure we only check for updates when NetworkingStatus.online is
+    true (LP: #1505663)
+  * [system-settings] Abort request when the onlineStatus changes to
+    false (LP: #1505663)
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Tue, 03 Nov 2015 16:26:31 +0000
+
 ubuntu-system-settings (0.3+16.04.20151029-0ubuntu1) xenial; urgency=medium
 
   [ CI Train Bot ]
