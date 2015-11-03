@@ -281,7 +281,7 @@ ItemPage {
                 Label {
                     text: activity.running ? i18n.tr("Checking for updates…") : i18n.tr("Connect to the Internet to check for updates")
                     verticalAlignment: Text.AlignVCenter
-                    elide: Text.ElideRight
+                    wrapMode: Text.Wrap
                     anchors {
                         left: activity.running ? activity.right : parent.left
                         top: parent.top
