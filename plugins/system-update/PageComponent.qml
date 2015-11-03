@@ -84,7 +84,8 @@ ItemPage {
         onFinished: {
             credentialsNotification.visible = false;
             root.state = "SEARCHING";
-            UpdateManager.checkUpdates();
+            if (NetworkingStatus.online)
+                UpdateManager.checkUpdates();
         }
     }
 
@@ -147,7 +148,7 @@ ItemPage {
             PropertyChanges { target: installAllButton; visible: false}
             PropertyChanges { target: checkForUpdatesArea; visible: true}
             PropertyChanges { target: updateNotification; visible: false}
-            PropertyChanges { target: activity; running: true}
+            PropertyChanges { target: activity; running: NetworkingStatus.online}
         },
         State {
             name: "NOUPDATES"
@@ -179,7 +180,8 @@ ItemPage {
         Component.onCompleted: {
             credentialsNotification.visible = false;
             root.state = "SEARCHING";
-            UpdateManager.checkUpdates();
+            if (NetworkingStatus.online)
+                UpdateManager.checkUpdates();
         }
 
         onUpdateAvailableFound: {
