@@ -135,6 +135,13 @@ std::vector<std::string> Network::listFolder(const std::string& folder, const st
 void Network::checkForNewVersions(QHash<QString, Update*> &apps)
 {
     qWarning() << __PRETTY_FUNCTION__;
+
+    // If we aren't online, don't check
+    if (!m_ncm->isOnline()) {
+        qWarning() << "Not currently online, don't check";
+        return;
+    }
+
     m_apps = apps;
     QJsonObject serializer;
     QJsonArray array;
