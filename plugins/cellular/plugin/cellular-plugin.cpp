@@ -42,6 +42,16 @@ private Q_SLOTS:
 CellularItem::CellularItem(const QVariantMap &staticData, QObject *parent):
     ItemBase(staticData, parent)
 {
+    QProcessEnvironment env = QProcessEnvironment::systemEnvironment();
+    if (env.contains(QLatin1String("USS_SHOW_ALL_UI"))) {
+        QString showAllS = env.value("USS_SHOW_ALL_UI", QString());
+
+        if(!showAllS.isEmpty()) {
+            setVisibility(true);
+            return;
+        }
+    }
+
     QOfonoManager *mm = new QOfonoManager(this);
     // Hide the plugin if there are no modems present
     setVisibility(mm->modems().length() > 0);
