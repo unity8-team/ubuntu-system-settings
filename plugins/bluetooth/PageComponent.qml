@@ -205,7 +205,7 @@ ItemPage {
                             topMargin: units.gu(1)
                         }
                         visible: backend.powered && !backend.discoverable
-                        running: true
+                        running: visible
                     }
                 }
             }
@@ -237,7 +237,7 @@ ItemPage {
                         text: getDisplayName(type, displayName)
                         control: ActivityIndicator {
                             visible: connection == Device.Connecting
-                            running: true
+                            running: visible
                         }
                         onClicked: {
                             backend.setSelectedDevice(addressName);
@@ -256,7 +256,7 @@ ItemPage {
                 enabled: bluetoothActionGroup.enabled
                 control: ActivityIndicator {
                     visible: backend.powered && backend.discovering
-                    running: true
+                    running: visible
                 }
             }
 
