@@ -21,8 +21,11 @@
 #include "phone-plugin.h"
 
 #include <QDebug>
+#include <QDBusInterface>
+#include <QDBusPendingReply>
+#include <QProcessEnvironment>
+#include <QtDBus>
 #include <SystemSettings/ItemBase>
-#include <qofonomanager.h>
 
 using namespace SystemSettings;
 
@@ -33,9 +36,6 @@ class PhoneItem: public ItemBase
 public:
     explicit PhoneItem(const QVariantMap &staticData, QObject *parent = 0);
     void setVisibility(bool visible);
-
-private Q_SLOTS:
-    void shouldShow(QStringList);
 };
 
 
@@ -52,17 +52,21 @@ PhoneItem::PhoneItem(const QVariantMap &staticData, QObject *parent):
         }
     }
 
-    QOfonoManager *mm = new QOfonoManager(this);
-    // Hide the plugin if there are no modems present
-    setVisibility(mm->modems().length() > 0);
-    QObject::connect(mm, SIGNAL(modemsChanged(QStringList)),
-                     this, SLOT(shouldShow(QStringList)));
+    bool supportedDevice(true);
 
-}
+    QDBusInterface m_NetStatusPropertiesIface(
+            "com.ubuntu.connectivity1",
+            "/com/ubuntu/connectivity1/NetworkingStatus",
+            "org.freedesktop.DBus.Properties",
+            QDBusConnection::sessionBus());
+    QDBusPendingReply<QVariant> modemReply = m_NetStatusPropertiesIface.call(
+        "Get", "com.ubuntu.connectivity1.NetworkingStatus", "ModemAvailable");
+    modemReply.waitForFinished();
+    if (modemReply.isValid()) {
+        supportedDevice = modemReply.argumentAt<0>().toBool();
+    }
 
-void PhoneItem::shouldShow(QStringList modems)
-{
-    setVisibility(modems.length() > 0);
+    setVisibility(supportedDevice);
 }
 
 void PhoneItem::setVisibility(bool visible)
