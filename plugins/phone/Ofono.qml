@@ -18,10 +18,10 @@
  *
 */
 import QtQuick 2.4
+import GSettings 1.0
 import MeeGo.QOfono 0.2
 
 Item {
-    property alias callForwarding: callForwarding
     property alias netReg: netReg
     property alias simMng: simMng
     property alias present: simMng.present
@@ -33,11 +33,6 @@ Item {
         return name + (number ? " (" + number + ")" : "");
     }
 
-    OfonoCallForwarding {
-        id: callForwarding
-        modemPath: path
-    }
-
     OfonoNetworkRegistration {
         id: netReg
         modemPath: path
@@ -46,5 +41,35 @@ Item {
     OfonoSimManager {
         id: simMng
         modemPath: path
+    }
+
+    function setCallForwardingSummary (val) {
+        var tmp = {};
+        var fwdSum = settings.callforwardingSummaries;
+        for (var k in fwdSum){
+            if (fwdSum.hasOwnProperty(k)) {
+                tmp[k] = fwdSum[k];
+            }
+        }
+        tmp[path] = val;
+        tmp[path + '_updated_at'] = (new Date).getTime() / 1000;
+        settings.callforwardingSummaries = tmp;
+    }
+
+    function getCallForwardingSummary () {
+        var fwdSum = settings.callforwardingSummaries;
+        var updated_at = fwdSum[path + '_updated_at'] || 0;
+
+        // Returns an empty string one hour after the value was set.
+        if (((new Date).getTime() / 1000) - updated_at > 3600) {
+            return '';
+        } else {
+            return fwdSum[path] || '';
+        }
+    }
+
+    GSettings {
+        id: settings
+        schema.id: "com.ubuntu.touch.system-settings"
     }
 }

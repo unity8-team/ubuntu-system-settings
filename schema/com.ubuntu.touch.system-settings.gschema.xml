@@ -27,5 +27,10 @@
             <summary>Whether the applications should be sorted by name.</summary>
             <description>If true the applications are sorted by name, otherwise by disk size.</description>
         </key>
+        <key name="callforwarding-summaries" type="a{ss}">
+            <summary>Call forwarding summaries</summary>
+            <default>{}</default>
+            <description>Mapping of modem paths to a call forwarding summary.</description>
+        </key>
     </schema>
 </schemalist>
