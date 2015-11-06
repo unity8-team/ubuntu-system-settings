@@ -73,6 +73,13 @@ function ruleComplete (success) {
 }
 
 /**
+ * Handler for when the rule ready changes.
+ */
+function ruleReadyChanged () {
+    d._pending = !callForwarding.ready;
+}
+
+/**
  * Scroll something into view.
  *
  * @param {QtObject} item to scroll to.
