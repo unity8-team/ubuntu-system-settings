@@ -1,3 +1,13 @@
+ubuntu-system-settings (0.3+16.04.20151109-0ubuntu1) xenial; urgency=medium
+
+  [ jonas-drange ]
+  * Cache call forwarding summary for each IMSI/ICCID. Block UI until
+    the CallForwarding binding is ready. Do not assume a failed
+    callforwarding change means it's disabled (could be forced by
+    carrier). (LP: #1478049)
+
+ -- Jonas G. Drange <ci-train-bot@canonical.com>  Mon, 09 Nov 2015 12:50:11 +0000
+
 ubuntu-system-settings (0.3+16.04.20151103.1-0ubuntu1) xenial; urgency=medium
 
   [ Bartosz Kosiorek ]
