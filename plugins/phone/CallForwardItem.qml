@@ -72,7 +72,7 @@ Column {
         /**
          * Server is working.
          */
-        property bool _pending: false
+        property bool _pending: !callForwarding.ready
 
         /**
          * Server failed to change/fetch setting.
@@ -233,10 +233,12 @@ Column {
         Component.onCompleted: {
             item.callForwarding[item.rule + 'Changed'].connect(Utils.ruleChanged);
             item.callForwarding[item.rule + 'Complete'].connect(Utils.ruleComplete);
+            item.callForwarding.readyChanged.connect(Utils.ruleReadyChanged);
         }
         Component.onDestruction: {
             item.callForwarding[item.rule + 'Changed'].disconnect(Utils.ruleChanged);
             item.callForwarding[item.rule + 'Complete'].disconnect(Utils.ruleComplete);
+            item.callForwarding.readyChanged.disconnect(Utils.ruleReadyChanged);
         }
     }
 }
