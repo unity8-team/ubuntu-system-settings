@@ -22,6 +22,7 @@
 #include <token.h>
 #include <QObject>
 #include <QtNetwork/QNetworkAccessManager>
+#include <QtNetwork/QNetworkConfigurationManager>
 #include <QtNetwork/QNetworkReply>
 #include <QHash>
 
@@ -62,6 +63,7 @@ private Q_SLOTS:
 
 private:
     QNetworkAccessManager m_nam;
+    QNetworkConfigurationManager *m_ncm;
     QHash<QString, Update*> m_apps;
     UbuntuOne::Token m_token;
 

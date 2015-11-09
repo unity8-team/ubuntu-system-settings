@@ -101,6 +101,7 @@ ItemPage {
                 objectPath: "/com/canonical/indicator/sound"
 
                 property variant volume: action("volume")
+                property variant silentMode: action("silent-mode")
                 property variant highVolume: action("high-volume")
 
                 Component.onCompleted: start()
