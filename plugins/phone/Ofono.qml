@@ -51,21 +51,15 @@ Item {
                 tmp[k] = fwdSum[k];
             }
         }
-        tmp[path] = val;
-        tmp[path + '_updated_at'] = (new Date).getTime() / 1000;
+        // Prefer IMSI to identify the SIM, use ICCID if IMSI is not available.
+        tmp[simMng.subscriberIdentity || simMng.CardIdentifier] = val;
         settings.callforwardingSummaries = tmp;
     }
 
     function getCallForwardingSummary () {
-        var fwdSum = settings.callforwardingSummaries;
-        var updated_at = fwdSum[path + '_updated_at'] || 0;
-
-        // Returns an empty string one hour after the value was set.
-        if (((new Date).getTime() / 1000) - updated_at > 3600) {
-            return '';
-        } else {
-            return fwdSum[path] || '';
-        }
+        // Use either IMSI or ICCID to identify the SIM.
+        var sid = simMng.subscriberIdentity || simMng.CardIdentifier;
+        return settings.callforwardingSummaries[sid] || '';
     }
 
     GSettings {

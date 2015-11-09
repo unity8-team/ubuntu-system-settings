@@ -30,7 +30,7 @@
         <key name="callforwarding-summaries" type="a{ss}">
             <summary>Call forwarding summaries</summary>
             <default>{}</default>
-            <description>Mapping of modem paths to a call forwarding summary.</description>
+            <description>Mapping of SIM to a call forwarding summary.</description>
         </key>
     </schema>
 </schemalist>
