@@ -192,7 +192,7 @@ Page {
                         backend.resetSelectedDevice();
                         pageStack.pop();
                     }
-                    enabled: backend.selectedDevice && backend.selectedDevice.path.length > 0 ? true : false
+                    enabled: backend.selectedDevice && backend.selectedDevice.path.length > 0 && backend.selectedDevice.paired ? true : false
                 }
             }
         }
