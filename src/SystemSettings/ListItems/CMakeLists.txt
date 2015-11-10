@@ -1,6 +1,10 @@
 set(QML_SOURCES
-    SingleValue.qml
+    BaseLayout.qml
+    BaseListItem.qml
+    ControlContainer.qml
     Standard.qml
+    StandardControl.qml
+    StandardProgression.qml
 )
 
 set(PLUG_DIR ${PLUGIN_QML_DIR}/SystemSettings/ListItems)

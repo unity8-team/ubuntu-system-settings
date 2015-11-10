@@ -78,7 +78,7 @@ ItemPage {
             }
             spacing: units.gu(1)
 
-            ListItem.Standard {
+            ListItem.StandardControl {
                 id: hotspotItem
                 text: i18n.tr("Hotspot")
                 enabled: Connectivity.hotspotStored
