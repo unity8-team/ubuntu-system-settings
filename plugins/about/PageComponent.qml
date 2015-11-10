@@ -21,9 +21,9 @@
 import QtQuick 2.4
 import QtSystemInfo 5.0
 import SystemSettings 1.0
-import SystemSettings.ListItems 1.0 as ListItem
+import SystemSettings.ListItems 1.0 as SettingsListItems
 import Ubuntu.Components 1.3
-import Ubuntu.Components.ListItems 1.3 as UuitkListItem
+import Ubuntu.Components.ListItems 1.3 as ListItems
 import Ubuntu.SystemSettings.StorageAbout 1.0
 import Ubuntu.SystemSettings.Update 1.0
 import MeeGo.QOfono 0.2
@@ -93,7 +93,7 @@ ItemPage {
                 }
             }
 
-            ListItem.SingleValue {
+            SettingsListItems.SingleValue {
                 id: serialItem
                 objectName: "serialItem"
                 text: i18n.tr("Serial")
@@ -101,7 +101,7 @@ ItemPage {
                 visible: backendInfos.serialNumber
             }
 
-            ListItem.SingleValue {
+            SettingsListItems.SingleValue {
                 objectName: "imeiItem"
                 property string imeiNumber
                 imeiNumber: deviceInfos.imei(0)
@@ -125,7 +125,7 @@ ItemPage {
             //     visible: modemsSorted.length > 1
             // }
 
-            ListItem.SingleValue {
+            SettingsListItems.SingleValue {
                 property string address: wlinfo.macAddress(NetworkInfo.WlanMode, 0)
                 text: i18n.tr("Wi-Fi address")
                 value: address ? address.toUpperCase() : ""
@@ -133,7 +133,7 @@ ItemPage {
                 showDivider: bthwaddr.visible
             }
 
-            ListItem.SingleValue {
+            SettingsListItems.SingleValue {
                 id: bthwaddr
                 text: i18n.tr("Bluetooth address")
                 value: network.bluetoothMacAddress
@@ -141,15 +141,14 @@ ItemPage {
                 showDivider: false
             }
 
-            UuitkListItem.Divider {}
+            ListItems.Divider {}
 
-            ListItem.SingleValue {
+            SettingsListItems.SingleValueProgression {
                 id: storageItem
                 objectName: "storageItem"
                 text: i18n.tr("Storage")
                 /* TRANSLATORS: that's the free disk space, indicated in the most appropriate storage unit */
                 value: i18n.tr("%1 free").arg(Utilities.formatSize(backendInfos.getFreeSpace("/home")))
-                progression: true
                 onClicked: pageStack.push(Qt.resolvedUrl("Storage.qml"))
             }
 
@@ -158,7 +157,7 @@ ItemPage {
                 text: i18n.tr("Software:")
             }
 
-            ListItem.SingleValue {
+            SettingsListItems.SingleValueProgression {
                 property string versionIdentifier: {
                     var num = UpdateManager.currentBuildNumber;
                     var ota = UpdateManager.detailedVersionDetails['tag'];
@@ -170,13 +169,12 @@ ItemPage {
                 value: "Ubuntu %1%2"
                     .arg(deviceInfos.version(DeviceInfo.Os))
                     .arg(versionIdentifier ? " (%1)".arg(versionIdentifier) : "")
-                progression: true
                 onClicked: pageStack.push(Qt.resolvedUrl("Version.qml"), {
                     version: versionIdentifier
                 })
             }
 
-            ListItem.SingleValue {
+            SettingsListItems.SingleValueProgression {
                 objectName: "lastUpdatedItem"
                 text: i18n.tr("Last updated")
                 value: UpdateManager.lastUpdateDate && !isNaN(UpdateManager.lastUpdateDate) ?
@@ -209,26 +207,23 @@ ItemPage {
                 text: i18n.tr("Legal:")
             }
 
-            ListItem.Standard {
+            SettingsListItems.StandardProgression {
                 objectName: "licenseItem"
                 text: i18n.tr("Software licenses")
-                progression: true
                 onClicked: pageStack.push(Qt.resolvedUrl("Software.qml"))
             }
 
-            ListItem.Standard {
+            SettingsListItems.StandardProgression {
                 property var regulatoryInfo:
                     pluginManager.getByName("regulatory-information")
                 text: i18n.tr("Regulatory info")
-                progression: true
                 visible: regulatoryInfo
                 onClicked: pageStack.push(regulatoryInfo.pageComponent)
             }
 
-            ListItem.SingleValue {
+            SettingsListItems.SingleValueProgression {
                 objectName: "devmodeItem"
                 text: i18n.tr("Developer mode")
-                progression: true
                 onClicked: pageStack.push(Qt.resolvedUrl("DevMode.qml"))
             }
         }

@@ -20,8 +20,8 @@
 
 import QtQuick 2.4
 import SystemSettings 1.0
-import SystemSettings.ListItems 1.0 as ListItem
-import Ubuntu.Components.ListItems 1.3 as UuitkListItem
+import SystemSettings.ListItems 1.0 as SettingsListItems
+import Ubuntu.Components.ListItems 1.3 as ListItems
 import Ubuntu.Components 1.3
 import Ubuntu.Components.Popups 1.3
 import Ubuntu.Connectivity 1.0
@@ -78,7 +78,7 @@ ItemPage {
             }
             spacing: units.gu(1)
 
-            ListItem.StandardControl {
+            SettingsListItems.Control {
                 id: hotspotItem
                 text: i18n.tr("Hotspot")
                 enabled: Connectivity.hotspotStored
@@ -101,7 +101,7 @@ ItemPage {
                 }
             }
 
-            UuitkListItem.Caption {
+            ListItems.Caption {
                 anchors {
                     left: parent.left
                     right: parent.right
