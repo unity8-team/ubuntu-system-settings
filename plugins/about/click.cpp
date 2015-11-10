@@ -217,7 +217,7 @@ QList<ClickModel::Click> ClickModel::buildClickList()
         return QList<ClickModel::Click>();
     }
 
-    clickmanifest = click_db_get_manifests_as_string(clickdb, TRUE, &err);
+    clickmanifest = click_db_get_manifests_as_string(clickdb, FALSE, &err);
     g_object_unref(clickdb);
 
     if (err != nullptr) {
