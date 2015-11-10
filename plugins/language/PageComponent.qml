@@ -21,6 +21,7 @@
 import QtQuick 2.4
 import GSettings 1.0
 import SystemSettings 1.0
+import SystemSettings.ListItems 1.0 as SettingsListItems
 import Ubuntu.Components 1.3
 import Ubuntu.Components.Popups 1.3
 import Ubuntu.Components.ListItems 1.3 as ListItem
@@ -114,12 +115,11 @@ ItemPage {
             ListItem.Divider {
             }
 
-            ListItem.SingleValue {
+            SettingsListItems.SingleValueProgression {
                 text: i18n.tr("Keyboard layouts")
                 value: plugin.keyboardLayoutsModel.subset.length == 1 ?
                        plugin.keyboardLayoutsModel.superset[plugin.keyboardLayoutsModel.subset[0]][0] :
                        plugin.keyboardLayoutsModel.subset.length
-                progression: true
 
                 onClicked: pageStack.push(keyboardLayouts)
             }
@@ -127,19 +127,18 @@ ItemPage {
             ListItem.Divider {
             }
 
-            ListItem.SingleValue {
+            SettingsListItems.SingleValueProgression {
                 visible: showAllUI
 
                 text: i18n.tr("Spell checking")
                 value: plugin.spellCheckingModel.subset.length == 1 ?
                        plugin.spellCheckingModel.superset[plugin.spellCheckingModel.subset[0]][0] :
                        plugin.spellCheckingModel.subset.length
-                progression: true
 
                 onClicked: pageStack.push(spellChecking)
             }
 
-            ListItem.Standard {
+            SettingsListItems.Control {
                 text: i18n.tr("Spell checking")
 
                 control: Switch {
@@ -150,7 +149,7 @@ ItemPage {
                 }
             }
 
-            ListItem.Standard {
+            SettingsListItems.Control {
                 text: i18n.tr("Auto correction")
 
                 control: Switch {
@@ -161,7 +160,7 @@ ItemPage {
                 }
             }
 
-            ListItem.Standard {
+            SettingsListItems.Control {
                 text: i18n.tr("Word suggestions")
 
                 control: Switch {
@@ -175,7 +174,7 @@ ItemPage {
             ListItem.Divider {
             }
 
-            ListItem.Standard {
+            SettingsListItems.Control {
                 text: i18n.tr("Auto capitalization")
 
                 control: Switch {
@@ -193,7 +192,7 @@ ItemPage {
             ListItem.ThinDivider {
             }
 
-            ListItem.Standard {
+            SettingsListItems.Control {
                 text: i18n.tr("Auto punctuation")
 
                 control: Switch {
@@ -212,7 +211,7 @@ ItemPage {
             ListItem.ThinDivider {
             }
 
-            ListItem.Standard {
+            SettingsListItems.Control {
                 text: i18n.tr("Keyboard sound")
 
                 control: Switch {
@@ -223,7 +222,7 @@ ItemPage {
                 }
             }
 
-            ListItem.Standard {
+            SettingsListItems.Control {
                 text: i18n.tr("Keyboard vibration")
 
                 control: Switch {
