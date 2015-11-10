@@ -1,3 +1,34 @@
+ubuntu-system-settings (0.3+16.04.20151103.1-0ubuntu1) xenial; urgency=medium
+
+  [ Bartosz Kosiorek ]
+  * Remove "Retry" button, when no internet connection is available. It
+    will automatically retry after establishing connection (LP:
+    #1479447) (LP: #1479447)
+
+  [ Ken VanDine ]
+  * Don't elide connect to internet label (LP: #1512768)
+  * Ensure we only check for updates when NetworkingStatus.online is
+    true (LP: #1505663)
+  * [system-settings] Abort request when the onlineStatus changes to
+    false (LP: #1505663)
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Tue, 03 Nov 2015 16:26:31 +0000
+
+ubuntu-system-settings (0.3+16.04.20151029-0ubuntu1) xenial; urgency=medium
+
+  [ CI Train Bot ]
+  * New rebuild forced.
+
+  [ jonas-drange ]
+  * Deprecated the use of Info endpoint in system_update.cpp and
+    hotspot. Exposed detailed version details on UpdateManager. Used
+    this to get to a 'tag' key which includes the ota string. Because of
+    more advanced system-image testing, about tests now use the
+    systemimage dbusmock template. debian/control, s-i-dbus changed to
+    3.0.2 because that's where the ota string is. (LP: #1475568)
+
+ -- Jonas G. Drange <ci-train-bot@canonical.com>  Thu, 29 Oct 2015 15:48:09 +0000
+
 ubuntu-system-settings (0.3+16.04.20151023.1-0ubuntu1) xenial; urgency=medium
 
   [ CI Train Bot ]

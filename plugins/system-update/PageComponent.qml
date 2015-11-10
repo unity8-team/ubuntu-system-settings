@@ -84,7 +84,8 @@ ItemPage {
         onFinished: {
             credentialsNotification.visible = false;
             root.state = "SEARCHING";
-            UpdateManager.checkUpdates();
+            if (NetworkingStatus.online)
+                UpdateManager.checkUpdates();
         }
     }
 
@@ -147,7 +148,7 @@ ItemPage {
             PropertyChanges { target: installAllButton; visible: false}
             PropertyChanges { target: checkForUpdatesArea; visible: true}
             PropertyChanges { target: updateNotification; visible: false}
-            PropertyChanges { target: activity; running: true}
+            PropertyChanges { target: activity; running: NetworkingStatus.online}
         },
         State {
             name: "NOUPDATES"
@@ -179,7 +180,8 @@ ItemPage {
         Component.onCompleted: {
             credentialsNotification.visible = false;
             root.state = "SEARCHING";
-            UpdateManager.checkUpdates();
+            if (NetworkingStatus.online)
+                UpdateManager.checkUpdates();
         }
 
         onUpdateAvailableFound: {
@@ -279,34 +281,15 @@ ItemPage {
                 Label {
                     text: activity.running ? i18n.tr("Checking for updates…") : i18n.tr("Connect to the Internet to check for updates")
                     verticalAlignment: Text.AlignVCenter
-                    elide: Text.ElideRight
+                    wrapMode: Text.Wrap
                     anchors {
                         left: activity.running ? activity.right : parent.left
                         top: parent.top
-                        right: btnRetry.visible ? btnRetry.left : parent.right
+                        right: parent.right
                         rightMargin: units.gu(2)
                         leftMargin: units.gu(2)
                     }
                     height: parent.height
-                }
-
-                Button {
-                    id: btnRetry
-                    text: i18n.tr("Retry")
-                    color: UbuntuColors.orange
-                    anchors {
-                        right: parent.right
-                        top: parent.top
-                        bottom: parent.bottom
-                        margins: units.gu(1)
-                    }
-                    visible: !activity.visible
-
-                    onClicked: {
-                        activity.running = true;
-                        root.state = "SEARCHING";
-                        UpdateManager.checkUpdates();
-                    }
                 }
             }
 

@@ -36,6 +36,8 @@ ItemPage {
     title: i18n.tr("OS Build Details")
     flickable: flickElement
 
+    property string version
+
     UbuntuStorageAboutPanel {
         id: storedInfo
     }
@@ -59,7 +61,7 @@ ItemPage {
             SingleValueStacked {
                 objectName: "versionBuildNumberItem"
                 text: i18n.tr("OS build number")
-                value: UpdateManager.currentBuildNumber ? UpdateManager.currentBuildNumber : "Non system image"
+                value: versionPage.version ? versionPage.version : "Non system image"
             }
 
             SingleValueStacked {
