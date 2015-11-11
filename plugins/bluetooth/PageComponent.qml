@@ -219,7 +219,7 @@ ItemPage {
                 text: i18n.tr("Bluetooth")
                 control: Switch {
                     id: btSwitch
-                    property bool serverChecked: bluetoothActionGroup.enabled.state
+                    property bool serverChecked: bluetoothActionGroup.enabled.state != undefined ? bluetoothActionGroup.enabled.state : false
                     USC.ServerPropertySynchroniser {
                         userTarget: btSwitch
                         userProperty: "checked"
@@ -292,7 +292,7 @@ ItemPage {
                     left: parent.left
                     right: parent.right
                 }
-                visible: bluetoothActionGroup.enabled.state && (connectedRepeater.count > 0)
+                visible: (bluetoothActionGroup.enabled.state != undefined && bluetoothActionGroup.enabled.state) && (connectedRepeater.count > 0)
                 objectName: "connectedList"
 
                 Repeater {
@@ -318,7 +318,7 @@ ItemPage {
             SettingsItemTitle {
                 id: disconnectedHeader
                 text: connectedList.visible ? i18n.tr("Connect another device:") : i18n.tr("Connect a device:")
-                enabled: bluetoothActionGroup.enabled.state
+                enabled: bluetoothActionGroup.enabled.state != undefined ? bluetoothActionGroup.enabled.state : false
                 control: ActivityIndicator {
                     visible: backend.powered && backend.discovering
                     running: true
@@ -331,7 +331,7 @@ ItemPage {
                     left: parent.left
                     right: parent.right
                 }
-                visible: bluetoothActionGroup.enabled.state && (disconnectedRepeater.count > 0)
+                visible: (bluetoothActionGroup.enabled.state != undefined && bluetoothActionGroup.enabled.state) && (disconnectedRepeater.count > 0)
                 objectName: "disconnectedList"
 
                 Repeater {
