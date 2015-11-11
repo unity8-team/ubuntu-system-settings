@@ -372,8 +372,6 @@ void DeviceModel::updateProperty(const QString &key, const QVariant &value)
         m_isPairable = value.toBool();
     } else if (key == "Discoverable") {
         setDiscoverable(value.toBool());
-        if (!m_isDiscoverable)
-            trySetDiscoverable(true);
     } else if (key == "Discovering") {
         setDiscovering(value.toBool());
         restartTimer();
