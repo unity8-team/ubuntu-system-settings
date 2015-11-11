@@ -3,10 +3,9 @@ set(QML_SOURCES
     BaseListItem.qml
     ControlContainer.qml
     Control.qml
-    Progression.qml
     SingleValue.qml
     SingleValueProgression.qml
-    Standard.qml
+    StandardProgression.qml
 )
 
 set(PLUG_DIR ${PLUGIN_QML_DIR}/SystemSettings/ListItems)

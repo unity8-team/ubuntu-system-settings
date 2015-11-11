@@ -5,7 +5,6 @@ internal BaseListItem BaseListItem.qml
 internal ControlContainer ControlContainer.qml
 
 Control 1.0 Control.qml
-Progression 1.0 Progression.qml
 SingleValue 1.0 SingleValue.qml
 SingleValueProgression 1.0 SingleValueProgression.qml
 Standard 1.0 Standard.qml

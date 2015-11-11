@@ -20,8 +20,8 @@
 import QtQuick 2.4
 import GSettings 1.0
 import SystemSettings 1.0
+import SystemSettings.ListItems 1.0 as SettingsListItems
 import Ubuntu.Components 1.3
-import Ubuntu.Components.ListItems 1.3 as ListItem
 
 /* This is a temporary solution to the issue of Hotspots failing on mako. If
 the device is mako, we hide the hotspot entry. Will be removed once lp:1434591
@@ -53,20 +53,17 @@ Column {
         anchors { left: parent.left; right: parent.right }
     }
 
-    ListItem.Standard {
+    SettingsListItems.StandardProgression {
         id: dataUsage
         text: i18n.tr("Data usage statistics")
-        progression: true
         visible: showAllUI
     }
 
-    ListItem.Divider {}
-
-    ListItem.SingleValue {
+    SettingsListItems.SingleValueProgression {
         text: i18n.tr("Carriers")
         id: chooseCarrier
         objectName: "carrierApnEntry"
-        progression: enabled
+        progressionVisible: enabled
         showDivider: false
         onClicked: {
             pageStack.push(Qt.resolvedUrl("../PageCarriersAndApns.qml"), {
@@ -74,8 +71,6 @@ Column {
             });
         }
     }
-
-    ListItem.Divider {}
 
     SimEditor {
         anchors { left: parent.left; right: parent.right }

@@ -4,6 +4,7 @@ import Ubuntu.Components 1.3
 BaseListItem {
     id: base
     property alias value: value.text
+    property alias progressionVisible: progression.visible
     height: layout.height + divider.height
 
     BaseLayout {
@@ -15,6 +16,8 @@ BaseListItem {
             horizontalAlignment: Text.AlignRight
         }
 
-        ProgressionSlot {}
+        ProgressionSlot {
+            id: progression
+        }
     }
 }

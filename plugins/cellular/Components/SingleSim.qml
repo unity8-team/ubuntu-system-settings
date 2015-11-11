@@ -18,9 +18,9 @@
  *
 */
 import QtQuick 2.4
-import SystemSettings 1.0
+import SystemSettings.ListItems 1.0 as SettingsListItems
+import Ubuntu.SystemSettings.Cellular 1.0
 import Ubuntu.Components 1.3
-import Ubuntu.Components.ListItems 1.3 as ListItem
 
 Column {
 
@@ -32,7 +32,7 @@ Column {
         @prevOnlineModem path to modem that was online before this event */
     signal umtsModemChanged (var sim, string prevOnlineModem);
 
-    ListItem.Standard {
+    SettingsListItems.Control {
         id: selector
         text: i18n.tr("Cellular data:")
         control: Switch {
@@ -45,7 +45,7 @@ Column {
         }
     }
 
-    ListItem.Standard {
+    SettingsListItems.Control {
         id: dataRoamingItem
         text: i18n.tr("Data roaming")
         enabled: sim.connMan.powered
@@ -59,30 +59,25 @@ Column {
         }
     }
 
-    ListItem.Standard {
+    SettingsListItems.StandardProgression{
         text: i18n.tr("Data usage statistics")
-        progression: true
         visible: showAllUI
     }
 
-    ListItem.Divider {
-        visible: radio.visible
-    }
-
-    RadioSingleSim {
-        id: radio
-        anchors { left: parent.left; right: parent.right }
-        visible: radio.enabled
-    }
-
-    ListItem.Divider {}
-
-    ListItem.SingleValue {
-        text: i18n.tr("Carrier");
+    SettingsListItems.SingleValueProgression {
+        text: i18n.tr("Carrier & APN");
         id: chooseCarrier
         objectName: "carrierApnEntry"
-        progression: enabled
+        value: sim.netReg.name || ""
         onClicked: pageStack.push(Qt.resolvedUrl("../PageCarrierAndApn.qml"), {
+            sim: sim
+        })
+    }
+
+    SettingsListItems.SingleValueProgression {
+        text: i18n.tr("Connection type")
+        value: sim.getTechString()
+        onClicked: pageStack.push(Qt.resolvedUrl("../ConnectionType.qml"), {
             sim: sim
         })
     }

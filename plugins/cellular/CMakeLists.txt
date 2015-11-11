@@ -7,6 +7,7 @@ set(QML_SOURCES
     apn_manager.js
     apn_editor.js
     carriers.js
+    ConnectionType.qml
     PageApnEditor.qml
     PageChooseApn.qml
     PageChooseCarrier.qml
