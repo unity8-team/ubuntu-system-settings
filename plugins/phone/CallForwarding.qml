@@ -28,6 +28,7 @@
 
 import QtQuick 2.4
 import QtContacts 5.0
+import MeeGo.QOfono 0.2
 import SystemSettings 1.0
 import Ubuntu.Components 1.3
 import Ubuntu.Components.ListItems 1.3 as ListItem
@@ -126,7 +127,7 @@ ItemPage {
                 id: fwdAll
                 anchors { left: parent.left; right: parent.right }
                 rule: "voiceUnconditional"
-                callForwarding: sim.callForwarding
+                callForwarding: callForwarding
                 text: i18n.tr("Forward every incoming call")
                 onEnteredEditMode: {page.editing = fwdAll; Utils.show(field)}
                 onLeftEditMode: page.editing = null
@@ -170,7 +171,7 @@ ItemPage {
                 id: fwdBusy
                 objectName: "fwdBusy"
                 anchors { left: parent.left; right: parent.right }
-                callForwarding: sim.callForwarding
+                callForwarding: callForwarding
                 rule: "voiceBusy"
                 text: i18n.tr("I’m on another call")
                 onEnteredEditMode: {page.editing = fwdBusy; Utils.show(field)}
@@ -181,7 +182,7 @@ ItemPage {
                 id: fwdLost
                 objectName: "fwdLost"
                 anchors { left: parent.left; right: parent.right }
-                callForwarding: sim.callForwarding
+                callForwarding: callForwarding
                 rule: "voiceNoReply"
                 text: i18n.tr("I don’t answer")
                 onEnteredEditMode: {page.editing = fwdLost; Utils.show(field)}
@@ -192,7 +193,7 @@ ItemPage {
                 id: fwdUnreachable
                 objectName: "fwdUnreachable"
                 anchors { left: parent.left; right: parent.right }
-                callForwarding: sim.callForwarding
+                callForwarding: callForwarding
                 rule: "voiceNotReachable"
                 text: i18n.tr("My phone is unreachable")
                 onEnteredEditMode: {
@@ -359,7 +360,39 @@ ItemPage {
     }
 
     Connections {
-        target: sim.callForwarding
+        target: callForwarding
         onGetPropertiesFailed: page.state = "forwardFailed";
+    }
+
+    OfonoCallForwarding {
+        id: callForwarding
+        modemPath: sim.path
+        function updateSummary () {
+            var val;
+
+            // Clear the summary and exit if any of the values are unknown.
+            if (typeof voiceUnconditional === 'undefined' ||
+                typeof voiceBusy === 'undefined' ||
+                typeof voiceNoReply === 'undefined' ||
+                typeof voiceNotReachable === 'undefined') {
+                sim.setCallForwardingSummary('');
+                return;
+            }
+
+            if (voiceUnconditional) {
+                 val = i18n.tr('All calls');
+            } else if (voiceBusy || voiceNoReply || voiceNotReachable) {
+                val = i18n.tr('Some calls')
+            } else {
+                val = i18n.tr('Off')
+            }
+            sim.setCallForwardingSummary(val);
+        }
+
+        Component.onCompleted: updateSummary()
+        onVoiceUnconditionalChanged: updateSummary()
+        onVoiceBusyChanged: updateSummary()
+        onVoiceNoReplyChanged: updateSummary()
+        onVoiceNotReachableChanged: updateSummary()
     }
 }
