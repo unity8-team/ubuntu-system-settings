@@ -20,18 +20,18 @@
 
 import QtQuick 2.4
 import Ubuntu.Components 1.3
-import Ubuntu.Components.ListItems 1.3 as ListItem
 
-ListItem.Base {
-    property alias name: name.text
-    property alias checked: checkBox.checked
-    property alias shortName: shortName.text
+ListItem {
+    property string name
+    property alias  checked: checkBox.checked
+    property alias  shortName: shortName.text
 
-    Row {
-        anchors.top: parent.top
-        anchors.left: parent.left
-        anchors.bottom: parent.bottom
-        spacing: units.gu(1)
+    height: layout.height + divider.height
+
+    ListItemLayout {
+        id: layout
+
+        title.text: name
 
         Rectangle {
             width: units.gu(3.0)
@@ -39,8 +39,6 @@ ListItem.Base {
             radius: units.gu(0.5)
 
             color: Theme.palette.normal.backgroundText
-
-            anchors.verticalCenter: parent.verticalCenter
 
             Label {
                 id: shortName
@@ -50,21 +48,14 @@ ListItem.Base {
 
                 anchors.centerIn: parent
             }
+
+            SlotsLayout.position: SlotsLayout.First
         }
 
-        Label {
-            id: name
-
-            anchors.verticalCenter: parent.verticalCenter
+        CheckBox {
+            id: checkBox
+            SlotsLayout.position: SlotsLayout.Trailing
         }
     }
-
-    CheckBox {
-        id: checkBox
-
-        anchors.right: parent.right
-        anchors.verticalCenter: parent.verticalCenter
-    }
-
     onClicked: checked = !checked
 }

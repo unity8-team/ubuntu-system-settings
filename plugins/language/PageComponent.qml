@@ -24,7 +24,7 @@ import SystemSettings 1.0
 import SystemSettings.ListItems 1.0 as SettingsListItems
 import Ubuntu.Components 1.3
 import Ubuntu.Components.Popups 1.3
-import Ubuntu.Components.ListItems 1.3 as ListItem
+import Ubuntu.Components.ListItems 1.3 as ListItems
 import Ubuntu.Settings.Menus 0.1 as Menus
 import Ubuntu.SystemSettings.LanguagePlugin 1.0
 
@@ -97,22 +97,30 @@ ItemPage {
             anchors.left: parent.left
             anchors.right: parent.right
 
-            Menus.StandardMenu {
-                iconSource: "image://theme/language-chooser"
-                text: i18n.tr("Display language…")
-                objectName: "displayLanguage"
-                component: Label {
-                    property int currentLanguage: plugin.currentLanguage
-                    objectName: "currentLanguage"
-                    text: plugin.languageNames[plugin.currentLanguage]
-                    elide: Text.ElideRight
-                    opacity: enabled ? 1.0 : 0.5
-                }
-
-                onClicked: PopupUtils.open(displayLanguage)
+            SettingsItemTitle {
+                text: i18n.tr("Language")
             }
 
-            ListItem.Divider {
+            ListItem {
+                id: base
+                height: layout.height + divider.height
+                objectName: "displayLanguage"
+
+                ListItemLayout {
+                    id: layout
+                    objectName: "currentLanguage"
+                    property int currentLanguage: plugin.currentLanguage
+                    title.text: i18n.tr("Display language…")
+                    subtitle.text: plugin.languageNames[plugin.currentLanguage]
+
+                    Icon {
+                        source: "image://theme/language-chooser"
+                        height: units.gu(2.5)
+                        width: height
+                        SlotsLayout.position: SlotsLayout.First
+                    }
+                }
+                onClicked: PopupUtils.open(displayLanguage)
             }
 
             SettingsListItems.SingleValueProgression {
@@ -124,7 +132,8 @@ ItemPage {
                 onClicked: pageStack.push(keyboardLayouts)
             }
 
-            ListItem.Divider {
+            SettingsItemTitle {
+                text: i18n.tr("Correction")
             }
 
             SettingsListItems.SingleValueProgression {
@@ -171,13 +180,11 @@ ItemPage {
                 }
             }
 
-            ListItem.Divider {
-            }
+            ListItemLayout {
+                title.text: i18n.tr("Auto capitalization")
+                summary.text: i18n.tr("Turns on Shift to capitalize the first letter of each sentence.")
 
-            SettingsListItems.Control {
-                text: i18n.tr("Auto capitalization")
-
-                control: Switch {
+                Switch {
                     property bool serverChecked: settings.autoCapitalization
                     onServerCheckedChanged: checked = serverChecked
                     Component.onCompleted: checked = serverChecked
@@ -185,17 +192,14 @@ ItemPage {
                 }
             }
 
-            ListItem.Caption {
-                text: i18n.tr("Turns on Shift to capitalize the first letter of each sentence.")
-            }
+            ListItems.ThinDivider {}
 
-            ListItem.ThinDivider {
-            }
+            ListItemLayout {
+                title.text: i18n.tr("Auto punctuation")
 
-            SettingsListItems.Control {
-                text: i18n.tr("Auto punctuation")
-
-                control: Switch {
+                /* TODO: update the string to mention quotes/brackets once the osk does that */
+                summary.text: i18n.tr("Inserts a period when you tap Space twice.")
+                Switch {
                     property bool serverChecked: settings.doubleSpaceFullStop
                     onServerCheckedChanged: checked = serverChecked
                     Component.onCompleted: checked = serverChecked
@@ -203,13 +207,7 @@ ItemPage {
                 }
             }
 
-            ListItem.Caption {
-                /* TODO: update the string to mention quotes/brackets once the osk does that */
-                text: i18n.tr("Inserts a period when you tap Space twice.")
-            }
-
-            ListItem.ThinDivider {
-            }
+            ListItems.ThinDivider {}
 
             SettingsListItems.Control {
                 text: i18n.tr("Keyboard sound")

@@ -18,21 +18,27 @@
 
 import QtQuick 2.4
 import Ubuntu.Components 1.3
-import Ubuntu.Components.ListItems 1.3 as ListItem
 
-ListItem.Standard {
-    id: itemEmpty
-    property string text
+Item {
+    property alias text: label.text
+    anchors {
+        left: parent.left
+        right: parent.right
+    }
+    height: units.gu(6)
+
     Label {
+        id: label
         anchors {
-            left: parent.left
-            leftMargin: units.gu(2)
-            right: parent.right
-            rightMargin: units.gu(2)
             top: parent.top
             topMargin: units.gu(3)
+            right: parent.right
+            rightMargin: units.gu(2)
+            bottom: parent.bottom
+            left: parent.left
+            leftMargin: units.gu(2)
         }
-        text: itemEmpty.text
+        fontSize: "small"
+        opacity: 0.75
     }
-    highlightWhenPressed: false
 }

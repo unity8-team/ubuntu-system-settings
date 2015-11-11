@@ -11,6 +11,7 @@ BaseListItem {
 
         Label {
             id: value
+            horizontalAlignment: Text.AlignRight
         }
     }
 }
