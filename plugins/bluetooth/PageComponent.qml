@@ -130,7 +130,7 @@ ItemPage {
             if (!root.dialogPopupId)
             {
                 root.currentDevice = device
-                root.dialogPopupId  = PopupUtils.open(displayPinCodeDialog, root, {pincode: passkey, name: device.name})
+                root.dialogPopupId  = PopupUtils.open(displayPinCodeDialog, root, {pincode: pincode, name: device.name})
                 root.dialogPopupId.canceled.connect(function() {
                     root.dialogPopupId = null
                     if (root.currentDevice) {
