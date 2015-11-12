@@ -1,23 +1,18 @@
 import QtQuick 2.4
+import "." as SettingsListItems
 import Ubuntu.Components 1.3
 
-BaseListItem {
+SettingsListItems.Standard {
     id: base
     property alias value: value.text
     property alias progressionVisible: progression.visible
-    height: layout.height + divider.height
 
-    BaseLayout {
-        id: layout
-        title.text: base.text
+    Label {
+        id: value
+        horizontalAlignment: Text.AlignRight
+    }
 
-        Label {
-            id: value
-            horizontalAlignment: Text.AlignRight
-        }
-
-        ProgressionSlot {
-            id: progression
-        }
+    ProgressionSlot {
+        id: progression
     }
 }

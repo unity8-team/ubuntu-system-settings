@@ -1,18 +1,12 @@
 import QtQuick 2.4
-import Ubuntu.Components 1.3
+import "." as SettingsListItems
 
-BaseListItem {
+SettingsListItems.Standard {
     id: base
     property alias value: value.text
-    height: layout.height + divider.height
 
-    BaseLayout {
-        id: layout
-        title.text: base.text
-
-        Label {
-            id: value
-            horizontalAlignment: Text.AlignRight
-        }
+    Label {
+        id: value
+        horizontalAlignment: Text.AlignRight
     }
 }

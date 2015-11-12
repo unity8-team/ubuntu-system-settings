@@ -1,10 +1,7 @@
 set(QML_SOURCES
-    BaseLayout.qml
-    BaseListItem.qml
-    ControlContainer.qml
-    Control.qml
     SingleValue.qml
     SingleValueProgression.qml
+    Standard.qml
     StandardProgression.qml
 )
 

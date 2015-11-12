@@ -78,12 +78,13 @@ ItemPage {
             }
             spacing: units.gu(1)
 
-            SettingsListItems.Control {
+            SettingsListItems.Standard {
                 id: hotspotItem
                 text: i18n.tr("Hotspot")
                 enabled: Connectivity.hotspotStored
                 onClicked: hotspotSwitch.trigger()
-                control: Switch {
+
+                Switch {
                     id: hotspotSwitch
                     objectName: "hotspotSwitch"
                     checked: Connectivity.hotspotEnabled

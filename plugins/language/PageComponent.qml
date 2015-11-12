@@ -24,7 +24,6 @@ import SystemSettings 1.0
 import SystemSettings.ListItems 1.0 as SettingsListItems
 import Ubuntu.Components 1.3
 import Ubuntu.Components.Popups 1.3
-import Ubuntu.Components.ListItems 1.3 as ListItems
 import Ubuntu.Settings.Menus 0.1 as Menus
 import Ubuntu.SystemSettings.LanguagePlugin 1.0
 
@@ -101,24 +100,20 @@ ItemPage {
                 text: i18n.tr("Language")
             }
 
-            ListItem {
+            SettingsListItems.Standard {
                 id: base
                 height: layout.height + divider.height
                 objectName: "displayLanguage"
+                property int currentLanguage: plugin.currentLanguage
+                text: i18n.tr("Display language…")
+                layout.subtitle.text: plugin.languageNames[plugin.currentLanguage]
+                layout.subtitle.objectName: "currentLanguage"
 
-                ListItemLayout {
-                    id: layout
-                    objectName: "currentLanguage"
-                    property int currentLanguage: plugin.currentLanguage
-                    title.text: i18n.tr("Display language…")
-                    subtitle.text: plugin.languageNames[plugin.currentLanguage]
-
-                    Icon {
-                        source: "image://theme/language-chooser"
-                        height: units.gu(2.5)
-                        width: height
-                        SlotsLayout.position: SlotsLayout.First
-                    }
+                Icon {
+                    source: "image://theme/language-chooser"
+                    height: units.gu(2.5)
+                    width: height
+                    SlotsLayout.position: SlotsLayout.First
                 }
                 onClicked: PopupUtils.open(displayLanguage)
             }
@@ -147,10 +142,10 @@ ItemPage {
                 onClicked: pageStack.push(spellChecking)
             }
 
-            SettingsListItems.Control {
+            SettingsListItems.Standard {
                 text: i18n.tr("Spell checking")
 
-                control: Switch {
+                Switch {
                     property bool serverChecked: settings.spellChecking
                     onServerCheckedChanged: checked = serverChecked
                     Component.onCompleted: checked = serverChecked
@@ -158,10 +153,10 @@ ItemPage {
                 }
             }
 
-            SettingsListItems.Control {
+            SettingsListItems.Standard {
                 text: i18n.tr("Auto correction")
 
-                control: Switch {
+                Switch {
                     property bool serverChecked: settings.autoCompletion
                     onServerCheckedChanged: checked = serverChecked
                     Component.onCompleted: checked = serverChecked
@@ -169,10 +164,10 @@ ItemPage {
                 }
             }
 
-            SettingsListItems.Control {
+            SettingsListItems.Standard {
                 text: i18n.tr("Word suggestions")
 
-                control: Switch {
+                Switch {
                     property bool serverChecked: settings.predictiveText
                     onServerCheckedChanged: checked = serverChecked
                     Component.onCompleted: checked = serverChecked
@@ -180,9 +175,11 @@ ItemPage {
                 }
             }
 
-            ListItemLayout {
-                title.text: i18n.tr("Auto capitalization")
-                summary.text: i18n.tr("Turns on Shift to capitalize the first letter of each sentence.")
+            SettingsListItems.Standard {
+                text: i18n.tr("Auto capitalization")
+                layout.summary.text: i18n.tr(
+                    "Turns on Shift to capitalize the first letter of each sentence."
+                )
 
                 Switch {
                     property bool serverChecked: settings.autoCapitalization
@@ -192,13 +189,12 @@ ItemPage {
                 }
             }
 
-            ListItems.ThinDivider {}
-
-            ListItemLayout {
-                title.text: i18n.tr("Auto punctuation")
+            SettingsListItems.Standard {
+                text: i18n.tr("Auto punctuation")
 
                 /* TODO: update the string to mention quotes/brackets once the osk does that */
-                summary.text: i18n.tr("Inserts a period when you tap Space twice.")
+                layout.summary.text: i18n.tr("Inserts a period when you tap Space twice.")
+
                 Switch {
                     property bool serverChecked: settings.doubleSpaceFullStop
                     onServerCheckedChanged: checked = serverChecked
@@ -207,12 +203,10 @@ ItemPage {
                 }
             }
 
-            ListItems.ThinDivider {}
-
-            SettingsListItems.Control {
+            SettingsListItems.Standard {
                 text: i18n.tr("Keyboard sound")
 
-                control: Switch {
+                Switch {
                     property bool serverChecked: settings.keyPressFeedback
                     onServerCheckedChanged: checked = serverChecked
                     Component.onCompleted: checked = serverChecked
@@ -220,10 +214,10 @@ ItemPage {
                 }
             }
 
-            SettingsListItems.Control {
+            SettingsListItems.Standard {
                 text: i18n.tr("Keyboard vibration")
 
-                control: Switch {
+                Switch {
                     property bool serverChecked: settings.keyPressHapticFeedback
                     onServerCheckedChanged: checked = serverChecked
                     Component.onCompleted: checked = serverChecked

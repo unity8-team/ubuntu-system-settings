@@ -19,9 +19,9 @@
 import QtQuick 2.4
 import QtQuick.Layouts 1.1
 import SystemSettings 1.0
-import SystemSettings.ListItems 1.0 as ListItem
-import Ubuntu.Components.ListItems 1.3 as UuitkListItem
+import SystemSettings.ListItems 1.0 as SettingsListItems
 import Ubuntu.Components 1.3
+import Ubuntu.Components.ListItems 1.3 as ListItems
 import Ubuntu.Components.Popups 1.3
 import Ubuntu.Connectivity 1.0
 import Ubuntu.SystemSettings.Cellular 1.0
@@ -188,16 +188,19 @@ Component {
                 width: parent.width
             }
 
-            ListItem.Standard {
+            SettingsListItems.Standard {
                 id: passwordRequired
                 text: i18n.tr("Require a password (recommended):")
-                leadWithControl: true
                 showDivider: false
-                control: CheckBox {
+                layout.padding.leading: 0
+                SlotsLayout.padding.leading: 0
+
+                CheckBox {
                     id: passwordRequiredToggle
                     objectName: "passwordRequiredToggle"
                     checked: Connectivity.hotspotAuth === "wpa-psk"
-
+                    SlotsLayout.position: SlotsLayout.First
+                    SlotsLayout.padding.leading: 0
                     // FIXME: Workaround for lp:1415023
                     activeFocusOnPress: false
                 }
@@ -215,26 +218,25 @@ Component {
                 width: parent.width
             }
 
-            ListItem.Standard {
+            SettingsListItems.Standard {
                 id: passwordVisible
                 enabled: passwordRequiredToggle.checked
-                leadWithControl: true
                 text: i18n.tr("Show password")
-                control: CheckBox {
+                layout.padding.leading: 0
+                SlotsLayout.padding.leading: 0
+
+                CheckBox {
                     id: passwordVisibleToggle
                     enabled: parent.enabled
-                    anchors {
-                        left: parent.left
-                        verticalCenter: parent.verticalCenter
-                    }
-
+                    SlotsLayout.position: SlotsLayout.First
+                    SlotsLayout.padding.leading: 0
                     // FIXME: Workaround for lp:1415023
                     activeFocusOnPress: false
                 }
                 onClicked: passwordVisibleToggle.trigger()
             }
 
-            UuitkListItem.Caption {
+            ListItems.Caption {
                 id: enableWifiCaption
                 anchors {
                     left: parent.left

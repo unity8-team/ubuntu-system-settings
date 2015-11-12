@@ -1,10 +1,5 @@
 module SystemSettings.ListItems
 
-internal BaseLayout BaseLayout.qml
-internal BaseListItem BaseListItem.qml
-internal ControlContainer ControlContainer.qml
-
-Control 1.0 Control.qml
 SingleValue 1.0 SingleValue.qml
 SingleValueProgression 1.0 SingleValueProgression.qml
 Standard 1.0 Standard.qml
