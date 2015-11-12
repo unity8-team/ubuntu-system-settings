@@ -181,26 +181,27 @@ ItemPage {
                     Qt.formatDate(UpdateManager.lastUpdateDate) : i18n.tr("Never")
             }
 
-            // ListItem.SingleControl {
-            //     control: Button {
-            //         objectName: "updateButton"
-            //         text: i18n.tr("Check for updates")
-            //         width: parent.width - units.gu(4)
-            //         onClicked: {
-            //             var upPlugin = pluginManager.getByName("system-update")
-            //             if (upPlugin) {
-            //                 var updatePage = upPlugin.pageComponent
-            //                 if (updatePage)
-            //                     pageStack.push(updatePage)
-            //                 else
-            //                     console.warn("Failed to get system-update pageComponent")
-            //             } else {
-            //                 console.warn("Failed to get system-update plugin instance")
-            //             }
-            //         }
-            //     }
-            //     showDivider: false
-            // }
+            SettingsListItems.SingleControl {
+
+                Button {
+                    objectName: "updateButton"
+                    text: i18n.tr("Check for updates")
+                    width: parent.width - units.gu(4)
+                    onClicked: {
+                        var upPlugin = pluginManager.getByName("system-update")
+                        if (upPlugin) {
+                            var updatePage = upPlugin.pageComponent
+                            if (updatePage)
+                                pageStack.push(updatePage)
+                            else
+                                console.warn("Failed to get system-update pageComponent")
+                        } else {
+                            console.warn("Failed to get system-update plugin instance")
+                        }
+                    }
+                }
+                showDivider: false
+            }
 
             SettingsItemTitle {
                 objectName: "legalItem"

@@ -1,5 +1,6 @@
 module SystemSettings.ListItems
 
+SingleControl 1.0 SingleControl.qml
 SingleValue 1.0 SingleValue.qml
 SingleValueProgression 1.0 SingleValueProgression.qml
 Standard 1.0 Standard.qml
