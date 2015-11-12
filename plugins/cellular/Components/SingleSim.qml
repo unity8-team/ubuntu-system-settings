@@ -32,10 +32,11 @@ Column {
         @prevOnlineModem path to modem that was online before this event */
     signal umtsModemChanged (var sim, string prevOnlineModem);
 
-    SettingsListItems.Control {
+    SettingsListItems.Standard {
         id: selector
         text: i18n.tr("Cellular data:")
-        control: Switch {
+
+        Switch {
             id: dataControl
             objectName: 'data'
             property bool serverChecked: sim.connMan.powered
@@ -45,11 +46,12 @@ Column {
         }
     }
 
-    SettingsListItems.Control {
+    SettingsListItems.Standard {
         id: dataRoamingItem
         text: i18n.tr("Data roaming")
         enabled: sim.connMan.powered
-        control: Switch {
+
+        Switch {
             id: dataRoamingControl
             objectName: "roaming"
             property bool serverChecked: sim.connMan.roamingAllowed
