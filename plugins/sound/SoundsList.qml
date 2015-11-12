@@ -19,6 +19,7 @@ ItemPage {
     property string soundsDir
 
     id: soundsPage
+    flickable: scrollWidget
 
     UbuntuSoundPanel {
         id: backendInfo
@@ -55,52 +56,76 @@ ItemPage {
         audioRole: MediaPlayer.alert
     }
 
-    Column {
-        id: columnId
-        anchors.left: parent.left
-        anchors.right: parent.right
+    Flickable {
+        id: scrollWidget
+        anchors.fill: parent
+        contentWidth: parent.width
+        contentHeight: contentItem.childrenRect.height + stopItem.height
+        boundsBehavior: (contentHeight > height) ?
+                            Flickable.DragAndOvershootBounds :
+                            Flickable.StopAtBounds
+        /* Set the direction to workaround https://bugreports.qt-project.org/browse/QTBUG-31905
+           otherwise the UI might end up in a situation where scrolling doesn't work */
+        flickableDirection: Flickable.VerticalFlick
 
-        ListItem.SingleControl {
-            id: listId
-            control: Button {
-                text: i18n.tr("Stop playing")
-                width: parent.width - units.gu(4)
-                onClicked:
-                    soundEffect.stop()
+        Column {
+            anchors.left: parent.left
+            anchors.right: parent.right
+
+            ListItem.ItemSelector {
+                id: soundSelector
+                containerHeight: itemHeight * model.length
+                height: containerHeight.height
+                expanded: true
+                model: soundDisplayNames
+                selectedIndex: {
+                    if (soundType == 0)
+                        soundSelector.selectedIndex =
+                                Utilities.indexSelectedFile(soundFileNames,
+                                    backendInfo.incomingCallSound)
+                    else if (soundType == 1)
+                        soundSelector.selectedIndex =
+                                Utilities.indexSelectedFile(soundFileNames,
+                                    backendInfo.incomingMessageSound)
+                }
+                onDelegateClicked: {
+                    if (soundType == 0) {
+                        soundSettings.incomingCallSound = soundFileNames[index]
+                        backendInfo.incomingCallSound = soundFileNames[index]
+                    } else if (soundType == 1) {
+                        soundSettings.incomingMessageSound = soundFileNames[index]
+                        backendInfo.incomingMessageSound = soundFileNames[index]
+                    }
+                    soundEffect.source = soundFileNames[index]
+                    soundEffect.play()
+                }
             }
-            enabled: soundEffect.playbackState == Audio.PlayingState
-            visible: showStopButton
+
+            ListItem.Standard {
+                id: customRingtone
+                text: i18n.tr("Custom Ringtone…")
+                onClicked: {
+                    // FIXME: open picker dialog here
+                }
+            }
         }
     }
 
-    ListItem.ItemSelector {
-        id: soundSelector
-        anchors.top: columnId.bottom
-        anchors.bottom: soundsPage.bottom
-        containerHeight: height
-
-        expanded: true
-        model: soundDisplayNames
-        selectedIndex: {
-            if (soundType == 0)
-                soundSelector.selectedIndex =
-                        Utilities.indexSelectedFile(soundFileNames,
-                            backendInfo.incomingCallSound)
-            else if (soundType == 1)
-                soundSelector.selectedIndex =
-                        Utilities.indexSelectedFile(soundFileNames,
-                            backendInfo.incomingMessageSound)
+    ListItem.SingleControl {
+        id: stopItem
+        anchors.bottom: parent.bottom
+        control: Button {
+            text: i18n.tr("Stop playing")
+            width: parent.width - units.gu(4)
+            onClicked:
+                soundEffect.stop()
         }
-        onDelegateClicked: {
-            if (soundType == 0) {
-                soundSettings.incomingCallSound = soundFileNames[index]
-                backendInfo.incomingCallSound = soundFileNames[index]
-            } else if (soundType == 1) {
-                soundSettings.incomingMessageSound = soundFileNames[index]
-                backendInfo.incomingMessageSound = soundFileNames[index]
-            }
-            soundEffect.source = soundFileNames[index]
-            soundEffect.play()
+        enabled: soundEffect.playbackState == Audio.PlayingState
+        visible: enabled
+        Rectangle {
+            anchors.fill: parent
+            z: parent.z - 1
+            color: Theme.palette.normal.background
         }
     }
 }
