@@ -468,6 +468,10 @@ Device::Type Device::getTypeFromClass (quint32 c)
         if ((c & 0x20) != 0)
             return Type::Camera;
         break;
+    case 0x07:
+        if ((c &0x4) != 0)
+            return Type::Watch;
+        break;
     }
 
     return Type::Other;

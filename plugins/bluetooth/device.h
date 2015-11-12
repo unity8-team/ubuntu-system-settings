@@ -71,7 +71,7 @@ public:
 
     enum Type { Other, Computer, Cellular, Smartphone, Phone, Modem, Network,
                 Headset, Speakers, Headphones, Video, OtherAudio, Joypad,
-                Keypad, Keyboard, Tablet, Mouse, Printer, Camera, Carkit };
+                Keypad, Keyboard, Tablet, Mouse, Printer, Camera, Carkit, Watch };
 
     enum Strength { None, Poor, Fair, Good, Excellent };
 

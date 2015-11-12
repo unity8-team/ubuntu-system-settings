@@ -58,6 +58,7 @@ Page {
         case Device.Mouse:      return i18n.tr("Mouse");
         case Device.Printer:    return i18n.tr("Printer");
         case Device.Camera:     return i18n.tr("Camera");
+        case Device.Watch:     return i18n.tr("Watch");
         default:                return i18n.tr("Other");
         }
     }
