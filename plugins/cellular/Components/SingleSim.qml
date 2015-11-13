@@ -76,11 +76,9 @@ Column {
         })
     }
 
-    SettingsListItems.SingleValueProgression {
-        text: i18n.tr("Connection type")
-        value: sim.getTechString()
-        onClicked: pageStack.push(Qt.resolvedUrl("../ConnectionType.qml"), {
-            sim: sim
-        })
+    RadioSingleSim {
+        id: radio
+        anchors { left: parent.left; right: parent.right }
+        visible: radio.enabled
     }
 }
