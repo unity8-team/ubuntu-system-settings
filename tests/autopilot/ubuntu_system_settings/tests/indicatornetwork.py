@@ -9,6 +9,8 @@
 import dbus
 import dbusmock
 
+import syslog
+
 __author__ = 'Jonas G. Drange'
 __email__ = 'jonas.drange@canonical.com'
 __copyright__ = '(c) 2015 Canonical Ltd.'
@@ -17,6 +19,8 @@ __license__ = 'LGPL 3+'
 BUS_NAME = 'com.canonical.indicator.network'
 MAIN_IFACE = 'org.gtk.Actions'
 MAIN_OBJ = '/com/canonical/indicator/network'
+MENU_IFACE = 'org.gtk.Menus'
+PHONE_WIFI_OBJ = '/com/canonical/indicator/network/phone_wifi_settings'
 SYSTEM_BUS = False
 
 NOT_IMPLEMENTED = '''raise dbus.exceptions.DBusException(
@@ -41,8 +45,14 @@ def list_actions(self):
     return list(self.actions)
 
 
-def set_state(self, action_name, parameters, platform_data):
-    eval(NOT_IMPLEMENTED)
+def start(self, groups):
+    syslog.syslog('inet start: ' + str(groups))
+    return dbusmock.get_object(MAIN_OBJ).menus
+
+
+def end(self, groups):
+    syslog.syslog('inet end: ' + str(groups))
+    pass
 
 
 @dbus.service.method(dbusmock.MOCK_IFACE,
@@ -62,11 +72,59 @@ def load(mock, parameters):
     mock.describe = describe
     mock.describe_all = describe_all
     mock.list_actions = list_actions
-    mock.set_state = set_state
 
     mock.actions = parameters.get('actions', {
         'wifi.enable': (True, '', [True]),
+        'accesspoint.0': (True, '', [False]),
+        'accesspoint.0::strength': (True, '', [44]),
+        'accesspoint.1': (True, '', [False]),
+        'accesspoint.1::strength': (True, '', [100]),
     })
+
+    mock.menus = parameters.get('menus', dbus.Array([
+        dbus.Struct((
+            dbus.UInt32(0), dbus.UInt32(0),
+            [
+                {
+                    'action': 'indicator.wifi.enable',
+                    'x-canonical-type': 'com.canonical.indicator.switch',
+                    'label': 'Wi-Fi'
+                },
+                {
+                    ':section': dbus.Struct(
+                        (dbus.UInt32(0), dbus.UInt32(1)), signature='(uu)'
+                    )
+                }
+            ]
+        ), signature='uuaa{sv}'),
+        dbus.Struct((
+            dbus.UInt32(0), dbus.UInt32(1),
+            dbus.Array([
+                dbus.Dictionary({
+                    'x-canonical-wifi-ap-is-secure': True,
+                    'x-canonical-wifi-ap-is-enterprise': False,
+                    'label': 'Secure',
+                    'x-canonical-type':
+                        'unity.widgets.systemsettings.tablet.accesspoint',
+                    'x-canonical-wifi-ap-strength-action':
+                        'indicator.accesspoint.0::strength',
+                    'action': 'indicator.accesspoint.0',
+                    'x-canonical-wifi-ap-is-adhoc': False
+                }, signature='sv'),
+                {
+                    'x-canonical-wifi-ap-is-secure': False,
+                    'x-canonical-wifi-ap-is-enterprise': False,
+                    'label': 'Insecure',
+                    'x-canonical-type':
+                        'unity.widgets.systemsettings.tablet.accesspoint',
+                    'x-canonical-wifi-ap-strength-action':
+                        'indicator.accesspoint.1::strength',
+                    'action': 'indicator.accesspoint.1',
+                    'x-canonical-wifi-ap-is-adhoc': False
+                },
+            ], signature='(a{sv})')
+        ), signature='uuaa{sv}')
+    ], signature='a(uuaa{sv})'))
 
     mock.AddMethods(
         MAIN_IFACE,
@@ -85,9 +143,25 @@ def load(mock, parameters):
             (
                 'List', '', 'as',
                 'ret = self.list_actions(self)'
-            ),
-            (
-                'SetState', 'sva{sv}', '',
-                'self.set_state(self, args[0], args[1], args[2])'
             )
         ])
+
+    mock.AddObject(
+       PHONE_WIFI_OBJ,
+       MENU_IFACE, {}, [
+            (
+                'Start', 'au', 'a(uuaa{sv})',
+                'ret = self.start(self, args[0])'
+            ),
+            (
+                'End', 'au', '',
+                'ret = self.end(self, args[0])'
+            )
+       ]
+    )
+
+    phone_wifi_obj = dbusmock.get_object(PHONE_WIFI_OBJ)
+    phone_wifi_obj.start = start
+    phone_wifi_obj.end = end
+
+    syslog.syslog('inet init')
