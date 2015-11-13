@@ -67,6 +67,10 @@ public:
                 WRITE setDialpadSoundsEnabled
                 NOTIFY dialpadSoundsEnabledChanged)
 
+    Q_PROPERTY (QString customRingtonePath
+                READ customRingtonePath
+                NOTIFY customRingtonePathChanged)
+
 
 public Q_SLOTS:
     void slotChanged(QString, QString);
@@ -81,6 +85,7 @@ Q_SIGNALS:
     void incomingMessageVibrateSilentModeChanged();
     void otherVibrateChanged();
     void dialpadSoundsEnabledChanged();
+    void customRingtonePathChanged();
 
 private:
     AccountsService m_accountsService;
@@ -101,6 +106,7 @@ private:
     void setOtherVibrate(bool enabled);
     bool getDialpadSoundsEnabled();
     void setDialpadSoundsEnabled(bool enabled);
+    QString customRingtonePath();
 
 };
 

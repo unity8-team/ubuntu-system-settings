@@ -21,6 +21,7 @@
 #include "sound.h"
 
 #include <QDir>
+#include <QStandardPaths>
 #include <unistd.h>
 
 #define AS_INTERFACE "com.ubuntu.touch.AccountsService.Sound"
@@ -211,6 +212,11 @@ void Sound::setDialpadSoundsEnabled(bool enabled)
                                       "DialpadSoundsEnabled",
                                       QVariant::fromValue(enabled));
     Q_EMIT(dialpadSoundsEnabledChanged());
+}
+
+QString Sound::customRingtonePath()
+{
+    return QString(QStandardPaths::writableLocation(QStandardPaths::DataLocation) + "/Music");
 }
 
 QStringList soundsListFromDir(const QString &dirString)
