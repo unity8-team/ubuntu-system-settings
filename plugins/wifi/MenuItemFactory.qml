@@ -150,7 +150,7 @@ Item {
                 loadAttributes();
             }
 
-            USC.ServerPropertySynchroniser {
+            resources: USC.ServerPropertySynchroniser {
                 userTarget: apItem
                 userProperty: "active"
                 userTrigger: "onActivate"

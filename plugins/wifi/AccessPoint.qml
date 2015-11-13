@@ -28,20 +28,7 @@ FramedMenuItem {
     property bool secure: false
     property bool adHoc: false
     property int signalStrength: 0
-
-    signal activate()
-
-    onCheckedChanged: {
-        // Can't rely on binding. Checked is assigned on click.
-        checkBoxActive.checked = checked;
-
-        // if stack has NetworkDetailsBrief, pop it
-        if (pageStack.depth === 3) {
-            pageStack.pop();
-        }
-    }
-
-    iconName: {
+    icon: {
         var imageName = "nm-signal-100"
 
         if (adHoc) {
@@ -62,15 +49,27 @@ FramedMenuItem {
         return imageName;
     }
 
-    iconFrame: false
-    control: CheckBox {
+    signal activate()
+
+    onCheckedChanged: {
+        // Can't rely on binding. Checked is assigned on click.
+        checkBoxActive.checked = checked;
+
+        // if stack has NetworkDetailsBrief, pop it
+        if (pageStack.depth === 3) {
+            pageStack.pop();
+        }
+    }
+
+    CheckBox {
         id: checkBoxActive
 
         onClicked: {
             accessPoint.activate();
         }
     }
-    progression: checked
+
+    progressionVisible: checked
     onClicked: {
         if (checked) {
             pageStack.push(Qt.resolvedUrl("NetworkDetailsBrief.qml"),

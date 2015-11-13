@@ -43,7 +43,7 @@ FramedMenuItem {
         }
     }
 
-    control: CheckBox {
+    CheckBox {
         id: checkbox
 
         Component.onCompleted: {
