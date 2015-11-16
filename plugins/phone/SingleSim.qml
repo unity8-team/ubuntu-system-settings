@@ -41,17 +41,7 @@ Column {
         text: i18n.tr("Call forwarding")
         showDivider: false
         progression: true
-        value: {
-            if (sim.callForwarding.voiceUnconditional) {
-                return i18n.tr("All calls");
-            } else if (sim.callForwarding.voiceBusy ||
-                       sim.callForwarding.voiceNoReply ||
-                       sim.callForwarding.voiceNotReachable) {
-                return i18n.tr("Some calls")
-            } else {
-                return i18n.tr("Off")
-            }
-        }
+        value: sim.getCallForwardingSummary()
         onClicked: pageStack.push(Qt.resolvedUrl("CallForwarding.qml"), {sim: sim})
     }
 
