@@ -9,8 +9,6 @@
 import dbus
 import dbusmock
 
-import syslog
-
 __author__ = 'Jonas G. Drange'
 __email__ = 'jonas.drange@canonical.com'
 __copyright__ = '(c) 2015 Canonical Ltd.'
@@ -46,12 +44,10 @@ def list_actions(self):
 
 
 def start(self, groups):
-    syslog.syslog('inet start: ' + str(groups))
     return dbusmock.get_object(MAIN_OBJ).menus
 
 
 def end(self, groups):
-    syslog.syslog('inet end: ' + str(groups))
     pass
 
 
@@ -168,5 +164,3 @@ def load(mock, parameters):
     phone_wifi_obj = dbusmock.get_object(PHONE_WIFI_OBJ)
     phone_wifi_obj.start = start
     phone_wifi_obj.end = end
-
-    syslog.syslog('inet init')
