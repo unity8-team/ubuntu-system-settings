@@ -21,6 +21,7 @@
 #include "sound.h"
 
 #include <QDir>
+#include <QFile>
 #include <QStandardPaths>
 #include <unistd.h>
 
@@ -89,10 +90,15 @@ void Sound::setIncomingCallSound(QString sound)
     if (sound == getIncomingCallSound())
         return;
 
+    QString prevSound = getIncomingCallSound();
+
     m_accountsService.setUserProperty(AS_INTERFACE,
                                       "IncomingCallSound",
                                       QVariant::fromValue(sound));
     Q_EMIT(incomingCallSoundChanged());
+
+    if (prevSound.startsWith(QString(QStandardPaths::writableLocation(QStandardPaths::DataLocation))))
+        QFile(prevSound).remove();
 }
 
 QString Sound::getIncomingMessageSound()
@@ -106,10 +112,15 @@ void Sound::setIncomingMessageSound(QString sound)
     if (sound == getIncomingMessageSound())
         return;
 
+    QString prevSound = getIncomingMessageSound();
+
     m_accountsService.setUserProperty(AS_INTERFACE,
                                       "IncomingMessageSound",
                                       QVariant::fromValue(sound));
+
     Q_EMIT(incomingMessageSoundChanged());
+    if (prevSound.startsWith(QString(QStandardPaths::writableLocation(QStandardPaths::DataLocation))))
+        QFile(prevSound).remove();
 }
 
 bool Sound::getIncomingCallVibrate()
