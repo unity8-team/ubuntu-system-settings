@@ -97,7 +97,8 @@ void Sound::setIncomingCallSound(QString sound)
                                       QVariant::fromValue(sound));
     Q_EMIT(incomingCallSoundChanged());
 
-    if (prevSound.startsWith(QString(QStandardPaths::writableLocation(QStandardPaths::DataLocation))))
+    if (prevSound.startsWith(QString(QStandardPaths::writableLocation(QStandardPaths::DataLocation))) &&
+            prevSound != getIncomingMessageSound())
         QFile(prevSound).remove();
 }
 
@@ -119,7 +120,8 @@ void Sound::setIncomingMessageSound(QString sound)
                                       QVariant::fromValue(sound));
 
     Q_EMIT(incomingMessageSoundChanged());
-    if (prevSound.startsWith(QString(QStandardPaths::writableLocation(QStandardPaths::DataLocation))))
+    if (prevSound.startsWith(QString(QStandardPaths::writableLocation(QStandardPaths::DataLocation))) &&
+            prevSound != getIncomingCallSound())
         QFile(prevSound).remove();
 }
 
