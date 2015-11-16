@@ -21,8 +21,8 @@
 import QtQuick 2.4
 import QtQuick.Layouts 1.1
 import SystemSettings 1.0
+import SystemSettings.ListItems 1.0 as SettingsListItems
 import Ubuntu.Components 1.3
-import Ubuntu.Components.ListItems 1.3 as ListItem
 import Ubuntu.SystemSettings.Wifi 1.0
 
 ItemPage {
@@ -48,27 +48,28 @@ ItemPage {
             anchors.left: parent.left
             anchors.right: parent.right
 
-            ListItem.Divider {}
-
-            Button {
-                text : i18n.tr("Forget this network")
-                anchors {
-                    left: parent.left
-                    right: parent.right
-                    margins: units.gu(2)
-                }
-                onClicked: {
-                    if (DbusHelper.forgetActiveDevice()) {
-                        accessPoint.checked = false;
-                        accessPoint.checkedChanged(false)
+            SettingsListItems.SingleControl {
+                Button {
+                    text : i18n.tr("Forget this network")
+                    anchors {
+                        left: parent.left
+                        right: parent.right
+                        margins: units.gu(2)
+                    }
+                    onClicked: {
+                        if (DbusHelper.forgetActiveDevice()) {
+                            accessPoint.checked = false;
+                            accessPoint.checkedChanged(false)
+                        }
                     }
                 }
             }
 
-            ListItem.Standard {
+            SettingsListItems.Standard {
                 text: i18n.tr("IP address")
                 id: addressItem
-                control: TextField {
+
+                TextField {
                     text: DbusHelper.wifiIp4Address
                     readOnly: true
                     horizontalAlignment: TextInput.AlignRight

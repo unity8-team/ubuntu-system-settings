@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 Canonical Ltd.
+ * Copyright 2013-2015 Canonical Ltd.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -15,7 +15,7 @@
  *
  * Authors:
  *      Nick Dedekind <nick.dedekind@canonical.com>
- */
+  */
 
 import QtQuick 2.4
 import QMenuModel 0.1 as QMenuModel
@@ -106,7 +106,7 @@ Item {
             property int menuIndex: -1
             property var extendedData: menu && menu.ext || undefined
             text: menu && menu.label ? menu.label : ""
-            busy: getExtendedProperty(extendedData, "xCanonicalBusyAction", false)
+            busy: getExtendedProperty(extendedData, "xCanonicalBusyAction", false) || true
 
             onMenuModelChanged: {
                 loadAttributes();
