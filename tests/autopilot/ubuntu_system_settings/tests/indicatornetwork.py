@@ -75,7 +75,7 @@ def load(mock, parameters):
 
     mock.actions = parameters.get('actions', {
         'wifi.enable': (True, '', [True]),
-        'accesspoint.0': (True, '', [False]),
+        'accesspoint.0': (True, '', [True]),
         'accesspoint.0::strength': (True, '', [44]),
         'accesspoint.1': (True, '', [False]),
         'accesspoint.1::strength': (True, '', [100]),
@@ -89,6 +89,11 @@ def load(mock, parameters):
                     'action': 'indicator.wifi.enable',
                     'x-canonical-type': 'com.canonical.indicator.switch',
                     'label': 'Wi-Fi'
+                },
+                {
+                    'x-canonical-type': 'com.canonical.indicator.section',
+                    'label': 'Available Wi-Fi networks',
+                    'x-canonical-busy-action': True
                 },
                 {
                     ':section': dbus.Struct(
@@ -121,7 +126,7 @@ def load(mock, parameters):
                         'indicator.accesspoint.1::strength',
                     'action': 'indicator.accesspoint.1',
                     'x-canonical-wifi-ap-is-adhoc': False
-                },
+                }
             ], signature='(a{sv})')
         ), signature='uuaa{sv}')
     ], signature='a(uuaa{sv})'))
