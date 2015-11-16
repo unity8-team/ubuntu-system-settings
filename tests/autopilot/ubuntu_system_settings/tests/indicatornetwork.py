@@ -75,10 +75,13 @@ def load(mock, parameters):
         'accesspoint.0::strength': (True, '', [44]),
         'accesspoint.1': (True, '', [False]),
         'accesspoint.1::strength': (True, '', [100]),
+        'accesspoint.2': (True, '', [False]),
+        'accesspoint.2::strength': (True, '', [74]),
+        'accesspoint.3': (False, '', [False]),
     })
 
     mock.menus = parameters.get('menus', dbus.Array([
-        dbus.Struct((
+        (
             dbus.UInt32(0), dbus.UInt32(0),
             [
                 {
@@ -88,8 +91,7 @@ def load(mock, parameters):
                 },
                 {
                     'x-canonical-type': 'com.canonical.indicator.section',
-                    'label': 'Available Wi-Fi networks',
-                    'x-canonical-busy-action': True
+                    'label': 'Available Wi-Fi networks'
                 },
                 {
                     ':section': dbus.Struct(
@@ -97,11 +99,11 @@ def load(mock, parameters):
                     )
                 }
             ]
-        ), signature='uuaa{sv}'),
-        dbus.Struct((
+        ),
+        (
             dbus.UInt32(0), dbus.UInt32(1),
-            dbus.Array([
-                dbus.Dictionary({
+            [
+                {
                     'x-canonical-wifi-ap-is-secure': True,
                     'x-canonical-wifi-ap-is-enterprise': False,
                     'label': 'Secure',
@@ -111,7 +113,7 @@ def load(mock, parameters):
                         'indicator.accesspoint.0::strength',
                     'action': 'indicator.accesspoint.0',
                     'x-canonical-wifi-ap-is-adhoc': False
-                }, signature='sv'),
+                },
                 {
                     'x-canonical-wifi-ap-is-secure': False,
                     'x-canonical-wifi-ap-is-enterprise': False,
@@ -122,9 +124,29 @@ def load(mock, parameters):
                         'indicator.accesspoint.1::strength',
                     'action': 'indicator.accesspoint.1',
                     'x-canonical-wifi-ap-is-adhoc': False
+                },
+                {
+                    'x-canonical-wifi-ap-is-secure': True,
+                    'x-canonical-wifi-ap-is-enterprise': True,
+                    'label': 'Enterprise',
+                    'x-canonical-type':
+                        'unity.widgets.systemsettings.tablet.accesspoint',
+                    'x-canonical-wifi-ap-strength-action':
+                        'indicator.accesspoint.2::strength',
+                    'action': 'indicator.accesspoint.2',
+                    'x-canonical-wifi-ap-is-adhoc': False
+                },
+                {
+                    'x-canonical-wifi-ap-is-secure': False,
+                    'x-canonical-wifi-ap-is-enterprise': False,
+                    'label': 'Unknown',
+                    'x-canonical-type':
+                        'unknown-type',
+                    'action': 'indicator.accesspoint.3',
+                    'x-canonical-wifi-ap-is-adhoc': False
                 }
-            ], signature='(a{sv})')
-        ), signature='uuaa{sv}')
+            ]
+        )
     ], signature='a(uuaa{sv})'))
 
     mock.AddMethods(
