@@ -133,17 +133,40 @@ ItemPage {
     ListItem.SingleControl {
         id: stopItem
         anchors.bottom: parent.bottom
-        control: Button {
-            text: i18n.tr("Stop playing")
-            width: parent.width - units.gu(4)
-            onClicked:
-                soundEffect.stop()
+        control: AbstractButton {
+            id: stopButton
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.horizontalCenter: parent.horizontalCenter
+            focus: false
+            width: height
+            height: units.gu(4)
+            enabled: soundEffect.playbackState == Audio.PlayingState
+            visible: enabled
+
+            onClicked: soundEffect.stop()
+
+            Rectangle {
+                anchors.fill: parent
+                radius: width * 0.5
+                border.color: UbuntuColors.warmGrey
+                border.width: 1
+            }
+
+            Rectangle {
+                width: parent.height * 0.4
+                height: width
+                smooth: true
+                anchors {
+                    verticalCenter: parent.verticalCenter
+                    horizontalCenter: parent.horizontalCenter
+                }
+                color: UbuntuColors.warmGrey
+            }
         }
-        enabled: soundEffect.playbackState == Audio.PlayingState
-        visible: enabled
         Rectangle {
             anchors.fill: parent
             z: parent.z - 1
+            visible: stopButton.visible
             color: Theme.palette.normal.background
         }
     }
