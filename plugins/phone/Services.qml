@@ -20,8 +20,8 @@
 
 import QtQuick 2.4
 import SystemSettings 1.0
+import SystemSettings.ListItems 1.0 as SettingsListItems
 import Ubuntu.Components 1.3
-import Ubuntu.Components.ListItems 1.3 as ListItem
 
 ItemPage {
     id: root
@@ -60,8 +60,7 @@ ItemPage {
             Repeater {
                 model: names
 
-                ListItem.Standard {
-                    progression: true
+                SettingsListItems.StandardProgression {
                     text: modelData
                     onClicked: pageStack.push(Qt.resolvedUrl("ServiceInfo.qml"), {serviceName: modelData, serviceNumber: sim.serviceNumbers[modelData]})
                 }

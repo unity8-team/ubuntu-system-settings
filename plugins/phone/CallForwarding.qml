@@ -164,7 +164,6 @@ ItemPage {
             SettingsItemTitle {
                 id: fwdSomeTitle
                 text: i18n.tr("Forward incoming calls when:")
-                showDivider: false
             }
 
             CallForwardItem {
