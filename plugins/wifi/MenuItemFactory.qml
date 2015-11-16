@@ -65,7 +65,7 @@ Item {
             property int menuIndex: -1
 
             text: menu && menu.label ? menu.label : ""
-            icon: menu ? menu.icon : ""
+            iconName: menu ? menu.icon : ""
             checkable: menu ? (menu.isCheck || menu.isRadio) : false
             checked: checkable ? menu.isToggled : false
             enabled: menu ? menu.sensitive : false

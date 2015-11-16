@@ -1,7 +1,7 @@
 /*
  * This file is part of system-settings
  *
- * Copyright (C) 2013 Canonical Ltd.
+ * Copyright (C) 2013-2015 Canonical Ltd.
  *
  * Contact: Alberto Mardegan <alberto.mardegan@canonical.com>
  *
@@ -19,58 +19,14 @@
  */
 
 import QtQuick 2.4
+import SystemSettings.ListItems 1.0 as SettingsListItems
 import Ubuntu.Components 1.3
-import Ubuntu.Settings.Components 0.1
 
-Item {
+SettingsListItems.IconProgression {
     id: root
-
-    signal clicked
-
-    height: button.height
 
     objectName: "entryComponent-" + model.item.baseName
 
-    AbstractButton {
-        id: button
-        anchors.left: parent.left
-        anchors.right: parent.right
-        onClicked: root.clicked()
-
-        height: col.height
-
-        Column {
-            id: col
-            anchors.left: parent.left
-            anchors.right: parent.right
-
-            Icon {
-                id: icon
-                anchors.horizontalCenter: parent.horizontalCenter
-                width: height
-                height: units.gu(4)
-                source: model.icon
-            }
-
-            Label {
-                anchors.horizontalCenter: parent.horizontalCenter
-                text: i18n.dtr(model.item.translations, model.displayName)
-                width: col.width
-                horizontalAlignment: Text.AlignHCenter
-                fontSize: "small"
-                wrapMode: Text.WrapAtWordBoundaryOrAnywhere
-            }
-        }
-    }
-
-    UbuntuShape {
-        z: -1
-        visible: button.pressed
-        anchors{
-            fill: root
-            margins: -units.gu(0.25)
-        }
-        backgroundColor: UbuntuColors.darkGrey
-        opacity: 0.15
-    }
+    text: i18n.dtr(model.item.translations, model.displayName)
+    iconSource: model.icon
 }

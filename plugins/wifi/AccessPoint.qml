@@ -28,7 +28,7 @@ FramedMenuItem {
     property bool secure: false
     property bool adHoc: false
     property int signalStrength: 0
-    icon: {
+    iconName: {
         var imageName = "nm-signal-100"
 
         if (adHoc) {

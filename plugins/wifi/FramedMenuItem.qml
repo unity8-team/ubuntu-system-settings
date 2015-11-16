@@ -22,18 +22,8 @@ import QtQuick 2.4
 import SystemSettings.ListItems 1.0 as SettingsListItems
 import Ubuntu.Components 1.3
 
-SettingsListItems.StandardProgression {
-    property alias icon: iconItem.name
-
+SettingsListItems.IconProgression {
     // FIXME: use padding + padding + icon width
     divider.anchors.leftMargin: units.gu(6)
     layout.subtitle.color: UbuntuColors.green
-
-    Icon {
-        id: iconItem
-        SlotsLayout.position: SlotsLayout.First
-        visible: name
-        height: Math.min(units.gu(2), layout.height - units.gu(1))
-        width: height
-    }
 }

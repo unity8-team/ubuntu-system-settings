@@ -1,4 +1,6 @@
 set(QML_SOURCES
+    Icon.qml
+    IconProgression.qml
     SingleControl.qml
     SingleValue.qml
     SingleValueProgression.qml
