@@ -109,7 +109,6 @@ ItemPage {
             ListItem.ItemSelector {
                 id: soundSelector
                 containerHeight: itemHeight * model.length
-                height: containerHeight.height
                 expanded: true
                 model: soundDisplayNames
                 selectedIndex: {
