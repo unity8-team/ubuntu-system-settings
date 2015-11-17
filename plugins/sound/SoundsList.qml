@@ -94,7 +94,7 @@ ItemPage {
         id: scrollWidget
         anchors.fill: parent
         contentWidth: parent.width
-        contentHeight: contentItem.childrenRect.height + stopItem.height
+        contentHeight: selectorColumn.height + stopItem.height
         boundsBehavior: (contentHeight > height) ?
                             Flickable.DragAndOvershootBounds :
                             Flickable.StopAtBounds
@@ -103,12 +103,12 @@ ItemPage {
         flickableDirection: Flickable.VerticalFlick
 
         Column {
+            id: selectorColumn
             anchors.left: parent.left
             anchors.right: parent.right
 
             ListItem.ItemSelector {
                 id: soundSelector
-                containerHeight: itemHeight * model.length
                 expanded: true
                 model: soundDisplayNames
                 selectedIndex: {
