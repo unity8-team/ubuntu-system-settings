@@ -170,8 +170,8 @@ def load(mock, parameters):
         ])
 
     mock.AddObject(
-       PHONE_WIFI_OBJ,
-       MENU_IFACE, {}, [
+        PHONE_WIFI_OBJ,
+        MENU_IFACE, {}, [
             (
                 'Start', 'au', 'a(uuaa{sv})',
                 'ret = self.start(self, args[0])'
@@ -180,7 +180,7 @@ def load(mock, parameters):
                 'End', 'au', '',
                 'ret = self.end(self, args[0])'
             )
-       ]
+        ]
     )
 
     phone_wifi_obj = dbusmock.get_object(PHONE_WIFI_OBJ)
