@@ -122,6 +122,7 @@ ItemPage {
             ListItem.Standard {
                 id: customRingtone
                 text: i18n.tr("Custom Ringtone")
+                visible: soundType === 0
                 progression: true
                 onClicked: {
                     pageStack.push(picker);
