@@ -121,7 +121,8 @@ ItemPage {
 
             ListItem.Standard {
                 id: customRingtone
-                text: i18n.tr("Custom Ringtone…")
+                text: i18n.tr("Custom Ringtone")
+                progression: true
                 onClicked: {
                     pageStack.push(picker);
                 }
@@ -198,6 +199,7 @@ ItemPage {
             visible: parent.visible
             handler: ContentHandler.Source
             contentType: ContentType.Music
+            showTitle: false
 
             onPeerSelected: {
                 pageStack.pop();
