@@ -79,7 +79,7 @@ class UbuntuSystemSettingsTestCase(
 
     """Base class for Ubuntu System Settings."""
 
-    APP_PATH = '/usr/bin/system-settings'
+    APP_PATH = 'system-settings'
     DESKTOP_FILE = '/usr/share/applications/ubuntu-system-settings.desktop'
 
     def setUp(self, panel=None):
