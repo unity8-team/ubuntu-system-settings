@@ -1,7 +1,7 @@
 /*
  * This file is part of system-settings
  *
- * Copyright (C) 2014 Canonical Ltd.
+ * Copyright (C) 2014-2015 Canonical Ltd.
  *
  * Contact: Diego Sarmentero <diego.sarmentero@canonical.com>
  *
@@ -19,18 +19,15 @@
  */
 
 import QtQuick 2.4
+import SystemSettings.ListItems 1.0 as SettingsListItems
 import Ubuntu.Components 1.3
-import Ubuntu.Components.ListItems 1.3 as ListItem
 import Ubuntu.SystemSettings.Update 1.0
 
-ListItem.SingleValue {
+SettingsListItems.IconProgression {
     id: root
     text: i18n.tr(model.displayName)
     objectName: "entryComponent-updates"
     iconSource: Qt.resolvedUrl(model.icon)
-    iconFrame: false
-    progression: true
-    value: updatesAvailable > 0 ? updatesAvailable : ""
 
     property int updatesAvailable: 0
 
@@ -43,7 +40,7 @@ ListItem.SingleValue {
         updatesAvailable =  _updatesAvailable;
     }
 
-    Connections {
+    resources: Connections {
         id: updateManager
         objectName: "updateManager"
         target: UpdateManager
@@ -52,4 +49,8 @@ ListItem.SingleValue {
     }
 
     onClicked: main.loadPluginByName("system-update");
+    Label { 
+        SlotsLayout.position: SlotsLayout.Trailing
+        text: updatesAvailable > 0 ? updatesAvailable : ""
+    }
 }

@@ -1,7 +1,7 @@
 /*
  * This file is part of system-settings
  *
- * Copyright (C) 2013-2014 Canonical Ltd.
+ * Copyright (C) 2013-2015 Canonical Ltd.
  *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License version 3, as published
@@ -19,7 +19,7 @@
 import QtQuick 2.4
 import SystemSettings 1.0
 import Ubuntu.Components 1.3
-import Ubuntu.Components.ListItems 1.3 as ListItem
+import Ubuntu.Components.ListItems 1.3 as ListItems
 import Ubuntu.SystemSettings.Update 1.0
 
 
@@ -28,7 +28,7 @@ ItemPage {
     objectName: "configurationPage"
     title: i18n.tr("Auto download")
 
-    ListItem.ItemSelector {
+    ListItems.ItemSelector {
         id: upgradePolicySelector
         expanded: true
         text: i18n.tr ("Download future updates automatically:")
