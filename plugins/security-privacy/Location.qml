@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 Canonical Ltd
+ * Copyright (C) 2013-2015 Canonical Ltd
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as
@@ -22,10 +22,11 @@ import GSettings 1.0
 import QMenuModel 0.1
 import Qt.labs.folderlistmodel 2.1
 import QtQuick 2.4
-import Ubuntu.Components 1.3
-import Ubuntu.Components.ListItems 1.3 as ListItem
-import Ubuntu.SystemSettings.SecurityPrivacy 1.0
 import SystemSettings 1.0
+import SystemSettings.ListItems 1.0 as SettingsListItems
+import Ubuntu.Components 1.3
+import Ubuntu.Components.ListItems 1.3 as ListItems
+import Ubuntu.SystemSettings.SecurityPrivacy 1.0
 
 ItemPage {
     id: locationPage
@@ -94,7 +95,7 @@ ItemPage {
                 text: i18n.tr("Let the phone detect your location:")
             }
 
-            ListItem.ItemSelector {
+            ListItems.ItemSelector {
                 id: detection
 
                 /* Helper that toggles location detection and HERE based on
@@ -199,7 +200,7 @@ ItemPage {
                 }
             }
 
-            ListItem.Caption {
+            ListItems.Caption {
                 /* TODO: replace by real info from the location service */
                 property int locationInfo: 0
 
@@ -235,10 +236,10 @@ ItemPage {
 
             Repeater {
                 model: trustStoreModel
-                ListItem.Standard {
+                SettingsListItems.Icon {
                     text: model.applicationName
                     iconSource: model.iconName
-                    control: Switch {
+                    Switch {
                         checked: model.granted
                         onClicked: trustStoreModel.setEnabled(index, !model.granted)
                     }
@@ -246,12 +247,11 @@ ItemPage {
                 }
             }
 
-            ListItem.Standard {
+            SettingsListItems.Standard {
                 text: i18n.tr("None requested")
                 visible: trustStoreModel.count === 0
                 enabled: false
             }
         }
-
     }
 }
