@@ -72,8 +72,7 @@ ItemPage {
                 SettingsListItems.SingleValueProgression {
                     text: i18n.tr(model.name)
                     enabled: trustStoreModel.count > 0
-                    //FIXME: slotslayout
-                    //progression: enabled ? true : false
+                    progressionVisible: enabled ? true : false
                     value: trustStoreModel.count > 0 ?
                         i18n.tr("%1/%2").arg(trustStoreModel.grantedCount).arg(trustStoreModel.count) :
                         i18n.tr("0")

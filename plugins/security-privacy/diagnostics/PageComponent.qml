@@ -84,13 +84,11 @@ ItemPage {
                 id: previousReports
                 property string ident: diagnosticsWidget.systemIdentifier()
                 text: i18n.tr("Previous error reports")
-                //FIXME: slotslayout
-                //progression: previousReports.ident != ""
+                enabled: previousReports.ident != ""
+                progressionVisible: enabled
                 onClicked: {
                     var base = "https://errors.ubuntu.com/user/"
-                    if (previousReports.progression) {
-                        Qt.openUrlExternally(base + ident)
-                    }
+                    Qt.openUrlExternally(base + ident)
                 }
             }
 
