@@ -18,7 +18,6 @@ import QtQuick 2.4
 import SystemSettings 1.0
 import SystemSettings.ListItems 1.0 as SettingsListItems
 import Ubuntu.Components 1.3
-import Ubuntu.Components.ListItems 1.3 as ListItems
 import Ubuntu.Components.Popups 1.3
 import Ubuntu.SystemSettings.Wifi 1.0
 import QMenuModel 0.1
@@ -82,7 +81,6 @@ ItemPage {
                         right: parent.right
                     }
                     height: loader.height
-                    visible: height > 0
 
                     Loader {
                         id: loader
@@ -125,14 +123,6 @@ ItemPage {
                 }
             }
 
-            ListItems.Divider {}
-
-            SettingsListItems.StandardProgression {
-                objectName: "previousNetwork"
-                text: i18n.tr("Previous networks")
-                onClicked: pageStack.push(Qt.resolvedUrl("PreviousNetworks.qml"))
-            }
-
             SettingsListItems.Standard {
                 objectName: "connectToHiddenNetwork"
                 text: i18n.tr("Connect to hidden network…")
@@ -141,6 +131,12 @@ ItemPage {
                     otherNetworLoader.source = "OtherNetwork.qml";
                     PopupUtils.open(otherNetworLoader.item);
                 }
+            }
+
+            SettingsListItems.StandardProgression {
+                objectName: "previousNetwork"
+                text: i18n.tr("Previous networks")
+                onClicked: pageStack.push(Qt.resolvedUrl("PreviousNetworks.qml"))
             }
 
             Loader {

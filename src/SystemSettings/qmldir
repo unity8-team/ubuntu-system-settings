@@ -1,7 +1,4 @@
 module SystemSettings
 
-BaseListItem BaseListItem.qml
-
 ItemPage 1.0 ItemPage.qml
 SettingsItemTitle 1.0 SettingsItemTitle.qml
-
