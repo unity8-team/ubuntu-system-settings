@@ -82,7 +82,7 @@ ItemPage {
                         "model": trustStoreModel,
                     })
 
-                    TrustStoreModel {
+                    resources: TrustStoreModel {
                         id: trustStoreModel
                         serviceName: model.trustStoreService
                     }
