@@ -46,6 +46,11 @@ void Device::initDevice(const QString &path, QDBusConnection &bus)
     QObject::connect(this, SIGNAL(strengthChanged()), this, SIGNAL(deviceChanged()));
 
     m_bluezDevice.reset(new BluezDevice1(BLUEZ_SERVICE, path, bus));
+    /* Give our calls a bit more time than the default 25 seconds to
+     * complete whatever they are doing. In some situations (e.g. with
+     * specific devices) the default doesn't seem to be enough to. */
+    m_bluezDevice->setTimeout(60 * 1000 /* 60 seconds */);
+
     m_bluezDeviceProperties.reset(new FreeDesktopProperties(BLUEZ_SERVICE, path, bus));
 
     QObject::connect(m_bluezDeviceProperties.data(), SIGNAL(PropertiesChanged(const QString&, const QVariantMap&, const QStringList&)),
