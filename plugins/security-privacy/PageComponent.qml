@@ -118,7 +118,7 @@ ItemPage {
             SettingsListItems.SingleValueProgression {
                 id: lockingControl
                 objectName: "lockingControl"
-                text: i18n.tr("Locking and unlocking")
+                text: i18n.tr("Screen Lock")
                 onClicked: pageStack.push(Qt.resolvedUrl("PhoneLocking.qml"), {usePowerd: usePowerd, powerSettings: powerSettings})
             }
             SettingsListItems.SingleValueProgression {
