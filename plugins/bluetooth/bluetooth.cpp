@@ -112,6 +112,7 @@ bool Bluetooth::isSupportedType(const int type)
     case Device::Type::OtherAudio:
     case Device::Type::Keyboard:
     case Device::Type::Mouse:
+    case Device::Type::Watch:
         return true;
 
     default:
