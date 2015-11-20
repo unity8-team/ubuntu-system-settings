@@ -28,7 +28,9 @@ ItemPage {
     flickable: scrollWidget
 
     function refreshSoundFileNames() {
-        return backendInfo.listSounds([soundsDir, "/custom" + soundsDir, backendInfo.customRingtonePath])
+        if (soundType === 0)
+            return backendInfo.listSounds([soundsDir, "/custom" + soundsDir, backendInfo.customRingtonePath])
+        return backendInfo.listSounds([soundsDir, "/custom" + soundsDir])
     }
 
     UbuntuSoundPanel {
