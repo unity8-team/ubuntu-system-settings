@@ -1,3 +1,12 @@
+ubuntu-system-settings (0.3+16.04.20151120-0ubuntu1) xenial; urgency=medium
+
+  * Ported the Bluetooth plugin to the changed BlueZ API which comes
+    with version 5.x. The overall device management gets a lot more
+    reliable with this. Superfluous code was dropped when possible. Also
+    the unit tests got a rework and all pass now. (LP: #1499789)
+
+ -- Simon Fels <simon.busch@canonical.com>  Fri, 20 Nov 2015 08:48:52 +0000
+
 ubuntu-system-settings (0.3+16.04.20151110-0ubuntu1) xenial; urgency=medium
 
   [ Alejandro J. Cura ]
