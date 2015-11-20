@@ -73,7 +73,7 @@ QQmlComponent *TestItem::pageComponent(QQmlEngine *engine, QObject *parent)
 {
     if (m_pageComponent == NULL) {
         QQmlComponent *page = new QQmlComponent(engine, parent);
-        page->setData("import QtQuick 2.0\n"
+        page->setData("import QtQuick 2.4\n"
                       "Rectangle {\n"
                       "  function reset() { console.log('Hello') }\n"
                       "  width: 200; height: 200;\n"

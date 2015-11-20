@@ -22,11 +22,11 @@
  *
  */
 
-import QtQuick 2.0
+import QtQuick 2.4
 import Qt.labs.folderlistmodel 1.0
 import SystemSettings 1.0
-import Ubuntu.Components 0.1
-import Ubuntu.Components.ListItems 0.1 as ListItem
+import Ubuntu.Components 1.3
+import Ubuntu.Components.ListItems 1.3 as ListItem
 import Ubuntu.SystemSettings.StorageAbout 1.0
 import Ubuntu.SystemSettings.Update 1.0
 
@@ -35,6 +35,8 @@ ItemPage {
     objectName: "versionPage"
     title: i18n.tr("OS Build Details")
     flickable: flickElement
+
+    property string version
 
     UbuntuStorageAboutPanel {
         id: storedInfo
@@ -59,7 +61,7 @@ ItemPage {
             SingleValueStacked {
                 objectName: "versionBuildNumberItem"
                 text: i18n.tr("OS build number")
-                value: UpdateManager.currentBuildNumber ? UpdateManager.currentBuildNumber : "Non system image"
+                value: versionPage.version ? versionPage.version : "Non system image"
             }
 
             SingleValueStacked {

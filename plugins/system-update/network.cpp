@@ -38,7 +38,8 @@ namespace UpdatePlugin {
 
 Network::Network(QObject *parent) :
     QObject(parent),
-    m_nam(this)
+    m_nam(this),
+    m_ncm(new QNetworkConfigurationManager())
 {
 }
 
@@ -134,6 +135,13 @@ std::vector<std::string> Network::listFolder(const std::string& folder, const st
 void Network::checkForNewVersions(QHash<QString, Update*> &apps)
 {
     qWarning() << __PRETTY_FUNCTION__;
+
+    // If we aren't online, don't check
+    if (!m_ncm->isOnline()) {
+        qWarning() << "Not currently online, don't check";
+        return;
+    }
+
     m_apps = apps;
     QJsonObject serializer;
     QJsonArray array;
@@ -166,8 +174,16 @@ void Network::checkForNewVersions(QHash<QString, Update*> &apps)
     connect(reply, &QNetworkReply::sslErrors, this, &Network::onReplySslErrors);
     connect(reply, static_cast<void(QNetworkReply::*)
             (QNetworkReply::NetworkError)>(&QNetworkReply::error),
-        this, &Network::onReplyError);
+            this, &Network::onReplyError);
+    connect(m_ncm, &QNetworkConfigurationManager::onlineStateChanged, [=](const bool &online) {
+            if (!online) {
+                qWarning() << "Offline, aborting check for updates";
+                reply->abort();
+            }
+    });
 }
+
+
 
 QString Network::getUrlApps()
 {

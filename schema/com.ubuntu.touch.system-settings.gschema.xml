@@ -33,7 +33,6 @@
             <summary>Whether the applications should be sorted by name.</summary>
             <description>If true the applications are sorted by name, otherwise by disk size.</description>
         </key>
-
         <key enum="primary-button-enum" name="mouse-primary-button">
             <default>"Left"</default>
             <summary>Primary Mouse Button.</summary>
@@ -93,6 +92,10 @@
             <default>true</default>
             <summary>Ignore touchpad when a mouse is connected.</summary>
             <description>Disable touchpad when a mouse is connected.</description>
+        <key name="callforwarding-summaries" type="a{ss}">
+            <summary>Call forwarding summaries</summary>
+            <default>{}</default>
+            <description>Mapping of SIM to a call forwarding summary.</description>
         </key>
     </schema>
 </schemalist>
