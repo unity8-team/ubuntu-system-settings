@@ -28,6 +28,9 @@ ListItem {
 
     height: layoutItem.height + (divider.visible ? divider.height : 0)
     divider.visible: showDivider
+    divider.colorFrom: "#EEEEEE"
+    divider.colorTo: "#EEEEEE"
+    divider.height: units.dp(1)
     highlightColor: highlightWhenPressed ? undefined : "transparent"
 
     ListItemLayout {
