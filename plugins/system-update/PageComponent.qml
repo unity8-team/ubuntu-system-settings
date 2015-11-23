@@ -22,8 +22,9 @@
 import QMenuModel 0.1
 import QtQuick 2.4
 import SystemSettings 1.0
+import SystemSettings.ListItems 1.0 as SettingsListItems
 import Ubuntu.Components 1.3
-import Ubuntu.Components.ListItems 1.3 as ListItem
+import Ubuntu.Components.ListItems 1.3 as ListItems
 import Ubuntu.Components.Popups 1.3
 import Ubuntu.OnlineAccounts.Client 0.1
 import Ubuntu.SystemSettings.Update 1.0
@@ -99,7 +100,7 @@ ItemPage {
              Button {
                  text: i18n.tr("Restart & Install")
                  visible: root.batterySafeForUpdate ? true : false
-                 color: UbuntuColors.orange
+                 color: UbuntuColors.green
                  onClicked: {
                      installingImageUpdate.visible = true;
                      UpdateManager.applySystemUpdate();
@@ -108,12 +109,12 @@ ItemPage {
              }
              Button {
                  text: i18n.tr("Cancel")
-                 color: UbuntuColors.warmGrey
+                 color: UbuntuColors.lightGrey
                  onClicked: {
                      updateList.currentIndex = 0;
                      var item = updateList.currentItem;
                      var modelItem = UpdateManager.model[0];
-                     item.actionButton.text = i18n.tr("Install");
+                     item.actionButton.text = i18n.tr("Update");
                      item.progressBar.opacity = 0;
                      modelItem.updateReady = true;
                      modelItem.selected = false;
@@ -133,7 +134,7 @@ ItemPage {
 
              Button {
                  text: i18n.tr("OK")
-                 color: UbuntuColors.orange
+                 color: UbuntuColors.green
                  onClicked: {
                      PopupUtils.close(dialogueError);
                  }
@@ -261,10 +262,9 @@ ItemPage {
             }
             height: childrenRect.height
 
-            ListItem.Base {
+            ListItems.Base {
                 id: checkForUpdatesArea
                 objectName: "checkForUpdatesArea"
-                showDivider: false
                 visible: false
 
                 ActivityIndicator {
@@ -293,20 +293,18 @@ ItemPage {
                 }
             }
 
-            ListItem.SingleControl {
+            SettingsListItems.SingleValue {
                 height: installAllButton.visible ? units.gu(8) : units.gu(2)
                 highlightWhenPressed: false
-                control: Button {
+                text: includeSystemUpdate ?
+                    i18n.tr("%1 update available", "%1 updates available", root.updatesAvailable).arg(root.updatesAvailable) :
+                    i18n.tr("%1 update available", "%1 updates available", root.updatesAvailable).arg(root.updatesAvailable)
+                Button {
                     id: installAllButton
                     objectName: "installAllButton"
-                    property string primaryText: includeSystemUpdate ?
-                                                     i18n.tr("Install %1 update…", "Install %1 updates…", root.updatesAvailable).arg(root.updatesAvailable) :
-                                                     i18n.tr("Install %1 update", "Install %1 updates", root.updatesAvailable).arg(root.updatesAvailable)
-                    property string secondaryText: i18n.tr("Pause All")
-                    color: UbuntuColors.orange
-                    text: root.installAll ? secondaryText : primaryText
-                    width: parent.width - units.gu(4)
-
+                    SlotsLayout.position: SlotsLayout.Trailing
+                    color: UbuntuColors.green
+                    text: root.installAll ? i18n.tr("Pause all") : i18n.tr("Update all")
                     onClicked: {
                         for (var i=0; i < updateList.count; i++) {
                             updateList.currentIndex = i;
@@ -339,7 +337,6 @@ ItemPage {
                         root.installAll = !root.installAll;
                     }
                 }
-                showDivider: false
             }
 
             ListView {
@@ -354,270 +351,95 @@ ItemPage {
                 interactive: false
                 spacing: 0
 
-                delegate: ListItem.Subtitled {
-                    id: listItem
-                    anchors {
-                        left: parent.left
-                        right: parent.right
-                        topMargin: units.gu(1)
-                        bottomMargin: units.gu(1)
+                delegate: UpdateItem {
+                    id: updateItem
+                    updateData: modelData
+                    tracker: DownloadTracker {
+                        id: tracker
+                        objectName: "tracker"
+                        packageName: updateData.packageName
+                        clickToken: updateData.clickToken
+                        download: updateData.downloadUrl
+                        downloadSha512: updateData.downloadSha512
+
+                        onFinished: {
+                            updateItem.progress.visible = false;
+                            updateItem.buttonAppUpdate.visible = false;
+                            updateItem.installed = true;
+                            updateItem.installing = false;
+                            root.updatesAvailable -= 1;
+                            updateData.updateRequired = false;
+                            UpdateManager.updateClickScope();
+                        }
+
+                        onProcessing: {
+                            console.warn("onProcessing: " + updateData.packageName + " " + path);
+                            updateItem.buttonAppUpdate.enabled = false;
+                            updateItem.installing = true;
+                            updateData.updateState = false;
+                        }
+
+                        onStarted: {
+                            console.warn("onStarted: " + updateData.packageName + " " + success);
+                            if (success)
+                                updateData.updateState = true;
+                            else
+                                updateData.updateState = false;
+                        }
+
+                        onPaused: {
+                            console.warn("onPaused: " + updateData.packageName + " " + success);
+                            if (success)
+                                updateData.updateState = false;
+                            else
+                                updateData.updateState = true;
+                        }
+
+                        onResumed: {
+                            console.warn("onResumed: " + updateData.packageName + " " + success);
+                            if (success)
+                                updateData.updateState = true;
+                            else
+                                updateData.updateState = false;
+                        }
+
+                        onCanceled: {
+                            console.warn("onCanceled: " + updateData.packageName + " " + success);
+                            if (success) {
+                                updateData.updateState = false;
+                                updateData.selected = false;
+                            }
+                        }
+
+                        onErrorFound: {
+                            console.warn("onErrorFound: " + updateData.packageName + " " + error);
+                            updateData.updateState = false;
+                            updateItem.retry = true;
+                            updateItem.installing = false;
+                        }
                     }
-                    iconSource: Qt.resolvedUrl(modelData.iconUrl)
-                    iconFrame: modelData.systemUpdate ? false : true
-                    height: visible ? textArea.height + units.gu(2) : 0
-                    highlightWhenPressed: false
-                    showDivider: false
-                    visible: opacity > 0
-                    opacity: installed ? 0 : 1
-                    Behavior on opacity { PropertyAnimation { duration: UbuntuAnimation.SleepyDuration } }
-
-                    property alias actionButton: buttonAppUpdate
-                    property alias progressBar: progress
-                    property bool installing: !modelData.systemUpdate && (modelData.updateReady || (progressBar.value === progressBar.maximumValue))
-                    property bool installed: false
-                    property bool retry: false
-
+                    
                     function pause () {
-                        console.warn("PAUSE: " + modelData.packageName);
-                        if (modelData.systemUpdate)
-                            return UpdateManager.pauseDownload(modelData.packageName);
-                        modelData.updateState = false;
+                        console.warn("PAUSE: " + updateData.packageName);
+                        if (updateData.systemUpdate)
+                            return UpdateManager.pauseDownload(updateData.packageName);
+                        updateData.updateState = false;
                         tracker.pause();
                     }
 
                     function resume () {
-                        console.warn("RESUME: " + modelData.packageName);
-                        if (modelData.systemUpdate)
-                            return UpdateManager.startDownload(modelData.packageName);
-                        modelData.updateState = true;
+                        console.warn("RESUME: " + updateData.packageName);
+                        if (updateData.systemUpdate)
+                            return UpdateManager.startDownload(updateData.packageName);
+                        updateData.updateState = true;
                         tracker.resume();
                     }
 
                     function start () {
-                        console.warn("START: " + modelData.packageName);
-                        modelData.selected = true;
-                        modelData.updateState = true;
-                        UpdateManager.startDownload(modelData.packageName);
-                    }
-                    Column {
-                        id: textArea
-                        objectName: "textArea"
-                        anchors {
-                            left: parent.left
-                            right: parent.right
-                        }
-                        spacing: units.gu(0.5)
-
-                        Item {
-                            anchors {
-                                left: parent.left
-                                right: parent.right
-                            }
-                            height: buttonAppUpdate.height
-
-                            Label {
-                                id: labelTitle
-                                objectName: "labelTitle"
-                                anchors {
-                                    left: parent.left
-                                    right: buttonAppUpdate.visible ? buttonAppUpdate.left : parent.right
-                                    verticalCenter: parent.verticalCenter
-                                }
-                                text: modelData.title
-                                font.bold: true
-                                elide: Text.ElideMiddle
-                            }
-
-                            Button {
-                                id: buttonAppUpdate
-                                objectName: "buttonAppUpdate"
-                                anchors.right: parent.right
-                                height: labelTitle.height + units.gu(1)
-                                enabled: !installing
-                                text: {
-                                    if (retry)
-                                        return i18n.tr("Retry");
-                                    if (modelData.systemUpdate) {
-                                        if (modelData.updateReady) {
-                                            return i18n.tr("Install…");
-                                        } else if (!modelData.updateState && !modelData.selected) {
-                                            return i18n.tr("Download");
-                                        }
-                                    }
-                                    if (modelData.updateState) {
-                                        return i18n.tr("Pause");
-                                    } else if (modelData.selected) {
-                                        return i18n.tr("Resume");
-                                    }
-                                    return i18n.tr("Update");
-                                }
-
-                                onClicked: {
-                                    if (retry) {
-                                        retry = false;
-                                        return UpdateManager.retryDownload(modelData.packageName);
-                                    }
-                                    if (modelData.updateState)
-                                        return pause();
-                                    if (!modelData.updateState && modelData.selected)
-                                        return resume();
-                                    if (!modelData.updateState && !modelData.selected && !modelData.updateReady)
-                                        return start();
-                                    if (modelData.updateReady)
-                                        PopupUtils.open(dialogInstallComponent);
-                                }
-                            }
-                        }
-
-                        Item {
-                            id: labelUpdateStatus
-                            anchors {
-                                left: parent.left
-                                right: parent.right
-                            }
-                            height: childrenRect.height
-                            visible: opacity > 0
-                            opacity: (modelData.updateState && modelData.selected && !modelData.updateReady) || (installing || installed) ? 1 : 0
-                            Behavior on opacity { PropertyAnimation { duration: UbuntuAnimation.SleepyDuration } }
-                            Label {
-                                objectName: "labelUpdateStatus"
-                                anchors.left: parent.left
-                                anchors.right: updateStatusLabel.left
-                                elide: Text.ElideMiddle
-                                fontSize: "small"
-                                text: {
-                                    if (retry)
-                                        return modelData.error;
-                                    if (installing)
-                                        return i18n.tr("Installing");
-                                    if (installed)
-                                        return i18n.tr("Installed");
-                                    return i18n.tr("Downloading");
-                                }
-                            }
-                            Label {
-                                id: updateStatusLabel
-                                anchors.right: parent.right
-                                visible: !labelSize.visible && !installing && !installed
-                                fontSize: "small"
-                                text: {
-                                    if (!labelUpdateStatus.visible)
-                                        return Utilities.formatSize(modelData.binaryFilesize);
-
-                                    return i18n.tr("%1 of %2").arg(
-                                        Utilities.formatSize(modelData.binaryFilesize * (progress.value * 0.01))).arg(
-                                        Utilities.formatSize(modelData.binaryFilesize)
-                                    );
-                                }
-                            }
-                        }
-
-                        ProgressBar {
-                            id: progress
-                            objectName: "progress"
-                            height: units.gu(2)
-                            anchors {
-                                left: parent.left
-                                right: parent.right
-                            }
-                            visible: opacity > 0
-                            opacity: modelData.selected && !modelData.updateReady && !installed ? 1 : 0
-                            value: modelData.systemUpdate ? modelData.downloadProgress : tracker.progress
-                            minimumValue: 0
-                            maximumValue: 100
-
-                            DownloadTracker {
-                                id: tracker
-                                objectName: "tracker"
-                                packageName: modelData.packageName
-                                clickToken: modelData.clickToken
-                                download: modelData.downloadUrl
-                                downloadSha512: modelData.downloadSha512
-
-                                onFinished: {
-                                    progress.visible = false;
-                                    buttonAppUpdate.visible = false;
-                                    installed = true;
-                                    installing = false;
-                                    root.updatesAvailable -= 1;
-                                    modelData.updateRequired = false;
-                                    UpdateManager.updateClickScope();
-                                }
-
-                                onProcessing: {
-                                    console.warn("onProcessing: " + modelData.packageName + " " + path);
-                                    buttonAppUpdate.enabled = false;
-                                    installing = true;
-                                    modelData.updateState = false;
-                                }
-
-                                onStarted: {
-                                    console.warn("onStarted: " + modelData.packageName + " " + success);
-                                    if (success)
-                                        modelData.updateState = true;
-                                    else
-                                        modelData.updateState = false;
-                                }
-
-                                onPaused: {
-                                    console.warn("onPaused: " + modelData.packageName + " " + success);
-                                    if (success)
-                                        modelData.updateState = false;
-                                    else
-                                        modelData.updateState = true;
-                                }
-
-                                onResumed: {
-                                    console.warn("onResumed: " + modelData.packageName + " " + success);
-                                    if (success)
-                                        modelData.updateState = true;
-                                    else
-                                        modelData.updateState = false;
-                                }
-
-                                onCanceled: {
-                                    console.warn("onCanceled: " + modelData.packageName + " " + success);
-                                    if (success) {
-                                        modelData.updateState = false;
-                                        modelData.selected = false;
-                                    }
-                                }
-
-                                onErrorFound: {
-                                    console.warn("onErrorFound: " + modelData.packageName + " " + error);
-                                    modelData.updateState = false;
-                                    retry = true;
-                                    installing = false;
-                                }
-                            }
-
-                            Behavior on opacity { PropertyAnimation { duration: UbuntuAnimation.SleepyDuration } }
-                        }
-
-                        Item {
-                            anchors {
-                                left: parent.left
-                                right: parent.right
-                            }
-                            height: childrenRect.height
-                            Label {
-                                id: labelVersion
-                                objectName: "labelVersion"
-                                anchors.left: parent.left
-                                text: modelData.remoteVersion ? i18n.tr("Version: ") + modelData.remoteVersion : ""
-                                elide: Text.ElideRight
-                                fontSize: "small"
-                            }
-
-                            Label {
-                                id: labelSize
-                                objectName: "labelSize"
-                                anchors.right: parent.right
-                                text: Utilities.formatSize(modelData.binaryFilesize)
-                                fontSize: "small"
-                                visible: !labelUpdateStatus.visible && !installing && !installed
-                            }
-                        }
+                        console.warn("START: " + updateData.packageName);
+                        updateData.selected = true;
+                        updateData.updateState = true;
+                        UpdateManager.startDownload(updateData.packageName);
                     }
                 }
             }
@@ -633,7 +455,7 @@ ItemPage {
                     left: parent.left
                     right: parent.right
                 }
-                ListItem.ThinDivider {}
+                ListItems.ThinDivider {}
 
                 Label {
                     text: i18n.tr("Sign in to Ubuntu One to receive updates for apps.")
@@ -652,6 +474,7 @@ ItemPage {
                         leftMargin: units.gu(2)
                         rightMargin: units.gu(2)
                     }
+                    color: UbuntuColors.lightGrey
                     onClicked: uoaConfig.exec()
                 }
 
@@ -727,8 +550,8 @@ ItemPage {
         anchors.bottom: parent.bottom
         anchors.left: parent.left
         anchors.right: parent.right
-        ListItem.ThinDivider {}
-        ListItem.SingleValue {
+        ListItems.ThinDivider {}
+        SettingsListItems.SingleValueProgression {
             objectName: "configuration"
             text: i18n.tr("Auto download")
             value: {
@@ -739,7 +562,6 @@ ItemPage {
                 else if (UpdateManager.downloadMode === 2)
                     return i18n.tr("Always")
             }
-            progression: true
             onClicked: pageStack.push(Qt.resolvedUrl("Configuration.qml"))
         }
     }
