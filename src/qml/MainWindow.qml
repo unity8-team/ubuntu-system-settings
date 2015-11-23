@@ -114,7 +114,7 @@ MainView {
 
             head.actions: [
                 Action {
-                    iconName: "search"
+                    iconName: "find"
                     onTriggered: {
                         pluginManager.filter = "";
                         search.visible = !search.visible;
