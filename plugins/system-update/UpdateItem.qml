@@ -50,47 +50,10 @@ ListItem {
                 anchors.fill: parent
                 source: Qt.resolvedUrl(updateData.iconUrl)
             }
+            aspect: updateData.systemUpdate ? UbuntuShape.Flat : UbuntuShape.Inset 
         }
 
-        Button {
-            id: buttonAppUpdate
-            objectName: "buttonAppUpdate"
-            SlotsLayout.position: SlotsLayout.Trailing
-            height: labelTitle.height + units.gu(1)
-            enabled: !installing
-            text: {
-                if (retry)
-                    return i18n.tr("Retry");
-                if (updateData.systemUpdate) {
-                    if (updateData.updateReady) {
-                        return i18n.tr("Update");
-                    } else if (!updateData.updateState && !updateData.selected) {
-                        return i18n.tr("Download");
-                    }
-                }
-                if (updateData.updateState) {
-                    return i18n.tr("Pause");
-                } else if (updateData.selected) {
-                    return i18n.tr("Resume");
-                }
-                return i18n.tr("Update");
-            }
-
-            onClicked: {
-                if (retry) {
-                    retry = false;
-                    return UpdateManager.retryDownload(updateData.packageName);
-                }
-                if (updateData.updateState)
-                    return pause();
-                if (!updateData.updateState && updateData.selected)
-                    return resume();
-                if (!updateData.updateState && !updateData.selected && !updateData.updateReady)
-                    return start();
-                if (updateData.updateReady)
-                    PopupUtils.open(dialogInstallComponent);
-            }
-        }
+        
 
         mainSlot: Column {
             id: textArea
@@ -100,17 +63,69 @@ ListItem {
             spacing: units.gu(0.5)
             height: childrenRect.height
 
-            Label {
-                id: labelTitle
-                objectName: "labelTitle"
+
+            Item {
                 anchors {
                     left: parent.left
+                    right: parent.right
                 }
-                text: updateData.title
-                font.bold: true
-                elide: Text.ElideMiddle
-            }
+                height: childrenRect.height
+                Button {
+                    id: buttonAppUpdate
+                    objectName: "buttonAppUpdate"
+                    anchors {
+                        top: parent.top
+                        right: parent.right
+                    }
+                    height: labelTitle.height + units.gu(1)
+                    enabled: !installing
+                    text: {
+                        if (retry)
+                            return i18n.tr("Retry");
+                        if (updateData.systemUpdate) {
+                            if (updateData.updateReady) {
+                                return i18n.tr("Update");
+                            } else if (!updateData.updateState && !updateData.selected) {
+                                return i18n.tr("Download");
+                            }
+                        }
+                        if (updateData.updateState) {
+                            return i18n.tr("Pause");
+                        } else if (updateData.selected) {
+                            return i18n.tr("Resume");
+                        }
+                        return i18n.tr("Update");
+                    }
 
+                    onClicked: {
+                        if (retry) {
+                            retry = false;
+                            return UpdateManager.retryDownload(updateData.packageName);
+                        }
+                        if (updateData.updateState)
+                            return pause();
+                        if (!updateData.updateState && updateData.selected)
+                            return resume();
+                        if (!updateData.updateState && !updateData.selected && !updateData.updateReady)
+                            return start();
+                        if (updateData.updateReady)
+                            PopupUtils.open(dialogInstallComponent);
+                    }
+                }
+            
+                Label {
+                    id: labelTitle
+                    objectName: "labelTitle"
+                    anchors {
+                        top: parent.top
+                        left: parent.left
+                    }
+                    text: updateData.title
+                    font.bold: true
+                    elide: Text.ElideMiddle
+                }
+            }
+            
             Item {
                 id: labelUpdateStatus
                 anchors {
