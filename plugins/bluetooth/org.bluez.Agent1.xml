@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <node name="/">
-  <interface name="org.bluez.Agent">
+  <interface name="org.bluez.Agent1">
     <method name="RequestPinCode">
       <annotation name="org.freedesktop.DBus.GLib.Async" value=""/>
       <arg type="o" name="device"/>
       <arg type="s" name="pincode" direction="out"/>
+    </method>
+
+    <method name="DisplayPinCode">
+      <annotation name="org.freedesktop.DBus.GLib.Async" value=""/>
+      <arg type="o" name="device"/>
+      <arg type="s" name="pincode"/>
     </method>
 
     <method name="RequestPasskey">
@@ -25,6 +31,17 @@
       <annotation name="org.freedesktop.DBus.GLib.Async" value=""/>
       <arg type="o" name="device"/>
       <arg type="u" name="passkey"/>
+    </method>
+
+    <method name="RequestAuthorization">
+      <annotation name="org.freedesktop.DBus.GLib.Async" value=""/>
+      <arg type="o" name="device"/>
+    </method>
+
+    <method name="AuthorizeService">
+      <annotation name="org.freedesktop.DBus.GLib.Async" value=""/>
+      <arg type="o" name="device"/>
+      <arg type="s" name="uuid"/>
     </method>
 
     <method name="Cancel">

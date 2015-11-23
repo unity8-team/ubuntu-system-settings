@@ -29,7 +29,7 @@ FakeBluez::FakeBluez(QObject *parent) :
 {
     DBusMock::registerMetaTypes();
 
-    m_dbusMock.registerTemplate(BLUEZ_SERVICE, "bluez4",
+    m_dbusMock.registerTemplate(BLUEZ_SERVICE, "bluez5",
                                 QDBusConnection::SystemBus);
     m_dbusTestRunner.startServices();
 
@@ -75,13 +75,49 @@ FakeBluez::addDevice(const QString& name, const QString &address)
     return reply.isValid() ? reply.value() : QString();
 }
 
+void
+FakeBluez::pairDevice(const QString &address)
+{
+    QDBusReply<void> reply = m_bluezMock->call("PairDevice",
+                                                  m_currentAdapter,
+                                                  address);
+
+    if (!reply.isValid()) {
+        qWarning() << "Failed to pair mock device:" << reply.error().message();
+    }
+}
+
+void
+FakeBluez::connectDevice(const QString &address)
+{
+    QDBusReply<void> reply = m_bluezMock->call("ConnectDevice",
+                                                  m_currentAdapter,
+                                                  address);
+
+    if (!reply.isValid()) {
+        qWarning() << "Failed to connect mock device:" << reply.error().message();
+    }
+}
+
+void
+FakeBluez::disconnectDevice(const QString &address)
+{
+    QDBusReply<void> reply = m_bluezMock->call("DisconnectDevice",
+                                                  m_currentAdapter,
+                                                  address);
+
+    if (!reply.isValid()) {
+        qWarning() << "Failed to disconnect mock device:" << reply.error().message();
+    }
+}
+
 QVariant
 FakeBluez::getProperty(const QString &path,
                        const QString &interface,
                        const QString &property)
 {
     QDBusInterface iface(BLUEZ_SERVICE, path,
-                         "org.freedesktop.DBus.Properties",
+                         FREEDESKTOP_PROPERTIES_IFACE,
                          m_dbusTestRunner.systemConnection());
 
     QDBusReply<QVariant> reply = iface.call("Get", interface, property);
@@ -103,10 +139,11 @@ FakeBluez::setProperty(const QString &path,
                        const QVariant &value)
 {
     QDBusInterface iface(BLUEZ_SERVICE, path,
-                         interface,
+                         FREEDESKTOP_PROPERTIES_IFACE,
                          m_dbusTestRunner.systemConnection());
 
-    QDBusReply<void> reply = iface.call("SetProperty",
+    QDBusReply<void> reply = iface.call("Set",
+                                        interface,
                                         property, value);
 
     if (!reply.isValid()) {

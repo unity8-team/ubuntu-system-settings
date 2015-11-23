@@ -27,33 +27,81 @@
 
 namespace
 {
-  const int SCANNING_ACTIVE_DURATION_MSEC = (10 * 1000);
-
+  const int SCANNING_ACTIVE_DURATION_MSEC = (30 * 1000);
   const int SCANNING_IDLE_DURATION_MSEC = (10 * 1000);
 }
 
 DeviceModel::DeviceModel(QDBusConnection &dbus, QObject *parent):
     QAbstractListModel(parent),
     m_dbus(dbus),
-    m_bluezManager("org.bluez", "/", "org.bluez.Manager", m_dbus)
+    m_bluezManager("org.bluez", "/", m_dbus),
+    m_bluezAgentManager("org.bluez", "/org/bluez", m_dbus),
+    m_isPowered(false),
+    m_isPairable(false),
+    m_isDiscovering(false),
+    m_isDiscoverable(false)
 {
     if (m_bluezManager.isValid()) {
 
-        QDBusReply<QDBusObjectPath> qObjectPath = m_bluezManager.call("DefaultAdapter");
-        if (qObjectPath.isValid())
-            setAdapterFromPath(qObjectPath.value().path());
+        connect(&m_bluezManager, SIGNAL(InterfacesAdded(const QDBusObjectPath&, InterfaceList)),
+                this, SLOT(slotInterfacesAdded(const QDBusObjectPath&, InterfaceList)));
 
-        m_dbus.connect (m_bluezManager.service(),
-                        m_bluezManager.path(),
-                        m_bluezManager.interface(),
-                        "DefaultAdapterChanged",
-                        this, SLOT(slotDefaultAdapterChanged(const QDBusObjectPath&)));
+        connect(&m_bluezManager, SIGNAL(InterfacesRemoved(const QDBusObjectPath&, const QStringList&)),
+                this, SLOT(slotInterfacesRemoved(const QDBusObjectPath&, const QStringList&)));
 
-        m_dbus.connect (m_bluezManager.service(),
-                        m_bluezManager.path(),
-                        m_bluezManager.interface(),
-                        "AdapterRemoved",
-                        this, SLOT(slotAdapterRemoved(const QDBusObjectPath&)));
+        watchCall(m_bluezManager.GetManagedObjects(), [=](QDBusPendingCallWatcher *watcher) {
+            QDBusPendingReply<ManagedObjectList> reply = *watcher;
+
+            if (reply.isError()) {
+                qWarning() << "Failed to retrieve list of managed objects from BlueZ service: "
+                           << reply.error().message();
+                watcher->deleteLater();
+                return;
+            }
+
+            auto objectList = reply.argumentAt<0>();
+
+            for (QDBusObjectPath path : objectList.keys()) {
+                InterfaceList ifaces = objectList.value(path);
+
+                if (!ifaces.contains(BLUEZ_ADAPTER_IFACE))
+                    continue;
+
+                // Ok, here we've found an adapter. As we don't expect multiple at the
+                // moment we just take the first one we find.
+                setAdapterFromPath(path.path(), ifaces.value(BLUEZ_ADAPTER_IFACE));
+                break;
+            }
+
+            watcher->deleteLater();
+        });
+    }
+
+    if (m_bluezAgentManager.isValid()) {
+        // NOTE: We can safely register our agent here even if we don't
+        // manage any adapter yet. BlueZ makes sure our agent will only
+        // process requests related to actions we do unless we our agent
+        // the system default one.
+        auto call = m_bluezAgentManager.RegisterAgent(QDBusObjectPath(DBUS_ADAPTER_AGENT_PATH),
+                                                      DBUS_AGENT_CAPABILITY);
+
+        watchCall(call, [=](QDBusPendingCallWatcher *watcher) {
+            QDBusPendingReply<void> reply = *watcher;
+
+            if (reply.isError()) {
+                qWarning() << "Failed to register our agent with BlueZ:"
+                           << reply.error().message();
+            }
+            else {
+                setupAsDefaultAgent();
+            }
+
+            watcher->deleteLater();
+        });
+    }
+    else {
+        qWarning() << "Could not register agent with BlueZ service as "
+                   << "the agent manager is not available!";
     }
 
     connect(&m_timer, SIGNAL(timeout()), this, SLOT(slotTimeout()));
@@ -62,6 +110,89 @@ DeviceModel::DeviceModel(QDBusConnection &dbus, QObject *parent):
 DeviceModel::~DeviceModel()
 {
     clearAdapter();
+
+    qWarning() << "Releasing device model ..";
+
+    if (m_bluezAgentManager.isValid()) {
+        auto call = m_bluezAgentManager.UnregisterAgent(QDBusObjectPath(DBUS_ADAPTER_AGENT_PATH));
+        watchCall(call, [=](QDBusPendingCallWatcher *watcher) {
+            QDBusPendingReply<void> reply = *watcher;
+
+            if (reply.isError()) {
+                qWarning() << "Failed to unregister our agent with BlueZ:"
+                           << reply.error().message();
+            }
+
+            watcher->deleteLater();
+        });
+    }
+}
+
+void DeviceModel::setupAsDefaultAgent()
+{
+    auto call = m_bluezAgentManager.RequestDefaultAgent(QDBusObjectPath(DBUS_ADAPTER_AGENT_PATH));
+    watchCall(call, [=](QDBusPendingCallWatcher *watcher) {
+        QDBusPendingReply<void> reply = *watcher;
+
+        if (reply.isError()) {
+            qWarning() << "Failed to setup ourself as default agent: "
+                       << reply.error().message();
+        }
+
+        watcher->deleteLater();
+    });
+}
+
+void DeviceModel::slotInterfacesAdded(const QDBusObjectPath &objectPath, InterfaceList ifacesAndProps)
+{
+    Q_UNUSED(ifacesAndProps);
+
+    auto candidatedPath = objectPath.path();
+
+    if (!m_bluezAdapter) {
+        // Maybe we have a new adapter we can start to use?
+        if (ifacesAndProps.contains(BLUEZ_ADAPTER_IFACE))
+            setAdapterFromPath(candidatedPath, ifacesAndProps.value(BLUEZ_ADAPTER_IFACE));
+
+        return;
+    }
+
+    // At this point we can only get new devices
+    if (!candidatedPath.startsWith(m_bluezAdapter->path()))
+        return;
+
+    if (!ifacesAndProps.contains(BLUEZ_DEVICE_IFACE))
+        return;
+
+    addDevice(candidatedPath, ifacesAndProps.value(BLUEZ_DEVICE_IFACE));
+}
+
+void DeviceModel::slotInterfacesRemoved(const QDBusObjectPath &objectPath, const QStringList &interfaces)
+{
+    auto candidatedPath = objectPath.path();
+
+    if (!m_bluezAdapter)
+        return;
+
+    if (candidatedPath == m_bluezAdapter->path() &&
+        interfaces.contains(BLUEZ_ADAPTER_IFACE)) {
+        clearAdapter();
+        return;
+    }
+
+    if (!candidatedPath.startsWith(m_bluezAdapter->path()))
+        return;
+
+    if (!interfaces.contains(BLUEZ_DEVICE_IFACE))
+        return;
+
+    auto device = getDeviceFromPath(candidatedPath);
+    if (!device)
+        return;
+
+    const int row = findRowFromAddress(device->getAddress());
+    if ((row >= 0))
+        removeRow(row);
 }
 
 int DeviceModel::findRowFromAddress(const QString &address) const
@@ -79,27 +210,45 @@ void DeviceModel::restartTimer()
                                    : SCANNING_IDLE_DURATION_MSEC);
 }
 
+void DeviceModel::setDiscovering(bool value)
+{
+    if (value == m_isDiscovering)
+        return;
+
+    m_isDiscovering = value;
+    Q_EMIT(discoveringChanged(m_isDiscovering));
+}
+
 void DeviceModel::stopDiscovery()
 {
-    if (m_isDiscovering) {
-        if (m_bluezAdapter)
-            m_bluezAdapter->asyncCall("StopDiscovery");
-        m_isDiscovering = false;
-        Q_EMIT(discoveringChanged(m_isDiscovering));
-    }
+    if (m_bluezAdapter && m_isPowered && m_isDiscovering) {
 
-    restartTimer();
+         watchCall(m_bluezAdapter->StopDiscovery(), [=](QDBusPendingCallWatcher *watcher) {
+            QDBusPendingReply<void> reply = *watcher;
+            if (reply.isError()) {
+                qWarning() << "Failed to stop device discovery:"
+                           << reply.error().message();
+            }
+
+            watcher->deleteLater();
+        });
+    }
 }
 
 void DeviceModel::startDiscovery()
 {
     if (m_bluezAdapter && m_isPowered && !m_isDiscovering) {
-        m_bluezAdapter->asyncCall("StartDiscovery");
-        m_isDiscovering = true;
-        Q_EMIT(discoveringChanged(m_isDiscovering));
-    }
 
-    restartTimer();
+        watchCall(m_bluezAdapter->StartDiscovery(), [=](QDBusPendingCallWatcher *watcher) {
+            QDBusPendingReply<void> reply = *watcher;
+            if (reply.isError()) {
+                qWarning() << "Failed to start device discovery:"
+                           << reply.error().message();
+            }
+
+            watcher->deleteLater();
+        });
+    }
 }
 
 void DeviceModel::toggleDiscovery()
@@ -119,27 +268,12 @@ void DeviceModel::clearAdapter()
 {
     if (m_bluezAdapter) {
 
-        QDBusConnection bus = m_bluezAdapter->connection();
-        const QString service = m_bluezAdapter->service();
-        const QString path = m_bluezAdapter->path();
-        const QString interface = m_bluezAdapter->interface();
-
         stopDiscovery();
         m_discoverableTimer.stop();
         trySetDiscoverable(false);
 
-        bus.disconnect(service, path, interface, "DeviceCreated",
-                       this, SLOT(slotDeviceCreated(const QDBusObjectPath&)));
-        bus.disconnect(service, path, interface, "DeviceRemoved",
-                       this, SLOT(slotDeviceRemoved(const QDBusObjectPath&)));
-        bus.disconnect(service, path, interface, "DeviceFound",
-                       this, SLOT(slotDeviceFound(const QString&, const QMap<QString,QVariant>&)));
-        bus.disconnect(service, path, interface, "DeviceDisappeared",
-                       this, SLOT(slotDeviceDisappeared(const QString&)));
-        bus.disconnect(service, path, interface, "PropertyChanged",
-                       this, SLOT(slotPropertyChanged(const QString&, const QDBusVariant&)));
-
         m_bluezAdapter.reset(0);
+        m_bluezAdapterProperties.reset(0);
         m_adapterName.clear();
 
         beginResetModel();
@@ -148,68 +282,75 @@ void DeviceModel::clearAdapter()
     }
 }
 
-void DeviceModel::setAdapterFromPath(const QString &path)
+void DeviceModel::setAdapterFromPath(const QString &path, const QVariantMap &properties)
 {
     clearAdapter();
 
     if (!path.isEmpty()) {
 
-        const QString service = "org.bluez";
-        const QString interface = "org.bluez.Adapter";
-        auto i = new QDBusInterface(service, path, interface, m_dbus);
+        auto adapter = new BluezAdapter1(BLUEZ_SERVICE, path, m_dbus);
+        auto adapterProperties = new FreeDesktopProperties(BLUEZ_SERVICE, path, m_dbus);
 
-        m_dbus.connect(service, path, interface, "DeviceCreated",
-                       this, SLOT(slotDeviceCreated(const QDBusObjectPath&)));
-        m_dbus.connect(service, path, interface, "DeviceRemoved",
-                       this, SLOT(slotDeviceRemoved(const QDBusObjectPath&)));
-        m_dbus.connect(service, path, interface, "DeviceFound",
-                       this, SLOT(slotDeviceFound(const QString&, const QMap<QString,QVariant>&)));
-        m_dbus.connect(service, path, interface, "DeviceDisappeared",
-                       this, SLOT(slotDeviceDisappeared(const QString&)));
-        m_dbus.connect(service, path, interface, "PropertyChanged",
-                       this, SLOT(slotPropertyChanged(const QString&, const QDBusVariant&)));
+        m_bluezAdapter.reset(adapter);
+        m_bluezAdapterProperties.reset(adapterProperties);
 
-        m_bluezAdapter.reset(i);
         startDiscovery();
         updateDevices();
 
-        QDBusReply<QMap<QString,QVariant> > properties = m_bluezAdapter->call("GetProperties");
-        if (properties.isValid())
-            setProperties(properties.value());
+        setProperties(properties);
+
+        connect(adapterProperties, SIGNAL(PropertiesChanged(const QString&, const QVariantMap&, const QStringList&)),
+                this, SLOT(slotAdapterPropertiesChanged(const QString&, const QVariantMap&, const QStringList&)));
 
         // Delay enabling discoverability by 1 second.
         m_discoverableTimer.setSingleShot(true);
         connect(&m_discoverableTimer, SIGNAL(timeout()), this, SLOT(slotEnableDiscoverable()));
         m_discoverableTimer.start(1000);
-
-        // With the agent registered on the bus, make it known by the adapter
-        QDBusReply<void > reply = m_bluezAdapter->call("RegisterAgent",
-                                                       qVariantFromValue(QDBusObjectPath(DBUS_ADAPTER_AGENT_PATH)),
-                                                       QString(DBUS_AGENT_CAPABILITY));
-        if (!reply.isValid())
-                qWarning() << "Error registering agent for the default adapter:" << reply.error();
     }
 }
 
-void DeviceModel::slotAdapterRemoved(const QDBusObjectPath &path)
+void DeviceModel::slotAdapterPropertiesChanged(const QString &interface, const QVariantMap &changedProperties,
+                                               const QStringList &invalidatedProperties)
 {
-  if (m_bluezAdapter && (m_bluezAdapter->path()==path.path()))
-      clearAdapter();
-}
+    Q_UNUSED(invalidatedProperties);
 
-void DeviceModel::slotDefaultAdapterChanged(const QDBusObjectPath &objectPath)
-{
-  setAdapterFromPath (objectPath.path());
+    if (interface != BLUEZ_ADAPTER_IFACE)
+        return;
+
+    setProperties(changedProperties);
 }
 
 void DeviceModel::updateDevices()
 {
-    if (m_bluezAdapter && m_bluezAdapter->isValid()) {
-        QDBusReply<QList<QDBusObjectPath> > reply = m_bluezAdapter->call("ListDevices");
-        if (reply.isValid())
-            for (auto path : reply.value())
-                addDevice(path.path());
-    }
+    watchCall(m_bluezManager.GetManagedObjects(), [=](QDBusPendingCallWatcher *watcher) {
+        QDBusPendingReply<ManagedObjectList> reply = *watcher;
+
+        if (reply.isError()) {
+            qWarning() << "Failed to retrieve list of managed objects from BlueZ service: "
+                       << reply.error().message();
+            watcher->deleteLater();
+            return;
+        }
+
+        auto objectList = reply.argumentAt<0>();
+
+        for (auto objectPath : objectList.keys()) {
+            auto candidatePath = objectPath.path();
+
+            if (!candidatePath.startsWith(m_bluezAdapter->path()))
+                continue;
+
+            InterfaceList ifaces = objectList.value(objectPath);
+
+            if (!ifaces.contains(BLUEZ_DEVICE_IFACE))
+                continue;
+
+            auto properties = ifaces.value(BLUEZ_DEVICE_IFACE);
+
+            addDevice(candidatePath, properties);
+        }
+
+    });
 }
 
 void DeviceModel::setProperties(const QMap<QString,QVariant> &properties)
@@ -231,6 +372,9 @@ void DeviceModel::updateProperty(const QString &key, const QVariant &value)
         m_isPairable = value.toBool();
     } else if (key == "Discoverable") {
         setDiscoverable(value.toBool());
+    } else if (key == "Discovering") {
+        setDiscovering(value.toBool());
+        restartTimer();
     } else if (key == "Powered") {
         setPowered(value.toBool());
         if (m_isPowered)
@@ -268,7 +412,7 @@ void DeviceModel::trySetDiscoverable(bool discoverable)
     value.setValue(disc);
 
     if (m_bluezAdapter && m_bluezAdapter->isValid() && m_isPowered) {
-        reply = m_bluezAdapter->call("SetProperty", "Discoverable", value);
+        reply = m_bluezAdapterProperties->call("Set", BLUEZ_ADAPTER_IFACE, "Discoverable", value);
         if (!reply.isValid())
             qWarning() << "Error setting device discoverable:" << reply.error();
     }
@@ -280,12 +424,23 @@ void DeviceModel::slotPropertyChanged(const QString      &key,
     updateProperty (key, value.variant());
 }
 
-void DeviceModel::addDevice(const QString &path)
+void DeviceModel::slotDevicePairingDone(bool success)
+{
+    Device *device = static_cast<Device*>(sender());
+
+    Q_EMIT(devicePairingDone(device, success));
+}
+
+void DeviceModel::addDevice(const QString &path, const QVariantMap &properties)
 {
     QSharedPointer<Device> device(new Device(path, m_dbus));
+    device->setProperties(properties);
+
     if (device->isValid()) {
         QObject::connect(device.data(), SIGNAL(deviceChanged()),
                          this, SLOT(slotDeviceChanged()));
+        QObject::connect(device.data(), SIGNAL(pairingDone(bool)),
+                         this, SLOT(slotDevicePairingDone(bool)));
         addDevice(device);
     }
 }
@@ -320,78 +475,6 @@ void DeviceModel::emitRowChanged(int row)
         QModelIndex qmi = index(row, 0);
         Q_EMIT(dataChanged(qmi, qmi));
     }
-}
-
-void DeviceModel::slotDeviceCreated(const QDBusObjectPath &path)
-{
-    const QString service = "org.bluez";
-    const QString interface = "org.bluez.Device";
-    QScopedPointer<QDBusInterface> bluezDevice(
-        new QDBusInterface(service, path.path(), interface, m_dbus));
-
-    // A device was created. Now, we likely already have it, so let's find it
-    // again and finish the initialization.
-    QDBusReply<QMap<QString,QVariant> > properties
-        = bluezDevice->call("GetProperties");
-    if (properties.isValid()) {
-        QMapIterator<QString,QVariant> it(properties);
-        while (it.hasNext()) {
-            it.next();
-            if (it.key() == "Address") {
-                QSharedPointer<Device> device = getDeviceFromAddress(it.value().toString());
-
-                if (device) {
-                    device->initDevice(path.path(), m_dbus);
-                    QObject::connect(device.data(), SIGNAL(deviceChanged()),
-                                     this, SLOT(slotDeviceChanged()));
-                    addDevice(device);
-                } else {
-                    addDevice(path.path());
-                }
-                break;
-            }
-        }
-    } else {
-        qWarning() << "Invalid device properties for" << path.path();
-    }
-}
-
-void DeviceModel::slotDeviceFound(const QString                &address,
-                                  const QMap<QString,QVariant> &properties)
-{
-    Q_UNUSED(properties);
-
-    QSharedPointer<Device> device = getDeviceFromAddress(address);
-
-    if (!device) {
-        QSharedPointer<Device> device(new Device(properties));
-        if (device->isValid()) {
-            addDevice(device);
-        }
-    } else {
-        device->setProperties(properties);
-    }
-}
-
-void DeviceModel::slotDeviceRemoved(const QDBusObjectPath &path)
-{
-    /* Remove the device immediately, it will be listed again
-       once discovery results are returned.  */
-
-    auto device = getDeviceFromPath(path.path());
-
-    if (device != nullptr) {
-        const int row = findRowFromAddress(device->getAddress());
-        if ((row >= 0))
-            removeRow(row);
-    }
-}
-
-void DeviceModel::slotDeviceDisappeared(const QString &address)
-{
-    const int row = findRowFromAddress(address);
-    if ((row >= 0) && !m_devices[row]->isPaired())
-        removeRow(row);
 }
 
 void DeviceModel::slotDeviceChanged()
@@ -429,61 +512,6 @@ QSharedPointer<Device> DeviceModel::getDeviceFromPath(const QString &path)
     return QSharedPointer<Device>();
 }
 
-void DeviceModel::addConnectAfterPairing(const QString &address, Device::ConnectionMode mode)
-{
-    QSharedPointer<Device> device = getDeviceFromAddress(address);
-    if (device) {
-        device->addConnectAfterPairing(mode);
-    } else {
-        qWarning() << "Device could not be found, can't add an operation";
-    }
-}
-
-void DeviceModel::slotCreateFinished(QDBusPendingCallWatcher *call)
-{
-    QDBusPendingReply<QDBusObjectPath> reply = *call;
-
-    if (reply.isError()) {
-        qWarning() << "Could not create device:" << reply.error().message();
-    }
-
-    call->deleteLater();
-}
-
-void DeviceModel::createDevice (const QString &address, QObject *agent)
-{
-    if (m_bluezAdapter) {
-        QString agent_path(DBUS_AGENT_PATH);
-        agent_path.append("/");
-        agent_path.append(address);
-        agent_path.replace(":", "_");
-
-        if(!m_dbus.registerObject(agent_path, agent))
-            qCritical() << "Couldn't register agent at" << agent_path;
-
-        QDBusPendingCall pcall = m_bluezAdapter->asyncCall("CreatePairedDevice",
-                                                           address,
-                                                           qVariantFromValue(QDBusObjectPath(agent_path)),
-                                                           QString(DBUS_AGENT_CAPABILITY));
-
-        QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(pcall, this);
-        QObject::connect(watcher, &QDBusPendingCallWatcher::finished, [this, address](QDBusPendingCallWatcher *watcher) {
-            QDBusPendingReply<QDBusObjectPath> reply = *watcher;
-
-            if (reply.isError()) {
-                qWarning() << "Could not create device:" << reply.error().message();
-            } else {
-                QSharedPointer<Device> device = getDeviceFromAddress(address);
-                device->connectPending();
-            }
-
-            watcher->deleteLater();
-        });
-    } else {
-        qWarning() << "Default adapter is not available for device creation";
-    }
-}
-
 void DeviceModel::slotRemoveFinished(QDBusPendingCallWatcher *call)
 {
     QDBusPendingReply<void> reply = *call;
@@ -496,19 +524,19 @@ void DeviceModel::slotRemoveFinished(QDBusPendingCallWatcher *call)
 
 void DeviceModel::removeDevice (const QString &path)
 {
-    if (m_bluezAdapter) {
-        QDBusPendingCall pcall = m_bluezAdapter->asyncCall("RemoveDevice", qVariantFromValue(QDBusObjectPath(path)));
-
-        QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(pcall, this);
-        QObject::connect(watcher, SIGNAL(finished(QDBusPendingCallWatcher*)),
-                         this, SLOT(slotRemoveFinished(QDBusPendingCallWatcher*)));
-    } else {
+    if (!m_bluezAdapter) {
         qWarning() << "Default adapter is not available for device removal";
+        return;
     }
+
+    QDBusPendingCall call = m_bluezAdapter->RemoveDevice(QDBusObjectPath(path));
+
+    QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(call, this);
+    QObject::connect(watcher, SIGNAL(finished(QDBusPendingCallWatcher*)),
+                     this, SLOT(slotRemoveFinished(QDBusPendingCallWatcher*)));
 }
 
-int
-DeviceModel::rowCount(const QModelIndex &parent) const
+int DeviceModel::rowCount(const QModelIndex &parent) const
 {
     Q_UNUSED(parent);
 
@@ -582,13 +610,6 @@ QVariant DeviceModel::data(const QModelIndex &index, int role) const
 
     return ret;
 }
-
-
-/***
-****
-****  Filter
-****
-***/
 
 void DeviceFilter::filterOnType(QVector<Device::Type> types)
 {
