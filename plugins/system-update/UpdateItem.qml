@@ -58,7 +58,6 @@ ListItem {
         mainSlot: Column {
             id: textArea
             objectName: "textArea"
-            //SlotsLayout.overrideVerticalPositioning: true
             SlotsLayout.padding.top: 0
             spacing: units.gu(0.5)
             height: childrenRect.height
