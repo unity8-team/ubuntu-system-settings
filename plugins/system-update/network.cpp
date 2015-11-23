@@ -175,7 +175,7 @@ void Network::checkForNewVersions(QHash<QString, Update*> &apps)
     connect(reply, static_cast<void(QNetworkReply::*)
             (QNetworkReply::NetworkError)>(&QNetworkReply::error),
             this, &Network::onReplyError);
-    connect(m_ncm, &QNetworkConfigurationManager::onlineStateChanged, [=](const bool &online) {
+    connect(m_ncm, &QNetworkConfigurationManager::onlineStateChanged, [&](const bool &online) {
             if (!online) {
                 qWarning() << "Offline, aborting check for updates";
                 reply->abort();
