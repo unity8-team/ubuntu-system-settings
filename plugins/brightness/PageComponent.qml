@@ -1,7 +1,7 @@
 /*
  * This file is part of system-settings
  *
- * Copyright (C) 2013-14 Canonical Ltd.
+ * Copyright (C) 2013-2015 Canonical Ltd.
  *
  * Contact: Iain Lane <iain.lane@canonical.com>
  *
@@ -21,8 +21,8 @@
 import GSettings 1.0
 import QtQuick 2.4
 import SystemSettings 1.0
+import SystemSettings.ListItems 1.0 as SettingsListItems
 import Ubuntu.Components 1.3
-import Ubuntu.Components.ListItems 1.3 as ListItem
 import Ubuntu.SystemSettings.Brightness 1.0
 import Ubuntu.Settings.Menus 0.1 as Menus
 import Ubuntu.Settings.Components 0.1 as USC
@@ -53,7 +53,7 @@ ItemPage {
             Component.onCompleted: start()
         }
 
-        ListItem.Standard {
+        SettingsListItems.Standard {
             text: i18n.tr("Display brightness")
             showDivider: false
         }
@@ -84,12 +84,17 @@ ItemPage {
             }
         }
 
-        ListItem.Standard {
+        SettingsListItems.Standard {
             id: adjust
             text: i18n.tr("Adjust automatically")
             visible: brightnessPanel.powerdRunning &&
                      brightnessPanel.autoBrightnessAvailable
-            control: CheckBox {
+
+            layout.summary.text: i18n.tr(
+                "Brightens and dims the display to suit the surroundings."
+            )
+
+            CheckBox {
                 id: autoAdjustCheck
                 property bool serverChecked: gsettings.autoBrightness
                 onServerCheckedChanged: checked = serverChecked
@@ -97,11 +102,6 @@ ItemPage {
                 onTriggered: gsettings.autoBrightness = checked
             }
             showDivider: false
-        }
-        ListItem.Caption {
-            text: i18n.tr(
-                    "Brightens and dims the display to suit the surroundings.")
-            visible: adjust.visible
         }
     }
 
