@@ -7,8 +7,6 @@
 
 from __future__ import absolute_import
 
-import os
-
 from autopilot.introspection.dbus import StateNotFoundError
 from autopilot.matchers import Eventually
 from testtools.matchers import Equals, NotEquals, raises
@@ -24,11 +22,16 @@ class SystemUpdatesTestCases(SystemUpdatesBaseTestCase):
 
     """Tests for System Updates."""
 
+    click_server_paramenters = {
+        'start': True
+    }
+
     def setUp(self):
         # Set environment variables
-        os.environ["IGNORE_CREDENTIALS"] = "True"
-        os.environ["IGNORE_UPDATES"] = "IGNORE_UPDATES"
-        os.environ["AUTOPILOT_ENABLED"] = "AUTOPILOT_ENABLED"
+        self.patch_environment("IGNORE_CREDENTIALS", "True")
+        self.patch_environment("AUTOPILOT_ENABLED", "AUTOPILOT_ENABLED")
+        self.patch_environment("IGNORE_UPDATES", "IGNORE_UPDATES")
+        self.patch_environment("URL_APPS", "http://localhost:8000")
         super(SystemUpdatesTestCases, self).setUp()
 
     def test_show_updates(self):
@@ -83,6 +86,23 @@ class SystemUpdatesTestCases(SystemUpdatesBaseTestCase):
             objectName='checkForUpdatesArea')
         self.assertThat(checkForUpdatesArea, NotEquals(None))
         self.assertThat(checkForUpdatesArea.visible, Equals(True))
+
+
+class SystemNoAppUpdatesTestCases(SystemUpdatesBaseTestCase):
+    """Tests for System Updates without any updates."""
+
+    click_server_paramenters = {
+        'start': True,
+        'responses': {}
+    }
+
+    def setUp(self):
+        # Set environment variables
+        self.patch_environment("IGNORE_CREDENTIALS", "True")
+        self.patch_environment("AUTOPILOT_ENABLED", "AUTOPILOT_ENABLED")
+        self.patch_environment("IGNORE_UPDATES", "IGNORE_UPDATES")
+        self.patch_environment("URL_APPS", "http://localhost:8000")
+        super(SystemNoAppUpdatesTestCases, self).setUp()
 
     def test_no_updates_state(self):
         """Check how the ui reacts to no updates state."""

@@ -134,8 +134,6 @@ std::vector<std::string> Network::listFolder(const std::string& folder, const st
 
 void Network::checkForNewVersions(QHash<QString, Update*> &apps)
 {
-    qWarning() << __PRETTY_FUNCTION__;
-
     // If we aren't online, don't check
     if (!m_ncm->isOnline()) {
         qWarning() << "Not currently online, don't check";
@@ -225,6 +223,7 @@ void Network::onUpdatesCheckFinished()
             auto url = object["download_url"].toString();
             auto download_sha512 = object["download_sha512"].toString();
             auto size = object["binary_filesize"].toInt();
+
             if (m_apps.contains(name)) {
                 m_apps[name]->setRemoteVersion(version);
                 if (m_apps[name]->updateRequired()) {
@@ -274,7 +273,6 @@ void Network::onReplyError(QNetworkReply::NetworkError code)
 
 void Network::getClickToken(Update *app, const QString &url)
 {
-    qWarning() << __PRETTY_FUNCTION__;
     if (!m_token.isValid()) {
         app->setError("Invalid User Token");
         return;
