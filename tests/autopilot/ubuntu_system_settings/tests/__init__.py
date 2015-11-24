@@ -579,7 +579,7 @@ class SystemUpdatesBaseTestCase(UbuntuSystemSettingsTestCase,
         'Status': 'online'
     }
 
-    click_server_paramenters = {
+    click_server_parameters = {
         'start': False
     }
 
@@ -600,9 +600,9 @@ class SystemUpdatesBaseTestCase(UbuntuSystemSettingsTestCase,
             self.session_con.get_object(CTV_IFACE, CTV_NETS_OBJ),
             'org.freedesktop.DBus.Properties')
 
-        if self.click_server_paramenters['start']:
+        if self.click_server_parameters['start']:
             self.clicksrv_manager = Manager(
-                responses=self.click_server_paramenters.get('responses', None)
+                responses=self.click_server_parameters.get('responses', None)
             )
             self.clicksrv_manager.start()
 

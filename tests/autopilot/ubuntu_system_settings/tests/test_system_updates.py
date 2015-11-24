@@ -22,7 +22,7 @@ class SystemUpdatesTestCases(SystemUpdatesBaseTestCase):
 
     """Tests for System Updates."""
 
-    click_server_paramenters = {
+    click_server_parameters = {
         'start': True
     }
 
@@ -91,7 +91,7 @@ class SystemUpdatesTestCases(SystemUpdatesBaseTestCase):
 class SystemNoAppUpdatesTestCases(SystemUpdatesBaseTestCase):
     """Tests for System Updates without any updates."""
 
-    click_server_paramenters = {
+    click_server_parameters = {
         'start': True,
         'responses': {}
     }
