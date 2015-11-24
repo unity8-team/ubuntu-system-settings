@@ -1,3 +1,13 @@
+ubuntu-system-settings (0.3+16.04.20151124-0ubuntu1) xenial; urgency=medium
+
+  [ CI Train Bot ]
+  * New rebuild forced.
+
+  [ Ken VanDine ]
+  * Allow setting custom ringtone with content-hub (LP: #1268097)
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Tue, 24 Nov 2015 11:09:44 +0000
+
 ubuntu-system-settings (0.3+16.04.20151120-0ubuntu1) xenial; urgency=medium
 
   * Ported the Bluetooth plugin to the changed BlueZ API which comes
