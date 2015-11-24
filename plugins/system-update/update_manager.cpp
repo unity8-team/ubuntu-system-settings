@@ -153,7 +153,6 @@ void UpdateManager::checkUpdates()
     m_checkingUpdates = 2;
     m_model.clear();
     m_apps.clear();
-
     Q_EMIT modelChanged();
     bool enabled = enableAutopilotMode();
 

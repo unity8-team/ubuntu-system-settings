@@ -223,7 +223,6 @@ void Network::onUpdatesCheckFinished()
             auto url = object["download_url"].toString();
             auto download_sha512 = object["download_sha512"].toString();
             auto size = object["binary_filesize"].toInt();
-
             if (m_apps.contains(name)) {
                 m_apps[name]->setRemoteVersion(version);
                 if (m_apps[name]->updateRequired()) {
