@@ -39,18 +39,31 @@ namespace UpdatePlugin {
 Network::Network(QObject *parent) :
     QObject(parent),
     m_nam(this),
-    m_ncm(new QNetworkConfigurationManager())
+    m_ncm(new QNetworkConfigurationManager()),
+    m_reply(0)
 {
+    qWarning() << __PRETTY_FUNCTION__;
+}
+
+Network::~Network()
+{
+    qWarning() << __PRETTY_FUNCTION__;
+    if (m_reply) {
+        m_reply->abort();
+        delete m_reply;
+    }
 }
 
 std::string Network::getArchitecture()
 {
+    qWarning() << __PRETTY_FUNCTION__;
     static const std::string deb_arch {architectureFromDpkg()};
     return deb_arch;
 }
 
 std::vector<std::string> Network::getAvailableFrameworks()
 {
+    qWarning() << __PRETTY_FUNCTION__;
     std::vector<std::string> result;
     for (auto f: listFolder(getFrameworksDir().toStdString(), FRAMEWORKS_PATTERN)) {
         result.push_back(f.substr(0, f.size()-FRAMEWORKS_EXTENSION_LENGTH));
@@ -60,6 +73,7 @@ std::vector<std::string> Network::getAvailableFrameworks()
 
 bool Network::replyIsValid(QNetworkReply *reply)
 {
+    qWarning() << __PRETTY_FUNCTION__;
     auto statusAttr = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute);
     if (!statusAttr.isValid()) {
         Q_EMIT errorOccurred();
@@ -80,6 +94,7 @@ bool Network::replyIsValid(QNetworkReply *reply)
 
 void Network::onTokenRequestFinished(Update* app, QNetworkReply* r)
 {
+    qWarning() << __PRETTY_FUNCTION__;
     // the scoped pointer will take care of calling the deleteLater when leaving the slot
     QScopedPointer<QNetworkReply, QScopedPointerDeleteLater> reply(r);
 
@@ -103,6 +118,7 @@ void Network::onTokenRequestFinished(Update* app, QNetworkReply* r)
 
 std::string Network::architectureFromDpkg()
 {
+    qWarning() << __PRETTY_FUNCTION__;
     QString program("dpkg");
     QStringList arguments;
     arguments << "--print-architecture";
@@ -119,6 +135,7 @@ std::string Network::architectureFromDpkg()
 
 std::vector<std::string> Network::listFolder(const std::string& folder, const std::string& pattern)
 {
+    qWarning() << __PRETTY_FUNCTION__;
     std::vector<std::string> result;
 
     QDir dir(QString::fromStdString(folder), QString::fromStdString(pattern),
@@ -168,19 +185,20 @@ void Network::checkForNewVersions(QHash<QString, Update*> &apps)
     request.setRawHeader(QByteArray("X-Ubuntu-Architecture"), QByteArray::fromStdString(getArchitecture()));
     request.setUrl(url);
 
-    auto reply = m_nam.post(request, content);
+    m_reply = m_nam.post(request, content);
 
-    connect(reply, &QNetworkReply::finished, this, &Network::onUpdatesCheckFinished);
-    connect(reply, &QNetworkReply::sslErrors, this, &Network::onReplySslErrors);
-    connect(reply, static_cast<void(QNetworkReply::*)
+    connect(m_reply, &QNetworkReply::finished, this, &Network::onUpdatesCheckFinished);
+    connect(m_reply, &QNetworkReply::sslErrors, this, &Network::onReplySslErrors);
+    connect(m_reply, static_cast<void(QNetworkReply::*)
             (QNetworkReply::NetworkError)>(&QNetworkReply::error),
             this, &Network::onReplyError);
     connect(m_ncm, &QNetworkConfigurationManager::onlineStateChanged, [&](const bool &online) {
-            if (!online && reply) {
+            if (!online && m_reply) {
                 qWarning() << "Offline, aborting check for updates";
-                reply->abort();
-                delete reply;
-                reply = NULL;
+                qWarning() << Q_FUNC_INFO << "isRunning:" << m_reply->isRunning();
+                if (m_reply->isRunning())
+                    m_reply->abort();
+                m_reply = 0;
             }
     });
 }
@@ -189,6 +207,7 @@ void Network::checkForNewVersions(QHash<QString, Update*> &apps)
 
 QString Network::getUrlApps()
 {
+    qWarning() << __PRETTY_FUNCTION__;
     QProcessEnvironment environment = QProcessEnvironment::systemEnvironment();
     QString command = environment.value("URL_APPS", QString(URL_APPS));
     return command;
@@ -196,6 +215,7 @@ QString Network::getUrlApps()
 
 QString Network::getFrameworksDir()
 {
+    qWarning() << __PRETTY_FUNCTION__;
     QProcessEnvironment environment = QProcessEnvironment::systemEnvironment();
     QString command = environment.value("FRAMEWORKS_FOLDER", QString(FRAMEWORKS_FOLDER));
     return command;
@@ -203,6 +223,7 @@ QString Network::getFrameworksDir()
 
 void Network::onUpdatesCheckFinished()
 {
+    qWarning() << __PRETTY_FUNCTION__;
     // the scoped pointer will take care of calling the deleteLater when leaving the slot
     auto r = qobject_cast<QNetworkReply*>(sender());
 
@@ -252,14 +273,17 @@ void Network::onUpdatesCheckFinished()
 
 void Network::onReplySslErrors(const QList<QSslError>&)
 {
+    qWarning() << __PRETTY_FUNCTION__;
     auto reply = sender();
     // Should this be a server or a network error??
     Q_EMIT serverError();
     reply->deleteLater();
+    m_reply = 0;
 }
 
 void Network::onReplyError(QNetworkReply::NetworkError code)
 {
+    qWarning() << __PRETTY_FUNCTION__;
     auto reply = sender();
     switch (code) {
         case QNetworkReply::TemporaryNetworkFailureError:
@@ -272,6 +296,7 @@ void Network::onReplyError(QNetworkReply::NetworkError code)
             Q_EMIT serverError();
     }
     reply->deleteLater();
+    m_reply = 0;
 }
 
 void Network::getClickToken(Update *app, const QString &url)
