@@ -24,9 +24,9 @@ class ServerThread(threading.Thread):
                     "changelog": "New version!"
                 }]
             }
-        self._httpd = HTTPServer(
-             (kwargs['server_address'], kwargs['server_port']), handler
-        )
+        self._httpd = HTTPServer((kwargs['server_address'],
+                                  kwargs['server_port']),
+                                 handler)
         self._httpd.responses = responses
 
     def run(self):
