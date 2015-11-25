@@ -9,6 +9,7 @@ from __future__ import absolute_import
 
 from autopilot.introspection.dbus import StateNotFoundError
 from autopilot.matchers import Eventually
+from fixtures import EnvironmentVariable
 from testtools.matchers import Equals, NotEquals, raises
 
 from ubuntu_system_settings.tests import SystemUpdatesBaseTestCase
@@ -28,10 +29,14 @@ class SystemUpdatesTestCases(SystemUpdatesBaseTestCase):
 
     def setUp(self):
         # Set environment variables
-        self.patch_environment("IGNORE_CREDENTIALS", "True")
-        self.patch_environment("AUTOPILOT_ENABLED", "AUTOPILOT_ENABLED")
-        self.patch_environment("IGNORE_UPDATES", "IGNORE_UPDATES")
-        self.patch_environment("URL_APPS", "http://localhost:8000")
+        self.useFixture(
+            EnvironmentVariable("IGNORE_CREDENTIALS", "True"))
+        self.useFixture(
+            EnvironmentVariable("AUTOPILOT_ENABLED", "AUTOPILOT_ENABLED"))
+        self.useFixture(
+            EnvironmentVariable("IGNORE_UPDATES", "IGNORE_UPDATES"))
+        # self.useFixture(
+        #     EnvironmentVariable("URL_APPS", "http://localhost:8000"))
         super(SystemUpdatesTestCases, self).setUp()
 
     def test_show_updates(self):
@@ -98,10 +103,14 @@ class SystemNoAppUpdatesTestCases(SystemUpdatesBaseTestCase):
 
     def setUp(self):
         # Set environment variables
-        self.patch_environment("IGNORE_CREDENTIALS", "True")
-        self.patch_environment("AUTOPILOT_ENABLED", "AUTOPILOT_ENABLED")
-        self.patch_environment("IGNORE_UPDATES", "IGNORE_UPDATES")
-        self.patch_environment("URL_APPS", "http://localhost:8000")
+        self.useFixture(
+            EnvironmentVariable("IGNORE_CREDENTIALS", "True"))
+        self.useFixture(
+            EnvironmentVariable("AUTOPILOT_ENABLED", "AUTOPILOT_ENABLED"))
+        self.useFixture(
+            EnvironmentVariable("IGNORE_UPDATES", "IGNORE_UPDATES"))
+        # self.useFixture(
+        #     EnvironmentVariable("URL_APPS", "http://localhost:8000"))
         super(SystemNoAppUpdatesTestCases, self).setUp()
 
     def test_no_updates_state(self):

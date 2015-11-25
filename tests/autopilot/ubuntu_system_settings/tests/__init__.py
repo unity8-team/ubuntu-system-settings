@@ -34,9 +34,9 @@ from dbusmock.templates.networkmanager import (InfrastructureMode,
 from fixtures import EnvironmentVariable
 from gi.repository import UPowerGlib
 from testtools.matchers import Equals, NotEquals, GreaterThan
-from ubuntu_system_settings.utils.mock_update_click_server import (
-    Manager
-)
+# from ubuntu_system_settings.utils.mock_update_click_server import (
+#     Manager
+# )
 from ubuntu_system_settings.tests.connectivity import (
     PRIV_OBJ as CTV_PRIV_OBJ, NETS_OBJ as CTV_NETS_OBJ,
     MAIN_IFACE as CTV_IFACE
@@ -601,10 +601,11 @@ class SystemUpdatesBaseTestCase(UbuntuSystemSettingsTestCase,
             'org.freedesktop.DBus.Properties')
 
         if self.click_server_parameters['start']:
-            self.clicksrv_manager = Manager(
-                responses=self.click_server_parameters.get('responses', None)
-            )
-            self.clicksrv_manager.start()
+            # self.clicksrv_manager = Manager(
+            #     responses=self.click_server_parameters.get('responses', None)
+            # )
+            # self.clicksrv_manager.start()
+            pass
 
         super(SystemUpdatesBaseTestCase, self).setUp()
         self.main_view.click_item('entryComponent-system-update')
