@@ -42,12 +42,10 @@ Network::Network(QObject *parent) :
     m_ncm(new QNetworkConfigurationManager()),
     m_reply(0)
 {
-    qWarning() << __PRETTY_FUNCTION__;
 }
 
 Network::~Network()
 {
-    qWarning() << __PRETTY_FUNCTION__;
     if (m_reply) {
         m_reply->abort();
         delete m_reply;
@@ -56,14 +54,12 @@ Network::~Network()
 
 std::string Network::getArchitecture()
 {
-    qWarning() << __PRETTY_FUNCTION__;
     static const std::string deb_arch {architectureFromDpkg()};
     return deb_arch;
 }
 
 std::vector<std::string> Network::getAvailableFrameworks()
 {
-    qWarning() << __PRETTY_FUNCTION__;
     std::vector<std::string> result;
     for (auto f: listFolder(getFrameworksDir().toStdString(), FRAMEWORKS_PATTERN)) {
         result.push_back(f.substr(0, f.size()-FRAMEWORKS_EXTENSION_LENGTH));
@@ -73,7 +69,6 @@ std::vector<std::string> Network::getAvailableFrameworks()
 
 bool Network::replyIsValid(QNetworkReply *reply)
 {
-    qWarning() << __PRETTY_FUNCTION__;
     auto statusAttr = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute);
     if (!statusAttr.isValid()) {
         Q_EMIT errorOccurred();
@@ -94,7 +89,6 @@ bool Network::replyIsValid(QNetworkReply *reply)
 
 void Network::onTokenRequestFinished(Update* app, QNetworkReply* r)
 {
-    qWarning() << __PRETTY_FUNCTION__;
     // the scoped pointer will take care of calling the deleteLater when leaving the slot
     QScopedPointer<QNetworkReply, QScopedPointerDeleteLater> reply(r);
 
@@ -118,7 +112,6 @@ void Network::onTokenRequestFinished(Update* app, QNetworkReply* r)
 
 std::string Network::architectureFromDpkg()
 {
-    qWarning() << __PRETTY_FUNCTION__;
     QString program("dpkg");
     QStringList arguments;
     arguments << "--print-architecture";
@@ -135,7 +128,6 @@ std::string Network::architectureFromDpkg()
 
 std::vector<std::string> Network::listFolder(const std::string& folder, const std::string& pattern)
 {
-    qWarning() << __PRETTY_FUNCTION__;
     std::vector<std::string> result;
 
     QDir dir(QString::fromStdString(folder), QString::fromStdString(pattern),
@@ -151,8 +143,6 @@ std::vector<std::string> Network::listFolder(const std::string& folder, const st
 
 void Network::checkForNewVersions(QHash<QString, Update*> &apps)
 {
-    qWarning() << __PRETTY_FUNCTION__;
-
     // If we aren't online, don't check
     if (!m_ncm->isOnline()) {
         qWarning() << "Not currently online, don't check";
@@ -205,7 +195,6 @@ void Network::checkForNewVersions(QHash<QString, Update*> &apps)
 
 QString Network::getUrlApps()
 {
-    qWarning() << __PRETTY_FUNCTION__;
     QProcessEnvironment environment = QProcessEnvironment::systemEnvironment();
     QString command = environment.value("URL_APPS", QString(URL_APPS));
     return command;
@@ -213,7 +202,6 @@ QString Network::getUrlApps()
 
 QString Network::getFrameworksDir()
 {
-    qWarning() << __PRETTY_FUNCTION__;
     QProcessEnvironment environment = QProcessEnvironment::systemEnvironment();
     QString command = environment.value("FRAMEWORKS_FOLDER", QString(FRAMEWORKS_FOLDER));
     return command;
@@ -221,7 +209,6 @@ QString Network::getFrameworksDir()
 
 void Network::onUpdatesCheckFinished()
 {
-    qWarning() << __PRETTY_FUNCTION__;
     // the scoped pointer will take care of calling the deleteLater when leaving the slot
     auto r = qobject_cast<QNetworkReply*>(sender());
 
@@ -271,7 +258,6 @@ void Network::onUpdatesCheckFinished()
 
 void Network::onReplySslErrors(const QList<QSslError>&)
 {
-    qWarning() << __PRETTY_FUNCTION__;
     auto reply = sender();
     // Should this be a server or a network error??
     Q_EMIT serverError();
@@ -281,7 +267,6 @@ void Network::onReplySslErrors(const QList<QSslError>&)
 
 void Network::onReplyError(QNetworkReply::NetworkError code)
 {
-    qWarning() << __PRETTY_FUNCTION__;
     auto reply = sender();
     switch (code) {
         case QNetworkReply::TemporaryNetworkFailureError:
@@ -299,7 +284,6 @@ void Network::onReplyError(QNetworkReply::NetworkError code)
 
 void Network::getClickToken(Update *app, const QString &url)
 {
-    qWarning() << __PRETTY_FUNCTION__;
     if (!m_token.isValid()) {
         app->setError("Invalid User Token");
         return;
