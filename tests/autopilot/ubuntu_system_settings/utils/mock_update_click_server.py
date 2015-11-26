@@ -1,42 +1,7 @@
 import json
 import threading
+import sys
 from http.server import BaseHTTPRequestHandler, HTTPServer
-
-
-class ServerThread(threading.Thread):
-
-    def __init__(self, **kwargs):
-        super(ServerThread, self).__init__()
-        handler = Handler
-
-        if not kwargs['responses']:
-            responses = {
-                '*': [{
-                    "name": "com.ubuntu.developer.testclick",
-                    "version": "2.0",
-                    "icon_url": (
-                        "https://raw.githubusercontent.com/ninja-ide/"
-                        "ninja-ide/master/ninja_ide/img/ninja_icon.png"
-                    ),
-                    "download_url": ("http://localhost:8000/download"),
-                    "binary_filesize": 9000,
-                    "download_sha512": "1232223sdfdsffs",
-                    "changelog": "New version!"
-                }]
-            }
-        self._httpd = HTTPServer((kwargs['server_address'],
-                                  kwargs['server_port']),
-                                 handler)
-        self._httpd.responses = responses
-
-    def run(self):
-        self._httpd.serve_forever()
-
-    def stop(self):
-        # Stop the run loop in server_forever
-        self._httpd.shutdown()
-        # Clean up.
-        self._httpd.server_close()
 
 
 class Handler(BaseHTTPRequestHandler):
@@ -65,33 +30,42 @@ class Handler(BaseHTTPRequestHandler):
         try:
             self.wfile.write(json.dumps(response).encode('utf-8'))
         except BrokenPipeError:
-            # System Settings shut down before we finished up. We ignore it.
-            pass
+            # System Settings shut down before we finished up. Log and ignore.
+            print("Server was interrupted.", file=sys.stderr)
 
 
 class Manager(object):
 
-    def __init__(self, server_address='', server_port=8000, responses={}):
+    # TODO: Use server_port=0
+    def __init__(self, server_address='', server_port=9009, responses={}):
         """Creates and initializes a Manager object. If there's an asterisk
         in the responses dict, it's used to handle all paths."""
-        self.thread = None
-        self.server_address = server_address
-        self.server_port = server_port
-        self.responses = responses
+        self._thread = None
+        if not responses:
+            responses = {
+                '*': [{
+                    "name": "com.ubuntu.developer.testclick",
+                    "version": "2.0",
+                    "icon_url": (
+                        "https://raw.githubusercontent.com/ninja-ide/"
+                        "ninja-ide/master/ninja_ide/img/ninja_icon.png"
+                    ),
+                    "download_url": ("http://localhost:9009/download"),
+                    "binary_filesize": 9000,
+                    "download_sha512": "1232223sdfdsffs",
+                    "changelog": "New version!"
+                }]
+            }
+        self._httpd = HTTPServer((server_address, server_port), Handler)
+        self._httpd.responses = responses
 
     def is_running(self):
-        return self.thread.is_alive()
+        return self._thread.is_alive()
 
     def start(self):
-        self.thread = ServerThread(
-            server_address=self.server_address,
-            server_port=self.server_port,
-            responses=self.responses
-        )
-        self.thread.start()
+        self._thread = threading.Thread(target=self._httpd.serve_forever)
+        self._thread.start()
 
     def stop(self):
-        self.thread.stop()
-        self.thread.join(timeout=10)
-        if self.is_running():
-            raise "The server could not be stopped in time."
+        self._httpd.shutdown()
+        self._httpd.server_close()

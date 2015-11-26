@@ -35,8 +35,8 @@ class SystemUpdatesTestCases(SystemUpdatesBaseTestCase):
             EnvironmentVariable("AUTOPILOT_ENABLED", "AUTOPILOT_ENABLED"))
         self.useFixture(
             EnvironmentVariable("IGNORE_UPDATES", "IGNORE_UPDATES"))
-        # self.useFixture(
-        #     EnvironmentVariable("URL_APPS", "http://localhost:8000"))
+        self.useFixture(
+            EnvironmentVariable("URL_APPS", "http://localhost:9009"))
         super(SystemUpdatesTestCases, self).setUp()
 
     def test_show_updates(self):
@@ -68,7 +68,6 @@ class SystemUpdatesTestCases(SystemUpdatesBaseTestCase):
         checkForUpdatesArea = updates.select_single(
             objectName='checkForUpdatesArea')
         self.assertThat(checkForUpdatesArea, NotEquals(None))
-        self.assertThat(checkForUpdatesArea.visible, Equals(True))
         self.assertThat(checkForUpdatesArea.visible,
                         Eventually(NotEquals(True)))
 
@@ -109,8 +108,8 @@ class SystemNoAppUpdatesTestCases(SystemUpdatesBaseTestCase):
             EnvironmentVariable("AUTOPILOT_ENABLED", "AUTOPILOT_ENABLED"))
         self.useFixture(
             EnvironmentVariable("IGNORE_UPDATES", "IGNORE_UPDATES"))
-        # self.useFixture(
-        #     EnvironmentVariable("URL_APPS", "http://localhost:8000"))
+        self.useFixture(
+            EnvironmentVariable("URL_APPS", "http://localhost:9009"))
         super(SystemNoAppUpdatesTestCases, self).setUp()
 
     def test_no_updates_state(self):
