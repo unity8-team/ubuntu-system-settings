@@ -1,7 +1,7 @@
 /*
  * This file is part of system-settings
  *
- * Copyright (C) 2013 Canonical Ltd.
+ * Copyright (C) 2013-2015 Canonical Ltd.
  *
  * Contact: Sebastien Bacher <sebastien.bacher@canonical.com>
  *
@@ -23,8 +23,8 @@ import QMenuModel 0.1
 import QtQuick 2.4
 import QtSystemInfo 5.0
 import SystemSettings 1.0
+import SystemSettings.ListItems 1.0 as SettingsListItems
 import Ubuntu.Components 1.3
-import Ubuntu.Components.ListItems 1.3 as ListItem
 import Ubuntu.SystemSettings.Battery 1.0
 import Ubuntu.SystemSettings.SecurityPrivacy 1.0
 import Ubuntu.Settings.Components 0.1 as USC
@@ -99,7 +99,7 @@ ItemPage {
             anchors.left: parent.left
             anchors.right: parent.right
 
-            ListItem.SingleValue {
+            SettingsListItems.SingleValue {
                 id: chargingLevel
                 text: i18n.tr("Charge level")
                 value: {
@@ -138,54 +138,54 @@ ItemPage {
                     ctx.beginPath()
                     ctx.strokeStyle = UbuntuColors.lightAubergine
 
-                    ctx.lineWidth = units.dp(2)
+                    ctx.lineWidth = units.dp(1)
 
                     var fontHeight = FontUtils.sizeToPixels("small")
+                    var font100PctWidth = context.measureText(i18n.tr("100%")).width
                     ctx.font="%1px Ubuntu".arg(fontHeight)
 
-                    ctx.translate(0, 1)
+                    // ctx.translate(0, 1)
 
-                    // 11 ticks with 0, 5, 10 being big
-                    for (var i = 0; i <= 10; i++) {
-                        var x = (i % 5 == 0) ? 0 : Math.floor(axisWidth / 2)
-                        var y = (i / 10) * (height - axisHeight - bottomMargin - ctx.lineWidth)
-                        ctx.moveTo(x, y)
-                        ctx.lineTo(axisWidth, y)
-                    }
+                    ctx.fillText("100%", 0, fontHeight)
+                    ctx.fillText("0%", 0, (height - axisHeight - ctx.lineWidth))
 
-                    ctx.translate(axisWidth + ctx.lineWidth / 2,
-                                  height - axisHeight - bottomMargin - ctx.lineWidth / 2)
+                    ctx.moveTo(font100PctWidth, 0)
 
-                    ctx.moveTo(0, 0)
-                    ctx.lineTo(0, -ctx.lineWidth)
+                    ctx.lineTo(font100PctWidth, (height - axisHeight - bottomMargin - ctx.lineWidth))
 
-                    // 24 ticks with 6, 12, 18, 24 being big
-                    for (i = 0; i <= 24; i++) {
-                        /* the marks need to be shifted on the hours */
-                        x = ((i - currentMinutes / 60) / 24) * (width - axisWidth - ctx.lineWidth - rightMargin)
-                        if (x < 0)
-                            continue
-                        y = (i % 6 == 0) ? axisHeight : axisHeight -
-                                            Math.floor(axisHeight / 2)
-                        ctx.moveTo(x, 0)
-                        ctx.lineTo(x, y)
+                    // ctx.translate(axisWidth + ctx.lineWidth / 2,
+                    //               height - axisHeight - bottomMargin - ctx.lineWidth / 2)
 
-                        /* Determine the hour to display */
-                        displayHour = (currentHour - (24-i))
-                        if (displayHour < 0)
-                            displayHour = displayHour + 24
-                        /* Store the x for the day change line */
-                        if (displayHour === 0)
-                            zeroMark = x
+                    ctx.moveTo(font100PctWidth, (width - axisWidth - ctx.lineWidth - rightMargin))
+                    ctx.lineTo(font100PctWidth, (width - axisWidth - ctx.lineWidth - rightMargin))
 
-                        /* Write the x-axis legend */
-                        if (i % 6 == 0) {
-                            labelWidth = context.measureText("%1".arg(displayHour)).width;
-                            ctx.fillText("%1".arg(displayHour),
-                                         x - labelWidth/2,
-                                         axisHeight + units.dp(1) + fontHeight)
-                        }
-                    }
+                    // // 24 ticks with 6, 12, 18, 24 being big
+                    // for (var i = 0; i <= 24; i++) {
+                    //     /* the marks need to be shifted on the hours */
+                    //     x = ((i - currentMinutes / 60) / 24) * (width - axisWidth - ctx.lineWidth - rightMargin)
+                    //     if (x < 0)
+                    //         continue
+                    //     y = (i % 6 == 0) ? axisHeight : axisHeight -
+                    //                         Math.floor(axisHeight / 2)
+                    //     ctx.moveTo(x, 0)
+                    //     ctx.lineTo(x, y)
+
+                    //     /* Determine the hour to display */
+                    //     displayHour = (currentHour - (24-i))
+                    //     if (displayHour < 0)
+                    //         displayHour = displayHour + 24
+                    //     /* Store the x for the day change line */
+                    //     if (displayHour === 0)
+                    //         zeroMark = x
+
+                    //     /* Write the x-axis legend */
+                    //     if (i % 6 == 0) {
+                    //         labelWidth = context.measureText("%1".arg(displayHour)).width;
+                    //         ctx.fillText("%1".arg(displayHour),
+                    //                      x - labelWidth/2,
+                    //                      axisHeight + units.dp(1) + fontHeight)
+                    //     }
+                    // }
 
                     labelWidth = context.measureText(i18n.tr("Yesterday")).width;
                     if(labelWidth < zeroMark)
@@ -262,7 +262,7 @@ ItemPage {
                 }
             }
 
-            ListItem.SingleValue {
+            SettingsListItems.SingleValue {
                 id: chargingEntry
                 text: {
                     if (indicatorPower.deviceState === "charging")
@@ -271,6 +271,8 @@ ItemPage {
                         return i18n.tr("Last full charge")
                     else if (indicatorPower.deviceState === "fully-charged")
                         return i18n.tr("Fully charged")
+                    else
+                        return ""
                 }
 
                 value: {
@@ -290,44 +292,6 @@ ItemPage {
                 text: i18n.tr("Ways to reduce battery use:")
             }
 
-            ListItem.Standard {
-                text: i18n.tr("Display brightness")
-                progression: true
-                onClicked: pageStack.push(
-                               pluginManager.getByName("brightness").pageComponent)
-            }
-
-            ListItem.SingleValue {
-                property bool lockOnSuspend:
-                    securityPrivacy.securityType !==
-                        UbuntuSecurityPrivacyPanel.Swipe
-                text: lockOnSuspend ? i18n.tr("Lock when idle") : i18n.tr("Sleep when idle")
-                value: {
-                    if (batteryBackend.powerdRunning ) {
-                        var timeout = Math.round(powerSettings.activityTimeout/60)
-                        return (powerSettings.activityTimeout != 0) ?
-                                    // TRANSLATORS: %1 is the number of minutes
-                                    i18n.tr("After %1 minute",
-                                            "After %1 minutes",
-                                            timeout).arg(timeout) :
-                                    i18n.tr("Never")
-                    }
-                    else {
-                        var timeout = Math.round(powerSettings.idleDelay/60)
-                        return (powerSettings.idleDelay != 0) ?
-                                    // TRANSLATORS: %1 is the number of minutes
-                                    i18n.tr("After %1 minute",
-                                            "After %1 minutes",
-                                            timeout).arg(timeout) :
-                                    i18n.tr("Never")
-                    }
-                }
-                progression: true
-                onClicked: pageStack.push(
-                               Qt.resolvedUrl("SleepValues.qml"),
-                               { title: text, lockOnSuspend: lockOnSuspend })
-            }
-
             QDBusActionGroup {
                 id: networkActionGroup
                 busType: 1
@@ -337,10 +301,12 @@ ItemPage {
                 Component.onCompleted: start()
             }
 
-            ListItem.Standard {
+            SettingsListItems.Icon {
                 // TRANSLATORS: “Wi-Fi used for hotspot” is hidden.
                 text: showAllUI ? i18n.tr("Wi-Fi used for hotspot") : i18n.tr("Wi-Fi")
-                control: Loader {
+                iconName: "wifi-high"
+
+                Loader {
                     active: networkActionGroup.enabled.state != null
                     sourceComponent: Switch {
                         id: wifiSwitch
@@ -371,10 +337,12 @@ ItemPage {
                 Component.onCompleted: start()
             }
 
-            ListItem.Standard {
+            SettingsListItems.Icon {
                 id: btListItem
                 text: i18n.tr("Bluetooth")
-                control: Loader {
+                iconName: "bluetooth-active"
+
+                Loader {
                     active: bluetoothActionGroup.enabled.state != null
                     sourceComponent: Switch {
                         id: btSwitch
@@ -404,10 +372,15 @@ ItemPage {
                 Component.onCompleted: start()
             }
 
-            ListItem.Standard {
+            SettingsListItems.Icon {
                 id: gpsListItem
                 text: i18n.tr("GPS")
-                control: Loader {
+                layout.summary.text: i18n.tr(
+                    "Accurate location detection requires GPS and/or Wi-Fi."
+                )
+                iconName: "gps"
+
+                Loader {
                     active: locationActionGroup.enabled.state != null
                     sourceComponent: Switch {
                         id: gpsSwitch
@@ -426,9 +399,48 @@ ItemPage {
                 visible: locationActionGroup.enabled.state !== undefined
             }
 
-            ListItem.Caption {
-                text: i18n.tr("Accurate location detection requires GPS and/or Wi-Fi.")
-                visible: gpsListItem.visible
+            SettingsListItems.SingleValueProgression {
+                property bool lockOnSuspend:
+                    securityPrivacy.securityType !==
+                        UbuntuSecurityPrivacyPanel.Swipe
+                text: lockOnSuspend ? i18n.tr("Lock when idle") : i18n.tr("Sleep when idle")
+                value: {
+                    if (batteryBackend.powerdRunning ) {
+                        var timeout = Math.round(powerSettings.activityTimeout/60)
+                        return (powerSettings.activityTimeout != 0) ?
+                                    // TRANSLATORS: %1 is the number of minutes
+                                    i18n.tr("After %1 minute",
+                                            "After %1 minutes",
+                                            timeout).arg(timeout) :
+                                    i18n.tr("Never")
+                    }
+                    else {
+                        var timeout = Math.round(powerSettings.idleDelay/60)
+                        return (powerSettings.idleDelay != 0) ?
+                                    // TRANSLATORS: %1 is the number of minutes
+                                    i18n.tr("After %1 minute",
+                                            "After %1 minutes",
+                                            timeout).arg(timeout) :
+                                    i18n.tr("Never")
+                    }
+                }
+
+                Icon {
+                    width: units.gu(2.5)
+                    height: width
+                    name: "network-secure"
+                    SlotsLayout.position: SlotsLayout.First
+                }
+
+                onClicked: pageStack.push(
+                               Qt.resolvedUrl("SleepValues.qml"),
+                               { title: text, lockOnSuspend: lockOnSuspend })
+            }
+
+            SettingsListItems.StandardProgression {
+                text: i18n.tr("Display brightness")
+                onClicked: pageStack.push(
+                               pluginManager.getByName("brightness").pageComponent)
             }
         }
     }
