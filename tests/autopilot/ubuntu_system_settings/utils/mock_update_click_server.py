@@ -65,7 +65,12 @@ class Manager(object):
     def start(self):
         self._thread = threading.Thread(target=self._httpd.serve_forever)
         self._thread.start()
+        print("Serving mocked click data...", file=sys.stderr)
 
     def stop(self):
         self._httpd.shutdown()
         self._httpd.server_close()
+        self._thread.join(timeout=10.0)
+        if self.is_running():
+            raise "Failed to stop server"
+        print("Stopped server.", file=sys.stderr)
