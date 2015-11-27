@@ -138,54 +138,54 @@ ItemPage {
                     ctx.beginPath()
                     ctx.strokeStyle = UbuntuColors.lightAubergine
 
-                    ctx.lineWidth = units.dp(1)
+                    ctx.lineWidth = units.dp(2)
 
                     var fontHeight = FontUtils.sizeToPixels("small")
-                    var font100PctWidth = context.measureText(i18n.tr("100%")).width
                     ctx.font="%1px Ubuntu".arg(fontHeight)
 
-                    // ctx.translate(0, 1)
+                    ctx.translate(0, 1)
 
-                    ctx.fillText("100%", 0, fontHeight)
-                    ctx.fillText("0%", 0, (height - axisHeight - ctx.lineWidth))
+                    // 11 ticks with 0, 5, 10 being big
+                    for (var i = 0; i <= 10; i++) {
+                        var x = (i % 5 == 0) ? 0 : Math.floor(axisWidth / 2)
+                        var y = (i / 10) * (height - axisHeight - bottomMargin - ctx.lineWidth)
+                        ctx.moveTo(x, y)
+                        ctx.lineTo(axisWidth, y)
+                    }
 
-                    ctx.moveTo(font100PctWidth, 0)
+                    ctx.translate(axisWidth + ctx.lineWidth / 2,
+                                  height - axisHeight - bottomMargin - ctx.lineWidth / 2)
 
-                    ctx.lineTo(font100PctWidth, (height - axisHeight - bottomMargin - ctx.lineWidth))
+                    ctx.moveTo(0, 0)
+                    ctx.lineTo(0, -ctx.lineWidth)
 
-                    // ctx.translate(axisWidth + ctx.lineWidth / 2,
-                    //               height - axisHeight - bottomMargin - ctx.lineWidth / 2)
+                    // 24 ticks with 6, 12, 18, 24 being big
+                    for (i = 0; i <= 24; i++) {
+                        /* the marks need to be shifted on the hours */
+                        x = ((i - currentMinutes / 60) / 24) * (width - axisWidth - ctx.lineWidth - rightMargin)
+                        if (x < 0)
+                            continue
+                        y = (i % 6 == 0) ? axisHeight : axisHeight -
+                                            Math.floor(axisHeight / 2)
+                        ctx.moveTo(x, 0)
+                        ctx.lineTo(x, y)
 
-                    ctx.moveTo(font100PctWidth, (width - axisWidth - ctx.lineWidth - rightMargin))
-                    ctx.lineTo(font100PctWidth, (width - axisWidth - ctx.lineWidth - rightMargin))
+                        /* Determine the hour to display */
+                        displayHour = (currentHour - (24-i))
+                        if (displayHour < 0)
+                            displayHour = displayHour + 24
+                        /* Store the x for the day change line */
+                        if (displayHour === 0)
+                            zeroMark = x
 
-                    // // 24 ticks with 6, 12, 18, 24 being big
-                    // for (var i = 0; i <= 24; i++) {
-                    //     /* the marks need to be shifted on the hours */
-                    //     x = ((i - currentMinutes / 60) / 24) * (width - axisWidth - ctx.lineWidth - rightMargin)
-                    //     if (x < 0)
-                    //         continue
-                    //     y = (i % 6 == 0) ? axisHeight : axisHeight -
-                    //                         Math.floor(axisHeight / 2)
-                    //     ctx.moveTo(x, 0)
-                    //     ctx.lineTo(x, y)
-
-                    //     /* Determine the hour to display */
-                    //     displayHour = (currentHour - (24-i))
-                    //     if (displayHour < 0)
-                    //         displayHour = displayHour + 24
-                    //     /* Store the x for the day change line */
-                    //     if (displayHour === 0)
-                    //         zeroMark = x
-
-                    //     /* Write the x-axis legend */
-                    //     if (i % 6 == 0) {
-                    //         labelWidth = context.measureText("%1".arg(displayHour)).width;
-                    //         ctx.fillText("%1".arg(displayHour),
-                    //                      x - labelWidth/2,
-                    //                      axisHeight + units.dp(1) + fontHeight)
-                    //     }
-                    // }
+                        /* Write the x-axis legend */
+                        if (i % 6 == 0) {
+                            labelWidth = context.measureText("%1".arg(displayHour)).width;
+                            ctx.fillText("%1".arg(displayHour),
+                                         x - labelWidth/2,
+                                         axisHeight + units.dp(1) + fontHeight)
+                        }
+                    }
 
                     labelWidth = context.measureText(i18n.tr("Yesterday")).width;
                     if(labelWidth < zeroMark)
