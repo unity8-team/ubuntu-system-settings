@@ -1,7 +1,10 @@
 import json
+import logging
 import threading
-import sys
+
 from http.server import BaseHTTPRequestHandler, HTTPServer
+
+logger = logging.getLogger(__name__)
 
 
 class Handler(BaseHTTPRequestHandler):
@@ -31,7 +34,7 @@ class Handler(BaseHTTPRequestHandler):
             self.wfile.write(json.dumps(response).encode('utf-8'))
         except BrokenPipeError:
             # System Settings shut down before we finished up. Log and ignore.
-            print("Server was interrupted.", file=sys.stderr)
+            self.log_message('Server was interrupted.')
 
 
 class Manager(object):
@@ -58,6 +61,7 @@ class Manager(object):
             }
         self._httpd = HTTPServer((server_address, server_port), Handler)
         self._httpd.responses = responses
+        logger.debug('Created mock update click server.')
 
     def is_running(self):
         return self._thread.is_alive()
@@ -65,12 +69,16 @@ class Manager(object):
     def start(self):
         self._thread = threading.Thread(target=self._httpd.serve_forever)
         self._thread.start()
-        print("Serving mocked click data...", file=sys.stderr)
+        logger.debug(
+            'Started mock update click server on %s:%d.' % (
+                self._httpd.server_address
+            )
+        )
 
     def stop(self):
         self._httpd.shutdown()
         self._httpd.server_close()
         self._thread.join(timeout=10.0)
         if self.is_running():
-            raise "Failed to stop server"
-        print("Stopped server.", file=sys.stderr)
+            raise 'Failed to stop server'
+        logger.debug('Stopped mock update click server.')
