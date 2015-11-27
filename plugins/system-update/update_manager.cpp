@@ -230,9 +230,11 @@ void UpdateManager::processUpdates()
     foreach (QString id, m_apps.keys()) {
         Update *app = m_apps.value(id);
         QString packagename(UBUNTU_PACKAGE_NAME);
-        if(app->getPackageName() != packagename && app->updateRequired()) {
-            updateAvailable = true;
-            m_model.append(QVariant::fromValue(app));
+        if (!m_model.contains(app->getPackageName())) {
+            if(app->getPackageName() != packagename && app->updateRequired()) {
+                updateAvailable = true;
+                m_model.append(QVariant::fromValue(app));
+            }
         }
     }
 
