@@ -1,3 +1,10 @@
+ubuntu-system-settings (0.3+16.04.20151127.2-0ubuntu1) xenial; urgency=medium
+
+  * Capture values by reference in the lambda (LP: #1517254, #1519046)
+  * Ensure we don't add duplicate updates to the model (LP: #1519971)
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Fri, 27 Nov 2015 20:05:44 +0000
+
 ubuntu-system-settings (0.3+16.04.20151124-0ubuntu1) xenial; urgency=medium
 
   [ CI Train Bot ]
