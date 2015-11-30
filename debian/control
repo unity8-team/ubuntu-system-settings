@@ -33,7 +33,6 @@ Build-Depends: dbus-test-runner,
 # test-deps
                qml-module-qttest,
                qml-module-qtquick2,
-               qtdeclarative5-ubuntu-ui-toolkit-plugin,
                libubuntuoneauth-2.0-dev,
                libubuntu-download-manager-client-dev,
                libubuntu-download-manager-common-dev,

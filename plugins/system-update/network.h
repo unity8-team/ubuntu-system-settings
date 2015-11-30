@@ -37,6 +37,7 @@ class Network : public QObject
     Q_OBJECT
 public:
     explicit Network(QObject *parent = 0);
+    ~Network();
 
     void checkForNewVersions(QHash<QString, Update*> &apps);
     void getClickToken(Update *app, const QString &url);
@@ -66,6 +67,7 @@ private:
     QNetworkConfigurationManager *m_ncm;
     QHash<QString, Update*> m_apps;
     UbuntuOne::Token m_token;
+    QNetworkReply* m_reply;
 
     QString getUrlApps();
     QString getFrameworksDir();
