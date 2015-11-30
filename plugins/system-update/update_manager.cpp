@@ -228,6 +228,8 @@ void UpdateManager::processUpdates()
     m_clickCheckingUpdate = false;
     bool updateAvailable = false;
     foreach (QString id, m_apps.keys()) {
+        if (m_model.contains(id))
+            continue;
         Update *app = m_apps.value(id);
         QString packagename(UBUNTU_PACKAGE_NAME);
         if(app->getPackageName() != packagename && app->updateRequired()) {

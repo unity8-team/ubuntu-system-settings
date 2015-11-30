@@ -4,14 +4,23 @@ include_directories(${QTDBUSMOCK_INCLUDE_DIRS})
 include_directories(${QTDBUSTEST_INCLUDE_DIRS})
 add_definitions(-DTESTS)
 
-add_executable(tst-bluetooth
-    tst_bluetooth.cpp
-    fakebluez.cpp
+set(PLUGIN_SOURCES
     ${CMAKE_SOURCE_DIR}/plugins/bluetooth/bluetooth.cpp
     ${CMAKE_SOURCE_DIR}/plugins/bluetooth/devicemodel.cpp
     ${CMAKE_SOURCE_DIR}/plugins/bluetooth/device.cpp
     ${CMAKE_SOURCE_DIR}/plugins/bluetooth/agent.cpp
-    ${CMAKE_SOURCE_DIR}/plugins/bluetooth/agentadaptor.cpp
+    ${CMAKE_SOURCE_DIR}/plugins/bluetooth/bluez_agent1adaptor.cpp
+    ${CMAKE_SOURCE_DIR}/plugins/bluetooth/bluez_agentmanager1.cpp
+    ${CMAKE_SOURCE_DIR}/plugins/bluetooth/bluez_device1.cpp
+    ${CMAKE_SOURCE_DIR}/plugins/bluetooth/bluez_adapter1.cpp
+    ${CMAKE_SOURCE_DIR}/plugins/bluetooth/freedesktop_objectmanager.cpp
+    ${CMAKE_SOURCE_DIR}/plugins/bluetooth/freedesktop_properties.cpp
+)
+
+add_executable(tst-bluetooth
+    tst_bluetooth.cpp
+    fakebluez.cpp
+    ${PLUGIN_SOURCES}
 )
 
 target_link_libraries(tst-bluetooth
@@ -22,11 +31,7 @@ target_link_libraries(tst-bluetooth
 add_executable(tst-bluetooth-devicemodel
     tst_devicemodel.cpp
     fakebluez.cpp
-    ${CMAKE_SOURCE_DIR}/plugins/bluetooth/bluetooth.cpp
-    ${CMAKE_SOURCE_DIR}/plugins/bluetooth/devicemodel.cpp
-    ${CMAKE_SOURCE_DIR}/plugins/bluetooth/device.cpp
-    ${CMAKE_SOURCE_DIR}/plugins/bluetooth/agent.cpp
-    ${CMAKE_SOURCE_DIR}/plugins/bluetooth/agentadaptor.cpp
+    ${PLUGIN_SOURCES}
 )
 
 target_link_libraries(tst-bluetooth-devicemodel
@@ -35,13 +40,9 @@ target_link_libraries(tst-bluetooth-devicemodel
 )
 
 add_executable(tst-bluetooth-device
-    tst_devicemodel.cpp
+    tst_device.cpp
     fakebluez.cpp
-    ${CMAKE_SOURCE_DIR}/plugins/bluetooth/bluetooth.cpp
-    ${CMAKE_SOURCE_DIR}/plugins/bluetooth/devicemodel.cpp
-    ${CMAKE_SOURCE_DIR}/plugins/bluetooth/device.cpp
-    ${CMAKE_SOURCE_DIR}/plugins/bluetooth/agent.cpp
-    ${CMAKE_SOURCE_DIR}/plugins/bluetooth/agentadaptor.cpp
+    ${PLUGIN_SOURCES}
 )
 
 target_link_libraries(tst-bluetooth-device

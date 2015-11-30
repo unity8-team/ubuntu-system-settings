@@ -34,8 +34,28 @@ ItemPage {
     objectName: "bluetoothPage"
 
     property var dialogPopupId
+    property var currentDevice
 
-    UbuntuBluetoothPanel { id: backend }
+    function finishDevicePairing() {
+        if (root.dialogPopupId)
+            PopupUtils.close(root.dialogPopupId)
+
+        root.dialogPopupId = null
+        root.currentDevice = null
+    }
+
+    UbuntuBluetoothPanel {
+        id: backend
+
+        onDevicePairingDone: {
+            console.log("Got pairing status notification for device " + device.address)
+
+            if (device != root.currentDevice)
+                return
+
+            finishDevicePairing()
+        }
+    }
 
     Timer {
         id: discoverableTimer
@@ -71,12 +91,23 @@ ItemPage {
     }
 
     Component {
+       id: displayPinCodeDialog
+       DisplayPinCodeDialog { }
+    }
+
+    Component {
         id: displayPasskeyDialog
         DisplayPasskeyDialog { }
     }
 
+    Component {
+        id: authorizationRequestDialog
+        AuthorizationRequestDialog { }
+    }
+
     Connections {
         target: backend.agent
+        onCancelNeeded: finishDevicePairing()
         onPasskeyConfirmationNeeded: {
             var request_tag = tag
             var popup = PopupUtils.open(confirmPasskeyDialog, root, {passkey: passkey, name: device.name})
@@ -95,23 +126,60 @@ ItemPage {
             popup.canceled.connect(function() {target.providePinCode(request_tag, false, "")})
             popup.provided.connect(function(pinCode) {target.providePinCode(request_tag, true, pinCode)})
         }
+        onDisplayPinCodeNeeded: {
+            if (!root.dialogPopupId)
+            {
+                root.currentDevice = device
+                root.dialogPopupId  = PopupUtils.open(displayPinCodeDialog, root, {pincode: pincode, name: device.name})
+                root.dialogPopupId.canceled.connect(function() {
+                    root.dialogPopupId = null
+                    if (root.currentDevice) {
+                        root.currentDevice.cancelPairing()
+                        root.currentDevice = null
+                    }
+                })
+            }
+            else
+            {
+                console.warn("Unhandled PIN code request for device " + device.name);
+            }
+        }
         onDisplayPasskeyNeeded: {
             if (!root.dialogPopupId)
             {
-                var request_tag = tag
+                root.currentDevice = device
                 root.dialogPopupId  = PopupUtils.open(displayPasskeyDialog, root, {passkey: passkey, name: device.name,
                                                  entered: entered})
-                root.dialogPopupId.canceled.connect(function() {root.dialogPopupId = null;
-                    target.displayPasskeyCallback(request_tag)})
+                root.dialogPopupId.canceled.connect(function() {
+                    root.dialogPopupId = null
+                    if (root.currentDevice) {
+                        root.currentDevice.cancelPairing()
+                        root.currentDevice = null
+                    }
+                })
             }
             else
             {
                 root.dialogPopupId.entered = entered
             }
         }
-        onPairingDone: {
-            if (root.dialogPopupId)
-                PopupUtils.close(root.dialogPopupId)
+        onReleaseNeeded: {
+            finishDevicePairing()
+        }
+        onAuthorizationRequested: {
+            if (!root.dialogPopupId)
+            {
+                var request_tag = tag
+                root.dialogPopupId  = PopupUtils.open(authorizationRequestDialog, root, {name: device.name})
+                root.dialogPopupId.accepted.connect(function() {
+                    root.dialogPopupId = null
+                    target.authorizationRequestCallback(request_tag, true)
+                })
+                root.dialogPopupId.declined.connect(function() {
+                    root.dialogPopupId = null
+                    target.authorizationRequestCallback(request_tag, false)
+                })
+            }
         }
     }
 
@@ -151,7 +219,7 @@ ItemPage {
                 text: i18n.tr("Bluetooth")
                 control: Switch {
                     id: btSwitch
-                    property bool serverChecked: bluetoothActionGroup.enabled.state
+                    property bool serverChecked: bluetoothActionGroup.enabled.state != undefined ? bluetoothActionGroup.enabled.state : false
                     USC.ServerPropertySynchroniser {
                         userTarget: btSwitch
                         userProperty: "checked"
@@ -205,12 +273,11 @@ ItemPage {
                             topMargin: units.gu(1)
                         }
                         visible: backend.powered && !backend.discoverable
-                        running: true
+                        running: visible
                     }
                 }
             }
 
-            //  Connnected Headset(s)
             ListItem.Standard {
                 id: connectedHeader
                 text: i18n.tr("Connected devices:")
@@ -225,7 +292,7 @@ ItemPage {
                     left: parent.left
                     right: parent.right
                 }
-                visible: bluetoothActionGroup.enabled && (connectedRepeater.count > 0)
+                visible: (bluetoothActionGroup.enabled.state != undefined && bluetoothActionGroup.enabled.state) && (connectedRepeater.count > 0)
                 objectName: "connectedList"
 
                 Repeater {
@@ -237,7 +304,7 @@ ItemPage {
                         text: getDisplayName(type, displayName)
                         control: ActivityIndicator {
                             visible: connection == Device.Connecting
-                            running: true
+                            running: visible
                         }
                         onClicked: {
                             backend.setSelectedDevice(addressName);
@@ -248,15 +315,13 @@ ItemPage {
                 }
             }
 
-            //  Disconnnected Headset(s)
-
             SettingsItemTitle {
                 id: disconnectedHeader
                 text: connectedList.visible ? i18n.tr("Connect another device:") : i18n.tr("Connect a device:")
-                enabled: bluetoothActionGroup.enabled
+                enabled: bluetoothActionGroup.enabled.state != undefined ? bluetoothActionGroup.enabled.state : false
                 control: ActivityIndicator {
                     visible: backend.powered && backend.discovering
-                    running: true
+                    running: visible
                 }
             }
 
@@ -266,7 +331,7 @@ ItemPage {
                     left: parent.left
                     right: parent.right
                 }
-                visible: bluetoothActionGroup.enabled && (disconnectedRepeater.count > 0)
+                visible: (bluetoothActionGroup.enabled.state != undefined && bluetoothActionGroup.enabled.state) && (disconnectedRepeater.count > 0)
                 objectName: "disconnectedList"
 
                 Repeater {
@@ -287,11 +352,10 @@ ItemPage {
             ListItem.Standard {
                 id: disconnectedNone
                 text: i18n.tr("None detected")
-                visible: !disconnectedList.visible
+                visible: !disconnectedList.visible && disconnectedHeader.visible
                 enabled: false
             }
 
-            //  Devices that connect automatically
             SettingsItemTitle {
                 id: autoconnectHeader
                 text: i18n.tr("Connect automatically when detected:")

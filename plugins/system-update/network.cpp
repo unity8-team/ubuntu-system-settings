@@ -39,8 +39,17 @@ namespace UpdatePlugin {
 Network::Network(QObject *parent) :
     QObject(parent),
     m_nam(this),
-    m_ncm(new QNetworkConfigurationManager())
+    m_ncm(new QNetworkConfigurationManager()),
+    m_reply(0)
 {
+}
+
+Network::~Network()
+{
+    if (m_reply) {
+        m_reply->abort();
+        delete m_reply;
+    }
 }
 
 std::string Network::getArchitecture()
@@ -134,7 +143,12 @@ std::vector<std::string> Network::listFolder(const std::string& folder, const st
 
 void Network::checkForNewVersions(QHash<QString, Update*> &apps)
 {
-    qWarning() << __PRETTY_FUNCTION__;
+    // If we aren't online, don't check
+    if (!m_ncm->isOnline()) {
+        qWarning() << "Not currently online, don't check";
+        return;
+    }
+
     m_apps = apps;
     QJsonObject serializer;
     QJsonArray array;
@@ -161,17 +175,17 @@ void Network::checkForNewVersions(QHash<QString, Update*> &apps)
     request.setRawHeader(QByteArray("X-Ubuntu-Architecture"), QByteArray::fromStdString(getArchitecture()));
     request.setUrl(url);
 
-    auto reply = m_nam.post(request, content);
+    m_reply = m_nam.post(request, content);
 
-    connect(reply, &QNetworkReply::finished, this, &Network::onUpdatesCheckFinished);
-    connect(reply, &QNetworkReply::sslErrors, this, &Network::onReplySslErrors);
-    connect(reply, static_cast<void(QNetworkReply::*)
+    connect(m_reply, &QNetworkReply::finished, this, &Network::onUpdatesCheckFinished);
+    connect(m_reply, &QNetworkReply::sslErrors, this, &Network::onReplySslErrors);
+    connect(m_reply, static_cast<void(QNetworkReply::*)
             (QNetworkReply::NetworkError)>(&QNetworkReply::error),
             this, &Network::onReplyError);
-    connect(m_ncm, &QNetworkConfigurationManager::onlineStateChanged, [=](const bool &online) {
-            if (!online) {
+    connect(m_ncm, &QNetworkConfigurationManager::onlineStateChanged, [&](const bool &online) {
+            if (!online && m_reply) {
                 qWarning() << "Offline, aborting check for updates";
-                reply->abort();
+                m_reply = 0;
             }
     });
 }
@@ -247,6 +261,7 @@ void Network::onReplySslErrors(const QList<QSslError>&)
     // Should this be a server or a network error??
     Q_EMIT serverError();
     reply->deleteLater();
+    m_reply = 0;
 }
 
 void Network::onReplyError(QNetworkReply::NetworkError code)
@@ -263,11 +278,11 @@ void Network::onReplyError(QNetworkReply::NetworkError code)
             Q_EMIT serverError();
     }
     reply->deleteLater();
+    m_reply = 0;
 }
 
 void Network::getClickToken(Update *app, const QString &url)
 {
-    qWarning() << __PRETTY_FUNCTION__;
     if (!m_token.isValid()) {
         app->setError("Invalid User Token");
         return;
