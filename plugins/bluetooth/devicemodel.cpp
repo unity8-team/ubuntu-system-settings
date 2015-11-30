@@ -412,9 +412,13 @@ void DeviceModel::trySetDiscoverable(bool discoverable)
     value.setValue(disc);
 
     if (m_bluezAdapter && m_bluezAdapter->isValid() && m_isPowered) {
-        reply = m_bluezAdapterProperties->call("Set", BLUEZ_ADAPTER_IFACE, "Discoverable", value);
-        if (!reply.isValid())
-            qWarning() << "Error setting device discoverable:" << reply.error();
+        watchCall(m_bluezAdapterProperties->Set(BLUEZ_ADAPTER_IFACE, "Discoverable", QDBusVariant(value)),
+                  [=](QDBusPendingCallWatcher *watcher) {
+            QDBusPendingReply<void> reply = *watcher;
+            if (reply.isError())
+                qWarning() << "Failed to set device discoverable state:" << reply.error();
+            watcher->deleteLater();
+        });
     }
 }
 
