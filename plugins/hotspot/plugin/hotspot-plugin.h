@@ -1,7 +1,7 @@
 /*
  * This file is part of system-settings
  *
- * Copyright (C) 2014 Canonical Ltd.
+ * Copyright (C) 2015 Canonical Ltd.
  *
  * Contact: Jonas G. Drange <jonas.drange@canonical.com>
  *
@@ -16,27 +16,24 @@
  *
  * You should have received a copy of the GNU General Public License along
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
  */
 
-import QtQuick 2.0
-import MeeGo.QOfono 0.2
-import Ubuntu.Components.ListItems 0.1 as ListItem
+#ifndef SYSTEM_SETTINGS_HOTSPOT_PLUGIN_H
+#define SYSTEM_SETTINGS_HOTSPOT_PLUGIN_H
 
-ListItem.SingleValue {
+#include <QObject>
+#include <SystemSettings/PluginInterface>
 
-    property string path
+class HotspotPlugin: public QObject, public SystemSettings::PluginInterface2
+{
+    Q_OBJECT
+    Q_PLUGIN_METADATA(IID "com.ubuntu.SystemSettings.PluginInterface/2.0")
+    Q_INTERFACES(SystemSettings::PluginInterface2)
 
-    OfonoSimManager {
-        id: sim
-        modemPath: path
-    }
+public:
+    SystemSettings::ItemBase *createItem(const QVariantMap &staticData,
+                                         QObject *parent = 0);
+};
 
-    id: numberItem
-    objectName: "numberItem"
-    text: i18n.tr("Phone number")
-    property string phoneNumber
-    phoneNumber: sim.subscriberNumbers.length > 0 ?
-        sim.subscriberNumbers[0] : ""
-    value: phoneNumber
-    visible: value
-}
+#endif // SYSTEM_SETTINGS_HOTSPOT_PLUGIN_H

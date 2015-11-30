@@ -17,15 +17,15 @@
  * Alberto Mardegan <alberto.mardegan@canonical.com>
  */
 
-import QtQuick 2.0
-import Ubuntu.Components 0.1
-import Ubuntu.Components.ListItems 0.1 as ListItem
+import QtQuick 2.4
+import Ubuntu.Components 1.3
+import Ubuntu.Components.ListItems 1.3 as ListItem
 import Ubuntu.SystemSettings.SecurityPrivacy 1.0
 import SystemSettings 1.0
 
 ItemPage {
     id: root
-    title: i18n.tr("Other app access")
+    title: i18n.tr("App permissions")
 
     Flickable {
         anchors.fill: parent
@@ -43,7 +43,7 @@ ItemPage {
             anchors.right: parent.right
 
             ListItem.Caption {
-                text: i18n.tr("Apps that you have granted and have requested access to:")
+                text: i18n.tr("Apps that you have granted access to:")
             }
 
             ListModel {
@@ -54,8 +54,13 @@ ItemPage {
                     trustStoreService: "CameraService"
                 }
                 ListElement {
-                    name: QT_TR_NOOP("Mic")
-                    caption: QT_TR_NOOP("Apps that have requested access to your mic")
+                    name: QT_TR_NOOP("Location")
+                    caption: QT_TR_NOOP("Apps that have requested access to your location")
+                    trustStoreService: "UbuntuLocationService"
+                }
+                ListElement {
+                    name: QT_TR_NOOP("Microphone")
+                    caption: QT_TR_NOOP("Apps that have requested access to your microphone")
                     trustStoreService: "PulseAudio"
                 }
             }
@@ -64,8 +69,9 @@ ItemPage {
                 model: appsModel
 
                 ListItem.SingleValue {
-                    text: model.name
+                    text: i18n.tr(model.name)
                     enabled: trustStoreModel.count > 0
+                    progression: enabled ? true : false
                     value: trustStoreModel.count > 0 ?
                         i18n.tr("%1/%2").arg(trustStoreModel.grantedCount).arg(trustStoreModel.count) :
                         i18n.tr("0")
@@ -80,6 +86,30 @@ ItemPage {
                         serviceName: model.trustStoreService
                     }
                 }
+            }
+
+            ListItem.Caption {
+                    text: i18n.tr("Apps may also request access to online accounts.")
+            }
+
+            ListItem.SingleControl {
+                control: Button {
+                    text: i18n.tr("Online Accounts…")
+                    width: parent.width - units.gu(4)
+                    onClicked: {
+                        var oaPlugin = pluginManager.getByName("online-accounts")
+                        if (oaPlugin) {
+                            var accountsPage = oaPlugin.pageComponent
+                            if (accountsPage)
+                                pageStack.push(accountsPage, {plugin: oaPlugin, pluginManager: pluginManager})
+                            else
+                                console.warn("online-accounts")
+                        } else {
+                            console.warn("online-accounts")
+                        }
+                    }
+                }
+                showDivider: false
             }
         }
     }

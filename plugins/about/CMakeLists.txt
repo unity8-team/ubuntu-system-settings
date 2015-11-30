@@ -9,8 +9,6 @@ set(QML_SOURCES
     EntryComponent.qml
     License.qml
     PageComponent.qml
-    PhoneNumber.qml
-    PhoneNumbers.qml
     SingleValueStacked.qml
     Software.qml
     Storage.qml

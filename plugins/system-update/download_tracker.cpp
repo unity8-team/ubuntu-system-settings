@@ -23,7 +23,7 @@
 #include <ubuntu/download_manager/error.h>
 
 #include "download_tracker.h"
-#include "network/network.h"
+#include "network.h"
 
 namespace {
     const QString DOWNLOAD_COMMAND = "post-download-command";

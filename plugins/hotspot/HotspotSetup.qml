@@ -16,14 +16,14 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import QtQuick 2.0
+import QtQuick 2.4
 import QtQuick.Layouts 1.1
 import SystemSettings 1.0
-import Ubuntu.Components 0.1
-import Ubuntu.Components.ListItems 0.1 as ListItem
+import Ubuntu.Components 1.3
+import Ubuntu.Components.ListItems 1.3 as ListItem
+import Ubuntu.Components.Popups 1.3
 import Ubuntu.Connectivity 1.0
 import Ubuntu.SystemSettings.Cellular 1.0
-import Ubuntu.Components.Popups 0.1
 
 Component {
     id: hotspotSetup
@@ -43,11 +43,21 @@ Component {
         anchorToKeyboard: true
 
         function settingsValid() {
-            return ssidField.text != "" && passwordField.length >= 8;
+            var ssidValid = ssidField.text !== "";
+            var passwordValid = passwordRequiredToggle.checked ?
+                                passwordField.length >= 8 : true;
+            return ssidValid && passwordValid;
+        }
+
+        function updateHotspotSettings () {
+            Connectivity.hotspotSsid = ssidField.text;
+            Connectivity.hotspotPassword = passwordField.text;
+            Connectivity.hotspotAuth = passwordRequiredToggle.checked ?
+                                       "wpa-psk" : "none";
         }
 
         title: stored ?
-            i18n.tr("Change hotspot setup") : i18n.tr("Setup hotspot")
+            i18n.tr("Change Hotspot Setup") : i18n.tr("Set Up Hotspot")
         text: feedback.enabled ? feedback.text : "";
 
         Common {
@@ -70,7 +80,11 @@ Component {
                     enabled: false
                 }
                 PropertyChanges {
-                    target: passwordLabel
+                    target: passwordRequired
+                    enabled: false
+                }
+                PropertyChanges {
+                    target: passwordRequiredLabel
                     opacity: 0.5
                 }
                 PropertyChanges {
@@ -117,12 +131,16 @@ Component {
                     opacity: 0.5
                 }
                 PropertyChanges {
-                    target: ssidField
+                    target: passwordRequired
                     enabled: false
                 }
                 PropertyChanges {
-                    target: passwordLabel
+                    target: passwordRequiredLabel
                     opacity: 0.5
+                }
+                PropertyChanges {
+                    target: ssidField
+                    enabled: false
                 }
                 PropertyChanges {
                     target: passwordField
@@ -153,8 +171,8 @@ Component {
 
             Label {
                 id: ssidLabel
-                text: i18n.tr("Hotspot name")
-                fontSize: "medium"
+                text: hotspotSetupDialog.stored ? i18n.tr("Hotspot name") :
+                                                  i18n.tr("Choose a name")
                 font.bold: true
                 color: Theme.palette.selected.backgroundText
                 elide: Text.ElideRight
@@ -169,43 +187,90 @@ Component {
                 width: parent.width
             }
 
-            Label {
-                id: passwordLabel
-                // TRANSLATORS: “Password (optional)” is hidden.
-                text: showAllUI ? i18n.tr("Password (optional)") :
-                                  i18n.tr("Key (must be 8 characters or longer)")
-                fontSize: "medium"
-                font.bold: true
-                color: Theme.palette.selected.backgroundText
-                wrapMode: Text.WordWrap
-                width: parent.width
-            }
+            ListItem.Empty {
+                id: passwordRequired
+                onClicked: passwordRequiredToggle.trigger()
 
-            Label {
-                visible: showAllUI
-                // TRANSLATORS: This string is hidden.
-                text: i18n.tr("If you do not enter a password, the hotspot will be insecure.")
+                CheckBox {
+                    id: passwordRequiredToggle
+                    objectName: "passwordRequiredToggle"
+                    checked: Connectivity.hotspotAuth === "wpa-psk"
+                    anchors {
+                        left: parent.left
+                        verticalCenter: parent.verticalCenter
+                    }
+                    // FIXME: Workaround for lp:1415023
+                    activeFocusOnPress: false
+                }
+
+                Label {
+                    id: passwordRequiredLabel
+                    anchors {
+                        left: passwordRequiredToggle.right
+                        leftMargin: units.gu(1)
+                        right: parent.right
+                        verticalCenter: parent.verticalCenter
+                    }
+
+                    // FIXME: Workaround for label not wrapping (lp:1442851)
+                    wrapMode: Text.Wrap
+                    text: i18n.tr("Require a password (recommended):")
+                }
             }
 
             TextField {
                 id: passwordField
                 objectName: "passwordField"
+                enabled: passwordRequiredToggle.checked
                 text: Connectivity.hotspotPassword
-                echoMode: passwordVisibleSwitch.checked ?
+                echoMode: passwordVisibleToggle.checked ?
                     TextInput.Normal : TextInput.Password
                 inputMethodHints: Qt.ImhNoAutoUppercase | Qt.ImhNoPredictiveText
                 width: parent.width
             }
 
-            ListItem.Standard {
-                // TRANSLATORS: “Show password” is hidden.
-                text: showAllUI ? i18n.tr("Show password") : i18n.tr("Show key")
+            ListItem.Empty {
                 id: passwordVisible
-                onClicked: passwordVisibleSwitch.trigger()
-                control: Switch {
-                    id: passwordVisibleSwitch
+                enabled: passwordRequiredToggle.checked
+                onClicked: passwordVisibleToggle.trigger()
+
+                CheckBox {
+                    id: passwordVisibleToggle
+                    enabled: parent.enabled
+                    anchors {
+                        left: parent.left
+                        verticalCenter: parent.verticalCenter
+                    }
+
+                    // FIXME: Workaround for lp:1415023
                     activeFocusOnPress: false
                 }
+
+                Label {
+                    id: passwordVisibleLabel
+
+                    /* FIXME: use enabled when lp:1491802 is fixed, or use
+                    CheckBox.text once lp:1323238 is fixed. */
+                    opacity: passwordRequiredToggle.checked ? 1 : 0.5
+                    anchors {
+                        left: passwordVisibleToggle.right
+                        leftMargin: units.gu(1)
+                        verticalCenter: parent.verticalCenter
+                    }
+                    text: i18n.tr("Show password")
+                }
+            }
+
+            ListItem.Caption {
+                id: enableWifiCaption
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                }
+                text: i18n.tr("Starting the hotspot will turn on Wi-Fi.")
+                visible: !Connectivity.wifiEnabled &&
+                         !hotspotSetupDialog.stored &&
+                         hotspotSetupDialog.state !== "SUCCEEDED"
             }
 
             Row {
@@ -221,6 +286,8 @@ Component {
                     id: cancelButton
                     width: (parent.width / 2) - units.gu(1)
                     text: i18n.tr("Cancel")
+
+                    // FIXME: Workaround for lp:1415023
                     activeFocusOnPress: false
                     onClicked: PopupUtils.close(hotspotSetupDialog)
                 }
@@ -230,11 +297,16 @@ Component {
                     objectName: "confirmButton"
                     width: (parent.width / 2) - units.gu(1)
                     text: hotspotSetupDialog.stored ? i18n.tr("Change") :
-                        i18n.tr("Enable")
+                        i18n.tr("Start")
                     enabled: settingsValid()
+
+                    // FIXME: Workaround for lp:1415023
                     activeFocusOnPress: false
                     onClicked: {
-                        if (hotspotSetupDialog.stored) {
+                        if (!Connectivity.wifiEnabled &&
+                                !hotspotSetupDialog.stored) {
+                            enableWifiAction.trigger();
+                        } else if (hotspotSetupDialog.stored) {
                             changeAction.trigger()
                         } else {
                             enableAction.trigger();
@@ -259,12 +331,22 @@ Component {
                         height: parent.height - units.gu(1.5)
                     }
                 }
+            }
+        }
 
-                Button {
-                    visible: showAllUI
-                    // TRANSLATORS: This string is hidden.
-                    text: i18n.tr("Start")
+        Action {
+            id: enableWifiAction
+            onTriggered: {
+                hotspotSetupDialog.state = "STARTING";
+
+                // As soon as Wi-Fi has been turned on, trigger enableAction.
+                function wifiUpdated (updated) {
+                    Connectivity.wifiEnabledUpdated.disconnect(wifiUpdated);
+                    enableAction.trigger();
                 }
+
+                Connectivity.wifiEnabledUpdated.connect(wifiUpdated);
+                Connectivity.wifiEnabled = true;
             }
         }
 
@@ -282,8 +364,7 @@ Component {
                     }
                 }
 
-                Connectivity.hotspotSsid = ssidField.text;
-                Connectivity.hotspotPassword = passwordField.text;
+                hotspotSetupDialog.updateHotspotSettings();
                 Connectivity.hotspotEnabledUpdated.connect(hotspotEnabledHandler);
                 Connectivity.hotspotEnabled = true;
             }
@@ -311,8 +392,7 @@ Component {
                     }
                 }
 
-                Connectivity.hotspotSsid = ssidField.text;
-                Connectivity.hotspotPassword = passwordField.text;
+                hotspotSetupDialog.updateHotspotSettings();
 
                 if (Connectivity.hotspotEnabled) {
                     hotspotSetupDialog.state = "STARTING";

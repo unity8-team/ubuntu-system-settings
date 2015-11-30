@@ -20,11 +20,11 @@
  */
 
 import QMenuModel 0.1
-import QtQuick 2.0
+import QtQuick 2.4
 import SystemSettings 1.0
-import Ubuntu.Components 0.1
-import Ubuntu.Components.ListItems 0.1 as ListItem
-import Ubuntu.Components.Popups 0.1
+import Ubuntu.Components 1.3
+import Ubuntu.Components.ListItems 1.3 as ListItem
+import Ubuntu.Components.Popups 1.3
 import Ubuntu.OnlineAccounts.Client 0.1
 import Ubuntu.SystemSettings.Update 1.0
 import Ubuntu.Connectivity 1.0
@@ -84,7 +84,8 @@ ItemPage {
         onFinished: {
             credentialsNotification.visible = false;
             root.state = "SEARCHING";
-            UpdateManager.checkUpdates();
+            if (NetworkingStatus.online)
+                UpdateManager.checkUpdates();
         }
     }
 
@@ -147,7 +148,7 @@ ItemPage {
             PropertyChanges { target: installAllButton; visible: false}
             PropertyChanges { target: checkForUpdatesArea; visible: true}
             PropertyChanges { target: updateNotification; visible: false}
-            PropertyChanges { target: activity; running: true}
+            PropertyChanges { target: activity; running: NetworkingStatus.online}
         },
         State {
             name: "NOUPDATES"
@@ -179,7 +180,8 @@ ItemPage {
         Component.onCompleted: {
             credentialsNotification.visible = false;
             root.state = "SEARCHING";
-            UpdateManager.checkUpdates();
+            if (NetworkingStatus.online)
+                UpdateManager.checkUpdates();
         }
 
         onUpdateAvailableFound: {
@@ -205,8 +207,7 @@ ItemPage {
         }
 
         onCredentialsDeleted: {
-            credentialsNotification.visible = false;
-            uoaConfig.exec();
+            credentialsNotification.visible = true;
         }
 
         onSystemUpdateDownloaded: {
@@ -280,34 +281,15 @@ ItemPage {
                 Label {
                     text: activity.running ? i18n.tr("Checking for updates…") : i18n.tr("Connect to the Internet to check for updates")
                     verticalAlignment: Text.AlignVCenter
-                    elide: Text.ElideRight
+                    wrapMode: Text.Wrap
                     anchors {
                         left: activity.running ? activity.right : parent.left
                         top: parent.top
-                        right: btnRetry.visible ? btnRetry.left : parent.right
+                        right: parent.right
                         rightMargin: units.gu(2)
                         leftMargin: units.gu(2)
                     }
                     height: parent.height
-                }
-
-                Button {
-                    id: btnRetry
-                    text: i18n.tr("Retry")
-                    color: UbuntuColors.orange
-                    anchors {
-                        right: parent.right
-                        top: parent.top
-                        bottom: parent.bottom
-                        margins: units.gu(1)
-                    }
-                    visible: !activity.visible
-
-                    onClicked: {
-                        activity.running = true;
-                        root.state = "SEARCHING";
-                        UpdateManager.checkUpdates();
-                    }
                 }
             }
 
@@ -714,8 +696,10 @@ ItemPage {
             spacing: units.gu(2)
 
             Image {
-                source: Qt.resolvedUrl("file:///usr/share/ubuntu/settings/system/icons/distributor-logo.png")
+                source: Qt.resolvedUrl("file:///usr/share/icons/suru/places/scalable/distributor-logo.svg")
                 anchors.horizontalCenter: parent.horizontalCenter
+                height: width
+                width: 96
                 NumberAnimation on rotation {
                     from: 0
                     to: 360

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 Canonical Ltd
+ * Copyright (C) 2013-2015 Canonical Ltd
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as
@@ -35,6 +35,11 @@
 
 #include "device.h"
 
+#include "freedesktop_objectmanager.h"
+#include "freedesktop_properties.h"
+#include "bluez_adapter1.h"
+#include "bluez_agentmanager1.h"
+
 class DeviceModel: public QAbstractListModel
 {
     Q_OBJECT
@@ -68,8 +73,6 @@ public:
     bool isPowered() const { return m_isPowered; }
     bool isDiscovering() const { return m_isDiscovering; }
     bool isDiscoverable() const { return m_isDiscoverable; }
-    void addConnectAfterPairing(const QString &address, Device::ConnectionMode mode);
-    void createDevice(const QString &address, QObject *agent);
     void removeDevice(const QString &path);
     void stopDiscovery();
     void startDiscovery();
@@ -80,10 +83,12 @@ Q_SIGNALS:
     void poweredChanged(bool powered);
     void discoveringChanged(bool isDiscovering);
     void discoverableChanged(bool isDiscoverable);
+    void devicePairingDone(Device *device, bool success);
 
 private:
     QDBusConnection m_dbus;
-    QDBusInterface m_bluezManager;
+    DBusObjectManagerInterface m_bluezManager;
+    BluezAgentManager1 m_bluezAgentManager;
 
     void setProperties(const QMap<QString,QVariant> &properties);
     void updateProperty(const QString &key, const QVariant &value);
@@ -100,31 +105,34 @@ private:
     void setDiscoverable(bool discoverable);
     void setPowered(bool powered);
 
-    QScopedPointer<QDBusInterface> m_bluezAdapter;
+    QScopedPointer<BluezAdapter1> m_bluezAdapter;
+    QScopedPointer<FreeDesktopProperties> m_bluezAdapterProperties;
+
     void clearAdapter();
-    void setAdapterFromPath(const QString &objectPath);
+    void setAdapterFromPath(const QString &objectPath, const QVariantMap &properties);
 
     QList<QSharedPointer<Device> > m_devices;
     void updateDevices();
     void addDevice(QSharedPointer<Device> &device);
-    void addDevice(const QString &objectPath);
+    void addDevice(const QString &objectPath, const QVariantMap &properties);
     void removeRow(int i);
     int findRowFromAddress(const QString &address) const;
     void emitRowChanged(int row);
 
+    void setDiscovering(bool value);
+    void setupAsDefaultAgent();
+
 private Q_SLOTS:
-    void slotCreateFinished(QDBusPendingCallWatcher *call);
+    void slotInterfacesAdded(const QDBusObjectPath &objectPath, InterfaceList ifacesAndProps);
+    void slotInterfacesRemoved(const QDBusObjectPath &objectPath, const QStringList &interfaces);
+    void slotAdapterPropertiesChanged(const QString &interface, const QVariantMap &changedProperties,
+                                      const QStringList &invalidatedProperties);
     void slotRemoveFinished(QDBusPendingCallWatcher *call);
     void slotPropertyChanged(const QString &key, const QDBusVariant &value);
     void slotTimeout();
     void slotEnableDiscoverable();
     void slotDeviceChanged();
-    void slotDeviceCreated(const QDBusObjectPath &);
-    void slotDeviceRemoved(const QDBusObjectPath &);
-    void slotDeviceFound(const QString &, const QMap<QString,QVariant>&);
-    void slotDeviceDisappeared(const QString&);
-    void slotDefaultAdapterChanged(const QDBusObjectPath&);
-    void slotAdapterRemoved(const QDBusObjectPath& path);
+    void slotDevicePairingDone(bool success);
 };
 
 class DeviceFilter: public QSortFilterProxyModel

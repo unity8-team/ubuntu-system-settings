@@ -1,7 +1,7 @@
 SET (CMAKE_AUTOMOC ON)
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
-add_library(update-plugin SHARED update-plugin.h update-plugin.cpp ../network/network.cpp ../network/network.h
+add_library(update-plugin SHARED update-plugin.h update-plugin.cpp ../network.cpp ../network.h
 ../update.cpp ../update.h ../update_manager.cpp ../update_manager.h ../system_update.cpp ../system_update.h
 ../download_tracker.h ../download_tracker.cpp)
 

@@ -47,6 +47,14 @@ def set_hotspot_password(self, value):
     self.SetProperty(PRIV_OBJ, PRIV_IFACE, 'HotspotPassword', value)
 
 
+def set_hotspot_auth(self, value):
+    self.SetProperty(PRIV_OBJ, PRIV_IFACE, 'HotspotAuth', value)
+
+
+def set_wifi_enabled(self, value):
+    self.SetProperty(NETS_OBJ, NETS_IFACE, 'WifiEnabled', value)
+
+
 def load(mock, parameters):
     global _parameters
     _parameters = parameters
@@ -54,6 +62,8 @@ def load(mock, parameters):
     mock.set_hotspot_enabled = set_hotspot_enabled
     mock.set_hotspot_ssid = set_hotspot_ssid
     mock.set_hotspot_password = set_hotspot_password
+    mock.set_wifi_enabled = set_wifi_enabled
+    mock.set_hotspot_auth = set_hotspot_auth
 
     mock.AddObject(
         NETS_OBJ,
@@ -67,7 +77,19 @@ def load(mock, parameters):
             'HotspotStored': _parameters.get(
                 'HotspotStored', dbus.Boolean(False)
             ),
-            'UnstoppableOperationHappening': dbus.Boolean(False),
+            'ModemAvailable': _parameters.get(
+                'ModemAvailable', dbus.Boolean(True)
+            ),
+            'FlightModeSwitchEnabled': _parameters.get(
+                'FlightModeSwitchEnabled', dbus.Boolean(False)
+            ),
+            'WifiSwitchEnabled': _parameters.get(
+                'WifiSwitchEnabled', dbus.Boolean(False)
+            ),
+            'HotspotSwitchEnabled': _parameters.get(
+                'HotspotSwitchEnabled', dbus.Boolean(False)
+            ),
+            'FlightMode': _parameters.get('FlightMode', dbus.Boolean(False)),
             'WifiEnabled': _parameters.get('WifiEnabled', dbus.Boolean(False)),
             # One of online, offline and connecting.
             'Status': _parameters.get('Status', 'offline')
@@ -81,6 +103,9 @@ def load(mock, parameters):
         {
             'HotspotPassword': _parameters.get(
                 'HotspotPassword', dbus.String('abcdefgh')
+            ),
+            'HotspotAuth': _parameters.get(
+                'HotspotAuth', dbus.String('wpa-psk')
             )
         },
         [
@@ -98,7 +123,7 @@ def load(mock, parameters):
             ),
             (
                 'SetWifiEnabled', 'b', '',
-                ''
+                'objects["/"].set_wifi_enabled(self, args[0])'
             ),
             (
                 'SetHotspotSsid', 'ay', '',
@@ -107,6 +132,10 @@ def load(mock, parameters):
             (
                 'SetHotspotPassword', 's', '',
                 'objects["/"].set_hotspot_password(self, args[0])'
+            ),
+            (
+                'SetHotspotAuth', 's', '',
+                'objects["/"].set_hotspot_auth(self, args[0])'
             ),
             (
                 'SetHotspotEnabled', 'b', '',

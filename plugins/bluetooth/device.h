@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 Canonical Ltd
+ * Copyright (C) 2013-2015 Canonical Ltd
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as
@@ -25,6 +25,9 @@
 #include <QDBusPendingCallWatcher>
 #include <QSharedPointer>
 #include <QString>
+
+#include "freedesktop_properties.h"
+#include "bluez_device1.h"
 
 struct Device: QObject
 {
@@ -71,17 +74,14 @@ public:
 
     enum Type { Other, Computer, Cellular, Smartphone, Phone, Modem, Network,
                 Headset, Speakers, Headphones, Video, OtherAudio, Joypad,
-                Keypad, Keyboard, Tablet, Mouse, Printer, Camera, Carkit };
+                Keypad, Keyboard, Tablet, Mouse, Printer, Camera, Carkit, Watch };
 
     enum Strength { None, Poor, Fair, Good, Excellent };
 
     enum Connection { Disconnected=1, Connecting=2,
                       Connected=4, Disconnecting=8 };
 
-    enum ConnectionMode { Audio, AudioSource, AudioSink, HandsfreeGateway,
-                          HeadsetMode, Input };
-
-    Q_ENUMS(Type Strength Connection ConnectionMode)
+    Q_ENUMS(Type Strength Connection)
 
     Q_DECLARE_FLAGS(Connections, Connection)
 
@@ -96,6 +96,7 @@ Q_SIGNALS:
     void connectionChanged();
     void strengthChanged();
     void deviceChanged(); // catchall for any change
+    void pairingDone(bool success);
 
 public:
     const QString& getName() const { return m_name; }
@@ -106,7 +107,7 @@ public:
     bool isTrusted() const { return m_trusted; }
     Connection getConnection() const { return m_connection; }
     Strength getStrength() const { return m_strength; }
-    QString getPath() const { return m_deviceInterface ? m_deviceInterface->path() : QString(); }
+    QString getPath() const { return m_bluezDevice ? m_bluezDevice->path() : QString(); }
 
   private:
     QString m_name;
@@ -118,15 +119,12 @@ public:
     bool m_paired = false;
     bool m_trusted = false;
     Connection m_connection = Connection::Disconnected;
-    Strength m_strength = Strength::Fair;
+    Strength m_strength = Strength::None;
     bool m_isConnected = false;
-    QSharedPointer<QDBusInterface> m_deviceInterface;
-    QSharedPointer<QDBusInterface> m_audioInterface;
-    QSharedPointer<QDBusInterface> m_audioSourceInterface;
-    QSharedPointer<QDBusInterface> m_audioSinkInterface;
-    QSharedPointer<QDBusInterface> m_headsetInterface;
-    QSharedPointer<QDBusInterface> m_inputInterface;
-    QList<ConnectionMode> m_connectAfterPairing;
+    bool m_connectAfterPairing = false;
+    QScopedPointer<BluezDevice1> m_bluezDevice;
+    QScopedPointer<FreeDesktopProperties> m_bluezDeviceProperties;
+    bool m_isPairing = false;
 
   protected:
     void setName(const QString &name);
@@ -142,33 +140,29 @@ public:
 
   public:
     Device() {}
-    ~Device() {}
     Device(const QString &path, QDBusConnection &bus);
-    Device(const QMap<QString,QVariant> &properties);
-    void initDevice(const QString &path, QDBusConnection &bus);
+    ~Device() {}
     bool isValid() const { return getType() != Type::Other; }
-    void connect(ConnectionMode);
-    void connectPending();
+    void pair();
+    Q_INVOKABLE void cancelPairing();
+    void connect();
     void makeTrusted(bool trusted);
-    void disconnect(ConnectionMode);
+    void disconnect();
     void setProperties(const QMap<QString,QVariant> &properties);
-    void addConnectAfterPairing(const ConnectionMode mode);
-
-  public Q_SLOTS:
-    void discoverServices();
+    void setConnectAfterPairing(bool value);
 
   private Q_SLOTS:
-    void slotPropertyChanged(const QString &key, const QDBusVariant &value);
-    void slotServiceDiscoveryDone(QDBusPendingCallWatcher *call);
+    void slotPropertiesChanged(const QString &interface, const QVariantMap &changedProperties,
+                               const QStringList &invalidatedProperties);
     void slotMakeTrustedDone(QDBusPendingCallWatcher *call);
-    void slotConnectDone(QDBusPendingCallWatcher *watcher);
-    void slotDisconnectDone(QDBusPendingCallWatcher *watcher);
 
   private:
+    void initDevice(const QString &path, QDBusConnection &bus);
     void updateProperties(QSharedPointer<QDBusInterface>);
-    void initInterface(QSharedPointer<QDBusInterface>&, const QString &path, const QString &name, QDBusConnection&);
     void updateProperty(const QString &key, const QVariant &value);
     static Type getTypeFromClass(quint32 bluetoothClass);
+    Device::Strength getStrengthFromRssi(int rssi);
+    void connectAfterPairing();
 };
 
 Q_DECLARE_METATYPE(Device*)

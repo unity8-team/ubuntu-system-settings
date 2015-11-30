@@ -17,11 +17,11 @@
  * Jonas G. Drange <jonas.drange@canonical.com>
  *
 */
-import QtQuick 2.0
+import QtQuick 2.4
 import GSettings 1.0
 import SystemSettings 1.0
-import Ubuntu.Components 0.1
-import Ubuntu.Components.ListItems 0.1 as ListItem
+import Ubuntu.Components 1.3
+import Ubuntu.Components.ListItems 1.3 as ListItem
 
 /* This is a temporary solution to the issue of Hotspots failing on mako. If
 the device is mako, we hide the hotspot entry. Will be removed once lp:1434591
@@ -51,25 +51,6 @@ Column {
 
     DataMultiSim {
         anchors { left: parent.left; right: parent.right }
-    }
-
-    ListItem.SingleValue {
-        text : i18n.tr("Hotspot disabled because Wi-Fi is off.")
-        visible: !hotspotItem.visible &&
-                 UpdateManager.deviceName !== "mako"
-    }
-
-    ListItem.SingleValue {
-        id: hotspotItem
-        text: i18n.tr("Wi-Fi hotspot")
-        progression: true
-        onClicked: {
-            pageStack.push(Qt.resolvedUrl("../Hotspot.qml"))
-        }
-        visible: (actionGroup.actionObject.valid ?
-                     actionGroup.actionObject.state : false) &&
-                 UpdateManager.deviceName !== "mako"
-
     }
 
     ListItem.Standard {
@@ -119,7 +100,7 @@ Column {
 
             expanded: true
             text: sim.title
-            model: sim.radioSettings.modemTechnologies
+            model: sim.radioSettings.availableTechnologies
             delegate: OptionSelectorDelegate {
                 objectName: sim.path + "_radio_" + modelData
                 text: sim.techToString(modelData)
@@ -141,9 +122,9 @@ Column {
             Connections {
                 target: sim.radioSettings
                 onTechnologyPreferenceChanged: radio.selectedIndex =
-                    sim.radioSettings.modemTechnologies.indexOf(preference)
+                    sim.radioSettings.availableTechnologies.indexOf(preference)
 
-                onModemTechnologiesChanged: {
+                onAvailableTechnologiesChanged: {
                     if ((technologies.indexOf('umts') === -1)
                          && (sim.mtkSettings.has3G === false)) {
                         radio.model = sim.addUmtsEnableToModel(technologies);
@@ -157,11 +138,11 @@ Column {
             }
 
             Component.onCompleted: {
-                if ((sim.radioSettings.modemTechnologies.indexOf('umts') === -1)
+                if ((sim.radioSettings.availableTechnologies.indexOf('umts') === -1)
                      && (sim.mtkSettings.has3G === false)) {
-                    radio.model = sim.addUmtsEnableToModel(sim.radioSettings.modemTechnologies);
+                    radio.model = sim.addUmtsEnableToModel(sim.radioSettings.availableTechnologies);
                 } else {
-                    radio.model = sim.radioSettings.modemTechnologies;
+                    radio.model = sim.radioSettings.availableTechnologies;
                 }
             }
         }

@@ -18,9 +18,9 @@
  * Jonas G. Drange <jonas.drange@canonical.com>
  *
 */
-import QtQuick 2.0
-import Ubuntu.Components 1.1
-import Ubuntu.Components.ListItems 0.1 as ListItem
+import QtQuick 2.4
+import Ubuntu.Components 1.3
+import Ubuntu.Components.ListItems 1.3 as ListItem
 
 Column {
 
@@ -41,17 +41,7 @@ Column {
         text: i18n.tr("Call forwarding")
         showDivider: false
         progression: true
-        value: {
-            if (sim.callForwarding.voiceUnconditional) {
-                return i18n.tr("All calls");
-            } else if (sim.callForwarding.voiceBusy ||
-                       sim.callForwarding.voiceNoReply ||
-                       sim.callForwarding.voiceNotReachable) {
-                return i18n.tr("Some calls")
-            } else {
-                return i18n.tr("Off")
-            }
-        }
+        value: sim.getCallForwardingSummary()
         onClicked: pageStack.push(Qt.resolvedUrl("CallForwarding.qml"), {sim: sim})
     }
 

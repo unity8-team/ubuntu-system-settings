@@ -25,7 +25,7 @@ install(FILES qmldir DESTINATION ${PLUG_DIR})
 install(FILES ${QML_SOURCES} DESTINATION ${PLUGIN_QML_DIR}/system-update)
 
 install(FILES system-update.settings DESTINATION ${PLUGIN_MANIFEST_DIR})
-install(FILES images/settings-system-update.svg images/distributor-logo.png DESTINATION ${PLUGIN_MANIFEST_DIR}/icons)
+install(FILES images/settings-system-update.svg DESTINATION ${PLUGIN_MANIFEST_DIR}/icons)
 
 
 set(QML_SOURCES_NOTIFICATION EntryComponent.qml)

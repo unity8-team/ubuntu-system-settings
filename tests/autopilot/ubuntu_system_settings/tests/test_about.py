@@ -15,7 +15,7 @@ from gi.repository import GLib
 from autopilot.matchers import Eventually
 from autopilot.platform import model
 from testtools import skipIf
-from testtools.matchers import Equals, NotEquals
+from testtools.matchers import Equals, NotEquals, Contains
 
 from ubuntu_system_settings.tests import (
     AboutBaseTestCase,
@@ -132,21 +132,6 @@ class AboutOfonoTestCase(AboutOfonoBaseTestCase):
             displayed_imei = self.about_page.get_imei()
             self.assertThat(displayed_imei, Equals(device_imei))
 
-    def test_phone_number(self):
-        self.assertEqual(str(self.about_page.get_number('numberItem')),
-                         '123456789')
-
-
-class AboutOfonoMultiSimTestCase(AboutOfonoBaseTestCase):
-
-    use_sims = 2
-
-    def test_phone_numbers(self):
-        self.assertEqual(str(self.about_page.get_number('numberItem1')),
-                         '123456789')
-        self.assertEqual(str(self.about_page.get_number('numberItem2')),
-                         '08123')
-
 
 class AboutSystemImageTestCase(AboutSystemImageBaseTestCase):
 
@@ -172,6 +157,11 @@ class AboutSystemImageTestCase(AboutSystemImageBaseTestCase):
         self.assertEquals(
             last_updated_date_displayed, self._get_last_updated_date())
 
+    def test_non_ota_version(self):
+        """Checks whether a non-ota release gets an rev number."""
+        os_item = self.about_page.wait_select_single(objectName='osItem')
+        self.assertThat(os_item.value, Contains(' (r42)'))
+
     def test_check_for_updates(self):
         """
         Checks whether clicking on Check for Updates brings us
@@ -180,6 +170,23 @@ class AboutSystemImageTestCase(AboutSystemImageBaseTestCase):
         system_updates_page = self.about_page.go_to_check_for_updates()
         self.assertThat(
             system_updates_page.visible, Eventually(Equals(True)))
+
+
+class AboutOtaTestCase(AboutSystemImageBaseTestCase):
+    systemimage_parameters = {
+        'version_detail': {
+            'ubuntu': '20150123.1',
+            'device': '20153344.1',
+            'custom': '201594834.1',
+            'version': '257',
+            'tag': 'OTA-100'
+        }
+    }
+
+    def test_ota_version(self):
+        """Checks whether a stable release gets an OTA number."""
+        os_item = self.about_page.wait_select_single(objectName='osItem')
+        self.assertThat(os_item.value, Contains(' (OTA-100)'))
 
 
 class StorageTestCase(StorageBaseTestCase):

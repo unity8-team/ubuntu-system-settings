@@ -40,6 +40,7 @@ public:
     QString currentDeviceBuildNumber() { return QString("20140927");}
     QString currentCustomBuildNumber() { return QString("20140927");}
     QString deviceName() { return QString("mako");}
+    QMap<QString, QVariant> detailedVersionDetails() { return QMap<QString, QVariant>();}
     QDateTime lastUpdateDate() { return QDateTime::currentDateTime(); }
 
     void checkForUpdate() {}

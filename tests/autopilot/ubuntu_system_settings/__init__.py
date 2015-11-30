@@ -87,6 +87,10 @@ class SystemSettingsMainWindow(ubuntuuitoolkit.MainView):
         return self._go_to_page('entryComponent-cellular', 'cellularPage')
 
     @autopilot.logging.log_action(logger.debug)
+    def go_to_hotspot_page(self):
+        return self._go_to_page('entryComponent-hotspot', 'hotspotPage')
+
+    @autopilot.logging.log_action(logger.debug)
     def go_to_bluetooth_page(self):
         return self._go_to_page('entryComponent-bluetooth', 'bluetoothPage')
 
@@ -106,6 +110,11 @@ class SystemSettingsMainWindow(ubuntuuitoolkit.MainView):
     def go_to_security_page(self):
         return self._go_to_page('entryComponent-security-privacy',
                                 'securityPrivacyPage')
+
+    @autopilot.logging.log_action(logger.debug)
+    def go_to_notification_page(self):
+        return self._go_to_page('entryComponent-notifications',
+                                'systemNotificationsPage')
 
     @autopilot.logging.log_action(logger.debug)
     def go_to_datetime_page(self):
@@ -333,52 +342,8 @@ class CellularPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
         field.write(name)
         self.pointing_device.click_object(ok)
 
-    """
-    :returns: Whether or not hotspot can be used.
-    """
-    @autopilot.logging.log_action(logger.debug)
-    def have_hotspot(self):
-        return self.wait_select_single(objectName='hotspotEntry').visible
 
-    """
-    :param: Configuration with keys ssid and password.
-    :returns: Hotspot page.
-    """
-    @autopilot.logging.log_action(logger.debug)
-    def setup_hotspot(self, config=None):
-        hotspot_page = self._enter_hotspot()
-        hotspot_page.setup_hotspot(config)
-        return hotspot_page
-
-    """
-    Enables hotspot.
-    :returns: Hotspot page.
-    """
-    @autopilot.logging.log_action(logger.debug)
-    def enable_hotspot(self):
-        hotspot_page = self._enter_hotspot()
-        hotspot_page.enable_hotspot()
-        return hotspot_page
-
-    """
-    Disables hotspot.
-    :returns: Hotspot page.
-    """
-    @autopilot.logging.log_action(logger.debug)
-    def disable_hotspot(self):
-        hotspot_page = self._enter_hotspot()
-        hotspot_page.disable_hotspot()
-        return hotspot_page
-
-    @autopilot.logging.log_action(logger.debug)
-    def _enter_hotspot(self):
-        obj = self.wait_select_single(objectName="hotspotEntry")
-        self.pointing_device.click_object(obj)
-        return self.get_root_instance().wait_select_single(
-            objectName='hotspotPage')
-
-
-class Hotspot(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
+class HotspotPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
 
     """Autopilot helper for Hotspot page."""
 
@@ -398,7 +363,23 @@ class Hotspot(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
 
     @autopilot.logging.log_action(logger.debug)
     def enable_hotspot(self):
-        self._switch.check()
+        # We assume that the following AssertionError is due to the panel
+        # instantly setting checked to False, prompting the user to turn on
+        # Wi-Fi instead.
+        try:
+            self._switch.check(timeout=2)
+        except AssertionError:
+            pass
+
+        try:
+            prompt = self.get_root_instance().wait_select_single(
+                objectName='enableWifiDialog')
+        except StateNotFoundError:
+            prompt = None
+
+        if prompt:
+            prompt.confirm_enable()
+            prompt.wait_until_destroyed(timeout=5)
 
     @autopilot.logging.log_action(logger.debug)
     def disable_hotspot(self):
@@ -406,15 +387,18 @@ class Hotspot(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
 
     @autopilot.logging.log_action(logger.debug)
     def setup_hotspot(self, config):
-        obj = self.select_single(objectName='hotspotSetupEntry')
+        obj = self.select_single(objectName='hotspotSetupButton')
         self.pointing_device.click_object(obj)
         setup = self.get_root_instance().wait_select_single(
             objectName='hotspotSetup')
         if config:
             if 'ssid' in config:
                 setup.set_ssid(config['ssid'])
+            if 'auth' in config:
+                setup.set_auth(config['auth'])
             if 'password' in config:
                 setup.set_password(config['password'])
+        utils.dismiss_osk()
         setup.enable()
         if setup:
             setup.wait_until_destroyed()
@@ -422,6 +406,28 @@ class Hotspot(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
     @autopilot.logging.log_action(logger.debug)
     def get_hotspot_status(self):
         return self._switch.checked
+
+    @autopilot.logging.log_action(logger.debug)
+    def get_hotspot_possible(self):
+        return self._switch.enabled
+
+
+class HotspotEnableWifiDialog(
+        ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
+    """Autopilot helper for the 'Turn on Wi-Fi' dialog in hotspot panel."""
+
+    @classmethod
+    def validate_dbus_object(cls, path, state):
+        name = introspection.get_classname_from_path(path)
+        if name == b'Dialog':
+            if state['objectName'][1] == 'enableWifiDialog':
+                return True
+        return False
+
+    @autopilot.logging.log_action(logger.debug)
+    def confirm_enable(self):
+        button = self.select_single('Button', objectName='confirmEnable')
+        self.pointing_device.click_object(button)
 
 
 class HotspotSetup(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
@@ -453,6 +459,11 @@ class HotspotSetup(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
         return self.wait_select_single(
             'Button', objectName='confirmButton')
 
+    @property
+    def _password_required_check(self):
+        return self.wait_select_single(
+            'CheckBox', objectName='passwordRequiredToggle')
+
     @autopilot.logging.log_action(logger.debug)
     def set_ssid(self, ssid):
         self._ssid_field.write(ssid)
@@ -460,6 +471,13 @@ class HotspotSetup(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
     @autopilot.logging.log_action(logger.debug)
     def set_password(self, password):
         self._password_field.write(password)
+
+    @autopilot.logging.log_action(logger.debug)
+    def set_auth(self, auth):
+        if auth == 'wpa-psk':
+            self._password_required_check.check()
+        else:
+            self._password_required_check.uncheck()
 
     @autopilot.logging.log_action(logger.debug)
     def enable(self):
@@ -876,7 +894,7 @@ class PhonePage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
         return page
 
     def _click_item(self, object_name):
-        item = self.select_single(objectName=object_name)
+        item = self.wait_select_single(objectName=object_name)
         item.swipe_into_view()
         self.pointing_device.click_object(item)
 
@@ -1382,8 +1400,8 @@ class LanguagePage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
         return False
 
     def get_current_language(self):
-        return self.select_single(
-            'Label', objectName='currentLanguage').currentLanguage
+        return self.wait_select_single(
+            objectName='currentLanguage').currentLanguage
 
     def _click_change_display_language(self):
         item = self.select_single(objectName='displayLanguage')

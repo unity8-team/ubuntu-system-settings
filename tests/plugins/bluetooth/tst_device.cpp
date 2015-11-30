@@ -36,7 +36,7 @@ private:
     QDBusConnection *m_dbus;
 
 private:
-    void checkAudioState(const QString &expected);
+    void processEvents(unsigned int msecs = 500);
 
 private Q_SLOTS:
     void init();
@@ -50,17 +50,29 @@ private Q_SLOTS:
     void testGetStrength();
     void testGetPath();
     void testMakeTrusted();
-    void testDiscoverServices();
-    
+    void testConnect();
+    void testDisconnect();
+
     void cleanup();
 
 };
 
+void DeviceTest::processEvents(unsigned int msecs)
+{
+    QTimer::singleShot(msecs, [=]() { QCoreApplication::instance()->exit(); });
+    QCoreApplication::instance()->exec();
+}
+
 void DeviceTest::init()
 {
+    qDBusRegisterMetaType<InterfaceList>();
+    qDBusRegisterMetaType<ManagedObjectList>();
+
     m_bluezMock = new FakeBluez();
     m_bluezMock->addAdapter("new0", "bluetoothTest");
     m_bluezMock->addDevice("My Phone", "00:00:de:ad:be:ef");
+    // Only this will set the 'Class' and 'Icon' properties for the device ...
+    m_bluezMock->pairDevice("00:00:de:ad:be:ef");
     m_dbus = new QDBusConnection(m_bluezMock->dbus());
 
     QList<QString> devices = m_bluezMock->devices();
@@ -68,6 +80,8 @@ void DeviceTest::init()
         QFAIL("No devices in mock to be tested.");
 
     m_device = new Device(devices.first(), *m_dbus);
+
+    processEvents();
 }
 
 void DeviceTest::cleanup()
@@ -78,29 +92,37 @@ void DeviceTest::cleanup()
 
 void DeviceTest::testGetName()
 {
-    QCOMPARE(m_device->getName(), "My Phone");
+    QCOMPARE(m_device->getName(), QString("My Phone"));
 }
 
-void DeviceTest::testAddress()
+void DeviceTest::testGetAddress()
 {
-    QCOMPARE(m_device->getAddress(), "00:00:de:ad:be:ef");
+    QCOMPARE(m_device->getAddress(), QString("00:00:de:ad:be:ef"));
 }
 
-void DeviceTest::testIconName()
+void DeviceTest::testGetIconName()
 {
-    QCOMPARE(m_device->getIconName(), "image://theme/audio-headset");
+    QCOMPARE(m_device->getIconName(), QString("image://theme/phone-smartphone-symbolic"));
 }
 
 void DeviceTest::testGetType()
 {
-    QCOMPARE(m_device->getType(), Device::Type::Headset);
+    QCOMPARE(m_device->getType(), Device::Type::Smartphone);
 }
 
 void DeviceTest::testIsPaired()
 {
+    QCOMPARE(m_device->isPaired(), true);
+
+    m_bluezMock->setProperty("/org/bluez/new0/dev_00_00_DE_AD_BE_EF", "org.bluez.Device1", "Paired", QVariant(false));
+
+    processEvents();
+
     QCOMPARE(m_device->isPaired(), false);
 
-    m_bluezMock->setProperty("org.bluez.Device", "Paired", QVariant(true));
+    m_bluezMock->setProperty("/org/bluez/new0/dev_00_00_DE_AD_BE_EF", "org.bluez.Device1", "Paired", QVariant(true));
+
+    processEvents();
 
     QCOMPARE(m_device->isPaired(), true);
 }
@@ -109,26 +131,28 @@ void DeviceTest::testIsTrusted()
 {
     QCOMPARE(m_device->isTrusted(), false);
 
-    m_bluezMock->setProperty("org.bluez.Device", "Trusted", QVariant(true));
+    m_bluezMock->setProperty("/org/bluez/new0/dev_00_00_DE_AD_BE_EF", "org.bluez.Device1", "Trusted", QVariant(true));
+
+    processEvents();
 
     QCOMPARE(m_device->isTrusted(), true);
 }
 
 void DeviceTest::testGetConnection()
 {
-    QCOMPARE(m_device.getConnection(), Device::Connection::Disconnected);
+    QCOMPARE(m_device->getConnection(), Device::Connection::Disconnected);
 }
 
 void DeviceTest::testGetStrength()
 {
-    QCOMPARE(m_device.getStrength(), Device::Strength::Good);
+    QCOMPARE(m_device->getStrength(), Device::Strength::Fair);
 }
 
 void DeviceTest::testGetPath()
 {
-    QCOMPARE(m_device.getPath(),
-             "/org/bluez/" + m_bluezMock->currentAdapter() + "/"
-             + "dev_00_00_de_ad_be_ef");
+    QCOMPARE(m_device->getPath(),
+             m_bluezMock->currentAdapterPath() + "/"
+             + "dev_00_00_DE_AD_BE_EF");
 }
 
 void DeviceTest::testMakeTrusted()
@@ -137,61 +161,40 @@ void DeviceTest::testMakeTrusted()
 
     m_device->makeTrusted(true);
 
+    processEvents();
+
     QCOMPARE(m_device->isTrusted(), true);
 
     m_device->makeTrusted(false);
 
+    processEvents();
+
     QCOMPARE(m_device->isTrusted(), false);
-}
-
-void DeviceTest::checkAudioState(const QString &expected)
-{
-    QVariant state = m_bluezMock->getProperty("org.bluez.Audio", "State");
-
-    QVERIFY(state.type() == QMetaType::QString);
-    QCOMPARE(state.toString(), expected);
-}
-
-void DeviceTest::testDiscoverServices()
-{
-    m_device->discoverServices();
-
-    QVariant state = m_bluezMock->getProperty("org.bluez.Audio", "State");
-
-    checkAudioState("disconnected");
 }
 
 void DeviceTest::testConnect()
 {
-    testDiscoverServices();
+    m_device->connect();
 
-    m_device->connect(Device::ConnectionMode::Audio);
+    m_bluezMock->connectDevice("00:00:de:ad:be:ef");
 
-    checkAudioState("connected");
+    processEvents();
+
+    QCOMPARE(m_device->getConnection(), Device::Connected);
 }
 
 void DeviceTest::testDisconnect()
 {
     testConnect();
 
-    m_device->disconnect(Device::ConnectionMode::Audio);
+    m_device->disconnect();
 
-    checkAudioState("disconnected");
+    m_bluezMock->disconnectDevice("00:00:de:ad:be:ef");
+
+    processEvents();
+
+    QCOMPARE(m_device->getConnection(), Device::Disconnected);
 }
 
-void DeviceTest::testConnectPending()
-{
-    testIsPaired();
-    testIsTrusted();
-
-    m_device->addConnectAfterPairing(Device::ConnectionMode::Audio);
-
-    checkAudioState("disconnected");
-
-    m_device->connectPending();
-
-    checkAudioState("connected");
-}
-
-QTEST_MAIN(DeviceTest);
+QTEST_MAIN(DeviceTest)
 #include "tst_device.moc"

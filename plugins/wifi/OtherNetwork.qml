@@ -14,12 +14,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import QtQuick 2.0
+import QtQuick 2.4
 import QtQuick.Layouts 1.1
 import SystemSettings 1.0
-import Ubuntu.Components 0.1
-import Ubuntu.Components.ListItems 0.1 as ListItem
-import Ubuntu.Components.Popups 0.1
+import Ubuntu.Components 1.3
+import Ubuntu.Components.ListItems 1.3 as ListItem
+import Ubuntu.Components.Popups 1.3
 import Ubuntu.SystemSettings.Wifi 1.0
 import QMenuModel 0.1
 
@@ -38,18 +38,22 @@ Component {
             if (networkname.length === 0) {
                 return false;
             }
-            if (securityList.selectedIndex === 0) {
-                return true
+            switch (securityList.selectedIndex) {
+                case 1: // WPA
+                    return password.length >= 8 || password.length >= 64;
+                case 2: // WPA Enterprise
+                case 4: // Dynamic WEP
+                case 5: // LEAP
+                    return password.length > 0 && username.length > 0;
+                case 3: // WEP
+                    return password.length === 5  ||
+                           password.length === 10 ||
+                           password.length === 13 ||
+                           password.length === 26;
+                case 0: // None
+                default:
+                    return true;
             }
-            if (securityList.selectedIndex === 3) {
-                // WEP
-                return password.length === 5  ||
-                       password.length === 10 ||
-                       password.length === 13 ||
-                       password.length === 26;
-            }
-            //WPA
-            return password.length >= 8
         }
 
         function filePicker (type) {

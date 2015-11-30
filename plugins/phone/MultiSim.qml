@@ -18,11 +18,11 @@
  * Jonas G. Drange <jonas.drange@canonical.com>
  *
 */
-import QtQuick 2.0
+import QtQuick 2.4
 import GSettings 1.0
 import SystemSettings 1.0
-import Ubuntu.Components 1.1
-import Ubuntu.Components.ListItems 0.1 as ListItem
+import Ubuntu.Components 1.3
+import Ubuntu.Components.ListItems 1.3 as ListItem
 
 Column {
 
@@ -51,17 +51,7 @@ Column {
                 objectName: "callFwdSim" + index
                 text: i18n.tr("Call forwarding")
                 progression: true
-                value: {
-                    if (sims[index].callForwarding.voiceUnconditional) {
-                        return i18n.tr("All calls");
-                    } else if (sims[index].callForwarding.voiceBusy ||
-                               sims[index].callForwarding.voiceNoReply ||
-                               sims[index].callForwarding.voiceNotReachable) {
-                        return i18n.tr("Some calls")
-                    } else {
-                        return i18n.tr("Off")
-                    }
-                }
+                value: sims[index].getCallForwardingSummary()
                 onClicked: pageStack.push(Qt.resolvedUrl("CallForwarding.qml"), {
                     sim: sims[index],
                     headerTitle: sims[index].title

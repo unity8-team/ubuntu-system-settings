@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 Canonical Ltd
+ * Copyright (C) 2013-2015 Canonical Ltd
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as
@@ -24,8 +24,9 @@
 #include <QObject>
 
 #include "agent.h"
-#include "agentadaptor.h"
 #include "devicemodel.h"
+
+#include "bluez_agent1adaptor.h"
 
 class Bluetooth : public QObject
 {
@@ -68,6 +69,7 @@ Q_SIGNALS:
     void poweredChanged(bool powered);
     void discoveringChanged(bool isActive);
     void discoverableChanged(bool isActive);
+    void devicePairingDone(Device *device, bool success);
 
 public:
     explicit Bluetooth(QObject *parent = nullptr);
@@ -84,6 +86,7 @@ public:
     Q_INVOKABLE void stopDiscovery();
     Q_INVOKABLE static bool isSupportedType(const int type);
     Q_INVOKABLE void trySetDiscoverable(bool discoverable);
+    Q_INVOKABLE void resetSelectedDevice();
 
 public:
     Agent * getAgent();
