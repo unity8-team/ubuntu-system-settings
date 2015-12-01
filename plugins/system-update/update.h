@@ -57,6 +57,7 @@ class Update : public QObject
     Q_PROPERTY(QString downloadUrl READ downloadUrl NOTIFY downloadUrlChanged)
     Q_PROPERTY(QString clickToken READ clickToken NOTIFY clickTokenChanged)
     Q_PROPERTY(QString downloadSha512 READ downloadSha512 NOTIFY downloadSha512Changed)
+    Q_PROPERTY(QString changelog READ changelog WRITE setChangelog NOTIFY changelogChanged)
 
 Q_SIGNALS:
     void systemUpdateChanged();
@@ -76,6 +77,7 @@ Q_SIGNALS:
     void clickTokenChanged();
     void packageNameChanged();
     void downloadSha512Changed();
+    void changelogChanged();
 
 public:
     explicit Update(QObject *parent = 0);
@@ -99,6 +101,7 @@ public:
     QString downloadUrl() { return m_downloadUrl; }
     QString clickToken() { return m_clickToken; }
     QString downloadSha512() { return m_download_sha512; }
+    QString changelog() { return m_changelog; }
 
     void setSystemUpdate(bool isSystem);
     void initializeApplication(QString packagename, QString title,
@@ -118,6 +121,7 @@ public:
     void setDownloadUrl(const QString &url);
     void setClickToken(const QString &token) { m_clickToken = token; Q_EMIT clickTokenChanged(); }
     void setDownloadSha512(const QString &sha512) { m_download_sha512 = sha512; Q_EMIT downloadSha512Changed(); }
+    void setChangelog(const QString &changelog) { m_changelog = changelog; Q_EMIT changelogChanged(); }
 
 private:
     int m_binary_filesize;
@@ -138,6 +142,7 @@ private:
     bool m_update_ready;
     bool m_update_state;
     QString m_download_sha512;
+    QString m_changelog;
 
     bool getIgnoreUpdates();
 };

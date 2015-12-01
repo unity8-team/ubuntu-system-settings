@@ -231,6 +231,7 @@ void Network::onUpdatesCheckFinished()
             auto icon_url = object["icon_url"].toString();
             auto url = object["download_url"].toString();
             auto download_sha512 = object["download_sha512"].toString();
+            auto changelog = object["changelog"].toString();
             auto size = object["binary_filesize"].toInt();
             if (m_apps.contains(name)) {
                 m_apps[name]->setRemoteVersion(version);
@@ -239,6 +240,7 @@ void Network::onUpdatesCheckFinished()
                     m_apps[name]->setDownloadUrl(url);
                     m_apps[name]->setBinaryFilesize(size);
                     m_apps[name]->setDownloadSha512(download_sha512);
+                    m_apps[name]->setChangelog(changelog);
                     updates = true;
                 }
             }
