@@ -24,8 +24,9 @@
 #include <QObject>
 
 #include "agent.h"
-#include "agentadaptor.h"
 #include "devicemodel.h"
+
+#include "bluez_agent1adaptor.h"
 
 class Bluetooth : public QObject
 {
@@ -68,6 +69,7 @@ Q_SIGNALS:
     void poweredChanged(bool powered);
     void discoveringChanged(bool isActive);
     void discoverableChanged(bool isActive);
+    void devicePairingDone(Device *device, bool success);
 
 public:
     explicit Bluetooth(QObject *parent = nullptr);

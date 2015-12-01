@@ -32,10 +32,10 @@
 #define BLUEZ_MAIN_OBJECT "/"
 #define BLUEZ_MOCK_IFACE "org.bluez.Mock"
 
-#define BLUEZ_MANAGER_IFACE "org.bluez.Manager"
-#define BLUEZ_ADAPTER_IFACE "org.bluez.Adapter"
-#define BLUEZ_DEVICE_IFACE "org.bluez.Device"
-#define BLUEZ_AUDIO_IFACE "org.bluez.Audio"
+#define BLUEZ_ADAPTER_IFACE "org.bluez.Adapter1"
+#define BLUEZ_DEVICE_IFACE "org.bluez.Device1"
+
+#define FREEDESKTOP_PROPERTIES_IFACE "org.freedesktop.DBus.Properties"
 
 using namespace QtDBusTest;
 using namespace QtDBusMock;
@@ -61,17 +61,20 @@ public:
 
     ~FakeBluez();
 
-    const QString currentAdapter() { return m_currentAdapter; }
+    const QString currentAdapterPath() { return QString("/org/bluez/%1").arg(m_currentAdapter); }
     const QList<QString> devices() { return m_devices; }
     const QDBusConnection & dbus() { return m_dbusTestRunner.systemConnection(); }
 
     QString addAdapter(const QString &name, const QString &system_name);
     QString addDevice(const QString &name, const QString &address);
+    void pairDevice(const QString &address);
+    void connectDevice(const QString &address);
+    void disconnectDevice(const QString &address);
 
     QVariant getProperty(const QString &path,
                          const QString &interface,
                          const QString &property);
-    
+
     void setProperty(const QString &path,
                      const QString &interface,
                      const QString &property,

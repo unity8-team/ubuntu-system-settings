@@ -1,3 +1,46 @@
+ubuntu-system-settings (0.3+16.04.20151127.2-0ubuntu1) xenial; urgency=medium
+
+  * Capture values by reference in the lambda (LP: #1517254, #1519046)
+  * Ensure we don't add duplicate updates to the model (LP: #1519971)
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Fri, 27 Nov 2015 20:05:44 +0000
+
+ubuntu-system-settings (0.3+16.04.20151124-0ubuntu1) xenial; urgency=medium
+
+  [ CI Train Bot ]
+  * New rebuild forced.
+
+  [ Ken VanDine ]
+  * Allow setting custom ringtone with content-hub (LP: #1268097)
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Tue, 24 Nov 2015 11:09:44 +0000
+
+ubuntu-system-settings (0.3+16.04.20151120-0ubuntu1) xenial; urgency=medium
+
+  * Ported the Bluetooth plugin to the changed BlueZ API which comes
+    with version 5.x. The overall device management gets a lot more
+    reliable with this. Superfluous code was dropped when possible. Also
+    the unit tests got a rework and all pass now. (LP: #1499789)
+
+ -- Simon Fels <simon.busch@canonical.com>  Fri, 20 Nov 2015 08:48:52 +0000
+
+ubuntu-system-settings (0.3+16.04.20151110-0ubuntu1) xenial; urgency=medium
+
+  [ Alejandro J. Cura ]
+  * If a system package gets updated by the user, only show the user's
+    copy (LP: #1265250)
+
+  [ Bartosz Kosiorek ]
+  * Allow translating "Unavailable" string (LP: #1511384) (LP: #1511384)
+
+  [ Ken VanDine ]
+  * Don't check for updates if not online (LP: #1505663)
+
+  [ Michael Zanetti ]
+  * Only animate ActivityIndicators when they are visible (LP: #1513450)
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Tue, 10 Nov 2015 15:27:33 +0000
+
 ubuntu-system-settings (0.3+16.04.20151109-0ubuntu1) xenial; urgency=medium
 
   [ jonas-drange ]
