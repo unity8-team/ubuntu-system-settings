@@ -1,10 +1,16 @@
+import argparse
 import json
-import logging
+import sys
 import threading
 
+from datetime import datetime
 from http.server import BaseHTTPRequestHandler, HTTPServer
 
-logger = logging.getLogger(__name__)
+
+def log(msg):
+    fd = sys.stdout
+    fd.write('%s %s\n' % (datetime.now().strftime('%H:%M:%S'), msg))
+    fd.flush()
 
 
 class Handler(BaseHTTPRequestHandler):
@@ -40,10 +46,12 @@ class Handler(BaseHTTPRequestHandler):
 class Manager(object):
 
     # TODO: Use server_port=0
-    def __init__(self, server_address='', server_port=9009, responses={}):
+    def __init__(self, server_address='', server_port=9009, responses={},
+                 cmdline=False):
         """Creates and initializes a Manager object. If there's an asterisk
         in the responses dict, it's used to handle all paths."""
         self._thread = None
+        self._cmdline = cmdline
         if not responses:
             responses = {
                 '*': [{
@@ -61,7 +69,7 @@ class Manager(object):
             }
         self._httpd = HTTPServer((server_address, server_port), Handler)
         self._httpd.responses = responses
-        logger.debug('Created mock update click server.')
+        log('Created mock update click server.')
 
     def is_running(self):
         return self._thread.is_alive()
@@ -69,11 +77,22 @@ class Manager(object):
     def start(self):
         self._thread = threading.Thread(target=self._httpd.serve_forever)
         self._thread.start()
-        logger.debug(
-            'Started mock update click server on %s:%d.' % (
+        log(
+            'Started mock update click server on http://%s:%d.' % (
                 self._httpd.server_address
             )
         )
+
+        # If the command line is the caller, wait for the keyboard interrupt.
+        # TODO: infer this by checking sys?
+        if self._cmdline:
+            print('Ctrl-C stops this server.')
+            try:
+                while self.is_running():
+                    self._thread.join(5)
+            except (KeyboardInterrupt, SystemExit):
+                print('')
+                self.stop()
 
     def stop(self):
         self._httpd.shutdown()
@@ -81,4 +100,47 @@ class Manager(object):
         self._thread.join(timeout=10.0)
         if self.is_running():
             raise 'Failed to stop server'
-        logger.debug('Stopped mock update click server.')
+        log('Stopped mock update click server.')
+
+
+def parse_args():
+    parser = argparse.ArgumentParser(description='mock click update server')
+
+    parser.add_argument('-a', '--address', default='localhost',
+                        help='address of server (default: localhost)')
+    parser.add_argument('-p', '--port', type=int, default=9009,
+                        help='port of server (default: 9009)')
+
+    parser.add_argument('-r', '--responses',
+                        help='JSON dictionary of path to responses. '
+                             'Passing a * (asteriks) path will used '
+                             'in all responses.')
+
+    args = parser.parse_args()
+
+    return args
+
+
+if __name__ == '__main__':
+    args = parse_args()
+
+    responses = None
+    if args.responses:
+        try:
+            responses = json.loads(args.responses)
+        except ValueError as detail:
+            sys.stderr.write('Malformed JSON given for '
+                             'responses: %s\n' % detail)
+            sys.exit(2)
+
+        if not isinstance(responses, dict):
+            sys.stderr.write('JSON responses must be a dictionary\n')
+            sys.exit(2)
+
+    man = Manager(
+        server_address=args.address,
+        server_port=args.port,
+        responses=responses,
+        cmdline=True)
+
+    man.start()
