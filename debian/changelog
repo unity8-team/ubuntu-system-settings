@@ -1,3 +1,13 @@
+ubuntu-system-settings (0.3+16.04.20151201-0ubuntu1) xenial; urgency=medium
+
+  [ jonas-drange ]
+  * Refactored mock click update server since it was not already in use,
+    and made use of it in the system udpates autopilot tests. Removed
+    assertion that assumed that the 'SEARCHING' state would last longer
+    than n seconds.
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Tue, 01 Dec 2015 17:55:33 +0000
+
 ubuntu-system-settings (0.3+16.04.20151127.2-0ubuntu1) xenial; urgency=medium
 
   * Capture values by reference in the lambda (LP: #1517254, #1519046)
