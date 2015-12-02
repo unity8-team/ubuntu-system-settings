@@ -77,6 +77,7 @@ ItemPage {
             backendInfo.incomingMessageSound = path
         }
         soundFileNames = refreshSoundFileNames()
+        previewTimer.start()
         soundEffect.source = path
         soundEffect.play()
     }
@@ -172,6 +173,12 @@ ItemPage {
             visible: stopButton.visible
             color: Theme.palette.normal.background
         }
+    }
+
+    Timer {
+        id: previewTimer
+        onTriggered: soundEffect.stop()
+        interval: 30000
     }
 
     Connections {
