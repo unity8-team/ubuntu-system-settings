@@ -1,3 +1,15 @@
+ubuntu-system-settings (0.3+16.04.20151203-0ubuntu1) xenial; urgency=medium
+
+  [ Ken VanDine ]
+  * Don't animate the ActivityIndicator when it's not visible (LP:
+    #1460945)
+
+  [ jonas-drange ]
+  * change single quotes in i18n.tr to double quotes as the parser does
+    not like single quotes (LP: #1518732)
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Thu, 03 Dec 2015 19:00:42 +0000
+
 ubuntu-system-settings (0.3+16.04.20151201-0ubuntu1) xenial; urgency=medium
 
   [ jonas-drange ]
