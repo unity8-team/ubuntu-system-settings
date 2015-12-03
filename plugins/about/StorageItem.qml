@@ -31,6 +31,6 @@ Item {
     ActivityIndicator {
         anchors.right: parent.right
         visible: !ready
-        running: true
+        running: visible
     }
 }
