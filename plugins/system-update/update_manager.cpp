@@ -41,6 +41,8 @@ using namespace UbuntuOne;
     #define CHECK_CREDENTIALS "CHECK_CREDENTIALS"
 #endif
 
+const QString TEST_APP = "com.ubuntu.developer.testclick";
+
 namespace UpdatePlugin {
 
 UpdateManager *UpdateManager::m_instance = 0;
@@ -153,6 +155,14 @@ void UpdateManager::checkUpdates()
     m_apps.clear();
     Q_EMIT modelChanged();
     bool enabled = enableAutopilotMode();
+
+    // If we're in testing mode, always consider updates for TEST_APP
+    if (enabled) {
+        Update *app = new Update();
+        app->initializeApplication(TEST_APP, QString("Test App"), QString("1.0"));
+        m_apps.insert(app->getPackageName(), app);
+    }
+
     if (getCheckForCredentials()) {
         m_systemUpdate.checkForUpdate();
         m_service.getCredentials();

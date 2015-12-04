@@ -1,34 +1,27 @@
+import argparse
 import json
+import sys
 import threading
+
+from datetime import datetime
 from http.server import BaseHTTPRequestHandler, HTTPServer
 
 
-KEEP_ALIVE = True
+def log(msg):
+    fd = sys.stdout
+    fd.write('%s %s\n' % (datetime.now().strftime('%H:%M:%S'), msg))
+    fd.flush()
 
 
-class MyHandler(BaseHTTPRequestHandler):
+class Handler(BaseHTTPRequestHandler):
+
+    responses = {}
 
     def do_HEAD(self):
+        """Sends headers.."""
         self.send_response(200)
         self.send_header("X-Click-Token", "X-Click-Token")
         self.end_headers()
-
-    def response_item_info(self):
-        response = [{
-            "name": "com.ubuntu.calculator",
-            "version": "9.0",
-            "icon_url": ("https://raw.githubusercontent.com/ninja-ide/"
-                         "ninja-ide/master/ninja_ide/img/ninja_icon.png"),
-            "download_url": ("https://public.apps.ubuntu.com/download/com."
-                             "ubuntu/calculator/com.ubuntu.calculator_1"
-                             ".3.329_all.click"),
-            "binary_filesize": 3423,
-            "download_sha512": "343244fsdfdsffs"
-        }]
-        self.send_response(200)
-        self.send_header("Content-type", "application/json")
-        self.end_headers()
-        self.wfile.write(bytes(json.dumps(response), 'UTF-8'))
 
     def do_POST(self):
         """Respond to a POST request."""
@@ -36,25 +29,118 @@ class MyHandler(BaseHTTPRequestHandler):
 
     def do_GET(self):
         """Respond to a GET request."""
-        if self.path.find("iteminfo/") != -1:
-            self.response_item_info()
-        elif self.path.find("shutdown") != -1:
-            global KEEP_ALIVE
-            KEEP_ALIVE = False
+        if '*' in self.server.responses:
+            response = self.server.responses['*']
+        else:
+            response = self.server.responses[self.path]
+        self.send_response(200)
+        self.send_header("Content-type", "application/json")
+        self.end_headers()
+        try:
+            self.wfile.write(json.dumps(response).encode('utf-8'))
+        except BrokenPipeError:
+            # System Settings shut down before we finished up. Log and ignore.
+            self.log_message('Server was interrupted.')
 
 
-def run_click_server():
-    server_address = ('', 8000)
-    httpd = HTTPServer(server_address, MyHandler)
-    global KEEP_ALIVE
-    print('start')
-    while KEEP_ALIVE:
-        httpd.handle_request()
+class Manager(object):
+
+    # TODO: Use server_port=0
+    def __init__(self, server_address='', server_port=9009, responses={},
+                 cmdline=False):
+        """Creates and initializes a Manager object. If there's an asterisk
+        in the responses dict, it's used to handle all paths."""
+        self._thread = None
+        self._cmdline = cmdline
+        if not responses:
+            responses = {
+                '*': [{
+                    "name": "com.ubuntu.developer.testclick",
+                    "version": "2.0",
+                    "icon_url": (
+                        "https://raw.githubusercontent.com/ninja-ide/"
+                        "ninja-ide/master/ninja_ide/img/ninja_icon.png"
+                    ),
+                    "download_url": ("http://localhost:9009/download"),
+                    "binary_filesize": 9000,
+                    "download_sha512": "1232223sdfdsffs",
+                    "changelog": "New version!"
+                }]
+            }
+        self._httpd = HTTPServer((server_address, server_port), Handler)
+        self._httpd.responses = responses
+        log('Created mock update click server.')
+
+    def is_running(self):
+        return self._thread.is_alive()
+
+    def start(self):
+        self._thread = threading.Thread(target=self._httpd.serve_forever)
+        self._thread.start()
+        log(
+            'Started mock update click server on http://%s:%d.' % (
+                self._httpd.server_address
+            )
+        )
+
+        # If the command line is the caller, wait for the keyboard interrupt.
+        # TODO: infer this by checking sys?
+        if self._cmdline:
+            print('Ctrl-C stops this server.')
+            try:
+                while self.is_running():
+                    self._thread.join(5)
+            except (KeyboardInterrupt, SystemExit):
+                print('')
+                self.stop()
+
+    def stop(self):
+        self._httpd.shutdown()
+        self._httpd.server_close()
+        self._thread.join(timeout=10.0)
+        if self.is_running():
+            raise 'Failed to stop server'
+        log('Stopped mock update click server.')
 
 
-def run_mocked_settings():
-    t = threading.Thread(target=run_click_server)
-    t.start()
+def parse_args():
+    parser = argparse.ArgumentParser(description='mock click update server')
+
+    parser.add_argument('-a', '--address', default='localhost',
+                        help='address of server (default: localhost)')
+    parser.add_argument('-p', '--port', type=int, default=9009,
+                        help='port of server (default: 9009)')
+
+    parser.add_argument('-r', '--responses',
+                        help='JSON dictionary of path to responses. '
+                             'Passing a * (asteriks) path will used '
+                             'in all responses.')
+
+    args = parser.parse_args()
+
+    return args
 
 
-run_mocked_settings()
+if __name__ == '__main__':
+    args = parse_args()
+
+    responses = None
+    if args.responses:
+        try:
+            responses = json.loads(args.responses)
+        except ValueError as detail:
+            sys.stderr.write('Malformed JSON given for '
+                             'responses: %s\n' % detail)
+            sys.exit(2)
+
+        if not isinstance(responses, dict):
+            sys.stderr.write('JSON responses must be a dictionary\n')
+            sys.exit(2)
+
+    man = Manager(
+        server_address=args.address,
+        server_port=args.port,
+        responses=responses,
+        cmdline=True)
+
+    man.start()
