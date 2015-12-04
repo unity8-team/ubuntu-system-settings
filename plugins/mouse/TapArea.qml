@@ -55,7 +55,6 @@ Item {
         id: doubleTapButton
         objectName: "doubleTapButton"
         text: "😴"
-        pressed: clickTimer.running
         height: parent.height
         width: height
         enabled: !safetyDelayTimer.running
