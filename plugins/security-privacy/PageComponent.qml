@@ -53,6 +53,14 @@ ItemPage {
         });
         return t;
     }
+    property var pluginOptions
+    onPluginOptionsChanged: {
+        if (pluginOptions['service']) {
+            var page = pageStack.push(Qt.resolvedUrl("AppAccess.qml"), {pluginManager: pluginManager})
+            page.openService(pluginOptions['service'])
+        }
+    }
+
 
     UbuntuDiagnostics {
         id: diagnosticsWidget
