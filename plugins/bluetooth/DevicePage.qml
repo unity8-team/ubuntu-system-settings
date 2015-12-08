@@ -58,6 +58,7 @@ Page {
         case Device.Mouse:      return i18n.tr("Mouse");
         case Device.Printer:    return i18n.tr("Printer");
         case Device.Camera:     return i18n.tr("Camera");
+        case Device.Watch:      return i18n.tr("Watch");
         default:                return i18n.tr("Other");
         }
     }
@@ -180,7 +181,7 @@ Page {
                         pageStack.pop();
                     }
                     visible: backend.selectedDevice ? true : false
-                    enabled: backend.selectedDevice ? backend.isSupportedType(backend.selectedDevice.type) : false
+                    enabled: backend.selectedDevice && backend.powered ? (backend.isSupportedType(backend.selectedDevice.type) || backend.selectedDevice.connection != Device.Disconnected) : false
                 }
             }
             ListItem.SingleControl {
@@ -192,7 +193,7 @@ Page {
                         backend.resetSelectedDevice();
                         pageStack.pop();
                     }
-                    enabled: backend.selectedDevice && backend.selectedDevice.path.length > 0 ? true : false
+                    enabled: backend.selectedDevice && backend.selectedDevice.path.length > 0 && backend.selectedDevice.paired ? true : false
                 }
             }
         }

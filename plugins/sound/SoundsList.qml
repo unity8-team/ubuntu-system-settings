@@ -2,6 +2,7 @@ import GSettings 1.0
 import QtQuick 2.4
 import QtMultimedia 5.0
 import SystemSettings 1.0
+import Ubuntu.Content 1.3
 import Ubuntu.Components 1.3
 import Ubuntu.Components.ListItems 1.3 as ListItem
 import Ubuntu.SystemSettings.Sound 1.0
@@ -12,13 +13,25 @@ import "utilities.js" as Utilities
 ItemPage {
     property variant soundDisplayNames:
         Utilities.buildSoundValues(soundFileNames)
-    property variant soundFileNames: backendInfo.listSounds(
-        [soundsDir, "/custom" + soundsDir])
+    property variant soundFileNames: refreshSoundFileNames()
     property bool showStopButton: false
     property int soundType // 0: ringtone, 1: message
     property string soundsDir
+    property var activeTransfer
+
+    onSoundFileNamesChanged: {
+        soundDisplayNames = Utilities.buildSoundValues(soundFileNames)
+        updateSelectedIndex()
+    }
 
     id: soundsPage
+    flickable: scrollWidget
+
+    function refreshSoundFileNames() {
+        if (soundType === 0)
+            return backendInfo.listSounds([soundsDir, "/custom" + soundsDir, backendInfo.customRingtonePath])
+        return backendInfo.listSounds([soundsDir, "/custom" + soundsDir])
+    }
 
     UbuntuSoundPanel {
         id: backendInfo
@@ -55,52 +68,175 @@ ItemPage {
         audioRole: MediaPlayer.alert
     }
 
-    Column {
-        id: columnId
-        anchors.left: parent.left
-        anchors.right: parent.right
+    function setRingtone(path) {
+        if (soundType == 0) {
+            soundSettings.incomingCallSound = path
+            backendInfo.incomingCallSound = path
+        } else if (soundType == 1) {
+            soundSettings.incomingMessageSound = path
+            backendInfo.incomingMessageSound = path
+        }
+        soundFileNames = refreshSoundFileNames()
+        previewTimer.start()
+        soundEffect.source = path
+        soundEffect.play()
+    }
 
-        ListItem.SingleControl {
-            id: listId
-            control: Button {
-                text: i18n.tr("Stop playing")
-                width: parent.width - units.gu(4)
-                onClicked:
-                    soundEffect.stop()
+    function updateSelectedIndex() {
+        if (soundType == 0)
+            soundSelector.selectedIndex =
+                    Utilities.indexSelectedFile(soundFileNames,
+                        backendInfo.incomingCallSound)
+        else if (soundType == 1)
+            soundSelector.selectedIndex =
+                    Utilities.indexSelectedFile(soundFileNames,
+                        backendInfo.incomingMessageSound)
+    }
+
+    Flickable {
+        id: scrollWidget
+        anchors.fill: parent
+        contentWidth: parent.width
+        contentHeight: selectorColumn.height + stopItem.height
+        boundsBehavior: (contentHeight > height) ?
+                            Flickable.DragAndOvershootBounds :
+                            Flickable.StopAtBounds
+        /* Set the direction to workaround https://bugreports.qt-project.org/browse/QTBUG-31905
+           otherwise the UI might end up in a situation where scrolling doesn't work */
+        flickableDirection: Flickable.VerticalFlick
+
+        Column {
+            id: selectorColumn
+            anchors.left: parent.left
+            anchors.right: parent.right
+
+            ListItem.ItemSelector {
+                id: soundSelector
+                expanded: true
+                model: soundDisplayNames
+                selectedIndex: {
+                    updateSelectedIndex()
+                }
+                onDelegateClicked: {
+                    setRingtone(soundFileNames[index])
+                }
             }
+
+            ListItem.Standard {
+                id: customRingtone
+                text: i18n.tr("Custom Ringtone")
+                visible: soundType === 0
+                progression: true
+                onClicked: {
+                    pageStack.push(picker);
+                }
+            }
+        }
+    }
+
+    ListItem.SingleControl {
+        id: stopItem
+        anchors.bottom: parent.bottom
+        control: AbstractButton {
+            id: stopButton
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.horizontalCenter: parent.horizontalCenter
+            focus: false
+            width: height
+            height: units.gu(4)
             enabled: soundEffect.playbackState == Audio.PlayingState
-            visible: showStopButton
-        }
-    }
+            visible: enabled
 
-    ListItem.ItemSelector {
-        id: soundSelector
-        anchors.top: columnId.bottom
-        anchors.bottom: soundsPage.bottom
-        containerHeight: height
+            onClicked: soundEffect.stop()
 
-        expanded: true
-        model: soundDisplayNames
-        selectedIndex: {
-            if (soundType == 0)
-                soundSelector.selectedIndex =
-                        Utilities.indexSelectedFile(soundFileNames,
-                            backendInfo.incomingCallSound)
-            else if (soundType == 1)
-                soundSelector.selectedIndex =
-                        Utilities.indexSelectedFile(soundFileNames,
-                            backendInfo.incomingMessageSound)
-        }
-        onDelegateClicked: {
-            if (soundType == 0) {
-                soundSettings.incomingCallSound = soundFileNames[index]
-                backendInfo.incomingCallSound = soundFileNames[index]
-            } else if (soundType == 1) {
-                soundSettings.incomingMessageSound = soundFileNames[index]
-                backendInfo.incomingMessageSound = soundFileNames[index]
+            Rectangle {
+                anchors.fill: parent
+                radius: width * 0.5
+                border.color: UbuntuColors.warmGrey
+                border.width: 1
             }
-            soundEffect.source = soundFileNames[index]
-            soundEffect.play()
+
+            Rectangle {
+                width: parent.height * 0.4
+                height: width
+                smooth: true
+                anchors {
+                    verticalCenter: parent.verticalCenter
+                    horizontalCenter: parent.horizontalCenter
+                }
+                color: UbuntuColors.warmGrey
+            }
+        }
+        Rectangle {
+            anchors.fill: parent
+            z: parent.z - 1
+            visible: stopButton.visible
+            color: Theme.palette.normal.background
         }
     }
+
+    Timer {
+        id: previewTimer
+        onTriggered: soundEffect.stop()
+        interval: 30000
+    }
+
+    Connections {
+        id: contentHubConnection
+        property var ringtoneCallback
+        target: activeTransfer ? activeTransfer : null
+        onStateChanged: {
+            if (activeTransfer.state === ContentTransfer.Charged) {
+                if (activeTransfer.items.length > 0) {
+                    var item = activeTransfer.items[0];
+                    var toneUri;
+                    if (item.move(backendInfo.customRingtonePath)) {
+                        toneUri = item.url;
+                    } else {
+                        toneUri = backendInfo.customRingtonePath + "/" + item.url.toString().split("/").splice(-1,1);
+                    }
+                    ringtoneCallback(toneUri);
+                }
+            }
+        }
+    }
+
+    Page {
+        id: picker
+        visible: false
+        title: i18n.tr("Choose from")
+
+        ContentPeerPicker {
+            id: peerPicker
+            visible: parent.visible
+            handler: ContentHandler.Source
+            contentType: ContentType.Music
+            showTitle: false
+
+            onPeerSelected: {
+                pageStack.pop();
+                // requests an active transfer from peer
+                function startContentTransfer(callback) {
+                    if (callback)
+                        contentHubConnection.ringtoneCallback = callback
+                    var transfer = peer.request();
+                    if (transfer !== null) {
+                        soundsPage.activeTransfer = transfer;
+                    }
+                }
+                peer.selectionType = ContentTransfer.Single;
+                startContentTransfer(function(uri) {
+                    setRingtone(uri.toString().replace("file:///", "/"));
+                });
+            }
+
+            onCancelPressed: pageStack.pop();
+        }
+    }
+
+    ContentTransferHint {
+        anchors.fill: parent
+        activeTransfer: soundsPage.activeTransfer
+    }
+
 }

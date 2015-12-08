@@ -35,6 +35,9 @@ private:
     DeviceModel *m_devicemodel;
     QDBusConnection *m_dbus;
 
+private:
+    void processEvents(unsigned int msecs = 500);
+
 private Q_SLOTS:
     void init();
     void testDeviceFoundOnStart();
@@ -45,15 +48,28 @@ private Q_SLOTS:
 
 };
 
+void DeviceModelTest::processEvents(unsigned int msecs)
+{
+    QTimer::singleShot(msecs, [=]() { QCoreApplication::instance()->exit(); });
+    QCoreApplication::instance()->exec();
+}
+
 void DeviceModelTest::init()
 {
+    qDBusRegisterMetaType<InterfaceList>();
+    qDBusRegisterMetaType<ManagedObjectList>();
+
     m_bluezMock = new FakeBluez();
 
     m_bluezMock->addAdapter("new0", "bluetoothTest");
     m_bluezMock->addDevice("My Phone", "00:00:de:ad:be:ef");
+    // Only this will set the 'Class' and 'Icon' properties for the device ...
+    m_bluezMock->pairDevice("00:00:de:ad:be:ef");
 
     m_dbus = new QDBusConnection(m_bluezMock->dbus());
     m_devicemodel = new DeviceModel(*m_dbus);
+
+    processEvents();
 }
 
 void DeviceModelTest::cleanup()
@@ -64,6 +80,9 @@ void DeviceModelTest::cleanup()
 
 void DeviceModelTest::testDeviceFoundOnStart()
 {
+    // FIXME needs to take a bit more time especially on i386
+    processEvents();
+
     QCOMPARE(m_devicemodel->rowCount(), 1);
 }
 

@@ -157,10 +157,10 @@ ItemPage {
                 }
 
                 ListItem.ItemSelector {
-                    model: [i18n.tr('Internet and MMS'),
-                            i18n.tr('Internet'),
-                            i18n.tr('MMS'),
-                            i18n.tr('LTE'), ]
+                    model: [i18n.tr("Internet and MMS"),
+                            i18n.tr("Internet"),
+                            i18n.tr("MMS"),
+                            i18n.tr("LTE"), ]
                     id: typeSel
                     objectName: "typeSelector"
                     delegate: OptionSelectorDelegate {
