@@ -77,6 +77,7 @@ ItemPage {
             backendInfo.incomingMessageSound = path
         }
         soundFileNames = refreshSoundFileNames()
+        previewTimer.start()
         soundEffect.source = path
         soundEffect.play()
     }
@@ -174,6 +175,12 @@ ItemPage {
         }
     }
 
+    Timer {
+        id: previewTimer
+        onTriggered: soundEffect.stop()
+        interval: 30000
+    }
+
     Connections {
         id: contentHubConnection
         property var ringtoneCallback
@@ -181,7 +188,13 @@ ItemPage {
         onStateChanged: {
             if (activeTransfer.state === ContentTransfer.Charged) {
                 if (activeTransfer.items.length > 0) {
-                    var toneUri = activeTransfer.items[0].url;
+                    var item = activeTransfer.items[0];
+                    var toneUri;
+                    if (item.move(backendInfo.customRingtonePath)) {
+                        toneUri = item.url;
+                    } else {
+                        toneUri = backendInfo.customRingtonePath + "/" + item.url.toString().split("/").splice(-1,1);
+                    }
                     ringtoneCallback(toneUri);
                 }
             }
@@ -191,11 +204,7 @@ ItemPage {
     Page {
         id: picker
         visible: false
-
-        ContentStore {
-            id: appStore
-            scope: ContentScope.App
-        }
+        title: i18n.tr("Choose from")
 
         ContentPeerPicker {
             id: peerPicker
@@ -210,7 +219,7 @@ ItemPage {
                 function startContentTransfer(callback) {
                     if (callback)
                         contentHubConnection.ringtoneCallback = callback
-                    var transfer = peer.request(appStore);
+                    var transfer = peer.request();
                     if (transfer !== null) {
                         soundsPage.activeTransfer = transfer;
                     }
