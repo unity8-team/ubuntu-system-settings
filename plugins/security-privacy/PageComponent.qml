@@ -53,14 +53,28 @@ ItemPage {
         });
         return t;
     }
+
     property var pluginOptions
-    onPluginOptionsChanged: {
-        if (pluginOptions['service']) {
-            var page = pageStack.push(Qt.resolvedUrl("AppAccess.qml"), {pluginManager: pluginManager})
-            page.openService(pluginOptions['service'])
+    Connections {
+        target: pageStack
+        onCurrentPageChanged: {
+            // If we get called with service=something open the app access page
+            // for that specific service, if it does exist.
+            //
+            // We need to wait until the PageComponent has been pushed to the stack
+            // before pushing the subpages, otherwise they will be pushed below the
+            // PageComponent.
+            if (pageStack.currentPage === root) {
+                if (pluginOptions && pluginOptions['service']) {
+                    var page = pageStack.push(Qt.resolvedUrl("AppAccess.qml"), {pluginManager: pluginManager})
+                    page.openService(pluginOptions['service'])
+                }
+                // Once done, disable this Connections, so that if the user navigates
+                // back to the root we won't push the subpages again
+                target = null
+            }
         }
     }
-
 
     UbuntuDiagnostics {
         id: diagnosticsWidget
