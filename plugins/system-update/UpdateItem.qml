@@ -17,8 +17,8 @@
  */
 
 import QtQuick 2.4
-//import Ubuntu.SystemSettings.Update 1.0
 import Ubuntu.Components 1.3
+import Ubuntu.Components.Popups 1.3
 
 ListItem {
     id: updateItem
@@ -37,7 +37,6 @@ ListItem {
             top: units.gu(1)
             bottom: units.gu(1)
         }
-        //height: visible ? textArea.height + units.gu(2) : 0
         visible: opacity > 0
         opacity: installed ? 0 : 1
         Behavior on opacity { PropertyAnimation { duration: UbuntuAnimation.SleepyDuration } }
@@ -53,15 +52,84 @@ ListItem {
             aspect: updateData.systemUpdate ? UbuntuShape.Flat : UbuntuShape.Inset 
         }
 
-        
+        Column {
+            SlotsLayout.position: SlotsLayout.Trailing
+            width: buttonAppUpdate.width
+
+            Button {
+                id: buttonAppUpdate
+                objectName: "buttonAppUpdate"
+                anchors {
+                    right: parent.right
+                }
+                height: labelTitle.height + units.gu(1)
+                enabled: !installing
+                text: {
+                    if (retry)
+                        return i18n.tr("Retry");
+                    if (updateData.systemUpdate) {
+                        if (updateData.updateReady) {
+                            return i18n.tr("Update");
+                        } else if (!updateData.updateState && !updateData.selected) {
+                            return i18n.tr("Download");
+                        }
+                    }
+                    if (updateData.updateState) {
+                        return i18n.tr("Pause");
+                    } else if (updateData.selected) {
+                        return i18n.tr("Resume");
+                    }
+                    return i18n.tr("Update");
+                }
+
+                onClicked: {
+                    if (retry) {
+                        retry = false;
+                        return UpdateManager.retryDownload(updateData.packageName);
+                    }
+                    if (updateData.updateState)
+                        return pause();
+                    if (!updateData.updateState && updateData.selected)
+                        return resume();
+                    if (!updateData.updateState && !updateData.selected && !updateData.updateReady)
+                        return start();
+                    if (updateData.updateReady)
+                        PopupUtils.open(dialogInstallComponent);
+                }
+             }
+
+             Label {
+                id: updateStatusLabel
+                anchors.right: parent.right
+                visible: updateData.updateState && !retry
+                fontSize: "small"
+                text: {
+                    if (installing)
+                        return i18n.tr("Installing");
+                    if (installed)
+                        return i18n.tr("Installed");
+                    return i18n.tr("%1 of %2").arg(
+                        Utilities.formatSize(updateData.binaryFilesize * (progress.value * 0.01))).arg(
+                        Utilities.formatSize(updateData.binaryFilesize)
+                    );
+                }
+            }
+        }
 
         mainSlot: Column {
-            id: textArea
-            objectName: "textArea"
+            id: updateColumn
+            objectName: "updateColumn"
             SlotsLayout.padding.top: 0
             spacing: units.gu(0.5)
             height: childrenRect.height
 
+            Label {
+                id: labelTitle
+                objectName: "labelTitle"
+                text: updateData.title
+                font.bold: true
+                elide: Text.ElideMiddle
+            }
 
             Item {
                 anchors {
@@ -69,62 +137,32 @@ ListItem {
                     right: parent.right
                 }
                 height: childrenRect.height
-                Button {
-                    id: buttonAppUpdate
-                    objectName: "buttonAppUpdate"
-                    anchors {
-                        top: parent.top
-                        right: parent.right
-                    }
-                    height: labelTitle.height + units.gu(1)
-                    enabled: !installing
-                    text: {
-                        if (retry)
-                            return i18n.tr("Retry");
-                        if (updateData.systemUpdate) {
-                            if (updateData.updateReady) {
-                                return i18n.tr("Update");
-                            } else if (!updateData.updateState && !updateData.selected) {
-                                return i18n.tr("Download");
-                            }
-                        }
-                        if (updateData.updateState) {
-                            return i18n.tr("Pause");
-                        } else if (updateData.selected) {
-                            return i18n.tr("Resume");
-                        }
-                        return i18n.tr("Update");
+                Row {
+                    spacing: units.gu(1)
+                    Label {
+                        id: labelVersion
+                        objectName: "labelVersion"
+                        text: updateData.remoteVersion ? i18n.tr("Version: ") + updateData.remoteVersion : ""
+                        elide: Text.ElideRight
+                        fontSize: "small"
                     }
 
-                    onClicked: {
-                        if (retry) {
-                            retry = false;
-                            return UpdateManager.retryDownload(updateData.packageName);
+                    Icon {
+                        name: "info"
+                        height: labelVersion.height
+                        width: height
+                        MouseArea {
+                            anchors.fill: parent
+                            onClicked: {
+                                PopupUtils.open(infoDialogComponent, undefined, {"title": updateData.title, "version": updateData.remoteVersion, "changelog": updateData.changelog})
+                                console.warn(updateData.changelog)
+                            }
                         }
-                        if (updateData.updateState)
-                            return pause();
-                        if (!updateData.updateState && updateData.selected)
-                            return resume();
-                        if (!updateData.updateState && !updateData.selected && !updateData.updateReady)
-                            return start();
-                        if (updateData.updateReady)
-                            PopupUtils.open(dialogInstallComponent);
                     }
-                }
-            
-                Label {
-                    id: labelTitle
-                    objectName: "labelTitle"
-                    anchors {
-                        top: parent.top
-                        left: parent.left
-                    }
-                    text: updateData.title
-                    font.bold: true
-                    elide: Text.ElideMiddle
                 }
             }
             
+            /* Not in the new design?
             Item {
                 id: labelUpdateStatus
                 anchors {
@@ -138,7 +176,6 @@ ListItem {
                 Label {
                     objectName: "labelUpdateStatus"
                     anchors.left: parent.left
-                    anchors.right: updateStatusLabel.left
                     elide: Text.ElideMiddle
                     fontSize: "small"
                     text: {
@@ -151,22 +188,8 @@ ListItem {
                         return i18n.tr("Downloading");
                     }
                 }
-                Label {
-                    id: updateStatusLabel
-                    anchors.right: parent.right
-                    visible: !labelSize.visible && !installing && !installed
-                    fontSize: "small"
-                    text: {
-                        if (!labelUpdateStatus.visible)
-                            return Utilities.formatSize(updateData.binaryFilesize);
-
-                        return i18n.tr("%1 of %2").arg(
-                            Utilities.formatSize(updateData.binaryFilesize * (progress.value * 0.01))).arg(
-                            Utilities.formatSize(updateData.binaryFilesize)
-                        );
-                    }
-                }
             }
+            */
 
             ProgressBar {
                 id: progress
@@ -184,29 +207,43 @@ ListItem {
 
                 Behavior on opacity { PropertyAnimation { duration: UbuntuAnimation.SleepyDuration } }
             }
+        }
 
-            Item {
-                anchors {
-                    left: parent.left
-                    right: parent.right
-                }
-                height: childrenRect.height
-                Label {
-                    id: labelVersion
-                    objectName: "labelVersion"
-                    anchors.left: parent.left
-                    text: updateData.remoteVersion ? i18n.tr("Version: ") + updateData.remoteVersion : ""
-                    elide: Text.ElideRight
-                    fontSize: "small"
-                }
+        Component {
+            id: infoDialogComponent
+            Dialog {
+                id: infoDialog
+                property string title
+                property string version
+                property string changelog
 
-                Label {
-                    id: labelSize
-                    objectName: "labelSize"
-                    anchors.right: parent.right
-                    text: Utilities.formatSize(updateData.binaryFilesize)
-                    fontSize: "small"
-                    visible: !labelUpdateStatus.visible && !installing && !installed
+                Column {
+                    spacing: units.gu(2)
+                    Label {
+                        anchors.left: parent.left
+                        text: title
+                        fontSize: "x-large"
+                        font.bold: true
+                    }
+                    Label {
+                        anchors.left: parent.left
+                        text: version
+                        fontSize: "medium"
+                    }
+                    Label {
+                        anchors.left: parent.left
+                        text: changelog
+                        fontSize: "medium"
+                    }
+
+                    Button {
+                        anchors.right: parent.right
+                        text: i18n.tr("OK")
+                        width: units.gu(6)
+                        onClicked: {
+                            PopupUtils.close(infoDialog);
+                        }
+                    }
                 }
             }
         }
