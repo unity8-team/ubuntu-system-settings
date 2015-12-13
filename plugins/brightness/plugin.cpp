@@ -23,9 +23,6 @@
 #include <QtQml>
 #include <QtQml/QQmlContext>
 #include "brightness.h"
-#include "display.h"
-#include "displays.h"
-
 
 void BackendPlugin::registerTypes(const char *uri)
 {
@@ -33,8 +30,6 @@ void BackendPlugin::registerTypes(const char *uri)
 
     qRegisterMetaType<Display::OrientationMode>();
     qmlRegisterType<Brightness>(uri, 1, 0, "UbuntuBrightnessPanel");
-    qmlRegisterType<Display>(uri, 1, 0, "Display");
-    qmlRegisterType<Displays>(uri, 1, 0, "Displays");
 }
 
 void BackendPlugin::initializeEngine(QQmlEngine *engine, const char *uri)

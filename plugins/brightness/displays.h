@@ -21,29 +21,37 @@
 #ifndef DISPLAYS_H
 #define DISPLAYS_H
 
-#include <QDBusInterface>
+#include <QAbstractListModel>
 #include <QObject>
 
-class Displays : public QObject
+#include "display.h"
+
+class DisplayListModel : public QAbstractListModel
 {
     Q_OBJECT
-    Q_PROPERTY( QStringList displays
-                READ displays
-                NOTIFY displaysChanged )
 
 public:
-    explicit Displays(QObject *parent = 0);
-    ~Displays();
+    explicit DisplayListModel(QObject *parent = 0);
+    ~DisplayListModel();
 
-    QStringList displays() const;
+    enum DisplayRoles {
+        ResolutionRole = Qt::UserRole + 1,
+        OrientationRole,
+        ScaleRole,
+        StateRole
+    };
 
-Q_SIGNALS:
-    void displaysChanged(QStringList &displays);
+    void addDisplay(Display* display);
+
+    QVariant data(const QModelIndex & index, int role = Qt::DisplayRole) const;
+
+    int rowCount(const QModelIndex & parent = QModelIndex()) const;
+
+protected:
+    QHash<int, QByteArray> roleNames() const;
 
 private:
-    QDBusConnection m_systemBusConnection;
-    QDBusInterface m_unityInterface;
-    QStringList m_displays;
+    QList<Display*> m_displays;
 };
 
 #endif // DISPLAYS_H

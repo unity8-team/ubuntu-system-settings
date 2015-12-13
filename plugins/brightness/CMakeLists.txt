@@ -1,5 +1,9 @@
 add_subdirectory(plugin)
 
+pkg_search_module(MIR REQUIRED mirclient)
+find_package(Qt5Gui)
+include_directories(${Qt5Gui_PRIVATE_INCLUDE_DIRS} ${MIR_INCLUDE_DIRS})
+
 set(QML_SOURCES
     PageComponent.qml
     PageResolution.qml

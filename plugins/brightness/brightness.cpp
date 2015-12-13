@@ -20,10 +20,14 @@
 
 #include "brightness.h"
 
+#include <qpa/qplatformnativeinterface.h>
+#include <mir_toolkit/mir_client_library.h>
+
 #include <QDBusArgument>
 #include <QDBusReply>
 #include <QDBusMetaType>
 #include <QDebug>
+#include <QGuiApplication>
 
 // Returned data from getBrightnessParams
 struct BrightnessParams {
@@ -65,6 +69,14 @@ Brightness::Brightness(QObject *parent) :
 {
     qRegisterMetaType<BrightnessParams>();
     m_powerdRunning = m_powerdIface.isValid();
+
+    auto *conn = static_cast<MirConnection*>(
+            QGuiApplication::platformNativeInterface()->nativeResourceForIntegration(
+                    "mirConnection"));
+    // MirDisplayConfiguration *conf = conn->create_copy_of_display_config()();
+    qWarning() << conn;
+    conn->connect();
+    // qWarning() << "num_cards" << conf->num_cards;
 
     if (!m_powerdRunning) {
         qWarning() << m_powerdIface.interface() << m_powerdIface.lastError().message();

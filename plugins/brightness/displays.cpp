@@ -18,29 +18,60 @@
  *
  */
 
+#include <QDebug>
 #include "displays.h"
 
-#include <QDebug>
-
-Displays::Displays(QObject *parent) :
-    QObject(parent),
-    m_systemBusConnection (QDBusConnection::systemBus()),
-    m_unityInterface ("com.canonical.unity",
-                   "/com/canonical/unity",
-                   "com.canonical.unity",
-                   m_systemBusConnection),
-    m_displays()
-{
+DisplayListModel::DisplayListModel(QObject *parent)
+    : QAbstractListModel(parent) {
 }
 
-Displays::~Displays()
-{
+void DisplayListModel::addDisplay(Display* display) {
+    int at = rowCount();
+    for (int i = 0; i < m_displays.size(); ++i) {
+        if (display->path() < m_displays.at(i)->path()) {
+            at = i;
+            break;
+        }
+    }
+    beginInsertRows(QModelIndex(), at, at);
+    m_displays.insert(at, display);
+    endInsertRows();
 }
 
-QStringList Displays::displays() const
-{
-    // return m_displays;
-    QStringList foo;
-    foo << "MHL";
-    return foo;
+int DisplayListModel::rowCount(const QModelIndex & parent) const {
+    Q_UNUSED(parent);
+    return m_displays.count();
+}
+
+QVariant DisplayListModel::data(const QModelIndex & index, int role) const {
+    if (index.row() < 0 || index.row() >= m_displays.count())
+        return QVariant();
+
+    Display* display = m_displays[index.row()];
+    if (role == Qt::DisplayRole) {
+        return QVariant::fromValue(display);
+    }
+    //  else if (role == displayRole) {
+    //     return QVariant::fromValue(display);
+    // } else if (role == GroupRole) {
+    //     return display->path();;
+    // }
+    // if (role == TypeRole)
+    //     return display.type();
+    // else if (role == SizeRole)
+    //     return display.size();
+    return QVariant();
+}
+
+QHash<int, QByteArray> DisplayListModel::roleNames() const {
+    QHash<int, QByteArray> roles;
+    roles[ResolutionRole] = "resolution";
+    roles[OrientationRole] = "orientation";
+    roles[ScaleRole] = "scale";
+    roles[StateRole] = "state";
+    return roles;
+}
+
+DisplayListModel::~DisplayListModel() {
+    qDeleteAll(m_displays);
 }
