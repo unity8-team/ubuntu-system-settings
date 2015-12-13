@@ -28,13 +28,6 @@
 #include <QDebug>
 #include <QGuiApplication>
 
-static void connection_callback(MirConnection *new_connection, void *context)
-{
-    //((MirDemoState*)context)->connection = new_connection;
-    qWarning() << "cb!";
-}
-
-
 // Returned data from getBrightnessParams
 struct BrightnessParams {
         int dim; // Dim brightness
@@ -68,6 +61,12 @@ typedef struct MirDemoState
     MirConnection *connection;
     MirSurface *surface;
 } MirDemoState;
+
+static void connection_callback(MirConnection *new_connection, void *context)
+{
+    ((MirDemoState*)context)->connection = new_connection;
+    qWarning() << "cb!";
+}
 
 Brightness::Brightness(QObject *parent) :
     QObject(parent),
@@ -104,20 +103,18 @@ Brightness::Brightness(QObject *parent) :
     // auto *conn = static_cast<MirConnection*>(
     //         QGuiApplication::platformNativeInterface()->nativeResourceForIntegration(
     //                 "mirConnection"));
-    // // MirDisplayConfiguration *conf = conn->create_copy_of_display_config()();
-    // qWarning() << conn;
-    // if (mir_connection_is_valid(conn)) {
-    //     qWarning() << "mir connection is valid";
-    // } else {
-    //     qWarning() << "mir connection is NOT valid";
-    //     mir_connection_get_error_message(conn);
-    // }
-    // MirDisplayConfiguration *conf = mir_connection_create_display_config(conn);
-    // if (conf) {
-    //     qWarning() << "num_cards" << conf->num_cards;
-    // } else {
-    //     qWarning() << "did not get a good mir display config";
-    // }
+
+    if (mir_connection_is_valid(mcd.connection)) {
+        qWarning() << "mir connection is valid";
+        MirDisplayConfiguration *conf = mir_connection_create_display_config(mcd.connection);
+        if (conf) {
+            qWarning() << "num_cards" << conf->num_cards;
+        } else {
+            qWarning() << "did not get a good mir display config";
+        }
+    } else {
+        qWarning() << "mir connection is NOT valid";
+    }
 
     if (!m_powerdRunning) {
         qWarning() << m_powerdIface.interface() << m_powerdIface.lastError().message();
