@@ -21,7 +21,6 @@
 #include "brightness.h"
 
 #include <qpa/qplatformnativeinterface.h>
-#include <mir_toolkit/mir_client_library.h>
 
 #include <QDBusArgument>
 #include <QDBusReply>
@@ -29,7 +28,12 @@
 #include <QDebug>
 #include <QGuiApplication>
 
-MirDisplayConfiguration* mir_connection_create_display_config(MirConnection *connection);
+static void connection_callback(MirConnection *new_connection, void *context)
+{
+    //((MirDemoState*)context)->connection = new_connection;
+    qWarning() << "cb!";
+}
+
 
 // Returned data from getBrightnessParams
 struct BrightnessParams {
@@ -59,6 +63,12 @@ const QDBusArgument &operator>>(const QDBusArgument &argument,
     return argument;
 }
 
+typedef struct MirDemoState
+{
+    MirConnection *connection;
+    MirSurface *surface;
+} MirDemoState;
+
 Brightness::Brightness(QObject *parent) :
     QObject(parent),
     m_systemBusConnection (QDBusConnection::systemBus()),
@@ -72,24 +82,42 @@ Brightness::Brightness(QObject *parent) :
     qRegisterMetaType<BrightnessParams>();
     m_powerdRunning = m_powerdIface.isValid();
 
-    auto *conn = static_cast<MirConnection*>(
-            QGuiApplication::platformNativeInterface()->nativeResourceForIntegration(
-                    "mirConnection"));
-    // MirDisplayConfiguration *conf = conn->create_copy_of_display_config()();
-    qWarning() << conn;
-    if (mir_connection_is_valid(conn)) {
-        qWarning() << "mir connection is valid";
-    } else {
-        qWarning() << "mir connection is NOT valid";
-        qWarning() << mir_connection_get_error_message(conn);
+    MirDemoState mcd;
+    mcd.connection = 0;
+    mcd.surface = 0;
 
+    qWarning() << "Connecting...";
+    mir_wait_for(mir_connect(nullptr, __FILE__, connection_callback, &mcd));
+    qWarning() << "Connected!";
+
+    if (mcd.connection == nullptr || !mir_connection_is_valid(mcd.connection))
+    {
+        const char *error = "Unknown error";
+        if (mcd.connection != nullptr)
+            error = mir_connection_get_error_message(mcd.connection);
+        qWarning() << error;
+        // fprintf(stderr, "Failed to connect to server `%s': %s\n",
+        //         server == nullptr ? "<default>" : server, error);
+        // return 1;
     }
-    MirDisplayConfiguration *conf = mir_connection_create_display_config(conn);
-    if (conf) {
-        qWarning() << "num_cards" << conf->num_cards;
-    } else {
-        qWarning() << "did not get a good mir display config";
-    }
+
+    // auto *conn = static_cast<MirConnection*>(
+    //         QGuiApplication::platformNativeInterface()->nativeResourceForIntegration(
+    //                 "mirConnection"));
+    // // MirDisplayConfiguration *conf = conn->create_copy_of_display_config()();
+    // qWarning() << conn;
+    // if (mir_connection_is_valid(conn)) {
+    //     qWarning() << "mir connection is valid";
+    // } else {
+    //     qWarning() << "mir connection is NOT valid";
+    //     mir_connection_get_error_message(conn);
+    // }
+    // MirDisplayConfiguration *conf = mir_connection_create_display_config(conn);
+    // if (conf) {
+    //     qWarning() << "num_cards" << conf->num_cards;
+    // } else {
+    //     qWarning() << "did not get a good mir display config";
+    // }
 
     if (!m_powerdRunning) {
         qWarning() << m_powerdIface.interface() << m_powerdIface.lastError().message();

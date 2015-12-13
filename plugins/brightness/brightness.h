@@ -21,9 +21,11 @@
 #ifndef BRIGHTNESS_H
 #define BRIGHTNESS_H
 
+#include <mir_toolkit/mir_client_library.h>
 #include <QDBusInterface>
 #include <QObject>
 #include "displays.h"
+
 
 class Brightness : public QObject
 {
