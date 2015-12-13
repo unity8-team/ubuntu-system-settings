@@ -77,6 +77,13 @@ Brightness::Brightness(QObject *parent) :
                     "mirConnection"));
     // MirDisplayConfiguration *conf = conn->create_copy_of_display_config()();
     qWarning() << conn;
+    if (mir_connection_is_valid(conn)) {
+        qWarning() << "mir connection is valid";
+    } else {
+        qWarning() << "mir connection is NOT valid";
+        qWarning() << mir_connection_get_error_message(conn);
+
+    }
     MirDisplayConfiguration *conf = mir_connection_create_display_config(conn);
     if (conf) {
         qWarning() << "num_cards" << conf->num_cards;
