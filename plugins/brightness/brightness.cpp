@@ -29,6 +29,8 @@
 #include <QDebug>
 #include <QGuiApplication>
 
+MirDisplayConfiguration* mir_connection_create_display_config(MirConnection *connection);
+
 // Returned data from getBrightnessParams
 struct BrightnessParams {
         int dim; // Dim brightness
@@ -75,8 +77,12 @@ Brightness::Brightness(QObject *parent) :
                     "mirConnection"));
     // MirDisplayConfiguration *conf = conn->create_copy_of_display_config()();
     qWarning() << conn;
-    conn->connect();
-    // qWarning() << "num_cards" << conf->num_cards;
+    MirDisplayConfiguration *conf = mir_connection_create_display_config(conn);
+    if (conf) {
+        qWarning() << "num_cards" << conf->num_cards;
+    } else {
+        qWarning() << "did not get a good mir display config";
+    }
 
     if (!m_powerdRunning) {
         qWarning() << m_powerdIface.interface() << m_powerdIface.lastError().message();

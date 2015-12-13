@@ -26,6 +26,7 @@ Build-Depends: dbus-test-runner,
                qml-module-ubuntu-connectivity (>= 0.5.3),
                qt5-default,
                qtbase5-dev,
+               qtbase5-private-dev,
                qtdeclarative5-dev,
                libapt-pkg-dev,
 # test-deps

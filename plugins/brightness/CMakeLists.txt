@@ -23,6 +23,8 @@ add_library(UbuntuBrightnessPanel MODULE
                 ${QML_SOURCES})
 qt5_use_modules(UbuntuBrightnessPanel Quick Qml DBus)
 
+target_link_libraries(UbuntuBrightnessPanel ${Qt5Gui_PRIVATE_LDFLAGS} ${MIR_LDFLAGS})
+
 set(PLUG_DIR ${PLUGIN_PRIVATE_MODULE_DIR}/Ubuntu/SystemSettings/Brightness)
 install(TARGETS UbuntuBrightnessPanel DESTINATION ${PLUG_DIR})
 install(FILES qmldir DESTINATION ${PLUG_DIR})
