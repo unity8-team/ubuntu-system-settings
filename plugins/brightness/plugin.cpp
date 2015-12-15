@@ -22,14 +22,17 @@
 
 #include <QtQml>
 #include <QtQml/QQmlContext>
+#include "display.h"
 #include "brightness.h"
 
 void BackendPlugin::registerTypes(const char *uri)
 {
     Q_ASSERT(uri == QLatin1String("Ubuntu.SystemSettings.Brightness"));
 
-    qRegisterMetaType<Display::OrientationMode>();
+    // qRegisterMetaType<Display::OrientationMode>();
     qmlRegisterType<Brightness>(uri, 1, 0, "UbuntuBrightnessPanel");
+    qmlRegisterType<Display>(uri, 1, 0, "Display");
+    qRegisterMetaType<Display*>("Display*");
 }
 
 void BackendPlugin::initializeEngine(QQmlEngine *engine, const char *uri)

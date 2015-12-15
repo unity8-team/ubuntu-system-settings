@@ -19,59 +19,74 @@
  */
 
 #include <QDebug>
+#include <QQmlEngine>
+#include <QGuiApplication>
+#include <qpa/qplatformnativeinterface.h>
 #include "displays.h"
 
-DisplayListModel::DisplayListModel(QObject *parent)
-    : QAbstractListModel(parent) {
+typedef struct MirState {
+    MirConnection *connection;
+} MirState;
+
+static void mir_connection_callback(MirConnection *new_connection, void *context) {
+    qWarning() << "Connection callback.";
+    ((MirState*)context)->connection = new_connection;
 }
 
-void DisplayListModel::addDisplay(Display* display) {
-    int at = rowCount();
-    for (int i = 0; i < m_displays.size(); ++i) {
-        if (display->path() < m_displays.at(i)->path()) {
-            at = i;
-            break;
+static void mir_display_change_callback(MirConnection *connection, void *context) {
+    qWarning() << "mir_display_change_callback";
+    // ((Displays*)context)->updateAvailableDisplays();
+}
+
+Displays::Displays(QObject *parent) :
+    QObject(parent),
+    m_displaysModel(this) {
+    if(makeDisplayServerConnection()) {
+        qWarning() << "displays connected";
+        updateAvailableDisplays();
+        mir_connection_set_display_config_change_callback(
+                m_mir_connection, mir_display_change_callback, this);
+    } else {
+        qWarning() << "displays not connected";
+    }
+}
+
+Displays::~Displays() {}
+
+bool Displays::makeDisplayServerConnection() {
+
+    qWarning() << "Connecting...";
+    m_mir_connection = static_cast<MirConnection*>(QGuiApplication::platformNativeInterface()->nativeResourceForIntegration("mirConnection"));
+    qWarning() << "Connected!";
+    if (m_mir_connection == nullptr || !mir_connection_is_valid(m_mir_connection)) {
+        const char *error = "Unknown error";
+        if (m_mir_connection != nullptr)
+            error = mir_connection_get_error_message(m_mir_connection);
+        qWarning() << error;
+        return false;
+    } else {
+        qWarning() << "Using mir as display server.";
+        return true;
+    }
+    return false;
+}
+
+void Displays::updateAvailableDisplays() {
+    if (m_mir_connection) {
+        MirDisplayConfiguration *conf = mir_connection_create_display_config(
+                m_mir_connection);
+
+        for (unsigned int i = 0; i < conf->num_outputs; ++i) {
+            MirDisplayOutput output = conf->outputs[i];
+            qWarning() << "output" << i;
+            QSharedPointer<Display> display(new Display(&output));
+            m_displaysModel.addDisplay(display);
         }
     }
-    beginInsertRows(QModelIndex(), at, at);
-    m_displays.insert(at, display);
-    endInsertRows();
 }
 
-int DisplayListModel::rowCount(const QModelIndex & parent) const {
-    Q_UNUSED(parent);
-    return m_displays.count();
-}
-
-QVariant DisplayListModel::data(const QModelIndex & index, int role) const {
-    if (index.row() < 0 || index.row() >= m_displays.count())
-        return QVariant();
-
-    Display* display = m_displays[index.row()];
-    if (role == Qt::DisplayRole) {
-        return QVariant::fromValue(display);
-    }
-    //  else if (role == displayRole) {
-    //     return QVariant::fromValue(display);
-    // } else if (role == GroupRole) {
-    //     return display->path();;
-    // }
-    // if (role == TypeRole)
-    //     return display.type();
-    // else if (role == SizeRole)
-    //     return display.size();
-    return QVariant();
-}
-
-QHash<int, QByteArray> DisplayListModel::roleNames() const {
-    QHash<int, QByteArray> roles;
-    roles[ResolutionRole] = "resolution";
-    roles[OrientationRole] = "orientation";
-    roles[ScaleRole] = "scale";
-    roles[StateRole] = "state";
-    return roles;
-}
-
-DisplayListModel::~DisplayListModel() {
-    qDeleteAll(m_displays);
+QAbstractItemModel * Displays::displays() {
+    auto ret = &m_displaysModel;
+    QQmlEngine::setObjectOwnership(ret, QQmlEngine::CppOwnership);
+    return ret;
 }

@@ -3,8 +3,6 @@
  *
  * Copyright (C) 2015 Canonical Ltd.
  *
- * Contact: Jonas G. Drange <jonas.drange@canonical.com>
- *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License version 3, as published
  * by the Free Software Foundation.
@@ -16,6 +14,9 @@
  *
  * You should have received a copy of the GNU General Public License along
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * Authors:
+ *      Jonas G. Drange <jonas.drange@canonical.com>
  */
 
 import QtQuick 2.0
@@ -27,11 +28,10 @@ import Ubuntu.SystemSettings.Brightness 1.0
 ItemPage {
     id: root
     title: i18n.tr("Resolution")
-    objectName: "resolutionPage"
+    objectName: "modePage"
 
-    property Display display
-
-    signal resolutionChanged(string resolution)
+    property var modes
+    property string mode
 
     Flickable {
         id: scrollWidget
@@ -46,16 +46,19 @@ ItemPage {
             anchors.right: parent.right
 
             ListItem.ItemSelector {
-                id: resolutionSelector
-                objectName: "resolutionSelector"
+                id: modeSelector
+                objectName: "modeSelector"
                 delegate: OptionSelectorDelegate {
                     text: modelData
                 }
-                model: display.availableResolutions
+                model: modes
                 expanded: true
                 highlightWhenPressed: false
-                onDelegateClicked: resolutionChanged(model[index])
-                Component.onCompleted: selectedIndex = display.availableResolutions.indexOf(display.resolution)
+                onDelegateClicked: mode = model[index]
+                Component.onCompleted: {
+                    selectedIndex = modes.indexOf(mode)
+                    console.warn("slected", modes, mode, modes.indexOf(mode))
+                }
             }
         }
     }

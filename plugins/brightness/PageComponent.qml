@@ -38,15 +38,6 @@ ItemPage {
         id: brightnessPanel
     }
 
-    // Displays {
-    //     id: displays
-    // }
-
-    // Component {
-    //     id: displayComponent
-    //     Display {}
-    // }
-
     Flickable {
         anchors.fill: parent
         contentHeight: contentItem.childrenRect.height
@@ -125,7 +116,25 @@ ItemPage {
                 visible: adjust.visible
             }
 
+            ListItem.Divider {
+                visible: brightnessPanel.displays.count > 0
+            }
 
+            Repeater {
+                id: rep
+                model: brightnessPanel.displays
+
+                delegate: ExternalDisplay {
+                    Component.onCompleted: console.warn('model.mode', mode);
+                    anchors { left: parent.left; right: parent.right }
+                }
+            }
+
+            ListItem.Divider {
+                anchors { left: parent.left; right: parent.right; }
+                height: units.gu(10)
+                opacity: 0
+            }
         }
     }
 
@@ -134,198 +143,3 @@ ItemPage {
         schema.id: "com.ubuntu.touch.system"
     }
 }
-
-
-
-
-
-
-
-
-            // ListItem.Divider {
-            //     visible: displaysModel.count > 0
-            // }
-
-            // Repeater {
-            //     model: displaysModel
-
-            //     Column {
-            //         anchors { left: parent.left; right: parent.right }
-
-            //         property var localOrientation: null
-            //         property string localResolution: ""
-            //         property double localScale: -1
-
-            //         SettingsItemTitle {
-            //             text: path
-            //             visible: model.count > 1
-            //         }
-
-            //         ListItem.Standard {
-            //             text: i18n.tr("External display")
-            //             enabled: display.connected
-            //             onClicked: enabledCheck.trigger()
-            //             control: CheckBox {
-            //                 id: enabledCheck
-            //                 property bool serverChecked: display.enabled
-            //                 onServerCheckedChanged: checked = serverChecked
-            //                 Component.onCompleted: checked = serverChecked
-            //                 onTriggered: display.enabled = checked
-            //             }
-            //         }
-
-            //         ListItem.SingleValue {
-            //             text: i18n.tr("Rotation")
-            //             value: {
-            //                 console.warn('display.orientation', display.orientation);
-            //                 switch (localOrientation || display.orientation) {
-            //                     case Display.AnyMode:
-            //                         return i18n.tr("None");
-            //                         break;
-            //                     case Display.PortraitMode:
-            //                     case Display.PortraitAnyMode:
-            //                         return i18n.tr("90° clockwise");
-            //                         break;
-            //                     case Display.LandscapeMode:
-            //                     case Display.LandscapeInvertedMode:
-            //                     case Display.LandscapeAnyMode:
-            //                         return i18n.tr("180° clockwise");
-            //                         break;
-            //                     case Display.PortraitInvertedMode:
-            //                         return i18n.tr("270° clockwise");
-            //                         break;
-            //                     default:
-            //                         throw "Unable to determine orientation type.";
-            //                 }
-            //             }
-            //             visible: enabledCheck.checked
-            //             progression: true
-            //             onClicked: {
-            //                 var rotationPage = pageStack.push(
-            //                     Qt.resolvedUrl("PageRotation.qml"), {
-            //                         display: display
-            //                     }
-            //                 );
-            //                 rotationPage.orientationChanged.connect(
-            //                     function (orientation) {
-            //                         console.warn('locally setting orientation', orientation);
-            //                         localOrientation = orientation;
-            //                     }
-            //                 );
-            //             }
-            //         }
-
-            //         ListItem.SingleValue {
-            //             text: i18n.tr("Resolution")
-            //             value: localResolution || display.resolution
-            //             visible: enabledCheck.checked
-            //             progression: true
-            //             onClicked: {
-            //                 var resPage = pageStack.push(
-            //                     Qt.resolvedUrl("PageResolution.qml"), {
-            //                         display: display
-            //                     }
-            //                 );
-            //                 resPage.resolutionChanged.connect(
-            //                     function (resolution) {
-            //                         console.warn('locally setting resolution', resolution);
-            //                         localResolution = resolution;
-            //                     }
-            //                 );
-            //             }
-            //         }
-
-            //         SettingsItemTitle {
-            //             text: i18n.tr("Scale UI elements")
-            //             visible: enabledCheck.checked
-            //             showDivider: false
-            //         }
-
-            //         /* Use the SliderMenu component instead of the Slider to avoid binding
-            //            issues on valueChanged until LP: #1388094 is fixed.
-            //         */
-            //         Menus.SliderMenu {
-            //             id: scaleSlider
-            //             objectName: "scaleSlider"
-            //             visible: enabledCheck.checked
-            //             live: true
-            //             minimumValue: 0.0
-            //             maximumValue: 100.0
-            //             value: localScale >= 0 ? localScale : display.scale
-            //             onUpdated: localScale = value
-            //         }
-
-            //         ListItem.Divider { opacity: 0 }
-
-            //         Column {
-            //             anchors {
-            //                 left: parent.left;
-            //                 right: parent.right
-            //                 leftMargin: spacing
-            //                 rightMargin: spacing
-            //             }
-            //             visible: enabledCheck.checked
-            //             spacing: units.gu(1)
-
-            //             Button {
-            //                 anchors { left: parent.left; right: parent.right }
-            //                 text: i18n.tr("Apply changes")
-            //                 enabled: localOrientation ||
-            //                          localResolution ||
-            //                          localScale >= 0
-            //                 onClicked: {
-            //                     if (localOrientation) {
-            //                         display.orientation = localOrientation;
-            //                         localOrientation = null;
-            //                     }
-
-            //                     if (localResolution) {
-            //                         display.resolution = localResolution;
-            //                         localResolution = "";
-            //                     }
-
-            //                     if (localScale >= 0) {
-            //                         display.scale = localScale;
-            //                         localScale = -1;
-            //                     }
-            //                 }
-            //             }
-
-            //             ListItem.ThinDivider { opacity: 0 }
-
-            //             Button {
-            //                 anchors { left: parent.left; right: parent.right }
-            //                 text: i18n.tr("Sound settings…")
-            //                 onClicked: {
-            //                     var sPlugin = pluginManager.getByName("sound")
-            //                     if (sPlugin) {
-            //                         var soundPage = sPlugin.pageComponent;
-            //                         if (soundPage)
-            //                             pageStack.push(soundPage);
-            //                         else
-            //                             console.warn(
-            //                                 "Failed to get system-update " +
-            //                                 "pageComponent"
-            //                             );
-            //                     } else {
-            //                         console.warn(
-            //                             "Failed to get system-update plugin " +
-            //                             "instance"
-            //                         )
-            //                     }
-            //                 }
-            //             }
-
-            //             Button {
-            //                 anchors { left: parent.left; right: parent.right }
-            //                 text: i18n.tr("External keyboard…")
-            //             }
-            //         }
-            //     }
-            // }
-
-            // ListItem.Divider {
-            //     anchors { left: parent.left; right: parent.right; }
-            //     height: units.gu(10)
-            //     opacity: 0
-            // }

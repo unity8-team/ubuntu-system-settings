@@ -18,29 +18,19 @@
  *
  */
 
-#ifndef DISPLAYS_H
-#define DISPLAYS_H
+#ifndef DISPLAYSERVER_H
+#define DISPLAYSERVER_H
 
-#include <QObject>
-#include <QDebug>
 #include <mir_toolkit/mir_client_library.h>
 
-#include "displaymodel.h"
-
-class Displays : public QObject
+typedef struct DisplayServerConnection
 {
-    Q_OBJECT
+    MirConnection *connection;
+} DisplayServerConnection;
 
-public:
-    explicit Displays(QObject *parent = 0);
-    ~Displays();
-    QAbstractItemModel * displays();
 
-private:
-    bool makeDisplayServerConnection();
-    void updateAvailableDisplays();
-    DisplayListModel m_displaysModel;
-    MirConnection *m_mir_connection;
-};
+DisplayServerConnection get_display_server_connection();
 
-#endif // DISPLAYS_H
+MirConnection *get_mir_display_server_connection();
+
+#endif // DISPLAYSERVER_H

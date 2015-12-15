@@ -18,97 +18,78 @@
  *
  */
 
-#include "display.h"
-
 #include <QDebug>
 
-Display::Display(QObject *parent) :
-    QObject(parent),
-    m_systemBusConnection (QDBusConnection::systemBus()),
-    m_unityInterface ("com.canonical.unity",
-                   "/com/canonical/unity",
-                   "com.canonical.unity",
-                   m_systemBusConnection),
-    m_enabled(false),
-    m_connected(false)
-{
-    m_resolution = QString("1600x1200x60");
-    m_availableResolutions = QStringList();
-    m_availableResolutions << m_resolution << "1280x1024x60" << "1024x768x60";
-    m_orientation = Display::OrientationMode::AnyMode;
+#include "display.h"
+
+Display::Display(MirDisplayOutput *output) {
+    m_mirOutput = output;
+    m_connected = output->connected;
+    m_enabled = output->used;
+    m_name = QString("Display %1").arg(QString::number(output->output_id));
+    qWarning() << "Display created" << output->type << output->connected << output->used;
+
+    if (m_mirOutput) {
+        updateModes();
+        updateOrientation();
+        updateSizes();
+    }
 }
 
-Display::~Display()
-{
+void Display::updateModes() {
+    for (unsigned int i = 0; i < m_mirOutput->num_modes; ++i) {
+        MirDisplayMode mode = m_mirOutput->modes[i];
+        m_availableModes <<  QString("%1x%2x%3").arg(
+                QString::number(mode.vertical_resolution),
+                QString::number(mode.horizontal_resolution),
+                QString::number(mode.refresh_rate));
+        qWarning() << "mode" << i << m_availableModes;
+        if (i == m_mirOutput->current_mode) {
+            m_currentMode = i;
+            m_refreshRate = mode.refresh_rate;
+        }
+    }
 }
 
-QString Display::path() const
-{
-    return m_path;
+void Display::updateSizes() {
+    m_physicalSize = QSizeF(
+        QSize(m_mirOutput->physical_width_mm,
+              m_mirOutput->physical_height_mm)
+    );
 }
 
-bool Display::enabled() const
-{
+void Display::updateOrientation() {
+    m_orientation = m_mirOutput->orientation;
+}
+
+bool Display::enabled() const {
     return m_enabled;
 }
 
-QString Display::resolution() const
-{
-    return m_resolution;
+bool Display::connected() const {
+    return m_connected;
 }
 
-QStringList Display::availableResolutions() const
-{
-    return m_availableResolutions;
+void Display::setEnabled(const bool &enabled) {
+
 }
 
-Display::OrientationMode Display::orientation() const
-{
-    return m_orientation;
+QString Display::mode() const {
+    return availableModes()[m_currentMode];
 }
 
-float Display::scale() const
-{
-    return m_scale;
+void Display::setMode(const QString &mode) {
+
 }
 
-bool Display::connected() const
-{
-    // return m_connected;
-    return true;
+QStringList Display::availableModes() const {
+    return m_availableModes;
 }
 
-void Display::setPath(const QString &path)
-{
-    qWarning() << "Sat path" << path;
-    m_path = path;
-    Q_EMIT pathChanged(path);
+Display::Orientation Display::orientation() const {
+    return (Display::Orientation)m_orientation;
 }
 
-void Display::setEnabled(const bool &enabled)
-{
-    qWarning() << "Sat enabled" << enabled;
-    m_enabled = enabled;
-    Q_EMIT enabledChanged(enabled);
-}
+void Display::setOrientation(const Display::Orientation &orientation) {
 
-void Display::setOrientation(const Display::OrientationMode &orientation)
-{
-    qWarning() << "Sat orientation" << orientation;
-    m_orientation = orientation;
-    Q_EMIT orientationChanged(orientation);
-}
-
-void Display::setResolution(const QString &resolution)
-{
-    qWarning() << "Sat resolution" << resolution;
-    m_resolution = resolution;
-    Q_EMIT resolutionChanged(resolution);
-}
-
-void Display::setScale(const float &scale)
-{
-    qWarning() << "Sat scale" << scale;
-    m_scale = scale;
-    Q_EMIT scaleChanged(scale);
 }

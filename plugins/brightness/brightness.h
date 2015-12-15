@@ -21,11 +21,9 @@
 #ifndef BRIGHTNESS_H
 #define BRIGHTNESS_H
 
-#include <mir_toolkit/mir_client_library.h>
 #include <QDBusInterface>
 #include <QObject>
 #include "displays.h"
-
 
 class Brightness : public QObject
 {
@@ -36,7 +34,7 @@ class Brightness : public QObject
     Q_PROPERTY (bool autoBrightnessAvailable
                 READ getAutoBrightnessAvailable
                 CONSTANT)
-    Q_PROPERTY (DisplayListModel *displays
+    Q_PROPERTY (QAbstractItemModel * displays
                 READ displays
                 CONSTANT)
 
@@ -44,7 +42,7 @@ public:
     explicit Brightness(QObject *parent = 0);
     bool getPowerdRunning() const;
     bool getAutoBrightnessAvailable() const;
-    DisplayListModel *displays() const;
+    QAbstractItemModel * displays();
 
 private:
     QDBusConnection m_systemBusConnection;
@@ -52,7 +50,7 @@ private:
     QDBusInterface m_powerdIface;
     bool m_powerdRunning;
     bool m_autoBrightnessAvailable;
-    DisplayListModel m_displays;
+    Displays m_displays;
 };
 
 #endif // BRIGHTNESS_H

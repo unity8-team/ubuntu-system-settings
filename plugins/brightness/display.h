@@ -23,93 +23,83 @@
 
 #include <QDBusInterface>
 #include <QObject>
+#include <QScreen>
+#include <mir_toolkit/client_types.h>
 
-class Display : public QObject
+struct Display : QObject
 {
     Q_OBJECT
-    Q_ENUMS(OrientationMode)
-    Q_PROPERTY( QString path
-                READ path
-                WRITE setPath
-                NOTIFY pathChanged )
+
+public:
+
+    Display() {}
+    ~Display() {}
+    Display(MirDisplayOutput *output);
+    Q_PROPERTY( QString name
+                READ name
+                CONSTANT )
     Q_PROPERTY( bool enabled
                 READ enabled
                 WRITE setEnabled
                 NOTIFY enabledChanged )
-    Q_PROPERTY( QStringList availableResolutions
-                READ availableResolutions
-                NOTIFY availableResolutionsChanged )
-    Q_PROPERTY( QString resolution
-                READ resolution
-                WRITE setResolution
-                NOTIFY resolutionChanged )
-    Q_PROPERTY( OrientationMode orientation
-                READ orientation
-                WRITE setOrientation
-                NOTIFY orientationChanged )
-    Q_PROPERTY( float scale
-                READ scale
-                WRITE setScale
-                NOTIFY scaleChanged )
     Q_PROPERTY( bool connected
                 READ connected
                 NOTIFY connectedChanged )
+    Q_PROPERTY( QStringList availableModes
+                READ availableModes
+                NOTIFY availableModesChanged )
+    Q_PROPERTY( QString mode
+                READ mode
+                WRITE setMode
+                NOTIFY modeChanged )
+    Q_PROPERTY( Orientation orientation
+                READ orientation
+                WRITE setOrientation
+                NOTIFY orientationChanged )
 
-public:
-    enum OrientationMode {
-        PortraitMode,
-        LandscapeMode,
-        PortraitInvertedMode,
-        LandscapeInvertedMode,
-        PortraitAnyMode,
-        LandscapeAnyMode,
-        AnyMode
-    };
+    enum Orientation { Normal, Left, Inverted, Right };
+    Q_ENUMS(Orientation)
 
-    explicit Display(QObject *parent = 0);
-    ~Display();
-
-    QString path() const;
-    void setPath(const QString &path);
+    QString name() const;
 
     bool enabled() const;
     void setEnabled(const bool &enabled);
 
-    QStringList availableResolutions() const;
-
-    QString resolution() const;
-    void setResolution(const QString &resolution);
-
-    OrientationMode orientation() const;
-    void setOrientation(const Display::OrientationMode &mode);
-
-    float scale() const;
-    void setScale(const float &scale);
-
     bool connected() const;
 
+    QStringList availableModes() const;
+
+    QString mode() const;
+    void setMode(const QString &mode);
+
+    Orientation orientation() const;
+    void setOrientation(const Orientation &orientation);
+
 Q_SIGNALS:
-    void pathChanged(const QString &path);
-    void enabledChanged(const bool enabled);
-    void availableResolutionsChanged(const QStringList &resolutions);
-    void resolutionChanged(const QString &resolution);
-    void orientationChanged(const Display::OrientationMode &mode);
-    void scaleChanged(float scale);
-    void connectedChanged(bool connected);
+    void enabledChanged();
+    void connectedChanged();
+    void availableModesChanged();
+    void modeChanged();
+    void orientationChanged();
 
 private:
-    QDBusConnection m_systemBusConnection;
-    QDBusInterface m_unityInterface;
-    QString m_path;
-    bool m_enabled;
-    QStringList m_availableResolutions;
-    QString m_resolution;
-    OrientationMode m_orientation;
-    float m_scale;
-    bool m_connected;
 
+    void updateModes();
+    void updateOrientation();
+    void updateSizes();
+
+    MirDisplayOutput *m_mirOutput;
+    QString m_name;
+    QSize m_size;
+    QSizeF m_physicalSize;
+    qreal m_refreshRate;
+    MirOrientation m_orientation;
+    QStringList m_availableModes;
+    int m_currentMode;
+    bool m_enabled;
+    bool m_connected;
 };
 
-Q_DECLARE_METATYPE (Display::OrientationMode)
+Q_DECLARE_METATYPE(Display*)
 
 #endif // DISPLAY_H

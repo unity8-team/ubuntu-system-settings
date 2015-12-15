@@ -20,7 +20,7 @@
 
 #include "brightness.h"
 
-#include <qpa/qplatformnativeinterface.h>
+//#include <qpa/qplatformnativeinterface.h>
 
 #include <QDBusArgument>
 #include <QDBusReply>
@@ -56,18 +56,6 @@ const QDBusArgument &operator>>(const QDBusArgument &argument,
     return argument;
 }
 
-typedef struct MirDemoState
-{
-    MirConnection *connection;
-    MirSurface *surface;
-} MirDemoState;
-
-static void connection_callback(MirConnection *new_connection, void *context)
-{
-    ((MirDemoState*)context)->connection = new_connection;
-    qWarning() << "cb!";
-}
-
 Brightness::Brightness(QObject *parent) :
     QObject(parent),
     m_systemBusConnection (QDBusConnection::systemBus()),
@@ -76,45 +64,11 @@ Brightness::Brightness(QObject *parent) :
                    "com.canonical.powerd",
                    m_systemBusConnection),
     m_powerdRunning(false),
-    m_autoBrightnessAvailable(false)
+    m_autoBrightnessAvailable(false),
+    m_displays(this)
 {
     qRegisterMetaType<BrightnessParams>();
     m_powerdRunning = m_powerdIface.isValid();
-
-    MirDemoState mcd;
-    mcd.connection = 0;
-    mcd.surface = 0;
-
-    qWarning() << "Connecting...";
-    mir_wait_for(mir_connect(nullptr, __FILE__, connection_callback, &mcd));
-    qWarning() << "Connected!";
-
-    if (mcd.connection == nullptr || !mir_connection_is_valid(mcd.connection))
-    {
-        const char *error = "Unknown error";
-        if (mcd.connection != nullptr)
-            error = mir_connection_get_error_message(mcd.connection);
-        qWarning() << error;
-        // fprintf(stderr, "Failed to connect to server `%s': %s\n",
-        //         server == nullptr ? "<default>" : server, error);
-        // return 1;
-    }
-
-    // auto *conn = static_cast<MirConnection*>(
-    //         QGuiApplication::platformNativeInterface()->nativeResourceForIntegration(
-    //                 "mirConnection"));
-
-    if (mir_connection_is_valid(mcd.connection)) {
-        qWarning() << "mir connection is valid";
-        MirDisplayConfiguration *conf = mir_connection_create_display_config(mcd.connection);
-        if (conf) {
-            qWarning() << "num_cards" << conf->num_cards;
-        } else {
-            qWarning() << "did not get a good mir display config";
-        }
-    } else {
-        qWarning() << "mir connection is NOT valid";
-    }
 
     if (!m_powerdRunning) {
         qWarning() << m_powerdIface.interface() << m_powerdIface.lastError().message();
@@ -139,4 +93,8 @@ bool Brightness::getAutoBrightnessAvailable() const
 
 bool Brightness::getPowerdRunning() const {
     return m_powerdRunning;
+}
+
+QAbstractItemModel * Brightness::displays() {
+    return m_displays.displays();
 }
