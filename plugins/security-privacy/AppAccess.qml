@@ -65,7 +65,7 @@ ItemPage {
                 }
                 ListElement {
                     name: QT_TR_NOOP("In-App Purchases")
-                    caption: QT_TR_NOOP("Ass that have requested access for in-app purchases")
+                    caption: QT_TR_NOOP("Apps that have requested access for in-app purchases")
                     trustStoreService: "InAppPurchases"
                 }
             }
