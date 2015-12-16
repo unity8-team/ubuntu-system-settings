@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-11 15:22-0500\n"
+"POT-Creation-Date: 2015-12-16 14:42-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -875,23 +875,23 @@ msgid "In-App Purchases"
 msgstr ""
 
 #: ../plugins/security-privacy/AppAccess.qml:68
-msgid "Ass that have requested access for in-app purchases"
+msgid "Apps that have requested access for in-app purchases"
 msgstr ""
 
-#: ../plugins/security-privacy/AppAccess.qml:80
+#: ../plugins/security-privacy/AppAccess.qml:81
 #, qt-format
 msgid "%1/%2"
 msgstr ""
 
-#: ../plugins/security-privacy/AppAccess.qml:81
+#: ../plugins/security-privacy/AppAccess.qml:82
 msgid "0"
 msgstr ""
 
-#: ../plugins/security-privacy/AppAccess.qml:96
+#: ../plugins/security-privacy/AppAccess.qml:97
 msgid "Apps may also request access to online accounts."
 msgstr ""
 
-#: ../plugins/security-privacy/AppAccess.qml:101
+#: ../plugins/security-privacy/AppAccess.qml:102
 msgid "Online Accounts…"
 msgstr ""
 
