@@ -37,6 +37,7 @@ Display::Display(MirDisplayOutput *output) {
 }
 
 void Display::updateModes() {
+    qWarning() << "updateModes";
     for (unsigned int i = 0; i < m_mirOutput->num_modes; ++i) {
         MirDisplayMode mode = m_mirOutput->modes[i];
         m_availableModes <<  QString("%1x%2x%3").arg(
@@ -52,6 +53,7 @@ void Display::updateModes() {
 }
 
 void Display::updateSizes() {
+    qWarning() << "updateSizes";
     m_physicalSize = QSizeF(
         QSize(m_mirOutput->physical_width_mm,
               m_mirOutput->physical_height_mm)
@@ -59,6 +61,7 @@ void Display::updateSizes() {
 }
 
 void Display::updateOrientation() {
+    qWarning() << "updateOrientation";
     m_orientation = m_mirOutput->orientation;
 }
 
@@ -75,7 +78,7 @@ bool Display::connected() const {
 }
 
 QString Display::mode() const {
-    return m_availableModes[m_currentMode];
+    return m_availableModes.value(m_currentMode, QString());
 }
 
 QStringList Display::availableModes() const {
