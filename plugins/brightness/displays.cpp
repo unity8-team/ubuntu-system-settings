@@ -51,7 +51,9 @@ Displays::Displays(QObject *parent) :
     }
 }
 
-Displays::~Displays() {}
+Displays::~Displays() {
+    mir_display_config_destroy(m_configuration);
+}
 
 bool Displays::makeDisplayServerConnection() {
 
@@ -72,21 +74,51 @@ bool Displays::makeDisplayServerConnection() {
 }
 
 void Displays::updateAvailableDisplays() {
-    if (m_mir_connection) {
-        MirDisplayConfiguration *conf = mir_connection_create_display_config(
-                m_mir_connection);
+    MirDisplayConfiguration *conf = mir_connection_create_display_config(
+            m_mir_connection);
 
-        for (unsigned int i = 0; i < conf->num_outputs; ++i) {
-            MirDisplayOutput output = conf->outputs[i];
-            qWarning() << "output" << i;
-            QSharedPointer<Display> display(new Display(&output));
-            m_displaysModel.addDisplay(display);
-        }
+    for (unsigned int i = 0; i < conf->num_outputs; ++i) {
+        MirDisplayOutput output = conf->outputs[i];
+        qWarning() << "output" << i;
+        QSharedPointer<Display> display(new Display(&output));
+        m_displaysModel.addDisplay(display);
     }
+    m_configuration = conf;
 }
 
 QAbstractItemModel * Displays::displays() {
     auto ret = &m_displaysModel;
     QQmlEngine::setObjectOwnership(ret, QQmlEngine::CppOwnership);
     return ret;
+}
+
+void Displays::applyDisplayConfiguration() {
+    qWarning() << "apply config";
+    MirDisplayOutput * outs[m_displaysModel.rowCount()] = {};
+    for (int i = 0; i < m_displaysModel.rowCount(); i++) {
+        int x = (int)i;
+        QModelIndex ix = m_displaysModel.index(x, 0, QModelIndex());
+        QString name = m_displaysModel.data(ix).toString();
+        QSharedPointer<Display> display = m_displaysModel.getDisplay(name);
+        outs[i] = display->output();
+    }
+
+    for (unsigned  int i = 0; i < m_configuration->num_outputs; ++i) {
+        MirDisplayOutput output = m_configuration->outputs[i];
+        qWarning() << "output" << i << "used" << output.used << "mode" << output.current_mode;
+
+    }
+    qWarning() << "sat new outputs";
+    m_configuration->outputs = reinterpret_cast<MirDisplayOutput*>(outs);
+
+    for (unsigned int i = 0; i < m_configuration->num_outputs; ++i) {
+        MirDisplayOutput output = m_configuration->outputs[i];
+        qWarning() << "output" << i << "used" << output.used << "mode" << output.current_mode;
+    }
+
+    mir_wait_for (mir_connection_apply_display_config(m_mir_connection, m_configuration));
+
+    const char *error = "No error";
+    error = mir_connection_get_error_message(m_mir_connection);
+    qWarning() << error;
 }

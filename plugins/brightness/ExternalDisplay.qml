@@ -33,6 +33,8 @@ Column {
     property string localMode: ""
     property double localScale: -1
 
+    signal apply();
+
     ListItems.Standard {
         text: i18n.tr("External display")
         enabled: model.connected
@@ -42,7 +44,12 @@ Column {
             property bool serverChecked: model.enabled
             onServerCheckedChanged: checked = serverChecked
             Component.onCompleted: checked = serverChecked
-            onTriggered: model.enabled = checked
+            onTriggered: {
+
+                console.warn('disabling display');
+                model.enabled = checked;
+                apply();
+            }
         }
     }
 
@@ -138,23 +145,29 @@ Column {
             anchors { left: parent.left; right: parent.right }
             text: i18n.tr("Apply changes")
             enabled: localOrientation ||
-                     localMode ||
-                     localScale >= 0
+                     localMode
+                     // localScale >= 0
             onClicked: {
+                var conf = {
+                    "name": model.name
+                }
+
                 if (localOrientation) {
-                    model.orientation = localOrientation;
+                    conf["orientation"] = localOrientation;
                     localOrientation = null;
                 }
 
                 if (localMode) {
-                    model.resolution = localMode;
+                    conf["mode"] = localMode;
                     localMode = "";
                 }
 
-                if (localScale >= 0) {
-                    model.scale = localScale;
-                    localScale = -1;
-                }
+                console.warn('applying conf', conf);
+
+                // if (localScale >= 0) {
+                //     model.scale = localScale;
+                //     localScale = -1;
+                // }
             }
         }
 
@@ -171,12 +184,12 @@ Column {
                         pageStack.push(soundPage);
                     else
                         console.warn(
-                            "Failed to get system-update " +
+                            "Failed to get sound page " +
                             "pageComponent"
                         );
                 } else {
                     console.warn(
-                        "Failed to get system-update plugin " +
+                        "Failed to get sound plugin " +
                         "instance"
                     )
                 }

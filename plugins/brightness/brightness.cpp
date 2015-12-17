@@ -98,3 +98,7 @@ bool Brightness::getPowerdRunning() const {
 QAbstractItemModel * Brightness::displays() {
     return m_displays.displays();
 }
+
+void Brightness::configureDisplay() {
+    m_displays.applyDisplayConfiguration();
+}

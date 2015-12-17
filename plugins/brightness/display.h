@@ -75,6 +75,8 @@ public:
     Orientation orientation() const;
     void setOrientation(const Orientation &orientation);
 
+    MirDisplayOutput * output() const;
+
 Q_SIGNALS:
     void enabledChanged();
     void connectedChanged();

@@ -18,6 +18,7 @@
  *
  */
 
+#include <QDebug>
 #include "displaymodel.h"
 
 DisplayListModel::DisplayListModel(QObject *parent)
@@ -80,6 +81,36 @@ QVariant DisplayListModel::data(const QModelIndex & index, int role) const {
     return ret;
 }
 
+bool DisplayListModel::setData(const QModelIndex &index,
+                               const QVariant &value,
+                               int role)
+{
+    qWarning() << __PRETTY_FUNCTION__ << index << value;
+    if (index.row() < 0 || index.row() >= m_displays.count())
+        return false;
+    auto display = m_displays[index.row()];
+    switch (role) {
+    case EnabledRole:
+        switch (static_cast<QMetaType::Type>(value.type())) {
+        case QMetaType::Bool:
+        case QMetaType::QChar:
+        case QMetaType::Int:
+        case QMetaType::UInt:
+        case QMetaType::LongLong:
+        case QMetaType::ULongLong:
+            display->setEnabled(value.toBool());
+            return true;
+
+        default:
+            break;
+        }
+
+        break;
+    }
+
+    return false;
+}
+
 QHash<int, QByteArray> DisplayListModel::roleNames() const {
     QHash<int, QByteArray> roles;
     roles[EnabledRole] = "enabled";
@@ -90,6 +121,22 @@ QHash<int, QByteArray> DisplayListModel::roleNames() const {
     // roles[ScaleRole] = "scale";
     // roles[StateRole] = "state";
     return roles;
+}
+
+QSharedPointer<Display> DisplayListModel::getDisplay(const QString name) const {
+    QSharedPointer<Display> display;
+
+    for (int i=0, n=m_displays.size(); i<n; i++)
+        if (m_displays[i]->name() == name)
+            return m_displays[i];
+
+    return display;
+}
+
+QModelIndex DisplayListModel::index(int row, int column,
+        const QModelIndex & parent) const {
+    Q_UNUSED(column);
+    return createIndex(row, column);
 }
 
 DisplayListModel::~DisplayListModel() {

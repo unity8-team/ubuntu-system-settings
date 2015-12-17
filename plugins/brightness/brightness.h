@@ -43,6 +43,7 @@ public:
     bool getPowerdRunning() const;
     bool getAutoBrightnessAvailable() const;
     QAbstractItemModel * displays();
+    Q_INVOKABLE void configureDisplay();
 
 private:
     QDBusConnection m_systemBusConnection;

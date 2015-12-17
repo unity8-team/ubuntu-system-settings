@@ -35,12 +35,14 @@ public:
     explicit Displays(QObject *parent = 0);
     ~Displays();
     QAbstractItemModel * displays();
+    void applyDisplayConfiguration();
 
 private:
     bool makeDisplayServerConnection();
     void updateAvailableDisplays();
     DisplayListModel m_displaysModel;
     MirConnection *m_mir_connection;
+    MirDisplayConfiguration *m_configuration;
 };
 
 #endif // DISPLAYS_H

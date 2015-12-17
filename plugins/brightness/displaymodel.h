@@ -48,8 +48,15 @@ public:
     void addDisplay(QSharedPointer<Display> &display);
 
     QVariant data(const QModelIndex & index, int role = Qt::DisplayRole) const;
-
+    bool setData(const QModelIndex &index, const QVariant &value,
+                 int role = Qt::EditRole);
     int rowCount(const QModelIndex & parent = QModelIndex()) const;
+    QModelIndex index(int row, int column,
+                      const QModelIndex & parent = QModelIndex()) const;
+
+    QSharedPointer<Display> getDisplay(const QString name) const;
+
+    Q_INVOKABLE bool apply(const bool &enabled);
 
 protected:
     QHash<int, QByteArray> roleNames() const;

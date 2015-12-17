@@ -126,6 +126,10 @@ ItemPage {
 
                 delegate: ExternalDisplay {
                     Component.onCompleted: console.warn('model.mode', mode);
+                    onApply: {
+                        console.warn('apply event obseverd by pagecompo');
+                        brightnessPanel.configureDisplay();
+                    }
                     anchors { left: parent.left; right: parent.right }
                 }
             }

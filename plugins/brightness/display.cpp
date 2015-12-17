@@ -62,6 +62,10 @@ void Display::updateOrientation() {
     m_orientation = m_mirOutput->orientation;
 }
 
+QString Display::name() const {
+    return m_name;
+}
+
 bool Display::enabled() const {
     return m_enabled;
 }
@@ -70,16 +74,8 @@ bool Display::connected() const {
     return m_connected;
 }
 
-void Display::setEnabled(const bool &enabled) {
-
-}
-
 QString Display::mode() const {
-    return availableModes()[m_currentMode];
-}
-
-void Display::setMode(const QString &mode) {
-
+    return m_availableModes[m_currentMode];
 }
 
 QStringList Display::availableModes() const {
@@ -90,6 +86,25 @@ Display::Orientation Display::orientation() const {
     return (Display::Orientation)m_orientation;
 }
 
-void Display::setOrientation(const Display::Orientation &orientation) {
+MirDisplayOutput * Display::output() const {
+    return m_mirOutput;
+}
 
+void Display::setEnabled(const bool &enabled) {
+    m_mirOutput->used = enabled;
+    qWarning() << __PRETTY_FUNCTION__ << enabled;
+}
+
+void Display::setMode(const QString &mode) {
+    int index = m_availableModes.indexOf(mode);
+    if (index >= 0) {
+        uint32_t i = (uint32_t)index;
+        m_mirOutput->current_mode = i;
+    } else {
+        qWarning() << __PRETTY_FUNCTION__ << "failed to set mode to" << mode;
+    }
+}
+
+void Display::setOrientation(const Orientation &orientation) {
+    qWarning() << __PRETTY_FUNCTION__ << orientation;
 }
