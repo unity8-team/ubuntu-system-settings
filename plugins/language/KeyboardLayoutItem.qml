@@ -22,49 +22,54 @@ import QtQuick 2.4
 import Ubuntu.Components 1.3
 import Ubuntu.Components.ListItems 1.3 as ListItem
 
-ListItem.Base {
+ListItem.Empty {
+    id: root
     property alias name: name.text
     property alias checked: checkBox.checked
     property alias shortName: shortName.text
 
-    Row {
-        anchors.top: parent.top
-        anchors.left: parent.left
-        anchors.bottom: parent.bottom
-        spacing: units.gu(1)
-
-        Rectangle {
-            width: units.gu(3.0)
-            height: units.gu(3.0)
-            radius: units.gu(0.5)
-
-            color: Theme.palette.normal.backgroundText
-
-            anchors.verticalCenter: parent.verticalCenter
-
-            Label {
-                id: shortName
-
-                color: Theme.palette.normal.background
-                fontSize: "small"
-
-                anchors.centerIn: parent
-            }
+    Rectangle {
+        id: icon
+        anchors {
+            left: parent.left
+            leftMargin: units.gu(2)
         }
+        width: units.gu(3.0)
+        height: units.gu(3.0)
+        radius: units.gu(0.5)
+
+        color: Theme.palette.normal.backgroundText
+
+        anchors.verticalCenter: parent.verticalCenter
 
         Label {
-            id: name
+            id: shortName
 
-            anchors.verticalCenter: parent.verticalCenter
+            color: Theme.palette.normal.background
+            fontSize: "small"
+
+            anchors.centerIn: parent
         }
+    }
+
+    Label {
+        id: name
+        anchors {
+            left: icon.right
+            leftMargin: units.gu(2)
+            right: checkBox.right
+            rightMargin: units.gu(4)
+        }
+        elide: Text.ElideMiddle
+        anchors.verticalCenter: parent.verticalCenter
     }
 
     CheckBox {
         id: checkBox
-
-        anchors.right: parent.right
-        anchors.verticalCenter: parent.verticalCenter
+        anchors {
+            right: parent.right
+            rightMargin: units.gu(2)
+            verticalCenter: parent.verticalCenter
+        }
     }
-
-    onClicked: checked = !checked
 }

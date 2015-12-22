@@ -25,9 +25,7 @@ import Ubuntu.SystemSettings.LanguagePlugin 1.0
 ItemPage {
     title: i18n.tr("Keyboard layouts")
 
-    UbuntuLanguagePlugin {
-        id: plugin
-    }
+    property var plugin
 
     SubsetView {
         id: subsetView
@@ -41,6 +39,10 @@ ItemPage {
 
         model: plugin.keyboardLayoutsModel
         delegate: KeyboardLayoutItem {
+            anchors {
+                left: parent.left
+                right: parent.right
+            }
             name: model.language
             shortName: model.icon
             checked: model.checked
