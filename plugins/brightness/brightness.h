@@ -23,6 +23,7 @@
 
 #include <QDBusInterface>
 #include <QObject>
+#include "displays.h"
 
 class Brightness : public QObject
 {
@@ -33,11 +34,16 @@ class Brightness : public QObject
     Q_PROPERTY (bool autoBrightnessAvailable
                 READ getAutoBrightnessAvailable
                 CONSTANT)
+    Q_PROPERTY (QAbstractItemModel * displays
+                READ displays
+                CONSTANT)
 
 public:
     explicit Brightness(QObject *parent = 0);
     bool getPowerdRunning() const;
     bool getAutoBrightnessAvailable() const;
+    QAbstractItemModel * displays();
+    Q_INVOKABLE void configureDisplay();
 
 private:
     QDBusConnection m_systemBusConnection;
@@ -45,6 +51,7 @@ private:
     QDBusInterface m_powerdIface;
     bool m_powerdRunning;
     bool m_autoBrightnessAvailable;
+    Displays m_displays;
 };
 
 #endif // BRIGHTNESS_H

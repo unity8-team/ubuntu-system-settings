@@ -20,10 +20,13 @@
 
 #include "brightness.h"
 
+//#include <qpa/qplatformnativeinterface.h>
+
 #include <QDBusArgument>
 #include <QDBusReply>
 #include <QDBusMetaType>
 #include <QDebug>
+#include <QGuiApplication>
 
 // Returned data from getBrightnessParams
 struct BrightnessParams {
@@ -61,7 +64,8 @@ Brightness::Brightness(QObject *parent) :
                    "com.canonical.powerd",
                    m_systemBusConnection),
     m_powerdRunning(false),
-    m_autoBrightnessAvailable(false)
+    m_autoBrightnessAvailable(false),
+    m_displays(this)
 {
     qRegisterMetaType<BrightnessParams>();
     m_powerdRunning = m_powerdIface.isValid();
@@ -89,4 +93,12 @@ bool Brightness::getAutoBrightnessAvailable() const
 
 bool Brightness::getPowerdRunning() const {
     return m_powerdRunning;
+}
+
+QAbstractItemModel * Brightness::displays() {
+    return m_displays.displays();
+}
+
+void Brightness::configureDisplay() {
+    m_displays.applyDisplayConfiguration();
 }

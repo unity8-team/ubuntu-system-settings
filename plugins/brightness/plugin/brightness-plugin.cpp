@@ -19,11 +19,17 @@
  */
 
 #include "brightness-plugin.h"
+// #include "../displays.h"
 
 #include <QDebug>
 #include <QDBusInterface>
 #include <QStringList>
 #include <SystemSettings/ItemBase>
+
+#include <libintl.h>
+QString _(const char *text){
+    return QString::fromUtf8(dgettext(0, text));
+}
 
 using namespace SystemSettings;
 
@@ -33,6 +39,7 @@ class BrightnessItem: public ItemBase
 
 public:
     explicit BrightnessItem(const QVariantMap &staticData, QObject *parent = 0);
+    void setDisplayName(const QString &name);
     void setVisibility(bool visible);
 
 };
@@ -47,7 +54,18 @@ BrightnessItem::BrightnessItem(const QVariantMap &staticData, QObject *parent):
                                   QDBusConnection::systemBus());
 
     // Hide the plugin if powerd isn't running; it's redundant currentlys
-    setVisibility(m_powerdIface.isValid());
+    //setVisibility(m_powerdIface.isValid());
+    setVisibility(true);
+    setDisplayName(_("Brightness"));
+    // Displays displays;
+    // if (displays.displays().count > 0) {
+    // }
+    //setName(_("Brightness & Display"));
+}
+
+void BrightnessItem::setDisplayName(const QString &name)
+{
+    setName(name);
 }
 
 void BrightnessItem::setVisibility(bool visible)

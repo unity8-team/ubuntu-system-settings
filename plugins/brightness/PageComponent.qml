@@ -38,70 +38,107 @@ ItemPage {
         id: brightnessPanel
     }
 
-    Column {
-        anchors.left: parent.left
-        anchors.right: parent.right
+    Flickable {
+        anchors.fill: parent
+        contentHeight: contentItem.childrenRect.height
+        boundsBehavior: (contentHeight > root.height) ?
+                            Flickable.DragAndOvershootBounds :
+                            Flickable.StopAtBounds
+        /* Set the direction to workaround
+           https://bugreports.qt-project.org/browse/QTBUG-31905 otherwise the UI
+           might end up in a situation where scrolling doesn't work */
+        flickableDirection: Flickable.VerticalFlick
 
-        QDBusActionGroup {
-            id: indicatorPower
-            busType: 1
-            busName: "com.canonical.indicator.power"
-            objectPath: "/com/canonical/indicator/power"
+        Column {
+            anchors.left: parent.left
+            anchors.right: parent.right
 
-            property variant brightness: action("brightness")
+            QDBusActionGroup {
+                id: indicatorPower
+                busType: 1
+                busName: "com.canonical.indicator.power"
+                objectPath: "/com/canonical/indicator/power"
 
-            Component.onCompleted: start()
-        }
+                property variant brightness: action("brightness")
 
-        ListItem.Standard {
-            text: i18n.tr("Display brightness")
-            showDivider: false
-        }
-
-        /* Use the SliderMenu component instead of the Slider to avoid binding
-           issues on valueChanged until LP: #1388094 is fixed.
-        */
-        Menus.SliderMenu {
-            id: brightnessSlider
-            objectName: "sliderMenu"
-            enabled: indicatorPower.brightness.state != null
-            live: true
-            minimumValue: 0.0
-            maximumValue: 100.0
-            minIcon: "image://theme/display-brightness-min"
-            maxIcon: "image://theme/display-brightness-max"
-
-            property real serverValue: enabled ? indicatorPower.brightness.state * 100 : 0.0
-
-            USC.ServerPropertySynchroniser {
-                userTarget: brightnessSlider
-                userProperty: "value"
-                serverTarget: brightnessSlider
-                serverProperty: "serverValue"
-                maximumWaitBufferInterval: 16
-
-                onSyncTriggered: indicatorPower.brightness.updateState(value / 100.0)
+                Component.onCompleted: start()
             }
-        }
 
-        ListItem.Standard {
-            id: adjust
-            text: i18n.tr("Adjust automatically")
-            visible: brightnessPanel.powerdRunning &&
-                     brightnessPanel.autoBrightnessAvailable
-            control: CheckBox {
-                id: autoAdjustCheck
-                property bool serverChecked: gsettings.autoBrightness
-                onServerCheckedChanged: checked = serverChecked
-                Component.onCompleted: checked = serverChecked
-                onTriggered: gsettings.autoBrightness = checked
+            SettingsItemTitle {
+                text: i18n.tr("Display brightness")
+                showDivider: false
             }
-            showDivider: false
-        }
-        ListItem.Caption {
-            text: i18n.tr(
-                    "Brightens and dims the display to suit the surroundings.")
-            visible: adjust.visible
+
+            /* Use the SliderMenu component instead of the Slider to avoid binding
+               issues on valueChanged until LP: #1388094 is fixed.
+            */
+            Menus.SliderMenu {
+                id: brightnessSlider
+                objectName: "sliderMenu"
+                enabled: indicatorPower.brightness.state != null
+                live: true
+                minimumValue: 0.0
+                maximumValue: 100.0
+                minIcon: "image://theme/display-brightness-min"
+                maxIcon: "image://theme/display-brightness-max"
+                showDivider: adjust.visible
+                property real serverValue: enabled ? indicatorPower.brightness.state * 100 : 0.0
+
+                USC.ServerPropertySynchroniser {
+                    userTarget: brightnessSlider
+                    userProperty: "value"
+                    serverTarget: brightnessSlider
+                    serverProperty: "serverValue"
+                    maximumWaitBufferInterval: 16
+
+                    onSyncTriggered: indicatorPower.brightness.updateState(value / 100.0)
+                }
+            }
+
+            ListItem.Standard {
+                id: adjust
+                text: i18n.tr("Adjust automatically")
+                visible: brightnessPanel.powerdRunning &&
+                         brightnessPanel.autoBrightnessAvailable
+                control: CheckBox {
+                    id: autoAdjustCheck
+                    property bool serverChecked: gsettings.autoBrightness
+                    onServerCheckedChanged: checked = serverChecked
+                    Component.onCompleted: checked = serverChecked
+                    onTriggered: gsettings.autoBrightness = checked
+                }
+                showDivider: false
+            }
+
+            ListItem.Caption {
+                text: i18n.tr(
+                        "Brightens and dims the display to suit the surroundings.")
+                visible: adjust.visible
+            }
+
+            ListItem.Divider {
+                visible: brightnessPanel.displays.count > 0
+            }
+
+            Repeater {
+                id: rep
+                model: brightnessPanel.displays
+
+                delegate: ExternalDisplay {
+                    Component.onCompleted: console.warn('model.mode', mode);
+                    onApply: {
+                        console.warn('apply event obseverd by pagecompo');
+                        brightnessPanel.configureDisplay();
+                    }
+                    anchors { left: parent.left; right: parent.right }
+                }
+            }
+
+            ListItem.Divider {
+                anchors { left: parent.left; right: parent.right; }
+                height: units.gu(10)
+                opacity: 0
+            }
         }
     }
 
