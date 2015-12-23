@@ -34,7 +34,7 @@ public:
 
     Display() {}
     ~Display() {}
-    Display(MirDisplayOutput *output);
+    Display(MirDisplayOutput * output);
     Q_PROPERTY( QString name
                 READ name
                 CONSTANT )
@@ -90,7 +90,7 @@ private:
     void updateOrientation();
     void updateSizes();
 
-    MirDisplayOutput *m_mirOutput;
+    MirDisplayOutput * m_mirOutput;
     QString m_name;
     QSize m_size;
     QSizeF m_physicalSize;

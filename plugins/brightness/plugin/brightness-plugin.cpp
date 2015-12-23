@@ -19,7 +19,7 @@
  */
 
 #include "brightness-plugin.h"
-// #include "../displays.h"
+#include "../mirdisplays.h"
 
 #include <QDebug>
 #include <QDBusInterface>
@@ -42,6 +42,8 @@ public:
     void setDisplayName(const QString &name);
     void setVisibility(bool visible);
 
+private:
+    int getNumberOfDisplays();
 };
 
 
@@ -56,11 +58,23 @@ BrightnessItem::BrightnessItem(const QVariantMap &staticData, QObject *parent):
     // Hide the plugin if powerd isn't running; it's redundant currentlys
     //setVisibility(m_powerdIface.isValid());
     setVisibility(true);
-    setDisplayName(_("Brightness"));
-    // Displays displays;
-    // if (displays.displays().count > 0) {
-    // }
-    //setName(_("Brightness & Display"));
+
+    if (getNumberOfDisplays() == 0) {
+        setDisplayName(_("Brightness"));
+    } else {
+        setDisplayName(_("Brightness & Display"));
+    }
+}
+
+int BrightnessItem::getNumberOfDisplays() {
+    MirDisplays mirDisplays;
+    int outputs = 0;
+
+    if (mirDisplays.isConnected()) {
+        MirDisplayConfiguration *conf = mirDisplays.getConfiguration();
+        outputs = conf->num_outputs;
+    }
+    return outputs;
 }
 
 void BrightnessItem::setDisplayName(const QString &name)

@@ -135,6 +135,7 @@ QSharedPointer<Display> DisplayListModel::getDisplay(const QString name) const {
 
 QModelIndex DisplayListModel::index(int row, int column,
         const QModelIndex & parent) const {
+    Q_UNUSED(parent);
     Q_UNUSED(column);
     return createIndex(row, column);
 }

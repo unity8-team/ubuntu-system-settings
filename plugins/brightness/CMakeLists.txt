@@ -11,11 +11,13 @@ set(QML_SOURCES
     ExternalDisplay.qml
 )
 
-add_library(uss-displays STATIC
+add_library(uss-displays SHARED
                 display.h
                 display.cpp
                 displaymodel.h
                 displaymodel.cpp
+                mirdisplays.h
+                mirdisplays.cpp
                 displays.h
                 displays.cpp)
 qt5_use_modules(uss-displays Quick DBus)

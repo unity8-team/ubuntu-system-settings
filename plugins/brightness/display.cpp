@@ -95,7 +95,6 @@ MirDisplayOutput * Display::output() const {
 
 void Display::setEnabled(const bool &enabled) {
     m_mirOutput->used = enabled;
-    qWarning() << __PRETTY_FUNCTION__ << enabled;
 }
 
 void Display::setMode(const QString &mode) {

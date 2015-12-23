@@ -18,31 +18,31 @@
  *
  */
 
-#ifndef DISPLAYS_H
-#define DISPLAYS_H
+#ifndef MIRDISPLAYS_H
+#define MIRDISPLAYS_H
 
 #include <QObject>
 #include <QDebug>
 #include <mir_toolkit/mir_client_library.h>
 
-#include "mirdisplays.h"
-#include "displaymodel.h"
-
-class Displays : public QObject
+class MirDisplays : public QObject
 {
     Q_OBJECT
 public:
-    explicit Displays(QObject * parent = 0);
-    ~Displays();
-    QAbstractItemModel * displays();
-    void applyDisplayConfiguration();
+    explicit MirDisplays(QObject *parent = 0);
+    ~MirDisplays();
+    MirDisplayConfiguration * getConfiguration() const;
+    void setConfiguration(MirDisplayConfiguration * conf);
+    void applyConfiguration(MirDisplayConfiguration * conf);
+    bool isConnected();
 
-public Q_SLOTS:
-    void updateAvailableMirDisplays();
+Q_SIGNALS:
+    void configurationChanged() const;
 
 private:
-    DisplayListModel m_displaysModel;
-    MirDisplays m_mirDisplays;
+    bool connect();
+    MirConnection * m_mir_connection;
+    MirDisplayConfiguration * m_configuration;
 };
 
-#endif // DISPLAYS_H
+#endif // MIRDISPLAYS_H
