@@ -27,7 +27,6 @@
 
 static void mir_display_change_callback(MirConnection *connection, void *context) {
     qWarning() << "mir_display_change_callback" << context;
-    // ((Displays*)context)->updateAvailableDisplays();
     MirDisplayConfiguration *conf = mir_connection_create_display_config(
             connection);
     static_cast<MirDisplays*>(context)->setConfiguration(conf);
@@ -72,7 +71,7 @@ void MirDisplays::applyConfiguration(MirDisplayConfiguration * conf) {
     qWarning() << error;
 }
 
-bool MirDisplays::connect() {
+void MirDisplays::connect() {
     qWarning() << "Connecting...";
     m_mir_connection = static_cast<MirConnection*>(
             QGuiApplication::platformNativeInterface()
@@ -83,13 +82,9 @@ bool MirDisplays::connect() {
         if (m_mir_connection != nullptr)
             error = mir_connection_get_error_message(m_mir_connection);
         qWarning() << error;
-        return false;
     } else {
         qWarning() << "Using mir as display server.";
         mir_connection_set_display_config_change_callback(
                 m_mir_connection, mir_display_change_callback, this);
-        return true;
     }
-    // Valid connection but null.
-    return false;
 }

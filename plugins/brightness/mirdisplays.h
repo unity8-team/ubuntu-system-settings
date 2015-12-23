@@ -40,7 +40,7 @@ Q_SIGNALS:
     void configurationChanged() const;
 
 private:
-    bool connect();
+    void connect();
     MirConnection * m_mir_connection;
     MirDisplayConfiguration * m_configuration;
 };
