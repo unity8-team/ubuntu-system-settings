@@ -15,7 +15,6 @@
  *
  * Authors:
  * Jonas G. Drange <jonas.drange@canonical.com>
- *
  */
 
 #include <QDebug>

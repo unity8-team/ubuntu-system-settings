@@ -16,6 +16,8 @@
  * Authors:
  * Jonas G. Drange <jonas.drange@canonical.com>
  *
+ * This is a concrete DAO for obtaining the means to view and configure
+ * displays (outputs) in Mir.
  */
 
 #ifndef MIRDISPLAYS_H

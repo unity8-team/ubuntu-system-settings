@@ -16,6 +16,10 @@
  * Authors:
  * Jonas G. Drange <jonas.drange@canonical.com>
  *
+ * A Displays manager class. Currently only suitable for Mir.
+ * Note: It is assumed that the model will hold QScreen objects
+ * some time in the future, and thus lose it's tight coupling
+ * to Mir.
  */
 
 #ifndef DISPLAYS_H
@@ -23,7 +27,6 @@
 
 #include <QObject>
 #include <QDebug>
-#include <mir_toolkit/mir_client_library.h>
 
 #include "mirdisplays.h"
 #include "displaymodel.h"

@@ -16,6 +16,9 @@
  * Authors:
  * Jonas G. Drange <jonas.drange@canonical.com>
  *
+ * A abstraction of a display, currently only suitable for use with Mir.
+ * Note: It is assumed that this class will eventually be replaced
+ * by QScreen objects produced by platform abstraction APIs.
  */
 
 #ifndef DISPLAY_H
@@ -85,7 +88,6 @@ Q_SIGNALS:
     void orientationChanged();
 
 private:
-
     void updateModes();
     void updateOrientation();
     void updateSizes();

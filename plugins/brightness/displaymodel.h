@@ -16,6 +16,7 @@
  * Authors:
  * Jonas G. Drange <jonas.drange@canonical.com>
  *
+ * A model for storing and accessing displays.
  */
 
 #ifndef DISPLAY_MODEL_H
