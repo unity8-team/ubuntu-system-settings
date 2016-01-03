@@ -38,8 +38,8 @@ public:
     Display() {}
     ~Display() {}
     Display(MirDisplayOutput * output);
-    Q_PROPERTY( QString name
-                READ name
+    Q_PROPERTY( int id
+                READ id
                 CONSTANT )
     Q_PROPERTY( bool enabled
                 READ enabled
@@ -60,10 +60,14 @@ public:
                 WRITE setOrientation
                 NOTIFY orientationChanged )
 
-    enum Orientation { Normal, Left, Inverted, Right };
+    enum Orientation {
+        Normal, PortraitMode, LandscapeInvertedMode,
+        PortraitInvertedMode
+    };
+
     Q_ENUMS(Orientation)
 
-    QString name() const;
+    int id() const;
 
     bool enabled() const;
     void setEnabled(const bool &enabled);
@@ -78,7 +82,10 @@ public:
     Orientation orientation() const;
     void setOrientation(const Orientation &orientation);
 
-    MirDisplayOutput * output() const;
+    // TODO: Move to some private object as to not expose too much
+    // MIR specific stuff in this model.
+    MirDisplayOutput * getDisplayOutput() const;
+    void setDisplayOutput(MirDisplayOutput * output);
 
 Q_SIGNALS:
     void enabledChanged();
@@ -92,8 +99,9 @@ private:
     void updateOrientation();
     void updateSizes();
 
+    // TODO: hide this in some private object in this model
     MirDisplayOutput * m_mirOutput;
-    QString m_name;
+
     QSize m_size;
     QSizeF m_physicalSize;
     qreal m_refreshRate;
@@ -102,6 +110,8 @@ private:
     int m_currentMode;
     bool m_enabled;
     bool m_connected;
+    MirPowerMode m_powerMode;
+    int m_id;
 };
 
 Q_DECLARE_METATYPE(Display*)

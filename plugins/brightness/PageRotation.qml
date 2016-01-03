@@ -30,9 +30,7 @@ ItemPage {
     title: i18n.tr("Resolution")
     objectName: "resolutionPage"
 
-    property Display display
-
-    signal orientationChanged(var orientation);
+    property var orientation
 
     Flickable {
         id: scrollWidget
@@ -58,10 +56,9 @@ ItemPage {
                 expanded: true
                 highlightWhenPressed: false
                 onDelegateClicked: {
-                    var orientation;
                     switch (index) {
                         case 0:
-                            orientation = Display.AnyMode;
+                            orientation = Display.Normal;
                             break;
                         case 1:
                             orientation = Display.PortraitMode;
@@ -73,20 +70,17 @@ ItemPage {
                             orientation = Display.PortraitInvertedMode;
                             break;
                     }
-                    orientationChanged(orientation);
                 }
                 Component.onCompleted: {
-                    switch (display.orientation) {
-                        case Display.AnyMode:
+                    console.warn('orientation', orientation)
+                    switch (orientation) {
+                        case Display.Normal:
                             selectedIndex = 0;
                             break;
                         case Display.PortraitMode:
-                        case Display.PortraitAnyMode:
                             selectedIndex = 1;
                             break;
-                        case Display.LandscapeMode:
                         case Display.LandscapeInvertedMode:
-                        case Display.LandscapeAnyMode:
                             selectedIndex = 2;
                             break;
                         case Display.PortraitInvertedMode:

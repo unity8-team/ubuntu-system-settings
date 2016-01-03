@@ -28,7 +28,7 @@ DisplayListModel::DisplayListModel(QObject *parent)
 void DisplayListModel::addDisplay(QSharedPointer<Display> &display) {
     int at = rowCount();
     for (int i = 0; i < m_displays.size(); ++i) {
-        if (display->name() < m_displays.at(i)->name()) {
+        if (display->id() < m_displays.at(i)->id()) {
             at = i;
             break;
         }
@@ -51,7 +51,7 @@ QVariant DisplayListModel::data(const QModelIndex & index, int role) const {
     auto display = m_displays[index.row()];
     switch (role) {
     case Qt::DisplayRole:
-        ret = display->name();
+        ret = QString("Display %1").arg(QString::number(display->id()));
         break;
     case EnabledRole:
         ret = display->enabled();
@@ -69,15 +69,6 @@ QVariant DisplayListModel::data(const QModelIndex & index, int role) const {
         ret = display->orientation();
         break;
     }
-    //  else if (role == displayRole) {
-    //     return QVariant::fromValue(display);
-    // } else if (role == GroupRole) {
-    //     return display->path();;
-    // }
-    // if (role == TypeRole)
-    //     return display.type();
-    // else if (role == SizeRole)
-    //     return display.size();
     return ret;
 }
 
@@ -85,7 +76,6 @@ bool DisplayListModel::setData(const QModelIndex &index,
                                const QVariant &value,
                                int role)
 {
-    qWarning() << __PRETTY_FUNCTION__ << index << value;
     if (index.row() < 0 || index.row() >= m_displays.count())
         return false;
     auto display = m_displays[index.row()];
@@ -119,15 +109,14 @@ QHash<int, QByteArray> DisplayListModel::roleNames() const {
     roles[AvailableModesRole] = "availableModes";
     roles[OrientationRole] = "orientation";
     // roles[ScaleRole] = "scale";
-    // roles[StateRole] = "state";
     return roles;
 }
 
-QSharedPointer<Display> DisplayListModel::getDisplay(const QString name) const {
+QSharedPointer<Display> DisplayListModel::getDisplay(const int outputId) const {
     QSharedPointer<Display> display;
 
     for (int i=0, n=m_displays.size(); i<n; i++)
-        if (m_displays[i]->name() == name)
+        if (m_displays[i]->id() == outputId)
             return m_displays[i];
 
     return display;
@@ -141,5 +130,4 @@ QModelIndex DisplayListModel::index(int row, int column,
 }
 
 DisplayListModel::~DisplayListModel() {
-    //qDeleteAll(m_displays);
 }

@@ -43,12 +43,7 @@ MirDisplays::MirDisplays(QObject *parent) :
     }
 }
 
-
-MirDisplays::~MirDisplays() {
-    if (m_configuration) {
-        mir_display_config_destroy(m_configuration);
-    }
-}
+MirDisplays::~MirDisplays() {}
 
 MirDisplayConfiguration * MirDisplays::getConfiguration() const {
     return m_configuration;
@@ -64,10 +59,11 @@ void MirDisplays::setConfiguration(MirDisplayConfiguration * conf) {
 
 void MirDisplays::applyConfiguration(MirDisplayConfiguration * conf) {
     mir_wait_for(mir_connection_apply_display_config(m_mir_connection, conf));
+    qWarning() << "mirdisplays applyConfiguration" << conf;
 
     const char *error = "No error";
     error = mir_connection_get_error_message(m_mir_connection);
-    qWarning() << error;
+    qWarning() << "Mir apply configuration error:" << error;
 }
 
 void MirDisplays::connect() {

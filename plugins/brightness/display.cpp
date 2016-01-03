@@ -23,17 +23,7 @@
 #include "display.h"
 
 Display::Display(MirDisplayOutput *output) {
-    m_mirOutput = output;
-    m_connected = output->connected;
-    m_enabled = output->used;
-    m_name = QString("Display %1").arg(QString::number(output->output_id));
-    qWarning() << "Display created" << output->type << output->connected << output->used;
-
-    if (m_mirOutput) {
-        updateModes();
-        updateOrientation();
-        updateSizes();
-    }
+    setDisplayOutput(output);
 }
 
 void Display::updateModes() {
@@ -65,12 +55,11 @@ void Display::updateOrientation() {
     m_orientation = m_mirOutput->orientation;
 }
 
-QString Display::name() const {
-    return m_name;
+int Display::id() const {
+    return m_id;
 }
-
 bool Display::enabled() const {
-    return m_enabled;
+    return m_enabled && m_powerMode == mir_power_mode_on;
 }
 
 bool Display::connected() const {
@@ -86,15 +75,37 @@ QStringList Display::availableModes() const {
 }
 
 Display::Orientation Display::orientation() const {
-    return (Display::Orientation)m_orientation;
+    qWarning() << __PRETTY_FUNCTION__ << m_orientation;
+    switch (m_orientation) {
+        case mir_orientation_normal:
+            return Display::Orientation::Normal;
+        case mir_orientation_left:
+            return Display::Orientation::PortraitMode;
+        case mir_orientation_inverted:
+            return Display::Orientation::LandscapeInvertedMode;
+        case mir_orientation_right:
+            return Display::Orientation::PortraitInvertedMode;
+        default:
+            return Display::Orientation::Normal;
+    }
 }
 
-MirDisplayOutput * Display::output() const {
+MirDisplayOutput * Display::getDisplayOutput() const {
     return m_mirOutput;
 }
 
 void Display::setEnabled(const bool &enabled) {
     m_mirOutput->used = enabled;
+    if (enabled) {
+        int index = m_availableModes.indexOf(mode());
+        uint32_t i = (uint32_t)index;
+        m_mirOutput->current_mode = i;
+        m_mirOutput->power_mode = mir_power_mode_on;
+    } else {
+        m_mirOutput->current_mode = 0;
+        m_mirOutput->power_mode = mir_power_mode_standby;
+    }
+    m_powerMode = m_mirOutput->power_mode;
 }
 
 void Display::setMode(const QString &mode) {
@@ -109,4 +120,43 @@ void Display::setMode(const QString &mode) {
 
 void Display::setOrientation(const Orientation &orientation) {
     qWarning() << __PRETTY_FUNCTION__ << orientation;
+    MirOrientation newOrientation;
+    switch (orientation) {
+        case Display::Orientation::Normal:
+            newOrientation = mir_orientation_normal;
+            break;
+        case Display::Orientation::PortraitMode:
+            newOrientation = mir_orientation_left;
+            break;
+        case Display::Orientation::LandscapeInvertedMode:
+            newOrientation = mir_orientation_inverted;
+            break;
+        case Display::Orientation::PortraitInvertedMode:
+            newOrientation = mir_orientation_right;
+            break;
+        default:
+            newOrientation = mir_orientation_normal;
+    }
+    m_orientation = newOrientation;
+}
+
+void Display::setDisplayOutput(MirDisplayOutput * output) {
+    qWarning() << __PRETTY_FUNCTION__ << output;
+    m_mirOutput = output;
+    if (output) {
+        m_connected = output->connected;
+        m_enabled = output->used && output->power_mode == mir_power_mode_on;
+        m_id = output->output_id;
+        m_powerMode = static_cast<MirPowerMode>(output->power_mode);
+        m_orientation = static_cast<MirOrientation>(output->orientation);
+        qWarning() << "Sat display output, type:"
+            << output->type
+            << "connected:" << output->connected
+            << "used:" << output->used
+            << "orientation:" << output->orientation;
+
+        updateModes();
+        updateOrientation();
+        updateSizes();
+    }
 }

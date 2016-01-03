@@ -29,9 +29,9 @@ import Ubuntu.SystemSettings.Brightness 1.0
 
 Column {
 
-    property var localOrientation: null
-    property string localMode: ""
-    property double localScale: -1
+    property var localOrientation
+    property string localMode
+    property var localEnabled
 
     signal apply();
 
@@ -45,10 +45,8 @@ Column {
             onServerCheckedChanged: checked = serverChecked
             Component.onCompleted: checked = serverChecked
             onTriggered: {
-
                 console.warn('disabling display');
-                model.enabled = checked;
-                apply();
+                localEnabled = checked;
             }
         }
     }
@@ -57,35 +55,35 @@ Column {
         text: i18n.tr("Rotation")
         value: {
             console.warn('display orientation', model.orientation);
-            switch (localOrientation || model.orientation) {
+            switch (model.orientation) {
                 case Display.Normal:
-                    return i18n.tr("Normal");
+                    return i18n.tr("None");
                     break;
-                case Display.Left:
-                    return i18n.tr("Left");
+                case Display.PortraitMode:
+                    return i18n.tr("90° clockwise");
                     break;
-                case Display.Inverted:
-                    return i18n.tr("Inverted");
+                case Display.LandscapeInvertedMode:
+                    return i18n.tr("180° clockwise");
                     break;
-                case Display.Right:
-                    return i18n.tr("Right");
+                case Display.PortraitInvertedMode:
+                    return i18n.tr("270° clockwise");
                     break;
                 default:
                     throw "Unable to determine orientation type.";
             }
         }
-        visible: enabledCheck.checked
+        visible: model.enabled
         progression: true
         onClicked: {
             var rotationPage = pageStack.push(
                 Qt.resolvedUrl("PageRotation.qml"), {
-                    display: model
+                    orientation: model.orientation
                 }
             );
             rotationPage.orientationChanged.connect(
-                function (orientation) {
-                    console.warn('locally setting orientation', orientation);
-                    localOrientation = orientation;
+                function () {
+                    console.warn('locally setting orientation', rotationPage.orientation);
+                    localOrientation = rotationPage.orientation;
                 }
             );
         }
@@ -93,8 +91,8 @@ Column {
 
     ListItems.SingleValue {
         text: i18n.tr("Resolution")
-        value: localMode || model.mode
-        visible: enabledCheck.checked
+        value: model.mode
+        visible: model.enabled
         progression: true
         onClicked: {
             var resPage = pageStack.push(
@@ -105,31 +103,28 @@ Column {
             );
             resPage.modeChanged.connect(
                 function (mode) {
-                    console.warn('locally setting mode', mode);
                     localMode = mode;
                 }
             );
         }
     }
 
-    // SettingsItemTitle {
-    //     text: i18n.tr("Scale UI elements")
-    //     visible: enabledCheck.checked
-    //     showDivider: false
-    // }
+    SettingsItemTitle {
+        text: i18n.tr("Scale UI elements")
+        visible: model.enabled && showAllUI
+        showDivider: false
+    }
 
-    // Menus.SliderMenu {
-    //     id: scaleSlider
-    //     objectName: "scaleSlider"
-    //     visible: enabledCheck.checked
-    //     live: true
-    //     minimumValue: 0.0
-    //     maximumValue: 100.0
-    //     value: localScale >= 0 ? localScale : model.scale
-    //     onUpdated: localScale = value
-    // }
-
-    // ListItems.Divider { opacity: 0 }
+    Menus.SliderMenu {
+        id: scaleSlider
+        objectName: "scaleSlider"
+        visible: model.enabled && showAllUI
+        live: true
+        minimumValue: 0.0
+        maximumValue: 100.0
+        value: localScale >= 0 ? localScale : model.scale
+        onUpdated: localScale = value
+    }
 
     Column {
         anchors {
@@ -138,36 +133,32 @@ Column {
             leftMargin: spacing
             rightMargin: spacing
         }
-        visible: enabledCheck.checked
+        visible: model.enabled
         spacing: units.gu(1)
 
         Button {
             anchors { left: parent.left; right: parent.right }
             text: i18n.tr("Apply changes")
             enabled: localOrientation ||
-                     localMode
-                     // localScale >= 0
+                     localMode ||
+                     (typeof localEnabled !== "undefined")
             onClicked: {
-                var conf = {
-                    "name": model.name
-                }
-
                 if (localOrientation) {
-                    conf["orientation"] = localOrientation;
+                    model.orientation = localOrientation;
                     localOrientation = null;
                 }
 
                 if (localMode) {
-                    conf["mode"] = localMode;
+                    model.mode = localMode;
                     localMode = "";
                 }
 
-                console.warn('applying conf', conf);
+                if (typeof localEnabled !== "undefined") {
+                    model.enabled = localEnabled;
+                    localEnabled = null;
+                }
 
-                // if (localScale >= 0) {
-                //     model.scale = localScale;
-                //     localScale = -1;
-                // }
+                apply();
             }
         }
 

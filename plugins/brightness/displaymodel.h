@@ -55,7 +55,7 @@ public:
     QModelIndex index(int row, int column,
                       const QModelIndex & parent = QModelIndex()) const;
 
-    QSharedPointer<Display> getDisplay(const QString name) const;
+    QSharedPointer<Display> getDisplay(const int outputId) const;
 
     Q_INVOKABLE bool apply(const bool &enabled);
 
