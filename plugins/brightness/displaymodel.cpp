@@ -36,10 +36,15 @@ void DisplayListModel::addDisplay(QSharedPointer<Display> &display) {
     beginInsertRows(QModelIndex(), at, at);
     m_displays.insert(at, display);
     endInsertRows();
+    sizeChanged();
 }
 
 int DisplayListModel::rowCount(const QModelIndex & parent) const {
     Q_UNUSED(parent);
+    return m_displays.count();
+}
+
+int DisplayListModel::size() const {
     return m_displays.count();
 }
 

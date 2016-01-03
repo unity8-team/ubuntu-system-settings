@@ -36,6 +36,11 @@ public:
     explicit DisplayListModel(QObject *parent = 0);
     ~DisplayListModel();
 
+
+    Q_PROPERTY( int size
+                READ size
+                NOTIFY sizeChanged )
+
     enum Roles
     {
       // Qt::DisplayRole holds display name
@@ -52,12 +57,16 @@ public:
     bool setData(const QModelIndex &index, const QVariant &value,
                  int role = Qt::EditRole);
     int rowCount(const QModelIndex & parent = QModelIndex()) const;
+    int size() const;
     QModelIndex index(int row, int column,
                       const QModelIndex & parent = QModelIndex()) const;
 
     QSharedPointer<Display> getDisplay(const int outputId) const;
 
     Q_INVOKABLE bool apply(const bool &enabled);
+
+Q_SIGNALS:
+    void sizeChanged();
 
 protected:
     QHash<int, QByteArray> roleNames() const;

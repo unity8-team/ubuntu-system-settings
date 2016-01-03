@@ -55,11 +55,10 @@ BrightnessItem::BrightnessItem(const QVariantMap &staticData, QObject *parent):
                                   "com.canonical.powerd",
                                   QDBusConnection::systemBus());
 
-    // Hide the plugin if powerd isn't running; it's redundant currentlys
-    //setVisibility(m_powerdIface.isValid());
-    setVisibility(true);
+    // Hide the plugin if powerd isn't running; it's currently redundant
+    setVisibility(m_powerdIface.isValid());
 
-    if (getNumberOfDisplays() == 0) {
+    if (getNumberOfDisplays() < 2) {
         setDisplayName(_("Brightness"));
     } else {
         setDisplayName(_("Brightness & Display"));

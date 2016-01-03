@@ -25,7 +25,6 @@
 
 
 static void mir_display_change_callback(MirConnection *connection, void *context) {
-    qWarning() << "mir_display_change_callback" << context;
     MirDisplayConfiguration *conf = mir_connection_create_display_config(
             connection);
     static_cast<MirDisplays*>(context)->setConfiguration(conf);
@@ -59,7 +58,6 @@ void MirDisplays::setConfiguration(MirDisplayConfiguration * conf) {
 
 void MirDisplays::applyConfiguration(MirDisplayConfiguration * conf) {
     mir_wait_for(mir_connection_apply_display_config(m_mir_connection, conf));
-    qWarning() << "mirdisplays applyConfiguration" << conf;
 
     const char *error = "No error";
     error = mir_connection_get_error_message(m_mir_connection);
@@ -67,7 +65,6 @@ void MirDisplays::applyConfiguration(MirDisplayConfiguration * conf) {
 }
 
 void MirDisplays::connect() {
-    qWarning() << "Connecting...";
     m_mir_connection = static_cast<MirConnection*>(
             QGuiApplication::platformNativeInterface()
                 ->nativeResourceForIntegration("mirConnection")

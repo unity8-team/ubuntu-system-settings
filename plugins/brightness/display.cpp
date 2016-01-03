@@ -27,14 +27,12 @@ Display::Display(MirDisplayOutput *output) {
 }
 
 void Display::updateModes() {
-    qWarning() << "updateModes";
     for (unsigned int i = 0; i < m_mirOutput->num_modes; ++i) {
         MirDisplayMode mode = m_mirOutput->modes[i];
         m_availableModes <<  QString("%1x%2x%3").arg(
                 QString::number(mode.vertical_resolution),
                 QString::number(mode.horizontal_resolution),
                 QString::number(mode.refresh_rate));
-        qWarning() << "mode" << i << m_availableModes;
         if (i == m_mirOutput->current_mode) {
             m_currentMode = i;
             m_refreshRate = mode.refresh_rate;
@@ -43,7 +41,6 @@ void Display::updateModes() {
 }
 
 void Display::updateSizes() {
-    qWarning() << "updateSizes";
     m_physicalSize = QSizeF(
         QSize(m_mirOutput->physical_width_mm,
               m_mirOutput->physical_height_mm)
@@ -51,7 +48,6 @@ void Display::updateSizes() {
 }
 
 void Display::updateOrientation() {
-    qWarning() << "updateOrientation";
     m_orientation = m_mirOutput->orientation;
 }
 
@@ -75,7 +71,6 @@ QStringList Display::availableModes() const {
 }
 
 Display::Orientation Display::orientation() const {
-    qWarning() << __PRETTY_FUNCTION__ << m_orientation;
     switch (m_orientation) {
         case mir_orientation_normal:
             return Display::Orientation::Normal;
@@ -119,7 +114,6 @@ void Display::setMode(const QString &mode) {
 }
 
 void Display::setOrientation(const Orientation &orientation) {
-    qWarning() << __PRETTY_FUNCTION__ << orientation;
     MirOrientation newOrientation;
     switch (orientation) {
         case Display::Orientation::Normal:
@@ -141,7 +135,6 @@ void Display::setOrientation(const Orientation &orientation) {
 }
 
 void Display::setDisplayOutput(MirDisplayOutput * output) {
-    qWarning() << __PRETTY_FUNCTION__ << output;
     m_mirOutput = output;
     if (output) {
         m_connected = output->connected;
@@ -149,11 +142,6 @@ void Display::setDisplayOutput(MirDisplayOutput * output) {
         m_id = output->output_id;
         m_powerMode = static_cast<MirPowerMode>(output->power_mode);
         m_orientation = static_cast<MirOrientation>(output->orientation);
-        qWarning() << "Sat display output, type:"
-            << output->type
-            << "connected:" << output->connected
-            << "used:" << output->used
-            << "orientation:" << output->orientation;
 
         updateModes();
         updateOrientation();

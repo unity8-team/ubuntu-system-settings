@@ -125,7 +125,7 @@ ItemPage {
                 model: brightnessPanel.displays
 
                 delegate: ExternalDisplay {
-                    Component.onCompleted: console.warn('model.mode', mode);
+                    visible: brightnessPanel.displays.size >= 2
                     onApply: {
                         console.warn('apply event obseverd by pagecompo');
                         brightnessPanel.configureDisplay();
