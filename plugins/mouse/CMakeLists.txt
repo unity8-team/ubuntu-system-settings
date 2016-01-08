@@ -18,6 +18,6 @@ add_custom_target(mouse-holder
 COMMAND echo This is just a dummy.
 SOURCES ${QML_SOURCES})
 
-install(FILES mouse.settings DESTINATION ${PLUGIN_MANIFEST_DIR})
+#install(FILES mouse.settings DESTINATION ${PLUGIN_MANIFEST_DIR})
 install(FILES settings-mouse.svg DESTINATION ${PLUGIN_MANIFEST_DIR}/icons)
 install(FILES ${QML_SOURCES} DESTINATION ${PLUGIN_QML_DIR}/mouse)
