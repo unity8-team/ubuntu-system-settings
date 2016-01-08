@@ -1,3 +1,37 @@
+ubuntu-system-settings (0.3+16.04.20160108.1-0ubuntu1) xenial; urgency=medium
+
+  * Adds Mouse & Touchpad panel, however it's disabled because it
+    requires unity8 support. added: plugins/mouse/
+    plugins/mouse/CMakeLists.txt plugins/mouse/Components/
+    plugins/mouse/Components/CMakeLists.txt
+    plugins/mouse/Components/UnityInputInfo/
+    plugins/mouse/Components/UnityInputInfo/CMakeLists.txt
+    plugins/mouse/Components/UnityInputInfo/UnityInputInfo.qml
+    plugins/mouse/Components/UnityInputInfo/qmldir
+    plugins/mouse/Connected.qml plugins/mouse/InputInfo/
+    plugins/mouse/InputInfo/CMakeLists.txt
+    plugins/mouse/InputInfo/linux/
+    plugins/mouse/InputInfo/linux/qinputdeviceinfo_linux.cpp
+    plugins/mouse/InputInfo/linux/qinputdeviceinfo_linux_p.h
+    plugins/mouse/InputInfo/plugin.cpp plugins/mouse/InputInfo/plugin.h
+    plugins/mouse/InputInfo/qdeclarativeinputdeviceinfo.cpp
+    plugins/mouse/InputInfo/qdeclarativeinputdeviceinfo_p.h
+    plugins/mouse/InputInfo/qinputinfo.cpp
+    plugins/mouse/InputInfo/qinputinfo.h plugins/mouse/InputInfo/qmldir
+    plugins/mouse/ItemTitle.qml plugins/mouse/None.qml
+    plugins/mouse/PageComponent.qml
+    plugins/mouse/PrimaryButtonSelector.qml
+    plugins/mouse/SectionHeader.qml plugins/mouse/TapArea.qml
+    plugins/mouse/mouse.settings plugins/mouse/plugin/
+    plugins/mouse/plugin/CMakeLists.txt plugins/mouse/plugin/mouse-
+    plugin.cpp plugins/mouse/plugin/mouse-plugin.h
+    plugins/mouse/settings-mouse.svg tests/plugins/mouse/
+    tests/plugins/mouse/CMakeLists.txt tests/plugins/mouse/Source/
+    tests/plugins/mouse/Source/qmldir tests/plugins/mouse/tst_mouse.cpp
+    tests/plugins/mouse/tst_mouse.qml
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Fri, 08 Jan 2016 19:06:03 +0000
+
 ubuntu-system-settings (0.3+16.04.20151222-0ubuntu1) xenial; urgency=medium
 
   [ jonas-drange ]
