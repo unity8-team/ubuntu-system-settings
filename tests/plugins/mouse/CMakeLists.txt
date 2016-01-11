@@ -6,7 +6,10 @@ find_package(Qt5Quick REQUIRED)
 find_package(Qt5QuickTest REQUIRED)
 add_definitions(-DTESTS)
 
-set(XVFB_CMD xvfb-run -a -s "-screen 0 640x480x24")
+set(XVFB_CMD
+    LD_PRELOAD=/usr/lib/x86_64-linux-gnu/mesa/libGL.so.1
+    xvfb-run -a -s "-screen 0 640x480x24"
+)
 
 set(QML_SOURCES tst_mouse.qml)
 
