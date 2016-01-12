@@ -204,7 +204,7 @@ void BluetoothTest::testIsSupportedType()
 {
     QCOMPARE(Bluetooth::isSupportedType(Device::Type::Headset), true);
     QCOMPARE(Bluetooth::isSupportedType(Device::Type::Keyboard), true);
-    QCOMPARE(Bluetooth::isSupportedType(Device::Type::Tablet), false);
+    QCOMPARE(Bluetooth::isSupportedType(Device::Type::Tablet), true);
 }
 
 
