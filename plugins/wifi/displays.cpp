@@ -36,19 +36,22 @@ Displays::Displays(const QDBusConnection &dbus, QObject *parent):
     m_devices(m_dbus)
 {
     qWarning() << Q_FUNC_INFO;
-    /*
-    if(!m_dbus.registerObject(DBUS_ADAPTER_AGENT_PATH, &m_agent))
-        qCritical() << "Couldn't register agent at" << DBUS_ADAPTER_AGENT_PATH;
-    */
 
+    m_manager = new AethercastManager(AETHERCAST_SERVICE, AETHERCAST_PATH, m_dbus);
     m_connectedDevices.setSourceModel(&m_devices);
 
     m_disconnectedDevices.setSourceModel(&m_devices);
 
-    /*
-    QObject::connect(&m_devices, SIGNAL(discoveringChanged(bool)),
-                     this, SIGNAL(discoveringChanged(bool)));
-    */
+    //QObject::connect(&m_manager, SIGNAL(scanningChanged(bool)),
+    //                 this, SIGNAL(discoveringChanged(bool)));
+}
+
+void Displays::scan()
+{
+    qWarning() << Q_FUNC_INFO;
+    if (!m_manager)
+        return;
+    m_manager->Scan();
 }
 
 /*

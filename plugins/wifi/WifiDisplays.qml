@@ -50,6 +50,9 @@ ItemPage {
                 text: i18n.tr("Wifi Displays")
                 control: Button {
                     text: i18n.tr("Detect")
+                    onClicked: {
+                        displays.scan();
+                    }
                 }
             }
 

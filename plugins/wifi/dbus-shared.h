@@ -20,8 +20,8 @@
 #ifndef USS_DBUS_SHARED_H
 #define USS_DBUS_SHARED_H
 
+#define AETHERCAST_PATH "/org/aethercast"
 #define AETHERCAST_SERVICE "org.aethercast"
-
 #define AETHERCAST_DEVICE_IFACE "org.aethercast.Device"
 #define AETHERCAST_MANAGER_IFACE "org.aethercast.Manager"
 

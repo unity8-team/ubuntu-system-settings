@@ -25,6 +25,7 @@
 #include <QtDBus>
 #include "devicemodel.h"
 #include "aethercast_device.h"
+#include "aethercast_manager.h"
 
 class Displays : public QObject
 {
@@ -60,6 +61,7 @@ public:
     Q_INVOKABLE void toggleDiscovery();
     Q_INVOKABLE void startDiscovery();
     Q_INVOKABLE void stopDiscovery();
+    Q_INVOKABLE void scan();
 
 public:
     QAbstractItemModel * devices();
@@ -74,6 +76,7 @@ private:
     DeviceModel m_devices;
     DeviceFilter m_connectedDevices;
     DeviceFilter m_disconnectedDevices;
+    AethercastManager* m_manager;
 };
 
 #endif // DISPLAYS_H
