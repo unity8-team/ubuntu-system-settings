@@ -38,12 +38,52 @@ Displays::Displays(const QDBusConnection &dbus, QObject *parent):
     qWarning() << Q_FUNC_INFO;
 
     m_manager = new AethercastManager(AETHERCAST_SERVICE, AETHERCAST_PATH, m_dbus);
-    m_connectedDevices.setSourceModel(&m_devices);
 
-    m_disconnectedDevices.setSourceModel(&m_devices);
+    m_aethercastProperties.reset(new FreeDesktopProperties(AETHERCAST_SERVICE, AETHERCAST_PATH, m_dbus));
+
+    QObject::connect(m_aethercastProperties.data(), SIGNAL(PropertiesChanged(const QString&, const QVariantMap&, const QStringList&)),
+                     this, SLOT(slotPropertiesChanged(const QString&, const QVariantMap&, const QStringList&)));
+
+
+    watchCall(m_aethercastProperties->GetAll(AETHERCAST_MANAGER_IFACE), [=](QDBusPendingCallWatcher *watcher) {
+        QDBusPendingReply<QVariantMap> reply = *watcher;
+
+        if (reply.isError()) {
+            qWarning() << "Failed to retrieve properties for manager";
+            watcher->deleteLater();
+            return;
+        }
+
+        auto properties = reply.argumentAt<0>();
+        setProperties(properties);
+        watcher->deleteLater();
+    });
+
 
     //QObject::connect(&m_manager, SIGNAL(scanningChanged(bool)),
-    //                 this, SIGNAL(discoveringChanged(bool)));
+    //                 this, SIGNAL(scanningChanged(bool)));
+}
+
+void Displays::slotPropertiesChanged(const QString &interface, const QVariantMap &changedProperties,
+                                           const QStringList &invalidatedProperties)
+{
+    Q_UNUSED(invalidatedProperties);
+    qWarning() << Q_FUNC_INFO;
+
+    if (interface != AETHERCAST_MANAGER_IFACE)
+        return;
+
+    setProperties(changedProperties);
+}
+
+void Displays::setProperties(const QMap<QString,QVariant> &properties)
+{
+    qWarning() << Q_FUNC_INFO;
+    QMapIterator<QString,QVariant> it(properties);
+    while (it.hasNext()) {
+        it.next();
+        updateProperty(it.key(), it.value());
+    }
 }
 
 void Displays::scan()
@@ -54,30 +94,6 @@ void Displays::scan()
     m_manager->Scan();
 }
 
-/*
-void Displays::toggleDiscovery()
-{
-    qWarning() << Q_FUNC_INFO;
-    m_devices.toggleDiscovery();
-}
-
-void Displays::startDiscovery()
-{
-    qWarning() << Q_FUNC_INFO;
-    m_devices.startDiscovery();
-}
-
-void Displays::stopDiscovery()
-{
-    qWarning() << Q_FUNC_INFO;
-    m_devices.stopDiscovery();
-}
-*/
-
-/***
-****
-***/
-
 QAbstractItemModel * Displays::devices()
 {
     qWarning() << Q_FUNC_INFO;
@@ -86,27 +102,6 @@ QAbstractItemModel * Displays::devices()
     return ret;
 }
 
-QAbstractItemModel * Displays::getConnectedDevices()
-{
-    qWarning() << Q_FUNC_INFO;
-    auto ret = &m_connectedDevices;
-    QQmlEngine::setObjectOwnership(ret, QQmlEngine::CppOwnership);
-    return ret;
-}
-
-QAbstractItemModel * Displays::getDisconnectedDevices()
-{
-    qWarning() << Q_FUNC_INFO;
-    auto ret = &m_disconnectedDevices;
-    QQmlEngine::setObjectOwnership(ret, QQmlEngine::CppOwnership);
-    return ret;
-}
-
-/***
-****
-***/
-
-/*
 void Displays::disconnectDevice()
 {
     qWarning() << Q_FUNC_INFO;
@@ -117,8 +112,10 @@ void Displays::connectDevice(const QString &address)
     qWarning() << Q_FUNC_INFO;
 }
 
-void Displays::removeDevice()
+void Displays::updateProperty(const QString &key, const QVariant &value)
 {
     qWarning() << Q_FUNC_INFO;
+    if (key == "Scanning") 
+        Q_EMIT(scanningChanged(value.toBool()));
 }
-*/
+

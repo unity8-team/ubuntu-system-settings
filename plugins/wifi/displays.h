@@ -35,21 +35,13 @@ class Displays : public QObject
                 READ devices
                 NOTIFY devicesChanged)
 
-    Q_PROPERTY (QAbstractItemModel* connectedDevices
-                READ getConnectedDevices
-                CONSTANT)
-
-    Q_PROPERTY (QAbstractItemModel* disconnectedDevices
-                READ getDisconnectedDevices
-                CONSTANT)
-
-    Q_PROPERTY (bool discovering
-                READ isDiscovering
-                NOTIFY discoveringChanged)
+    Q_PROPERTY (bool scanning
+                READ scanning
+                NOTIFY scanningChanged)
 
 Q_SIGNALS:
     void devicesChanged();
-    void discoveringChanged(bool isActive);
+    void scanningChanged(bool isActive);
 
 public:
     explicit Displays(QObject *parent = nullptr);
@@ -58,26 +50,24 @@ public:
 
     Q_INVOKABLE void connectDevice(const QString &address);
     Q_INVOKABLE void disconnectDevice();
-    Q_INVOKABLE void toggleDiscovery();
-    Q_INVOKABLE void startDiscovery();
-    Q_INVOKABLE void stopDiscovery();
     Q_INVOKABLE void scan();
+    void setProperties(const QMap<QString,QVariant> &properties);
 
 public:
     QAbstractItemModel * devices();
-    QAbstractItemModel * getConnectedDevices();
-    QAbstractItemModel * getDisconnectedDevices();
-    QAbstractItemModel * getAutoconnectDevices();
+    bool scanning() const { return m_manager->scanning(); }
 
-    bool isDiscovering() const { return true;/*m_devices.isDiscovering();*/ }
+private Q_SLOTS:
+    void slotPropertiesChanged(const QString &interface, const QVariantMap &changedProperties,
+                               const QStringList &invalidatedProperties);
 
 private:
     QDBusConnection m_dbus;
     DeviceModel m_devices;
-    DeviceFilter m_connectedDevices;
-    DeviceFilter m_disconnectedDevices;
     AethercastManager* m_manager;
+    QScopedPointer<FreeDesktopProperties> m_aethercastProperties;
+    void updateProperties(QSharedPointer<QDBusInterface>);
+    void updateProperty(const QString &key, const QVariant &value);
 };
 
 #endif // DISPLAYS_H
-

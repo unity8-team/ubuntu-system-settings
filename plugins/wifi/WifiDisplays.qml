@@ -36,6 +36,9 @@ ItemPage {
             onDevicesChanged: {
                 console.warn("onDevicesChanged: " + devices);
             }
+            onScanningChanged: {
+                console.warn("onScanningChanged: " + scanning);
+            }
         }
 
         Column {
