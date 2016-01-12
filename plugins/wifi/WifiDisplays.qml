@@ -50,11 +50,24 @@ ItemPage {
 
             ListItem.Standard {
                 objectName: "wifiDisplays"
-                text: i18n.tr("Wifi Displays")
-                control: Button {
-                    text: i18n.tr("Detect")
-                    onClicked: {
-                        displays.scan();
+                text: i18n.tr("Wi-Fi Displays")
+                control: Item {
+                    anchors.verticalCenter: parent.verticalCenter
+                    height: parent.height
+                    width: childrenRect.width
+                    Button {
+                        anchors.centerIn: parent
+                        text: i18n.tr("Detect")
+                        visible: !ind.running
+                        onClicked: {
+                            displays.scan();
+                        }
+                    }
+                    ActivityIndicator {
+                        id: ind
+                        anchors.centerIn: parent
+                        running: displays.scanning
+                        visible: running
                     }
                 }
             }
