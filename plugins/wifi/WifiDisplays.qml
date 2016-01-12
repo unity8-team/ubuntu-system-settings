@@ -55,19 +55,24 @@ ItemPage {
                     anchors.verticalCenter: parent.verticalCenter
                     height: parent.height
                     width: childrenRect.width
-                    Button {
-                        anchors.centerIn: parent
-                        text: i18n.tr("Detect")
-                        visible: !ind.running
-                        onClicked: {
-                            displays.scan();
-                        }
-                    }
                     ActivityIndicator {
                         id: ind
                         anchors.centerIn: parent
                         running: displays.scanning
                         visible: running
+                    }
+                    Icon {
+                        anchors.centerIn: parent
+                        height: units.gu(4)
+                        width: height
+                        visible: !ind.running
+                        name: "reload"
+                        MouseArea {
+                            anchors.fill: parent
+                            onClicked: {
+                                displays.scan();
+                            }
+                        }
                     }
                 }
             }
