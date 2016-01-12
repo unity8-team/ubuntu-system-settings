@@ -76,12 +76,13 @@ public:
   protected:
     void setName(const QString &name);
     void setAddress(const QString &address);
-    void setState(QString state);
+    void setState(const QString &state);
 
   public:
     Device() {}
     Device(const QString &path, QDBusConnection &bus);
     ~Device() {}
+    void connect();
     void disconnect();
     void setProperties(const QMap<QString,QVariant> &properties);
 

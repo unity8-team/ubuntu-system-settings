@@ -23,11 +23,16 @@
 
 #include <QObject>
 #include <QtDBus>
+#include "devicemodel.h"
 #include "aethercast_device.h"
 
 class Displays : public QObject
 {
     Q_OBJECT
+
+    Q_PROPERTY (QAbstractItemModel* devices
+                READ devices
+                NOTIFY devicesChanged)
 
     Q_PROPERTY (QAbstractItemModel* connectedDevices
                 READ getConnectedDevices
@@ -42,6 +47,7 @@ class Displays : public QObject
                 NOTIFY discoveringChanged)
 
 Q_SIGNALS:
+    void devicesChanged();
     void discoveringChanged(bool isActive);
 
 public:
@@ -56,6 +62,7 @@ public:
     Q_INVOKABLE void stopDiscovery();
 
 public:
+    QAbstractItemModel * devices();
     QAbstractItemModel * getConnectedDevices();
     QAbstractItemModel * getDisconnectedDevices();
     QAbstractItemModel * getAutoconnectDevices();
@@ -64,11 +71,9 @@ public:
 
 private:
     QDBusConnection m_dbus;
-    /*
     DeviceModel m_devices;
     DeviceFilter m_connectedDevices;
     DeviceFilter m_disconnectedDevices;
-    */
 };
 
 #endif // DISPLAYS_H

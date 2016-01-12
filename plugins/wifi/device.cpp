@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013-2015 Canonical Ltd
+ * Copyright (C) 2016 Canonical Ltd
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as
@@ -14,9 +14,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  * Authors:
- * Charles Kerr <charles.kerr@canonical.com>
+ * Ken VanDine <ken.vandine@canonical.com>
  */
 
+#include "aethercast_device.h"
 #include "device.h"
 
 #include <QDBusReply>
@@ -25,20 +26,22 @@
 #include <QTimer>
 
 Device::Device(const QString &path, QDBusConnection &bus) :
-   m_strength(Device::None)
+   m_state(QString())
 {
+    qWarning() << Q_FUNC_INFO;
     initDevice(path, bus);
 }
 
 void Device::initDevice(const QString &path, QDBusConnection &bus)
 {
+    qWarning() << Q_FUNC_INFO;
     /* whenever any of the properties changes,
        trigger the catch-all deviceChanged() signal */
     QObject::connect(this, SIGNAL(nameChanged()), this, SIGNAL(deviceChanged()));
     QObject::connect(this, SIGNAL(addressChanged()), this, SIGNAL(deviceChanged()));
     QObject::connect(this, SIGNAL(stateChanged()), this, SIGNAL(deviceChanged()));
 
-    m_aethercastDevice.reset(new AethercastDevice1(AETHERCAST_SERVICE, path, bus));
+    m_aethercastDevice.reset(new AethercastDevice(AETHERCAST_SERVICE, path, bus));
     /* Give our calls a bit more time than the default 25 seconds to
      * complete whatever they are doing. In some situations (e.g. with
      * specific devices) the default doesn't seem to be enough to. */
@@ -99,6 +102,7 @@ void Device::connect()
 
 void Device::setName(const QString &name)
 {
+    qWarning() << Q_FUNC_INFO << name;
     if (m_name != name) {
         m_name = name;
         Q_EMIT(nameChanged());
@@ -107,6 +111,7 @@ void Device::setName(const QString &name)
 
 void Device::setAddress(const QString &address)
 {
+    qWarning() << Q_FUNC_INFO << address;
     if (m_address != address) {
         m_address = address;
         Q_EMIT(addressChanged());
@@ -115,6 +120,7 @@ void Device::setAddress(const QString &address)
 
 void Device::setState(const QString &state)
 {
+    qWarning() << Q_FUNC_INFO << state;
     if (m_state != state) {
         m_state = state;
         Q_EMIT(stateChanged());

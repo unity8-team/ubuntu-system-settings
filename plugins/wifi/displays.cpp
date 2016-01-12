@@ -32,18 +32,20 @@ Displays::Displays(QObject *parent):
 
 Displays::Displays(const QDBusConnection &dbus, QObject *parent):
     QObject(parent),
-    m_dbus(dbus)
-    //m_devices(m_dbus)
+    m_dbus(dbus),
+    m_devices(m_dbus)
 {
     qWarning() << Q_FUNC_INFO;
     /*
     if(!m_dbus.registerObject(DBUS_ADAPTER_AGENT_PATH, &m_agent))
         qCritical() << "Couldn't register agent at" << DBUS_ADAPTER_AGENT_PATH;
+    */
 
     m_connectedDevices.setSourceModel(&m_devices);
 
     m_disconnectedDevices.setSourceModel(&m_devices);
 
+    /*
     QObject::connect(&m_devices, SIGNAL(discoveringChanged(bool)),
                      this, SIGNAL(discoveringChanged(bool)));
     */
@@ -73,7 +75,14 @@ void Displays::stopDiscovery()
 ****
 ***/
 
-/*
+QAbstractItemModel * Displays::devices()
+{
+    qWarning() << Q_FUNC_INFO;
+    auto ret = &m_devices;
+    QQmlEngine::setObjectOwnership(ret, QQmlEngine::CppOwnership);
+    return ret;
+}
+
 QAbstractItemModel * Displays::getConnectedDevices()
 {
     qWarning() << Q_FUNC_INFO;
@@ -89,7 +98,6 @@ QAbstractItemModel * Displays::getDisconnectedDevices()
     QQmlEngine::setObjectOwnership(ret, QQmlEngine::CppOwnership);
     return ret;
 }
-*/
 
 /***
 ****

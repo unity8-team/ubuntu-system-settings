@@ -37,6 +37,7 @@ DeviceModel::DeviceModel(QDBusConnection &dbus, QObject *parent):
     m_aethercastManager(AETHERCAST_SERVICE, "/org/aethercast", m_dbus),
     m_isDiscovering(false)
 {
+    qWarning() << Q_FUNC_INFO;
     if (m_aethercastManager.isValid()) {
 
         connect(&m_aethercastManager, SIGNAL(InterfacesAdded(const QDBusObjectPath&, InterfaceList)),
@@ -79,6 +80,8 @@ DeviceModel::~DeviceModel()
 void DeviceModel::slotInterfacesAdded(const QDBusObjectPath &objectPath, InterfaceList ifacesAndProps)
 {
     Q_UNUSED(ifacesAndProps);
+
+    qWarning() << Q_FUNC_INFO << objectPath.path();
 
     auto candidatedPath = objectPath.path();
 
@@ -223,22 +226,23 @@ void DeviceModel::slotDevicePairingDone(bool success)
 
 void DeviceModel::addDevice(const QString &path, const QVariantMap &properties)
 {
+    qWarning() << Q_FUNC_INFO;
     QSharedPointer<Device> device(new Device(path, m_dbus));
     device->setProperties(properties);
+    qWarning() << Q_FUNC_INFO;
 
-    /*
-    if (device->isValid()) {
+    if (device) {
         QObject::connect(device.data(), SIGNAL(deviceChanged()),
                          this, SLOT(slotDeviceChanged()));
-        QObject::connect(device.data(), SIGNAL(pairingDone(bool)),
-                         this, SLOT(slotDevicePairingDone(bool)));
+        //QObject::connect(device.data(), SIGNAL(pairingDone(bool)),
+        //                 this, SLOT(slotDevicePairingDone(bool)));
         addDevice(device);
     }
-    */
 }
 
 void DeviceModel::addDevice(QSharedPointer<Device> &device)
 {
+    qWarning() << Q_FUNC_INFO;
     int row = findRowFromAddress(device->getAddress());
 
     if (row >= 0) { // update existing device

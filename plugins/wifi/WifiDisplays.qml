@@ -31,6 +31,13 @@ ItemPage {
         contentWidth: parent.width
         contentHeight: contentItem.childrenRect.height
 
+        Displays {
+            id: displays
+            onDevicesChanged: {
+                console.warn("onDevicesChanged: " + devices);
+            }
+        }
+
         Column {
             anchors {
                 left: parent.left
@@ -41,21 +48,22 @@ ItemPage {
             ListItem.Standard {
                 objectName: "wifiDisplays"
                 text: i18n.tr("Wifi Displays")
-                control: Item {
-                    Button {}
-
+                control: Button {
+                    text: i18n.tr("Detect")
                 }
             }
 
             Repeater {
                 id: mainMenu
-                model: menuStack.tail ? menuStack.tail : null
-                delegate: Item {
+                model: displays.devices ? displays.devices : null
+                delegate: ListItem.Subtitled {
                     id: displayDelegate
                     anchors {
                         left: parent.left
                         right: parent.right
                     }
+                    text: displayName
+                    subText: addressName
                 }
             }
         }

@@ -18,10 +18,14 @@ RemoveBackground.qml
 SectionMenuItem.qml
 StandardMenuItem.qml
 SwitchMenuItem.qml
+WifiDisplays.qml
 )
 
 add_library(UbuntuWifiPanel MODULE
+  aethercast_device.cpp
+  aethercast_manager.cpp
   certhandler.cpp
+  device.cpp
   devicemodel.cpp
   displays.cpp
   freedesktop_properties.cpp
@@ -30,7 +34,11 @@ add_library(UbuntuWifiPanel MODULE
   previousnetworkmodel.cpp
   unitymenumodelstack.cpp
   wifidbushelper.cpp
+  aethercast_helper.h
+  aethercast_device.h
+  aethercast_manager.h
   certhandler.h
+  device.h
   devicemodel.h
   displays.h
   freedesktop_properties.h
