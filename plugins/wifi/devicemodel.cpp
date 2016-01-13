@@ -200,8 +200,7 @@ void DeviceModel::setProperties(const QMap<QString,QVariant> &properties)
 
 void DeviceModel::updateProperty(const QString &key, const QVariant &value)
 {
-    Q_UNUSED(key);
-    Q_UNUSED(value);
+    qWarning() << Q_FUNC_INFO << key << ":" << value;
     /*
     if (key == "Name") {
         m_adapterName = value.toString();
@@ -214,6 +213,7 @@ void DeviceModel::updateProperty(const QString &key, const QVariant &value)
 void DeviceModel::slotPropertyChanged(const QString      &key,
                                       const QDBusVariant &value)
 {
+    qWarning() << Q_FUNC_INFO << key << ":" << value.variant();
     updateProperty (key, value.variant());
 }
 
@@ -331,7 +331,7 @@ QHash<int,QByteArray> DeviceModel::roleNames() const
 
     if (Q_UNLIKELY(names.empty())) {
         names[Qt::DisplayRole] = "displayName";
-        names[StateRole] = "state";
+        names[StateRole] = "stateName";
         names[AddressRole] = "addressName";
     }
 

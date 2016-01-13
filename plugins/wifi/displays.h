@@ -49,7 +49,7 @@ public:
     ~Displays() {}
 
     Q_INVOKABLE void connectDevice(const QString &address);
-    Q_INVOKABLE void disconnectDevice();
+    Q_INVOKABLE void disconnectDevice(const QString &address);
     Q_INVOKABLE void scan();
     void setProperties(const QMap<QString,QVariant> &properties);
 

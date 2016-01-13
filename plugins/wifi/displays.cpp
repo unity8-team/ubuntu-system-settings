@@ -58,10 +58,6 @@ Displays::Displays(const QDBusConnection &dbus, QObject *parent):
         setProperties(properties);
         watcher->deleteLater();
     });
-
-
-    //QObject::connect(&m_manager, SIGNAL(scanningChanged(bool)),
-    //                 this, SIGNAL(scanningChanged(bool)));
 }
 
 void Displays::slotPropertiesChanged(const QString &interface, const QVariantMap &changedProperties,
@@ -102,20 +98,25 @@ QAbstractItemModel * Displays::devices()
     return ret;
 }
 
-void Displays::disconnectDevice()
+void Displays::disconnectDevice(const QString &address)
 {
-    qWarning() << Q_FUNC_INFO;
+    qWarning() << Q_FUNC_INFO << address;
+    auto device = m_devices.getDeviceFromAddress(address);
+    if (device)
+        device->disconnect();
 }
 
 void Displays::connectDevice(const QString &address)
 {
-    qWarning() << Q_FUNC_INFO;
+    qWarning() << Q_FUNC_INFO << address;
+    auto device = m_devices.getDeviceFromAddress(address);
+    if (device)
+        device->connect();
 }
 
 void Displays::updateProperty(const QString &key, const QVariant &value)
 {
-    qWarning() << Q_FUNC_INFO;
+    qWarning() << Q_FUNC_INFO << key << ":" << value;
     if (key == "Scanning") 
         Q_EMIT(scanningChanged(value.toBool()));
 }
-

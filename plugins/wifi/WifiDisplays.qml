@@ -87,7 +87,20 @@ ItemPage {
                         right: parent.right
                     }
                     text: displayName
-                    subText: addressName
+                    subText: stateName
+                    Button {
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.right: parent.right
+                        height: units.gu(4)
+                        visible: stateName !== "connecting"
+                        text: stateName === "connected" ? i18n.tr("Disconnect") : i18n.tr("Connect")
+                        onClicked: {
+                            if (stateName === "connected")
+                                displays.disconnectDevice(addressName);
+                            else
+                                displays.connectDevice(addressName);
+                        }
+                    }
                 }
             }
         }

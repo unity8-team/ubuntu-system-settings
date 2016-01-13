@@ -63,7 +63,7 @@ Q_SIGNALS:
 public:
     const QString& getName() const { return m_name; }
     const QString& getAddress() const { return m_address; }
-    QString getState() const { return m_state; }
+    const QString& getState() const { return m_state; }
     QString getPath() const { return m_aethercastDevice ? m_aethercastDevice->path() : QString(); }
 
   private:

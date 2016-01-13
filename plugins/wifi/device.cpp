@@ -73,16 +73,18 @@ void Device::initDevice(const QString &path, QDBusConnection &bus)
 void Device::slotPropertiesChanged(const QString &interface, const QVariantMap &changedProperties,
                                    const QStringList &invalidatedProperties)
 {
+    qWarning() << Q_FUNC_INFO;
     Q_UNUSED(invalidatedProperties);
 
-   if (interface != AETHERCAST_DEVICE_IFACE)
-      return;
+    if (interface != AETHERCAST_DEVICE_IFACE)
+        return;
 
-   setProperties(changedProperties);
+    setProperties(changedProperties);
 }
 
 void Device::setProperties(const QMap<QString,QVariant> &properties)
 {
+    qWarning() << Q_FUNC_INFO;
     QMapIterator<QString,QVariant> it(properties);
     while (it.hasNext()) {
         it.next();
@@ -92,12 +94,14 @@ void Device::setProperties(const QMap<QString,QVariant> &properties)
 
 void Device::disconnect()
 {
-    return;
+    qWarning() << Q_FUNC_INFO;
+    m_aethercastDevice->Disconnect();
 }
 
 void Device::connect()
 {
-    return;
+    qWarning() << Q_FUNC_INFO;
+    m_aethercastDevice->Connect(QString());
 }
 
 void Device::setName(const QString &name)
@@ -129,6 +133,7 @@ void Device::setState(const QString &state)
 
 void Device::updateProperty(const QString &key, const QVariant &value)
 {
+    qWarning() << Q_FUNC_INFO << key << ":" << value;
     if (key == "Name") {
         setName(value.toString());
     } else if (key == "Address") {
