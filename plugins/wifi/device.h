@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013-2015 Canonical Ltd
+ * Copyright (C) 2016 Canonical Ltd
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as
@@ -14,7 +14,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  * Authors:
- * Charles Kerr <charles.kerr@canonical.com>
+ * Ken VanDine <ken.vandine@canonical.com>
  */
 
 #ifndef USS_AETHERCAST_DEVICE_H
