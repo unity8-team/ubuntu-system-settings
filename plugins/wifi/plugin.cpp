@@ -23,9 +23,9 @@
 #include "wifidbushelper.h"
 #include "previousnetworkmodel.h"
 #include "certhandler.h"
-#include "aethercast_helper.h"
-#include "displays.h"
-#include "device.h"
+#include "aethercast/aethercast_helper.h"
+#include "aethercast/displays.h"
+#include "aethercast/device.h"
 
 namespace {
 

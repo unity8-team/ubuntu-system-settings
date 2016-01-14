@@ -22,27 +22,27 @@ WifiDisplays.qml
 )
 
 add_library(UbuntuWifiPanel MODULE
-  aethercast_device.cpp
-  aethercast_manager.cpp
+  aethercast/aethercast_device.cpp
+  aethercast/aethercast_manager.cpp
+  aethercast/device.cpp
+  aethercast/devicemodel.cpp
+  aethercast/displays.cpp
+  aethercast/freedesktop_properties.cpp
+  aethercast/freedesktop_objectmanager.cpp
   certhandler.cpp
-  device.cpp
-  devicemodel.cpp
-  displays.cpp
-  freedesktop_properties.cpp
-  freedesktop_objectmanager.cpp
   plugin.cpp
   previousnetworkmodel.cpp
   unitymenumodelstack.cpp
   wifidbushelper.cpp
-  aethercast_helper.h
-  aethercast_device.h
-  aethercast_manager.h
+  aethercast/aethercast_helper.h
+  aethercast/aethercast_device.h
+  aethercast/aethercast_manager.h
+  aethercast/device.h
+  aethercast/devicemodel.h
+  aethercast/displays.h
+  aethercast/freedesktop_properties.h
+  aethercast/freedesktop_objectmanager.h
   certhandler.h
-  device.h
-  devicemodel.h
-  displays.h
-  freedesktop_properties.h
-  freedesktop_objectmanager.h
   nm_manager_proxy.h
   nm_settings_proxy.h
   nm_settings_connection_proxy.h
