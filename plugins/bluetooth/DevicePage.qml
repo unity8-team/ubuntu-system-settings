@@ -45,6 +45,7 @@ Page {
     function getTypeString(type) {
         switch (type) {
         case Device.Computer:   return i18n.tr("Computer");
+        case Device.Smartphone: return i18n.tr("Phone");
         case Device.Phone:      return i18n.tr("Phone");
         case Device.Modem:      return i18n.tr("Modem");
         case Device.Network:    return i18n.tr("Network");
