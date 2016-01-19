@@ -266,14 +266,15 @@ ItemPage {
                         enabled: false
                     }
 
-                    ActivityIndicator {
+                    Label {
                         anchors {
                             top: parent.top
                             right: parent.right
                             topMargin: units.gu(1)
                         }
+                        color: "darkgrey"
                         visible: backend.powered && !backend.discoverable
-                        running: visible
+                        text: i18n.tr("Searching…")
                     }
                 }
             }
@@ -319,9 +320,15 @@ ItemPage {
                 id: disconnectedHeader
                 text: connectedList.visible ? i18n.tr("Connect another device:") : i18n.tr("Connect a device:")
                 enabled: bluetoothActionGroup.enabled.state != undefined ? bluetoothActionGroup.enabled.state : false
-                control: ActivityIndicator {
-                    visible: backend.powered && backend.discovering
-                    running: visible
+                control: Label {
+                    anchors {
+                        top: parent.top
+                        right: parent.right
+                        topMargin: units.gu(1)
+                    }
+                    color: "darkgrey"
+                    visible: backend.powered && backend.discoverable
+                    text: i18n.tr("Searching…")
                 }
             }
 
