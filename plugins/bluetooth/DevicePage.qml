@@ -152,6 +152,7 @@ Page {
             ListItem.Standard {
                 id: trustedCheck
                 text: i18n.tr("Connect automatically when detected:")
+                visible: backend.selectedDevice.paired
                 control: CheckBox {
                     property bool serverChecked: backend.selectedDevice ? backend.selectedDevice.trusted : false
                     onServerCheckedChanged: checked = serverChecked
