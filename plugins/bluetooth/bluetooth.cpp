@@ -103,22 +103,8 @@ void Bluetooth::trySetDiscoverable(bool discoverable)
 
 bool Bluetooth::isSupportedType(const int type)
 {
-    switch((Device::Type)type) {
-
-    case Device::Type::Headset:
-    case Device::Type::Headphones:
-    case Device::Type::Speakers:
-    case Device::Type::Carkit:
-    case Device::Type::OtherAudio:
-    case Device::Type::Keyboard:
-    case Device::Type::Mouse:
-    case Device::Type::Tablet:
-    case Device::Type::Watch:
-        return true;
-
-    default:
-        return false;
-    }
+    Q_UNUSED(type);
+    return true;
 }
 
 /***
