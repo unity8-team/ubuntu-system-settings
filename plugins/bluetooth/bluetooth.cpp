@@ -101,12 +101,6 @@ void Bluetooth::trySetDiscoverable(bool discoverable)
     m_devices.trySetDiscoverable(discoverable);
 }
 
-bool Bluetooth::isSupportedType(const int type)
-{
-    Q_UNUSED(type);
-    return true;
-}
-
 /***
 ****
 ***/
