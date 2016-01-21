@@ -194,7 +194,7 @@ Page {
                         backend.resetSelectedDevice();
                         pageStack.pop();
                     }
-                    enabled: backend.selectedDevice && backend.selectedDevice.path.length > 0 && backend.selectedDevice.paired ? true : false
+                    enabled: backend.powered && backend.selectedDevice && backend.selectedDevice.path.length > 0 && backend.selectedDevice.paired ? true : false
                 }
             }
         }
