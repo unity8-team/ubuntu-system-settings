@@ -1,3 +1,14 @@
+ubuntu-system-settings (0.3+16.04.20160121-0ubuntu1) xenial; urgency=medium
+
+  * Don't display the ActivityIndicator while searching, causes to much
+    load. (LP: #1535827)
+  * Don't display the setting to automatically connect when detected
+    during pairing (LP: #1535822)
+  * Only enable the forget device button when bluetooth is enabled (LP:
+    #1535829)
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Thu, 21 Jan 2016 14:47:13 +0000
+
 ubuntu-system-settings (0.3+16.04.20160108.1-0ubuntu1) xenial; urgency=medium
 
   * Adds Mouse & Touchpad panel, however it's disabled because it
