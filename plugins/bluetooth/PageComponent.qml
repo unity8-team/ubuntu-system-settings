@@ -327,7 +327,7 @@ ItemPage {
                         topMargin: units.gu(1)
                     }
                     color: "darkgrey"
-                    visible: backend.powered && backend.discoverable
+                    visible: backend.powered && backend.discovering
                     text: i18n.tr("Searching…")
                 }
             }
