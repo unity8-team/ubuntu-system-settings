@@ -64,6 +64,10 @@ class Bluetooth : public QObject
                 READ isDiscoverable
                 NOTIFY discoverableChanged)
 
+    Q_PROPERTY (QString adapterName
+                READ adapterName
+                NOTIFY adapterNameChanged)
+
     Q_PROPERTY (QString adapterAddress
                 READ adapterAddress
                 NOTIFY adapterAddressChanged)
@@ -74,6 +78,7 @@ Q_SIGNALS:
     void discoveringChanged(bool isActive);
     void discoverableChanged(bool isActive);
     void devicePairingDone(Device *device, bool success);
+    void adapterNameChanged();
     void adapterAddressChanged();
 
 public:

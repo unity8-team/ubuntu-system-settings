@@ -85,6 +85,8 @@ Q_SIGNALS:
     void discoveringChanged(bool isDiscovering);
     void discoverableChanged(bool isDiscoverable);
     void devicePairingDone(Device *device, bool success);
+    void adapterNameChanged();
+    void adapterAddressChanged();
 
 private:
     QDBusConnection m_dbus;
