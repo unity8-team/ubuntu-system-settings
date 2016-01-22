@@ -64,12 +64,17 @@ class Bluetooth : public QObject
                 READ isDiscoverable
                 NOTIFY discoverableChanged)
 
+    Q_PROPERTY (QString adapterAddress
+                READ adapterAddress
+                NOTIFY adapterAddressChanged)
+
 Q_SIGNALS:
     void selectedDeviceChanged();
     void poweredChanged(bool powered);
     void discoveringChanged(bool isActive);
     void discoverableChanged(bool isActive);
     void devicePairingDone(Device *device, bool success);
+    void adapterAddressChanged();
 
 public:
     explicit Bluetooth(QObject *parent = nullptr);
@@ -77,6 +82,7 @@ public:
     ~Bluetooth() {}
 
     Q_INVOKABLE QString adapterName() const { return m_devices.adapterName(); }
+    Q_INVOKABLE QString adapterAddress() const { return m_devices.adapterAddress(); }
     Q_INVOKABLE void setSelectedDevice(const QString &address);
     Q_INVOKABLE void connectDevice(const QString &address);
     Q_INVOKABLE void disconnectDevice();

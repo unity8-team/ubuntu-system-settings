@@ -68,6 +68,7 @@ public:
     QSharedPointer<Device> getDeviceFromAddress(const QString &address);
     QSharedPointer<Device> getDeviceFromPath(const QString &path);
     QString adapterName() const { return m_adapterName; }
+    QString adapterAddress() const { return m_adapterAddress; }
 
 public:
     bool isPowered() const { return m_isPowered; }
