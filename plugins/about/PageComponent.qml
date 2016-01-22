@@ -53,10 +53,6 @@ ItemPage {
         onModemsChanged: root.modemsSorted = modems.slice(0).sort()
     }
 
-    NetworkAbout {
-        id: network
-    }
-
     NetworkInfo {
         id: wlinfo
     }
