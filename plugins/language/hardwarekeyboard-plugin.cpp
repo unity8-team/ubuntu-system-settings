@@ -215,5 +215,11 @@ HardwareKeyboardPlugin::enabledLayoutsChanged()
 
 void HardwareKeyboardPlugin::setCurrentLayout(const QString &code)
 {
+    Q_UNUSED(code);
     // TODO: Implement.
+}
+
+void HardwareKeyboardPlugin::requestCurrentLayoutMove(const int from, const int to) {
+    m_keyboardLayoutsModel.moveSubsetRow(from, to);
+    keyboardLayoutsModelChanged();
 }

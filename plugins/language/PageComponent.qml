@@ -34,7 +34,7 @@ ItemPage {
     title: i18n.tr("Language & Text")
 
     // Disabled due to LP: #1524400
-    property bool externalKeyboardPresent: showAllUI
+    property bool externalKeyboardPresent: true
 
     UbuntuLanguagePlugin {
         id: plugin

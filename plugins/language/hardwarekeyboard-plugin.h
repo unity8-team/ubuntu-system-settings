@@ -55,6 +55,7 @@ public:
     virtual ~HardwareKeyboardPlugin();
 
     Q_INVOKABLE void setCurrentLayout(const QString &code);
+    Q_INVOKABLE void requestCurrentLayoutMove(const int from, const int to);
 
     SubsetModel *keyboardLayoutsModel();
     Q_SLOT void keyboardLayoutsModelChanged();

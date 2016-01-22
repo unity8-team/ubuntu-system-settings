@@ -27,6 +27,11 @@ ListItem.Empty {
     property alias name: name.text
     property alias checked: checkBox.checked
     property alias shortName: shortName.text
+    property alias draggable: dragHandle.visible
+    property alias dragger: dragArea.drag
+
+    signal dragStarted()
+    signal dragFinished()
 
     Rectangle {
         id: icon
@@ -57,11 +62,31 @@ ListItem.Empty {
         anchors {
             left: icon.right
             leftMargin: units.gu(2)
-            right: checkBox.right
-            rightMargin: units.gu(4)
+            right: dragHandle.visible ? dragHandle.left : checkBox.left
+            rightMargin: units.gu(3)
         }
         elide: Text.ElideMiddle
         anchors.verticalCenter: parent.verticalCenter
+    }
+
+    Icon {
+        id: dragHandle
+        width: units.gu(2.5)
+        anchors {
+            right: checkBox.left
+            rightMargin: units.gu(3)
+            verticalCenter: parent.verticalCenter
+        }
+
+        MouseArea {
+            id: dragArea
+            anchors.fill: parent
+
+            onPressed: root.dragStarted()
+            onReleased: root.dragFinished()
+        }
+
+        name: "grip-large"
     }
 
     CheckBox {

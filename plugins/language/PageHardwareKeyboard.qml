@@ -66,7 +66,8 @@ ItemPage {
                 progression: true
 
                 onClicked: pageStack.push(Qt.resolvedUrl("KeyboardLayouts.qml"), {
-                    plugin: plugin
+                    plugin: plugin,
+                    currentLayoutsDraggable: true
                 })
             }
         }
