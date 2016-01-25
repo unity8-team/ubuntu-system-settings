@@ -150,7 +150,7 @@ Column {
                 maximumValue: 1000
                 value: backend.mouseDoubleClickSpeed
                 live: true
-                property real serverValue: enabled ? backend.mouseDoubleClickSpeed : 0.0
+                property int serverValue: enabled ? backend.mouseDoubleClickSpeed : 0
                 USC.ServerPropertySynchroniser {
                     userTarget: mouseDoubleClickSpeed
                     userProperty: "value"
@@ -321,7 +321,7 @@ Column {
                 maximumValue: 1000
                 value: backend.touchpadDoubleClickSpeed
                 live: true
-                property real serverValue: enabled ? backend.touchpadDoubleClickSpeed : 0.0
+                property int serverValue: enabled ? backend.touchpadDoubleClickSpeed : 0
                 USC.ServerPropertySynchroniser {
                     userTarget: touchClickSpeed
                     userProperty: "value"
