@@ -18,13 +18,13 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
  
-import GSettings 1.0
 import QtQuick 2.0
 import SystemSettings 1.0
 import Ubuntu.Components 1.3
 import Ubuntu.Components.ListItems 1.3 as ListItem
 import Ubuntu.Settings.Menus 0.1 as Menus
 import Ubuntu.Settings.Components 0.1 as USC
+import Ubuntu.SystemSettings.Mouse 1.0
 import "Components/UnityInputInfo"
 
 Column {
@@ -34,9 +34,8 @@ Column {
     }
     height: childrenRect.height
     
-    GSettings {
-        id: settings
-        schema.id: "com.ubuntu.touch.system-settings"
+    UbuntuMousePanel {
+        id: backend
     }
     
     Column {
@@ -73,9 +72,9 @@ Column {
                 function formatValue(v) { return v.toFixed(2) }
                 minimumValue: 0.0
                 maximumValue: 1.0
-                value: settings.mouseCursorSpeed
+                value: backend.mouseCursorSpeed
                 live: true
-                property real serverValue: enabled ? settings.mouseCursorSpeed : 0.0
+                property real serverValue: enabled ? backend.mouseCursorSpeed : 0.0
                 USC.ServerPropertySynchroniser {
                     userTarget: mouseMoveSpeed
                     userProperty: "value"
@@ -83,7 +82,7 @@ Column {
                     serverProperty: "serverValue"
                     maximumWaitBufferInterval: 16
                     
-                    onSyncTriggered: settings.mouseCursorSpeed = value
+                    onSyncTriggered: backend.mouseCursorSpeed = value
                 }
             }
         }
@@ -112,9 +111,9 @@ Column {
                 function formatValue(v) { return v.toFixed(2) }
                 minimumValue: 0.0
                 maximumValue: 1.0
-                value: settings.mouseScrollSpeed
+                value: backend.mouseScrollSpeed
                 live: true
-                property real serverValue: enabled ? settings.mouseScrollSpeed : 0.0
+                property real serverValue: enabled ? backend.mouseScrollSpeed : 0.0
                 USC.ServerPropertySynchroniser {
                     userTarget: mouseScrollSpeed
                     userProperty: "value"
@@ -122,7 +121,7 @@ Column {
                     serverProperty: "serverValue"
                     maximumWaitBufferInterval: 16
                     
-                    onSyncTriggered: settings.mouseScrollSpeed = value
+                    onSyncTriggered: backend.mouseScrollSpeed = value
                 }
             }
         }
@@ -149,9 +148,9 @@ Column {
                 function formatValue(v) { return v.toFixed(2) }
                 minimumValue: 100
                 maximumValue: 1000
-                value: settings.mouseDoubleClickSpeed
+                value: backend.mouseDoubleClickSpeed
                 live: true
-                property real serverValue: enabled ? settings.mouseDoubleClickSpeed : 0.0
+                property real serverValue: enabled ? backend.mouseDoubleClickSpeed : 0.0
                 USC.ServerPropertySynchroniser {
                     userTarget: mouseDoubleClickSpeed
                     userProperty: "value"
@@ -159,7 +158,7 @@ Column {
                     serverProperty: "serverValue"
                     maximumWaitBufferInterval: 16
                     
-                    onSyncTriggered: settings.mouseDoubleClickSpeed = value
+                    onSyncTriggered: backend.mouseDoubleClickSpeed = value
                 }
             }
         }
@@ -185,7 +184,7 @@ Column {
                     topMargin: units.gu(2)
                 }
                 height: units.gu(5)
-                doubleTapSpeed: settings.mouseDoubleClickSpeed
+                doubleTapSpeed: backend.mouseDoubleClickSpeed
             }    
         }
 
@@ -196,14 +195,14 @@ Column {
                 right: parent.right
             }
             height: childrenRect.height + units.gu(2)
-            buttonEnum: settings.mousePrimaryButton
-            onButtonEnumChanged: {
-                settings.mousePrimaryButton = buttonEnum;
+            selected: backend.mousePrimaryButton
+            onSelectedChanged: {
+                backend.mousePrimaryButton = selected;
             }
             Binding {
                 target: mousePrimarySelector
-                property: "buttonEnum"
-                value: settings.mousePrimaryButton
+                property: "selected"
+                value: backend.mousePrimaryButton
             }
         }
     }
@@ -244,9 +243,9 @@ Column {
                 function formatValue(v) { return v.toFixed(2) }
                 minimumValue: 0.0
                 maximumValue: 1.0
-                value: settings.touchpadCursorSpeed
+                value: backend.touchpadCursorSpeed
                 live: true
-                property real serverValue: enabled ? settings.touchpadCursorSpeed : 0.0
+                property real serverValue: enabled ? backend.touchpadCursorSpeed : 0.0
                 USC.ServerPropertySynchroniser {
                     userTarget: touchMoveSpeed
                     userProperty: "value"
@@ -254,7 +253,7 @@ Column {
                     serverProperty: "serverValue"
                     maximumWaitBufferInterval: 16
                     
-                    onSyncTriggered: settings.touchpadCursorSpeed = value
+                    onSyncTriggered: backend.touchpadCursorSpeed = value
                 }
             }
         }
@@ -282,9 +281,9 @@ Column {
                 function formatValue(v) { return v.toFixed(2) }
                 minimumValue: 0.0
                 maximumValue: 1.0
-                value: settings.touchpadScrollSpeed
+                value: backend.touchpadScrollSpeed
                 live: true
-                property real serverValue: enabled ? settings.touchpadScrollSpeed : 0.0
+                property real serverValue: enabled ? backend.touchpadScrollSpeed : 0.0
                 USC.ServerPropertySynchroniser {
                     userTarget: touchScrollSpeed
                     userProperty: "value"
@@ -292,7 +291,7 @@ Column {
                     serverProperty: "serverValue"
                     maximumWaitBufferInterval: 16
                     
-                    onSyncTriggered: settings.touchpadScrollSpeed = value
+                    onSyncTriggered: backend.touchpadScrollSpeed = value
                 }
             }
         }
@@ -320,9 +319,9 @@ Column {
                 function formatValue(v) { return v.toFixed(2) }
                 minimumValue: 100
                 maximumValue: 1000
-                value: settings.touchpadDoubleClickSpeed
+                value: backend.touchpadDoubleClickSpeed
                 live: true
-                property real serverValue: enabled ? settings.touchpadDoubleClickSpeed : 0.0
+                property real serverValue: enabled ? backend.touchpadDoubleClickSpeed : 0.0
                 USC.ServerPropertySynchroniser {
                     userTarget: touchClickSpeed
                     userProperty: "value"
@@ -330,7 +329,7 @@ Column {
                     serverProperty: "serverValue"
                     maximumWaitBufferInterval: 16
                     
-                    onSyncTriggered: settings.touchpadDoubleClickSpeed = value
+                    onSyncTriggered: backend.touchpadDoubleClickSpeed = value
                 }
             }
         }
@@ -355,7 +354,7 @@ Column {
                     rightMargin: units.gu(2)
                 }
                 height: units.gu(5)
-                doubleTapSpeed: settings.touchpadDoubleClickSpeed
+                doubleTapSpeed: backend.touchpadDoubleClickSpeed
             }
         }
 
@@ -366,14 +365,14 @@ Column {
                 right: parent.right
             }
             height: childrenRect.height + units.gu(1)
-            buttonEnum: settings.touchpadPrimaryButton
-            onButtonEnumChanged: {
-                settings.touchpadPrimaryButton = buttonEnum;
+            selected: backend.touchpadPrimaryButton
+            onSelectedChanged: {
+                backend.touchpadPrimaryButton = selected;
             }
             Binding {
                 target: touchpadPrimarySelector
-                property: "buttonEnum"
-                value: settings.touchpadPrimaryButton
+                property: "selected"
+                value: backend.touchpadPrimaryButton
             }
         }
 
@@ -389,10 +388,10 @@ Column {
             Row {
                 spacing: units.gu(1)
                 CheckBox {
-                    property bool serverChecked: settings.touchpadTapToClick
+                    property bool serverChecked: backend.touchpadTapToClick
                     onServerCheckedChanged: checked = serverChecked
                     Component.onCompleted: checked = serverChecked
-                    onTriggered: settings.touchpadTapToClick = checked
+                    onTriggered: backend.touchpadTapToClick = checked
                 }
                 Label {
                     height: parent.height
@@ -403,10 +402,10 @@ Column {
             Row {
                 spacing: units.gu(1)
                 CheckBox {
-                    property bool serverChecked: settings.touchpadTwoFingerScroll
+                    property bool serverChecked: backend.touchpadTwoFingerScroll
                     onServerCheckedChanged: checked = serverChecked
                     Component.onCompleted: checked = serverChecked
-                    onTriggered: settings.touchpadTwoFingerScroll = checked
+                    onTriggered: backend.touchpadTwoFingerScroll = checked
                 }
                 Label {
                     height: parent.height
@@ -432,10 +431,10 @@ Column {
             Row {
                 spacing: units.gu(1)
                 CheckBox {
-                    property bool serverChecked: settings.touchpadDisableWhileTyping
+                    property bool serverChecked: backend.touchpadDisableWhileTyping
                     onServerCheckedChanged: checked = serverChecked
                     Component.onCompleted: checked = serverChecked
-                    onTriggered: settings.touchpadDisableWhileTyping = checked
+                    onTriggered: backend.touchpadDisableWhileTyping = checked
                 }
                 Label {
                     height: parent.height
@@ -446,10 +445,10 @@ Column {
             Row {
                 spacing: units.gu(1)
                 CheckBox {
-                    property bool serverChecked: settings.touchpadDisableWithMouse
+                    property bool serverChecked: backend.touchpadDisableWithMouse
                     onServerCheckedChanged: checked = serverChecked
                     Component.onCompleted: checked = serverChecked
-                    onTriggered: settings.touchpadDisableWithMouse = checked
+                    onTriggered: backend.touchpadDisableWithMouse = checked
                 }
                 Label {
                     height: parent.height
