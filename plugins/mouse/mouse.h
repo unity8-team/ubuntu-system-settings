@@ -22,15 +22,8 @@
 #include "accountsservice.h"
 
 #include <QDBusServiceWatcher>
-#include <QStringList>
-#include <QtDBus/QDBusInterface>
 #include <QtCore/QObject>
-#include <QtCore/QSettings>
 #include <QtCore/QString>
-
-typedef struct _GObject GObject;
-typedef struct _GParamSpec GParamSpec;
-typedef void *gpointer;
 
 class Mouse: public QObject
 {

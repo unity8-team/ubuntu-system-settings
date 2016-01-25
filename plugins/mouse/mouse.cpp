@@ -17,10 +17,6 @@
  */
 
 #include "mouse.h"
-#include <QtCore/QDebug>
-#include <QtDBus/QDBusInterface>
-#include <QtDBus/QDBusMessage>
-#include <QtDBus/QDBusVariant>
 
 #define AS_INTERFACE "com.ubuntu.AccountsService.Input"
 
@@ -294,5 +290,3 @@ void Mouse::setTouchpadDisableWithMouse (bool enabled)
                                       QVariant::fromValue(enabled));
     Q_EMIT (touchpadDisableWithMouseChanged());
 }
-
-#include "mouse.moc"
