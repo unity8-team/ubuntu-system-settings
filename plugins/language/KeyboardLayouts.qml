@@ -143,7 +143,7 @@ ItemPage {
         opacity: 0.9
 
         onYChanged: {
-            if (!dragMarker.visible && Math.abs(y - originalY) > height / 2) {
+            if (!dragMarker.visible && Math.abs(y - originalY) >= height / 2) {
                 dragMarker.visible = true;
                 dragItem.elementToShrink.clip = true;
                 elementToShrink.height = 0.01;
