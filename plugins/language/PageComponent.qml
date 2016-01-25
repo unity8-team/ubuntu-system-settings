@@ -26,6 +26,7 @@ import Ubuntu.Components.Popups 1.3
 import Ubuntu.Components.ListItems 1.3 as ListItem
 import Ubuntu.Settings.Menus 0.1 as Menus
 import Ubuntu.SystemSettings.LanguagePlugin 1.0
+import "../mouse/Components/UnityInputInfo"
 
 ItemPage {
     id: root
@@ -33,8 +34,7 @@ ItemPage {
 
     title: i18n.tr("Language & Text")
 
-    // Disabled due to LP: #1524400
-    property bool externalKeyboardPresent: true
+    property bool externalKeyboardPresent: UnityInputInfo.keyboards || 1
 
     UbuntuLanguagePlugin {
         id: plugin
