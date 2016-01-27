@@ -1,4 +1,3 @@
-add_subdirectory(plugin)
 add_subdirectory(InputInfo)
 add_subdirectory(Components)
 
