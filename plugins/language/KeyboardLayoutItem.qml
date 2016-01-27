@@ -72,6 +72,7 @@ ListItem.Empty {
     Icon {
         id: dragHandle
         width: units.gu(2.5)
+        height: parent.height
         anchors {
             right: checkBox.left
             rightMargin: units.gu(3)

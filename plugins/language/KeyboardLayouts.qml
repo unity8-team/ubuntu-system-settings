@@ -30,7 +30,7 @@ ItemPage {
 
     property var plugin
     property bool currentLayoutsDraggable: false
-    property bool currentlyDragging: false
+    property bool draggingCurrentLayouts: false
     property double originalContentY: 0
 
     // Empty height + ThinDivider height
@@ -43,8 +43,13 @@ ItemPage {
 
         anchors.fill: parent
 
-        subsetLabel: i18n.tr("Current layouts:")
-        supersetLabel: i18n.tr("All layouts available:")
+        section.property: "subset"
+        section.delegate: ListItem.Standard {
+            text: section == "true" ? i18n.tr("Current layouts:") : i18n.tr("All layouts available:")
+
+            // Fade out if it's “All layouts available” and we're draggingCurrentLayouts
+            opacity: section != "true" && draggingCurrentLayouts ? 0 : 1
+        }
 
         model: plugin.keyboardLayoutsModel
         delegate: KeyboardLayoutItem {
@@ -53,16 +58,20 @@ ItemPage {
                 left: parent.left
                 right: parent.right
             }
+
             Behavior on height { enabled: visible; UbuntuNumberAnimation { } }
+
             name: model.language
             shortName: model.icon
             checked: model.checked
             enabled: model.enabled
-            draggable: currentLayoutsDraggable &&
-                       model.subset &&
-                       subsetView.model.subset.length > 1
 
-            visible: root.currentlyDragging ? model.subset : true
+            draggable: (currentLayoutsDraggable &&
+                        model.subset &&
+                        subsetView.model.subset.length > 1)
+
+            visible: root.draggingCurrentLayouts ? model.subset : true
+            opacity: root.draggingCurrentLayouts ? 0.75 : 1
 
             onCheckedChanged: {
                 var element = model.index < subsetView.model.subset.length ?
@@ -75,7 +84,12 @@ ItemPage {
             }
 
             onDragStarted: {
-                root.currentlyDragging = true;
+
+                // If the element is not checked, refuse dragging.
+                if (!model.checked) {
+                    return;
+                }
+                root.draggingCurrentLayouts = true;
 
                 // Force scroll to top
                 subsetView.contentY = -listItemHeight
@@ -100,7 +114,7 @@ ItemPage {
             }
 
             onDragFinished: {
-                root.currentlyDragging = false;
+                root.draggingCurrentLayouts = false;
                 dragger.target = undefined;
                 dragItem.visible = false;
                 if (dragMarker.visible && dragMarker.index != index) {
@@ -127,7 +141,8 @@ ItemPage {
             }
             return i;
         }
-        y: (index + 2) * listItemHeight
+        y: ((index + 2) * listItemHeight) - height / 2
+        height: units.gu(1)
     }
 
     KeyboardLayoutItem {
@@ -139,9 +154,10 @@ ItemPage {
 
         objectName: "dragItem"
         visible: false
-
         opacity: 0.9
-
+        style: Rectangle {
+            color: Theme.palette.selected.background
+        }
         onYChanged: {
             if (!dragMarker.visible && Math.abs(y - originalY) >= height / 2) {
                 dragMarker.visible = true;
