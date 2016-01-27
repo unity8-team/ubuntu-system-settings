@@ -16,8 +16,8 @@
  * Authors: Ken VanDine <ken.vandine@canonical.com>
  */
 
-#ifndef ACCOUNTSSERVICE_PLUGIN_H
-#define ACCOUNTSSERVICE_PLUGIN_H
+#ifndef MOUSE_AS_PLUGIN_H
+#define MOUSE_AS_PLUGIN_H
 
 #include <QtQml/QQmlEngine>
 #include <QtQml/QQmlExtensionPlugin>
