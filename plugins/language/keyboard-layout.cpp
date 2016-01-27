@@ -32,6 +32,7 @@ KeyboardLayout::KeyboardLayout(const QString &name,
     m_displayName(displayName),
     m_shortName(language)
 {
+    Q_UNUSED(shortName);
     m_shortName[0] = m_shortName[0].toUpper();
 }
 
