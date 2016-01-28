@@ -1,3 +1,11 @@
+ubuntu-system-settings (0.3+16.04.20160128-0ubuntu1) xenial; urgency=medium
+
+  * Allow pairing regardless of type (LP: #1535660, #1534221)
+  * Exposed adapterAddress in the bluetooth plugin to be used to get the
+    address in the about plugin (LP: #1537029)
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Thu, 28 Jan 2016 14:23:03 +0000
+
 ubuntu-system-settings (0.3+16.04.20160121-0ubuntu1) xenial; urgency=medium
 
   * Don't display the ActivityIndicator while searching, causes to much
