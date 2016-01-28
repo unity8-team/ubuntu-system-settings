@@ -65,6 +65,9 @@ public:
     virtual void setSubset(const QList<int> &subset);
     Q_SIGNAL virtual void subsetChanged() const;
 
+    virtual void moveSubsetRow(int from, int to);
+
+
     virtual bool allowEmpty() const;
     virtual void setAllowEmpty(bool allowEmpty);
     Q_SIGNAL virtual void allowEmptyChanged() const;
