@@ -1,3 +1,11 @@
+ubuntu-system-settings (0.3+16.04.20160128-0ubuntu1) xenial; urgency=medium
+
+  [ jonas-drange ]
+  * currently just building debs, waiting for the backend to be
+    implemented (LP: #1491340)
+
+ -- Michał Sawicz <michal.sawicz@canonical.com>  Thu, 28 Jan 2016 16:05:23 +0000
+
 ubuntu-system-settings (0.3+16.04.20160121-0ubuntu1) xenial; urgency=medium
 
   * Don't display the ActivityIndicator while searching, causes to much
