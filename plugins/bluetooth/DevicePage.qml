@@ -182,7 +182,7 @@ Page {
                         pageStack.pop();
                     }
                     visible: backend.selectedDevice ? true : false
-                    enabled: backend.selectedDevice && backend.powered ? backend.selectedDevice.connection != Device.Disconnected : false
+                    enabled: backend.selectedDevice && backend.powered ? true : false
                 }
             }
             ListItem.SingleControl {
