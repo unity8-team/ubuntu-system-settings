@@ -20,6 +20,7 @@
  */
 
 #include <QDBusMetaType>
+#include <QtAlgorithms>
 #include <QtDebug>
 #include "hardwarekeyboard-plugin.h"
 
@@ -45,9 +46,7 @@ HardwareKeyboardPlugin::~HardwareKeyboardPlugin()
         g_object_unref(m_xkbInfo);
     }
 
-    for (QList<KeyboardLayout *>::const_iterator
-         i(m_keyboardLayouts.begin()); i != m_keyboardLayouts.end(); ++i)
-        delete *i;
+    qDeleteAll(m_keyboardLayouts);
 }
 
 SubsetModel *

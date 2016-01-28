@@ -34,7 +34,7 @@ ItemPage {
 
     title: i18n.tr("Language & Text")
 
-    property bool externalKeyboardPresent: UnityInputInfo.keyboards || 1
+    property bool externalKeyboardPresent: UnityInputInfo.keyboards > 0
 
     UbuntuLanguagePlugin {
         id: plugin
