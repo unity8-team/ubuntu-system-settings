@@ -260,7 +260,7 @@ ItemPage {
                             topMargin: units.gu(1)
                         }
                         height: units.gu(3)
-                        text: backend.discoverable ? backend.adapterName() : ""
+                        text: backend.discoverable ? backend.adapterName : ""
                         color: "darkgrey"
                         visible: backend.discoverable
                         enabled: false

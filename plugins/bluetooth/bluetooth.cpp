@@ -65,6 +65,12 @@ Bluetooth::Bluetooth(const QDBusConnection &dbus, QObject *parent):
 
     QObject::connect(&m_devices, SIGNAL(devicePairingDone(Device*,bool)),
                      this, SIGNAL(devicePairingDone(Device*,bool)));
+
+    QObject::connect(&m_devices, SIGNAL(adapterNameChanged()),
+                     this, SIGNAL(adapterNameChanged()));
+
+    QObject::connect(&m_devices, SIGNAL(adapterAddressChanged()),
+                     this, SIGNAL(adapterAddressChanged()));
 }
 
 void Bluetooth::setSelectedDevice(const QString &address)
@@ -99,26 +105,6 @@ void Bluetooth::stopDiscovery()
 void Bluetooth::trySetDiscoverable(bool discoverable)
 {
     m_devices.trySetDiscoverable(discoverable);
-}
-
-bool Bluetooth::isSupportedType(const int type)
-{
-    switch((Device::Type)type) {
-
-    case Device::Type::Headset:
-    case Device::Type::Headphones:
-    case Device::Type::Speakers:
-    case Device::Type::Carkit:
-    case Device::Type::OtherAudio:
-    case Device::Type::Keyboard:
-    case Device::Type::Mouse:
-    case Device::Type::Tablet:
-    case Device::Type::Watch:
-        return true;
-
-    default:
-        return false;
-    }
 }
 
 /***
