@@ -1,3 +1,9 @@
+ubuntu-system-settings (0.3+16.04.20160129-0ubuntu1) xenial; urgency=medium
+
+  * ￼Return "Phone" for type Smartphone (LP: #1534221)
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Fri, 29 Jan 2016 15:43:18 +0000
+
 ubuntu-system-settings (0.3+16.04.20160128-0ubuntu1) xenial; urgency=medium
 
   * Allow pairing regardless of type (LP: #1535660, #1534221)
