@@ -153,6 +153,7 @@ Page {
             ListItem.Standard {
                 id: trustedCheck
                 text: i18n.tr("Connect automatically when detected:")
+                visible: backend.selectedDevice.paired
                 control: CheckBox {
                     property bool serverChecked: backend.selectedDevice ? backend.selectedDevice.trusted : false
                     onServerCheckedChanged: checked = serverChecked
@@ -194,7 +195,7 @@ Page {
                         backend.resetSelectedDevice();
                         pageStack.pop();
                     }
-                    enabled: backend.selectedDevice && backend.selectedDevice.path.length > 0 && backend.selectedDevice.paired ? true : false
+                    enabled: backend.powered && backend.selectedDevice && backend.selectedDevice.path.length > 0 && backend.selectedDevice.paired ? true : false
                 }
             }
         }
