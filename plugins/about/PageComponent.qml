@@ -25,6 +25,7 @@ import Ubuntu.Components 1.3
 import Ubuntu.Components.ListItems 1.3 as ListItem
 import Ubuntu.SystemSettings.StorageAbout 1.0
 import Ubuntu.SystemSettings.Update 1.0
+import Ubuntu.SystemSettings.Bluetooth 1.0
 import MeeGo.QOfono 0.2
 
 ItemPage {
@@ -39,6 +40,10 @@ ItemPage {
         id: backendInfos
     }
 
+    UbuntuBluetoothPanel {
+        id: bluetooth
+    }
+
     DeviceInfo {
         id: deviceInfos
     }
@@ -46,10 +51,6 @@ ItemPage {
     OfonoManager {
         id: manager
         onModemsChanged: root.modemsSorted = modems.slice(0).sort()
-    }
-
-    NetworkAbout {
-        id: network
     }
 
     NetworkInfo {
@@ -136,8 +137,8 @@ ItemPage {
             ListItem.SingleValue {
                 id: bthwaddr
                 text: i18n.tr("Bluetooth address")
-                value: network.bluetoothMacAddress
-                visible: network.bluetoothMacAddress
+                value: bluetooth.adapterAddress
+                visible: bluetooth.adapterAddress
                 showDivider: false
             }
 

@@ -68,6 +68,7 @@ public:
     QSharedPointer<Device> getDeviceFromAddress(const QString &address);
     QSharedPointer<Device> getDeviceFromPath(const QString &path);
     QString adapterName() const { return m_adapterName; }
+    QString adapterAddress() const { return m_adapterAddress; }
 
 public:
     bool isPowered() const { return m_isPowered; }
@@ -84,6 +85,8 @@ Q_SIGNALS:
     void discoveringChanged(bool isDiscovering);
     void discoverableChanged(bool isDiscoverable);
     void devicePairingDone(Device *device, bool success);
+    void adapterNameChanged();
+    void adapterAddressChanged();
 
 private:
     QDBusConnection m_dbus;
