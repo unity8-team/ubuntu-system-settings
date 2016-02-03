@@ -46,7 +46,6 @@ pkg_check_modules(QTDBUSMOCK REQUIRED libqtdbusmock-1 REQUIRED)
 pkg_check_modules(QTDBUSTEST REQUIRED libqtdbustest-1 REQUIRED)
 pkg_search_module(POLKIT_AGENT polkit-agent-1)
 pkg_search_module(CLICK REQUIRED click-0.4)
-pkg_check_modules(QOFONO REQUIRED qofono-qt5 REQUIRED)
 
 find_program(XGETTEXT_BIN xgettext)
 find_program(MSGFMT_BIN msgfmt)

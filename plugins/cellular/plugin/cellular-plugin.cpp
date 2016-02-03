@@ -21,8 +21,11 @@
 #include "cellular-plugin.h"
 
 #include <QDebug>
+#include <QDBusInterface>
+#include <QDBusPendingReply>
+#include <QProcessEnvironment>
+#include <QtDBus>
 #include <SystemSettings/ItemBase>
-#include <qofonomanager.h>
 
 using namespace SystemSettings;
 
@@ -33,26 +36,37 @@ class CellularItem: public ItemBase
 public:
     explicit CellularItem(const QVariantMap &staticData, QObject *parent = 0);
     void setVisibility(bool visible);
-
-private Q_SLOTS:
-    void shouldShow(QStringList);
 };
 
 
 CellularItem::CellularItem(const QVariantMap &staticData, QObject *parent):
     ItemBase(staticData, parent)
 {
-    QOfonoManager *mm = new QOfonoManager(this);
-    // Hide the plugin if there are no modems present
-    setVisibility(mm->modems().length() > 0);
-    QObject::connect(mm, SIGNAL(modemsChanged(QStringList)),
-                     this, SLOT(shouldShow(QStringList)));
+    QProcessEnvironment env = QProcessEnvironment::systemEnvironment();
+    if (env.contains(QLatin1String("USS_SHOW_ALL_UI"))) {
+        QString showAllS = env.value("USS_SHOW_ALL_UI", QString());
 
-}
+        if(!showAllS.isEmpty()) {
+            setVisibility(true);
+            return;
+        }
+    }
 
-void CellularItem::shouldShow(QStringList modems)
-{
-    setVisibility(modems.length() > 0);
+    bool supportedDevice(true);
+
+    QDBusInterface m_NetStatusPropertiesIface(
+            "com.ubuntu.connectivity1",
+            "/com/ubuntu/connectivity1/NetworkingStatus",
+            "org.freedesktop.DBus.Properties",
+            QDBusConnection::sessionBus());
+    QDBusPendingReply<QVariant> modemReply = m_NetStatusPropertiesIface.call(
+        "Get", "com.ubuntu.connectivity1.NetworkingStatus", "ModemAvailable");
+    modemReply.waitForFinished();
+    if (modemReply.isValid()) {
+        supportedDevice = modemReply.argumentAt<0>().toBool();
+    }
+
+    setVisibility(supportedDevice);
 }
 
 void CellularItem::setVisibility(bool visible)
