@@ -8,6 +8,10 @@ FakeSsoService::FakeSsoService(QObject *parent) :
 {
 }
 
+void FakeSsoService::invalidateCredentials()
+{
+}
+
 void FakeSsoService::getCredentials()
 {
     if(m_validCredentials) {

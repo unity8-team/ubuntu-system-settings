@@ -19,40 +19,34 @@
 #ifndef NETWORK_H
 #define NETWORK_H
 
+#include <token.h>
 #include <QObject>
 #include <QtNetwork/QNetworkAccessManager>
+#include <QtNetwork/QNetworkConfigurationManager>
 #include <QtNetwork/QNetworkReply>
 #include <QHash>
-#include "../update.h"
+
+#include "update.h"
 
 #define X_CLICK_TOKEN "X-Click-Token"
 
 namespace UpdatePlugin {
-
-class RequestObject : public QObject
-{
-    Q_OBJECT
-public:
-    explicit RequestObject(QString oper, QObject *parent = 0) :
-        QObject(parent)
-    {
-        operation = oper;
-    }
-
-    QString operation;
-};
 
 class Network : public QObject
 {
     Q_OBJECT
 public:
     explicit Network(QObject *parent = 0);
+    ~Network();
 
     void checkForNewVersions(QHash<QString, Update*> &apps);
-    void getClickToken(Update *app, const QString &url,
-                       const QString &authHeader);
+    void getClickToken(Update *app, const QString &url);
+
     virtual std::vector<std::string> getAvailableFrameworks();
     virtual std::string getArchitecture();
+
+    void setUbuntuOneToken(UbuntuOne::Token token) { m_token = token; }
+    UbuntuOne::Token getUbuntuOneToken() { return m_token; }
 
 Q_SIGNALS:
     void updatesFound();
@@ -61,16 +55,24 @@ Q_SIGNALS:
     void networkError();
     void serverError();
     void clickTokenObtained(Update *app, const QString &clickToken);
+    void credentialError();
 
 private Q_SLOTS:
-    void onReply(QNetworkReply*);
+    void onUpdatesCheckFinished();
+    void onReplySslErrors(const QList<QSslError> & errors);
+    void onReplyError(QNetworkReply::NetworkError code);
 
 private:
     QNetworkAccessManager m_nam;
+    QNetworkConfigurationManager *m_ncm;
     QHash<QString, Update*> m_apps;
+    UbuntuOne::Token m_token;
+    QNetworkReply* m_reply;
 
     QString getUrlApps();
     QString getFrameworksDir();
+    bool replyIsValid(QNetworkReply *reply);
+    void onTokenRequestFinished(Update* update, QNetworkReply* reply);
 
 protected:
     virtual std::string architectureFromDpkg();

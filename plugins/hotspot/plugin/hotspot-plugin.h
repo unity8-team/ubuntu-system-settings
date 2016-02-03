@@ -3,7 +3,7 @@
  *
  * Copyright (C) 2015 Canonical Ltd.
  *
- * Contact: Ken VanDine <ken.vandine@canonical.com>
+ * Contact: Jonas G. Drange <jonas.drange@canonical.com>
  *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License version 3, as published
@@ -16,6 +16,7 @@
  *
  * You should have received a copy of the GNU General Public License along
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
  */
 
 #ifndef SYSTEM_SETTINGS_HOTSPOT_PLUGIN_H

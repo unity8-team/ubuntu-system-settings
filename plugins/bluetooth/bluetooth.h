@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 Canonical Ltd
+ * Copyright (C) 2013-2015 Canonical Ltd
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as
@@ -24,8 +24,9 @@
 #include <QObject>
 
 #include "agent.h"
-#include "agentadaptor.h"
 #include "devicemodel.h"
+
+#include "bluez_agent1adaptor.h"
 
 class Bluetooth : public QObject
 {
@@ -63,11 +64,22 @@ class Bluetooth : public QObject
                 READ isDiscoverable
                 NOTIFY discoverableChanged)
 
+    Q_PROPERTY (QString adapterName
+                READ adapterName
+                NOTIFY adapterNameChanged)
+
+    Q_PROPERTY (QString adapterAddress
+                READ adapterAddress
+                NOTIFY adapterAddressChanged)
+
 Q_SIGNALS:
     void selectedDeviceChanged();
     void poweredChanged(bool powered);
     void discoveringChanged(bool isActive);
     void discoverableChanged(bool isActive);
+    void devicePairingDone(Device *device, bool success);
+    void adapterNameChanged();
+    void adapterAddressChanged();
 
 public:
     explicit Bluetooth(QObject *parent = nullptr);
@@ -75,6 +87,7 @@ public:
     ~Bluetooth() {}
 
     Q_INVOKABLE QString adapterName() const { return m_devices.adapterName(); }
+    Q_INVOKABLE QString adapterAddress() const { return m_devices.adapterAddress(); }
     Q_INVOKABLE void setSelectedDevice(const QString &address);
     Q_INVOKABLE void connectDevice(const QString &address);
     Q_INVOKABLE void disconnectDevice();
@@ -82,8 +95,8 @@ public:
     Q_INVOKABLE void toggleDiscovery();
     Q_INVOKABLE void startDiscovery();
     Q_INVOKABLE void stopDiscovery();
-    Q_INVOKABLE static bool isSupportedType(const int type);
     Q_INVOKABLE void trySetDiscoverable(bool discoverable);
+    Q_INVOKABLE void resetSelectedDevice();
 
 public:
     Agent * getAgent();

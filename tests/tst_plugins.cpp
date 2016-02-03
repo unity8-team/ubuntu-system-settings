@@ -40,6 +40,7 @@ public:
 
 private Q_SLOTS:
     void testCategory();
+    void testName();
     void testKeywords();
     void testSorting();
     void testReset();
@@ -53,7 +54,7 @@ void PluginsTest::testCategory()
     manager.componentComplete();
 
     QSet<QString> expectedCategories;
-    expectedCategories << "phone" << "network" << "misc";
+    expectedCategories << "phone" << "network" << "misc" << "system";
     QCOMPARE(manager.categories().toSet(), expectedCategories);
 
     QMap<QString, Plugin *> plugins = manager.plugins("phone");
@@ -69,6 +70,24 @@ void PluginsTest::testCategory()
     QSet<QString> expectedNames;
     expectedNames << "Bluetooth" << "Wireless";
     QCOMPARE(names.toSet(), expectedNames);
+}
+
+void PluginsTest::testName()
+{
+    PluginManager manager;
+    manager.classBegin();
+    manager.componentComplete();
+
+    Plugin *brightness = 0;
+    Q_FOREACH(Plugin *plugin, manager.plugins("system")) {
+        if (plugin->displayName() == "Brightness & Display") {
+            brightness = plugin;
+        }
+    }
+
+    QVERIFY(brightness != 0);
+
+    QCOMPARE(brightness->displayName(), QString("Brightness & Display"));
 }
 
 void PluginsTest::testKeywords()

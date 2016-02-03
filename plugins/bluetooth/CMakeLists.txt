@@ -3,20 +3,34 @@ include_directories(${CMAKE_CURRENT_BINARY_DIR})
 set(QML_SOURCES
 ProvidePinCodeDialog.qml
 ConfirmPasskeyDialog.qml
+DisplayPinCodeDialog.qml
 DisplayPasskeyDialog.qml
 ProvidePasskeyDialog.qml
-PageComponent.qml 
+AuthorizationRequestDialog.qml
+DevicePage.qml
+PageComponent.qml
 )
 
 add_library(UbuntuBluetoothPanel MODULE
+  bluez_adapter1.cpp
+  bluez_agentmanager1.cpp
+  bluez_device1.cpp
+  bluez_agent1adaptor.cpp
+  freedesktop_properties.cpp
+  freedesktop_objectmanager.cpp
   agent.cpp
-  agentadaptor.cpp
   bluetooth.cpp
   device.cpp
   devicemodel.cpp
+  bluez_adapter1.h
+  bluez_agentmanager1.h
+  bluez_device1.h
+  bluez_agent1adaptor.h
+  freedesktop_properties.h
+  freedesktop_objectmanager.h
   plugin.cpp
-  agent.h 
-  agentadaptor.h
+  bluez_helper.h
+  agent.h
   bluetooth.h
   device.h
   devicemodel.h

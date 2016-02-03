@@ -20,9 +20,9 @@
 
 import GSettings 1.0
 import QMenuModel 0.1
-import QtQuick 2.0
-import Ubuntu.Components 0.1
-import Ubuntu.Components.ListItems 0.1 as ListItem
+import QtQuick 2.4
+import Ubuntu.Components 1.3
+import Ubuntu.Components.ListItems 1.3 as ListItem
 import SystemSettings 1.0
 import Ubuntu.SystemSettings.Battery 1.0
 import Ubuntu.SystemSettings.Diagnostics 1.0
@@ -117,27 +117,7 @@ ItemPage {
             ListItem.SingleValue {
                 id: lockingControl
                 objectName: "lockingControl"
-                text: i18n.tr("Lock phone")
-                value: {
-                    if (batteryBackend.powerdRunning ) {
-                        var timeout = Math.round(powerSettings.activityTimeout/60)
-                        return (powerSettings.activityTimeout != 0) ?
-                                    // TRANSLATORS: %1 is the number of minutes
-                                    i18n.tr("After %1 minute",
-                                            "After %1 minutes",
-                                            timeout).arg(timeout) :
-                                    i18n.tr("Never")
-                    }
-                    else {
-                        var timeout = Math.round(powerSettings.idleDelay/60)
-                        return (powerSettings.idleDelay != 0) ?
-                                    // TRANSLATORS: %1 is the number of minutes
-                                    i18n.tr("After %1 minute",
-                                            "After %1 minutes",
-                                            timeout).arg(timeout) :
-                                    i18n.tr("Manually")
-                    }
-                }
+                text: i18n.tr("Locking and unlocking")
                 progression: true
                 onClicked: pageStack.push(Qt.resolvedUrl("PhoneLocking.qml"), {usePowerd: usePowerd, powerSettings: powerSettings})
             }
@@ -207,7 +187,7 @@ ItemPage {
             ListItem.SingleValue {
                 id: locationItem
                 objectName: "locationItem"
-                text: i18n.tr("Location access")
+                text: i18n.tr("Location")
                 value: ""
                 progression: true
                 onClicked: pageStack.push(Qt.resolvedUrl("Location.qml"))
@@ -225,14 +205,14 @@ ItemPage {
                 value: locationActionGroup.enabled.state
             }
             ListItem.SingleValue {
-                text: i18n.tr("Other app access")
+                text: i18n.tr("App permissions")
                 progression: true
-                onClicked: pageStack.push(Qt.resolvedUrl("AppAccess.qml"))
+                onClicked: pageStack.push(Qt.resolvedUrl("AppAccess.qml"), {pluginManager: pluginManager})
             }
             ListItem.SingleValue {
                 text: i18n.tr("Diagnostics")
                 progression: true
-                value: diagnosticsWidget.canReportCrashes ?
+                value: diagnosticsWidget.reportCrashes ?
                            /* TRANSLATORS: This string is shown when crash
                               reports are to be sent by the system. */
                            i18n.tr("Sent") :

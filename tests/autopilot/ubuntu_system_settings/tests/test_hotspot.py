@@ -56,6 +56,26 @@ class HotspotSetupTestCase(HotspotBaseTestCase):
             Eventually(Equals(True))
         )
 
+    def test_insecure_setup(self):
+        ssid = 'bar'
+        auth = 'none'
+        config = {'ssid': ssid, 'auth': auth}
+
+        self.hotspot_page.setup_hotspot(config)
+
+        # Assert that the switch is on.
+        self.assertTrue(self.hotspot_page.get_hotspot_status())
+
+        self.assertThat(
+            lambda: self.ctv_private.Get(CTV_PRIV_IFACE, 'HotspotAuth'),
+            Eventually(Equals(auth))
+        )
+
+        self.assertThat(
+            lambda: self.ctv_nets.Get(CTV_NETS_IFACE, 'HotspotStored'),
+            Eventually(Equals(True))
+        )
+
 
 class HotspotExistsTestCase(HotspotBaseTestCase):
 
@@ -80,8 +100,7 @@ class HotspotExistsTestCase(HotspotBaseTestCase):
 
     def test_changing(self):
         ssid = 'bar'
-        password = 'zomgzomg'
-        config = {'ssid': ssid, 'password': password}
+        config = {'ssid': ssid}
         self.hotspot_page.setup_hotspot(config)
 
         self.assertThat(
@@ -89,11 +108,6 @@ class HotspotExistsTestCase(HotspotBaseTestCase):
                 self.ctv_nets.Get(CTV_NETS_IFACE, 'HotspotSsid')
             ).decode('UTF-8'),
             Eventually(Equals(ssid))
-        )
-
-        self.assertThat(
-            lambda: self.ctv_private.Get(CTV_PRIV_IFACE, 'HotspotPassword'),
-            Eventually(Equals(password))
         )
 
 
@@ -166,8 +180,7 @@ class HotspotSetupNoWiFiTestCase(HotspotBaseTestCase):
 
     def test_setup(self):
         ssid = 'bar'
-        password = 'zomgzomg'
-        config = {'ssid': ssid, 'password': password}
+        config = {'ssid': ssid}
 
         self.assertThat(
             lambda: self.ctv_nets.Get(CTV_NETS_IFACE, 'HotspotStored'),

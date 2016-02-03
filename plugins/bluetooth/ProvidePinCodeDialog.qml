@@ -1,7 +1,7 @@
 /*
  * This file is part of ubuntu-system-settings
  *
- * Copyright (C) 2013 Canonical Ltd.
+ * Copyright (C) 2013-2015 Canonical Ltd.
  *
  * Contact: Charles Kerr <charles.kerr@canonical.com>
  *
@@ -19,9 +19,9 @@
  */
 
 
-import QtQuick 2.0
-import Ubuntu.Components 0.1
-import Ubuntu.Components.Popups 0.1
+import QtQuick 2.4
+import Ubuntu.Components 1.3
+import Ubuntu.Components.Popups 1.3
 
 Dialog {
     id: root

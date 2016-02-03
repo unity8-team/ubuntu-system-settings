@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 Canonical Ltd
+ * Copyright (C) 2013-2015 Canonical Ltd
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as
@@ -53,7 +53,7 @@ void Agent::reject(QDBusMessage msg, const char *functionName)
  */
 void Agent::Release()
 {
-    Q_EMIT(pairingDone());
+    Q_EMIT(releaseNeeded());
 }
 
 /***
@@ -112,9 +112,24 @@ void Agent::confirmPasskey(uint tag, bool confirmed)
     }
 }
 
-/***
-****
-***/
+QString Agent::RequestPinCode(const QDBusObjectPath &objectPath)
+{
+    auto device = m_devices.getDeviceFromPath(objectPath.path());
+    if (device) {
+        const uint tag = m_tag++;
+
+        setDelayedReply(true);
+        assert(!m_delayedReplies.contains(tag));
+        m_delayedReplies[tag] = message();
+
+        Q_EMIT(pinCodeNeeded(tag, device.data()));
+
+    } else { // passkey requested for an unknown device..?!
+        reject(message(), __func__);
+    }
+
+  return 0;
+}
 
 /**
  * This method gets called when the service daemon
@@ -168,35 +183,6 @@ void Agent::providePasskey(uint tag, bool provided, uint passkey)
 ****
 ***/
 
-/*
- * This method gets called when the service daemon
- * needs to get the passkey for an authentication.
- *
- * The return value should be a string of 1-16 characters
- * length. The string can be alphanumeric.
- *
- * Possible errors: org.bluez.Error.Rejected
- *                  org.bluez.Error.Canceled
- */
-QString Agent::RequestPinCode(const QDBusObjectPath &objectPath)
-{
-    auto device = m_devices.getDeviceFromPath(objectPath.path());
-    if (device) {
-        const uint tag = m_tag++;
-
-        setDelayedReply(true);
-        assert(!m_delayedReplies.contains(tag));
-        m_delayedReplies[tag] = message();
-
-        Q_EMIT(pinCodeNeeded(tag, device.data()));
-
-    } else { // passkey requested for an unknown device..?!
-        reject(message(), __func__);
-    }
-
-    return "";
-}
-
 /**
  * Invoked by the user-facing code after it prompts the user for a PIN code
  * from an Agent::pinCodeNeeded() signal.
@@ -218,33 +204,23 @@ void Agent::providePinCode(uint tag, bool confirmed, QString pinCode)
     }
 }
 
-/** This method gets called when the service daemon
- * needs to display a passkey for an authentication.
- * The entered parameter indicates the number of already
- * typed keys on the remote side.
- * An empty reply should be returned. When the passkey
- * needs no longer to be displayed, the Cancel method
- * of the agent will be called.
- * During the pairing process this method might be
- * called multiple times to update the entered value.
- * Note that the passkey will always be a 6-digit number,
- * so the display should be zero-padded at the start if
- * the value contains less than 6 digits.
- */
+void Agent::DisplayPinCode(const QDBusObjectPath &objectPath, QString pincode)
+{
+    auto device = m_devices.getDeviceFromPath(objectPath.path());
+    if (device) {
+        Q_EMIT(displayPinCodeNeeded(device.data(), pincode));
+    } else {
+        reject(message(), __func__);
+    }
+}
 
 void Agent::DisplayPasskey(const QDBusObjectPath &objectPath, uint passkey, ushort entered)
 {
     auto device = m_devices.getDeviceFromPath(objectPath.path());
     if (device) {
-        const uint tag = m_tag++;
-
-        setDelayedReply(true);
-        assert(!m_delayedReplies.contains(tag));
-        m_delayedReplies[tag] = message();
-
         QString passkeyStr = QString("%1").arg(passkey, 6, 10, QChar('0'));
-        Q_EMIT(displayPasskeyNeeded(tag, device.data(), passkeyStr, entered));
-    } else { // confirmation requested for an unknown device..?!
+        Q_EMIT(displayPasskeyNeeded(device.data(), passkeyStr, entered));
+    } else {
         reject(message(), __func__);
     }
 }
@@ -256,6 +232,53 @@ void Agent::DisplayPasskey(const QDBusObjectPath &objectPath, uint passkey, usho
 void Agent::Cancel()
 {
     qWarning() << "Cancel callback called";
+
+    Q_EMIT(cancelNeeded());
+}
+
+void Agent::RequestAuthorization(const QDBusObjectPath &path)
+{
+    qWarning() << "Authorization requested for device"
+               << path.path();
+
+    auto device = m_devices.getDeviceFromPath(path.path());
+    if (device) {
+        const uint tag = m_tag++;
+
+        setDelayedReply(true);
+        assert(!m_delayedReplies.contains(tag));
+        m_delayedReplies[tag] = message();
+
+        Q_EMIT(authorizationRequested(tag, device.data()));
+    }
+    else {
+        reject(message(), __func__);
+    }
+}
+
+void Agent::authorizationRequestCallback(uint tag, bool allow)
+{
+    if (m_delayedReplies.contains(tag)) {
+        QDBusMessage message = m_delayedReplies[tag];
+
+        if (allow)
+            m_connection.send(message.createReply());
+        else
+            reject(message, __func__);
+
+        m_delayedReplies.remove(tag);
+    }
+}
+
+void Agent::displayPinCodeCallback(uint tag)
+{
+    if (m_delayedReplies.contains(tag)) {
+        QDBusMessage message = m_delayedReplies[tag];
+
+        cancel(message, __func__);
+
+        m_delayedReplies.remove(tag);
+    }
 }
 
 /**

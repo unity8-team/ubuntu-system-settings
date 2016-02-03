@@ -21,6 +21,8 @@
 #include "sound.h"
 
 #include <QDir>
+#include <QFile>
+#include <QStandardPaths>
 #include <unistd.h>
 
 #define AS_INTERFACE "com.ubuntu.touch.AccountsService.Sound"
@@ -88,10 +90,22 @@ void Sound::setIncomingCallSound(QString sound)
     if (sound == getIncomingCallSound())
         return;
 
+    QString prevSound = getIncomingCallSound();
+
     m_accountsService.setUserProperty(AS_INTERFACE,
                                       "IncomingCallSound",
                                       QVariant::fromValue(sound));
     Q_EMIT(incomingCallSoundChanged());
+
+    if (sound.startsWith(customRingtonePath())) {
+        QDir dir(customRingtonePath());
+        QFileInfoList files(dir.entryInfoList(QDir::Files));
+        Q_FOREACH(QFileInfo f, files) {
+            if (f.absoluteFilePath() != sound)
+                QFile(f.absoluteFilePath()).remove();
+        }
+    }
+
 }
 
 QString Sound::getIncomingMessageSound()
@@ -105,9 +119,12 @@ void Sound::setIncomingMessageSound(QString sound)
     if (sound == getIncomingMessageSound())
         return;
 
+    QString prevSound = getIncomingMessageSound();
+
     m_accountsService.setUserProperty(AS_INTERFACE,
                                       "IncomingMessageSound",
                                       QVariant::fromValue(sound));
+
     Q_EMIT(incomingMessageSoundChanged());
 }
 
@@ -211,6 +228,11 @@ void Sound::setDialpadSoundsEnabled(bool enabled)
                                       "DialpadSoundsEnabled",
                                       QVariant::fromValue(enabled));
     Q_EMIT(dialpadSoundsEnabledChanged());
+}
+
+QString Sound::customRingtonePath()
+{
+    return QString(QStandardPaths::writableLocation(QStandardPaths::DataLocation) + "/Music");
 }
 
 QStringList soundsListFromDir(const QString &dirString)

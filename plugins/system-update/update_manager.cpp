@@ -18,15 +18,19 @@
  *
 */
 
-#include "update_manager.h"
-#include <QString>
-#include <QStringList>
+
+#include <QDBusInterface>
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QJsonArray>
 #include <QJsonValue>
 #include <QProcessEnvironment>
-#include <QDBusInterface>
+#include <QString>
+#include <QStringList>
+#include <ssoservice.h>
+
+#include "update_manager.h"
+#include "network.h"
 
 using namespace UbuntuOne;
 
@@ -36,6 +40,8 @@ using namespace UbuntuOne;
 #else
     #define CHECK_CREDENTIALS "CHECK_CREDENTIALS"
 #endif
+
+const QString TEST_APP = "com.ubuntu.developer.testclick";
 
 namespace UpdatePlugin {
 
@@ -81,6 +87,8 @@ UpdateManager::UpdateManager(QObject *parent):
                   this, SIGNAL(networkError()));
     QObject::connect(&m_network, SIGNAL(serverError()),
                   this, SIGNAL(serverError()));
+    QObject::connect(&m_network, SIGNAL(credentialError()),
+                     this, SLOT(handleCredentialsFailed()));
     QObject::connect(&m_network,
                      SIGNAL(clickTokenObtained(Update*, const QString&)),
                      this, SLOT(clickTokenReceived(Update*, const QString&)));
@@ -147,6 +155,14 @@ void UpdateManager::checkUpdates()
     m_apps.clear();
     Q_EMIT modelChanged();
     bool enabled = enableAutopilotMode();
+
+    // If we're in testing mode, always consider updates for TEST_APP
+    if (enabled) {
+        Update *app = new Update();
+        app->initializeApplication(TEST_APP, QString("Test App"), QString("1.0"));
+        m_apps.insert(app->getPackageName(), app);
+    }
+
     if (getCheckForCredentials()) {
         m_systemUpdate.checkForUpdate();
         m_service.getCredentials();
@@ -162,11 +178,16 @@ void UpdateManager::checkUpdates()
 
 void UpdateManager::handleCredentialsFound(Token token)
 {
-    m_token = token;
+    m_network.setUbuntuOneToken(token);
     QStringList args("list");
     args << "--manifest";
     QString command = getClickCommand();
     m_process.start(command, args);
+}
+
+void UpdateManager::handleCredentialsFailed()
+{
+    m_service.invalidateCredentials();
 }
 
 QString UpdateManager::getClickCommand()
@@ -217,6 +238,8 @@ void UpdateManager::processUpdates()
     m_clickCheckingUpdate = false;
     bool updateAvailable = false;
     foreach (QString id, m_apps.keys()) {
+        if (m_model.contains(id))
+            continue;
         Update *app = m_apps.value(id);
         QString packagename(UBUNTU_PACKAGE_NAME);
         if(app->getPackageName() != packagename && app->updateRequired()) {
@@ -325,13 +348,7 @@ void UpdateManager::pauseDownload(const QString &packagename)
 
 void UpdateManager::downloadApp(Update *app)
 {
-    if (m_token.isValid()) {
-        QString authHeader = m_token.signUrl(app->downloadUrl(), QStringLiteral("HEAD"), true);
-        app->setClickUrl(app->downloadUrl());
-        m_network.getClickToken(app, app->downloadUrl(), authHeader);
-    } else {
-        app->setError("Invalid User Token");
-    }
+    m_network.getClickToken(app, app->downloadUrl());
 }
 
 void UpdateManager::clickTokenReceived(Update *app, const QString &clickToken)

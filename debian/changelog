@@ -1,3 +1,348 @@
+ubuntu-system-settings (0.3+16.04.20160129-0ubuntu1) xenial; urgency=medium
+
+  * ￼Return "Phone" for type Smartphone (LP: #1534221)
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Fri, 29 Jan 2016 15:43:18 +0000
+
+ubuntu-system-settings (0.3+16.04.20160128-0ubuntu1) xenial; urgency=medium
+
+  * Allow pairing regardless of type (LP: #1535660, #1534221)
+  * Exposed adapterAddress in the bluetooth plugin to be used to get the
+    address in the about plugin (LP: #1537029)
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Thu, 28 Jan 2016 14:23:03 +0000
+
+ubuntu-system-settings (0.3+16.04.20160121-0ubuntu1) xenial; urgency=medium
+
+  * Don't display the ActivityIndicator while searching, causes to much
+    load. (LP: #1535827)
+  * Don't display the setting to automatically connect when detected
+    during pairing (LP: #1535822)
+  * Only enable the forget device button when bluetooth is enabled (LP:
+    #1535829)
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Thu, 21 Jan 2016 14:47:13 +0000
+
+ubuntu-system-settings (0.3+16.04.20160108.1-0ubuntu1) xenial; urgency=medium
+
+  * Adds Mouse & Touchpad panel, however it's disabled because it
+    requires unity8 support. added: plugins/mouse/
+    plugins/mouse/CMakeLists.txt plugins/mouse/Components/
+    plugins/mouse/Components/CMakeLists.txt
+    plugins/mouse/Components/UnityInputInfo/
+    plugins/mouse/Components/UnityInputInfo/CMakeLists.txt
+    plugins/mouse/Components/UnityInputInfo/UnityInputInfo.qml
+    plugins/mouse/Components/UnityInputInfo/qmldir
+    plugins/mouse/Connected.qml plugins/mouse/InputInfo/
+    plugins/mouse/InputInfo/CMakeLists.txt
+    plugins/mouse/InputInfo/linux/
+    plugins/mouse/InputInfo/linux/qinputdeviceinfo_linux.cpp
+    plugins/mouse/InputInfo/linux/qinputdeviceinfo_linux_p.h
+    plugins/mouse/InputInfo/plugin.cpp plugins/mouse/InputInfo/plugin.h
+    plugins/mouse/InputInfo/qdeclarativeinputdeviceinfo.cpp
+    plugins/mouse/InputInfo/qdeclarativeinputdeviceinfo_p.h
+    plugins/mouse/InputInfo/qinputinfo.cpp
+    plugins/mouse/InputInfo/qinputinfo.h plugins/mouse/InputInfo/qmldir
+    plugins/mouse/ItemTitle.qml plugins/mouse/None.qml
+    plugins/mouse/PageComponent.qml
+    plugins/mouse/PrimaryButtonSelector.qml
+    plugins/mouse/SectionHeader.qml plugins/mouse/TapArea.qml
+    plugins/mouse/mouse.settings plugins/mouse/plugin/
+    plugins/mouse/plugin/CMakeLists.txt plugins/mouse/plugin/mouse-
+    plugin.cpp plugins/mouse/plugin/mouse-plugin.h
+    plugins/mouse/settings-mouse.svg tests/plugins/mouse/
+    tests/plugins/mouse/CMakeLists.txt tests/plugins/mouse/Source/
+    tests/plugins/mouse/Source/qmldir tests/plugins/mouse/tst_mouse.cpp
+    tests/plugins/mouse/tst_mouse.qml
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Fri, 08 Jan 2016 19:06:03 +0000
+
+ubuntu-system-settings (0.3+16.04.20151222-0ubuntu1) xenial; urgency=medium
+
+  [ jonas-drange ]
+  * Expand indicator network mock to include access points, sections and
+    switches via org.gtk.Menus.
+  * fix utils leak in main
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Tue, 22 Dec 2015 19:46:25 +0000
+
+ubuntu-system-settings (0.3+16.04.20151216.1-0ubuntu1) xenial; urgency=medium
+
+  [ Ken VanDine ]
+  * Improved metadata sent to download manager so they show up better in
+    the transfer indicator.
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Wed, 16 Dec 2015 16:19:08 +0000
+
+ubuntu-system-settings (0.3+16.04.20151204.1-0ubuntu1) xenial; urgency=medium
+
+  [ Ken VanDine ]
+  * Don't delete previous custom ringtones unless a new custom ringtone
+    is selected. Set header titled in the picker. (LP: #1519332)
+
+  [ jonas-drange ]
+  * drop /usr/bin/ from USS binary in autopilot tests (LP: #1517488)
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Fri, 04 Dec 2015 16:18:04 +0000
+
+ubuntu-system-settings (0.3+16.04.20151203-0ubuntu1) xenial; urgency=medium
+
+  [ Ken VanDine ]
+  * Don't animate the ActivityIndicator when it's not visible (LP:
+    #1460945)
+
+  [ jonas-drange ]
+  * change single quotes in i18n.tr to double quotes as the parser does
+    not like single quotes (LP: #1518732)
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Thu, 03 Dec 2015 19:00:42 +0000
+
+ubuntu-system-settings (0.3+16.04.20151201-0ubuntu1) xenial; urgency=medium
+
+  [ jonas-drange ]
+  * Refactored mock click update server since it was not already in use,
+    and made use of it in the system udpates autopilot tests. Removed
+    assertion that assumed that the 'SEARCHING' state would last longer
+    than n seconds.
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Tue, 01 Dec 2015 17:55:33 +0000
+
+ubuntu-system-settings (0.3+16.04.20151127.2-0ubuntu1) xenial; urgency=medium
+
+  * Capture values by reference in the lambda (LP: #1517254, #1519046)
+  * Ensure we don't add duplicate updates to the model (LP: #1519971)
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Fri, 27 Nov 2015 20:05:44 +0000
+
+ubuntu-system-settings (0.3+16.04.20151124-0ubuntu1) xenial; urgency=medium
+
+  [ CI Train Bot ]
+  * New rebuild forced.
+
+  [ Ken VanDine ]
+  * Allow setting custom ringtone with content-hub (LP: #1268097)
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Tue, 24 Nov 2015 11:09:44 +0000
+
+ubuntu-system-settings (0.3+16.04.20151120-0ubuntu1) xenial; urgency=medium
+
+  * Ported the Bluetooth plugin to the changed BlueZ API which comes
+    with version 5.x. The overall device management gets a lot more
+    reliable with this. Superfluous code was dropped when possible. Also
+    the unit tests got a rework and all pass now. (LP: #1499789)
+
+ -- Simon Fels <simon.busch@canonical.com>  Fri, 20 Nov 2015 08:48:52 +0000
+
+ubuntu-system-settings (0.3+16.04.20151110-0ubuntu1) xenial; urgency=medium
+
+  [ Alejandro J. Cura ]
+  * If a system package gets updated by the user, only show the user's
+    copy (LP: #1265250)
+
+  [ Bartosz Kosiorek ]
+  * Allow translating "Unavailable" string (LP: #1511384) (LP: #1511384)
+
+  [ Ken VanDine ]
+  * Don't check for updates if not online (LP: #1505663)
+
+  [ Michael Zanetti ]
+  * Only animate ActivityIndicators when they are visible (LP: #1513450)
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Tue, 10 Nov 2015 15:27:33 +0000
+
+ubuntu-system-settings (0.3+16.04.20151109-0ubuntu1) xenial; urgency=medium
+
+  [ jonas-drange ]
+  * Cache call forwarding summary for each IMSI/ICCID. Block UI until
+    the CallForwarding binding is ready. Do not assume a failed
+    callforwarding change means it's disabled (could be forced by
+    carrier). (LP: #1478049)
+
+ -- Jonas G. Drange <ci-train-bot@canonical.com>  Mon, 09 Nov 2015 12:50:11 +0000
+
+ubuntu-system-settings (0.3+16.04.20151103.1-0ubuntu1) xenial; urgency=medium
+
+  [ Bartosz Kosiorek ]
+  * Remove "Retry" button, when no internet connection is available. It
+    will automatically retry after establishing connection (LP:
+    #1479447) (LP: #1479447)
+
+  [ Ken VanDine ]
+  * Don't elide connect to internet label (LP: #1512768)
+  * Ensure we only check for updates when NetworkingStatus.online is
+    true (LP: #1505663)
+  * [system-settings] Abort request when the onlineStatus changes to
+    false (LP: #1505663)
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Tue, 03 Nov 2015 16:26:31 +0000
+
+ubuntu-system-settings (0.3+16.04.20151029-0ubuntu1) xenial; urgency=medium
+
+  [ CI Train Bot ]
+  * New rebuild forced.
+
+  [ jonas-drange ]
+  * Deprecated the use of Info endpoint in system_update.cpp and
+    hotspot. Exposed detailed version details on UpdateManager. Used
+    this to get to a 'tag' key which includes the ota string. Because of
+    more advanced system-image testing, about tests now use the
+    systemimage dbusmock template. debian/control, s-i-dbus changed to
+    3.0.2 because that's where the ota string is. (LP: #1475568)
+
+ -- Jonas G. Drange <ci-train-bot@canonical.com>  Thu, 29 Oct 2015 15:48:09 +0000
+
+ubuntu-system-settings (0.3+16.04.20151023.1-0ubuntu1) xenial; urgency=medium
+
+  [ CI Train Bot ]
+  * New rebuild forced.
+
+  [ Ken VanDine ]
+  * Bump Ubuntu.Components imports to 1.3 and fixed UbuntuShape
+    deprecations (LP: #1508363)
+
+  [ jonas-drange ]
+  * re-add silentMode property to repair the silent mode switch
+
+ -- Jonas G. Drange <ci-train-bot@canonical.com>  Fri, 23 Oct 2015 14:57:29 +0000
+
+ubuntu-system-settings (0.3+15.10.20151002-0ubuntu1) wily; urgency=medium
+
+  [ Sebastien Bacher ]
+  * [hospot] include cmakefile hack to get files listed in qtcreator
+  * [security-privacy] use the system location as well to look for trust
+    store items, that's needed at least for unity8-dash which is not
+    distributed as a click and doesn't a .local entry (LP: #1501428)
+  * [sound] don't display silent mode warnings, sounds should just be
+    played when user selected (LP: #1391502)
+
+  [ jonas-drange ]
+  * [phone] encode numbers before passing them to url-dispatcher (LP:
+    #1496845)
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Fri, 02 Oct 2015 17:52:49 +0000
+
+ubuntu-system-settings (0.3+15.10.20150930-0ubuntu1) wily; urgency=medium
+
+  * Used the correct property to determine if whoopsie will
+    automatically report crashes (LP: #1494442)
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Wed, 30 Sep 2015 15:23:14 +0000
+
+ubuntu-system-settings (0.3+15.10.20150924-0ubuntu1) wily; urgency=medium
+
+  [ CI Train Bot ]
+  * New rebuild forced.
+
+  [ jonas-drange ]
+  * [autopilot] use wait_select_single instead of select_single for all
+    click_item
+  * [security-privacy] fix test broken by recent ui changes
+
+ -- Jonas G. Drange <ci-train-bot@canonical.com>  Thu, 24 Sep 2015 09:54:48 +0000
+
+ubuntu-system-settings (0.3+15.10.20150918-0ubuntu1) wily; urgency=medium
+
+  [ jonas-drange ]
+  * [hotspot] hide/show based on modem availability from Connectivity
+    (which also requires a bumped dep). (LP: #1487157)
+  * [time-date] Migrate threaded code to worker-object pattern, move
+    sorting to a worker thread from the GUI thread, and only instantiate
+    UbuntuTimeDatePanel plugin once. (LP: #1492260)
+  * [wifi/wpa2ep] allow passwords of length 1 for wpa enterprise
+    authentication schemes. (LP: #1490417)
+
+ -- Jonas G. Drange <ci-train-bot@canonical.com>  Fri, 18 Sep 2015 14:20:27 +0000
+
+ubuntu-system-settings (0.3+15.10.20150915-0ubuntu1) wily; urgency=medium
+
+  [ Ken VanDine ]
+  * ported to libqofono 0.82 (modemTechnologies now
+    availableTechnologies)
+
+ -- Tony Espy <ci-train-bot@canonical.com>  Tue, 15 Sep 2015 00:23:13 +0000
+
+ubuntu-system-settings (0.3+15.10.20150910.1-0ubuntu1) wily; urgency=medium
+
+  [ jonas-drange ]
+  * [hotspot] allow insecure hotspot, hide hotspot for mako, make
+    autopilot tests run on mako, and change packaging so we get a newer
+    Connectivity API (provided by indicator-network). (LP: #1431876)
+  * [system-update] deviceName now uses correct argument returned from
+    system image backend. (LP: #1487432)
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Thu, 10 Sep 2015 19:01:48 +0000
+
+ubuntu-system-settings (0.3+15.10.20150909-0ubuntu1) wily; urgency=medium
+
+  [ Ken VanDine ]
+  * Don't initialize and int as NULL
+  * Fixed test to match string change
+  * Pass some args when pushing the online-accounts panel page
+
+  [ Sebastien Bacher ]
+  * [security-privacy] small bugfixes and ui tweaks update some strings
+    to match the design translate the list items names include online
+    accounts button (LP: #1488016, #1487382)
+  * [system-update] use scalable distributor-logo icon from the theme
+    (LP: #1367137)
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Wed, 09 Sep 2015 15:08:25 +0000
+
+ubuntu-system-settings (0.3+15.10.20150901-0ubuntu1) wily; urgency=medium
+
+  [ Ken VanDine ]
+  * emit credentialsDeleted when the U1 token expired (LP: #1378678)
+
+  [ Manuel de la Pena ]
+  * Sign the query in order to get a possible auth error from the server
+    and stop the user from trying to do updates with invalid creds.
+  * The updates page is leaking objects when we have a successful update
+    and when we do have errors. The following branch ensures that no
+    memory is wasted.
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Tue, 01 Sep 2015 13:59:12 +0000
+
+ubuntu-system-settings (0.3+15.10.20150831-0ubuntu1) wily; urgency=medium
+
+  [ simon.busch@canonical.com ]
+  * Reworking bluetooth support in settings a bit to work as it should:
+    devices are now correctly connected after they got paired which
+    wasn't the case before due to timing reasons
+    (org.bluez.Audio/Input/... interface wasn't registered yet)
+    DevicePage is now created on the fly to avoid it displaying
+    information for a moment from a previously selected device
+    DevicePage is now split out of the PageComponent.qml file Discover
+    service functionality is dropped as bluez does this on its own and
+    we don't need to care (LP: #1488836)
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Mon, 31 Aug 2015 13:22:00 +0000
+
+ubuntu-system-settings (0.3+15.10.20150827-0ubuntu1) wily; urgency=medium
+
+  [ Ken VanDine ]
+  * Don't show the phone number in the about page, that is now provided
+    by address-book-app (LP: #1364452)
+
+  [ Robert Ancell ]
+  * Use new QML package names for qml-module-qt-labs-folderlistmodel,
+    qml-module-qtsysteminfo.
+
+  [ Sebastien Bacher ]
+  * [security-privacy] rename the "Lock phone" item to "Locking and
+    unlocking" and do not include the screen delay as a value, it
+    misleads users to think that the section is only about that where it
+    also includes security options (LP: #1361127)
+  * [security-privacy] use the correct access to location string (LP:
+    #1388184)
+
+  [ jonas-drange ]
+  * Use wait_select_single instead of select_single to make the test
+    less flaky
+  * [plugin] add has-dynamic-name to allow for dynamic renaming of a
+    plugin. (LP: #1475629)
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Thu, 27 Aug 2015 07:47:59 +0000
+
 ubuntu-system-settings (0.3+15.10.20150818-0ubuntu1) wily; urgency=medium
 
   [ CI Train Bot ]

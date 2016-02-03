@@ -22,7 +22,7 @@
 #include <QObject>
 #include <QTest>
 #include <QString>
-#include "network/network.h"
+#include "network.h"
 #include "update.h"
 
 using namespace UpdatePlugin;

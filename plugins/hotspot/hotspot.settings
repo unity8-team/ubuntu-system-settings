@@ -2,6 +2,7 @@
     "plugin": "hotspot-plugin",
     "icon": "preferences-network-hotspot-symbolic",
     "name": "Hotspot",
+    "plugin": "hotspot-plugin",
     "translations": "ubuntu-system-settings",
     "category": "network",
     "priority": 2,

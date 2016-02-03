@@ -23,11 +23,13 @@
 #include <ubuntu/download_manager/error.h>
 
 #include "download_tracker.h"
-#include "network/network.h"
+#include "network.h"
 
 namespace {
     const QString DOWNLOAD_COMMAND = "post-download-command";
-    const QString APP_ID = "app_id";
+    const QString PACKAGE_NAME = "package-name";
+    const QString TITLE = "title";
+    const QString SHOW_IN_INDICATOR = "indicator-shown";
     const QString PKCON_COMMAND = "pkcon";
     const QString DOWNLOAD_MANAGER_SHA512 = "sha512";
 }
@@ -68,9 +70,17 @@ void DownloadTracker::setPackageName(const QString& package)
     }
 }
 
+void DownloadTracker::setTitle(const QString& title)
+{
+    if (!title.isEmpty()) {
+        m_title = title;
+        startService();
+    }
+}
+
 void DownloadTracker::startService()
 {
-    if (!m_clickToken.isEmpty() && !m_downloadUrl.isEmpty() && !m_packageName.isEmpty()) {
+    if (!m_clickToken.isEmpty() && !m_downloadUrl.isEmpty() && !m_packageName.isEmpty() && !m_title.isEmpty()) {
         if (m_manager == nullptr) {
             m_manager = Manager::createSessionManager("", this);
 
@@ -84,7 +94,9 @@ void DownloadTracker::startService()
         QString command = getPkconCommand();
         args << command << "-p" << "install-local" << "$file";
         vmap[DOWNLOAD_COMMAND] = args;
-        vmap[APP_ID] = m_packageName;
+        vmap[PACKAGE_NAME] = m_packageName;
+        vmap[TITLE] = m_title;
+        vmap[SHOW_IN_INDICATOR] = m_show_in_indicator;
         StringMap map;
         map[X_CLICK_TOKEN] = m_clickToken;
         DownloadStruct dstruct(m_downloadUrl, m_download_sha512, DOWNLOAD_MANAGER_SHA512, vmap, map);

@@ -18,9 +18,9 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import QtQuick 2.0
-import Ubuntu.Components 1.1
-import Ubuntu.Components.ListItems 0.1 as ListItem
+import QtQuick 2.4
+import Ubuntu.Components 1.3
+import Ubuntu.Components.ListItems 1.3 as ListItem
 import Ubuntu.Components.Themes.Ambiance 0.1
 import MeeGo.QOfono 0.2
 import "callForwardingUtils.js" as Utils
@@ -72,7 +72,7 @@ Column {
         /**
          * Server is working.
          */
-        property bool _pending: false
+        property bool _pending: !callForwarding.ready
 
         /**
          * Server failed to change/fetch setting.
@@ -233,10 +233,12 @@ Column {
         Component.onCompleted: {
             item.callForwarding[item.rule + 'Changed'].connect(Utils.ruleChanged);
             item.callForwarding[item.rule + 'Complete'].connect(Utils.ruleComplete);
+            item.callForwarding.readyChanged.connect(Utils.ruleReadyChanged);
         }
         Component.onDestruction: {
             item.callForwarding[item.rule + 'Changed'].disconnect(Utils.ruleChanged);
             item.callForwarding[item.rule + 'Complete'].disconnect(Utils.ruleComplete);
+            item.callForwarding.readyChanged.disconnect(Utils.ruleReadyChanged);
         }
     }
 }
