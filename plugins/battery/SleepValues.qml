@@ -75,8 +75,8 @@ ItemPage {
             anchors.right: parent.right
 
             SettingsItemTitle {
-                text: lockOnSuspend ? i18n.tr("Lock the phone when it's not in use:") :
-                                      i18n.tr("Put the phone to sleep when it is not in use:")
+                text: lockOnSuspend ? i18n.tr("Lock the device when it's not in use:") :
+                                      i18n.tr("Put the device to sleep when it is not in use:")
             }
 
             ListItem.ItemSelector {

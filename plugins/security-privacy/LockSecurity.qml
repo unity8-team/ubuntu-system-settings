@@ -35,7 +35,7 @@ ItemPage {
     // The user can still press the main "back" button or other buttons on the
     // page while the "change password" dialog is up.  This is because the
     // dialog is not guaranteed to cover the whole screen; consider the case of
-    // turning a phone to landscape mode.  We'd rather not have the password
+    // turning a device to landscape mode.  We'd rather not have the password
     // changing operation interrupted by destroying the dialog out from under
     // it.  So we make sure the whole page and header back button are disabled
     // while the dialog is working.
@@ -442,7 +442,7 @@ ItemPage {
             anchors.right: parent.right
 
             SettingsItemTitle {
-                text: i18n.tr("Unlock the phone using:")
+                text: i18n.tr("Unlock the device using:")
             }
 
             ListItem.ItemSelector {

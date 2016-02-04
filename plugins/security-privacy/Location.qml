@@ -91,7 +91,7 @@ ItemPage {
             anchors.right: parent.right
 
             SettingsItemTitle {
-                text: i18n.tr("Let the phone detect your location:")
+                text: i18n.tr("Let the device detect your location:")
             }
 
             ListItem.ItemSelector {

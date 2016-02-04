@@ -32,7 +32,7 @@ ItemPage {
     id: root
     objectName: "aboutPage"
 
-    title: i18n.tr("About this phone")
+    title: i18n.tr("About")
     flickable: scrollWidget
     property var modemsSorted: []
 

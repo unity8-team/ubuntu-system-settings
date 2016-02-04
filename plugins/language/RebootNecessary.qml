@@ -31,7 +31,7 @@ Dialog {
     signal reboot()
     signal revert(int to)
 
-    text: i18n.tr("The phone needs to restart for changes to take effect.")
+    text: i18n.tr("The device needs to restart for changes to take effect.")
     Button {
         id: reboot
         objectName: "reboot"
