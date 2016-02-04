@@ -64,6 +64,10 @@ MainView {
             if (!loadPluginByName(defaultPlugin, pluginOptions))
                 Qt.quit()
         }
+
+        // when running in windowed mode, use a fixed width
+        view.minimumWidth  = units.gu(50)
+        view.maximumWidth = units.gu(50)
     }
 
     Connections {
