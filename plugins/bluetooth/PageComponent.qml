@@ -303,6 +303,13 @@ ItemPage {
                         iconSource: iconPath
                         iconFrame: false
                         text: getDisplayName(type, displayName)
+                        /* Dropped to work around #1542098, we should 
+                         * add this back when we switch to the new listitem
+                         * control: ActivityIndicator {
+                         *     visible: connection == Device.Connecting
+                         *     running: visible
+                         * }
+                         */
                         onClicked: {
                             backend.setSelectedDevice(addressName);
                             pageStack.push(Qt.resolvedUrl("DevicePage.qml"), {backend: backend, root: root});
