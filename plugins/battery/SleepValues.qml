@@ -122,7 +122,7 @@ ItemPage {
             }
 
             ListItem.Caption {
-                text: lockOnSuspend ? i18n.tr("Shorter times are more secure. Phone won't lock during calls or video playback.") : i18n.tr("Phone won’t sleep during calls or video playback.")
+                text: lockOnSuspend ? i18n.tr("Shorter times are more secure. Device won't lock during calls or video playback.") : i18n.tr("Device won’t sleep during calls or video playback.")
             }
         }
     }
