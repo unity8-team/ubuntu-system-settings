@@ -303,10 +303,6 @@ ItemPage {
                         iconSource: iconPath
                         iconFrame: false
                         text: getDisplayName(type, displayName)
-                        control: ActivityIndicator {
-                            visible: connection == Device.Connecting
-                            running: visible
-                        }
                         onClicked: {
                             backend.setSelectedDevice(addressName);
                             pageStack.push(Qt.resolvedUrl("DevicePage.qml"), {backend: backend, root: root});
