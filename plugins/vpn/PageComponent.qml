@@ -22,6 +22,8 @@ import QtQuick 2.0
 import SystemSettings 1.0
 import Ubuntu.Components 1.3
 import Ubuntu.Components.ListItems 1.3 as ListItem
+import Ubuntu.Components.Popups 1.3
+import Ubuntu.Connectivity 1.0
 import Ubuntu.Settings.Vpn 0.1
 
 ItemPage {
@@ -29,6 +31,10 @@ ItemPage {
     title: i18n.tr("VPN")
     objectName: "vpnPage"
     flickable: scrollWidget
+
+    function openConnection(connection) {
+        PopupUtils.open(vpnEditorDialog, root, {"connection": connection});
+    }
 
     Flickable {
         id: scrollWidget
@@ -42,6 +48,38 @@ ItemPage {
 
         Column {
             anchors { left: parent.left; right: parent.right }
+
+            VpnList {
+                id: list
+                anchors { left: parent.left; right: parent.right }
+                model: Connectivity.vpnConnections
+            }
+
+            ListItem.Caption {
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                }
+                text : i18n.tr("To add a VPN configuration, download its config file or configure it manually.")
+            }
+
+            ListItem.SingleControl {
+                control: Button {
+                    text : i18n.tr("Add Manual Configuration…")
+                    onClicked: Connectivity.vpnConnections.add(VpnConnection.OPENVPN)
+                }
+            }
         }
+    }
+
+    // FIXME: Load this async
+    Component {
+        id: vpnEditorDialog
+        VpnEditorDialog {}
+    }
+
+    Connections {
+        target: Connectivity.vpnConnections
+        onAddFinished: openConnection(connection)
     }
 }
