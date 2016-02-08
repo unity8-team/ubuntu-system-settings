@@ -18,22 +18,21 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import QtQuick 2.0
-import SystemSettings 1.0
-import Ubuntu.Components 1.3
-import Ubuntu.Components.ListItems 1.3 as ListItem
+#ifndef SYSTEM_SETTINGS_PHONE_PLUGIN_H
+#define SYSTEM_SETTINGS_PHONE_PLUGIN_H
 
-Column {
-    anchors.left: parent.left
-    anchors.right: parent.right
-    property bool pocketPC: false
-    
-    ListItem.Caption {
-        text: {
-            if (pocketPC)
-                return i18n.tr("Connect a mouse or touchpad via USB, or use a Bluetooth device. If a Bluetooth device isn’t detected, make sure it is turned on and its batteries are charged.")
-            else
-                return i18n.tr("You need to use a Bluetooth mouse or touchpad with this display. Make sure it is close to the device and its batteries are charged.")
-        }
-    }
-}
+#include <QObject>
+#include <SystemSettings/PluginInterface>
+
+class PhonePlugin: public QObject, public SystemSettings::PluginInterface2
+{
+    Q_OBJECT
+    Q_PLUGIN_METADATA(IID "com.ubuntu.SystemSettings.PluginInterface/2.0")
+    Q_INTERFACES(SystemSettings::PluginInterface2)
+
+public:
+    SystemSettings::ItemBase *createItem(const QVariantMap &staticData,
+                                         QObject *parent = 0);
+};
+
+#endif // SYSTEM_SETTINGS_PHONE_PLUGIN_H

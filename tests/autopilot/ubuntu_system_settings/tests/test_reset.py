@@ -29,7 +29,7 @@ class ResetTestCase(ResetBaseTestCase):
         """Checks whether Reset page is available"""
         self.assertThat(
             self.reset_page.title,
-            Equals(_('Reset phone')))
+            Equals(_('Reset device')))
 
     def test_reset_launcher(self):
         gsettings = Gio.Settings.new('com.canonical.Unity.Launcher')

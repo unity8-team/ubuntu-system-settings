@@ -32,7 +32,7 @@ ItemPage {
     id: root
     objectName: "aboutPage"
 
-    title: i18n.tr("About this phone")
+    title: i18n.tr("About")
     flickable: scrollWidget
     property var modemsSorted: []
 
@@ -109,7 +109,7 @@ ItemPage {
                 text: "IMEI"
                 value: modemsSorted.length ? (imeiNumber || i18n.tr("None")) :
                     i18n.tr("None")
-                visible: modemsSorted.length <= 1
+                visible: modemsSorted.length == 1
             }
 
             ListItem.MultiValue {
