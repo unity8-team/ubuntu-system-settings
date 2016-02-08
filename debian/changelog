@@ -1,3 +1,10 @@
+ubuntu-system-settings (0.3+16.04.20160208-0ubuntu1) xenial; urgency=medium
+
+  * Make cellular and phone dynamically visible (LP: #1541588)
+  * Set a fixed width to 50 GU when in windowed mode (LP: #1542050)
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Mon, 08 Feb 2016 14:32:42 +0000
+
 ubuntu-system-settings (0.3+16.04.20160129-0ubuntu1) xenial; urgency=medium
 
   * ￼Return "Phone" for type Smartphone (LP: #1534221)
