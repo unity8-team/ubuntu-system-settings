@@ -17,7 +17,7 @@
 pragma Singleton
 
 import QtQuick 2.4
-import Ubuntu.SystemSettings.Mouse.InputInfo 0.1
+import QtSystemInfo 5.5
 
 Item {
     id: root
@@ -42,7 +42,7 @@ Item {
             mice.push(devicePath);
             miceCount++;
         }
-        
+
         function addTouchPad(devicePath) {
             touchpads.push(devicePath);
             touchpadCount++;
@@ -75,19 +75,24 @@ Item {
         }
     }
 
-    InputDeviceInfo {
+    InputDeviceModel {
         id: inputInfo
+        filter: InputInfo.Keyboard | InputInfo.Mouse | InputInfo.TouchScreen | InputInfo.TouchScreen
         objectName: "inputDeviceInfo"
-
-        onNewDevice: {
-            var device = inputInfo.get(inputInfo.indexOf(devicePath));
+        onAdded: {
+            var device = inputDevice;
+            var type = device.properties.deviceType;
+            // for (var i in device.properties) {
+            //     console.warn('i', i)
+            // }
             if (device === null) {
                 return;
             }
 
-            var hasMouse = (device.types & InputInfo.Mouse) == InputInfo.Mouse
-            var hasTouchpad = (device.types & InputInfo.TouchPad) == InputInfo.TouchPad
-            var hasKeyboard = (device.types & InputInfo.Keyboard) == InputInfo.Keyboard
+            var hasMouse = (type & InputInfo.Mouse) == InputInfo.Mouse
+            var hasTouchpad = (type & InputInfo.TouchPad) == InputInfo.TouchPad
+            var hasKeyboard = (type & InputInfo.Keyboard) == InputInfo.Keyboard
+            console.warn(device, type, hasMouse, hasTouchpad, hasKeyboard)
 
             if (hasMouse) {
                 priv.addMouse(devicePath);
@@ -100,7 +105,7 @@ Item {
                 priv.addKeyboard(devicePath)
             }
         }
-        onDeviceRemoved: {
+        onRemoved: {
             priv.removeDevice(devicePath)
         }
     }

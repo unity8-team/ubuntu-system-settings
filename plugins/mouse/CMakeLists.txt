@@ -1,6 +1,5 @@
-add_subdirectory(plugin)
-add_subdirectory(InputInfo)
 add_subdirectory(Components)
+add_subdirectory(plugin)
 
 set(QML_SOURCES
     PageComponent.qml

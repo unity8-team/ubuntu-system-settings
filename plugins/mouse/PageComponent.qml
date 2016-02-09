@@ -35,7 +35,7 @@ ItemPage {
         console.warn("MICE: " + UnityInputInfo.mice);
         console.warn("TOUCHPADS: " + UnityInputInfo.touchpads);
     }
-    
+
     states: [
         State {
             name: "none"
