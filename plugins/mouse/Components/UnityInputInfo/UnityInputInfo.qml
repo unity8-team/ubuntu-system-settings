@@ -81,18 +81,14 @@ Item {
         objectName: "inputDeviceInfo"
         onAdded: {
             var device = inputDevice;
-            var type = device.properties.deviceType;
-            // for (var i in device.properties) {
-            //     console.warn('i', i)
-            // }
             if (device === null) {
                 return;
             }
+            var devicePath = device.devicePath;
 
-            var hasMouse = (type & InputInfo.Mouse) == InputInfo.Mouse
-            var hasTouchpad = (type & InputInfo.TouchPad) == InputInfo.TouchPad
-            var hasKeyboard = (type & InputInfo.Keyboard) == InputInfo.Keyboard
-            console.warn(device, type, hasMouse, hasTouchpad, hasKeyboard)
+            var hasMouse = device.type & InputInfo.Mouse;
+            var hasTouchpad = device.type & InputInfo.TouchPad;
+            var hasKeyboard = device.type & InputInfo.Keyboard;
 
             if (hasMouse) {
                 priv.addMouse(devicePath);
