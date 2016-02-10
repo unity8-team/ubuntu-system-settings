@@ -1,3 +1,11 @@
+ubuntu-system-settings (0.3+16.04.20160210-0ubuntu1) xenial; urgency=medium
+
+  [ jonas-drange ]
+  * Add External Keyboard panel which allows for configuration of the
+    default keymap. (LP: #1524400, #1491340)
+
+ -- Michał Sawicz <michal.sawicz@canonical.com>  Wed, 10 Feb 2016 18:37:12 +0000
+
 ubuntu-system-settings (0.3+16.04.20160208-0ubuntu1) xenial; urgency=medium
 
   * Make cellular and phone dynamically visible (LP: #1541588)
