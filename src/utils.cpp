@@ -36,7 +36,7 @@ void parsePluginOptions(const QStringList &arguments, QString &defaultPlugin,
     for (int i = 1; i < arguments.count(); i++) {
         const QString &argument = arguments.at(i);
         if (argument.startsWith("settings://")) {
-            QUrl urlArgument(argument);
+            QUrl urlArgument(Utilities::mapUrl(argument));
             /* Find out which plugin is required. If the first component of the
              * path is "system", just skip it. */
             QStringList pathComponents =
@@ -74,6 +74,23 @@ QString Utilities::formatSize(quint64 size) const
     g_free (formatted_size);
 
     return q_formatted_size;
+}
+
+/*
+ * Returns the URL to which a shortcut leads, if any. If it does
+ * not lead anywhere, the URL is returned unchanged.
+ */
+QString Utilities::shortcutToUrl(const QString &shortcut) const
+{
+    return Utilities::mapUrl(shortcut);
+}
+
+QString Utilities::mapUrl(const QString &url)
+{
+    if (url == QStringLiteral("settings:///system/location")) {
+        return QStringLiteral("settings:///system/security-privacy?subpage=location");
+    }
+    return url;
 }
 
 } // namespace
