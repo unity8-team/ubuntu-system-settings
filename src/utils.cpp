@@ -28,7 +28,14 @@
 
 typedef QPair<QString,QString> StringPair;
 
+
 namespace SystemSettings {
+
+// Load the shortcut settings.
+QSettings Utilities::m_shortcutSettings(
+    QString("%1/%2").arg(PLUGIN_MANIFEST_DIR).arg("url-map.ini"),
+    QSettings::IniFormat
+);
 
 void parsePluginOptions(const QStringList &arguments, QString &defaultPlugin,
                         QVariantMap &pluginOptions)
@@ -36,7 +43,7 @@ void parsePluginOptions(const QStringList &arguments, QString &defaultPlugin,
     for (int i = 1; i < arguments.count(); i++) {
         const QString &argument = arguments.at(i);
         if (argument.startsWith("settings://")) {
-            QUrl urlArgument(Utilities::mapUrl(argument));
+            QUrl urlArgument(Utilities::mapShortcut(argument));
             /* Find out which plugin is required. If the first component of the
              * path is "system", just skip it. */
             QStringList pathComponents =
@@ -45,6 +52,7 @@ void parsePluginOptions(const QStringList &arguments, QString &defaultPlugin,
             if (pathComponents.value(pluginIndex, "") == "system")
                 pluginIndex++;
             defaultPlugin = pathComponents.value(pluginIndex, QString());
+
             /* Convert the query parameters into options for the plugin */
             QUrlQuery query(urlArgument);
             Q_FOREACH(const StringPair &pair, query.queryItems()) {
@@ -77,20 +85,36 @@ QString Utilities::formatSize(quint64 size) const
 }
 
 /*
- * Returns the URL to which a shortcut leads, if any. If it does
- * not lead anywhere, the URL is returned unchanged.
+ * Returns a shortcut URL based on the given url, if
+ * a shortcut exists. If not, the url is returned unchanged.
+ * This function exposes mapShortcut to QML.
  */
-QString Utilities::shortcutToUrl(const QString &shortcut) const
+QString Utilities::shortcutToUrl(const QString &url) const
 {
-    return Utilities::mapUrl(shortcut);
+    return Utilities::mapShortcut(url);
 }
 
-QString Utilities::mapUrl(const QString &url)
+/*
+ * Returns a shortcut URL based on the given url, if
+ * a shortcut exists. If not, the url is returned unchanged.
+ */
+QString Utilities::mapShortcut(const QString &url)
 {
-    if (url == QStringLiteral("settings:///system/location")) {
-        return QStringLiteral("settings:///system/security-privacy?subpage=location");
-    }
-    return url;
+
+    QString key;
+    QString shortcut;
+    QStringList pathComponents =
+        QUrl(url).path().split('/', QString::SkipEmptyParts);
+
+    int pluginIndex = 0;
+    if (pathComponents.value(pluginIndex, "") == "system")
+        pluginIndex++;
+    key = pathComponents.value(pluginIndex, QString());
+
+    Utilities::m_shortcutSettings.beginGroup("Shortcuts");
+    shortcut = Utilities::m_shortcutSettings.value(key, QVariant()).toString();
+
+    return shortcut.isEmpty() ? url : shortcut;
 }
 
 } // namespace

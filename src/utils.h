@@ -21,6 +21,7 @@
 #ifndef SYSTEM_SETTINGS_UTILS_H
 #define SYSTEM_SETTINGS_UTILS_H
 
+#include <QSettings>
 #include <QStringList>
 #include <QVariantMap>
 
@@ -35,9 +36,13 @@ class Utilities : public QObject {
 public:
     explicit Utilities(QObject *parent = 0);
     Q_INVOKABLE QString formatSize(quint64) const;
-    Q_INVOKABLE QString shortcutToUrl(const QString &shortcut) const;
-    static QString mapUrl(const QString &url);
+    Q_INVOKABLE QString shortcutToUrl(const QString &url) const;
+    static QString mapShortcut(const QString &url);
+
+private:
+    static QSettings m_shortcutSettings;
 };
+
 
 } // namespace
 

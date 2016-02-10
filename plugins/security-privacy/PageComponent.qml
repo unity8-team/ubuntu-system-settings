@@ -53,6 +53,29 @@ ItemPage {
         });
         return t;
     }
+    property var pluginOptions
+    Connections {
+        target: pageStack
+        onCurrentPageChanged: {
+            // If we are called with subpage=foo, push foo on the stack.
+            //
+            // We need to wait until the PageComponent has been pushed to the stack
+            // before pushing the subpages, otherwise they will be pushed below the
+            // PageComponent.
+            if (pageStack.currentPage === root) {
+                if (pluginOptions && pluginOptions['subpage']) {
+                    switch (pluginOptions['subpage']) {
+                    case 'location':
+                        pageStack.push(Qt.resolvedUrl("Location.qml"));
+                        break;
+                    }
+                }
+                // Once done, disable this Connections, so that if the user navigates
+                // back to the root we won't push the subpages again
+                target = null
+            }
+        }
+    }
 
     UbuntuDiagnostics {
         id: diagnosticsWidget
