@@ -137,6 +137,7 @@ private Q_SLOTS:
     void updateFailed(int consecutiveFailureCount, QString lastReason);
     void updateDownloaded();
     void systemUpdatePaused(int value);
+    void systemUpdateStarted(int value);
     void systemUpdateProgress(int value, double eta);
     void processOutput();
     void processUpdates();

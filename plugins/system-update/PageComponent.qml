@@ -210,8 +210,20 @@ ItemPage {
             credentialsNotification.visible = true;
         }
 
+        onSystemUpdatePaused: {
+            if (root.includeSystemUpdate)
+                UpdateManager.model[0].status = Update.Paused;
+        }
+
+        onSystemUpdateStarted: {
+            if (root.includeSystemUpdate)
+                UpdateManager.model[0].status = Update.Downloading;
+        }
+
         onSystemUpdateDownloaded: {
             root.installAll = false;
+            if (root.includeSystemUpdate)
+                UpdateManager.model[0].status = Update.Downloaded;
         }
 
         onSystemUpdateFailed: {
@@ -440,7 +452,7 @@ ItemPage {
                                     if (modelData.systemUpdate) {
                                         if (modelData.updateReady) {
                                             return i18n.tr("Install…");
-                                        } else if (!modelData.updateState && !modelData.selected) {
+                                        } else if ((!modelData.updateState && !modelData.selected) || modelData.status === Update.NotStarted {
                                             return i18n.tr("Download");
                                         }
                                     }
