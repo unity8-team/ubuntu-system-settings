@@ -28,7 +28,6 @@
 
 typedef QPair<QString,QString> StringPair;
 
-
 namespace SystemSettings {
 
 // Load the shortcut settings.
@@ -52,7 +51,6 @@ void parsePluginOptions(const QStringList &arguments, QString &defaultPlugin,
             if (pathComponents.value(pluginIndex, "") == "system")
                 pluginIndex++;
             defaultPlugin = pathComponents.value(pluginIndex, QString());
-
             /* Convert the query parameters into options for the plugin */
             QUrlQuery query(urlArgument);
             Q_FOREACH(const StringPair &pair, query.queryItems()) {

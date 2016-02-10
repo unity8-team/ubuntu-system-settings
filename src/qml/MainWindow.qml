@@ -70,16 +70,12 @@ MainView {
         target: UriHandler
         onOpened: {
             var url = String(uris)
-
             url = Utilities.shortcutToUrl(url);
-
             var panelAndOptions = url.replace("settings:///system/", "")
             var optionIndex = panelAndOptions.indexOf("?")
             var panel = optionIndex > -1 ?
                         panelAndOptions.substring(0, optionIndex) :
                         panelAndOptions
-
-
             var urlParams = {}
             // Parse URL options
             // From http://stackoverflow.com/a/2880929

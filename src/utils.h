@@ -43,7 +43,6 @@ private:
     static QSettings m_shortcutSettings;
 };
 
-
 } // namespace
 
 #endif // SYSTEM_SETTINGS_UTILS_H
