@@ -93,6 +93,7 @@ public:
 
     Q_INVOKABLE void checkUpdates();
     Q_INVOKABLE void startDownload(const QString &packagename);
+    Q_INVOKABLE void forceAllowGSMDownload(const QString &packagename);
     Q_INVOKABLE void pauseDownload(const QString &packagename);
     Q_INVOKABLE void retryDownload(const QString &packagename);
     Q_INVOKABLE void applySystemUpdate() { m_systemUpdate.applyUpdate(); }
@@ -137,7 +138,7 @@ private Q_SLOTS:
     void updateFailed(int consecutiveFailureCount, QString lastReason);
     void updateDownloaded();
     void systemUpdatePaused(int value);
-    void systemUpdateStarted(int value);
+    void systemUpdateStarted();
     void systemUpdateProgress(int value, double eta);
     void processOutput();
     void processUpdates();

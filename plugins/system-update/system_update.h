@@ -54,6 +54,7 @@ public:
 
     void checkForUpdate();
     void downloadUpdate();
+    void forceAllowGSMDownload();
     void applyUpdate();
     void cancelUpdate();
     void pauseDownload();
@@ -68,7 +69,7 @@ Q_SIGNALS:
     void updateNotFound();
     void updateProgress(int percentage, double eta);
     void updatePaused(int percentage);
-    void updateStarted(int percentage);
+    void updateStarted();
     void updateDownloaded();
     void updateFailed(int consecutiveFailureCount, QString lastReason);
     void downloadModeChanged();

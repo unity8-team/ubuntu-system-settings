@@ -411,6 +411,14 @@ ItemPage {
                         modelData.updateState = true;
                         UpdateManager.startDownload(modelData.packageName);
                     }
+
+                    function forceDownload () {
+                        console.warn("FORCE DOWNLOAD: " + modelData.packageName);
+                        modelData.selected = true;
+                        modelData.updateState = true;
+                        UpdateManager.forceAllowGSMDownload(modelData.packageName);
+                    }
+
                     Column {
                         id: textArea
                         objectName: "textArea"
@@ -475,6 +483,8 @@ ItemPage {
                                         return resume();
                                     if (!modelData.updateState && !modelData.selected && !modelData.updateReady)
                                         return start();
+                                    if (modelData.systemUpdate && modelData.status === Update.NotStarted)
+                                        return forceDownload();
                                     if (modelData.updateReady)
                                         PopupUtils.open(dialogInstallComponent);
                                 }
