@@ -184,7 +184,7 @@ ItemPage {
                             HERE is a Nokia trademark, so it should probably
                             not be translated. */
                             name: NetworkingStatus.modemAvailable ?
-                                i18n.tr("Using GPS, anonymized Wi-Fi and cellular network info.<br>By selecting this option you accept the <a href='%1'>Nokia HERE terms and conditions</a>.").arg("here-terms.qml"), :
+                                i18n.tr("Using GPS, anonymized Wi-Fi and cellular network info.<br>By selecting this option you accept the <a href='%1'>Nokia HERE terms and conditions</a>.").arg("here-terms.qml") :
                                 i18n.tr("Using GPS and anonymized Wi-Fi info.<br>By selecting this option you accept the <a href='%1'>Nokia HERE terms and conditions</a>.").arg("here-terms.qml"),
                             key: "here"
                         });
