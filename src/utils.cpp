@@ -93,7 +93,7 @@ QString Utilities::shortcutToUrl(const QString &url) const
 QString Utilities::mapShortcut(const QString &url)
 {
 
-    // This member will be called from multiple thread, and QSettings
+    // This member will be called from multiple threads, and QSettings
     // is reentrant, meaning each call to this function require its own
     // settings instance.
     QSettings settings(
