@@ -36,7 +36,9 @@ void parsePluginOptions(const QStringList &arguments, QString &defaultPlugin,
     for (int i = 1; i < arguments.count(); i++) {
         const QString &argument = arguments.at(i);
         if (argument.startsWith("settings://")) {
+            qWarning() << "got argument" << argument << "maps to" << Utilities::mapShortcut(argument);
             QUrl urlArgument(Utilities::mapShortcut(argument));
+            qWarning() << "resulting url" << urlArgument.path();
             /* Find out which plugin is required. If the first component of the
              * path is "system", just skip it. */
             QStringList pathComponents =
@@ -100,6 +102,14 @@ QString Utilities::mapShortcut(const QString &url)
         QString("%1/%2").arg(PLUGIN_MANIFEST_DIR).arg("url-map.ini"),
         QSettings::IniFormat
     );
+    settings.sync();
+    qWarning() << settings.status();
+
+    // If reading the settings failed, return the url unchanged.
+    if (settings.status() != QSettings::NoError) {
+        qWarning() << "could not read url map file.";
+        return url;
+    }
 
     QString key;
     QString shortcut;
