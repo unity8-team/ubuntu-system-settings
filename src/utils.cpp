@@ -30,12 +30,6 @@ typedef QPair<QString,QString> StringPair;
 
 namespace SystemSettings {
 
-// Load the shortcut settings.
-QSettings Utilities::m_shortcutSettings(
-    QString("%1/%2").arg(PLUGIN_MANIFEST_DIR).arg("url-map.ini"),
-    QSettings::IniFormat
-);
-
 void parsePluginOptions(const QStringList &arguments, QString &defaultPlugin,
                         QVariantMap &pluginOptions)
 {
@@ -99,6 +93,14 @@ QString Utilities::shortcutToUrl(const QString &url) const
 QString Utilities::mapShortcut(const QString &url)
 {
 
+    // This member will be called from multiple thread, and QSettings
+    // is reentrant, meaning each call to this function require its own
+    // settings instance.
+    QSettings settings(
+        QString("%1/%2").arg(PLUGIN_MANIFEST_DIR).arg("url-map.ini"),
+        QSettings::IniFormat
+    );
+
     QString key;
     QString shortcut;
     QStringList pathComponents =
@@ -109,8 +111,8 @@ QString Utilities::mapShortcut(const QString &url)
         pluginIndex++;
     key = pathComponents.value(pluginIndex, QString());
 
-    Utilities::m_shortcutSettings.beginGroup("Shortcuts");
-    shortcut = Utilities::m_shortcutSettings.value(key, QVariant()).toString();
+    settings.beginGroup("Shortcuts");
+    shortcut = settings.value(key, QVariant()).toString();
 
     return shortcut.isEmpty() ? url : shortcut;
 }

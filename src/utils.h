@@ -38,9 +38,6 @@ public:
     Q_INVOKABLE QString formatSize(quint64) const;
     Q_INVOKABLE QString shortcutToUrl(const QString &url) const;
     static QString mapShortcut(const QString &url);
-
-private:
-    static QSettings m_shortcutSettings;
 };
 
 } // namespace
