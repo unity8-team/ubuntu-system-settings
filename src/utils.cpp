@@ -36,8 +36,8 @@ void parsePluginOptions(const QStringList &arguments, QString &defaultPlugin,
     for (int i = 1; i < arguments.count(); i++) {
         const QString &argument = arguments.at(i);
         if (argument.startsWith("settings://")) {
-            qWarning() << "got argument" << argument << "maps to" << Utilities::mapShortcut(argument);
-            QUrl urlArgument(Utilities::mapShortcut(argument));
+            qWarning() << "got argument" << argument << "maps to" << Utilities::getDestinationUrl(argument);
+            QUrl urlArgument(Utilities::getDestinationUrl(argument));
             qWarning() << "resulting url" << urlArgument.path();
             /* Find out which plugin is required. If the first component of the
              * path is "system", just skip it. */
@@ -79,52 +79,70 @@ QString Utilities::formatSize(quint64 size) const
 }
 
 /*
- * Returns a shortcut URL based on the given url, if
- * a shortcut exists. If not, the url is returned unchanged.
- * This function exposes mapShortcut to QML.
+ * This function makes getDestinationUrl invokable from QML.
  */
-QString Utilities::shortcutToUrl(const QString &url) const
+QString Utilities::mapUrl(const QString &source)
 {
-    return Utilities::mapShortcut(url);
+    return Utilities::getDestinationUrl(source);
 }
 
 /*
- * Returns a shortcut URL based on the given url, if
- * a shortcut exists. If not, the url is returned unchanged.
+ * Returns a destination for the given source if the source has an entry
+ * in url-map.ini (based on the first path component, excluding “system”).
+ * If there were any query items on the source, these are appended to the
+ * destination.
+
+ * If the source had no entry, it's returned unchanged.
  */
-QString Utilities::mapShortcut(const QString &url)
+QString Utilities::getDestinationUrl(const QString &source)
 {
 
     // This member will be called from multiple threads, and QSettings
     // is reentrant, meaning each call to this function require its own
     // settings instance.
-    QSettings settings(
+    QSettings map(
         QString("%1/%2").arg(PLUGIN_MANIFEST_DIR).arg("url-map.ini"),
         QSettings::IniFormat
     );
-    settings.sync();
-    qWarning() << settings.status();
+    map.sync();
 
-    // If reading the settings failed, return the url unchanged.
-    if (settings.status() != QSettings::NoError) {
-        qWarning() << "could not read url map file.";
-        return url;
+    // If reading the map failed, return the source unchanged.
+    if (map.status() != QSettings::NoError) {
+        qWarning() << "reading url map failed: " << map.status();
+        return source;
     }
 
-    QString key;
-    QString shortcut;
+    QUrl sourceUrl(source);
     QStringList pathComponents =
-        QUrl(url).path().split('/', QString::SkipEmptyParts);
+        sourceUrl.path().split('/', QString::SkipEmptyParts);
 
     int pluginIndex = 0;
     if (pathComponents.value(pluginIndex, "") == "system")
         pluginIndex++;
-    key = pathComponents.value(pluginIndex, QString());
+    QString key = pathComponents.value(pluginIndex, QString());
 
-    settings.beginGroup("Shortcuts");
-    shortcut = settings.value(key, QVariant()).toString();
+    map.beginGroup("sources");
+    if (map.contains(key)) {
+        QString destination = map.value(key, QVariant()).toString();
 
-    return shortcut.isEmpty() ? url : shortcut;
+        // Copy any query from the source to the destination
+        if (sourceUrl.hasQuery()) {
+            QUrl destinationUrl = QUrl(destination);
+            QUrlQuery sQ(sourceUrl);
+            QUrlQuery dQ(destinationUrl);
+
+            // Insert all query items from source query to destination query.
+            for (int i = 0; i < sQ.queryItems().size(); ++i) {
+                const QPair<QString, QString> a(sQ.queryItems().at(i));
+                dQ.addQueryItem(a.first, a.second);
+            }
+
+            destinationUrl.setQuery(dQ);
+            destination = destinationUrl.toString();
+        }
+        return destination;
+    }
+    return source;
 }
 
 } // namespace

@@ -36,8 +36,8 @@ class Utilities : public QObject {
 public:
     explicit Utilities(QObject *parent = 0);
     Q_INVOKABLE QString formatSize(quint64) const;
-    Q_INVOKABLE QString shortcutToUrl(const QString &url) const;
-    static QString mapShortcut(const QString &url);
+    Q_INVOKABLE QString mapUrl(const QString &source);
+    static QString getDestinationUrl(const QString &source);
 };
 
 } // namespace

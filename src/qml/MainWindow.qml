@@ -71,8 +71,8 @@ MainView {
         onOpened: {
             var url = String(uris);
             console.warn('UriHandler got', uris, 'cast to string as', url);
-            url = Utilities.shortcutToUrl(url);
-            console.warn('Utilities.shortcutToUrl jiggled it to', url);
+            url = Utilities.mapUrl(url);
+            console.warn('Utilities.mapUrl jiggled it to', url);
             var panelAndOptions = url.replace("settings:///system/", "")
             var optionIndex = panelAndOptions.indexOf("?")
             var panel = optionIndex > -1 ?
