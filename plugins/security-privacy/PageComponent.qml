@@ -68,6 +68,12 @@ ItemPage {
                     case 'location':
                         pageStack.push(Qt.resolvedUrl("Location.qml"));
                         break;
+                    case 'permissions':
+                        var page = pageStack.push(Qt.resolvedUrl("AppAccess.qml"), {pluginManager: pluginManager})
+                        if (pluginOptions['service']) {
+                            page.openService(pluginOptions['service'])
+                        }
+                        break;
                     }
                 }
                 // Once done, disable this Connections, so that if the user navigates
