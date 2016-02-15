@@ -75,7 +75,14 @@ ItemPage {
                         }
                         break;
                     }
+                } else if (pluginOptions && pluginOptions['service']) {
+                    // This code can be removed once the camera app asks for
+                    // settings:///system/permissions?service=camera as
+                    // described inlp:1545733.
+                    var page = pageStack.push(Qt.resolvedUrl("AppAccess.qml"), {pluginManager: pluginManager})
+                    page.openService(pluginOptions['service'])
                 }
+
                 // Once done, disable this Connections, so that if the user navigates
                 // back to the root we won't push the subpages again
                 target = null
