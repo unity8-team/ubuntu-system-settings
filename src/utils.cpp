@@ -96,8 +96,7 @@ QString Utilities::mapUrl(const QString &source)
  */
 QString Utilities::getDestinationUrl(const QString &source)
 {
-
-    // This member will be called from multiple threads, and QSettings
+    // This method will be called from multiple threads, and QSettings
     // is reentrant, meaning each call to this function require its own
     // settings instance.
     QSettings map(
@@ -125,7 +124,7 @@ QString Utilities::getDestinationUrl(const QString &source)
     if (map.contains(key)) {
         QString destination = map.value(key, QVariant()).toString();
 
-        // Copy any query from the source to the destination
+        // Copy any query items from the source to the destination
         if (sourceUrl.hasQuery()) {
             QUrl destinationUrl = QUrl(destination);
             QUrlQuery sQ(sourceUrl);
