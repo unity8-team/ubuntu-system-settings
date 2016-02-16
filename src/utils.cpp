@@ -36,9 +36,7 @@ void parsePluginOptions(const QStringList &arguments, QString &defaultPlugin,
     for (int i = 1; i < arguments.count(); i++) {
         const QString &argument = arguments.at(i);
         if (argument.startsWith("settings://")) {
-            qWarning() << "got argument" << argument << "maps to" << Utilities::getDestinationUrl(argument);
             QUrl urlArgument(Utilities::getDestinationUrl(argument));
-            qWarning() << "resulting url" << urlArgument.path();
             /* Find out which plugin is required. If the first component of the
              * path is "system", just skip it. */
             QStringList pathComponents =
