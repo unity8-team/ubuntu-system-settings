@@ -25,8 +25,8 @@ import SystemSettings 1.0
 
 MainView {
     id: main
-    width: units.gu(50)
-    height: units.gu(90)
+    implicitWidth: units.gu(50)
+    implicitHeight: units.gu(90)
     applicationName: "ubuntu-system-settings"
     objectName: "systemSettingsMainView"
     automaticOrientation: true
@@ -65,9 +65,9 @@ MainView {
                 Qt.quit()
         }
 
-        // when running in windowed mode, use a fixed width
-        view.minimumWidth  = units.gu(50)
-        view.maximumWidth = units.gu(50)
+        // when running in windowed mode, constrain width
+        view.minimumWidth  = Qt.binding( function() { return units.gu(40) } )
+        view.maximumWidth = Qt.binding( function() { return units.gu(50) } )
     }
 
     Connections {
