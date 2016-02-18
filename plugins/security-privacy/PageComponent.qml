@@ -76,9 +76,9 @@ ItemPage {
                         break;
                     }
                 } else if (pluginOptions && pluginOptions['service']) {
-                    // This code can be removed once the camera app asks for
-                    // settings:///system/permissions?service=camera as
-                    // described inlp:1545733.
+                    // This whole else if branch will be removed once the
+                    // camera app asks for [1] as described in lp:1545733.
+                    // [1] settings:///system/permissions?service=camera
                     var page = pageStack.push(Qt.resolvedUrl("AppAccess.qml"), {pluginManager: pluginManager})
                     page.openService(pluginOptions['service'])
                 }
