@@ -32,8 +32,14 @@ ItemPage {
     objectName: "vpnPage"
     flickable: scrollWidget
 
+    property var diag
+
     function openConnection(connection) {
-        PopupUtils.open(vpnEditorDialog, root, {"connection": connection});
+        diag = PopupUtils.open(vpnEditorDialog, root, {"connection": connection});
+    }
+
+    function previewConnection(connection) {
+        diag = PopupUtils.open(vpnPreviewDialog, root, {"connection": connection});
     }
 
     Flickable {
@@ -53,6 +59,9 @@ ItemPage {
                 id: list
                 anchors { left: parent.left; right: parent.right }
                 model: Connectivity.vpnConnections
+
+                onRequestOpenConnection: openConnection(connection)
+                onRequestPreviewConnection: previewConnection(connection)
             }
 
             ListItem.Caption {
@@ -72,10 +81,26 @@ ItemPage {
         }
     }
 
-    // FIXME: Load this async
     Component {
         id: vpnEditorDialog
-        VpnEditorDialog {}
+        VpnEditorDialog {
+            onTypeChanged: {
+                console.warn("type changed", connection, type);
+                connection.remove();
+                PopupUtils.close(diag);
+                Connectivity.vpnConnections.add(type);
+            }
+        }
+    }
+
+    Component {
+        id: vpnPreviewDialog
+        VpnPreviewDialog {
+            onChangeClicked: {
+                PopupUtils.close(diag);
+                openConnection(connection);
+            }
+        }
     }
 
     Connections {
