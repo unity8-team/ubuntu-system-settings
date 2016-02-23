@@ -21,7 +21,6 @@
 #include "timezonelocationmodel.h"
 #include <glib.h>
 #include <glib-object.h>
-#include <geonames.h>
 
 #include <QDebug>
 

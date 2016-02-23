@@ -27,7 +27,10 @@
 
 #include <QtConcurrent>
 
+extern "C"
+{
 #include <geonames.h>
+}
 
 class TimeZoneLocationModel : public QAbstractTableModel
 {
