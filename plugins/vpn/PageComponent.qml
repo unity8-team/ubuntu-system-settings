@@ -85,7 +85,6 @@ ItemPage {
         id: vpnEditorDialog
         VpnEditorDialog {
             onTypeChanged: {
-                console.warn("type changed", connection, type);
                 connection.remove();
                 PopupUtils.close(diag);
                 Connectivity.vpnConnections.add(type);
