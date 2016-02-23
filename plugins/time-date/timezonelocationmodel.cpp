@@ -116,7 +116,7 @@ void TimeZoneLocationModel::filterFinished(GObject      *source_object,
 
     QList<GeonamesCity *> locations;
 
-    for (guint i = 0; cities[i]; ++i) {
+    for (guint i = 0; i < cities_len; ++i) {
         GeonamesCity *city = geonames_get_city(cities[i]);
         if (city) {
             locations.append(city);
