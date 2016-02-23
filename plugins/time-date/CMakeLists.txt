@@ -1,4 +1,6 @@
-include_directories(${GLIB_INCLUDE_DIRS} ${TIMEZONEMAP_INCLUDE_DIRS})
+include_directories(${GLIB_INCLUDE_DIRS} ${GEONAMES_INCLUDE_DIRS})
+
+add_definitions(-DQT_NO_KEYWORDS)
 
 set(QML_SOURCES ChooseTimeZone.qml PageComponent.qml Scroller.qml TimePicker.qml)
 
@@ -11,7 +13,7 @@ add_library(UbuntuTimeDatePanel MODULE plugin.h
   ${QML_SOURCES}
 )
 qt5_use_modules(UbuntuTimeDatePanel Qml Quick DBus Concurrent)
-target_link_libraries(UbuntuTimeDatePanel ${GLIB_LDFLAGS} ${TIMEZONEMAP_LDFLAGS})
+target_link_libraries(UbuntuTimeDatePanel ${GLIB_LDFLAGS} ${GEONAMES_LDFLAGS})
 
 
 set(PLUG_DIR ${PLUGIN_PRIVATE_MODULE_DIR}/Ubuntu/SystemSettings/TimeDate)

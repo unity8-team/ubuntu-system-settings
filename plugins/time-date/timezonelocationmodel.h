@@ -27,7 +27,7 @@
 
 #include <QtConcurrent>
 
-class TimeZonePopulateWorker;
+#include <geonames.h>
 
 class TimeZoneLocationModel : public QAbstractTableModel
 {
@@ -44,22 +44,6 @@ public:
         SimpleRole
     };
 
-    struct TzLocation {
-        bool operator<(const TzLocation &other) const
-        {
-            QString pattern("%1, %2");
-
-            return pattern.arg(city).arg(country) <
-                    pattern.arg(other.city).arg(other.country);
-        }
-
-        QString city;
-        QString country;
-        QString timezone;
-        QString state;
-        QString full_country;
-    };
-
     void filter(const QString& pattern);
 
     // implemented virtual methods from QAbstractTableModel
@@ -73,41 +57,15 @@ public:
 Q_SIGNALS:
     void filterBegin();
     void filterComplete();
-    void modelUpdated();
-
-public Q_SLOTS:
-    void store(QList<TzLocation> sortedLocations);
-    void filterFinished();
 
 private:
-    QList<TzLocation> m_locations;
-    QList<TzLocation> m_originalLocations;
-    QString m_pattern;
+    QList<GeonamesCity *> m_locations;
+    GCancellable *m_cancellable;
 
-    QThread *m_workerThread;
-    TimeZonePopulateWorker *m_populateWorker;
-
-    bool substringFilter(const QString& input);
-    QFutureWatcher<TzLocation> m_watcher;
-    void setModel(QList<TzLocation> locations);
-};
-
-Q_DECLARE_METATYPE (TimeZoneLocationModel::TzLocation)
-
-class TimeZonePopulateWorker : public QObject
-{
-    Q_OBJECT
-
-public slots:
-    void run();
-
-Q_SIGNALS:
-    void resultReady(const QList<TimeZoneLocationModel::TzLocation> &sortedList);
-    void finished();
-
-private:
-    void buildCityMap();
-
+    static void filterFinished(GObject      *source_object,
+                               GAsyncResult *res,
+                               gpointer      user_data);
+    void setModel(QList<GeonamesCity *> locations);
 };
 
 #endif // TIMEZONELOCATIONMODEL_H
