@@ -26,6 +26,7 @@
 
 TimeZoneLocationModel::TimeZoneLocationModel(QObject *parent):
     QAbstractTableModel(parent),
+    modelUpdating(false),
     m_cancellable(nullptr)
 {
 }
