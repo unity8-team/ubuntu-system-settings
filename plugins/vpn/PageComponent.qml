@@ -74,6 +74,7 @@ ItemPage {
 
             ListItem.SingleControl {
                 control: Button {
+                    objectName: "addVpnButton"
                     text : i18n.tr("Add Manual Configuration…")
                     onClicked: Connectivity.vpnConnections.add(VpnConnection.OPENVPN)
                 }

@@ -120,6 +120,10 @@ class SystemSettingsMainWindow(ubuntuuitoolkit.MainView):
     def go_to_datetime_page(self):
         return self._go_to_page('entryComponent-time-date', 'timeDatePage')
 
+    @autopilot.logging.log_action(logger.debug)
+    def go_to_vpn_page(self):
+        return self._go_to_page('entryComponent-vpn', 'vpnPage')
+
     def _go_to_page(self, item_object_name, page_object_name):
         self.click_item(item_object_name)
         page = self.wait_select_single(objectName=page_object_name)
@@ -1831,3 +1835,108 @@ class NetworkDetails(
     def _click_forget(self):
         button = self.select_single('Button', objectName='forgetNetwork')
         self.pointing_device.click_object(button)
+
+
+class VpnPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
+
+    """Autopilot helper for the VPN page."""
+
+    @classmethod
+    def validate_dbus_object(cls, path, state):
+        name = introspection.get_classname_from_path(path)
+        if name == b'PageComponent':
+            if state['objectName'][1] == 'vpnPage':
+                return True
+        return False
+
+    @autopilot.logging.log_action(logger.debug)
+    def add_vpn(self):
+        obj = self.select_single(objectName='addVpnButton')
+        self.pointing_device.click_object(obj)
+        return self.get_root_instance().wait_select_single(
+            objectName='vpnOpenvpnEditor')
+
+    @autopilot.logging.log_action(logger.debug)
+    def preview_vpn(self, at):
+        obj = self.wait_select_single(objectName='vpnListConnection%d' % at)
+        self.pointing_device.click_object(obj)
+        return self.get_root_instance().wait_select_single(
+            objectName='vpnPreviewDialog')
+
+    @autopilot.logging.log_action(logger.debug)
+    def change_vpn(self, at):
+        diag = self.preview_vpn(at)
+        change_button = diag.wait_select_single(
+            objectName='vpnPreviewChangeButton'
+        )
+        self.pointing_device.click_object(change_button)
+        return self.get_root_instance().wait_select_single(
+            objectName='vpnOpenvpnEditor')
+
+
+class VpnEditorDialog(
+    ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase
+):
+
+    """Autopilot helper for OpenVpn change dialog."""
+
+    @property
+    def _openvpn_server_field(self):
+        return self.wait_select_single(
+            ubuntuuitoolkit.TextField,
+            objectName='vpnOpenvpnServerField')
+
+    @property
+    def _openvpn_port_field(self):
+        return self.wait_select_single(
+            ubuntuuitoolkit.TextField,
+            objectName='vpnOpenvpnPortField')
+
+    @property
+    def _openvpn_custom_port_toggle(self):
+        return self.wait_select_single(
+            ubuntuuitoolkit.CheckBox,
+            objectName='vpnOpenvpnCustomPortToggle')
+
+    @property
+    def _openvpn_tcp_toggle(self):
+        return self.wait_select_single(
+            ubuntuuitoolkit.CheckBox,
+            objectName='vpnOpenvpnTcpToggle')
+
+    @property
+    def _openvpn_udp_toggle(self):
+        return self.wait_select_single(
+            ubuntuuitoolkit.CheckBox,
+            objectName='vpnOpenvpnUdpToggle')
+
+    @property
+    def _openvpn_ca_field(self):
+        return self.wait_select_single(
+            ubuntuuitoolkit.ItemSelector,
+            objectName='vpnOpenvpnCaField')
+
+    @property
+    def _openvpn_ok_button(self):
+        return self.wait_select_single(
+            'Button', objectName='vpnOpenvpnOkButton')
+
+    @autopilot.logging.log_action(logger.debug)
+    def set_openvpn_server(self, server):
+        self._openvpn_server_field.write(server)
+
+    @autopilot.logging.log_action(logger.debug)
+    def set_openvpn_custom_port(self, port):
+        # XXX: workaround for lp:1546559, i.e. we need to wait
+        # some time between writing to the API.
+        from time import sleep
+        self._openvpn_custom_port_toggle.check()
+        sleep(1)
+        self._openvpn_port_field.write(port)
+
+    @autopilot.logging.log_action(logger.debug)
+    def openvpn_okay(self):
+        utils.dismiss_osk()
+        self.get_root_instance().main_view.scroll_to_and_click(
+            self._openvpn_ok_button
+        )
