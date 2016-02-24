@@ -35,6 +35,11 @@ void TimeZoneLocationModel::setModel(QList<GeonamesCity *> locations)
 {
     modelUpdating = false;
     beginResetModel();
+
+    Q_FOREACH(GeonamesCity *city, m_locations) {
+        geonames_city_free(city);
+    }
+
     m_locations = locations;
     endResetModel();
     Q_EMIT(filterComplete());
@@ -157,6 +162,9 @@ TimeZoneLocationModel::~TimeZoneLocationModel()
     if (m_cancellable) {
         g_cancellable_cancel(m_cancellable);
         g_object_unref(m_cancellable);
-        m_cancellable = nullptr;
+    }
+
+    Q_FOREACH(GeonamesCity *city, m_locations) {
+        geonames_city_free(city);
     }
 }
