@@ -991,6 +991,12 @@ class VpnBaseTestCase(UbuntuSystemSettingsVpnTestCase):
         super(VpnBaseTestCase, self).setUp()
         self.vpn_page = self.main_view.go_to_vpn_page()
 
+    def get_vpn_connection_object(self, path):
+        return dbus.Interface(
+            self.session_con.get_object(CTV_IFACE, path),
+            'org.freedesktop.DBus.Properties'
+        )
+
 
 class WifiBaseTestCase(UbuntuSystemSettingsTestCase,
                        dbusmock.DBusTestCase):

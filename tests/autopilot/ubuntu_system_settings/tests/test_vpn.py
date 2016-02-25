@@ -11,7 +11,7 @@ from testtools.matchers import Equals
 from ubuntu_system_settings.tests import VpnBaseTestCase
 
 from ubuntu_system_settings.tests.connectivity import (
-    PRIV_IFACE as CTV_PRIV_IFACE
+    PRIV_IFACE as CTV_PRIV_IFACE, VPN_CONN_OPENVPN_IFACE
 )
 
 
@@ -19,7 +19,7 @@ class VpnAddTestCase(VpnBaseTestCase):
 
     connectivity_parameters = {}
 
-    def test_setup(self):
+    def test_add_and_configure_openvpn(self):
         change_dialog = self.vpn_page.add_vpn()
 
         # Wait for length of VpnConnections to become 1
@@ -29,7 +29,31 @@ class VpnAddTestCase(VpnBaseTestCase):
             ),
             Eventually(Equals(1))
         )
+        conn_path = self.ctv_private.Get(CTV_PRIV_IFACE, 'VpnConnections')[0]
+        conn_obj = self.get_vpn_connection_object(conn_path)
 
         change_dialog.set_openvpn_server('vpn.ubuntu.com')
-        change_dialog.set_openvpn_custom_port("1000")
+        self.assertThat(
+            lambda: conn_obj.Get(VPN_CONN_OPENVPN_IFACE, 'remote'),
+            Eventually(Equals('vpn.ubuntu.com'))
+        )
+
+        change_dialog.set_openvpn_custom_port('1000')
+        self.assertThat(
+            lambda: conn_obj.Get(VPN_CONN_OPENVPN_IFACE, 'portSet'),
+            Eventually(Equals(True))
+        )
+        self.assertThat(
+            lambda: conn_obj.Get(VPN_CONN_OPENVPN_IFACE, 'port'),
+            Eventually(Equals(1000))
+        )
+
+        # Any file will do.
+        change_dialog.set_openvpn_ca(
+            ['etc', 'apt', 'sources.list']
+        )
+        self.assertThat(
+            lambda: conn_obj.Get(VPN_CONN_OPENVPN_IFACE, 'ca'),
+            Eventually(Equals('/etc/apt/sources.list'))
+        )
         change_dialog.openvpn_okay()

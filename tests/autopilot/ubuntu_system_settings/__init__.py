@@ -1854,7 +1854,7 @@ class VpnPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
         obj = self.select_single(objectName='addVpnButton')
         self.pointing_device.click_object(obj)
         return self.get_root_instance().wait_select_single(
-            objectName='vpnOpenvpnEditor')
+            objectName='vpnEditorDialog')
 
     @autopilot.logging.log_action(logger.debug)
     def preview_vpn(self, at):
@@ -1871,14 +1871,13 @@ class VpnPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
         )
         self.pointing_device.click_object(change_button)
         return self.get_root_instance().wait_select_single(
-            objectName='vpnOpenvpnEditor')
+            objectName='vpnEditorDialog')
 
 
 class VpnEditorDialog(
     ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase
 ):
-
-    """Autopilot helper for OpenVpn change dialog."""
+    """Autopilot helper for vpn change dialog."""
 
     @property
     def _openvpn_server_field(self):
@@ -1912,14 +1911,12 @@ class VpnEditorDialog(
 
     @property
     def _openvpn_ca_field(self):
-        return self.wait_select_single(
-            ubuntuuitoolkit.ItemSelector,
-            objectName='vpnOpenvpnCaField')
+        return self.wait_select_single(objectName='vpnOpenvpnCaField')
 
     @property
     def _openvpn_ok_button(self):
         return self.wait_select_single(
-            'Button', objectName='vpnOpenvpnOkButton')
+            'Button', objectName='vpnOpenvpnOkayButton')
 
     @autopilot.logging.log_action(logger.debug)
     def set_openvpn_server(self, server):
@@ -1927,12 +1924,41 @@ class VpnEditorDialog(
 
     @autopilot.logging.log_action(logger.debug)
     def set_openvpn_custom_port(self, port):
+        self._openvpn_custom_port_toggle.check()
         # XXX: workaround for lp:1546559, i.e. we need to wait
         # some time between writing to the API.
-        from time import sleep
-        self._openvpn_custom_port_toggle.check()
         sleep(1)
         self._openvpn_port_field.write(port)
+
+    @autopilot.logging.log_action(logger.debug)
+    def set_openvpn_ca(self, paths):
+        self.set_openvpn_file(self._openvpn_ca_field, paths)
+
+    @autopilot.logging.log_action(logger.debug)
+    def set_openvpn_file(self, field, paths):
+        self.pointing_device.click_object(field)
+
+        # Wait for expanded animation.
+        sleep(0.5)
+
+        # file = field.wait_select_single(objectName='vpnFileSelectorItem0')
+        choose = field.wait_select_single(objectName='vpnFileSelectorItem1')
+        self.pointing_device.click_object(choose)
+        file_dialog = self.get_root_instance().wait_select_single(
+            objectName='vpnDialogFile'
+        )
+
+        # Go to root /
+        root = file_dialog.wait_select_single(objectName='vpnFilePathItem_/')
+        self.pointing_device.click_object(root)
+
+        for path in paths:
+            list_view = file_dialog.wait_select_single(
+                'QQuickListView', objectName='vpnFileList'
+            )
+            list_view.click_element('vpnFileItem_%s' % path)
+        accept = file_dialog.wait_select_single(objectName='vpnFileAccept')
+        self.pointing_device.click_object(accept)
 
     @autopilot.logging.log_action(logger.debug)
     def openvpn_okay(self):
