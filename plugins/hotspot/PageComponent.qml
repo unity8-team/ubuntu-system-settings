@@ -32,20 +32,6 @@ ItemPage {
     title: i18n.tr("Hotspot")
 
     states: [
-        State {
-            name: "disabled"
-            // Undefined WifiEnabled means Connectivity is unavailable.
-            when: typeof Connectivity.wifiEnabled === "undefined" ||
-                  Connectivity.FlightMode
-            PropertyChanges {
-                target: hotspotItem
-                enabled: false
-            }
-            PropertyChanges {
-                target: hotspotSetupButton
-                enabled: false
-            }
-        },
         State {
             name: "nowifi"
             when: Connectivity.wifiEnabled === false
@@ -80,7 +66,8 @@ ItemPage {
             ListItem.Standard {
                 id: hotspotItem
                 text: i18n.tr("Hotspot")
-                enabled: Connectivity.hotspotStored
+                enabled: (Connectivity.hotspotStored
+                          && Connectivity.hotspotSwitchEnabled)
                 onClicked: hotspotSwitch.trigger()
                 control: Switch {
                     id: hotspotSwitch
@@ -118,6 +105,7 @@ ItemPage {
                 width: parent.width - units.gu(4)
                 text: Connectivity.hotspotStored ?
                     i18n.tr("Change Password/Setup…") : i18n.tr("Set Up Hotspot…")
+                enabled: Connectivity.hotspotSwitchEnabled
                 onClicked: {
                     setup.setSource(Qt.resolvedUrl("HotspotSetup.qml"));
                     PopupUtils.open(setup.item, root, {});
