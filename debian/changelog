@@ -1,3 +1,10 @@
+ubuntu-system-settings (0.3+16.04.20160225-0ubuntu1) xenial; urgency=medium
+
+  * Don't use the cellular portion of the location accuracy string when
+    there is no modem available (LP: #1545021)
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Thu, 25 Feb 2016 14:04:44 +0000
+
 ubuntu-system-settings (0.3+16.04.20160218-0ubuntu1) xenial; urgency=medium
 
   [ jonas-drange ]
