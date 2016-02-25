@@ -33,7 +33,6 @@ TimeZoneLocationModel::TimeZoneLocationModel(QObject *parent):
 
 void TimeZoneLocationModel::setModel(QList<GeonamesCity *> locations)
 {
-    modelUpdating = false;
     beginResetModel();
 
     Q_FOREACH(GeonamesCity *city, m_locations) {
@@ -42,7 +41,6 @@ void TimeZoneLocationModel::setModel(QList<GeonamesCity *> locations)
 
     m_locations = locations;
     endResetModel();
-    Q_EMIT(filterComplete());
 }
 
 int TimeZoneLocationModel::rowCount(const QModelIndex &parent) const
@@ -116,6 +114,11 @@ void TimeZoneLocationModel::filterFinished(GObject      *source_object,
 
     cities = geonames_query_cities_finish(res, &cities_len, &error);
     if (error) {
+        if (!g_error_matches(error, G_IO_ERROR, G_IO_ERROR_CANCELLED)) {
+            TimeZoneLocationModel *model = static_cast<TimeZoneLocationModel *>(user_data);
+            g_clear_object(&model->m_cancellable);
+            qWarning() << "Could not filter timezones:" << error->message;
+        }
         return;
     }
 
@@ -129,23 +132,30 @@ void TimeZoneLocationModel::filterFinished(GObject      *source_object,
     }
 
     TimeZoneLocationModel *model = static_cast<TimeZoneLocationModel *>(user_data);
+
+    g_clear_object(&model->m_cancellable);
+
     model->setModel(locations);
+    model->modelUpdating = false;
+
+    Q_EMIT model->filterComplete();
 }
 
 void TimeZoneLocationModel::filter(const QString& pattern)
 {
     modelUpdating = true;
-
-    Q_EMIT (filterBegin());
+    Q_EMIT filterBegin();
 
     if (m_cancellable) {
         g_cancellable_cancel(m_cancellable);
-        g_object_unref(m_cancellable);
-        m_cancellable = nullptr;
+        g_clear_object(&m_cancellable);
     }
 
+    setModel(QList<GeonamesCity *>());
+
     if (pattern.isEmpty()) {
-        setModel(QList<GeonamesCity *>());
+        modelUpdating = false;
+        Q_EMIT filterComplete();
         return;
     }
 
@@ -161,7 +171,7 @@ TimeZoneLocationModel::~TimeZoneLocationModel()
 {
     if (m_cancellable) {
         g_cancellable_cancel(m_cancellable);
-        g_object_unref(m_cancellable);
+        g_clear_object(&m_cancellable);
     }
 
     Q_FOREACH(GeonamesCity *city, m_locations) {
