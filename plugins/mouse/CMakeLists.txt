@@ -1,4 +1,3 @@
-add_subdirectory(Components)
 add_subdirectory(plugin)
 
 set(QML_SOURCES

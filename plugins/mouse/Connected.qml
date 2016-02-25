@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU General Public License along
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
- 
+
 import GSettings 1.0
 import QtQuick 2.0
 import SystemSettings 1.0
@@ -25,7 +25,6 @@ import Ubuntu.Components 1.3
 import Ubuntu.Components.ListItems 1.3 as ListItem
 import Ubuntu.Settings.Menus 0.1 as Menus
 import Ubuntu.Settings.Components 0.1 as USC
-import "Components/UnityInputInfo"
 
 Column {
     anchors {
@@ -33,18 +32,18 @@ Column {
         right: parent.right
     }
     height: childrenRect.height
-    
+
     GSettings {
         id: settings
         schema.id: "com.ubuntu.touch.system-settings"
     }
-    
+
     Column {
         anchors {
             left: parent.left
             right: parent.right
         }
-        visible: UnityInputInfo.mice > 0
+        visible: miceModel.count > 0
 
         SectionHeader {
             text: i18n.tr("Mouse")
@@ -63,7 +62,7 @@ Column {
             }
 
             Menus.SliderMenu {
-                anchors { 
+                anchors {
                     left: parent.left
                     right: parent.right
                 }
@@ -82,7 +81,7 @@ Column {
                     serverTarget: mouseMoveSpeed
                     serverProperty: "serverValue"
                     maximumWaitBufferInterval: 16
-                    
+
                     onSyncTriggered: settings.mouseCursorSpeed = value
                 }
             }
@@ -102,7 +101,7 @@ Column {
             }
 
             Menus.SliderMenu {
-                anchors { 
+                anchors {
                     left: parent.left
                     right: parent.right
                 }
@@ -121,7 +120,7 @@ Column {
                     serverTarget: mouseScrollSpeed
                     serverProperty: "serverValue"
                     maximumWaitBufferInterval: 16
-                    
+
                     onSyncTriggered: settings.mouseScrollSpeed = value
                 }
             }
@@ -139,7 +138,7 @@ Column {
             }
 
             Menus.SliderMenu {
-                anchors { 
+                anchors {
                     left: parent.left
                     right: parent.right
                 }
@@ -158,7 +157,7 @@ Column {
                     serverTarget: mouseDoubleClickSpeed
                     serverProperty: "serverValue"
                     maximumWaitBufferInterval: 16
-                    
+
                     onSyncTriggered: settings.mouseDoubleClickSpeed = value
                 }
             }
@@ -177,7 +176,7 @@ Column {
             }
 
             TapArea {
-                anchors { 
+                anchors {
                     left: parent.left
                     right: parent.right
                     leftMargin: units.gu(2)
@@ -186,12 +185,12 @@ Column {
                 }
                 height: units.gu(5)
                 doubleTapSpeed: settings.mouseDoubleClickSpeed
-            }    
+            }
         }
 
         PrimaryButtonSelector {
             id: mousePrimarySelector
-            anchors { 
+            anchors {
                 left: parent.left
                 right: parent.right
             }
@@ -214,7 +213,7 @@ Column {
             right: parent.right
             topMargin: units.gu(2)
         }
-        visible: UnityInputInfo.touchpads > 0
+        visible: touchpadsModel.count > 0
         spacing: units.gu(0.1)
 
         SectionHeader {
@@ -234,7 +233,7 @@ Column {
             }
 
             Menus.SliderMenu {
-                anchors { 
+                anchors {
                     left: parent.left
                     right: parent.right
                 }
@@ -253,7 +252,7 @@ Column {
                     serverTarget: touchMoveSpeed
                     serverProperty: "serverValue"
                     maximumWaitBufferInterval: 16
-                    
+
                     onSyncTriggered: settings.touchpadCursorSpeed = value
                 }
             }
@@ -272,7 +271,7 @@ Column {
             }
 
             Menus.SliderMenu {
-                anchors { 
+                anchors {
                     left: parent.left
                     right: parent.right
                 }
@@ -291,7 +290,7 @@ Column {
                     serverTarget: touchScrollSpeed
                     serverProperty: "serverValue"
                     maximumWaitBufferInterval: 16
-                    
+
                     onSyncTriggered: settings.touchpadScrollSpeed = value
                 }
             }
@@ -310,7 +309,7 @@ Column {
             }
 
             Menus.SliderMenu {
-                anchors { 
+                anchors {
                     left: parent.left
                     right: parent.right
                 }
@@ -329,7 +328,7 @@ Column {
                     serverTarget: touchClickSpeed
                     serverProperty: "serverValue"
                     maximumWaitBufferInterval: 16
-                    
+
                     onSyncTriggered: settings.touchpadDoubleClickSpeed = value
                 }
             }
@@ -348,7 +347,7 @@ Column {
             }
 
             TapArea {
-                anchors { 
+                anchors {
                     left: parent.left
                     right: parent.right
                     leftMargin: units.gu(2)
@@ -361,7 +360,7 @@ Column {
 
         PrimaryButtonSelector {
             id: touchpadPrimarySelector
-            anchors { 
+            anchors {
                 left: parent.left
                 right: parent.right
             }
