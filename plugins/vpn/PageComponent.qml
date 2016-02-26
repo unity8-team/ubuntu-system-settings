@@ -68,6 +68,8 @@ ItemPage {
             }
 
             ListItem.Caption {
+                // We do not yet support configuration files.
+                visible: false
                 anchors {
                     left: parent.left
                     right: parent.right
