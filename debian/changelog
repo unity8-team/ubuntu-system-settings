@@ -1,3 +1,11 @@
+ubuntu-system-settings (0.3+16.04.20160226.1-0ubuntu1) xenial; urgency=medium
+
+  * Add InAppPurchases to privacy plug-in. Update translation template.
+    Fix translation template to not include full path to settings.js
+    file. (LP: #1524943)
+
+ -- Rodney Dawes <ci-train-bot@canonical.com>  Fri, 26 Feb 2016 19:07:26 +0000
+
 ubuntu-system-settings (0.3+16.04.20160226-0ubuntu1) xenial; urgency=medium
 
   * Subtract amount used by apps when computing otherSize (LP: #1524424)
