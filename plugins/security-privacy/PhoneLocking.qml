@@ -146,7 +146,7 @@ ItemPage {
 
             ListItem.Caption {
                 text: securityPrivacy.securityType === UbuntuSecurityPrivacyPanel.Swipe ?
-                      i18n.tr("Turn on lock security to restrict access when the phone is locked.") :
+                      i18n.tr("Turn on lock security to restrict access when the device is locked.") :
                       i18n.tr("Other apps and functions will prompt you to unlock.")
             }
         }

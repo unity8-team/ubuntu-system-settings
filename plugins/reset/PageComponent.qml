@@ -29,7 +29,7 @@ import Ubuntu.SystemSettings.Reset 1.0
 ItemPage {
     id: root
 
-    title: i18n.tr("Reset phone")
+    title: i18n.tr("Reset device")
     objectName: "resetPage"
     flickable: scrollWidget
 

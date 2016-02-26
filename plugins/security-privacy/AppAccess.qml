@@ -27,6 +27,21 @@ ItemPage {
     id: root
     title: i18n.tr("App permissions")
 
+    function openService(service) {
+        for (var i = 0; i < appsModel.count; i++) {
+            var item = appsModel.get(i)
+            if (item.service === service) {
+                var model = trustStoreModelComponent.createObject(null, { serviceName: item.trustStoreService })
+                pageStack.push(Qt.resolvedUrl("AppAccessControl.qml"), {
+                                    "title": i18n.tr(item.name),
+                                    "caption": i18n.tr(item.caption),
+                                    "model": model
+                               })
+                return;
+            }
+        }
+    }
+
     Flickable {
         anchors.fill: parent
         contentHeight: contentItem.childrenRect.height
@@ -52,16 +67,19 @@ ItemPage {
                     name: QT_TR_NOOP("Camera")
                     caption: QT_TR_NOOP("Apps that have requested access to your camera")
                     trustStoreService: "CameraService"
+                    service: "camera"
                 }
                 ListElement {
                     name: QT_TR_NOOP("Location")
                     caption: QT_TR_NOOP("Apps that have requested access to your location")
                     trustStoreService: "UbuntuLocationService"
+                    service: "location"
                 }
                 ListElement {
                     name: QT_TR_NOOP("Microphone")
                     caption: QT_TR_NOOP("Apps that have requested access to your microphone")
                     trustStoreService: "PulseAudio"
+                    service: "microphone"
                 }
             }
 
@@ -113,4 +131,10 @@ ItemPage {
             }
         }
     }
+
+    Component {
+        id: trustStoreModelComponent
+        TrustStoreModel {}
+    }
+
 }
