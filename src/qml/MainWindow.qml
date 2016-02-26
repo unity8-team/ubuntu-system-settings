@@ -73,7 +73,8 @@ MainView {
     Connections {
         target: UriHandler
         onOpened: {
-            var url = String(uris)
+            var url = String(uris);
+            url = Utilities.mapUrl(url);
             var panelAndOptions = url.replace("settings:///system/", "")
             var optionIndex = panelAndOptions.indexOf("?")
             var panel = optionIndex > -1 ?

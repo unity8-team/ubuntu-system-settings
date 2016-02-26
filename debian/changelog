@@ -1,3 +1,19 @@
+ubuntu-system-settings (0.3+16.04.20160225-0ubuntu1) xenial; urgency=medium
+
+  * Don't use the cellular portion of the location accuracy string when
+    there is no modem available (LP: #1545021)
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Thu, 25 Feb 2016 14:04:44 +0000
+
+ubuntu-system-settings (0.3+16.04.20160218-0ubuntu1) xenial; urgency=medium
+
+  [ jonas-drange ]
+  * Define a map used for mapping short, panel-agnostic URLs and expose
+    translation functionality to both QML and c++. (LP: #1489833,
+    #1533835)
+
+ -- Charles Kerr <charles.kerr@canonical.com>  Thu, 18 Feb 2016 17:06:34 +0000
+
 ubuntu-system-settings (0.3+16.04.20160208-0ubuntu1) xenial; urgency=medium
 
   * Make cellular and phone dynamically visible (LP: #1541588)
