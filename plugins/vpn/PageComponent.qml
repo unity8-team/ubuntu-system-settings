@@ -34,8 +34,11 @@ ItemPage {
 
     property var diag
 
-    function openConnection(connection) {
-        diag = PopupUtils.open(vpnEditorDialog, root, {"connection": connection});
+    function openConnection(connection, isNew) {
+        diag = PopupUtils.open(vpnEditorDialog, root, {
+            "connection": connection,
+            "isNew": isNew
+        });
     }
 
     function previewConnection(connection) {
@@ -105,6 +108,6 @@ ItemPage {
 
     Connections {
         target: Connectivity.vpnConnections
-        onAddFinished: openConnection(connection)
+        onAddFinished: openConnection(connection, true)
     }
 }
