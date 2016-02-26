@@ -1,3 +1,9 @@
+ubuntu-system-settings (0.3+16.04.20160226-0ubuntu1) xenial; urgency=medium
+
+  * Subtract amount used by apps when computing otherSize (LP: #1524424)
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Fri, 26 Feb 2016 12:32:49 +0000
+
 ubuntu-system-settings (0.3+16.04.20160225-0ubuntu1) xenial; urgency=medium
 
   * Don't use the cellular portion of the location accuracy string when
