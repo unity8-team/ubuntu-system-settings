@@ -33,12 +33,24 @@ class VpnAddTestCase(VpnBaseTestCase):
         conn_obj = self.get_vpn_connection_object(conn_path)
 
         change_dialog.set_openvpn_server('vpn.ubuntu.com')
+        change_dialog.set_openvpn_custom_port('1000')
+
+        change_dialog.set_openvpn_ca(
+            # Any file will do.
+            ['etc', 'apt', 'sources.list']
+        )
+        change_dialog.openvpn_okay()
+
         self.assertThat(
             lambda: conn_obj.Get(VPN_CONN_OPENVPN_IFACE, 'remote'),
             Eventually(Equals('vpn.ubuntu.com'))
         )
 
-        change_dialog.set_openvpn_custom_port('1000')
+        self.assertThat(
+            lambda: conn_obj.Get(VPN_CONN_OPENVPN_IFACE, 'ca'),
+            Eventually(Equals('/etc/apt/sources.list'))
+        )
+
         self.assertThat(
             lambda: conn_obj.Get(VPN_CONN_OPENVPN_IFACE, 'portSet'),
             Eventually(Equals(True))
@@ -47,13 +59,3 @@ class VpnAddTestCase(VpnBaseTestCase):
             lambda: conn_obj.Get(VPN_CONN_OPENVPN_IFACE, 'port'),
             Eventually(Equals(1000))
         )
-
-        # Any file will do.
-        change_dialog.set_openvpn_ca(
-            ['etc', 'apt', 'sources.list']
-        )
-        self.assertThat(
-            lambda: conn_obj.Get(VPN_CONN_OPENVPN_IFACE, 'ca'),
-            Eventually(Equals('/etc/apt/sources.list'))
-        )
-        change_dialog.openvpn_okay()

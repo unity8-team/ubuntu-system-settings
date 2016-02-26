@@ -1916,7 +1916,7 @@ class VpnEditorDialog(
     @property
     def _openvpn_ok_button(self):
         return self.wait_select_single(
-            'Button', objectName='vpnOpenvpnOkayButton')
+            'Button', objectName='vpnEditorOkayButton')
 
     @autopilot.logging.log_action(logger.debug)
     def set_openvpn_server(self, server):
