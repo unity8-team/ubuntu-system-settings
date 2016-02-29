@@ -89,7 +89,7 @@ ItemPage {
 
     Component {
         id: vpnEditorDialog
-        VpnEditorDialog {
+        VpnEditor {
             onTypeChanged: {
                 connection.remove();
                 PopupUtils.close(diag);
