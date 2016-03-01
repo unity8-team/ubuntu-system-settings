@@ -31,7 +31,7 @@ TimeZoneLocationModel::TimeZoneLocationModel(QObject *parent):
 {
 }
 
-void TimeZoneLocationModel::setModel(QList<GeonamesCity *> locations)
+void TimeZoneLocationModel::setModel(const QList<GeonamesCity *> &locations)
 {
     beginResetModel();
 

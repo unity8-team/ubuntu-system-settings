@@ -65,7 +65,7 @@ private:
     static void filterFinished(GObject      *source_object,
                                GAsyncResult *res,
                                gpointer      user_data);
-    void setModel(QList<GeonamesCity *> locations);
+    void setModel(const QList<GeonamesCity *> &locations);
 };
 
 #endif // TIMEZONELOCATIONMODEL_H
