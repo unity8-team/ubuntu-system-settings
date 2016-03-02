@@ -366,8 +366,10 @@ void DeviceModel::updateProperty(const QString &key, const QVariant &value)
 {
     if (key == "Name") {
         m_adapterName = value.toString();
+        Q_EMIT(adapterNameChanged());
     } else if (key == "Address") {
         m_adapterAddress = value.toString();
+        Q_EMIT(adapterAddressChanged());
     } else if (key == "Pairable") {
         m_isPairable = value.toBool();
     } else if (key == "Discoverable") {

@@ -1,3 +1,5 @@
+add_subdirectory(plugin)
+
 set(QML_SOURCES
     CallForwarding.qml
     CallForwardItem.qml
