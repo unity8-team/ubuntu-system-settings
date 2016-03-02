@@ -128,8 +128,6 @@ public:
 public Q_SLOTS:
     void registerSystemUpdate(const QString& packageName, Update *update);
     void systemUpdateNotAvailable();
-    void systemUpdatePaused(int value);
-    void systemUpdateDownloadStarted();
 
 protected:
     explicit UpdateManager(QObject *parent = 0);
@@ -139,6 +137,8 @@ private Q_SLOTS:
     void clickUpdateNotAvailable();
     void updateFailed(int consecutiveFailureCount, QString lastReason);
     void updateDownloaded();
+    void systemUpdateDownloadStarted();
+    void systemUpdatePaused(int value);
     void systemUpdateProgress(int value, double eta);
     void processOutput();
     void processUpdates();

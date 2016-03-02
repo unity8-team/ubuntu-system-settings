@@ -210,16 +210,6 @@ ItemPage {
             credentialsNotification.visible = true;
         }
 
-        onSystemUpdatePaused: {
-            if (root.includeSystemUpdate)
-                UpdateManager.model[0].status = Update.Paused;
-        }
-
-        onSystemUpdateDownloadStarted: {
-            if (root.includeSystemUpdate)
-                UpdateManager.model[0].status = Update.Downloading;
-        }
-
         onSystemUpdateDownloaded: {
             root.installAll = false;
             if (root.includeSystemUpdate)
