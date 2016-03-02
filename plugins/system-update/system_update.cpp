@@ -146,10 +146,10 @@ bool SystemUpdate::checkTarget() {
 }
 
 QString SystemUpdate::deviceName() {
-        if (m_deviceName.isNull())
-            setCurrentDetailedVersion();
+    if (m_deviceName.isNull())
+        setCurrentDetailedVersion();
 
-        return m_deviceName;
+    return m_deviceName;
 }
 
 QDateTime SystemUpdate::lastUpdateDate() {
