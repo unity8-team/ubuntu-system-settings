@@ -33,6 +33,8 @@ ItemPage {
 
     title: i18n.tr("Hardware keyboard")
 
+    property var langPlugin
+
     Component {
         id: keyboardLayouts
 
@@ -70,6 +72,64 @@ ItemPage {
                     currentLayoutsDraggable: true
                 })
             }
+
+
+            ListItem.Standard {
+                text: i18n.tr("Auto-repeat")
+                control: Switch {
+                    property bool serverChecked: langPlugin.keyboardRepeat
+                    onServerCheckedChanged: checked = serverChecked
+                    Component.onCompleted: checked = serverChecked
+                    onTriggered: langPlugin.keyboardRepeat = checked
+                }
+            }
+
+            /* Use the SliderMenu component instead of the Slider to avoid binding
+               issues on valueChanged until LP: #1388094 is fixed.
+            */
+            Menus.SliderMenu {
+                id: delaySlider
+                objectName: "delaySlider"
+                text: i18n.tr("Delay before repeating:")
+                minimumValue: 100
+                maximumValue: 2000
+                value: langPlugin.keyboardDelay
+                live: true
+                property int serverValue: langPlugin.keyboardDelay
+                USC.ServerPropertySynchroniser {
+                    userTarget: delaySlider
+                    userProperty: "value"
+                    serverTarget: delaySlider
+                    serverProperty: "serverValue"
+                    maximumWaitBufferInterval: 16
+
+                    onSyncTriggered: langPlugin.keyboardDelay = value
+                }
+            }
+
+            /* Use the SliderMenu component instead of the Slider to avoid binding
+               issues on valueChanged until LP: #1388094 is fixed.
+            */
+            Menus.SliderMenu {
+                id: repeatSpeedSlider
+                objectName: "repeatSpeedSlider"
+                text: i18n.tr("Repeat speed")
+                minimumValue: 20
+                maximumValue: 2000
+                value: langPlugin.keyboardRepeatInterval
+                live: true
+                property int serverValue: langPlugin.keyboardRepeatInterval
+                USC.ServerPropertySynchroniser {
+                    userTarget: repeatSpeedSlider
+                    userProperty: "value"
+                    serverTarget: repeatSpeedSlider
+                    serverProperty: "serverValue"
+                    maximumWaitBufferInterval: 16
+
+                    onSyncTriggered: langPlugin.keyboardRepeatInterval = value
+                }
+            }
+
         }
     }
 }

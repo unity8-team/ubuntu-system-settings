@@ -65,7 +65,7 @@ Architecture: any
 Depends: ${misc:Depends},
          ${shlibs:Depends},
          accountsservice,
-         accountsservice-ubuntu-schemas (>= 0.0.3+14.10.20140829~),
+         accountsservice-ubuntu-schemas (>= 0.0.6),
          bluez (>= 5.23),
          click | ubuntu-snappy-cli,
          dbus-property-service [amd64 armhf i386],

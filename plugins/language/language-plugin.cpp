@@ -17,6 +17,7 @@
  * You should have received a copy of the GNU General Public License along
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+#include <QDBusServiceWatcher>
 #include <QtDebug>
 #include "language-plugin.h"
 #include "keyboard-layout.h"
@@ -24,6 +25,7 @@
 #include <act/act.h>
 #include <unicode/locid.h>
 
+#define AS_INTERFACE "com.ubuntu.AccountsService.Input"
 #define LANGUAGE2LOCALE "/usr/share/language-tools/language2locale"
 
 static const char * const LOCALE_BLACKLIST[] = {
@@ -89,6 +91,17 @@ LanguagePlugin::LanguagePlugin(QObject *parent) :
     m_manager(act_user_manager_get_default()),
     m_user(nullptr)
 {
+
+    connect (&m_accountsService,
+        SIGNAL (propertyChanged (QString, QString)),
+        this,
+        SLOT (slotChanged (QString, QString)));
+
+    connect (&m_accountsService,
+        SIGNAL (nameOwnerChanged()),
+        this,
+        SLOT (slotNameOwnerChanged()));
+
     if (m_manager != nullptr) {
         g_object_ref(m_manager);
 
@@ -360,7 +373,91 @@ managerLoaded(GObject    *object,
     plugin->managerLoaded();
 }
 
-void LanguagePlugin::reboot()
+void
+LanguagePlugin::reboot()
 {
     m_sessionService.reboot();
+}
+
+void
+LanguagePlugin::slotNameOwnerChanged()
+{
+    // Tell QML so that it refreshes its view of the property
+    Q_EMIT inputSourcesPerWindowChanged();
+    Q_EMIT keyboardRepeatChanged();
+    Q_EMIT keyboardDelayChanged();
+    Q_EMIT keyboardRepeatIntervalChanged();
+}
+
+void
+LanguagePlugin::slotChanged(QString interface,
+                                 QString property)
+{
+    if (interface == AS_INTERFACE) {
+        if (property == "InputSourcesPerWindow") {
+            Q_EMIT inputSourcesPerWindowChanged();
+        } else if (property == "KeyboardRepeat") {
+            Q_EMIT keyboardRepeatChanged();
+        } else if (property == "KeyboardDelay") {
+            Q_EMIT keyboardDelayChanged();
+        } else if (property == "KeyboardRepeatInterval") {
+            Q_EMIT keyboardRepeatIntervalChanged();
+        }
+    }
+}
+
+bool
+LanguagePlugin::inputSourcesPerWindow () {
+    return m_accountsService.getUserProperty(AS_INTERFACE,
+                                             "InputSourcesPerWindow").toBool();
+}
+
+void
+LanguagePlugin::setInputSourcesPerWindow (const bool perWindow) {
+    m_accountsService.setUserProperty(AS_INTERFACE,
+                                      "InputSourcesPerWindow",
+                                      QVariant::fromValue(perWindow));
+    Q_EMIT (inputSourcesPerWindowChanged());
+}
+
+bool
+LanguagePlugin::keyboardRepeat () {
+    return m_accountsService.getUserProperty(AS_INTERFACE,
+                                             "KeyboardRepeat").toBool();
+}
+
+void
+LanguagePlugin::setKeyboardRepeat (const bool repeat) {
+    m_accountsService.setUserProperty(AS_INTERFACE,
+                                      "KeyboardRepeat",
+                                      QVariant::fromValue(repeat));
+    Q_EMIT (keyboardRepeatChanged());
+}
+
+int
+LanguagePlugin::keyboardDelay () {
+    return m_accountsService.getUserProperty(AS_INTERFACE,
+                                             "KeyboardDelay").toInt();
+}
+
+void
+LanguagePlugin::setKeyboardDelay (const int delay) {
+    m_accountsService.setUserProperty(AS_INTERFACE,
+                                      "KeyboardDelay",
+                                      QVariant::fromValue(delay));
+    Q_EMIT (keyboardDelayChanged());
+}
+
+int
+LanguagePlugin::keyboardRepeatInterval () {
+    return m_accountsService.getUserProperty(AS_INTERFACE,
+                                             "KeyboardRepeatInterval").toInt();
+}
+
+void
+LanguagePlugin::setKeyboardRepeatInterval (const int interval) {
+    m_accountsService.setUserProperty(AS_INTERFACE,
+                                      "KeyboardRepeatInterval",
+                                      QVariant::fromValue(interval));
+    Q_EMIT (keyboardRepeatIntervalChanged());
 }

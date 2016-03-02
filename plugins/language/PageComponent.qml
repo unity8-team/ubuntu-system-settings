@@ -136,7 +136,9 @@ ItemPage {
                 text: i18n.tr("External keyboard")
                 progression: true
                 showDivider: false
-                onClicked: pageStack.push(Qt.resolvedUrl("PageHardwareKeyboard.qml"))
+                onClicked: pageStack.push(Qt.resolvedUrl("PageHardwareKeyboard.qml"), {
+                    langPlugin: plugin
+                    })
                 visible: externalKeyboardPresent
             }
 

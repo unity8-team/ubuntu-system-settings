@@ -23,6 +23,7 @@
 
 #include <QtCore>
 #include "subset-model.h"
+#include "accountsservice.h"
 #include "sessionservice.h"
 
 typedef struct _ActUser ActUser;
@@ -56,6 +57,26 @@ public:
                WRITE setCurrentLanguage
                NOTIFY currentLanguageChanged)
 
+    Q_PROPERTY(bool inputSourcesPerWindow
+               READ inputSourcesPerWindow
+               WRITE setInputSourcesPerWindow
+               NOTIFY inputSourcesPerWindowChanged)
+
+    Q_PROPERTY(bool keyboardRepeat
+               READ keyboardRepeat
+               WRITE setKeyboardRepeat
+               NOTIFY keyboardRepeatChanged)
+
+    Q_PROPERTY(int keyboardDelay
+               READ keyboardDelay
+               WRITE setKeyboardDelay
+               NOTIFY keyboardDelayChanged)
+
+    Q_PROPERTY(int keyboardRepeatInterval
+               READ keyboardRepeatInterval
+               WRITE setKeyboardRepeatInterval
+               NOTIFY keyboardRepeatIntervalChanged)
+
     Q_PROPERTY(SubsetModel *spellCheckingModel
                READ spellCheckingModel
                CONSTANT)
@@ -73,10 +94,30 @@ public:
     void setCurrentLanguage(int index);
     Q_SIGNAL void currentLanguageChanged() const;
 
+    bool inputSourcesPerWindow ();
+    void setInputSourcesPerWindow (const bool perWindow);
+    Q_SIGNAL void inputSourcesPerWindowChanged() const;
+
+    bool keyboardRepeat ();
+    void setKeyboardRepeat (const bool repeat);
+    Q_SIGNAL void keyboardRepeatChanged() const;
+
+    int keyboardDelay ();
+    void setKeyboardDelay (const int delay);
+    Q_SIGNAL void keyboardDelayChanged() const;
+
+    int keyboardRepeatInterval ();
+    void setKeyboardRepeatInterval (const int interval);
+    Q_SIGNAL void keyboardRepeatIntervalChanged() const;
+
     SubsetModel *spellCheckingModel();
     Q_SLOT void spellCheckingModelChanged();
 
     Q_INVOKABLE QString languageToLayout(const QString &lang);
+
+public Q_SLOTS:
+    void slotChanged(QString, QString);
+    void slotNameOwnerChanged();
 
 private:
 
@@ -109,6 +150,7 @@ private:
 
     SubsetModel m_spellCheckingModel;
     SessionService m_sessionService;
+    AccountsService m_accountsService;
 };
 
 #endif // LANGUAGE_PLUGIN_H
