@@ -215,7 +215,7 @@ ItemPage {
                 UpdateManager.model[0].status = Update.Paused;
         }
 
-        onSystemUpdateStarted: {
+        onSystemUpdateDownloadStarted: {
             if (root.includeSystemUpdate)
                 UpdateManager.model[0].status = Update.Downloading;
         }

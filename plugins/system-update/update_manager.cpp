@@ -107,8 +107,8 @@ UpdateManager::UpdateManager(QObject *parent):
                   SLOT(updateFailed(int, QString)));
     QObject::connect(&m_systemUpdate, SIGNAL(updatePaused(int)),
                   SLOT(systemUpdatePaused(int)));
-    QObject::connect(&m_systemUpdate, SIGNAL(updateStarted()),
-                  SLOT(systemUpdateStarted()));
+    QObject::connect(&m_systemUpdate, SIGNAL(downloadStarted()),
+                  SLOT(systemUpdateDownloadStarted()));
     QObject::connect(&m_systemUpdate, SIGNAL(updateProgress(int, double)),
                   SLOT(systemUpdateProgress(int, double)));
     QObject::connect(&m_systemUpdate, SIGNAL(rebooting(bool)),
@@ -309,7 +309,7 @@ void UpdateManager::systemUpdatePaused(int value)
     }
 }
 
-void UpdateManager::systemUpdateStarted()
+void UpdateManager::systemUpdateDownloadStarted()
 {                 
     QString packagename(UBUNTU_PACKAGE_NAME);
     if (m_apps.contains(packagename)) {

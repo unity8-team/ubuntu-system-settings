@@ -129,7 +129,7 @@ public Q_SLOTS:
     void registerSystemUpdate(const QString& packageName, Update *update);
     void systemUpdateNotAvailable();
     void systemUpdatePaused(int value);
-    void systemUpdateStarted();
+    void systemUpdateDownloadStarted();
 
 protected:
     explicit UpdateManager(QObject *parent = 0);

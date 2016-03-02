@@ -61,8 +61,8 @@ SystemUpdate::SystemUpdate(QObject *parent) :
                 this, SLOT(updateDownloadProgress(int, double)));
     connect(&m_SystemServiceIface, SIGNAL(UpdatePaused(int)),
                 this, SIGNAL(updatePaused(int)));
-    connect(&m_SystemServiceIface, SIGNAL(UpdateStarted()),
-                this, SIGNAL(updateStarted()));
+    connect(&m_SystemServiceIface, SIGNAL(DownloadStarted()),
+                this, SIGNAL(downloadStarted()));
     connect(&m_SystemServiceIface, SIGNAL(UpdateDownloaded()),
                 this, SIGNAL(updateDownloaded()));
     connect(&m_SystemServiceIface, SIGNAL(UpdateFailed(int, QString)),
