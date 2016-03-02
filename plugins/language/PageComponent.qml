@@ -19,6 +19,7 @@
  */
 
 import QtQuick 2.4
+import QtSystemInfo 5.5
 import GSettings 1.0
 import SystemSettings 1.0
 import Ubuntu.Components 1.3
@@ -26,7 +27,6 @@ import Ubuntu.Components.Popups 1.3
 import Ubuntu.Components.ListItems 1.3 as ListItem
 import Ubuntu.Settings.Menus 0.1 as Menus
 import Ubuntu.SystemSettings.LanguagePlugin 1.0
-import "../mouse/Components/UnityInputInfo"
 
 ItemPage {
     id: root
@@ -34,7 +34,12 @@ ItemPage {
 
     title: i18n.tr("Language & Text")
 
-    property bool externalKeyboardPresent: UnityInputInfo.keyboards > 0
+    InputDeviceManager {
+        id: keyboardsModel
+        filter: InputInfo.Keyboard
+    }
+
+    property bool externalKeyboardPresent: keyboardsModel.count > 0
 
     UbuntuLanguagePlugin {
         id: plugin
