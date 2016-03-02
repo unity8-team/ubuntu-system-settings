@@ -460,7 +460,7 @@ ItemPage {
                                     if (modelData.systemUpdate) {
                                         if (modelData.updateReady) {
                                             return i18n.tr("Install…");
-                                        } else if ((!modelData.updateState && !modelData.selected) || modelData.status === Update.NotStarted {
+                                        } else if ((!modelData.updateState && !modelData.selected) || modelData.status === Update.NotStarted) {
                                             return i18n.tr("Download");
                                         }
                                     }
