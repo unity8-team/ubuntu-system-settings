@@ -454,7 +454,7 @@ ItemPage {
                                             return i18n.tr("Download");
                                         }
                                     }
-                                    if (modelData.updateState) {
+                                    if (modelData.updateState || modelData.status === Update.Downloading) {
                                         return i18n.tr("Pause");
                                     } else if (modelData.selected) {
                                         return i18n.tr("Resume");
