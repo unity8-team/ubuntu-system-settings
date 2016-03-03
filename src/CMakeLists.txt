@@ -32,6 +32,13 @@ QT5_ADD_RESOURCES(system-settings-resources ui.qrc)
 
 add_executable(system-settings ${USS_SOURCES} ${QML_SOURCES} ${system-settings-resources})
 qt5_use_modules(system-settings Core Gui Quick Qml)
+
+if (MAPPLAUNCHERD_ENABLED)
+  add_definitions(-DMAPPLAUNCHERD_ENABLED)
+  target_link_libraries (system-settings ${MAPPLAUNCH_LDFLAGS})
+  target_compile_options(system-settings PRIVATE ${MAPPLAUNCH_CFLAGS})
+endif()
+
 target_link_libraries(system-settings SystemSettings ${GLIB_LDFLAGS})
 install(TARGETS system-settings RUNTIME DESTINATION bin)
 

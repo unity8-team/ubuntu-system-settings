@@ -30,20 +30,29 @@
 #include <QQuickView>
 #include <QtQml>
 #include <QtQml/QQmlDebuggingEnabler>
+#include <QScopedPointer>
 static QQmlDebuggingEnabler debuggingEnabler(false);
+
+#ifdef MAPPLAUNCHERD_ENABLED
+#include <mdeclarativecache5/MDeclarativeCache>
+#endif
 
 using namespace SystemSettings;
 
-int main(int argc, char **argv)
+int Q_DECL_EXPORT main(int argc, char **argv)
 {
-    QGuiApplication app(argc, argv);
+  #ifdef MAPPLAUNCHERD_ENABLED
+      QScopedPointer<QGuiApplication> app(MDeclarativeCache::qApplication(argc, argv));
+  #else
+      QScopedPointer<QGuiApplication> app(new QGuiApplication(argc,argv));
+  #endif
 
     /* The testability driver is only loaded by QApplication but not by
      * QGuiApplication.  However, QApplication depends on QWidget which would
      * add some unneeded overhead => Let's load the testability driver on our
      * own.
      */
-    if (app.arguments().contains(QStringLiteral("-testability"))) {
+    if (app->arguments().contains(QStringLiteral("-testability"))) {
         QLibrary testLib(QStringLiteral("qttestability"));
         if (testLib.load()) {
             typedef void (*TasInitialize)(void);
@@ -78,24 +87,29 @@ int main(int argc, char **argv)
      */
     QString defaultPlugin;
     QVariantMap pluginOptions;
-    parsePluginOptions(app.arguments(), defaultPlugin, pluginOptions);
+    parsePluginOptions(app->arguments(), defaultPlugin, pluginOptions);
 
-    QQuickView view;
+    #ifdef MAPPLAUNCHERD_ENABLED
+        QScopedPointer<QQuickView> view(MDeclarativeCache::qQuickView());
+    #else
+        QScopedPointer<QQuickView> view(new QQuickView);
+    #endif
     Utilities utils;
-    QObject::connect(view.engine(), SIGNAL(quit()), &app, SLOT(quit()),
+    QObject::connect(view->engine(), SIGNAL(quit()), app.data(), SLOT(quit()),
                      Qt::QueuedConnection);
     qmlRegisterType<QAbstractItemModel>();
     qmlRegisterType<SystemSettings::PluginManager>("SystemSettings", 1, 0, "PluginManager");
-    view.engine()->rootContext()->setContextProperty("Utilities", &utils);
-    view.setResizeMode(QQuickView::SizeRootObjectToView);
-    view.engine()->addImportPath(PLUGIN_PRIVATE_MODULE_DIR);
-    view.engine()->addImportPath(PLUGIN_QML_DIR);
-    view.rootContext()->setContextProperty("defaultPlugin", defaultPlugin);
-    view.rootContext()->setContextProperty("i18nDirectory", I18N_DIRECTORY);
-    view.rootContext()->setContextProperty("pluginOptions", pluginOptions);
-    view.rootContext()->setContextProperty("view", &view);
-    view.setSource(QUrl("qrc:/qml/MainWindow.qml"));
-    view.show();
 
-    return app.exec();
+    view->engine()->rootContext()->setContextProperty("Utilities", &utils);
+    view->setResizeMode(QQuickView::SizeRootObjectToView);
+    view->engine()->addImportPath(PLUGIN_PRIVATE_MODULE_DIR);
+    view->engine()->addImportPath(PLUGIN_QML_DIR);
+    view->rootContext()->setContextProperty("defaultPlugin", defaultPlugin);
+    view->rootContext()->setContextProperty("i18nDirectory", I18N_DIRECTORY);
+    view->rootContext()->setContextProperty("pluginOptions", pluginOptions);
+    view->rootContext()->setContextProperty("view", view);
+    view->setSource(QUrl("qrc:/qml/MainWindow.qml"));
+    view->show();
+
+    return app->exec();
 }

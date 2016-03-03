@@ -1,6 +1,8 @@
 project(ubuntu-system-settings C CXX)
 cmake_minimum_required(VERSION 2.8.10)
 
+option(MAPPLAUNCHERD_ENABLED "Build with mapplauncherd support" ON)
+
 if(${PROJECT_BINARY_DIR} STREQUAL ${PROJECT_SOURCE_DIR})
    message(FATAL_ERROR "In-tree build attempt detected, aborting. Set your build dir outside your source dir, delete CMakeCache.txt from source root and try again.")
 endif()
@@ -46,6 +48,11 @@ pkg_check_modules(QTDBUSMOCK REQUIRED libqtdbusmock-1 REQUIRED)
 pkg_check_modules(QTDBUSTEST REQUIRED libqtdbustest-1 REQUIRED)
 pkg_search_module(POLKIT_AGENT polkit-agent-1)
 pkg_search_module(CLICK REQUIRED click-0.4)
+
+if (MAPPLAUNCHERD_ENABLED)
+  set(MAPPLAUNCHERD_COMMAND_PREFIX "/usr/bin/invoker --type=ubuntu-components ")
+  pkg_check_modules(MAPPLAUNCH REQUIRED qdeclarative5-boostable)
+endif()
 
 find_program(XGETTEXT_BIN xgettext)
 find_program(MSGFMT_BIN msgfmt)
