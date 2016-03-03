@@ -35,7 +35,7 @@ ItemPage {
     property var diag
 
     function openConnection(connection, isNew) {
-        diag = PopupUtils.open(vpnEditorDialog, root, {
+        pageStack.push(vpnEditorDialog, {
             "connection": connection,
             "isNew": isNew
         });
@@ -63,8 +63,7 @@ ItemPage {
                 anchors { left: parent.left; right: parent.right }
                 model: Connectivity.vpnConnections
 
-                onRequestOpenConnection: openConnection(connection)
-                onRequestPreviewConnection: previewConnection(connection)
+                onClickedConnection: openConnection(connection)
             }
 
             ListItem.Caption {
@@ -92,7 +91,7 @@ ItemPage {
         VpnEditor {
             onTypeChanged: {
                 connection.remove();
-                PopupUtils.close(diag);
+                pageStack.pop();
                 Connectivity.vpnConnections.add(type);
             }
         }
