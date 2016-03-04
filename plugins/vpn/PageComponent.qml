@@ -63,7 +63,7 @@ ItemPage {
                 anchors { left: parent.left; right: parent.right }
                 model: Connectivity.vpnConnections
 
-                onClickedConnection: openConnection(connection)
+                onClickedConnection: previewConnection(connection)
             }
 
             ListItem.Caption {
