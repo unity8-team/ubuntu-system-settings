@@ -23,11 +23,9 @@ add_library(UbuntuStorageAboutPanel MODULE
     plugin.cpp
     storageabout.cpp
     click.cpp
-    networkabout.cpp
     plugin.h
     storageabout.h
     click.h
-    networkabout.h
     ${QML_SOURCES} # So they show up in Qt designer.
 )
 

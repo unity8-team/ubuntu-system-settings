@@ -93,6 +93,7 @@ int main(int argc, char **argv)
     view.rootContext()->setContextProperty("defaultPlugin", defaultPlugin);
     view.rootContext()->setContextProperty("i18nDirectory", I18N_DIRECTORY);
     view.rootContext()->setContextProperty("pluginOptions", pluginOptions);
+    view.rootContext()->setContextProperty("view", &view);
     view.setSource(QUrl("qrc:/qml/MainWindow.qml"));
     view.show();
 
