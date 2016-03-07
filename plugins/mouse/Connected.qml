@@ -169,6 +169,7 @@ Column {
             }
             spacing: units.gu(3)
             height: childrenRect.height
+            visible: showAllUI
 
             ItemTitle {
                 text: i18n.tr("Test double-click:")
@@ -342,6 +343,7 @@ Column {
             }
             spacing: units.gu(3)
             height: childrenRect.height
+            visible: showAllUI
             ItemTitle {
                 text: i18n.tr("Test double-click:")
                 showDivider: false
