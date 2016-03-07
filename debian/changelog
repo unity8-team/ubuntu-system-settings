@@ -1,3 +1,14 @@
+ubuntu-system-settings (0.3+16.04.20160304-0ubuntu1) xenial; urgency=medium
+
+  [ CI Train Bot ]
+  * Resync trunk.
+
+  [ jonas-drange ]
+  * Drop our own InputInfo implementation and use QSystemInfo 5.5. (LP:
+    #1549314)
+
+ -- Jonas G. Drange <ci-train-bot@canonical.com>  Fri, 04 Mar 2016 13:58:59 +0000
+
 ubuntu-system-settings (0.3+16.04.20160226.1-0ubuntu1) xenial; urgency=medium
 
   * Add InAppPurchases to privacy plug-in. Update translation template.
