@@ -132,6 +132,7 @@ Column {
             }
             spacing: 0
             height: childrenRect.height
+            visible: showAllUI
             ItemTitle {
                 text: i18n.tr("Double-click:")
                 showDivider: false
@@ -303,6 +304,7 @@ Column {
             }
             spacing: 0
             height: childrenRect.height
+            visible: showAllUI
             ItemTitle {
                 text: i18n.tr("Double-click:")
                 showDivider: false
