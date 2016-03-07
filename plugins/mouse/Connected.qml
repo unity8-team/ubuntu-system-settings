@@ -25,7 +25,6 @@ import Ubuntu.Components.ListItems 1.3 as ListItem
 import Ubuntu.Settings.Menus 0.1 as Menus
 import Ubuntu.Settings.Components 0.1 as USC
 import Ubuntu.SystemSettings.Mouse 1.0
-import "Components/UnityInputInfo"
 
 Column {
     anchors {
@@ -43,7 +42,7 @@ Column {
             left: parent.left
             right: parent.right
         }
-        visible: UnityInputInfo.mice > 0
+        visible: miceModel.count > 0
 
         SectionHeader {
             text: i18n.tr("Mouse")
@@ -213,7 +212,7 @@ Column {
             right: parent.right
             topMargin: units.gu(2)
         }
-        visible: UnityInputInfo.touchpads > 0
+        visible: touchpadsModel.count > 0
         spacing: units.gu(0.1)
 
         SectionHeader {

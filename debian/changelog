@@ -1,3 +1,76 @@
+ubuntu-system-settings (0.3+16.04.20160304-0ubuntu1) xenial; urgency=medium
+
+  [ CI Train Bot ]
+  * Resync trunk.
+
+  [ jonas-drange ]
+  * Drop our own InputInfo implementation and use QSystemInfo 5.5. (LP:
+    #1549314)
+
+ -- Jonas G. Drange <ci-train-bot@canonical.com>  Fri, 04 Mar 2016 13:58:59 +0000
+
+ubuntu-system-settings (0.3+16.04.20160226.1-0ubuntu1) xenial; urgency=medium
+
+  * Add InAppPurchases to privacy plug-in. Update translation template.
+    Fix translation template to not include full path to settings.js
+    file. (LP: #1524943)
+
+ -- Rodney Dawes <ci-train-bot@canonical.com>  Fri, 26 Feb 2016 19:07:26 +0000
+
+ubuntu-system-settings (0.3+16.04.20160226-0ubuntu1) xenial; urgency=medium
+
+  * Subtract amount used by apps when computing otherSize (LP: #1524424)
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Fri, 26 Feb 2016 12:32:49 +0000
+
+ubuntu-system-settings (0.3+16.04.20160225-0ubuntu1) xenial; urgency=medium
+
+  * Don't use the cellular portion of the location accuracy string when
+    there is no modem available (LP: #1545021)
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Thu, 25 Feb 2016 14:04:44 +0000
+
+ubuntu-system-settings (0.3+16.04.20160218-0ubuntu1) xenial; urgency=medium
+
+  [ jonas-drange ]
+  * Define a map used for mapping short, panel-agnostic URLs and expose
+    translation functionality to both QML and c++. (LP: #1489833,
+    #1533835)
+
+ -- Charles Kerr <charles.kerr@canonical.com>  Thu, 18 Feb 2016 17:06:34 +0000
+
+ubuntu-system-settings (0.3+16.04.20160208-0ubuntu1) xenial; urgency=medium
+
+  * Make cellular and phone dynamically visible (LP: #1541588)
+  * Set a fixed width to 50 GU when in windowed mode (LP: #1542050)
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Mon, 08 Feb 2016 14:32:42 +0000
+
+ubuntu-system-settings (0.3+16.04.20160129-0ubuntu1) xenial; urgency=medium
+
+  * ￼Return "Phone" for type Smartphone (LP: #1534221)
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Fri, 29 Jan 2016 15:43:18 +0000
+
+ubuntu-system-settings (0.3+16.04.20160128-0ubuntu1) xenial; urgency=medium
+
+  * Allow pairing regardless of type (LP: #1535660, #1534221)
+  * Exposed adapterAddress in the bluetooth plugin to be used to get the
+    address in the about plugin (LP: #1537029)
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Thu, 28 Jan 2016 14:23:03 +0000
+
+ubuntu-system-settings (0.3+16.04.20160121-0ubuntu1) xenial; urgency=medium
+
+  * Don't display the ActivityIndicator while searching, causes to much
+    load. (LP: #1535827)
+  * Don't display the setting to automatically connect when detected
+    during pairing (LP: #1535822)
+  * Only enable the forget device button when bluetooth is enabled (LP:
+    #1535829)
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Thu, 21 Jan 2016 14:47:13 +0000
+
 ubuntu-system-settings (0.3+16.04.20160108.1-0ubuntu1) xenial; urgency=medium
 
   * Adds Mouse & Touchpad panel, however it's disabled because it
