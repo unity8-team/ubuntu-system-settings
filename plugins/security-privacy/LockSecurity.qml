@@ -62,6 +62,8 @@ ItemPage {
                 return 1
             case UbuntuSecurityPrivacyPanel.Passphrase:
                 return 2
+            case UbuntuSecurityPrivacyPanel.Fingerprint:
+                return 3
         }
     }
 
@@ -73,6 +75,8 @@ ItemPage {
                 return UbuntuSecurityPrivacyPanel.Passcode
             case 2:
                 return UbuntuSecurityPrivacyPanel.Passphrase
+            case 3:
+                return UbuntuSecurityPrivacyPanel.Fingerprint
         }
     }
 
@@ -449,12 +453,14 @@ ItemPage {
                 property string swipe: i18n.tr("Swipe (no security)")
                 property string passcode: i18n.tr("4-digit passcode")
                 property string passphrase: i18n.tr("Passphrase")
+                property string fingerprint: i18n.tr("Fingerprint")
                 property string swipeAlt: i18n.tr("Swipe (no security)… ")
                 property string passcodeAlt: i18n.tr("4-digit passcode…")
                 property string passphraseAlt: i18n.tr("Passphrase…")
+                property string fingerprintAlt: i18n.tr("Fingerprint…")
 
                 id: unlockMethod
-                model: 3
+                model: 4
                 delegate: OptionSelectorDelegate {
                     objectName: {
                         switch (index) {
@@ -464,13 +470,24 @@ ItemPage {
                                 return "method_code";
                             case 2:
                                 return "method_phrase";
+                            case 3:
+                                return "method_finger";
                             default:
                                 return "method_unknown";
                         }
                     }
-                    text: index == 0 ? (unlockMethod.selectedIndex == 0 ? unlockMethod.swipe : unlockMethod.swipeAlt) :
-                         (index == 1 ? (unlockMethod.selectedIndex == 1 ? unlockMethod.passcode : unlockMethod.passcodeAlt) :
-                                       (unlockMethod.selectedIndex == 2 ? unlockMethod.passphrase : unlockMethod.passphraseAlt))
+                    text: {
+                        switch (unlockMethod.selectedIndex) {
+                        case 0:
+                            return index == 0 ? unlockMethod.swipe : unlockMethod.swipeAlt;
+                        case 1:
+                            return index == 1 ? unlockMethod.passcode : unlockMethod.passcodeAlt;
+                        case 2:
+                            return index == 2 ? unlockMethod.passphrase : unlockMethod.passphraseAlt;
+                        case 3:
+                            return index == 3 ? unlockMethod.fingerprint : unlockMethod.fingerprintAlt;
+                        }
+                    }
                 }
                 expanded: true
                 onDelegateClicked: {

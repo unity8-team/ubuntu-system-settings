@@ -199,19 +199,34 @@ SecurityPrivacy::SecurityType SecurityPrivacy::getSecurityType()
     if (m_user == nullptr || !act_user_is_loaded(m_user))
         return SecurityPrivacy::Passphrase; // we need to return something
 
+    int hint = m_accountsService.getUserProperty(AS_INTERFACE,
+                                                "PasswordDisplayHint").toInt();
+
     if (act_user_get_password_mode(m_user) == ACT_USER_PASSWORD_MODE_NONE)
         return SecurityPrivacy::Swipe;
-    else if (m_accountsService.getUserProperty(AS_INTERFACE,
-                                               "PasswordDisplayHint").toInt() == 1)
-        return SecurityPrivacy::Passcode;
-    else
+    else if (hint == 0)
         return SecurityPrivacy::Passphrase;
+    else if (hint == 1)
+        return SecurityPrivacy::Passcode;
+    else if (hint == 2)
+        return SecurityPrivacy::Fingerprint;
+    else
+        qWarning() << "got unknown security type" << hint;
 }
 
 bool SecurityPrivacy::setDisplayHint(SecurityType type)
 {
+    int hint;
+    switch (type) {
+    case SecurityPrivacy::Passphrase:
+        hint = 0;
+    case SecurityPrivacy::Passcode:
+        hint = 1;
+    case SecurityPrivacy::Fingerprint:
+        hint = 2;
+    }
     if (!m_accountsService.setUserProperty(AS_INTERFACE, "PasswordDisplayHint",
-                                           (type == SecurityPrivacy::Passcode) ? 1 : 0)) {
+                                           hint)) {
         return false;
     }
 
@@ -382,7 +397,8 @@ QString SecurityPrivacy::setSecurity(QString oldValue, QString value, SecurityTy
             setDisplayHint(oldType);
             return badPasswordMessage(oldType);
         }
-    } else {
+    } else if (type == SecurityPrivacy::Password
+               || type == SecurityPrivacy::Passphrase) {
         QString errorText = setPassword(oldValue, value);
         if (!errorText.isEmpty()) {
             if (errorText == dgettext("Linux-PAM", "Authentication token manipulation error")) {
@@ -408,6 +424,8 @@ QString SecurityPrivacy::setSecurity(QString oldValue, QString value, SecurityTy
             setPasswordModeWithPolicykit(oldType, oldValue); // needed to revert to swipe
             return badPasswordMessage(oldType);
         }
+    } else if (type == SecurityPrivacy::Fingerprint) {
+        qWarning() << "Setting fingerprint sec";
     }
 
     return "";

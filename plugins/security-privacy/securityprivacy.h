@@ -71,7 +71,8 @@ public:
     enum SecurityType {
          Swipe,
          Passcode,
-         Passphrase
+         Passphrase,
+         Fingerprint
     };
 
     explicit SecurityPrivacy(QObject *parent = 0);
