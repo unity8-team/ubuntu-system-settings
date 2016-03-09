@@ -20,7 +20,7 @@ class VpnAddTestCase(VpnBaseTestCase):
     connectivity_parameters = {}
 
     def test_add_and_configure_openvpn(self):
-        change_dialog = self.vpn_page.add_vpn()
+        page = self.vpn_page.add_vpn()
 
         # Wait for length of VpnConnections to become 1
         self.assertThat(
@@ -32,14 +32,14 @@ class VpnAddTestCase(VpnBaseTestCase):
         conn_path = self.ctv_private.Get(CTV_PRIV_IFACE, 'VpnConnections')[0]
         conn_obj = self.get_vpn_connection_object(conn_path)
 
-        change_dialog.set_openvpn_server('vpn.ubuntu.com')
-        change_dialog.set_openvpn_custom_port('1000')
+        page.set_openvpn_server('vpn.ubuntu.com')
+        page.set_openvpn_custom_port('1000')
 
-        change_dialog.set_openvpn_ca(
+        page.set_openvpn_ca(
             # Any file will do.
             ['etc', 'apt', 'sources.list']
         )
-        change_dialog.openvpn_okay()
+        page.openvpn_okay()
 
         self.assertThat(
             lambda: conn_obj.Get(VPN_CONN_OPENVPN_IFACE, 'remote'),

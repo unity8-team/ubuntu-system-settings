@@ -1874,7 +1874,7 @@ class VpnPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
             objectName='vpnEditorDialog')
 
 
-class VpnEditorDialog(
+class VpnEditor(
     ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase
 ):
     """Autopilot helper for vpn change dialog."""
