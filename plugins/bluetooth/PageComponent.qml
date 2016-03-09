@@ -66,12 +66,28 @@ ItemPage {
     Connections {
         target: Qt.application
         onActiveChanged: {
+            console.log("bluetooth: app active state changed")
             if (Qt.application.state !== Qt.ApplicationActive) {
                 backend.trySetDiscoverable(false)
+                backend.blockDiscovery();
             }
             else {
                 discoverableTimer.start()
+                backend.unblockDiscovery();
             }
+        }
+    }
+
+    Connections {
+        target: pageStack
+        onCurrentPageChanged: {
+            console.log("bluetooth: current page changed")
+            // If a child page was put on the stack make sure we
+            // don't run device discovery.
+            if (pageStack.currentPage != root)
+                backend.blockDiscovery();
+            else
+                backend.unblockDiscovery();
         }
     }
 

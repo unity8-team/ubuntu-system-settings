@@ -92,6 +92,31 @@ void Bluetooth::trySetDiscoverable(bool discoverable)
     m_devices.trySetDiscoverable(discoverable);
 }
 
+void Bluetooth::startDiscovery()
+{
+    m_devices.startDiscovery();
+}
+
+void Bluetooth::stopDiscovery()
+{
+    m_devices.stopDiscovery();
+}
+
+void Bluetooth::toggleDiscovery()
+{
+    m_devices.toggleDiscovery();
+}
+
+void Bluetooth::blockDiscovery()
+{
+    m_devices.blockDiscovery();
+}
+
+void Bluetooth::unblockDiscovery()
+{
+    m_devices.unblockDiscovery();
+}
+
 /***
 ****
 ***/

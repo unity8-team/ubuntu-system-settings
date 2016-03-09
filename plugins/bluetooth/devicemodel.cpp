@@ -206,6 +206,9 @@ int DeviceModel::findRowFromAddress(const QString &address) const
 
 void DeviceModel::restartDiscoveryTimer()
 {
+    if (m_discoveryBlockCount > 0)
+        return;
+
     m_discoveryTimer.start (m_isDiscovering ? SCANNING_ACTIVE_DURATION_MSEC
                                    : SCANNING_IDLE_DURATION_MSEC);
 }
@@ -418,6 +421,32 @@ void DeviceModel::trySetDiscoverable(bool discoverable)
         if (!reply.isValid())
             qWarning() << "Error setting device discoverable:" << reply.error();
     }
+}
+
+void DeviceModel::blockDiscovery()
+{
+    qDebug() << __PRETTY_FUNCTION__;
+    m_discoveryBlockCount++;
+
+    stopDiscovery();
+    m_discoveryTimer.stop();
+}
+
+void DeviceModel::unblockDiscovery()
+{
+    qDebug() << __PRETTY_FUNCTION__;
+
+    if (m_discoveryBlockCount == 0) {
+        qWarning() << "BUG: Tried to unblock discovery when it isn't blocked!?";
+        return;
+    }
+
+    m_discoveryBlockCount--;
+
+    if (m_discoveryBlockCount > 0)
+        return;
+
+    restartDiscoveryTimer();
 }
 
 void DeviceModel::slotPropertyChanged(const QString      &key,

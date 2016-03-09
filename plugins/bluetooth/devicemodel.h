@@ -75,10 +75,12 @@ public:
     bool isDiscovering() const { return m_isDiscovering; }
     bool isDiscoverable() const { return m_isDiscoverable; }
     void removeDevice(const QString &path);
+    void trySetDiscoverable(bool discoverable);
     void stopDiscovery();
     void startDiscovery();
     void toggleDiscovery();
-    void trySetDiscoverable(bool discoverable);
+    void blockDiscovery();
+    void unblockDiscovery();
 
 Q_SIGNALS:
     void poweredChanged(bool powered);
@@ -104,6 +106,8 @@ private:
     bool m_isDiscoverable = false;
     QTimer m_discoveryTimer;
     QTimer m_discoverableTimer;
+    unsigned int m_discoveryBlockCount;
+
     void restartDiscoveryTimer();
     void setDiscoverable(bool discoverable);
     void setPowered(bool powered);
