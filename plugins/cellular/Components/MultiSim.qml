@@ -22,6 +22,7 @@ import GSettings 1.0
 import SystemSettings 1.0
 import Ubuntu.Components 1.3
 import Ubuntu.Components.ListItems 1.3 as ListItem
+import Ubuntu.SystemSettings.Cellular 1.0
 
 /* This is a temporary solution to the issue of Hotspots failing on mako. If
 the device is mako, we hide the hotspot entry. Will be removed once lp:1434591
@@ -149,9 +150,8 @@ Column {
     }
 
 
-    GSettings {
+    UbuntuCellularPanel {
         id: phoneSettings
-        schema.id: "com.ubuntu.phone"
         Component.onCompleted: {
             // set default names
             var simNames = phoneSettings.simNames;
