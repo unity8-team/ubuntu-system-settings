@@ -87,21 +87,6 @@ void Bluetooth::resetSelectedDevice()
     Q_EMIT(selectedDeviceChanged());
 }
 
-void Bluetooth::toggleDiscovery()
-{
-    m_devices.toggleDiscovery();
-}
-
-void Bluetooth::startDiscovery()
-{
-    m_devices.startDiscovery();
-}
-
-void Bluetooth::stopDiscovery()
-{
-    m_devices.stopDiscovery();
-}
-
 void Bluetooth::trySetDiscoverable(bool discoverable)
 {
     m_devices.trySetDiscoverable(discoverable);
