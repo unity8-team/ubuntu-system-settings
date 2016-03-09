@@ -104,7 +104,7 @@ DeviceModel::DeviceModel(QDBusConnection &dbus, QObject *parent):
                    << "the agent manager is not available!";
     }
 
-    connect(&m_timer, SIGNAL(timeout()), this, SLOT(slotTimeout()));
+    connect(&m_discoveryTimer, SIGNAL(timeout()), this, SLOT(slotDiscoveryTimeout()));
 }
 
 DeviceModel::~DeviceModel()
@@ -204,9 +204,9 @@ int DeviceModel::findRowFromAddress(const QString &address) const
     return -1;
 }
 
-void DeviceModel::restartTimer()
+void DeviceModel::restartDiscoveryTimer()
 {
-    m_timer.start (m_isDiscovering ? SCANNING_ACTIVE_DURATION_MSEC
+    m_discoveryTimer.start (m_isDiscovering ? SCANNING_ACTIVE_DURATION_MSEC
                                    : SCANNING_IDLE_DURATION_MSEC);
 }
 
@@ -259,9 +259,9 @@ void DeviceModel::toggleDiscovery()
         startDiscovery();
 }
 
-void DeviceModel::slotTimeout()
+void DeviceModel::slotDiscoveryTimeout()
 {
-    toggleDiscovery ();
+    toggleDiscovery();
 }
 
 void DeviceModel::clearAdapter()
@@ -376,7 +376,7 @@ void DeviceModel::updateProperty(const QString &key, const QVariant &value)
         setDiscoverable(value.toBool());
     } else if (key == "Discovering") {
         setDiscovering(value.toBool());
-        restartTimer();
+        restartDiscoveryTimer();
     } else if (key == "Powered") {
         setPowered(value.toBool());
         if (m_isPowered)

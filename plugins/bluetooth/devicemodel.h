@@ -102,9 +102,9 @@ private:
     bool m_isPairable = false;
     bool m_isDiscovering = false;
     bool m_isDiscoverable = false;
-    QTimer m_timer;
+    QTimer m_discoveryTimer;
     QTimer m_discoverableTimer;
-    void restartTimer();
+    void restartDiscoveryTimer();
     void setDiscoverable(bool discoverable);
     void setPowered(bool powered);
 
@@ -132,7 +132,7 @@ private Q_SLOTS:
                                       const QStringList &invalidatedProperties);
     void slotRemoveFinished(QDBusPendingCallWatcher *call);
     void slotPropertyChanged(const QString &key, const QDBusVariant &value);
-    void slotTimeout();
+    void slotDiscoveryTimeout();
     void slotEnableDiscoverable();
     void slotDeviceChanged();
     void slotDevicePairingDone(bool success);
