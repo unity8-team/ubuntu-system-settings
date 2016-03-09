@@ -1,4 +1,5 @@
 {
+    "plugin": "phone-plugin",
     "icon": "preferences-system-phone-symbolic",
     "name": "Phone",
     "translations": "ubuntu-system-settings",
@@ -19,5 +20,5 @@
     ],
     "page-component": "PageComponent.qml",
     "has-dynamic-keywords": false,
-    "has-dynamic-visibility": false
+    "has-dynamic-visibility": true
 }

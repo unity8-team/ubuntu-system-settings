@@ -94,7 +94,7 @@ ItemPage {
          Dialog {
              id: dialogueInstall
              title: i18n.tr("Update System")
-             text: root.batterySafeForUpdate ? i18n.tr("The phone needs to restart to install the system update.") : i18n.tr("Connect the phone to power before installing the system update.")
+             text: root.batterySafeForUpdate ? i18n.tr("The device needs to restart to install the system update.") : i18n.tr("Connect the device to power before installing the system update.")
 
              Button {
                  text: i18n.tr("Restart & Install")

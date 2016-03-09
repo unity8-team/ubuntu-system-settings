@@ -1,6 +1,6 @@
 {
     "icon": "reset",
-    "name": "Reset phone",
+    "name": "Reset",
     "translations": "ubuntu-system-settings",
     "category": "uncategorized-bottom",
     "priority": 1,

@@ -38,7 +38,7 @@ Component {
             }
         }
         objectName: "factoryResetDialog"
-        text: i18n.tr("All documents, saved games, settings, and other items will be permanently deleted from this phone.")
+        text: i18n.tr("All documents, saved games, settings, and other items will be permanently deleted from this device.")
         Button {
             id: action
             text: i18n.tr("Erase & Reset Everything")

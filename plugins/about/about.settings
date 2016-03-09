@@ -1,6 +1,6 @@
 {
     "icon": "ubuntu-logo-symbolic",
-    "name": "About this phone",
+    "name": "About",
     "translations": "ubuntu-system-settings",
     "category": "uncategorized-bottom",
     "priority": 0,
