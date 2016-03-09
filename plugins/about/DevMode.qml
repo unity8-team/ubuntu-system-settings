@@ -81,7 +81,7 @@ ItemPage {
                         width: parent.width
                         horizontalAlignment: Text.AlignHCenter
                         wrapMode: Text.WordWrap
-                        text: i18n.tr("In Developer Mode, anyone can access, change or delete anything on this phone by connecting it to another device.")
+                        text: i18n.tr("In Developer Mode, anyone can access, change or delete anything on this device by connecting it to another device.")
                     }
                 }
             }
