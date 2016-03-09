@@ -60,7 +60,7 @@ DeviceModel::DeviceModel(QDBusConnection &dbus, QObject *parent):
 
             for (QDBusObjectPath path : objectList.keys()) {
                 InterfaceList ifaces = objectList.value(path);
-                addDevice(path, ifaces.value(AETHERCAST_DEVICE_IFACE));
+                addDevice(path.path(), ifaces.value(AETHERCAST_DEVICE_IFACE));
                 break;
             }
 
