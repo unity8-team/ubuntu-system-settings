@@ -1,3 +1,10 @@
+ubuntu-system-settings (0.3+16.04.20160310-0ubuntu1) UNRELEASED; urgency=medium
+
+  * Adds Mouse & Touchpad panel, however it's disabled because it
+    requires unity8 support.
+
+ -- Robert Bruce Park <robert.park@canonical.com>  Thu, 10 Mar 2016 20:49:33 +0000
+
 ubuntu-system-settings (0.3+16.04.20160304-0ubuntu1) xenial; urgency=medium
 
   [ CI Train Bot ]
