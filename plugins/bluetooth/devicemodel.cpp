@@ -470,21 +470,19 @@ void DeviceModel::slotDeviceConnectionChanged()
     // or connecting) and will stop device discovery while those actions
     // are ongoing.
 
-    unsigned int wasInactive = (m_activeDevices > 0);
+    unsigned int wasInactive = (m_activeDevices == 0);
 
     switch (device->getConnection()) {
     case Device::Disconnected:
     case Device::Connected:
-        m_activeDevices++;
+        if (m_activeDevices == 0)
+            break;
+
+        m_activeDevices--;
         break;
     case Device::Disconnecting:
     case Device::Connecting:
-        if (m_activeDevices == 0) {
-            qWarning() << "BUG: mismatch of counted active/inactive bluetooth devices";
-            break;
-        }
-
-        m_activeDevices--;
+        m_activeDevices++;
         break;
     default:
         break;
