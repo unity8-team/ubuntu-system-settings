@@ -39,7 +39,9 @@ DeviceModel::DeviceModel(QDBusConnection &dbus, QObject *parent):
     m_isPowered(false),
     m_isPairable(false),
     m_isDiscovering(false),
-    m_isDiscoverable(false)
+    m_isDiscoverable(false),
+    m_discoveryBlockCount(0),
+    m_activeDevices(0)
 {
     if (m_bluezManager.isValid()) {
 
@@ -410,6 +412,9 @@ void DeviceModel::slotEnableDiscoverable()
 
 void DeviceModel::trySetDiscoverable(bool discoverable)
 {
+    if (m_isDiscoverable)
+        return;
+
     QVariant value;
     QDBusVariant disc(discoverable);
     QDBusReply<void > reply;
@@ -425,7 +430,6 @@ void DeviceModel::trySetDiscoverable(bool discoverable)
 
 void DeviceModel::blockDiscovery()
 {
-    qDebug() << __PRETTY_FUNCTION__;
     m_discoveryBlockCount++;
 
     stopDiscovery();
@@ -434,12 +438,8 @@ void DeviceModel::blockDiscovery()
 
 void DeviceModel::unblockDiscovery()
 {
-    qDebug() << __PRETTY_FUNCTION__;
-
-    if (m_discoveryBlockCount == 0) {
-        qWarning() << "BUG: Tried to unblock discovery when it isn't blocked!?";
+    if (m_discoveryBlockCount == 0)
         return;
-    }
 
     m_discoveryBlockCount--;
 
@@ -462,6 +462,40 @@ void DeviceModel::slotDevicePairingDone(bool success)
     Q_EMIT(devicePairingDone(device, success));
 }
 
+void DeviceModel::slotDeviceConnectionChanged()
+{
+    Device *device = static_cast<Device*>(sender());
+
+    // We count the number of active devices here (either disconnecting
+    // or connecting) and will stop device discovery while those actions
+    // are ongoing.
+
+    unsigned int wasInactive = (m_activeDevices > 0);
+
+    switch (device->getConnection()) {
+    case Device::Disconnected:
+    case Device::Connected:
+        m_activeDevices++;
+        break;
+    case Device::Disconnecting:
+    case Device::Connecting:
+        if (m_activeDevices == 0) {
+            qWarning() << "BUG: mismatch of counted active/inactive bluetooth devices";
+            break;
+        }
+
+        m_activeDevices--;
+        break;
+    default:
+        break;
+    }
+
+    if (wasInactive && m_activeDevices > 0)
+        blockDiscovery();
+    else
+        unblockDiscovery();
+}
+
 void DeviceModel::addDevice(const QString &path, const QVariantMap &properties)
 {
     QSharedPointer<Device> device(new Device(path, m_dbus));
@@ -472,6 +506,8 @@ void DeviceModel::addDevice(const QString &path, const QVariantMap &properties)
                          this, SLOT(slotDeviceChanged()));
         QObject::connect(device.data(), SIGNAL(pairingDone(bool)),
                          this, SLOT(slotDevicePairingDone(bool)));
+        QObject::connect(device.data(), SIGNAL(connectionChanged()),
+                         this, SLOT(slotDeviceConnectionChanged()));
         addDevice(device);
     }
 }

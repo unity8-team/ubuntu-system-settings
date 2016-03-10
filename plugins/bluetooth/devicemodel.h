@@ -107,6 +107,8 @@ private:
     QTimer m_discoveryTimer;
     QTimer m_discoverableTimer;
     unsigned int m_discoveryBlockCount;
+    unsigned int m_activeDevices;
+    bool m_anyDeviceActive;
 
     void restartDiscoveryTimer();
     void setDiscoverable(bool discoverable);
@@ -140,6 +142,7 @@ private Q_SLOTS:
     void slotEnableDiscoverable();
     void slotDeviceChanged();
     void slotDevicePairingDone(bool success);
+    void slotDeviceConnectionChanged();
 };
 
 class DeviceFilter: public QSortFilterProxyModel
