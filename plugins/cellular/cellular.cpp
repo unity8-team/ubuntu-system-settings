@@ -20,6 +20,7 @@
 
 #include "cellular.h"
 #include <QDebug>
+#include <QDBusReply>
 
 #define AS_INTERFACE "com.ubuntu.touch.AccountsService.Phone"
 
@@ -97,12 +98,16 @@ void Cellular::setDefaultSimForMessages(QString sim)
 
 QVariantMap Cellular::getSimNames()
 {
-    QVariantMap map = m_accountsService.getUserProperty(AS_INTERFACE,
-                                                        "SimNames").toMap();
-    for(QVariantMap::const_iterator iter = map.begin(); iter != map.end(); ++iter) {
+    QVariantMap ret;
+    QVariant names = m_accountsService.getUserProperty(AS_INTERFACE,
+                                                       "SimNames").toMap();
+    QMap<QString, QString> map = qdbus_cast<QMap<QString, QString> >(names);
+    
+    for(QMap<QString,QString>::const_iterator iter = map.begin(); iter != map.end(); ++iter) {
         qWarning() << Q_FUNC_INFO << "Key: " << iter.key() << "Value: " << iter.value();
+        ret.insert(iter.key(), iter.value());
     }
-    return map;
+    return ret;
 }
 
 void Cellular::setSimNames(QVariantMap sims)
