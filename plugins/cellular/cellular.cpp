@@ -19,6 +19,7 @@
 */
 
 #include "cellular.h"
+#include <QDebug>
 
 #define AS_INTERFACE "com.ubuntu.touch.AccountsService.Phone"
 
@@ -102,9 +103,14 @@ QVariantMap Cellular::getSimNames()
 
 void Cellular::setSimNames(QVariantMap sims)
 {
+    QMap<QString, QString> map;
+    for(QVariantMap::const_iterator iter = sims.begin(); iter != sims.end(); ++iter) {
+        qDebug() << Q_FUNC_INFO << "Key: " << iter.key() << "Value: " << iter.value();
+        map.insert(iter.key(), iter.value().toString());
+    }
     m_accountsService.setUserProperty(AS_INTERFACE,
                                       "SimNames",
-                                      QVariant::fromValue(sims));
+                                      QVariant::fromValue(map));
 
     Q_EMIT(simNamesChanged());
 }
