@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU General Public License along
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
- 
+
 import GSettings 1.0
 import QtQuick 2.4
 import Ubuntu.Components 1.3
@@ -46,7 +46,7 @@ Column {
             text: root.text
             fontSize: "medium"
             elide: Text.ElideRight
-            color: Theme.palette.selected.backgroundText
+            color: Theme.palette.normal.baseText
             font.weight: Text.Normal
         }
         highlightWhenPressed: false
