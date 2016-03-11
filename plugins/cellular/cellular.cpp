@@ -98,16 +98,17 @@ void Cellular::setDefaultSimForMessages(QString sim)
 
 QVariantMap Cellular::getSimNames()
 {
-    QVariantMap ret;
-    QVariant names = m_accountsService.getUserProperty(AS_INTERFACE,
-                                                       "SimNames").toMap();
-    QMap<QString, QString> map = qdbus_cast<QMap<QString, QString> >(names);
-    
-    for(QMap<QString,QString>::const_iterator iter = map.begin(); iter != map.end(); ++iter) {
-        qWarning() << Q_FUNC_INFO << "Key: " << iter.key() << "Value: " << iter.value();
-        ret.insert(iter.key(), iter.value());
+    QVariantMap namesAsVariantMap;
+    QVariant value = m_accountsService.getUserProperty(AS_INTERFACE, "SimNames");
+    // the signature is a{ss} instead of a{sv}
+    QMap<QString, QString> names = qdbus_cast<QMap<QString, QString> >(value);
+    QMapIterator<QString, QString> i(names);
+    while (i.hasNext()) {
+        i.next();
+        namesAsVariantMap[i.key()] = i.value();
+        qWarning() << Q_FUNC_INFO << "Key: " << i.key() << "Value: " << i.value();
     }
-    return ret;
+    return namesAsVariantMap;
 }
 
 void Cellular::setSimNames(QVariantMap sims)
