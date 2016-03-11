@@ -45,7 +45,7 @@ QSharedPointer<Device> Agent::findOrCreateDevice(const QDBusObjectPath &path)
     auto device = m_devices.getDeviceFromPath(path.path());
 
     // If the device doesn't exist we just couldn't add it to our
-    // internall list as we didn't received the corresponding dbus
+    // internal list as we didn't received the corresponding dbus
     // signal for that yet. This normally happens when a remote device
     // wants to pair with us but we didn't discovered that device yet.
     // We simply create an entry for this new device then and will

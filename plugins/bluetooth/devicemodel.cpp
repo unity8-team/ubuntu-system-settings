@@ -520,6 +520,7 @@ QSharedPointer<Device> DeviceModel::getDeviceFromPath(const QString &path)
 
 QSharedPointer<Device> DeviceModel::addDeviceFromPath(const QDBusObjectPath &path)
 {
+    qWarning() << "Creating device object for path" << path.path();
     QVariantMap noProps;
     return addDevice(path.path(), noProps);
 }
