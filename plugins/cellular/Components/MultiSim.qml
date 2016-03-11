@@ -164,6 +164,11 @@ Column {
                 simNames[m1] = "SIM 2";
             }
             phoneSettings.simNames = simNames;
+            console.warn("phoneSettings.simNames: " + phoneSettings.simNames);
+            console.warn("modems: " + modems);
+            for (var prop in phoneSettings.simNames) {
+                console.warn("Object item:", prop, "=", simNames[prop])
+            }
         }
     }
 
