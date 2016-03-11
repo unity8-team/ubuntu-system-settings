@@ -1,3 +1,13 @@
+ubuntu-system-settings (0.3+16.04.20160311-0ubuntu1) xenial; urgency=medium
+
+  [ Ken VanDine ]
+  * Enable mouse test and use LD_PRELOAD to fix crash running with Xvfb
+  * Hide MouseDoubleClickSpeed and TouchpadDoubleClickSpeed settings
+    because they are not supported by USC yet.
+  * Use accountsservice for properties instead of gsettings
+
+ -- Michał Sawicz <michal.sawicz@canonical.com>  Fri, 11 Mar 2016 03:13:05 +0000
+
 ubuntu-system-settings (0.3+16.04.20160304-0ubuntu1) xenial; urgency=medium
 
   [ CI Train Bot ]
