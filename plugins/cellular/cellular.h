@@ -24,6 +24,7 @@
 #include "accountsservice.h"
 
 #include <QObject>
+#include <QVariantMap>
 
 class Cellular : public QObject
 {
@@ -39,7 +40,7 @@ public:
                 READ getDefaultSimForMessages
                 WRITE setDefaultSimForMessages
                 NOTIFY defaultSimForMessagesChanged)
-    Q_PROPERTY (QStringList simNames
+    Q_PROPERTY (QVariantMap simNames
                 READ getSimNames
                 WRITE setSimNames
                 NOTIFY simNamesChanged)
@@ -60,8 +61,8 @@ private:
     void setDefaultSimForCalls(QString sim);
     QString getDefaultSimForMessages();
     void setDefaultSimForMessages(QString sim);
-    QStringList getSimNames();
-    void setSimNames(QStringList names);
+    QVariantMap getSimNames();
+    void setSimNames(QVariantMap names);
 
 };
 
