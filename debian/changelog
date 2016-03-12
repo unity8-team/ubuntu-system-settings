@@ -1,3 +1,12 @@
+ubuntu-system-settings (0.3+16.04.20160312-0ubuntu1) xenial; urgency=medium
+
+  [ Ken VanDine ]
+  * Added status tracking for updates to be used for system updates.
+    Added handling of started signal from system-image-dbus as well as
+    ForceAllowGSMDownload (LP: #1508081)
+
+ -- Barry Warsaw <ci-train-bot@canonical.com>  Sat, 12 Mar 2016 03:41:08 +0000
+
 ubuntu-system-settings (0.3+16.04.20160311-0ubuntu1) xenial; urgency=medium
 
   [ Ken VanDine ]
