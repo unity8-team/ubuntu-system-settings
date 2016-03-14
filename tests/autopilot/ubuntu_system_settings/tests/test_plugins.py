@@ -137,6 +137,13 @@ class SystemSettingsTestCases(UbuntuSystemSettingsTestCase):
         )
         self.assertThat(plugin, NotEquals(None))
 
+    def test_vpn(self):
+        """ Checks whether the Vpn plugin is available """
+        plugin = self.main_view.select_single(
+            objectName='entryComponent-vpn'
+        )
+        self.assertThat(plugin, NotEquals(None))
+
 
 class SystemSettingsUpowerTestCases(UbuntuSystemSettingsUpowerTestCase):
     def setUp(self):

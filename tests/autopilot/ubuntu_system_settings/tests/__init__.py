@@ -937,6 +937,67 @@ class LanguageBaseTestCase(UbuntuSystemSettingsTestCase,
         super(LanguageBaseTestCase, self).tearDown()
 
 
+class UbuntuSystemSettingsVpnTestCase(UbuntuSystemSettingsTestCase,
+                                      dbusmock.DBusTestCase):
+    """Base class for tests that tests the vpn functionality."""
+    connectivity_parameters = {}
+    indicatornetwork_parameters = {}
+
+    @classmethod
+    def setUpClass(cls):
+        cls.session_con = cls.get_dbus(False)
+
+        cls.start_system_bus()
+
+        super(UbuntuSystemSettingsVpnTestCase, cls).setUpClass()
+
+    def setUp(self):
+        if is_process_running(INDICATOR_NETWORK):
+            _stop_process(INDICATOR_NETWORK)
+            self.addCleanup(_start_process, INDICATOR_NETWORK)
+
+        ctv_tmpl = os.path.join(os.path.dirname(__file__), 'connectivity.py')
+        (self.ctv_mock, self.obj_ctv) = self.spawn_server_template(
+            ctv_tmpl, parameters=self.connectivity_parameters,
+            stdout=subprocess.PIPE)
+
+        self.ctv_private = dbus.Interface(
+            self.session_con.get_object(CTV_IFACE, CTV_PRIV_OBJ),
+            'org.freedesktop.DBus.Properties')
+
+        super(UbuntuSystemSettingsVpnTestCase, self).setUp()
+
+    def tearDown(self):
+        self.ctv_mock.terminate()
+        self.ctv_mock.wait()
+        super(UbuntuSystemSettingsVpnTestCase, self).tearDown()
+
+    @classmethod
+    def tearDownClass(cls):
+        if dbusmock.DBusTestCase.system_bus_pid is not None:
+            cls.stop_dbus(dbusmock.DBusTestCase.system_bus_pid)
+            del os.environ['DBUS_SYSTEM_BUS_ADDRESS']
+            dbusmock.DBusTestCase.system_bus_pid = None
+        if dbusmock.DBusTestCase.session_bus_pid is not None:
+            cls.stop_dbus(dbusmock.DBusTestCase.session_bus_pid)
+            del os.environ['DBUS_SESSION_BUS_ADDRESS']
+            dbusmock.DBusTestCase.session_bus_pid = None
+        super(UbuntuSystemSettingsVpnTestCase, cls).tearDownClass()
+
+
+class VpnBaseTestCase(UbuntuSystemSettingsVpnTestCase):
+
+    def setUp(self):
+        super(VpnBaseTestCase, self).setUp()
+        self.vpn_page = self.main_view.go_to_vpn_page()
+
+    def get_vpn_connection_object(self, path):
+        return dbus.Interface(
+            self.session_con.get_object(CTV_IFACE, path),
+            'org.freedesktop.DBus.Properties'
+        )
+
+
 class WifiBaseTestCase(UbuntuSystemSettingsTestCase,
                        dbusmock.DBusTestCase):
     """ Base class for wifi settings tests"""
