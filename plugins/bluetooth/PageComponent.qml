@@ -59,19 +59,33 @@ ItemPage {
 
     Timer {
         id: discoverableTimer
+        repeat: false
+        running: false
         onTriggered: backend.trySetDiscoverable(true)
     }
 
-    /* Disable bt visiblity when switching out */
+    property int lastApplicationState: Qt.ApplicationSuspended
+
+    /* Disable BT visiblity/discovery when switching out */
     Connections {
         target: Qt.application
-        onActiveChanged: {
+        onStateChanged: {
             if (Qt.application.state !== Qt.ApplicationActive) {
                 backend.trySetDiscoverable(false)
+
+                // We only increase the block count when we get inactive
+                // and not for any other state as would then end up in
+                // a state we can never escape from.
+                if (Qt.application.state === Qt.ApplicationInactive &&
+                    lastApplicationState === Qt.ApplicationActive)
+                    backend.blockDiscovery()
             }
             else {
                 discoverableTimer.start()
+                backend.unblockDiscovery()
             }
+
+            lastApplicationState = Qt.application.state
         }
     }
 

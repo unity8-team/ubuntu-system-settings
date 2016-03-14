@@ -92,11 +92,13 @@ public:
     Q_INVOKABLE void connectDevice(const QString &address);
     Q_INVOKABLE void disconnectDevice();
     Q_INVOKABLE void removeDevice();
-    Q_INVOKABLE void toggleDiscovery();
-    Q_INVOKABLE void startDiscovery();
-    Q_INVOKABLE void stopDiscovery();
     Q_INVOKABLE void trySetDiscoverable(bool discoverable);
     Q_INVOKABLE void resetSelectedDevice();
+    Q_INVOKABLE void blockDiscovery();
+    Q_INVOKABLE void unblockDiscovery();
+    Q_INVOKABLE void startDiscovery();
+    Q_INVOKABLE void stopDiscovery();
+    Q_INVOKABLE void toggleDiscovery();
 
 public:
     Agent * getAgent();
