@@ -1854,7 +1854,7 @@ class VpnPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
         obj = self.select_single(objectName='addVpnButton')
         self.pointing_device.click_object(obj)
         return self.get_root_instance().wait_select_single(
-            objectName='vpnEditorDialog')
+            objectName='vpnEditor')
 
     @autopilot.logging.log_action(logger.debug)
     def preview_vpn(self, at):
@@ -1871,7 +1871,7 @@ class VpnPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
         )
         self.pointing_device.click_object(change_button)
         return self.get_root_instance().wait_select_single(
-            objectName='vpnEditorDialog')
+            objectName='vpnEditor')
 
 
 class VpnEditor(
