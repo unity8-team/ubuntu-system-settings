@@ -1,3 +1,9 @@
+ubuntu-system-settings (0.3+16.04.20160314-0ubuntu1) xenial; urgency=medium
+
+  * Rework Bluetooth device discovery handling
+
+ -- Simon Fels <simon.busch@canonical.com>  Mon, 14 Mar 2016 14:09:57 +0000
+
 ubuntu-system-settings (0.3+16.04.20160312-0ubuntu1) xenial; urgency=medium
 
   [ Ken VanDine ]
