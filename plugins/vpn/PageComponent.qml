@@ -123,7 +123,6 @@ ItemPage {
                 }
             }
         }
-
     }
 
     Connections {
