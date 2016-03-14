@@ -1,8 +1,9 @@
-ubuntu-system-settings (0.3+16.04.20160314.2-0ubuntu1) UNRELEASED; urgency=medium
+ubuntu-system-settings (0.3+16.04.20160314.2-0ubuntu1) xenial; urgency=medium
 
+  [ jonas-drange ]
   * New VPN panel with happy path tes
 
- -- jonas-drange <jonas.drange@canonical.com>  Mon, 14 Mar 2016 23:42:46 +0000
+ -- Robert Bruce Park <robert.park@canonical.com>  Mon, 14 Mar 2016 23:42:47 +0000
 
 ubuntu-system-settings (0.3+16.04.20160314-0ubuntu1) xenial; urgency=medium
 
