@@ -1,3 +1,41 @@
+ubuntu-system-settings (0.3+16.04.20160312-0ubuntu1) xenial; urgency=medium
+
+  [ Ken VanDine ]
+  * Added status tracking for updates to be used for system updates.
+    Added handling of started signal from system-image-dbus as well as
+    ForceAllowGSMDownload (LP: #1508081)
+
+ -- Barry Warsaw <ci-train-bot@canonical.com>  Sat, 12 Mar 2016 03:41:08 +0000
+
+ubuntu-system-settings (0.3+16.04.20160311-0ubuntu1) xenial; urgency=medium
+
+  [ Ken VanDine ]
+  * Enable mouse test and use LD_PRELOAD to fix crash running with Xvfb
+  * Hide MouseDoubleClickSpeed and TouchpadDoubleClickSpeed settings
+    because they are not supported by USC yet.
+  * Use accountsservice for properties instead of gsettings
+
+ -- Michał Sawicz <michal.sawicz@canonical.com>  Fri, 11 Mar 2016 03:13:05 +0000
+
+ubuntu-system-settings (0.3+16.04.20160304-0ubuntu1) xenial; urgency=medium
+
+  [ CI Train Bot ]
+  * Resync trunk.
+
+  [ jonas-drange ]
+  * Drop our own InputInfo implementation and use QSystemInfo 5.5. (LP:
+    #1549314)
+
+ -- Jonas G. Drange <ci-train-bot@canonical.com>  Fri, 04 Mar 2016 13:58:59 +0000
+
+ubuntu-system-settings (0.3+16.04.20160226.1-0ubuntu1) xenial; urgency=medium
+
+  * Add InAppPurchases to privacy plug-in. Update translation template.
+    Fix translation template to not include full path to settings.js
+    file. (LP: #1524943)
+
+ -- Rodney Dawes <ci-train-bot@canonical.com>  Fri, 26 Feb 2016 19:07:26 +0000
+
 ubuntu-system-settings (0.3+16.04.20160226-0ubuntu1) xenial; urgency=medium
 
   * Subtract amount used by apps when computing otherSize (LP: #1524424)

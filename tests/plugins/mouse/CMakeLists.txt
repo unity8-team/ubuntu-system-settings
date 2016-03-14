@@ -6,7 +6,15 @@ find_package(Qt5Quick REQUIRED)
 find_package(Qt5QuickTest REQUIRED)
 add_definitions(-DTESTS)
 
-set(XVFB_CMD xvfb-run -a -s "-screen 0 640x480x24")
+find_program( HAVE_GCC gcc )
+if (NOT ${HAVE_GCC} STREQUAL "")
+    exec_program( gcc ARGS "-dumpmachine" OUTPUT_VARIABLE ARCH_TRIPLET )
+    set(LD_PRELOAD_PATH "LD_PRELOAD=/usr/lib/${ARCH_TRIPLET}/mesa/libGL.so.1")
+endif()
+set(XVFB_CMD
+    env ${qmltest_ENVIRONMENT} ${LD_PRELOAD_PATH}
+    xvfb-run -a -s "-screen 0 640x480x24"
+)
 
 set(QML_SOURCES tst_mouse.qml)
 
