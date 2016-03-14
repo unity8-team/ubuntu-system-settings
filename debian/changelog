@@ -1,3 +1,10 @@
+ubuntu-system-settings (0.3+16.04.20160314.4-0ubuntu1) xenial; urgency=medium
+
+  [ jonas-drange ]
+  * New VPN panel with happy path test (LP: #1495553)
+
+ -- Jonas G. Drange <ci-train-bot@canonical.com>  Mon, 14 Mar 2016 21:26:48 +0000
+
 ubuntu-system-settings (0.3+16.04.20160314-0ubuntu1) xenial; urgency=medium
 
   * Rework Bluetooth device discovery handling
