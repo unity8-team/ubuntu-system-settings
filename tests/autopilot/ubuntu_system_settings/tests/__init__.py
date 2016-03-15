@@ -50,6 +50,7 @@ ACCOUNTS_USER_IFACE = 'org.freedesktop.Accounts.User'
 ACCOUNTS_OBJ = '/org/freedesktop/Accounts'
 ACCOUNTS_SERVICE = 'com.canonical.unity.AccountsService'
 ACCOUNTS_SOUND_IFACE = 'com.ubuntu.touch.AccountsService.Sound'
+ACCOUNTS_PHONE_IFACE = 'com.ubuntu.touch.AccountsService.Phone'
 INDICATOR_NETWORK = 'indicator-network'
 ISOUND_SERVICE = 'com.canonical.indicator.sound'
 ISOUND_ACTION_PATH = '/com/canonical/indicator/sound'
@@ -429,15 +430,11 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
 
         super(UbuntuSystemSettingsOfonoTestCase, self).setUp()
 
-    def set_default_for_calls(self, gsettings, default):
-        gsettings.set_value('default-sim-for-calls', default)
-        # wait for gsettings
-        sleep(1)
+    def set_default_for_calls(self, obj, default):
+        obj.Set(ACCOUNTS_PHONE_IFACE, "DefaultSimForCalls", default)
 
-    def set_default_for_messages(self, gsettings, default):
-        gsettings.set_value('default-sim-for-messages', default)
-        # wait for gsettings
-        sleep(1)
+    def set_default_for_messages(self, obj, default):
+        obj.Set(ACCOUNTS_PHONE_IFACE, "DefaultSimForMessages", default)
 
     def get_default_sim_for_calls_selector(self, text):
         return self.cellular_page.select_single(
@@ -454,6 +451,71 @@ class CellularBaseTestCase(UbuntuSystemSettingsOfonoTestCase):
 
     def setUp(self):
         """ Go to Cellular page """
+
+        user_obj = '/user/foo'
+
+        self.accts_phone_props = {
+            'DefaultSimForCalls': dbus.String("/ril_0", variant_level=1),
+            'DefaultSimForMessages': dbus.String("/ril_1", variant_level=1),
+            'SimNames': dbus.Dictionary({}, signature='ss', variant_level=1)}
+
+        # start dbus system bus
+        self.mock_server = self.spawn_server(ACCOUNTS_IFACE, ACCOUNTS_OBJ,
+                                             ACCOUNTS_IFACE, system_bus=True,
+                                             stdout=subprocess.PIPE)
+
+        self.wait_for_bus_object(ACCOUNTS_IFACE,
+                                 ACCOUNTS_OBJ,
+                                 system_bus=True)
+
+        self.dbus_mock = dbus.Interface(self.dbus_con.get_object(
+                                        ACCOUNTS_IFACE,
+                                        ACCOUNTS_OBJ,
+                                        ACCOUNTS_IFACE),
+                                        dbusmock.MOCK_IFACE)
+
+        # let accountservice find a user object path
+        self.dbus_mock.AddMethod(ACCOUNTS_IFACE, 'FindUserById', 'x', 'o',
+                                 'ret = "%s"' % user_obj)
+
+        self.dbus_mock.AddProperties(ACCOUNTS_PHONE_IFACE,
+                                     self.accts_phone_props)
+
+        # add getter and setter to mock
+        self.dbus_mock.AddMethods(
+            'org.freedesktop.DBus.Properties',
+            [
+                ('self.Get',
+                 's',
+                 'v',
+                 'ret = self.accts_phone_props[args[0]]'),
+                ('self.Set',
+                 'sv',
+                 '',
+                 'self.accts_phone_props[args[0]] = args[1]')
+            ])
+
+        # add user object to mock
+        self.dbus_mock.AddObject(
+            user_obj, ACCOUNTS_PHONE_IFACE, self.accts_phone_props,
+            [
+                (
+                    'GetDefaultSimForCalls', '', 'v',
+                    'ret = self.Get("%s", "DefaultSimForCalls")' %
+                    ACCOUNTS_PHONE_IFACE),
+                (
+                    'GetDefaultSimForMessages', '', 'v',
+                    'ret = self.Get("%s", "DefaultSimForMessages")' %
+                    ACCOUNTS_PHONE_IFACE),
+                (
+                    'GetSimNames', '', 'v',
+                    'ret = self.Get("%s", "SimNames")' %
+                    ACCOUNTS_PHONE_IFACE)
+            ])
+
+        self.obj_phone = self.dbus_con.get_object(ACCOUNTS_IFACE, user_obj,
+                                                  ACCOUNTS_IFACE)
+
         super(CellularBaseTestCase, self).setUp()
         self.cellular_page = self.main_view.go_to_cellular_page()
 
