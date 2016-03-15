@@ -1,3 +1,28 @@
+ubuntu-system-settings (0.3+16.04.20160314-0ubuntu1) xenial; urgency=medium
+
+  * Rework Bluetooth device discovery handling
+
+ -- Simon Fels <simon.busch@canonical.com>  Mon, 14 Mar 2016 14:09:57 +0000
+
+ubuntu-system-settings (0.3+16.04.20160312-0ubuntu1) xenial; urgency=medium
+
+  [ Ken VanDine ]
+  * Added status tracking for updates to be used for system updates.
+    Added handling of started signal from system-image-dbus as well as
+    ForceAllowGSMDownload (LP: #1508081)
+
+ -- Barry Warsaw <ci-train-bot@canonical.com>  Sat, 12 Mar 2016 03:41:08 +0000
+
+ubuntu-system-settings (0.3+16.04.20160311-0ubuntu1) xenial; urgency=medium
+
+  [ Ken VanDine ]
+  * Enable mouse test and use LD_PRELOAD to fix crash running with Xvfb
+  * Hide MouseDoubleClickSpeed and TouchpadDoubleClickSpeed settings
+    because they are not supported by USC yet.
+  * Use accountsservice for properties instead of gsettings
+
+ -- Michał Sawicz <michal.sawicz@canonical.com>  Fri, 11 Mar 2016 03:13:05 +0000
+
 ubuntu-system-settings (0.3+16.04.20160304-0ubuntu1) xenial; urgency=medium
 
   [ CI Train Bot ]

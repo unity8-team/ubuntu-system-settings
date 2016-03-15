@@ -76,10 +76,12 @@ public:
     bool isDiscovering() const { return m_isDiscovering; }
     bool isDiscoverable() const { return m_isDiscoverable; }
     void removeDevice(const QString &path);
+    void trySetDiscoverable(bool discoverable);
     void stopDiscovery();
     void startDiscovery();
     void toggleDiscovery();
-    void trySetDiscoverable(bool discoverable);
+    void blockDiscovery();
+    void unblockDiscovery();
 
 Q_SIGNALS:
     void poweredChanged(bool powered);
@@ -103,9 +105,13 @@ private:
     bool m_isPairable = false;
     bool m_isDiscovering = false;
     bool m_isDiscoverable = false;
-    QTimer m_timer;
+    QTimer m_discoveryTimer;
     QTimer m_discoverableTimer;
-    void restartTimer();
+    unsigned int m_discoveryBlockCount;
+    unsigned int m_activeDevices;
+    bool m_anyDeviceActive;
+
+    void restartDiscoveryTimer();
     void setDiscoverable(bool discoverable);
     void setPowered(bool powered);
 
@@ -133,10 +139,11 @@ private Q_SLOTS:
                                       const QStringList &invalidatedProperties);
     void slotRemoveFinished(QDBusPendingCallWatcher *call);
     void slotPropertyChanged(const QString &key, const QDBusVariant &value);
-    void slotTimeout();
+    void slotDiscoveryTimeout();
     void slotEnableDiscoverable();
     void slotDeviceChanged();
     void slotDevicePairingDone(bool success);
+    void slotDeviceConnectionChanged();
 };
 
 class DeviceFilter: public QSortFilterProxyModel
