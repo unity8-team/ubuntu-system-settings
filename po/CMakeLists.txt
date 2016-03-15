@@ -17,10 +17,9 @@ file(GLOB SETTINGSFILES RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}"
                         "${CMAKE_SOURCE_DIR}/plugins/*/*.settings")
 file(GLOB PYFILES RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}"
                         "${CMAKE_SOURCE_DIR}/push-helper/*.py")
-file(GLOB SETTINGSJSFILE RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}"
-                   "${CMAKE_CURRENT_BINARY_DIR}/settings.js")
+file(RELATIVE_PATH SETTINGSJSFILE "${CMAKE_CURRENT_SOURCE_DIR}" "${CMAKE_CURRENT_BINARY_DIR}/settings.js")
 
-add_custom_command(OUTPUT settings.js
+add_custom_target(settings.js
     COMMAND ./extractsettingsinfo ${SETTINGSFILES} -o ${CMAKE_CURRENT_BINARY_DIR}/settings.js
     WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
     DEPENDS ${SETTINGSFILES}
@@ -48,7 +47,7 @@ add_custom_target(pot-qml
                             --keyword=tr --keyword=tr:1,2 --from-code=UTF-8
                             ${QMLFILES} ${SETTINGSJSFILE}
     WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
-    DEPENDS pot-desktop ${QMLFILES} "${CMAKE_CURRENT_BINARY_DIR}/settings.js" #desktop.js
+    DEPENDS pot-desktop ${QMLFILES} settings.js #desktop.js
 )
 
 add_custom_target(pot-cpp
