@@ -106,7 +106,6 @@ QVariantMap Cellular::getSimNames()
     while (i.hasNext()) {
         i.next();
         namesAsVariantMap[i.key()] = i.value();
-        qWarning() << Q_FUNC_INFO << "Key: " << i.key() << "Value: " << i.value();
     }
     return namesAsVariantMap;
 }
@@ -115,7 +114,6 @@ void Cellular::setSimNames(QVariantMap sims)
 {
     QMap<QString, QString> map;
     for(QVariantMap::const_iterator iter = sims.begin(); iter != sims.end(); ++iter) {
-        qWarning() << Q_FUNC_INFO << "Key: " << iter.key() << "Value: " << iter.value();
         map.insert(iter.key(), iter.value().toString());
     }
     m_accountsService.setUserProperty(AS_INTERFACE,
