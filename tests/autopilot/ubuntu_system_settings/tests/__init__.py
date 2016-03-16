@@ -457,6 +457,8 @@ class CellularBaseTestCase(UbuntuSystemSettingsOfonoTestCase):
         self.mock_server = self.spawn_server(ACCOUNTS_IFACE, ACCOUNTS_OBJ,
                                              ACCOUNTS_IFACE, system_bus=True,
                                              stdout=subprocess.PIPE)
+        # give it time to ensure the mock is up
+        sleep(1)
 
         self.wait_for_bus_object(ACCOUNTS_IFACE,
                                  ACCOUNTS_OBJ,

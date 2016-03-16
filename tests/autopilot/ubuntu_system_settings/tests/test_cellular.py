@@ -10,16 +10,12 @@ from time import sleep
 
 from autopilot.introspection.dbus import StateNotFoundError
 from autopilot.matchers import Eventually
-import autopilot.logging
-import dbus
-import logging
 from testtools.matchers import Equals, raises, StartsWith
 
 from ubuntu_system_settings.tests import (
     CellularBaseTestCase, CONNMAN_IFACE, RDO_IFACE,
     NETREG_IFACE, ACCOUNTS_PHONE_IFACE)
 
-logger = logging.getLogger(__name__)
 
 DEV_IFACE = 'org.freedesktop.NetworkManager.Device'
 
