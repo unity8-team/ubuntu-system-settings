@@ -1,3 +1,20 @@
+ubuntu-system-settings (0.3+16.04.20160316.1-0ubuntu1) xenial; urgency=medium
+
+  [ Michael Terry ]
+  * Use geonames library instead of timezonemap library to search city
+    names, which gives us slightly better sorting (and future
+    improvements)
+
+  [ Rodney Dawes ]
+  * Fix the CMakeLists.txt to handle settings.js generation and
+    translations better. (LP: #1555623)
+
+  [ jonas-drange ]
+  * Replace usage of backgroundText from the selected palette for labels
+    with baseText from normal palette.
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Wed, 16 Mar 2016 17:03:54 +0000
+
 ubuntu-system-settings (0.3+16.04.20160314.4-0ubuntu1) xenial; urgency=medium
 
   [ jonas-drange ]
