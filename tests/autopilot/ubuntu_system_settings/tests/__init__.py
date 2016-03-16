@@ -430,12 +430,6 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
 
         super(UbuntuSystemSettingsOfonoTestCase, self).setUp()
 
-    def set_default_for_calls(self, obj, default):
-        obj.Set(ACCOUNTS_PHONE_IFACE, "DefaultSimForCalls", default)
-
-    def set_default_for_messages(self, obj, default):
-        obj.Set(ACCOUNTS_PHONE_IFACE, "DefaultSimForMessages", default)
-
     def get_default_sim_for_calls_selector(self, text):
         return self.cellular_page.select_single(
             objectName="defaultForCalls" + text
@@ -528,6 +522,11 @@ class CellularBaseTestCase(UbuntuSystemSettingsOfonoTestCase):
 
         for key, value in kwargs.items():
             context.SetProperty(key, value)
+
+    def tearDown(self):
+        self.mock_server.terminate()
+        self.mock_server.wait()
+        super(CellularBaseTestCase, self).tearDown()
 
 
 class HotspotBaseTestCase(UbuntuSystemSettingsHotspotTestCase):

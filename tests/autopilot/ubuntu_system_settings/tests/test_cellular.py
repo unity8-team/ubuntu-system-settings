@@ -270,9 +270,6 @@ class DualSimCellularTestCase(CellularBaseTestCase):
     def test_changing_default_sim_for_calls(self):
         default = self.obj_phone.GetDefaultSimForCalls()
 
-        self.addCleanup(
-            self.set_default_for_calls, self.obj_phone, default)
-
         # click ask
         self.system_settings.main_view.scroll_to_and_click(
             self.get_default_sim_for_calls_selector('ask'))
@@ -286,8 +283,6 @@ class DualSimCellularTestCase(CellularBaseTestCase):
 
     def test_changing_default_sim_for_messages(self):
         default = self.obj_phone.GetDefaultSimForMessages()
-        self.addCleanup(
-            self.set_default_for_messages, self.obj_phone, default)
 
         # click ask
         self.system_settings.main_view.scroll_to_and_click(
