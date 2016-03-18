@@ -222,6 +222,9 @@ class UbuntuSystemSettingsHotspotTestCase(UbuntuSystemSettingsTestCase,
             inetwork, parameters=self.indicatornetwork_parameters,
             stdout=subprocess.PIPE)
 
+        # Required since this test needs to dismiss the OSK.
+        self.useFixture(EnvironmentVariable("UITK_USE_MALIIT", "1"))
+
         super(UbuntuSystemSettingsHotspotTestCase, self).setUp()
 
     def tearDown(self):
@@ -989,6 +992,8 @@ class VpnBaseTestCase(UbuntuSystemSettingsVpnTestCase):
 
     def setUp(self):
         super(VpnBaseTestCase, self).setUp()
+        # Required since this test needs to dismiss the OSK.
+        self.useFixture(EnvironmentVariable("UITK_USE_MALIIT", "1"))
         self.vpn_page = self.main_view.go_to_vpn_page()
 
     def get_vpn_connection_object(self, path):
@@ -1039,6 +1044,9 @@ class WifiBaseTestCase(UbuntuSystemSettingsTestCase,
             'test_ap', 'test_ap',
             security=NM80211ApSecurityFlags.NM_802_11_AP_SEC_KEY_MGMT_PSK
         )
+
+        # Required since this test needs to dismiss the OSK.
+        self.useFixture(EnvironmentVariable("UITK_USE_MALIIT", "1"))
 
         super(WifiBaseTestCase, self).setUp(panel)
         if panel:
