@@ -87,9 +87,9 @@ void Bluetooth::resetSelectedDevice()
     Q_EMIT(selectedDeviceChanged());
 }
 
-void Bluetooth::toggleDiscovery()
+void Bluetooth::trySetDiscoverable(bool discoverable)
 {
-    m_devices.toggleDiscovery();
+    m_devices.trySetDiscoverable(discoverable);
 }
 
 void Bluetooth::startDiscovery()
@@ -102,9 +102,19 @@ void Bluetooth::stopDiscovery()
     m_devices.stopDiscovery();
 }
 
-void Bluetooth::trySetDiscoverable(bool discoverable)
+void Bluetooth::toggleDiscovery()
 {
-    m_devices.trySetDiscoverable(discoverable);
+    m_devices.toggleDiscovery();
+}
+
+void Bluetooth::blockDiscovery()
+{
+    m_devices.blockDiscovery();
+}
+
+void Bluetooth::unblockDiscovery()
+{
+    m_devices.unblockDiscovery();
 }
 
 /***

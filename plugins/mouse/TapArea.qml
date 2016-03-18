@@ -24,7 +24,7 @@ import Ubuntu.Components 1.3
 Item {
     /* this property will come from Mir */
     property int doubleTapSpeed: 1000
-    property var message
+    property var message: ""
     property bool lastStatus
     property var button: doubleTapButton
 

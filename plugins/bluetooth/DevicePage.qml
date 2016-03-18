@@ -175,7 +175,6 @@ Page {
                                 || backend.selectedDevice.connection == Device.Connecting)) {
                             backend.disconnectDevice();
                         } else {
-                            backend.stopDiscovery()
                             backend.connectDevice(backend.selectedDevice.address);
                         }
 
