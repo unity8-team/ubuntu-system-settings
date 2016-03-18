@@ -1,3 +1,10 @@
+ubuntu-system-settings (0.3+16.04.20160318-0ubuntu1) xenial; urgency=medium
+
+  * Process pairing attempts for unknown devices correctly (LP:
+    #1539158)
+
+ -- Simon Fels <simon.busch@canonical.com>  Fri, 18 Mar 2016 17:56:23 +0000
+
 ubuntu-system-settings (0.3+16.04.20160316.1-0ubuntu1) xenial; urgency=medium
 
   [ Michael Terry ]
