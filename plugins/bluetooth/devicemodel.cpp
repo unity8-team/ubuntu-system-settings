@@ -494,23 +494,25 @@ void DeviceModel::slotDeviceConnectionChanged()
         unblockDiscovery();
 }
 
-void DeviceModel::addDevice(const QString &path, const QVariantMap &properties)
+QSharedPointer<Device> DeviceModel::addDevice(const QString &path, const QVariantMap &properties)
 {
     QSharedPointer<Device> device(new Device(path, m_dbus));
     device->setProperties(properties);
 
-    if (device->isValid()) {
-        QObject::connect(device.data(), SIGNAL(deviceChanged()),
-                         this, SLOT(slotDeviceChanged()));
-        QObject::connect(device.data(), SIGNAL(pairingDone(bool)),
-                         this, SLOT(slotDevicePairingDone(bool)));
-        QObject::connect(device.data(), SIGNAL(connectionChanged()),
-                         this, SLOT(slotDeviceConnectionChanged()));
-        addDevice(device);
-    }
+    if (!device->isValid())
+        return QSharedPointer<Device>(nullptr);
+
+    QObject::connect(device.data(), SIGNAL(deviceChanged()),
+                     this, SLOT(slotDeviceChanged()));
+    QObject::connect(device.data(), SIGNAL(pairingDone(bool)),
+                     this, SLOT(slotDevicePairingDone(bool)));
+    QObject::connect(device.data(), SIGNAL(connectionChanged()),
+                     this, SLOT(slotDeviceConnectionChanged()));
+
+    return addDevice(device);
 }
 
-void DeviceModel::addDevice(QSharedPointer<Device> &device)
+QSharedPointer<Device> DeviceModel::addDevice(QSharedPointer<Device> &device)
 {
     int row = findRowFromAddress(device->getAddress());
 
@@ -523,6 +525,8 @@ void DeviceModel::addDevice(QSharedPointer<Device> &device)
         m_devices.append(device);
         endInsertRows();
     }
+
+    return device;
 }
 
 void DeviceModel::removeRow(int row)
@@ -575,6 +579,13 @@ QSharedPointer<Device> DeviceModel::getDeviceFromPath(const QString &path)
             return device;
 
     return QSharedPointer<Device>();
+}
+
+QSharedPointer<Device> DeviceModel::addDeviceFromPath(const QDBusObjectPath &path)
+{
+    qWarning() << "Creating device object for path" << path.path();
+    QVariantMap noProps;
+    return addDevice(path.path(), noProps);
 }
 
 void DeviceModel::slotRemoveFinished(QDBusPendingCallWatcher *call)
