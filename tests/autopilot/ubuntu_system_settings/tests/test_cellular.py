@@ -5,6 +5,7 @@
 # under the terms of the GNU General Public License version 3, as published
 # by the Free Software Foundation.
 
+import dbus
 from gi.repository import Gio, GLib
 from time import sleep
 
@@ -211,27 +212,22 @@ class DualSimCellularTestCase(CellularBaseTestCase):
         finally:
             self.cellular_page.set_name(sim, old_name)
 
-    """ FIXME: Update to use AccountsService
     def test_remote_manipulation_of_name(self):
-        gsettings = Gio.Settings.new('com.ubuntu.phone')
-        old_names = gsettings.get_value('sim-names')
+        old_names = self.obj_phone.GetSimNames()
         sim = '/ril_0'
         name = 'BAS QUX'
-        new_names = old_names.unpack()
+        new_names = old_names
         new_names[sim] = name
-        new_names = GLib.Variant('a{ss}', new_names)
-        gsettings.set_value('sim-names', new_names)
+        self.obj_phone.Set(ACCOUNTS_PHONE_IFACE, "SimNames", new_names)
+        self.dbus_mock.EmitSignal(ACCOUNTS_PHONE_IFACE, "PropertyChanged", "sv", dbus.Array(["SimNames", new_names]))
+        self.dbus_mock.EmitSignal(ACCOUNTS_PHONE_IFACE, "PropertiesChanged", "sa{sv}as", dbus.Array(["SimNames", new_names, dbus.Array([], signature='s')]))
+
         try:
             self.assertThat(
                 lambda: self.cellular_page.get_name(sim),
                 Eventually(StartsWith(name)))
         except Exception as e:
             raise e
-        finally:
-            gsettings.set_value('sim-names', old_names)
-            # wait for gsettings
-            sleep(1)
-    """
 
     def test_roaming_switch(self):
         self.cellular_page.disable_datas()
