@@ -6,8 +6,6 @@
 # by the Free Software Foundation.
 
 import dbus
-from gi.repository import Gio, GLib
-from time import sleep
 
 from autopilot.introspection.dbus import StateNotFoundError
 from autopilot.matchers import Eventually
@@ -219,7 +217,8 @@ class DualSimCellularTestCase(CellularBaseTestCase):
         new_names = old_names
         new_names[sim] = name
         self.obj_phone.Set(ACCOUNTS_PHONE_IFACE, "SimNames", new_names)
-        self.dbus_mock.EmitSignal(ACCOUNTS_PHONE_IFACE, "PropertyChanged", "sv", dbus.Array(["SimNames", new_names]))
+        self.dbus_mock.EmitSignal(ACCOUNTS_PHONE_IFACE, "PropertyChanged",
+                                  "sv", dbus.Array(["SimNames", new_names]))
 
         try:
             self.assertThat(
@@ -259,8 +258,6 @@ class DualSimCellularTestCase(CellularBaseTestCase):
             Eventually(Equals(True)))
 
     def test_changing_default_sim_for_calls(self):
-        default = self.obj_phone.GetDefaultSimForCalls()
-
         # click ask
         self.system_settings.main_view.scroll_to_and_click(
             self.get_default_sim_for_calls_selector('ask'))
@@ -273,8 +270,6 @@ class DualSimCellularTestCase(CellularBaseTestCase):
             Eventually(Equals('/ril_0')))
 
     def test_changing_default_sim_for_messages(self):
-        default = self.obj_phone.GetDefaultSimForMessages()
-
         # click ask
         self.system_settings.main_view.scroll_to_and_click(
             self.get_default_sim_for_messages_selector('ask'))
