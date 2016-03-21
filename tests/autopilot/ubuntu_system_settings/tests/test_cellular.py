@@ -220,7 +220,7 @@ class DualSimCellularTestCase(CellularBaseTestCase):
         new_names[sim] = name
         self.obj_phone.Set(ACCOUNTS_PHONE_IFACE, "SimNames", new_names)
         self.dbus_mock.EmitSignal(ACCOUNTS_PHONE_IFACE, "PropertyChanged", "sv", dbus.Array(["SimNames", new_names]))
-        self.dbus_mock.EmitSignal(ACCOUNTS_PHONE_IFACE, "PropertiesChanged", "sa{sv}as", dbus.Array(["SimNames", new_names, dbus.Array([], signature='s')]))
+        #self.dbus_mock.EmitSignal(ACCOUNTS_PHONE_IFACE, "PropertiesChanged", "sa{sv}as", dbus.Array(["SimNames", new_names, dbus.Array(["SimNames"], signature='s')]))
 
         try:
             self.assertThat(
