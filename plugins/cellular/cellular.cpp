@@ -41,7 +41,6 @@ Cellular::Cellular(QObject *parent) :
 void Cellular::slotChanged(QString interface,
                                   QString property)
 {
-    qWarning() << "INTERFACE:" << interface << "PROPERTY:" << property;
     if (interface != AS_INTERFACE)
         return;
 
