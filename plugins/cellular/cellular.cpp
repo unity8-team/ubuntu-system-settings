@@ -76,7 +76,6 @@ void Cellular::setDefaultSimForCalls(QString sim)
     m_accountsService.setUserProperty(AS_INTERFACE,
                                       "DefaultSimForCalls",
                                       QVariant::fromValue(sim));
-    Q_EMIT(defaultSimForCallsChanged());
 }
 
 QString Cellular::getDefaultSimForMessages()
@@ -93,8 +92,6 @@ void Cellular::setDefaultSimForMessages(QString sim)
     m_accountsService.setUserProperty(AS_INTERFACE,
                                       "DefaultSimForMessages",
                                       QVariant::fromValue(sim));
-
-    Q_EMIT(defaultSimForMessagesChanged());
 }
 
 QVariantMap Cellular::getSimNames()
@@ -120,6 +117,4 @@ void Cellular::setSimNames(QVariantMap sims)
     m_accountsService.setUserProperty(AS_INTERFACE,
                                       "SimNames",
                                       QVariant::fromValue(map));
-
-    Q_EMIT(simNamesChanged());
 }
