@@ -49,7 +49,10 @@ ItemPage {
     }
 
     property var dialog: null
-    property var plugin
+
+    UbuntuSecurityPrivacyPanel {
+        id: securityPrivacy
+    }
 
     function methodToIndex(method) {
         switch (method) {
@@ -82,7 +85,7 @@ ItemPage {
         // Set manually rather than have these be dynamically bound, since
         // the security type can change out from under us, but we don't
         // want dialog to change in that case.
-        dialog.oldMethod = plugin.securityType
+        dialog.oldMethod = securityPrivacy.securityType
         dialog.newMethod = indexToMethod(unlockMethod.selectedIndex)
     }
 
@@ -186,7 +189,7 @@ ItemPage {
                         confirmButton.enabled = text.length > 0
                 }
                 Component.onCompleted: {
-                    if (plugin.securityType !== UbuntuSecurityPrivacyPanel.Swipe)
+                    if (securityPrivacy.securityType !== UbuntuSecurityPrivacyPanel.Swipe)
                         forceActiveFocus()
                 }
             }
@@ -253,7 +256,7 @@ ItemPage {
                             UbuntuSecurityPrivacyPanel.Passphrase
                 onTextChanged: { displayMismatchWarning() }
                 Component.onCompleted: {
-                    if (plugin.securityType === UbuntuSecurityPrivacyPanel.Swipe)
+                    if (securityPrivacy.securityType === UbuntuSecurityPrivacyPanel.Swipe)
                         forceActiveFocus()
                 }
             }
@@ -359,7 +362,7 @@ ItemPage {
                     onClicked: {
                         PopupUtils.close(changeSecurityDialog)
                         unlockMethod.selectedIndex =
-                                methodToIndex(plugin.securityType)
+                                methodToIndex(securityPrivacy.securityType)
                     }
                 }
 
@@ -408,7 +411,7 @@ ItemPage {
                             return
                         }
 
-                        var errorText = plugin.setSecurity(
+                        var errorText = securityPrivacy.setSecurity(
                             currentInput.visible ? currentInput.text : "",
                             newInput.text,
                             changeSecurityDialog.newMethod)
@@ -498,20 +501,20 @@ ItemPage {
             Binding {
                 target: unlockMethod
                 property: "selectedIndex"
-                value: methodToIndex(plugin.securityType)
+                value: methodToIndex(securityPrivacy.securityType)
             }
 
             ListItem.SingleControl {
 
                 id: changeControl
-                visible: plugin.securityType !==
+                visible: securityPrivacy.securityType !==
                             UbuntuSecurityPrivacyPanel.Swipe
 
                 control: Button {
                     property string changePasscode: i18n.tr("Change passcode…")
                     property string changePassphrase: i18n.tr("Change passphrase…")
 
-                    property bool passcode: plugin.securityType ===
+                    property bool passcode: securityPrivacy.securityType ===
                                             UbuntuSecurityPrivacyPanel.Passcode
 
                     objectName: "changePass"

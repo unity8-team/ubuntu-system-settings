@@ -32,7 +32,10 @@ ItemPage {
 
     property bool usePowerd
     property var powerSettings
-    property var plugin
+
+    UbuntuSecurityPrivacyPanel {
+        id: securityPrivacy
+    }
 
     Flickable {
         anchors.fill: parent
@@ -58,7 +61,7 @@ ItemPage {
                 objectName: "lockSecurity"
                 text: i18n.tr("Lock security")
                 value: {
-                    switch (plugin.securityType) {
+                    switch (securityPrivacy.securityType) {
                         case UbuntuSecurityPrivacyPanel.Swipe:
                             return swipe
                         case UbuntuSecurityPrivacyPanel.Passcode:
@@ -75,7 +78,7 @@ ItemPage {
 
             ListItem.SingleValue {
                 objectName: "lockTimeout"
-                property bool lockOnSuspend: plugin.securityType !==
+                property bool lockOnSuspend: securityPrivacy.securityType !==
                                                 UbuntuSecurityPrivacyPanel.Swipe
                 text: lockOnSuspend ? i18n.tr("Lock when idle")
                                     : i18n.tr("Sleep when idle")
@@ -122,12 +125,12 @@ ItemPage {
                 text: i18n.tr("Launcher")
                 control: CheckBox {
                     id: launcherCheck
-                    enabled: plugin.securityType !== UbuntuSecurityPrivacyPanel.Swipe
+                    enabled: securityPrivacy.securityType !== UbuntuSecurityPrivacyPanel.Swipe
 
-                    property bool serverChecked: plugin.enableLauncherWhileLocked || !enabled
+                    property bool serverChecked: securityPrivacy.enableLauncherWhileLocked || !enabled
                     onServerCheckedChanged: checked = serverChecked
                     Component.onCompleted: checked = serverChecked
-                    onTriggered: plugin.enableLauncherWhileLocked = checked
+                    onTriggered: securityPrivacy.enableLauncherWhileLocked = checked
                 }
             }
 
@@ -135,17 +138,17 @@ ItemPage {
                 text: i18n.tr("Notifications and quick settings")
                 control: CheckBox {
                     id: indicatorsCheck
-                    enabled: plugin.securityType !== UbuntuSecurityPrivacyPanel.Swipe
+                    enabled: securityPrivacy.securityType !== UbuntuSecurityPrivacyPanel.Swipe
 
-                    property bool serverChecked: plugin.enableIndicatorsWhileLocked || !enabled
+                    property bool serverChecked: securityPrivacy.enableIndicatorsWhileLocked || !enabled
                     onServerCheckedChanged: checked = serverChecked
                     Component.onCompleted: checked = serverChecked
-                    onTriggered: plugin.enableIndicatorsWhileLocked = checked
+                    onTriggered: securityPrivacy.enableIndicatorsWhileLocked = checked
                 }
             }
 
             ListItem.Caption {
-                text: plugin.securityType === UbuntuSecurityPrivacyPanel.Swipe ?
+                text: securityPrivacy.securityType === UbuntuSecurityPrivacyPanel.Swipe ?
                       i18n.tr("Turn on lock security to restrict access when the device is locked.") :
                       i18n.tr("Other apps and functions will prompt you to unlock.")
             }

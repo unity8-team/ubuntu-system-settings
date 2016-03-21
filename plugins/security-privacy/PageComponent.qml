@@ -157,7 +157,7 @@ ItemPage {
                 text: i18n.tr("Fingerprint ID")
                 progression: true
                 onClicked: pageStack.push(fingeprintPage, {
-                    passSet: plugin.securityType !== UbuntuSecurityPrivacyPanel.Swipe
+                    passSet: securityPrivacy.securityType !== UbuntuSecurityPrivacyPanel.Swipe
                 })
             }
             Component {
@@ -171,8 +171,7 @@ ItemPage {
                 progression: true
                 onClicked: pageStack.push(Qt.resolvedUrl("PhoneLocking.qml"), {
                     usePowerd: usePowerd,
-                    powerSettings: powerSettings,
-                    plugin: securityPrivacy
+                    powerSettings: powerSettings
                 })
             }
             ListItem.SingleValue {

@@ -208,10 +208,10 @@ SecurityPrivacy::SecurityType SecurityPrivacy::getSecurityType()
         return SecurityPrivacy::Passphrase;
     else if (hint == 1)
         return SecurityPrivacy::Passcode;
-    else if (hint == 2)
+    else {
+        qWarning() << "fingerprint security type" << hint;
         return SecurityPrivacy::Fingerprint;
-    else
-        qWarning() << "got unknown security type" << hint;
+    }
 }
 
 bool SecurityPrivacy::setDisplayHint(SecurityType type)
@@ -397,7 +397,7 @@ QString SecurityPrivacy::setSecurity(QString oldValue, QString value, SecurityTy
             setDisplayHint(oldType);
             return badPasswordMessage(oldType);
         }
-    } else if (type == SecurityPrivacy::Password
+    } else if (type == SecurityPrivacy::Passcode
                || type == SecurityPrivacy::Passphrase) {
         QString errorText = setPassword(oldValue, value);
         if (!errorText.isEmpty()) {
