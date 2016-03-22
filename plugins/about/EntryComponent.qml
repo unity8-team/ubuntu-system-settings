@@ -30,7 +30,4 @@ ListItem.Standard {
     iconFrame: false
     text: i18n.tr(model.displayName)
     progression: true
-    onClicked: {
-        Haptics.play();
-    }
 }
