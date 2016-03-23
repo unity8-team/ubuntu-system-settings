@@ -1,3 +1,11 @@
+ubuntu-system-settings (0.3+16.04.20160323-0ubuntu1) xenial; urgency=medium
+
+  [ jonas-drange ]
+  * Add External Keyboard panel which allows for configuration of the
+    default keymap. (LP: #1524400, #1491340)
+
+ -- Michael Zanetti <michael.zanetti@canonical.com>  Wed, 23 Mar 2016 08:46:55 +0000
+
 ubuntu-system-settings (0.3+16.04.20160318-0ubuntu1) xenial; urgency=medium
 
   * Process pairing attempts for unknown devices correctly (LP:
