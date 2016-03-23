@@ -1,3 +1,11 @@
+ubuntu-system-settings (0.3+16.04.20160323.2-0ubuntu1) xenial; urgency=medium
+
+  [ Jim Hodapp ]
+  * Make sure the sound preview plugin can find the QML Audio.audioRole
+    property.
+
+ -- Timo Jyrinki <timo.jyrinki@canonical.com>  Wed, 23 Mar 2016 22:30:28 +0000
+
 ubuntu-system-settings (0.3+16.04.20160323-0ubuntu1) xenial; urgency=medium
 
   [ jonas-drange ]
