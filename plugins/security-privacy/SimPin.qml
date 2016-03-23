@@ -441,7 +441,7 @@ ItemPage {
             }
 
             ListItem.Caption {
-                text: i18n.tr("When a SIM PIN is set, it must be entered to access cellular services after restarting the phone or swapping the SIM.")
+                text: i18n.tr("When a SIM PIN is set, it must be entered to access cellular services after restarting the device or swapping the SIM.")
             }
 
             ListItem.Caption {

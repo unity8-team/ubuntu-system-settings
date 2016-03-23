@@ -45,6 +45,7 @@ Page {
     function getTypeString(type) {
         switch (type) {
         case Device.Computer:   return i18n.tr("Computer");
+        case Device.Smartphone: return i18n.tr("Phone");
         case Device.Phone:      return i18n.tr("Phone");
         case Device.Modem:      return i18n.tr("Modem");
         case Device.Network:    return i18n.tr("Network");
@@ -174,7 +175,6 @@ Page {
                                 || backend.selectedDevice.connection == Device.Connecting)) {
                             backend.disconnectDevice();
                         } else {
-                            backend.stopDiscovery()
                             backend.connectDevice(backend.selectedDevice.address);
                         }
 
@@ -182,7 +182,7 @@ Page {
                         pageStack.pop();
                     }
                     visible: backend.selectedDevice ? true : false
-                    enabled: backend.selectedDevice && backend.powered ? (backend.isSupportedType(backend.selectedDevice.type) || backend.selectedDevice.connection != Device.Disconnected) : false
+                    enabled: backend.selectedDevice && backend.powered ? true : false
                 }
             }
             ListItem.SingleControl {

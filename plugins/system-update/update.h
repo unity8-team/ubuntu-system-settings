@@ -30,6 +30,7 @@ namespace UpdatePlugin {
 class Update : public QObject
 {
     Q_OBJECT
+    Q_ENUMS(Status)
     Q_PROPERTY(bool systemUpdate READ systemUpdate WRITE setSystemUpdate
                NOTIFY systemUpdateChanged)
     Q_PROPERTY(QString packageName READ getPackageName NOTIFY packageNameChanged)
@@ -57,6 +58,10 @@ class Update : public QObject
     Q_PROPERTY(QString downloadUrl READ downloadUrl NOTIFY downloadUrlChanged)
     Q_PROPERTY(QString clickToken READ clickToken NOTIFY clickTokenChanged)
     Q_PROPERTY(QString downloadSha512 READ downloadSha512 NOTIFY downloadSha512Changed)
+    Q_PROPERTY (Status status
+                READ status
+                WRITE setStatus
+                NOTIFY statusChanged)
 
 Q_SIGNALS:
     void systemUpdateChanged();
@@ -76,8 +81,16 @@ Q_SIGNALS:
     void clickTokenChanged();
     void packageNameChanged();
     void downloadSha512Changed();
+    void statusChanged();
 
 public:
+    enum Status {
+         NotStarted,
+         Downloading,
+         Downloaded,
+         Paused
+    };
+
     explicit Update(QObject *parent = 0);
     virtual ~Update();
 
@@ -99,6 +112,7 @@ public:
     QString downloadUrl() { return m_downloadUrl; }
     QString clickToken() { return m_clickToken; }
     QString downloadSha512() { return m_download_sha512; }
+    Status status() { return m_status; }
 
     void setSystemUpdate(bool isSystem);
     void initializeApplication(QString packagename, QString title,
@@ -118,6 +132,7 @@ public:
     void setDownloadUrl(const QString &url);
     void setClickToken(const QString &token) { m_clickToken = token; Q_EMIT clickTokenChanged(); }
     void setDownloadSha512(const QString &sha512) { m_download_sha512 = sha512; Q_EMIT downloadSha512Changed(); }
+    void setStatus(Status s) { m_status = s; Q_EMIT statusChanged(); }
 
 private:
     int m_binary_filesize;
@@ -138,6 +153,7 @@ private:
     bool m_update_ready;
     bool m_update_state;
     QString m_download_sha512;
+    Status m_status = Status::NotStarted;
 
     bool getIgnoreUpdates();
 };

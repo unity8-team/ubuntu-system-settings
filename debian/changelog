@@ -1,3 +1,121 @@
+ubuntu-system-settings (0.3+16.04.20160318-0ubuntu1) xenial; urgency=medium
+
+  * Process pairing attempts for unknown devices correctly (LP:
+    #1539158)
+
+ -- Simon Fels <simon.busch@canonical.com>  Fri, 18 Mar 2016 17:56:23 +0000
+
+ubuntu-system-settings (0.3+16.04.20160316.1-0ubuntu1) xenial; urgency=medium
+
+  [ Michael Terry ]
+  * Use geonames library instead of timezonemap library to search city
+    names, which gives us slightly better sorting (and future
+    improvements)
+
+  [ Rodney Dawes ]
+  * Fix the CMakeLists.txt to handle settings.js generation and
+    translations better. (LP: #1555623)
+
+  [ jonas-drange ]
+  * Replace usage of backgroundText from the selected palette for labels
+    with baseText from normal palette.
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Wed, 16 Mar 2016 17:03:54 +0000
+
+ubuntu-system-settings (0.3+16.04.20160314.4-0ubuntu1) xenial; urgency=medium
+
+  [ jonas-drange ]
+  * New VPN panel with happy path test (LP: #1495553)
+
+ -- Jonas G. Drange <ci-train-bot@canonical.com>  Mon, 14 Mar 2016 21:26:48 +0000
+
+ubuntu-system-settings (0.3+16.04.20160314-0ubuntu1) xenial; urgency=medium
+
+  * Rework Bluetooth device discovery handling
+
+ -- Simon Fels <simon.busch@canonical.com>  Mon, 14 Mar 2016 14:09:57 +0000
+
+ubuntu-system-settings (0.3+16.04.20160312-0ubuntu1) xenial; urgency=medium
+
+  [ Ken VanDine ]
+  * Added status tracking for updates to be used for system updates.
+    Added handling of started signal from system-image-dbus as well as
+    ForceAllowGSMDownload (LP: #1508081)
+
+ -- Barry Warsaw <ci-train-bot@canonical.com>  Sat, 12 Mar 2016 03:41:08 +0000
+
+ubuntu-system-settings (0.3+16.04.20160311-0ubuntu1) xenial; urgency=medium
+
+  [ Ken VanDine ]
+  * Enable mouse test and use LD_PRELOAD to fix crash running with Xvfb
+  * Hide MouseDoubleClickSpeed and TouchpadDoubleClickSpeed settings
+    because they are not supported by USC yet.
+  * Use accountsservice for properties instead of gsettings
+
+ -- Michał Sawicz <michal.sawicz@canonical.com>  Fri, 11 Mar 2016 03:13:05 +0000
+
+ubuntu-system-settings (0.3+16.04.20160304-0ubuntu1) xenial; urgency=medium
+
+  [ CI Train Bot ]
+  * Resync trunk.
+
+  [ jonas-drange ]
+  * Drop our own InputInfo implementation and use QSystemInfo 5.5. (LP:
+    #1549314)
+
+ -- Jonas G. Drange <ci-train-bot@canonical.com>  Fri, 04 Mar 2016 13:58:59 +0000
+
+ubuntu-system-settings (0.3+16.04.20160226.1-0ubuntu1) xenial; urgency=medium
+
+  * Add InAppPurchases to privacy plug-in. Update translation template.
+    Fix translation template to not include full path to settings.js
+    file. (LP: #1524943)
+
+ -- Rodney Dawes <ci-train-bot@canonical.com>  Fri, 26 Feb 2016 19:07:26 +0000
+
+ubuntu-system-settings (0.3+16.04.20160226-0ubuntu1) xenial; urgency=medium
+
+  * Subtract amount used by apps when computing otherSize (LP: #1524424)
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Fri, 26 Feb 2016 12:32:49 +0000
+
+ubuntu-system-settings (0.3+16.04.20160225-0ubuntu1) xenial; urgency=medium
+
+  * Don't use the cellular portion of the location accuracy string when
+    there is no modem available (LP: #1545021)
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Thu, 25 Feb 2016 14:04:44 +0000
+
+ubuntu-system-settings (0.3+16.04.20160218-0ubuntu1) xenial; urgency=medium
+
+  [ jonas-drange ]
+  * Define a map used for mapping short, panel-agnostic URLs and expose
+    translation functionality to both QML and c++. (LP: #1489833,
+    #1533835)
+
+ -- Charles Kerr <charles.kerr@canonical.com>  Thu, 18 Feb 2016 17:06:34 +0000
+
+ubuntu-system-settings (0.3+16.04.20160208-0ubuntu1) xenial; urgency=medium
+
+  * Make cellular and phone dynamically visible (LP: #1541588)
+  * Set a fixed width to 50 GU when in windowed mode (LP: #1542050)
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Mon, 08 Feb 2016 14:32:42 +0000
+
+ubuntu-system-settings (0.3+16.04.20160129-0ubuntu1) xenial; urgency=medium
+
+  * ￼Return "Phone" for type Smartphone (LP: #1534221)
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Fri, 29 Jan 2016 15:43:18 +0000
+
+ubuntu-system-settings (0.3+16.04.20160128-0ubuntu1) xenial; urgency=medium
+
+  * Allow pairing regardless of type (LP: #1535660, #1534221)
+  * Exposed adapterAddress in the bluetooth plugin to be used to get the
+    address in the about plugin (LP: #1537029)
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Thu, 28 Jan 2016 14:23:03 +0000
+
 ubuntu-system-settings (0.3+16.04.20160121-0ubuntu1) xenial; urgency=medium
 
   * Don't display the ActivityIndicator while searching, causes to much

@@ -33,7 +33,7 @@ Column {
             if (pocketPC)
                 return i18n.tr("Connect a mouse or touchpad via USB, or use a Bluetooth device. If a Bluetooth device isn’t detected, make sure it is turned on and its batteries are charged.")
             else
-                return i18n.tr("You need to use a Bluetooth mouse or touchpad with this display. Make sure it is close to the phone and its batteries are charged.")
+                return i18n.tr("You need to use a Bluetooth mouse or touchpad with this display. Make sure it is close to the device and its batteries are charged.")
         }
     }
 }

@@ -64,12 +64,17 @@ MainView {
             if (!loadPluginByName(defaultPlugin, pluginOptions))
                 Qt.quit()
         }
+
+        // when running in windowed mode, use a fixed width
+        view.minimumWidth  = units.gu(50)
+        view.maximumWidth = units.gu(50)
     }
 
     Connections {
         target: UriHandler
         onOpened: {
-            var url = String(uris)
+            var url = String(uris);
+            url = Utilities.mapUrl(url);
             var panelAndOptions = url.replace("settings:///system/", "")
             var optionIndex = panelAndOptions.indexOf("?")
             var panel = optionIndex > -1 ?

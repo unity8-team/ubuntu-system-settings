@@ -287,7 +287,7 @@ Component {
             objectName: "networknameLabel"
             fontSize: "medium"
             font.bold: false
-            color: Theme.palette.selected.backgroundText
+            color: Theme.palette.normal.baseText
             elide: Text.ElideRight
             visible: !ssid
         }
@@ -309,7 +309,7 @@ Component {
             objectName: "securityListLabel"
             fontSize: "medium"
             font.bold: false
-            color: Theme.palette.selected.backgroundText
+            color: Theme.palette.normal.baseText
             elide: Text.ElideRight
         }
 
@@ -340,7 +340,7 @@ Component {
             objectName: "authListLabel"
             fontSize: "medium"
             font.bold: false
-            color: Theme.palette.selected.backgroundText
+            color: Theme.palette.normal.baseText
             elide: Text.ElideRight
             visible: securityList.selectedIndex === 2 ||
                      securityList.selectedIndex === 4
@@ -365,7 +365,7 @@ Component {
             objectName: "p2authLabel"
             fontSize: "medium"
             font.bold: false
-            color: Theme.palette.selected.backgroundText
+            color: Theme.palette.normal.baseText
             elide: Text.ElideRight
             visible: (securityList.selectedIndex === 2 ||
                       securityList.selectedIndex === 4 /* WPA or D-WEP */) &&
@@ -398,7 +398,7 @@ Component {
             objectName: "cacertListLabel"
             fontSize: "medium"
             font.bold: false
-            color: Theme.palette.selected.backgroundText
+            color: Theme.palette.normal.baseText
             visible: (securityList.selectedIndex === 2 ||
                       securityList.selectedIndex === 4 /* WPA or D-WEP */) &&
                      (authList.selectedIndex === 0 ||
@@ -498,7 +498,7 @@ Component {
             objectName: "cacertHintLabel"
             fontSize: "small"
             font.bold: false
-            color: Theme.palette.selected.backgroundText
+            color: Theme.palette.normal.baseText
             visible: (securityList.selectedIndex === 2 ||
                       securityList.selectedIndex === 4 /* WPA or D-WEP */) &&
                      (authList.selectedIndex === 0 ||
@@ -514,7 +514,7 @@ Component {
             objectName: "usercertLabel"
             fontSize: "medium"
             font.bold: false
-            color: Theme.palette.selected.backgroundText
+            color: Theme.palette.normal.baseText
             visible: (securityList.selectedIndex === 2 ||
                       securityList.selectedIndex === 4) &&
                       authList.selectedIndex === 0 // only for TLS
@@ -556,7 +556,7 @@ Component {
             objectName: "userprivatekeyLabel"
             fontSize: "medium"
             font.bold: false
-            color: Theme.palette.selected.backgroundText
+            color: Theme.palette.normal.baseText
             visible: (securityList.selectedIndex === 2 ||
                       securityList.selectedIndex === 4) &&
                      (authList.selectedIndex === 0) // only for TLS
@@ -624,7 +624,7 @@ Component {
             objectName: "pacFileLabel"
             fontSize: "medium"
             font.bold: false
-            color: Theme.palette.selected.backgroundText
+            color: Theme.palette.normal.baseText
             visible: (securityList.selectedIndex === 2 ||
                       securityList.selectedIndex === 4 /* WPA or D-WEP */) &&
                       (authList.selectedIndex === 3)
@@ -674,7 +674,7 @@ Component {
             objectName: "pacProvisioningListLabel"
             fontSize: "medium"
             font.bold: false
-            color: Theme.palette.selected.backgroundText
+            color: Theme.palette.normal.baseText
             elide: Text.ElideRight
             visible: (securityList.selectedIndex === 2 ||
                       securityList.selectedIndex === 4) &&
@@ -701,7 +701,7 @@ Component {
             objectName: "peapVersionListLabel"
             fontSize: "medium"
             font.bold: false
-            color: Theme.palette.selected.backgroundText
+            color: Theme.palette.normal.baseText
             elide: Text.ElideRight
             visible: (securityList.selectedIndex === 2 ||
                       securityList.selectedIndex === 4) &&
@@ -727,7 +727,7 @@ Component {
             objectName: "anonymousIdentityLabel"
             fontSize: "medium"
             font.bold: false
-            color: Theme.palette.selected.backgroundText
+            color: Theme.palette.normal.baseText
             visible: (securityList.selectedIndex === 2 &&
                       authList.selectedIndex !== 2)
         }
@@ -758,7 +758,7 @@ Component {
             objectName: "usernameLabel"
             fontSize: "medium"
             font.bold: false
-            color: Theme.palette.selected.backgroundText
+            color: Theme.palette.normal.baseText
             elide: Text.ElideRight
             visible: (securityList.selectedIndex === 2 ||
                       securityList.selectedIndex === 4 ||
@@ -790,7 +790,7 @@ Component {
             objectName: "passwordListLabel"
             fontSize: "medium"
             font.bold: false
-            color: Theme.palette.selected.backgroundText
+            color: Theme.palette.normal.baseText
             elide: Text.ElideRight
             visible: securityList.selectedIndex !== 0
         }
@@ -822,7 +822,7 @@ Component {
                 text : i18n.tr("Show password")
                 objectName: "passwordVisibleLabel"
                 fontSize: "medium"
-                color: Theme.palette.selected.backgroundText
+                color: Theme.palette.normal.baseText
                 elide: Text.ElideRight
                 height: passwordVisibleSwitch.height
                 verticalAlignment: Text.AlignVCenter
@@ -858,7 +858,7 @@ Component {
                 text : i18n.tr("Remember password")
                 objectName: "passwordRememberLabel"
                 fontSize: "medium"
-                color: Theme.palette.selected.backgroundText
+                color: Theme.palette.normal.baseText
                 elide: Text.ElideRight
                 height: passwordRememberSwitch.height
                 verticalAlignment: Text.AlignVCenter

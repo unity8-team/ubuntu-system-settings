@@ -61,6 +61,8 @@ SystemUpdate::SystemUpdate(QObject *parent) :
                 this, SLOT(updateDownloadProgress(int, double)));
     connect(&m_SystemServiceIface, SIGNAL(UpdatePaused(int)),
                 this, SIGNAL(updatePaused(int)));
+    connect(&m_SystemServiceIface, SIGNAL(DownloadStarted()),
+                this, SIGNAL(downloadStarted()));
     connect(&m_SystemServiceIface, SIGNAL(UpdateDownloaded()),
                 this, SIGNAL(updateDownloaded()));
     connect(&m_SystemServiceIface, SIGNAL(UpdateFailed(int, QString)),
@@ -80,6 +82,10 @@ void SystemUpdate::checkForUpdate() {
 
 void SystemUpdate::downloadUpdate() {
     m_SystemServiceIface.asyncCall("DownloadUpdate");
+}
+
+void SystemUpdate::forceAllowGSMDownload() {
+    m_SystemServiceIface.asyncCall("ForceAllowGSMDownload");
 }
 
 void SystemUpdate::applyUpdate() {
@@ -140,10 +146,10 @@ bool SystemUpdate::checkTarget() {
 }
 
 QString SystemUpdate::deviceName() {
-        if (m_deviceName.isNull())
-            setCurrentDetailedVersion();
+    if (m_deviceName.isNull())
+        setCurrentDetailedVersion();
 
-        return m_deviceName;
+    return m_deviceName;
 }
 
 QDateTime SystemUpdate::lastUpdateDate() {

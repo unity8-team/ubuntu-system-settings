@@ -1,3 +1,0 @@
-module Ubuntu.SystemSettings.Mouse.InputInfo
-plugin InputInfo
-typeinfo InputInfo.qmltypes

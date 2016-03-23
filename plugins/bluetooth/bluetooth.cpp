@@ -65,6 +65,12 @@ Bluetooth::Bluetooth(const QDBusConnection &dbus, QObject *parent):
 
     QObject::connect(&m_devices, SIGNAL(devicePairingDone(Device*,bool)),
                      this, SIGNAL(devicePairingDone(Device*,bool)));
+
+    QObject::connect(&m_devices, SIGNAL(adapterNameChanged()),
+                     this, SIGNAL(adapterNameChanged()));
+
+    QObject::connect(&m_devices, SIGNAL(adapterAddressChanged()),
+                     this, SIGNAL(adapterAddressChanged()));
 }
 
 void Bluetooth::setSelectedDevice(const QString &address)
@@ -81,9 +87,9 @@ void Bluetooth::resetSelectedDevice()
     Q_EMIT(selectedDeviceChanged());
 }
 
-void Bluetooth::toggleDiscovery()
+void Bluetooth::trySetDiscoverable(bool discoverable)
 {
-    m_devices.toggleDiscovery();
+    m_devices.trySetDiscoverable(discoverable);
 }
 
 void Bluetooth::startDiscovery()
@@ -96,29 +102,19 @@ void Bluetooth::stopDiscovery()
     m_devices.stopDiscovery();
 }
 
-void Bluetooth::trySetDiscoverable(bool discoverable)
+void Bluetooth::toggleDiscovery()
 {
-    m_devices.trySetDiscoverable(discoverable);
+    m_devices.toggleDiscovery();
 }
 
-bool Bluetooth::isSupportedType(const int type)
+void Bluetooth::blockDiscovery()
 {
-    switch((Device::Type)type) {
+    m_devices.blockDiscovery();
+}
 
-    case Device::Type::Headset:
-    case Device::Type::Headphones:
-    case Device::Type::Speakers:
-    case Device::Type::Carkit:
-    case Device::Type::OtherAudio:
-    case Device::Type::Keyboard:
-    case Device::Type::Mouse:
-    case Device::Type::Tablet:
-    case Device::Type::Watch:
-        return true;
-
-    default:
-        return false;
-    }
+void Bluetooth::unblockDiscovery()
+{
+    m_devices.unblockDiscovery();
 }
 
 /***
