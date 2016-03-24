@@ -282,12 +282,6 @@ quint64 StorageAbout::getHomeSize()
     return m_homeSize;
 }
 
-void StorageAbout::populateClickModel()
-{
-    qWarning() << Q_FUNC_INFO;
-    m_clickModel.buildClickList();
-}
-
 void StorageAbout::populateSizes()
 {
     quint32 *running = new quint32(0);

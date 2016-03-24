@@ -35,8 +35,7 @@ ClickModel::ClickModel(QObject *parent):
     QAbstractTableModel(parent),
     m_totalClickSize(0)
 {
-    //m_clickPackages = buildClickList();
-    m_totalClickSize = 0;
+    m_clickPackages = buildClickList();
 }
 
 /* Look through `hooks' for a desktop or ini file in `directory'
