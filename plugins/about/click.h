@@ -54,6 +54,7 @@ public:
     QVariant data (const QModelIndex &index, int role = Qt::DisplayRole) const;
     QHash<int, QByteArray> roleNames() const;
     quint64 getClickSize() const;
+    QList<Click> buildClickList();
 
 private:
     void populateFromDesktopOrIniFile(Click *newClick,
@@ -61,7 +62,6 @@ private:
                                       QDir directory,
                                       QString name);
     Click buildClick(QVariantMap manifest);
-    QList<Click> buildClickList();
 
     QList<Click> m_clickPackages;
     int m_totalClickSize;

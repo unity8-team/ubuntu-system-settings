@@ -114,7 +114,10 @@ ItemPage {
         property bool ready: false
         // All of these events come simultaneously
         onMoviesSizeChanged: ready = true
-        Component.onCompleted: populateSizes()
+        Component.onCompleted: {
+            populateSizes();
+            populateClickModel();
+        }
         sortRole: settingsId.storageSortByName ?
                       ClickRoles.DisplayNameRole :
                       ClickRoles.InstalledSizeRole

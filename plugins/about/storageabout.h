@@ -108,6 +108,7 @@ public:
     quint64 getPicturesSize();
     quint64 getHomeSize();
     Q_INVOKABLE void populateSizes();
+    Q_INVOKABLE void populateClickModel();
     QStringList getMountedVolumes() const;
     Q_INVOKABLE QString getDevicePath (const QString mount_point);
     Q_INVOKABLE qint64 getFreeSpace (const QString mount_point);
