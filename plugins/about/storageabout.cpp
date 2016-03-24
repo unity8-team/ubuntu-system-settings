@@ -319,9 +319,13 @@ QStringList StorageAbout::getMountedVolumes() const
 {
     QStringList out;
 
-    Q_FOREACH (const QStorageInfo &storage, QStorageInfo::mountedVolumes())
-        if (storage.isValid() && storage.isReady())
+    Q_FOREACH (const QStorageInfo &storage, QStorageInfo::mountedVolumes()) {
+        if (storage.isValid() && storage.isReady()) {
+            qWarning() << "name:" << storage.name();
+	    qWarning() << "fileSystemType:" << storage.fileSystemType();
             out.append(storage.rootPath());
+        }
+    }
 
     return out;
 }
