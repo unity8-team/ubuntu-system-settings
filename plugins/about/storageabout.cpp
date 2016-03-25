@@ -321,10 +321,16 @@ QStringList StorageAbout::getMountedVolumes() const
 
     Q_FOREACH (const QStorageInfo &storage, QStorageInfo::mountedVolumes()) {
         if (storage.isValid() && storage.isReady()) {
-            if (isInternal(storage.rootPath())) {
-                qWarning() << "rootPath:" << storage.rootPath();
+            QString drive(storage.rootPath());
+            QString devicePath(getDevicePath(drive));
+            /* only deal with the device's storage for now, external mounts
+               handling would require being smarter on the categories
+               computation as well and is not in the current design */
+            if (isInternal(drive) && !devicePath.isEmpty() && !out.contains(drive)) {
+                qWarning() << "rootPath:" << drive;
 	        qWarning() << "fileSystemType:" << storage.fileSystemType();
-                out.append(storage.rootPath());
+                qWarning() << "devicePath:" << devicePath;
+                out.append(drive);
             }
         }
     }
@@ -332,7 +338,7 @@ QStringList StorageAbout::getMountedVolumes() const
     return out;
 }
 
-QString StorageAbout::getDevicePath(const QString mount_point)
+QString StorageAbout::getDevicePath(const QString mount_point) const
 {
     QString s_mount_point;
     GUnixMountEntry * g_mount_point = nullptr;
