@@ -43,8 +43,7 @@ ItemPage {
             /* only deal with the device's storage for now, external mounts
                handling would require being smarter on the categories
                computation as well and is not in the current design */
-            if (backendInfo.isInternal(drive) &&
-                paths.indexOf(path) == -1 && // Haven't seen this device before
+            if (paths.indexOf(path) == -1 && // Haven't seen this device before
                 path.charAt(0) === "/") { // Has a real mount point
                 drives.push(drive)
                 paths.push(path)

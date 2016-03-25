@@ -321,9 +321,11 @@ QStringList StorageAbout::getMountedVolumes() const
 
     Q_FOREACH (const QStorageInfo &storage, QStorageInfo::mountedVolumes()) {
         if (storage.isValid() && storage.isReady()) {
-            qWarning() << "name:" << storage.name();
-	    qWarning() << "fileSystemType:" << storage.fileSystemType();
-            out.append(storage.rootPath());
+            if (isInternal(storage.rootPath())) {
+                qWarning() << "rootPath:" << storage.rootPath();
+	        qWarning() << "fileSystemType:" << storage.fileSystemType();
+                out.append(storage.rootPath());
+            }
         }
     }
 
@@ -366,7 +368,7 @@ QString StorageAbout::getDevicePath(const QString mount_point)
  * met: http://www.gnu.org/copyleft/gpl.html.
  *
  */
-bool StorageAbout::isInternal(const QString &drive)
+bool StorageAbout::isInternal(const QString &drive) const
 {
     bool ret = false;
     FILE *fsDescription = setmntent(_PATH_MOUNTED, "r");
