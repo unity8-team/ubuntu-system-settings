@@ -317,18 +317,28 @@ void StorageAbout::populateSizes()
 
 QStringList StorageAbout::getMountedVolumes() const
 {
+    QStringList checked;
     QStringList out;
 
     Q_FOREACH (const QStorageInfo &storage, QStorageInfo::mountedVolumes()) {
         if (storage.isValid() && storage.isReady()) {
             QString drive(storage.rootPath());
+            qWarning() << "DRIVE:" << drive;
+            /* Only check devices once */
+            if (checked.contains(drive))
+                continue;
+             
+            checked.append(drive);
             QString devicePath(getDevicePath(drive));
+            if (devicePath.isEmpty() || out.contains(drive))
+                continue;
+
             /* only deal with the device's storage for now, external mounts
                handling would require being smarter on the categories
                computation as well and is not in the current design */
-            if (isInternal(drive) && !devicePath.isEmpty() && !out.contains(drive)) {
+            if (isInternal(drive)) {
                 qWarning() << "rootPath:" << drive;
-	        qWarning() << "fileSystemType:" << storage.fileSystemType();
+                qWarning() << "fileSystemType:" << storage.fileSystemType();
                 qWarning() << "devicePath:" << devicePath;
                 out.append(drive);
             }
