@@ -1,3 +1,24 @@
+ubuntu-system-settings (0.3+16.04.20160325-0ubuntu1) xenial; urgency=medium
+
+  * Bump Ubuntu.Content import to 1.3 to prevent mixed version imports
+    (LP: #1554621)
+  * Only include the "any data connection" item when there is a modem
+    present. (LP: #1560884)
+  * Play haptic feedback when selecting About and Reset from the main
+    view. (LP: #1560571)
+  * Removed unnecessary mouse-plugin, it was intended for use with
+    dynamic visibility, which is no longer needed.
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Fri, 25 Mar 2016 20:53:47 +0000
+
+ubuntu-system-settings (0.3+16.04.20160323.2-0ubuntu1) xenial; urgency=medium
+
+  [ Jim Hodapp ]
+  * Make sure the sound preview plugin can find the QML Audio.audioRole
+    property.
+
+ -- Timo Jyrinki <timo.jyrinki@canonical.com>  Wed, 23 Mar 2016 22:30:28 +0000
+
 ubuntu-system-settings (0.3+16.04.20160323-0ubuntu1) xenial; urgency=medium
 
   [ jonas-drange ]
