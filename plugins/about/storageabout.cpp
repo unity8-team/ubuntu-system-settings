@@ -393,7 +393,8 @@ bool StorageAbout::isInternal(const QString &drive)
             break;
         }
 
-        if (strcmp(entry.mnt_type, "rootfs") == 0) {
+        if (strcmp(entry.mnt_type, "rootfs") == 0
+            || strcmp(entry.mnt_type, "ext4") == 0) {
             ret = true;
             break;
         }
