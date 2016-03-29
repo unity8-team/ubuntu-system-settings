@@ -41,7 +41,7 @@ ItemPage {
                 right: parent.right
             }
             horizontalAlignment: Text.AlignHCenter
-            text: i18n.tr("Scanning devices")
+            text: i18n.tr("Scanning")
         }
         ActivityIndicator {
             id: progress
