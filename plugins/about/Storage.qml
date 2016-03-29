@@ -31,10 +31,23 @@ ItemPage {
     objectName: "storagePage"
     title: i18n.tr("Storage")
 
-    ActivityIndicator {
+    Column {
         anchors.centerIn: parent
-        visible: running
-        running: !pageLoader.visible
+        visible: progress.running
+        spacing: units.gu(2)
+        Label {
+            anchors {
+                left: parent.left
+                right: parent.right
+            }
+            horizontalAlignment: Text.AlignHCenter
+            text: i18n.tr("Scanning devices")
+        }
+        ActivityIndicator {
+            id: progress
+            visible: running
+            running: !pageLoader.visible
+        }
     }
 
     Loader {
