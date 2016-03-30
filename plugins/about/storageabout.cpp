@@ -320,8 +320,6 @@ QStringList StorageAbout::getMountedVolumes()
     if (m_mountedVolumes.isEmpty())
         prepareMountedVolumes();
 
-    qWarning() << Q_FUNC_INFO << m_mountedVolumes.length();
-
     return m_mountedVolumes;
 }
 
