@@ -28,100 +28,125 @@ import Ubuntu.SystemSettings.StorageAbout 1.0
 
 ItemPage {
     id: storagePage
-
     objectName: "storagePage"
     title: i18n.tr("Storage")
-    flickable: scrollWidget
 
-    property var allDrives: {
-        var drives = ["/"] // Always consider /
-        var paths = [backendInfo.getDevicePath("/")]
-        var systemDrives = backendInfo.mountedVolumes
-        for (var i = 0; i < systemDrives.length; i++) {
-            var drive = systemDrives[i]
-            var path = backendInfo.getDevicePath(drive)
-            /* only deal with the device's storage for now, external mounts
-               handling would require being smarter on the categories
-               computation as well and is not in the current design */
-            if (backendInfo.isInternal(drive) &&
-                paths.indexOf(path) == -1 && // Haven't seen this device before
-                path.charAt(0) === "/") { // Has a real mount point
-                drives.push(drive)
-                paths.push(path)
+    Column {
+        anchors.centerIn: parent
+        visible: progress.running
+        spacing: units.gu(2)
+        Label {
+            anchors {
+                left: parent.left
+                right: parent.right
             }
+            horizontalAlignment: Text.AlignHCenter
+            text: i18n.tr("Scanning")
         }
-        return drives
-    }
-    property real diskSpace: {
-        var space = 0
-        for (var i = 0; i < allDrives.length; i++) {
-            space += backendInfo.getTotalSpace(allDrives[i])
+        ActivityIndicator {
+            id: progress
+            visible: running
+            running: !pageLoader.visible
         }
-        return space
-    }
-    /* Limit the free space to the user available one (see bug #1374134) */
-    property real freediskSpace: {
-        return backendInfo.getFreeSpace("/home")
     }
 
-    property real usedByUbuntu: diskSpace -
-                                freediskSpace -
-                                backendInfo.homeSize -
-                                backendInfo.totalClickSize
-    property real otherSize: diskSpace -
-                             freediskSpace -
-                             usedByUbuntu -
-                             backendInfo.totalClickSize -
-                             backendInfo.moviesSize -
-                             backendInfo.picturesSize -
-                             backendInfo.audioSize
-    property variant spaceColors: [
-        UbuntuColors.orange,
-        "red",
-        "blue",
-        "green",
-        "yellow",
-        UbuntuColors.lightAubergine]
-    property variant spaceLabels: [
-        i18n.tr("Used by Ubuntu"),
-        i18n.tr("Videos"),
-        i18n.tr("Audio"),
-        i18n.tr("Pictures"),
-        i18n.tr("Other files"),
-        i18n.tr("Used by apps")]
-    property variant spaceValues: [
-        usedByUbuntu, // Used by Ubuntu
-        backendInfo.moviesSize,
-        backendInfo.audioSize,
-        backendInfo.picturesSize,
-        otherSize, //Other Files
-        backendInfo.totalClickSize]
-    property variant spaceObjectNames: [
-        "usedByUbuntuItem",
-        "moviesItem",
-        "audioItem",
-        "picturesItem",
-        "otherFilesItem",
-        "usedByAppsItem"]
+    Loader {
+        id: pageLoader
+        anchors.fill: parent
+        onStateChanged: {
+            if (state === Loader.Ready)
+                storagePage.flickable = scrollWidget;
+        }
 
-    GSettings {
-        id: settingsId
-        schema.id: "com.ubuntu.touch.system-settings"
-    }
+        asynchronous: true
+        visible: status == Loader.Ready
+        sourceComponent: Item {
+            anchors.fill: parent
+            property var allDrives: {
+                var drives = ["/"] // Always consider /
+                var paths = [backendInfo.getDevicePath("/")]
+                var systemDrives = backendInfo.mountedVolumes
+                for (var i = 0; i < systemDrives.length; i++) {
+                    var drive = systemDrives[i]
+                    var path = backendInfo.getDevicePath(drive)
+                    if (paths.indexOf(path) == -1 && // Haven't seen this device before
+                        path.charAt(0) === "/") { // Has a real mount point
+                        drives.push(drive)
+                        paths.push(path)
+                    }
+                }
+                return drives
+            }
+            property real diskSpace: {
+                var space = 0
+                for (var i = 0; i < allDrives.length; i++) {
+                    space += backendInfo.getTotalSpace(allDrives[i])
+                }
+                return space
+            }
+            /* Limit the free space to the user available one (see bug #1374134) */
+            property real freediskSpace: {
+                return backendInfo.getFreeSpace("/home")
+            }
 
-    UbuntuStorageAboutPanel {
-        id: backendInfo
-        property bool ready: false
-        // All of these events come simultaneously
-        onMoviesSizeChanged: ready = true
-        Component.onCompleted: populateSizes()
-        sortRole: settingsId.storageSortByName ?
-                      ClickRoles.DisplayNameRole :
-                      ClickRoles.InstalledSizeRole
+            property real usedByUbuntu: diskSpace -
+                                        freediskSpace -
+                                        backendInfo.homeSize -
+                                        backendInfo.totalClickSize
+            property real otherSize: diskSpace -
+                                     freediskSpace -
+                                     usedByUbuntu -
+                                     backendInfo.totalClickSize -
+                                     backendInfo.moviesSize -
+                                     backendInfo.picturesSize -
+                                     backendInfo.audioSize
+            property variant spaceColors: [
+                UbuntuColors.orange,
+                "red",
+                "blue",
+                "green",
+                "yellow",
+                UbuntuColors.lightAubergine]
+            property variant spaceLabels: [
+                i18n.tr("Used by Ubuntu"),
+                i18n.tr("Videos"),
+                i18n.tr("Audio"),
+                i18n.tr("Pictures"),
+                i18n.tr("Other files"),
+                i18n.tr("Used by apps")]
+            property variant spaceValues: [
+                usedByUbuntu, // Used by Ubuntu
+                backendInfo.moviesSize,
+                backendInfo.audioSize,
+                backendInfo.picturesSize,
+                otherSize, //Other Files
+                backendInfo.totalClickSize]
+            property variant spaceObjectNames: [
+                "usedByUbuntuItem",
+                "moviesItem",
+                "audioItem",
+                "picturesItem",
+                "otherFilesItem",
+                "usedByAppsItem"]
 
-    }
+            GSettings {
+                id: settingsId
+                schema.id: "com.ubuntu.touch.system-settings"
+            }
 
-    Flickable {
+            UbuntuStorageAboutPanel {
+                id: backendInfo
+                property bool ready: false
+                // All of these events come simultaneously
+                onMoviesSizeChanged: ready = true
+                Component.onCompleted: populateSizes()
+                sortRole: settingsId.storageSortByName ?
+                              ClickRoles.DisplayNameRole :
+                              ClickRoles.InstalledSizeRole
+
+            }
+
+            Flickable {
         id: scrollWidget
         anchors.fill: parent
         contentHeight: columnId.height
@@ -200,6 +225,8 @@ ItemPage {
                                i18n.tr("N/A")
                 }
             }
+        }
+    }
         }
     }
 }

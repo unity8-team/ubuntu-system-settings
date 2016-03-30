@@ -315,18 +315,41 @@ void StorageAbout::populateSizes()
                                 m_cancellable));
 }
 
-QStringList StorageAbout::getMountedVolumes() const
+QStringList StorageAbout::getMountedVolumes()
 {
-    QStringList out;
+    if (m_mountedVolumes.isEmpty())
+        prepareMountedVolumes();
 
-    Q_FOREACH (const QStorageInfo &storage, QStorageInfo::mountedVolumes())
-        if (storage.isValid() && storage.isReady())
-            out.append(storage.rootPath());
-
-    return out;
+    return m_mountedVolumes;
 }
 
-QString StorageAbout::getDevicePath(const QString mount_point)
+void StorageAbout::prepareMountedVolumes()
+{
+    QStringList checked;
+
+    Q_FOREACH (const QStorageInfo &storage, QStorageInfo::mountedVolumes()) {
+        if (storage.isValid() && storage.isReady()) {
+            QString drive(storage.rootPath());
+            /* Only check devices once */
+            if (checked.contains(drive))
+                continue;
+             
+            checked.append(drive);
+            QString devicePath(getDevicePath(drive));
+            if (devicePath.isEmpty() || m_mountedVolumes.contains(drive))
+                continue;
+
+            /* only deal with the device's storage for now, external mounts
+               handling would require being smarter on the categories
+               computation as well and is not in the current design */
+            if (isInternal(drive)) {
+                m_mountedVolumes.append(drive);
+            }
+        }
+    }
+}
+
+QString StorageAbout::getDevicePath(const QString mount_point) const
 {
     QString s_mount_point;
     GUnixMountEntry * g_mount_point = nullptr;
@@ -362,7 +385,7 @@ QString StorageAbout::getDevicePath(const QString mount_point)
  * met: http://www.gnu.org/copyleft/gpl.html.
  *
  */
-bool StorageAbout::isInternal(const QString &drive)
+bool StorageAbout::isInternal(const QString &drive) const
 {
     bool ret = false;
     FILE *fsDescription = setmntent(_PATH_MOUNTED, "r");
