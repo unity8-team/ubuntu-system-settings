@@ -1,3 +1,15 @@
+ubuntu-system-settings (0.3+16.04.20160330-0ubuntu1) xenial; urgency=medium
+
+  [ Jin Hsieh ]
+  * Bug fixed - Settings/Storage shows we have only 2.3GB total storage
+
+  [ Ken VanDine ]
+  * Use a loader for the Storage page and show an ActivityIndicator
+    until the page is ready Improved performance of building the list of
+    mountedVolumes (LP: #1422206)
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Wed, 30 Mar 2016 17:43:55 +0000
+
 ubuntu-system-settings (0.3+16.04.20160325-0ubuntu1) xenial; urgency=medium
 
   * Bump Ubuntu.Content import to 1.3 to prevent mixed version imports
