@@ -315,10 +315,19 @@ void StorageAbout::populateSizes()
                                 m_cancellable));
 }
 
-QStringList StorageAbout::getMountedVolumes() const
+QStringList StorageAbout::getMountedVolumes()
+{
+    if (m_mountedVolumes.isEmpty())
+        prepareMountedVolumes();
+
+    qWarning() << Q_FUNC_INFO << m_mountedVolumes.length();
+
+    return m_mountedVolumes;
+}
+
+void StorageAbout::prepareMountedVolumes()
 {
     QStringList checked;
-    QStringList out;
 
     Q_FOREACH (const QStorageInfo &storage, QStorageInfo::mountedVolumes()) {
         if (storage.isValid() && storage.isReady()) {
@@ -329,19 +338,17 @@ QStringList StorageAbout::getMountedVolumes() const
              
             checked.append(drive);
             QString devicePath(getDevicePath(drive));
-            if (devicePath.isEmpty() || out.contains(drive))
+            if (devicePath.isEmpty() || m_mountedVolumes.contains(drive))
                 continue;
 
             /* only deal with the device's storage for now, external mounts
                handling would require being smarter on the categories
                computation as well and is not in the current design */
             if (isInternal(drive)) {
-                out.append(drive);
+                m_mountedVolumes.append(drive);
             }
         }
     }
-
-    return out;
 }
 
 QString StorageAbout::getDevicePath(const QString mount_point) const

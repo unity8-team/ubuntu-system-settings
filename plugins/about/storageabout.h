@@ -108,7 +108,7 @@ public:
     quint64 getPicturesSize();
     quint64 getHomeSize();
     Q_INVOKABLE void populateSizes();
-    QStringList getMountedVolumes() const;
+    QStringList getMountedVolumes();
     Q_INVOKABLE QString getDevicePath (const QString mount_point) const;
     Q_INVOKABLE qint64 getFreeSpace (const QString mount_point);
     Q_INVOKABLE qint64 getTotalSpace (const QString mount_point);
@@ -121,6 +121,8 @@ Q_SIGNALS:
     void sizeReady();
 
 private:
+    void prepareMountedVolumes();
+    QStringList m_mountedVolumes;
     QString m_serialNumber;
     QString m_vendorString;
     QString m_deviceBuildDisplayID;
