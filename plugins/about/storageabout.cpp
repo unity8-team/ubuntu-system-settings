@@ -323,7 +323,6 @@ QStringList StorageAbout::getMountedVolumes() const
     Q_FOREACH (const QStorageInfo &storage, QStorageInfo::mountedVolumes()) {
         if (storage.isValid() && storage.isReady()) {
             QString drive(storage.rootPath());
-            qWarning() << "DRIVE:" << drive;
             /* Only check devices once */
             if (checked.contains(drive))
                 continue;
@@ -337,9 +336,6 @@ QStringList StorageAbout::getMountedVolumes() const
                handling would require being smarter on the categories
                computation as well and is not in the current design */
             if (isInternal(drive)) {
-                qWarning() << "rootPath:" << drive;
-                qWarning() << "fileSystemType:" << storage.fileSystemType();
-                qWarning() << "devicePath:" << devicePath;
                 out.append(drive);
             }
         }
