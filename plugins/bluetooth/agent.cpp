@@ -40,6 +40,22 @@ void Agent::reject(QDBusMessage msg, const char *functionName)
   m_connection.send(msg.createErrorReply(name, text));
 }
 
+QSharedPointer<Device> Agent::findOrCreateDevice(const QDBusObjectPath &path)
+{
+    auto device = m_devices.getDeviceFromPath(path.path());
+
+    // If the device doesn't exist we just couldn't add it to our
+    // internal list as we didn't received the corresponding dbus
+    // signal for that yet. This normally happens when a remote device
+    // wants to pair with us but we didn't discovered that device yet.
+    // We simply create an entry for this new device then and will
+    // continue as normal.
+    if (!device)
+        device = m_devices.addDeviceFromPath(path);
+
+    return device;
+}
+
 /***
 ****
 ***/
@@ -76,8 +92,7 @@ void Agent::Release()
  */
 void Agent::RequestConfirmation(const QDBusObjectPath &objectPath, uint passkey)
 {
-    auto device = m_devices.getDeviceFromPath(objectPath.path());
-    if (device) {
+    if (auto device = findOrCreateDevice(objectPath)) {
         const uint tag = m_tag++;
 
         setDelayedReply(true);
@@ -114,8 +129,7 @@ void Agent::confirmPasskey(uint tag, bool confirmed)
 
 QString Agent::RequestPinCode(const QDBusObjectPath &objectPath)
 {
-    auto device = m_devices.getDeviceFromPath(objectPath.path());
-    if (device) {
+    if (auto device = findOrCreateDevice(objectPath)) {
         const uint tag = m_tag++;
 
         setDelayedReply(true);
@@ -142,8 +156,7 @@ QString Agent::RequestPinCode(const QDBusObjectPath &objectPath)
  */
 unsigned int Agent::RequestPasskey(const QDBusObjectPath &objectPath)
 {
-    auto device = m_devices.getDeviceFromPath(objectPath.path());
-    if (device) {
+    if (auto device = findOrCreateDevice(objectPath)) {
         const uint tag = m_tag++;
 
         setDelayedReply(true);
@@ -206,8 +219,7 @@ void Agent::providePinCode(uint tag, bool confirmed, QString pinCode)
 
 void Agent::DisplayPinCode(const QDBusObjectPath &objectPath, QString pincode)
 {
-    auto device = m_devices.getDeviceFromPath(objectPath.path());
-    if (device) {
+    if (auto device = findOrCreateDevice(objectPath)) {
         Q_EMIT(displayPinCodeNeeded(device.data(), pincode));
     } else {
         reject(message(), __func__);
@@ -216,8 +228,7 @@ void Agent::DisplayPinCode(const QDBusObjectPath &objectPath, QString pincode)
 
 void Agent::DisplayPasskey(const QDBusObjectPath &objectPath, uint passkey, ushort entered)
 {
-    auto device = m_devices.getDeviceFromPath(objectPath.path());
-    if (device) {
+    if (auto device = findOrCreateDevice(objectPath)) {
         QString passkeyStr = QString("%1").arg(passkey, 6, 10, QChar('0'));
         Q_EMIT(displayPasskeyNeeded(device.data(), passkeyStr, entered));
     } else {
@@ -236,13 +247,12 @@ void Agent::Cancel()
     Q_EMIT(cancelNeeded());
 }
 
-void Agent::RequestAuthorization(const QDBusObjectPath &path)
+void Agent::RequestAuthorization(const QDBusObjectPath &objectPath)
 {
     qWarning() << "Authorization requested for device"
-               << path.path();
+               << objectPath.path();
 
-    auto device = m_devices.getDeviceFromPath(path.path());
-    if (device) {
+    if (auto device = findOrCreateDevice(objectPath)) {
         const uint tag = m_tag++;
 
         setDelayedReply(true);

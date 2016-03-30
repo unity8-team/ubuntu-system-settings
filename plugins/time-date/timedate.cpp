@@ -23,7 +23,6 @@
 #include <QEvent>
 #include <glib.h>
 #include <glib-object.h>
-#include <timezonemap/tz.h>
 #include <unistd.h>
 
 #include <iostream>
@@ -44,6 +43,11 @@ TimeDate::TimeDate(QObject *parent) :
              SIGNAL (serviceOwnerChanged (QString, QString, QString)),
              this,
              SLOT (slotNameOwnerChanged (QString, QString, QString)));
+
+    connect (&m_timeZoneModel, SIGNAL (filterBegin ()),
+             this, SIGNAL (listUpdatingChanged ()));
+    connect (&m_timeZoneModel, SIGNAL (filterComplete ()),
+             this, SIGNAL (listUpdatingChanged ()));
 
     m_useNTP = getUseNTP();
 

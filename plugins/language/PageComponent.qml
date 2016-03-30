@@ -19,6 +19,7 @@
  */
 
 import QtQuick 2.4
+import QtSystemInfo 5.5
 import GSettings 1.0
 import SystemSettings 1.0
 import Ubuntu.Components 1.3
@@ -33,8 +34,19 @@ ItemPage {
 
     title: i18n.tr("Language & Text")
 
+    InputDeviceManager {
+        id: keyboardsModel
+        filter: InputInfo.Keyboard
+    }
+
+    property bool externalKeyboardPresent: keyboardsModel.count > 0
+
     UbuntuLanguagePlugin {
         id: plugin
+    }
+
+    OnScreenKeyboardPlugin {
+        id: oskPlugin
     }
 
     Component {
@@ -47,12 +59,6 @@ ItemPage {
                 })
             }
         }
-    }
-
-    Component {
-        id: keyboardLayouts
-
-        KeyboardLayouts {}
     }
 
     Component {
@@ -100,6 +106,7 @@ ItemPage {
                 iconSource: "image://theme/language-chooser"
                 text: i18n.tr("Display language…")
                 objectName: "displayLanguage"
+                showDivider: false
                 component: Label {
                     property int currentLanguage: plugin.currentLanguage
                     objectName: "currentLanguage"
@@ -111,21 +118,29 @@ ItemPage {
                 onClicked: PopupUtils.open(displayLanguage)
             }
 
-            ListItem.Divider {
-            }
+            ListItem.Divider {}
 
             ListItem.SingleValue {
-                text: i18n.tr("Keyboard layouts")
-                value: plugin.keyboardLayoutsModel.subset.length == 1 ?
-                       plugin.keyboardLayoutsModel.superset[plugin.keyboardLayoutsModel.subset[0]][0] :
-                       plugin.keyboardLayoutsModel.subset.length
+                text: externalKeyboardPresent ? i18n.tr("On-screen keyboard") :
+                                                i18n.tr("Keyboard layouts")
                 progression: true
-
-                onClicked: pageStack.push(keyboardLayouts)
+                value: oskPlugin.keyboardLayoutsModel.subset.length == 1 ?
+                       oskPlugin.keyboardLayoutsModel.superset[oskPlugin.keyboardLayoutsModel.subset[0]][0] :
+                       oskPlugin.keyboardLayoutsModel.subset.length
+                onClicked: pageStack.push(Qt.resolvedUrl("KeyboardLayouts.qml"), {
+                    plugin: oskPlugin
+                })
             }
 
-            ListItem.Divider {
+            ListItem.Standard {
+                text: i18n.tr("External keyboard")
+                progression: true
+                showDivider: false
+                onClicked: pageStack.push(Qt.resolvedUrl("PageHardwareKeyboard.qml"))
+                visible: externalKeyboardPresent
             }
+
+            ListItem.Divider {}
 
             ListItem.SingleValue {
                 visible: showAllUI

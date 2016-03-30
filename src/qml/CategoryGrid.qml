@@ -60,6 +60,7 @@ Column {
                         if (pageComponent) {
                             pageStack.push(model.item.pageComponent,
                                            { plugin: model.item, pluginManager: pluginManager })
+                            Haptics.play();
                         }
                     }
                 }

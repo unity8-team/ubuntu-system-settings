@@ -24,18 +24,18 @@ import Ubuntu.Components 1.3
 import Ubuntu.Components.ListItems 1.3 as ListItem
 
 Column {
-    property var buttonEnum
+    property var selected
 
     Binding {
         target: primaryLeftCheck
         property: "checked"
-        value: (buttonEnum === "Left") ? true : false
+        value: (selected === "left") ? true : false
     }
 
     Binding {
         target: primaryRightCheck
         property: "checked"
-        value: (buttonEnum === "Right") ? true : false
+        value: (selected === "right") ? true : false
     }
 
     SettingsItemTitle {
@@ -62,7 +62,7 @@ Column {
                     id: primaryLeftCheck
                     onTriggered: {
                         if (checked)
-                            buttonEnum = "Left"
+                            selected = "left"
                         else
                             checked = true;
                     }
@@ -79,7 +79,7 @@ Column {
                     id: primaryRightCheck
                     onTriggered: {
                         if (checked)
-                            buttonEnum = "Right"
+                            selected = "right"
                         else
                             checked = true;
                     }

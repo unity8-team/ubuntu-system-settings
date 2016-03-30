@@ -401,3 +401,27 @@ SubsetModel::elementAtIndex(const QModelIndex &index) const
 {
     return elementAtRow(index.row());
 }
+
+void
+SubsetModel::moveSubsetRow(int from, int to) {
+    // Make sure its not moved outside the lists
+    if (to < 0) {
+        to = 0;
+    }
+    if (to >= m_subset.count()) {
+        to = m_subset.count()-1;
+    }
+
+    // Nothing to do?
+    if (from == to) {
+        return;
+    }
+
+    // QList's and QAbstractItemModel's move implementation differ when moving an item up the list :/
+    // While QList needs the index in the resulting list, beginMoveRows expects it to be in the current list
+    // adjust the model's index by +1 in case we're moving upwards
+    int newModelIndex = to > from ? to+1 : to;
+    beginMoveRows(QModelIndex(), from, from, QModelIndex(), newModelIndex);
+    m_subset.move(from, to);
+    endMoveRows();
+}
