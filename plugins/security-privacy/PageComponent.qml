@@ -157,13 +157,22 @@ ItemPage {
                 text: i18n.tr("Fingerprint ID")
                 progression: true
                 onClicked: pageStack.push(fingeprintPage, {
-                    passSet: securityPrivacy.securityType !== UbuntuSecurityPrivacyPanel.Swipe
+                    passSet: securityPrivacy.securityType !== UbuntuSecurityPrivacyPanel.Swipe,
+                    plugin: null
                 })
             }
+
             Component {
                 id: fingeprintPage
-                Fingerprint {}
+                Fingerprint {
+                    onRequestPasscode: {
+                        // We want to recreate the Fingerprint page.
+                        pageStack.pop();
+                        pageStack.push(Qt.resolvedUrl("LockSecurity.qml"));
+                    }
+                }
             }
+
             ListItem.SingleValue {
                 id: lockingControl
                 objectName: "lockingControl"

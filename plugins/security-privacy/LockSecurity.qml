@@ -1,9 +1,10 @@
 /*
  * This file is part of system-settings
  *
- * Copyright (C) 2013 Canonical Ltd.
+ * Copyright (C) 2013-2015 Canonical Ltd.
  *
  * Contact: Iain Lane <iain.lane@canonical.com>
+ *          Jonas G. Drange <jonas.drange@canonical.com>
  *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License version 3, as published
@@ -457,7 +458,6 @@ ItemPage {
                 property string swipeAlt: i18n.tr("Swipe (no security)… ")
                 property string passcodeAlt: i18n.tr("4-digit passcode…")
                 property string passphraseAlt: i18n.tr("Passphrase…")
-                property string fingerprintAlt: i18n.tr("Fingerprint")
 
                 id: unlockMethod
                 model: 4
@@ -477,17 +477,19 @@ ItemPage {
                         }
                     }
                     text: {
-                        switch (unlockMethod.selectedIndex) {
+                        var si = unlockMethod.selectedIndex;
+                        switch (index) {
                         case 0:
-                            return index == 0 ? unlockMethod.swipe : unlockMethod.swipeAlt;
+                            return si == 0 ? unlockMethod.swipe : unlockMethod.swipeAlt;
                         case 1:
-                            return index == 1 ? unlockMethod.passcode : unlockMethod.passcodeAlt;
+                            return si == 1 ? unlockMethod.passcode : unlockMethod.passcodeAlt;
                         case 2:
-                            return index == 2 ? unlockMethod.passphrase : unlockMethod.passphraseAlt;
+                            return si == 2 ? unlockMethod.passphrase : unlockMethod.passphraseAlt;
                         case 3:
-                            return index == 3 ? unlockMethod.fingerprint : unlockMethod.fingerprintAlt;
+                            return unlockMethod.fingerprint;
                         }
                     }
+                    enabled: index != 3 || securityPrivacy.enableFingerprintIdentification
                 }
                 expanded: true
                 onDelegateClicked: {
