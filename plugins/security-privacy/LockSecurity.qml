@@ -144,6 +144,8 @@ ItemPage {
                         return i18n.tr("Switch to passcode")
                     case UbuntuSecurityPrivacyPanel.Passphrase:
                         return i18n.tr("Switch to passphrase")
+                    case UbuntuSecurityPrivacyPanel.Fingerprint:
+                        return i18n.tr("Switch to fingerprint")
                     }
                 }
             }
@@ -509,8 +511,10 @@ ItemPage {
             ListItem.SingleControl {
 
                 id: changeControl
-                visible: securityPrivacy.securityType !==
-                            UbuntuSecurityPrivacyPanel.Swipe
+                visible: securityPrivacy.securityType ===
+                         UbuntuSecurityPrivacyPanel.Passcode &&
+                         securityPrivacy.securityType ===
+                         UbuntuSecurityPrivacyPanel.Passphrase
 
                 control: Button {
                     property string changePasscode: i18n.tr("Change passcode…")

@@ -101,6 +101,8 @@ void SecurityPrivacy::slotChanged(QString interface,
             Q_EMIT enableIndicatorsWhileLockedChanged();
         } else if (property == "EnableFingerprintIdentification") {
             Q_EMIT enableFingerprintIdentificationChanged();
+        } else if (property == "FingerprintsEnrolled") {
+            Q_EMIT fingerprintsEnrolledChanged();
         }
     } else if (interface == AS_TOUCH_INTERFACE) {
         if (property == "MessagesWelcomeScreen") {
@@ -121,6 +123,7 @@ void SecurityPrivacy::slotNameOwnerChanged()
 {
     // Tell QML so that it refreshes its view of the property
     Q_EMIT enableFingerprintIdentificationChanged();
+    Q_EMIT fingerprintsEnrolledChanged();
     Q_EMIT messagesWelcomeScreenChanged();
     Q_EMIT statsWelcomeScreenChanged();
     Q_EMIT enableLauncherWhileLockedChanged();
@@ -144,6 +147,23 @@ void SecurityPrivacy::setEnableFingerprintIdentification(bool enabled)
                                       "EnableFingerprintIdentification",
                                       QVariant::fromValue(enabled));
     Q_EMIT(enableFingerprintIdentificationChanged());
+}
+
+uint SecurityPrivacy::getFingerprintsEnrolled()
+{
+    return m_accountsService.getUserProperty(AS_INTERFACE,
+                                             "FingerprintsEnrolled").toUInt();
+}
+
+void SecurityPrivacy::setFingerprintsEnrolled(uint count)
+{
+    if (count == getFingerprintsEnrolled())
+        return;
+
+    m_accountsService.setUserProperty(AS_INTERFACE,
+                                      "FingerprintsEnrolled",
+                                      QVariant::fromValue(count));
+    Q_EMIT(fingerprintsEnrolledChanged());
 }
 
 bool SecurityPrivacy::getStatsWelcomeScreen()
@@ -240,6 +260,9 @@ bool SecurityPrivacy::setDisplayHint(SecurityType type)
         hint = 0;
     case SecurityPrivacy::Passcode:
         hint = 1;
+    case SecurityPrivacy::Fingerprint:
+        // Don't change the value, but don't fail either.
+        return true;
     }
     if (!m_accountsService.setUserProperty(AS_INTERFACE, "PasswordDisplayHint",
                                            hint)) {
@@ -390,6 +413,8 @@ QString SecurityPrivacy::setSecurity(QString oldValue, QString value, SecurityTy
         return "Internal error: user not loaded";
     else if (type == SecurityPrivacy::Swipe && !value.isEmpty())
         return "Internal error: trying to set password with swipe mode";
+    else if (type == SecurityPrivacy::Fingerprint && !value.isEmpty())
+        return "Internal error: trying to set password with fingeprint mode";
 
     SecurityType oldType = getSecurityType();
     if (type == oldType && value == oldValue)
@@ -412,6 +437,7 @@ QString SecurityPrivacy::setSecurity(QString oldValue, QString value, SecurityTy
     }
 
     if (type == SecurityPrivacy::Swipe) {
+        // Swipe excludes fingerprint ID
         setEnableFingerprintIdentification(false);
         if (!setPasswordModeWithPolicykit(type, oldValue)) {
             setDisplayHint(oldType);
@@ -420,15 +446,14 @@ QString SecurityPrivacy::setSecurity(QString oldValue, QString value, SecurityTy
         }
     } else if (type == SecurityPrivacy::Passcode
                || type == SecurityPrivacy::Passphrase) {
+        // Setting the passcode/passphrase should disable fingerprint ID.
         setEnableFingerprintIdentification(false);
         QString errorText = setPassword(oldValue, value);
         if (!errorText.isEmpty()) {
-            // If changing pwd failed, revert fp id to whatever it was.
-            setEnableFingerprintIdentification(oldFingerprintIdEnabled);
-
             if (errorText == dgettext("Linux-PAM", "Authentication token manipulation error")) {
                 // Special case this common message because the one PAM gives is so awful
                 setDisplayHint(oldType);
+                setEnableFingerprintIdentification(oldFingerprintIdEnabled);
                 return badPasswordMessage(oldType);
             } else if (oldValue != value) {
                 // Only treat this as an error case if the passwords aren't
@@ -451,8 +476,12 @@ QString SecurityPrivacy::setSecurity(QString oldValue, QString value, SecurityTy
             return badPasswordMessage(oldType);
         }
     } else if (type == SecurityPrivacy::Fingerprint) {
+        if (oldType == SecurityPrivacy::Swipe) {
+            return _("You must set a passcode to use fingerprint ID.");
+        }
+
         setEnableFingerprintIdentification(true);
-        qWarning() << "Setting fingerprint sec";
+        qWarning() << "Sat fingerprint ID";
     }
 
     return "";
