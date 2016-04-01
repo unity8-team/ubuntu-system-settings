@@ -106,8 +106,7 @@ ItemPage {
                     iconName: "add"
                     objectName: "newApn"
                     onTriggered: {
-                        editor = pageStack.push(Qt.resolvedUrl("PageApnEditor.qml"), {
-                            manager:         Manager,
+                        editor = pageStack.push(pageApnEditor, {
                             mmsModel:        mmsContexts,
                             internetModel:   internetContexts,
                             iaModel:         iaContexts
@@ -117,6 +116,13 @@ ItemPage {
             ]
         }
     ]
+
+    Component {
+        id: pageApnEditor
+        PageApnEditor {
+            onRequestContextCreation: Manager.createContext(type)
+        }
+    }
 
     Flickable {
         id: scrollWidget
@@ -294,8 +300,7 @@ ItemPage {
 
             onItemRemoved: Manager.removeContext(path);
             onClicked: {
-                editor = pageStack.push(Qt.resolvedUrl("PageApnEditor.qml"), {
-                    manager:         Manager,
+                editor = pageStack.push(pageApnEditor, {
                     contextQML:      qml,
                     mmsModel:        mmsContexts,
                     internetModel:   internetContexts,

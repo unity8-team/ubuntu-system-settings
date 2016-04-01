@@ -47,7 +47,7 @@ function getModelFromType (type) {
             model = iaContexts;
             break;
         default:
-            throw new Error('Unknown context type ' + type);
+            console.warn('Unknown context type', type);
     }
     return model;
 }
@@ -289,7 +289,9 @@ function contextRemoved (path) {
  * @param {String} type
  */
 function contextTypeChanged (type) {
-    addContextToModel(this, type);
+    if (type) {
+        addContextToModel(this, type);
+    }
 }
 
 /**
