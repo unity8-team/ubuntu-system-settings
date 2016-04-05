@@ -1,0 +1,21 @@
+{
+    "icon": "input-mouse-symbolic",
+    "name": "Mouse & Touchpad",
+    "translations": "ubuntu-system-settings",
+    "category": "system",
+    "form-factors": [
+        "phone",
+        "tablet"
+    ],
+    "keywords": [
+        "mouse",
+        "touchpad",
+        "tap",
+        "touch",
+        "click",
+        "input"
+    ],
+    "has-dynamic-keywords": false,
+    "has-dynamic-visibility": false,
+    "page-component": "PageComponent.qml"
+}

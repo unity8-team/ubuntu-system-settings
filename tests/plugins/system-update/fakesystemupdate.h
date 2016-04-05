@@ -45,6 +45,7 @@ public:
 
     void checkForUpdate() {}
     void downloadUpdate() {}
+    void forceAllowGSMDownload() {}
     void applyUpdate() {}
     void cancelUpdate() {}
     void pauseDownload() {}

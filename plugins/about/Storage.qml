@@ -71,6 +71,7 @@ ItemPage {
     property real otherSize: diskSpace -
                              freediskSpace -
                              usedByUbuntu -
+                             backendInfo.totalClickSize -
                              backendInfo.moviesSize -
                              backendInfo.picturesSize -
                              backendInfo.audioSize

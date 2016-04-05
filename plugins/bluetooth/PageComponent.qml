@@ -59,19 +59,33 @@ ItemPage {
 
     Timer {
         id: discoverableTimer
+        repeat: false
+        running: false
         onTriggered: backend.trySetDiscoverable(true)
     }
 
-    /* Disable bt visiblity when switching out */
+    property int lastApplicationState: Qt.ApplicationSuspended
+
+    /* Disable BT visiblity/discovery when switching out */
     Connections {
         target: Qt.application
-        onActiveChanged: {
+        onStateChanged: {
             if (Qt.application.state !== Qt.ApplicationActive) {
                 backend.trySetDiscoverable(false)
+
+                // We only increase the block count when we get inactive
+                // and not for any other state as would then end up in
+                // a state we can never escape from.
+                if (Qt.application.state === Qt.ApplicationInactive &&
+                    lastApplicationState === Qt.ApplicationActive)
+                    backend.blockDiscovery()
             }
             else {
                 discoverableTimer.start()
+                backend.unblockDiscovery()
             }
+
+            lastApplicationState = Qt.application.state
         }
     }
 
@@ -260,20 +274,21 @@ ItemPage {
                             topMargin: units.gu(1)
                         }
                         height: units.gu(3)
-                        text: backend.discoverable ? backend.adapterName() : ""
+                        text: backend.discoverable ? backend.adapterName : ""
                         color: "darkgrey"
                         visible: backend.discoverable
                         enabled: false
                     }
 
-                    ActivityIndicator {
+                    Label {
                         anchors {
                             top: parent.top
                             right: parent.right
                             topMargin: units.gu(1)
                         }
+                        color: "darkgrey"
                         visible: backend.powered && !backend.discoverable
-                        running: visible
+                        text: i18n.tr("Searching…")
                     }
                 }
             }
@@ -319,9 +334,15 @@ ItemPage {
                 id: disconnectedHeader
                 text: connectedList.visible ? i18n.tr("Connect another device:") : i18n.tr("Connect a device:")
                 enabled: bluetoothActionGroup.enabled.state != undefined ? bluetoothActionGroup.enabled.state : false
-                control: ActivityIndicator {
+                control: Label {
+                    anchors {
+                        top: parent.top
+                        right: parent.right
+                        topMargin: units.gu(1)
+                    }
+                    color: "darkgrey"
                     visible: backend.powered && backend.discovering
-                    running: visible
+                    text: i18n.tr("Searching…")
                 }
             }
 

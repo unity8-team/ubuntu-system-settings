@@ -17,6 +17,8 @@ __license__ = 'LGPL 3+'
 BUS_NAME = 'com.canonical.indicator.network'
 MAIN_IFACE = 'org.gtk.Actions'
 MAIN_OBJ = '/com/canonical/indicator/network'
+MENU_IFACE = 'org.gtk.Menus'
+PHONE_WIFI_OBJ = '/com/canonical/indicator/network/phone_wifi_settings'
 SYSTEM_BUS = False
 
 NOT_IMPLEMENTED = '''raise dbus.exceptions.DBusException(
@@ -41,8 +43,12 @@ def list_actions(self):
     return list(self.actions)
 
 
-def set_state(self, action_name, parameters, platform_data):
-    eval(NOT_IMPLEMENTED)
+def start(self, groups):
+    return dbusmock.get_object(MAIN_OBJ).menus
+
+
+def end(self, groups):
+    pass
 
 
 @dbus.service.method(dbusmock.MOCK_IFACE,
@@ -62,11 +68,86 @@ def load(mock, parameters):
     mock.describe = describe
     mock.describe_all = describe_all
     mock.list_actions = list_actions
-    mock.set_state = set_state
 
     mock.actions = parameters.get('actions', {
         'wifi.enable': (True, '', [True]),
+        'accesspoint.0': (True, '', [True]),
+        'accesspoint.0::strength': (True, '', [44]),
+        'accesspoint.1': (True, '', [False]),
+        'accesspoint.1::strength': (True, '', [100]),
+        'accesspoint.2': (True, '', [False]),
+        'accesspoint.2::strength': (True, '', [74]),
+        'accesspoint.3': (False, '', [False]),
     })
+
+    mock.menus = parameters.get('menus', dbus.Array([
+        (
+            dbus.UInt32(0), dbus.UInt32(0),
+            [
+                {
+                    'action': 'indicator.wifi.enable',
+                    'x-canonical-type': 'com.canonical.indicator.switch',
+                    'label': 'Wi-Fi'
+                },
+                {
+                    'x-canonical-type': 'com.canonical.indicator.section',
+                    'label': 'Available Wi-Fi networks'
+                },
+                {
+                    ':section': dbus.Struct(
+                        (dbus.UInt32(0), dbus.UInt32(1)), signature='(uu)'
+                    )
+                }
+            ]
+        ),
+        (
+            dbus.UInt32(0), dbus.UInt32(1),
+            [
+                {
+                    'x-canonical-wifi-ap-is-secure': True,
+                    'x-canonical-wifi-ap-is-enterprise': False,
+                    'label': 'Secure',
+                    'x-canonical-type':
+                        'unity.widgets.systemsettings.tablet.accesspoint',
+                    'x-canonical-wifi-ap-strength-action':
+                        'indicator.accesspoint.0::strength',
+                    'action': 'indicator.accesspoint.0',
+                    'x-canonical-wifi-ap-is-adhoc': False
+                },
+                {
+                    'x-canonical-wifi-ap-is-secure': False,
+                    'x-canonical-wifi-ap-is-enterprise': False,
+                    'label': 'Insecure',
+                    'x-canonical-type':
+                        'unity.widgets.systemsettings.tablet.accesspoint',
+                    'x-canonical-wifi-ap-strength-action':
+                        'indicator.accesspoint.1::strength',
+                    'action': 'indicator.accesspoint.1',
+                    'x-canonical-wifi-ap-is-adhoc': False
+                },
+                {
+                    'x-canonical-wifi-ap-is-secure': True,
+                    'x-canonical-wifi-ap-is-enterprise': True,
+                    'label': 'Enterprise',
+                    'x-canonical-type':
+                        'unity.widgets.systemsettings.tablet.accesspoint',
+                    'x-canonical-wifi-ap-strength-action':
+                        'indicator.accesspoint.2::strength',
+                    'action': 'indicator.accesspoint.2',
+                    'x-canonical-wifi-ap-is-adhoc': False
+                },
+                {
+                    'x-canonical-wifi-ap-is-secure': False,
+                    'x-canonical-wifi-ap-is-enterprise': False,
+                    'label': 'Unknown',
+                    'x-canonical-type':
+                        'unknown-type',
+                    'action': 'indicator.accesspoint.3',
+                    'x-canonical-wifi-ap-is-adhoc': False
+                }
+            ]
+        )
+    ], signature='a(uuaa{sv})'))
 
     mock.AddMethods(
         MAIN_IFACE,
@@ -85,9 +166,23 @@ def load(mock, parameters):
             (
                 'List', '', 'as',
                 'ret = self.list_actions(self)'
-            ),
-            (
-                'SetState', 'sva{sv}', '',
-                'self.set_state(self, args[0], args[1], args[2])'
             )
         ])
+
+    mock.AddObject(
+        PHONE_WIFI_OBJ,
+        MENU_IFACE, {}, [
+            (
+                'Start', 'au', 'a(uuaa{sv})',
+                'ret = self.start(self, args[0])'
+            ),
+            (
+                'End', 'au', '',
+                'ret = self.end(self, args[0])'
+            )
+        ]
+    )
+
+    phone_wifi_obj = dbusmock.get_object(PHONE_WIFI_OBJ)
+    phone_wifi_obj.start = start
+    phone_wifi_obj.end = end

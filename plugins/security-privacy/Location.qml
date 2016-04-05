@@ -24,6 +24,7 @@ import Qt.labs.folderlistmodel 2.1
 import QtQuick 2.4
 import Ubuntu.Components 1.3
 import Ubuntu.Components.ListItems 1.3 as ListItem
+import Ubuntu.Connectivity 1.0
 import Ubuntu.SystemSettings.SecurityPrivacy 1.0
 import SystemSettings 1.0
 
@@ -91,7 +92,7 @@ ItemPage {
             anchors.right: parent.right
 
             SettingsItemTitle {
-                text: i18n.tr("Let the phone detect your location:")
+                text: i18n.tr("Let the device detect your location:")
             }
 
             ListItem.ItemSelector {
@@ -182,7 +183,9 @@ ItemPage {
                             terms and conditions reside (typically a qml file).
                             HERE is a Nokia trademark, so it should probably
                             not be translated. */
-                            name: i18n.tr("Using GPS, anonymized Wi-Fi and cellular network info.<br>By selecting this option you accept the <a href='%1'>Nokia HERE terms and conditions</a>.").arg("here-terms.qml"),
+                            name: NetworkingStatus.modemAvailable ?
+                                i18n.tr("Using GPS, anonymized Wi-Fi and cellular network info.<br>By selecting this option you accept the <a href='%1'>Nokia HERE terms and conditions</a>.").arg("here-terms.qml") :
+                                i18n.tr("Using GPS and anonymized Wi-Fi info.<br>By selecting this option you accept the <a href='%1'>Nokia HERE terms and conditions</a>.").arg("here-terms.qml"),
                             key: "here"
                         });
                     }

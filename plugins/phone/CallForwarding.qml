@@ -34,7 +34,7 @@ import Ubuntu.Components 1.3
 import Ubuntu.Components.ListItems 1.3 as ListItem
 import Ubuntu.Components.Popups 1.3
 import Ubuntu.Components.Themes.Ambiance 0.1
-import Ubuntu.Content 0.1
+import Ubuntu.Content 1.3
 import "callForwardingUtils.js" as Utils
 
 ItemPage {
@@ -272,7 +272,7 @@ ItemPage {
         Dialog {
             id: dialog
             property var contact
-            title: i18n.tr('Please select a phone number')
+            title: i18n.tr("Please select a phone number")
 
             ListItem.ItemSelector {
                 anchors {
@@ -380,11 +380,11 @@ ItemPage {
             }
 
             if (voiceUnconditional) {
-                 val = i18n.tr('All calls');
+                 val = i18n.tr("All calls");
             } else if (voiceBusy || voiceNoReply || voiceNotReachable) {
-                val = i18n.tr('Some calls')
+                val = i18n.tr("Some calls")
             } else {
-                val = i18n.tr('Off')
+                val = i18n.tr("Off")
             }
             sim.setCallForwardingSummary(val);
         }

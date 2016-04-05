@@ -45,6 +45,7 @@ Page {
     function getTypeString(type) {
         switch (type) {
         case Device.Computer:   return i18n.tr("Computer");
+        case Device.Smartphone: return i18n.tr("Phone");
         case Device.Phone:      return i18n.tr("Phone");
         case Device.Modem:      return i18n.tr("Modem");
         case Device.Network:    return i18n.tr("Network");
@@ -152,6 +153,7 @@ Page {
             ListItem.Standard {
                 id: trustedCheck
                 text: i18n.tr("Connect automatically when detected:")
+                visible: backend.selectedDevice.paired
                 control: CheckBox {
                     property bool serverChecked: backend.selectedDevice ? backend.selectedDevice.trusted : false
                     onServerCheckedChanged: checked = serverChecked
@@ -173,7 +175,6 @@ Page {
                                 || backend.selectedDevice.connection == Device.Connecting)) {
                             backend.disconnectDevice();
                         } else {
-                            backend.stopDiscovery()
                             backend.connectDevice(backend.selectedDevice.address);
                         }
 
@@ -181,7 +182,7 @@ Page {
                         pageStack.pop();
                     }
                     visible: backend.selectedDevice ? true : false
-                    enabled: backend.selectedDevice && backend.powered ? (backend.isSupportedType(backend.selectedDevice.type) || backend.selectedDevice.connection != Device.Disconnected) : false
+                    enabled: backend.selectedDevice && backend.powered ? true : false
                 }
             }
             ListItem.SingleControl {
@@ -193,7 +194,7 @@ Page {
                         backend.resetSelectedDevice();
                         pageStack.pop();
                     }
-                    enabled: backend.selectedDevice && backend.selectedDevice.path.length > 0 && backend.selectedDevice.paired ? true : false
+                    enabled: backend.powered && backend.selectedDevice && backend.selectedDevice.path.length > 0 && backend.selectedDevice.paired ? true : false
                 }
             }
         }

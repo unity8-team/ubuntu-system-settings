@@ -22,10 +22,11 @@ import dbusmock
 import os
 import random
 import subprocess
+import ubuntuuitoolkit
+
 from datetime import datetime
 from time import sleep
 
-import ubuntuuitoolkit
 from autopilot import platform
 from autopilot.matchers import Eventually
 from dbusmock.templates.networkmanager import (InfrastructureMode,
@@ -33,6 +34,9 @@ from dbusmock.templates.networkmanager import (InfrastructureMode,
 from fixtures import EnvironmentVariable
 from gi.repository import UPowerGlib
 from testtools.matchers import Equals, NotEquals, GreaterThan
+from ubuntu_system_settings.utils.mock_update_click_server import (
+    Manager
+)
 from ubuntu_system_settings.tests.connectivity import (
     PRIV_OBJ as CTV_PRIV_OBJ, NETS_OBJ as CTV_NETS_OBJ,
     MAIN_IFACE as CTV_IFACE
@@ -79,7 +83,7 @@ class UbuntuSystemSettingsTestCase(
 
     """Base class for Ubuntu System Settings."""
 
-    APP_PATH = '/usr/bin/system-settings'
+    BINARY = 'system-settings'
     DESKTOP_FILE = '/usr/share/applications/ubuntu-system-settings.desktop'
 
     def setUp(self, panel=None):
@@ -107,7 +111,7 @@ class UbuntuSystemSettingsTestCase(
         :returns: A proxy object that represents the application. Introspection
         data is retrievable via this object.
         """
-        params = [self.APP_PATH]
+        params = [self.BINARY]
         if platform.model() != 'Desktop':
             params.append('--desktop_file_hint={}'.format(self.DESKTOP_FILE))
 
@@ -575,9 +579,14 @@ class SystemUpdatesBaseTestCase(UbuntuSystemSettingsTestCase,
         'Status': 'online'
     }
 
+    click_server_parameters = {
+        'start': False
+    }
+
     def setUp(self):
         """Go to SystemUpdates Page."""
         self.session_con = self.get_dbus(False)
+        self.clicksrv_manager = None
         if is_process_running(INDICATOR_NETWORK):
             _stop_process(INDICATOR_NETWORK)
             self.addCleanup(_start_process, INDICATOR_NETWORK)
@@ -591,12 +600,20 @@ class SystemUpdatesBaseTestCase(UbuntuSystemSettingsTestCase,
             self.session_con.get_object(CTV_IFACE, CTV_NETS_OBJ),
             'org.freedesktop.DBus.Properties')
 
+        if self.click_server_parameters['start']:
+            self.clicksrv_manager = Manager(
+                responses=self.click_server_parameters.get('responses', None)
+            )
+            self.clicksrv_manager.start()
+
         super(SystemUpdatesBaseTestCase, self).setUp()
         self.main_view.click_item('entryComponent-system-update')
 
     def tearDown(self):
         self.ctv_mock.terminate()
         self.ctv_mock.wait()
+        if self.clicksrv_manager and self.clicksrv_manager.is_running():
+            self.clicksrv_manager.stop()
         super(SystemUpdatesBaseTestCase, self).tearDown()
 
 
@@ -918,6 +935,67 @@ class LanguageBaseTestCase(UbuntuSystemSettingsTestCase,
         self.mock_server.terminate()
         self.mock_server.wait()
         super(LanguageBaseTestCase, self).tearDown()
+
+
+class UbuntuSystemSettingsVpnTestCase(UbuntuSystemSettingsTestCase,
+                                      dbusmock.DBusTestCase):
+    """Base class for tests that tests the vpn functionality."""
+    connectivity_parameters = {}
+    indicatornetwork_parameters = {}
+
+    @classmethod
+    def setUpClass(cls):
+        cls.session_con = cls.get_dbus(False)
+
+        cls.start_system_bus()
+
+        super(UbuntuSystemSettingsVpnTestCase, cls).setUpClass()
+
+    def setUp(self):
+        if is_process_running(INDICATOR_NETWORK):
+            _stop_process(INDICATOR_NETWORK)
+            self.addCleanup(_start_process, INDICATOR_NETWORK)
+
+        ctv_tmpl = os.path.join(os.path.dirname(__file__), 'connectivity.py')
+        (self.ctv_mock, self.obj_ctv) = self.spawn_server_template(
+            ctv_tmpl, parameters=self.connectivity_parameters,
+            stdout=subprocess.PIPE)
+
+        self.ctv_private = dbus.Interface(
+            self.session_con.get_object(CTV_IFACE, CTV_PRIV_OBJ),
+            'org.freedesktop.DBus.Properties')
+
+        super(UbuntuSystemSettingsVpnTestCase, self).setUp()
+
+    def tearDown(self):
+        self.ctv_mock.terminate()
+        self.ctv_mock.wait()
+        super(UbuntuSystemSettingsVpnTestCase, self).tearDown()
+
+    @classmethod
+    def tearDownClass(cls):
+        if dbusmock.DBusTestCase.system_bus_pid is not None:
+            cls.stop_dbus(dbusmock.DBusTestCase.system_bus_pid)
+            del os.environ['DBUS_SYSTEM_BUS_ADDRESS']
+            dbusmock.DBusTestCase.system_bus_pid = None
+        if dbusmock.DBusTestCase.session_bus_pid is not None:
+            cls.stop_dbus(dbusmock.DBusTestCase.session_bus_pid)
+            del os.environ['DBUS_SESSION_BUS_ADDRESS']
+            dbusmock.DBusTestCase.session_bus_pid = None
+        super(UbuntuSystemSettingsVpnTestCase, cls).tearDownClass()
+
+
+class VpnBaseTestCase(UbuntuSystemSettingsVpnTestCase):
+
+    def setUp(self):
+        super(VpnBaseTestCase, self).setUp()
+        self.vpn_page = self.main_view.go_to_vpn_page()
+
+    def get_vpn_connection_object(self, path):
+        return dbus.Interface(
+            self.session_con.get_object(CTV_IFACE, path),
+            'org.freedesktop.DBus.Properties'
+        )
 
 
 class WifiBaseTestCase(UbuntuSystemSettingsTestCase,

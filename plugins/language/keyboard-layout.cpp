@@ -30,8 +30,10 @@ KeyboardLayout::KeyboardLayout(const QString &name,
     m_name(name),
     m_language(language),
     m_displayName(displayName),
-    m_shortName(shortName)
+    m_shortName(language)
 {
+    Q_UNUSED(shortName);
+    m_shortName[0] = m_shortName[0].toUpper();
 }
 
 KeyboardLayout::KeyboardLayout(const QFileInfo &fileInfo,

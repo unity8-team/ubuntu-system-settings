@@ -97,9 +97,15 @@ void Sound::setIncomingCallSound(QString sound)
                                       QVariant::fromValue(sound));
     Q_EMIT(incomingCallSoundChanged());
 
-    if (prevSound.startsWith(QString(QStandardPaths::writableLocation(QStandardPaths::DataLocation))) &&
-            prevSound != getIncomingMessageSound())
-        QFile(prevSound).remove();
+    if (sound.startsWith(customRingtonePath())) {
+        QDir dir(customRingtonePath());
+        QFileInfoList files(dir.entryInfoList(QDir::Files));
+        Q_FOREACH(QFileInfo f, files) {
+            if (f.absoluteFilePath() != sound)
+                QFile(f.absoluteFilePath()).remove();
+        }
+    }
+
 }
 
 QString Sound::getIncomingMessageSound()
@@ -120,9 +126,6 @@ void Sound::setIncomingMessageSound(QString sound)
                                       QVariant::fromValue(sound));
 
     Q_EMIT(incomingMessageSoundChanged());
-    if (prevSound.startsWith(QString(QStandardPaths::writableLocation(QStandardPaths::DataLocation))) &&
-            prevSound != getIncomingCallSound())
-        QFile(prevSound).remove();
 }
 
 bool Sound::getIncomingCallVibrate()

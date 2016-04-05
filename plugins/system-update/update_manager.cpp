@@ -41,6 +41,8 @@ using namespace UbuntuOne;
     #define CHECK_CREDENTIALS "CHECK_CREDENTIALS"
 #endif
 
+const QString TEST_APP = "com.ubuntu.developer.testclick";
+
 namespace UpdatePlugin {
 
 UpdateManager *UpdateManager::m_instance = 0;
@@ -105,6 +107,8 @@ UpdateManager::UpdateManager(QObject *parent):
                   SLOT(updateFailed(int, QString)));
     QObject::connect(&m_systemUpdate, SIGNAL(updatePaused(int)),
                   SLOT(systemUpdatePaused(int)));
+    QObject::connect(&m_systemUpdate, SIGNAL(downloadStarted()),
+                  SLOT(systemUpdateDownloadStarted()));
     QObject::connect(&m_systemUpdate, SIGNAL(updateProgress(int, double)),
                   SLOT(systemUpdateProgress(int, double)));
     QObject::connect(&m_systemUpdate, SIGNAL(rebooting(bool)),
@@ -153,6 +157,14 @@ void UpdateManager::checkUpdates()
     m_apps.clear();
     Q_EMIT modelChanged();
     bool enabled = enableAutopilotMode();
+
+    // If we're in testing mode, always consider updates for TEST_APP
+    if (enabled) {
+        Update *app = new Update();
+        app->initializeApplication(TEST_APP, QString("Test App"), QString("1.0"));
+        m_apps.insert(app->getPackageName(), app);
+    }
+
     if (getCheckForCredentials()) {
         m_systemUpdate.checkForUpdate();
         m_service.getCredentials();
@@ -293,8 +305,20 @@ void UpdateManager::systemUpdatePaused(int value)
         update->setSelected(true);
         update->setUpdateState(false);
         update->setDownloadProgress(value);
+        update->setStatus(Update::Paused);
     }
 }
+
+void UpdateManager::systemUpdateDownloadStarted()
+{                 
+    QString packagename(UBUNTU_PACKAGE_NAME);
+    if (m_apps.contains(packagename)) {
+        Update *update = m_apps[packagename];
+        update->setSelected(true);
+        update->setUpdateState(true);
+        update->setStatus(Update::Downloading);
+    }
+} 
 
 void UpdateManager::systemUpdateProgress(int value, double eta)
 {
@@ -314,6 +338,15 @@ void UpdateManager::startDownload(const QString &packagename)
     } else {
         downloadApp(m_apps[packagename]);
     }
+}
+
+void UpdateManager::forceAllowGSMDownload(const QString &packagename)
+{
+    if (!m_apps[packagename]->systemUpdate()) 
+        return;
+
+    m_apps[packagename]->setUpdateState(true);
+        m_systemUpdate.forceAllowGSMDownload();
 }
 
 void UpdateManager::retryDownload(const QString &packagename)
