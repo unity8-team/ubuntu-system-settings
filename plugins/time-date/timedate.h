@@ -28,13 +28,16 @@
 #include <QDBusServiceWatcher>
 #include <QObject>
 #include <QProcess>
+#include <gio/gio.h>
 
 class TimeDate : public QObject
 {
     Q_OBJECT
     Q_PROPERTY (QString timeZone
                 READ timeZone
-                WRITE setTimeZone
+                NOTIFY timeZoneChanged)
+    Q_PROPERTY (QString timeZoneName
+                READ timeZoneName
                 NOTIFY timeZoneChanged)
     Q_PROPERTY (QAbstractItemModel *timeZoneModel
                 READ getTimeZoneModel
@@ -53,8 +56,9 @@ class TimeDate : public QObject
 public:
     explicit TimeDate(QObject *parent = 0);
     ~TimeDate();
-    void setTimeZone (QString &time_zone);
+    Q_INVOKABLE void setTimeZone (const QString &time_zone, const QString &time_zone_name = QString());
     QString timeZone();
+    QString timeZoneName();
     bool useNTP();
     QAbstractItemModel *getTimeZoneModel();
     QString getFilter();
@@ -76,13 +80,16 @@ Q_SIGNALS:
 private:
     bool m_useNTP;
     QString m_currentTimeZone;
+    QString m_currentTimeZoneName;
+    bool m_settingTimeZone;
     QDBusConnection m_systemBusConnection;
     QDBusServiceWatcher m_serviceWatcher;
     QDBusInterface m_timeDateInterface;
+    GSettings *m_indicatorSettings;
     QString m_objectPath;
     TimeZoneLocationModel m_timeZoneModel;
     QString m_filter;
-    QString getTimeZone();
+    void initializeTimeZone();
     bool getUseNTP();
     void setUpInterface();
 

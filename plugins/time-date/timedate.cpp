@@ -29,6 +29,7 @@
 TimeDate::TimeDate(QObject *parent) :
     QObject(parent),
     m_useNTP(false),
+    m_settingTimeZone(false),
     m_systemBusConnection (QDBusConnection::systemBus()),
     m_serviceWatcher ("org.freedesktop.timedate1",
                       m_systemBusConnection,
@@ -37,6 +38,7 @@ TimeDate::TimeDate(QObject *parent) :
                          "/org/freedesktop/timedate1",
                          "org.freedesktop.timedate1",
                           m_systemBusConnection),
+    m_indicatorSettings(g_settings_new("com.canonical.indicator.datetime")),
     m_timeZoneModel()
 {
     connect (&m_serviceWatcher,
@@ -68,19 +70,35 @@ void TimeDate::setUpInterface()
 QString TimeDate::timeZone()
 {
     if (m_currentTimeZone.isEmpty() || m_currentTimeZone.isNull())
-        m_currentTimeZone = getTimeZone();
+        initializeTimeZone();
 
      return m_currentTimeZone;
 }
 
-QString TimeDate::getTimeZone()
+QString TimeDate::timeZoneName()
 {
-    QVariant tz(m_timeDateInterface.property("Timezone"));
+    if (m_currentTimeZoneName.isEmpty() || m_currentTimeZoneName.isNull())
+        initializeTimeZone();
 
-    if (tz.isValid())
-        return tz.toString();
+     return m_currentTimeZoneName;
+}
 
-    return QString();
+void TimeDate::initializeTimeZone()
+{
+    // Get timezone from authoritative source
+    m_currentTimeZone = m_timeDateInterface.property("Timezone").toString();
+    if (m_currentTimeZone.isEmpty())
+        return;
+
+    // And get saved user-visible name if we have one
+    g_autofree gchar *gtzname = g_settings_get_string(m_indicatorSettings, "timezone-name");
+    QString tzname(gtzname);
+    int space = tzname.indexOf(' ');
+    if (space > 0 && tzname.left(space) == m_currentTimeZone && tzname.size() > space + 1) {
+        m_currentTimeZoneName = tzname.mid(space + 1);
+    } else {
+        m_currentTimeZoneName = m_currentTimeZone.split('/').last().replace('_', ' ');
+    }
 }
 
 bool TimeDate::useNTP()
@@ -114,10 +132,7 @@ void TimeDate::slotChanged(QString interface,
 
     if (changed_properties.contains("Timezone")) {
         QString tz(changed_properties["Timezone"].toString());
-        if (tz != m_currentTimeZone) {
-            m_currentTimeZone = tz;
-            Q_EMIT timeZoneChanged();
-        }
+        setTimeZone(tz);
     }
 
     if (changed_properties.contains("NTP")) {
@@ -143,9 +158,31 @@ void TimeDate::slotNameOwnerChanged(QString name,
         setUpInterface();
 }
 
-void TimeDate::setTimeZone(QString &time_zone)
+void TimeDate::setTimeZone(const QString &time_zone, const QString &time_zone_name)
 {
-    m_timeDateInterface.call("SetTimezone", time_zone, false);
+    if (m_settingTimeZone)
+        return;
+
+    auto name = time_zone_name;
+    if (name.isEmpty())
+        name = time_zone.split('/').last().replace('_', ' ');
+
+    if (m_currentTimeZone != time_zone || m_currentTimeZoneName != name) {
+        m_settingTimeZone = true;
+
+        auto reply = m_timeDateInterface.call("SetTimezone", time_zone, false);
+        if (reply.errorName().isEmpty()) {
+            m_currentTimeZone = time_zone;
+            m_currentTimeZoneName = name;
+
+            auto combined = QString("%1 %2").arg(time_zone, name);
+            g_settings_set_string(m_indicatorSettings, "timezone-name", combined.toUtf8().data());
+
+            Q_EMIT timeZoneChanged();
+        }
+
+        m_settingTimeZone = false;
+    }
 }
 
 QAbstractItemModel *TimeDate::getTimeZoneModel()
@@ -175,4 +212,5 @@ bool TimeDate::getListUpdating()
 }
 
 TimeDate::~TimeDate() {
+    g_clear_object (&m_indicatorSettings);
 }
