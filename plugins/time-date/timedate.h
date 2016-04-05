@@ -81,7 +81,6 @@ private:
     bool m_useNTP;
     QString m_currentTimeZone;
     QString m_currentTimeZoneName;
-    bool m_settingTimeZone;
     QDBusConnection m_systemBusConnection;
     QDBusServiceWatcher m_serviceWatcher;
     QDBusInterface m_timeDateInterface;

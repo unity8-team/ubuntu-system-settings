@@ -29,7 +29,6 @@
 TimeDate::TimeDate(QObject *parent) :
     QObject(parent),
     m_useNTP(false),
-    m_settingTimeZone(false),
     m_systemBusConnection (QDBusConnection::systemBus()),
     m_serviceWatcher ("org.freedesktop.timedate1",
                       m_systemBusConnection,
@@ -160,15 +159,12 @@ void TimeDate::slotNameOwnerChanged(QString name,
 
 void TimeDate::setTimeZone(const QString &time_zone, const QString &time_zone_name)
 {
-    if (m_settingTimeZone)
-        return;
-
-    auto name = time_zone_name;
-    if (name.isEmpty())
-        name = time_zone.split('/').last().replace('_', ' ');
-
-    if (m_currentTimeZone != time_zone || m_currentTimeZoneName != name) {
-        m_settingTimeZone = true;
+    if (m_currentTimeZone != time_zone ||
+        (!time_zone_name.isEmpty() && m_currentTimeZoneName != time_zone_name))
+    {
+        auto name = time_zone_name;
+        if (name.isEmpty())
+            name = time_zone.split('/').last().replace('_', ' ');
 
         auto reply = m_timeDateInterface.call("SetTimezone", time_zone, false);
         if (reply.errorName().isEmpty()) {
@@ -180,8 +176,6 @@ void TimeDate::setTimeZone(const QString &time_zone, const QString &time_zone_na
 
             Q_EMIT timeZoneChanged();
         }
-
-        m_settingTimeZone = false;
     }
 }
 
