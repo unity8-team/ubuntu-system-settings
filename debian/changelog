@@ -1,3 +1,9 @@
+ubuntu-system-settings (0.4+16.04.20160325-0ubuntu1) UNRELEASED; urgency=medium
+
+  * Bump version number for change in TimeDate plugin API
+
+ -- Michael Terry <mterry@ubuntu.com>  Tue, 05 Apr 2016 15:16:11 -0400
+
 ubuntu-system-settings (0.3+16.04.20160325-0ubuntu1) xenial; urgency=medium
 
   * Bump Ubuntu.Content import to 1.3 to prevent mixed version imports
