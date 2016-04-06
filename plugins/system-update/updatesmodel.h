@@ -23,6 +23,7 @@
 #include <QObject>
 #include <QAbstractListModel>
 
+#include "update.h"
 
 class UpdatesModel : public QAbstractListModel
 {
@@ -53,5 +54,5 @@ private:
     Update::UpdateType currentFilter;
 
 };
-
+Q_DECLARE_METATYPE(UpdatesModel::ItemRoles)
 #endif // UPDATESMODEL_H

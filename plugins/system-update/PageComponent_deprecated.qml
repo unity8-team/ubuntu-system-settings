@@ -1,10 +1,10 @@
 /*
  * This file is part of system-settings
  *
- * Copyright (C) 2013-2016 Canonical Ltd.
+ * Copyright (C) 2013-2014 Canonical Ltd.
  *
  * Contact: Didier Roche <didier.roches@canonical.com>
- *          Diego Sarmentero <diego.sarmentero@canonical.com>
+ * Contact: Diego Sarmentero <diego.sarmentero@canonical.com>
  *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License version 3, as published
@@ -34,9 +34,23 @@ ItemPage {
     id: root
     objectName: "systemUpdatesPage"
 
+    title: installingImageUpdate.visible ? "" : i18n.tr("Updates")
+    flickable: installingImageUpdate.visible ? null : scrollWidget
+
+    property bool installAll: false
+    property bool includeSystemUpdate: false
+    property bool systemUpdateInProgress: false
+    property int updatesAvailable: 0
     property bool isCharging: indicatorPower.deviceState === "charging"
     property bool batterySafeForUpdate: isCharging || chargeLevel > 25
     property var chargeLevel: indicatorPower.batteryLevel || 0
+    property var notificationAction;
+    property string errorDialogText: ""
+
+    onUpdatesAvailableChanged: {
+        if (updatesAvailable < 1 && root.state != "SEARCHING")
+            root.state = "NOUPDATES";
+    }
 
     QDBusActionGroup {
         id: indicatorPower
@@ -53,9 +67,11 @@ ItemPage {
         target: NetworkingStatus
         onOnlineChanged: {
             if (NetworkingStatus.online) {
-                // Set to searching, and start a search for updates
+                activity.running = true;
+                root.state = "SEARCHING";
+                UpdateManager.checkUpdates();
             } else {
-                // Stop all things
+                activity.running = false;
             }
         }
     }
@@ -66,8 +82,46 @@ ItemPage {
         providerId: "ubuntuone"
 
         onFinished: {
-            // Found credentials, do stuff that now can be done
+            credentialsNotification.visible = false;
+            root.state = "SEARCHING";
+            if (NetworkingStatus.online)
+                UpdateManager.checkUpdates();
         }
+    }
+
+    Component {
+         id: dialogInstallComponent
+         Dialog {
+             id: dialogueInstall
+             title: i18n.tr("Update System")
+             text: root.batterySafeForUpdate ? i18n.tr("The device needs to restart to install the system update.") : i18n.tr("Connect the device to power before installing the system update.")
+
+             Button {
+                 text: i18n.tr("Restart & Install")
+                 visible: root.batterySafeForUpdate ? true : false
+                 color: UbuntuColors.orange
+                 onClicked: {
+                     installingImageUpdate.visible = true;
+                     UpdateManager.applySystemUpdate();
+                     PopupUtils.close(dialogueInstall);
+                 }
+             }
+             Button {
+                 text: i18n.tr("Cancel")
+                 color: UbuntuColors.warmGrey
+                 onClicked: {
+                     updateList.currentIndex = 0;
+                     var item = updateList.currentItem;
+                     var modelItem = UpdateManager.model[0];
+                     item.actionButton.text = i18n.tr("Install");
+                     item.progressBar.opacity = 0;
+                     modelItem.updateReady = true;
+                     modelItem.selected = false;
+                     root.systemUpdateInProgress = false;
+                     PopupUtils.close(dialogueInstall);
+                 }
+             }
+         }
     }
 
     Component {
@@ -86,6 +140,37 @@ ItemPage {
              }
          }
     }
+
+    //states
+    states: [
+        State {
+            name: "SEARCHING"
+            PropertyChanges { target: installAllButton; visible: false}
+            PropertyChanges { target: checkForUpdatesArea; visible: true}
+            PropertyChanges { target: updateNotification; visible: false}
+            PropertyChanges { target: activity; running: NetworkingStatus.online}
+        },
+        State {
+            name: "NOUPDATES"
+            PropertyChanges { target: updateNotification; text: i18n.tr("Software is up to date")}
+            PropertyChanges { target: updateNotification; visible: true}
+            PropertyChanges { target: updateList; visible: false}
+            PropertyChanges { target: installAllButton; visible: false}
+        },
+        State {
+            name: "SYSTEMUPDATEFAILED"
+            PropertyChanges { target: installingImageUpdate; visible: false}
+            PropertyChanges { target: installAllButton; visible: false}
+            PropertyChanges { target: checkForUpdatesArea; visible: false}
+            PropertyChanges { target: updateNotification; visible: false}
+        },
+        State {
+            name: "UPDATE"
+            PropertyChanges { target: updateList; visible: true}
+            PropertyChanges { target: installAllButton; visible: root.updatesAvailable > 1}
+            PropertyChanges { target: updateNotification; visible: false}
+        }
+    ]
 
     Connections {
         id: updateManager

@@ -92,13 +92,15 @@ public:
          NotStarted,
          Downloading,
          Downloaded,
-         Paused
+         Paused,
+         Installing,
+         Installed
     };
 
     enum UpdateType {
-        Unknown = 0,
-        System = 1,
-        Click = 2
+        Unknown,
+        System,
+        Click
     };
 
     explicit Update(QObject *parent = 0);

@@ -17,3 +17,19 @@
  * Jonas G. Drange <jonas.drange@canonical.com>
  *
 */
+#include "updatesmodel.h"
+
+UpdatesModel::UpdatesModel(QObject *parent) :
+    QAbstractListModel(parent),
+    currentFilter(Update::Unknown)
+{
+    connect(deviceInfoManager,SIGNAL(ready()),this,SLOT(updateDeviceList()));
+    connect(deviceInfoManager,SIGNAL(filterChanged(QInputDevice::InputTypeFlags)),
+            this,SLOT(updateDeviceList()));
+
+
+    connect(deviceInfoManager, &QInputInfoManager::deviceAdded,
+            this,&QDeclarativeInputDeviceModel::addedDevice);
+    connect(deviceInfoManager, &QInputInfoManager::deviceRemoved,
+            this,&QDeclarativeInputDeviceModel::removedDevice);
+}
