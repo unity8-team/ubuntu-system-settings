@@ -30,7 +30,9 @@ namespace UpdatePlugin {
 class Update : public QObject
 {
     Q_OBJECT
+    Q_ENUMS(UpdateType)
     Q_ENUMS(Status)
+
     Q_PROPERTY(bool systemUpdate READ systemUpdate WRITE setSystemUpdate
                NOTIFY systemUpdateChanged)
     Q_PROPERTY(QString packageName READ getPackageName NOTIFY packageNameChanged)
@@ -89,6 +91,12 @@ public:
          Downloading,
          Downloaded,
          Paused
+    };
+
+    enum UpdateType {
+        Unknown = 0,
+        System = 1,
+        Click = 2
     };
 
     explicit Update(QObject *parent = 0);
