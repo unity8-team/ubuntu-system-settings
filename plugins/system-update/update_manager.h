@@ -52,6 +52,7 @@ namespace UpdatePlugin {
 class UpdateManager : public QObject
 {
     Q_OBJECT
+    Q_ENUMS(UpdateStatus)
     Q_PROPERTY(QVariantList model READ model NOTIFY modelChanged)
     Q_PROPERTY(int downloadMode READ downloadMode WRITE setDownloadMode
                NOTIFY downloadModeChanged)
@@ -90,6 +91,15 @@ Q_SIGNALS:
 
 public:
     static UpdateManager *instance();
+
+    enum UpdateStatus {
+         NotStarted,
+         Downloading,
+         Downloaded,
+         Paused,
+         Installing,
+         Installed
+    };
 
     Q_INVOKABLE void checkUpdates();
     Q_INVOKABLE void startDownload(const QString &packagename);

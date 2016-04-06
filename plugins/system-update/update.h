@@ -127,26 +127,26 @@ public:
     QString changelog() { return m_changelog; }
     Status status() { return m_status; }
 
-    void setSystemUpdate(bool isSystem);
+    void setSystemUpdate(bool isSystem); // KILL
     void initializeApplication(QString packagename, QString title,
-                               QString version);
-    void setRemoteVersion(QString &version);
-    void setUpdateRequired(bool state);
-    void setUpdateState(bool state);
-    void setUpdateReady(bool ready);
-    void setSelected(bool value);
-    void setBinaryFilesize(int size);
-    void setDownloadProgress(int progress);
-    void setIconUrl(QString icon);
-    void setError(QString error);
-    void setUpdateAvailable(bool available) { m_update = available; }
-    void setLastUpdateDate(const QString date);
-    void setClickUrl(const QString &url) { m_click_url = url; }
-    void setDownloadUrl(const QString &url);
-    void setClickToken(const QString &token) { m_clickToken = token; Q_EMIT clickTokenChanged(); }
-    void setDownloadSha512(const QString &sha512) { m_download_sha512 = sha512; Q_EMIT downloadSha512Changed(); }
-    void setChangelog(const QString &changelog) { m_changelog = changelog; Q_EMIT changelogChanged(); }
-    void setStatus(Status s) { m_status = s; Q_EMIT statusChanged(); }
+                               QString version); // ???
+    void setRemoteVersion(QString &version); // UDM meta
+    void setUpdateRequired(bool state); // ???
+    void setUpdateState(bool state); // ???
+    void setUpdateReady(bool ready); // UDM
+    void setSelected(bool value); // ???
+    void setBinaryFilesize(int size); // UDM meta
+    void setDownloadProgress(int progress); // UDM
+    void setIconUrl(QString icon); // UDM meta
+    void setError(QString error); // QML
+    void setUpdateAvailable(bool available) { m_update = available; } // KILL
+    void setLastUpdateDate(const QString date); // KILL
+    void setClickUrl(const QString &url) { m_click_url = url; } // ???
+    void setDownloadUrl(const QString &url); // UDM
+    void setClickToken(const QString &token) { m_clickToken = token; Q_EMIT clickTokenChanged(); } // ???
+    void setDownloadSha512(const QString &sha512) { m_download_sha512 = sha512; Q_EMIT downloadSha512Changed(); } // ???
+    void setChangelog(const QString &changelog) { m_changelog = changelog; Q_EMIT changelogChanged(); } // UDM meta
+    void setStatus(Status s) { m_status = s; Q_EMIT statusChanged(); } // UDM
 
 private:
     int m_binary_filesize;

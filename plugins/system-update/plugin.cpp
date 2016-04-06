@@ -25,7 +25,6 @@
 #include "update_manager.h"
 #include "system_update.h"
 #include "update.h"
-#include "download_tracker.h"
 
 using namespace UpdatePlugin;
 
@@ -35,7 +34,6 @@ void BackendPlugin::registerTypes(const char *uri)
 
     qmlRegisterType<SystemUpdate>(uri, 1, 0, "SystemUpdate");
     qmlRegisterType<Update>(uri, 1, 0, "Update");
-    qmlRegisterType<DownloadTracker>(uri, 1, 0, "DownloadTracker");
 }
 
 void BackendPlugin::initializeEngine(QQmlEngine *engine, const char *uri)
