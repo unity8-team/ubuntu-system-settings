@@ -59,7 +59,7 @@ HotspotItem::HotspotItem(const QVariantMap &staticData, QObject *parent):
 
     bool supportedDevice(true);
 
-    // TODO: Remove check for mako (lp:1434591).
+    // TODO: Remove check for flo (LP 1434591).
     QDBusInterface m_SystemServiceIface("com.canonical.SystemImage",
                                         "/Service",
                                         "com.canonical.SystemImage",
@@ -69,7 +69,7 @@ HotspotItem::HotspotItem(const QVariantMap &staticData, QObject *parent):
     if (reply.isValid()) {
         QMap<QString, QString> result = reply.argumentAt<0>();
         QString device = result["device_name"];
-        if (device == "mako" || device == "flo") {
+        if (device == "flo") {
             setVisibility(false);
             return;
         }
