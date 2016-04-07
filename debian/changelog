@@ -1,3 +1,11 @@
+ubuntu-system-settings (0.3+16.04.20160407-0ubuntu1) xenial; urgency=medium
+
+  [ Ken VanDine ]
+  * Ported DefaultSimForCalls, DefaultSimForMessages and SimNames to use
+    AccountsService (LP: #1418040)
+
+ -- Alfonso Sanchez-Beato <alfonso.sanchez-beato@canonical.com>  Thu, 07 Apr 2016 13:20:44 +0000
+
 ubuntu-system-settings (0.3+16.04.20160330-0ubuntu1) xenial; urgency=medium
 
   [ Jin Hsieh ]
