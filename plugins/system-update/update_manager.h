@@ -98,7 +98,8 @@ public:
          Downloaded,
          Paused,
          Installing,
-         Installed
+         Installed,
+         Failed
     };
 
     Q_INVOKABLE void checkUpdates();

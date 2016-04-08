@@ -15,14 +15,26 @@
  * You should have received a copy of the GNU General Public License along
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * This file represents the UI of the System Updates panel and exposes an
- * API that can be used to present the various states of the update panel,
- * e.g. "not logged in", "no updates found", etc.
- *
+ * This file represents the UI of the System Updates panel.
  */
 
 Column {
 
-    property var name
+    /*!
+        \qmlproperty bool userAuthenticated
+
+        Indicates whether or not the user is authenticated and can receive
+        updates which require authentication.
+    */
+    property bool userAuthenticated: false
+
+    /*!
+        \qmlproperty bool havePower
+
+        Indicates whether or not there is sufficient power to perform
+        updates.
+    */
+    property bool havePower: false
+
 
 }
