@@ -6,7 +6,7 @@ SET (CMAKE_AUTOMOC ON)
 
 add_library(UbuntuUpdatePanel MODULE
             plugin.cpp
-            updatemanager.cpp
+            # updatemanager.cpp
             ${QML_SOURCES})
 
 qt5_use_modules(UbuntuUpdatePanel Qml Quick Network DBus)
