@@ -25,7 +25,7 @@
 #include <QTimer>
 #include <SystemSettings/ItemBase>
 
-#include "../update_manager.h"
+#include "../updatemanager.h"
 
 using namespace SystemSettings;
 using namespace UpdatePlugin;

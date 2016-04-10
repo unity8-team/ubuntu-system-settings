@@ -26,7 +26,7 @@ import Ubuntu.Components 1.3
 import Ubuntu.Components.ListItems 1.3 as ListItem
 import Ubuntu.Components.Popups 1.3
 import Ubuntu.OnlineAccounts.Client 0.1
-import Ubuntu.SystemSettings.Update 1.0
+// import Ubuntu.SystemSettings.Update 1.0
 import Ubuntu.Connectivity 1.0
 
 
@@ -34,41 +34,41 @@ ItemPage {
     id: root
     objectName: "systemUpdatesPage"
 
-    property bool isCharging: indicatorPower.deviceState === "charging"
-    property bool batterySafeForUpdate: isCharging || chargeLevel > 25
-    property var chargeLevel: indicatorPower.batteryLevel || 0
+    // property bool isCharging: indicatorPower.deviceState === "charging"
+    // property bool batterySafeForUpdate: isCharging || chargeLevel > 25
+    // property var chargeLevel: indicatorPower.batteryLevel || 0
 
-    QDBusActionGroup {
-        id: indicatorPower
-        busType: 1
-        busName: "com.canonical.indicator.power"
-        objectPath: "/com/canonical/indicator/power"
-        property variant batteryLevel: action("battery-level").state
-        property variant deviceState: action("device-state").state
-        Component.onCompleted: start()
-    }
+    // QDBusActionGroup {
+    //     id: indicatorPower
+    //     busType: 1
+    //     busName: "com.canonical.indicator.power"
+    //     objectPath: "/com/canonical/indicator/power"
+    //     property variant batteryLevel: action("battery-level").state
+    //     property variant deviceState: action("device-state").state
+    //     Component.onCompleted: start()
+    // }
 
-    Connections {
-        id: networkingStatus
-        target: NetworkingStatus
-        onOnlineChanged: {
-            if (NetworkingStatus.online) {
-                // Set to searching, and start a search for updates
-            } else {
-                // Stop all things
-            }
-        }
-    }
+    // Connections {
+    //     id: networkingStatus
+    //     target: NetworkingStatus
+    //     onOnlineChanged: {
+    //         if (NetworkingStatus.online) {
+    //             // Set to searching, and start a search for updates
+    //         } else {
+    //             // Stop all things
+    //         }
+    //     }
+    // }
 
-    Setup {
-        id: uoaConfig
-        applicationId: "ubuntu-system-settings"
-        providerId: "ubuntuone"
+    // Setup {
+    //     id: uoaConfig
+    //     applicationId: "ubuntu-system-settings"
+    //     providerId: "ubuntuone"
 
-        onFinished: {
-            // Found credentials, do stuff that now can be done
-        }
-    }
+    //     onFinished: {
+    //         // Found credentials, do stuff that now can be done
+    //     }
+    // }
 
     Component {
          id: dialogErrorComponent

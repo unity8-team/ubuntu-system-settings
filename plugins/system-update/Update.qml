@@ -3,8 +3,6 @@
  *
  * Copyright (C) 2016 Canonical Ltd.
  *
- * Contact: Jonas G. Drange <jonas.drange@canonical.com>
- *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License version 3, as published
  * by the Free Software Foundation.
@@ -24,54 +22,90 @@
  */
 
 import QtQuick 2.4
+import Ubuntu.Components 1.3
 
 Item {
+    id: update
 
-    property string name
-    property int status // This is an UpdateManager::UpdateStatus enum
+    property alias name: name.text
+    property int status // This is an updateManager::UpdateStatus
+    property int mode // This is an updateManager::UpdateMode
     property string version
-    property string iconUrl
+    property alias iconUrl: icon.source
     property string size
     property string changelog
     property int progress // From 0 to 100
 
     signal retry()
     signal download()
-    signal install()
     signal pause()
+    signal install()
 
-    states: [
-        State {
-            name: "NotStarted"
-            when: status === DownloadManager.NotStarted
-        },
-        State {
-            name: "Downloading"
-            when: status === DownloadManager.Downloading
-        },
-        State {
-            name: "Downloaded"
-            when: status === DownloadManager.Downloaded
-        },
-        State {
-            name: "Paused"
-            when: status === DownloadManager.Paused
-        },
-        State {
-            name: "Installing"
-            when: status === DownloadManager.Installing
-        },
-        State {
-            name: "Installed"
-            when: status === DownloadManager.Installed
-        },
-        State {
-            name: "Failed"
-            when: status === DownloadManager.Failed
-        }
-    ]
+    // MOCK
+    property var updateManager: ({
+        "downloadable": 0,
+        "installable": 1,
+        "installableWithRestart": 2,
+        "pausable": 3,
+        "nonPausable": 4,
+        "retriable": 5,
+    })
 
     function setError(errorString) {
 
+    }
+
+    states: [
+    ]
+
+    Icon {
+        id: icon
+    }
+
+    Label {
+        id: name
+        font.bold: true
+        elide: Text.ElideMiddle
+    }
+
+    Button {
+        // Enabled as long as it's not NonPausable.
+        enabled: update.mode !== updateManager.nonPausable
+
+        text: {
+            switch(update.mode) {
+            case updateManager.retriable:
+                return i18n.tr("Retry")
+            case updateManager.downloadable:
+                return i18n.tr("Download")
+            case updateManager.pausable:
+            case updateManager.nonPausable:
+                return i18n.tr("Pause")
+            case updateManager.installable:
+                return i18n.tr("Install")
+            case updateManager.installableWithRestart:
+                return i18n.tr("Install…")
+            }
+        }
+
+        onClicked: {
+            switch (update.mode) {
+            case updateManager.retriable:
+                update.retry();
+                break;
+            case updateManager.downloadable:
+                update.download();
+                break;
+            case updateManager.pausable:
+                update.pause();
+                break;
+            case updateManager.installable:
+            case updateManager.installableWithRestart:
+                update.install();
+                break;
+            case updateManager.nonPausable:
+                break;
+            }
+        }
     }
 }

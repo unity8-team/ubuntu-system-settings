@@ -37,13 +37,58 @@ namespace UpdatePlugin {
 class SystemUpdate : public QObject
 {
     Q_OBJECT
+    Q_PROPERTY(UpdateManager::UpdateStatus status READ status NOTIFY statusChanged)
+    Q_PROPERTY(int downloadMode READ downloadMode WRITE setDownloadMode
+               NOTIFY downloadModeChanged)
+    Q_PROPERTY(QString version READ version NOTIFY versionChanged)
+    Q_PROPERTY(double progress READ progress NOTIFY progressChanged)
+    Q_PROPERTY(int size READ size NOTIFY sizeChanged)
 
 public:
     explicit SystemUpdate(QObject *parent = 0);
     ~SystemUpdate();
 
-    int downloadMode();
-    void setDownloadMode(int);
+    const int downloadMode();
+    void setDownloadMode(const int &downloadMode);
+
+    const UpdateManager::UpdateStatus status();
+
+    const QString version();
+    const double progress();
+    const int size();
+
+    // Q_INVOKABLE void checkForUpdate();
+    Q_INVOKABLE void downloadUpdate();
+    Q_INVOKABLE void forceAllowGSMDownload();
+    Q_INVOKABLE void applyUpdate();
+    Q_INVOKABLE void cancelUpdate();
+    Q_INVOKABLE void pauseDownload();
+    Q_INVOKABLE void checkTarget();
+
+public Q_SLOTS:
+    void ProcessAvailableStatus(bool, bool, QString, int, QString, QString);
+    void ProcessSettingChanged(QString, QString);
+
+Q_SIGNALS:
+    void downloadModeChanged();
+    void versionChanged();
+    void statusChanged();
+    void progressChanged();
+    void sizeChanged();
+    // void updateAvailable(const QString& packageName);
+    // void updateNotFound();
+    // void updateProgress(int percentage, double eta);
+    // void updatePaused(int percentage);
+    // void downloadStarted();
+    // void updateDownloaded();
+    // void updateFailed(int consecutiveFailureCount, QString lastReason);
+    // void updateProcessFailed(const QString& reason);
+    // void rebooting(bool status);
+
+private Q_SLOTS:
+    void updateDownloadProgress(int percentage, double eta);
+
+private:
     QDateTime lastUpdateDate();
     int currentBuildNumber();
     QString currentUbuntuBuildNumber();
@@ -52,45 +97,17 @@ public:
     QMap<QString, QVariant> detailedVersionDetails();
     QString deviceName();
 
-    void checkForUpdate();
-    void downloadUpdate();
-    void forceAllowGSMDownload();
-    void applyUpdate();
-    void cancelUpdate();
-    void pauseDownload();
-    bool checkTarget();
-
-public Q_SLOTS:
-    void ProcessAvailableStatus(bool, bool, QString, int, QString, QString);
-    void ProcessSettingChanged(QString, QString);
-
-Q_SIGNALS:
-    void updateAvailable(const QString& packageName, Update *update);
-    void updateNotFound();
-    void updateProgress(int percentage, double eta);
-    void updatePaused(int percentage);
-    void downloadStarted();
-    void updateDownloaded();
-    void updateFailed(int consecutiveFailureCount, QString lastReason);
-    void downloadModeChanged();
-    void versionChanged();
-    void updateProcessFailed(const QString& reason);
-    void rebooting(bool status);
-
-private Q_SLOTS:
-    void updateDownloadProgress(int percentage, double eta);
-
-private:
     int m_currentBuildNumber;
     QMap<QString, QVariant> m_detailedVersion;
     QDateTime m_lastUpdateDate;
     int m_downloadMode;
     QString m_deviceName;
 
+    UpdateManager::UpdateStatus m_status;
+
     QDBusConnection m_systemBusConnection;
     QString m_objectPath;
     QDBusInterface m_SystemServiceIface;
-    Update *update;
 
     void setCurrentDetailedVersion();
 };

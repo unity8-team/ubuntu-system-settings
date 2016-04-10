@@ -4,8 +4,10 @@ set(QML_SOURCES
     Configuration.qml)
 SET (CMAKE_AUTOMOC ON)
 
-add_library(UbuntuUpdatePanel MODULE plugin.h plugin.cpp
-${QML_SOURCES})
+add_library(UbuntuUpdatePanel MODULE
+            plugin.cpp
+            updatemanager.cpp
+            ${QML_SOURCES})
 
 qt5_use_modules(UbuntuUpdatePanel Qml Quick Network DBus)
 include_directories(/usr/include/apt-pkg/)
@@ -16,6 +18,7 @@ target_link_libraries(UbuntuUpdatePanel
     apt-pkg
     update-plugin
     ${UBUNTUONEAUTH_LDFLAGS}
+    ${UBUNTUDOWNLOADMANAGERQML_LDFLAGS}
 )
 
 set(PLUG_DIR ${PLUGIN_PRIVATE_MODULE_DIR}/Ubuntu/SystemSettings/Update)

@@ -22,9 +22,9 @@
 
 #include <QtQml>
 #include <QtQml/QQmlContext>
-#include "update_manager.h"
+#include "updatemanager.h"
 #include "system_update.h"
-#include "update.h"
+#include "updatemanager.h"
 
 using namespace UpdatePlugin;
 
@@ -33,7 +33,6 @@ void BackendPlugin::registerTypes(const char *uri)
     Q_ASSERT(uri == QLatin1String("Ubuntu.SystemSettings.Update"));
 
     qmlRegisterType<SystemUpdate>(uri, 1, 0, "SystemUpdate");
-    qmlRegisterType<Update>(uri, 1, 0, "Update");
 }
 
 void BackendPlugin::initializeEngine(QQmlEngine *engine, const char *uri)

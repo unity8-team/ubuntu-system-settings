@@ -48,7 +48,6 @@ SystemUpdate::SystemUpdate(QObject *parent) :
                          "com.canonical.SystemImage",
                          m_systemBusConnection)
 {
-    update = nullptr;
 
     qDBusRegisterMetaType<QMap<QString, QString> >();
 
@@ -242,38 +241,38 @@ void SystemUpdate::ProcessAvailableStatus(bool isAvailable,
                                           QString lastUpdateDate,
                                           QString errorReason)
 {
-    update = new Update(this);
-    QString packageName(UBUNTU_PACKAGE_NAME);
-    update->initializeApplication(packageName, "Ubuntu",
-                                  QString::number(this->currentBuildNumber()));
+    // update = new Update(this);
+    // QString packageName(UBUNTU_PACKAGE_NAME);
+    // update->initializeApplication(packageName, "Ubuntu",
+    //                               QString::number(this->currentBuildNumber()));
 
-    update->setSystemUpdate(true);
-    update->setRemoteVersion(availableVersion);
-    update->setBinaryFilesize(updateSize);
-    update->setError(errorReason);
-    update->setUpdateState(downloading);
-    update->setSelected(downloading);
-    update->setUpdateAvailable(isAvailable);
-    update->setLastUpdateDate(lastUpdateDate);
-    update->setIconUrl(QString("file:///usr/share/icons/suru/places/scalable/distributor-logo.svg"));
+    // update->setSystemUpdate(true);
+    // update->setRemoteVersion(availableVersion);
+    // update->setBinaryFilesize(updateSize);
+    // update->setError(errorReason);
+    // update->setUpdateState(downloading);
+    // update->setSelected(downloading);
+    // update->setUpdateAvailable(isAvailable);
+    // update->setLastUpdateDate(lastUpdateDate);
+    // update->setIconUrl(QString("file:///usr/share/icons/suru/places/scalable/distributor-logo.svg"));
 
-    if (update->updateRequired()) {
-        Q_EMIT updateAvailable(packageName, update);
-    } else {
-        Q_EMIT updateNotFound();
-    }
+    // if (update->updateRequired()) {
+    //     Q_EMIT updateAvailable(packageName, update);
+    // } else {
+    //     Q_EMIT updateNotFound();
+    // }
 
-    if (downloading) {
-        update->setSelected(true);
-    }
+    // if (downloading) {
+    //     update->setSelected(true);
+    // }
 }
 
 void SystemUpdate::updateDownloadProgress(int percentage, double eta)
 {
     Q_UNUSED(eta);
-    if (update != nullptr) {
-        update->setDownloadProgress(percentage);
-    }
+    // if (update != nullptr) {
+    //     update->setDownloadProgress(percentage);
+    // }
 }
 
 }

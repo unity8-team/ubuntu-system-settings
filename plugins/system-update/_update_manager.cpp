@@ -310,7 +310,7 @@ void UpdateManager::systemUpdatePaused(int value)
 }
 
 void UpdateManager::systemUpdateDownloadStarted()
-{                 
+{
     QString packagename(UBUNTU_PACKAGE_NAME);
     if (m_apps.contains(packagename)) {
         Update *update = m_apps[packagename];
@@ -318,7 +318,7 @@ void UpdateManager::systemUpdateDownloadStarted()
         update->setUpdateState(true);
         update->setStatus(Update::Downloading);
     }
-} 
+}
 
 void UpdateManager::systemUpdateProgress(int value, double eta)
 {
@@ -342,7 +342,7 @@ void UpdateManager::startDownload(const QString &packagename)
 
 void UpdateManager::forceAllowGSMDownload(const QString &packagename)
 {
-    if (!m_apps[packagename]->systemUpdate()) 
+    if (!m_apps[packagename]->systemUpdate())
         return;
 
     m_apps[packagename]->setUpdateState(true);

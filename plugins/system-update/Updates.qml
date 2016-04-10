@@ -18,23 +18,67 @@
  * This file represents the UI of the System Updates panel.
  */
 
+import QtQuick 2.4
+import Ubuntu.Components 1.3
+
 Column {
+    id: updates
 
-    /*!
-        \qmlproperty bool userAuthenticated
-
-        Indicates whether or not the user is authenticated and can receive
-        updates which require authentication.
-    */
-    property bool userAuthenticated: false
+    width: units.gu(50)
+    height: units.gu(95)
 
     /*!
         \qmlproperty bool havePower
 
         Indicates whether or not there is sufficient power to perform
-        updates.
+        updates. If disabled, it causes the UI to prompt for power to
+        be provided if user initiates an update.
     */
     property bool havePower: false
 
+    /*!
+        \qmlproperty bool checkInprogress
 
+        Indicates whether or not there's a check in progress. Causes the
+        UI to hide things that aren't appropriate.
+    */
+    property bool checkInprogress: false
+
+    /*!
+        \qmlproperty bool authenticated
+
+        Indicates whether or not the user is authenticated.
+    */
+    property bool authenticated: false
+
+    property alias systemUpdate: imageUpdate.systemUpdate
+
+    property alias clickUpdatesModel: clickUpdates.model
+
+    /*!
+        \qmlsignal requestAuthentication
+
+        Indicates that the user wanted to authenticate.
+
+        \sa authenticated
+    */
+    signal requestAuthentication()
+
+    Global {
+        id: globalArea
+    }
+
+    ImageUpdate {
+        id: imageUpdate
+    }
+
+    ClickUpdates {
+        id: clickUpdates
+        visible: authenticated
+    }
+
+    NotAuthenticatedNotification {
+        visible: !authenticated
+        onRequestAuthentication: updates.requestAuthentication()
+    }
 }
