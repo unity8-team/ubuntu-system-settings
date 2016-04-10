@@ -36,12 +36,14 @@ public:
     explicit QSystemImage(QObject *parent = 0);
     ~QSystemImage();
 
-    Q_PROPERTY(QString downloadMode READ downloadMode
+    Q_PROPERTY(int downloadMode READ downloadMode
                WRITE setDownloadMode NOTIFY downloadModeChanged)
     Q_PROPERTY(QString channelName READ channelName NOTIFY channelNameChanged)
     Q_PROPERTY(QString deviceName READ deviceName NOTIFY deviceNameChanged)
-    Q_PROPERTY(QString currentBuildNumber READ currentBuildNumber
+    Q_PROPERTY(int currentBuildNumber READ currentBuildNumber
                NOTIFY currentBuildNumberChanged)
+    Q_PROPERTY(int targetBuildNumber READ targetBuildNumber
+               NOTIFY targetBuildNumberChanged)
     Q_PROPERTY(QString currentUbuntuBuildNumber READ currentUbuntuBuildNumber
                NOTIFY currentUbuntuBuildNumberChanged)
     Q_PROPERTY(QString currentDeviceBuildNumber READ currentDeviceBuildNumber
@@ -59,15 +61,16 @@ public:
     int downloadMode();
     void setDownloadMode(const int &downloadMode);
 
-    const QString deviceName();
-    const QString channelName();
-    const QString currentUbuntuBuildNumber();
-    const QString currentDeviceBuildNumber();
-    const QString currentCustomBuildNumber();
-    const QVariantMap detailedVersionDetails();
-    const int currentBuildNumber();
-    const QDateTime lastUpdateDate();
-    const QDateTime lastCheckDate();
+    QString deviceName() const;
+    QString channelName() const;
+    QString currentUbuntuBuildNumber() const;
+    QString currentDeviceBuildNumber() const;
+    QString currentCustomBuildNumber() const;
+    QVariantMap detailedVersionDetails() const;
+    int currentBuildNumber() const;
+    int targetBuildNumber() const;
+    QDateTime lastUpdateDate() const;
+    QDateTime lastCheckDate() const;
 
     Q_INVOKABLE void checkForUpdate();
     Q_INVOKABLE void downloadUpdate();
@@ -78,6 +81,7 @@ public:
     Q_INVOKABLE void checkTarget();
     Q_INVOKABLE void productionReset();
     Q_INVOKABLE void factoryReset();
+    Q_INVOKABLE bool getIsTargetNewer() const;
 
 signals:
     void currentBuildNumberChanged();
@@ -86,6 +90,7 @@ signals:
     void currentUbuntuBuildNumberChanged();
     void currentDeviceBuildNumberChanged();
     void currentCustomBuildNumberChanged();
+    void targetBuildNumberChanged();
     void detailedVersionDetailsChanged();
     void lastUpdateDateChanged();
     void lastCheckDateChanged();
@@ -99,7 +104,6 @@ signals:
     void updateDownloaded();
     void downloadStarted();
     void updatePaused(const int &percentage);
-    void updateProgress(const int &percentage, const double &eta);
     void updateAvailableStatus(const bool isAvailable,
                                const bool downloading,
                                const QString &availableVersion,
@@ -110,6 +114,7 @@ signals:
 
 private slots:
     void slotNameOwnerChanged(const QString&, const QString&, const QString&);
+    void settingsChanged(const QString &key, const QString &newvalue);
 
 private:
     int m_currentBuildNumber;
@@ -127,8 +132,7 @@ private:
     QString m_deviceName;
 
     void initializeProperties();
+    void setUpInterface();
 };
-
-}
 
 #endif // QSYSTEMIMAGE_H

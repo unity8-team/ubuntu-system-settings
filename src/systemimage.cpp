@@ -35,9 +35,7 @@ QString _(const char *text)
     return QString::fromUtf8(dgettext(0, text));
 }
 
-namespace UpdatePlugin {
-
-SystemUpdate::SystemUpdate(QObject *parent) :
+QSystemImage::QSystemImage(QObject *parent) :
     QObject(parent),
     m_downloadMode(-1),
     m_systemBusConnection (QDBusConnection::systemBus()),
@@ -61,12 +59,12 @@ SystemUpdate::SystemUpdate(QObject *parent) :
     setUpInterface();
 }
 
-SystemUpdate::~SystemUpdate() {
+QSystemImage::~QSystemImage() {
 }
 
-void SystemUpdate::slotNameOwnerChanged(QString name,
-                                        QString oldOwner,
-                                        QString newOwner) {
+void QSystemImage::slotNameOwnerChanged(const QString &name,
+                                        const QString &oldOwner,
+                                        const QString &newOwner) {
     Q_UNUSED (oldOwner);
     Q_UNUSED (newOwner);
 
@@ -77,7 +75,7 @@ void SystemUpdate::slotNameOwnerChanged(QString name,
         setUpInterface();
 }
 
-void SystemUpdate::setUpInterface() {
+void QSystemImage::setUpInterface() {
     connect(&m_systemServiceIface,
             SIGNAL(UpdateAvailableStatus(bool, bool, QString, int, QString,
                                          QString)),
@@ -105,49 +103,45 @@ void SystemUpdate::setUpInterface() {
     initializeProperties();
 }
 
-void SystemUpdate::factoryReset() {
+void QSystemImage::factoryReset() {
     m_systemServiceIface.asyncCall("FactoryReset");
 }
 
-void SystemUpdate::factoryReset() {
-    m_systemServiceIface.asyncCall("FactoryReset");
-}
-
-void SystemUpdate::productionReset() {
+void QSystemImage::productionReset() {
     m_systemServiceIface.asyncCall("ProductionReset");
 }
 
-void SystemUpdate::checkForUpdate() {
+void QSystemImage::checkForUpdate() {
     m_systemServiceIface.asyncCall("CheckForUpdate");
 }
 
-void SystemUpdate::downloadUpdate() {
+void QSystemImage::downloadUpdate() {
     m_systemServiceIface.asyncCall("DownloadUpdate");
 }
 
-void SystemUpdate::forceAllowGSMDownload() {
+void QSystemImage::forceAllowGSMDownload() {
     m_systemServiceIface.asyncCall("ForceAllowGSMDownload");
 }
 
-void SystemUpdate::applyUpdate() {
+void QSystemImage::applyUpdate() {
     QDBusReply<QString> reply = m_systemServiceIface.call("ApplyUpdate");
     if (!reply.isValid())
         Q_EMIT updateProcessFailed(reply.value());
 }
 
-void SystemUpdate::cancelUpdate() {
+void QSystemImage::cancelUpdate() {
     QDBusReply<QString> reply = m_systemServiceIface.call("CancelUpdate");
     if (!reply.isValid())
         Q_EMIT updateProcessFailed(_("Can't cancel current request (can't contact service)"));
 }
 
-void SystemUpdate::pauseDownload() {
+void QSystemImage::pauseDownload() {
     QDBusReply<QString> reply = m_systemServiceIface.call("PauseDownload");
     if (!reply.isValid())
         Q_EMIT updateProcessFailed(_("Can't pause current request (can't contact service)"));
 }
 
-void SystemUpdate::initializeProperties() {
+void QSystemImage::initializeProperties() {
     QDBusPendingReply<QMap<QString, QString> > reply = m_systemServiceIface.call("Information");
     reply.waitForFinished();
     if (reply.isValid()) {
@@ -184,50 +178,54 @@ void SystemUpdate::initializeProperties() {
     }
 }
 
-const bool SystemUpdate::checkTarget() {
+bool QSystemImage::getIsTargetNewer() const {
     return m_targetBuildNumber > m_currentBuildNumber;
 }
 
-const QString SystemUpdate::deviceName() {
+QString QSystemImage::deviceName() const {
     return m_deviceName;
 }
 
-const QString SystemUpdate::channelName() {
+QString QSystemImage::channelName() const {
     return m_channelName;
 }
 
-const QDateTime SystemUpdate::lastUpdateDate() {
+QDateTime QSystemImage::lastUpdateDate() const {
     return m_lastUpdateDate;
 }
 
-const QDateTime SystemUpdate::lastCheckDate() {
+QDateTime QSystemImage::lastCheckDate() const {
     return m_lastCheckDate;
 }
 
-const int SystemUpdate::currentBuildNumber() {
+int QSystemImage::currentBuildNumber() const {
     return m_currentBuildNumber;
 }
 
-const QString SystemUpdate::currentUbuntuBuildNumber() {
+QString QSystemImage::currentUbuntuBuildNumber() const {
     QString val = m_detailedVersion.value("ubuntu").toString();
     return val.isEmpty() ? _("Unavailable") : val;
 }
 
-const QString SystemUpdate::currentDeviceBuildNumber() {
+QString QSystemImage::currentDeviceBuildNumber() const {
     QString val = m_detailedVersion.value("device").toString();
     return val.isEmpty() ? _("Unavailable") : val;
 }
 
-const QString SystemUpdate::currentCustomBuildNumber() {
+QString QSystemImage::currentCustomBuildNumber() const {
     QString val = m_detailedVersion.value("custom").toString();
     return val.isEmpty() ? _("Unavailable") : val;
 }
 
-const QVariantMap SystemUpdate::detailedVersionDetails() {
+int QSystemImage::targetBuildNumber() const {
+    return m_targetBuildNumber;
+}
+
+QVariantMap QSystemImage::detailedVersionDetails() const {
     return m_detailedVersion;
 }
 
-int SystemUpdate::downloadMode() {
+int QSystemImage::downloadMode() {
     if (m_downloadMode != -1)
         return m_downloadMode;
 
@@ -248,15 +246,15 @@ int SystemUpdate::downloadMode() {
     return m_downloadMode;
 }
 
-void SystemUpdate::setDownloadMode(const int &value) {
-    if (m_downloadMode == value)
+void QSystemImage::setDownloadMode(const int &downloadMode) {
+    if (m_downloadMode == downloadMode)
         return;
 
-    m_downloadMode = value;
-    m_systemServiceIface.asyncCall("SetSetting", "auto_download", QString::number(value));
+    m_downloadMode = downloadMode;
+    m_systemServiceIface.asyncCall("SetSetting", "auto_download", QString::number(downloadMode));
 }
 
-void SystemUpdate::settingsChanged(const QString &key, const QString &newvalue) {
+void QSystemImage::settingsChanged(const QString &key, const QString &newvalue) {
     if(key == "auto_download") {
         bool ok;
         int newintValue;
@@ -268,7 +266,7 @@ void SystemUpdate::settingsChanged(const QString &key, const QString &newvalue) 
     }
 }
 
-// void SystemUpdate::ProcessAvailableStatus(bool isAvailable,
+// void QSystemImage::ProcessAvailableStatus(bool isAvailable,
 //                                           bool downloading,
 //                                           QString availableVersion,
 //                                           int updateSize,
@@ -280,7 +278,7 @@ void SystemUpdate::settingsChanged(const QString &key, const QString &newvalue) 
 //     // update->initializeApplication(packageName, "Ubuntu",
 //     //                               QString::number(this->currentBuildNumber()));
 
-//     // update->setSystemUpdate(true);
+//     // update->QSystemImage(true);
 //     // update->setRemoteVersion(availableVersion);
 //     // update->setBinaryFilesize(updateSize);
 //     // update->setError(errorReason);
@@ -300,5 +298,3 @@ void SystemUpdate::settingsChanged(const QString &key, const QString &newvalue) 
 //     //     update->setSelected(true);
 //     // }
 // }
-
-}
