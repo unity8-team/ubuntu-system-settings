@@ -22,10 +22,9 @@
 
 #include <QDebug>
 #include <QStringList>
-#include <QTimer>
 #include <SystemSettings/ItemBase>
 
-// #include "../updatemanager.h"
+#include "../updatemanager.h"
 
 using namespace SystemSettings;
 using namespace UpdatePlugin;
@@ -40,9 +39,7 @@ public:
     ~UpdateItem();
 
 private Q_SLOTS:
-    void onUpdateAvailableFound(bool);
-    void onModelChanged();
-    void shouldShow();
+    void onUpdatesCountChanged();
 
 private:
     UpdateManager *m_updateManager;
@@ -53,17 +50,8 @@ UpdateItem::UpdateItem(const QVariantMap &staticData, QObject *parent):
 {
     setVisibility(false);
     m_updateManager = UpdateManager::instance();
-    QObject::connect(m_updateManager, SIGNAL(updateAvailableFound(bool)),
-                  this, SLOT(onUpdateAvailableFound(bool)));
-    QObject::connect(m_updateManager, SIGNAL(modelChanged()),
-                  this, SLOT(onModelChanged()));
-    QTimer::singleShot(100, this, SLOT(shouldShow()));
-}
-
-void UpdateItem::onUpdateAvailableFound(bool)
-{
-    if (m_updateManager->model().count() > 0)
-        setVisibility(true);
+    QObject::connect(m_updateManager, SIGNAL(updatesCountChanged()),
+                  this, SLOT(onUpdatesCountChanged()));
 }
 
 void UpdateItem::setVisibility(bool visible)
@@ -71,19 +59,14 @@ void UpdateItem::setVisibility(bool visible)
     setVisible(visible);
 }
 
-void UpdateItem::onModelChanged()
+void UpdateItem::onUpdatesCountChanged()
 {
-    if (m_updateManager->model().count() > 0)
+    if (m_updateManager->updatesCount() > 0)
         setVisibility(true);
     else
         setVisibility(false);
 }
 
-void UpdateItem::shouldShow()
-{
-    if (m_updateManager->checkTarget())
-        setVisibility(true);
-}
 
 UpdateItem::~UpdateItem()
 {

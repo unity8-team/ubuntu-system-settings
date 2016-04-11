@@ -25,27 +25,34 @@ class UpdateManager : public QObject
 {
     Q_OBJECT
 public:
-    explicit UpdateManager(QObject *parent = 0);
-    ~UpdateManager() {}
     static UpdateManager *instance();
 
+    Q_ENUMS(UpdateMode)
     Q_ENUMS(UpdateStatus)
     Q_PROPERTY(bool online READ online WRITE setOnline NOTIFY onlineChanged)
     Q_PROPERTY(bool authenticated READ authenticated
                NOTIFY authenticatedChanged)
+    Q_PROPERTY(bool haveSufficientPower READ haveSufficientPower
+               WRITE setHaveSufficientPower
+               NOTIFY haveSufficientPowerChanged)
     Q_PROPERTY(Ubuntu:DownloadManager::UbuntuDownloadManager udm READ udm
                NOTIFY udmChanged)
     Q_PROPERTY(int updatesCount READ updatesCount NOTIFY updatesCountChanged)
+    Q_PROPERTY(int downloadMode READ downloadMode WRITE setDownloadMode NOTIFY downloadModeChanged)
 
-    const bool online();
-    void setOnline(const bool &online);
+    bool online() const;
+    void setOnline(const bool online);
 
-    const bool authenticated();
-    void setAuthenticated(const bool &authenticated);
+    bool authenticated() const;
 
-    const Ubuntu:DownloadManager::UbuntuDownloadManager udm();
+    bool haveSufficientPower() const;
+    void setHaveSufficientPower(const bool haveSufficientPower);
 
-    const int updatesCount();
+    Ubuntu:DownloadManager::UbuntuDownloadManager udm() const;
+
+    int updatesCount() const;
+    int downloadMode() const;
+    void setDownloadMode(const int &downloadMode);
 
     enum UpdateMode {
         Downloadable,
@@ -57,6 +64,7 @@ public:
     };
 
     enum UpdateStatus {
+        NotAvailable,
         NotStarted,
         AutomaticallyDownloading,
         ManuallyDownloading,
@@ -67,18 +75,46 @@ public:
         Failed
     };
 
+protected:
+    explicit UpdateManager(QObject *parent = 0);
+    ~UpdateManager();
+
+public slots:
+    void checkForUpdates();
+    void abortCheckForUpdates();
+
+private slots:
+    void handleClickUpdateMetadataFound(
+            const ClickUpdateMetadata &clickUpdateMetadata);
+
+    // System Image slots
+    void siProcessAvailableStatus(const bool isAvailable,
+                                  const bool downloading,
+                                  const QString &availableVersion,
+                                  const int &updateSize,
+                                  const QString &lastUpdateDate,
+                                  const QString &errorReason);
+    // void siUpdateFailed(const int &consecutiveFailureCount,
+    //                     const QString &lastReason);
+
+    // UDM slots
+    // void udmDownloadFinished(const Ubuntu:DownloadManager::SingleDownload &download);
+    // void udmErrorFound(const Ubuntu:DownloadManager::SingleDownload &download);
+
+    // SSO slots
+    void handleCredentialsFound(const Token &token);
+    void handleCredentialsFailed();
+
+
 signals:
     void onlineChanged();
     void authenticatedChanged();
+    void haveSufficientPowerChanged();
     void udmChanged();
     void updatesCountChanged();
 
     // void requestClickUpdateMetadata();
     // void requestInstalledClicks();
-
-private slots:
-    void foundClickUpdate(QMap<QString, QVariant> clickUpdateMetadata);
-
 
 
 private:
@@ -86,12 +122,28 @@ private:
 
     bool m_online;
     bool m_authenticated;
+    bool m_haveSufficientPower;
     bool m_updatesCount;
 
     ClickUpdateChecker m_clickUpChecker;
     SystemUpdate m_systemUpdate;
+    QSystemImage m_systemImage;
     Ubuntu:DownloadManager::UbuntuDownloadManager m_udm;
     UbuntuOne::SSOService m_ssoService;
+
+    void setAuthenticated(const bool authenticated);
+    void setUpdatesCount(const int &count);
+
+    // Whether or not the click update metadata exist in UDM.
+    bool clickUpdateInUdm(const ClickUpdateMetadata &clickUpdateMetadata) const;
+
+    // Creates the download in UDM for click update with given metadata.
+    void createClickUpdateDownload(const ClickUpdateMetadata &clickUpdateMetadata);
+
+    void setUpSystemImage();
+    void setUpClickUpdateChecker();
+    void setUpSSOService();
+    void setUpUdm();
 };
 
 }

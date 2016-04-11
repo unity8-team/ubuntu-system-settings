@@ -14,8 +14,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
 */
-#ifndef HELPERS_H
-#define HELPERS_H
+#ifndef UPDATEHELPERS_H
+#define UPDATEHELPERS_H
 
 namespace UpdatePlugin {
 
@@ -24,8 +24,14 @@ class Helpers
 public:
     static std::vector<std::string> getAvailableFrameworks();
     static std::string getArchitecture();
+    static std::vector<std::string> listFolder(const std::string &folder,
+                                               const std::string &pattern);
+    static QString clickMetadataURL(); // "https://search.apps.ubuntu.com/api/v1/click-metadata";
+    static bool isIgnoringCredentials(); // IGNORE_CREDENTIALS
+    static QString whichClick(); // // CLICK_COMMAND
+
 };
 
 }
 
-#endif // HELPERS_H
+#endif // UPDATEHELPERS_H

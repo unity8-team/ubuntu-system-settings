@@ -14,8 +14,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
 */
-#ifndef CLICKAPI_H
-#define CLICKAPI_H
+#ifndef CLICKUPDATECHECKER_H
+#define CLICKUPDATECHECKER_H
+
+#include <QtNetwork/QNetworkAccessManager>
+#include <QtNetwork/QNetworkReply>
 
 namespace UpdatePlugin {
 
@@ -28,30 +31,35 @@ public:
 
     Q_PROPERTY(QString errorString READ errorString NOTIFY errorStringChanged)
 
-    void check();
-    void abort();
+    void checkForUpdates();
+    void abortCheckForUpdates();
+    void setToken(const UbuntuOne::Token &token);
 
-    const QString errorString();
-
-public slots:
-    void receivedClickUpdateMetadata(const QJsonDocument &metadata);
+    QString errorString() const;
 
 private slots:
     void requestSucceded();
     void requestFailed();
     void requestSslFailed();
-    void processedInstalledClicks(const int exitCode);
+    void processedInstalledClicks(const int &exitCode);
 
 signals:
-    void serverError();
     void errorStringChanged();
-    void foundClickUpdate(QMap<QString, QVariant> clickUpdateMetadata);
+    void foundClickUpdate(const ClickUpdateMetadata &clickUpdateMetadata);
+
+    // Check completed, i.e. all installed clicks have been checked.
+    void checkCompleted();
+
+    // The check failed, but this does not include failures for individual
+    // click updates; those failures will merely be logged and ignored.
+    void checkFailed();
 
 private:
     QProcess m_process;
     UbuntuOne::Token m_token;
+    QList<ClickUpdateMetadata> m_clickUpdateMetadatas;
 };
 
 }
 
-#endif // CLICKAPI_H
+#endif // CLICKUPDATECHECKER_H

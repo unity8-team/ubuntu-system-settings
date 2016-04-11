@@ -22,6 +22,7 @@
 
 #include <QtQml>
 #include <QtQml/QQmlContext>
+#include "systemimage.h"
 // #include "updatemanager.h"
 
 using namespace UpdatePlugin;

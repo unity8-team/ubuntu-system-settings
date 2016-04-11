@@ -27,11 +27,86 @@ UpdateManager *UpdateManager::instance()
     return m_instance;
 }
 
+UpdateManager::UpdateManager(QObject *parent):
+    QObject(parent)
+{
+    setUpSystemImage();
+    setUpClickUpdateChecker();
+    setUpSSOService();
+    setUpUdm();
+}
+
 UpdateManager::~UpdateManager()
 {
 }
 
-const bool UpdateManager::online()
+void UpdateManager::setUpSystemImage()
+{
+
+    connect(&m_systemImage,
+            SIGNAL(downloadModeChanged()),
+            this,
+            SIGNAL(downloadModeChanged())
+    );
+    connect(&m_systemImage,
+            SIGNAL(updateAvailableStatus(const bool isAvailable,
+                                         const bool downloading,
+                                         const QString &availableVersion,
+                                         const int &updateSize,
+                                         const QString &lastUpdateDate,
+                                         const QString &errorReason)),
+            this,
+            SLOT(siProcessAvailableStatus(const bool isAvailable,
+                                          const bool downloading,
+                                          const QString &availableVersion,
+                                          const int &updateSize,
+                                          const QString &lastUpdateDate,
+                                          const QString &errorReason))
+    );
+
+}
+
+
+void UpdateManager::setUpClickUpdateChecker()
+{
+    connect(&m_clickUpChecker,
+            SIGNAL(foundClickUpdate(const ClickUpdateMetadata &clickUpdateMetadata)),
+            this,
+            SLOT(handleClickUpdateMetadataFound(
+                    const ClickUpdateMetadata &clickUpdateMetadata))
+    );
+}
+
+
+void UpdateManager::setUpSSOService()
+{
+    connect(&m_ssoService,
+            SIGNAL(credentialsFound(const Token &token)),
+            this,
+            SLOT(handleCredentialsFound(const Token &token))
+    );
+    connect(&m_ssoService,
+            SIGNAL(credentialsNotFound()),
+            this,
+            SLOT(handleCredentialsFailed())
+    );
+    connect(&m_ssoService,
+            SIGNAL(credentialsDeleted()),
+            this,
+            SLOT(handleCredentialsFailed())
+    );
+
+    m_ssoService.getCredentials();
+}
+
+
+void UpdateManager::setUpUdm()
+{
+
+}
+
+
+bool UpdateManager::online() const
 {
     return m_online;
 }
@@ -44,7 +119,7 @@ void UpdateManager::setOnline(const bool &online)
     }
 }
 
-const bool UpdateManager::authenticated()
+bool UpdateManager::authenticated() const
 {
     return m_authenticated;
 }
@@ -58,34 +133,88 @@ void UpdateManager::setAuthenticated(const bool &authenticated)
 
 }
 
-const QVariantList UpdateManager::udmDownloads()
+bool UpdateManager::haveSufficientPower() const
 {
-    return m_udmDownloads;
+    return m_haveSufficientPower;
 }
 
-void UpdateManager::setUdm(const QVariantList udmDownloads)
+void UpdateManager::setHaveSufficientPower(const bool &haveSufficientPower)
 {
-    if (udmDownloads != m_udmDownloads) {
-        m_udmDownloads = udmDownloads;
-        Q_EMIT udmDownloadsChanged();
+    if (haveSufficientPower != m_haveSufficientPower) {
+        m_haveSufficientPower = haveSufficientPower;
+        Q_EMIT authenticatedChanged();
+    }
+
+}
+
+Ubuntu:DownloadManager::UbuntuDownloadManager UpdateManager::udm() const
+{
+    return m_udm;
+}
+
+
+int UpdateManager::updatesCount() const
+{
+    return m_updatesCount;
+}
+
+void UpdateManager::setUpdatesCount(const int &count) {
+    if (count != m_updatesCount) {
+        m_updatesCount = count;
+        Q_EMIT updatesCountChanged();
     }
 }
 
+int UpdateManager::downloadMode() const
+{
+    return m_systemImage.downloadMode();
+}
 
-void UpdateManager::receivedClickMetadata(const QJsonDocument metadata)
+void UpdateManager::setDownloadMode(const int &downloadMode)
+{
+    m_systemImage.setDownloadMode(downloadMode);
+}
+
+void UpdateManager::checkForUpdates()
+{
+    m_systemImage.checkForUpdates();
+    m_clickUpChecker.checkForUpdates();
+}
+
+void UpdateManager::abortCheckForUpdates()
+{
+    // TODO: Figure out way to cancel SI check
+    m_clickUpChecker.abortCheckForUpdates();
+}
+
+bool UpdateManager::clickUpdateInUdm(const ClickUpdateMetadata &clickUpdateMetadata) const
 {
 
 }
 
-void UpdateManager::receivedInstalledClicks(const int exitCode)
+void UpdateManager::createClickUpdateDownload(const ClickUpdateMetadata &clickUpdateMetadata)
 {
 
 }
 
-void UpdateManager::clickMetaPrimed(ClickMeta clickMeta)
+void UpdateManager::handleCredentialsFound(const Token &token)
 {
+    m_token = token;
 
+    // Set click update checker's token, and start a check.
+    m_clickUpChecker.setToken(token);
+    m_clickUpChecker.checkForUpdates();
 }
 
+void UpdateManager::handleCredentialsFailed()
+{
+    m_ssoService.invalidateCredentials();
+
+
+    // Ask click update checker to stop checking for updates.
+    // Revoke the token given to click update checker.
+    m_clickUpChecker.abortCheckForUpdates();
+    m_clickUpChecker.setToken(null);
+}
 
 } // UpdatePlugin

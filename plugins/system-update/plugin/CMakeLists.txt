@@ -14,6 +14,8 @@ add_library(update-plugin SHARED
             # ../system_update.h
             # ../download_tracker.h
             # ../download_tracker.cpp
+            ../updatemanager.h
+            ../updatemanager.cpp
 )
 
 qt5_use_modules(update-plugin Core Qml Quick Network DBus)

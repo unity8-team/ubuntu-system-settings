@@ -47,14 +47,13 @@ QSystemImage::QSystemImage(QObject *parent) :
                          "com.canonical.SystemImage",
                          m_systemBusConnection)
 {
-
     qDBusRegisterMetaType<QMap<QString, QString> >();
 
 
     connect (&m_serviceWatcher,
-             SIGNAL(serviceOwnerChanged (QString, QString, QString)),
+             SIGNAL(serviceOwnerChanged(QString, QString, QString)),
              this,
-             SLOT(slotNameOwnerChanged (QString, QString, QString)));
+             SLOT(slotNameOwnerChanged(QString, QString, QString)));
 
     setUpInterface();
 }

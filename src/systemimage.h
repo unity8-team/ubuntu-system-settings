@@ -23,11 +23,10 @@
 #ifndef QSYSTEMIMAGE_H
 #define QSYSTEMIMAGE_H
 
-#include <QtDBus>
 #include <QDBusInterface>
-#include <QObject>
 #include <QDBusServiceWatcher>
-
+#include <QObject>
+#include <QtDBus>
 
 class QSystemImage : public QObject
 {
