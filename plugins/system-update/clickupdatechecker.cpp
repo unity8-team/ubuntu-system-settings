@@ -36,15 +36,15 @@ void ClickUpdateChecker::setUpMeta(const ClickUpdateMetadata &meta)
     connect(&meta, SIGNAL(credentialError()),
             this, SIGNAL(credentialError()));
     connect(&meta, SIGNAL(signedDownloadUrlChanged()),
-            this, SLOT(handlePrimedMeta()));
+            this, SLOT(handleSignedDownloadUrl()));
+    connect(&meta, SIGNAL(downloadUrlSignFailure()),
+            this, SLOT(handleDownloadUrlSignFailure()));
 }
 
 void ClickUpdateChecker::setUpProcess()
 {
-    QObject::connect(&m_process,
-                     SIGNAL(finished(const int &exitCode)),
-                     this,
-                     SLOT(processedInstalledClicks(const int &exitCode)));
+    QObject::connect(&m_process, SIGNAL(finished(const int &exitCode)),
+                     this, SLOT(handleInstalledClicks(const int &exitCode)));
 }
 
 // This method is quite complex, and naturally not synchronous. Basically,
@@ -65,12 +65,15 @@ void ClickUpdateChecker::checkForUpdates()
     // the state of the token.
     if (m_token == null) {
         Q_EMIT checkCompleted();
+        return;
     }
 
     assert(m_token.isValid() && "ClickUpdateChecker got bad token!");
 
     // Clear list of click update metadatas; we're starting anew.
     m_metas.clear();
+
+    setErrorString("");
 
     // Start process of getting the list of installed clicks.
     QStringList args("list");
@@ -93,9 +96,11 @@ void ClickUpdateChecker::abortCheckForUpdates()
         m_reply.abort();
         delete m_reply;
     }
+
+    Q_EMIT checkCompleted();
 }
 
-void ClickUpdateChecker::processedInstalledClicks(const int &exitCode)
+void ClickUpdateChecker::handleInstalledClicks(const int &exitCode)
 {
     if (exitCode > 0) {
         setErrorString(
@@ -111,6 +116,12 @@ void ClickUpdateChecker::processedInstalledClicks(const int &exitCode)
     QJsonDocument document = QJsonDocument::fromJson(output.toUtf8());
     QJsonArray array = document.array();
 
+    // Nothing to do.
+    if (array.size() == 0) {
+        Q_EMIT checkCompleted();
+        return;
+    }
+
     int i;
     for (i = 0; i < array.size(); i++) {
         QJsonObject object = array.at(i).toObject();
@@ -119,13 +130,36 @@ void ClickUpdateChecker::processedInstalledClicks(const int &exitCode)
         meta.setName(object.value("name").toString());
         meta.setTitle(object.value("title").toString());
         meta.setLocalVersion(object.value("version").toString());
+        m_metas.insert(meta.getName(), meta);
     }
+
+    // Populate each ClickUpdateMetadata with remote metadata.
+    requestClickMetadata();
 }
 
-void ClickUpdateChecker::clickUpdateMetadataSignedDownloadUrl()
+void ClickUpdateChecker::handleSignedDownloadUrl()
 {
     ClickUpdateMetadata *meta = qobject_cast<ClickUpdateMetadata*>(sender());
-    foundClickUpdate(*meta);
+    clickUpdateDownloadable(*meta);
+    delete meta;
+
+    // Are we finished?
+    foreach (const QString &name, m_metas.keys()) {
+        if (m_metas.get(name).signedDownloadUrl().isEmpty()) {
+            // not finished
+            return;
+        }
+    }
+
+    // All metas had signed download urls, so we're done.
+    Q_EMIT checkCompleted();
+}
+
+void ClickUpdateChecker::handleDownloadUrlSignFailure()
+{
+    ClickUpdateMetadata *meta = qobject_cast<ClickUpdateMetadata*>(sender());
+    // This should be safe.
+    m_metas.remove(meta->getName());
     delete meta;
 }
 
@@ -165,56 +199,9 @@ void ClickUpdateChecker::requestClickMetadata()
     request.setUrl(url);
 
     m_reply = m_nam.post(request, content);
+
+    // Wait for the reply to complete in some way, and set up listeners
     setUpReply();
-}
-
-void ClickUpdateChecker::setUpReply()
-{
-
-    assert((m_reply != NULL) && "setUpReply got null reply!");
-
-    connect(m_reply, SIGNAL(finished()),
-            this, SLOT(requestSucceeded()));
-    connect(m_reply, SIGNAL(sslErrors(const QList<QSslError> &errors)),
-            this, SLOT(requestSslFailed(const QList<QSslError> &errors)));
-    connect(m_reply, SIGNAL(error(const QNetworkReply::NetworkError &code)),
-            SLOT(requestFailed(const QNetworkReply::NetworkError &code)));
-}
-
-void ClickUpdateChecker::setToken(const UbuntuOne::Token &token)
-{
-    m_token = token;
-}
-
-void ClickUpdateChecker::requestSslFailed(const QList<QSslError> &errors)
-{
-    auto reply = sender();
-    QString errorString = "SSL error:";
-    foreach (const QSslError &err, errors) {
-        errorString << err.errorString();
-    }
-    setErrorString(errorString);
-    Q_EMIT serverError();
-    reply->deleteLater();
-    m_reply = 0;
-}
-
-void ClickUpdateChecker::onReplyError(const QNetworkReply::NetworkError &code)
-{
-    auto reply = sender();
-    setErrorString("network error");
-    switch (code) {
-        case QNetworkReply::TemporaryNetworkFailureError:
-        case QNetworkReply::UnknownNetworkError:
-        case QNetworkReply::UnknownProxyError:
-        case QNetworkReply::UnknownServerError:
-            Q_EMIT networkError();
-            break;
-        default:
-            Q_EMIT serverError();
-    }
-    reply->deleteLater();
-    m_reply = 0;
 }
 
 void ClickUpdateChecker::requestSucceeded()
@@ -258,7 +245,7 @@ void ClickUpdateChecker::requestSucceeded()
                     // ClickUpdateMetadata now has enough information to
                     // request the signed download URL, which we'll
                     // monitor and act on when it changes.
-                    // See: clickUpdateMetadataSignedDownloadUrl
+                    // See: handleDownloadUrlSigned
                     meta.signDownloadUrl();
                 }
             }
@@ -268,38 +255,6 @@ void ClickUpdateChecker::requestSucceeded()
     // Document wasn't an array, what was it?
     setErrorString("json parse failed: " + jsonError.errorString());
     Q_EMIT serverError();
-}
-
-bool ClickUpdateChecker::validReply(QNetworkReply *reply)
-{
-    auto statusAttr = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute);
-    if (!statusAttr.isValid()) {
-        Q_EMIT networkError();
-        setErrorString("status attribute was invalid");
-        return false;
-    }
-
-    int httpStatus = statusAttr.toInt();
-    qWarning() << "HTTP Status: " << httpStatus;
-
-    if (httpStatus == 401 || httpStatus == 403) {
-        setErrorString("credential error");
-        Q_EMIT credentialError();
-        return false;
-    }
-
-    return true;
-}
-
-QString ClickUpdateChecker::errorString() const
-{
-    return m_errorString;
-}
-
-void ClickUpdateChecker::setErrorString(const QString &errorString)
-{
-    m_errorString = errorString;
-    Q_EMIT errorStringChanged();
 }
 
 } // Namespace UpdatePlugin

@@ -29,6 +29,7 @@ public:
 
     Q_ENUMS(UpdateMode)
     Q_ENUMS(UpdateStatus)
+    Q_ENUMS(ManagerStatus)
     Q_PROPERTY(bool online READ online WRITE setOnline NOTIFY onlineChanged)
     Q_PROPERTY(bool authenticated READ authenticated
                NOTIFY authenticatedChanged)
@@ -39,6 +40,7 @@ public:
                NOTIFY udmChanged)
     Q_PROPERTY(int updatesCount READ updatesCount NOTIFY updatesCountChanged)
     Q_PROPERTY(int downloadMode READ downloadMode WRITE setDownloadMode NOTIFY downloadModeChanged)
+    Q_PROPERTY(ManagerStatus managerStatus READ managerStatus NOTIFY managerStatusChanged)
 
     bool online() const;
     void setOnline(const bool online);
@@ -54,6 +56,8 @@ public:
     int downloadMode() const;
     void setDownloadMode(const int &downloadMode);
 
+    ManagerStatus managerStatus() const;
+
     enum UpdateMode {
         Downloadable,
         Installable,
@@ -61,6 +65,14 @@ public:
         Pausable,
         NonPausable,
         Retriable
+    };
+
+    enum ManagerStatus {
+        Idle,
+        CheckingClickUpdates,
+        CheckingSystemUpdates,
+        CheckingAllUpdates,
+        Failed
     };
 
     enum UpdateStatus {
@@ -84,16 +96,16 @@ public slots:
     void abortCheckForUpdates();
 
 private slots:
-    void handleClickUpdateMetadataFound(
+    void handleClickUpdateMetadata(
             const ClickUpdateMetadata &clickUpdateMetadata);
 
     // System Image slots
-    void siProcessAvailableStatus(const bool isAvailable,
-                                  const bool downloading,
-                                  const QString &availableVersion,
-                                  const int &updateSize,
-                                  const QString &lastUpdateDate,
-                                  const QString &errorReason);
+    void handleSiAvailableStatus(const bool isAvailable,
+                                 const bool downloading,
+                                 const QString &availableVersion,
+                                 const int &updateSize,
+                                 const QString &lastUpdateDate,
+                                 const QString &errorReason);
     // void siUpdateFailed(const int &consecutiveFailureCount,
     //                     const QString &lastReason);
 
@@ -105,6 +117,8 @@ private slots:
     void handleCredentialsFound(const Token &token);
     void handleCredentialsFailed();
 
+    void handleClickCheckCompleted();
+
 
 signals:
     void onlineChanged();
@@ -112,6 +126,7 @@ signals:
     void haveSufficientPowerChanged();
     void udmChanged();
     void updatesCountChanged();
+    void managerStatusChanged();
 
     // void requestClickUpdateMetadata();
     // void requestInstalledClicks();
@@ -123,7 +138,8 @@ private:
     bool m_online;
     bool m_authenticated;
     bool m_haveSufficientPower;
-    bool m_updatesCount;
+    int m_updatesCount;
+    ManagerStatus m_managerStatus;
 
     ClickUpdateChecker m_clickUpChecker;
     SystemUpdate m_systemUpdate;
@@ -133,6 +149,7 @@ private:
 
     void setAuthenticated(const bool authenticated);
     void setUpdatesCount(const int &count);
+    void setManagerStatus(const ManagerStatus &status);
 
     // Whether or not the click update metadata exist in UDM.
     bool clickUpdateInUdm(const ClickUpdateMetadata &clickUpdateMetadata) const;

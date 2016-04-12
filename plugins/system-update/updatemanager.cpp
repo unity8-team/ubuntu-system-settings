@@ -56,12 +56,12 @@ void UpdateManager::setUpSystemImage()
                                          const QString &lastUpdateDate,
                                          const QString &errorReason)),
             this,
-            SLOT(siProcessAvailableStatus(const bool isAvailable,
-                                          const bool downloading,
-                                          const QString &availableVersion,
-                                          const int &updateSize,
-                                          const QString &lastUpdateDate,
-                                          const QString &errorReason))
+            SLOT(handleSiAvailableStatus(const bool isAvailable,
+                                         const bool downloading,
+                                         const QString &availableVersion,
+                                         const int &updateSize,
+                                         const QString &lastUpdateDate,
+                                         const QString &errorReason))
     );
 
 }
@@ -70,10 +70,10 @@ void UpdateManager::setUpSystemImage()
 void UpdateManager::setUpClickUpdateChecker()
 {
     connect(&m_clickUpChecker,
-            SIGNAL(foundClickUpdate(
+            SIGNAL( clickUpdateDownloadable(
                     const ClickUpdateMetadata &clickUpdateMetadata)),
             this,
-            SLOT(handleClickUpdateMetadataFound(
+            SLOT(handleClickUpdateMetadata(
                     const ClickUpdateMetadata &clickUpdateMetadata))
     );
 
@@ -84,6 +84,12 @@ void UpdateManager::setUpClickUpdateChecker()
             SIGNAL(credentialError()),
             this,
             SLOT(handleCredentialsFailed())
+    );
+
+    connect(&m_clickUpChecker,
+            SIGNAL(checkCompleted()),
+            this,
+            SLOT(handleClickCheckCompleted())
     );
 }
 
@@ -105,8 +111,6 @@ void UpdateManager::setUpSSOService()
             this,
             SLOT(handleCredentialsFailed())
     );
-
-    m_ssoService.getCredentials();
 }
 
 
@@ -185,16 +189,35 @@ void UpdateManager::setDownloadMode(const int &downloadMode)
     m_systemImage.setDownloadMode(downloadMode);
 }
 
+ManagerStatus UpdateManager::managerStatus() const
+{
+    return m_managerStatus;
+}
+
 void UpdateManager::checkForUpdates()
 {
+    if (!m_token) {
+        m_ssoService.getCredentials();
+    }
+
     m_systemImage.checkForUpdates();
     m_clickUpChecker.checkForUpdates();
+    setManagerStatus(ManagerStatus::CheckingAllUpdates);
 }
 
 void UpdateManager::abortCheckForUpdates()
 {
     // TODO: Figure out way to cancel SI check
     m_clickUpChecker.abortCheckForUpdates();
+    setManagerStatus(ManagerStatus::Idle);
+}
+
+void UpdateManager::setManagerStatus(const ManagerStatus &status)
+{
+    if (m_managerStatus != status) {
+        m_managerStatus = status;
+        Q_EMIT managerStatusChanged();
+    }
 }
 
 bool UpdateManager::clickUpdateInUdm(const ClickUpdateMetadata &clickUpdateMetadata) const
@@ -211,6 +234,12 @@ void UpdateManager::handleCredentialsFound(const Token &token)
 {
     m_token = token;
 
+    if (!m_token.isValid()) {
+        qWarning() << "updateManager got invalid token.";
+        handleCredentialsFailed();
+        return;
+    }
+
     // Set click update checker's token, and start a check.
     m_clickUpChecker.setToken(token);
     m_clickUpChecker.checkForUpdates();
@@ -219,11 +248,40 @@ void UpdateManager::handleCredentialsFound(const Token &token)
 void UpdateManager::handleCredentialsFailed()
 {
     m_ssoService.invalidateCredentials();
+    m_token = null;
 
     // Ask click update checker to stop checking for updates.
     // Revoke the token given to click update checker.
     m_clickUpChecker.abortCheckForUpdates();
     m_clickUpChecker.setToken(null);
+
+    // We've invalidated the token, and the user is now not authenticated.
+    setAuthenticated(false);
+}
+
+// We don't handle the contents of the available status here,
+// we delegate that to SystemUpdate.qml.
+void UpdateManager::handleSiAvailableStatus(const bool isAvailable,
+                                            const bool downloading,
+                                            const QString &availableVersion,
+                                            const int &updateSize,
+                                            const QString &lastUpdateDate,
+                                            const QString &errorReason)
+{
+    if (m_managerStatus == ManagerStatus::CheckingAllUpdates) {
+        setManagerStatus(ManagerStatus::CheckingClickUpdates);
+    } else if (m_managerStatus == ManagerStatus::CheckingSystemUpdates) {
+        setManagerStatus(ManagerStatus::Idle);
+    }
+}
+
+void UpdateManager::handleClickCheckCompleted()
+{
+    if (m_managerStatus == ManagerStatus::CheckingAllUpdates) {
+        setManagerStatus(ManagerStatus::CheckingSystemUpdates);
+    } else if (m_managerStatus == ManagerStatus::CheckingClickUpdates) {
+        setManagerStatus(ManagerStatus::Idle);
+    }
 }
 
 } // UpdatePlugin

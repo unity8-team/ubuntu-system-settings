@@ -21,14 +21,16 @@
 #ifndef CLICKUPDATEMETADATA_H
 #define CLICKUPDATEMETADATA_H
 
-#include <QtNetwork/QNetworkAccessManager>
-#include <QtNetwork/QNetworkReply>
+#include "clickapiproto.h"
 
 #define X_CLICK_TOKEN "X-Click-Token"
 
 namespace UpdatePlugin {
 
-class ClickUpdateMetadata : public QObject
+//
+// Represents click metadata composed from local and remote sources.
+//
+class ClickUpdateMetadata : public ClickApiProto
 {
     Q_OBJECT
 public:
@@ -157,9 +159,7 @@ signals:
     void remoteVersionChanged();
     void localVersionChanged();
 
-    void errorStringChanged();
-    void signingFailed();
-    void credentialError();
+    void downloadUrlSignFailure();
 
 private:
     void setSignedDownloadUrl(const QString &signedDownloadUrl);
@@ -185,8 +185,6 @@ private:
 
     QString m_signedDownloadUrl;
     QString m_clickToken;
-
-    UbuntuOne::Token m_token;
 };
 
 }

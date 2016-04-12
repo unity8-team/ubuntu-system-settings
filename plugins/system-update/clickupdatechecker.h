@@ -17,61 +17,42 @@
 #ifndef CLICKUPDATECHECKER_H
 #define CLICKUPDATECHECKER_H
 
-#include <QtNetwork/QNetworkAccessManager>
-#include <QtNetwork/QNetworkReply>
+#include "clickapiproto.h"
 
 namespace UpdatePlugin {
 
-class ClickUpdateChecker : public QObject
+//
+// Gathers metadata on locally installed clicks and signals to listeners
+// if any clicks needs updating.
+//
+class ClickUpdateChecker : public ClickApiProto
 {
     Q_OBJECT
 public:
     explicit ClickUpdateChecker(QObject *parent = 0);
     ~ClickUpdateChecker();
 
-    Q_PROPERTY(QString errorString READ errorString NOTIFY errorStringChanged)
-
     void checkForUpdates();
     void abortCheckForUpdates();
-    void setToken(const UbuntuOne::Token &token);
-
-    QString errorString() const;
 
 private slots:
-    void requestSucceeded();
-    void requestFailed(const QNetworkReply::NetworkError &code);
-    void requestSslFailed();
-    void processedInstalledClicks(const int &exitCode);
-    void clickUpdateMetadataSignedDownloadUrl();
+    void handleInstalledClicks(const int &exitCode);
+    void handleDownloadUrlSigned();
+    void handleDownloadUrlSignFailure();
 
 signals:
-    void errorStringChanged();
-    void foundClickUpdate(const ClickUpdateMetadata &meta);
-
-    // Check completed, i.e. all installed clicks have been checked.
+    void clickUpdateDownloadable(const ClickUpdateMetadata &meta);
     void checkCompleted();
 
-    void networkError();
-    void credentialError();
-    void serverError();
-
 private:
-    // Connect signals/slots on ClickUpdateMetadata
     void setUpMeta(const ClickUpdateMetadata &meta);
-    // Connect signals/slots on qprocess.
     void setUpProcess();
-    // Connect signals/slots on qnetworkreply.
-    void setUpReply();
-    void validReply();
-    void setErrorString(const QString &errorString);
+
+    // Starts process of adding remote metadata to each installed click
     void requestClickMetadata();
 
-    QString m_errorString;
     QProcess m_process;
-    UbuntuOne::Token m_token;
     QMap<QString, ClickUpdateMetadata> m_metas;
-    QNetworkAccessManager m_nam;
-    QNetworkReply* m_reply;
 };
 
 }
