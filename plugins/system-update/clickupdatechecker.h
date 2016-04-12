@@ -27,7 +27,7 @@ class ClickUpdateChecker : public QObject
     Q_OBJECT
 public:
     explicit ClickUpdateChecker(QObject *parent = 0);
-    ~ClickUpdateChecker() {}
+    ~ClickUpdateChecker();
 
     Q_PROPERTY(QString errorString READ errorString NOTIFY errorStringChanged)
 
@@ -38,26 +38,40 @@ public:
     QString errorString() const;
 
 private slots:
-    void requestSucceded();
-    void requestFailed();
+    void requestSucceeded();
+    void requestFailed(const QNetworkReply::NetworkError &code);
     void requestSslFailed();
     void processedInstalledClicks(const int &exitCode);
+    void clickUpdateMetadataSignedDownloadUrl();
 
 signals:
     void errorStringChanged();
-    void foundClickUpdate(const ClickUpdateMetadata &clickUpdateMetadata);
+    void foundClickUpdate(const ClickUpdateMetadata &meta);
 
     // Check completed, i.e. all installed clicks have been checked.
     void checkCompleted();
 
-    // The check failed, but this does not include failures for individual
-    // click updates; those failures will merely be logged and ignored.
-    void checkFailed();
+    void networkError();
+    void credentialError();
+    void serverError();
 
 private:
+    // Connect signals/slots on ClickUpdateMetadata
+    void setUpMeta(const ClickUpdateMetadata &meta);
+    // Connect signals/slots on qprocess.
+    void setUpProcess();
+    // Connect signals/slots on qnetworkreply.
+    void setUpReply();
+    void validReply();
+    void setErrorString(const QString &errorString);
+    void requestClickMetadata();
+
+    QString m_errorString;
     QProcess m_process;
     UbuntuOne::Token m_token;
-    QList<ClickUpdateMetadata> m_clickUpdateMetadatas;
+    QMap<QString, ClickUpdateMetadata> m_metas;
+    QNetworkAccessManager m_nam;
+    QNetworkReply* m_reply;
 };
 
 }

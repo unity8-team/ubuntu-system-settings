@@ -70,10 +70,20 @@ void UpdateManager::setUpSystemImage()
 void UpdateManager::setUpClickUpdateChecker()
 {
     connect(&m_clickUpChecker,
-            SIGNAL(foundClickUpdate(const ClickUpdateMetadata &clickUpdateMetadata)),
+            SIGNAL(foundClickUpdate(
+                    const ClickUpdateMetadata &clickUpdateMetadata)),
             this,
             SLOT(handleClickUpdateMetadataFound(
                     const ClickUpdateMetadata &clickUpdateMetadata))
+    );
+
+    // If click update checker gets back 401/403, the credentials we had
+    // were probably bad, so invalidate them locally via the
+    // handleCredentialsFailed slot.
+    connect(&m_clickUpChecker,
+            SIGNAL(credentialError()),
+            this,
+            SLOT(handleCredentialsFailed())
     );
 }
 
@@ -209,7 +219,6 @@ void UpdateManager::handleCredentialsFound(const Token &token)
 void UpdateManager::handleCredentialsFailed()
 {
     m_ssoService.invalidateCredentials();
-
 
     // Ask click update checker to stop checking for updates.
     // Revoke the token given to click update checker.

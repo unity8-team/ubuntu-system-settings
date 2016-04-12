@@ -24,6 +24,8 @@
 #include <QtNetwork/QNetworkAccessManager>
 #include <QtNetwork/QNetworkReply>
 
+#define X_CLICK_TOKEN "X-Click-Token"
+
 namespace UpdatePlugin {
 
 class ClickUpdateMetadata : public QObject
@@ -31,28 +33,48 @@ class ClickUpdateMetadata : public QObject
     Q_OBJECT
 public:
     explicit ClickUpdateMetadata(QObject *parent = 0,
-                                 const UbuntuOne::Token &token,
-                                 const QJsonDocument &metadata);
+                                 const UbuntuOne::Token &token);
     ~ClickUpdateMetadata() {}
-    Q_PROPERTY(QString anonDownloadUrl READ anonDownloadUrl NOTIFY anonDownloadUrlChanged)
-    Q_PROPERTY(uint binaryFilesize READ binaryFilesize NOTIFY binaryFilesizeChanged)
-    Q_PROPERTY(QString changelog READ changelog NOTIFY changelogChanged)
-    Q_PROPERTY(QString channel READ channel NOTIFY channelChanged)
-    Q_PROPERTY(QString content READ content NOTIFY contentChanged)
-    Q_PROPERTY(QStringList department READ department NOTIFY departmentChanged)
-    Q_PROPERTY(QString downloadSha512 READ downloadSha512 NOTIFY downloadSha512Changed)
-    Q_PROPERTY(QString downloadUrl READ downloadUrl NOTIFY downloadUrlChanged)
-    Q_PROPERTY(QString iconUrl READ iconUrl NOTIFY iconUrlChanged)
-    Q_PROPERTY(QString name READ name NOTIFY nameChanged)
-    Q_PROPERTY(QString origin READ origin NOTIFY originChanged)
-    Q_PROPERTY(QString packageName READ packageName NOTIFY packageNameChanged)
-    Q_PROPERTY(int revision READ revision NOTIFY revisionChanged)
-    Q_PROPERTY(int sequence READ sequence NOTIFY sequenceChanged)
-    Q_PROPERTY(QString status READ status NOTIFY statusChanged)
-    Q_PROPERTY(QString title READ title NOTIFY titleChanged)
-    Q_PROPERTY(QString version READ version NOTIFY versionChanged)
-    Q_PROPERTY(QString signedDownloadUrl READ signedDownloadUrl NOTIFY signedDownloadUrlChanged)
-    Q_PROPERTY(QString clickToken READ clickToken NOTIFY clickTokenChanged)
+    Q_PROPERTY(QString anonDownloadUrl READ anonDownloadUrl
+               WRITE setAnonDownloadUrl NOTIFY anonDownloadUrlChanged)
+    Q_PROPERTY(uint binaryFilesize READ binaryFilesize
+               WRITE setBinaryFilesize NOTIFY binaryFilesizeChanged)
+    Q_PROPERTY(QString changelog READ changelog
+               WRITE setChangelog NOTIFY changelogChanged)
+    Q_PROPERTY(QString channel READ channel
+               WRITE setChannel NOTIFY channelChanged)
+    Q_PROPERTY(QString content READ content
+               WRITE setContent NOTIFY contentChanged)
+    Q_PROPERTY(QStringList department READ department
+               WRITE setDepartment NOTIFY departmentChanged)
+    Q_PROPERTY(QString downloadSha512 READ downloadSha512
+               WRITE setDownloadSha512 NOTIFY downloadSha512Changed)
+    Q_PROPERTY(QString downloadUrl READ downloadUrl
+               WRITE setDownloadUrl NOTIFY downloadUrlChanged)
+    Q_PROPERTY(QString iconUrl READ iconUrl
+               WRITE setIconUrl NOTIFY iconUrlChanged)
+    Q_PROPERTY(QString name READ name
+               WRITE setName NOTIFY nameChanged)
+    Q_PROPERTY(QString origin READ origin
+               WRITE setOrigin NOTIFY originChanged)
+    Q_PROPERTY(QString packageName READ packageName
+               WRITE setPackageName NOTIFY packageNameChanged)
+    Q_PROPERTY(int revision READ revision
+               WRITE setRevision NOTIFY revisionChanged)
+    Q_PROPERTY(int sequence READ sequence
+               WRITE setSequence NOTIFY sequenceChanged)
+    Q_PROPERTY(QString status READ status
+               WRITE setStatus NOTIFY statusChanged)
+    Q_PROPERTY(QString title READ title
+               WRITE setTitle NOTIFY titleChanged)
+    Q_PROPERTY(QString remoteVersion READ remoteVersion
+               WRITE setRemoteVersion NOTIFY remoteVersionChanged)
+    Q_PROPERTY(QString localVersion READ localVersion
+               WRITE setLocalVersion NOTIFY localVersionChanged)
+    Q_PROPERTY(QString signedDownloadUrl READ signedDownloadUrl
+               NOTIFY signedDownloadUrlChanged)
+    Q_PROPERTY(QString clickToken READ clickToken
+               WRITE setClickToken NOTIFY clickTokenChanged)
 
     // Errors relating to parsing, fetching click tokens etc.
     Q_PROPERTY(QString errorString READ errorString NOTIFY errorStringChanged)
@@ -79,41 +101,6 @@ public:
     QString clickToken() const;
     QString errorString() const;
 
-    // Abort any networking activity.
-    void abort();
-
-private slots:
-    void tokenRequestSslFailed(const QList<QSslError> &errors);
-    void tokenRequestFailed(const QNetworkReply::NetworkError &code);
-    void tokenRequestSucceeded(const QNetworkReply* reply);
-
-signals:
-    void anonDownloadUrlChanged();
-    void binaryFilesizeChanged();
-    void changelogChanged();
-    void channelChanged();
-    void contentChanged();
-    void departmentChanged();
-    void downloadSha512Changed();
-    void downloadUrlChanged();
-    void iconUrlChanged();
-    void nameChanged();
-    void originChanged();
-    void packageNameChanged();
-    void revisionChanged();
-    void sequenceChanged();
-    void statusChanged();
-    void titleChanged();
-    void versionChanged();
-
-    void signedDownloadUrlChanged();
-    void clickTokenChanged();
-
-    void errorStringChanged();
-    void parsingFailed();
-    void signingFailed();
-
-private:
     void setAnonDownloadUrl(const QString &anonDownloadUrl);
     void setBinaryFilesize(const uint &binaryFilesize);
     void setChangelog(const QString &changelog);
@@ -130,12 +117,52 @@ private:
     void setSequence(const QString &sequence);
     void setStatus(const QString &status);
     void setTitle(const QString &title);
-    void setVersion(const QString &version);
+    void setRemoteVersion(const QString &version);
+    void setLocalVersion(const QString &version);
 
-    void setSignedDownloadUrl(const QString &signedDownloadUrl);
     void setClickToken(const QString &clickToken);
 
-    void parseMetadata();
+    // Abort any networking activity.
+    void abort();
+
+    void signDownloadUrl();
+
+    bool isUpdateRequired();
+
+private slots:
+    void tokenRequestSslFailed(const QList<QSslError> &errors);
+    void tokenRequestFailed(const QNetworkReply::NetworkError &code);
+    void tokenRequestSucceeded(const QNetworkReply* reply);
+
+signals:
+    void signedDownloadUrlChanged();
+    void clickTokenChanged();
+
+    void anonDownloadUrlChanged();
+    void binaryFilesizeChanged();
+    void changelogChanged();
+    void channelChanged();
+    void contentChanged();
+    void departmentChanged();
+    void downloadSha512Changed();
+    void downloadUrlChanged();
+    void iconUrlChanged();
+    void nameChanged();
+    void originChanged();
+    void packageNameChanged();
+    void revisionChanged();
+    void sequenceChanged();
+    void statusChanged();
+    void titleChanged();
+    void remoteVersionChanged();
+    void localVersionChanged();
+
+    void errorStringChanged();
+    void signingFailed();
+    void credentialError();
+
+private:
+    void setSignedDownloadUrl(const QString &signedDownloadUrl);
 
     QString m_anonDownloadUrl;
     uint m_binaryFilesize;
@@ -153,12 +180,12 @@ private:
     QString m_sequence;
     QString m_status;
     QString m_title;
-    QString m_version;
+    QString m_local_version;
+    QString m_remote_version;
 
     QString m_signedDownloadUrl;
     QString m_clickToken;
 
-    QJsonDocument m_metadata;
     UbuntuOne::Token m_token;
 };
 
