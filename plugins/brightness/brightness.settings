@@ -14,5 +14,6 @@
     ],
     "has-dynamic-keywords": false,
     "has-dynamic-visibility": true,
+    "has-dynamic-name": true,
     "page-component": "PageComponent.qml"
 }
