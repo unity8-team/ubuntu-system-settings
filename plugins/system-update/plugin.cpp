@@ -22,6 +22,7 @@
 
 #include <QtQml>
 #include <QtQml/QQmlContext>
+#include "systemimage.h"
 #include "updatemanager.h"
 
 using namespace UpdatePlugin;
@@ -31,7 +32,7 @@ void BackendPlugin::registerTypes(const char *uri)
     Q_ASSERT(uri == QLatin1String("Ubuntu.SystemSettings.Update"));
 
     // qmlRegisterType<SystemUpdate>(uri, 1, 0, "SystemUpdate");
-    // qmlRegisterType<QSystemImage>(uri, 1, 0, "SystemImage");
+    qmlRegisterType<QSystemImage>(uri, 1, 0, "SystemImage");
 }
 
 void BackendPlugin::initializeEngine(QQmlEngine *engine, const char *uri)

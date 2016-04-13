@@ -14,12 +14,25 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
 */
+#include "helpers.h"
 #include <QProcessEnvironment>
 
 namespace UpdatePlugin {
 
+QString Helpers::getFrameworksDir()
+{
+    QProcessEnvironment environment = QProcessEnvironment::systemEnvironment();
+    return environment.value("FRAMEWORKS_FOLDER",
+                             QStringLiteral("/usr/share/click/frameworks/"));
+}
+
 std::vector<std::string> Helpers::getAvailableFrameworks()
 {
+    std::vector<std::string> result;
+    for (auto f: listFolder(getFrameworksDir().toStdString(), "*.framework")) {
+        result.push_back(f.substr(0, f.size()-10));
+    }
+    return result;
 
 }
 
@@ -65,7 +78,10 @@ std::string Helpers::architectureFromDpkg()
 
 QString Helpers::clickMetadataUrl()
 {
-    return QStringLiteral("https://search.apps.ubuntu.com/api/v1/click-metadata");
+    QString url =
+        QStringLiteral("https://search.apps.ubuntu.com/api/v1/click-metadata");
+    QProcessEnvironment environment = QProcessEnvironment::systemEnvironment();
+    return environment.value("URL_APPS", url);
 }
 
 QString Helpers::clickTokenUrl(const QString &url)
@@ -83,8 +99,8 @@ bool Helpers::isIgnoringCredentials()
 
 QString Helpers::whichClick()
 {
-    // CLICK_COMMAND
-    return QStringLiteral("click");
+    QProcessEnvironment environment = QProcessEnvironment::systemEnvironment();
+    return environment.value("CLICK_COMMAND", QStringLiteral("click"));
 }
 
-} // Namespace UpdatePlugin
+} // UpdatePlugin

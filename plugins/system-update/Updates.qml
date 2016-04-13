@@ -50,8 +50,25 @@ Column {
     */
     property bool authenticated: false
 
+    /*!
+        \qmlproperty bool online
+
+        Indicates whether or not we're connected to the internet.
+    */
+    property bool online: false
+
+    /*!
+        \qmlproperty alias systemImageBackend
+
+        Holds the system image backend.
+    */
     property alias systemImageBackend: imageUpdate.systemImageBackend
 
+    /*!
+        \qmlproperty alias clickUpdatesModel
+
+        Holds the click updates model. Normally this is UDM.downloads.
+    */
     property alias clickUpdatesModel: clickUpdates.model
 
     /*!
@@ -69,6 +86,8 @@ Column {
 
     ImageUpdate {
         id: imageUpdate
+        // FIXME: remove
+        visible: false
     }
 
     ClickUpdates {

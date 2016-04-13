@@ -130,7 +130,8 @@ void QSystemImage::productionReset() {
 }
 
 void QSystemImage::checkForUpdate() {
-    m_systemServiceIface.asyncCall("CheckForUpdate");
+    qWarning() << "QSystemImage checking update";
+    // m_systemServiceIface.asyncCall("CheckForUpdate");
 }
 
 void QSystemImage::downloadUpdate() {

@@ -19,10 +19,11 @@
 import QtQuick 2.4
 
 Update {
+    Component.onCompleted: console.warn(modelData)
     // modelData should be a SingleDownload here.
-    onModelDataChanged: {
-        if (typeof modelData !== "SingleDownload") {
-            console.warn("ClickUpdate got", typeof modelData, "instead of SingleDownload");
-        }
-    }
+    // onModelDataChanged: {
+    //     if (typeof modelData !== "SingleDownload") {
+    //         console.warn("ClickUpdate got", typeof modelData, "instead of SingleDownload");
+    //     }
+    // }
 }

@@ -18,22 +18,26 @@
 #define UPDATEHELPERS_H
 
 #include <sstream>
+#include <vector>
+#include <QString>
+#include <QDebug>
+#include <QDir>
 
 namespace UpdatePlugin {
 
 class Helpers
 {
 public:
+    static QString getFrameworksDir();
     static std::vector<std::string> getAvailableFrameworks();
     static std::string getArchitecture();
     static std::string architectureFromDpkg();
     static std::vector<std::string> listFolder(const std::string &folder,
                                                const std::string &pattern);
-    static QString clickMetadataURL(); // "https://search.apps.ubuntu.com/api/v1/click-metadata";
+    static QString clickMetadataUrl(); // "https://search.apps.ubuntu.com/api/v1/click-metadata";
     static QString clickTokenUrl(const QString &url);
     static bool isIgnoringCredentials(); // IGNORE_CREDENTIALS
-    static QString whichClick(); // // CLICK_COMMAND
-
+    static QString whichClick(); // CLICK_COMMAND
 };
 
 } // Namespace UpdatePlugin

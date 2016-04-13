@@ -3,9 +3,12 @@ set(QML_SOURCES
     Updates.qml
     Update.qml
     ImageUpdate.qml
+    ClickUpdate.qml
     ClickUpdates.qml
     SystemUpdatePrompt.qml
-    Configuration.qml)
+    NotAuthenticatedNotification.qml
+    Configuration.qml
+    Global.qml)
 SET (CMAKE_AUTOMOC ON)
 
 
@@ -24,12 +27,11 @@ target_link_libraries(UbuntuUpdatePanel
     apt-pkg
     update-plugin
     ${UBUNTUONEAUTH_LDFLAGS}
-    ${UBUNTUDOWNLOADMANAGERQML_LDFLAGS}
 )
 
 set(PLUG_DIR ${PLUGIN_PRIVATE_MODULE_DIR}/Ubuntu/SystemSettings/Update)
 install(TARGETS UbuntuUpdatePanel DESTINATION ${PLUG_DIR})
-install(FILES qmldir DESTINATION ${PLUG_DIR})
+install(FILES qmldir.in DESTINATION ${PLUG_DIR} RENAME qmldir)
 install(FILES ${QML_SOURCES} DESTINATION ${PLUGIN_QML_DIR}/system-update)
 
 install(FILES system-update.settings DESTINATION ${PLUGIN_MANIFEST_DIR})

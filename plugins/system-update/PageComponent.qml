@@ -22,17 +22,24 @@
 import QMenuModel 0.1
 import QtQuick 2.4
 import SystemSettings 1.0
+import Ubuntu.Connectivity 1.0
 import Ubuntu.Components 1.3
 import Ubuntu.Components.ListItems 1.3 as ListItem
 import Ubuntu.Components.Popups 1.3
+import Ubuntu.DownloadManager 1.2
 import Ubuntu.OnlineAccounts.Client 0.1
 import Ubuntu.SystemSettings.Update 1.0
-import Ubuntu.Connectivity 1.0
 
 
 ItemPage {
     id: root
     objectName: "systemUpdatesPage"
+
+    Component.onCompleted: {
+        if (!UpdateManager.udm)
+            UpdateManager.udm = udm.createObject(UpdateManager);
+    }
+    Component { id: udm;  DownloadManager {} }
 
     // property bool isCharging: indicatorPower.deviceState === "charging"
     // property bool batterySafeForUpdate: isCharging || chargeLevel > 25
@@ -48,17 +55,11 @@ ItemPage {
     //     Component.onCompleted: start()
     // }
 
-    // Connections {
-    //     id: networkingStatus
-    //     target: NetworkingStatus
-    //     onOnlineChanged: {
-    //         if (NetworkingStatus.online) {
-    //             // Set to searching, and start a search for updates
-    //         } else {
-    //             // Stop all things
-    //         }
-    //     }
-    // }
+    Binding {
+        target: UpdateManager
+        property: "online"
+        value: NetworkingStatus.online
+    }
 
     // Setup {
     //     id: uoaConfig
@@ -102,7 +103,12 @@ ItemPage {
         flickableDirection: Flickable.VerticalFlick
 
         Updates {
-
+            online: UpdateManager.online
+            clickUpdatesModel: UpdateManager.udm.downloads
+            authenticated: UpdateManager.authenticated
+            Component.onCompleted: {
+                console.warn("Updates completed.");
+            }
         }
     }
 

@@ -36,10 +36,11 @@ ListItem.SingleValue {
     progression: true
     value: updatesAvailable > 0 ? updatesAvailable : ""
 
-    DownloadManager {
-        id: manager
-        Component.onCompleted: UpdateManager.udm = manager
-    }
-
     onClicked: main.loadPluginByName("system-update");
+
+    Component.onCompleted: {
+        if (!UpdateManager.udm)
+            UpdateManager.udm = udm.createObject(UpdateManager);
+    }
+    Component { id: udm;  DownloadManager {} }
 }

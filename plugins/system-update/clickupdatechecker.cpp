@@ -43,8 +43,8 @@ void ClickUpdateChecker::initializeMeta(const QSharedPointer<ClickUpdateMetadata
 {
     QObject::connect(meta.data(), SIGNAL(credentialError()),
                      this, SIGNAL(credentialError()));
-    QObject::connect(meta.data(), SIGNAL(clickTokenRequestSucceeded(const ClickUpdateMetadata&)),
-                     this, SLOT(handleMetadataClickTokenObtained(const ClickUpdateMetadata&)));
+    QObject::connect(meta.data(), SIGNAL(clickTokenRequestSucceeded(const ClickUpdateMetadata*)),
+                     this, SLOT(handleMetadataClickTokenObtained(const ClickUpdateMetadata*)));
     QObject::connect(meta.data(), SIGNAL(clickTokenRequestFailed()),
                      this, SLOT(handleClickTokenRequestFailed()));
 
@@ -68,6 +68,7 @@ void ClickUpdateChecker::initializeProcess()
 // ClickUpdateMetadata to do this for us.
 void ClickUpdateChecker::checkForUpdates()
 {
+    qWarning() << "click checker: checkForUpdates...";
     // No token, so don't check anything, but report that the check
     // completed. We should not be given an invalid token here,
     // and we've yet to talk to the server so we can't know
@@ -87,6 +88,9 @@ void ClickUpdateChecker::checkForUpdates()
     args << "--manifest";
     QString command = Helpers::whichClick();
     m_process.start(command, args);
+    if (!m_process.waitForStarted()) {
+        handleProcessError(m_process.error());
+    }
 }
 
 // Tries to shut down all checks we might currently be doing.
@@ -108,6 +112,7 @@ void ClickUpdateChecker::abortCheckForUpdates()
 
 void ClickUpdateChecker::handleInstalledClicks(const int &exitCode)
 {
+    qWarning() << "click checker: handleInstalledClicks..." << exitCode;
     if (exitCode > 0) {
         setErrorString(
             QString("list command exited with code %1.").arg(exitCode)
@@ -122,6 +127,7 @@ void ClickUpdateChecker::handleInstalledClicks(const int &exitCode)
 
     // Nothing to do.
     if (array.size() == 0) {
+        qWarning() << "click checker: nothing to do, no clicks installed.";
         Q_EMIT checkCompleted();
         return;
     }
@@ -132,33 +138,61 @@ void ClickUpdateChecker::handleInstalledClicks(const int &exitCode)
 
         QSharedPointer<ClickUpdateMetadata> meta(new ClickUpdateMetadata);
 
+        initializeMeta(meta);
+
         meta->setToken(m_token);
         meta->setName(object.value("name").toString());
         meta->setTitle(object.value("title").toString());
         meta->setLocalVersion(object.value("version").toString());
         m_metas.insert(meta->name(), meta);
+        qWarning() << "click checker: queueing up" << meta->name();
     }
 
     // Populate each ClickUpdateMetadata with remote metadata.
     requestClickMetadata();
 }
 
+void ClickUpdateChecker::handleProcessError(const QProcess::ProcessError &error)
+{
+    qWarning() << "click checker: process failed";
+// QProcess::FailedToStart 0   The process failed to start. Either the invoked program is missing, or you may have insufficient permissions to invoke the program.
+// QProcess::Crashed   1   The process crashed some time after starting successfully.
+// QProcess::Timedout  2   The last waitFor...() function timed out. The state of QProcess is unchanged, and you can try calling waitFor...() again.
+// QProcess::WriteError    4   An error occurred when attempting to write to the process. For example, the process may not be running, or it may have closed its input channel.
+// QProcess::ReadError 3   An error occurred when attempting to read from the process. For example, the process may not be running.
+// QProcess::UnknownError
+    switch(error) {
+    case QProcess::FailedToStart:
+        qWarning() << "QProcess::FailedToStart";
+        break;
+    case QProcess::Crashed:
+        qWarning() << "QProcess::Crashed";
+        break;
+    case QProcess::Timedout:
+        qWarning() << "QProcess::Timedout";
+        break;
+    case QProcess::WriteError:
+        qWarning() << "QProcess::WriteError";
+        break;
+    case QProcess::ReadError:
+        qWarning() << "QProcess::ReadError";
+        break;
+    case QProcess::UnknownError:
+        qWarning() << "QProcess::UnknownError";
+        break;
+    }
+}
+
 void ClickUpdateChecker::handleMetadataClickTokenObtained(const ClickUpdateMetadata *meta)
 {
+    qWarning() << "click checker: handling obtained token on metadata" << meta->name();
     // Pass the shared pointer instead.
-    foreach (const QString &name, m_metas.keys()) {
-        if (name == meta->name()) {
-            Q_EMIT clickUpdateDownloadable(m_metas.value(name));
-            // not finished
-            return;
-        }
-    }
+    Q_EMIT clickUpdateMetadataCompleted(m_metas.value(meta->name()));
 
-    // Are we finished?
+    // Check if all tokens are fetched.
     foreach (const QString &name, m_metas.keys()) {
         if (m_metas.value(name)->clickToken().isEmpty()) {
-            // not finished
-            return;
+            return; // Not done.
         }
     }
 
@@ -173,6 +207,7 @@ void ClickUpdateChecker::handleClickTokenRequestFailed(const ClickUpdateMetadata
 
 void ClickUpdateChecker::requestClickMetadata()
 {
+    qWarning() << "click checker: asking for remote metadata...";
     QJsonObject serializer;
 
     // Construct the “name” list
@@ -190,7 +225,8 @@ void ClickUpdateChecker::requestClickMetadata()
     QJsonDocument doc(serializer);
     QByteArray content = doc.toJson();
 
-    QString urlApps = Helpers::clickMetadataURL();
+    QString urlApps = Helpers::clickMetadataUrl();
+    qWarning() << "click checker: using url" << urlApps;
     QString authHeader = m_token.signUrl(urlApps,
                                          QStringLiteral("POST"), true);
     QUrl url(urlApps);
@@ -214,25 +250,22 @@ void ClickUpdateChecker::requestClickMetadata()
 
 void ClickUpdateChecker::requestSucceeded()
 {
-    // the scoped pointer will take care of calling the deleteLater when
-    // leaving the slot
-    auto r = qobject_cast<QNetworkReply*>(sender());
+    qWarning() << "click checker: request succeeded...";
 
     // check for http error status and emit all the required signals
-    if (!validReply(r)) {
+    if (!validReply(m_reply)) {
         return;
     }
 
-    QScopedPointer<QNetworkReply, QScopedPointerDeleteLater> reply(r);
-
     QJsonParseError *jsonError = new QJsonParseError;
-    auto document = QJsonDocument::fromJson(reply->readAll(), jsonError);
+    auto document = QJsonDocument::fromJson(m_reply->readAll(), jsonError);
 
     if (document.isArray()) {
         QJsonArray array = document.array();
         for (int i = 0; i < array.size(); i++) {
             auto object = array.at(i).toObject();
             auto name = object["name"].toString();
+            qWarning() << "click checker: got metadata for" << name;
             auto version = object["version"].toString();
             auto icon_url = object["icon_url"].toString();
             auto url = object["download_url"].toString();

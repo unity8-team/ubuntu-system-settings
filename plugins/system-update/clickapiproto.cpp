@@ -35,10 +35,10 @@ void ClickApiProto::setUpReply()
 
     connect(m_reply, SIGNAL(finished()),
             this, SLOT(requestSucceeded()));
-    connect(m_reply, SIGNAL(sslErrors(const QList<QSslError> &errors)),
-            this, SLOT(requestSslFailed(const QList<QSslError> &errors)));
-    connect(m_reply, SIGNAL(error(const QNetworkReply::NetworkError &code)),
-            SLOT(requestFailed(const QNetworkReply::NetworkError &code)));
+    connect(m_reply, SIGNAL(sslErrors(const QList<QSslError>&)),
+            this, SLOT(requestSslFailed(const QList<QSslError>&)));
+    connect(m_reply, SIGNAL(error(const QNetworkReply::NetworkError&)),
+            SLOT(requestFailed(const QNetworkReply::NetworkError&)));
 }
 
 void ClickApiProto::setToken(const UbuntuOne::Token &token)

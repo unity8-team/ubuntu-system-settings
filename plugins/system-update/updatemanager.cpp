@@ -43,11 +43,12 @@ UpdateManager::UpdateManager(QObject *parent):
 
 UpdateManager::~UpdateManager()
 {
+    if (m_udm)
+        m_udm->deleteLater();
 }
 
 void UpdateManager::initializeSystemImage()
 {
-
     connect(&m_systemImage,
             SIGNAL(downloadModeChanged()),
             this,
@@ -74,7 +75,7 @@ void UpdateManager::initializeSystemImage()
 void UpdateManager::initializeClickUpdateChecker()
 {
     connect(&m_clickUpChecker,
-            SIGNAL(clickUpdateDownloadable(
+            SIGNAL(clickUpdateMetadataCompleted(
                     const QSharedPointer<ClickUpdateMetadata>&)),
             this,
             SLOT(downloadClickUpdate(
@@ -110,6 +111,11 @@ void UpdateManager::initializeSSOService()
 
 void UpdateManager::initializeUdm()
 {
+    // We're return m_udm to QML, so we need to explicitly retain ownership.
+    QQmlEngine::setObjectOwnership(m_udm, QQmlEngine::CppOwnership);
+    // Reparent to us instead.
+    // m_udm->setParent(this);
+
     updateClickUpdatesCount();
     connect(m_udm, SIGNAL(downloadsChanged()),
             this, SLOT(updateClickUpdatesCount()));
@@ -129,9 +135,16 @@ bool UpdateManager::online() const
 
 void UpdateManager::setOnline(const bool online)
 {
+    qWarning() << "sat online" << online;
     if (online != m_online) {
         m_online = online;
         Q_EMIT onlineChanged();
+    }
+
+    if (m_online) {
+        checkForUpdates();
+    } else {
+        abortCheckForUpdates();
     }
 }
 
@@ -167,14 +180,14 @@ QObject *UpdateManager::udm() const
 }
 
 void UpdateManager::setUdm(QObject *udm) {
-    qWarning() << "setUdm" << udm;
     if (m_udm != udm) {
         m_udm = udm;
         Q_EMIT udmChanged();
     }
 
-    if (udm)
+    if (m_udm) {
         initializeUdm();
+    }
 }
 
 int UpdateManager::updatesCount() const
@@ -208,6 +221,7 @@ UpdateManager::ManagerStatus UpdateManager::managerStatus() const
 void UpdateManager::checkForUpdates()
 {
     if (!m_token.isValid()) {
+        qWarning() << "checkForUpdates checking creds";
         m_ssoService.getCredentials();
     }
 
@@ -229,16 +243,37 @@ void UpdateManager::setManagerStatus(const UpdateManager::ManagerStatus &status)
         m_managerStatus = status;
         Q_EMIT managerStatusChanged();
     }
+    QString s;
+    switch(m_managerStatus) {
+    case ManagerIdle:
+        s = "ManagerIdle"; break;
+    case ManagerCheckingClickUpdates:
+        s = "ManagerCheckingClickUpdates"; break;
+    case ManagerCheckingSystemUpdates:
+        s = "ManagerCheckingSystemUpdates"; break;
+    case ManagerCheckingAllUpdates:
+        s = "ManagerCheckingAllUpdates"; break;
+    case ManagerFailed:
+        s = "ManagerFailed"; break;
+    }
+    qWarning() << "manager: status now" << s;
 }
 
 bool UpdateManager::clickUpdateInUdm(const QSharedPointer<ClickUpdateMetadata> &meta) const
 {
-
+    qWarning() << "manager: clickUpdateInUdm check on" << meta->name();
+    foreach(const QVariant &v, m_udm->property("downloads").toList()) {
+        qWarning() << v.value<QObject*>()->property("downloadId");
+    }
 }
 
 void UpdateManager::downloadClickUpdate(const QSharedPointer<ClickUpdateMetadata> &meta)
 {
+    qWarning() << "manager: found downloadable click update metadata" << meta->name();
 
+    if (!clickUpdateInUdm(meta)) {
+
+    }
 }
 
 void UpdateManager::createClickUpdateDownload(const QSharedPointer<ClickUpdateMetadata> &meta)
@@ -248,6 +283,7 @@ void UpdateManager::createClickUpdateDownload(const QSharedPointer<ClickUpdateMe
 
 void UpdateManager::handleCredentialsFound(const UbuntuOne::Token &token)
 {
+    qWarning() << "found credentials";
     m_token = token;
 
     if (!m_token.isValid()) {
@@ -256,6 +292,8 @@ void UpdateManager::handleCredentialsFound(const UbuntuOne::Token &token)
         return;
     }
 
+    setAuthenticated(true);
+
     // Set click update checker's token, and start a check.
     m_clickUpChecker.setToken(token);
     m_clickUpChecker.checkForUpdates();
@@ -263,6 +301,7 @@ void UpdateManager::handleCredentialsFound(const UbuntuOne::Token &token)
 
 void UpdateManager::handleCredentialsFailed()
 {
+    qWarning() << "failed credentials";
     m_ssoService.invalidateCredentials();
     m_token = UbuntuOne::Token();
 
@@ -284,6 +323,11 @@ void UpdateManager::handleSiAvailableStatus(const bool isAvailable,
                                             const QString &lastUpdateDate,
                                             const QString &errorReason)
 {
+    qWarning() << "got available status from SI";
+
+    m_systemUpdatesCount = isAvailable ? 1 : 0;
+    setUpdatesCount();
+
     if (m_managerStatus == UpdateManager::ManagerStatus::ManagerCheckingAllUpdates) {
         setManagerStatus(UpdateManager::ManagerStatus::ManagerCheckingClickUpdates);
     } else if (m_managerStatus == UpdateManager::ManagerStatus::ManagerCheckingSystemUpdates) {
@@ -293,6 +337,7 @@ void UpdateManager::handleSiAvailableStatus(const bool isAvailable,
 
 void UpdateManager::handleClickCheckCompleted()
 {
+    qWarning() << "manager: click check completed";
     if (m_managerStatus == UpdateManager::ManagerStatus::ManagerCheckingAllUpdates) {
         setManagerStatus(UpdateManager::ManagerStatus::ManagerCheckingSystemUpdates);
     } else if (m_managerStatus == UpdateManager::ManagerStatus::ManagerCheckingClickUpdates) {

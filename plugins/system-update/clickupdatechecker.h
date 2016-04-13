@@ -26,8 +26,8 @@
 namespace UpdatePlugin {
 
 //
-// Gathers metadata on locally installed clicks and signals to listeners
-// if any clicks needs updating.
+// Checks for click updates. Every click update that is downloadable is
+// emitted in the clickUpdateMetadataCompleted signal.
 //
 class ClickUpdateChecker : public ClickApiProto
 {
@@ -44,11 +44,13 @@ protected slots:
 
 private slots:
     void handleInstalledClicks(const int &exitCode);
+    void handleProcessError(const QProcess::ProcessError &error);
     void handleMetadataClickTokenObtained(const ClickUpdateMetadata *meta);
     void handleClickTokenRequestFailed(const ClickUpdateMetadata *meta);
 
 signals:
-    void clickUpdateDownloadable(const QSharedPointer<ClickUpdateMetadata> &meta);
+    void clickUpdateMetadataCompleted(
+        const QSharedPointer<ClickUpdateMetadata> &meta);
     void checkCompleted();
 
 private:

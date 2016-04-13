@@ -17,6 +17,7 @@ add_library(update-plugin SHARED
             ../clickupdatechecker.cpp
             ../clickupdatemetadata.cpp
             ../clickapiproto.cpp
+            ../helpers.cpp
 )
 
 qt5_use_modules(update-plugin Core Qml Quick Network DBus)
