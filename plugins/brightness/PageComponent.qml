@@ -43,6 +43,10 @@ ItemPage {
         id: brightnessPanel
     }
 
+    AethercastDisplays {
+        id: aethercastDisplays
+    }
+
     Column {
         anchors.left: parent.left
         anchors.right: parent.right
@@ -108,18 +112,18 @@ ItemPage {
                     "Brightens and dims the display to suit the surroundings.")
             visible: adjust.visible
         }
-    }
 
-    ListItem.Divider {
-        visible: brightnessPanel.widiSupported
-    }
+        ListItem.Divider {
+            visible: brightnessPanel.widiSupported
+        }
 
-    ListItem.SingleValue {
-        objectName: "displayCasting"
-        visible: brightnessPanel.widiSupported
-        text: i18n.tr("Display Casting")
-        value: backend
-        progression: true
-        onClicked: pageStack.push(Qt.resolvedUrl("WifiDisplays.qml"))
+        ListItem.SingleValue {
+            objectName: "displayCasting"
+            visible: brightnessPanel.widiSupported
+            text: i18n.tr("Display Casting")
+            value: backend
+            progression: true
+            onClicked: pageStack.push(Qt.resolvedUrl("WifiDisplays.qml"))
+        }
     }
 }

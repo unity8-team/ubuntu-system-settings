@@ -71,13 +71,6 @@ ItemPage {
                 top: parent.top
             }
 
-            ListItem.SingleValue {
-                objectName: "wifiDisplays"
-                text: i18n.tr("Wi-Fi Displays")
-                progression: true
-                onClicked: pageStack.push(Qt.resolvedUrl("WifiDisplays.qml"))
-            }
-
             Repeater {
                 id: mainMenu
                 model: menuStack.tail ? menuStack.tail : null

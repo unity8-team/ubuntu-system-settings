@@ -23,9 +23,6 @@
 #include "wifidbushelper.h"
 #include "previousnetworkmodel.h"
 #include "certhandler.h"
-#include "aethercast/aethercast_helper.h"
-#include "aethercast/displays.h"
-#include "aethercast/device.h"
 
 namespace {
 
@@ -46,11 +43,6 @@ QObject* dbusProvider(QQmlEngine* engine, QJSEngine* /* scriptEngine */)
 void BackendPlugin::registerTypes(const char *uri)
 {
     Q_ASSERT(uri == QLatin1String("Ubuntu.SystemSettings.Wifi"));
-
-    // Register additional QtDBus types we need
-    qDBusRegisterMetaType<InterfaceList>();
-    qDBusRegisterMetaType<ManagedObjectList>();
-
     qmlRegisterType<UnityMenuModelStack>(uri, 1, 0, "UnityMenuModelStack");
     qmlRegisterSingletonType<WifiDbusHelper>(uri, 1, 0, "DbusHelper", dbusProvider);
     qmlRegisterType<PreviousNetworkModel>(uri, 1, 0, "PreviousNetworkModel");
@@ -58,8 +50,6 @@ void BackendPlugin::registerTypes(const char *uri)
     qmlRegisterType<PrivatekeyListModel>(uri, 1, 0, "PrivatekeyListModel");
     qmlRegisterType<PacFileListModel>(uri, 1, 0, "PacFileListModel");
     qmlRegisterType<FileHandler>(uri, 1, 0, "FileHandler");
-    qmlRegisterType<Device>(uri, 1, 0, "Device");
-    qmlRegisterType<Displays>(uri, 1, 0, "Displays");
 }
 
 void BackendPlugin::initializeEngine(QQmlEngine *engine, const char *uri)

@@ -18,12 +18,12 @@ import QtQuick 2.4
 import SystemSettings 1.0
 import Ubuntu.Components 1.3
 import Ubuntu.Components.ListItems 1.3 as ListItem
-import Ubuntu.SystemSettings.Wifi 1.0
+import Ubuntu.SystemSettings.Brightness 1.0
 
 ItemPage {
     id: wifiDisplays
     objectName: "wifiDisplays"
-    title: i18n.tr("Wi-Fi Displays")
+    title: i18n.tr("Display Casting")
 
     Flickable {
         id: pageFlickable
@@ -31,7 +31,7 @@ ItemPage {
         contentWidth: parent.width
         contentHeight: contentItem.childrenRect.height
 
-        Displays {
+        AethercastDisplays {
             id: displays
             onDevicesChanged: {
                 console.warn("onDevicesChanged: " + devices);
@@ -50,7 +50,7 @@ ItemPage {
 
             ListItem.Standard {
                 objectName: "wifiDisplays"
-                text: i18n.tr("Wi-Fi Displays")
+                text: i18n.tr("Devices")
                 control: Item {
                     anchors.verticalCenter: parent.verticalCenter
                     height: parent.height

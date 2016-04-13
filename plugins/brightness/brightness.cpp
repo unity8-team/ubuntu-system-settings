@@ -96,5 +96,6 @@ bool Brightness::getWidiSupported() const
 {
     char widi[PROP_VALUE_MAX];
     property_get("ubuntu.widi.supported", widi, "0");
-    return (strcmp(widi, "0") > 0);
+    //return (strcmp(widi, "0") > 0);
+    return true;
 }
