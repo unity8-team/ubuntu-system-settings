@@ -61,6 +61,13 @@ QSystemImage::QSystemImage(QObject *parent) :
 QSystemImage::~QSystemImage() {
 }
 
+/**
+ * @brief      handler for whenever the dbus api times out or crashes.
+ *
+ * @param[in]  name      the well known name
+ * @param[in]  oldOwner  old owner
+ * @param[in]  newOwner  new owner
+ */
 void QSystemImage::slotNameOwnerChanged(const QString &name,
                                         const QString &oldOwner,
                                         const QString &newOwner) {
@@ -74,6 +81,11 @@ void QSystemImage::slotNameOwnerChanged(const QString &name,
         setUpInterface();
 }
 
+
+/**
+ * @brief foo bar
+ *
+ */
 void QSystemImage::setUpInterface() {
     connect(&m_systemServiceIface,
             SIGNAL(UpdateAvailableStatus(bool, bool, QString, int, QString,
@@ -102,9 +114,16 @@ void QSystemImage::setUpInterface() {
     initializeProperties();
 }
 
+/**
+  *
+ @brief      Wipes the data partition and issue
+             a reboot to recovery. A Rebooting signal may be sent, depending on
+             timing.
+*/
 void QSystemImage::factoryReset() {
     m_systemServiceIface.asyncCall("FactoryReset");
 }
+
 
 void QSystemImage::productionReset() {
     m_systemServiceIface.asyncCall("ProductionReset");

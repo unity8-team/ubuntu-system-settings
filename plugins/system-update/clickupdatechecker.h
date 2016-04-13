@@ -17,7 +17,11 @@
 #ifndef CLICKUPDATECHECKER_H
 #define CLICKUPDATECHECKER_H
 
-#include "clickapiproto.h"
+#include <QHash>
+#include <QProcess>
+#include <QSharedPointer>
+
+#include "clickupdatemetadata.h"
 
 namespace UpdatePlugin {
 
@@ -35,24 +39,27 @@ public:
     void checkForUpdates();
     void abortCheckForUpdates();
 
+protected slots:
+    void requestSucceeded();
+
 private slots:
     void handleInstalledClicks(const int &exitCode);
-    void handleDownloadUrlSigned();
-    void handleDownloadUrlSignFailure();
+    void handleMetadataClickTokenObtained(const ClickUpdateMetadata *meta);
+    void handleClickTokenRequestFailed(const ClickUpdateMetadata *meta);
 
 signals:
-    void clickUpdateDownloadable(const ClickUpdateMetadata &meta);
+    void clickUpdateDownloadable(const QSharedPointer<ClickUpdateMetadata> &meta);
     void checkCompleted();
 
 private:
-    void setUpMeta(const ClickUpdateMetadata &meta);
-    void setUpProcess();
+    void initializeMeta(const QSharedPointer<ClickUpdateMetadata> &meta);
+    void initializeProcess();
 
     // Starts process of adding remote metadata to each installed click
     void requestClickMetadata();
 
     QProcess m_process;
-    QMap<QString, ClickUpdateMetadata> m_metas;
+    QHash<QString, QSharedPointer<ClickUpdateMetadata> > m_metas;
 };
 
 }

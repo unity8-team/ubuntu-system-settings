@@ -26,7 +26,7 @@ import Ubuntu.Components 1.3
 import Ubuntu.Components.ListItems 1.3 as ListItem
 import Ubuntu.Components.Popups 1.3
 import Ubuntu.OnlineAccounts.Client 0.1
-// import Ubuntu.SystemSettings.Update 1.0
+import Ubuntu.SystemSettings.Update 1.0
 import Ubuntu.Connectivity 1.0
 
 

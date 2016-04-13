@@ -37,12 +37,11 @@ Column {
     property bool havePower: false
 
     /*!
-        \qmlproperty bool checkInprogress
+        \qmlproperty UpdateManager::ManagerStatus managerStatus
 
-        Indicates whether or not there's a check in progress. Causes the
-        UI to hide things that aren't appropriate.
+        Reflects state of manager.
     */
-    property bool checkInprogress: false
+    property int managerStatus
 
     /*!
         \qmlproperty bool authenticated
@@ -51,7 +50,7 @@ Column {
     */
     property bool authenticated: false
 
-    property alias systemUpdate: imageUpdate.systemUpdate
+    property alias systemImageBackend: imageUpdate.systemImageBackend
 
     property alias clickUpdatesModel: clickUpdates.model
 

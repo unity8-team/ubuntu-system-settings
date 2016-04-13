@@ -1,10 +1,16 @@
 set(QML_SOURCES
     PageComponent.qml
+    Updates.qml
+    Update.qml
+    ImageUpdate.qml
+    ClickUpdates.qml
     SystemUpdatePrompt.qml
     Configuration.qml)
 SET (CMAKE_AUTOMOC ON)
 
+
 add_library(UbuntuUpdatePanel MODULE
+            plugin.h
             plugin.cpp
             # updatemanager.cpp
             ${QML_SOURCES})

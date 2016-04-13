@@ -63,9 +63,16 @@ std::string Helpers::architectureFromDpkg()
 }
 
 
-QString Helpers::clickMetadataURL()
+QString Helpers::clickMetadataUrl()
 {
     return QStringLiteral("https://search.apps.ubuntu.com/api/v1/click-metadata");
+}
+
+QString Helpers::clickTokenUrl(const QString &url)
+{
+    QProcessEnvironment environment = QProcessEnvironment::systemEnvironment();
+    return environment.value("CLICK_TOKEN_URL", url);
+
 }
 
 bool Helpers::isIgnoringCredentials()

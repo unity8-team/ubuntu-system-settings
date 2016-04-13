@@ -34,9 +34,8 @@ class ClickUpdateMetadata : public ClickApiProto
 {
     Q_OBJECT
 public:
-    explicit ClickUpdateMetadata(QObject *parent = 0,
-                                 const UbuntuOne::Token &token);
-    ~ClickUpdateMetadata() {}
+    explicit ClickUpdateMetadata(QObject *parent = 0);
+    ~ClickUpdateMetadata();
     Q_PROPERTY(QString anonDownloadUrl READ anonDownloadUrl
                WRITE setAnonDownloadUrl NOTIFY anonDownloadUrlChanged)
     Q_PROPERTY(uint binaryFilesize READ binaryFilesize
@@ -73,20 +72,15 @@ public:
                WRITE setRemoteVersion NOTIFY remoteVersionChanged)
     Q_PROPERTY(QString localVersion READ localVersion
                WRITE setLocalVersion NOTIFY localVersionChanged)
-    Q_PROPERTY(QString signedDownloadUrl READ signedDownloadUrl
-               NOTIFY signedDownloadUrlChanged)
-    Q_PROPERTY(QString clickToken READ clickToken
-               WRITE setClickToken NOTIFY clickTokenChanged)
 
-    // Errors relating to parsing, fetching click tokens etc.
-    Q_PROPERTY(QString errorString READ errorString NOTIFY errorStringChanged)
+    Q_PROPERTY(QString clickToken READ clickToken NOTIFY clickTokenChanged)
 
     QString anonDownloadUrl() const;
     uint binaryFilesize() const;
     QString changelog() const;
     QString channel() const;
     QString content() const;
-    QString department() const;
+    QStringList department() const;
     QString downloadSha512() const;
     QString downloadUrl() const;
     QString iconUrl() const;
@@ -97,47 +91,42 @@ public:
     int sequence() const;
     QString status() const;
     QString title() const;
-    QString version() const;
+    QString remoteVersion() const;
+    QString localVersion() const;
 
-    QString signedDownloadUrl() const;
     QString clickToken() const;
-    QString errorString() const;
 
     void setAnonDownloadUrl(const QString &anonDownloadUrl);
     void setBinaryFilesize(const uint &binaryFilesize);
     void setChangelog(const QString &changelog);
     void setChannel(const QString &channel);
     void setContent(const QString &content);
-    void setDepartment(const QString &department);
+    void setDepartment(const QStringList &department);
     void setDownloadSha512(const QString &downloadSha512);
     void setDownloadUrl(const QString &downloadUrl);
     void setIconUrl(const QString &iconUrl);
     void setName(const QString &name);
     void setOrigin(const QString &origin);
     void setPackageName(const QString &packageName);
-    void setRevision(const QString &revision);
-    void setSequence(const QString &sequence);
+    void setRevision(const int &revision);
+    void setSequence(const int &sequence);
     void setStatus(const QString &status);
     void setTitle(const QString &title);
     void setRemoteVersion(const QString &version);
     void setLocalVersion(const QString &version);
 
-    void setClickToken(const QString &clickToken);
-
     // Abort any networking activity.
     void abort();
-
-    void signDownloadUrl();
-
+    void requestClickToken();
     bool isUpdateRequired();
 
-private slots:
-    void tokenRequestSslFailed(const QList<QSslError> &errors);
-    void tokenRequestFailed(const QNetworkReply::NetworkError &code);
-    void tokenRequestSucceeded(const QNetworkReply* reply);
+protected slots:
+    void requestSucceeded();
+//     void tokenRequestSslFailed(const QList<QSslError> &errors);
+//     void tokenRequestFailed(const QNetworkReply::NetworkError &code);
+//     void tokenRequestSucceeded(const QNetworkReply* reply);
 
 signals:
-    void signedDownloadUrlChanged();
     void clickTokenChanged();
 
     void anonDownloadUrlChanged();
@@ -159,32 +148,32 @@ signals:
     void remoteVersionChanged();
     void localVersionChanged();
 
-    void downloadUrlSignFailure();
+    void clickTokenRequestSucceeded(const ClickUpdateMetadata *meta);
+    void clickTokenRequestFailed();
 
 private:
-    void setSignedDownloadUrl(const QString &signedDownloadUrl);
+    void setClickToken(const QString &clickToken);
+    QString m_clickToken;
 
     QString m_anonDownloadUrl;
     uint m_binaryFilesize;
     QString m_changelog;
     QString m_channel;
     QString m_content;
-    QString m_department;
+    QStringList m_department;
     QString m_downloadSha512;
     QString m_downloadUrl;
     QString m_iconUrl;
     QString m_name;
     QString m_origin;
     QString m_packageName;
-    QString m_revision;
-    QString m_sequence;
+    int m_revision;
+    int m_sequence;
     QString m_status;
     QString m_title;
-    QString m_local_version;
-    QString m_remote_version;
+    QString m_localVersion;
+    QString m_remoteVersion;
 
-    QString m_signedDownloadUrl;
-    QString m_clickToken;
 };
 
 }

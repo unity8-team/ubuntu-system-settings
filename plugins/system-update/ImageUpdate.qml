@@ -19,5 +19,5 @@
 import QtQuick 2.4
 
 Update {
-    property var systemUpdate
+    property var systemImageBackend
 }

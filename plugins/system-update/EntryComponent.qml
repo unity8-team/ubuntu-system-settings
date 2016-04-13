@@ -21,10 +21,14 @@
 import QtQuick 2.4
 import Ubuntu.Components 1.3
 import Ubuntu.Components.ListItems 1.3 as ListItem
+import Ubuntu.DownloadManager 1.2
 import Ubuntu.SystemSettings.Update 1.0
 
 ListItem.SingleValue {
     id: root
+
+    property int updatesAvailable: UpdateManager.updatesCount
+
     text: i18n.tr(model.displayName)
     objectName: "entryComponent-updates"
     iconSource: Qt.resolvedUrl(model.icon)
@@ -32,23 +36,9 @@ ListItem.SingleValue {
     progression: true
     value: updatesAvailable > 0 ? updatesAvailable : ""
 
-    property int updatesAvailable: 0
-
-    function _updatesRefresh() {
-        var _updatesAvailable = 0;
-        for (var i=0; i < UpdateManager.model.length; i++) {
-            if (UpdateManager.model[i].updateRequired)
-                _updatesAvailable += 1;
-        }
-        updatesAvailable =  _updatesAvailable;
-    }
-
-    Connections {
-        id: updateManager
-        objectName: "updateManager"
-        target: UpdateManager
-        onModelChanged: root._updatesRefresh()
-        onUpdateAvailableFound: root._updatesRefresh()
+    DownloadManager {
+        id: manager
+        Component.onCompleted: UpdateManager.udm = manager
     }
 
     onClicked: main.loadPluginByName("system-update");

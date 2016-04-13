@@ -14,9 +14,13 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
 */
+#include <assert.h>
 #include "clickapiproto.h"
 
-ClickApiProto::ClickApiProto(QObject *parent)
+namespace UpdatePlugin {
+
+ClickApiProto::ClickApiProto(QObject *parent):
+    QObject(parent)
 {
 }
 
@@ -47,7 +51,7 @@ void ClickApiProto::requestSslFailed(const QList<QSslError> &errors)
     auto reply = sender();
     QString errorString = "SSL error:";
     foreach (const QSslError &err, errors) {
-        errorString << err.errorString();
+        errorString += err.errorString();
     }
     setErrorString(errorString);
     Q_EMIT serverError();
@@ -60,20 +64,20 @@ void ClickApiProto::onReplyError(const QNetworkReply::NetworkError &code)
     auto reply = sender();
     setErrorString("network error");
     switch (code) {
-        case QNetworkReply::TemporaryNetworkFailureError:
-        case QNetworkReply::UnknownNetworkError:
-        case QNetworkReply::UnknownProxyError:
-        case QNetworkReply::UnknownServerError:
-            Q_EMIT networkError();
-            break;
-        default:
-            Q_EMIT serverError();
+    case QNetworkReply::TemporaryNetworkFailureError:
+    case QNetworkReply::UnknownNetworkError:
+    case QNetworkReply::UnknownProxyError:
+    case QNetworkReply::UnknownServerError:
+        Q_EMIT networkError();
+        break;
+    default:
+        Q_EMIT serverError();
     }
     reply->deleteLater();
     m_reply = 0;
 }
 
-bool ClickApiProto::validReply(QNetworkReply *reply)
+bool ClickApiProto::validReply(const QNetworkReply *reply)
 {
     auto statusAttr = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute);
     if (!statusAttr.isValid()) {
@@ -104,3 +108,5 @@ void ClickApiProto::setErrorString(const QString &errorString)
     m_errorString = errorString;
     Q_EMIT errorStringChanged();
 }
+
+} // UpdatePlugin

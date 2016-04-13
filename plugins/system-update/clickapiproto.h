@@ -17,8 +17,12 @@
 #ifndef CLICKAPIPROXY_H
 #define CLICKAPIPROXY_H
 
+#include <token.h>
+
 #include <QtNetwork/QNetworkAccessManager>
 #include <QtNetwork/QNetworkReply>
+
+namespace UpdatePlugin {
 
 //
 // Implements some behaviour and state for interacting with a remove click
@@ -39,7 +43,8 @@ public:
 protected slots:
     virtual void requestSucceeded() = 0;
     void requestFailed(const QNetworkReply::NetworkError &code);
-    void requestSslFailed();
+    void requestSslFailed(const QList<QSslError> &errors);
+    void onReplyError(const QNetworkReply::NetworkError &code);
 
 signals:
     void errorStringChanged();
@@ -49,7 +54,7 @@ signals:
 
 protected:
     void setUpReply();
-    void validReply();
+    bool validReply(const QNetworkReply *reply);
     void setErrorString(const QString &errorString);
 
 protected:
@@ -57,5 +62,10 @@ protected:
     UbuntuOne::Token m_token;
     QNetworkAccessManager m_nam;
     QNetworkReply* m_reply;
+
+};
+
+} // UpdatePlugin
+
 
 #endif // CLICKAPIPROXY_H

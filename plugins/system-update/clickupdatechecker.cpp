@@ -14,15 +14,23 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
 */
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonArray>
+#include <QJsonValue>
+#include <QByteArray>
+
+#include <assert.h>
 #include "clickupdatechecker.h"
-#include "helper.h"
+#include "helpers.h"
 
 
 namespace UpdatePlugin {
 
-ClickUpdateChecker::ClickUpdateChecker(QObject *parent)
+ClickUpdateChecker::ClickUpdateChecker(QObject *parent):
+    ClickApiProto(parent)
 {
-    setUpProcess();
+    initializeProcess();
 }
 
 ClickUpdateChecker::~ClickUpdateChecker()
@@ -31,20 +39,21 @@ ClickUpdateChecker::~ClickUpdateChecker()
         delete m_reply;
 }
 
-void ClickUpdateChecker::setUpMeta(const ClickUpdateMetadata &meta)
+void ClickUpdateChecker::initializeMeta(const QSharedPointer<ClickUpdateMetadata> &meta)
 {
-    connect(&meta, SIGNAL(credentialError()),
-            this, SIGNAL(credentialError()));
-    connect(&meta, SIGNAL(signedDownloadUrlChanged()),
-            this, SLOT(handleSignedDownloadUrl()));
-    connect(&meta, SIGNAL(downloadUrlSignFailure()),
-            this, SLOT(handleDownloadUrlSignFailure()));
+    QObject::connect(meta.data(), SIGNAL(credentialError()),
+                     this, SIGNAL(credentialError()));
+    QObject::connect(meta.data(), SIGNAL(clickTokenRequestSucceeded(const ClickUpdateMetadata&)),
+                     this, SLOT(handleMetadataClickTokenObtained(const ClickUpdateMetadata&)));
+    QObject::connect(meta.data(), SIGNAL(clickTokenRequestFailed()),
+                     this, SLOT(handleClickTokenRequestFailed()));
+
 }
 
-void ClickUpdateChecker::setUpProcess()
+void ClickUpdateChecker::initializeProcess()
 {
-    QObject::connect(&m_process, SIGNAL(finished(const int &exitCode)),
-                     this, SLOT(handleInstalledClicks(const int &exitCode)));
+    QObject::connect(&m_process, SIGNAL(finished(const int&)),
+                     this, SLOT(handleInstalledClicks(const int&)));
 }
 
 // This method is quite complex, and naturally not synchronous. Basically,
@@ -63,12 +72,10 @@ void ClickUpdateChecker::checkForUpdates()
     // completed. We should not be given an invalid token here,
     // and we've yet to talk to the server so we can't know
     // the state of the token.
-    if (m_token == null) {
+    if (!m_token.isValid()) {
         Q_EMIT checkCompleted();
         return;
     }
-
-    assert(m_token.isValid() && "ClickUpdateChecker got bad token!");
 
     // Clear list of click update metadatas; we're starting anew.
     m_metas.clear();
@@ -80,7 +87,6 @@ void ClickUpdateChecker::checkForUpdates()
     args << "--manifest";
     QString command = Helpers::whichClick();
     m_process.start(command, args);
-
 }
 
 // Tries to shut down all checks we might currently be doing.
@@ -88,12 +94,12 @@ void ClickUpdateChecker::abortCheckForUpdates()
 {
     // Abort all click update metadata objects.
     foreach (const QString &name, m_metas.keys())
-        m_metas.value(name).abort();
+        m_metas.value(name)->abort();
 
     m_process.terminate();
 
     if (m_reply) {
-        m_reply.abort();
+        m_reply->abort();
         delete m_reply;
     }
 
@@ -104,9 +110,7 @@ void ClickUpdateChecker::handleInstalledClicks(const int &exitCode)
 {
     if (exitCode > 0) {
         setErrorString(
-            QString(
-                "list command exited with code %1."
-            ).arg(exitCode));
+            QString("list command exited with code %1.").arg(exitCode)
         );
         Q_EMIT checkCompleted();
         return;
@@ -125,27 +129,34 @@ void ClickUpdateChecker::handleInstalledClicks(const int &exitCode)
     int i;
     for (i = 0; i < array.size(); i++) {
         QJsonObject object = array.at(i).toObject();
-        ClickUpdateMetadata meta(this, m_token);
 
-        meta.setName(object.value("name").toString());
-        meta.setTitle(object.value("title").toString());
-        meta.setLocalVersion(object.value("version").toString());
-        m_metas.insert(meta.getName(), meta);
+        QSharedPointer<ClickUpdateMetadata> meta(new ClickUpdateMetadata);
+
+        meta->setToken(m_token);
+        meta->setName(object.value("name").toString());
+        meta->setTitle(object.value("title").toString());
+        meta->setLocalVersion(object.value("version").toString());
+        m_metas.insert(meta->name(), meta);
     }
 
     // Populate each ClickUpdateMetadata with remote metadata.
     requestClickMetadata();
 }
 
-void ClickUpdateChecker::handleSignedDownloadUrl()
+void ClickUpdateChecker::handleMetadataClickTokenObtained(const ClickUpdateMetadata *meta)
 {
-    ClickUpdateMetadata *meta = qobject_cast<ClickUpdateMetadata*>(sender());
-    clickUpdateDownloadable(*meta);
-    delete meta;
+    // Pass the shared pointer instead.
+    foreach (const QString &name, m_metas.keys()) {
+        if (name == meta->name()) {
+            Q_EMIT clickUpdateDownloadable(m_metas.value(name));
+            // not finished
+            return;
+        }
+    }
 
     // Are we finished?
     foreach (const QString &name, m_metas.keys()) {
-        if (m_metas.get(name).signedDownloadUrl().isEmpty()) {
+        if (m_metas.value(name)->clickToken().isEmpty()) {
             // not finished
             return;
         }
@@ -155,12 +166,9 @@ void ClickUpdateChecker::handleSignedDownloadUrl()
     Q_EMIT checkCompleted();
 }
 
-void ClickUpdateChecker::handleDownloadUrlSignFailure()
+void ClickUpdateChecker::handleClickTokenRequestFailed(const ClickUpdateMetadata *meta)
 {
-    ClickUpdateMetadata *meta = qobject_cast<ClickUpdateMetadata*>(sender());
-    // This should be safe.
-    m_metas.remove(meta->getName());
-    delete meta;
+    m_metas.remove(meta->name());
 }
 
 void ClickUpdateChecker::requestClickMetadata()
@@ -191,11 +199,11 @@ void ClickUpdateChecker::requestClickMetadata()
     QNetworkRequest request;
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
     request.setRawHeader(
-            QByteArray("X-Ubuntu-Frameworks"),
-            QByteArray::fromStdString(frameworks.str()));
+                QByteArray("X-Ubuntu-Frameworks"),
+                QByteArray::fromStdString(frameworks.str()));
     request.setRawHeader(
-            QByteArray("X-Ubuntu-Architecture"),
-            QByteArray::fromStdString(getArchitecture()));
+                QByteArray("X-Ubuntu-Architecture"),
+                QByteArray::fromStdString(Helpers::getArchitecture()));
     request.setUrl(url);
 
     m_reply = m_nam.post(request, content);
@@ -211,18 +219,17 @@ void ClickUpdateChecker::requestSucceeded()
     auto r = qobject_cast<QNetworkReply*>(sender());
 
     // check for http error status and emit all the required signals
-    if (!replyIsValid(r)) {
+    if (!validReply(r)) {
         return;
     }
 
     QScopedPointer<QNetworkReply, QScopedPointerDeleteLater> reply(r);
 
-    QJsonParseError jsonError;
+    QJsonParseError *jsonError = new QJsonParseError;
     auto document = QJsonDocument::fromJson(reply->readAll(), jsonError);
 
     if (document.isArray()) {
         QJsonArray array = document.array();
-        bool updates = false;
         for (int i = 0; i < array.size(); i++) {
             auto object = array.at(i).toObject();
             auto name = object["name"].toString();
@@ -233,28 +240,29 @@ void ClickUpdateChecker::requestSucceeded()
             auto changelog = object["changelog"].toString();
             auto size = object["binary_filesize"].toInt();
             if (m_metas.contains(name)) {
-                ClickUpdateMetadata meta = m_metas.get(name);
-                meta.setRemoteVersion(version);
-                if (meta.isUpdateRequired()) {
-                    meta.setIconUrl(icon_url);
-                    meta.setDownloadUrl(url);
-                    meta.setBinaryFilesize(size);
-                    meta.setDownloadSha512(download_sha512);
-                    meta.setChangelog(changelog);
+                QSharedPointer<ClickUpdateMetadata> meta = m_metas.value(name);
+                meta->setRemoteVersion(version);
+                if (meta->isUpdateRequired()) {
+                    meta->setIconUrl(icon_url);
+                    meta->setDownloadUrl(url);
+                    meta->setBinaryFilesize(size);
+                    meta->setDownloadSha512(download_sha512);
+                    meta->setChangelog(changelog);
 
                     // ClickUpdateMetadata now has enough information to
                     // request the signed download URL, which we'll
                     // monitor and act on when it changes.
                     // See: handleDownloadUrlSigned
-                    meta.signDownloadUrl();
+                    meta->requestClickToken();
                 }
             }
         }
     }
 
     // Document wasn't an array, what was it?
-    setErrorString("json parse failed: " + jsonError.errorString());
+    setErrorString("json parse failed: " + jsonError->errorString());
+    delete jsonError;
     Q_EMIT serverError();
 }
 
-} // Namespace UpdatePlugin
+} // UpdatePlugin
