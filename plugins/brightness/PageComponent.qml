@@ -32,7 +32,12 @@ ItemPage {
     id: root
     objectName: "brightnessPage"
 
-    title: i18n.tr("Brightness")
+    title: brightnessPanel.widiSupported ? i18n.tr("Brightness & Display") : i18n.tr("Brightness")
+
+    GSettings {
+        id: gsettings
+        schema.id: "com.ubuntu.touch.system"
+    }
 
     UbuntuBrightnessPanel {
         id: brightnessPanel
@@ -105,8 +110,16 @@ ItemPage {
         }
     }
 
-    GSettings {
-        id: gsettings
-        schema.id: "com.ubuntu.touch.system"
+    ListItem.Divider {
+        visible: brightnessPanel.widiSupported
+    }
+
+    ListItem.SingleValue {
+        objectName: "displayCasting"
+        visible: brightnessPanel.widiSupported
+        text: i18n.tr("Display Casting")
+        value: backend
+        progression: true
+        onClicked: pageStack.push(Qt.resolvedUrl("WifiDisplays.qml"))
     }
 }
