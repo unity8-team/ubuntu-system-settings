@@ -6,7 +6,7 @@ set(QML_SOURCES
 )
 
 add_library(UbuntuBrightnessPanel MODULE
-               aethercast/aethercast_helper.h
+                aethercast/aethercast_helper.h
                 aethercast/aethercast_device.h
                 aethercast/aethercast_manager.h
                 aethercast/device.h
