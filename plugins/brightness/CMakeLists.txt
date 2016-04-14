@@ -27,8 +27,7 @@ add_library(UbuntuBrightnessPanel MODULE
                 brightness.cpp
                 ${QML_SOURCES})
 qt5_use_modules(UbuntuBrightnessPanel Quick Qml DBus)
-pkg_check_modules(LIBANDROID REQUIRED libandroid-properties)
-target_link_libraries(UbuntuBrightnessPanel SystemSettings ${LIBANDROID_LDFLAGS})
+target_link_libraries(UbuntuBrightnessPanel SystemSettings ${ANDR_PROP_LDFLAGS})
 
 set(PLUG_DIR ${PLUGIN_PRIVATE_MODULE_DIR}/Ubuntu/SystemSettings/Brightness)
 install(TARGETS UbuntuBrightnessPanel DESTINATION ${PLUG_DIR})

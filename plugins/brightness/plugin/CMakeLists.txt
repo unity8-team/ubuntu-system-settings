@@ -4,6 +4,5 @@ add_definitions(-DQT_NO_KEYWORDS)
 
 add_library(brightness-plugin SHARED brightness-plugin.h brightness-plugin.cpp)
 qt5_use_modules(brightness-plugin Core Qml DBus)
-pkg_check_modules(LIBANDROID REQUIRED libandroid-properties)
-target_link_libraries(brightness-plugin SystemSettings ${LIBANDROID_LDFLAGS})
+target_link_libraries(brightness-plugin SystemSettings ${ANDR_PROP_LDFLAGS})
 install(TARGETS brightness-plugin DESTINATION ${PLUGIN_MODULE_DIR})
