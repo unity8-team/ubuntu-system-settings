@@ -119,4 +119,6 @@ void Displays::updateProperty(const QString &key, const QVariant &value)
     qWarning() << Q_FUNC_INFO << key << ":" << value;
     if (key == "Scanning") 
         Q_EMIT(scanningChanged(value.toBool()));
+    if (key == "State") 
+        Q_EMIT(stateChanged());
 }

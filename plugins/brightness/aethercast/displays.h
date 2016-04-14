@@ -39,9 +39,14 @@ class Displays : public QObject
                 READ scanning
                 NOTIFY scanningChanged)
 
+    Q_PROPERTY (QString state
+                READ state
+                NOTIFY stateChanged)
+
 Q_SIGNALS:
     void devicesChanged();
     void scanningChanged(bool isActive);
+    void stateChanged();
 
 public:
     explicit Displays(QObject *parent = nullptr);
@@ -56,6 +61,7 @@ public:
 public:
     QAbstractItemModel * devices();
     bool scanning() const { return m_manager->scanning(); }
+    QString state() const { return m_manager->state(); }
 
 private Q_SLOTS:
     void slotPropertiesChanged(const QString &interface, const QVariantMap &changedProperties,

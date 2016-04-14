@@ -121,7 +121,7 @@ ItemPage {
             objectName: "displayCasting"
             visible: brightnessPanel.widiSupported
             text: i18n.tr("Display Casting")
-            value: backend
+            value: aethercastDisplays.state === "Connected" ? i18n.tr("Connected") : i18n.tr("Disconnected")
             progression: true
             onClicked: pageStack.push(Qt.resolvedUrl("WifiDisplays.qml"))
         }
