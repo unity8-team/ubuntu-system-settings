@@ -15,24 +15,35 @@ __license__ = 'LGPL 3+'
 BUS_NAME = 'com.canonical.applications.Downloader'
 MAIN_IFACE = 'com.canonical.applications.DownloadManager'
 MAIN_OBJ = '/'
-SYSTEM_BUS = False
+SYSTEM_BUS = True
 
 
 def load(mock, parameters):
     global _parameters
     _parameters = parameters
 
-    mock.props = {
+    mock.properties = {
         'downloads': _parameters.get('downloads', dbus.Array([])),
     }
+
+    mock.path_to_download = {}
+
+    # mock.createDownload((
+    #         'http://foo.com', '', '',
+    #         dbus.Dictionary(
+    #             {'clickupdate': 'com.ubuntu.developer.testclick'},
+    #             signature='sv'),
+    #         dbus.Dictionary({}, signature='ss')
+    #     )
+    # )
 
 
 @dbus.service.method(MAIN_IFACE,
                      in_signature='sb', out_signature='ao')
 def getAllDownloads(self, appId, uncollected):
     import syslog
-    syslog.syslog("get all downloads")
-    return dbus.Array(['/foo', '/bar'], signature='o')
+    syslog.syslog("get all downloads", self.path_to_download.keys())
+    return dbus.Array(self.path_to_download.keys(), signature='o')
 
 
 @dbus.service.method(MAIN_IFACE,
@@ -41,10 +52,11 @@ def createDownload(self, download_struct):
     import syslog
     syslog.syslog("create download", download_struct)
     ds = DownloadStruct(*download_struct)
-    downloads = self.props["downloads"]
+    downloads = self.properties["downloads"]
     ds.path = "/singledownload_%s" % len(downloads)
-    downloads.append(ds)
-    self.props["downloads"] = downloads
+    downloads.append(ds.path)
+    self.path_to_download[ds.path] = ds
+    self.properties["downloads"] = downloads
     return ds.path
 
 

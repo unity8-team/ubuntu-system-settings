@@ -20,35 +20,40 @@
 namespace UpdatePlugin {
 
 ClickApiProto::ClickApiProto(QObject *parent):
-    QObject(parent)
+    QObject(parent),
+    m_errorString(""),
+    m_token(UbuntuOne::Token())
 {
+    initializeNam();
 }
 
 ClickApiProto::~ClickApiProto()
 {
+    cancel();
 }
 
-void ClickApiProto::setUpReply()
+void ClickApiProto::initializeNam()
 {
-
-    assert((m_reply != NULL) && "setUpReply got null reply!");
-
-    connect(m_reply, SIGNAL(finished()),
-            this, SLOT(requestSucceeded()));
-    connect(m_reply, SIGNAL(sslErrors(const QList<QSslError>&)),
-            this, SLOT(requestSslFailed(const QList<QSslError>&)));
-    connect(m_reply, SIGNAL(error(const QNetworkReply::NetworkError&)),
-            SLOT(requestFailed(const QNetworkReply::NetworkError&)));
+    connect(&m_nam, SIGNAL(finished(QNetworkReply *)),
+            this, SLOT(requestFinished(QNetworkReply *)));
+    connect(&m_nam, SIGNAL(sslErrors(QNetworkReply *, const QList<QSslError>&)),
+            this, SLOT(requestSslFailed(QNetworkReply *, const QList<QSslError>&)));
 }
 
+void ClickApiProto::initializeReply(QNetworkReply *reply)
+{
+    qWarning() << "click proto: init reply" << reply;
+    connect(this, SIGNAL(abortNetworking()),
+            reply, SLOT(abort()));
+}
 void ClickApiProto::setToken(const UbuntuOne::Token &token)
 {
     m_token = token;
 }
 
-void ClickApiProto::requestSslFailed(const QList<QSslError> &errors)
+void ClickApiProto::requestSslFailed(QNetworkReply *reply,
+                                     const QList<QSslError> &errors)
 {
-    auto reply = sender();
     QString errorString = "SSL error:";
     foreach (const QSslError &err, errors) {
         errorString += err.errorString();
@@ -56,14 +61,21 @@ void ClickApiProto::requestSslFailed(const QList<QSslError> &errors)
     setErrorString(errorString);
     Q_EMIT serverError();
     reply->deleteLater();
-    m_reply = 0;
 }
 
-void ClickApiProto::onReplyError(const QNetworkReply::NetworkError &code)
+void ClickApiProto::requestFinished(QNetworkReply *reply)
 {
-    auto reply = sender();
-    setErrorString("network error");
-    switch (code) {
+    qWarning() << "click proto: something finished" << reply;
+    // check for http error status and emit all the required signals
+    if (!validReply(reply)) {
+        reply->deleteLater();
+        return;
+    }
+
+    switch (reply->error()) {
+    case QNetworkReply::NoError:
+        requestSucceeded(reply);
+        return;
     case QNetworkReply::TemporaryNetworkFailureError:
     case QNetworkReply::UnknownNetworkError:
     case QNetworkReply::UnknownProxyError:
@@ -73,8 +85,8 @@ void ClickApiProto::onReplyError(const QNetworkReply::NetworkError &code)
     default:
         Q_EMIT serverError();
     }
+
     reply->deleteLater();
-    m_reply = 0;
 }
 
 bool ClickApiProto::validReply(const QNetworkReply *reply)
@@ -107,6 +119,12 @@ void ClickApiProto::setErrorString(const QString &errorString)
 {
     m_errorString = errorString;
     Q_EMIT errorStringChanged();
+}
+
+void ClickApiProto::cancel()
+{
+    // Tell each reply to abort. See initializeReply().
+    Q_EMIT abortNetworking();
 }
 
 } // UpdatePlugin

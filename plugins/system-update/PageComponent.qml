@@ -35,30 +35,53 @@ ItemPage {
     id: root
     objectName: "systemUpdatesPage"
 
-    Component.onCompleted: {
-        if (!UpdateManager.udm)
-            UpdateManager.udm = udm.createObject(UpdateManager);
-    }
+    // Component.onCompleted: {
+    //     if (!UpdateManager.udm)
+    //         UpdateManager.udm = udm.createObject(UpdateManager);
+    // }
     Component { id: udm;  DownloadManager {} }
+    Component { id: sdl;  SingleDownload {} }
 
     // property bool isCharging: indicatorPower.deviceState === "charging"
     // property bool batterySafeForUpdate: isCharging || chargeLevel > 25
     // property var chargeLevel: indicatorPower.batteryLevel || 0
 
-    // QDBusActionGroup {
-    //     id: indicatorPower
-    //     busType: 1
-    //     busName: "com.canonical.indicator.power"
-    //     objectPath: "/com/canonical/indicator/power"
-    //     property variant batteryLevel: action("battery-level").state
-    //     property variant deviceState: action("device-state").state
-    //     Component.onCompleted: start()
-    // }
+    QDBusActionGroup {
+        id: indicatorPower
+        busType: 1
+        busName: "com.canonical.indicator.power"
+        objectPath: "/com/canonical/indicator/power"
+        property variant batteryLevel: action("battery-level").state
+        property variant deviceState: action("device-state").state
+        Component.onCompleted: start()
+    }
 
     Binding {
         target: UpdateManager
         property: "online"
         value: NetworkingStatus.online
+    }
+
+    Binding {
+        target: UpdateManager
+        property: "haveSufficientPower"
+        value: (indicatorPower.deviceState === "charging")
+               && (indicatorPower.batteryLevel > 25)
+    }
+
+    Connections {
+        target: UpdateManager
+        onClickUpdateReady: {
+            console.warn('qml saw clickUpdateReady', url, hash, algorithm, metadata, headers);
+            // var download = sdl.createObject(UpdateManager, {
+            //     "autoStart": false,
+            //     "metadata": metadata,
+            //     "headers": headers,
+            //     "hash": hash,
+            //     "algorithm": algorithm
+            // });
+            // download.download(url);
+        }
     }
 
     // Setup {
@@ -107,7 +130,7 @@ ItemPage {
             clickUpdatesModel: UpdateManager.udm.downloads
             authenticated: UpdateManager.authenticated
             Component.onCompleted: {
-                console.warn("Updates completed.");
+                // console.warn("Updates completed.");
             }
         }
     }

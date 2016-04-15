@@ -38,6 +38,7 @@ public:
     static QString clickTokenUrl(const QString &url);
     static bool isIgnoringCredentials(); // IGNORE_CREDENTIALS
     static QString whichClick(); // CLICK_COMMAND
+    static QString whichPkcon(); // PKCON_COMMAND
 };
 
 } // Namespace UpdatePlugin

@@ -39,8 +39,10 @@ ListItem.SingleValue {
     onClicked: main.loadPluginByName("system-update");
 
     Component.onCompleted: {
-        if (!UpdateManager.udm)
+        if (!UpdateManager.udm) {
+            console.warn("created udm");
             UpdateManager.udm = udm.createObject(UpdateManager);
+        }
     }
     Component { id: udm;  DownloadManager {} }
 }

@@ -308,12 +308,12 @@ signals:
      \param lastUpdateDate
      \param errorReason
     */
-    void updateAvailableStatus(const bool isAvailable,
-                               const bool downloading,
-                               const QString &availableVersion,
-                               const int &updateSize,
-                               const QString &lastUpdateDate,
-                               const QString &errorReason);
+    void updateAvailableStatus(bool,
+                               bool,
+                               QString,
+                               int,
+                               QString,
+                               QString);
     /*!
      \brief Handle availability status changes for updates.
 

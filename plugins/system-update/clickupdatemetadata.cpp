@@ -25,7 +25,26 @@
 namespace UpdatePlugin {
 
 ClickUpdateMetadata::ClickUpdateMetadata(QObject *parent):
-    ClickApiProto(parent)
+    ClickApiProto(parent),
+    m_clickToken(""),
+    m_anonDownloadUrl(""),
+    m_binaryFilesize(0),
+    m_changelog(""),
+    m_channel(""),
+    m_content(""),
+    m_department(),
+    m_downloadSha512(""),
+    m_downloadUrl(""),
+    m_iconUrl(""),
+    m_name(""),
+    m_origin(""),
+    m_packageName(""),
+    m_revision(0),
+    m_sequence(0),
+    m_status(""),
+    m_title(""),
+    m_localVersion(""),
+    m_remoteVersion("")
 {
 }
 
@@ -287,14 +306,6 @@ void ClickUpdateMetadata::setClickToken(const QString &clickToken)
     }
 }
 
-void ClickUpdateMetadata::abort()
-{
-    if (m_reply) {
-        m_reply->abort();
-        delete m_reply;
-    }
-}
-
 void ClickUpdateMetadata::requestClickToken()
 {
     qWarning() << "click meta:" << name() << "requests token...";
@@ -313,27 +324,21 @@ void ClickUpdateMetadata::requestClickToken()
     QNetworkRequest request;
     request.setUrl(query);
 
-    m_reply = m_nam.head(request);
-
-    setUpReply();
+    QNetworkReply *reply = m_nam.head(request);
+    initializeReply(reply);
 }
 
-void ClickUpdateMetadata::requestSucceeded()
+void ClickUpdateMetadata::requestSucceeded(QNetworkReply *reply)
 {
-    // check for http error status and emit all the required signals
-    if (!validReply(m_reply)) {
-        return;
-    }
-
-    if (m_reply->hasRawHeader(X_CLICK_TOKEN)) {
-        QString header(m_reply->rawHeader(X_CLICK_TOKEN));
+    if (reply->hasRawHeader(X_CLICK_TOKEN)) {
+        QString header(reply->rawHeader(X_CLICK_TOKEN));
         // This should inform the world that this click update
         // metadata is enough to start a download & install.
-            setClickToken(header);
-        return;
+        setClickToken(header);
+    } else {
+        Q_EMIT clickTokenRequestFailed();
     }
-
-    Q_EMIT clickTokenRequestFailed();
+    reply->deleteLater();
 }
 
 bool ClickUpdateMetadata::isUpdateRequired()

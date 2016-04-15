@@ -19,6 +19,7 @@
 #include <QQmlEngine>
 #include <QQmlComponent>
 #include <QQmlError>
+#include "helpers.h"
 
 namespace UpdatePlugin {
 
@@ -26,23 +27,39 @@ UpdateManager *UpdateManager::m_instance = 0;
 
 UpdateManager *UpdateManager::instance()
 {
+    qWarning() << "trace instance1";
     if (!m_instance)
         m_instance = new UpdateManager;
 
+    qWarning() << "trace instance2";
     return m_instance;
 }
 
 UpdateManager::UpdateManager(QObject *parent):
     QObject(parent),
-    m_updatesCount(-1)
+    m_online(false),
+    m_authenticated(false),
+    m_haveSufficientPower(false),
+    m_updatesCount(-1),
+    m_clickUpdatesCount(0),
+    m_systemUpdatesCount(0),
+    m_managerStatus(ManagerStatus::Idle),
+    m_udm(nullptr),
+    m_token(UbuntuOne::Token())
 {
+    qDBusRegisterMetaType<StringMap>();
+    qWarning() << "trace a";
     initializeSystemImage();
+    qWarning() << "trace b";
     initializeClickUpdateChecker();
+    qWarning() << "trace c";
     initializeSSOService();
+    qWarning() << "trace c9";
 }
 
 UpdateManager::~UpdateManager()
 {
+    qWarning() << "trace deletion1";
     if (m_udm)
         m_udm->deleteLater();
 }
@@ -75,10 +92,10 @@ void UpdateManager::initializeSystemImage()
 void UpdateManager::initializeClickUpdateChecker()
 {
     connect(&m_clickUpChecker,
-            SIGNAL(clickUpdateMetadataCompleted(
+            SIGNAL(updateAvailable(
                     const QSharedPointer<ClickUpdateMetadata>&)),
             this,
-            SLOT(downloadClickUpdate(
+            SLOT(onClickUpdateAvailable(
                     const QSharedPointer<ClickUpdateMetadata>&))
     );
 
@@ -88,44 +105,59 @@ void UpdateManager::initializeClickUpdateChecker()
     connect(&m_clickUpChecker, SIGNAL(credentialError()),
             this, SLOT(handleCredentialsFailed())
     );
-
     connect(&m_clickUpChecker, SIGNAL(checkCompleted()),
-            this, SLOT(handleClickCheckCompleted())
+            this, SLOT(onClickCheckCompleted())
+    );
+    connect(&m_clickUpChecker, SIGNAL(networkError()),
+            this, SLOT(onNetworkError())
+    );
+    connect(&m_clickUpChecker, SIGNAL(serverError()),
+            this, SLOT(onServerError())
     );
 }
 
 
 void UpdateManager::initializeSSOService()
 {
+    qWarning() << "trace c0";
     connect(&m_ssoService, SIGNAL(credentialsFound(const Token&)),
             this, SLOT(handleCredentialsFound(const Token&))
     );
+    qWarning() << "trace c1";
     connect(&m_ssoService, SIGNAL(credentialsNotFound()),
             this, SLOT(handleCredentialsFailed())
     );
+    qWarning() << "trace c2";
     connect(&m_ssoService, SIGNAL(credentialsDeleted()),
             this, SLOT(handleCredentialsFailed())
     );
+    qWarning() << "trace c3";
 }
 
 
 void UpdateManager::initializeUdm()
 {
+    qWarning() << "trace d";
     // We're return m_udm to QML, so we need to explicitly retain ownership.
     QQmlEngine::setObjectOwnership(m_udm, QQmlEngine::CppOwnership);
-    // Reparent to us instead.
-    // m_udm->setParent(this);
+    qWarning() << "trace e";
+    m_udm->setParent(this);
+    qWarning() << "trace f";
 
-    updateClickUpdatesCount();
     connect(m_udm, SIGNAL(downloadsChanged()),
             this, SLOT(updateClickUpdatesCount()));
+    qWarning() << "trace g";
+
+    updateClickUpdatesCount();
+    qWarning() << "trace h";
 }
 
 void UpdateManager::updateClickUpdatesCount()
 {
-    m_clickUpdatesCount = m_udm->property("downloads").toList().count();
+    qWarning() << "trace 12";
+    // m_clickUpdatesCount = m_udm->property("downloads").toList().count();
     qWarning() << "updating click updates count..." << m_clickUpdatesCount;
-    setUpdatesCount();
+    calculateUpdatesCount();
 }
 
 bool UpdateManager::online() const
@@ -144,7 +176,7 @@ void UpdateManager::setOnline(const bool online)
     if (m_online) {
         checkForUpdates();
     } else {
-        abortCheckForUpdates();
+        cancelCheckForUpdates();
     }
 }
 
@@ -180,13 +212,18 @@ QObject *UpdateManager::udm() const
 }
 
 void UpdateManager::setUdm(QObject *udm) {
+    qWarning() << "trace setudm1" << udm;
     if (m_udm != udm) {
         m_udm = udm;
         Q_EMIT udmChanged();
+        qWarning() << "trace setudm2";
     }
 
+    qWarning() << "trace setudm3";
     if (m_udm) {
+        qWarning() << "trace setudm4";
         initializeUdm();
+        qWarning() << "trace setudm5";
     }
 }
 
@@ -195,11 +232,14 @@ int UpdateManager::updatesCount() const
     return m_updatesCount;
 }
 
-void UpdateManager::setUpdatesCount() {
+void UpdateManager::calculateUpdatesCount() {
+    qWarning() << "trace 4";
     int newCount = m_clickUpdatesCount + m_systemUpdatesCount;
     if (newCount != m_updatesCount) {
         m_updatesCount = newCount;
+        qWarning() << "trace 1";
         Q_EMIT updatesCountChanged();
+        qWarning() << "trace 3";
     }
 }
 
@@ -226,15 +266,15 @@ void UpdateManager::checkForUpdates()
     }
 
     m_systemImage.checkForUpdate();
-    m_clickUpChecker.checkForUpdates();
-    setManagerStatus(UpdateManager::ManagerStatus::ManagerCheckingAllUpdates);
+    m_clickUpChecker.check();
+    setManagerStatus(ManagerStatus::CheckingAllUpdates);
 }
 
-void UpdateManager::abortCheckForUpdates()
+void UpdateManager::cancelCheckForUpdates()
 {
-    // TODO: Figure out way to cancel SI check
-    m_clickUpChecker.abortCheckForUpdates();
-    setManagerStatus(ManagerStatus::ManagerIdle);
+    m_systemImage.cancelUpdate();
+    m_clickUpChecker.cancel();
+    setManagerStatus(ManagerStatus::Idle);
 }
 
 void UpdateManager::setManagerStatus(const UpdateManager::ManagerStatus &status)
@@ -245,40 +285,62 @@ void UpdateManager::setManagerStatus(const UpdateManager::ManagerStatus &status)
     }
     QString s;
     switch(m_managerStatus) {
-    case ManagerIdle:
-        s = "ManagerIdle"; break;
-    case ManagerCheckingClickUpdates:
-        s = "ManagerCheckingClickUpdates"; break;
-    case ManagerCheckingSystemUpdates:
-        s = "ManagerCheckingSystemUpdates"; break;
-    case ManagerCheckingAllUpdates:
-        s = "ManagerCheckingAllUpdates"; break;
-    case ManagerFailed:
-        s = "ManagerFailed"; break;
+    case Idle:
+        s = "Idle"; break;
+    case CheckingClickUpdates:
+        s = "CheckingClickUpdates"; break;
+    case CheckingSystemUpdates:
+        s = "CheckingSystemUpdates"; break;
+    case CheckingAllUpdates:
+        s = "CheckingAllUpdates"; break;
+    case NetworkError:
+        s = "NetworkError"; break;
+    case ServerError:
+        s = "ServerError"; break;
     }
     qWarning() << "manager: status now" << s;
 }
 
 bool UpdateManager::clickUpdateInUdm(const QSharedPointer<ClickUpdateMetadata> &meta) const
 {
+    bool found = false;
     qWarning() << "manager: clickUpdateInUdm check on" << meta->name();
     foreach(const QVariant &v, m_udm->property("downloads").toList()) {
-        qWarning() << v.value<QObject*>()->property("downloadId");
+        QObject *download = v.value<QObject*>();
+        qWarning() << download->property("metadata");
+        // QObject *downloadMeta = download->property("metadata").value<QObject*>();
+        // foreach(const QString &key, download->property(""))
+        // qWarning() << v.value<QObject*>()->property("downloadId");
     }
+    return found;
 }
 
-void UpdateManager::downloadClickUpdate(const QSharedPointer<ClickUpdateMetadata> &meta)
+void UpdateManager::onClickUpdateAvailable(const QSharedPointer<ClickUpdateMetadata> &meta)
 {
     qWarning() << "manager: found downloadable click update metadata" << meta->name();
 
     if (!clickUpdateInUdm(meta)) {
-
+        qWarning() << "manager: click metadata was not in udm, downloading..";
+        createClickUpdateDownload(meta);
     }
 }
 
 void UpdateManager::createClickUpdateDownload(const QSharedPointer<ClickUpdateMetadata> &meta)
 {
+    StringMap headers;
+    headers[X_CLICK_TOKEN] = meta->clickToken();
 
+    QStringList command;
+    command << Helpers::whichPkcon() << "-p" << "install-local" << "$file";
+
+    QVariantMap metadata;
+    metadata["command"] = command;
+    metadata["package-name"] = meta->name();
+    metadata["title"] = meta->title();
+    metadata["indicator-shown"] = false;
+    qWarning() << "manager: create click download" << meta->downloadUrl() << meta->downloadSha512() << metadata << headers;
+    Q_EMIT clickUpdateReady(meta->downloadUrl(), meta->downloadSha512(),
+                            "sha512", metadata, headers);
 }
 
 void UpdateManager::handleCredentialsFound(const UbuntuOne::Token &token)
@@ -296,7 +358,7 @@ void UpdateManager::handleCredentialsFound(const UbuntuOne::Token &token)
 
     // Set click update checker's token, and start a check.
     m_clickUpChecker.setToken(token);
-    m_clickUpChecker.checkForUpdates();
+    m_clickUpChecker.check();
 }
 
 void UpdateManager::handleCredentialsFailed()
@@ -307,7 +369,7 @@ void UpdateManager::handleCredentialsFailed()
 
     // Ask click update checker to stop checking for updates.
     // Revoke the token given to click update checker.
-    m_clickUpChecker.abortCheckForUpdates();
+    m_clickUpChecker.cancel();
     m_clickUpChecker.setToken(m_token);
 
     // We've invalidated the token, and the user is now not authenticated.
@@ -326,23 +388,33 @@ void UpdateManager::handleSiAvailableStatus(const bool isAvailable,
     qWarning() << "got available status from SI";
 
     m_systemUpdatesCount = isAvailable ? 1 : 0;
-    setUpdatesCount();
+    calculateUpdatesCount();
 
-    if (m_managerStatus == UpdateManager::ManagerStatus::ManagerCheckingAllUpdates) {
-        setManagerStatus(UpdateManager::ManagerStatus::ManagerCheckingClickUpdates);
-    } else if (m_managerStatus == UpdateManager::ManagerStatus::ManagerCheckingSystemUpdates) {
-        setManagerStatus(UpdateManager::ManagerStatus::ManagerIdle);
+    if (m_managerStatus == ManagerStatus::CheckingAllUpdates) {
+        setManagerStatus(ManagerStatus::CheckingClickUpdates);
+    } else if (m_managerStatus == ManagerStatus::CheckingSystemUpdates) {
+        setManagerStatus(ManagerStatus::Idle);
     }
 }
 
-void UpdateManager::handleClickCheckCompleted()
+void UpdateManager::onClickCheckCompleted()
 {
     qWarning() << "manager: click check completed";
-    if (m_managerStatus == UpdateManager::ManagerStatus::ManagerCheckingAllUpdates) {
-        setManagerStatus(UpdateManager::ManagerStatus::ManagerCheckingSystemUpdates);
-    } else if (m_managerStatus == UpdateManager::ManagerStatus::ManagerCheckingClickUpdates) {
-        setManagerStatus(UpdateManager::ManagerStatus::ManagerIdle);
+    if (m_managerStatus == ManagerStatus::CheckingAllUpdates) {
+        setManagerStatus(ManagerStatus::CheckingSystemUpdates);
+    } else if (m_managerStatus == ManagerStatus::CheckingClickUpdates) {
+        setManagerStatus(ManagerStatus::Idle);
     }
+}
+
+void UpdateManager::onNetworkError()
+{
+    setManagerStatus(ManagerStatus::NetworkError);
+}
+
+void UpdateManager::onServerError()
+{
+    setManagerStatus(ManagerStatus::ServerError);
 }
 
 } // UpdatePlugin

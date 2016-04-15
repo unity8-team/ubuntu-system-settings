@@ -26,8 +26,7 @@
 namespace UpdatePlugin {
 
 //
-// Checks for click updates. Every click update that is downloadable is
-// emitted in the clickUpdateMetadataCompleted signal.
+// Checks for click updates.
 //
 class ClickUpdateChecker : public ClickApiProto
 {
@@ -36,11 +35,11 @@ public:
     explicit ClickUpdateChecker(QObject *parent = 0);
     ~ClickUpdateChecker();
 
-    void checkForUpdates();
-    void abortCheckForUpdates();
+    void check();
+    void cancel();
 
 protected slots:
-    void requestSucceeded();
+    void requestSucceeded(QNetworkReply *reply);
 
 private slots:
     void handleInstalledClicks(const int &exitCode);
@@ -49,7 +48,7 @@ private slots:
     void handleClickTokenRequestFailed(const ClickUpdateMetadata *meta);
 
 signals:
-    void clickUpdateMetadataCompleted(
+    void updateAvailable(
         const QSharedPointer<ClickUpdateMetadata> &meta);
     void checkCompleted();
 

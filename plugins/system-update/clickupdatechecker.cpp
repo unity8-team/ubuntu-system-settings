@@ -35,8 +35,6 @@ ClickUpdateChecker::ClickUpdateChecker(QObject *parent):
 
 ClickUpdateChecker::~ClickUpdateChecker()
 {
-    if (m_reply)
-        delete m_reply;
 }
 
 void ClickUpdateChecker::initializeMeta(const QSharedPointer<ClickUpdateMetadata> &meta)
@@ -47,7 +45,6 @@ void ClickUpdateChecker::initializeMeta(const QSharedPointer<ClickUpdateMetadata
                      this, SLOT(handleMetadataClickTokenObtained(const ClickUpdateMetadata*)));
     QObject::connect(meta.data(), SIGNAL(clickTokenRequestFailed()),
                      this, SLOT(handleClickTokenRequestFailed()));
-
 }
 
 void ClickUpdateChecker::initializeProcess()
@@ -66,9 +63,9 @@ void ClickUpdateChecker::initializeProcess()
 // The second is receiving the metadata for clicks we found installed.
 // The third is signing the download url for each click update. We ask the
 // ClickUpdateMetadata to do this for us.
-void ClickUpdateChecker::checkForUpdates()
+void ClickUpdateChecker::check()
 {
-    qWarning() << "click checker: checkForUpdates...";
+    qWarning() << "click checker: check...";
     // No token, so don't check anything, but report that the check
     // completed. We should not be given an invalid token here,
     // and we've yet to talk to the server so we can't know
@@ -94,18 +91,16 @@ void ClickUpdateChecker::checkForUpdates()
 }
 
 // Tries to shut down all checks we might currently be doing.
-void ClickUpdateChecker::abortCheckForUpdates()
+void ClickUpdateChecker::cancel()
 {
     // Abort all click update metadata objects.
     foreach (const QString &name, m_metas.keys())
-        m_metas.value(name)->abort();
+        m_metas.value(name)->cancel();
 
     m_process.terminate();
 
-    if (m_reply) {
-        m_reply->abort();
-        delete m_reply;
-    }
+    // This tells active replies to abort.
+    Q_EMIT abortNetworking();
 
     Q_EMIT checkCompleted();
 }
@@ -187,7 +182,7 @@ void ClickUpdateChecker::handleMetadataClickTokenObtained(const ClickUpdateMetad
 {
     qWarning() << "click checker: handling obtained token on metadata" << meta->name();
     // Pass the shared pointer instead.
-    Q_EMIT clickUpdateMetadataCompleted(m_metas.value(meta->name()));
+    Q_EMIT updateAvailable(m_metas.value(meta->name()));
 
     // Check if all tokens are fetched.
     foreach (const QString &name, m_metas.keys()) {
@@ -242,23 +237,16 @@ void ClickUpdateChecker::requestClickMetadata()
                 QByteArray::fromStdString(Helpers::getArchitecture()));
     request.setUrl(url);
 
-    m_reply = m_nam.post(request, content);
-
-    // Wait for the reply to complete in some way, and set up listeners
-    setUpReply();
+    QNetworkReply *reply = m_nam.post(request, content);
+    initializeReply(reply);
 }
 
-void ClickUpdateChecker::requestSucceeded()
+void ClickUpdateChecker::requestSucceeded(QNetworkReply *reply)
 {
     qWarning() << "click checker: request succeeded...";
 
-    // check for http error status and emit all the required signals
-    if (!validReply(m_reply)) {
-        return;
-    }
-
     QJsonParseError *jsonError = new QJsonParseError;
-    auto document = QJsonDocument::fromJson(m_reply->readAll(), jsonError);
+    auto document = QJsonDocument::fromJson(reply->readAll(), jsonError);
 
     if (document.isArray()) {
         QJsonArray array = document.array();
@@ -290,12 +278,14 @@ void ClickUpdateChecker::requestSucceeded()
                 }
             }
         }
+    } else {
+        // Document wasn't an array, what was it?
+        setErrorString("json parse failed: " + jsonError->errorString());
+        Q_EMIT serverError();
     }
 
-    // Document wasn't an array, what was it?
-    setErrorString("json parse failed: " + jsonError->errorString());
     delete jsonError;
-    Q_EMIT serverError();
+    reply->deleteLater();
 }
 
 } // UpdatePlugin

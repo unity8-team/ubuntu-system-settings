@@ -28,54 +28,50 @@
 #include "clickupdatechecker.h"
 #include "systemimage.h"
 
+typedef QMap<QString, QString> StringMap;
+Q_DECLARE_METATYPE(StringMap)
+
 // Having the full namespaced name in a slot seems to confuse
 // SignalSpy so we need this declaration.
 using UbuntuOne::Token;
 
 namespace UpdatePlugin {
 
-//
-// Mediator for the UI, System Image and Click updates.
-//
-// Note: UpdateManager does not provide models for click updates,
-// nor system updates. The respective states are kept in
-// ubuntu-download-manager and systemimage.
-//
 class UpdateManager : public QObject
 {
     Q_OBJECT
-public:
     Q_ENUMS(UpdateMode)
     Q_ENUMS(UpdateStatus)
     Q_ENUMS(ManagerStatus)
-
+public:
     enum UpdateMode {
-        UpdateDownloadable,
-        UpdateInstallable,
-        UpdateInstallableWithRestart,
-        UpdatePausable,
-        UpdateNonPausable,
-        UpdateRetriable
+        Downloadable,
+        Installable,
+        InstallableWithRestart,
+        Pausable,
+        NonPausable,
+        Retriable
     };
 
     enum ManagerStatus {
-        ManagerIdle,
-        ManagerCheckingClickUpdates,
-        ManagerCheckingSystemUpdates,
-        ManagerCheckingAllUpdates,
-        ManagerFailed
+        Idle,
+        CheckingClickUpdates,
+        CheckingSystemUpdates,
+        CheckingAllUpdates,
+        NetworkError,
+        ServerError
     };
 
     enum UpdateStatus {
-        UpdateNotAvailable,
-        UpdateNotStarted,
-        UpdateAutomaticallyDownloading,
-        UpdateManuallyDownloading,
-        UpdateDownloadPaused,
-        UpdateInstallationPaused,
-        UpdateInstalling,
-        UpdateInstalled,
-        UpdateFailed
+        NotAvailable,
+        NotStarted,
+        AutomaticallyDownloading,
+        ManuallyDownloading,
+        DownloadPaused,
+        InstallationPaused,
+        Installing,
+        Installed,
+        Failed
     };
 
     static UpdateManager *instance();
@@ -90,7 +86,8 @@ public:
     Q_PROPERTY(int updatesCount READ updatesCount NOTIFY updatesCountChanged)
     Q_PROPERTY(int downloadMode READ downloadMode WRITE setDownloadMode
                NOTIFY downloadModeChanged)
-    Q_PROPERTY(ManagerStatus managerStatus READ managerStatus NOTIFY managerStatusChanged)
+    Q_PROPERTY(ManagerStatus managerStatus READ managerStatus
+               NOTIFY managerStatusChanged)
 
     bool online() const;
     void setOnline(const bool online);
@@ -116,13 +113,12 @@ protected:
 
 public slots:
     void checkForUpdates();
-    void abortCheckForUpdates();
+    void cancelCheckForUpdates();
 
 private slots:
-    void downloadClickUpdate(
+    void onClickUpdateAvailable(
             const QSharedPointer<ClickUpdateMetadata> &meta);
 
-    // System Image slots
     void handleSiAvailableStatus(const bool isAvailable,
                                  const bool downloading,
                                  const QString &availableVersion,
@@ -132,12 +128,13 @@ private slots:
     // void siUpdateFailed(const int &consecutiveFailureCount,
     //                     const QString &lastReason);
 
-    // SSO slots
     void handleCredentialsFound(const Token &token);
     void handleCredentialsFailed();
 
-    void handleClickCheckCompleted();
+    void onClickCheckCompleted();
     void updateClickUpdatesCount();
+    void onNetworkError();
+    void onServerError();
 
 signals:
     void onlineChanged();
@@ -147,16 +144,17 @@ signals:
     void udmChanged();
     void updatesCountChanged();
     void managerStatusChanged();
-
-    // void requestClickUpdateMetadata();
-    // void requestInstalledClicks();
-
+    void clickUpdateReady(const QString &url,
+                          const QString &hash,
+                          const QString &algorithm,
+                          const QVariantMap &metadata,
+                          const StringMap &headers);
 
 private:
     static UpdateManager *m_instance;
 
     void setAuthenticated(const bool authenticated);
-    void setUpdatesCount();
+    void calculateUpdatesCount();
     void setManagerStatus(const ManagerStatus &status);
 
     // Whether or not the click update metadata exist in UDM.
@@ -175,8 +173,8 @@ private:
     int m_updatesCount;
     int m_clickUpdatesCount;
     int m_systemUpdatesCount;
-    ManagerStatus m_managerStatus;
 
+    ManagerStatus m_managerStatus;
     ClickUpdateChecker m_clickUpChecker;
     QSystemImage m_systemImage;
     QObject *m_udm;

@@ -29,6 +29,7 @@ namespace UpdatePlugin {
 
 //
 // Represents click metadata composed from local and remote sources.
+// Can fetch click tokens for each download.
 //
 class ClickUpdateMetadata : public ClickApiProto
 {
@@ -116,12 +117,12 @@ public:
     void setLocalVersion(const QString &version);
 
     // Abort any networking activity.
-    void abort();
+    void cancel();
     void requestClickToken();
     bool isUpdateRequired();
 
 protected slots:
-    void requestSucceeded();
+    void requestSucceeded(QNetworkReply *reply);
 //     void tokenRequestSslFailed(const QList<QSslError> &errors);
 //     void tokenRequestFailed(const QNetworkReply::NetworkError &code);
 //     void tokenRequestSucceeded(const QNetworkReply* reply);

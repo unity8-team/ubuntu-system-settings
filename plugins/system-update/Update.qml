@@ -23,89 +23,165 @@
 
 import QtQuick 2.4
 import Ubuntu.Components 1.3
+import Ubuntu.Components.ListItems 1.3 as ListItems
+import Ubuntu.SystemSettings.Update 1.0
 
 Item {
     id: update
 
-    property alias name: name.text
-    property int status // This is an updateManager::UpdateStatus
-    property int mode // This is an updateManager::UpdateMode
-    property string version
-    property alias iconUrl: icon.source
+    property int status // This is an UM::UpdateStatus
+    property int mode // This is an UM::UpdateMode
     property string size
-    property string changelog
-    property int progress // From 0 to 100
+    property string version
+
+    property alias name: name.text
+    property alias iconUrl: icon.source
+    property alias changelog: changelogLabel.text
+    property alias progress: progressBar.value
 
     signal retry()
     signal download()
     signal pause()
     signal install()
 
-    // MOCK
-    property var updateManager: ({
-        "downloadable": 0,
-        "installable": 1,
-        "installableWithRestart": 2,
-        "pausable": 3,
-        "nonPausable": 4,
-        "retriable": 5,
-    })
-
     function setError(errorString) {
 
     }
 
-    states: [
-    ]
+    height: childrenRect.height
 
-    Icon {
-        id: icon
+    Item {
+        id: iconPlaceholder
+        height: update.height
+        width: units.gu(9)
+
+        anchors {
+            top: update.top
+            left: update.left
+            bottom: update.bottom
+        }
+
+        Icon {
+            id: icon
+            anchors {
+                margins: units.gu(2)
+                top: iconPlaceholder.top
+                left: iconPlaceholder.left
+            }
+            width: iconPlaceholder.width - (units.gu(2) * 2)
+        }
     }
 
     Label {
         id: name
-        font.bold: true
+        anchors {
+            left: iconPlaceholder.right
+            top: update.top
+            topMargin: units.gu(2)
+        }
         elide: Text.ElideMiddle
     }
 
     Button {
+        id: button
+        anchors {
+            top: update.top
+            topMargin: units.gu(2)
+            right: update.right
+            rightMargin: units.gu(2)
+        }
         // Enabled as long as it's not NonPausable.
-        enabled: update.mode !== updateManager.nonPausable
+        // enabled: update.mode !== updateManager.nonPausable
 
         text: {
+            console.warn("update.mode", update.mode)
             switch(update.mode) {
-            case updateManager.retriable:
+            case UM.Retriable:
                 return i18n.tr("Retry")
-            case updateManager.downloadable:
+            case UM.Downloadable:
                 return i18n.tr("Download")
-            case updateManager.pausable:
-            case updateManager.nonPausable:
+            case UM.Pausable:
+            case UM.NonPausable:
                 return i18n.tr("Pause")
-            case updateManager.installable:
+            case UM.Installable:
                 return i18n.tr("Install")
-            case updateManager.installableWithRestart:
+            case UM.InstallableWithRestart:
                 return i18n.tr("Install…")
+            default:
+                return "FUUUUU"
             }
         }
 
         onClicked: {
             switch (update.mode) {
-            case updateManager.retriable:
+            case UM.Retriable:
                 update.retry();
                 break;
-            case updateManager.downloadable:
+            case UM.Downloadable:
                 update.download();
                 break;
-            case updateManager.pausable:
+            case UM.Pausable:
                 update.pause();
                 break;
-            case updateManager.installable:
-            case updateManager.installableWithRestart:
+            case UM.Installable:
+            case UM.InstallableWithRestart:
                 update.install();
                 break;
-            case updateManager.nonPausable:
+            case UM.NonPausable:
                 break;
             }
+        }
+    }
+
+    Label {
+        id: sizeAndStatusLabel
+        anchors {
+            top: button.bottom
+            topMargin: units.gu(0.5)
+            right: update.right
+            rightMargin: units.gu(2.2)
+        }
+        text: {
+            return size
+        }
+    }
+
+    Label {
+        id: versionLabel
+        anchors {
+            top: name.bottom
+            topMargin: units.gu(1)
+            left: iconPlaceholder.right
+
+        }
+        text: i18n.tr("Version %1").arg(update.version)
+    }
+
+    ProgressBar {
+        id: progressBar
+        indeterminate: progress < 0 || progress > 100
+        minimumValue: 0
+        maximumValue: 100
+        showProgressPercentage: false
+        height: units.gu(0.5)
+        visible: false
+    }
+
+    Label {
+
+    }
+
+    ListItems.Expandable {
+        id: changelogLabel
+        anchors {
+            left: iconPlaceholder.right
+            bottom: update.bottom
+            bottomMargin: units.gu(2)
+        }
+        collapsedHeight: 1
+        expandedHeight: units.gu(30)
+        onClicked: {
+            expanded = true;
         }
     }
 }

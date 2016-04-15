@@ -27,18 +27,31 @@
 
 using namespace UpdatePlugin;
 
+static QObject *umSingletonProvider(QQmlEngine *engine, QJSEngine *scriptEngine)
+{
+    Q_UNUSED(engine)
+    Q_UNUSED(scriptEngine)
+
+    return UpdateManager::instance();
+}
+
 void BackendPlugin::registerTypes(const char *uri)
 {
     Q_ASSERT(uri == QLatin1String("Ubuntu.SystemSettings.Update"));
 
-    // qmlRegisterType<SystemUpdate>(uri, 1, 0, "SystemUpdate");
     qmlRegisterType<QSystemImage>(uri, 1, 0, "SystemImage");
+
+    // The context is already populated with “UpdateManager”, but we still need to
+    // register it as a type.
+    // TODO: Register as well as providing a singleton via qmlRegisterSingleton.
+    // qmlRegisterUncreatableType<UpdateManager>(uri, 1, 0, "UM", "");
+    qmlRegisterSingletonType<UpdateManager>(uri, 1, 0, "UpdateManager", umSingletonProvider);
 }
 
 void BackendPlugin::initializeEngine(QQmlEngine *engine, const char *uri)
 {
     QQmlExtensionPlugin::initializeEngine(engine, uri);
-    QQmlContext* context = engine->rootContext();
-    context->setContextProperty("UpdateManager",
-                                UpdateManager::instance());
+    // QQmlContext* context = engine->rootContext();
+    // context->setContextProperty("UpdateManager",
+    //                             UpdateManager::instance());
 }

@@ -39,29 +39,31 @@ public:
     Q_PROPERTY(QString errorString READ errorString NOTIFY errorStringChanged)
     QString errorString() const;
     void setToken(const UbuntuOne::Token &token);
+    void cancel();
 
 protected slots:
-    virtual void requestSucceeded() = 0;
-    void requestFailed(const QNetworkReply::NetworkError &code);
-    void requestSslFailed(const QList<QSslError> &errors);
-    void onReplyError(const QNetworkReply::NetworkError &code);
+    virtual void requestSucceeded(QNetworkReply *reply) = 0;
+    void requestFinished(QNetworkReply *reply);
+    void requestSslFailed(QNetworkReply *reply, const QList<QSslError> &errors);
 
 signals:
     void errorStringChanged();
     void networkError();
     void serverError();
     void credentialError();
+    void abortNetworking();
 
 protected:
-    void setUpReply();
+    void initializeReply(QNetworkReply *reply);
     bool validReply(const QNetworkReply *reply);
     void setErrorString(const QString &errorString);
 
-protected:
     QString m_errorString;
     UbuntuOne::Token m_token;
     QNetworkAccessManager m_nam;
-    QNetworkReply* m_reply;
+
+private:
+    void initializeNam();
 
 };
 
