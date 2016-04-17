@@ -15,7 +15,7 @@ __license__ = 'LGPL 3+'
 BUS_NAME = 'com.canonical.applications.Downloader'
 MAIN_IFACE = 'com.canonical.applications.DownloadManager'
 MAIN_OBJ = '/'
-SYSTEM_BUS = True
+SYSTEM_BUS = False
 
 
 def load(mock, parameters):

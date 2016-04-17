@@ -19,17 +19,15 @@
 #ifndef UPDATEMANAGER_H
 #define UPDATEMANAGER_H
 
-#include <QSharedPointer>
 #include <QDebug>
+#include <QSharedPointer>
 
 #include <token.h>
 #include <ssoservice.h>
+
 #include "clickupdatemetadata.h"
 #include "clickupdatechecker.h"
 #include "systemimage.h"
-
-typedef QMap<QString, QString> StringMap;
-Q_DECLARE_METATYPE(StringMap)
 
 // Having the full namespaced name in a slot seems to confuse
 // SignalSpy so we need this declaration.
@@ -82,8 +80,9 @@ public:
     Q_PROPERTY(bool haveSufficientPower READ haveSufficientPower
                WRITE setHaveSufficientPower
                NOTIFY haveSufficientPowerChanged)
-    Q_PROPERTY(QObject *udm READ udm WRITE setUdm NOTIFY udmChanged)
     Q_PROPERTY(int updatesCount READ updatesCount NOTIFY updatesCountChanged)
+    Q_PROPERTY(int clickPackageDownloadsCount READ clickPackageDownloadsCount
+               WRITE setClickPackageDownloadsCount NOTIFY clickPackageDownloadsCountChanged)
     Q_PROPERTY(int downloadMode READ downloadMode WRITE setDownloadMode
                NOTIFY downloadModeChanged)
     Q_PROPERTY(ManagerStatus managerStatus READ managerStatus
@@ -97,11 +96,11 @@ public:
     bool haveSufficientPower() const;
     void setHaveSufficientPower(const bool haveSufficientPower);
 
-    QObject *udm() const;
-    void setUdm(QObject *udm);
-    void initializeUdm();
-
     int updatesCount() const;
+
+    int clickPackageDownloadsCount() const;
+    void setClickPackageDownloadsCount(const int &clickPackageDownloadsCount);
+
     int downloadMode();
     void setDownloadMode(const int &downloadMode);
 
@@ -132,7 +131,6 @@ private slots:
     void handleCredentialsFailed();
 
     void onClickCheckCompleted();
-    void updateClickUpdatesCount();
     void onNetworkError();
     void onServerError();
 
@@ -141,43 +139,40 @@ signals:
     void authenticatedChanged();
     void haveSufficientPowerChanged();
     void downloadModeChanged();
-    void udmChanged();
+    void clickPackageDownloadsCountChanged();
     void updatesCountChanged();
     void managerStatusChanged();
     void clickUpdateReady(const QString &url,
                           const QString &hash,
                           const QString &algorithm,
                           const QVariantMap &metadata,
-                          const StringMap &headers);
+                          const QVariantMap &headers);
 
 private:
     static UpdateManager *m_instance;
 
     void setAuthenticated(const bool authenticated);
-    void calculateUpdatesCount();
     void setManagerStatus(const ManagerStatus &status);
-
-    // Whether or not the click update metadata exist in UDM.
-    bool clickUpdateInUdm(const QSharedPointer<ClickUpdateMetadata> &meta) const;
 
     // Creates the download in UDM for click update with given metadata.
     void createClickUpdateDownload(const QSharedPointer<ClickUpdateMetadata> &meta);
+    void calculateUpdatesCount();
 
     void initializeSystemImage();
     void initializeClickUpdateChecker();
     void initializeSSOService();
+    void initializeUdm();
 
     bool m_online;
     bool m_authenticated;
     bool m_haveSufficientPower;
     int m_updatesCount;
-    int m_clickUpdatesCount;
+    int m_clickPackageDownloadsCount;
     int m_systemUpdatesCount;
 
     ManagerStatus m_managerStatus;
     ClickUpdateChecker m_clickUpChecker;
     QSystemImage m_systemImage;
-    QObject *m_udm;
     UbuntuOne::Token m_token;
     UbuntuOne::SSOService m_ssoService;
 };

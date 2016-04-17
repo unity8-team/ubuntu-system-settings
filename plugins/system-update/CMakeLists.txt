@@ -21,17 +21,22 @@ add_library(UbuntuUpdatePanel MODULE
 qt5_use_modules(UbuntuUpdatePanel Qml Quick Network DBus)
 include_directories(/usr/include/apt-pkg/)
 
+pkg_check_modules(UBUNTU_DOWNLOAD_MANAGER_CLIENT REQUIRED ubuntu-download-manager-client)
+pkg_check_modules(UBUNTU_DOWNLOAD_MANAGER_COMMON REQUIRED ubuntu-download-manager-common)
 pkg_check_modules(UBUNTUONEAUTH REQUIRED ubuntuoneauth-2.0)
 add_definitions(${UBUNTUONEAUTH_CFLAGS} ${UBUNTUONEAUTH_CFLAGS_OTHER})
 target_link_libraries(UbuntuUpdatePanel
     apt-pkg
     update-plugin
     ${UBUNTUONEAUTH_LDFLAGS}
+    ${UBUNTU_DOWNLOAD_MANAGER_CLIENT_LDFLAGS}
+    ${UBUNTU_DOWNLOAD_MANAGER_COMMON_LDFLAGS}
 )
 
 set(PLUG_DIR ${PLUGIN_PRIVATE_MODULE_DIR}/Ubuntu/SystemSettings/Update)
 install(TARGETS UbuntuUpdatePanel DESTINATION ${PLUG_DIR})
 install(FILES qmldir.in DESTINATION ${PLUG_DIR} RENAME qmldir)
+install(FILES Udm.qml DESTINATION ${PLUG_DIR})
 install(FILES ${QML_SOURCES} DESTINATION ${PLUGIN_QML_DIR}/system-update)
 
 install(FILES system-update.settings DESTINATION ${PLUGIN_MANIFEST_DIR})

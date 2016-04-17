@@ -260,6 +260,7 @@ void ClickUpdateChecker::requestSucceeded(QNetworkReply *reply)
             auto download_sha512 = object["download_sha512"].toString();
             auto changelog = object["changelog"].toString();
             auto size = object["binary_filesize"].toInt();
+            auto title = object["title"].toString();
             if (m_metas.contains(name)) {
                 QSharedPointer<ClickUpdateMetadata> meta = m_metas.value(name);
                 meta->setRemoteVersion(version);
@@ -269,6 +270,7 @@ void ClickUpdateChecker::requestSucceeded(QNetworkReply *reply)
                     meta->setBinaryFilesize(size);
                     meta->setDownloadSha512(download_sha512);
                     meta->setChangelog(changelog);
+                    meta->setTitle(title);
 
                     // ClickUpdateMetadata now has enough information to
                     // request the signed download URL, which we'll

@@ -39,8 +39,6 @@ ItemPage {
     //     if (!UpdateManager.udm)
     //         UpdateManager.udm = udm.createObject(UpdateManager);
     // }
-    Component { id: udm;  DownloadManager {} }
-    Component { id: sdl;  SingleDownload {} }
 
     // property bool isCharging: indicatorPower.deviceState === "charging"
     // property bool batterySafeForUpdate: isCharging || chargeLevel > 25
@@ -70,17 +68,30 @@ ItemPage {
     }
 
     Connections {
+        target: Udm
+        onDownloadsChanged: UpdateManager.clickPackageDownloadsCount =
+                                Udm.clickPackageDownloads.length;
+    }
+
+    Connections {
         target: UpdateManager
         onClickUpdateReady: {
-            console.warn('qml saw clickUpdateReady', url, hash, algorithm, metadata, headers);
-            // var download = sdl.createObject(UpdateManager, {
-            //     "autoStart": false,
-            //     "metadata": metadata,
-            //     "headers": headers,
-            //     "hash": hash,
-            //     "algorithm": algorithm
-            // });
-            // download.download(url);
+            var packageName = metadata["custom"]["package-name"];
+            if (!Udm.hasClickPackageDownload(packageName)) {
+                var singleDownloadObj = sdl.createObject(UpdateManager, {
+                    "autoStart": false,
+                    "hash": hash,
+                    "algorithm": algorithm,
+                    "headers": headers
+                });
+
+                var metadataObj = mdt.createObject(UpdateManager, metadata);
+                singleDownloadObj.metadata = metadataObj;
+                singleDownloadObj.download(url);
+                singleDownloadObj.errorFound.connect(function () {
+                    console.warn(this.errorMessage);
+                }.bind(singleDownloadObj));
+            }
         }
     }
 
@@ -93,23 +104,6 @@ ItemPage {
     //         // Found credentials, do stuff that now can be done
     //     }
     // }
-
-    Component {
-         id: dialogErrorComponent
-         Dialog {
-             id: dialogueError
-             title: i18n.tr("Installation failed")
-             text: root.errorDialogText
-
-             Button {
-                 text: i18n.tr("OK")
-                 color: UbuntuColors.orange
-                 onClicked: {
-                     PopupUtils.close(dialogueError);
-                 }
-             }
-         }
-    }
 
     Flickable {
         id: scrollWidget
@@ -125,13 +119,14 @@ ItemPage {
            otherwise the UI might end up in a situation where scrolling doesn't work */
         flickableDirection: Flickable.VerticalFlick
 
+        Label {
+            text: "downloads: " + Udm.downloads.length;
+        }
+
         Updates {
             online: UpdateManager.online
-            clickUpdatesModel: UpdateManager.udm.downloads
+            clickUpdatesModel: Udm.clickPackageDownloads
             authenticated: UpdateManager.authenticated
-            Component.onCompleted: {
-                // console.warn("Updates completed.");
-            }
         }
     }
 
@@ -157,4 +152,23 @@ ItemPage {
             onClicked: pageStack.push(Qt.resolvedUrl("Configuration.qml"))
         }
     }
+
+    Component {
+         id: dialogErrorComponent
+         Dialog {
+             id: dialogueError
+             title: i18n.tr("Installation failed")
+             text: root.errorDialogText
+
+             Button {
+                 text: i18n.tr("OK")
+                 color: UbuntuColors.orange
+                 onClicked: {
+                     PopupUtils.close(dialogueError);
+                 }
+             }
+         }
+    }
+    Component { id: sdl; SingleDownload {} }
+    Component { id: mdt; Metadata {} }
 }

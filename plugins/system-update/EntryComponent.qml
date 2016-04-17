@@ -21,7 +21,6 @@
 import QtQuick 2.4
 import Ubuntu.Components 1.3
 import Ubuntu.Components.ListItems 1.3 as ListItem
-import Ubuntu.DownloadManager 1.2
 import Ubuntu.SystemSettings.Update 1.0
 
 ListItem.SingleValue {
@@ -38,11 +37,9 @@ ListItem.SingleValue {
 
     onClicked: main.loadPluginByName("system-update");
 
-    Component.onCompleted: {
-        if (!UpdateManager.udm) {
-            console.warn("created udm");
-            UpdateManager.udm = udm.createObject(UpdateManager);
-        }
+    Connections {
+        target: Udm
+        onDownloadsChanged: UpdateManager.clickPackageDownloadsCount =
+                                Udm.clickPackageDownloads.length;
     }
-    Component { id: udm;  DownloadManager {} }
 }

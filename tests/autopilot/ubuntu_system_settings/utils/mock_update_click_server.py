@@ -64,7 +64,8 @@ class Manager(object):
                     "download_url": ("http://localhost:9009/download"),
                     "binary_filesize": 9000,
                     "download_sha512": "1232223sdfdsffs",
-                    "changelog": "New version!"
+                    "changelog": "New version!",
+                    "title": "Test Click App"
                 }]
             }
         self._httpd = HTTPServer((server_address, server_port), Handler)

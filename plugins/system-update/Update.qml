@@ -96,16 +96,16 @@ Item {
         text: {
             console.warn("update.mode", update.mode)
             switch(update.mode) {
-            case UM.Retriable:
+            case UpdateManager.Retriable:
                 return i18n.tr("Retry")
-            case UM.Downloadable:
+            case UpdateManager.Downloadable:
                 return i18n.tr("Download")
-            case UM.Pausable:
-            case UM.NonPausable:
+            case UpdateManager.Pausable:
+            case UpdateManager.NonPausable:
                 return i18n.tr("Pause")
-            case UM.Installable:
+            case UpdateManager.Installable:
                 return i18n.tr("Install")
-            case UM.InstallableWithRestart:
+            case UpdateManager.InstallableWithRestart:
                 return i18n.tr("Install…")
             default:
                 return "FUUUUU"
@@ -114,20 +114,20 @@ Item {
 
         onClicked: {
             switch (update.mode) {
-            case UM.Retriable:
+            case UpdateManager.Retriable:
                 update.retry();
                 break;
-            case UM.Downloadable:
+            case UpdateManager.Downloadable:
                 update.download();
                 break;
-            case UM.Pausable:
+            case UpdateManager.Pausable:
                 update.pause();
                 break;
-            case UM.Installable:
-            case UM.InstallableWithRestart:
+            case UpdateManager.Installable:
+            case UpdateManager.InstallableWithRestart:
                 update.install();
                 break;
-            case UM.NonPausable:
+            case UpdateManager.NonPausable:
                 break;
             }
         }

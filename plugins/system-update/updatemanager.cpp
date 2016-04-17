@@ -17,8 +17,8 @@
 #include "updatemanager.h"
 
 #include <QQmlEngine>
-#include <QQmlComponent>
-#include <QQmlError>
+#include <QQmlProperty>
+#include <QCoreApplication>
 #include "helpers.h"
 
 namespace UpdatePlugin {
@@ -27,11 +27,11 @@ UpdateManager *UpdateManager::m_instance = 0;
 
 UpdateManager *UpdateManager::instance()
 {
-    qWarning() << "trace instance1";
+    // qWarning() << "trace instance1";
     if (!m_instance)
         m_instance = new UpdateManager;
 
-    qWarning() << "trace instance2";
+    // qWarning() << "trace instance2";
     return m_instance;
 }
 
@@ -41,27 +41,23 @@ UpdateManager::UpdateManager(QObject *parent):
     m_authenticated(false),
     m_haveSufficientPower(false),
     m_updatesCount(-1),
-    m_clickUpdatesCount(0),
+    m_clickPackageDownloadsCount(0),
     m_systemUpdatesCount(0),
     m_managerStatus(ManagerStatus::Idle),
-    m_udm(nullptr),
     m_token(UbuntuOne::Token())
 {
-    qDBusRegisterMetaType<StringMap>();
-    qWarning() << "trace a";
+    // qWarning() << "trace a";
     initializeSystemImage();
-    qWarning() << "trace b";
+    // qWarning() << "trace b";
     initializeClickUpdateChecker();
-    qWarning() << "trace c";
+    // qWarning() << "trace c";
     initializeSSOService();
-    qWarning() << "trace c9";
+    // qWarning() << "trace c9";
+    // initializeUdm();
 }
 
 UpdateManager::~UpdateManager()
 {
-    qWarning() << "trace deletion1";
-    if (m_udm)
-        m_udm->deleteLater();
 }
 
 void UpdateManager::initializeSystemImage()
@@ -119,46 +115,49 @@ void UpdateManager::initializeClickUpdateChecker()
 
 void UpdateManager::initializeSSOService()
 {
-    qWarning() << "trace c0";
+    // qWarning() << "trace c0";
     connect(&m_ssoService, SIGNAL(credentialsFound(const Token&)),
             this, SLOT(handleCredentialsFound(const Token&))
     );
-    qWarning() << "trace c1";
+    // qWarning() << "trace c1";
     connect(&m_ssoService, SIGNAL(credentialsNotFound()),
             this, SLOT(handleCredentialsFailed())
     );
-    qWarning() << "trace c2";
+    // qWarning() << "trace c2";
     connect(&m_ssoService, SIGNAL(credentialsDeleted()),
             this, SLOT(handleCredentialsFailed())
     );
-    qWarning() << "trace c3";
+    // qWarning() << "trace c3";
 }
 
 
 void UpdateManager::initializeUdm()
 {
-    qWarning() << "trace d";
-    // We're return m_udm to QML, so we need to explicitly retain ownership.
-    QQmlEngine::setObjectOwnership(m_udm, QQmlEngine::CppOwnership);
-    qWarning() << "trace e";
-    m_udm->setParent(this);
-    qWarning() << "trace f";
+    // qWarning() << "uman init udm";
+    // if (m_udm == nullptr) {
+    //     m_udm = Ubuntu::DownloadManager::Manager::createSessionManager("", this);
+    // }
 
-    connect(m_udm, SIGNAL(downloadsChanged()),
-            this, SLOT(updateClickUpdatesCount()));
-    qWarning() << "trace g";
+    // connect(m_udm, &Ubuntu::DownloadManager::Manager::downloadsFound,
+    //         this, &UpdateManager::onDownloadsFound);
 
-    updateClickUpdatesCount();
-    qWarning() << "trace h";
+    // auto environment = QProcessEnvironment::systemEnvironment();
+    // if (environment.contains("APP_ID")) {
+    //     m_appId = environment.value("APP_ID");
+    // } else {
+    //     m_appId = QCoreApplication::applicationFilePath();
+    // }
+
+    // m_udm->getAllDownloads("", true);
+
+    // connect(m_udm, SIGNAL(downloadsChanged()),
+    //         this, SLOT(updateClickUpdatesCount()));
+    // qWarning() << "trace g";
+
+    // updateClickUpdatesCount();
+    // qWarning() << "trace h";
 }
 
-void UpdateManager::updateClickUpdatesCount()
-{
-    qWarning() << "trace 12";
-    // m_clickUpdatesCount = m_udm->property("downloads").toList().count();
-    qWarning() << "updating click updates count..." << m_clickUpdatesCount;
-    calculateUpdatesCount();
-}
 
 bool UpdateManager::online() const
 {
@@ -206,25 +205,19 @@ void UpdateManager::setHaveSufficientPower(const bool haveSufficientPower)
     }
 }
 
-QObject *UpdateManager::udm() const
+void UpdateManager::setClickPackageDownloadsCount(const int &clickPackageDownloadsCount)
 {
-    return m_udm;
+    qWarning() << "manager: setClickPackageDownloadsCount" << clickPackageDownloadsCount;
+    if (clickPackageDownloadsCount != m_clickPackageDownloadsCount) {
+        m_clickPackageDownloadsCount = clickPackageDownloadsCount;
+        Q_EMIT clickPackageDownloadsCountChanged();
+    }
+    calculateUpdatesCount();
 }
 
-void UpdateManager::setUdm(QObject *udm) {
-    qWarning() << "trace setudm1" << udm;
-    if (m_udm != udm) {
-        m_udm = udm;
-        Q_EMIT udmChanged();
-        qWarning() << "trace setudm2";
-    }
-
-    qWarning() << "trace setudm3";
-    if (m_udm) {
-        qWarning() << "trace setudm4";
-        initializeUdm();
-        qWarning() << "trace setudm5";
-    }
+int UpdateManager::clickPackageDownloadsCount() const
+{
+    return m_clickPackageDownloadsCount;
 }
 
 int UpdateManager::updatesCount() const
@@ -233,13 +226,13 @@ int UpdateManager::updatesCount() const
 }
 
 void UpdateManager::calculateUpdatesCount() {
-    qWarning() << "trace 4";
-    int newCount = m_clickUpdatesCount + m_systemUpdatesCount;
+    // qWarning() << "trace 4";
+    int newCount = m_clickPackageDownloadsCount + m_systemUpdatesCount;
     if (newCount != m_updatesCount) {
         m_updatesCount = newCount;
-        qWarning() << "trace 1";
+        // qWarning() << "trace 1";
         Q_EMIT updatesCountChanged();
-        qWarning() << "trace 3";
+        // qWarning() << "trace 3";
     }
 }
 
@@ -301,43 +294,99 @@ void UpdateManager::setManagerStatus(const UpdateManager::ManagerStatus &status)
     qWarning() << "manager: status now" << s;
 }
 
-bool UpdateManager::clickUpdateInUdm(const QSharedPointer<ClickUpdateMetadata> &meta) const
-{
-    bool found = false;
-    qWarning() << "manager: clickUpdateInUdm check on" << meta->name();
-    foreach(const QVariant &v, m_udm->property("downloads").toList()) {
-        QObject *download = v.value<QObject*>();
-        qWarning() << download->property("metadata");
-        // QObject *downloadMeta = download->property("metadata").value<QObject*>();
-        // foreach(const QString &key, download->property(""))
-        // qWarning() << v.value<QObject*>()->property("downloadId");
-    }
-    return found;
-}
+// bool UpdateManager::clickUpdateInUdm(const QSharedPointer<ClickUpdateMetadata> &meta) const
+// {
+//     foreach(const QSharedPointer<Ubuntu::DownloadManager::Download> download, m_clickDownloadsList) {
+//         // qWarning() << download.data()->title();
+//         qWarning() << "had download" << download;
+//         if (getPackageName(download) == meta->name()) {
+//             qWarning() << "found it!" << meta->name();
+//             return true;
+//         }
+//         // SingleDownload* singleDownload = new SingleDownload(this);
+//         // singleDownload->bindDownload(download.data());
+//         // if (download.data()->state() == Download::UNCOLLECTED && !download.data()->filePath().isEmpty()) {
+//         //     emit singleDownload->finished(download.data()->filePath());
+//         // }
+//     }
+//     // bool found = false;
+//     // if (meta.isNull()) {
+//     //     qWarning() << "we lost meta";
+//     //     return false;
+//     // }
+//     // qWarning() << "manager: clickUpdateInUdm check on" << meta->name() << "...";
+//     // if (!m_udm) {
+//     //     qWarning() << "we no longer have UDM";
+//     //     return false;
+//     // }
+//     // QQmlProperty downloads(m_udm, "downloads");
+//     // if (!downloads.isValid()) {
+//     //     qWarning() << "downloads is not valid!";
+//     //     return false;
+//     // }
+
+//     // foreach(const QVariant &v, downloads.read().toList()) {
+//     //     if (v == NULL) {
+//     //         qWarning() << "-------------- v was deleted";
+//     //         continue;
+//     //     }
+//     //     if (v.isNull()) {
+//     //         qWarning() << "got null qvariant";
+//     //         continue;
+//     //     }
+//     //     if (!v.isValid()) {
+//     //         qWarning() << "got invalid qvariant";
+//     //         continue;
+//     //     }
+
+//     //     if (!v.canConvert<QObject*>()) {
+//     //         qWarning() << "could not convert, is" << v.typeName();
+//     //         continue;
+//     //     }
+//     //     QObject *download = v.value<QObject*>();
+//     //     qWarning() << "manager: clickUpdateInUdm in foreach";
+//     //     QObject *downloadMeta = download->property("metadata").value<QObject*>();
+//     //     qWarning() << "manager: clickUpdateInUdm has meta" << downloadMeta;
+//     //     QVariantMap custom = downloadMeta->property("custom").toMap();
+//     //     if (!custom.contains("package-name")) {
+//     //         qWarning() << "no package-name";
+//     //         continue;
+//     //     }
+
+//     //     if (custom.value("package-name") == meta->name()) {
+//     //         qWarning() << "found it!" << meta->name();
+//     //         return true;
+//     //     }
+//     // }
+//     // return found;
+// }
 
 void UpdateManager::onClickUpdateAvailable(const QSharedPointer<ClickUpdateMetadata> &meta)
 {
     qWarning() << "manager: found downloadable click update metadata" << meta->name();
-
-    if (!clickUpdateInUdm(meta)) {
-        qWarning() << "manager: click metadata was not in udm, downloading..";
-        createClickUpdateDownload(meta);
-    }
+    createClickUpdateDownload(meta);
 }
 
 void UpdateManager::createClickUpdateDownload(const QSharedPointer<ClickUpdateMetadata> &meta)
 {
-    StringMap headers;
+    QVariantMap headers;
     headers[X_CLICK_TOKEN] = meta->clickToken();
 
     QStringList command;
     command << Helpers::whichPkcon() << "-p" << "install-local" << "$file";
 
+    QVariantMap custom;
+    custom["package-name"] = meta->name();
+    custom["changelog"] = meta->changelog();
+    custom["iconUrl"] = meta->iconUrl();
+    custom["remoteVersion"] = meta->remoteVersion();
+    custom["binaryFilesize"] = meta->binaryFilesize();
+
     QVariantMap metadata;
+    metadata["custom"] = custom;
     metadata["command"] = command;
-    metadata["package-name"] = meta->name();
     metadata["title"] = meta->title();
-    metadata["indicator-shown"] = false;
+    metadata["showInIndicator"] = false;
     qWarning() << "manager: create click download" << meta->downloadUrl() << meta->downloadSha512() << metadata << headers;
     Q_EMIT clickUpdateReady(meta->downloadUrl(), meta->downloadSha512(),
                             "sha512", metadata, headers);

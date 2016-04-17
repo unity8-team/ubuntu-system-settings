@@ -334,6 +334,7 @@ void ClickUpdateMetadata::requestSucceeded(QNetworkReply *reply)
         QString header(reply->rawHeader(X_CLICK_TOKEN));
         // This should inform the world that this click update
         // metadata is enough to start a download & install.
+        qWarning() << "setting click token to" << header;
         setClickToken(header);
     } else {
         Q_EMIT clickTokenRequestFailed();
