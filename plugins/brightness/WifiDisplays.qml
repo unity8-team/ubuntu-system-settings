@@ -25,6 +25,25 @@ ItemPage {
     objectName: "wifiDisplays"
     title: i18n.tr("Display Casting")
 
+    Component.onCompleted: {
+        if (!displays.scanning)
+            displays.scan();
+    }
+
+    Timer {
+        id: scanTimer
+        interval: 60000
+        repeat: true
+        running: !displays.scanning
+        onTriggered: {
+            console.warn("Timer triggered");
+            if (!displays.scanning) {
+                console.warn("Initiating a scan");
+                displays.scan();
+            }
+        }
+    }
+
     Flickable {
         id: pageFlickable
         anchors.fill: parent
@@ -61,19 +80,6 @@ ItemPage {
                         running: displays.scanning
                         visible: running
                     }
-                    Icon {
-                        anchors.centerIn: parent
-                        height: units.gu(4)
-                        width: height
-                        visible: !ind.running
-                        name: "reload"
-                        MouseArea {
-                            anchors.fill: parent
-                            onClicked: {
-                                displays.scan();
-                            }
-                        }
-                    }
                 }
             }
 
@@ -86,6 +92,8 @@ ItemPage {
                         left: parent.left
                         right: parent.right
                     }
+                    iconName: "video-display"
+                    iconFrame: false
                     text: displayName
                     subText: stateName
                     Button {
