@@ -22,8 +22,10 @@
  */
 
 import QtQuick 2.4
+import QtQuick.Layouts 1.2
 import Ubuntu.Components 1.3
 import Ubuntu.Components.ListItems 1.3 as ListItems
+import Ubuntu.Components.Themes 1.3
 import Ubuntu.SystemSettings.Update 1.0
 
 Item {
@@ -48,93 +50,116 @@ Item {
 
     }
 
-    height: childrenRect.height
+    height: topSlot.height + middleSlot.height + progressBarSlot.height + bottomSlot.height + divider.height
 
     Item {
-        id: iconPlaceholder
-        height: update.height
-        width: units.gu(9)
+        id: iconSlot
 
         anchors {
             top: update.top
             left: update.left
             bottom: update.bottom
         }
+        width: units.gu(9)
 
         Icon {
             id: icon
             anchors {
+                left: iconSlot.left
+                right: iconSlot.right
+                top: iconSlot.top
                 margins: units.gu(2)
-                top: iconPlaceholder.top
-                left: iconPlaceholder.left
             }
-            width: iconPlaceholder.width - (units.gu(2) * 2)
         }
     }
 
-    Label {
-        id: name
-        anchors {
-            left: iconPlaceholder.right
-            top: update.top
-            topMargin: units.gu(2)
-        }
-        elide: Text.ElideMiddle
-    }
+    Item {
+        id: topSlot
 
-    Button {
-        id: button
         anchors {
+            left: iconSlot.right
             top: update.top
             topMargin: units.gu(2)
             right: update.right
             rightMargin: units.gu(2)
         }
-        // Enabled as long as it's not NonPausable.
-        // enabled: update.mode !== updateManager.nonPausable
 
-        text: {
-            console.warn("update.mode", update.mode)
-            switch(update.mode) {
-            case UpdateManager.Retriable:
-                return i18n.tr("Retry")
-            case UpdateManager.Downloadable:
-                return i18n.tr("Download")
-            case UpdateManager.Pausable:
-            case UpdateManager.NonPausable:
-                return i18n.tr("Pause")
-            case UpdateManager.Installable:
-                return i18n.tr("Install")
-            case UpdateManager.InstallableWithRestart:
-                return i18n.tr("Install…")
-            default:
-                return "FUUUUU"
-            }
+        Label {
+            id: name
+            verticalAlignment: Text.AlignVCenter
+            height: button.height
+            font.pointSize: 10
+            elide: Text.ElideMiddle
         }
 
-        onClicked: {
-            switch (update.mode) {
-            case UpdateManager.Retriable:
-                update.retry();
-                break;
-            case UpdateManager.Downloadable:
-                update.download();
-                break;
-            case UpdateManager.Pausable:
-                update.pause();
-                break;
-            case UpdateManager.Installable:
-            case UpdateManager.InstallableWithRestart:
-                update.install();
-                break;
-            case UpdateManager.NonPausable:
-                break;
+        Button {
+            id: button
+            anchors {
+                top: update.top
+                topMargin: units.gu(2)
+                right: update.right
+                rightMargin: units.gu(2)
+            }
+            height: units.gu(4)
+
+            // Enabled as long as it's not NonPausable.
+            enabled: update.mode !== UpdateManager.NonPausable
+
+            text: {
+                switch(update.mode) {
+                case UpdateManager.Retriable:
+                    return i18n.tr("Retry")
+                case UpdateManager.Downloadable:
+                    return i18n.tr("Download")
+                case UpdateManager.Pausable:
+                case UpdateManager.NonPausable:
+                    return i18n.tr("Pause")
+                case UpdateManager.Installable:
+                    return i18n.tr("Install")
+                case UpdateManager.InstallableWithRestart:
+                    return i18n.tr("Install…")
+                default:
+                    console.warn("Unknown update mode", update.mode);
+                }
+            }
+
+            onClicked: {
+                switch (update.mode) {
+                case UpdateManager.Retriable:
+                    update.retry();
+                    break;
+                case UpdateManager.Downloadable:
+                    update.download();
+                    break;
+                case UpdateManager.Pausable:
+                    update.pause();
+                    break;
+                case UpdateManager.Installable:
+                case UpdateManager.InstallableWithRestart:
+                    update.install();
+                    break;
+                case UpdateManager.NonPausable:
+                    break;
+                }
             }
         }
     }
 
+    Item {
+        id: middleSlot
+    }
+
+    Item {
+        id: progressBarSlot
+    }
+
+    Item {
+        id: bottomSlot
+    }
+
     Label {
         id: sizeAndStatusLabel
+        fontSize: "small"
         anchors {
             top: button.bottom
             topMargin: units.gu(0.5)
@@ -146,42 +171,89 @@ Item {
         }
     }
 
-    Label {
-        id: versionLabel
+    RowLayout {
+        id: expandableVersionLabel
+        property bool expanded: false
         anchors {
-            top: name.bottom
-            topMargin: units.gu(1)
+            top: progressBar.visible ? progressBar.bottom : name.bottom
+            topMargin: units.gu(0.5)
             left: iconPlaceholder.right
-
         }
-        text: i18n.tr("Version %1").arg(update.version)
+
+        Label {
+            id: versionLabel
+            text: i18n.tr("Version %1").arg(update.version)
+        }
+
+        Icon {
+            id: expandableVersionIcon
+            name: "info"
+            color: parent.expanded ? theme.palette.selected.baseText : theme.palette.normal.baseText
+            width: units.gu(1.7)
+        }
+
+        MouseArea {
+            anchors.fill: parent
+            onClicked: parent.expanded = !parent.expanded
+        }
     }
 
     ProgressBar {
         id: progressBar
+        anchors {
+            top: name.bottom
+            topMargin: units.gu(1.1)
+            left: iconPlaceholder.right
+        }
         indeterminate: progress < 0 || progress > 100
         minimumValue: 0
         maximumValue: 100
         showProgressPercentage: false
         height: units.gu(0.5)
-        visible: false
+        width: units.gu(23)
+        visible: {
+            switch (update.mode) {
+            case UpdateManager.AutomaticallyDownloading:
+            case UpdateManager.ManuallyDownloading:
+            case UpdateManager.DownloadPaused:
+            case UpdateManager.InstallationPaused:
+            case UpdateManager.Installing:
+                return true;
+            default:
+                return false;
+            }
+        }
     }
 
     Label {
-
+        id: changelogLabel
+        visible: expandableVersionLabel.expanded
+        anchors {
+            top: expandableVersionLabel.bottom
+            topMargin: units.gu(1)
+            left: iconPlaceholder.right
+            right: update.right
+            rightMargin: units.gu(2)
+        }
+        wrapMode: Text.WordWrap
+        Component.onCompleted: {
+            origHeight = height;
+            height = Qt.binding(function () {
+                return visible ? origHeight : 0;
+            });
+        }
     }
 
-    ListItems.Expandable {
-        id: changelogLabel
+    ListItems.ThinDivider {
+        id: divider
         anchors {
+            top: expandableVersionLabel.expanded ? changelogLabel.bottom : expandableVersionLabel.bottom
+            topMargin: units.gu(1)
             left: iconPlaceholder.right
+            right: update.right
+            rightMargin: units.gu(2)
             bottom: update.bottom
             bottomMargin: units.gu(2)
-        }
-        collapsedHeight: 1
-        expandedHeight: units.gu(30)
-        onClicked: {
-            expanded = true;
         }
     }
 }

@@ -26,7 +26,7 @@ import Ubuntu.SystemSettings.Update 1.0
 
 import "."
 
-Item {
+Column {
     width: units.gu(50)
     height: units.gu(90)
 
@@ -38,8 +38,19 @@ Item {
         size: "300.3 MB"
         version: "0.5"
         progress: 50
-        mode: UM.Downloadable
-        status: UM.NotStarted
+        mode: UpdateManager.Pausable
+        status: UpdateManager.AutomaticallyDownloading
+    }
+    Update {
+        anchors { left: parent.left; right: parent.right }
+        name: "Ubuntu"
+        iconUrl: "file:///usr/share/icons/suru/places/scalable/distributor-logo.svg"
+        changelog: "* Add audio & video policy groups by default.\n* Enable back & forward buttons.\n* Switch to wikidata"
+        size: "300.3 MB"
+        version: "0.5"
+        progress: 50
+        mode: UpdateManager.NonPausable
+        status: UpdateManager.Installing
     }
 }
 

@@ -35,11 +35,6 @@ ItemPage {
     id: root
     objectName: "systemUpdatesPage"
 
-    // Component.onCompleted: {
-    //     if (!UpdateManager.udm)
-    //         UpdateManager.udm = udm.createObject(UpdateManager);
-    // }
-
     // property bool isCharging: indicatorPower.deviceState === "charging"
     // property bool batterySafeForUpdate: isCharging || chargeLevel > 25
     // property var chargeLevel: indicatorPower.batteryLevel || 0
@@ -78,15 +73,15 @@ ItemPage {
         onClickUpdateReady: {
             var packageName = metadata["custom"]["package-name"];
             if (!Udm.hasClickPackageDownload(packageName)) {
+                var metadataObj = mdt.createObject(UpdateManager, metadata);
                 var singleDownloadObj = sdl.createObject(UpdateManager, {
+                    "url": url,
                     "autoStart": false,
                     "hash": hash,
                     "algorithm": algorithm,
-                    "headers": headers
+                    "headers": headers,
+                    "metadata": metadataObj
                 });
-
-                var metadataObj = mdt.createObject(UpdateManager, metadata);
-                singleDownloadObj.metadata = metadataObj;
                 singleDownloadObj.download(url);
                 singleDownloadObj.errorFound.connect(function () {
                     console.warn(this.errorMessage);
@@ -169,6 +164,6 @@ ItemPage {
              }
          }
     }
-    Component { id: sdl; SingleDownload {} }
+    Component { id: sdl; SingleDownload { property string url; } }
     Component { id: mdt; Metadata {} }
 }
