@@ -46,6 +46,16 @@ ItemPage {
 
     AethercastDisplays {
         id: aethercastDisplays
+        onDevicesChanged: {
+            console.warn("onDevicesChanged: " + devices);
+        }
+        onScanningChanged: {
+            console.warn("onScanningChanged: " + scanning);
+        }
+
+        onStateChanged: {
+            console.warn("aethercastDisplays onStateNameChanged: " + state);
+        }
     }
 
     Flickable {
