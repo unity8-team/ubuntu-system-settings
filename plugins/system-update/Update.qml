@@ -31,26 +31,35 @@ import Ubuntu.SystemSettings.Update 1.0
 Item {
     id: update
 
-    property int status // This is an UM::UpdateStatus
-    property int mode // This is an UM::UpdateMode
-    property string size
+    property int status // This is an UpdateManager::UpdateStatus
+    property int mode // This is an UpdateManager::UpdateMode
+    property int size
     property string version
+    property string errorTitle
+    property string errorDetail
 
     property alias name: name.text
     property alias iconUrl: icon.source
     property alias changelog: changelogLabel.text
     property alias progress: progressBar.value
 
+    property var formatter: function (number) { return number }
+
     signal retry()
     signal download()
     signal pause()
     signal install()
 
-    function setError(errorString) {
-
+    function setError (title, detail) {
+        errorTitle = title;
+        errorDetail = detail;
     }
 
-    height: topSlot.height + middleSlot.height + progressBarSlot.height + bottomSlot.height + divider.height
+    height: (topSlot.height + topSlot.anchors.topMargin
+             + middleSlot.height + middleSlot.anchors.topMargin
+             + progressBarSlot.height + progressBarSlot.anchors.topMargin
+             + bottomSlot.height + bottomSlot.anchors.topMargin
+             + divider.height + divider.anchors.topMargin)
 
     Item {
         id: iconSlot
@@ -73,8 +82,10 @@ Item {
         }
     }
 
-    Item {
+    RowLayout {
         id: topSlot
+        height: units.gu(4)
+        spacing: units.gu(1)
 
         anchors {
             left: iconSlot.right
@@ -90,17 +101,15 @@ Item {
             height: button.height
             font.pointSize: 10
             elide: Text.ElideMiddle
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+            Layout.alignment: Qt.AlignVCenter | Qt.AlignLeft
         }
 
         Button {
             id: button
-            anchors {
-                top: update.top
-                topMargin: units.gu(2)
-                right: update.right
-                rightMargin: units.gu(2)
-            }
-            height: units.gu(4)
+            Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
+            Layout.fillHeight: true
 
             // Enabled as long as it's not NonPausable.
             enabled: update.mode !== UpdateManager.NonPausable
@@ -145,115 +154,236 @@ Item {
         }
     }
 
-    Item {
-        id: middleSlot
-    }
-
-    Item {
-        id: progressBarSlot
-    }
-
-    Item {
-        id: bottomSlot
-    }
-
-    Label {
-        id: sizeAndStatusLabel
-        fontSize: "small"
+    Column {
+        id: errorSlot
+        spacing: units.gu(1)
         anchors {
-            top: button.bottom
-            topMargin: units.gu(0.5)
+            top: topSlot.bottom
+            left: iconSlot.right
             right: update.right
-            rightMargin: units.gu(2.2)
+            rightMargin: units.gu(2)
+
         }
-        text: {
-            return size
+        visible: update.status === UpdateManager.Failed
+        Label {
+            text: update.errorTitle
+            color: UbuntuColors.red
+        }
+
+        Label {
+            anchors { left: parent.left; right: parent.right }
+            text: update.errorDetail
+            fontSize: "small"
+            wrapMode: Text.WordWrap
         }
     }
 
     RowLayout {
-        id: expandableVersionLabel
-        property bool expanded: false
+        id: progressBarSlot
         anchors {
-            top: progressBar.visible ? progressBar.bottom : name.bottom
-            topMargin: units.gu(0.5)
-            left: iconPlaceholder.right
+            top: topSlot.bottom
+            topMargin: units.gu(1)
+            left: iconSlot.right
+            right: update.right
+            rightMargin: units.gu(2)
         }
-
-        Label {
-            id: versionLabel
-            text: i18n.tr("Version %1").arg(update.version)
-        }
-
-        Icon {
-            id: expandableVersionIcon
-            name: "info"
-            color: parent.expanded ? theme.palette.selected.baseText : theme.palette.normal.baseText
-            width: units.gu(1.7)
-        }
-
-        MouseArea {
-            anchors.fill: parent
-            onClicked: parent.expanded = !parent.expanded
-        }
-    }
-
-    ProgressBar {
-        id: progressBar
-        anchors {
-            top: name.bottom
-            topMargin: units.gu(1.1)
-            left: iconPlaceholder.right
-        }
-        indeterminate: progress < 0 || progress > 100
-        minimumValue: 0
-        maximumValue: 100
-        showProgressPercentage: false
-        height: units.gu(0.5)
-        width: units.gu(23)
         visible: {
-            switch (update.mode) {
+            switch (update.status) {
             case UpdateManager.AutomaticallyDownloading:
             case UpdateManager.ManuallyDownloading:
             case UpdateManager.DownloadPaused:
             case UpdateManager.InstallationPaused:
             case UpdateManager.Installing:
                 return true;
+            case UpdateManager.Failed:
             default:
                 return false;
             }
         }
+        height: units.gu(2)
+
+        ProgressBar {
+            id: progressBar
+            anchors { left: parent.left }
+            indeterminate: progress < 0 || progress > 100
+            minimumValue: 0
+            maximumValue: 100
+            showProgressPercentage: false
+            Layout.maximumWidth: units.gu(23)
+            Layout.maximumHeight: units.gu(0.5)
+        }
+
+        Rectangle {
+            id: progressBarInfo
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+            Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
+        }
     }
 
-    Label {
-        id: changelogLabel
-        visible: expandableVersionLabel.expanded
+    RowLayout {
+        id: middleSlot
+        height: units.gu(3)
+
         anchors {
-            top: expandableVersionLabel.bottom
-            topMargin: units.gu(1)
-            left: iconPlaceholder.right
+            top: topSlot.bottom
+            topMargin: progressBarSlot.visible ? units.gu(1) : 0
+            left: iconSlot.right
             right: update.right
             rightMargin: units.gu(2)
         }
-        wrapMode: Text.WordWrap
-        Component.onCompleted: {
-            origHeight = height;
-            height = Qt.binding(function () {
-                return visible ? origHeight : 0;
-            });
+
+        states: [
+            State {
+                when: progressBarSlot.visible
+                AnchorChanges { target: middleSlot; anchors.top: progressBarSlot.bottom }
+            },
+            State {
+                when: update.status === UpdateManager.Failed
+                AnchorChanges { target: middleSlot; anchors.top: errorSlot.bottom }
+            }
+        ]
+
+        transitions: Transition {
+            AnchorAnimation {
+                duration: UbuntuAnimation.FastDuration
+                easing: UbuntuAnimation.StandardEasing
+            }
+        }
+
+        RowLayout {
+            id: expandableVersionLabel
+            property bool expanded: false
+            spacing: units.gu(0.5)
+            Label {
+                id: versionLabel
+                verticalAlignment: Text.AlignVCenter
+                text: i18n.tr("Version %1").arg(update.version)
+                fontSize: "small"
+            }
+
+            Icon {
+                id: expandableVersionIcon
+                name: "info"
+                visible: update.changelog
+                color: parent.expanded ? theme.palette.selected.baseText : theme.palette.normal.baseText
+
+                height: versionLabel.height
+            }
+
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    if (!update.changelog) return;
+                    parent.expanded = !parent.expanded
+                }
+            }
+        }
+
+        Label {
+            id: sizeAndStatusLabel
+            states: State {
+                when: progressBarSlot.visible
+                ParentChange { target: sizeAndStatusLabel;
+                               parent: progressBarInfo }
+                PropertyChanges { target: sizeAndStatusLabel;
+                                  width: progressBarInfo.width;
+                                  horizontalAlignment: Text.AlignRight }
+            }
+            verticalAlignment: Text.AlignVCenter
+            Layout.fillHeight: true
+            Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
+            fontSize: "small"
+            text: {
+                switch (update.status) {
+                case UpdateManager.NotStarted:
+                    return formatter(size);
+                case UpdateManager.AutomaticallyDownloading:
+                case UpdateManager.ManuallyDownloading:
+                case UpdateManager.DownloadPaused:
+                    var down = formatter(size * (progressBar.value / 100));
+                    var left = formatter(size);
+                    return i18n.tr("%1 of %2").arg(down).arg(left);
+                case UpdateManager.NotAvailable:
+                case UpdateManager.Failed:
+                case UpdateManager.Installing:
+                case UpdateManager.Installed:
+                case UpdateManager.InstallationPaused:
+                default:
+                    return "";
+                }
+            }
+        }
+    }
+
+    Item {
+        id: bottomSlot
+        anchors {
+            top: middleSlot.bottom
+            left: iconSlot.right
+            right: update.right
+            rightMargin: units.gu(2)
+        }
+        height: childrenRect.height
+
+        Column {
+            id: changelogCol
+            // Whether or not to animate height. We will enable this
+            // when changelogLabel has completed.
+            property bool animate: false
+            height: childrenRect.height
+            Behavior on height {
+                animation: UbuntuNumberAnimation {}
+                enabled: changelogCol.animate
+            }
+            anchors { left: parent.left; right: parent.right }
+
+            add: Transition {
+                SequentialAnimation {
+                    // Wait out height animation
+                    NumberAnimation {
+                        property: "opacity"
+                        from: 0; to: 0;
+                        duration: UbuntuAnimation.FastDuration
+                    }
+                    NumberAnimation {
+                        property: "opacity"
+                        from: 0; to: 1.0;
+                        duration: UbuntuAnimation.BriskDuration
+                    }
+                }
+            }
+
+            Label {
+                id: changelogLabel
+                anchors { left: parent.left; right: parent.right }
+                clip: true
+                fontSize: "small"
+                wrapMode: Text.WordWrap
+                visible: expandableVersionLabel.expanded
+                property int origHeight;
+                Component.onCompleted: {
+                    origHeight = height;
+                    visible = Qt.binding(function (){
+                        return expandableVersionLabel.expanded;
+                    });
+                    height = Qt.binding(function () {
+                        return visible && text !== "" ? origHeight : 0;
+                    });
+                    changelogCol.animate = true;
+                }
+            }
         }
     }
 
     ListItems.ThinDivider {
         id: divider
         anchors {
-            top: expandableVersionLabel.expanded ? changelogLabel.bottom : expandableVersionLabel.bottom
+            top: bottomSlot.bottom
             topMargin: units.gu(1)
-            left: iconPlaceholder.right
+            left: iconSlot.right
             right: update.right
             rightMargin: units.gu(2)
-            bottom: update.bottom
-            bottomMargin: units.gu(2)
         }
     }
 }

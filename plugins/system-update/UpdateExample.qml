@@ -35,22 +35,57 @@ Column {
         name: "Ubuntu"
         iconUrl: "file:///usr/share/icons/suru/places/scalable/distributor-logo.svg"
         changelog: "* Add audio & video policy groups by default.\n* Enable back & forward buttons.\n* Switch to wikidata"
-        size: "300.3 MB"
+        size: 3303
         version: "0.5"
         progress: 50
+        mode: UpdateManager.Downloadable
+        status: UpdateManager.NotStarted
+    }
+    Update {
+        anchors { left: parent.left; right: parent.right }
+        name: "Spotify"
+        iconUrl: "https://lh3.googleusercontent.com/UrY7BAZ-XfXGpfkeWg0zCCeo-7ras4DCoRalC_WXXWTK9q5b0Iw7B0YQMsVxZaNB7DM=w300"
+        changelog: ""
+        size: 875421
+        version: "0.5"
+        progress: 50
+        mode: UpdateManager.Installable
+        status: UpdateManager.NotStarted
+        onInstall: status = UpdateManager.Installing
+    }
+    Update {
+        anchors { left: parent.left; right: parent.right }
+        name: "Castle Defence System & Dragons & Dungeons"
+        iconUrl: "file:///usr/share/icons/suru/places/scalable/distributor-logo.svg"
+        changelog: "* Add audio & video policy groups by default.\n* Enable back & forward buttons.\n* Switch to wikidata * Add audio & video policy groups by default.\n* Enable back & forward buttons.\n* Switch to wikidata"
+        size: 3758
+        version: "0.5"
+        progress: 50
+        mode: UpdateManager.NonPausable
+        status: UpdateManager.Installing
+    }
+    Update {
+        anchors { left: parent.left; right: parent.right }
+        name: "FooDab"
+        iconUrl: "file:///usr/share/icons/suru/places/scalable/distributor-logo.svg"
+        changelog: "* Add audio & video policy groups by default.\n* Enable back & forward buttons.\n* Switch to wikidata"
+        size: 98987
+        version: "0.5"
+        progress: 37
         mode: UpdateManager.Pausable
         status: UpdateManager.AutomaticallyDownloading
     }
     Update {
         anchors { left: parent.left; right: parent.right }
-        name: "Ubuntu"
+        name: "Bad Seed"
         iconUrl: "file:///usr/share/icons/suru/places/scalable/distributor-logo.svg"
         changelog: "* Add audio & video policy groups by default.\n* Enable back & forward buttons.\n* Switch to wikidata"
-        size: "300.3 MB"
+        size: 50648
         version: "0.5"
-        progress: 50
-        mode: UpdateManager.NonPausable
-        status: UpdateManager.Installing
+        progress: 80
+        mode: UpdateManager.Retriable
+        status: UpdateManager.Failed
+        Component.onCompleted: setError("Download failed", "There was a damned issue. The update server is not responding. Please try again later.")
     }
 }
 

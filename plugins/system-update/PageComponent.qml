@@ -74,6 +74,7 @@ ItemPage {
             var packageName = metadata["custom"]["package-name"];
             if (!Udm.hasClickPackageDownload(packageName)) {
                 var metadataObj = mdt.createObject(UpdateManager, metadata);
+                metadata.title = "FOOBAR";
                 var singleDownloadObj = sdl.createObject(UpdateManager, {
                     "url": url,
                     "autoStart": false,
