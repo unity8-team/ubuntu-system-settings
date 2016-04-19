@@ -14,13 +14,16 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
 */
+#include <assert.h>
+
+#include <QByteArray>
+#include <QDateTime>
+#include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
-#include <QJsonArray>
 #include <QJsonValue>
-#include <QByteArray>
+#include <QStandardPaths>
 
-#include <assert.h>
 #include "clickupdatechecker.h"
 #include "helpers.h"
 
@@ -28,13 +31,41 @@
 namespace UpdatePlugin {
 
 ClickUpdateChecker::ClickUpdateChecker(QObject *parent):
-    ClickApiProto(parent)
+    ClickApiProto(parent),
+    m_cache(QStandardPaths::writableLocation(
+        QStandardPaths::CacheLocation)
+        + "/click-metadata-cache.json")
 {
+    readFromCache();
+
     initializeProcess();
 }
 
 ClickUpdateChecker::~ClickUpdateChecker()
 {
+}
+
+void ClickUpdateChecker::readFromCache()
+{
+    if (!m_cache.open(QIODevice::ReadWrite | QIODevice::Text)) {
+        qWarning() << "could not open cache file," << m_cache.errorString();
+    } else {
+        QString cachedJson = m_cache.readAll();
+        QJsonDocument d = QJsonDocument::fromJson(cachedJson.toUtf8());
+        QJsonObject o = d.object();
+
+        // How old is this cache?
+        int cachedAt = o.value(QStringLiteral("cached_at")).toInt(0);
+        uint now = QDateTime::currentDateTime().toTime_t();
+        // If the cache timestamp is older than 24 hours, don't use it.
+        if (cachedAt < (now - 86400)) {
+
+        }
+        qWarning() << cachedAt << now;
+
+    }
+    m_cache.close();
+
 }
 
 void ClickUpdateChecker::initializeMeta(const QSharedPointer<ClickUpdateMetadata> &meta)
@@ -55,7 +86,7 @@ void ClickUpdateChecker::initializeProcess()
 
 // This method is quite complex, and naturally not synchronous. Basically,
 // there are three async operations, with one for each
-// updated click (signing the download URL). Each of these can fail in various
+// updated click (fetching a click token). Each of these can fail in various
 // ways, so we report either serverError or networkError with an accompanying
 // errorString.
 //
@@ -63,6 +94,8 @@ void ClickUpdateChecker::initializeProcess()
 // The second is receiving the metadata for clicks we found installed.
 // The third is signing the download url for each click update. We ask the
 // ClickUpdateMetadata to do this for us.
+//
+// All of this can be bypassed if we find cached metadata newer than 24 hours.
 void ClickUpdateChecker::check()
 {
     qWarning() << "click checker: check...";
@@ -75,8 +108,11 @@ void ClickUpdateChecker::check()
         return;
     }
 
-    // Clear list of click update metadatas; we're starting anew.
-    m_metas.clear();
+    // If we already have metas, we assume they can
+    if (m_metas.count() > 0) {
+        Q_EMIT checkCompleted();
+        return;
+    }
 
     setErrorString("");
 
@@ -191,6 +227,9 @@ void ClickUpdateChecker::handleMetadataClickTokenObtained(const ClickUpdateMetad
         }
     }
 
+    // Cache this data.
+    cacheClickMetadata();
+
     // All metas had signed download urls, so we're done.
     Q_EMIT checkCompleted();
 }
@@ -198,6 +237,11 @@ void ClickUpdateChecker::handleMetadataClickTokenObtained(const ClickUpdateMetad
 void ClickUpdateChecker::handleClickTokenRequestFailed(const ClickUpdateMetadata *meta)
 {
     m_metas.remove(meta->name());
+}
+
+void ClickUpdateChecker::cacheClickMetadata()
+{
+
 }
 
 void ClickUpdateChecker::requestClickMetadata()

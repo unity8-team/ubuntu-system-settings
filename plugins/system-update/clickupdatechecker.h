@@ -17,6 +17,7 @@
 #ifndef CLICKUPDATECHECKER_H
 #define CLICKUPDATECHECKER_H
 
+#include <QFile>
 #include <QHash>
 #include <QProcess>
 #include <QSharedPointer>
@@ -55,12 +56,15 @@ signals:
 private:
     void initializeMeta(const QSharedPointer<ClickUpdateMetadata> &meta);
     void initializeProcess();
+    void readFromCache();
 
     // Starts process of adding remote metadata to each installed click
     void requestClickMetadata();
+    void cacheClickMetadata();
 
     QProcess m_process;
     QHash<QString, QSharedPointer<ClickUpdateMetadata> > m_metas;
+    QFile m_cache;
 };
 
 }

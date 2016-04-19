@@ -35,10 +35,6 @@ ItemPage {
     id: root
     objectName: "systemUpdatesPage"
 
-    // property bool isCharging: indicatorPower.deviceState === "charging"
-    // property bool batterySafeForUpdate: isCharging || chargeLevel > 25
-    // property var chargeLevel: indicatorPower.batteryLevel || 0
-
     QDBusActionGroup {
         id: indicatorPower
         busType: 1
