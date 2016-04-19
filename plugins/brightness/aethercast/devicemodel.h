@@ -22,7 +22,6 @@
 
 #include <QByteArray>
 #include <QHash>
-#include <QTimer>
 #include <QList>
 #include <QVariant>
 
@@ -65,14 +64,7 @@ public:
     QSharedPointer<Device> getDeviceFromAddress(const QString &address);
     QSharedPointer<Device> getDeviceFromPath(const QString &path);
 
-public:
-    bool isDiscovering() const { return m_isDiscovering; }
-    void stopDiscovery();
-    void startDiscovery();
-    void toggleDiscovery();
-
 Q_SIGNALS:
-    void discoveringChanged(bool isDiscovering);
     void devicePairingDone(Device *device, bool success);
 
 private:
@@ -82,9 +74,6 @@ private:
     void setProperties(const QMap<QString,QVariant> &properties);
     void updateProperty(const QString &key, const QVariant &value);
 
-    bool m_isDiscovering = false;
-    QTimer m_timer;
-
     QList<QSharedPointer<Device> > m_devices;
     void updateDevices();
     void addDevice(QSharedPointer<Device> &device);
@@ -93,8 +82,6 @@ private:
     int findRowFromAddress(const QString &address) const;
     void emitRowChanged(int row);
 
-    void setDiscovering(bool value);
-
 private Q_SLOTS:
     void slotInterfacesAdded(const QDBusObjectPath &objectPath, InterfaceList ifacesAndProps);
     void slotInterfacesRemoved(const QDBusObjectPath &objectPath, const QStringList &interfaces);
@@ -102,7 +89,6 @@ private Q_SLOTS:
                                       const QStringList &invalidatedProperties);
     void slotRemoveFinished(QDBusPendingCallWatcher *call);
     void slotPropertyChanged(const QString &key, const QDBusVariant &value);
-    void slotTimeout();
     void slotDeviceChanged();
     void slotDevicePairingDone(bool success);
 };

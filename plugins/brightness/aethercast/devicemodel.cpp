@@ -34,8 +34,7 @@ namespace
 DeviceModel::DeviceModel(QDBusConnection &dbus, QObject *parent):
     QAbstractListModel(parent),
     m_dbus(dbus),
-    m_aethercastManager(AETHERCAST_SERVICE, "/org/aethercast", m_dbus),
-    m_isDiscovering(false)
+    m_aethercastManager(AETHERCAST_SERVICE, "/org/aethercast", m_dbus)
 {
     qWarning() << Q_FUNC_INFO;
     if (m_aethercastManager.isValid()) {
@@ -67,8 +66,6 @@ DeviceModel::DeviceModel(QDBusConnection &dbus, QObject *parent):
             watcher->deleteLater();
         });
     }
-
-    connect(&m_timer, SIGNAL(timeout()), this, SLOT(slotTimeout()));
 }
 
 DeviceModel::~DeviceModel()
@@ -130,64 +127,6 @@ int DeviceModel::findRowFromAddress(const QString &address) const
     return -1;
 }
 
-void DeviceModel::setDiscovering(bool value)
-{
-    if (value == m_isDiscovering)
-        return;
-
-    m_isDiscovering = value;
-    Q_EMIT(discoveringChanged(m_isDiscovering));
-}
-
-void DeviceModel::stopDiscovery()
-{
-    /*
-    if (m_aethercastManager.isValid() && m_isDiscovering) {
-
-         watchCall(m_aethercastManager.StopDiscovery(), [=](QDBusPendingCallWatcher *watcher) {
-            QDBusPendingReply<void> reply = *watcher;
-            if (reply.isError()) {
-                qWarning() << "Failed to stop device discovery:"
-                           << reply.error().message();
-            }
-
-            watcher->deleteLater();
-        });
-    }
-    */
-}
-
-void DeviceModel::startDiscovery()
-{
-    /*
-    if (m_aethercastManager.isValid() && !m_isDiscovering) {
-
-        watchCall(m_aethercastManager->StartDiscovery(), [=](QDBusPendingCallWatcher *watcher) {
-            QDBusPendingReply<void> reply = *watcher;
-            if (reply.isError()) {
-                qWarning() << "Failed to start device discovery:"
-                           << reply.error().message();
-            }
-
-            watcher->deleteLater();
-        });
-    }
-    */
-}
-
-void DeviceModel::toggleDiscovery()
-{
-    if (isDiscovering())
-        stopDiscovery();
-    else
-        startDiscovery();
-}
-
-void DeviceModel::slotTimeout()
-{
-    toggleDiscovery ();
-}
-
 void DeviceModel::setProperties(const QMap<QString,QVariant> &properties)
 {
     QMapIterator<QString,QVariant> it(properties);
@@ -233,8 +172,6 @@ void DeviceModel::addDevice(const QString &path, const QVariantMap &properties)
     if (device) {
         QObject::connect(device.data(), SIGNAL(deviceChanged()),
                          this, SLOT(slotDeviceChanged()));
-        //QObject::connect(device.data(), SIGNAL(pairingDone(bool)),
-        //                 this, SLOT(slotDevicePairingDone(bool)));
         addDevice(device);
     }
 }
