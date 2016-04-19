@@ -64,9 +64,6 @@ public:
     QSharedPointer<Device> getDeviceFromAddress(const QString &address);
     QSharedPointer<Device> getDeviceFromPath(const QString &path);
 
-Q_SIGNALS:
-    void devicePairingDone(Device *device, bool success);
-
 private:
     QDBusConnection m_dbus;
     DBusObjectManagerInterface m_aethercastManager;
@@ -90,7 +87,6 @@ private Q_SLOTS:
     void slotRemoveFinished(QDBusPendingCallWatcher *call);
     void slotPropertyChanged(const QString &key, const QDBusVariant &value);
     void slotDeviceChanged();
-    void slotDevicePairingDone(bool success);
 };
 
 class DeviceFilter: public QSortFilterProxyModel

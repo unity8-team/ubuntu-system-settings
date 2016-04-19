@@ -155,13 +155,6 @@ void DeviceModel::slotPropertyChanged(const QString      &key,
     updateProperty (key, value.variant());
 }
 
-void DeviceModel::slotDevicePairingDone(bool success)
-{
-    Device *device = static_cast<Device*>(sender());
-
-    Q_EMIT(devicePairingDone(device, success));
-}
-
 void DeviceModel::addDevice(const QString &path, const QVariantMap &properties)
 {
     qWarning() << Q_FUNC_INFO;
