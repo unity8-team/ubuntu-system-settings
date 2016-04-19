@@ -143,7 +143,7 @@ ItemPage {
             ListItem.SingleValue {
                 objectName: "displayCasting"
                 visible: brightnessPanel.widiSupported
-                text: i18n.tr("Display Casting")
+                text: i18n.tr("Wireless Display")
                 value: aethercastDisplays.state === "connected" ? i18n.tr("Connected") : i18n.tr("Disconnected")
                 progression: true
                 onClicked: pageStack.push(Qt.resolvedUrl("WifiDisplays.qml"))

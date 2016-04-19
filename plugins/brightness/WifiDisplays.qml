@@ -23,7 +23,7 @@ import Ubuntu.SystemSettings.Brightness 1.0
 ItemPage {
     id: wifiDisplays
     objectName: "wifiDisplays"
-    title: i18n.tr("Display Casting")
+    title: i18n.tr("Wireless Display")
 
     Component.onCompleted: {
         if (!displays.scanning)
