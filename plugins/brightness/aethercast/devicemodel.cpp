@@ -307,3 +307,24 @@ bool DeviceFilter::lessThan(const QModelIndex &left,
   const QString b = sourceModel()->data(right, Qt::DisplayRole).value<QString>();
   return a < b;
 }
+
+void DeviceFilter::filterOnState(QString state)
+{
+    m_state = state;
+    m_stateEnabled = true;
+    invalidateFilter();
+}
+
+bool DeviceFilter::filterAcceptsRow(int sourceRow,
+                                    const QModelIndex &sourceParent) const
+{
+    bool accepts = true;
+    QModelIndex childIndex = sourceModel()->index(sourceRow, 0, sourceParent);
+
+    if (accepts && m_stateEnabled) {
+        const QString state = childIndex.model()->data(childIndex, DeviceModel::StateRole).value<QString>();
+        accepts = m_state == state;
+    }
+
+    return accepts;
+}

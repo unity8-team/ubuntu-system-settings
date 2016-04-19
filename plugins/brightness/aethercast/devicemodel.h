@@ -97,8 +97,15 @@ public:
     DeviceFilter() {}
     virtual ~DeviceFilter() {}
 
+    void filterOnState(QString);
+
 protected:
+    virtual bool filterAcceptsRow(int, const QModelIndex&) const;
     virtual bool lessThan(const QModelIndex&, const QModelIndex&) const;
+
+private:
+    QString m_state = "disconnected";
+    bool m_stateEnabled = false;
 
 };
 

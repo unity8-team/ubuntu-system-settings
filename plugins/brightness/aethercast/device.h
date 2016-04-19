@@ -50,8 +50,6 @@ struct Device: QObject
                READ getState
                NOTIFY stateChanged)
 
-public:
-
 
 Q_SIGNALS:
     void pathChanged();

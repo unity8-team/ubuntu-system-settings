@@ -58,6 +58,9 @@ Displays::Displays(const QDBusConnection &dbus, QObject *parent):
         setProperties(properties);
         watcher->deleteLater();
     });
+
+    m_connectedDevices.filterOnState("connected");
+    m_connectedDevices.setSourceModel(&m_devices);
 }
 
 void Displays::slotPropertiesChanged(const QString &interface, const QVariantMap &changedProperties,
@@ -94,6 +97,14 @@ QAbstractItemModel * Displays::devices()
 {
     qWarning() << Q_FUNC_INFO;
     auto ret = &m_devices;
+    QQmlEngine::setObjectOwnership(ret, QQmlEngine::CppOwnership);
+    return ret;
+}
+
+QAbstractItemModel * Displays::connectedDevices()
+{
+    qWarning() << Q_FUNC_INFO;
+    auto ret = &m_connectedDevices;
     QQmlEngine::setObjectOwnership(ret, QQmlEngine::CppOwnership);
     return ret;
 }

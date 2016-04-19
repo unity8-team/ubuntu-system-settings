@@ -43,8 +43,13 @@ class Displays : public QObject
                 READ state
                 NOTIFY stateChanged)
 
+    Q_PROPERTY (QAbstractItemModel* connectedDevices
+                READ connectedDevices
+                NOTIFY connectedDevicesChanged)
+
 Q_SIGNALS:
     void devicesChanged();
+    void connectedDevicesChanged();
     void scanningChanged(bool isActive);
     void stateChanged();
 
@@ -60,6 +65,7 @@ public:
 
 public:
     QAbstractItemModel * devices();
+    QAbstractItemModel * connectedDevices();
     bool scanning() const { return m_manager->scanning(); }
     QString state() const { return m_manager->state(); }
 
@@ -70,6 +76,7 @@ private Q_SLOTS:
 private:
     QDBusConnection m_dbus;
     DeviceModel m_devices;
+    DeviceFilter m_connectedDevices;
     AethercastManager* m_manager;
     QScopedPointer<FreeDesktopProperties> m_aethercastProperties;
     void updateProperties(QSharedPointer<QDBusInterface>);
