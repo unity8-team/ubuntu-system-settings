@@ -37,6 +37,8 @@ ItemPage {
         running: !displays.scanning
         onTriggered: {
             console.warn("Timer triggered");
+            console.warn("ConnectedDevices: " + connectedDevices.length);
+            console.warn("DisconnectedDevices: " + disconnectedDevices.length);
             if (!displays.scanning && displays.state !== "connected") {
                 console.warn("Initiating a scan");
                 displays.scan();
@@ -57,9 +59,7 @@ ItemPage {
 
         AethercastDisplays {
             id: displays
-            onDevicesChanged: {
-                console.warn("onDevicesChanged: " + devices);
-            }
+
             onScanningChanged: {
                 console.warn("onScanningChanged: " + scanning);
             }

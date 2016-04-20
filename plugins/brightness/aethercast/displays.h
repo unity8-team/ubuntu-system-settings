@@ -33,15 +33,15 @@ class Displays : public QObject
 
     Q_PROPERTY (QAbstractItemModel* devices
                 READ devices
-                NOTIFY devicesChanged)
+                CONSTANT)
 
     Q_PROPERTY (QAbstractItemModel* connectedDevices
                 READ connectedDevices
-                NOTIFY connectedDevicesChanged)
+                CONSTANT)
 
     Q_PROPERTY (QAbstractItemModel* disconnectedDevices
                 READ disconnectedDevices
-                NOTIFY disconnectedDevicesChanged)
+                CONSTANT)
 
     Q_PROPERTY (bool scanning
                 READ scanning
@@ -52,9 +52,6 @@ class Displays : public QObject
                 NOTIFY stateChanged)
 
 Q_SIGNALS:
-    void devicesChanged();
-    void connectedDevicesChanged();
-    void disconnectedDevicesChanged();
     void scanningChanged(bool isActive);
     void stateChanged();
 
