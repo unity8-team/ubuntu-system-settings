@@ -34,6 +34,13 @@ Column {
     property bool havePower: false
 
     /*!
+        \qmlproperty bool haveSystemUpdate
+
+        Indicates whether or not there exist a system update.
+    */
+    property bool haveSystemUpdate: false
+
+    /*!
         \qmlproperty UpdateManager::ManagerStatus managerStatus
 
         Reflects state of manager.
@@ -77,14 +84,9 @@ Column {
     */
     signal requestAuthentication()
 
-    Global {
-        id: globalArea
-    }
-
     ImageUpdate {
         id: imageUpdate
-        // FIXME: remove
-        visible: false
+        visible: updates.haveSystemUpdate
     }
 
     ClickUpdates {

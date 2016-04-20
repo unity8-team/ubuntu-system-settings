@@ -56,6 +56,7 @@ public:
         CheckingClickUpdates,
         CheckingSystemUpdates,
         CheckingAllUpdates,
+        Working,
         NetworkError,
         ServerError
     };
@@ -80,6 +81,9 @@ public:
     Q_PROPERTY(bool haveSufficientPower READ haveSufficientPower
                WRITE setHaveSufficientPower
                NOTIFY haveSufficientPowerChanged)
+    Q_PROPERTY(bool haveSystemUpdate READ haveSystemUpdate
+               NOTIFY haveSystemUpdateChanged)
+    Q_PROPERTY(QSystemImage* systemImageBackend READ systemImageBackend CONSTANT)
     Q_PROPERTY(int updatesCount READ updatesCount NOTIFY updatesCountChanged)
     Q_PROPERTY(int downloadMode READ downloadMode WRITE setDownloadMode
                NOTIFY downloadModeChanged)
@@ -90,6 +94,9 @@ public:
     void setOnline(const bool online);
 
     bool authenticated() const;
+
+    bool haveSystemUpdate() const;
+    QSystemImage* systemImageBackend() const;
 
     bool haveSufficientPower() const;
     void setHaveSufficientPower(const bool haveSufficientPower);
@@ -133,6 +140,7 @@ signals:
     void onlineChanged();
     void authenticatedChanged();
     void haveSufficientPowerChanged();
+    void haveSystemUpdateChanged();
     void downloadModeChanged();
     void updatesCountChanged();
     void managerStatusChanged();
@@ -166,7 +174,7 @@ private:
 
     ManagerStatus m_managerStatus;
     ClickUpdateChecker m_clickUpChecker;
-    QSystemImage m_systemImage;
+    QSystemImage *m_systemImage;
     UbuntuOne::Token m_token;
     UbuntuOne::SSOService m_ssoService;
 };

@@ -114,12 +114,39 @@ ItemPage {
             text: "downloads: " + Udm.downloads.length;
         }
 
+        Rectangle {
+            color: "white"
+            anchors.fill: parent
+            visible: placeholder.text
+
+            Label {
+                id: placeholder
+                anchors.fill: parent
+                verticalAlignment: Text.AlignVCenter
+                wrapMode: Text.WordWrap
+                text: {
+                    var s = UpdateManager.managerStatus;
+                    if (!g.online) {
+                        return i18n.tr("Connect to the Internet to check for updates.");
+                    } else if (s === UpdateManager.Idle && updatesCount === 0) {
+                        return i18n.tr("Software is up to date");
+                    } else if (s === UpdateManager.ServerError || s === UpdateManager.NetworkError) {
+                        return i18n.tr("The update server is not responding. Try again later.");
+                    }
+                    return "";
+                }
+            }
+        }
+
         Updates {
             anchors { left: parent.left; right: parent.right }
-
-            online: UpdateManager.online
-            clickUpdatesModel: Udm.clickPackageDownloads
             authenticated: UpdateManager.authenticated
+            clickUpdatesModel: Udm.clickPackageDownloads
+            havePower: UpdateManager.haveSufficientPower
+            haveSystemUpdate: UpdateManager.haveSystemUpdate
+            managerStatus: UpdateManager.managerStatus
+            online: UpdateManager.online
+            systemImageBackend: UpdateManager.systemImageBackend
         }
     }
 

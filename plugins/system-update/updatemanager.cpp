@@ -44,6 +44,7 @@ UpdateManager::UpdateManager(QObject *parent):
     m_clickUpdatesCount(0),
     m_systemUpdatesCount(0),
     m_managerStatus(ManagerStatus::Idle),
+    m_systemImage(nullptr),
     m_token(UbuntuOne::Token())
 {
     // qWarning() << "trace a";
@@ -60,16 +61,21 @@ UpdateManager::UpdateManager(QObject *parent):
 
 UpdateManager::~UpdateManager()
 {
+    if (m_systemImage != nullptr)
+        delete m_systemImage;
 }
 
 void UpdateManager::initializeSystemImage()
 {
-    connect(&m_systemImage,
+    if (m_systemImage == nullptr)
+        m_systemImage = new QSystemImage(this);
+
+    connect(m_systemImage,
             SIGNAL(downloadModeChanged()),
             this,
             SIGNAL(downloadModeChanged())
     );
-    connect(&m_systemImage,
+    connect(m_systemImage,
             SIGNAL(updateAvailableStatus(const bool,
                                          const bool,
                                          const QString&,
@@ -85,7 +91,7 @@ void UpdateManager::initializeSystemImage()
                                          const QString&))
     );
 
-    if (m_systemImage.getIsTargetNewer()) {
+    if (m_systemImage->getIsTargetNewer()) {
         m_systemUpdatesCount = 1;
         calculateUpdatesCount();
     }
@@ -208,6 +214,16 @@ bool UpdateManager::haveSufficientPower() const
     return m_haveSufficientPower;
 }
 
+bool UpdateManager::haveSystemUpdate() const
+{
+    return m_systemUpdatesCount > 0;
+}
+
+QSystemImage* UpdateManager::systemImageBackend() const
+{
+    return m_systemImage;
+}
+
 void UpdateManager::setHaveSufficientPower(const bool haveSufficientPower)
 {
     if (haveSufficientPower != m_haveSufficientPower) {
@@ -234,12 +250,12 @@ void UpdateManager::calculateUpdatesCount() {
 
 int UpdateManager::downloadMode()
 {
-    return m_systemImage.downloadMode();
+    return m_systemImage->downloadMode();
 }
 
 void UpdateManager::setDownloadMode(const int &downloadMode)
 {
-    m_systemImage.setDownloadMode(downloadMode);
+    m_systemImage->setDownloadMode(downloadMode);
 }
 
 UpdateManager::ManagerStatus UpdateManager::managerStatus() const
@@ -254,14 +270,14 @@ void UpdateManager::checkForUpdates()
         m_ssoService.getCredentials();
     }
 
-    m_systemImage.checkForUpdate();
+    m_systemImage->checkForUpdate();
     m_clickUpChecker.check();
     setManagerStatus(ManagerStatus::CheckingAllUpdates);
 }
 
 void UpdateManager::cancelCheckForUpdates()
 {
-    m_systemImage.cancelUpdate();
+    m_systemImage->cancelUpdate();
     m_clickUpChecker.cancel();
     setManagerStatus(ManagerStatus::Idle);
 }
@@ -422,7 +438,7 @@ void UpdateManager::handleCredentialsFailed()
 }
 
 // We don't handle the contents of the available status here,
-// we delegate that to SystemUpdate.qml.
+// we delegate that to ImageUpdate.qml.
 void UpdateManager::handleSiAvailableStatus(const bool isAvailable,
                                             const bool downloading,
                                             const QString &availableVersion,
@@ -433,6 +449,7 @@ void UpdateManager::handleSiAvailableStatus(const bool isAvailable,
     qWarning() << "got available status from SI";
 
     m_systemUpdatesCount = isAvailable ? 1 : 0;
+    haveSystemUpdateChanged();
     calculateUpdatesCount();
 
     if (m_managerStatus == ManagerStatus::CheckingAllUpdates) {

@@ -17,6 +17,7 @@
  */
 
 import QtQuick 2.4
+import Ubuntu.SystemSettings.Update 1.0
 
 Update {
     property var systemImageBackend

@@ -39,7 +39,8 @@ void BackendPlugin::registerTypes(const char *uri)
 {
     Q_ASSERT(uri == QLatin1String("Ubuntu.SystemSettings.Update"));
 
-    qmlRegisterType<QSystemImage>(uri, 1, 0, "SystemImage");
+    qmlRegisterUncreatableType<QSystemImage>(uri, 1, 0, "SystemImage",
+        "System Image can't be instantiated directly.");
 
     // The context is already populated with “UpdateManager”, but we still need to
     // register it as a type.
