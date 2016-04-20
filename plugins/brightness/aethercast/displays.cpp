@@ -60,7 +60,7 @@ Displays::Displays(const QDBusConnection &dbus, QObject *parent):
     });
 
     m_connectedDevices.filterOnState("connected");
-    m_connectedDevices.filterOnState("configuration");
+    //m_connectedDevices.filterOnState("configuration");
     m_connectedDevices.setSourceModel(&m_devices);
 
     m_disconnectedDevices.filterOnState("disconnected");
