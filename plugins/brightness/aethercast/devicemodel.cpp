@@ -310,6 +310,7 @@ bool DeviceFilter::lessThan(const QModelIndex &left,
 
 void DeviceFilter::filterOnState(QString state)
 {
+    qWarning() << Q_FUNC_INFO << state;
     m_state = state;
     m_stateEnabled = true;
     invalidateFilter();
@@ -324,6 +325,7 @@ bool DeviceFilter::filterAcceptsRow(int sourceRow,
     if (accepts && m_stateEnabled) {
         const QString state = childIndex.model()->data(childIndex, DeviceModel::StateRole).value<QString>();
         accepts = m_state == state;
+        qWarning() << Q_FUNC_INFO << "m_state:" << m_state << "state:" << state;
     }
 
     return accepts;
