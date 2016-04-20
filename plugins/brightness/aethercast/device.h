@@ -50,7 +50,6 @@ struct Device: QObject
                READ getState
                NOTIFY stateChanged)
 
-
 Q_SIGNALS:
     void pathChanged();
     void nameChanged();
@@ -59,14 +58,18 @@ Q_SIGNALS:
     void deviceChanged(); // catchall for any change
 
 public:
+    enum State { Idle=0, Disconnected=2, Configuration=3, Connected=4 };
+    Q_ENUMS(State)
+    Q_DECLARE_FLAGS(States, State)
+
     const QString& getName() const { return m_name; }
     const QString& getAddress() const { return m_address; }
-    const QString& getState() const { return m_state; }
+    const State& getState() const { return m_state; }
     QString getPath() const { return m_aethercastDevice ? m_aethercastDevice->path() : QString(); }
 
   private:
     QString m_name;
-    QString m_state;
+    State m_state;
     QString m_address;
     QScopedPointer<AethercastDevice> m_aethercastDevice;
     QScopedPointer<FreeDesktopProperties> m_aethercastDeviceProperties;
@@ -74,7 +77,7 @@ public:
   protected:
     void setName(const QString &name);
     void setAddress(const QString &address);
-    void setState(const QString &state);
+    void setState(const State &state);
 
   public:
     Device() {}
@@ -92,8 +95,10 @@ public:
     void initDevice(const QString &path, QDBusConnection &bus);
     void updateProperties(QSharedPointer<QDBusInterface>);
     void updateProperty(const QString &key, const QVariant &value);
+
 };
 
 Q_DECLARE_METATYPE(Device*)
+Q_DECLARE_OPERATORS_FOR_FLAGS(Device::States)
 
 #endif // USS_AETHERCAST_DEVICE_H

@@ -26,7 +26,7 @@
 #include <QTimer>
 
 Device::Device(const QString &path, QDBusConnection &bus) :
-   m_state(QString())
+   m_state(Device::Idle)
 {
     qWarning() << Q_FUNC_INFO;
     initDevice(path, bus);
@@ -122,7 +122,7 @@ void Device::setAddress(const QString &address)
     }
 }
 
-void Device::setState(const QString &state)
+void Device::setState(const State &state)
 {
     qWarning() << Q_FUNC_INFO << state;
     if (m_state != state) {
@@ -139,6 +139,13 @@ void Device::updateProperty(const QString &key, const QVariant &value)
     } else if (key == "Address") {
         setAddress(value.toString());
     } else if (key == "State") {
-        setState(value.toString());
+        if (value.toString() == "idle")
+            setState(Device::Idle);
+        else if (value.toString() == "disconnected")
+            setState(Device::Disconnected);
+        else if (value.toString() == "connected")
+            setState(Device::Connected);
+        else if (value.toString() == "configuration")
+            setState(Device::Configuration);
     }
 }

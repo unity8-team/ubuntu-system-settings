@@ -102,7 +102,7 @@ public:
     DeviceFilter() {}
     virtual ~DeviceFilter() {}
 
-    void filterOnState(QString);
+    void filterOnStates(Device::States);
 
 Q_SIGNALS:
     void countChanged(int count);
@@ -112,8 +112,10 @@ protected:
     virtual bool lessThan(const QModelIndex&, const QModelIndex&) const;
 
 private:
-    QString m_state = "disconnected";
-    bool m_stateEnabled = false;
+    Device::State stringToState(const QString &state) const;
+
+    Device::States m_states = Device::Idle;
+    bool m_statesEnabled = false;
 
 };
 
