@@ -16,6 +16,7 @@
  * Authors:
  * Didier Roche <didier.roche@canonical.com>
  * Diego Sarmentero <diego.sarmentero@canonical.com>
+ * Sergio Schvezov <sergio.schvezov@canonical.com>
  * Jonas G. Drange <jonas.drange@canonical.com>
  *
 */
@@ -131,7 +132,9 @@ private:
     QString m_objectPath;
     QString m_deviceName;
 
+    // Synchronously initialize pertinent properties.
     void initializeProperties();
+    // Sets up connections on the DBus interface.
     void setUpInterface();
 };
 

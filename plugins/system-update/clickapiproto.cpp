@@ -99,7 +99,7 @@ bool ClickApiProto::validReply(const QNetworkReply *reply)
     }
 
     int httpStatus = statusAttr.toInt();
-    qWarning() << "HTTP Status: " << httpStatus;
+    qWarning() << "click proto: HTTP Status: " << httpStatus;
 
     if (httpStatus == 401 || httpStatus == 403) {
         setErrorString("credential error");

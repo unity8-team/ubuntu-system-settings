@@ -35,4 +35,7 @@ DownloadManager {
         }
         console.warn('Cancelled idle downloads.');
     }
+
+    onDownloadFinished: console.warn('udm download finished', download, path);
+    onErrorFound: console.warn('udm download error', download);
 }

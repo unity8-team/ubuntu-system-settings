@@ -29,7 +29,9 @@ namespace UpdatePlugin {
 
 class ClickUpdateMetadata;
 
-//
+/**
+    Caches a list of ClickUpdateMetadatas for 24 hours.
+*/
 class ClickApiCache : public QObject
 {
     Q_OBJECT
@@ -52,17 +54,27 @@ public:
     static const QString TITLE;
     static const QString CLICK_TOKEN;
 
+    // Return whether or not the cache is valid.
     bool valid();
+
+    // Return a list of ClickUpdateMetadatas from cache.
     QList<QSharedPointer<ClickUpdateMetadata> > read();
+
+    // Set the cache to be a list of ClickUpdateMetadatas.
     void write(const QList<QSharedPointer<ClickUpdateMetadata> > &metas);
 
 private:
-    bool parse(const QJsonObject &obj, const QSharedPointer<ClickUpdateMetadata> &meta);
+    // Parse a JSON object, and if successful, update the
+    // ClickUpdateMetadata with values from the JSON object.
+    bool parse(const QJsonObject &obj,
+               const QSharedPointer<ClickUpdateMetadata> &meta);
+
+    // Serialize a ClickUpdateMetadata object.
     QJsonArray serialize(const QList<QSharedPointer<ClickUpdateMetadata>> &metas);
+
     QFile m_cache;
 };
 
 } // UpdatePlugin
-
 
 #endif // CLICKAPICACHE_H

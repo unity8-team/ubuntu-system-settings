@@ -17,13 +17,47 @@
  */
 
 import QtQuick 2.4
+import Ubuntu.SystemSettings.Update 1.0
 
 Update {
-    Component.onCompleted: console.warn(modelData)
-    // modelData should be a SingleDownload here.
-    // onModelDataChanged: {
-    //     if (typeof modelData !== "SingleDownload") {
-    //         console.warn("ClickUpdate got", typeof modelData, "instead of SingleDownload");
-    //     }
-    // }
+    id: update
+    Component.onCompleted: {
+        console.warn("ClickUpdate", modelData, modelData.metadata, modelData.metadata.title, modelData.metadata.custom.iconUrl);
+    }
+    status: {
+        if (modelData.errorMessage) return UpdateManager.Failed;
+        if (modelData.isCompleted) return UpdateManager.Installed;
+        if (modelData.downloadInProgress) {
+            return modelData.downloading ? UpdateManager.ManuallyDownloading
+                : UpdateManager.DownloadPaused;
+        }
+        return UpdateManager.NotStarted;
+    }
+    mode: {
+        if (modelData.errorMessage) return UpdateManager.Retriable;
+        if (modelData.isCompleted) return UpdateManager.NonPausable;
+        if (modelData.downloadInProgress) {
+            return modelData.downloading ? UpdateManager.Pausable
+                : UpdateManager.Installable;
+        }
+        return UpdateManager.Installable;
+    }
+    name: modelData.metadata.title
+    version: modelData.metadata.custom.remoteVersion
+    size: modelData.metadata.custom.binaryFilesize
+    iconUrl: modelData.metadata.custom.iconUrl
+    changelog: modelData.metadata.custom.changelog
+
+    onRetry: modelData.start();
+    onDownload: modelData.start();
+    onPause: modelData.pause();
+    onInstall: modelData.start();
+
+    Connections {
+        target: modelData
+        onErrorMessageChanged: update.setError(
+            i18n.tr("Download failed"), modelData.errorMessage
+        )
+        onFinished: console.warn('Download finished')
+    }
 }

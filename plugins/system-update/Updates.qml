@@ -24,9 +24,6 @@ import Ubuntu.Components 1.3
 Column {
     id: updates
 
-    width: units.gu(50)
-    height: units.gu(95)
-
     /*!
         \qmlproperty bool havePower
 
@@ -92,6 +89,7 @@ Column {
 
     ClickUpdates {
         id: clickUpdates
+        anchors { left: parent.left; right: parent.right }
         visible: authenticated
     }
 

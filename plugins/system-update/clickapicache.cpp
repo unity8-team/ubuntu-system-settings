@@ -50,23 +50,19 @@ ClickApiCache::~ClickApiCache()
 bool ClickApiCache::valid()
 {
     bool val = false;
-    if (!m_cache.open(QIODevice::ReadWrite | QIODevice::Text)) {
-        qWarning() << "could not open cache file," << m_cache.errorString();
+    if (!m_cache.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        qWarning() << "Reading cache failed:" << m_cache.errorString();
     } else {
         QString cachedJson = m_cache.readAll();
         QJsonDocument d = QJsonDocument::fromJson(cachedJson.toUtf8());
         QJsonObject o = d.object();
 
-        // How old is this cache?
         int cachedAt = o.value(CACHED_AT).toInt(0);
-        uint now = QDateTime::currentDateTime().toTime_t();
-
-        // If the cache timestamp is older than 24 hours, don't use it.
-        qWarning() << "click cache:" << cachedAt << now << (now - 86400);
+        int now = (int) QDateTime::currentDateTime().toTime_t();
         val = cachedAt > (now - 86400);
     }
     m_cache.close();
-    qWarning() << "click cache: returning val" << val;
+    qWarning() << "click cache: cache valid:" << val;
     return val;
 }
 
@@ -74,8 +70,8 @@ QList<QSharedPointer<ClickUpdateMetadata> > ClickApiCache::read()
 {
     QList<QSharedPointer<ClickUpdateMetadata> > list;
 
-    if (!m_cache.open(QIODevice::ReadWrite | QIODevice::Text)) {
-        qWarning() << "could not open cache file," << m_cache.errorString();
+    if (!m_cache.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        qWarning() << "Reading cache failed:" << m_cache.errorString();
     } else {
         QString cachedJson = m_cache.readAll();
         QJsonDocument d = QJsonDocument::fromJson(cachedJson.toUtf8());

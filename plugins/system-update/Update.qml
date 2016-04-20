@@ -174,7 +174,7 @@ Item {
             anchors { left: parent.left; right: parent.right }
             text: update.errorDetail
             fontSize: "small"
-            wrapMode: Text.WordWrap
+            wrapMode: Text.WrapAnywhere
         }
     }
 

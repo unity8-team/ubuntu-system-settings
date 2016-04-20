@@ -20,6 +20,6 @@ import QtQuick 2.4
 
 ListView {
     delegate: ClickUpdate {
-
+        anchors { left: parent.left; right: parent.right }
     }
 }

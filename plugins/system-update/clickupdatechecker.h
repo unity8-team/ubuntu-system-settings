@@ -39,7 +39,10 @@ public:
     explicit ClickUpdateChecker(QObject *parent = 0);
     ~ClickUpdateChecker();
 
+    // Check for click updates.
     void check();
+
+    // Cancel check for click updates.
     void cancel();
 
     // Return the amount of cached click updates.
@@ -55,16 +58,27 @@ private slots:
     void handleClickTokenFailure(const ClickUpdateMetadata *meta);
 
 signals:
+    // Indicate that this ClickUpdateMetadata is ready for download and
+    // install.
     void updateAvailable(
         const QSharedPointer<ClickUpdateMetadata> &meta);
+
+    // Indicate that the check has been completed.
     void checkCompleted();
 
 private:
+    // Set up connections on a ClickUpdateMetadata instance.
     void initializeMeta(const QSharedPointer<ClickUpdateMetadata> &meta);
+
+    // Set up connections on a process instance (used for click list …)
     void initializeProcess();
 
-    // Starts process of adding remote metadata to each installed click
+    // Start process of adding remote metadata to each installed click
     void requestClickMetadata();
+
+    // Parses click metadata.
+    // Note: This also asks a ClickUpdateMetadata to request a click token.
+    // TODO: Make this more obvious.
     void parseClickMetadata(const QJsonArray &array);
 
     QProcess m_process;
