@@ -50,6 +50,11 @@ ItemPage {
         contentWidth: parent.width
         contentHeight: contentItem.childrenRect.height
 
+        // Only allow flicking if the content doesn't fit on the page
+        boundsBehavior: (contentHeight > wifiDisplays.height) ?
+                            Flickable.DragAndOvershootBounds :
+                            Flickable.StopAtBounds
+
         AethercastDisplays {
             id: displays
             onDevicesChanged: {
@@ -68,24 +73,13 @@ ItemPage {
             }
 
             ListItem.Standard {
-                objectName: "wifiDisplays"
-                text: i18n.tr("Devices")
-                control: Item {
-                    anchors.verticalCenter: parent.verticalCenter
-                    height: parent.height
-                    width: childrenRect.width
-                    ActivityIndicator {
-                        id: ind
-                        anchors.centerIn: parent
-                        running: displays.scanning
-                        visible: running
-                    }
-                }
+                objectName: "connectedDisplay"
+                text: i18n.tr("Connected display:")
+                visible: displays.connectedDevices.length > 0
             }
 
             Repeater {
-                id: mainMenu
-                model: displays.devices ? displays.devices : null
+                model: displays.connectedDevices ? displays.connectedDevices : null
                 delegate: ListItem.Subtitled {
                     id: displayDelegate
                     anchors {
@@ -105,11 +99,49 @@ ItemPage {
                     }
                 }
             }
-        }
 
-        // Only allow flicking if the content doesn't fit on the page
-        boundsBehavior: (contentHeight > wifiDisplays.height) ?
-                            Flickable.DragAndOvershootBounds :
-                            Flickable.StopAtBounds
+            ListItem.Divider {
+                visible: displays.disconnectedDevices.length > 0
+            }
+
+            ListItem.Standard {
+                objectName: "wifiDisplays"
+                text: i18n.tr("Use another display:")
+                control: Item {
+                    anchors.verticalCenter: parent.verticalCenter
+                    height: parent.height
+                    width: childrenRect.width
+                    ActivityIndicator {
+                        id: ind
+                        anchors.centerIn: parent
+                        running: displays.scanning
+                        visible: running
+                    }
+                }
+            }
+
+            Repeater {
+                model: displays.disconnectedDevices ? displays.disconnectedDevices : null
+                delegate: ListItem.Subtitled {
+                    id: displayDelegate
+                    anchors {
+                        left: parent.left
+                        right: parent.right
+                    }
+                    iconName: "video-display"
+                    iconFrame: false
+                    text: displayName
+                    subText: stateName
+                    enabled: stateName === "idle" || stateName === "connected" || stateName === "disconnected"
+                    onClicked: {
+                        if (stateName === "connected")
+                            displays.disconnectDevice(addressName);
+                        else
+                            displays.connectDevice(addressName);
+                    }
+                }
+            }
+
+        }
     }
 }

@@ -60,7 +60,6 @@ Displays::Displays(const QDBusConnection &dbus, QObject *parent):
     });
 
     m_connectedDevices.filterOnState("connected");
-    m_connectedDevices.filterOnState("configuring");
     m_connectedDevices.setSourceModel(&m_devices);
 
     m_disconnectedDevices.filterOnState("disconnected");
@@ -110,6 +109,14 @@ QAbstractItemModel * Displays::connectedDevices()
 {
     qWarning() << Q_FUNC_INFO;
     auto ret = &m_connectedDevices;
+    QQmlEngine::setObjectOwnership(ret, QQmlEngine::CppOwnership);
+    return ret;
+}
+
+QAbstractItemModel * Displays::disconnectedDevices()
+{
+    qWarning() << Q_FUNC_INFO;
+    auto ret = &m_disconnectedDevices;
     QQmlEngine::setObjectOwnership(ret, QQmlEngine::CppOwnership);
     return ret;
 }
