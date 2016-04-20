@@ -60,7 +60,12 @@ Displays::Displays(const QDBusConnection &dbus, QObject *parent):
     });
 
     m_connectedDevices.filterOnState("connected");
+    m_connectedDevices.filterOnState("configuring");
     m_connectedDevices.setSourceModel(&m_devices);
+
+    m_disconnectedDevices.filterOnState("disconnected");
+    m_disconnectedDevices.filterOnState("idle");
+    m_disconnectedDevices.setSourceModel(&m_devices);
 }
 
 void Displays::slotPropertiesChanged(const QString &interface, const QVariantMap &changedProperties,

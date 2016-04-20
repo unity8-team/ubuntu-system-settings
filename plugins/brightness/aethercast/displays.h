@@ -35,6 +35,14 @@ class Displays : public QObject
                 READ devices
                 NOTIFY devicesChanged)
 
+    Q_PROPERTY (QAbstractItemModel* connectedDevices
+                READ connectedDevices
+                NOTIFY connectedDevicesChanged)
+
+    Q_PROPERTY (QAbstractItemModel* disconnectedDevices
+                READ disconnectedDevices
+                NOTIFY disconnectedDevicesChanged)
+
     Q_PROPERTY (bool scanning
                 READ scanning
                 NOTIFY scanningChanged)
@@ -43,13 +51,10 @@ class Displays : public QObject
                 READ state
                 NOTIFY stateChanged)
 
-    Q_PROPERTY (QAbstractItemModel* connectedDevices
-                READ connectedDevices
-                NOTIFY connectedDevicesChanged)
-
 Q_SIGNALS:
     void devicesChanged();
     void connectedDevicesChanged();
+    void disconnectedDevicesChanged();
     void scanningChanged(bool isActive);
     void stateChanged();
 
@@ -66,6 +71,7 @@ public:
 public:
     QAbstractItemModel * devices();
     QAbstractItemModel * connectedDevices();
+    QAbstractItemModel * disconnectedDevices();
     bool scanning() const { return m_manager->scanning(); }
     QString state() const { return m_manager->state(); }
 
@@ -77,6 +83,7 @@ private:
     QDBusConnection m_dbus;
     DeviceModel m_devices;
     DeviceFilter m_connectedDevices;
+    DeviceFilter m_disconnectedDevices;
     AethercastManager* m_manager;
     QScopedPointer<FreeDesktopProperties> m_aethercastProperties;
     void updateProperties(QSharedPointer<QDBusInterface>);
