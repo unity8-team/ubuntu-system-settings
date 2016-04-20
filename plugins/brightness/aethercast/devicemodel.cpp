@@ -183,6 +183,7 @@ void DeviceModel::addDevice(QSharedPointer<Device> &device)
         m_devices.append(device);
         endInsertRows();
     }
+    emit countChanged(rowCount());
 }
 
 void DeviceModel::removeRow(int row)
@@ -192,6 +193,7 @@ void DeviceModel::removeRow(int row)
         m_devices.removeAt(row);
         endRemoveRows();
     }
+    emit countChanged(rowCount());
 }
 
 void DeviceModel::emitRowChanged(int row)

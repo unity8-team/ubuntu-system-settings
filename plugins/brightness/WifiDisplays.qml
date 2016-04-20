@@ -37,8 +37,8 @@ ItemPage {
         running: !displays.scanning
         onTriggered: {
             console.warn("Timer triggered");
-            console.warn("ConnectedDevices: " + connectedDevices.length);
-            console.warn("DisconnectedDevices: " + disconnectedDevices.length);
+            console.warn("ConnectedDevices: " + displays.connectedDevices.count);
+            console.warn("DisconnectedDevices: " + displays.disconnectedDevices.count);
             if (!displays.scanning && displays.state !== "connected") {
                 console.warn("Initiating a scan");
                 displays.scan();
@@ -75,7 +75,7 @@ ItemPage {
             ListItem.Standard {
                 objectName: "connectedDisplay"
                 text: i18n.tr("Connected display:")
-                visible: displays.connectedDevices.length > 0
+                visible: displays.connectedDevices.count > 0
             }
 
             Repeater {
@@ -101,7 +101,7 @@ ItemPage {
             }
 
             ListItem.Divider {
-                visible: displays.disconnectedDevices.length > 0
+                visible: displays.disconnectedDevices.count > 0
             }
 
             ListItem.Standard {

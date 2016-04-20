@@ -42,6 +42,7 @@
 class DeviceModel: public QAbstractListModel
 {
     Q_OBJECT
+    Q_PROPERTY(int count READ rowCount NOTIFY countChanged)
 
 public:
     explicit DeviceModel(QDBusConnection &dbus, QObject *parent = 0);
@@ -63,6 +64,9 @@ public:
 
     QSharedPointer<Device> getDeviceFromAddress(const QString &address);
     QSharedPointer<Device> getDeviceFromPath(const QString &path);
+
+Q_SIGNALS:
+    void countChanged(int count);
 
 private:
     QDBusConnection m_dbus;
@@ -92,12 +96,16 @@ private Q_SLOTS:
 class DeviceFilter: public QSortFilterProxyModel
 {
     Q_OBJECT
+    Q_PROPERTY(int count READ rowCount NOTIFY countChanged)
 
 public:
     DeviceFilter() {}
     virtual ~DeviceFilter() {}
 
     void filterOnState(QString);
+
+Q_SIGNALS:
+    void countChanged(int count);
 
 protected:
     virtual bool filterAcceptsRow(int, const QModelIndex&) const;
