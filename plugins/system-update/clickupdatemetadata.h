@@ -73,9 +73,9 @@ public:
                WRITE setRemoteVersion NOTIFY remoteVersionChanged)
     Q_PROPERTY(QString localVersion READ localVersion
                WRITE setLocalVersion NOTIFY localVersionChanged)
-
     Q_PROPERTY(QString clickToken READ clickToken NOTIFY clickTokenChanged)
 
+    QString clickToken() const;
     QString anonDownloadUrl() const;
     uint binaryFilesize() const;
     QString changelog() const;
@@ -95,8 +95,7 @@ public:
     QString remoteVersion() const;
     QString localVersion() const;
 
-    QString clickToken() const;
-
+    void setClickToken(const QString &clickToken);
     void setAnonDownloadUrl(const QString &anonDownloadUrl);
     void setBinaryFilesize(const uint &binaryFilesize);
     void setChangelog(const QString &changelog);
@@ -118,6 +117,7 @@ public:
 
     // Abort any networking activity.
     void cancel();
+
     void requestClickToken();
     bool isUpdateRequired();
 
@@ -153,9 +153,7 @@ signals:
     void clickTokenRequestFailed();
 
 private:
-    void setClickToken(const QString &clickToken);
     QString m_clickToken;
-
     QString m_anonDownloadUrl;
     uint m_binaryFilesize;
     QString m_changelog;

@@ -17,6 +17,7 @@ add_library(update-plugin SHARED
             ../clickupdatechecker.cpp
             ../clickupdatemetadata.cpp
             ../clickapiproto.cpp
+            ../clickapicache.cpp
             ../helpers.cpp
 )
 

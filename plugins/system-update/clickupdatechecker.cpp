@@ -19,7 +19,6 @@
 #include <QByteArray>
 #include <QDateTime>
 #include <QJsonArray>
-#include <QJsonDocument>
 #include <QJsonObject>
 #include <QJsonValue>
 #include <QStandardPaths>
@@ -32,12 +31,10 @@ namespace UpdatePlugin {
 
 ClickUpdateChecker::ClickUpdateChecker(QObject *parent):
     ClickApiProto(parent),
-    m_cache(QStandardPaths::writableLocation(
-        QStandardPaths::CacheLocation)
-        + "/click-metadata-cache.json")
+    m_process(),
+    m_metas(),
+    m_apiCache(this)
 {
-    readFromCache();
-
     initializeProcess();
 }
 
@@ -45,43 +42,27 @@ ClickUpdateChecker::~ClickUpdateChecker()
 {
 }
 
-void ClickUpdateChecker::readFromCache()
-{
-    if (!m_cache.open(QIODevice::ReadWrite | QIODevice::Text)) {
-        qWarning() << "could not open cache file," << m_cache.errorString();
-    } else {
-        QString cachedJson = m_cache.readAll();
-        QJsonDocument d = QJsonDocument::fromJson(cachedJson.toUtf8());
-        QJsonObject o = d.object();
-
-        // How old is this cache?
-        int cachedAt = o.value(QStringLiteral("cached_at")).toInt(0);
-        uint now = QDateTime::currentDateTime().toTime_t();
-        // If the cache timestamp is older than 24 hours, don't use it.
-        if (cachedAt < (now - 86400)) {
-
-        }
-        qWarning() << cachedAt << now;
-
-    }
-    m_cache.close();
-
-}
-
 void ClickUpdateChecker::initializeMeta(const QSharedPointer<ClickUpdateMetadata> &meta)
 {
     QObject::connect(meta.data(), SIGNAL(credentialError()),
                      this, SIGNAL(credentialError()));
     QObject::connect(meta.data(), SIGNAL(clickTokenRequestSucceeded(const ClickUpdateMetadata*)),
-                     this, SLOT(handleMetadataClickTokenObtained(const ClickUpdateMetadata*)));
+                     this, SLOT(processClickToken(const ClickUpdateMetadata*)));
     QObject::connect(meta.data(), SIGNAL(clickTokenRequestFailed()),
-                     this, SLOT(handleClickTokenRequestFailed()));
+                     this, SLOT(handleClickTokenFailure()));
 }
 
 void ClickUpdateChecker::initializeProcess()
 {
     QObject::connect(&m_process, SIGNAL(finished(const int&)),
-                     this, SLOT(handleInstalledClicks(const int&)));
+                     this, SLOT(processInstalledClicks(const int&)));
+}
+
+int ClickUpdateChecker::cachedCount() {
+    if (m_apiCache.valid()) {
+        return m_apiCache.read().count();
+    }
+    return 0;
 }
 
 // This method is quite complex, and naturally not synchronous. Basically,
@@ -108,11 +89,19 @@ void ClickUpdateChecker::check()
         return;
     }
 
-    // If we already have metas, we assume they can
-    if (m_metas.count() > 0) {
+    // Do we have cached data? If so, return it and mark the check as complete.
+    if (m_apiCache.valid()) {
+        qWarning() << "click checker: cache valid";
+        foreach(const QSharedPointer<ClickUpdateMetadata> &meta, m_apiCache.read()){
+            qWarning() << "click checker: cache had" << meta->name();
+            Q_EMIT updateAvailable(meta);
+        }
         Q_EMIT checkCompleted();
         return;
     }
+    qWarning() << "click checker: cache invalid";
+
+    m_metas.clear();
 
     setErrorString("");
 
@@ -141,9 +130,9 @@ void ClickUpdateChecker::cancel()
     Q_EMIT checkCompleted();
 }
 
-void ClickUpdateChecker::handleInstalledClicks(const int &exitCode)
+void ClickUpdateChecker::processInstalledClicks(const int &exitCode)
 {
-    qWarning() << "click checker: handleInstalledClicks..." << exitCode;
+    qWarning() << "click checker: processInstalledClicks..." << exitCode;
     if (exitCode > 0) {
         setErrorString(
             QString("list command exited with code %1.").arg(exitCode)
@@ -165,16 +154,15 @@ void ClickUpdateChecker::handleInstalledClicks(const int &exitCode)
 
     int i;
     for (i = 0; i < array.size(); i++) {
-        QJsonObject object = array.at(i).toObject();
-
         QSharedPointer<ClickUpdateMetadata> meta(new ClickUpdateMetadata);
-
+        meta->setToken(m_token);
         initializeMeta(meta);
 
-        meta->setToken(m_token);
+        QJsonObject object = array.at(i).toObject();
         meta->setName(object.value("name").toString());
         meta->setTitle(object.value("title").toString());
         meta->setLocalVersion(object.value("version").toString());
+
         m_metas.insert(meta->name(), meta);
         qWarning() << "click checker: queueing up" << meta->name();
     }
@@ -186,12 +174,6 @@ void ClickUpdateChecker::handleInstalledClicks(const int &exitCode)
 void ClickUpdateChecker::handleProcessError(const QProcess::ProcessError &error)
 {
     qWarning() << "click checker: process failed";
-// QProcess::FailedToStart 0   The process failed to start. Either the invoked program is missing, or you may have insufficient permissions to invoke the program.
-// QProcess::Crashed   1   The process crashed some time after starting successfully.
-// QProcess::Timedout  2   The last waitFor...() function timed out. The state of QProcess is unchanged, and you can try calling waitFor...() again.
-// QProcess::WriteError    4   An error occurred when attempting to write to the process. For example, the process may not be running, or it may have closed its input channel.
-// QProcess::ReadError 3   An error occurred when attempting to read from the process. For example, the process may not be running.
-// QProcess::UnknownError
     switch(error) {
     case QProcess::FailedToStart:
         qWarning() << "QProcess::FailedToStart";
@@ -214,7 +196,7 @@ void ClickUpdateChecker::handleProcessError(const QProcess::ProcessError &error)
     }
 }
 
-void ClickUpdateChecker::handleMetadataClickTokenObtained(const ClickUpdateMetadata *meta)
+void ClickUpdateChecker::processClickToken(const ClickUpdateMetadata *meta)
 {
     qWarning() << "click checker: handling obtained token on metadata" << meta->name();
     // Pass the shared pointer instead.
@@ -227,21 +209,15 @@ void ClickUpdateChecker::handleMetadataClickTokenObtained(const ClickUpdateMetad
         }
     }
 
-    // Cache this data.
-    cacheClickMetadata();
+    m_apiCache.write(m_metas.values());
 
     // All metas had signed download urls, so we're done.
     Q_EMIT checkCompleted();
 }
 
-void ClickUpdateChecker::handleClickTokenRequestFailed(const ClickUpdateMetadata *meta)
+void ClickUpdateChecker::handleClickTokenFailure(const ClickUpdateMetadata *meta)
 {
     m_metas.remove(meta->name());
-}
-
-void ClickUpdateChecker::cacheClickMetadata()
-{
-
 }
 
 void ClickUpdateChecker::requestClickMetadata()
@@ -293,45 +269,51 @@ void ClickUpdateChecker::requestSucceeded(QNetworkReply *reply)
     auto document = QJsonDocument::fromJson(reply->readAll(), jsonError);
 
     if (document.isArray()) {
-        QJsonArray array = document.array();
-        for (int i = 0; i < array.size(); i++) {
-            auto object = array.at(i).toObject();
-            auto name = object["name"].toString();
-            qWarning() << "click checker: got metadata for" << name;
-            auto version = object["version"].toString();
-            auto icon_url = object["icon_url"].toString();
-            auto url = object["download_url"].toString();
-            auto download_sha512 = object["download_sha512"].toString();
-            auto changelog = object["changelog"].toString();
-            auto size = object["binary_filesize"].toInt();
-            auto title = object["title"].toString();
-            if (m_metas.contains(name)) {
-                QSharedPointer<ClickUpdateMetadata> meta = m_metas.value(name);
-                meta->setRemoteVersion(version);
-                if (meta->isUpdateRequired()) {
-                    meta->setIconUrl(icon_url);
-                    meta->setDownloadUrl(url);
-                    meta->setBinaryFilesize(size);
-                    meta->setDownloadSha512(download_sha512);
-                    meta->setChangelog(changelog);
-                    meta->setTitle(title);
-
-                    // ClickUpdateMetadata now has enough information to
-                    // request the signed download URL, which we'll
-                    // monitor and act on when it changes.
-                    // See: handleDownloadUrlSigned
-                    meta->requestClickToken();
-                }
-            }
-        }
+        parseClickMetadata(document.array());
     } else {
-        // Document wasn't an array, what was it?
+        setErrorString("Got unexpected JSON from server.");
+        Q_EMIT serverError();
+    }
+
+    if (jsonError->error != QJsonParseError::NoError) {
         setErrorString("json parse failed: " + jsonError->errorString());
         Q_EMIT serverError();
     }
 
     delete jsonError;
     reply->deleteLater();
+}
+
+void ClickUpdateChecker::parseClickMetadata(const QJsonArray &array)
+{
+    for (int i = 0; i < array.size(); i++) {
+        auto object = array.at(i).toObject();
+        auto name = object["name"].toString();
+        qWarning() << "click checker: got metadata for" << name;
+        auto version = object["version"].toString();
+        auto icon_url = object["icon_url"].toString();
+        auto url = object["download_url"].toString();
+        auto download_sha512 = object["download_sha512"].toString();
+        auto changelog = object["changelog"].toString();
+        auto size = object["binary_filesize"].toInt();
+        auto title = object["title"].toString();
+        if (m_metas.contains(name)) {
+            QSharedPointer<ClickUpdateMetadata> meta = m_metas.value(name);
+            meta->setRemoteVersion(version);
+            if (meta->isUpdateRequired()) {
+                meta->setIconUrl(icon_url);
+                meta->setDownloadUrl(url);
+                meta->setBinaryFilesize(size);
+                meta->setDownloadSha512(download_sha512);
+                meta->setChangelog(changelog);
+                meta->setTitle(title);
+
+                // Start the process of obtaining a click token for this
+                // click update.
+                meta->requestClickToken();
+            }
+        }
+    }
 }
 
 } // UpdatePlugin

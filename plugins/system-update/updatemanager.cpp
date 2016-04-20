@@ -41,7 +41,7 @@ UpdateManager::UpdateManager(QObject *parent):
     m_authenticated(false),
     m_haveSufficientPower(false),
     m_updatesCount(-1),
-    m_clickPackageDownloadsCount(0),
+    m_clickUpdatesCount(0),
     m_systemUpdatesCount(0),
     m_managerStatus(ManagerStatus::Idle),
     m_token(UbuntuOne::Token())
@@ -54,6 +54,8 @@ UpdateManager::UpdateManager(QObject *parent):
     initializeSSOService();
     // qWarning() << "trace c9";
     // initializeUdm();
+
+    calculateUpdatesCount();
 }
 
 UpdateManager::~UpdateManager()
@@ -82,6 +84,11 @@ void UpdateManager::initializeSystemImage()
                                          const QString&,
                                          const QString&))
     );
+
+    if (m_systemImage.getIsTargetNewer()) {
+        m_systemUpdatesCount = 1;
+        calculateUpdatesCount();
+    }
 }
 
 
@@ -110,6 +117,10 @@ void UpdateManager::initializeClickUpdateChecker()
     connect(&m_clickUpChecker, SIGNAL(serverError()),
             this, SLOT(onServerError())
     );
+
+    m_clickUpdatesCount = m_clickUpChecker.cachedCount();
+    qWarning() << "in initializeClickUpdateChecker we set m_clickUpdatesCount to " << m_clickUpdatesCount;
+    calculateUpdatesCount();
 }
 
 
@@ -205,21 +216,6 @@ void UpdateManager::setHaveSufficientPower(const bool haveSufficientPower)
     }
 }
 
-void UpdateManager::setClickPackageDownloadsCount(const int &clickPackageDownloadsCount)
-{
-    qWarning() << "manager: setClickPackageDownloadsCount" << clickPackageDownloadsCount;
-    if (clickPackageDownloadsCount != m_clickPackageDownloadsCount) {
-        m_clickPackageDownloadsCount = clickPackageDownloadsCount;
-        Q_EMIT clickPackageDownloadsCountChanged();
-    }
-    calculateUpdatesCount();
-}
-
-int UpdateManager::clickPackageDownloadsCount() const
-{
-    return m_clickPackageDownloadsCount;
-}
-
 int UpdateManager::updatesCount() const
 {
     return m_updatesCount;
@@ -227,7 +223,7 @@ int UpdateManager::updatesCount() const
 
 void UpdateManager::calculateUpdatesCount() {
     // qWarning() << "trace 4";
-    int newCount = m_clickPackageDownloadsCount + m_systemUpdatesCount;
+    int newCount = m_clickUpdatesCount + m_systemUpdatesCount;
     if (newCount != m_updatesCount) {
         m_updatesCount = newCount;
         // qWarning() << "trace 1";

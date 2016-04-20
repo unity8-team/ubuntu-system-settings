@@ -54,7 +54,7 @@ void ClickApiProto::setToken(const UbuntuOne::Token &token)
 void ClickApiProto::requestSslFailed(QNetworkReply *reply,
                                      const QList<QSslError> &errors)
 {
-    QString errorString = "SSL error:";
+    QString errorString = "SSL error: ";
     foreach (const QSslError &err, errors) {
         errorString += err.errorString();
     }

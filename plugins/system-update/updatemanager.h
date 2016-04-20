@@ -81,8 +81,6 @@ public:
                WRITE setHaveSufficientPower
                NOTIFY haveSufficientPowerChanged)
     Q_PROPERTY(int updatesCount READ updatesCount NOTIFY updatesCountChanged)
-    Q_PROPERTY(int clickPackageDownloadsCount READ clickPackageDownloadsCount
-               WRITE setClickPackageDownloadsCount NOTIFY clickPackageDownloadsCountChanged)
     Q_PROPERTY(int downloadMode READ downloadMode WRITE setDownloadMode
                NOTIFY downloadModeChanged)
     Q_PROPERTY(ManagerStatus managerStatus READ managerStatus
@@ -97,9 +95,6 @@ public:
     void setHaveSufficientPower(const bool haveSufficientPower);
 
     int updatesCount() const;
-
-    int clickPackageDownloadsCount() const;
-    void setClickPackageDownloadsCount(const int &clickPackageDownloadsCount);
 
     int downloadMode();
     void setDownloadMode(const int &downloadMode);
@@ -139,7 +134,6 @@ signals:
     void authenticatedChanged();
     void haveSufficientPowerChanged();
     void downloadModeChanged();
-    void clickPackageDownloadsCountChanged();
     void updatesCountChanged();
     void managerStatusChanged();
     void clickUpdateReady(const QString &url,
@@ -167,7 +161,7 @@ private:
     bool m_authenticated;
     bool m_haveSufficientPower;
     int m_updatesCount;
-    int m_clickPackageDownloadsCount;
+    int m_clickUpdatesCount;
     int m_systemUpdatesCount;
 
     ManagerStatus m_managerStatus;

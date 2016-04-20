@@ -19,10 +19,13 @@
 
 #include <QFile>
 #include <QHash>
+#include <QJsonDocument>
+#include <QList>
 #include <QProcess>
 #include <QSharedPointer>
 
 #include "clickupdatemetadata.h"
+#include "clickapicache.h"
 
 namespace UpdatePlugin {
 
@@ -39,14 +42,17 @@ public:
     void check();
     void cancel();
 
+    // Return the amount of cached click updates.
+    int cachedCount();
+
 protected slots:
     void requestSucceeded(QNetworkReply *reply);
 
 private slots:
-    void handleInstalledClicks(const int &exitCode);
+    void processInstalledClicks(const int &exitCode);
+    void processClickToken(const ClickUpdateMetadata *meta);
     void handleProcessError(const QProcess::ProcessError &error);
-    void handleMetadataClickTokenObtained(const ClickUpdateMetadata *meta);
-    void handleClickTokenRequestFailed(const ClickUpdateMetadata *meta);
+    void handleClickTokenFailure(const ClickUpdateMetadata *meta);
 
 signals:
     void updateAvailable(
@@ -56,15 +62,14 @@ signals:
 private:
     void initializeMeta(const QSharedPointer<ClickUpdateMetadata> &meta);
     void initializeProcess();
-    void readFromCache();
 
     // Starts process of adding remote metadata to each installed click
     void requestClickMetadata();
-    void cacheClickMetadata();
+    void parseClickMetadata(const QJsonArray &array);
 
     QProcess m_process;
     QHash<QString, QSharedPointer<ClickUpdateMetadata> > m_metas;
-    QFile m_cache;
+    ClickApiCache m_apiCache;
 };
 
 }
