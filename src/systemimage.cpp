@@ -37,15 +37,27 @@ QString _(const char *text)
 
 QSystemImage::QSystemImage(QObject *parent) :
     QObject(parent),
+    m_currentBuildNumber(0),
+    m_detailedVersion(),
+    m_lastUpdateDate(),
     m_downloadMode(-1),
-    m_systemBusConnection (QDBusConnection::systemBus()),
-    m_serviceWatcher ("com.canonical.SystemImage",
-                      m_systemBusConnection,
-                      QDBusServiceWatcher::WatchForOwnerChange),
-    m_systemServiceIface ("com.canonical.SystemImage",
+    m_systemBusConnection(QDBusConnection::systemBus()),
+    m_serviceWatcher("com.canonical.SystemImage",
+                     m_systemBusConnection,
+                     QDBusServiceWatcher::WatchForOwnerChange),
+    m_systemServiceIface("com.canonical.SystemImage",
                          "/Service",
                          "com.canonical.SystemImage",
-                         m_systemBusConnection)
+                         m_systemBusConnection),
+    m_lastCheckDate(),
+    m_channelName(""),
+    m_targetBuildNumber(0),
+    m_deviceName(""),
+    m_updateAvailable(false),
+    m_downloading(false),
+    m_availableVersion(""),
+    m_updateSize(0),
+    m_errorReason("")
 {
     qDBusRegisterMetaType<QMap<QString, QString> >();
 
@@ -61,13 +73,6 @@ QSystemImage::QSystemImage(QObject *parent) :
 QSystemImage::~QSystemImage() {
 }
 
-/**
- * @brief      handler for whenever the dbus api times out or crashes.
- *
- * @param[in]  name      the well known name
- * @param[in]  oldOwner  old owner
- * @param[in]  newOwner  new owner
- */
 void QSystemImage::slotNameOwnerChanged(const QString &name,
                                         const QString &oldOwner,
                                         const QString &newOwner) {
@@ -81,11 +86,6 @@ void QSystemImage::slotNameOwnerChanged(const QString &name,
         setUpInterface();
 }
 
-
-/**
- * @brief foo bar
- *
- */
 void QSystemImage::setUpInterface() {
     connect(&m_systemServiceIface,
             SIGNAL(UpdateAvailableStatus(bool, bool, QString, int, QString,
@@ -93,6 +93,21 @@ void QSystemImage::setUpInterface() {
             this,
             SIGNAL(updateAvailableStatus(bool, bool, QString, int, QString,
                                          QString)));
+
+    connect(&m_systemServiceIface,
+            SIGNAL(UpdateAvailableStatus(bool, bool, QString, int, QString,
+                                         QString)),
+            this,
+            SLOT(availableStatusChanged(bool, bool, QString, int, QString,
+                                          QString)));
+
+    connect(&m_systemServiceIface,
+            SIGNAL(UpdateAvailableStatus(bool, bool, QString, int, QString,
+                                         QString)),
+            this,
+            SLOT(ProcessAvailableStatus(bool, bool, QString, int, QString,
+                                        QString)));
+
     connect(&m_systemServiceIface, SIGNAL(UpdateProgress(int, double)),
                 this, SIGNAL(updateProgress(int, double)));
     connect(&m_systemServiceIface, SIGNAL(UpdateProgress(int, double)),
@@ -114,12 +129,6 @@ void QSystemImage::setUpInterface() {
     initializeProperties();
 }
 
-/**
-  *
- @brief      Wipes the data partition and issue
-             a reboot to recovery. A Rebooting signal may be sent, depending on
-             timing.
-*/
 void QSystemImage::factoryReset() {
     m_systemServiceIface.asyncCall("FactoryReset");
 }
@@ -130,7 +139,7 @@ void QSystemImage::productionReset() {
 }
 
 void QSystemImage::checkForUpdate() {
-    qWarning() << "QSystemImage checking update";
+    qWarning() << "QSystemImage: checking update";
     m_systemServiceIface.asyncCall("CheckForUpdate");
 }
 
@@ -161,6 +170,7 @@ void QSystemImage::pauseDownload() {
 }
 
 void QSystemImage::initializeProperties() {
+    qWarning() << "QSystemImage: initializeProperties";
     QDBusPendingReply<QMap<QString, QString> > reply = m_systemServiceIface.call("Information");
     reply.waitForFinished();
     if (reply.isValid()) {
@@ -171,6 +181,11 @@ void QSystemImage::initializeProperties() {
 
         m_targetBuildNumber = result["target_build_number"].toInt();
         Q_EMIT targetBuildNumberChanged();
+
+        // We also set m_availableVersion here for consistency
+        // TODO: maybe drop exposing targetBuildNumber?
+        m_availableVersion = QString::number(m_targetBuildNumber);
+        Q_EMIT availableVersionChanged();
 
         m_channelName = result["channel_name"];
         Q_EMIT channelNameChanged();
@@ -195,6 +210,8 @@ void QSystemImage::initializeProperties() {
     } else {
         qWarning() << "Error when retrieving version information: " << reply.error();
     }
+    qWarning() << "QSystemImage: m_currentBuildNumber" << m_currentBuildNumber;
+    qWarning() << "QSystemImage: m_targetBuildNumber" << m_targetBuildNumber;
 }
 
 bool QSystemImage::getIsTargetNewer() const {
@@ -215,6 +232,31 @@ QDateTime QSystemImage::lastUpdateDate() const {
 
 QDateTime QSystemImage::lastCheckDate() const {
     return m_lastCheckDate;
+}
+
+bool QSystemImage::updateAvailable()
+{
+    return m_updateAvailable;
+}
+
+bool QSystemImage::downloading()
+{
+    return m_downloading;
+}
+
+QString QSystemImage::availableVersion()
+{
+    return m_availableVersion;
+}
+
+int QSystemImage::updateSize()
+{
+    return m_updateSize;
+}
+
+QString QSystemImage::errorReason()
+{
+    return m_errorReason;
 }
 
 int QSystemImage::currentBuildNumber() const {
@@ -285,35 +327,43 @@ void QSystemImage::settingsChanged(const QString &key, const QString &newvalue) 
     }
 }
 
-// void QSystemImage::ProcessAvailableStatus(bool isAvailable,
-//                                           bool downloading,
-//                                           QString availableVersion,
-//                                           int updateSize,
-//                                           QString lastUpdateDate,
-//                                           QString errorReason)
-// {
-//     // update = new Update(this);
-//     // QString packageName(UBUNTU_PACKAGE_NAME);
-//     // update->initializeApplication(packageName, "Ubuntu",
-//     //                               QString::number(this->currentBuildNumber()));
+void QSystemImage::availableStatusChanged(const bool isAvailable,
+                                          const bool downloading,
+                                          const QString &availableVersion,
+                                          const int &updateSize,
+                                          const QString &lastUpdateDate,
+                                          const QString &errorReason)
+{
 
-//     // update->QSystemImage(true);
-//     // update->setRemoteVersion(availableVersion);
-//     // update->setBinaryFilesize(updateSize);
-//     // update->setError(errorReason);
-//     // update->setUpdateState(downloading);
-//     // update->setSelected(downloading);
-//     // update->setUpdateAvailable(isAvailable);
-//     // update->setLastUpdateDate(lastUpdateDate);
-//     // update->setIconUrl(QString("file:///usr/share/icons/suru/places/scalable/distributor-logo.svg"));
+    if (m_updateAvailable != isAvailable) {
+        m_updateAvailable = isAvailable;
+        Q_EMIT updateAvailableChanged();
+    }
 
-//     // if (update->updateRequired()) {
-//     //     Q_EMIT updateAvailable(packageName, update);
-//     // } else {
-//     //     Q_EMIT updateNotFound();
-//     // }
+    if (m_downloading != downloading) {
+        m_downloading = downloading;
+        Q_EMIT downloadingChanged();
+    }
 
-//     // if (downloading) {
-//     //     update->setSelected(true);
-//     // }
-// }
+    if (m_availableVersion != availableVersion) {
+        m_availableVersion = availableVersion;
+        Q_EMIT availableVersionChanged();
+    }
+
+    if (m_updateSize != updateSize) {
+        m_updateSize = updateSize;
+        Q_EMIT updateSizeChanged();
+    }
+
+    QDateTime lud = QDateTime::fromString(lastUpdateDate, Qt::ISODate);
+    if (m_lastUpdateDate != lud) {
+        m_lastUpdateDate = lud;
+        Q_EMIT lastUpdateDateChanged();
+    }
+
+    if (m_errorReason != errorReason) {
+        m_errorReason = errorReason;
+        Q_EMIT errorReasonChanged();
+    }
+}
+

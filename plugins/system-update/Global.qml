@@ -37,13 +37,6 @@ Item {
 
     clip: true
 
-    states: [
-        State {
-            name: "centered"
-            when: centered
-        }
-    ]
-
     Behavior on height {
         UbuntuNumberAnimation {}
     }

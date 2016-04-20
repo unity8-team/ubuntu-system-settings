@@ -47,6 +47,7 @@ public:
         Installable,
         InstallableWithRestart,
         Pausable,
+        Resumable,
         NonPausable,
         Retriable
     };
@@ -108,13 +109,12 @@ public:
 
     ManagerStatus managerStatus() const;
 
+    Q_INVOKABLE void checkForUpdates();
+    Q_INVOKABLE void cancelCheckForUpdates();
+
 protected:
     explicit UpdateManager(QObject *parent = 0);
     ~UpdateManager();
-
-public slots:
-    void checkForUpdates();
-    void cancelCheckForUpdates();
 
 private slots:
     void onClickUpdateAvailable(

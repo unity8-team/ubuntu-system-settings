@@ -20,5 +20,44 @@ import QtQuick 2.4
 import Ubuntu.SystemSettings.Update 1.0
 
 Update {
+    id: update
     property var systemImageBackend
+
+    name: "Ubuntu"
+    version: systemImageBackend.availableVersion
+    size: systemImageBackend.updateSize
+    iconUrl: "file:///usr/share/icons/suru/places/scalable/distributor-logo.svg"
+
+    // onRetry: modelData.start();
+    onDownload: systemImageBackend.downloadUpdate();
+    onPause: systemImageBackend.pauseDownload();
+    onInstall: systemImageBackend.applyUpdate();
+
+    Connections {
+        target: systemImageBackend
+        onDownloadStarted: {
+            update.progress = -1;
+            update.status = UpdateManager.ManuallyDownloading;
+            update.mode = UpdateManager.Pausable;
+        }
+        onUpdateProgress: {
+            update.progress = percentage;
+            update.status = UpdateManager.ManuallyDownloading;
+            update.mode = UpdateManager.Pausable;
+        }
+        onUpdatePaused: {
+            update.progress = percentage;
+            update.status = UpdateManager.DownloadPaused;
+            update.mode = UpdateManager.Resumable;
+        }
+        onUpdateDownloaded: {
+            update.status = UpdateManager.NotStarted;
+            update.mode = UpdateManager.InstallableWithRestart;
+        }
+        onUpdateFailed: {
+            update.status = UpdateManager.Failed;
+            update.mode = UpdateManager.Retriable;
+            update.setError(i18n.tr("Download failed"), last_reason);
+        }
+    }
 }

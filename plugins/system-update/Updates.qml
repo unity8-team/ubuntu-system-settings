@@ -48,6 +48,13 @@ Column {
     property int managerStatus
 
     /*!
+        \qmlproperty int updatesCount
+
+        Amount of updates.
+    */
+    property int updatesCount
+
+    /*!
         \qmlproperty bool authenticated
 
         Indicates whether or not the user is authenticated.
@@ -84,8 +91,34 @@ Column {
     */
     signal requestAuthentication()
 
+    /*!
+        \qmlsignal stop
+
+        Indicates that the user wants some action to stop.
+        Note: Currently this is only implemented for checks.
+    */
+    signal stop()
+
+    Global {
+        id: glob
+        anchors {
+            left: parent.left
+            right: parent.right
+            margins: units.gu(2)
+        }
+
+        height: hidden ? 0 : units.gu(6)
+        managerStatus: updates.managerStatus
+        requireRestart: updates.haveSystemUpdate
+        updatesCount: updates.updatesCount
+        online: updates.online
+
+        onStop: updates.stop()
+    }
+
     ImageUpdate {
         id: imageUpdate
+        anchors { left: parent.left; right: parent.right }
         visible: updates.haveSystemUpdate
     }
 

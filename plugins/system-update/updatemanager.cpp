@@ -266,12 +266,21 @@ UpdateManager::ManagerStatus UpdateManager::managerStatus() const
 void UpdateManager::checkForUpdates()
 {
     if (!m_token.isValid()) {
-        qWarning() << "checkForUpdates checking creds";
+        qWarning() << "checkForUpdates checking creds...";
         m_ssoService.getCredentials();
     }
 
     m_systemImage->checkForUpdate();
-    m_clickUpChecker.check();
+
+
+    // Allow a click updates check to complete.
+    if (managerStatus() == Idle || managerStatus() == CheckingSystemUpdates) {
+        qWarning() << "manager: starting click updates check...";
+        m_clickUpChecker.check();
+    } else {
+        qWarning() << "manager: click updates check already in progress.";
+    }
+
     setManagerStatus(ManagerStatus::CheckingAllUpdates);
 }
 

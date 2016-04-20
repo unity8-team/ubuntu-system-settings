@@ -18,7 +18,7 @@
 
 import QtQuick 2.4
 
-ListView {
+Repeater {
     delegate: ClickUpdate {
         anchors { left: parent.left; right: parent.right }
     }

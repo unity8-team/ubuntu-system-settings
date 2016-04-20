@@ -110,10 +110,6 @@ ItemPage {
            otherwise the UI might end up in a situation where scrolling doesn't work */
         flickableDirection: Flickable.VerticalFlick
 
-        Label {
-            text: "downloads: " + Udm.downloads.length;
-        }
-
         Rectangle {
             color: "white"
             anchors.fill: parent
@@ -126,9 +122,9 @@ ItemPage {
                 wrapMode: Text.WordWrap
                 text: {
                     var s = UpdateManager.managerStatus;
-                    if (!g.online) {
+                    if (!UpdateManager.online) {
                         return i18n.tr("Connect to the Internet to check for updates.");
-                    } else if (s === UpdateManager.Idle && updatesCount === 0) {
+                    } else if (s === UpdateManager.Idle && UpdateManager.updatesCount === 0) {
                         return i18n.tr("Software is up to date");
                     } else if (s === UpdateManager.ServerError || s === UpdateManager.NetworkError) {
                         return i18n.tr("The update server is not responding. Try again later.");
@@ -147,6 +143,9 @@ ItemPage {
             managerStatus: UpdateManager.managerStatus
             online: UpdateManager.online
             systemImageBackend: UpdateManager.systemImageBackend
+            updatesCount: UpdateManager.updatesCount
+
+            onStop: UpdateManager.cancelCheckForUpdates()
         }
     }
 

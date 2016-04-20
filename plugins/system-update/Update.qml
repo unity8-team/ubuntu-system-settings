@@ -63,7 +63,6 @@ Item {
 
     Item {
         id: iconSlot
-
         anchors {
             top: update.top
             left: update.left
@@ -86,7 +85,6 @@ Item {
         id: topSlot
         height: units.gu(4)
         spacing: units.gu(1)
-
         anchors {
             left: iconSlot.right
             top: update.top
@@ -244,12 +242,13 @@ Item {
             }
         ]
 
-        transitions: Transition {
-            AnchorAnimation {
-                duration: UbuntuAnimation.FastDuration
-                easing: UbuntuAnimation.StandardEasing
-            }
-        }
+        // IMPROVE?
+        // transitions: Transition {
+        //     AnchorAnimation {
+        //         duration: UbuntuAnimation.FastDuration
+        //         easing: UbuntuAnimation.StandardEasing
+        //     }
+        // }
 
         RowLayout {
             id: expandableVersionLabel

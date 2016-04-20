@@ -27,6 +27,7 @@
 #include <QDBusInterface>
 #include <QDBusServiceWatcher>
 #include <QObject>
+#include <QDebug>
 #include <QtDBus>
 
 class QSystemImage : public QObject
@@ -57,6 +58,17 @@ public:
     Q_PROPERTY(QDateTime lastCheckDate READ lastCheckDate
                NOTIFY lastCheckDateChanged)
 
+    Q_PROPERTY(bool updateAvailable READ updateAvailable
+               NOTIFY updateAvailableChanged)
+    Q_PROPERTY(bool downloading READ downloading
+               NOTIFY downloadingChanged)
+    Q_PROPERTY(QString availableVersion READ availableVersion
+               NOTIFY availableVersionChanged)
+    Q_PROPERTY(int updateSize READ updateSize
+               NOTIFY updateSizeChanged)
+    Q_PROPERTY(QString errorReason READ errorReason
+               NOTIFY errorReasonChanged)
+
     int downloadMode();
     void setDownloadMode(const int &downloadMode);
 
@@ -71,13 +83,18 @@ public:
     QDateTime lastUpdateDate() const;
     QDateTime lastCheckDate() const;
 
+    bool updateAvailable();
+    bool downloading();
+    QString availableVersion();
+    int updateSize();
+    QString errorReason();
+
     Q_INVOKABLE void checkForUpdate();
     Q_INVOKABLE void downloadUpdate();
     Q_INVOKABLE void forceAllowGSMDownload();
     Q_INVOKABLE void applyUpdate();
     Q_INVOKABLE void cancelUpdate();
     Q_INVOKABLE void pauseDownload();
-    Q_INVOKABLE void checkTarget();
     Q_INVOKABLE void productionReset();
     Q_INVOKABLE void factoryReset();
     Q_INVOKABLE bool getIsTargetNewer() const;
@@ -94,6 +111,12 @@ signals:
     void lastUpdateDateChanged();
     void lastCheckDateChanged();
 
+    void updateAvailableChanged();
+    void downloadingChanged();
+    void availableVersionChanged();
+    void updateSizeChanged();
+    void errorReasonChanged();
+
     void downloadModeChanged();
     void updateNotFound();
     void updateProcessFailed(const QString &reason);
@@ -103,7 +126,6 @@ signals:
     void updateDownloaded();
     void downloadStarted();
     void updatePaused(const int &percentage);
-
     void updateAvailableStatus(bool,
                                bool,
                                QString,
@@ -116,6 +138,12 @@ signals:
 private slots:
     void slotNameOwnerChanged(const QString&, const QString&, const QString&);
     void settingsChanged(const QString &key, const QString &newvalue);
+    void availableStatusChanged(const bool isAvailable,
+                                const bool downloading,
+                                const QString &availableVersion,
+                                const int &updateSize,
+                                const QString &lastUpdateDate,
+                                const QString &errorReason);
 
 private:
     int m_currentBuildNumber;
@@ -129,10 +157,15 @@ private:
     QDateTime m_lastCheckDate;
     QString m_channelName;
     int m_targetBuildNumber;
-    QString m_objectPath;
     QString m_deviceName;
 
-    // Synchronously initialize pertinent properties.
+    bool m_updateAvailable;
+    bool m_downloading;
+    QString m_availableVersion;
+    int m_updateSize;
+    QString m_errorReason;
+
+    // Synchronously initialize properties from the Information call.
     void initializeProperties();
     // Sets up connections on the DBus interface.
     void setUpInterface();

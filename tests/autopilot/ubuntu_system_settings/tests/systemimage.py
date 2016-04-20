@@ -36,18 +36,6 @@ def load(mock, parameters):
         'update_available': _parameters.get('update_available', False)
     }
 
-    @dbus.service.signal(dbus_interface="%s.%s" % (
-        MAIN_IFACE, "UpdateAvailableStatus"
-    ), signature='bbsiss')
-    def UpdateAvailableStatus(self, is_available, downloading,
-                              available_version, update_size,
-                              last_update_date, error_reason):
-        print("FOOOOooooooooooOOoOo")
-
-    mock.EmitSignal(
-        MAIN_IFACE, 'UpdateAvailableStatus', 'bbsiss',
-        [mock.si_props['update_available'], False, '1000', 100, 'date', ''])
-
 
 @dbus.service.method(MAIN_IFACE,
                      in_signature='', out_signature='isssa{ss}')
@@ -92,8 +80,6 @@ def CheckForUpdate(self):
         MAIN_IFACE, 'UpdateAvailableStatus', 'bbsiss',
         [self.si_props['update_available'], False, '1000', 100, 'date', ''])
 
-    # UpdateAvailableStatus(self.si_props['update_available'],
-    #                       False, '2000', 100, 'date', '')
     print("CheckForUpdate   ")
 
 
