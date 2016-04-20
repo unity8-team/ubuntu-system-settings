@@ -268,7 +268,7 @@ QHash<int,QByteArray> DeviceModel::roleNames() const
 
     if (Q_UNLIKELY(names.empty())) {
         names[Qt::DisplayRole] = "displayName";
-        names[StateRole] = "stateName";
+        names[StateRole] = "state";
         names[AddressRole] = "addressName";
     }
 

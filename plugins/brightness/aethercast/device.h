@@ -46,7 +46,7 @@ struct Device: QObject
                READ getAddress
                NOTIFY addressChanged)
 
-    Q_PROPERTY(QString state
+    Q_PROPERTY(State state
                READ getState
                NOTIFY stateChanged)
 

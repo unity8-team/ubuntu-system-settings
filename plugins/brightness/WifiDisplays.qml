@@ -39,7 +39,7 @@ ItemPage {
             console.warn("Timer triggered");
             console.warn("ConnectedDevices: " + displays.connectedDevices.count);
             console.warn("DisconnectedDevices: " + displays.disconnectedDevices.count);
-            if (!displays.scanning && displays.state !== "connected") {
+            if (!displays.scanning && displays.state !== Device.Connected) {
                 console.warn("Initiating a scan");
                 displays.scan();
             }
@@ -89,10 +89,10 @@ ItemPage {
                     iconName: "video-display"
                     iconFrame: false
                     text: displayName
-                    subText: stateName
-                    enabled: stateName === "idle" || stateName === "connected" || stateName === "disconnected"
+                    subText: state
+                    enabled: state === Device.Idle || state === Device.Connected || state === Device.Disconnected
                     onClicked: {
-                        if (stateName === "connected")
+                        if (state === Device.Connected)
                             displays.disconnectDevice(addressName);
                         else
                             displays.connectDevice(addressName);
@@ -131,17 +131,16 @@ ItemPage {
                     iconName: "video-display"
                     iconFrame: false
                     text: displayName
-                    subText: stateName
-                    enabled: stateName === "idle" || stateName === "connected" || stateName === "disconnected"
+                    subText: state
+                    enabled: state === Device.Idle || state === Device.Connected || state === Device.Disconnected
                     onClicked: {
-                        if (stateName === "connected")
+                        if (state === Device.Connected)
                             displays.disconnectDevice(addressName);
                         else
                             displays.connectDevice(addressName);
                     }
                 }
             }
-
         }
     }
 }
