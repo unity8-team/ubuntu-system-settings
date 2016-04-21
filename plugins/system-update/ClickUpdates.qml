@@ -29,6 +29,7 @@ Column {
         delegate: ClickUpdate {
             anchors { left: parent.left; right: parent.right }
             onRequestedRetry: updates.requestedRetry(packageName)
+            formatter: Utilities.formatSize
         }
     }
 }

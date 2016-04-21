@@ -22,7 +22,7 @@ import Ubuntu.SystemSettings.Update 1.0
 Update {
     id: update
     property var systemImageBackend
-
+    formatter: Utilities.formatSize
     name: "Ubuntu"
     version: systemImageBackend.availableVersion
     size: systemImageBackend.updateSize

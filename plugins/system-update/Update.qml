@@ -43,7 +43,17 @@ Item {
     property alias changelog: changelogLabel.text
     property alias progress: progressBar.value
 
-    property var formatter: function (number) { return number }
+    // By Aliceljm [1]
+    // [1] http://stackoverflow.com/a/18650828/538866
+    property var formatter: function formatBytes(bytes,decimals) {
+        if (typeof decimals === 'undefined') decimals = 0;
+        if(bytes == 0) return '0 Byte';
+        var k = 1000; // or 1024 for binary
+        var dm = decimals + 1 || 3;
+        var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+        var i = Math.floor(Math.log(bytes) / Math.log(k));
+        return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + sizes[i];
+    }
 
     signal retry()
     signal download()
@@ -226,14 +236,14 @@ Item {
             minimumValue: 0
             maximumValue: 100
             showProgressPercentage: false
-            Layout.maximumWidth: units.gu(23)
+            Layout.fillWidth: true
             Layout.maximumHeight: units.gu(0.5)
         }
 
         Rectangle {
             id: progressBarInfo
-            Layout.fillWidth: true
             Layout.fillHeight: true
+            Layout.minimumWidth: units.gu(12)
             Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
         }
     }
@@ -306,7 +316,9 @@ Item {
                                parent: progressBarInfo }
                 PropertyChanges { target: sizeAndStatusLabel;
                                   width: progressBarInfo.width;
-                                  horizontalAlignment: Text.AlignRight }
+                                  horizontalAlignment: Text.AlignRight;
+                                  elide: Text.ElideRight }
+
             }
             verticalAlignment: Text.AlignVCenter
             Layout.fillHeight: true

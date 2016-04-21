@@ -27,7 +27,7 @@ import Ubuntu.SystemSettings.Update 1.0
 import "."
 
 Column {
-    width: units.gu(50)
+    width: units.gu(35)
     height: units.gu(90)
 
     Update {
