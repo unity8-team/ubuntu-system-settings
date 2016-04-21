@@ -226,6 +226,7 @@ void ClickUpdateChecker::processClickToken(const ClickUpdateMetadata *meta)
 void ClickUpdateChecker::completionCheck()
 {
     qWarning() << "click checker: checking for completion...";
+    qWarning() << "click checker: completion check had" << m_metas.keys().count() << "keys";
     // Check if all tokens are fetched.
     foreach (const QString &name, m_metas.keys()) {
         if (m_metas.value(name)->clickToken().isEmpty()) {
