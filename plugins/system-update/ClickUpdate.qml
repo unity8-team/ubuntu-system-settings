@@ -30,29 +30,16 @@ Update {
         packageName = modelData.metadata.custom["package-name"];
         console.warn("have package name", packageName);
     }
-    status: {
-        if (modelData.errorMessage) return UpdateManager.Failed;
-        if (modelData.isCompleted) return UpdateManager.Installed;
-        if (modelData.downloadInProgress) {
-            return modelData.downloading ? UpdateManager.ManuallyDownloading
-                : UpdateManager.DownloadPaused;
-        }
-        return UpdateManager.NotStarted;
-    }
-    mode: {
-        if (modelData.errorMessage) return UpdateManager.Retriable;
-        if (modelData.isCompleted) return UpdateManager.NonPausable;
-        if (modelData.downloadInProgress) {
-            return modelData.downloading ? UpdateManager.Pausable
-                : UpdateManager.Installable;
-        }
-        return UpdateManager.Installable;
-    }
+    // Initial status, mode
+    status: UpdateManager.NotStarted
+    mode: UpdateManager.Installable
+
     name: modelData.metadata.title
     version: modelData.metadata.custom.remoteVersion
     size: modelData.metadata.custom.binaryFilesize
     iconUrl: modelData.metadata.custom.iconUrl
     changelog: modelData.metadata.custom.changelog
+    progress: modelData.progress
 
     // If this failed, we tell our parents
     onRetry: requestedRetry(update.packageName)
@@ -63,9 +50,22 @@ Update {
 
     Connections {
         target: modelData
-        onErrorMessageChanged: update.setError(
-            i18n.tr("Download failed"), modelData.errorMessage
-        )
-        onFinished: console.warn('Download finished')
+        onErrorMessageChanged: {
+            update.setError(
+                i18n.tr("Download failed"), modelData.errorMessage
+            )
+            update.mode = UpdateManager.Retriable;
+            update.status = UpdateManager.Failed;
+        }
+        onFinished: {
+            console.warn('ClickUpdate Connections: Download finished')
+            update.mode = UpdateManager.NonPausable;
+            update.status = UpdateManager.Installed;
+        }
+        onProgressChanged: {
+            console.warn('ClickUpdate Connections: Progress changed', progress)
+            update.mode = UpdateManager.Pausable;
+            update.status = UpdateManager.ManuallyDownloading;
+        }
     }
 }
