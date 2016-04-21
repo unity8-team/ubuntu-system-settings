@@ -112,7 +112,7 @@ protected:
     virtual bool lessThan(const QModelIndex&, const QModelIndex&) const;
 
 private:
-    Device::States m_states = Device::Idle;
+    Device::States m_states = Device::State::Idle;
     bool m_statesEnabled = false;
 
 };
