@@ -72,7 +72,7 @@ ItemPage {
                 var metadataObj = mdt.createObject(UpdateManager, metadata);
                 var singleDownloadObj = sdl.createObject(UpdateManager, {
                     "url": url,
-                    "autoStart": false,
+                    "autoStart": autoStart,
                     "hash": hash,
                     "algorithm": algorithm,
                     "headers": headers,
@@ -80,7 +80,7 @@ ItemPage {
                 });
                 singleDownloadObj.download(url);
                 singleDownloadObj.errorFound.connect(function () {
-                    console.warn(this.errorMessage);
+                    console.warn("singledown err", this.errorMessage);
                 }.bind(singleDownloadObj));
             }
         }
@@ -146,6 +146,8 @@ ItemPage {
             updatesCount: UpdateManager.updatesCount
 
             onStop: UpdateManager.cancelCheckForUpdates()
+            onClickPackageRequestedRetry: UpdateManager.retryClickPackage(packageName);
+            Component.onDestruction: UpdateManager.cancelCheckForUpdates()
         }
     }
 

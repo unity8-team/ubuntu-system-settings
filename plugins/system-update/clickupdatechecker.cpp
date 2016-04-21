@@ -89,21 +89,27 @@ void ClickUpdateChecker::check()
         return;
     }
 
+    m_metas.clear();
+    setErrorString("");
+
     // Do we have cached data? If so, return it and mark the check as complete.
     if (m_apiCache.valid()) {
         qWarning() << "click checker: cache valid";
         foreach(const QSharedPointer<ClickUpdateMetadata> &meta, m_apiCache.read()){
             qWarning() << "click checker: cache had" << meta->name();
+            m_metas.insert(meta->name(), meta);
+
+            // For retries: set a token and store it for later.
+            meta->setToken(m_token);
+            initializeMeta(meta);
+
             Q_EMIT updateAvailable(meta);
         }
         Q_EMIT checkCompleted();
         return;
     }
+
     qWarning() << "click checker: cache invalid";
-
-    m_metas.clear();
-
-    setErrorString("");
 
     // Start process of getting the list of installed clicks.
     QStringList args("list");
@@ -112,6 +118,18 @@ void ClickUpdateChecker::check()
     m_process.start(command, args);
     if (!m_process.waitForStarted()) {
         handleProcessError(m_process.error());
+    }
+}
+
+void ClickUpdateChecker::check(const QString &packageName)
+{
+    qWarning() << "click checker: checking this one file" << packageName << "...";
+    if (m_metas.contains(packageName)) {
+        qWarning() << "click checker: requesting click token for" << packageName << "...";
+
+        // For now, assume this check means INSTALL!
+        m_metas.value(packageName)->setAutomatic(true);
+        m_metas.value(packageName)->requestClickToken();
     }
 }
 

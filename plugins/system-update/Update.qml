@@ -50,6 +50,25 @@ Item {
     signal pause()
     signal install()
 
+    states: State {
+        name: "done"; when: status === UpdateManager.Installed
+        PropertyChanges { target: update; height: 0; clip: true }
+    }
+
+    transitions: Transition {
+        from: ""; to: "done"
+        SequentialAnimation {
+            // Dummy, since PauseAniation is buggy here.
+            PropertyAnimation { property: "opacity"; duration: 2000 }
+            PropertyAnimation {
+                target: update
+                properties: "height"
+                duration: UbuntuAnimation.FastDuration
+                easing: UbuntuAnimation.StandardEasing
+            }
+        }
+    }
+
     function setError (title, detail) {
         errorTitle = title;
         errorDetail = detail;

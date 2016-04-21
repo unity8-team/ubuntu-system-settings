@@ -21,8 +21,14 @@ import Ubuntu.SystemSettings.Update 1.0
 
 Update {
     id: update
+    property string packageName
+
+    signal requestedRetry(string packageName)
+
     Component.onCompleted: {
         console.warn("ClickUpdate", modelData, modelData.metadata, modelData.metadata.title, modelData.metadata.custom.iconUrl);
+        packageName = modelData.metadata.custom["package-name"];
+        console.warn("have package name", packageName);
     }
     status: {
         if (modelData.errorMessage) return UpdateManager.Failed;
@@ -48,7 +54,9 @@ Update {
     iconUrl: modelData.metadata.custom.iconUrl
     changelog: modelData.metadata.custom.changelog
 
-    onRetry: modelData.start();
+    // If this failed, we tell our parents
+    onRetry: requestedRetry(update.packageName)
+
     onDownload: modelData.start();
     onPause: modelData.pause();
     onInstall: modelData.start();

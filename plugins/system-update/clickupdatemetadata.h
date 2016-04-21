@@ -74,8 +74,9 @@ public:
     Q_PROPERTY(QString localVersion READ localVersion
                WRITE setLocalVersion NOTIFY localVersionChanged)
     Q_PROPERTY(QString clickToken READ clickToken NOTIFY clickTokenChanged)
+    Q_PROPERTY(bool automatic READ automatic WRITE setAutomatic
+               NOTIFY automaticChanged)
 
-    QString clickToken() const;
     QString anonDownloadUrl() const;
     uint binaryFilesize() const;
     QString changelog() const;
@@ -94,8 +95,9 @@ public:
     QString title() const;
     QString remoteVersion() const;
     QString localVersion() const;
+    QString clickToken() const;
+    bool automatic() const;
 
-    void setClickToken(const QString &clickToken);
     void setAnonDownloadUrl(const QString &anonDownloadUrl);
     void setBinaryFilesize(const uint &binaryFilesize);
     void setChangelog(const QString &changelog);
@@ -114,9 +116,8 @@ public:
     void setTitle(const QString &title);
     void setRemoteVersion(const QString &version);
     void setLocalVersion(const QString &version);
-
-    // Abort any networking activity.
-    void cancel();
+    void setClickToken(const QString &clickToken);
+    void setAutomatic(const bool automatic);
 
     void requestClickToken();
     bool isUpdateRequired();
@@ -128,8 +129,6 @@ protected slots:
 //     void tokenRequestSucceeded(const QNetworkReply* reply);
 
 signals:
-    void clickTokenChanged();
-
     void anonDownloadUrlChanged();
     void binaryFilesizeChanged();
     void changelogChanged();
@@ -148,6 +147,8 @@ signals:
     void titleChanged();
     void remoteVersionChanged();
     void localVersionChanged();
+    void clickTokenChanged();
+    void automaticChanged();
 
     void clickTokenRequestSucceeded(const ClickUpdateMetadata *meta);
     void clickTokenRequestFailed();
@@ -172,6 +173,7 @@ private:
     QString m_title;
     QString m_localVersion;
     QString m_remoteVersion;
+    bool m_automatic;
 
 };
 

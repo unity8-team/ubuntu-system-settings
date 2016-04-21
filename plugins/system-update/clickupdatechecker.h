@@ -42,6 +42,10 @@ public:
     // Check for click updates.
     void check();
 
+    // Check for updates for this one package. Will try to refresh the
+    // click token.
+    void check(const QString &packageName);
+
     // Cancel check for click updates.
     void cancel();
 

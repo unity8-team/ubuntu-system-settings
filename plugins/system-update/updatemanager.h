@@ -57,7 +57,7 @@ public:
         CheckingClickUpdates,
         CheckingSystemUpdates,
         CheckingAllUpdates,
-        Working,
+        BatchMode, // Installing all updates
         NetworkError,
         ServerError
     };
@@ -112,6 +112,8 @@ public:
     Q_INVOKABLE void checkForUpdates();
     Q_INVOKABLE void cancelCheckForUpdates();
 
+    Q_INVOKABLE void retryClickPackage(const QString &packageName);
+
 protected:
     explicit UpdateManager(QObject *parent = 0);
     ~UpdateManager();
@@ -138,6 +140,9 @@ private slots:
 
 signals:
     void onlineChanged();
+    void connected();
+    void disconnected();
+
     void authenticatedChanged();
     void haveSufficientPowerChanged();
     void haveSystemUpdateChanged();
@@ -148,7 +153,8 @@ signals:
                           const QString &hash,
                           const QString &algorithm,
                           const QVariantMap &metadata,
-                          const QVariantMap &headers);
+                          const QVariantMap &headers,
+                          const bool autoStart);
 
 private:
     static UpdateManager *m_instance;

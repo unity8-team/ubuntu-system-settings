@@ -18,8 +18,17 @@
 
 import QtQuick 2.4
 
-Repeater {
-    delegate: ClickUpdate {
+Column {
+    id: updates
+    signal requestedRetry(string packageName)
+    height: rep.contentHeight
+    property alias model: rep.model
+    Repeater {
         anchors { left: parent.left; right: parent.right }
+        id: rep
+        delegate: ClickUpdate {
+            anchors { left: parent.left; right: parent.right }
+            onRequestedRetry: updates.requestedRetry(packageName)
+        }
     }
 }

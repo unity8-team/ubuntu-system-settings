@@ -43,10 +43,13 @@ UpdateManager::UpdateManager(QObject *parent):
     m_updatesCount(-1),
     m_clickUpdatesCount(0),
     m_systemUpdatesCount(0),
-    m_managerStatus(ManagerStatus::Idle),
+    m_managerStatus(ManagerStatus::CheckingAllUpdates),
     m_systemImage(nullptr),
     m_token(UbuntuOne::Token())
 {
+    connect(this, SIGNAL(connected()), this, SLOT(checkForUpdates()));
+    connect(this, SIGNAL(disconnected()), this, SLOT(cancelCheckForUpdates()));
+
     // qWarning() << "trace a";
     initializeSystemImage();
     // qWarning() << "trace b";
@@ -183,16 +186,13 @@ bool UpdateManager::online() const
 
 void UpdateManager::setOnline(const bool online)
 {
-    qWarning() << "sat online" << online;
     if (online != m_online) {
+        qWarning() << "manager: online change:" << online;
         m_online = online;
         Q_EMIT onlineChanged();
-    }
 
-    if (m_online) {
-        checkForUpdates();
-    } else {
-        cancelCheckForUpdates();
+        if (online) Q_EMIT connected();
+        if (!online) Q_EMIT disconnected();
     }
 }
 
@@ -265,122 +265,55 @@ UpdateManager::ManagerStatus UpdateManager::managerStatus() const
 
 void UpdateManager::checkForUpdates()
 {
-    if (!m_token.isValid()) {
-        qWarning() << "checkForUpdates checking creds...";
-        m_ssoService.getCredentials();
-    }
-
+    qWarning() << "manager: check";
     m_systemImage->checkForUpdate();
+    setManagerStatus(ManagerStatus::CheckingSystemUpdates);
 
-
-    // Allow a click updates check to complete.
-    if (managerStatus() == Idle || managerStatus() == CheckingSystemUpdates) {
-        qWarning() << "manager: starting click updates check...";
-        m_clickUpChecker.check();
-    } else {
-        qWarning() << "manager: click updates check already in progress.";
+    // Don't check for click updates if there are no credentials.
+    if (!m_token.isValid()) {
+        m_ssoService.getCredentials();
+        return;
     }
 
-    setManagerStatus(ManagerStatus::CheckingAllUpdates);
+    // Start a click update check only if none in progress.
+    if (managerStatus() == ManagerStatus::Idle
+        || managerStatus() == ManagerStatus::CheckingSystemUpdates) {
+        setManagerStatus(ManagerStatus::CheckingAllUpdates);
+        m_clickUpChecker.check();
+    }
 }
 
 void UpdateManager::cancelCheckForUpdates()
 {
-    m_systemImage->cancelUpdate();
     m_clickUpChecker.cancel();
     setManagerStatus(ManagerStatus::Idle);
 }
 
-void UpdateManager::setManagerStatus(const UpdateManager::ManagerStatus &status)
+void UpdateManager::setManagerStatus(const ManagerStatus &status)
 {
     if (m_managerStatus != status) {
         m_managerStatus = status;
         Q_EMIT managerStatusChanged();
     }
-    QString s;
-    switch(m_managerStatus) {
-    case Idle:
-        s = "Idle"; break;
-    case CheckingClickUpdates:
-        s = "CheckingClickUpdates"; break;
-    case CheckingSystemUpdates:
-        s = "CheckingSystemUpdates"; break;
-    case CheckingAllUpdates:
-        s = "CheckingAllUpdates"; break;
-    case NetworkError:
-        s = "NetworkError"; break;
-    case ServerError:
-        s = "ServerError"; break;
-    }
-    qWarning() << "manager: status now" << s;
+    // QString s;
+    // switch(m_managerStatus) {
+    // case ManagerStatus::Idle:
+    //     s = "Idle"; break;
+    // case ManagerStatus::CheckingClickUpdates:
+    //     s = "CheckingClickUpdates"; break;
+    // case ManagerStatus::CheckingSystemUpdates:
+    //     s = "CheckingSystemUpdates"; break;
+    // case ManagerStatus::CheckingAllUpdates:
+    //     s = "CheckingAllUpdates"; break;
+    // case ManagerStatus::BatchMode:
+    //     s = "BatchMode"; break;
+    // case ManagerStatus::NetworkError:
+    //     s = "NetworkError"; break;
+    // case ManagerStatus::ServerError:
+    //     s = "ServerError"; break;
+    // }
+    // qWarning() << "manager: status now" << s;
 }
-
-// bool UpdateManager::clickUpdateInUdm(const QSharedPointer<ClickUpdateMetadata> &meta) const
-// {
-//     foreach(const QSharedPointer<Ubuntu::DownloadManager::Download> download, m_clickDownloadsList) {
-//         // qWarning() << download.data()->title();
-//         qWarning() << "had download" << download;
-//         if (getPackageName(download) == meta->name()) {
-//             qWarning() << "found it!" << meta->name();
-//             return true;
-//         }
-//         // SingleDownload* singleDownload = new SingleDownload(this);
-//         // singleDownload->bindDownload(download.data());
-//         // if (download.data()->state() == Download::UNCOLLECTED && !download.data()->filePath().isEmpty()) {
-//         //     emit singleDownload->finished(download.data()->filePath());
-//         // }
-//     }
-//     // bool found = false;
-//     // if (meta.isNull()) {
-//     //     qWarning() << "we lost meta";
-//     //     return false;
-//     // }
-//     // qWarning() << "manager: clickUpdateInUdm check on" << meta->name() << "...";
-//     // if (!m_udm) {
-//     //     qWarning() << "we no longer have UDM";
-//     //     return false;
-//     // }
-//     // QQmlProperty downloads(m_udm, "downloads");
-//     // if (!downloads.isValid()) {
-//     //     qWarning() << "downloads is not valid!";
-//     //     return false;
-//     // }
-
-//     // foreach(const QVariant &v, downloads.read().toList()) {
-//     //     if (v == NULL) {
-//     //         qWarning() << "-------------- v was deleted";
-//     //         continue;
-//     //     }
-//     //     if (v.isNull()) {
-//     //         qWarning() << "got null qvariant";
-//     //         continue;
-//     //     }
-//     //     if (!v.isValid()) {
-//     //         qWarning() << "got invalid qvariant";
-//     //         continue;
-//     //     }
-
-//     //     if (!v.canConvert<QObject*>()) {
-//     //         qWarning() << "could not convert, is" << v.typeName();
-//     //         continue;
-//     //     }
-//     //     QObject *download = v.value<QObject*>();
-//     //     qWarning() << "manager: clickUpdateInUdm in foreach";
-//     //     QObject *downloadMeta = download->property("metadata").value<QObject*>();
-//     //     qWarning() << "manager: clickUpdateInUdm has meta" << downloadMeta;
-//     //     QVariantMap custom = downloadMeta->property("custom").toMap();
-//     //     if (!custom.contains("package-name")) {
-//     //         qWarning() << "no package-name";
-//     //         continue;
-//     //     }
-
-//     //     if (custom.value("package-name") == meta->name()) {
-//     //         qWarning() << "found it!" << meta->name();
-//     //         return true;
-//     //     }
-//     // }
-//     // return found;
-// }
 
 void UpdateManager::onClickUpdateAvailable(const QSharedPointer<ClickUpdateMetadata> &meta)
 {
@@ -408,9 +341,14 @@ void UpdateManager::createClickUpdateDownload(const QSharedPointer<ClickUpdateMe
     metadata["command"] = command;
     metadata["title"] = meta->title();
     metadata["showInIndicator"] = false;
+    metadata["downloadUrl"] = meta->downloadUrl();
     qWarning() << "manager: create click download" << meta->downloadUrl() << meta->downloadSha512() << metadata << headers;
     Q_EMIT clickUpdateReady(meta->downloadUrl(), meta->downloadSha512(),
-                            "sha512", metadata, headers);
+                            "sha512", metadata, headers, meta->automatic());
+}
+
+void UpdateManager::retryClickPackage(const QString &packageName) {
+    m_clickUpChecker.check(packageName);
 }
 
 void UpdateManager::handleCredentialsFound(const UbuntuOne::Token &token)
@@ -426,9 +364,10 @@ void UpdateManager::handleCredentialsFound(const UbuntuOne::Token &token)
 
     setAuthenticated(true);
 
-    // Set click update checker's token, and start a check.
+    // Set click update checker's token, cancel and start a new check.
     m_clickUpChecker.setToken(token);
-    m_clickUpChecker.check();
+    m_clickUpChecker.cancel();
+    checkForUpdates();
 }
 
 void UpdateManager::handleCredentialsFailed()
@@ -471,9 +410,30 @@ void UpdateManager::handleSiAvailableStatus(const bool isAvailable,
 void UpdateManager::onClickCheckCompleted()
 {
     qWarning() << "manager: click check completed";
+    QString s;
+    switch(m_managerStatus) {
+    case ManagerStatus::Idle:
+        s = "Idle"; break;
+    case ManagerStatus::CheckingClickUpdates:
+        s = "CheckingClickUpdates"; break;
+    case ManagerStatus::CheckingSystemUpdates:
+        s = "CheckingSystemUpdates"; break;
+    case ManagerStatus::CheckingAllUpdates:
+        s = "CheckingAllUpdates"; break;
+    case ManagerStatus::BatchMode:
+        s = "BatchMode"; break;
+    case ManagerStatus::NetworkError:
+        s = "NetworkError"; break;
+    case ManagerStatus::ServerError:
+        s = "ServerError"; break;
+    }
+    qWarning() << "manager: click check completed status:" << s;
+
     if (m_managerStatus == ManagerStatus::CheckingAllUpdates) {
+        qWarning() << "manager: wanted to set to CheckingSystemUpdates";
         setManagerStatus(ManagerStatus::CheckingSystemUpdates);
     } else if (m_managerStatus == ManagerStatus::CheckingClickUpdates) {
+        qWarning() << "manager: wanted to set to ClickUpdates";
         setManagerStatus(ManagerStatus::Idle);
     }
 }

@@ -44,7 +44,8 @@ ClickUpdateMetadata::ClickUpdateMetadata(QObject *parent):
     m_status(""),
     m_title(""),
     m_localVersion(""),
-    m_remoteVersion("")
+    m_remoteVersion(""),
+    m_automatic(false)
 {
 }
 
@@ -326,6 +327,19 @@ void ClickUpdateMetadata::requestClickToken()
 
     QNetworkReply *reply = m_nam.head(request);
     initializeReply(reply);
+}
+
+bool ClickUpdateMetadata::automatic() const
+{
+    return m_automatic;
+}
+
+void ClickUpdateMetadata::setAutomatic(const bool automatic)
+{
+    if (m_automatic != automatic) {
+        m_automatic = automatic;
+        Q_EMIT automaticChanged();
+    }
 }
 
 void ClickUpdateMetadata::requestSucceeded(QNetworkReply *reply)

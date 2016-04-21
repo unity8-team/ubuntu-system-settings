@@ -20,6 +20,7 @@
 
 import QtQuick 2.4
 import Ubuntu.Components 1.3
+import Ubuntu.SystemSettings.Update 1.0
 
 Column {
     id: updates
@@ -99,6 +100,15 @@ Column {
     */
     signal stop()
 
+    /*!
+        \qmlsignal clickPackageRequestedRetry(string packageName)
+
+        Indicates that the click package should be retried.
+    */
+    signal clickPackageRequestedRetry(string packageName)
+
+
+
     Global {
         id: glob
         anchors {
@@ -119,13 +129,16 @@ Column {
     ImageUpdate {
         id: imageUpdate
         anchors { left: parent.left; right: parent.right }
-        visible: updates.haveSystemUpdate
+        visible: (updates.haveSystemUpdate
+                  && updates.managerStatus === UpdateManager.Idle)
     }
 
     ClickUpdates {
         id: clickUpdates
         anchors { left: parent.left; right: parent.right }
-        visible: authenticated
+        visible: (authenticated
+                  && updates.managerStatus === UpdateManager.Idle)
+        onRequestedRetry: clickPackageRequestedRetry(packageName)
     }
 
     NotAuthenticatedNotification {

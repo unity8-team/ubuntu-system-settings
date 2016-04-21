@@ -29,7 +29,7 @@ Item {
     property bool online: false
 
     // Indicate whether or not this component should be displayed
-    property bool hidden: updatesCount === 1
+    property bool hidden: updatesCount === 1 && managerStatus === UpdateManager.Idle
 
     signal stop()
     signal pause()
@@ -60,7 +60,7 @@ Item {
         }
 
         ActivityIndicator {
-            running: true
+            running: parent.visible
         }
 
         Label {

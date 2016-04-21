@@ -30,7 +30,7 @@ DownloadManager {
         console.warn('UDM is being destroyed...');
         for (var i=0;i<clickPackageDownloads.length; i++) {
             var cpd = clickPackageDownloads[i];
-            if (cpd.downloading || cpd.isCompleted || cpd.downloadInProgress) continue;
+            if (cpd.isCompleted || cpd.downloadInProgress) continue;
             clickPackageDownloads[i].cancel();
         }
         console.warn('Cancelled idle downloads.');

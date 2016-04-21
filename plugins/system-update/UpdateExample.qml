@@ -51,7 +51,14 @@ Column {
         progress: 50
         mode: UpdateManager.Installable
         status: UpdateManager.NotStarted
-        onInstall: status = UpdateManager.Installing
+        onInstall: {
+            if (status == UpdateManager.NotStarted) {
+                status = UpdateManager.Installing
+            } else if (status == UpdateManager.Installing) {
+                status = UpdateManager.Installed
+                mode = UpdateManager.NonPausable
+           }
+       }
     }
     Update {
         anchors { left: parent.left; right: parent.right }
