@@ -312,7 +312,7 @@ void ClickUpdateMetadata::requestClickToken()
     qWarning() << "click meta:" << name() << "requests token...";
     if (!m_token.isValid()) {
         qWarning() << "click meta:" << name() << "token invalid";
-        Q_EMIT clickTokenRequestFailed();
+        Q_EMIT credentialError();
         return;
     }
 
@@ -351,7 +351,7 @@ void ClickUpdateMetadata::requestSucceeded(QNetworkReply *reply)
         qWarning() << "setting click token to" << header;
         setClickToken(header);
     } else {
-        Q_EMIT clickTokenRequestFailed();
+        Q_EMIT clickTokenRequestFailed(this);
     }
     reply->deleteLater();
 }

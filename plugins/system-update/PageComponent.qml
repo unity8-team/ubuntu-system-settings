@@ -96,6 +96,31 @@ ItemPage {
     //     }
     // }
 
+    Rectangle {
+        color: "white"
+        anchors.fill: parent
+        visible: placeholder.text
+
+        Label {
+            id: placeholder
+            anchors.fill: parent
+            verticalAlignment: Text.AlignVCenter
+            horizontalAlignment: Text.AlignHCenter
+            wrapMode: Text.WordWrap
+            text: {
+                var s = UpdateManager.managerStatus;
+                if (!UpdateManager.online) {
+                    return i18n.tr("Connect to the Internet to check for updates.");
+                } else if (s === UpdateManager.Idle && UpdateManager.updatesCount === 0) {
+                    return i18n.tr("Software is up to date");
+                } else if (s === UpdateManager.ServerError || s === UpdateManager.NetworkError) {
+                    return i18n.tr("The update server is not responding. Try again later.");
+                }
+                return "";
+            }
+        }
+    }
+
     Flickable {
         id: scrollWidget
 
@@ -109,30 +134,6 @@ ItemPage {
         /* Set the direction to workaround https://bugreports.qt-project.org/browse/QTBUG-31905
            otherwise the UI might end up in a situation where scrolling doesn't work */
         flickableDirection: Flickable.VerticalFlick
-
-        Rectangle {
-            color: "white"
-            anchors.fill: parent
-            visible: placeholder.text
-
-            Label {
-                id: placeholder
-                anchors.fill: parent
-                verticalAlignment: Text.AlignVCenter
-                wrapMode: Text.WordWrap
-                text: {
-                    var s = UpdateManager.managerStatus;
-                    if (!UpdateManager.online) {
-                        return i18n.tr("Connect to the Internet to check for updates.");
-                    } else if (s === UpdateManager.Idle && UpdateManager.updatesCount === 0) {
-                        return i18n.tr("Software is up to date");
-                    } else if (s === UpdateManager.ServerError || s === UpdateManager.NetworkError) {
-                        return i18n.tr("The update server is not responding. Try again later.");
-                    }
-                    return "";
-                }
-            }
-        }
 
         Updates {
             anchors { left: parent.left; right: parent.right }

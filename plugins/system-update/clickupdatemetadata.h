@@ -151,7 +151,7 @@ signals:
     void automaticChanged();
 
     void clickTokenRequestSucceeded(const ClickUpdateMetadata *meta);
-    void clickTokenRequestFailed();
+    void clickTokenRequestFailed(const ClickUpdateMetadata *meta);
 
 private:
     QString m_clickToken;

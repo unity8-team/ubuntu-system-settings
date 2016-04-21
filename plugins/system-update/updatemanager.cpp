@@ -27,11 +27,9 @@ UpdateManager *UpdateManager::m_instance = 0;
 
 UpdateManager *UpdateManager::instance()
 {
-    // qWarning() << "trace instance1";
     if (!m_instance)
         m_instance = new UpdateManager;
 
-    // qWarning() << "trace instance2";
     return m_instance;
 }
 
@@ -50,13 +48,9 @@ UpdateManager::UpdateManager(QObject *parent):
     connect(this, SIGNAL(connected()), this, SLOT(checkForUpdates()));
     connect(this, SIGNAL(disconnected()), this, SLOT(cancelCheckForUpdates()));
 
-    // qWarning() << "trace a";
     initializeSystemImage();
-    // qWarning() << "trace b";
     initializeClickUpdateChecker();
-    // qWarning() << "trace c";
     initializeSSOService();
-    // qWarning() << "trace c9";
     // initializeUdm();
 
     calculateUpdatesCount();
@@ -135,47 +129,21 @@ void UpdateManager::initializeClickUpdateChecker()
 
 void UpdateManager::initializeSSOService()
 {
-    // qWarning() << "trace c0";
     connect(&m_ssoService, SIGNAL(credentialsFound(const Token&)),
             this, SLOT(handleCredentialsFound(const Token&))
     );
-    // qWarning() << "trace c1";
     connect(&m_ssoService, SIGNAL(credentialsNotFound()),
             this, SLOT(handleCredentialsFailed())
     );
-    // qWarning() << "trace c2";
     connect(&m_ssoService, SIGNAL(credentialsDeleted()),
             this, SLOT(handleCredentialsFailed())
     );
-    // qWarning() << "trace c3";
 }
 
 
 void UpdateManager::initializeUdm()
 {
-    // qWarning() << "uman init udm";
-    // if (m_udm == nullptr) {
-    //     m_udm = Ubuntu::DownloadManager::Manager::createSessionManager("", this);
-    // }
 
-    // connect(m_udm, &Ubuntu::DownloadManager::Manager::downloadsFound,
-    //         this, &UpdateManager::onDownloadsFound);
-
-    // auto environment = QProcessEnvironment::systemEnvironment();
-    // if (environment.contains("APP_ID")) {
-    //     m_appId = environment.value("APP_ID");
-    // } else {
-    //     m_appId = QCoreApplication::applicationFilePath();
-    // }
-
-    // m_udm->getAllDownloads("", true);
-
-    // connect(m_udm, SIGNAL(downloadsChanged()),
-    //         this, SLOT(updateClickUpdatesCount()));
-    // qWarning() << "trace g";
-
-    // updateClickUpdatesCount();
-    // qWarning() << "trace h";
 }
 
 
@@ -238,13 +206,10 @@ int UpdateManager::updatesCount() const
 }
 
 void UpdateManager::calculateUpdatesCount() {
-    // qWarning() << "trace 4";
     int newCount = m_clickUpdatesCount + m_systemUpdatesCount;
     if (newCount != m_updatesCount) {
         m_updatesCount = newCount;
-        // qWarning() << "trace 1";
         Q_EMIT updatesCountChanged();
-        // qWarning() << "trace 3";
     }
 }
 

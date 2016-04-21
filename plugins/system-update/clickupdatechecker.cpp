@@ -48,8 +48,8 @@ void ClickUpdateChecker::initializeMeta(const QSharedPointer<ClickUpdateMetadata
                      this, SIGNAL(credentialError()));
     QObject::connect(meta.data(), SIGNAL(clickTokenRequestSucceeded(const ClickUpdateMetadata*)),
                      this, SLOT(processClickToken(const ClickUpdateMetadata*)));
-    QObject::connect(meta.data(), SIGNAL(clickTokenRequestFailed()),
-                     this, SLOT(handleClickTokenFailure()));
+    QObject::connect(meta.data(), SIGNAL(clickTokenRequestFailed(const ClickUpdateMetadata*)),
+                     this, SLOT(handleClickTokenFailure(const ClickUpdateMetadata*)));
 }
 
 void ClickUpdateChecker::initializeProcess()
@@ -220,9 +220,16 @@ void ClickUpdateChecker::processClickToken(const ClickUpdateMetadata *meta)
     // Pass the shared pointer instead.
     Q_EMIT updateAvailable(m_metas.value(meta->name()));
 
+    completionCheck();
+}
+
+void ClickUpdateChecker::completionCheck()
+{
+    qWarning() << "click checker: checking for completion...";
     // Check if all tokens are fetched.
     foreach (const QString &name, m_metas.keys()) {
         if (m_metas.value(name)->clickToken().isEmpty()) {
+            qWarning() << "click checker: not complete.";
             return; // Not done.
         }
     }
@@ -231,11 +238,13 @@ void ClickUpdateChecker::processClickToken(const ClickUpdateMetadata *meta)
 
     // All metas had signed download urls, so we're done.
     Q_EMIT checkCompleted();
+    qWarning() << "click checker: complete.";
 }
 
 void ClickUpdateChecker::handleClickTokenFailure(const ClickUpdateMetadata *meta)
 {
     m_metas.remove(meta->name());
+    completionCheck();
 }
 
 void ClickUpdateChecker::requestClickMetadata()
@@ -330,6 +339,10 @@ void ClickUpdateChecker::parseClickMetadata(const QJsonArray &array)
                 // Start the process of obtaining a click token for this
                 // click update.
                 meta->requestClickToken();
+            } else {
+                // Update not required, let's remove it.
+                m_metas.remove(meta->name());
+                completionCheck();
             }
         }
     }

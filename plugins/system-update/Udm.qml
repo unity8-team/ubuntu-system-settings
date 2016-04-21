@@ -12,6 +12,7 @@ DownloadManager {
                 dls.push(udm.downloads[i]);
             }
         }
+        console.warn('UDM clickPackageDownloads changed', dls.length);
         return dls;
     }
 
@@ -35,7 +36,7 @@ DownloadManager {
         }
         console.warn('Cancelled idle downloads.');
     }
-
+    onDownloadsChanged: console.warn('udm downloads changed', downloads.length);
     onDownloadFinished: console.warn('udm download finished', download, path);
     onErrorFound: console.warn('udm download error', download);
 }

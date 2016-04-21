@@ -85,6 +85,9 @@ private:
     // TODO: Make this more obvious.
     void parseClickMetadata(const QJsonArray &array);
 
+    // Assert completion of check, signalling if check complete.
+    void completionCheck();
+
     QProcess m_process;
     QHash<QString, QSharedPointer<ClickUpdateMetadata> > m_metas;
     ClickApiCache m_apiCache;
