@@ -141,13 +141,6 @@ void DeviceModel::setProperties(const QMap<QString,QVariant> &properties)
 void DeviceModel::updateProperty(const QString &key, const QVariant &value)
 {
     qWarning() << Q_FUNC_INFO << key << ":" << value;
-    /*
-    if (key == "Name") {
-        m_adapterName = value.toString();
-    } else if (key == "Address") {
-        m_adapterAddress = value.toString();
-    }
-    */
 }
 
 void DeviceModel::slotPropertyChanged(const QString      &key,
@@ -336,7 +329,7 @@ bool DeviceFilter::filterAcceptsRow(int sourceRow,
     if (accepts && m_statesEnabled) {
         const int state = childIndex.model()->data(childIndex, DeviceModel::StateRole).value<int>();
         accepts = (m_states & state) != 0;
-        qWarning() << Q_FUNC_INFO << "m_states:" << m_states << "state:" << state;
+        qWarning() << Q_FUNC_INFO << "m_states:" << m_states << "state:" << state << "accepts:" << accepts;
     }
 
     return accepts;

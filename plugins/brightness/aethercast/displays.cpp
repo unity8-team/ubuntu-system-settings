@@ -59,10 +59,12 @@ Displays::Displays(const QDBusConnection &dbus, QObject *parent):
         watcher->deleteLater();
     });
 
-    m_connectedDevices.filterOnStates(Device::State::Connected | Device::State::Configuration);
+    m_connectedDevices.filterOnStates(Device::State::Connected |
+                                      Device::State::Configuration);
     m_connectedDevices.setSourceModel(&m_devices);
 
-    m_disconnectedDevices.filterOnStates(Device::State::Disconnected | Device::State::Idle);
+    m_disconnectedDevices.filterOnStates(Device::State::Disconnected |
+                                         Device::State::Idle);
     m_disconnectedDevices.setSourceModel(&m_devices);
 }
 
