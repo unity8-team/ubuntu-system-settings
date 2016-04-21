@@ -319,6 +319,7 @@ void ClickUpdateChecker::parseClickMetadata(const QJsonArray &array)
             QSharedPointer<ClickUpdateMetadata> meta = m_metas.value(name);
             meta->setRemoteVersion(version);
             if (meta->isUpdateRequired()) {
+                qWarning() << "click checker: update of" << meta->name() << "is required";
                 meta->setIconUrl(icon_url);
                 meta->setDownloadUrl(url);
                 meta->setBinaryFilesize(size);
