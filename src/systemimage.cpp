@@ -101,13 +101,6 @@ void QSystemImage::setUpInterface() {
             SLOT(availableStatusChanged(bool, bool, QString, int, QString,
                                           QString)));
 
-    connect(&m_systemServiceIface,
-            SIGNAL(UpdateAvailableStatus(bool, bool, QString, int, QString,
-                                         QString)),
-            this,
-            SLOT(ProcessAvailableStatus(bool, bool, QString, int, QString,
-                                        QString)));
-
     connect(&m_systemServiceIface, SIGNAL(UpdateProgress(int, double)),
                 this, SIGNAL(updateProgress(int, double)));
     connect(&m_systemServiceIface, SIGNAL(UpdateProgress(int, double)),
