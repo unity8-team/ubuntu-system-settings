@@ -347,6 +347,16 @@ void ClickUpdateChecker::parseClickMetadata(const QJsonArray &array)
             }
         }
     }
+
+    // Prune m_metas, removing those without necessary metadata. These are
+    // either locally installed clicks, or retracted from the API (?).
+    qWarning() << "click checker: pruning...";
+    foreach (const QString &name, m_metas.keys()) {
+        qWarning() << name << m_metas.value(name)->remoteVersion();
+        if (m_metas.value(name)->remoteVersion().isEmpty())
+            m_metas.remove(name);
+    }
+    completionCheck();
 }
 
 } // UpdatePlugin
