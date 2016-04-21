@@ -39,7 +39,7 @@ ItemPage {
             console.warn("Timer triggered");
             console.warn("ConnectedDevices: " + displays.connectedDevices.count);
             console.warn("DisconnectedDevices: " + displays.disconnectedDevices.count);
-            if (!displays.scanning && displays.state !== Device.Connected) {
+            if (!displays.scanning && displays.state !== AethercastDevice.Connected) {
                 console.warn("Initiating a scan");
                 displays.scan();
             }
@@ -90,9 +90,9 @@ ItemPage {
                     iconFrame: false
                     text: displayName
                     subText: state
-                    enabled: state === Device.Idle || state === Device.Connected || state === Device.Disconnected
+                    enabled: state === AethercastDevice.Idle || state === AethercastDevice.Connected || state === AethercastDevice.Disconnected
                     onClicked: {
-                        if (state === Device.Connected)
+                        if (state === AethercastDevice.Connected)
                             displays.disconnectDevice(addressName);
                         else
                             displays.connectDevice(addressName);
@@ -132,9 +132,9 @@ ItemPage {
                     iconFrame: false
                     text: displayName
                     subText: state
-                    enabled: state === Device.Idle || state === Device.Connected || state === Device.Disconnected
+                    enabled: state === AethercastDevice.Idle || state === AethercastDevice.Connected || state === AethercastDevice.Disconnected
                     onClicked: {
-                        if (state === Device.Connected)
+                        if (state === AethercastDevice.Connected)
                             displays.disconnectDevice(addressName);
                         else
                             displays.connectDevice(addressName);
