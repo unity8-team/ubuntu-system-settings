@@ -112,8 +112,6 @@ protected:
     virtual bool lessThan(const QModelIndex&, const QModelIndex&) const;
 
 private:
-    Device::State stringToState(const QString &state) const;
-
     Device::States m_states = Device::Idle;
     bool m_statesEnabled = false;
 

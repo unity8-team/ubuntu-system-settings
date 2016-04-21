@@ -334,25 +334,10 @@ bool DeviceFilter::filterAcceptsRow(int sourceRow,
     QModelIndex childIndex = sourceModel()->index(sourceRow, 0, sourceParent);
 
     if (accepts && m_statesEnabled) {
-        const QString ret = childIndex.model()->data(childIndex, DeviceModel::StateRole).value<QString>();
-        const Device::State state = this->stringToState(ret);
+        const int state = childIndex.model()->data(childIndex, DeviceModel::StateRole).value<int>();
         accepts = (m_states & state) != 0;
-        qWarning() << Q_FUNC_INFO << "ret:" << ret << "m_states:" << m_states << "state:" << state;
+        qWarning() << Q_FUNC_INFO << "m_states:" << m_states << "state:" << state;
     }
 
     return accepts;
 }
-
-Device::State DeviceFilter::stringToState(const QString &state) const
-{
-    qWarning() << Q_FUNC_INFO << state;
-    if (state == "disconnected")
-        return Device::Disconnected;
-    else if (state == "connected")
-        return Device::Connected;
-    else if (state == "configuration")
-        return Device::Configuration;
-    else
-        return Device::Idle;
-}
-
