@@ -110,7 +110,7 @@ ItemPage {
                     iconName: "video-display"
                     iconFrame: false
                     text: displayName
-                    subText: (stateName === AethercastDevice.Connected) ? i18n.tr("Connected") : i18n.tr("Disconnected")
+                    subText: (stateName === AethercastDevice.Connected) ? i18n.tr("Connected") : i18n.tr("Not connected")
                     enabled: stateName === AethercastDevice.Idle || stateName === AethercastDevice.Connected || stateName === AethercastDevice.Disconnected
                     onClicked: {
                         if (stateName === AethercastDevice.Connected)
@@ -153,7 +153,7 @@ ItemPage {
                     iconName: "video-display"
                     iconFrame: false
                     text: displayName
-                    subText: (stateName === AethercastDevice.Connected) ? i18n.tr("Connected") : i18n.tr("Disconnected")
+                    subText: (stateName === AethercastDevice.Connected) ? i18n.tr("Connected") : i18n.tr("Not connected")
                     enabled: stateName === AethercastDevice.Idle || stateName === AethercastDevice.Connected || stateName === AethercastDevice.Disconnected
                     onClicked: {
                         if (stateName === AethercastDevice.Connected)
