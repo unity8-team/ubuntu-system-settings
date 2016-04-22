@@ -27,7 +27,7 @@
 Displays::Displays(QObject *parent):
     Displays(QDBusConnection::systemBus(), parent)
 {
-    qWarning() << Q_FUNC_INFO;
+    //qWarning() << Q_FUNC_INFO;
 }
 
 Displays::Displays(const QDBusConnection &dbus, QObject *parent):
@@ -35,7 +35,7 @@ Displays::Displays(const QDBusConnection &dbus, QObject *parent):
     m_dbus(dbus),
     m_devices(m_dbus)
 {
-    qWarning() << Q_FUNC_INFO;
+    //qWarning() << Q_FUNC_INFO;
 
     m_manager = new AethercastManager(AETHERCAST_SERVICE, AETHERCAST_PATH, m_dbus);
 
@@ -66,13 +66,16 @@ Displays::Displays(const QDBusConnection &dbus, QObject *parent):
     m_disconnectedDevices.filterOnStates(Device::State::Idle |
                                          Device::State::Disconnected);
     m_disconnectedDevices.setSourceModel(&m_devices);
+    connect(&m_connectedDevices, SIGNAL(rowsInserted(const QModelIndex, int, int)), this, SIGNAL(connectedDevicesChanged()));
+    connect(&m_disconnectedDevices, SIGNAL(rowsInserted(const QModelIndex, int, int)), this, SIGNAL(disconnectedDevicesChanged()));
+
 }
 
 void Displays::slotPropertiesChanged(const QString &interface, const QVariantMap &changedProperties,
                                            const QStringList &invalidatedProperties)
 {
     Q_UNUSED(invalidatedProperties);
-    qWarning() << Q_FUNC_INFO;
+    //qWarning() << Q_FUNC_INFO;
 
     if (interface != AETHERCAST_MANAGER_IFACE)
         return;
@@ -82,7 +85,7 @@ void Displays::slotPropertiesChanged(const QString &interface, const QVariantMap
 
 void Displays::setProperties(const QMap<QString,QVariant> &properties)
 {
-    qWarning() << Q_FUNC_INFO;
+    //qWarning() << Q_FUNC_INFO;
     QMapIterator<QString,QVariant> it(properties);
     while (it.hasNext()) {
         it.next();
@@ -92,7 +95,7 @@ void Displays::setProperties(const QMap<QString,QVariant> &properties)
 
 void Displays::scan()
 {
-    qWarning() << Q_FUNC_INFO;
+    //qWarning() << Q_FUNC_INFO;
     if (!m_manager)
         return;
     m_manager->Scan();
@@ -100,7 +103,7 @@ void Displays::scan()
 
 QAbstractItemModel * Displays::devices()
 {
-    qWarning() << Q_FUNC_INFO;
+    //qWarning() << Q_FUNC_INFO;
     auto ret = &m_devices;
     QQmlEngine::setObjectOwnership(ret, QQmlEngine::CppOwnership);
     return ret;
@@ -108,7 +111,7 @@ QAbstractItemModel * Displays::devices()
 
 QAbstractItemModel * Displays::connectedDevices()
 {
-    qWarning() << Q_FUNC_INFO;
+    //qWarning() << Q_FUNC_INFO;
     auto ret = &m_connectedDevices;
     QQmlEngine::setObjectOwnership(ret, QQmlEngine::CppOwnership);
     return ret;
@@ -116,7 +119,7 @@ QAbstractItemModel * Displays::connectedDevices()
 
 QAbstractItemModel * Displays::disconnectedDevices()
 {
-    qWarning() << Q_FUNC_INFO;
+    //qWarning() << Q_FUNC_INFO;
     auto ret = &m_disconnectedDevices;
     QQmlEngine::setObjectOwnership(ret, QQmlEngine::CppOwnership);
     return ret;
@@ -124,7 +127,7 @@ QAbstractItemModel * Displays::disconnectedDevices()
 
 void Displays::disconnectDevice(const QString &address)
 {
-    qWarning() << Q_FUNC_INFO << address;
+    //qWarning() << Q_FUNC_INFO << address;
     auto device = m_devices.getDeviceFromAddress(address);
     if (device)
         device->disconnect();
@@ -132,7 +135,7 @@ void Displays::disconnectDevice(const QString &address)
 
 void Displays::connectDevice(const QString &address)
 {
-    qWarning() << Q_FUNC_INFO << address;
+    //qWarning() << Q_FUNC_INFO << address;
     auto device = m_devices.getDeviceFromAddress(address);
     if (device)
         device->connect();
@@ -140,7 +143,7 @@ void Displays::connectDevice(const QString &address)
 
 void Displays::updateProperty(const QString &key, const QVariant &value)
 {
-    qWarning() << Q_FUNC_INFO << key << ":" << value;
+    //qWarning() << Q_FUNC_INFO << key << ":" << value;
     if (key == "Scanning") 
         Q_EMIT(scanningChanged(value.toBool()));
     if (key == "State") 

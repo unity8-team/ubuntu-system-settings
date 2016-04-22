@@ -37,11 +37,11 @@ class Displays : public QObject
 
     Q_PROPERTY (QAbstractItemModel* connectedDevices
                 READ connectedDevices
-                CONSTANT)
+                NOTIFY connectedDevicesChanged)
 
     Q_PROPERTY (QAbstractItemModel* disconnectedDevices
                 READ disconnectedDevices
-                CONSTANT)
+                NOTIFY disconnectedDevicesChanged)
 
     Q_PROPERTY (bool scanning
                 READ scanning
@@ -54,6 +54,8 @@ class Displays : public QObject
 Q_SIGNALS:
     void scanningChanged(bool isActive);
     void stateChanged();
+    void connectedDevicesChanged();
+    void disconnectedDevicesChanged();
 
 public:
     explicit Displays(QObject *parent = nullptr);
