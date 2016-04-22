@@ -165,7 +165,7 @@ void DeviceModel::addDevice(const QString &path, const QVariantMap &properties)
 
 void DeviceModel::addDevice(QSharedPointer<Device> &device)
 {
-    qWarning() << Q_FUNC_INFO;
+    //qWarning() << Q_FUNC_INFO;
     int row = findRowFromAddress(device->getAddress());
 
     if (row >= 0) { // update existing device
@@ -182,7 +182,7 @@ void DeviceModel::addDevice(QSharedPointer<Device> &device)
 
 void DeviceModel::removeRow(int row)
 {
-    qWarning() << Q_FUNC_INFO;
+    //qWarning() << Q_FUNC_INFO;
     if (0<=row && row<m_devices.size()) {
         beginRemoveRows(QModelIndex(), row, row);
         m_devices.removeAt(row);
@@ -193,7 +193,7 @@ void DeviceModel::removeRow(int row)
 
 void DeviceModel::emitRowChanged(int row)
 {
-    qWarning() << Q_FUNC_INFO;
+    //qWarning() << Q_FUNC_INFO;
     if (0<=row && row<m_devices.size()) {
         QModelIndex qmi = index(row, 0);
         Q_EMIT(dataChanged(qmi, qmi));
@@ -248,7 +248,7 @@ void DeviceModel::slotRemoveFinished(QDBusPendingCallWatcher *call)
 
 int DeviceModel::rowCount(const QModelIndex &parent) const
 {
-    qWarning() << Q_FUNC_INFO;
+    //qWarning() << Q_FUNC_INFO;
     Q_UNUSED(parent);
 
     return m_devices.size();
