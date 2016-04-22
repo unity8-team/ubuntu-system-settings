@@ -73,17 +73,30 @@ ItemPage {
             }
         }
 
+        Label {
+            anchors {
+                left: parent.left
+                right: parent.right
+            }
+            visible: displays.devices.count < 1
+            horizontalAlignment: Text.AlignHCenter
+            verticalAlignment: Text.AlignVCenter
+            height: units.gu(8)
+            text: i18n.tr("No displays detected")
+        }
+
         Column {
             anchors {
                 left: parent.left
                 right: parent.right
                 top: parent.top
             }
+            visible: displays.devices.count > 0
 
             ListItem.Standard {
                 objectName: "connectedDisplay"
                 text: i18n.tr("Connected display:")
-                visible: displays.connectedDevices.count > 0
+                visible: displays.connectedDevices.count > 0 && displays.state === "connected"
             }
 
             Repeater {
@@ -114,7 +127,7 @@ ItemPage {
 
             ListItem.Standard {
                 objectName: "wifiDisplays"
-                text: i18n.tr("Use another display:")
+                text: (displays.state === "connected" && displays.disconnectedDevices.count > 0) ? i18n.tr("Use another display:") : i18n.tr("Choose a display:")
                 visible: displays.disconnectedDevices.count > 0
                 control: Item {
                     anchors.verticalCenter: parent.verticalCenter
