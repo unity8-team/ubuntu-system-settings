@@ -158,7 +158,7 @@ ItemPage {
                 visible: brightnessPanel.widiSupported
                 enabled: aethercastDisplays.enabled
                 text: i18n.tr("Wireless display")
-                value: aethercastDisplays.state === "connected" ? i18n.tr("Connected") : i18n.tr("Disconnected")
+                value: aethercastDisplays.state === "connected" ? i18n.tr("Connected") : i18n.tr("Not connected")
                 progression: true
                 onClicked: pageStack.push(Qt.resolvedUrl("WifiDisplays.qml"))
             }
