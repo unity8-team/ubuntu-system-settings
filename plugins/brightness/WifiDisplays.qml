@@ -89,10 +89,10 @@ ItemPage {
                     iconName: "video-display"
                     iconFrame: false
                     text: displayName
-                    subText: state
-                    enabled: state === AethercastDevice.Idle || state === AethercastDevice.Connected || state === AethercastDevice.Disconnected
+                    subText: (stateName === AethercastDevice.Connected) ? i18n.tr("Connected") : i18n.tr("Disconnected")
+                    enabled: stateName === AethercastDevice.Idle || stateName === AethercastDevice.Connected || stateName === AethercastDevice.Disconnected
                     onClicked: {
-                        if (state === AethercastDevice.Connected)
+                        if (stateName === AethercastDevice.Connected)
                             displays.disconnectDevice(addressName);
                         else
                             displays.connectDevice(addressName);
@@ -131,10 +131,10 @@ ItemPage {
                     iconName: "video-display"
                     iconFrame: false
                     text: displayName
-                    subText: state
-                    enabled: state === AethercastDevice.Idle || state === AethercastDevice.Connected || state === AethercastDevice.Disconnected
+                    subText: (stateName === AethercastDevice.Connected) ? i18n.tr("Connected") : i18n.tr("Disconnected")
+                    enabled: stateName === AethercastDevice.Idle || stateName === AethercastDevice.Connected || stateName === AethercastDevice.Disconnected
                     onClicked: {
-                        if (state === AethercastDevice.Connected)
+                        if (stateName === AethercastDevice.Connected)
                             displays.disconnectDevice(addressName);
                         else
                             displays.connectDevice(addressName);
