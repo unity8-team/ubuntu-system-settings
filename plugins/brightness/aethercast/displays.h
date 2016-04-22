@@ -47,12 +47,18 @@ class Displays : public QObject
                 READ scanning
                 NOTIFY scanningChanged)
 
+    Q_PROPERTY (bool enabled
+                READ enabled
+                WRITE setEnabled
+                NOTIFY enabledChanged)
+
     Q_PROPERTY (QString state
                 READ state
                 NOTIFY stateChanged)
 
 Q_SIGNALS:
     void scanningChanged(bool isActive);
+    void enabledChanged(bool enabled);
     void stateChanged();
     void connectedDevicesChanged();
     void disconnectedDevicesChanged();
@@ -72,6 +78,8 @@ public:
     QAbstractItemModel * connectedDevices();
     QAbstractItemModel * disconnectedDevices();
     bool scanning() const { return m_manager->scanning(); }
+    bool enabled() const { return m_manager->enabled(); }
+    void setEnabled(bool);
     QString state() const { return m_manager->state(); }
 
 private Q_SLOTS:

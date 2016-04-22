@@ -9,6 +9,7 @@
             <arg name="path" type="o" direction="in"/>
         </method>
         <method name="Scan"/>
+        <property name="Enabled" type="b" access="readwrite"/>
         <property name="State" type="s" access="read"/>
         <property name="Capabilities" type="as" access="read"/>
         <property name="Scanning" type="b" access="read"/>

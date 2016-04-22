@@ -127,6 +127,7 @@ ItemPage {
                 }
                 showDivider: false
             }
+
             ListItem.Caption {
                 text: i18n.tr(
                         "Brightens and dims the display to suit the surroundings.")
@@ -137,10 +138,26 @@ ItemPage {
                 visible: brightnessPanel.widiSupported
             }
 
+	    ListItem.Standard {
+		text: i18n.tr("External display")
+		enabled: brightnessPanel.widiSupported
+		onClicked: enabledCheck.trigger()
+		control: CheckBox {
+		    id: enabledCheck
+		    property bool serverChecked: aethercastDisplays.enabled
+		    onServerCheckedChanged: checked = serverChecked
+		    Component.onCompleted: checked = serverChecked
+		    onTriggered: {
+		        aethercastDisplays.enabled = checked;
+		    }
+		}
+	    }
+
             ListItem.SingleValue {
                 objectName: "displayCasting"
                 visible: brightnessPanel.widiSupported
-                text: i18n.tr("Wireless Display")
+                enabled: aethercastDisplays.enabled
+                text: i18n.tr("Wireless display")
                 value: aethercastDisplays.state === "connected" ? i18n.tr("Connected") : i18n.tr("Disconnected")
                 progression: true
                 onClicked: pageStack.push(Qt.resolvedUrl("WifiDisplays.qml"))

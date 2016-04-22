@@ -93,6 +93,15 @@ void Displays::setProperties(const QMap<QString,QVariant> &properties)
     }
 }
 
+void Displays::setEnabled(bool enabled)
+{
+    qWarning() << Q_FUNC_INFO;
+    if (!m_manager)
+        return;
+    m_manager->setEnabled(enabled);
+    emit enabledChanged(enabled);
+}
+
 void Displays::scan()
 {
     //qWarning() << Q_FUNC_INFO;

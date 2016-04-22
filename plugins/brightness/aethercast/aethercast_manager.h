@@ -8,8 +8,8 @@
  * Do not edit! All changes made to it will be lost.
  */
 
-#ifndef AETHERCAST_MANAGER_H_1450292154
-#define AETHERCAST_MANAGER_H_1450292154
+#ifndef AETHERCAST_MANAGER_H_1461342532
+#define AETHERCAST_MANAGER_H_1461342532
 
 #include <QtCore/QObject>
 #include <QtCore/QByteArray>
@@ -38,6 +38,12 @@ public:
     Q_PROPERTY(QStringList Capabilities READ capabilities)
     inline QStringList capabilities() const
     { return qvariant_cast< QStringList >(property("Capabilities")); }
+
+    Q_PROPERTY(bool Enabled READ enabled WRITE setEnabled)
+    inline bool enabled() const
+    { return qvariant_cast< bool >(property("Enabled")); }
+    inline void setEnabled(bool value)
+    { setProperty("Enabled", QVariant::fromValue(value)); }
 
     Q_PROPERTY(bool Scanning READ scanning)
     inline bool scanning() const
