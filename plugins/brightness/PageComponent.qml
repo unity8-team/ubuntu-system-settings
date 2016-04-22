@@ -142,7 +142,7 @@ ItemPage {
 		text: i18n.tr("External display")
 		enabled: brightnessPanel.widiSupported
 		onClicked: enabledCheck.trigger()
-		control: CheckBox {
+		control: Switch {
 		    id: enabledCheck
 		    property bool serverChecked: aethercastDisplays.enabled
 		    onServerCheckedChanged: checked = serverChecked
