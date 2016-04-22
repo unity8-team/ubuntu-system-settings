@@ -63,6 +63,14 @@ ItemPage {
             onScanningChanged: {
                 console.warn("onScanningChanged: " + scanning);
             }
+
+            onConnectedDevicesChanged: {
+                console.warn("ConnectedDevices: " + displays.connectedDevices.count);
+            }
+
+            onDisconnectedDevicesChanged: {
+                console.warn("DisconnectedDevices: " + displays.disconnectedDevices.count);
+            }
         }
 
         Column {
@@ -107,6 +115,7 @@ ItemPage {
             ListItem.Standard {
                 objectName: "wifiDisplays"
                 text: i18n.tr("Use another display:")
+                visible: displays.disconnectedDevices.count > 0
                 control: Item {
                     anchors.verticalCenter: parent.verticalCenter
                     height: parent.height
