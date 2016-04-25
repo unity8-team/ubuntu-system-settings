@@ -1,3 +1,4 @@
+include_directories(${ANDR_PROP_INCLUDE_DIRS})
 add_subdirectory(plugin)
 
 set(QML_SOURCES
