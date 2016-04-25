@@ -76,12 +76,13 @@ void SystemUpdate::slotNameOwnerChanged(const QString &name,
 
     if (name != "com.canonical.SystemImage")
         return;
-
+    qWarning() << "got si slot name owner change, setting up...";
     if (m_SystemServiceIface.isValid())
         setUpInterface();
 }
 
 void SystemUpdate::setUpInterface() {
+    qWarning() << "setting up the si interface...";
     connect(&m_SystemServiceIface, SIGNAL(UpdateAvailableStatus(bool, bool, QString, int, QString, QString)),
                this, SLOT(ProcessAvailableStatus(bool, bool, QString, int, QString, QString)));
     // signals to forward directly to QML
@@ -242,6 +243,7 @@ void SystemUpdate::ProcessAvailableStatus(bool isAvailable,
                                           QString lastUpdateDate,
                                           QString errorReason)
 {
+    qWarning()<<"ProcessAvailableStatus";
     update = new Update(this);
     QString packageName(UBUNTU_PACKAGE_NAME);
     update->initializeApplication(packageName, "Ubuntu",
