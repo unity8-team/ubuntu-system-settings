@@ -39,7 +39,7 @@ namespace UpdatePlugin {
 SystemUpdate::SystemUpdate(QObject *parent) :
     QObject(parent),
     m_currentBuildNumber(-1),
-    m_targetBuildNumber(0),
+    m_targetBuildNumber(-1),
     m_detailedVersion(),
     m_lastUpdateDate(),
     m_downloadMode(-1),
