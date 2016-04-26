@@ -18,6 +18,7 @@ import QtQuick 2.4
 import SystemSettings 1.0
 import Ubuntu.Components 1.3
 import Ubuntu.Components.ListItems 1.3 as ListItem
+import Ubuntu.Components.Popups 1.3
 import Ubuntu.SystemSettings.Brightness 1.0
 
 ItemPage {
@@ -28,6 +29,46 @@ ItemPage {
     Component.onCompleted: {
         if (!displays.scanning)
             displays.scan();
+    }
+
+    property string selectedDisplayName
+
+    function showError(error, displayName) {
+        var diag = PopupUtils.open(errorAlert, null, {"error": error, "displayName": selectedDisplayName});
+    }
+
+    Component {
+        id: errorAlert
+        Dialog {
+            id: dialog
+            property int error
+            property string displayName
+            title: {
+                if (error === AethercastDisplays.Failed)
+                    return i18n.tr("This device can't connect to %1.").arg(displayName)
+                else if (error === AethercastDisplays.Failed)
+                    return i18n.tr("There is no Wi-Fi channel both devices can use.")
+                else if (error === AethercastDisplays.Failed)
+                    return i18n.tr("This device can't connect to %1.").arg(displayName)
+                else if (error === AethercastDisplays.Failed)
+                    return i18n.tr("There is no Wi-Fi frequency both devices can use.")
+                else if (error === AethercastDisplays.Failed)
+                    return i18n.tr("%1 is not responding.").arg(displayName)
+                else if (error === AethercastDisplays.Unknown)
+                    return i18n.tr("There was an unknown error connecting to %1.").arg(displayName)
+            }
+            text: {
+                if (error === AethercastDisplays.Failed)
+                    return i18n.tr("Try powering the display off then on again.")
+                else if (error === AethercastDisplays.Failed)
+                    return i18n.tr("Try moving closer to the display and reconnecting.")
+            }
+
+            Button {
+                text: i18n.tr("OK")
+                onClicked: PopupUtils.close(dialog)
+            }
+        }
     }
 
     Timer {
@@ -59,6 +100,11 @@ ItemPage {
 
         AethercastDisplays {
             id: displays
+
+            onConnectError: {
+                console.warn("onConnectError: " + error);
+                showError(error, "FOOBAR");
+            }
 
             onScanningChanged: {
                 console.warn("onScanningChanged: " + scanning);
@@ -115,8 +161,10 @@ ItemPage {
                     onClicked: {
                         if (stateName === AethercastDevice.Connected)
                             displays.disconnectDevice(addressName);
-                        else
+                        else {
+                            selectedDisplayName = displayName;
                             displays.connectDevice(addressName);
+                        }
                     }
                 }
             }
@@ -126,7 +174,6 @@ ItemPage {
             }
 
             ListItem.Standard {
-                objectName: "wifiDisplays"
                 text: (displays.state === "connected" && displays.disconnectedDevices.count > 0) ? i18n.tr("Use another display:") : i18n.tr("Choose a display:")
                 visible: displays.disconnectedDevices.count > 0
                 control: Item {
@@ -158,8 +205,10 @@ ItemPage {
                     onClicked: {
                         if (stateName === AethercastDevice.Connected)
                             displays.disconnectDevice(addressName);
-                        else
+                        else {
+                            selectedDisplayName = displayName;
                             displays.connectDevice(addressName);
+                        }
                     }
                 }
             }
