@@ -442,3 +442,13 @@ class ApnTestCase(CellularBaseTestCase):
             lambda: self.modem_0.connMan.GetContexts()[0][1]['Preferred'],
             Eventually(Equals(True))
         )
+
+    def active_apn_is_automatically_preferred(self):
+        self.add_connection_context(self.modem_0,
+                                    Type='internet', Name='Provisioned',
+                                    Active=True)
+        self.cellular_page.open_apn_page(None)
+        self.assertThat(
+            lambda: self.modem_0.connMan.GetContexts()[0][1]['Preferred'],
+            Eventually(Equals(True))
+        )

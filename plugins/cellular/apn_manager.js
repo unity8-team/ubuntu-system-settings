@@ -291,6 +291,7 @@ function contextRemoved (path) {
 function contextTypeChanged (type) {
     if (type) {
         addContextToModel(this, type);
+        checkPreferred();
     }
 }
 
@@ -490,7 +491,6 @@ function connManPoweredChanged (powered) {
  */
 function checkPreferred () {
     var models = [internetContexts, iaContexts, mmsContexts];
-
     models.forEach(function (model) {
         var i;
         var ctx;
@@ -505,8 +505,13 @@ function checkPreferred () {
             }
         }
 
-        if (activeCtx && getConflictingContexts(activeCtx).length === 0) {
-            activeCtx.preferred = true;
+        try {
+            var conflicts = getConflictingContexts(activeCtx);
+            if (activeCtx && conflicts.length === 0) {
+                activeCtx.preferred = true;
+            }
+        } catch (e) {
+            console.error(e);
         }
     });
 }
