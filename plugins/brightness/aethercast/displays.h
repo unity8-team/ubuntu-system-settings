@@ -56,24 +56,28 @@ class Displays : public QObject
                 READ state
                 NOTIFY stateChanged)
 
-Q_SIGNALS:
-    void scanningChanged(bool isActive);
-    void enabledChanged(bool enabled);
-    void stateChanged();
-    void connectedDevicesChanged();
-    void disconnectedDevicesChanged();
 
 public:
     explicit Displays(QObject *parent = nullptr);
     explicit Displays(const QDBusConnection &dbus, QObject *parent = nullptr);
     ~Displays() {}
 
+    enum Error {
+        None,
+        Failed,
+        Already,
+        ParamInvalid,
+        InvalidState,
+        NotConnected,
+        NotReady,
+        Unknown
+    };
+    Q_ENUMS(Error)
+
     Q_INVOKABLE void connectDevice(const QString &address);
     Q_INVOKABLE void disconnectDevice(const QString &address);
     Q_INVOKABLE void scan();
     void setProperties(const QMap<QString,QVariant> &properties);
-
-public:
     QAbstractItemModel * devices();
     QAbstractItemModel * connectedDevices();
     QAbstractItemModel * disconnectedDevices();
@@ -81,6 +85,14 @@ public:
     bool enabled() const { return m_manager->enabled(); }
     void setEnabled(bool);
     QString state() const { return m_manager->state(); }
+
+Q_SIGNALS:
+    void scanningChanged(bool isActive);
+    void enabledChanged(bool enabled);
+    void stateChanged();
+    void connectedDevicesChanged();
+    void disconnectedDevicesChanged();
+    void connectError(int error);
 
 private Q_SLOTS:
     void slotPropertiesChanged(const QString &interface, const QVariantMap &changedProperties,
@@ -95,6 +107,7 @@ private:
     QScopedPointer<FreeDesktopProperties> m_aethercastProperties;
     void updateProperties(QSharedPointer<QDBusInterface>);
     void updateProperty(const QString &key, const QVariant &value);
+    void handleConnectError(QDBusError error);
 };
 
 #endif // DISPLAYS_H

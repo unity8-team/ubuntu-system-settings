@@ -92,16 +92,16 @@ void Device::setProperties(const QMap<QString,QVariant> &properties)
     }
 }
 
-void Device::disconnect()
+QDBusPendingReply<void> Device::disconnect()
 {
-    //qWarning() << Q_FUNC_INFO;
-    m_aethercastDevice->Disconnect();
+    qWarning() << Q_FUNC_INFO;
+    return m_aethercastDevice->Disconnect();
 }
 
-void Device::connect()
+QDBusPendingReply<void> Device::connect()
 {
-    //qWarning() << Q_FUNC_INFO;
-    m_aethercastDevice->Connect(QString());
+    qWarning() << Q_FUNC_INFO;
+    return m_aethercastDevice->Connect(QString());
 }
 
 void Device::setName(const QString &name)

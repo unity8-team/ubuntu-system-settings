@@ -83,8 +83,8 @@ public:
     Device() {}
     Device(const QString &path, QDBusConnection &bus);
     ~Device() {}
-    void connect();
-    void disconnect();
+    QDBusPendingReply<void> connect();
+    QDBusPendingReply<void> disconnect();
     void setProperties(const QMap<QString,QVariant> &properties);
 
   private Q_SLOTS:
