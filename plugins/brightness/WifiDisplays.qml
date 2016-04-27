@@ -39,22 +39,7 @@ ItemPage {
 
     Component {
         id: errorAlert
-        Dialog {
-            id: dialog
-            property int error
-            property string displayName
-            text: {
-                if (error === AethercastDisplays.Failed)
-                    return i18n.tr("This device failed to connect to %1.").arg(displayName)
-                else if (error === AethercastDisplays.Unknown)
-                    return i18n.tr("There was an unknown error connecting to %1.").arg(displayName)
-            }
-
-            Button {
-                text: i18n.tr("OK")
-                onClicked: PopupUtils.close(dialog)
-            }
-        }
+        WifiDisplaysAlert {}
     }
 
     Timer {

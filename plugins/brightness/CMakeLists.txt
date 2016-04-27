@@ -4,6 +4,7 @@ add_subdirectory(plugin)
 set(QML_SOURCES
     PageComponent.qml
     WifiDisplays.qml
+    WifiDisplaysAlert.qml
 )
 
 add_library(UbuntuBrightnessPanel MODULE
