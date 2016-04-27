@@ -99,7 +99,6 @@ void Displays::setEnabled(bool enabled)
     if (!m_manager)
         return;
     m_manager->setEnabled(enabled);
-    emit enabledChanged(enabled);
 }
 
 void Displays::scan()
@@ -182,4 +181,6 @@ void Displays::updateProperty(const QString &key, const QVariant &value)
         Q_EMIT(scanningChanged(value.toBool()));
     if (key == "State") 
         Q_EMIT(stateChanged());
+    if (key == "Enabled") 
+        Q_EMIT(enabledChanged(value.toBool()));
 }
