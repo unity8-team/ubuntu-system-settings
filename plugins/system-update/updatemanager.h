@@ -15,34 +15,39 @@
  *
  * Mediator for downloading and installing system and click updates.
  *
-*/
-#ifndef UPDATEMANAGER_H
-#define UPDATEMANAGER_H
+ */
+#ifndef PLUGINS_SYSTEM_UPDATE_MANAGER_H_
+#define PLUGINS_SYSTEM_UPDATE_MANAGER_H_
 
 #include <QDebug>
 #include <QSharedPointer>
+#include <QSqlQueryModel>
 
 #include <token.h>
 #include <ssoservice.h>
 
 #include "clickupdatemetadata.h"
 #include "clickupdatechecker.h"
+#include "clickupdatestore.h"
 #include "systemimage.h"
 
 // Having the full namespaced name in a slot seems to confuse
 // SignalSpy so we need this declaration.
 using UbuntuOne::Token;
 
-namespace UpdatePlugin {
-
-class UpdateManager : public QObject
+namespace UpdatePlugin
 {
-    Q_OBJECT
+
+class UpdateManager: public QObject
+{
+Q_OBJECT
+    public:
+
     Q_ENUMS(UpdateMode)
     Q_ENUMS(UpdateStatus)
     Q_ENUMS(ManagerStatus)
-public:
-    enum UpdateMode {
+    enum UpdateMode
+    {
         Downloadable,
         Installable,
         InstallableWithRestart,
@@ -52,7 +57,8 @@ public:
         Retriable
     };
 
-    enum ManagerStatus {
+    enum ManagerStatus
+    {
         Idle,
         CheckingClickUpdates,
         CheckingSystemUpdates,
@@ -62,7 +68,8 @@ public:
         ServerError
     };
 
-    enum UpdateStatus {
+    enum UpdateStatus
+    {
         NotAvailable,
         NotStarted,
         AutomaticallyDownloading,
@@ -78,40 +85,40 @@ public:
 
     Q_PROPERTY(bool online READ online WRITE setOnline NOTIFY onlineChanged)
     Q_PROPERTY(bool authenticated READ authenticated
-               NOTIFY authenticatedChanged)
+            NOTIFY authenticatedChanged)
     Q_PROPERTY(bool haveSufficientPower READ haveSufficientPower
-               WRITE setHaveSufficientPower
-               NOTIFY haveSufficientPowerChanged)
+            WRITE setHaveSufficientPower
+            NOTIFY haveSufficientPowerChanged)
     Q_PROPERTY(bool haveSystemUpdate READ haveSystemUpdate
-               NOTIFY haveSystemUpdateChanged)
+            NOTIFY haveSystemUpdateChanged)
     Q_PROPERTY(QSystemImage* systemImageBackend READ systemImageBackend CONSTANT)
     Q_PROPERTY(int updatesCount READ updatesCount NOTIFY updatesCountChanged)
     Q_PROPERTY(int downloadMode READ downloadMode WRITE setDownloadMode
-               NOTIFY downloadModeChanged)
+            NOTIFY downloadModeChanged)
     Q_PROPERTY(ManagerStatus managerStatus READ managerStatus
-               NOTIFY managerStatusChanged)
+            NOTIFY managerStatusChanged)
+    Q_PROPERTY(QSqlQueryModel* installedClickUpdates READ installedClickUpdates
+               CONSTANT)
+    Q_PROPERTY(QSqlQueryModel* activeClickUpdates READ activeClickUpdates
+               CONSTANT)
 
     bool online() const;
     void setOnline(const bool online);
-
     bool authenticated() const;
-
     bool haveSystemUpdate() const;
     QSystemImage* systemImageBackend() const;
-
     bool haveSufficientPower() const;
     void setHaveSufficientPower(const bool haveSufficientPower);
-
     int updatesCount() const;
-
     int downloadMode();
     void setDownloadMode(const int &downloadMode);
-
     ManagerStatus managerStatus() const;
+
+    QSqlQueryModel *installedClickUpdates();
+    QSqlQueryModel *activeClickUpdates();
 
     Q_INVOKABLE void checkForUpdates();
     Q_INVOKABLE void cancelCheckForUpdates();
-
     Q_INVOKABLE void retryClickPackage(const QString &packageName);
 
 protected:
@@ -122,8 +129,7 @@ private slots:
     void onClickUpdateAvailable(
             const QSharedPointer<ClickUpdateMetadata> &meta);
 
-    void handleSiAvailableStatus(const bool isAvailable,
-                                 const bool downloading,
+    void handleSiAvailableStatus(const bool isAvailable, const bool downloading,
                                  const QString &availableVersion,
                                  const int &updateSize,
                                  const QString &lastUpdateDate,
@@ -149,8 +155,7 @@ signals:
     void downloadModeChanged();
     void updatesCountChanged();
     void managerStatusChanged();
-    void clickUpdateReady(const QString &url,
-                          const QString &hash,
+    void clickUpdateReady(const QString &url, const QString &hash,
                           const QString &algorithm,
                           const QVariantMap &metadata,
                           const QVariantMap &headers,
@@ -163,13 +168,14 @@ private:
     void setManagerStatus(const ManagerStatus &status);
 
     // Creates the download in UDM for click update with given metadata.
-    void createClickUpdateDownload(const QSharedPointer<ClickUpdateMetadata> &meta);
+    void createClickUpdateDownload(
+            const QSharedPointer<ClickUpdateMetadata> &meta);
     void calculateUpdatesCount();
 
     void initializeSystemImage();
     void initializeClickUpdateChecker();
     void initializeSSOService();
-    void initializeUdm();
+    void initializeClickUpdateStore();
 
     bool m_online;
     bool m_authenticated;
@@ -183,8 +189,9 @@ private:
     QSystemImage *m_systemImage;
     UbuntuOne::Token m_token;
     UbuntuOne::SSOService m_ssoService;
+    ClickUpdateStore m_clickUpdateStore;
 };
 
 }
 
-#endif // UPDATEMANAGER_H
+#endif // PLUGINS_SYSTEM_UPDATE_MANAGER_H_

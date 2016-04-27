@@ -13,7 +13,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
-*/
+ */
 #include <QDateTime>
 #include <QDebug>
 #include <QJsonArray>
@@ -37,132 +37,125 @@ const QString ClickApiCache::BINARY_FILESIZE(QStringLiteral("binary_filesize"));
 const QString ClickApiCache::TITLE(QStringLiteral("title"));
 const QString ClickApiCache::CLICK_TOKEN(QStringLiteral("click_token"));
 
-ClickApiCache::ClickApiCache(QObject *parent, const QString &file):
-    QObject(parent),
-    m_cache(file)
-{
+ClickApiCache::ClickApiCache(QObject *parent, const QString &file)
+    : QObject(parent), m_cache(file) {}
+
+ClickApiCache::~ClickApiCache() {}
+
+bool ClickApiCache::valid() {
+  bool val = false;
+  if (!m_cache.open(QIODevice::ReadOnly | QIODevice::Text)) {
+    qWarning() << "Reading cache failed:" << m_cache.errorString();
+  } else {
+    QString cachedJson = m_cache.readAll();
+    QJsonDocument d = QJsonDocument::fromJson(cachedJson.toUtf8());
+    QJsonObject o = d.object();
+
+    int cachedAt = o.value(CACHED_AT).toInt(0);
+    int now = (int)QDateTime::currentDateTime().toTime_t();
+    val = cachedAt > (now - 86400);
+  }
+  m_cache.close();
+  qWarning() << "click cache: cache valid:" << val;
+  return val;
 }
 
-ClickApiCache::~ClickApiCache()
-{
-}
+QList<QSharedPointer<ClickUpdateMetadata>> ClickApiCache::read() {
+  QList<QSharedPointer<ClickUpdateMetadata>> list;
 
-bool ClickApiCache::valid()
-{
-    bool val = false;
-    if (!m_cache.open(QIODevice::ReadOnly | QIODevice::Text)) {
-        qWarning() << "Reading cache failed:" << m_cache.errorString();
-    } else {
-        QString cachedJson = m_cache.readAll();
-        QJsonDocument d = QJsonDocument::fromJson(cachedJson.toUtf8());
-        QJsonObject o = d.object();
-
-        int cachedAt = o.value(CACHED_AT).toInt(0);
-        int now = (int) QDateTime::currentDateTime().toTime_t();
-        val = cachedAt > (now - 86400);
+  if (!m_cache.open(QIODevice::ReadOnly | QIODevice::Text)) {
+    qWarning() << "Reading cache failed:" << m_cache.errorString();
+  } else {
+    QString cachedJson = m_cache.readAll();
+    QJsonDocument d = QJsonDocument::fromJson(cachedJson.toUtf8());
+    foreach (const QJsonValue &v, d.object()[METADATAS].toArray()) {
+      QSharedPointer<ClickUpdateMetadata> meta(new ClickUpdateMetadata);
+      if (v.isObject() && parse(v.toObject(), meta)) {
+        list.append(meta);
+      }
     }
-    m_cache.close();
-    qWarning() << "click cache: cache valid:" << val;
-    return val;
+  }
+
+  m_cache.close();
+  return list;
 }
 
-QList<QSharedPointer<ClickUpdateMetadata> > ClickApiCache::read()
-{
-    QList<QSharedPointer<ClickUpdateMetadata> > list;
+void ClickApiCache::write(
+    const QList<QSharedPointer<ClickUpdateMetadata>> &metas) {
+  if (!m_cache.open(QIODevice::WriteOnly | QIODevice::Text)) {
+    qWarning() << "could not open cache file for writing,"
+               << m_cache.errorString();
+    return;
+  }
 
-    if (!m_cache.open(QIODevice::ReadOnly | QIODevice::Text)) {
-        qWarning() << "Reading cache failed:" << m_cache.errorString();
-    } else {
-        QString cachedJson = m_cache.readAll();
-        QJsonDocument d = QJsonDocument::fromJson(cachedJson.toUtf8());
-        foreach(const QJsonValue &v, d.object()[METADATAS].toArray()) {
-            QSharedPointer<ClickUpdateMetadata> meta(new ClickUpdateMetadata);
-            if (v.isObject() && parse(v.toObject(), meta)) {
-                list.append(meta);
-            }
-        }
-    }
+  QJsonObject root;
+  root.insert(METADATAS, serialize(metas));
 
-    m_cache.close();
-    return list;
+  QJsonValue now((int)QDateTime::currentDateTime().toTime_t());
+  root.insert(CACHED_AT, now);
+  QJsonDocument d(root);
+
+  if (m_cache.write(d.toJson()) > 0) {
+    qWarning() << "successfully wrote to cache";
+  } else {
+    qWarning() << "failed to write to cache";
+  }
+  m_cache.close();
 }
 
-void ClickApiCache::write(const QList<QSharedPointer<ClickUpdateMetadata> > &metas)
-{
-    if (!m_cache.open(QIODevice::WriteOnly | QIODevice::Text)) {
-        qWarning() << "could not open cache file for writing," << m_cache.errorString();
-        return;
-    }
+bool ClickApiCache::parse(const QJsonObject &obj,
+                          const QSharedPointer<ClickUpdateMetadata> &meta) {
+  // If either of the following values cannot be found, the click update
+  // metadata is incomplete and the user needs to fetch new data from
+  // a server.
+  QString name = obj[NAME].toString();
+  qWarning() << "click cache: parsing" << name << "...";
+  QString localVersion = obj[LOCAL_VERSION].toString();
+  QString remoteVersion = obj[REMOTE_VERSION].toString();
+  QString iconUrl = obj[ICON_URL].toString();
+  QString downloadUrl = obj[DOWNLOAD_URL].toString();
+  QString downloadSha512 = obj[DOWNLOAD_SHA512].toString();
+  QString changelog = obj[CHANGELOG].toString();
+  int size = obj[BINARY_FILESIZE].toInt();
+  QString title = obj[TITLE].toString();
+  QString clickToken = obj[CLICK_TOKEN].toString();
 
-    QJsonObject root;
-    root.insert(METADATAS, serialize(metas));
+  if (remoteVersion.isEmpty() || localVersion.isEmpty() || iconUrl.isEmpty() ||
+      downloadUrl.isEmpty() || downloadSha512.isEmpty() ||
+      changelog.isEmpty() || title.isEmpty() || clickToken.isEmpty())
+    return false;
 
-    QJsonValue now((int) QDateTime::currentDateTime().toTime_t());
-    root.insert(CACHED_AT, now);
-    QJsonDocument d(root);
-
-    if (m_cache.write(d.toJson()) > 0) {
-        qWarning() << "successfully wrote to cache";
-    } else {
-        qWarning() << "failed to write to cache";
-    }
-    m_cache.close();
-}
-
-bool ClickApiCache::parse(const QJsonObject &obj, const QSharedPointer<ClickUpdateMetadata> &meta)
-{
-    // If either of the following values cannot be found, the click update
-    // metadata is incomplete and the user needs to fetch new data from
-    // a server.
-    QString name = obj[NAME].toString();
-    qWarning() << "click cache: parsing" << name << "...";
-    QString localVersion = obj[LOCAL_VERSION].toString();
-    QString remoteVersion = obj[REMOTE_VERSION].toString();
-    QString iconUrl = obj[ICON_URL].toString();
-    QString downloadUrl = obj[DOWNLOAD_URL].toString();
-    QString downloadSha512 = obj[DOWNLOAD_SHA512].toString();
-    QString changelog = obj[CHANGELOG].toString();
-    int size = obj[BINARY_FILESIZE].toInt();
-    QString title = obj[TITLE].toString();
-    QString clickToken = obj[CLICK_TOKEN].toString();
-
-    if (remoteVersion.isEmpty() || localVersion.isEmpty() || iconUrl.isEmpty()
-        || downloadUrl.isEmpty() || downloadSha512.isEmpty()
-        || changelog.isEmpty() || title.isEmpty() || clickToken.isEmpty())
-        return false;
-
-    meta->setName(name);
-    meta->setRemoteVersion(remoteVersion);
-    meta->setLocalVersion(localVersion);
-    meta->setIconUrl(iconUrl);
-    meta->setDownloadUrl(downloadUrl);
-    meta->setDownloadSha512(downloadSha512);
-    meta->setChangelog(changelog);
-    meta->setBinaryFilesize(size);
-    meta->setTitle(title);
-    meta->setClickToken(clickToken);
-    return true;
+  meta->setName(name);
+  meta->setRemoteVersion(remoteVersion);
+  meta->setLocalVersion(localVersion);
+  meta->setIconUrl(iconUrl);
+  meta->setDownloadUrl(downloadUrl);
+  meta->setDownloadSha512(downloadSha512);
+  meta->setChangelog(changelog);
+  meta->setBinaryFilesize(size);
+  meta->setTitle(title);
+  meta->setClickToken(clickToken);
+  return true;
 }
 
 QJsonArray ClickApiCache::serialize(
-    const QList<QSharedPointer<ClickUpdateMetadata>> &metas)
-{
-    QJsonArray a;
-    foreach(const QSharedPointer<ClickUpdateMetadata> &meta, metas) {
-        QJsonObject o;
-        o.insert(NAME, meta->name());
-        o.insert(REMOTE_VERSION, meta->remoteVersion());
-        o.insert(LOCAL_VERSION, meta->localVersion());
-        o.insert(ICON_URL, meta->iconUrl());
-        o.insert(DOWNLOAD_URL, meta->downloadUrl());
-        o.insert(DOWNLOAD_SHA512, meta->downloadSha512());
-        o.insert(CHANGELOG, meta->changelog());
-        o.insert(BINARY_FILESIZE, (int) meta->binaryFilesize());
-        o.insert(TITLE, meta->title());
-        o.insert(CLICK_TOKEN, meta->clickToken());
-        a.append(QJsonValue(o));
-    }
-    return a;
+    const QList<QSharedPointer<ClickUpdateMetadata>> &metas) {
+  QJsonArray a;
+  foreach (const QSharedPointer<ClickUpdateMetadata> &meta, metas) {
+    QJsonObject o;
+    o.insert(NAME, meta->name());
+    o.insert(REMOTE_VERSION, meta->remoteVersion());
+    o.insert(LOCAL_VERSION, meta->localVersion());
+    o.insert(ICON_URL, meta->iconUrl());
+    o.insert(DOWNLOAD_URL, meta->downloadUrl());
+    o.insert(DOWNLOAD_SHA512, meta->downloadSha512());
+    o.insert(CHANGELOG, meta->changelog());
+    o.insert(BINARY_FILESIZE, (int)meta->binaryFilesize());
+    o.insert(TITLE, meta->title());
+    o.insert(CLICK_TOKEN, meta->clickToken());
+    a.append(QJsonValue(o));
+  }
+  return a;
 }
 
 } // UpdatePlugin

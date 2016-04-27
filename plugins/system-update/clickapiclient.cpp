@@ -13,57 +13,59 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
-*/
+ */
+#include "clickapiclient.h"
+
 #include <assert.h>
-#include "clickapiproto.h"
 
-namespace UpdatePlugin {
+namespace UpdatePlugin
+{
 
-ClickApiProto::ClickApiProto(QObject *parent):
-    QObject(parent),
-    m_errorString(""),
-    m_token(UbuntuOne::Token())
+ClickApiClient::ClickApiClient(QObject *parent) :
+        QObject(parent),
+        m_errorString(""),
+        m_token(UbuntuOne::Token())
 {
     initializeNam();
 }
 
-ClickApiProto::~ClickApiProto()
+ClickApiClient::~ClickApiClient()
 {
     cancel();
 }
 
-void ClickApiProto::initializeNam()
+void ClickApiClient::initializeNam()
 {
-    connect(&m_nam, SIGNAL(finished(QNetworkReply *)),
-            this, SLOT(requestFinished(QNetworkReply *)));
+    connect(&m_nam, SIGNAL(finished(QNetworkReply *)), this,
+            SLOT(requestFinished(QNetworkReply *)));
     connect(&m_nam, SIGNAL(sslErrors(QNetworkReply *, const QList<QSslError>&)),
-            this, SLOT(requestSslFailed(QNetworkReply *, const QList<QSslError>&)));
+            this,
+            SLOT(requestSslFailed(QNetworkReply *, const QList<QSslError>&)));
 }
 
-void ClickApiProto::initializeReply(QNetworkReply *reply)
+void ClickApiClient::initializeReply(QNetworkReply *reply)
 {
     qWarning() << "click proto: init reply" << reply;
-    connect(this, SIGNAL(abortNetworking()),
-            reply, SLOT(abort()));
+    connect(this, SIGNAL(abortNetworking()), reply, SLOT(abort()));
 }
-void ClickApiProto::setToken(const UbuntuOne::Token &token)
+void ClickApiClient::setToken(const UbuntuOne::Token &token)
 {
     m_token = token;
 }
 
-void ClickApiProto::requestSslFailed(QNetworkReply *reply,
-                                     const QList<QSslError> &errors)
+void ClickApiClient::requestSslFailed(QNetworkReply *reply,
+                                      const QList<QSslError> &errors)
 {
     QString errorString = "SSL error: ";
-    foreach (const QSslError &err, errors) {
-        errorString += err.errorString();
-    }
+    foreach (const QSslError &err, errors){
+    errorString += err.errorString();
+}
     setErrorString(errorString);
     Q_EMIT serverError();
     reply->deleteLater();
 }
 
-void ClickApiProto::requestFinished(QNetworkReply *reply)
+void ClickApiClient::requestFinished(QNetworkReply *reply)
 {
     qWarning() << "click proto: something finished" << reply;
     // check for http error status and emit all the required signals
@@ -89,9 +91,10 @@ void ClickApiProto::requestFinished(QNetworkReply *reply)
     reply->deleteLater();
 }
 
-bool ClickApiProto::validReply(const QNetworkReply *reply)
+bool ClickApiClient::validReply(const QNetworkReply *reply)
 {
-    auto statusAttr = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute);
+    auto statusAttr = reply->attribute(
+            QNetworkRequest::HttpStatusCodeAttribute);
     if (!statusAttr.isValid()) {
         Q_EMIT networkError();
         setErrorString("status attribute was invalid");
@@ -110,18 +113,18 @@ bool ClickApiProto::validReply(const QNetworkReply *reply)
     return true;
 }
 
-QString ClickApiProto::errorString() const
+QString ClickApiClient::errorString() const
 {
     return m_errorString;
 }
 
-void ClickApiProto::setErrorString(const QString &errorString)
+void ClickApiClient::setErrorString(const QString &errorString)
 {
     m_errorString = errorString;
     Q_EMIT errorStringChanged();
 }
 
-void ClickApiProto::cancel()
+void ClickApiClient::cancel()
 {
     // Tell each reply to abort. See initializeReply().
     Q_EMIT abortNetworking();

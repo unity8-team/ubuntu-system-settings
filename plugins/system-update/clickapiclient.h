@@ -13,28 +13,29 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
-*/
-#ifndef CLICKAPIPROXY_H
-#define CLICKAPIPROXY_H
+ */
+#ifndef PLUGINS_SYSTEM_UPDATE_CLICKAPIPROXY_H_
+#define PLUGINS_SYSTEM_UPDATE_CLICKAPIPROXY_H_
 
 #include <token.h>
 
 #include <QtNetwork/QNetworkAccessManager>
 #include <QtNetwork/QNetworkReply>
 
-namespace UpdatePlugin {
+namespace UpdatePlugin
+{
 
 /**
-    Implements some behaviour and state for interacting with a remote click
-    API. Meant to normalize the behaviour of 401 and 403 responses, as well
-    as reporting errors and cancel().
-*/
-class ClickApiProto : public QObject
+ Implements some behaviour and state for interacting with a remote click
+ API. Meant to normalize the behaviour of 401 and 403 responses, as well
+ as reporting errors and cancel().
+ */
+class ClickApiClient: public QObject
 {
-    Q_OBJECT
+Q_OBJECT
 public:
-    explicit ClickApiProto(QObject *parent = 0);
-    ~ClickApiProto();
+    explicit ClickApiClient(QObject *parent = 0);
+    ~ClickApiClient();
 
     Q_PROPERTY(QString errorString READ errorString NOTIFY errorStringChanged)
     QString errorString() const;
@@ -80,4 +81,4 @@ private:
 
 } // UpdatePlugin
 
-#endif // CLICKAPIPROXY_H
+#endif // PLUGINS_SYSTEM_UPDATE_CLICKAPIPROXY_H_

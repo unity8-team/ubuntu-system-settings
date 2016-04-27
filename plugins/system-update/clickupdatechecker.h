@@ -13,9 +13,9 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
-*/
-#ifndef CLICKUPDATECHECKER_H
-#define CLICKUPDATECHECKER_H
+ */
+#ifndef PLUGINS_SYSTEM_UPDATE_CLICKUPDATECHECKER_H_
+#define PLUGINS_SYSTEM_UPDATE_CLICKUPDATECHECKER_H_
 
 #include <QFile>
 #include <QHash>
@@ -25,16 +25,15 @@
 #include <QSharedPointer>
 
 #include "clickupdatemetadata.h"
-#include "clickapicache.h"
 
-namespace UpdatePlugin {
-
+namespace UpdatePlugin
+{
 //
 // Checks for click updates.
 //
-class ClickUpdateChecker : public ClickApiProto
+class ClickUpdateChecker: public ClickApiClient
 {
-    Q_OBJECT
+Q_OBJECT
 public:
     explicit ClickUpdateChecker(QObject *parent = 0);
     ~ClickUpdateChecker();
@@ -49,9 +48,6 @@ public:
     // Cancel check for click updates.
     void cancel();
 
-    // Return the amount of cached click updates.
-    int cachedCount();
-
 protected slots:
     void requestSucceeded(QNetworkReply *reply);
 
@@ -64,8 +60,7 @@ private slots:
 signals:
     // Indicate that this ClickUpdateMetadata is ready for download and
     // install.
-    void updateAvailable(
-        const QSharedPointer<ClickUpdateMetadata> &meta);
+    void updateAvailable(const QSharedPointer<ClickUpdateMetadata> &meta);
 
     // Indicate that the check has been completed.
     void checkCompleted();
@@ -90,9 +85,8 @@ private:
 
     QProcess m_process;
     QHash<QString, QSharedPointer<ClickUpdateMetadata> > m_metas;
-    ClickApiCache m_apiCache;
 };
 
 }
 
-#endif // CLICKUPDATECHECKER_H
+#endif // PLUGINS_SYSTEM_UPDATE_CLICKUPDATECHECKER_H_

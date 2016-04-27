@@ -13,7 +13,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
-*/
+ */
 #include <assert.h>
 
 #include <QByteArray>
@@ -26,14 +26,13 @@
 #include "clickupdatechecker.h"
 #include "helpers.h"
 
+namespace UpdatePlugin
+{
 
-namespace UpdatePlugin {
-
-ClickUpdateChecker::ClickUpdateChecker(QObject *parent):
-    ClickApiProto(parent),
-    m_process(),
-    m_metas(),
-    m_apiCache(this)
+ClickUpdateChecker::ClickUpdateChecker(QObject *parent) :
+        ClickApiClient(parent),
+        m_process(),
+        m_metas()
 {
     initializeProcess();
 }
@@ -42,27 +41,23 @@ ClickUpdateChecker::~ClickUpdateChecker()
 {
 }
 
-void ClickUpdateChecker::initializeMeta(const QSharedPointer<ClickUpdateMetadata> &meta)
+void ClickUpdateChecker::initializeMeta(
+        const QSharedPointer<ClickUpdateMetadata> &meta)
 {
-    QObject::connect(meta.data(), SIGNAL(credentialError()),
-                     this, SIGNAL(credentialError()));
-    QObject::connect(meta.data(), SIGNAL(clickTokenRequestSucceeded(const ClickUpdateMetadata*)),
-                     this, SLOT(processClickToken(const ClickUpdateMetadata*)));
-    QObject::connect(meta.data(), SIGNAL(clickTokenRequestFailed(const ClickUpdateMetadata*)),
-                     this, SLOT(handleClickTokenFailure(const ClickUpdateMetadata*)));
+    QObject::connect(meta.data(), SIGNAL(credentialError()), this,
+            SIGNAL(credentialError()));
+    QObject::connect(meta.data(),
+            SIGNAL(clickTokenRequestSucceeded(const ClickUpdateMetadata*)),
+            this, SLOT(processClickToken(const ClickUpdateMetadata*)));
+    QObject::connect(meta.data(),
+            SIGNAL(clickTokenRequestFailed(const ClickUpdateMetadata*)), this,
+            SLOT(handleClickTokenFailure(const ClickUpdateMetadata*)));
 }
 
 void ClickUpdateChecker::initializeProcess()
 {
-    QObject::connect(&m_process, SIGNAL(finished(const int&)),
-                     this, SLOT(processInstalledClicks(const int&)));
-}
-
-int ClickUpdateChecker::cachedCount() {
-    if (m_apiCache.valid()) {
-        return m_apiCache.read().count();
-    }
-    return 0;
+    QObject::connect(&m_process, SIGNAL(finished(const int&)), this,
+            SLOT(processInstalledClicks(const int&)));
 }
 
 // This method is quite complex, and naturally not synchronous. Basically,
@@ -92,25 +87,6 @@ void ClickUpdateChecker::check()
     m_metas.clear();
     setErrorString("");
 
-    // Do we have cached data? If so, return it and mark the check as complete.
-    if (m_apiCache.valid()) {
-        qWarning() << "click checker: cache valid";
-        foreach(const QSharedPointer<ClickUpdateMetadata> &meta, m_apiCache.read()){
-            qWarning() << "click checker: cache had" << meta->name();
-            m_metas.insert(meta->name(), meta);
-
-            // For retries: set a token and store it for later.
-            meta->setToken(m_token);
-            initializeMeta(meta);
-
-            Q_EMIT updateAvailable(meta);
-        }
-        Q_EMIT checkCompleted();
-        return;
-    }
-
-    qWarning() << "click checker: cache invalid";
-
     // Start process of getting the list of installed clicks.
     QStringList args("list");
     args << "--manifest";
@@ -123,9 +99,11 @@ void ClickUpdateChecker::check()
 
 void ClickUpdateChecker::check(const QString &packageName)
 {
-    qWarning() << "click checker: checking this one file" << packageName << "...";
+    qWarning() << "click checker: checking this one file" << packageName
+            << "...";
     if (m_metas.contains(packageName)) {
-        qWarning() << "click checker: requesting click token for" << packageName << "...";
+        qWarning() << "click checker: requesting click token for" << packageName
+                << "...";
 
         // For now, assume this check means INSTALL!
         m_metas.value(packageName)->setAutomatic(true);
@@ -137,8 +115,7 @@ void ClickUpdateChecker::check(const QString &packageName)
 void ClickUpdateChecker::cancel()
 {
     // Abort all click update metadata objects.
-    foreach (const QString &name, m_metas.keys())
-        m_metas.value(name)->cancel();
+    foreach (const QString &name, m_metas.keys())m_metas.value(name)->cancel();
 
     m_process.terminate();
 
@@ -153,8 +130,7 @@ void ClickUpdateChecker::processInstalledClicks(const int &exitCode)
     qWarning() << "click checker: processInstalledClicks..." << exitCode;
     if (exitCode > 0) {
         setErrorString(
-            QString("list command exited with code %1.").arg(exitCode)
-        );
+                QString("list command exited with code %1.").arg(exitCode));
         Q_EMIT checkCompleted();
         return;
     }
@@ -192,7 +168,7 @@ void ClickUpdateChecker::processInstalledClicks(const int &exitCode)
 void ClickUpdateChecker::handleProcessError(const QProcess::ProcessError &error)
 {
     qWarning() << "click checker: process failed";
-    switch(error) {
+    switch (error) {
     case QProcess::FailedToStart:
         qWarning() << "QProcess::FailedToStart";
         break;
@@ -216,7 +192,8 @@ void ClickUpdateChecker::handleProcessError(const QProcess::ProcessError &error)
 
 void ClickUpdateChecker::processClickToken(const ClickUpdateMetadata *meta)
 {
-    qWarning() << "click checker: handling obtained token on metadata" << meta->name();
+    qWarning() << "click checker: handling obtained token on metadata"
+            << meta->name();
     // Pass the shared pointer instead.
     Q_EMIT updateAvailable(m_metas.value(meta->name()));
 
@@ -226,23 +203,24 @@ void ClickUpdateChecker::processClickToken(const ClickUpdateMetadata *meta)
 void ClickUpdateChecker::completionCheck()
 {
     qWarning() << "click checker: checking for completion...";
-    qWarning() << "click checker: completion check had" << m_metas.keys().count() << "keys";
+    qWarning() << "click checker: completion check had"
+            << m_metas.keys().count() << "keys";
+
     // Check if all tokens are fetched.
-    foreach (const QString &name, m_metas.keys()) {
+    foreach (const QString &name, m_metas.keys()){
         if (m_metas.value(name)->clickToken().isEmpty()) {
             qWarning() << "click checker: not complete.";
             return; // Not done.
         }
     }
 
-    m_apiCache.write(m_metas.values());
-
     // All metas had signed download urls, so we're done.
     Q_EMIT checkCompleted();
     qWarning() << "click checker: complete.";
 }
 
-void ClickUpdateChecker::handleClickTokenFailure(const ClickUpdateMetadata *meta)
+void ClickUpdateChecker::handleClickTokenFailure(
+        const ClickUpdateMetadata *meta)
 {
     m_metas.remove(meta->name());
     completionCheck();
@@ -255,13 +233,12 @@ void ClickUpdateChecker::requestClickMetadata()
 
     // Construct the “name” list
     QJsonArray array;
-    foreach (const QString &name, m_metas.keys())
-        array.append(QJsonValue(name));
+    foreach (const QString &name, m_metas.keys())array.append(QJsonValue(name));
     serializer.insert("name", array);
 
     // Create list of frameworks.
     std::stringstream frameworks;
-    for (auto f: Helpers::getAvailableFrameworks()) {
+    for (auto f : Helpers::getAvailableFrameworks()) {
         frameworks << "," << f;
     }
 
@@ -270,19 +247,16 @@ void ClickUpdateChecker::requestClickMetadata()
 
     QString urlApps = Helpers::clickMetadataUrl();
     qWarning() << "click checker: using url" << urlApps;
-    QString authHeader = m_token.signUrl(urlApps,
-                                         QStringLiteral("POST"), true);
+    QString authHeader = m_token.signUrl(urlApps, QStringLiteral("POST"), true);
     QUrl url(urlApps);
     url.setQuery(authHeader);
 
     QNetworkRequest request;
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
-    request.setRawHeader(
-                QByteArray("X-Ubuntu-Frameworks"),
-                QByteArray::fromStdString(frameworks.str()));
-    request.setRawHeader(
-                QByteArray("X-Ubuntu-Architecture"),
-                QByteArray::fromStdString(Helpers::getArchitecture()));
+    request.setRawHeader(QByteArray("X-Ubuntu-Frameworks"),
+            QByteArray::fromStdString(frameworks.str()));
+    request.setRawHeader(QByteArray("X-Ubuntu-Architecture"),
+            QByteArray::fromStdString(Helpers::getArchitecture()));
     request.setUrl(url);
 
     QNetworkReply *reply = m_nam.post(request, content);
@@ -329,7 +303,8 @@ void ClickUpdateChecker::parseClickMetadata(const QJsonArray &array)
             QSharedPointer<ClickUpdateMetadata> meta = m_metas.value(name);
             meta->setRemoteVersion(version);
             if (meta->isUpdateRequired()) {
-                qWarning() << "click checker: update of" << meta->name() << "is required";
+                qWarning() << "click checker: update of" << meta->name()
+                        << "is required";
                 meta->setIconUrl(icon_url);
                 meta->setDownloadUrl(url);
                 meta->setBinaryFilesize(size);

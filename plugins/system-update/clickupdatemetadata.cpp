@@ -17,35 +17,35 @@
  * to the click servers in order to sign the download URL as soon as it is
  * created.
  *
-*/
+ */
 #include "clickupdatemetadata.h"
 #include <apt-pkg/debversion.h>
 #include "helpers.h"
 
-namespace UpdatePlugin {
+namespace UpdatePlugin
+{
 
-ClickUpdateMetadata::ClickUpdateMetadata(QObject *parent):
-    ClickApiProto(parent),
-    m_clickToken(""),
-    m_anonDownloadUrl(""),
-    m_binaryFilesize(0),
-    m_changelog(""),
-    m_channel(""),
-    m_content(""),
-    m_department(),
-    m_downloadSha512(""),
-    m_downloadUrl(""),
-    m_iconUrl(""),
-    m_name(""),
-    m_origin(""),
-    m_packageName(""),
-    m_revision(0),
-    m_sequence(0),
-    m_status(""),
-    m_title(""),
-    m_localVersion(""),
-    m_remoteVersion(""),
-    m_automatic(false)
+ClickUpdateMetadata::ClickUpdateMetadata(QObject *parent) :
+        ClickApiClient(parent),
+        m_clickToken(""),
+        m_anonDownloadUrl(""),
+        m_binaryFilesize(0),
+        m_changelog(""),
+        m_channel(""),
+        m_content(""),
+        m_department(),
+        m_downloadSha512(""),
+        m_downloadUrl(""),
+        m_iconUrl(""),
+        m_name(""),
+        m_origin(""),
+        m_packageName(""),
+        m_revision(0),
+        m_status(""),
+        m_title(""),
+        m_localVersion(""),
+        m_remoteVersion(""),
+        m_automatic(false)
 {
 }
 
@@ -117,11 +117,6 @@ QString ClickUpdateMetadata::packageName() const
 int ClickUpdateMetadata::revision() const
 {
     return m_revision;
-}
-
-int ClickUpdateMetadata::sequence() const
-{
-    return m_sequence;
 }
 
 QString ClickUpdateMetadata::status() const
@@ -253,14 +248,6 @@ void ClickUpdateMetadata::setRevision(const int &revision)
     }
 }
 
-void ClickUpdateMetadata::setSequence(const int &sequence)
-{
-    if (m_sequence != sequence) {
-        m_sequence = sequence;
-        Q_EMIT sequenceChanged();
-    }
-}
-
 void ClickUpdateMetadata::setStatus(const QString &status)
 {
     if (m_status != status) {
@@ -316,7 +303,8 @@ void ClickUpdateMetadata::requestClickToken()
         return;
     }
 
-    QString authHeader = m_token.signUrl(downloadUrl(), QStringLiteral("HEAD"), true);
+    QString authHeader = m_token.signUrl(downloadUrl(), QStringLiteral("HEAD"),
+            true);
     // app->setClickUrl(app->downloadUrl());
 
     QString signUrl = Helpers::clickTokenUrl(downloadUrl());
@@ -360,7 +348,7 @@ bool ClickUpdateMetadata::isUpdateRequired()
 {
 
     int result = debVS.CmpVersion(m_localVersion.toUtf8().data(),
-                                  m_remoteVersion.toUtf8().data());
+            m_remoteVersion.toUtf8().data());
     return result < 0;
 }
 
@@ -378,7 +366,6 @@ bool ClickUpdateMetadata::isUpdateRequired()
 // {
 
 // }
-
 
 // signals:
 //     void signedDownloadUrlChanged();
@@ -405,4 +392,4 @@ bool ClickUpdateMetadata::isUpdateRequired()
 
 //     void downloadUrlSignFailure();
 
-} // UpdatePlugin
+}// UpdatePlugin

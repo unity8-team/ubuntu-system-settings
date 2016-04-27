@@ -17,65 +17,65 @@
  * to the click servers in order to sign the download URL as soon as it is
  * created.
  *
-*/
+ */
 #ifndef CLICKUPDATEMETADATA_H
 #define CLICKUPDATEMETADATA_H
 
-#include "clickapiproto.h"
+#include "clickapiclient.h"
 
 #define X_CLICK_TOKEN "X-Click-Token"
 
-namespace UpdatePlugin {
+namespace UpdatePlugin
+{
 
 //
 // Represents click metadata composed from local and remote sources.
 // Can fetch click tokens for each download.
 //
-class ClickUpdateMetadata : public ClickApiProto
+class ClickUpdateMetadata: public ClickApiClient
 {
-    Q_OBJECT
+Q_OBJECT
 public:
     explicit ClickUpdateMetadata(QObject *parent = 0);
     ~ClickUpdateMetadata();
+
     Q_PROPERTY(QString anonDownloadUrl READ anonDownloadUrl
-               WRITE setAnonDownloadUrl NOTIFY anonDownloadUrlChanged)
+            WRITE setAnonDownloadUrl NOTIFY anonDownloadUrlChanged)
     Q_PROPERTY(uint binaryFilesize READ binaryFilesize
-               WRITE setBinaryFilesize NOTIFY binaryFilesizeChanged)
+            WRITE setBinaryFilesize NOTIFY binaryFilesizeChanged)
     Q_PROPERTY(QString changelog READ changelog
-               WRITE setChangelog NOTIFY changelogChanged)
+            WRITE setChangelog NOTIFY changelogChanged)
     Q_PROPERTY(QString channel READ channel
-               WRITE setChannel NOTIFY channelChanged)
+            WRITE setChannel NOTIFY channelChanged)
     Q_PROPERTY(QString content READ content
-               WRITE setContent NOTIFY contentChanged)
+            WRITE setContent NOTIFY contentChanged)
     Q_PROPERTY(QStringList department READ department
-               WRITE setDepartment NOTIFY departmentChanged)
+            WRITE setDepartment NOTIFY departmentChanged)
     Q_PROPERTY(QString downloadSha512 READ downloadSha512
-               WRITE setDownloadSha512 NOTIFY downloadSha512Changed)
+            WRITE setDownloadSha512 NOTIFY downloadSha512Changed)
     Q_PROPERTY(QString downloadUrl READ downloadUrl
-               WRITE setDownloadUrl NOTIFY downloadUrlChanged)
+            WRITE setDownloadUrl NOTIFY downloadUrlChanged)
     Q_PROPERTY(QString iconUrl READ iconUrl
-               WRITE setIconUrl NOTIFY iconUrlChanged)
+            WRITE setIconUrl NOTIFY iconUrlChanged)
     Q_PROPERTY(QString name READ name
-               WRITE setName NOTIFY nameChanged)
+            WRITE setName NOTIFY nameChanged)
     Q_PROPERTY(QString origin READ origin
-               WRITE setOrigin NOTIFY originChanged)
+            WRITE setOrigin NOTIFY originChanged)
     Q_PROPERTY(QString packageName READ packageName
-               WRITE setPackageName NOTIFY packageNameChanged)
+            WRITE setPackageName NOTIFY packageNameChanged)
     Q_PROPERTY(int revision READ revision
-               WRITE setRevision NOTIFY revisionChanged)
-    Q_PROPERTY(int sequence READ sequence
-               WRITE setSequence NOTIFY sequenceChanged)
+            WRITE setRevision NOTIFY revisionChanged)
     Q_PROPERTY(QString status READ status
-               WRITE setStatus NOTIFY statusChanged)
+            WRITE setStatus NOTIFY statusChanged)
     Q_PROPERTY(QString title READ title
-               WRITE setTitle NOTIFY titleChanged)
+            WRITE setTitle NOTIFY titleChanged)
     Q_PROPERTY(QString remoteVersion READ remoteVersion
-               WRITE setRemoteVersion NOTIFY remoteVersionChanged)
+            WRITE setRemoteVersion NOTIFY remoteVersionChanged)
     Q_PROPERTY(QString localVersion READ localVersion
-               WRITE setLocalVersion NOTIFY localVersionChanged)
+            WRITE setLocalVersion NOTIFY localVersionChanged)
     Q_PROPERTY(QString clickToken READ clickToken NOTIFY clickTokenChanged)
     Q_PROPERTY(bool automatic READ automatic WRITE setAutomatic
-               NOTIFY automaticChanged)
+            NOTIFY automaticChanged)
 
     QString anonDownloadUrl() const;
     uint binaryFilesize() const;
@@ -90,7 +90,6 @@ public:
     QString origin() const;
     QString packageName() const;
     int revision() const;
-    int sequence() const;
     QString status() const;
     QString title() const;
     QString remoteVersion() const;
@@ -111,7 +110,6 @@ public:
     void setOrigin(const QString &origin);
     void setPackageName(const QString &packageName);
     void setRevision(const int &revision);
-    void setSequence(const int &sequence);
     void setStatus(const QString &status);
     void setTitle(const QString &title);
     void setRemoteVersion(const QString &version);
@@ -168,7 +166,6 @@ private:
     QString m_origin;
     QString m_packageName;
     int m_revision;
-    int m_sequence;
     QString m_status;
     QString m_title;
     QString m_localVersion;

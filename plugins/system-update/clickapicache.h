@@ -13,7 +13,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
-*/
+ */
 #ifndef CLICKAPICACHE_H
 #define CLICKAPICACHE_H
 
@@ -25,21 +25,23 @@
 
 #include "clickupdatemetadata.h"
 
-namespace UpdatePlugin {
+namespace UpdatePlugin
+{
 
 class ClickUpdateMetadata;
 
 /**
-    Caches a list of ClickUpdateMetadatas for 24 hours.
-*/
-class ClickApiCache : public QObject
+ Caches a list of ClickUpdateMetadatas for 24 hours.
+ */
+class ClickApiCache: public QObject
 {
-    Q_OBJECT
+Q_OBJECT
 public:
-    explicit ClickApiCache(QObject *parent = 0,
-                           const QString &file = QStandardPaths::writableLocation(
-                               QStandardPaths::CacheLocation)
-                               + "/click-metadata-cache.json");
+    explicit ClickApiCache(
+            QObject *parent = 0,
+            const QString &file = QStandardPaths::writableLocation(
+                    QStandardPaths::CacheLocation)
+                    + "/click-metadata-cache.json");
     ~ClickApiCache();
     static const QString CACHED_AT;
     static const QString METADATAS;
@@ -70,7 +72,8 @@ private:
                const QSharedPointer<ClickUpdateMetadata> &meta);
 
     // Serialize a ClickUpdateMetadata object.
-    QJsonArray serialize(const QList<QSharedPointer<ClickUpdateMetadata>> &metas);
+    QJsonArray serialize(
+            const QList<QSharedPointer<ClickUpdateMetadata>> &metas);
 
     QFile m_cache;
 };

@@ -14,14 +14,14 @@ add_library(update-plugin SHARED
             # ../download_tracker.h
             # ../download_tracker.cpp
             ../updatemanager.cpp
+            ../clickupdatestore.cpp
             ../clickupdatechecker.cpp
             ../clickupdatemetadata.cpp
-            ../clickapiproto.cpp
-            ../clickapicache.cpp
+            ../clickapiclient.cpp
             ../helpers.cpp
 )
 
-qt5_use_modules(update-plugin Core Qml Quick Network DBus)
+qt5_use_modules(update-plugin Core Qml Quick Network DBus Sql)
 include_directories(/usr/include/apt-pkg/)
 pkg_check_modules(UBUNTUONEAUTH REQUIRED ubuntuoneauth-2.0)
 add_definitions(${UBUNTUONEAUTH_CFLAGS} ${UBUNTUONEAUTH_CFLAGS_OTHER})

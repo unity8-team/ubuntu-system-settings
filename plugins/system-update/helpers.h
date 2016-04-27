@@ -13,9 +13,9 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
-*/
-#ifndef UPDATEHELPERS_H
-#define UPDATEHELPERS_H
+ */
+#ifndef PLUGINS_SYSTEM_UPDATE_HELPERS_H_
+#define PLUGINS_SYSTEM_UPDATE_HELPERS_H
 
 #include <sstream>
 #include <vector>
@@ -23,7 +23,8 @@
 #include <QDebug>
 #include <QDir>
 
-namespace UpdatePlugin {
+namespace UpdatePlugin
+{
 
 class Helpers
 {
@@ -43,4 +44,4 @@ public:
 
 } // Namespace UpdatePlugin
 
-#endif // UPDATEHELPERS_H
+#endif // PLUGINS_SYSTEM_UPDATE_HELPERS_H_
