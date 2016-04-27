@@ -74,7 +74,7 @@ ItemPage {
 
             onConnectError: {
                 console.warn("onConnectError: " + error);
-                showError(error, "FOOBAR");
+                showError(error);
             }
 
             onScanningChanged: {
