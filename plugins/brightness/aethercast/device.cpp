@@ -28,13 +28,11 @@
 Device::Device(const QString &path, QDBusConnection &bus) :
    m_state(Device::Idle)
 {
-    //qWarning() << Q_FUNC_INFO;
     initDevice(path, bus);
 }
 
 void Device::initDevice(const QString &path, QDBusConnection &bus)
 {
-    //qWarning() << Q_FUNC_INFO;
     /* whenever any of the properties changes,
        trigger the catch-all deviceChanged() signal */
     QObject::connect(this, SIGNAL(nameChanged()), this, SIGNAL(deviceChanged()));
@@ -73,7 +71,6 @@ void Device::initDevice(const QString &path, QDBusConnection &bus)
 void Device::slotPropertiesChanged(const QString &interface, const QVariantMap &changedProperties,
                                    const QStringList &invalidatedProperties)
 {
-    //qWarning() << Q_FUNC_INFO;
     Q_UNUSED(invalidatedProperties);
 
     if (interface != AETHERCAST_DEVICE_IFACE)
@@ -84,7 +81,6 @@ void Device::slotPropertiesChanged(const QString &interface, const QVariantMap &
 
 void Device::setProperties(const QMap<QString,QVariant> &properties)
 {
-    //qWarning() << Q_FUNC_INFO;
     QMapIterator<QString,QVariant> it(properties);
     while (it.hasNext()) {
         it.next();
@@ -94,19 +90,16 @@ void Device::setProperties(const QMap<QString,QVariant> &properties)
 
 QDBusPendingReply<void> Device::disconnect()
 {
-    qWarning() << Q_FUNC_INFO;
     return m_aethercastDevice->Disconnect();
 }
 
 QDBusPendingReply<void> Device::connect()
 {
-    qWarning() << Q_FUNC_INFO;
     return m_aethercastDevice->Connect(QString());
 }
 
 void Device::setName(const QString &name)
 {
-    //qWarning() << Q_FUNC_INFO << name;
     if (m_name != name) {
         m_name = name;
         Q_EMIT(nameChanged());
@@ -115,7 +108,6 @@ void Device::setName(const QString &name)
 
 void Device::setAddress(const QString &address)
 {
-    //qWarning() << Q_FUNC_INFO << address;
     if (m_address != address) {
         m_address = address;
         Q_EMIT(addressChanged());
@@ -124,7 +116,6 @@ void Device::setAddress(const QString &address)
 
 void Device::setState(const State &state)
 {
-    //qWarning() << Q_FUNC_INFO << state;
     if (m_state != state) {
         m_state = state;
         Q_EMIT(stateChanged());
@@ -133,7 +124,6 @@ void Device::setState(const State &state)
 
 void Device::updateProperty(const QString &key, const QVariant &value)
 {
-    //qWarning() << Q_FUNC_INFO << key << ":" << value;
     if (key == "Name") {
         setName(value.toString());
     } else if (key == "Address") {

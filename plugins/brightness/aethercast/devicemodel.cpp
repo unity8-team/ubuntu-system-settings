@@ -36,7 +36,6 @@ DeviceModel::DeviceModel(QDBusConnection &dbus, QObject *parent):
     m_dbus(dbus),
     m_aethercastManager(AETHERCAST_SERVICE, "/org/aethercast", m_dbus)
 {
-    //qWarning() << Q_FUNC_INFO;
     if (m_aethercastManager.isValid()) {
 
         connect(&m_aethercastManager, SIGNAL(InterfacesAdded(const QDBusObjectPath&, InterfaceList)),
@@ -76,8 +75,6 @@ DeviceModel::~DeviceModel()
 void DeviceModel::slotInterfacesAdded(const QDBusObjectPath &objectPath, InterfaceList ifacesAndProps)
 {
     Q_UNUSED(ifacesAndProps);
-
-    //qWarning() << Q_FUNC_INFO << objectPath.path();
 
     auto candidatedPath = objectPath.path();
 
@@ -120,7 +117,6 @@ void DeviceModel::slotInterfacesRemoved(const QDBusObjectPath &objectPath, const
 
 int DeviceModel::findRowFromAddress(const QString &address) const
 {
-    //qWarning() << Q_FUNC_INFO;
     for (int i=0, n=m_devices.size(); i<n; i++)
         if (m_devices[i]->getAddress() == address)
             return i;
@@ -130,7 +126,6 @@ int DeviceModel::findRowFromAddress(const QString &address) const
 
 void DeviceModel::setProperties(const QMap<QString,QVariant> &properties)
 {
-    //qWarning() << Q_FUNC_INFO;
     QMapIterator<QString,QVariant> it(properties);
     while (it.hasNext()) {
         it.next();
@@ -146,13 +141,11 @@ void DeviceModel::updateProperty(const QString &key, const QVariant &value)
 void DeviceModel::slotPropertyChanged(const QString      &key,
                                       const QDBusVariant &value)
 {
-    //qWarning() << Q_FUNC_INFO << key << ":" << value.variant();
     updateProperty (key, value.variant());
 }
 
 void DeviceModel::addDevice(const QString &path, const QVariantMap &properties)
 {
-    //qWarning() << Q_FUNC_INFO;
     QSharedPointer<Device> device(new Device(path, m_dbus));
     device->setProperties(properties);
 
@@ -165,7 +158,6 @@ void DeviceModel::addDevice(const QString &path, const QVariantMap &properties)
 
 void DeviceModel::addDevice(QSharedPointer<Device> &device)
 {
-    //qWarning() << Q_FUNC_INFO;
     int row = findRowFromAddress(device->getAddress());
 
     if (row >= 0) { // update existing device
@@ -182,7 +174,6 @@ void DeviceModel::addDevice(QSharedPointer<Device> &device)
 
 void DeviceModel::removeRow(int row)
 {
-    //qWarning() << Q_FUNC_INFO;
     if (0<=row && row<m_devices.size()) {
         beginRemoveRows(QModelIndex(), row, row);
         m_devices.removeAt(row);
@@ -193,7 +184,6 @@ void DeviceModel::removeRow(int row)
 
 void DeviceModel::emitRowChanged(int row)
 {
-    //qWarning() << Q_FUNC_INFO;
     if (0<=row && row<m_devices.size()) {
         QModelIndex qmi = index(row, 0);
         Q_EMIT(dataChanged(qmi, qmi));
@@ -202,7 +192,6 @@ void DeviceModel::emitRowChanged(int row)
 
 void DeviceModel::slotDeviceChanged()
 {
-    //qWarning() << Q_FUNC_INFO;
     const Device * device = qobject_cast<Device*>(sender());
 
     // find the row that goes with this device
@@ -248,7 +237,6 @@ void DeviceModel::slotRemoveFinished(QDBusPendingCallWatcher *call)
 
 int DeviceModel::rowCount(const QModelIndex &parent) const
 {
-    //qWarning() << Q_FUNC_INFO;
     Q_UNUSED(parent);
 
     return m_devices.size();
@@ -269,7 +257,6 @@ QHash<int,QByteArray> DeviceModel::roleNames() const
 
 QVariant DeviceModel::data(const QModelIndex &index, int role) const
 {
-    //qWarning() << Q_FUNC_INFO;
     QVariant ret;
 
     if ((0<=index.row()) && (index.row()<m_devices.size())) {
@@ -304,7 +291,6 @@ QVariant DeviceModel::data(const QModelIndex &index, int role) const
 bool DeviceFilter::lessThan(const QModelIndex &left,
                             const QModelIndex &right) const
 {
-    //qWarning() << Q_FUNC_INFO;
     const QString a = sourceModel()->data(left, Qt::DisplayRole).value<QString>();
     const QString b = sourceModel()->data(right, Qt::DisplayRole).value<QString>();
     return a < b;
@@ -312,7 +298,6 @@ bool DeviceFilter::lessThan(const QModelIndex &left,
 
 void DeviceFilter::filterOnStates(Device::States states)
 {
-    //qWarning() << Q_FUNC_INFO << states;
     m_states = states;
     m_statesEnabled = true;
     invalidateFilter();
@@ -321,14 +306,12 @@ void DeviceFilter::filterOnStates(Device::States states)
 bool DeviceFilter::filterAcceptsRow(int sourceRow,
                                     const QModelIndex &sourceParent) const
 {
-    //qWarning() << Q_FUNC_INFO;
     bool accepts = true;
     QModelIndex childIndex = sourceModel()->index(sourceRow, 0, sourceParent);
 
     if (accepts && m_statesEnabled) {
         const int state = childIndex.model()->data(childIndex, DeviceModel::StateRole).value<int>();
         accepts = (m_states & state) != 0;
-        //qWarning() << Q_FUNC_INFO << "m_states:" << m_states << "state:" << state << "accepts:" << accepts;
     }
 
     return accepts;

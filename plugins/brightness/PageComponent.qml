@@ -44,31 +44,8 @@ ItemPage {
         id: brightnessPanel
     }
 
-
-    function showError(error, displayName) {
-        var diag = PopupUtils.open(errorAlert, null, {"error": error, "displayName": selectedDisplayName});
-    }
-
-    Component {
-        id: errorAlert
-        WifiDisplaysAlert {}
-    }
-
     AethercastDisplays {
         id: aethercastDisplays
-
-        onConnectError: {
-            console.warn("onConnectError: " + error);
-            showError(error);
-        }
-
-        onScanningChanged: {
-            console.warn("onScanningChanged: " + scanning);
-        }
-
-        onStateChanged: {
-            console.warn("aethercastDisplays onStateNameChanged: " + state);
-        }
     }
 
     Flickable {

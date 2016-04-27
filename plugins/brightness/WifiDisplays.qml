@@ -48,11 +48,7 @@ ItemPage {
         repeat: true
         running: !displays.scanning
         onTriggered: {
-            console.warn("Timer triggered");
-            console.warn("ConnectedDevices: " + displays.connectedDevices.count);
-            console.warn("DisconnectedDevices: " + displays.disconnectedDevices.count);
             if (!displays.scanning && displays.state !== AethercastDevice.Connected) {
-                console.warn("Initiating a scan");
                 displays.scan();
             }
         }
@@ -77,14 +73,12 @@ ItemPage {
                 showError(error);
             }
 
-            onScanningChanged: {
-                console.warn("onScanningChanged: " + scanning);
-            }
-
+            // Log some info to help debug
             onConnectedDevicesChanged: {
                 console.warn("ConnectedDevices: " + displays.connectedDevices.count);
             }
 
+            // Log some info to help debug
             onDisconnectedDevicesChanged: {
                 console.warn("DisconnectedDevices: " + displays.disconnectedDevices.count);
             }
