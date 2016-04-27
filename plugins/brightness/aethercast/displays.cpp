@@ -134,9 +134,30 @@ QAbstractItemModel * Displays::disconnectedDevices()
     return ret;
 }
 
+void Displays::handleConnectError(QDBusError error)
+{
+    qWarning() << Q_FUNC_INFO << error;
+    if (error.name() == "org.aethercast.Error.None")
+        Q_EMIT(connectError(Error::None));
+    else if (error.name() == "org.aethercast.Error.Failed")
+        Q_EMIT(connectError(Error::Failed));
+    else if (error.name() == "org.aethercast.Error.Already")
+        Q_EMIT(connectError(Error::Already));
+    else if (error.name() == "org.aethercast.Error.ParamInvalid")
+        Q_EMIT(connectError(Error::ParamInvalid));
+    else if (error.name() == "org.aethercast.Error.InvalidState")
+        Q_EMIT(connectError(Error::InvalidState));
+    else if (error.name() == "org.aethercast.Error.NotConnected")
+        Q_EMIT(connectError(Error::NotConnected));
+    else if (error.name() == "org.aethercast.Error.NotReady")
+        Q_EMIT(connectError(Error::NotReady));
+    else
+        Q_EMIT(connectError(Error::Unknown));
+}
+
 void Displays::disconnectDevice(const QString &address)
 {
-    //qWarning() << Q_FUNC_INFO << address;
+    qWarning() << Q_FUNC_INFO << address;
     auto device = m_devices.getDeviceFromAddress(address);
     if (device)
         device->disconnect();
@@ -144,10 +165,14 @@ void Displays::disconnectDevice(const QString &address)
 
 void Displays::connectDevice(const QString &address)
 {
-    //qWarning() << Q_FUNC_INFO << address;
+    qWarning() << Q_FUNC_INFO << address;
     auto device = m_devices.getDeviceFromAddress(address);
-    if (device)
-        device->connect();
+    if (!device)
+        return;
+    auto reply = device->connect();
+    reply.waitForFinished();
+    if (reply.isError())
+        handleConnectError(reply.error());
 }
 
 void Displays::updateProperty(const QString &key, const QVariant &value)
