@@ -1,10 +1,38 @@
-# set(XVFB_CMD xvfb-run -a -s "-screen 0 640x480x24")
-# include_directories(${CMAKE_CURRENT_BINARY_DIR} ../../../plugins/system-update)
-# add_definitions(-DTESTS)
+set(XVFB_CMD xvfb-run -a -s "-screen 0 640x480x24")
+include_directories(${CMAKE_CURRENT_BINARY_DIR} ../../../plugins/system-update)
 
-# # Need to get libsignon/accounts here, as they get exposed in headers
-# pkg_check_modules(UBUNTUONEAUTH REQUIRED ubuntuoneauth-2.0)
-# add_definitions(${UBUNTUONEAUTH_CFLAGS} ${UBUNTUONEAUTH_CFLAGS_OTHER})
+find_package(Qt5Test REQUIRED)
+add_definitions(-DTESTS)
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
+
+# Install a mock click server
+file(COPY
+    ${CMAKE_CURRENT_SOURCE_DIR}/../../autopilot/ubuntu_system_settings/utils/mock_update_click_server.py
+    DESTINATION
+    ${CMAKE_CURRENT_BINARY_DIR})
+
+# Need to get libsignon/accounts here, as they get exposed in headers
+pkg_check_modules(UBUNTUONEAUTH REQUIRED ubuntuoneauth-2.0)
+add_definitions(${UBUNTUONEAUTH_CFLAGS} ${UBUNTUONEAUTH_CFLAGS_OTHER})
+
+add_executable(tst-clickapiclient tst_clickapiclient.cpp mockclickservertestcase.h)
+add_test(tst-clickapiclient tst-clickapiclient)
+set_tests_properties(
+    tst-clickapiclient
+        PROPERTIES
+        ENVIRONMENT "IGNORE_CREDENTIALS=1;URL_APPS=http://127.0.0.1:9009"
+)
+target_link_libraries(tst-clickapiclient Qt5::Test update-plugin)
+
+add_executable(tst-clickupdatemetadata tst_clickupdatemetadata.cpp mockclickservertestcase.h)
+add_test(tst-clickupdatemetadata tst-clickupdatemetadata)
+set_tests_properties(
+    tst-clickupdatemetadata
+        PROPERTIES
+        ENVIRONMENT "IGNORE_CREDENTIALS=1;URL_APPS=http://127.0.0.1:9009"
+)
+target_link_libraries(tst-clickupdatemetadata Qt5::Test update-plugin)
 
 # add_executable(tst-update-manager
 #     tst_updatemanager.cpp

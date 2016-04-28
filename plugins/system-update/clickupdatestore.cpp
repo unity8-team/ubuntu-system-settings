@@ -32,8 +32,6 @@ ClickUpdateStore::ClickUpdateStore(QObject *parent) :
         m_activeUpdates(this)
 {
     m_db = QSqlDatabase::addDatabase(QLatin1String("QSQLITE"));
-    if (!m_db.isValid())
-        qWarning() << "the db wasn't valid in the initializer";
     initializeStore();
 }
 
@@ -44,11 +42,15 @@ ClickUpdateStore::~ClickUpdateStore()
 
 void ClickUpdateStore::initializeStore()
 {
-    QString dbPath =
-        QStandardPaths::writableLocation(QStandardPaths::AppDataLocation)
-        + QDir::separator() + "clickupdatestore.db";
-    m_db.setDatabaseName(dbPath);
+    QString dataPath = QStandardPaths::writableLocation(
+        QStandardPaths::AppDataLocation);
+    if (!QDir().mkpath(dataPath)) {
+        qCritical() << "Could not create" << dataPath;
+        return;
+    }
 
+    QString dbPath = dataPath + QDir::separator() + "clickupdatestore.db";
+    m_db.setDatabaseName(dbPath);
     if (!m_db.open()) {
         qCritical() << "Could not open updates database:" <<
             dbPath << m_db.lastError().text();
@@ -76,6 +78,11 @@ void ClickUpdateStore::initializeStore()
         qWarning() << m_installedUpdates.lastError();
 }
 
+void ClickUpdateStore::clickUpdateInstalled(const QString &uid)
+{
+
+}
+
 bool ClickUpdateStore::createDb()
 {
     if (Q_UNLIKELY(!m_db.transaction())) return false;
@@ -88,9 +95,7 @@ bool ClickUpdateStore::createDb()
         return false;
     }
 
-    // There is duplication and several candidate keys in this model,
-    // but we ignore it so as to keep the data simple.
-    ok = q.exec("CREATE TABLE updates (id INTEGER PRIMARY KEY,"
+    ok = q.exec("CREATE TABLE updates ("
                 "app_id TEXT NOT NULL,"
                 "version TEXT NOT NULL,"
                 "revision INTEGER NOT NULL,"
@@ -103,7 +108,8 @@ bool ClickUpdateStore::createDb()
                 "download_url TEXT NOT NULL,"
                 "changelog TEXT NOT NULL,"
                 "udm_download_id INTEGER,"
-                "click_token TEXT DEFAULT '')");
+                "click_token TEXT DEFAULT '',"
+                "PRIMARY KEY (app_id, revision))");
 
     if (Q_UNLIKELY(!ok)) {
         m_db.rollback();
@@ -132,7 +138,7 @@ QDateTime ClickUpdateStore::lastCheckDate()
     }
 
     QSqlQuery q(m_db);
-    q.exec("SELECT checked_at_utc FROM meta;");
+    q.exec("SELECT checked_at_utc FROM meta ORDER BY checked_at_utc DESC;");
 
     if (q.next())
         d = QDateTime::fromTime_t(q.value(0).toUInt());

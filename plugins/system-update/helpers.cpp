@@ -89,13 +89,14 @@ QString Helpers::clickTokenUrl(const QString &url)
 {
     QProcessEnvironment environment = QProcessEnvironment::systemEnvironment();
     return environment.value("CLICK_TOKEN_URL", url);
-
 }
 
 bool Helpers::isIgnoringCredentials()
 {
-    // IGNORE_CREDENTIALS
-    return false;
+    QProcessEnvironment environment = QProcessEnvironment::systemEnvironment();
+    // If IGNORE_CREDENTIALS is set to something other than an empty string,
+    // we should ignore credentials.
+    return environment.value("IGNORE_CREDENTIALS", "") != "";
 }
 
 QString Helpers::whichClick()

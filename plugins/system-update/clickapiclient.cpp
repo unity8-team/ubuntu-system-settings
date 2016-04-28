@@ -73,6 +73,7 @@ void ClickApiClient::requestFinished(QNetworkReply *reply)
         reply->deleteLater();
         return;
     }
+    qWarning() << "valid reply!";
 
     switch (reply->error()) {
     case QNetworkReply::NoError:
@@ -97,6 +98,7 @@ bool ClickApiClient::validReply(const QNetworkReply *reply)
             QNetworkRequest::HttpStatusCodeAttribute);
     if (!statusAttr.isValid()) {
         Q_EMIT networkError();
+        qWarning() << "status attribute was invalid";
         setErrorString("status attribute was invalid");
         return false;
     }
@@ -107,6 +109,12 @@ bool ClickApiClient::validReply(const QNetworkReply *reply)
     if (httpStatus == 401 || httpStatus == 403) {
         setErrorString("credential error");
         Q_EMIT credentialError();
+        return false;
+    }
+
+    if (httpStatus == 404) {
+        setErrorString("not found");
+        Q_EMIT serverError();
         return false;
     }
 

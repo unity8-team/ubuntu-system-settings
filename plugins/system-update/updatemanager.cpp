@@ -126,7 +126,7 @@ void UpdateManager::initializeSSOService()
 
 void UpdateManager::initializeClickUpdateStore()
 {
-
+    qWarning() << "last update" << m_clickUpdateStore.lastCheckDate().toString("dd.MM.yyyy hh:mm:ss");
 }
 
 bool UpdateManager::online() const

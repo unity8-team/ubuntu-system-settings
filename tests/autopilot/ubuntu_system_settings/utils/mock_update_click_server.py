@@ -20,7 +20,7 @@ class Handler(BaseHTTPRequestHandler):
     def do_HEAD(self):
         """Sends headers.."""
         self.send_response(200)
-        self.send_header("X-Click-Token", "X-Click-Token")
+        self.send_header("X-Click-Token", "Mock-X-Click-Token")
         self.end_headers()
 
     def do_POST(self):
@@ -29,10 +29,21 @@ class Handler(BaseHTTPRequestHandler):
 
     def do_GET(self):
         """Respond to a GET request."""
-        if '*' in self.server.responses:
-            response = self.server.responses['*']
-        else:
+        if self.path in self.server.responses:
             response = self.server.responses[self.path]
+        elif self.path == '/403':
+            self.send_response(403)
+            self.send_header("Content-type", "text/plain")
+            self.end_headers()
+            return
+        elif self.path == '/404':
+            self.send_response(404)
+            self.send_header("Content-type", "text/plain")
+            self.end_headers()
+            return
+        elif '*' in self.server.responses:
+            response = self.server.responses['*']
+
         self.send_response(200)
         self.send_header("Content-type", "application/json")
         self.end_headers()

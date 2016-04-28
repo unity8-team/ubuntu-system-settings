@@ -30,7 +30,6 @@ import Ubuntu.DownloadManager 1.2
 import Ubuntu.OnlineAccounts.Client 0.1
 import Ubuntu.SystemSettings.Update 1.0
 
-
 ItemPage {
     id: root
     objectName: "systemUpdatesPage"

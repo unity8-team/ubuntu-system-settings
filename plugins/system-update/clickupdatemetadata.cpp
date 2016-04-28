@@ -297,7 +297,7 @@ void ClickUpdateMetadata::setClickToken(const QString &clickToken)
 void ClickUpdateMetadata::requestClickToken()
 {
     qWarning() << "click meta:" << name() << "requests token...";
-    if (!m_token.isValid()) {
+    if (!m_token.isValid() && !Helpers::isIgnoringCredentials()) {
         qWarning() << "click meta:" << name() << "token invalid";
         Q_EMIT credentialError();
         return;
@@ -305,7 +305,12 @@ void ClickUpdateMetadata::requestClickToken()
 
     QString authHeader = m_token.signUrl(downloadUrl(), QStringLiteral("HEAD"),
             true);
-    // app->setClickUrl(app->downloadUrl());
+
+    if (authHeader.isEmpty()) {
+        // Already logged.
+        clickTokenRequestFailed(this);
+        return;
+    }
 
     QString signUrl = Helpers::clickTokenUrl(downloadUrl());
     QUrl query(signUrl);
