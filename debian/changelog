@@ -1,3 +1,35 @@
+ubuntu-system-settings (0.3+16.04.20160428-0ubuntu1) xenial; urgency=medium
+
+  [ Ken VanDine ]
+  * Added Display Casting to the brightness panel added:
+    plugins/brightness/WifiDisplays.qml
+    plugins/brightness/WifiDisplaysAlert.qml
+    plugins/brightness/aethercast/
+    plugins/brightness/aethercast/aethercast_device.cpp
+    plugins/brightness/aethercast/aethercast_device.h
+    plugins/brightness/aethercast/aethercast_helper.h
+    plugins/brightness/aethercast/aethercast_manager.cpp
+    plugins/brightness/aethercast/aethercast_manager.h
+    plugins/brightness/aethercast/dbus-shared.h
+    plugins/brightness/aethercast/device.cpp
+    plugins/brightness/aethercast/device.h
+    plugins/brightness/aethercast/devicemodel.cpp
+    plugins/brightness/aethercast/devicemodel.h
+    plugins/brightness/aethercast/displays.cpp
+    plugins/brightness/aethercast/displays.h
+    plugins/brightness/aethercast/freedesktop_objectmanager.cpp
+    plugins/brightness/aethercast/freedesktop_objectmanager.h
+    plugins/brightness/aethercast/freedesktop_properties.cpp
+    plugins/brightness/aethercast/freedesktop_properties.h
+    plugins/brightness/aethercast/org.aethercast.xml
+  * Make the brightness plugin name dynamic based on the android
+    property ubuntu.widi.supported
+
+  [ Michał Sawicz ]
+  * Dynamic grid unit size support
+
+ -- Simon Fels <simon.busch@canonical.com>  Thu, 28 Apr 2016 15:31:45 +0000
+
 ubuntu-system-settings (0.3+16.04.20160412-0ubuntu1) xenial; urgency=medium
 
   * Dropped workaround for lack of default value for MousePrimaryButton
