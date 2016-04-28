@@ -37,5 +37,3 @@ install(FILES qmldir DESTINATION ${PLUG_DIR})
 install(FILES brightness.settings DESTINATION ${PLUGIN_MANIFEST_DIR})
 install(FILES settings-brightness.svg DESTINATION ${PLUGIN_MANIFEST_DIR}/icons)
 install(FILES ${QML_SOURCES} DESTINATION ${PLUGIN_QML_DIR}/brightness)
-
-

@@ -65,7 +65,6 @@ Displays::Displays(const QDBusConnection &dbus, QObject *parent):
     m_disconnectedDevices.setSourceModel(&m_devices);
     connect(&m_connectedDevices, SIGNAL(rowsInserted(const QModelIndex, int, int)), this, SIGNAL(connectedDevicesChanged()));
     connect(&m_disconnectedDevices, SIGNAL(rowsInserted(const QModelIndex, int, int)), this, SIGNAL(disconnectedDevicesChanged()));
-
 }
 
 void Displays::slotPropertiesChanged(const QString &interface, const QVariantMap &changedProperties,

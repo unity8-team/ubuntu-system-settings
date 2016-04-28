@@ -42,6 +42,9 @@ ItemPage {
         WifiDisplaysAlert {}
     }
 
+    // Aethercast only caches results of devices discovered during scan
+    // for a limited time, so we'll automatically rescan 60s after scanning
+    // finishes
     Timer {
         id: scanTimer
         interval: 60000
@@ -69,7 +72,7 @@ ItemPage {
             id: displays
 
             onConnectError: {
-                console.warn("onConnectError: " + error);
+                console.error("onConnectError: " + error);
                 showError(error);
             }
 

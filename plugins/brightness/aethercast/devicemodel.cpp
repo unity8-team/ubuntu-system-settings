@@ -135,6 +135,8 @@ void DeviceModel::setProperties(const QMap<QString,QVariant> &properties)
 
 void DeviceModel::updateProperty(const QString &key, const QVariant &value)
 {
+    // Log any cases we get updateProperty until we can ensure
+    // we don't need to handle it
     qWarning() << Q_FUNC_INFO << key << ":" << value;
 }
 
