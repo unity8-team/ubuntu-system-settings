@@ -1,4 +1,5 @@
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
+include_directories(${ANDR_PROP_INCLUDE_DIRS})
 
 add_definitions(-DQT_NO_KEYWORDS)
 

@@ -58,6 +58,7 @@ BrightnessItem::BrightnessItem(const QVariantMap &staticData, QObject *parent):
 
     char widi[PROP_VALUE_MAX] = "";
     property_get("ubuntu.widi.supported", widi, "0");
+    // We want to log this property to help aid debugging
     qWarning() << Q_FUNC_INFO << "ubuntu.widi.supported:" << widi;
 
     if (strcmp(widi, "0") == 0) {
