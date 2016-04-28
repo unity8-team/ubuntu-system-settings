@@ -40,12 +40,21 @@ ItemPage {
         schema.id: "com.ubuntu.touch.system"
     }
 
+    AethercastDisplays {
+        id: aethercastDisplays
+    }
+
     UbuntuBrightnessPanel {
         id: brightnessPanel
     }
 
-    AethercastDisplays {
-        id: aethercastDisplays
+    QDBusActionGroup {
+        id: indicatorPower
+        busType: 1
+        busName: "com.canonical.indicator.power"
+        objectPath: "/com/canonical/indicator/power"
+        property variant brightness: action("brightness")
+        Component.onCompleted: start()
     }
 
     Flickable {
@@ -63,17 +72,6 @@ ItemPage {
         Column {
             anchors.left: parent.left
             anchors.right: parent.right
-
-            QDBusActionGroup {
-                id: indicatorPower
-                busType: 1
-                busName: "com.canonical.indicator.power"
-                objectPath: "/com/canonical/indicator/power"
-
-                property variant brightness: action("brightness")
-
-                Component.onCompleted: start()
-            }
 
             ListItem.Standard {
                 text: i18n.tr("Display brightness")
@@ -131,20 +129,20 @@ ItemPage {
                 visible: brightnessPanel.widiSupported
             }
 
-	    ListItem.Standard {
-		text: i18n.tr("External display")
-		enabled: brightnessPanel.widiSupported
-		onClicked: enabledCheck.trigger()
-		control: Switch {
-		    id: enabledCheck
-		    property bool serverChecked: aethercastDisplays.enabled
-		    onServerCheckedChanged: checked = serverChecked
-		    Component.onCompleted: checked = serverChecked
-		    onTriggered: {
-		        aethercastDisplays.enabled = checked;
-		    }
-		}
-	    }
+            ListItem.Standard {
+                text: i18n.tr("External display")
+                enabled: brightnessPanel.widiSupported
+                onClicked: enabledCheck.trigger()
+                control: Switch {
+                    id: enabledCheck
+                    property bool serverChecked: aethercastDisplays.enabled
+                    onServerCheckedChanged: checked = serverChecked
+                    Component.onCompleted: checked = serverChecked
+                    onTriggered: {
+                        aethercastDisplays.enabled = checked;
+                    }
+                }
+            }
 
             ListItem.SingleValue {
                 objectName: "displayCasting"
