@@ -34,6 +34,25 @@ set_tests_properties(
 )
 target_link_libraries(tst-clickupdatemetadata Qt5::Test update-plugin)
 
+add_executable(tst-clickupdatestore tst_clickupdatestore.cpp)
+add_test(tst-clickupdatestore tst-clickupdatestore)
+# set_tests_properties(
+#     tst-clickupdatestore
+#         PROPERTIES
+#         ENVIRONMENT "IGNORE_CREDENTIALS=1;URL_APPS=http://127.0.0.1:9009"
+# )
+target_link_libraries(tst-clickupdatestore Qt5::Test update-plugin)
+
+add_executable(tst-updatepluginhelpers tst_helpers.cpp)
+add_test(tst-updatepluginhelpers tst-updatepluginhelpers)
+set_tests_properties(
+    tst-updatepluginhelpers
+        PROPERTIES
+        ENVIRONMENT "IGNORE_CREDENTIALS=1;URL_APPS=http://127.0.0.1:9009;FRAMEWORKS_FOLDER=${CMAKE_CURRENT_BINARY_DIR};CLICK_TOKEN_URL=http://example.org;"
+)
+target_link_libraries(tst-updatepluginhelpers Qt5::Test update-plugin)
+
+
 # add_executable(tst-update-manager
 #     tst_updatemanager.cpp
 #     fakeprocess.cpp

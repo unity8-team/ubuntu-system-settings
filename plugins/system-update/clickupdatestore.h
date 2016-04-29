@@ -23,6 +23,8 @@
 #include <QSqlQueryModel>
 #include <QSqlTableModel>
 
+#include "clickupdatemetadata.h"
+
 namespace UpdatePlugin
 {
 
@@ -33,6 +35,9 @@ public:
     explicit ClickUpdateStore(QObject *parent = 0);
     ~ClickUpdateStore();
 
+    // For testing purposes.
+    explicit ClickUpdateStore(const QString &dbpath, QObject *parent = 0);
+
     Q_PROPERTY(QSqlQueryModel* installedUpdates READ installedUpdates
                CONSTANT)
     Q_PROPERTY(QSqlQueryModel* activeUpdates READ activeUpdates
@@ -41,19 +46,37 @@ public:
     QSqlQueryModel *installedUpdates();
     QSqlQueryModel *activeUpdates();
     QDateTime lastCheckDate();
+    void setLastCheckDate(const QDateTime &lastCheckUtc);
+
+    // Adds a click update to the store based on the given metadata.
+    // Can safely be called multiple times for the same update.
+    void add(const ClickUpdateMetadata *meta);
+
+    // Mark a click update as installed.
+    void markInstalled(const QString &appId, const int &revision);
+
+    void setUdmId(const QString &appId, const int &revision, const int &udmId);
+    void unsetUdmId(const QString &appId, const int &revision);
 
 private slots:
-    void clickUpdateInstalled(const QString &uid);
+    void queryActive();
+    void queryInstalled();
+    void queryAll();
 
 signals:
 
 private:
     void initializeStore();
     bool createDb();
+    bool openDb();
 
-    QSqlDatabase m_db;
+    // Removes old updates.
+    void pruneDb();
+
+    QSqlDatabase m_db = QSqlDatabase::addDatabase(QLatin1String("QSQLITE"));
     QSqlQueryModel m_installedUpdates;
     QSqlQueryModel m_activeUpdates;
+    QString m_dbpath;
 };
 
 } // UpdatePlugin

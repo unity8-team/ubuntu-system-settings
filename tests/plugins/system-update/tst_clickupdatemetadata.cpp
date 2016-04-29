@@ -128,7 +128,6 @@ private slots:
         m_instance->setAutomatic(!m_instance->automatic());
         QCOMPARE(automaticSpy.count(), 1);
     }
-
     void testObtainClickToken()
     {
         QSignalSpy clickTokenSpy(m_instance, SIGNAL(clickTokenChanged()));
@@ -151,7 +150,6 @@ private slots:
         QVERIFY(metas.size() == 1);
         QVERIFY(metas.at(0) == m_instance);
     }
-
     void testEmptyDownloadUrl()
     {
         std::vector<const UpdatePlugin::ClickUpdateMetadata*> metas;
@@ -167,6 +165,16 @@ private slots:
         // and that the instance we got is identical to ours.
         QVERIFY(metas.size() == 1);
         QVERIFY(metas.at(0) == m_instance);
+    }
+    void testUpdateRequired()
+    {
+        m_instance->setLocalVersion("1.0.0");
+        m_instance->setRemoteVersion("1.0.1");
+        QVERIFY(m_instance->isUpdateRequired() == true);
+
+        m_instance->setLocalVersion("1.0.1");
+        m_instance->setRemoteVersion("1.0.1");
+        QVERIFY(m_instance->isUpdateRequired() == false);
     }
 
 private:
