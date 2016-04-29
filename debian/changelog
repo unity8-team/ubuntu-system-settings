@@ -1,3 +1,20 @@
+ubuntu-system-settings (0.3+16.04.20160429.2-0ubuntu1) xenial; urgency=medium
+
+  [ Antti Kaijanmäki ]
+  * Add string for cellular data switch. (LP: #1373463)
+
+  [ Ken VanDine ]
+  * Fixes to sleep/idle settings from Pat McGowan (LP: #1494514,
+    #1367294, #1569758)
+  * Only depend on aethercast on amd64, armhf, i386 which are the only
+    supported arches
+
+  [ Matthew Paul Thomas ]
+  * Removes the GPS switch and caption from Battery settings, fixing bug
+    1520580. (LP: #1520580)
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Fri, 29 Apr 2016 19:26:08 +0000
+
 ubuntu-system-settings (0.3+16.04.20160428-0ubuntu1) xenial; urgency=medium
 
   [ Ken VanDine ]
