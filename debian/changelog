@@ -1,3 +1,9 @@
+ubuntu-system-settings (0.3+16.04.20160429-0ubuntu1) xenial; urgency=medium
+
+  * Add string for cellular data switch. (LP: #1373463)
+
+ -- Antti Kaijanmäki <antti.kaijanmaki@canonical.com>  Fri, 29 Apr 2016 10:47:07 +0000
+
 ubuntu-system-settings (0.3+16.04.20160412-0ubuntu1) xenial; urgency=medium
 
   * Dropped workaround for lack of default value for MousePrimaryButton
