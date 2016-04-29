@@ -111,6 +111,9 @@ private slots:
                     ->record(1).value("app_id").toString(),
                  m.name());
 
+        // Pruning here should have no effect.
+        m_instance->pruneDb();
+
         // Mark as installed
         m_instance->markInstalled(m.name(), m.revision());
         QCOMPARE(m_instance->activeUpdates()->rowCount(), 1);

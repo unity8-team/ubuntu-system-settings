@@ -58,6 +58,9 @@ public:
     void setUdmId(const QString &appId, const int &revision, const int &udmId);
     void unsetUdmId(const QString &appId, const int &revision);
 
+    // Removes old updates.
+    void pruneDb();
+
 private slots:
     void queryActive();
     void queryInstalled();
@@ -69,9 +72,6 @@ private:
     void initializeStore();
     bool createDb();
     bool openDb();
-
-    // Removes old updates.
-    void pruneDb();
 
     QSqlDatabase m_db = QSqlDatabase::addDatabase(QLatin1String("QSQLITE"));
     QSqlQueryModel m_installedUpdates;

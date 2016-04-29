@@ -77,6 +77,18 @@ class Manager(object):
                     "download_sha512": "1232223sdfdsffs",
                     "changelog": "New version!",
                     "title": "Test Click App"
+                }, {
+                    "name": "com.ubuntu.developer.myclick",
+                    "version": "13.0",
+                    "icon_url": (
+                        "https://upload.wikimedia.org/wikipedia/"
+                        "commons/a/ab/Logo-ubuntu_cof-orange-hex.svg"
+                    ),
+                    "download_url": ("http://localhost:9009/download"),
+                    "binary_filesize": 12000,
+                    "download_sha512": "489478",
+                    "changelog": "Foo",
+                    "title": "My Click App"
                 }]
             }
         self._httpd = HTTPServer((server_address, server_port), Handler)

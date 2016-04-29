@@ -35,11 +35,18 @@ ClickUpdateChecker::ClickUpdateChecker(QObject *parent) :
         m_metas()
 {
     initializeProcess();
+
+    // The API client should set an appropriate error string.
+    connect(this, SIGNAL(networkError()),
+            this, SIGNAL(checkCompleted()));
+    connect(this, SIGNAL(serverError()),
+            this, SIGNAL(checkCompleted()));
 }
 
 ClickUpdateChecker::~ClickUpdateChecker()
 {
 }
+
 
 void ClickUpdateChecker::initializeMeta(
         const QSharedPointer<ClickUpdateMetadata> &meta)
@@ -79,7 +86,7 @@ void ClickUpdateChecker::check()
     // completed. We should not be given an invalid token here,
     // and we've yet to talk to the server so we can't know
     // the state of the token.
-    if (!m_token.isValid()) {
+    if (!m_token.isValid() && !Helpers::isIgnoringCredentials()) {
         Q_EMIT checkCompleted();
         return;
     }

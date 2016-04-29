@@ -12,6 +12,12 @@ file(COPY
     DESTINATION
     ${CMAKE_CURRENT_BINARY_DIR})
 
+# Install a mock click command
+file(COPY
+    ${CMAKE_CURRENT_SOURCE_DIR}/../../autopilot/ubuntu_system_settings/utils/mock_click_command
+    DESTINATION
+    ${CMAKE_CURRENT_BINARY_DIR})
+
 # Need to get libsignon/accounts here, as they get exposed in headers
 pkg_check_modules(UBUNTUONEAUTH REQUIRED ubuntuoneauth-2.0)
 add_definitions(${UBUNTUONEAUTH_CFLAGS} ${UBUNTUONEAUTH_CFLAGS_OTHER})
@@ -33,6 +39,15 @@ set_tests_properties(
         ENVIRONMENT "IGNORE_CREDENTIALS=1;URL_APPS=http://127.0.0.1:9009"
 )
 target_link_libraries(tst-clickupdatemetadata Qt5::Test update-plugin)
+
+add_executable(tst-clickupdatechecker tst_clickupdatechecker.cpp mockclickservertestcase.h)
+add_test(tst-clickupdatechecker tst-clickupdatechecker)
+set_tests_properties(
+    tst-clickupdatechecker
+        PROPERTIES
+        ENVIRONMENT "IGNORE_CREDENTIALS=1;URL_APPS=http://127.0.0.1:9009;CLICK_COMMAND=${CMAKE_CURRENT_BINARY_DIR}/mock_click_command"
+)
+target_link_libraries(tst-clickupdatechecker Qt5::Test update-plugin)
 
 add_executable(tst-clickupdatestore tst_clickupdatestore.cpp)
 add_test(tst-clickupdatestore tst-clickupdatestore)

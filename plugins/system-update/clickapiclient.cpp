@@ -99,7 +99,7 @@ bool ClickApiClient::validReply(const QNetworkReply *reply)
     if (!statusAttr.isValid()) {
         Q_EMIT networkError();
         qWarning() << "status attribute was invalid";
-        setErrorString("status attribute was invalid");
+        setErrorString("Could not parse the HTTP status code.");
         return false;
     }
 
@@ -107,13 +107,13 @@ bool ClickApiClient::validReply(const QNetworkReply *reply)
     qWarning() << "click proto: HTTP Status: " << httpStatus;
 
     if (httpStatus == 401 || httpStatus == 403) {
-        setErrorString("credential error");
+        setErrorString(QString("Server responded with %1.").arg(httpStatus));
         Q_EMIT credentialError();
         return false;
     }
 
     if (httpStatus == 404) {
-        setErrorString("not found");
+        setErrorString("Server responded with 404.");
         Q_EMIT serverError();
         return false;
     }

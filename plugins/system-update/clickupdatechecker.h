@@ -62,7 +62,8 @@ signals:
     // install.
     void updateAvailable(const QSharedPointer<ClickUpdateMetadata> &meta);
 
-    // Indicate that the check has been completed.
+    // Indicate that the check has been completed. This is called on both
+    // server and networking errors. Check the errorString for failures.
     void checkCompleted();
 
 private:

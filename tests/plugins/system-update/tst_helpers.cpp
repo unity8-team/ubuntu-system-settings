@@ -15,19 +15,15 @@ private slots:
     }
     void testGetAvailableFrameworks()
     {
-
+        QString target("ubuntu-sdk-15.04");
+        for(auto const& value: UpdatePlugin::Helpers::getAvailableFrameworks())
+             QCOMPARE(QString::fromStdString(value), target);
     }
     void testGetArchitecture()
     {
-
-    }
-    void testArchitectureFromDpkg()
-    {
-
-    }
-    void testListFolder()
-    {
-
+        QString res = QString::fromStdString(
+            UpdatePlugin::Helpers::getArchitecture());
+        QVERIFY(!res.isEmpty());
     }
     void testClickMetadataUrl()
     {
@@ -36,7 +32,9 @@ private slots:
     }
     void testClickTokenUrl()
     {
-
+        QString target("http://example.org");
+        QCOMPARE(UpdatePlugin::Helpers::clickTokenUrl(target),
+                 target);
     }
     void testIsIgnoringCredentials()
     {
