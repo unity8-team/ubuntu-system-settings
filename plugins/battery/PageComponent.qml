@@ -392,44 +392,6 @@ ItemPage {
                 }
                 visible: bluetoothActionGroup.visible
             }
-
-            QDBusActionGroup {
-                id: locationActionGroup
-                busType: DBus.SessionBus
-                busName: "com.canonical.indicator.location"
-                objectPath: "/com/canonical/indicator/location"
-
-                property variant enabled: action("gps-detection-enabled")
-
-                Component.onCompleted: start()
-            }
-
-            ListItem.Standard {
-                id: gpsListItem
-                text: i18n.tr("GPS")
-                control: Loader {
-                    active: locationActionGroup.enabled.state != null
-                    sourceComponent: Switch {
-                        id: gpsSwitch
-                        property bool serverChecked: locationActionGroup.enabled.state
-
-                        USC.ServerPropertySynchroniser {
-                            userTarget: gpsSwitch
-                            userProperty: "checked"
-                            serverTarget: gpsSwitch
-                            serverProperty: "serverChecked"
-
-                            onSyncTriggered: locationActionGroup.enabled.activate()
-                        }
-                    }
-                }
-                visible: locationActionGroup.enabled.state !== undefined
-            }
-
-            ListItem.Caption {
-                text: i18n.tr("Accurate location detection requires GPS and/or Wi-Fi.")
-                visible: gpsListItem.visible
-            }
         }
     }
 }
