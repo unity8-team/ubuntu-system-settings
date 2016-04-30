@@ -86,6 +86,7 @@ void ClickUpdateChecker::check()
     // and we've yet to talk to the server so we can't know
     // the state of the token.
     if (!m_token.isValid() && !Helpers::isIgnoringCredentials()) {
+        // TODO: maybe credential error? Not completed.
         Q_EMIT checkCompleted();
         return;
     }

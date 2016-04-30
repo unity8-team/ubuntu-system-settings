@@ -17,11 +17,13 @@
  */
 
 import QtQuick 2.4
+import Ubuntu.DownloadManager 1.2
 import Ubuntu.SystemSettings.Update 1.0
 
 Update {
     id: update
     property string packageName
+    property var download: null
 
     signal requestedRetry(string packageName)
 
@@ -29,7 +31,9 @@ Update {
         // console.warn("ClickUpdate", modelData, modelData.metadata, modelData.metadata.title, modelData.metadata.custom.iconUrl);
         // packageName = modelData.app_id
         // console.warn("have package name", packageName);
-
+        if (udm_download_id) {
+            download = Udm.getDownload(udm_download_id);
+        }
     }
     // Initial status, mode
     status: UpdateManager.NotStarted
@@ -50,7 +54,7 @@ Update {
     // onInstall: modelData.start();
 
     Connections {
-        target: update
+        target: download
         onErrorMessageChanged: {
             update.setError(
                 i18n.tr("Download failed"), update.errorMessage
@@ -69,4 +73,7 @@ Update {
             update.status = UpdateManager.ManuallyDownloading;
         }
     }
+
+    Component { id: sdl; SingleDownload { property string url; } }
+    Component { id: mdt; Metadata {} }
 }

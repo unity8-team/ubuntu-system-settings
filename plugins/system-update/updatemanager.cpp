@@ -102,12 +102,6 @@ void UpdateManager::initializeClickUpdateChecker()
             SLOT(onNetworkError()));
     connect(&m_clickUpChecker, SIGNAL(serverError()), this,
             SLOT(onServerError()));
-
-    // m_clickUpdatesCount = m_clickUpChecker.cachedCount();
-    // qWarning()
-    //         << "in initializeClickUpdateChecker we set m_clickUpdatesCount to "
-    //         << m_clickUpdatesCount;
-    calculateUpdatesCount();
 }
 
 void UpdateManager::initializeSSOService()
@@ -122,7 +116,13 @@ void UpdateManager::initializeSSOService()
 
 void UpdateManager::initializeClickUpdateStore()
 {
-    qWarning() << "last update" << m_clickUpdateStore.lastCheckDate().toString("dd.MM.yyyy hh:mm:ss");
+    qWarning() << "last click check" << m_clickUpdateStore.lastCheckDate().toString("dd.MM.yyyy hh:mm:ss");
+
+    m_clickUpdatesCount = m_clickUpdateStore.activeUpdates()->rowCount();
+    // qWarning()
+    //         << "in initializeClickUpdateStore we set m_clickUpdatesCount to "
+    //         << m_clickUpdatesCount;
+    calculateUpdatesCount();
 }
 
 bool UpdateManager::online() const

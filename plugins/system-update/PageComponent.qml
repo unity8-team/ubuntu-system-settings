@@ -44,15 +44,6 @@ ItemPage {
         Component.onCompleted: start()
     }
 
-    DownloadManager {
-        id: udm
-
-        onDownloadsChanged: console.warn('udm downloads changed', downloads.length);
-        onDownloadFinished: console.warn('udm download finished', download, path);
-        onErrorFound: console.warn('udm download error', download);
-    }
-
-
     Binding {
         target: UpdateManager
         property: "online"
@@ -193,6 +184,4 @@ ItemPage {
              }
          }
     }
-    Component { id: sdl; SingleDownload { property string url; } }
-    Component { id: mdt; Metadata {} }
 }
