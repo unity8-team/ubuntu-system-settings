@@ -87,13 +87,9 @@ void UpdateManager::initializeSystemImage()
 void UpdateManager::initializeClickUpdateChecker()
 {
     connect(&m_clickUpChecker,
-            SIGNAL(updateAvailable(
-                const QSharedPointer<ClickUpdateMetadata>&
-            )),
+            SIGNAL(updateAvailable(const ClickUpdateMetadata*)),
             this,
-            SLOT(onClickUpdateAvailable(
-                const QSharedPointer<ClickUpdateMetadata>&
-            )));
+            SLOT(onClickUpdateAvailable(const ClickUpdateMetadata*)));
 
     // If click update checker gets back 401/403, the credentials we had
     // were probably bad, so invalidate them locally via the
@@ -211,12 +207,12 @@ UpdateManager::ManagerStatus UpdateManager::managerStatus() const
     return m_managerStatus;
 }
 
-QSqlQueryModel *UpdateManager::installedClickUpdates()
+ClickUpdateModel *UpdateManager::installedClickUpdates()
 {
     return m_clickUpdateStore.installedUpdates();
 }
 
-QSqlQueryModel *UpdateManager::activeClickUpdates()
+ClickUpdateModel *UpdateManager::activeClickUpdates()
 {
     return m_clickUpdateStore.activeUpdates();
 }
@@ -273,40 +269,38 @@ void UpdateManager::setManagerStatus(const ManagerStatus &status)
     // qWarning() << "manager: status now" << s;
 }
 
-void UpdateManager::onClickUpdateAvailable(
-        const QSharedPointer<ClickUpdateMetadata> &meta)
+void UpdateManager::onClickUpdateAvailable(const ClickUpdateMetadata *meta)
 {
     qWarning() << "manager: found downloadable click update metadata"
             << meta->name();
-    createClickUpdateDownload(meta);
+    m_clickUpdateStore.add(meta);
 }
 
-void UpdateManager::createClickUpdateDownload(
-        const QSharedPointer<ClickUpdateMetadata> &meta)
+void UpdateManager::createClickUpdateDownload(const ClickUpdateMetadata *meta)
 {
-    QVariantMap headers;
-    headers[X_CLICK_TOKEN] = meta->clickToken();
+    // QVariantMap headers;
+    // headers[X_CLICK_TOKEN] = meta->clickToken();
 
-    QStringList command;
-    command << Helpers::whichPkcon() << "-p" << "install-local" << "$file";
+    // QStringList command;
+    // command << Helpers::whichPkcon() << "-p" << "install-local" << "$file";
 
-    QVariantMap custom;
-    custom["package-name"] = meta->name();
-    custom["changelog"] = meta->changelog();
-    custom["iconUrl"] = meta->iconUrl();
-    custom["remoteVersion"] = meta->remoteVersion();
-    custom["binaryFilesize"] = meta->binaryFilesize();
+    // QVariantMap custom;
+    // custom["package-name"] = meta->name();
+    // custom["changelog"] = meta->changelog();
+    // custom["iconUrl"] = meta->iconUrl();
+    // custom["remoteVersion"] = meta->remoteVersion();
+    // custom["binaryFilesize"] = meta->binaryFilesize();
 
-    QVariantMap metadata;
-    metadata["custom"] = custom;
-    metadata["command"] = command;
-    metadata["title"] = meta->title();
-    metadata["showInIndicator"] = false;
-    metadata["downloadUrl"] = meta->downloadUrl();
-    qWarning() << "manager: create click download" << meta->downloadUrl()
-            << meta->downloadSha512() << metadata << headers;
-    Q_EMIT clickUpdateReady(meta->downloadUrl(), meta->downloadSha512(),
-            "sha512", metadata, headers, meta->automatic());
+    // QVariantMap metadata;
+    // metadata["custom"] = custom;
+    // metadata["command"] = command;
+    // metadata["title"] = meta->title();
+    // metadata["showInIndicator"] = false;
+    // metadata["downloadUrl"] = meta->downloadUrl();
+    // qWarning() << "manager: create click download" << meta->downloadUrl()
+    //         << meta->downloadSha512() << metadata << headers;
+    // Q_EMIT clickUpdateReady(meta->downloadUrl(), meta->downloadSha512(),
+    //         "sha512", metadata, headers, meta->automatic());
 }
 
 void UpdateManager::retryClickPackage(const QString &packageName)

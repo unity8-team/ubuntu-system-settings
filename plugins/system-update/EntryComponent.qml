@@ -36,10 +36,4 @@ ListItem.SingleValue {
     value: updatesAvailable > 0 ? updatesAvailable : ""
 
     onClicked: main.loadPluginByName("system-update");
-
-    Connections {
-        target: Udm
-        onDownloadsChanged: UpdateManager.clickPackageDownloadsCount =
-                                Udm.clickPackageDownloads.length;
-    }
 }

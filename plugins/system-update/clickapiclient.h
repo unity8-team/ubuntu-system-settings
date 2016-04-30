@@ -14,8 +14,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef PLUGINS_SYSTEM_UPDATE_CLICKAPIPROXY_H_
-#define PLUGINS_SYSTEM_UPDATE_CLICKAPIPROXY_H_
+#ifndef PLUGINS_SYSTEM_UPDATE_CLICKAPICLIENT_H_
+#define PLUGINS_SYSTEM_UPDATE_CLICKAPICLIENT_H_
 
 #include <token.h>
 
@@ -32,7 +32,7 @@ namespace UpdatePlugin
  */
 class ClickApiClient: public QObject
 {
-Q_OBJECT
+    Q_OBJECT
 public:
     explicit ClickApiClient(QObject *parent = 0);
     ~ClickApiClient();
@@ -81,4 +81,4 @@ private:
 
 } // UpdatePlugin
 
-#endif // PLUGINS_SYSTEM_UPDATE_CLICKAPIPROXY_H_
+#endif // PLUGINS_SYSTEM_UPDATE_CLICKAPICLIENT_H_

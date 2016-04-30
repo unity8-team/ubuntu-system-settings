@@ -20,14 +20,13 @@
 #define PLUGINS_SYSTEM_UPDATE_MANAGER_H_
 
 #include <QDebug>
-#include <QSharedPointer>
-#include <QSqlQueryModel>
 
 #include <token.h>
 #include <ssoservice.h>
 
 #include "clickupdatemetadata.h"
 #include "clickupdatechecker.h"
+#include "clickupdatemodel.h"
 #include "clickupdatestore.h"
 #include "systemimage.h"
 
@@ -97,9 +96,9 @@ Q_OBJECT
             NOTIFY downloadModeChanged)
     Q_PROPERTY(ManagerStatus managerStatus READ managerStatus
             NOTIFY managerStatusChanged)
-    Q_PROPERTY(QSqlQueryModel* installedClickUpdates READ installedClickUpdates
+    Q_PROPERTY(ClickUpdateModel* installedClickUpdates READ installedClickUpdates
                CONSTANT)
-    Q_PROPERTY(QSqlQueryModel* activeClickUpdates READ activeClickUpdates
+    Q_PROPERTY(ClickUpdateModel* activeClickUpdates READ activeClickUpdates
                CONSTANT)
 
     bool online() const;
@@ -114,8 +113,8 @@ Q_OBJECT
     void setDownloadMode(const int &downloadMode);
     ManagerStatus managerStatus() const;
 
-    QSqlQueryModel *installedClickUpdates();
-    QSqlQueryModel *activeClickUpdates();
+    ClickUpdateModel *installedClickUpdates();
+    ClickUpdateModel *activeClickUpdates();
 
     Q_INVOKABLE void checkForUpdates();
     Q_INVOKABLE void cancelCheckForUpdates();
@@ -126,10 +125,10 @@ protected:
     ~UpdateManager();
 
 private slots:
-    void onClickUpdateAvailable(
-            const QSharedPointer<ClickUpdateMetadata> &meta);
+    void onClickUpdateAvailable(const ClickUpdateMetadata *meta);
 
-    void handleSiAvailableStatus(const bool isAvailable, const bool downloading,
+    void handleSiAvailableStatus(const bool isAvailable,
+                                 const bool downloading,
                                  const QString &availableVersion,
                                  const int &updateSize,
                                  const QString &lastUpdateDate,
@@ -168,8 +167,7 @@ private:
     void setManagerStatus(const ManagerStatus &status);
 
     // Creates the download in UDM for click update with given metadata.
-    void createClickUpdateDownload(
-            const QSharedPointer<ClickUpdateMetadata> &meta);
+    void createClickUpdateDownload(const ClickUpdateMetadata *meta);
     void calculateUpdatesCount();
 
     void initializeSystemImage();

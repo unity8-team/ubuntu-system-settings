@@ -14,9 +14,6 @@ private slots:
     void initTestCase()
     {
         startMockClickServer();
-        QSignalSpy readyReadStandardOutputSpy(&m_mockclickserver,
-            SIGNAL(readyReadStandardOutput()));
-        QVERIFY(readyReadStandardOutputSpy.wait());
     }
     void cleanupTestCase()
     {

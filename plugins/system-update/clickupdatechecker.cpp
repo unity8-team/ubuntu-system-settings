@@ -38,9 +38,9 @@ ClickUpdateChecker::ClickUpdateChecker(QObject *parent) :
 
     // The API client should set an appropriate error string.
     connect(this, SIGNAL(networkError()),
-            this, SIGNAL(checkCompleted()));
+            this, SIGNAL(checkFailed()));
     connect(this, SIGNAL(serverError()),
-            this, SIGNAL(checkCompleted()));
+            this, SIGNAL(checkFailed()));
 }
 
 ClickUpdateChecker::~ClickUpdateChecker()
@@ -48,15 +48,14 @@ ClickUpdateChecker::~ClickUpdateChecker()
 }
 
 
-void ClickUpdateChecker::initializeMeta(
-        const QSharedPointer<ClickUpdateMetadata> &meta)
+void ClickUpdateChecker::initializeMeta(const ClickUpdateMetadata *meta)
 {
-    QObject::connect(meta.data(), SIGNAL(credentialError()), this,
+    QObject::connect(meta, SIGNAL(credentialError()), this,
             SIGNAL(credentialError()));
-    QObject::connect(meta.data(),
+    QObject::connect(meta,
             SIGNAL(clickTokenRequestSucceeded(const ClickUpdateMetadata*)),
             this, SLOT(processClickToken(const ClickUpdateMetadata*)));
-    QObject::connect(meta.data(),
+    QObject::connect(meta,
             SIGNAL(clickTokenRequestFailed(const ClickUpdateMetadata*)), this,
             SLOT(handleClickTokenFailure(const ClickUpdateMetadata*)));
 }
@@ -135,10 +134,17 @@ void ClickUpdateChecker::cancel()
 void ClickUpdateChecker::processInstalledClicks(const int &exitCode)
 {
     qWarning() << "click checker: processInstalledClicks..." << exitCode;
-    if (exitCode > 0) {
-        setErrorString(
-                QString("list command exited with code %1.").arg(exitCode));
+
+    if (exitCode == 15) {
+        // 15 is in pythonese terminated, i.e. normal if cancel was called.
         Q_EMIT checkCompleted();
+        return;
+    }
+
+    if (exitCode > 0) {
+        QString e("Failed to enumerate installed clicks (%1).");
+        setErrorString(e.arg(exitCode));
+        Q_EMIT checkFailed();
         return;
     }
 
@@ -155,7 +161,9 @@ void ClickUpdateChecker::processInstalledClicks(const int &exitCode)
 
     int i;
     for (i = 0; i < array.size(); i++) {
-        QSharedPointer<ClickUpdateMetadata> meta(new ClickUpdateMetadata);
+        // No parent as we do reference count via the shared ptr.
+        // Checker will outlive the child, so this may not be needed.
+        ClickUpdateMetadata *meta = new ClickUpdateMetadata(this);
         meta->setToken(m_token);
         initializeMeta(meta);
 
@@ -195,15 +203,14 @@ void ClickUpdateChecker::handleProcessError(const QProcess::ProcessError &error)
         qWarning() << "QProcess::UnknownError";
         break;
     }
+    Q_EMIT checkFailed();
 }
 
 void ClickUpdateChecker::processClickToken(const ClickUpdateMetadata *meta)
 {
     qWarning() << "click checker: handling obtained token on metadata"
             << meta->name();
-    // Pass the shared pointer instead.
     Q_EMIT updateAvailable(m_metas.value(meta->name()));
-
     completionCheck();
 }
 
@@ -226,9 +233,11 @@ void ClickUpdateChecker::completionCheck()
     qWarning() << "click checker: complete.";
 }
 
+// TODO: this is bad, we need to tell the user, not hide this.
 void ClickUpdateChecker::handleClickTokenFailure(
         const ClickUpdateMetadata *meta)
 {
+    Q_EMIT updateAvailable(m_metas.value(meta->name()));
     m_metas.remove(meta->name());
     completionCheck();
 }
@@ -307,7 +316,7 @@ void ClickUpdateChecker::parseClickMetadata(const QJsonArray &array)
         auto size = object["binary_filesize"].toInt();
         auto title = object["title"].toString();
         if (m_metas.contains(name)) {
-            QSharedPointer<ClickUpdateMetadata> meta = m_metas.value(name);
+            ClickUpdateMetadata *meta = m_metas.value(name);
             meta->setRemoteVersion(version);
             if (meta->isUpdateRequired()) {
                 qWarning() << "click checker: update of" << meta->name()

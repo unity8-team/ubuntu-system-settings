@@ -1,3 +1,2 @@
 module Ubuntu.SystemSettings.Update
 plugin UbuntuUpdatePanel
-singleton Udm 1.0 Udm.qml

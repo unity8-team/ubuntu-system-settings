@@ -15,6 +15,7 @@ add_library(update-plugin SHARED
             # ../download_tracker.cpp
             ../updatemanager.cpp
             ../clickupdatestore.cpp
+            ../clickupdatemodel.cpp
             ../clickupdatechecker.cpp
             ../clickupdatemetadata.cpp
             ../clickapiclient.cpp

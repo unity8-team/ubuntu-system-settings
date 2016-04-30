@@ -26,33 +26,34 @@ Update {
     signal requestedRetry(string packageName)
 
     Component.onCompleted: {
-        console.warn("ClickUpdate", modelData, modelData.metadata, modelData.metadata.title, modelData.metadata.custom.iconUrl);
-        packageName = modelData.metadata.custom["package-name"];
-        console.warn("have package name", packageName);
+        // console.warn("ClickUpdate", modelData, modelData.metadata, modelData.metadata.title, modelData.metadata.custom.iconUrl);
+        // packageName = modelData.app_id
+        // console.warn("have package name", packageName);
+
     }
     // Initial status, mode
     status: UpdateManager.NotStarted
     mode: UpdateManager.Installable
 
-    name: modelData.metadata.title
-    version: modelData.metadata.custom.remoteVersion
-    size: modelData.metadata.custom.binaryFilesize
-    iconUrl: modelData.metadata.custom.iconUrl
-    changelog: modelData.metadata.custom.changelog
-    progress: modelData.progress
+    name: title
+    version: remote_version
+    size: model.size
+    iconUrl: icon_url
+    changelog: changelog
+    // progress: modelData.progress
 
     // If this failed, we tell our parents
     onRetry: requestedRetry(update.packageName)
 
-    onDownload: modelData.start();
-    onPause: modelData.pause();
-    onInstall: modelData.start();
+    // onDownload: modelData.start();
+    // onPause: modelData.pause();
+    // onInstall: modelData.start();
 
     Connections {
-        target: modelData
+        target: update
         onErrorMessageChanged: {
             update.setError(
-                i18n.tr("Download failed"), modelData.errorMessage
+                i18n.tr("Download failed"), update.errorMessage
             )
             update.mode = UpdateManager.Retriable;
             update.status = UpdateManager.Failed;

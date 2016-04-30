@@ -13,6 +13,9 @@ protected:
         params << "mock_update_click_server.py";
         params << args;
         m_mockclickserver.start("python3", params);
+        QSignalSpy readyReadStandardOutputSpy(&m_mockclickserver,
+            SIGNAL(readyReadStandardOutput()));
+        QVERIFY(readyReadStandardOutputSpy.wait());
     }
 
     QProcess m_mockclickserver;

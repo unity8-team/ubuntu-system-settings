@@ -21,6 +21,7 @@ import QtQuick 2.4
 Column {
     id: updates
     signal requestedRetry(string packageName)
+    signal requestDownload(int udmDownloadId)
     height: rep.contentHeight
     property alias model: rep.model
     Repeater {

@@ -27,7 +27,7 @@ add_test(tst-clickapiclient tst-clickapiclient)
 set_tests_properties(
     tst-clickapiclient
         PROPERTIES
-        ENVIRONMENT "IGNORE_CREDENTIALS=1;URL_APPS=http://127.0.0.1:9009"
+        ENVIRONMENT "IGNORE_CREDENTIALS=1;URL_APPS=http://127.0.0.1:9009/metadata"
 )
 target_link_libraries(tst-clickapiclient Qt5::Test update-plugin)
 
@@ -36,7 +36,7 @@ add_test(tst-clickupdatemetadata tst-clickupdatemetadata)
 set_tests_properties(
     tst-clickupdatemetadata
         PROPERTIES
-        ENVIRONMENT "IGNORE_CREDENTIALS=1;URL_APPS=http://127.0.0.1:9009"
+        ENVIRONMENT "IGNORE_CREDENTIALS=1;URL_APPS=http://127.0.0.1:9009/metadata"
 )
 target_link_libraries(tst-clickupdatemetadata Qt5::Test update-plugin)
 
@@ -45,7 +45,7 @@ add_test(tst-clickupdatechecker tst-clickupdatechecker)
 set_tests_properties(
     tst-clickupdatechecker
         PROPERTIES
-        ENVIRONMENT "IGNORE_CREDENTIALS=1;URL_APPS=http://127.0.0.1:9009;CLICK_COMMAND=${CMAKE_CURRENT_BINARY_DIR}/mock_click_command"
+        ENVIRONMENT "IGNORE_CREDENTIALS=1;URL_APPS=http://127.0.0.1:9009/metadata;CLICK_COMMAND=${CMAKE_CURRENT_BINARY_DIR}/mock_click_command"
 )
 target_link_libraries(tst-clickupdatechecker Qt5::Test update-plugin)
 

@@ -92,7 +92,7 @@ void ClickUpdateStore::add(const ClickUpdateMetadata *meta)
     q.bindValue(":revision", meta->revision());
     q.bindValue(":state", "pending");
     q.bindValue(":created_at_utc",
-                QDateTime::currentDateTimeUtc().currentMSecsSinceEpoch());
+                QDateTime::currentDateTimeUtc().currentMSecsSinceEpoch());;
     q.bindValue(":download_sha512", meta->downloadSha512());
     q.bindValue(":title", meta->title());
     q.bindValue(":size", meta->binaryFilesize());
@@ -252,12 +252,12 @@ void ClickUpdateStore::pruneDb()
 
 }
 
-QSqlQueryModel *ClickUpdateStore::installedUpdates()
+ClickUpdateModel *ClickUpdateStore::installedUpdates()
 {
     return &m_installedUpdates;
 }
 
-QSqlQueryModel *ClickUpdateStore::activeUpdates()
+ClickUpdateModel *ClickUpdateStore::activeUpdates()
 {
     return &m_activeUpdates;
 }

@@ -44,6 +44,15 @@ ItemPage {
         Component.onCompleted: start()
     }
 
+    DownloadManager {
+        id: udm
+
+        onDownloadsChanged: console.warn('udm downloads changed', downloads.length);
+        onDownloadFinished: console.warn('udm download finished', download, path);
+        onErrorFound: console.warn('udm download error', download);
+    }
+
+
     Binding {
         target: UpdateManager
         property: "online"
@@ -58,31 +67,25 @@ ItemPage {
     }
 
     Connections {
-        target: Udm
-        onDownloadsChanged: UpdateManager.clickPackageDownloadsCount =
-                                Udm.clickPackageDownloads.length;
-    }
-
-    Connections {
         target: UpdateManager
-        onClickUpdateReady: {
-            var packageName = metadata["custom"]["package-name"];
-            if (!Udm.hasClickPackageDownload(packageName)) {
-                var metadataObj = mdt.createObject(UpdateManager, metadata);
-                var singleDownloadObj = sdl.createObject(UpdateManager, {
-                    "url": url,
-                    "autoStart": autoStart,
-                    "hash": hash,
-                    "algorithm": algorithm,
-                    "headers": headers,
-                    "metadata": metadataObj
-                });
-                singleDownloadObj.download(url);
-                singleDownloadObj.errorFound.connect(function () {
-                    console.warn("singledown err", this.errorMessage);
-                }.bind(singleDownloadObj));
-            }
-        }
+        // onClickUpdateReady: {
+        //     var packageName = metadata["custom"]["package-name"];
+        //     if (!Udm.hasClickPackageDownload(packageName)) {
+        //         var metadataObj = mdt.createObject(UpdateManager, metadata);
+        //         var singleDownloadObj = sdl.createObject(UpdateManager, {
+        //             "url": url,
+        //             "autoStart": autoStart,
+        //             "hash": hash,
+        //             "algorithm": algorithm,
+        //             "headers": headers,
+        //             "metadata": metadataObj
+        //         });
+        //         singleDownloadObj.download(url);
+        //         singleDownloadObj.errorFound.connect(function () {
+        //             console.warn("singledown err", this.errorMessage);
+        //         }.bind(singleDownloadObj));
+        //     }
+        // }
     }
 
     // Setup {
@@ -137,7 +140,7 @@ ItemPage {
         Updates {
             anchors { left: parent.left; right: parent.right }
             authenticated: UpdateManager.authenticated
-            clickUpdatesModel: Udm.clickPackageDownloads
+            clickUpdatesModel: UpdateManager.activeClickUpdates
             havePower: UpdateManager.haveSufficientPower
             haveSystemUpdate: UpdateManager.haveSystemUpdate
             managerStatus: UpdateManager.managerStatus

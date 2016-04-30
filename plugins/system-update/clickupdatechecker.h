@@ -22,7 +22,6 @@
 #include <QJsonDocument>
 #include <QList>
 #include <QProcess>
-#include <QSharedPointer>
 
 #include "clickupdatemetadata.h"
 
@@ -58,19 +57,20 @@ private slots:
     void handleClickTokenFailure(const ClickUpdateMetadata *meta);
 
 signals:
-    // Indicate that this ClickUpdateMetadata is ready for download and
-    // install.
-    void updateAvailable(const QSharedPointer<ClickUpdateMetadata> &meta);
+    // Indicate that this ClickUpdateMetadata is pending.
+    void updateAvailable(const ClickUpdateMetadata *meta);
 
-    // Indicate that the check has been completed. This is called on both
-    // server and networking errors. Check the errorString for failures.
+    // Indicate that the check has been completed successfully.
     void checkCompleted();
+
+    // The check failed. Emitted on fatal networking/server/process failures.
+    void checkFailed();
 
 private:
     // Set up connections on a ClickUpdateMetadata instance.
-    void initializeMeta(const QSharedPointer<ClickUpdateMetadata> &meta);
+    void initializeMeta(const ClickUpdateMetadata *meta);
 
-    // Set up connections on a process instance (used for click list …)
+    // Set up connections on a process instance.
     void initializeProcess();
 
     // Start process of adding remote metadata to each installed click
@@ -84,8 +84,14 @@ private:
     // Assert completion of check, signalling if check complete.
     void completionCheck();
 
+    // Represents the process that we use to query installed clicks.
     QProcess m_process;
-    QHash<QString, QSharedPointer<ClickUpdateMetadata> > m_metas;
+
+    // For each check we store metas until the next check.
+    // We calculate whether or not we're done checking based
+    // on whether or not there is a click token on a meta,
+    // or if it has been removed from this list.
+    QHash<QString, ClickUpdateMetadata*> m_metas;
 };
 
 }

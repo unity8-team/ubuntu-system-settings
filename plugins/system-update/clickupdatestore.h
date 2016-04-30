@@ -20,10 +20,9 @@
 #include <QDateTime>
 #include <QDebug>
 #include <QSqlDatabase>
-#include <QSqlQueryModel>
-#include <QSqlTableModel>
 
 #include "clickupdatemetadata.h"
+#include "clickupdatemodel.h"
 
 namespace UpdatePlugin
 {
@@ -38,13 +37,13 @@ public:
     // For testing purposes.
     explicit ClickUpdateStore(const QString &dbpath, QObject *parent = 0);
 
-    Q_PROPERTY(QSqlQueryModel* installedUpdates READ installedUpdates
+    Q_PROPERTY(ClickUpdateModel* installedUpdates READ installedUpdates
                CONSTANT)
-    Q_PROPERTY(QSqlQueryModel* activeUpdates READ activeUpdates
+    Q_PROPERTY(ClickUpdateModel* activeUpdates READ activeUpdates
                CONSTANT)
 
-    QSqlQueryModel *installedUpdates();
-    QSqlQueryModel *activeUpdates();
+    ClickUpdateModel *installedUpdates();
+    ClickUpdateModel *activeUpdates();
     QDateTime lastCheckDate();
     void setLastCheckDate(const QDateTime &lastCheckUtc);
 
@@ -69,13 +68,14 @@ private slots:
 signals:
 
 private:
+    void init(const QString &dbpath, QObject *parent);
     void initializeStore();
     bool createDb();
     bool openDb();
 
     QSqlDatabase m_db = QSqlDatabase::addDatabase(QLatin1String("QSQLITE"));
-    QSqlQueryModel m_installedUpdates;
-    QSqlQueryModel m_activeUpdates;
+    ClickUpdateModel m_installedUpdates;
+    ClickUpdateModel m_activeUpdates;
     QString m_dbpath;
 };
 
