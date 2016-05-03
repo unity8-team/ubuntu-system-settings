@@ -1,3 +1,11 @@
+ubuntu-system-settings (0.3+16.04.20160503-0ubuntu1) xenial; urgency=medium
+
+  * Only hide ringer sound settings when there is no modem,
+    IncomingMessageSound is used by ubuntu-push for other generic
+    notifications (LP: #1577783)
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Tue, 03 May 2016 13:52:13 +0000
+
 ubuntu-system-settings (0.3+16.04.20160429.2-0ubuntu1) xenial; urgency=medium
 
   [ Antti Kaijanmäki ]
