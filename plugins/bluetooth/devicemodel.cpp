@@ -501,11 +501,18 @@ QSharedPointer<Device> DeviceModel::addDevice(const QString &path, const QVarian
     QSharedPointer<Device> device(new Device(path, m_dbus));
     device->setProperties(properties);
 
-    // We assume that the device shall be valid. Also we know that at certain
-    // situations it might take a moment for a device to become such. This is
-    // because the validity is earned once the device properties are gathered
-    // and this done asynchronously in the Device class constructor. Knowing
-    // that we wait here for a while.
+    // At this point the device is not valid oly when the device type has
+    // not been updated to the value from the properties. Also we know that
+    // when this function is called from FindOrCreateDevice() context the
+    // properties are not yet known. In that case the device will become
+    // valid once the device properties are gathered and this done
+    // asynchronously in the Device class constructor which takes a while.
+    // This is a problem in certain situations and as a consequence the
+    // pin code request is rejected and the bonding denied. To workaround
+    // this unwanted behavior we assume that at this point it is just a
+    // matter of time for the device to beome valid and we wait a bit here.
+    // This is safe because in any other case the properties are already
+    // updated.
     uint8_t tries = 0;
     while (!device->isValid() && tries < 10) {
         QTime timeout = QTime::currentTime().addMSecs(100);
