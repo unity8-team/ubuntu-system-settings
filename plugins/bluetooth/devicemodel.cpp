@@ -22,6 +22,8 @@
 
 #include <QDBusReply>
 #include <QDebug>
+#include <QTime>
+#include <QCoreApplication>
 
 #include "dbus-shared.h"
 
@@ -499,6 +501,21 @@ QSharedPointer<Device> DeviceModel::addDevice(const QString &path, const QVarian
     QSharedPointer<Device> device(new Device(path, m_dbus));
     device->setProperties(properties);
 
+    // We assume that the device shall be valid. Also we know that at certain
+    // situations it might take a moment for a device to become such. This is
+    // because the validity is earned once the device properties are gathered
+    // and this done asynchronously in the Device class constructor. Knowing
+    // that we wait here for a while.
+    uint8_t tries = 0;
+    while (!device->isValid() && tries < 10) {
+        QTime timeout = QTime::currentTime().addMSecs(100);
+        while (QTime::currentTime() < timeout)
+            QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
+        tries++;
+    }
+
+    // However if the above fails there is nothing else that can be done
+    // than returning the nullptr.
     if (!device->isValid())
         return QSharedPointer<Device>(nullptr);
 
