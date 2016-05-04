@@ -17,20 +17,18 @@
 
 #include "plugin.h"
 
-#include <QtQml>
+// Qt
+#include <QtQml/QtQml>
 #include <QtQml/QQmlContext>
-#include "notification_manager.h"
-#include "notification_item.h"
 
-using namespace NotificationsPlugin;
+#include "click_applications_model.h"
 
 
 void BackendPlugin::registerTypes(const char *uri)
 {
     Q_ASSERT(uri == QLatin1String("Ubuntu.SystemSettings.Notifications"));
 
-    qmlRegisterType<NotificationsManager>(uri, 1, 0, "NotificationsManager");
-    qmlRegisterType<NotificationItem>(uri, 1, 0, "NotificationItem");
+    qmlRegisterType<ClickApplicationsModel>(uri, 1, 0, "ClickApplicationsModel");
 }
 
 void BackendPlugin::initializeEngine(QQmlEngine *engine, const char *uri)

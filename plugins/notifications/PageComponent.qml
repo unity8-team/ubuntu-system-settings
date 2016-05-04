@@ -28,8 +28,8 @@ ItemPage {
 
     title: i18n.tr("Notifications")
 
-    NotificationsManager {
-        id: notificationsManager
+    ClickApplicationsModel {
+        id: clickApplicationsModel
     }
 
     ListItem.Base {
@@ -58,12 +58,12 @@ ItemPage {
             top: subtitle.bottom
             bottom: parent.bottom
         }
-        model: notificationsManager.model
+        model: clickApplicationsModel
         clip: true
         contentHeight: contentItem.childrenRect.height
 
         delegate: ListItem.Standard {
-            text: modelData.title
+            text: modelData.displayName
             Component.onCompleted: {
                 if (modelData.icon.search("/") == -1) {
                     iconName = modelData.icon
@@ -72,6 +72,7 @@ ItemPage {
                     iconSource = modelData.icon
                 }
             }
+            /*
             control: Switch {
                 checked: modelData.status
 
@@ -79,6 +80,7 @@ ItemPage {
                     modelData.status = checked;
                 }
             }
+            */
         }
     }
 }
