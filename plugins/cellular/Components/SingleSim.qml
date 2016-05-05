@@ -18,13 +18,16 @@
  *
 */
 import QtQuick 2.4
+import QtQuick.Layouts 1.2
 import SystemSettings 1.0
+import Ubuntu.Connectivity 1.1
 import Ubuntu.Components 1.3
 import Ubuntu.Components.ListItems 1.3 as ListItem
 
 Column {
 
     objectName: "singleSim"
+    id: singlesim
 
     property var sim
 
@@ -32,30 +35,56 @@ Column {
         @prevOnlineModem path to modem that was online before this event */
     signal umtsModemChanged (var sim, string prevOnlineModem);
 
-    ListItem.Standard {
-        id: selector
-        text: i18n.tr("Cellular data:")
-        control: Switch {
-            id: dataControl
-            objectName: 'data'
-            property bool serverChecked: sim.connMan.powered
-            onServerCheckedChanged: checked = serverChecked
-            Component.onCompleted: checked = serverChecked
-            onTriggered: sim.connMan.powered = checked
-        }
+    property var currentSim
+    Component.onCompleted: {
+        currentSim = sortedModems.get(0).Sim
+        Connectivity.simForMobileData = currentSim
+    }
+    SortFilterModel {
+        id: sortedModems
+        model: Connectivity.modems
+        sort.property: "Index"
+        sort.order: Qt.AscendingOrder
     }
 
-    ListItem.Standard {
-        id: dataRoamingItem
-        text: i18n.tr("Data roaming")
-        enabled: sim.connMan.powered
-        control: Switch {
-            id: dataRoamingControl
-            objectName: "roaming"
-            property bool serverChecked: sim.connMan.roamingAllowed
-            onServerCheckedChanged: checked = serverChecked
-            Component.onCompleted: checked = serverChecked
-            onTriggered: sim.connMan.roamingAllowed = checked
+    ColumnLayout {
+        anchors.left: parent.left
+        anchors.right: parent.right
+        spacing: units.gu(2)
+        anchors.margins: units.gu(2)
+
+        RowLayout {
+            Layout.topMargin: units.gu(2)
+            Label {
+                text: i18n.tr("Cellular data")
+                Layout.fillWidth: true
+            }
+            Switch {
+                id: dataSwitch
+                checked: Connectivity.mobileDataEnabled
+                function trigger() {
+                    Connectivity.mobileDataEnabled = !checked
+                }
+            }
+        }
+        ColumnLayout {
+            Layout.bottomMargin: units.gu(2)
+            spacing: units.gu(2)
+
+            RowLayout {
+                Label {
+                    text: i18n.tr("Data roaming")
+                    Layout.fillWidth: true
+                }
+                Switch {
+                    id: dataRoamingSwitch
+                    enabled: singlesim.currentSim !== null && dataSwitch.checked
+                    checked: singlesim.currentSim.DataRoamingEnabled
+                    function trigger() {
+                        singlesim.currentSim.DataRoamingEnabled = !checked
+                    }
+                }
+            }
         }
     }
 

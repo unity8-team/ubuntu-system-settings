@@ -18,77 +18,149 @@
  *
 */
 import QtQuick 2.4
+import QtQuick.Layouts 1.2
+
 import SystemSettings 1.0
+
 import Ubuntu.Components 1.3
 import Ubuntu.Components.ListItems 1.3 as ListItem
 
-Column {
+import Ubuntu.Connectivity 1.1
 
-    property string prevOnlineModem: parent.prevOnlineModem
+ColumnLayout {
+    anchors.margins: units.gu(2)
 
-    function getNameFromIndex (index) {
-        var dummy = i18n.tr("Cellular data")
-        if (index === 0) {
-            return i18n.tr("Off");
-        } else if (index > 0) {
-            return sims[index - 1].title;
-        }
+    SortFilterModel {
+        id: sortedModems
+        model: Connectivity.modems
+        sort.property: "Index"
+        sort.order: Qt.AscendingOrder
     }
 
-    height: childrenRect.height
+    ColumnLayout {
+        spacing: units.gu(2)
 
-    SettingsItemTitle { text: i18n.tr("Cellular data:") }
-
-    ListItem.ItemSelector {
-        id: use
-        objectName: "data"
-        expanded: true
-        model: {
-            // create a model of 'off' and all sim paths
-            var m = ['off'];
-            sims.forEach(function (sim) {
-                m.push(sim.path);
-            });
-            return m;
-        }
-        delegate: OptionSelectorDelegate {
-            objectName: "use" + modelData
-            text: getNameFromIndex(index)
-        }
-        selectedIndex: {
-            if (prevOnlineModem) {
-                return model.indexOf(prevOnlineModem);
-            } else {
-                return [true, sims[0].connMan.powered, sims[1].connMan.powered]
-                    .lastIndexOf(true);
+        RowLayout {
+            Layout.topMargin: units.gu(2)
+            Label {
+                text: i18n.tr("Cellular data")
+                Layout.fillWidth: true
             }
-        }
-
-        onDelegateClicked: {
-            // power all sims on or off
-            sims.forEach(function (sim) {
-                sim.connMan.powered = (model[index] === sim.path);
-            });
-        }
-    }
-
-    ListItem.Standard {
-        id: dataRoamingItem
-        text: i18n.tr("Data roaming")
-        enabled: use.selectedIndex !== 0
-        control: Switch {
-            id: dataRoamingControl
-            objectName: "roaming"
-
-            property bool serverChecked: poweredSim && poweredSim.connMan.roamingAllowed
-            onServerCheckedChanged: checked = serverChecked
-            Component.onCompleted: checked = serverChecked
-            onTriggered: {
-                if (poweredSim) {
-                    poweredSim.connMan.roamingAllowed = checked;
+            Switch {
+                id: dataSwitch
+                checked: Connectivity.mobileDataEnabled
+                enabled: simSelector.currentSim !== null
+                function trigger() {
+                    Connectivity.mobileDataEnabled = !checked
                 }
             }
         }
-        showDivider: false
+        ColumnLayout {
+            Layout.leftMargin: units.gu(2)
+            spacing: units.gu(2)
+            OptionSelector {
+                id: simSelector
+                expanded: currentSim === null
+                model: sortedModems
+                selectedIndex: -1
+
+                delegate: OptionSelectorDelegate {
+                    text: {
+                        if (model.Sim) {
+                            circled(model.Index) + " " + model.Sim.PrimaryPhoneNumber
+                        }
+                        else {
+                            return circled(model.Index) + " " + i18n.tr("No SIM detected")
+                        }
+                    }
+                    subText: {
+                        if (model.Sim) {
+                            return ""
+                        }
+                        else {
+                            return i18n.tr("Insert a SIM, then restart the phone.")
+                        }
+                    }
+                    //enabled: model.Sim !== null // https://bugs.launchpad.net/ubuntu/+source/ubuntu-ui-toolkit/+bug/1577359
+
+                    function circled(index) {
+                        if (index === 1) {
+                            return "①"
+                        } else if (index === 2) {
+                            return "②"
+                        }
+
+                        return " "
+                    }
+                }
+
+                property var currentSim : null
+                onSelectedIndexChanged: {
+                    if (selectedIndex == -1) {
+                        currentSim = null
+                    } else {
+                        currentSim = model.get(selectedIndex).Sim
+                    }
+                }
+                onCurrentSimChanged: {
+                    if (currentSim != null) {
+                        dataRoamingSwitch.checked = Qt.binding(function() {
+                            return currentSim.DataRoamingEnabled
+                        })
+                    }
+                }
+
+                function setSelectedIndex() {
+                    if (Connectivity.simForMobileData === null) {
+                        simSelector.selectedIndex = -1
+                        return
+                    }
+
+                    for (var i = 0; i < sortedModems.count; i++) {
+                        if (sortedModems.get(i).Sim === Connectivity.simForMobileData) {
+                            simSelector.selectedIndex = i
+                            return
+                        }
+                    }
+                    simSelector.selectedIndex = -1
+                }
+                Connections {
+                    target: Connectivity
+                    onSimForMobileDataUpdated: {
+                        simSelector.setSelectedIndex()
+                    }
+                }
+                Component.onCompleted: {
+                    setSelectedIndex()
+                }
+
+                onTriggered:  {
+                    // @bug: https://bugs.launchpad.net/ubuntu/+source/ubuntu-ui-toolkit/+bug/1577351
+                    // Connectivity.simForMobileData = currentSim
+                }
+                onDelegateClicked: {
+                    var sim = sortedModems.get(index).Sim
+                    if (sim === null) {
+                        return
+                    }
+                    Connectivity.simForMobileData = sim
+                }
+            }
+        }
+        RowLayout {
+            Layout.bottomMargin: units.gu(2)
+            Label {
+                text: i18n.tr("Data roaming")
+                Layout.fillWidth: true
+            }
+            Switch {
+                id: dataRoamingSwitch
+                enabled: simSelector.currentSim !== null && dataSwitch.checked
+                checked: simSelector.currentSim ? simSelector.currentSim.DataRoamingEnabled : false
+                function trigger() {
+                    simSelector.currentSim.DataRoamingEnabled = !checked
+                }
+            }
+        }
     }
 }
