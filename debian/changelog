@@ -1,3 +1,9 @@
+ubuntu-system-settings (0.3+16.04.20160505-0ubuntu1) xenial; urgency=medium
+
+  * use Connectivity API for cellular data and roaming control.
+
+ -- Antti Kaijanmäki <antti.kaijanmaki@canonical.com>  Thu, 05 May 2016 12:17:27 +0000
+
 ubuntu-system-settings (0.3+16.04.20160429.2-0ubuntu1) xenial; urgency=medium
 
   [ Antti Kaijanmäki ]
