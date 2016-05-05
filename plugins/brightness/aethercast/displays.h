@@ -108,6 +108,7 @@ private:
     void updateProperties(QSharedPointer<QDBusInterface>);
     void updateProperty(const QString &key, const QVariant &value);
     void handleConnectError(QDBusError error);
+    void callFinishedSlot(QDBusPendingCallWatcher *call);
 };
 
 #endif // DISPLAYS_H
