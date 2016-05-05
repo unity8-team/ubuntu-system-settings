@@ -77,7 +77,8 @@ Q_OBJECT
         InstallationPaused,
         Installing,
         Installed,
-        Failed
+        DownloadFailed,
+        InstallationFailed
     };
 
     static UpdateManager *instance();
@@ -139,6 +140,8 @@ private slots:
     void handleCredentialsFound(const Token &token);
     void handleCredentialsFailed();
 
+    void udmDownloadEnded(const QString &id);
+
     void onClickCheckCompleted();
     void onNetworkError();
     void onServerError();
@@ -166,8 +169,6 @@ private:
     void setAuthenticated(const bool authenticated);
     void setManagerStatus(const ManagerStatus &status);
 
-    // Creates the download in UDM for click update with given metadata.
-    void createClickUpdateDownload(const ClickUpdateMetadata *meta);
     void calculateUpdatesCount();
 
     void initializeSystemImage();

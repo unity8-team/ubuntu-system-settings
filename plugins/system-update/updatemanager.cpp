@@ -276,33 +276,6 @@ void UpdateManager::onClickUpdateAvailable(const ClickUpdateMetadata *meta)
     m_clickUpdateStore.add(meta);
 }
 
-void UpdateManager::createClickUpdateDownload(const ClickUpdateMetadata *meta)
-{
-    // QVariantMap headers;
-    // headers[X_CLICK_TOKEN] = meta->clickToken();
-
-    // QStringList command;
-    // command << Helpers::whichPkcon() << "-p" << "install-local" << "$file";
-
-    // QVariantMap custom;
-    // custom["package-name"] = meta->name();
-    // custom["changelog"] = meta->changelog();
-    // custom["iconUrl"] = meta->iconUrl();
-    // custom["remoteVersion"] = meta->remoteVersion();
-    // custom["binaryFilesize"] = meta->binaryFilesize();
-
-    // QVariantMap metadata;
-    // metadata["custom"] = custom;
-    // metadata["command"] = command;
-    // metadata["title"] = meta->title();
-    // metadata["showInIndicator"] = false;
-    // metadata["downloadUrl"] = meta->downloadUrl();
-    // qWarning() << "manager: create click download" << meta->downloadUrl()
-    //         << meta->downloadSha512() << metadata << headers;
-    // Q_EMIT clickUpdateReady(meta->downloadUrl(), meta->downloadSha512(),
-    //         "sha512", metadata, headers, meta->automatic());
-}
-
 void UpdateManager::retryClickPackage(const QString &packageName)
 {
     m_clickUpChecker.check(packageName);
@@ -362,6 +335,11 @@ void UpdateManager::handleSiAvailableStatus(const bool isAvailable,
     } else if (m_managerStatus == ManagerStatus::CheckingSystemUpdates) {
         setManagerStatus(ManagerStatus::Idle);
     }
+}
+
+void UpdateManager::udmDownloadEnded(const QString &id)
+{
+    m_clickUpdateStore.unsetUdmId(id.toInt());
 }
 
 void UpdateManager::onClickCheckCompleted()

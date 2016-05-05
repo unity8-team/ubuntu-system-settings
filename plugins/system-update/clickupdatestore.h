@@ -57,6 +57,8 @@ public:
     void setUdmId(const QString &appId, const int &revision, const int &udmId);
     void unsetUdmId(const QString &appId, const int &revision);
 
+    void unsetUdmId(const int &udmId);
+
     // Removes old updates.
     void pruneDb();
 

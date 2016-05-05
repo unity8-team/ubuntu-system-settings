@@ -99,6 +99,16 @@ private slots:
         QVERIFY(m_instance->activeUpdates()
                     ->record(0).value("udm_download_id").isNull());
 
+        // Associate with udm
+        m_instance->setUdmId(m.name(), m.revision(), 3);
+        QCOMPARE(m_instance->activeUpdates()->record(0).value("udm_download_id").toInt(),
+                 3);
+
+        // Disassociate (using udm id)
+        m_instance->unsetUdmId(3);
+        QVERIFY(m_instance->activeUpdates()
+                    ->record(0).value("udm_download_id").isNull());
+
         // Add second click app
         m_instance->add(&m2);
         QCOMPARE(m_instance->activeUpdates()->rowCount(), 2);

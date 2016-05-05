@@ -91,7 +91,19 @@ Column {
         version: "0.5"
         progress: 80
         mode: UpdateManager.Retriable
-        status: UpdateManager.Failed
+        status: UpdateManager.DownloadFailed
+        Component.onCompleted: setError("Download failed", "There was a damned issue. The update server is not responding. Please try again later.")
+    }
+    Update {
+        anchors { left: parent.left; right: parent.right }
+        name: "Bad Seed"
+        iconUrl: "file:///usr/share/icons/suru/places/scalable/distributor-logo.svg"
+        changelog: "* Add audio & video policy groups by default.\n* Enable back & forward buttons.\n* Switch to wikidata"
+        size: 50648
+        version: "0.5"
+        progress: 80
+        mode: UpdateManager.Retriable
+        status: UpdateManager.InstallationFailed
         Component.onCompleted: setError("Download failed", "There was a damned issue. The update server is not responding. Please try again later.")
     }
 }

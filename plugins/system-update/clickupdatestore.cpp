@@ -122,8 +122,8 @@ void ClickUpdateStore::setUdmId(const QString &appId, const int &revision,
     q.bindValue(":revision", revision);
 
     if (!q.exec())
-        qCritical() << "could not set udm id" << appId
-                    << "as installed" << q.lastError().text();
+        qCritical() << "could not set udm id for app id" << appId
+                    << q.lastError().text();
 
     queryActive();
 }
@@ -140,10 +140,27 @@ void ClickUpdateStore::unsetUdmId(const QString &appId, const int &revision)
     q.bindValue(":revision", revision);
 
     if (!q.exec())
-        qCritical() << "could not unset udm id" << appId
-                    << "as installed" << q.lastError().text();
+        qCritical() << "could not unset udm id for app id" << appId
+                    << q.lastError().text();
 
     queryActive();
+}
+
+void ClickUpdateStore::unsetUdmId(const int &udmId)
+{
+    if (!openDb()) return;
+
+    QSqlQuery q(m_db);
+    q.prepare("UPDATE updates SET udm_download_id=NULL"
+              " WHERE udm_download_id=:udm_download_id");
+    q.bindValue(":udm_download_id", QVariant(udmId));
+
+    if (!q.exec())
+        qCritical() << "could not unset udm id given udm id" << udmId
+                    << q.lastError().text();
+
+    queryActive();
+
 }
 
 void ClickUpdateStore::queryActive()
