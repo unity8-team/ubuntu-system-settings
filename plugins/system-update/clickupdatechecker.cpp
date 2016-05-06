@@ -173,6 +173,10 @@ void ClickUpdateChecker::processInstalledClicks(const int &exitCode)
         meta->setTitle(object.value("title").toString());
         meta->setLocalVersion(object.value("version").toString());
 
+        QStringList command;
+        command << Helpers::whichPkcon() << "-p" << "install-local" << "$file";
+        meta->setCommand(command);
+
         m_metas.insert(meta->name(), meta);
         qWarning() << "click checker: queueing up" << meta->name();
     }

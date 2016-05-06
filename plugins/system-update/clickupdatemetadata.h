@@ -74,6 +74,8 @@ public:
     Q_PROPERTY(QString localVersion READ localVersion
             WRITE setLocalVersion NOTIFY localVersionChanged)
     Q_PROPERTY(QString clickToken READ clickToken NOTIFY clickTokenChanged)
+    Q_PROPERTY(QStringList command READ command
+               WRITE setCommand NOTIFY commandChanged)
     Q_PROPERTY(bool automatic READ automatic WRITE setAutomatic
             NOTIFY automaticChanged)
 
@@ -95,6 +97,7 @@ public:
     QString remoteVersion() const;
     QString localVersion() const;
     QString clickToken() const;
+    QStringList command() const;
     bool automatic() const;
 
     void setAnonDownloadUrl(const QString &anonDownloadUrl);
@@ -115,6 +118,7 @@ public:
     void setRemoteVersion(const QString &version);
     void setLocalVersion(const QString &version);
     void setClickToken(const QString &clickToken);
+    void setCommand(const QStringList &command);
     void setAutomatic(const bool automatic);
 
     void requestClickToken();
@@ -146,13 +150,13 @@ signals:
     void remoteVersionChanged();
     void localVersionChanged();
     void clickTokenChanged();
+    void commandChanged();
     void automaticChanged();
 
     void clickTokenRequestSucceeded(const ClickUpdateMetadata *meta);
     void clickTokenRequestFailed(const ClickUpdateMetadata *meta);
 
 private:
-    QString m_clickToken;
     QString m_anonDownloadUrl;
     uint m_binaryFilesize;
     QString m_changelog;
@@ -170,6 +174,8 @@ private:
     QString m_title;
     QString m_localVersion;
     QString m_remoteVersion;
+    QString m_clickToken;
+    QStringList m_command;
     bool m_automatic;
 
 };

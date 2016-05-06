@@ -83,10 +83,10 @@ void ClickUpdateStore::add(const ClickUpdateMetadata *meta)
     QSqlQuery q(m_db);
     q.prepare("INSERT OR REPLACE INTO updates (app_id, revision, state,"
               "created_at_utc, download_sha512, title, size, icon_url,"
-              "download_url, changelog, click_token,"
+              "download_url, changelog, command, click_token,"
               "local_version, remote_version) VALUES (:app_id,"
               ":revision, :state, :created_at_utc, :download_sha512, :title,"
-              ":size, :icon_url, :download_url, :changelog,"
+              ":size, :icon_url, :download_url, :changelog, :command,"
               ":click_token, :local_version, :remote_version)");
     q.bindValue(":app_id", meta->name());
     q.bindValue(":revision", meta->revision());
@@ -99,6 +99,7 @@ void ClickUpdateStore::add(const ClickUpdateMetadata *meta)
     q.bindValue(":icon_url", meta->iconUrl());
     q.bindValue(":download_url", meta->downloadUrl());
     q.bindValue(":changelog", meta->changelog());
+    q.bindValue(":command", meta->command().join(" "));
     q.bindValue(":click_token", meta->clickToken());
     q.bindValue(":local_version", meta->localVersion());
     q.bindValue(":remote_version", meta->remoteVersion());
@@ -241,6 +242,7 @@ bool ClickUpdateStore::createDb()
                 "size INTEGER NOT NULL,"
                 "icon_url TEXT NOT NULL,"
                 "download_url TEXT NOT NULL,"
+                "command TEXT NOT NULL,"
                 "changelog TEXT NOT NULL,"
                 "udm_download_id INTEGER,"
                 "click_token TEXT DEFAULT '',"

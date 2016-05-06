@@ -107,20 +107,3 @@ Column {
         Component.onCompleted: setError("Download failed", "There was a damned issue. The update server is not responding. Please try again later.")
     }
 }
-
-        // UpdateDownloadable,
-        // UpdateInstallable,
-        // UpdateInstallableWithRestart,
-        // UpdatePausable,
-        // UpdateNonPausable,
-        // UpdateRetriable
-
-        // UpdateNotAvailable,
-        // UpdateNotStarted,
-        // UpdateAutomaticallyDownloading,
-        // UpdateManuallyDownloading,
-        // UpdateDownloadPaused,
-        // UpdateInstallationPaused,
-        // UpdateInstalling,
-        // UpdateInstalled,
-        // UpdateFailed

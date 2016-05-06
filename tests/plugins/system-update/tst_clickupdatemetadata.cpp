@@ -121,6 +121,13 @@ private slots:
         QCOMPARE(clickTokenSpy.count(), 1);
         QVERIFY(m_instance->clickToken() == "clickToken");
 
+        QStringList command;
+        command << "ls" << "-la";
+        QSignalSpy commandSpy(m_instance, SIGNAL(commandChanged()));
+        m_instance->setCommand(command);
+        QCOMPARE(commandSpy.count(), 1);
+        QVERIFY(m_instance->command() == command);
+
         QSignalSpy automaticSpy(m_instance, SIGNAL(automaticChanged()));
         m_instance->setAutomatic(!m_instance->automatic());
         QCOMPARE(automaticSpy.count(), 1);

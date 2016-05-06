@@ -27,7 +27,6 @@ namespace UpdatePlugin
 
 ClickUpdateMetadata::ClickUpdateMetadata(QObject *parent) :
         ClickApiClient(parent),
-        m_clickToken(""),
         m_anonDownloadUrl(""),
         m_binaryFilesize(0),
         m_changelog(""),
@@ -45,6 +44,8 @@ ClickUpdateMetadata::ClickUpdateMetadata(QObject *parent) :
         m_title(""),
         m_localVersion(""),
         m_remoteVersion(""),
+        m_clickToken(""),
+        m_command(""),
         m_automatic(false)
 {
 }
@@ -142,6 +143,11 @@ QString ClickUpdateMetadata::localVersion() const
 QString ClickUpdateMetadata::clickToken() const
 {
     return m_clickToken;
+}
+
+QStringList ClickUpdateMetadata::command() const
+{
+    return m_command;
 }
 
 void ClickUpdateMetadata::setAnonDownloadUrl(const QString &anonDownloadUrl)
@@ -291,6 +297,14 @@ void ClickUpdateMetadata::setClickToken(const QString &clickToken)
     if (!m_clickToken.isEmpty()) {
         qWarning() << "click meta: emit clickTokenRequestSucceeded";
         clickTokenRequestSucceeded(this);
+    }
+}
+
+void ClickUpdateMetadata::setCommand(const QStringList &command)
+{
+    if (m_command != command) {
+        m_command = command;
+        Q_EMIT commandChanged();
     }
 }
 

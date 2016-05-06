@@ -101,12 +101,18 @@ Column {
     signal stop()
 
     /*!
-        \qmlsignal clickPackageRequestedRetry(string packageName)
+        \qmlsignal clickPackageRequestedRetry(string packageName, int revision)
 
-        Indicates that the click package should be retried.
+        Indicates that the click update should be retried.
     */
-    signal clickPackageRequestedRetry(string packageName)
+    signal clickPackageRequestedRetry(string packageName, int revision)
 
+    /*!
+        \qmlsignal udmDownloadCreated(string packageName, int revision, int udmId)
+
+        Indicates that a UDM download was created for this a click update.
+    */
+    signal udmDownloadCreated(string packageName, int revision, int udmId)
 
 
     Global {

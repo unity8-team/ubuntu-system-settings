@@ -119,7 +119,7 @@ Q_OBJECT
 
     Q_INVOKABLE void checkForUpdates();
     Q_INVOKABLE void cancelCheckForUpdates();
-    Q_INVOKABLE void retryClickPackage(const QString &packageName);
+    Q_INVOKABLE void retryClickPackage(const QString &packageName, const int &revision);
 
 protected:
     explicit UpdateManager(QObject *parent = 0);

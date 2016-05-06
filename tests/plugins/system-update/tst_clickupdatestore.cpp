@@ -53,6 +53,8 @@ private slots:
     void testUpdateLifecycle()
     {
         UpdatePlugin::ClickUpdateMetadata m;
+        QStringList mc;
+        mc << "ls" << "la";
         m.setRevision(42);
         m.setName("com.ubuntu.testapp");
         m.setLocalVersion("0.1");
@@ -63,6 +65,7 @@ private slots:
         m.setDownloadUrl("http://example.org/testapp.click");
         m.setChangelog("* Fixed all bugs * Introduced new bugs");
         m.setClickToken("Mock-X-Click-Token");
+        m.setCommand(mc);
         m.setDownloadSha512("987654323456789");
 
         UpdatePlugin::ClickUpdateMetadata m2;
@@ -76,6 +79,7 @@ private slots:
         m2.setDownloadUrl("http://example.org/myapp.click");
         m2.setChangelog("* First version");
         m2.setClickToken("Mock-X-Click-Token");
+        m2.setCommand(mc);
         m2.setDownloadSha512("293847");
 
         // Add a click app

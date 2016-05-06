@@ -276,8 +276,9 @@ void UpdateManager::onClickUpdateAvailable(const ClickUpdateMetadata *meta)
     m_clickUpdateStore.add(meta);
 }
 
-void UpdateManager::retryClickPackage(const QString &packageName)
+void UpdateManager::retryClickPackage(const QString &packageName, const int &revision)
 {
+    Q_UNUSED(revision)
     m_clickUpChecker.check(packageName);
 }
 

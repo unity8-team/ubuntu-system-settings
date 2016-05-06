@@ -23,9 +23,11 @@ import Ubuntu.SystemSettings.Update 1.0
 Update {
     id: update
     property string packageName
+    property int revision
     property var download: null
 
-    signal requestedRetry(string packageName)
+    signal requestedRetry(string packageName, int revision)
+    signal udmDownloadCreated(string packageName, int revision, int udmId)
 
     Component.onCompleted: {
         // console.warn("ClickUpdate", modelData, modelData.metadata, modelData.metadata.title, modelData.metadata.custom.iconUrl);
@@ -33,6 +35,30 @@ Update {
         // console.warn("have package name", packageName);
         if (udm_download_id) {
             download = Udm.getDownload(udm_download_id);
+        } else {
+                var metadata = {
+                    "command": command.split(" "),
+                    "title": title,
+                    "showInIndicator": false,
+                    // "downloadUrl": download_url,
+                };
+                console.warn("metadata", metadata);
+                var headers = {
+                    "X-Click-Token": click_token
+                };
+                console.warn("headers", metadata);
+                var metadataObj = mdt.createObject(update, metadata);
+                var singleDownloadObj = sdl.createObject(update, {
+                    "url": download_url,
+                    "autoStart": true,
+                    "hash": download_sha512,
+                    "algorithm": "sha512",
+                    "headers": headers,
+                    "metadata": metadataObj
+                });
+                singleDownloadObj.download(url);
+                download = singleDownloadObj;
+            }
         }
     }
     // Initial status, mode
@@ -47,7 +73,7 @@ Update {
     // progress: modelData.progress
 
     // If this failed, we tell our parents
-    onRetry: requestedRetry(update.packageName)
+    onRetry: requestedRetry(update.packageName, update.revision)
 
     // onDownload: modelData.start();
     // onPause: modelData.pause();
@@ -71,6 +97,16 @@ Update {
             console.warn('ClickUpdate Connections: Progress changed', progress)
             update.mode = UpdateManager.Pausable;
             update.status = UpdateManager.ManuallyDownloading;
+        }
+        onDownloadingChanged: {
+            console.warn('ClickUpdate Connections: Downloading changed', download.downloading)
+            if (download.downloading) {
+                update.mode = UpdateManager.Pausable;
+                update.status = UpdateManager.ManuallyDownloading;
+            } else {
+                update.mode = UpdateManager.Resumable;
+                update.status = UpdateManager.DownloadPaused;
+            }
         }
     }
 
