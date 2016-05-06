@@ -19,12 +19,9 @@
 */
 import QtQuick 2.4
 import QtQuick.Layouts 1.2
-
 import SystemSettings 1.0
-
 import Ubuntu.Components 1.3
 import Ubuntu.Components.ListItems 1.3 as ListItem
-
 import Ubuntu.Connectivity 1.1
 
 ColumnLayout {
@@ -50,6 +47,13 @@ ColumnLayout {
                 id: dataSwitch
                 checked: Connectivity.mobileDataEnabled
                 enabled: simSelector.currentSim !== null
+
+                /*
+                 * We override Switch::trigger here to workaround bug:
+                 * https://bugs.launchpad.net/ubuntu/+source/ubuntu-ui-toolkit/+bug/1494387
+                 *
+                 * The bug causes the checked binding to be overridden if plain onTriggered is used.
+                 */
                 function trigger() {
                     Connectivity.mobileDataEnabled = !checked
                 }
@@ -82,6 +86,10 @@ ColumnLayout {
                         }
                     }
                     //enabled: model.Sim !== null // https://bugs.launchpad.net/ubuntu/+source/ubuntu-ui-toolkit/+bug/1577359
+                    /* As per bug above, we can't set enabled to false when there is no SIM card in the slot.
+                     * The bug causes the delegate to render completely empty and not showing the texts.
+                     * Once the bug is fixed, the line above can be uncommented.
+                     */
 
                     function circled(index) {
                         if (index === 1) {
@@ -96,14 +104,14 @@ ColumnLayout {
 
                 property var currentSim : null
                 onSelectedIndexChanged: {
-                    if (selectedIndex == -1) {
+                    if (selectedIndex === -1) {
                         currentSim = null
                     } else {
                         currentSim = model.get(selectedIndex).Sim
                     }
                 }
                 onCurrentSimChanged: {
-                    if (currentSim != null) {
+                    if (currentSim !== null) {
                         dataRoamingSwitch.checked = Qt.binding(function() {
                             return currentSim.DataRoamingEnabled
                         })
@@ -137,6 +145,12 @@ ColumnLayout {
                 onTriggered:  {
                     // @bug: https://bugs.launchpad.net/ubuntu/+source/ubuntu-ui-toolkit/+bug/1577351
                     // Connectivity.simForMobileData = currentSim
+                    /*
+                     * There is a bug in onTriggered that causes it to be fired *before* selectedIndex has been updated
+                     * and thus there is no way of knowing what index was actually selected by the user.
+                     *
+                     * This is worked around below by using onDelegateClicked which gives us the missing index.
+                     */
                 }
                 onDelegateClicked: {
                     var sim = sortedModems.get(index).Sim
