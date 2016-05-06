@@ -97,7 +97,7 @@ class DualSimCellularTestCase(CellularBaseTestCase):
     use_sims = 2
 
     def test_data_off(self):
-        self.cellular_page.disable_datas()
+        self.cellular_page.disable_data()
         self.assertThat(
             lambda: self.modem_0.Get(CONNMAN_IFACE, 'Powered'),
             Eventually(Equals(False))
@@ -228,7 +228,7 @@ class DualSimCellularTestCase(CellularBaseTestCase):
             raise e
 
     def test_roaming_switch(self):
-        self.cellular_page.disable_datas()
+        self.cellular_page.disable_data()
         # assert roaming_switch is disabled
         self.assertThat(
             lambda: self.cellular_page.enable_roaming(timeout=1),

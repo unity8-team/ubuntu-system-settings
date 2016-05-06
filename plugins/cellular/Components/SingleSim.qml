@@ -61,6 +61,7 @@ Column {
             }
             Switch {
                 id: dataSwitch
+                objectName: "data"
                 checked: Connectivity.mobileDataEnabled
                 function trigger() {
                     Connectivity.mobileDataEnabled = !checked
@@ -78,6 +79,7 @@ Column {
                 }
                 Switch {
                     id: dataRoamingSwitch
+                    objectName: "roaming"
                     enabled: singlesim.currentSim !== null && dataSwitch.checked
                     checked: singlesim.currentSim.DataRoamingEnabled
                     function trigger() {

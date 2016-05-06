@@ -44,7 +44,8 @@ ColumnLayout {
                 Layout.fillWidth: true
             }
             Switch {
-                id: dataSwitch
+                id: data
+                objectName: "data"
                 checked: Connectivity.mobileDataEnabled
                 enabled: simSelector.currentSim !== null
 
@@ -64,11 +65,12 @@ ColumnLayout {
             spacing: units.gu(2)
             OptionSelector {
                 id: simSelector
-                expanded: currentSim === null
+                expanded: true
                 model: sortedModems
                 selectedIndex: -1
 
                 delegate: OptionSelectorDelegate {
+                    objectName: "'use/ril_" + (model.Index - 1)
                     text: {
                         if (model.Sim) {
                             circled(model.Index) + " " + model.Sim.PrimaryPhoneNumber
@@ -112,7 +114,7 @@ ColumnLayout {
                 }
                 onCurrentSimChanged: {
                     if (currentSim !== null) {
-                        dataRoamingSwitch.checked = Qt.binding(function() {
+                        roaming.checked = Qt.binding(function() {
                             return currentSim.DataRoamingEnabled
                         })
                     }
@@ -168,8 +170,9 @@ ColumnLayout {
                 Layout.fillWidth: true
             }
             Switch {
-                id: dataRoamingSwitch
-                enabled: simSelector.currentSim !== null && dataSwitch.checked
+                id: roaming
+                objectName: "roaming"
+                enabled: simSelector.currentSim !== null && data.checked
                 checked: simSelector.currentSim ? simSelector.currentSim.DataRoamingEnabled : false
                 function trigger() {
                     simSelector.currentSim.DataRoamingEnabled = !checked

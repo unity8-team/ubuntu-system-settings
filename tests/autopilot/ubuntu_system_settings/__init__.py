@@ -228,9 +228,6 @@ class CellularPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
     def disable_data(self):
         self._set_data(False)
 
-    def disable_datas(self):
-        self.select_sim_for_data('off')
-
     @autopilot.logging.log_action(logger.debug)
     def _set_data(self, data):
         chk = self.select_single(objectName='data')
