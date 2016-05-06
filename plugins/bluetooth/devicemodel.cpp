@@ -501,7 +501,7 @@ QSharedPointer<Device> DeviceModel::addDevice(const QString &path, const QVarian
     QSharedPointer<Device> device(new Device(path, m_dbus));
     device->setProperties(properties);
 
-    // At this point the device is not valid oly when the device type has
+    // At this point the device is not valid only when the device type has
     // not been updated to the value from the properties. Also we know that
     // when this function is called from FindOrCreateDevice() context the
     // properties are not yet known. In that case the device will become
