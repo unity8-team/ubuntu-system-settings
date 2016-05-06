@@ -21,19 +21,19 @@ SwitchMenuItem.qml
 )
 
 add_library(UbuntuWifiPanel MODULE
-  wifidbushelper.cpp
-  plugin.cpp
-  unitymenumodelstack.cpp
-  previousnetworkmodel.cpp
   certhandler.cpp
-  wifidbushelper.h
-  plugin.h
-  unitymenumodelstack.h
-  previousnetworkmodel.h
+  plugin.cpp
+  previousnetworkmodel.cpp
+  unitymenumodelstack.cpp
+  wifidbushelper.cpp
   certhandler.h
   nm_manager_proxy.h
   nm_settings_proxy.h
   nm_settings_connection_proxy.h
+  plugin.h
+  previousnetworkmodel.h
+  unitymenumodelstack.h
+  wifidbushelper.h
   ${QML_SOURCES}
 )
 qt5_use_modules(UbuntuWifiPanel Qml Quick DBus)

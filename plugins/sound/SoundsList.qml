@@ -1,6 +1,6 @@
 import GSettings 1.0
 import QtQuick 2.4
-import QtMultimedia 5.0
+import QtMultimedia 5.6
 import SystemSettings 1.0
 import Ubuntu.Content 1.3
 import Ubuntu.Components 1.3

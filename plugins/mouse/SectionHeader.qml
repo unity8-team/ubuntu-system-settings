@@ -45,7 +45,7 @@ Column {
             text: root.text
             fontSize: "medium"
             elide: Text.ElideRight
-            color: Theme.palette.selected.backgroundText
+            color: Theme.palette.normal.baseText
             font.weight: Text.Normal
         }
         highlightWhenPressed: false

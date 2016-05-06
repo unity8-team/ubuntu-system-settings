@@ -67,6 +67,7 @@ public:
 
     QSharedPointer<Device> getDeviceFromAddress(const QString &address);
     QSharedPointer<Device> getDeviceFromPath(const QString &path);
+    QSharedPointer<Device> addDeviceFromPath(const QDBusObjectPath &path);
     QString adapterName() const { return m_adapterName; }
     QString adapterAddress() const { return m_adapterAddress; }
 
@@ -122,8 +123,8 @@ private:
 
     QList<QSharedPointer<Device> > m_devices;
     void updateDevices();
-    void addDevice(QSharedPointer<Device> &device);
-    void addDevice(const QString &objectPath, const QVariantMap &properties);
+    QSharedPointer<Device> addDevice(QSharedPointer<Device> &device);
+    QSharedPointer<Device> addDevice(const QString &objectPath, const QVariantMap &properties);
     void removeRow(int i);
     int findRowFromAddress(const QString &address) const;
     void emitRowChanged(int row);

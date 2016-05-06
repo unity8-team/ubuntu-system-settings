@@ -5,8 +5,7 @@
 # under the terms of the GNU General Public License version 3, as published
 # by the Free Software Foundation.
 
-from gi.repository import Gio, GLib
-from time import sleep
+import dbus
 
 from autopilot.introspection.dbus import StateNotFoundError
 from autopilot.matchers import Eventually
@@ -14,7 +13,7 @@ from testtools.matchers import Equals, raises, StartsWith
 
 from ubuntu_system_settings.tests import (
     CellularBaseTestCase, CONNMAN_IFACE, RDO_IFACE,
-    NETREG_IFACE)
+    NETREG_IFACE, ACCOUNTS_PHONE_IFACE)
 
 
 DEV_IFACE = 'org.freedesktop.NetworkManager.Device'
@@ -173,10 +172,10 @@ class DualSimCellularTestCase(CellularBaseTestCase):
         self.cellular_page.change_carrier('my.cool.telco', sim=sim)
 
     def test_change_sim1_name(self):
-        gsettings = Gio.Settings.new('com.ubuntu.phone')
+
         sim = '/ril_0'
         try:
-            old_name = gsettings.get_value('sim-names')[sim]
+            old_name = self.obj_phone.GetSimNames()[sim]
         except:
             old_name = 'SIM 1'
         new_name = 'FOO BAR'
@@ -184,21 +183,18 @@ class DualSimCellularTestCase(CellularBaseTestCase):
 
         try:
             self.assertThat(
-                lambda: gsettings.get_value('sim-names')[sim],
+                lambda: self.obj_phone.GetSimNames()[sim],
                 Eventually(Equals(new_name)))
         except Exception as e:
             raise e
         finally:
             self.cellular_page.set_name(sim, old_name)
-            # wait for gsettings
-            sleep(1)
 
     def test_change_sim2_name(self):
-        gsettings = Gio.Settings.new('com.ubuntu.phone')
         sim = '/ril_1'
 
         try:
-            old_name = gsettings.get_value('sim-names')[sim]
+            old_name = self.obj_phone.GetSimNames()[sim]
         except:
             old_name = 'SIM 2'
 
@@ -207,34 +203,29 @@ class DualSimCellularTestCase(CellularBaseTestCase):
 
         try:
             self.assertThat(
-                lambda: gsettings.get_value('sim-names')[sim],
+                lambda: self.obj_phone.GetSimNames()[sim],
                 Eventually(Equals(new_name)))
         except Exception as e:
             raise e
         finally:
             self.cellular_page.set_name(sim, old_name)
-            # wait for gsettings
-            sleep(1)
 
     def test_remote_manipulation_of_name(self):
-        gsettings = Gio.Settings.new('com.ubuntu.phone')
-        old_names = gsettings.get_value('sim-names')
+        old_names = self.obj_phone.GetSimNames()
         sim = '/ril_0'
         name = 'BAS QUX'
-        new_names = old_names.unpack()
+        new_names = old_names
         new_names[sim] = name
-        new_names = GLib.Variant('a{ss}', new_names)
-        gsettings.set_value('sim-names', new_names)
+        self.obj_phone.Set(ACCOUNTS_PHONE_IFACE, "SimNames", new_names)
+        self.dbus_mock.EmitSignal(ACCOUNTS_PHONE_IFACE, "PropertyChanged",
+                                  "sv", dbus.Array(["SimNames", new_names]))
+
         try:
             self.assertThat(
                 lambda: self.cellular_page.get_name(sim),
                 Eventually(StartsWith(name)))
         except Exception as e:
             raise e
-        finally:
-            gsettings.set_value('sim-names', old_names)
-            # wait for gsettings
-            sleep(1)
 
     def test_roaming_switch(self):
         self.cellular_page.disable_datas()
@@ -267,12 +258,6 @@ class DualSimCellularTestCase(CellularBaseTestCase):
             Eventually(Equals(True)))
 
     def test_changing_default_sim_for_calls(self):
-        gsettings = Gio.Settings.new('com.ubuntu.phone')
-        default = gsettings.get_value('default-sim-for-calls')
-
-        self.addCleanup(
-            self.set_default_for_calls, gsettings, default)
-
         # click ask
         self.system_settings.main_view.scroll_to_and_click(
             self.get_default_sim_for_calls_selector('ask'))
@@ -281,15 +266,10 @@ class DualSimCellularTestCase(CellularBaseTestCase):
             self.get_default_sim_for_calls_selector('/ril_0'))
 
         self.assertThat(
-            lambda: gsettings.get_value('default-sim-for-calls').get_string(),
+            lambda: self.obj_phone.GetDefaultSimForCalls(),
             Eventually(Equals('/ril_0')))
 
     def test_changing_default_sim_for_messages(self):
-        gsettings = Gio.Settings.new('com.ubuntu.phone')
-        default = gsettings.get_value('default-sim-for-messages')
-        self.addCleanup(
-            self.set_default_for_messages, gsettings, default)
-
         # click ask
         self.system_settings.main_view.scroll_to_and_click(
             self.get_default_sim_for_messages_selector('ask'))
@@ -298,8 +278,7 @@ class DualSimCellularTestCase(CellularBaseTestCase):
             self.get_default_sim_for_messages_selector('/ril_1'))
 
         self.assertThat(
-            lambda:
-                gsettings.get_value('default-sim-for-messages').get_string(),
+            lambda: self.obj_phone.GetDefaultSimForMessages(),
             Eventually(Equals('/ril_1')))
 
 

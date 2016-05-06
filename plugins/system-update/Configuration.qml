@@ -20,6 +20,7 @@ import QtQuick 2.4
 import SystemSettings 1.0
 import Ubuntu.Components 1.3
 import Ubuntu.Components.ListItems 1.3 as ListItem
+import Ubuntu.Connectivity 1.0
 import Ubuntu.SystemSettings.Update 1.0
 
 
@@ -51,8 +52,10 @@ ItemPage {
         Component.onCompleted: {
             insert(0, { name: i18n.tr("Never"), description: "" })
             insert(1, { name: i18n.tr("When on wi-fi"), description: "" })
-            insert(2, { name: i18n.tr("On any data connection"),
+            if (NetworkingStatus.modemAvailable) {
+                insert(2, { name: i18n.tr("On any data connection"),
                        description: i18n.tr("Data charges may apply.") })
+            }
         }
     }
 }

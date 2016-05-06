@@ -75,6 +75,8 @@ private:
 
     void cancel(QDBusMessage msg, const char *functionName);
     void reject(QDBusMessage msg, const char *functionName);
+
+    QSharedPointer<Device> findOrCreateDevice(const QDBusObjectPath &path);
 };
 
 Q_DECLARE_METATYPE(Agent*)

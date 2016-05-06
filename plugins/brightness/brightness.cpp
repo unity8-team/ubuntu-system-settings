@@ -19,6 +19,7 @@
  */
 
 #include "brightness.h"
+#include <hybris/properties/properties.h>
 
 #include <QDBusArgument>
 #include <QDBusReply>
@@ -89,4 +90,11 @@ bool Brightness::getAutoBrightnessAvailable() const
 
 bool Brightness::getPowerdRunning() const {
     return m_powerdRunning;
+}
+
+bool Brightness::getWidiSupported() const 
+{
+    char widi[PROP_VALUE_MAX];
+    property_get("ubuntu.widi.supported", widi, "0");
+    return (strcmp(widi, "0") > 0);
 }

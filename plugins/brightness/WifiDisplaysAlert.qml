@@ -1,7 +1,7 @@
 /*
  * This file is part of system-settings
  *
- * Copyright (C) 2015 Canonical Ltd
+ * Copyright (C) 2016 Canonical Ltd.
  *
  * Contact: Ken VanDine <ken.vandine@canonical.com>
  *
@@ -18,21 +18,24 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef SYSTEM_SETTINGS_MOUSE_PLUGIN_H
-#define SYSTEM_SETTINGS_MOUSE_PLUGIN_H
+import QtQuick 2.4
+import Ubuntu.Components 1.3
+import Ubuntu.Components.Popups 1.3
+import Ubuntu.SystemSettings.Brightness 1.0
 
-#include <QObject>
-#include <SystemSettings/PluginInterface>
+Dialog {
+    id: dialog
+    property int error
+    property string displayName
+    text: {
+        if (error === AethercastDisplays.Failed)
+            return i18n.tr("This device failed to connect to %1.").arg(displayName)
+        else if (error === AethercastDisplays.Unknown)
+            return i18n.tr("There was an unknown error connecting to %1.").arg(displayName)
+    }
 
-class MousePlugin: public QObject, public SystemSettings::PluginInterface2
-{
-    Q_OBJECT
-    Q_PLUGIN_METADATA(IID "com.ubuntu.SystemSettings.PluginInterface/2.0")
-    Q_INTERFACES(SystemSettings::PluginInterface2)
-
-public:
-    SystemSettings::ItemBase *createItem(const QVariantMap &staticData,
-                                         QObject *parent = 0);
-};
-
-#endif // SYSTEM_SETTINGS_MOUSE_PLUGIN_H
+    Button {
+        text: i18n.tr("OK")
+        onClicked: PopupUtils.close(dialog)
+    }
+}

@@ -1398,7 +1398,7 @@ class LanguagePage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
     @classmethod
     def validate_dbus_object(cls, path, state):
         name = introspection.get_classname_from_path(path)
-        if name == b'ItemPage':
+        if name == b'PageComponent':
             if state['objectName'][1] == 'languagePage':
                 return True
         return False

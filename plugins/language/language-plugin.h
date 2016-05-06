@@ -56,10 +56,6 @@ public:
                WRITE setCurrentLanguage
                NOTIFY currentLanguageChanged)
 
-    Q_PROPERTY(SubsetModel *keyboardLayoutsModel
-               READ keyboardLayoutsModel
-               CONSTANT)
-
     Q_PROPERTY(SubsetModel *spellCheckingModel
                READ spellCheckingModel
                CONSTANT)
@@ -77,19 +73,15 @@ public:
     void setCurrentLanguage(int index);
     Q_SIGNAL void currentLanguageChanged() const;
 
-    SubsetModel *keyboardLayoutsModel();
-    Q_SLOT void keyboardLayoutsModelChanged();
-
     SubsetModel *spellCheckingModel();
     Q_SLOT void spellCheckingModelChanged();
+
+    Q_INVOKABLE QString languageToLayout(const QString &lang);
 
 private:
 
     void updateLanguageNamesAndCodes();
     void updateCurrentLanguage();
-    void updateEnabledLayouts();
-    void updateKeyboardLayouts();
-    void updateKeyboardLayoutsModel();
     void updateSpellCheckingModel();
 
     int indexForLocale(const QString &name);
@@ -106,12 +98,6 @@ private:
                               GParamSpec *pspec,
                               gpointer    user_data);
 
-    void enabledLayoutsChanged();
-
-    friend void enabledLayoutsChanged(GSettings *settings,
-                                      gchar     *key,
-                                      gpointer   user_data);
-
     QStringList m_languageNames;
     QStringList m_languageCodes;
     QHash<QString, unsigned int> m_indicesByLocale;
@@ -121,12 +107,8 @@ private:
     ActUserManager *m_manager;
     ActUser *m_user;
 
-    GSettings *m_maliitSettings;
-    QList<KeyboardLayout *> m_keyboardLayouts;
-    SubsetModel m_keyboardLayoutsModel;
     SubsetModel m_spellCheckingModel;
     SessionService m_sessionService;
-    QStringList m_layoutPaths;
 };
 
 #endif // LANGUAGE_PLUGIN_H

@@ -19,6 +19,7 @@
 
 #include <QtQml>
 #include <QtQml/QQmlContext>
+#include "cellular.h"
 #include "connectivity.h"
 
 static QObject *connectivitySingeltonProvider(QQmlEngine *engine, QJSEngine *scriptEngine)
@@ -34,6 +35,8 @@ void BackendPlugin::registerTypes(const char *uri)
 {
     Q_ASSERT(uri == QLatin1String("Ubuntu.SystemSettings.Cellular"));
     qmlRegisterSingletonType<Connectivity>(uri, 1, 0, "Connectivity", connectivitySingeltonProvider);
+    qmlRegisterType<Cellular>(uri, 1, 0, "UbuntuCellularPanel");
+
 }
 
 void BackendPlugin::initializeEngine(QQmlEngine *engine, const char *uri)
