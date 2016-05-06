@@ -24,6 +24,7 @@
 
 #include <QtDBus>
 #include <QDBusInterface>
+#include <QDBusServiceWatcher>
 #include <QObject>
 #include <QProcess>
 #include <QUrl>
@@ -79,20 +80,25 @@ Q_SIGNALS:
 
 private Q_SLOTS:
     void updateDownloadProgress(int percentage, double eta);
+    void slotNameOwnerChanged(const QString&, const QString&, const QString&);
 
 private:
+    // Synchronously initialize properties from the Information call.
+    void initializeProperties();
+    // Sets up connections on the DBus interface.
+    void setUpInterface();
+
     int m_currentBuildNumber;
+    int m_targetBuildNumber;
     QMap<QString, QVariant> m_detailedVersion;
     QDateTime m_lastUpdateDate;
     int m_downloadMode;
     QString m_deviceName;
 
     QDBusConnection m_systemBusConnection;
-    QString m_objectPath;
+    QDBusServiceWatcher m_serviceWatcher;
     QDBusInterface m_SystemServiceIface;
     Update *update;
-
-    void setCurrentDetailedVersion();
 };
 
 }
