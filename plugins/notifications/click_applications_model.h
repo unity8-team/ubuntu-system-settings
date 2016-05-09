@@ -49,15 +49,18 @@ Q_SIGNALS:
 
 protected:
     struct ClickApplicationEntry {
-        QString displayName;         
+        QString pkgName;         
+        QString version;
+        QString displayName;
         QUrl icon;                                                 
     };
 
     QList<ClickApplicationEntry> m_entries;
 
 private:
-    void populateFromManifest(ClickApplicationEntry &entry, const QVariantMap &var);
-    void populateFromDesktopFile(ClickApplicationEntry &entry, const QVariantMap &var, const QVariantMap &hooks);
+    void addClickApplicationEntry(const ClickApplicationEntry& entry);
+    void populateFromLegacyHelpersDir();
+    bool clickManifestHasPushHelperHook(const QVariantMap& manifest);
     void populateFromClickDatabase();
 };
 

@@ -21,11 +21,15 @@
 
 #include <QtCore/QDebug>
 #include <QtCore/QDir>
+#include <QtCore/QDirIterator>
 #include <QtCore/QFile>
 #include <QtCore/QJsonArray>
 #include <QtCore/QJsonDocument>
 #include <QtCore/QJsonObject>
+#include <QtCore/QStandardPaths>
 #include <QtGui/QIcon>
+
+#define LEGACY_PUSH_HELPER_DIR "/usr/lib/ubuntu-push-client/legacy-helpers/"
 
 #include <libintl.h>
 QString _(const char *text){
@@ -35,6 +39,7 @@ QString _(const char *text){
 ClickApplicationsModel::ClickApplicationsModel(QObject* parent)
     : QAbstractListModel(parent)
 {
+    populateFromLegacyHelpersDir();
     populateFromClickDatabase();
 }
 
@@ -75,30 +80,48 @@ QVariant ClickApplicationsModel::data(const QModelIndex& index, int role) const
     }
 }
 
-void ClickApplicationsModel::populateFromManifest(ClickApplicationEntry &entry, const QVariantMap &var)
+void ClickApplicationsModel::addClickApplicationEntry(const ClickApplicationEntry& entry)
 {
-    entry.displayName = var.value("title", _("Unknown title")).toString();
+    beginInsertRows(QModelIndex(), rowCount(), rowCount());
+    m_entries.append(entry);
+    endInsertRows();
+}
 
-    if (var.contains("_directory")) {
-        QString dirPath(var.value("_directory", "").toString());
-        QString iconFileName(var.value("icon", "").toString());
- 
-        if (!dirPath.isEmpty() && !iconFileName.isEmpty()) {
-            QDir dir(dirPath);
-            QFile icon(dir.absoluteFilePath(iconFileName.simplified()));
+void ClickApplicationsModel::populateFromLegacyHelpersDir()
+{
+     QDirIterator it(LEGACY_PUSH_HELPER_DIR, QDir::Files, QDirIterator::NoIteratorFlags);
+     while (it.hasNext()) {
+         QFileInfo fileInfo(it.next());
 
-            if (!icon.exists() && QIcon::hasThemeIcon(iconFileName)) {
-                entry.icon = QString("image://theme/%1").arg(iconFileName);
-            } else {
-                entry.icon = icon.fileName();
+         ClickApplicationEntry entry;
+         entry.pkgName = fileInfo.fileName();
+         entry.displayName = entry.pkgName; //FIXME
+         addClickApplicationEntry(entry);
+     }
+}
+
+bool ClickApplicationsModel::clickManifestHasPushHelperHook(const QVariantMap& manifest)
+{
+    QVariant hooksVar(manifest.value("hooks"));
+    if (!hooksVar.isValid()) {
+        return false;
+    }
+
+    QVariantMap hooksMap(hooksVar.toMap());
+    QMapIterator<QString, QVariant> hooksIterator(hooksMap);
+    while (hooksIterator.hasNext()) {
+        hooksIterator.next();
+        QVariant hookVar(hooksIterator.value());
+
+        if (hookVar.isValid()) {
+            QVariantMap hookMap(hookVar.toMap());
+            if (hookMap.keys().contains("push-helper")) {
+                return true;
             }
         }
     }
-}
 
-void ClickApplicationsModel::populateFromDesktopFile(ClickApplicationEntry &entry, const QVariantMap &var, const QVariantMap &hooks)
-{
-
+    return false;
 }
 
 void ClickApplicationsModel::populateFromClickDatabase()
@@ -108,7 +131,7 @@ void ClickApplicationsModel::populateFromClickDatabase()
     GError *err = nullptr;
     click_db_read(clickdb, nullptr, &err);
     if (err != nullptr) {
-        qWarning() << Q_FUNC_INFO << "Unable to read click packages db:" << err->message;
+        qWarning() << Q_FUNC_INFO << "[ERROR] Unable to read click packages db:" << err->message;
         g_error_free(err);
         g_object_unref(clickdb);
         return;
@@ -116,7 +139,7 @@ void ClickApplicationsModel::populateFromClickDatabase()
 
     gchar *clickmanifest = click_db_get_manifests_as_string(clickdb, FALSE, &err);
     if (err != nullptr) {
-        qWarning() << Q_FUNC_INFO << "Unable to get click packages manifest:" << err->message;
+        qWarning() << Q_FUNC_INFO << "[ERROR] Unable to get click packages manifest:" << err->message;
         g_error_free(err);
         g_object_unref(clickdb);
         return;
@@ -130,30 +153,28 @@ void ClickApplicationsModel::populateFromClickDatabase()
     g_free(clickmanifest);
 
     if (jsonError.error != QJsonParseError::NoError) {
-        qWarning() << Q_FUNC_INFO << "Unable to parser data from click packages manifest:" << jsonError.errorString();
+        qWarning() << Q_FUNC_INFO << "[ERROR] Unable to parser data from click packages manifest:" << jsonError.errorString();
         return;
     }
 
-    int count = 0;
     QJsonArray data(jsonDoc.array());
     QJsonArray::ConstIterator i;
     for (i = data.constBegin(); i != data.constEnd(); ++i) {
-        QVariantMap var = (*i).toObject().toVariantMap();
+        QVariantMap manifest = (*i).toObject().toVariantMap();
+
+        if (!clickManifestHasPushHelperHook(manifest)) {
+            continue;
+        }
 
         ClickApplicationEntry entry;
-        populateFromManifest(entry, var);
+        entry.pkgName = manifest.value("name").toString();
+        entry.version = manifest.value("version").toString();
 
-        /*
-        QVariant hooksVar(var.value("hooks"));
-        if (hooksVar.isValid()) {
-            QVariantMap hooks(hooksVar.toMap());
-            populateFromDesktopFile(entry, var, hooks);
-        }
-        */
+        entry.displayName = manifest.value("title").toString();
+        entry.icon = manifest.value("icon").toString();
 
-        beginInsertRows(QModelIndex(), count, count);
-        m_entries.append(entry);
-        endInsertRows();
-        ++count;
+
+        entry.displayName = entry.pkgName; //FIXME
+        addClickApplicationEntry(entry);
     }
 }
