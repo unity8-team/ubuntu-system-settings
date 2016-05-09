@@ -63,14 +63,8 @@ ItemPage {
         contentHeight: contentItem.childrenRect.height
 
         delegate: ListItem.Standard {
-            text: modelData.displayName
-            Component.onCompleted: {
-                if (modelData.icon.search("/") == -1) {
-                    iconName = modelData.icon
-                }
-                else {
-                    iconSource = modelData.icon
-                }
+            text: model.displayName
+            iconSource = model.icon
             }
             /*
             control: Switch {
