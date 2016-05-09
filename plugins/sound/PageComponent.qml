@@ -185,6 +185,11 @@ ItemPage {
                     }
                     text: i18n.tr("Dialpad tones")
                 }
+            }
+
+            Column  {
+                anchors.left: parent.left
+                anchors.right: parent.right
 
                 SettingsItemTitle {
                     text: i18n.tr("Messages:")
@@ -224,10 +229,10 @@ ItemPage {
                     }
                     text: i18n.tr("Vibrate in Silent Mode")
                 }
+            }
 
-                SettingsItemTitle {
-                    text: i18n.tr("Other sounds:")
-                }
+            SettingsItemTitle {
+                text: i18n.tr("Other sounds:")
             }
 
             ListItem.Standard {

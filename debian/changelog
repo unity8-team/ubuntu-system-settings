@@ -1,3 +1,21 @@
+ubuntu-system-settings (0.3+16.04.20160506-0ubuntu1) xenial; urgency=medium
+
+  [ jonas-drange ]
+  * Set Preferred on some context as soon as we know it's type and it is
+    active. Do not copy the Manager instance from panel to panel. (LP:
+    #1537913)
+  * add servicewatcher to system image binding (LP: #1509022)
+
+ -- Jonas G. Drange <ci-train-bot@canonical.com>  Fri, 06 May 2016 13:50:49 +0000
+
+ubuntu-system-settings (0.3+16.04.20160503-0ubuntu1) xenial; urgency=medium
+
+  * Only hide ringer sound settings when there is no modem,
+    IncomingMessageSound is used by ubuntu-push for other generic
+    notifications (LP: #1577783)
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Tue, 03 May 2016 13:52:13 +0000
+
 ubuntu-system-settings (0.3+16.04.20160429.2-0ubuntu1) xenial; urgency=medium
 
   [ Antti Kaijanmäki ]
