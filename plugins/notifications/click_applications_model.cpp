@@ -15,8 +15,6 @@
  *
 */
 
-#include "click_applications_model.h"
-
 #include <click.h>
 #include <gio/gdesktopappinfo.h>
 
@@ -29,6 +27,9 @@
 #include <QtCore/QJsonObject>
 #include <QtCore/QStandardPaths>
 #include <QtGui/QIcon>
+
+#include "click_applications_model.h"
+#include "click_application_entry.h"
 
 #define LEGACY_PUSH_HELPER_DIR "/usr/lib/ubuntu-push-client/legacy-helpers/"
 
@@ -65,29 +66,38 @@ QVariant ClickApplicationsModel::data(const QModelIndex& index, int role) const
         return QVariant();
     }
 
-    const ClickApplicationEntry& entry = m_entries.at(index.row());
+    ClickApplicationEntry *entry = m_entries.at(index.row());
     switch (role) {
     case DisplayName:
-        return entry.displayName;
+        return entry->displayName();
     case Icon:
-        return entry.icon;
+        return entry->icon();
     default:
         return QVariant();
     }
 }
 
-void ClickApplicationsModel::addClickApplicationEntry(const ClickApplicationEntry& entry)
+ClickApplicationEntry* ClickApplicationsModel::get(int index) const
+{
+    if (index < 0 || index >= rowCount()) {
+        return nullptr;
+    }
+
+    return m_entries.at(index);
+}
+
+void ClickApplicationsModel::addClickApplicationEntry(ClickApplicationEntry *entry)
 {
     beginInsertRows(QModelIndex(), rowCount(), rowCount());
-    m_entries.append(entry);
+    m_entries << entry;
     endInsertRows();
 }
 
-void ClickApplicationsModel::getApplicationDataFromDesktopFile(ClickApplicationEntry& entry)
+void ClickApplicationsModel::getApplicationDataFromDesktopFile(ClickApplicationEntry *entry)
 {
-    QString desktopFile = entry.pkgName + ".desktop";
-    if (!entry.appName.isEmpty() && !entry.version.isEmpty()) {
-        desktopFile = entry.pkgName + "_" + entry.appName + "_" + entry.version + ".desktop";
+    QString desktopFile = entry->pkgName() + ".desktop";
+    if (!entry->appName().isEmpty() && !entry->version().isEmpty()) {
+        desktopFile = entry->pkgName() + "_" + entry->appName() + "_" + entry->version() + ".desktop";
     }
 
     GAppInfo* appInfo = (GAppInfo*)g_desktop_app_info_new(desktopFile.toUtf8().constData());
@@ -96,10 +106,11 @@ void ClickApplicationsModel::getApplicationDataFromDesktopFile(ClickApplicationE
         return;
     }
 
-    entry.displayName = g_strdup(g_app_info_get_display_name(appInfo));
+    entry->setDisplayName(g_strdup(g_app_info_get_display_name(appInfo)));
     GIcon* icon = g_app_info_get_icon(appInfo);
     if (icon != nullptr) {
-        entry.icon = g_icon_to_string(icon);
+        QString iconPath = g_icon_to_string(icon);
+        entry->setIcon(iconPath);
     }
 
     g_object_unref(appInfo);
@@ -111,8 +122,8 @@ void ClickApplicationsModel::populateFromLegacyHelpersDir()
      while (it.hasNext()) {
          QFileInfo fileInfo(it.next());
 
-         ClickApplicationEntry entry;
-         entry.pkgName = fileInfo.fileName();
+         ClickApplicationEntry *entry = new ClickApplicationEntry();
+         entry->setPkgName(fileInfo.fileName());
 
          getApplicationDataFromDesktopFile(entry);
          addClickApplicationEntry(entry);
@@ -209,13 +220,13 @@ void ClickApplicationsModel::populateFromClickDatabase()
             continue;
         }
 
-        ClickApplicationEntry entry;
-        entry.pkgName = manifest.value("name").toString();
-        entry.version = manifest.value("version").toString();
-        entry.appName = getApplicationNameFromDesktopHook(manifest);
+        ClickApplicationEntry *entry = new ClickApplicationEntry();
+        entry->setPkgName(manifest.value("name").toString());
+        entry->setVersion(manifest.value("version").toString());
+        entry->setAppName(getApplicationNameFromDesktopHook(manifest));
 
-        entry.displayName = manifest.value("title").toString();
-        entry.icon = manifest.value("icon").toString();
+        entry->setDisplayName(manifest.value("title").toString());
+        entry->setIcon(manifest.value("icon").toString());
 
         getApplicationDataFromDesktopFile(entry);
         addClickApplicationEntry(entry);

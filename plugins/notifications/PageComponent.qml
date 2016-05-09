@@ -28,10 +28,6 @@ ItemPage {
 
     title: i18n.tr("Notifications")
 
-    ClickApplicationsModel {
-        id: clickApplicationsModel
-    }
-
     ListItem.Base {
         id: subtitle
         height: labelSubtitle.height + units.gu(2)
@@ -58,13 +54,11 @@ ItemPage {
             top: subtitle.bottom
             bottom: parent.bottom
         }
-        model: clickApplicationsModel
+        model: ClickApplicationsModel
         clip: true
         contentHeight: contentItem.childrenRect.height
 
         delegate: ListItem.Standard {
-            text: model.displayName
-            iconSource = model.icon
             Component.onCompleted: {
                 var iconPath = model.icon.toString()
                 if (iconPath.search("/") == -1) {
@@ -73,15 +67,10 @@ ItemPage {
                     iconSource = model.icon
                 }
             }
-            /*
-            control: Switch {
-                checked: modelData.status
+            text: model.displayName
+            progression: true
 
-                onCheckedChanged: {
-                    modelData.status = checked;
-                }
-            }
-            */
+            onClicked: pageStack.push(Qt.resolvedUrl("ClickAppNotifications.qml"), { entry: ClickApplicationsModel.get(index)})
         }
     }
 }

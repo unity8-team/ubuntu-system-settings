@@ -1,14 +1,20 @@
-set(QML_SOURCES PageComponent.qml)
 SET (CMAKE_AUTOMOC ON)
+
+set(QML_SOURCES
+    PageComponent.qml
+    ClickAppNotifications.qml
+    )
 
 set(ubuntu_notifications_panel_HDRS
     plugin.h
     click_applications_model.h
+    click_application_entry.h
     )
 
 set(ubuntu_notifications_panel_SRCS
     plugin.cpp
     click_applications_model.cpp
+    click_application_entry.cpp
     )
 
 add_library(UbuntuNotificationsPanel MODULE ${ubuntu_notifications_panel_HDRS} ${ubuntu_notifications_panel_SRCS} ${QML_SOURCES})

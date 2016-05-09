@@ -22,6 +22,8 @@
 #include <QtCore/QAbstractListModel>
 #include <QtCore/QUrl>
 
+class ClickApplicationEntry;
+
 class ClickApplicationsModel : public QAbstractListModel
 {
     Q_OBJECT
@@ -44,23 +46,17 @@ public:
     int rowCount(const QModelIndex& parent=QModelIndex()) const;
     QVariant data(const QModelIndex& index, int role) const;
 
+    Q_INVOKABLE ClickApplicationEntry* get(int index) const;
+
 Q_SIGNALS:
     void rowCountChanged();
 
 protected:
-    struct ClickApplicationEntry {
-        QString pkgName;         
-        QString version;
-        QString appName;         
-        QString displayName;
-        QUrl icon;                                                 
-    };
-
-    QList<ClickApplicationEntry> m_entries;
+    QList<ClickApplicationEntry*> m_entries;
 
 private:
-    void addClickApplicationEntry(const ClickApplicationEntry& entry);
-    void getApplicationDataFromDesktopFile(ClickApplicationEntry& entry);
+    void addClickApplicationEntry(ClickApplicationEntry *entry);
+    void getApplicationDataFromDesktopFile(ClickApplicationEntry *entry);
     void populateFromLegacyHelpersDir();
     bool clickManifestHasPushHelperHook(const QVariantMap& manifest);
     QString getApplicationNameFromDesktopHook(const QVariantMap& manifest);
