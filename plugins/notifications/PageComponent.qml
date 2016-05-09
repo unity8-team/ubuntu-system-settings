@@ -65,6 +65,13 @@ ItemPage {
         delegate: ListItem.Standard {
             text: model.displayName
             iconSource = model.icon
+            Component.onCompleted: {
+                var iconPath = model.icon.toString()
+                if (iconPath.search("/") == -1) {
+                    iconName = model.icon
+                } else {
+                    iconSource = model.icon
+                }
             }
             /*
             control: Switch {

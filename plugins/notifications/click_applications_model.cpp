@@ -18,6 +18,7 @@
 #include "click_applications_model.h"
 
 #include <click.h>
+#include <gio/gdesktopappinfo.h>
 
 #include <QtCore/QDebug>
 #include <QtCore/QDir>
@@ -30,11 +31,6 @@
 #include <QtGui/QIcon>
 
 #define LEGACY_PUSH_HELPER_DIR "/usr/lib/ubuntu-push-client/legacy-helpers/"
-
-#include <libintl.h>
-QString _(const char *text){
-    return QString::fromUtf8(dgettext(0, text));
-}
 
 ClickApplicationsModel::ClickApplicationsModel(QObject* parent)
     : QAbstractListModel(parent)
@@ -87,6 +83,28 @@ void ClickApplicationsModel::addClickApplicationEntry(const ClickApplicationEntr
     endInsertRows();
 }
 
+void ClickApplicationsModel::getApplicationDataFromDesktopFile(ClickApplicationEntry& entry)
+{
+    QString desktopFile = entry.pkgName + ".desktop";
+    if (!entry.appName.isEmpty() && !entry.version.isEmpty()) {
+        desktopFile = entry.pkgName + "_" + entry.appName + "_" + entry.version + ".desktop";
+    }
+
+    GAppInfo* appInfo = (GAppInfo*)g_desktop_app_info_new(desktopFile.toUtf8().constData());
+    if (appInfo == nullptr) {
+        qWarning() << Q_FUNC_INFO << "[ERROR] Unable to get desktop file:" << desktopFile;
+        return;
+    }
+
+    entry.displayName = g_strdup(g_app_info_get_display_name(appInfo));
+    GIcon* icon = g_app_info_get_icon(appInfo);
+    if (icon != nullptr) {
+        entry.icon = g_icon_to_string(icon);
+    }
+
+    g_object_unref(appInfo);
+}
+
 void ClickApplicationsModel::populateFromLegacyHelpersDir()
 {
      QDirIterator it(LEGACY_PUSH_HELPER_DIR, QDir::Files, QDirIterator::NoIteratorFlags);
@@ -95,7 +113,8 @@ void ClickApplicationsModel::populateFromLegacyHelpersDir()
 
          ClickApplicationEntry entry;
          entry.pkgName = fileInfo.fileName();
-         entry.displayName = entry.pkgName; //FIXME
+
+         getApplicationDataFromDesktopFile(entry);
          addClickApplicationEntry(entry);
      }
 }
@@ -108,10 +127,10 @@ bool ClickApplicationsModel::clickManifestHasPushHelperHook(const QVariantMap& m
     }
 
     QVariantMap hooksMap(hooksVar.toMap());
-    QMapIterator<QString, QVariant> hooksIterator(hooksMap);
-    while (hooksIterator.hasNext()) {
-        hooksIterator.next();
-        QVariant hookVar(hooksIterator.value());
+    QMapIterator<QString, QVariant> it(hooksMap);
+    while (it.hasNext()) {
+        it.next();
+        QVariant hookVar(it.value());
 
         if (hookVar.isValid()) {
             QVariantMap hookMap(hookVar.toMap());
@@ -122,6 +141,30 @@ bool ClickApplicationsModel::clickManifestHasPushHelperHook(const QVariantMap& m
     }
 
     return false;
+}
+
+QString ClickApplicationsModel::getApplicationNameFromDesktopHook(const QVariantMap& manifest)
+{
+    QVariant hooksVar(manifest.value("hooks"));
+    if (!hooksVar.isValid()) {
+        return QString();
+    }
+
+    QVariantMap hooksMap(hooksVar.toMap());
+    QMapIterator<QString, QVariant> it(hooksMap);
+    while (it.hasNext()) {
+        it.next();
+        QVariant hookVar(it.value());
+
+        if (hookVar.isValid()) {
+            QVariantMap hookMap(hookVar.toMap());
+            if (hookMap.keys().contains("desktop")) {
+                return it.key();
+            }
+        }
+    }
+
+    return QString();
 }
 
 void ClickApplicationsModel::populateFromClickDatabase()
@@ -158,9 +201,9 @@ void ClickApplicationsModel::populateFromClickDatabase()
     }
 
     QJsonArray data(jsonDoc.array());
-    QJsonArray::ConstIterator i;
-    for (i = data.constBegin(); i != data.constEnd(); ++i) {
-        QVariantMap manifest = (*i).toObject().toVariantMap();
+    QJsonArray::ConstIterator it;
+    for (it = data.constBegin(); it != data.constEnd(); ++it) {
+        QVariantMap manifest = (*it).toObject().toVariantMap();
 
         if (!clickManifestHasPushHelperHook(manifest)) {
             continue;
@@ -169,12 +212,12 @@ void ClickApplicationsModel::populateFromClickDatabase()
         ClickApplicationEntry entry;
         entry.pkgName = manifest.value("name").toString();
         entry.version = manifest.value("version").toString();
+        entry.appName = getApplicationNameFromDesktopHook(manifest);
 
         entry.displayName = manifest.value("title").toString();
         entry.icon = manifest.value("icon").toString();
 
-
-        entry.displayName = entry.pkgName; //FIXME
+        getApplicationDataFromDesktopFile(entry);
         addClickApplicationEntry(entry);
     }
 }

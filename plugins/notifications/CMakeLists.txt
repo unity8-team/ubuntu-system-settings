@@ -14,9 +14,9 @@ set(ubuntu_notifications_panel_SRCS
 add_library(UbuntuNotificationsPanel MODULE ${ubuntu_notifications_panel_HDRS} ${ubuntu_notifications_panel_SRCS} ${QML_SOURCES})
 
 add_definitions(-DQT_NO_KEYWORDS)
-include_directories(${CLICK_INCLUDE_DIRS})
+include_directories(${CLICK_INCLUDE_DIRS} ${GIO_INCLUDE_DIRS})
 
-target_link_libraries(UbuntuNotificationsPanel ${CLICK_LDFLAGS})
+target_link_libraries(UbuntuNotificationsPanel ${CLICK_LDFLAGS} ${GIO_LDFLAGS})
 qt5_use_modules(UbuntuNotificationsPanel Qml Quick)
 
 set(PLUG_DIR ${PLUGIN_PRIVATE_MODULE_DIR}/Ubuntu/SystemSettings/Notifications)

@@ -51,6 +51,7 @@ protected:
     struct ClickApplicationEntry {
         QString pkgName;         
         QString version;
+        QString appName;         
         QString displayName;
         QUrl icon;                                                 
     };
@@ -59,8 +60,10 @@ protected:
 
 private:
     void addClickApplicationEntry(const ClickApplicationEntry& entry);
+    void getApplicationDataFromDesktopFile(ClickApplicationEntry& entry);
     void populateFromLegacyHelpersDir();
     bool clickManifestHasPushHelperHook(const QVariantMap& manifest);
+    QString getApplicationNameFromDesktopHook(const QVariantMap& manifest);
     void populateFromClickDatabase();
 };
 
