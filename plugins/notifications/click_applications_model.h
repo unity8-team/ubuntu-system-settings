@@ -38,7 +38,11 @@ public:
 
     enum Roles {
         DisplayName = Qt::UserRole + 1,
-        Icon
+        Icon,
+        SoundsNotify,
+        VibrationsNotify,
+        BubblesNotify,
+        ListNotify
     };
 
     // reimplemented from QAbstractListModel
@@ -48,13 +52,21 @@ public:
 
     Q_INVOKABLE ClickApplicationEntry* get(int index) const;
 
-Q_SIGNALS:
-    void rowCountChanged();
-
 protected:
     QList<ClickApplicationEntry*> m_entries;
 
+Q_SIGNALS:
+    void rowCountChanged();
+
+private Q_SLOTS:
+    void onEntrySoundsNotifyChanged();
+    void onEntryVibrationsNotifyChanged();
+    void onEntryBubblesNotifyChanged();
+    void onEntryListNotifyChanged();
+
 private:
+    void notifyDataChanged(ClickApplicationEntry *entry, int role);
+    ClickApplicationEntry* getNewClickApplicationEntry();
     void addClickApplicationEntry(ClickApplicationEntry *entry);
     void getApplicationDataFromDesktopFile(ClickApplicationEntry *entry);
     void populateFromLegacyHelpersDir();

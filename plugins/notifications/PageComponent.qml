@@ -18,7 +18,7 @@
 
 import QtQuick 2.4
 import Ubuntu.Components 1.3
-import Ubuntu.Components.ListItems 1.3 as ListItem
+import Ubuntu.Components.ListItems 1.3 as ListItems
 import Ubuntu.SystemSettings.Notifications 1.0
 import SystemSettings 1.0
 
@@ -28,7 +28,7 @@ ItemPage {
 
     title: i18n.tr("Notifications")
 
-    ListItem.Base {
+    ListItems.Base {
         id: subtitle
         height: labelSubtitle.height + units.gu(2)
         Label {
@@ -58,19 +58,51 @@ ItemPage {
         clip: true
         contentHeight: contentItem.childrenRect.height
 
-        delegate: ListItem.Standard {
-            Component.onCompleted: {
-                var iconPath = model.icon.toString()
-                if (iconPath.search("/") == -1) {
-                    iconName = model.icon
-                } else {
-                    iconSource = model.icon
-                }
-            }
-            text: model.displayName
-            progression: true
+        delegate: ListItem {
+            height: layout.height + (divider.visible ? divider.height : 0)
 
             onClicked: pageStack.push(Qt.resolvedUrl("ClickAppNotifications.qml"), { entry: ClickApplicationsModel.get(index)})
+
+            ListItemLayout {
+                id: layout
+
+                Component.onCompleted: {
+                    var iconPath = model.icon.toString()
+                    if (iconPath.search("/") == -1) {
+                        icon.name = model.icon
+                    } else {
+                        icon.source = model.icon
+                    }
+                }
+
+                title.text: model.displayName
+                subtitle.text: {
+                    var arr = []
+                    if (model.soundsNotify) {
+                        arr.push(i18n.tr("Sounds"))
+                    }
+                    if (model.vibrationsNotify) {
+                        arr.push(i18n.tr("Vibrations"))
+                    }
+                    if (model.bubblesNotify) {
+                        arr.push(i18n.tr("Bubbles"))
+                    }
+                    if (model.listNotify) {
+                        arr.push(i18n.tr("Notification List"))
+                    }
+                    return arr.join(", ")
+                }
+                Icon {
+                    id: icon
+                    SlotsLayout.position: SlotsLayout.Leading;
+                    width: units.gu(5)
+                }
+                Icon {
+                    name: "next"
+                    SlotsLayout.position: SlotsLayout.Trailing;
+                    width: units.gu(2)
+                }
+            }
         }
     }
 }

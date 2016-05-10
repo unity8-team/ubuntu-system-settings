@@ -50,6 +50,10 @@ QHash<int, QByteArray> ClickApplicationsModel::roleNames() const
     if (roles.isEmpty()) {
         roles[DisplayName] = "displayName";
         roles[Icon] = "icon";
+        roles[SoundsNotify] = "soundsNotify";
+        roles[VibrationsNotify] = "vibrationsNotify";
+        roles[BubblesNotify] = "bubblesNotify";
+        roles[ListNotify] = "listNotify";
     }
     return roles;
 }
@@ -72,6 +76,14 @@ QVariant ClickApplicationsModel::data(const QModelIndex& index, int role) const
         return entry->displayName();
     case Icon:
         return entry->icon();
+    case SoundsNotify:
+        return entry->soundsNotify();
+    case VibrationsNotify:
+        return entry->vibrationsNotify();
+    case BubblesNotify:
+        return entry->bubblesNotify();
+    case ListNotify:
+        return entry->listNotify();
     default:
         return QVariant();
     }
@@ -84,6 +96,55 @@ ClickApplicationEntry* ClickApplicationsModel::get(int index) const
     }
 
     return m_entries.at(index);
+}
+
+void ClickApplicationsModel::onEntrySoundsNotifyChanged()
+{
+    ClickApplicationEntry *entry = qobject_cast<ClickApplicationEntry*>(sender());
+    notifyDataChanged(entry, SoundsNotify);
+}
+
+void ClickApplicationsModel::onEntryVibrationsNotifyChanged()
+{
+    ClickApplicationEntry *entry = qobject_cast<ClickApplicationEntry*>(sender());
+    notifyDataChanged(entry, VibrationsNotify);
+}
+
+void ClickApplicationsModel::onEntryBubblesNotifyChanged()
+{
+    ClickApplicationEntry *entry = qobject_cast<ClickApplicationEntry*>(sender());
+    notifyDataChanged(entry, BubblesNotify);
+}
+
+void ClickApplicationsModel::onEntryListNotifyChanged()
+{
+    ClickApplicationEntry *entry = qobject_cast<ClickApplicationEntry*>(sender());
+    notifyDataChanged(entry, ListNotify);
+}
+
+void ClickApplicationsModel::notifyDataChanged(ClickApplicationEntry *entry, int role)
+{
+    int idx = m_entries.indexOf(entry);
+    if (idx < 0) {
+        return;
+    }
+
+    QVector<int> roles;
+    roles << role;
+
+    Q_EMIT dataChanged(this->index(idx, 0), this->index(idx, 0), roles);
+}
+
+ClickApplicationEntry* ClickApplicationsModel::getNewClickApplicationEntry()
+{
+    ClickApplicationEntry* newClick = new ClickApplicationEntry();
+
+    connect(newClick, SIGNAL(soundsNotifyChanged()), SLOT(onEntrySoundsNotifyChanged()));
+    connect(newClick, SIGNAL(vibrationsNotifyChanged()), SLOT(onEntryVibrationsNotifyChanged()));   
+    connect(newClick, SIGNAL(bubblesNotifyChanged()), SLOT(onEntryBubblesNotifyChanged()));
+    connect(newClick, SIGNAL(listNotifyChanged()), SLOT(onEntryListNotifyChanged()));
+
+    return newClick;
 }
 
 void ClickApplicationsModel::addClickApplicationEntry(ClickApplicationEntry *entry)
@@ -122,7 +183,7 @@ void ClickApplicationsModel::populateFromLegacyHelpersDir()
      while (it.hasNext()) {
          QFileInfo fileInfo(it.next());
 
-         ClickApplicationEntry *entry = new ClickApplicationEntry();
+         ClickApplicationEntry *entry = getNewClickApplicationEntry();
          entry->setPkgName(fileInfo.fileName());
 
          getApplicationDataFromDesktopFile(entry);
@@ -220,7 +281,7 @@ void ClickApplicationsModel::populateFromClickDatabase()
             continue;
         }
 
-        ClickApplicationEntry *entry = new ClickApplicationEntry();
+        ClickApplicationEntry *entry = getNewClickApplicationEntry();
         entry->setPkgName(manifest.value("name").toString());
         entry->setVersion(manifest.value("version").toString());
         entry->setAppName(getApplicationNameFromDesktopHook(manifest));
