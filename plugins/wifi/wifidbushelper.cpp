@@ -300,17 +300,11 @@ QString WifiDbusHelper::getWifiIpAddress()
     auto devices = reply1.value();
 
     for (const auto &d : devices) {
-        qWarning() << Q_FUNC_INFO << "path:" << d.path();
         QDBusInterface iface(NM_SERVICE, d.path(), NM_DEVICE_IFACE, m_systemBusConnection);
         auto type_v = iface.property("DeviceType");
-        qWarning() << Q_FUNC_INFO << "type:" << type_v.toUInt();
         if (type_v.toUInt() == 2 /* NM_DEVICE_TYPE_WIFI */) {
             auto ip4name = iface.property("IpInterface").toString();
-            qWarning() << Q_FUNC_INFO << "IpInterface:" << ip4name;
-            auto ret = QNetworkInterface::interfaceFromName(ip4name).addressEntries()[0].ip().toString();
-            qWarning() << Q_FUNC_INFO << "Ip:" << ret;
-            return ret;
-            //return QNetworkInterface::interfaceFromName(ip4name).addressEntries()[0].ip().toString();
+            return QNetworkInterface::interfaceFromName(ip4name).addressEntries()[0].ip().toString();
             break;
         }
     }
