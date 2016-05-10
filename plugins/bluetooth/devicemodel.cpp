@@ -502,7 +502,7 @@ QSharedPointer<Device> DeviceModel::addDevice(const QString &path, const QVarian
     device->setProperties(properties);
 
     // The device is valid when the right properties are set for it. The
-    // code below makes sure that the right properties are set as it certain
+    // code below makes sure that the right properties are set as in certain
     // situations it happens with a delay.
     //
     // In case this function is called from FindOrCreateDevice() context
