@@ -149,15 +149,27 @@ void Displays::disconnectDevice(const QString &address)
         device->disconnect();
 }
 
+void Displays::callFinishedSlot(QDBusPendingCallWatcher *call)
+{
+    qWarning() << Q_FUNC_INFO;
+    QDBusPendingReply<QString, QByteArray> reply = *call;
+    if (reply.isError())
+        handleConnectError(reply.error());
+    call->deleteLater();
+}
+
 void Displays::connectDevice(const QString &address)
 {
+    qWarning() << Q_FUNC_INFO;
     auto device = m_devices.getDeviceFromAddress(address);
     if (!device)
         return;
     auto reply = device->connect();
-    reply.waitForFinished();
-    if (reply.isError())
-        handleConnectError(reply.error());
+
+    QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(reply, this);
+
+    QObject::connect(watcher, SIGNAL(finished(QDBusPendingCallWatcher*)),
+                     this, SLOT(callFinishedSlot(QDBusPendingCallWatcher*)));
 }
 
 void Displays::updateProperty(const QString &key, const QVariant &value)
