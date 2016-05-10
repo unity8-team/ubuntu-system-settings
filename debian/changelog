@@ -1,3 +1,11 @@
+ubuntu-system-settings (0.3+16.04.20160510-0ubuntu1) xenial; urgency=medium
+
+  * Don't use Ip4Address from NetworkManager, it was deprecated since
+    0.9 and since removed. Use QNetworkInterface to get the IP address.
+    (LP: #1579825)
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Tue, 10 May 2016 18:19:38 +0000
+
 ubuntu-system-settings (0.3+16.04.20160506-0ubuntu1) xenial; urgency=medium
 
   [ jonas-drange ]
