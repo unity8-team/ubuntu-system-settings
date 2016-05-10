@@ -501,21 +501,23 @@ QSharedPointer<Device> DeviceModel::addDevice(const QString &path, const QVarian
     QSharedPointer<Device> device(new Device(path, m_dbus));
     device->setProperties(properties);
 
-    // At this point the device is not valid only when the device type has
-    // not been updated to the value from the properties. Also we know that
-    // when this function is called from FindOrCreateDevice() context the
-    // properties are not yet known. In that case the device will become
-    // valid once the device properties are gathered and this done
-    // asynchronously in the Device class constructor which takes a while.
-    // This is a problem in certain situations and as a consequence the
-    // pin code request is rejected and the bonding denied. To workaround
-    // this unwanted behavior we assume that at this point it is just a
-    // matter of time for the device to beome valid and we wait a bit here.
-    // This is safe because in any other case the properties are already
-    // updated.
+    // The device is valid when the right properties are set for it. The
+    // code below makes sure that the right properties are set as it certain
+    // situations it happens with a delay.
+    //
+    // In case this function is called from FindOrCreateDevice() context
+    // the properties are not yet known. Of course the device will become
+    // valid once the device properties are gathered however this is done
+    // asynchronously, in the Device class constructor, and it takes a
+    // while. This is a problem in certain situations and as a consequence
+    // the pin code request is rejected and the pairing denied. To
+    // workaround this unwanted behavior we assume that at this point it is
+    // just a matter of time for the device to become valid and we wait a
+    // bit here. This is safe because in any other case the properties are
+    // already updated.
     uint8_t tries = 0;
     while (!device->isValid() && tries < 10) {
-        QTime timeout = QTime::currentTime().addMSecs(100);
+        const QTime timeout = QTime::currentTime().addMSecs(100);
         while (QTime::currentTime() < timeout)
             QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
         tries++;
