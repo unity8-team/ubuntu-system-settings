@@ -22,6 +22,7 @@
 #include <QDBusReply>
 #include <QtDebug>
 #include <QDBusInterface>
+#include <QNetworkInterface>
 #include <algorithm>
 #include <arpa/inet.h>
 
@@ -297,33 +298,24 @@ QString WifiDbusHelper::getWifiIpAddress()
         return QString();
     }
     auto devices = reply1.value();
-    int ip4addr;
 
-    QDBusObjectPath dev;
     for (const auto &d : devices) {
+        qWarning() << Q_FUNC_INFO << "path:" << d.path();
         QDBusInterface iface(NM_SERVICE, d.path(), NM_DEVICE_IFACE, m_systemBusConnection);
         auto type_v = iface.property("DeviceType");
+        qWarning() << Q_FUNC_INFO << "type:" << type_v.toUInt();
         if (type_v.toUInt() == 2 /* NM_DEVICE_TYPE_WIFI */) {
-            ip4addr = iface.property("Ip4Address").toInt();
-            dev = d;
+            auto ip4name = iface.property("IpInterface").toString();
+            qWarning() << Q_FUNC_INFO << "IpInterface:" << ip4name;
+            auto ret = QNetworkInterface::interfaceFromName(ip4name).addressEntries()[0].ip().toString();
+            qWarning() << Q_FUNC_INFO << "Ip:" << ret;
+            return ret;
+            //return QNetworkInterface::interfaceFromName(ip4name).addressEntries()[0].ip().toString();
             break;
         }
     }
 
-    if (dev.path().isEmpty()) {
-        // didn't find a wifi device
-        return QString();
-    }
-
-    if (!ip4addr) {
-        // no ip address
-        return QString();
-    }
-
-
-    struct in_addr ip_addr;
-    ip_addr.s_addr = ip4addr;
-    return QString(inet_ntoa(ip_addr));
+    return QString();
 }
 
 struct Network : public QObject
