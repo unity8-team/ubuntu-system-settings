@@ -21,8 +21,9 @@
 #include <QtQml/QtQml>
 #include <QtQml/QQmlContext>
 
-#include "click_applications_model.h"
 #include "click_application_entry.h"
+#include "click_applications_model.h"
+#include "click_applications_notify_model.h"
 
 #define MAKE_SINGLETON_FACTORY(type) \
     static QObject* type##_singleton_factory(QQmlEngine* engine, QJSEngine* scriptEngine) { \
@@ -39,6 +40,7 @@ void BackendPlugin::registerTypes(const char *uri)
 
     qmlRegisterSingletonType<ClickApplicationsModel>(uri, 1, 0, "ClickApplicationsModel", ClickApplicationsModel_singleton_factory);
     qmlRegisterType<ClickApplicationEntry>(uri, 1, 0, "ClickApplicationEntry");
+    qmlRegisterType<ClickApplicationsNotifyModel>(uri, 1, 0, "ClickApplicationsNotifyModel");
 }
 
 void BackendPlugin::initializeEngine(QQmlEngine *engine, const char *uri)
