@@ -28,21 +28,16 @@ ItemPage {
 
     title: i18n.tr("Notifications")
 
-    ListItems.Base {
-        id: subtitle
-        height: labelSubtitle.height + units.gu(2)
-        Label {
-            id: labelSubtitle
-            text: i18n.tr("Selected apps can alert you using notification bubbles, sounds, vibrations, and the Notifications list.")
-            wrapMode: Text.WordWrap
-            anchors {
-                top: parent.top
-                left: parent.left
-                right: parent.right
-                margins: units.gu(1)
-            }
-        }
-        highlightWhenPressed: false
+    ClickApplicationsNotifyModel {
+        id: clickAppsSoundsNotifyModel
+        notifyType: ClickApplicationsNotifyModel.SoundsNotify
+        sourceModel: ClickApplicationsModel
+    }
+
+    ClickApplicationsNotifyModel {
+        id: clickAppsVibrationsNotifyModel
+        notifyType: ClickApplicationsNotifyModel.VibrationsNotify
+        sourceModel: ClickApplicationsModel
     }
 
     ListView {
@@ -51,12 +46,77 @@ ItemPage {
         anchors {
             left: parent.left
             right: parent.right
-            top: subtitle.bottom
+            top: parent.top
             bottom: parent.bottom
         }
         model: ClickApplicationsModel
         clip: true
         contentHeight: contentItem.childrenRect.height
+
+        header: Column {
+            anchors {
+                left: parent.left
+                right: parent.right
+            }
+ 
+            ListItems.Base {
+                height: labelSubtitle.height + units.gu(2)
+                Label {
+                    id: labelSubtitle
+                    text: i18n.tr("Selected apps can alert you using notification bubbles, sounds, vibrations, and the Notifications list.")
+                    wrapMode: Text.WordWrap
+                    anchors {
+                        top: parent.top
+                        left: parent.left
+                        right: parent.right
+                        topMargin: units.gu(1)
+                    }
+                }
+
+                highlightWhenPressed: false
+            }
+
+            ListItem {
+                //onClicked: pageStack.push(Qt.resolvedUrl("ClickAppsSoundsNotify.qml"), { model: clickAppsSoundsNotifyModel })
+
+                ListItemLayout {
+                    title.text: i18n.tr("Apps that notify with sound");
+                    Label {
+                        text: clickAppsSoundsNotifyModel.count
+                        fontSize: "x-large"
+                        SlotsLayout.position: SlotsLayout.Trailing;
+                    }
+                    Icon {
+                        name: "next"
+                        SlotsLayout.position: SlotsLayout.Trailing;
+                        width: units.gu(2)
+                    }
+                }
+            }
+
+            ListItem {
+                //onClicked: pageStack.push(Qt.resolvedUrl("ClickAppsSoundsNotify.qml"), { model: clickAppsSoundsNotifyModel })
+
+                ListItemLayout {
+                    title.text: i18n.tr("Apps that notify with vibration");
+                    Label {
+                        text: clickAppsVibrationsNotifyModel.count
+                        fontSize: "x-large"
+                        SlotsLayout.position: SlotsLayout.Trailing;
+                    }
+                    Icon {
+                        name: "next"
+                        SlotsLayout.position: SlotsLayout.Trailing;
+                        width: units.gu(2)
+                    }
+                }
+            }
+
+            ListItem {
+                ListItemLayout { title.text: i18n.tr("All installed apps:") }
+            }
+
+        }
 
         delegate: ListItem {
             height: layout.height + (divider.visible ? divider.height : 0)
