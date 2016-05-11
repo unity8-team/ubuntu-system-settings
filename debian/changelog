@@ -1,3 +1,10 @@
+ubuntu-system-settings (0.3+16.04.20160511.1-0ubuntu1) xenial; urgency=medium
+
+  * Fix pin code request is rejected because device is not valid (LP:
+    #1539158)
+
+ -- Konrad Zapałowicz <konrad.zapalowicz@canonical.com>  Wed, 11 May 2016 14:42:30 +0000
+
 ubuntu-system-settings (0.3+16.04.20160510-0ubuntu1) xenial; urgency=medium
 
   * Don't use Ip4Address from NetworkManager, it was deprecated since
