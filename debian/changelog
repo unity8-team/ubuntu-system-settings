@@ -1,3 +1,10 @@
+ubuntu-system-settings (0.3+16.04.20160511-0ubuntu1) xenial; urgency=medium
+
+  * Play the haptic feedback before pushing the page so it happens when
+    the use taps not after the page has loaded. (LP: #1578816)
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Wed, 11 May 2016 13:44:39 +0000
+
 ubuntu-system-settings (0.3+16.04.20160510-0ubuntu1) xenial; urgency=medium
 
   * Don't use Ip4Address from NetworkManager, it was deprecated since
