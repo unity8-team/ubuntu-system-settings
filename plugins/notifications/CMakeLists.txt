@@ -3,6 +3,8 @@ SET (CMAKE_AUTOMOC ON)
 set(QML_SOURCES
     PageComponent.qml
     ClickAppNotifications.qml
+    ClickAppsSoundsNotify.qml
+    ClickAppsVibrationsNotify.qml
     )
 
 set(ubuntu_notifications_panel_HDRS
