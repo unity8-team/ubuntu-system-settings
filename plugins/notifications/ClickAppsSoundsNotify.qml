@@ -48,11 +48,7 @@ ItemPage {
         }
 
         delegate: ListItem {
-            height: layout.height + (divider.visible ? divider.height : 0)
-
             ListItemLayout {
-                id: layout
-
                 Component.onCompleted: {
                     var iconPath = model.icon.toString()
                     if (iconPath.search("/") == -1) {
@@ -64,10 +60,20 @@ ItemPage {
 
                 title.text: model.displayName
 
-                Icon {
-                    id: icon
+                Row {
+                    spacing: units.gu(2)
+
                     SlotsLayout.position: SlotsLayout.Leading;
-                    width: units.gu(5)
+
+                    CheckBox {
+                        anchors.verticalCenter: icon.verticalCenter
+                        checked: model.soundsNotify
+                    }
+
+                    Icon {
+                        id: icon
+                        width: units.gu(5)
+                    }
                 }
             }
         }
