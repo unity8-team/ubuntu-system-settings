@@ -145,8 +145,12 @@ void Displays::handleConnectError(QDBusError error)
 void Displays::disconnectDevice(const QString &address)
 {
     auto device = m_devices.getDeviceFromAddress(address);
-    if (device)
-        device->disconnect();
+    if (!device)
+        return;
+    QDBusPendingReply<void> reply = device->disconnect();
+    QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(reply, this);
+    QObject::connect(watcher, SIGNAL(finished(QDBusPendingCallWatcher*)),
+                     this, SLOT(callFinishedSlot(QDBusPendingCallWatcher*)));
 }
 
 void Displays::callFinishedSlot(QDBusPendingCallWatcher *call)
@@ -164,10 +168,8 @@ void Displays::connectDevice(const QString &address)
     auto device = m_devices.getDeviceFromAddress(address);
     if (!device)
         return;
-    auto reply = device->connect();
-
+    QDBusPendingReply<void> reply = device->connect();
     QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(reply, this);
-
     QObject::connect(watcher, SIGNAL(finished(QDBusPendingCallWatcher*)),
                      this, SLOT(callFinishedSlot(QDBusPendingCallWatcher*)));
 }
