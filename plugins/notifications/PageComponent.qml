@@ -77,8 +77,6 @@ ItemPage {
             }
 
             ListItem {
-                //onClicked: pageStack.push(Qt.resolvedUrl("ClickAppsSoundsNotify.qml"), { model: clickAppsSoundsNotifyModel })
-
                 ListItemLayout {
                     title.text: i18n.tr("Apps that notify with sound");
                     Label {
@@ -92,11 +90,11 @@ ItemPage {
                         width: units.gu(2)
                     }
                 }
+
+                onClicked: pageStack.push(Qt.resolvedUrl("ClickAppsSoundsNotify.qml"), { model: clickAppsSoundsNotifyModel })
             }
 
             ListItem {
-                //onClicked: pageStack.push(Qt.resolvedUrl("ClickAppsSoundsNotify.qml"), { model: clickAppsSoundsNotifyModel })
-
                 ListItemLayout {
                     title.text: i18n.tr("Apps that notify with vibration");
                     Label {
@@ -110,6 +108,8 @@ ItemPage {
                         width: units.gu(2)
                     }
                 }
+
+                onClicked: pageStack.push(Qt.resolvedUrl("ClickAppsVibrationsNotify.qml"), { model: clickAppsVibrationsNotifyModel })
             }
 
             ListItem {
