@@ -92,7 +92,12 @@ void Displays::setEnabled(bool enabled)
 {
     if (!m_manager)
         return;
-    m_manager->setEnabled(enabled);
+    bool ret = m_manager->setEnabled(enabled);
+    qWarning() << Q_FUNC_INFO << "RET:" << ret;
+    if (ret)
+        Q_EMIT(enabledChanged(enabled));
+    else
+        Q_EMIT(enabledChanged(!enabled));
 }
 
 void Displays::scan()
