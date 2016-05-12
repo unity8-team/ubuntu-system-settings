@@ -43,7 +43,6 @@ ItemPage {
     AethercastDisplays {
         id: aethercastDisplays
         onEnabledChanged: {
-            console.warn("onEnabledChanged: " + enabled);
             enabledCheck.serverChecked = enabled;
             enabledCheck.checked = enabledCheck.serverChecked;
         }

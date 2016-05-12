@@ -80,7 +80,6 @@ void Displays::slotPropertiesChanged(const QString &interface, const QVariantMap
 
 void Displays::setProperties(const QMap<QString,QVariant> &properties)
 {
-    qWarning() << Q_FUNC_INFO << properties;
     QMapIterator<QString,QVariant> it(properties);
     while (it.hasNext()) {
         it.next();
@@ -93,7 +92,6 @@ void Displays::setEnabled(bool enabled)
     if (!m_manager)
         return;
     bool ret = m_manager->setEnabled(enabled);
-    qWarning() << Q_FUNC_INFO << "RET:" << ret;
     if (ret)
         Q_EMIT(enabledChanged(enabled));
     else
@@ -130,7 +128,6 @@ QAbstractItemModel * Displays::disconnectedDevices()
 
 void Displays::handleConnectError(QDBusError error)
 {
-    qWarning() << Q_FUNC_INFO << error;
     if (error.name() == "org.aethercast.Error.None")
         Q_EMIT(connectError(Error::None));
     else if (error.name() == "org.aethercast.Error.Failed")
@@ -162,9 +159,7 @@ void Displays::disconnectDevice(const QString &address)
 
 void Displays::callFinishedSlot(QDBusPendingCallWatcher *call)
 {
-    qWarning() << Q_FUNC_INFO;
     QDBusPendingReply<void> reply = *call;
-    qWarning() << Q_FUNC_INFO << reply.error();
     if (reply.isFinished() && reply.isError())
         handleConnectError(reply.error());
     call->deleteLater();
@@ -172,7 +167,6 @@ void Displays::callFinishedSlot(QDBusPendingCallWatcher *call)
 
 void Displays::connectDevice(const QString &address)
 {
-    qWarning() << Q_FUNC_INFO;
     auto device = m_devices.getDeviceFromAddress(address);
     if (!device)
         return;
