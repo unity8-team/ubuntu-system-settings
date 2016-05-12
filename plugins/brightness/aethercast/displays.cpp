@@ -158,9 +158,9 @@ void Displays::disconnectDevice(const QString &address)
 void Displays::callFinishedSlot(QDBusPendingCallWatcher *call)
 {
     qWarning() << Q_FUNC_INFO;
-    QDBusPendingReply<QString, QByteArray> reply = *call;
+    QDBusPendingReply<void> reply = *call;
     qWarning() << Q_FUNC_INFO << reply.error();
-    if (reply.isError())
+    if (reply.isFinished() && reply.isError())
         handleConnectError(reply.error());
     call->deleteLater();
 }
