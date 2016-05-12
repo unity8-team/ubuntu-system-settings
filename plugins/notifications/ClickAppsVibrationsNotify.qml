@@ -43,8 +43,37 @@ ItemPage {
         clip: true
         contentHeight: contentItem.childrenRect.height
 
-        header: ListItem {
-            ListItemLayout { title.text: i18n.tr("Apps that notify with vibration:") }
+        header: Column {
+            anchors {
+                left: parent.left
+                right: parent.right
+            }
+
+            ListItem {
+                ListItemLayout { title.text: i18n.tr("When in Silent mode:") }
+            }
+
+            ListItem {
+                height: layout.height + (divider.visible ? divider.height : 0)
+                SlotsLayout {
+                    id: layout
+
+                    mainSlot: Item {
+                        height: optionSelector.itemHeight * 2
+                        width: parent.width - 2 * (layout.padding.leading + layout.padding.trailing)
+                        OptionSelector {
+                            id: optionSelector
+                            expanded: true
+                            model: [i18n.tr("Vibrate as normal"),
+                                    i18n.tr("Don't vibrate")]
+                        }
+                    }
+                }
+            }
+ 
+            ListItem {
+                ListItemLayout { title.text: i18n.tr("All installed apps:") }
+            }
         }
 
         delegate: ListItem {
