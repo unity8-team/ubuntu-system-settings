@@ -92,6 +92,10 @@ void Displays::setEnabled(bool enabled)
     if (!m_manager)
         return;
     bool ret = m_manager->setEnabled(enabled);
+    /* This is a hack to ensure the aethercast enabled switch stays 
+     * in sync with the enabled property.  We should be able to rely
+     * on the propertiesChanged signal to catch this, but we can't
+     */
     if (ret)
         Q_EMIT(enabledChanged(enabled));
     else
