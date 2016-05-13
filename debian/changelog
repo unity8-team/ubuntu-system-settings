@@ -1,3 +1,22 @@
+ubuntu-system-settings (0.3+16.04.20160513-0ubuntu1) xenial; urgency=medium
+
+  * Use libclick to display installed click pkgs on Notifications page
+    removed: plugins/notifications/notification_item.cpp
+    plugins/notifications/notification_item.h
+    plugins/notifications/notification_manager.cpp
+    plugins/notifications/notification_manager.h added:
+    plugins/notifications/ClickAppNotifications.qml
+    plugins/notifications/ClickAppsSoundsNotify.qml
+    plugins/notifications/ClickAppsVibrationsNotify.qml
+    plugins/notifications/click_application_entry.cpp
+    plugins/notifications/click_application_entry.h
+    plugins/notifications/click_applications_model.cpp
+    plugins/notifications/click_applications_model.h
+    plugins/notifications/click_applications_notify_model.cpp
+    plugins/notifications/click_applications_notify_model.h
+
+ -- Arthur Mello <arthur.mello@canonical.com>  Fri, 13 May 2016 16:54:52 +0000
+
 ubuntu-system-settings (0.3+16.04.20160510-0ubuntu1) xenial; urgency=medium
 
   * Don't use Ip4Address from NetworkManager, it was deprecated since
