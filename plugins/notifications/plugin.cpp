@@ -17,20 +17,30 @@
 
 #include "plugin.h"
 
-#include <QtQml>
+// Qt
+#include <QtQml/QtQml>
 #include <QtQml/QQmlContext>
-#include "notification_manager.h"
-#include "notification_item.h"
 
-using namespace NotificationsPlugin;
+#include "click_application_entry.h"
+#include "click_applications_model.h"
+#include "click_applications_notify_model.h"
 
+#define MAKE_SINGLETON_FACTORY(type) \
+    static QObject* type##_singleton_factory(QQmlEngine* engine, QJSEngine* scriptEngine) { \
+        Q_UNUSED(engine); \
+        Q_UNUSED(scriptEngine); \
+        return new type(); \
+    }
+
+MAKE_SINGLETON_FACTORY(ClickApplicationsModel)
 
 void BackendPlugin::registerTypes(const char *uri)
 {
     Q_ASSERT(uri == QLatin1String("Ubuntu.SystemSettings.Notifications"));
 
-    qmlRegisterType<NotificationsManager>(uri, 1, 0, "NotificationsManager");
-    qmlRegisterType<NotificationItem>(uri, 1, 0, "NotificationItem");
+    qmlRegisterSingletonType<ClickApplicationsModel>(uri, 1, 0, "ClickApplicationsModel", ClickApplicationsModel_singleton_factory);
+    qmlRegisterType<ClickApplicationEntry>(uri, 1, 0, "ClickApplicationEntry");
+    qmlRegisterType<ClickApplicationsNotifyModel>(uri, 1, 0, "ClickApplicationsNotifyModel");
 }
 
 void BackendPlugin::initializeEngine(QQmlEngine *engine, const char *uri)

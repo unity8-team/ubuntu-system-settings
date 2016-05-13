@@ -18,7 +18,7 @@
 
 import QtQuick 2.4
 import Ubuntu.Components 1.3
-import Ubuntu.Components.ListItems 1.3 as ListItem
+import Ubuntu.Components.ListItems 1.3 as ListItems
 import Ubuntu.SystemSettings.Notifications 1.0
 import SystemSettings 1.0
 
@@ -28,25 +28,16 @@ ItemPage {
 
     title: i18n.tr("Notifications")
 
-    NotificationsManager {
-        id: notificationsManager
+    ClickApplicationsNotifyModel {
+        id: clickAppsSoundsNotifyModel
+        notifyType: ClickApplicationsNotifyModel.SoundsNotify
+        sourceModel: ClickApplicationsModel
     }
 
-    ListItem.Base {
-        id: subtitle
-        height: labelSubtitle.height + units.gu(2)
-        Label {
-            id: labelSubtitle
-            text: i18n.tr("Selected apps can alert you using notification bubbles, sounds, vibrations, and the Notifications list.")
-            wrapMode: Text.WordWrap
-            anchors {
-                top: parent.top
-                left: parent.left
-                right: parent.right
-                margins: units.gu(1)
-            }
-        }
-        highlightWhenPressed: false
+    ClickApplicationsNotifyModel {
+        id: clickAppsVibrationsNotifyModel
+        notifyType: ClickApplicationsNotifyModel.VibrationsNotify
+        sourceModel: ClickApplicationsModel
     }
 
     ListView {
@@ -55,28 +46,121 @@ ItemPage {
         anchors {
             left: parent.left
             right: parent.right
-            top: subtitle.bottom
+            top: parent.top
             bottom: parent.bottom
         }
-        model: notificationsManager.model
+        model: ClickApplicationsModel
         clip: true
         contentHeight: contentItem.childrenRect.height
 
-        delegate: ListItem.Standard {
-            text: modelData.title
-            Component.onCompleted: {
-                if (modelData.icon.search("/") == -1) {
-                    iconName = modelData.icon
-                }
-                else {
-                    iconSource = modelData.icon
-                }
+        header: Column {
+            anchors {
+                left: parent.left
+                right: parent.right
             }
-            control: Switch {
-                checked: modelData.status
+ 
+            ListItems.Base {
+                height: labelSubtitle.height + units.gu(2)
+                Label {
+                    id: labelSubtitle
+                    text: i18n.tr("Selected apps can alert you using notification bubbles, sounds, vibrations, and the Notifications list.")
+                    wrapMode: Text.WordWrap
+                    anchors {
+                        top: parent.top
+                        left: parent.left
+                        right: parent.right
+                        topMargin: units.gu(1)
+                    }
+                }
 
-                onCheckedChanged: {
-                    modelData.status = checked;
+                highlightWhenPressed: false
+            }
+
+            ListItem {
+                ListItemLayout {
+                    title.text: i18n.tr("Apps that notify with sound");
+                    Label {
+                        text: clickAppsSoundsNotifyModel.count
+                        fontSize: "x-large"
+                        SlotsLayout.position: SlotsLayout.Trailing;
+                    }
+                    Icon {
+                        name: "next"
+                        SlotsLayout.position: SlotsLayout.Trailing;
+                        width: units.gu(2)
+                    }
+                }
+
+                onClicked: pageStack.push(Qt.resolvedUrl("ClickAppsSoundsNotify.qml"), { model: clickAppsSoundsNotifyModel })
+            }
+
+            ListItem {
+                ListItemLayout {
+                    title.text: i18n.tr("Apps that notify with vibration");
+                    Label {
+                        text: clickAppsVibrationsNotifyModel.count
+                        fontSize: "x-large"
+                        SlotsLayout.position: SlotsLayout.Trailing;
+                    }
+                    Icon {
+                        name: "next"
+                        SlotsLayout.position: SlotsLayout.Trailing;
+                        width: units.gu(2)
+                    }
+                }
+
+                onClicked: pageStack.push(Qt.resolvedUrl("ClickAppsVibrationsNotify.qml"), { model: clickAppsVibrationsNotifyModel })
+            }
+
+            ListItem {
+                ListItemLayout { title.text: i18n.tr("All installed apps:") }
+            }
+
+        }
+
+        delegate: ListItem {
+            height: layout.height + (divider.visible ? divider.height : 0)
+
+            onClicked: pageStack.push(Qt.resolvedUrl("ClickAppNotifications.qml"), { entry: ClickApplicationsModel.get(index)})
+
+            ListItemLayout {
+                id: layout
+
+                Component.onCompleted: {
+                    var iconPath = model.icon.toString()
+                    if (iconPath.search("/") == -1) {
+                        icon.name = model.icon
+                    } else {
+                        icon.source = model.icon
+                    }
+                }
+
+                title.text: model.displayName
+                subtitle.text: {
+                    var arr = []
+                    if (model.soundsNotify) {
+                        arr.push(i18n.tr("Sounds"))
+                    }
+                    if (model.vibrationsNotify) {
+                        arr.push(i18n.tr("Vibrations"))
+                    }
+                    if (model.bubblesNotify) {
+                        arr.push(i18n.tr("Bubbles"))
+                    }
+                    if (model.listNotify) {
+                        arr.push(i18n.tr("Notification List"))
+                    }
+                    return arr.join(", ")
+                }
+                Icon {
+                    id: icon
+                    SlotsLayout.position: SlotsLayout.Leading;
+                    width: units.gu(5)
+                }
+                Icon {
+                    name: "next"
+                    SlotsLayout.position: SlotsLayout.Trailing;
+                    width: units.gu(2)
                 }
             }
         }
