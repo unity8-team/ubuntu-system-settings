@@ -304,13 +304,18 @@ ItemPage {
                 text: lockOnSuspend ? i18n.tr("Lock when idle") : i18n.tr("Sleep when idle")
                 value: {
                     if (batteryBackend.powerdRunning ) {
-                        var timeout = Math.round(powerSettings.activityTimeout/60)
-                        return (powerSettings.activityTimeout != 0) ?
+                        var timeout = powerSettings.activityTimeout
+                        return timeout == 0 ?
+                                    i18n.tr("Never") :
+				    (timeout < 60) ?
+		                    // TRANSLATORS: %1 is the number of seconds
+                    	            i18n.tr("After %1 second",
+                               	            "After %1 seconds",
+                                             timeout).arg(timeout) :
                                     // TRANSLATORS: %1 is the number of minutes
                                     i18n.tr("After %1 minute",
                                             "After %1 minutes",
-                                            timeout).arg(timeout) :
-                                    i18n.tr("Never")
+                                            Math.round(timeout/60)).arg(Math.round(timeout/60))
                     }
                     else {
                         var timeout = Math.round(powerSettings.idleDelay/60)
@@ -391,6 +396,44 @@ ItemPage {
                     }
                 }
                 visible: bluetoothActionGroup.visible
+            }
+
+            QDBusActionGroup {
+                id: locationActionGroup
+                busType: DBus.SessionBus
+                busName: "com.canonical.indicator.location"
+                objectPath: "/com/canonical/indicator/location"
+
+                property variant enabled: action("gps-detection-enabled")
+
+                Component.onCompleted: start()
+            }
+
+            ListItem.Standard {
+                id: gpsListItem
+                text: i18n.tr("GPS")
+                control: Loader {
+                    active: locationActionGroup.enabled.state != null
+                    sourceComponent: Switch {
+                        id: gpsSwitch
+                        property bool serverChecked: locationActionGroup.enabled.state
+
+                        USC.ServerPropertySynchroniser {
+                            userTarget: gpsSwitch
+                            userProperty: "checked"
+                            serverTarget: gpsSwitch
+                            serverProperty: "serverChecked"
+
+                            onSyncTriggered: locationActionGroup.enabled.activate()
+                        }
+                    }
+                }
+                visible: locationActionGroup.enabled.state !== undefined
+            }
+
+            ListItem.Caption {
+                text: i18n.tr("Accurate location detection requires GPS and/or Wi-Fi.")
+                visible: gpsListItem.visible
             }
         }
     }
