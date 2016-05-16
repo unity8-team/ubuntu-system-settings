@@ -289,6 +289,12 @@ class CellularPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
         return chooseApnPage.open(name)
 
     @autopilot.logging.log_action(logger.debug)
+    def open_apn_page(self, name, sim=None):
+        carrierApnPage = self._click_carrier_apn()
+        chooseApnPage = carrierApnPage.open_apn(sim)
+        return chooseApnPage
+
+    @autopilot.logging.log_action(logger.debug)
     def delete_apn(self, name, sim=None):
         carrierApnPage = self._click_carrier_apn()
         chooseApnPage = carrierApnPage.open_apn(sim)
