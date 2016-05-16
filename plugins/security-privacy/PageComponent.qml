@@ -18,6 +18,7 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import Biometryd 0.0
 import GSettings 1.0
 import QMenuModel 0.1
 import QtQuick 2.4
@@ -157,8 +158,7 @@ ItemPage {
                 text: i18n.tr("Fingerprint ID")
                 progression: true
                 onClicked: pageStack.push(fingeprintPage, {
-                    passSet: securityPrivacy.securityType !== UbuntuSecurityPrivacyPanel.Swipe,
-                    plugin: null
+                    passcodeSet: securityPrivacy.securityType !== UbuntuSecurityPrivacyPanel.Swipe
                 })
             }
 

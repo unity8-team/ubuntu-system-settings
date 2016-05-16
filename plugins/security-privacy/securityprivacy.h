@@ -44,10 +44,6 @@ class SecurityPrivacy: public QObject
                 READ getEnableFingerprintIdentification
                 WRITE setEnableFingerprintIdentification
                 NOTIFY enableFingerprintIdentificationChanged)
-    Q_PROPERTY (uint fingerprintsEnrolled
-                READ getFingerprintsEnrolled
-                WRITE setFingerprintsEnrolled
-                NOTIFY fingerprintsEnrolledChanged)
     Q_PROPERTY (bool statsWelcomeScreen
                 READ getStatsWelcomeScreen
                 WRITE setStatsWelcomeScreen
@@ -88,8 +84,6 @@ public:
 
     bool getEnableFingerprintIdentification();
     void setEnableFingerprintIdentification(bool enabled);
-    uint getFingerprintsEnrolled();
-    void setFingerprintsEnrolled(uint count);
     bool getStatsWelcomeScreen();
     void setStatsWelcomeScreen(bool enabled);
     bool getMessagesWelcomeScreen();
@@ -113,7 +107,6 @@ public Q_SLOTS:
 
 Q_SIGNALS:
     void enableFingerprintIdentificationChanged();
-    void fingerprintsEnrolledChanged();
     void statsWelcomeScreenChanged();
     void messagesWelcomeScreenChanged();
     void enableLauncherWhileLockedChanged();

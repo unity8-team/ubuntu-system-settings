@@ -18,13 +18,14 @@
  * You should have received a copy of the GNU General Public License along
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
+import Biometryd 0.0
 import GSettings 1.0
 import QtQuick 2.4
 import QtQuick.Layouts 1.1
 import Ubuntu.Components 1.3
 import Ubuntu.Components.ListItems 1.3 as ListItem
 import Ubuntu.Components.Popups 1.3
+import Ubuntu.Settings.Fingerprint 0.1
 import Ubuntu.SystemSettings.SecurityPrivacy 1.0
 import SystemSettings 1.0
 
@@ -50,7 +51,8 @@ ItemPage {
     }
 
     property var dialog: null
-
+    property int enrolledFingerprints: 0
+    onEnrolledFingerprints: console.warn(enrolledFingerprints)
     UbuntuSecurityPrivacyPanel {
         id: securityPrivacy
     }
@@ -172,7 +174,9 @@ ItemPage {
                 echoMode: TextInput.Password
                 inputMethodHints: {
                     if (changeSecurityDialog.oldMethod ===
-                            UbuntuSecurityPrivacyPanel.Passphrase)
+                            UbuntuSecurityPrivacyPanel.Passphrase ||
+                        changeSecurityDialog.oldMethod ===
+                            UbuntuSecurityPrivacyPanel.Fingerprint)
                         return Qt.ImhNoAutoUppercase | Qt.ImhSensitiveData
                     else if (changeSecurityDialog.oldMethod ===
                              UbuntuSecurityPrivacyPanel.Passcode)
@@ -185,7 +189,9 @@ ItemPage {
                 visible: changeSecurityDialog.oldMethod ===
                             UbuntuSecurityPrivacyPanel.Passphrase ||
                          changeSecurityDialog.oldMethod ===
-                             UbuntuSecurityPrivacyPanel.Passcode
+                             UbuntuSecurityPrivacyPanel.Passcode ||
+                         changeSecurityDialog.oldMethod ===
+                             UbuntuSecurityPrivacyPanel.Fingerprint
                 onTextChanged: {
                     if (changeSecurityDialog.newMethod ===
                             UbuntuSecurityPrivacyPanel.Swipe)
@@ -363,9 +369,14 @@ ItemPage {
                     color: UbuntuColors.lightGrey
                     text: i18n.tr("Cancel")
                     onClicked: {
-                        PopupUtils.close(changeSecurityDialog)
-                        unlockMethod.selectedIndex =
-                                methodToIndex(securityPrivacy.securityType)
+                        PopupUtils.close(changeSecurityDialog);
+                        var newSelectedIndex;
+                        if (securityPrivacy.enableFingerprintIdentification) {
+                            newSelectedIndex = methodToIndex(UbuntuSecurityPrivacyPanel.Fingerprint);
+                        } else {
+                            newSelectedIndex = methodToIndex(securityPrivacy.securityType);
+                        }
+                        unlockMethod.selectedIndex = newSelectedIndex;
                     }
                 }
 
@@ -424,6 +435,10 @@ ItemPage {
                             currentInput.forceActiveFocus()
                             currentInput.selectAll()
                             changeSecurityDialog.enabled = true
+
+                            // We can always safely disable FP ident here, but
+                            // in some cases it is required.
+                            securityPrivacy.enableFingerprintIdentification = false;
                         } else {
                             PopupUtils.close(changeSecurityDialog)
                         }
@@ -491,12 +506,38 @@ ItemPage {
                             return unlockMethod.fingerprint;
                         }
                     }
-                    enabled: index != 3 || securityPrivacy.enableFingerprintIdentification
+                    enabled: {
+                        // Fingerprint is the only one we disable, unless the user
+                        // has chosen FP ident and there are more than 0 enrolled
+                        // FPs and there's a pass{code|phrase} set.
+                        var passSet = (securityPrivacy.securityType ===
+                                       UbuntuSecurityPrivacyPanel.Passcode
+                                       || securityPrivacy.securityType ===
+                                       UbuntuSecurityPrivacyPanel.Passphrase);
+                        var haveFps = page.enrolledFingerprints > 0;
+                        return index !== 3 || (haveFps && passSet);
+                    }
                 }
                 expanded: true
                 onDelegateClicked: {
                     if (selectedIndex === index && !changeControl.visible)
                         return // nothing to do
+
+                    // This check is needed for when FP is the chosen method,
+                    // but the user wants to disable FP in favour of the
+                    // securityType already set, for which  there is nothing
+                    // to do, except turn off FP ident.
+                    if (methodToIndex(securityPrivacy.securityType) === index) {
+                        securityPrivacy.enableFingerprintIdentification = false;
+                        return
+                    }
+
+                    // Bail if we enabled FP ident.
+                    if (index === 3) {
+                        // Toggle FP ident.
+                        securityPrivacy.enableFingerprintIdentification = true;
+                        return;
+                    }
 
                     selectedIndex = index
                     openDialog()
@@ -505,7 +546,13 @@ ItemPage {
             Binding {
                 target: unlockMethod
                 property: "selectedIndex"
-                value: methodToIndex(securityPrivacy.securityType)
+                value: {
+                    if (securityPrivacy.enableFingerprintIdentification) {
+                        return methodToIndex(UbuntuSecurityPrivacyPanel.Fingerprint);
+                    } else {
+                        return methodToIndex(securityPrivacy.securityType);
+                    }
+                }
             }
 
             ListItem.SingleControl {
@@ -534,5 +581,38 @@ ItemPage {
                 showDivider: false
             }
         }
+    }
+
+    // This observer is used to decide whether or not to enabled Fingerprint ID
+    // to be selected by the user as a security method.
+    Observer {
+        id: sizeObserver
+        onFailed: {
+            page.enrolledFingerprints = 0;
+            op = null;
+        }
+        onSucceeded: {
+            // FIXME(jgdx): use result, not hard coded value
+            page.enrolledFingerprints = 10;
+            op = null;
+        }
+
+        property var op: null
+
+        Component.onCompleted: {
+            op = Biometryd.defaultDevice.templateStore.size(user);
+            op.start(sizeObserver);
+        }
+
+        Component.onDestruction: op && op.cancel();
+    }
+
+    User {
+        id: user
+        uid: fp.uid
+    }
+
+    UbuntuSettingsFingerprint {
+        id: fp
     }
 }

@@ -61,6 +61,8 @@ ItemPage {
                 objectName: "lockSecurity"
                 text: i18n.tr("Lock security")
                 value: {
+                    if (securityPrivacy.enableFingerprintIdentification)
+                        return fingerprint
                     switch (securityPrivacy.securityType) {
                         case UbuntuSecurityPrivacyPanel.Swipe:
                             return swipe
