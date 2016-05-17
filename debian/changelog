@@ -1,3 +1,9 @@
+ubuntu-system-settings (0.3+16.04.20160517-0ubuntu1) xenial; urgency=medium
+
+  * Catch connection errors asynchronously
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Tue, 17 May 2016 14:06:38 +0000
+
 ubuntu-system-settings (0.3+16.04.20160511-0ubuntu1) xenial; urgency=medium
 
   * Play the haptic feedback before pushing the page so it happens when
