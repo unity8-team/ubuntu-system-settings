@@ -99,7 +99,7 @@ ItemPage {
              Button {
                  text: i18n.tr("Restart & Install")
                  visible: root.batterySafeForUpdate ? true : false
-                 color: UbuntuColors.orange
+                 color: theme.palette.normal.positive
                  onClicked: {
                      installingImageUpdate.visible = true;
                      UpdateManager.applySystemUpdate();
@@ -108,7 +108,6 @@ ItemPage {
              }
              Button {
                  text: i18n.tr("Cancel")
-                 color: UbuntuColors.warmGrey
                  onClicked: {
                      updateList.currentIndex = 0;
                      var item = updateList.currentItem;
@@ -133,7 +132,7 @@ ItemPage {
 
              Button {
                  text: i18n.tr("OK")
-                 color: UbuntuColors.orange
+                 color: theme.palette.normal.positive
                  onClicked: {
                      PopupUtils.close(dialogueError);
                  }
@@ -305,7 +304,7 @@ ItemPage {
                                                      i18n.tr("Install %1 update…", "Install %1 updates…", root.updatesAvailable).arg(root.updatesAvailable) :
                                                      i18n.tr("Install %1 update", "Install %1 updates", root.updatesAvailable).arg(root.updatesAvailable)
                     property string secondaryText: i18n.tr("Pause All")
-                    color: UbuntuColors.orange
+                    color: theme.palette.normal.positive
                     text: root.installAll ? secondaryText : primaryText
                     width: parent.width - units.gu(4)
 
