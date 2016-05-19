@@ -51,7 +51,6 @@ ItemPage {
         }
         model: ClickApplicationsModel
         clip: true
-        contentHeight: contentItem.childrenRect.height
 
         header: Column {
             anchors {
@@ -81,7 +80,7 @@ ItemPage {
                     title.text: i18n.tr("Apps that notify with sound");
                     Label {
                         text: clickAppsSoundsNotifyModel.count
-                        fontSize: "x-large"
+                        fontSize: "large"
                         SlotsLayout.position: SlotsLayout.Trailing;
                     }
                     Icon {
@@ -99,7 +98,7 @@ ItemPage {
                     title.text: i18n.tr("Apps that notify with vibration");
                     Label {
                         text: clickAppsVibrationsNotifyModel.count
-                        fontSize: "x-large"
+                        fontSize: "large"
                         SlotsLayout.position: SlotsLayout.Trailing;
                     }
                     Icon {
