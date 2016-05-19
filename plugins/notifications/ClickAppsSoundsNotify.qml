@@ -26,6 +26,8 @@ ItemPage {
     objectName: "appsSoundsNotifyPage"
 
     property alias model: appsSoundsNotifyList.model
+    
+    property var uncheckedIndexes: []
 
     title: i18n.tr("Sound")
 
@@ -68,6 +70,17 @@ ItemPage {
                     CheckBox {
                         anchors.verticalCenter: icon.verticalCenter
                         checked: model.soundsNotify
+
+                        onCheckedChanged: {
+                            if (!checked) {
+                                uncheckedIndexes.push(index)
+                            } else {
+                                var i = uncheckedIndexes.indexOf(index)
+                                if (i >= 0) {
+                                    uncheckedIndexes.splice(i, 1)
+                                }
+                            }
+                        }
                     }
 
                     Icon {

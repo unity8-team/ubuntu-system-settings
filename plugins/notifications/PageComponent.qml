@@ -90,7 +90,20 @@ ItemPage {
                     }
                 }
 
-                onClicked: pageStack.push(Qt.resolvedUrl("ClickAppsSoundsNotify.qml"), { model: clickAppsSoundsNotifyModel })
+                onClicked: {
+                    if (clickAppsSoundsNotifyModel.count <= 0) {
+                        return
+                    }
+
+                    var page = pageStack.push(Qt.resolvedUrl("ClickAppsSoundsNotify.qml"), { model: clickAppsSoundsNotifyModel })
+                    page.Component.onDestruction.connect( function() {
+                        var indexes = page.uncheckedIndexes
+                        indexes.sort()
+                        for (var i = indexes.length - 1; i >= 0; i--) {
+                           clickAppsSoundsNotifyModel.get(indexes[i]).soundsNotify = false
+                        }
+                    })
+                }
             }
 
             ListItem {
@@ -108,7 +121,20 @@ ItemPage {
                     }
                 }
 
-                onClicked: pageStack.push(Qt.resolvedUrl("ClickAppsVibrationsNotify.qml"), { model: clickAppsVibrationsNotifyModel })
+                onClicked: {
+                    if (clickAppsVibrationsNotifyModel.count <= 0) {
+                        return
+                    }
+
+                    var page = pageStack.push(Qt.resolvedUrl("ClickAppsVibrationsNotify.qml"), { model: clickAppsVibrationsNotifyModel })
+                    page.Component.onDestruction.connect( function() {
+                        var indexes = page.uncheckedIndexes
+                        indexes.sort()
+                        for (var i = indexes.length - 1; i >= 0; i--) {
+                           clickAppsVibrationsNotifyModel.get(indexes[i]).vibrationsNotify = false
+                        } 
+                    })
+                }
             }
 
             ListItem {

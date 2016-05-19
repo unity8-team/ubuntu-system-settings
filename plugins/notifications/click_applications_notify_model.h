@@ -22,6 +22,7 @@
 #include <QtCore/QSortFilterProxyModel>
 
 class ClickApplicationsModel;
+class ClickApplicationEntry;
 
 class ClickApplicationsNotifyModel : public QSortFilterProxyModel
 {
@@ -50,7 +51,7 @@ public:
     void setNotifyType(int type);
 
     int count() const;
-    Q_INVOKABLE QVariantMap get(int row) const;
+    Q_INVOKABLE ClickApplicationEntry* get(int row) const;
 
 Q_SIGNALS:
     void sourceModelChanged() const;

@@ -60,9 +60,14 @@ int ClickApplicationsNotifyModel::count() const
     return rowCount();
 }
 
-QVariantMap ClickApplicationsNotifyModel::get(int row) const
+ClickApplicationEntry* ClickApplicationsNotifyModel::get(int row) const
 {
-    //TODO
+    if (row < 0 || row >= rowCount()) {
+        return nullptr;
+    }
+
+    QModelIndex idx = mapToSource(index(row, 0));
+    return sourceModel()->get(idx.row()); 
 }
 
 bool ClickApplicationsNotifyModel::filterAcceptsRow(int source_row, const QModelIndex& source_parent) const
