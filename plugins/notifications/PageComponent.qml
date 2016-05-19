@@ -149,6 +149,11 @@ ItemPage {
                     if (model.listNotify) {
                         arr.push(i18n.tr("Notification List"))
                     }
+
+                    if (arr.length == 0) {
+                        arr.push(i18n.tr("Disabled"))
+                    }
+
                     return arr.join(", ")
                 }
                 Icon {
