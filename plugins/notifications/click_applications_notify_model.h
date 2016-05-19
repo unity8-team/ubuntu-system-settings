@@ -51,7 +51,7 @@ public:
     void setNotifyType(int type);
 
     int count() const;
-    Q_INVOKABLE ClickApplicationEntry* get(int row) const;
+    Q_INVOKABLE bool disableNotify(int row);
 
 Q_SIGNALS:
     void sourceModelChanged() const;

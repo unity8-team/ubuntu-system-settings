@@ -29,7 +29,6 @@
 #include <QtGui/QIcon>
 
 #include "click_applications_model.h"
-#include "click_application_entry.h"
 
 #define LEGACY_PUSH_HELPER_DIR "/usr/lib/ubuntu-push-client/legacy-helpers/"
 
@@ -70,95 +69,84 @@ QVariant ClickApplicationsModel::data(const QModelIndex& index, int role) const
         return QVariant();
     }
 
-    ClickApplicationEntry *entry = m_entries.at(index.row());
+    const ClickApplicationEntry& entry = m_entries.at(index.row());
     switch (role) {
     case DisplayName:
-        return entry->displayName();
+        return entry.displayName;
     case Icon:
-        return entry->icon();
+        return entry.icon;
     case SoundsNotify:
-        return entry->soundsNotify();
+        return entry.soundsNotify;
     case VibrationsNotify:
-        return entry->vibrationsNotify();
+        return entry.vibrationsNotify;
     case BubblesNotify:
-        return entry->bubblesNotify();
+        return entry.bubblesNotify;
     case ListNotify:
-        return entry->listNotify();
+        return entry.listNotify;
     default:
         return QVariant();
     }
 }
 
-ClickApplicationEntry* ClickApplicationsModel::get(int index) const
+
+bool ClickApplicationsModel::setNotifyEnabled(int role, int idx, bool enabled)
 {
-    if (index < 0 || index >= rowCount()) {
-        return nullptr;
+    if (idx < 0 || idx >= rowCount()) {
+        return false;
     }
 
-    return m_entries.at(index);
-}
+    switch (role) {
+    case SoundsNotify:
+        if (m_entries.at(idx).soundsNotify == enabled) {
+            return false;
+        }
 
-void ClickApplicationsModel::onEntrySoundsNotifyChanged()
-{
-    ClickApplicationEntry *entry = qobject_cast<ClickApplicationEntry*>(sender());
-    notifyDataChanged(entry, SoundsNotify);
-}
+        m_entries[idx].soundsNotify = enabled;
+        break;
+    case VibrationsNotify:
+        if (m_entries.at(idx).vibrationsNotify == enabled) {
+            return false;
+        }
 
-void ClickApplicationsModel::onEntryVibrationsNotifyChanged()
-{
-    ClickApplicationEntry *entry = qobject_cast<ClickApplicationEntry*>(sender());
-    notifyDataChanged(entry, VibrationsNotify);
-}
+        m_entries[idx].vibrationsNotify = enabled;
+        break;
+    case BubblesNotify:
+        if (m_entries.at(idx).bubblesNotify == enabled) {
+            return false;
+        }
 
-void ClickApplicationsModel::onEntryBubblesNotifyChanged()
-{
-    ClickApplicationEntry *entry = qobject_cast<ClickApplicationEntry*>(sender());
-    notifyDataChanged(entry, BubblesNotify);
-}
+        m_entries[idx].bubblesNotify = enabled;
+        break;
+    case ListNotify:
+        if (m_entries.at(idx).listNotify == enabled) {
+            return false;
+        }
 
-void ClickApplicationsModel::onEntryListNotifyChanged()
-{
-    ClickApplicationEntry *entry = qobject_cast<ClickApplicationEntry*>(sender());
-    notifyDataChanged(entry, ListNotify);
-}
-
-void ClickApplicationsModel::notifyDataChanged(ClickApplicationEntry *entry, int role)
-{
-    int idx = m_entries.indexOf(entry);
-    if (idx < 0) {
-        return;
+        m_entries[idx].listNotify = enabled;
+        break;
+    default:
+        return false;
     }
 
     QVector<int> roles;
     roles << role;
 
     Q_EMIT dataChanged(this->index(idx, 0), this->index(idx, 0), roles);
+    return true;
 }
 
-ClickApplicationEntry* ClickApplicationsModel::getNewClickApplicationEntry()
-{
-    ClickApplicationEntry* newClick = new ClickApplicationEntry();
-
-    connect(newClick, SIGNAL(soundsNotifyChanged()), SLOT(onEntrySoundsNotifyChanged()));
-    connect(newClick, SIGNAL(vibrationsNotifyChanged()), SLOT(onEntryVibrationsNotifyChanged()));   
-    connect(newClick, SIGNAL(bubblesNotifyChanged()), SLOT(onEntryBubblesNotifyChanged()));
-    connect(newClick, SIGNAL(listNotifyChanged()), SLOT(onEntryListNotifyChanged()));
-
-    return newClick;
-}
-
-void ClickApplicationsModel::addClickApplicationEntry(ClickApplicationEntry *entry)
+void ClickApplicationsModel::addClickApplicationEntry(const ClickApplicationEntry& entry)
 {
     beginInsertRows(QModelIndex(), rowCount(), rowCount());
     m_entries << entry;
     endInsertRows();
 }
 
-void ClickApplicationsModel::getApplicationDataFromDesktopFile(ClickApplicationEntry *entry)
+void ClickApplicationsModel::getApplicationDataFromDesktopFile(ClickApplicationEntry& entry)
 {
-    QString desktopFile = entry->pkgName() + ".desktop";
-    if (!entry->appName().isEmpty() && !entry->version().isEmpty()) {
-        desktopFile = entry->pkgName() + "_" + entry->appName() + "_" + entry->version() + ".desktop";
+    QString desktopFile = entry.pkgName + ".desktop";
+    if (!entry.appName.isEmpty() && !entry.version.isEmpty()) {
+        desktopFile = entry.pkgName + "_" + entry.appName + "_" + entry.version + ".desktop";
     }
 
     GAppInfo* appInfo = (GAppInfo*)g_desktop_app_info_new(desktopFile.toUtf8().constData());
@@ -167,11 +155,11 @@ void ClickApplicationsModel::getApplicationDataFromDesktopFile(ClickApplicationE
         return;
     }
 
-    entry->setDisplayName(g_strdup(g_app_info_get_display_name(appInfo)));
+    entry.displayName = g_strdup(g_app_info_get_display_name(appInfo));
     GIcon* icon = g_app_info_get_icon(appInfo);
     if (icon != nullptr) {
         QString iconPath = g_icon_to_string(icon);
-        entry->setIcon(iconPath);
+        entry.icon = iconPath;
     }
 
     g_object_unref(appInfo);
@@ -179,16 +167,16 @@ void ClickApplicationsModel::getApplicationDataFromDesktopFile(ClickApplicationE
 
 void ClickApplicationsModel::populateFromLegacyHelpersDir()
 {
-     QDirIterator it(LEGACY_PUSH_HELPER_DIR, QDir::Files, QDirIterator::NoIteratorFlags);
-     while (it.hasNext()) {
-         QFileInfo fileInfo(it.next());
+    QDirIterator it(LEGACY_PUSH_HELPER_DIR, QDir::Files, QDirIterator::NoIteratorFlags);
+    while (it.hasNext()) {
+        QFileInfo fileInfo(it.next());
 
-         ClickApplicationEntry *entry = getNewClickApplicationEntry();
-         entry->setPkgName(fileInfo.fileName());
+        ClickApplicationEntry entry;
+        entry.pkgName = fileInfo.fileName();
 
-         getApplicationDataFromDesktopFile(entry);
-         addClickApplicationEntry(entry);
-     }
+        getApplicationDataFromDesktopFile(entry);
+        addClickApplicationEntry(entry);
+    }
 }
 
 bool ClickApplicationsModel::clickManifestHasPushHelperHook(const QVariantMap& manifest)
@@ -281,13 +269,14 @@ void ClickApplicationsModel::populateFromClickDatabase()
             continue;
         }
 
-        ClickApplicationEntry *entry = getNewClickApplicationEntry();
-        entry->setPkgName(manifest.value("name").toString());
-        entry->setVersion(manifest.value("version").toString());
-        entry->setAppName(getApplicationNameFromDesktopHook(manifest));
+        ClickApplicationEntry entry;
 
-        entry->setDisplayName(manifest.value("title").toString());
-        entry->setIcon(manifest.value("icon").toString());
+        entry.pkgName = manifest.value("name").toString();
+        entry.version = manifest.value("version").toString();
+        entry.appName = getApplicationNameFromDesktopHook(manifest);
+
+        entry.displayName = manifest.value("title").toString();
+        entry.icon = manifest.value("icon").toString();
 
         getApplicationDataFromDesktopFile(entry);
         addClickApplicationEntry(entry);

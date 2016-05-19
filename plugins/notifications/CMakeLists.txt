@@ -9,14 +9,12 @@ set(QML_SOURCES
 
 set(ubuntu_notifications_panel_HDRS
     plugin.h
-    click_application_entry.h
     click_applications_model.h
     click_applications_notify_model.h
     )
 
 set(ubuntu_notifications_panel_SRCS
     plugin.cpp
-    click_application_entry.cpp
     click_applications_model.cpp
     click_applications_notify_model.cpp
     )

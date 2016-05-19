@@ -74,7 +74,7 @@ ItemPage {
             }
  
             ListItem {
-                ListItemLayout { title.text: i18n.tr("All installed apps:") }
+                ListItemLayout { title.text: i18n.tr("Apps that notify with vibrations:") }
             }
         }
 

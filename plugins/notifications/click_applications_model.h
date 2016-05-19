@@ -22,8 +22,6 @@
 #include <QtCore/QAbstractListModel>
 #include <QtCore/QUrl>
 
-class ClickApplicationEntry;
-
 class ClickApplicationsModel : public QAbstractListModel
 {
     Q_OBJECT
@@ -50,25 +48,29 @@ public:
     int rowCount(const QModelIndex& parent=QModelIndex()) const;
     QVariant data(const QModelIndex& index, int role) const;
 
-    Q_INVOKABLE ClickApplicationEntry* get(int index) const;
+    Q_INVOKABLE bool setNotifyEnabled(int role, int idx, bool enabled);
 
 protected:
-    QList<ClickApplicationEntry*> m_entries;
+    struct ClickApplicationEntry {
+        QString pkgName;
+        QString appName;
+        QString version;
+        QString displayName;
+        QUrl icon;
+        bool soundsNotify = true;
+        bool vibrationsNotify = true;
+        bool bubblesNotify = true;
+        bool listNotify = true;
+ 
+    };
+    QList<ClickApplicationEntry> m_entries;
 
 Q_SIGNALS:
     void rowCountChanged();
 
-private Q_SLOTS:
-    void onEntrySoundsNotifyChanged();
-    void onEntryVibrationsNotifyChanged();
-    void onEntryBubblesNotifyChanged();
-    void onEntryListNotifyChanged();
-
 private:
-    void notifyDataChanged(ClickApplicationEntry *entry, int role);
-    ClickApplicationEntry* getNewClickApplicationEntry();
-    void addClickApplicationEntry(ClickApplicationEntry *entry);
-    void getApplicationDataFromDesktopFile(ClickApplicationEntry *entry);
+    void addClickApplicationEntry(const ClickApplicationEntry& entry);
+    void getApplicationDataFromDesktopFile(ClickApplicationEntry& entry);
     void populateFromLegacyHelpersDir();
     bool clickManifestHasPushHelperHook(const QVariantMap& manifest);
     QString getApplicationNameFromDesktopHook(const QVariantMap& manifest);

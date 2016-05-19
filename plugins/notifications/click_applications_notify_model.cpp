@@ -60,14 +60,28 @@ int ClickApplicationsNotifyModel::count() const
     return rowCount();
 }
 
-ClickApplicationEntry* ClickApplicationsNotifyModel::get(int row) const
+bool ClickApplicationsNotifyModel::disableNotify(int row)
 {
     if (row < 0 || row >= rowCount()) {
-        return nullptr;
+        return false;
     }
 
     QModelIndex idx = mapToSource(index(row, 0));
-    return sourceModel()->get(idx.row()); 
+
+    switch (m_notifyType) {
+    case SoundsNotify:
+        return sourceModel()->setNotifyEnabled(ClickApplicationsModel::SoundsNotify, idx.row(), false);
+    case VibrationsNotify:
+        return sourceModel()->setNotifyEnabled(ClickApplicationsModel::VibrationsNotify, idx.row(), false);
+    case BubblesNotify:
+        return sourceModel()->setNotifyEnabled(ClickApplicationsModel::BubblesNotify, idx.row(), false);
+    case ListNotify:
+        return sourceModel()->setNotifyEnabled(ClickApplicationsModel::ListNotify, idx.row(), false);
+    default:
+        return false;
+    }
+
+    return false; 
 }
 
 bool ClickApplicationsNotifyModel::filterAcceptsRow(int source_row, const QModelIndex& source_parent) const

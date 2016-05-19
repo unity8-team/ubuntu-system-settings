@@ -19,13 +19,13 @@
 import QtQuick 2.4
 import Ubuntu.Components 1.3
 import Ubuntu.Components.ListItems 1.3 as ListItems
-import Ubuntu.SystemSettings.Notifications 1.0
 import SystemSettings 1.0
 
 ItemPage {
-    property ClickApplicationEntry entry;
-
-    title: entry.displayName
+    property alias soundsNotify: soundsChecked.checked
+    property alias vibrationsNotify: vibrationsChecked.checked
+    property alias bubblesNotify: bubblesChecked.checked
+    property alias listNotify: listChecked.checked
 
     ListItems.Base {
         id: subtitle
@@ -62,9 +62,8 @@ ItemPage {
                 id: soundsLayout
                 title.text: i18n.tr("Sounds")
                 CheckBox {
-                    checked: entry.soundsNotify
+                    id: soundsChecked
                     SlotsLayout.position: SlotsLayout.Leading
-                    onCheckedChanged: entry.soundsNotify = checked
                 }
             }
         }
@@ -75,9 +74,8 @@ ItemPage {
                 id: vibrationsLayout
                 title.text: i18n.tr("Vibrations")
                 CheckBox {
-                    checked: entry.vibrationsNotify
+                    id: vibrationsChecked
                     SlotsLayout.position: SlotsLayout.Leading
-                    onCheckedChanged: entry.vibrationsNotify = checked
                 }
             }
         }
@@ -88,9 +86,8 @@ ItemPage {
                 id: bubblesLayout
                 title.text: i18n.tr("Notification Bubbles")
                 CheckBox {
-                    checked: entry.bubblesNotify
+                    id: bubblesChecked
                     SlotsLayout.position: SlotsLayout.Leading
-                    onCheckedChanged: entry.bubblesNotify = checked
                 }
             }
         }
@@ -101,9 +98,8 @@ ItemPage {
                 id: listLayout
                 title.text: i18n.tr("Notification List")
                 CheckBox {
-                    checked: entry.listNotify
+                    id: listChecked
                     SlotsLayout.position: SlotsLayout.Leading
-                    onCheckedChanged: entry.listNotify = checked
                 }
             }
         }

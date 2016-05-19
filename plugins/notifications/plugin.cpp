@@ -21,7 +21,6 @@
 #include <QtQml/QtQml>
 #include <QtQml/QQmlContext>
 
-#include "click_application_entry.h"
 #include "click_applications_model.h"
 #include "click_applications_notify_model.h"
 
@@ -39,7 +38,6 @@ void BackendPlugin::registerTypes(const char *uri)
     Q_ASSERT(uri == QLatin1String("Ubuntu.SystemSettings.Notifications"));
 
     qmlRegisterSingletonType<ClickApplicationsModel>(uri, 1, 0, "ClickApplicationsModel", ClickApplicationsModel_singleton_factory);
-    qmlRegisterType<ClickApplicationEntry>(uri, 1, 0, "ClickApplicationEntry");
     qmlRegisterType<ClickApplicationsNotifyModel>(uri, 1, 0, "ClickApplicationsNotifyModel");
 }
 

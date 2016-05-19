@@ -100,7 +100,7 @@ ItemPage {
                         var indexes = page.uncheckedIndexes
                         indexes.sort()
                         for (var i = indexes.length - 1; i >= 0; i--) {
-                           clickAppsSoundsNotifyModel.get(indexes[i]).soundsNotify = false
+                           clickAppsSoundsNotifyModel.disableNotify(indexes[i])
                         }
                     })
                 }
@@ -131,7 +131,7 @@ ItemPage {
                         var indexes = page.uncheckedIndexes
                         indexes.sort()
                         for (var i = indexes.length - 1; i >= 0; i--) {
-                           clickAppsVibrationsNotifyModel.get(indexes[i]).vibrationsNotify = false
+                           clickAppsVibrationsNotifyModel.disableNotify(indexes[i])
                         } 
                     })
                 }
@@ -146,7 +146,21 @@ ItemPage {
         delegate: ListItem {
             height: layout.height + (divider.visible ? divider.height : 0)
 
-            onClicked: pageStack.push(Qt.resolvedUrl("ClickAppNotifications.qml"), { entry: ClickApplicationsModel.get(index)})
+            onClicked: {
+                var page = pageStack.push(Qt.resolvedUrl("ClickAppNotifications.qml"),
+                                                         { title: model.displayName,
+                                                           soundsNotify: model.soundsNotify,
+                                                           vibrationsNotify: model.vibrationsNotify,
+                                                           bubblesNotify: model.bubblesNotify,
+                                                           listNotify: model.listNotify })
+
+                page.Component.onDestruction.connect( function() {
+                    ClickApplicationsModel.setNotifyEnabled(ClickApplicationsModel.SoundsNotify, index, page.soundsNotify)
+                    ClickApplicationsModel.setNotifyEnabled(ClickApplicationsModel.VibrationsNotify, index, page.vibrationsNotify)
+                    ClickApplicationsModel.setNotifyEnabled(ClickApplicationsModel.BubblesNotify, index, page.bubblesNotify)
+                    ClickApplicationsModel.setNotifyEnabled(ClickApplicationsModel.ListNotify, index, page.listNotify)
+                })
+            }
 
             ListItemLayout {
                 id: layout
