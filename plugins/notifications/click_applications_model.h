@@ -37,6 +37,7 @@ public:
     enum Roles {
         DisplayName = Qt::UserRole + 1,
         Icon,
+        EnableNotifications,
         SoundsNotify,
         VibrationsNotify,
         BubblesNotify,
@@ -57,11 +58,11 @@ protected:
         QString version;
         QString displayName;
         QUrl icon;
+        bool enableNotifications = true;
         bool soundsNotify = true;
         bool vibrationsNotify = true;
         bool bubblesNotify = true;
         bool listNotify = true;
- 
     };
     QList<ClickApplicationEntry> m_entries;
 

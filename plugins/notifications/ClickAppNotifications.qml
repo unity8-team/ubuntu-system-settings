@@ -18,42 +18,66 @@
 
 import QtQuick 2.4
 import Ubuntu.Components 1.3
-import Ubuntu.Components.ListItems 1.3 as ListItems
 import SystemSettings 1.0
 
 ItemPage {
+    id: appNotificationsPage
+
+    property alias enableNotifications: enableNotificationsChecked.checked
     property alias soundsNotify: soundsChecked.checked
     property alias vibrationsNotify: vibrationsChecked.checked
     property alias bubblesNotify: bubblesChecked.checked
     property alias listNotify: listChecked.checked
 
-    ListItems.Base {
-        id: subtitle
-        height: labelSubtitle.height + units.gu(2)
-
-        Label {
-            id: labelSubtitle
-            text: i18n.tr("Let this app alert me using:")
-            wrapMode: Text.WordWrap
-            anchors {
-                top: parent.top
-                left: parent.left
-                right: parent.right
-                margins: units.gu(1)
-            }
+    function disableNotificationsWhenAllUnchecked() {
+        if (!soundsNotify && !vibrationsNotify && !bubblesNotify && !listNotify) {
+            enableNotifications = false
         }
+    }
 
-        highlightWhenPressed: false
+    onSoundsNotifyChanged: {
+        if (!soundsNotify) {
+            disableNotificationsWhenAllUnchecked()
+        }
+    }
+
+    onVibrationsNotifyChanged: {
+        if (!vibrationsNotify) {
+            disableNotificationsWhenAllUnchecked()
+        }
+    }
+
+    onBubblesNotifyChanged: {
+        if (!bubblesNotify) {
+            disableNotificationsWhenAllUnchecked()
+        }
+    }
+
+    onListNotifyChanged: {
+        if (!listNotify) {
+            disableNotificationsWhenAllUnchecked()
+        }
     }
 
     Column {
         id: notificationsColumn
 
-        anchors {
-            top: subtitle.bottom
-            bottom: parent.bottom
-            left: parent.left
-            right: parent.right
+        anchors.fill: parent
+
+        ListItem {
+            height: enableNotificationsLayout.height + (divider.visible ? divider.height : 0)
+            ListItemLayout {
+                id: enableNotificationsLayout
+                title.text: i18n.tr("Enable Notifications")
+                CheckBox {
+                    id: enableNotificationsChecked
+                    SlotsLayout.position: SlotsLayout.Leading
+                }
+            }
+        }
+
+        ListItem {
+            ListItemLayout { title.text: i18n.tr("Let this app alert me using:") }
         }
 
         ListItem {
@@ -64,6 +88,7 @@ ItemPage {
                 CheckBox {
                     id: soundsChecked
                     SlotsLayout.position: SlotsLayout.Leading
+                    enabled: appNotificationsPage.enableNotifications
                 }
             }
         }
@@ -76,6 +101,7 @@ ItemPage {
                 CheckBox {
                     id: vibrationsChecked
                     SlotsLayout.position: SlotsLayout.Leading
+                    enabled: appNotificationsPage.enableNotifications
                 }
             }
         }
@@ -88,6 +114,7 @@ ItemPage {
                 CheckBox {
                     id: bubblesChecked
                     SlotsLayout.position: SlotsLayout.Leading
+                    enabled: appNotificationsPage.enableNotifications
                 }
             }
         }
@@ -100,6 +127,7 @@ ItemPage {
                 CheckBox {
                     id: listChecked
                     SlotsLayout.position: SlotsLayout.Leading
+                    enabled: appNotificationsPage.enableNotifications
                 }
             }
         }

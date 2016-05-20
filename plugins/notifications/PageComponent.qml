@@ -149,12 +149,15 @@ ItemPage {
             onClicked: {
                 var page = pageStack.push(Qt.resolvedUrl("ClickAppNotifications.qml"),
                                                          { title: model.displayName,
+                                                           enableNotifications: model.enableNotifications,
                                                            soundsNotify: model.soundsNotify,
                                                            vibrationsNotify: model.vibrationsNotify,
                                                            bubblesNotify: model.bubblesNotify,
                                                            listNotify: model.listNotify })
 
                 page.Component.onDestruction.connect( function() {
+                    page.disableNotificationsWhenAllUnchecked()
+                    ClickApplicationsModel.setNotifyEnabled(ClickApplicationsModel.EnableNotifications, index, page.enableNotifications)
                     ClickApplicationsModel.setNotifyEnabled(ClickApplicationsModel.SoundsNotify, index, page.soundsNotify)
                     ClickApplicationsModel.setNotifyEnabled(ClickApplicationsModel.VibrationsNotify, index, page.vibrationsNotify)
                     ClickApplicationsModel.setNotifyEnabled(ClickApplicationsModel.BubblesNotify, index, page.bubblesNotify)
@@ -176,6 +179,10 @@ ItemPage {
 
                 title.text: model.displayName
                 subtitle.text: {
+                    if (!model.enableNotifications) {
+                        return i18n.tr("Disabled")
+                    }
+
                     var arr = []
                     if (model.soundsNotify) {
                         arr.push(i18n.tr("Sounds"))
@@ -188,10 +195,6 @@ ItemPage {
                     }
                     if (model.listNotify) {
                         arr.push(i18n.tr("Notification List"))
-                    }
-
-                    if (arr.length == 0) {
-                        arr.push(i18n.tr("Disabled"))
                     }
 
                     return arr.join(", ")

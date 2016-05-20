@@ -88,6 +88,10 @@ bool ClickApplicationsNotifyModel::filterAcceptsRow(int source_row, const QModel
 {
     QModelIndex index = sourceModel()->index(source_row, 0, source_parent);
 
+    if (!sourceModel()->data(index, ClickApplicationsModel::EnableNotifications).toBool()) {
+        return false;
+    }
+
     if (m_notifyType == SoundsNotify) {
         return sourceModel()->data(index, ClickApplicationsModel::SoundsNotify).toBool();
     }

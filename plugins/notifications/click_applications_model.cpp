@@ -49,6 +49,7 @@ QHash<int, QByteArray> ClickApplicationsModel::roleNames() const
     if (roles.isEmpty()) {
         roles[DisplayName] = "displayName";
         roles[Icon] = "icon";
+        roles[EnableNotifications] = "enableNotifications";
         roles[SoundsNotify] = "soundsNotify";
         roles[VibrationsNotify] = "vibrationsNotify";
         roles[BubblesNotify] = "bubblesNotify";
@@ -75,6 +76,8 @@ QVariant ClickApplicationsModel::data(const QModelIndex& index, int role) const
         return entry.displayName;
     case Icon:
         return entry.icon;
+    case EnableNotifications:
+        return entry.enableNotifications;
     case SoundsNotify:
         return entry.soundsNotify;
     case VibrationsNotify:
@@ -96,6 +99,13 @@ bool ClickApplicationsModel::setNotifyEnabled(int role, int idx, bool enabled)
     }
 
     switch (role) {
+    case EnableNotifications:
+        if (m_entries.at(idx).enableNotifications == enabled) {
+            return false;
+        }
+
+        m_entries[idx].enableNotifications = enabled;
+        break;
     case SoundsNotify:
         if (m_entries.at(idx).soundsNotify == enabled) {
             return false;
@@ -130,6 +140,19 @@ bool ClickApplicationsModel::setNotifyEnabled(int role, int idx, bool enabled)
 
     QVector<int> roles;
     roles << role;
+
+    if (role != EnableNotifications) {
+        if (!m_entries[idx].soundsNotify &&
+            !m_entries[idx].vibrationsNotify &&
+            !m_entries[idx].bubblesNotify &&
+            !m_entries[idx].listNotify) {
+
+            if (m_entries[idx].enableNotifications) {
+                m_entries[idx].enableNotifications = false;
+                roles << EnableNotifications;
+            }
+        }
+    }
 
     Q_EMIT dataChanged(this->index(idx, 0), this->index(idx, 0), roles);
     return true;
