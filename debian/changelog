@@ -1,3 +1,10 @@
+ubuntu-system-settings (0.3+16.04.20160523.1-0ubuntu1) xenial; urgency=medium
+
+  [ jonas-drange ]
+  * Implements Fingerprint ID setup (LP: #1547040)
+
+ -- Jonas G. Drange <ci-train-bot@canonical.com>  Mon, 23 May 2016 14:23:56 +0000
+
 ubuntu-system-settings (0.3+16.04.20160517-0ubuntu1) xenial; urgency=medium
 
   * Fixes to sleep/idle settings in the Battery and Security panels (LP:
