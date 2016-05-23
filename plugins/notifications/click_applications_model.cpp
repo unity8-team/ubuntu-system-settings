@@ -17,6 +17,7 @@
 
 #include <click.h>
 #include <gio/gdesktopappinfo.h>
+#include <gio/gio.h>
 
 #include <QtCore/QDebug>
 #include <QtCore/QDir>
@@ -31,6 +32,13 @@
 #include "click_applications_model.h"
 
 #define LEGACY_PUSH_HELPER_DIR "/usr/lib/ubuntu-push-client/legacy-helpers/"
+#define GSETTINGS_SCHEMA_ID "com.ubuntu.notifications.settings"
+#define GSETTINGS_BASE_PATH "/com/ubuntu/NotificationSettings/"
+#define GSETTINGS_ENABLE_NOTIFICATIONS_KEY "enable-notifications"
+#define GSETTINGS_SOUNDS_NOTIFY_KEY "use-sounds-notifications"
+#define GSETTINGS_VIBRATIONS_NOTIFY_KEY "use-vibrations-notifications"
+#define GSETTINGS_BUBBLES_NOTIFY_KEY "use-bubbles-notifications"
+#define GSETTINGS_LIST_NOTIFY_KEY "use-list-notifications"
 
 ClickApplicationsModel::ClickApplicationsModel(QObject* parent)
     : QAbstractListModel(parent)
@@ -91,50 +99,13 @@ QVariant ClickApplicationsModel::data(const QModelIndex& index, int role) const
     }
 }
 
-
 bool ClickApplicationsModel::setNotifyEnabled(int role, int idx, bool enabled)
 {
     if (idx < 0 || idx >= rowCount()) {
         return false;
     }
 
-    switch (role) {
-    case EnableNotifications:
-        if (m_entries.at(idx).enableNotifications == enabled) {
-            return false;
-        }
-
-        m_entries[idx].enableNotifications = enabled;
-        break;
-    case SoundsNotify:
-        if (m_entries.at(idx).soundsNotify == enabled) {
-            return false;
-        }
-
-        m_entries[idx].soundsNotify = enabled;
-        break;
-    case VibrationsNotify:
-        if (m_entries.at(idx).vibrationsNotify == enabled) {
-            return false;
-        }
-
-        m_entries[idx].vibrationsNotify = enabled;
-        break;
-    case BubblesNotify:
-        if (m_entries.at(idx).bubblesNotify == enabled) {
-            return false;
-        }
-
-        m_entries[idx].bubblesNotify = enabled;
-        break;
-    case ListNotify:
-        if (m_entries.at(idx).listNotify == enabled) {
-            return false;
-        }
-
-        m_entries[idx].listNotify = enabled;
-        break;
-    default:
+    if (!saveNotifyEnabled(m_entries[idx], role, enabled)) {
         return false;
     }
 
@@ -147,14 +118,79 @@ bool ClickApplicationsModel::setNotifyEnabled(int role, int idx, bool enabled)
             !m_entries[idx].bubblesNotify &&
             !m_entries[idx].listNotify) {
 
-            if (m_entries[idx].enableNotifications) {
-                m_entries[idx].enableNotifications = false;
+            if (saveNotifyEnabled(m_entries[idx], EnableNotifications, false)) {
                 roles << EnableNotifications;
             }
         }
     }
 
     Q_EMIT dataChanged(this->index(idx, 0), this->index(idx, 0), roles);
+    return true;
+}
+
+bool ClickApplicationsModel::saveNotifyEnabled(ClickApplicationEntry& entry, int role, bool enabled)
+{
+    QString path = GSETTINGS_BASE_PATH;
+ 
+    if (entry.appName.isEmpty()) {
+        path = path + "dpkg/" + entry.pkgName + "/";
+    } else {
+        path = path + entry.pkgName + "/" + entry.appName + "/";
+    }
+
+    GSettings *settings = g_settings_new_with_path(GSETTINGS_SCHEMA_ID, path.toUtf8().constData());
+
+    QString key;
+    if (role == EnableNotifications) {
+        if (entry.enableNotifications == enabled) {
+            return false;
+        }
+
+        entry.enableNotifications = enabled;
+        key = GSETTINGS_ENABLE_NOTIFICATIONS_KEY;
+
+    } else if (role == SoundsNotify) {
+        if (entry.soundsNotify == enabled) {
+            return false;
+        }
+
+        entry.soundsNotify = enabled;
+        key = GSETTINGS_SOUNDS_NOTIFY_KEY;
+
+    } else if (role == VibrationsNotify) {
+        if (entry.vibrationsNotify == enabled) {
+            return false;
+        }
+
+        entry.vibrationsNotify = enabled;
+        key = GSETTINGS_VIBRATIONS_NOTIFY_KEY;
+
+    } else if (role == BubblesNotify) {
+        if (entry.bubblesNotify == enabled) {
+            return false;
+        }
+
+        entry.bubblesNotify = enabled;
+        key = GSETTINGS_BUBBLES_NOTIFY_KEY;
+    
+    } else if (role == ListNotify) {
+        if (entry.listNotify == enabled) {
+            return false;
+        }
+
+        entry.listNotify = enabled;
+        key = GSETTINGS_LIST_NOTIFY_KEY;
+
+    } else {
+        return false;
+    }
+
+    if (!g_settings_set_boolean(settings, key.toUtf8().constData(), enabled)) {
+        qWarning() << Q_FUNC_INFO << "[ERROR] Unable to store notification settings";
+        return false;
+    }
+
+    g_object_unref(settings);
     return true;
 }
 
@@ -188,6 +224,27 @@ void ClickApplicationsModel::getApplicationDataFromDesktopFile(ClickApplicationE
     g_object_unref(appInfo);
 }
 
+void ClickApplicationsModel::getNotificationsSettings(ClickApplicationEntry& entry)
+{
+    QString path = GSETTINGS_BASE_PATH;
+ 
+    if (entry.appName.isEmpty()) {
+        path = path + "dpkg/" + entry.pkgName + "/";
+    } else {
+        path = path + entry.pkgName + "/" + entry.appName + "/";
+    }
+
+    GSettings *settings = g_settings_new_with_path(GSETTINGS_SCHEMA_ID, path.toUtf8().constData());
+
+    entry.enableNotifications = g_settings_get_boolean(settings, GSETTINGS_ENABLE_NOTIFICATIONS_KEY);
+    entry.soundsNotify = g_settings_get_boolean(settings, GSETTINGS_SOUNDS_NOTIFY_KEY);
+    entry.vibrationsNotify = g_settings_get_boolean(settings, GSETTINGS_VIBRATIONS_NOTIFY_KEY);
+    entry.bubblesNotify = g_settings_get_boolean(settings, GSETTINGS_BUBBLES_NOTIFY_KEY);
+    entry.listNotify = g_settings_get_boolean(settings, GSETTINGS_LIST_NOTIFY_KEY);
+    
+    g_object_unref(settings);
+}
+
 void ClickApplicationsModel::populateFromLegacyHelpersDir()
 {
     QDirIterator it(LEGACY_PUSH_HELPER_DIR, QDir::Files, QDirIterator::NoIteratorFlags);
@@ -198,6 +255,7 @@ void ClickApplicationsModel::populateFromLegacyHelpersDir()
         entry.pkgName = fileInfo.fileName();
 
         getApplicationDataFromDesktopFile(entry);
+        getNotificationsSettings(entry);
         addClickApplicationEntry(entry);
     }
 }
@@ -302,6 +360,7 @@ void ClickApplicationsModel::populateFromClickDatabase()
         entry.icon = manifest.value("icon").toString();
 
         getApplicationDataFromDesktopFile(entry);
+        getNotificationsSettings(entry);
         addClickApplicationEntry(entry);
     }
 }
