@@ -99,6 +99,8 @@ void SecurityPrivacy::slotChanged(QString interface,
             Q_EMIT enableLauncherWhileLockedChanged();
         } else if (property == "EnableIndicatorsWhileLocked") {
             Q_EMIT enableIndicatorsWhileLockedChanged();
+        } else if (property == "EnableFingerprintIdentification") {
+            Q_EMIT enableFingerprintIdentificationChanged();
         }
     } else if (interface == AS_TOUCH_INTERFACE) {
         if (property == "MessagesWelcomeScreen") {
@@ -118,12 +120,30 @@ void SecurityPrivacy::slotChanged(QString interface,
 void SecurityPrivacy::slotNameOwnerChanged()
 {
     // Tell QML so that it refreshes its view of the property
+    Q_EMIT enableFingerprintIdentificationChanged();
     Q_EMIT messagesWelcomeScreenChanged();
     Q_EMIT statsWelcomeScreenChanged();
     Q_EMIT enableLauncherWhileLockedChanged();
     Q_EMIT enableIndicatorsWhileLockedChanged();
     Q_EMIT hereEnabledChanged();
     Q_EMIT hereLicensePathChanged();
+}
+
+bool SecurityPrivacy::getEnableFingerprintIdentification()
+{
+    return m_accountsService.getUserProperty(AS_INTERFACE,
+                                             "EnableFingerprintIdentification").toBool();
+}
+
+void SecurityPrivacy::setEnableFingerprintIdentification(bool enabled)
+{
+    if (enabled == getEnableFingerprintIdentification())
+        return;
+
+    m_accountsService.setUserProperty(AS_INTERFACE,
+                                      "EnableFingerprintIdentification",
+                                      QVariant::fromValue(enabled));
+    Q_EMIT(enableFingerprintIdentificationChanged());
 }
 
 bool SecurityPrivacy::getStatsWelcomeScreen()
