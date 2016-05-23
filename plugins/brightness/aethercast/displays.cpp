@@ -91,7 +91,15 @@ void Displays::setEnabled(bool enabled)
 {
     if (!m_manager)
         return;
-    m_manager->setEnabled(enabled);
+    bool ret = m_manager->setEnabled(enabled);
+    /* This is a hack to ensure the aethercast enabled switch stays 
+     * in sync with the enabled property.  We should be able to rely
+     * on the propertiesChanged signal to catch this, but we can't
+     */
+    if (ret)
+        Q_EMIT(enabledChanged(enabled));
+    else
+        Q_EMIT(enabledChanged(!enabled));
 }
 
 void Displays::scan()
@@ -145,8 +153,20 @@ void Displays::handleConnectError(QDBusError error)
 void Displays::disconnectDevice(const QString &address)
 {
     auto device = m_devices.getDeviceFromAddress(address);
-    if (device)
-        device->disconnect();
+    if (!device)
+        return;
+    QDBusPendingReply<void> reply = device->disconnect();
+    QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(reply, this);
+    QObject::connect(watcher, SIGNAL(finished(QDBusPendingCallWatcher*)),
+                     this, SLOT(callFinishedSlot(QDBusPendingCallWatcher*)));
+}
+
+void Displays::callFinishedSlot(QDBusPendingCallWatcher *call)
+{
+    QDBusPendingReply<void> reply = *call;
+    if (reply.isFinished() && reply.isError())
+        handleConnectError(reply.error());
+    call->deleteLater();
 }
 
 void Displays::connectDevice(const QString &address)
@@ -154,10 +174,10 @@ void Displays::connectDevice(const QString &address)
     auto device = m_devices.getDeviceFromAddress(address);
     if (!device)
         return;
-    auto reply = device->connect();
-    reply.waitForFinished();
-    if (reply.isError())
-        handleConnectError(reply.error());
+    QDBusPendingReply<void> reply = device->connect();
+    QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(reply, this);
+    QObject::connect(watcher, SIGNAL(finished(QDBusPendingCallWatcher*)),
+                     this, SLOT(callFinishedSlot(QDBusPendingCallWatcher*)));
 }
 
 void Displays::updateProperty(const QString &key, const QVariant &value)
