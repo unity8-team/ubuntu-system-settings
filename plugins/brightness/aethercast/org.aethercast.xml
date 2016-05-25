@@ -1,0 +1,36 @@
+<!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN"
+ "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
+<node>
+    <interface name="org.aethercast.Manager">
+        <method name="RegisterMediaManager">
+            <arg name="path" type="o" direction="in"/>
+        </method>
+        <method name="UnregisterMediaManager">
+            <arg name="path" type="o" direction="in"/>
+        </method>
+        <method name="Scan"/>
+        <property name="Enabled" type="b" access="readwrite"/>
+        <property name="State" type="s" access="read"/>
+        <property name="Capabilities" type="as" access="read"/>
+        <property name="Scanning" type="b" access="read"/>
+    </interface>
+    <interface name="org.aethercast.Device">
+        <method name="Connect">
+            <arg name="role" type="s" direction="in"/>
+        </method>
+        <method name="Disconnect"/>
+        <property name="State" type="s" access="read"/>
+        <property name="Address" type="s" access="read"/>
+        <property name="Name" type="s" access="read"/>
+        <property name="Capabilities" type="as" access="read"/>
+    </interface>
+    <interface name="org.aethercast.MediaManager">
+        <method name="Configure">
+            <arg name="address" type="s"/>
+            <arg name="port" type="i"/>
+        </method>
+        <method name="Play"/>
+        <method name="Pause"/>
+        <method name="Teardown"/>
+    </interface>
+</node>

@@ -19,11 +19,17 @@
  */
 
 #include "brightness-plugin.h"
+#include <hybris/properties/properties.h>
 
 #include <QDebug>
 #include <QDBusInterface>
 #include <QStringList>
 #include <SystemSettings/ItemBase>
+
+#include <libintl.h>
+QString _(const char *text){
+    return QString::fromUtf8(dgettext(0, text));
+}
 
 using namespace SystemSettings;
 
@@ -33,6 +39,7 @@ class BrightnessItem: public ItemBase
 
 public:
     explicit BrightnessItem(const QVariantMap &staticData, QObject *parent = 0);
+    void setDisplayName(const QString &name);
     void setVisibility(bool visible);
 
 };
@@ -46,8 +53,24 @@ BrightnessItem::BrightnessItem(const QVariantMap &staticData, QObject *parent):
                                   "com.canonical.powerd",
                                   QDBusConnection::systemBus());
 
-    // Hide the plugin if powerd isn't running; it's redundant currentlys
+    // Hide the plugin if powerd isn't running; it's currently redundant
     setVisibility(m_powerdIface.isValid());
+
+    char widi[PROP_VALUE_MAX] = "";
+    property_get("ubuntu.widi.supported", widi, "0");
+    // We want to log this property to help aid debugging
+    qWarning() << Q_FUNC_INFO << "ubuntu.widi.supported:" << widi;
+
+    if (strcmp(widi, "0") == 0) {
+        setDisplayName(_("Brightness"));
+    } else {
+        setDisplayName(_("Brightness & Display"));
+    }
+}
+
+void BrightnessItem::setDisplayName(const QString &name)
+{
+    setName(name);
 }
 
 void BrightnessItem::setVisibility(bool visible)

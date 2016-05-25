@@ -73,7 +73,7 @@ function saving () {
     } else {
         type = indexToType();
         if (type === 'internet+mms') type = 'internet';
-        manager.createContext(type);
+        root.requestContextCreation(type);
     }
 }
 

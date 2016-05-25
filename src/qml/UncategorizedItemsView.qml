@@ -50,10 +50,10 @@ Column {
                     onClicked: {
                         var pageComponent = model.item.pageComponent
                         if (pageComponent) {
+                            Haptics.play();
                             pageStack.push(model.item.pageComponent,
                                            { plugin: model.item,
                                              pluginManager: pluginManager })
-                            Haptics.play();
                         }
                     }
                 }

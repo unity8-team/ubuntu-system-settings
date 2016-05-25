@@ -33,11 +33,15 @@ class Brightness : public QObject
     Q_PROPERTY (bool autoBrightnessAvailable
                 READ getAutoBrightnessAvailable
                 CONSTANT)
+    Q_PROPERTY (bool widiSupported
+                READ getWidiSupported
+                CONSTANT)
 
 public:
     explicit Brightness(QObject *parent = 0);
     bool getPowerdRunning() const;
     bool getAutoBrightnessAvailable() const;
+    bool getWidiSupported() const;
 
 private:
     QDBusConnection m_systemBusConnection;
