@@ -23,7 +23,7 @@ import SystemSettings 1.0
 ItemPage {
     id: appNotificationsPage
 
-    property alias enableNotifications: enableNotificationsChecked.checked
+    property alias enableNotifications: enableNotificationsSwitch.checked
     property alias soundsNotify: soundsChecked.checked
     property alias vibrationsNotify: vibrationsChecked.checked
     property alias bubblesNotify: bubblesChecked.checked
@@ -69,8 +69,8 @@ ItemPage {
             ListItemLayout {
                 id: enableNotificationsLayout
                 title.text: i18n.tr("Enable Notifications")
-                CheckBox {
-                    id: enableNotificationsChecked
+                Switch {
+                    id: enableNotificationsSwitch
                     SlotsLayout.position: SlotsLayout.Leading
                 }
             }

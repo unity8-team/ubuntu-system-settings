@@ -71,13 +71,9 @@ Q_SIGNALS:
 
 private:
     bool saveNotifyEnabled(ClickApplicationEntry& entry, int role, bool enabled);
-    void addClickApplicationEntry(const ClickApplicationEntry& entry);
     void getApplicationDataFromDesktopFile(ClickApplicationEntry& entry);
     void getNotificationsSettings(ClickApplicationEntry& entry);
-    void populateFromLegacyHelpersDir();
-    bool clickManifestHasPushHelperHook(const QVariantMap& manifest);
-    QString getApplicationNameFromDesktopHook(const QVariantMap& manifest);
-    void populateFromClickDatabase();
+    void populateModel();
 };
 
 #endif // CLICKAPPLICATIONSMODEL_H

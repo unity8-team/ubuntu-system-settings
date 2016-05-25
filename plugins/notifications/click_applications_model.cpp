@@ -15,24 +15,16 @@
  *
 */
 
-#include <click.h>
 #include <gio/gdesktopappinfo.h>
 #include <gio/gio.h>
 
 #include <QtCore/QDebug>
-#include <QtCore/QDir>
-#include <QtCore/QDirIterator>
-#include <QtCore/QFile>
-#include <QtCore/QJsonArray>
-#include <QtCore/QJsonDocument>
-#include <QtCore/QJsonObject>
-#include <QtCore/QStandardPaths>
-#include <QtGui/QIcon>
 
 #include "click_applications_model.h"
 
-#define LEGACY_PUSH_HELPER_DIR "/usr/lib/ubuntu-push-client/legacy-helpers/"
-#define GSETTINGS_SCHEMA_ID "com.ubuntu.notifications.settings"
+#define GSETTINGS_APPS_SCHEMA_ID "com.ubuntu.notifications.settings.applications"
+#define GSETTINGS_APPLICATIONS_KEY "applications"
+#define GSETTINGS_NOTIFICATIONS_SCHEMA_ID "com.ubuntu.notifications.settings"
 #define GSETTINGS_BASE_PATH "/com/ubuntu/NotificationSettings/"
 #define GSETTINGS_ENABLE_NOTIFICATIONS_KEY "enable-notifications"
 #define GSETTINGS_SOUNDS_NOTIFY_KEY "use-sounds-notifications"
@@ -43,8 +35,7 @@
 ClickApplicationsModel::ClickApplicationsModel(QObject* parent)
     : QAbstractListModel(parent)
 {
-    populateFromLegacyHelpersDir();
-    populateFromClickDatabase();
+    populateModel();
 }
 
 ClickApplicationsModel::~ClickApplicationsModel()
@@ -138,7 +129,7 @@ bool ClickApplicationsModel::saveNotifyEnabled(ClickApplicationEntry& entry, int
         path = path + entry.pkgName + "/" + entry.appName + "/";
     }
 
-    GSettings *settings = g_settings_new_with_path(GSETTINGS_SCHEMA_ID, path.toUtf8().constData());
+    GSettings *settings = g_settings_new_with_path(GSETTINGS_NOTIFICATIONS_SCHEMA_ID, path.toUtf8().constData());
 
     QString key;
     if (role == EnableNotifications) {
@@ -194,13 +185,6 @@ bool ClickApplicationsModel::saveNotifyEnabled(ClickApplicationEntry& entry, int
     return true;
 }
 
-void ClickApplicationsModel::addClickApplicationEntry(const ClickApplicationEntry& entry)
-{
-    beginInsertRows(QModelIndex(), rowCount(), rowCount());
-    m_entries << entry;
-    endInsertRows();
-}
-
 void ClickApplicationsModel::getApplicationDataFromDesktopFile(ClickApplicationEntry& entry)
 {
     QString desktopFile = entry.pkgName + ".desktop";
@@ -234,7 +218,7 @@ void ClickApplicationsModel::getNotificationsSettings(ClickApplicationEntry& ent
         path = path + entry.pkgName + "/" + entry.appName + "/";
     }
 
-    GSettings *settings = g_settings_new_with_path(GSETTINGS_SCHEMA_ID, path.toUtf8().constData());
+    GSettings *settings = g_settings_new_with_path(GSETTINGS_NOTIFICATIONS_SCHEMA_ID, path.toUtf8().constData());
 
     entry.enableNotifications = g_settings_get_boolean(settings, GSETTINGS_ENABLE_NOTIFICATIONS_KEY);
     entry.soundsNotify = g_settings_get_boolean(settings, GSETTINGS_SOUNDS_NOTIFY_KEY);
@@ -245,122 +229,40 @@ void ClickApplicationsModel::getNotificationsSettings(ClickApplicationEntry& ent
     g_object_unref(settings);
 }
 
-void ClickApplicationsModel::populateFromLegacyHelpersDir()
+void ClickApplicationsModel::populateModel()
 {
-    QDirIterator it(LEGACY_PUSH_HELPER_DIR, QDir::Files, QDirIterator::NoIteratorFlags);
-    while (it.hasNext()) {
-        QFileInfo fileInfo(it.next());
+    GSettings *settings = g_settings_new(GSETTINGS_APPS_SCHEMA_ID);
+    GVariant *applications = g_settings_get_value(settings, GSETTINGS_APPLICATIONS_KEY);
+    GVariantIter *it;
 
-        ClickApplicationEntry entry;
-        entry.pkgName = fileInfo.fileName();
-
-        getApplicationDataFromDesktopFile(entry);
-        getNotificationsSettings(entry);
-        addClickApplicationEntry(entry);
-    }
-}
-
-bool ClickApplicationsModel::clickManifestHasPushHelperHook(const QVariantMap& manifest)
-{
-    QVariant hooksVar(manifest.value("hooks"));
-    if (!hooksVar.isValid()) {
-        return false;
-    }
-
-    QVariantMap hooksMap(hooksVar.toMap());
-    QMapIterator<QString, QVariant> it(hooksMap);
-    while (it.hasNext()) {
-        it.next();
-        QVariant hookVar(it.value());
-
-        if (hookVar.isValid()) {
-            QVariantMap hookMap(hookVar.toMap());
-            if (hookMap.keys().contains("push-helper")) {
-                return true;
-            }
-        }
-    }
-
-    return false;
-}
-
-QString ClickApplicationsModel::getApplicationNameFromDesktopHook(const QVariantMap& manifest)
-{
-    QVariant hooksVar(manifest.value("hooks"));
-    if (!hooksVar.isValid()) {
-        return QString();
-    }
-
-    QVariantMap hooksMap(hooksVar.toMap());
-    QMapIterator<QString, QVariant> it(hooksMap);
-    while (it.hasNext()) {
-        it.next();
-        QVariant hookVar(it.value());
-
-        if (hookVar.isValid()) {
-            QVariantMap hookMap(hookVar.toMap());
-            if (hookMap.keys().contains("desktop")) {
-                return it.key();
-            }
-        }
-    }
-
-    return QString();
-}
-
-void ClickApplicationsModel::populateFromClickDatabase()
-{
-    ClickDB *clickdb = click_db_new();
-
-    GError *err = nullptr;
-    click_db_read(clickdb, nullptr, &err);
-    if (err != nullptr) {
-        qWarning() << Q_FUNC_INFO << "[ERROR] Unable to read click packages db:" << err->message;
-        g_error_free(err);
-        g_object_unref(clickdb);
-        return;
-    }
-
-    gchar *clickmanifest = click_db_get_manifests_as_string(clickdb, FALSE, &err);
-    if (err != nullptr) {
-        qWarning() << Q_FUNC_INFO << "[ERROR] Unable to get click packages manifest:" << err->message;
-        g_error_free(err);
-        g_object_unref(clickdb);
-        return;
-    }
-
-    g_object_unref(clickdb);
-
-    QJsonParseError jsonError;
-    QJsonDocument jsonDoc = QJsonDocument::fromJson(clickmanifest, &jsonError);
-
-    g_free(clickmanifest);
-
-    if (jsonError.error != QJsonParseError::NoError) {
-        qWarning() << Q_FUNC_INFO << "[ERROR] Unable to parser data from click packages manifest:" << jsonError.errorString();
-        return;
-    }
-
-    QJsonArray data(jsonDoc.array());
-    QJsonArray::ConstIterator it;
-    for (it = data.constBegin(); it != data.constEnd(); ++it) {
-        QVariantMap manifest = (*it).toObject().toVariantMap();
-
-        if (!clickManifestHasPushHelperHook(manifest)) {
-            continue;
+    g_variant_get(applications, "as", &it);
+    gchar *appEntry;
+    while (g_variant_iter_loop(it, "s", &appEntry)) {
+        QStringList entryData = QString(appEntry).split('/');
+        if (entryData.size() != 3) {
+           continue;
         }
 
         ClickApplicationEntry entry;
 
-        entry.pkgName = manifest.value("name").toString();
-        entry.version = manifest.value("version").toString();
-        entry.appName = getApplicationNameFromDesktopHook(manifest);
-
-        entry.displayName = manifest.value("title").toString();
-        entry.icon = manifest.value("icon").toString();
+        if (entryData[0] == "dpkg" && entryData[2] == "0") {
+            // Legacy dpkg application
+            entry.pkgName = entryData[1];
+        } else {
+            entry.pkgName = entryData[0];
+            entry.appName = entryData[1];
+            entry.version = entryData[2];
+        }
 
         getApplicationDataFromDesktopFile(entry);
         getNotificationsSettings(entry);
-        addClickApplicationEntry(entry);
+
+        beginInsertRows(QModelIndex(), rowCount(), rowCount());
+        m_entries << entry;
+        endInsertRows();
     }
+
+    g_variant_iter_free(it);
+    g_variant_unref(applications);
+    g_object_unref(settings);
 }
