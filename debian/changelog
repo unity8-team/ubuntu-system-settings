@@ -1,8 +1,12 @@
-ubuntu-system-settings (0.4+16.04.20160325-0ubuntu1) UNRELEASED; urgency=medium
+ubuntu-system-settings (0.4+16.10.20160525-0ubuntu1) yakkety; urgency=medium
 
+  [ Michael Terry ]
   * Bump version number for change in TimeDate plugin API
 
- -- Michael Terry <mterry@ubuntu.com>  Tue, 05 Apr 2016 15:16:11 -0400
+  [ CI Train Bot ]
+  * No-change rebuild.
+
+ -- Michael Terry <michael.terry@canonical.com>  Wed, 25 May 2016 06:02:08 +0000
 
 ubuntu-system-settings (0.3+16.10.20160523-0ubuntu1) yakkety; urgency=medium
 
