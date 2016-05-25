@@ -46,3 +46,4 @@ add_test(NAME python3 COMMAND "${CMAKE_CURRENT_BINARY_DIR}/test_code.py")
 add_test(NAME test_push_helper COMMAND "${CMAKE_CURRENT_BINARY_DIR}/test_push_helper.py")
 
 add_subdirectory(plugins)
+add_subdirectory(mocks)
