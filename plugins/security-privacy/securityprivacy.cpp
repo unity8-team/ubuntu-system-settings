@@ -401,6 +401,9 @@ QString SecurityPrivacy::setSecurity(QString oldValue, QString value, SecurityTy
         if (!setPasswordModeWithPolicykit(type, oldValue)) {
             setDisplayHint(oldType);
             return badPasswordMessage(oldType);
+        } else {
+            // Successfully enabling Swipe must disable fingerprint auth.
+            setEnableFingerprintIdentification(false);
         }
     } else {
         QString errorText = setPassword(oldValue, value);
