@@ -20,7 +20,7 @@
 import QtQuick 2.4
 import QtQuick.Layouts 1.2
 import SystemSettings 1.0
-import Ubuntu.Connectivity 1.1
+import Ubuntu.Connectivity 1.0
 import Ubuntu.Components 1.3
 import Ubuntu.Components.ListItems 1.3 as ListItem
 
@@ -63,8 +63,11 @@ Column {
                 id: dataSwitch
                 objectName: "data"
                 checked: Connectivity.mobileDataEnabled
-                function trigger() {
-                    Connectivity.mobileDataEnabled = !checked
+                onTriggered: {
+                    Connectivity.mobileDataEnabled = checked
+                    checked = Qt.binding(function() {
+                        return Connectivity.mobileDataEnabled
+                    })
                 }
             }
         }

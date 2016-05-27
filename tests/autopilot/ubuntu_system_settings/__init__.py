@@ -21,6 +21,7 @@ from autopilot.exceptions import StateNotFoundError
 from ubuntu_system_settings.utils.i18n import ugettext as _
 
 import logging
+from time import sleep
 import autopilot.logging
 import ubuntuuitoolkit
 import ubuntu_system_settings.utils as utils

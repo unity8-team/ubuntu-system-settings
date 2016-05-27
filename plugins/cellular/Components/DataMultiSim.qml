@@ -22,7 +22,7 @@ import QtQuick.Layouts 1.2
 import SystemSettings 1.0
 import Ubuntu.Components 1.3
 import Ubuntu.Components.ListItems 1.3 as ListItem
-import Ubuntu.Connectivity 1.1
+import Ubuntu.Connectivity 1.0
 
 ColumnLayout {
     anchors.margins: units.gu(2)
@@ -48,29 +48,34 @@ ColumnLayout {
                 objectName: "data"
                 checked: Connectivity.mobileDataEnabled
                 enabled: simSelector.currentSim !== null
-
-                /*
-                 * We override Switch::trigger here to workaround bug:
-                 * https://bugs.launchpad.net/ubuntu/+source/ubuntu-ui-toolkit/+bug/1494387
-                 *
-                 * The bug causes the checked binding to be overridden if plain onTriggered is used.
-                 */
-                function trigger() {
-                    Connectivity.mobileDataEnabled = !checked
+                onTriggered: {
+                    Connectivity.mobileDataEnabled = checked
+                    /*
+                     * We do this binding here to workaround bug:
+                     * https://bugs.launchpad.net/ubuntu/+source/ubuntu-ui-toolkit/+bug/1494387
+                     *
+                     * The bug causes the checked binding to be overridden if plain onTriggered is used.
+                     */
+                    checked = Qt.binding(function() {
+                        return Connectivity.mobileDataEnabled
+                    })
                 }
             }
         }
         ColumnLayout {
             Layout.leftMargin: units.gu(2)
-            spacing: units.gu(2)
-            OptionSelector {
+            Label {
+                text: ""
+                Layout.fillWidth: true
+            }
+            OptionSelector {                
                 id: simSelector
                 expanded: true
                 model: sortedModems
                 selectedIndex: -1
 
                 delegate: OptionSelectorDelegate {
-                    objectName: "'use/ril_" + (model.Index - 1)
+                    objectName: "use/ril_" + (model.Index - 1)
                     text: {
                         if (model.Sim) {
                             circled(model.Index) + " " + model.Sim.PrimaryPhoneNumber
