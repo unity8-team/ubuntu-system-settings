@@ -1,10 +1,9 @@
+# add_qml_test macro
+include(QmlTest)
+
 add_subdirectory(security-privacy)
 add_subdirectory(system-update)
 add_subdirectory(bluetooth)
-add_subdirectory(mouse)
-
-# add_qml_test macro
-include(QmlTest)
 
 set(qmltest_DEFAULT_TARGETS qmluitests)
 set(qmltest_DEFAULT_PROPERTIES ENVIRONMENT "LC_ALL=C")
@@ -14,4 +13,6 @@ set(qmltest_DEFAULT_IMPORT_PATHS
 )
 
 add_qml_test(mouse mouse
-             IMPORT_PATHS ${CMAKE_SOURCE_DIR}/tests/plugins/mouse)
+             IMPORT_PATHS
+             ${CMAKE_SOURCE_DIR}/tests/plugins/mouse
+             ${qmltest_DEFAULT_IMPORT_PATHS})
