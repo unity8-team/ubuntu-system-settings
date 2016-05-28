@@ -60,7 +60,6 @@ macro(add_manual_qml_test SUBPATH COMPONENT_NAME)
 
     set(qmlscene_command
         env ${qmltest_ENVIRONMENT}
-            ${XVFB_CMD}
             ${qmlscene_exe} ${CMAKE_CURRENT_SOURCE_DIR}/${qmltest_FILE}.qml
             ${qmlscene_imports}
     )
