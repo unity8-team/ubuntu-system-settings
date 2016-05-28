@@ -20,17 +20,24 @@
 import QtQuick 2.4
 import QtTest 1.0
 import Ubuntu.Components 1.3
+import Ubuntu.Test 0.1
 
 import Source 1.0
 
-TapArea {
-    id: area
-    height: 48
-    width: height
-    doubleTapSpeed: 200
+Item {
+    id: testRoot
+    width: units.gu(50)
+    height: units.gu(90)
 
-    TestCase {
-        name: "ItemTests"
+    TapArea {
+        id: area
+        height: 48
+        width: height
+        doubleTapSpeed: 200
+    }
+
+    UbuntuTestCase {
+        name: "MouseTapAreaTest"
         id: test1
         when: windowShown
 
