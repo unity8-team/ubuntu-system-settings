@@ -21,6 +21,16 @@
 
 find_program(qmltestrunner_exe qmltestrunner)
 find_program(qmlscene_exe qmlscene)
+find_program(gcc_exe gcc)
+
+if (NOT ${gcc_exe} STREQUAL "")
+    exec_program(gcc ARGS "-dumpmachine" OUTPUT_VARIABLE ARCH_TRIPLET)
+    set(LD_PRELOAD_PATH "LD_PRELOAD=/usr/lib/${ARCH_TRIPLET}/mesa/libGL.so.1")
+endif()
+set(XVFB_CMD
+    env ${qmltest_ENVIRONMENT} ${LD_PRELOAD_PATH}
+    xvfb-run -a -s "-screen 0 640x480x24"
+)
 
 if(NOT qmltestrunner_exe)
   msg(FATAL_ERROR "Could not locate qmltestrunner.")
@@ -50,6 +60,7 @@ macro(add_manual_qml_test SUBPATH COMPONENT_NAME)
 
     set(qmlscene_command
         env ${qmltest_ENVIRONMENT}
+            ${XVFB_CMD}
             ${qmlscene_exe} ${CMAKE_CURRENT_SOURCE_DIR}/${qmltest_FILE}.qml
             ${qmlscene_imports}
     )
@@ -81,7 +92,7 @@ macro(add_qml_test SUBPATH COMPONENT_NAME)
 
     set(qmltest_command
         env ${qmltest_ENVIRONMENT}
-        ${qmltestrunner_exe} -input ${CMAKE_CURRENT_SOURCE_DIR}/${qmltest_FILE}.qml
+        ${XVFB_CMD} ${qmltestrunner_exe} -input ${CMAKE_CURRENT_SOURCE_DIR}/${qmltest_FILE}.qml
             ${qmltestrunner_imports}
             -o ${CMAKE_BINARY_DIR}/${qmltest_TARGET}.xml,xunitxml
             -o -,txt

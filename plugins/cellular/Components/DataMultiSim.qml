@@ -27,6 +27,7 @@ Column {
     property string prevOnlineModem: parent.prevOnlineModem
 
     function getNameFromIndex (index) {
+        var dummy = i18n.tr("Cellular data")
         if (index === 0) {
             return i18n.tr("Off");
         } else if (index > 0) {

@@ -21,6 +21,7 @@ import QtQuick 2.4
 import SystemSettings 1.0
 import Ubuntu.Components 1.3
 import Ubuntu.Components.ListItems 1.3 as ListItem
+import Ubuntu.SystemSettings.Cellular 1.0
 
 Column {
 
@@ -30,6 +31,10 @@ Column {
 
     function getNameFromIndex (index) {
         return [i18n.tr("Ask me each time"), sims[0].title, sims[1].title][index];
+    }
+
+    UbuntuCellularPanel {
+        id: phoneSettings
     }
 
     SettingsItemTitle { text: i18n.tr("For outgoing calls, use:") }
