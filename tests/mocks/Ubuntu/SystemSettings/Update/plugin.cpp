@@ -15,11 +15,23 @@
  */
 
 #include "plugin.h"
+#include "MockUpdateManager.h"
 
 #include <QtQml>
+
+static QObject *umSingletonProvider(QQmlEngine *engine, QJSEngine *scriptEngine)
+{
+    Q_UNUSED(engine)
+    Q_UNUSED(scriptEngine)
+
+    return MockUpdateManager::instance();
+}
 
 void BackendPlugin::registerTypes(const char *uri)
 {
     Q_ASSERT(uri == QLatin1String("Ubuntu.SystemSettings.Update"));
-    // Register types
+    qmlRegisterUncreatableType<MockSystemImage>(uri, 1, 0, "SystemImage",
+        "System Image can't be instantiated directly.");
+    qmlRegisterSingletonType<MockUpdateManager>(uri, 1, 0, "UpdateManager", umSingletonProvider);
+
 }

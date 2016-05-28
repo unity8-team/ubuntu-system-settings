@@ -15,4 +15,12 @@ set(qmltest_DEFAULT_IMPORT_PATHS
 add_qml_test(mouse mouse
              IMPORT_PATHS
              ${CMAKE_SOURCE_DIR}/tests/plugins/mouse
-             ${qmltest_DEFAULT_IMPORT_PATHS})
+             ${qmltest_DEFAULT_IMPORT_PATHS}
+)
+
+add_qml_test(system-update update
+             IMPORT_PATHS
+             ${CMAKE_SOURCE_DIR}/tests/plugins/system-update
+             ${CMAKE_BINARY_DIR}/tests/mocks/
+             ${qmltest_DEFAULT_IMPORT_PATHS}
+)

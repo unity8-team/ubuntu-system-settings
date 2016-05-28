@@ -48,11 +48,3 @@ void BackendPlugin::registerTypes(const char *uri)
     // qmlRegisterUncreatableType<UpdateManager>(uri, 1, 0, "UM", "");
     qmlRegisterSingletonType<UpdateManager>(uri, 1, 0, "UpdateManager", umSingletonProvider);
 }
-
-void BackendPlugin::initializeEngine(QQmlEngine *engine, const char *uri)
-{
-    QQmlExtensionPlugin::initializeEngine(engine, uri);
-    // QQmlContext* context = engine->rootContext();
-    // context->setContextProperty("UpdateManager",
-    //                             UpdateManager::instance());
-}

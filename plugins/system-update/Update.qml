@@ -43,7 +43,7 @@ Item {
     property alias changelog: changelogLabel.text
     property alias progress: progressBar.value
 
-    // By Aliceljm [1]
+    // By Aliceljm [1].
     // [1] http://stackoverflow.com/a/18650828/538866
     property var formatter: function formatBytes(bytes,decimals) {
         if (typeof decimals === 'undefined') decimals = 0;

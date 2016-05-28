@@ -5,6 +5,10 @@
 macro(add_uss_mock PLUGIN VERSION PATH)
 #    cmake_parse_arguments(MOCK "" "${single}" "" ${ARGN})
 
+    if(NOT QMLFILES_SEARCH_PATH)
+        set(QMLFILES_SEARCH_PATH ${CMAKE_CURRENT_SOURCE_DIR})
+    endif()
+
     set(qmlfiles_dir ${CMAKE_CURRENT_BINARY_DIR})
 
     file(GLOB QMLFILES
@@ -28,5 +32,4 @@ macro(add_uss_mock PLUGIN VERSION PATH)
     )
 endmacro()
 
-add_subdirectory(system-update)
-add_subdirectory(downloadmanager)
+add_subdirectory(Ubuntu)

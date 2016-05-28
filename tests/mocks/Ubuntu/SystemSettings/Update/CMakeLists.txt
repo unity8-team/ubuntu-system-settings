@@ -4,11 +4,14 @@ include_directories(
 
 set(MOCK_SYSTEMUPDATE_SRCS
     plugin.cpp
+    MockUpdateManager.cpp
+    MockSystemImage.cpp
+    MockClickUpdateModel.h
 )
 
 add_library(MockSystemUpdate MODULE ${MOCK_SYSTEMUPDATE_SRCS})
 
 qt5_use_modules(MockSystemUpdate Qml Quick Core)
 
-add_uss_mock(Ubuntu.SystemSettings.Update 1.0 Ubuntu.SystemSettings.Update
+add_uss_mock(Ubuntu.SystemSettings.Update 1.0 Ubuntu/SystemSettings/Update
              TARGETS MockSystemUpdate)
