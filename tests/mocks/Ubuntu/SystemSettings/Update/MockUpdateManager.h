@@ -29,18 +29,32 @@ class MockUpdateManager: public QObject
 Q_OBJECT
     public:
 
-    Q_ENUMS(UpdateMode)
-    Q_ENUMS(UpdateStatus)
+    Q_ENUMS(UpdateKind)
+    Q_ENUMS(UpdateState)
     Q_ENUMS(ManagerStatus)
-    enum UpdateMode
+
+    enum UpdateKind
     {
-        Downloadable,
-        Installable,
-        InstallableWithRestart,
-        Pausable,
-        Resumable,
-        NonPausable,
-        Retriable
+        KindApp,
+        KindSystem,
+        KindUnknown
+    };
+
+        enum UpdateState
+    {
+        StateUnknown,
+        StateAvailable,
+        StateUnavailable,
+        StateQueuedForDownload,
+        StateDownloading,
+        StateDownloadingAutomatically,
+        StateDownloadPaused,
+        StateInstalling,
+        StateInstallingAutomatically,
+        StateInstallPaused,
+        StateInstalled,
+        StateDownloaded,
+        StateFailed
     };
 
     enum ManagerStatus
@@ -52,20 +66,6 @@ Q_OBJECT
         BatchMode, // Installing all updates
         NetworkError,
         ServerError
-    };
-
-    enum UpdateStatus
-    {
-        NotAvailable,
-        NotStarted,
-        AutomaticallyDownloading,
-        ManuallyDownloading,
-        DownloadPaused,
-        InstallationPaused,
-        Installing,
-        Installed,
-        DownloadFailed,
-        InstallationFailed
     };
 
     static MockUpdateManager *instance();

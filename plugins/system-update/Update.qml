@@ -3,6 +3,8 @@
  *
  * Copyright (C) 2016 Canonical Ltd.
  *
+ * Contact: Jonas G. Drange <jonas.drange@canonical.com>
+ *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License version 3, as published
  * by the Free Software Foundation.
@@ -31,8 +33,8 @@ import Ubuntu.SystemSettings.Update 1.0
 Item {
     id: update
 
-    property int status // This is an UpdateManager::UpdateStatus
-    property int mode // This is an UpdateManager::UpdateMode
+    property int state // This is an UpdateManager::UpdateState
+    property int kind // This is an UpdateManager::UpdateKind
     property int size
     property string version
     property string errorTitle
@@ -45,14 +47,14 @@ Item {
 
     // By Aliceljm [1].
     // [1] http://stackoverflow.com/a/18650828/538866
-    property var formatter: function formatBytes(bytes,decimals) {
+    property var formatter: function formatBytes(bytes, decimals) {
         if (typeof decimals === 'undefined') decimals = 0;
         if(bytes == 0) return '0 Byte';
         var k = 1000; // or 1024 for binary
         var dm = decimals + 1 || 3;
         var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
         var i = Math.floor(Math.log(bytes) / Math.log(k));
-        return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + sizes[i];
+        return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + " " + sizes[i];
     }
 
     signal retry()
@@ -87,18 +89,33 @@ Item {
     // Component.onCompleted: console.warn(height)
 
     height: {
-        var h;
-        h = name.height + name.anchors.topMargin;
-        h += expandableVersionLabel.height + name.anchors.topMargin;
-        h += progressBar.visible ?
-             downloadLabel.height + downloadLabel.anchors.topMargin
-             : 0;
-        h += progressBar.visible ?
-                 progressBar.height + progressBar.anchors.topMargin : 0;
-        h += changelogLabel.visible ?
-                 changelogCol.height : 0;
-        h += error.visible ? error.height : 0;
-        console.warn(h);
+        var h = 0;
+        var nameHeight = name.height + name.anchors.topMargin;
+        var buttonHeight = button.height + button.anchors.topMargin;
+        var versionHeight = expandableVersionLabel.height + expandableVersionLabel.anchors.topMargin;
+
+        var statusLabelHeight = statusLabel.text ?
+                (statusLabel.height + statusLabel.anchors.topMargin) : 0;
+        var downloadLabelHeight = downloadLabel.text ?
+            (downloadLabel.height + downloadLabel.anchors.topMargin) : 0;
+
+        var progressBarHeight = progressBar.visible ?
+                (progressBar.height + progressBar.anchors.topMargin) : 0;
+        var changelogLabelHeight = changelogLabel.visible ?
+                (changelogCol.height + changelogCol.anchors.topMargin) : 0;
+        var errorHeight = error.visible ? (error.height + units.gu(1)) : 0;
+
+        h += Math.max(nameHeight, buttonHeight);
+        if (progressBarHeight || errorHeight) {
+            h += progressBarHeight
+                 + errorHeight
+                 + versionHeight
+                 + Math.max(downloadLabelHeight, statusLabelHeight);
+        } else {
+            h += Math.max(downloadLabelHeight, statusLabelHeight, versionHeight);
+        }
+
+        h += changelogLabelHeight;
         return h;
     }
 
@@ -139,6 +156,7 @@ Item {
 
     Button {
         id: button
+        objectName: "updateButton"
         anchors {
             top: parent.top
             topMargin: units.gu(2.3) // Vcenter in name does not work here
@@ -146,43 +164,94 @@ Item {
             rightMargin: units.gu(2)
         }
 
-        // Enabled as long as it's not NonPausable.
-        enabled: update.mode !== UpdateManager.NonPausable
+        enabled: {
+            switch(update.state) {
+            case UpdateManager.StateAvailable:
+            case UpdateManager.StateQueuedForDownload:
+            case UpdateManager.StateDownloading:
+            case UpdateManager.StateDownloadingAutomatically:
+            case UpdateManager.StateDownloadPaused:
+            case UpdateManager.StateInstallPaused:
+            case UpdateManager.StateDownloaded:
+            case UpdateManager.StateFailed:
+                return true;
+
+            case UpdateManager.StateInstalling:
+            case UpdateManager.StateInstallingAutomatically:
+            case UpdateManager.StateUnavailable:
+            case UpdateManager.StateInstalled:
+            case UpdateManager.StateUnknown:
+            default:
+                return false;
+            }
+        }
 
         text: {
-            switch(update.mode) {
-            case UpdateManager.Retriable:
+            switch(update.state) {
+            case UpdateManager.StateUnknown:
+            case UpdateManager.StateUnavailable:
+            case UpdateManager.StateFailed:
                 return i18n.tr("Retry")
-            case UpdateManager.Downloadable:
-                return i18n.tr("Download")
-            case UpdateManager.Pausable:
-            case UpdateManager.NonPausable:
-                return i18n.tr("Pause")
-            case UpdateManager.Installable:
-                return i18n.tr("Install")
-            case UpdateManager.InstallableWithRestart:
-                return i18n.tr("Install…")
+
+            case UpdateManager.StateAvailable:
+            case UpdateManager.StateDownloadPaused:
+                if (kind === UpdateManager.KindApp) {
+                    return i18n.tr("Update");
+                } else {
+                    return i18n.tr("Download")
+                }
+
+            case UpdateManager.StateQueuedForDownload:
+            case UpdateManager.StateDownloading:
+            case UpdateManager.StateDownloadingAutomatically:
+            case UpdateManager.StateInstalling:
+            case UpdateManager.StateInstallingAutomatically:
+            case UpdateManager.StateInstalled:
+                return i18n.tr("Pause");
+
+            case UpdateManager.StateInstallPaused:
+            case UpdateManager.StateDownloaded:
+                if (kind === UpdateManager.KindSystem) {
+                    return i18n.tr("Install…");
+                } else {
+                    return i18n.tr("Install");
+                }
+
             default:
-                console.warn("Unknown update mode", update.mode);
+                console.error("Unknown update state", update.state);
             }
         }
 
         onClicked: {
-            switch (update.mode) {
-            case UpdateManager.Retriable:
+            switch (update.state) {
+
+            // Retries.
+            case UpdateManager.StateUnknown:
+            case UpdateManager.StateUnavailable:
+            case UpdateManager.StateFailed:
                 update.retry();
                 break;
-            case UpdateManager.Downloadable:
-                update.download();
+
+            case UpdateManager.StateAvailable:
+            case UpdateManager.StateDownloadPaused:
+            case UpdateManager.StateInstallPaused:
+                if (kind === UpdateManager.KindApp) {
+                    update.install();
+                } else {
+                    update.download();
+                }
                 break;
-            case UpdateManager.Pausable:
+
+            case UpdateManager.StateDownloaded:
+                    update.install();
+                    break;
+
+            case UpdateManager.StateQueuedForDownload:
+            case UpdateManager.StateDownloading:
+            case UpdateManager.StateDownloadingAutomatically:
+            case UpdateManager.StateInstalling:
+            case UpdateManager.StateInstallingAutomatically:
                 update.pause();
-                break;
-            case UpdateManager.Installable:
-            case UpdateManager.InstallableWithRestart:
-                update.install();
-                break;
-            case UpdateManager.NonPausable:
                 break;
             }
         }
@@ -190,6 +259,7 @@ Item {
 
     RowLayout {
         id: expandableVersionLabel
+        objectName: "updateVersionLabel"
         anchors {
             top: name.bottom
             topMargin: units.gu(1)
@@ -198,7 +268,7 @@ Item {
         width: units.gu(10)
         property bool expanded: false
         spacing: units.gu(0.5)
-        visible: update.status !== UpdateManager.InstallationFailed
+        visible: update.state !== UpdateManager.StateFailed
         Label {
             id: versionLabel
             verticalAlignment: Text.AlignVCenter
@@ -211,7 +281,7 @@ Item {
             id: expandableVersionIcon
             name: "info"
             visible: update.changelog
-            color: parent.expanded ? theme.palette.selected.baseText : theme.palette.normal.baseText
+            color: parent.expanded ? theme.palette.selected.activity : theme.palette.normal.baseText
 
             height: versionLabel.height
         }
@@ -227,6 +297,7 @@ Item {
 
     Label {
         id: downloadLabel
+        objectName: "updateDownloadLabel"
         anchors {
             top: name.bottom
             topMargin: units.gu(1)
@@ -236,20 +307,26 @@ Item {
         verticalAlignment: Text.AlignVCenter
         fontSize: "small"
         text: {
-            switch (update.status) {
-            case UpdateManager.AutomaticallyDownloading:
-            case UpdateManager.ManuallyDownloading:
-            case UpdateManager.DownloadPaused:
-                return i18n.tr("Downloading");
-            case UpdateManager.Installing:
-            case UpdateManager.InstallationPaused:
+            switch (update.state) {
+
+            case UpdateManager.StateInstalling:
+            case UpdateManager.StateInstallingAutomatically:
+            case UpdateManager.StateInstallPaused:
                 return i18n.tr("Installing");
-            case UpdateManager.InstallationFailed:
-                return i18n.tr("Installation failed");
-            case UpdateManager.Installed:
-                return i18n.tr("Installed");
-            case UpdateManager.NotStarted:
-            case UpdateManager.NotAvailable:
+
+            case UpdateManager.StateInstallPaused:
+            case UpdateManager.StateDownloadPaused:
+                return i18n.tr("Paused");
+
+            case UpdateManager.StateQueuedForDownload:
+                return i18n.tr("Waiting to download");
+
+            case UpdateManager.StateDownloading:
+                return i18n.tr("Downloading");
+
+            // case UpdateManager.StateFailed:
+            //     return i18n.tr("Installation failed");
+
             default:
                 return "";
             }
@@ -259,6 +336,7 @@ Item {
 
     Label {
         id: statusLabel
+        objectName: "updateStatusLabel"
         anchors {
             top: name.bottom
             topMargin: units.gu(1)
@@ -269,22 +347,21 @@ Item {
         horizontalAlignment: Text.AlignHCenter
         fontSize: "small"
         text: {
-            switch (update.status) {
-            case UpdateManager.NotStarted:
+            switch (update.state) {
+
+            case UpdateManager.StateAvailable:
                 return formatter(size);
-            case UpdateManager.AutomaticallyDownloading:
-            case UpdateManager.ManuallyDownloading:
-            case UpdateManager.DownloadPaused:
-                var down = formatter(size * (progressBar.value / 100));
+
+            case UpdateManager.StateDownloading:
+            case UpdateManager.StateDownloadingAutomatically:
+            case UpdateManager.StateDownloadPaused:
+                var down = formatter(size * progress);
                 var left = formatter(size);
                 return i18n.tr("%1 of %2").arg(down).arg(left);
-            case UpdateManager.Installing:
-            case UpdateManager.InstallationPaused:
+
+            case UpdateManager.StateDownloaded:
                 return i18n.tr("Downloaded");
-            case UpdateManager.NotAvailable:
-            case UpdateManager.DownloadFailed:
-            case UpdateManager.InstallationFailed:
-            case UpdateManager.Installed:
+
             default:
                 return "";
             }
@@ -293,7 +370,13 @@ Item {
 
     Column {
         id: error
+        objectName: "updateError"
         spacing: units.gu(1)
+        height: childrenRect.height
+
+        property alias title: errorElementTitle.text
+        property alias detail: errorElementDetail.text
+
         anchors {
             top: name.bottom
             left: iconSlot.right
@@ -303,7 +386,7 @@ Item {
         }
         states: State {
             name: "visible"
-            when: update.status === UpdateManager.DownloadFailed
+            when: update.state === UpdateManager.StateFailed
 
             PropertyChanges {
                 target: error
@@ -317,12 +400,15 @@ Item {
         }
 
         visible: false
+
         Label {
+            id: errorElementTitle
             text: update.errorTitle
             color: UbuntuColors.red
         }
 
         Label {
+            id: errorElementDetail
             anchors { left: parent.left; right: parent.right }
             text: update.errorDetail
             fontSize: "small"
@@ -333,6 +419,7 @@ Item {
 
     ProgressBar {
         id: progressBar
+        objectName: "updateProgressbar"
         anchors {
             top: downloadLabel.bottom
             topMargin: units.gu(1)
@@ -344,15 +431,17 @@ Item {
         states: State {
             name: "visible"
             when: {
-                switch (update.status) {
-                case UpdateManager.AutomaticallyDownloading:
-                case UpdateManager.ManuallyDownloading:
-                case UpdateManager.DownloadPaused:
-                case UpdateManager.InstallationPaused:
-                case UpdateManager.Installing:
+                // Waiting to download manually, downloading manually,
+                // and/or installing manually
+                switch (update.state) {
+
+                case UpdateManager.StateQueuedForDownload:
+                case UpdateManager.StateDownloading:
+                case UpdateManager.StateDownloadPaused:
+                case UpdateManager.StateInstalling:
+                case UpdateManager.StateInstallPaused:
                     return true;
-                case UpdateManager.DownloadFailed:
-                case UpdateManager.InstallationFailed:
+
                 default:
                     return false;
                 }
@@ -370,7 +459,7 @@ Item {
         }
         visible: false
         height: units.gu(0.5)
-        indeterminate: progress < 0 || progress > 100
+        indeterminate: update.progress < 0 || update.progress > 100
         minimumValue: 0
         maximumValue: 100
         showProgressPercentage: false
@@ -386,7 +475,7 @@ Item {
     //         rightMargin: units.gu(2)
     //     }
     //     visible: {
-    //         switch (update.status) {
+    //         switch (update.state) {
     //         case UpdateManager.AutomaticallyDownloading:
     //         case UpdateManager.ManuallyDownloading:
     //         case UpdateManager.DownloadPaused:
@@ -437,7 +526,7 @@ Item {
     // //             AnchorChanges { target: middleSlot; anchors.top: progressBarSlot.bottom }
     // //         },
     // //         State {
-    // //             when: update.status === UpdateManager.Failed
+    // //             when: update.state === UpdateManager.Failed
     // //             AnchorChanges { target: middleSlot; anchors.top: errorSlot.bottom }
     // //         }
     // //     ]
@@ -525,6 +614,19 @@ Item {
             left: iconSlot.right
             right: parent.right
             rightMargin: units.gu(2)
+        }
+    }
+
+    // Makes the progress bar indeterminate when waiting
+    Binding {
+        target: progressBar
+        property: "value"
+        value: -1
+        when: {
+            var queued = update.state === UpdateManager.StateQueuedForDownload;
+            var installing = update.state === UpdateManager.StateInstalling;
+            var isApp = update.kind === UpdateManager.KindApp;
+            return (queued || installing) && isApp;
         }
     }
 }
