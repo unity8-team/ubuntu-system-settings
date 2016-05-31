@@ -24,89 +24,76 @@ Update {
     id: update
     property string packageName
     property int revision
+    property var downloadId: null
     property var download: null
 
-    signal requestedRetry(string packageName, int revision)
-    signal udmDownloadCreated(string packageName, int revision, int udmId)
-
-    Component.onCompleted: {
-        // console.warn("ClickUpdate", modelData, modelData.metadata, modelData.metadata.title, modelData.metadata.custom.iconUrl);
-        // packageName = modelData.app_id
-        // console.warn("have package name", packageName);
-        if (udm_download_id) {
-            download = Udm.getDownload(udm_download_id);
-        } else {
-                var metadata = {
-                    "command": command.split(" "),
-                    "title": title,
-                    "showInIndicator": false,
-                    // "downloadUrl": download_url,
-                };
-                console.warn("metadata", metadata);
-                var headers = {
-                    "X-Click-Token": click_token
-                };
-                console.warn("headers", metadata);
-                var metadataObj = mdt.createObject(update, metadata);
-                var singleDownloadObj = sdl.createObject(update, {
-                    "url": download_url,
-                    "autoStart": true,
-                    "hash": download_sha512,
-                    "algorithm": "sha512",
-                    "headers": headers,
-                    "metadata": metadataObj
-                });
-                singleDownloadObj.download(url);
-                download = singleDownloadObj;
-            }
+    onDownloadIdChanged: {
+        if (downloadId === null) {
+            var metadata = {
+                "command": model.command.split(" "),
+                "title": model.title,
+                "showInIndicator": false,
+                // "downloadUrl": download_url,
+            };
+            console.warn("metadata", metadata);
+            var headers = {
+                "X-Click-Token": model.click_token
+            };
+            console.warn("headers", metadata);
+            var metadataObj = mdt.createObject(update, metadata);
+            var singleDownloadObj = sdl.createObject(update, {
+                "url": model.download_url,
+                "autoStart": true,
+                "hash": model.download_sha512,
+                "algorithm": "sha512",
+                "headers": model.headers,
+                "metadata": metadataObj
+            });
+            singleDownloadObj.download(model.url);
+            download = singleDownloadObj;
         }
     }
+
+    updateState: UpdateManager.StateAvailable
     // Initial status, mode
-    status: UpdateManager.NotStarted
-    mode: UpdateManager.Installable
+    kind: UpdateManager.KindApp
 
-    name: title
-    version: remote_version
+    name: model.title
+    version: model.remote_version
     size: model.size
-    iconUrl: icon_url
-    changelog: changelog
-    // progress: modelData.progress
+    iconUrl: model.icon_url
+    changelog: model.changelog
+    // progress: model.progress
 
-    // If this failed, we tell our parents
-    onRetry: requestedRetry(update.packageName, update.revision)
 
-    // onDownload: modelData.start();
-    // onPause: modelData.pause();
-    // onInstall: modelData.start();
+    onRetry: UpdateManager.retryClickPackage(update.packageName, update.revision)
+
+    // onDownload: model.start();
+    // onPause: model.pause();
+    // onInstall: model.start();
 
     Connections {
         target: download
-        onErrorMessageChanged: {
+        onErrorChanged: {
             update.setError(
-                i18n.tr("Download failed"), update.errorMessage
+                i18n.tr("Download failed"), download.errorMessage
             )
-            update.mode = UpdateManager.Retriable;
-            update.status = UpdateManager.Failed;
+            updateState = UpdateManager.StateFailed;
         }
         onFinished: {
             console.warn('ClickUpdate Connections: Download finished')
-            update.mode = UpdateManager.NonPausable;
-            update.status = UpdateManager.Installed;
+            updateState = UpdateManager.StateInstalled;
         }
         onProgressChanged: {
-            console.warn('ClickUpdate Connections: Progress changed', progress)
-            update.mode = UpdateManager.Pausable;
-            update.status = UpdateManager.ManuallyDownloading;
+            console.warn('ClickUpdate Connections: Progress changed', download.progress)
+            update.progress = download.progress;
+            updateState = UpdateManager.StateDownloading;
         }
-        onDownloadingChanged: {
-            console.warn('ClickUpdate Connections: Downloading changed', download.downloading)
-            if (download.downloading) {
-                update.mode = UpdateManager.Pausable;
-                update.status = UpdateManager.ManuallyDownloading;
-            } else {
-                update.mode = UpdateManager.Resumable;
-                update.status = UpdateManager.DownloadPaused;
-            }
+        onPaused: {
+            updateState = UpdateManager.StateDownloadPaused;
+        }
+        onResumed: {
+            updateState = UpdateManager.StateDownloading;
         }
     }
 

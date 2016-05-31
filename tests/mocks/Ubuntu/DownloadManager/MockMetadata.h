@@ -18,6 +18,7 @@
 #define MOCK_METADATA_H
 
 #include <QObject>
+#include <QVariant>
 #include <QVariantMap>
 #include <QString>
 
@@ -25,10 +26,11 @@ class MockMetadata : public QObject {
     Q_OBJECT
     Q_PROPERTY(QString title READ title WRITE setTitle NOTIFY titleChanged)
     Q_PROPERTY(bool showInIndicator READ showInIndicator WRITE setShowInIndicator NOTIFY showIndicatorChanged)
+    Q_PROPERTY(QStringList command READ command WRITE setCommand NOTIFY commandChanged)
+    Q_PROPERTY(QVariantMap custom READ custom WRITE setCustom NOTIFY customChanged)
 
- public:
+public:
     explicit MockMetadata(QObject* parent=0);
-    MockMetadata(QVariantMap map, QObject* parent=0);
 
     QString title() const;
     void setTitle(QString title);
@@ -38,11 +40,23 @@ class MockMetadata : public QObject {
 
     QVariantMap map() const;
 
- signals:
+    QStringList command() const;
+    void setCommand(const QStringList &command);
+
+    QVariantMap custom() const;
+    void setCustom(const QVariantMap &custom);
+
+
+signals:
     void titleChanged();
     void showIndicatorChanged();
-    void deflateChanged();
-    void extractChanged();
+    void commandChanged();
+    void customChanged();
+
+private:
+    QVariantMap m_map;
+    QVariantMap m_custom;
+
 };
 
 #endif // MOCK_METADATA_H

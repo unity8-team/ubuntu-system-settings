@@ -16,6 +16,9 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+// DEPRECATED
+
+
 import QtQuick 2.4
 
 Column {

@@ -14,6 +14,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "MockDownloadManager.h"
+#include <QDebug>
 
 MockDownloadManager::MockDownloadManager(QObject *parent)
 {
@@ -32,6 +33,7 @@ void MockDownloadManager::download(QString url)
 
 QVariantList MockDownloadManager::downloads()
 {
+    qDebug() << "somebody requested downloads";
     return QVariantList();
 }
 

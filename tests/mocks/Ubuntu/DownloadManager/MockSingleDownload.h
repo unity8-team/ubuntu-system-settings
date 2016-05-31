@@ -60,6 +60,14 @@ class MockSingleDownload : public QObject
     void setMetadata(MockMetadata* metadata);
     void setAutoStart(bool value);
 
+    Q_INVOKABLE void mockErrorMessage(const QString &error); // mock only
+    Q_INVOKABLE void mockFinished(); // mock only
+    Q_INVOKABLE void mockProgress(const int &progress); // mock only
+    Q_INVOKABLE void mockDownloading(const bool downloading); // mock only
+    Q_INVOKABLE void mockPause(); // mock only
+    Q_INVOKABLE void mockResume(); // mock only
+
+
  signals:
     void isCompletedChanged();
     void allowMobileDownloadChanged();
@@ -79,13 +87,11 @@ class MockSingleDownload : public QObject
     void started(bool success);
     void errorChanged();
 
-public slots:
-    void onFinished(const QString& path);
-    void onProgress(qulonglong received, qulonglong total);
-    void onPaused(bool wasPaused);
-    void onResumed(bool wasResumed);
-    void onStarted(bool wasStarted);
-    void onCanceled(bool wasCanceled);
+private:
+    QString m_errorMessage;
+    bool m_downloading;
+    int m_progress;
+
 };
 
 #endif // MOCK_SINGLEDOWNLOAD_H

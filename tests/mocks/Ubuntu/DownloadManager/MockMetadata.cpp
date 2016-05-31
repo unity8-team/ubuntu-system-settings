@@ -17,23 +17,20 @@
 #include "MockMetadata.h"
 
 MockMetadata::MockMetadata(QObject* parent)
+    : QObject(parent)
+    , m_map()
+    , m_custom()
 {
-
-}
-
-MockMetadata::MockMetadata(QVariantMap map, QObject* parent)
-{
-
 }
 
 QString MockMetadata::title() const
 {
-    return QString();
+    return m_map.value("title", "").toString();
 }
 
 void MockMetadata::setTitle(QString title)
 {
-
+    m_map.insert("title", title);
 }
 
 bool MockMetadata::showInIndicator() const
@@ -49,4 +46,25 @@ void MockMetadata::setShowInIndicator(bool shown)
 QVariantMap MockMetadata::map() const
 {
     return QVariantMap();
+}
+
+QStringList MockMetadata::command() const
+{
+    return m_map.contains("command") ? m_map.value("command").toStringList():QStringList();
+}
+
+void MockMetadata::setCommand(const QStringList &command)
+{
+    m_map.insert("command", command);
+}
+
+
+QVariantMap MockMetadata::custom() const
+{
+    return m_custom;
+}
+
+void MockMetadata::setCustom(const QVariantMap &custom)
+{
+    m_custom = custom;
 }

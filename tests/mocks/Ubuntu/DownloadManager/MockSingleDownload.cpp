@@ -15,35 +15,42 @@
  */
 
 #include "MockSingleDownload.h"
+#include <QDebug>
 
 MockSingleDownload::MockSingleDownload(QObject *parent)
+    : QObject(parent)
+    , m_errorMessage("")
+    , m_downloading(false)
+    , m_progress(0)
 {
-
+    qDebug() << "MockSingleDownload init";
 }
 
 void MockSingleDownload::start()
 {
-
+    Q_EMIT (started(true));
 }
 
 void MockSingleDownload::pause()
 {
+    Q_EMIT (started(true));
 
 }
 
 void MockSingleDownload::resume()
 {
-
+    Q_EMIT (resumed(true));
 }
 
 void MockSingleDownload::cancel()
 {
+    Q_EMIT (canceled(true));
 
 }
 
 void MockSingleDownload::download(QString url)
 {
-
+    qDebug() << "single download download" << url;
 }
 
 void MockSingleDownload::startDownload()
@@ -58,7 +65,7 @@ bool MockSingleDownload::isCompleted() const
 
 QString MockSingleDownload::errorMessage() const
 {
-    return QString();
+    return m_errorMessage;
 }
 
 bool MockSingleDownload::allowMobileDownload() const
@@ -68,12 +75,12 @@ bool MockSingleDownload::allowMobileDownload() const
 
 int MockSingleDownload::progress() const
 {
-    return 0;
+    return m_progress;
 }
 
 bool MockSingleDownload::downloading() const
 {
-    return false;
+    return m_downloading;
 }
 
 bool MockSingleDownload::downloadInProgress() const
@@ -88,12 +95,12 @@ bool MockSingleDownload::autoStart() const
 
 QString MockSingleDownload::downloadId() const
 {
-
+    return "";
 }
 
 QVariantMap MockSingleDownload::headers() const
 {
-
+    return QVariantMap();
 }
 
 MockMetadata*MockSingleDownload:: metadata() const
@@ -120,32 +127,39 @@ void MockSingleDownload::setAutoStart(bool value) {
 
 }
 
-void MockSingleDownload::onFinished(const QString& path)
+void MockSingleDownload::mockErrorMessage(const QString &error)
 {
-
+    m_errorMessage = error;
+    Q_EMIT (errorChanged());
 }
 
-void MockSingleDownload::onProgress(qulonglong received, qulonglong total)
+void MockSingleDownload::mockFinished()
 {
+    m_downloading = false;
 
+    Q_EMIT (finished("/path/to/download"));
 }
 
-void MockSingleDownload::onPaused(bool wasPaused)
+void MockSingleDownload::mockProgress(const int &progress)
 {
-
+    m_progress = progress;
+    Q_EMIT (progressChanged());
 }
 
-void MockSingleDownload::onResumed(bool wasResumed)
+void MockSingleDownload::mockDownloading(const bool downloading)
 {
-
+    m_downloading = downloading;
+    Q_EMIT (downloadingChanged());
 }
 
-void MockSingleDownload::onStarted(bool wasStarted)
+void MockSingleDownload::mockPause()
 {
-
+    m_downloading = false;
+    Q_EMIT (paused(true));
 }
 
-void MockSingleDownload::onCanceled(bool wasCanceled)
+void MockSingleDownload::mockResume()
 {
-
+    m_downloading = true;
+    Q_EMIT (resumed(true));
 }

@@ -8,6 +8,7 @@ DownloadManager {
     id: udm
 
     function getDownload(id) {
+        console.warn('getDownload')
         for (var i=0; i < downloads.length; i++) {
             if (id === downloads[i].downloadId) return downloads[i];
         }

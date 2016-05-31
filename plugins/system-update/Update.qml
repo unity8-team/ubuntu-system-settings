@@ -33,7 +33,7 @@ import Ubuntu.SystemSettings.Update 1.0
 Item {
     id: update
 
-    property int state // This is an UpdateManager::UpdateState
+    property int updateState // This is an UpdateManager::UpdateState
     property int kind // This is an UpdateManager::UpdateKind
     property int size
     property string version
@@ -165,7 +165,7 @@ Item {
         }
 
         enabled: {
-            switch(update.state) {
+            switch(updateState) {
             case UpdateManager.StateAvailable:
             case UpdateManager.StateQueuedForDownload:
             case UpdateManager.StateDownloading:
@@ -187,7 +187,7 @@ Item {
         }
 
         text: {
-            switch(update.state) {
+            switch(updateState) {
             case UpdateManager.StateUnknown:
             case UpdateManager.StateUnavailable:
             case UpdateManager.StateFailed:
@@ -218,12 +218,12 @@ Item {
                 }
 
             default:
-                console.error("Unknown update state", update.state);
+                console.error("Unknown update state", updateState);
             }
         }
 
         onClicked: {
-            switch (update.state) {
+            switch (updateState) {
 
             // Retries.
             case UpdateManager.StateUnknown:
@@ -268,7 +268,7 @@ Item {
         width: units.gu(10)
         property bool expanded: false
         spacing: units.gu(0.5)
-        visible: update.state !== UpdateManager.StateFailed
+        visible: updateState !== UpdateManager.StateFailed
         Label {
             id: versionLabel
             verticalAlignment: Text.AlignVCenter
@@ -307,7 +307,7 @@ Item {
         verticalAlignment: Text.AlignVCenter
         fontSize: "small"
         text: {
-            switch (update.state) {
+            switch (updateState) {
 
             case UpdateManager.StateInstalling:
             case UpdateManager.StateInstallingAutomatically:
@@ -347,7 +347,7 @@ Item {
         horizontalAlignment: Text.AlignHCenter
         fontSize: "small"
         text: {
-            switch (update.state) {
+            switch (updateState) {
 
             case UpdateManager.StateAvailable:
                 return formatter(size);
@@ -386,7 +386,7 @@ Item {
         }
         states: State {
             name: "visible"
-            when: update.state === UpdateManager.StateFailed
+            when: updateState === UpdateManager.StateFailed
 
             PropertyChanges {
                 target: error
@@ -433,7 +433,7 @@ Item {
             when: {
                 // Waiting to download manually, downloading manually,
                 // and/or installing manually
-                switch (update.state) {
+                switch (updateState) {
 
                 case UpdateManager.StateQueuedForDownload:
                 case UpdateManager.StateDownloading:
@@ -475,7 +475,7 @@ Item {
     //         rightMargin: units.gu(2)
     //     }
     //     visible: {
-    //         switch (update.state) {
+    //         switch (updateState) {
     //         case UpdateManager.AutomaticallyDownloading:
     //         case UpdateManager.ManuallyDownloading:
     //         case UpdateManager.DownloadPaused:
@@ -526,7 +526,7 @@ Item {
     // //             AnchorChanges { target: middleSlot; anchors.top: progressBarSlot.bottom }
     // //         },
     // //         State {
-    // //             when: update.state === UpdateManager.Failed
+    // //             when: updateState === UpdateManager.Failed
     // //             AnchorChanges { target: middleSlot; anchors.top: errorSlot.bottom }
     // //         }
     // //     ]
@@ -623,8 +623,8 @@ Item {
         property: "value"
         value: -1
         when: {
-            var queued = update.state === UpdateManager.StateQueuedForDownload;
-            var installing = update.state === UpdateManager.StateInstalling;
+            var queued = updateState === UpdateManager.StateQueuedForDownload;
+            var installing = updateState === UpdateManager.StateInstalling;
             var isApp = update.kind === UpdateManager.KindApp;
             return (queued || installing) && isApp;
         }
