@@ -1,3 +1,9 @@
+ubuntu-system-settings (0.3+16.10.20160601-0ubuntu1) UNRELEASED; urgency=medium
+
+  * Depend on qml-module-ubuntu-performancemetrics
+
+ -- William Hua <william.hua@canonical.com>  Wed, 01 Jun 2016 10:40:55 -0400
+
 ubuntu-system-settings (0.3+16.10.20160523-0ubuntu1) yakkety; urgency=medium
 
   * Catch connection errors asynchronously
