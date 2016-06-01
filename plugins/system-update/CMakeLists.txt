@@ -2,9 +2,9 @@ set(QML_SOURCES
     PageComponent.qml
     Updates.qml
     Update.qml
-    ImageUpdate.qml
     ClickUpdate.qml
     ClickUpdates.qml
+    SystemUpdate.qml
     SystemUpdatePrompt.qml
     NotAuthenticatedNotification.qml
     Configuration.qml

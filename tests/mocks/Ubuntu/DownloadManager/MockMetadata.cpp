@@ -15,6 +15,7 @@
  */
 
 #include "MockMetadata.h"
+#include <QDebug>
 
 MockMetadata::MockMetadata(QObject* parent)
     : QObject(parent)

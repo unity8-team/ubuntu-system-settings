@@ -49,6 +49,7 @@ Q_OBJECT
         StateDownloading,
         StateDownloadingAutomatically,
         StateDownloadPaused,
+        StateAutomaticDownloadPaused,
         StateInstalling,
         StateInstallingAutomatically,
         StateInstallPaused,
@@ -131,7 +132,6 @@ signals:
 
 private:
     static MockUpdateManager *m_instance;
-
     MockSystemImage *m_systemImage;
 };
 

@@ -60,6 +60,7 @@ Item {
     signal retry()
     signal download()
     signal pause()
+    signal resume()
     signal install()
 
     // states: State {
@@ -171,6 +172,7 @@ Item {
             case UpdateManager.StateDownloading:
             case UpdateManager.StateDownloadingAutomatically:
             case UpdateManager.StateDownloadPaused:
+            case UpdateManager.StateAutomaticDownloadPaused:
             case UpdateManager.StateInstallPaused:
             case UpdateManager.StateDownloaded:
             case UpdateManager.StateFailed:
@@ -191,15 +193,18 @@ Item {
             case UpdateManager.StateUnknown:
             case UpdateManager.StateUnavailable:
             case UpdateManager.StateFailed:
-                return i18n.tr("Retry")
+                return i18n.tr("Retry");
 
             case UpdateManager.StateAvailable:
-            case UpdateManager.StateDownloadPaused:
                 if (kind === UpdateManager.KindApp) {
                     return i18n.tr("Update");
                 } else {
-                    return i18n.tr("Download")
+                    return i18n.tr("Download");
                 }
+
+            case UpdateManager.StateDownloadPaused:
+            case UpdateManager.StateAutomaticDownloadPaused:
+                    return i18n.tr("Resume");
 
             case UpdateManager.StateQueuedForDownload:
             case UpdateManager.StateDownloading:
@@ -232,9 +237,13 @@ Item {
                 update.retry();
                 break;
 
-            case UpdateManager.StateAvailable:
             case UpdateManager.StateDownloadPaused:
+            case UpdateManager.StateAutomaticDownloadPaused:
             case UpdateManager.StateInstallPaused:
+                update.resume();
+                break;
+
+            case UpdateManager.StateAvailable:
                 if (kind === UpdateManager.KindApp) {
                     update.install();
                 } else {
@@ -355,6 +364,7 @@ Item {
             case UpdateManager.StateDownloading:
             case UpdateManager.StateDownloadingAutomatically:
             case UpdateManager.StateDownloadPaused:
+            case UpdateManager.StateAutomaticDownloadPaused:
                 var down = formatter(size * progress);
                 var left = formatter(size);
                 return i18n.tr("%1 of %2").arg(down).arg(left);
@@ -614,19 +624,6 @@ Item {
             left: iconSlot.right
             right: parent.right
             rightMargin: units.gu(2)
-        }
-    }
-
-    // Makes the progress bar indeterminate when waiting
-    Binding {
-        target: progressBar
-        property: "value"
-        value: -1
-        when: {
-            var queued = updateState === UpdateManager.StateQueuedForDownload;
-            var installing = updateState === UpdateManager.StateInstalling;
-            var isApp = update.kind === UpdateManager.KindApp;
-            return (queued || installing) && isApp;
         }
     }
 }

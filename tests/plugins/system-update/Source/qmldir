@@ -2,3 +2,4 @@ module Source
 
 Update 1.0 ../../../../plugins/system-update/Update.qml
 ClickUpdate 1.0 ../../../../plugins/system-update/ClickUpdate.qml
+SystemUpdate 1.0 ../../../../plugins/system-update/SystemUpdate.qml

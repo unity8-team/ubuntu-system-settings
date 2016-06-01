@@ -91,6 +91,19 @@ public:
     Q_INVOKABLE void factoryReset();
     Q_INVOKABLE bool getIsTargetNewer() const;
 
+    Q_INVOKABLE void mockProgress(const int &percentage, const double &eta); // mock only
+    Q_INVOKABLE void mockAvailableStatus(const bool is_available,
+                             const bool downloading,
+                             const QString &available_version,
+                             const int &update_size,
+                             const QString &last_update_date,
+                             const QString &error_reason); // mock only
+    Q_INVOKABLE void mockPaused(const int &percentage); // mock only
+    Q_INVOKABLE void mockStarted(); // mock only
+    Q_INVOKABLE void mockDownloaded(); // mock only
+    Q_INVOKABLE void mockFailed(const int &consecutiveFailureCount,
+                    const QString &lastReason); // mock only
+
 signals:
     void currentBuildNumberChanged();
     void deviceNameChanged();
@@ -125,6 +138,9 @@ signals:
                                QString,
                                QString);
     void updateProgress(const int &percentage, const double &eta);
+
+private:
+    int m_downloadMode;
 };
 
 #endif // MOCK_SYSTEMIMAGE_H

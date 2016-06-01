@@ -17,8 +17,9 @@
 
 #include "MockSystemImage.h"
 
-MockSystemImage::MockSystemImage(QObject *parent) :
-    QObject(parent)
+MockSystemImage::MockSystemImage(QObject *parent)
+    : QObject(parent)
+    , m_downloadMode(-1)
 {
 }
 
@@ -140,9 +141,51 @@ QVariantMap MockSystemImage::detailedVersionDetails() const
 
 int MockSystemImage::downloadMode()
 {
-    return 0;
+    return m_downloadMode;
 }
 
 void MockSystemImage::setDownloadMode(const int &downloadMode)
 {
+    m_downloadMode = downloadMode;
+    Q_EMIT (downloadModeChanged());
+}
+
+void MockSystemImage::mockProgress(const int &percentage, const double &eta)
+{
+    Q_EMIT (updateProgress(percentage, eta));
+}
+
+void MockSystemImage::mockAvailableStatus(const bool is_available,
+                         const bool downloading,
+                         const QString &available_version,
+                         const int &update_size,
+                         const QString &last_update_date,
+                         const QString &error_reason)
+{
+    Q_EMIT (updateAvailableStatus(is_available,
+                                  downloading,
+                                  available_version,
+                                  update_size,
+                                  last_update_date,
+                                  error_reason));
+}
+
+void MockSystemImage::mockPaused(const int &percentage)
+{
+    Q_EMIT (updatePaused(percentage));
+}
+
+void MockSystemImage::mockStarted()
+{
+    Q_EMIT (downloadStarted());
+}
+
+void MockSystemImage::mockDownloaded()
+{
+    Q_EMIT (updateDownloaded());
+}
+
+void MockSystemImage::mockFailed(const int &consecutiveFailureCount, const QString &lastReason)
+{
+    Q_EMIT (updateFailed(consecutiveFailureCount, lastReason));
 }

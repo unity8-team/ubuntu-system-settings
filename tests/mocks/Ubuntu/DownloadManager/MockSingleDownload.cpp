@@ -22,6 +22,11 @@ MockSingleDownload::MockSingleDownload(QObject *parent)
     , m_errorMessage("")
     , m_downloading(false)
     , m_progress(0)
+    , m_metadata(new MockMetadata)
+    , m_headers()
+    , m_autostart(false)
+    , m_hash("")
+    , m_algorithm("")
 {
     qDebug() << "MockSingleDownload init";
 }
@@ -50,7 +55,7 @@ void MockSingleDownload::cancel()
 
 void MockSingleDownload::download(QString url)
 {
-    qDebug() << "single download download" << url;
+    m_downloading = true;
 }
 
 void MockSingleDownload::startDownload()
@@ -90,7 +95,7 @@ bool MockSingleDownload::downloadInProgress() const
 
 bool MockSingleDownload::autoStart() const
 {
-    return false;
+    return m_autostart;
 }
 
 QString MockSingleDownload::downloadId() const
@@ -100,12 +105,12 @@ QString MockSingleDownload::downloadId() const
 
 QVariantMap MockSingleDownload::headers() const
 {
-    return QVariantMap();
+    return m_headers;
 }
 
-MockMetadata*MockSingleDownload:: metadata() const
+MockMetadata * MockSingleDownload:: metadata()
 {
-
+    return m_metadata;
 }
 
 void MockSingleDownload::setAllowMobileDownload(bool value)
@@ -113,18 +118,21 @@ void MockSingleDownload::setAllowMobileDownload(bool value)
 
 }
 
-void MockSingleDownload::setHeaders(QVariantMap headers)
+void MockSingleDownload::setHeaders(const QVariantMap headers)
 {
-
+    m_headers = headers;
+    Q_EMIT(metadataChanged());
 }
 
-void MockSingleDownload::setMetadata(MockMetadata* metadata)
+void MockSingleDownload::setMetadata(const MockMetadata * metadata)
 {
-
+    m_metadata = const_cast<MockMetadata*>(metadata);
+    Q_EMIT(metadataChanged());
 }
 
-void MockSingleDownload::setAutoStart(bool value) {
-
+void MockSingleDownload::setAutoStart(bool value)
+{
+    m_autostart = value;
 }
 
 void MockSingleDownload::mockErrorMessage(const QString &error)
@@ -163,3 +171,37 @@ void MockSingleDownload::mockResume()
     m_downloading = true;
     Q_EMIT (resumed(true));
 }
+
+void MockSingleDownload::mockProcess()
+{
+    Q_EMIT (processing("/path/to/download"));
+}
+
+void MockSingleDownload::mockStart()
+{
+    Q_EMIT (started(true));
+}
+
+QString MockSingleDownload::hash() const
+{
+    return m_hash;
+}
+
+QString MockSingleDownload::algorithm() const
+{
+    return m_algorithm;
+}
+
+void MockSingleDownload::setHash(const QString &value)
+{
+    m_hash = value;
+    Q_EMIT (hashChanged());
+}
+
+void MockSingleDownload::setAlgorithm(const QString &value)
+{
+    m_algorithm = value;
+    Q_EMIT (algorithmChanged());
+}
+
+

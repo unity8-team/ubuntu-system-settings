@@ -33,7 +33,10 @@ class MockSingleDownload : public QObject
     Q_PROPERTY(bool downloading READ downloading NOTIFY downloadingChanged)
     Q_PROPERTY(QString downloadId READ downloadId NOTIFY downloadIdChanged)
     Q_PROPERTY(QVariantMap headers READ headers WRITE setHeaders NOTIFY headersChanged)
-    Q_PROPERTY(MockMetadata* metadata READ metadata WRITE setMetadata NOTIFY metadataChanged)
+    Q_PROPERTY(MockMetadata * metadata READ metadata WRITE setMetadata NOTIFY metadataChanged)
+    Q_PROPERTY(QString hash READ hash WRITE setHash NOTIFY hashChanged)
+    Q_PROPERTY(QString algorithm READ algorithm WRITE setAlgorithm NOTIFY algorithmChanged)
+
 
  public:
     explicit MockSingleDownload(QObject *parent = 0);
@@ -54,11 +57,15 @@ class MockSingleDownload : public QObject
     bool autoStart() const;
     QString downloadId() const;
     QVariantMap headers() const;
-    MockMetadata* metadata() const;
+    MockMetadata * metadata();
+    QString hash() const;
+    QString algorithm() const;
     void setAllowMobileDownload(bool value);
     void setHeaders(QVariantMap headers);
-    void setMetadata(MockMetadata* metadata);
+    void setMetadata(const MockMetadata * metadata);
     void setAutoStart(bool value);
+    void setHash(const QString &value);
+    void setAlgorithm(const QString &value);
 
     Q_INVOKABLE void mockErrorMessage(const QString &error); // mock only
     Q_INVOKABLE void mockFinished(); // mock only
@@ -66,6 +73,8 @@ class MockSingleDownload : public QObject
     Q_INVOKABLE void mockDownloading(const bool downloading); // mock only
     Q_INVOKABLE void mockPause(); // mock only
     Q_INVOKABLE void mockResume(); // mock only
+    Q_INVOKABLE void mockProcess(); // mock only
+    Q_INVOKABLE void mockStart(); // mock only
 
 
  signals:
@@ -77,6 +86,8 @@ class MockSingleDownload : public QObject
     void downloadIdChanged();
     void headersChanged();
     void metadataChanged();
+    void hashChanged();
+    void algorithmChanged();
 
     void canceled(bool success);
     void finished(const QString& path);
@@ -91,6 +102,11 @@ private:
     QString m_errorMessage;
     bool m_downloading;
     int m_progress;
+    MockMetadata * m_metadata;
+    QVariantMap m_headers;
+    bool m_autostart;
+    QString m_hash;
+    QString m_algorithm;
 
 };
 

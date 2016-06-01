@@ -26,51 +26,46 @@ Update {
     property int revision
     property var downloadId: null
     property var download: null
+    property var command
+    property string clickToken
+    property string downloadUrl
+    property string downloadSha512
+    property string remoteVersion
+    property string headers
 
     onDownloadIdChanged: {
         if (downloadId === null) {
             var metadata = {
-                "command": model.command.split(" "),
-                "title": model.title,
+                "command": command.split(" "),
+                "title": name,
                 "showInIndicator": false,
                 // "downloadUrl": download_url,
             };
-            console.warn("metadata", metadata);
-            var headers = {
-                "X-Click-Token": model.click_token
+            var hdrs = {
+                "X-Click-Token": clickToken
             };
-            console.warn("headers", metadata);
             var metadataObj = mdt.createObject(update, metadata);
             var singleDownloadObj = sdl.createObject(update, {
-                "url": model.download_url,
-                "autoStart": true,
-                "hash": model.download_sha512,
+                "url": downloadUrl,
+                "autoStart": false,
+                "hash": downloadSha512,
                 "algorithm": "sha512",
-                "headers": model.headers,
+                "headers": hdrs,
                 "metadata": metadataObj
             });
-            singleDownloadObj.download(model.url);
+            singleDownloadObj.download(downloadUrl);
             download = singleDownloadObj;
         }
     }
 
     updateState: UpdateManager.StateAvailable
-    // Initial status, mode
     kind: UpdateManager.KindApp
 
-    name: model.title
-    version: model.remote_version
-    size: model.size
-    iconUrl: model.icon_url
-    changelog: model.changelog
-    // progress: model.progress
-
-
     onRetry: UpdateManager.retryClickPackage(update.packageName, update.revision)
-
-    // onDownload: model.start();
-    // onPause: model.pause();
-    // onInstall: model.start();
+    onPause: download.pause()
+    onResume: download.resume()
+    onInstall: download.download(update.downloadUrl)
+    onDownload: download.download(update.downloadUrl)
 
     Connections {
         target: download
@@ -81,11 +76,9 @@ Update {
             updateState = UpdateManager.StateFailed;
         }
         onFinished: {
-            console.warn('ClickUpdate Connections: Download finished')
             updateState = UpdateManager.StateInstalled;
         }
         onProgressChanged: {
-            console.warn('ClickUpdate Connections: Progress changed', download.progress)
             update.progress = download.progress;
             updateState = UpdateManager.StateDownloading;
         }
@@ -95,8 +88,26 @@ Update {
         onResumed: {
             updateState = UpdateManager.StateDownloading;
         }
+        onStarted: {
+            updateState = UpdateManager.StateQueuedForDownload;
+        }
+        onProcessing: {
+            updateState = UpdateManager.StateInstalling;
+        }
     }
 
     Component { id: sdl; SingleDownload { property string url; } }
     Component { id: mdt; Metadata {} }
+
+    // Makes the progress bar indeterminate when waiting
+    Binding {
+        target: update
+        property: "progress"
+        value: -1
+        when: {
+            var queued = updateState === UpdateManager.StateQueuedForDownload;
+            var installing = updateState === UpdateManager.StateInstalling;
+            return queued || installing;
+        }
+    }
 }
