@@ -157,6 +157,11 @@ ItemPage {
 
                 page.Component.onDestruction.connect( function() {
                     page.disableNotificationsWhenAllUnchecked()
+                    
+                    if (!ClickApplicationsModel) {
+                        return
+                    }
+
                     ClickApplicationsModel.setNotifyEnabled(ClickApplicationsModel.EnableNotifications, index, page.enableNotifications)
                     ClickApplicationsModel.setNotifyEnabled(ClickApplicationsModel.SoundsNotify, index, page.soundsNotify)
                     ClickApplicationsModel.setNotifyEnabled(ClickApplicationsModel.VibrationsNotify, index, page.vibrationsNotify)

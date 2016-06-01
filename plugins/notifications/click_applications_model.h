@@ -24,6 +24,8 @@
 
 #include <QGSettings/QGSettings>
 
+class QTimer;
+
 class ClickApplicationsModel : public QAbstractListModel
 {
     Q_OBJECT
@@ -73,15 +75,22 @@ Q_SIGNALS:
 
 private Q_SLOTS:
     void onApplicationsListChanged(const QString& key);
+    void checkMissingDesktopData();
 
 private:
     bool saveNotifyEnabled(ClickApplicationEntry& entry, int role, bool enabled);
-    void getApplicationDataFromDesktopFile(ClickApplicationEntry& entry);
+    bool getApplicationDataFromDesktopFile(ClickApplicationEntry& entry);
     void getNotificationsSettings(ClickApplicationEntry& entry);
     bool parseApplicationKeyFromSettings(ClickApplicationEntry& entry, const QString& appEntry);
     int getIndexByApplicationData(ClickApplicationEntry& entry);
+    void addMissingDesktopDataEntry(ClickApplicationEntry& entry);
+    void addEntry(ClickApplicationEntry& entry);
+    void removeEntryByIndex(int index);
     void populateModel();
+
     QScopedPointer<QGSettings> m_applications;
+    QList<ClickApplicationEntry> m_missingDesktopDataEntries;
+    QTimer *m_checkMissingDesktopDataTimer;
 };
 
 #endif // CLICKAPPLICATIONSMODEL_H

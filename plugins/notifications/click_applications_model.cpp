@@ -17,6 +17,7 @@
 
 #include <gio/gdesktopappinfo.h>
 
+#include <QtCore/QTimer>
 #include <QtCore/QDebug>
 
 #include "click_applications_model.h"
@@ -38,6 +39,10 @@ ClickApplicationsModel::ClickApplicationsModel(QObject* parent)
     populateModel();
 
     connect(m_applications.data(), SIGNAL(changed(const QString&)), SLOT(onApplicationsListChanged(const QString&)));
+
+    m_checkMissingDesktopDataTimer = new QTimer(this);
+    m_checkMissingDesktopDataTimer->setInterval(1000);
+    connect(m_checkMissingDesktopDataTimer, SIGNAL(timeout()), SLOT(checkMissingDesktopData()));
 }
 
 ClickApplicationsModel::~ClickApplicationsModel()
@@ -184,7 +189,7 @@ bool ClickApplicationsModel::saveNotifyEnabled(ClickApplicationEntry& entry, int
     }
 }
 
-void ClickApplicationsModel::getApplicationDataFromDesktopFile(ClickApplicationEntry& entry)
+bool ClickApplicationsModel::getApplicationDataFromDesktopFile(ClickApplicationEntry& entry)
 {
     QString desktopFile = entry.pkgName + ".desktop";
     if (!entry.appName.isEmpty() && !entry.version.isEmpty()) {
@@ -194,7 +199,7 @@ void ClickApplicationsModel::getApplicationDataFromDesktopFile(ClickApplicationE
     GAppInfo* appInfo = (GAppInfo*)g_desktop_app_info_new(desktopFile.toUtf8().constData());
     if (appInfo == nullptr) {
         qWarning() << Q_FUNC_INFO << "[ERROR] Unable to get desktop file:" << desktopFile;
-        return;
+        return false;
     }
 
     entry.displayName = g_strdup(g_app_info_get_display_name(appInfo));
@@ -205,6 +210,7 @@ void ClickApplicationsModel::getApplicationDataFromDesktopFile(ClickApplicationE
     }
 
     g_object_unref(appInfo);
+    return true;
 }
 
 void ClickApplicationsModel::getNotificationsSettings(ClickApplicationEntry& entry)
@@ -262,6 +268,30 @@ int ClickApplicationsModel::getIndexByApplicationData(ClickApplicationEntry& ent
     return -1;
 }
 
+void ClickApplicationsModel::addMissingDesktopDataEntry(ClickApplicationEntry& entry)
+{
+    m_missingDesktopDataEntries << entry;
+    m_checkMissingDesktopDataTimer->start();
+}
+
+void ClickApplicationsModel::addEntry(ClickApplicationEntry& entry)
+{
+    getNotificationsSettings(entry);
+
+    beginInsertRows(QModelIndex(), rowCount(), rowCount());
+    m_entries << entry;
+    endInsertRows();
+    Q_EMIT rowCountChanged();
+}
+
+void ClickApplicationsModel::removeEntryByIndex(int index)
+{
+    beginRemoveRows(QModelIndex(), index, index);
+    m_entries.removeAt(index);
+    endRemoveRows();
+    Q_EMIT rowCountChanged();
+}
+
 void ClickApplicationsModel::populateModel()
 {
     Q_FOREACH (QString appEntry, m_applications->get(GSETTINGS_APPLICATIONS_KEY).toStringList()) {
@@ -270,13 +300,12 @@ void ClickApplicationsModel::populateModel()
             continue;
         }
 
-        getApplicationDataFromDesktopFile(entry);
-        getNotificationsSettings(entry);
+        if (!getApplicationDataFromDesktopFile(entry)) {
+            addMissingDesktopDataEntry(entry);
+            continue;
+        }
 
-        beginInsertRows(QModelIndex(), rowCount(), rowCount());
-        m_entries << entry;
-        endInsertRows();
-        Q_EMIT rowCountChanged();
+        addEntry(entry);
     }
 }
 
@@ -305,10 +334,7 @@ void ClickApplicationsModel::onApplicationsListChanged(const QString& key) {
             continue;
         }
 
-        beginRemoveRows(QModelIndex(), i, i);
-        m_entries.removeAt(i);
-        endRemoveRows();
-        Q_EMIT rowCountChanged();
+        removeEntryByIndex(i);
     }
 
     //Check for added entries
@@ -322,11 +348,32 @@ void ClickApplicationsModel::onApplicationsListChanged(const QString& key) {
             continue;
         }
 
-        getApplicationDataFromDesktopFile(entry);
+        if (!getApplicationDataFromDesktopFile(entry)) {
+            addMissingDesktopDataEntry(entry);
+            continue;
+        }
 
-        beginInsertRows(QModelIndex(), rowCount(), rowCount());
-        m_entries << entry;
-        endInsertRows();
-        Q_EMIT rowCountChanged();
+        addEntry(entry);
+    }
+}
+
+void ClickApplicationsModel::checkMissingDesktopData()
+{
+    QList<ClickApplicationEntry> stillMissing;
+
+    while (!m_missingDesktopDataEntries.isEmpty()) {
+        ClickApplicationEntry entry = m_missingDesktopDataEntries.takeFirst();
+
+        if (!getApplicationDataFromDesktopFile(entry)) {
+            stillMissing << entry;
+        } else {
+            addEntry(entry);
+        }
+    }
+
+    if (stillMissing.isEmpty()) {
+        m_checkMissingDesktopDataTimer->stop();
+    } else {
+        m_missingDesktopDataEntries.append(stillMissing);
     }
 }
