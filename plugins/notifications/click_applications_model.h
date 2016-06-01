@@ -22,6 +22,8 @@
 #include <QtCore/QAbstractListModel>
 #include <QtCore/QUrl>
 
+#include <QGSettings/QGSettings>
+
 class ClickApplicationsModel : public QAbstractListModel
 {
     Q_OBJECT
@@ -69,11 +71,15 @@ protected:
 Q_SIGNALS:
     void rowCountChanged();
 
+private Q_SLOTS:
+    void onApplicationsListChanged(const QString& key);
+
 private:
     bool saveNotifyEnabled(ClickApplicationEntry& entry, int role, bool enabled);
     void getApplicationDataFromDesktopFile(ClickApplicationEntry& entry);
     void getNotificationsSettings(ClickApplicationEntry& entry);
     void populateModel();
+    QScopedPointer<QGSettings> m_applications;
 };
 
 #endif // CLICKAPPLICATIONSMODEL_H

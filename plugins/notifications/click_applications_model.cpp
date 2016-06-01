@@ -16,7 +16,6 @@
 */
 
 #include <gio/gdesktopappinfo.h>
-#include <gio/gio.h>
 
 #include <QtCore/QDebug>
 
@@ -33,9 +32,12 @@
 #define GSETTINGS_LIST_NOTIFY_KEY "use-list-notifications"
 
 ClickApplicationsModel::ClickApplicationsModel(QObject* parent)
-    : QAbstractListModel(parent)
+    : QAbstractListModel(parent),
+    m_applications(new QGSettings(GSETTINGS_APPS_SCHEMA_ID))
 {
     populateModel();
+
+    connect(m_applications.data(), SIGNAL(changed(const QString&)), SLOT(onApplicationsListChanged(const QString&)));
 }
 
 ClickApplicationsModel::~ClickApplicationsModel()
@@ -129,60 +131,57 @@ bool ClickApplicationsModel::saveNotifyEnabled(ClickApplicationEntry& entry, int
         path = path + entry.pkgName + "/" + entry.appName + "/";
     }
 
-    GSettings *settings = g_settings_new_with_path(GSETTINGS_NOTIFICATIONS_SCHEMA_ID, path.toUtf8().constData());
+    QScopedPointer<QGSettings> settings(new QGSettings(GSETTINGS_NOTIFICATIONS_SCHEMA_ID, path.toUtf8().constData()));
 
-    QString key;
-    if (role == EnableNotifications) {
+    switch (role) {
+    case EnableNotifications:
         if (entry.enableNotifications == enabled) {
             return false;
         }
 
         entry.enableNotifications = enabled;
-        key = GSETTINGS_ENABLE_NOTIFICATIONS_KEY;
+        settings->set(GSETTINGS_ENABLE_NOTIFICATIONS_KEY, enabled);
+        return true;
 
-    } else if (role == SoundsNotify) {
+    case SoundsNotify:
         if (entry.soundsNotify == enabled) {
             return false;
         }
 
         entry.soundsNotify = enabled;
-        key = GSETTINGS_SOUNDS_NOTIFY_KEY;
+        settings->set(GSETTINGS_SOUNDS_NOTIFY_KEY, enabled);
+        return true;
 
-    } else if (role == VibrationsNotify) {
+    case VibrationsNotify:
         if (entry.vibrationsNotify == enabled) {
             return false;
         }
 
         entry.vibrationsNotify = enabled;
-        key = GSETTINGS_VIBRATIONS_NOTIFY_KEY;
+        settings->set(GSETTINGS_VIBRATIONS_NOTIFY_KEY, enabled);
+        return true;
 
-    } else if (role == BubblesNotify) {
+    case BubblesNotify:
         if (entry.bubblesNotify == enabled) {
             return false;
         }
 
         entry.bubblesNotify = enabled;
-        key = GSETTINGS_BUBBLES_NOTIFY_KEY;
-    
-    } else if (role == ListNotify) {
+        settings->set(GSETTINGS_BUBBLES_NOTIFY_KEY, enabled);
+        return true;
+
+    case ListNotify:
         if (entry.listNotify == enabled) {
             return false;
         }
 
         entry.listNotify = enabled;
-        key = GSETTINGS_LIST_NOTIFY_KEY;
+        settings->set(GSETTINGS_LIST_NOTIFY_KEY, enabled);
+        return true;
 
-    } else {
+    default:
         return false;
     }
-
-    if (!g_settings_set_boolean(settings, key.toUtf8().constData(), enabled)) {
-        qWarning() << Q_FUNC_INFO << "[ERROR] Unable to store notification settings";
-        return false;
-    }
-
-    g_object_unref(settings);
-    return true;
 }
 
 void ClickApplicationsModel::getApplicationDataFromDesktopFile(ClickApplicationEntry& entry)
@@ -218,33 +217,24 @@ void ClickApplicationsModel::getNotificationsSettings(ClickApplicationEntry& ent
         path = path + entry.pkgName + "/" + entry.appName + "/";
     }
 
-    GSettings *settings = g_settings_new_with_path(GSETTINGS_NOTIFICATIONS_SCHEMA_ID, path.toUtf8().constData());
+    QScopedPointer<QGSettings> settings(new QGSettings(GSETTINGS_NOTIFICATIONS_SCHEMA_ID, path.toUtf8().constData()));
 
-    entry.enableNotifications = g_settings_get_boolean(settings, GSETTINGS_ENABLE_NOTIFICATIONS_KEY);
-    entry.soundsNotify = g_settings_get_boolean(settings, GSETTINGS_SOUNDS_NOTIFY_KEY);
-    entry.vibrationsNotify = g_settings_get_boolean(settings, GSETTINGS_VIBRATIONS_NOTIFY_KEY);
-    entry.bubblesNotify = g_settings_get_boolean(settings, GSETTINGS_BUBBLES_NOTIFY_KEY);
-    entry.listNotify = g_settings_get_boolean(settings, GSETTINGS_LIST_NOTIFY_KEY);
-    
-    g_object_unref(settings);
+    entry.enableNotifications = settings->get(GSETTINGS_ENABLE_NOTIFICATIONS_KEY).toBool();
+    entry.soundsNotify = settings->get(GSETTINGS_SOUNDS_NOTIFY_KEY).toBool();
+    entry.vibrationsNotify = settings->get(GSETTINGS_VIBRATIONS_NOTIFY_KEY).toBool();
+    entry.bubblesNotify = settings->get(GSETTINGS_BUBBLES_NOTIFY_KEY).toBool();
+    entry.listNotify = settings->get(GSETTINGS_LIST_NOTIFY_KEY).toBool();
 }
 
 void ClickApplicationsModel::populateModel()
 {
-    GSettings *settings = g_settings_new(GSETTINGS_APPS_SCHEMA_ID);
-    GVariant *applications = g_settings_get_value(settings, GSETTINGS_APPLICATIONS_KEY);
-    GVariantIter *it;
-
-    g_variant_get(applications, "as", &it);
-    gchar *appEntry;
-    while (g_variant_iter_loop(it, "s", &appEntry)) {
-        QStringList entryData = QString(appEntry).split('/');
+    Q_FOREACH (QString appEntry, m_applications->get(GSETTINGS_APPLICATIONS_KEY).toStringList()) {
+        QStringList entryData = appEntry.split('/');
         if (entryData.size() != 3) {
-           continue;
+            continue;
         }
 
         ClickApplicationEntry entry;
-
         if (entryData[0] == "dpkg" && entryData[2] == "0") {
             // Legacy dpkg application
             entry.pkgName = entryData[1];
@@ -260,9 +250,21 @@ void ClickApplicationsModel::populateModel()
         beginInsertRows(QModelIndex(), rowCount(), rowCount());
         m_entries << entry;
         endInsertRows();
+        Q_EMIT rowCountChanged();
+    }
+}
+
+void ClickApplicationsModel::onApplicationsListChanged(const QString& key) {
+    if (key != GSETTINGS_APPLICATIONS_KEY) {
+        return;
     }
 
-    g_variant_iter_free(it);
-    g_variant_unref(applications);
-    g_object_unref(settings);
+    if (!m_entries.isEmpty()) {
+        beginResetModel();
+        m_entries.clear();
+        endResetModel();
+        Q_EMIT rowCountChanged();
+    }
+
+    populateModel();
 }
