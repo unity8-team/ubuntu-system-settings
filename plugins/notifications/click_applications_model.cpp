@@ -226,22 +226,48 @@ void ClickApplicationsModel::getNotificationsSettings(ClickApplicationEntry& ent
     entry.listNotify = settings->get(GSETTINGS_LIST_NOTIFY_KEY).toBool();
 }
 
+bool ClickApplicationsModel::parseApplicationKeyFromSettings(ClickApplicationEntry& entry, const QString& appEntry)
+{
+    QStringList entryData = appEntry.split('/');
+    if (entryData.size() != 3) {
+        return false;
+    }
+
+    if (entryData[0] == "dpkg" && entryData[2] == "0") {
+        // Legacy dpkg application
+        entry.pkgName = entryData[1];
+    } else {
+        entry.pkgName = entryData[0];
+        entry.appName = entryData[1];
+        entry.version = entryData[2];
+    }
+
+    return true;
+}
+
+int ClickApplicationsModel::getIndexByApplicationData(ClickApplicationEntry& entry)
+{
+    for (int i = 0; i < rowCount(); ++i) {
+         if (m_entries.at(i).pkgName != entry.pkgName) {
+             continue;
+         }
+
+         if (m_entries.at(i).appName != entry.appName) {
+             continue;
+         }
+
+         return i;
+    }
+
+    return -1;
+}
+
 void ClickApplicationsModel::populateModel()
 {
     Q_FOREACH (QString appEntry, m_applications->get(GSETTINGS_APPLICATIONS_KEY).toStringList()) {
-        QStringList entryData = appEntry.split('/');
-        if (entryData.size() != 3) {
-            continue;
-        }
-
         ClickApplicationEntry entry;
-        if (entryData[0] == "dpkg" && entryData[2] == "0") {
-            // Legacy dpkg application
-            entry.pkgName = entryData[1];
-        } else {
-            entry.pkgName = entryData[0];
-            entry.appName = entryData[1];
-            entry.version = entryData[2];
+        if (!parseApplicationKeyFromSettings(entry, appEntry)) {
+            continue;
         }
 
         getApplicationDataFromDesktopFile(entry);
@@ -259,12 +285,48 @@ void ClickApplicationsModel::onApplicationsListChanged(const QString& key) {
         return;
     }
 
-    if (!m_entries.isEmpty()) {
-        beginResetModel();
-        m_entries.clear();
-        endResetModel();
+    //Check for removed entries
+    for (int i = rowCount() - 1; i >= 0; --i) {
+        bool removed = true;        
+
+        Q_FOREACH (QString appEntry, m_applications->get(GSETTINGS_APPLICATIONS_KEY).toStringList()) {
+            ClickApplicationEntry entry;
+            if (!parseApplicationKeyFromSettings(entry, appEntry)) {
+                continue;
+            }
+
+            if (m_entries.at(i).pkgName == entry.pkgName && m_entries.at(i).appName == entry.appName) {
+                removed = false;
+                continue;
+            }
+        }
+
+        if (!removed) {
+            continue;
+        }
+
+        beginRemoveRows(QModelIndex(), i, i);
+        m_entries.removeAt(i);
+        endRemoveRows();
         Q_EMIT rowCountChanged();
     }
 
-    populateModel();
+    //Check for added entries
+    Q_FOREACH (QString appEntry, m_applications->get(GSETTINGS_APPLICATIONS_KEY).toStringList()) {
+        ClickApplicationEntry entry;
+        if (!parseApplicationKeyFromSettings(entry, appEntry)) {
+            continue;
+        }
+
+        if (getIndexByApplicationData(entry) >= 0) {
+            continue;
+        }
+
+        getApplicationDataFromDesktopFile(entry);
+
+        beginInsertRows(QModelIndex(), rowCount(), rowCount());
+        m_entries << entry;
+        endInsertRows();
+        Q_EMIT rowCountChanged();
+    }
 }

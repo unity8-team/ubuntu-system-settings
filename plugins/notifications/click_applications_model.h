@@ -78,6 +78,8 @@ private:
     bool saveNotifyEnabled(ClickApplicationEntry& entry, int role, bool enabled);
     void getApplicationDataFromDesktopFile(ClickApplicationEntry& entry);
     void getNotificationsSettings(ClickApplicationEntry& entry);
+    bool parseApplicationKeyFromSettings(ClickApplicationEntry& entry, const QString& appEntry);
+    int getIndexByApplicationData(ClickApplicationEntry& entry);
     void populateModel();
     QScopedPointer<QGSettings> m_applications;
 };
