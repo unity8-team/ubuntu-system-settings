@@ -160,6 +160,7 @@ ItemPage {
                 onClicked: pageStack.push(fingeprintPage, {
                     passcodeSet: securityPrivacy.securityType !== UbuntuSecurityPrivacyPanel.Swipe
                 })
+                visible: Biometryd.available
             }
 
             Component {

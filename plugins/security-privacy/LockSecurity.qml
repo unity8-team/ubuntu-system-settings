@@ -52,7 +52,7 @@ ItemPage {
 
     property var dialog: null
     property int enrolledFingerprints: 0
-    onEnrolledFingerprints: console.warn(enrolledFingerprints)
+    onEnrolledFingerprintsChanged: console.warn(enrolledFingerprints)
     UbuntuSecurityPrivacyPanel {
         id: securityPrivacy
     }
@@ -593,18 +593,34 @@ ItemPage {
         }
         onSucceeded: {
             // FIXME(jgdx): use result, not hard coded value
-            page.enrolledFingerprints = 10;
+            page.enrolledFingerprints = result;
             op = null;
+        }
+
+        function start () {
+            console.warn('start');
+            op = Biometryd.defaultDevice.templateStore.size(user);
+            op.start(sizeObserver);
         }
 
         property var op: null
 
         Component.onCompleted: {
-            op = Biometryd.defaultDevice.templateStore.size(user);
-            op.start(sizeObserver);
+            console.warn('sizeObserver completed');
+            if (Biometryd.available)
+                start();
         }
-
         Component.onDestruction: op && op.cancel();
+    }
+
+    Connections {
+        target: Biometryd
+        onAvailableChanged: {
+            console.warn("onAvailableChanged");
+            if (available) {
+                sizeObserver.start();
+            }
+        }
     }
 
     User {
