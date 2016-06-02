@@ -31,3 +31,17 @@ add_qml_test(system-update click_update
              ${CMAKE_BINARY_DIR}/tests/mocks/
              ${qmltest_DEFAULT_IMPORT_PATHS}
 )
+
+add_qml_test(system-update system_update
+             IMPORT_PATHS
+             ${CMAKE_SOURCE_DIR}/tests/plugins/system-update
+             ${CMAKE_BINARY_DIR}/tests/mocks/
+             ${qmltest_DEFAULT_IMPORT_PATHS}
+)
+
+add_qml_test(system-update global
+             IMPORT_PATHS
+             ${CMAKE_SOURCE_DIR}/tests/plugins/system-update
+             ${CMAKE_BINARY_DIR}/tests/mocks/
+             ${qmltest_DEFAULT_IMPORT_PATHS}
+)

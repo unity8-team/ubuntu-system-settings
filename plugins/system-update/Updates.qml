@@ -132,8 +132,8 @@ Column {
         onStop: updates.stop()
     }
 
-    ImageUpdate {
-        id: imageUpdate
+    SystemUpdates {
+        id: systemUpdate
         anchors { left: parent.left; right: parent.right }
         visible: (updates.haveSystemUpdate
                   && updates.managerStatus === UpdateManager.Idle)

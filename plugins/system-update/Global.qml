@@ -68,6 +68,7 @@ Item {
         }
 
         Button {
+            objectName: "updatesGlobalStopButton"
             text: i18n.tr("Stop")
             onClicked: g.stop()
             Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
@@ -87,6 +88,7 @@ Item {
         }
 
         Button {
+            objectName: "updatesGlobalInstallButton"
             text: {
                 if (g.requireRestart) {
                     return i18n.tr(
@@ -110,9 +112,13 @@ Item {
     RowLayout {
         id: pause
         anchors.fill: parent
-        visible: false
+        visible: {
+            var batchMode = g.managerStatus === UpdateManager.BatchMode;
+            return batchMode && updatesCount > 1;
+        }
 
         Button {
+            objectName: "updatesGlobalPauseButton"
             text: i18n.tr("Pause All")
             onClicked: g.pause()
             Layout.fillWidth: true
