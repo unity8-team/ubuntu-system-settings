@@ -53,8 +53,24 @@ ItemPage {
         id: displayLanguage
 
         DisplayLanguage {
+            displayMode: 0
+
             onLanguageChanged: {
-                PopupUtils.open(rebootNecessaryNotification, root, {
+                PopupUtils.open(rebootNecessaryNotificationLanguage, root, {
+                    revertTo: oldLanguage
+                })
+            }
+        }
+    }
+
+    Component {
+        id: displayFormat
+
+        DisplayLanguage {
+            displayMode: 1
+
+            onLanguageChanged: {
+                PopupUtils.open(rebootNecessaryNotificationFormat, root, {
                     revertTo: oldLanguage
                 })
             }
@@ -68,7 +84,7 @@ ItemPage {
     }
 
     Component {
-        id: rebootNecessaryNotification
+        id: rebootNecessaryNotificationLanguage
 
         RebootNecessary {
 
@@ -78,6 +94,20 @@ ItemPage {
             onRevert: {
                 plugin.currentLanguage = to;
                 i18n.language = plugin.languageCodes[to]
+            }
+        }
+    }
+
+    Component {
+        id: rebootNecessaryNotificationFormat
+
+        RebootNecessary {
+
+            onReboot: {
+                plugin.reboot();
+            }
+            onRevert: {
+                plugin.currentFormat = to;
             }
         }
     }
@@ -106,7 +136,6 @@ ItemPage {
                 iconSource: "image://theme/language-chooser"
                 text: i18n.tr("Display language…")
                 objectName: "displayLanguage"
-                showDivider: false
                 component: Label {
                     property int currentLanguage: plugin.currentLanguage
                     objectName: "currentLanguage"
@@ -116,6 +145,13 @@ ItemPage {
                 }
 
                 onClicked: PopupUtils.open(displayLanguage)
+            }
+
+            ListItem.SingleValue {
+                text: i18n.tr("Date & number formats")
+                progression: true
+                value: plugin.languageNames[plugin.currentFormat]
+                onClicked: PopupUtils.open(displayFormat)
             }
 
             ListItem.Divider {}

@@ -56,6 +56,11 @@ public:
                WRITE setCurrentLanguage
                NOTIFY currentLanguageChanged)
 
+    Q_PROPERTY(int currentFormat
+               READ currentFormat
+               WRITE setCurrentFormat
+               NOTIFY currentFormatChanged)
+
     Q_PROPERTY(SubsetModel *spellCheckingModel
                READ spellCheckingModel
                CONSTANT)
@@ -72,6 +77,10 @@ public:
     int currentLanguage() const;
     void setCurrentLanguage(int index);
     Q_SIGNAL void currentLanguageChanged() const;
+
+    int currentFormat() const;
+    void setCurrentFormat(int index);
+    Q_SIGNAL void currentFormatChanged() const;
 
     SubsetModel *spellCheckingModel();
     Q_SLOT void spellCheckingModelChanged();
@@ -104,6 +113,8 @@ private:
 
     int m_currentLanguage;
     int m_nextCurrentLanguage;
+    int m_currentFormat;
+    int m_nextCurrentFormat;
     ActUserManager *m_manager;
     ActUser *m_user;
 
