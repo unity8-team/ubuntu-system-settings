@@ -28,8 +28,8 @@ Item {
     property int updatesCount: 0
     property bool online: false
 
-    // Indicate whether or not this component should be displayed
-    property bool hidden: updatesCount === 1 && managerStatus === UpdateManager.Idle
+    // The only case where the global should be hidden.
+    property bool hidden: updatesCount <= 1 && managerStatus === UpdateManager.Idle
 
     signal stop()
     signal pause()

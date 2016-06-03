@@ -93,7 +93,6 @@ Item {
             cGlob.managerStatus = UpdateManager.CheckingAllUpdates;
 
             compare(cGlob.hidden, false, "global was not visible");
-            wait(3000)
         }
 
         function test_stop() {
@@ -105,7 +104,6 @@ Item {
             compare(stop.visible, true);
             mouseClick(stop, stop.width / 2, stop.height / 2);
             stopSignalSpy.wait();
-            wait(3000)
         }
 
         function test_checkIdle() {
@@ -114,7 +112,6 @@ Item {
             cGlob.managerStatus = UpdateManager.Idle;
 
             compare(cGlob.hidden, false, "global was not visible");
-            wait(3000)
         }
 
         function test_installApps() {
@@ -127,7 +124,6 @@ Item {
             compare(install.text, i18n.tr("Install %1 update", "Install %1 updates", 2).arg(2));
             mouseClick(install, install.width / 2, install.height / 2);
             installSignalSpy.wait();
-            wait(3000)
         }
 
         function test_installWithRestart() {
@@ -141,7 +137,6 @@ Item {
             compare(install.text, i18n.tr("Install %1 update…", "Install %1 updates…", 2).arg(2));
             mouseClick(install, install.width / 2, install.height / 2);
             installSignalSpy.wait();
-            wait(3000)
         }
 
         function test_singleUpdate() {
@@ -150,7 +145,6 @@ Item {
             cGlob.managerStatus = UpdateManager.Idle;
 
             compare(cGlob.hidden, true, "global was visible for single update");
-            wait(3000)
         }
 
         function test_batchMode() {
@@ -159,7 +153,6 @@ Item {
             cGlob.managerStatus = UpdateManager.BatchMode;
 
             compare(cGlob.hidden, false, "global was hidden in batchmode");
-            wait(3000)
         }
 
         function test_pause() {
@@ -171,7 +164,6 @@ Item {
             compare(pause.visible, true);
             mouseClick(pause, pause.width / 2, pause.height / 2);
             pauseSignalSpy.wait();
-            wait(3000)
         }
     }
 }

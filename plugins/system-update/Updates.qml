@@ -24,96 +24,18 @@ import Ubuntu.SystemSettings.Update 1.0
 
 Column {
     id: updates
-
-    /*!
-        \qmlproperty bool havePower
-
-        Indicates whether or not there is sufficient power to perform
-        updates. If disabled, it causes the UI to prompt for power to
-        be provided if user initiates an update.
-    */
     property bool havePower: false
-
-    /*!
-        \qmlproperty bool haveSystemUpdate
-
-        Indicates whether or not there exist a system update.
-    */
     property bool haveSystemUpdate: false
-
-    /*!
-        \qmlproperty UpdateManager::ManagerStatus managerStatus
-
-        Reflects state of manager.
-    */
     property int managerStatus
-
-    /*!
-        \qmlproperty int updatesCount
-
-        Amount of updates.
-    */
     property int updatesCount
-
-    /*!
-        \qmlproperty bool authenticated
-
-        Indicates whether or not the user is authenticated.
-    */
     property bool authenticated: false
-
-    /*!
-        \qmlproperty bool online
-
-        Indicates whether or not we're connected to the internet.
-    */
     property bool online: false
-
-    /*!
-        \qmlproperty alias systemImageBackend
-
-        Holds the system image backend.
-    */
     property alias systemImageBackend: imageUpdate.systemImageBackend
-
-    /*!
-        \qmlproperty alias clickUpdatesModel
-
-        Holds the click updates model. Normally this is UDM.downloads.
-    */
     property alias clickUpdatesModel: clickUpdates.model
 
-    /*!
-        \qmlsignal requestAuthentication
-
-        Indicates that the user wanted to authenticate.
-
-        \sa authenticated
-    */
     signal requestAuthentication()
-
-    /*!
-        \qmlsignal stop
-
-        Indicates that the user wants some action to stop.
-        Note: Currently this is only implemented for checks.
-    */
     signal stop()
-
-    /*!
-        \qmlsignal clickPackageRequestedRetry(string packageName, int revision)
-
-        Indicates that the click update should be retried.
-    */
-    signal clickPackageRequestedRetry(string packageName, int revision)
-
-    /*!
-        \qmlsignal udmDownloadCreated(string packageName, int revision, int udmId)
-
-        Indicates that a UDM download was created for this a click update.
-    */
     signal udmDownloadCreated(string packageName, int revision, int udmId)
-
 
     Global {
         id: glob
@@ -150,5 +72,31 @@ Column {
     NotAuthenticatedNotification {
         visible: !authenticated
         onRequestAuthentication: updates.requestAuthentication()
+    }
+
+
+    Rectangle {
+        color: "white"
+        anchors.fill: parent
+        visible: placeholder.text
+
+        Label {
+            id: placeholder
+            anchors.fill: parent
+            verticalAlignment: Text.AlignVCenter
+            horizontalAlignment: Text.AlignHCenter
+            wrapMode: Text.WordWrap
+            text: {
+                var s = UpdateManager.managerStatus;
+                if (!UpdateManager.online) {
+                    return i18n.tr("Connect to the Internet to check for updates.");
+                } else if (s === UpdateManager.Idle && UpdateManager.updatesCount === 0) {
+                    return i18n.tr("Software is up to date");
+                } else if (s === UpdateManager.ServerError || s === UpdateManager.NetworkError) {
+                    return i18n.tr("The update server is not responding. Try again later.");
+                }
+                return "";
+            }
+        }
     }
 }
