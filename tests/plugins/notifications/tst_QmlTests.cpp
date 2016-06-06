@@ -29,9 +29,10 @@ class ClickApplicationsModelMock : public ClickApplicationsModel {
     Q_OBJECT
 
 public:
-    static bool foo() {
-        return false;
-    }
+    Q_INVOKABLE void foo() { qWarning() << "[DEBUG] MOCK BAR"; }
+
+protected Q_SLOTS:
+    void populateModel() { /* DO NOTHING */ }
 };
 
 #define MAKE_SINGLETON_FACTORY(type) \

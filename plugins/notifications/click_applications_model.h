@@ -70,6 +70,9 @@ protected:
     };
     QList<ClickApplicationEntry> m_entries;
 
+protected Q_SLOTS:
+    virtual void populateModel();
+
 Q_SIGNALS:
     void rowCountChanged();
 
@@ -86,7 +89,6 @@ private:
     void addMissingDesktopDataEntry(ClickApplicationEntry& entry);
     void addEntry(ClickApplicationEntry& entry);
     void removeEntryByIndex(int index);
-    void populateModel();
 
     QScopedPointer<QGSettings> m_applications;
     QList<ClickApplicationEntry> m_missingDesktopDataEntries;

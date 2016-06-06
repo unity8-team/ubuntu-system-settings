@@ -34,11 +34,10 @@
 
 ClickApplicationsModel::ClickApplicationsModel(QObject* parent)
     : QAbstractListModel(parent),
-    m_applications(new QGSettings(GSETTINGS_APPS_SCHEMA_ID))
+    m_applications(0)
 {
-    populateModel();
-
-    connect(m_applications.data(), SIGNAL(changed(const QString&)), SLOT(onApplicationsListChanged(const QString&)));
+    // This way populateModel can be override during tests
+    QTimer::singleShot(0, this, SLOT(populateModel()));
 
     m_checkMissingDesktopDataTimer = new QTimer(this);
     m_checkMissingDesktopDataTimer->setInterval(1000);
@@ -294,6 +293,10 @@ void ClickApplicationsModel::removeEntryByIndex(int index)
 
 void ClickApplicationsModel::populateModel()
 {
+    m_applications.reset(new QGSettings(GSETTINGS_APPS_SCHEMA_ID));
+
+    connect(m_applications.data(), SIGNAL(changed(const QString&)), SLOT(onApplicationsListChanged(const QString&)));
+
     Q_FOREACH (QString appEntry, m_applications->get(GSETTINGS_APPLICATIONS_KEY).toStringList()) {
         ClickApplicationEntry entry;
         if (!parseApplicationKeyFromSettings(entry, appEntry)) {
