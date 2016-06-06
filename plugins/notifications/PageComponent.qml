@@ -30,12 +30,14 @@ ItemPage {
 
     ClickApplicationsNotifyModel {
         id: clickAppsSoundsNotifyModel
+        objectName: "clickAppsSoundsNotifyModel"
         notifyType: ClickApplicationsNotifyModel.SoundsNotify
         sourceModel: ClickApplicationsModel
     }
 
     ClickApplicationsNotifyModel {
         id: clickAppsVibrationsNotifyModel
+        objectName: "clickAppsVibrationsNotifyModel"
         notifyType: ClickApplicationsNotifyModel.VibrationsNotify
         sourceModel: ClickApplicationsModel
     }
@@ -79,6 +81,7 @@ ItemPage {
                 ListItemLayout {
                     title.text: i18n.tr("Apps that notify with sound");
                     Label {
+                        objectName: "clickAppsSoundsNotifyLabel"
                         text: clickAppsSoundsNotifyModel.count
                         fontSize: "large"
                         SlotsLayout.position: SlotsLayout.Trailing;
@@ -110,6 +113,7 @@ ItemPage {
                 ListItemLayout {
                     title.text: i18n.tr("Apps that notify with vibration");
                     Label {
+                        objectName: "clickAppsVibrationsNotifyLabel"
                         text: clickAppsVibrationsNotifyModel.count
                         fontSize: "large"
                         SlotsLayout.position: SlotsLayout.Trailing;

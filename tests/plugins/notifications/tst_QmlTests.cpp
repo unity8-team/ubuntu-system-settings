@@ -29,7 +29,83 @@ class ClickApplicationsModelMock : public ClickApplicationsModel {
     Q_OBJECT
 
 public:
-    Q_INVOKABLE void foo() { qWarning() << "[DEBUG] MOCK BAR"; }
+    Q_INVOKABLE void addApplication(const QString& pkgName, const QString& appName) {
+        ClickApplicationEntry entry;
+
+        entry.pkgName = pkgName;
+        entry.appName = appName;
+        entry.displayName = appName;
+
+        entry.enableNotifications = true;
+        entry.soundsNotify = true;
+        entry.vibrationsNotify = true;
+        entry.bubblesNotify = true;
+        entry.listNotify = true;
+
+        beginInsertRows(QModelIndex(), rowCount(), rowCount());
+        m_entries << entry;
+        endInsertRows();
+        Q_EMIT rowCountChanged();
+    }
+
+    Q_INVOKABLE void removeApplicationByIndex(int index) {
+        beginRemoveRows(QModelIndex(), index, index);
+        m_entries.removeAt(index);
+        endRemoveRows();
+        Q_EMIT rowCountChanged();
+    }
+
+    Q_INVOKABLE void cleanup() {
+        beginResetModel();
+        m_entries.clear();
+        endResetModel();
+        Q_EMIT rowCountChanged();
+    }
+
+    Q_INVOKABLE void setNotificationByIndex(int role, int idx, bool enabled) {
+        switch (role) {
+        case EnableNotifications:
+            m_entries[idx].enableNotifications = enabled;
+            break;
+
+        case SoundsNotify:
+            m_entries[idx].soundsNotify = enabled;
+            break;
+
+        case VibrationsNotify:
+            m_entries[idx].vibrationsNotify = enabled;
+            break;
+
+        case BubblesNotify:
+            m_entries[idx].bubblesNotify = enabled;
+            break;
+
+        case ListNotify:
+            m_entries[idx].listNotify = enabled;
+            break;
+
+        default:
+            return;
+        }
+
+        QVector<int> roles;
+        roles << role;
+
+        if (role != EnableNotifications) {
+            if (!m_entries[idx].soundsNotify &&
+                !m_entries[idx].vibrationsNotify &&
+                !m_entries[idx].bubblesNotify &&
+                !m_entries[idx].listNotify ) {
+                
+                if (m_entries[idx].enableNotifications) {
+                    m_entries[idx].enableNotifications = false;
+                    roles << EnableNotifications;
+                }
+            }
+        }
+
+        Q_EMIT dataChanged(this->index(idx, 0), this->index(idx, 0), roles);
+    }
 
 protected Q_SLOTS:
     void populateModel() { /* DO NOTHING */ }

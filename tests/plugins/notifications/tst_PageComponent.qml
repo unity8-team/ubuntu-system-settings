@@ -24,19 +24,136 @@ import Ubuntu.SystemSettings.Notifications 1.0
 import NotificationsSource 1.0
 
 PageComponent {
-    id: area
-    height: 48
-    width: height
+    id: root
+
+    width: 300
+    height: 500
 
     TestCase {
-        name: "ItemTests"
+        name: "NotificationsPageComponent"
         when: windowShown
 
-        function init() {
-            ClickApplicationsModel.foo()
+        function cleanup() {
+            ClickApplicationsModel.cleanup()
         }
-        function test_double_click_success() {
-            compare(0, 0);
+
+        function test_start_empty() {
+            var soundsModel = findChild(root, "clickAppsSoundsNotifyModel")
+            compare(soundsModel.count, 0)
+
+            var vibrationsModel = findChild(root, "clickAppsVibrationsNotifyModel")
+            compare(vibrationsModel.count, 0)
+
+            var appsList = findChild(root, "notificationsList")
+            compare(appsList.count, 0)
+        }
+
+        function test_updated_when_added() {
+            var soundsModel = findChild(root, "clickAppsSoundsNotifyModel")
+            compare(soundsModel.count, 0)
+
+            var vibrationsModel = findChild(root, "clickAppsVibrationsNotifyModel")
+            compare(vibrationsModel.count, 0)
+
+            var appsList = findChild(root, "notificationsList")
+            compare(appsList.count, 0)
+
+            ClickApplicationsModel.addApplication("Pkg01", "App01")
+            ClickApplicationsModel.addApplication("Pkg02", "App02")
+
+            compare(soundsModel.count, 2)
+            compare(vibrationsModel.count, 2)
+            compare(appsList.count, 2)
+
+            var soundsLabel = findChild(root, "clickAppsSoundsNotifyLabel")
+            tryCompare(soundsLabel, "text", "2")
+
+            var vibrationsLabel = findChild(root, "clickAppsVibrationsNotifyLabel")
+            tryCompare(vibrationsLabel, "text", "2")
+        }
+
+        function test_updated_when_removed() {
+            ClickApplicationsModel.addApplication("Pkg01", "App01")
+            ClickApplicationsModel.addApplication("Pkg02", "App02")
+
+            var soundsModel = findChild(root, "clickAppsSoundsNotifyModel")
+            compare(soundsModel.count, 2)
+
+            var vibrationsModel = findChild(root, "clickAppsVibrationsNotifyModel")
+            compare(vibrationsModel.count, 2)
+
+            var appsList = findChild(root, "notificationsList")
+            compare(appsList.count, 2)
+
+            ClickApplicationsModel.removeApplicationByIndex(0)
+
+            compare(soundsModel.count, 1)
+            compare(vibrationsModel.count, 1)
+            compare(appsList.count, 1)
+
+            var soundsLabel = findChild(root, "clickAppsSoundsNotifyLabel")
+            tryCompare(soundsLabel, "text", "1")
+
+            var vibrationsLabel = findChild(root, "clickAppsVibrationsNotifyLabel")
+            tryCompare(vibrationsLabel, "text", "1")
+        }
+
+        function test_sounds_filter_is_updated() {
+            var soundsModel = findChild(root, "clickAppsSoundsNotifyModel")
+            compare(soundsModel.count, 0)
+
+            var soundsLabel = findChild(root, "clickAppsSoundsNotifyLabel")
+
+            ClickApplicationsModel.addApplication("Pkg01", "App01")
+            ClickApplicationsModel.addApplication("Pkg02", "App02")
+            ClickApplicationsModel.addApplication("Pkg03", "App03")
+
+            compare(soundsModel.count, 3)
+            tryCompare(soundsLabel, "text", "3")
+
+            ClickApplicationsModel.setNotificationByIndex(ClickApplicationsModel.EnableNotifications, 0, false)
+
+            compare(soundsModel.count, 2)
+            tryCompare(soundsLabel, "text", "2")
+
+            ClickApplicationsModel.setNotificationByIndex(ClickApplicationsModel.SoundsNotify, 1, false)
+
+            compare(soundsModel.count, 1)
+            tryCompare(soundsLabel, "text", "1")
+
+            ClickApplicationsModel.setNotificationByIndex(ClickApplicationsModel.VibrationsNotify, 2, false)
+
+            compare(soundsModel.count, 1)
+            tryCompare(soundsLabel, "text", "1")
+        }
+
+        function test_vibrations_filter_is_updated() {
+            var vibrationsModel = findChild(root, "clickAppsVibrationsNotifyModel")
+            compare(vibrationsModel.count, 0)
+
+            var vibrationsLabel = findChild(root, "clickAppsVibrationsNotifyLabel")
+
+            ClickApplicationsModel.addApplication("Pkg01", "App01")
+            ClickApplicationsModel.addApplication("Pkg02", "App02")
+            ClickApplicationsModel.addApplication("Pkg03", "App03")
+
+            compare(vibrationsModel.count, 3)
+            tryCompare(vibrationsLabel, "text", "3")
+
+            ClickApplicationsModel.setNotificationByIndex(ClickApplicationsModel.EnableNotifications, 0, false)
+
+            compare(vibrationsModel.count, 2)
+            tryCompare(vibrationsLabel, "text", "2")
+
+            ClickApplicationsModel.setNotificationByIndex(ClickApplicationsModel.VibrationsNotify, 1, false)
+
+            compare(vibrationsModel.count, 1)
+            tryCompare(vibrationsLabel, "text", "1")
+
+            ClickApplicationsModel.setNotificationByIndex(ClickApplicationsModel.SoundsNotify, 2, false)
+
+            compare(vibrationsModel.count, 1)
+            tryCompare(vibrationsLabel, "text", "1")
         }
     }
 }
