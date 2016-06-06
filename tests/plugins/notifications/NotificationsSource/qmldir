@@ -1,0 +1,2 @@
+module NotificationsSource
+PageComponent 1.0 ../../../../plugins/notifications/PageComponent.qml
