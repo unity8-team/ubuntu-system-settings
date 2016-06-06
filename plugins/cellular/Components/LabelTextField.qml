@@ -37,7 +37,7 @@ TextField {
             property bool error: (field.hasOwnProperty("errorHighlight") &&
                                  field.errorHighlight &&
                                  !field.acceptableInput)
-            onErrorChanged: error ? UbuntuColors.orange : color
+            onErrorChanged: error ? theme.palette.normal.negative : color
             color: Theme.palette.selected.background
             anchors.fill: parent
             visible: field.activeFocus

@@ -174,7 +174,6 @@ ItemPage {
 
                 Button {
                     Layout.fillWidth: true
-                    color: UbuntuColors.lightGrey
                     text: i18n.tr("Cancel")
                     onClicked: PopupUtils.close(changePinDialog)
                 }
@@ -182,7 +181,7 @@ ItemPage {
                 Button {
                     id: confirmButton
                     Layout.fillWidth: true
-                    color: UbuntuColors.green
+                    color: theme.palette.normal.positive
                     text: i18n.tr("Change")
                     enabled: false
                     onClicked: {
@@ -314,7 +313,6 @@ ItemPage {
                 Button {
                     objectName: "cancelButton"
                     Layout.fillWidth: true
-                    color: UbuntuColors.lightGrey
                     text: i18n.tr("Cancel")
                     onClicked: {
                         if (curSim.lockedPins.length < 1)
@@ -329,7 +327,7 @@ ItemPage {
                     id: lockButton
                     objectName: "lockButton"
                     Layout.fillWidth: true
-                    color: UbuntuColors.green
+                    color: theme.palette.normal.positive
 
                     text: curSim.lockedPins.length > 0 ? i18n.tr("Unlock") : i18n.tr("Lock")
                     enabled: false
@@ -428,7 +426,7 @@ ItemPage {
                             objectName: "unlock"
                             enabled: sims[index].simMng.pinRequired !== 'none'
                             text: i18n.tr("Unlock…")
-                            color: UbuntuColors.green
+                            color: theme.palette.normal.positive
                             onClicked: Connectivity.unlockModem(sims[index].path)
                         }
                     }

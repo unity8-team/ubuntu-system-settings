@@ -176,17 +176,13 @@ Column {
                     property bool error: (field.hasOwnProperty("errorHighlight") &&
                                           field.errorHighlight &&
                                           !field.acceptableInput)
-                    onErrorChanged: error ? UbuntuColors.orange : color
+                    onErrorChanged: error ? theme.palette.normal.negative : color
                     color: Theme.palette.normal.background
                     anchors.fill: parent
                     visible: field.activeFocus
                 }
             }
 
-            cursorDelegate: Rectangle {
-                width: units.dp(1)
-                color: UbuntuColors.orange
-            }
             onVisibleChanged:
                 if (visible === true) forceActiveFocus()
         }
@@ -218,7 +214,7 @@ Column {
         height: contentHeight + units.gu(4)
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
-        color: UbuntuColors.red
+        color: theme.palette.normal.negative
         text: i18n.tr("Call forwarding can’t be changed right now.")
     }
 
