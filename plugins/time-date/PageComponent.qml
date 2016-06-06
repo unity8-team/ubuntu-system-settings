@@ -23,7 +23,7 @@ import SystemSettings 1.0
 import Ubuntu.Components 1.3
 import Ubuntu.Components.ListItems 1.3 as ListItem
 import Ubuntu.Components.Popups 1.3
-import Ubuntu.SystemSettings.TimeDate 1.0
+import Ubuntu.SystemSettings.TimeDate 1.1
 
 ItemPage {
     id: root
@@ -65,8 +65,7 @@ ItemPage {
             ListItem.SingleValue {
                 objectName: "timeZone"
                 id: timeZone
-                //e.g. America/New_York -> America/New York
-                text: timeDatePanel.timeZone.replace("_", " ")
+                text: timeDatePanel.timeZoneName
                 value: getUTCOffset()
                 progression: true
                 onClicked: pageStack.push(Qt.resolvedUrl("ChooseTimeZone.qml"), {
