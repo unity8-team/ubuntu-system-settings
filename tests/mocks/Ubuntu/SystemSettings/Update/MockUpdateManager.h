@@ -40,7 +40,7 @@ Q_OBJECT
         KindUnknown
     };
 
-        enum UpdateState
+    enum UpdateState
     {
         StateUnknown,
         StateAvailable,
