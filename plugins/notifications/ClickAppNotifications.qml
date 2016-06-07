@@ -71,6 +71,7 @@ ItemPage {
                 title.text: i18n.tr("Enable Notifications")
                 Switch {
                     id: enableNotificationsSwitch
+                    objectName: "enableNotificationsSwitch"
                     SlotsLayout.position: SlotsLayout.Leading
                 }
             }
@@ -87,6 +88,7 @@ ItemPage {
                 title.text: i18n.tr("Sounds")
                 CheckBox {
                     id: soundsChecked
+                    objectName: "soundsChecked"
                     SlotsLayout.position: SlotsLayout.Leading
                     enabled: appNotificationsPage.enableNotifications
                 }
@@ -100,6 +102,7 @@ ItemPage {
                 title.text: i18n.tr("Vibrations")
                 CheckBox {
                     id: vibrationsChecked
+                    objectName: "vibrationsChecked"
                     SlotsLayout.position: SlotsLayout.Leading
                     enabled: appNotificationsPage.enableNotifications
                 }
@@ -113,6 +116,7 @@ ItemPage {
                 title.text: i18n.tr("Notification Bubbles")
                 CheckBox {
                     id: bubblesChecked
+                    objectName: "bubblesChecked"
                     SlotsLayout.position: SlotsLayout.Leading
                     enabled: appNotificationsPage.enableNotifications
                 }
@@ -126,6 +130,7 @@ ItemPage {
                 title.text: i18n.tr("Notification List")
                 CheckBox {
                     id: listChecked
+                    objectName: "listChecked"
                     SlotsLayout.position: SlotsLayout.Leading
                     enabled: appNotificationsPage.enableNotifications
                 }
