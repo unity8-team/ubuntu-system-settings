@@ -33,7 +33,7 @@ ItemPage {
 
     ListView {
         id: appsVibrationsNotifyList
-        objectName: "appsVibrationNotifyList"
+        objectName: "appsVibrationsNotifyList"
 
         anchors {
             left: parent.left
