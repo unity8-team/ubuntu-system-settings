@@ -33,25 +33,21 @@ Column {
         right: parent.right
     }
 
-    ListItems.ThinDivider {}
-
     Label {
         text: i18n.tr("Sign in to Ubuntu One to receive updates for apps.")
         horizontalAlignment: Text.AlignHCenter
         wrapMode: Text.Wrap
         anchors {
             left: parent.left
+            leftMargin: units.gu(10)
             right: parent.right
+            rightMargin: units.gu(10)
         }
     }
     Button {
+        objectName: "updateRequestAuthButton"
         text: i18n.tr("Sign In…")
-        anchors {
-            left: parent.left
-            right: parent.right
-            leftMargin: units.gu(2)
-            rightMargin: units.gu(2)
-        }
+        anchors.horizontalCenter: parent.horizontalCenter
         // onClicked: uoaConfig.exec()
         onClicked: credentialsNotification.requestAuthentication()
     }

@@ -40,7 +40,7 @@ Item {
     property string errorTitle
     property string errorDetail
 
-    property alias name: name.text
+    property alias name: nameLabel.text
     property alias iconUrl: icon.source
     property alias changelog: changelogLabel.text
     property alias progress: progressBar.value
@@ -71,7 +71,7 @@ Item {
     // transitions: Transition {
     //     from: ""; to: "done"
     //     SequentialAnimation {
-    //         // Dummy, since PauseAniation is buggy here.
+    //         // Dummy, since PauseAnimation is buggy here.
     //         PropertyAnimation { property: "opacity"; duration: 2000 }
     //         PropertyAnimation {
     //             target: update
@@ -91,7 +91,7 @@ Item {
 
     height: {
         var h = 0;
-        var nameHeight = name.height + name.anchors.topMargin;
+        var nameHeight = nameLabel.height + nameLabel.anchors.topMargin;
         var buttonHeight = button.height + button.anchors.topMargin;
         var versionHeight = expandableVersionLabel.height + expandableVersionLabel.anchors.topMargin;
 
@@ -142,7 +142,7 @@ Item {
     }
 
     Label {
-        id: name
+        id: nameLabel
         anchors {
             top: parent.top
             topMargin: units.gu(2)
@@ -270,7 +270,7 @@ Item {
         id: expandableVersionLabel
         objectName: "updateVersionLabel"
         anchors {
-            top: name.bottom
+            top: nameLabel.bottom
             topMargin: units.gu(1)
             left: iconSlot.right
         }
@@ -308,7 +308,7 @@ Item {
         id: downloadLabel
         objectName: "updateDownloadLabel"
         anchors {
-            top: name.bottom
+            top: nameLabel.bottom
             topMargin: units.gu(1)
             left: iconSlot.right
         }
@@ -347,7 +347,7 @@ Item {
         id: statusLabel
         objectName: "updateStatusLabel"
         anchors {
-            top: name.bottom
+            top: nameLabel.bottom
             topMargin: units.gu(1)
             right: parent.right
             rightMargin: units.gu(2)
@@ -388,7 +388,7 @@ Item {
         property alias detail: errorElementDetail.text
 
         anchors {
-            top: name.bottom
+            top: nameLabel.bottom
             left: iconSlot.right
             right: parent.right
             rightMargin: units.gu(2)

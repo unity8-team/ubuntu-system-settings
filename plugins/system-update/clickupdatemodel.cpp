@@ -68,6 +68,7 @@ const char* ClickUpdateModel::COLUMN_NAMES[] = {
     "changelog",
     "udm_download_id",
     "click_token",
+    "command",
     NULL
 };
 

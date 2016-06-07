@@ -26,34 +26,33 @@ Update {
     property int revision
     property var downloadId: null
     property var download: null
-    property var command
+    property string command
     property string clickToken
     property string downloadUrl
     property string downloadSha512
-    property string remoteVersion
     property string headers
 
     onDownloadIdChanged: {
         if (downloadId === null) {
             var metadata = {
-                "command": command.split(" "),
-                "title": name,
+                "command": update.command.split(" "),
+                "title": update.name,
                 "showInIndicator": false,
                 // "downloadUrl": download_url,
             };
             var hdrs = {
-                "X-Click-Token": clickToken
+                "X-Click-Token": update.clickToken
             };
             var metadataObj = mdt.createObject(update, metadata);
             var singleDownloadObj = sdl.createObject(update, {
-                "url": downloadUrl,
+                "url": update.downloadUrl,
                 "autoStart": false,
-                "hash": downloadSha512,
+                "hash": update.downloadSha512,
                 "algorithm": "sha512",
                 "headers": hdrs,
                 "metadata": metadataObj
             });
-            singleDownloadObj.download(downloadUrl);
+            singleDownloadObj.download(update.downloadUrl);
             download = singleDownloadObj;
         }
     }

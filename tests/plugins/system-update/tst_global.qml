@@ -43,7 +43,7 @@ Item {
                 margins: units.gu(2)
             }
             width: testRoot.width
-            height: hidden ? 0 : units.gu(6)
+            height: units.gu(6)
         }
     }
 
@@ -122,6 +122,7 @@ Item {
             var install = findChild(cGlob, "updatesGlobalInstallButton");
             compare(install.visible, true);
             compare(install.text, i18n.tr("Install %1 update", "Install %1 updates", 2).arg(2));
+            tryCompare
             mouseClick(install, install.width / 2, install.height / 2);
             installSignalSpy.wait();
         }

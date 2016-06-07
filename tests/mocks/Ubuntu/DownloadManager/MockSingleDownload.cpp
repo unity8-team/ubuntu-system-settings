@@ -28,7 +28,6 @@ MockSingleDownload::MockSingleDownload(QObject *parent)
     , m_hash("")
     , m_algorithm("")
 {
-    qDebug() << "MockSingleDownload init";
 }
 
 void MockSingleDownload::start()
