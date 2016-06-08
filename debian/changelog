@@ -1,3 +1,9 @@
+ubuntu-system-settings (0.4+16.10.20160608-0ubuntu1) yakkety; urgency=medium
+
+  * Show user-friendly city name for the timezone. (LP: #1566295)
+
+ -- Robert Bruce Park <robert.park@canonical.com>  Wed, 08 Jun 2016 17:42:46 +0000
+
 ubuntu-system-settings (0.4+16.10.20160525-0ubuntu1) yakkety; urgency=medium
 
   [ Michael Terry ]
