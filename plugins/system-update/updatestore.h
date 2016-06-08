@@ -14,36 +14,36 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef PLUGINS_SYSTEM_UPDATE_CLICKUPDATESTORE_H_
-#define PLUGINS_SYSTEM_UPDATE_CLICKUPDATESTORE_H_
+#ifndef PLUGINS_SYSTEM_UPDATE_UPDATESTORE_H
+#define PLUGINS_SYSTEM_UPDATE_UPDATESTORE_H
 
 #include <QDateTime>
 #include <QDebug>
 #include <QSqlDatabase>
 
 #include "clickupdatemetadata.h"
-#include "clickupdatemodel.h"
+#include "updatemodel.h"
 
 namespace UpdatePlugin
 {
 
-class ClickUpdateStore : public QObject
+class UpdateStore : public QObject
 {
     Q_OBJECT
 public:
-    explicit ClickUpdateStore(QObject *parent = 0);
-    ~ClickUpdateStore();
+    explicit UpdateStore(QObject *parent = 0);
+    ~UpdateStore();
 
     // For testing purposes.
-    explicit ClickUpdateStore(const QString &dbpath, QObject *parent = 0);
+    explicit UpdateStore(const QString &dbpath, QObject *parent = 0);
 
-    Q_PROPERTY(ClickUpdateModel* installedUpdates READ installedUpdates
+    Q_PROPERTY(UpdateModel* installedUpdates READ installedUpdates
                CONSTANT)
-    Q_PROPERTY(ClickUpdateModel* activeUpdates READ activeUpdates
+    Q_PROPERTY(UpdateModel* pendingClickUpdates READ pendingClickUpdates
                CONSTANT)
 
-    ClickUpdateModel *installedUpdates();
-    ClickUpdateModel *activeUpdates();
+    UpdateModel *installedUpdates();
+    UpdateModel *pendingClickUpdates();
     QDateTime lastCheckDate();
     void setLastCheckDate(const QDateTime &lastCheckUtc);
 
@@ -51,7 +51,7 @@ public:
     // Can safely be called multiple times for the same update.
     void add(const ClickUpdateMetadata *meta);
 
-    // Mark a click update as installed.
+    // Mark an update as installed.
     void markInstalled(const QString &appId, const int &revision);
 
     void setUdmId(const QString &appId, const int &revision, const int &udmId);
@@ -63,7 +63,7 @@ public:
     void pruneDb();
 
 private slots:
-    void queryActive();
+    void queryPending();
     void queryInstalled();
     void queryAll();
 
@@ -76,11 +76,14 @@ private:
     bool openDb();
 
     QSqlDatabase m_db = QSqlDatabase::addDatabase(QLatin1String("QSQLITE"));
-    ClickUpdateModel m_installedUpdates;
-    ClickUpdateModel m_activeUpdates;
+    UpdateModel m_installedUpdates;
+    UpdateModel m_pendingClickUpdates;
     QString m_dbpath;
+
+    const QString KIND_CLICK = QLatin1String("click");
+    const QString KIND_SYSTEM = QLatin1String("system");
 };
 
 } // UpdatePlugin
 
-#endif /* PLUGINS_SYSTEM_UPDATE_CLICKUPDATESTORE_H_ */
+#endif /* PLUGINS_SYSTEM_UPDATE_UPDATESTORE_H */

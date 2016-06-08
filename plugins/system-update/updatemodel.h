@@ -14,20 +14,20 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef PLUGINS_SYSTEM_UPDATE_CLICKUPDATEMODEL_H_
-#define PLUGINS_SYSTEM_UPDATE_CLICKUPDATEMODEL_H_
+#ifndef PLUGINS_SYSTEM_UPDATE_UPDATEMODEL_H
+#define PLUGINS_SYSTEM_UPDATE_UPDATEMODEL_H
 
 #include <QSqlQueryModel>
 
 namespace UpdatePlugin
 {
 
-class ClickUpdateModel : public QSqlQueryModel
+class UpdateModel : public QSqlQueryModel
 {
     Q_OBJECT
 public:
-    explicit ClickUpdateModel(QObject *parent = 0);
-    ~ClickUpdateModel();
+    explicit UpdateModel(QObject *parent = 0);
+    ~UpdateModel();
 
     QVariant data(const QModelIndex &index, int role) const;
     QHash<int, QByteArray> roleNames() const;
@@ -39,4 +39,4 @@ private:
 
 } // UpdatePlugin
 
-#endif // PLUGINS_SYSTEM_UPDATE_CLICKUPDATEMODEL_H_
+#endif // PLUGINS_SYSTEM_UPDATE_UPDATEMODEL_H

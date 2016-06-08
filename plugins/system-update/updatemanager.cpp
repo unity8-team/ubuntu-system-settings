@@ -40,7 +40,7 @@ UpdateManager::UpdateManager(QObject *parent) :
         m_managerStatus(ManagerStatus::CheckingAllUpdates),
         m_systemImage(nullptr),
         m_token(UbuntuOne::Token()),
-        m_clickUpdateStore(this)
+        m_updatestore(this)
 {
     connect(this, SIGNAL(connected()), this, SLOT(checkForUpdates()));
     connect(this, SIGNAL(disconnected()), this, SLOT(cancelCheckForUpdates()));
@@ -48,7 +48,7 @@ UpdateManager::UpdateManager(QObject *parent) :
     initializeSystemImage();
     initializeClickUpdateChecker();
     initializeSSOService();
-    initializeClickUpdateStore();
+    initializeUpdateStore();
 
     calculateUpdatesCount();
 }
@@ -114,13 +114,13 @@ void UpdateManager::initializeSSOService()
             SLOT(handleCredentialsFailed()));
 }
 
-void UpdateManager::initializeClickUpdateStore()
+void UpdateManager::initializeUpdateStore()
 {
-    qWarning() << "last click check" << m_clickUpdateStore.lastCheckDate().toString("dd.MM.yyyy hh:mm:ss");
+    qWarning() << "last click check" << m_updatestore.lastCheckDate().toString("dd.MM.yyyy hh:mm:ss");
 
-    m_clickUpdatesCount = m_clickUpdateStore.activeUpdates()->rowCount();
+    m_clickUpdatesCount = m_updatestore.pendingClickUpdates()->rowCount();
     // qWarning()
-    //         << "in initializeClickUpdateStore we set m_clickUpdatesCount to "
+    //         << "in initializeUpdateStore we set m_clickUpdatesCount to "
     //         << m_clickUpdatesCount;
     calculateUpdatesCount();
 }
@@ -207,14 +207,14 @@ UpdateManager::ManagerStatus UpdateManager::managerStatus() const
     return m_managerStatus;
 }
 
-ClickUpdateModel *UpdateManager::installedClickUpdates()
+UpdateModel *UpdateManager::installedUpdates()
 {
-    return m_clickUpdateStore.installedUpdates();
+    return m_updatestore.installedUpdates();
 }
 
-ClickUpdateModel *UpdateManager::activeClickUpdates()
+UpdateModel *UpdateManager::activeClickUpdates()
 {
-    return m_clickUpdateStore.activeUpdates();
+    return m_updatestore.pendingClickUpdates();
 }
 
 void UpdateManager::checkForUpdates()
@@ -273,7 +273,7 @@ void UpdateManager::onClickUpdateAvailable(const ClickUpdateMetadata *meta)
 {
     qWarning() << "manager: found downloadable click update metadata"
             << meta->name();
-    m_clickUpdateStore.add(meta);
+    m_updatestore.add(meta);
 }
 
 void UpdateManager::retryClickPackage(const QString &packageName, const int &revision)
@@ -340,7 +340,7 @@ void UpdateManager::handleSiAvailableStatus(const bool isAvailable,
 
 void UpdateManager::udmDownloadEnded(const QString &id)
 {
-    m_clickUpdateStore.unsetUdmId(id.toInt());
+    m_updatestore.unsetUdmId(id.toInt());
 }
 
 void UpdateManager::onClickCheckCompleted()

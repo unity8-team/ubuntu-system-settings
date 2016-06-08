@@ -26,8 +26,8 @@
 
 #include "clickupdatemetadata.h"
 #include "clickupdatechecker.h"
-#include "clickupdatemodel.h"
-#include "clickupdatestore.h"
+#include "updatemodel.h"
+#include "updatestore.h"
 #include "systemimage.h"
 
 // Having the full namespaced name in a slot seems to confuse
@@ -98,9 +98,9 @@ Q_OBJECT
             NOTIFY downloadModeChanged)
     Q_PROPERTY(ManagerStatus managerStatus READ managerStatus
             NOTIFY managerStatusChanged)
-    Q_PROPERTY(ClickUpdateModel* installedClickUpdates READ installedClickUpdates
+    Q_PROPERTY(UpdateModel* installedUpdates READ installedUpdates
                CONSTANT)
-    Q_PROPERTY(ClickUpdateModel* activeClickUpdates READ activeClickUpdates
+    Q_PROPERTY(UpdateModel* activeClickUpdates READ activeClickUpdates
                CONSTANT)
 
     bool online() const;
@@ -115,8 +115,8 @@ Q_OBJECT
     void setDownloadMode(const int &downloadMode);
     ManagerStatus managerStatus() const;
 
-    ClickUpdateModel *installedClickUpdates();
-    ClickUpdateModel *activeClickUpdates();
+    UpdateModel *installedUpdates();
+    UpdateModel *activeClickUpdates();
 
     Q_INVOKABLE void checkForUpdates();
     Q_INVOKABLE void cancelCheckForUpdates();
@@ -175,7 +175,7 @@ private:
     void initializeSystemImage();
     void initializeClickUpdateChecker();
     void initializeSSOService();
-    void initializeClickUpdateStore();
+    void initializeUpdateStore();
 
     bool m_online;
     bool m_authenticated;
@@ -189,7 +189,7 @@ private:
     QSystemImage *m_systemImage;
     UbuntuOne::Token m_token;
     UbuntuOne::SSOService m_ssoService;
-    ClickUpdateStore m_clickUpdateStore;
+    UpdateStore m_updatestore;
 };
 
 }

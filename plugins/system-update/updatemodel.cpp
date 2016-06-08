@@ -14,21 +14,21 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#include "clickupdatemodel.h"
+#include "updatemodel.h"
 
 namespace UpdatePlugin
 {
 
-ClickUpdateModel::ClickUpdateModel(QObject *parent) :
+UpdateModel::UpdateModel(QObject *parent) :
     QSqlQueryModel(parent)
 {
 }
 
-ClickUpdateModel::~ClickUpdateModel()
+UpdateModel::~UpdateModel()
 {
 }
 
-QHash<int, QByteArray> ClickUpdateModel::roleNames() const
+QHash<int, QByteArray> UpdateModel::roleNames() const
 {
     int idx = 0;
     QHash<int, QByteArray> roleNames;
@@ -39,7 +39,7 @@ QHash<int, QByteArray> ClickUpdateModel::roleNames() const
     return roleNames;
 }
 
-QVariant ClickUpdateModel::data(const QModelIndex &index, int role) const
+QVariant UpdateModel::data(const QModelIndex &index, int role) const
 {
     QVariant value = QSqlQueryModel::data(index, role);
     if (role < Qt::UserRole) {
@@ -52,7 +52,8 @@ QVariant ClickUpdateModel::data(const QModelIndex &index, int role) const
     return value;
 }
 
-const char* ClickUpdateModel::COLUMN_NAMES[] = {
+const char* UpdateModel::COLUMN_NAMES[] = {
+    "kind",
     "app_id",
     "local_version",
     "remote_version",

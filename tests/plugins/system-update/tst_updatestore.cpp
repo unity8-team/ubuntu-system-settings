@@ -10,9 +10,9 @@
 #include "mockclickservertestcase.h"
 
 #include "clickupdatemetadata.h"
-#include "clickupdatestore.h"
+#include "updatestore.h"
 
-class TstClickUpdateStore
+class TstUpdateStore
     : public QObject
 {
     Q_OBJECT
@@ -29,7 +29,7 @@ private slots:
         QVERIFY(m_dir->isValid());
         m_dbfile = m_dir->path() + "/cupdatesstore.db";
         qWarning() << "test using dbfile"  << m_dbfile;
-        m_instance = new UpdatePlugin::ClickUpdateStore(m_dbfile);
+        m_instance = new UpdatePlugin::UpdateStore(m_dbfile);
     }
     void cleanup()
     {
@@ -84,44 +84,44 @@ private slots:
 
         // Add a click app
         m_instance->add(&m);
-        QCOMPARE(m_instance->activeUpdates()->rowCount(), 1);
+        QCOMPARE(m_instance->pendingClickUpdates()->rowCount(), 1);
         QCOMPARE(m_instance->installedUpdates()->rowCount(), 0);
 
         // We had to refresh tokens.
         m.setClickToken("New-Mock-X-Click-Token");
         m_instance->add(&m);
-        QCOMPARE(m_instance->activeUpdates()->rowCount(), 1);
+        QCOMPARE(m_instance->pendingClickUpdates()->rowCount(), 1);
         QCOMPARE(m_instance->installedUpdates()->rowCount(), 0);
 
         // Associate with udm
         m_instance->setUdmId(m.name(), m.revision(), 3);
-        QCOMPARE(m_instance->activeUpdates()->record(0).value("udm_download_id").toInt(),
+        QCOMPARE(m_instance->pendingClickUpdates()->record(0).value("udm_download_id").toInt(),
                  3);
 
         // Disassociate with udm
         m_instance->unsetUdmId(m.name(), m.revision());
-        QVERIFY(m_instance->activeUpdates()
+        QVERIFY(m_instance->pendingClickUpdates()
                     ->record(0).value("udm_download_id").isNull());
 
         // Associate with udm
         m_instance->setUdmId(m.name(), m.revision(), 3);
-        QCOMPARE(m_instance->activeUpdates()->record(0).value("udm_download_id").toInt(),
+        QCOMPARE(m_instance->pendingClickUpdates()->record(0).value("udm_download_id").toInt(),
                  3);
 
         // Disassociate (using udm id)
         m_instance->unsetUdmId(3);
-        QVERIFY(m_instance->activeUpdates()
+        QVERIFY(m_instance->pendingClickUpdates()
                     ->record(0).value("udm_download_id").isNull());
 
         // Add second click app
         m_instance->add(&m2);
-        QCOMPARE(m_instance->activeUpdates()->rowCount(), 2);
+        QCOMPARE(m_instance->pendingClickUpdates()->rowCount(), 2);
         QCOMPARE(m_instance->installedUpdates()->rowCount(), 0);
 
-        QCOMPARE(m_instance->activeUpdates()
+        QCOMPARE(m_instance->pendingClickUpdates()
                     ->record(0).value("app_id").toString(),
                  m2.name());
-        QCOMPARE(m_instance->activeUpdates()
+        QCOMPARE(m_instance->pendingClickUpdates()
                     ->record(1).value("app_id").toString(),
                  m.name());
 
@@ -130,15 +130,16 @@ private slots:
 
         // Mark as installed
         m_instance->markInstalled(m.name(), m.revision());
-        QCOMPARE(m_instance->activeUpdates()->rowCount(), 1);
+        QCOMPARE(m_instance->pendingClickUpdates()->rowCount(), 1);
         QCOMPARE(m_instance->installedUpdates()->rowCount(), 1);
     }
 
 private:
-    UpdatePlugin::ClickUpdateStore *m_instance;
+    UpdatePlugin::UpdateStore *m_instance;
     QTemporaryDir *m_dir;
     QString m_dbfile;
 };
 
-QTEST_MAIN(TstClickUpdateStore)
-#include "tst_clickupdatestore.moc"
+QTEST_MAIN(TstUpdateStore)
+
+#include "tst_updatestore.moc"

@@ -49,14 +49,14 @@ set_tests_properties(
 )
 target_link_libraries(tst-clickupdatechecker Qt5::Test update-plugin)
 
-add_executable(tst-clickupdatestore tst_clickupdatestore.cpp)
-add_test(tst-clickupdatestore tst-clickupdatestore)
+add_executable(tst-updatestore tst_updatestore.cpp)
+add_test(tst-updatestore tst-updatestore)
 # set_tests_properties(
-#     tst-clickupdatestore
+#     tst-updatestore
 #         PROPERTIES
 #         ENVIRONMENT "IGNORE_CREDENTIALS=1;URL_APPS=http://127.0.0.1:9009"
 # )
-target_link_libraries(tst-clickupdatestore Qt5::Test update-plugin)
+target_link_libraries(tst-updatestore Qt5::Test update-plugin)
 
 add_executable(tst-updatepluginhelpers tst_helpers.cpp)
 add_test(tst-updatepluginhelpers tst-updatepluginhelpers)

@@ -14,7 +14,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#include "clickupdatestore.h"
+#include "updatestore.h"
 
 #include <QDir>
 #include <QSqlDatabase>
@@ -25,10 +25,10 @@
 namespace UpdatePlugin
 {
 
-ClickUpdateStore::ClickUpdateStore(QObject *parent) :
+UpdateStore::UpdateStore(QObject *parent) :
         QObject(parent),
         m_installedUpdates(this),
-        m_activeUpdates(this),
+        m_pendingClickUpdates(this),
         m_dbpath("")
 {
     QString dataPath = QStandardPaths::writableLocation(
@@ -37,21 +37,21 @@ ClickUpdateStore::ClickUpdateStore(QObject *parent) :
         qCritical() << "Could not create" << dataPath;
         return;
     }
-    m_dbpath = dataPath + QLatin1String("/clickupdatestore.db");
+    m_dbpath = dataPath + QLatin1String("/updatestore.db");
 
     initializeStore();
 }
 
-ClickUpdateStore::ClickUpdateStore(const QString &dbpath, QObject *parent) :
+UpdateStore::UpdateStore(const QString &dbpath, QObject *parent) :
         QObject(parent),
         m_installedUpdates(this),
-        m_activeUpdates(this),
+        m_pendingClickUpdates(this),
         m_dbpath(dbpath)
 {
     initializeStore();
 }
 
-ClickUpdateStore::~ClickUpdateStore()
+UpdateStore::~UpdateStore()
 {
     m_db.close();
     QString name = m_db.connectionName();
@@ -59,7 +59,7 @@ ClickUpdateStore::~ClickUpdateStore()
     QSqlDatabase::removeDatabase(name);
 }
 
-void ClickUpdateStore::initializeStore()
+void UpdateStore::initializeStore()
 {
     m_db.setDatabaseName(m_dbpath);
     if (!openDb()) return;
@@ -76,7 +76,7 @@ void ClickUpdateStore::initializeStore()
     queryAll();
 }
 
-void ClickUpdateStore::add(const ClickUpdateMetadata *meta)
+void UpdateStore::add(const ClickUpdateMetadata *meta)
 {
     if (!openDb()) return;
 
@@ -84,10 +84,10 @@ void ClickUpdateStore::add(const ClickUpdateMetadata *meta)
     q.prepare("INSERT OR REPLACE INTO updates (app_id, revision, state,"
               "created_at_utc, download_sha512, title, size, icon_url,"
               "download_url, changelog, command, click_token,"
-              "local_version, remote_version) VALUES (:app_id,"
+              "local_version, remote_version, kind) VALUES (:app_id,"
               ":revision, :state, :created_at_utc, :download_sha512, :title,"
               ":size, :icon_url, :download_url, :changelog, :command,"
-              ":click_token, :local_version, :remote_version)");
+              ":click_token, :local_version, :remote_version, :kind)");
     q.bindValue(":app_id", meta->name());
     q.bindValue(":revision", meta->revision());
     q.bindValue(":state", "pending");
@@ -103,14 +103,15 @@ void ClickUpdateStore::add(const ClickUpdateMetadata *meta)
     q.bindValue(":click_token", meta->clickToken());
     q.bindValue(":local_version", meta->localVersion());
     q.bindValue(":remote_version", meta->remoteVersion());
+    q.bindValue(":kind", KIND_CLICK);
 
     if (!q.exec())
         qCritical() << "Could not add click update" << q.lastError().text();
 
-    queryActive();
+    queryPending();
 }
 
-void ClickUpdateStore::setUdmId(const QString &appId, const int &revision,
+void UpdateStore::setUdmId(const QString &appId, const int &revision,
                                 const int &udmId)
 {
     if (!openDb()) return;
@@ -126,10 +127,10 @@ void ClickUpdateStore::setUdmId(const QString &appId, const int &revision,
         qCritical() << "could not set udm id for app id" << appId
                     << q.lastError().text();
 
-    queryActive();
+    queryPending();
 }
 
-void ClickUpdateStore::unsetUdmId(const QString &appId, const int &revision)
+void UpdateStore::unsetUdmId(const QString &appId, const int &revision)
 {
     if (!openDb()) return;
 
@@ -144,10 +145,10 @@ void ClickUpdateStore::unsetUdmId(const QString &appId, const int &revision)
         qCritical() << "could not unset udm id for app id" << appId
                     << q.lastError().text();
 
-    queryActive();
+    queryPending();
 }
 
-void ClickUpdateStore::unsetUdmId(const int &udmId)
+void UpdateStore::unsetUdmId(const int &udmId)
 {
     if (!openDb()) return;
 
@@ -160,25 +161,26 @@ void ClickUpdateStore::unsetUdmId(const int &udmId)
         qCritical() << "could not unset udm id given udm id" << udmId
                     << q.lastError().text();
 
-    queryActive();
+    queryPending();
 
 }
 
-void ClickUpdateStore::queryActive()
+void UpdateStore::queryPending()
 {
     if (!openDb()) return;
 
     // TODO: this should query for DISTINCT app_id
-    m_activeUpdates.setQuery("SELECT * FROM updates WHERE state='pending' "
-                             "ORDER BY title ASC",
+    // TODO: bind KIND_CLICK
+    m_pendingClickUpdates.setQuery("SELECT * FROM updates WHERE state='pending' "
+                             " AND kind='" + KIND_CLICK + "' ORDER BY title ASC",
                              m_db);
-    if (m_activeUpdates.lastError().isValid())
-        qWarning() << m_activeUpdates.lastError();
+    if (m_pendingClickUpdates.lastError().isValid())
+        qWarning() << m_pendingClickUpdates.lastError();
 
     m_db.close();
 }
 
-void ClickUpdateStore::queryInstalled()
+void UpdateStore::queryInstalled()
 {
     if (!openDb()) return;
 
@@ -191,13 +193,13 @@ void ClickUpdateStore::queryInstalled()
     m_db.close();
 }
 
-void ClickUpdateStore::queryAll()
+void UpdateStore::queryAll()
 {
-    queryActive();
+    queryPending();
     queryInstalled();
 }
 
-void ClickUpdateStore::markInstalled(const QString &appId, const int &revision)
+void UpdateStore::markInstalled(const QString &appId, const int &revision)
 {
     if (!openDb()) return;
 
@@ -217,7 +219,7 @@ void ClickUpdateStore::markInstalled(const QString &appId, const int &revision)
     queryAll();
 }
 
-bool ClickUpdateStore::createDb()
+bool UpdateStore::createDb()
 {
     if (Q_UNLIKELY(!m_db.transaction())) return false;
 
@@ -230,6 +232,7 @@ bool ClickUpdateStore::createDb()
     }
 
     ok = q.exec("CREATE TABLE updates ("
+                "kind TEXT NOT NULL,"
                 "app_id TEXT NOT NULL,"
                 "local_version TEXT NOT NULL,"
                 "remote_version TEXT NOT NULL,"
@@ -256,7 +259,7 @@ bool ClickUpdateStore::createDb()
     return m_db.commit();
 }
 
-bool ClickUpdateStore::openDb()
+bool UpdateStore::openDb()
 {
     if (m_db.isOpen()) return true;
     if (Q_UNLIKELY(!m_db.open())) {
@@ -266,22 +269,22 @@ bool ClickUpdateStore::openDb()
     return true;
 }
 
-void ClickUpdateStore::pruneDb()
+void UpdateStore::pruneDb()
 {
 
 }
 
-ClickUpdateModel *ClickUpdateStore::installedUpdates()
+UpdateModel *UpdateStore::installedUpdates()
 {
     return &m_installedUpdates;
 }
 
-ClickUpdateModel *ClickUpdateStore::activeUpdates()
+UpdateModel *UpdateStore::pendingClickUpdates()
 {
-    return &m_activeUpdates;
+    return &m_pendingClickUpdates;
 }
 
-QDateTime ClickUpdateStore::lastCheckDate()
+QDateTime UpdateStore::lastCheckDate()
 {
     QDateTime d;
     if (!openDb()) return d;
@@ -297,7 +300,7 @@ QDateTime ClickUpdateStore::lastCheckDate()
     return d.toUTC();
 }
 
-void ClickUpdateStore::setLastCheckDate(const QDateTime &lastCheckUtc)
+void UpdateStore::setLastCheckDate(const QDateTime &lastCheckUtc)
 {
     if (!openDb()) return;
 
