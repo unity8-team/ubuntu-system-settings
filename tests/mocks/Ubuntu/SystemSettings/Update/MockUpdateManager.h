@@ -31,7 +31,7 @@ Q_OBJECT
 
     Q_ENUMS(UpdateKind)
     Q_ENUMS(UpdateState)
-    Q_ENUMS(ManagerStatus)
+    Q_ENUMS(Status)
 
     enum UpdateKind
     {
@@ -58,55 +58,32 @@ Q_OBJECT
         StateFailed
     };
 
-    enum ManagerStatus
+    enum Status
     {
-        Idle,
-        CheckingClickUpdates,
-        CheckingSystemUpdates,
-        CheckingAllUpdates,
-        BatchMode, // Installing all updates
-        NetworkError,
-        ServerError
+        StatusIdle,
+        StatusCheckingClickUpdates,
+        StatusCheckingSystemUpdates,
+        StatusCheckingAllUpdates,
+        StatusBatchMode, // Installing all updates
+        StatusNetworkError,
+        StatusServerError
     };
 
     static MockUpdateManager *instance();
 
-    Q_PROPERTY(bool online READ online WRITE setOnline NOTIFY onlineChanged)
     Q_PROPERTY(bool authenticated READ authenticated
-            NOTIFY authenticatedChanged)
-    Q_PROPERTY(bool haveSufficientPower READ haveSufficientPower
-            WRITE setHaveSufficientPower
-            NOTIFY haveSufficientPowerChanged)
-    Q_PROPERTY(bool haveSystemUpdate READ haveSystemUpdate
-            NOTIFY haveSystemUpdateChanged)
-    Q_PROPERTY(MockSystemImage* systemImageBackend READ systemImageBackend CONSTANT)
-    Q_PROPERTY(int updatesCount READ updatesCount NOTIFY updatesCountChanged)
-    Q_PROPERTY(int downloadMode READ downloadMode WRITE setDownloadMode
-            NOTIFY downloadModeChanged)
-    Q_PROPERTY(ManagerStatus managerStatus READ managerStatus
-            NOTIFY managerStatusChanged)
+               NOTIFY authenticatedChanged)
     Q_PROPERTY(MockClickUpdateModel* installedClickUpdates READ installedClickUpdates
                CONSTANT)
-    Q_PROPERTY(MockClickUpdateModel* activeClickUpdates READ activeClickUpdates
+    Q_PROPERTY(MockClickUpdateModel* pendingClickUpdates READ pendingClickUpdates
                CONSTANT)
 
-    bool online() const;
-    void setOnline(const bool online);
-    bool authenticated() const;
-    bool haveSystemUpdate() const;
-    MockSystemImage* systemImageBackend() const;
-    bool haveSufficientPower() const;
-    void setHaveSufficientPower(const bool haveSufficientPower);
-    int updatesCount() const;
-    int downloadMode();
-    void setDownloadMode(const int &downloadMode);
-    ManagerStatus managerStatus() const;
-
+    bool authenticated();
     MockClickUpdateModel *installedClickUpdates();
-    MockClickUpdateModel *activeClickUpdates();
+    MockClickUpdateModel *pendingClickUpdates();
 
-    Q_INVOKABLE void checkForUpdates();
-    Q_INVOKABLE void cancelCheckForUpdates();
+    Q_INVOKABLE void checkForClickUpdates();
+    Q_INVOKABLE void cancelCheckForClickUpdates();
     Q_INVOKABLE void retryClickPackage(const QString &packageName, const int &revision);
 
 protected:
@@ -114,25 +91,15 @@ protected:
     ~MockUpdateManager();
 
 signals:
-    void onlineChanged();
-    void connected();
-    void disconnected();
-
     void authenticatedChanged();
-    void haveSufficientPowerChanged();
-    void haveSystemUpdateChanged();
-    void downloadModeChanged();
-    void updatesCountChanged();
-    void managerStatusChanged();
-    void clickUpdateReady(const QString &url, const QString &hash,
-                          const QString &algorithm,
-                          const QVariantMap &metadata,
-                          const QVariantMap &headers,
-                          const bool autoStart);
+
+    void networkError();
+    void serverError();
+    void clickUpdateCheckCompleted();
 
 private:
     static MockUpdateManager *m_instance;
-    MockSystemImage *m_systemImage;
+    bool m_authenticated;
 };
 
 #endif // MOCK_UPDATE_MANAGER_H

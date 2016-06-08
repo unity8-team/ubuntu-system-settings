@@ -26,16 +26,21 @@ import Ubuntu.SystemSettings.Update 1.0
 Item {
     id: updates
     property bool havePower: false
+    property int status: UpdateManager.StatusIdle
+    property int updatesCount: {
+        var count = 0;
+        count += updates.haveSystemUpdate ? 1 : 0;
+        count += UpdateManager.pendingClickUpdates.count
+    }
+    property bool authenticated: UpdateManager.authenticated
+    property bool online: NetworkingStatus.online
+
+    // Set by the report from SI
     property bool haveSystemUpdate: false
-    property int managerStatus
-    property int updatesCount
-    property bool authenticated: false
-    property bool online: false
-    property alias systemImageBackend: systemUpdate.backend
-    property alias clickUpdatesModel: clickUpdatesRepeater.model
+
+    property Flickable flickable: scrollWidget
 
     signal requestAuthentication()
-    signal stop()
 //    signal udmDownloadCreated(string packageName, int revision, int udmId)
 
     states: [
@@ -60,14 +65,14 @@ Item {
             name: "noAuth"
             when: !authenticated
             PropertyChanges { target: notauthNotification; visible: true }
-            PropertyChanges { target: noauthDivider; visible: (haveSystemUpdate || !glob.hidden) }
+            PropertyChanges { target: noauthDivider; visible: (updates.haveSystemUpdate || !glob.hidden) }
         },
         State {
             name: "noUpdates"
             PropertyChanges { target: overlay; visible: true }
             when: {
                 var idle = managerStatus === UpdateManager.Idle;
-                var noUpdates = (updatesCount === 0) && !haveSystemUpdate;
+                var noUpdates = (updatesCount === 0) && !updates.haveSystemUpdate;
                 return idle && noUpdates;
             }
         }
@@ -102,7 +107,11 @@ Item {
             requireRestart: updates.haveSystemUpdate
             updatesCount: updates.updatesCount
             online: updates.online
-            onStop: updates.stop()
+            onStop: {
+                // TODO: stop si check
+                UpdateManager.cancelCheckForClickUpdates()
+
+            }
         }
 
         SystemUpdate {
@@ -129,6 +138,7 @@ Item {
 
             Repeater {
                 id: clickUpdatesRepeater
+                model: UpdateManager.pendingClickUpdates
                 height: childrenRect.height
                 delegate: ClickUpdate {
                     width: clickUpdates.width
@@ -202,6 +212,27 @@ Item {
                 }
                 return "";
             }
+        }
+    }
+
+    Connections {
+        target: UpdateManager
+        onNetworkError: console.warn('Updates.qml: onNetworkError')
+        onServerError: console.warn('Updates.qml: onServerError')
+        onClickUpdateCheckCompleted: console.warn('Updates.qml: onClickUpdateCheckCompleted')
+    }
+
+    Connections {
+        target: SystemImage
+        onUpdateAvailableStatus: {
+            // bool isAvailable,
+            // bool downloading,
+            // QString &availableVersion,
+            // int &updateSize,
+            // QString &lastUpdateDate,
+            // QString &errorReason)
+            console.warn('onUpdateAvailableStatus', isAvailable, downloading, availableVersion, updateSize, lastUpdateDate, errorReason);
+            updates.haveSystemUpdate = isAvailable;
         }
     }
 }

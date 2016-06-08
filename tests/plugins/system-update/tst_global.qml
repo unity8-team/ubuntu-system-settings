@@ -90,7 +90,7 @@ Item {
         function test_checkInProgress() {
             cGlob.updatesCount = 2;
             cGlob.online = true;
-            cGlob.managerStatus = UpdateManager.CheckingAllUpdates;
+            cGlob.status = UpdateManager.StatusCheckingAllUpdates;
 
             compare(cGlob.hidden, false, "global was not visible");
         }
@@ -98,7 +98,7 @@ Item {
         function test_stop() {
             cGlob.updatesCount = 2;
             cGlob.online = true;
-            cGlob.managerStatus = UpdateManager.CheckingAllUpdates;
+            cGlob.status = UpdateManager.StatusCheckingAllUpdates;
 
             var stop = findChild(cGlob, "updatesGlobalStopButton");
             compare(stop.visible, true);
@@ -109,7 +109,7 @@ Item {
         function test_checkIdle() {
             cGlob.updatesCount = 2;
             cGlob.online = true;
-            cGlob.managerStatus = UpdateManager.Idle;
+            cGlob.status = UpdateManager.StatusIdle;
 
             compare(cGlob.hidden, false, "global was not visible");
         }
@@ -117,7 +117,7 @@ Item {
         function test_installApps() {
             cGlob.updatesCount = 2;
             cGlob.online = true;
-            cGlob.managerStatus = UpdateManager.Idle;
+            cGlob.status = UpdateManager.StatusIdle;
 
             var install = findChild(cGlob, "updatesGlobalInstallButton");
             compare(install.visible, true);
@@ -130,7 +130,7 @@ Item {
         function test_installWithRestart() {
             cGlob.updatesCount = 2;
             cGlob.online = true;
-            cGlob.managerStatus = UpdateManager.Idle;
+            cGlob.status = UpdateManager.StatusIdle;
             cGlob.requireRestart = true;
 
             var install = findChild(cGlob, "updatesGlobalInstallButton");
@@ -143,7 +143,7 @@ Item {
         function test_singleUpdate() {
             cGlob.updatesCount = 1;
             cGlob.online = true;
-            cGlob.managerStatus = UpdateManager.Idle;
+            cGlob.status = UpdateManager.StatusIdle;
 
             compare(cGlob.hidden, true, "global was visible for single update");
         }
@@ -151,7 +151,7 @@ Item {
         function test_batchMode() {
             cGlob.updatesCount = 2;
             cGlob.online = true;
-            cGlob.managerStatus = UpdateManager.BatchMode;
+            cGlob.status = UpdateManager.StatusBatchMode;
 
             compare(cGlob.hidden, false, "global was hidden in batchmode");
         }
@@ -159,7 +159,7 @@ Item {
         function test_pause() {
             cGlob.updatesCount = 2;
             cGlob.online = true;
-            cGlob.managerStatus = UpdateManager.BatchMode;
+            cGlob.status = UpdateManager.StatusBatchMode;
 
             var pause = findChild(cGlob, "updatesGlobalPauseButton");
             compare(pause.visible, true);

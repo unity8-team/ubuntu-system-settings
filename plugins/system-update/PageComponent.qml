@@ -33,6 +33,7 @@ import Ubuntu.SystemSettings.Update 1.0
 ItemPage {
     id: root
     objectName: "systemUpdatesPage"
+    flickable: updates.flickable
 
     QDBusActionGroup {
         id: indicatorPower
@@ -44,18 +45,18 @@ ItemPage {
         Component.onCompleted: start()
     }
 
-    Binding {
-        target: UpdateManager
-        property: "online"
-        value: NetworkingStatus.online
-    }
+    // Binding {
+    //     target: UpdateManager
+    //     property: "online"
+    //     value: NetworkingStatus.online
+    // }
 
-    Binding {
-        target: UpdateManager
-        property: "haveSufficientPower"
-        value: (indicatorPower.deviceState === "charging")
-               && (indicatorPower.batteryLevel > 25)
-    }
+    // Binding {
+    //     target: UpdateManager
+    //     property: "haveSufficientPower"
+    //     value: (indicatorPower.deviceState === "charging")
+    //            && (indicatorPower.batteryLevel > 25)
+    // }
 
     Connections {
         target: UpdateManager
@@ -89,60 +90,36 @@ ItemPage {
     //     }
     // }
 
-    Rectangle {
-        color: "white"
-        anchors.fill: parent
-        visible: placeholder.text
+    // Flickable {
+    //     id: scrollWidget
 
-        Label {
-            id: placeholder
-            anchors.fill: parent
-            verticalAlignment: Text.AlignVCenter
-            horizontalAlignment: Text.AlignHCenter
-            wrapMode: Text.WordWrap
-            text: {
-                var s = UpdateManager.managerStatus;
-                if (!UpdateManager.online) {
-                    return i18n.tr("Connect to the Internet to check for updates.");
-                } else if (s === UpdateManager.Idle && UpdateManager.updatesCount === 0) {
-                    return i18n.tr("Software is up to date");
-                } else if (s === UpdateManager.ServerError || s === UpdateManager.NetworkError) {
-                    return i18n.tr("The update server is not responding. Try again later.");
-                }
-                return "";
-            }
+    //     anchors.top: parent.top
+    //     anchors.left: parent.left
+    //     anchors.right: parent.right
+    //     anchors.bottom: configuration.top
+
+    //     contentHeight: contentItem.childrenRect.height
+    //     boundsBehavior: (contentHeight > root.height) ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
+    //     /* Set the direction to workaround https://bugreports.qt-project.org/browse/QTBUG-31905
+    //        otherwise the UI might end up in a situation where scrolling doesn't work */
+    //     flickableDirection: Flickable.VerticalFlick
+
+    // }
+    Updates {
+        id: updates
+        anchors {
+            top: parent.top
+            left: parent.left
+            right: parent.right
+            bottom: configuration.top
         }
-    }
+        havePower: (indicatorPower.deviceState === "charging")
+                    && (indicatorPower.batteryLevel > 25)
+        // managerStatus: UpdateManager.managerStatus
 
-    Flickable {
-        id: scrollWidget
-
-        anchors.top: parent.top
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.bottom: configuration.top
-
-        contentHeight: contentItem.childrenRect.height
-        boundsBehavior: (contentHeight > root.height) ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
-        /* Set the direction to workaround https://bugreports.qt-project.org/browse/QTBUG-31905
-           otherwise the UI might end up in a situation where scrolling doesn't work */
-        flickableDirection: Flickable.VerticalFlick
-
-        Updates {
-            anchors { left: parent.left; right: parent.right }
-            authenticated: UpdateManager.authenticated
-            clickUpdatesModel: UpdateManager.activeClickUpdates
-            havePower: UpdateManager.haveSufficientPower
-            haveSystemUpdate: UpdateManager.haveSystemUpdate
-            managerStatus: UpdateManager.managerStatus
-            online: UpdateManager.online
-            systemImageBackend: UpdateManager.systemImageBackend
-            updatesCount: UpdateManager.updatesCount
-
-            onStop: UpdateManager.cancelCheckForUpdates()
-            onClickPackageRequestedRetry: UpdateManager.retryClickPackage(packageName);
-            Component.onDestruction: UpdateManager.cancelCheckForUpdates()
-        }
+        onStop: UpdateManager.cancelCheckForUpdates()
+        // onClickPackageRequestedRetry: UpdateManager.retryClickPackage(packageName);
+        Component.onDestruction: UpdateManager.cancelCheckForUpdates()
     }
 
     Column {
@@ -156,11 +133,11 @@ ItemPage {
             objectName: "configuration"
             text: i18n.tr("Auto download")
             value: {
-                if (UpdateManager.downloadMode === 0)
+                if (SystemImage.downloadMode === 0)
                     return i18n.tr("Never")
-                else if (UpdateManager.downloadMode === 1)
+                else if (SystemImage.downloadMode === 1)
                     return i18n.tr("On wi-fi")
-                else if (UpdateManager.downloadMode === 2)
+                else if (SystemImage.downloadMode === 2)
                     return i18n.tr("Always")
             }
             progression: true

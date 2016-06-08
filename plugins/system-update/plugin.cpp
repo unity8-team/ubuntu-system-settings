@@ -35,16 +35,17 @@ static QObject *umSingletonProvider(QQmlEngine *engine, QJSEngine *scriptEngine)
     return UpdateManager::instance();
 }
 
+static QObject *siSingletonProvider(QQmlEngine *engine, QJSEngine *scriptEngine)
+{
+    Q_UNUSED(engine)
+    Q_UNUSED(scriptEngine)
+
+    return new QSystemImage;
+}
+
 void BackendPlugin::registerTypes(const char *uri)
 {
     Q_ASSERT(uri == QLatin1String("Ubuntu.SystemSettings.Update"));
-
-    qmlRegisterUncreatableType<QSystemImage>(uri, 1, 0, "SystemImage",
-        "System Image can't be instantiated directly.");
-
-    // The context is already populated with “UpdateManager”, but we still need to
-    // register it as a type.
-    // TODO: Register as well as providing a singleton via qmlRegisterSingleton.
-    // qmlRegisterUncreatableType<UpdateManager>(uri, 1, 0, "UM", "");
+    qmlRegisterSingletonType<QSystemImage>(uri, 1, 0, "SystemImage", siSingletonProvider);
     qmlRegisterSingletonType<UpdateManager>(uri, 1, 0, "UpdateManager", umSingletonProvider);
 }

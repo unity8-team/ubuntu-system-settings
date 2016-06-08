@@ -23,13 +23,13 @@ import Ubuntu.SystemSettings.Update 1.0
 
 Item {
     id: g
-    property int managerStatus // A UpdateManager::ManagerStatus
+    property int status // A UpdateManager::ManagerStatus
     property bool requireRestart: false
     property int updatesCount: 0
     property bool online: false
 
     // The only case where the global should be hidden.
-    property bool hidden: updatesCount <= 1 && managerStatus === UpdateManager.Idle
+    property bool hidden: updatesCount <= 1 && status === UpdateManager.StatusIdle
 
     signal stop()
     signal pause()
@@ -50,10 +50,10 @@ Item {
         }
         opacity: visible ? 1 : 0
         visible: {
-            switch (g.managerStatus) {
-            case UpdateManager.CheckingClickUpdates:
-            case UpdateManager.CheckingSystemUpdates:
-            case UpdateManager.CheckingAllUpdates:
+            switch (g.status) {
+            case UpdateManager.StatusCheckingClickUpdates:
+            case UpdateManager.StatusCheckingSystemUpdates:
+            case UpdateManager.StatusCheckingAllUpdates:
                 return true;
             }
             return false;
@@ -83,7 +83,7 @@ Item {
         }
         opacity: visible ? 1 : 0
         visible: {
-            var canInstall = g.managerStatus === UpdateManager.Idle;
+            var canInstall = g.status === UpdateManager.StatusIdle;
             return canInstall && updatesCount > 1;
         }
 
@@ -113,7 +113,7 @@ Item {
         id: pause
         anchors.fill: parent
         visible: {
-            var batchMode = g.managerStatus === UpdateManager.BatchMode;
+            var batchMode = g.status === UpdateManager.StatusBatchMode;
             return batchMode && updatesCount > 1;
         }
 

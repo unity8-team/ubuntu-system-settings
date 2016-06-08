@@ -34,7 +34,6 @@ Item {
         id: update
 
         SystemUpdate {
-            backend: UpdateManager.systemImageBackend
             width: testRoot.width
         }
     }
@@ -60,57 +59,57 @@ Item {
         }
 
         function test_automaticallyStarted () {
-            UpdateManager.systemImageBackend.downloadMode = 1;
-            UpdateManager.systemImageBackend.mockStarted();
+            SystemImage.downloadMode = 1;
+            SystemImage.mockStarted();
             compare(sUpdt.updateState, UpdateManager.StateDownloadingAutomatically);
         }
 
         function test_manuallyStarted () {
-            UpdateManager.systemImageBackend.downloadMode = 0;
-            UpdateManager.systemImageBackend.mockStarted();
+            SystemImage.downloadMode = 0;
+            SystemImage.mockStarted();
             compare(sUpdt.updateState, UpdateManager.StateQueuedForDownload);
         }
 
         function test_automaticalProgress () {
             var progressbar = findChild(sUpdt, "updateProgressbar");
-            UpdateManager.systemImageBackend.downloadMode = 1;
-            UpdateManager.systemImageBackend.mockProgress(50, 0); // pct, eta
+            SystemImage.downloadMode = 1;
+            SystemImage.mockProgress(50, 0); // pct, eta
             compare(sUpdt.updateState, UpdateManager.StateDownloadingAutomatically);
             compare(progressbar.value, 50);
         }
 
         function test_manualProgress () {
             var progressbar = findChild(sUpdt, "updateProgressbar");
-            UpdateManager.systemImageBackend.downloadMode = 0;
-            UpdateManager.systemImageBackend.mockProgress(50, 0); // pct, eta
+            SystemImage.downloadMode = 0;
+            SystemImage.mockProgress(50, 0); // pct, eta
             compare(sUpdt.updateState, UpdateManager.StateDownloading);
             compare(progressbar.value, 50);
         }
 
         function test_automaticalPause () {
             var progressbar = findChild(sUpdt, "updateProgressbar");
-            UpdateManager.systemImageBackend.downloadMode = 1;
-            UpdateManager.systemImageBackend.mockPaused(50); // pct
+            SystemImage.downloadMode = 1;
+            SystemImage.mockPaused(50); // pct
             compare(sUpdt.updateState, UpdateManager.StateAutomaticDownloadPaused);
             compare(progressbar.value, 50);
         }
 
         function test_manualPause () {
             var progressbar = findChild(sUpdt, "updateProgressbar");
-            UpdateManager.systemImageBackend.downloadMode = 0;
-            UpdateManager.systemImageBackend.mockPaused(50); // pct
+            SystemImage.downloadMode = 0;
+            SystemImage.mockPaused(50); // pct
             compare(sUpdt.updateState, UpdateManager.StateDownloadPaused);
             compare(progressbar.value, 50);
         }
 
         function test_downloaded () {
-            UpdateManager.systemImageBackend.mockDownloaded();
+            SystemImage.mockDownloaded();
             compare(sUpdt.updateState, UpdateManager.StateDownloaded);
         }
 
         function test_failed () {
             var error = findChild(sUpdt, "updateError");
-            UpdateManager.systemImageBackend.mockFailed(3, "fail");
+            SystemImage.mockFailed(3, "fail");
             compare(sUpdt.updateState, UpdateManager.StateFailed);
             compare(error.visible, true);
             compare(error.title, i18n.tr("Update failed"));
@@ -118,16 +117,16 @@ Item {
         }
 
         function test_goingManualPausesDownload () {
-            UpdateManager.systemImageBackend.downloadMode = 1;
-            UpdateManager.systemImageBackend.mockProgress(50, 0); // pct, eta
+            SystemImage.downloadMode = 1;
+            SystemImage.mockProgress(50, 0); // pct, eta
             compare(sUpdt.updateState, UpdateManager.StateDownloadingAutomatically);
 
             pauseSignalSpy.target = sUpdt;
 
             // Set manual
-            UpdateManager.systemImageBackend.downloadMode = 0;
+            SystemImage.downloadMode = 0;
             pauseSignalSpy.wait();
-            UpdateManager.systemImageBackend.mockPaused(50); // pct
+            SystemImage.mockPaused(50); // pct
             compare(sUpdt.updateState, UpdateManager.StateDownloadPaused);
         }
     }

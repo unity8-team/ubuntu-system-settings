@@ -27,11 +27,17 @@ static QObject *umSingletonProvider(QQmlEngine *engine, QJSEngine *scriptEngine)
     return MockUpdateManager::instance();
 }
 
+static QObject *siSingletonProvider(QQmlEngine *engine, QJSEngine *scriptEngine)
+{
+    Q_UNUSED(engine)
+    Q_UNUSED(scriptEngine)
+
+    return new MockSystemImage;
+}
+
 void BackendPlugin::registerTypes(const char *uri)
 {
     Q_ASSERT(uri == QLatin1String("Ubuntu.SystemSettings.Update"));
-    qmlRegisterUncreatableType<MockSystemImage>(uri, 1, 0, "SystemImage",
-        "System Image can't be instantiated directly.");
+    qmlRegisterSingletonType<MockSystemImage>(uri, 1, 0, "SystemImage", siSingletonProvider);
     qmlRegisterSingletonType<MockUpdateManager>(uri, 1, 0, "UpdateManager", umSingletonProvider);
-
 }

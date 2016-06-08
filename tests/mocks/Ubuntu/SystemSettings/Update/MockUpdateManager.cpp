@@ -18,7 +18,7 @@
 
 MockUpdateManager::MockUpdateManager(QObject *parent)
     : QObject(parent)
-    , m_systemImage(new MockSystemImage(parent))
+    , m_authenticated(false)
 {
 }
 
@@ -35,57 +35,8 @@ MockUpdateManager::~MockUpdateManager()
 {
 }
 
-
-bool MockUpdateManager::online() const
-{
-    return false;
-}
-
-void MockUpdateManager::setOnline(const bool online)
-{
-}
-
-bool MockUpdateManager::authenticated() const
-{
-    return false;
-}
-
-bool MockUpdateManager::haveSufficientPower() const
-{
-    return false;
-}
-
-bool MockUpdateManager::haveSystemUpdate() const
-{
-    return false;
-}
-
-MockSystemImage* MockUpdateManager::systemImageBackend() const
-{
-    return m_systemImage;
-}
-
-void MockUpdateManager::setHaveSufficientPower(const bool haveSufficientPower)
-{
-}
-
-int MockUpdateManager::updatesCount() const
-{
-    return 0;
-}
-
-int MockUpdateManager::downloadMode()
-{
-    return m_systemImage->downloadMode();
-}
-
-void MockUpdateManager::setDownloadMode(const int &downloadMode)
-{
-}
-
-MockUpdateManager::ManagerStatus MockUpdateManager::managerStatus() const
-{
-    return ManagerStatus::Idle;
+bool MockUpdateManager::authenticated(){
+    return m_authenticated;
 }
 
 MockClickUpdateModel *MockUpdateManager::installedClickUpdates()
@@ -93,16 +44,16 @@ MockClickUpdateModel *MockUpdateManager::installedClickUpdates()
     return new MockClickUpdateModel(this);
 }
 
-MockClickUpdateModel *MockUpdateManager::activeClickUpdates()
+MockClickUpdateModel *MockUpdateManager::pendingClickUpdates()
 {
     return new MockClickUpdateModel(this);
 }
 
-void MockUpdateManager::checkForUpdates()
+void MockUpdateManager::checkForClickUpdates()
 {
 }
 
-void MockUpdateManager::cancelCheckForUpdates()
+void MockUpdateManager::cancelCheckForClickUpdates()
 {
 
 }

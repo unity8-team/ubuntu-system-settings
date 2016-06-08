@@ -49,9 +49,10 @@ UpdateItem::UpdateItem(const QVariantMap &staticData, QObject *parent):
     ItemBase(staticData, parent)
 {
     m_updateManager = UpdateManager::instance();
-    setVisibility(m_updateManager->updatesCount() > 0);
-    QObject::connect(m_updateManager, SIGNAL(updatesCountChanged()),
-                     this, SLOT(onUpdatesCountChanged()));
+    setVisibility(true);
+    // // setVisibility(m_updateManager->updatesCount() > 0);
+    // QObject::connect(m_updateManager, SIGNAL(updatesCountChanged()),
+    //                  this, SLOT(onUpdatesCountChanged()));
 }
 
 void UpdateItem::setVisibility(bool visible)
@@ -61,11 +62,10 @@ void UpdateItem::setVisibility(bool visible)
 
 void UpdateItem::onUpdatesCountChanged()
 {
-    qWarning() << "update-plugin.cpp onUpdatesCountChanged" << m_updateManager->updatesCount();
-    if (m_updateManager->updatesCount() > 0)
-        setVisibility(true);
-    else
-        setVisibility(false);
+    // if (m_updateManager->updatesCount() > 0)
+    //     setVisibility(true);
+    // else
+    //     setVisibility(false);
 }
 
 

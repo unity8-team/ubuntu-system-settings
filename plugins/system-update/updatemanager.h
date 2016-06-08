@@ -40,11 +40,11 @@ namespace UpdatePlugin
 class UpdateManager: public QObject
 {
 Q_OBJECT
-    public:
+public:
 
     Q_ENUMS(UpdateKind)
     Q_ENUMS(UpdateState)
-    Q_ENUMS(ManagerStatus)
+    Q_ENUMS(Status)
 
     enum UpdateKind
     {
@@ -71,55 +71,32 @@ Q_OBJECT
         StateFailed
     };
 
-    enum ManagerStatus
+    enum Status
     {
-        Idle,
-        CheckingClickUpdates,
-        CheckingSystemUpdates,
-        CheckingAllUpdates,
-        BatchMode, // Installing all updates
-        NetworkError,
-        ServerError
+        StatusIdle,
+        StatusCheckingClickUpdates,
+        StatusCheckingSystemUpdates,
+        StatusCheckingAllUpdates,
+        StatusBatchMode, // Installing all updates
+        StatusNetworkError,
+        StatusServerError
     };
 
     static UpdateManager *instance();
 
-    Q_PROPERTY(bool online READ online WRITE setOnline NOTIFY onlineChanged)
     Q_PROPERTY(bool authenticated READ authenticated
-            NOTIFY authenticatedChanged)
-    Q_PROPERTY(bool haveSufficientPower READ haveSufficientPower
-            WRITE setHaveSufficientPower
-            NOTIFY haveSufficientPowerChanged)
-    Q_PROPERTY(bool haveSystemUpdate READ haveSystemUpdate
-            NOTIFY haveSystemUpdateChanged)
-    Q_PROPERTY(QSystemImage* systemImageBackend READ systemImageBackend CONSTANT)
-    Q_PROPERTY(int updatesCount READ updatesCount NOTIFY updatesCountChanged)
-    Q_PROPERTY(int downloadMode READ downloadMode WRITE setDownloadMode
-            NOTIFY downloadModeChanged)
-    Q_PROPERTY(ManagerStatus managerStatus READ managerStatus
-            NOTIFY managerStatusChanged)
+               NOTIFY authenticatedChanged)
     Q_PROPERTY(UpdateModel* installedUpdates READ installedUpdates
                CONSTANT)
-    Q_PROPERTY(UpdateModel* activeClickUpdates READ activeClickUpdates
+    Q_PROPERTY(UpdateModel* pendingClickUpdates READ pendingClickUpdates
                CONSTANT)
 
-    bool online() const;
-    void setOnline(const bool online);
-    bool authenticated() const;
-    bool haveSystemUpdate() const;
-    QSystemImage* systemImageBackend() const;
-    bool haveSufficientPower() const;
-    void setHaveSufficientPower(const bool haveSufficientPower);
-    int updatesCount() const;
-    int downloadMode();
-    void setDownloadMode(const int &downloadMode);
-    ManagerStatus managerStatus() const;
-
+    bool authenticated();
     UpdateModel *installedUpdates();
-    UpdateModel *activeClickUpdates();
+    UpdateModel *pendingClickUpdates();
 
-    Q_INVOKABLE void checkForUpdates();
-    Q_INVOKABLE void cancelCheckForUpdates();
+    Q_INVOKABLE void checkForClickUpdates();
+    Q_INVOKABLE void cancelCheckForClickUpdates();
     Q_INVOKABLE void retryClickPackage(const QString &packageName, const int &revision);
 
 protected:
@@ -129,67 +106,38 @@ protected:
 private slots:
     void onClickUpdateAvailable(const ClickUpdateMetadata *meta);
 
-    void handleSiAvailableStatus(const bool isAvailable,
-                                 const bool downloading,
-                                 const QString &availableVersion,
-                                 const int &updateSize,
-                                 const QString &lastUpdateDate,
-                                 const QString &errorReason);
-    // void siUpdateFailed(const int &consecutiveFailureCount,
-    //                     const QString &lastReason);
-
     void handleCredentialsFound(const Token &token);
     void handleCredentialsFailed();
 
     void udmDownloadEnded(const QString &id);
 
-    void onClickCheckCompleted();
-    void onNetworkError();
-    void onServerError();
-
 signals:
-    void onlineChanged();
-    void connected();
-    void disconnected();
-
+    // void clickUpdateReady(const QString &url, const QString &hash,
+    //                       const QString &algorithm,
+    //                       const QVariantMap &metadata,
+    //                       const QVariantMap &headers,
+    //                       const bool autoStart);
     void authenticatedChanged();
-    void haveSufficientPowerChanged();
-    void haveSystemUpdateChanged();
-    void downloadModeChanged();
-    void updatesCountChanged();
-    void managerStatusChanged();
-    void clickUpdateReady(const QString &url, const QString &hash,
-                          const QString &algorithm,
-                          const QVariantMap &metadata,
-                          const QVariantMap &headers,
-                          const bool autoStart);
+    void networkError();
+    void serverError();
+    void clickUpdateCheckCompleted();
+
 
 private:
     static UpdateManager *m_instance;
 
     void setAuthenticated(const bool authenticated);
-    void setManagerStatus(const ManagerStatus &status);
-
-    void calculateUpdatesCount();
 
     void initializeSystemImage();
     void initializeClickUpdateChecker();
     void initializeSSOService();
     void initializeUpdateStore();
 
-    bool m_online;
-    bool m_authenticated;
-    bool m_haveSufficientPower;
-    int m_updatesCount;
-    int m_clickUpdatesCount;
-    int m_systemUpdatesCount;
-
-    ManagerStatus m_managerStatus;
     ClickUpdateChecker m_clickUpChecker;
-    QSystemImage *m_systemImage;
     UbuntuOne::Token m_token;
     UbuntuOne::SSOService m_ssoService;
     UpdateStore m_updatestore;
+    bool m_authenticated;
 };
 
 }

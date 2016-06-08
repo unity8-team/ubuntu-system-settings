@@ -21,22 +21,21 @@ import Ubuntu.SystemSettings.Update 1.0
 
 Update {
     id: update
-    property var backend
     name: "Ubuntu Touch"
-    version: backend.availableVersion
-    size: backend.updateSize
+    version: SystemImage.availableVersion
+    size: SystemImage.updateSize
     iconUrl: "file:///usr/share/icons/suru/places/scalable/distributor-logo.svg"
 
-    // onRetry: modelData.start();
-    onDownload: backend.downloadUpdate();
-    onPause: backend.pauseDownload();
-    onInstall: backend.applyUpdate();
+    onRetry: modelData.downloadUpdate();
+    onDownload: SystemImage.downloadUpdate();
+    onPause: SystemImage.pauseDownload();
+    onInstall: SystemImage.applyUpdate();
 
     Connections {
-        target: backend
+        target: SystemImage
         onDownloadStarted: {
             update.progress = -1;
-            switch (backend.downloadMode) {
+            switch (SystemImage.downloadMode) {
                 case 0: // Manual
                     update.updateState = UpdateManager.StateQueuedForDownload;
                     break;
@@ -48,7 +47,7 @@ Update {
         }
         onUpdateProgress: {
             update.progress = percentage;
-            switch (backend.downloadMode) {
+            switch (SystemImage.downloadMode) {
                 case 0: // Manual
                     update.updateState = UpdateManager.StateDownloading;
                     break;
@@ -60,7 +59,7 @@ Update {
         }
         onUpdatePaused: {
             update.progress = percentage;
-            switch (backend.downloadMode) {
+            switch (SystemImage.downloadMode) {
                 case 0: // Manual
                     update.updateState = UpdateManager.StateDownloadPaused;
                     break;
@@ -78,9 +77,9 @@ Update {
             update.setError(i18n.tr("Update failed"), lastReason);
         }
         onDownloadModeChanged: {
-            console.log("onDownloadModeChanged", backend.downloadMode);
+            console.log("onDownloadModeChanged", SystemImage.downloadMode);
             // Pause an automatic download if the downloadMode changes to Manual.
-            if (backend.downloadMode === 0 &&
+            if (SystemImage.downloadMode === 0 &&
                 update.updateState === UpdateManager.StateDownloadingAutomatically) {
                 update.pause();
             }

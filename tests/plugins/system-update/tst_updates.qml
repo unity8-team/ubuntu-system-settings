@@ -56,7 +56,7 @@ Item {
 
         function init() {
             cUpdts = updates.createObject(testRoot, {
-                systemImageBackend: UpdateManager.systemImageBackend
+                systemImageBackend: SystemImage
             });
         }
 
