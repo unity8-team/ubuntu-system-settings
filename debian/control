@@ -65,7 +65,7 @@ Architecture: any
 Depends: ${misc:Depends},
          ${shlibs:Depends},
          accountsservice,
-         accountsservice-ubuntu-schemas (>= 0.0.6),
+         accountsservice-ubuntu-schemas (>= 0.0.7),
          aethercast [amd64 armhf i386],
          bluez (>= 5.23),
          click | ubuntu-snappy-cli,
