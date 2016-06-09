@@ -471,7 +471,7 @@ ItemPage {
                 property string passphraseAlt: i18n.tr("Passphrase…")
 
                 id: unlockMethod
-                model: showAllUI ? 4 : 3
+                model: Biometryd.available ? 4 : 3
                 delegate: OptionSelectorDelegate {
                     objectName: {
                         switch (index) {
@@ -600,7 +600,6 @@ ItemPage {
         property var op: null
 
         Component.onCompleted: {
-            console.warn('sizeObserver completed');
             if (Biometryd.available)
                 start();
         }
