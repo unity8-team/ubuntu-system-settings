@@ -20,6 +20,7 @@
 
 import QtQuick 2.4
 import Ubuntu.Components 1.3
+import Ubuntu.Connectivity 1.0
 import Ubuntu.Components.ListItems 1.3 as ListItems
 import Ubuntu.SystemSettings.Update 1.0
 
@@ -32,8 +33,9 @@ Item {
         count += updates.haveSystemUpdate ? 1 : 0;
         count += UpdateManager.pendingClickUpdates.count
     }
-    property bool authenticated: UpdateManager.authenticated
+    property var pendingClickUpdatesModel: UpdateManager.pendingClickUpdates
     property bool online: NetworkingStatus.online
+    property bool authenticated: UpdateManager.authenticated
 
     // Set by the report from SI
     property bool haveSystemUpdate: false
@@ -58,12 +60,12 @@ Item {
             PropertyChanges { target: glob; hidden: true }
             PropertyChanges { target: systemUpdate; visible: false }
             PropertyChanges { target: clickUpdates; visible: false }
-            when: managerStatus === UpdateManager.NetworkError ||
-                  managerStatus === UpdateManager.ServerError
+            when: status === UpdateManager.StatusNetworkError ||
+                  status === UpdateManager.StatusServerError
         },
         State {
             name: "noAuth"
-            when: !authenticated
+            when: !updates.authenticated
             PropertyChanges { target: notauthNotification; visible: true }
             PropertyChanges { target: noauthDivider; visible: (updates.haveSystemUpdate || !glob.hidden) }
         },
@@ -71,7 +73,7 @@ Item {
             name: "noUpdates"
             PropertyChanges { target: overlay; visible: true }
             when: {
-                var idle = managerStatus === UpdateManager.Idle;
+                var idle = status === UpdateManager.StatusIdle;
                 var noUpdates = (updatesCount === 0) && !updates.haveSystemUpdate;
                 return idle && noUpdates;
             }
@@ -103,7 +105,7 @@ Item {
             }
 
             height: hidden ? 0 : units.gu(6)
-            managerStatus: updates.managerStatus
+            status: updates.status
             requireRestart: updates.haveSystemUpdate
             updatesCount: updates.updatesCount
             online: updates.online
@@ -138,7 +140,7 @@ Item {
 
             Repeater {
                 id: clickUpdatesRepeater
-                model: UpdateManager.pendingClickUpdates
+                model: updates.pendingClickUpdatesModel
                 height: childrenRect.height
                 delegate: ClickUpdate {
                     width: clickUpdates.width
@@ -202,12 +204,13 @@ Item {
             horizontalAlignment: Text.AlignHCenter
             wrapMode: Text.WordWrap
             text: {
-                var s = updates.managerStatus;
+                var s = updates.status;
                 if (!updates.online) {
                     return i18n.tr("Connect to the Internet to check for updates.");
-                } else if (s === UpdateManager.Idle && UpdateManager.updatesCount === 0) {
+                } else if (s === UpdateManager.StatusIdle && updates.updatesCount === 0) {
                     return i18n.tr("Software is up to date");
-                } else if (s === UpdateManager.ServerError || s === UpdateManager.NetworkError) {
+                } else if (s === UpdateManager.StatusServerError ||
+                           s === UpdateManager.StatusNetworkError) {
                     return i18n.tr("The update server is not responding. Try again later.");
                 }
                 return "";

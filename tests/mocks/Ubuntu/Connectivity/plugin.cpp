@@ -1,7 +1,7 @@
 /*
  * This file is part of system-settings
  *
- * Copyright (C) 2016 Canonical Ltd.
+ * Copyright (C) 2014-2016 Canonical Ltd.
  *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License version 3, as published
@@ -14,32 +14,27 @@
  *
  * You should have received a copy of the GNU General Public License along
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * Authors:
+ *     Antti Kaijanmäki <antti.kaijanmaki@canonical.com>
  */
 
 #include "plugin.h"
-#include "MockUpdateManager.h"
 
 #include <QtQml>
 
-static QObject *umSingletonProvider(QQmlEngine *engine, QJSEngine *scriptEngine)
+#include "MockNetworkingStatus.h"
+
+static QObject * networkingStatusSingletonProvider(QQmlEngine *engine, QJSEngine *scriptEngine)
 {
     Q_UNUSED(engine)
     Q_UNUSED(scriptEngine)
 
-    return MockUpdateManager::instance();
-}
-
-static QObject *siSingletonProvider(QQmlEngine *engine, QJSEngine *scriptEngine)
-{
-    Q_UNUSED(engine)
-    Q_UNUSED(scriptEngine)
-
-    return new MockSystemImage;
+    return new MockNetworkingStatus;
 }
 
 void BackendPlugin::registerTypes(const char *uri)
 {
-    Q_ASSERT(uri == QLatin1String("Ubuntu.SystemSettings.Update"));
-    qmlRegisterSingletonType<MockSystemImage>(uri, 1, 0, "SystemImage", siSingletonProvider);
-    qmlRegisterSingletonType<MockUpdateManager>(uri, 1, 0, "UpdateManager", umSingletonProvider);
+    Q_ASSERT(uri == QLatin1String("Ubuntu.Connectivity"));
+    qmlRegisterSingletonType<MockNetworkingStatus>(uri, 1, 0, "NetworkingStatus", networkingStatusSingletonProvider);
 }

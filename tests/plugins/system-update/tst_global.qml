@@ -3,8 +3,6 @@
  *
  * Copyright (C) 2016 Canonical Ltd.
  *
- * Contact: Jonas G. Drange <jonas.drange@canonical.com>
- *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License version 3, as published
  * by the Free Software Foundation.
@@ -16,10 +14,8 @@
  *
  * You should have received a copy of the GNU General Public License along
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- * This is testing of the Global component, which is the spinner as well
- * as the “Update all/Pause all” area.
  */
+
 import QtQuick 2.4
 import QtTest 1.0
 import Ubuntu.Components 1.3

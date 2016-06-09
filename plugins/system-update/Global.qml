@@ -23,7 +23,7 @@ import Ubuntu.SystemSettings.Update 1.0
 
 Item {
     id: g
-    property int status // A UpdateManager::ManagerStatus
+    property int status // A UpdateManager::Status
     property bool requireRestart: false
     property int updatesCount: 0
     property bool online: false

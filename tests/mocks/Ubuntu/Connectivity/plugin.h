@@ -1,7 +1,7 @@
 /*
  * This file is part of system-settings
  *
- * Copyright (C) 2016 Canonical Ltd.
+ * Copyright (C) 2014-2016 Canonical Ltd.
  *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License version 3, as published
@@ -14,12 +14,15 @@
  *
  * You should have received a copy of the GNU General Public License along
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * Authors:
+ *     Antti Kaijanmäki <antti.kaijanmaki@canonical.com>
  */
 
-#ifndef MOCK_SYSTEM_UPDATE_PLUGIN_H
-#define MOCK_SYSTEM_UPDATE_PLUGIN_H
+#ifndef MOCK_CONNECTIVITY_H
+#define MOCK_CONNECTIVITY_H
 
-#include <QQmlExtensionPlugin>
+#include <QtQml/QQmlExtensionPlugin>
 
 class BackendPlugin : public QQmlExtensionPlugin
 {
@@ -30,4 +33,4 @@ public:
     void registerTypes(const char *uri) override;
 };
 
-#endif // MOCK_SYSTEM_UPDATE_PLUGIN_H
+#endif // MOCK_CONNECTIVITY_H

@@ -1,19 +1,20 @@
 /*
- * Copyright (C) 2016 Canonical Ltd
+ * This file is part of system-settings
  *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License version 3 as
- * published by the Free Software Foundation.
+ * Copyright (C) 2016 Canonical Ltd.
  *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ * This program is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License version 3, as published
+ * by the Free Software Foundation.
  *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranties of
+ * MERCHANTABILITY, SATISFACTORY QUALITY, or FITNESS FOR A PARTICULAR
+ * PURPOSE.  See the GNU General Public License for more details.
  *
-*/
+ * You should have received a copy of the GNU General Public License along
+ * with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #ifndef MOCK_SYSTEMIMAGE_H
 #define MOCK_SYSTEMIMAGE_H
@@ -93,11 +94,11 @@ public:
 
     Q_INVOKABLE void mockProgress(const int &percentage, const double &eta); // mock only
     Q_INVOKABLE void mockAvailableStatus(const bool is_available,
-                             const bool downloading,
-                             const QString &available_version,
-                             const int &update_size,
-                             const QString &last_update_date,
-                             const QString &error_reason); // mock only
+                                         const bool downloading,
+                                         const QString &available_version,
+                                         const int &update_size,
+                                         const QString &last_update_date,
+                                         const QString &error_reason); // mock only
     Q_INVOKABLE void mockPaused(const int &percentage); // mock only
     Q_INVOKABLE void mockStarted(); // mock only
     Q_INVOKABLE void mockDownloaded(); // mock only

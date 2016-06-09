@@ -3,8 +3,6 @@
  *
  * Copyright (C) 2016 Canonical Ltd.
  *
- * Contact: Jonas G. Drange <jonas.drange@canonical.com>
- *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License version 3, as published
  * by the Free Software Foundation.
@@ -16,15 +14,12 @@
  *
  * You should have received a copy of the GNU General Public License along
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- * Here we test the Updates component, which constitutes the main Updates
- * screen as seen in [1].
- *
- * [1] https://wiki.ubuntu.com/SoftwareUpdates#Phone
  */
+
 import QtQuick 2.4
 import QtTest 1.0
 import Ubuntu.Components 1.3
+import Ubuntu.Connectivity 1.0
 import Ubuntu.SystemSettings.Update 1.0
 import Ubuntu.Test 0.1
 
@@ -56,7 +51,7 @@ Item {
 
         function init() {
             cUpdts = updates.createObject(testRoot, {
-                systemImageBackend: SystemImage
+                pendingClickUpdatesModel: mockClickUpdatesModel
             });
         }
 
@@ -109,304 +104,242 @@ Item {
             }
         }
 
+
         function test_visibility_data() {
-            var connectText = i18n.tr("Connect to the Internet to check for updates.");
-            var uptodateText = i18n.tr("Software is up to date");
-            var notrespondingText = i18n.tr("The update server is not responding. Try again later.");
+            var textConnect = i18n.tr("Connect to the Internet to check for updates.");
+            var textUpdated = i18n.tr("Software is up to date");
+            var textNotResponding = i18n.tr("The update server is not responding. Try again later.");
             return [
                 {
                     tag: "check in progress (offline, no auth)",
                     haveSystemUpdate: false,
                     updatesCount: 0,
-                    managerStatus: UpdateManager.CheckingAllUpdates,
+                    status: UpdateManager.StatusCheckingAllUpdates,
                     online: false,
                     authenticated: false,
                     // Here be target values:
-                    global: { hidden: true },
-                    systemupdate: { visible: false },
-                    clickupdates: { visible: false },
-                    noauthnotification: { visible: false },
-                    fullscreenmessage: { visible: true, text: connectText }
+                    global: { hidden: true }, systemupdate: { visible: false }, clickupdates: { visible: false },
+                    noauthnotification: { visible: false }, fullscreenmessage: { visible: true, text: textConnect }
                 },
                 {
                     tag: "check in progress (offline, auth)",
                     haveSystemUpdate: false,
                     updatesCount: 0,
-                    managerStatus: UpdateManager.CheckingAllUpdates,
+                    status: UpdateManager.StatusCheckingAllUpdates,
                     online: false,
                     authenticated: true,
                     // Here be target values:
-                    global: { hidden: true },
-                    systemupdate: { visible: false },
-                    clickupdates: { visible: false },
-                    noauthnotification: { visible: false },
-                    fullscreenmessage: { visible: true, text: connectText }
+                    global: { hidden: true }, systemupdate: { visible: false }, clickupdates: { visible: false },
+                    noauthnotification: { visible: false }, fullscreenmessage: { visible: true, text: textConnect }
                 },
                 {
                     tag: "check in progress (online, no auth)",
                     haveSystemUpdate: false,
                     updatesCount: 0,
-                    managerStatus: UpdateManager.CheckingAllUpdates,
+                    status: UpdateManager.StatusCheckingAllUpdates,
                     online: true,
                     authenticated: false,
                     // Here be target values:
-                    global: { hidden: false },
-                    systemupdate: { visible: false },
-                    clickupdates: { visible: false },
-                    noauthnotification: { visible: true },
-                    fullscreenmessage: { visible: false }
+                    global: { hidden: false }, systemupdate: { visible: false }, clickupdates: { visible: false },
+                    noauthnotification: { visible: true }, fullscreenmessage: { visible: false }
                 },
                 {
                     tag: "check in progress (online, auth)",
                     haveSystemUpdate: false,
                     updatesCount: 0,
-                    managerStatus: UpdateManager.CheckingAllUpdates,
+                    status: UpdateManager.StatusCheckingAllUpdates,
                     online: true,
                     authenticated: true,
                     // Here be target values:
-                    global: { hidden: false },
-                    systemupdate: { visible: false },
-                    clickupdates: { visible: false },
-                    noauthnotification: { visible: false },
-                    fullscreenmessage: { visible: false }
+                    global: { hidden: false }, systemupdate: { visible: false }, clickupdates: { visible: false },
+                    noauthnotification: { visible: false }, fullscreenmessage: { visible: false }
                 },
                 {
                     tag: "no updates (offline, no auth)",
                     haveSystemUpdate: false,
                     updatesCount: 0,
-                    managerStatus: UpdateManager.Idle,
+                    status: UpdateManager.StatusIdle,
                     online: false,
                     authenticated: false,
                     // Here be target values:
-                    global: { hidden: true },
-                    systemupdate: { visible: false },
-                    clickupdates: { visible: false },
-                    noauthnotification: { visible: false },
-                    fullscreenmessage: { visible: true, text: connectText }
+                    global: { hidden: true }, systemupdate: { visible: false }, clickupdates: { visible: false },
+                    noauthnotification: { visible: false }, fullscreenmessage: { visible: true, text: textConnect }
                 },
                 {
                     tag: "no updates (offline, auth)",
                     haveSystemUpdate: false,
                     updatesCount: 0,
-                    managerStatus: UpdateManager.Idle,
+                    status: UpdateManager.StatusIdle,
                     online: false,
                     authenticated: true,
                     // Here be target values:
-                    global: { hidden: true },
-                    systemupdate: { visible: false },
-                    clickupdates: { visible: false },
-                    noauthnotification: { visible: false },
-                    fullscreenmessage: { visible: true, text: connectText }
+                    global: { hidden: true }, systemupdate: { visible: false }, clickupdates: { visible: false },
+                    noauthnotification: { visible: false }, fullscreenmessage: { visible: true, text: textConnect }
                 },
                 {
                     tag: "no updates (online, auth)",
                     haveSystemUpdate: false,
                     updatesCount: 0,
-                    managerStatus: UpdateManager.Idle,
+                    status: UpdateManager.StatusIdle,
                     online: true,
                     authenticated: true,
                     // Here be target values:
-                    global: { hidden: true },
-                    systemupdate: { visible: false },
-                    clickupdates: { visible: false },
-                    noauthnotification: { visible: false },
-                    fullscreenmessage: { visible: true, text: uptodateText }
+                    global: { hidden: true }, systemupdate: { visible: false }, clickupdates: { visible: false },
+                    noauthnotification: { visible: false }, fullscreenmessage: { visible: true, text: textUpdated }
                 },
                 {
                     tag: "no updates (online, no auth)",
                     haveSystemUpdate: false,
                     updatesCount: 0,
-                    managerStatus: UpdateManager.Idle,
+                    status: UpdateManager.StatusIdle,
                     online: true,
                     authenticated: false,
                     // Here be target values:
-                    global: { hidden: true },
-                    systemupdate: { visible: false },
-                    clickupdates: { visible: false },
-                    noauthnotification: { visible: true },
-                    fullscreenmessage: { visible: false }
+                    global: { hidden: true }, systemupdate: { visible: false }, clickupdates: { visible: false },
+                    noauthnotification: { visible: true }, fullscreenmessage: { visible: false }
                 },
                 {
                     tag: "offline (auth)",
                     haveSystemUpdate: false,
                     updatesCount: 0,
-                    managerStatus: UpdateManager.Idle,
+                    status: UpdateManager.StatusIdle,
                     online: false,
                     authenticated: true,
                     // Here be target values:
-                    global: { hidden: true },
-                    systemupdate: { visible: false },
-                    clickupdates: { visible: false },
-                    noauthnotification: { visible: false },
-                    fullscreenmessage: { visible: true, text: connectText }
+                    global: { hidden: true }, systemupdate: { visible: false }, clickupdates: { visible: false },
+                    noauthnotification: { visible: false }, fullscreenmessage: { visible: true, text: textConnect }
                 },,
                 {
                     tag: "offline (no auth)",
                     haveSystemUpdate: false,
                     updatesCount: 0,
-                    managerStatus: UpdateManager.Idle,
+                    status: UpdateManager.StatusIdle,
                     online: false,
                     authenticated: false,
                     // Here be target values:
-                    global: { hidden: true },
-                    systemupdate: { visible: false },
-                    clickupdates: { visible: false },
-                    noauthnotification: { visible: false },
-                    fullscreenmessage: { visible: true, text: connectText }
+                    global: { hidden: true }, systemupdate: { visible: false }, clickupdates: { visible: false },
+                    noauthnotification: { visible: false }, fullscreenmessage: { visible: true, text: textConnect }
                 },
                 {
                     tag: "server error",
                     haveSystemUpdate: false,
                     updatesCount: 0,
-                    managerStatus: UpdateManager.ServerError,
+                    status: UpdateManager.StatusServerError,
                     online: true,
                     authenticated: true,
                     // Here be target values:
-                    global: { hidden: true },
-                    systemupdate: { visible: false },
-                    clickupdates: { visible: false },
-                    noauthnotification: { visible: false },
-                    fullscreenmessage: { visible: true, text: notrespondingText }
+                    global: { hidden: true }, systemupdate: { visible: false }, clickupdates: { visible: false },
+                    noauthnotification: { visible: false }, fullscreenmessage: { visible: true, text: textNotResponding }
                 },
                 {
                     tag: "network error",
                     haveSystemUpdate: false,
                     updatesCount: 0,
-                    managerStatus: UpdateManager.NetworkError,
+                    status: UpdateManager.StatusNetworkError,
                     online: true,
                     authenticated: true,
                     // Here be target values:
-                    global: { hidden: true },
-                    systemupdate: { visible: false },
-                    clickupdates: { visible: false },
-                    noauthnotification: { visible: false },
-                    fullscreenmessage: { visible: true, text: notrespondingText }
+                    global: { hidden: true }, systemupdate: { visible: false }, clickupdates: { visible: false },
+                    noauthnotification: { visible: false }, fullscreenmessage: { visible: true, text: textNotResponding }
                 },
                 {
                     tag: "system update (online, no auth)",
                     haveSystemUpdate: true,
                     updatesCount: 1,
-                    managerStatus: UpdateManager.Idle,
+                    status: UpdateManager.StatusIdle,
                     online: true,
                     authenticated: false,
                     // Here be target values:
-                    global: { hidden: true },
-                    systemupdate: { visible: true },
-                    clickupdates: { visible: false },
-                    noauthnotification: { visible: true },
-                    fullscreenmessage: { visible: false }
+                    global: { hidden: true }, systemupdate: { visible: true }, clickupdates: { visible: false },
+                    noauthnotification: { visible: true }, fullscreenmessage: { visible: false }
                 },
                 {
                     tag: "system update (online, auth)",
                     haveSystemUpdate: true,
                     updatesCount: 1,
-                    managerStatus: UpdateManager.Idle,
+                    status: UpdateManager.StatusIdle,
                     online: true,
                     authenticated: true,
                     // Here be target values:
-                    global: { hidden: true },
-                    systemupdate: { visible: true },
-                    clickupdates: { visible: false },
-                    noauthnotification: { visible: false },
-                    fullscreenmessage: { visible: false }
+                    global: { hidden: true }, systemupdate: { visible: true }, clickupdates: { visible: false },
+                    noauthnotification: { visible: false }, fullscreenmessage: { visible: false }
                 },
                 {
                     tag: "system update (offline, auth)",
                     haveSystemUpdate: true,
                     updatesCount: 1,
-                    managerStatus: UpdateManager.Idle,
+                    status: UpdateManager.StatusIdle,
                     online: false,
                     authenticated: true,
                     // Here be target values:
-                    global: { hidden: true },
-                    systemupdate: { visible: false },
-                    clickupdates: { visible: false },
-                    noauthnotification: { visible: false },
-                    fullscreenmessage: { visible: true, text: connectText }
+                    global: { hidden: true }, systemupdate: { visible: false }, clickupdates: { visible: false },
+                    noauthnotification: { visible: false }, fullscreenmessage: { visible: true, text: textConnect }
                 },
                 {
                     tag: "system update (network error)",
                     haveSystemUpdate: true,
                     updatesCount: 1,
-                    managerStatus: UpdateManager.NetworkError,
+                    status: UpdateManager.StatusNetworkError,
                     online: true,
                     authenticated: true,
                     // Here be target values:
-                    global: { hidden: true },
-                    systemupdate: { visible: false },
-                    clickupdates: { visible: false },
-                    noauthnotification: { visible: false },
-                    fullscreenmessage: { visible: true, text: notrespondingText }
+                    global: { hidden: true }, systemupdate: { visible: false }, clickupdates: { visible: false },
+                    noauthnotification: { visible: false }, fullscreenmessage: { visible: true, text: textNotResponding }
                 },
                 {
                     tag: "system update (server error)",
                     haveSystemUpdate: true,
                     updatesCount: 1,
-                    managerStatus: UpdateManager.ServerError,
+                    status: UpdateManager.StatusServerError,
                     online: true,
                     authenticated: true,
                     // Here be target values:
-                    global: { hidden: true },
-                    systemupdate: { visible: false },
-                    clickupdates: { visible: false },
-                    noauthnotification: { visible: false },
-                    fullscreenmessage: { visible: true, text: notrespondingText }
+                    global: { hidden: true }, systemupdate: { visible: false }, clickupdates: { visible: false },
+                    noauthnotification: { visible: false }, fullscreenmessage: { visible: true, text: textNotResponding }
                 },
                 {
                     tag: "click updates (offline, no system update)",
                     haveSystemUpdate: false,
                     updatesCount: 2,
-                    managerStatus: UpdateManager.Idle,
+                    status: UpdateManager.StatusIdle,
                     online: false,
                     authenticated: true,
                     // Here be target values:
-                    global: { hidden: true },
-                    systemupdate: { visible: false },
-                    clickupdates: { visible: false },
-                    noauthnotification: { visible: false },
-                    fullscreenmessage: { visible: true, text: connectText }
+                    global: { hidden: true }, systemupdate: { visible: false }, clickupdates: { visible: false },
+                    noauthnotification: { visible: false }, fullscreenmessage: { visible: true, text: textConnect }
                 },
                 {
                     tag: "click updates (online, no system update)",
                     haveSystemUpdate: false,
                     updatesCount: 2,
-                    managerStatus: UpdateManager.Idle,
+                    status: UpdateManager.StatusIdle,
                     online: true,
                     authenticated: true,
                     // Here be target values:
-                    global: { hidden: false },
-                    systemupdate: { visible: false },
-                    clickupdates: { visible: true },
-                    noauthnotification: { visible: false },
-                    fullscreenmessage: { visible: false }
+                    global: { hidden: false }, systemupdate: { visible: false }, clickupdates: { visible: true },
+                    noauthnotification: { visible: false }, fullscreenmessage: { visible: false }
                 },
                 {
                     tag: "click updates (online, system update)",
                     haveSystemUpdate: true,
                     updatesCount: 3,
-                    managerStatus: UpdateManager.Idle,
+                    status: UpdateManager.StatusIdle,
                     online: true,
                     authenticated: true,
                     // Here be target values:
-                    global: { hidden: false },
-                    systemupdate: { visible: true },
-                    clickupdates: { visible: true },
-                    noauthnotification: { visible: false },
-                    fullscreenmessage: { visible: false }
+                    global: { hidden: false }, systemupdate: { visible: true }, clickupdates: { visible: true },
+                    noauthnotification: { visible: false }, fullscreenmessage: { visible: false }
                 },
                 {
                     tag: "many click updates (online, system update)",
                     haveSystemUpdate: true,
                     updatesCount: 50,
-                    managerStatus: UpdateManager.Idle,
+                    status: UpdateManager.StatusIdle,
                     online: true,
                     authenticated: true,
                     // Here be target values:
-                    global: { hidden: false },
-                    systemupdate: { visible: true },
-                    clickupdates: { visible: true },
-                    noauthnotification: { visible: false },
-                    fullscreenmessage: { visible: false }
+                    global: { hidden: false }, systemupdate: { visible: true }, clickupdates: { visible: true },
+                    noauthnotification: { visible: false }, fullscreenmessage: { visible: false }
                 }
             ]
         }
@@ -414,10 +347,10 @@ Item {
         function test_visibility(data) {
             cUpdts.haveSystemUpdate = data.haveSystemUpdate;
             cUpdts.updatesCount = data.updatesCount;
-            cUpdts.managerStatus = data.managerStatus;
+            cUpdts.status = data.status;
             cUpdts.online = data.online;
             cUpdts.authenticated = data.authenticated;
-            cUpdts.clickUpdatesModel = mockClickUpdatesModel;
+            cUpdts.pendingClickUpdatesModel = mockClickUpdatesModel;
 
             // If updatesCount is sufficient, create some dummy click updates.
             // We don't test the individual click updates here.
@@ -435,5 +368,15 @@ Item {
                 compare(getFullscreenMessageText().text, data.fullscreenmessage.text, "fullscreen message had wrong text");
             }
         }
+
+        // function test_offline() {
+        //     compare(getGlobal().hidden, true);
+        //     compare(getSystemUpdate().visible, false);
+        //     compare(getClickUpdates().visible, false);
+        //     compare(getNoAuthNotif().visible, false);
+        //     compare(getFullscreenMessage().visible, true);
+        //     compare(getFullscreenMessageText().text, i18n.tr("Connect to the Internet to check for updates."));
+        // }
+
     }
 }

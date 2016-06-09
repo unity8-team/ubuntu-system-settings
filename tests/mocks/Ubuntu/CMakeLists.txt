@@ -1,2 +1,3 @@
+add_subdirectory(Connectivity)
 add_subdirectory(DownloadManager)
 add_subdirectory(SystemSettings)
