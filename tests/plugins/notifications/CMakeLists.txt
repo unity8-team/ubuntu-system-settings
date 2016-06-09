@@ -34,7 +34,7 @@ target_link_libraries(${TEST}
 
 add_test(${TEST} ${XVFB_COMMAND} ${CMAKE_CURRENT_BINARY_DIR}/${TEST}
     -input ${CMAKE_SOURCE_DIR}/tests/plugins/notifications/
-    -import ${CMAKE_SOURCE_DIR}/src/
-    -import ${CMAKE_SOURCE_DIR}/tests/plugins/notifications
     -import ${CMAKE_BINARY_DIR}/tests/mocks/
+    -import ${CMAKE_SOURCE_DIR}/tests/plugins/notifications
+    -import ${CMAKE_SOURCE_DIR}/src/
 )

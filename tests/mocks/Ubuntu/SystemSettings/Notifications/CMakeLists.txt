@@ -8,8 +8,9 @@ include_directories(
 set(MOCK_NOTIFICATIONS_SRCS
     ${CMAKE_SOURCE_DIR}/plugins/notifications/click_applications_model.cpp
     ${CMAKE_SOURCE_DIR}/plugins/notifications/click_applications_notify_model.cpp
-    plugin.cpp
     MockClickApplicationsModel.cpp
+    MockClickApplicationsNotifyModel.cpp
+    plugin.cpp
 )
 
 add_library(MockUbuntuNotificationsPanel MODULE ${MOCK_NOTIFICATIONS_SRCS})

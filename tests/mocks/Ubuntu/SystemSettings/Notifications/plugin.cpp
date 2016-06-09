@@ -14,10 +14,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "click_applications_notify_model.h"
-
 #include "plugin.h"
 #include "MockClickApplicationsModel.h"
+#include "MockClickApplicationsNotifyModel.h"
 
 #include <QtQml>
 
@@ -34,5 +33,5 @@ void BackendPlugin::registerTypes(const char *uri)
 {
     Q_ASSERT(uri == QLatin1String("Ubuntu.SystemSettings.Notifications"));
     qmlRegisterSingletonType<MockClickApplicationsModel>(uri, 1, 0, "ClickApplicationsModel", MockClickApplicationsModel_singleton_factory);
-    qmlRegisterType<ClickApplicationsNotifyModel>(uri, 1, 0, "ClickApplicationsNotifyModel");
+    qmlRegisterType<MockClickApplicationsNotifyModel>(uri, 1, 0, "ClickApplicationsNotifyModel");
 }
