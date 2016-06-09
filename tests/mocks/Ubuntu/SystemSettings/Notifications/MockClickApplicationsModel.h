@@ -16,6 +16,20 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <QtQuickTest/QtQuickTest>
+// local
+#include "click_applications_model.h"
 
-QUICK_TEST_MAIN(tst_notifications)
+class MockClickApplicationsModel : public ClickApplicationsModel {
+    Q_OBJECT
+
+public:
+    Q_INVOKABLE void addApplication(const QString& pkgName, const QString& appName);
+    Q_INVOKABLE void removeApplicationByIndex(int index);
+    Q_INVOKABLE void setNotificationByIndex(int role, int idx, bool enabled);
+    Q_INVOKABLE void cleanup();
+
+protected Q_SLOTS:
+    void populateModel() { /* DO NOTHING */ }
+};
+
+
