@@ -146,8 +146,6 @@ ItemPage {
                         return i18n.tr("Switch to passcode")
                     case UbuntuSecurityPrivacyPanel.Passphrase:
                         return i18n.tr("Switch to passphrase")
-                    case UbuntuSecurityPrivacyPanel.Fingerprint:
-                        return i18n.tr("Switch to fingerprint")
                     }
                 }
             }
@@ -174,9 +172,7 @@ ItemPage {
                 echoMode: TextInput.Password
                 inputMethodHints: {
                     if (changeSecurityDialog.oldMethod ===
-                            UbuntuSecurityPrivacyPanel.Passphrase ||
-                        changeSecurityDialog.oldMethod ===
-                            UbuntuSecurityPrivacyPanel.Fingerprint)
+                            UbuntuSecurityPrivacyPanel.Passphrase)
                         return Qt.ImhNoAutoUppercase | Qt.ImhSensitiveData
                     else if (changeSecurityDialog.oldMethod ===
                              UbuntuSecurityPrivacyPanel.Passcode)
@@ -189,9 +185,7 @@ ItemPage {
                 visible: changeSecurityDialog.oldMethod ===
                             UbuntuSecurityPrivacyPanel.Passphrase ||
                          changeSecurityDialog.oldMethod ===
-                             UbuntuSecurityPrivacyPanel.Passcode ||
-                         changeSecurityDialog.oldMethod ===
-                             UbuntuSecurityPrivacyPanel.Fingerprint
+                             UbuntuSecurityPrivacyPanel.Passcode
                 onTextChanged: {
                     if (changeSecurityDialog.newMethod ===
                             UbuntuSecurityPrivacyPanel.Swipe)
@@ -477,7 +471,7 @@ ItemPage {
                 property string passphraseAlt: i18n.tr("Passphrase…")
 
                 id: unlockMethod
-                model: 4
+                model: showAllUI ? 4 : 3
                 delegate: OptionSelectorDelegate {
                     objectName: {
                         switch (index) {

@@ -160,14 +160,13 @@ ItemPage {
                 onClicked: pageStack.push(fingeprintPage, {
                     passcodeSet: securityPrivacy.securityType !== UbuntuSecurityPrivacyPanel.Swipe
                 })
-                visible: Biometryd.available
+                visible: Biometryd.isAvailable && showAllUI
             }
 
             Component {
                 id: fingeprintPage
                 Fingerprint {
                     onRequestPasscode: {
-                        // We want to recreate the Fingerprint page.
                         pageStack.pop();
                         pageStack.push(Qt.resolvedUrl("LockSecurity.qml"));
                     }
