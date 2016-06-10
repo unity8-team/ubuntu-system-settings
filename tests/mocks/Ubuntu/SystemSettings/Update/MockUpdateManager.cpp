@@ -64,6 +64,11 @@ void MockUpdateManager::retryClickPackage(const QString &packageName, const int 
 {
 }
 
+void MockUpdateManager::clickUpdateInstalled(const QString &packageName, const int &revision)
+{
+
+}
+
 void MockUpdateManager::mockAuthenticate(const bool authenticated)
 {
     m_authenticated = authenticated;

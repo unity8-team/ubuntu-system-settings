@@ -22,6 +22,7 @@ import QtQuick 2.4
 import Ubuntu.Components 1.3
 import Ubuntu.Connectivity 1.0
 import Ubuntu.Components.ListItems 1.3 as ListItems
+import Ubuntu.DownloadManager 1.2
 import Ubuntu.SystemSettings.Update 1.0
 
 Item {
@@ -34,8 +35,22 @@ Item {
         count += UpdateManager.pendingClickUpdates.count
     }
     property var pendingClickUpdatesModel: UpdateManager.pendingClickUpdates
+    property DownloadManager udm
     property bool online: NetworkingStatus.online
     property bool authenticated: UpdateManager.authenticated
+
+    function getDownload(packageName, revision) {
+        var custom;
+        for (var i=0; i < udm.downloads.length; i++) {
+            custom = udm.downloads[i].metadata.custom;
+            if (custom.packageName == packageName
+                && custom.revision == revision) {
+                return udm.downloads[i];
+            }
+        }
+        return null;
+    }
+
 
     // Set by the report from SI
     property bool haveSystemUpdate: false
@@ -143,12 +158,13 @@ Item {
                 model: updates.pendingClickUpdatesModel
                 height: childrenRect.height
                 delegate: ClickUpdate {
+                    objectName: "updatesClickUpdate" + index
                     width: clickUpdates.width
                     command: model.command
                     packageName: app_id
                     revision: model.revision
-                    downloadId: udm_download_id
                     clickToken: click_token
+                    download: updates.getDownload(app_id, model.revision)
                     downloadUrl: download_url
                     downloadSha512: download_sha512
                     version: remote_version

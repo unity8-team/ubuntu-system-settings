@@ -97,7 +97,7 @@ public:
     Q_INVOKABLE void pauseDownload();
     Q_INVOKABLE void productionReset();
     Q_INVOKABLE void factoryReset();
-    Q_INVOKABLE bool getIsTargetNewer() const;
+    Q_INVOKABLE bool checkTarget() const;
 
 signals:
     void currentBuildNumberChanged();

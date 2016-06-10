@@ -24,7 +24,6 @@ Update {
     id: update
     property string packageName
     property int revision
-    property var downloadId: null
     property var download: null
     property string command
     property string clickToken
@@ -32,13 +31,22 @@ Update {
     property string downloadSha512
     property string headers
 
-    onDownloadIdChanged: {
-        if (downloadId === null) {
+    updateState: UpdateManager.StateAvailable
+    kind: UpdateManager.KindApp
+
+    onRetry: UpdateManager.retryClickPackage(update.packageName, update.revision)
+    onPause: download.pause()
+    onResume: download.resume()
+    onInstall: {
+        if (download === null) {
             var metadata = {
                 "command": update.command.split(" "),
                 "title": update.name,
                 "showInIndicator": false,
-                // "downloadUrl": download_url,
+                "custom": {
+                    "packageName": update.packageName,
+                    "revision": update.revision
+                }
             };
             var hdrs = {
                 "X-Click-Token": update.clickToken
@@ -55,16 +63,10 @@ Update {
             singleDownloadObj.download(update.downloadUrl);
             download = singleDownloadObj;
         }
+
+        download.download(update.downloadUrl)
     }
-
-    updateState: UpdateManager.StateAvailable
-    kind: UpdateManager.KindApp
-
-    onRetry: UpdateManager.retryClickPackage(update.packageName, update.revision)
-    onPause: download.pause()
-    onResume: download.resume()
-    onInstall: download.download(update.downloadUrl)
-    onDownload: download.download(update.downloadUrl)
+    onDownload: install()
 
     Connections {
         target: download

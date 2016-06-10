@@ -26,7 +26,11 @@ import Ubuntu.SystemSettings.Update 1.0
 ListItem.SingleValue {
     id: root
 
-    property int updatesAvailable: UpdateManager.updatesCount
+    property int updatesAvailable: {
+        var n = UpdateManager.pendingClickUpdates.count;
+        n += SystemImage.checkTarget() ? 1 : 0;
+        return n;
+    }
 
     text: i18n.tr(model.displayName)
     objectName: "entryComponent-updates"

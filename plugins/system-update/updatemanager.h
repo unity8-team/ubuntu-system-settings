@@ -98,6 +98,7 @@ public:
     Q_INVOKABLE void checkForClickUpdates();
     Q_INVOKABLE void cancelCheckForClickUpdates();
     Q_INVOKABLE void retryClickPackage(const QString &packageName, const int &revision);
+    Q_INVOKABLE void clickUpdateInstalled(const QString &packageName, const int &revision);
 
 protected:
     explicit UpdateManager(QObject *parent = 0);
@@ -109,7 +110,6 @@ private slots:
     void handleCredentialsFound(const Token &token);
     void handleCredentialsFailed();
 
-    void udmDownloadEnded(const QString &id);
 
 signals:
     // void clickUpdateReady(const QString &url, const QString &hash,

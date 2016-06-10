@@ -45,6 +45,15 @@ ItemPage {
         Component.onCompleted: start()
     }
 
+    DownloadManager {
+        id: udm
+        // onDownloadCanceled: UpdateManager.udmDownloadEnded(download.downloadId) // (SingleDownload download)
+        onDownloadFinished: UpdateManager.clickUpdateInstalled(
+            download.custom.packageName, download.custom.revision
+        ) // (SingleDownload download, QString path)
+        // onErrorFound: UpdateManager.udmDownloadEnded(download.downloadId) // (SingleDownload download)
+    }
+
     // Binding {
     //     target: UpdateManager
     //     property: "online"
@@ -115,11 +124,11 @@ ItemPage {
         }
         havePower: (indicatorPower.deviceState === "charging")
                     && (indicatorPower.batteryLevel > 25)
-        // managerStatus: UpdateManager.managerStatus
+        udm: udm
 
-        onStop: UpdateManager.cancelCheckForUpdates()
         // onClickPackageRequestedRetry: UpdateManager.retryClickPackage(packageName);
-        Component.onDestruction: UpdateManager.cancelCheckForUpdates()
+        Component.onCompleted: UpdateManager.checkForClickUpdates()
+        Component.onDestruction: UpdateManager.cancelCheckForClickUpdates()
     }
 
     Column {

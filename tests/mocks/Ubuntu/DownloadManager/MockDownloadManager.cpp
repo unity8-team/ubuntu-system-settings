@@ -20,6 +20,8 @@
 #include <QDebug>
 
 MockDownloadManager::MockDownloadManager(QObject *parent)
+    : QObject(parent)
+    , m_downloads()
 {
 
 }
@@ -34,10 +36,14 @@ void MockDownloadManager::download(QString url)
 
 }
 
+void MockDownloadManager::mockDownload(MockSingleDownload *download)
+{
+    m_downloads.append(QVariant::fromValue(download));
+}
+
 QVariantList MockDownloadManager::downloads()
 {
-    qDebug() << "somebody requested downloads";
-    return QVariantList();
+    return m_downloads;
 }
 
 QString MockDownloadManager::errorMessage() const

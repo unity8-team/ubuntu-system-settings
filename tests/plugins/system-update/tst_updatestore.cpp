@@ -111,25 +111,25 @@ private slots:
         QCOMPARE(m_instance->pendingClickUpdates()->rowCount(), 1);
         QCOMPARE(m_instance->installedUpdates()->rowCount(), 0);
 
-        // Associate with udm
-        m_instance->setUdmId(m.name(), m.revision(), 3);
-        QCOMPARE(m_instance->pendingClickUpdates()->record(0).value("udm_download_id").toInt(),
-                 3);
+        // // Associate with udm
+        // m_instance->setUdmId(m.name(), m.revision(), 3);
+        // QCOMPARE(m_instance->pendingClickUpdates()->record(0).value("udm_download_id").toInt(),
+        //          3);
 
-        // Disassociate with udm
-        m_instance->unsetUdmId(m.name(), m.revision());
-        QVERIFY(m_instance->pendingClickUpdates()
-                    ->record(0).value("udm_download_id").isNull());
+        // // Disassociate with udm
+        // m_instance->unsetUdmId(m.name(), m.revision());
+        // QVERIFY(m_instance->pendingClickUpdates()
+        //             ->record(0).value("udm_download_id").isNull());
 
-        // Associate with udm
-        m_instance->setUdmId(m.name(), m.revision(), 3);
-        QCOMPARE(m_instance->pendingClickUpdates()->record(0).value("udm_download_id").toInt(),
-                 3);
+        // // Associate with udm
+        // m_instance->setUdmId(m.name(), m.revision(), 3);
+        // QCOMPARE(m_instance->pendingClickUpdates()->record(0).value("udm_download_id").toInt(),
+        //          3);
 
-        // Disassociate (using udm id)
-        m_instance->unsetUdmId(3);
-        QVERIFY(m_instance->pendingClickUpdates()
-                    ->record(0).value("udm_download_id").isNull());
+        // // Disassociate (using udm id)
+        // m_instance->unsetUdmId(3);
+        // QVERIFY(m_instance->pendingClickUpdates()
+        //             ->record(0).value("udm_download_id").isNull());
 
         // Add second click app
         m_instance->add(&m2);

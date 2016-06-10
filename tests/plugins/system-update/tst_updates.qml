@@ -20,6 +20,7 @@ import QtQuick 2.4
 import QtTest 1.0
 import Ubuntu.Components 1.3
 import Ubuntu.Connectivity 1.0
+import Ubuntu.DownloadManager 1.2
 import Ubuntu.SystemSettings.Update 1.0
 import Ubuntu.Test 0.1
 
@@ -38,10 +39,43 @@ Item {
         }
     }
 
+    Component {
+        id: singledownload
+
+        SingleDownload {
+            metadata: Metadata {}
+        }
+    }
+
+    Component {
+        id: downloadmanager
+
+        DownloadManager {}
+    }
+
     ListModel {
         id: mockClickUpdatesModel
         dynamicRoles: true
     }
+
+    function generateClickUpdates(count) {
+        for (var i = 0; i < count; i++) {
+            mockClickUpdatesModel.append({
+                "app_id": "app" + i,
+                "revision": i,
+                "command": "click test --foo",
+                "click_token": "as54d",
+                "download_url": "http://example.org/c.click",
+                "download_sha512": "6a5sd4a6s",
+                "remote_version": i,
+                "size": 500,
+                "title": "Click Update #" + i,
+                "icon_url": "",
+                "changelog": "Changes"
+            });
+        }
+    }
+
 
     UbuntuTestCase {
         name: "UpdatesTest"
@@ -51,7 +85,8 @@ Item {
 
         function init() {
             cUpdts = updates.createObject(testRoot, {
-                pendingClickUpdatesModel: mockClickUpdatesModel
+                pendingClickUpdatesModel: mockClickUpdatesModel,
+                udm: downloadmanager.createObject(testRoot, {})
             });
         }
 
@@ -84,26 +119,6 @@ Item {
         function getFullscreenMessageText() {
             return findChild(cUpdts, "updatesFullscreenMessageText");
         }
-
-        function generateClickUpdates(count) {
-            for (var i = 0; i < count; i++) {
-                mockClickUpdatesModel.append({
-                    "app_id": "app" + i,
-                    "revision": i,
-                    "command": "click test --foo",
-                    "udm_download_id": null,
-                    "click_token": "as54d",
-                    "download_url": "http://example.org/c.click",
-                    "download_sha512": "6a5sd4a6s",
-                    "remote_version": i,
-                    "size": 500,
-                    "title": "Click Update #" + i,
-                    "icon_url": "",
-                    "changelog": "Changes"
-                });
-            }
-        }
-
 
         function test_visibility_data() {
             var textConnect = i18n.tr("Connect to the Internet to check for updates.");
@@ -368,15 +383,35 @@ Item {
                 compare(getFullscreenMessageText().text, data.fullscreenmessage.text, "fullscreen message had wrong text");
             }
         }
+    }
 
-        // function test_offline() {
-        //     compare(getGlobal().hidden, true);
-        //     compare(getSystemUpdate().visible, false);
-        //     compare(getClickUpdates().visible, false);
-        //     compare(getNoAuthNotif().visible, false);
-        //     compare(getFullscreenMessage().visible, true);
-        //     compare(getFullscreenMessageText().text, i18n.tr("Connect to the Internet to check for updates."));
-        // }
+    UbuntuTestCase {
+        name: "UpdatesUdmTests"
+        when: windowShown
 
+        function test_udm() {
+            generateClickUpdates(1);
+            var download = singledownload.createObject(testRoot, {});
+            download.metadata.custom = { packageName: "app0", revision: "0" };
+
+            var downloadManager = downloadmanager.createObject(testRoot, {});
+            downloadManager.mockDownload(download);
+
+            var ups = updates.createObject(testRoot, {
+                pendingClickUpdatesModel: mockClickUpdatesModel,
+                udm: downloadManager,
+                online: true,
+                authenticated: true
+            });
+            download.mockProgress(50);
+            var downloadEl = findChild(ups, "updatesClickUpdate0");
+            compare(downloadEl.download, download);
+            compare(downloadEl.updateState, UpdateManager.StateDownloading);
+
+            download.destroy();
+            ups.destroy();
+            downloadManager.destroy();
+            mockClickUpdatesModel.clear();
+        }
     }
 }

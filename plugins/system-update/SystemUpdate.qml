@@ -77,7 +77,6 @@ Update {
             update.setError(i18n.tr("Update failed"), lastReason);
         }
         onDownloadModeChanged: {
-            console.log("onDownloadModeChanged", SystemImage.downloadMode);
             // Pause an automatic download if the downloadMode changes to Manual.
             if (SystemImage.downloadMode === 0 &&
                 update.updateState === UpdateManager.StateDownloadingAutomatically) {

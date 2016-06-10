@@ -131,7 +131,7 @@ UpdateModel *UpdateManager::pendingClickUpdates()
 
 bool UpdateManager::authenticated()
 {
-    return m_authenticated;
+    return m_authenticated || Helpers::isIgnoringCredentials();
 }
 
 void UpdateManager::setAuthenticated(const bool authenticated)
@@ -147,7 +147,7 @@ void UpdateManager::checkForClickUpdates()
     qWarning() << "manager: check";
 
     // Don't check for click updates if there are no credentials.
-    if (!m_token.isValid()) {
+    if (!m_token.isValid() && !Helpers::isIgnoringCredentials()) {
         m_ssoService.getCredentials();
         return;
     }
@@ -212,9 +212,9 @@ void UpdateManager::handleCredentialsFailed()
     setAuthenticated(false);
 }
 
-void UpdateManager::udmDownloadEnded(const QString &id)
+void UpdateManager::clickUpdateInstalled(const QString &packageName, const int &revision)
 {
-    m_updatestore.unsetUdmId(id.toInt());
+    m_updatestore.markInstalled(packageName, revision);
 }
 
 } // UpdatePlugin

@@ -19,6 +19,7 @@
 import QtQuick 2.4
 import QtTest 1.0
 import Ubuntu.Components 1.3
+import Ubuntu.DownloadManager 1.2
 import Ubuntu.SystemSettings.Update 1.0
 import Ubuntu.Test 0.1
 
@@ -37,6 +38,34 @@ Item {
         }
     }
 
+    function get_test_data() {
+        return {
+            updateState: UpdateManager.StateAvailable,
+            kind: UpdateManager.KindApp,
+            progress: 0,
+
+            size: 1000,
+            packageName: "some_app",
+            revision: 1,
+            command: "test click install --fake",
+            name: "Some click app",
+            clickToken: "hjiklmnopq",
+            downloadUrl: "http://example.org/c.click",
+            downloadSha512: "abcdefg",
+            headers: {},
+            remoteVersion: 2,
+            changelog: "Changes",
+            iconUrl: ""
+        }
+    }
+
+
+    Component {
+        id: cDownload
+
+        SingleDownload {}
+    }
+
     property var cUpdt: null
 
     SignalSpy {
@@ -44,82 +73,63 @@ Item {
     }
 
     UbuntuTestCase {
-        name: "ClickUpdateTest"
+        name: "ClickUpdateWithDownloadTest"
         when: windowShown
 
-        function init () {
-            cUpdt = update.createObject(testRoot, get_data());
+        function init() {
+            cUpdt = update.createObject(testRoot, get_test_data());
+            cUpdt.download = cDownload.createObject(cUpdt, {});
         }
 
-        function cleanup () {
+        function cleanup() {
+            cUpdt.download.destroy();
             cUpdt.destroy();
             cUpdt = null;
         }
 
-        function get_data () {
-            return {
-                updateState: UpdateManager.StateAvailable,
-                kind: UpdateManager.KindApp,
-                progress: 0,
-
-                size: 1000,
-                packageName: "some_app",
-                revision: 1,
-                command: "test click install --fake",
-                name: "Some click app",
-                clickToken: "hjiklmnopq",
-                downloadUrl: "http://example.org/c.click",
-                downloadSha512: "abcdefg",
-                headers: {},
-                remoteVersion: 2,
-                changelog: "Changes",
-                iconUrl: ""
-            }
-        }
-
-        function test_onStarted () {
+        function test_onStarted() {
             cUpdt.download.mockStart();
             compare(cUpdt.updateState, UpdateManager.StateQueuedForDownload);
             // Ensure indeterminate progress bar.
             compare(cUpdt.progress, -1);
         }
 
-        function test_onProgress () {
+        function test_onProgress() {
             cUpdt.download.mockProgress(50);
             compare(cUpdt.progress, 50);
             compare(cUpdt.updateState, UpdateManager.StateDownloading);
         }
 
-        function test_onFinished () {
+        function test_onFinished() {
             cUpdt.download.mockFinished();
             compare(cUpdt.updateState, UpdateManager.StateInstalled);
         }
 
-        function test_onError () {
+        function test_onError() {
             cUpdt.download.mockErrorMessage("Error");
             compare(cUpdt.errorTitle, i18n.tr("Download failed"));
             compare(cUpdt.errorDetail, "Error");
             compare(cUpdt.updateState, UpdateManager.StateFailed);
         }
 
-        function test_onPause () {
+        function test_onPause() {
             cUpdt.download.mockPause();
             compare(cUpdt.updateState, UpdateManager.StateDownloadPaused);
         }
 
-        function test_onResume () {
+        function test_onResume() {
             cUpdt.download.mockResume();
             compare(cUpdt.updateState, UpdateManager.StateDownloading);
         }
 
-        function test_onProcessing () {
+        function test_onProcessing() {
             cUpdt.download.mockProcess();
             compare(cUpdt.updateState, UpdateManager.StateInstalling);
             // Ensure indeterminate progress bar.
             compare(cUpdt.progress, -1);
         }
 
-        function test_startUpdate () {
+        function test_startUpdate() {
             var button = findChild(cUpdt, "updateButton");
             cUpdt.updateState = UpdateManager.StateAvailable;
 
@@ -129,7 +139,7 @@ Item {
             buttonSignalSpy.wait();
         }
 
-        function test_pauseUpdate () {
+        function test_pauseUpdate() {
             var button = findChild(cUpdt, "updateButton");
             cUpdt.updateState = UpdateManager.StateDownloading;
 
@@ -139,7 +149,7 @@ Item {
             buttonSignalSpy.wait();
         }
 
-        function test_retryUpdate () {
+        function test_retryUpdate() {
             var button = findChild(cUpdt, "updateButton");
             cUpdt.updateState = UpdateManager.StateFailed;
 
@@ -149,7 +159,7 @@ Item {
             buttonSignalSpy.wait();
         }
 
-        function test_resumeUpdate () {
+        function test_resumeUpdate() {
             var button = findChild(cUpdt, "updateButton");
             cUpdt.updateState = UpdateManager.StateDownloadPaused;
 
@@ -158,20 +168,44 @@ Item {
             mouseClick(button, button.width / 2, button.height / 2);
             buttonSignalSpy.wait();
         }
+    }
 
-        function test_metadata () {
-            var m = cUpdt.download.metadata;
-            compare(m.command, get_data().command.split(" "));
-            compare(m.title, get_data().name);
-            compare(m.showInIndicator, false, "click update shown in indicator");
+    UbuntuTestCase {
+        name: "ClickUpdateWithoutDownloadTest"
+        when: windowShown
+
+        function init() {
+            cUpdt = update.createObject(testRoot, get_test_data());
+
+            var button = findChild(cUpdt, "updateButton");
+            mouseClick(button, button.width / 2, button.height / 2);
         }
 
-        function test_download () {
+        function cleanup() {
+            cUpdt.destroy();
+            cUpdt = null;
+        }
+
+        function test_metadata() {
+            var m = cUpdt.download.metadata;
+            compare(m.command, get_test_data().command.split(" "));
+            compare(m.title, get_test_data().name);
+            compare(m.showInIndicator, false, "click update shown in indicator");
+            compare(m.custom, {
+                "packageName": get_test_data().packageName,
+                "revision": get_test_data().revision
+            });
+        }
+
+        function test_download() {
             var d = cUpdt.download;
-            compare(d.url, get_data().downloadUrl);
+            compare(d.url, get_test_data().downloadUrl);
             compare(d.autoStart, false, "click update is autostarting");
-            compare(d.hash, get_data().downloadSha512);
+            compare(d.hash, get_test_data().downloadSha512);
             compare(d.algorithm, "sha512", "click update not using sha512 algo");
         }
     }
 }
+
+
+

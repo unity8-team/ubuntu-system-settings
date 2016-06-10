@@ -37,6 +37,7 @@ public:
     ~MockDownloadManager();
 
     Q_INVOKABLE void download(QString url);
+    Q_INVOKABLE void mockDownload(MockSingleDownload *download);
 
     QVariantList downloads();
     QString errorMessage() const;
@@ -51,6 +52,9 @@ signals:
     void downloadPaused(MockSingleDownload *download);
     void downloadResumed(MockSingleDownload *download);
     void downloadCanceled(MockSingleDownload *download);
+
+private:
+    QVariantList m_downloads;
 };
 
 #endif // MOCK_DOWNLOADMANAGER_H

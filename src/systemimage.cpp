@@ -207,7 +207,7 @@ void QSystemImage::initializeProperties() {
     qWarning() << "QSystemImage: m_targetBuildNumber" << m_targetBuildNumber;
 }
 
-bool QSystemImage::getIsTargetNewer() const {
+bool QSystemImage::checkTarget() const {
     return m_targetBuildNumber > m_currentBuildNumber;
 }
 

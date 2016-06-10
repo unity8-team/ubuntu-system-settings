@@ -85,6 +85,7 @@ Q_OBJECT
     Q_INVOKABLE void checkForClickUpdates();
     Q_INVOKABLE void cancelCheckForClickUpdates();
     Q_INVOKABLE void retryClickPackage(const QString &packageName, const int &revision);
+    Q_INVOKABLE void clickUpdateInstalled(const QString &packageName, const int &revision);
 
     Q_INVOKABLE void mockAuthenticate(const bool authenticated); // mock only
     Q_INVOKABLE void mockServerError(); // mock only

@@ -101,7 +101,7 @@ bool MockSingleDownload::autoStart() const
 
 QString MockSingleDownload::downloadId() const
 {
-    return "";
+    return "42";
 }
 
 QVariantMap MockSingleDownload::headers() const

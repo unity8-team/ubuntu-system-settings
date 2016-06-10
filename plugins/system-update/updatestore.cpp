@@ -113,59 +113,59 @@ void UpdateStore::add(const ClickUpdateMetadata *meta)
     queryPending();
 }
 
-void UpdateStore::setUdmId(const QString &appId, const int &revision,
-                                const int &udmId)
-{
-    if (!openDb()) return;
+// void UpdateStore::setUdmId(const QString &appId, const int &revision,
+//                                 const int &udmId)
+// {
+//     if (!openDb()) return;
 
-    QSqlQuery q(m_db);
-    q.prepare("UPDATE updates SET udm_download_id=:udm_download_id"
-              " WHERE app_id=:app_id AND revision=:revision");
-    q.bindValue(":udm_download_id", udmId);
-    q.bindValue(":app_id", appId);
-    q.bindValue(":revision", revision);
+//     QSqlQuery q(m_db);
+//     q.prepare("UPDATE updates SET udm_download_id=:udm_download_id"
+//               " WHERE app_id=:app_id AND revision=:revision");
+//     q.bindValue(":udm_download_id", udmId);
+//     q.bindValue(":app_id", appId);
+//     q.bindValue(":revision", revision);
 
-    if (!q.exec())
-        qCritical() << "could not set udm id for app id" << appId
-                    << q.lastError().text();
+//     if (!q.exec())
+//         qCritical() << "could not set udm id for app id" << appId
+//                     << q.lastError().text();
 
-    queryPending();
-}
+//     queryPending();
+// }
 
-void UpdateStore::unsetUdmId(const QString &appId, const int &revision)
-{
-    if (!openDb()) return;
+// void UpdateStore::unsetUdmId(const QString &appId, const int &revision)
+// {
+//     if (!openDb()) return;
 
-    QSqlQuery q(m_db);
-    q.prepare("UPDATE updates SET udm_download_id=NULL"
-              " WHERE app_id=:app_id AND revision=:revision");
-    // q.bindValue(":udm_download_id", QVariant(NULL));
-    q.bindValue(":app_id", appId);
-    q.bindValue(":revision", revision);
+//     QSqlQuery q(m_db);
+//     q.prepare("UPDATE updates SET udm_download_id=NULL"
+//               " WHERE app_id=:app_id AND revision=:revision");
+//     // q.bindValue(":udm_download_id", QVariant(NULL));
+//     q.bindValue(":app_id", appId);
+//     q.bindValue(":revision", revision);
 
-    if (!q.exec())
-        qCritical() << "could not unset udm id for app id" << appId
-                    << q.lastError().text();
+//     if (!q.exec())
+//         qCritical() << "could not unset udm id for app id" << appId
+//                     << q.lastError().text();
 
-    queryPending();
-}
+//     queryPending();
+// }
 
-void UpdateStore::unsetUdmId(const int &udmId)
-{
-    if (!openDb()) return;
+// void UpdateStore::unsetUdmId(const int &udmId)
+// {
+//     if (!openDb()) return;
 
-    QSqlQuery q(m_db);
-    q.prepare("UPDATE updates SET udm_download_id=NULL"
-              " WHERE udm_download_id=:udm_download_id");
-    q.bindValue(":udm_download_id", QVariant(udmId));
+//     QSqlQuery q(m_db);
+//     q.prepare("UPDATE updates SET udm_download_id=NULL"
+//               " WHERE udm_download_id=:udm_download_id");
+//     q.bindValue(":udm_download_id", QVariant(udmId));
 
-    if (!q.exec())
-        qCritical() << "could not unset udm id given udm id" << udmId
-                    << q.lastError().text();
+//     if (!q.exec())
+//         qCritical() << "could not unset udm id given udm id" << udmId
+//                     << q.lastError().text();
 
-    queryPending();
+//     queryPending();
 
-}
+// }
 
 void UpdateStore::queryPending()
 {
@@ -249,7 +249,6 @@ bool UpdateStore::createDb()
                 "download_url TEXT NOT NULL,"
                 "command TEXT NOT NULL,"
                 "changelog TEXT NOT NULL,"
-                "udm_download_id INTEGER,"
                 "click_token TEXT DEFAULT '',"
                 "PRIMARY KEY (app_id, revision))");
 

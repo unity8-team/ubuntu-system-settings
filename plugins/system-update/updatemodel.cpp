@@ -24,6 +24,8 @@ namespace UpdatePlugin
 UpdateModel::UpdateModel(QObject *parent) :
     QSqlQueryModel(parent)
 {
+    connect(this, SIGNAL(endRemoveRows()), SIGNAL(countChanged()));
+    connect(this, SIGNAL(endInsertRows()), SIGNAL(countChanged()));
 }
 
 UpdateModel::~UpdateModel()
