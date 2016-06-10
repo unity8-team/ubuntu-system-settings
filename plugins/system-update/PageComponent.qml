@@ -137,7 +137,9 @@ ItemPage {
         anchors.bottom: parent.bottom
         anchors.left: parent.left
         anchors.right: parent.right
+
         ListItem.ThinDivider {}
+
         ListItem.SingleValue {
             objectName: "configuration"
             text: i18n.tr("Auto download")
