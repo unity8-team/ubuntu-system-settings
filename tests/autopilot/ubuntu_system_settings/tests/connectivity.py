@@ -62,6 +62,7 @@ def set_hotspot_auth(self, value):
 def set_wifi_enabled(self, value):
     self.SetProperty(NETS_OBJ, NETS_IFACE, 'WifiEnabled', value)
 
+
 @dbus.service.method(dbusmock.MOCK_IFACE,
                      in_signature='s', out_signature='s')
 def AddSim(self, imsi):
@@ -85,6 +86,7 @@ def AddSim(self, imsi):
     )
     return path
 
+
 @dbus.service.method(dbusmock.MOCK_IFACE,
                      in_signature='sis', out_signature='s')
 def AddModem(self, serial, index, sim):
@@ -101,6 +103,7 @@ def AddModem(self, serial, index, sim):
         ]
     )
     return path
+
 
 def add_openvpn_object(mock, path):
     obj = dbusmock.get_object(path)
@@ -267,8 +270,8 @@ def load(mock, parameters):
             'HotspotAuth': _parameters.get(
                 'HotspotAuth', dbus.String('wpa-psk')
             ),
-            'VpnConnections': _parameters.get('VpnConnections',
-                                              dbus.Array([], signature='o')
+            'VpnConnections': _parameters.get(
+                'VpnConnections', dbus.Array([], signature='o')
             ),
             'MobileDataEnabled': _parameters.get(
                 'MobileDataEnabled', dbus.Boolean(False)

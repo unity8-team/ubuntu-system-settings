@@ -39,8 +39,7 @@ from ubuntu_system_settings.utils.mock_update_click_server import (
 )
 from ubuntu_system_settings.tests.connectivity import (
     PRIV_OBJ as CTV_PRIV_OBJ, NETS_OBJ as CTV_NETS_OBJ,
-    MAIN_IFACE as CTV_IFACE, PRIV_IFACE as CTV_PRIV_IFACE,
-    MODEM_IFACE as CTV_MODEM_IFACE, SIM_IFACE as CTV_SIM_IFACE
+    MAIN_IFACE as CTV_IFACE
 )
 from ubuntuuitoolkit._custom_proxy_objects._common import (
     is_process_running, _start_process, _stop_process)
@@ -465,9 +464,15 @@ class CellularBaseTestCase(UbuntuSystemSettingsOfonoTestCase):
             'org.freedesktop.DBus.Properties')
 
         sim = self.obj_ctv.AddSim("1234567890")
-        self.ctv_private.Set(CON_IFACE, 'Sims', dbus.Array([sim], signature='o'))
+        self.ctv_private.Set(CON_IFACE,
+                             'Sims',
+                             dbus.Array([sim],
+                                        signature='o'))
         modem = self.obj_ctv.AddModem("0987654321", 1, sim)
-        self.ctv_private.Set(CON_IFACE, 'Modems', dbus.Array([modem], signature='o'))
+        self.ctv_private.Set(CON_IFACE,
+                             'Modems',
+                             dbus.Array([modem],
+                                        signature='o'))
 
         self.ctv_modem0 = dbus.Interface(
             self.session_con.get_object(CTV_IFACE, modem),
@@ -478,9 +483,15 @@ class CellularBaseTestCase(UbuntuSystemSettingsOfonoTestCase):
 
         if self.use_sims == 2:
             sim2 = self.obj_ctv.AddSim("2345678901")
-            self.ctv_private.Set(CON_IFACE, 'Sims', dbus.Array([sim, sim2], signature='o'))
+            self.ctv_private.Set(CON_IFACE,
+                                 'Sims',
+                                 dbus.Array([sim, sim2],
+                                            signature='o'))
             modem2 = self.obj_ctv.AddModem("1098765432", 2, sim2)
-            self.ctv_private.Set(CON_IFACE, 'Modems', dbus.Array([modem, modem2], signature='o'))
+            self.ctv_private.Set(CON_IFACE,
+                                 'Modems',
+                                 dbus.Array([modem, modem2],
+                                            signature='o'))
 
             self.ctv_modem1 = dbus.Interface(
                 self.session_con.get_object(CTV_IFACE, modem2),

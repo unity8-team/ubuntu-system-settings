@@ -13,10 +13,12 @@ from autopilot.matchers import Eventually
 from testtools.matchers import Equals, raises, StartsWith
 
 from ubuntu_system_settings.tests import (
-    CellularBaseTestCase, CONNMAN_IFACE, RDO_IFACE,
-    NETREG_IFACE, ACCOUNTS_PHONE_IFACE, CON_IFACE,
-    CTV_MODEM_IFACE, CTV_SIM_IFACE)
+    CellularBaseTestCase, RDO_IFACE,
+    NETREG_IFACE, ACCOUNTS_PHONE_IFACE, CON_IFACE)
 
+from ubuntu_system_settings.tests.connectivity import (
+    SIM_IFACE as CTV_SIM_IFACE
+)
 
 DEV_IFACE = 'org.freedesktop.NetworkManager.Device'
 
@@ -103,9 +105,10 @@ class DualSimCellularTestCase(CellularBaseTestCase):
             Eventually(Equals(False))
         )
 
-
     def test_sim1_online(self):
-        self.ctv_private.Set(CON_IFACE, 'SimForMobileData', dbus.ObjectPath("/"))
+        self.ctv_private.Set(CON_IFACE,
+                             'SimForMobileData',
+                             dbus.ObjectPath("/"))
         self.cellular_page.select_sim_for_data('/ril_0')
         self.assertThat(
             lambda: self.ctv_private.Get(CON_IFACE, 'SimForMobileData'),
@@ -113,7 +116,9 @@ class DualSimCellularTestCase(CellularBaseTestCase):
         )
 
     def test_sim2_online(self):
-        self.ctv_private.Set(CON_IFACE, 'SimForMobileData', dbus.ObjectPath("/"))
+        self.ctv_private.Set(CON_IFACE,
+                             'SimForMobileData',
+                             dbus.ObjectPath("/"))
         self.cellular_page.select_sim_for_data('/ril_1')
         self.assertThat(
             lambda: self.ctv_private.Get(CON_IFACE, 'SimForMobileData'),
@@ -229,7 +234,9 @@ class DualSimCellularTestCase(CellularBaseTestCase):
     def test_allow_roaming_sim_1(self):
         self.ctv_private.Set(CON_IFACE, 'MobileDataEnabled', True)
         self.ctv_sim0.Set(CTV_SIM_IFACE, 'DataRoamingEnabled', False)
-        self.ctv_private.Set(CON_IFACE, 'SimForMobileData', dbus.ObjectPath("/"))
+        self.ctv_private.Set(CON_IFACE,
+                             'SimForMobileData',
+                             dbus.ObjectPath("/"))
         self.cellular_page.select_sim_for_data('/ril_0')
         self.assertThat(
             lambda: self.ctv_private.Get(CON_IFACE, 'SimForMobileData'),
@@ -244,7 +251,9 @@ class DualSimCellularTestCase(CellularBaseTestCase):
     def test_allow_roaming_sim_2(self):
         self.ctv_private.Set(CON_IFACE, 'MobileDataEnabled', True)
         self.ctv_sim1.Set(CTV_SIM_IFACE, 'DataRoamingEnabled', False)
-        self.ctv_private.Set(CON_IFACE, 'SimForMobileData', dbus.ObjectPath("/"))
+        self.ctv_private.Set(CON_IFACE,
+                             'SimForMobileData',
+                             dbus.ObjectPath("/"))
         self.cellular_page.select_sim_for_data('/ril_1')
         self.assertThat(
             lambda: self.ctv_private.Get(CON_IFACE, 'SimForMobileData'),
