@@ -18,7 +18,7 @@
  *
 */
 import QtQuick 2.4
-import QtQuick.Layouts 1.2
+import QtQuick.Layouts 1.1
 import SystemSettings 1.0
 import Ubuntu.Connectivity 1.0
 import Ubuntu.Components 1.3
