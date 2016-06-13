@@ -137,7 +137,15 @@ Item {
             updatesCount: updates.updatesCount
             online: updates.online
             onStop: {
-                // TODO: stop si check
+                // SI silently cancels any check if no download in progress.
+                SystemImage.cancelUpdate()
+                switch (updates.status) {
+                    case UpdateManager.StatusCheckingAllUpdates:
+                        updates.status = UpdateManager.StatusCheckingClickUpdates; break;
+                    case UpdateManager.StatusCheckingSystemUpdates:
+                        updates.status = UpdateManager.StatusIdle; break;
+                }
+
                 UpdateManager.cancelCheckForClickUpdates()
 
             }
