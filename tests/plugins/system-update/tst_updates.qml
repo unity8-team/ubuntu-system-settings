@@ -445,6 +445,12 @@ Item {
             // Finish System Image check while checking all.
             SystemImage.mockAvailableStatus(false, false, "", 0, "", "");
             compare(updatesInstance.status, UpdateManager.StatusCheckingClickUpdates);
+
+            // Cancel System Image
+            updatesInstance.check();
+            compare(updatesInstance.status, UpdateManager.StatusCheckingAllUpdates);
+            findChild(updatesInstance, "updatesGlobal").stop();
+            compare(updatesInstance.status, UpdateManager.StatusCheckingClickUpdates);
         }
     }
 }
