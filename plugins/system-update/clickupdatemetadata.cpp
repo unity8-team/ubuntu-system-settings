@@ -286,14 +286,12 @@ void ClickUpdateMetadata::setLocalVersion(const QString &version)
 
 void ClickUpdateMetadata::setClickToken(const QString &clickToken)
 {
-    qWarning() << "click meta: sat click token" << clickToken;
     if (m_clickToken != clickToken) {
         m_clickToken = clickToken;
         Q_EMIT clickTokenChanged();
     }
 
     if (!m_clickToken.isEmpty()) {
-        qWarning() << "click meta: emit clickTokenRequestSucceeded";
         clickTokenRequestSucceeded(this);
     }
 }

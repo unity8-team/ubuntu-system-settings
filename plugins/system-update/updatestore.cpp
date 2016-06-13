@@ -27,11 +27,9 @@
 namespace UpdatePlugin
 {
 
-UpdateStore::UpdateStore(QObject *parent) :
-        QObject(parent),
-        m_installedUpdates(this),
-        m_pendingClickUpdates(this),
-        m_dbpath("")
+UpdateStore::UpdateStore(QObject *parent)
+    : QObject(parent)
+    , m_dbpath("")
 {
     QString dataPath = QStandardPaths::writableLocation(
         QStandardPaths::AppDataLocation);
@@ -44,11 +42,9 @@ UpdateStore::UpdateStore(QObject *parent) :
     initializeStore();
 }
 
-UpdateStore::UpdateStore(const QString &dbpath, QObject *parent) :
-        QObject(parent),
-        m_installedUpdates(this),
-        m_pendingClickUpdates(this),
-        m_dbpath(dbpath)
+UpdateStore::UpdateStore(const QString &dbpath, QObject *parent)
+    : QObject(parent)
+    , m_dbpath(dbpath)
 {
     initializeStore();
 }
@@ -56,17 +52,26 @@ UpdateStore::UpdateStore(const QString &dbpath, QObject *parent) :
 UpdateStore::~UpdateStore()
 {
     m_db.close();
-    QString name = m_db.connectionName();
     m_db = QSqlDatabase();
-    QSqlDatabase::removeDatabase(name);
+    QSqlDatabase::removeDatabase(m_connectionName);
 }
 
 void UpdateStore::initializeStore()
 {
+    // Create a unique connection name
+    int connI = 0;
+    while (m_connectionName.isEmpty()) {
+        QString tmpl("update-store-%1");
+        if (!QSqlDatabase::contains(tmpl.arg(connI)))
+            m_connectionName = tmpl.arg(connI);
+        connI++;
+    }
+
+    m_db = QSqlDatabase::addDatabase(QLatin1String("QSQLITE"), m_connectionName);
     m_db.setDatabaseName(m_dbpath);
     if (!openDb()) return;
-
     QSqlQuery q(m_db);
+
     // Check whether the table already exists
     q.exec("SELECT name FROM sqlite_master WHERE type='table' AND name='updates'");
     if (!q.next() && !createDb()) {
@@ -75,7 +80,7 @@ void UpdateStore::initializeStore()
         return;
     }
 
-    queryAll();
+    m_db.close();
 }
 
 void UpdateStore::add(const ClickUpdateMetadata *meta)
@@ -110,7 +115,9 @@ void UpdateStore::add(const ClickUpdateMetadata *meta)
     if (!q.exec())
         qCritical() << "Could not add click update" << q.lastError().text();
 
-    queryPending();
+    m_db.close();
+
+    Q_EMIT (updatesChanged());
 }
 
 // void UpdateStore::setUdmId(const QString &appId, const int &revision,
@@ -167,38 +174,41 @@ void UpdateStore::add(const ClickUpdateMetadata *meta)
 
 // }
 
-void UpdateStore::queryPending()
+// void UpdateStore::queryPending()
+// {
+//     if (!openDb()) return;
+
+//     // TODO: this should query for DISTINCT app_id
+//     // TODO: bind KIND_CLICK
+//     m_pendingClickUpdates.setQuery("SELECT * FROM updates WHERE state='pending' "
+//                              " AND kind='" + KIND_CLICK + "' ORDER BY title ASC",
+//                              m_db);
+//     if (m_pendingClickUpdates.lastError().isValid())
+//         qWarning() << m_pendingClickUpdates.lastError();
+
+//     m_db.close();
+// }
+
+// void UpdateStore::queryInstalled()
+// {
+
+//     m_installedUpdates.setQuery("SELECT * FROM updates WHERE state='installed' "
+//                                 "ORDER BY updated_at_utc DESC",
+//                                 m_db);
+//     if (m_installedUpdates.lastError().isValid())
+//         qWarning() << m_installedUpdates.lastError();
+
+//     m_db.close();
+// }
+
+// void UpdateStore::queryAll()
+// {
+//     queryPending();
+//     queryInstalled();
+// }
+QSqlDatabase UpdateStore::db() const
 {
-    if (!openDb()) return;
-
-    // TODO: this should query for DISTINCT app_id
-    // TODO: bind KIND_CLICK
-    m_pendingClickUpdates.setQuery("SELECT * FROM updates WHERE state='pending' "
-                             " AND kind='" + KIND_CLICK + "' ORDER BY title ASC",
-                             m_db);
-    if (m_pendingClickUpdates.lastError().isValid())
-        qWarning() << m_pendingClickUpdates.lastError();
-
-    m_db.close();
-}
-
-void UpdateStore::queryInstalled()
-{
-    if (!openDb()) return;
-
-    m_installedUpdates.setQuery("SELECT * FROM updates WHERE state='installed' "
-                                "ORDER BY updated_at_utc DESC",
-                                m_db);
-    if (m_installedUpdates.lastError().isValid())
-        qWarning() << m_installedUpdates.lastError();
-
-    m_db.close();
-}
-
-void UpdateStore::queryAll()
-{
-    queryPending();
-    queryInstalled();
+    return m_db;
 }
 
 void UpdateStore::markInstalled(const QString &appId, const int &revision)
@@ -218,7 +228,9 @@ void UpdateStore::markInstalled(const QString &appId, const int &revision)
         qCritical() << "could not mark app" << appId
                     << "as installed" << q.lastError().text();
 
-    queryAll();
+    m_db.close();
+
+    Q_EMIT (updatesChanged());
 }
 
 bool UpdateStore::createDb()
@@ -236,19 +248,19 @@ bool UpdateStore::createDb()
     ok = q.exec("CREATE TABLE updates ("
                 "kind TEXT NOT NULL,"
                 "app_id TEXT NOT NULL,"
-                "local_version TEXT NOT NULL,"
-                "remote_version TEXT NOT NULL,"
+                "local_version TEXT,"
+                "remote_version TEXT,"
                 "revision INTEGER NOT NULL,"
                 "state TEXT NOT NULL,"
                 "created_at_utc INTEGER NOT NULL,"
                 "updated_at_utc INTEGER,"
                 "title TEXT NOT NULL,"
-                "download_sha512 TEXT NOT NULL,"
+                "download_sha512 TEXT,"
                 "size INTEGER NOT NULL,"
                 "icon_url TEXT NOT NULL,"
-                "download_url TEXT NOT NULL,"
-                "command TEXT NOT NULL,"
-                "changelog TEXT NOT NULL,"
+                "download_url TEXT,"
+                "command TEXT,"
+                "changelog TEXT,"
                 "click_token TEXT DEFAULT '',"
                 "PRIMARY KEY (app_id, revision))");
 
@@ -273,16 +285,6 @@ bool UpdateStore::openDb()
 void UpdateStore::pruneDb()
 {
 
-}
-
-UpdateModel *UpdateStore::installedUpdates()
-{
-    return &m_installedUpdates;
-}
-
-UpdateModel *UpdateStore::pendingClickUpdates()
-{
-    return &m_pendingClickUpdates;
 }
 
 QDateTime UpdateStore::lastCheckDate()

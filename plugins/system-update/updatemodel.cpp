@@ -16,16 +16,33 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <QSqlError>
 #include "updatemodel.h"
+#include "updatemanager.h"
 
 namespace UpdatePlugin
 {
 
-UpdateModel::UpdateModel(QObject *parent) :
-    QSqlQueryModel(parent)
+UpdateModel::UpdateModel(QObject *parent)
+    : QSqlQueryModel(parent)
+    , m_filter(UpdateTypes::All)
+    , m_store(UpdateManager::instance()->updateStore())
 {
-    connect(this, SIGNAL(endRemoveRows()), SIGNAL(countChanged()));
-    connect(this, SIGNAL(endInsertRows()), SIGNAL(countChanged()));
+    initialize();
+}
+
+UpdateModel::UpdateModel(const QString &dbpath, QObject *parent)
+    : QSqlQueryModel(parent)
+    , m_filter(UpdateTypes::All)
+    , m_store(new UpdateStore(dbpath, this))
+{
+    initialize();
+}
+
+void UpdateModel::initialize()
+{
+    connect(this, SIGNAL(filterChanged()), SLOT(update()));
+    connect(m_store, &UpdateStore::updatesChanged, this, &UpdateModel::update);
 }
 
 UpdateModel::~UpdateModel()
@@ -59,6 +76,59 @@ QVariant UpdateModel::data(const QModelIndex &index, int role) const
 int UpdateModel::count() const
 {
     return rowCount();
+}
+
+
+void UpdateModel::setFilter(const UpdateModel::UpdateTypes &filter)
+{
+    if (filter != m_filter) {
+        m_filter = filter;
+        Q_EMIT (filterChanged());
+    }
+}
+
+UpdateModel::UpdateTypes UpdateModel::filter() const
+{
+    return m_filter;
+}
+
+void UpdateModel::update()
+{
+    if (!m_store->openDb()) return;
+
+    QString sql;
+    switch (m_filter) {
+    case UpdateTypes::All:
+        sql = "SELECT * FROM updates";
+        break;
+    case UpdateTypes::Pending:
+    case UpdateTypes::PendingClicksUpdates:
+        sql = "SELECT * FROM updates WHERE state='pending' "
+              " AND kind='" + m_store->KIND_CLICK + "' ORDER BY title ASC";
+        break;
+    case UpdateTypes::PendingSystemUpdates:
+        sql = ""; // We don't store it, use SI instead.
+        qWarning() << "Ignoring filter for pending system updates.";
+        break;
+    case UpdateTypes::InstalledClicksUpdates:
+        sql = "SELECT * FROM updates WHERE state='installed'"
+              " AND kind='" + m_store->KIND_CLICK + "' ORDER BY updated_at_utc DESC";
+        break;
+    case UpdateTypes::InstalledSystemUpdates:
+        sql = "SELECT * FROM updates WHERE state='installed'"
+              " AND kind='" + m_store->KIND_SYSTEM + "' ORDER BY updated_at_utc DESC";
+        break;
+    case UpdateTypes::Installed:
+        sql = "SELECT * FROM updates WHERE state='installed'";
+        break;
+    }
+
+    if (!sql.isEmpty())
+        setQuery(sql, m_store->db());
+        if (lastError().isValid())
+            qWarning() << lastError();
+
+    m_store->db().close();
 }
 
 const char* UpdateModel::COLUMN_NAMES[] = {

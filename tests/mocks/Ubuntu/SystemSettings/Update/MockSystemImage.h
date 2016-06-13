@@ -93,12 +93,12 @@ public:
     Q_INVOKABLE bool getIsTargetNewer() const;
 
     Q_INVOKABLE void mockProgress(const int &percentage, const double &eta); // mock only
-    Q_INVOKABLE void mockAvailableStatus(const bool is_available,
+    Q_INVOKABLE void mockAvailableStatus(const bool isAvailable,
                                          const bool downloading,
-                                         const QString &available_version,
-                                         const int &update_size,
-                                         const QString &last_update_date,
-                                         const QString &error_reason); // mock only
+                                         const QString availableVersion,
+                                         const int updateSize,
+                                         const QString lastUpdateDate,
+                                         const QString errorReason);
     Q_INVOKABLE void mockPaused(const int &percentage); // mock only
     Q_INVOKABLE void mockStarted(); // mock only
     Q_INVOKABLE void mockDownloaded(); // mock only
@@ -132,12 +132,12 @@ signals:
     void updateDownloaded();
     void downloadStarted();
     void updatePaused(const int &percentage);
-    void updateAvailableStatus(bool,
-                               bool,
-                               QString,
-                               int,
-                               QString,
-                               QString);
+    void updateAvailableStatus(const bool isAvailable,
+                               const bool downloading,
+                               const QString availableVersion,
+                               const int updateSize,
+                               const QString lastUpdateDate,
+                               const QString errorReason);
     void updateProgress(const int &percentage, const double &eta);
 
 private:

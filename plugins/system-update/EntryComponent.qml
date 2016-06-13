@@ -27,10 +27,11 @@ ListItem.SingleValue {
     id: root
 
     property int updatesAvailable: {
-        var n = UpdateManager.pendingClickUpdates.count;
-        n += SystemImage.checkTarget() ? 1 : 0;
-        return n;
+        var sUpdates = SystemImage.checkTarget() ? 1 : 0;
+        var cUpdates = clickupdates.count;
+        return sUpdates + cUpdates;
     }
+    height: updatesAvailable > 0 ? units.gu(6) : 0
 
     text: i18n.tr(model.displayName)
     objectName: "entryComponent-updates"
@@ -40,4 +41,11 @@ ListItem.SingleValue {
     value: updatesAvailable > 0 ? updatesAvailable : ""
 
     onClicked: main.loadPluginByName("system-update");
+
+    UpdateModel {
+        id: clickupdates
+        filter: UpdateModel.PendingClicksUpdates
+    }
+
+    Behavior on height { UbuntuNumberAnimation {} }
 }

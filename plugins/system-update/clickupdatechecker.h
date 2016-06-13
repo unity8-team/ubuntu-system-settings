@@ -32,7 +32,7 @@ namespace UpdatePlugin
 //
 // Checks for click updates.
 //
-class ClickUpdateChecker: public ClickApiClient
+class ClickUpdateChecker : public ClickApiClient
 {
 Q_OBJECT
 public:
@@ -62,10 +62,9 @@ signals:
     // Indicate that this ClickUpdateMetadata is pending.
     void updateAvailable(const ClickUpdateMetadata *meta);
 
-    // Indicate that the check has been completed successfully.
+    void checkStarted();
     void checkCompleted();
-
-    // The check failed. Emitted on fatal networking/server/process failures.
+    void checkCanceled();
     void checkFailed();
 
 private:

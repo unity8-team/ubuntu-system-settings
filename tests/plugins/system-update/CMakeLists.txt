@@ -1,10 +1,35 @@
 set(XVFB_CMD xvfb-run -a -s "-screen 0 640x480x24")
-include_directories(${CMAKE_CURRENT_BINARY_DIR} ../../../plugins/system-update)
+add_definitions(-DTESTS)
+include_directories(${CMAKE_CURRENT_BINARY_DIR}
+    ${CMAKE_SOURCE_DIR}/plugins/system-update
+    /usr/include/apt-pkg/)
 
 find_package(Qt5Test REQUIRED)
-add_definitions(-DTESTS)
+find_package(Qt5Sql REQUIRED)
+find_package(Qt5Network REQUIRED)
+
+pkg_check_modules(UBUNTUONEAUTH REQUIRED ubuntuoneauth-2.0)
+add_definitions(${UBUNTUONEAUTH_CFLAGS} ${UBUNTUONEAUTH_CFLAGS_OTHER})
+
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
+
+set(PLUGIN_SOURCES
+    ${CMAKE_SOURCE_DIR}/plugins/system-update/clickapiclient.cpp
+    ${CMAKE_SOURCE_DIR}/plugins/system-update/clickupdatechecker.cpp
+    ${CMAKE_SOURCE_DIR}/plugins/system-update/clickupdatemetadata.cpp
+    ${CMAKE_SOURCE_DIR}/plugins/system-update/helpers.cpp
+    ${CMAKE_SOURCE_DIR}/plugins/system-update/updatemodel.cpp
+    ${CMAKE_SOURCE_DIR}/plugins/system-update/updatestore.cpp
+    ${CMAKE_SOURCE_DIR}/plugins/system-update/updatemanager.cpp
+)
+
+set(PLUGIN_LIBS
+    Qt5::Sql
+    Qt5::Network
+    apt-pkg
+    ${UBUNTUONEAUTH_LDFLAGS}
+)
 
 # Install a mock click server
 file(COPY
@@ -18,54 +43,64 @@ file(COPY
     DESTINATION
     ${CMAKE_CURRENT_BINARY_DIR})
 
-# Need to get libsignon/accounts here, as they get exposed in headers
-pkg_check_modules(UBUNTUONEAUTH REQUIRED ubuntuoneauth-2.0)
-add_definitions(${UBUNTUONEAUTH_CFLAGS} ${UBUNTUONEAUTH_CFLAGS_OTHER})
-
-add_executable(tst-clickapiclient tst_clickapiclient.cpp mockclickservertestcase.h)
+add_executable(tst-clickapiclient
+               tst_clickapiclient.cpp
+               mockclickservertestcase.h
+               ${PLUGIN_SOURCES})
 add_test(tst-clickapiclient tst-clickapiclient)
 set_tests_properties(
     tst-clickapiclient
         PROPERTIES
         ENVIRONMENT "IGNORE_CREDENTIALS=1;URL_APPS=http://127.0.0.1:9009/metadata"
 )
-target_link_libraries(tst-clickapiclient Qt5::Test update-plugin)
+target_link_libraries(tst-clickapiclient Qt5::Test ${PLUGIN_LIBS})
 
-add_executable(tst-clickupdatemetadata tst_clickupdatemetadata.cpp mockclickservertestcase.h)
+add_executable(tst-clickupdatemetadata
+               tst_clickupdatemetadata.cpp
+               mockclickservertestcase.h
+               ${PLUGIN_SOURCES})
 add_test(tst-clickupdatemetadata tst-clickupdatemetadata)
 set_tests_properties(
     tst-clickupdatemetadata
         PROPERTIES
         ENVIRONMENT "IGNORE_CREDENTIALS=1;URL_APPS=http://127.0.0.1:9009/metadata"
 )
-target_link_libraries(tst-clickupdatemetadata Qt5::Test update-plugin)
+target_link_libraries(tst-clickupdatemetadata Qt5::Test ${PLUGIN_LIBS})
 
-add_executable(tst-clickupdatechecker tst_clickupdatechecker.cpp mockclickservertestcase.h)
+add_executable(tst-clickupdatechecker
+               tst_clickupdatechecker.cpp
+               mockclickservertestcase.h
+               ${PLUGIN_SOURCES})
 add_test(tst-clickupdatechecker tst-clickupdatechecker)
 set_tests_properties(
     tst-clickupdatechecker
         PROPERTIES
         ENVIRONMENT "IGNORE_CREDENTIALS=1;URL_APPS=http://127.0.0.1:9009/metadata;CLICK_COMMAND=${CMAKE_CURRENT_BINARY_DIR}/mock_click_command"
 )
-target_link_libraries(tst-clickupdatechecker Qt5::Test update-plugin)
+target_link_libraries(tst-clickupdatechecker Qt5::Test ${PLUGIN_LIBS})
 
-add_executable(tst-updatestore tst_updatestore.cpp)
+add_executable(tst-updatestore
+               tst_updatestore.cpp
+               ${PLUGIN_SOURCES})
 add_test(tst-updatestore tst-updatestore)
-# set_tests_properties(
-#     tst-updatestore
-#         PROPERTIES
-#         ENVIRONMENT "IGNORE_CREDENTIALS=1;URL_APPS=http://127.0.0.1:9009"
-# )
-target_link_libraries(tst-updatestore Qt5::Test update-plugin)
+target_link_libraries(tst-updatestore Qt5::Test ${PLUGIN_LIBS})
 
-add_executable(tst-updatepluginhelpers tst_helpers.cpp)
+add_executable(tst-updatemodel
+               tst_updatemodel.cpp
+               ${PLUGIN_SOURCES})
+add_test(tst-updatemodel tst-updatemodel)
+target_link_libraries(tst-updatemodel Qt5::Test ${PLUGIN_LIBS})
+
+add_executable(tst-updatepluginhelpers
+               tst_helpers.cpp
+               ${PLUGIN_SOURCES})
 add_test(tst-updatepluginhelpers tst-updatepluginhelpers)
 set_tests_properties(
     tst-updatepluginhelpers
         PROPERTIES
         ENVIRONMENT "IGNORE_CREDENTIALS=1;URL_APPS=http://127.0.0.1:9009;FRAMEWORKS_FOLDER=${CMAKE_CURRENT_BINARY_DIR};CLICK_TOKEN_URL=http://example.org;"
 )
-target_link_libraries(tst-updatepluginhelpers Qt5::Test update-plugin)
+target_link_libraries(tst-updatepluginhelpers Qt5::Test ${PLUGIN_LIBS})
 
 
 # add_executable(tst-update-manager

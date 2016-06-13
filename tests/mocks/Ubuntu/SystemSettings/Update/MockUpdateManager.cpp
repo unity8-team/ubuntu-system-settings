@@ -41,16 +41,6 @@ bool MockUpdateManager::authenticated(){
     return m_authenticated;
 }
 
-MockClickUpdateModel *MockUpdateManager::installedClickUpdates()
-{
-    return new MockClickUpdateModel(this);
-}
-
-MockClickUpdateModel *MockUpdateManager::pendingClickUpdates()
-{
-    return new MockClickUpdateModel(this);
-}
-
 void MockUpdateManager::checkForClickUpdates()
 {
 }
@@ -88,4 +78,9 @@ void MockUpdateManager::mockNetworkError()
 void MockUpdateManager::mockClickUpdateCheckComplete()
 {
     Q_EMIT (clickUpdateCheckCompleted());
+}
+
+void MockUpdateManager::mockClickUpdateCheckStarted()
+{
+    Q_EMIT (clickUpdateCheckStarted());
 }

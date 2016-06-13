@@ -24,7 +24,6 @@
 #include <QSqlDatabase>
 
 #include "clickupdatemetadata.h"
-#include "updatemodel.h"
 
 namespace UpdatePlugin
 {
@@ -39,13 +38,6 @@ public:
     // For testing purposes.
     explicit UpdateStore(const QString &dbpath, QObject *parent = 0);
 
-    Q_PROPERTY(UpdateModel* installedUpdates READ installedUpdates
-               CONSTANT)
-    Q_PROPERTY(UpdateModel* pendingClickUpdates READ pendingClickUpdates
-               CONSTANT)
-
-    UpdateModel *installedUpdates();
-    UpdateModel *pendingClickUpdates();
     QDateTime lastCheckDate();
     void setLastCheckDate(const QDateTime &lastCheckUtc);
 
@@ -56,34 +48,27 @@ public:
     // Mark an update as installed.
     void markInstalled(const QString &appId, const int &revision);
 
-    // void setUdmId(const QString &appId, const int &revision, const int &udmId);
-    // void unsetUdmId(const QString &appId, const int &revision);
-
-    // void unsetUdmId(const int &udmId);
-
-    // Removes old updates.
+    // Removes (30 days) old updates.
     void pruneDb();
 
-private slots:
-    void queryPending();
-    void queryInstalled();
-    void queryAll();
+    QSqlDatabase db() const;
+    bool openDb();
+
+    const QString KIND_CLICK = QLatin1String("click");
+    const QString KIND_SYSTEM = QLatin1String("system");
 
 signals:
+    void updatesChanged();
 
 private:
     void init(const QString &dbpath, QObject *parent);
     void initializeStore();
     bool createDb();
-    bool openDb();
 
-    QSqlDatabase m_db = QSqlDatabase::addDatabase(QLatin1String("QSQLITE"));
-    UpdateModel m_installedUpdates;
-    UpdateModel m_pendingClickUpdates;
+    QSqlDatabase m_db;
     QString m_dbpath;
+    QString m_connectionName;
 
-    const QString KIND_CLICK = QLatin1String("click");
-    const QString KIND_SYSTEM = QLatin1String("system");
 };
 
 } // UpdatePlugin

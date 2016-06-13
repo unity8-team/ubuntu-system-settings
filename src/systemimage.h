@@ -126,12 +126,12 @@ signals:
     void updateDownloaded();
     void downloadStarted();
     void updatePaused(const int &percentage);
-    void updateAvailableStatus(bool,
-                               bool,
-                               QString,
-                               int,
-                               QString,
-                               QString);
+    void updateAvailableStatus(const bool isAvailable,
+                               const bool downloading,
+                               const QString availableVersion,
+                               const int updateSize,
+                               const QString lastUpdateDate,
+                               const QString errorReason);
 
     void updateProgress(const int &percentage, const double &eta);
 

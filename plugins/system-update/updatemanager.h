@@ -37,23 +37,23 @@ using UbuntuOne::Token;
 namespace UpdatePlugin
 {
 
-class UpdateManager: public QObject
+class UpdateManager : public QObject
 {
-Q_OBJECT
-public:
-
+    Q_OBJECT
+    Q_PROPERTY(bool authenticated READ authenticated
+               NOTIFY authenticatedChanged)
     Q_ENUMS(UpdateKind)
     Q_ENUMS(UpdateState)
     Q_ENUMS(Status)
-
-    enum UpdateKind
+public:
+    enum class UpdateKind
     {
         KindApp,
         KindSystem,
         KindUnknown
     };
 
-    enum UpdateState
+    enum class UpdateState
     {
         StateUnknown,
         StateAvailable,
@@ -71,7 +71,7 @@ public:
         StateFailed
     };
 
-    enum Status
+    enum class Status
     {
         StatusIdle,
         StatusCheckingClickUpdates,
@@ -84,16 +84,8 @@ public:
 
     static UpdateManager *instance();
 
-    Q_PROPERTY(bool authenticated READ authenticated
-               NOTIFY authenticatedChanged)
-    Q_PROPERTY(UpdateModel* installedUpdates READ installedUpdates
-               CONSTANT)
-    Q_PROPERTY(UpdateModel* pendingClickUpdates READ pendingClickUpdates
-               CONSTANT)
-
     bool authenticated();
-    UpdateModel *installedUpdates();
-    UpdateModel *pendingClickUpdates();
+    UpdateStore *updateStore();
 
     Q_INVOKABLE void checkForClickUpdates();
     Q_INVOKABLE void cancelCheckForClickUpdates();
@@ -106,29 +98,21 @@ protected:
 
 private slots:
     void onClickUpdateAvailable(const ClickUpdateMetadata *meta);
-
     void handleCredentialsFound(const Token &token);
     void handleCredentialsFailed();
 
-
 signals:
-    // void clickUpdateReady(const QString &url, const QString &hash,
-    //                       const QString &algorithm,
-    //                       const QVariantMap &metadata,
-    //                       const QVariantMap &headers,
-    //                       const bool autoStart);
     void authenticatedChanged();
     void networkError();
     void serverError();
+    void clickUpdateCheckStarted();
     void clickUpdateCheckCompleted();
-
 
 private:
     static UpdateManager *m_instance;
 
     void setAuthenticated(const bool authenticated);
 
-    void initializeSystemImage();
     void initializeClickUpdateChecker();
     void initializeSSOService();
     void initializeUpdateStore();

@@ -32,12 +32,25 @@ Item {
     property int updatesCount: {
         var count = 0;
         count += updates.haveSystemUpdate ? 1 : 0;
-        count += UpdateManager.pendingClickUpdates.count
+        count += clickUpdatesModel.count
     }
-    property var pendingClickUpdatesModel: UpdateManager.pendingClickUpdates
-    property DownloadManager udm
+
+    property var clickUpdatesModel: pendingClickUpdates
+    property var udm
     property bool online: NetworkingStatus.online
     property bool authenticated: UpdateManager.authenticated
+
+    function check() {
+        // Check for click updates start when we get credentials, i.e. not
+        // here.
+        SystemImage.checkForUpdate();
+        switch (updates.status) {
+            case UpdateManager.StatusCheckingClickUpdates:
+                updates.status = UpdateManager.StatusCheckingAllUpdates; break;
+            case UpdateManager.StatusIdle:
+                updates.status = UpdateManager.StatusCheckingSystemUpdates; break;
+        }
+    }
 
     function getDownload(packageName, revision) {
         var custom;
@@ -50,7 +63,6 @@ Item {
         }
         return null;
     }
-
 
     // Set by the report from SI
     property bool haveSystemUpdate: false
@@ -155,7 +167,7 @@ Item {
 
             Repeater {
                 id: clickUpdatesRepeater
-                model: updates.pendingClickUpdatesModel
+                model: clickUpdatesModel
                 height: childrenRect.height
                 delegate: ClickUpdate {
                     objectName: "updatesClickUpdate" + index
@@ -238,7 +250,22 @@ Item {
         target: UpdateManager
         onNetworkError: console.warn('Updates.qml: onNetworkError')
         onServerError: console.warn('Updates.qml: onServerError')
-        onClickUpdateCheckCompleted: console.warn('Updates.qml: onClickUpdateCheckCompleted')
+        onClickUpdateCheckStarted: {
+            switch (updates.status) {
+                case UpdateManager.StatusIdle:
+                    updates.status = UpdateManager.StatusCheckingClickUpdates; break;
+                case UpdateManager.StatusCheckingSystemUpdates:
+                    updates.status = UpdateManager.StatusCheckingAllUpdates; break;
+            }
+        }
+        onClickUpdateCheckCompleted: {
+            switch (updates.status) {
+                case UpdateManager.StatusCheckingClickUpdates:
+                    updates.status = UpdateManager.StatusIdle; break;
+                case UpdateManager.StatusCheckingAllUpdates:
+                    updates.status = UpdateManager.StatusCheckingSystemUpdates; break;
+            }
+        }
     }
 
     Connections {
@@ -252,6 +279,18 @@ Item {
             // QString &errorReason)
             console.warn('onUpdateAvailableStatus', isAvailable, downloading, availableVersion, updateSize, lastUpdateDate, errorReason);
             updates.haveSystemUpdate = isAvailable;
+
+            switch (updates.status) {
+                case UpdateManager.StatusCheckingAllUpdates:
+                    updates.status = UpdateManager.StatusCheckingClickUpdates; break;
+                case UpdateManager.StatusCheckingSystemUpdates:
+                    updates.status = UpdateManager.StatusIdle; break;
+            }
         }
+    }
+
+    UpdateModel {
+        id: pendingClickUpdates
+        filter: UpdateModel.PendingClicksUpdates
     }
 }

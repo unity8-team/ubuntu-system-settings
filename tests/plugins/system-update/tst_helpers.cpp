@@ -21,8 +21,7 @@
 
 #include "helpers.h"
 
-class TstUpdatePluginHelpers
-    : public QObject
+class TstUpdatePluginHelpers : public QObject
 {
     Q_OBJECT
 private slots:

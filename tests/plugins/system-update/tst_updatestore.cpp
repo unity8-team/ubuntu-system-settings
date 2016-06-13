@@ -19,34 +19,24 @@
 #include <QDate>
 #include <QFile>
 #include <QSignalSpy>
-#include <QSqlRecord>
+#include <QSqlQuery>
 #include <QTemporaryDir>
 #include <QTime>
 #include <QTimeZone>
 #include <QTest>
 
-#include "mockclickservertestcase.h"
-
 #include "clickupdatemetadata.h"
 #include "updatestore.h"
 
-class TstUpdateStore
-    : public QObject
+class TstUpdateStore : public QObject
 {
     Q_OBJECT
 private slots:
-    void initTestCase()
-    {
-    }
-    void cleanupTestCase()
-    {
-    }
     void init()
     {
         m_dir = new QTemporaryDir();
         QVERIFY(m_dir->isValid());
         m_dbfile = m_dir->path() + "/cupdatesstore.db";
-        qWarning() << "test using dbfile"  << m_dbfile;
         m_instance = new UpdatePlugin::UpdateStore(m_dbfile);
     }
     void cleanup()
@@ -54,6 +44,7 @@ private slots:
         delete m_instance;
         delete m_dir;
     }
+
     void testLastCheck()
     {
         QCOMPARE(m_instance->lastCheckDate().isValid(), false);
@@ -102,56 +93,179 @@ private slots:
 
         // Add a click app
         m_instance->add(&m);
-        QCOMPARE(m_instance->pendingClickUpdates()->rowCount(), 1);
-        QCOMPARE(m_instance->installedUpdates()->rowCount(), 0);
 
-        // We had to refresh tokens.
+        int size = 0;
+        QVERIFY(m_instance->openDb());
+        QSqlQuery q = m_instance->db().exec("SELECT * FROM updates");
+
+        while (q.next()) {
+            QVERIFY(q.isValid());
+            QCOMPARE(q.value(0).toString(), m_instance->KIND_CLICK);
+            QCOMPARE(q.value(1).toString(), m.name());
+            QCOMPARE(q.value(2).toString(), m.localVersion());
+            QCOMPARE(q.value(3).toString(), m.remoteVersion());
+            QCOMPARE(q.value(4).toInt(), m.revision());
+            QCOMPARE(q.value(5).toString(), QString("pending"));
+            QCOMPARE(q.value(8).toString(), m.title());
+            QCOMPARE(q.value(9).toString(), m.downloadSha512());
+            QCOMPARE(q.value(10).toUInt(), m.binaryFilesize());
+            QCOMPARE(q.value(11).toString(), m.iconUrl());
+            QCOMPARE(q.value(12).toString(), m.downloadUrl());
+            QCOMPARE(q.value(13).toString(), m.command().join(" "));
+            QCOMPARE(q.value(14).toString(), m.changelog());
+            QCOMPARE(q.value(15).toString(), m.clickToken());
+
+            size++;
+        }
+
+        QCOMPARE(size, 1);
+        m_instance->db().close();
+
+        // We had to refresh tokens, so we re-add the clickmetadata.
         m.setClickToken("New-Mock-X-Click-Token");
         m_instance->add(&m);
-        QCOMPARE(m_instance->pendingClickUpdates()->rowCount(), 1);
-        QCOMPARE(m_instance->installedUpdates()->rowCount(), 0);
 
-        // // Associate with udm
-        // m_instance->setUdmId(m.name(), m.revision(), 3);
-        // QCOMPARE(m_instance->pendingClickUpdates()->record(0).value("udm_download_id").toInt(),
-        //          3);
+        size = 0;
+        QVERIFY(m_instance->openDb());
+        QSqlQuery q2 = m_instance->db().exec("SELECT * FROM updates");
 
-        // // Disassociate with udm
-        // m_instance->unsetUdmId(m.name(), m.revision());
-        // QVERIFY(m_instance->pendingClickUpdates()
-        //             ->record(0).value("udm_download_id").isNull());
+        while (q2.next()) {
+            QVERIFY(q2.isValid());
+            QCOMPARE(q2.value(0).toString(), m_instance->KIND_CLICK);
+            QCOMPARE(q2.value(1).toString(), m.name());
+            QCOMPARE(q2.value(2).toString(), m.localVersion());
+            QCOMPARE(q2.value(3).toString(), m.remoteVersion());
+            QCOMPARE(q2.value(4).toInt(), m.revision());
+            QCOMPARE(q2.value(5).toString(), QString("pending"));
+            QCOMPARE(q2.value(8).toString(), m.title());
+            QCOMPARE(q2.value(9).toString(), m.downloadSha512());
+            QCOMPARE(q2.value(10).toUInt(), m.binaryFilesize());
+            QCOMPARE(q2.value(11).toString(), m.iconUrl());
+            QCOMPARE(q2.value(12).toString(), m.downloadUrl());
+            QCOMPARE(q2.value(13).toString(), m.command().join(" "));
+            QCOMPARE(q2.value(14).toString(), m.changelog());
+            QCOMPARE(q2.value(15).toString(), m.clickToken());
 
-        // // Associate with udm
-        // m_instance->setUdmId(m.name(), m.revision(), 3);
-        // QCOMPARE(m_instance->pendingClickUpdates()->record(0).value("udm_download_id").toInt(),
-        //          3);
+            size++;
+        }
 
-        // // Disassociate (using udm id)
-        // m_instance->unsetUdmId(3);
-        // QVERIFY(m_instance->pendingClickUpdates()
-        //             ->record(0).value("udm_download_id").isNull());
+        QCOMPARE(size, 1);
+        m_instance->db().close();
 
         // Add second click app
         m_instance->add(&m2);
-        QCOMPARE(m_instance->pendingClickUpdates()->rowCount(), 2);
-        QCOMPARE(m_instance->installedUpdates()->rowCount(), 0);
 
-        QCOMPARE(m_instance->pendingClickUpdates()
-                    ->record(0).value("app_id").toString(),
-                 m2.name());
-        QCOMPARE(m_instance->pendingClickUpdates()
-                    ->record(1).value("app_id").toString(),
-                 m.name());
+        size = 0;
+        QVERIFY(m_instance->openDb());
+        QSqlQuery q3 = m_instance->db().exec("SELECT * FROM updates");
 
-        // Pruning here should have no effect.
-        m_instance->pruneDb();
+        while (q3.next()) {
+            UpdatePlugin::ClickUpdateMetadata *target;
+
+            if (q3.value(1).toString() == m.name())
+                target = &m;
+            else
+                target = &m2;
+
+            QVERIFY(q3.isValid());
+            QCOMPARE(q3.value(0).toString(), m_instance->KIND_CLICK);
+            QCOMPARE(q3.value(1).toString(), target->name());
+            QCOMPARE(q3.value(2).toString(), target->localVersion());
+            QCOMPARE(q3.value(3).toString(), target->remoteVersion());
+            QCOMPARE(q3.value(4).toInt(), target->revision());
+            QCOMPARE(q3.value(5).toString(), QString("pending"));
+            QCOMPARE(q3.value(8).toString(), target->title());
+            QCOMPARE(q3.value(9).toString(), target->downloadSha512());
+            QCOMPARE(q3.value(10).toUInt(), target->binaryFilesize());
+            QCOMPARE(q3.value(11).toString(), target->iconUrl());
+            QCOMPARE(q3.value(12).toString(), target->downloadUrl());
+            QCOMPARE(q3.value(13).toString(), target->command().join(" "));
+            QCOMPARE(q3.value(14).toString(), target->changelog());
+            QCOMPARE(q3.value(15).toString(), target->clickToken());
+
+            size++;
+        }
+
+        QCOMPARE(size, 2);
+        m_instance->db().close();
 
         // Mark as installed
         m_instance->markInstalled(m.name(), m.revision());
-        QCOMPARE(m_instance->pendingClickUpdates()->rowCount(), 1);
-        QCOMPARE(m_instance->installedUpdates()->rowCount(), 1);
+
+        size = 0;
+        QVERIFY(m_instance->openDb());
+        QSqlQuery q4 = m_instance->db().exec("SELECT * FROM updates WHERE state='installed'");
+
+        while (q4.next()) {
+            QVERIFY(q4.isValid());
+            QCOMPARE(q4.value(0).toString(), m_instance->KIND_CLICK);
+            QCOMPARE(q4.value(1).toString(), m.name());
+            QCOMPARE(q4.value(2).toString(), m.localVersion());
+            QCOMPARE(q4.value(3).toString(), m.remoteVersion());
+            QCOMPARE(q4.value(4).toInt(), m.revision());
+            QCOMPARE(q4.value(5).toString(), QString("installed"));
+            QCOMPARE(q4.value(8).toString(), m.title());
+            QCOMPARE(q4.value(9).toString(), m.downloadSha512());
+            QCOMPARE(q4.value(10).toUInt(), m.binaryFilesize());
+            QCOMPARE(q4.value(11).toString(), m.iconUrl());
+            QCOMPARE(q4.value(12).toString(), m.downloadUrl());
+            QCOMPARE(q4.value(13).toString(), m.command().join(" "));
+            QCOMPARE(q4.value(14).toString(), m.changelog());
+            QCOMPARE(q4.value(15).toString(), m.clickToken());
+
+            size++;
+        }
+
+        QCOMPARE(size, 1);
+        m_instance->db().close();
+
+        QCOMPARE(size, 1);
+        m_instance->db().close();
+
+        size = 0;
+        QVERIFY(m_instance->openDb());
+        QSqlQuery q5 = m_instance->db().exec("SELECT * FROM updates WHERE state='pending'");
+
+        while (q5.next()) {
+            QVERIFY(q5.isValid());
+            QCOMPARE(q5.value(0).toString(), m_instance->KIND_CLICK);
+            QCOMPARE(q5.value(1).toString(), m2.name());
+            QCOMPARE(q5.value(2).toString(), m2.localVersion());
+            QCOMPARE(q5.value(3).toString(), m2.remoteVersion());
+            QCOMPARE(q5.value(4).toInt(), m2.revision());
+            QCOMPARE(q5.value(5).toString(), QString("pending"));
+            QCOMPARE(q5.value(8).toString(), m2.title());
+            QCOMPARE(q5.value(9).toString(), m2.downloadSha512());
+            QCOMPARE(q5.value(10).toUInt(), m2.binaryFilesize());
+            QCOMPARE(q5.value(11).toString(), m2.iconUrl());
+            QCOMPARE(q5.value(12).toString(), m2.downloadUrl());
+            QCOMPARE(q5.value(13).toString(), m2.command().join(" "));
+            QCOMPARE(q5.value(14).toString(), m2.changelog());
+            QCOMPARE(q5.value(15).toString(), m2.clickToken());
+
+            size++;
+        }
+
+        QCOMPARE(size, 1);
+        m_instance->db().close();
     }
 
+    void testUpdatesChanged()
+    {
+        UpdatePlugin::ClickUpdateMetadata m;
+
+        // set minimum required
+        m.setName("test.app");
+        m.setRevision(1);
+
+        QSignalSpy updatesChangedSpy(m_instance, SIGNAL(updatesChanged()));
+
+        m_instance->add(&m);
+        QTRY_COMPARE(updatesChangedSpy.count(), 1);
+
+        m_instance->markInstalled(m.name(), m.revision());
+        QTRY_COMPARE(updatesChangedSpy.count(), 2);
+    }
 private:
     UpdatePlugin::UpdateStore *m_instance;
     QTemporaryDir *m_dir;

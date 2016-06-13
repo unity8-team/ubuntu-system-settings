@@ -32,14 +32,14 @@ namespace UpdatePlugin
  API. Meant to normalize the behaviour of 401 and 403 responses, as well
  as reporting errors and cancel().
  */
-class ClickApiClient: public QObject
+class ClickApiClient : public QObject
 {
     Q_OBJECT
+    Q_PROPERTY(QString errorString READ errorString NOTIFY errorStringChanged)
 public:
     explicit ClickApiClient(QObject *parent = 0);
     ~ClickApiClient();
 
-    Q_PROPERTY(QString errorString READ errorString NOTIFY errorStringChanged)
     QString errorString() const;
 
     // Set the token we will provide to the remote API for identification.

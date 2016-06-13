@@ -83,15 +83,12 @@ void ClickUpdateChecker::initializeProcess()
 void ClickUpdateChecker::check()
 {
     qWarning() << "click checker: check...";
-    // No token, so don't check anything, but report that the check
-    // completed. We should not be given an invalid token here,
-    // and we've yet to talk to the server so we can't know
-    // the state of the token.
+    // No token, so don't check anything,
     if (!m_token.isValid() && !Helpers::isIgnoringCredentials()) {
-        // TODO: maybe credential error? Not completed.
-        Q_EMIT checkCompleted();
         return;
     }
+
+    Q_EMIT (checkStarted());
 
     m_metas.clear();
     setErrorString("");
@@ -131,7 +128,7 @@ void ClickUpdateChecker::cancel()
     // This tells active replies to abort.
     Q_EMIT abortNetworking();
 
-    Q_EMIT checkCompleted();
+    Q_EMIT checkCanceled();
 }
 
 void ClickUpdateChecker::processInstalledClicks(const int &exitCode)
@@ -139,8 +136,8 @@ void ClickUpdateChecker::processInstalledClicks(const int &exitCode)
     qWarning() << "click checker: processInstalledClicks..." << exitCode;
 
     if (exitCode == 15) {
-        // 15 is in pythonese terminated, i.e. normal if cancel was called.
-        Q_EMIT checkCompleted();
+        // 15 is terminated in pythonese, i.e. normal if cancel was called.
+        Q_EMIT checkCanceled();
         return;
     }
 

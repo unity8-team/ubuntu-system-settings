@@ -25,18 +25,9 @@
 
 namespace UpdatePlugin
 {
-
-//
-// Represents click metadata composed from local and remote sources.
-// Can fetch click tokens for each download.
-//
-class ClickUpdateMetadata: public ClickApiClient
+class ClickUpdateMetadata : public ClickApiClient
 {
-Q_OBJECT
-public:
-    explicit ClickUpdateMetadata(QObject *parent = 0);
-    ~ClickUpdateMetadata();
-
+    Q_OBJECT
     Q_PROPERTY(QString anonDownloadUrl READ anonDownloadUrl
             WRITE setAnonDownloadUrl NOTIFY anonDownloadUrlChanged)
     Q_PROPERTY(uint binaryFilesize READ binaryFilesize
@@ -76,6 +67,9 @@ public:
                WRITE setCommand NOTIFY commandChanged)
     Q_PROPERTY(bool automatic READ automatic WRITE setAutomatic
             NOTIFY automaticChanged)
+public:
+    explicit ClickUpdateMetadata(QObject *parent = 0);
+    ~ClickUpdateMetadata();
 
     QString anonDownloadUrl() const;
     uint binaryFilesize() const;
@@ -175,7 +169,6 @@ private:
     QString m_clickToken;
     QStringList m_command;
     bool m_automatic;
-
 };
 
 }

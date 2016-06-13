@@ -89,15 +89,18 @@ ItemPage {
         // }
     }
 
-    // Setup {
-    //     id: uoaConfig
-    //     applicationId: "ubuntu-system-settings"
-    //     providerId: "ubuntuone"
+    Setup {
+        id: uoaConfig
+        applicationId: "ubuntu-system-settings"
+        providerId: "ubuntuone"
 
-    //     onFinished: {
-    //         // Found credentials, do stuff that now can be done
-    //     }
-    // }
+        onFinished: {
+            if (reply.errorName)
+                console.warn('Online Accounts failed:', reply.errorName);
+            else
+                UpdateManager.checkForClickUpdates()
+        }
+    }
 
     // Flickable {
     //     id: scrollWidget
@@ -127,8 +130,9 @@ ItemPage {
         udm: udm
 
         // onClickPackageRequestedRetry: UpdateManager.retryClickPackage(packageName);
-        Component.onCompleted: UpdateManager.checkForClickUpdates()
+        Component.onCompleted: check()
         Component.onDestruction: UpdateManager.cancelCheckForClickUpdates()
+        onRequestAuthentication: uoaConfig.exec()
     }
 
     Column {

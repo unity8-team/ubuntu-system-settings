@@ -156,19 +156,20 @@ void MockSystemImage::mockProgress(const int &percentage, const double &eta)
     Q_EMIT (updateProgress(percentage, eta));
 }
 
-void MockSystemImage::mockAvailableStatus(const bool is_available,
-                         const bool downloading,
-                         const QString &available_version,
-                         const int &update_size,
-                         const QString &last_update_date,
-                         const QString &error_reason)
+
+void MockSystemImage::mockAvailableStatus(const bool isAvailable,
+                                          const bool downloading,
+                                          const QString availableVersion,
+                                          const int updateSize,
+                                          const QString lastUpdateDate,
+                                          const QString errorReason)
 {
-    Q_EMIT (updateAvailableStatus(is_available,
+    Q_EMIT (updateAvailableStatus(isAvailable,
                                   downloading,
-                                  available_version,
-                                  update_size,
-                                  last_update_date,
-                                  error_reason));
+                                  availableVersion,
+                                  updateSize,
+                                  lastUpdateDate,
+                                  errorReason));
 }
 
 void MockSystemImage::mockPaused(const int &percentage)

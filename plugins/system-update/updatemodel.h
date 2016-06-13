@@ -20,6 +20,7 @@
 #define PLUGINS_SYSTEM_UPDATE_UPDATEMODEL_H
 
 #include <QSqlQueryModel>
+#include "updatestore.h"
 
 namespace UpdatePlugin
 {
@@ -27,22 +28,49 @@ namespace UpdatePlugin
 class UpdateModel : public QSqlQueryModel
 {
     Q_OBJECT
+    Q_PROPERTY(UpdateTypes filter
+               READ filter
+               WRITE setFilter
+               NOTIFY filterChanged)
+    Q_PROPERTY(int count READ count NOTIFY countChanged)
+    Q_ENUMS(UpdateTypes)
 public:
+    enum class UpdateTypes
+    {
+        All,
+        Pending,
+        PendingClicksUpdates,
+        PendingSystemUpdates,
+        InstalledClicksUpdates,
+        InstalledSystemUpdates,
+        Installed
+    };
+
     explicit UpdateModel(QObject *parent = 0);
     ~UpdateModel();
 
-    Q_PROPERTY(int count READ count NOTIFY countChanged)
+    // For testing.
+    explicit UpdateModel(const QString &dbpath, QObject *parent = 0);
 
     QVariant data(const QModelIndex &index, int role) const;
     QHash<int, QByteArray> roleNames() const;
     int count() const;
+    void setFilter(const UpdateTypes &filter);
+    UpdateTypes filter() const;
+
+public slots:
+    // Re-runs query based on the current filter, used in testing.
+    Q_INVOKABLE void update();
 
 signals:
     void countChanged();
+    void filterChanged();
 
 private:
+    void initialize();
     const static char* COLUMN_NAMES[];
-    QString QUERY;
+    UpdateTypes m_filter;
+    UpdateStore *m_store;
 };
 
 } // UpdatePlugin

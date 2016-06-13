@@ -36,7 +36,6 @@ UpdateManager::UpdateManager(QObject *parent) :
         m_updatestore(this),
         m_authenticated(false)
 {
-//    initializeSystemImage();
     initializeClickUpdateChecker();
     initializeSSOService();
     initializeUpdateStore();
@@ -44,31 +43,6 @@ UpdateManager::UpdateManager(QObject *parent) :
 
 UpdateManager::~UpdateManager()
 {
-}
-
-void UpdateManager::initializeSystemImage()
-{
-    // if (m_systemImage == nullptr) m_systemImage = new QSystemImage(this);
-
-    // connect(m_systemImage,
-    //         SIGNAL(updateAvailableStatus(const bool,
-    //                                      const bool,
-    //                                      const QString&,
-    //                                      const int&,
-    //                                      const QString&,
-    //                                      const QString&)),
-    //         this,
-    //         SLOT(handleSiAvailableStatus(const bool,
-    //                                      const bool,
-    //                                      const QString&,
-    //                                      const int&,
-    //                                      const QString&,
-    //                                      const QString&)));
-
-    // if (m_systemImage->getIsTargetNewer()) {
-    //     m_systemUpdatesCount = 1;
-    //     calculateUpdatesCount();
-    // }
 }
 
 void UpdateManager::initializeClickUpdateChecker()
@@ -86,6 +60,8 @@ void UpdateManager::initializeClickUpdateChecker()
 
     connect(&m_clickUpChecker, SIGNAL(checkCompleted()), this,
             SIGNAL(clickUpdateCheckCompleted()));
+    connect(&m_clickUpChecker, SIGNAL(checkStarted()), this,
+            SIGNAL(clickUpdateCheckStarted()));
     connect(&m_clickUpChecker, SIGNAL(networkError()), this,
             SIGNAL(networkError()));
     connect(&m_clickUpChecker, SIGNAL(serverError()), this,
@@ -113,22 +89,6 @@ void UpdateManager::initializeUpdateStore()
     // calculateUpdatesCount();
 }
 
-
-// QSystemImage* UpdateManager::systemImageBackend() const
-// {
-//     return m_systemImage;
-// }
-
-UpdateModel *UpdateManager::installedUpdates()
-{
-    return m_updatestore.installedUpdates();
-}
-
-UpdateModel *UpdateManager::pendingClickUpdates()
-{
-    return m_updatestore.pendingClickUpdates();
-}
-
 bool UpdateManager::authenticated()
 {
     return m_authenticated || Helpers::isIgnoringCredentials();
@@ -142,11 +102,17 @@ void UpdateManager::setAuthenticated(const bool authenticated)
     }
 }
 
+UpdateStore *UpdateManager::updateStore()
+{
+    return &m_updatestore;
+}
+
 void UpdateManager::checkForClickUpdates()
 {
     qWarning() << "manager: check";
 
-    // Don't check for click updates if there are no credentials.
+    // Don't check for click updates if there are no credentials,
+    // instead ask for credentials.
     if (!m_token.isValid() && !Helpers::isIgnoringCredentials()) {
         m_ssoService.getCredentials();
         return;

@@ -20,7 +20,7 @@
 #define MOCK_UPDATE_MANAGER_H
 
 #include "MockSystemImage.h"
-#include "MockClickUpdateModel.h"
+#include "MockUpdateModel.h"
 
 #include <QDebug>
 
@@ -73,14 +73,8 @@ Q_OBJECT
 
     Q_PROPERTY(bool authenticated READ authenticated
                NOTIFY authenticatedChanged)
-    Q_PROPERTY(MockClickUpdateModel* installedClickUpdates READ installedClickUpdates
-               CONSTANT)
-    Q_PROPERTY(MockClickUpdateModel* pendingClickUpdates READ pendingClickUpdates
-               CONSTANT)
 
     bool authenticated();
-    MockClickUpdateModel *installedClickUpdates();
-    MockClickUpdateModel *pendingClickUpdates();
 
     Q_INVOKABLE void checkForClickUpdates();
     Q_INVOKABLE void cancelCheckForClickUpdates();
@@ -90,6 +84,7 @@ Q_OBJECT
     Q_INVOKABLE void mockAuthenticate(const bool authenticated); // mock only
     Q_INVOKABLE void mockServerError(); // mock only
     Q_INVOKABLE void mockNetworkError(); // mock only
+    Q_INVOKABLE void mockClickUpdateCheckStarted(); // mock only
     Q_INVOKABLE void mockClickUpdateCheckComplete(); // mock only
 
 protected:
@@ -101,6 +96,7 @@ signals:
 
     void networkError();
     void serverError();
+    void clickUpdateCheckStarted();
     void clickUpdateCheckCompleted();
 
 private:

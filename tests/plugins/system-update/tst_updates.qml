@@ -81,43 +81,43 @@ Item {
         name: "UpdatesTest"
         when: windowShown
 
-        property var cUpdts: null
+        property var updatesInstance: null
 
         function init() {
-            cUpdts = updates.createObject(testRoot, {
-                pendingClickUpdatesModel: mockClickUpdatesModel,
+            updatesInstance = updates.createObject(testRoot, {
+                clickUpdatesModel: mockClickUpdatesModel,
                 udm: downloadmanager.createObject(testRoot, {})
             });
         }
 
         function cleanup () {
-            cUpdts.destroy();
-            cUpdts = null;
+            updatesInstance.destroy();
+            updatesInstance = null;
             mockClickUpdatesModel.clear();
         }
 
         function getGlobal() {
-            return findChild(cUpdts, "updatesGlobal");
+            return findChild(updatesInstance, "updatesGlobal");
         }
 
         function getSystemUpdate() {
-            return findChild(cUpdts, "updatesSystemUpdate");
+            return findChild(updatesInstance, "updatesSystemUpdate");
         }
 
         function getClickUpdates() {
-            return findChild(cUpdts, "updatesClickUpdates");
+            return findChild(updatesInstance, "updatesClickUpdates");
         }
 
         function getNoAuthNotif() {
-            return findChild(cUpdts, "updatesNoAuthNotif");
+            return findChild(updatesInstance, "updatesNoAuthNotif");
         }
 
         function getFullscreenMessage() {
-            return findChild(cUpdts, "updatesFullscreenMessage");
+            return findChild(updatesInstance, "updatesFullscreenMessage");
         }
 
         function getFullscreenMessageText() {
-            return findChild(cUpdts, "updatesFullscreenMessageText");
+            return findChild(updatesInstance, "updatesFullscreenMessageText");
         }
 
         function test_visibility_data() {
@@ -360,12 +360,12 @@ Item {
         }
 
         function test_visibility(data) {
-            cUpdts.haveSystemUpdate = data.haveSystemUpdate;
-            cUpdts.updatesCount = data.updatesCount;
-            cUpdts.status = data.status;
-            cUpdts.online = data.online;
-            cUpdts.authenticated = data.authenticated;
-            cUpdts.pendingClickUpdatesModel = mockClickUpdatesModel;
+            updatesInstance.haveSystemUpdate = data.haveSystemUpdate;
+            updatesInstance.updatesCount = data.updatesCount;
+            updatesInstance.status = data.status;
+            updatesInstance.online = data.online;
+            updatesInstance.authenticated = data.authenticated;
+            updatesInstance.clickUpdatesModel = mockClickUpdatesModel;
 
             // If updatesCount is sufficient, create some dummy click updates.
             // We don't test the individual click updates here.
@@ -386,32 +386,65 @@ Item {
     }
 
     UbuntuTestCase {
-        name: "UpdatesUdmTests"
+        name: "UpdatesIntegration"
         when: windowShown
 
-        function test_udm() {
+        property var updatesInstance: null
+        property var downloadInstance: null
+        property var downloadManagerInstance: null
+
+        function init() {
             generateClickUpdates(1);
-            var download = singledownload.createObject(testRoot, {});
-            download.metadata.custom = { packageName: "app0", revision: "0" };
+            downloadManagerInstance = downloadmanager.createObject(testRoot, {});
+            downloadInstance = singledownload.createObject(testRoot, {});
+            downloadInstance.metadata.custom = { packageName: "app0", revision: "0" };
+            downloadManagerInstance.mockDownload(downloadInstance);
 
-            var downloadManager = downloadmanager.createObject(testRoot, {});
-            downloadManager.mockDownload(download);
-
-            var ups = updates.createObject(testRoot, {
-                pendingClickUpdatesModel: mockClickUpdatesModel,
-                udm: downloadManager,
+            updatesInstance = updates.createObject(testRoot, {
+                clickUpdatesModel: mockClickUpdatesModel,
+                udm: downloadManagerInstance,
                 online: true,
                 authenticated: true
             });
-            download.mockProgress(50);
-            var downloadEl = findChild(ups, "updatesClickUpdate0");
-            compare(downloadEl.download, download);
-            compare(downloadEl.updateState, UpdateManager.StateDownloading);
+        }
 
-            download.destroy();
-            ups.destroy();
-            downloadManager.destroy();
+        function cleanup() {
+            downloadInstance.destroy();
+            updatesInstance.destroy();
+            downloadManagerInstance.destroy();
             mockClickUpdatesModel.clear();
+        }
+
+        function test_udm() {
+            downloadInstance.mockProgress(50);
+            var downloadEl = findChild(updatesInstance, "updatesClickUpdate0");
+            compare(downloadEl.download, downloadInstance);
+            compare(downloadEl.updateState, UpdateManager.StateDownloading);
+        }
+
+        function test_updateChecking() {
+            // Default state.
+            compare(updatesInstance.status, UpdateManager.StatusIdle);
+
+            // Start click check.
+            UpdateManager.mockClickUpdateCheckStarted();
+            compare(updatesInstance.status, UpdateManager.StatusCheckingClickUpdates);
+
+            // Complete click check during click check only.
+            UpdateManager.mockClickUpdateCheckComplete();
+            compare(updatesInstance.status, UpdateManager.StatusIdle);
+
+            // Start a System Image check from Idle
+            updatesInstance.check();
+            compare(updatesInstance.status, UpdateManager.StatusCheckingSystemUpdates);
+
+            // Start click check while System Image check.
+            UpdateManager.mockClickUpdateCheckStarted();
+            compare(updatesInstance.status, UpdateManager.StatusCheckingAllUpdates);
+
+            // Finish System Image check while checking all.
+            SystemImage.mockAvailableStatus(false, false, "", 0, "", "");
+            compare(updatesInstance.status, UpdateManager.StatusCheckingClickUpdates);
         }
     }
 }

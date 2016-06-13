@@ -6,7 +6,7 @@ set(MOCK_SYSTEMUPDATE_SRCS
     plugin.cpp
     MockUpdateManager.cpp
     MockSystemImage.cpp
-    MockClickUpdateModel.h
+    MockUpdateModel.h
 )
 
 add_library(MockSystemUpdate MODULE ${MOCK_SYSTEMUPDATE_SRCS})

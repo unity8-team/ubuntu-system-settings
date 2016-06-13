@@ -70,9 +70,9 @@ private slots:
     void testCancelCheck()
     {
         m_instance->check();
-        QSignalSpy checkCompletedSpy(m_instance, SIGNAL(checkCompleted()));
+        QSignalSpy checkCanceledSpy(m_instance, SIGNAL(checkCanceled()));
         m_instance->cancel();
-        QVERIFY(checkCompletedSpy.wait());
+        QVERIFY(checkCanceledSpy.wait());
     }
     void testFailedCheck()
     {
