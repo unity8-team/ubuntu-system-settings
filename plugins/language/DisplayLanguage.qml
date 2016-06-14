@@ -73,7 +73,8 @@ SheetBase {
         }
 
         onCurrentIndexChanged: {
-            i18n.language = plugin.languageCodes[currentIndex]
+            if (displayMode == 0)
+                i18n.language = plugin.languageCodes[currentIndex]
         }
     }
 
