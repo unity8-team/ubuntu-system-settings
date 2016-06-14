@@ -24,8 +24,7 @@ import Ubuntu.Components 1.3
 import Ubuntu.Components.ListItems 1.3 as ListItem
 import Ubuntu.Connectivity 1.0
 
-ColumnLayout {
-    anchors.margins: units.gu(2)
+Column {
 
     SortFilterModel {
         id: sortedModems
@@ -34,154 +33,134 @@ ColumnLayout {
         sort.order: Qt.AscendingOrder
     }
 
-    ColumnLayout {
-        spacing: units.gu(2)
-
-        RowLayout {
-            Layout.topMargin: units.gu(2)
-            Label {
-                text: i18n.tr("Cellular data")
-                Layout.fillWidth: true
-            }
-            Switch {
-                id: data
-                objectName: "data"
-                checked: Connectivity.mobileDataEnabled
-                enabled: simSelector.currentSim !== null
-                onTriggered: {
-                    Connectivity.mobileDataEnabled = checked
-                    /*
-                     * We do this binding here to workaround bug:
-                     * https://bugs.launchpad.net/ubuntu/+source/ubuntu-ui-toolkit/+bug/1494387
-                     *
-                     * The bug causes the checked binding to be overridden if plain onTriggered is used.
-                     */
-                    checked = Qt.binding(function() {
-                        return Connectivity.mobileDataEnabled
-                    })
-                }
+    ListItem.Standard {
+        text: i18n.tr("Cellular data")
+        control: Switch {
+            id: data
+            objectName: "data"
+            checked: Connectivity.mobileDataEnabled
+            enabled: simSelector.currentSim !== null
+            onTriggered: {
+                Connectivity.mobileDataEnabled = checked
+                /*
+                 * We do this binding here to workaround bug:
+                 * https://bugs.launchpad.net/ubuntu/+source/ubuntu-ui-toolkit/+bug/1494387
+                 *
+                 * The bug causes the checked binding to be overridden if plain onTriggered is used.
+                 */
+                checked = Qt.binding(function() {
+                    return Connectivity.mobileDataEnabled
+                })
             }
         }
-        ColumnLayout {
-            Layout.leftMargin: units.gu(2)
-            Label {
-                text: ""
-                Layout.fillWidth: true
+    }
+
+    ListItem.ItemSelector {
+        id: simSelector
+        showDivider: false
+        expanded: true
+        model: sortedModems
+        selectedIndex: -1
+
+        delegate: OptionSelectorDelegate {
+            objectName: "use/ril_" + (model.Index - 1)
+            text: {
+                if (model.Sim) {
+                    circled(model.Index) + " " + model.Sim.PrimaryPhoneNumber
+                }
+                else {
+                    return circled(model.Index) + " " + i18n.tr("No SIM detected")
+                }
             }
-            OptionSelector {                
-                id: simSelector
-                expanded: true
-                model: sortedModems
-                selectedIndex: -1
+            subText: {
+                if (model.Sim) {
+                    return ""
+                }
+                else {
+                    return i18n.tr("Insert a SIM, then restart the phone.")
+                }
+            }
+            enabled: model.Sim !== null
 
-                delegate: OptionSelectorDelegate {
-                    objectName: "use/ril_" + (model.Index - 1)
-                    text: {
-                        if (model.Sim) {
-                            circled(model.Index) + " " + model.Sim.PrimaryPhoneNumber
-                        }
-                        else {
-                            return circled(model.Index) + " " + i18n.tr("No SIM detected")
-                        }
-                    }
-                    subText: {
-                        if (model.Sim) {
-                            return ""
-                        }
-                        else {
-                            return i18n.tr("Insert a SIM, then restart the phone.")
-                        }
-                    }
-                    //enabled: model.Sim !== null // https://bugs.launchpad.net/ubuntu/+source/ubuntu-ui-toolkit/+bug/1577359
-                    /* As per bug above, we can't set enabled to false when there is no SIM card in the slot.
-                     * The bug causes the delegate to render completely empty and not showing the texts.
-                     * Once the bug is fixed, the line above can be uncommented.
-                     */
-
-                    function circled(index) {
-                        if (index === 1) {
-                            return "①"
-                        } else if (index === 2) {
-                            return "②"
-                        }
-
-                        return " "
-                    }
+            function circled(index) {
+                if (index === 1) {
+                    return "①"
+                } else if (index === 2) {
+                    return "②"
                 }
 
-                property var currentSim : null
-                onSelectedIndexChanged: {
-                    if (selectedIndex === -1) {
-                        currentSim = null
-                    } else {
-                        currentSim = model.get(selectedIndex).Sim
-                    }
-                }
-                onCurrentSimChanged: {
-                    if (currentSim !== null) {
-                        roaming.checked = Qt.binding(function() {
-                            return currentSim.DataRoamingEnabled
-                        })
-                    }
-                }
-
-                function setSelectedIndex() {
-                    if (Connectivity.simForMobileData === null) {
-                        simSelector.selectedIndex = -1
-                        return
-                    }
-
-                    for (var i = 0; i < sortedModems.count; i++) {
-                        if (sortedModems.get(i).Sim === Connectivity.simForMobileData) {
-                            simSelector.selectedIndex = i
-                            return
-                        }
-                    }
-                    simSelector.selectedIndex = -1
-                }
-                Connections {
-                    target: Connectivity
-                    onSimForMobileDataUpdated: {
-                        simSelector.setSelectedIndex()
-                    }
-                }
-                Component.onCompleted: {
-                    setSelectedIndex()
-                }
-
-                onTriggered:  {
-                    // @bug: https://bugs.launchpad.net/ubuntu/+source/ubuntu-ui-toolkit/+bug/1577351
-                    // Connectivity.simForMobileData = currentSim
-                    /*
-                     * There is a bug in onTriggered that causes it to be fired *before* selectedIndex has been updated
-                     * and thus there is no way of knowing what index was actually selected by the user.
-                     *
-                     * This is worked around below by using onDelegateClicked which gives us the missing index.
-                     */
-                }
-                onDelegateClicked: {
-                    var sim = sortedModems.get(index).Sim
-                    if (sim === null) {
-                        return
-                    }
-                    Connectivity.simForMobileData = sim
-                }
+                return " "
             }
         }
-        RowLayout {
-            Layout.bottomMargin: units.gu(2)
-            Label {
-                text: i18n.tr("Data roaming")
-                Layout.fillWidth: true
+
+        property var currentSim : null
+        onSelectedIndexChanged: {
+            if (selectedIndex === -1) {
+                currentSim = null
+            } else {
+                currentSim = model.get(selectedIndex).Sim
             }
-            Switch {
-                id: roaming
-                objectName: "roaming"
-                enabled: simSelector.currentSim !== null && data.checked
-                checked: simSelector.currentSim ? simSelector.currentSim.DataRoamingEnabled : false
-                function trigger() {
-                    simSelector.currentSim.DataRoamingEnabled = !checked
+        }
+        onCurrentSimChanged: {
+            if (currentSim !== null) {
+                roaming.checked = Qt.binding(function() {
+                    return currentSim.DataRoamingEnabled
+                })
+            }
+        }
+
+        function setSelectedIndex() {
+            if (Connectivity.simForMobileData === null) {
+                simSelector.selectedIndex = -1
+                return
+            }
+
+            for (var i = 0; i < sortedModems.count; i++) {
+                if (sortedModems.get(i).Sim === Connectivity.simForMobileData) {
+                    simSelector.selectedIndex = i
+                    return
                 }
+            }
+            simSelector.selectedIndex = -1
+        }
+        Connections {
+            target: Connectivity
+            onSimForMobileDataUpdated: {
+                simSelector.setSelectedIndex()
+            }
+        }
+        Component.onCompleted: {
+            setSelectedIndex()
+        }
+
+        onTriggered:  {
+            // @bug: https://bugs.launchpad.net/ubuntu/+source/ubuntu-ui-toolkit/+bug/1577351
+            // Connectivity.simForMobileData = currentSim
+            /*
+             * There is a bug in onTriggered that causes it to be fired *before* selectedIndex has been updated
+             * and thus there is no way of knowing what index was actually selected by the user.
+             *
+             * This is worked around below by using onDelegateClicked which gives us the missing index.
+             */
+        }
+        onDelegateClicked: {
+            var sim = sortedModems.get(index).Sim
+            if (sim === null) {
+                return
+            }
+            Connectivity.simForMobileData = sim
+        }
+    }
+
+    ListItem.Standard {
+        text: i18n.tr("Data roaming")
+        control: Switch {
+            id: roaming
+            objectName: "roaming"
+            enabled: simSelector.currentSim !== null && data.checked
+            checked: simSelector.currentSim ? simSelector.currentSim.DataRoamingEnabled : false
+            function trigger() {
+                simSelector.currentSim.DataRoamingEnabled = !checked
             }
         }
     }

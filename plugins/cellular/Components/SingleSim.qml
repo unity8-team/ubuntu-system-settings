@@ -37,8 +37,11 @@ Column {
 
     property var currentSim
     Component.onCompleted: {
-        currentSim = sortedModems.get(0).Sim
-        Connectivity.simForMobileData = currentSim
+        if (sortedModems.rowCount() === 1)
+        {
+            currentSim = sortedModems.get(0).Sim
+            Connectivity.simForMobileData = currentSim
+        }
     }
     SortFilterModel {
         id: sortedModems
@@ -47,48 +50,36 @@ Column {
         sort.order: Qt.AscendingOrder
     }
 
-    ColumnLayout {
-        anchors.left: parent.left
-        anchors.right: parent.right
-        spacing: units.gu(2)
-        anchors.margins: units.gu(2)
-
-        RowLayout {
-            Layout.topMargin: units.gu(2)
-            Label {
-                text: i18n.tr("Cellular data")
-                Layout.fillWidth: true
-            }
-            Switch {
-                id: dataSwitch
-                objectName: "data"
-                checked: Connectivity.mobileDataEnabled
-                onTriggered: {
-                    Connectivity.mobileDataEnabled = checked
-                    checked = Qt.binding(function() {
-                        return Connectivity.mobileDataEnabled
-                    })
-                }
+    ListItem.Standard {
+        text: i18n.tr("Cellular data")
+        control: Switch {
+            id: data
+            objectName: "data"
+            checked: Connectivity.mobileDataEnabled
+            enabled: singlesim.currentSim !== null
+            onTriggered: {
+                Connectivity.mobileDataEnabled = checked
+                /*
+                 * We do this binding here to workaround bug:
+                 * https://bugs.launchpad.net/ubuntu/+source/ubuntu-ui-toolkit/+bug/1494387
+                 *
+                 * The bug causes the checked binding to be overridden if plain onTriggered is used.
+                 */
+                checked = Qt.binding(function() {
+                    return Connectivity.mobileDataEnabled
+                })
             }
         }
-        ColumnLayout {
-            Layout.bottomMargin: units.gu(2)
-            spacing: units.gu(2)
-
-            RowLayout {
-                Label {
-                    text: i18n.tr("Data roaming")
-                    Layout.fillWidth: true
-                }
-                Switch {
-                    id: dataRoamingSwitch
-                    objectName: "roaming"
-                    enabled: singlesim.currentSim !== null && dataSwitch.checked
-                    checked: singlesim.currentSim.DataRoamingEnabled
-                    function trigger() {
-                        singlesim.currentSim.DataRoamingEnabled = !checked
-                    }
-                }
+    }
+    ListItem.Standard {
+        text: i18n.tr("Data roaming")
+        control: Switch {
+            id: roaming
+            objectName: "roaming"
+            enabled: singlesim.currentSim !== null && data.checked
+            checked: singlesim.currentSim.DataRoamingEnabled
+            function trigger() {
+                singlesim.currentSim.DataRoamingEnabled = !checked
             }
         }
     }
