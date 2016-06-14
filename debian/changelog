@@ -1,3 +1,10 @@
+ubuntu-system-settings (0.4+16.10.20160614-0ubuntu1) yakkety; urgency=medium
+
+  [ William Hua ]
+  * Make language and formats locale independent settings (LP: #1392699)
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Tue, 14 Jun 2016 14:49:39 +0000
+
 ubuntu-system-settings (0.4+16.10.20160606-0ubuntu1) yakkety; urgency=medium
 
   [ Michael Terry ]
