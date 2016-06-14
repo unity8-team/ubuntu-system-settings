@@ -157,7 +157,7 @@ ItemPage {
                 visible: false
                 text: i18n.tr("Call forwarding status can’t be checked " +
                               "now. Try again later.")
-                color: UbuntuColors.red
+                color: theme.palette.normal.negative
                 horizontalAlignment: Text.AlignHCenter
             }
 

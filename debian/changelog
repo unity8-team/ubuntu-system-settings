@@ -1,3 +1,66 @@
+ubuntu-system-settings (0.4+16.10.20160606-0ubuntu1) yakkety; urgency=medium
+
+  [ Michael Terry ]
+  * Update some button colors to the new theme style (LP: #1581047)
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Mon, 06 Jun 2016 22:02:47 +0000
+
+ubuntu-system-settings (0.4+16.10.20160525-0ubuntu1) yakkety; urgency=medium
+
+  [ Michael Terry ]
+  * Bump version number for change in TimeDate plugin API
+
+  [ CI Train Bot ]
+  * No-change rebuild.
+
+ -- Michael Terry <michael.terry@canonical.com>  Wed, 25 May 2016 06:02:08 +0000
+
+ubuntu-system-settings (0.3+16.10.20160523-0ubuntu1) yakkety; urgency=medium
+
+  * Catch connection errors asynchronously
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Mon, 23 May 2016 12:27:38 +0000
+
+ubuntu-system-settings (0.3+16.04.20160517-0ubuntu1) xenial; urgency=medium
+
+  * Fixes to sleep/idle settings in the Battery and Security panels (LP:
+    #1581423)
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Tue, 17 May 2016 14:04:58 +0000
+
+ubuntu-system-settings (0.3+16.04.20160511-0ubuntu1) xenial; urgency=medium
+
+  * Play the haptic feedback before pushing the page so it happens when
+    the use taps not after the page has loaded. (LP: #1578816)
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Wed, 11 May 2016 13:44:39 +0000
+
+ubuntu-system-settings (0.3+16.04.20160510-0ubuntu1) xenial; urgency=medium
+
+  * Don't use Ip4Address from NetworkManager, it was deprecated since
+    0.9 and since removed. Use QNetworkInterface to get the IP address.
+    (LP: #1579825)
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Tue, 10 May 2016 18:19:38 +0000
+
+ubuntu-system-settings (0.3+16.04.20160506-0ubuntu1) xenial; urgency=medium
+
+  [ jonas-drange ]
+  * Set Preferred on some context as soon as we know it's type and it is
+    active. Do not copy the Manager instance from panel to panel. (LP:
+    #1537913)
+  * add servicewatcher to system image binding (LP: #1509022)
+
+ -- Jonas G. Drange <ci-train-bot@canonical.com>  Fri, 06 May 2016 13:50:49 +0000
+
+ubuntu-system-settings (0.3+16.04.20160503-0ubuntu1) xenial; urgency=medium
+
+  * Only hide ringer sound settings when there is no modem,
+    IncomingMessageSound is used by ubuntu-push for other generic
+    notifications (LP: #1577783)
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Tue, 03 May 2016 13:52:13 +0000
+
 ubuntu-system-settings (0.3+16.04.20160429.2-0ubuntu1) xenial; urgency=medium
 
   [ Antti Kaijanmäki ]

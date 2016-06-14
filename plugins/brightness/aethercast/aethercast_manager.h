@@ -42,8 +42,8 @@ public:
     Q_PROPERTY(bool Enabled READ enabled WRITE setEnabled)
     inline bool enabled() const
     { return qvariant_cast< bool >(property("Enabled")); }
-    inline void setEnabled(bool value)
-    { setProperty("Enabled", QVariant::fromValue(value)); }
+    inline bool setEnabled(bool value)
+    { return setProperty("Enabled", QVariant::fromValue(value)); }
 
     Q_PROPERTY(bool Scanning READ scanning)
     inline bool scanning() const
