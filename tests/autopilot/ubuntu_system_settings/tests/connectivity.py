@@ -65,13 +65,13 @@ def set_wifi_enabled(self, value):
 
 @dbus.service.method(dbusmock.MOCK_IFACE,
                      in_signature='s', out_signature='s')
-def AddSim(self, imsi):
-    path = "/com/ubuntu/connectivity1/sim/{}".format(imsi)
+def AddSim(self, iccid):
+    path = "/com/ubuntu/connectivity1/sim/{}".format(iccid)
     self.AddObject(
         path,
         SIM_IFACE,
         {
-            'Imsi': dbus.String(imsi),
+            'Iccid': dbus.String(iccid),
             'PrimaryPhoneNumber': dbus.String("358401234567"),
             'Locked': dbus.Boolean(False),
             'Present': dbus.Boolean(True),
