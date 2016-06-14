@@ -28,12 +28,13 @@ SheetBase {
     id: root
     objectName: "displayLanguageDialog"
 
+    property int displayMode: 0
     property string initialLanguage
 
     signal languageChanged (int newLanguage, int oldLanguage)
 
     modal: true
-    title: i18n.tr("Display language")
+    title: displayMode == 0 ? i18n.tr("Display language") : i18n.tr("Date & number formats")
 
     contentsWidth: parent.width
     contentsHeight: parent.height
@@ -58,7 +59,7 @@ SheetBase {
            otherwise the UI might end up in a situation where scrolling doesn't work */
         flickableDirection: Flickable.VerticalFlick
 
-        currentIndex: plugin.currentLanguage
+        currentIndex: displayMode == 0 ? plugin.currentLanguage : plugin.currentFormat
 
         model: plugin.languageNames
         delegate: ListItem.Standard {
@@ -72,7 +73,8 @@ SheetBase {
         }
 
         onCurrentIndexChanged: {
-            i18n.language = plugin.languageCodes[currentIndex]
+            if (displayMode == 0)
+                i18n.language = plugin.languageCodes[currentIndex]
         }
     }
 
@@ -114,7 +116,7 @@ SheetBase {
             id: confirmButton
             objectName: "confirmChangeLanguage"
             text: i18n.tr("Confirm")
-            enabled: languageList.currentIndex != plugin.currentLanguage
+            enabled: languageList.currentIndex != (displayMode == 0 ? plugin.currentLanguage : plugin.currentFormat)
 
             anchors.left: parent.horizontalCenter
             anchors.right: parent.right
@@ -125,10 +127,16 @@ SheetBase {
             anchors.bottomMargin: units.gu(1)
 
             onClicked: {
-                var oldLang = plugin.currentLanguage;
+                var oldLang = displayMode == 0 ? plugin.currentLanguage : plugin.currentFormat;
                 var newLang = languageList.currentIndex;
+
                 languageChanged(newLang, oldLang);
-                plugin.currentLanguage = newLang;
+
+                if (displayMode == 0)
+                    plugin.currentLanguage = newLang;
+                else
+                    plugin.currentFormat = newLang;
+
                 PopupUtils.close(root);
             }
         }

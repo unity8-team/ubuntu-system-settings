@@ -86,6 +86,8 @@ LanguagePlugin::LanguagePlugin(QObject *parent) :
     QObject(parent),
     m_currentLanguage(-1),
     m_nextCurrentLanguage(-1),
+    m_currentFormat(-1),
+    m_nextCurrentFormat(-1),
     m_manager(act_user_manager_get_default()),
     m_user(nullptr)
 {
@@ -154,6 +156,22 @@ LanguagePlugin::setCurrentLanguage(int index)
 {
     if (index >= 0 && index < m_languageCodes.length()) {
         m_nextCurrentLanguage = index;
+
+        updateCurrentLanguage();
+    }
+}
+
+int
+LanguagePlugin::currentFormat() const
+{
+    return m_currentFormat;
+}
+
+void
+LanguagePlugin::setCurrentFormat(int index)
+{
+    if (index >= 0 && index < m_languageCodes.length()) {
+        m_nextCurrentFormat = index;
 
         updateCurrentLanguage();
     }
@@ -246,6 +264,7 @@ void
 LanguagePlugin::updateCurrentLanguage()
 {
     int previousLanguage(m_currentLanguage);
+    int previousFormat(m_currentFormat);
 
     if (m_user != nullptr && act_user_is_loaded(m_user)) {
         if (m_nextCurrentLanguage >= 0) {
@@ -255,23 +274,35 @@ LanguagePlugin::updateCurrentLanguage()
             QString formatsLocale(m_languageCodes[m_currentLanguage]);
             QString language(formatsLocale.left(formatsLocale.indexOf('.')));
             act_user_set_language(m_user, qPrintable(language));
+        } else if (m_nextCurrentFormat >= 0) {
+            m_currentFormat = m_nextCurrentFormat;
+            m_nextCurrentFormat = -1;
+
+            QString formatsLocale(m_languageCodes[m_currentFormat]);
             act_user_set_formats_locale(m_user, qPrintable(formatsLocale));
         } else {
+            QString language(act_user_get_language(m_user));
             QString formatsLocale(act_user_get_formats_locale(m_user));
-            m_currentLanguage = indexForLocale(formatsLocale);
 
-            if (m_currentLanguage < 0) {
-                QString language(act_user_get_language(m_user));
-                m_currentLanguage = indexForLocale(language);
-            }
+            m_currentLanguage = indexForLocale(language);
+            m_currentFormat = indexForLocale(formatsLocale);
+
+            if (m_currentLanguage < 0)
+                m_currentLanguage = m_currentFormat;
         }
     }
 
     if (m_currentLanguage < 0)
         m_currentLanguage = indexForLocale(QLocale::system().name());
 
+    if (m_currentFormat < 0)
+        m_currentFormat = indexForLocale(QLocale::system().name());
+
     if (m_currentLanguage != previousLanguage)
         Q_EMIT currentLanguageChanged();
+
+    if (m_currentFormat != previousFormat)
+        Q_EMIT currentFormatChanged();
 }
 
 
