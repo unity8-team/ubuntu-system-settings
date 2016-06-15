@@ -360,7 +360,6 @@ ItemPage {
 
                 Button {
                     Layout.fillWidth: true
-                    color: UbuntuColors.lightGrey
                     text: i18n.tr("Cancel")
                     onClicked: {
                         PopupUtils.close(changeSecurityDialog);
@@ -377,7 +376,7 @@ ItemPage {
                 Button {
                     id: confirmButton
                     Layout.fillWidth: true
-                    color: UbuntuColors.green
+                    color: theme.palette.normal.positive
 
                     text: {
                         if (changeSecurityDialog.newMethod ===

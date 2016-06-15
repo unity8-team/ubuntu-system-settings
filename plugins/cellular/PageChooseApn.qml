@@ -166,7 +166,7 @@ ItemPage {
 
             Button {
                 text: i18n.tr("Reset")
-                color: UbuntuColors.orange
+                color: theme.palette.normal.positive
                 onClicked: {
                     Manager.reset();
                     PopupUtils.close(dialogue);

@@ -97,6 +97,7 @@ Q_SIGNALS:
 private Q_SLOTS:
     void slotPropertiesChanged(const QString &interface, const QVariantMap &changedProperties,
                                const QStringList &invalidatedProperties);
+    void callFinishedSlot(QDBusPendingCallWatcher *call);
 
 private:
     QDBusConnection m_dbus;
