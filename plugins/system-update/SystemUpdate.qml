@@ -26,7 +26,7 @@ Update {
     size: SystemImage.updateSize
     iconUrl: "file:///usr/share/icons/suru/places/scalable/distributor-logo.svg"
 
-    onRetry: modelData.downloadUpdate();
+    // onRetry: modelData.downloadUpdate();
     onDownload: SystemImage.downloadUpdate();
     onPause: SystemImage.pauseDownload();
     onInstall: SystemImage.applyUpdate();

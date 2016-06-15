@@ -203,8 +203,6 @@ void QSystemImage::initializeProperties() {
     } else {
         qWarning() << "Error when retrieving version information: " << reply.error();
     }
-    qWarning() << "QSystemImage: m_currentBuildNumber" << m_currentBuildNumber;
-    qWarning() << "QSystemImage: m_targetBuildNumber" << m_targetBuildNumber;
 }
 
 bool QSystemImage::checkTarget() const {

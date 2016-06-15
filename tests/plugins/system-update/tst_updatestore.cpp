@@ -44,7 +44,6 @@ private slots:
         delete m_instance;
         delete m_dir;
     }
-
     void testLastCheck()
     {
         QCOMPARE(m_instance->lastCheckDate().isValid(), false);
@@ -249,7 +248,6 @@ private slots:
         QCOMPARE(size, 1);
         m_instance->db().close();
     }
-
     void testUpdatesChanged()
     {
         UpdatePlugin::ClickUpdateMetadata m;
@@ -265,6 +263,72 @@ private slots:
 
         m_instance->markInstalled(m.name(), m.revision());
         QTRY_COMPARE(updatesChangedSpy.count(), 2);
+    }
+    void testPruning()
+    {
+        UpdatePlugin::ClickUpdateMetadata recentUpdate;
+        recentUpdate.setName("new.app");
+        recentUpdate.setRevision(1);
+
+        UpdatePlugin::ClickUpdateMetadata oldUpdate;
+        oldUpdate.setName("old.app");
+        oldUpdate.setRevision(1);
+
+        m_instance->add(&recentUpdate);
+        m_instance->add(&oldUpdate);
+
+        m_instance->markInstalled(recentUpdate.name(), recentUpdate.revision());
+        m_instance->markInstalled(oldUpdate.name(), oldUpdate.revision());
+
+        // Change update date directly in the db
+        QVERIFY(m_instance->openDb());
+        QSqlQuery q(m_instance->db());
+        q.prepare("UPDATE updates SET updated_at_utc = :updated WHERE app_id = :appid");
+        QDateTime longAgo = QDateTime::currentDateTime().addMonths(-1).addDays(-1).toUTC();
+
+        q.bindValue(":updated", longAgo.toMSecsSinceEpoch());
+        q.bindValue(":appid", oldUpdate.name());
+        q.exec();
+
+        m_instance->pruneDb();
+
+        QVERIFY(m_instance->openDb());
+        QSqlQuery q1(m_instance->db());
+        q1.exec("SELECT * FROM updates");
+        int size = 0;
+        while (q1.next()) {
+            QVERIFY(q1.isValid());
+            QCOMPARE(q1.value(1).toString(), recentUpdate.name());
+            size++;
+        }
+        QCOMPARE(size, 1);
+    }
+    void testSystemUpdate()
+    {
+        // We basically add system updates using a freehand API,
+        // since version information can change from channel to
+        // channel. We test that here.
+        QString kind("system");
+        QString uniqueIdentifier("_ubuntu");
+        int revision(1);
+        QString version("OTA-42");
+        QString changelog("Changes");
+        QString title("Ubuntu Touch");
+        QString iconUrl("distributor-logo.svg");
+        int binarySize(1000);
+        m_instance->add(kind, uniqueIdentifier, revision, version, changelog,
+                        title, iconUrl, binarySize);
+
+        QVERIFY(m_instance->openDb());
+        QSqlQuery q(m_instance->db());
+        q.exec("SELECT * FROM updates");
+        int size = 0;
+        while (q.next()) {
+            QVERIFY(q.isValid());
+            QCOMPARE(q.value(1).toString(), uniqueIdentifier);
+            size++;
+        }
+        QCOMPARE(size, 1);
     }
 private:
     UpdatePlugin::UpdateStore *m_instance;

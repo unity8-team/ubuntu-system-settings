@@ -58,6 +58,11 @@ Item {
         dynamicRoles: true
     }
 
+    ListModel {
+        id: mockPreviousUpdatesModel
+        dynamicRoles: true
+    }
+
     function generateClickUpdates(count) {
         for (var i = 0; i < count; i++) {
             mockClickUpdatesModel.append({
@@ -75,7 +80,6 @@ Item {
             });
         }
     }
-
 
     UbuntuTestCase {
         name: "UpdatesTest"

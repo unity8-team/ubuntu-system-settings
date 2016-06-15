@@ -19,6 +19,7 @@
  */
 
 import QtQuick 2.4
+import SystemSettings 1.0
 import Ubuntu.Components 1.3
 import Ubuntu.Connectivity 1.0
 import Ubuntu.Components.ListItems 1.3 as ListItems
@@ -36,6 +37,7 @@ Item {
     }
 
     property var clickUpdatesModel: pendingClickUpdates
+    property var previousUpdatesModel: previousUpdates
     property var udm
     property bool online: NetworkingStatus.online
     property bool authenticated: UpdateManager.authenticated
@@ -194,6 +196,37 @@ Item {
                     changelog: model.changelog
                 }
             }
+
+            Column {
+                id: previous
+                objectName: "updatesPreviousUpdates"
+                visible: previousUpdatesRepeater.model && previousUpdatesRepeater.model.count > 0
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                    top: updates.haveSystemUpdate ? systemUpdate.bottom : glob.bottom
+                }
+                height: childrenRect.height
+
+                SettingsItemTitle {
+                    text: i18n.tr("Previous Updates")
+                }
+
+                Repeater {
+                    id: previousUpdatesRepeater
+                    model: previousUpdatesModel
+                    height: childrenRect.height
+                    delegate: Update {
+                        objectName: "updatesPreviousUpdate" + index
+                        width: previous.width
+                        version: remote_version
+                        size: model.size
+                        name: title
+                        iconUrl: icon_url
+                        changelog: model.changelog
+                    }
+                }
+            }
         }
 
         ListItems.ThinDivider {
@@ -300,5 +333,10 @@ Item {
     UpdateModel {
         id: pendingClickUpdates
         filter: UpdateModel.PendingClicksUpdates
+    }
+
+    UpdateModel {
+        id: previousUpdates
+        filter: UpdateModel.Installed
     }
 }

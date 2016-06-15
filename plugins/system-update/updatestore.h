@@ -45,8 +45,13 @@ public:
     // Can safely be called multiple times for the same update.
     void add(const ClickUpdateMetadata *meta);
 
+    void add(const QString &kind, const QString &uniqueIdentifier,
+             const int &revision, const QString &version,
+             const QString &changelog, const QString &title,
+             const QString &iconUrl, const int &size);
+
     // Mark an update as installed.
-    void markInstalled(const QString &appId, const int &revision);
+    void markInstalled(const QString &uniqueIdentifier, const int &revision);
 
     // Removes (30 days) old updates.
     void pruneDb();
@@ -68,7 +73,6 @@ private:
     QSqlDatabase m_db;
     QString m_dbpath;
     QString m_connectionName;
-
 };
 
 } // UpdatePlugin

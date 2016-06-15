@@ -120,98 +120,45 @@ void UpdateStore::add(const ClickUpdateMetadata *meta)
     Q_EMIT (updatesChanged());
 }
 
-// void UpdateStore::setUdmId(const QString &appId, const int &revision,
-//                                 const int &udmId)
-// {
-//     if (!openDb()) return;
+void UpdateStore::add(const QString &kind, const QString &uniqueIdentifier,
+                      const int &revision, const QString &version,
+                      const QString &changelog, const QString &title,
+                      const QString &iconUrl, const int &size)
+{
+    if (!openDb()) return;
 
-//     QSqlQuery q(m_db);
-//     q.prepare("UPDATE updates SET udm_download_id=:udm_download_id"
-//               " WHERE app_id=:app_id AND revision=:revision");
-//     q.bindValue(":udm_download_id", udmId);
-//     q.bindValue(":app_id", appId);
-//     q.bindValue(":revision", revision);
+    QSqlQuery q(m_db);
+    q.prepare("INSERT OR REPLACE INTO updates (app_id, revision, state,"
+              "created_at_utc, title, size, icon_url, changelog,"
+              "remote_version, kind) VALUES (:app_id,"
+              ":revision, :state, :created_at_utc, :title,"
+              ":size, :icon_url, :changelog, :remote_version, :kind)");
+    q.bindValue(":app_id", uniqueIdentifier);
+    q.bindValue(":revision", revision);
+    q.bindValue(":state", "pending");
+    q.bindValue(":created_at_utc",
+                QDateTime::currentDateTimeUtc().currentMSecsSinceEpoch());;
+    q.bindValue(":title", title);
+    q.bindValue(":size", size);
+    q.bindValue(":icon_url", iconUrl);
+    q.bindValue(":changelog", changelog);
+    q.bindValue(":remote_version", version);
+    q.bindValue(":kind", kind);
 
-//     if (!q.exec())
-//         qCritical() << "could not set udm id for app id" << appId
-//                     << q.lastError().text();
+    if (!q.exec())
+        qCritical() << "Could not add update" << q.lastError().text();
 
-//     queryPending();
-// }
+    m_db.close();
 
-// void UpdateStore::unsetUdmId(const QString &appId, const int &revision)
-// {
-//     if (!openDb()) return;
+    Q_EMIT (updatesChanged());
+}
 
-//     QSqlQuery q(m_db);
-//     q.prepare("UPDATE updates SET udm_download_id=NULL"
-//               " WHERE app_id=:app_id AND revision=:revision");
-//     // q.bindValue(":udm_download_id", QVariant(NULL));
-//     q.bindValue(":app_id", appId);
-//     q.bindValue(":revision", revision);
-
-//     if (!q.exec())
-//         qCritical() << "could not unset udm id for app id" << appId
-//                     << q.lastError().text();
-
-//     queryPending();
-// }
-
-// void UpdateStore::unsetUdmId(const int &udmId)
-// {
-//     if (!openDb()) return;
-
-//     QSqlQuery q(m_db);
-//     q.prepare("UPDATE updates SET udm_download_id=NULL"
-//               " WHERE udm_download_id=:udm_download_id");
-//     q.bindValue(":udm_download_id", QVariant(udmId));
-
-//     if (!q.exec())
-//         qCritical() << "could not unset udm id given udm id" << udmId
-//                     << q.lastError().text();
-
-//     queryPending();
-
-// }
-
-// void UpdateStore::queryPending()
-// {
-//     if (!openDb()) return;
-
-//     // TODO: this should query for DISTINCT app_id
-//     // TODO: bind KIND_CLICK
-//     m_pendingClickUpdates.setQuery("SELECT * FROM updates WHERE state='pending' "
-//                              " AND kind='" + KIND_CLICK + "' ORDER BY title ASC",
-//                              m_db);
-//     if (m_pendingClickUpdates.lastError().isValid())
-//         qWarning() << m_pendingClickUpdates.lastError();
-
-//     m_db.close();
-// }
-
-// void UpdateStore::queryInstalled()
-// {
-
-//     m_installedUpdates.setQuery("SELECT * FROM updates WHERE state='installed' "
-//                                 "ORDER BY updated_at_utc DESC",
-//                                 m_db);
-//     if (m_installedUpdates.lastError().isValid())
-//         qWarning() << m_installedUpdates.lastError();
-
-//     m_db.close();
-// }
-
-// void UpdateStore::queryAll()
-// {
-//     queryPending();
-//     queryInstalled();
-// }
 QSqlDatabase UpdateStore::db() const
 {
     return m_db;
 }
 
-void UpdateStore::markInstalled(const QString &appId, const int &revision)
+void UpdateStore::markInstalled(const QString &uniqueIdentifier, const int &revision)
 {
     if (!openDb()) return;
 
@@ -221,11 +168,11 @@ void UpdateStore::markInstalled(const QString &appId, const int &revision)
     q.bindValue(":state", "installed");
     q.bindValue(":updated_at_utc",
                 QDateTime::currentDateTimeUtc().currentMSecsSinceEpoch());
-    q.bindValue(":app_id", appId);
+    q.bindValue(":app_id", uniqueIdentifier);
     q.bindValue(":revision", revision);
 
     if (!q.exec())
-        qCritical() << "could not mark app" << appId
+        qCritical() << "could not mark app" << uniqueIdentifier
                     << "as installed" << q.lastError().text();
 
     m_db.close();
@@ -252,8 +199,8 @@ bool UpdateStore::createDb()
                 "remote_version TEXT,"
                 "revision INTEGER NOT NULL,"
                 "state TEXT NOT NULL,"
-                "created_at_utc INTEGER NOT NULL,"
-                "updated_at_utc INTEGER,"
+                "created_at_utc BIGINT NOT NULL,"
+                "updated_at_utc BIGINT,"
                 "title TEXT NOT NULL,"
                 "download_sha512 TEXT,"
                 "size INTEGER NOT NULL,"
@@ -284,7 +231,17 @@ bool UpdateStore::openDb()
 
 void UpdateStore::pruneDb()
 {
+    if (!openDb()) return;
 
+    QSqlQuery q(m_db);
+    QDateTime monthAgo = QDateTime::currentDateTime().addMonths(-1).toUTC();
+    q.prepare("DELETE FROM updates WHERE updated_at_utc < :updated");
+    q.bindValue(":updated", monthAgo.toMSecsSinceEpoch());
+
+    if (!q.exec())
+        qCritical() << "could not prune db" << q.lastError().text();
+
+    m_db.close();
 }
 
 QDateTime UpdateStore::lastCheckDate()

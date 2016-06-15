@@ -9,6 +9,7 @@ set(qmltest_DEFAULT_TARGETS qmluitests)
 set(qmltest_DEFAULT_PROPERTIES ENVIRONMENT "LC_ALL=C")
 
 set(qmltest_DEFAULT_IMPORT_PATHS
+  ${CMAKE_SOURCE_DIR}/src
   ${CMAKE_BINARY_DIR}/tests/utils/modules
   ${CMAKE_BINARY_DIR}/tests/mocks/
 )
