@@ -65,7 +65,9 @@ Column {
             objectName: "use/ril_" + (model.Index - 1)
             text: {
                 if (model.Sim) {
-                    circled(model.Index) + " " + model.Sim.PrimaryPhoneNumber
+                    return  sims[model.Index - 1].name + " (" +
+                            (model.Sim.PrimaryPhoneNumber !== "" ?
+                                model.Sim.PrimaryPhoneNumber : model.Sim.Iccid) + ")"
                 }
                 else {
                     return circled(model.Index) + " " + i18n.tr("No SIM detected")
