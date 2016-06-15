@@ -165,7 +165,7 @@ ItemPage {
 
             Component {
                 id: fingeprintPage
-                Fingerprint {
+                Fingerprints {
                     onRequestPasscode: {
                         pageStack.pop();
                         pageStack.push(Qt.resolvedUrl("LockSecurity.qml"));
