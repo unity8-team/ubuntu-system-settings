@@ -52,7 +52,7 @@ Column {
     ListItem.Standard {
         text: i18n.tr("Cellular data")
         control: Switch {
-            id: data
+            id: dataSwitch
             objectName: "data"
             checked: Connectivity.mobileDataEnabled
             enabled: singlesim.currentSim !== null
@@ -75,7 +75,7 @@ Column {
         control: Switch {
             id: roaming
             objectName: "roaming"
-            enabled: singlesim.currentSim !== null && data.checked
+            enabled: singlesim.currentSim !== null && dataSwitch.checked
             checked: singlesim.currentSim.DataRoamingEnabled
             function trigger() {
                 singlesim.currentSim.DataRoamingEnabled = !checked
