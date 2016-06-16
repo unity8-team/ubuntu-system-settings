@@ -70,7 +70,7 @@ Column {
                                 model.Sim.PrimaryPhoneNumber : model.Sim.Imsi) + ")"
                 }
                 else {
-                    return circled(model.Index) + " " + i18n.tr("No SIM detected")
+                    return i18n.tr("No SIM detected")
                 }
             }
             subText: {
@@ -82,16 +82,6 @@ Column {
                 }
             }
             enabled: model.Sim !== null
-
-            function circled(index) {
-                if (index === 1) {
-                    return "①"
-                } else if (index === 2) {
-                    return "②"
-                }
-
-                return " "
-            }
         }
 
         property var currentSim : null
