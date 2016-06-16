@@ -1,3 +1,11 @@
+ubuntu-system-settings (0.4+16.10.20160616.1-0ubuntu1) yakkety; urgency=medium
+
+  [ Arthur Mello ]
+  * Add new Notifications panel but keep it hidden until backend changes
+    lands
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Thu, 16 Jun 2016 17:36:54 +0000
+
 ubuntu-system-settings (0.4+16.10.20160606-0ubuntu1) yakkety; urgency=medium
 
   [ Michael Terry ]
