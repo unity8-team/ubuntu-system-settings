@@ -1,0 +1,23 @@
+{
+    "icon": "preferences-desktop-notifications-symbolic",
+    "name": "Notifications",
+    "translations": "ubuntu-system-settings",
+    "category": "personal",
+    "priority": 5,
+    "keywords": [
+        "software",
+        "notifications",
+        "apps",
+        "authorize",
+        "alerts",
+        "permissions",
+        "badges",
+        "facebook",
+        "twitter",
+        "flickr",
+        "gmail"
+    ],
+    "has-dynamic-keywords": false,
+    "has-dynamic-visibility": false,
+    "page-component": "PageComponent.qml"
+}
