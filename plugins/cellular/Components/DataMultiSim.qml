@@ -67,7 +67,7 @@ Column {
                 if (model.Sim) {
                     return  sims[model.Index - 1].name + " (" +
                             (model.Sim.PrimaryPhoneNumber !== "" ?
-                                model.Sim.PrimaryPhoneNumber : model.Sim.Iccid) + ")"
+                                model.Sim.PrimaryPhoneNumber : model.Sim.Imsi) + ")"
                 }
                 else {
                     return circled(model.Index) + " " + i18n.tr("No SIM detected")
