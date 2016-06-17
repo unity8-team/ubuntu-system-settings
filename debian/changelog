@@ -1,3 +1,17 @@
+ubuntu-system-settings (0.4+16.10.20160609-0ubuntu1) yakkety; urgency=medium
+
+  * Fix pin code request is rejected because device is not valid (LP:
+    #1539158)
+
+ -- Konrad Zapałowicz <konrad.zapalowicz@canonical.com>  Thu, 09 Jun 2016 11:16:36 +0000
+
+ubuntu-system-settings (0.4+16.10.20160606-0ubuntu1) yakkety; urgency=medium
+
+  [ Michael Terry ]
+  * Update some button colors to the new theme style (LP: #1581047)
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Mon, 06 Jun 2016 22:02:47 +0000
+
 ubuntu-system-settings (0.4+16.10.20160525-0ubuntu1) yakkety; urgency=medium
 
   [ Michael Terry ]
