@@ -33,6 +33,7 @@ ClickAppNotifications {
         name: "ClickAppNotifications"
         when: windowShown
 
+        /*
         function clickItem(item, button) {
             waitForRendering(item)
             if (button === undefined) button = Qt.LeftButton
@@ -111,5 +112,6 @@ ClickAppNotifications {
 
             tryCompare(enableSwitch, "checked", false)
         }
+        */
     }
 }
