@@ -34,8 +34,10 @@ ClickAppNotifications {
         when: windowShown
 
         function clickItem(item, button) {
+            waitForRendering(item)
             if (button === undefined) button = Qt.LeftButton
             mouseClick(item, button)
+            waitForRendering(item)
         }
 
         function init() {
