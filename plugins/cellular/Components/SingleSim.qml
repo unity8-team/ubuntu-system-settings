@@ -36,7 +36,7 @@ Column {
 
     property var currentSim
     Component.onCompleted: {
-        if (sortedModems.rowCount() === 1)
+        if (sortedModems.count === 1)
         {
             currentSim = sortedModems.get(0).Sim
             Connectivity.simForMobileData = currentSim
