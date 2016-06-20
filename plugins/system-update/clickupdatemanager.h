@@ -40,6 +40,9 @@ namespace UpdatePlugin
 class ClickUpdateManager : public ClickApiClient
 {
     Q_OBJECT
+
+    //qWarning() << "last click check" << m_updatestore.lastCheckDate().toString("dd.MM.yyyy hh:mm:ss");
+    // Q_PROPERTY(QDateTime lastCheck READ lastCheck NOTIFY lastCheckChanged)
     Q_PROPERTY(bool authenticated READ authenticated
                NOTIFY authenticatedChanged)
 public:
@@ -65,6 +68,9 @@ private slots:
     void handleClickTokenFailure(const ClickUpdateMetadata *meta);
     void handleCredentialsFound(const Token &token);
     void handleCredentialsFailed();
+    void handleCommunicationErrors();
+    void handleCheckStart() { m_checking = true; }
+    void handleCheckStop() { m_checking = false; }
 
 signals:
     void authenticatedChanged();
@@ -102,6 +108,7 @@ private:
     UbuntuOne::Token m_token;
     UbuntuOne::SSOService m_ssoService;
     bool m_authenticated;
+    bool m_checking;
 };
 } // UpdatePlugin
 

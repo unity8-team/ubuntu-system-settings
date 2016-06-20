@@ -17,8 +17,8 @@
  */
 #include <QSqlError>
 
+#include "systemupdate.h"
 #include "updatemodel.h"
-#include "updatemanager.h"
 
 namespace UpdatePlugin
 {
@@ -26,7 +26,7 @@ namespace UpdatePlugin
 UpdateModel::UpdateModel(QObject *parent)
     : QSqlQueryModel(parent)
     , m_filter(UpdateTypes::All)
-    , m_store(UpdateManager::instance()->updateStore())
+    , m_store(SystemUpdate::instance()->updateStore())
 {
     initialize();
 }

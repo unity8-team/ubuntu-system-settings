@@ -22,19 +22,20 @@
 
 #include <QtQml>
 #include <QtQml/QQmlContext>
+#include "enums.h"
 #include "systemimage.h"
+#include "systemupdate.h"
 #include "clickupdatemanager.h"
-#include "updatemanager.h"
 #include "updatemodel.h"
 
 using namespace UpdatePlugin;
 
-static QObject *umSingletonProvider(QQmlEngine *engine, QJSEngine *scriptEngine)
+static QObject *suSingletonProvider(QQmlEngine *engine, QJSEngine *scriptEngine)
 {
     Q_UNUSED(engine)
     Q_UNUSED(scriptEngine)
 
-    return UpdateManager::instance();
+    return SystemUpdate::instance();
 }
 
 static QObject *siSingletonProvider(QQmlEngine *engine, QJSEngine *scriptEngine)
@@ -48,8 +49,20 @@ static QObject *siSingletonProvider(QQmlEngine *engine, QJSEngine *scriptEngine)
 void BackendPlugin::registerTypes(const char *uri)
 {
     Q_ASSERT(uri == QLatin1String("Ubuntu.SystemSettings.Update"));
-    qmlRegisterSingletonType<QSystemImage>(uri, 1, 0, "SystemImage", siSingletonProvider);
+
+    qmlRegisterSingletonType<SystemUpdate>(
+        uri, 1, 0, "SystemUpdate", suSingletonProvider
+    );
+    // SI is a singleton because we use it both in the EntryComponent as well
+    // as in the PageComponent.
+    qmlRegisterSingletonType<QSystemImage>(
+        uri, 1, 0, "SystemImage", siSingletonProvider
+    );
+
+    qmlRegisterUncreatableType<Enums>(
+        uri, 1, 0, "Enums", "Enums can't be instantiated directly."
+    );
+
     qmlRegisterType<ClickUpdateManager>(uri, 1, 0, "ClickUpdateManager");
     qmlRegisterType<UpdateModel>(uri, 1, 0, "UpdateModel");
-    qmlRegisterSingletonType<UpdateManager>(uri, 1, 0, "UpdateManager", umSingletonProvider);
 }

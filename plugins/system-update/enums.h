@@ -1,7 +1,7 @@
 /*
  * This file is part of system-settings
  *
- * Copyright (C) 2013-2016 Canonical Ltd.
+ * Copyright (C) 2016 Canonical Ltd.
  *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License version 3, as published
@@ -16,21 +16,19 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef UPDATE_MANAGER_H
-#define UPDATE_MANAGER_H
+#ifndef SYSTEM_UPDATE_ENUMS_H
+#define SYSTEM_UPDATE_ENUMS_H
 
-#include <QDebug>
-
-#include "updatestore.h"
+#include <QObject>
 
 namespace UpdatePlugin
 {
-class UpdateManager : public QObject
+class Enums : public QObject
 {
     Q_OBJECT
     Q_ENUMS(UpdateKind)
     Q_ENUMS(UpdateState)
-    Q_ENUMS(Status)
+    Q_ENUMS(SystemStatus)
 public:
     enum class UpdateKind
     {
@@ -57,7 +55,7 @@ public:
         StateFailed
     };
 
-    enum class Status
+    enum class SystemStatus
     {
         StatusIdle,
         StatusCheckingClickUpdates,
@@ -67,19 +65,10 @@ public:
         StatusNetworkError,
         StatusServerError
     };
-
-    static UpdateManager *instance();
-    UpdateStore *updateStore();
-
-protected:
-    explicit UpdateManager(QObject *parent = 0);
-    ~UpdateManager();
-
 private:
-    static UpdateManager *m_instance;
-    void initializeUpdateStore();
-    UpdateStore m_updatestore;
+    explicit Enums(QObject *parent = 0) {}
+    ~Enums() {}
 };
 } // UpdatePlugin
 
-#endif // UPDATE_MANAGER_H
+#endif // SYSTEM_UPDATE_ENUMS_H

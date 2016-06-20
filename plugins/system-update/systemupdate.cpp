@@ -16,41 +16,29 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "updatemanager.h"
+#include "systemupdate.h"
 #include "helpers.h"
 
 namespace UpdatePlugin
 {
 
-UpdateManager *UpdateManager::m_instance = 0;
+SystemUpdate *SystemUpdate::m_instance = 0;
 
-UpdateManager *UpdateManager::instance()
+SystemUpdate *SystemUpdate::instance()
 {
-    if (!m_instance) m_instance = new UpdateManager;
+    if (!m_instance) m_instance = new SystemUpdate;
     return m_instance;
 }
 
-UpdateManager::UpdateManager(QObject *parent) : QObject(parent)
-{
-    initializeUpdateStore();
-}
-
-UpdateManager::~UpdateManager()
+SystemUpdate::SystemUpdate(QObject *parent) : QObject(parent)
 {
 }
 
-void UpdateManager::initializeUpdateStore()
+SystemUpdate::~SystemUpdate()
 {
-    qWarning() << "last click check" << m_updatestore.lastCheckDate().toString("dd.MM.yyyy hh:mm:ss");
-
-
-    // qWarning()
-    //         << "in initializeUpdateStore we set m_clickUpdatesCount to "
-    //         << m_clickUpdatesCount;
-    // calculateUpdatesCount();
 }
 
-UpdateStore *UpdateManager::updateStore()
+UpdateStore *SystemUpdate::updateStore()
 {
     return &m_updatestore;
 }

@@ -27,17 +27,18 @@
 
 #include "clickupdatemanager.h"
 #include "helpers.h"
-#include "updatemanager.h"
+#include "systemupdate.h"
 
 namespace UpdatePlugin
 {
 ClickUpdateManager::ClickUpdateManager(QObject *parent)
         : ClickApiClient(parent)
-        , m_store(UpdateManager::instance()->updateStore())
+        , m_store(SystemUpdate::instance()->updateStore())
         , m_process()
         , m_metas()
         , m_token(UbuntuOne::Token())
         , m_authenticated(false)
+        , m_checking(false)
 {
     init();
 }
@@ -49,6 +50,7 @@ ClickUpdateManager::ClickUpdateManager(const QString &dbpath, QObject *parent)
         , m_metas()
         , m_token(UbuntuOne::Token())
         , m_authenticated(false)
+        , m_checking(false)
 {
     init();
 }
@@ -57,6 +59,14 @@ void ClickUpdateManager::init()
 {
     initializeProcess();
     initializeSSOService();
+
+    connect(this, SIGNAL(serverError()), this, SLOT(handleCommunicationErrors()));
+    connect(this, SIGNAL(networkError()), this, SLOT(handleCommunicationErrors()));
+
+    connect(this, SIGNAL(checkStarted()), this, SLOT(handleCheckStart()));
+    connect(this, SIGNAL(checkCompleted()), this, SLOT(handleCheckStop()));
+    connect(this, SIGNAL(checkFailed()), this, SLOT(handleCheckStop()));
+    connect(this, SIGNAL(checkCanceled()), this, SLOT(handleCheckStop()));
 }
 
 ClickUpdateManager::~ClickUpdateManager()
@@ -305,6 +315,11 @@ void ClickUpdateManager::handleCredentialsFailed()
     setAuthenticated(false);
 }
 
+void ClickUpdateManager::handleCommunicationErrors()
+{
+    if (m_checking)
+        Q_EMIT (checkFailed());
+}
 
 void ClickUpdateManager::requestClickMetadata()
 {

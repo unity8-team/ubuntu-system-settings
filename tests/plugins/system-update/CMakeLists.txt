@@ -1,6 +1,7 @@
 set(XVFB_CMD xvfb-run -a -s "-screen 0 640x480x24")
 add_definitions(-DTESTS)
-include_directories(${CMAKE_CURRENT_BINARY_DIR}
+include_directories(
+    ${CMAKE_CURRENT_BINARY_DIR}
     ${CMAKE_SOURCE_DIR}/plugins/system-update
     /usr/include/apt-pkg/)
 
@@ -15,13 +16,14 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 set(PLUGIN_SOURCES
+    ${CMAKE_SOURCE_DIR}/plugins/system-update/systemupdate.cpp
     ${CMAKE_SOURCE_DIR}/plugins/system-update/clickapiclient.cpp
     ${CMAKE_SOURCE_DIR}/plugins/system-update/clickupdatemanager.cpp
     ${CMAKE_SOURCE_DIR}/plugins/system-update/clickupdatemetadata.cpp
     ${CMAKE_SOURCE_DIR}/plugins/system-update/helpers.cpp
+    ${CMAKE_SOURCE_DIR}/plugins/system-update/enums.h
     ${CMAKE_SOURCE_DIR}/plugins/system-update/updatemodel.cpp
     ${CMAKE_SOURCE_DIR}/plugins/system-update/updatestore.cpp
-    ${CMAKE_SOURCE_DIR}/plugins/system-update/updatemanager.cpp
 )
 
 set(PLUGIN_LIBS

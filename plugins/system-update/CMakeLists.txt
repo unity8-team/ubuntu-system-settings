@@ -19,7 +19,7 @@ pkg_check_modules(UBUNTUONEAUTH REQUIRED ubuntuoneauth-2.0)
 add_definitions(${UBUNTUONEAUTH_CFLAGS} ${UBUNTUONEAUTH_CFLAGS_OTHER})
 
 add_library(UbuntuUpdatePanel MODULE
-            updatemanager.cpp
+            systemupdate.cpp
             updatestore.cpp
             updatemodel.cpp
             clickupdatemanager.cpp
@@ -27,6 +27,7 @@ add_library(UbuntuUpdatePanel MODULE
             clickapiclient.cpp
             helpers.cpp
             plugin.cpp
+            enums.h
             # updatemanager.cpp
             ${QML_SOURCES})
 
