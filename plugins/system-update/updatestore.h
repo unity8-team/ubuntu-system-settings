@@ -16,8 +16,8 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef PLUGINS_SYSTEM_UPDATE_UPDATESTORE_H
-#define PLUGINS_SYSTEM_UPDATE_UPDATESTORE_H
+#ifndef UPDATE_STORE_H
+#define UPDATE_STORE_H
 
 #include <QDateTime>
 #include <QDebug>
@@ -27,7 +27,6 @@
 
 namespace UpdatePlugin
 {
-
 class UpdateStore : public QObject
 {
     Q_OBJECT
@@ -74,7 +73,6 @@ private:
     QString m_dbpath;
     QString m_connectionName;
 };
-
 } // UpdatePlugin
 
-#endif /* PLUGINS_SYSTEM_UPDATE_UPDATESTORE_H */
+#endif // UPDATE_STORE_H

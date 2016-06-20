@@ -16,15 +16,14 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef PLUGINS_SYSTEM_UPDATE_UPDATEMODEL_H
-#define PLUGINS_SYSTEM_UPDATE_UPDATEMODEL_H
+#ifndef UPDATE_MODEL_H
+#define UPDATE_MODEL_H
 
 #include <QSqlQueryModel>
 #include "updatestore.h"
 
 namespace UpdatePlugin
 {
-
 class UpdateModel : public QSqlQueryModel
 {
     Q_OBJECT
@@ -72,7 +71,6 @@ private:
     UpdateTypes m_filter;
     UpdateStore *m_store;
 };
-
 } // UpdatePlugin
 
-#endif // PLUGINS_SYSTEM_UPDATE_UPDATEMODEL_H
+#endif // UPDATE_MODEL_H

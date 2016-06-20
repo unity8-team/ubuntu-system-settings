@@ -36,22 +36,36 @@ Item {
         count += clickUpdatesModel.count
     }
 
-    property var clickUpdatesModel: pendingClickUpdates
-    property var previousUpdatesModel: previousUpdates
-    property var udm
-    property bool online: NetworkingStatus.online
-    property bool authenticated: UpdateManager.authenticated
+    property var clickUpdateManager: ClickUpdateManager {}
+    property var clickUpdatesModel: UpdateModel {
+        filter: UpdateModel.PendingClicksUpdates
+    }
+    property var previousUpdatesModel: UpdateModel {
+        filter: UpdateModel.Installed
+    }
+    property var udm: DownloadManager {
+        // onDownloadCanceled: UpdateManager.udmDownloadEnded(download.downloadId) // (SingleDownload download)
+        onDownloadFinished: clickUpdateManager.clickUpdateInstalled(
+            download.custom.packageName, download.custom.revision
+        )
+        // (SingleDownload download, QString path)
+        // onErrorFound: UpdateManager.udmDownloadEnded(download.downloadId) // (SingleDownload download)
+    }
 
-    function check() {
-        // Check for click updates start when we get credentials, i.e. not
-        // here.
+    property bool online: NetworkingStatus.online
+
+    function checkSystem() {
         SystemImage.checkForUpdate();
+
         switch (updates.status) {
             case UpdateManager.StatusCheckingClickUpdates:
                 updates.status = UpdateManager.StatusCheckingAllUpdates; break;
             case UpdateManager.StatusIdle:
                 updates.status = UpdateManager.StatusCheckingSystemUpdates; break;
-        }
+    }
+
+    function checkClick() {
+        clickUpdateManager.check();
     }
 
     function getDownload(packageName, revision) {
@@ -66,7 +80,12 @@ Item {
         return null;
     }
 
-    // Set by the report from SI
+    function cancelChecks() {
+        clickUpdateManager.cancel();
+        // No way to stop check in SI.
+    }
+
+    // Set using the report from SI
     property bool haveSystemUpdate: false
 
     property Flickable flickable: scrollWidget
@@ -94,7 +113,7 @@ Item {
         },
         State {
             name: "noAuth"
-            when: !updates.authenticated
+            when: !clickUpdateManager.authenticated
             PropertyChanges { target: notauthNotification; visible: true }
             PropertyChanges { target: noauthDivider; visible: (updates.haveSystemUpdate || !glob.hidden) }
         },
@@ -147,9 +166,7 @@ Item {
                     case UpdateManager.StatusCheckingSystemUpdates:
                         updates.status = UpdateManager.StatusIdle; break;
                 }
-
-                UpdateManager.cancelCheckForClickUpdates()
-
+                clickUpdateManager.cancel();
             }
         }
 
@@ -288,18 +305,11 @@ Item {
     }
 
     Connections {
-        target: UpdateManager
+        target: clickUpdateManager
         onNetworkError: console.warn('Updates.qml: onNetworkError')
         onServerError: console.warn('Updates.qml: onServerError')
-        onClickUpdateCheckStarted: {
-            switch (updates.status) {
-                case UpdateManager.StatusIdle:
-                    updates.status = UpdateManager.StatusCheckingClickUpdates; break;
-                case UpdateManager.StatusCheckingSystemUpdates:
-                    updates.status = UpdateManager.StatusCheckingAllUpdates; break;
-            }
-        }
-        onClickUpdateCheckCompleted: {
+
+        function onCheckStop() {
             switch (updates.status) {
                 case UpdateManager.StatusCheckingClickUpdates:
                     updates.status = UpdateManager.StatusIdle; break;
@@ -307,6 +317,27 @@ Item {
                     updates.status = UpdateManager.StatusCheckingSystemUpdates; break;
             }
         }
+        onCheckFailed: onCheckStop()
+        onCheckCompleted: onCheckStop()
+        onCheckCanceled: onCheckStop()
+        onNetworkError: {
+
+        }
+        onServerError: {
+
+        }
+        onCredentialError: {
+
+        }
+        function onCheckStart() {
+            switch (updates.status) {
+                case UpdateManager.StatusIdle:
+                    updates.status = UpdateManager.StatusCheckingClickUpdates; break;
+                case UpdateManager.StatusCheckingSystemUpdates:
+                    updates.status = UpdateManager.StatusCheckingAllUpdates; break;
+            }
+        }
+        onCheckStarted: onCheckStart()
     }
 
     Connections {
@@ -329,14 +360,5 @@ Item {
             }
         }
     }
-
-    UpdateModel {
-        id: pendingClickUpdates
-        filter: UpdateModel.PendingClicksUpdates
-    }
-
-    UpdateModel {
-        id: previousUpdates
-        filter: UpdateModel.Installed
-    }
+    Component.onDestruction: cancelChecks()
 }

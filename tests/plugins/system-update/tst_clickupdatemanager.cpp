@@ -17,14 +17,17 @@
  */
 
 #include <QSignalSpy>
+#include <QSqlError>
+#include <QSqlQuery>
+#include <QTemporaryDir>
 #include <QTest>
 
 #include "mockclickservertestcase.h"
 
 #include "clickupdatemetadata.h"
-#include "clickupdatechecker.h"
+#include "clickupdatemanager.h"
 
-class TstClickUpdateChecker
+class TstClickUpdateManager
     : public QObject
     , public MockClickServerTestCase
 {
@@ -32,6 +35,8 @@ class TstClickUpdateChecker
 private slots:
     void initTestCase()
     {
+        // The server starts with a default setting that will have it
+        // respond with two click updates.
         startMockClickServer();
     }
     void cleanupTestCase()
@@ -40,11 +45,19 @@ private slots:
     }
     void init()
     {
-        m_instance = new UpdatePlugin::ClickUpdateChecker();
+        m_dir = new QTemporaryDir();
+        QVERIFY(m_dir->isValid());
+        m_dbfile = m_dir->path() + "/cupdatemanagerstore.db";
+
+        m_instance = new UpdatePlugin::ClickUpdateManager(m_dbfile);
+        m_store = new UpdatePlugin::UpdateStore(m_dbfile);
     }
     void cleanup()
     {
+        m_store->db().close();
         delete m_instance;
+        delete m_store;
+        delete m_dir;
     }
     void testCheckCompletes()
     {
@@ -87,39 +100,26 @@ private slots:
 
         startMockClickServer();
     }
-    void testCheckEmitsClicks()
+    void testStoresClick()
     {
         QSignalSpy checkCompletedSpy(m_instance, SIGNAL(checkCompleted()));
 
-        QList<const UpdatePlugin::ClickUpdateMetadata*> metas;
-        QObject::connect(
-            m_instance, &UpdatePlugin::ClickUpdateChecker::updateAvailable,
-            [&](const UpdatePlugin::ClickUpdateMetadata *value) {
-                metas.append(value);
-            }
-        );
-
         m_instance->check();
 
-        QTRY_VERIFY(metas.size() == 2);
-        QCOMPARE(checkCompletedSpy.count(), 1);
+        QTRY_COMPARE(checkCompletedSpy.count(), 1);
 
-        // // Value set by mock click command.
-        // QCOMPARE(m->localVersion(), QLatin1String("0.1"));
+        int actualStoreSize = 0;
+        QVERIFY(m_store->openDb());
+        QSqlQuery query = m_store->db().exec("SELECT * FROM updates");
 
-        // // Values set by mock click server.
-        // QCOMPARE(m->name(), QLatin1String("com.ubuntu.developer.testclick"));
-        // QCOMPARE(m->remoteVersion(), QLatin1String("2.0"));
-        // QCOMPARE(m->downloadUrl(), QLatin1String("http://localhost:9009/download"));
-        // QCOMPARE(m->binaryFilesize(), (uint)9000);
-        // QCOMPARE(m->downloadSha512(), QLatin1String("1232223sdfdsffs"));
-        // QCOMPARE(m->changelog(), QLatin1String("New version!"));
-        // QCOMPARE(m->changelog(), QLatin1String("New version!"));
-        // QCOMPARE(m->title(), QLatin1String("Test Click App"));
+        while (query.next()) {
+            QVERIFY(query.isValid());
+            QCOMPARE(query.value(0).toString(), m_store->KIND_CLICK);
+            actualStoreSize++;
+        }
 
-        // // This comparison is also made against values from the mock click
-        // // update server, but they are fetched using a different code path.
-        // QCOMPARE(m->clickToken(), QLatin1String("Mock-X-Click-Token"));
+        QCOMPARE(actualStoreSize, 2);
+        m_store->db().close();
     }
     void testCheckClick()
     {
@@ -127,21 +127,24 @@ private slots:
         m_instance->check();
         QVERIFY(checkCompletedSpy.wait());
 
-        const UpdatePlugin::ClickUpdateMetadata *m;
-        QObject::connect(
-            m_instance, &UpdatePlugin::ClickUpdateChecker::updateAvailable,
-            [&](const UpdatePlugin::ClickUpdateMetadata *value) {
-                m = value;
-            }
-        );
-        m_instance->check("com.ubuntu.developer.testclick");
+        // const UpdatePlugin::ClickUpdateMetadata *m;
+        // QObject::connect(
+        //     m_instance, &UpdatePlugin::ClickUpdateManager::updateAvailable,
+        //     [&](const UpdatePlugin::ClickUpdateMetadata *value) {
+        //         m = value;
+        //     }
+        // );
+        // m_instance->check("com.ubuntu.developer.testclick");
 
-        QTRY_VERIFY(m);
+        // QTRY_VERIFY(m);
     }
 private:
-    UpdatePlugin::ClickUpdateChecker *m_instance;
+    UpdatePlugin::ClickUpdateManager *m_instance;
+    UpdatePlugin::UpdateStore *m_store;
+    QTemporaryDir *m_dir;
+    QString m_dbfile;
 };
 
-QTEST_MAIN(TstClickUpdateChecker)
-#include "tst_clickupdatechecker.moc"
+QTEST_MAIN(TstClickUpdateManager)
+#include "tst_clickupdatemanager.moc"
 

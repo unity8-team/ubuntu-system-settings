@@ -16,7 +16,7 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 set(PLUGIN_SOURCES
     ${CMAKE_SOURCE_DIR}/plugins/system-update/clickapiclient.cpp
-    ${CMAKE_SOURCE_DIR}/plugins/system-update/clickupdatechecker.cpp
+    ${CMAKE_SOURCE_DIR}/plugins/system-update/clickupdatemanager.cpp
     ${CMAKE_SOURCE_DIR}/plugins/system-update/clickupdatemetadata.cpp
     ${CMAKE_SOURCE_DIR}/plugins/system-update/helpers.cpp
     ${CMAKE_SOURCE_DIR}/plugins/system-update/updatemodel.cpp
@@ -67,17 +67,17 @@ set_tests_properties(
 )
 target_link_libraries(tst-clickupdatemetadata Qt5::Test ${PLUGIN_LIBS})
 
-add_executable(tst-clickupdatechecker
-               tst_clickupdatechecker.cpp
+add_executable(tst-clickupdatemanager
+               tst_clickupdatemanager.cpp
                mockclickservertestcase.h
                ${PLUGIN_SOURCES})
-add_test(tst-clickupdatechecker tst-clickupdatechecker)
+add_test(tst-clickupdatemanager tst-clickupdatemanager)
 set_tests_properties(
-    tst-clickupdatechecker
+    tst-clickupdatemanager
         PROPERTIES
         ENVIRONMENT "IGNORE_CREDENTIALS=1;URL_APPS=http://127.0.0.1:9009/metadata;CLICK_COMMAND=${CMAKE_CURRENT_BINARY_DIR}/mock_click_command"
 )
-target_link_libraries(tst-clickupdatechecker Qt5::Test ${PLUGIN_LIBS})
+target_link_libraries(tst-clickupdatemanager Qt5::Test ${PLUGIN_LIBS})
 
 add_executable(tst-updatestore
                tst_updatestore.cpp

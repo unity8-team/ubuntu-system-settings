@@ -15,8 +15,8 @@
  * You should have received a copy of the GNU General Public License along
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 #include <QSqlError>
+
 #include "updatemodel.h"
 #include "updatemanager.h"
 
@@ -103,8 +103,9 @@ void UpdateModel::update()
         break;
     case UpdateTypes::Pending:
     case UpdateTypes::PendingClicksUpdates:
-        sql = "SELECT * FROM updates WHERE state='pending' "
-              " AND kind='" + m_store->KIND_CLICK + "' ORDER BY title ASC";
+        sql = "SELECT *, MAX(revision) FROM updates WHERE state='pending' "
+              " AND kind='" + m_store->KIND_CLICK + "' GROUP BY app_id"
+              " ORDER BY title ASC";
         break;
     case UpdateTypes::PendingSystemUpdates:
         sql = ""; // We don't store it, use SI instead.

@@ -16,8 +16,8 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef PLUGINS_SYSTEM_UPDATE_CLICKUPDATECHECKER_H_
-#define PLUGINS_SYSTEM_UPDATE_CLICKUPDATECHECKER_H_
+#ifndef CLICK_UPDATE_MANAGER_H
+#define CLICK_UPDATE_MANAGER_H
 
 #include <QFile>
 #include <QHash>
@@ -25,29 +25,35 @@
 #include <QList>
 #include <QProcess>
 
+#include <token.h>
+#include <ssoservice.h>
+
 #include "clickupdatemetadata.h"
+#include "updatestore.h"
+
+// Having the full namespaced name in a slot seems to confuse
+// SignalSpy so we need this declaration.
+using UbuntuOne::Token;
 
 namespace UpdatePlugin
 {
-//
-// Checks for click updates.
-//
-class ClickUpdateChecker : public ClickApiClient
+class ClickUpdateManager : public ClickApiClient
 {
-Q_OBJECT
+    Q_OBJECT
+    Q_PROPERTY(bool authenticated READ authenticated
+               NOTIFY authenticatedChanged)
 public:
-    explicit ClickUpdateChecker(QObject *parent = 0);
-    ~ClickUpdateChecker();
+    explicit ClickUpdateManager(QObject *parent = 0);
+    // For testing.
+    explicit ClickUpdateManager(const QString &dbpath, QObject *parent = 0);
+    ~ClickUpdateManager();
 
-    // Check for click updates.
-    void check();
+    Q_INVOKABLE void check();
+    Q_INVOKABLE void check(const QString &packageName);
+    Q_INVOKABLE void cancel();
+    Q_INVOKABLE void clickUpdateInstalled(const QString &packageName, const int &revision);
 
-    // Check for updates for this one package. Will try to refresh the
-    // click token.
-    void check(const QString &packageName);
-
-    // Cancel check for click updates.
-    void cancel();
+    bool authenticated();
 
 protected slots:
     void requestSucceeded(QNetworkReply *reply);
@@ -57,10 +63,11 @@ private slots:
     void processClickToken(const ClickUpdateMetadata *meta);
     void handleProcessError(const QProcess::ProcessError &error);
     void handleClickTokenFailure(const ClickUpdateMetadata *meta);
+    void handleCredentialsFound(const Token &token);
+    void handleCredentialsFailed();
 
 signals:
-    // Indicate that this ClickUpdateMetadata is pending.
-    void updateAvailable(const ClickUpdateMetadata *meta);
+    void authenticatedChanged();
 
     void checkStarted();
     void checkCompleted();
@@ -68,11 +75,13 @@ signals:
     void checkFailed();
 
 private:
-    // Set up connections on a ClickUpdateMetadata instance.
+    void setAuthenticated(const bool authenticated);
     void initializeMeta(const ClickUpdateMetadata *meta);
 
+    void init();
     // Set up connections on a process instance.
     void initializeProcess();
+    void initializeSSOService();
 
     // Start process of adding remote metadata to each installed click
     void requestClickMetadata();
@@ -85,16 +94,15 @@ private:
     // Assert completion of check, signalling if check complete.
     void completionCheck();
 
+    UpdateStore *m_store;
     // Represents the process that we use to query installed clicks.
     QProcess m_process;
-
-    // For each check we store metas until the next check.
-    // We calculate whether or not we're done checking based
-    // on whether or not there is a click token on a meta,
-    // or if it has been removed from this list.
     QHash<QString, ClickUpdateMetadata*> m_metas;
+
+    UbuntuOne::Token m_token;
+    UbuntuOne::SSOService m_ssoService;
+    bool m_authenticated;
 };
+} // UpdatePlugin
 
-}
-
-#endif // PLUGINS_SYSTEM_UPDATE_CLICKUPDATECHECKER_H_
+#endif // CLICK_UPDATE_MANAGER_H

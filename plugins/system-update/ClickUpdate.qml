@@ -25,6 +25,7 @@ Update {
     property string packageName
     property int revision
     property var download: null
+    property var clickUpdateManager: ClickUpdateManager {}
     property string command
     property string clickToken
     property string downloadUrl
@@ -34,7 +35,7 @@ Update {
     updateState: UpdateManager.StateAvailable
     kind: UpdateManager.KindApp
 
-    onRetry: UpdateManager.retryClickPackage(update.packageName, update.revision)
+    onRetry: clickUpdateManager.check(update.packageName)
     onPause: download.pause()
     onResume: download.resume()
     onInstall: {

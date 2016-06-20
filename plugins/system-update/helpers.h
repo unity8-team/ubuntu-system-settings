@@ -16,8 +16,8 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef PLUGINS_SYSTEM_UPDATE_HELPERS_H_
-#define PLUGINS_SYSTEM_UPDATE_HELPERS_H
+#ifndef SYSTEM_UPDATE_HELPERS_H
+#define SYSTEM_UPDATE_HELPERS_H
 
 #include <sstream>
 #include <vector>
@@ -27,7 +27,6 @@
 
 namespace UpdatePlugin
 {
-
 class Helpers
 {
 public:
@@ -47,4 +46,4 @@ private:
 
 } // Namespace UpdatePlugin
 
-#endif // PLUGINS_SYSTEM_UPDATE_HELPERS_H_
+#endif // SYSTEM_UPDATE_HELPERS_H

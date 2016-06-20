@@ -16,8 +16,8 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef CLICKUPDATEMETADATA_H
-#define CLICKUPDATEMETADATA_H
+#ifndef CLICK_UPDATE_METADATA_H
+#define CLICK_UPDATE_METADATA_H
 
 #include "clickapiclient.h"
 
@@ -170,7 +170,6 @@ private:
     QStringList m_command;
     bool m_automatic;
 };
+} // UpdatePlugin
 
-}
-
-#endif // CLICKUPDATEMETADATA_H
+#endif // CLICK_UPDATE_METADATA_H

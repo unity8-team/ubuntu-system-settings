@@ -89,6 +89,24 @@ private slots:
         m_model->setFilter(UpdatePlugin::UpdateModel::UpdateTypes::All);
         QCOMPARE(m_model->count(), 2);
     }
+    void testSupersededUpdate()
+    {
+        UpdatePlugin::ClickUpdateMetadata superseded;
+        superseded.setName("some.app");
+        superseded.setRevision(1);
+
+        UpdatePlugin::ClickUpdateMetadata replacement;
+        replacement.setName("some.app");
+        replacement.setRevision(2);
+
+        m_store->add(&superseded);
+        m_store->add(&replacement);
+
+        // We only want the replacement in our model of pending updates.
+        m_model->setFilter(UpdatePlugin::UpdateModel::UpdateTypes::PendingClicksUpdates);
+        QCOMPARE(m_model->count(), 1);
+        QCOMPARE(m_model->data(m_model->index(0, 1), Qt::DisplayRole).toString(), replacement.name());
+    }
 private:
     UpdatePlugin::UpdateModel *m_model;
     UpdatePlugin::UpdateStore *m_store;

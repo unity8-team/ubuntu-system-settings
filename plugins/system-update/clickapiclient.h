@@ -16,8 +16,8 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef PLUGINS_SYSTEM_UPDATE_CLICKAPICLIENT_H_
-#define PLUGINS_SYSTEM_UPDATE_CLICKAPICLIENT_H_
+#ifndef CLICK_API_CLIENT_H
+#define CLICK_API_CLIENT_H
 
 #include <token.h>
 
@@ -26,12 +26,6 @@
 
 namespace UpdatePlugin
 {
-
-/**
- Implements some behaviour and state for interacting with a remote click
- API. Meant to normalize the behaviour of 401 and 403 responses, as well
- as reporting errors and cancel().
- */
 class ClickApiClient : public QObject
 {
     Q_OBJECT
@@ -80,7 +74,6 @@ private:
     // Set up connections to the network manager.
     void initializeNam();
 };
-
 } // UpdatePlugin
 
-#endif // PLUGINS_SYSTEM_UPDATE_CLICKAPICLIENT_H_
+#endif // CLICK_API_CLIENT_H

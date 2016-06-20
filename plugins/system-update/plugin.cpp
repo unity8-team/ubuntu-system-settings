@@ -23,6 +23,7 @@
 #include <QtQml>
 #include <QtQml/QQmlContext>
 #include "systemimage.h"
+#include "clickupdatemanager.h"
 #include "updatemanager.h"
 #include "updatemodel.h"
 
@@ -48,6 +49,7 @@ void BackendPlugin::registerTypes(const char *uri)
 {
     Q_ASSERT(uri == QLatin1String("Ubuntu.SystemSettings.Update"));
     qmlRegisterSingletonType<QSystemImage>(uri, 1, 0, "SystemImage", siSingletonProvider);
-    qmlRegisterSingletonType<UpdateManager>(uri, 1, 0, "UpdateManager", umSingletonProvider);
+    qmlRegisterType<ClickUpdateManager>(uri, 1, 0, "ClickUpdateManager");
     qmlRegisterType<UpdateModel>(uri, 1, 0, "UpdateModel");
+    qmlRegisterSingletonType<UpdateManager>(uri, 1, 0, "UpdateManager", umSingletonProvider);
 }

@@ -17,6 +17,7 @@
  */
 
 #include "plugin.h"
+#include "MockClickUpdateManager.h"
 #include "MockUpdateManager.h"
 #include "MockUpdateModel.h"
 #include "MockSystemImage.h"
@@ -42,6 +43,7 @@ static QObject *siSingletonProvider(QQmlEngine *engine, QJSEngine *scriptEngine)
 void BackendPlugin::registerTypes(const char *uri)
 {
     Q_ASSERT(uri == QLatin1String("Ubuntu.SystemSettings.Update"));
+    qmlRegisterType<MockClickUpdateManager>(uri, 1, 0, "ClickUpdateManager");
     qmlRegisterSingletonType<MockSystemImage>(uri, 1, 0, "SystemImage", siSingletonProvider);
     qmlRegisterSingletonType<MockUpdateManager>(uri, 1, 0, "UpdateManager", umSingletonProvider);
     qmlRegisterType<MockUpdateModel>(uri, 1, 0, "UpdateModel");

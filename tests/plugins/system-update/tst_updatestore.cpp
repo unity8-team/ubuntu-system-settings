@@ -17,7 +17,6 @@
  */
 
 #include <QDate>
-#include <QFile>
 #include <QSignalSpy>
 #include <QSqlQuery>
 #include <QTemporaryDir>

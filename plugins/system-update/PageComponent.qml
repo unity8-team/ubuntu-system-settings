@@ -45,13 +45,9 @@ ItemPage {
         Component.onCompleted: start()
     }
 
-    DownloadManager {
-        id: udm
-        // onDownloadCanceled: UpdateManager.udmDownloadEnded(download.downloadId) // (SingleDownload download)
-        onDownloadFinished: UpdateManager.clickUpdateInstalled(
-            download.custom.packageName, download.custom.revision
-        ) // (SingleDownload download, QString path)
-        // onErrorFound: UpdateManager.udmDownloadEnded(download.downloadId) // (SingleDownload download)
+    ClickUpdateManager {
+        id: clickUpdateManager
+
     }
 
     // Binding {
@@ -98,7 +94,7 @@ ItemPage {
             if (reply.errorName)
                 console.warn('Online Accounts failed:', reply.errorName);
             else
-                UpdateManager.checkForClickUpdates()
+                updates.checkClick();
         }
     }
 
@@ -127,11 +123,6 @@ ItemPage {
         }
         havePower: (indicatorPower.deviceState === "charging")
                     && (indicatorPower.batteryLevel > 25)
-        udm: udm
-
-        // onClickPackageRequestedRetry: UpdateManager.retryClickPackage(packageName);
-        Component.onCompleted: check()
-        Component.onDestruction: UpdateManager.cancelCheckForClickUpdates()
         onRequestAuthentication: uoaConfig.exec()
     }
 

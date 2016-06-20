@@ -4,7 +4,6 @@ set(QML_SOURCES
     Updates.qml
     Update.qml
     ClickUpdate.qml
-    ClickUpdates.qml
     SystemUpdate.qml
     SystemUpdatePrompt.qml
     NotAuthenticatedNotification.qml
@@ -23,7 +22,7 @@ add_library(UbuntuUpdatePanel MODULE
             updatemanager.cpp
             updatestore.cpp
             updatemodel.cpp
-            clickupdatechecker.cpp
+            clickupdatemanager.cpp
             clickupdatemetadata.cpp
             clickapiclient.cpp
             helpers.cpp

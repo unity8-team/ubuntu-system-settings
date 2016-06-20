@@ -4,6 +4,7 @@ include_directories(
 
 set(MOCK_SYSTEMUPDATE_SRCS
     plugin.cpp
+    MockClickUpdateManager.cpp
     MockUpdateManager.cpp
     MockSystemImage.cpp
     MockUpdateModel.h
