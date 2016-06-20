@@ -35,6 +35,7 @@
 
 typedef void *gpointer;
 typedef char gchar;
+typedef struct _GSettings GSettings;
 
 class KeyboardLayout;
 
@@ -70,6 +71,7 @@ private:
     QList<KeyboardLayout *> m_keyboardLayouts;
     SubsetModel m_keyboardLayoutsModel;
     AccountsService m_accountsService;
+    GSettings *m_sourcesSettings;
 };
 
 #endif // HWKBD_PLUGIN_H
