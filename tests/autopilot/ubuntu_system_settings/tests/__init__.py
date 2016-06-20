@@ -452,6 +452,10 @@ class CellularBaseTestCase(UbuntuSystemSettingsOfonoTestCase):
 
         self.session_con = self.get_dbus(False)
 
+        if is_process_running(INDICATOR_NETWORK):
+            _stop_process(INDICATOR_NETWORK)
+            self.addCleanup(_start_process, INDICATOR_NETWORK)
+
         ctv_tmpl = os.path.join(os.path.dirname(__file__), 'connectivity.py')
         (self.ctv_mock, self.obj_ctv) = self.spawn_server_template(
             ctv_tmpl, parameters=self.connectivity_parameters,
