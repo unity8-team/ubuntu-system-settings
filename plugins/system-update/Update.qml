@@ -87,7 +87,16 @@ Item {
         errorDetail = detail;
     }
 
-    // Component.onCompleted: console.warn(height)
+    states: [
+        State {
+            name: "installed"
+            PropertyChanges {
+                target: update
+                height: 0
+                clip: true
+            }
+        }
+    ]
 
     height: {
         var h = 0;
@@ -119,6 +128,11 @@ Item {
         h += changelogLabelHeight;
         return h;
     }
+
+    Behavior on height {
+        animation: UbuntuNumberAnimation {}
+    }
+
 
     // Holds icon, but also extends vertically to the bottom of the component.
     Item {
@@ -372,6 +386,9 @@ Item {
             case SystemUpdate.StateDownloaded:
                 return i18n.tr("Downloaded");
 
+            case SystemUpdate.StateInstalled:
+                return i18n.tr("Installed");
+
             default:
                 return "";
             }
@@ -618,6 +635,7 @@ Item {
 
     ListItems.ThinDivider {
         id: divider
+        visible: update.height !== 0
         anchors {
             top: parent.bottom
             topMargin: units.gu(1)
@@ -625,5 +643,12 @@ Item {
             right: parent.right
             rightMargin: units.gu(2)
         }
+    }
+
+    Timer {
+        id: hideTimer
+        interval: 2000
+        running: update.updateState === SystemUpdate.StateInstalled
+        onTriggered: update.state = "installed"
     }
 }

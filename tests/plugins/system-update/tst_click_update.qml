@@ -174,7 +174,6 @@ Item {
             compare(clickUpdateInstance.errorTitle, i18n.tr("Update failed"));
             compare(clickUpdateInstance.errorDetail, "The server responded incorrectly.");
             compare(clickUpdateInstance.updateState, SystemUpdate.StateFailed);
-            wait(10000)
         }
     }
 

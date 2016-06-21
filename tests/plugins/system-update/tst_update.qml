@@ -274,6 +274,30 @@ Item {
                     targetStatusLabelText: i18n.tr("%1 of %2").arg("500 Bytes").arg("1 KB"),
                     targetDownloadLabelText: "",
                 },
+
+                // Installed
+                {
+                    tag: "App update installed",
+                    updateState: SystemUpdate.StateInstalled,
+                    kind: SystemUpdate.KindApp,
+                    progress: 1,
+                    button: { text: i18n.tr("Pause"), visibility: true, state: false },
+                    progressbar: { visibility: false, progress: 1, },
+                    error: { title: "", detail: "", visiblity: false, },
+                    targetStatusLabelText: i18n.tr("Installed"),
+                    targetDownloadLabelText: "",
+                },
+                {
+                    tag: "System update installed",
+                    updateState: SystemUpdate.StateInstalled,
+                    kind: SystemUpdate.KindSystem,
+                    progress: 1,
+                    button: { text: i18n.tr("Pause"), visibility: true, state: false },
+                    progressbar: { visibility: false, progress: 1, },
+                    error: { title: "", detail: "", visiblity: false, },
+                    targetStatusLabelText: i18n.tr("Installed"),
+                    targetDownloadLabelText: "",
+                },
             ]
         }
 

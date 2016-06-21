@@ -334,9 +334,12 @@ Item {
     Connections {
         target: udm
         // onDownloadCanceled: SystemUpdate.udmDownloadEnded(download.downloadId) // (SingleDownload download)
-        onDownloadFinished: clickUpdateManager.clickUpdateInstalled(
-            download.custom.packageName, download.custom.revision
-        )
+        onDownloadFinished: {
+
+            clickUpdateManager.clickUpdateInstalled(
+                download.custom.packageName, download.custom.revision
+            );
+        }
         // (SingleDownload download, QString path)
         // onErrorFound: SystemUpdate.udmDownloadEnded(download.downloadId) // (SingleDownload download)
     }

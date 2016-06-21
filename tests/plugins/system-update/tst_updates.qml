@@ -453,9 +453,7 @@ Item {
         }
 
         function test_clickDownloadComplete() {
-            wait(3000)
             downloadManagerInstance.mockDownloadFinished(downloadInstance, "");
-            wait(3000)
         }
 
         function test_updateChecking() {
