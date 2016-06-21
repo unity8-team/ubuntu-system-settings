@@ -37,7 +37,7 @@ ClickUpdateManager::ClickUpdateManager(QObject *parent)
         , m_process()
         , m_metas()
         , m_token(UbuntuOne::Token())
-        , m_authenticated(false)
+        , m_authenticated(true)
         , m_checking(false)
 {
     init();
@@ -49,7 +49,7 @@ ClickUpdateManager::ClickUpdateManager(const QString &dbpath, QObject *parent)
         , m_process()
         , m_metas()
         , m_token(UbuntuOne::Token())
-        , m_authenticated(false)
+        , m_authenticated(true)
         , m_checking(false)
 {
     init();
