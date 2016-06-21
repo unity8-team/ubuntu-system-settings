@@ -60,7 +60,7 @@ void MockSystemImage::pauseDownload()
 {
 }
 
-bool MockSystemImage::getIsTargetNewer() const
+bool MockSystemImage::checkTarget() const
 {
     return false;
 }

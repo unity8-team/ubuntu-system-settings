@@ -207,7 +207,7 @@ Item {
         function test_download() {
             var d = clickUpdateInstance.download;
             compare(d.url, get_test_data().downloadUrl);
-            compare(d.autoStart, false, "click update is autostarting");
+            compare(d.autoStart, true, "click update is autostarting");
             compare(d.hash, get_test_data().downloadSha512);
             compare(d.algorithm, "sha512", "click update not using sha512 algo");
         }

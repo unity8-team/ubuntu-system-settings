@@ -191,6 +191,10 @@ Item {
                     name: title
                     iconUrl: icon_url
                     changelog: model.changelog
+
+                    onRetryUpdate: {
+                        clickUpdateManager.check(name);
+                    }
                 }
             }
 
@@ -335,9 +339,9 @@ Item {
         target: udm
         // onDownloadCanceled: SystemUpdate.udmDownloadEnded(download.downloadId) // (SingleDownload download)
         onDownloadFinished: {
-            console.warn('download finished');
+            console.warn('download finished', download, download.metadata.custom);
             clickUpdateManager.clickUpdateInstalled(
-                download.custom.packageName, download.custom.revision
+                download.metadata.custom.packageName, download.metadata.custom.revision
             );
         }
         onDownloadsChanged: console.warn('udm downloads changed', udm.downloads);

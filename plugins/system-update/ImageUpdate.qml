@@ -25,7 +25,8 @@ Update {
     version: SystemImage.availableVersion
     size: SystemImage.updateSize
     iconUrl: "file:///usr/share/icons/suru/places/scalable/distributor-logo.svg"
-
+    updateState: SystemImage.checkTarget() ? SystemUpdate.StateAvailable :
+                                              SystemUpdate.StateUnavailable
     // onRetry: modelData.downloadUpdate();
     onDownload: SystemImage.downloadUpdate();
     onPause: SystemImage.pauseDownload();

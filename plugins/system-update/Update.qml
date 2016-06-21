@@ -48,6 +48,9 @@ Item {
     // By Aliceljm [1].
     // [1] http://stackoverflow.com/a/18650828/538866
     property var formatter: function formatBytes(bytes, decimals) {
+        if (typeof Utilities !== "undefined") {
+            return Utilities.formatSize(bytes);
+        }
         if (typeof decimals === 'undefined') decimals = 0;
         if(bytes == 0) return '0 Byte';
         var k = 1000; // or 1024 for binary
@@ -384,6 +387,8 @@ Item {
             case SystemUpdate.StateAutomaticDownloadPaused:
                 var down = formatter(size * progress);
                 var left = formatter(size);
+                // TRANSLATORS: %1 is the human readable amount of bytes
+                // downloaded, and %2 is the total to be downloaded.
                 return i18n.tr("%1 of %2").arg(down).arg(left);
 
             case SystemUpdate.StateDownloaded:

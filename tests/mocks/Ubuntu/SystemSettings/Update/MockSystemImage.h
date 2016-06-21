@@ -90,7 +90,7 @@ public:
     Q_INVOKABLE void pauseDownload();
     Q_INVOKABLE void productionReset();
     Q_INVOKABLE void factoryReset();
-    Q_INVOKABLE bool getIsTargetNewer() const;
+    Q_INVOKABLE bool checkTarget() const;
 
     Q_INVOKABLE void mockProgress(const int &percentage, const double &eta); // mock only
     Q_INVOKABLE void mockAvailableStatus(const bool isAvailable,
