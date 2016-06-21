@@ -65,6 +65,7 @@ void ClickUpdateManager::init()
 
     connect(this, SIGNAL(checkStarted()), this, SLOT(handleCheckStart()));
     connect(this, SIGNAL(checkCompleted()), this, SLOT(handleCheckStop()));
+    connect(this, SIGNAL(checkCompleted()), this, SLOT(handleCheckCompleted()));
     connect(this, SIGNAL(checkFailed()), this, SLOT(handleCheckStop()));
     connect(this, SIGNAL(checkCanceled()), this, SLOT(handleCheckStop()));
 }
@@ -243,6 +244,11 @@ void ClickUpdateManager::handleProcessError(const QProcess::ProcessError &error)
         break;
     }
     Q_EMIT checkFailed();
+}
+
+void ClickUpdateManager::handleCheckCompleted()
+{
+    m_store->setLastCheckDate(QDateTime::currentDateTime());
 }
 
 void ClickUpdateManager::processClickToken(const ClickUpdateMetadata *meta)
@@ -433,6 +439,14 @@ void ClickUpdateManager::parseClickMetadata(const QJsonArray &array)
             m_metas.remove(name);
     }
     completionCheck();
+}
+
+bool ClickUpdateManager::isCheckRequired()
+{
+    // Spec says that a manual check should not happen if a check was
+    // completed less than 30 minutes ago.
+    QDateTime now = QDateTime::currentDateTimeUtc().addSecs(-1800); // 30 mins
+    return m_store->lastCheckDate() < now;
 }
 
 bool ClickUpdateManager::authenticated()

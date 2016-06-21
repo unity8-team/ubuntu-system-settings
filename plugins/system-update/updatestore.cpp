@@ -273,5 +273,4 @@ void UpdateStore::setLastCheckDate(const QDateTime &lastCheckUtc)
 
     m_db.close();
 }
-
 } // UpdatePlugin

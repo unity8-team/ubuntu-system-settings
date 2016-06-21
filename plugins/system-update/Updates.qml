@@ -342,5 +342,12 @@ Item {
         // (SingleDownload download, QString path)
         // onErrorFound: SystemUpdate.udmDownloadEnded(download.downloadId) // (SingleDownload download)
     }
+    Component.onCompleted: {
+        if (clickUpdateManager.isCheckRequired()) {
+            checkClick();
+            checkSystem();
+            console.warn('do check');
+        }
+    }
     Component.onDestruction: cancelChecks()
 }

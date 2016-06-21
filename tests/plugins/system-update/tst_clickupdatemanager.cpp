@@ -138,6 +138,26 @@ private slots:
 
         // QTRY_VERIFY(m);
     }
+    void testCheckRequired()
+    {
+        QVERIFY(m_store->openDb());
+        QSqlQuery q(m_store->db());
+        QDateTime longAgo = QDateTime::currentDateTime().addMonths(-1).addDays(-1).toUTC();
+
+        q.prepare("REPLACE INTO meta (checked_at_utc) VALUES (:checked_at_utc)");
+        q.bindValue(":checked_at_utc", longAgo.toMSecsSinceEpoch());
+
+        QVERIFY(q.exec());
+
+        QVERIFY(m_instance->isCheckRequired());
+    }
+    void testNotRequiredAfterCheck()
+    {
+        QSignalSpy checkCompletedSpy(m_instance, SIGNAL(checkCompleted()));
+        m_instance->check();
+        QVERIFY(checkCompletedSpy.wait());
+        QVERIFY(!m_instance->isCheckRequired());
+    }
 private:
     UpdatePlugin::ClickUpdateManager *m_instance;
     UpdatePlugin::UpdateStore *m_store;

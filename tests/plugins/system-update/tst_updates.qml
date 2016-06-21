@@ -487,4 +487,39 @@ Item {
             compare(updatesInstance.status, SystemUpdate.StatusIdle);
         }
     }
+
+    UbuntuTestCase {
+        name: "UpdateDateTimeTests"
+        when: windowShown
+
+        function test_noCheck() {
+            var clickUm = clickUpdateManagerComponent.createObject(testRoot);
+            clickUm.mockIsCheckRequired(false);
+
+            var update = updates.createObject(testRoot, {
+                clickUpdatesModel: mockClickUpdatesModel,
+                previousUpdatesModel: mockPreviousUpdatesModel,
+                clickUpdateManager: clickUm,
+                online: true,
+                authenticated: true
+            });
+
+            verify(!clickUm.isChecking());
+        }
+
+        function test_check() {
+            var clickUm = clickUpdateManagerComponent.createObject(testRoot);
+            clickUm.mockIsCheckRequired(true);
+
+            var update = updates.createObject(testRoot, {
+                clickUpdatesModel: mockClickUpdatesModel,
+                previousUpdatesModel: mockPreviousUpdatesModel,
+                clickUpdateManager: clickUm,
+                online: true,
+                authenticated: true
+            });
+
+            verify(clickUm.isChecking());
+        }
+    }
 }

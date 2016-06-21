@@ -18,6 +18,7 @@
 #ifndef MOCK_CLICK_UPDATE_MANAGER_H
 #define MOCK_CLICK_UPDATE_MANAGER_H
 
+#include <QDateTime>
 #include <QObject>
 
 class MockClickUpdateManager : public QObject
@@ -35,6 +36,7 @@ public:
     Q_INVOKABLE void clickUpdateInstalled(const QString &packageName, const int &revision);
 
     bool authenticated();
+    Q_INVOKABLE bool isCheckRequired();
 
     Q_INVOKABLE void mockCheckStarted(); // mock only
     Q_INVOKABLE void mockCheckComplete(); // mock only
@@ -44,9 +46,12 @@ public:
     Q_INVOKABLE void mockNetworkError(); // mock only
     Q_INVOKABLE void mockServerError(); // mock only
     Q_INVOKABLE void mockCredentialError(); // mock only
+    Q_INVOKABLE void mockIsCheckRequired(const bool isRequired); // mock only
+    Q_INVOKABLE bool isChecking() const; // mock only
 
 signals:
     void authenticatedChanged();
+
     void checkStarted();
     void checkCompleted();
     void checkCanceled();
@@ -59,6 +64,8 @@ signals:
 private:
     bool m_authenticated;
     bool m_checking;
+    QDateTime m_lastCheck;
+    bool m_checkRequired;
 };
 
 #endif // MOCK_CLICK_UPDATE_MANAGER_H

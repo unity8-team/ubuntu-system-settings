@@ -19,6 +19,7 @@
 #ifndef CLICK_UPDATE_MANAGER_H
 #define CLICK_UPDATE_MANAGER_H
 
+#include <QDateTime>
 #include <QFile>
 #include <QHash>
 #include <QJsonDocument>
@@ -40,9 +41,6 @@ namespace UpdatePlugin
 class ClickUpdateManager : public ClickApiClient
 {
     Q_OBJECT
-
-    //qWarning() << "last click check" << m_updatestore.lastCheckDate().toString("dd.MM.yyyy hh:mm:ss");
-    // Q_PROPERTY(QDateTime lastCheck READ lastCheck NOTIFY lastCheckChanged)
     Q_PROPERTY(bool authenticated READ authenticated
                NOTIFY authenticatedChanged)
 public:
@@ -55,6 +53,8 @@ public:
     Q_INVOKABLE void check(const QString &packageName);
     Q_INVOKABLE void cancel();
     Q_INVOKABLE void clickUpdateInstalled(const QString &packageName, const int &revision);
+
+    Q_INVOKABLE bool isCheckRequired();
 
     bool authenticated();
 
@@ -71,6 +71,7 @@ private slots:
     void handleCommunicationErrors();
     void handleCheckStart() { m_checking = true; }
     void handleCheckStop() { m_checking = false; }
+    void handleCheckCompleted();
 
 signals:
     void authenticatedChanged();
