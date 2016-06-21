@@ -78,7 +78,7 @@ Column {
                     return ""
                 }
                 else {
-                    return i18n.tr("Insert a SIM, then restart the phone.")
+                    return i18n.tr("Insert a SIM, then restart the device.")
                 }
             }
             enabled: model.Sim !== null
