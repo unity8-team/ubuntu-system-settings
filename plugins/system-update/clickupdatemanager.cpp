@@ -275,7 +275,7 @@ void ClickUpdateManager::completionCheck()
 }
 
 void ClickUpdateManager::handleClickTokenFailure(
-        const ClickUpdateMetadata *meta)
+        ClickUpdateMetadata *meta)
 {
     // Set empty click token in db. This way we can ask the user to retry.
     meta->setClickToken("");

@@ -50,41 +50,6 @@ ItemPage {
 
     }
 
-    // Binding {
-    //     target: UpdateManager
-    //     property: "online"
-    //     value: NetworkingStatus.online
-    // }
-
-    // Binding {
-    //     target: UpdateManager
-    //     property: "haveSufficientPower"
-    //     value: (indicatorPower.deviceState === "charging")
-    //            && (indicatorPower.batteryLevel > 25)
-    // }
-
-    Connections {
-        target: UpdateManager
-        // onClickUpdateReady: {
-        //     var packageName = metadata["custom"]["package-name"];
-        //     if (!Udm.hasClickPackageDownload(packageName)) {
-        //         var metadataObj = mdt.createObject(UpdateManager, metadata);
-        //         var singleDownloadObj = sdl.createObject(UpdateManager, {
-        //             "url": url,
-        //             "autoStart": autoStart,
-        //             "hash": hash,
-        //             "algorithm": algorithm,
-        //             "headers": headers,
-        //             "metadata": metadataObj
-        //         });
-        //         singleDownloadObj.download(url);
-        //         singleDownloadObj.errorFound.connect(function () {
-        //             console.warn("singledown err", this.errorMessage);
-        //         }.bind(singleDownloadObj));
-        //     }
-        // }
-    }
-
     Setup {
         id: uoaConfig
         applicationId: "ubuntu-system-settings"

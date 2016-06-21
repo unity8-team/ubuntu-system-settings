@@ -65,7 +65,7 @@ private slots:
     void processInstalledClicks(const int &exitCode);
     void processClickToken(const ClickUpdateMetadata *meta);
     void handleProcessError(const QProcess::ProcessError &error);
-    void handleClickTokenFailure(const ClickUpdateMetadata *meta);
+    void handleClickTokenFailure(ClickUpdateMetadata *meta);
     void handleCredentialsFound(const Token &token);
     void handleCredentialsFailed();
     void handleCommunicationErrors();
