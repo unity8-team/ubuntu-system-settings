@@ -31,12 +31,8 @@ SystemUpdate::SystemUpdate(QObject *parent) : QObject(parent)
 {
 }
 
-SystemUpdate::~SystemUpdate()
+void SystemUpdate::notifyStoreChanged()
 {
-}
-
-UpdateStore *SystemUpdate::updateStore()
-{
-    return &m_updatestore;
+    Q_EMIT (storeChanged());
 }
 } // UpdatePlugin

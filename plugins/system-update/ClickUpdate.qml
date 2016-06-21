@@ -39,7 +39,9 @@ Update {
     onPause: download.pause()
     onResume: download.resume()
     onInstall: {
+        console.warn('onInstall...');
         if (download === null) {
+            console.warn('onInstall had no download. Creating one...');
             var metadata = {
                 "command": update.command.split(" "),
                 "title": update.name,
@@ -55,7 +57,7 @@ Update {
             var metadataObj = mdt.createObject(update, metadata);
             var singleDownloadObj = sdl.createObject(update, {
                 "url": update.downloadUrl,
-                "autoStart": false,
+                "autoStart": true,
                 "hash": update.downloadSha512,
                 "algorithm": "sha512",
                 "headers": hdrs,
@@ -65,6 +67,7 @@ Update {
             download = singleDownloadObj;
         }
 
+        console.warn('onInstall will now download', update.downloadUrl);
         download.download(update.downloadUrl)
     }
     onDownload: install()

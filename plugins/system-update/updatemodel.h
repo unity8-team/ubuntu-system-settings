@@ -27,6 +27,7 @@ namespace UpdatePlugin
 class UpdateModel : public QSqlQueryModel
 {
     Q_OBJECT
+    // TODO: use flags
     Q_PROPERTY(UpdateTypes filter
                READ filter
                WRITE setFilter

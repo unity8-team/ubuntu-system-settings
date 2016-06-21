@@ -111,6 +111,10 @@ private slots:
     {
         // TODO IMPLEMENT
     }
+    void testCount()
+    {
+        // TODO implement!!
+    }
 private:
     UpdatePlugin::UpdateModel *m_model;
     UpdatePlugin::UpdateStore *m_store;

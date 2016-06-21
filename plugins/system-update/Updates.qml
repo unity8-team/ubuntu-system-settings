@@ -339,6 +339,7 @@ Item {
                 download.custom.packageName, download.custom.revision
             );
         }
+        onDownloadsChanged: console.warn('udm downloads changed', udm.downloads);
         // (SingleDownload download, QString path)
         // onErrorFound: SystemUpdate.udmDownloadEnded(download.downloadId) // (SingleDownload download)
     }

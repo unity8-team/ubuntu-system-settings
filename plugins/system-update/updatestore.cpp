@@ -17,6 +17,7 @@
  */
 
 #include "updatestore.h"
+#include "systemupdate.h"
 
 #include <QDir>
 #include <QSqlDatabase>
@@ -38,6 +39,9 @@ UpdateStore::UpdateStore(QObject *parent)
         return;
     }
     m_dbpath = dataPath + QLatin1String("/updatestore.db");
+
+    connect(this, &UpdateStore::updatesChanged,
+            SystemUpdate::instance(), &SystemUpdate::notifyStoreChanged);
 
     initializeStore();
 }
@@ -66,6 +70,7 @@ void UpdateStore::initializeStore()
             m_connectionName = tmpl.arg(connI);
         connI++;
     }
+    qWarning() << "initializeStore with conn name" << m_connectionName;
 
     m_db = QSqlDatabase::addDatabase(QLatin1String("QSQLITE"), m_connectionName);
     m_db.setDatabaseName(m_dbpath);
@@ -77,10 +82,8 @@ void UpdateStore::initializeStore()
     if (!q.next() && !createDb()) {
         qCritical() << "Could not create updates database:" << m_dbpath
             << m_db.lastError().text();
-        return;
     }
-
-    m_db.close();
+    q.finish();
 }
 
 void UpdateStore::add(const ClickUpdateMetadata *meta)
@@ -112,10 +115,11 @@ void UpdateStore::add(const ClickUpdateMetadata *meta)
     q.bindValue(":remote_version", meta->remoteVersion());
     q.bindValue(":kind", KIND_CLICK);
 
-    if (!q.exec())
+    if (!q.exec()) {
         qCritical() << "Could not add click update" << q.lastError().text();
+    }
 
-    m_db.close();
+    q.finish();
 
     Q_EMIT (updatesChanged());
 }
@@ -145,10 +149,11 @@ void UpdateStore::add(const QString &kind, const QString &uniqueIdentifier,
     q.bindValue(":remote_version", version);
     q.bindValue(":kind", kind);
 
-    if (!q.exec())
+    if (!q.exec()) {
         qCritical() << "Could not add update" << q.lastError().text();
+    }
 
-    m_db.close();
+    q.finish();
 
     Q_EMIT (updatesChanged());
 }
@@ -171,11 +176,12 @@ void UpdateStore::markInstalled(const QString &uniqueIdentifier, const int &revi
     q.bindValue(":app_id", uniqueIdentifier);
     q.bindValue(":revision", revision);
 
-    if (!q.exec())
+    if (!q.exec()) {
         qCritical() << "could not mark app" << uniqueIdentifier
                     << "as installed" << q.lastError().text();
+    }
 
-    m_db.close();
+    q.finish();
 
     Q_EMIT (updatesChanged());
 }
@@ -238,10 +244,10 @@ void UpdateStore::pruneDb()
     q.prepare("DELETE FROM updates WHERE updated_at_utc < :updated");
     q.bindValue(":updated", monthAgo.toMSecsSinceEpoch());
 
-    if (!q.exec())
+    if (!q.exec()) {
         qCritical() << "could not prune db" << q.lastError().text();
-
-    m_db.close();
+    }
+    q.finish();
 }
 
 QDateTime UpdateStore::lastCheckDate()
@@ -252,10 +258,10 @@ QDateTime UpdateStore::lastCheckDate()
     QSqlQuery q(m_db);
     q.exec("SELECT checked_at_utc FROM meta ORDER BY checked_at_utc DESC;");
 
-    if (q.next())
+    if (q.next()) {
         d = QDateTime::fromMSecsSinceEpoch(q.value(0).toLongLong());
-
-    m_db.close();
+    }
+    q.finish();
 
     return d.toUTC();
 }
@@ -268,9 +274,10 @@ void UpdateStore::setLastCheckDate(const QDateTime &lastCheckUtc)
     q.prepare("REPLACE INTO meta (checked_at_utc) VALUES (:checked_at_utc)");
     q.bindValue(":checked_at_utc", lastCheckUtc.toMSecsSinceEpoch());
 
-    if (!q.exec())
+    if (!q.exec()) {
         qCritical() << "could not update checked at value" << q.lastError().text();
+    }
 
-    m_db.close();
+    q.finish();
 }
 } // UpdatePlugin

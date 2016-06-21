@@ -31,7 +31,6 @@ class SystemUpdate : public QObject
     Q_ENUMS(SystemStatus)
 public:
     static SystemUpdate *instance();
-    UpdateStore *updateStore();
 
     enum class UpdateKind
     {
@@ -69,13 +68,18 @@ public:
         StatusServerError
     };
 
+public slots:
+    void notifyStoreChanged();
+
+signals:
+    void storeChanged();
+
 protected:
     explicit SystemUpdate(QObject *parent = 0);
-    ~SystemUpdate();
+    ~SystemUpdate() {}
 
 private:
     static SystemUpdate *m_instance;
-    UpdateStore m_updatestore;
 };
 } // UpdatePlugin
 

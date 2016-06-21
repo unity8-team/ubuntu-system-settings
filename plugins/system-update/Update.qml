@@ -165,7 +165,6 @@ Item {
         }
         verticalAlignment: Text.AlignVCenter
         height: button.height
-        fontSize: "large"
         elide: Text.ElideMiddle
     }
 
@@ -292,6 +291,7 @@ Item {
         property bool expanded: false
         spacing: units.gu(0.5)
         visible: updateState !== SystemUpdate.StateFailed
+
         Label {
             id: versionLabel
             verticalAlignment: Text.AlignVCenter
@@ -310,7 +310,10 @@ Item {
         }
 
         MouseArea {
-            anchors.fill: parent
+            anchors {
+                fill: parent
+                margins: units.gu(-2) // grow hitbox
+            }
             onClicked: {
                 if (!update.changelog) return;
                 parent.expanded = !parent.expanded
@@ -591,6 +594,7 @@ Item {
         // when changelogLabel has completed.
         property bool animate: false
         height: childrenRect.height
+
         Behavior on height {
             animation: UbuntuNumberAnimation {}
             enabled: changelogCol.animate
@@ -631,6 +635,12 @@ Item {
                 changelogCol.animate = true;
             }
         }
+
+    }
+
+    MouseArea {
+        anchors.fill: changelogCol
+        onClicked: expandableVersionLabel.expanded = false
     }
 
     ListItems.ThinDivider {

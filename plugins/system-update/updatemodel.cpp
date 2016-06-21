@@ -16,6 +16,7 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include <QSqlError>
+#include <QSqlQuery>
 
 #include "systemupdate.h"
 #include "updatemodel.h"
@@ -26,7 +27,7 @@ namespace UpdatePlugin
 UpdateModel::UpdateModel(QObject *parent)
     : QSqlQueryModel(parent)
     , m_filter(UpdateTypes::All)
-    , m_store(SystemUpdate::instance()->updateStore())
+    , m_store(new UpdateStore(this))
 {
     initialize();
 }
@@ -42,11 +43,13 @@ UpdateModel::UpdateModel(const QString &dbpath, QObject *parent)
 void UpdateModel::initialize()
 {
     connect(this, SIGNAL(filterChanged()), SLOT(update()));
-    connect(m_store, &UpdateStore::updatesChanged, this, &UpdateModel::update);
+    connect(SystemUpdate::instance(), &SystemUpdate::storeChanged,
+            this, &UpdateModel::update);
 }
 
 UpdateModel::~UpdateModel()
 {
+    query().finish();
 }
 
 QHash<int, QByteArray> UpdateModel::roleNames() const
@@ -94,6 +97,8 @@ UpdateModel::UpdateTypes UpdateModel::filter() const
 
 void UpdateModel::update()
 {
+    int oldCount = count();
+    qWarning() << "update count(old)" << oldCount;
     if (!m_store->openDb()) return;
 
     QString sql;
@@ -109,7 +114,6 @@ void UpdateModel::update()
         break;
     case UpdateTypes::PendingSystemUpdates:
         sql = ""; // We don't store it, use SI instead.
-        qWarning() << "Ignoring filter for pending system updates.";
         break;
     case UpdateTypes::InstalledClicksUpdates:
         sql = "SELECT * FROM updates WHERE state='installed'"
@@ -124,12 +128,27 @@ void UpdateModel::update()
         break;
     }
 
-    if (!sql.isEmpty())
-        setQuery(sql, m_store->db());
-        if (lastError().isValid())
-            qWarning() << lastError();
+    qWarning() << "sql" << sql;
 
-    m_store->db().close();
+    if (sql.isEmpty()) {
+        return; // nothing to execute.
+    }
+
+    setQuery(sql, m_store->db());
+
+    if (lastError().isValid()) {
+        qWarning() << lastError();
+    }
+
+    if (!query().isActive()) {
+        qWarning() << "query aint active";
+    }
+
+    qWarning() << "update count (new)" << count();
+
+    if (oldCount != count()) {
+        Q_EMIT (countChanged());
+    }
 }
 
 const char* UpdateModel::COLUMN_NAMES[] = {

@@ -33,7 +33,7 @@ namespace UpdatePlugin
 {
 ClickUpdateManager::ClickUpdateManager(QObject *parent)
         : ClickApiClient(parent)
-        , m_store(SystemUpdate::instance()->updateStore())
+        , m_store(new UpdateStore(this))
         , m_process()
         , m_metas()
         , m_token(UbuntuOne::Token())
