@@ -36,11 +36,6 @@ void MockDownloadManager::download(QString url)
 
 }
 
-void MockDownloadManager::mockDownload(MockSingleDownload *download)
-{
-    m_downloads.append(QVariant::fromValue(download));
-}
-
 QVariantList MockDownloadManager::downloads()
 {
     return m_downloads;
@@ -59,4 +54,16 @@ bool MockDownloadManager::autoStart() const
 void MockDownloadManager::setAutoStart(bool value)
 {
 
+}
+
+void MockDownloadManager::mockDownload(MockSingleDownload *download)
+{
+    m_downloads.append(QVariant::fromValue(download));
+}
+
+void MockDownloadManager::mockDownloadFinished(MockSingleDownload *download,
+                                               const QString &path)
+{
+    m_downloads.removeOne(QVariant::fromValue(download));
+    Q_EMIT (downloadFinished(download, path));
 }

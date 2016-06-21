@@ -77,6 +77,8 @@ void ClickUpdateManager::initializeMeta(const ClickUpdateMetadata *meta)
 {
     QObject::connect(meta, SIGNAL(credentialError()), this,
             SIGNAL(credentialError()));
+    QObject::connect(meta, SIGNAL(credentialError()), this,
+            SLOT(handleCredentialsFailed()));
     QObject::connect(meta,
             SIGNAL(clickTokenRequestSucceeded(const ClickUpdateMetadata*)),
             this, SLOT(processClickToken(const ClickUpdateMetadata*)));
@@ -272,10 +274,14 @@ void ClickUpdateManager::completionCheck()
     qWarning() << "click checker: complete.";
 }
 
-// TODO: this is bad, we need to tell the user, not hide this.
 void ClickUpdateManager::handleClickTokenFailure(
         const ClickUpdateMetadata *meta)
 {
+    // Set empty click token in db. This way we can ask the user to retry.
+    meta->setClickToken("");
+    m_store->add(meta);
+
+    // We're done with it.
     m_metas.remove(meta->name());
     completionCheck();
 }

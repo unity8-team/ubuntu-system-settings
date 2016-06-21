@@ -452,6 +452,12 @@ Item {
             compare(downloadEl.updateState, SystemUpdate.StateDownloading);
         }
 
+        function test_clickDownloadComplete() {
+            wait(3000)
+            downloadManagerInstance.mockDownloadFinished(downloadInstance, "");
+            wait(3000)
+        }
+
         function test_updateChecking() {
             // Default state.
             compare(updatesInstance.status, SystemUpdate.StatusIdle);

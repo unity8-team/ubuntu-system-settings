@@ -66,7 +66,7 @@ Item {
         SingleDownload {}
     }
 
-    property var cUpdt: null
+    property var clickUpdateInstance: null
 
     SignalSpy {
         id: buttonSignalSpy
@@ -77,96 +77,104 @@ Item {
         when: windowShown
 
         function init() {
-            cUpdt = update.createObject(testRoot, get_test_data());
-            cUpdt.download = cDownload.createObject(cUpdt, {});
+            clickUpdateInstance = update.createObject(testRoot, get_test_data());
+            clickUpdateInstance.download = cDownload.createObject(clickUpdateInstance, {});
         }
 
         function cleanup() {
-            cUpdt.download.destroy();
-            cUpdt.destroy();
-            cUpdt = null;
+            clickUpdateInstance.download.destroy();
+            clickUpdateInstance.destroy();
+            clickUpdateInstance = null;
         }
 
         function test_onStarted() {
-            cUpdt.download.mockStart();
-            compare(cUpdt.updateState, SystemUpdate.StateQueuedForDownload);
+            clickUpdateInstance.download.mockStart();
+            compare(clickUpdateInstance.updateState, SystemUpdate.StateQueuedForDownload);
             // Ensure indeterminate progress bar.
-            compare(cUpdt.progress, -1);
+            compare(clickUpdateInstance.progress, -1);
         }
 
         function test_onProgress() {
-            cUpdt.download.mockProgress(50);
-            compare(cUpdt.progress, 50);
-            compare(cUpdt.updateState, SystemUpdate.StateDownloading);
+            clickUpdateInstance.download.mockProgress(50);
+            compare(clickUpdateInstance.progress, 50);
+            compare(clickUpdateInstance.updateState, SystemUpdate.StateDownloading);
         }
 
         function test_onFinished() {
-            cUpdt.download.mockFinished();
-            compare(cUpdt.updateState, SystemUpdate.StateInstalled);
+            clickUpdateInstance.download.mockFinished();
+            compare(clickUpdateInstance.updateState, SystemUpdate.StateInstalled);
         }
 
         function test_onError() {
-            cUpdt.download.mockErrorMessage("Error");
-            compare(cUpdt.errorTitle, i18n.tr("Download failed"));
-            compare(cUpdt.errorDetail, "Error");
-            compare(cUpdt.updateState, SystemUpdate.StateFailed);
+            clickUpdateInstance.download.mockErrorMessage("Error");
+            compare(clickUpdateInstance.errorTitle, i18n.tr("Download failed"));
+            compare(clickUpdateInstance.errorDetail, "Error");
+            compare(clickUpdateInstance.updateState, SystemUpdate.StateFailed);
         }
 
         function test_onPause() {
-            cUpdt.download.mockPause();
-            compare(cUpdt.updateState, SystemUpdate.StateDownloadPaused);
+            clickUpdateInstance.download.mockPause();
+            compare(clickUpdateInstance.updateState, SystemUpdate.StateDownloadPaused);
         }
 
         function test_onResume() {
-            cUpdt.download.mockResume();
-            compare(cUpdt.updateState, SystemUpdate.StateDownloading);
+            clickUpdateInstance.download.mockResume();
+            compare(clickUpdateInstance.updateState, SystemUpdate.StateDownloading);
         }
 
         function test_onProcessing() {
-            cUpdt.download.mockProcess();
-            compare(cUpdt.updateState, SystemUpdate.StateInstalling);
+            clickUpdateInstance.download.mockProcess();
+            compare(clickUpdateInstance.updateState, SystemUpdate.StateInstalling);
             // Ensure indeterminate progress bar.
-            compare(cUpdt.progress, -1);
+            compare(clickUpdateInstance.progress, -1);
         }
 
         function test_startUpdate() {
-            var button = findChild(cUpdt, "updateButton");
-            cUpdt.updateState = SystemUpdate.StateAvailable;
+            var button = findChild(clickUpdateInstance, "updateButton");
+            clickUpdateInstance.updateState = SystemUpdate.StateAvailable;
 
-            buttonSignalSpy.target = cUpdt;
+            buttonSignalSpy.target = clickUpdateInstance;
             buttonSignalSpy.signalName = "install";
             mouseClick(button, button.width / 2, button.height / 2);
             buttonSignalSpy.wait();
         }
 
         function test_pauseUpdate() {
-            var button = findChild(cUpdt, "updateButton");
-            cUpdt.updateState = SystemUpdate.StateDownloading;
+            var button = findChild(clickUpdateInstance, "updateButton");
+            clickUpdateInstance.updateState = SystemUpdate.StateDownloading;
 
-            buttonSignalSpy.target = cUpdt;
+            buttonSignalSpy.target = clickUpdateInstance;
             buttonSignalSpy.signalName = "pause";
             mouseClick(button, button.width / 2, button.height / 2);
             buttonSignalSpy.wait();
         }
 
         function test_retryUpdate() {
-            var button = findChild(cUpdt, "updateButton");
-            cUpdt.updateState = SystemUpdate.StateFailed;
+            var button = findChild(clickUpdateInstance, "updateButton");
+            clickUpdateInstance.updateState = SystemUpdate.StateFailed;
 
-            buttonSignalSpy.target = cUpdt;
+            buttonSignalSpy.target = clickUpdateInstance;
             buttonSignalSpy.signalName = "retry";
             mouseClick(button, button.width / 2, button.height / 2);
             buttonSignalSpy.wait();
         }
 
         function test_resumeUpdate() {
-            var button = findChild(cUpdt, "updateButton");
-            cUpdt.updateState = SystemUpdate.StateDownloadPaused;
+            var button = findChild(clickUpdateInstance, "updateButton");
+            clickUpdateInstance.updateState = SystemUpdate.StateDownloadPaused;
 
-            buttonSignalSpy.target = cUpdt;
+            buttonSignalSpy.target = clickUpdateInstance;
             buttonSignalSpy.signalName = "resume";
             mouseClick(button, button.width / 2, button.height / 2);
             buttonSignalSpy.wait();
+        }
+
+        function test_invalidatedClickToken() {
+            clickUpdateInstance.clickToken = "";
+            compare(clickUpdateInstance.errorTitle, i18n.tr("Update failed"));
+            compare(clickUpdateInstance.errorDetail, "The server responded incorrectly.");
+            compare(clickUpdateInstance.updateState, SystemUpdate.StateFailed);
+            wait(10000)
         }
     }
 
@@ -175,19 +183,19 @@ Item {
         when: windowShown
 
         function init() {
-            cUpdt = update.createObject(testRoot, get_test_data());
+            clickUpdateInstance = update.createObject(testRoot, get_test_data());
 
-            var button = findChild(cUpdt, "updateButton");
+            var button = findChild(clickUpdateInstance, "updateButton");
             mouseClick(button, button.width / 2, button.height / 2);
         }
 
         function cleanup() {
-            cUpdt.destroy();
-            cUpdt = null;
+            clickUpdateInstance.destroy();
+            clickUpdateInstance = null;
         }
 
         function test_metadata() {
-            var m = cUpdt.download.metadata;
+            var m = clickUpdateInstance.download.metadata;
             compare(m.command, get_test_data().command.split(" "));
             compare(m.title, get_test_data().name);
             compare(m.showInIndicator, false, "click update shown in indicator");
@@ -198,7 +206,7 @@ Item {
         }
 
         function test_download() {
-            var d = cUpdt.download;
+            var d = clickUpdateInstance.download;
             compare(d.url, get_test_data().downloadUrl);
             compare(d.autoStart, false, "click update is autostarting");
             compare(d.hash, get_test_data().downloadSha512);

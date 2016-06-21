@@ -37,12 +37,15 @@ public:
     ~MockDownloadManager();
 
     Q_INVOKABLE void download(QString url);
-    Q_INVOKABLE void mockDownload(MockSingleDownload *download);
 
     QVariantList downloads();
     QString errorMessage() const;
     bool autoStart() const;
     void setAutoStart(bool value);
+
+    Q_INVOKABLE void mockDownload(MockSingleDownload *download); // mock only
+    Q_INVOKABLE void mockDownloadFinished(MockSingleDownload *download,
+                                          const QString &path); // mock only
 
 signals:
     void errorChanged();

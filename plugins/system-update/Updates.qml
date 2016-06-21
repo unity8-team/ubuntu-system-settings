@@ -39,22 +39,14 @@ Item {
         count += updates.haveSystemUpdate ? 1 : 0;
         count += clickUpdatesModel.count
     }
-    property var clickUpdateManager: ClickUpdateManager {
-    }
+    property var clickUpdateManager: ClickUpdateManager {}
     property var clickUpdatesModel: UpdateModel {
         filter: UpdateModel.PendingClicksUpdates
     }
     property var previousUpdatesModel: UpdateModel {
         filter: UpdateModel.Installed
     }
-    property var udm: DownloadManager {
-        // onDownloadCanceled: SystemUpdate.udmDownloadEnded(download.downloadId) // (SingleDownload download)
-        onDownloadFinished: clickUpdateManager.clickUpdateInstalled(
-            download.custom.packageName, download.custom.revision
-        )
-        // (SingleDownload download, QString path)
-        // onErrorFound: SystemUpdate.udmDownloadEnded(download.downloadId) // (SingleDownload download)
-    }
+    property var udm: DownloadManager {}
 
     function checkSystem() {
         SystemImage.checkForUpdate();
@@ -186,7 +178,7 @@ Item {
                 height: childrenRect.height
                 delegate: ClickUpdate {
                     objectName: "updatesClickUpdate" + index
-                    width: clickUpdates.width
+                    anchors { left: clickUpdates.left; right: clickUpdates.right }
                     command: model.command
                     packageName: app_id
                     revision: model.revision
@@ -337,6 +329,16 @@ Item {
                 updates.status = SystemUpdate.StatusIdle; break;
             }
         }
+    }
+
+    Connections {
+        target: udm
+        // onDownloadCanceled: SystemUpdate.udmDownloadEnded(download.downloadId) // (SingleDownload download)
+        onDownloadFinished: clickUpdateManager.clickUpdateInstalled(
+            download.custom.packageName, download.custom.revision
+        )
+        // (SingleDownload download, QString path)
+        // onErrorFound: SystemUpdate.udmDownloadEnded(download.downloadId) // (SingleDownload download)
     }
     Component.onDestruction: cancelChecks()
 }

@@ -69,6 +69,23 @@ Update {
     }
     onDownload: install()
 
+    states: [
+        State {
+            name: "invalidClickToken"
+            when: update.clickToken === ""
+            StateChangeScript {
+                script: update.setError(
+                    i18n.tr("Update failed"),
+                    i18n.tr("The server responded incorrectly.")
+                )
+            }
+            PropertyChanges {
+                target: update
+                updateState: SystemUpdate.StateFailed
+            }
+        }
+    ]
+
     Connections {
         target: download
         onErrorChanged: {
