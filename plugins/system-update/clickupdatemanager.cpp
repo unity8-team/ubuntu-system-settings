@@ -464,6 +464,7 @@ void ClickUpdateManager::setAuthenticated(const bool authenticated)
 
 void ClickUpdateManager::clickUpdateInstalled(const QString &packageName, const int &revision)
 {
+    qWarning() << "clickUpdateInstalled" << packageName << revision;
     m_store->markInstalled(packageName, revision);
 }
 

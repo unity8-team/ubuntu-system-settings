@@ -166,6 +166,7 @@ QSqlDatabase UpdateStore::db() const
 
 void UpdateStore::markInstalled(const QString &uniqueIdentifier, const int &revision)
 {
+    qWarning() << "store markInstalled" << uniqueIdentifier << revision;
     if (!openDb()) return;
 
     QSqlQuery q(m_db);

@@ -339,7 +339,7 @@ Item {
         target: udm
         // onDownloadCanceled: SystemUpdate.udmDownloadEnded(download.downloadId) // (SingleDownload download)
         onDownloadFinished: {
-            console.warn('download finished', download, download.metadata.custom);
+            console.warn('download finished', download, download.metadata.custom.packageName, download.metadata.custom.revision);
             clickUpdateManager.clickUpdateInstalled(
                 download.metadata.custom.packageName, download.metadata.custom.revision
             );
