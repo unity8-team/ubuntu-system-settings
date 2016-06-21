@@ -44,16 +44,16 @@ Update {
             var metadata = {
                 "command": update.command.split(" "),
                 "title": update.name,
-                "showInIndicator": false,
-                "custom": {
-                    "packageName": update.packageName,
-                    "revision": update.revision
-                }
+                "showInIndicator": false
             };
             var hdrs = {
                 "X-Click-Token": update.clickToken
             };
             var metadataObj = mdt.createObject(update, metadata);
+            metadataObj.custom = {
+                "packageName": update.packageName,
+                "revision": update.revision
+            };
             var singleDownloadObj = sdl.createObject(update, {
                 "url": update.downloadUrl,
                 "autoStart": true,
@@ -66,7 +66,7 @@ Update {
             download = singleDownloadObj;
         }
 
-        console.warn('onInstall will now download', update.downloadUrl);
+        console.warn('onInstall will now download', update.downloadUrl, download, download.metadata, download.metadata.custom, download.metadata.custom.packageName);
         download.download(update.downloadUrl)
     }
     onDownload: install()
