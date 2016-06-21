@@ -58,6 +58,7 @@ UpdateStore::~UpdateStore()
     m_db.close();
     m_db = QSqlDatabase();
     QSqlDatabase::removeDatabase(m_connectionName);
+    qWarning() << "removing database" << m_connectionName;
 }
 
 void UpdateStore::initializeStore()
@@ -175,11 +176,11 @@ void UpdateStore::markInstalled(const QString &uniqueIdentifier, const int &revi
                 QDateTime::currentDateTimeUtc().currentMSecsSinceEpoch());
     q.bindValue(":app_id", uniqueIdentifier);
     q.bindValue(":revision", revision);
-
     if (!q.exec()) {
         qCritical() << "could not mark app" << uniqueIdentifier
                     << "as installed" << q.lastError().text();
     }
+    qWarning() << "marking as installed" << q.executedQuery();
 
     q.finish();
 

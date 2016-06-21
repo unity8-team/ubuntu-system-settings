@@ -146,7 +146,7 @@ signals:
     void automaticChanged();
 
     void clickTokenRequestSucceeded(const ClickUpdateMetadata *meta);
-    void clickTokenRequestFailed(const ClickUpdateMetadata *meta);
+    void clickTokenRequestFailed(ClickUpdateMetadata *meta);
 
 private:
     QString m_anonDownloadUrl;

@@ -335,6 +335,7 @@ Item {
         target: udm
         // onDownloadCanceled: SystemUpdate.udmDownloadEnded(download.downloadId) // (SingleDownload download)
         onDownloadFinished: {
+            console.warn('download finished');
             clickUpdateManager.clickUpdateInstalled(
                 download.custom.packageName, download.custom.revision
             );

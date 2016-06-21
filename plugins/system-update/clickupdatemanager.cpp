@@ -84,8 +84,8 @@ void ClickUpdateManager::initializeMeta(const ClickUpdateMetadata *meta)
             SIGNAL(clickTokenRequestSucceeded(const ClickUpdateMetadata*)),
             this, SLOT(processClickToken(const ClickUpdateMetadata*)));
     QObject::connect(meta,
-            SIGNAL(clickTokenRequestFailed(const ClickUpdateMetadata*)), this,
-            SLOT(handleClickTokenFailure(const ClickUpdateMetadata*)));
+            SIGNAL(clickTokenRequestFailed(ClickUpdateMetadata*)), this,
+            SLOT(handleClickTokenFailure(ClickUpdateMetadata*)));
 }
 
 void ClickUpdateManager::initializeProcess()
