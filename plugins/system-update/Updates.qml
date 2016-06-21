@@ -31,7 +31,7 @@ Item {
     property Flickable flickable: scrollWidget
     property bool havePower: false
     property bool online: NetworkingStatus.online
-    property bool haveSystemUpdate: false
+    property bool haveSystemUpdate: SystemImage.checkTarget()
     property bool authenticated: clickUpdateManager.authenticated
     property int status: SystemUpdate.StatusIdle
     property int updatesCount: {

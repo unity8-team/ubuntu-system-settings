@@ -107,6 +107,10 @@ private slots:
         QCOMPARE(m_model->count(), 1);
         QCOMPARE(m_model->data(m_model->index(0, 1), Qt::DisplayRole).toString(), replacement.name());
     }
+    void testRoles()
+    {
+        // TODO IMPLEMENT
+    }
 private:
     UpdatePlugin::UpdateModel *m_model;
     UpdatePlugin::UpdateStore *m_store;

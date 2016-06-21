@@ -165,7 +165,7 @@ Item {
         }
         verticalAlignment: Text.AlignVCenter
         height: button.height
-        font.pointSize: 10
+        fontSize: "large"
         elide: Text.ElideMiddle
     }
 

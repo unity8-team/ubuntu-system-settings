@@ -146,11 +146,9 @@ const char* UpdateModel::COLUMN_NAMES[] = {
     "size",
     "icon_url",
     "download_url",
-    "changelog",
-    "udm_download_id",
-    "click_token",
     "command",
+    "changelog",
+    "click_token",
     NULL
 };
-
 } // UpdatePlugin
