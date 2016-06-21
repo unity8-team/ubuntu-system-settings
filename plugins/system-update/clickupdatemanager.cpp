@@ -398,7 +398,9 @@ void ClickUpdateManager::parseClickMetadata(const QJsonArray &array)
     for (int i = 0; i < array.size(); i++) {
         auto object = array.at(i).toObject();
         auto name = object["name"].toString();
+
         qWarning() << "click checker: got metadata for" << name;
+
         auto version = object["version"].toString();
         auto icon_url = object["icon_url"].toString();
         auto url = object["download_url"].toString();
@@ -406,18 +408,22 @@ void ClickUpdateManager::parseClickMetadata(const QJsonArray &array)
         auto changelog = object["changelog"].toString();
         auto size = object["binary_filesize"].toInt();
         auto title = object["title"].toString();
+        auto revision = object["revision"].toInt();
         if (m_metas.contains(name)) {
             ClickUpdateMetadata *meta = m_metas.value(name);
             meta->setRemoteVersion(version);
             if (meta->isUpdateRequired()) {
+
                 qWarning() << "click checker: update of" << meta->name()
                         << "is required";
+
                 meta->setIconUrl(icon_url);
                 meta->setDownloadUrl(url);
                 meta->setBinaryFilesize(size);
                 meta->setDownloadSha512(download_sha512);
                 meta->setChangelog(changelog);
                 meta->setTitle(title);
+                meta->setRevision(revision);
 
                 // Start the process of obtaining a click token for this
                 // click update.
