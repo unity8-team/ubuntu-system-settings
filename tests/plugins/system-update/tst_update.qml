@@ -62,8 +62,8 @@ Item {
                 {
                     tag: "System update available",
 
-                    updateState: UpdateManager.StateAvailable,
-                    kind: UpdateManager.KindSystem,
+                    updateState: SystemUpdate.StateAvailable,
+                    kind: SystemUpdate.KindSystem,
                     progress: 0,
                     button: { text: i18n.tr("Download"), visibility: true, state: true, signal: "download", },
                     progressbar: { visibility: false, progress: 0, },
@@ -74,8 +74,8 @@ Item {
                 {
                     tag: "App update available",
 
-                    updateState: UpdateManager.StateAvailable,
-                    kind: UpdateManager.KindApp,
+                    updateState: SystemUpdate.StateAvailable,
+                    kind: SystemUpdate.KindApp,
                     progress: 0,
                     button: { text: i18n.tr("Update"), visibility: true, state: true, signal: "install", },
                     progressbar: { visibility: false, progress: 0, },
@@ -88,8 +88,8 @@ Item {
                 {
                     tag: "App update downloading automatically",
 
-                    updateState: UpdateManager.StateDownloadingAutomatically,
-                    kind: UpdateManager.KindApp,
+                    updateState: SystemUpdate.StateDownloadingAutomatically,
+                    kind: SystemUpdate.KindApp,
                     progress: 0.5,
                     button: { text: i18n.tr("Pause"), visibility: true, state: true, signal: "pause", },
                     progressbar: { visibility: false, progress: 0.5, },
@@ -100,8 +100,8 @@ Item {
                 {
                     tag: "System update downloading automatically",
 
-                    updateState: UpdateManager.StateDownloadingAutomatically,
-                    kind: UpdateManager.KindSystem,
+                    updateState: SystemUpdate.StateDownloadingAutomatically,
+                    kind: SystemUpdate.KindSystem,
                     progress: 0.5,
                     button: { text: i18n.tr("Pause"), visibility: true, state: true, signal: "pause", },
                     progressbar: { visibility: false, progress: 0.5, },
@@ -114,8 +114,8 @@ Item {
                 {
                     tag: "App update Downloading manually",
 
-                    updateState: UpdateManager.StateDownloading,
-                    kind: UpdateManager.KindApp,
+                    updateState: SystemUpdate.StateDownloading,
+                    kind: SystemUpdate.KindApp,
                     progress: 0.5,
                     button: { text: i18n.tr("Pause"), visibility: true, state: true, signal: "pause", },
                     progressbar: { visibility: true, progress: 0.5, },
@@ -126,8 +126,8 @@ Item {
                 {
                     tag: "System update Downloading manually",
 
-                    updateState: UpdateManager.StateDownloading,
-                    kind: UpdateManager.KindSystem,
+                    updateState: SystemUpdate.StateDownloading,
+                    kind: SystemUpdate.KindSystem,
                     progress: 0.5,
                     button: { text: i18n.tr("Pause"), visibility: true, state: true, signal: "pause", },
                     progressbar: { visibility: true, progress: 0.5, },
@@ -140,8 +140,8 @@ Item {
                 {
                     tag: "App update Download failed",
 
-                    updateState: UpdateManager.StateFailed,
-                    kind: UpdateManager.KindApp,
+                    updateState: SystemUpdate.StateFailed,
+                    kind: SystemUpdate.KindApp,
                     progress: 0.5,
                     button: { text: i18n.tr("Retry"), visibility: true, state: true, signal: "retry", },
                     progressbar: { visibility: false, progress: 0.5, },
@@ -152,8 +152,8 @@ Item {
                 {
                     tag: "System update Download failed",
 
-                    updateState: UpdateManager.StateFailed,
-                    kind: UpdateManager.KindSystem,
+                    updateState: SystemUpdate.StateFailed,
+                    kind: SystemUpdate.KindSystem,
                     progress: 0.5,
                     button: { text: i18n.tr("Retry"), visibility: true, state: true, signal: "retry", },
                     progressbar: { visibility: false, progress: 0.5, },
@@ -165,8 +165,8 @@ Item {
                 // Downloaded
                 {
                     tag: "App update Downloaded",
-                    updateState: UpdateManager.StateDownloaded,
-                    kind: UpdateManager.KindApp,
+                    updateState: SystemUpdate.StateDownloaded,
+                    kind: SystemUpdate.KindApp,
                     progress: 0.5,
                     button: { text: i18n.tr("Install"), visibility: true, state: true, signal: "install", },
                     progressbar: { visibility: false, progress: 0.5, },
@@ -177,8 +177,8 @@ Item {
                 {
                     tag: "System update Downloaded",
 
-                    updateState: UpdateManager.StateDownloaded,
-                    kind: UpdateManager.KindSystem,
+                    updateState: SystemUpdate.StateDownloaded,
+                    kind: SystemUpdate.KindSystem,
                     progress: 0.5,
                     button: { text: i18n.tr("Install…"), visibility: true, state: true, signal: "install", },
                     progressbar: { visibility: false, progress: 0.5, },
@@ -190,8 +190,8 @@ Item {
                 // Waiting to download
                 {
                     tag: "App update Waiting to download",
-                    updateState: UpdateManager.StateQueuedForDownload,
-                    kind: UpdateManager.KindApp,
+                    updateState: SystemUpdate.StateQueuedForDownload,
+                    kind: SystemUpdate.KindApp,
                     progress: 0,
                     button: { text: i18n.tr("Pause"), visibility: true, state: true, signal: "pause", },
                     progressbar: { visibility: true, progress: 0, },
@@ -201,8 +201,8 @@ Item {
                 },
                 {
                     tag: "System update Waiting to download (Manual)",
-                    updateState: UpdateManager.StateQueuedForDownload,
-                    kind: UpdateManager.KindSystem,
+                    updateState: SystemUpdate.StateQueuedForDownload,
+                    kind: SystemUpdate.KindSystem,
                     progress: 0,
                     button: { text: i18n.tr("Pause"), visibility: true, state: true, signal: "pause", },
                     progressbar: { visibility: true, progress: 0, },
@@ -215,8 +215,8 @@ Item {
                 {
                     tag: "App update Installing",
 
-                    updateState: UpdateManager.StateInstalling,
-                    kind: UpdateManager.KindApp,
+                    updateState: SystemUpdate.StateInstalling,
+                    kind: SystemUpdate.KindApp,
                     progress: 1,
                     button: { text: i18n.tr("Pause"), visibility: true, state: false, },
                     progressbar: { visibility: true, progress: 1, },
@@ -227,8 +227,8 @@ Item {
                 {
                     tag: "System update Installing",
 
-                    updateState: UpdateManager.StateInstalling,
-                    kind: UpdateManager.KindSystem,
+                    updateState: SystemUpdate.StateInstalling,
+                    kind: SystemUpdate.KindSystem,
                     progress: 0.5,
 
                     button: { text: i18n.tr("Pause"), visibility: true, state: false, },
@@ -242,8 +242,8 @@ Item {
                 {
                     tag: "App update Download Paused",
 
-                    updateState: UpdateManager.StateDownloadPaused,
-                    kind: UpdateManager.KindApp,
+                    updateState: SystemUpdate.StateDownloadPaused,
+                    kind: SystemUpdate.KindApp,
                     progress: 1,
                     button: { text: i18n.tr("Resume"), visibility: true, state: true, signal: "resume", },
                     progressbar: { visibility: true, progress: 1, },
@@ -254,8 +254,8 @@ Item {
                 {
                     tag: "System update Download Paused (Manual)",
 
-                    updateState: UpdateManager.StateDownloadPaused,
-                    kind: UpdateManager.KindSystem,
+                    updateState: SystemUpdate.StateDownloadPaused,
+                    kind: SystemUpdate.KindSystem,
                     progress: 0.5,
                     button: { text: i18n.tr("Resume"), visibility: true, state: true, signal: "resume", },
                     progressbar: { visibility: true, progress: 0.5, },
@@ -265,8 +265,8 @@ Item {
                 },
                 {
                     tag: "System update Download Paused (Automatic)",
-                    updateState: UpdateManager.StateAutomaticDownloadPaused,
-                    kind: UpdateManager.KindSystem,
+                    updateState: SystemUpdate.StateAutomaticDownloadPaused,
+                    kind: SystemUpdate.KindSystem,
                     progress: 0.5,
                     button: { text: i18n.tr("Resume"), visibility: true, state: true, signal: "resume", },
                     progressbar: { visibility: false, progress: 0.5, },
@@ -283,10 +283,10 @@ Item {
             data["size"] = 1000;
 
             // Non-functional stuff
-            if (data["kind"] === UpdateManager.KindSystem) {
+            if (data["kind"] === SystemUpdate.KindSystem) {
                 data["name"] = "Ubuntu Touch";
                 data["iconUrl"] = "distributor-logo.png";
-            } else if (data["kind"] === UpdateManager.KindApp) {
+            } else if (data["kind"] === SystemUpdate.KindApp) {
                 data["name"] = "Some app";
                 data["iconUrl"] = "system-settings.png";
             }

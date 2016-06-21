@@ -53,6 +53,12 @@ Item {
         DownloadManager {}
     }
 
+    Component {
+        id: clickUpdateManagerComponent
+
+        ClickUpdateManager {}
+    }
+
     ListModel {
         id: mockClickUpdatesModel
         dynamicRoles: true
@@ -81,6 +87,18 @@ Item {
         }
     }
 
+    function generatePreviousUpdates(count) {
+        for (var i = 0; i < count; i++) {
+            mockPreviousUpdatesModel.append({
+                "remote_version": i,
+                "size": 500,
+                "title": "Update #" + i,
+                "icon_url": "",
+                "changelog": "Changes"
+            });
+        }
+    }
+
     UbuntuTestCase {
         name: "UpdatesTest"
         when: windowShown
@@ -88,8 +106,10 @@ Item {
         property var updatesInstance: null
 
         function init() {
+            generatePreviousUpdates(1);
             updatesInstance = updates.createObject(testRoot, {
                 clickUpdatesModel: mockClickUpdatesModel,
+                previousUpdatesModel: mockPreviousUpdatesModel,
                 udm: downloadmanager.createObject(testRoot, {})
             });
         }
@@ -104,8 +124,8 @@ Item {
             return findChild(updatesInstance, "updatesGlobal");
         }
 
-        function getSystemUpdate() {
-            return findChild(updatesInstance, "updatesSystemUpdate");
+        function getImageUpdate() {
+            return findChild(updatesInstance, "updatesImageUpdate");
         }
 
         function getClickUpdates() {
@@ -133,7 +153,7 @@ Item {
                     tag: "check in progress (offline, no auth)",
                     haveSystemUpdate: false,
                     updatesCount: 0,
-                    status: UpdateManager.StatusCheckingAllUpdates,
+                    status: SystemUpdate.StatusCheckingAllUpdates,
                     online: false,
                     authenticated: false,
                     // Here be target values:
@@ -144,7 +164,7 @@ Item {
                     tag: "check in progress (offline, auth)",
                     haveSystemUpdate: false,
                     updatesCount: 0,
-                    status: UpdateManager.StatusCheckingAllUpdates,
+                    status: SystemUpdate.StatusCheckingAllUpdates,
                     online: false,
                     authenticated: true,
                     // Here be target values:
@@ -155,7 +175,7 @@ Item {
                     tag: "check in progress (online, no auth)",
                     haveSystemUpdate: false,
                     updatesCount: 0,
-                    status: UpdateManager.StatusCheckingAllUpdates,
+                    status: SystemUpdate.StatusCheckingAllUpdates,
                     online: true,
                     authenticated: false,
                     // Here be target values:
@@ -166,7 +186,7 @@ Item {
                     tag: "check in progress (online, auth)",
                     haveSystemUpdate: false,
                     updatesCount: 0,
-                    status: UpdateManager.StatusCheckingAllUpdates,
+                    status: SystemUpdate.StatusCheckingAllUpdates,
                     online: true,
                     authenticated: true,
                     // Here be target values:
@@ -177,7 +197,7 @@ Item {
                     tag: "no updates (offline, no auth)",
                     haveSystemUpdate: false,
                     updatesCount: 0,
-                    status: UpdateManager.StatusIdle,
+                    status: SystemUpdate.StatusIdle,
                     online: false,
                     authenticated: false,
                     // Here be target values:
@@ -188,7 +208,7 @@ Item {
                     tag: "no updates (offline, auth)",
                     haveSystemUpdate: false,
                     updatesCount: 0,
-                    status: UpdateManager.StatusIdle,
+                    status: SystemUpdate.StatusIdle,
                     online: false,
                     authenticated: true,
                     // Here be target values:
@@ -199,7 +219,7 @@ Item {
                     tag: "no updates (online, auth)",
                     haveSystemUpdate: false,
                     updatesCount: 0,
-                    status: UpdateManager.StatusIdle,
+                    status: SystemUpdate.StatusIdle,
                     online: true,
                     authenticated: true,
                     // Here be target values:
@@ -210,7 +230,7 @@ Item {
                     tag: "no updates (online, no auth)",
                     haveSystemUpdate: false,
                     updatesCount: 0,
-                    status: UpdateManager.StatusIdle,
+                    status: SystemUpdate.StatusIdle,
                     online: true,
                     authenticated: false,
                     // Here be target values:
@@ -221,7 +241,7 @@ Item {
                     tag: "offline (auth)",
                     haveSystemUpdate: false,
                     updatesCount: 0,
-                    status: UpdateManager.StatusIdle,
+                    status: SystemUpdate.StatusIdle,
                     online: false,
                     authenticated: true,
                     // Here be target values:
@@ -232,7 +252,7 @@ Item {
                     tag: "offline (no auth)",
                     haveSystemUpdate: false,
                     updatesCount: 0,
-                    status: UpdateManager.StatusIdle,
+                    status: SystemUpdate.StatusIdle,
                     online: false,
                     authenticated: false,
                     // Here be target values:
@@ -243,7 +263,7 @@ Item {
                     tag: "server error",
                     haveSystemUpdate: false,
                     updatesCount: 0,
-                    status: UpdateManager.StatusServerError,
+                    status: SystemUpdate.StatusServerError,
                     online: true,
                     authenticated: true,
                     // Here be target values:
@@ -254,7 +274,7 @@ Item {
                     tag: "network error",
                     haveSystemUpdate: false,
                     updatesCount: 0,
-                    status: UpdateManager.StatusNetworkError,
+                    status: SystemUpdate.StatusNetworkError,
                     online: true,
                     authenticated: true,
                     // Here be target values:
@@ -265,7 +285,7 @@ Item {
                     tag: "system update (online, no auth)",
                     haveSystemUpdate: true,
                     updatesCount: 1,
-                    status: UpdateManager.StatusIdle,
+                    status: SystemUpdate.StatusIdle,
                     online: true,
                     authenticated: false,
                     // Here be target values:
@@ -276,7 +296,7 @@ Item {
                     tag: "system update (online, auth)",
                     haveSystemUpdate: true,
                     updatesCount: 1,
-                    status: UpdateManager.StatusIdle,
+                    status: SystemUpdate.StatusIdle,
                     online: true,
                     authenticated: true,
                     // Here be target values:
@@ -287,7 +307,7 @@ Item {
                     tag: "system update (offline, auth)",
                     haveSystemUpdate: true,
                     updatesCount: 1,
-                    status: UpdateManager.StatusIdle,
+                    status: SystemUpdate.StatusIdle,
                     online: false,
                     authenticated: true,
                     // Here be target values:
@@ -298,7 +318,7 @@ Item {
                     tag: "system update (network error)",
                     haveSystemUpdate: true,
                     updatesCount: 1,
-                    status: UpdateManager.StatusNetworkError,
+                    status: SystemUpdate.StatusNetworkError,
                     online: true,
                     authenticated: true,
                     // Here be target values:
@@ -309,7 +329,7 @@ Item {
                     tag: "system update (server error)",
                     haveSystemUpdate: true,
                     updatesCount: 1,
-                    status: UpdateManager.StatusServerError,
+                    status: SystemUpdate.StatusServerError,
                     online: true,
                     authenticated: true,
                     // Here be target values:
@@ -320,7 +340,7 @@ Item {
                     tag: "click updates (offline, no system update)",
                     haveSystemUpdate: false,
                     updatesCount: 2,
-                    status: UpdateManager.StatusIdle,
+                    status: SystemUpdate.StatusIdle,
                     online: false,
                     authenticated: true,
                     // Here be target values:
@@ -331,7 +351,7 @@ Item {
                     tag: "click updates (online, no system update)",
                     haveSystemUpdate: false,
                     updatesCount: 2,
-                    status: UpdateManager.StatusIdle,
+                    status: SystemUpdate.StatusIdle,
                     online: true,
                     authenticated: true,
                     // Here be target values:
@@ -342,7 +362,7 @@ Item {
                     tag: "click updates (online, system update)",
                     haveSystemUpdate: true,
                     updatesCount: 3,
-                    status: UpdateManager.StatusIdle,
+                    status: SystemUpdate.StatusIdle,
                     online: true,
                     authenticated: true,
                     // Here be target values:
@@ -353,7 +373,7 @@ Item {
                     tag: "many click updates (online, system update)",
                     haveSystemUpdate: true,
                     updatesCount: 50,
-                    status: UpdateManager.StatusIdle,
+                    status: SystemUpdate.StatusIdle,
                     online: true,
                     authenticated: true,
                     // Here be target values:
@@ -379,7 +399,7 @@ Item {
             }
 
             compare(getGlobal().hidden, data.global.hidden, "global had wrong visibility");
-            compare(getSystemUpdate().visible, data.systemupdate.visible, "system update had wrong visibility");
+            compare(getImageUpdate().visible, data.systemupdate.visible, "system update had wrong visibility");
             compare(getClickUpdates().visible, data.clickupdates.visible, "click updates had wrong visibility");
             compare(getNoAuthNotif().visible, data.noauthnotification.visible, "no auth notification had wrong visibility");
             compare(getFullscreenMessage().visible, data.fullscreenmessage.visible, "fullscreen message had wrong visibility");
@@ -396,20 +416,26 @@ Item {
         property var updatesInstance: null
         property var downloadInstance: null
         property var downloadManagerInstance: null
+        property var clickUpdateManagerInstance: null
 
         function init() {
             generateClickUpdates(1);
-            downloadManagerInstance = downloadmanager.createObject(testRoot, {});
+            generatePreviousUpdates(1);
+            downloadManagerInstance = downloadmanager.createObject(testRoot);
             downloadInstance = singledownload.createObject(testRoot, {});
             downloadInstance.metadata.custom = { packageName: "app0", revision: "0" };
             downloadManagerInstance.mockDownload(downloadInstance);
 
+            clickUpdateManagerInstance = clickUpdateManagerComponent.createObject(testRoot);
             updatesInstance = updates.createObject(testRoot, {
                 clickUpdatesModel: mockClickUpdatesModel,
+                previousUpdatesModel: mockPreviousUpdatesModel,
+                clickUpdateManager: clickUpdateManagerInstance,
                 udm: downloadManagerInstance,
                 online: true,
                 authenticated: true
             });
+
         }
 
         function cleanup() {
@@ -423,38 +449,38 @@ Item {
             downloadInstance.mockProgress(50);
             var downloadEl = findChild(updatesInstance, "updatesClickUpdate0");
             compare(downloadEl.download, downloadInstance);
-            compare(downloadEl.updateState, UpdateManager.StateDownloading);
+            compare(downloadEl.updateState, SystemUpdate.StateDownloading);
         }
 
         function test_updateChecking() {
             // Default state.
-            compare(updatesInstance.status, UpdateManager.StatusIdle);
+            compare(updatesInstance.status, SystemUpdate.StatusIdle);
 
             // Start click check.
-            UpdateManager.mockClickUpdateCheckStarted();
-            compare(updatesInstance.status, UpdateManager.StatusCheckingClickUpdates);
+            clickUpdateManagerInstance.mockCheckStarted();
+            compare(updatesInstance.status, SystemUpdate.StatusCheckingClickUpdates);
 
             // Complete click check during click check only.
-            UpdateManager.mockClickUpdateCheckComplete();
-            compare(updatesInstance.status, UpdateManager.StatusIdle);
+            clickUpdateManagerInstance.mockCheckComplete();
+            compare(updatesInstance.status, SystemUpdate.StatusIdle);
 
             // Start a System Image check from Idle
-            updatesInstance.check();
-            compare(updatesInstance.status, UpdateManager.StatusCheckingSystemUpdates);
+            updatesInstance.checkSystem();
+            compare(updatesInstance.status, SystemUpdate.StatusCheckingSystemUpdates);
 
             // Start click check while System Image check.
-            UpdateManager.mockClickUpdateCheckStarted();
-            compare(updatesInstance.status, UpdateManager.StatusCheckingAllUpdates);
+            clickUpdateManagerInstance.mockCheckStarted();
+            compare(updatesInstance.status, SystemUpdate.StatusCheckingAllUpdates);
 
             // Finish System Image check while checking all.
             SystemImage.mockAvailableStatus(false, false, "", 0, "", "");
-            compare(updatesInstance.status, UpdateManager.StatusCheckingClickUpdates);
+            compare(updatesInstance.status, SystemUpdate.StatusCheckingClickUpdates);
 
-            // Cancel System Image
-            updatesInstance.check();
-            compare(updatesInstance.status, UpdateManager.StatusCheckingAllUpdates);
+            // Cancel all
+            updatesInstance.checkSystem();
+            compare(updatesInstance.status, SystemUpdate.StatusCheckingAllUpdates);
             findChild(updatesInstance, "updatesGlobal").stop();
-            compare(updatesInstance.status, UpdateManager.StatusCheckingClickUpdates);
+            compare(updatesInstance.status, SystemUpdate.StatusIdle);
         }
     }
 }

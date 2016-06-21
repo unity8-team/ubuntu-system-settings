@@ -15,21 +15,20 @@
  * You should have received a copy of the GNU General Public License along
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
-#ifndef SYSTEM_UPDATE_ENUMS_H
-#define SYSTEM_UPDATE_ENUMS_H
+#ifndef MOCK_SYSTEM_UPDATE_H
+#define MOCK_SYSTEM_UPDATE_H
 
 #include <QObject>
 
-namespace UpdatePlugin
-{
-class Enums : public QObject
+class MockSystemUpdate : public QObject
 {
     Q_OBJECT
     Q_ENUMS(UpdateKind)
     Q_ENUMS(UpdateState)
     Q_ENUMS(SystemStatus)
 public:
+    static MockSystemUpdate *instance();
+
     enum class UpdateKind
     {
         KindApp,
@@ -65,10 +64,15 @@ public:
         StatusNetworkError,
         StatusServerError
     };
-private:
-    explicit Enums(QObject *parent = 0) {}
-    ~Enums() {}
-};
-} // UpdatePlugin
 
-#endif // SYSTEM_UPDATE_ENUMS_H
+protected:
+    MockSystemUpdate(QObject *parent = 0)
+    {
+        Q_UNUSED(parent);
+    }
+    ~MockSystemUpdate() {}
+private:
+    static MockSystemUpdate *m_instance;
+};
+
+#endif // MOCK_SYSTEM_UPDATE_H

@@ -32,7 +32,7 @@ add_qml_test(system-update click_update
              ${qmltest_DEFAULT_IMPORT_PATHS}
 )
 
-add_qml_test(system-update system_update
+add_qml_test(system-update image_update
              IMPORT_PATHS
              ${CMAKE_SOURCE_DIR}/tests/plugins/system-update
              ${qmltest_DEFAULT_IMPORT_PATHS}
@@ -44,11 +44,7 @@ add_qml_test(system-update global
              ${qmltest_DEFAULT_IMPORT_PATHS}
 )
 
-add_qml_test(system-update updates
-             IMPORT_PATHS
-             ${CMAKE_SOURCE_DIR}/tests/plugins/system-update
-             ${qmltest_DEFAULT_IMPORT_PATHS}
-)
+add_qml_test(system-update updates)
 
 add_qml_test(system-update noauthentication
              IMPORT_PATHS

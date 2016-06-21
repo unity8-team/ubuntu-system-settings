@@ -21,7 +21,6 @@ set(PLUGIN_SOURCES
     ${CMAKE_SOURCE_DIR}/plugins/system-update/clickupdatemanager.cpp
     ${CMAKE_SOURCE_DIR}/plugins/system-update/clickupdatemetadata.cpp
     ${CMAKE_SOURCE_DIR}/plugins/system-update/helpers.cpp
-    ${CMAKE_SOURCE_DIR}/plugins/system-update/enums.h
     ${CMAKE_SOURCE_DIR}/plugins/system-update/updatemodel.cpp
     ${CMAKE_SOURCE_DIR}/plugins/system-update/updatestore.cpp
 )

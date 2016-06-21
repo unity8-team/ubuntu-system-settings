@@ -1,7 +1,7 @@
 /*
  * This file is part of system-settings
  *
- * Copyright (C) 2013-2016 Canonical Ltd.
+ * Copyright (C) 2016 Canonical Ltd.
  *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License version 3, as published
@@ -15,28 +15,12 @@
  * You should have received a copy of the GNU General Public License along
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include "systemupdate.h"
+#include "MockSystemUpdate.h"
 
-namespace UpdatePlugin
-{
-SystemUpdate *SystemUpdate::m_instance = 0;
+MockSystemUpdate *MockSystemUpdate::m_instance = 0;
 
-SystemUpdate *SystemUpdate::instance()
+MockSystemUpdate *MockSystemUpdate::instance()
 {
-    if (!m_instance) m_instance = new SystemUpdate;
+    if (!m_instance) m_instance = new MockSystemUpdate;
     return m_instance;
 }
-
-SystemUpdate::SystemUpdate(QObject *parent) : QObject(parent)
-{
-}
-
-SystemUpdate::~SystemUpdate()
-{
-}
-
-UpdateStore *SystemUpdate::updateStore()
-{
-    return &m_updatestore;
-}
-} // UpdatePlugin

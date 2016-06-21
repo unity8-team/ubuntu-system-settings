@@ -18,12 +18,20 @@
 
 #include "plugin.h"
 
-#include "enums.h"
 #include "MockClickUpdateManager.h"
 #include "MockUpdateModel.h"
 #include "MockSystemImage.h"
+#include "MockSystemUpdate.h"
 
 #include <QtQml>
+
+static QObject *suSingletonProvider(QQmlEngine *engine, QJSEngine *scriptEngine)
+{
+    Q_UNUSED(engine)
+    Q_UNUSED(scriptEngine)
+
+    return MockSystemUpdate::instance();
+}
 
 static QObject *siSingletonProvider(QQmlEngine *engine, QJSEngine *scriptEngine)
 {
@@ -37,10 +45,7 @@ void BackendPlugin::registerTypes(const char *uri)
 {
     Q_ASSERT(uri == QLatin1String("Ubuntu.SystemSettings.Update"));
     qmlRegisterSingletonType<MockSystemImage>(uri, 1, 0, "SystemImage", siSingletonProvider);
-
-    qmlRegisterUncreatableType<UpdatePlugin::Enums>(
-        uri, 1, 0, "Enums", "Enums can't be instantiated directly."
-    );
+    qmlRegisterSingletonType<MockSystemUpdate>(uri, 1, 0, "SystemUpdate", suSingletonProvider);
 
     qmlRegisterType<MockClickUpdateManager>(uri, 1, 0, "ClickUpdateManager");
     qmlRegisterType<MockUpdateModel>(uri, 1, 0, "UpdateModel");

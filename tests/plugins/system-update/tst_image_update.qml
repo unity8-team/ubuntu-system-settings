@@ -32,7 +32,7 @@ Item {
     Component {
         id: update
 
-        SystemUpdate {
+        ImageUpdate {
             width: testRoot.width
         }
     }
@@ -60,20 +60,20 @@ Item {
         function test_automaticallyStarted () {
             SystemImage.downloadMode = 1;
             SystemImage.mockStarted();
-            compare(sUpdt.updateState, UpdateManager.StateDownloadingAutomatically);
+            compare(sUpdt.updateState, SystemUpdate.StateDownloadingAutomatically);
         }
 
         function test_manuallyStarted () {
             SystemImage.downloadMode = 0;
             SystemImage.mockStarted();
-            compare(sUpdt.updateState, UpdateManager.StateQueuedForDownload);
+            compare(sUpdt.updateState, SystemUpdate.StateQueuedForDownload);
         }
 
         function test_automaticalProgress () {
             var progressbar = findChild(sUpdt, "updateProgressbar");
             SystemImage.downloadMode = 1;
             SystemImage.mockProgress(50, 0); // pct, eta
-            compare(sUpdt.updateState, UpdateManager.StateDownloadingAutomatically);
+            compare(sUpdt.updateState, SystemUpdate.StateDownloadingAutomatically);
             compare(progressbar.value, 50);
         }
 
@@ -81,7 +81,7 @@ Item {
             var progressbar = findChild(sUpdt, "updateProgressbar");
             SystemImage.downloadMode = 0;
             SystemImage.mockProgress(50, 0); // pct, eta
-            compare(sUpdt.updateState, UpdateManager.StateDownloading);
+            compare(sUpdt.updateState, SystemUpdate.StateDownloading);
             compare(progressbar.value, 50);
         }
 
@@ -89,7 +89,7 @@ Item {
             var progressbar = findChild(sUpdt, "updateProgressbar");
             SystemImage.downloadMode = 1;
             SystemImage.mockPaused(50); // pct
-            compare(sUpdt.updateState, UpdateManager.StateAutomaticDownloadPaused);
+            compare(sUpdt.updateState, SystemUpdate.StateAutomaticDownloadPaused);
             compare(progressbar.value, 50);
         }
 
@@ -97,19 +97,19 @@ Item {
             var progressbar = findChild(sUpdt, "updateProgressbar");
             SystemImage.downloadMode = 0;
             SystemImage.mockPaused(50); // pct
-            compare(sUpdt.updateState, UpdateManager.StateDownloadPaused);
+            compare(sUpdt.updateState, SystemUpdate.StateDownloadPaused);
             compare(progressbar.value, 50);
         }
 
         function test_downloaded () {
             SystemImage.mockDownloaded();
-            compare(sUpdt.updateState, UpdateManager.StateDownloaded);
+            compare(sUpdt.updateState, SystemUpdate.StateDownloaded);
         }
 
         function test_failed () {
             var error = findChild(sUpdt, "updateError");
             SystemImage.mockFailed(3, "fail");
-            compare(sUpdt.updateState, UpdateManager.StateFailed);
+            compare(sUpdt.updateState, SystemUpdate.StateFailed);
             compare(error.visible, true);
             compare(error.title, i18n.tr("Update failed"));
             compare(error.detail, "fail");
@@ -118,7 +118,7 @@ Item {
         function test_goingManualPausesDownload () {
             SystemImage.downloadMode = 1;
             SystemImage.mockProgress(50, 0); // pct, eta
-            compare(sUpdt.updateState, UpdateManager.StateDownloadingAutomatically);
+            compare(sUpdt.updateState, SystemUpdate.StateDownloadingAutomatically);
 
             pauseSignalSpy.target = sUpdt;
 
@@ -126,7 +126,7 @@ Item {
             SystemImage.downloadMode = 0;
             pauseSignalSpy.wait();
             SystemImage.mockPaused(50); // pct
-            compare(sUpdt.updateState, UpdateManager.StateDownloadPaused);
+            compare(sUpdt.updateState, SystemUpdate.StateDownloadPaused);
         }
     }
 }

@@ -43,7 +43,6 @@ private:
     static std::vector<std::string> listFolder(const std::string &folder,
                                                const std::string &pattern);
 };
-
 } // Namespace UpdatePlugin
 
 #endif // SYSTEM_UPDATE_HELPERS_H

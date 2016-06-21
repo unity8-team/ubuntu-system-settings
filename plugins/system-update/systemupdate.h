@@ -15,12 +15,10 @@
  * You should have received a copy of the GNU General Public License along
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 #ifndef SYSTEM_UPDATE_H
 #define SYSTEM_UPDATE_H
 
 #include <QDebug>
-
 #include "updatestore.h"
 
 namespace UpdatePlugin
@@ -28,9 +26,48 @@ namespace UpdatePlugin
 class SystemUpdate : public QObject
 {
     Q_OBJECT
+    Q_ENUMS(UpdateKind)
+    Q_ENUMS(UpdateState)
+    Q_ENUMS(SystemStatus)
 public:
     static SystemUpdate *instance();
     UpdateStore *updateStore();
+
+    enum class UpdateKind
+    {
+        KindApp,
+        KindSystem,
+        KindUnknown
+    };
+
+    enum class UpdateState
+    {
+        StateUnknown,
+        StateAvailable,
+        StateUnavailable,
+        StateQueuedForDownload,
+        StateDownloading,
+        StateDownloadingAutomatically,
+        StateDownloadPaused,
+        StateAutomaticDownloadPaused,
+        StateInstalling,
+        StateInstallingAutomatically,
+        StateInstallPaused,
+        StateInstalled,
+        StateDownloaded,
+        StateFailed
+    };
+
+    enum class SystemStatus
+    {
+        StatusIdle,
+        StatusCheckingClickUpdates,
+        StatusCheckingSystemUpdates,
+        StatusCheckingAllUpdates,
+        StatusBatchMode, // Installing all updates
+        StatusNetworkError,
+        StatusServerError
+    };
 
 protected:
     explicit SystemUpdate(QObject *parent = 0);

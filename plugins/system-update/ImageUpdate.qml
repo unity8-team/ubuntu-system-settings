@@ -37,11 +37,11 @@ Update {
             update.progress = -1;
             switch (SystemImage.downloadMode) {
                 case 0: // Manual
-                    update.updateState = UpdateManager.StateQueuedForDownload;
+                    update.updateState = SystemUpdate.StateQueuedForDownload;
                     break;
                 case 1: // Auto on Wi-Fi
                 case 2: // Always
-                    update.updateState = UpdateManager.StateDownloadingAutomatically;
+                    update.updateState = SystemUpdate.StateDownloadingAutomatically;
                     break;
             }
         }
@@ -49,11 +49,11 @@ Update {
             update.progress = percentage;
             switch (SystemImage.downloadMode) {
                 case 0: // Manual
-                    update.updateState = UpdateManager.StateDownloading;
+                    update.updateState = SystemUpdate.StateDownloading;
                     break;
                 case 1: // Auto on Wi-Fi
                 case 2: // Always
-                    update.updateState = UpdateManager.StateDownloadingAutomatically;
+                    update.updateState = SystemUpdate.StateDownloadingAutomatically;
                     break;
             }
         }
@@ -61,25 +61,25 @@ Update {
             update.progress = percentage;
             switch (SystemImage.downloadMode) {
                 case 0: // Manual
-                    update.updateState = UpdateManager.StateDownloadPaused;
+                    update.updateState = SystemUpdate.StateDownloadPaused;
                     break;
                 case 1: // Auto on Wi-Fi
                 case 2: // Always
-                    update.updateState = UpdateManager.StateAutomaticDownloadPaused;
+                    update.updateState = SystemUpdate.StateAutomaticDownloadPaused;
                     break;
             }
         }
         onUpdateDownloaded: {
-            update.updateState = UpdateManager.StateDownloaded;
+            update.updateState = SystemUpdate.StateDownloaded;
         }
         onUpdateFailed: {
-            update.updateState = UpdateManager.StateFailed;
+            update.updateState = SystemUpdate.StateFailed;
             update.setError(i18n.tr("Update failed"), lastReason);
         }
         onDownloadModeChanged: {
             // Pause an automatic download if the downloadMode changes to Manual.
             if (SystemImage.downloadMode === 0 &&
-                update.updateState === UpdateManager.StateDownloadingAutomatically) {
+                update.updateState === SystemUpdate.StateDownloadingAutomatically) {
                 update.pause();
             }
         }

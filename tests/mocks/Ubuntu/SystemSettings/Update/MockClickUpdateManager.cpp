@@ -70,3 +70,19 @@ void MockClickUpdateManager::mockAuthenticated(const bool authenticated)
     m_authenticated = authenticated;
     Q_EMIT(authenticatedChanged());
 }
+
+void MockClickUpdateManager::mockNetworkError()
+{
+    Q_EMIT (networkError());
+}
+
+void MockClickUpdateManager::mockServerError()
+{
+    Q_EMIT (serverError());
+}
+
+void MockClickUpdateManager::mockCredentialError()
+{
+    Q_EMIT (credentialError());
+}
+

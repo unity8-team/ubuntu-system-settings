@@ -22,7 +22,6 @@
 
 #include <QtQml>
 #include <QtQml/QQmlContext>
-#include "enums.h"
 #include "systemimage.h"
 #include "systemupdate.h"
 #include "clickupdatemanager.h"
@@ -57,10 +56,6 @@ void BackendPlugin::registerTypes(const char *uri)
     // as in the PageComponent.
     qmlRegisterSingletonType<QSystemImage>(
         uri, 1, 0, "SystemImage", siSingletonProvider
-    );
-
-    qmlRegisterUncreatableType<Enums>(
-        uri, 1, 0, "Enums", "Enums can't be instantiated directly."
     );
 
     qmlRegisterType<ClickUpdateManager>(uri, 1, 0, "ClickUpdateManager");

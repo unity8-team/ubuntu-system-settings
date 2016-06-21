@@ -40,8 +40,8 @@ Item {
 
     function get_test_data() {
         return {
-            updateState: UpdateManager.StateAvailable,
-            kind: UpdateManager.KindApp,
+            updateState: SystemUpdate.StateAvailable,
+            kind: SystemUpdate.KindApp,
             progress: 0,
 
             size: 1000,
@@ -89,7 +89,7 @@ Item {
 
         function test_onStarted() {
             cUpdt.download.mockStart();
-            compare(cUpdt.updateState, UpdateManager.StateQueuedForDownload);
+            compare(cUpdt.updateState, SystemUpdate.StateQueuedForDownload);
             // Ensure indeterminate progress bar.
             compare(cUpdt.progress, -1);
         }
@@ -97,41 +97,41 @@ Item {
         function test_onProgress() {
             cUpdt.download.mockProgress(50);
             compare(cUpdt.progress, 50);
-            compare(cUpdt.updateState, UpdateManager.StateDownloading);
+            compare(cUpdt.updateState, SystemUpdate.StateDownloading);
         }
 
         function test_onFinished() {
             cUpdt.download.mockFinished();
-            compare(cUpdt.updateState, UpdateManager.StateInstalled);
+            compare(cUpdt.updateState, SystemUpdate.StateInstalled);
         }
 
         function test_onError() {
             cUpdt.download.mockErrorMessage("Error");
             compare(cUpdt.errorTitle, i18n.tr("Download failed"));
             compare(cUpdt.errorDetail, "Error");
-            compare(cUpdt.updateState, UpdateManager.StateFailed);
+            compare(cUpdt.updateState, SystemUpdate.StateFailed);
         }
 
         function test_onPause() {
             cUpdt.download.mockPause();
-            compare(cUpdt.updateState, UpdateManager.StateDownloadPaused);
+            compare(cUpdt.updateState, SystemUpdate.StateDownloadPaused);
         }
 
         function test_onResume() {
             cUpdt.download.mockResume();
-            compare(cUpdt.updateState, UpdateManager.StateDownloading);
+            compare(cUpdt.updateState, SystemUpdate.StateDownloading);
         }
 
         function test_onProcessing() {
             cUpdt.download.mockProcess();
-            compare(cUpdt.updateState, UpdateManager.StateInstalling);
+            compare(cUpdt.updateState, SystemUpdate.StateInstalling);
             // Ensure indeterminate progress bar.
             compare(cUpdt.progress, -1);
         }
 
         function test_startUpdate() {
             var button = findChild(cUpdt, "updateButton");
-            cUpdt.updateState = UpdateManager.StateAvailable;
+            cUpdt.updateState = SystemUpdate.StateAvailable;
 
             buttonSignalSpy.target = cUpdt;
             buttonSignalSpy.signalName = "install";
@@ -141,7 +141,7 @@ Item {
 
         function test_pauseUpdate() {
             var button = findChild(cUpdt, "updateButton");
-            cUpdt.updateState = UpdateManager.StateDownloading;
+            cUpdt.updateState = SystemUpdate.StateDownloading;
 
             buttonSignalSpy.target = cUpdt;
             buttonSignalSpy.signalName = "pause";
@@ -151,7 +151,7 @@ Item {
 
         function test_retryUpdate() {
             var button = findChild(cUpdt, "updateButton");
-            cUpdt.updateState = UpdateManager.StateFailed;
+            cUpdt.updateState = SystemUpdate.StateFailed;
 
             buttonSignalSpy.target = cUpdt;
             buttonSignalSpy.signalName = "retry";
@@ -161,7 +161,7 @@ Item {
 
         function test_resumeUpdate() {
             var button = findChild(cUpdt, "updateButton");
-            cUpdt.updateState = UpdateManager.StateDownloadPaused;
+            cUpdt.updateState = SystemUpdate.StateDownloadPaused;
 
             buttonSignalSpy.target = cUpdt;
             buttonSignalSpy.signalName = "resume";

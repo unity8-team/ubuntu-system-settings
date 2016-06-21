@@ -41,6 +41,9 @@ public:
     Q_INVOKABLE void mockCheckCanceled(); // mock only
     Q_INVOKABLE void mockCheckFailed(); // mock only
     Q_INVOKABLE void mockAuthenticated(const bool authenticated); // mock only
+    Q_INVOKABLE void mockNetworkError(); // mock only
+    Q_INVOKABLE void mockServerError(); // mock only
+    Q_INVOKABLE void mockCredentialError(); // mock only
 
 signals:
     void authenticatedChanged();
@@ -48,6 +51,10 @@ signals:
     void checkCompleted();
     void checkCanceled();
     void checkFailed();
+
+    void networkError();
+    void serverError();
+    void credentialError();
 
 private:
     bool m_authenticated;

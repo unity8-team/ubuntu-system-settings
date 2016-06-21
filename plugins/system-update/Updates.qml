@@ -28,15 +28,19 @@ import Ubuntu.SystemSettings.Update 1.0
 
 Item {
     id: updates
+    property Flickable flickable: scrollWidget
     property bool havePower: false
-    property int status: UpdateManager.StatusIdle
+    property bool online: NetworkingStatus.online
+    property bool haveSystemUpdate: false
+    property bool authenticated: clickUpdateManager.authenticated
+    property int status: SystemUpdate.StatusIdle
     property int updatesCount: {
         var count = 0;
         count += updates.haveSystemUpdate ? 1 : 0;
         count += clickUpdatesModel.count
     }
-
-    property var clickUpdateManager: ClickUpdateManager {}
+    property var clickUpdateManager: ClickUpdateManager {
+    }
     property var clickUpdatesModel: UpdateModel {
         filter: UpdateModel.PendingClicksUpdates
     }
@@ -44,28 +48,32 @@ Item {
         filter: UpdateModel.Installed
     }
     property var udm: DownloadManager {
-        // onDownloadCanceled: UpdateManager.udmDownloadEnded(download.downloadId) // (SingleDownload download)
+        // onDownloadCanceled: SystemUpdate.udmDownloadEnded(download.downloadId) // (SingleDownload download)
         onDownloadFinished: clickUpdateManager.clickUpdateInstalled(
             download.custom.packageName, download.custom.revision
         )
         // (SingleDownload download, QString path)
-        // onErrorFound: UpdateManager.udmDownloadEnded(download.downloadId) // (SingleDownload download)
+        // onErrorFound: SystemUpdate.udmDownloadEnded(download.downloadId) // (SingleDownload download)
     }
-
-    property bool online: NetworkingStatus.online
 
     function checkSystem() {
         SystemImage.checkForUpdate();
 
         switch (updates.status) {
-            case UpdateManager.StatusCheckingClickUpdates:
-                updates.status = UpdateManager.StatusCheckingAllUpdates; break;
-            case UpdateManager.StatusIdle:
-                updates.status = UpdateManager.StatusCheckingSystemUpdates; break;
+        case SystemUpdate.StatusCheckingClickUpdates:
+            updates.status = SystemUpdate.StatusCheckingAllUpdates; break;
+        case SystemUpdate.StatusIdle:
+            updates.status = SystemUpdate.StatusCheckingSystemUpdates; break;
+        }
     }
 
     function checkClick() {
         clickUpdateManager.check();
+    }
+
+    function cancelChecks() {
+        clickUpdateManager.cancel();
+        updates.status = SystemUpdate.StatusIdle;
     }
 
     function getDownload(packageName, revision) {
@@ -80,16 +88,6 @@ Item {
         return null;
     }
 
-    function cancelChecks() {
-        clickUpdateManager.cancel();
-        // No way to stop check in SI.
-    }
-
-    // Set using the report from SI
-    property bool haveSystemUpdate: false
-
-    property Flickable flickable: scrollWidget
-
     signal requestAuthentication()
 //    signal udmDownloadCreated(string packageName, int revision, int udmId)
 
@@ -98,7 +96,7 @@ Item {
             name: "offline"
             PropertyChanges { target: overlay; visible: true }
             PropertyChanges { target: glob; hidden: true }
-            PropertyChanges { target: systemUpdate; visible: false }
+            PropertyChanges { target: imageUpdate; visible: false }
             PropertyChanges { target: clickUpdates; visible: false }
             when: !online
         },
@@ -106,14 +104,14 @@ Item {
             name: "error"
             PropertyChanges { target: overlay; visible: true }
             PropertyChanges { target: glob; hidden: true }
-            PropertyChanges { target: systemUpdate; visible: false }
+            PropertyChanges { target: imageUpdate; visible: false }
             PropertyChanges { target: clickUpdates; visible: false }
-            when: status === UpdateManager.StatusNetworkError ||
-                  status === UpdateManager.StatusServerError
+            when: status === SystemUpdate.StatusNetworkError ||
+                  status === SystemUpdate.StatusServerError
         },
         State {
             name: "noAuth"
-            when: !clickUpdateManager.authenticated
+            when: !updates.authenticated
             PropertyChanges { target: notauthNotification; visible: true }
             PropertyChanges { target: noauthDivider; visible: (updates.haveSystemUpdate || !glob.hidden) }
         },
@@ -121,7 +119,7 @@ Item {
             name: "noUpdates"
             PropertyChanges { target: overlay; visible: true }
             when: {
-                var idle = status === UpdateManager.StatusIdle;
+                var idle = status === SystemUpdate.StatusIdle;
                 var noUpdates = (updatesCount === 0) && !updates.haveSystemUpdate;
                 return idle && noUpdates;
             }
@@ -135,7 +133,7 @@ Item {
         contentHeight: {
             var h = 0;
             h += glob.hidden ? 0 : glob.height;
-            h += systemUpdate.visible ? systemUpdate.height : 0;
+            h += imageUpdate.visible ? imageUpdate.height : 0;
             h += clickUpdates.visible ? clickUpdates.height : 0;
             h += noauthDivider.visible ? noauthDivider.height : 0;
             h += notauthNotification.visible ? notauthNotification.height : 0;
@@ -157,22 +155,12 @@ Item {
             requireRestart: updates.haveSystemUpdate
             updatesCount: updates.updatesCount
             online: updates.online
-            onStop: {
-                // SI silently cancels any check if no download in progress.
-                SystemImage.cancelUpdate()
-                switch (updates.status) {
-                    case UpdateManager.StatusCheckingAllUpdates:
-                        updates.status = UpdateManager.StatusCheckingClickUpdates; break;
-                    case UpdateManager.StatusCheckingSystemUpdates:
-                        updates.status = UpdateManager.StatusIdle; break;
-                }
-                clickUpdateManager.cancel();
-            }
+            onStop: updates.cancelChecks()
         }
 
-        SystemUpdate {
-            id: systemUpdate
-            objectName: "updatesSystemUpdate"
+        ImageUpdate {
+            id: imageUpdate
+            objectName: "updatesImageUpdate"
             visible: updates.haveSystemUpdate
             anchors {
                 left: parent.left
@@ -188,7 +176,7 @@ Item {
             anchors {
                 left: parent.left
                 right: parent.right
-                top: updates.haveSystemUpdate ? systemUpdate.bottom : glob.bottom
+                top: updates.haveSystemUpdate ? imageUpdate.bottom : glob.bottom
             }
             height: childrenRect.height
 
@@ -221,7 +209,6 @@ Item {
                 anchors {
                     left: parent.left
                     right: parent.right
-                    top: updates.haveSystemUpdate ? systemUpdate.bottom : glob.bottom
                 }
                 height: childrenRect.height
 
@@ -252,7 +239,7 @@ Item {
             anchors {
                 left: parent.left
                 right: parent.left
-                top: systemUpdate.visible ? systemUpdate.bottom : glob.bottom
+                top: imageUpdate.visible ? imageUpdate.bottom : glob.bottom
             }
         }
 
@@ -264,8 +251,8 @@ Item {
                 top: {
                     if (noauthDivider.visible)
                         return noauthDivider.bottom
-                    else if (systemUpdate.visible)
-                        return systemUpdate.bottom
+                    else if (imageUpdate.visible)
+                        return imageUpdate.bottom
                     else
                         return glob.bottom
                 }
@@ -293,10 +280,10 @@ Item {
                 var s = updates.status;
                 if (!updates.online) {
                     return i18n.tr("Connect to the Internet to check for updates.");
-                } else if (s === UpdateManager.StatusIdle && updates.updatesCount === 0) {
+                } else if (s === SystemUpdate.StatusIdle && updates.updatesCount === 0) {
                     return i18n.tr("Software is up to date");
-                } else if (s === UpdateManager.StatusServerError ||
-                           s === UpdateManager.StatusNetworkError) {
+                } else if (s === SystemUpdate.StatusServerError ||
+                           s === SystemUpdate.StatusNetworkError) {
                     return i18n.tr("The update server is not responding. Try again later.");
                 }
                 return "";
@@ -306,35 +293,26 @@ Item {
 
     Connections {
         target: clickUpdateManager
-        onNetworkError: console.warn('Updates.qml: onNetworkError')
-        onServerError: console.warn('Updates.qml: onServerError')
-
         function onCheckStop() {
             switch (updates.status) {
-                case UpdateManager.StatusCheckingClickUpdates:
-                    updates.status = UpdateManager.StatusIdle; break;
-                case UpdateManager.StatusCheckingAllUpdates:
-                    updates.status = UpdateManager.StatusCheckingSystemUpdates; break;
+            case SystemUpdate.StatusCheckingClickUpdates:
+                updates.status = SystemUpdate.StatusIdle; break;
+            case SystemUpdate.StatusCheckingAllUpdates:
+                updates.status = SystemUpdate.StatusCheckingSystemUpdates; break;
             }
         }
         onCheckFailed: onCheckStop()
         onCheckCompleted: onCheckStop()
         onCheckCanceled: onCheckStop()
-        onNetworkError: {
-
-        }
-        onServerError: {
-
-        }
-        onCredentialError: {
-
-        }
+        onNetworkError: updates.status = SystemUpdate.StatusNetworkError
+        onServerError: updates.status = SystemUpdate.StatusServerError
+        onCredentialError: console.warn('Credential error');
         function onCheckStart() {
             switch (updates.status) {
-                case UpdateManager.StatusIdle:
-                    updates.status = UpdateManager.StatusCheckingClickUpdates; break;
-                case UpdateManager.StatusCheckingSystemUpdates:
-                    updates.status = UpdateManager.StatusCheckingAllUpdates; break;
+            case SystemUpdate.StatusIdle:
+                updates.status = SystemUpdate.StatusCheckingClickUpdates; break;
+            case SystemUpdate.StatusCheckingSystemUpdates:
+                updates.status = SystemUpdate.StatusCheckingAllUpdates; break;
             }
         }
         onCheckStarted: onCheckStart()
@@ -353,10 +331,10 @@ Item {
             updates.haveSystemUpdate = isAvailable;
 
             switch (updates.status) {
-                case UpdateManager.StatusCheckingAllUpdates:
-                    updates.status = UpdateManager.StatusCheckingClickUpdates; break;
-                case UpdateManager.StatusCheckingSystemUpdates:
-                    updates.status = UpdateManager.StatusIdle; break;
+            case SystemUpdate.StatusCheckingAllUpdates:
+                updates.status = SystemUpdate.StatusCheckingClickUpdates; break;
+            case SystemUpdate.StatusCheckingSystemUpdates:
+                updates.status = SystemUpdate.StatusIdle; break;
             }
         }
     }

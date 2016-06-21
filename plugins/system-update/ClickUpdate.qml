@@ -32,8 +32,8 @@ Update {
     property string downloadSha512
     property string headers
 
-    updateState: UpdateManager.StateAvailable
-    kind: UpdateManager.KindApp
+    updateState: SystemUpdate.StateAvailable
+    kind: SystemUpdate.KindApp
 
     onRetry: clickUpdateManager.check(update.packageName)
     onPause: download.pause()
@@ -75,26 +75,26 @@ Update {
             update.setError(
                 i18n.tr("Download failed"), download.errorMessage
             )
-            updateState = UpdateManager.StateFailed;
+            updateState = SystemUpdate.StateFailed;
         }
         onFinished: {
-            updateState = UpdateManager.StateInstalled;
+            updateState = SystemUpdate.StateInstalled;
         }
         onProgressChanged: {
             update.progress = download.progress;
-            updateState = UpdateManager.StateDownloading;
+            updateState = SystemUpdate.StateDownloading;
         }
         onPaused: {
-            updateState = UpdateManager.StateDownloadPaused;
+            updateState = SystemUpdate.StateDownloadPaused;
         }
         onResumed: {
-            updateState = UpdateManager.StateDownloading;
+            updateState = SystemUpdate.StateDownloading;
         }
         onStarted: {
-            updateState = UpdateManager.StateQueuedForDownload;
+            updateState = SystemUpdate.StateQueuedForDownload;
         }
         onProcessing: {
-            updateState = UpdateManager.StateInstalling;
+            updateState = SystemUpdate.StateInstalling;
         }
     }
 
@@ -107,8 +107,8 @@ Update {
         property: "progress"
         value: -1
         when: {
-            var queued = updateState === UpdateManager.StateQueuedForDownload;
-            var installing = updateState === UpdateManager.StateInstalling;
+            var queued = updateState === SystemUpdate.StateQueuedForDownload;
+            var installing = updateState === SystemUpdate.StateInstalling;
             return queued || installing;
         }
     }

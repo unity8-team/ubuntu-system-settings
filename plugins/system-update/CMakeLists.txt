@@ -4,8 +4,8 @@ set(QML_SOURCES
     Updates.qml
     Update.qml
     ClickUpdate.qml
-    SystemUpdate.qml
-    SystemUpdatePrompt.qml
+    ImageUpdate.qml
+    ImageUpdatePrompt.qml
     NotAuthenticatedNotification.qml
     Configuration.qml
     Global.qml)
@@ -27,7 +27,6 @@ add_library(UbuntuUpdatePanel MODULE
             clickapiclient.cpp
             helpers.cpp
             plugin.cpp
-            enums.h
             # updatemanager.cpp
             ${QML_SOURCES})
 

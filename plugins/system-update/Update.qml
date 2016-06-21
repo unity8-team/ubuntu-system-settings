@@ -33,8 +33,8 @@ import Ubuntu.SystemSettings.Update 1.0
 Item {
     id: update
 
-    property int updateState // This is an UpdateManager::UpdateState
-    property int kind // This is an UpdateManager::UpdateKind
+    property int updateState // This is an SystemUpdate::UpdateState
+    property int kind // This is an SystemUpdate::UpdateKind
     property int size
     property string version
     property string errorTitle
@@ -64,7 +64,7 @@ Item {
     signal install()
 
     // states: State {
-    //     name: "done"; when: status === UpdateManager.Installed
+    //     name: "done"; when: status === SystemUpdate.Installed
     //     PropertyChanges { target: update; height: 0; clip: true }
     // }
 
@@ -167,22 +167,22 @@ Item {
 
         enabled: {
             switch(updateState) {
-            case UpdateManager.StateAvailable:
-            case UpdateManager.StateQueuedForDownload:
-            case UpdateManager.StateDownloading:
-            case UpdateManager.StateDownloadingAutomatically:
-            case UpdateManager.StateDownloadPaused:
-            case UpdateManager.StateAutomaticDownloadPaused:
-            case UpdateManager.StateInstallPaused:
-            case UpdateManager.StateDownloaded:
-            case UpdateManager.StateFailed:
+            case SystemUpdate.StateAvailable:
+            case SystemUpdate.StateQueuedForDownload:
+            case SystemUpdate.StateDownloading:
+            case SystemUpdate.StateDownloadingAutomatically:
+            case SystemUpdate.StateDownloadPaused:
+            case SystemUpdate.StateAutomaticDownloadPaused:
+            case SystemUpdate.StateInstallPaused:
+            case SystemUpdate.StateDownloaded:
+            case SystemUpdate.StateFailed:
                 return true;
 
-            case UpdateManager.StateInstalling:
-            case UpdateManager.StateInstallingAutomatically:
-            case UpdateManager.StateUnavailable:
-            case UpdateManager.StateInstalled:
-            case UpdateManager.StateUnknown:
+            case SystemUpdate.StateInstalling:
+            case SystemUpdate.StateInstallingAutomatically:
+            case SystemUpdate.StateUnavailable:
+            case SystemUpdate.StateInstalled:
+            case SystemUpdate.StateUnknown:
             default:
                 return false;
             }
@@ -190,33 +190,33 @@ Item {
 
         text: {
             switch(updateState) {
-            case UpdateManager.StateUnknown:
-            case UpdateManager.StateUnavailable:
-            case UpdateManager.StateFailed:
+            case SystemUpdate.StateUnknown:
+            case SystemUpdate.StateUnavailable:
+            case SystemUpdate.StateFailed:
                 return i18n.tr("Retry");
 
-            case UpdateManager.StateAvailable:
-                if (kind === UpdateManager.KindApp) {
+            case SystemUpdate.StateAvailable:
+                if (kind === SystemUpdate.KindApp) {
                     return i18n.tr("Update");
                 } else {
                     return i18n.tr("Download");
                 }
 
-            case UpdateManager.StateDownloadPaused:
-            case UpdateManager.StateAutomaticDownloadPaused:
+            case SystemUpdate.StateDownloadPaused:
+            case SystemUpdate.StateAutomaticDownloadPaused:
                     return i18n.tr("Resume");
 
-            case UpdateManager.StateQueuedForDownload:
-            case UpdateManager.StateDownloading:
-            case UpdateManager.StateDownloadingAutomatically:
-            case UpdateManager.StateInstalling:
-            case UpdateManager.StateInstallingAutomatically:
-            case UpdateManager.StateInstalled:
+            case SystemUpdate.StateQueuedForDownload:
+            case SystemUpdate.StateDownloading:
+            case SystemUpdate.StateDownloadingAutomatically:
+            case SystemUpdate.StateInstalling:
+            case SystemUpdate.StateInstallingAutomatically:
+            case SystemUpdate.StateInstalled:
                 return i18n.tr("Pause");
 
-            case UpdateManager.StateInstallPaused:
-            case UpdateManager.StateDownloaded:
-                if (kind === UpdateManager.KindSystem) {
+            case SystemUpdate.StateInstallPaused:
+            case SystemUpdate.StateDownloaded:
+                if (kind === SystemUpdate.KindSystem) {
                     return i18n.tr("Install…");
                 } else {
                     return i18n.tr("Install");
@@ -231,35 +231,35 @@ Item {
             switch (updateState) {
 
             // Retries.
-            case UpdateManager.StateUnknown:
-            case UpdateManager.StateUnavailable:
-            case UpdateManager.StateFailed:
+            case SystemUpdate.StateUnknown:
+            case SystemUpdate.StateUnavailable:
+            case SystemUpdate.StateFailed:
                 update.retry();
                 break;
 
-            case UpdateManager.StateDownloadPaused:
-            case UpdateManager.StateAutomaticDownloadPaused:
-            case UpdateManager.StateInstallPaused:
+            case SystemUpdate.StateDownloadPaused:
+            case SystemUpdate.StateAutomaticDownloadPaused:
+            case SystemUpdate.StateInstallPaused:
                 update.resume();
                 break;
 
-            case UpdateManager.StateAvailable:
-                if (kind === UpdateManager.KindApp) {
+            case SystemUpdate.StateAvailable:
+                if (kind === SystemUpdate.KindApp) {
                     update.install();
                 } else {
                     update.download();
                 }
                 break;
 
-            case UpdateManager.StateDownloaded:
+            case SystemUpdate.StateDownloaded:
                     update.install();
                     break;
 
-            case UpdateManager.StateQueuedForDownload:
-            case UpdateManager.StateDownloading:
-            case UpdateManager.StateDownloadingAutomatically:
-            case UpdateManager.StateInstalling:
-            case UpdateManager.StateInstallingAutomatically:
+            case SystemUpdate.StateQueuedForDownload:
+            case SystemUpdate.StateDownloading:
+            case SystemUpdate.StateDownloadingAutomatically:
+            case SystemUpdate.StateInstalling:
+            case SystemUpdate.StateInstallingAutomatically:
                 update.pause();
                 break;
             }
@@ -277,7 +277,7 @@ Item {
         width: units.gu(10)
         property bool expanded: false
         spacing: units.gu(0.5)
-        visible: updateState !== UpdateManager.StateFailed
+        visible: updateState !== SystemUpdate.StateFailed
         Label {
             id: versionLabel
             verticalAlignment: Text.AlignVCenter
@@ -318,22 +318,22 @@ Item {
         text: {
             switch (updateState) {
 
-            case UpdateManager.StateInstalling:
-            case UpdateManager.StateInstallingAutomatically:
-            case UpdateManager.StateInstallPaused:
+            case SystemUpdate.StateInstalling:
+            case SystemUpdate.StateInstallingAutomatically:
+            case SystemUpdate.StateInstallPaused:
                 return i18n.tr("Installing");
 
-            case UpdateManager.StateInstallPaused:
-            case UpdateManager.StateDownloadPaused:
+            case SystemUpdate.StateInstallPaused:
+            case SystemUpdate.StateDownloadPaused:
                 return i18n.tr("Paused");
 
-            case UpdateManager.StateQueuedForDownload:
+            case SystemUpdate.StateQueuedForDownload:
                 return i18n.tr("Waiting to download");
 
-            case UpdateManager.StateDownloading:
+            case SystemUpdate.StateDownloading:
                 return i18n.tr("Downloading");
 
-            // case UpdateManager.StateFailed:
+            // case SystemUpdate.StateFailed:
             //     return i18n.tr("Installation failed");
 
             default:
@@ -358,18 +358,18 @@ Item {
         text: {
             switch (updateState) {
 
-            case UpdateManager.StateAvailable:
+            case SystemUpdate.StateAvailable:
                 return formatter(size);
 
-            case UpdateManager.StateDownloading:
-            case UpdateManager.StateDownloadingAutomatically:
-            case UpdateManager.StateDownloadPaused:
-            case UpdateManager.StateAutomaticDownloadPaused:
+            case SystemUpdate.StateDownloading:
+            case SystemUpdate.StateDownloadingAutomatically:
+            case SystemUpdate.StateDownloadPaused:
+            case SystemUpdate.StateAutomaticDownloadPaused:
                 var down = formatter(size * progress);
                 var left = formatter(size);
                 return i18n.tr("%1 of %2").arg(down).arg(left);
 
-            case UpdateManager.StateDownloaded:
+            case SystemUpdate.StateDownloaded:
                 return i18n.tr("Downloaded");
 
             default:
@@ -396,7 +396,7 @@ Item {
         }
         states: State {
             name: "visible"
-            when: updateState === UpdateManager.StateFailed
+            when: updateState === SystemUpdate.StateFailed
 
             PropertyChanges {
                 target: error
@@ -445,11 +445,11 @@ Item {
                 // and/or installing manually
                 switch (updateState) {
 
-                case UpdateManager.StateQueuedForDownload:
-                case UpdateManager.StateDownloading:
-                case UpdateManager.StateDownloadPaused:
-                case UpdateManager.StateInstalling:
-                case UpdateManager.StateInstallPaused:
+                case SystemUpdate.StateQueuedForDownload:
+                case SystemUpdate.StateDownloading:
+                case SystemUpdate.StateDownloadPaused:
+                case SystemUpdate.StateInstalling:
+                case SystemUpdate.StateInstallPaused:
                     return true;
 
                 default:
@@ -486,13 +486,13 @@ Item {
     //     }
     //     visible: {
     //         switch (updateState) {
-    //         case UpdateManager.AutomaticallyDownloading:
-    //         case UpdateManager.ManuallyDownloading:
-    //         case UpdateManager.DownloadPaused:
-    //         case UpdateManager.InstallationPaused:
-    //         case UpdateManager.Installing:
+    //         case SystemUpdate.AutomaticallyDownloading:
+    //         case SystemUpdate.ManuallyDownloading:
+    //         case SystemUpdate.DownloadPaused:
+    //         case SystemUpdate.InstallationPaused:
+    //         case SystemUpdate.Installing:
     //             return true;
-    //         case UpdateManager.Failed:
+    //         case SystemUpdate.Failed:
     //         default:
     //             return false;
     //         }
@@ -536,7 +536,7 @@ Item {
     // //             AnchorChanges { target: middleSlot; anchors.top: progressBarSlot.bottom }
     // //         },
     // //         State {
-    // //             when: updateState === UpdateManager.Failed
+    // //             when: updateState === SystemUpdate.Failed
     // //             AnchorChanges { target: middleSlot; anchors.top: errorSlot.bottom }
     // //         }
     // //     ]
