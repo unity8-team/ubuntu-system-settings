@@ -209,7 +209,7 @@ void ClickUpdateManager::processInstalledClicks(const int &exitCode)
         meta->setLocalVersion(object.value("version").toString());
 
         QStringList command;
-        command << Helpers::whichPkcon() << "-p" << "install-local" << "$file";
+        command << Helpers::whichPkcon() << "-p" << "-d" << "install-local" << "$file";
         meta->setCommand(command);
 
         m_metas.insert(meta->name(), meta);

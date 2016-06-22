@@ -72,6 +72,7 @@ QHash<int, QByteArray> UpdateModel::roleNames() const
         names[SizeRole] = "size";
         names[DownloadUrlRole] = "downloadUrl";
         names[ChangelogRole] = "changelog";
+        names[CommandRole] = "command";
         names[TokenRole] = "token";
     }
 
