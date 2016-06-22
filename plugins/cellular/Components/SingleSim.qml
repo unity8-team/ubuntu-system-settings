@@ -41,6 +41,22 @@ Column {
             currentSim = sortedModems.get(0).Sim
             Connectivity.simForMobileData = currentSim
         }
+        if (sortedModems.count === 2 &&
+                (sortedModems.get(0).Sim === null ||
+                 sortedModems.get(1).Sim === null))
+        {
+            // Dual-SIM phone with only one sim present
+            var sim = sortedModems.get(0).Sim
+            if (sim === null)
+            {
+                sim = sortedModems.get(1).Sim
+            }
+            if (sim !== null)
+            {
+                currentSim = sim
+                Connectivity.simForMobileData = sim
+            }
+        }
     }
     SortFilterModel {
         id: sortedModems
