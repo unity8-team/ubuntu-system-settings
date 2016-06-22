@@ -58,8 +58,10 @@ public:
     QSqlDatabase db() const;
     bool openDb();
 
-    const QString KIND_CLICK = QLatin1String("click");
-    const QString KIND_SYSTEM = QLatin1String("system");
+    static const QString KIND_CLICK;
+    static const QString KIND_SYSTEM;
+    static const QString STATE_PENDING;
+    static const QString STATE_INSTALLED;
 
 signals:
     void updatesChanged();

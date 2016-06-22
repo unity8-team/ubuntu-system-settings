@@ -180,16 +180,16 @@ Item {
                     objectName: "updatesClickUpdate" + index
                     anchors { left: clickUpdates.left; right: clickUpdates.right }
                     command: model.command
-                    packageName: app_id
+                    packageName: identifier
                     revision: model.revision
-                    clickToken: click_token
-                    download: updates.getDownload(app_id, model.revision)
-                    downloadUrl: download_url
-                    downloadSha512: download_sha512
-                    version: remote_version
+                    clickToken: token
+                    download: updates.getDownload(identifier, model.revision)
+                    downloadUrl: downloadUrl
+                    downloadSha512: downloadHash
+                    version: remoteVersion
                     size: model.size
                     name: title
-                    iconUrl: icon_url
+                    iconUrl: iconUrl
                     changelog: model.changelog
 
                     onRetryUpdate: {
@@ -219,10 +219,10 @@ Item {
                     delegate: Update {
                         objectName: "updatesPreviousUpdate" + index
                         width: previous.width
-                        version: remote_version
+                        version: remoteVersion
                         size: model.size
                         name: title
-                        iconUrl: icon_url
+                        iconUrl: iconUrl
                         changelog: model.changelog
                     }
                 }

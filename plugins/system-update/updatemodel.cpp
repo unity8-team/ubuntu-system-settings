@@ -54,33 +54,97 @@ UpdateModel::~UpdateModel()
 
 QHash<int, QByteArray> UpdateModel::roleNames() const
 {
-    int idx = 0;
-    QHash<int, QByteArray> roleNames;
-    while (COLUMN_NAMES[idx]) {
-        roleNames[Qt::UserRole + idx + 1] = COLUMN_NAMES[idx];
-        idx++;
+    static QHash<int,QByteArray> names;
+
+    if (Q_UNLIKELY(names.empty())) {
+        names[Qt::DisplayRole] = "displayName";
+        names[KindRole] = "kind";
+        names[IconUrlRole] = "iconUrl";
+        names[IdRole] = "identifier";
+        names[LocalVersionRole] = "localVersion";
+        names[RemoteVersionRole] = "remoteVersion";
+        names[RevisionRole] = "revision";
+        names[StateRole] = "state";
+        names[CreatedAtRole] = "createdAt";
+        names[UpdatedAtRole] = "updatedAt";
+        names[TitleRole] = "title";
+        names[DownloadHashRole] = "downloadHash";
+        names[SizeRole] = "size";
+        names[DownloadUrlRole] = "downloadUrl";
+        names[ChangelogRole] = "changelog";
+        names[TokenRole] = "token";
     }
-    return roleNames;
+
+    return names;
 }
 
 QVariant UpdateModel::data(const QModelIndex &index, int role) const
 {
-    QVariant value = QSqlQueryModel::data(index, role);
-    if (role < Qt::UserRole) {
-        value = QSqlQueryModel::data(index, role);
-    } else {
-        int columnIdx = role - Qt::UserRole - 1;
-        QModelIndex modelIndex = this->index(index.row(), columnIdx);
-        value = QSqlQueryModel::data(modelIndex, Qt::DisplayRole);
+    int col;
+
+    // Note: This is tied to the UpdateStore DB schema.
+    switch (role) {
+    case Qt::DisplayRole:
+    case TitleRole:
+        col = 8;
+        break;
+    case KindRole:
+        col = 0;
+        break;
+    case IconUrlRole:
+        col = 11;
+        break;
+    case IdRole:
+        col = 1;
+        break;
+    case LocalVersionRole:
+        col = 2;
+        break;
+    case RemoteVersionRole:
+        col = 3;
+        break;
+    case RevisionRole:
+        col = 4;
+        break;
+    case StateRole:
+        col = 5;
+        break;
+    case CreatedAtRole:
+        col = 6;
+        break;
+    case UpdatedAtRole:
+        col = 7;
+        break;
+    case DownloadHashRole:
+        col = 9;
+        break;
+    case SizeRole:
+        col = 10;
+        break;
+    case DownloadUrlRole:
+        col = 12;
+        break;
+    case CommandRole:
+        col = 13;
+        break;
+    case ChangelogRole:
+        col = 14;
+        break;
+    case TokenRole:
+        col = 15;
+        break;
     }
-    return value;
+
+    QModelIndex idx = this->index(index.row(), col);
+    // We ask for display role, because we've already determined
+    // what data to return.
+    return QSqlQueryModel::data(idx, Qt::DisplayRole);
 }
 
 int UpdateModel::count() const
 {
     return rowCount();
 }
-
 
 void UpdateModel::setFilter(const UpdateModel::UpdateTypes &filter)
 {
@@ -108,27 +172,29 @@ void UpdateModel::update()
         break;
     case UpdateTypes::Pending:
     case UpdateTypes::PendingClicksUpdates:
-        sql = "SELECT *, MAX(revision) FROM updates WHERE state='pending' "
-              " AND kind='" + m_store->KIND_CLICK + "' GROUP BY app_id"
+        // FIXME: use prepared statement.
+        sql = "SELECT *, MAX(revision) FROM updates WHERE state='"
+              + UpdateStore::STATE_PENDING + "' AND kind='"
+              + UpdateStore::KIND_CLICK + "' GROUP BY app_id"
               " ORDER BY title ASC";
         break;
     case UpdateTypes::PendingSystemUpdates:
         sql = ""; // We don't store it, use SI instead.
         break;
     case UpdateTypes::InstalledClicksUpdates:
-        sql = "SELECT * FROM updates WHERE state='installed'"
+        // FIXME: use prepared statement.
+        sql = "SELECT * FROM updates WHERE state='" + UpdateStore::STATE_INSTALLED + "'"
               " AND kind='" + m_store->KIND_CLICK + "' ORDER BY updated_at_utc DESC";
         break;
     case UpdateTypes::InstalledSystemUpdates:
-        sql = "SELECT * FROM updates WHERE state='installed'"
+        // FIXME: use prepared statement.
+        sql = "SELECT * FROM updates WHERE state='" + UpdateStore::STATE_INSTALLED + "'"
               " AND kind='" + m_store->KIND_SYSTEM + "' ORDER BY updated_at_utc DESC";
         break;
     case UpdateTypes::Installed:
-        sql = "SELECT * FROM updates WHERE state='installed'";
+        sql = "SELECT * FROM updates WHERE state='" + UpdateStore::STATE_INSTALLED + "'";
         break;
     }
-
-    qWarning() << "sql" << sql;
 
     if (sql.isEmpty()) {
         return; // nothing to execute.
@@ -141,33 +207,11 @@ void UpdateModel::update()
     }
 
     if (!query().isActive()) {
-        qWarning() << "query aint active";
+        qWarning() << "Query was not active.";
     }
-
-    qWarning() << "update count (new)" << count();
 
     if (oldCount != count()) {
         Q_EMIT (countChanged());
     }
 }
-
-const char* UpdateModel::COLUMN_NAMES[] = {
-    "kind",
-    "app_id",
-    "local_version",
-    "remote_version",
-    "revision",
-    "state",
-    "created_at_utc",
-    "updated_at_utc",
-    "title",
-    "download_sha512",
-    "size",
-    "icon_url",
-    "download_url",
-    "command",
-    "changelog",
-    "click_token",
-    NULL
-};
 } // UpdatePlugin

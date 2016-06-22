@@ -72,16 +72,16 @@ Item {
     function generateClickUpdates(count) {
         for (var i = 0; i < count; i++) {
             mockClickUpdatesModel.append({
-                "app_id": "app" + i,
+                "identifier": "app" + i,
                 "revision": i,
                 "command": "click test --foo",
-                "click_token": "as54d",
-                "download_url": "http://example.org/c.click",
-                "download_sha512": "6a5sd4a6s",
-                "remote_version": i,
+                "token": "as54d",
+                "downloadUrl": "http://example.org/c.click",
+                "downloadHash": "6a5sd4a6s",
+                "remoteVersion": i,
                 "size": 500,
                 "title": "Click Update #" + i,
-                "icon_url": "",
+                "iconUrl": "",
                 "changelog": "Changes"
             });
         }
@@ -90,10 +90,10 @@ Item {
     function generatePreviousUpdates(count) {
         for (var i = 0; i < count; i++) {
             mockPreviousUpdatesModel.append({
-                "remote_version": i,
+                "remoteVersion": i,
                 "size": 500,
                 "title": "Update #" + i,
-                "icon_url": "",
+                "iconUrl": "",
                 "changelog": "Changes"
             });
         }

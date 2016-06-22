@@ -27,6 +27,10 @@
 
 namespace UpdatePlugin
 {
+const QString UpdateStore::KIND_CLICK = QLatin1String("click");
+const QString UpdateStore::KIND_SYSTEM = QLatin1String("system");
+const QString UpdateStore::STATE_PENDING = QLatin1String("pending");
+const QString UpdateStore::STATE_INSTALLED = QLatin1String("installed");
 
 UpdateStore::UpdateStore(QObject *parent)
     : QObject(parent)
@@ -101,7 +105,7 @@ void UpdateStore::add(const ClickUpdateMetadata *meta)
               ":click_token, :local_version, :remote_version, :kind)");
     q.bindValue(":app_id", meta->name());
     q.bindValue(":revision", meta->revision());
-    q.bindValue(":state", "pending");
+    q.bindValue(":state", UpdateStore::STATE_PENDING);
     q.bindValue(":created_at_utc",
                 QDateTime::currentDateTimeUtc().currentMSecsSinceEpoch());;
     q.bindValue(":download_sha512", meta->downloadSha512());
@@ -114,7 +118,7 @@ void UpdateStore::add(const ClickUpdateMetadata *meta)
     q.bindValue(":click_token", meta->clickToken());
     q.bindValue(":local_version", meta->localVersion());
     q.bindValue(":remote_version", meta->remoteVersion());
-    q.bindValue(":kind", KIND_CLICK);
+    q.bindValue(":kind", UpdateStore::KIND_CLICK);
 
     if (!q.exec()) {
         qCritical() << "Could not add click update" << q.lastError().text();
@@ -140,7 +144,7 @@ void UpdateStore::add(const QString &kind, const QString &uniqueIdentifier,
               ":size, :icon_url, :changelog, :remote_version, :kind)");
     q.bindValue(":app_id", uniqueIdentifier);
     q.bindValue(":revision", revision);
-    q.bindValue(":state", "pending");
+    q.bindValue(":state", UpdateStore::STATE_PENDING);
     q.bindValue(":created_at_utc",
                 QDateTime::currentDateTimeUtc().currentMSecsSinceEpoch());;
     q.bindValue(":title", title);
@@ -172,7 +176,7 @@ void UpdateStore::markInstalled(const QString &uniqueIdentifier, const int &revi
     QSqlQuery q(m_db);
     q.prepare("UPDATE updates SET state=:state, updated_at_utc=:updated_at_utc"
               " WHERE app_id=:app_id AND revision=:revision");
-    q.bindValue(":state", "installed");
+    q.bindValue(":state", UpdateStore::STATE_INSTALLED);
     q.bindValue(":updated_at_utc",
                 QDateTime::currentDateTimeUtc().currentMSecsSinceEpoch());
     q.bindValue(":app_id", uniqueIdentifier);

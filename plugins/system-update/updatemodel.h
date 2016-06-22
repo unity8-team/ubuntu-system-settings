@@ -46,6 +46,29 @@ public:
         Installed
     };
 
+    enum Roles
+    {
+      // Qt::DisplayRole holds the title of the app
+      KindRole = Qt::UserRole,
+      IconUrlRole,
+      IdRole,
+      LocalVersionRole,
+      RemoteVersionRole,
+      RevisionRole,
+      StateRole,
+      CreatedAtRole,
+      UpdatedAtRole,
+      TitleRole,
+      DownloadHashRole,
+      SizeRole,
+      DownloadUrlRole,
+      CommandRole,
+      ChangelogRole,
+      TokenRole,
+      LastRole = TokenRole
+    };
+
+
     explicit UpdateModel(QObject *parent = 0);
     ~UpdateModel();
 
@@ -68,7 +91,7 @@ signals:
 
 private:
     void initialize();
-    const static char* COLUMN_NAMES[];
+    //const static char* COLUMN_NAMES[];
     UpdateTypes m_filter;
     UpdateStore *m_store;
 };

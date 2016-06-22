@@ -78,13 +78,21 @@ private slots:
 
         m_model->setFilter(UpdatePlugin::UpdateModel::UpdateTypes::PendingClicksUpdates);
         QCOMPARE(m_model->count(), 1);
-        // Col 1 is app_id
-        QCOMPARE(m_model->data(m_model->index(0, 1), Qt::DisplayRole).toString(), pendingApp.name());
+        QCOMPARE(
+            m_model->data(
+                m_model->index(0, 0), UpdatePlugin::UpdateModel::IdRole
+            ).toString(), pendingApp.name()
+        );
 
         m_model->setFilter(UpdatePlugin::UpdateModel::UpdateTypes::InstalledClicksUpdates);
         QCOMPARE(m_model->count(), 1);
-        // Col 1 is app_id
-        QCOMPARE(m_model->data(m_model->index(0, 1), Qt::DisplayRole).toString(), installedApp.name());
+
+        QCOMPARE(
+            m_model->data(
+                m_model->index(0, 0), UpdatePlugin::UpdateModel::IdRole
+            ).toString(),
+            installedApp.name()
+        );
 
         m_model->setFilter(UpdatePlugin::UpdateModel::UpdateTypes::All);
         QCOMPARE(m_model->count(), 2);
@@ -105,11 +113,52 @@ private slots:
         // We only want the replacement in our model of pending updates.
         m_model->setFilter(UpdatePlugin::UpdateModel::UpdateTypes::PendingClicksUpdates);
         QCOMPARE(m_model->count(), 1);
-        QCOMPARE(m_model->data(m_model->index(0, 1), Qt::DisplayRole).toString(), replacement.name());
+        QCOMPARE(m_model->data(
+            m_model->index(0, 1), UpdatePlugin::UpdateModel::IdRole
+        ).toString(), replacement.name());
     }
     void testRoles()
     {
-        // TODO IMPLEMENT
+        using namespace UpdatePlugin;
+        ClickUpdateMetadata app;
+
+        QStringList mc;
+        mc << "ls" << "la";
+
+        app.setName("com.ubuntu.testapp");
+        app.setLocalVersion("0.1");
+        app.setRemoteVersion("0.2");
+        app.setRevision(42);
+        app.setTitle("Test App");
+        app.setDownloadSha512("987654323456789");
+        app.setBinaryFilesize(1000);
+        app.setIconUrl("http://example.org/testapp.png");
+        app.setDownloadUrl("http://example.org/testapp.click");
+        app.setCommand(mc);
+        app.setChangelog("* Fixed all bugs * Introduced new bugs");
+        app.setClickToken("Mock-X-Click-Token");
+
+        m_store->add(&app);
+        m_model->update(); // Uses All filter.
+
+        QModelIndex idx = m_model->index(0, 0);
+
+        QCOMPARE(m_model->data(idx, UpdateModel::KindRole).toString(), UpdateStore::KIND_CLICK);
+        QCOMPARE(m_model->data(idx, UpdateModel::IdRole).toString(), app.name());
+        QCOMPARE(m_model->data(idx, UpdateModel::LocalVersionRole).toString(), app.localVersion());
+        QCOMPARE(m_model->data(idx, UpdateModel::RemoteVersionRole).toString(), app.remoteVersion());
+        QCOMPARE(m_model->data(idx, UpdateModel::RevisionRole).toInt(), app.revision());
+        QCOMPARE(m_model->data(idx, UpdateModel::TitleRole).toString(), app.title());
+        QCOMPARE(m_model->data(idx, UpdateModel::DownloadHashRole).toString(), app.downloadSha512());
+        QCOMPARE(m_model->data(idx, UpdateModel::SizeRole).toUInt(), app.binaryFilesize());
+        QCOMPARE(m_model->data(idx, UpdateModel::IconUrlRole).toString(), app.iconUrl());
+        QCOMPARE(m_model->data(idx, UpdateModel::DownloadUrlRole).toString(), app.downloadUrl());
+        QCOMPARE(m_model->data(idx, UpdateModel::CommandRole).toString(), app.command().join(" "));
+        QCOMPARE(m_model->data(idx, UpdateModel::ChangelogRole).toString(), app.changelog());
+        QCOMPARE(m_model->data(idx, UpdateModel::StateRole).toString(), UpdateStore::STATE_PENDING);
+
+        // Verify that the date ain't empty.
+        QVERIFY(!m_model->data(idx, UpdateModel::CreatedAtRole).toString().isEmpty());
     }
     void testCount()
     {
