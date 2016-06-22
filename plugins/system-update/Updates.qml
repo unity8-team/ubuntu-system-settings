@@ -184,12 +184,12 @@ Item {
                     revision: model.revision
                     clickToken: token
                     download: updates.getDownload(identifier, model.revision)
-                    downloadUrl: downloadUrl
+                    downloadUrl: model.downloadUrl
                     downloadSha512: downloadHash
                     version: remoteVersion
                     size: model.size
                     name: title
-                    iconUrl: iconUrl
+                    iconUrl: model.iconUrl
                     changelog: model.changelog
 
                     onRetryUpdate: {

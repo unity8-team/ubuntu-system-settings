@@ -30,7 +30,7 @@ Update {
     // onRetry: modelData.downloadUpdate();
     onDownload: SystemImage.downloadUpdate();
     onPause: SystemImage.pauseDownload();
-    onInstall: SystemImage.applyUpdate();
+    // onInstall: SystemImage.applyUpdate();
 
     Connections {
         target: SystemImage
