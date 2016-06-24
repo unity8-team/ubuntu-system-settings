@@ -18,12 +18,14 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import Biometryd 0.0
 import GSettings 1.0
 import QMenuModel 0.1
 import QtQuick 2.4
 import Ubuntu.Components 1.3
 import Ubuntu.Components.ListItems 1.3 as ListItem
 import SystemSettings 1.0
+import Ubuntu.Settings.Fingerprint 0.1
 import Ubuntu.SystemSettings.Battery 1.0
 import Ubuntu.SystemSettings.Diagnostics 1.0
 import Ubuntu.SystemSettings.SecurityPrivacy 1.0
@@ -151,11 +153,35 @@ ItemPage {
                 text: i18n.tr("Security")
             }
             ListItem.SingleValue {
+                id: fingerprintControl
+                objectName: "fingerprintControl"
+                text: i18n.tr("Fingerprint ID")
+                progression: true
+                onClicked: pageStack.push(fingeprintPage, {
+                    passcodeSet: securityPrivacy.securityType !== UbuntuSecurityPrivacyPanel.Swipe
+                })
+                visible: Biometryd.available
+            }
+
+            Component {
+                id: fingeprintPage
+                Fingerprints {
+                    onRequestPasscode: {
+                        pageStack.pop();
+                        pageStack.push(Qt.resolvedUrl("LockSecurity.qml"));
+                    }
+                }
+            }
+
+            ListItem.SingleValue {
                 id: lockingControl
                 objectName: "lockingControl"
                 text: i18n.tr("Locking and unlocking")
                 progression: true
-                onClicked: pageStack.push(Qt.resolvedUrl("PhoneLocking.qml"), {usePowerd: usePowerd, powerSettings: powerSettings})
+                onClicked: pageStack.push(Qt.resolvedUrl("PhoneLocking.qml"), {
+                    usePowerd: usePowerd,
+                    powerSettings: powerSettings
+                })
             }
             ListItem.SingleValue {
                 id: simControl

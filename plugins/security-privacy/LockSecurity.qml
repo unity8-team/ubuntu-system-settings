@@ -1,9 +1,10 @@
 /*
  * This file is part of system-settings
  *
- * Copyright (C) 2013 Canonical Ltd.
+ * Copyright (C) 2013-2016 Canonical Ltd.
  *
  * Contact: Iain Lane <iain.lane@canonical.com>
+ *          Jonas G. Drange <jonas.drange@canonical.com>
  *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License version 3, as published
@@ -17,13 +18,14 @@
  * You should have received a copy of the GNU General Public License along
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
+import Biometryd 0.0
 import GSettings 1.0
 import QtQuick 2.4
 import QtQuick.Layouts 1.1
 import Ubuntu.Components 1.3
 import Ubuntu.Components.ListItems 1.3 as ListItem
 import Ubuntu.Components.Popups 1.3
+import Ubuntu.Settings.Fingerprint 0.1
 import Ubuntu.SystemSettings.SecurityPrivacy 1.0
 import SystemSettings 1.0
 
@@ -49,6 +51,7 @@ ItemPage {
     }
 
     property var dialog: null
+    property int enrolledFingerprints: 0
 
     UbuntuSecurityPrivacyPanel {
         id: securityPrivacy
@@ -62,6 +65,8 @@ ItemPage {
                 return 1
             case UbuntuSecurityPrivacyPanel.Passphrase:
                 return 2
+            case UbuntuSecurityPrivacyPanel.Fingerprint:
+                return 3
         }
     }
 
@@ -73,6 +78,8 @@ ItemPage {
                 return UbuntuSecurityPrivacyPanel.Passcode
             case 2:
                 return UbuntuSecurityPrivacyPanel.Passphrase
+            case 3:
+                return UbuntuSecurityPrivacyPanel.Fingerprint
         }
     }
 
@@ -355,9 +362,14 @@ ItemPage {
                     Layout.fillWidth: true
                     text: i18n.tr("Cancel")
                     onClicked: {
-                        PopupUtils.close(changeSecurityDialog)
-                        unlockMethod.selectedIndex =
-                                methodToIndex(securityPrivacy.securityType)
+                        PopupUtils.close(changeSecurityDialog);
+                        var newSelectedIndex;
+                        if (securityPrivacy.enableFingerprintIdentification) {
+                            newSelectedIndex = methodToIndex(UbuntuSecurityPrivacyPanel.Fingerprint);
+                        } else {
+                            newSelectedIndex = methodToIndex(securityPrivacy.securityType);
+                        }
+                        unlockMethod.selectedIndex = newSelectedIndex;
                     }
                 }
 
@@ -416,6 +428,10 @@ ItemPage {
                             currentInput.forceActiveFocus()
                             currentInput.selectAll()
                             changeSecurityDialog.enabled = true
+
+                            // We can always safely disable FP ident here, but
+                            // in some cases it is required.
+                            securityPrivacy.enableFingerprintIdentification = false;
                         } else {
                             PopupUtils.close(changeSecurityDialog)
                         }
@@ -448,12 +464,13 @@ ItemPage {
                 property string swipe: i18n.tr("Swipe (no security)")
                 property string passcode: i18n.tr("4-digit passcode")
                 property string passphrase: i18n.tr("Passphrase")
+                property string fingerprint: i18n.tr("Fingerprint")
                 property string swipeAlt: i18n.tr("Swipe (no security)… ")
                 property string passcodeAlt: i18n.tr("4-digit passcode…")
                 property string passphraseAlt: i18n.tr("Passphrase…")
 
                 id: unlockMethod
-                model: 3
+                model: Biometryd.available ? 4 : 3
                 delegate: OptionSelectorDelegate {
                     objectName: {
                         switch (index) {
@@ -463,18 +480,57 @@ ItemPage {
                                 return "method_code";
                             case 2:
                                 return "method_phrase";
+                            case 3:
+                                return "method_finger";
                             default:
                                 return "method_unknown";
                         }
                     }
-                    text: index == 0 ? (unlockMethod.selectedIndex == 0 ? unlockMethod.swipe : unlockMethod.swipeAlt) :
-                         (index == 1 ? (unlockMethod.selectedIndex == 1 ? unlockMethod.passcode : unlockMethod.passcodeAlt) :
-                                       (unlockMethod.selectedIndex == 2 ? unlockMethod.passphrase : unlockMethod.passphraseAlt))
+                    text: {
+                        var si = unlockMethod.selectedIndex;
+                        switch (index) {
+                        case 0:
+                            return si == 0 ? unlockMethod.swipe : unlockMethod.swipeAlt;
+                        case 1:
+                            return si == 1 ? unlockMethod.passcode : unlockMethod.passcodeAlt;
+                        case 2:
+                            return si == 2 ? unlockMethod.passphrase : unlockMethod.passphraseAlt;
+                        case 3:
+                            return unlockMethod.fingerprint;
+                        }
+                    }
+                    enabled: {
+                        // Fingerprint is the only one we disable, unless the user
+                        // has chosen FP ident and there are more than 0 enrolled
+                        // FPs and there's a pass{code|phrase} set.
+                        var passSet = (securityPrivacy.securityType ===
+                                       UbuntuSecurityPrivacyPanel.Passcode
+                                       || securityPrivacy.securityType ===
+                                       UbuntuSecurityPrivacyPanel.Passphrase);
+                        var haveFps = page.enrolledFingerprints > 0;
+                        return index !== 3 || (haveFps && passSet);
+                    }
                 }
                 expanded: true
                 onDelegateClicked: {
                     if (selectedIndex === index && !changeControl.visible)
                         return // nothing to do
+
+                    // This check is needed for when FP is the chosen method,
+                    // but the user wants to disable FP in favour of the
+                    // securityType already set, for which  there is nothing
+                    // to do, except turn off FP ident.
+                    if (methodToIndex(securityPrivacy.securityType) === index) {
+                        securityPrivacy.enableFingerprintIdentification = false;
+                        return
+                    }
+
+                    // Bail if we enabled FP ident.
+                    if (index === 3) {
+                        // Toggle FP ident.
+                        securityPrivacy.enableFingerprintIdentification = true;
+                        return;
+                    }
 
                     selectedIndex = index
                     openDialog()
@@ -483,14 +539,22 @@ ItemPage {
             Binding {
                 target: unlockMethod
                 property: "selectedIndex"
-                value: methodToIndex(securityPrivacy.securityType)
+                value: {
+                    if (securityPrivacy.enableFingerprintIdentification) {
+                        return methodToIndex(UbuntuSecurityPrivacyPanel.Fingerprint);
+                    } else {
+                        return methodToIndex(securityPrivacy.securityType);
+                    }
+                }
             }
 
             ListItem.SingleControl {
 
                 id: changeControl
-                visible: securityPrivacy.securityType !==
-                            UbuntuSecurityPrivacyPanel.Swipe
+                visible: securityPrivacy.securityType ===
+                         UbuntuSecurityPrivacyPanel.Passcode &&
+                         securityPrivacy.securityType ===
+                         UbuntuSecurityPrivacyPanel.Passphrase
 
                 control: Button {
                     property string changePasscode: i18n.tr("Change passcode…")
@@ -511,4 +575,46 @@ ItemPage {
             }
         }
     }
+
+    // This observer is used to decide whether or not to enabled Fingerprint ID
+    // to be selected by the user as a security method.
+    Observer {
+        id: sizeObserver
+        onFailed: {
+            page.enrolledFingerprints = 0;
+            _op = null;
+        }
+        onSucceeded: {
+            page.enrolledFingerprints = result;
+            _op = null;
+        }
+        onCanceled: _op = null
+
+        function start () {
+            _op = Biometryd.defaultDevice.templateStore.size(user);
+            _op.start(sizeObserver);
+        }
+
+        property var _op: null
+
+        Component.onCompleted: {
+            if (Biometryd.available)
+                start();
+        }
+        Component.onDestruction: _op && _op.cancel();
+    }
+
+    Connections {
+        target: Biometryd
+        onAvailableChanged: {
+            if (available)
+                sizeObserver.start();
+        }
+    }
+
+    User {
+        id: user
+        uid: UbuntuSettingsFingerprint.uid
+    }
+
 }

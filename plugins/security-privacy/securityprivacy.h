@@ -40,6 +40,10 @@ class SecurityPrivacy: public QObject
 {
     Q_OBJECT
     Q_ENUMS(SecurityType)
+    Q_PROPERTY (bool enableFingerprintIdentification
+                READ getEnableFingerprintIdentification
+                WRITE setEnableFingerprintIdentification
+                NOTIFY enableFingerprintIdentificationChanged)
     Q_PROPERTY (bool statsWelcomeScreen
                 READ getStatsWelcomeScreen
                 WRITE setStatsWelcomeScreen
@@ -71,12 +75,15 @@ public:
     enum SecurityType {
          Swipe,
          Passcode,
-         Passphrase
+         Passphrase,
+         Fingerprint
     };
 
     explicit SecurityPrivacy(QObject *parent = 0);
     virtual ~SecurityPrivacy();
 
+    bool getEnableFingerprintIdentification();
+    void setEnableFingerprintIdentification(bool enabled);
     bool getStatsWelcomeScreen();
     void setStatsWelcomeScreen(bool enabled);
     bool getMessagesWelcomeScreen();
@@ -99,6 +106,7 @@ public Q_SLOTS:
     void slotNameOwnerChanged();
 
 Q_SIGNALS:
+    void enableFingerprintIdentificationChanged();
     void statsWelcomeScreenChanged();
     void messagesWelcomeScreenChanged();
     void enableLauncherWhileLockedChanged();

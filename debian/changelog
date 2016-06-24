@@ -1,3 +1,11 @@
+ubuntu-system-settings (0.4+16.10.20160619-0ubuntu1) yakkety; urgency=medium
+
+  [ jonas-drange ]
+  * expose fingerprint ID panel and the Fingerprint lock setting (LP:
+    #1547040)
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Sun, 19 Jun 2016 02:48:24 +0000
+
 ubuntu-system-settings (0.4+16.10.20160609-0ubuntu1) yakkety; urgency=medium
 
   * Fix pin code request is rejected because device is not valid (LP:
