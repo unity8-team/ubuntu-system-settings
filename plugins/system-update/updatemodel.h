@@ -78,7 +78,7 @@ class UpdateModel : public QAbstractListModel
     Q_PROPERTY(int count READ count NOTIFY countChanged)
     Q_ENUMS(UpdateTypes)
 public:
-    enum class UpdateTypes
+    enum UpdateTypes
     {
         All,
         Pending,
@@ -159,6 +159,7 @@ public:
                        const QString &downloadId);
 
     Q_INVOKABLE bool contains(const QString &downloadId) const;
+    void pruneDb();
 
 public slots:
     Q_INVOKABLE void refresh();
@@ -174,7 +175,6 @@ private:
     void initialize();
     bool createDb();
     void initializeDb();
-    void pruneDb();
     bool openDb();
 
     int find(const QString &id, const int &revision) const;
