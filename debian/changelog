@@ -1,3 +1,11 @@
+ubuntu-system-settings (0.4+16.10.20160624-0ubuntu1) yakkety; urgency=medium
+
+  [ Antti Kaijanmäki ]
+  * use Connectivity API for cellular data and roaming control. (LP:
+    #1373463)
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Fri, 24 Jun 2016 13:42:47 +0000
+
 ubuntu-system-settings (0.4+16.10.20160619-0ubuntu1) yakkety; urgency=medium
 
   [ jonas-drange ]
