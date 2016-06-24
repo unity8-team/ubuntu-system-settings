@@ -23,6 +23,7 @@
 #include <QDebug>
 #include <QSqlDatabase>
 
+#include "systemupdate.h"
 #include "clickupdatemetadata.h"
 
 namespace UpdatePlugin
@@ -43,14 +44,20 @@ public:
     // Adds a click update to the store based on the given metadata.
     // Can safely be called multiple times for the same update.
     void add(const ClickUpdateMetadata *meta);
+    ClickUpdateMetadata* getPending(const QString &id);
 
-    void add(const QString &kind, const QString &uniqueIdentifier,
+    void add(const QString &kind, const QString &id,
              const int &revision, const QString &version,
              const QString &changelog, const QString &title,
-             const QString &iconUrl, const int &size);
+             const QString &iconUrl, const int &size,
+             const bool automatic);
 
     // Mark an update as installed.
-    void markInstalled(const QString &uniqueIdentifier, const int &revision);
+    void markInstalled(const QString &id, const int &revision);
+    void setUpdateState(const QString &id, const int &revision,
+                        const SystemUpdate::UpdateState &state);
+    void setProgress(const QString &id, const int &revision,
+                     const int &progress);
 
     // Removes (30 days) old updates.
     void pruneDb();
@@ -62,9 +69,12 @@ public:
     static const QString KIND_SYSTEM;
     static const QString STATE_PENDING;
     static const QString STATE_INSTALLED;
+    QString updateStateToString(const SystemUpdate::UpdateState &state);
+    SystemUpdate::UpdateState stringToUpdateState(const QString &state);
 
 signals:
-    void updatesChanged();
+    void changed();
+    void itemChanged(const QString &id, const int &revision);
 
 private:
     void init(const QString &dbpath, QObject *parent);

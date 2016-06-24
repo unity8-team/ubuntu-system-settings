@@ -49,6 +49,7 @@ public:
         StateInstalling,
         StateInstallingAutomatically,
         StateInstallPaused,
+        StateInstallFinished,
         StateInstalled,
         StateDownloaded,
         StateFailed

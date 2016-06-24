@@ -25,7 +25,10 @@
 #include <QTest>
 
 #include "clickupdatemetadata.h"
+#include "systemupdate.h"
 #include "updatestore.h"
+
+using namespace UpdatePlugin;
 
 class TstUpdateStore : public QObject
 {
@@ -36,7 +39,7 @@ private slots:
         m_dir = new QTemporaryDir();
         QVERIFY(m_dir->isValid());
         m_dbfile = m_dir->path() + "/cupdatesstore.db";
-        m_instance = new UpdatePlugin::UpdateStore(m_dbfile);
+        m_instance = new UpdateStore(m_dbfile);
     }
     void cleanup()
     {
@@ -59,7 +62,7 @@ private slots:
     }
     void testUpdateLifecycle()
     {
-        UpdatePlugin::ClickUpdateMetadata m;
+        ClickUpdateMetadata m;
         QStringList mc;
         mc << "ls" << "la";
         m.setRevision(42);
@@ -75,7 +78,7 @@ private slots:
         m.setCommand(mc);
         m.setDownloadSha512("987654323456789");
 
-        UpdatePlugin::ClickUpdateMetadata m2;
+        ClickUpdateMetadata m2;
         m2.setRevision(100);
         m2.setName("com.ubuntu.myapp");
         m2.setLocalVersion("1.1");
@@ -112,7 +115,7 @@ private slots:
             QCOMPARE(q.value(13).toString(), m.command().join(" "));
             QCOMPARE(q.value(14).toString(), m.changelog());
             QCOMPARE(q.value(15).toString(), m.clickToken());
-
+            QCOMPARE(q.value(16).toString(), QString("available"));
             size++;
         }
 
@@ -143,7 +146,7 @@ private slots:
             QCOMPARE(q2.value(13).toString(), m.command().join(" "));
             QCOMPARE(q2.value(14).toString(), m.changelog());
             QCOMPARE(q2.value(15).toString(), m.clickToken());
-
+            QCOMPARE(q2.value(16).toString(), QString("available"));
             size++;
         }
 
@@ -158,7 +161,7 @@ private slots:
         QSqlQuery q3 = m_instance->db().exec("SELECT * FROM updates");
 
         while (q3.next()) {
-            UpdatePlugin::ClickUpdateMetadata *target;
+            ClickUpdateMetadata *target;
 
             if (q3.value(1).toString() == m.name())
                 target = &m;
@@ -180,7 +183,7 @@ private slots:
             QCOMPARE(q3.value(13).toString(), target->command().join(" "));
             QCOMPARE(q3.value(14).toString(), target->changelog());
             QCOMPARE(q3.value(15).toString(), target->clickToken());
-
+            QCOMPARE(q3.value(16).toString(), QString("available"));
             size++;
         }
 
@@ -210,7 +213,7 @@ private slots:
             QCOMPARE(q4.value(13).toString(), m.command().join(" "));
             QCOMPARE(q4.value(14).toString(), m.changelog());
             QCOMPARE(q4.value(15).toString(), m.clickToken());
-
+            QCOMPARE(q4.value(16).toString(), QString("available"));
             size++;
         }
 
@@ -240,36 +243,37 @@ private slots:
             QCOMPARE(q5.value(13).toString(), m2.command().join(" "));
             QCOMPARE(q5.value(14).toString(), m2.changelog());
             QCOMPARE(q5.value(15).toString(), m2.clickToken());
-
+            QCOMPARE(q5.value(16).toString(), QString("available"));
             size++;
         }
 
         QCOMPARE(size, 1);
         m_instance->db().close();
     }
-    void testUpdatesChanged()
+    void testStoreChanged()
     {
-        UpdatePlugin::ClickUpdateMetadata m;
+        ClickUpdateMetadata m;
 
         // set minimum required
         m.setName("test.app");
         m.setRevision(1);
 
-        QSignalSpy updatesChangedSpy(m_instance, SIGNAL(updatesChanged()));
+        QSignalSpy storeChangedSpy(m_instance, SIGNAL(changed()));
 
         m_instance->add(&m);
-        QTRY_COMPARE(updatesChangedSpy.count(), 1);
+        QTRY_COMPARE(storeChangedSpy.count(), 1);
 
+        QSignalSpy storeItemChangedSpy(m_instance, SIGNAL(itemChanged(QString, int)));
         m_instance->markInstalled(m.name(), m.revision());
-        QTRY_COMPARE(updatesChangedSpy.count(), 2);
+        QTRY_COMPARE(storeItemChangedSpy.count(), 1);
     }
     void testPruning()
     {
-        UpdatePlugin::ClickUpdateMetadata recentUpdate;
+        ClickUpdateMetadata recentUpdate;
         recentUpdate.setName("new.app");
         recentUpdate.setRevision(1);
 
-        UpdatePlugin::ClickUpdateMetadata oldUpdate;
+        ClickUpdateMetadata oldUpdate;
         oldUpdate.setName("old.app");
         oldUpdate.setRevision(1);
 
@@ -282,7 +286,7 @@ private slots:
         // Change update date directly in the db
         QVERIFY(m_instance->openDb());
         QSqlQuery q(m_instance->db());
-        q.prepare("UPDATE updates SET updated_at_utc = :updated WHERE app_id = :appid");
+        q.prepare("UPDATE updates SET updated_at_utc = :updated WHERE id = :appid");
         QDateTime longAgo = QDateTime::currentDateTime().addMonths(-1).addDays(-1).toUTC();
 
         q.bindValue(":updated", longAgo.toMSecsSinceEpoch());
@@ -316,7 +320,7 @@ private slots:
         QString iconUrl("distributor-logo.svg");
         int binarySize(1000);
         m_instance->add(kind, uniqueIdentifier, revision, version, changelog,
-                        title, iconUrl, binarySize);
+                        title, iconUrl, binarySize, false);
 
         QVERIFY(m_instance->openDb());
         QSqlQuery q(m_instance->db());
@@ -329,8 +333,75 @@ private slots:
         }
         QCOMPARE(size, 1);
     }
+    void testMarkInstalled()
+    {
+        ClickUpdateMetadata m;
+        m.setName("test.app");
+        m.setRevision(1);
+
+        QSignalSpy storeChangedSpy(m_instance, SIGNAL(changed()));
+        QSignalSpy storeItemChangedSpy(m_instance, SIGNAL(itemChanged(QString, int)));
+
+        m_instance->add(&m);
+        m_instance->markInstalled(m.name(), m.revision());
+        QTRY_COMPARE(storeChangedSpy.count(), 1);
+        QTRY_COMPARE(storeItemChangedSpy.count(), 1);
+
+        QVERIFY(m_instance->openDb());
+        QSqlQuery q(m_instance->db());
+        q.exec("SELECT state FROM updates");
+        while (q.next()) {
+            QVERIFY(q.isValid());
+            QCOMPARE(q.value(0).toString(), UpdateStore::STATE_INSTALLED);
+        }
+    }
+    void testSetUpdateState()
+    {
+        ClickUpdateMetadata m;
+        m.setName("test.app");
+        m.setRevision(1);
+
+        QSignalSpy storeChangedSpy(m_instance, SIGNAL(changed()));
+        QSignalSpy storeItemChangedSpy(m_instance, SIGNAL(itemChanged(QString, int)));
+
+        m_instance->add(&m);
+        m_instance->setUpdateState(m.name(), m.revision(),
+                                   SystemUpdate::UpdateState::StateAvailable);
+        QTRY_COMPARE(storeChangedSpy.count(), 1);
+        QTRY_COMPARE(storeItemChangedSpy.count(), 1);
+
+        QVERIFY(m_instance->openDb());
+        QSqlQuery q(m_instance->db());
+        q.exec("SELECT update_state FROM updates");
+        while (q.next()) {
+            QVERIFY(q.isValid());
+            QCOMPARE(q.value(0).toString(), QString("available"));
+        }
+    }
+    void testSetProgress()
+    {
+        ClickUpdateMetadata m;
+        m.setName("test.app");
+        m.setRevision(1);
+
+        QSignalSpy storeChangedSpy(m_instance, SIGNAL(changed()));
+        QSignalSpy storeItemChangedSpy(m_instance, SIGNAL(itemChanged(QString, int)));
+
+        m_instance->add(&m);
+        m_instance->setProgress(m.name(), m.revision(), 50);
+        QTRY_COMPARE(storeChangedSpy.count(), 1);
+        QTRY_COMPARE(storeItemChangedSpy.count(), 1);
+
+        QVERIFY(m_instance->openDb());
+        QSqlQuery q(m_instance->db());
+        q.exec("SELECT progress FROM updates");
+        while (q.next()) {
+            QVERIFY(q.isValid());
+            QCOMPARE(q.value(0).toInt(), 50);
+        }
+    }
 private:
-    UpdatePlugin::UpdateStore *m_instance;
+    UpdateStore *m_instance;
     QTemporaryDir *m_dir;
     QString m_dbfile;
 };

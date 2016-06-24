@@ -27,7 +27,6 @@
 
 #include "clickupdatemanager.h"
 #include "helpers.h"
-#include "systemupdate.h"
 
 namespace UpdatePlugin
 {
@@ -145,12 +144,13 @@ void ClickUpdateManager::check(const QString &packageName)
 {
     qWarning() << "click checker: checking this one file" << packageName
             << "...";
-    if (m_metas.contains(packageName)) {
+    ClickUpdateMetadata *m = m_store->getPending(packageName);
+    if (m->name() == packageName) {
         qWarning() << "click checker: requesting click token for" << packageName
                 << "...";
-
-        m_metas.value(packageName)->setAutomatic(true);
-        m_metas.value(packageName)->requestClickToken();
+        initializeMeta(m);
+        m->setAutomatic(true);
+        m->requestClickToken();
     }
 }
 
@@ -197,8 +197,6 @@ void ClickUpdateManager::processInstalledClicks(const int &exitCode)
 
     int i;
     for (i = 0; i < array.size(); i++) {
-        // No parent as we do reference count via the shared ptr.
-        // Checker will outlive the child, so this may not be needed.
         ClickUpdateMetadata *meta = new ClickUpdateMetadata(this);
         meta->setToken(m_token);
         initializeMeta(meta);
@@ -209,7 +207,8 @@ void ClickUpdateManager::processInstalledClicks(const int &exitCode)
         meta->setLocalVersion(object.value("version").toString());
 
         QStringList command;
-        command << Helpers::whichPkcon() << "-p" << "-d" << "install-local" << "$file";
+        // command << Helpers::whichPkcon() << "-p" << "install-local" << "$file";
+        command << "sleep" << "5";
         meta->setCommand(command);
 
         m_metas.insert(meta->name(), meta);
@@ -468,10 +467,25 @@ void ClickUpdateManager::setAuthenticated(const bool authenticated)
     }
 }
 
-void ClickUpdateManager::clickUpdateInstalled(const QString &packageName, const int &revision)
+void ClickUpdateManager::markInstalled(const QString &packageName, const int &revision)
 {
-    qWarning() << "clickUpdateInstalled" << packageName << revision;
+    qWarning() << "click manager mark installed" << packageName << revision;
     m_store->markInstalled(packageName, revision);
 }
 
+
+void ClickUpdateManager::setUpdateState(const QString &packageName, const int &revision,
+                                        const int &state)
+{
+    qWarning() << "click manager set update state" << packageName << revision << state;
+    SystemUpdate::UpdateState u = (SystemUpdate::UpdateState) state;
+    m_store->setUpdateState(packageName, revision, u);
+}
+
+void ClickUpdateManager::setProgress(const QString &packageName, const int &revision,
+                                     const int &progress)
+{
+    qWarning() << "click manager set progress" << packageName << revision << progress;
+    m_store->setProgress(packageName, revision, progress);
+}
 } // UpdatePlugin

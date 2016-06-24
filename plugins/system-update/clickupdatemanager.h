@@ -29,6 +29,7 @@
 #include <token.h>
 #include <ssoservice.h>
 
+#include "systemupdate.h"
 #include "clickupdatemetadata.h"
 #include "updatestore.h"
 
@@ -52,7 +53,11 @@ public:
     Q_INVOKABLE void check();
     Q_INVOKABLE void check(const QString &packageName);
     Q_INVOKABLE void cancel();
-    Q_INVOKABLE void clickUpdateInstalled(const QString &packageName, const int &revision);
+    Q_INVOKABLE void markInstalled(const QString &packageName, const int &revision);
+    Q_INVOKABLE void setUpdateState(const QString &packageName, const int &revision,
+                                    const int &state);
+    Q_INVOKABLE void setProgress(const QString &packageName, const int &revision,
+                                 const int &progress);
 
     Q_INVOKABLE bool isCheckRequired();
 

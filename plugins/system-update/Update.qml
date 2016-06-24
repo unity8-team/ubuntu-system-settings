@@ -92,7 +92,7 @@ Item {
 
     states: [
         State {
-            name: "installed"
+            name: "finished"
             PropertyChanges {
                 target: update
                 height: 0
@@ -181,6 +181,14 @@ Item {
             rightMargin: units.gu(2)
         }
 
+        visible: {
+            switch (updateState) {
+            case SystemUpdate.StateInstalled:
+                return false;
+            default:
+                return true;
+            }
+        }
         enabled: {
             switch(updateState) {
             case SystemUpdate.StateAvailable:
@@ -198,12 +206,12 @@ Item {
             case SystemUpdate.StateInstallingAutomatically:
             case SystemUpdate.StateUnavailable:
             case SystemUpdate.StateInstalled:
+            case SystemUpdate.StateInstallFinished:
             case SystemUpdate.StateUnknown:
             default:
                 return false;
             }
         }
-
         text: {
             switch(updateState) {
             case SystemUpdate.StateUnknown:
@@ -227,6 +235,7 @@ Item {
             case SystemUpdate.StateDownloadingAutomatically:
             case SystemUpdate.StateInstalling:
             case SystemUpdate.StateInstallingAutomatically:
+            case SystemUpdate.StateInstallFinished:
             case SystemUpdate.StateInstalled:
                 return i18n.tr("Pause");
 
@@ -394,7 +403,7 @@ Item {
             case SystemUpdate.StateDownloaded:
                 return i18n.tr("Downloaded");
 
-            case SystemUpdate.StateInstalled:
+            case SystemUpdate.StateInstallFinished:
                 return i18n.tr("Installed");
 
             default:
@@ -663,7 +672,7 @@ Item {
     Timer {
         id: hideTimer
         interval: 2000
-        running: update.updateState === SystemUpdate.StateInstalled
-        onTriggered: update.state = "installed"
+        running: update.updateState === SystemUpdate.StateInstallFinished
+        onTriggered: update.state = "finished"
     }
 }

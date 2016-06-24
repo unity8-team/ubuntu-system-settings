@@ -80,7 +80,9 @@ class Manager(object):
                             "https://raw.githubusercontent.com/ninja-ide/"
                             "ninja-ide/master/ninja_ide/img/ninja_icon.png"
                         ),
-                        "download_url": ("http://localhost:9009/download"),
+                        "download_url": ("https://upload.wikimedia.org/wikiped"
+                                         "ia/commons/9/9a/Self-portrait_at_34_"
+                                         "by_Rembrandt.jpg"),
                         "binary_filesize": 9000,
                         "download_sha512": "1232223sdfdsffs",
                         "changelog": "New version!",

@@ -24,7 +24,6 @@ Update {
     id: update
     property string packageName
     property int revision
-    property var download: null
     property string command
     property string clickToken
     property string downloadUrl
@@ -34,93 +33,26 @@ Update {
     updateState: SystemUpdate.StateAvailable
     kind: SystemUpdate.KindApp
 
-    onRetry: retryUpdate(update.packageName)
-    onPause: download.pause()
-    onResume: download.resume()
-    onInstall: {
-        console.warn('onInstall...');
-        if (download === null) {
-            console.warn('onInstall had no download. Creating one...');
-            var metadata = {
-                "command": update.command.split(" "),
-                "title": update.name,
-                "showInIndicator": false
-            };
-            var hdrs = {
-                "X-Click-Token": update.clickToken
-            };
-            var metadataObj = mdt.createObject(update, metadata);
-            metadataObj.custom = {
-                "packageName": update.packageName,
-                "revision": update.revision
-            };
-            var singleDownloadObj = sdl.createObject(update, {
-                "url": update.downloadUrl,
-                "autoStart": true,
-                "hash": update.downloadSha512,
-                "algorithm": "sha512",
-                "headers": hdrs,
-                "metadata": metadataObj
-            });
-            singleDownloadObj.download(update.downloadUrl);
-            download = singleDownloadObj;
-        }
+    // onRetry: retryUpdate(update.packageName)
+    // onPause: download.pause()
+    // onResume: download.resume()
+    // onInstall:
+    // onDownload: install()
 
-        console.warn('onInstall will now download', update.downloadUrl, download, download.metadata, download.metadata.custom, download.metadata.custom.packageName);
-        download.download(update.downloadUrl)
-    }
-    onDownload: install()
-
-    signal retryUpdate(string name)
+    // signal retryUpdate(string name)
 
     states: [
         State {
-            name: "invalidClickToken"
-            when: update.clickToken === ""
+            name: "failed"
+            when: update.updateState === SystemUpdate.StateFailed
             StateChangeScript {
                 script: update.setError(
                     i18n.tr("Update failed"),
-                    i18n.tr("The server responded incorrectly.")
+                    i18n.tr("Something went wrong.")
                 )
-            }
-            PropertyChanges {
-                target: update
-                updateState: SystemUpdate.StateFailed
             }
         }
     ]
-
-    Connections {
-        target: download
-        onErrorChanged: {
-            update.setError(
-                i18n.tr("Download failed"), download.errorMessage
-            )
-            updateState = SystemUpdate.StateFailed;
-        }
-        onFinished: {
-            updateState = SystemUpdate.StateInstalled;
-        }
-        onProgressChanged: {
-            update.progress = download.progress;
-            updateState = SystemUpdate.StateDownloading;
-        }
-        onPaused: {
-            updateState = SystemUpdate.StateDownloadPaused;
-        }
-        onResumed: {
-            updateState = SystemUpdate.StateDownloading;
-        }
-        onStarted: {
-            updateState = SystemUpdate.StateQueuedForDownload;
-        }
-        onProcessing: {
-            updateState = SystemUpdate.StateInstalling;
-        }
-    }
-
-    Component { id: sdl; SingleDownload { property string url; } }
-    Component { id: mdt; Metadata {} }
 
     // Makes the progress bar indeterminate when waiting
     Binding {

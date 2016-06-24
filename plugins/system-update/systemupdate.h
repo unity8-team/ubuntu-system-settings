@@ -19,7 +19,6 @@
 #define SYSTEM_UPDATE_H
 
 #include <QDebug>
-#include "updatestore.h"
 
 namespace UpdatePlugin
 {
@@ -52,6 +51,7 @@ public:
         StateInstalling,
         StateInstallingAutomatically,
         StateInstallPaused,
+        StateInstallFinished,
         StateInstalled,
         StateDownloaded,
         StateFailed
@@ -70,9 +70,11 @@ public:
 
 public slots:
     void notifyStoreChanged();
+    void notifyStoreItemChanged(const QString &id, const int &revision);
 
 signals:
     void storeChanged();
+    void storeItemChanged(const QString &id, const int &revision);
 
 protected:
     explicit SystemUpdate(QObject *parent = 0);
@@ -81,6 +83,8 @@ protected:
 private:
     static SystemUpdate *m_instance;
 };
+
 } // UpdatePlugin
 
+// Q_DECLARE_METATYPE(UpdatePlugin::SystemUpdate::UpdateState)
 #endif // SYSTEM_UPDATE_H

@@ -28,25 +28,21 @@ import Ubuntu.SystemSettings.Update 1.0
 
 Item {
     id: updates
+    property var clickUpdateManager
     property Flickable flickable: scrollWidget
     property bool havePower: false
     property bool online: NetworkingStatus.online
     property bool haveSystemUpdate: SystemImage.checkTarget()
-    property bool authenticated: clickUpdateManager.authenticated
+    property bool authenticated: true
     property int status: SystemUpdate.StatusIdle
     property int updatesCount: {
         var count = 0;
         count += updates.haveSystemUpdate ? 1 : 0;
         count += clickUpdatesModel.count
     }
-    property var clickUpdateManager: ClickUpdateManager {}
-    property var clickUpdatesModel: UpdateModel {
-        filter: UpdateModel.PendingClicksUpdates
-    }
-    property var previousUpdatesModel: UpdateModel {
-        filter: UpdateModel.Installed
-    }
-    property var udm: DownloadManager {}
+    property var clickUpdatesModel
+    property var previousUpdatesModel
+    property var udm
 
     function checkSystem() {
         SystemImage.checkForUpdate();
@@ -68,8 +64,50 @@ Item {
         updates.status = SystemUpdate.StatusIdle;
     }
 
+    function createDownload(click) {
+        console.warn('create download', click, click.command);
+        var metadata = {
+            "command": click.command,
+            "title": click.title,
+            "showInIndicator": false
+        };
+        var hdrs = {
+            "X-Click-Token": click.token
+        };
+        var metadataObj = mdt.createObject(null, metadata);
+        metadataObj.custom = {
+            "packageName": click.identifier,
+            "revision": click.revision
+        };
+        var singleDownloadObj = sdl.createObject(null, {
+            "url": click.downloadUrl,
+            "autoStart": true,
+            //"hash": click.downloadSha512,
+            // "algorithm": "sha512",
+            "headers": hdrs,
+            "metadata": metadataObj
+        });
+        singleDownloadObj.download(click.downloadUrl);
+        console.warn('onInstall will now download', click.downloadUrl, click.command, click.title, click.token, click.identifier, click.revision);
+        console.warn('onInstall created download', singleDownloadObj, singleDownloadObj.metadata, singleDownloadObj.metadata.title)
+        bindDownload(singleDownloadObj);
+    }
+
+    function bindDownload(dl) {
+        dl.finished.connect(function () {
+            console.warn('bindDownload finished')
+        });
+        dl.canceled.connect(function () {
+            console.warn('bindDownload canceled')
+        });
+        dl.failed.connect(function () {
+            console.warn('bindDownloafailedd ')
+        });
+    }
+
     function getDownload(packageName, revision) {
         var custom;
+        console.warn('getDownload count', udm.downloads.length);
         for (var i=0; i < udm.downloads.length; i++) {
             custom = udm.downloads[i].metadata.custom;
             if (custom.packageName == packageName
@@ -183,17 +221,28 @@ Item {
                     packageName: identifier
                     revision: model.revision
                     clickToken: token
-                    download: updates.getDownload(identifier, model.revision)
                     downloadUrl: model.downloadUrl
+                    updateState: model.updateState
+                    progress: model.progress
                     downloadSha512: downloadHash
                     version: remoteVersion
                     size: model.size
                     name: title
                     iconUrl: model.iconUrl
                     changelog: model.changelog
-
-                    onRetryUpdate: {
-                        clickUpdateManager.check(name);
+                    onPause: {
+                        console.warn('onPause', getDownload(identifier, model.revision))
+                        getDownload(identifier, model.revision).pause()
+                    }
+                    onResume: {
+                        console.warn('onResume', getDownload(identifier, model.revision))
+                        getDownload(identifier, model.revision).resume()
+                    }
+                    onInstall: createDownload(model)
+                    onDownload: createDownload(model)
+                    onRetry: {
+                        updateState = SystemUpdate.StateUnavailable;
+                        clickUpdateManager.check(packageName);
                     }
                 }
             }
@@ -222,8 +271,9 @@ Item {
                         version: remoteVersion
                         size: model.size
                         name: title
-                        iconUrl: iconUrl
+                        iconUrl: model.iconUrl
                         changelog: model.changelog
+                        updateState: SystemUpdate.StateInstalled
                     }
                 }
             }
@@ -335,19 +385,42 @@ Item {
         }
     }
 
-    Connections {
-        target: udm
-        // onDownloadCanceled: SystemUpdate.udmDownloadEnded(download.downloadId) // (SingleDownload download)
-        onDownloadFinished: {
-            console.warn('download finished', download, download.metadata.custom.packageName, download.metadata.custom.revision);
-            clickUpdateManager.clickUpdateInstalled(
-                download.metadata.custom.packageName, download.metadata.custom.revision
-            );
+    Component {
+        id: sdl
+
+        SingleDownload {
+            property string url
+            property string pkg: metadata.custom ? metadata.custom.packageName : ""
+            property int revision: metadata.custom ? metadata.custom.revision : -1
+
+            function setState (state) {
+                clickUpdateManager.setUpdateState(pkg, revision, state);
+            }
+
+            function setProgress (progress) {
+                setState(SystemUpdate.StateDownloading);
+                clickUpdateManager.setProgress(pkg, revision, progress);
+            }
+
+            onErrorChanged: {
+                setState(SystemUpdate.StateFailed)
+                console.warn(errorMessage)
+            }
+            onFinished: setState(SystemUpdate.StateInstallFinished)
+            onCanceled: setState(SystemUpdate.StateAvailable)
+            onProgressChanged: setProgress(progress)
+            onPaused: setState(SystemUpdate.StateDownloadPaused)
+            onResumed: setState(SystemUpdate.StateDownloading)
+            onStarted: setState(SystemUpdate.StateQueuedForDownload)
+            onProcessing: setState(SystemUpdate.StateInstalling)
         }
-        onDownloadsChanged: console.warn('udm downloads changed', udm.downloads);
-        // (SingleDownload download, QString path)
-        // onErrorFound: SystemUpdate.udmDownloadEnded(download.downloadId) // (SingleDownload download)
     }
+
+    Component {
+        id: mdt
+        Metadata {}
+    }
+
     Component.onCompleted: {
         if (clickUpdateManager.isCheckRequired()) {
             checkClick();

@@ -19,12 +19,48 @@
 #ifndef UPDATE_MODEL_H
 #define UPDATE_MODEL_H
 
-#include <QSqlQueryModel>
+#include <QAbstractListModel>
+#include <QModelIndex>
+#include <QDateTime>
+#include <QSqlQuery>
+#include <QSqlRecord>
+
 #include "updatestore.h"
 
 namespace UpdatePlugin
 {
-class UpdateModel : public QSqlQueryModel
+
+struct UpdateStruct {
+    QString kind;
+    QString id;
+    QString localVersion;
+    QString remoteVersion;
+    int revision;
+    QString state;
+    QDateTime createdAt;
+    QDateTime updatedAt;
+    QString title;
+    QString downloadHash;
+    int size;
+    QString iconUrl;
+    QString downloadUrl;
+    QStringList command;
+    QString changelog;
+    QString token;
+    SystemUpdate::UpdateState updateState;
+    int progress;
+    bool automatic;
+
+    bool operator==(const UpdateStruct &other) const
+    {
+       if (other.id == id && other.revision == revision)
+          return true;
+       else
+          return false;
+    }
+};
+
+class UpdateModel : public QAbstractListModel
 {
     Q_OBJECT
     // TODO: use flags
@@ -65,9 +101,11 @@ public:
       CommandRole,
       ChangelogRole,
       TokenRole,
-      LastRole = TokenRole
+      UpdateStateRole,
+      ProgressRole,
+      AutomaticRole,
+      LastRole = AutomaticRole
     };
-
 
     explicit UpdateModel(QObject *parent = 0);
     ~UpdateModel();
@@ -78,12 +116,13 @@ public:
     QVariant data(const QModelIndex &index, int role) const;
     QHash<int, QByteArray> roleNames() const;
     int count() const;
+    int rowCount(const QModelIndex &parent = QModelIndex()) const;
     void setFilter(const UpdateTypes &filter);
     UpdateTypes filter() const;
 
 public slots:
-    // Re-runs query based on the current filter, used in testing.
     Q_INVOKABLE void update();
+    Q_INVOKABLE void updateItem(const QString &id, const int &revision);
 
 signals:
     void countChanged();
@@ -91,9 +130,12 @@ signals:
 
 private:
     void initialize();
+    int find(const QString &id, const int &revision) const;
+    void setValues(UpdateStruct *update, QSqlQuery *query);
     //const static char* COLUMN_NAMES[];
     UpdateTypes m_filter;
     UpdateStore *m_store;
+    QList<UpdateStruct> m_updates;
 };
 } // UpdatePlugin
 

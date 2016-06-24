@@ -35,4 +35,10 @@ void SystemUpdate::notifyStoreChanged()
 {
     Q_EMIT (storeChanged());
 }
+
+void SystemUpdate::notifyStoreItemChanged(const QString &id,
+                                          const int &revision)
+{
+    Q_EMIT (storeItemChanged(id, revision));
+}
 } // UpdatePlugin

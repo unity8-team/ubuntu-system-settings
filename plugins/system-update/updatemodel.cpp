@@ -17,25 +17,51 @@
  */
 #include <QSqlError>
 #include <QSqlQuery>
+#include <QSqlRecord>
+#include <QSqlField>
 
 #include "systemupdate.h"
 #include "updatemodel.h"
 
 namespace UpdatePlugin
 {
+const QString ALL = "kind, id, local_version, remote_version, revision, \
+    state, created_at_utc, updated_at_utc, title, download_sha512, size, \
+    icon_url, download_url, command, changelog, click_token, \
+    update_state, progress, automatic";
+
+const QString GET_SINGLE = "SELECT " + ALL + " FROM updates WHERE id=:id \
+    AND revision=:revision";
+
+const QString GET_ALL = "SELECT " + ALL + " FROM updates";
+
+const QString GET_PENDING_CLICKS = "SELECT " + ALL + ", MAX(revision) FROM \
+    updates WHERE state=:state AND kind=:kind GROUP BY id ORDER BY \
+    title ASC";
+
+const QString GET_INSTALLED_CLICKS = "SELECT " + ALL + " FROM updates \
+    WHERE state=:state AND kind=:kind ORDER BY updated_at_utc DESC";
+
+const QString GET_INSTALLED_SYSUPDATES = "SELECT " + ALL + " FROM updates \
+    WHERE state=:state AND kind=:kind ORDER BY updated_at_utc DESC";
+
+const QString GET_INSTALLED = "SELECT " + ALL + " FROM updates WHERE \
+    state=:state ORDER BY updated_at_utc";
 
 UpdateModel::UpdateModel(QObject *parent)
-    : QSqlQueryModel(parent)
+    : QAbstractListModel(parent)
     , m_filter(UpdateTypes::All)
     , m_store(new UpdateStore(this))
+    , m_updates()
 {
     initialize();
 }
 
 UpdateModel::UpdateModel(const QString &dbpath, QObject *parent)
-    : QSqlQueryModel(parent)
+    : QAbstractListModel(parent)
     , m_filter(UpdateTypes::All)
     , m_store(new UpdateStore(dbpath, this))
+    , m_updates()
 {
     initialize();
 }
@@ -45,11 +71,13 @@ void UpdateModel::initialize()
     connect(this, SIGNAL(filterChanged()), SLOT(update()));
     connect(SystemUpdate::instance(), &SystemUpdate::storeChanged,
             this, &UpdateModel::update);
+    connect(SystemUpdate::instance(), SIGNAL(storeItemChanged(QString, int)),
+            this, SLOT(updateItem(QString, int)));
 }
 
 UpdateModel::~UpdateModel()
 {
-    query().finish();
+    // query().finish();
 }
 
 QHash<int, QByteArray> UpdateModel::roleNames() const
@@ -74,6 +102,9 @@ QHash<int, QByteArray> UpdateModel::roleNames() const
         names[ChangelogRole] = "changelog";
         names[CommandRole] = "command";
         names[TokenRole] = "token";
+        names[UpdateStateRole] = "updateState";
+        names[ProgressRole] = "progress";
+        names[AutomaticRole] = "automatic";
     }
 
     return names;
@@ -81,65 +112,59 @@ QHash<int, QByteArray> UpdateModel::roleNames() const
 
 QVariant UpdateModel::data(const QModelIndex &index, int role) const
 {
-    int col;
+    int row = index.row();
 
-    // Note: This is tied to the UpdateStore DB schema.
+    if (row < 0 || row > (m_updates.length() - 1))
+        return QVariant();
+
+    UpdateStruct u = m_updates.at(row);
+
     switch (role) {
     case Qt::DisplayRole:
-    case TitleRole:
-        col = 8;
-        break;
     case KindRole:
-        col = 0;
-        break;
-    case IconUrlRole:
-        col = 11;
-        break;
+        return u.kind;
     case IdRole:
-        col = 1;
-        break;
+        return u.id;
     case LocalVersionRole:
-        col = 2;
-        break;
+        return u.localVersion;
     case RemoteVersionRole:
-        col = 3;
-        break;
+        return u.remoteVersion;
     case RevisionRole:
-        col = 4;
-        break;
+        return u.revision;
     case StateRole:
-        col = 5;
-        break;
+        return u.state;
     case CreatedAtRole:
-        col = 6;
-        break;
+        return u.createdAt;
     case UpdatedAtRole:
-        col = 7;
-        break;
+        return u.updatedAt;
+    case TitleRole:
+        return u.title;
     case DownloadHashRole:
-        col = 9;
-        break;
+        return u.downloadHash;
     case SizeRole:
-        col = 10;
-        break;
+        return u.size;
+    case IconUrlRole:
+        return u.iconUrl;
     case DownloadUrlRole:
-        col = 12;
-        break;
+        return u.downloadUrl;
     case CommandRole:
-        col = 13;
-        break;
+        return u.command;
     case ChangelogRole:
-        col = 14;
-        break;
+        return u.changelog;
     case TokenRole:
-        col = 15;
-        break;
+        return u.token;
+    case UpdateStateRole:
+        return (int) u.updateState;
+    case ProgressRole:
+        return u.progress;
+    case AutomaticRole:
+        return u.automatic;
     }
+}
 
-    QModelIndex idx = this->index(index.row(), col);
-    // We ask for display role, because we've already determined
-    // what data to return.
-    return QSqlQueryModel::data(idx, Qt::DisplayRole);
+int UpdateModel::rowCount(const QModelIndex &parent) const
+{
+    return m_updates.size();
 }
 
 int UpdateModel::count() const
@@ -162,57 +187,137 @@ UpdateModel::UpdateTypes UpdateModel::filter() const
 
 void UpdateModel::update()
 {
+    qWarning() << "blast update...";
     int oldCount = count();
-    qWarning() << "update count(old)" << oldCount;
     if (!m_store->openDb()) return;
 
-    QString sql;
+    QSqlQuery q(m_store->db());
     switch (m_filter) {
     case UpdateTypes::All:
-        sql = "SELECT * FROM updates";
+        q.prepare(GET_ALL);
         break;
     case UpdateTypes::Pending:
     case UpdateTypes::PendingClicksUpdates:
-        // FIXME: use prepared statement.
-        sql = "SELECT *, MAX(revision) FROM updates WHERE state='"
-              + UpdateStore::STATE_PENDING + "' AND kind='"
-              + UpdateStore::KIND_CLICK + "' GROUP BY app_id"
-              " ORDER BY title ASC";
+        q.prepare(GET_PENDING_CLICKS);
+        q.bindValue(":state", UpdateStore::STATE_PENDING);
+        q.bindValue(":kind", UpdateStore::KIND_CLICK);
         break;
     case UpdateTypes::PendingSystemUpdates:
-        sql = ""; // We don't store it, use SI instead.
-        break;
+        return; // We don't store these, so bail.
     case UpdateTypes::InstalledClicksUpdates:
-        // FIXME: use prepared statement.
-        sql = "SELECT * FROM updates WHERE state='" + UpdateStore::STATE_INSTALLED + "'"
-              " AND kind='" + m_store->KIND_CLICK + "' ORDER BY updated_at_utc DESC";
+        q.prepare(GET_INSTALLED_CLICKS);
+        q.bindValue(":state", UpdateStore::STATE_INSTALLED);
+        q.bindValue(":kind", UpdateStore::KIND_CLICK);
         break;
     case UpdateTypes::InstalledSystemUpdates:
-        // FIXME: use prepared statement.
-        sql = "SELECT * FROM updates WHERE state='" + UpdateStore::STATE_INSTALLED + "'"
-              " AND kind='" + m_store->KIND_SYSTEM + "' ORDER BY updated_at_utc DESC";
+        q.prepare(GET_INSTALLED_SYSUPDATES);
+        q.bindValue(":state", UpdateStore::STATE_INSTALLED);
+        q.bindValue(":kind", UpdateStore::KIND_SYSTEM);
         break;
     case UpdateTypes::Installed:
-        sql = "SELECT * FROM updates WHERE state='" + UpdateStore::STATE_INSTALLED + "'";
+        q.prepare(GET_INSTALLED);
+        q.bindValue(":state", UpdateStore::STATE_INSTALLED);
         break;
     }
 
-    if (sql.isEmpty()) {
-        return; // nothing to execute.
+    if (!q.exec()) {
+        qCritical() << "could not update" << q.lastError().text();
+        return;
     }
 
-    setQuery(sql, m_store->db());
+    m_updates.clear();
+    beginResetModel();
 
-    if (lastError().isValid()) {
-        qWarning() << lastError();
+    while (q.next()) {
+        UpdateStruct u;
+        setValues(&u, &q);
+        m_updates.append(u);
     }
 
-    if (!query().isActive()) {
-        qWarning() << "Query was not active.";
-    }
+    endResetModel();
 
     if (oldCount != count()) {
         Q_EMIT (countChanged());
     }
+}
+
+void UpdateModel::updateItem(const QString &id, const int &revision)
+{
+    int idx = find(id, revision);
+
+    if (idx < 0) {
+        return;
+    }
+
+    if (!m_store->openDb()) return;
+    QSqlQuery q(m_store->db());
+    q.prepare(GET_SINGLE);
+    q.bindValue(":id", id);
+    q.bindValue(":revision", revision);
+
+    if (!q.exec()) {
+        qCritical() << "could fetch item from db" << q.lastError().text();
+        return;
+    }
+
+    q.next();
+
+    UpdateStruct u = m_updates.at(idx);
+    setValues(&u, &q);
+    m_updates.replace(idx, u);
+
+    QModelIndex first = index(idx, 0);
+    QModelIndex last = index(first.row(), 0);
+
+    Q_EMIT (dataChanged(first, last));
+
+    // qWarning() << q.value(1).toString();
+    // qWarning() << "updateItem" << rowCount() << id << revision;
+    // for (int i = 0; i < rowCount(); i++) {
+    //     QModelIndex idIdx = index(i, 1);
+    //     QString recordId = QSqlQueryModel::data(index(i, 1)).toString();
+    //     int recordRev = QSqlQueryModel::data(index(i, 4)).toInt();
+    //     QModelIndex last = index(i, columnCount() - 1);
+    //     if (recordId == id && recordRev == revision) {
+    //         qWarning() << record(i);
+    //         record(i).setValue(17, 50);
+    //         Q_EMIT (dataChanged(idIdx, last));
+    //         break;
+    //     }
+    // }
+}
+
+int UpdateModel::find(const QString &id, const int &revision) const
+{
+    int res = -1;
+    for (int i = 0; i < m_updates.size(); i++) {
+        if (m_updates.at(i).id == id && m_updates.at(i).revision == revision) {
+            return i;
+        }
+    }
+    return res;
+}
+
+void UpdateModel::setValues(UpdateStruct *update, QSqlQuery *query)
+{
+    update->kind = query->value(0).toString();
+    update->id = query->value(1).toString();
+    update->localVersion = query->value(2).toString();
+    update->remoteVersion = query->value(3).toString();
+    update->revision = query->value(4).toInt();
+    update->state = query->value(5).toString();
+    update->createdAt = QDateTime::fromMSecsSinceEpoch(query->value(6).toLongLong());
+    update->updatedAt = QDateTime::fromMSecsSinceEpoch(query->value(7).toLongLong());
+    update->title = query->value(8).toString();
+    update->downloadHash = query->value(9).toString();
+    update->size = query->value(10).toInt();
+    update->iconUrl = query->value(11).toString();
+    update->downloadUrl = query->value(12).toString();
+    update->command = query->value("command").toStringList();
+    update->changelog = query->value(14).toString();
+    update->token = query->value(15).toString();
+    update->updateState = m_store->stringToUpdateState(query->value(16).toString());
+    update->progress = query->value(17).toInt();
+    update->automatic = query->value(18).toBool();
 }
 } // UpdatePlugin

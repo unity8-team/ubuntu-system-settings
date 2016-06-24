@@ -28,6 +28,8 @@
 #include "clickupdatemetadata.h"
 #include "updatemodel.h"
 
+using namespace UpdatePlugin;
+
 class TstUpdateModel : public QObject
 {
     Q_OBJECT
@@ -37,8 +39,8 @@ private slots:
         m_dir = new QTemporaryDir();
         QVERIFY(m_dir->isValid());
         m_dbfile = m_dir->path() + "/cupdatesstore.db";
-        m_model = new UpdatePlugin::UpdateModel(m_dbfile);
-        m_store = new UpdatePlugin::UpdateStore(m_dbfile);
+        m_model = new UpdateModel(m_dbfile);
+        m_store = new UpdateStore(m_dbfile);
     }
     void cleanup()
     {
@@ -53,7 +55,7 @@ private slots:
     }
     void testUpdate()
     {
-        UpdatePlugin::ClickUpdateMetadata m;
+        ClickUpdateMetadata m;
         m.setName("test.app");
         m.setRevision(1);
 
@@ -64,11 +66,11 @@ private slots:
     }
     void testFilters()
     {
-        UpdatePlugin::ClickUpdateMetadata pendingApp;
+        ClickUpdateMetadata pendingApp;
         pendingApp.setName("pending.app");
         pendingApp.setRevision(1);
 
-        UpdatePlugin::ClickUpdateMetadata installedApp;
+        ClickUpdateMetadata installedApp;
         installedApp.setName("installed.app");
         installedApp.setRevision(1);
 
@@ -76,34 +78,34 @@ private slots:
         m_store->add(&installedApp);
         m_store->markInstalled("installed.app", 1);
 
-        m_model->setFilter(UpdatePlugin::UpdateModel::UpdateTypes::PendingClicksUpdates);
+        m_model->setFilter(UpdateModel::UpdateTypes::PendingClicksUpdates);
         QCOMPARE(m_model->count(), 1);
         QCOMPARE(
             m_model->data(
-                m_model->index(0, 0), UpdatePlugin::UpdateModel::IdRole
+                m_model->index(0), UpdateModel::IdRole
             ).toString(), pendingApp.name()
         );
 
-        m_model->setFilter(UpdatePlugin::UpdateModel::UpdateTypes::InstalledClicksUpdates);
+        m_model->setFilter(UpdateModel::UpdateTypes::InstalledClicksUpdates);
         QCOMPARE(m_model->count(), 1);
 
         QCOMPARE(
             m_model->data(
-                m_model->index(0, 0), UpdatePlugin::UpdateModel::IdRole
+                m_model->index(0), UpdateModel::IdRole
             ).toString(),
             installedApp.name()
         );
 
-        m_model->setFilter(UpdatePlugin::UpdateModel::UpdateTypes::All);
+        m_model->setFilter(UpdateModel::UpdateTypes::All);
         QCOMPARE(m_model->count(), 2);
     }
     void testSupersededUpdate()
     {
-        UpdatePlugin::ClickUpdateMetadata superseded;
+        ClickUpdateMetadata superseded;
         superseded.setName("some.app");
         superseded.setRevision(1);
 
-        UpdatePlugin::ClickUpdateMetadata replacement;
+        ClickUpdateMetadata replacement;
         replacement.setName("some.app");
         replacement.setRevision(2);
 
@@ -111,10 +113,10 @@ private slots:
         m_store->add(&replacement);
 
         // We only want the replacement in our model of pending updates.
-        m_model->setFilter(UpdatePlugin::UpdateModel::UpdateTypes::PendingClicksUpdates);
+        m_model->setFilter(UpdateModel::UpdateTypes::PendingClicksUpdates);
         QCOMPARE(m_model->count(), 1);
         QCOMPARE(m_model->data(
-            m_model->index(0, 1), UpdatePlugin::UpdateModel::IdRole
+            m_model->index(0), UpdateModel::IdRole
         ).toString(), replacement.name());
     }
     void testRoles()
@@ -138,10 +140,18 @@ private slots:
         app.setChangelog("* Fixed all bugs * Introduced new bugs");
         app.setClickToken("Mock-X-Click-Token");
 
-        m_store->add(&app);
-        m_model->update(); // Uses All filter.
 
-        QModelIndex idx = m_model->index(0, 0);
+        QSignalSpy storeChangedSpy(m_store, SIGNAL(changed()));
+        m_store->add(&app);
+        m_model->update();
+        QTRY_COMPARE(storeChangedSpy.count(), 1);
+        m_store->setUpdateState(app.name(), app.revision(),
+                                SystemUpdate::UpdateState::StateAvailable);
+        m_store->setProgress(app.name(), app.revision(), 50);
+
+        m_model->updateItem(app.name(), app.revision());
+        QTest::qWait(500);
+        QModelIndex idx = m_model->index(0);
 
         QCOMPARE(m_model->data(idx, UpdateModel::KindRole).toString(), UpdateStore::KIND_CLICK);
         QCOMPARE(m_model->data(idx, UpdateModel::IdRole).toString(), app.name());
@@ -157,6 +167,12 @@ private slots:
         QCOMPARE(m_model->data(idx, UpdateModel::ChangelogRole).toString(), app.changelog());
         QCOMPARE(m_model->data(idx, UpdateModel::StateRole).toString(), UpdateStore::STATE_PENDING);
 
+        int stateInt = m_model->data(idx, UpdateModel::UpdateStateRole).toInt();
+        SystemUpdate::UpdateState u = (SystemUpdate::UpdateState) stateInt;
+        QCOMPARE(u, SystemUpdate::UpdateState::StateAvailable);
+
+        QCOMPARE(m_model->data(idx, UpdateModel::ProgressRole).toInt(), 50);
+
         // Verify that the date ain't empty.
         QVERIFY(!m_model->data(idx, UpdateModel::CreatedAtRole).toString().isEmpty());
     }
@@ -165,8 +181,8 @@ private slots:
         // TODO implement!!
     }
 private:
-    UpdatePlugin::UpdateModel *m_model;
-    UpdatePlugin::UpdateStore *m_store;
+    UpdateModel *m_model;
+    UpdateStore *m_store;
     QTemporaryDir *m_dir;
     QString m_dbfile;
 };

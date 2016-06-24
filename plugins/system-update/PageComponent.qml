@@ -47,7 +47,28 @@ ItemPage {
 
     ClickUpdateManager {
         id: clickUpdateManager
+    }
 
+
+    DownloadManager {
+        id: downloadManager
+        cleanDownloads: true
+        // onDownloadCanceled: SystemUpdate.udmDownloadEnded(download.downloadId) // (SingleDownload download)
+        onDownloadFinished: {
+            console.warn('download FIN',
+                         download,
+                         download.metadata.title,
+                         download.metadata.custom.packageName,
+                         download.metadata.custom.revision);
+            clickUpdateManager.markInstalled(
+                download.metadata.custom.packageName, download.metadata.custom.revision
+            );
+        }
+        onDownloadsChanged: console.warn('udm downloads changed', downloadManager.downloads);
+        // (SingleDownload download, QString path)
+        onErrorFound: {
+            console.warn('error found!', download)
+        }
     }
 
     Setup {
@@ -78,6 +99,17 @@ ItemPage {
     //     flickableDirection: Flickable.VerticalFlick
 
     // }
+
+    UpdateModel {
+        id: clickUpdates
+        filter: UpdateModel.PendingClicksUpdates
+    }
+
+    UpdateModel {
+        id: prevUpdates
+        filter: UpdateModel.Installed
+    }
+
     Updates {
         id: updates
         anchors {
@@ -86,6 +118,13 @@ ItemPage {
             right: parent.right
             bottom: configuration.top
         }
+
+        clickUpdatesModel: clickUpdates
+        clickUpdateManager: clickUpdateManager
+        previousUpdatesModel: prevUpdates
+        udm: downloadManager
+        authenticated: clickUpdateManager.authenticated
+
         havePower: (indicatorPower.deviceState === "charging")
                     && (indicatorPower.batteryLevel > 25)
         onRequestAuthentication: uoaConfig.exec()
