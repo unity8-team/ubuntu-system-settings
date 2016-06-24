@@ -116,6 +116,7 @@ private slots:
             QCOMPARE(q.value(14).toString(), m.changelog());
             QCOMPARE(q.value(15).toString(), m.clickToken());
             QCOMPARE(q.value(16).toString(), QString("available"));
+            QCOMPARE(q.value(17).toBool(), false);
             size++;
         }
 
@@ -147,6 +148,7 @@ private slots:
             QCOMPARE(q2.value(14).toString(), m.changelog());
             QCOMPARE(q2.value(15).toString(), m.clickToken());
             QCOMPARE(q2.value(16).toString(), QString("available"));
+            QCOMPARE(q2.value(17).toBool(), false);
             size++;
         }
 
@@ -184,6 +186,7 @@ private slots:
             QCOMPARE(q3.value(14).toString(), target->changelog());
             QCOMPARE(q3.value(15).toString(), target->clickToken());
             QCOMPARE(q3.value(16).toString(), QString("available"));
+            QCOMPARE(q3.value(17).toBool(), false);
             size++;
         }
 
@@ -214,6 +217,7 @@ private slots:
             QCOMPARE(q4.value(14).toString(), m.changelog());
             QCOMPARE(q4.value(15).toString(), m.clickToken());
             QCOMPARE(q4.value(16).toString(), QString("available"));
+            QCOMPARE(q4.value(17).toBool(), false);
             size++;
         }
 
@@ -244,6 +248,7 @@ private slots:
             QCOMPARE(q5.value(14).toString(), m2.changelog());
             QCOMPARE(q5.value(15).toString(), m2.clickToken());
             QCOMPARE(q5.value(16).toString(), QString("available"));
+            QCOMPARE(q5.value(17).toBool(), false);
             size++;
         }
 

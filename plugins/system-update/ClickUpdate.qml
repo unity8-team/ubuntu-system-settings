@@ -24,7 +24,7 @@ Update {
     id: update
     property string packageName
     property int revision
-    property string command
+    property var command
     property string clickToken
     property string downloadUrl
     property string downloadSha512

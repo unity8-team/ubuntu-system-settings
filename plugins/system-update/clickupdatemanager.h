@@ -31,7 +31,7 @@
 
 #include "systemupdate.h"
 #include "clickupdatemetadata.h"
-#include "updatestore.h"
+#include "updatemodel.h"
 
 // Having the full namespaced name in a slot seems to confuse
 // SignalSpy so we need this declaration.
@@ -53,11 +53,11 @@ public:
     Q_INVOKABLE void check();
     Q_INVOKABLE void check(const QString &packageName);
     Q_INVOKABLE void cancel();
-    Q_INVOKABLE void markInstalled(const QString &packageName, const int &revision);
-    Q_INVOKABLE void setUpdateState(const QString &packageName, const int &revision,
-                                    const int &state);
-    Q_INVOKABLE void setProgress(const QString &packageName, const int &revision,
-                                 const int &progress);
+    // Q_INVOKABLE void markInstalled(const QString &packageName, const int &revision);
+    // Q_INVOKABLE void setUpdateState(const QString &packageName, const int &revision,
+    //                                 const int &state);
+    // Q_INVOKABLE void setProgress(const QString &packageName, const int &revision,
+    //                              const int &progress);
 
     Q_INVOKABLE bool isCheckRequired();
 
@@ -106,7 +106,7 @@ private:
     // Assert completion of check, signalling if check complete.
     void completionCheck();
 
-    UpdateStore *m_store;
+    UpdateModel *m_model;
     // Represents the process that we use to query installed clicks.
     QProcess m_process;
     QHash<QString, ClickUpdateMetadata*> m_metas;

@@ -20,7 +20,7 @@ add_definitions(${UBUNTUONEAUTH_CFLAGS} ${UBUNTUONEAUTH_CFLAGS_OTHER})
 
 add_library(UbuntuUpdatePanel MODULE
             systemupdate.cpp
-            updatestore.cpp
+            # updatestore.cpp
             updatemodel.cpp
             clickupdatemanager.cpp
             clickupdatemetadata.cpp

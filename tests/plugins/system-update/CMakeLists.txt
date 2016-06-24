@@ -22,7 +22,7 @@ set(PLUGIN_SOURCES
     ${CMAKE_SOURCE_DIR}/plugins/system-update/clickupdatemetadata.cpp
     ${CMAKE_SOURCE_DIR}/plugins/system-update/helpers.cpp
     ${CMAKE_SOURCE_DIR}/plugins/system-update/updatemodel.cpp
-    ${CMAKE_SOURCE_DIR}/plugins/system-update/updatestore.cpp
+    # ${CMAKE_SOURCE_DIR}/plugins/system-update/updatestore.cpp
 )
 
 set(PLUGIN_LIBS
@@ -80,11 +80,11 @@ set_tests_properties(
 )
 target_link_libraries(tst-clickupdatemanager Qt5::Test ${PLUGIN_LIBS})
 
-add_executable(tst-updatestore
-               tst_updatestore.cpp
-               ${PLUGIN_SOURCES})
-add_test(tst-updatestore tst-updatestore)
-target_link_libraries(tst-updatestore Qt5::Test ${PLUGIN_LIBS})
+# add_executable(tst-updatestore
+#                tst_updatestore.cpp
+#                ${PLUGIN_SOURCES})
+# add_test(tst-updatestore tst-updatestore)
+# target_link_libraries(tst-updatestore Qt5::Test ${PLUGIN_LIBS})
 
 add_executable(tst-updatemodel
                tst_updatemodel.cpp

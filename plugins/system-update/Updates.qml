@@ -66,6 +66,9 @@ Item {
 
     function createDownload(click) {
         console.warn('create download', click, click.command);
+        for (var i = 0; i < click.command.length; i++) {
+            console.warn('click command', i, click.command[i]);
+        }
         var metadata = {
             "command": click.command,
             "title": click.title,
@@ -90,19 +93,6 @@ Item {
         singleDownloadObj.download(click.downloadUrl);
         console.warn('onInstall will now download', click.downloadUrl, click.command, click.title, click.token, click.identifier, click.revision);
         console.warn('onInstall created download', singleDownloadObj, singleDownloadObj.metadata, singleDownloadObj.metadata.title)
-        bindDownload(singleDownloadObj);
-    }
-
-    function bindDownload(dl) {
-        dl.finished.connect(function () {
-            console.warn('bindDownload finished')
-        });
-        dl.canceled.connect(function () {
-            console.warn('bindDownload canceled')
-        });
-        dl.failed.connect(function () {
-            console.warn('bindDownloafailedd ')
-        });
     }
 
     function getDownload(packageName, revision) {
@@ -238,7 +228,10 @@ Item {
                         console.warn('onResume', getDownload(identifier, model.revision))
                         getDownload(identifier, model.revision).resume()
                     }
-                    onInstall: createDownload(model)
+                    onInstall: {
+                        console.warn("onInstall", identifier, model.revision);
+                        createDownload(model)
+                    }
                     onDownload: createDownload(model)
                     onRetry: {
                         updateState = SystemUpdate.StateUnavailable;
@@ -404,7 +397,7 @@ Item {
 
             onErrorChanged: {
                 setState(SystemUpdate.StateFailed)
-                console.warn(errorMessage)
+                if (metadata) console.warn(errorMessage)
             }
             onFinished: setState(SystemUpdate.StateInstallFinished)
             onCanceled: setState(SystemUpdate.StateAvailable)

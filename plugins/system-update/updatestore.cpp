@@ -96,16 +96,14 @@ void UpdateStore::initializeStore()
 
 void UpdateStore::add(const ClickUpdateMetadata *meta)
 {
-    if (!openDb()) return;
-
     QSqlQuery q(m_db);
     q.prepare("INSERT OR REPLACE INTO updates (id, revision, state,"
               "created_at_utc, download_sha512, title, size, icon_url,"
-              "download_url, changelog, command, click_token,"
+              "download_url, changelog, command, token,"
               "local_version, remote_version, kind, update_state, automatic) "
               "VALUES (:id, :revision, :state, :created_at_utc, "
               ":download_sha512, :title, :size, :icon_url, :download_url,"
-              ":changelog, :command, :click_token, :local_version,"
+              ":changelog, :command, :token, :local_version,"
               ":remote_version, :kind, :update_state, :automatic)");
     q.bindValue(":id", meta->name());
     q.bindValue(":revision", meta->revision());
@@ -119,7 +117,7 @@ void UpdateStore::add(const ClickUpdateMetadata *meta)
     q.bindValue(":download_url", meta->downloadUrl());
     q.bindValue(":changelog", meta->changelog());
     q.bindValue(":command", meta->command().join(" "));
-    q.bindValue(":click_token", meta->clickToken());
+    q.bindValue(":token", meta->clickToken());
     q.bindValue(":local_version", meta->localVersion());
     q.bindValue(":remote_version", meta->remoteVersion());
     q.bindValue(":kind", UpdateStore::KIND_CLICK);
@@ -129,8 +127,6 @@ void UpdateStore::add(const ClickUpdateMetadata *meta)
     if (!q.exec()) {
         qCritical() << "Could not add click update" << q.lastError().text();
     }
-
-    q.finish();
 
     Q_EMIT (changed());
 }
@@ -142,7 +138,7 @@ ClickUpdateMetadata* UpdateStore::getPending(const QString &id)
 
     QSqlQuery q(m_db);
     q.prepare("SELECT id, revision, download_sha512, title, size, icon_url,"
-              "download_url, changelog, command, click_token,"
+              "download_url, changelog, command, token,"
               "local_version, remote_version, update_state, automatic "
               "FROM updates WHERE id=:id AND state=:state AND kind=:kind");
     q.bindValue(":id", id);
@@ -218,7 +214,6 @@ QSqlDatabase UpdateStore::db() const
 
 void UpdateStore::markInstalled(const QString &id, const int &revision)
 {
-    qWarning() << "store markInstalled" << id << revision;
     if (!openDb()) return;
 
     QSqlQuery q(m_db);
@@ -229,21 +224,21 @@ void UpdateStore::markInstalled(const QString &id, const int &revision)
                 QDateTime::currentDateTimeUtc().currentMSecsSinceEpoch());
     q.bindValue(":id", id);
     q.bindValue(":revision", revision);
+
     if (!q.exec()) {
         qCritical() << "could not mark app" << id
                     << "as installed" << q.lastError().text();
     }
-    qWarning() << "marking as installed" << id << revision;
 
     q.finish();
 
     Q_EMIT (itemChanged(id, revision));
+    Q_EMIT (changed());
 }
 
 void UpdateStore::setUpdateState(const QString &id, const int &revision,
                                  const SystemUpdate::UpdateState &state)
 {
-    qWarning() << "store set update state" << id << revision;
     if (!openDb()) return;
 
     QSqlQuery q(m_db);
@@ -256,7 +251,6 @@ void UpdateStore::setUpdateState(const QString &id, const int &revision,
         qCritical() << "could not change state on " << id
                     << "as installed" << q.lastError().text();
     }
-    qWarning() << "setting state" << updateStateToString(state);
 
     q.finish();
 
@@ -266,7 +260,6 @@ void UpdateStore::setUpdateState(const QString &id, const int &revision,
 void UpdateStore::setProgress(const QString &id, const int &revision,
                               const int &progress)
 {
-    qWarning() << "store setProgress" << id << revision;
     if (!openDb()) return;
 
     QSqlQuery q(m_db);
@@ -275,11 +268,31 @@ void UpdateStore::setProgress(const QString &id, const int &revision,
     q.bindValue(":progress", progress);
     q.bindValue(":id", id);
     q.bindValue(":revision", revision);
+
     if (!q.exec()) {
         qCritical() << "could not set progress on " << id
                     << "as installed" << q.lastError().text();
     }
-    qWarning() << "setting progress" << q.executedQuery();
+
+    q.finish();
+
+    Q_EMIT (itemChanged(id, revision));
+}
+
+void UpdateStore::setDownloadId(const QString &id, const int &revision,
+                                const QString &downloadId)
+{
+    QSqlQuery q(m_db);
+    q.prepare("UPDATE updates SET download_id=:did"
+              " WHERE id=:id AND revision=:revision");
+    q.bindValue(":did", downloadId);
+    q.bindValue(":id", id);
+    q.bindValue(":revision", revision);
+
+    if (!q.exec()) {
+        qCritical() << "could not set download id on " << id
+            << q.lastError().text();
+    }
 
     q.finish();
 
@@ -315,10 +328,11 @@ bool UpdateStore::createDb()
                 "download_url TEXT,"
                 "command TEXT,"
                 "changelog TEXT,"
-                "click_token TEXT DEFAULT '',"
+                "token TEXT DEFAULT '',"
                 "update_state TEXT DEFAULT 'unknown',"
                 "progress INTEGER,"
                 "automatic INTEGER DEFAULT 0,"
+                "download_id TEXT,"
                 "PRIMARY KEY (id, revision))");
 
     if (Q_UNLIKELY(!ok)) {

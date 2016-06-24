@@ -83,7 +83,7 @@ class Manager(object):
                         "download_url": ("https://upload.wikimedia.org/wikiped"
                                          "ia/commons/9/9a/Self-portrait_at_34_"
                                          "by_Rembrandt.jpg"),
-                        "binary_filesize": 9000,
+                        "binary_filesize": 6471.77 * 1000.0,
                         "download_sha512": "1232223sdfdsffs",
                         "changelog": "New version!",
                         "title": "Test Click App"
@@ -94,8 +94,11 @@ class Manager(object):
                             "https://upload.wikimedia.org/wikipedia/"
                             "commons/a/ab/Logo-ubuntu_cof-orange-hex.svg"
                         ),
-                        "download_url": ("http://localhost:9009/download"),
-                        "binary_filesize": 12000,
+                        "download_url": ("https://upload.wikimedia.org/wikiped"
+                                         "ia/commons/d/d2/The_Harvesters%2C_p"
+                                         "ainting_by_Brugel%2C_with_frame.jpg"
+                                         ),
+                        "binary_filesize": 5015.2 * 1000.0,
                         "download_sha512": "489478",
                         "changelog": "Foo",
                         "title": "My Click App"

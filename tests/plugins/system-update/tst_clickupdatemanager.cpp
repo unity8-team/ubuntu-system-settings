@@ -50,13 +50,13 @@ private slots:
         m_dbfile = m_dir->path() + "/cupdatemanagerstore.db";
 
         m_instance = new UpdatePlugin::ClickUpdateManager(m_dbfile);
-        m_store = new UpdatePlugin::UpdateStore(m_dbfile);
+        m_model = new UpdatePlugin::UpdateStore(m_dbfile);
     }
     void cleanup()
     {
-        m_store->db().close();
+        m_model->db().close();
         delete m_instance;
-        delete m_store;
+        delete m_model;
         delete m_dir;
     }
     void testCheckCompletes()
@@ -109,17 +109,17 @@ private slots:
         QTRY_COMPARE(checkCompletedSpy.count(), 1);
 
         int actualStoreSize = 0;
-        QVERIFY(m_store->openDb());
-        QSqlQuery query = m_store->db().exec("SELECT * FROM updates");
+        QVERIFY(m_model->openDb());
+        QSqlQuery query = m_model->db().exec("SELECT * FROM updates");
 
         while (query.next()) {
             QVERIFY(query.isValid());
-            QCOMPARE(query.value(0).toString(), m_store->KIND_CLICK);
+            QCOMPARE(query.value(0).toString(), m_model->KIND_CLICK);
             actualStoreSize++;
         }
 
         QCOMPARE(actualStoreSize, 2);
-        m_store->db().close();
+        m_model->db().close();
     }
     void testCheckClick()
     {
@@ -140,8 +140,8 @@ private slots:
     }
     void testCheckRequired()
     {
-        QVERIFY(m_store->openDb());
-        QSqlQuery q(m_store->db());
+        QVERIFY(m_model->openDb());
+        QSqlQuery q(m_model->db());
         QDateTime longAgo = QDateTime::currentDateTime().addMonths(-1).addDays(-1).toUTC();
 
         q.prepare("REPLACE INTO meta (checked_at_utc) VALUES (:checked_at_utc)");
@@ -160,7 +160,7 @@ private slots:
     }
 private:
     UpdatePlugin::ClickUpdateManager *m_instance;
-    UpdatePlugin::UpdateStore *m_store;
+    UpdatePlugin::UpdateModel *m_model;
     QTemporaryDir *m_dir;
     QString m_dbfile;
 };

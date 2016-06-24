@@ -52,13 +52,6 @@ public:
              const QString &iconUrl, const int &size,
              const bool automatic);
 
-    // Mark an update as installed.
-    void markInstalled(const QString &id, const int &revision);
-    void setUpdateState(const QString &id, const int &revision,
-                        const SystemUpdate::UpdateState &state);
-    void setProgress(const QString &id, const int &revision,
-                     const int &progress);
-
     // Removes (30 days) old updates.
     void pruneDb();
 

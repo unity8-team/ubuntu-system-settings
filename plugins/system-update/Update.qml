@@ -394,7 +394,7 @@ Item {
             case SystemUpdate.StateDownloadingAutomatically:
             case SystemUpdate.StateDownloadPaused:
             case SystemUpdate.StateAutomaticDownloadPaused:
-                var down = formatter(size * progress);
+                var down = formatter((size / 100) * progress);
                 var left = formatter(size);
                 // TRANSLATORS: %1 is the human readable amount of bytes
                 // downloaded, and %2 is the total to be downloaded.

@@ -32,7 +32,7 @@ namespace UpdatePlugin
 {
 ClickUpdateManager::ClickUpdateManager(QObject *parent)
         : ClickApiClient(parent)
-        , m_store(new UpdateStore(this))
+        , m_model(new UpdateModel(this))
         , m_process()
         , m_metas()
         , m_token(UbuntuOne::Token())
@@ -44,7 +44,7 @@ ClickUpdateManager::ClickUpdateManager(QObject *parent)
 
 ClickUpdateManager::ClickUpdateManager(const QString &dbpath, QObject *parent)
         : ClickApiClient(parent)
-        , m_store(new UpdateStore(dbpath, this))
+        , m_model(new UpdateModel(dbpath, this))
         , m_process()
         , m_metas()
         , m_token(UbuntuOne::Token())
@@ -144,7 +144,7 @@ void ClickUpdateManager::check(const QString &packageName)
 {
     qWarning() << "click checker: checking this one file" << packageName
             << "...";
-    ClickUpdateMetadata *m = m_store->getPending(packageName);
+    ClickUpdateMetadata *m = m_model->getPending(packageName);
     if (m->name() == packageName) {
         qWarning() << "click checker: requesting click token for" << packageName
                 << "...";
@@ -247,7 +247,7 @@ void ClickUpdateManager::handleProcessError(const QProcess::ProcessError &error)
 
 void ClickUpdateManager::handleCheckCompleted()
 {
-    m_store->setLastCheckDate(QDateTime::currentDateTime());
+    m_model->setLastCheckDate(QDateTime::currentDateTime());
 }
 
 void ClickUpdateManager::processClickToken(const ClickUpdateMetadata *meta)
@@ -255,7 +255,7 @@ void ClickUpdateManager::processClickToken(const ClickUpdateMetadata *meta)
     qWarning() << "click checker: handling obtained token on metadata"
             << meta->name();
 
-    m_store->add(meta);
+    m_model->add(meta);
 
     completionCheck();
 }
@@ -284,7 +284,7 @@ void ClickUpdateManager::handleClickTokenFailure(
 {
     // Set empty click token in db. This way we can ask the user to retry.
     meta->setClickToken("");
-    m_store->add(meta);
+    m_model->add(meta);
 
     // We're done with it.
     m_metas.remove(meta->name());
@@ -451,7 +451,7 @@ bool ClickUpdateManager::isCheckRequired()
     // Spec says that a manual check should not happen if a check was
     // completed less than 30 minutes ago.
     QDateTime now = QDateTime::currentDateTimeUtc().addSecs(-1800); // 30 mins
-    return m_store->lastCheckDate() < now;
+    return m_model->lastCheckDate() < now;
 }
 
 bool ClickUpdateManager::authenticated()
@@ -467,25 +467,22 @@ void ClickUpdateManager::setAuthenticated(const bool authenticated)
     }
 }
 
-void ClickUpdateManager::markInstalled(const QString &packageName, const int &revision)
-{
-    qWarning() << "click manager mark installed" << packageName << revision;
-    m_store->markInstalled(packageName, revision);
-}
+// void ClickUpdateManager::markInstalled(const QString &packageName, const int &revision)
+// {
+//     m_model->markInstalled(packageName, revision);
+// }
 
 
-void ClickUpdateManager::setUpdateState(const QString &packageName, const int &revision,
-                                        const int &state)
-{
-    qWarning() << "click manager set update state" << packageName << revision << state;
-    SystemUpdate::UpdateState u = (SystemUpdate::UpdateState) state;
-    m_store->setUpdateState(packageName, revision, u);
-}
+// void ClickUpdateManager::setUpdateState(const QString &packageName, const int &revision,
+//                                         const int &state)
+// {
+//     SystemUpdate::UpdateState u = (SystemUpdate::UpdateState) state;
+//     m_model->setUpdateState(packageName, revision, u);
+// }
 
-void ClickUpdateManager::setProgress(const QString &packageName, const int &revision,
-                                     const int &progress)
-{
-    qWarning() << "click manager set progress" << packageName << revision << progress;
-    m_store->setProgress(packageName, revision, progress);
-}
+// void ClickUpdateManager::setProgress(const QString &packageName, const int &revision,
+//                                      const int &progress)
+// {
+//     m_model->setProgress(packageName, revision, progress);
+// }
 } // UpdatePlugin

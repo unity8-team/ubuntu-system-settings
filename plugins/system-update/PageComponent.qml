@@ -49,28 +49,6 @@ ItemPage {
         id: clickUpdateManager
     }
 
-
-    DownloadManager {
-        id: downloadManager
-        cleanDownloads: true
-        // onDownloadCanceled: SystemUpdate.udmDownloadEnded(download.downloadId) // (SingleDownload download)
-        onDownloadFinished: {
-            console.warn('download FIN',
-                         download,
-                         download.metadata.title,
-                         download.metadata.custom.packageName,
-                         download.metadata.custom.revision);
-            clickUpdateManager.markInstalled(
-                download.metadata.custom.packageName, download.metadata.custom.revision
-            );
-        }
-        onDownloadsChanged: console.warn('udm downloads changed', downloadManager.downloads);
-        // (SingleDownload download, QString path)
-        onErrorFound: {
-            console.warn('error found!', download)
-        }
-    }
-
     Setup {
         id: uoaConfig
         applicationId: "ubuntu-system-settings"
