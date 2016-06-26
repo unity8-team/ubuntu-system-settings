@@ -1,14 +1,16 @@
 SET (CMAKE_AUTOMOC ON)
 set(QML_SOURCES
-    PageComponent.qml
-    Updates.qml
-    Update.qml
     ClickUpdate.qml
+    Configuration.qml
+    DownloadHandler.qml
+    Global.qml
     ImageUpdate.qml
     ImageUpdatePrompt.qml
     NotAuthenticatedNotification.qml
-    Configuration.qml
-    Global.qml)
+    PageComponent.qml
+    Updates.qml
+    Update.qml
+)
 
 include_directories(
     ${CMAKE_CURRENT_BINARY_DIR}
@@ -19,15 +21,16 @@ pkg_check_modules(UBUNTUONEAUTH REQUIRED ubuntuoneauth-2.0)
 add_definitions(${UBUNTUONEAUTH_CFLAGS} ${UBUNTUONEAUTH_CFLAGS_OTHER})
 
 add_library(UbuntuUpdatePanel MODULE
-            systemupdate.cpp
             # updatestore.cpp
-            updatemodel.cpp
-            clickupdatemanager.cpp
-            clickupdatemetadata.cpp
             clickapiclient.cpp
+            clickupdate.cpp
+            clickupdatemanager.cpp
             helpers.cpp
             plugin.cpp
-            # updatemanager.cpp
+            systemupdate.cpp
+            update.cpp
+            updatestruct.cpp
+            updatemodel.cpp
             ${QML_SOURCES})
 
 qt5_use_modules(UbuntuUpdatePanel Core Qml Quick Network DBus Sql)

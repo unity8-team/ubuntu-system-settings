@@ -23,50 +23,13 @@
 #include <QDateTime>
 #include <QModelIndex>
 #include <QSqlDatabase>
-#include <QSqlQuery>
-#include <QSqlRecord>
 
 #include "systemupdate.h"
-#include "clickupdatemetadata.h"
-// #include "updatestore.h"
+#include "update.h"
+#include "updatestruct.h"
 
 namespace UpdatePlugin
 {
-
-struct UpdateStruct {
-    QString kind;
-    QString id;
-    QString localVersion;
-    QString remoteVersion;
-    int revision;
-    QString state;
-    QDateTime createdAt;
-    QDateTime updatedAt;
-    QString title;
-    QString downloadHash;
-    int size;
-    QString iconUrl;
-    QString downloadUrl;
-    QStringList command;
-    QString changelog;
-    QString token;
-    SystemUpdate::UpdateState updateState;
-    int progress;
-    bool automatic;
-    QString downloadId;
-    QString error;
-
-    bool operator==(const UpdateStruct &other) const
-    {
-        if (other.id == id && other.revision == revision)
-            return true;
-        else if (other.downloadId == downloadId)
-            return true;
-        else
-            return false;
-    }
-};
-
 class UpdateModel : public QAbstractListModel
 {
     Q_OBJECT
@@ -98,7 +61,7 @@ public:
       LocalVersionRole,
       RemoteVersionRole,
       RevisionRole,
-      StateRole,
+      InstalledRole,
       CreatedAtRole,
       UpdatedAtRole,
       TitleRole,
@@ -124,8 +87,6 @@ public:
 
     static const QString KIND_CLICK;
     static const QString KIND_SYSTEM;
-    static const QString STATE_PENDING;
-    static const QString STATE_INSTALLED;
 
     QSqlDatabase db() const; // For testing.
     QVariant data(const QModelIndex &index, int role) const;
@@ -139,8 +100,8 @@ public:
     QDateTime lastCheckDate();
     void setLastCheckDate(const QDateTime &lastCheckUtc);
 
-    void add(const ClickUpdateMetadata *meta);
-    ClickUpdateMetadata* getPending(const QString &id);
+    void add(const Update *update);
+    Update* getPending(const QString &id, const QString &kind);
 
     void add(const QString &kind, const QString &id,
              const int &revision, const QString &version,
@@ -148,28 +109,35 @@ public:
              const QString &iconUrl, const int &size,
              const bool automatic);
 
-    void setInstalled(const QString &downloadId);
-    void setError(const QString &downloadId, const QString &msg);
-    void setProgress(const QString &downloadId,
+    Q_INVOKABLE void setInstalled(const QString &downloadId);
+    Q_INVOKABLE void setError(const QString &downloadId, const QString &msg);
+    Q_INVOKABLE void setProgress(const QString &downloadId,
                      const int &progress);
-    void pauseUpdate(const QString &downloadId);
-    void resumeUpdate(const QString &downloadId);
-    void cancelUpdate(const QString &downloadId);
-    void setDownloadId(const QString &id, const int &revision,
+    Q_INVOKABLE void startUpdate(const QString &downloadId);
+    Q_INVOKABLE void processUpdate(const QString &downloadId);
+    Q_INVOKABLE void pauseUpdate(const QString &downloadId);
+    Q_INVOKABLE void resumeUpdate(const QString &downloadId);
+    Q_INVOKABLE void cancelUpdate(const QString &downloadId);
+    Q_INVOKABLE void setDownloadId(const QString &id, const int &revision,
                        const QString &downloadId);
-
     Q_INVOKABLE bool contains(const QString &downloadId) const;
+
     void pruneDb();
 
+    static QString updateStateToString(const SystemUpdate::UpdateState &state);
+    static SystemUpdate::UpdateState stringToUpdateState(const QString &state);
+
 public slots:
-    Q_INVOKABLE void refresh();
-    Q_INVOKABLE void refreshItem(const QString &id, const int &revision);
+    void refresh();
+    void refreshItem(const QString &id, const int &revision);
+    void refreshItem(const QString &downloadId);
 
 signals:
     void countChanged();
     void filterChanged();
     void changed();
     void updateChanged(const QString &id, const int &revision);
+    void updateChanged(const QString &downloadId);
 
 private:
     void initialize();
@@ -178,13 +146,12 @@ private:
     bool openDb();
 
     int find(const QString &id, const int &revision) const;
-    void setValues(UpdateStruct *update, QSqlQuery *query);
+    int find(const QString &downloadId) const;
+    void refresh(const int &idx);
 
     void setState(const QString &downloadId,
                   const SystemUpdate::UpdateState &state);
     void unsetDownloadId(const QString &downloadId);
-    QString updateStateToString(const SystemUpdate::UpdateState &state);
-    SystemUpdate::UpdateState stringToUpdateState(const QString &state);
 
     QSqlDatabase m_db;
     QString m_dbpath;

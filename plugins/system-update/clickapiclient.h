@@ -19,8 +19,6 @@
 #ifndef CLICK_API_CLIENT_H
 #define CLICK_API_CLIENT_H
 
-#include <token.h>
-
 #include <QtNetwork/QNetworkAccessManager>
 #include <QtNetwork/QNetworkReply>
 
@@ -36,42 +34,31 @@ public:
 
     QString errorString() const;
 
-    // Set the token we will provide to the remote API for identification.
-    void setToken(const UbuntuOne::Token &token);
-
-    // Cancel each pending network reply.
     void cancel();
+    QNetworkAccessManager* nam();
+    void initializeReply(QNetworkReply *reply);
 
-protected slots:
-    virtual void requestSucceeded(QNetworkReply *reply) = 0;
+    bool validReply(const QNetworkReply *reply);
+    void setErrorString(const QString &errorString);
+
+public slots:
+    void requestSucceeded(QNetworkReply *reply);
     void requestFinished(QNetworkReply *reply);
     void requestSslFailed(QNetworkReply *reply, const QList<QSslError> &errors);
 
 signals:
+    void success(QNetworkReply *reply);
     void errorStringChanged();
     void networkError();
     void serverError();
     void credentialError();
 
-    // This signal is emitted specifically for cancelling active network
-    // replies.
     void abortNetworking();
 
-protected:
-    // Set up connections on a network reply.
-    void initializeReply(QNetworkReply *reply);
-
-    // Return whether or not the reply was valid. Emits signals as to indicate
-    // what went wrong, if anything.
-    bool validReply(const QNetworkReply *reply);
-    void setErrorString(const QString &errorString);
-
+private:
     QString m_errorString;
-    UbuntuOne::Token m_token;
     QNetworkAccessManager m_nam;
 
-private:
-    // Set up connections to the network manager.
     void initializeNam();
 };
 } // UpdatePlugin

@@ -70,19 +70,13 @@ private slots:
         QVERIFY(readyReadStandardOutputSpy.wait());
     }
 
-protected:
-    void requestSucceeded(QNetworkReply *reply)
-    {
-
-    }
-
 private:
     QNetworkReply* request(const QString &url) {
         QUrl u(url);
         QNetworkRequest request;
         request.setUrl(u);
 
-        QNetworkReply *reply = m_nam.get(request);
+        QNetworkReply *reply = nam()->get(request);
         initializeReply(reply);
         return reply;
     }

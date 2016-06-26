@@ -31,11 +31,12 @@
 namespace UpdatePlugin
 {
 ClickUpdateManager::ClickUpdateManager(QObject *parent)
-        : ClickApiClient(parent)
+        : QObject(parent)
         , m_model(new UpdateModel(this))
         , m_process()
-        , m_metas()
-        , m_token(UbuntuOne::Token())
+        , m_apiClient(this)
+        , m_updates()
+        , m_u1token(UbuntuOne::Token())
         , m_authenticated(true)
         , m_checking(false)
 {
@@ -43,11 +44,12 @@ ClickUpdateManager::ClickUpdateManager(QObject *parent)
 }
 
 ClickUpdateManager::ClickUpdateManager(const QString &dbpath, QObject *parent)
-        : ClickApiClient(parent)
+        : QObject(parent)
         , m_model(new UpdateModel(dbpath, this))
         , m_process()
-        , m_metas()
-        , m_token(UbuntuOne::Token())
+        , m_apiClient(this)
+        , m_updates()
+        , m_u1token(UbuntuOne::Token())
         , m_authenticated(true)
         , m_checking(false)
 {
@@ -58,9 +60,7 @@ void ClickUpdateManager::init()
 {
     initializeProcess();
     initializeSSOService();
-
-    connect(this, SIGNAL(serverError()), this, SLOT(handleCommunicationErrors()));
-    connect(this, SIGNAL(networkError()), this, SLOT(handleCommunicationErrors()));
+    initializeApiClient();
 
     connect(this, SIGNAL(checkStarted()), this, SLOT(handleCheckStart()));
     connect(this, SIGNAL(checkCompleted()), this, SLOT(handleCheckStop()));
@@ -73,34 +73,45 @@ ClickUpdateManager::~ClickUpdateManager()
 {
 }
 
-void ClickUpdateManager::initializeMeta(const ClickUpdateMetadata *meta)
+void ClickUpdateManager::initializeUpdate(const ClickUpdate *update)
 {
-    QObject::connect(meta, SIGNAL(credentialError()), this,
-            SIGNAL(credentialError()));
-    QObject::connect(meta, SIGNAL(credentialError()), this,
-            SLOT(handleCredentialsFailed()));
-    QObject::connect(meta,
-            SIGNAL(clickTokenRequestSucceeded(const ClickUpdateMetadata*)),
-            this, SLOT(processClickToken(const ClickUpdateMetadata*)));
-    QObject::connect(meta,
-            SIGNAL(clickTokenRequestFailed(ClickUpdateMetadata*)), this,
-            SLOT(handleClickTokenFailure(ClickUpdateMetadata*)));
+    connect(update, SIGNAL(clickTokenRequestSucceeded(const ClickUpdate*)),
+            this, SLOT(processClickToken(const ClickUpdate*)));
+    connect(update, SIGNAL(clickTokenRequestFailed(ClickUpdate*)),
+            this, SLOT(handleClickTokenFailure(ClickUpdate*)));
 }
 
 void ClickUpdateManager::initializeProcess()
 {
-    QObject::connect(&m_process, SIGNAL(finished(const int&)), this,
-            SLOT(processInstalledClicks(const int&)));
+    connect(&m_process, SIGNAL(finished(const int&)),
+            this, SLOT(processInstalledClicks(const int&)));
 }
 
 void ClickUpdateManager::initializeSSOService()
 {
-    connect(&m_ssoService, SIGNAL(credentialsFound(const Token&)), this,
-            SLOT(handleCredentialsFound(const Token&)));
-    connect(&m_ssoService, SIGNAL(credentialsNotFound()), this,
-            SLOT(handleCredentialsFailed()));
-    connect(&m_ssoService, SIGNAL(credentialsDeleted()), this,
-            SLOT(handleCredentialsFailed()));
+    connect(&m_ssoService, SIGNAL(credentialsFound(const Token&)),
+            this, SLOT(handleCredentialsFound(const Token&)));
+    connect(&m_ssoService, SIGNAL(credentialsNotFound()),
+            this, SLOT(handleCredentialsFailed()));
+    connect(&m_ssoService, SIGNAL(credentialsDeleted()),
+            this, SLOT(handleCredentialsFailed()));
+}
+
+void ClickUpdateManager::initializeApiClient()
+{
+    connect(&m_apiClient, SIGNAL(success(QNetworkReply*)),
+            this, SLOT(handleMetadata(QNetworkReply*)));
+    connect(&m_apiClient, SIGNAL(serverError()),
+            this, SLOT(handleCommunicationErrors()));
+    connect(&m_apiClient, SIGNAL(networkError()),
+            this, SLOT(handleCommunicationErrors()));
+
+    connect(&m_apiClient, SIGNAL(networkError()),
+            this, SIGNAL(networkError()));
+    connect(&m_apiClient, SIGNAL(serverError()),
+            this, SIGNAL(serverError()));
+    connect(&m_apiClient, SIGNAL(credentialError()),
+            this, SIGNAL(credentialError()));
 }
 
 // Basically, there are three async operations, with one for each
@@ -109,26 +120,26 @@ void ClickUpdateManager::initializeSSOService()
 // errorString.
 //
 // The first operation is obtaining the list of clicks installed on the system.
-// The second is receiving the metadata for clicks we found installed.
+// The second is receiving the update data for clicks we found installed.
 // The third is signing the download url for each click update. We ask the
-// ClickUpdateMetadata to do this for us.
+// ClickUpdate to do this for us.
 //
-// All of this can be bypassed if we find cached metadata newer than 24 hours.
+// All of this can be bypassed if we find cached update data newer than 24 hours.
 void ClickUpdateManager::check()
 {
     qWarning() << "click checker: check...";
 
     // Don't check for click updates if there are no credentials,
     // instead ask for credentials.
-    if (!m_token.isValid() && !Helpers::isIgnoringCredentials()) {
+    if (!m_u1token.isValid() && !Helpers::isIgnoringCredentials()) {
         m_ssoService.getCredentials();
         return;
     }
 
     Q_EMIT (checkStarted());
 
-    m_metas.clear();
-    setErrorString("");
+    m_updates.clear();
+    m_apiClient.setErrorString("");
 
     // Start process of getting the list of installed clicks.
     QStringList args("list");
@@ -144,11 +155,12 @@ void ClickUpdateManager::check(const QString &packageName)
 {
     qWarning() << "click checker: checking this one file" << packageName
             << "...";
-    ClickUpdateMetadata *m = m_model->getPending(packageName);
-    if (m->name() == packageName) {
+    ClickUpdate *m = qobject_cast<ClickUpdate*>(m_model->getPending(packageName,
+                                                                    UpdateModel::KIND_CLICK));
+    if (m && m->name() == packageName) {
         qWarning() << "click checker: requesting click token for" << packageName
                 << "...";
-        initializeMeta(m);
+        initializeUpdate(m);
         m->setAutomatic(true);
         m->requestClickToken();
     }
@@ -157,13 +169,12 @@ void ClickUpdateManager::check(const QString &packageName)
 // Tries to shut down all checks we might currently be doing.
 void ClickUpdateManager::cancel()
 {
-    // Abort all click update metadata objects.
-    foreach (const QString &name, m_metas.keys())m_metas.value(name)->cancel();
+    // Abort all click update update data objects.
+    foreach (const QString &name, m_updates.keys())m_updates.value(name)->cancel();
 
     m_process.terminate();
 
-    // This tells active replies to abort.
-    Q_EMIT abortNetworking();
+    m_apiClient.abortNetworking();
     Q_EMIT checkCanceled();
 }
 
@@ -179,7 +190,7 @@ void ClickUpdateManager::processInstalledClicks(const int &exitCode)
 
     if (exitCode > 0) {
         QString e("Failed to enumerate installed clicks (%1).");
-        setErrorString(e.arg(exitCode));
+        m_apiClient.setErrorString(e.arg(exitCode));
         Q_EMIT checkFailed();
         return;
     }
@@ -197,25 +208,25 @@ void ClickUpdateManager::processInstalledClicks(const int &exitCode)
 
     int i;
     for (i = 0; i < array.size(); i++) {
-        ClickUpdateMetadata *meta = new ClickUpdateMetadata(this);
-        meta->setToken(m_token);
-        initializeMeta(meta);
+        ClickUpdate *update = new ClickUpdate(this);
+        update->setU1Token(m_u1token);
+        initializeUpdate(update);
 
         QJsonObject object = array.at(i).toObject();
-        meta->setName(object.value("name").toString());
-        meta->setTitle(object.value("title").toString());
-        meta->setLocalVersion(object.value("version").toString());
+        update->setName(object.value("name").toString());
+        update->setTitle(object.value("title").toString());
+        update->setLocalVersion(object.value("version").toString());
 
         QStringList command;
         // command << Helpers::whichPkcon() << "-p" << "install-local" << "$file";
         command << "sleep" << "5";
-        meta->setCommand(command);
+        update->setCommand(command);
 
-        m_metas.insert(meta->name(), meta);
-        qWarning() << "click checker: queueing up" << meta->name();
+        m_updates.insert(update->name(), update);
+        qWarning() << "click checker: queueing up" << update->name();
     }
 
-    // Populate each ClickUpdateMetadata with remote metadata.
+    // Populate each ClickUpdate with remote update data.
     requestClickMetadata();
 }
 
@@ -250,12 +261,12 @@ void ClickUpdateManager::handleCheckCompleted()
     m_model->setLastCheckDate(QDateTime::currentDateTime());
 }
 
-void ClickUpdateManager::processClickToken(const ClickUpdateMetadata *meta)
+void ClickUpdateManager::processClickToken(const ClickUpdate *update)
 {
-    qWarning() << "click checker: handling obtained token on metadata"
-            << meta->name();
+    qWarning() << "click checker: handling obtained token on update data"
+            << update->name();
 
-    m_model->add(meta);
+    m_model->add(update);
 
     completionCheck();
 }
@@ -264,30 +275,30 @@ void ClickUpdateManager::completionCheck()
 {
     qWarning() << "click checker: checking for completion...";
     qWarning() << "click checker: completion check had"
-            << m_metas.keys().count() << "keys";
+            << m_updates.keys().count() << "keys";
 
     // Check if all tokens are fetched.
-    foreach (const QString &name, m_metas.keys()){
-        if (m_metas.value(name)->clickToken().isEmpty()) {
+    foreach (const QString &name, m_updates.keys()){
+        if (m_updates.value(name)->token().isEmpty()) {
             qWarning() << "click checker: not complete.";
             return; // Not done.
         }
     }
 
-    // All metas had signed download urls, so we're done.
+    // All updates had signed download urls, so we're done.
     Q_EMIT checkCompleted();
     qWarning() << "click checker: complete.";
 }
 
 void ClickUpdateManager::handleClickTokenFailure(
-        ClickUpdateMetadata *meta)
+        ClickUpdate *update)
 {
     // Set empty click token in db. This way we can ask the user to retry.
-    meta->setClickToken("");
-    m_model->add(meta);
+    update->setToken("");
+    m_model->add(update);
 
     // We're done with it.
-    m_metas.remove(meta->name());
+    m_updates.remove(update->name());
     completionCheck();
 }
 
@@ -295,9 +306,9 @@ void ClickUpdateManager::handleClickTokenFailure(
 void ClickUpdateManager::handleCredentialsFound(const UbuntuOne::Token &token)
 {
     qWarning() << "found credentials";
-    m_token = token;
+    m_u1token = token;
 
-    if (!m_token.isValid()) {
+    if (!m_u1token.isValid()) {
         qWarning() << "updateManager got invalid token.";
         handleCredentialsFailed();
         return;
@@ -305,8 +316,6 @@ void ClickUpdateManager::handleCredentialsFound(const UbuntuOne::Token &token)
 
     setAuthenticated(true);
 
-    // Set click update checker's token, cancel and start a new check.
-    setToken(token);
     cancel();
     check();
 }
@@ -315,12 +324,9 @@ void ClickUpdateManager::handleCredentialsFailed()
 {
     qWarning() << "failed credentials";
     m_ssoService.invalidateCredentials();
-    m_token = UbuntuOne::Token();
+    m_u1token = UbuntuOne::Token();
 
-    // Ask click update checker to stop checking for updates.
-    // Revoke the token given to click update checker.
     cancel();
-    setToken(m_token);
 
     // We've invalidated the token, and the user is now not authenticated.
     setAuthenticated(false);
@@ -334,12 +340,12 @@ void ClickUpdateManager::handleCommunicationErrors()
 
 void ClickUpdateManager::requestClickMetadata()
 {
-    qWarning() << "click checker: asking for remote metadata...";
+    qWarning() << "click checker: asking for remote update data...";
     QJsonObject serializer;
 
     // Construct the “name” list
     QJsonArray array;
-    foreach (const QString &name, m_metas.keys())array.append(QJsonValue(name));
+    foreach (const QString &name, m_updates.keys())array.append(QJsonValue(name));
     serializer.insert("name", array);
 
     // Create list of frameworks.
@@ -353,7 +359,9 @@ void ClickUpdateManager::requestClickMetadata()
 
     QString urlApps = Helpers::clickMetadataUrl();
     qWarning() << "click checker: using url" << urlApps;
-    QString authHeader = m_token.signUrl(urlApps, QStringLiteral("POST"), true);
+    QString authHeader = m_u1token.signUrl(
+        urlApps, QStringLiteral("POST"), true
+    );
     QUrl url(urlApps);
     url.setQuery(authHeader);
 
@@ -365,11 +373,11 @@ void ClickUpdateManager::requestClickMetadata()
             QByteArray::fromStdString(Helpers::getArchitecture()));
     request.setUrl(url);
 
-    QNetworkReply *reply = m_nam.post(request, content);
-    initializeReply(reply);
+    QNetworkReply *reply = m_apiClient.nam()->post(request, content);
+    m_apiClient.initializeReply(reply);
 }
 
-void ClickUpdateManager::requestSucceeded(QNetworkReply *reply)
+void ClickUpdateManager::handleMetadata(QNetworkReply *reply)
 {
     qWarning() << "click checker: request succeeded...";
 
@@ -379,13 +387,13 @@ void ClickUpdateManager::requestSucceeded(QNetworkReply *reply)
     if (document.isArray()) {
         parseClickMetadata(document.array());
     } else {
-        setErrorString("Got unexpected JSON from server.");
-        Q_EMIT serverError();
+        m_apiClient.setErrorString("Got unexpected JSON from server.");
+        handleCommunicationErrors();
     }
 
     if (jsonError->error != QJsonParseError::NoError) {
-        setErrorString("json parse failed: " + jsonError->errorString());
-        Q_EMIT serverError();
+        m_apiClient.setErrorString("json parse failed: " + jsonError->errorString());
+        handleCommunicationErrors();
     }
 
     delete jsonError;
@@ -398,7 +406,7 @@ void ClickUpdateManager::parseClickMetadata(const QJsonArray &array)
         auto object = array.at(i).toObject();
         auto name = object["name"].toString();
 
-        qWarning() << "click checker: got metadata for" << name;
+        qWarning() << "click checker: got update data for" << name;
 
         auto version = object["version"].toString();
         auto icon_url = object["icon_url"].toString();
@@ -408,40 +416,40 @@ void ClickUpdateManager::parseClickMetadata(const QJsonArray &array)
         auto size = object["binary_filesize"].toInt();
         auto title = object["title"].toString();
         auto revision = object["revision"].toInt();
-        if (m_metas.contains(name)) {
-            ClickUpdateMetadata *meta = m_metas.value(name);
-            meta->setRemoteVersion(version);
-            if (meta->isUpdateRequired()) {
+        if (m_updates.contains(name)) {
+            ClickUpdate *update = m_updates.value(name);
+            update->setRemoteVersion(version);
+            if (update->isUpdateRequired()) {
 
-                qWarning() << "click checker: update of" << meta->name()
+                qWarning() << "click checker: update of" << update->name()
                         << "is required";
 
-                meta->setIconUrl(icon_url);
-                meta->setDownloadUrl(url);
-                meta->setBinaryFilesize(size);
-                meta->setDownloadSha512(download_sha512);
-                meta->setChangelog(changelog);
-                meta->setTitle(title);
-                meta->setRevision(revision);
+                update->setIconUrl(icon_url);
+                update->setDownloadUrl(url);
+                update->setBinaryFilesize(size);
+                update->setDownloadSha512(download_sha512);
+                update->setChangelog(changelog);
+                update->setTitle(title);
+                update->setRevision(revision);
 
                 // Start the process of obtaining a click token for this
                 // click update.
-                meta->requestClickToken();
+                update->requestClickToken();
             } else {
                 // Update not required, let's remove it.
-                m_metas.remove(meta->name());
+                m_updates.remove(update->name());
                 completionCheck();
             }
         }
     }
 
-    // Prune m_metas, removing those without necessary metadata. These are
+    // Prune m_updates, removing those without necessary update data. These are
     // either locally installed clicks, or retracted from the API (?).
     qWarning() << "click checker: pruning...";
-    foreach (const QString &name, m_metas.keys()) {
-        qWarning() << name << m_metas.value(name)->remoteVersion();
-        if (m_metas.value(name)->remoteVersion().isEmpty())
-            m_metas.remove(name);
+    foreach (const QString &name, m_updates.keys()) {
+        qWarning() << name << m_updates.value(name)->remoteVersion();
+        if (m_updates.value(name)->remoteVersion().isEmpty())
+            m_updates.remove(name);
     }
     completionCheck();
 }

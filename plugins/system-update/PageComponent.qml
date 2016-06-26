@@ -26,7 +26,6 @@ import Ubuntu.Connectivity 1.0
 import Ubuntu.Components 1.3
 import Ubuntu.Components.ListItems 1.3 as ListItem
 import Ubuntu.Components.Popups 1.3
-import Ubuntu.DownloadManager 1.2
 import Ubuntu.OnlineAccounts.Client 0.1
 import Ubuntu.SystemSettings.Update 1.0
 
@@ -88,6 +87,11 @@ ItemPage {
         filter: UpdateModel.Installed
     }
 
+    DownloadHandler {
+        id: downloadHandler
+        updateModel: clickUpdates
+    }
+
     Updates {
         id: updates
         anchors {
@@ -100,7 +104,8 @@ ItemPage {
         clickUpdatesModel: clickUpdates
         clickUpdateManager: clickUpdateManager
         previousUpdatesModel: prevUpdates
-        udm: downloadManager
+        downloadHandler: downloadHandler
+
         authenticated: clickUpdateManager.authenticated
 
         havePower: (indicatorPower.deviceState === "charging")

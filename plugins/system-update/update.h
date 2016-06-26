@@ -16,16 +16,16 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef CLICK_UPDATE_METADATA_H
-#define CLICK_UPDATE_METADATA_H
+#ifndef UPDATE_H
+#define UPDATE_H
 
-#include "clickapiclient.h"
-
-#define X_CLICK_TOKEN "X-Click-Token"
+#include <QObject>
+#include <QString>
+#include <QStringList>
 
 namespace UpdatePlugin
 {
-class ClickUpdateMetadata : public ClickApiClient
+class Update : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(QString anonDownloadUrl READ anonDownloadUrl
@@ -62,14 +62,14 @@ class ClickUpdateMetadata : public ClickApiClient
             WRITE setRemoteVersion NOTIFY remoteVersionChanged)
     Q_PROPERTY(QString localVersion READ localVersion
             WRITE setLocalVersion NOTIFY localVersionChanged)
-    Q_PROPERTY(QString clickToken READ clickToken NOTIFY clickTokenChanged)
+    Q_PROPERTY(QString token READ token NOTIFY tokenChanged)
     Q_PROPERTY(QStringList command READ command
                WRITE setCommand NOTIFY commandChanged)
     Q_PROPERTY(bool automatic READ automatic WRITE setAutomatic
             NOTIFY automaticChanged)
 public:
-    explicit ClickUpdateMetadata(QObject *parent = 0);
-    ~ClickUpdateMetadata();
+    explicit Update(QObject *parent = 0);
+    ~Update();
 
     QString anonDownloadUrl() const;
     uint binaryFilesize() const;
@@ -88,7 +88,7 @@ public:
     QString title() const;
     QString remoteVersion() const;
     QString localVersion() const;
-    QString clickToken() const;
+    QString token() const;
     QStringList command() const;
     bool automatic() const;
 
@@ -109,18 +109,11 @@ public:
     void setTitle(const QString &title);
     void setRemoteVersion(const QString &version);
     void setLocalVersion(const QString &version);
-    void setClickToken(const QString &clickToken);
+    void setToken(const QString &token);
     void setCommand(const QStringList &command);
     void setAutomatic(const bool automatic);
 
-    void requestClickToken();
     bool isUpdateRequired();
-
-protected slots:
-    void requestSucceeded(QNetworkReply *reply);
-//     void tokenRequestSslFailed(const QList<QSslError> &errors);
-//     void tokenRequestFailed(const QNetworkReply::NetworkError &code);
-//     void tokenRequestSucceeded(const QNetworkReply* reply);
 
 signals:
     void anonDownloadUrlChanged();
@@ -141,14 +134,11 @@ signals:
     void titleChanged();
     void remoteVersionChanged();
     void localVersionChanged();
-    void clickTokenChanged();
+    void tokenChanged();
     void commandChanged();
     void automaticChanged();
 
-    void clickTokenRequestSucceeded(const ClickUpdateMetadata *meta);
-    void clickTokenRequestFailed(ClickUpdateMetadata *meta);
-
-private:
+protected:
     QString m_anonDownloadUrl;
     uint m_binaryFilesize;
     QString m_changelog;
@@ -166,10 +156,10 @@ private:
     QString m_title;
     QString m_localVersion;
     QString m_remoteVersion;
-    QString m_clickToken;
+    QString m_token;
     QStringList m_command;
     bool m_automatic;
 };
 } // UpdatePlugin
 
-#endif // CLICK_UPDATE_METADATA_H
+#endif // UPDATE_H

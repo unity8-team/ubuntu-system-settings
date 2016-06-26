@@ -22,11 +22,9 @@
 
 namespace UpdatePlugin
 {
-
-ClickApiClient::ClickApiClient(QObject *parent) :
-        QObject(parent),
-        m_errorString(""),
-        m_token(UbuntuOne::Token())
+ClickApiClient::ClickApiClient(QObject *parent)
+    : QObject(parent)
+    , m_errorString("")
 {
     initializeNam();
 }
@@ -41,27 +39,27 @@ void ClickApiClient::initializeNam()
     connect(&m_nam, SIGNAL(finished(QNetworkReply *)), this,
             SLOT(requestFinished(QNetworkReply *)));
     connect(&m_nam, SIGNAL(sslErrors(QNetworkReply *, const QList<QSslError>&)),
-            this,
-            SLOT(requestSslFailed(QNetworkReply *, const QList<QSslError>&)));
+            this, SLOT(requestSslFailed(QNetworkReply *, const QList<QSslError>&)));
+}
+
+QNetworkAccessManager* ClickApiClient::nam()
+{
+    return &m_nam;
 }
 
 void ClickApiClient::initializeReply(QNetworkReply *reply)
 {
-    qWarning() << "click proto: init reply" << reply;
+    qWarning() << "click api client: init reply" << reply;
     connect(this, SIGNAL(abortNetworking()), reply, SLOT(abort()));
-}
-void ClickApiClient::setToken(const UbuntuOne::Token &token)
-{
-    m_token = token;
 }
 
 void ClickApiClient::requestSslFailed(QNetworkReply *reply,
                                       const QList<QSslError> &errors)
 {
     QString errorString = "SSL error: ";
-    foreach (const QSslError &err, errors){
-    errorString += err.errorString();
-}
+    foreach (const QSslError &err, errors) {
+        errorString += err.errorString();
+    }
     setErrorString(errorString);
     Q_EMIT serverError();
     reply->deleteLater();
@@ -69,7 +67,7 @@ void ClickApiClient::requestSslFailed(QNetworkReply *reply,
 
 void ClickApiClient::requestFinished(QNetworkReply *reply)
 {
-    qWarning() << "click proto: something finished" << reply;
+    qWarning() << "click api client: something finished" << reply;
     // check for http error status and emit all the required signals
     if (!validReply(reply)) {
         reply->deleteLater();
@@ -94,6 +92,11 @@ void ClickApiClient::requestFinished(QNetworkReply *reply)
     reply->deleteLater();
 }
 
+void ClickApiClient::requestSucceeded(QNetworkReply *reply)
+{
+    Q_EMIT (success(reply));
+}
+
 bool ClickApiClient::validReply(const QNetworkReply *reply)
 {
     auto statusAttr = reply->attribute(
@@ -106,7 +109,7 @@ bool ClickApiClient::validReply(const QNetworkReply *reply)
     }
 
     int httpStatus = statusAttr.toInt();
-    qWarning() << "click proto: HTTP Status: " << httpStatus;
+    qWarning() << "click api client: HTTP Status: " << httpStatus;
 
     if (httpStatus == 401 || httpStatus == 403) {
         setErrorString(QString("Server responded with %1.").arg(httpStatus));

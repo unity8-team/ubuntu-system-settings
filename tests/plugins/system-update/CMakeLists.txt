@@ -16,11 +16,13 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 set(PLUGIN_SOURCES
-    ${CMAKE_SOURCE_DIR}/plugins/system-update/systemupdate.cpp
     ${CMAKE_SOURCE_DIR}/plugins/system-update/clickapiclient.cpp
+    ${CMAKE_SOURCE_DIR}/plugins/system-update/clickupdate.cpp
     ${CMAKE_SOURCE_DIR}/plugins/system-update/clickupdatemanager.cpp
-    ${CMAKE_SOURCE_DIR}/plugins/system-update/clickupdatemetadata.cpp
     ${CMAKE_SOURCE_DIR}/plugins/system-update/helpers.cpp
+    ${CMAKE_SOURCE_DIR}/plugins/system-update/systemupdate.cpp
+    ${CMAKE_SOURCE_DIR}/plugins/system-update/update.cpp
+    ${CMAKE_SOURCE_DIR}/plugins/system-update/updatestruct.cpp
     ${CMAKE_SOURCE_DIR}/plugins/system-update/updatemodel.cpp
     # ${CMAKE_SOURCE_DIR}/plugins/system-update/updatestore.cpp
 )
@@ -56,17 +58,17 @@ set_tests_properties(
 )
 target_link_libraries(tst-clickapiclient Qt5::Test ${PLUGIN_LIBS})
 
-add_executable(tst-clickupdatemetadata
-               tst_clickupdatemetadata.cpp
+add_executable(tst-clickupdate
+               tst_clickupdate.cpp
                mockclickservertestcase.h
                ${PLUGIN_SOURCES})
-add_test(tst-clickupdatemetadata tst-clickupdatemetadata)
+add_test(tst-clickupdate tst-clickupdate)
 set_tests_properties(
-    tst-clickupdatemetadata
+    tst-clickupdate
         PROPERTIES
         ENVIRONMENT "IGNORE_CREDENTIALS=1;URL_APPS=http://127.0.0.1:9009/metadata"
 )
-target_link_libraries(tst-clickupdatemetadata Qt5::Test ${PLUGIN_LIBS})
+target_link_libraries(tst-clickupdate Qt5::Test ${PLUGIN_LIBS})
 
 add_executable(tst-clickupdatemanager
                tst_clickupdatemanager.cpp
@@ -85,6 +87,13 @@ target_link_libraries(tst-clickupdatemanager Qt5::Test ${PLUGIN_LIBS})
 #                ${PLUGIN_SOURCES})
 # add_test(tst-updatestore tst-updatestore)
 # target_link_libraries(tst-updatestore Qt5::Test ${PLUGIN_LIBS})
+
+add_executable(tst-update
+               tst_update.cpp
+               mockclickservertestcase.h
+               ${PLUGIN_SOURCES})
+add_test(tst-update tst-update)
+target_link_libraries(tst-update Qt5::Test ${PLUGIN_LIBS})
 
 add_executable(tst-updatemodel
                tst_updatemodel.cpp

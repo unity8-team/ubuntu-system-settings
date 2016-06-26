@@ -29,6 +29,10 @@ import Ubuntu.SystemSettings.Update 1.0
 Item {
     id: updates
     property var clickUpdateManager
+    property var clickUpdatesModel
+    property var previousUpdatesModel
+    property var downloadHandler
+
     property Flickable flickable: scrollWidget
     property bool havePower: false
     property bool online: NetworkingStatus.online
@@ -40,9 +44,6 @@ Item {
         count += updates.haveSystemUpdate ? 1 : 0;
         count += clickUpdatesModel.count
     }
-    property var clickUpdatesModel
-    property var previousUpdatesModel
-    property var udm
 
     function checkSystem() {
         SystemImage.checkForUpdate();
@@ -65,6 +66,10 @@ Item {
     }
 
     function createDownload(click) {
+        if (click.downloadId) {
+            console.warn(click.title, "already had downloadId", click.downloadId);
+            return;
+        }
         console.warn('create download', click, click.command);
         for (var i = 0; i < click.command.length; i++) {
             console.warn('click command', i, click.command[i]);
@@ -83,7 +88,7 @@ Item {
             "revision": click.revision
         };
         var singleDownloadObj = sdl.createObject(null, {
-            "url": click.downloadUrl,
+            // "url": click.downloadUrl,
             "autoStart": true,
             //"hash": click.downloadSha512,
             // "algorithm": "sha512",
@@ -93,17 +98,35 @@ Item {
         singleDownloadObj.download(click.downloadUrl);
         console.warn('onInstall will now download', click.downloadUrl, click.command, click.title, click.token, click.identifier, click.revision);
         console.warn('onInstall created download', singleDownloadObj, singleDownloadObj.metadata, singleDownloadObj.metadata.title)
+        singleDownloadObj.downloadIdChanged.connect(function () {
+            var identifier = this.metadata.custom.packageName;
+            var revision = this.metadata.custom.revision;
+            console.warn('onDownloadIdChanged', identifier, revision, this.downloadId)
+            if (this.downloadId && identifier && (typeof revision !== "undefined"))
+                clickUpdatesModel.setDownloadId(identifier, revision, this.downloadId);
+        }.bind(singleDownloadObj))
+        singleDownloadObj.progressChanged.connect(function () {
+            console.warn('onProgressChanged', this.progress);
+            clickUpdatesModel.setProgress(this.downloadId, this.progress);
+        }.bind(singleDownloadObj))
+        singleDownloadObj.started.connect(function () {
+            console.warn('onStarted');
+            clickUpdatesModel.startUpdate(this.downloadId);
+        }.bind(singleDownloadObj))
+        singleDownloadObj.processing.connect(function () {
+            console.warn('onProcessing');
+            clickUpdatesModel.processUpdate(this.downloadId);
+        }.bind(singleDownloadObj))
     }
 
-    function getDownload(packageName, revision) {
-        var custom;
-        console.warn('getDownload count', udm.downloads.length);
-        for (var i=0; i < udm.downloads.length; i++) {
-            custom = udm.downloads[i].metadata.custom;
-            if (custom.packageName == packageName
-                && custom.revision == revision) {
-                return udm.downloads[i];
-            }
+    function getDownload(downloadId) {
+        console.warn('getDownload', downloadId);
+        var dls = downloadHandler.downloads;
+        for (var i=0; i < dls.length; i++) {
+            console.warn('getDownload length:', dls.length, "looking at:", i,
+                         dls[i], "id:", dls[i].downloadId, dls[i].downloadId === downloadId);
+            if (dls[i].downloadId === downloadId)
+                return dls[i];
         }
         return null;
     }
@@ -207,30 +230,30 @@ Item {
                 delegate: ClickUpdate {
                     objectName: "updatesClickUpdate" + index
                     anchors { left: clickUpdates.left; right: clickUpdates.right }
-                    command: model.command
-                    packageName: identifier
-                    revision: model.revision
-                    clickToken: token
-                    downloadUrl: model.downloadUrl
+                    // command: model.command
+                    // packageName: identifier
+                    // revision: model.revision
+                    // clickToken: token
+                    // downloadUrl: model.downloadUrl
                     updateState: model.updateState
                     progress: model.progress
-                    downloadSha512: downloadHash
+                    // downloadSha512: downloadHash
                     version: remoteVersion
                     size: model.size
                     name: title
                     iconUrl: model.iconUrl
                     changelog: model.changelog
                     onPause: {
-                        console.warn('onPause', getDownload(identifier, model.revision))
-                        getDownload(identifier, model.revision).pause()
+                        console.warn('onPause', getDownload(model.downloadId));
+                        getDownload(model.downloadId).pause();
                     }
                     onResume: {
-                        console.warn('onResume', getDownload(identifier, model.revision))
-                        getDownload(identifier, model.revision).resume()
+                        console.warn('onResume', getDownload(model.downloadId));
+                        getDownload(model.downloadId).resume();
                     }
                     onInstall: {
                         console.warn("onInstall", identifier, model.revision);
-                        createDownload(model)
+                        createDownload(model);
                     }
                     onDownload: createDownload(model)
                     onRetry: {
@@ -382,30 +405,7 @@ Item {
         id: sdl
 
         SingleDownload {
-            property string url
-            property string pkg: metadata.custom ? metadata.custom.packageName : ""
-            property int revision: metadata.custom ? metadata.custom.revision : -1
 
-            function setState (state) {
-                clickUpdateManager.setUpdateState(pkg, revision, state);
-            }
-
-            function setProgress (progress) {
-                setState(SystemUpdate.StateDownloading);
-                clickUpdateManager.setProgress(pkg, revision, progress);
-            }
-
-            onErrorChanged: {
-                setState(SystemUpdate.StateFailed)
-                if (metadata) console.warn(errorMessage)
-            }
-            onFinished: setState(SystemUpdate.StateInstallFinished)
-            onCanceled: setState(SystemUpdate.StateAvailable)
-            onProgressChanged: setProgress(progress)
-            onPaused: setState(SystemUpdate.StateDownloadPaused)
-            onResumed: setState(SystemUpdate.StateDownloading)
-            onStarted: setState(SystemUpdate.StateQueuedForDownload)
-            onProcessing: setState(SystemUpdate.StateInstalling)
         }
     }
 

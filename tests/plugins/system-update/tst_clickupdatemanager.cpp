@@ -24,8 +24,11 @@
 
 #include "mockclickservertestcase.h"
 
-#include "clickupdatemetadata.h"
+#include "updatemodel.h"
+#include "clickupdate.h"
 #include "clickupdatemanager.h"
+
+using namespace UpdatePlugin;
 
 class TstClickUpdateManager
     : public QObject
@@ -49,12 +52,11 @@ private slots:
         QVERIFY(m_dir->isValid());
         m_dbfile = m_dir->path() + "/cupdatemanagerstore.db";
 
-        m_instance = new UpdatePlugin::ClickUpdateManager(m_dbfile);
-        m_model = new UpdatePlugin::UpdateStore(m_dbfile);
+        m_instance = new ClickUpdateManager(m_dbfile);
+        m_model = new UpdateModel(m_dbfile);
     }
     void cleanup()
     {
-        m_model->db().close();
         delete m_instance;
         delete m_model;
         delete m_dir;
@@ -95,9 +97,6 @@ private slots:
         QSignalSpy checkFailedSpy(m_instance, SIGNAL(checkFailed()));
         QVERIFY(checkFailedSpy.wait());
 
-        QVERIFY(!m_instance->errorString().isEmpty());
-        qDebug() << "Click update checker said:" << m_instance->errorString();
-
         startMockClickServer();
     }
     void testStoresClick()
@@ -109,12 +108,11 @@ private slots:
         QTRY_COMPARE(checkCompletedSpy.count(), 1);
 
         int actualStoreSize = 0;
-        QVERIFY(m_model->openDb());
         QSqlQuery query = m_model->db().exec("SELECT * FROM updates");
 
         while (query.next()) {
             QVERIFY(query.isValid());
-            QCOMPARE(query.value(0).toString(), m_model->KIND_CLICK);
+            QCOMPARE(query.value(0).toString(), UpdateModel::KIND_CLICK);
             actualStoreSize++;
         }
 
@@ -127,10 +125,10 @@ private slots:
         m_instance->check();
         QVERIFY(checkCompletedSpy.wait());
 
-        // const UpdatePlugin::ClickUpdateMetadata *m;
+        // const ClickUpdateMetadata *m;
         // QObject::connect(
-        //     m_instance, &UpdatePlugin::ClickUpdateManager::updateAvailable,
-        //     [&](const UpdatePlugin::ClickUpdateMetadata *value) {
+        //     m_instance, &ClickUpdateManager::updateAvailable,
+        //     [&](const ClickUpdateMetadata *value) {
         //         m = value;
         //     }
         // );
@@ -140,7 +138,6 @@ private slots:
     }
     void testCheckRequired()
     {
-        QVERIFY(m_model->openDb());
         QSqlQuery q(m_model->db());
         QDateTime longAgo = QDateTime::currentDateTime().addMonths(-1).addDays(-1).toUTC();
 
@@ -159,8 +156,8 @@ private slots:
         QVERIFY(!m_instance->isCheckRequired());
     }
 private:
-    UpdatePlugin::ClickUpdateManager *m_instance;
-    UpdatePlugin::UpdateModel *m_model;
+    ClickUpdateManager *m_instance;
+    UpdateModel *m_model;
     QTemporaryDir *m_dir;
     QString m_dbfile;
 };

@@ -25,7 +25,7 @@
 #include <QTimeZone>
 #include <QTest>
 
-#include "clickupdatemetadata.h"
+#include "update.h"
 #include "updatemodel.h"
 
 using namespace UpdatePlugin;
@@ -52,7 +52,7 @@ private slots:
     }
     void testUpdate()
     {
-        ClickUpdateMetadata m;
+        Update m;
         m.setName("test.app");
         m.setRevision(1);
 
@@ -63,11 +63,11 @@ private slots:
     }
     void testFilters()
     {
-        ClickUpdateMetadata pendingApp;
+        Update pendingApp;
         pendingApp.setName("pending.app");
         pendingApp.setRevision(1);
 
-        ClickUpdateMetadata installedApp;
+        Update installedApp;
         installedApp.setName("installed.app");
         installedApp.setRevision(1);
 
@@ -99,11 +99,11 @@ private slots:
     }
     void testSupersededUpdate()
     {
-        ClickUpdateMetadata superseded;
+        Update superseded;
         superseded.setName("some.app");
         superseded.setRevision(1);
 
-        ClickUpdateMetadata replacement;
+        Update replacement;
         replacement.setName("some.app");
         replacement.setRevision(2);
 
@@ -120,7 +120,7 @@ private slots:
     void testRoles()
     {
         using namespace UpdatePlugin;
-        ClickUpdateMetadata app;
+        Update app;
         QStringList mc;
         mc << "ls" << "la";
 
@@ -135,7 +135,7 @@ private slots:
         app.setDownloadUrl("http://example.org/testapp.click");
         app.setCommand(mc);
         app.setChangelog("* Fixed all bugs * Introduced new bugs");
-        app.setClickToken("Mock-X-Click-Token");
+        app.setToken("token");
 
         QSignalSpy storeChangedSpy(m_model, SIGNAL(changed()));
         m_model->add(&app);
@@ -160,7 +160,7 @@ private slots:
         QCOMPARE(m_model->data(idx, UpdateModel::DownloadUrlRole).toString(), app.downloadUrl());
         QCOMPARE(m_model->data(idx, UpdateModel::CommandRole).toStringList(), app.command());
         QCOMPARE(m_model->data(idx, UpdateModel::ChangelogRole).toString(), app.changelog());
-        QCOMPARE(m_model->data(idx, UpdateModel::StateRole).toString(), UpdateModel::STATE_PENDING);
+        QCOMPARE(m_model->data(idx, UpdateModel::InstalledRole).toBool(), false);
         QCOMPARE(m_model->data(idx, UpdateModel::AutomaticRole).toBool(), app.automatic());
         QCOMPARE(m_model->data(idx, UpdateModel::DownloadIdRole).toString(), QString("1234"));
         QCOMPARE(m_model->data(idx, UpdateModel::ErrorRole).toString(), QString(""));
@@ -216,7 +216,7 @@ private slots:
     }
     void testUpdateLifecycle()
     {
-        ClickUpdateMetadata m;
+        Update m;
         QStringList mc;
         mc << "ls" << "la";
         m.setRevision(42);
@@ -228,11 +228,11 @@ private slots:
         m.setIconUrl("http://example.org/testapp.png");
         m.setDownloadUrl("http://example.org/testapp.click");
         m.setChangelog("* Fixed all bugs * Introduced new bugs");
-        m.setClickToken("Mock-X-Click-Token");
+        m.setToken("token");
         m.setCommand(mc);
         m.setDownloadSha512("987654323456789");
 
-        ClickUpdateMetadata m2;
+        Update m2;
         m2.setRevision(100);
         m2.setName("com.ubuntu.myapp");
         m2.setLocalVersion("1.1");
@@ -242,11 +242,11 @@ private slots:
         m2.setIconUrl("http://example.org/myapp.png");
         m2.setDownloadUrl("http://example.org/myapp.click");
         m2.setChangelog("* First version");
-        m2.setClickToken("Mock-X-Click-Token");
+        m2.setToken("token");
         m2.setCommand(mc);
         m2.setDownloadSha512("293847");
 
-        // Add a click app
+        // Add an app
         m_model->add(&m);
 
         int size = 0;
@@ -267,7 +267,7 @@ private slots:
             QCOMPARE(q.value(12).toString(), m.downloadUrl());
             QCOMPARE(q.value(13).toString(), m.command().join(" "));
             QCOMPARE(q.value(14).toString(), m.changelog());
-            QCOMPARE(q.value(15).toString(), m.clickToken());
+            QCOMPARE(q.value(15).toString(), m.token());
             QCOMPARE(q.value(16).toString(), QString("available"));
             QCOMPARE(q.value(17).toBool(), false);
             size++;
@@ -275,8 +275,8 @@ private slots:
 
         QCOMPARE(size, 1);
 
-        // We had to refresh tokens, so we re-add the clickmetadata.
-        m.setClickToken("New-Mock-X-Click-Token");
+        // We had to refresh tokens, so we re-add the update.
+        m.setToken("newtoken");
         m_model->add(&m);
 
         size = 0;
@@ -297,7 +297,7 @@ private slots:
             QCOMPARE(q2.value(12).toString(), m.downloadUrl());
             QCOMPARE(q2.value(13).toString(), m.command().join(" "));
             QCOMPARE(q2.value(14).toString(), m.changelog());
-            QCOMPARE(q2.value(15).toString(), m.clickToken());
+            QCOMPARE(q2.value(15).toString(), m.token());
             QCOMPARE(q2.value(16).toString(), QString("available"));
             QCOMPARE(q2.value(17).toBool(), false);
             size++;
@@ -305,14 +305,14 @@ private slots:
 
         QCOMPARE(size, 1);
 
-        // Add second click app
+        // Add second app
         m_model->add(&m2);
 
         size = 0;
         QSqlQuery q3 = m_model->db().exec("SELECT * FROM updates");
 
         while (q3.next()) {
-            ClickUpdateMetadata *target;
+            Update *target;
 
             if (q3.value(1).toString() == m.name())
                 target = &m;
@@ -333,7 +333,7 @@ private slots:
             QCOMPARE(q3.value(12).toString(), target->downloadUrl());
             QCOMPARE(q3.value(13).toString(), target->command().join(" "));
             QCOMPARE(q3.value(14).toString(), target->changelog());
-            QCOMPARE(q3.value(15).toString(), target->clickToken());
+            QCOMPARE(q3.value(15).toString(), target->token());
             QCOMPARE(q3.value(16).toString(), QString("available"));
             QCOMPARE(q3.value(17).toBool(), false);
             size++;
@@ -363,7 +363,7 @@ private slots:
             QCOMPARE(q4.value(12).toString(), m.downloadUrl());
             QCOMPARE(q4.value(13).toString(), m.command().join(" "));
             QCOMPARE(q4.value(14).toString(), m.changelog());
-            QCOMPARE(q4.value(15).toString(), m.clickToken());
+            QCOMPARE(q4.value(15).toString(), m.token());
             QCOMPARE(q4.value(16).toString(), QString("installfinished"));
             QCOMPARE(q4.value(17).toBool(), false);
             size++;
@@ -389,7 +389,7 @@ private slots:
             QCOMPARE(q5.value(12).toString(), m2.downloadUrl());
             QCOMPARE(q5.value(13).toString(), m2.command().join(" "));
             QCOMPARE(q5.value(14).toString(), m2.changelog());
-            QCOMPARE(q5.value(15).toString(), m2.clickToken());
+            QCOMPARE(q5.value(15).toString(), m2.token());
             QCOMPARE(q5.value(16).toString(), QString("available"));
             QCOMPARE(q5.value(17).toBool(), false);
             size++;
@@ -399,11 +399,11 @@ private slots:
     }
     void testPruning()
     {
-        ClickUpdateMetadata recentUpdate;
+        Update recentUpdate;
         recentUpdate.setName("new.app");
         recentUpdate.setRevision(1);
 
-        ClickUpdateMetadata oldUpdate;
+        Update oldUpdate;
         oldUpdate.setName("old.app");
         oldUpdate.setRevision(1);
 
@@ -461,6 +461,27 @@ private slots:
             size++;
         }
         QCOMPARE(size, 1);
+    }
+    void testChangeSignal()
+    {
+        Update app;
+        app.setName("new.app");
+        app.setRevision(1);
+
+        QSignalSpy storeChangedSpy(m_model, SIGNAL(changed()));
+        m_model->add(&app);
+        QTRY_COMPARE(storeChangedSpy.count(), 1);
+
+    }
+    void testUpdateChangeSignal()
+    {
+        Update app;
+        app.setName("new.app");
+        app.setRevision(1);
+
+        QSignalSpy storeChangedSpy(m_model, SIGNAL(changed()));
+        m_model->add(&app);
+        QTRY_COMPARE(storeChangedSpy.count(), 1);
     }
 private:
     UpdateModel *m_model;

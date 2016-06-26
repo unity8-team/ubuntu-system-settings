@@ -15,31 +15,35 @@
  * You should have received a copy of the GNU General Public License along
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * This file represents the UI of the System Updates panel.
  */
-
+import Ubuntu.DownloadManager 1.2
 import Ubuntu.SystemSettings.Update 1.0
 
 DownloadManager {
-    property var clickModel
+    property var updateModel
     onDownloadFinished: {
-        clickModel.setInstalled(download.downloadId)
+        console.warn('onDownloadFinished', download.downloadId);
+        updateModel.setInstalled(download.downloadId)
     }
 
     onDownloadPaused: {
-        clickModel.pauseDownload(download.downloadId)
+        console.warn('onDownloadPaused', download.downloadId);
+        updateModel.pauseUpdate(download.downloadId)
     }
 
     onDownloadResumed: {
-        clickModel.resumeDownload(download.downloadId)
+        console.warn('onDownloadResumed', download.downloadId);
+        updateModel.resumeUpdate(download.downloadId)
     }
 
     onDownloadCanceled: {
-        clickModel.cancelDownload(download.downloadId)
+        console.warn('onDownloadCanceled', download.downloadId);
+        updateModel.cancelUpdate(download.downloadId)
     }
 
     onErrorFound: {
-        clickModel.setError(download.downloadId, download.errorMessage)
+        console.warn('onErrorFound', download.downloadId);
+        updateModel.setError(download.downloadId, download.errorMessage)
     }
 
     // // onDownloadCanceled: SystemUpdate.udmDownloadEnded(download.downloadId) // (SingleDownload download)

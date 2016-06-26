@@ -27,7 +27,7 @@
 namespace UpdatePlugin
 {
 const QString ALL = "kind, id, local_version, remote_version, revision, \
-    state, created_at_utc, updated_at_utc, title, download_sha512, size, \
+    installed, created_at_utc, updated_at_utc, title, download_sha512, size, \
     icon_url, download_url, command, changelog, token, \
     update_state, progress, automatic, download_id, error";
 
@@ -37,22 +37,20 @@ const QString GET_SINGLE = "SELECT " + ALL + " FROM updates WHERE id=:id \
 const QString GET_ALL = "SELECT " + ALL + " FROM updates";
 
 const QString GET_PENDING_CLICKS = "SELECT " + ALL + ", MAX(revision) FROM \
-    updates WHERE state=:state AND kind=:kind GROUP BY id ORDER BY \
+    updates WHERE installed=:installed AND kind=:kind GROUP BY id ORDER BY \
     title ASC";
 
 const QString GET_INSTALLED_CLICKS = "SELECT " + ALL + " FROM updates \
-    WHERE state=:state AND kind=:kind ORDER BY updated_at_utc DESC";
+    WHERE installed=:installed AND kind=:kind ORDER BY updated_at_utc DESC";
 
 const QString GET_INSTALLED_SYSUPDATES = "SELECT " + ALL + " FROM updates \
-    WHERE state=:state AND kind=:kind ORDER BY updated_at_utc DESC";
+    WHERE installed=:installed AND kind=:kind ORDER BY updated_at_utc DESC";
 
 const QString GET_INSTALLED = "SELECT " + ALL + " FROM updates WHERE \
-    state=:state ORDER BY updated_at_utc";
+    installed=:installed ORDER BY updated_at_utc";
 
 const QString UpdateModel::KIND_CLICK = QLatin1String("click");
 const QString UpdateModel::KIND_SYSTEM = QLatin1String("system");
-const QString UpdateModel::STATE_PENDING = QLatin1String("pending");
-const QString UpdateModel::STATE_INSTALLED = QLatin1String("installed");
 
 UpdateModel::UpdateModel(QObject *parent)
     : QAbstractListModel(parent)
@@ -85,12 +83,20 @@ UpdateModel::UpdateModel(const QString &dbpath, QObject *parent)
 void UpdateModel::initialize()
 {
     connect(this, SIGNAL(filterChanged()), SLOT(refresh()));
-    // connect(SystemUpdate::instance(), &SystemUpdate::storeChanged,
-    //         this, &UpdateModel::refresh);
-    // connect(SystemUpdate::instance(), SIGNAL(storeItemChanged(QString, int)),
-    //         this, SLOT(refreshItem(QString, int)));
-}
+    connect(this, SIGNAL(changed()),
+            SystemUpdate::instance(), SLOT(notifyModelChanged()));
+    connect(this, SIGNAL(updateChanged(QString, int)),
+            SystemUpdate::instance(), SLOT(notifyModelItemChanged(QString, int)));
+    connect(this, SIGNAL(updateChanged(QString)),
+            SystemUpdate::instance(), SLOT(notifyModelItemChanged(QString)));
 
+    connect(SystemUpdate::instance(), SIGNAL(modelChanged()),
+            this, SLOT(refresh()));
+    connect(SystemUpdate::instance(), SIGNAL(modelItemChanged(QString, int)),
+            this, SLOT(refreshItem(QString, int)));
+    connect(SystemUpdate::instance(), SIGNAL(modelItemChanged(QString)),
+            this, SLOT(refreshItem(QString)));
+}
 
 void UpdateModel::initializeDb()
 {
@@ -138,7 +144,7 @@ QHash<int, QByteArray> UpdateModel::roleNames() const
         names[LocalVersionRole] = "localVersion";
         names[RemoteVersionRole] = "remoteVersion";
         names[RevisionRole] = "revision";
-        names[StateRole] = "state";
+        names[InstalledRole] = "installed";
         names[CreatedAtRole] = "createdAt";
         names[UpdatedAtRole] = "updatedAt";
         names[TitleRole] = "title";
@@ -183,8 +189,8 @@ QVariant UpdateModel::data(const QModelIndex &index, int role) const
         return u.remoteVersion;
     case RevisionRole:
         return u.revision;
-    case StateRole:
-        return u.state;
+    case InstalledRole:
+        return u.installed;
     case CreatedAtRole:
         return u.createdAt;
     case UpdatedAtRole:
@@ -259,24 +265,24 @@ void UpdateModel::refresh()
     case UpdateTypes::Pending:
     case UpdateTypes::PendingClicksUpdates:
         q.prepare(GET_PENDING_CLICKS);
-        q.bindValue(":state", UpdateModel::STATE_PENDING);
+        q.bindValue(":installed", false);
         q.bindValue(":kind", UpdateModel::KIND_CLICK);
         break;
     case UpdateTypes::PendingSystemUpdates:
         return; // We don't store these, so bail.
     case UpdateTypes::InstalledClicksUpdates:
         q.prepare(GET_INSTALLED_CLICKS);
-        q.bindValue(":state", UpdateModel::STATE_INSTALLED);
+        q.bindValue(":installed", true);
         q.bindValue(":kind", UpdateModel::KIND_CLICK);
         break;
     case UpdateTypes::InstalledSystemUpdates:
         q.prepare(GET_INSTALLED_SYSUPDATES);
-        q.bindValue(":state", UpdateModel::STATE_INSTALLED);
+        q.bindValue(":installed", true);
         q.bindValue(":kind", UpdateModel::KIND_SYSTEM);
         break;
     case UpdateTypes::Installed:
         q.prepare(GET_INSTALLED);
-        q.bindValue(":state", UpdateModel::STATE_INSTALLED);
+        q.bindValue(":installed", true);
         break;
     }
 
@@ -290,7 +296,7 @@ void UpdateModel::refresh()
 
     while (q.next()) {
         UpdateStruct u;
-        setValues(&u, &q);
+        u.setValues(&q);
         m_updates.append(u);
     }
 
@@ -303,17 +309,39 @@ void UpdateModel::refresh()
 
 void UpdateModel::refreshItem(const QString &id, const int &revision)
 {
+    // qWarning() << Q_FUNC_INFO << id << revision;
     int idx = find(id, revision);
 
     if (idx < 0) {
         return;
     }
 
+    // qWarning() << Q_FUNC_INFO << "found something";
+    refresh(idx);
+}
+
+void UpdateModel::refreshItem(const QString &downloadId)
+{
+    // qWarning() << Q_FUNC_INFO << downloadId;
+    int idx = find(downloadId);
+
+    if (idx < 0) {
+        return;
+    }
+
+    // qWarning() << Q_FUNC_INFO << "found some id";
+    refresh(idx);
+}
+
+void UpdateModel::refresh(const int &idx)
+{
+    UpdateStruct update = m_updates[idx];
+    // qWarning() << Q_FUNC_INFO << idx << update.id << update.revision;
     if (!openDb()) return;
     QSqlQuery q(m_db);
     q.prepare(GET_SINGLE);
-    q.bindValue(":id", id);
-    q.bindValue(":revision", revision);
+    q.bindValue(":id", update.id);
+    q.bindValue(":revision", update.revision);
 
     if (!q.exec()) {
         qCritical() << "could fetch item from db" << q.lastError().text();
@@ -322,63 +350,53 @@ void UpdateModel::refreshItem(const QString &id, const int &revision)
 
     q.next();
 
-    UpdateStruct u = m_updates.at(idx);
-    setValues(&u, &q);
-    m_updates.replace(idx, u);
+    update.setValues(&q);
+    m_updates.replace(idx, update);
 
     QModelIndex first = index(idx, 0);
     QModelIndex last = index(first.row(), 0);
 
+    // qWarning() << Q_FUNC_INFO << "datachanged" << idx << first << last;
     Q_EMIT (dataChanged(first, last));
-
-    // qWarning() << q.value(1).toString();
-    // qWarning() << "updateItem" << rowCount() << id << revision;
-    // for (int i = 0; i < rowCount(); i++) {
-    //     QModelIndex idIdx = index(i, 1);
-    //     QString recordId = QSqlQueryModel::data(index(i, 1)).toString();
-    //     int recordRev = QSqlQueryModel::data(index(i, 4)).toInt();
-    //     QModelIndex last = index(i, columnCount() - 1);
-    //     if (recordId == id && recordRev == revision) {
-    //         qWarning() << record(i);
-    //         record(i).setValue(17, 50);
-    //         Q_EMIT (dataChanged(idIdx, last));
-    //         break;
-    //     }
-    // }
 }
 
-
-void UpdateModel::add(const ClickUpdateMetadata *meta)
+void UpdateModel::add(const Update *update)
 {
+    // qWarning() << "adding" << update->name();
     if (!openDb()) return;
 
     QSqlQuery q(m_db);
-    q.prepare("INSERT OR REPLACE INTO updates (id, revision, state,"
+    q.prepare("INSERT OR REPLACE INTO updates (id, revision, installed,"
               "created_at_utc, download_sha512, title, size, icon_url,"
               "download_url, changelog, command, token,"
               "local_version, remote_version, kind, update_state, automatic) "
-              "VALUES (:id, :revision, :state, :created_at_utc, "
+              "VALUES (:id, :revision, :installed, :created_at_utc, "
               ":download_sha512, :title, :size, :icon_url, :download_url,"
               ":changelog, :command, :token, :local_version,"
               ":remote_version, :kind, :update_state, :automatic)");
-    q.bindValue(":id", meta->name());
-    q.bindValue(":revision", meta->revision());
-    q.bindValue(":state", UpdateModel::STATE_PENDING);
+    q.bindValue(":id", update->name());
+    q.bindValue(":revision", update->revision());
+    q.bindValue(":installed", false);
     q.bindValue(":created_at_utc",
                 QDateTime::currentDateTimeUtc().currentMSecsSinceEpoch());;
-    q.bindValue(":download_sha512", meta->downloadSha512());
-    q.bindValue(":title", meta->title());
-    q.bindValue(":size", meta->binaryFilesize());
-    q.bindValue(":icon_url", meta->iconUrl());
-    q.bindValue(":download_url", meta->downloadUrl());
-    q.bindValue(":changelog", meta->changelog());
-    q.bindValue(":command", meta->command().join(" "));
-    q.bindValue(":token", meta->clickToken());
-    q.bindValue(":local_version", meta->localVersion());
-    q.bindValue(":remote_version", meta->remoteVersion());
+    q.bindValue(":download_sha512", update->downloadSha512());
+    q.bindValue(":title", update->title());
+    q.bindValue(":size", update->binaryFilesize());
+    q.bindValue(":icon_url", update->iconUrl());
+    q.bindValue(":download_url", update->downloadUrl());
+    q.bindValue(":changelog", update->changelog());
+    q.bindValue(":command", update->command().join(" "));
+    q.bindValue(":token", update->token());
+    q.bindValue(":local_version", update->localVersion());
+    q.bindValue(":remote_version", update->remoteVersion());
     q.bindValue(":kind", UpdateModel::KIND_CLICK);
-    q.bindValue(":update_state", updateStateToString(SystemUpdate::UpdateState::StateAvailable));
-    q.bindValue(":automatic", meta->automatic());
+    q.bindValue(
+        ":update_state",
+        updateStateToString(
+            SystemUpdate::UpdateState::StateAvailable
+        )
+    );
+    q.bindValue(":automatic", update->automatic());
 
     if (!q.exec()) {
         qCritical() << "Could not add click update" << q.lastError().text();
@@ -387,22 +405,22 @@ void UpdateModel::add(const ClickUpdateMetadata *meta)
     Q_EMIT (changed());
 }
 
-ClickUpdateMetadata* UpdateModel::getPending(const QString &id)
+Update* UpdateModel::getPending(const QString &id, const QString &kind)
 {
-    ClickUpdateMetadata *m = new ClickUpdateMetadata(this);
+    Update *m = new Update(this);
     if (!openDb()) return m;
 
     QSqlQuery q(m_db);
     q.prepare("SELECT id, revision, download_sha512, title, size, icon_url,"
               "download_url, changelog, command, token,"
               "local_version, remote_version, update_state, automatic "
-              "FROM updates WHERE id=:id AND state=:state AND kind=:kind");
+              "FROM updates WHERE id=:id AND installed=:installed AND kind=:kind");
     q.bindValue(":id", id);
-    q.bindValue(":state", UpdateModel::STATE_PENDING);
-    q.bindValue(":kind", UpdateModel::KIND_CLICK);
+    q.bindValue(":installed", false);
+    q.bindValue(":kind", kind);
 
     if (!q.exec()) {
-        qCritical() << "Could not fetch click update" << q.lastError().text();
+        qCritical() << "Could not fetch update" << q.lastError().text();
         return m;
     }
 
@@ -417,7 +435,7 @@ ClickUpdateMetadata* UpdateModel::getPending(const QString &id)
     m->setDownloadUrl(q.value(6).toString());
     m->setChangelog(q.value(7).toString());
     m->setCommand(q.value(8).toStringList());
-    m->setClickToken(q.value(0).toString());
+    m->setToken(q.value(0).toString());
     m->setLocalVersion(q.value(10).toString());
     m->setRemoteVersion(q.value(11).toString());
     m->setAutomatic(q.value(12).toBool());
@@ -436,14 +454,14 @@ void UpdateModel::add(const QString &kind, const QString &id,
     if (!openDb()) return;
 
     QSqlQuery q(m_db);
-    q.prepare("INSERT OR REPLACE INTO updates (id, revision, state,"
+    q.prepare("INSERT OR REPLACE INTO updates (id, revision, installed,"
               "created_at_utc, title, size, icon_url, changelog,"
               "remote_version, kind, automatic) VALUES (:id,"
-              ":revision, :state, :created_at_utc, :title,"
+              ":revision, :installed, :created_at_utc, :title,"
               ":size, :icon_url, :changelog, :remote_version, :kind, :automatic)");
     q.bindValue(":id", id);
     q.bindValue(":revision", revision);
-    q.bindValue(":state", UpdateModel::STATE_PENDING);
+    q.bindValue(":installed", false);
     q.bindValue(":created_at_utc",
                 QDateTime::currentDateTimeUtc().currentMSecsSinceEpoch());;
     q.bindValue(":title", title);
@@ -468,9 +486,9 @@ void UpdateModel::setInstalled(const QString &downloadId)
     if (!openDb()) return;
 
     QSqlQuery q(m_db);
-    q.prepare("UPDATE updates SET state=:state, updated_at_utc=:updated_at_utc"
-              " WHERE download_id=:did");
-    q.bindValue(":state", UpdateModel::STATE_INSTALLED);
+    q.prepare("UPDATE updates SET installed=:installed, "
+              "updated_at_utc=:updated_at_utc WHERE download_id=:did");
+    q.bindValue(":installed", true);
     q.bindValue(":updated_at_utc",
                 QDateTime::currentDateTimeUtc().currentMSecsSinceEpoch());
     q.bindValue(":did", downloadId);
@@ -486,6 +504,16 @@ void UpdateModel::setInstalled(const QString &downloadId)
     unsetDownloadId(downloadId);
 
     Q_EMIT (changed());
+}
+
+void UpdateModel::startUpdate(const QString &downloadId)
+{
+    setState(downloadId, SystemUpdate::UpdateState::StateQueuedForDownload);
+}
+
+void UpdateModel::processUpdate(const QString &downloadId)
+{
+    setState(downloadId, SystemUpdate::UpdateState::StateInstalling);
 }
 
 void UpdateModel::setError(const QString &downloadId, const QString &msg)
@@ -525,7 +553,7 @@ void UpdateModel::setState(const QString &downloadId,
 
     q.finish();
 
-    // Q_EMIT (updateChanged(id, revision));
+    Q_EMIT (updateChanged(downloadId));
 }
 
 void UpdateModel::setProgress(const QString &downloadId,
@@ -534,9 +562,11 @@ void UpdateModel::setProgress(const QString &downloadId,
     if (!openDb()) return;
 
     QSqlQuery q(m_db);
-    q.prepare("UPDATE updates SET progress=:progress"
-              " WHERE download_id=:did");
+    q.prepare("UPDATE updates SET progress=:progress, "
+              "update_state=:state WHERE download_id=:did");
     q.bindValue(":progress", progress);
+    q.bindValue(":state",
+                updateStateToString(SystemUpdate::UpdateState::StateDownloading));
     q.bindValue(":did", downloadId);
 
     if (!q.exec()) {
@@ -546,16 +576,17 @@ void UpdateModel::setProgress(const QString &downloadId,
 
     q.finish();
 
-    // Q_EMIT (updateChanged(id, revision));
+    Q_EMIT (updateChanged(downloadId));
 }
 
 void UpdateModel::setDownloadId(const QString &id, const int &revision,
                                 const QString &downloadId)
 {
+    // qWarning() << Q_FUNC_INFO << id << revision << downloadId;
     if (!openDb()) return;
 
     QSqlQuery q(m_db);
-    q.prepare("UPDATE updates SET download_id=:did, error=NULL"
+    q.prepare("UPDATE updates SET download_id=:did, error=''"
               " WHERE id=:id AND revision=:revision");
     q.bindValue(":did", downloadId);
     q.bindValue(":id", id);
@@ -568,7 +599,7 @@ void UpdateModel::setDownloadId(const QString &id, const int &revision,
 
     q.finish();
 
-    // Q_EMIT (updateChanged(id, revision));
+    Q_EMIT (updateChanged(id, revision));
 }
 
 void UpdateModel::pauseUpdate(const QString &downloadId)
@@ -619,7 +650,7 @@ bool UpdateModel::createDb()
                 "local_version TEXT,"
                 "remote_version TEXT,"
                 "revision INTEGER NOT NULL,"
-                "state TEXT NOT NULL,"
+                "installed INTEGER NOT NULL,"
                 "created_at_utc BIGINT NOT NULL,"
                 "updated_at_utc BIGINT,"
                 "title TEXT NOT NULL,"
@@ -783,6 +814,17 @@ int UpdateModel::find(const QString &id, const int &revision) const
     return res;
 }
 
+int UpdateModel::find(const QString &downloadId) const
+{
+    int res = -1;
+    for (int i = 0; i < m_updates.size(); i++) {
+        if (m_updates.at(i).downloadId == downloadId) {
+            return i;
+        }
+    }
+    return res;
+}
+
 bool UpdateModel::contains(const QString& downloadId) const
 {
     for (int i = 0; i < m_updates.size(); i++) {
@@ -791,31 +833,5 @@ bool UpdateModel::contains(const QString& downloadId) const
         }
     }
     return false;
-}
-
-
-void UpdateModel::setValues(UpdateStruct *update, QSqlQuery *query)
-{
-    update->kind = query->value(0).toString();
-    update->id = query->value(1).toString();
-    update->localVersion = query->value(2).toString();
-    update->remoteVersion = query->value(3).toString();
-    update->revision = query->value(4).toInt();
-    update->state = query->value(5).toString();
-    update->createdAt = QDateTime::fromMSecsSinceEpoch(query->value(6).toLongLong());
-    update->updatedAt = QDateTime::fromMSecsSinceEpoch(query->value(7).toLongLong());
-    update->title = query->value(8).toString();
-    update->downloadHash = query->value(9).toString();
-    update->size = query->value(10).toInt();
-    update->iconUrl = query->value(11).toString();
-    update->downloadUrl = query->value(12).toString();
-    update->command = query->value("command").toString().split(" ");
-    update->changelog = query->value(14).toString();
-    update->token = query->value(15).toString();
-    update->updateState = stringToUpdateState(query->value(16).toString());
-    update->progress = query->value(17).toInt();
-    update->automatic = query->value(18).toBool();
-    update->downloadId = query->value("download_id").toString();
-    update->error = query->value("error").toString();
 }
 } // UpdatePlugin

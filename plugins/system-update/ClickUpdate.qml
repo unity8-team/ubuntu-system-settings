@@ -22,13 +22,12 @@ import Ubuntu.SystemSettings.Update 1.0
 
 Update {
     id: update
-    property string packageName
-    property int revision
-    property var command
-    property string clickToken
-    property string downloadUrl
-    property string downloadSha512
-    property string headers
+    // property string packageName
+    // property int revision
+    // property var command
+    // property string downloadUrl
+    // property string downloadSha512
+    property string downloadId
 
     updateState: SystemUpdate.StateAvailable
     kind: SystemUpdate.KindApp
@@ -40,6 +39,10 @@ Update {
     // onDownload: install()
 
     // signal retryUpdate(string name)
+
+    onProgressChanged: {
+        console.warn('onProgressChanged (qml)', progress);
+    }
 
     states: [
         State {

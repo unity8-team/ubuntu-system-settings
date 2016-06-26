@@ -69,12 +69,14 @@ public:
     };
 
 public slots:
-    void notifyStoreChanged();
-    void notifyStoreItemChanged(const QString &id, const int &revision);
+    void notifyModelChanged();
+    void notifyModelItemChanged(const QString &id, const int &revision);
+    void notifyModelItemChanged(const QString &downloadId);
 
 signals:
-    void storeChanged();
-    void storeItemChanged(const QString &id, const int &revision);
+    void modelChanged();
+    void modelItemChanged(const QString &id, const int &revision);
+    void modelItemChanged(const QString &downloadId);
 
 protected:
     explicit SystemUpdate(QObject *parent = 0);

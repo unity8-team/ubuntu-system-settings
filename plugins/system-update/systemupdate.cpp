@@ -31,14 +31,19 @@ SystemUpdate::SystemUpdate(QObject *parent) : QObject(parent)
 {
 }
 
-void SystemUpdate::notifyStoreChanged()
+void SystemUpdate::notifyModelChanged()
 {
-    Q_EMIT (storeChanged());
+    Q_EMIT (modelChanged());
 }
 
-void SystemUpdate::notifyStoreItemChanged(const QString &id,
+void SystemUpdate::notifyModelItemChanged(const QString &id,
                                           const int &revision)
 {
-    Q_EMIT (storeItemChanged(id, revision));
+    Q_EMIT (modelItemChanged(id, revision));
+}
+
+void SystemUpdate::notifyModelItemChanged(const QString &downloadId)
+{
+    Q_EMIT (modelItemChanged(downloadId));
 }
 } // UpdatePlugin

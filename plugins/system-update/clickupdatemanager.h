@@ -30,7 +30,7 @@
 #include <ssoservice.h>
 
 #include "systemupdate.h"
-#include "clickupdatemetadata.h"
+#include "clickupdate.h"
 #include "updatemodel.h"
 
 // Having the full namespaced name in a slot seems to confuse
@@ -39,7 +39,7 @@ using UbuntuOne::Token;
 
 namespace UpdatePlugin
 {
-class ClickUpdateManager : public ClickApiClient
+class ClickUpdateManager : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(bool authenticated READ authenticated
@@ -63,14 +63,12 @@ public:
 
     bool authenticated();
 
-protected slots:
-    void requestSucceeded(QNetworkReply *reply);
-
 private slots:
+    void handleMetadata(QNetworkReply *reply);
     void processInstalledClicks(const int &exitCode);
-    void processClickToken(const ClickUpdateMetadata *meta);
+    void processClickToken(const ClickUpdate *update);
     void handleProcessError(const QProcess::ProcessError &error);
-    void handleClickTokenFailure(ClickUpdateMetadata *meta);
+    void handleClickTokenFailure(ClickUpdate *update);
     void handleCredentialsFound(const Token &token);
     void handleCredentialsFailed();
     void handleCommunicationErrors();
@@ -86,20 +84,25 @@ signals:
     void checkCanceled();
     void checkFailed();
 
+    void networkError();
+    void serverError();
+    void credentialError();
+
 private:
     void setAuthenticated(const bool authenticated);
-    void initializeMeta(const ClickUpdateMetadata *meta);
+    void initializeUpdate(const ClickUpdate *update);
 
     void init();
     // Set up connections on a process instance.
     void initializeProcess();
     void initializeSSOService();
+    void initializeApiClient();
 
     // Start process of adding remote metadata to each installed click
     void requestClickMetadata();
 
     // Parses click metadata.
-    // Note: This also asks a ClickUpdateMetadata to request a click token.
+    // Note: This also asks a ClickUpdate to request a click token.
     // TODO: Make this more obvious.
     void parseClickMetadata(const QJsonArray &array);
 
@@ -109,9 +112,10 @@ private:
     UpdateModel *m_model;
     // Represents the process that we use to query installed clicks.
     QProcess m_process;
-    QHash<QString, ClickUpdateMetadata*> m_metas;
+    ClickApiClient m_apiClient;
+    QHash<QString, ClickUpdate*> m_updates;
 
-    UbuntuOne::Token m_token;
+    UbuntuOne::Token m_u1token;
     UbuntuOne::SSOService m_ssoService;
     bool m_authenticated;
     bool m_checking;
