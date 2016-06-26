@@ -405,9 +405,9 @@ void UpdateModel::add(const Update *update)
     Q_EMIT (changed());
 }
 
-Update* UpdateModel::getPending(const QString &id, const QString &kind)
+ClickUpdate* UpdateModel::getPendingClickUpdate(const QString &id)
 {
-    Update *m = new Update(this);
+    ClickUpdate *m = new ClickUpdate();
     if (!openDb()) return m;
 
     QSqlQuery q(m_db);
@@ -417,7 +417,7 @@ Update* UpdateModel::getPending(const QString &id, const QString &kind)
               "FROM updates WHERE id=:id AND installed=:installed AND kind=:kind");
     q.bindValue(":id", id);
     q.bindValue(":installed", false);
-    q.bindValue(":kind", kind);
+    q.bindValue(":kind", UpdateModel::KIND_CLICK);
 
     if (!q.exec()) {
         qCritical() << "Could not fetch update" << q.lastError().text();
@@ -429,13 +429,13 @@ Update* UpdateModel::getPending(const QString &id, const QString &kind)
     m->setName(q.value(0).toString());
     m->setRevision(q.value(1).toInt());
     m->setDownloadSha512(q.value(2).toString());
-    m->setTitle(q.value(3).toString());
+    m->setTitle(q.value("title").toString());
     m->setBinaryFilesize(q.value(4).toInt());
-    m->setIconUrl(q.value(5).toString());
+    m->setIconUrl(q.value("icon_url").toString());
     m->setDownloadUrl(q.value(6).toString());
-    m->setChangelog(q.value(7).toString());
-    m->setCommand(q.value(8).toStringList());
-    m->setToken(q.value(0).toString());
+    m->setChangelog(q.value("changelog").toString());
+    m->setCommand(q.value("command").toStringList());
+    m->setToken(q.value("token").toString());
     m->setLocalVersion(q.value(10).toString());
     m->setRemoteVersion(q.value(11).toString());
     m->setAutomatic(q.value(12).toBool());

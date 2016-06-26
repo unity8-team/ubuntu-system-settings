@@ -27,14 +27,19 @@ ClickUpdate::ClickUpdate(QObject *parent)
     , m_apiClient(this)
     , m_u1Token(UbuntuOne::Token())
 {
-    connect(this, SIGNAL(tokenChanged()),
-            this, SLOT(handleTokenChanged()));
-    connect(&m_apiClient, SIGNAL(success(QNetworkReply*)),
-            this, SLOT(handleToken(QNetworkReply*)));
+    init();
 }
 
 ClickUpdate::~ClickUpdate()
 {
+}
+
+void ClickUpdate::init()
+{
+    connect(this, SIGNAL(tokenChanged()),
+            this, SLOT(handleTokenChanged()));
+    connect(&m_apiClient, SIGNAL(success(QNetworkReply*)),
+            this, SLOT(handleToken(QNetworkReply*)));
 }
 
 void ClickUpdate::handleTokenChanged()

@@ -192,7 +192,6 @@ Item {
         enabled: {
             switch(updateState) {
             case SystemUpdate.StateAvailable:
-            case SystemUpdate.StateQueuedForDownload:
             case SystemUpdate.StateDownloading:
             case SystemUpdate.StateDownloadingAutomatically:
             case SystemUpdate.StateDownloadPaused:
@@ -207,6 +206,7 @@ Item {
             case SystemUpdate.StateUnavailable:
             case SystemUpdate.StateInstalled:
             case SystemUpdate.StateInstallFinished:
+            case SystemUpdate.StateQueuedForDownload:
             case SystemUpdate.StateUnknown:
             default:
                 return false;
@@ -220,6 +220,7 @@ Item {
                 return i18n.tr("Retry");
 
             case SystemUpdate.StateAvailable:
+            case SystemUpdate.StateQueuedForDownload:
                 if (kind === SystemUpdate.KindApp) {
                     return i18n.tr("Update");
                 } else {
@@ -230,7 +231,6 @@ Item {
             case SystemUpdate.StateAutomaticDownloadPaused:
                     return i18n.tr("Resume");
 
-            case SystemUpdate.StateQueuedForDownload:
             case SystemUpdate.StateDownloading:
             case SystemUpdate.StateDownloadingAutomatically:
             case SystemUpdate.StateInstalling:
@@ -280,7 +280,7 @@ Item {
                     update.install();
                     break;
 
-            case SystemUpdate.StateQueuedForDownload:
+            // case SystemUpdate.StateQueuedForDownload:
             case SystemUpdate.StateDownloading:
             case SystemUpdate.StateDownloadingAutomatically:
             case SystemUpdate.StateInstalling:

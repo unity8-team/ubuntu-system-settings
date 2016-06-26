@@ -155,8 +155,8 @@ void ClickUpdateManager::check(const QString &packageName)
 {
     qWarning() << "click checker: checking this one file" << packageName
             << "...";
-    ClickUpdate *m = qobject_cast<ClickUpdate*>(m_model->getPending(packageName,
-                                                                    UpdateModel::KIND_CLICK));
+    ClickUpdate *m = m_model->getPendingClickUpdate(packageName);
+    qWarning() << "click um: got back" << m;
     if (m && m->name() == packageName) {
         qWarning() << "click checker: requesting click token for" << packageName
                 << "...";
@@ -220,7 +220,7 @@ void ClickUpdateManager::processInstalledClicks(const int &exitCode)
         QStringList command;
         // command << Helpers::whichPkcon() << "-p" << "install-local" << "$file";
         command << "sleep" << "5";
-        update->setCommand(command);
+        // update->setCommand(command);
 
         m_updates.insert(update->name(), update);
         qWarning() << "click checker: queueing up" << update->name();

@@ -65,17 +65,36 @@ Item {
         updates.status = SystemUpdate.StatusIdle;
     }
 
+
+    function bindDownload(obj) {
+        obj.downloadIdChanged.connect(function () {
+            var identifier = this.metadata.custom.packageName;
+            var revision = this.metadata.custom.revision;
+            console.warn('onDownloadIdChanged', identifier, revision, this.downloadId)
+            if (this.downloadId && identifier && (typeof revision !== "undefined")) {
+                clickUpdatesModel.setDownloadId(identifier, revision, this.downloadId);
+                clickUpdatesModel.startUpdate(this.downloadId);
+            }
+        }.bind(obj))
+        obj.progressChanged.connect(function () {
+            console.warn('onProgressChanged', this.progress);
+            clickUpdatesModel.setProgress(this.downloadId, this.progress);
+        }.bind(obj))
+        obj.started.connect(function () {
+            console.warn('onStarted');
+            clickUpdatesModel.startUpdate(this.downloadId);
+        }.bind(obj))
+        obj.processing.connect(function () {
+            console.warn('onProcessing');
+            clickUpdatesModel.processUpdate(this.downloadId);
+        }.bind(obj))
+        obj._bound = true;
+    }
+
     function createDownload(click) {
-        if (click.downloadId) {
-            console.warn(click.title, "already had downloadId", click.downloadId);
-            return;
-        }
-        console.warn('create download', click, click.command);
-        for (var i = 0; i < click.command.length; i++) {
-            console.warn('click command', i, click.command[i]);
-        }
+        console.warn('create download', click.title);
         var metadata = {
-            "command": click.command,
+            //"command": click.command,
             "title": click.title,
             "showInIndicator": false
         };
@@ -96,27 +115,9 @@ Item {
             "metadata": metadataObj
         });
         singleDownloadObj.download(click.downloadUrl);
-        console.warn('onInstall will now download', click.downloadUrl, click.command, click.title, click.token, click.identifier, click.revision);
-        console.warn('onInstall created download', singleDownloadObj, singleDownloadObj.metadata, singleDownloadObj.metadata.title)
-        singleDownloadObj.downloadIdChanged.connect(function () {
-            var identifier = this.metadata.custom.packageName;
-            var revision = this.metadata.custom.revision;
-            console.warn('onDownloadIdChanged', identifier, revision, this.downloadId)
-            if (this.downloadId && identifier && (typeof revision !== "undefined"))
-                clickUpdatesModel.setDownloadId(identifier, revision, this.downloadId);
-        }.bind(singleDownloadObj))
-        singleDownloadObj.progressChanged.connect(function () {
-            console.warn('onProgressChanged', this.progress);
-            clickUpdatesModel.setProgress(this.downloadId, this.progress);
-        }.bind(singleDownloadObj))
-        singleDownloadObj.started.connect(function () {
-            console.warn('onStarted');
-            clickUpdatesModel.startUpdate(this.downloadId);
-        }.bind(singleDownloadObj))
-        singleDownloadObj.processing.connect(function () {
-            console.warn('onProcessing');
-            clickUpdatesModel.processUpdate(this.downloadId);
-        }.bind(singleDownloadObj))
+        console.warn('onInstall created download', singleDownloadObj);
+        bindDownload(singleDownloadObj);
+
     }
 
     function getDownload(downloadId) {
@@ -130,6 +131,8 @@ Item {
         }
         return null;
     }
+
+
 
     signal requestAuthentication()
 //    signal udmDownloadCreated(string packageName, int revision, int udmId)
@@ -245,20 +248,49 @@ Item {
                     changelog: model.changelog
                     onPause: {
                         console.warn('onPause', getDownload(model.downloadId));
-                        getDownload(model.downloadId).pause();
+                        try {
+                            getDownload(model.downloadId).pause();
+                        } catch (e) {
+                            clickUpdatesModel.setError(
+                                model.downloadId, i18n.tr("Installation failed.")
+                            );
+                        }
                     }
                     onResume: {
                         console.warn('onResume', getDownload(model.downloadId));
-                        getDownload(model.downloadId).resume();
+                        try {
+                            getDownload(model.downloadId).resume();
+                        } catch (e) {
+                            clickUpdatesModel.setError(
+                                model.downloadId, i18n.tr("Installation failed.")
+                            );
+                        }
                     }
                     onInstall: {
                         console.warn("onInstall", identifier, model.revision);
-                        createDownload(model);
+                        if (model.downloadId) {
+                            console.warn('already had download id');
+                        } else {
+                            createDownload(model);
+                        }
                     }
-                    onDownload: createDownload(model)
+                    onDownload: install()
                     onRetry: {
                         updateState = SystemUpdate.StateUnavailable;
-                        clickUpdateManager.check(packageName);
+                        clickUpdateManager.check(model.identifier);
+                    }
+
+                    Component.onCompleted: {
+                        console.warn('onCompleted check on ', model.title);
+                        var dl;
+                        if (model.downloadId) {
+                            dl = getDownload(model.downloadId);
+                            if (dl && !dl._bound)
+                                bindDownload(dl);
+                        } else {
+                            // if (model.automatic)
+                                //createDownload(model);
+                        }
                     }
                 }
             }
@@ -403,9 +435,8 @@ Item {
 
     Component {
         id: sdl
-
         SingleDownload {
-
+            property bool _bound: false
         }
     }
 

@@ -55,6 +55,7 @@ signals:
     // void credentialError();
 
 private:
+    void init();
     ClickApiClient m_apiClient;
     UbuntuOne::Token m_u1Token;
 };

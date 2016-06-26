@@ -16,6 +16,7 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
+import QtQuick 2.4
 import Ubuntu.DownloadManager 1.2
 import Ubuntu.SystemSettings.Update 1.0
 
@@ -42,7 +43,7 @@ DownloadManager {
     }
 
     onErrorFound: {
-        console.warn('onErrorFound', download.downloadId);
+        console.warn('onErrorFound', download.downloadId, download.errorMessage);
         updateModel.setError(download.downloadId, download.errorMessage)
     }
 

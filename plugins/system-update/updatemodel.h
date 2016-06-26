@@ -24,6 +24,7 @@
 #include <QModelIndex>
 #include <QSqlDatabase>
 
+#include "clickupdate.h"
 #include "systemupdate.h"
 #include "update.h"
 #include "updatestruct.h"
@@ -101,7 +102,7 @@ public:
     void setLastCheckDate(const QDateTime &lastCheckUtc);
 
     void add(const Update *update);
-    Update* getPending(const QString &id, const QString &kind);
+    ClickUpdate* getPendingClickUpdate(const QString &id);
 
     void add(const QString &kind, const QString &id,
              const int &revision, const QString &version,
