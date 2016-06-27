@@ -48,6 +48,7 @@ signals:
 private slots:
     void cancel();
     void handleSuccess(QNetworkReply *reply);
+    void handleFailure();
 
 private:
     void init();

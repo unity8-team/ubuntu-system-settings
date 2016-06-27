@@ -1,15 +1,15 @@
 SET (CMAKE_AUTOMOC ON)
 set(QML_SOURCES
-    ClickUpdate.qml
+    ClickUpdateDelegate.qml
     Configuration.qml
     DownloadHandler.qml
     Global.qml
-    ImageUpdate.qml
+    ImageUpdateDelegate.qml
     ImageUpdatePrompt.qml
     NotAuthenticatedNotification.qml
     PageComponent.qml
     Updates.qml
-    Update.qml
+    UpdateDelegate.qml
 )
 
 include_directories(
@@ -30,7 +30,6 @@ add_library(UbuntuUpdatePanel MODULE
             systemupdate.cpp
             update.cpp
             updatedb.cpp
-            updatestruct.cpp
             updatemodel.cpp
             ${QML_SOURCES})
 

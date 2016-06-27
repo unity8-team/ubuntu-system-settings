@@ -476,6 +476,11 @@ bool Update::deepEquals(const Update *other) const
     return true;
 }
 
+bool Update::equals(const Update *other) const
+{
+    return *this == other;
+}
+
 QString Update::stateToString(const Update::State &state)
 {
     switch (state) {
@@ -543,30 +548,34 @@ Update::State Update::stringToState(const QString &state)
         return State::StateDownloaded;
     if (state == QLatin1String("failed"))
         return State::StateFailed;
-    else
-        return State::StateUnknown;
+
+    return State::StateUnknown;
 }
 
 QString Update::kindToString(const Update::Kind &kind)
 {
     switch (kind) {
-    case Kind::KindUnknown:
-        return QLatin1String("unknown");
+    case Kind::KindAll:
+        return QLatin1String("all");
     case Kind::KindClick:
         return QLatin1String("click");
     case Kind::KindImage:
         return QLatin1String("image");
+    case Kind::KindUnknown:
+        return QLatin1String("unknown");
     }
 }
 
 Update::Kind Update::stringToKind(const QString &kind)
 {
+    if (kind == QLatin1String("all"))
+        return Kind::KindAll;
     if (kind == QLatin1String("click"))
         return Kind::KindClick;
     if (kind == QLatin1String("image"))
         return Kind::KindImage;
-    else
-        return Kind::KindUnknown;
+
+    return Kind::KindUnknown;
 }
 
 // void Update::tokenRequestSslFailed(const QList<QSslError> &errors)

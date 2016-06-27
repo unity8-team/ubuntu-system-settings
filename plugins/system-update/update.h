@@ -35,7 +35,6 @@ class Update : public QObject
     Q_OBJECT
     Q_ENUMS(Kind)
     Q_ENUMS(State)
-    Q_ENUMS(Filter)
     Q_PROPERTY(Kind kind READ kind
             WRITE setKind NOTIFY kindChanged)
     Q_PROPERTY(QString anonDownloadUrl READ anonDownloadUrl
@@ -90,22 +89,12 @@ public:
     explicit Update(QObject *parent = 0);
     ~Update();
 
-    enum class Filter
-    {
-        All,
-        Pending,
-        PendingClicks,
-        PendingImage,
-        InstalledClicks,
-        InstalledImage,
-        Installed
-    };
-
     enum class Kind
     {
+        KindUnknown,
         KindClick,
         KindImage,
-        KindUnknown
+        KindAll
     };
 
     enum class State
@@ -198,6 +187,8 @@ public:
     /* Whether or not either id and rev equals to other, or download id is set
     and that is equal to that of other. */
     bool operator==(const Update *other) const;
+
+    bool equals(const Update *other) const;
 
 signals:
     void kindChanged();

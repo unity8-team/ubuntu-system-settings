@@ -44,8 +44,14 @@ const QString GET_ALL_KIND = "SELECT " + ALL + " FROM \
 const QString GET_PENDING = "SELECT " + ALL + " FROM \
     updates WHERE installed=0 ORDER BY title ASC";
 
+const QString GET_PENDING_REVERSED = "SELECT " + ALL + " FROM \
+    updates WHERE installed=0 ORDER BY title DESC";
+
 const QString GET_PENDING_KIND = "SELECT " + ALL + " FROM \
     updates WHERE installed=0 AND kind=:kind ORDER BY title ASC";
+
+const QString GET_PENDING_CLICK = "SELECT " + ALL + ", MAX(revision) FROM \
+    updates WHERE installed=0 AND kind=:kind GROUP BY id ORDER BY title ASC";
 
 const QString GET_INSTALLED = "SELECT " + ALL + " FROM updates \
     WHERE installed=1 ORDER BY updated_at_utc DESC";
@@ -153,6 +159,22 @@ void UpdateDb::add(const QSharedPointer<Update> &update)
 
     if (!q.exec()) {
         qCritical() << "Could not add update" << q.lastError().text();
+    }
+
+    Q_EMIT changed();
+}
+
+void UpdateDb::remove(const QSharedPointer<Update> &update)
+{
+    if (!openDb()) return;
+
+    QSqlQuery q(m_db);
+    q.prepare("DELETE FROM updates WHERE id=:id AND revision=:revision");
+    q.bindValue(":id", update->identifier());
+    q.bindValue(":revision", update->revision());
+
+    if (!q.exec()) {
+        qCritical() << "Could not delete update" << q.lastError().text();
     }
 
     Q_EMIT changed();
@@ -398,7 +420,7 @@ void UpdateDb::setLastCheckDate(const QDateTime &lastCheckUtc)
     }
 }
 
-QList<QSharedPointer<Update> > UpdateDb::updates(const Update::Filter &filter)
+QList<QSharedPointer<Update> > UpdateDb::updates(const UpdateDb::Filter &filter)
 {
     QList<QSharedPointer<Update> > list;
     qWarning() << "blast refresh...";
@@ -410,34 +432,37 @@ QList<QSharedPointer<Update> > UpdateDb::updates(const Update::Filter &filter)
 
     QSqlQuery q(m_db);
     switch (filter) {
-    case Update::Filter::All:
+    case Filter::All:
         q.prepare(GET_ALL);
         break;
-    case Update::Filter::Pending:
+    case Filter::Pending:
         q.prepare(GET_PENDING);
         break;
-    case Update::Filter::PendingClicks:
-        q.prepare(GET_PENDING_KIND);
+    case Filter::PendingReversed:
+        q.prepare(GET_PENDING_REVERSED);
+        break;
+    case Filter::PendingClicks:
+        q.prepare(GET_PENDING_CLICK);
         q.bindValue(":kind", Update::kindToString(
             Update::Kind::KindClick)
         );
         break;
-    case Update::Filter::PendingImage:
+    case Filter::PendingImage:
         q.prepare(GET_PENDING_KIND);
         q.bindValue(":kind", Update::kindToString(
             Update::Kind::KindImage)
         );
         break;
-    case Update::Filter::Installed:
+    case Filter::Installed:
         q.prepare(GET_INSTALLED);
         break;
-    case Update::Filter::InstalledClicks:
+    case Filter::InstalledClicks:
         q.prepare(GET_INSTALLED_KIND);
         q.bindValue(":kind", Update::kindToString(
             Update::Kind::KindClick)
         );
         break;
-    case Update::Filter::InstalledImage:
+    case Filter::InstalledImage:
         q.prepare(GET_INSTALLED_KIND);
         q.bindValue(":kind", Update::kindToString(
             Update::Kind::KindImage)

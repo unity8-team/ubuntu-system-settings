@@ -20,17 +20,16 @@ import QtQuick 2.4
 import Ubuntu.DownloadManager 1.2
 import Ubuntu.SystemSettings.Update 1.0
 
-Update {
+UpdateDelegate {
     id: update
     // property string packageName
     // property int revision
     // property var command
     // property string downloadUrl
     // property string downloadSha512
-    property string downloadId
 
-    updateState: SystemUpdate.StateAvailable
-    kind: SystemUpdate.KindApp
+    updateState: Update.StateAvailable
+    kind: Update.KindClick
 
     // onRetry: retryUpdate(update.packageName)
     // onPause: download.pause()
@@ -47,7 +46,7 @@ Update {
     states: [
         State {
             name: "failed"
-            when: update.updateState === SystemUpdate.StateFailed
+            when: update.updateState === Update.StateFailed
             StateChangeScript {
                 script: update.setError(
                     i18n.tr("Update failed"),
@@ -63,8 +62,8 @@ Update {
         property: "progress"
         value: -1
         when: {
-            var queued = updateState === SystemUpdate.StateQueuedForDownload;
-            var installing = updateState === SystemUpdate.StateInstalling;
+            var queued = updateState === Update.StateQueuedForDownload;
+            var installing = updateState === Update.StateInstalling;
             return queued || installing;
         }
     }

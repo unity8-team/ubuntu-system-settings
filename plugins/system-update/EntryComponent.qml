@@ -44,7 +44,8 @@ ListItem.SingleValue {
 
     UpdateModel {
         id: clickupdates
-        filter: UpdateModel.PendingClicksUpdates
+        filter: UpdateModel.PendingClicks
+        Component.onCompleted: console.warn(UpdateModel.All, UpdateModel.PendingClicks)
     }
 
     Behavior on height { UbuntuNumberAnimation {} }

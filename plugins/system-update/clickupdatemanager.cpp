@@ -438,6 +438,7 @@ void ClickUpdateManager::parseClickMetadata(const QJsonArray &array)
                 ClickTokenDownloader* dl = new ClickTokenDownloader(this, update);
                 dl->setAuthToken(m_authToken);
                 initializeTokenDownloader(dl);
+                dl->requestToken();
             } else {
                 // Update not required, let's remove it.
                 m_updates.remove(update->identifier());

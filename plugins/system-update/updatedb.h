@@ -31,16 +31,30 @@ namespace UpdatePlugin
 class UpdateDb : public QObject
 {
     Q_OBJECT
+    Q_ENUMS(Filter)
 public:
+    enum class Filter
+    {
+        All,
+        Pending,
+        PendingReversed,
+        PendingClicks,
+        PendingImage,
+        InstalledClicks,
+        InstalledImage,
+        Installed
+    };
+
     explicit UpdateDb(QObject *parent = 0);
     ~UpdateDb();
     // For testing.
     explicit UpdateDb(const QString &dbpath, QObject *parent = 0);
 
     void add(const QSharedPointer<Update> &update);
+    void remove(const QSharedPointer<Update> &update);
     // QList<QSharedPointer<ClickUpdate> > getClicks();
 
-    QList<QSharedPointer<Update> > updates(const Update::Filter &filter);
+    QList<QSharedPointer<Update> > updates(const Filter &filter);
 
     QSqlDatabase db(); // For testing.
 

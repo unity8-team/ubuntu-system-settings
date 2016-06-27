@@ -21,7 +21,6 @@
 
 #include "update.h"
 #include "updatedb.h"
-#include "updatestruct.h"
 
 #include <QAbstractListModel>
 #include <QDateTime>
@@ -32,9 +31,11 @@ namespace UpdatePlugin
 {
 class UpdateModel : public QAbstractListModel
 {
+
     Q_OBJECT
-    // TODO: use flags
-    Q_PROPERTY(Update::Filter filter
+    /* Note: The filter is not declared in UpdateModel, so we can't use it
+    from QML. We use an int instead. */
+    Q_PROPERTY(int filter
                READ filter
                WRITE setFilter
                NOTIFY filterChanged)
@@ -42,7 +43,6 @@ class UpdateModel : public QAbstractListModel
 public:
     enum Roles
     {
-      // Qt::DisplayRole holds the title of the app
       KindRole = Qt::UserRole,
       IconUrlRole,
       IdRole,
@@ -79,8 +79,8 @@ public:
     int count() const;
     int rowCount(const QModelIndex &parent = QModelIndex()) const;
 
-    Update::Filter filter() const;
-    void setFilter(const Update::Filter &filter);
+    int filter() const;
+    void setFilter(const int &filter);
 
     Q_INVOKABLE void setInstalled(const QString &downloadId);
     Q_INVOKABLE void setError(const QString &downloadId, const QString &msg);
@@ -93,7 +93,10 @@ public:
     Q_INVOKABLE void cancelUpdate(const QString &downloadId);
     Q_INVOKABLE void setDownloadId(const QString &id, const int &revision,
                        const QString &downloadId);
-    Q_INVOKABLE bool contains(const QString &downloadId) const;
+    // Q_INVOKABLE bool contains(const QString &downloadId) const;
+
+public slots:
+    void refresh();
 
 signals:
     void countChanged();
@@ -103,13 +106,22 @@ signals:
     // void updateChanged(const QString &downloadId);
 
 private:
+    void insertRow(const int &row, const QSharedPointer<Update> &update);
+    void removeRow(int i);
+    void moveRow(const int &from, const int &to);
+    void emitRowChanged(int row);
     void initialize();
-    int find(const QString &id, const int &revision) const;
-    int find(const QString &downloadId) const;
-
+    // int find(const QString &id, const int &revision) const;
+    // int find(const QString &downloadId) const;
+    // static QSharedPointer<Update> find(const QList<QSharedPointer<Update> > &list,
+    //                                    const QSharedPointer<Update> &update);
+    static bool contains(const QList<QSharedPointer<Update> > &list,
+                         const QSharedPointer<Update> &update);
+    static int indexOf(const QList<QSharedPointer<Update> > &list,
+                        const QSharedPointer<Update> &update);
     UpdateDb* m_db;
-    Update::Filter m_filter;
-    QList<UpdateStruct> m_updates;
+    int m_filter;
+    QList<QSharedPointer<Update> > m_updates;
 };
 } // UpdatePlugin
 

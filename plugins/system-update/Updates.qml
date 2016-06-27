@@ -132,8 +132,6 @@ Item {
         return null;
     }
 
-
-
     signal requestAuthentication()
 //    signal udmDownloadCreated(string packageName, int revision, int udmId)
 
@@ -204,7 +202,7 @@ Item {
             onStop: updates.cancelChecks()
         }
 
-        ImageUpdate {
+        ImageUpdateDelegate {
             id: imageUpdate
             objectName: "updatesImageUpdate"
             visible: updates.haveSystemUpdate
@@ -230,7 +228,7 @@ Item {
                 id: clickUpdatesRepeater
                 model: clickUpdatesModel
                 height: childrenRect.height
-                delegate: ClickUpdate {
+                delegate: ClickUpdateDelegate {
                     objectName: "updatesClickUpdate" + index
                     anchors { left: clickUpdates.left; right: clickUpdates.right }
                     // command: model.command
@@ -276,7 +274,7 @@ Item {
                     }
                     onDownload: install()
                     onRetry: {
-                        updateState = SystemUpdate.StateUnavailable;
+                        updateState = Update.StateUnavailable;
                         clickUpdateManager.check(model.identifier);
                     }
 
@@ -313,7 +311,7 @@ Item {
                     id: previousUpdatesRepeater
                     model: previousUpdatesModel
                     height: childrenRect.height
-                    delegate: Update {
+                    delegate: UpdateDelegate {
                         objectName: "updatesPreviousUpdate" + index
                         width: previous.width
                         version: remoteVersion
@@ -321,7 +319,7 @@ Item {
                         name: title
                         iconUrl: model.iconUrl
                         changelog: model.changelog
-                        updateState: SystemUpdate.StateInstalled
+                        updateState: Update.StateInstalled
                     }
                 }
             }

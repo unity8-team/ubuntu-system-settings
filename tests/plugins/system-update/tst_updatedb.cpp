@@ -27,11 +27,12 @@
 
 #include "update.h"
 #include "updatedb.h"
+#include "updatemodel.h"
 
 using namespace UpdatePlugin;
 
 Q_DECLARE_METATYPE(QSharedPointer<Update>)
-Q_DECLARE_METATYPE(Update::Filter)
+Q_DECLARE_METATYPE(UpdateDb::Filter)
 
 class TstUpdateDb : public QObject
 {
@@ -61,7 +62,7 @@ private slots:
     }
     void testNoUpdates()
     {
-        auto list = m_instance->updates(Update::Filter::All);
+        auto list = m_instance->updates(UpdateDb::Filter::All);
         QCOMPARE(list.size(), 0);
     }
     void testAddUpdate()
@@ -74,13 +75,29 @@ private slots:
         m_instance->add(m);
         QTRY_COMPARE(changedSpy.count(), 1);
     }
+    void testRemoveUpdate()
+    {
+
+        QSharedPointer<Update> m = createUpdate();
+        m->setIdentifier("test.app");
+        m->setRevision(1);
+
+        QSignalSpy changedSpy(m_instance, SIGNAL(changed()));
+        m_instance->add(m);
+        m_instance->remove(m);
+        QTRY_COMPARE(changedSpy.count(), 2);
+
+        auto list = m_instance->updates(UpdateDb::Filter::All);
+        QCOMPARE(list.size(), 0);
+
+    }
     void testFilters_data()
     {
         QTest::addColumn<QSharedPointer<Update> >("a");
         QTest::addColumn<QSharedPointer<Update> >("b");
         QTest::addColumn<QSharedPointer<Update> >("c");
         QTest::addColumn<QSharedPointer<Update> >("d");
-        QTest::addColumn<Update::Filter>("filter");
+        QTest::addColumn<UpdateDb::Filter>("filter");
         QTest::addColumn<QStringList>("ids");
 
         QSharedPointer<Update> a = createUpdate();
@@ -102,25 +119,25 @@ private slots:
         d->setKind(Update::Kind::KindImage);
 
         QStringList all; all << "a" << "b" << "c" << "d";
-        QTest::newRow("All") << a << b << c << d << Update::Filter::All << all;
+        QTest::newRow("All") << a << b << c << d << UpdateDb::Filter::All << all;
 
         QStringList pending; pending << "a" << "b";
-        QTest::newRow("Pending") << a << b << c << d << Update::Filter::Pending << pending;
+        QTest::newRow("Pending") << a << b << c << d << UpdateDb::Filter::Pending << pending;
 
         QStringList pendingClicks; pendingClicks << "a";
-        QTest::newRow("PendingClicks") << a << b << c << d << Update::Filter::PendingClicks << pendingClicks;
+        QTest::newRow("PendingClicks") << a << b << c << d << UpdateDb::Filter::PendingClicks << pendingClicks;
 
         QStringList pendingImage; pendingImage << "b";
-        QTest::newRow("PendingImage") << a << b << c << d << Update::Filter::PendingImage << pendingImage;
+        QTest::newRow("PendingImage") << a << b << c << d << UpdateDb::Filter::PendingImage << pendingImage;
 
         QStringList installedClicks; installedClicks << "c";
-        QTest::newRow("InstalledClicks") << a << b << c << d << Update::Filter::InstalledClicks << installedClicks;
+        QTest::newRow("InstalledClicks") << a << b << c << d << UpdateDb::Filter::InstalledClicks << installedClicks;
 
         QStringList installedImage; installedImage << "d";
-        QTest::newRow("InstalledImage") << a << b << c << d << Update::Filter::InstalledImage << installedImage;
+        QTest::newRow("InstalledImage") << a << b << c << d << UpdateDb::Filter::InstalledImage << installedImage;
 
         QStringList installed; installed << "c" << "d";
-        QTest::newRow("Installed") << a << b << c << d << Update::Filter::Installed << installed;
+        QTest::newRow("Installed") << a << b << c << d << UpdateDb::Filter::Installed << installed;
     }
     void testFilters()
     {
@@ -128,7 +145,7 @@ private slots:
         QFETCH(QSharedPointer<Update>, b);
         QFETCH(QSharedPointer<Update>, c);
         QFETCH(QSharedPointer<Update>, d);
-        QFETCH(Update::Filter, filter);
+        QFETCH(UpdateDb::Filter, filter);
         QFETCH(QStringList, ids);
 
         m_instance->add(a);
@@ -192,26 +209,25 @@ private slots:
     //     m_instance->setFilter(UpdateModel::UpdateTypes::All);
     //     QCOMPARE(m_instance->count(), 2);
     // }
-    // void testSupersededUpdate()
-    // {
-    //     Update superseded;
-    //     superseded.setName("some.app");
-    //     superseded.setRevision(1);
+    void testSupersededUpdate()
+    {
+        QSharedPointer<Update> superseded = createUpdate();
+        superseded->setIdentifier("some.app");
+        superseded->setRevision(1);
+        superseded->setKind(Update::Kind::KindClick);
 
-    //     Update replacement;
-    //     replacement.setName("some.app");
-    //     replacement.setRevision(2);
+        QSharedPointer<Update> replacement = createUpdate();
+        replacement->setIdentifier("some.app");
+        replacement->setRevision(2);
+        replacement->setKind(Update::Kind::KindClick);
 
-    //     m_instance->add(&superseded);
-    //     m_instance->add(&replacement);
+        m_instance->add(superseded);
+        m_instance->add(replacement);
 
-    //     // We only want the replacement in our model of pending updates.
-    //     m_instance->setFilter(UpdateModel::UpdateTypes::PendingClicksUpdates);
-    //     QCOMPARE(m_instance->count(), 1);
-    //     QCOMPARE(m_instance->data(
-    //         m_instance->index(0), UpdateModel::IdRole
-    //     ).toString(), replacement.name());
-    // }
+        // We only want the replacement in our db of pending updates.
+        QList<QSharedPointer<Update> > list = m_instance->updates(UpdateDb::Filter::PendingClicks);
+        QCOMPARE(list.count(), 1);
+    }
     // void testRoles()
     // {
     //     using namespace UpdatePlugin;
@@ -288,27 +304,27 @@ private slots:
     //     QTRY_COMPARE(filterChangedSpy.count(), 1);
     //     QCOMPARE((int) m_instance->filter(), filter);
     // }
-    // void testLastCheck_data() {
-    //     QTest::addColumn<QDateTime>("set");
-    //     QTest::addColumn<QDateTime>("target");
+    void testLastCheck_data() {
+        QTest::addColumn<QDateTime>("set");
+        QTest::addColumn<QDateTime>("target");
 
-    //     QDateTime otherTz(QDate(2016, 2, 29), QTime(20, 0), QTimeZone(2 * 3600));
-    //     QDateTime utcTz(QDate(2016, 2, 29), QTime(18, 0), Qt::UTC);
-    //     QTest::newRow("Different TZ") << otherTz << utcTz;
+        QDateTime otherTz(QDate(2016, 2, 29), QTime(20, 0), QTimeZone(2 * 3600));
+        QDateTime utcTz(QDate(2016, 2, 29), QTime(18, 0), Qt::UTC);
+        QTest::newRow("Different TZ") << otherTz << utcTz;
 
-    //     QTest::newRow("UTC TZ") << QDateTime(QDate(2016, 2, 29), QTime(18, 0), Qt::UTC)
-    //                             << QDateTime(QDate(2016, 2, 29), QTime(18, 0), Qt::UTC);
-    // }
-    // void testLastCheck()
-    // {
-    //     QFETCH(QDateTime, set);
-    //     QFETCH(QDateTime, target);
-    //     QCOMPARE(m_instance->lastCheckDate().isValid(), false);
+        QTest::newRow("UTC TZ") << QDateTime(QDate(2016, 2, 29), QTime(18, 0), Qt::UTC)
+                                << QDateTime(QDate(2016, 2, 29), QTime(18, 0), Qt::UTC);
+    }
+    void testLastCheck()
+    {
+        QFETCH(QDateTime, set);
+        QFETCH(QDateTime, target);
+        QCOMPARE(m_instance->lastCheckDate().isValid(), false);
 
-    //     m_instance->setLastCheckDate(set);
+        m_instance->setLastCheckDate(set);
 
-    //     QCOMPARE(m_instance->lastCheckDate(), target);
-    // }
+        QCOMPARE(m_instance->lastCheckDate(), target);
+    }
     // void testUpdateLifecycle()
     // {
     //     Update m;
@@ -492,45 +508,40 @@ private slots:
 
     //     QCOMPARE(size, 1);
     // }
-    // void testPruning()
-    // {
-    //     Update recentUpdate;
-    //     recentUpdate.setName("new.app");
-    //     recentUpdate.setRevision(1);
+    void testPruning()
+    {
+        QSharedPointer<Update> recentUpdate = createUpdate();
+        recentUpdate->setIdentifier("new.app");
+        recentUpdate->setRevision(1);
 
-    //     Update oldUpdate;
-    //     oldUpdate.setName("old.app");
-    //     oldUpdate.setRevision(1);
+        QSharedPointer<Update> oldUpdate = createUpdate();
+        oldUpdate->setIdentifier("old.app");
+        oldUpdate->setRevision(1);
 
-    //     m_instance->add(&recentUpdate);
-    //     m_instance->add(&oldUpdate);
+        m_instance->add(recentUpdate);
+        m_instance->add(oldUpdate);
 
-    //     m_instance->setDownloadId(recentUpdate.name(), recentUpdate.revision(), "1");
-    //     m_instance->setInstalled("1");
-    //     m_instance->setDownloadId(oldUpdate.name(), oldUpdate.revision(), "2");
-    //     m_instance->setInstalled("2");
+        // Change update date directly in the db
+        QSqlQuery q(m_instance->db());
+        q.prepare("UPDATE updates SET updated_at_utc=:updated WHERE id=:id");
+        QDateTime longAgo = QDateTime::currentDateTime().addMonths(-1).addDays(-1).toUTC();
 
-    //     // Change update date directly in the db
-    //     QSqlQuery q(m_instance->db());
-    //     q.prepare("UPDATE updates SET updated_at_utc = :updated WHERE id = :appid");
-    //     QDateTime longAgo = QDateTime::currentDateTime().addMonths(-1).addDays(-1).toUTC();
+        q.bindValue(":updated", longAgo.toMSecsSinceEpoch());
+        q.bindValue(":id", oldUpdate->identifier());
+        q.exec();
 
-    //     q.bindValue(":updated", longAgo.toMSecsSinceEpoch());
-    //     q.bindValue(":appid", oldUpdate.name());
-    //     q.exec();
+        m_instance->pruneDb();
 
-    //     m_instance->pruneDb();
-
-    //     QSqlQuery q1(m_instance->db());
-    //     q1.exec("SELECT * FROM updates");
-    //     int size = 0;
-    //     while (q1.next()) {
-    //         QVERIFY(q1.isValid());
-    //         QCOMPARE(q1.value(1).toString(), recentUpdate.name());
-    //         size++;
-    //     }
-    //     QCOMPARE(size, 1);
-    // }
+        QSqlQuery q1(m_instance->db());
+        q1.exec("SELECT * FROM updates");
+        int size = 0;
+        while (q1.next()) {
+            QVERIFY(q1.isValid());
+            QCOMPARE(q1.value("id").toString(), recentUpdate->identifier());
+            size++;
+        }
+        QCOMPARE(size, 1);
+    }
     // void testSystemUpdate()
     // {
     //     // We basically add system updates using a freehand API,

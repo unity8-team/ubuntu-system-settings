@@ -40,25 +40,126 @@ private slots:
         QVERIFY(m_dir->isValid());
         m_dbfile = m_dir->path() + "/cupdatesstore.db";
         m_model = new UpdateModel(m_dbfile);
+        m_db = m_model->db();
     }
     void cleanup()
     {
         m_model->deleteLater();
         delete m_dir;
     }
-    // void testNoUpdates()
-    // {
-    //     QCOMPARE(m_model->count(), 0);
-    // }
-    // void testUpdate()
-    // {
-    //     Update m;
-    //     m.setName("test.app");
-    //     m.setRevision(1);
+    QSharedPointer<Update> createUpdate()
+    {
+        return QSharedPointer<Update>(new Update);
+    }
+    void testNoUpdates()
+    {
+        QCOMPARE(m_model->count(), 0);
+    }
+    void testAdd()
+    {
+        QSharedPointer<Update> m = createUpdate();
+        m->setIdentifier("test.app");
+        m->setRevision(1);
 
-    //     m_model->add(&m);
-    //     m_model->refresh();
+        QSignalSpy insertedSpy(m_model, SIGNAL(rowsAboutToBeInserted(const QModelIndex&, int, int)));
+        m_db->add(m);
+        QTRY_COMPARE(insertedSpy.count(), 1);
+        QCOMPARE(m_model->count(), 1);
+    }
+    void testAddMultiple()
+    {
+        QSharedPointer<Update> a = createUpdate();
+        a->setIdentifier("a.app");
+        a->setRevision(1);
+        QSharedPointer<Update> b = createUpdate();
+        b->setIdentifier("b.app");
+        b->setRevision(1);
+        QSharedPointer<Update> c = createUpdate();
+        c->setIdentifier("c.app");
+        c->setRevision(1);
 
+        m_db->add(a);
+        m_db->add(b);
+        m_db->add(c);
+
+        QCOMPARE(m_model->count(), 3);
+    }
+    void testRemove()
+    {
+        QSharedPointer<Update> a = createUpdate();
+        a->setIdentifier("a.app");
+        a->setRevision(1);
+
+        m_db->add(a);
+        QCOMPARE(m_model->count(), 1);
+
+        QSignalSpy removeSpy(m_model, SIGNAL(rowsAboutToBeRemoved(const QModelIndex&, int, int)));
+        m_db->remove(a);
+        QTRY_COMPARE(removeSpy.count(), 1);
+        QCOMPARE(m_model->count(), 0);
+    }
+    void testMoveDown()
+    {
+        /* For moving, we need a filter that sorts. Pending updates are sorted
+        by title ASC. (See UpdateDb::GET_PENDING) */
+        m_model->setFilter((int) UpdateDb::Filter::Pending);
+
+        QSharedPointer<Update> a = createUpdate();
+        a->setIdentifier("end.app");
+        a->setRevision(1);
+        a->setTitle("Zyx");
+
+        QSharedPointer<Update> b = createUpdate();
+        b->setIdentifier("middle.app");
+        b->setRevision(1);
+        b->setTitle("OPQ");
+
+        QSharedPointer<Update> c = createUpdate();
+        c->setIdentifier("first.app");
+        c->setRevision(1);
+        c->setTitle("ABC");
+
+        m_db->add(a);
+        m_db->add(b);
+        m_db->add(c);
+
+        QCOMPARE(m_model->data(m_model->index(0, 0), UpdateModel::Roles::IdRole).toString(),
+                 c->identifier());
+        QCOMPARE(m_model->data(m_model->index(1, 0), UpdateModel::Roles::IdRole).toString(),
+                 b->identifier());
+        QCOMPARE(m_model->data(m_model->index(2, 0), UpdateModel::Roles::IdRole).toString(),
+                 a->identifier());
+
+
+        QSignalSpy moveSpy(m_model, SIGNAL(rowsMoved(const QModelIndex&, int, int, const QModelIndex&, int)));
+
+        // Revert to natural sort.
+        m_model->setFilter((int) UpdateDb::Filter::PendingReversed);
+        QCOMPARE(m_model->data(m_model->index(0, 0), UpdateModel::Roles::IdRole).toString(),
+                 a->identifier());
+        QCOMPARE(m_model->data(m_model->index(1, 0), UpdateModel::Roles::IdRole).toString(),
+                 b->identifier());
+        QCOMPARE(m_model->data(m_model->index(2, 0), UpdateModel::Roles::IdRole).toString(),
+                 c->identifier());
+
+        QTRY_COMPARE(moveSpy.count(), 2);
+    }
+    // void testChange()
+    // {
+    //     QSharedPointer<Update> m = createUpdate();
+    //     m->setIdentifier("test.app");
+    //     m->setRevision(1);
+    //     m->setTitle("old");
+    //     m_db->add(m);
+
+    //     QSharedPointer<Update> nw = createUpdate();
+    //     nw->setIdentifier("test.app");
+    //     nw->setRevision(1);
+    //     nw->setTitle("new");
+
+    //     // QSignalSpy dataChangedSpy(m_model, SIGNAL(dataChanged(const QModelIndex&, const QModelIndex&)));
+    //     m_db->add(nw);
+    //     // QTRY_COMPARE(dataChangedSpy.count(), 1);
     //     QCOMPARE(m_model->count(), 1);
     // }
     // void testFilters()
@@ -503,6 +604,7 @@ private slots:
         // QTRY_COMPARE(endInsertSpy.count(), 1);
     }
 private:
+    UpdateDb *m_db;
     UpdateModel *m_model;
     QTemporaryDir *m_dir;
     QString m_dbfile;

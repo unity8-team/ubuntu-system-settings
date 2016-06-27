@@ -19,14 +19,14 @@
 import QtQuick 2.4
 import Ubuntu.SystemSettings.Update 1.0
 
-Update {
+UpdateDelegate {
     id: update
     name: "Ubuntu Touch"
     version: SystemImage.availableVersion
     size: SystemImage.updateSize
     iconUrl: "file:///usr/share/icons/suru/places/scalable/distributor-logo.svg"
-    updateState: SystemImage.checkTarget() ? SystemUpdate.StateAvailable :
-                                              SystemUpdate.StateUnavailable
+    updateState: SystemImage.checkTarget() ? Update.StateAvailable :
+                                              Update.StateUnavailable
     // onRetry: modelData.downloadUpdate();
     onDownload: SystemImage.downloadUpdate();
     onPause: SystemImage.pauseDownload();
@@ -38,11 +38,11 @@ Update {
             update.progress = -1;
             switch (SystemImage.downloadMode) {
                 case 0: // Manual
-                    update.updateState = SystemUpdate.StateQueuedForDownload;
+                    update.updateState = Update.StateQueuedForDownload;
                     break;
                 case 1: // Auto on Wi-Fi
                 case 2: // Always
-                    update.updateState = SystemUpdate.StateDownloadingAutomatically;
+                    update.updateState = Update.StateDownloadingAutomatically;
                     break;
             }
         }
@@ -50,11 +50,11 @@ Update {
             update.progress = percentage;
             switch (SystemImage.downloadMode) {
                 case 0: // Manual
-                    update.updateState = SystemUpdate.StateDownloading;
+                    update.updateState = Update.StateDownloading;
                     break;
                 case 1: // Auto on Wi-Fi
                 case 2: // Always
-                    update.updateState = SystemUpdate.StateDownloadingAutomatically;
+                    update.updateState = Update.StateDownloadingAutomatically;
                     break;
             }
         }
@@ -62,25 +62,25 @@ Update {
             update.progress = percentage;
             switch (SystemImage.downloadMode) {
                 case 0: // Manual
-                    update.updateState = SystemUpdate.StateDownloadPaused;
+                    update.updateState = Update.StateDownloadPaused;
                     break;
                 case 1: // Auto on Wi-Fi
                 case 2: // Always
-                    update.updateState = SystemUpdate.StateAutomaticDownloadPaused;
+                    update.updateState = Update.StateAutomaticDownloadPaused;
                     break;
             }
         }
         onUpdateDownloaded: {
-            update.updateState = SystemUpdate.StateDownloaded;
+            update.updateState = Update.StateDownloaded;
         }
         onUpdateFailed: {
-            update.updateState = SystemUpdate.StateFailed;
+            update.updateState = Update.StateFailed;
             update.setError(i18n.tr("Update failed"), lastReason);
         }
         onDownloadModeChanged: {
             // Pause an automatic download if the downloadMode changes to Manual.
             if (SystemImage.downloadMode === 0 &&
-                update.updateState === SystemUpdate.StateDownloadingAutomatically) {
+                update.updateState === Update.StateDownloadingAutomatically) {
                 update.pause();
             }
         }

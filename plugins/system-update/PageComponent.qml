@@ -79,12 +79,12 @@ ItemPage {
 
     UpdateModel {
         id: clickUpdates
-        filter: UpdateModel.PendingClicksUpdates
+        filter: UpdateDb.PendingClicks
     }
 
     UpdateModel {
         id: prevUpdates
-        filter: UpdateModel.Installed
+        filter: UpdateDb.Installed
     }
 
     DownloadHandler {

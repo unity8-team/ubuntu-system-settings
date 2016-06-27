@@ -29,6 +29,7 @@ ClickTokenDownloader::ClickTokenDownloader(QObject *parent,
     , m_authToken(UbuntuOne::Token())
 {
     init();
+    qWarning() << "click token download init for" << update->identifier();
 }
 
 ClickTokenDownloader::~ClickTokenDownloader()
@@ -41,11 +42,11 @@ void ClickTokenDownloader::init()
     connect(&m_apiClient, SIGNAL(success(QNetworkReply*)),
             this, SLOT(handleSuccess(QNetworkReply*)));
     connect(&m_apiClient, SIGNAL(networkError()),
-            this, SIGNAL(tokenRequestFailed(m_update)));
+            this, SLOT(handleFailure()));
     connect(&m_apiClient, SIGNAL(serverError()),
-            this, SIGNAL(tokenRequestFailed(m_update)));
+            this, SLOT(handleFailure()));
     connect(&m_apiClient, SIGNAL(credentialError()),
-            this, SIGNAL(tokenRequestFailed(m_update)));
+            this, SLOT(handleFailure()));
 }
 
 void ClickTokenDownloader::setAuthToken(const UbuntuOne::Token &authToken)
@@ -104,5 +105,10 @@ void ClickTokenDownloader::handleSuccess(QNetworkReply *reply)
         Q_EMIT tokenRequestFailed(m_update);
     }
     reply->deleteLater();
+}
+
+void ClickTokenDownloader::handleFailure()
+{
+    Q_EMIT tokenRequestFailed(m_update);
 }
 }// UpdatePlugin
