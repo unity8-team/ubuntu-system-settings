@@ -19,7 +19,7 @@
 #ifndef UPDATE_STRUCT_H
 #define UPDATE_STRUCT_H
 
-#include "systemupdate.h"
+#include "update.h"
 
 #include <QString>
 #include <QStringList>
@@ -49,13 +49,20 @@ public:
     QStringList command;
     QString changelog;
     QString token;
-    SystemUpdate::UpdateState updateState;
+    Update::State updateState;
     int progress;
     bool automatic;
     QString downloadId;
     QString error;
 
+    // Set values on struct given an sql query.
     void setValues(const QSqlQuery *query);
+
+    // Whether or not all fields in this struct is equal to that of other.
+    bool deepEquals(const UpdateStruct &other) const;
+
+    /* Whether or not either id and rev equals to other, or download id is set
+    and that is equal to that of other. */
     bool operator==(const UpdateStruct &other) const;
 };
 } // UpdatePlugin

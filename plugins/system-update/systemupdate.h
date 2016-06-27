@@ -18,6 +18,8 @@
 #ifndef SYSTEM_UPDATE_H
 #define SYSTEM_UPDATE_H
 
+#include "updatedb.h"
+
 #include <QDebug>
 
 namespace UpdatePlugin
@@ -25,39 +27,11 @@ namespace UpdatePlugin
 class SystemUpdate : public QObject
 {
     Q_OBJECT
-    Q_ENUMS(UpdateKind)
-    Q_ENUMS(UpdateState)
-    Q_ENUMS(SystemStatus)
+    Q_ENUMS(Status)
 public:
     static SystemUpdate *instance();
 
-    enum class UpdateKind
-    {
-        KindApp,
-        KindSystem,
-        KindUnknown
-    };
-
-    enum class UpdateState
-    {
-        StateUnknown,
-        StateAvailable,
-        StateUnavailable,
-        StateQueuedForDownload,
-        StateDownloading,
-        StateDownloadingAutomatically,
-        StateDownloadPaused,
-        StateAutomaticDownloadPaused,
-        StateInstalling,
-        StateInstallingAutomatically,
-        StateInstallPaused,
-        StateInstallFinished,
-        StateInstalled,
-        StateDownloaded,
-        StateFailed
-    };
-
-    enum class SystemStatus
+    enum class Status
     {
         StatusIdle,
         StatusCheckingClickUpdates,
@@ -68,15 +42,17 @@ public:
         StatusServerError
     };
 
-public slots:
-    void notifyModelChanged();
-    void notifyModelItemChanged(const QString &id, const int &revision);
-    void notifyModelItemChanged(const QString &downloadId);
+    UpdateDb* updateDb();
 
-signals:
-    void modelChanged();
-    void modelItemChanged(const QString &id, const int &revision);
-    void modelItemChanged(const QString &downloadId);
+// public slots:
+//     void notifyModelChanged();
+//     void notifyModelItemChanged(const QString &id, const int &revision);
+//     void notifyModelItemChanged(const QString &downloadId);
+
+// signals:
+//     void modelChanged();
+//     void modelItemChanged(const QString &id, const int &revision);
+//     void modelItemChanged(const QString &downloadId);
 
 protected:
     explicit SystemUpdate(QObject *parent = 0);
@@ -84,6 +60,7 @@ protected:
 
 private:
     static SystemUpdate *m_instance;
+    UpdateDb m_updateDb;
 };
 
 } // UpdatePlugin

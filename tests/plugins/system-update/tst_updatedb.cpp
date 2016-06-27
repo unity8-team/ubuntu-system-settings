@@ -26,11 +26,14 @@
 #include <QTest>
 
 #include "update.h"
-#include "updatemodel.h"
+#include "updatedb.h"
 
 using namespace UpdatePlugin;
 
-class TstUpdateModel : public QObject
+Q_DECLARE_METATYPE(QSharedPointer<Update>)
+Q_DECLARE_METATYPE(Update::Filter)
+
+class TstUpdateDb : public QObject
 {
     Q_OBJECT
 private slots:
@@ -38,28 +41,120 @@ private slots:
     {
         m_dir = new QTemporaryDir();
         QVERIFY(m_dir->isValid());
-        m_dbfile = m_dir->path() + "/cupdatesstore.db";
-        m_model = new UpdateModel(m_dbfile);
+        m_dbfile = m_dir->path() + "/test_updatedb.db";
+        m_instance = new UpdateDb(m_dbfile);
     }
     void cleanup()
     {
-        m_model->deleteLater();
+        m_instance->deleteLater();
         delete m_dir;
     }
-    // void testNoUpdates()
-    // {
-    //     QCOMPARE(m_model->count(), 0);
-    // }
+    void cleanupTestCase()
+    {
+        /* Allow for deleteLater of QObjects in this test to be deleted.
+        Workaround for QTBUG-12575. */
+        QTest::qWait(200);
+    }
+    QSharedPointer<Update> createUpdate()
+    {
+        return QSharedPointer<Update>(new Update);
+    }
+    void testNoUpdates()
+    {
+        auto list = m_instance->updates(Update::Filter::All);
+        QCOMPARE(list.size(), 0);
+    }
+    void testAddUpdate()
+    {
+        QSharedPointer<Update> m = createUpdate();
+        m->setIdentifier("test.app");
+        m->setRevision(1);
+
+        QSignalSpy changedSpy(m_instance, SIGNAL(changed()));
+        m_instance->add(m);
+        QTRY_COMPARE(changedSpy.count(), 1);
+    }
+    void testFilters_data()
+    {
+        QTest::addColumn<QSharedPointer<Update> >("a");
+        QTest::addColumn<QSharedPointer<Update> >("b");
+        QTest::addColumn<QSharedPointer<Update> >("c");
+        QTest::addColumn<QSharedPointer<Update> >("d");
+        QTest::addColumn<Update::Filter>("filter");
+        QTest::addColumn<QStringList>("ids");
+
+        QSharedPointer<Update> a = createUpdate();
+        a->setIdentifier("a");
+        a->setKind(Update::Kind::KindClick);
+
+        QSharedPointer<Update> b = createUpdate();
+        b->setIdentifier("b");
+        b->setKind(Update::Kind::KindImage);
+
+        QSharedPointer<Update> c = createUpdate();
+        c->setIdentifier("c");
+        c->setInstalled(true);
+        c->setKind(Update::Kind::KindClick);
+
+        QSharedPointer<Update> d = createUpdate();
+        d->setIdentifier("d");
+        d->setInstalled(true);
+        d->setKind(Update::Kind::KindImage);
+
+        QStringList all; all << "a" << "b" << "c" << "d";
+        QTest::newRow("All") << a << b << c << d << Update::Filter::All << all;
+
+        QStringList pending; pending << "a" << "b";
+        QTest::newRow("Pending") << a << b << c << d << Update::Filter::Pending << pending;
+
+        QStringList pendingClicks; pendingClicks << "a";
+        QTest::newRow("PendingClicks") << a << b << c << d << Update::Filter::PendingClicks << pendingClicks;
+
+        QStringList pendingImage; pendingImage << "b";
+        QTest::newRow("PendingImage") << a << b << c << d << Update::Filter::PendingImage << pendingImage;
+
+        QStringList installedClicks; installedClicks << "c";
+        QTest::newRow("InstalledClicks") << a << b << c << d << Update::Filter::InstalledClicks << installedClicks;
+
+        QStringList installedImage; installedImage << "d";
+        QTest::newRow("InstalledImage") << a << b << c << d << Update::Filter::InstalledImage << installedImage;
+
+        QStringList installed; installed << "c" << "d";
+        QTest::newRow("Installed") << a << b << c << d << Update::Filter::Installed << installed;
+    }
+    void testFilters()
+    {
+        QFETCH(QSharedPointer<Update>, a);
+        QFETCH(QSharedPointer<Update>, b);
+        QFETCH(QSharedPointer<Update>, c);
+        QFETCH(QSharedPointer<Update>, d);
+        QFETCH(Update::Filter, filter);
+        QFETCH(QStringList, ids);
+
+        m_instance->add(a);
+        m_instance->add(b);
+        m_instance->add(c);
+        m_instance->add(d);
+
+        QList<QSharedPointer<Update> > updates = m_instance->updates(filter);
+
+        QStringList actualIds;
+        for (int i = 0; i < updates.size(); i++) {
+            actualIds << updates.at(i)->identifier();
+        }
+
+        QCOMPARE(actualIds, ids);
+    }
     // void testUpdate()
     // {
     //     Update m;
     //     m.setName("test.app");
     //     m.setRevision(1);
 
-    //     m_model->add(&m);
-    //     m_model->refresh();
+    //     m_instance->add(&m);
+    //     m_instance->refresh();
 
-    //     QCOMPARE(m_model->count(), 1);
+    //     QCOMPARE(m_instance->count(), 1);
     // }
     // void testFilters()
     // {
@@ -71,31 +166,31 @@ private slots:
     //     installedApp.setName("installed.app");
     //     installedApp.setRevision(1);
 
-    //     m_model->add(&pendingApp);
-    //     m_model->add(&installedApp);
-    //     m_model->setDownloadId("installed.app", 1, "1234");
-    //     m_model->setInstalled("1234");
+    //     m_instance->add(&pendingApp);
+    //     m_instance->add(&installedApp);
+    //     m_instance->setDownloadId("installed.app", 1, "1234");
+    //     m_instance->setInstalled("1234");
 
-    //     m_model->setFilter(UpdateModel::UpdateTypes::PendingClicksUpdates);
-    //     QCOMPARE(m_model->count(), 1);
+    //     m_instance->setFilter(UpdateModel::UpdateTypes::PendingClicksUpdates);
+    //     QCOMPARE(m_instance->count(), 1);
     //     QCOMPARE(
-    //         m_model->data(
-    //             m_model->index(0), UpdateModel::IdRole
+    //         m_instance->data(
+    //             m_instance->index(0), UpdateModel::IdRole
     //         ).toString(), pendingApp.name()
     //     );
 
-    //     m_model->setFilter(UpdateModel::UpdateTypes::InstalledClicksUpdates);
-    //     QCOMPARE(m_model->count(), 1);
+    //     m_instance->setFilter(UpdateModel::UpdateTypes::InstalledClicksUpdates);
+    //     QCOMPARE(m_instance->count(), 1);
 
     //     QCOMPARE(
-    //         m_model->data(
-    //             m_model->index(0), UpdateModel::IdRole
+    //         m_instance->data(
+    //             m_instance->index(0), UpdateModel::IdRole
     //         ).toString(),
     //         installedApp.name()
     //     );
 
-    //     m_model->setFilter(UpdateModel::UpdateTypes::All);
-    //     QCOMPARE(m_model->count(), 2);
+    //     m_instance->setFilter(UpdateModel::UpdateTypes::All);
+    //     QCOMPARE(m_instance->count(), 2);
     // }
     // void testSupersededUpdate()
     // {
@@ -107,14 +202,14 @@ private slots:
     //     replacement.setName("some.app");
     //     replacement.setRevision(2);
 
-    //     m_model->add(&superseded);
-    //     m_model->add(&replacement);
+    //     m_instance->add(&superseded);
+    //     m_instance->add(&replacement);
 
     //     // We only want the replacement in our model of pending updates.
-    //     m_model->setFilter(UpdateModel::UpdateTypes::PendingClicksUpdates);
-    //     QCOMPARE(m_model->count(), 1);
-    //     QCOMPARE(m_model->data(
-    //         m_model->index(0), UpdateModel::IdRole
+    //     m_instance->setFilter(UpdateModel::UpdateTypes::PendingClicksUpdates);
+    //     QCOMPARE(m_instance->count(), 1);
+    //     QCOMPARE(m_instance->data(
+    //         m_instance->index(0), UpdateModel::IdRole
     //     ).toString(), replacement.name());
     // }
     // void testRoles()
@@ -137,42 +232,42 @@ private slots:
     //     app.setChangelog("* Fixed all bugs * Introduced new bugs");
     //     app.setToken("token");
 
-    //     QSignalSpy storeChangedSpy(m_model, SIGNAL(changed()));
-    //     m_model->add(&app);
-    //     m_model->setDownloadId(app.name(), app.revision(), "1234");
+    //     QSignalSpy storeChangedSpy(m_instance, SIGNAL(changed()));
+    //     m_instance->add(&app);
+    //     m_instance->setDownloadId(app.name(), app.revision(), "1234");
 
     //     QTRY_COMPARE(storeChangedSpy.count(), 1);
-    //     m_model->setProgress("1234", 50);
+    //     m_instance->setProgress("1234", 50);
 
-    //     m_model->refresh();
+    //     m_instance->refresh();
 
-    //     QModelIndex idx = m_model->index(0);
+    //     QModelIndex idx = m_instance->index(0);
 
-    //     QCOMPARE(m_model->data(idx, UpdateModel::KindRole).toString(), UpdateModel::KIND_CLICK);
-    //     QCOMPARE(m_model->data(idx, UpdateModel::IdRole).toString(), app.name());
-    //     QCOMPARE(m_model->data(idx, UpdateModel::LocalVersionRole).toString(), app.localVersion());
-    //     QCOMPARE(m_model->data(idx, UpdateModel::RemoteVersionRole).toString(), app.remoteVersion());
-    //     QCOMPARE(m_model->data(idx, UpdateModel::RevisionRole).toInt(), app.revision());
-    //     QCOMPARE(m_model->data(idx, UpdateModel::TitleRole).toString(), app.title());
-    //     QCOMPARE(m_model->data(idx, UpdateModel::DownloadHashRole).toString(), app.downloadSha512());
-    //     QCOMPARE(m_model->data(idx, UpdateModel::SizeRole).toUInt(), app.binaryFilesize());
-    //     QCOMPARE(m_model->data(idx, UpdateModel::IconUrlRole).toString(), app.iconUrl());
-    //     QCOMPARE(m_model->data(idx, UpdateModel::DownloadUrlRole).toString(), app.downloadUrl());
-    //     QCOMPARE(m_model->data(idx, UpdateModel::CommandRole).toStringList(), app.command());
-    //     QCOMPARE(m_model->data(idx, UpdateModel::ChangelogRole).toString(), app.changelog());
-    //     QCOMPARE(m_model->data(idx, UpdateModel::InstalledRole).toBool(), false);
-    //     QCOMPARE(m_model->data(idx, UpdateModel::AutomaticRole).toBool(), app.automatic());
-    //     QCOMPARE(m_model->data(idx, UpdateModel::DownloadIdRole).toString(), QString("1234"));
-    //     QCOMPARE(m_model->data(idx, UpdateModel::ErrorRole).toString(), QString(""));
+    //     QCOMPARE(m_instance->data(idx, UpdateModel::KindRole).toString(), UpdateModel::KIND_CLICK);
+    //     QCOMPARE(m_instance->data(idx, UpdateModel::IdRole).toString(), app.name());
+    //     QCOMPARE(m_instance->data(idx, UpdateModel::LocalVersionRole).toString(), app.localVersion());
+    //     QCOMPARE(m_instance->data(idx, UpdateModel::RemoteVersionRole).toString(), app.remoteVersion());
+    //     QCOMPARE(m_instance->data(idx, UpdateModel::RevisionRole).toInt(), app.revision());
+    //     QCOMPARE(m_instance->data(idx, UpdateModel::TitleRole).toString(), app.title());
+    //     QCOMPARE(m_instance->data(idx, UpdateModel::DownloadHashRole).toString(), app.downloadSha512());
+    //     QCOMPARE(m_instance->data(idx, UpdateModel::SizeRole).toUInt(), app.binaryFilesize());
+    //     QCOMPARE(m_instance->data(idx, UpdateModel::IconUrlRole).toString(), app.iconUrl());
+    //     QCOMPARE(m_instance->data(idx, UpdateModel::DownloadUrlRole).toString(), app.downloadUrl());
+    //     QCOMPARE(m_instance->data(idx, UpdateModel::CommandRole).toStringList(), app.command());
+    //     QCOMPARE(m_instance->data(idx, UpdateModel::ChangelogRole).toString(), app.changelog());
+    //     QCOMPARE(m_instance->data(idx, UpdateModel::InstalledRole).toBool(), false);
+    //     QCOMPARE(m_instance->data(idx, UpdateModel::AutomaticRole).toBool(), app.automatic());
+    //     QCOMPARE(m_instance->data(idx, UpdateModel::DownloadIdRole).toString(), QString("1234"));
+    //     QCOMPARE(m_instance->data(idx, UpdateModel::ErrorRole).toString(), QString(""));
 
-    //     int stateInt = m_model->data(idx, UpdateModel::UpdateStateRole).toInt();
+    //     int stateInt = m_instance->data(idx, UpdateModel::UpdateStateRole).toInt();
     //     SystemUpdate::UpdateState u = (SystemUpdate::UpdateState) stateInt;
     //     QCOMPARE(u, SystemUpdate::UpdateState::StateAvailable);
 
-    //     QCOMPARE(m_model->data(idx, UpdateModel::ProgressRole).toInt(), 50);
+    //     QCOMPARE(m_instance->data(idx, UpdateModel::ProgressRole).toInt(), 50);
 
     //     // Verify that the date ain't empty.
-    //     QVERIFY(!m_model->data(idx, UpdateModel::CreatedAtRole).toString().isEmpty());
+    //     QVERIFY(!m_instance->data(idx, UpdateModel::CreatedAtRole).toString().isEmpty());
     // }
     // void testFilter_data()
     // {
@@ -188,10 +283,10 @@ private slots:
     // {
     //     QFETCH(int, filter);
 
-    //     QSignalSpy filterChangedSpy(m_model, SIGNAL(filterChanged()));
-    //     m_model->setFilter((UpdateModel::UpdateTypes) filter);
+    //     QSignalSpy filterChangedSpy(m_instance, SIGNAL(filterChanged()));
+    //     m_instance->setFilter((UpdateModel::UpdateTypes) filter);
     //     QTRY_COMPARE(filterChangedSpy.count(), 1);
-    //     QCOMPARE((int) m_model->filter(), filter);
+    //     QCOMPARE((int) m_instance->filter(), filter);
     // }
     // void testLastCheck_data() {
     //     QTest::addColumn<QDateTime>("set");
@@ -208,11 +303,11 @@ private slots:
     // {
     //     QFETCH(QDateTime, set);
     //     QFETCH(QDateTime, target);
-    //     QCOMPARE(m_model->lastCheckDate().isValid(), false);
+    //     QCOMPARE(m_instance->lastCheckDate().isValid(), false);
 
-    //     m_model->setLastCheckDate(set);
+    //     m_instance->setLastCheckDate(set);
 
-    //     QCOMPARE(m_model->lastCheckDate(), target);
+    //     QCOMPARE(m_instance->lastCheckDate(), target);
     // }
     // void testUpdateLifecycle()
     // {
@@ -247,14 +342,14 @@ private slots:
     //     m2.setDownloadSha512("293847");
 
     //     // Add an app
-    //     m_model->add(&m);
+    //     m_instance->add(&m);
 
     //     int size = 0;
-    //     QSqlQuery q = m_model->db().exec("SELECT * FROM updates");
+    //     QSqlQuery q = m_instance->db().exec("SELECT * FROM updates");
 
     //     while (q.next()) {
     //         QVERIFY(q.isValid());
-    //         QCOMPARE(q.value(0).toString(), m_model->KIND_CLICK);
+    //         QCOMPARE(q.value(0).toString(), m_instance->KIND_CLICK);
     //         QCOMPARE(q.value(1).toString(), m.name());
     //         QCOMPARE(q.value(2).toString(), m.localVersion());
     //         QCOMPARE(q.value(3).toString(), m.remoteVersion());
@@ -277,14 +372,14 @@ private slots:
 
     //     // We had to refresh tokens, so we re-add the update.
     //     m.setToken("newtoken");
-    //     m_model->add(&m);
+    //     m_instance->add(&m);
 
     //     size = 0;
-    //     QSqlQuery q2 = m_model->db().exec("SELECT * FROM updates");
+    //     QSqlQuery q2 = m_instance->db().exec("SELECT * FROM updates");
 
     //     while (q2.next()) {
     //         QVERIFY(q2.isValid());
-    //         QCOMPARE(q2.value(0).toString(), m_model->KIND_CLICK);
+    //         QCOMPARE(q2.value(0).toString(), m_instance->KIND_CLICK);
     //         QCOMPARE(q2.value(1).toString(), m.name());
     //         QCOMPARE(q2.value(2).toString(), m.localVersion());
     //         QCOMPARE(q2.value(3).toString(), m.remoteVersion());
@@ -306,10 +401,10 @@ private slots:
     //     QCOMPARE(size, 1);
 
     //     // Add second app
-    //     m_model->add(&m2);
+    //     m_instance->add(&m2);
 
     //     size = 0;
-    //     QSqlQuery q3 = m_model->db().exec("SELECT * FROM updates");
+    //     QSqlQuery q3 = m_instance->db().exec("SELECT * FROM updates");
 
     //     while (q3.next()) {
     //         Update *target;
@@ -320,7 +415,7 @@ private slots:
     //             target = &m2;
 
     //         QVERIFY(q3.isValid());
-    //         QCOMPARE(q3.value(0).toString(), m_model->KIND_CLICK);
+    //         QCOMPARE(q3.value(0).toString(), m_instance->KIND_CLICK);
     //         QCOMPARE(q3.value(1).toString(), target->name());
     //         QCOMPARE(q3.value(2).toString(), target->localVersion());
     //         QCOMPARE(q3.value(3).toString(), target->remoteVersion());
@@ -342,15 +437,15 @@ private slots:
     //     QCOMPARE(size, 2);
 
     //     // Mark as installed
-    //     m_model->setDownloadId(m.name(), m.revision(), "1234");
-    //     m_model->setInstalled("1234");
+    //     m_instance->setDownloadId(m.name(), m.revision(), "1234");
+    //     m_instance->setInstalled("1234");
 
     //     size = 0;
-    //     QSqlQuery q4 = m_model->db().exec("SELECT * FROM updates WHERE state='installed'");
+    //     QSqlQuery q4 = m_instance->db().exec("SELECT * FROM updates WHERE state='installed'");
 
     //     while (q4.next()) {
     //         QVERIFY(q4.isValid());
-    //         QCOMPARE(q4.value(0).toString(), m_model->KIND_CLICK);
+    //         QCOMPARE(q4.value(0).toString(), m_instance->KIND_CLICK);
     //         QCOMPARE(q4.value(1).toString(), m.name());
     //         QCOMPARE(q4.value(2).toString(), m.localVersion());
     //         QCOMPARE(q4.value(3).toString(), m.remoteVersion());
@@ -372,11 +467,11 @@ private slots:
     //     QCOMPARE(size, 1);
 
     //     size = 0;
-    //     QSqlQuery q5 = m_model->db().exec("SELECT * FROM updates WHERE state='pending'");
+    //     QSqlQuery q5 = m_instance->db().exec("SELECT * FROM updates WHERE state='pending'");
 
     //     while (q5.next()) {
     //         QVERIFY(q5.isValid());
-    //         QCOMPARE(q5.value(0).toString(), m_model->KIND_CLICK);
+    //         QCOMPARE(q5.value(0).toString(), m_instance->KIND_CLICK);
     //         QCOMPARE(q5.value(1).toString(), m2.name());
     //         QCOMPARE(q5.value(2).toString(), m2.localVersion());
     //         QCOMPARE(q5.value(3).toString(), m2.remoteVersion());
@@ -407,16 +502,16 @@ private slots:
     //     oldUpdate.setName("old.app");
     //     oldUpdate.setRevision(1);
 
-    //     m_model->add(&recentUpdate);
-    //     m_model->add(&oldUpdate);
+    //     m_instance->add(&recentUpdate);
+    //     m_instance->add(&oldUpdate);
 
-    //     m_model->setDownloadId(recentUpdate.name(), recentUpdate.revision(), "1");
-    //     m_model->setInstalled("1");
-    //     m_model->setDownloadId(oldUpdate.name(), oldUpdate.revision(), "2");
-    //     m_model->setInstalled("2");
+    //     m_instance->setDownloadId(recentUpdate.name(), recentUpdate.revision(), "1");
+    //     m_instance->setInstalled("1");
+    //     m_instance->setDownloadId(oldUpdate.name(), oldUpdate.revision(), "2");
+    //     m_instance->setInstalled("2");
 
     //     // Change update date directly in the db
-    //     QSqlQuery q(m_model->db());
+    //     QSqlQuery q(m_instance->db());
     //     q.prepare("UPDATE updates SET updated_at_utc = :updated WHERE id = :appid");
     //     QDateTime longAgo = QDateTime::currentDateTime().addMonths(-1).addDays(-1).toUTC();
 
@@ -424,9 +519,9 @@ private slots:
     //     q.bindValue(":appid", oldUpdate.name());
     //     q.exec();
 
-    //     m_model->pruneDb();
+    //     m_instance->pruneDb();
 
-    //     QSqlQuery q1(m_model->db());
+    //     QSqlQuery q1(m_instance->db());
     //     q1.exec("SELECT * FROM updates");
     //     int size = 0;
     //     while (q1.next()) {
@@ -449,10 +544,10 @@ private slots:
     //     QString title("Ubuntu Touch");
     //     QString iconUrl("distributor-logo.svg");
     //     int binarySize(1000);
-    //     m_model->add(kind, uniqueIdentifier, revision, version, changelog,
+    //     m_instance->add(kind, uniqueIdentifier, revision, version, changelog,
     //                     title, iconUrl, binarySize, false);
 
-    //     QSqlQuery q(m_model->db());
+    //     QSqlQuery q(m_instance->db());
     //     q.exec("SELECT * FROM updates");
     //     int size = 0;
     //     while (q.next()) {
@@ -468,8 +563,8 @@ private slots:
     //     app.setName("new.app");
     //     app.setRevision(1);
 
-    //     QSignalSpy storeChangedSpy(m_model, SIGNAL(changed()));
-    //     m_model->add(&app);
+    //     QSignalSpy storeChangedSpy(m_instance, SIGNAL(changed()));
+    //     m_instance->add(&app);
     //     QTRY_COMPARE(storeChangedSpy.count(), 1);
 
     // }
@@ -479,8 +574,8 @@ private slots:
     //     app.setName("new.app");
     //     app.setRevision(1);
 
-    //     QSignalSpy storeChangedSpy(m_model, SIGNAL(changed()));
-    //     m_model->add(&app);
+    //     QSignalSpy storeChangedSpy(m_instance, SIGNAL(changed()));
+    //     m_instance->add(&app);
     //     QTRY_COMPARE(storeChangedSpy.count(), 1);
     // }
     void testInsertRows()
@@ -489,11 +584,11 @@ private slots:
         // upd.setName("new.app");
         // upd.setRevision(1);
 
-        // QSignalSpy beginInsertSpy(m_model, SIGNAL(beginInsertRows(QModelIndex*, int, int)));
-        // QSignalSpy endInsertSpy(m_model, SIGNAL(endInsertRows()));
+        // QSignalSpy beginInsertSpy(m_instance, SIGNAL(beginInsertRows(QModelIndex*, int, int)));
+        // QSignalSpy endInsertSpy(m_instance, SIGNAL(endInsertRows()));
 
-        // m_model->(&upd);
-        // m_model->refresh();
+        // m_instance->(&upd);
+        // m_instance->refresh();
 
         // QTRY_COMPARE(beginInsertSpy.count(), 1);
         // QList<QVariant> arguments = beginInsertSpy.takeFirst()
@@ -503,11 +598,11 @@ private slots:
         // QTRY_COMPARE(endInsertSpy.count(), 1);
     }
 private:
-    UpdateModel *m_model;
+    UpdateDb *m_instance;
     QTemporaryDir *m_dir;
     QString m_dbfile;
 };
 
-QTEST_MAIN(TstUpdateModel)
+QTEST_MAIN(TstUpdateDb)
 
-#include "tst_updatemodel.moc"
+#include "tst_updatedb.moc"

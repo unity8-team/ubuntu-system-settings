@@ -16,6 +16,9 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include "clickupdatemanager.h"
+#include "helpers.h"
+
 #include <assert.h>
 
 #include <QByteArray>
@@ -25,18 +28,16 @@
 #include <QJsonValue>
 #include <QStandardPaths>
 
-#include "clickupdatemanager.h"
-#include "helpers.h"
 
 namespace UpdatePlugin
 {
 ClickUpdateManager::ClickUpdateManager(QObject *parent)
         : QObject(parent)
-        , m_model(new UpdateModel(this))
+        , m_db(SystemUpdate::instance()->updateDb())
         , m_process()
         , m_apiClient(this)
         , m_updates()
-        , m_u1token(UbuntuOne::Token())
+        , m_authToken(UbuntuOne::Token())
         , m_authenticated(true)
         , m_checking(false)
 {
@@ -45,11 +46,11 @@ ClickUpdateManager::ClickUpdateManager(QObject *parent)
 
 ClickUpdateManager::ClickUpdateManager(const QString &dbpath, QObject *parent)
         : QObject(parent)
-        , m_model(new UpdateModel(dbpath, this))
+        , m_db(new UpdateDb(dbpath, this))
         , m_process()
         , m_apiClient(this)
         , m_updates()
-        , m_u1token(UbuntuOne::Token())
+        , m_authToken(UbuntuOne::Token())
         , m_authenticated(true)
         , m_checking(false)
 {
@@ -73,12 +74,14 @@ ClickUpdateManager::~ClickUpdateManager()
 {
 }
 
-void ClickUpdateManager::initializeUpdate(const ClickUpdate *update)
+void ClickUpdateManager::initializeTokenDownloader(const ClickTokenDownloader *dler)
 {
-    connect(update, SIGNAL(clickTokenRequestSucceeded(const ClickUpdate*)),
-            this, SLOT(processClickToken(const ClickUpdate*)));
-    connect(update, SIGNAL(clickTokenRequestFailed(ClickUpdate*)),
-            this, SLOT(handleClickTokenFailure(ClickUpdate*)));
+    connect(dler, SIGNAL(tokenRequestSucceeded(Update*)),
+            this, SLOT(handleTokenDownload(Update*)));
+    connect(dler, SIGNAL(tokenRequestFailed(Update*)),
+            this, SLOT(handleTokenDownloadFailure(Update*)));
+    connect(this, SIGNAL(checkCanceled()),
+            dler, SLOT(cancel()));
 }
 
 void ClickUpdateManager::initializeProcess()
@@ -131,7 +134,7 @@ void ClickUpdateManager::check()
 
     // Don't check for click updates if there are no credentials,
     // instead ask for credentials.
-    if (!m_u1token.isValid() && !Helpers::isIgnoringCredentials()) {
+    if (!m_authToken.isValid() && !Helpers::isIgnoringCredentials()) {
         m_ssoService.getCredentials();
         return;
     }
@@ -153,24 +156,26 @@ void ClickUpdateManager::check()
 
 void ClickUpdateManager::check(const QString &packageName)
 {
-    qWarning() << "click checker: checking this one file" << packageName
-            << "...";
-    ClickUpdate *m = m_model->getPendingClickUpdate(packageName);
-    qWarning() << "click um: got back" << m;
-    if (m && m->name() == packageName) {
-        qWarning() << "click checker: requesting click token for" << packageName
-                << "...";
-        initializeUpdate(m);
-        m->setAutomatic(true);
-        m->requestClickToken();
-    }
+    // qWarning() << "click checker: checking this one file" << packageName
+    //         << "...";
+    // ClickUpdate *m = m_db->getPendingClickUpdate(packageName);
+    // qWarning() << "click um: got back" << m;
+    // if (m && m->identifier() == packageName) {
+    //     qWarning() << "click checker: requesting click token for" << packageName
+    //             << "...";
+    //     initializeTokenDownloader(m);
+    //     m->setAutomatic(true);
+    //     m->requestClickToken();
+    // }
 }
 
 // Tries to shut down all checks we might currently be doing.
 void ClickUpdateManager::cancel()
 {
     // Abort all click update update data objects.
-    foreach (const QString &name, m_updates.keys())m_updates.value(name)->cancel();
+    // foreach (const QString &name, m_updates.keys())m_updates.value(name)->cancel();
+
+
 
     m_process.terminate();
 
@@ -208,22 +213,20 @@ void ClickUpdateManager::processInstalledClicks(const int &exitCode)
 
     int i;
     for (i = 0; i < array.size(); i++) {
-        ClickUpdate *update = new ClickUpdate(this);
-        update->setU1Token(m_u1token);
-        initializeUpdate(update);
+        Update *update = new Update(this);
 
         QJsonObject object = array.at(i).toObject();
-        update->setName(object.value("name").toString());
+        update->setIdentifier(object.value("name").toString());
         update->setTitle(object.value("title").toString());
         update->setLocalVersion(object.value("version").toString());
 
         QStringList command;
         // command << Helpers::whichPkcon() << "-p" << "install-local" << "$file";
         command << "sleep" << "5";
-        // update->setCommand(command);
+        update->setCommand(command);
 
-        m_updates.insert(update->name(), update);
-        qWarning() << "click checker: queueing up" << update->name();
+        m_updates.insert(update->identifier(), update);
+        qWarning() << "click checker: queueing up" << update->identifier();
     }
 
     // Populate each ClickUpdate with remote update data.
@@ -258,15 +261,15 @@ void ClickUpdateManager::handleProcessError(const QProcess::ProcessError &error)
 
 void ClickUpdateManager::handleCheckCompleted()
 {
-    m_model->setLastCheckDate(QDateTime::currentDateTime());
+    m_db->setLastCheckDate(QDateTime::currentDateTime());
 }
 
-void ClickUpdateManager::processClickToken(const ClickUpdate *update)
+void ClickUpdateManager::handleTokenDownload(Update *update)
 {
     qWarning() << "click checker: handling obtained token on update data"
-            << update->name();
+            << update->identifier();
 
-    m_model->add(update);
+    // m_db->add(update);
 
     completionCheck();
 }
@@ -290,25 +293,23 @@ void ClickUpdateManager::completionCheck()
     qWarning() << "click checker: complete.";
 }
 
-void ClickUpdateManager::handleClickTokenFailure(
-        ClickUpdate *update)
+void ClickUpdateManager::handleTokenDownloadFailure(Update *update)
 {
-    // Set empty click token in db. This way we can ask the user to retry.
+    // Unset token, let the user try again.
     update->setToken("");
-    m_model->add(update);
+    // m_db->add(update);
 
     // We're done with it.
-    m_updates.remove(update->name());
+    m_updates.remove(update->identifier());
     completionCheck();
 }
-
 
 void ClickUpdateManager::handleCredentialsFound(const UbuntuOne::Token &token)
 {
     qWarning() << "found credentials";
-    m_u1token = token;
+    m_authToken = token;
 
-    if (!m_u1token.isValid()) {
+    if (!m_authToken.isValid()) {
         qWarning() << "updateManager got invalid token.";
         handleCredentialsFailed();
         return;
@@ -324,7 +325,7 @@ void ClickUpdateManager::handleCredentialsFailed()
 {
     qWarning() << "failed credentials";
     m_ssoService.invalidateCredentials();
-    m_u1token = UbuntuOne::Token();
+    m_authToken = UbuntuOne::Token();
 
     cancel();
 
@@ -359,7 +360,7 @@ void ClickUpdateManager::requestClickMetadata()
 
     QString urlApps = Helpers::clickMetadataUrl();
     qWarning() << "click checker: using url" << urlApps;
-    QString authHeader = m_u1token.signUrl(
+    QString authHeader = m_authToken.signUrl(
         urlApps, QStringLiteral("POST"), true
     );
     QUrl url(urlApps);
@@ -417,27 +418,29 @@ void ClickUpdateManager::parseClickMetadata(const QJsonArray &array)
         auto title = object["title"].toString();
         auto revision = object["revision"].toInt();
         if (m_updates.contains(name)) {
-            ClickUpdate *update = m_updates.value(name);
+            Update *update = m_updates.value(name);
             update->setRemoteVersion(version);
             if (update->isUpdateRequired()) {
 
-                qWarning() << "click checker: update of" << update->name()
+                qWarning() << "click checker: update of" << update->identifier()
                         << "is required";
 
                 update->setIconUrl(icon_url);
                 update->setDownloadUrl(url);
                 update->setBinaryFilesize(size);
-                update->setDownloadSha512(download_sha512);
+                update->setDownloadHash(download_sha512);
                 update->setChangelog(changelog);
                 update->setTitle(title);
                 update->setRevision(revision);
 
                 // Start the process of obtaining a click token for this
                 // click update.
-                update->requestClickToken();
+                ClickTokenDownloader* dl = new ClickTokenDownloader(this, update);
+                dl->setAuthToken(m_authToken);
+                initializeTokenDownloader(dl);
             } else {
                 // Update not required, let's remove it.
-                m_updates.remove(update->name());
+                m_updates.remove(update->identifier());
                 completionCheck();
             }
         }
@@ -459,7 +462,7 @@ bool ClickUpdateManager::isCheckRequired()
     // Spec says that a manual check should not happen if a check was
     // completed less than 30 minutes ago.
     QDateTime now = QDateTime::currentDateTimeUtc().addSecs(-1800); // 30 mins
-    return m_model->lastCheckDate() < now;
+    return m_db->lastCheckDate() < now;
 }
 
 bool ClickUpdateManager::authenticated()
@@ -474,23 +477,4 @@ void ClickUpdateManager::setAuthenticated(const bool authenticated)
         Q_EMIT (authenticatedChanged());
     }
 }
-
-// void ClickUpdateManager::markInstalled(const QString &packageName, const int &revision)
-// {
-//     m_model->markInstalled(packageName, revision);
-// }
-
-
-// void ClickUpdateManager::setUpdateState(const QString &packageName, const int &revision,
-//                                         const int &state)
-// {
-//     SystemUpdate::UpdateState u = (SystemUpdate::UpdateState) state;
-//     m_model->setUpdateState(packageName, revision, u);
-// }
-
-// void ClickUpdateManager::setProgress(const QString &packageName, const int &revision,
-//                                      const int &progress)
-// {
-//     m_model->setProgress(packageName, revision, progress);
-// }
 } // UpdatePlugin

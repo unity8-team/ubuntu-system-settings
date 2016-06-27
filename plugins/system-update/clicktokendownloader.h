@@ -16,49 +16,45 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef CLICK_UPDATE_H
-#define CLICK_UPDATE_H
+#ifndef CLICKTOKEN_DOWNLOADER_H
+#define CLICKTOKEN_DOWNLOADER_H
 
-#include "update.h"
 #include "clickapiclient.h"
+#include "update.h"
 
 #include <token.h>
 
 #include <QObject>
-#include <QNetworkReply>
+#include <QSharedPointer>
 
 #define X_CLICK_TOKEN "X-Click-Token"
 
 namespace UpdatePlugin
 {
-class ClickUpdate : public Update
+class ClickTokenDownloader : public QObject
 {
     Q_OBJECT
 public:
-    explicit ClickUpdate(QObject *parent = 0);
-    ~ClickUpdate();
+    explicit ClickTokenDownloader(QObject *parent, Update *update);
+    ~ClickTokenDownloader();
 
-    void requestClickToken();
-    void cancel();
-    void setU1Token(const UbuntuOne::Token &token);
-
-private slots:
-    void handleToken(QNetworkReply *reply);
-    void handleTokenChanged();
-//     void tokenRequestSslFailed(const QList<QSslError> &errors);
-//     void tokenRequestFailed(const QNetworkReply::NetworkError &code);
-//     void tokenRequestSucceeded(const QNetworkReply* reply);
+    void requestToken();
+    void setAuthToken(const UbuntuOne::Token &authToken);
 
 signals:
-    void clickTokenRequestSucceeded(const ClickUpdate *update);
-    void clickTokenRequestFailed(ClickUpdate *update);
-    // void credentialError();
+    void tokenRequestSucceeded(Update *update);
+    void tokenRequestFailed(Update *update);
+
+private slots:
+    void cancel();
+    void handleSuccess(QNetworkReply *reply);
 
 private:
     void init();
+    Update *m_update;
     ClickApiClient m_apiClient;
-    UbuntuOne::Token m_u1Token;
+    UbuntuOne::Token m_authToken;
 };
 } // UpdatePlugin
 
-#endif // CLICK_UPDATE_H
+#endif // CLICKTOKEN_DOWNLOADER_H

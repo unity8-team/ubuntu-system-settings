@@ -16,28 +16,36 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include "helpers.h"
 #include "update.h"
 
 #include <apt-pkg/debversion.h>
+#include <QVariant>
 
 namespace UpdatePlugin
 {
 Update::Update(QObject *parent)
     : QObject(parent)
+    , m_kind(Kind::KindUnknown)
+    , m_identifier("")
+    , m_revision(0)
     , m_anonDownloadUrl("")
     , m_binaryFilesize(0)
     , m_changelog("")
     , m_channel("")
     , m_content("")
+    , m_createdAt()
+    , m_updatedAt()
     , m_department()
-    , m_downloadSha512("")
+    , m_downloadId("")
+    , m_downloadHash("")
     , m_downloadUrl("")
+    , m_error("")
     , m_iconUrl("")
-    , m_name("")
+    , m_installed(false)
     , m_origin("")
-    , m_packageName("")
-    , m_revision(0)
-    , m_status("")
+    , m_progress(-1)
+    , m_state(State::StateUnknown)
     , m_title("")
     , m_localVersion("")
     , m_remoteVersion("")
@@ -45,10 +53,22 @@ Update::Update(QObject *parent)
     , m_command("")
     , m_automatic(false)
 {
+    qWarning() << "created update";
 }
 
 Update::~Update()
 {
+    qWarning() << "destroying update";
+}
+
+Update::Kind Update::kind() const
+{
+    return m_kind;
+}
+
+QString Update::identifier() const
+{
+    return m_identifier;
 }
 
 QString Update::anonDownloadUrl() const
@@ -76,14 +96,29 @@ QString Update::content() const
     return m_content;
 }
 
+QDateTime Update::createdAt() const
+{
+    return m_createdAt;
+}
+
+QDateTime Update::updatedAt() const
+{
+    return m_updatedAt;
+}
+
 QStringList Update::department() const
 {
     return m_department;
 }
 
-QString Update::downloadSha512() const
+QString Update::downloadId() const
 {
-    return m_downloadSha512;
+    return m_downloadId;
+}
+
+QString Update::downloadHash() const
+{
+    return m_downloadHash;
 }
 
 QString Update::downloadUrl() const
@@ -91,14 +126,19 @@ QString Update::downloadUrl() const
     return m_downloadUrl;
 }
 
+QString Update::error() const
+{
+    return m_error;
+}
+
 QString Update::iconUrl() const
 {
     return m_iconUrl;
 }
 
-QString Update::name() const
+bool Update::installed() const
 {
-    return m_name;
+    return m_installed;
 }
 
 QString Update::origin() const
@@ -106,9 +146,9 @@ QString Update::origin() const
     return m_origin;
 }
 
-QString Update::packageName() const
+int Update::progress() const
 {
-    return m_packageName;
+    return m_progress;
 }
 
 int Update::revision() const
@@ -116,9 +156,9 @@ int Update::revision() const
     return m_revision;
 }
 
-QString Update::status() const
+Update::State Update::state() const
 {
-    return m_status;
+    return m_state;
 }
 
 QString Update::title() const
@@ -144,6 +184,14 @@ QString Update::token() const
 QStringList Update::command() const
 {
     return m_command;
+}
+
+void Update::setKind(const Update::Kind &kind)
+{
+    if (m_kind != kind) {
+        m_kind = kind;
+        Q_EMIT kindChanged();
+    }
 }
 
 void Update::setAnonDownloadUrl(const QString &anonDownloadUrl)
@@ -186,6 +234,22 @@ void Update::setContent(const QString &content)
     }
 }
 
+void Update::setCreatedAt(const QDateTime &createdAt)
+{
+    if (m_createdAt != createdAt) {
+        m_createdAt = createdAt;
+        Q_EMIT createdAtChanged();
+    }
+}
+
+void Update::setUpdatedAt(const QDateTime &updatedAt)
+{
+    if (m_updatedAt != updatedAt) {
+        m_updatedAt = updatedAt;
+        Q_EMIT updatedAtChanged();
+    }
+}
+
 void Update::setDepartment(const QStringList &department)
 {
     if (m_department != department) {
@@ -194,11 +258,19 @@ void Update::setDepartment(const QStringList &department)
     }
 }
 
-void Update::setDownloadSha512(const QString &downloadSha512)
+void Update::setDownloadId(const QString &downloadId)
 {
-    if (m_downloadSha512 != downloadSha512) {
-        m_downloadSha512 = downloadSha512;
-        Q_EMIT downloadSha512Changed();
+    if (m_downloadId != downloadId) {
+        m_downloadId = downloadId;
+        Q_EMIT downloadIdChanged();
+    }
+}
+
+void Update::setDownloadHash(const QString &downloadHash)
+{
+    if (m_downloadHash != downloadHash) {
+        m_downloadHash = downloadHash;
+        Q_EMIT downloadHashChanged();
     }
 }
 
@@ -210,6 +282,14 @@ void Update::setDownloadUrl(const QString &downloadUrl)
     }
 }
 
+void Update::setError(const QString &error)
+{
+    if (m_error != error) {
+        m_error = error;
+        Q_EMIT errorChanged();
+    }
+}
+
 void Update::setIconUrl(const QString &iconUrl)
 {
     if (m_iconUrl != iconUrl) {
@@ -218,11 +298,19 @@ void Update::setIconUrl(const QString &iconUrl)
     }
 }
 
-void Update::setName(const QString &name)
+void Update::setIdentifier(const QString &identifier)
 {
-    if (m_name != name) {
-        m_name = name;
-        Q_EMIT nameChanged();
+    if (m_identifier != identifier) {
+        m_identifier = identifier;
+        Q_EMIT identifierChanged();
+    }
+}
+
+void Update::setInstalled(const bool installed)
+{
+    if (m_installed != installed) {
+        m_installed = installed;
+        Q_EMIT installedChanged();
     }
 }
 
@@ -234,11 +322,11 @@ void Update::setOrigin(const QString &origin)
     }
 }
 
-void Update::setPackageName(const QString &packageName)
+void Update::setProgress(const int &progress)
 {
-    if (m_packageName != packageName) {
-        m_packageName = packageName;
-        Q_EMIT packageNameChanged();
+    if (m_progress != progress) {
+        m_progress = progress;
+        Q_EMIT progressChanged();
     }
 }
 
@@ -250,11 +338,11 @@ void Update::setRevision(const int &revision)
     }
 }
 
-void Update::setStatus(const QString &status)
+void Update::setState(const Update::State &state)
 {
-    if (m_status != status) {
-        m_status = status;
-        Q_EMIT statusChanged();
+    if (m_state != state) {
+        m_state = state;
+        Q_EMIT stateChanged();
     }
 }
 
@@ -318,6 +406,169 @@ bool Update::isUpdateRequired()
     return result < 0;
 }
 
+void Update::setValues(const QSqlQuery *query)
+{
+    setKind(stringToKind(
+        query->value("kind").toString()
+    ));
+    setIdentifier(query->value("id").toString());
+    setLocalVersion(query->value("local_version").toString());
+    setRemoteVersion(query->value("remote_version").toString());
+    setRevision(query->value("revision").toInt());
+    setInstalled(query->value("installed").toBool());
+    setCreatedAt(QDateTime::fromMSecsSinceEpoch(
+        query->value("created_at_utc").toLongLong()
+    ));
+    setUpdatedAt(QDateTime::fromMSecsSinceEpoch(
+        query->value("updated_at_utc").toLongLong()
+    ));
+    setTitle(query->value("title").toString());
+    setDownloadHash(query->value("download_hash").toString());
+    setBinaryFilesize(query->value("size").toInt());
+    setIconUrl(query->value("icon_url").toString());
+    setDownloadUrl(query->value("download_url").toString());
+    setCommand(query->value("command").toString().split(" "));
+    setChangelog(query->value("changelog").toString());
+    setToken(query->value("token").toString());
+    setState(Update::stringToState(
+        query->value("update_state").toString()
+    ));
+    setProgress(query->value("progress").toInt());
+    setAutomatic(query->value("automatic").toBool());
+    setDownloadId(query->value("download_id").toString());
+    setError(query->value("error").toString());
+}
+
+bool Update::operator==(const Update *other) const
+{
+    if (other->identifier() == identifier() && other->revision() == revision())
+        return true;
+    else if (!downloadId().isEmpty() && (other->downloadId() == downloadId()))
+        return true;
+    else
+        return false;
+}
+
+bool Update::deepEquals(const Update *other) const
+{
+    if (kind() != other->kind()) return false;
+    if (identifier() != other->identifier()) return false;
+    if (localVersion() != other->localVersion()) return false;
+    if (remoteVersion() != other->remoteVersion()) return false;
+    if (revision() != other->revision()) return false;
+    if (installed() != other->installed()) return false;
+    if (createdAt() != other->createdAt()) return false;
+    if (updatedAt() != other->updatedAt()) return false;
+    if (title() != other->title()) return false;
+    if (downloadId() != other->downloadId()) return false;
+    if (downloadHash() != other->downloadHash()) return false;
+    if (downloadUrl() != other->downloadUrl()) return false;
+    if (binaryFilesize() != other->binaryFilesize()) return false;
+    if (iconUrl() != other->iconUrl()) return false;
+    if (command() != other->command()) return false;
+    if (changelog() != other->changelog()) return false;
+    if (token() != other->token()) return false;
+    if (state() != other->state()) return false;
+    if (progress() != other->progress()) return false;
+    if (automatic() != other->automatic()) return false;
+    if (error() != other->error()) return false;
+
+    return true;
+}
+
+QString Update::stateToString(const Update::State &state)
+{
+    switch (state) {
+    case State::StateUnknown:
+        return QLatin1String("unknown");
+    case State::StateAvailable:
+        return QLatin1String("available");
+    case State::StateUnavailable:
+        return QLatin1String("unavailable");
+    case State::StateQueuedForDownload:
+        return QLatin1String("queuedfordownload");
+    case State::StateDownloading:
+        return QLatin1String("downloading");
+    case State::StateDownloadingAutomatically:
+        return QLatin1String("downloadingautomatically");
+    case State::StateDownloadPaused:
+        return QLatin1String("downloadpaused");
+    case State::StateAutomaticDownloadPaused:
+        return QLatin1String("automaticdownloadpaused");
+    case State::StateInstalling:
+        return QLatin1String("installing");
+    case State::StateInstallingAutomatically:
+        return QLatin1String("installingautomatically");
+    case State::StateInstallPaused:
+        return QLatin1String("installpaused");
+    case State::StateInstallFinished:
+        return QLatin1String("installfinished");
+    case State::StateInstalled:
+        return QLatin1String("installed");
+    case State::StateDownloaded:
+        return QLatin1String("downloaded");
+    case State::StateFailed:
+        return QLatin1String("failed");
+    }
+    return QLatin1String("unknown");
+}
+
+Update::State Update::stringToState(const QString &state)
+{
+    if (state == QLatin1String("available"))
+        return State::StateAvailable;
+    if (state == QLatin1String("unavailable"))
+        return State::StateUnavailable;
+    if (state == QLatin1String("queuedfordownload"))
+        return State::StateQueuedForDownload;
+    if (state == QLatin1String("downloading"))
+        return State::StateDownloading;
+    if (state == QLatin1String("downloadingautomatically"))
+        return State::StateDownloadingAutomatically;
+    if (state == QLatin1String("downloadpaused"))
+        return State::StateDownloadPaused;
+    if (state == QLatin1String("automaticdownloadpaused"))
+        return State::StateAutomaticDownloadPaused;
+    if (state == QLatin1String("installing"))
+        return State::StateInstalling;
+    if (state == QLatin1String("installingautomatically"))
+        return State::StateInstallingAutomatically;
+    if (state == QLatin1String("installpaused"))
+        return State::StateInstallPaused;
+    if (state == QLatin1String("installfinished"))
+        return State::StateInstallFinished;
+    if (state == QLatin1String("installed"))
+        return State::StateInstalled;
+    if (state == QLatin1String("downloaded"))
+        return State::StateDownloaded;
+    if (state == QLatin1String("failed"))
+        return State::StateFailed;
+    else
+        return State::StateUnknown;
+}
+
+QString Update::kindToString(const Update::Kind &kind)
+{
+    switch (kind) {
+    case Kind::KindUnknown:
+        return QLatin1String("unknown");
+    case Kind::KindClick:
+        return QLatin1String("click");
+    case Kind::KindImage:
+        return QLatin1String("image");
+    }
+}
+
+Update::Kind Update::stringToKind(const QString &kind)
+{
+    if (kind == QLatin1String("click"))
+        return Kind::KindClick;
+    if (kind == QLatin1String("image"))
+        return Kind::KindImage;
+    else
+        return Kind::KindUnknown;
+}
+
 // void Update::tokenRequestSslFailed(const QList<QSslError> &errors)
 // {
 
@@ -343,7 +594,7 @@ bool Update::isUpdateRequired()
 //     void channelChanged();
 //     void contentChanged();
 //     void departmentChanged();
-//     void downloadSha512Changed();
+//     void downloadHashChanged();
 //     void downloadUrlChanged();
 //     void iconUrlChanged();
 //     void nameChanged();

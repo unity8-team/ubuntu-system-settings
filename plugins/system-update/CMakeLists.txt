@@ -23,12 +23,13 @@ add_definitions(${UBUNTUONEAUTH_CFLAGS} ${UBUNTUONEAUTH_CFLAGS_OTHER})
 add_library(UbuntuUpdatePanel MODULE
             # updatestore.cpp
             clickapiclient.cpp
-            clickupdate.cpp
+            clicktokendownloader.cpp
             clickupdatemanager.cpp
             helpers.cpp
             plugin.cpp
             systemupdate.cpp
             update.cpp
+            updatedb.cpp
             updatestruct.cpp
             updatemodel.cpp
             ${QML_SOURCES})

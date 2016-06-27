@@ -19,15 +19,14 @@
 #ifndef UPDATE_MODEL_H
 #define UPDATE_MODEL_H
 
+#include "update.h"
+#include "updatedb.h"
+#include "updatestruct.h"
+
 #include <QAbstractListModel>
 #include <QDateTime>
 #include <QModelIndex>
 #include <QSqlDatabase>
-
-#include "clickupdate.h"
-#include "systemupdate.h"
-#include "update.h"
-#include "updatestruct.h"
 
 namespace UpdatePlugin
 {
@@ -35,24 +34,12 @@ class UpdateModel : public QAbstractListModel
 {
     Q_OBJECT
     // TODO: use flags
-    Q_PROPERTY(UpdateTypes filter
+    Q_PROPERTY(Update::Filter filter
                READ filter
                WRITE setFilter
                NOTIFY filterChanged)
     Q_PROPERTY(int count READ count NOTIFY countChanged)
-    Q_ENUMS(UpdateTypes)
 public:
-    enum UpdateTypes
-    {
-        All,
-        Pending,
-        PendingClicksUpdates,
-        PendingSystemUpdates,
-        InstalledClicksUpdates,
-        InstalledSystemUpdates,
-        Installed
-    };
-
     enum Roles
     {
       // Qt::DisplayRole holds the title of the app
@@ -81,34 +68,19 @@ public:
     };
 
     explicit UpdateModel(QObject *parent = 0);
-    ~UpdateModel();
+    ~UpdateModel() {};
 
     // For testing.
     explicit UpdateModel(const QString &dbpath, QObject *parent = 0);
 
-    static const QString KIND_CLICK;
-    static const QString KIND_SYSTEM;
-
-    QSqlDatabase db() const; // For testing.
+    UpdateDb* db();
     QVariant data(const QModelIndex &index, int role) const;
     QHash<int, QByteArray> roleNames() const;
     int count() const;
     int rowCount(const QModelIndex &parent = QModelIndex()) const;
 
-    UpdateTypes filter() const;
-    void setFilter(const UpdateTypes &filter);
-
-    QDateTime lastCheckDate();
-    void setLastCheckDate(const QDateTime &lastCheckUtc);
-
-    void add(const Update *update);
-    ClickUpdate* getPendingClickUpdate(const QString &id);
-
-    void add(const QString &kind, const QString &id,
-             const int &revision, const QString &version,
-             const QString &changelog, const QString &title,
-             const QString &iconUrl, const int &size,
-             const bool automatic);
+    Update::Filter filter() const;
+    void setFilter(const Update::Filter &filter);
 
     Q_INVOKABLE void setInstalled(const QString &downloadId);
     Q_INVOKABLE void setError(const QString &downloadId, const QString &msg);
@@ -123,42 +95,20 @@ public:
                        const QString &downloadId);
     Q_INVOKABLE bool contains(const QString &downloadId) const;
 
-    void pruneDb();
-
-    static QString updateStateToString(const SystemUpdate::UpdateState &state);
-    static SystemUpdate::UpdateState stringToUpdateState(const QString &state);
-
-public slots:
-    void refresh();
-    void refreshItem(const QString &id, const int &revision);
-    void refreshItem(const QString &downloadId);
-
 signals:
     void countChanged();
     void filterChanged();
-    void changed();
-    void updateChanged(const QString &id, const int &revision);
-    void updateChanged(const QString &downloadId);
+    // void changed();
+    // void updateChanged(const QString &id, const int &revision);
+    // void updateChanged(const QString &downloadId);
 
 private:
     void initialize();
-    bool createDb();
-    void initializeDb();
-    bool openDb();
-
     int find(const QString &id, const int &revision) const;
     int find(const QString &downloadId) const;
-    void refresh(const int &idx);
 
-    void setState(const QString &downloadId,
-                  const SystemUpdate::UpdateState &state);
-    void unsetDownloadId(const QString &downloadId);
-
-    QSqlDatabase m_db;
-    QString m_dbpath;
-    QString m_connectionName;
-
-    UpdateTypes m_filter;
+    UpdateDb* m_db;
+    Update::Filter m_filter;
     QList<UpdateStruct> m_updates;
 };
 } // UpdatePlugin

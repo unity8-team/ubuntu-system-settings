@@ -27,23 +27,30 @@ SystemUpdate *SystemUpdate::instance()
     return m_instance;
 }
 
-SystemUpdate::SystemUpdate(QObject *parent) : QObject(parent)
+SystemUpdate::SystemUpdate(QObject *parent)
+    : QObject(parent)
+    , m_updateDb(this)
 {
 }
 
-void SystemUpdate::notifyModelChanged()
-{
-    Q_EMIT (modelChanged());
-}
+// void SystemUpdate::notifyModelChanged()
+// {
+//     Q_EMIT (modelChanged());
+// }
 
-void SystemUpdate::notifyModelItemChanged(const QString &id,
-                                          const int &revision)
-{
-    Q_EMIT (modelItemChanged(id, revision));
-}
+// void SystemUpdate::notifyModelItemChanged(const QString &id,
+//                                           const int &revision)
+// {
+//     Q_EMIT (modelItemChanged(id, revision));
+// }
 
-void SystemUpdate::notifyModelItemChanged(const QString &downloadId)
+// void SystemUpdate::notifyModelItemChanged(const QString &downloadId)
+// {
+//     Q_EMIT (modelItemChanged(downloadId));
+// }
+
+UpdateDb* SystemUpdate:: updateDb()
 {
-    Q_EMIT (modelItemChanged(downloadId));
+    return &m_updateDb;
 }
 } // UpdatePlugin

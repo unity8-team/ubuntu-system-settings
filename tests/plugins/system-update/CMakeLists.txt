@@ -17,14 +17,13 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 set(PLUGIN_SOURCES
     ${CMAKE_SOURCE_DIR}/plugins/system-update/clickapiclient.cpp
-    ${CMAKE_SOURCE_DIR}/plugins/system-update/clickupdate.cpp
+    ${CMAKE_SOURCE_DIR}/plugins/system-update/clicktokendownloader.cpp
     ${CMAKE_SOURCE_DIR}/plugins/system-update/clickupdatemanager.cpp
     ${CMAKE_SOURCE_DIR}/plugins/system-update/helpers.cpp
     ${CMAKE_SOURCE_DIR}/plugins/system-update/systemupdate.cpp
     ${CMAKE_SOURCE_DIR}/plugins/system-update/update.cpp
-    ${CMAKE_SOURCE_DIR}/plugins/system-update/updatestruct.cpp
+    ${CMAKE_SOURCE_DIR}/plugins/system-update/updatedb.cpp
     ${CMAKE_SOURCE_DIR}/plugins/system-update/updatemodel.cpp
-    # ${CMAKE_SOURCE_DIR}/plugins/system-update/updatestore.cpp
 )
 
 set(PLUGIN_LIBS
@@ -58,17 +57,17 @@ set_tests_properties(
 )
 target_link_libraries(tst-clickapiclient Qt5::Test ${PLUGIN_LIBS})
 
-add_executable(tst-clickupdate
-               tst_clickupdate.cpp
+add_executable(tst-clicktokendownloader
+               tst_clicktokendownloader.cpp
                mockclickservertestcase.h
                ${PLUGIN_SOURCES})
-add_test(tst-clickupdate tst-clickupdate)
+add_test(tst-clicktokendownloader tst-clicktokendownloader)
 set_tests_properties(
-    tst-clickupdate
+    tst-clicktokendownloader
         PROPERTIES
         ENVIRONMENT "IGNORE_CREDENTIALS=1;URL_APPS=http://127.0.0.1:9009/metadata"
 )
-target_link_libraries(tst-clickupdate Qt5::Test ${PLUGIN_LIBS})
+target_link_libraries(tst-clicktokendownloader Qt5::Test ${PLUGIN_LIBS})
 
 add_executable(tst-clickupdatemanager
                tst_clickupdatemanager.cpp
@@ -82,15 +81,14 @@ set_tests_properties(
 )
 target_link_libraries(tst-clickupdatemanager Qt5::Test ${PLUGIN_LIBS})
 
-# add_executable(tst-updatestore
-#                tst_updatestore.cpp
-#                ${PLUGIN_SOURCES})
-# add_test(tst-updatestore tst-updatestore)
-# target_link_libraries(tst-updatestore Qt5::Test ${PLUGIN_LIBS})
+add_executable(tst-updatedb
+               tst_updatedb.cpp
+               ${PLUGIN_SOURCES})
+add_test(tst-updatedb tst-updatedb)
+target_link_libraries(tst-updatedb Qt5::Test ${PLUGIN_LIBS})
 
 add_executable(tst-update
                tst_update.cpp
-               mockclickservertestcase.h
                ${PLUGIN_SOURCES})
 add_test(tst-update tst-update)
 target_link_libraries(tst-update Qt5::Test ${PLUGIN_LIBS})

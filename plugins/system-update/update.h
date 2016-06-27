@@ -20,14 +20,24 @@
 #define UPDATE_H
 
 #include <QObject>
+#include <QDateTime>
+#include <QNetworkReply>
+#include <QSqlQuery>
 #include <QString>
 #include <QStringList>
+
+#include <token.h>
 
 namespace UpdatePlugin
 {
 class Update : public QObject
 {
     Q_OBJECT
+    Q_ENUMS(Kind)
+    Q_ENUMS(State)
+    Q_ENUMS(Filter)
+    Q_PROPERTY(Kind kind READ kind
+            WRITE setKind NOTIFY kindChanged)
     Q_PROPERTY(QString anonDownloadUrl READ anonDownloadUrl
             WRITE setAnonDownloadUrl NOTIFY anonDownloadUrlChanged)
     Q_PROPERTY(uint binaryFilesize READ binaryFilesize
@@ -38,24 +48,32 @@ class Update : public QObject
             WRITE setChannel NOTIFY channelChanged)
     Q_PROPERTY(QString content READ content
             WRITE setContent NOTIFY contentChanged)
+    Q_PROPERTY(QDateTime createdAt READ createdAt
+            WRITE setCreatedAt NOTIFY createdAtChanged)
+    Q_PROPERTY(bool installed READ installed
+            WRITE setInstalled NOTIFY installedChanged)
+    Q_PROPERTY(QDateTime updatedAt READ updatedAt
+            WRITE setUpdatedAt NOTIFY updatedAtChanged)
     Q_PROPERTY(QStringList department READ department
             WRITE setDepartment NOTIFY departmentChanged)
-    Q_PROPERTY(QString downloadSha512 READ downloadSha512
-            WRITE setDownloadSha512 NOTIFY downloadSha512Changed)
+    Q_PROPERTY(QString downloadId READ downloadId
+            WRITE setDownloadId NOTIFY downloadIdChanged)
+    Q_PROPERTY(QString downloadHash READ downloadHash
+            WRITE setDownloadHash NOTIFY downloadHashChanged)
     Q_PROPERTY(QString downloadUrl READ downloadUrl
             WRITE setDownloadUrl NOTIFY downloadUrlChanged)
     Q_PROPERTY(QString iconUrl READ iconUrl
             WRITE setIconUrl NOTIFY iconUrlChanged)
-    Q_PROPERTY(QString name READ name
-            WRITE setName NOTIFY nameChanged)
+    Q_PROPERTY(QString identifier READ identifier
+            WRITE setIdentifier NOTIFY identifierChanged)
     Q_PROPERTY(QString origin READ origin
             WRITE setOrigin NOTIFY originChanged)
-    Q_PROPERTY(QString packageName READ packageName
-            WRITE setPackageName NOTIFY packageNameChanged)
+    Q_PROPERTY(int progress READ progress
+            WRITE setProgress NOTIFY progressChanged)
     Q_PROPERTY(int revision READ revision
             WRITE setRevision NOTIFY revisionChanged)
-    Q_PROPERTY(QString status READ status
-            WRITE setStatus NOTIFY statusChanged)
+    Q_PROPERTY(State state READ state
+            WRITE setState NOTIFY stateChanged)
     Q_PROPERTY(QString title READ title
             WRITE setTitle NOTIFY titleChanged)
     Q_PROPERTY(QString remoteVersion READ remoteVersion
@@ -67,24 +85,74 @@ class Update : public QObject
                WRITE setCommand NOTIFY commandChanged)
     Q_PROPERTY(bool automatic READ automatic WRITE setAutomatic
             NOTIFY automaticChanged)
+    Q_PROPERTY(QString error READ error WRITE setError NOTIFY errorChanged)
 public:
     explicit Update(QObject *parent = 0);
     ~Update();
 
+    enum class Filter
+    {
+        All,
+        Pending,
+        PendingClicks,
+        PendingImage,
+        InstalledClicks,
+        InstalledImage,
+        Installed
+    };
+
+    enum class Kind
+    {
+        KindClick,
+        KindImage,
+        KindUnknown
+    };
+
+    enum class State
+    {
+        StateUnknown,
+        StateAvailable,
+        StateUnavailable,
+        StateQueuedForDownload,
+        StateDownloading,
+        StateDownloadingAutomatically,
+        StateDownloadPaused,
+        StateAutomaticDownloadPaused,
+        StateInstalling,
+        StateInstallingAutomatically,
+        StateInstallPaused,
+        StateInstallFinished,
+        StateInstalled,
+        StateDownloaded,
+        StateFailed
+    };
+
+    static QString stateToString(const State &state);
+    static State stringToState(const QString &state);
+
+    static QString kindToString(const Kind &kind);
+    static Kind stringToKind(const QString &kind);
+
+    Kind kind() const;
+    QString identifier() const;
+    int revision() const;
     QString anonDownloadUrl() const;
     uint binaryFilesize() const;
     QString changelog() const;
     QString channel() const;
     QString content() const;
+    QDateTime createdAt() const;
+    QDateTime updatedAt() const;
     QStringList department() const;
-    QString downloadSha512() const;
+    QString downloadId() const;
+    QString downloadHash() const;
     QString downloadUrl() const;
+    QString error() const;
     QString iconUrl() const;
-    QString name() const;
+    bool installed() const;
     QString origin() const;
-    QString packageName() const;
-    int revision() const;
-    QString status() const;
+    int progress() const;
+    State state() const;
     QString title() const;
     QString remoteVersion() const;
     QString localVersion() const;
@@ -92,20 +160,26 @@ public:
     QStringList command() const;
     bool automatic() const;
 
+    void setKind(const Kind &kind);
+    void setIdentifier(const QString &identifier);
+    void setRevision(const int &revision);
     void setAnonDownloadUrl(const QString &anonDownloadUrl);
     void setBinaryFilesize(const uint &binaryFilesize);
     void setChangelog(const QString &changelog);
     void setChannel(const QString &channel);
     void setContent(const QString &content);
+    void setCreatedAt(const QDateTime &createdAt);
+    void setUpdatedAt(const QDateTime &updatedAt);
     void setDepartment(const QStringList &department);
-    void setDownloadSha512(const QString &downloadSha512);
+    void setDownloadId(const QString &downloadId);
+    void setDownloadHash(const QString &downloadHash);
     void setDownloadUrl(const QString &downloadUrl);
+    void setError(const QString &error);
     void setIconUrl(const QString &iconUrl);
-    void setName(const QString &name);
+    void setInstalled(const bool installed);
     void setOrigin(const QString &origin);
-    void setPackageName(const QString &packageName);
-    void setRevision(const int &revision);
-    void setStatus(const QString &status);
+    void setProgress(const int &progress);
+    void setState(const State &state);
     void setTitle(const QString &title);
     void setRemoteVersion(const QString &version);
     void setLocalVersion(const QString &version);
@@ -115,22 +189,38 @@ public:
 
     bool isUpdateRequired();
 
+    // Set values on update given an sql query.
+    void setValues(const QSqlQuery *query);
+
+    // Whether or not all fields in this update is equal to that of other.
+    bool deepEquals(const Update *other) const;
+
+    /* Whether or not either id and rev equals to other, or download id is set
+    and that is equal to that of other. */
+    bool operator==(const Update *other) const;
+
 signals:
+    void kindChanged();
+    void identifierChanged();
+    void revisionChanged();
     void anonDownloadUrlChanged();
     void binaryFilesizeChanged();
     void changelogChanged();
     void channelChanged();
     void contentChanged();
+    void createdAtChanged();
+    void installedChanged();
+    void updatedAtChanged();
     void departmentChanged();
-    void downloadSha512Changed();
+    void downloadIdChanged();
+    void downloadHashChanged();
     void downloadUrlChanged();
+    void errorChanged();
     void iconUrlChanged();
-    void nameChanged();
     void originChanged();
-    void packageNameChanged();
-    void revisionChanged();
+    void progressChanged();
     void sequenceChanged();
-    void statusChanged();
+    void stateChanged();
     void titleChanged();
     void remoteVersionChanged();
     void localVersionChanged();
@@ -139,20 +229,26 @@ signals:
     void automaticChanged();
 
 protected:
+    Kind m_kind;
+    QString m_identifier;
+    int m_revision;
     QString m_anonDownloadUrl;
     uint m_binaryFilesize;
     QString m_changelog;
     QString m_channel;
     QString m_content;
+    QDateTime m_createdAt;
+    QDateTime m_updatedAt;
     QStringList m_department;
-    QString m_downloadSha512;
+    QString m_downloadId;
+    QString m_downloadHash;
     QString m_downloadUrl;
+    QString m_error;
     QString m_iconUrl;
-    QString m_name;
+    bool m_installed;
     QString m_origin;
-    QString m_packageName;
-    int m_revision;
-    QString m_status;
+    int m_progress;
+    State m_state;
     QString m_title;
     QString m_localVersion;
     QString m_remoteVersion;

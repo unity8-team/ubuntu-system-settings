@@ -19,19 +19,19 @@
 #ifndef CLICK_UPDATE_MANAGER_H
 #define CLICK_UPDATE_MANAGER_H
 
+#include "systemupdate.h"
+#include "clicktokendownloader.h"
+#include "updatedb.h"
+
+#include <ssoservice.h>
+#include <token.h>
+
 #include <QDateTime>
 #include <QFile>
 #include <QHash>
 #include <QJsonDocument>
 #include <QList>
 #include <QProcess>
-
-#include <token.h>
-#include <ssoservice.h>
-
-#include "systemupdate.h"
-#include "clickupdate.h"
-#include "updatemodel.h"
 
 // Having the full namespaced name in a slot seems to confuse
 // SignalSpy so we need this declaration.
@@ -66,9 +66,11 @@ public:
 private slots:
     void handleMetadata(QNetworkReply *reply);
     void processInstalledClicks(const int &exitCode);
-    void processClickToken(const ClickUpdate *update);
     void handleProcessError(const QProcess::ProcessError &error);
-    void handleClickTokenFailure(ClickUpdate *update);
+
+    void handleTokenDownload(Update *update);
+    void handleTokenDownloadFailure(Update *update);
+
     void handleCredentialsFound(const Token &token);
     void handleCredentialsFailed();
     void handleCommunicationErrors();
@@ -90,13 +92,14 @@ signals:
 
 private:
     void setAuthenticated(const bool authenticated);
-    void initializeUpdate(const ClickUpdate *update);
 
     void init();
     // Set up connections on a process instance.
     void initializeProcess();
     void initializeSSOService();
     void initializeApiClient();
+    void initializeTokenDownloader(const ClickTokenDownloader *dler);
+    void initializeUpdate(const Update *update);
 
     // Start process of adding remote metadata to each installed click
     void requestClickMetadata();
@@ -109,13 +112,13 @@ private:
     // Assert completion of check, signalling if check complete.
     void completionCheck();
 
-    UpdateModel *m_model;
+    UpdateDb *m_db;
     // Represents the process that we use to query installed clicks.
     QProcess m_process;
     ClickApiClient m_apiClient;
-    QHash<QString, ClickUpdate*> m_updates;
+    QHash<QString, Update*> m_updates;
 
-    UbuntuOne::Token m_u1token;
+    UbuntuOne::Token m_authToken;
     UbuntuOne::SSOService m_ssoService;
     bool m_authenticated;
     bool m_checking;
