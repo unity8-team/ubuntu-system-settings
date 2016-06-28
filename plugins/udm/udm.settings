@@ -1,0 +1,14 @@
+{
+    "name": "UDM",
+    "icon": "ubuntu-store-symbolic",
+    "translations": "stock_application",
+    "category": "network",
+    "keywords": [
+        "example",
+        "test",
+        "sample"
+    ],
+    "has-dynamic-keywords": false,
+    "has-dynamic-visibility": false,
+    "page-component": "PageComponent.qml"
+}
