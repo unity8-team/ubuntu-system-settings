@@ -22,6 +22,7 @@ import GSettings 1.0
 import QtQuick 2.4
 import Ubuntu.Components 1.3
 import Ubuntu.Components.ListItems 1.3 as ListItem
+import Ubuntu.Connectivity 1.0
 import SystemSettings 1.0
 import Ubuntu.SystemSettings.Sound 1.0
 import Ubuntu.Settings.Menus 0.1 as Menus
@@ -84,10 +85,6 @@ ItemPage {
                 text: i18n.tr("Silent Mode")
             }
 
-            SettingsItemTitle {
-                text: i18n.tr("Ringer:")
-            }
-
             QDBusActionGroup {
                 id: soundActionGroup
                 busType: DBus.SessionBus
@@ -101,122 +98,137 @@ ItemPage {
                 Component.onCompleted: start()
             }
 
-            Menus.SliderMenu {
-                id: volumeSlider
-                objectName: "sliderMenu"
-                enabled: soundActionGroup.volume.state != null
-                minimumValue: 0.0
-                maximumValue: 1.0
-                minIcon: "image://theme/audio-volume-low-zero"
-                maxIcon: "image://theme/audio-volume-high"
+            Column  {
+                anchors.left: parent.left
+                anchors.right: parent.right
+                visible: NetworkingStatus.modemAvailable
 
-                property real serverValue: soundActionGroup.volume.state
+                SettingsItemTitle {
+                    text: i18n.tr("Ringer:")
+                }
 
-                USC.ServerPropertySynchroniser {
-                    userTarget: volumeSlider
-                    userProperty: "value"
-                    serverTarget: volumeSlider
-                    serverProperty: "serverValue"
-                    maximumWaitBufferInterval: 16
+                Menus.SliderMenu {
+                    id: volumeSlider
+                    objectName: "sliderMenu"
+                    enabled: soundActionGroup.volume.state != null
+                    minimumValue: 0.0
+                    maximumValue: 1.0
+                    minIcon: "image://theme/audio-volume-low-zero"
+                    maxIcon: "image://theme/audio-volume-high"
 
-                    onSyncTriggered: soundActionGroup.volume.updateState(value);
+                    property real serverValue: soundActionGroup.volume.state
+
+                    USC.ServerPropertySynchroniser {
+                        userTarget: volumeSlider
+                        userProperty: "value"
+                        serverTarget: volumeSlider
+                        serverProperty: "serverValue"
+                        maximumWaitBufferInterval: 16
+
+                        onSyncTriggered: soundActionGroup.volume.updateState(value);
+                    }
+                }
+
+                ListItem.Standard {
+                    id: highVolumeWarning
+                    visible: soundActionGroup.highVolume.state == true
+                    text: i18n.tr("High volume can damage your hearing.")
+                }
+
+                SettingsItemTitle {
+                    text: i18n.tr("Phone calls:")
+                }
+
+                ListItem.SingleValue {
+                    text: i18n.tr("Ringtone")
+                    value: Utilities.buildDisplayName(
+                               backendInfo.incomingCallSound)
+                    progression: true
+                    onClicked: pageStack.push(
+                                   Qt.resolvedUrl("SoundsList.qml"),
+                                   { title: i18n.tr("Ringtone"),
+                                     showStopButton: true,
+                                     soundType: 0,
+                                     soundsDir:
+                                       "/usr/share/sounds/ubuntu/ringtones/" })
+                }
+
+                ListItem.Standard {
+                    control: CheckBox {
+                        objectName: "callVibrate"
+                        property bool serverChecked: backendInfo.incomingCallVibrate
+                        onServerCheckedChanged: checked = serverChecked
+                        Component.onCompleted: checked = serverChecked
+                        onTriggered: backendInfo.incomingCallVibrate = checked
+                    }
+                    text: i18n.tr("Vibrate on ring")
+                }
+
+                ListItem.Standard {
+                    control: CheckBox {
+                        objectName: "callVibrateSilentMode"
+                        property bool serverChecked: backendInfo.incomingCallVibrateSilentMode
+                        onServerCheckedChanged: checked = serverChecked
+                        Component.onCompleted: checked = serverChecked
+                        onTriggered: backendInfo.incomingCallVibrateSilentMode = checked
+                    }
+                    text: i18n.tr("Vibrate in Silent Mode")
+                }
+
+                ListItem.Standard {
+                    control: Switch {
+                        objectName: "dialpadSounds"
+                        property bool serverChecked: backendInfo.dialpadSoundsEnabled
+                        onServerCheckedChanged: checked = serverChecked
+                        Component.onCompleted: checked = serverChecked
+                        onTriggered: backendInfo.dialpadSoundsEnabled = checked
+                    }
+                    text: i18n.tr("Dialpad tones")
                 }
             }
 
-            ListItem.Standard {
-                id: highVolumeWarning
-                visible: soundActionGroup.highVolume.state == true
-                text: i18n.tr("High volume can damage your hearing.")
-            }
+            Column  {
+                anchors.left: parent.left
+                anchors.right: parent.right
 
-            SettingsItemTitle {
-                text: i18n.tr("Phone calls:")
-            }
-
-            ListItem.SingleValue {
-                text: i18n.tr("Ringtone")
-                value: Utilities.buildDisplayName(
-                           backendInfo.incomingCallSound)
-                progression: true
-                onClicked: pageStack.push(
-                               Qt.resolvedUrl("SoundsList.qml"),
-                               { title: i18n.tr("Ringtone"),
-                                 showStopButton: true,
-                                 soundType: 0,
-                                 soundsDir:
-                                   "/usr/share/sounds/ubuntu/ringtones/" })
-            }
-
-            ListItem.Standard {
-                control: CheckBox {
-                    objectName: "callVibrate"
-                    property bool serverChecked: backendInfo.incomingCallVibrate
-                    onServerCheckedChanged: checked = serverChecked
-                    Component.onCompleted: checked = serverChecked
-                    onTriggered: backendInfo.incomingCallVibrate = checked
+                SettingsItemTitle {
+                    text: i18n.tr("Messages:")
                 }
-                text: i18n.tr("Vibrate on ring")
-            }
 
-            ListItem.Standard {
-                control: CheckBox {
-                    objectName: "callVibrateSilentMode"
-                    property bool serverChecked: backendInfo.incomingCallVibrateSilentMode
-                    onServerCheckedChanged: checked = serverChecked
-                    Component.onCompleted: checked = serverChecked
-                    onTriggered: backendInfo.incomingCallVibrateSilentMode = checked
+                ListItem.SingleValue {
+                    text: i18n.tr("Message received")
+                    value:Utilities.buildDisplayName(
+                              backendInfo.incomingMessageSound)
+                    progression: true
+                    onClicked: pageStack.push(
+                                   Qt.resolvedUrl("SoundsList.qml"),
+                                   { title: i18n.tr("Message received"),
+                                      soundType: 1,
+                                     soundsDir:
+                                       "/usr/share/sounds/ubuntu/notifications/" })
                 }
-                text: i18n.tr("Vibrate in Silent Mode")
-            }
 
-            ListItem.Standard {
-                control: Switch {
-                    objectName: "dialpadSounds"
-                    property bool serverChecked: backendInfo.dialpadSoundsEnabled
-                    onServerCheckedChanged: checked = serverChecked
-                    Component.onCompleted: checked = serverChecked
-                    onTriggered: backendInfo.dialpadSoundsEnabled = checked
+                ListItem.Standard {
+                    control: CheckBox {
+                        objectName: "messageVibrate"
+                        property bool serverChecked: backendInfo.incomingMessageVibrate
+                        onServerCheckedChanged: checked = serverChecked
+                        Component.onCompleted: checked = serverChecked
+                        onTriggered: backendInfo.incomingMessageVibrate = checked
+                    }
+                    text: i18n.tr("Vibrate with message sound")
                 }
-                text: i18n.tr("Dialpad tones")
-            }
 
-            SettingsItemTitle {
-                text: i18n.tr("Messages:")
-            }
-
-            ListItem.SingleValue {
-                text: i18n.tr("Message received")
-                value:Utilities.buildDisplayName(
-                          backendInfo.incomingMessageSound)
-                progression: true
-                onClicked: pageStack.push(
-                               Qt.resolvedUrl("SoundsList.qml"),
-                               { title: i18n.tr("Message received"),
-                                  soundType: 1,
-                                 soundsDir:
-                                   "/usr/share/sounds/ubuntu/notifications/" })
-            }
-
-            ListItem.Standard {
-                control: CheckBox {
-                    objectName: "messageVibrate"
-                    property bool serverChecked: backendInfo.incomingMessageVibrate
-                    onServerCheckedChanged: checked = serverChecked
-                    Component.onCompleted: checked = serverChecked
-                    onTriggered: backendInfo.incomingMessageVibrate = checked
+                ListItem.Standard {
+                    control: CheckBox {
+                        objectName: "messageVibrateSilentMode"
+                        property bool serverChecked: backendInfo.incomingMessageVibrateSilentMode
+                        onServerCheckedChanged: checked = serverChecked
+                        Component.onCompleted: checked = serverChecked
+                        onTriggered: backendInfo.incomingMessageVibrateSilentMode = checked
+                    }
+                    text: i18n.tr("Vibrate in Silent Mode")
                 }
-                text: i18n.tr("Vibrate with message sound")
-            }
-
-            ListItem.Standard {
-                control: CheckBox {
-                    objectName: "messageVibrateSilentMode"
-                    property bool serverChecked: backendInfo.incomingMessageVibrateSilentMode
-                    onServerCheckedChanged: checked = serverChecked
-                    Component.onCompleted: checked = serverChecked
-                    onTriggered: backendInfo.incomingMessageVibrateSilentMode = checked
-                }
-                text: i18n.tr("Vibrate in Silent Mode")
             }
 
             SettingsItemTitle {

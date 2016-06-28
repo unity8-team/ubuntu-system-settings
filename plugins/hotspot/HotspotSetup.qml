@@ -174,7 +174,7 @@ Component {
                 text: hotspotSetupDialog.stored ? i18n.tr("Hotspot name") :
                                                   i18n.tr("Choose a name")
                 font.bold: true
-                color: Theme.palette.selected.backgroundText
+                color: Theme.palette.normal.baseText
                 elide: Text.ElideRight
             }
 

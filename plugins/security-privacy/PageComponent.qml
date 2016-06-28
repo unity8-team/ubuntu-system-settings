@@ -18,12 +18,14 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import Biometryd 0.0
 import GSettings 1.0
 import QMenuModel 0.1
 import QtQuick 2.4
 import Ubuntu.Components 1.3
 import Ubuntu.Components.ListItems 1.3 as ListItem
 import SystemSettings 1.0
+import Ubuntu.Settings.Fingerprint 0.1
 import Ubuntu.SystemSettings.Battery 1.0
 import Ubuntu.SystemSettings.Diagnostics 1.0
 import Ubuntu.SystemSettings.SecurityPrivacy 1.0
@@ -52,6 +54,42 @@ ItemPage {
                 t++;
         });
         return t;
+    }
+    property var pluginOptions
+    Connections {
+        target: pageStack
+        onCurrentPageChanged: {
+            // If we are called with subpage=foo, push foo on the stack.
+            //
+            // We need to wait until the PageComponent has been pushed to the stack
+            // before pushing the subpages, otherwise they will be pushed below the
+            // PageComponent.
+            if (pageStack.currentPage === root) {
+                if (pluginOptions && pluginOptions['subpage']) {
+                    switch (pluginOptions['subpage']) {
+                    case 'location':
+                        pageStack.push(Qt.resolvedUrl("Location.qml"));
+                        break;
+                    case 'permissions':
+                        var page = pageStack.push(Qt.resolvedUrl("AppAccess.qml"), {pluginManager: pluginManager})
+                        if (pluginOptions['service']) {
+                            page.openService(pluginOptions['service'])
+                        }
+                        break;
+                    }
+                } else if (pluginOptions && pluginOptions['service']) {
+                    // This whole else if branch will be removed once the
+                    // camera app asks for [1] as described in lp:1545733.
+                    // [1] settings:///system/permissions?service=camera
+                    var page = pageStack.push(Qt.resolvedUrl("AppAccess.qml"), {pluginManager: pluginManager})
+                    page.openService(pluginOptions['service'])
+                }
+
+                // Once done, disable this Connections, so that if the user navigates
+                // back to the root we won't push the subpages again
+                target = null
+            }
+        }
     }
 
     UbuntuDiagnostics {
@@ -115,11 +153,35 @@ ItemPage {
                 text: i18n.tr("Security")
             }
             ListItem.SingleValue {
+                id: fingerprintControl
+                objectName: "fingerprintControl"
+                text: i18n.tr("Fingerprint ID")
+                progression: true
+                onClicked: pageStack.push(fingeprintPage, {
+                    passcodeSet: securityPrivacy.securityType !== UbuntuSecurityPrivacyPanel.Swipe
+                })
+                visible: Biometryd.available
+            }
+
+            Component {
+                id: fingeprintPage
+                Fingerprints {
+                    onRequestPasscode: {
+                        pageStack.pop();
+                        pageStack.push(Qt.resolvedUrl("LockSecurity.qml"));
+                    }
+                }
+            }
+
+            ListItem.SingleValue {
                 id: lockingControl
                 objectName: "lockingControl"
                 text: i18n.tr("Locking and unlocking")
                 progression: true
-                onClicked: pageStack.push(Qt.resolvedUrl("PhoneLocking.qml"), {usePowerd: usePowerd, powerSettings: powerSettings})
+                onClicked: pageStack.push(Qt.resolvedUrl("PhoneLocking.qml"), {
+                    usePowerd: usePowerd,
+                    powerSettings: powerSettings
+                })
             }
             ListItem.SingleValue {
                 id: simControl

@@ -22,6 +22,8 @@
 
 #include <QDBusReply>
 #include <QDebug>
+#include <QTime>
+#include <QCoreApplication>
 
 #include "dbus-shared.h"
 
@@ -39,7 +41,9 @@ DeviceModel::DeviceModel(QDBusConnection &dbus, QObject *parent):
     m_isPowered(false),
     m_isPairable(false),
     m_isDiscovering(false),
-    m_isDiscoverable(false)
+    m_isDiscoverable(false),
+    m_discoveryBlockCount(0),
+    m_activeDevices(0)
 {
     if (m_bluezManager.isValid()) {
 
@@ -104,7 +108,7 @@ DeviceModel::DeviceModel(QDBusConnection &dbus, QObject *parent):
                    << "the agent manager is not available!";
     }
 
-    connect(&m_timer, SIGNAL(timeout()), this, SLOT(slotTimeout()));
+    connect(&m_discoveryTimer, SIGNAL(timeout()), this, SLOT(slotDiscoveryTimeout()));
 }
 
 DeviceModel::~DeviceModel()
@@ -204,9 +208,12 @@ int DeviceModel::findRowFromAddress(const QString &address) const
     return -1;
 }
 
-void DeviceModel::restartTimer()
+void DeviceModel::restartDiscoveryTimer()
 {
-    m_timer.start (m_isDiscovering ? SCANNING_ACTIVE_DURATION_MSEC
+    if (m_discoveryBlockCount > 0)
+        return;
+
+    m_discoveryTimer.start (m_isDiscovering ? SCANNING_ACTIVE_DURATION_MSEC
                                    : SCANNING_IDLE_DURATION_MSEC);
 }
 
@@ -259,9 +266,9 @@ void DeviceModel::toggleDiscovery()
         startDiscovery();
 }
 
-void DeviceModel::slotTimeout()
+void DeviceModel::slotDiscoveryTimeout()
 {
-    toggleDiscovery ();
+    toggleDiscovery();
 }
 
 void DeviceModel::clearAdapter()
@@ -366,15 +373,17 @@ void DeviceModel::updateProperty(const QString &key, const QVariant &value)
 {
     if (key == "Name") {
         m_adapterName = value.toString();
+        Q_EMIT(adapterNameChanged());
     } else if (key == "Address") {
         m_adapterAddress = value.toString();
+        Q_EMIT(adapterAddressChanged());
     } else if (key == "Pairable") {
         m_isPairable = value.toBool();
     } else if (key == "Discoverable") {
         setDiscoverable(value.toBool());
     } else if (key == "Discovering") {
         setDiscovering(value.toBool());
-        restartTimer();
+        restartDiscoveryTimer();
     } else if (key == "Powered") {
         setPowered(value.toBool());
         if (m_isPowered)
@@ -405,6 +414,9 @@ void DeviceModel::slotEnableDiscoverable()
 
 void DeviceModel::trySetDiscoverable(bool discoverable)
 {
+    if (m_isDiscoverable)
+        return;
+
     QVariant value;
     QDBusVariant disc(discoverable);
     QDBusReply<void > reply;
@@ -416,6 +428,27 @@ void DeviceModel::trySetDiscoverable(bool discoverable)
         if (!reply.isValid())
             qWarning() << "Error setting device discoverable:" << reply.error();
     }
+}
+
+void DeviceModel::blockDiscovery()
+{
+    m_discoveryBlockCount++;
+
+    stopDiscovery();
+    m_discoveryTimer.stop();
+}
+
+void DeviceModel::unblockDiscovery()
+{
+    if (m_discoveryBlockCount == 0)
+        return;
+
+    m_discoveryBlockCount--;
+
+    if (m_discoveryBlockCount > 0)
+        return;
+
+    restartDiscoveryTimer();
 }
 
 void DeviceModel::slotPropertyChanged(const QString      &key,
@@ -431,21 +464,81 @@ void DeviceModel::slotDevicePairingDone(bool success)
     Q_EMIT(devicePairingDone(device, success));
 }
 
-void DeviceModel::addDevice(const QString &path, const QVariantMap &properties)
+void DeviceModel::slotDeviceConnectionChanged()
+{
+    Device *device = static_cast<Device*>(sender());
+
+    // We count the number of active devices here (either disconnecting
+    // or connecting) and will stop device discovery while those actions
+    // are ongoing.
+
+    unsigned int wasInactive = (m_activeDevices == 0);
+
+    switch (device->getConnection()) {
+    case Device::Disconnected:
+    case Device::Connected:
+        if (m_activeDevices == 0)
+            break;
+
+        m_activeDevices--;
+        break;
+    case Device::Disconnecting:
+    case Device::Connecting:
+        m_activeDevices++;
+        break;
+    default:
+        break;
+    }
+
+    if (wasInactive && m_activeDevices > 0)
+        blockDiscovery();
+    else
+        unblockDiscovery();
+}
+
+QSharedPointer<Device> DeviceModel::addDevice(const QString &path, const QVariantMap &properties)
 {
     QSharedPointer<Device> device(new Device(path, m_dbus));
     device->setProperties(properties);
 
-    if (device->isValid()) {
-        QObject::connect(device.data(), SIGNAL(deviceChanged()),
-                         this, SLOT(slotDeviceChanged()));
-        QObject::connect(device.data(), SIGNAL(pairingDone(bool)),
-                         this, SLOT(slotDevicePairingDone(bool)));
-        addDevice(device);
+    // The device is valid when the right properties are set for it. The
+    // code below makes sure that the right properties are set as in certain
+    // situations it happens with a delay.
+    //
+    // In case this function is called from FindOrCreateDevice() context
+    // the properties are not yet known. Of course the device will become
+    // valid once the device properties are gathered however this is done
+    // asynchronously, in the Device class constructor, and it takes a
+    // while. This is a problem in certain situations and as a consequence
+    // the pin code request is rejected and the pairing denied. To
+    // workaround this unwanted behavior we assume that at this point it is
+    // just a matter of time for the device to become valid and we wait a
+    // bit here. This is safe because in any other case the properties are
+    // already updated.
+    uint8_t tries = 0;
+    while (!device->isValid() && tries < 10) {
+        const QTime timeout = QTime::currentTime().addMSecs(100);
+        while (QTime::currentTime() < timeout)
+            QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
+        tries++;
     }
+
+    // However if the above fails there is nothing else that can be done
+    // than returning the nullptr.
+    if (!device->isValid())
+        return QSharedPointer<Device>(nullptr);
+
+    QObject::connect(device.data(), SIGNAL(deviceChanged()),
+                     this, SLOT(slotDeviceChanged()));
+    QObject::connect(device.data(), SIGNAL(pairingDone(bool)),
+                     this, SLOT(slotDevicePairingDone(bool)));
+    QObject::connect(device.data(), SIGNAL(connectionChanged()),
+                     this, SLOT(slotDeviceConnectionChanged()));
+
+    return addDevice(device);
 }
 
-void DeviceModel::addDevice(QSharedPointer<Device> &device)
+QSharedPointer<Device> DeviceModel::addDevice(QSharedPointer<Device> &device)
 {
     int row = findRowFromAddress(device->getAddress());
 
@@ -458,6 +551,8 @@ void DeviceModel::addDevice(QSharedPointer<Device> &device)
         m_devices.append(device);
         endInsertRows();
     }
+
+    return device;
 }
 
 void DeviceModel::removeRow(int row)
@@ -510,6 +605,13 @@ QSharedPointer<Device> DeviceModel::getDeviceFromPath(const QString &path)
             return device;
 
     return QSharedPointer<Device>();
+}
+
+QSharedPointer<Device> DeviceModel::addDeviceFromPath(const QDBusObjectPath &path)
+{
+    qWarning() << "Creating device object for path" << path.path();
+    QVariantMap noProps;
+    return addDevice(path.path(), noProps);
 }
 
 void DeviceModel::slotRemoveFinished(QDBusPendingCallWatcher *call)

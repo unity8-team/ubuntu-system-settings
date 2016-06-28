@@ -15,12 +15,12 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-from time import sleep
 from autopilot import introspection
 from autopilot.exceptions import StateNotFoundError
 from ubuntu_system_settings.utils.i18n import ugettext as _
 
 import logging
+from time import sleep
 import autopilot.logging
 import ubuntuuitoolkit
 import ubuntu_system_settings.utils as utils
@@ -119,6 +119,10 @@ class SystemSettingsMainWindow(ubuntuuitoolkit.MainView):
     @autopilot.logging.log_action(logger.debug)
     def go_to_datetime_page(self):
         return self._go_to_page('entryComponent-time-date', 'timeDatePage')
+
+    @autopilot.logging.log_action(logger.debug)
+    def go_to_vpn_page(self):
+        return self._go_to_page('entryComponent-vpn', 'vpnPage')
 
     def _go_to_page(self, item_object_name, page_object_name):
         self.click_item(item_object_name)
@@ -224,9 +228,6 @@ class CellularPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
     def disable_data(self):
         self._set_data(False)
 
-    def disable_datas(self):
-        self.select_sim_for_data('off')
-
     @autopilot.logging.log_action(logger.debug)
     def _set_data(self, data):
         chk = self.select_single(objectName='data')
@@ -283,6 +284,12 @@ class CellularPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
         carrierApnPage = self._click_carrier_apn()
         chooseApnPage = carrierApnPage.open_apn(sim)
         return chooseApnPage.open(name)
+
+    @autopilot.logging.log_action(logger.debug)
+    def open_apn_page(self, name, sim=None):
+        carrierApnPage = self._click_carrier_apn()
+        chooseApnPage = carrierApnPage.open_apn(sim)
+        return chooseApnPage
 
     @autopilot.logging.log_action(logger.debug)
     def delete_apn(self, name, sim=None):
@@ -1394,7 +1401,7 @@ class LanguagePage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
     @classmethod
     def validate_dbus_object(cls, path, state):
         name = introspection.get_classname_from_path(path)
-        if name == b'ItemPage':
+        if name == b'PageComponent':
             if state['objectName'][1] == 'languagePage':
                 return True
         return False
@@ -1831,3 +1838,134 @@ class NetworkDetails(
     def _click_forget(self):
         button = self.select_single('Button', objectName='forgetNetwork')
         self.pointing_device.click_object(button)
+
+
+class VpnPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
+
+    """Autopilot helper for the VPN page."""
+
+    @classmethod
+    def validate_dbus_object(cls, path, state):
+        name = introspection.get_classname_from_path(path)
+        if name == b'PageComponent':
+            if state['objectName'][1] == 'vpnPage':
+                return True
+        return False
+
+    @autopilot.logging.log_action(logger.debug)
+    def add_vpn(self):
+        obj = self.select_single(objectName='addVpnButton')
+        self.pointing_device.click_object(obj)
+        return self.get_root_instance().wait_select_single(
+            objectName='vpnEditor')
+
+    @autopilot.logging.log_action(logger.debug)
+    def preview_vpn(self, at):
+        obj = self.wait_select_single(objectName='vpnListConnection%d' % at)
+        self.pointing_device.click_object(obj)
+        return self.get_root_instance().wait_select_single(
+            objectName='vpnPreviewDialog')
+
+    @autopilot.logging.log_action(logger.debug)
+    def change_vpn(self, at):
+        diag = self.preview_vpn(at)
+        change_button = diag.wait_select_single(
+            objectName='vpnPreviewChangeButton'
+        )
+        self.pointing_device.click_object(change_button)
+        return self.get_root_instance().wait_select_single(
+            objectName='vpnEditor')
+
+
+class VpnEditor(
+    ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase
+):
+    """Autopilot helper for vpn change dialog."""
+
+    @property
+    def _openvpn_server_field(self):
+        return self.wait_select_single(
+            ubuntuuitoolkit.TextField,
+            objectName='vpnOpenvpnServerField')
+
+    @property
+    def _openvpn_port_field(self):
+        return self.wait_select_single(
+            ubuntuuitoolkit.TextField,
+            objectName='vpnOpenvpnPortField')
+
+    @property
+    def _openvpn_custom_port_toggle(self):
+        return self.wait_select_single(
+            ubuntuuitoolkit.CheckBox,
+            objectName='vpnOpenvpnCustomPortToggle')
+
+    @property
+    def _openvpn_tcp_toggle(self):
+        return self.wait_select_single(
+            ubuntuuitoolkit.CheckBox,
+            objectName='vpnOpenvpnTcpToggle')
+
+    @property
+    def _openvpn_udp_toggle(self):
+        return self.wait_select_single(
+            ubuntuuitoolkit.CheckBox,
+            objectName='vpnOpenvpnUdpToggle')
+
+    @property
+    def _openvpn_ca_field(self):
+        return self.wait_select_single(objectName='vpnOpenvpnCaField')
+
+    @property
+    def _openvpn_ok_button(self):
+        return self.wait_select_single(
+            'Button', objectName='vpnEditorOkayButton')
+
+    @autopilot.logging.log_action(logger.debug)
+    def set_openvpn_server(self, server):
+        self._openvpn_server_field.write(server)
+
+    @autopilot.logging.log_action(logger.debug)
+    def set_openvpn_custom_port(self, port):
+        self._openvpn_custom_port_toggle.check()
+        # XXX: workaround for lp:1546559, i.e. we need to wait
+        # some time between writing to the API.
+        sleep(1)
+        self._openvpn_port_field.write(port)
+
+    @autopilot.logging.log_action(logger.debug)
+    def set_openvpn_ca(self, paths):
+        self.set_openvpn_file(self._openvpn_ca_field, paths)
+
+    @autopilot.logging.log_action(logger.debug)
+    def set_openvpn_file(self, field, paths):
+        self.pointing_device.click_object(field)
+
+        # Wait for expanded animation.
+        sleep(0.5)
+
+        # file = field.wait_select_single(objectName='vpnFileSelectorItem0')
+        choose = field.wait_select_single(objectName='vpnFileSelectorItem1')
+        self.pointing_device.click_object(choose)
+        file_dialog = self.get_root_instance().wait_select_single(
+            objectName='vpnDialogFile'
+        )
+
+        # Go to root /
+        root = file_dialog.wait_select_single(objectName='vpnFilePathItem_/')
+        self.pointing_device.click_object(root)
+
+        for path in paths:
+            list_view = file_dialog.wait_select_single(
+                'QQuickListView', objectName='vpnFileList'
+            )
+            list_view.click_element('vpnFileItem_%s' % path)
+        accept = file_dialog.wait_select_single(objectName='vpnFileAccept')
+        self.pointing_device.click_object(accept)
+
+    @autopilot.logging.log_action(logger.debug)
+    def openvpn_okay(self):
+        utils.dismiss_osk()
+        self.get_root_instance().main_view.scroll_to_and_click(
+            self._openvpn_ok_button
+        )

@@ -81,17 +81,19 @@ int main(int argc, char **argv)
     parsePluginOptions(app.arguments(), defaultPlugin, pluginOptions);
 
     QQuickView view;
+    Utilities utils;
     QObject::connect(view.engine(), SIGNAL(quit()), &app, SLOT(quit()),
                      Qt::QueuedConnection);
     qmlRegisterType<QAbstractItemModel>();
     qmlRegisterType<SystemSettings::PluginManager>("SystemSettings", 1, 0, "PluginManager");
-    view.engine()->rootContext()->setContextProperty("Utilities", new Utilities());
+    view.engine()->rootContext()->setContextProperty("Utilities", &utils);
     view.setResizeMode(QQuickView::SizeRootObjectToView);
     view.engine()->addImportPath(PLUGIN_PRIVATE_MODULE_DIR);
     view.engine()->addImportPath(PLUGIN_QML_DIR);
     view.rootContext()->setContextProperty("defaultPlugin", defaultPlugin);
     view.rootContext()->setContextProperty("i18nDirectory", I18N_DIRECTORY);
     view.rootContext()->setContextProperty("pluginOptions", pluginOptions);
+    view.rootContext()->setContextProperty("view", &view);
     view.setSource(QUrl("qrc:/qml/MainWindow.qml"));
     view.show();
 

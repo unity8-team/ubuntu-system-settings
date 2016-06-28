@@ -47,7 +47,7 @@ function getModelFromType (type) {
             model = iaContexts;
             break;
         default:
-            throw new Error('Unknown context type ' + type);
+            console.warn('Unknown context type', type);
     }
     return model;
 }
@@ -289,7 +289,10 @@ function contextRemoved (path) {
  * @param {String} type
  */
 function contextTypeChanged (type) {
-    addContextToModel(this, type);
+    if (type) {
+        addContextToModel(this, type);
+        checkPreferred();
+    }
 }
 
 /**
@@ -488,7 +491,6 @@ function connManPoweredChanged (powered) {
  */
 function checkPreferred () {
     var models = [internetContexts, iaContexts, mmsContexts];
-
     models.forEach(function (model) {
         var i;
         var ctx;
@@ -503,8 +505,13 @@ function checkPreferred () {
             }
         }
 
-        if (activeCtx && getConflictingContexts(activeCtx).length === 0) {
-            activeCtx.preferred = true;
+        try {
+            var conflicts = getConflictingContexts(activeCtx);
+            if (activeCtx && conflicts.length === 0) {
+                activeCtx.preferred = true;
+            }
+        } catch (e) {
+            console.error(e);
         }
     });
 }

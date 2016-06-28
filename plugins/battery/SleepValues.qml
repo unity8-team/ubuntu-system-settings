@@ -35,7 +35,7 @@ ItemPage {
 
     property alias usePowerd: batteryBackend.powerdRunning
     property bool lockOnSuspend
-    property variant idleValues: [60,120,180,240,300,600]
+    property variant idleValues: [30,60,120,180,240,300,600,0]
 
     UbuntuBatteryPanel {
         id: batteryBackend
@@ -49,18 +49,14 @@ ItemPage {
                 var curIndex = idleValues.indexOf(value)
                 if( curIndex != -1)
                     sleepSelector.selectedIndex = curIndex
-                else if(value === 0)
-                    sleepSelector.selectedIndex = 6
-                // ensure dimTimeout is 10 seconds less than activityTimeout
-                if (usePowerd)
-                    dimTimeout = Math.max(activityTimeout - 10, 0)
             }
+	    console.warn("Change on: " + key)
         }
         Component.onCompleted: {
             if (usePowerd)
-                sleepSelector.selectedIndex = (powerSettings.activityTimeout === 0) ? 6 : idleValues.indexOf(powerSettings.activityTimeout)
+                sleepSelector.selectedIndex = idleValues.indexOf(powerSettings.activityTimeout)
             else
-                sleepSelector.selectedIndex = (powerSettings.idleDelay === 0) ? 6 : idleValues.indexOf(powerSettings.idleDelay)
+                sleepSelector.selectedIndex = idleValues.indexOf(powerSettings.idleDelay)
         }
     }
 
@@ -75,8 +71,8 @@ ItemPage {
             anchors.right: parent.right
 
             SettingsItemTitle {
-                text: lockOnSuspend ? i18n.tr("Lock the phone when it's not in use:") :
-                                      i18n.tr("Put the phone to sleep when it is not in use:")
+                text: lockOnSuspend ? i18n.tr("Lock the device when it's not in use:") :
+                                      i18n.tr("Put the device to sleep when it is not in use:")
             }
 
             ListItem.ItemSelector {
@@ -86,6 +82,10 @@ ItemPage {
                     text: modelData
                 }
                 model: [
+                    // TRANSLATORS: %1 is the number of seconds
+                    i18n.tr("After %1 seconds",
+                            "After %1 seconds",
+                            30).arg(30),
                     // TRANSLATORS: %1 is the number of minutes
                     i18n.tr("After %1 minute",
                             "After %1 minutes",
@@ -113,16 +113,21 @@ ItemPage {
                     i18n.tr("Never")]
                 expanded: true
                 onDelegateClicked: {
-                  if (usePowerd)
-                    powerSettings.activityTimeout = (index == 6) ? 0 : idleValues[index]
+                  if (usePowerd) {
+ 		    powerSettings.activityTimeout = idleValues[index]
+                    // ensure dimTimeout is 10 seconds less than activityTimeout
+                    powerSettings.dimTimeout = Math.max(powerSettings.activityTimeout - 10, 0)
+		    console.warn("activity: " +  powerSettings.activityTimeout)
+    		    console.warn("dim: " +  powerSettings.dimTimeout)
+		  }
                   else
-                    powerSettings.idleDelay = (index == 6) ? 0 : idleValues[index]
+                    powerSettings.idleDelay = idleValues[index]
                 }
                 highlightWhenPressed: false
             }
 
             ListItem.Caption {
-                text: lockOnSuspend ? i18n.tr("Shorter times are more secure. Phone won't lock during calls or video playback.") : i18n.tr("Phone won’t sleep during calls or video playback.")
+                text: lockOnSuspend ? i18n.tr("Shorter times are more secure. Device won't lock during calls or video playback.") : i18n.tr("Device won’t sleep during calls or video playback.")
             }
         }
     }

@@ -39,11 +39,15 @@ namespace UpdatePlugin {
 SystemUpdate::SystemUpdate(QObject *parent) :
     QObject(parent),
     m_currentBuildNumber(-1),
+    m_targetBuildNumber(-1),
     m_detailedVersion(),
     m_lastUpdateDate(),
     m_downloadMode(-1),
-    m_systemBusConnection (QDBusConnection::systemBus()),
-    m_SystemServiceIface ("com.canonical.SystemImage",
+    m_systemBusConnection(QDBusConnection::systemBus()),
+    m_serviceWatcher("com.canonical.SystemImage",
+                     m_systemBusConnection,
+                     QDBusServiceWatcher::WatchForOwnerChange),
+    m_SystemServiceIface("com.canonical.SystemImage",
                          "/Service",
                          "com.canonical.SystemImage",
                          m_systemBusConnection)
@@ -52,6 +56,33 @@ SystemUpdate::SystemUpdate(QObject *parent) :
 
     qDBusRegisterMetaType<QMap<QString, QString> >();
 
+    connect(&m_serviceWatcher,
+             SIGNAL(serviceOwnerChanged(QString, QString, QString)),
+             this,
+             SLOT(slotNameOwnerChanged(QString, QString, QString)));
+
+    setUpInterface();
+}
+
+SystemUpdate::~SystemUpdate() {
+}
+
+
+void SystemUpdate::slotNameOwnerChanged(const QString &name,
+                                        const QString &oldOwner,
+                                        const QString &newOwner) {
+    Q_UNUSED (oldOwner);
+    Q_UNUSED (newOwner);
+
+    if (name != "com.canonical.SystemImage")
+        return;
+    qWarning() << "got si slot name owner change, setting up...";
+    if (m_SystemServiceIface.isValid())
+        setUpInterface();
+}
+
+void SystemUpdate::setUpInterface() {
+    qWarning() << "setting up the si interface...";
     connect(&m_SystemServiceIface, SIGNAL(UpdateAvailableStatus(bool, bool, QString, int, QString, QString)),
                this, SLOT(ProcessAvailableStatus(bool, bool, QString, int, QString, QString)));
     // signals to forward directly to QML
@@ -61,6 +92,8 @@ SystemUpdate::SystemUpdate(QObject *parent) :
                 this, SLOT(updateDownloadProgress(int, double)));
     connect(&m_SystemServiceIface, SIGNAL(UpdatePaused(int)),
                 this, SIGNAL(updatePaused(int)));
+    connect(&m_SystemServiceIface, SIGNAL(DownloadStarted()),
+                this, SIGNAL(downloadStarted()));
     connect(&m_SystemServiceIface, SIGNAL(UpdateDownloaded()),
                 this, SIGNAL(updateDownloaded()));
     connect(&m_SystemServiceIface, SIGNAL(UpdateFailed(int, QString)),
@@ -69,9 +102,8 @@ SystemUpdate::SystemUpdate(QObject *parent) :
                 this, SLOT(ProcessSettingChanged(QString, QString)));
     connect(&m_SystemServiceIface, SIGNAL(Rebooting(bool)),
                 this, SIGNAL(rebooting(bool)));
-}
 
-SystemUpdate::~SystemUpdate() {
+    initializeProperties();
 }
 
 void SystemUpdate::checkForUpdate() {
@@ -80,6 +112,10 @@ void SystemUpdate::checkForUpdate() {
 
 void SystemUpdate::downloadUpdate() {
     m_SystemServiceIface.asyncCall("DownloadUpdate");
+}
+
+void SystemUpdate::forceAllowGSMDownload() {
+    m_SystemServiceIface.asyncCall("ForceAllowGSMDownload");
 }
 
 void SystemUpdate::applyUpdate() {
@@ -100,7 +136,8 @@ void SystemUpdate::pauseDownload() {
         Q_EMIT updateProcessFailed(_("Can't pause current request (can't contact service)"));
 }
 
-void SystemUpdate::setCurrentDetailedVersion() {
+
+void SystemUpdate::initializeProperties() {
     QDBusPendingReply<QMap<QString, QString> > reply = m_SystemServiceIface.call("Information");
     reply.waitForFinished();
     if (reply.isValid()) {
@@ -108,6 +145,7 @@ void SystemUpdate::setCurrentDetailedVersion() {
         m_currentBuildNumber = result["current_build_number"].toInt();
         m_deviceName = result["device_name"];
         m_lastUpdateDate = QDateTime::fromString(result["last_update_date"], Qt::ISODate);
+        m_targetBuildNumber = result["target_build_number"].toInt();
 
         QMap<QString, QVariant> details;
         QStringList keyvalue = result["version_detail"].split(",", QString::SkipEmptyParts);
@@ -124,68 +162,37 @@ void SystemUpdate::setCurrentDetailedVersion() {
 }
 
 bool SystemUpdate::checkTarget() {
-    int target = 0;
-    int current = 0;
-    QDBusPendingReply<QMap<QString, QString> > reply = m_SystemServiceIface.call("Information");
-    reply.waitForFinished();
-    if (reply.isValid()) {
-        QMap<QString, QString> result = reply.argumentAt<0>();
-        target = result.value("target_build_number", "0").toInt();
-        current = result.value("current_build_number", "0").toInt();
-    } else {
-        qWarning() << "Error when retrieving version information: " << reply.error();
-    }
-
-    return target > current;
+    return m_targetBuildNumber > m_currentBuildNumber;
 }
 
 QString SystemUpdate::deviceName() {
-        if (m_deviceName.isNull())
-            setCurrentDetailedVersion();
-
-        return m_deviceName;
+    return m_deviceName;
 }
 
 QDateTime SystemUpdate::lastUpdateDate() {
-    if (!m_lastUpdateDate.isValid())
-        setCurrentDetailedVersion();
-
     return m_lastUpdateDate;
 }
 
 int SystemUpdate::currentBuildNumber() {
-    if (m_currentBuildNumber == -1)
-        setCurrentDetailedVersion();
-
     return m_currentBuildNumber;
 }
 
 QString SystemUpdate::currentUbuntuBuildNumber() {
-    if (!m_detailedVersion.contains("ubuntu"))
-        setCurrentDetailedVersion();
     QString val = m_detailedVersion.value("ubuntu").toString();
     return val.isEmpty() ? _("Unavailable") : val;
 }
 
 QString SystemUpdate::currentDeviceBuildNumber() {
-    if (!m_detailedVersion.contains("device"))
-        setCurrentDetailedVersion();
     QString val = m_detailedVersion.value("device").toString();
     return val.isEmpty() ? _("Unavailable") : val;
 }
 
 QString SystemUpdate::currentCustomBuildNumber() {
-    if (!m_detailedVersion.contains("custom"))
-        setCurrentDetailedVersion();
     QString val = m_detailedVersion.value("custom").toString();
     return val.isEmpty() ? _("Unavailable") : val;
 }
 
 QMap<QString, QVariant> SystemUpdate::detailedVersionDetails() {
-     if (m_detailedVersion.empty()) {
-        setCurrentDetailedVersion();
-     }
-
     return m_detailedVersion;
 }
 
@@ -236,6 +243,7 @@ void SystemUpdate::ProcessAvailableStatus(bool isAvailable,
                                           QString lastUpdateDate,
                                           QString errorReason)
 {
+    qWarning()<<"ProcessAvailableStatus";
     update = new Update(this);
     QString packageName(UBUNTU_PACKAGE_NAME);
     update->initializeApplication(packageName, "Ubuntu",

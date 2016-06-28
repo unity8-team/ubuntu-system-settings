@@ -31,7 +31,7 @@ ItemPage {
     title: i18n.tr("Locking and unlocking")
 
     property bool usePowerd
-    property variant powerSettings
+    property var powerSettings
 
     UbuntuSecurityPrivacyPanel {
         id: securityPrivacy
@@ -56,10 +56,13 @@ ItemPage {
                 property string swipe: i18n.ctr("Unlock with swipe", "None")
                 property string passcode: i18n.tr("Passcode")
                 property string passphrase: i18n.tr("Passphrase")
+                property string fingerprint: i18n.tr("Fingerprint")
 
                 objectName: "lockSecurity"
                 text: i18n.tr("Lock security")
                 value: {
+                    if (securityPrivacy.enableFingerprintIdentification)
+                        return fingerprint
                     switch (securityPrivacy.securityType) {
                         case UbuntuSecurityPrivacyPanel.Swipe:
                             return swipe
@@ -67,6 +70,8 @@ ItemPage {
                             return passcode
                         case UbuntuSecurityPrivacyPanel.Passphrase:
                             return passphrase
+                        case UbuntuSecurityPrivacyPanel.Fingerprint:
+                            return fingerprint
                     }
                 }
                 progression: true
@@ -81,20 +86,25 @@ ItemPage {
                                     : i18n.tr("Sleep when idle")
                 value: {
                     if (usePowerd) {
-                        var timeout = Math.round(powerSettings.activityTimeout/60)
-                        return (powerSettings.activityTimeout != 0) ?
+                        var timeout = powerSettings.activityTimeout
+                        return timeout == 0 ?
+                                    i18n.tr("Never") :
+				    (timeout < 60) ?
+		                    // TRANSLATORS: %1 is the number of seconds
+                    	            i18n.tr("After %1 second",
+                               	            "After %1 seconds",
+                                             timeout).arg(timeout) :
                                     // TRANSLATORS: %1 is the number of minutes
-                                    i18n.tr("%1 minute",
-                                            "%1 minutes",
-                                            timeout).arg(timeout) :
-                                    i18n.tr("Never")
+                                    i18n.tr("After %1 minute",
+                                            "After %1 minutes",
+                                            Math.round(timeout/60)).arg(Math.round(timeout/60))
                     }
                     else {
                         var timeout = Math.round(powerSettings.idleDelay/60)
                         return (powerSettings.idleDelay != 0) ?
                                     // TRANSLATORS: %1 is the number of minutes
-                                    i18n.tr("%1 minute",
-                                            "%1 minutes",
+                                    i18n.tr("After %1 minute",
+                                            "After %1 minutes",
                                             timeout).arg(timeout) :
                                     i18n.tr("Never")
                     }
@@ -146,7 +156,7 @@ ItemPage {
 
             ListItem.Caption {
                 text: securityPrivacy.securityType === UbuntuSecurityPrivacyPanel.Swipe ?
-                      i18n.tr("Turn on lock security to restrict access when the phone is locked.") :
+                      i18n.tr("Turn on lock security to restrict access when the device is locked.") :
                       i18n.tr("Other apps and functions will prompt you to unlock.")
             }
         }

@@ -1,0 +1,20 @@
+{
+    "icon": "network-vpn",
+    "name": "VPN",
+    "translations": "ubuntu-system-settings",
+    "category": "network",
+    "priority": 3,
+    "keywords": [
+        "network",
+        "connect",
+        "disconnect",
+        "vpn",
+        "openvpn",
+        "ip",
+        "address",
+        "routing"
+    ],
+    "has-dynamic-keywords": false,
+    "has-dynamic-visibility": false,
+    "page-component": "PageComponent.qml"
+}

@@ -1,3 +1,374 @@
+ubuntu-system-settings (0.4+16.10.20160624-0ubuntu1) yakkety; urgency=medium
+
+  [ Antti Kaijanmäki ]
+  * use Connectivity API for cellular data and roaming control. (LP:
+    #1373463)
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Fri, 24 Jun 2016 13:42:47 +0000
+
+ubuntu-system-settings (0.4+16.10.20160619-0ubuntu1) yakkety; urgency=medium
+
+  [ jonas-drange ]
+  * expose fingerprint ID panel and the Fingerprint lock setting (LP:
+    #1547040)
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Sun, 19 Jun 2016 02:48:24 +0000
+
+ubuntu-system-settings (0.4+16.10.20160609-0ubuntu1) yakkety; urgency=medium
+
+  * Fix pin code request is rejected because device is not valid (LP:
+    #1539158)
+
+ -- Konrad Zapałowicz <konrad.zapalowicz@canonical.com>  Thu, 09 Jun 2016 11:16:36 +0000
+
+ubuntu-system-settings (0.4+16.10.20160606-0ubuntu1) yakkety; urgency=medium
+
+  [ Michael Terry ]
+  * Update some button colors to the new theme style (LP: #1581047)
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Mon, 06 Jun 2016 22:02:47 +0000
+
+ubuntu-system-settings (0.4+16.10.20160525-0ubuntu1) yakkety; urgency=medium
+
+  [ Michael Terry ]
+  * Bump version number for change in TimeDate plugin API
+
+  [ CI Train Bot ]
+  * No-change rebuild.
+
+ -- Michael Terry <michael.terry@canonical.com>  Wed, 25 May 2016 06:02:08 +0000
+
+ubuntu-system-settings (0.3+16.10.20160523-0ubuntu1) yakkety; urgency=medium
+
+  * Catch connection errors asynchronously
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Mon, 23 May 2016 12:27:38 +0000
+
+ubuntu-system-settings (0.3+16.04.20160517-0ubuntu1) xenial; urgency=medium
+
+  * Fixes to sleep/idle settings in the Battery and Security panels (LP:
+    #1581423)
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Tue, 17 May 2016 14:04:58 +0000
+
+ubuntu-system-settings (0.3+16.04.20160511-0ubuntu1) xenial; urgency=medium
+
+  * Play the haptic feedback before pushing the page so it happens when
+    the use taps not after the page has loaded. (LP: #1578816)
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Wed, 11 May 2016 13:44:39 +0000
+
+ubuntu-system-settings (0.3+16.04.20160510-0ubuntu1) xenial; urgency=medium
+
+  * Don't use Ip4Address from NetworkManager, it was deprecated since
+    0.9 and since removed. Use QNetworkInterface to get the IP address.
+    (LP: #1579825)
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Tue, 10 May 2016 18:19:38 +0000
+
+ubuntu-system-settings (0.3+16.04.20160506-0ubuntu1) xenial; urgency=medium
+
+  [ jonas-drange ]
+  * Set Preferred on some context as soon as we know it's type and it is
+    active. Do not copy the Manager instance from panel to panel. (LP:
+    #1537913)
+  * add servicewatcher to system image binding (LP: #1509022)
+
+ -- Jonas G. Drange <ci-train-bot@canonical.com>  Fri, 06 May 2016 13:50:49 +0000
+
+ubuntu-system-settings (0.3+16.04.20160503-0ubuntu1) xenial; urgency=medium
+
+  * Only hide ringer sound settings when there is no modem,
+    IncomingMessageSound is used by ubuntu-push for other generic
+    notifications (LP: #1577783)
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Tue, 03 May 2016 13:52:13 +0000
+
+ubuntu-system-settings (0.3+16.04.20160429.2-0ubuntu1) xenial; urgency=medium
+
+  [ Antti Kaijanmäki ]
+  * Add string for cellular data switch. (LP: #1373463)
+
+  [ Ken VanDine ]
+  * Fixes to sleep/idle settings from Pat McGowan (LP: #1494514,
+    #1367294, #1569758)
+  * Only depend on aethercast on amd64, armhf, i386 which are the only
+    supported arches
+
+  [ Matthew Paul Thomas ]
+  * Removes the GPS switch and caption from Battery settings, fixing bug
+    1520580. (LP: #1520580)
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Fri, 29 Apr 2016 19:26:08 +0000
+
+ubuntu-system-settings (0.3+16.04.20160428-0ubuntu1) xenial; urgency=medium
+
+  [ Ken VanDine ]
+  * Added Display Casting to the brightness panel added:
+    plugins/brightness/WifiDisplays.qml
+    plugins/brightness/WifiDisplaysAlert.qml
+    plugins/brightness/aethercast/
+    plugins/brightness/aethercast/aethercast_device.cpp
+    plugins/brightness/aethercast/aethercast_device.h
+    plugins/brightness/aethercast/aethercast_helper.h
+    plugins/brightness/aethercast/aethercast_manager.cpp
+    plugins/brightness/aethercast/aethercast_manager.h
+    plugins/brightness/aethercast/dbus-shared.h
+    plugins/brightness/aethercast/device.cpp
+    plugins/brightness/aethercast/device.h
+    plugins/brightness/aethercast/devicemodel.cpp
+    plugins/brightness/aethercast/devicemodel.h
+    plugins/brightness/aethercast/displays.cpp
+    plugins/brightness/aethercast/displays.h
+    plugins/brightness/aethercast/freedesktop_objectmanager.cpp
+    plugins/brightness/aethercast/freedesktop_objectmanager.h
+    plugins/brightness/aethercast/freedesktop_properties.cpp
+    plugins/brightness/aethercast/freedesktop_properties.h
+    plugins/brightness/aethercast/org.aethercast.xml
+  * Make the brightness plugin name dynamic based on the android
+    property ubuntu.widi.supported
+
+  [ Michał Sawicz ]
+  * Dynamic grid unit size support
+
+ -- Simon Fels <simon.busch@canonical.com>  Thu, 28 Apr 2016 15:31:45 +0000
+
+ubuntu-system-settings (0.3+16.04.20160412-0ubuntu1) xenial; urgency=medium
+
+  * Dropped workaround for lack of default value for MousePrimaryButton
+    and TouchpadPrimaryButton.
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Tue, 12 Apr 2016 17:08:04 +0000
+
+ubuntu-system-settings (0.3+16.04.20160407-0ubuntu1) xenial; urgency=medium
+
+  [ Ken VanDine ]
+  * Ported DefaultSimForCalls, DefaultSimForMessages and SimNames to use
+    AccountsService (LP: #1418040)
+
+ -- Alfonso Sanchez-Beato <alfonso.sanchez-beato@canonical.com>  Thu, 07 Apr 2016 13:20:44 +0000
+
+ubuntu-system-settings (0.3+16.04.20160330-0ubuntu1) xenial; urgency=medium
+
+  [ Jin Hsieh ]
+  * Bug fixed - Settings/Storage shows we have only 2.3GB total storage
+
+  [ Ken VanDine ]
+  * Use a loader for the Storage page and show an ActivityIndicator
+    until the page is ready Improved performance of building the list of
+    mountedVolumes (LP: #1422206)
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Wed, 30 Mar 2016 17:43:55 +0000
+
+ubuntu-system-settings (0.3+16.04.20160325-0ubuntu1) xenial; urgency=medium
+
+  * Bump Ubuntu.Content import to 1.3 to prevent mixed version imports
+    (LP: #1554621)
+  * Only include the "any data connection" item when there is a modem
+    present. (LP: #1560884)
+  * Play haptic feedback when selecting About and Reset from the main
+    view. (LP: #1560571)
+  * Removed unnecessary mouse-plugin, it was intended for use with
+    dynamic visibility, which is no longer needed.
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Fri, 25 Mar 2016 20:53:47 +0000
+
+ubuntu-system-settings (0.3+16.04.20160323.2-0ubuntu1) xenial; urgency=medium
+
+  [ Jim Hodapp ]
+  * Make sure the sound preview plugin can find the QML Audio.audioRole
+    property.
+
+ -- Timo Jyrinki <timo.jyrinki@canonical.com>  Wed, 23 Mar 2016 22:30:28 +0000
+
+ubuntu-system-settings (0.3+16.04.20160323-0ubuntu1) xenial; urgency=medium
+
+  [ jonas-drange ]
+  * Add External Keyboard panel which allows for configuration of the
+    default keymap. (LP: #1524400, #1491340)
+
+ -- Michael Zanetti <michael.zanetti@canonical.com>  Wed, 23 Mar 2016 08:46:55 +0000
+
+ubuntu-system-settings (0.3+16.04.20160318-0ubuntu1) xenial; urgency=medium
+
+  * Process pairing attempts for unknown devices correctly (LP:
+    #1539158)
+
+ -- Simon Fels <simon.busch@canonical.com>  Fri, 18 Mar 2016 17:56:23 +0000
+
+ubuntu-system-settings (0.3+16.04.20160316.1-0ubuntu1) xenial; urgency=medium
+
+  [ Michael Terry ]
+  * Use geonames library instead of timezonemap library to search city
+    names, which gives us slightly better sorting (and future
+    improvements)
+
+  [ Rodney Dawes ]
+  * Fix the CMakeLists.txt to handle settings.js generation and
+    translations better. (LP: #1555623)
+
+  [ jonas-drange ]
+  * Replace usage of backgroundText from the selected palette for labels
+    with baseText from normal palette.
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Wed, 16 Mar 2016 17:03:54 +0000
+
+ubuntu-system-settings (0.3+16.04.20160314.4-0ubuntu1) xenial; urgency=medium
+
+  [ jonas-drange ]
+  * New VPN panel with happy path test (LP: #1495553)
+
+ -- Jonas G. Drange <ci-train-bot@canonical.com>  Mon, 14 Mar 2016 21:26:48 +0000
+
+ubuntu-system-settings (0.3+16.04.20160314-0ubuntu1) xenial; urgency=medium
+
+  * Rework Bluetooth device discovery handling
+
+ -- Simon Fels <simon.busch@canonical.com>  Mon, 14 Mar 2016 14:09:57 +0000
+
+ubuntu-system-settings (0.3+16.04.20160312-0ubuntu1) xenial; urgency=medium
+
+  [ Ken VanDine ]
+  * Added status tracking for updates to be used for system updates.
+    Added handling of started signal from system-image-dbus as well as
+    ForceAllowGSMDownload (LP: #1508081)
+
+ -- Barry Warsaw <ci-train-bot@canonical.com>  Sat, 12 Mar 2016 03:41:08 +0000
+
+ubuntu-system-settings (0.3+16.04.20160311-0ubuntu1) xenial; urgency=medium
+
+  [ Ken VanDine ]
+  * Enable mouse test and use LD_PRELOAD to fix crash running with Xvfb
+  * Hide MouseDoubleClickSpeed and TouchpadDoubleClickSpeed settings
+    because they are not supported by USC yet.
+  * Use accountsservice for properties instead of gsettings
+
+ -- Michał Sawicz <michal.sawicz@canonical.com>  Fri, 11 Mar 2016 03:13:05 +0000
+
+ubuntu-system-settings (0.3+16.04.20160304-0ubuntu1) xenial; urgency=medium
+
+  [ CI Train Bot ]
+  * Resync trunk.
+
+  [ jonas-drange ]
+  * Drop our own InputInfo implementation and use QSystemInfo 5.5. (LP:
+    #1549314)
+
+ -- Jonas G. Drange <ci-train-bot@canonical.com>  Fri, 04 Mar 2016 13:58:59 +0000
+
+ubuntu-system-settings (0.3+16.04.20160226.1-0ubuntu1) xenial; urgency=medium
+
+  * Add InAppPurchases to privacy plug-in. Update translation template.
+    Fix translation template to not include full path to settings.js
+    file. (LP: #1524943)
+
+ -- Rodney Dawes <ci-train-bot@canonical.com>  Fri, 26 Feb 2016 19:07:26 +0000
+
+ubuntu-system-settings (0.3+16.04.20160226-0ubuntu1) xenial; urgency=medium
+
+  * Subtract amount used by apps when computing otherSize (LP: #1524424)
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Fri, 26 Feb 2016 12:32:49 +0000
+
+ubuntu-system-settings (0.3+16.04.20160225-0ubuntu1) xenial; urgency=medium
+
+  * Don't use the cellular portion of the location accuracy string when
+    there is no modem available (LP: #1545021)
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Thu, 25 Feb 2016 14:04:44 +0000
+
+ubuntu-system-settings (0.3+16.04.20160218-0ubuntu1) xenial; urgency=medium
+
+  [ jonas-drange ]
+  * Define a map used for mapping short, panel-agnostic URLs and expose
+    translation functionality to both QML and c++. (LP: #1489833,
+    #1533835)
+
+ -- Charles Kerr <charles.kerr@canonical.com>  Thu, 18 Feb 2016 17:06:34 +0000
+
+ubuntu-system-settings (0.3+16.04.20160208-0ubuntu1) xenial; urgency=medium
+
+  * Make cellular and phone dynamically visible (LP: #1541588)
+  * Set a fixed width to 50 GU when in windowed mode (LP: #1542050)
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Mon, 08 Feb 2016 14:32:42 +0000
+
+ubuntu-system-settings (0.3+16.04.20160129-0ubuntu1) xenial; urgency=medium
+
+  * ￼Return "Phone" for type Smartphone (LP: #1534221)
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Fri, 29 Jan 2016 15:43:18 +0000
+
+ubuntu-system-settings (0.3+16.04.20160128-0ubuntu1) xenial; urgency=medium
+
+  * Allow pairing regardless of type (LP: #1535660, #1534221)
+  * Exposed adapterAddress in the bluetooth plugin to be used to get the
+    address in the about plugin (LP: #1537029)
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Thu, 28 Jan 2016 14:23:03 +0000
+
+ubuntu-system-settings (0.3+16.04.20160121-0ubuntu1) xenial; urgency=medium
+
+  * Don't display the ActivityIndicator while searching, causes to much
+    load. (LP: #1535827)
+  * Don't display the setting to automatically connect when detected
+    during pairing (LP: #1535822)
+  * Only enable the forget device button when bluetooth is enabled (LP:
+    #1535829)
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Thu, 21 Jan 2016 14:47:13 +0000
+
+ubuntu-system-settings (0.3+16.04.20160108.1-0ubuntu1) xenial; urgency=medium
+
+  * Adds Mouse & Touchpad panel, however it's disabled because it
+    requires unity8 support. added: plugins/mouse/
+    plugins/mouse/CMakeLists.txt plugins/mouse/Components/
+    plugins/mouse/Components/CMakeLists.txt
+    plugins/mouse/Components/UnityInputInfo/
+    plugins/mouse/Components/UnityInputInfo/CMakeLists.txt
+    plugins/mouse/Components/UnityInputInfo/UnityInputInfo.qml
+    plugins/mouse/Components/UnityInputInfo/qmldir
+    plugins/mouse/Connected.qml plugins/mouse/InputInfo/
+    plugins/mouse/InputInfo/CMakeLists.txt
+    plugins/mouse/InputInfo/linux/
+    plugins/mouse/InputInfo/linux/qinputdeviceinfo_linux.cpp
+    plugins/mouse/InputInfo/linux/qinputdeviceinfo_linux_p.h
+    plugins/mouse/InputInfo/plugin.cpp plugins/mouse/InputInfo/plugin.h
+    plugins/mouse/InputInfo/qdeclarativeinputdeviceinfo.cpp
+    plugins/mouse/InputInfo/qdeclarativeinputdeviceinfo_p.h
+    plugins/mouse/InputInfo/qinputinfo.cpp
+    plugins/mouse/InputInfo/qinputinfo.h plugins/mouse/InputInfo/qmldir
+    plugins/mouse/ItemTitle.qml plugins/mouse/None.qml
+    plugins/mouse/PageComponent.qml
+    plugins/mouse/PrimaryButtonSelector.qml
+    plugins/mouse/SectionHeader.qml plugins/mouse/TapArea.qml
+    plugins/mouse/mouse.settings plugins/mouse/plugin/
+    plugins/mouse/plugin/CMakeLists.txt plugins/mouse/plugin/mouse-
+    plugin.cpp plugins/mouse/plugin/mouse-plugin.h
+    plugins/mouse/settings-mouse.svg tests/plugins/mouse/
+    tests/plugins/mouse/CMakeLists.txt tests/plugins/mouse/Source/
+    tests/plugins/mouse/Source/qmldir tests/plugins/mouse/tst_mouse.cpp
+    tests/plugins/mouse/tst_mouse.qml
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Fri, 08 Jan 2016 19:06:03 +0000
+
+ubuntu-system-settings (0.3+16.04.20151222-0ubuntu1) xenial; urgency=medium
+
+  [ jonas-drange ]
+  * Expand indicator network mock to include access points, sections and
+    switches via org.gtk.Menus.
+  * fix utils leak in main
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Tue, 22 Dec 2015 19:46:25 +0000
+
+ubuntu-system-settings (0.3+16.04.20151216.1-0ubuntu1) xenial; urgency=medium
+
+  [ Ken VanDine ]
+  * Improved metadata sent to download manager so they show up better in
+    the transfer indicator.
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Wed, 16 Dec 2015 16:19:08 +0000
+
 ubuntu-system-settings (0.3+16.04.20151204.1-0ubuntu1) xenial; urgency=medium
 
   [ Ken VanDine ]

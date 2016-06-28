@@ -94,12 +94,12 @@ ItemPage {
          Dialog {
              id: dialogueInstall
              title: i18n.tr("Update System")
-             text: root.batterySafeForUpdate ? i18n.tr("The phone needs to restart to install the system update.") : i18n.tr("Connect the phone to power before installing the system update.")
+             text: root.batterySafeForUpdate ? i18n.tr("The device needs to restart to install the system update.") : i18n.tr("Connect the device to power before installing the system update.")
 
              Button {
                  text: i18n.tr("Restart & Install")
                  visible: root.batterySafeForUpdate ? true : false
-                 color: UbuntuColors.orange
+                 color: theme.palette.normal.positive
                  onClicked: {
                      installingImageUpdate.visible = true;
                      UpdateManager.applySystemUpdate();
@@ -108,7 +108,6 @@ ItemPage {
              }
              Button {
                  text: i18n.tr("Cancel")
-                 color: UbuntuColors.warmGrey
                  onClicked: {
                      updateList.currentIndex = 0;
                      var item = updateList.currentItem;
@@ -133,7 +132,7 @@ ItemPage {
 
              Button {
                  text: i18n.tr("OK")
-                 color: UbuntuColors.orange
+                 color: theme.palette.normal.positive
                  onClicked: {
                      PopupUtils.close(dialogueError);
                  }
@@ -212,6 +211,8 @@ ItemPage {
 
         onSystemUpdateDownloaded: {
             root.installAll = false;
+            if (root.includeSystemUpdate)
+                UpdateManager.model[0].status = Update.Downloaded;
         }
 
         onSystemUpdateFailed: {
@@ -303,7 +304,7 @@ ItemPage {
                                                      i18n.tr("Install %1 update…", "Install %1 updates…", root.updatesAvailable).arg(root.updatesAvailable) :
                                                      i18n.tr("Install %1 update", "Install %1 updates", root.updatesAvailable).arg(root.updatesAvailable)
                     property string secondaryText: i18n.tr("Pause All")
-                    color: UbuntuColors.orange
+                    color: theme.palette.normal.positive
                     text: root.installAll ? secondaryText : primaryText
                     width: parent.width - units.gu(4)
 
@@ -399,6 +400,14 @@ ItemPage {
                         modelData.updateState = true;
                         UpdateManager.startDownload(modelData.packageName);
                     }
+
+                    function forceDownload () {
+                        console.warn("FORCE DOWNLOAD: " + modelData.packageName);
+                        modelData.selected = true;
+                        modelData.updateState = true;
+                        UpdateManager.forceAllowGSMDownload(modelData.packageName);
+                    }
+
                     Column {
                         id: textArea
                         objectName: "textArea"
@@ -440,11 +449,11 @@ ItemPage {
                                     if (modelData.systemUpdate) {
                                         if (modelData.updateReady) {
                                             return i18n.tr("Install…");
-                                        } else if (!modelData.updateState && !modelData.selected) {
+                                        } else if ((!modelData.updateState && !modelData.selected) || modelData.status === Update.NotStarted) {
                                             return i18n.tr("Download");
                                         }
                                     }
-                                    if (modelData.updateState) {
+                                    if (modelData.updateState || modelData.status === Update.Downloading) {
                                         return i18n.tr("Pause");
                                     } else if (modelData.selected) {
                                         return i18n.tr("Resume");
@@ -463,6 +472,8 @@ ItemPage {
                                         return resume();
                                     if (!modelData.updateState && !modelData.selected && !modelData.updateReady)
                                         return start();
+                                    if (modelData.systemUpdate && modelData.status === Update.NotStarted)
+                                        return forceDownload();
                                     if (modelData.updateReady)
                                         PopupUtils.open(dialogInstallComponent);
                                 }
@@ -530,6 +541,8 @@ ItemPage {
                                 id: tracker
                                 objectName: "tracker"
                                 packageName: modelData.packageName
+                                title: modelData.title
+                                showInIndicator: false
                                 clickToken: modelData.clickToken
                                 download: modelData.downloadUrl
                                 downloadSha512: modelData.downloadSha512

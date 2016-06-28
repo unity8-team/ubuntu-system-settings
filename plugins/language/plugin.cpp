@@ -24,6 +24,8 @@
 #include <QtQml>
 #include "subset-model.h"
 #include "language-plugin.h"
+#include "onscreenkeyboard-plugin.h"
+#include "hardwarekeyboard-plugin.h"
 
 void BackendPlugin::registerTypes(const char *uri)
 {
@@ -31,6 +33,8 @@ void BackendPlugin::registerTypes(const char *uri)
 
     qmlRegisterType<SubsetModel>(uri, 1, 0, "SubsetModel");
     qmlRegisterType<LanguagePlugin>(uri, 1, 0, "UbuntuLanguagePlugin");
+    qmlRegisterType<OnScreenKeyboardPlugin>(uri, 1, 0, "OnScreenKeyboardPlugin");
+    qmlRegisterType<HardwareKeyboardPlugin>(uri, 1, 0, "HardwareKeyboardPlugin");
 }
 
 void BackendPlugin::initializeEngine(QQmlEngine *engine, const char *uri)
