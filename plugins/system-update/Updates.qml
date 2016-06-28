@@ -164,6 +164,8 @@ Item {
                 delegate: ClickUpdateDelegate {
                     objectName: "updatesClickUpdate" + index
                     anchors { left: clickUpdates.left; right: clickUpdates.right }
+                    // downloader: downloadHandler
+                    updateModel: clickUpdatesModel
                     // command: model.command
                     // packageName: identifier
                     // revision: model.revision

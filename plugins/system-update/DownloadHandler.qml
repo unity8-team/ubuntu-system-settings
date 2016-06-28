@@ -21,43 +21,46 @@ import Ubuntu.DownloadManager 1.2
 import Ubuntu.SystemSettings.Update 1.0
 
 Item {
+    id: root
     property var updateModel
+    property alias downloads: udm.downloads
 
     DownloadManager {
         id: udm
 
         onDownloadFinished: {
             console.warn('udm onDownloadFinished', download.downloadId);
-            // updateModel.setInstalled(download.downloadId)
+            updateModel.setInstalled(download.downloadId)
         }
 
         onDownloadPaused: {
             console.warn('udm onDownloadPaused', download.downloadId);
-            // updateModel.pauseUpdate(download.downloadId)
+            updateModel.pauseUpdate(download.downloadId)
         }
 
         onDownloadResumed: {
             console.warn('udm onDownloadResumed', download.downloadId);
-            // updateModel.resumeUpdate(download.downloadId)
+            updateModel.resumeUpdate(download.downloadId)
         }
 
         onDownloadCanceled: {
             console.warn('udm onDownloadCanceled', download.downloadId);
-            // updateModel.cancelUpdate(download.downloadId)
+            updateModel.cancelUpdate(download.downloadId)
         }
 
         onErrorFound: {
             console.warn('udm onErrorFound', download.downloadId, download.errorMessage);
-            // updateModel.setError(download.downloadId, download.errorMessage)
+            updateModel.setError(download.downloadId, download.errorMessage)
         }
         onDownloadsChanged: {
             console.warn('udm udm downloads changed..');
+        }
+        Component.onCompleted: {
             // for (var i = 0; i<downloads.length; i++) {
             //     console.warn(downloads[i].downloadId, downloads[i].metadata.title);
             // }
         }
     }
-
 }
 
     // ListView {

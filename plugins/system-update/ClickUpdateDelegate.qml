@@ -19,6 +19,8 @@
 import QtQuick 2.4
 import Ubuntu.DownloadManager 1.2
 import Ubuntu.SystemSettings.Update 1.0
+import Ubuntu.DownloadManager 1.2
+import Ubuntu.SystemSettings.Update 1.0
 
 UpdateDelegate {
     id: update
@@ -27,16 +29,49 @@ UpdateDelegate {
     // property var command
     // property string downloadSha512
     // property var udm: null
-    // property var clickModel: null
+    // property var downloader: null
+    property var updateModel: null
     // property var downloadTracker: null
 
     updateState: Update.StateAvailable
     kind: Update.KindClick
 
-    onInstall: download()
-    onDownload: {
-        createDownload()
+    onInstall: createDownload()
+    onDownload: createDownload()
+
+
+    QtObject {
+        id: internal
+
+        // function connectToDownloadObject() {
+        //     if (model.downloadId && downloader) {
+        //         for(var i = 0; i < downloader.downloads.length; i++) {
+        //             if (downloader.downloads[i].downloadId == downloadId) {
+        //                 downloader.bindDownload(downloader.downloads[i]);
+        //             }
+        //         }
+        //     }
+        // }
     }
+
+    // Component.onCompleted: {
+    //     if (!model.downloadId)
+    //         return;
+
+    //     for (var i = 0; i < udm.downloads.length; i++) {
+    //         console.warn('delegate udm download', udm.downloads[i]);
+    //         if (udm.downloads[i].downloadId === model.downloadId) {
+    //             console.warn('found download for', model.title);
+    //             return;
+    //         }
+    //     }
+
+    //     console.warn('did not found a damn thing for ', model.title);
+    // }
+
+    // Component.onCompleted: internal.connectToDownloadObject()
+    // onDownloaderChanged: internal.connectToDownloadObject()
+
     // onRetry: retryUpdate(update.packageName)
     // onPause: downloadObject.pause()
     // onResume: downloadObject.resume()
@@ -99,6 +134,10 @@ UpdateDelegate {
         }
     }
 
+    Component.onCompleted: {
+        console.warn('clickupdatedelegate was created');
+    }
+
     function createDownload() {
         console.warn('createDownload', model, model.identifier, model.revision);
 
@@ -115,12 +154,12 @@ UpdateDelegate {
         var hdrs = {
             "X-Click-Token": model.token
         };
-        var metadataObj = mdt.createObject(null, metadata);
+        var metadataObj = mdt.createObject(update, metadata);
         // metadataObj.custom = {
-        //     "packageName": model.identifier,
+        //     "identifier": model.identifier,
         //     "revision": model.revision
         // };
-        var singleDownloadObj = sdl.createObject(null, {
+        var singleDownloadObj = sdl.createObject(update, {
             // "url": model.downloadUrl,
             "autoStart": true,
             //"hash": model.downloadSha512,
@@ -134,6 +173,59 @@ UpdateDelegate {
         // bindDownload(singleDownloadObj);
     }
 
+
+
+    // function onProgressChanged(dl) {
+    //     console.warn('onProgressChanged', progress);
+    //     updateModel.setProgress(dl.downloadId, progress);
+    // }
+
+    // function bindDownload(dl) {
+    //     dl.progressChanged.connect(onProgressChanged);
+    // }
+
+    // function unbindDownload(dl) {
+    //     dl.progressChanged.disconnect(onProgressChanged);
+    // }
+
+    Component {
+        id: sdl
+
+        SingleDownload {
+            // property bool _bound: false
+            property var identifier
+            property var revision
+
+            onDownloadIdChanged: {
+
+                console.warn('downloid changed', downloadId);
+
+                if (downloadId && identifier && (typeof revision !== "undefined")) {
+                    updateModel.setDownloadId(identifier, revision, downloadId);
+                    updateModel.startUpdate(downloadId);
+                }
+            }
+            onProgressChanged: {
+                console.warn('onProgressChanged', progress);
+                updateModel.setProgress(downloadId, progress);
+            }
+            onStarted: {
+                console.warn('onStarted');
+
+                updateModel.startUpdate(downloadId);
+            }
+            onProcessing: {
+                console.warn('onProcessing');
+
+                updateModel.processUpdate(downloadId);
+            }
+        }
+    }
+
+    Component {
+        id: mdt
+        Metadata {}
+    }
     // function pause(downloadId) {
     //     console.warn('pause', downloadId);
     //     // var dl = getDownload(downloadId);
@@ -145,45 +237,5 @@ UpdateDelegate {
     //     // }
     // }
 
-    Component {
-        id: sdl
-
-        SingleDownload {
-            // property bool _bound: false
-
-            property var identifier
-            property var revision
-
-            onDownloadIdChanged: {
-
-                console.warn('downloid changed', downloadId);
-
-                if (downloadId && identifier && (typeof revision !== "undefined")) {
-                    // updateModel.setDownloadId(identifier, revision, downloadId);
-                    // updateModel.startUpdate(downloadId);
-                }
-            }
-            onProgressChanged: {
-                console.warn('onProgressChanged', progress);
-
-                // updateModel.setProgress(downloadId, progress);
-            }
-            onStarted: {
-                console.warn('onStarted');
-
-                // updateModel.startUpdate(downloadId);
-            }
-            onProcessing: {
-                console.warn('onProcessing');
-
-                // updateModel.processUpdate(downloadId);
-            }
-        }
-    }
-
-    Component {
-        id: mdt
-        Metadata {}
-    }
 
 }

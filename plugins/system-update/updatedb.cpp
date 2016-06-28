@@ -190,7 +190,9 @@ void UpdateDb::remove(const QSharedPointer<Update> &update)
 
 void UpdateDb::setInstalled(const QString &downloadId)
 {
+    qWarning() << "set installed";
     if (!openDb()) return;
+    qWarning() << "set installed2";
 
     QSqlQuery q(m_db);
     q.prepare("UPDATE updates SET installed=:installed, update_state=:state, "
