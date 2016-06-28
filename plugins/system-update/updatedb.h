@@ -33,7 +33,7 @@ class UpdateDb : public QObject
     Q_OBJECT
     Q_ENUMS(Filter)
 public:
-    enum class Filter
+    enum Filter
     {
         All,
         Pending,
@@ -52,6 +52,7 @@ public:
 
     void add(const QSharedPointer<Update> &update);
     void remove(const QSharedPointer<Update> &update);
+    QSharedPointer<Update> get(const QString &downloadId);
     // QList<QSharedPointer<ClickUpdate> > getClicks();
 
     QList<QSharedPointer<Update> > updates(const Filter &filter);
@@ -82,6 +83,7 @@ public:
 
 signals:
     void changed();
+    void changed(const QString &downloadId);
 
 private:
     bool createDb();

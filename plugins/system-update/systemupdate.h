@@ -18,8 +18,6 @@
 #ifndef SYSTEM_UPDATE_H
 #define SYSTEM_UPDATE_H
 
-#include "updatedb.h"
-
 #include <QDebug>
 
 namespace UpdatePlugin
@@ -42,17 +40,13 @@ public:
         StatusServerError
     };
 
-    UpdateDb* updateDb();
+public slots:
+    void notifyDbChanged();
+    void notifyDbChanged(const QString &downloadId);
 
-// public slots:
-//     void notifyModelChanged();
-//     void notifyModelItemChanged(const QString &id, const int &revision);
-//     void notifyModelItemChanged(const QString &downloadId);
-
-// signals:
-//     void modelChanged();
-//     void modelItemChanged(const QString &id, const int &revision);
-//     void modelItemChanged(const QString &downloadId);
+signals:
+    void dbChanged();
+    void dbChanged(const QString &downloadId);
 
 protected:
     explicit SystemUpdate(QObject *parent = 0);
@@ -60,10 +54,8 @@ protected:
 
 private:
     static SystemUpdate *m_instance;
-    UpdateDb m_updateDb;
 };
 
 } // UpdatePlugin
 
-// Q_DECLARE_METATYPE(UpdatePlugin::SystemUpdate::UpdateState)
 #endif // SYSTEM_UPDATE_H

@@ -65,73 +65,6 @@ Item {
         updates.status = SystemUpdate.StatusIdle;
     }
 
-
-    function bindDownload(obj) {
-        obj.downloadIdChanged.connect(function () {
-            var identifier = this.metadata.custom.packageName;
-            var revision = this.metadata.custom.revision;
-            console.warn('onDownloadIdChanged', identifier, revision, this.downloadId)
-            if (this.downloadId && identifier && (typeof revision !== "undefined")) {
-                clickUpdatesModel.setDownloadId(identifier, revision, this.downloadId);
-                clickUpdatesModel.startUpdate(this.downloadId);
-            }
-        }.bind(obj))
-        obj.progressChanged.connect(function () {
-            console.warn('onProgressChanged', this.progress);
-            clickUpdatesModel.setProgress(this.downloadId, this.progress);
-        }.bind(obj))
-        obj.started.connect(function () {
-            console.warn('onStarted');
-            clickUpdatesModel.startUpdate(this.downloadId);
-        }.bind(obj))
-        obj.processing.connect(function () {
-            console.warn('onProcessing');
-            clickUpdatesModel.processUpdate(this.downloadId);
-        }.bind(obj))
-        obj._bound = true;
-    }
-
-    function createDownload(click) {
-        console.warn('create download', click.title);
-        var metadata = {
-            //"command": click.command,
-            "title": click.title,
-            "showInIndicator": false
-        };
-        var hdrs = {
-            "X-Click-Token": click.token
-        };
-        var metadataObj = mdt.createObject(null, metadata);
-        metadataObj.custom = {
-            "packageName": click.identifier,
-            "revision": click.revision
-        };
-        var singleDownloadObj = sdl.createObject(null, {
-            // "url": click.downloadUrl,
-            "autoStart": true,
-            //"hash": click.downloadSha512,
-            // "algorithm": "sha512",
-            "headers": hdrs,
-            "metadata": metadataObj
-        });
-        singleDownloadObj.download(click.downloadUrl);
-        console.warn('onInstall created download', singleDownloadObj);
-        bindDownload(singleDownloadObj);
-
-    }
-
-    function getDownload(downloadId) {
-        console.warn('getDownload', downloadId);
-        var dls = downloadHandler.downloads;
-        for (var i=0; i < dls.length; i++) {
-            console.warn('getDownload length:', dls.length, "looking at:", i,
-                         dls[i], "id:", dls[i].downloadId, dls[i].downloadId === downloadId);
-            if (dls[i].downloadId === downloadId)
-                return dls[i];
-        }
-        return null;
-    }
-
     signal requestAuthentication()
 //    signal udmDownloadCreated(string packageName, int revision, int udmId)
 
@@ -244,52 +177,52 @@ Item {
                     name: title
                     iconUrl: model.iconUrl
                     changelog: model.changelog
-                    onPause: {
-                        console.warn('onPause', getDownload(model.downloadId));
-                        try {
-                            getDownload(model.downloadId).pause();
-                        } catch (e) {
-                            clickUpdatesModel.setError(
-                                model.downloadId, i18n.tr("Installation failed.")
-                            );
-                        }
-                    }
-                    onResume: {
-                        console.warn('onResume', getDownload(model.downloadId));
-                        try {
-                            getDownload(model.downloadId).resume();
-                        } catch (e) {
-                            clickUpdatesModel.setError(
-                                model.downloadId, i18n.tr("Installation failed.")
-                            );
-                        }
-                    }
-                    onInstall: {
-                        console.warn("onInstall", identifier, model.revision);
-                        if (model.downloadId) {
-                            console.warn('already had download id');
-                        } else {
-                            createDownload(model);
-                        }
-                    }
-                    onDownload: install()
-                    onRetry: {
-                        updateState = Update.StateUnavailable;
-                        clickUpdateManager.check(model.identifier);
-                    }
+                    // onPause: {
+                    //     console.warn('onPause', getDownload(model.downloadId));
+                    //     try {
+                    //         getDownload(model.downloadId).pause();
+                    //     } catch (e) {
+                    //         clickUpdatesModel.setError(
+                    //             model.downloadId, i18n.tr("Installation failed.")
+                    //         );
+                    //     }
+                    // }
+                    // onResume: {
+                    //     console.warn('onResume', getDownload(model.downloadId));
+                    //     try {
+                    //         getDownload(model.downloadId).resume();
+                    //     } catch (e) {
+                    //         clickUpdatesModel.setError(
+                    //             model.downloadId, i18n.tr("Installation failed.")
+                    //         );
+                    //     }
+                    // }
+                    // onInstall: {
+                    //     console.warn("onInstall", identifier, model.revision);
+                    //     if (model.downloadId) {
+                    //         console.warn('already had download id');
+                    //     } else {
+                    //         createDownload(model);
+                    //     }
+                    // }
+                    // onRetry: {
+                    //     updateState = Update.StateUnavailable;
+                    //     clickUpdateManager.check(model.identifier);
+                    // }
+                    // onPause: downloadHandler.pause(model.downloadId)
 
-                    Component.onCompleted: {
-                        console.warn('onCompleted check on ', model.title);
-                        var dl;
-                        if (model.downloadId) {
-                            dl = getDownload(model.downloadId);
-                            if (dl && !dl._bound)
-                                bindDownload(dl);
-                        } else {
-                            // if (model.automatic)
-                                //createDownload(model);
-                        }
-                    }
+                    // Component.onCompleted: {
+                    //     console.warn('onCompleted check on ', model.title);
+                    //     var dl;
+                    //     if (model.downloadId) {
+                    //         dl = getDownload(model.downloadId);
+                    //         if (dl && !dl._bound)
+                    //             bindDownload(dl);
+                    //     } else {
+                    //         // if (model.automatic)
+                    //             //createDownload(model);
+                    //     }
+                    // }
                 }
             }
 
@@ -429,18 +362,6 @@ Item {
                 updates.status = SystemUpdate.StatusIdle; break;
             }
         }
-    }
-
-    Component {
-        id: sdl
-        SingleDownload {
-            property bool _bound: false
-        }
-    }
-
-    Component {
-        id: mdt
-        Metadata {}
     }
 
     Component.onCompleted: {

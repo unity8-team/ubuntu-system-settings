@@ -112,7 +112,7 @@ private:
     // Assert completion of check, signalling if check complete.
     void completionCheck();
 
-    UpdateDb *m_db;
+    UpdateDb m_db;
     // Represents the process that we use to query installed clicks.
     QProcess m_process;
     ClickApiClient m_apiClient;

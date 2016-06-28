@@ -97,6 +97,8 @@ public:
 
 public slots:
     void refresh();
+    void refresh(const QString &downloadId);
+    void clear();
 
 signals:
     void countChanged();
@@ -119,7 +121,7 @@ private:
                          const QSharedPointer<Update> &update);
     static int indexOf(const QList<QSharedPointer<Update> > &list,
                         const QSharedPointer<Update> &update);
-    UpdateDb* m_db;
+    UpdateDb m_db;
     int m_filter;
     QList<QSharedPointer<Update> > m_updates;
 };

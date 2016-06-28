@@ -16,6 +16,7 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include "systemupdate.h"
 #include "updatedb.h"
 
 #include <QDir>
@@ -35,6 +36,9 @@ const QString ALL = "kind, id, local_version, remote_version, revision, \
 
 const QString GET_SINGLE = "SELECT " + ALL + " FROM updates WHERE id=:id \
     AND revision=:revision";
+
+const QString GET_SINGLE_DOWNLOAD = "SELECT " + ALL + " FROM updates \
+    WHERE download_id=:did LIMIT 1";
 
 const QString GET_ALL = "SELECT " + ALL + " FROM updates";
 
@@ -87,7 +91,6 @@ QSqlDatabase UpdateDb::db()
     return m_db;
 }
 
-
 void UpdateDb::initializeDb()
 {
     // Create a unique connection name
@@ -112,6 +115,11 @@ void UpdateDb::initializeDb()
             << m_db.lastError().text();
             return;
     }
+
+    connect(this, SIGNAL(changed()),
+            SystemUpdate::instance(), SLOT(notifyDbChanged()));
+    connect(this, SIGNAL(changed(const QString&)),
+            SystemUpdate::instance(), SLOT(notifyDbChanged(const QString&)));
 }
 
 UpdateDb::~UpdateDb()
@@ -205,11 +213,13 @@ void UpdateDb::setInstalled(const QString &downloadId)
 void UpdateDb::setStarted(const QString &downloadId)
 {
     setState(downloadId, Update::State::StateQueuedForDownload);
+    changed(downloadId);
 }
 
 void UpdateDb::setProcessing(const QString &downloadId)
 {
     setState(downloadId, Update::State::StateInstalling);
+    changed(downloadId);
 }
 
 void UpdateDb::setError(const QString &downloadId, const QString &msg)
@@ -228,7 +238,7 @@ void UpdateDb::setError(const QString &downloadId, const QString &msg)
                     << q.lastError().text();
     }
 
-    Q_EMIT changed();
+    changed(downloadId);
 }
 
 void UpdateDb::setState(const QString &downloadId,
@@ -245,8 +255,6 @@ void UpdateDb::setState(const QString &downloadId,
         qCritical() << "could not change state on " << downloadId
                     << q.lastError().text();
     }
-
-    Q_EMIT changed();
 }
 
 void UpdateDb::setProgress(const QString &downloadId,
@@ -267,7 +275,7 @@ void UpdateDb::setProgress(const QString &downloadId,
                     << q.lastError().text();
     }
 
-    Q_EMIT changed();
+    changed(downloadId);
 }
 
 void UpdateDb::setDownloadId(const QString &id, const int &revision,
@@ -288,17 +296,19 @@ void UpdateDb::setDownloadId(const QString &id, const int &revision,
             << q.lastError().text();
     }
 
-    Q_EMIT changed();
+    changed(downloadId);
 }
 
 void UpdateDb::setPaused(const QString &downloadId)
 {
     setState(downloadId, Update::State::StateDownloadPaused);
+    changed(downloadId);
 }
 
 void UpdateDb::setResumed(const QString &downloadId)
 {
     setState(downloadId, Update::State::StateDownloading);
+    changed(downloadId);
 }
 
 void UpdateDb::setCanceled(const QString &downloadId)
@@ -306,6 +316,7 @@ void UpdateDb::setCanceled(const QString &downloadId)
     // FIXME: consolidate
     setState(downloadId, Update::State::StateAvailable);
     unsetDownloadId(downloadId);
+    changed(downloadId);
 }
 
 
@@ -320,8 +331,6 @@ void UpdateDb::unsetDownloadId(const QString &downloadId)
         qCritical() << "could not unsetset download id on " << downloadId
             << q.lastError().text();
     }
-
-    Q_EMIT changed();
 }
 
 bool UpdateDb::createDb()
@@ -423,7 +432,6 @@ void UpdateDb::setLastCheckDate(const QDateTime &lastCheckUtc)
 QList<QSharedPointer<Update> > UpdateDb::updates(const UpdateDb::Filter &filter)
 {
     QList<QSharedPointer<Update> > list;
-    qWarning() << "blast refresh...";
 
     if (!openDb()) {
         qWarning() << "could not open db";
@@ -482,5 +490,24 @@ QList<QSharedPointer<Update> > UpdateDb::updates(const UpdateDb::Filter &filter)
     }
 
     return list;
+}
+
+QSharedPointer<Update> UpdateDb::get(const QString &downloadId)
+{
+    QSharedPointer<Update> u = QSharedPointer<Update>(new Update);
+    if (!openDb()) return u;
+
+    QSqlQuery q(m_db);
+    q.prepare(GET_SINGLE_DOWNLOAD);
+    q.bindValue(":did", downloadId);
+
+    if (!q.exec()) {
+        qCritical() << "could not get update" << q.lastError().text();
+    }
+
+    if (q.next()) {
+        u->setValues(&q);
+    }
+    return u;
 }
 } // UpdatePlugin

@@ -27,13 +27,14 @@
 #include <QJsonObject>
 #include <QJsonValue>
 #include <QStandardPaths>
+#include <QSharedPointer>
 
 
 namespace UpdatePlugin
 {
 ClickUpdateManager::ClickUpdateManager(QObject *parent)
         : QObject(parent)
-        , m_db(SystemUpdate::instance()->updateDb())
+        , m_db(this)
         , m_process()
         , m_apiClient(this)
         , m_updates()
@@ -46,7 +47,7 @@ ClickUpdateManager::ClickUpdateManager(QObject *parent)
 
 ClickUpdateManager::ClickUpdateManager(const QString &dbpath, QObject *parent)
         : QObject(parent)
-        , m_db(new UpdateDb(dbpath, this))
+        , m_db(dbpath, this)
         , m_process()
         , m_apiClient(this)
         , m_updates()
@@ -158,7 +159,7 @@ void ClickUpdateManager::check(const QString &packageName)
 {
     // qWarning() << "click checker: checking this one file" << packageName
     //         << "...";
-    // ClickUpdate *m = m_db->getPendingClickUpdate(packageName);
+    // ClickUpdate *m = m_db.getPendingClickUpdate(packageName);
     // qWarning() << "click um: got back" << m;
     // if (m && m->identifier() == packageName) {
     //     qWarning() << "click checker: requesting click token for" << packageName
@@ -213,12 +214,13 @@ void ClickUpdateManager::processInstalledClicks(const int &exitCode)
 
     int i;
     for (i = 0; i < array.size(); i++) {
-        Update *update = new Update(this);
+        Update *update = new Update();
 
         QJsonObject object = array.at(i).toObject();
         update->setIdentifier(object.value("name").toString());
         update->setTitle(object.value("title").toString());
         update->setLocalVersion(object.value("version").toString());
+        update->setKind(Update::Kind::KindClick);
 
         QStringList command;
         // command << Helpers::whichPkcon() << "-p" << "install-local" << "$file";
@@ -261,7 +263,7 @@ void ClickUpdateManager::handleProcessError(const QProcess::ProcessError &error)
 
 void ClickUpdateManager::handleCheckCompleted()
 {
-    m_db->setLastCheckDate(QDateTime::currentDateTime());
+    m_db.setLastCheckDate(QDateTime::currentDateTime());
 }
 
 void ClickUpdateManager::handleTokenDownload(Update *update)
@@ -269,7 +271,7 @@ void ClickUpdateManager::handleTokenDownload(Update *update)
     qWarning() << "click checker: handling obtained token on update data"
             << update->identifier();
 
-    // m_db->add(update);
+    m_db.add(QSharedPointer<Update>(update));
 
     completionCheck();
 }
@@ -297,7 +299,7 @@ void ClickUpdateManager::handleTokenDownloadFailure(Update *update)
 {
     // Unset token, let the user try again.
     update->setToken("");
-    // m_db->add(update);
+    m_db.add(QSharedPointer<Update>(update));
 
     // We're done with it.
     m_updates.remove(update->identifier());
@@ -463,7 +465,7 @@ bool ClickUpdateManager::isCheckRequired()
     // Spec says that a manual check should not happen if a check was
     // completed less than 30 minutes ago.
     QDateTime now = QDateTime::currentDateTimeUtc().addSecs(-1800); // 30 mins
-    return m_db->lastCheckDate() < now;
+    return m_db.lastCheckDate() < now;
 }
 
 bool ClickUpdateManager::authenticated()
