@@ -18,6 +18,7 @@
 #ifndef SYSTEM_UPDATE_H
 #define SYSTEM_UPDATE_H
 
+#include "updatedb.h"
 #include <QDebug>
 
 namespace UpdatePlugin
@@ -40,6 +41,8 @@ public:
         StatusServerError
     };
 
+    UpdateDb* db();
+
 public slots:
     void notifyDbChanged();
     void notifyDbChanged(const QString &downloadId);
@@ -54,6 +57,7 @@ protected:
 
 private:
     static SystemUpdate *m_instance;
+    UpdateDb* m_db;
 };
 
 } // UpdatePlugin

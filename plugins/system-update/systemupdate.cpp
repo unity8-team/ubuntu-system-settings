@@ -30,6 +30,13 @@ SystemUpdate *SystemUpdate::instance()
 SystemUpdate::SystemUpdate(QObject *parent)
     : QObject(parent)
 {
+    m_db = new UpdateDb(this);
+    qWarning() << "FOO";
+}
+
+UpdateDb* SystemUpdate::db()
+{
+    return m_db;
 }
 
 void SystemUpdate::notifyDbChanged()

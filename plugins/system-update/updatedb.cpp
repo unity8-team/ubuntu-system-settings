@@ -101,6 +101,7 @@ void UpdateDb::initializeDb()
             m_connectionName = tmpl.arg(connI);
         connI++;
     }
+
     qWarning() << "initializeDb with conn name" << m_connectionName << m_dbpath;
 
     m_db = QSqlDatabase::addDatabase(QLatin1String("QSQLITE"), m_connectionName);
@@ -115,11 +116,10 @@ void UpdateDb::initializeDb()
             << m_db.lastError().text();
             return;
     }
-
-    connect(this, SIGNAL(changed()),
-            SystemUpdate::instance(), SLOT(notifyDbChanged()));
-    connect(this, SIGNAL(changed(const QString&)),
-            SystemUpdate::instance(), SLOT(notifyDbChanged(const QString&)));
+    // connect(this, SIGNAL(changed()),
+    //         SystemUpdate::instance(), SLOT(notifyDbChanged()));
+    // connect(this, SIGNAL(changed(const QString&)),
+    //         SystemUpdate::instance(), SLOT(notifyDbChanged(const QString&)));
 }
 
 UpdateDb::~UpdateDb()
@@ -190,9 +190,7 @@ void UpdateDb::remove(const QSharedPointer<Update> &update)
 
 void UpdateDb::setInstalled(const QString &downloadId)
 {
-    qWarning() << "set installed";
     if (!openDb()) return;
-    qWarning() << "set installed2";
 
     QSqlQuery q(m_db);
     q.prepare("UPDATE updates SET installed=:installed, update_state=:state, "

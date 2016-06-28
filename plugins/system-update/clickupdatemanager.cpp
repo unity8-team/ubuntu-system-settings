@@ -34,7 +34,7 @@ namespace UpdatePlugin
 {
 ClickUpdateManager::ClickUpdateManager(QObject *parent)
         : QObject(parent)
-        , m_db(this)
+        , m_db(SystemUpdate::instance()->db())
         , m_process()
         , m_apiClient(this)
         , m_updates()
@@ -47,7 +47,7 @@ ClickUpdateManager::ClickUpdateManager(QObject *parent)
 
 ClickUpdateManager::ClickUpdateManager(const QString &dbpath, QObject *parent)
         : QObject(parent)
-        , m_db(dbpath, this)
+        , m_db(new UpdateDb(dbpath, this))
         , m_process()
         , m_apiClient(this)
         , m_updates()
@@ -159,7 +159,7 @@ void ClickUpdateManager::check(const QString &packageName)
 {
     // qWarning() << "click checker: checking this one file" << packageName
     //         << "...";
-    // ClickUpdate *m = m_db.getPendingClickUpdate(packageName);
+    // ClickUpdate *m = m_db->getPendingClickUpdate(packageName);
     // qWarning() << "click um: got back" << m;
     // if (m && m->identifier() == packageName) {
     //     qWarning() << "click checker: requesting click token for" << packageName
@@ -263,7 +263,7 @@ void ClickUpdateManager::handleProcessError(const QProcess::ProcessError &error)
 
 void ClickUpdateManager::handleCheckCompleted()
 {
-    m_db.setLastCheckDate(QDateTime::currentDateTime());
+    m_db->setLastCheckDate(QDateTime::currentDateTime());
 }
 
 void ClickUpdateManager::handleTokenDownload(Update *update)
@@ -271,7 +271,7 @@ void ClickUpdateManager::handleTokenDownload(Update *update)
     qWarning() << "click checker: handling obtained token on update data"
             << update->identifier();
 
-    m_db.add(QSharedPointer<Update>(update));
+    m_db->add(QSharedPointer<Update>(update));
 
     completionCheck();
 }
@@ -299,7 +299,7 @@ void ClickUpdateManager::handleTokenDownloadFailure(Update *update)
 {
     // Unset token, let the user try again.
     update->setToken("");
-    m_db.add(QSharedPointer<Update>(update));
+    m_db->add(QSharedPointer<Update>(update));
 
     // We're done with it.
     m_updates.remove(update->identifier());
@@ -465,7 +465,7 @@ bool ClickUpdateManager::isCheckRequired()
     // Spec says that a manual check should not happen if a check was
     // completed less than 30 minutes ago.
     QDateTime now = QDateTime::currentDateTimeUtc().addSecs(-1800); // 30 mins
-    return m_db.lastCheckDate() < now;
+    return m_db->lastCheckDate() < now;
 }
 
 bool ClickUpdateManager::authenticated()

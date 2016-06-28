@@ -31,7 +31,6 @@ namespace UpdatePlugin
 {
 class UpdateModel : public QAbstractListModel
 {
-
     Q_OBJECT
     /* Note: The filter is not declared in UpdateModel, so we can't use it
     from QML. We use an int instead. */
@@ -121,7 +120,7 @@ private:
                          const QSharedPointer<Update> &update);
     static int indexOf(const QList<QSharedPointer<Update> > &list,
                         const QSharedPointer<Update> &update);
-    UpdateDb m_db;
+    UpdateDb* m_db;
     int m_filter;
     QList<QSharedPointer<Update> > m_updates;
 };

@@ -69,17 +69,17 @@ set_tests_properties(
 )
 target_link_libraries(tst-clicktokendownloader Qt5::Test ${PLUGIN_LIBS})
 
-add_executable(tst-clickupdatemanager
-               tst_clickupdatemanager.cpp
-               mockclickservertestcase.h
-               ${PLUGIN_SOURCES})
-add_test(tst-clickupdatemanager tst-clickupdatemanager)
-set_tests_properties(
-    tst-clickupdatemanager
-        PROPERTIES
-        ENVIRONMENT "IGNORE_CREDENTIALS=1;URL_APPS=http://127.0.0.1:9009/metadata;CLICK_COMMAND=${CMAKE_CURRENT_BINARY_DIR}/mock_click_command"
-)
-target_link_libraries(tst-clickupdatemanager Qt5::Test ${PLUGIN_LIBS})
+# add_executable(tst-clickupdatemanager
+#                tst_clickupdatemanager.cpp
+#                mockclickservertestcase.h
+#                ${PLUGIN_SOURCES})
+# add_test(tst-clickupdatemanager tst-clickupdatemanager)
+# set_tests_properties(
+#     tst-clickupdatemanager
+#         PROPERTIES
+#         ENVIRONMENT "IGNORE_CREDENTIALS=1;URL_APPS=http://127.0.0.1:9009/metadata;CLICK_COMMAND=${CMAKE_CURRENT_BINARY_DIR}/mock_click_command"
+# )
+# target_link_libraries(tst-clickupdatemanager Qt5::Test ${PLUGIN_LIBS})
 
 add_executable(tst-updatedb
                tst_updatedb.cpp
@@ -93,11 +93,11 @@ add_executable(tst-update
 add_test(tst-update tst-update)
 target_link_libraries(tst-update Qt5::Test ${PLUGIN_LIBS})
 
-add_executable(tst-updatemodel
-               tst_updatemodel.cpp
-               ${PLUGIN_SOURCES})
-add_test(tst-updatemodel tst-updatemodel)
-target_link_libraries(tst-updatemodel Qt5::Test ${PLUGIN_LIBS})
+# add_executable(tst-updatemodel
+#                tst_updatemodel.cpp
+#                ${PLUGIN_SOURCES})
+# add_test(tst-updatemodel tst-updatemodel)
+# target_link_libraries(tst-updatemodel Qt5::Test ${PLUGIN_LIBS})
 
 add_executable(tst-updatepluginhelpers
                tst_helpers.cpp

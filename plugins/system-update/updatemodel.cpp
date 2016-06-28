@@ -31,30 +31,30 @@ namespace UpdatePlugin
 {
 UpdateModel::UpdateModel(QObject *parent)
     : QAbstractListModel(parent)
-    , m_db(this)
+    , m_db(SystemUpdate::instance()->db())
     , m_filter((int) UpdateDb::Filter::All)
     , m_updates()
 {
     initialize();
-    connect(SystemUpdate::instance(), SIGNAL(dbChanged()), this, SLOT(refresh()));
-    connect(SystemUpdate::instance(), SIGNAL(dbChanged(const QString&)),
-            this, SLOT(refresh(const QString&)));
+    // connect(SystemUpdate::instance(), SIGNAL(dbChanged()), this, SLOT(refresh()));
+    // connect(SystemUpdate::instance(), SIGNAL(dbChanged(const QString&)),
+    //         this, SLOT(refresh(const QString&)));
 }
 
 UpdateModel::UpdateModel(const QString &dbpath, QObject *parent)
     : QAbstractListModel(parent)
-    , m_db(dbpath, this)
+    , m_db(new UpdateDb(dbpath, this))
     , m_filter((int) UpdateDb::Filter::All)
     , m_updates()
 {
     initialize();
-    connect(&m_db, SIGNAL(changed()), this, SLOT(refresh()));
-    connect(&m_db, SIGNAL(changed()), this, SLOT(refresh()));
 }
 
 void UpdateModel::initialize()
 {
     connect(this, SIGNAL(filterChanged()), SLOT(clear()));
+    connect(m_db, SIGNAL(changed()), this, SLOT(refresh()));
+    connect(m_db, SIGNAL(changed(const QString)), this, SLOT(refresh(const QString)));
 
     // connect(this, SIGNAL(changed()),
     //         SystemUpdate::instance(), SLOT(notifyModelChanged()));
@@ -104,7 +104,7 @@ QHash<int, QByteArray> UpdateModel::roleNames() const
 
 UpdateDb* UpdateModel::db()
 {
-    return &m_db;
+    return m_db;
 }
 
 QVariant UpdateModel::data(const QModelIndex &index, int role) const
@@ -199,7 +199,7 @@ void UpdateModel::clear()
 
 void UpdateModel::refresh(const QString &downloadId)
 {
-    QSharedPointer<Update> u = m_db.get(downloadId);
+    QSharedPointer<Update> u = m_db->get(downloadId);
     int ix = UpdateModel::indexOf(m_updates, u);
 
     if (ix >= 0 && ix < m_updates.size()) {
@@ -210,7 +210,7 @@ void UpdateModel::refresh(const QString &downloadId)
 
 void UpdateModel::refresh()
 {
-    QList<QSharedPointer<Update> > now = m_db.updates((UpdateDb::Filter) m_filter);
+    QList<QSharedPointer<Update> > now = m_db->updates((UpdateDb::Filter) m_filter);
     // QList<Update*> udb;
     // QList<Update*> uold;
     int oldCount = m_updates.size();
@@ -577,22 +577,22 @@ int UpdateModel::indexOf(const QList<QSharedPointer<Update> > &list,
 
 void UpdateModel::setInstalled(const QString &downloadId)
 {
-    m_db.setInstalled(downloadId);
+    m_db->setInstalled(downloadId);
 }
 
 void UpdateModel::startUpdate(const QString &downloadId)
 {
-    m_db.setStarted(downloadId);
+    m_db->setStarted(downloadId);
 }
 
 void UpdateModel::processUpdate(const QString &downloadId)
 {
-    m_db.setProcessing(downloadId);
+    m_db->setProcessing(downloadId);
 }
 
 void UpdateModel::setError(const QString &downloadId, const QString &msg)
 {
-    m_db.setError(downloadId, msg);
+    m_db->setError(downloadId, msg);
 }
 
 // void UpdateModel::setState(const QString &downloadId,
@@ -604,28 +604,28 @@ void UpdateModel::setError(const QString &downloadId, const QString &msg)
 void UpdateModel::setProgress(const QString &downloadId,
                               const int &progress)
 {
-    m_db.setProgress(downloadId, progress);
+    m_db->setProgress(downloadId, progress);
 }
 
 void UpdateModel::setDownloadId(const QString &id, const int &revision,
                                 const QString &downloadId)
 {
-    m_db.setDownloadId(id, revision, downloadId);
+    m_db->setDownloadId(id, revision, downloadId);
 }
 
 void UpdateModel::pauseUpdate(const QString &downloadId)
 {
-    m_db.setPaused(downloadId);
+    m_db->setPaused(downloadId);
 }
 
 void UpdateModel::resumeUpdate(const QString &downloadId)
 {
-    m_db.setResumed(downloadId);
+    m_db->setResumed(downloadId);
 }
 
 void UpdateModel::cancelUpdate(const QString &downloadId)
 {
-    m_db.setCanceled(downloadId);
+    m_db->setCanceled(downloadId);
 }
 
 
