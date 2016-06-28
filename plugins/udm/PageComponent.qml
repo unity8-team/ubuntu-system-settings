@@ -40,14 +40,14 @@ ItemPage {
         onDownloadFinished: {
             console.warn('udm onDownloadFinished', download.downloadId);
         }
-        // onDownloadsChanged: {
-        //     console.log('udm downloads changed..');
-        //     for (var i = 0; i<downloads.length; i++) {
-        //         console.log(i, 'changed');
-        //         downloads[i].downloadId;
-        //         downloads[i].metadata.title;
-        //     }
-        // }
+        onDownloadsChanged: {
+            console.log('udm downloads changed..');
+            for (var i = 0; i<downloads.length; i++) {
+                console.log(i, 'changed');
+                downloads[i].downloadId;
+                downloads[i].metadata.title;
+            }
+        }
     }
 
     Component {
