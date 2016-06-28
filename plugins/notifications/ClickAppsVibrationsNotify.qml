@@ -27,8 +27,6 @@ ItemPage {
 
     property alias model: appsVibrationsNotifyList.model
 
-    property var uncheckedIndexes: []
-
     title: i18n.tr("Vibration")
 
     ListView {
@@ -100,16 +98,7 @@ ItemPage {
                         anchors.verticalCenter: icon.verticalCenter
                         checked: model.vibrationsNotify
 
-                        onCheckedChanged: {
-                            if (!checked) {
-                                uncheckedIndexes.push(index)
-                            } else {
-                                var i = uncheckedIndexes.indexOf(index)
-                                if (i >= 0) {
-                                    uncheckedIndexes.splice(i, 1)
-                                }
-                            }
-                        }
+                        onCheckedChanged: appsVibrationsNotifyPage.model.setNotifyEnabled(index, checked)
                     }
 
                     Icon {

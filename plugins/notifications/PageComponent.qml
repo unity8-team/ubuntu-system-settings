@@ -28,6 +28,13 @@ ItemPage {
 
     title: i18n.tr("Notifications")
 
+    onActiveChanged: {
+        if (active) {
+            clickAppsSoundsNotifyModel.updateEnabledEntries()
+            clickAppsVibrationsNotifyModel.updateEnabledEntries()
+        }
+    }
+
     ClickApplicationsNotifyModel {
         id: clickAppsSoundsNotifyModel
         objectName: "clickAppsSoundsNotifyModel"
@@ -98,14 +105,8 @@ ItemPage {
                         return
                     }
 
-                    var page = pageStack.push(Qt.resolvedUrl("ClickAppsSoundsNotify.qml"), { model: clickAppsSoundsNotifyModel })
-                    page.Component.onDestruction.connect( function() {
-                        var indexes = page.uncheckedIndexes
-                        indexes.sort()
-                        for (var i = indexes.length - 1; i >= 0; i--) {
-                           clickAppsSoundsNotifyModel.disableNotify(indexes[i])
-                        }
-                    })
+                    pageStack.push(Qt.resolvedUrl("ClickAppsSoundsNotify.qml"),
+                                                  { model: clickAppsSoundsNotifyModel })
                 }
             }
 
@@ -130,14 +131,8 @@ ItemPage {
                         return
                     }
 
-                    var page = pageStack.push(Qt.resolvedUrl("ClickAppsVibrationsNotify.qml"), { model: clickAppsVibrationsNotifyModel })
-                    page.Component.onDestruction.connect( function() {
-                        var indexes = page.uncheckedIndexes
-                        indexes.sort()
-                        for (var i = indexes.length - 1; i >= 0; i--) {
-                           clickAppsVibrationsNotifyModel.disableNotify(indexes[i])
-                        } 
-                    })
+                    pageStack.push(Qt.resolvedUrl("ClickAppsVibrationsNotify.qml"),
+                                                  { model: clickAppsVibrationsNotifyModel })
                 }
             }
 
@@ -150,29 +145,9 @@ ItemPage {
         delegate: ListItem {
             height: layout.height + (divider.visible ? divider.height : 0)
 
-            onClicked: {
-                var page = pageStack.push(Qt.resolvedUrl("ClickAppNotifications.qml"),
-                                                         { title: model.displayName,
-                                                           enableNotifications: model.enableNotifications,
-                                                           soundsNotify: model.soundsNotify,
-                                                           vibrationsNotify: model.vibrationsNotify,
-                                                           bubblesNotify: model.bubblesNotify,
-                                                           listNotify: model.listNotify })
-
-                page.Component.onDestruction.connect( function() {
-                    page.disableNotificationsWhenAllUnchecked()
-                    
-                    if (!ClickApplicationsModel) {
-                        return
-                    }
-
-                    ClickApplicationsModel.setNotifyEnabled(ClickApplicationsModel.EnableNotifications, index, page.enableNotifications)
-                    ClickApplicationsModel.setNotifyEnabled(ClickApplicationsModel.SoundsNotify, index, page.soundsNotify)
-                    ClickApplicationsModel.setNotifyEnabled(ClickApplicationsModel.VibrationsNotify, index, page.vibrationsNotify)
-                    ClickApplicationsModel.setNotifyEnabled(ClickApplicationsModel.BubblesNotify, index, page.bubblesNotify)
-                    ClickApplicationsModel.setNotifyEnabled(ClickApplicationsModel.ListNotify, index, page.listNotify)
-                })
-            }
+            onClicked: pageStack.push(Qt.resolvedUrl("ClickAppNotifications.qml"),
+                                                     { entry: model,
+                                                       entryIndex: index })
 
             ListItemLayout {
                 id: layout

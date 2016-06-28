@@ -51,7 +51,8 @@ public:
     void setNotifyType(int type);
 
     int count() const;
-    Q_INVOKABLE bool disableNotify(int row);
+    Q_INVOKABLE void updateEnabledEntries();
+    Q_INVOKABLE bool setNotifyEnabled(int row, bool enabled);
 
 Q_SIGNALS:
     void sourceModelChanged() const;

@@ -18,46 +18,16 @@
 
 import QtQuick 2.4
 import Ubuntu.Components 1.3
+import Ubuntu.SystemSettings.Notifications 1.0
 import SystemSettings 1.0
 
 ItemPage {
     id: appNotificationsPage
 
-    property alias enableNotifications: enableNotificationsSwitch.checked
-    property alias soundsNotify: soundsChecked.checked
-    property alias vibrationsNotify: vibrationsChecked.checked
-    property alias bubblesNotify: bubblesChecked.checked
-    property alias listNotify: listChecked.checked
+    property var entry
+    property int entryIndex
 
-    function disableNotificationsWhenAllUnchecked() {
-        if (!soundsNotify && !vibrationsNotify && !bubblesNotify && !listNotify) {
-            enableNotifications = false
-        }
-    }
-
-    onSoundsNotifyChanged: {
-        if (!soundsNotify) {
-            disableNotificationsWhenAllUnchecked()
-        }
-    }
-
-    onVibrationsNotifyChanged: {
-        if (!vibrationsNotify) {
-            disableNotificationsWhenAllUnchecked()
-        }
-    }
-
-    onBubblesNotifyChanged: {
-        if (!bubblesNotify) {
-            disableNotificationsWhenAllUnchecked()
-        }
-    }
-
-    onListNotifyChanged: {
-        if (!listNotify) {
-            disableNotificationsWhenAllUnchecked()
-        }
-    }
+    title: entry.displayName
 
     Column {
         id: notificationsColumn
@@ -73,6 +43,13 @@ ItemPage {
                     id: enableNotificationsSwitch
                     objectName: "enableNotificationsSwitch"
                     SlotsLayout.position: SlotsLayout.Leading
+                    checked: entry.enableNotifications
+
+                    onCheckedChanged: {
+                        ClickApplicationsModel.setNotifyEnabled(ClickApplicationsModel.EnableNotifications,
+                                                                appNotificationsPage.entryIndex,
+                                                                checked)
+                    }
                 }
             }
         }
@@ -90,7 +67,14 @@ ItemPage {
                     id: soundsChecked
                     objectName: "soundsChecked"
                     SlotsLayout.position: SlotsLayout.Leading
-                    enabled: appNotificationsPage.enableNotifications
+                    enabled: entry.enableNotifications
+                    checked: entry.soundsNotify
+
+                    onCheckedChanged: {
+                        ClickApplicationsModel.setNotifyEnabled(ClickApplicationsModel.SoundsNotify,
+                                                                appNotificationsPage.entryIndex,
+                                                                checked)
+                    }
                 }
             }
         }
@@ -104,7 +88,14 @@ ItemPage {
                     id: vibrationsChecked
                     objectName: "vibrationsChecked"
                     SlotsLayout.position: SlotsLayout.Leading
-                    enabled: appNotificationsPage.enableNotifications
+                    enabled: entry.enableNotifications
+                    checked: entry.vibrationsNotify
+
+                    onCheckedChanged: {
+                        ClickApplicationsModel.setNotifyEnabled(ClickApplicationsModel.VibrationsNotify,
+                                                                appNotificationsPage.entryIndex,
+                                                                checked)
+                    }
                 }
             }
         }
@@ -118,7 +109,14 @@ ItemPage {
                     id: bubblesChecked
                     objectName: "bubblesChecked"
                     SlotsLayout.position: SlotsLayout.Leading
-                    enabled: appNotificationsPage.enableNotifications
+                    enabled: entry.enableNotifications
+                    checked: entry.bubblesNotify
+
+                    onCheckedChanged: {
+                        ClickApplicationsModel.setNotifyEnabled(ClickApplicationsModel.BubblesNotify,
+                                                                appNotificationsPage.entryIndex,
+                                                                checked)
+                    }
                 }
             }
         }
@@ -132,7 +130,14 @@ ItemPage {
                     id: listChecked
                     objectName: "listChecked"
                     SlotsLayout.position: SlotsLayout.Leading
-                    enabled: appNotificationsPage.enableNotifications
+                    enabled: entry.enableNotifications
+                    checked: entry.listNotify
+
+                    onCheckedChanged: {
+                        ClickApplicationsModel.setNotifyEnabled(ClickApplicationsModel.ListNotify,
+                                                                appNotificationsPage.entryIndex,
+                                                                checked)
+                    }
                 }
             }
         }

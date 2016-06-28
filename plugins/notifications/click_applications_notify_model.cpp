@@ -22,6 +22,8 @@ ClickApplicationsNotifyModel::ClickApplicationsNotifyModel(QObject* parent)
     : QSortFilterProxyModel(parent),
     m_notifyType(-1)
 {
+    setDynamicSortFilter(false);
+
     connect(this, SIGNAL(rowsInserted(QModelIndex, int, int)), SLOT(onModelChanged()));
     connect(this, SIGNAL(rowsRemoved(QModelIndex, int, int)), SLOT(onModelChanged()));
 }
@@ -60,7 +62,12 @@ int ClickApplicationsNotifyModel::count() const
     return rowCount();
 }
 
-bool ClickApplicationsNotifyModel::disableNotify(int row)
+void ClickApplicationsNotifyModel::updateEnabledEntries()
+{
+    invalidateFilter();
+}
+
+bool ClickApplicationsNotifyModel::setNotifyEnabled(int row, bool enabled)
 {
     if (row < 0 || row >= rowCount()) {
         return false;
@@ -70,13 +77,13 @@ bool ClickApplicationsNotifyModel::disableNotify(int row)
 
     switch (m_notifyType) {
     case SoundsNotify:
-        return sourceModel()->setNotifyEnabled(ClickApplicationsModel::SoundsNotify, idx.row(), false);
+        return sourceModel()->setNotifyEnabled(ClickApplicationsModel::SoundsNotify, idx.row(), enabled);
     case VibrationsNotify:
-        return sourceModel()->setNotifyEnabled(ClickApplicationsModel::VibrationsNotify, idx.row(), false);
+        return sourceModel()->setNotifyEnabled(ClickApplicationsModel::VibrationsNotify, idx.row(), enabled);
     case BubblesNotify:
-        return sourceModel()->setNotifyEnabled(ClickApplicationsModel::BubblesNotify, idx.row(), false);
+        return sourceModel()->setNotifyEnabled(ClickApplicationsModel::BubblesNotify, idx.row(), enabled);
     case ListNotify:
-        return sourceModel()->setNotifyEnabled(ClickApplicationsModel::ListNotify, idx.row(), false);
+        return sourceModel()->setNotifyEnabled(ClickApplicationsModel::ListNotify, idx.row(), enabled);
     default:
         return false;
     }
