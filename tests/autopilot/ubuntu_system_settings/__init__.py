@@ -15,12 +15,12 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-from time import sleep
 from autopilot import introspection
 from autopilot.exceptions import StateNotFoundError
 from ubuntu_system_settings.utils.i18n import ugettext as _
 
 import logging
+from time import sleep
 import autopilot.logging
 import ubuntuuitoolkit
 import ubuntu_system_settings.utils as utils
@@ -227,9 +227,6 @@ class CellularPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
     @autopilot.logging.log_action(logger.debug)
     def disable_data(self):
         self._set_data(False)
-
-    def disable_datas(self):
-        self.select_sim_for_data('off')
 
     @autopilot.logging.log_action(logger.debug)
     def _set_data(self, data):

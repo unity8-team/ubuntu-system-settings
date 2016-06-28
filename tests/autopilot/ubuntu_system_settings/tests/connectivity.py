@@ -21,6 +21,9 @@ SYSTEM_BUS = False
 PRIV_IFACE = 'com.ubuntu.connectivity1.Private'
 PRIV_OBJ = '/com/ubuntu/connectivity1/Private'
 
+MODEM_IFACE = 'com.ubuntu.connectivity1.Modem'
+SIM_IFACE = 'com.ubuntu.connectivity1.Sim'
+
 NETS_IFACE = 'com.ubuntu.connectivity1.NetworkingStatus'
 NETS_OBJ = '/com/ubuntu/connectivity1/NetworkingStatus'
 
@@ -58,6 +61,48 @@ def set_hotspot_auth(self, value):
 
 def set_wifi_enabled(self, value):
     self.SetProperty(NETS_OBJ, NETS_IFACE, 'WifiEnabled', value)
+
+
+@dbus.service.method(dbusmock.MOCK_IFACE,
+                     in_signature='s', out_signature='s')
+def AddSim(self, iccid):
+    path = "/com/ubuntu/connectivity1/sim/{}".format(iccid)
+    self.AddObject(
+        path,
+        SIM_IFACE,
+        {
+            'Iccid': dbus.String(iccid),
+            'PrimaryPhoneNumber': dbus.String("358401234567"),
+            'Locked': dbus.Boolean(False),
+            'Present': dbus.Boolean(True),
+            'Mcc': dbus.String("358"),
+            'Mnc': dbus.String("42"),
+            'PreferredLanguages': [dbus.String("en"), dbus.String("fi")],
+            'DataRoamingEnabled': dbus.Boolean(False),
+        },
+        [
+            ('Unlock', '', '', ''),
+        ]
+    )
+    return path
+
+
+@dbus.service.method(dbusmock.MOCK_IFACE,
+                     in_signature='sis', out_signature='s')
+def AddModem(self, serial, index, sim):
+    path = "/com/ubuntu/connectivity1/modem/{}".format(serial)
+    self.AddObject(
+        path,
+        MODEM_IFACE,
+        {
+            'Index': dbus.Int32(index),
+            'Serial': dbus.String(serial),
+            'Sim': dbus.ObjectPath(sim)
+        },
+        [
+        ]
+    )
+    return path
 
 
 def add_openvpn_object(mock, path):
@@ -225,8 +270,21 @@ def load(mock, parameters):
             'HotspotAuth': _parameters.get(
                 'HotspotAuth', dbus.String('wpa-psk')
             ),
-            'VpnConnections': _parameters.get('VpnConnections',
-                                              dbus.Array([], signature='o'))
+            'VpnConnections': _parameters.get(
+                'VpnConnections', dbus.Array([], signature='o')
+            ),
+            'MobileDataEnabled': _parameters.get(
+                'MobileDataEnabled', dbus.Boolean(False)
+            ),
+            'SimForMobileData': _parameters.get(
+                'SimForMobileData', dbus.ObjectPath('/')
+            ),
+            'Modems': _parameters.get(
+                'Modems', dbus.Array([], signature='o')
+            ),
+            'Sims': _parameters.get(
+                'Sims', dbus.Array([], signature='o')
+            )
         },
         [
             (
