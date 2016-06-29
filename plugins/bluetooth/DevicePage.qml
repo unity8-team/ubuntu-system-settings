@@ -139,10 +139,10 @@ Page {
             }
 
             SettingsListItems.SingleControl {
-
                 Button {
-                    text: backend.selectedDevice && (backend.selectedDevice.connection == Device.Connected || backend.selectedDevice.connection == Device.Connecting) ? i18n.tr("Disconnect") : i18n.tr("Connect")
+                    anchors.centerIn: parent
                     width: parent.width - units.gu(8)
+                    text: backend.selectedDevice && (backend.selectedDevice.connection == Device.Connected || backend.selectedDevice.connection == Device.Connecting) ? i18n.tr("Disconnect") : i18n.tr("Connect")
                     onClicked: {
                         if (backend.selectedDevice
                             && (backend.selectedDevice.connection == Device.Connected
@@ -161,10 +161,10 @@ Page {
             }
 
             SettingsListItems.SingleControl {
-
                 Button {
-                    text: i18n.tr("Forget this device")
+                    anchors.centerIn: parent
                     width: parent.width - units.gu(8)
+                    text: i18n.tr("Forget this device")
                     onClicked: {
                         backend.removeDevice();
                         backend.resetSelectedDevice();
