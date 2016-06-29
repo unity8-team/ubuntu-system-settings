@@ -253,10 +253,17 @@ ItemPage {
                 showDivider: false
 
                 Label {
+                    anchors {
+                        verticalCenter: parent.verticalCenter
+                        right: parent.right
+                        rightMargin: units.gu(2)
+                    }
                     color: "darkgrey"
                     visible: backend.powered && !backend.discoverable
                     text: i18n.tr("Searching…")
+                    fontSize: "x-small"
                     SlotsLayout.position: SlotsLayout.Trailing
+                    SlotsLayout.overrideVerticalPositioning: true
                 }
             }
 
@@ -304,13 +311,16 @@ ItemPage {
                 enabled: bluetoothActionGroup.enabled.state != undefined ? bluetoothActionGroup.enabled.state : false
                 Label {
                     anchors {
-                        top: parent.top
+                        verticalCenter: parent.verticalCenter
                         right: parent.right
-                        topMargin: units.gu(1)
+                        rightMargin: units.gu(2)
                     }
                     color: "darkgrey"
                     visible: backend.powered && backend.discovering
                     text: i18n.tr("Searching…")
+                    fontSize: "x-small"
+                    SlotsLayout.position: SlotsLayout.Trailing
+                    SlotsLayout.overrideVerticalPositioning: true
                 }
             }
 
