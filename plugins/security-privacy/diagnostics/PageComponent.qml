@@ -20,8 +20,9 @@
 
 import QtQuick 2.4
 import SystemSettings 1.0
+import SystemSettings.ListItems 1.0 as SettingsListItems
 import Ubuntu.Components 1.3
-import Ubuntu.Components.ListItems 1.3 as ListItem
+import Ubuntu.Components.ListItems 1.3 as ListItems
 import Ubuntu.SystemSettings.Diagnostics 1.0
 
 ItemPage {
@@ -54,15 +55,14 @@ ItemPage {
             anchors.left: parent.left
             anchors.right: parent.right
 
-            ListItem.SingleValue {
+            SettingsListItems.SingleValueProgression {
                 text: i18n.tr("Privacy policy")
-                progression: true
                 onClicked: {
                     Qt.openUrlExternally("http://www.ubuntu.com/aboutus/privacypolicy?crashdb")
                 }
             }
 
-            ListItem.Standard {
+            SettingsListItems.Standard {
                 text: i18n.tr("Report to Canonical:")
             }
 
@@ -80,20 +80,19 @@ ItemPage {
                 textEntry: i18n.tr("App crashes and errors")
             }
 
-            ListItem.SingleValue {
+            SettingsListItems.SingleValueProgression {
                 id: previousReports
                 property string ident: diagnosticsWidget.systemIdentifier()
                 text: i18n.tr("Previous error reports")
-                progression: previousReports.ident != ""
+                enabled: previousReports.ident != ""
+                progressionVisible: enabled
                 onClicked: {
                     var base = "https://errors.ubuntu.com/user/"
-                    if (previousReports.progression) {
-                        Qt.openUrlExternally(base + ident)
-                    }
+                    Qt.openUrlExternally(base + ident)
                 }
             }
 
-            ListItem.Caption {
+            ListItems.Caption {
                 text: i18n.tr("Includes info about what an app was doing when it failed.")
             }
         }

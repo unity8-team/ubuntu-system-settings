@@ -19,14 +19,15 @@
  */
 
 import GSettings 1.0
+import MeeGo.QOfono 0.2
 import QtQuick 2.4
 import QtQuick.Layouts 1.1
-import Ubuntu.Components 1.3
-import Ubuntu.Components.ListItems 1.3 as ListItem
-import Ubuntu.Components.Popups 1.3
 import SystemSettings 1.0
+import SystemSettings.ListItems 1.0 as SettingsListItems
+import Ubuntu.Components 1.3
+import Ubuntu.Components.ListItems 1.3 as ListItems
+import Ubuntu.Components.Popups 1.3
 import Ubuntu.SystemSettings.SecurityPrivacy 1.0
-import MeeGo.QOfono 0.2
 import "sims.js" as Sims
 
 
@@ -386,14 +387,14 @@ ItemPage {
                         }
                     }
 
-                    ListItem.Standard {
+                    SettingsListItems.Standard {
                         text: sims[index].title
                         visible: sims.length > 1
                     }
 
-                    ListItem.Standard {
+                    SettingsListItems.Standard {
                         text: i18n.tr("SIM PIN")
-                        control: Switch {
+                        Switch {
                             id: simPinSwitch
                             objectName: "simPinSwitch"
                             checked: sims[index].simMng.lockedPins.length > 0
@@ -404,11 +405,11 @@ ItemPage {
                         }
                     }
 
-                    ListItem.Standard {
+                    SettingsListItems.Standard {
                         id: changeControl
                         visible: sim.state === "unlocked"
                         text: i18n.tr("Unlocked")
-                        control: Button {
+                         Button {
                             enabled: parent.visible
                             text: i18n.tr("Change PIN…")
                             onClicked: {
@@ -418,11 +419,11 @@ ItemPage {
                         }
                     }
 
-                    ListItem.Standard {
+                    SettingsListItems.Standard {
                         id: lockControl
                         visible: sim.state === "locked"
                         text: i18n.tr("Locked")
-                        control: Button {
+                        Button {
                             objectName: "unlock"
                             enabled: sims[index].simMng.pinRequired !== 'none'
                             text: i18n.tr("Unlock…")
@@ -431,18 +432,18 @@ ItemPage {
                         }
                     }
 
-                    ListItem.Divider {
+                    ListItems.Divider {
                         visible: index < (sims.length - 1)
                     }
 
                 }
             }
 
-            ListItem.Caption {
+            ListItems.Caption {
                 text: i18n.tr("When a SIM PIN is set, it must be entered to access cellular services after restarting the device or swapping the SIM.")
             }
 
-            ListItem.Caption {
+            ListItems.Caption {
                 text: i18n.tr("Entering an incorrect PIN repeatedly may lock the SIM permanently.")
             }
         }
