@@ -20,6 +20,7 @@
 
 import QtQuick 2.4
 import SystemSettings 1.0
+import SystemSettings.ListItems 1.0 as SettingsListItems
 import Ubuntu.Components 1.3
 import Ubuntu.Components.ListItems 1.3 as ListItem
 import Ubuntu.SystemSettings.TimeDate 1.1
@@ -52,7 +53,7 @@ ItemPage {
         visible: showAllUI
     }
 
-    ListItem.Standard {
+    SettingsListItems.Standard {
         anchors.top: setTimeZoneSelector.bottom
         text: timeDatePanel.timeZoneName
         enabled: false
@@ -96,7 +97,7 @@ ItemPage {
 
         model: timeDatePanel.timeZoneModel
         visible: setTimeZoneSelector.selectedIndex == 1 && count > 0
-        delegate: ListItem.Standard {
+        delegate: SettingsListItems.Standard {
             text: displayName
             // If a timezone is manually selected, record which one so that
             // we highlight that one only. Usually all cities in that timezone

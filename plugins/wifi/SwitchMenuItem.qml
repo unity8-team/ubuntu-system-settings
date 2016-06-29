@@ -33,7 +33,7 @@ FramedMenuItem {
         switcher.checked = checked;
     }
 
-    control: Switch {
+    Switch {
         id: switcher
 
         Component.onCompleted: {

@@ -21,9 +21,9 @@
 import QMenuModel 0.1
 import QtQuick 2.4
 import SystemSettings 1.0
+import SystemSettings.ListItems 1.0 as SettingsListItems
 import Ubuntu.Components 1.3
 import Ubuntu.Components.Popups 1.3
-import Ubuntu.Components.ListItems 1.3 as ListItem
 import Ubuntu.SystemSettings.Bluetooth 1.0
 import Ubuntu.Settings.Components 0.1 as USC
 
@@ -229,9 +229,9 @@ ItemPage {
                 Component.onCompleted: start()
             }
 
-            ListItem.Standard {
+            SettingsListItems.Standard {
                 text: i18n.tr("Bluetooth")
-                control: Switch {
+                Switch {
                     id: btSwitch
                     property bool serverChecked: bluetoothActionGroup.enabled.state != undefined ? bluetoothActionGroup.enabled.state : false
                     USC.ServerPropertySynchroniser {
@@ -246,54 +246,21 @@ ItemPage {
             }
 
             // Discoverability
-            ListItem.Standard {
+            SettingsListItems.SingleValue {
+                text: backend.discoverable ? i18n.tr("Discoverable") : i18n.tr("Not discoverable")
+                value: backend.discoverable ? backend.adapterName() : ""
                 enabled: bluetoothActionGroup.enabled
                 showDivider: false
 
-                Rectangle {
-                    color: "transparent"
-                    anchors.fill: parent
-                    anchors.topMargin: units.gu(1)
-                    anchors.leftMargin: units.gu(2)
-                    anchors.rightMargin: units.gu(2)
-
-                    Label {
-                        anchors {
-                            top: parent.top
-                            left: parent.left
-                            topMargin: units.gu(1)
-                        }
-                        height: units.gu(3)
-                        text: backend.discoverable ? i18n.tr("Discoverable") : i18n.tr("Not discoverable")
-                    }
-
-                    Label {
-                        anchors {
-                            top: parent.top
-                            right: parent.right
-                            topMargin: units.gu(1)
-                        }
-                        height: units.gu(3)
-                        text: backend.discoverable ? backend.adapterName : ""
-                        color: "darkgrey"
-                        visible: backend.discoverable
-                        enabled: false
-                    }
-
-                    Label {
-                        anchors {
-                            top: parent.top
-                            right: parent.right
-                            topMargin: units.gu(1)
-                        }
-                        color: "darkgrey"
-                        visible: backend.powered && !backend.discoverable
-                        text: i18n.tr("Searching…")
-                    }
+                Label {
+                    color: "darkgrey"
+                    visible: backend.powered && !backend.discoverable
+                    text: i18n.tr("Searching…")
+                    SlotsLayout.position: SlotsLayout.Trailing
                 }
             }
 
-            ListItem.Standard {
+            SettingsItemTitle {
                 id: connectedHeader
                 text: i18n.tr("Connected devices:")
 
@@ -313,11 +280,13 @@ ItemPage {
                 Repeater {
                     id: connectedRepeater
                     model: backend.connectedDevices
-                    delegate: ListItem.Standard {
+                    delegate: SettingsListItems.IconProgression {
                         iconSource: iconPath
-                        iconFrame: false
                         text: getDisplayName(type, displayName)
-                        control: ActivityIndicator {
+                        layout.subtitle.text: connection == Device.Connecting ? i18n.tr("Connecting…") : i18n.tr("Connected")
+                        layout.subtitle.color: UbuntuColors.green
+
+                        ActivityIndicator {
                             visible: connection == Device.Connecting
                             running: visible
                         }
@@ -325,7 +294,6 @@ ItemPage {
                             backend.setSelectedDevice(addressName);
                             pageStack.push(Qt.resolvedUrl("DevicePage.qml"), {backend: backend, root: root});
                         }
-                        progression: true
                     }
                 }
             }
@@ -334,7 +302,7 @@ ItemPage {
                 id: disconnectedHeader
                 text: connectedList.visible ? i18n.tr("Connect another device:") : i18n.tr("Connect a device:")
                 enabled: bluetoothActionGroup.enabled.state != undefined ? bluetoothActionGroup.enabled.state : false
-                control: Label {
+                Label {
                     anchors {
                         top: parent.top
                         right: parent.right
@@ -358,23 +326,20 @@ ItemPage {
                 Repeater {
                     id: disconnectedRepeater
                     model: backend.disconnectedDevices
-                    delegate: ListItem.Standard {
+                    delegate: SettingsListItems.IconProgression {
                         iconSource: iconPath
-                        iconFrame: false
                         text: getDisplayName(type, displayName)
                         onClicked: {
                             backend.setSelectedDevice(addressName);
                             pageStack.push(Qt.resolvedUrl("DevicePage.qml"), {backend: backend, root: root});
                         }
-                        progression: true
                     }
                 }
             }
-            ListItem.Standard {
+            SettingsListItems.Standard {
                 id: disconnectedNone
                 text: i18n.tr("None detected")
                 visible: !disconnectedList.visible && disconnectedHeader.visible
-                enabled: false
             }
 
             SettingsItemTitle {
@@ -395,15 +360,13 @@ ItemPage {
                 Repeater {
                     id: autoconnectRepeater
                     model: backend.autoconnectDevices
-                    delegate: ListItem.Standard {
+                    delegate: SettingsListItems.IconProgression {
                         iconSource: iconPath
-                        iconFrame: false
                         text: getDisplayName(type, displayName)
                         onClicked: {
                             backend.setSelectedDevice(addressName);
                             pageStack.push(Qt.resolvedUrl("DevicePage.qml"), {backend: backend, root: root});
                         }
-                        progression: true
                     }
                 }
             }

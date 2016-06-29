@@ -21,8 +21,8 @@
 import QtQuick 2.4
 import QtQuick.Layouts 1.1
 import SystemSettings 1.0
+import SystemSettings.ListItems 1.0 as SettingsListItems
 import Ubuntu.Components 1.3
-import Ubuntu.Components.ListItems 1.3 as ListItem
 import Ubuntu.SystemSettings.Wifi 1.0
 
 ItemPage {
@@ -53,29 +53,24 @@ ItemPage {
             anchors.left: parent.left
             anchors.right: parent.right
 
-            ListItem.Standard {
+            SettingsListItems.SingleValue {
                 text: i18n.tr("Name")
-                control: Label {
-                    text: networkName
-                }
+                value: networkName
             }
 
-            ListItem.Standard {
+            SettingsListItems.SingleValue {
                 id: lastLabel
                 text: i18n.tr("Last connected")
-                control: Label {
-                    id: lastField
-
-                    text: networkDetails.lastUsed.length !== 0 ?
-                        networkDetails.lastUsed : i18n.tr("Never")
-                }
+                value: networkDetails.lastUsed.length !== 0 ?
+                    networkDetails.lastUsed : i18n.tr("Never")
             }
 
-            ListItem.Standard {
+            SettingsListItems.Standard {
                 id: passwordLabel
                 text: i18n.tr("Password")
                 visible: networkDetails.password.length !== 0
-                control: TextInput {
+
+                TextInput {
                     id: passwordField
                     readOnly: true
                     text: networkDetails.password
@@ -84,28 +79,30 @@ ItemPage {
                 }
             }
 
-            ListItem.Standard {
+            SettingsListItems.Standard {
                 id: passwordVisible
                 text: i18n.tr("Show password")
                 visible: networkDetails.password.length !== 0
-                control: Switch {
+
+                Switch {
                     id: passwordVisibleSwitch
                 }
             }
 
-            ListItem.Divider {}
+            SettingsListItems.SingleControl {
 
-            Button {
-                objectName: "forgetNetwork"
-                text : i18n.tr("Forget this network")
-                anchors {
-                    left: parent.left
-                    right: parent.right
-                    margins: units.gu(2)
-                }
-                onClicked : {
-                    DbusHelper.forgetConnection(dbusPath);
-                    pageStack.pop();
+                Button {
+                    objectName: "forgetNetwork"
+                    text : i18n.tr("Forget this network")
+                    anchors {
+                        left: parent.left
+                        right: parent.right
+                        margins: units.gu(2)
+                    }
+                    onClicked : {
+                        DbusHelper.forgetConnection(dbusPath);
+                        pageStack.pop();
+                    }
                 }
             }
         }

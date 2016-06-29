@@ -19,8 +19,9 @@
  */
 
 import QtQuick 2.4
+import SystemSettings.ListItems 1.0 as SettingsListItems
 import Ubuntu.Components 1.3
-import Ubuntu.Components.ListItems 1.3 as ListItem
+import Ubuntu.Components.ListItems 1.0 as ListItems
 import Ubuntu.Components.Themes.Ambiance 0.1
 import MeeGo.QOfono 0.2
 import "callForwardingUtils.js" as Utils
@@ -135,12 +136,13 @@ Column {
         }
     ]
 
-    ListItem.ThinDivider { anchors { left: parent.left; right: parent.right }}
+    ListItems.ThinDivider { anchors { left: parent.left; right: parent.right }}
 
-    ListItem.Standard {
+    SettingsListItems.Standard {
         id: control
         onClicked: check.trigger(!check.checked)
-        control: CheckBox {
+
+        CheckBox {
             id: check
             objectName: "check_" + rule
             checked: callForwarding[rule] !== ""
@@ -149,13 +151,13 @@ Column {
         }
     }
 
-    ListItem.Standard {
+    SettingsListItems.Standard {
         id: input
         visible: false
-        height: visible ? units.gu(6) : 0
         /* TRANSLATORS: This string will be truncated on smaller displays. */
         text: i18n.tr("Forward to")
-        control: TextField {
+
+        TextField {
             id: field
             objectName: "field_" + rule
             horizontalAlignment: TextInput.AlignRight
@@ -194,7 +196,7 @@ Column {
         }
     }
 
-    ListItem.SingleValue {
+    SettingsListItems.SingleValue {
         id: current
         objectName: "current_" + rule
         visible: value

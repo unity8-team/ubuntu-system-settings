@@ -1,7 +1,7 @@
 /*
  * This file is part of system-settings
  *
- * Copyright (C) 2013 Canonical Ltd.
+ * Copyright (C) 2013-2015 Canonical Ltd.
  *
  * Contact: Alberto Mardegan <alberto.mardegan@canonical.com>
  *
@@ -19,17 +19,17 @@
  */
 
 import QtQuick 2.4
+import SystemSettings.ListItems 1.0 as SettingsListItems
 import Ubuntu.Components 1.3
-import Ubuntu.Components.ListItems 1.3 as ListItem
 import Ubuntu.SystemSettings.FlightMode 1.0 as FlightMode
 import Ubuntu.Settings.Components 0.1 as USC
 
-ListItem.Standard {
+SettingsListItems.Icon {
     id: root
     iconSource: model.icon
-    iconFrame: false
     text: i18n.tr(model.displayName)
-    control: Switch {
+
+    Switch {
         id: switchItem
 
         USC.ServerPropertySynchroniser {
@@ -42,7 +42,7 @@ ListItem.Standard {
         }
     }
 
-    FlightMode.Helper {
+    resources: FlightMode.Helper {
         id: helper
     }
 }

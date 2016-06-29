@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 Canonical Ltd.
+ * Copyright 2013-2015 Canonical Ltd.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -28,19 +28,6 @@ FramedMenuItem {
     property bool secure: false
     property bool adHoc: false
     property int signalStrength: 0
-
-    signal activate()
-
-    onCheckedChanged: {
-        // Can't rely on binding. Checked is assigned on click.
-        checkBoxActive.checked = checked;
-
-        // if stack has NetworkDetailsBrief, pop it
-        if (pageStack.depth === 3) {
-            pageStack.pop();
-        }
-    }
-
     iconName: {
         var imageName = "nm-signal-100"
 
@@ -61,16 +48,18 @@ FramedMenuItem {
         }
         return imageName;
     }
+    layout.subtitle.text: checked ? i18n.tr("Connected") : ""
 
-    iconFrame: false
-    control: CheckBox {
-        id: checkBoxActive
+    signal activate()
 
-        onClicked: {
-            accessPoint.activate();
+    onCheckedChanged: {
+        // if stack has NetworkDetailsBrief, pop it
+        if (pageStack.depth === 3) {
+            pageStack.pop();
         }
     }
-    progression: checked
+
+    progressionVisible: checked
     onClicked: {
         if (checked) {
             pageStack.push(Qt.resolvedUrl("NetworkDetailsBrief.qml"),

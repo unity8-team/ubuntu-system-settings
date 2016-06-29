@@ -19,8 +19,8 @@
  */
 
 import QtQuick 2.4
+import SystemSettings.ListItems 1.0 as SettingsListItems
 import Ubuntu.Components 1.3
-import Ubuntu.Components.ListItems 1.3 as ListItem
 import SystemSettings 1.0
 
 MainView {
@@ -117,6 +117,16 @@ MainView {
             visible: false
             flickable: mainFlickable
 
+            head.actions: [
+                Action {
+                    iconName: "find"
+                    onTriggered: {
+                        pluginManager.filter = "";
+                        search.visible = !search.visible;
+                    }
+                }
+            ]
+
             Flickable {
                 id: mainFlickable
                 anchors.fill: parent
@@ -130,9 +140,11 @@ MainView {
                     anchors.left: parent.left
                     anchors.right: parent.right
 
-                    ListItem.SingleControl {
+                    SettingsListItems.SingleControl {
                         id: search
-                        control: TextField {
+                        visible: false
+                        TextField {
+                            id: searchField
                             width: parent.width - units.gu(4)
                             placeholderText: i18n.tr("Search")
                             objectName: "searchTextField"
@@ -140,23 +152,24 @@ MainView {
                             onDisplayTextChanged:
                                 pluginManager.filter = displayText
                         }
+                        onVisibleChanged: if (visible) searchField.forceActiveFocus()
                     }
 
                     UncategorizedItemsView {
                         model: pluginManager.itemModel("uncategorized-top")
                     }
 
-                    CategoryGrid {
+                    CategorySection {
                         category: "network"
                         categoryName: i18n.tr("Network")
                     }
 
-                    CategoryGrid {
+                    CategorySection {
                         category: "personal"
                         categoryName: i18n.tr("Personal")
                     }
 
-                    CategoryGrid {
+                    CategorySection {
                         category: "system"
                         categoryName: i18n.tr("System")
                     }
