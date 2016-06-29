@@ -29,6 +29,15 @@ ItemPage {
 
     title: entry.displayName
 
+    function disableNotificationsWhenAllUnchecked() {
+        if (!entry.soundsNotify && !entry.vibrationsNotify && !entry.bubblesNotify && !entry.listNotify) {
+            enableNotificationsSwitch.checked = false
+            entry.enableNotifications = false
+        }
+    }
+
+    Component.onDestruction: disableNotificationsWhenAllUnchecked()
+
     Column {
         id: notificationsColumn
 
@@ -74,6 +83,7 @@ ItemPage {
                         ClickApplicationsModel.setNotifyEnabled(ClickApplicationsModel.SoundsNotify,
                                                                 appNotificationsPage.entryIndex,
                                                                 checked)
+                        disableNotificationsWhenAllUnchecked()
                     }
                 }
             }
@@ -95,6 +105,7 @@ ItemPage {
                         ClickApplicationsModel.setNotifyEnabled(ClickApplicationsModel.VibrationsNotify,
                                                                 appNotificationsPage.entryIndex,
                                                                 checked)
+                        disableNotificationsWhenAllUnchecked()
                     }
                 }
             }
@@ -116,6 +127,7 @@ ItemPage {
                         ClickApplicationsModel.setNotifyEnabled(ClickApplicationsModel.BubblesNotify,
                                                                 appNotificationsPage.entryIndex,
                                                                 checked)
+                        disableNotificationsWhenAllUnchecked()
                     }
                 }
             }
@@ -137,6 +149,7 @@ ItemPage {
                         ClickApplicationsModel.setNotifyEnabled(ClickApplicationsModel.ListNotify,
                                                                 appNotificationsPage.entryIndex,
                                                                 checked)
+                        disableNotificationsWhenAllUnchecked()
                     }
                 }
             }
