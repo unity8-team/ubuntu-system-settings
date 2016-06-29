@@ -108,21 +108,25 @@ PageComponent {
             ClickApplicationsModel.addApplication("Pkg02", "App02")
             ClickApplicationsModel.addApplication("Pkg03", "App03")
 
+            soundsModel.updateEnabledEntries()
             compare(soundsModel.count, 3)
             tryCompare(soundsLabel, "text", "3")
 
             ClickApplicationsModel.setNotificationByIndex(ClickApplicationsModel.EnableNotifications, 0, false)
 
+            soundsModel.updateEnabledEntries()
             compare(soundsModel.count, 2)
             tryCompare(soundsLabel, "text", "2")
 
             ClickApplicationsModel.setNotificationByIndex(ClickApplicationsModel.SoundsNotify, 1, false)
 
+            soundsModel.updateEnabledEntries()
             compare(soundsModel.count, 1)
             tryCompare(soundsLabel, "text", "1")
 
             ClickApplicationsModel.setNotificationByIndex(ClickApplicationsModel.VibrationsNotify, 2, false)
 
+            soundsModel.updateEnabledEntries()
             compare(soundsModel.count, 1)
             tryCompare(soundsLabel, "text", "1")
         }
@@ -137,21 +141,25 @@ PageComponent {
             ClickApplicationsModel.addApplication("Pkg02", "App02")
             ClickApplicationsModel.addApplication("Pkg03", "App03")
 
+            vibrationsModel.updateEnabledEntries()
             compare(vibrationsModel.count, 3)
             tryCompare(vibrationsLabel, "text", "3")
 
             ClickApplicationsModel.setNotificationByIndex(ClickApplicationsModel.EnableNotifications, 0, false)
 
+            vibrationsModel.updateEnabledEntries()
             compare(vibrationsModel.count, 2)
             tryCompare(vibrationsLabel, "text", "2")
 
             ClickApplicationsModel.setNotificationByIndex(ClickApplicationsModel.VibrationsNotify, 1, false)
 
+            vibrationsModel.updateEnabledEntries()
             compare(vibrationsModel.count, 1)
             tryCompare(vibrationsLabel, "text", "1")
 
             ClickApplicationsModel.setNotificationByIndex(ClickApplicationsModel.SoundsNotify, 2, false)
 
+            vibrationsModel.updateEnabledEntries()
             compare(vibrationsModel.count, 1)
             tryCompare(vibrationsLabel, "text", "1")
         }

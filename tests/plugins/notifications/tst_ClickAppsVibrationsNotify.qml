@@ -55,6 +55,7 @@ ClickAppsVibrationsNotify {
 
             ClickApplicationsModel.addApplication("Pkg01", "App01")
 
+            clickAppsVibrationsNotifyModel.updateEnabledEntries()
             compare(clickAppsVibrationsNotifyModel.count, 1)
 
             var appsList = findChild(root, "appsVibrationsNotifyList")
@@ -63,9 +64,11 @@ ClickAppsVibrationsNotify {
 
         function test_should_update_when_removed() {
             ClickApplicationsModel.addApplication("Pkg01", "App01")
+            clickAppsVibrationsNotifyModel.updateEnabledEntries()
             compare(clickAppsVibrationsNotifyModel.count, 1)
 
             ClickApplicationsModel.removeApplicationByIndex(0)
+            clickAppsVibrationsNotifyModel.updateEnabledEntries()
             compare(clickAppsVibrationsNotifyModel.count, 0)
 
             var appsList = findChild(root, "appsVibrationsNotifyList")

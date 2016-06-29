@@ -55,6 +55,7 @@ ClickAppsSoundsNotify {
 
             ClickApplicationsModel.addApplication("Pkg01", "App01")
 
+            clickAppsSoundsNotifyModel.updateEnabledEntries()
             compare(clickAppsSoundsNotifyModel.count, 1)
 
             var appsList = findChild(root, "appsSoundsNotifyList")
@@ -63,9 +64,11 @@ ClickAppsSoundsNotify {
 
         function test_should_update_when_removed() {
             ClickApplicationsModel.addApplication("Pkg01", "App01")
+            clickAppsSoundsNotifyModel.updateEnabledEntries()
             compare(clickAppsSoundsNotifyModel.count, 1)
 
             ClickApplicationsModel.removeApplicationByIndex(0)
+            clickAppsSoundsNotifyModel.updateEnabledEntries()
             compare(clickAppsSoundsNotifyModel.count, 0)
 
             var appsList = findChild(root, "appsSoundsNotifyList")

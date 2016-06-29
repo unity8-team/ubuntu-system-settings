@@ -30,6 +30,8 @@ public:
     MockClickApplicationsModel* sourceModel() const;
     void setSourceModel(MockClickApplicationsModel* sourceModel);
 
+    Q_INVOKABLE bool setNotifyEnabled(int /*row*/, bool /*enabled*/) { return true; };
+
 Q_SIGNALS:
     void sourceModelChanged() const;
 };

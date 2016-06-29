@@ -29,7 +29,5 @@ public:
     Q_INVOKABLE void cleanup();
 
 protected Q_SLOTS:
-    void populateModel() { /* DO NOTHING */ }
+    void populateModel() { /* DO NOTHING */ };
 };
-
-

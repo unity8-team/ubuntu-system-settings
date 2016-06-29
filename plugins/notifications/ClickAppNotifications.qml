@@ -27,9 +27,13 @@ ItemPage {
     property var entry
     property int entryIndex
 
-    title: entry.displayName
+    title: entry ? entry.displayName : ""
 
     function disableNotificationsWhenAllUnchecked() {
+        if (!entry) {
+            return
+        }
+
         if (!entry.soundsNotify && !entry.vibrationsNotify && !entry.bubblesNotify && !entry.listNotify) {
             enableNotificationsSwitch.checked = false
             entry.enableNotifications = false
@@ -52,7 +56,7 @@ ItemPage {
                     id: enableNotificationsSwitch
                     objectName: "enableNotificationsSwitch"
                     SlotsLayout.position: SlotsLayout.Leading
-                    checked: entry.enableNotifications
+                    checked: entry ? entry.enableNotifications : false
 
                     onCheckedChanged: {
                         ClickApplicationsModel.setNotifyEnabled(ClickApplicationsModel.EnableNotifications,
@@ -76,8 +80,8 @@ ItemPage {
                     id: soundsChecked
                     objectName: "soundsChecked"
                     SlotsLayout.position: SlotsLayout.Leading
-                    enabled: entry.enableNotifications
-                    checked: entry.soundsNotify
+                    enabled: entry ? entry.enableNotifications : false
+                    checked: entry ? entry.soundsNotify : false
 
                     onCheckedChanged: {
                         ClickApplicationsModel.setNotifyEnabled(ClickApplicationsModel.SoundsNotify,
@@ -98,8 +102,8 @@ ItemPage {
                     id: vibrationsChecked
                     objectName: "vibrationsChecked"
                     SlotsLayout.position: SlotsLayout.Leading
-                    enabled: entry.enableNotifications
-                    checked: entry.vibrationsNotify
+                    enabled: entry ? entry.enableNotifications : false
+                    checked: entry ? entry.vibrationsNotify : false
 
                     onCheckedChanged: {
                         ClickApplicationsModel.setNotifyEnabled(ClickApplicationsModel.VibrationsNotify,
@@ -120,8 +124,8 @@ ItemPage {
                     id: bubblesChecked
                     objectName: "bubblesChecked"
                     SlotsLayout.position: SlotsLayout.Leading
-                    enabled: entry.enableNotifications
-                    checked: entry.bubblesNotify
+                    enabled: entry ? entry.enableNotifications : false
+                    checked: entry ? entry.bubblesNotify : false
 
                     onCheckedChanged: {
                         ClickApplicationsModel.setNotifyEnabled(ClickApplicationsModel.BubblesNotify,
@@ -142,8 +146,8 @@ ItemPage {
                     id: listChecked
                     objectName: "listChecked"
                     SlotsLayout.position: SlotsLayout.Leading
-                    enabled: entry.enableNotifications
-                    checked: entry.listNotify
+                    enabled: entry ? entry.enableNotifications : false
+                    checked: entry ? entry.listNotify : false
 
                     onCheckedChanged: {
                         ClickApplicationsModel.setNotifyEnabled(ClickApplicationsModel.ListNotify,
