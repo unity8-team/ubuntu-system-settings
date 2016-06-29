@@ -29,45 +29,15 @@ UpdateDelegate {
     // property var command
     // property string downloadSha512
     // property var udm: null
-    // property var downloader: null
+    property var downloader: null
     property var updateModel: null
     // property var downloadTracker: null
 
     updateState: Update.StateAvailable
     kind: Update.KindClick
 
-    onInstall: createDownload()
-    onDownload: createDownload()
-
-
-    QtObject {
-        id: internal
-
-        // function connectToDownloadObject() {
-        //     if (model.downloadId && downloader) {
-        //         for(var i = 0; i < downloader.downloads.length; i++) {
-        //             if (downloader.downloads[i].downloadId == downloadId) {
-        //                 downloader.bindDownload(downloader.downloads[i]);
-        //             }
-        //         }
-        //     }
-        // }
-    }
-
-    // Component.onCompleted: {
-    //     if (!model.downloadId)
-    //         return;
-
-    //     for (var i = 0; i < udm.downloads.length; i++) {
-    //         console.warn('delegate udm download', udm.downloads[i]);
-    //         if (udm.downloads[i].downloadId === model.downloadId) {
-    //             console.warn('found download for', model.title);
-    //             return;
-    //         }
-    //     }
-
-    //     console.warn('did not found a damn thing for ', model.title);
-    // }
+    onInstall: downloader.createDownload(model)
+    onDownload: downloader.createDownload(model)
 
     // Component.onCompleted: internal.connectToDownloadObject()
     // onDownloaderChanged: internal.connectToDownloadObject()
@@ -133,109 +103,4 @@ UpdateDelegate {
             return queued || installing;
         }
     }
-
-    Component.onCompleted: {
-        console.warn('clickupdatedelegate was created');
-    }
-
-    function createDownload() {
-        console.warn('createDownload', model, model.identifier, model.revision);
-
-        if (model.downloadId) {
-            console.warn('model already had downloadId', model.downloadId);
-            return;
-        }
-
-        var metadata = {
-            //"command": model.command,
-            "title": model.title,
-            "showInIndicator": false
-        };
-        var hdrs = {
-            "X-Click-Token": model.token
-        };
-        var metadataObj = mdt.createObject(update, metadata);
-        // metadataObj.custom = {
-        //     "identifier": model.identifier,
-        //     "revision": model.revision
-        // };
-        var singleDownloadObj = sdl.createObject(update, {
-            // "url": model.downloadUrl,
-            "autoStart": true,
-            //"hash": model.downloadSha512,
-            // "algorithm": "sha512",
-            "headers": hdrs,
-            "metadata": metadataObj,
-            "revision": model.revision,
-            "identifier": model.identifier
-        });
-        singleDownloadObj.download(model.downloadUrl);
-        // bindDownload(singleDownloadObj);
-    }
-
-
-
-    // function onProgressChanged(dl) {
-    //     console.warn('onProgressChanged', progress);
-    //     updateModel.setProgress(dl.downloadId, progress);
-    // }
-
-    // function bindDownload(dl) {
-    //     dl.progressChanged.connect(onProgressChanged);
-    // }
-
-    // function unbindDownload(dl) {
-    //     dl.progressChanged.disconnect(onProgressChanged);
-    // }
-
-    Component {
-        id: sdl
-
-        SingleDownload {
-            // property bool _bound: false
-            property var identifier
-            property var revision
-
-            onDownloadIdChanged: {
-
-                console.warn('downloid changed', downloadId);
-
-                if (downloadId && identifier && (typeof revision !== "undefined")) {
-                    updateModel.setDownloadId(identifier, revision, downloadId);
-                    updateModel.startUpdate(downloadId);
-                }
-            }
-            onProgressChanged: {
-                console.warn('onProgressChanged', progress);
-                updateModel.setProgress(downloadId, progress);
-            }
-            onStarted: {
-                console.warn('onStarted');
-
-                updateModel.startUpdate(downloadId);
-            }
-            onProcessing: {
-                console.warn('onProcessing');
-
-                updateModel.processUpdate(downloadId);
-            }
-        }
-    }
-
-    Component {
-        id: mdt
-        Metadata {}
-    }
-    // function pause(downloadId) {
-    //     console.warn('pause', downloadId);
-    //     // var dl = getDownload(downloadId);
-    //     // if (dl) {
-    //     //     console.warn('pause will pause download', dl);
-    //     //     dl.pause();
-    //     // } else {
-    //     //     console.warn('pause found no download');
-    //     // }
-    // }
-
-
 }

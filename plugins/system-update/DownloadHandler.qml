@@ -27,7 +27,7 @@ Item {
 
     DownloadManager {
         id: udm
-
+        cleanDownloads: false
         onDownloadFinished: {
             console.warn('udm onDownloadFinished', download.downloadId);
             updateModel.setInstalled(download.downloadId)
@@ -54,12 +54,96 @@ Item {
         }
         onDownloadsChanged: {
             console.warn('udm udm downloads changed..');
+            for (var i = 0; i<downloads.length; i++) {
+                console.warn(downloads[i].downloadId, downloads[i].metadata.title);
+                if (!downloads[i]._bound) {
+                    downloads[i].progressChanged.connect(onDownloadProgress.bind(downloads[i]));
+                    downloads[i]._bound = true;
+                }
+            }
         }
         Component.onCompleted: {
-            // for (var i = 0; i<downloads.length; i++) {
-            //     console.warn(downloads[i].downloadId, downloads[i].metadata.title);
-            // }
+            console.warn('downloads length', downloads.length);
         }
+    }
+
+    function createDownload(click) {
+        console.warn('createDownload', click, click.identifier, click.revision);
+
+        if (click.downloadId) {
+            console.warn('click already had downloadId', click.downloadId);
+            return;
+        }
+
+        var metadata = {
+            //"command": click.command,
+            "title": click.title,
+            "showInIndicator": false
+        };
+        var hdrs = {
+            "X-Click-Token": click.token
+        };
+        var metadataObj = mdt.createObject(root, metadata);
+        // metadataObj.custom = {
+        //     "identifier": click.identifier,
+        //     "revision": click.revision
+        // };
+        var singleDownloadObj = sdl.createObject(root, {
+            // "url": click.downloadUrl,
+            "autoStart": true,
+            //"hash": click.downloadSha512,
+            // "algorithm": "sha512",
+            "headers": hdrs,
+            "metadata": metadataObj,
+            "revision": click.revision,
+            "identifier": click.identifier
+        });
+        singleDownloadObj.download(click.downloadUrl);
+        // bindDownload(singleDownloadObj);
+    }
+
+    function onDownloadProgress (progress) {
+        console.warn('dyno binding', this.downloadId, this.progress)
+        updateModel.setProgress(this.downloadId, this.progress);
+    }
+
+    Component {
+        id: sdl
+
+        SingleDownload {
+            property bool _bound: true
+            property var identifier
+            property var revision
+
+            onDownloadIdChanged: {
+
+                console.warn('downloid changed', downloadId);
+
+                if (downloadId && identifier && (typeof revision !== "undefined")) {
+                    updateModel.setDownloadId(identifier, revision, downloadId);
+                    updateModel.startUpdate(downloadId);
+                }
+            }
+            onProgressChanged: {
+                console.warn('onProgressChanged', progress);
+                updateModel.setProgress(downloadId, progress);
+            }
+            onStarted: {
+                console.warn('onStarted');
+
+                updateModel.startUpdate(downloadId);
+            }
+            onProcessing: {
+                console.warn('onProcessing');
+
+                updateModel.processUpdate(downloadId);
+            }
+        }
+    }
+
+    Component {
+        id: mdt
+        Metadata {}
     }
 }
 

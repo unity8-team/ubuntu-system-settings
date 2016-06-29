@@ -81,9 +81,9 @@ class Manager(object):
                             "ninja-ide/master/ninja_ide/img/ninja_icon.png"
                         ),
                         "download_url": ("https://upload.wikimedia.org/wikiped"
-                                         "ia/commons/9/9a/Self-portrait_at_34_"
-                                         "by_Rembrandt.jpg"),
-                        "binary_filesize": 6471.77 * 1000.0,
+                                         "ia/commons/3/30/04U_Dec_28_2012_0230"
+                                         "Z.jpg"),
+                        "binary_filesize": 23820.0 * 1000.0,
                         "download_sha512": "1232223sdfdsffs",
                         "changelog": "New version!",
                         "title": "Test Click App"
