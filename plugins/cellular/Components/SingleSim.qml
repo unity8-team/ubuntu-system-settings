@@ -19,12 +19,14 @@
 */
 import QtQuick 2.4
 import SystemSettings 1.0
+import Ubuntu.Connectivity 1.0
 import Ubuntu.Components 1.3
 import Ubuntu.Components.ListItems 1.3 as ListItem
 
 Column {
 
     objectName: "singleSim"
+    id: singlesim
 
     property var sim
 
@@ -32,30 +34,68 @@ Column {
         @prevOnlineModem path to modem that was online before this event */
     signal umtsModemChanged (var sim, string prevOnlineModem);
 
-    ListItem.Standard {
-        id: selector
-        text: i18n.tr("Cellular data:")
-        control: Switch {
-            id: dataControl
-            objectName: 'data'
-            property bool serverChecked: sim.connMan.powered
-            onServerCheckedChanged: checked = serverChecked
-            Component.onCompleted: checked = serverChecked
-            onTriggered: sim.connMan.powered = checked
+    property var currentSim
+    Component.onCompleted: {
+        if (sortedModems.count === 1)
+        {
+            currentSim = sortedModems.get(0).Sim
+            Connectivity.simForMobileData = currentSim
         }
+        if (sortedModems.count === 2 &&
+                (sortedModems.get(0).Sim === null ||
+                 sortedModems.get(1).Sim === null))
+        {
+            // Dual-SIM phone with only one sim present
+            var sim = sortedModems.get(0).Sim
+            if (sim === null)
+            {
+                sim = sortedModems.get(1).Sim
+            }
+            if (sim !== null)
+            {
+                currentSim = sim
+                Connectivity.simForMobileData = sim
+            }
+        }
+    }
+    SortFilterModel {
+        id: sortedModems
+        model: Connectivity.modems
+        sort.property: "Index"
+        sort.order: Qt.AscendingOrder
     }
 
     ListItem.Standard {
-        id: dataRoamingItem
-        text: i18n.tr("Data roaming")
-        enabled: sim.connMan.powered
+        text: i18n.tr("Cellular data")
         control: Switch {
-            id: dataRoamingControl
+            id: dataSwitch
+            objectName: "data"
+            checked: Connectivity.mobileDataEnabled
+            enabled: singlesim.currentSim !== null
+            onTriggered: {
+                Connectivity.mobileDataEnabled = checked
+                /*
+                 * We do this binding here to workaround bug:
+                 * https://bugs.launchpad.net/ubuntu/+source/ubuntu-ui-toolkit/+bug/1494387
+                 *
+                 * The bug causes the checked binding to be overridden if plain onTriggered is used.
+                 */
+                checked = Qt.binding(function() {
+                    return Connectivity.mobileDataEnabled
+                })
+            }
+        }
+    }
+    ListItem.Standard {
+        text: i18n.tr("Data roaming")
+        control: Switch {
+            id: roaming
             objectName: "roaming"
-            property bool serverChecked: sim.connMan.roamingAllowed
-            onServerCheckedChanged: checked = serverChecked
-            Component.onCompleted: checked = serverChecked
-            onTriggered: sim.connMan.roamingAllowed = checked
+            enabled: singlesim.currentSim !== null && dataSwitch.checked
+            checked: singlesim.currentSim.DataRoamingEnabled
+            function trigger() {
+                singlesim.currentSim.DataRoamingEnabled = !checked
+            }
         }
     }
 
