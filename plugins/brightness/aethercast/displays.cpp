@@ -56,7 +56,8 @@ Displays::Displays(const QDBusConnection &dbus, QObject *parent):
         watcher->deleteLater();
     });
 
-    m_connectedDevices.filterOnStates(Device::State::Configuration |
+    m_connectedDevices.filterOnStates(Device::State::Association |
+                                      Device::State::Configuration |
                                       Device::State::Connected);
     m_connectedDevices.setSourceModel(&m_devices);
 
