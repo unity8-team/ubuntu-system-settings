@@ -199,12 +199,12 @@ class SecurityTestCase(SecurityBaseTestCase):
         elif actTimeout is 60:
             self.assertEquals(
                 activityTimeout,
-                ('{:d} minute').format(int(actTimeout/60))
+                ('After {:d} minute').format(int(actTimeout/60))
             )
         else:
             self.assertEquals(
                 activityTimeout,
-                ('{:d} minutes').format(int(actTimeout/60))
+                ('After {:d} minutes').format(int(actTimeout/60))
             )
 
     def test_idle_never_timeout(self):
