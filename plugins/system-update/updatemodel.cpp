@@ -32,7 +32,7 @@ namespace UpdatePlugin
 UpdateModel::UpdateModel(QObject *parent)
     : QAbstractListModel(parent)
     , m_db(SystemUpdate::instance()->db())
-    , m_filter((int) UpdateDb::Filter::All)
+    , m_filter(UpdateModel::Filter::All)
     , m_updates()
 {
     initialize();
@@ -44,7 +44,7 @@ UpdateModel::UpdateModel(QObject *parent)
 UpdateModel::UpdateModel(const QString &dbpath, QObject *parent)
     : QAbstractListModel(parent)
     , m_db(new UpdateDb(dbpath, this))
-    , m_filter((int) UpdateDb::Filter::All)
+    , m_filter(UpdateModel::Filter::All)
     , m_updates()
 {
     initialize();
@@ -54,7 +54,8 @@ void UpdateModel::initialize()
 {
     connect(this, SIGNAL(filterChanged()), SLOT(clear()));
     connect(m_db, SIGNAL(changed()), this, SLOT(refresh()));
-    connect(m_db, SIGNAL(changed(const QString)), this, SLOT(refresh(const QString)));
+    connect(m_db, SIGNAL(changed(const QString, const int)),
+            this, SLOT(refresh(const QString, const int)));
 
     // connect(this, SIGNAL(changed()),
     //         SystemUpdate::instance(), SLOT(notifyModelChanged()));
@@ -96,7 +97,6 @@ QHash<int, QByteArray> UpdateModel::roleNames() const
         names[UpdateStateRole] = "updateState";
         names[ProgressRole] = "progress";
         names[AutomaticRole] = "automatic";
-        names[DownloadIdRole] = "downloadId";
     }
 
     return names;
@@ -156,8 +156,6 @@ QVariant UpdateModel::data(const QModelIndex &index, int role) const
         return u->progress();
     case AutomaticRole:
         return u->automatic();
-    case DownloadIdRole:
-        return u->downloadId();
     case ErrorRole:
         return u->error();
     }
@@ -175,7 +173,7 @@ int UpdateModel::count() const
     return rowCount();
 }
 
-void UpdateModel::setFilter(const int &filter)
+void UpdateModel::setFilter(const UpdateModel::Filter &filter)
 {
     if (filter != m_filter) {
         m_filter = filter;
@@ -183,7 +181,7 @@ void UpdateModel::setFilter(const int &filter)
     }
 }
 
-int UpdateModel::filter() const
+UpdateModel::Filter UpdateModel::filter() const
 {
     return m_filter;
 }
@@ -197,10 +195,11 @@ void UpdateModel::clear()
     refresh();
 }
 
-void UpdateModel::refresh(const QString &downloadId)
+void UpdateModel::refresh(const QString &id, const int &revision)
 {
-    QSharedPointer<Update> u = m_db->get(downloadId);
+    QSharedPointer<Update> u = m_db->get(id, revision);
     int ix = UpdateModel::indexOf(m_updates, u);
+    qWarning() << "refreshing" << id << revision << ix << u->progress();
 
     if (ix >= 0 && ix < m_updates.size()) {
         m_updates.replace(ix, u);
@@ -210,7 +209,7 @@ void UpdateModel::refresh(const QString &downloadId)
 
 void UpdateModel::refresh()
 {
-    QList<QSharedPointer<Update> > now = m_db->updates((UpdateDb::Filter) m_filter);
+    QList<QSharedPointer<Update> > now = m_db->updates((uint) m_filter);
     // QList<Update*> udb;
     // QList<Update*> uold;
     int oldCount = m_updates.size();
@@ -410,6 +409,8 @@ void UpdateModel::emitRowChanged(int row)
 {
     if (0 <= row && row < m_updates.size()) {
         QModelIndex qmi = index(row, 0);
+        qWarning() << "emitting rowchanged for " << row << m_updates.at(row)->progress();
+
         Q_EMIT(dataChanged(qmi, qmi));
     }
 }
@@ -575,57 +576,62 @@ int UpdateModel::indexOf(const QList<QSharedPointer<Update> > &list,
 //     // Q_EMIT (dataChanged(first, last));
 // }
 
-void UpdateModel::setInstalled(const QString &downloadId)
+void UpdateModel::queueUpdate(const QString &id, const int &revision)
 {
-    m_db->setInstalled(downloadId);
+    m_db->setQueued(id, revision);
 }
 
-void UpdateModel::startUpdate(const QString &downloadId)
+void UpdateModel::setInstalled(const QString &id, const int &revision)
 {
-    m_db->setStarted(downloadId);
+    m_db->setInstalled(id, revision);
 }
 
-void UpdateModel::processUpdate(const QString &downloadId)
+void UpdateModel::startUpdate(const QString &id, const int &revision)
 {
-    m_db->setProcessing(downloadId);
+    m_db->setStarted(id, revision);
 }
 
-void UpdateModel::setError(const QString &downloadId, const QString &msg)
+void UpdateModel::processUpdate(const QString &id, const int &revision)
 {
-    m_db->setError(downloadId, msg);
+    m_db->setProcessing(id, revision);
 }
 
-// void UpdateModel::setState(const QString &downloadId,
+void UpdateModel::setError(const QString &id, const int &revision, const QString &msg)
+{
+    m_db->setError(id, revision, msg);
+}
+
+// void UpdateModel::setState(const QString &id, const int &revision,
 //                            const SystemUpdate::UpdateState &state)
 // {
 
 // }
 
-void UpdateModel::setProgress(const QString &downloadId,
+void UpdateModel::setProgress(const QString &id, const int &revision,
                               const int &progress)
 {
-    m_db->setProgress(downloadId, progress);
+    m_db->setProgress(id, revision, progress);
 }
 
-void UpdateModel::setDownloadId(const QString &id, const int &revision,
-                                const QString &downloadId)
+// void UpdateModel::setDownloadId(const QString &id, const int &revision,
+//                                 const QString &downloadId)
+// {
+//     m_db->setDownloadId(id, revision, downloadId);
+// }
+
+void UpdateModel::pauseUpdate(const QString &id, const int &revision)
 {
-    m_db->setDownloadId(id, revision, downloadId);
+    m_db->setPaused(id, revision);
 }
 
-void UpdateModel::pauseUpdate(const QString &downloadId)
+void UpdateModel::resumeUpdate(const QString &id, const int &revision)
 {
-    m_db->setPaused(downloadId);
+    m_db->setResumed(id, revision);
 }
 
-void UpdateModel::resumeUpdate(const QString &downloadId)
+void UpdateModel::cancelUpdate(const QString &id, const int &revision)
 {
-    m_db->setResumed(downloadId);
-}
-
-void UpdateModel::cancelUpdate(const QString &downloadId)
-{
-    m_db->setCanceled(downloadId);
+    m_db->setCanceled(id, revision);
 }
 
 

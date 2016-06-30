@@ -1,7 +1,7 @@
 /*
  * This file is part of system-settings
  *
- * Copyright (C) 2014 Canonical Ltd.
+ * Copyright (C) 2014-2016 Canonical Ltd.
  *
  * Contact: Diego Sarmentero <diego.sarmentero@canonical.com>
  *
@@ -26,25 +26,20 @@ import Ubuntu.SystemSettings.Update 1.0
 ListItem.SingleValue {
     id: root
 
-    property int updatesAvailable: {
-        var sUpdates = SystemImage.checkTarget() ? 1 : 0;
-        var cUpdates = clickupdates.count;
-        return sUpdates + cUpdates;
-    }
-    height: updatesAvailable > 0 ? units.gu(6) : 0
+    height: updates.count > 0 ? units.gu(6) : 0
 
     text: i18n.tr(model.displayName)
     objectName: "entryComponent-updates"
     iconSource: Qt.resolvedUrl(model.icon)
     iconFrame: false
     progression: true
-    value: updatesAvailable > 0 ? updatesAvailable : ""
+    value: updates.count
 
     onClicked: main.loadPluginByName("system-update");
 
     UpdateModel {
-        id: clickupdates
-        filter: UpdateDb.PendingClicks
+        id: updates
+        filter: UpdateModel.Pending
     }
 
     Behavior on height { UbuntuNumberAnimation {} }

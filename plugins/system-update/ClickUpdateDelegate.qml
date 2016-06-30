@@ -29,15 +29,12 @@ UpdateDelegate {
     // property var command
     // property string downloadSha512
     // property var udm: null
-    property var downloader: null
-    property var updateModel: null
+    // property var updateModel: null
     // property var downloadTracker: null
 
     updateState: Update.StateAvailable
     kind: Update.KindClick
 
-    onInstall: downloader.createDownload(model)
-    onDownload: downloader.createDownload(model)
 
     // Component.onCompleted: internal.connectToDownloadObject()
     // onDownloaderChanged: internal.connectToDownloadObject()
@@ -78,7 +75,8 @@ UpdateDelegate {
     // onDownload: install()
 
     // signal retryUpdate(string name)
-
+    onProgressChanged: console.warn('clickupdatedelegate saw progress change', progress)
+    onUpdateStateChanged: console.warn('clickupdatedelegate saw updatestate change', updateState)
     states: [
         State {
             name: "failed"

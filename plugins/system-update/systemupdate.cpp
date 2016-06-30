@@ -29,9 +29,8 @@ SystemUpdate *SystemUpdate::instance()
 
 SystemUpdate::SystemUpdate(QObject *parent)
     : QObject(parent)
+    , m_db(new UpdateDb(this))
 {
-    m_db = new UpdateDb(this);
-    qWarning() << "FOO";
 }
 
 UpdateDb* SystemUpdate::db()
@@ -39,20 +38,20 @@ UpdateDb* SystemUpdate::db()
     return m_db;
 }
 
-void SystemUpdate::notifyDbChanged()
-{
-    Q_EMIT (dbChanged());
-}
-
-// void SystemUpdate::notifyDbChanged(const Update &update)
+// void SystemUpdate::notifyDbChanged()
 // {
-//     Q_EMIT (dbChanged(update));
+//     Q_EMIT (dbChanged());
 // }
 
-void SystemUpdate::notifyDbChanged(const QString &downloadId)
-{
-    Q_EMIT (dbChanged(downloadId));
-}
+// // void SystemUpdate::notifyDbChanged(const Update &update)
+// // {
+// //     Q_EMIT (dbChanged(update));
+// // }
+
+// void SystemUpdate::notifyDbChanged(const QString &downloadId)
+// {
+//     Q_EMIT (dbChanged(downloadId));
+// }
 
 // void SystemUpdate::notifyModelItemChanged(const QString &downloadId)
 // {

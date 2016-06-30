@@ -88,11 +88,6 @@ private slots:
         QCOMPARE(departmentSpy.count(), 1);
         QCOMPARE(m_instance->department(), depts);
 
-        QSignalSpy downloadIdSpy(m_instance, SIGNAL(downloadIdChanged()));
-        m_instance->setDownloadId("downloadId");
-        QCOMPARE(downloadIdSpy.count(), 1);
-        QCOMPARE(m_instance->downloadId(), QString("downloadId"));
-
         QSignalSpy downloadHash(m_instance, SIGNAL(downloadHashChanged()));
         m_instance->setDownloadHash("downloadHash");
         QCOMPARE(downloadHash.count(), 1);
@@ -213,7 +208,6 @@ private slots:
         a->setState(Update::State::StateAvailable);
         a->setProgress(0);
         a->setAutomatic(false);
-        a->setDownloadId("downloadId_a");
         a->setError("error_a");
 
         Update* b = new Update;
@@ -236,7 +230,6 @@ private slots:
         b->setState(Update::State::StateFailed);
         b->setProgress(0);
         b->setAutomatic(false);
-        b->setDownloadId("downloadId_b");
         b->setError("error_b");
 
         QTest::newRow("Equality") << a << a << true;
@@ -264,21 +257,14 @@ private slots:
         a->setIdentifier("id_a");
         a->setRevision(1);
 
-        Update* a1 = new Update;
-        a1->setDownloadId("abc");
-
         Update* b = new Update;
         b->setIdentifier("id_b");
         b->setRevision(2);
 
-        Update* b1 = new Update;
-        b1->setDownloadId("xyz");
-
         QTest::newRow("Id/rev equality") << a << a << true;
-        QTest::newRow("Download id equality") << a1 << a1 << true;
 
         QTest::newRow("Id/rev inequality") << a << b << false;
-        QTest::newRow("Download id inequality") << a1 << b1 << false;
+        QTest::newRow("Id/rev inequality 2") << b << a << false;
     }
     void testShallowEquality()
     {

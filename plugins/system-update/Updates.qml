@@ -164,8 +164,7 @@ Item {
                 delegate: ClickUpdateDelegate {
                     objectName: "updatesClickUpdate" + index
                     anchors { left: clickUpdates.left; right: clickUpdates.right }
-                    downloader: downloadHandler
-                    updateModel: clickUpdatesModel
+                    // updateModel: clickUpdatesModel
                     // command: model.command
                     // packageName: identifier
                     // revision: model.revision
@@ -179,6 +178,13 @@ Item {
                     name: title
                     iconUrl: model.iconUrl
                     changelog: model.changelog
+
+                    onInstall: downloadHandler.createDownload(model)
+                    onDownload: downloadHandler.createDownload(model)
+
+                    onPause: downloadHandler.pauseDownload(model)
+                    onResume: downloadHandler.resumeDownload(model)
+
                     // onPause: {
                     //     console.warn('onPause', getDownload(model.downloadId));
                     //     try {

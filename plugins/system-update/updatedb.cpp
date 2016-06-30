@@ -18,6 +18,7 @@
 
 #include "systemupdate.h"
 #include "updatedb.h"
+#include "updatemodel.h"
 
 #include <QDir>
 #include <QSqlError>
@@ -32,13 +33,13 @@ namespace {
 const QString ALL = "kind, id, local_version, remote_version, revision, \
     installed, created_at_utc, updated_at_utc, title, download_hash, size, \
     icon_url, download_url, command, changelog, token, \
-    update_state, progress, automatic, download_id, error";
+    update_state, progress, automatic, error";
 
 const QString GET_SINGLE = "SELECT " + ALL + " FROM updates WHERE id=:id \
     AND revision=:revision";
 
 const QString GET_SINGLE_DOWNLOAD = "SELECT " + ALL + " FROM updates \
-    WHERE download_id=:did LIMIT 1";
+    WHERE id=:id AND revision=:revision";
 
 const QString GET_ALL = "SELECT " + ALL + " FROM updates";
 
@@ -188,150 +189,161 @@ void UpdateDb::remove(const QSharedPointer<Update> &update)
     Q_EMIT changed();
 }
 
-void UpdateDb::setInstalled(const QString &downloadId)
+void UpdateDb::setInstalled(const QString &id, const int &revision)
 {
     if (!openDb()) return;
 
     QSqlQuery q(m_db);
     q.prepare("UPDATE updates SET installed=:installed, update_state=:state, "
-              "updated_at_utc=:updated_at_utc, download_id='' "
-              "WHERE download_id=:did");
+              "updated_at_utc=:updated_at_utc "
+              "WHERE id=:id AND revision=:revision");
     q.bindValue(":installed", true);
     q.bindValue(":state", Update::stateToString(Update::State::StateInstallFinished));
     q.bindValue(":updated_at_utc",
                 QDateTime::currentDateTimeUtc().currentMSecsSinceEpoch());
-    q.bindValue(":did", downloadId);
+    q.bindValue(":id", id);
+    q.bindValue(":revision", revision);
 
     if (!q.exec()) {
-        qCritical() << "could not mark download" << downloadId
+        qCritical() << "could not mark download" << id << revision
                     << "as installed" << q.lastError().text();
     }
 
     Q_EMIT changed();
 }
 
-void UpdateDb::setStarted(const QString &downloadId)
+void UpdateDb::setStarted(const QString &id, const int &revision)
 {
-    setState(downloadId, Update::State::StateQueuedForDownload);
-    changed(downloadId);
+    setState(id, revision, Update::State::StateDownloading);
+    changed(id, revision);
 }
 
-void UpdateDb::setProcessing(const QString &downloadId)
+void UpdateDb::setQueued(const QString &id, const int &revision)
 {
-    setState(downloadId, Update::State::StateInstalling);
-    changed(downloadId);
+    setState(id, revision, Update::State::StateQueuedForDownload);
+    changed(id, revision);
 }
 
-void UpdateDb::setError(const QString &downloadId, const QString &msg)
+void UpdateDb::setProcessing(const QString &id, const int &revision)
+{
+    setState(id, revision, Update::State::StateInstalling);
+    changed(id, revision);
+}
+
+void UpdateDb::setError(const QString &id, const int &revision, const QString &msg)
 {
     if (!openDb()) return;
 
     QSqlQuery q(m_db);
     q.prepare("UPDATE updates SET error=:error, update_state=:state, "
-              "download_id='' WHERE download_id=:did");
+              "WHERE id=:id AND revision=:revision");
     q.bindValue(":error", msg);
     q.bindValue(":state", Update::stateToString(Update::State::StateFailed));
-    q.bindValue(":did", downloadId);
+    q.bindValue(":id", id);
+    q.bindValue(":revision", revision);
 
     if (!q.exec()) {
-        qCritical() << "could set error on " << downloadId
+        qCritical() << "could set error on " << id << revision
                     << q.lastError().text();
     }
 
-    changed(downloadId);
+    changed(id, revision);
 }
 
-void UpdateDb::setState(const QString &downloadId,
+void UpdateDb::setState(const QString &id, const int &revision,
                         const Update::State &state)
 {
     if (!openDb()) return;
 
     QSqlQuery q(m_db);
     q.prepare("UPDATE updates SET update_state=:state"
-              " WHERE download_id=:did");
+              " WHERE id=:id AND revision=:revision");
     q.bindValue(":state", Update::stateToString(state));
-    q.bindValue(":did", downloadId);
+    q.bindValue(":id", id);
+    q.bindValue(":revision", revision);
+
     if (!q.exec()) {
-        qCritical() << "could not change state on " << downloadId
+        qCritical() << "could not change state on " << id << revision
                     << q.lastError().text();
     }
 }
 
-void UpdateDb::setProgress(const QString &downloadId,
-                              const int &progress)
+void UpdateDb::setProgress(const QString &id, const int &revision,
+                           const int &progress)
 {
     if (!openDb()) return;
 
     QSqlQuery q(m_db);
     q.prepare("UPDATE updates SET progress=:progress, "
-              "update_state=:state WHERE download_id=:did");
+              "update_state=:state WHERE id=:id AND revision=:revision");
     q.bindValue(":progress", progress);
     q.bindValue(":state",
                 Update::stateToString(Update::State::StateDownloading));
-    q.bindValue(":did", downloadId);
-
-    if (!q.exec()) {
-        qCritical() << "could not set progress on " << downloadId
-                    << q.lastError().text();
-    }
-
-    changed(downloadId);
-}
-
-void UpdateDb::setDownloadId(const QString &id, const int &revision,
-                                const QString &downloadId)
-{
-    // qWarning() << Q_FUNC_INFO << id << revision << downloadId;
-    if (!openDb()) return;
-
-    QSqlQuery q(m_db);
-    q.prepare("UPDATE updates SET download_id=:did, error=''"
-              " WHERE id=:id AND revision=:revision");
-    q.bindValue(":did", downloadId);
     q.bindValue(":id", id);
     q.bindValue(":revision", revision);
 
     if (!q.exec()) {
-        qCritical() << "could not set download id on " << id << revision
-            << q.lastError().text();
+        qCritical() << "could not set progress on " << id << revision
+                    << q.lastError().text();
     }
 
-    changed(downloadId);
+    changed(id, revision);
 }
 
-void UpdateDb::setPaused(const QString &downloadId)
+// void UpdateDb::setDownloadId(const QString &id, const int &revision,
+//                                 const QString &downloadId)
+// {
+//     // qWarning() << Q_FUNC_INFO << id << revision << downloadId;
+//     if (!openDb()) return;
+
+//     QSqlQuery q(m_db);
+//     q.prepare("UPDATE updates SET download_id=:did, error=''"
+//               " WHERE id=:id AND revision=:revision");
+//     q.bindValue(":did", downloadId);
+//     q.bindValue(":id", id);
+//     q.bindValue(":revision", revision);
+
+//     if (!q.exec()) {
+//         qCritical() << "could not set download id on " << id << revision
+//             << q.lastError().text();
+//     }
+
+//     changed(downloadId);
+// }
+
+void UpdateDb::setPaused(const QString &id, const int &revision)
 {
-    setState(downloadId, Update::State::StateDownloadPaused);
-    changed(downloadId);
+    setState(id, revision, Update::State::StateDownloadPaused);
+    changed(id, revision);
 }
 
-void UpdateDb::setResumed(const QString &downloadId)
+void UpdateDb::setResumed(const QString &id, const int &revision)
 {
-    setState(downloadId, Update::State::StateDownloading);
-    changed(downloadId);
+    setState(id, revision, Update::State::StateDownloading);
+    changed(id, revision);
 }
 
-void UpdateDb::setCanceled(const QString &downloadId)
+void UpdateDb::setCanceled(const QString &id, const int &revision)
 {
     // FIXME: consolidate
-    setState(downloadId, Update::State::StateAvailable);
-    unsetDownloadId(downloadId);
-    changed(downloadId);
+    setState(id, revision, Update::State::StateAvailable);
+    // unsetDownloadId(downloadId);
+    changed(id, revision);
 }
 
 
-void UpdateDb::unsetDownloadId(const QString &downloadId)
-{
-    QSqlQuery q(m_db);
-    q.prepare("UPDATE updates SET download_id=null"
-              " WHERE download_id=:did");
-    q.bindValue(":did", downloadId);
+// void UpdateDb::unsetDownloadId(const QString &downloadId)
+// {
+//     QSqlQuery q(m_db);
+//     q.prepare("UPDATE updates SET download_id=null"
+//               " WHERE download_id=:did");
+//     q.bindValue(":did", downloadId);
 
-    if (!q.exec()) {
-        qCritical() << "could not unsetset download id on " << downloadId
-            << q.lastError().text();
-    }
-}
+//     if (!q.exec()) {
+//         qCritical() << "could not unsetset download id on " << downloadId
+//             << q.lastError().text();
+//     }
+// }
 
 bool UpdateDb::createDb()
 {
@@ -365,10 +377,9 @@ bool UpdateDb::createDb()
                 "update_state TEXT DEFAULT 'unknown',"
                 "progress INTEGER,"
                 "automatic INTEGER DEFAULT 0,"
-                "download_id TEXT,"
+                // "download_id TEXT,"
                 "error TEXT,"
                 "PRIMARY KEY (id, revision))");
-
     if (Q_UNLIKELY(!ok)) {
         m_db.rollback();
         return false;
@@ -429,9 +440,11 @@ void UpdateDb::setLastCheckDate(const QDateTime &lastCheckUtc)
     }
 }
 
-QList<QSharedPointer<Update> > UpdateDb::updates(const UpdateDb::Filter &filter)
+QList<QSharedPointer<Update> > UpdateDb::updates(const uint &filter)
 {
     QList<QSharedPointer<Update> > list;
+
+    UpdateModel::Filter eFilter = (UpdateModel::Filter) filter;
 
     if (!openDb()) {
         qWarning() << "could not open db";
@@ -439,38 +452,38 @@ QList<QSharedPointer<Update> > UpdateDb::updates(const UpdateDb::Filter &filter)
     }
 
     QSqlQuery q(m_db);
-    switch (filter) {
-    case Filter::All:
+    switch (eFilter) {
+    case UpdateModel::Filter::All:
         q.prepare(GET_ALL);
         break;
-    case Filter::Pending:
+    case UpdateModel::Filter::Pending:
         q.prepare(GET_PENDING);
         break;
-    case Filter::PendingReversed:
+    case UpdateModel::Filter::PendingReversed:
         q.prepare(GET_PENDING_REVERSED);
         break;
-    case Filter::PendingClicks:
+    case UpdateModel::Filter::PendingClicks:
         q.prepare(GET_PENDING_CLICK);
         q.bindValue(":kind", Update::kindToString(
             Update::Kind::KindClick)
         );
         break;
-    case Filter::PendingImage:
+    case UpdateModel::Filter::PendingImage:
         q.prepare(GET_PENDING_KIND);
         q.bindValue(":kind", Update::kindToString(
             Update::Kind::KindImage)
         );
         break;
-    case Filter::Installed:
+    case UpdateModel::Filter::Installed:
         q.prepare(GET_INSTALLED);
         break;
-    case Filter::InstalledClicks:
+    case UpdateModel::Filter::InstalledClicks:
         q.prepare(GET_INSTALLED_KIND);
         q.bindValue(":kind", Update::kindToString(
             Update::Kind::KindClick)
         );
         break;
-    case Filter::InstalledImage:
+    case UpdateModel::Filter::InstalledImage:
         q.prepare(GET_INSTALLED_KIND);
         q.bindValue(":kind", Update::kindToString(
             Update::Kind::KindImage)
@@ -492,14 +505,15 @@ QList<QSharedPointer<Update> > UpdateDb::updates(const UpdateDb::Filter &filter)
     return list;
 }
 
-QSharedPointer<Update> UpdateDb::get(const QString &downloadId)
+QSharedPointer<Update> UpdateDb::get(const QString &id, const int &revision)
 {
     QSharedPointer<Update> u = QSharedPointer<Update>(new Update);
     if (!openDb()) return u;
 
     QSqlQuery q(m_db);
     q.prepare(GET_SINGLE_DOWNLOAD);
-    q.bindValue(":did", downloadId);
+    q.bindValue(":id", id);
+    q.bindValue(":revision", revision);
 
     if (!q.exec()) {
         qCritical() << "could not get update" << q.lastError().text();

@@ -34,12 +34,25 @@ class UpdateModel : public QAbstractListModel
     Q_OBJECT
     /* Note: The filter is not declared in UpdateModel, so we can't use it
     from QML. We use an int instead. */
-    Q_PROPERTY(int filter
+    Q_PROPERTY(Filter filter
                READ filter
                WRITE setFilter
                NOTIFY filterChanged)
     Q_PROPERTY(int count READ count NOTIFY countChanged)
+    Q_ENUMS(Filter)
 public:
+    enum class Filter : uint
+    {
+        All,
+        Pending,
+        PendingReversed,
+        PendingClicks,
+        PendingImage,
+        InstalledClicks,
+        InstalledImage,
+        Installed
+    };
+
     enum Roles
     {
       KindRole = Qt::UserRole,
@@ -78,25 +91,26 @@ public:
     int count() const;
     int rowCount(const QModelIndex &parent = QModelIndex()) const;
 
-    int filter() const;
-    void setFilter(const int &filter);
+    Filter filter() const;
+    void setFilter(const Filter &filter);
 
-    Q_INVOKABLE void setInstalled(const QString &downloadId);
-    Q_INVOKABLE void setError(const QString &downloadId, const QString &msg);
-    Q_INVOKABLE void setProgress(const QString &downloadId,
+    Q_INVOKABLE void setInstalled(const QString &id, const int &revision);
+    Q_INVOKABLE void setError(const QString &id, const int &revision, const QString &msg);
+    Q_INVOKABLE void setProgress(const QString &id, const int &revision,
                      const int &progress);
-    Q_INVOKABLE void startUpdate(const QString &downloadId);
-    Q_INVOKABLE void processUpdate(const QString &downloadId);
-    Q_INVOKABLE void pauseUpdate(const QString &downloadId);
-    Q_INVOKABLE void resumeUpdate(const QString &downloadId);
-    Q_INVOKABLE void cancelUpdate(const QString &downloadId);
-    Q_INVOKABLE void setDownloadId(const QString &id, const int &revision,
-                       const QString &downloadId);
+    Q_INVOKABLE void startUpdate(const QString &id, const int &revision);
+    Q_INVOKABLE void queueUpdate(const QString &id, const int &revision);
+    Q_INVOKABLE void processUpdate(const QString &id, const int &revision);
+    Q_INVOKABLE void pauseUpdate(const QString &id, const int &revision);
+    Q_INVOKABLE void resumeUpdate(const QString &id, const int &revision);
+    Q_INVOKABLE void cancelUpdate(const QString &id, const int &revision);
+    // Q_INVOKABLE void setDownloadId(const QString &id, const int &revision,
+    //                    const QString &downloadId);
     // Q_INVOKABLE bool contains(const QString &downloadId) const;
 
 public slots:
     void refresh();
-    void refresh(const QString &downloadId);
+    void refresh(const QString &id, const int &revision);
     void clear();
 
 signals:
@@ -121,7 +135,7 @@ private:
     static int indexOf(const QList<QSharedPointer<Update> > &list,
                         const QSharedPointer<Update> &update);
     UpdateDb* m_db;
-    int m_filter;
+    Filter m_filter;
     QList<QSharedPointer<Update> > m_updates;
 };
 } // UpdatePlugin

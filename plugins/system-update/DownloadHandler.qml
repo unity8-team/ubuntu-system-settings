@@ -30,41 +30,79 @@ Item {
         cleanDownloads: false
         onDownloadFinished: {
             console.warn('udm onDownloadFinished', download.downloadId);
-            updateModel.setInstalled(download.downloadId)
+            updateModel.setInstalled(download.metadata.custom.identifier,
+                                     download.metadata.custom.revision);
         }
 
         onDownloadPaused: {
-            console.warn('udm onDownloadPaused', download.downloadId);
-            updateModel.pauseUpdate(download.downloadId)
+            console.warn('udm onDownloadPaused', download.downloadId,
+                         download.metadata.custom.identifier, download.metadata.custom.revision);
+            updateModel.pauseUpdate(download.metadata.custom.identifier,
+                                    download.metadata.custom.revision)
         }
 
         onDownloadResumed: {
-            console.warn('udm onDownloadResumed', download.downloadId);
-            updateModel.resumeUpdate(download.downloadId)
+            console.warn('udm onDownloadResumed', download.downloadId,
+                         download.metadata.custom.identifier, download.metadata.custom.revision);
+            updateModel.resumeUpdate(download.metadata.custom.identifier,
+                                     download.metadata.custom.revision)
         }
 
         onDownloadCanceled: {
-            console.warn('udm onDownloadCanceled', download.downloadId);
-            updateModel.cancelUpdate(download.downloadId)
+            console.warn('udm onDownloadCanceled', download.downloadId,
+                         download.metadata.custom.identifier, download.metadata.custom.revision);
+            updateModel.cancelUpdate(download.metadata.custom.identifier,
+                                     download.metadata.custom.revision)
         }
 
         onErrorFound: {
             console.warn('udm onErrorFound', download.downloadId, download.errorMessage);
-            updateModel.setError(download.downloadId, download.errorMessage)
+            updateModel.setError(download.metadata.custom.identifier,
+                                 download.metadata.custom.revision,
+                                 download.errorMessage)
         }
-        onDownloadsChanged: {
-            console.warn('udm udm downloads changed..');
-            for (var i = 0; i<downloads.length; i++) {
-                console.warn(downloads[i].downloadId, downloads[i].metadata.title);
-                if (!downloads[i]._bound) {
-                    downloads[i].progressChanged.connect(onDownloadProgress.bind(downloads[i]));
-                    downloads[i]._bound = true;
-                }
+        onDownloadsChanged: restoreDownloads()
+        Component.onCompleted: restoreDownloads()
+    }
+
+    function restoreDownloads() {
+        for (var i = 0; i<downloads.length; i++) {
+            console.warn(downloads[i].downloadId, downloads[i].metadata.title);
+            if (!downloads[i]._bound) {
+                downloads[i].progressChanged.connect(onDownloadProgress.bind(downloads[i]));
+                downloads[i]._bound = true;
             }
         }
-        Component.onCompleted: {
-            console.warn('downloads length', downloads.length);
+    }
+
+    function resumeDownload(click) {
+        var download = getDownloadFor(click);
+        if (download) {
+            console.warn('resuming', download.downloadId);
+            download.resume();
+        } else {
+            console.warn('resume failed');
         }
+    }
+
+    function pauseDownload(click) {
+        var download = getDownloadFor(click);
+        if (download) {
+            console.warn('pausing', download.downloadId);
+            download.pause();
+        } else {
+            console.warn('pause failed');
+        }
+    }
+
+    function getDownloadFor(click) {
+        var cust;
+        for (var i = 0; i<downloads.length; i++) {
+            cust = downloads[i].metadata.custom;
+            if (cust.identifier === click.identifier && cust.revision === click.revision)
+                return downloads[i];
+        }
+        return null;
     }
 
     function createDownload(click) {
@@ -84,10 +122,10 @@ Item {
             "X-Click-Token": click.token
         };
         var metadataObj = mdt.createObject(root, metadata);
-        // metadataObj.custom = {
-        //     "identifier": click.identifier,
-        //     "revision": click.revision
-        // };
+        metadataObj.custom = {
+            "identifier": click.identifier,
+            "revision": click.revision
+        };
         var singleDownloadObj = sdl.createObject(root, {
             // "url": click.downloadUrl,
             "autoStart": true,
@@ -103,8 +141,11 @@ Item {
     }
 
     function onDownloadProgress (progress) {
-        console.warn('dyno binding', this.downloadId, this.progress)
-        updateModel.setProgress(this.downloadId, this.progress);
+        console.warn('dyno binding', this.downloadId, this.progress,
+                     this.metadata.custom.identifier, this.metadata.custom.revision)
+        updateModel.setProgress(this.metadata.custom.identifier,
+                                this.metadata.custom.revision,
+                                this.progress);
     }
 
     Component {
@@ -112,31 +153,37 @@ Item {
 
         SingleDownload {
             property bool _bound: true
-            property var identifier
-            property var revision
 
             onDownloadIdChanged: {
 
                 console.warn('downloid changed', downloadId);
 
-                if (downloadId && identifier && (typeof revision !== "undefined")) {
-                    updateModel.setDownloadId(identifier, revision, downloadId);
-                    updateModel.startUpdate(downloadId);
-                }
+                // var identifier = download.metadata.custom.identifier;
+                // var revision = download.metadata.custom.revision;
+
+                // if (downloadId && identifier && (typeof revision !== "undefined")) {
+                //     // updateModel.setDownloadId(identifier, revision);
+                //     updateModel.startUpdate(identifier, revision);
+                // }
+                updateModel.queueUpdate(metadata.custom.identifier,
+                                      metadata.custom.revision);
             }
             onProgressChanged: {
-                console.warn('onProgressChanged', progress);
-                updateModel.setProgress(downloadId, progress);
+                console.warn('onProgressChanged', metadata.custom.identifier, metadata.custom.revision, progress);
+                updateModel.setProgress(metadata.custom.identifier,
+                                        metadata.custom.revision,
+                                        progress);
             }
             onStarted: {
-                console.warn('onStarted');
+                console.warn('onStarted', metadata.custom.identifier, metadata.custom.revision);
 
-                updateModel.startUpdate(downloadId);
+                updateModel.startUpdate(metadata.custom.identifier,
+                                        metadata.custom.revision);
             }
             onProcessing: {
                 console.warn('onProcessing');
-
-                updateModel.processUpdate(downloadId);
+                updateModel.processUpdate(metadata.custom.identifier,
+                                          metadata.custom.revision);
             }
         }
     }

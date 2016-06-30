@@ -43,13 +43,13 @@ public:
 
     UpdateDb* db();
 
-public slots:
-    void notifyDbChanged();
-    void notifyDbChanged(const QString &downloadId);
+// public slots:
+//     void notifyDbChanged();
+//     void notifyDbChanged(const QString &id, const int &revision);
 
-signals:
-    void dbChanged();
-    void dbChanged(const QString &downloadId);
+// signals:
+//     void dbChanged();
+//     void dbChanged(const QString &id, const int &revision);
 
 protected:
     explicit SystemUpdate(QObject *parent = 0);

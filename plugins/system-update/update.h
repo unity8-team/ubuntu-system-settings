@@ -55,8 +55,6 @@ class Update : public QObject
             WRITE setUpdatedAt NOTIFY updatedAtChanged)
     Q_PROPERTY(QStringList department READ department
             WRITE setDepartment NOTIFY departmentChanged)
-    Q_PROPERTY(QString downloadId READ downloadId
-            WRITE setDownloadId NOTIFY downloadIdChanged)
     Q_PROPERTY(QString downloadHash READ downloadHash
             WRITE setDownloadHash NOTIFY downloadHashChanged)
     Q_PROPERTY(QString downloadUrl READ downloadUrl
@@ -133,7 +131,6 @@ public:
     QDateTime createdAt() const;
     QDateTime updatedAt() const;
     QStringList department() const;
-    QString downloadId() const;
     QString downloadHash() const;
     QString downloadUrl() const;
     QString error() const;
@@ -160,7 +157,6 @@ public:
     void setCreatedAt(const QDateTime &createdAt);
     void setUpdatedAt(const QDateTime &updatedAt);
     void setDepartment(const QStringList &department);
-    void setDownloadId(const QString &downloadId);
     void setDownloadHash(const QString &downloadHash);
     void setDownloadUrl(const QString &downloadUrl);
     void setError(const QString &error);
@@ -203,7 +199,6 @@ signals:
     void installedChanged();
     void updatedAtChanged();
     void departmentChanged();
-    void downloadIdChanged();
     void downloadHashChanged();
     void downloadUrlChanged();
     void errorChanged();
@@ -231,7 +226,6 @@ protected:
     QDateTime m_createdAt;
     QDateTime m_updatedAt;
     QStringList m_department;
-    QString m_downloadId;
     QString m_downloadHash;
     QString m_downloadUrl;
     QString m_error;

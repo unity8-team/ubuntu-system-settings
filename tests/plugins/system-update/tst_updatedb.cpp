@@ -32,7 +32,7 @@
 using namespace UpdatePlugin;
 
 Q_DECLARE_METATYPE(QSharedPointer<Update>)
-Q_DECLARE_METATYPE(UpdateDb::Filter)
+Q_DECLARE_METATYPE(UpdateModel::Filter)
 
 class TstUpdateDb : public QObject
 {
@@ -62,7 +62,7 @@ private slots:
     }
     void testNoUpdates()
     {
-        auto list = m_instance->updates(UpdateDb::Filter::All);
+        auto list = m_instance->updates((uint) UpdateModel::Filter::All);
         QCOMPARE(list.size(), 0);
     }
     void testAddUpdate()
@@ -87,7 +87,7 @@ private slots:
         m_instance->remove(m);
         QTRY_COMPARE(changedSpy.count(), 2);
 
-        auto list = m_instance->updates(UpdateDb::Filter::All);
+        auto list = m_instance->updates((uint) UpdateModel::Filter::All);
         QCOMPARE(list.size(), 0);
 
     }
@@ -97,7 +97,7 @@ private slots:
         QTest::addColumn<QSharedPointer<Update> >("b");
         QTest::addColumn<QSharedPointer<Update> >("c");
         QTest::addColumn<QSharedPointer<Update> >("d");
-        QTest::addColumn<UpdateDb::Filter>("filter");
+        QTest::addColumn<UpdateModel::Filter>("filter");
         QTest::addColumn<QStringList>("ids");
 
         QSharedPointer<Update> a = createUpdate();
@@ -119,25 +119,25 @@ private slots:
         d->setKind(Update::Kind::KindImage);
 
         QStringList all; all << "a" << "b" << "c" << "d";
-        QTest::newRow("All") << a << b << c << d << UpdateDb::Filter::All << all;
+        QTest::newRow("All") << a << b << c << d << UpdateModel::Filter::All << all;
 
         QStringList pending; pending << "a" << "b";
-        QTest::newRow("Pending") << a << b << c << d << UpdateDb::Filter::Pending << pending;
+        QTest::newRow("Pending") << a << b << c << d << UpdateModel::Filter::Pending << pending;
 
         QStringList pendingClicks; pendingClicks << "a";
-        QTest::newRow("PendingClicks") << a << b << c << d << UpdateDb::Filter::PendingClicks << pendingClicks;
+        QTest::newRow("PendingClicks") << a << b << c << d << UpdateModel::Filter::PendingClicks << pendingClicks;
 
         QStringList pendingImage; pendingImage << "b";
-        QTest::newRow("PendingImage") << a << b << c << d << UpdateDb::Filter::PendingImage << pendingImage;
+        QTest::newRow("PendingImage") << a << b << c << d << UpdateModel::Filter::PendingImage << pendingImage;
 
         QStringList installedClicks; installedClicks << "c";
-        QTest::newRow("InstalledClicks") << a << b << c << d << UpdateDb::Filter::InstalledClicks << installedClicks;
+        QTest::newRow("InstalledClicks") << a << b << c << d << UpdateModel::Filter::InstalledClicks << installedClicks;
 
         QStringList installedImage; installedImage << "d";
-        QTest::newRow("InstalledImage") << a << b << c << d << UpdateDb::Filter::InstalledImage << installedImage;
+        QTest::newRow("InstalledImage") << a << b << c << d << UpdateModel::Filter::InstalledImage << installedImage;
 
         QStringList installed; installed << "c" << "d";
-        QTest::newRow("Installed") << a << b << c << d << UpdateDb::Filter::Installed << installed;
+        QTest::newRow("Installed") << a << b << c << d << UpdateModel::Filter::Installed << installed;
     }
     void testFilters()
     {
@@ -145,7 +145,7 @@ private slots:
         QFETCH(QSharedPointer<Update>, b);
         QFETCH(QSharedPointer<Update>, c);
         QFETCH(QSharedPointer<Update>, d);
-        QFETCH(UpdateDb::Filter, filter);
+        QFETCH(UpdateModel::Filter, filter);
         QFETCH(QStringList, ids);
 
         m_instance->add(a);
@@ -153,7 +153,7 @@ private slots:
         m_instance->add(c);
         m_instance->add(d);
 
-        QList<QSharedPointer<Update> > updates = m_instance->updates(filter);
+        QList<QSharedPointer<Update> > updates = m_instance->updates((uint) filter);
 
         QStringList actualIds;
         for (int i = 0; i < updates.size(); i++) {
@@ -225,7 +225,7 @@ private slots:
         m_instance->add(replacement);
 
         // We only want the replacement in our db of pending updates.
-        QList<QSharedPointer<Update> > list = m_instance->updates(UpdateDb::Filter::PendingClicks);
+        QList<QSharedPointer<Update> > list = m_instance->updates((uint) UpdateModel::Filter::PendingClicks);
         QCOMPARE(list.count(), 1);
     }
     // void testRoles()

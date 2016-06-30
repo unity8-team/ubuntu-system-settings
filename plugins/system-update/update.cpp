@@ -37,7 +37,6 @@ Update::Update(QObject *parent)
     , m_createdAt()
     , m_updatedAt()
     , m_department()
-    , m_downloadId("")
     , m_downloadHash("")
     , m_downloadUrl("")
     , m_error("")
@@ -109,11 +108,6 @@ QDateTime Update::updatedAt() const
 QStringList Update::department() const
 {
     return m_department;
-}
-
-QString Update::downloadId() const
-{
-    return m_downloadId;
 }
 
 QString Update::downloadHash() const
@@ -255,14 +249,6 @@ void Update::setDepartment(const QStringList &department)
     if (m_department != department) {
         m_department = department;
         Q_EMIT departmentChanged();
-    }
-}
-
-void Update::setDownloadId(const QString &downloadId)
-{
-    if (m_downloadId != downloadId) {
-        m_downloadId = downloadId;
-        Q_EMIT downloadIdChanged();
     }
 }
 
@@ -435,15 +421,12 @@ void Update::setValues(const QSqlQuery *query)
     ));
     setProgress(query->value("progress").toInt());
     setAutomatic(query->value("automatic").toBool());
-    setDownloadId(query->value("download_id").toString());
     setError(query->value("error").toString());
 }
 
 bool Update::operator==(const Update *other) const
 {
     if (other->identifier() == identifier() && other->revision() == revision())
-        return true;
-    else if (!downloadId().isEmpty() && (other->downloadId() == downloadId()))
         return true;
     else
         return false;
@@ -460,7 +443,6 @@ bool Update::deepEquals(const Update *other) const
     if (createdAt() != other->createdAt()) return false;
     if (updatedAt() != other->updatedAt()) return false;
     if (title() != other->title()) return false;
-    if (downloadId() != other->downloadId()) return false;
     if (downloadHash() != other->downloadHash()) return false;
     if (downloadUrl() != other->downloadUrl()) return false;
     if (binaryFilesize() != other->binaryFilesize()) return false;
