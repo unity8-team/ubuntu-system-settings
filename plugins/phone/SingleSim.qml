@@ -17,17 +17,15 @@
  * Ken Vandine <ken.vandine@canonical.com>
  * Jonas G. Drange <jonas.drange@canonical.com>
  *
-*/
+ */
 import QtQuick 2.4
 import SystemSettings.ListItems 1.0 as SettingsListItems
 import Ubuntu.Components 1.3
 
 Column {
-
     property var sim
     property string carrierName: sim.netReg.name
     property string carrierString: carrierName ? carrierName : i18n.tr("SIM")
-
 
     SettingsListItems.StandardProgression {
         objectName: "callWait"

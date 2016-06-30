@@ -96,7 +96,7 @@ Column {
         State {
             name: "failed"
             when: d._failed
-            PropertyChanges { target: control; enabled: false; control: check }
+            PropertyChanges { target: control; enabled: false }
             PropertyChanges { target: check; checked: false }
             PropertyChanges { target: failed; visible: true }
             PropertyChanges { target: activity; visible: false }
@@ -111,14 +111,12 @@ Column {
         State {
             name: "requesting"
             when: d._editing && d._pending
-            PropertyChanges { target: control; control: activity }
             PropertyChanges { target: check; enabled: false; visible: false }
             PropertyChanges { target: current; enabled: false; visible: true }
         },
         State {
             name: "pending"
             when: d._pending
-            PropertyChanges { target: control; control: activity }
             PropertyChanges { target: check; enabled: false; visible: false }
             PropertyChanges { target: current; enabled: false; visible: false }
         },
@@ -148,6 +146,14 @@ Column {
             checked: callForwarding[rule] !== ""
             onTriggered: Utils.checked(checked)
             visible: !activity.running
+            SlotsLayout.position: SlotsLayout.Trailing
+
+            ActivityIndicator {
+                id: activity
+                anchors.centerIn: parent
+                running: d._pending
+                visible: running
+            }
         }
     }
 
@@ -218,12 +224,6 @@ Column {
         verticalAlignment: Text.AlignVCenter
         color: theme.palette.normal.negative
         text: i18n.tr("Call forwarding can’t be changed right now.")
-    }
-
-    ActivityIndicator {
-        id: activity
-        running: d._pending
-        visible: running
     }
 
     Connections {

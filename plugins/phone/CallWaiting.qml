@@ -73,14 +73,13 @@ ItemPage {
                     else
                         callSettings.voiceCallWaiting = "disabled";
                 }
+                ActivityIndicator {
+                    id: callWaitingIndicator
+                    anchors.centerIn: parent
+                    running: callWaitingIndicator.running
+                    visible: running && attached
+                }
             }
-
-            ActivityIndicator {
-                id: callWaitingIndicator
-                running: callWaitingIndicator.running
-                visible: running && attached
-            }
-
         }
 
         ListItems.Caption {

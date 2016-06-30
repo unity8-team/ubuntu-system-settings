@@ -289,8 +289,6 @@ ItemPage {
     Component {
         id: apnDelegate
 
-
-
         SettingsListItems.StandardProgression {
             id: apnListItem
             text: qml.name
