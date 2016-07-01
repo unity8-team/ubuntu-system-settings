@@ -40,7 +40,6 @@ Column {
 
     SettingsItemTitle {
         text: i18n.tr("Primary button:")
-        showDivider: false
     }
 
     ListItem.Empty {
