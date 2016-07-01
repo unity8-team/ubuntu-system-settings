@@ -242,7 +242,7 @@ Item {
 
             case Update.StateInstallPaused:
             case Update.StateDownloaded:
-                if (kind === Update.KindSystem) {
+                if (kind === Update.KindImage) {
                     return i18n.tr("Install…");
                 } else {
                     return i18n.tr("Install");

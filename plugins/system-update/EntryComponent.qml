@@ -21,6 +21,7 @@
 import QtQuick 2.4
 import Ubuntu.Components 1.3
 import Ubuntu.Components.ListItems 1.3 as ListItem
+import Ubuntu.DownloadManager 1.2
 import Ubuntu.SystemSettings.Update 1.0
 
 ListItem.SingleValue {
@@ -40,6 +41,17 @@ ListItem.SingleValue {
     UpdateModel {
         id: updates
         filter: UpdateModel.Pending
+    }
+
+    DownloadManager {
+        onDownloadFinished: {
+            updates.setInstalled(download.metadata.custom.identifier,
+                                 download.metadata.custom.revision);
+        }
+    }
+
+    SystemImageHandler {
+        updateModel: updates
     }
 
     Behavior on height { UbuntuNumberAnimation {} }

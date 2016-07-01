@@ -24,6 +24,7 @@
 using namespace UpdatePlugin;
 
 Q_DECLARE_METATYPE(Update::Kind)
+Q_DECLARE_METATYPE(Update::State)
 
 class TstUpdate
     : public QObject
@@ -46,8 +47,6 @@ private slots:
     }
     void testProperties()
     {
-        QStringList depts; depts << "foo" << "bar";
-
         QSignalSpy kindSpy(m_instance, SIGNAL(kindChanged()));
         m_instance->setKind(Update::Kind::KindClick);
         QCOMPARE(kindSpy.count(), 1);
@@ -58,15 +57,11 @@ private slots:
         QCOMPARE(identifierSpy.count(), 1);
         QCOMPARE(m_instance->identifier(), QString("identifier"));
 
-        QSignalSpy anonDownloadUrlSpy(m_instance, SIGNAL(anonDownloadUrlChanged()));
-        m_instance->setAnonDownloadUrl("anonDownloadUrl");
-        QCOMPARE(anonDownloadUrlSpy.count(), 1);
-        QCOMPARE(m_instance->anonDownloadUrl(), QString("anonDownloadUrl"));
-
         QSignalSpy binaryFilesizeSpy(m_instance, SIGNAL(binaryFilesizeChanged()));
-        m_instance->setBinaryFilesize(1000);
+        uint size = 1000;
+        m_instance->setBinaryFilesize(size);
         QCOMPARE(binaryFilesizeSpy.count(), 1);
-        QCOMPARE(m_instance->binaryFilesize(), (uint) 1000);
+        QCOMPARE(m_instance->binaryFilesize(), size);
 
         QSignalSpy changelogSpy(m_instance, SIGNAL(changelogChanged()));
         m_instance->setChangelog("changelog");
@@ -77,16 +72,6 @@ private slots:
         m_instance->setChannel("channel");
         QCOMPARE(channelSpy.count(), 1);
         QCOMPARE(m_instance->channel(), QString("channel"));
-
-        QSignalSpy contentSpy(m_instance, SIGNAL(contentChanged()));
-        m_instance->setContent("content");
-        QCOMPARE(contentSpy.count(), 1);
-        QCOMPARE(m_instance->content(), QString("content"));
-
-        QSignalSpy departmentSpy(m_instance, SIGNAL(departmentChanged()));
-        m_instance->setDepartment(depts);
-        QCOMPARE(departmentSpy.count(), 1);
-        QCOMPARE(m_instance->department(), depts);
 
         QSignalSpy downloadHash(m_instance, SIGNAL(downloadHashChanged()));
         m_instance->setDownloadHash("downloadHash");
@@ -108,11 +93,6 @@ private slots:
         QCOMPARE(installedSpy.count(), 1);
         QCOMPARE(m_instance->installed(), true);
 
-        QSignalSpy originSpy(m_instance, SIGNAL(originChanged()));
-        m_instance->setOrigin("origin");
-        QCOMPARE(originSpy.count(), 1);
-        QCOMPARE(m_instance->origin(), QString("origin"));
-
         QDateTime createdAt(QDate(2016, 2, 29), QTime(18, 0), Qt::UTC);
         QSignalSpy createdAtSpy(m_instance, SIGNAL(createdAtChanged()));
         m_instance->setCreatedAt(createdAt);
@@ -126,9 +106,10 @@ private slots:
         QCOMPARE(m_instance->updatedAt(), updatedAt);
 
         QSignalSpy revisionSpy(m_instance, SIGNAL(revisionChanged()));
-        m_instance->setRevision(10);
+        uint rev = 10;
+        m_instance->setRevision(rev);
         QCOMPARE(revisionSpy.count(), 1);
-        QCOMPARE(m_instance->revision(), 10);
+        QCOMPARE(m_instance->revision(), rev);
 
         QSignalSpy stateSpy(m_instance, SIGNAL(stateChanged()));
         m_instance->setState(Update::State::StateFailed);
@@ -272,11 +253,50 @@ private slots:
         QFETCH(Update*, b);
         QFETCH(bool, equals);
 
-        QCOMPARE(a == b, equals);
-        QCOMPARE(b == a, equals);
+        QCOMPARE(*a == *b, equals);
+        QCOMPARE(*b == *a, equals);
 
         a->deleteLater();
         b->deleteLater();
+    }
+    void testStateEnums_data()
+    {
+        QTest::addColumn<Update::State>("state");
+        QTest::newRow("StateUnknown") << Update::State::StateUnknown;
+        QTest::newRow("StateAvailable") << Update::State::StateAvailable;
+        QTest::newRow("StateUnavailable") << Update::State::StateUnavailable;
+        QTest::newRow("StateQueuedForDownload") << Update::State::StateQueuedForDownload;
+        QTest::newRow("StateDownloading") << Update::State::StateDownloading;
+        QTest::newRow("StateDownloadingAutomatically") << Update::State::StateDownloadingAutomatically;
+        QTest::newRow("StateDownloadPaused") << Update::State::StateDownloadPaused;
+        QTest::newRow("StateAutomaticDownloadPaused") << Update::State::StateAutomaticDownloadPaused;
+        QTest::newRow("StateInstalling") << Update::State::StateInstalling;
+        QTest::newRow("StateInstallingAutomatically") << Update::State::StateInstallingAutomatically;
+        QTest::newRow("StateInstallPaused") << Update::State::StateInstallPaused;
+        QTest::newRow("StateInstallFinished") << Update::State::StateInstallFinished;
+        QTest::newRow("StateInstalled") << Update::State::StateInstalled;
+        QTest::newRow("StateDownloaded") << Update::State::StateDownloaded;
+        QTest::newRow("StateFailed") << Update::State::StateFailed;
+    }
+    void testStateEnums()
+    {
+        QFETCH(Update::State, state);
+        QString state_s = Update::stateToString(state);
+        QCOMPARE(Update::stringToState(state_s), state);
+    }
+    void testKindEnums_data()
+    {
+        QTest::addColumn<Update::Kind>("kind");
+        QTest::newRow("KindUnknown") << Update::Kind::KindUnknown;
+        QTest::newRow("KindClick") << Update::Kind::KindClick;
+        QTest::newRow("KindImage") << Update::Kind::KindImage;
+        QTest::newRow("KindAll") << Update::Kind::KindAll;
+    }
+    void testKindEnums()
+    {
+        QFETCH(Update::Kind, kind);
+        QString kind_s = Update::kindToString(kind);
+        QCOMPARE(Update::stringToKind(kind_s), kind);
     }
 private:
     Update *m_instance;

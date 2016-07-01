@@ -8,6 +8,7 @@ set(QML_SOURCES
     ImageUpdatePrompt.qml
     NotAuthenticatedNotification.qml
     PageComponent.qml
+    SystemImageHandler.qml
     Updates.qml
     UpdateDelegate.qml
 )
@@ -54,7 +55,7 @@ install(FILES ${QML_SOURCES} DESTINATION ${PLUGIN_QML_DIR}/system-update)
 install(FILES system-update.settings DESTINATION ${PLUGIN_MANIFEST_DIR})
 install(FILES images/settings-system-update.svg DESTINATION ${PLUGIN_MANIFEST_DIR}/icons)
 
-set(QML_SOURCES_NOTIFICATION EntryComponent.qml)
+set(QML_SOURCES_NOTIFICATION EntryComponent.qml SystemImageHandler.qml)
 
 # We need a dummy target so the QML files show up in Qt Creator
 # If this plugin gets some C++ sources, remove this.

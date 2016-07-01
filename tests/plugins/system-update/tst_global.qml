@@ -56,111 +56,300 @@ Item {
 
 
     SignalSpy {
-        id: installSignalSpy
-        signalName: "install"
+        id: requestInstallSpy
+        signalName: "requestInstall"
+    }
+
+    SignalSpy {
+        id: resumeSignalSpy
+        signalName: "resume"
     }
 
     UbuntuTestCase {
         name: "GlobalTest"
         when: windowShown
 
-        property var cGlob: null
+        property var instance: null
 
         function init () {
-            cGlob = glob.createObject(testRoot, {});
+            instance = glob.createObject(testRoot, {});
 
-            stopSignalSpy.target = cGlob;
-            pauseSignalSpy.target = cGlob;
-            installSignalSpy.target = cGlob;
+            stopSignalSpy.target = instance;
+            pauseSignalSpy.target = instance;
+            requestInstallSpy.target = instance;
+            resumeSignalSpy.target = instance;
         }
 
         function cleanup () {
             stopSignalSpy.clear();
             pauseSignalSpy.clear();
-            installSignalSpy.clear();
+            requestInstallSpy.clear();
+            resumeSignalSpy.clear();
 
-            cGlob.destroy();
-            cGlob = null;
+            instance.destroy();
+            instance = null;
         }
 
         function test_checkInProgress() {
-            cGlob.updatesCount = 2;
-            cGlob.online = true;
-            cGlob.status = SystemUpdate.StatusCheckingAllUpdates;
+            instance.updatesCount = 2;
+            instance.online = true;
+            instance.status = SystemUpdate.StatusCheckingAllUpdates;
 
-            compare(cGlob.hidden, false, "global was not visible");
+            compare(instance.hidden, false, "global was not visible");
         }
 
         function test_stop() {
-            cGlob.updatesCount = 2;
-            cGlob.online = true;
-            cGlob.status = SystemUpdate.StatusCheckingAllUpdates;
+            instance.updatesCount = 2;
+            instance.online = true;
+            instance.status = SystemUpdate.StatusCheckingAllUpdates;
 
-            var stop = findChild(cGlob, "updatesGlobalStopButton");
+            var stop = findChild(instance, "updatesGlobalStopButton");
             compare(stop.visible, true);
             mouseClick(stop, stop.width / 2, stop.height / 2);
             stopSignalSpy.wait();
         }
 
         function test_checkIdle() {
-            cGlob.updatesCount = 2;
-            cGlob.online = true;
-            cGlob.status = SystemUpdate.StatusIdle;
+            instance.updatesCount = 2;
+            instance.online = true;
+            instance.status = SystemUpdate.StatusIdle;
 
-            compare(cGlob.hidden, false, "global was not visible");
+            compare(instance.hidden, false, "global was not visible");
         }
 
         function test_installApps() {
-            cGlob.updatesCount = 2;
-            cGlob.online = true;
-            cGlob.status = SystemUpdate.StatusIdle;
+            instance.updatesCount = 2;
+            instance.online = true;
+            instance.status = SystemUpdate.StatusIdle;
 
-            var install = findChild(cGlob, "updatesGlobalInstallButton");
+            var install = findChild(instance, "updatesGlobalInstallButton");
             compare(install.visible, true);
             compare(install.text, i18n.tr("Install %1 update", "Install %1 updates", 2).arg(2));
-            tryCompare
             mouseClick(install, install.width / 2, install.height / 2);
-            installSignalSpy.wait();
+            requestInstallSpy.wait();
         }
 
         function test_installWithRestart() {
-            cGlob.updatesCount = 2;
-            cGlob.online = true;
-            cGlob.status = SystemUpdate.StatusIdle;
-            cGlob.requireRestart = true;
+            instance.updatesCount = 2;
+            instance.online = true;
+            instance.status = SystemUpdate.StatusIdle;
+            instance.requireRestart = true;
 
-            var install = findChild(cGlob, "updatesGlobalInstallButton");
+            var install = findChild(instance, "updatesGlobalInstallButton");
             compare(install.visible, true);
             compare(install.text, i18n.tr("Install %1 update…", "Install %1 updates…", 2).arg(2));
             mouseClick(install, install.width / 2, install.height / 2);
-            installSignalSpy.wait();
+            requestInstallSpy.wait();
         }
 
         function test_singleUpdate() {
-            cGlob.updatesCount = 1;
-            cGlob.online = true;
-            cGlob.status = SystemUpdate.StatusIdle;
+            instance.updatesCount = 1;
+            instance.online = true;
+            instance.status = SystemUpdate.StatusIdle;
 
-            compare(cGlob.hidden, true, "global was visible for single update");
+            compare(instance.hidden, true, "global was visible for single update");
         }
 
         function test_batchMode() {
-            cGlob.updatesCount = 2;
-            cGlob.online = true;
-            cGlob.status = SystemUpdate.StatusBatchMode;
+            instance.updatesCount = 2;
+            instance.online = true;
+            instance.status = SystemUpdate.StatusBatchMode;
 
-            compare(cGlob.hidden, false, "global was hidden in batchmode");
+            compare(instance.hidden, false, "global was hidden in batchmode");
         }
 
         function test_pause() {
-            cGlob.updatesCount = 2;
-            cGlob.online = true;
-            cGlob.status = SystemUpdate.StatusBatchMode;
+            instance.updatesCount = 2;
+            instance.online = true;
+            instance.status = SystemUpdate.StatusBatchMode;
 
-            var pause = findChild(cGlob, "updatesGlobalPauseButton");
+            var pause = findChild(instance, "updatesGlobalPauseButton");
             compare(pause.visible, true);
             mouseClick(pause, pause.width / 2, pause.height / 2);
             pauseSignalSpy.wait();
+        }
+
+        function test_resume() {
+            instance.updatesCount = 2;
+            instance.online = true;
+            instance.status = SystemUpdate.StatusBatchModePaused;
+
+            var resume = findChild(instance, "updatesGlobalResumeButton");
+            compare(resume.visible, true);
+            mouseClick(resume, resume.width / 2, resume.height / 2);
+            resumeSignalSpy.wait();
+        }
+
+        function test_visibility_data() {
+            return [
+                {
+                    tag: "idle",
+                    status: SystemUpdate.StatusIdle, online: true, updatesCount: 0, hidden: true
+                },
+                {
+                    tag: "idle, no network",
+                    status: SystemUpdate.StatusIdle, online: false, updatesCount: 0, hidden: true
+                },
+                {
+                    tag: "idle, one update",
+                    status: SystemUpdate.StatusIdle, online: true, updatesCount: 1, hidden: true
+                },
+                {
+                    tag: "idle, two updates",
+                    status: SystemUpdate.StatusIdle, online: true, updatesCount: 2, hidden: false
+                },
+                {
+                    tag: "idle, two updates, no network",
+                    status: SystemUpdate.StatusIdle, online: false, updatesCount: 2, hidden: true
+                },
+                {
+                    tag: "checking clicks, no network, no updates",
+                    status: SystemUpdate.StatusCheckingClickUpdates, online: false, updatesCount: 0, hidden: true
+                },
+                {
+                    tag: "checking clicks, no network, updates",
+                    status: SystemUpdate.StatusCheckingClickUpdates, online: false, updatesCount: 2, hidden: true
+                },
+                {
+                    tag: "checking clicks, network, no updates",
+                    status: SystemUpdate.StatusCheckingClickUpdates, online: true, updatesCount: 0, hidden: false
+                },
+                {
+                    tag: "checking clicks, network, one update",
+                    status: SystemUpdate.StatusCheckingClickUpdates, online: true, updatesCount: 1, hidden: false
+                },
+                {
+                    tag: "checking clicks, network, updates",
+                    status: SystemUpdate.StatusCheckingClickUpdates, online: true, updatesCount: 2, hidden: false
+                },
+                {
+                    tag: "checking image, no network, no updates",
+                    status: SystemUpdate.StatusCheckingSystemUpdates, online: false, updatesCount: 0, hidden: true
+                },
+                {
+                    tag: "checking image, no network, updates",
+                    status: SystemUpdate.StatusCheckingSystemUpdates, online: false, updatesCount: 2, hidden: true
+                },
+                {
+                    tag: "checking image, network, no updates",
+                    status: SystemUpdate.StatusCheckingSystemUpdates, online: true, updatesCount: 0, hidden: false
+                },
+                {
+                    tag: "checking image, network, one update",
+                    status: SystemUpdate.StatusCheckingSystemUpdates, online: true, updatesCount: 1, hidden: false
+                },
+                {
+                    tag: "checking image, network, updates",
+                    status: SystemUpdate.StatusCheckingSystemUpdates, online: true, updatesCount: 2, hidden: false
+                },
+                {
+                    tag: "checking all, no network, no updates",
+                    status: SystemUpdate.StatusCheckingAllUpdates, online: false, updatesCount: 0, hidden: true
+                },
+                {
+                    tag: "checking all, no network, updates",
+                    status: SystemUpdate.StatusCheckingAllUpdates, online: false, updatesCount: 2, hidden: true
+                },
+                {
+                    tag: "checking all, network, no updates",
+                    status: SystemUpdate.StatusCheckingAllUpdates, online: true, updatesCount: 0, hidden: false
+                },
+                {
+                    tag: "checking all, network, one update",
+                    status: SystemUpdate.StatusCheckingAllUpdates, online: true, updatesCount: 1, hidden: false
+                },
+                {
+                    tag: "checking all, network, updates",
+                    status: SystemUpdate.StatusCheckingAllUpdates, online: true, updatesCount: 2, hidden: false
+                },
+                {
+                    tag: "batch mode, no network, no updates",
+                    status: SystemUpdate.StatusBatchMode, online: false, updatesCount: 0, hidden: true
+                },
+                {
+                    tag: "batch mode, no network, updates",
+                    status: SystemUpdate.StatusBatchMode, online: false, updatesCount: 2, hidden: true
+                },
+                {
+                    tag: "batch mode, network, no updates",
+                    status: SystemUpdate.StatusBatchMode, online: true, updatesCount: 0, hidden: false
+                },
+                {
+                    tag: "batch mode, network, one update",
+                    status: SystemUpdate.StatusBatchMode, online: true, updatesCount: 1, hidden: false
+                },
+                {
+                    tag: "batch mode, network, updates",
+                    status: SystemUpdate.StatusBatchMode, online: true, updatesCount: 2, hidden: false
+                },
+                {
+                    tag: "batch mode (paused), no network, no updates",
+                    status: SystemUpdate.StatusBatchModePaused, online: false, updatesCount: 0, hidden: true
+                },
+                {
+                    tag: "batch mode (paused), no network, updates",
+                    status: SystemUpdate.StatusBatchModePaused, online: false, updatesCount: 2, hidden: true
+                },
+                {
+                    tag: "batch mode (paused), network, no updates",
+                    status: SystemUpdate.StatusBatchModePaused, online: true, updatesCount: 0, hidden: false
+                },
+                {
+                    tag: "batch mode (paused), network, one update",
+                    status: SystemUpdate.StatusBatchModePaused, online: true, updatesCount: 1, hidden: false
+                },
+                {
+                    tag: "batch mode (paused), network, updates",
+                    status: SystemUpdate.StatusBatchModePaused, online: true, updatesCount: 2, hidden: false
+                },
+                {
+                    tag: "network error, no network, no updates",
+                    status: SystemUpdate.StatusNetworkError, online: false, updatesCount: 0, hidden: true
+                },
+                {
+                    tag: "network error, no network, updates",
+                    status: SystemUpdate.StatusNetworkError, online: false, updatesCount: 2, hidden: true
+                },
+                {
+                    tag: "network error, network, no updates",
+                    status: SystemUpdate.StatusNetworkError, online: true, updatesCount: 0, hidden: true
+                },
+                {
+                    tag: "network error, network, one update",
+                    status: SystemUpdate.StatusNetworkError, online: true, updatesCount: 1, hidden: true
+                },
+                {
+                    tag: "network error, network, updates",
+                    status: SystemUpdate.StatusNetworkError, online: true, updatesCount: 2, hidden: true
+                },
+                {
+                    tag: "server error, no network, no updates",
+                    status: SystemUpdate.StatusServerError, online: false, updatesCount: 0, hidden: true
+                },
+                {
+                    tag: "server error, no network, updates",
+                    status: SystemUpdate.StatusServerError, online: false, updatesCount: 2, hidden: true
+                },
+                {
+                    tag: "server error, network, no updates",
+                    status: SystemUpdate.StatusServerError, online: true, updatesCount: 0, hidden: true
+                },
+                {
+                    tag: "server error, network, one update",
+                    status: SystemUpdate.StatusServerError, online: true, updatesCount: 1, hidden: true
+                },
+                {
+                    tag: "server error, network, updates",
+                    status: SystemUpdate.StatusServerError, online: true, updatesCount: 2, hidden: true
+                },
+            ]
+        }
+
+        function test_visibility(data) {
+            instance.status = data.status;
+            instance.online = data.online;
+            instance.updatesCount = data.updatesCount;
+            compare(instance.hidden, data.hidden);
         }
     }
 }

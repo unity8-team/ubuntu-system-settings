@@ -36,9 +36,6 @@ UpdateModel::UpdateModel(QObject *parent)
     , m_updates()
 {
     initialize();
-    // connect(SystemUpdate::instance(), SIGNAL(dbChanged()), this, SLOT(refresh()));
-    // connect(SystemUpdate::instance(), SIGNAL(dbChanged(const QString&)),
-    //         this, SLOT(refresh(const QString&)));
 }
 
 UpdateModel::UpdateModel(const QString &dbpath, QObject *parent)
@@ -54,22 +51,8 @@ void UpdateModel::initialize()
 {
     connect(this, SIGNAL(filterChanged()), SLOT(clear()));
     connect(m_db, SIGNAL(changed()), this, SLOT(refresh()));
-    connect(m_db, SIGNAL(changed(const QString, const int)),
-            this, SLOT(refresh(const QString, const int)));
-
-    // connect(this, SIGNAL(changed()),
-    //         SystemUpdate::instance(), SLOT(notifyModelChanged()));
-    // connect(this, SIGNAL(updateChanged(QString, int)),
-    //         SystemUpdate::instance(), SLOT(notifyModelItemChanged(QString, int)));
-    // connect(this, SIGNAL(updateChanged(QString)),
-    //         SystemUpdate::instance(), SLOT(notifyModelItemChanged(QString)));
-
-    // connect(SystemUpdate::instance(), SIGNAL(modelChanged()),
-    //         this, SLOT(refresh()));
-    // connect(SystemUpdate::instance(), SIGNAL(modelItemChanged(QString, int)),
-    //         this, SLOT(refreshItem(QString, int)));
-    // connect(SystemUpdate::instance(), SIGNAL(modelItemChanged(QString)),
-    //         this, SLOT(refreshItem(QString)));
+    connect(m_db, SIGNAL(changed(const QString, const uint)),
+            this, SLOT(refresh(const QString, const uint)));
 }
 
 QHash<int, QByteArray> UpdateModel::roleNames() const
@@ -119,7 +102,7 @@ QVariant UpdateModel::data(const QModelIndex &index, int role) const
     switch (role) {
     case Qt::DisplayRole:
     case KindRole:
-        return (int) u->kind();
+        return (uint) u->kind();
     case IdRole:
         return u->identifier();
     case LocalVersionRole:
@@ -151,7 +134,7 @@ QVariant UpdateModel::data(const QModelIndex &index, int role) const
     case TokenRole:
         return u->token();
     case UpdateStateRole:
-        return (int) u->state();
+        return (uint) u->state();
     case ProgressRole:
         return u->progress();
     case AutomaticRole:
@@ -195,11 +178,10 @@ void UpdateModel::clear()
     refresh();
 }
 
-void UpdateModel::refresh(const QString &id, const int &revision)
+void UpdateModel::refresh(const QString &id, const uint &revision)
 {
     QSharedPointer<Update> u = m_db->get(id, revision);
     int ix = UpdateModel::indexOf(m_updates, u);
-    qWarning() << "refreshing" << id << revision << ix << u->progress();
 
     if (ix >= 0 && ix < m_updates.size()) {
         m_updates.replace(ix, u);
@@ -210,157 +192,57 @@ void UpdateModel::refresh(const QString &id, const int &revision)
 void UpdateModel::refresh()
 {
     QList<QSharedPointer<Update> > now = m_db->updates((uint) m_filter);
-    // QList<Update*> udb;
-    // QList<Update*> uold;
     int oldCount = m_updates.size();
 
-// for(item in old)
-//     if (new does not contain item)
-//         remove item from old
-
-// for(item in new)
-//     if (item exists in old)
-//         if (position(item, old) == position(item, new))
-//             continue // next loop iteration
-//         else
-//             move old item to position(item, new)
-//     else
-//         insert new item into old at position(item, new)
-
-    // qWarning() << "m_updates..";
+    // qWarning() << "m_updates is";
     for (int i = 0; i < m_updates.size(); i++) {
         QSharedPointer<Update> item = m_updates.at(i);
-        // qWarning() << "m_updates:" << item->identifier();
-        if (!UpdateModel::contains(now, item))
+        // qWarning() << "\t" << i << item->identifier();
+        if (!UpdateModel::contains(now, item)) {
+            // qWarning() << "\t\t removing" << i;
             removeRow(i);
+        }
     }
 
-    // qWarning() << "now..";
+    // qWarning() << "now is";
     for (int i = 0; i < now.size(); i++) {
         QSharedPointer<Update> item = now.at(i);
-        // qWarning() << "now:" << item->identifier() << i;
+        // qWarning() << "\t" << item->identifier() << i;
 
-        // qWarning() << "\twhile m_updates...";
+        // qWarning() << "\t\twhile m_updates...";
         for (int i = 0; i < m_updates.size(); i++) {
             QSharedPointer<Update> item = m_updates.at(i);
-            // qWarning() << "\t\tm_updates:" << item->identifier();
+            // qWarning() << "\t\t\tm_updates:" << item->identifier();
         }
 
         int oldPos = UpdateModel::indexOf(m_updates, item);
-        // qWarning() << "indeof" << item->identifier() << "was"<<oldPos;
+        // qWarning() << "\t\tindexOf" << item->identifier() << "was"<<oldPos;
         if (UpdateModel::contains(m_updates, item)) {
-            // qWarning() << "m_updates contains" << item->identifier();
+            // qWarning() << "\t\tm_updates contains" << item->identifier();
             if (oldPos == i) {
                 if (!m_updates.at(oldPos)->deepEquals(item.data())) {
+                    // qWarning() << "\t\t\t row"<<i<<"changed";
                     emitRowChanged(i);
                 }
             } else {
-                // qWarning() << "oldPos" << oldPos << "i" << i;
+                // qWarning() << "\t\t\t moving"<<i<<"from"<<oldPos;
                 moveRow(oldPos, i);
             }
         } else {
+            // qWarning() << "\t\t\t inserting"<<i<<item->identifier();
             insertRow(i, item);
         }
     }
 
-    // // Added
-    // for (int i = 0; i < fromdb.size(); i++) {
-    //     QSharedPointer<Update> u = fromdb.at(i);
-    //     if (!UpdateModel::contains(m_updates, u)) {
-    //         insertRow(i, u);
-    //     }
-    // }
-
-    // // Removed
-    // for (int i = 0; i < m_updates.size(); i++) {
-    //     QSharedPointer<Update> u = m_updates.at(i);
-    //     if (!UpdateModel::contains(fromdb, u)) {
-    //         removeRow(i);
-    //     }
-    // }
-
-    // // Moved
-    // for (int i = 0; i < tmp.size(); i++) {
-
-    // }
-    // for (int i = 0; i < fromdb.size(); i++) {
-    //     QSharedPointer<Update> u = fromdb.at(i);
-    //     if (UpdateModel::contains(tmp, u)) {
-    //         int from = UpdateModel::indexOf(tmp, u);
-
-    //         if (i == from)
-    //             continue;
-
-    //         qWarning() << "index of" << u->identifier() << from << i;
-    //         // Move operation is on m_updates.
-    //         // moveRow(from, i);
-    //     }
-    // }
-
-
-    // Q_FOREACH(QSharedPointer<Update> u, m_updates) {
-    //     uold.append(u.data());
-    // }
-
-
-    // QList<QSharedPointer<Update> > removed;
-    //  Q_FOREACH(QSharedPointer<Update> u, m_updates) {
-    //     if (!UpdateModel::contains(fromdb, u))
-    //         removed.append(u);
-    // }
-
-    /* Ugly, but we need to be precise about changes so the view will not
-    unnecessarily update too much of it. */
-    // QList<QPair<int, int> > moveFromTo;
-    // QList<int> added;
-    // QList<int> changed;
-    // for (int i3 = 0; i3 < udb.size(); i3++) {
-    //     Update* u = udb.at(i3);
-    //     if (uold.contains(u)) {
-    //         int ixFrom = uold.indexOf(u);
-    //         int ixTo = i3;
-
-    //         if (ixFrom != ixTo) {
-    //             // Moved
-    //             moveFromTo << QPair<int, int>(ixFrom, ixTo);
-    //         } else {
-    //             // Changed?
-    //             Update* uOld = uold.at(uold.indexOf(u));
-    //             if (!u->deepEquals(uOld)) {
-    //                 changed << i3;
-    //             }
-    //         }
-    //     } else {
-    //         // Added.
-    //         added << i3;
-    //     }
-    // }
-
-    // Q_FOREACH(int i, removed) {
-    //     beginRemoveRows(QModelIndex(), i, i);
-    //     endRemoveRows();
-    // }
-
-    // Q_FOREACH(int i, added) {
-    //     beginInsertRows(QModelIndex(), i, i);
-    //     endInsertRows();
-    // }
-
-    // qWarning() << "removing" << removed;
-    // qWarning() << "moved" << moveFromTo;
-    // qWarning() << "added" << added;
-    // qWarning() << "changed" << changed;
-
-    // m_updates = fromdb;
-
-    // Q_FOREACH(int i, changed) {
-    //     emitRowChanged(i);
-    // }
+    // qWarning() << "\n\nm_updates after operation";
+    for (int i = 0; i < m_updates.size(); i++) {
+        QSharedPointer<Update> item = m_updates.at(i);
+        // qWarning() << "\tm_updates:" << item->identifier();
+    }
 
     if (now.size() != oldCount) {
         Q_EMIT countChanged();
     }
-
 }
 
 void UpdateModel::insertRow(const int &row, const QSharedPointer<Update> &update)
@@ -384,6 +266,7 @@ void UpdateModel::removeRow(int row)
 
 void UpdateModel::moveRow(const int &from, const int &to)
 {
+    qWarning() << "moving rows" << from << to;
     bool fromOk = (from >= 0 && from < m_updates.size());
     bool toOk = (to >= 0 && to < m_updates.size());
     int _to = to;
@@ -396,11 +279,11 @@ void UpdateModel::moveRow(const int &from, const int &to)
             // qWarning() << "move from" << from << "to" << _to;
             // qWarning() << "( really move from" << from << "to" << to << ")";
             // qWarning() << "move" << m_updates.at(from)->identifier()
-            //            << "to" << to;
+            //             << "to" << to;
             m_updates.move(from, to);
             endMoveRows();
         } else {
-            // qWarning() << "move from" << from << "to" << _to << "failed";
+            qWarning() << "move from" << from << "to" << _to << "failed";
         }
     }
 }
@@ -409,21 +292,9 @@ void UpdateModel::emitRowChanged(int row)
 {
     if (0 <= row && row < m_updates.size()) {
         QModelIndex qmi = index(row, 0);
-        qWarning() << "emitting rowchanged for " << row << m_updates.at(row)->progress();
-
         Q_EMIT(dataChanged(qmi, qmi));
     }
 }
-
-// QSharedPointer<Update> UpdateModel::find(const QList<QSharedPointer<Update> > &list,
-//                                          const QSharedPointer<Update> &update)
-// {
-//     Q_FOREACH(QSharedPointer<Update> u, list) {
-//         if (*u == *update)
-//             return u;
-//     }
-//     return QSharedPointer<Update>(nullptr);
-// }
 
 bool UpdateModel::contains(const QList<QSharedPointer<Update> > &list,
                            const QSharedPointer<Update> &update)
@@ -431,7 +302,7 @@ bool UpdateModel::contains(const QList<QSharedPointer<Update> > &list,
     return list.end() != std::find_if(
         list.begin(), list.end(),
         [update](const QSharedPointer<Update> other) {
-            return *update == other.data();
+            return *update == *other.data();
         }
     );
 }
@@ -440,231 +311,81 @@ int UpdateModel::indexOf(const QList<QSharedPointer<Update> > &list,
                           const QSharedPointer<Update> &update)
 {
     for (int i = 0; i < list.size(); i++) {
-        if (*list.at(i) == update.data()) {
+        if (*list.at(i) == *update.data()) {
             return i;
         }
     }
     return -1;
 }
-// void UpdateModel::refresh()
-// {
-//     qWarning() << "blast refresh...";
-//     int oldCount = count();
-//     if (!openDb())
-//         qWarning() << "could not open db";
-
-//     QSqlQuery q(m_db);
-//     switch (m_filter) {
-//     case UpdateDb::Filter::All:
-//         // q = QSqlQuery(GET_ALL, m_db);
-//         q.prepare(GET_ALL);
-//         break;
-//     case UpdateDb::Filter::Pending:
-//     case UpdateDb::Filter::PendingClicksUpdates:
-//         q.prepare(GET_PENDING_CLICKS);
-//         q.bindValue(":installed", false);
-//         q.bindValue(":kind", UpdateModel::KIND_CLICK);
-//         break;
-//     case UpdateDb::Filter::PendingSystemUpdates:
-//         return; // We don't store these, so bail.
-//     case UpdateDb::Filter::InstalledClicksUpdates:
-//         q.prepare(GET_INSTALLED_CLICKS);
-//         q.bindValue(":installed", true);
-//         q.bindValue(":kind", UpdateModel::KIND_CLICK);
-//         break;
-//     case UpdateDb::Filter::InstalledSystemUpdates:
-//         q.prepare(GET_INSTALLED_SYSUPDATES);
-//         q.bindValue(":installed", true);
-//         q.bindValue(":kind", UpdateModel::KIND_SYSTEM);
-//         break;
-//     case UpdateDb::Filter::Installed:
-//         q.prepare(GET_INSTALLED);
-//         q.bindValue(":installed", true);
-//         break;
-//     }
-
-//     if (!q.exec()) {
-//         qCritical() << "could not update" << q.lastError().text() << q.executedQuery();
-//         return;
-//     }
-
-//     // m_updates.clear();
-//     // beginResetModel();
-
-//     QList<UpdateStruct> listNow;
-//     // QList<UpdateStruct> changed;
-//     // QList<UpdateStruct> removed;
-//     QList<UpdateStruct> added;
-
-//     while (q.next()) {
-//         UpdateStruct u;
-//         u.setValues(&q);
-//         listNow.append(u);
-
-//         if (m_updates.contains(u)) {
-//             int ix = m_updates.indexOf(u);
-//             if (!u.deepEquals(m_updates.at(ix))) {
-//                 m_updates.replace(ix, u);
-//                 Q_EMIT (dataChanged(index(ix, 0), index(ix, 0)));
-//             }
-//         } else {
-//             added.append(u);
-//         }
-//     }
-
-//     for (int i = 0; i < m_updates.size(); i++) {
-
-//     }
-
-//     // endResetModel();
-
-//     if (oldCount != count()) {
-//         Q_EMIT (countChanged());
-//     }
-// }
-
-// void UpdateModel::refreshItem(const QString &id, const int &revision)
-// {
-//     // qWarning() << Q_FUNC_INFO << id << revision;
-//     int idx = find(id, revision);
-
-//     if (idx < 0) {
-//         return;
-//     }
-
-//     // qWarning() << Q_FUNC_INFO << "found something";
-//     refresh(idx);
-// }
-
-// void UpdateModel::refreshItem(const QString &downloadId)
-// {
-//     // qWarning() << Q_FUNC_INFO << downloadId;
-//     int idx = find(downloadId);
-
-//     if (idx < 0) {
-//         return;
-//     }
-
-//     // qWarning() << Q_FUNC_INFO << "found some id";
-//     refresh(idx);
-// }
-
-// void UpdateModel::refresh(const int &idx)
-// {
-//     // UpdateStruct update = m_updates[idx];
-//     // // qWarning() << Q_FUNC_INFO << idx << update.id << update.revision;
-//     // if (!openDb()) return;
-//     // QSqlQuery q(m_db);
-//     // q.prepare(GET_SINGLE);
-//     // q.bindValue(":id", update.id);
-//     // q.bindValue(":revision", update.revision);
-
-//     // if (!q.exec()) {
-//     //     qCritical() << "could fetch item from db" << q.lastError().text();
-//     //     return;
-//     // }
-
-//     // q.next();
-
-//     // update.setValues(&q);
-//     // m_updates.replace(idx, update);
-
-//     // QModelIndex first = index(idx, 0);
-//     // QModelIndex last = index(first.row(), 0);
-
-//     // // qWarning() << Q_FUNC_INFO << "datachanged" << idx << first << last;
-//     // Q_EMIT (dataChanged(first, last));
-// }
-
-void UpdateModel::queueUpdate(const QString &id, const int &revision)
+void UpdateModel::queueUpdate(const QString &id, const uint &revision)
 {
     m_db->setQueued(id, revision);
 }
 
-void UpdateModel::setInstalled(const QString &id, const int &revision)
+void UpdateModel::setInstalled(const QString &id, const uint &revision)
 {
     m_db->setInstalled(id, revision);
 }
 
-void UpdateModel::startUpdate(const QString &id, const int &revision)
+void UpdateModel::startUpdate(const QString &id, const uint &revision)
 {
     m_db->setStarted(id, revision);
 }
 
-void UpdateModel::processUpdate(const QString &id, const int &revision)
+void UpdateModel::processUpdate(const QString &id, const uint &revision)
 {
     m_db->setProcessing(id, revision);
 }
 
-void UpdateModel::setError(const QString &id, const int &revision, const QString &msg)
+void UpdateModel::setError(const QString &id, const uint &revision, const QString &msg)
 {
     m_db->setError(id, revision, msg);
 }
 
-// void UpdateModel::setState(const QString &id, const int &revision,
-//                            const SystemUpdate::UpdateState &state)
-// {
+void UpdateModel::setDownloaded(const QString &id, const uint &revision)
+{
+    m_db->setDownloaded(id, revision);
+}
 
-// }
-
-void UpdateModel::setProgress(const QString &id, const int &revision,
+void UpdateModel::setProgress(const QString &id, const uint &revision,
                               const int &progress)
 {
     m_db->setProgress(id, revision, progress);
 }
 
-// void UpdateModel::setDownloadId(const QString &id, const int &revision,
-//                                 const QString &downloadId)
-// {
-//     m_db->setDownloadId(id, revision, downloadId);
-// }
-
-void UpdateModel::pauseUpdate(const QString &id, const int &revision)
+void UpdateModel::pauseUpdate(const QString &id, const uint &revision)
 {
     m_db->setPaused(id, revision);
 }
 
-void UpdateModel::resumeUpdate(const QString &id, const int &revision)
+void UpdateModel::resumeUpdate(const QString &id, const uint &revision)
 {
     m_db->setResumed(id, revision);
 }
 
-void UpdateModel::cancelUpdate(const QString &id, const int &revision)
+void UpdateModel::cancelUpdate(const QString &id, const uint &revision)
 {
     m_db->setCanceled(id, revision);
 }
 
+void UpdateModel::setImageUpdate(const QString &id, const QString &version,
+                                 const int &updateSize, const int &downloadMode)
+{
+    QSharedPointer<Update> u = QSharedPointer<Update>(new Update);
+    u->setIdentifier(id);
+    u->setKind(Update::Kind::KindImage);
 
-// int UpdateModel::find(const QString &id, const int &revision) const
-// {
-//     int res = -1;
-//     for (int i = 0; i < m_updates.size(); i++) {
-//         if (m_updates.at(i)->identifier() == id
-//             && m_updates.at(i)->revision() == revision) {
-//             return i;
-//         }
-//     }
-//     return res;
-// }
+    bool ok = false;
+    uint revision = version.toUInt(&ok, 10);
+    if (!ok) {
+        qWarning() << "failed to convert" << version << "to an integer.";
+        revision = 0;
+    }
+    u->setRevision(revision);
+    u->setBinaryFilesize((int) updateSize);
+    u->setRemoteVersion(version);
+    u->setAutomatic(downloadMode != 0); // 0 is manual
 
-// int UpdateModel::find(const QString &downloadId) const
-// {
-//     int res = -1;
-//     for (int i = 0; i < m_updates.size(); i++) {
-//         if (m_updates.at(i)->downloadId() == downloadId) {
-//             return i;
-//         }
-//     }
-//     return res;
-// }
-
-// bool UpdateModel::contains(const QString& downloadId) const
-// {
-//     for (int i = 0; i < m_updates.size(); i++) {
-//         if (m_updates.at(i)->downloadId() == downloadId) {
-//             return true;
-//         }
-//     }
-//     return false;
-// }
+    m_db->add(u);
+}
 } // UpdatePlugin

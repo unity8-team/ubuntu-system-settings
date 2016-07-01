@@ -22,67 +22,11 @@ import Ubuntu.SystemSettings.Update 1.0
 UpdateDelegate {
     id: update
     name: "Ubuntu Touch"
-    version: SystemImage.availableVersion
-    size: SystemImage.updateSize
     iconUrl: "file:///usr/share/icons/suru/places/scalable/distributor-logo.svg"
-    updateState: SystemImage.checkTarget() ? Update.StateAvailable :
-                                              Update.StateUnavailable
+    // updateState: SystemImage.checkTarget() ? Update.StateAvailable :
+    //                                           Update.StateUnavailable
     // onRetry: modelData.downloadUpdate();
     onDownload: SystemImage.downloadUpdate();
     onPause: SystemImage.pauseDownload();
     // onInstall: SystemImage.applyUpdate();
-
-    Connections {
-        target: SystemImage
-        onDownloadStarted: {
-            update.progress = -1;
-            switch (SystemImage.downloadMode) {
-                case 0: // Manual
-                    update.updateState = Update.StateQueuedForDownload;
-                    break;
-                case 1: // Auto on Wi-Fi
-                case 2: // Always
-                    update.updateState = Update.StateDownloadingAutomatically;
-                    break;
-            }
-        }
-        onUpdateProgress: {
-            update.progress = percentage;
-            switch (SystemImage.downloadMode) {
-                case 0: // Manual
-                    update.updateState = Update.StateDownloading;
-                    break;
-                case 1: // Auto on Wi-Fi
-                case 2: // Always
-                    update.updateState = Update.StateDownloadingAutomatically;
-                    break;
-            }
-        }
-        onUpdatePaused: {
-            update.progress = percentage;
-            switch (SystemImage.downloadMode) {
-                case 0: // Manual
-                    update.updateState = Update.StateDownloadPaused;
-                    break;
-                case 1: // Auto on Wi-Fi
-                case 2: // Always
-                    update.updateState = Update.StateAutomaticDownloadPaused;
-                    break;
-            }
-        }
-        onUpdateDownloaded: {
-            update.updateState = Update.StateDownloaded;
-        }
-        onUpdateFailed: {
-            update.updateState = Update.StateFailed;
-            update.setError(i18n.tr("Update failed"), lastReason);
-        }
-        onDownloadModeChanged: {
-            // Pause an automatic download if the downloadMode changes to Manual.
-            if (SystemImage.downloadMode === 0 &&
-                update.updateState === Update.StateDownloadingAutomatically) {
-                update.pause();
-            }
-        }
-    }
 }

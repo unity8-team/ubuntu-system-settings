@@ -46,16 +46,10 @@ const QString GET_ALL = "SELECT " + ALL + " FROM updates";
 const QString GET_ALL_KIND = "SELECT " + ALL + " FROM \
     updates WHERE kind=:kind ORDER BY title ASC";
 
-const QString GET_PENDING = "SELECT " + ALL + " FROM \
-    updates WHERE installed=0 ORDER BY title ASC";
+const QString GET_PENDING = "SELECT " + ALL + ", MAX(revision) FROM \
+    updates WHERE installed=0 GROUP BY id ORDER BY title ASC";
 
-const QString GET_PENDING_REVERSED = "SELECT " + ALL + " FROM \
-    updates WHERE installed=0 ORDER BY title DESC";
-
-const QString GET_PENDING_KIND = "SELECT " + ALL + " FROM \
-    updates WHERE installed=0 AND kind=:kind ORDER BY title ASC";
-
-const QString GET_PENDING_CLICK = "SELECT " + ALL + ", MAX(revision) FROM \
+const QString GET_PENDING_KIND = "SELECT " + ALL + ", MAX(revision) FROM \
     updates WHERE installed=0 AND kind=:kind GROUP BY id ORDER BY title ASC";
 
 const QString GET_INSTALLED = "SELECT " + ALL + " FROM updates \
@@ -97,13 +91,11 @@ void UpdateDb::initializeDb()
     // Create a unique connection name
     int connI = 0;
     while (m_connectionName.isEmpty()) {
-        QString tmpl("update-model-%1");
+        QString tmpl("system-settings-update-%1");
         if (!QSqlDatabase::contains(tmpl.arg(connI)))
             m_connectionName = tmpl.arg(connI);
         connI++;
     }
-
-    qWarning() << "initializeDb with conn name" << m_connectionName << m_dbpath;
 
     m_db = QSqlDatabase::addDatabase(QLatin1String("QSQLITE"), m_connectionName);
     m_db.setDatabaseName(m_dbpath);
@@ -117,10 +109,6 @@ void UpdateDb::initializeDb()
             << m_db.lastError().text();
             return;
     }
-    // connect(this, SIGNAL(changed()),
-    //         SystemUpdate::instance(), SLOT(notifyDbChanged()));
-    // connect(this, SIGNAL(changed(const QString&)),
-    //         SystemUpdate::instance(), SLOT(notifyDbChanged(const QString&)));
 }
 
 UpdateDb::~UpdateDb()
@@ -128,7 +116,6 @@ UpdateDb::~UpdateDb()
     m_db.close();
     m_db = QSqlDatabase();
     QSqlDatabase::removeDatabase(m_connectionName);
-    qWarning() << "removing database" << m_connectionName;
 }
 
 void UpdateDb::add(const QSharedPointer<Update> &update)
@@ -138,11 +125,11 @@ void UpdateDb::add(const QSharedPointer<Update> &update)
     QSqlQuery q(m_db);
     q.prepare("INSERT OR REPLACE INTO updates (id, revision, installed,"
               "created_at_utc, download_hash, title, size, icon_url,"
-              "download_url, changelog, command, token,"
+              "download_url, changelog, command, token, progress, "
               "local_version, remote_version, kind, update_state, automatic) "
               "VALUES (:id, :revision, :installed, :created_at_utc, "
               ":download_hash, :title, :size, :icon_url, :download_url,"
-              ":changelog, :command, :token, :local_version,"
+              ":changelog, :command, :token, :progress, :local_version,"
               ":remote_version, :kind, :update_state, :automatic)");
     q.bindValue(":id", update->identifier());
     q.bindValue(":revision", update->revision());
@@ -157,6 +144,7 @@ void UpdateDb::add(const QSharedPointer<Update> &update)
     q.bindValue(":changelog", update->changelog());
     q.bindValue(":command", update->command().join(" "));
     q.bindValue(":token", update->token());
+    q.bindValue(":progress", update->progress());
     q.bindValue(":local_version", update->localVersion());
     q.bindValue(":remote_version", update->remoteVersion());
     q.bindValue(":kind", Update::kindToString(update->kind()));
@@ -189,7 +177,39 @@ void UpdateDb::remove(const QSharedPointer<Update> &update)
     Q_EMIT changed();
 }
 
-void UpdateDb::setInstalled(const QString &id, const int &revision)
+void UpdateDb::update(const QSharedPointer<Update> &update, const QSqlQuery &query)
+{
+    update->setKind(Update::stringToKind(
+        query.value("kind").toString()
+    ));
+    update->setIdentifier(query.value("id").toString());
+    update->setLocalVersion(query.value("local_version").toString());
+    update->setRemoteVersion(query.value("remote_version").toString());
+    update->setRevision(query.value("revision").toUInt());
+    update->setInstalled(query.value("installed").toBool());
+    update->setCreatedAt(QDateTime::fromMSecsSinceEpoch(
+        query.value("created_at_utc").toLongLong()
+    ));
+    update->setUpdatedAt(QDateTime::fromMSecsSinceEpoch(
+        query.value("updated_at_utc").toLongLong()
+    ));
+    update->setTitle(query.value("title").toString());
+    update->setDownloadHash(query.value("download_hash").toString());
+    update->setBinaryFilesize(query.value("size").toUInt());
+    update->setIconUrl(query.value("icon_url").toString());
+    update->setDownloadUrl(query.value("download_url").toString());
+    update->setCommand(query.value("command").toString().split(" "));
+    update->setChangelog(query.value("changelog").toString());
+    update->setToken(query.value("token").toString());
+    update->setState(Update::stringToState(
+        query.value("update_state").toString()
+    ));
+    update->setProgress(query.value("progress").toInt());
+    update->setAutomatic(query.value("automatic").toBool());
+    update->setError(query.value("error").toString());
+}
+
+void UpdateDb::setInstalled(const QString &id, const uint &revision)
 {
     if (!openDb()) return;
 
@@ -212,30 +232,30 @@ void UpdateDb::setInstalled(const QString &id, const int &revision)
     Q_EMIT changed();
 }
 
-void UpdateDb::setStarted(const QString &id, const int &revision)
+void UpdateDb::setStarted(const QString &id, const uint &revision)
 {
     setState(id, revision, Update::State::StateDownloading);
     changed(id, revision);
 }
 
-void UpdateDb::setQueued(const QString &id, const int &revision)
+void UpdateDb::setQueued(const QString &id, const uint &revision)
 {
     setState(id, revision, Update::State::StateQueuedForDownload);
     changed(id, revision);
 }
 
-void UpdateDb::setProcessing(const QString &id, const int &revision)
+void UpdateDb::setProcessing(const QString &id, const uint &revision)
 {
     setState(id, revision, Update::State::StateInstalling);
     changed(id, revision);
 }
 
-void UpdateDb::setError(const QString &id, const int &revision, const QString &msg)
+void UpdateDb::setError(const QString &id, const uint &revision, const QString &msg)
 {
     if (!openDb()) return;
 
     QSqlQuery q(m_db);
-    q.prepare("UPDATE updates SET error=:error, update_state=:state, "
+    q.prepare("UPDATE updates SET error=:error, update_state=:state "
               "WHERE id=:id AND revision=:revision");
     q.bindValue(":error", msg);
     q.bindValue(":state", Update::stateToString(Update::State::StateFailed));
@@ -243,14 +263,20 @@ void UpdateDb::setError(const QString &id, const int &revision, const QString &m
     q.bindValue(":revision", revision);
 
     if (!q.exec()) {
-        qCritical() << "could set error on " << id << revision
+        qCritical() << "could not set error on " << id << revision
                     << q.lastError().text();
     }
 
     changed(id, revision);
 }
 
-void UpdateDb::setState(const QString &id, const int &revision,
+void UpdateDb::setDownloaded(const QString &id, const uint &revision)
+{
+    setState(id, revision, Update::State::StateDownloaded);
+    changed(id, revision);
+}
+
+void UpdateDb::setState(const QString &id, const uint &revision,
                         const Update::State &state)
 {
     if (!openDb()) return;
@@ -268,7 +294,7 @@ void UpdateDb::setState(const QString &id, const int &revision,
     }
 }
 
-void UpdateDb::setProgress(const QString &id, const int &revision,
+void UpdateDb::setProgress(const QString &id, const uint &revision,
                            const int &progress)
 {
     if (!openDb()) return;
@@ -290,60 +316,25 @@ void UpdateDb::setProgress(const QString &id, const int &revision,
     changed(id, revision);
 }
 
-// void UpdateDb::setDownloadId(const QString &id, const int &revision,
-//                                 const QString &downloadId)
-// {
-//     // qWarning() << Q_FUNC_INFO << id << revision << downloadId;
-//     if (!openDb()) return;
-
-//     QSqlQuery q(m_db);
-//     q.prepare("UPDATE updates SET download_id=:did, error=''"
-//               " WHERE id=:id AND revision=:revision");
-//     q.bindValue(":did", downloadId);
-//     q.bindValue(":id", id);
-//     q.bindValue(":revision", revision);
-
-//     if (!q.exec()) {
-//         qCritical() << "could not set download id on " << id << revision
-//             << q.lastError().text();
-//     }
-
-//     changed(downloadId);
-// }
-
-void UpdateDb::setPaused(const QString &id, const int &revision)
+void UpdateDb::setPaused(const QString &id, const uint &revision)
 {
     setState(id, revision, Update::State::StateDownloadPaused);
     changed(id, revision);
 }
 
-void UpdateDb::setResumed(const QString &id, const int &revision)
+void UpdateDb::setResumed(const QString &id, const uint &revision)
 {
     setState(id, revision, Update::State::StateDownloading);
     changed(id, revision);
 }
 
-void UpdateDb::setCanceled(const QString &id, const int &revision)
+void UpdateDb::setCanceled(const QString &id, const uint &revision)
 {
     // FIXME: consolidate
     setState(id, revision, Update::State::StateAvailable);
     // unsetDownloadId(downloadId);
     changed(id, revision);
 }
-
-
-// void UpdateDb::unsetDownloadId(const QString &downloadId)
-// {
-//     QSqlQuery q(m_db);
-//     q.prepare("UPDATE updates SET download_id=null"
-//               " WHERE download_id=:did");
-//     q.bindValue(":did", downloadId);
-
-//     if (!q.exec()) {
-//         qCritical() << "could not unsetset download id on " << downloadId
-//             << q.lastError().text();
-//     }
-// }
 
 bool UpdateDb::createDb()
 {
@@ -377,7 +368,6 @@ bool UpdateDb::createDb()
                 "update_state TEXT DEFAULT 'unknown',"
                 "progress INTEGER,"
                 "automatic INTEGER DEFAULT 0,"
-                // "download_id TEXT,"
                 "error TEXT,"
                 "PRIMARY KEY (id, revision))");
     if (Q_UNLIKELY(!ok)) {
@@ -459,11 +449,8 @@ QList<QSharedPointer<Update> > UpdateDb::updates(const uint &filter)
     case UpdateModel::Filter::Pending:
         q.prepare(GET_PENDING);
         break;
-    case UpdateModel::Filter::PendingReversed:
-        q.prepare(GET_PENDING_REVERSED);
-        break;
     case UpdateModel::Filter::PendingClicks:
-        q.prepare(GET_PENDING_CLICK);
+        q.prepare(GET_PENDING_KIND);
         q.bindValue(":kind", Update::kindToString(
             Update::Kind::KindClick)
         );
@@ -498,14 +485,14 @@ QList<QSharedPointer<Update> > UpdateDb::updates(const uint &filter)
 
     while (q.next()) {
         QSharedPointer<Update> u = QSharedPointer<Update>(new Update);
-        u->setValues(&q);
+        update(u, q);
         list.append(u);
     }
 
     return list;
 }
 
-QSharedPointer<Update> UpdateDb::get(const QString &id, const int &revision)
+QSharedPointer<Update> UpdateDb::get(const QString &id, const uint &revision)
 {
     QSharedPointer<Update> u = QSharedPointer<Update>(new Update);
     if (!openDb()) return u;
@@ -520,7 +507,7 @@ QSharedPointer<Update> UpdateDb::get(const QString &id, const int &revision)
     }
 
     if (q.next()) {
-        u->setValues(&q);
+        update(u, q);
     }
     return u;
 }

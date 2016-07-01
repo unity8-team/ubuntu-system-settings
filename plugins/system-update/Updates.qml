@@ -66,7 +66,6 @@ Item {
     }
 
     signal requestAuthentication()
-//    signal udmDownloadCreated(string packageName, int revision, int udmId)
 
     states: [
         State {
@@ -133,6 +132,32 @@ Item {
             updatesCount: updates.updatesCount
             online: updates.online
             onStop: updates.cancelChecks()
+
+            onPause: {
+                downloadHandler.pauseAll();
+                SystemImage.pauseDownload();
+                updates.status = SystemUpdate.StatusBatchModePaused;
+            }
+            onResume: {
+                downloadHandler.resumeAll();
+                SystemImage.downloadUpdate();
+                updates.status = SystemUpdate.StatusBatchMode;
+            }
+            onRequestInstall: {
+                console.warn('request install', requireRestart)
+                if (requireRestart) {
+                    var popup = PopupUtils.open(updatePrompt, {
+                        havePowerForUpdate: updates.havePower
+                    });
+                    popup.connect.requestSystemUpdate(function () {
+                        install();
+                    });
+                } else {
+                    postClickBatchHandler.target = clickUpdatesModel;
+                    install();
+                }
+            }
+            onInstall: updates.status = SystemUpdate.StatusBatchMode;
         }
 
         ImageUpdateDelegate {
@@ -164,15 +189,8 @@ Item {
                 delegate: ClickUpdateDelegate {
                     objectName: "updatesClickUpdate" + index
                     anchors { left: clickUpdates.left; right: clickUpdates.right }
-                    // updateModel: clickUpdatesModel
-                    // command: model.command
-                    // packageName: identifier
-                    // revision: model.revision
-                    // clickToken: token
-                    // downloadUrl: model.downloadUrl
                     updateState: model.updateState
                     progress: model.progress
-                    // downloadSha512: downloadHash
                     version: remoteVersion
                     size: model.size
                     name: title
@@ -185,52 +203,10 @@ Item {
                     onPause: downloadHandler.pauseDownload(model)
                     onResume: downloadHandler.resumeDownload(model)
 
-                    // onPause: {
-                    //     console.warn('onPause', getDownload(model.downloadId));
-                    //     try {
-                    //         getDownload(model.downloadId).pause();
-                    //     } catch (e) {
-                    //         clickUpdatesModel.setError(
-                    //             model.downloadId, i18n.tr("Installation failed.")
-                    //         );
-                    //     }
-                    // }
-                    // onResume: {
-                    //     console.warn('onResume', getDownload(model.downloadId));
-                    //     try {
-                    //         getDownload(model.downloadId).resume();
-                    //     } catch (e) {
-                    //         clickUpdatesModel.setError(
-                    //             model.downloadId, i18n.tr("Installation failed.")
-                    //         );
-                    //     }
-                    // }
-                    // onInstall: {
-                    //     console.warn("onInstall", identifier, model.revision);
-                    //     if (model.downloadId) {
-                    //         console.warn('already had download id');
-                    //     } else {
-                    //         createDownload(model);
-                    //     }
-                    // }
-                    // onRetry: {
-                    //     updateState = Update.StateUnavailable;
-                    //     clickUpdateManager.check(model.identifier);
-                    // }
-                    // onPause: downloadHandler.pause(model.downloadId)
-
-                    // Component.onCompleted: {
-                    //     console.warn('onCompleted check on ', model.title);
-                    //     var dl;
-                    //     if (model.downloadId) {
-                    //         dl = getDownload(model.downloadId);
-                    //         if (dl && !dl._bound)
-                    //             bindDownload(dl);
-                    //     } else {
-                    //         // if (model.automatic)
-                    //             //createDownload(model);
-                    //     }
-                    // }
+                    Connections {
+                        target: glob
+                        onInstall: install()
+                    }
                 }
             }
 
@@ -372,6 +348,29 @@ Item {
         }
     }
 
+    // Will apply a System Image if enabled and the click model reaches 0.
+    // Connections {
+    //     id: postClickUpdateImageInstaller
+    //     enabled: false
+    //     target: clickUpdatesModel
+    //     onCountChanged: {
+    //         if (clickUpdatesModel.count === 0 && )
+    //             SystemImage.
+    //     }
+    // }
+
+    Connections {
+        id: postClickBatchHandler
+        ignoreUnknownSignals: true
+        target: null
+        onCountChanged: {
+            if (target.count === 0) {
+                updates.status = SystemUpdate.StatusIdle;
+                target = null;
+            }
+        }
+    }
+
     Component.onCompleted: {
         if (clickUpdateManager.isCheckRequired()) {
             checkClick();
@@ -380,4 +379,10 @@ Item {
         }
     }
     Component.onDestruction: cancelChecks()
+
+    Component {
+        id: updatePrompt
+
+        ImageUpdatePrompt {}
+    }
 }

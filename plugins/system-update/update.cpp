@@ -29,21 +29,17 @@ Update::Update(QObject *parent)
     , m_kind(Kind::KindUnknown)
     , m_identifier("")
     , m_revision(0)
-    , m_anonDownloadUrl("")
     , m_binaryFilesize(0)
     , m_changelog("")
     , m_channel("")
-    , m_content("")
     , m_createdAt()
     , m_updatedAt()
-    , m_department()
     , m_downloadHash("")
     , m_downloadUrl("")
     , m_error("")
     , m_iconUrl("")
     , m_installed(false)
-    , m_origin("")
-    , m_progress(-1)
+    , m_progress(0)
     , m_state(State::StateUnknown)
     , m_title("")
     , m_localVersion("")
@@ -52,12 +48,10 @@ Update::Update(QObject *parent)
     , m_command("")
     , m_automatic(false)
 {
-    qWarning() << "created update";
 }
 
 Update::~Update()
 {
-    qWarning() << "destroying update";
 }
 
 Update::Kind Update::kind() const
@@ -68,11 +62,6 @@ Update::Kind Update::kind() const
 QString Update::identifier() const
 {
     return m_identifier;
-}
-
-QString Update::anonDownloadUrl() const
-{
-    return m_anonDownloadUrl;
 }
 
 uint Update::binaryFilesize() const
@@ -90,11 +79,6 @@ QString Update::channel() const
     return m_channel;
 }
 
-QString Update::content() const
-{
-    return m_content;
-}
-
 QDateTime Update::createdAt() const
 {
     return m_createdAt;
@@ -103,11 +87,6 @@ QDateTime Update::createdAt() const
 QDateTime Update::updatedAt() const
 {
     return m_updatedAt;
-}
-
-QStringList Update::department() const
-{
-    return m_department;
 }
 
 QString Update::downloadHash() const
@@ -135,17 +114,12 @@ bool Update::installed() const
     return m_installed;
 }
 
-QString Update::origin() const
-{
-    return m_origin;
-}
-
 int Update::progress() const
 {
     return m_progress;
 }
 
-int Update::revision() const
+uint Update::revision() const
 {
     return m_revision;
 }
@@ -188,14 +162,6 @@ void Update::setKind(const Update::Kind &kind)
     }
 }
 
-void Update::setAnonDownloadUrl(const QString &anonDownloadUrl)
-{
-    if (m_anonDownloadUrl != anonDownloadUrl) {
-        m_anonDownloadUrl = anonDownloadUrl;
-        Q_EMIT anonDownloadUrlChanged();
-    }
-}
-
 void Update::setBinaryFilesize(const uint &binaryFilesize)
 {
     if (m_binaryFilesize != binaryFilesize) {
@@ -220,14 +186,6 @@ void Update::setChannel(const QString &channel)
     }
 }
 
-void Update::setContent(const QString &content)
-{
-    if (m_content != content) {
-        m_content = content;
-        Q_EMIT contentChanged();
-    }
-}
-
 void Update::setCreatedAt(const QDateTime &createdAt)
 {
     if (m_createdAt != createdAt) {
@@ -241,14 +199,6 @@ void Update::setUpdatedAt(const QDateTime &updatedAt)
     if (m_updatedAt != updatedAt) {
         m_updatedAt = updatedAt;
         Q_EMIT updatedAtChanged();
-    }
-}
-
-void Update::setDepartment(const QStringList &department)
-{
-    if (m_department != department) {
-        m_department = department;
-        Q_EMIT departmentChanged();
     }
 }
 
@@ -300,14 +250,6 @@ void Update::setInstalled(const bool installed)
     }
 }
 
-void Update::setOrigin(const QString &origin)
-{
-    if (m_origin != origin) {
-        m_origin = origin;
-        Q_EMIT originChanged();
-    }
-}
-
 void Update::setProgress(const int &progress)
 {
     if (m_progress != progress) {
@@ -316,7 +258,7 @@ void Update::setProgress(const int &progress)
     }
 }
 
-void Update::setRevision(const int &revision)
+void Update::setRevision(const uint &revision)
 {
     if (m_revision != revision) {
         m_revision = revision;
@@ -392,41 +334,9 @@ bool Update::isUpdateRequired()
     return result < 0;
 }
 
-void Update::setValues(const QSqlQuery *query)
+bool Update::operator==(const Update &other) const
 {
-    setKind(stringToKind(
-        query->value("kind").toString()
-    ));
-    setIdentifier(query->value("id").toString());
-    setLocalVersion(query->value("local_version").toString());
-    setRemoteVersion(query->value("remote_version").toString());
-    setRevision(query->value("revision").toInt());
-    setInstalled(query->value("installed").toBool());
-    setCreatedAt(QDateTime::fromMSecsSinceEpoch(
-        query->value("created_at_utc").toLongLong()
-    ));
-    setUpdatedAt(QDateTime::fromMSecsSinceEpoch(
-        query->value("updated_at_utc").toLongLong()
-    ));
-    setTitle(query->value("title").toString());
-    setDownloadHash(query->value("download_hash").toString());
-    setBinaryFilesize(query->value("size").toInt());
-    setIconUrl(query->value("icon_url").toString());
-    setDownloadUrl(query->value("download_url").toString());
-    setCommand(query->value("command").toString().split(" "));
-    setChangelog(query->value("changelog").toString());
-    setToken(query->value("token").toString());
-    setState(Update::stringToState(
-        query->value("update_state").toString()
-    ));
-    setProgress(query->value("progress").toInt());
-    setAutomatic(query->value("automatic").toBool());
-    setError(query->value("error").toString());
-}
-
-bool Update::operator==(const Update *other) const
-{
-    if (other->identifier() == identifier() && other->revision() == revision())
+    if (other.identifier() == identifier() && other.revision() == revision())
         return true;
     else
         return false;
@@ -458,7 +368,7 @@ bool Update::deepEquals(const Update *other) const
     return true;
 }
 
-bool Update::equals(const Update *other) const
+bool Update::equals(const Update &other) const
 {
     return *this == other;
 }
@@ -544,6 +454,7 @@ QString Update::kindToString(const Update::Kind &kind)
     case Kind::KindImage:
         return QLatin1String("image");
     case Kind::KindUnknown:
+    default:
         return QLatin1String("unknown");
     }
 }
@@ -559,45 +470,4 @@ Update::Kind Update::stringToKind(const QString &kind)
 
     return Kind::KindUnknown;
 }
-
-// void Update::tokenRequestSslFailed(const QList<QSslError> &errors)
-// {
-
-// }
-
-// void Update::tokenRequestFailed(const QNetworkReply::NetworkError &code)
-// {
-
-// }
-
-// void Update::tokenRequestSucceeded(const QNetworkReply* reply)
-// {
-
-// }
-
-// signals:
-//     void signedDownloadUrlChanged();
-//     void tokenChanged();
-
-//     void anonDownloadUrlChanged();
-//     void binaryFilesizeChanged();
-//     void changelogChanged();
-//     void channelChanged();
-//     void contentChanged();
-//     void departmentChanged();
-//     void downloadHashChanged();
-//     void downloadUrlChanged();
-//     void iconUrlChanged();
-//     void nameChanged();
-//     void originChanged();
-//     void packageNameChanged();
-//     void revisionChanged();
-//     void sequenceChanged();
-//     void statusChanged();
-//     void titleChanged();
-//     void remoteVersionChanged();
-//     void localVersionChanged();
-
-//     void downloadUrlSignFailure();
-
 } // UpdatePlugin

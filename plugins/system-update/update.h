@@ -21,12 +21,8 @@
 
 #include <QObject>
 #include <QDateTime>
-#include <QNetworkReply>
-#include <QSqlQuery>
 #include <QString>
 #include <QStringList>
-
-#include <token.h>
 
 namespace UpdatePlugin
 {
@@ -37,24 +33,18 @@ class Update : public QObject
     Q_ENUMS(State)
     Q_PROPERTY(Kind kind READ kind
             WRITE setKind NOTIFY kindChanged)
-    Q_PROPERTY(QString anonDownloadUrl READ anonDownloadUrl
-            WRITE setAnonDownloadUrl NOTIFY anonDownloadUrlChanged)
     Q_PROPERTY(uint binaryFilesize READ binaryFilesize
             WRITE setBinaryFilesize NOTIFY binaryFilesizeChanged)
     Q_PROPERTY(QString changelog READ changelog
             WRITE setChangelog NOTIFY changelogChanged)
     Q_PROPERTY(QString channel READ channel
             WRITE setChannel NOTIFY channelChanged)
-    Q_PROPERTY(QString content READ content
-            WRITE setContent NOTIFY contentChanged)
     Q_PROPERTY(QDateTime createdAt READ createdAt
             WRITE setCreatedAt NOTIFY createdAtChanged)
     Q_PROPERTY(bool installed READ installed
             WRITE setInstalled NOTIFY installedChanged)
     Q_PROPERTY(QDateTime updatedAt READ updatedAt
             WRITE setUpdatedAt NOTIFY updatedAtChanged)
-    Q_PROPERTY(QStringList department READ department
-            WRITE setDepartment NOTIFY departmentChanged)
     Q_PROPERTY(QString downloadHash READ downloadHash
             WRITE setDownloadHash NOTIFY downloadHashChanged)
     Q_PROPERTY(QString downloadUrl READ downloadUrl
@@ -63,11 +53,9 @@ class Update : public QObject
             WRITE setIconUrl NOTIFY iconUrlChanged)
     Q_PROPERTY(QString identifier READ identifier
             WRITE setIdentifier NOTIFY identifierChanged)
-    Q_PROPERTY(QString origin READ origin
-            WRITE setOrigin NOTIFY originChanged)
     Q_PROPERTY(int progress READ progress
             WRITE setProgress NOTIFY progressChanged)
-    Q_PROPERTY(int revision READ revision
+    Q_PROPERTY(uint revision READ revision
             WRITE setRevision NOTIFY revisionChanged)
     Q_PROPERTY(State state READ state
             WRITE setState NOTIFY stateChanged)
@@ -87,17 +75,17 @@ public:
     explicit Update(QObject *parent = 0);
     ~Update();
 
-    enum class Kind
+    enum class Kind : uint
     {
-        KindUnknown,
+        KindUnknown = 0,
         KindClick,
         KindImage,
         KindAll
     };
 
-    enum class State
+    enum class State : uint
     {
-        StateUnknown,
+        StateUnknown = 0,
         StateAvailable,
         StateUnavailable,
         StateQueuedForDownload,
@@ -122,21 +110,17 @@ public:
 
     Kind kind() const;
     QString identifier() const;
-    int revision() const;
-    QString anonDownloadUrl() const;
+    uint revision() const;
     uint binaryFilesize() const;
     QString changelog() const;
     QString channel() const;
-    QString content() const;
     QDateTime createdAt() const;
     QDateTime updatedAt() const;
-    QStringList department() const;
     QString downloadHash() const;
     QString downloadUrl() const;
     QString error() const;
     QString iconUrl() const;
     bool installed() const;
-    QString origin() const;
     int progress() const;
     State state() const;
     QString title() const;
@@ -148,21 +132,17 @@ public:
 
     void setKind(const Kind &kind);
     void setIdentifier(const QString &identifier);
-    void setRevision(const int &revision);
-    void setAnonDownloadUrl(const QString &anonDownloadUrl);
+    void setRevision(const uint &revision);
     void setBinaryFilesize(const uint &binaryFilesize);
     void setChangelog(const QString &changelog);
     void setChannel(const QString &channel);
-    void setContent(const QString &content);
     void setCreatedAt(const QDateTime &createdAt);
     void setUpdatedAt(const QDateTime &updatedAt);
-    void setDepartment(const QStringList &department);
     void setDownloadHash(const QString &downloadHash);
     void setDownloadUrl(const QString &downloadUrl);
     void setError(const QString &error);
     void setIconUrl(const QString &iconUrl);
     void setInstalled(const bool installed);
-    void setOrigin(const QString &origin);
     void setProgress(const int &progress);
     void setState(const State &state);
     void setTitle(const QString &title);
@@ -174,38 +154,30 @@ public:
 
     bool isUpdateRequired();
 
-    // Set values on update given an sql query.
-    void setValues(const QSqlQuery *query);
-
     // Whether or not all fields in this update is equal to that of other.
     bool deepEquals(const Update *other) const;
 
     /* Whether or not either id and rev equals to other, or download id is set
     and that is equal to that of other. */
-    bool operator==(const Update *other) const;
+    bool operator==(const Update &other) const;
 
-    bool equals(const Update *other) const;
+    bool equals(const Update &other) const;
 
 signals:
     void kindChanged();
     void identifierChanged();
     void revisionChanged();
-    void anonDownloadUrlChanged();
     void binaryFilesizeChanged();
     void changelogChanged();
     void channelChanged();
-    void contentChanged();
     void createdAtChanged();
     void installedChanged();
     void updatedAtChanged();
-    void departmentChanged();
     void downloadHashChanged();
     void downloadUrlChanged();
     void errorChanged();
     void iconUrlChanged();
-    void originChanged();
     void progressChanged();
-    void sequenceChanged();
     void stateChanged();
     void titleChanged();
     void remoteVersionChanged();
@@ -217,21 +189,17 @@ signals:
 protected:
     Kind m_kind;
     QString m_identifier;
-    int m_revision;
-    QString m_anonDownloadUrl;
+    uint m_revision;
     uint m_binaryFilesize;
     QString m_changelog;
     QString m_channel;
-    QString m_content;
     QDateTime m_createdAt;
     QDateTime m_updatedAt;
-    QStringList m_department;
     QString m_downloadHash;
     QString m_downloadUrl;
     QString m_error;
     QString m_iconUrl;
     bool m_installed;
-    QString m_origin;
     int m_progress;
     State m_state;
     QString m_title;

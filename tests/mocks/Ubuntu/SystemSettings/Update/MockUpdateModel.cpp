@@ -16,23 +16,22 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef MOCK_UPDATE_MODEL_H
-#define MOCK_UPDATE_MODEL_H
+#include "MockUpdateModel.h"
+#include "update.h"
 
-#include "updatemodel.h"
-#include <QObject>
-#include <QString>
-#include <QDebug>
+#include <QSharedPointer>
 
-class MockUpdateModel : public UpdatePlugin::UpdateModel
+void MockUpdateModel::mockAddUpdate(const QString &id, const int &revision)
 {
-    Q_OBJECT
-public:
-    MockUpdateModel(QObject *parent = 0)
-        : UpdatePlugin::UpdateModel(":memory:", parent) {}
-    ~MockUpdateModel(){}
+    using namespace UpdatePlugin;
+    QSharedPointer<Update> u = QSharedPointer<Update>(new Update);
+    u->setIdentifier(id);
+    u->setKind(Update::Kind::KindClick);
+    u->setRevision(revision);
+    u->setTitle("Test App" + id);
+    u->setRemoteVersion("v" + revision);
+    u->setBinaryFilesize(5000 * 1000);
+    db()->add(u);
+    refresh();
+}
 
-    Q_INVOKABLE void mockAddUpdate(const QString &id, const int &revision);
-};
-
-#endif // MOCK_UPDATE_MODEL_H

@@ -32,25 +32,28 @@ Item {
     Component {
         id: update
 
-        Update {
+        UpdateDelegate {
             width: testRoot.width
         }
     }
 
     // We try here to address all the states which are enumerated in the
     // spec [1]. Due to limitations in DownloadManager, “Download” is
-    // not possible on app updates. App updates are only Update-able
+    // not possible on app updates. Click updates are only Update-able
     // (i.e. Download+Install as one step).
     // [1] https://wiki.ubuntu.com/SoftwareUpdates#Phone
     UbuntuTestCase {
         name: "UpdateTest"
         when: windowShown
 
+        property var instance: null
+
         SignalSpy {
             id: buttonSignalSpy
         }
 
         function cleanup() {
+            instance && instance.destroy();
             buttonSignalSpy.target = null;
             buttonSignalSpy.signalName = "";
         }
@@ -62,8 +65,8 @@ Item {
                 {
                     tag: "System update available",
 
-                    updateState: SystemUpdate.StateAvailable,
-                    kind: SystemUpdate.KindSystem,
+                    updateState: Update.StateAvailable,
+                    kind: Update.KindImage,
                     progress: 0,
                     button: { text: i18n.tr("Download"), visibility: true, state: true, signal: "download", },
                     progressbar: { visibility: false, progress: 0, },
@@ -72,10 +75,10 @@ Item {
                     targetDownloadLabelText: "",
                 },
                 {
-                    tag: "App update available",
+                    tag: "Click update available",
 
-                    updateState: SystemUpdate.StateAvailable,
-                    kind: SystemUpdate.KindApp,
+                    updateState: Update.StateAvailable,
+                    kind: Update.KindClick,
                     progress: 0,
                     button: { text: i18n.tr("Update"), visibility: true, state: true, signal: "install", },
                     progressbar: { visibility: false, progress: 0, },
@@ -86,13 +89,13 @@ Item {
 
                 // Downloading automatically
                 {
-                    tag: "App update downloading automatically",
+                    tag: "Click update downloading automatically",
 
-                    updateState: SystemUpdate.StateDownloadingAutomatically,
-                    kind: SystemUpdate.KindApp,
-                    progress: 0.5,
+                    updateState: Update.StateDownloadingAutomatically,
+                    kind: Update.KindClick,
+                    progress: 50,
                     button: { text: i18n.tr("Pause"), visibility: true, state: true, signal: "pause", },
-                    progressbar: { visibility: false, progress: 0.5, },
+                    progressbar: { visibility: false, progress: 50, },
                     error: { title: "", detail: "", visiblity: false, },
                     targetStatusLabelText: i18n.tr("%1 of %2").arg("500 Bytes").arg("1 KB"),
                     targetDownloadLabelText: "",
@@ -100,11 +103,11 @@ Item {
                 {
                     tag: "System update downloading automatically",
 
-                    updateState: SystemUpdate.StateDownloadingAutomatically,
-                    kind: SystemUpdate.KindSystem,
-                    progress: 0.5,
+                    updateState: Update.StateDownloadingAutomatically,
+                    kind: Update.KindImage,
+                    progress: 50,
                     button: { text: i18n.tr("Pause"), visibility: true, state: true, signal: "pause", },
-                    progressbar: { visibility: false, progress: 0.5, },
+                    progressbar: { visibility: false, progress: 50, },
                     error: { title: "", detail: "", visiblity: false, },
                     targetStatusLabelText: i18n.tr("%1 of %2").arg("500 Bytes").arg("1 KB"),
                     targetDownloadLabelText: "",
@@ -112,13 +115,13 @@ Item {
 
                 // Downloading manually
                 {
-                    tag: "App update Downloading manually",
+                    tag: "Click update Downloading manually",
 
-                    updateState: SystemUpdate.StateDownloading,
-                    kind: SystemUpdate.KindApp,
-                    progress: 0.5,
+                    updateState: Update.StateDownloading,
+                    kind: Update.KindClick,
+                    progress: 50,
                     button: { text: i18n.tr("Pause"), visibility: true, state: true, signal: "pause", },
-                    progressbar: { visibility: true, progress: 0.5, },
+                    progressbar: { visibility: true, progress: 50, },
                     error: { title: "", detail: "", visiblity: false, },
                     targetStatusLabelText: i18n.tr("%1 of %2").arg("500 Bytes").arg("1 KB"),
                     targetDownloadLabelText: i18n.tr("Downloading"),
@@ -126,11 +129,11 @@ Item {
                 {
                     tag: "System update Downloading manually",
 
-                    updateState: SystemUpdate.StateDownloading,
-                    kind: SystemUpdate.KindSystem,
-                    progress: 0.5,
+                    updateState: Update.StateDownloading,
+                    kind: Update.KindImage,
+                    progress: 50,
                     button: { text: i18n.tr("Pause"), visibility: true, state: true, signal: "pause", },
-                    progressbar: { visibility: true, progress: 0.5, },
+                    progressbar: { visibility: true, progress: 50, },
                     error: { title: "", detail: "", visiblity: false, },
                     targetStatusLabelText: i18n.tr("%1 of %2").arg("500 Bytes").arg("1 KB"),
                     targetDownloadLabelText: i18n.tr("Downloading"),
@@ -138,13 +141,13 @@ Item {
 
                 // Download failed
                 {
-                    tag: "App update Download failed",
+                    tag: "Click update Download failed",
 
-                    updateState: SystemUpdate.StateFailed,
-                    kind: SystemUpdate.KindApp,
-                    progress: 0.5,
+                    updateState: Update.StateFailed,
+                    kind: Update.KindClick,
+                    progress: 50,
                     button: { text: i18n.tr("Retry"), visibility: true, state: true, signal: "retry", },
-                    progressbar: { visibility: false, progress: 0.5, },
+                    progressbar: { visibility: false, progress: 50, },
                     error: { title: "Fail", detail: "Something failed big time.", visiblity: true, },
                     targetStatusLabelText: "",
                     targetDownloadLabelText: "",
@@ -152,11 +155,11 @@ Item {
                 {
                     tag: "System update Download failed",
 
-                    updateState: SystemUpdate.StateFailed,
-                    kind: SystemUpdate.KindSystem,
-                    progress: 0.5,
+                    updateState: Update.StateFailed,
+                    kind: Update.KindImage,
+                    progress: 50,
                     button: { text: i18n.tr("Retry"), visibility: true, state: true, signal: "retry", },
-                    progressbar: { visibility: false, progress: 0.5, },
+                    progressbar: { visibility: false, progress: 50, },
                     error: { title: "Fail", detail: "Something failed big time.", visiblity: true, },
                     targetStatusLabelText: "",
                     targetDownloadLabelText: "",
@@ -164,12 +167,12 @@ Item {
 
                 // Downloaded
                 {
-                    tag: "App update Downloaded",
-                    updateState: SystemUpdate.StateDownloaded,
-                    kind: SystemUpdate.KindApp,
-                    progress: 0.5,
+                    tag: "Click update Downloaded",
+                    updateState: Update.StateDownloaded,
+                    kind: Update.KindClick,
+                    progress: 50,
                     button: { text: i18n.tr("Install"), visibility: true, state: true, signal: "install", },
-                    progressbar: { visibility: false, progress: 0.5, },
+                    progressbar: { visibility: false, progress: 50, },
                     error: { title: "", detail: "", visiblity: false, },
                     targetStatusLabelText: i18n.tr("Downloaded"),
                     targetDownloadLabelText: "",
@@ -177,11 +180,11 @@ Item {
                 {
                     tag: "System update Downloaded",
 
-                    updateState: SystemUpdate.StateDownloaded,
-                    kind: SystemUpdate.KindSystem,
-                    progress: 0.5,
+                    updateState: Update.StateDownloaded,
+                    kind: Update.KindImage,
+                    progress: 50,
                     button: { text: i18n.tr("Install…"), visibility: true, state: true, signal: "install", },
-                    progressbar: { visibility: false, progress: 0.5, },
+                    progressbar: { visibility: false, progress: 50, },
                     error: { title: "", detail: "", visiblity: false, },
                     targetStatusLabelText: i18n.tr("Downloaded"),
                     targetDownloadLabelText: "",
@@ -189,11 +192,11 @@ Item {
 
                 // Waiting to download
                 {
-                    tag: "App update Waiting to download",
-                    updateState: SystemUpdate.StateQueuedForDownload,
-                    kind: SystemUpdate.KindApp,
+                    tag: "Click update Waiting to download",
+                    updateState: Update.StateQueuedForDownload,
+                    kind: Update.KindClick,
                     progress: 0,
-                    button: { text: i18n.tr("Pause"), visibility: true, state: true, signal: "pause", },
+                    button: { text: i18n.tr("Update"), visibility: true, state: false },
                     progressbar: { visibility: true, progress: 0, },
                     error: { title: "", detail: "", visiblity: false, },
                     targetStatusLabelText: "",
@@ -201,10 +204,10 @@ Item {
                 },
                 {
                     tag: "System update Waiting to download (Manual)",
-                    updateState: SystemUpdate.StateQueuedForDownload,
-                    kind: SystemUpdate.KindSystem,
+                    updateState: Update.StateQueuedForDownload,
+                    kind: Update.KindImage,
                     progress: 0,
-                    button: { text: i18n.tr("Pause"), visibility: true, state: true, signal: "pause", },
+                    button: { text: i18n.tr("Download"), visibility: true, state: false },
                     progressbar: { visibility: true, progress: 0, },
                     error: { title: "", detail: "", visiblity: false, },
                     targetStatusLabelText: "",
@@ -213,10 +216,10 @@ Item {
 
                 // Installing
                 {
-                    tag: "App update Installing",
+                    tag: "Click update Installing",
 
-                    updateState: SystemUpdate.StateInstalling,
-                    kind: SystemUpdate.KindApp,
+                    updateState: Update.StateInstalling,
+                    kind: Update.KindClick,
                     progress: 1,
                     button: { text: i18n.tr("Pause"), visibility: true, state: false, },
                     progressbar: { visibility: true, progress: 1, },
@@ -227,12 +230,12 @@ Item {
                 {
                     tag: "System update Installing",
 
-                    updateState: SystemUpdate.StateInstalling,
-                    kind: SystemUpdate.KindSystem,
-                    progress: 0.5,
+                    updateState: Update.StateInstalling,
+                    kind: Update.KindImage,
+                    progress: 50,
 
                     button: { text: i18n.tr("Pause"), visibility: true, state: false, },
-                    progressbar: { visibility: true, progress: 0.5, },
+                    progressbar: { visibility: true, progress: 50, },
                     error: { title: "", detail: "", visiblity: false, },
                     targetStatusLabelText: "",
                     targetDownloadLabelText: i18n.tr("Installing"),
@@ -240,13 +243,13 @@ Item {
 
                 // Download Paused
                 {
-                    tag: "App update Download Paused",
+                    tag: "Click update Download Paused",
 
-                    updateState: SystemUpdate.StateDownloadPaused,
-                    kind: SystemUpdate.KindApp,
-                    progress: 1,
+                    updateState: Update.StateDownloadPaused,
+                    kind: Update.KindClick,
+                    progress: 100,
                     button: { text: i18n.tr("Resume"), visibility: true, state: true, signal: "resume", },
-                    progressbar: { visibility: true, progress: 1, },
+                    progressbar: { visibility: true, progress: 100, },
                     error: { title: "", detail: "", visiblity: false, },
                     targetStatusLabelText: i18n.tr("%1 of %2").arg("1 KB").arg("1 KB"),
                     targetDownloadLabelText: i18n.tr("Paused"),
@@ -254,32 +257,32 @@ Item {
                 {
                     tag: "System update Download Paused (Manual)",
 
-                    updateState: SystemUpdate.StateDownloadPaused,
-                    kind: SystemUpdate.KindSystem,
-                    progress: 0.5,
+                    updateState: Update.StateDownloadPaused,
+                    kind: Update.KindImage,
+                    progress: 50,
                     button: { text: i18n.tr("Resume"), visibility: true, state: true, signal: "resume", },
-                    progressbar: { visibility: true, progress: 0.5, },
+                    progressbar: { visibility: true, progress: 50, },
                     error: { title: "", detail: "", visiblity: false, },
                     targetStatusLabelText: i18n.tr("%1 of %2").arg("500 Bytes").arg("1 KB"),
                     targetDownloadLabelText: i18n.tr("Paused"),
                 },
                 {
                     tag: "System update Download Paused (Automatic)",
-                    updateState: SystemUpdate.StateAutomaticDownloadPaused,
-                    kind: SystemUpdate.KindSystem,
-                    progress: 0.5,
+                    updateState: Update.StateAutomaticDownloadPaused,
+                    kind: Update.KindImage,
+                    progress: 50,
                     button: { text: i18n.tr("Resume"), visibility: true, state: true, signal: "resume", },
-                    progressbar: { visibility: false, progress: 0.5, },
+                    progressbar: { visibility: false, progress: 50, },
                     error: { title: "", detail: "", visiblity: false, },
                     targetStatusLabelText: i18n.tr("%1 of %2").arg("500 Bytes").arg("1 KB"),
                     targetDownloadLabelText: "",
                 },
 
-                // Installed
+                // Install finished
                 {
-                    tag: "App update installed",
-                    updateState: SystemUpdate.StateInstalled,
-                    kind: SystemUpdate.KindApp,
+                    tag: "Click update install finished",
+                    updateState: Update.StateInstallFinished,
+                    kind: Update.KindClick,
                     progress: 1,
                     button: { text: i18n.tr("Pause"), visibility: true, state: false },
                     progressbar: { visibility: false, progress: 1, },
@@ -288,14 +291,38 @@ Item {
                     targetDownloadLabelText: "",
                 },
                 {
-                    tag: "System update installed",
-                    updateState: SystemUpdate.StateInstalled,
-                    kind: SystemUpdate.KindSystem,
+                    tag: "System update install finished",
+                    updateState: Update.StateInstallFinished,
+                    kind: Update.KindImage,
                     progress: 1,
                     button: { text: i18n.tr("Pause"), visibility: true, state: false },
                     progressbar: { visibility: false, progress: 1, },
                     error: { title: "", detail: "", visiblity: false, },
                     targetStatusLabelText: i18n.tr("Installed"),
+                    targetDownloadLabelText: "",
+                },
+
+                // Installed
+                {
+                    tag: "Click update installed",
+                    updateState: Update.StateInstalled,
+                    kind: Update.KindClick,
+                    progress: 1,
+                    button: { text: i18n.tr("Pause"), visibility: false, state: false },
+                    progressbar: { visibility: false, progress: 1, },
+                    error: { title: "", detail: "", visiblity: false, },
+                    targetStatusLabelText: "",
+                    targetDownloadLabelText: "",
+                },
+                {
+                    tag: "System update installed",
+                    updateState: Update.StateInstalled,
+                    kind: Update.KindImage,
+                    progress: 1,
+                    button: { text: i18n.tr("Pause"), visibility: false, state: false },
+                    progressbar: { visibility: false, progress: 1, },
+                    error: { title: "", detail: "", visiblity: false, },
+                    targetStatusLabelText: "",
                     targetDownloadLabelText: "",
                 },
             ]
@@ -307,34 +334,34 @@ Item {
             data["size"] = 1000;
 
             // Non-functional stuff
-            if (data["kind"] === SystemUpdate.KindSystem) {
+            if (data["kind"] === Update.KindImage) {
                 data["name"] = "Ubuntu Touch";
                 data["iconUrl"] = "distributor-logo.png";
-            } else if (data["kind"] === SystemUpdate.KindApp) {
+            } else if (data["kind"] === Update.KindClick) {
                 data["name"] = "Some app";
                 data["iconUrl"] = "system-settings.png";
             }
 
-            var u = update.createObject(testRoot, data);
-            var button = findChild(u, "updateButton");
-            var statusLabel = findChild(u, "updateStatusLabel");
-            var downloadLabel = findChild(u, "updateDownloadLabel");
-            var progressbar = findChild(u, "updateProgressbar");
-            var error = findChild(u, "updateError");
+            instance = update.createObject(testRoot, data);
+            var button = findChild(instance, "updateButton");
+            var statusLabel = findChild(instance, "updateStatusLabel");
+            var downloadLabel = findChild(instance, "updateDownloadLabel");
+            var progressbar = findChild(instance, "updateProgressbar");
+            var error = findChild(instance, "updateError");
 
             compare(button.text, data.button.text, "button had wrong text");
             compare(button.visible, data.button.visibility, "button had wrong visibility");
             compare(button.enabled, data.button.state, "button had wrong enabled value");
 
             if (data.button.state === true) {
-                buttonSignalSpy.target = u;
+                buttonSignalSpy.target = instance;
                 buttonSignalSpy.signalName = data.button.signal;
                 mouseClick(button, button.width / 2, button.height / 2);
                 buttonSignalSpy.wait();
             }
 
             if (data.error.title && data.error.detail) {
-                u.setError(data.error.title, data.error.detail);
+                instance.setError(data.error.title, data.error.detail);
             }
 
             compare(error.visible, data.error.visiblity, "error had wrong visibility");
@@ -347,8 +374,6 @@ Item {
             compare(statusLabel.text, data.targetStatusLabelText, "status label had wrong text");
 
             compare(downloadLabel.text, data.targetDownloadLabelText, "download label had wrong text");
-
-            u.destroy();
         }
 
         function test_retry() {

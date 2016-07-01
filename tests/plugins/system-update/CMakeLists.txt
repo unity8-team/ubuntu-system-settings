@@ -93,11 +93,11 @@ add_executable(tst-update
 add_test(tst-update tst-update)
 target_link_libraries(tst-update Qt5::Test ${PLUGIN_LIBS})
 
-# add_executable(tst-updatemodel
-#                tst_updatemodel.cpp
-#                ${PLUGIN_SOURCES})
-# add_test(tst-updatemodel tst-updatemodel)
-# target_link_libraries(tst-updatemodel Qt5::Test ${PLUGIN_LIBS})
+add_executable(tst-updatemodel
+               tst_updatemodel.cpp
+               ${PLUGIN_SOURCES})
+add_test(tst-updatemodel tst-updatemodel)
+target_link_libraries(tst-updatemodel Qt5::Test ${PLUGIN_LIBS})
 
 add_executable(tst-updatepluginhelpers
                tst_helpers.cpp
@@ -109,32 +109,6 @@ set_tests_properties(
         ENVIRONMENT "IGNORE_CREDENTIALS=1;URL_APPS=http://127.0.0.1:9009;FRAMEWORKS_FOLDER=${CMAKE_CURRENT_BINARY_DIR};CLICK_TOKEN_URL=http://example.org;"
 )
 target_link_libraries(tst-updatepluginhelpers Qt5::Test ${PLUGIN_LIBS})
-
-
-# add_executable(tst-update-manager
-#     tst_updatemanager.cpp
-#     fakeprocess.cpp
-#     fakeprocess.h
-#     fakenetwork.cpp
-#     fakenetwork.h
-#     fakessoservice.cpp
-#     fakessoservice.h
-#     fakesystemupdate.cpp
-#     ../../../plugins/system-update/update.cpp
-#     ../../../plugins/system-update/update_manager.cpp
-#     ../../../plugins/system-update/system_update.cpp
-# )
-
-# add_executable(tst-update
-#     tst_update.cpp
-#     ../../../plugins/system-update/update.cpp
-# )
-
-# add_executable(tst-network
-#     tst_network.cpp
-#     ../../../plugins/system-update/update.cpp
-#     ../../../plugins/system-update/network.cpp
-# )
 
 # # set the path to the library folder
 # include_directories(/usr/include/apt-pkg/)

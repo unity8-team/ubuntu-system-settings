@@ -15,30 +15,31 @@
  * You should have received a copy of the GNU General Public License along
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef MOCK_SYSTEM_UPDATE_H
-#define MOCK_SYSTEM_UPDATE_H
+#ifndef MOCK_UPDATE_H
+#define MOCK_UPDATE_H
 
 #include <QObject>
 
-class MockSystemUpdate : public QObject
+class MockUpdate : public QObject
 {
     Q_OBJECT
-    Q_ENUMS(UpdateKind)
-    Q_ENUMS(UpdateState)
-    Q_ENUMS(SystemStatus)
+    Q_ENUMS(Kind)
+    Q_ENUMS(State)
 public:
-    static MockSystemUpdate *instance();
+    MockUpdate(QObject *parent = 0) : QObject(parent) {};
+    ~MockUpdate() {};
 
-    enum class UpdateKind
+    enum class Kind : uint
     {
-        KindApp,
-        KindSystem,
-        KindUnknown
+        KindUnknown = 0,
+        KindClick,
+        KindImage,
+        KindAll
     };
 
-    enum class UpdateState
+    enum class State : uint
     {
-        StateUnknown,
+        StateUnknown = 0,
         StateAvailable,
         StateUnavailable,
         StateQueuedForDownload,
@@ -54,27 +55,6 @@ public:
         StateDownloaded,
         StateFailed
     };
-
-    enum class SystemStatus
-    {
-        StatusIdle,
-        StatusCheckingClickUpdates,
-        StatusCheckingSystemUpdates,
-        StatusCheckingAllUpdates,
-        StatusBatchMode, // Installing all updates
-        StatusBatchModePaused,
-        StatusNetworkError,
-        StatusServerError
-    };
-
-protected:
-    MockSystemUpdate(QObject *parent = 0)
-    {
-        Q_UNUSED(parent);
-    }
-    ~MockSystemUpdate() {}
-private:
-    static MockSystemUpdate *m_instance;
 };
 
-#endif // MOCK_SYSTEM_UPDATE_H
+#endif // MOCK_UPDATE_H

@@ -15,24 +15,4 @@
  * You should have received a copy of the GNU General Public License along
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
-#ifndef MOCK_UPDATE_MODEL_H
-#define MOCK_UPDATE_MODEL_H
-
-#include "updatemodel.h"
-#include <QObject>
-#include <QString>
-#include <QDebug>
-
-class MockUpdateModel : public UpdatePlugin::UpdateModel
-{
-    Q_OBJECT
-public:
-    MockUpdateModel(QObject *parent = 0)
-        : UpdatePlugin::UpdateModel(":memory:", parent) {}
-    ~MockUpdateModel(){}
-
-    Q_INVOKABLE void mockAddUpdate(const QString &id, const int &revision);
-};
-
-#endif // MOCK_UPDATE_MODEL_H
+#include "MockUpdate.h"

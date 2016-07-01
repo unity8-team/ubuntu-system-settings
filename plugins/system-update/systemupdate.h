@@ -37,6 +37,7 @@ public:
         StatusCheckingSystemUpdates,
         StatusCheckingAllUpdates,
         StatusBatchMode, // Installing all updates
+        StatusBatchModePaused, // Installing all updates paused
         StatusNetworkError,
         StatusServerError
     };

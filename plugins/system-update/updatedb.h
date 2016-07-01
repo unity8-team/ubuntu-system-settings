@@ -29,8 +29,8 @@
 namespace UpdatePlugin
 {
 
-/* Object that wraps the updates database and will normally only be
-instantiated once. */
+/* Object that wraps the updates database and will only be instantiated
+once. */
 class UpdateDb : public QObject
 {
     Q_OBJECT
@@ -43,41 +43,37 @@ public:
 
     void add(const QSharedPointer<Update> &update);
     void remove(const QSharedPointer<Update> &update);
-    QSharedPointer<Update> get(const QString &id, const int &revision);
-    // QList<QSharedPointer<ClickUpdate> > getClicks();
-
-    QList<QSharedPointer<Update> > updates(const uint &filter);
+    QSharedPointer<Update> get(const QString &id, const uint &revision);
+    QList<QSharedPointer<Update> > updates(const uint &filter = 0);
 
     QSqlDatabase db(); // For testing.
 
     QDateTime lastCheckDate();
     void setLastCheckDate(const QDateTime &lastCheckUtc);
 
-    void setState(const QString &id, const int &revision,
-                  const Update::State &state);
-    void setInstalled(const QString &id, const int &revision);
-    void setError(const QString &id, const int &revision, const QString &msg);
-    void setProgress(const QString &id, const int &revision,
+    void setInstalled(const QString &id, const uint &revision);
+    void setError(const QString &id, const uint &revision, const QString &msg);
+    void setDownloaded(const QString &id, const uint &revision);
+    void setProgress(const QString &id, const uint &revision,
                      const int &progress);
-    void setStarted(const QString &id, const int &revision);
-    void setQueued(const QString &id, const int &revision);
-    void setProcessing(const QString &id, const int &revision);
-    void setPaused(const QString &id, const int &revision);
-    void setResumed(const QString &id, const int &revision);
-    void setCanceled(const QString &id, const int &revision);
-    // void setDownloadId(const QString &id, const int &revision,
-    //                    const QString &downloadId);
-    // void setState(const QString &downloadId,
-    //               const SystemUpdate::UpdateState &state);
-    // void unsetDownloadId(const QString &downloadId);
+    void setStarted(const QString &id, const uint &revision);
+    void setQueued(const QString &id, const uint &revision);
+    void setProcessing(const QString &id, const uint &revision);
+    void setPaused(const QString &id, const uint &revision);
+    void setResumed(const QString &id, const uint &revision);
+    void setCanceled(const QString &id, const uint &revision);
 
     void pruneDb();
 
 signals:
     void changed();
-    void changed(const QString &id, const int &revision);
+    void changed(const QString &id, const uint &revision);
 
 private:
+    static void update(const QSharedPointer<Update> &update,
+                       const QSqlQuery &query);
+    void setState(const QString &id, const uint &revision,
+                  const Update::State &state);
     bool createDb();
     void initializeDb();
     bool openDb();

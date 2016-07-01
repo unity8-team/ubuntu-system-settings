@@ -32,8 +32,6 @@ namespace UpdatePlugin
 class UpdateModel : public QAbstractListModel
 {
     Q_OBJECT
-    /* Note: The filter is not declared in UpdateModel, so we can't use it
-    from QML. We use an int instead. */
     Q_PROPERTY(Filter filter
                READ filter
                WRITE setFilter
@@ -43,9 +41,8 @@ class UpdateModel : public QAbstractListModel
 public:
     enum class Filter : uint
     {
-        All,
+        All = 0,
         Pending,
-        PendingReversed,
         PendingClicks,
         PendingImage,
         InstalledClicks,
@@ -86,38 +83,42 @@ public:
     explicit UpdateModel(const QString &dbpath, QObject *parent = 0);
 
     UpdateDb* db();
-    QVariant data(const QModelIndex &index, int role) const;
-    QHash<int, QByteArray> roleNames() const;
+
+    QVariant data(const QModelIndex &index, int role) const Q_DECL_OVERRIDE;
+    QHash<int, QByteArray> roleNames() const Q_DECL_OVERRIDE;
     int count() const;
-    int rowCount(const QModelIndex &parent = QModelIndex()) const;
+    int rowCount(const QModelIndex &parent = QModelIndex()) const Q_DECL_OVERRIDE;
 
     Filter filter() const;
     void setFilter(const Filter &filter);
 
-    Q_INVOKABLE void setInstalled(const QString &id, const int &revision);
-    Q_INVOKABLE void setError(const QString &id, const int &revision, const QString &msg);
-    Q_INVOKABLE void setProgress(const QString &id, const int &revision,
+    Q_INVOKABLE void setInstalled(const QString &id, const uint &revision);
+    Q_INVOKABLE void setError(const QString &id, const uint &revision, const QString &msg);
+    Q_INVOKABLE void setProgress(const QString &id, const uint &revision,
                      const int &progress);
-    Q_INVOKABLE void startUpdate(const QString &id, const int &revision);
-    Q_INVOKABLE void queueUpdate(const QString &id, const int &revision);
-    Q_INVOKABLE void processUpdate(const QString &id, const int &revision);
-    Q_INVOKABLE void pauseUpdate(const QString &id, const int &revision);
-    Q_INVOKABLE void resumeUpdate(const QString &id, const int &revision);
-    Q_INVOKABLE void cancelUpdate(const QString &id, const int &revision);
-    // Q_INVOKABLE void setDownloadId(const QString &id, const int &revision,
+    Q_INVOKABLE void setDownloaded(const QString &id, const uint &revision);
+    Q_INVOKABLE void startUpdate(const QString &id, const uint &revision);
+    Q_INVOKABLE void queueUpdate(const QString &id, const uint &revision);
+    Q_INVOKABLE void processUpdate(const QString &id, const uint &revision);
+    Q_INVOKABLE void pauseUpdate(const QString &id, const uint &revision);
+    Q_INVOKABLE void resumeUpdate(const QString &id, const uint &revision);
+    Q_INVOKABLE void cancelUpdate(const QString &id, const uint &revision);
+    Q_INVOKABLE void setImageUpdate(const QString &id, const QString &version,
+                                    const int &updateSize, const int &downloadMode);
+    // Q_INVOKABLE void setDownloadId(const QString &id, const uint &revision,
     //                    const QString &downloadId);
     // Q_INVOKABLE bool contains(const QString &downloadId) const;
 
 public slots:
     void refresh();
-    void refresh(const QString &id, const int &revision);
+    void refresh(const QString &id, const uint &revision);
     void clear();
 
 signals:
     void countChanged();
     void filterChanged();
     // void changed();
-    // void updateChanged(const QString &id, const int &revision);
+    // void updateChanged(const QString &id, const uint &revision);
     // void updateChanged(const QString &downloadId);
 
 private:
@@ -126,7 +127,7 @@ private:
     void moveRow(const int &from, const int &to);
     void emitRowChanged(int row);
     void initialize();
-    // int find(const QString &id, const int &revision) const;
+    // int find(const QString &id, const uint &revision) const;
     // int find(const QString &downloadId) const;
     // static QSharedPointer<Update> find(const QList<QSharedPointer<Update> > &list,
     //                                    const QSharedPointer<Update> &update);

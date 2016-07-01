@@ -28,12 +28,21 @@ Item {
     property int updatesCount: 0
     property bool online: false
 
-    // The only case where the global should be hidden.
-    property bool hidden: updatesCount <= 1 && status === SystemUpdate.StatusIdle
+    property bool hidden: {
+        // For some, we hide unconditionally:
+        switch (status) {
+        case SystemUpdate.StatusNetworkError:
+        case SystemUpdate.StatusServerError:
+            return true;
+        }
+        return updatesCount <= 1 && status === SystemUpdate.StatusIdle || !online;
+    }
 
     signal stop()
     signal pause()
+    signal requestInstall()
     signal install()
+    signal resume()
 
     clip: true
 
@@ -90,7 +99,7 @@ Item {
         Button {
             objectName: "updatesGlobalInstallButton"
             text: {
-                if (g.requireRestart) {
+                if (g.requireRestart === true) {
                     return i18n.tr(
                         "Install %1 update…",
                         "Install %1 updates…",
@@ -104,7 +113,7 @@ Item {
                     ).arg(updatesCount);
                 }
             }
-            onClicked: g.install()
+            onClicked: g.requestInstall()
             Layout.fillWidth: true
         }
     }
@@ -114,13 +123,29 @@ Item {
         anchors.fill: parent
         visible: {
             var batchMode = g.status === SystemUpdate.StatusBatchMode;
-            return batchMode && updatesCount > 1;
+            return batchMode && updatesCount >= 1;
         }
 
         Button {
             objectName: "updatesGlobalPauseButton"
             text: i18n.tr("Pause All")
             onClicked: g.pause()
+            Layout.fillWidth: true
+        }
+    }
+
+    RowLayout {
+        id: resume
+        anchors.fill: parent
+        visible: {
+            var batchModePaused = g.status === SystemUpdate.StatusBatchModePaused;
+            return batchModePaused && updatesCount >= 1;
+        }
+
+        Button {
+            objectName: "updatesGlobalResumeButton"
+            text: i18n.tr("Resume All")
+            onClicked: g.resume()
             Layout.fillWidth: true
         }
     }

@@ -1,8 +1,9 @@
 module Source
 
-Update 1.0 ../../../../plugins/system-update/Update.qml
 Updates 1.0 ../../../../plugins/system-update/Updates.qml
-ClickUpdate 1.0 ../../../../plugins/system-update/ClickUpdate.qml
-ImageUpdate 1.0 ../../../../plugins/system-update/ImageUpdate.qml
+UpdateDelegate 1.0 ../../../../plugins/system-update/UpdateDelegate.qml
+ClickUpdateDelegate 1.0 ../../../../plugins/system-update/ClickUpdateDelegate.qml
+ImageUpdateDelegate 1.0 ../../../../plugins/system-update/ImageUpdateDelegate.qml
 Global 1.0 ../../../../plugins/system-update/Global.qml
 NotAuthenticatedNotification 1.0 ../../../../plugins/system-update/NotAuthenticatedNotification.qml
+SystemImageHandler 1.0 ../../../../plugins/system-update/SystemImageHandler.qml
