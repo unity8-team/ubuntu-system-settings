@@ -63,9 +63,19 @@ ItemPage {
                         width: parent.width - 2 * (layout.padding.leading + layout.padding.trailing)
                         OptionSelector {
                             id: optionSelector
+
+                            selectedIndex: GeneralNotificationSettings.vibrateInSilentMode ? 0 : 1
                             expanded: true
                             model: [i18n.tr("Vibrate as normal"),
                                     i18n.tr("Don't vibrate")]
+
+                            onDelegateClicked: {
+                                if (index === 0) {
+                                    GeneralNotificationSettings.vibrateInSilentMode = true
+                                } else {
+                                    GeneralNotificationSettings.vibrateInSilentMode = false
+                                }
+                            }
                         }
                     }
                 }
