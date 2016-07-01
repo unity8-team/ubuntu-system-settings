@@ -21,6 +21,7 @@
 #include <QtQml/QtQml>
 #include <QtQml/QQmlContext>
 
+#include "general_notification_settings.h"
 #include "click_applications_model.h"
 #include "click_applications_notify_model.h"
 
@@ -31,12 +32,14 @@
         return new type(); \
     }
 
+MAKE_SINGLETON_FACTORY(GeneralNotificationSettings)
 MAKE_SINGLETON_FACTORY(ClickApplicationsModel)
 
 void BackendPlugin::registerTypes(const char *uri)
 {
     Q_ASSERT(uri == QLatin1String("Ubuntu.SystemSettings.Notifications"));
 
+    qmlRegisterSingletonType<GeneralNotificationSettings>(uri, 1, 0, "GeneralNotificationSettings", GeneralNotificationSettings_singleton_factory);
     qmlRegisterSingletonType<ClickApplicationsModel>(uri, 1, 0, "ClickApplicationsModel", ClickApplicationsModel_singleton_factory);
     qmlRegisterType<ClickApplicationsNotifyModel>(uri, 1, 0, "ClickApplicationsNotifyModel");
 }
