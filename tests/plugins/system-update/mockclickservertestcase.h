@@ -1,6 +1,7 @@
-#ifndef MOCKCLICKSERVERTESTCASE_H_
-#define MOCKCLICKSERVERTESTCASE_H_
+#ifndef MOCK_CLICKSERVER_TESTCASE_H
+#define MOCK_CLICKSERVER_TESTCASE_H
 
+#include <QTest>
 #include <QProcess>
 #include <QSignalSpy>
 
@@ -21,4 +22,4 @@ protected:
     QProcess m_mockclickserver;
 };
 
-#endif // MOCKCLICKSERVERTESTCASE_H_
+#endif // MOCK_CLICKSERVER_TESTCASE_H

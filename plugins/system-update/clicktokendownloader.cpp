@@ -92,8 +92,6 @@ void ClickTokenDownloader::handleSuccess(QNetworkReply *reply)
 {
     if (reply->hasRawHeader(X_CLICK_TOKEN)) {
         QString header(reply->rawHeader(X_CLICK_TOKEN));
-        // This should inform the world that this click update
-        // metadata is enough to start a download & install.
         qWarning() << "setting click token to" << header;
         m_update->setToken(header);
         if (!header.isEmpty()) {

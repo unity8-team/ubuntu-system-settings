@@ -16,12 +16,13 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <QSignalSpy>
-#include <QTest>
-
-#include "mockclickservertestcase.h"
 
 #include "clicktokendownloader.h"
+#include "update.h"
+#include "mockclickservertestcase.h"
+
+#include <QSignalSpy>
+#include <QTest>
 
 using namespace UpdatePlugin;
 
@@ -31,62 +32,83 @@ class TstClickTokenDownloader
 {
     Q_OBJECT
 private slots:
-    // void initTestCase()
-    // {
-    //     startMockClickServer();
-    // }
-    // void cleanupTestCase()
-    // {
-    //     m_mockclickserver.close();
-    // }
-    // void init()
-    // {
-    //     m_instance = new Click();
-    // }
-    // void cleanup()
-    // {
-    //     delete m_instance;
-    // }
-    // void testObtainClickToken()
-    // {
-    //     QSignalSpy tokenSpy(m_instance, SIGNAL(tokenChanged()));
+    void initTestCase()
+    {
+        startMockClickServer();
+    }
+    void cleanupTestCase()
+    {
+        m_mockclickserver.close();
+    }
+    void init()
+    {
+        m_update = new Update();
+        m_instance = new ClickTokenDownloader(nullptr, m_update);
+    }
+    void cleanup()
+    {
+        delete m_instance;
+        delete m_update;
+    }
+    void testObtainClickToken()
+    {
+        QSignalSpy tokenSpy(m_update, SIGNAL(tokenChanged()));
 
-    //     std::vector<const ClickUpdate*> updates;
-    //     QObject::connect(
-    //         m_instance, &ClickUpdate::clickTokenRequestSucceeded,
-    //         [&](const ClickUpdate *value) {
-    //             updates.emplace_back(value);
-    //         }
-    //     );
+        std::vector<Update*> updates;
+        QObject::connect(
+            m_instance, &ClickTokenDownloader::tokenRequestSucceeded,
+            [&](Update *value) {
+                updates.emplace_back(value);
+            }
+        );
 
-    //     m_instance->setDownloadUrl("http://localhost:9009/download");
-    //     m_instance->requestClickToken();
-    //     QVERIFY(tokenSpy.wait());
-    //     QVERIFY(m_instance->token() == "Mock-X-Click-Token");
+        m_update->setDownloadUrl("http://localhost:9009/download");
+        m_instance->requestToken();
+        QVERIFY(tokenSpy.wait());
+        QCOMPARE(m_update->token(), QString("Mock-X-Click-Token"));
 
-    //     // Make sure we got a meta from the tokenRequestSucceeded signal,
-    //     // and that the instance we got is identical to ours.
-    //     QVERIFY(updates.size() == 1);
-    //     QVERIFY(updates.at(0) == m_instance);
-    // }
-    // void testEmptyDownloadUrl()
-    // {
-    //     std::vector<const ClickUpdate*> updates;
-    //     QObject::connect(
-    //         m_instance, &ClickUpdate::clickTokenRequestFailed,
-    //         [&](const ClickUpdate *value) {
-    //             updates.emplace_back(value);
-    //         }
-    //     );
-    //     m_instance->requestClickToken();
+        QCOMPARE((int) updates.size(), 1);
+        QCOMPARE(updates.at(0), m_update);
+    }
+    void testEmptyDownloadUrl()
+    {
+        std::vector<Update*> updates;
+        QObject::connect(
+            m_instance, &ClickTokenDownloader::tokenRequestFailed,
+            [&](Update *value) {
+                updates.emplace_back(value);
+            }
+        );
+        m_instance->requestToken();
 
-    //     // Make sure we got a meta from the tokenRequestSucceeded signal,
-    //     // and that the instance we got is identical to ours.
-    //     QVERIFY(updates.size() == 1);
-    //     QVERIFY(updates.at(0) == m_instance);
-    // }
+        QTRY_COMPARE((int) updates.size(), 1);
+        QTRY_COMPARE(updates.at(0), m_update);
+    }
+    void testFailure()
+    {
+        m_mockclickserver.close();
+
+        std::vector<Update*> updates;
+        QObject::connect(
+            m_instance, &ClickTokenDownloader::tokenRequestFailed,
+            [&](Update *value) {
+                updates.emplace_back(value);
+            }
+        );
+        m_update->setDownloadUrl("http://localhost:9009/download");
+        m_instance->requestToken();
+
+        QTRY_COMPARE((int) updates.size(), 1);
+        QTRY_COMPARE(updates.at(0), m_update);
+
+        startMockClickServer();
+        QSignalSpy readyReadStandardOutputSpy(&m_mockclickserver,
+            SIGNAL(readyReadStandardOutput()));
+        QVERIFY(readyReadStandardOutputSpy.wait());
+    }
 private:
-    // ClickUpdate *m_instance;
+    ClickTokenDownloader *m_instance;
+    Update *m_update;
 };
 
 QTEST_MAIN(TstClickTokenDownloader)

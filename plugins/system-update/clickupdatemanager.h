@@ -99,7 +99,6 @@ private:
     void initializeSSOService();
     void initializeApiClient();
     void initializeTokenDownloader(const ClickTokenDownloader *dler);
-    void initializeUpdate(const Update *update);
 
     // Start process of adding remote metadata to each installed click
     void requestClickMetadata();

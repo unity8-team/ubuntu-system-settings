@@ -27,6 +27,7 @@ set(PLUGIN_SOURCES
 )
 
 set(PLUGIN_LIBS
+    Qt5::Test
     Qt5::Sql
     Qt5::Network
     apt-pkg
@@ -55,7 +56,7 @@ set_tests_properties(
         PROPERTIES
         ENVIRONMENT "IGNORE_CREDENTIALS=1;URL_APPS=http://127.0.0.1:9009/metadata"
 )
-target_link_libraries(tst-clickapiclient Qt5::Test ${PLUGIN_LIBS})
+target_link_libraries(tst-clickapiclient ${PLUGIN_LIBS})
 
 add_executable(tst-clicktokendownloader
                tst_clicktokendownloader.cpp
@@ -67,7 +68,7 @@ set_tests_properties(
         PROPERTIES
         ENVIRONMENT "IGNORE_CREDENTIALS=1;URL_APPS=http://127.0.0.1:9009/metadata"
 )
-target_link_libraries(tst-clicktokendownloader Qt5::Test ${PLUGIN_LIBS})
+target_link_libraries(tst-clicktokendownloader ${PLUGIN_LIBS})
 
 # add_executable(tst-clickupdatemanager
 #                tst_clickupdatemanager.cpp
@@ -79,25 +80,25 @@ target_link_libraries(tst-clicktokendownloader Qt5::Test ${PLUGIN_LIBS})
 #         PROPERTIES
 #         ENVIRONMENT "IGNORE_CREDENTIALS=1;URL_APPS=http://127.0.0.1:9009/metadata;CLICK_COMMAND=${CMAKE_CURRENT_BINARY_DIR}/mock_click_command"
 # )
-# target_link_libraries(tst-clickupdatemanager Qt5::Test ${PLUGIN_LIBS})
+# target_link_libraries(tst-clickupdatemanager ${PLUGIN_LIBS})
 
 add_executable(tst-updatedb
                tst_updatedb.cpp
                ${PLUGIN_SOURCES})
 add_test(tst-updatedb tst-updatedb)
-target_link_libraries(tst-updatedb Qt5::Test ${PLUGIN_LIBS})
+target_link_libraries(tst-updatedb ${PLUGIN_LIBS})
 
 add_executable(tst-update
                tst_update.cpp
                ${PLUGIN_SOURCES})
 add_test(tst-update tst-update)
-target_link_libraries(tst-update Qt5::Test ${PLUGIN_LIBS})
+target_link_libraries(tst-update ${PLUGIN_LIBS})
 
 add_executable(tst-updatemodel
                tst_updatemodel.cpp
                ${PLUGIN_SOURCES})
 add_test(tst-updatemodel tst-updatemodel)
-target_link_libraries(tst-updatemodel Qt5::Test ${PLUGIN_LIBS})
+target_link_libraries(tst-updatemodel ${PLUGIN_LIBS})
 
 add_executable(tst-updatepluginhelpers
                tst_helpers.cpp
@@ -108,7 +109,7 @@ set_tests_properties(
         PROPERTIES
         ENVIRONMENT "IGNORE_CREDENTIALS=1;URL_APPS=http://127.0.0.1:9009;FRAMEWORKS_FOLDER=${CMAKE_CURRENT_BINARY_DIR};CLICK_TOKEN_URL=http://example.org;"
 )
-target_link_libraries(tst-updatepluginhelpers Qt5::Test ${PLUGIN_LIBS})
+target_link_libraries(tst-updatepluginhelpers ${PLUGIN_LIBS})
 
 # # set the path to the library folder
 # include_directories(/usr/include/apt-pkg/)
