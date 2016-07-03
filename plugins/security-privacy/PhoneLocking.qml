@@ -31,7 +31,7 @@ ItemPage {
     title: i18n.tr("Locking and unlocking")
 
     property bool usePowerd
-    property variant powerSettings
+    property var powerSettings
 
     UbuntuSecurityPrivacyPanel {
         id: securityPrivacy
@@ -56,10 +56,13 @@ ItemPage {
                 property string swipe: i18n.ctr("Unlock with swipe", "None")
                 property string passcode: i18n.tr("Passcode")
                 property string passphrase: i18n.tr("Passphrase")
+                property string fingerprint: i18n.tr("Fingerprint")
 
                 objectName: "lockSecurity"
                 text: i18n.tr("Lock security")
                 value: {
+                    if (securityPrivacy.enableFingerprintIdentification)
+                        return fingerprint
                     switch (securityPrivacy.securityType) {
                         case UbuntuSecurityPrivacyPanel.Swipe:
                             return swipe
@@ -67,6 +70,8 @@ ItemPage {
                             return passcode
                         case UbuntuSecurityPrivacyPanel.Passphrase:
                             return passphrase
+                        case UbuntuSecurityPrivacyPanel.Fingerprint:
+                            return fingerprint
                     }
                 }
                 progression: true

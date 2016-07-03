@@ -443,8 +443,66 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
 
 class CellularBaseTestCase(UbuntuSystemSettingsOfonoTestCase):
 
+    connectivity_parameters = {
+        'Status': 'online'
+    }
+
     def setUp(self):
         """ Go to Cellular page """
+
+        self.session_con = self.get_dbus(False)
+
+        if is_process_running(INDICATOR_NETWORK):
+            _stop_process(INDICATOR_NETWORK)
+            self.addCleanup(_start_process, INDICATOR_NETWORK)
+
+        ctv_tmpl = os.path.join(os.path.dirname(__file__), 'connectivity.py')
+        (self.ctv_mock, self.obj_ctv) = self.spawn_server_template(
+            ctv_tmpl, parameters=self.connectivity_parameters,
+            stdout=subprocess.PIPE)
+
+        sleep(1)
+
+        self.ctv_private = dbus.Interface(
+            self.session_con.get_object(CTV_IFACE, CTV_PRIV_OBJ),
+            'org.freedesktop.DBus.Properties')
+
+        sim = self.obj_ctv.AddSim("1234567890")
+        self.ctv_private.Set(CON_IFACE,
+                             'Sims',
+                             dbus.Array([sim],
+                                        signature='o'))
+        modem = self.obj_ctv.AddModem("0987654321", 1, sim)
+        self.ctv_private.Set(CON_IFACE,
+                             'Modems',
+                             dbus.Array([modem],
+                                        signature='o'))
+
+        self.ctv_modem0 = dbus.Interface(
+            self.session_con.get_object(CTV_IFACE, modem),
+            'org.freedesktop.DBus.Properties')
+        self.ctv_sim0 = dbus.Interface(
+            self.session_con.get_object(CTV_IFACE, sim),
+            'org.freedesktop.DBus.Properties')
+
+        if self.use_sims == 2:
+            sim2 = self.obj_ctv.AddSim("2345678901")
+            self.ctv_private.Set(CON_IFACE,
+                                 'Sims',
+                                 dbus.Array([sim, sim2],
+                                            signature='o'))
+            modem2 = self.obj_ctv.AddModem("1098765432", 2, sim2)
+            self.ctv_private.Set(CON_IFACE,
+                                 'Modems',
+                                 dbus.Array([modem, modem2],
+                                            signature='o'))
+
+            self.ctv_modem1 = dbus.Interface(
+                self.session_con.get_object(CTV_IFACE, modem2),
+                'org.freedesktop.DBus.Properties')
+            self.ctv_sim1 = dbus.Interface(
+                self.session_con.get_object(CTV_IFACE, sim2),
+                'org.freedesktop.DBus.Properties')
 
         user_obj = '/user/foo'
 
@@ -526,6 +584,8 @@ class CellularBaseTestCase(UbuntuSystemSettingsOfonoTestCase):
             context.SetProperty(key, value)
 
     def tearDown(self):
+        self.ctv_mock.terminate()
+        self.ctv_mock.wait()
         self.mock_server.terminate()
         self.mock_server.wait()
         super(CellularBaseTestCase, self).tearDown()
