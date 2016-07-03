@@ -44,7 +44,7 @@ private slots:
     }
     void cleanupTestCase()
     {
-        m_mockclickserver.close();
+        stopMockClickServer();
     }
     void init()
     {

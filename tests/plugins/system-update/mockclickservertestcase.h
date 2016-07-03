@@ -19,6 +19,12 @@ protected:
         QVERIFY(readyReadStandardOutputSpy.wait());
     }
 
+    void stopMockClickServer()
+    {
+        m_mockclickserver.close();
+        QTest::qWait(1000);
+    }
+
     QProcess m_mockclickserver;
 };
 
