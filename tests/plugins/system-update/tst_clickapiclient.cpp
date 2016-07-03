@@ -44,31 +44,31 @@ private slots:
     {
         cancel();
     }
-    void testForbiddenBehaviour()
-    {
-        QSignalSpy credentialErrorSpy(this, SIGNAL(credentialError()));
-        QNetworkReply *reply = request("http://localhost:9009/403");
-        QVERIFY(credentialErrorSpy.wait());
-    }
-    void testNotFound()
-    {
-        QSignalSpy serverErrorSpy(this, SIGNAL(serverError()));
-        QNetworkReply *reply = request("http://localhost:9009/404");
-        QVERIFY(serverErrorSpy.wait());
-    }
-    void testOffline()
-    {
-        m_mockclickserver.close();
+    // void testForbiddenBehaviour()
+    // {
+    //     QSignalSpy credentialErrorSpy(this, SIGNAL(credentialError()));
+    //     QNetworkReply *reply = request("http://localhost:9009/403");
+    //     QVERIFY(credentialErrorSpy.wait());
+    // }
+    // void testNotFound()
+    // {
+    //     QSignalSpy serverErrorSpy(this, SIGNAL(serverError()));
+    //     QNetworkReply *reply = request("http://localhost:9009/404");
+    //     QVERIFY(serverErrorSpy.wait());
+    // }
+    // void testOffline()
+    // {
+    //     m_mockclickserver.close();
 
-        QSignalSpy networkErrorSpy(this, SIGNAL(networkError()));
-        QNetworkReply *reply = request("http://localhost:9009/");
-        QVERIFY(networkErrorSpy.wait());
+    //     QSignalSpy networkErrorSpy(this, SIGNAL(networkError()));
+    //     QNetworkReply *reply = request("http://localhost:9009/");
+    //     QVERIFY(networkErrorSpy.wait());
 
-        startMockClickServer();
-        QSignalSpy readyReadStandardOutputSpy(&m_mockclickserver,
-            SIGNAL(readyReadStandardOutput()));
-        QVERIFY(readyReadStandardOutputSpy.wait());
-    }
+    //     startMockClickServer();
+    //     QSignalSpy readyReadStandardOutputSpy(&m_mockclickserver,
+    //         SIGNAL(readyReadStandardOutput()));
+    //     QVERIFY(readyReadStandardOutputSpy.wait());
+    // }
 
 private:
     QNetworkReply* request(const QString &url) {
