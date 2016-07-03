@@ -459,7 +459,6 @@ private slots:
     }
 private:
     UpdateDb *m_instance;
-    QTemporaryDir *m_dir;
     QString m_dbfile;
 };
 
