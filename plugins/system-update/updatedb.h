@@ -49,7 +49,7 @@ public:
     QSqlDatabase db(); // For testing.
 
     QDateTime lastCheckDate();
-    void setLastCheckDate(const QDateTime &lastCheckUtc);
+    void setLastCheckDate(const QDateTime &lastCheck);
 
     void setInstalled(const QString &id, const uint &revision);
     void setError(const QString &id, const uint &revision, const QString &msg);

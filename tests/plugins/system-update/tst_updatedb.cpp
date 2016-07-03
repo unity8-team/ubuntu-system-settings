@@ -346,7 +346,7 @@ private slots:
         QTest::addColumn<QDateTime>("set");
         QTest::addColumn<QDateTime>("target");
 
-        QDateTime otherTz(QDate(2016, 2, 29), QTime(20, 0), QTimeZone(2 * 3600));
+        QDateTime otherTz(QDate(2016, 2, 29), QTime(23, 0), QTimeZone(5 * 3600));
         QDateTime utcTz(QDate(2016, 2, 29), QTime(18, 0), Qt::UTC);
         QTest::newRow("Different TZ") << otherTz << utcTz;
 

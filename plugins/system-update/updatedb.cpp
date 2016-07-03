@@ -417,13 +417,13 @@ QDateTime UpdateDb::lastCheckDate()
     return d.toUTC();
 }
 
-void UpdateDb::setLastCheckDate(const QDateTime &lastCheckUtc)
+void UpdateDb::setLastCheckDate(const QDateTime &lastCheck)
 {
     if (!openDb()) return;
 
     QSqlQuery q(m_db);
     q.prepare("REPLACE INTO meta (checked_at_utc) VALUES (:checked_at_utc)");
-    q.bindValue(":checked_at_utc", lastCheckUtc.toMSecsSinceEpoch());
+    q.bindValue(":checked_at_utc", lastCheck.toUTC().toMSecsSinceEpoch());
 
     if (!q.exec()) {
         qCritical() << "could not update checked at value" << q.lastError().text();
