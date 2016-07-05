@@ -135,6 +135,7 @@ QUrl Background::prepareBackgroundFile(const QUrl &url, bool shareWithGreeter)
     QUrl prepared = url;
 
     if (getCustomBackgroundFolder() != getContentHubFolder() &&
+        !url.path().startsWith(getCustomBackgroundFolder()) &&
         url != QUrl::fromLocalFile(defaultBackgroundFile()))
     {
         QDir backgroundFolder;
@@ -148,7 +149,7 @@ QUrl Background::prepareBackgroundFile(const QUrl &url, bool shareWithGreeter)
 
         QUrl newPath = QUrl::fromLocalFile(backgroundFolder.path() + "/" + url.fileName());
 
-        if (url != newPath && QFile(newPath.path()).exists())
+        if (QFile(newPath.path()).exists())
         {
             // The file already exists in the shared greeter data folder...
             // Likely we just pulled the same file from ContentHub again.
