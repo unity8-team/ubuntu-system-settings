@@ -135,7 +135,7 @@ QUrl Background::prepareBackgroundFile(const QUrl &url, bool shareWithGreeter)
     QUrl prepared = url;
 
     if (getCustomBackgroundFolder() != getContentHubFolder() &&
-        !url.path().startsWith(getCustomBackgroundFolder()) &&
+        !url.path().startsWith(getCustomBackgroundFolder().path()) &&
         url != QUrl::fromLocalFile(defaultBackgroundFile()))
     {
         QDir backgroundFolder;
