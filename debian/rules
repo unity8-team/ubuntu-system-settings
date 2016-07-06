@@ -4,6 +4,10 @@
 # Uncomment this to turn on verbose mode.
 export DH_VERBOSE=1
 
+# Skip tests on the archs they are known to be flaky with current configuration
+# Ref.: https://bugs.launchpad.net/ubuntu/+source/mesa/+bug/1585942
+testskip_architectures := arm64
+
 include /usr/share/dpkg/buildflags.mk
 include /usr/share/dpkg/architecture.mk
 
