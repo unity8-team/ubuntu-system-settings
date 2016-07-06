@@ -16,43 +16,44 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef CLICKTOKEN_DOWNLOADER_H
-#define CLICKTOKEN_DOWNLOADER_H
+#ifndef CLICK_TOKEN_DOWNLOADER_H
+#define CLICK_TOKEN_DOWNLOADER_H
 
-#include "clickapiclient.h"
 #include "update.h"
 
 #include <token.h>
 
 #include <QObject>
+#include <QSharedPointer>
 
 namespace UpdatePlugin
 {
-class ClickTokenDownloader : public QObject
+namespace Click
+{
+class TokenDownloader : public QObject
 {
     Q_OBJECT
 public:
-    explicit ClickTokenDownloader(QObject *parent, Update *update);
-    ~ClickTokenDownloader();
+    explicit TokenDownloader(QSharedPointer<Update> update, QObject *parent = 0)
+        : QObject(parent)
+        , m_update(update)
+        , m_authToken(UbuntuOne::Token()) {}
+    virtual ~TokenDownloader() {};
+    virtual void download() = 0;
+    virtual void setAuthToken(const UbuntuOne::Token &authToken) = 0;
 
-    void requestToken();
-    void setAuthToken(const UbuntuOne::Token &authToken);
+public slots:
+    virtual void cancel() = 0;
 
 signals:
-    void tokenRequestSucceeded(Update *update);
-    void tokenRequestFailed(Update *update);
+    void downloadSucceeded(QSharedPointer<Update> update);
+    void downloadFailed(QSharedPointer<Update> update);
 
-private slots:
-    void cancel();
-    void handleSuccess(const QString &token);
-    void handleFailure();
-
-private:
-    void init();
-    Update *m_update;
-    ClickApiClient m_client;
+protected:
+    QSharedPointer<Update> m_update;
     UbuntuOne::Token m_authToken;
 };
+} // Click
 } // UpdatePlugin
 
-#endif // CLICKTOKEN_DOWNLOADER_H
+#endif // CLICK_TOKEN_DOWNLOADER_H

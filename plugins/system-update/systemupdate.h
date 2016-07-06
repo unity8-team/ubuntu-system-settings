@@ -19,6 +19,8 @@
 #define SYSTEM_UPDATE_H
 
 #include "updatedb.h"
+#include "network/manager.h"
+
 #include <QDebug>
 
 namespace UpdatePlugin
@@ -29,6 +31,7 @@ class SystemUpdate : public QObject
     Q_ENUMS(Status)
 public:
     static SystemUpdate *instance();
+    static void destroyInstance();
 
     enum class Status
     {
@@ -43,24 +46,17 @@ public:
     };
 
     UpdateDb* db();
-
-// public slots:
-//     void notifyDbChanged();
-//     void notifyDbChanged(const QString &id, const int &revision);
-
-// signals:
-//     void dbChanged();
-//     void dbChanged(const QString &id, const int &revision);
+    Network::Manager* nam();
 
 protected:
     explicit SystemUpdate(QObject *parent = 0);
-    ~SystemUpdate() {}
+    ~SystemUpdate() { qWarning() << "SystemUpdate was destroyed."; }
 
 private:
     static SystemUpdate *m_instance;
-    UpdateDb* m_db;
+    UpdateDb *m_db;
+    Network::Manager *m_nam;
 };
 
 } // UpdatePlugin
-
 #endif // SYSTEM_UPDATE_H

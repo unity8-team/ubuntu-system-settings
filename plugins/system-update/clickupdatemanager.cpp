@@ -19,50 +19,50 @@
 #include "clickupdatemanager.h"
 #include "helpers.h"
 
-#include <assert.h>
+#include "click/client_impl.h"
+#include "click/manifest_impl.h"
+#include "click/sso_impl.h"
+#include "click/tokendownloader_factory_impl.h"
 
-#include <QByteArray>
 #include <QDateTime>
-#include <QJsonArray>
+#include <QJsonDocument>
 #include <QJsonObject>
-#include <QJsonValue>
-#include <QStandardPaths>
-#include <QSharedPointer>
-
+#include <QList>
 
 namespace UpdatePlugin
 {
 ClickUpdateManager::ClickUpdateManager(QObject *parent)
-        : QObject(parent)
-        , m_db(SystemUpdate::instance()->db())
-        , m_process()
-        , m_apiClient(this)
-        , m_updates()
-        , m_authToken(UbuntuOne::Token())
-        , m_authenticated(true)
-        , m_checking(false)
+    : QObject(parent)
+    , m_client(new Click::ClientImpl(this))
+    , m_manifest(new Click::ManifestImpl(this))
+    , m_sso(new Click::SSOImpl(this))
+    , m_downloadFactory(new Click::TokenDownloaderFactoryImpl)
+    , m_db(SystemUpdate::instance()->db())
 {
     init();
 }
 
-ClickUpdateManager::ClickUpdateManager(const QString &dbpath, QObject *parent)
-        : QObject(parent)
-        , m_db(new UpdateDb(dbpath, this))
-        , m_process()
-        , m_apiClient(this)
-        , m_updates()
-        , m_authToken(UbuntuOne::Token())
-        , m_authenticated(true)
-        , m_checking(false)
+ClickUpdateManager::ClickUpdateManager(Click::Client *client,
+                                       Click::Manifest *manifest,
+                                       Click::SSO *sso,
+                                       Click::TokenDownloaderFactory *downloadFactory,
+                                       UpdateDb *db,
+                                       QObject *parent)
+    : QObject(parent)
+    , m_client(client)
+    , m_manifest(manifest)
+    , m_sso(sso)
+    , m_downloadFactory(downloadFactory)
+    , m_db(db)
 {
     init();
 }
 
 void ClickUpdateManager::init()
 {
-    initializeProcess();
-    initializeSSOService();
-    initializeApiClient();
+    initClient();
+    initManifest();
+    initSSO();
 
     connect(this, SIGNAL(checkStarted()), this, SLOT(handleCheckStart()));
     connect(this, SIGNAL(checkCompleted()), this, SLOT(handleCheckStop()));
@@ -73,101 +73,79 @@ void ClickUpdateManager::init()
 
 ClickUpdateManager::~ClickUpdateManager()
 {
+    delete m_downloadFactory;
 }
 
-void ClickUpdateManager::initializeTokenDownloader(const ClickTokenDownloader *dler)
+void ClickUpdateManager::initTokenDownloader(const Click::TokenDownloader *downloader)
 {
-    connect(dler, SIGNAL(tokenRequestSucceeded(Update*)),
-            this, SLOT(handleTokenDownload(Update*)));
-    connect(dler, SIGNAL(tokenRequestFailed(Update*)),
-            this, SLOT(handleTokenDownloadFailure(Update*)));
-    connect(this, SIGNAL(checkCanceled()),
-            dler, SLOT(cancel()));
+    connect(downloader, SIGNAL(downloadSucceeded(QSharedPointer<Update>)),
+            this, SLOT(handleTokenDownload(QSharedPointer<Update>)));
+    connect(downloader, SIGNAL(downloadFailed(QSharedPointer<Update>)),
+            this, SLOT(handleTokenDownloadFailure(QSharedPointer<Update>)));
+    connect(this, SIGNAL(checkCanceled()), downloader, SLOT(cancel()));
 }
 
-void ClickUpdateManager::initializeProcess()
+void ClickUpdateManager::initClient()
 {
-    connect(&m_process, SIGNAL(finished(const int&)),
-            this, SLOT(processInstalledClicks(const int&)));
-}
-
-void ClickUpdateManager::initializeSSOService()
-{
-    connect(&m_ssoService, SIGNAL(credentialsFound(const Token&)),
-            this, SLOT(handleCredentialsFound(const Token&)));
-    connect(&m_ssoService, SIGNAL(credentialsNotFound()),
-            this, SLOT(handleCredentialsFailed()));
-    connect(&m_ssoService, SIGNAL(credentialsDeleted()),
-            this, SLOT(handleCredentialsFailed()));
-}
-
-void ClickUpdateManager::initializeApiClient()
-{
-    connect(&m_apiClient, SIGNAL(success(QNetworkReply*)),
-            this, SLOT(handleMetadata(QNetworkReply*)));
-    connect(&m_apiClient, SIGNAL(serverError()),
+    connect(m_client, SIGNAL(metadataRequestSucceeded(const QByteArray&)),
+            this, SLOT(handleMetadataSuccess(const QByteArray&)));
+    connect(m_client, SIGNAL(serverError()),
             this, SLOT(handleCommunicationErrors()));
-    connect(&m_apiClient, SIGNAL(networkError()),
+    connect(m_client, SIGNAL(networkError()),
+            this, SLOT(handleCommunicationErrors()));
+    connect(m_client, SIGNAL(credentialError()),
             this, SLOT(handleCommunicationErrors()));
 
-    connect(&m_apiClient, SIGNAL(networkError()),
+    // Redirect signals to consumers.
+    connect(m_client, SIGNAL(networkError()),
             this, SIGNAL(networkError()));
-    connect(&m_apiClient, SIGNAL(serverError()),
+    connect(m_client, SIGNAL(serverError()),
             this, SIGNAL(serverError()));
-    connect(&m_apiClient, SIGNAL(credentialError()),
+    connect(m_client, SIGNAL(credentialError()),
             this, SIGNAL(credentialError()));
 }
 
-// Basically, there are three async operations, with one for each
-// updated click (fetching a click token). Each of these can fail in various
-// ways, so we report either serverError or networkError with an accompanying
-// errorString.
-//
-// The first operation is obtaining the list of clicks installed on the system.
-// The second is receiving the update data for clicks we found installed.
-// The third is signing the download url for each click update. We ask the
-// ClickUpdate to do this for us.
-//
-// All of this can be bypassed if we find cached update data newer than 24 hours.
+void ClickUpdateManager::initManifest()
+{
+    connect(m_manifest, SIGNAL(requestSucceeded(const QJsonArray&)),
+            this, SLOT(handleManifestSuccess(const QJsonArray&)));
+    connect(m_manifest, SIGNAL(requestFailed()),
+            this, SLOT(handleManifestFailure()));
+}
+
+void ClickUpdateManager::initSSO()
+{
+    connect(m_sso, SIGNAL(credentialsRequestSucceeded(const UbuntuOne::Token&)),
+            this, SLOT(handleCredentialsFound(const UbuntuOne::Token&)));
+    connect(m_sso, SIGNAL(credentialsRequestFailed()),
+            this, SLOT(handleCredentialsFailed()));
+}
+
 void ClickUpdateManager::check()
 {
-    qWarning() << "click checker: check...";
-
     // Don't check for click updates if there are no credentials,
     // instead ask for credentials.
     if (!m_authToken.isValid() && !Helpers::isIgnoringCredentials()) {
-        m_ssoService.getCredentials();
+        m_sso->requestCredentials();
         return;
     }
 
-    Q_EMIT (checkStarted());
+    Q_EMIT checkStarted();
 
     m_updates.clear();
-    m_apiClient.setErrorString("");
-
-    // Start process of getting the list of installed clicks.
-    QStringList args("list");
-    args << "--manifest";
-    QString command = Helpers::whichClick();
-    m_process.start(command, args);
-    if (!m_process.waitForStarted()) {
-        handleProcessError(m_process.error());
-    }
+    m_manifest->request();
 }
 
-void ClickUpdateManager::check(const QString &packageName)
+void ClickUpdateManager::check(const QString &packageName, const uint &revision)
 {
-    // qWarning() << "click checker: checking this one file" << packageName
-    //         << "...";
-    // ClickUpdate *m = m_db->getPendingClickUpdate(packageName);
-    // qWarning() << "click um: got back" << m;
-    // if (m && m->identifier() == packageName) {
-    //     qWarning() << "click checker: requesting click token for" << packageName
-    //             << "...";
-    //     initializeTokenDownloader(m);
-    //     m->setAutomatic(true);
-    //     m->requestClickToken();
-    // }
+    QSharedPointer<Update> u = m_db->get(packageName, revision);
+    if (u->identifier() == packageName && u->revision() == revision) {
+        u->setAutomatic(true);
+        Click::TokenDownloader* dl = m_downloadFactory->create(m_client, u, this);
+        dl->setAuthToken(m_authToken);
+        initTokenDownloader(dl);
+        dl->download();
+    }
 }
 
 // Tries to shut down all checks we might currently be doing.
@@ -175,90 +153,40 @@ void ClickUpdateManager::cancel()
 {
     // Abort all click update update data objects.
     // foreach (const QString &name, m_updates.keys())m_updates.value(name)->cancel();
-
-
-
-    m_process.terminate();
-
-    m_apiClient.abortNetworking();
+    m_client->cancel();
     Q_EMIT checkCanceled();
 }
 
-void ClickUpdateManager::processInstalledClicks(const int &exitCode)
+void ClickUpdateManager::handleManifestSuccess(const QJsonArray &manifest)
 {
-    qWarning() << "click checker: processInstalledClicks..." << exitCode;
-
-    if (exitCode == 15) {
-        // 15 is terminated in pythonese, i.e. normal if cancel was called.
-        Q_EMIT checkCanceled();
-        return;
-    }
-
-    if (exitCode > 0) {
-        QString e("Failed to enumerate installed clicks (%1).");
-        m_apiClient.setErrorString(e.arg(exitCode));
-        Q_EMIT checkFailed();
-        return;
-    }
-
-    QString output(m_process.readAllStandardOutput());
-    QJsonDocument document = QJsonDocument::fromJson(output.toUtf8());
-    QJsonArray array = document.array();
-
     // Nothing to do.
-    if (array.size() == 0) {
-        qWarning() << "click checker: nothing to do, no clicks installed.";
+    if (manifest.size() == 0) {
         Q_EMIT checkCompleted();
         return;
     }
 
     int i;
-    for (i = 0; i < array.size(); i++) {
-        Update *update = new Update();
+    for (i = 0; i < manifest.size(); i++) {
+        QSharedPointer<Update> update = QSharedPointer<Update>(new Update);
 
-        QJsonObject object = array.at(i).toObject();
+        QJsonObject object = manifest.at(i).toObject();
         update->setIdentifier(object.value("name").toString());
         update->setTitle(object.value("title").toString());
         update->setLocalVersion(object.value("version").toString());
         update->setKind(Update::Kind::KindClick);
 
         QStringList command;
-        // command << Helpers::whichPkcon() << "-p" << "install-local" << "$file";
-        command << "sleep" << "5";
+        command << Helpers::whichPkcon() << "-p" << "install-local" << "$file";
         update->setCommand(command);
-
         m_updates.insert(update->identifier(), update);
-        qWarning() << "click checker: queueing up" << update->identifier();
     }
-
-    // Populate each ClickUpdate with remote update data.
-    requestClickMetadata();
+    requestMetadata();
 }
 
-void ClickUpdateManager::handleProcessError(const QProcess::ProcessError &error)
+void ClickUpdateManager::handleManifestFailure()
 {
-    qWarning() << "click checker: process failed";
-    switch (error) {
-    case QProcess::FailedToStart:
-        qWarning() << "QProcess::FailedToStart";
-        break;
-    case QProcess::Crashed:
-        qWarning() << "QProcess::Crashed";
-        break;
-    case QProcess::Timedout:
-        qWarning() << "QProcess::Timedout";
-        break;
-    case QProcess::WriteError:
-        qWarning() << "QProcess::WriteError";
-        break;
-    case QProcess::ReadError:
-        qWarning() << "QProcess::ReadError";
-        break;
-    case QProcess::UnknownError:
-        qWarning() << "QProcess::UnknownError";
-        break;
-    }
-    Q_EMIT checkFailed();
+    if (m_checking)
+        Q_EMIT checkFailed();
 }
 
 void ClickUpdateManager::handleCheckCompleted()
@@ -266,40 +194,37 @@ void ClickUpdateManager::handleCheckCompleted()
     m_db->setLastCheckDate(QDateTime::currentDateTime());
 }
 
-void ClickUpdateManager::handleTokenDownload(Update *update)
+void ClickUpdateManager::handleTokenDownload(QSharedPointer<Update> update)
 {
-    qWarning() << "click checker: handling obtained token on update data"
-            << update->identifier();
+    // Token reported as downloaded, but empty.
+    if (update->token().isEmpty()) {
+        m_updates.remove(update->identifier());
+    }
 
-    m_db->add(QSharedPointer<Update>(update));
+    // Update in db.
+    m_db->add(update);
 
     completionCheck();
 }
 
 void ClickUpdateManager::completionCheck()
 {
-    qWarning() << "click checker: checking for completion...";
-    qWarning() << "click checker: completion check had"
-            << m_updates.keys().count() << "keys";
-
     // Check if all tokens are fetched.
     foreach (const QString &name, m_updates.keys()){
         if (m_updates.value(name)->token().isEmpty()) {
-            qWarning() << "click checker: not complete.";
             return; // Not done.
         }
     }
 
     // All updates had signed download urls, so we're done.
     Q_EMIT checkCompleted();
-    qWarning() << "click checker: complete.";
 }
 
-void ClickUpdateManager::handleTokenDownloadFailure(Update *update)
+void ClickUpdateManager::handleTokenDownloadFailure(QSharedPointer<Update> update)
 {
     // Unset token, let the user try again.
     update->setToken("");
-    m_db->add(QSharedPointer<Update>(update));
+    m_db->add(update);
 
     // We're done with it.
     m_updates.remove(update->identifier());
@@ -308,11 +233,9 @@ void ClickUpdateManager::handleTokenDownloadFailure(Update *update)
 
 void ClickUpdateManager::handleCredentialsFound(const UbuntuOne::Token &token)
 {
-    qWarning() << "found credentials";
     m_authToken = token;
 
-    if (!m_authToken.isValid()) {
-        qWarning() << "updateManager got invalid token.";
+    if (!m_authToken.isValid() && !Helpers::isIgnoringCredentials()) {
         handleCredentialsFailed();
         return;
     }
@@ -325,8 +248,7 @@ void ClickUpdateManager::handleCredentialsFound(const UbuntuOne::Token &token)
 
 void ClickUpdateManager::handleCredentialsFailed()
 {
-    qWarning() << "failed credentials";
-    m_ssoService.invalidateCredentials();
+    m_sso->invalidateCredentials();
     m_authToken = UbuntuOne::Token();
 
     cancel();
@@ -338,79 +260,55 @@ void ClickUpdateManager::handleCredentialsFailed()
 void ClickUpdateManager::handleCommunicationErrors()
 {
     if (m_checking)
-        Q_EMIT (checkFailed());
+        Q_EMIT checkFailed();
 }
 
-void ClickUpdateManager::requestClickMetadata()
+void ClickUpdateManager::requestMetadata()
 {
-    qWarning() << "click checker: asking for remote update data...";
-    QJsonObject serializer;
-
-    // Construct the “name” list
-    QJsonArray array;
-    foreach (const QString &name, m_updates.keys())array.append(QJsonValue(name));
-    serializer.insert("name", array);
-
-    // Create list of frameworks.
-    std::stringstream frameworks;
-    for (auto f : Helpers::getAvailableFrameworks()) {
-        frameworks << "," << f;
+    QList<QString> packages;
+    Q_FOREACH(const QString &name, m_updates.keys()) {
+        packages.append(name);
     }
 
-    QJsonDocument doc(serializer);
-    QByteArray content = doc.toJson();
-
     QString urlApps = Helpers::clickMetadataUrl();
-    qWarning() << "click checker: using url" << urlApps;
-    QString authHeader = m_authToken.signUrl(
-        urlApps, QStringLiteral("POST"), true
-    );
+
+    QString authHeader;
+    if (!Helpers::isIgnoringCredentials()) {
+        authHeader = m_authToken.signUrl(
+            urlApps, QStringLiteral("POST"), true
+        );
+    }
     QUrl url(urlApps);
     url.setQuery(authHeader);
 
-    QNetworkRequest request;
-    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
-    request.setRawHeader(QByteArray("X-Ubuntu-Frameworks"),
-            QByteArray::fromStdString(frameworks.str()));
-    request.setRawHeader(QByteArray("X-Ubuntu-Architecture"),
-            QByteArray::fromStdString(Helpers::getArchitecture()));
-    request.setUrl(url);
-
-    QNetworkReply *reply = m_apiClient.nam()->post(request, content);
-    m_apiClient.initializeReply(reply);
+    m_client->requestMetadata(url, packages);
 }
 
-void ClickUpdateManager::handleMetadata(QNetworkReply *reply)
+void ClickUpdateManager::handleMetadataSuccess(const QByteArray &metadata)
 {
-    qWarning() << "click checker: request succeeded...";
-
     QJsonParseError *jsonError = new QJsonParseError;
-    auto document = QJsonDocument::fromJson(reply->readAll(), jsonError);
+    auto document = QJsonDocument::fromJson(metadata, jsonError);
 
     if (document.isArray()) {
-        parseClickMetadata(document.array());
+        parseMetadata(document.array());
     } else {
-        m_apiClient.setErrorString("Got unexpected JSON from server.");
+        qCritical() << "Server click metadata was not an array.";
         handleCommunicationErrors();
     }
 
     if (jsonError->error != QJsonParseError::NoError) {
-        m_apiClient.setErrorString("json parse failed: " + jsonError->errorString());
+        qCritical() << "Server click metadata parsing failed:" << jsonError->errorString();
         handleCommunicationErrors();
     }
 
     delete jsonError;
-    reply->deleteLater();
 }
 
-void ClickUpdateManager::parseClickMetadata(const QJsonArray &array)
+void ClickUpdateManager::parseMetadata(const QJsonArray &array)
 {
     for (int i = 0; i < array.size(); i++) {
         auto object = array.at(i).toObject();
         auto name = object["name"].toString();
-
-        qWarning() << "click checker: got update data for" << name;
-
         auto version = object["version"].toString();
         auto icon_url = object["icon_url"].toString();
         auto url = object["download_url"].toString();
@@ -420,13 +318,9 @@ void ClickUpdateManager::parseClickMetadata(const QJsonArray &array)
         auto title = object["title"].toString();
         auto revision = object["revision"].toInt();
         if (m_updates.contains(name)) {
-            Update *update = m_updates.value(name);
+            QSharedPointer<Update> update = m_updates.value(name);
             update->setRemoteVersion(version);
             if (update->isUpdateRequired()) {
-
-                qWarning() << "click checker: update of" << update->identifier()
-                        << "is required";
-
                 update->setIconUrl(icon_url);
                 update->setDownloadUrl(url);
                 update->setBinaryFilesize(size);
@@ -435,12 +329,10 @@ void ClickUpdateManager::parseClickMetadata(const QJsonArray &array)
                 update->setTitle(title);
                 update->setRevision(revision);
 
-                // Start the process of obtaining a click token for this
-                // click update.
-                ClickTokenDownloader* dl = new ClickTokenDownloader(this, update);
+                Click::TokenDownloader* dl = m_downloadFactory->create(m_client, update, this);
                 dl->setAuthToken(m_authToken);
-                initializeTokenDownloader(dl);
-                dl->requestToken();
+                initTokenDownloader(dl);
+                dl->download();
             } else {
                 // Update not required, let's remove it.
                 m_updates.remove(update->identifier());
@@ -450,10 +342,8 @@ void ClickUpdateManager::parseClickMetadata(const QJsonArray &array)
     }
 
     // Prune m_updates, removing those without necessary update data. These are
-    // either locally installed clicks, or retracted from the API (?).
-    qWarning() << "click checker: pruning...";
+    // either locally installed clicks, or in some other way not in the meta data.
     foreach (const QString &name, m_updates.keys()) {
-        qWarning() << name << m_updates.value(name)->remoteVersion();
         if (m_updates.value(name)->remoteVersion().isEmpty())
             m_updates.remove(name);
     }
@@ -477,7 +367,7 @@ void ClickUpdateManager::setAuthenticated(const bool authenticated)
 {
     if (authenticated != m_authenticated) {
         m_authenticated = authenticated;
-        Q_EMIT (authenticatedChanged());
+        Q_EMIT authenticatedChanged();
     }
 }
 } // UpdatePlugin

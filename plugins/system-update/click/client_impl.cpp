@@ -16,41 +16,65 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "clickapiclient.h"
+#include "client_impl.h"
 #include "helpers.h"
 #include "systemupdate.h"
 
+#include <QJsonArray>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonValue>
+
 namespace UpdatePlugin
 {
-ClickApiClient::ClickApiClient(NetworkAccessManager *nam,
-                               QObject *parent)
-    : QObject(parent)
+namespace Click
+{
+ClientImpl::ClientImpl(QObject *parent)
+    : Client(parent)
+    , m_nam(SystemUpdate::instance()->nam())
+{
+    initializeNam();
+}
+
+ClientImpl::ClientImpl(UpdatePlugin::Network::Manager *nam, QObject *parent)
+    : Client(parent)
     , m_nam(nam)
 {
     initializeNam();
 }
 
-ClickApiClient::~ClickApiClient()
+ClientImpl::~ClientImpl()
 {
     cancel();
 }
 
-void ClickApiClient::initializeNam()
+void ClientImpl::initializeNam()
 {
-    connect(m_nam, SIGNAL(finished(QNetworkReply *)), this,
-            SLOT(requestFinished(QNetworkReply *)));
+    connect(m_nam, SIGNAL(finished(QNetworkReply *)),
+            this, SLOT(requestFinished(QNetworkReply *)));
     connect(m_nam, SIGNAL(sslErrors(QNetworkReply *, const QList<QSslError>&)),
             this, SLOT(requestSslFailed(QNetworkReply *, const QList<QSslError>&)));
 }
 
-void ClickApiClient::getMetadata(const QUrl &url,
-                                 const QByteArray &packageNames)
+void ClientImpl::requestMetadata(const QUrl &url,
+                             const QList<QString> &packages)
 {
     // Create list of frameworks.
     std::stringstream frameworks;
     for (auto f : Helpers::getAvailableFrameworks()) {
         frameworks << "," << f;
     }
+
+    // Create JSON bytearray of packages.
+    QJsonObject serializer;
+    QJsonArray array;
+    Q_FOREACH(const QString &name, packages) {
+        array.append(QJsonValue(name));
+    }
+    serializer.insert("name", array);
+
+    QJsonDocument doc(serializer);
+    QByteArray content = doc.toJson();
 
     QNetworkRequest request;
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
@@ -61,10 +85,10 @@ void ClickApiClient::getMetadata(const QUrl &url,
     request.setUrl(url);
     request.setOriginatingObject(this);
 
-    initializeReply(m_nam->post(request, packageNames));
+    initializeReply(m_nam->post(request, content));
 }
 
-void ClickApiClient::getToken(const QUrl &url)
+void ClientImpl::requestToken(const QUrl &url)
 {
     QNetworkRequest request;
     request.setUrl(url);
@@ -73,13 +97,12 @@ void ClickApiClient::getToken(const QUrl &url)
     initializeReply(m_nam->head(request));
 }
 
-void ClickApiClient::initializeReply(QNetworkReply *reply)
+void ClientImpl::initializeReply(QNetworkReply *reply)
 {
-    qWarning() << "click api client: init reply" << reply;
     connect(this, SIGNAL(abortNetworking()), reply, SLOT(abort()));
 }
 
-void ClickApiClient::requestSslFailed(QNetworkReply *reply,
+void ClientImpl::requestSslFailed(QNetworkReply *reply,
                                       const QList<QSslError> &errors)
 {
     QString errorString = "SSL error: ";
@@ -91,14 +114,10 @@ void ClickApiClient::requestSslFailed(QNetworkReply *reply,
     reply->deleteLater();
 }
 
-void ClickApiClient::requestFinished(QNetworkReply *reply)
+void ClientImpl::requestFinished(QNetworkReply *reply)
 {
-    // TODO: refactor this bit
-    if (reply->request().originatingObject() == this) {
-        qWarning() << "click api client: something finished" << reply << "and we will handle it.";
-    } else {
-        qWarning() << "click api client: something finished" << reply << "but we will NOT handle it.";
-        return;
+    if (reply->request().originatingObject() != this) {
+        return; // We did not create this request.
     }
 
     if (!validReply(reply)) {
@@ -106,7 +125,6 @@ void ClickApiClient::requestFinished(QNetworkReply *reply)
         reply->deleteLater();
         return;
     }
-    qWarning() << "valid reply!";
 
     switch (reply->error()) {
     case QNetworkReply::NoError:
@@ -125,27 +143,22 @@ void ClickApiClient::requestFinished(QNetworkReply *reply)
     reply->deleteLater();
 }
 
-void ClickApiClient::requestSucceeded(QNetworkReply *reply)
+void ClientImpl::requestSucceeded(QNetworkReply *reply)
 {
-    qWarning() << Q_FUNC_INFO << reply->request().url().toString();
     QByteArray content(reply->readAll());
     if (reply->hasRawHeader(X_CLICK_TOKEN)) {
-        qWarning() << Q_FUNC_INFO << "had header" << X_CLICK_TOKEN << reply->rawHeader(X_CLICK_TOKEN);
         QString header(reply->rawHeader(X_CLICK_TOKEN));
-        // qWarning() << "setting click token to" << header;
-        // m_update->setToken(header);
         Q_EMIT tokenRequestSucceeded(header);
     } else if (!content.isEmpty()) {
-        qWarning() << Q_FUNC_INFO << "had metadata";
         Q_EMIT metadataRequestSucceeded(content);
     } else {
-        qWarning() << Q_FUNC_INFO << "not understood";
+        qWarning() << Q_FUNC_INFO << "Request was not understood.";
     }
 
     reply->deleteLater();
 }
 
-bool ClickApiClient::validReply(const QNetworkReply *reply)
+bool ClientImpl::validReply(const QNetworkReply *reply)
 {
     auto statusAttr = reply->attribute(
             QNetworkRequest::HttpStatusCodeAttribute);
@@ -156,7 +169,6 @@ bool ClickApiClient::validReply(const QNetworkReply *reply)
     }
 
     int httpStatus = statusAttr.toInt();
-    qWarning() << "click api client: HTTP Status: " << httpStatus;
 
     if (httpStatus == 401 || httpStatus == 403) {
         qCritical() << QString("Server responded with %1.").arg(httpStatus);
@@ -173,20 +185,10 @@ bool ClickApiClient::validReply(const QNetworkReply *reply)
     return true;
 }
 
-// void ClickApiClient::handleTokenReply(QNetworkReply *reply)
-// {
-
-// }
-
-// void ClickApiClient::handleMetadataReply(QNetworkReply *reply)
-// {
-
-// }
-
-void ClickApiClient::cancel()
+void ClientImpl::cancel()
 {
     // Tell each reply to abort. See initializeReply().
     Q_EMIT abortNetworking();
 }
-
+} // Click
 } // UpdatePlugin

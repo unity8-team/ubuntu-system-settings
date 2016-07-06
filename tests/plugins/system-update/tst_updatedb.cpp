@@ -456,11 +456,9 @@ private slots:
         m_instance->setResumed("not there", 0);
         m_instance->setCanceled("not there", 0);
 
-
         QSqlQuery q(m_instance->db());
         q.exec("SELECT * FROM updates");
         QVERIFY(!q.next());
-
     }
 private:
     UpdateDb *m_instance;
@@ -468,5 +466,4 @@ private:
 };
 
 QTEST_MAIN(TstUpdateDb)
-
 #include "tst_updatedb.moc"

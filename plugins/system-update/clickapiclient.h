@@ -19,36 +19,40 @@
 #ifndef CLICK_API_CLIENT_H
 #define CLICK_API_CLIENT_H
 
+#include "systemupdate.h"
+#include "networkaccessmanager.h"
+
 #include <QtNetwork/QNetworkAccessManager>
 #include <QtNetwork/QNetworkReply>
+
+#define X_CLICK_TOKEN "X-Click-Token"
 
 namespace UpdatePlugin
 {
 class ClickApiClient : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(QString errorString READ errorString NOTIFY errorStringChanged)
 public:
-    explicit ClickApiClient(QObject *parent = 0);
+    explicit ClickApiClient(NetworkAccessManager *nam =
+                                SystemUpdate::instance()->nam(),
+                            QObject *parent = 0);
     ~ClickApiClient();
 
-    QString errorString() const;
-
     void cancel();
-    QNetworkAccessManager* nam();
-    void initializeReply(QNetworkReply *reply);
 
-    bool validReply(const QNetworkReply *reply);
-    void setErrorString(const QString &errorString);
+    void getMetadata(const QUrl &url, const QByteArray &packageNames);
+    void getToken(const QUrl &url);
 
-public slots:
+private slots:
     void requestSucceeded(QNetworkReply *reply);
     void requestFinished(QNetworkReply *reply);
     void requestSslFailed(QNetworkReply *reply, const QList<QSslError> &errors);
+    // void handleTokenReply(QNetworkReply *reply);
+    // void handleMetadataReply(QNetworkReply *reply);
 
 signals:
-    void success(QNetworkReply *reply);
-    void errorStringChanged();
+    void metadataRequestSucceeded(const QByteArray &metadata);
+    void tokenRequestSucceeded(const QString &token);
     void networkError();
     void serverError();
     void credentialError();
@@ -56,8 +60,9 @@ signals:
     void abortNetworking();
 
 private:
-    QString m_errorString;
-    QNetworkAccessManager m_nam;
+    void initializeReply(QNetworkReply *reply);
+    bool validReply(const QNetworkReply *reply);
+    NetworkAccessManager *m_nam;
 
     void initializeNam();
 };

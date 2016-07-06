@@ -3,7 +3,6 @@
 
 #include <QTest>
 #include <QProcess>
-#include <QSignalSpy>
 
 class MockClickServerTestCase
 {
@@ -11,18 +10,16 @@ protected:
     void startMockClickServer(const QStringList &args = QStringList())
     {
         QStringList params;
-        params << "mock_update_click_server.py";
+        params << "mockclickserver.py";
         params << args;
         m_mockclickserver.start("python3", params);
-        QSignalSpy readyReadStandardOutputSpy(&m_mockclickserver,
-            SIGNAL(readyReadStandardOutput()));
-        QVERIFY(readyReadStandardOutputSpy.wait());
+        QTRY_COMPARE(m_mockclickserver.state(), QProcess::Running);
     }
 
     void stopMockClickServer()
     {
         m_mockclickserver.close();
-        QTest::qWait(1000);
+        QTRY_COMPARE(m_mockclickserver.state(), QProcess::NotRunning);
     }
 
     QProcess m_mockclickserver;

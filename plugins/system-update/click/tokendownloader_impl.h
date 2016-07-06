@@ -16,43 +16,38 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef CLICKTOKEN_DOWNLOADER_H
-#define CLICKTOKEN_DOWNLOADER_H
+#ifndef CLICK_TOKEN_DOWNLOADER_IMPL_H
+#define CLICK_TOKEN_DOWNLOADER_IMPL_H
 
-#include "clickapiclient.h"
-#include "update.h"
-
-#include <token.h>
-
-#include <QObject>
+#include "tokendownloader.h"
+#include "client.h"
 
 namespace UpdatePlugin
 {
-class ClickTokenDownloader : public QObject
+namespace Click
 {
-    Q_OBJECT
+class TokenDownloaderImpl : public TokenDownloader
+{
 public:
-    explicit ClickTokenDownloader(QObject *parent, Update *update);
-    ~ClickTokenDownloader();
+    explicit TokenDownloaderImpl(Client *client,
+                                 QSharedPointer<Update> update,
+                                 QObject *parent = 0);
+    virtual ~TokenDownloaderImpl();
+    virtual void download() override;
+    virtual void setAuthToken(const UbuntuOne::Token &authToken) override;
 
-    void requestToken();
-    void setAuthToken(const UbuntuOne::Token &authToken);
-
-signals:
-    void tokenRequestSucceeded(Update *update);
-    void tokenRequestFailed(Update *update);
+public slots:
+    virtual void cancel() override;
 
 private slots:
-    void cancel();
     void handleSuccess(const QString &token);
     void handleFailure();
 
 private:
     void init();
-    Update *m_update;
-    ClickApiClient m_client;
-    UbuntuOne::Token m_authToken;
+    Client *m_client;
 };
+} // Click
 } // UpdatePlugin
 
-#endif // CLICKTOKEN_DOWNLOADER_H
+#endif // CLICK_TOKEN_DOWNLOADER_IMPL_H

@@ -18,8 +18,8 @@
 
 
 #include "clicktokendownloader.h"
-#include "update.h"
 #include "mockclickservertestcase.h"
+#include "update.h"
 
 #include <QSignalSpy>
 #include <QTest>
@@ -86,7 +86,7 @@ private slots:
     }
     void testFailure()
     {
-        m_mockclickserver.close();
+        stopMockClickServer();
 
         std::vector<Update*> updates;
         QObject::connect(
@@ -102,9 +102,6 @@ private slots:
         QTRY_COMPARE(updates.at(0), m_update);
 
         startMockClickServer();
-        QSignalSpy readyReadStandardOutputSpy(&m_mockclickserver,
-            SIGNAL(readyReadStandardOutput()));
-        QVERIFY(readyReadStandardOutputSpy.wait());
     }
 private:
     ClickTokenDownloader *m_instance;

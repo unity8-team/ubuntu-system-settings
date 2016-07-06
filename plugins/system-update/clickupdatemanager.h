@@ -20,22 +20,19 @@
 #define CLICK_UPDATE_MANAGER_H
 
 #include "systemupdate.h"
-#include "clicktokendownloader.h"
 #include "updatedb.h"
 
-#include <ssoservice.h>
-#include <token.h>
+#include "click/client.h"
+#include "click/manifest.h"
+#include "click/sso.h"
+#include "click/tokendownloader.h"
+#include "click/tokendownloader_factory.h"
 
-#include <QDateTime>
-#include <QFile>
 #include <QHash>
-#include <QJsonDocument>
-#include <QList>
 #include <QProcess>
-
-// Having the full namespaced name in a slot seems to confuse
-// SignalSpy so we need this declaration.
-using UbuntuOne::Token;
+#include <QByteArray>
+#include <QJsonArray>
+#include <QSharedPointer>
 
 namespace UpdatePlugin
 {
@@ -46,32 +43,28 @@ class ClickUpdateManager : public QObject
                NOTIFY authenticatedChanged)
 public:
     explicit ClickUpdateManager(QObject *parent = 0);
-    // For testing.
-    explicit ClickUpdateManager(const QString &dbpath, QObject *parent = 0);
+    explicit ClickUpdateManager(Click::Client *client,
+                                Click::Manifest *manifest,
+                                Click::SSO *sso,
+                                Click::TokenDownloaderFactory *downloadFactory,
+                                UpdateDb *db,
+                                QObject *parent = 0);
     ~ClickUpdateManager();
 
     Q_INVOKABLE void check();
-    Q_INVOKABLE void check(const QString &packageName);
+    Q_INVOKABLE void check(const QString &packageName, const uint &revision);
     Q_INVOKABLE void cancel();
-    // Q_INVOKABLE void markInstalled(const QString &packageName, const int &revision);
-    // Q_INVOKABLE void setUpdateState(const QString &packageName, const int &revision,
-    //                                 const int &state);
-    // Q_INVOKABLE void setProgress(const QString &packageName, const int &revision,
-    //                              const int &progress);
-
     Q_INVOKABLE bool isCheckRequired();
 
     bool authenticated();
 
 private slots:
-    void handleMetadata(QNetworkReply *reply);
-    void processInstalledClicks(const int &exitCode);
-    void handleProcessError(const QProcess::ProcessError &error);
-
-    void handleTokenDownload(Update *update);
-    void handleTokenDownloadFailure(Update *update);
-
-    void handleCredentialsFound(const Token &token);
+    void handleManifestSuccess(const QJsonArray &manifest);
+    void handleManifestFailure();
+    void handleMetadataSuccess(const QByteArray &metadata);
+    void handleTokenDownload(QSharedPointer<Update> update);
+    void handleTokenDownloadFailure(QSharedPointer<Update> update);
+    void handleCredentialsFound(const UbuntuOne::Token &token);
     void handleCredentialsFailed();
     void handleCommunicationErrors();
     void handleCheckStart() { m_checking = true; }
@@ -94,33 +87,26 @@ private:
     void setAuthenticated(const bool authenticated);
 
     void init();
-    // Set up connections on a process instance.
-    void initializeProcess();
-    void initializeSSOService();
-    void initializeApiClient();
-    void initializeTokenDownloader(const ClickTokenDownloader *dler);
+    void initClient();
+    void initManifest();
+    void initSSO();
+    void initTokenDownloader(const Click::TokenDownloader *downloader);
 
-    // Start process of adding remote metadata to each installed click
-    void requestClickMetadata();
+    void requestMetadata();
+    void parseMetadata(const QJsonArray &array);
 
-    // Parses click metadata.
-    // Note: This also asks a ClickUpdate to request a click token.
-    // TODO: Make this more obvious.
-    void parseClickMetadata(const QJsonArray &array);
-
-    // Assert completion of check, signalling if check complete.
     void completionCheck();
 
-    UpdateDb* m_db;
-    // Represents the process that we use to query installed clicks.
-    QProcess m_process;
-    ClickApiClient m_apiClient;
-    QHash<QString, Update*> m_updates;
+    Click::Client *m_client;
+    Click::Manifest *m_manifest;
+    Click::SSO *m_sso;
+    Click::TokenDownloaderFactory *m_downloadFactory;
+    UpdateDb *m_db;
 
+    QHash<QString, QSharedPointer<Update>> m_updates;
     UbuntuOne::Token m_authToken;
-    UbuntuOne::SSOService m_ssoService;
-    bool m_authenticated;
-    bool m_checking;
+    bool m_authenticated = true;
+    bool m_checking = false;
 };
 } // UpdatePlugin
 

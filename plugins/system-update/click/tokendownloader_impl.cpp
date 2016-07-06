@@ -16,58 +16,56 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "clicktokendownloader.h"
 #include "helpers.h"
-#include "networkaccessmanager.h"
+#include "tokendownloader_impl.h"
 
 namespace UpdatePlugin
 {
-ClickTokenDownloader::ClickTokenDownloader(QObject *parent,
-                                           Update *update)
-    : QObject(parent)
-    , m_update(update)
-    , m_client(SystemUpdate::instance()->nam(), this)
-    , m_authToken(UbuntuOne::Token())
+namespace Click
+{
+TokenDownloaderImpl::TokenDownloaderImpl(Client *client,
+                                         QSharedPointer<Update> update,
+                                         QObject *parent)
+    : TokenDownloader(update, parent)
+    , m_client(client)
 {
     init();
-    qWarning() << "click token download init for" << update->identifier();
+    qWarning() << "tokendownloaderimpl: init for" << update->identifier();
 }
 
-ClickTokenDownloader::~ClickTokenDownloader()
+TokenDownloaderImpl::~TokenDownloaderImpl()
 {
     cancel();
 }
 
-void ClickTokenDownloader::init()
+void TokenDownloaderImpl::init()
 {
-    // connect(&m_client, SIGNAL(success(QNetworkReply*)),
-    //         this, SLOT(handleSuccess(QNetworkReply*)));
-    connect(&m_client, SIGNAL(tokenRequestSucceeded(const QString)),
+    connect(m_client, SIGNAL(tokenRequestSucceeded(const QString)),
             this, SLOT(handleSuccess(const QString)));
-    connect(&m_client, SIGNAL(networkError()),
+    connect(m_client, SIGNAL(networkError()),
             this, SLOT(handleFailure()));
-    connect(&m_client, SIGNAL(serverError()),
+    connect(m_client, SIGNAL(serverError()),
             this, SLOT(handleFailure()));
-    connect(&m_client, SIGNAL(credentialError()),
+    connect(m_client, SIGNAL(credentialError()),
             this, SLOT(handleFailure()));
 }
 
-void ClickTokenDownloader::setAuthToken(const UbuntuOne::Token &authToken)
+void TokenDownloaderImpl::setAuthToken(const UbuntuOne::Token &authToken)
 {
     m_authToken = authToken;
 }
 
-void ClickTokenDownloader::cancel()
+void TokenDownloaderImpl::cancel()
 {
-    m_client.cancel();
+    m_client->cancel();
 }
 
-void ClickTokenDownloader::requestToken()
+void TokenDownloaderImpl::download()
 {
-    qWarning() << "requests token on url" << m_update->identifier();
+    qWarning() << "download token on url" << m_update->identifier();
     if (!m_authToken.isValid() && !Helpers::isIgnoringCredentials()) {
         qWarning() << "token invalid";
-        Q_EMIT tokenRequestFailed(m_update);
+        Q_EMIT downloadFailed(m_update);
         return;
     }
 
@@ -77,28 +75,29 @@ void ClickTokenDownloader::requestToken()
 
     if (authHeader.isEmpty()) {
         // Already logged.
-        tokenRequestFailed(m_update);
+        downloadFailed(m_update);
         return;
     }
 
     QString signUrl = Helpers::clickTokenUrl(m_update->downloadUrl());
     QUrl query(signUrl);
     query.setQuery(authHeader);
-    m_client.getToken(query);
+    m_client->requestToken(query);
 }
 
-void ClickTokenDownloader::handleSuccess(const QString &token)
+void TokenDownloaderImpl::handleSuccess(const QString &token)
 {
     m_update->setToken(token);
     if (token.isEmpty()) {
-        tokenRequestFailed(m_update);
+        downloadFailed(m_update);
     } else {
-        tokenRequestSucceeded(m_update);
+        downloadSucceeded(m_update);
     }
 }
 
-void ClickTokenDownloader::handleFailure()
+void TokenDownloaderImpl::handleFailure()
 {
-    Q_EMIT tokenRequestFailed(m_update);
+    Q_EMIT downloadFailed(m_update);
 }
+}// Click
 }// UpdatePlugin

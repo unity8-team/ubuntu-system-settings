@@ -1,7 +1,7 @@
 /*
  * This file is part of system-settings
  *
- * Copyright (C) 2013-2016 Canonical Ltd.
+ * Copyright (C) 2016 Canonical Ltd.
  *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License version 3, as published
@@ -15,40 +15,19 @@
  * You should have received a copy of the GNU General Public License along
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include "systemupdate.h"
-#include "network/manager_impl.h"
+
+#include "tokendownloader_impl.h"
+#include "tokendownloader_factory_impl.h"
 
 namespace UpdatePlugin
 {
-SystemUpdate *SystemUpdate::m_instance = 0;
-
-SystemUpdate *SystemUpdate::instance()
+namespace Click
 {
-    if (!m_instance) m_instance = new SystemUpdate;
-    return m_instance;
-}
-
-void SystemUpdate::destroyInstance()
+TokenDownloader* TokenDownloaderFactoryImpl::create(Client *client,
+                                                    QSharedPointer<Update> update,
+                                                    QObject *parent)
 {
-    delete m_instance;
-    m_instance = nullptr;
+    return new TokenDownloaderImpl(client, update, parent);
 }
-
-SystemUpdate::SystemUpdate(QObject *parent)
-    : QObject(parent)
-    , m_db(new UpdateDb(this))
-    , m_nam(new Network::ManagerImpl(this))
-{
-    qWarning() << "created system update.";
-}
-
-UpdateDb* SystemUpdate::db()
-{
-    return m_db;
-}
-
-Network::Manager* SystemUpdate::nam()
-{
-    return m_nam;
-}
+} // Click
 } // UpdatePlugin

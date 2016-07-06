@@ -16,43 +16,32 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef CLICKTOKEN_DOWNLOADER_H
-#define CLICKTOKEN_DOWNLOADER_H
-
-#include "clickapiclient.h"
-#include "update.h"
+#ifndef CLICK_SSO_H
+#define CLICK_SSO_H
 
 #include <token.h>
 
 #include <QObject>
+#include <QString>
 
 namespace UpdatePlugin
 {
-class ClickTokenDownloader : public QObject
+namespace Click
+{
+class SSO : public QObject
 {
     Q_OBJECT
 public:
-    explicit ClickTokenDownloader(QObject *parent, Update *update);
-    ~ClickTokenDownloader();
-
-    void requestToken();
-    void setAuthToken(const UbuntuOne::Token &authToken);
+    SSO(QObject *parent = 0) : QObject(parent) {};
+    virtual ~SSO() {};
+    virtual void requestCredentials() = 0;
+    virtual void invalidateCredentials() = 0;
 
 signals:
-    void tokenRequestSucceeded(Update *update);
-    void tokenRequestFailed(Update *update);
-
-private slots:
-    void cancel();
-    void handleSuccess(const QString &token);
-    void handleFailure();
-
-private:
-    void init();
-    Update *m_update;
-    ClickApiClient m_client;
-    UbuntuOne::Token m_authToken;
+    void credentialsRequestSucceeded(const UbuntuOne::Token &token);
+    void credentialsRequestFailed();
 };
+} // Click
 } // UpdatePlugin
 
-#endif // CLICKTOKEN_DOWNLOADER_H
+#endif // CLICK_SSO_H

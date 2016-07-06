@@ -330,9 +330,7 @@ void UpdateDb::setResumed(const QString &id, const uint &revision)
 
 void UpdateDb::setCanceled(const QString &id, const uint &revision)
 {
-    // FIXME: consolidate
     setState(id, revision, Update::State::StateAvailable);
-    // unsetDownloadId(downloadId);
     changed(id, revision);
 }
 
@@ -342,7 +340,8 @@ bool UpdateDb::createDb()
 
     QSqlQuery q(m_db);
     bool ok;
-    ok = q.exec("CREATE TABLE meta(checked_at_utc BIGINT)");
+    ok = q.exec("CREATE TABLE meta(checked_at_utc BIGINT, "
+                "system_status TEXT)");
     if (Q_UNLIKELY(!ok)) {
         m_db.rollback();
         return false;
