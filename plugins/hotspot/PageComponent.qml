@@ -80,6 +80,7 @@ ItemPage {
 
             SettingsListItems.Standard {
                 id: hotspotItem
+                objectName: "hotspotItem"
                 text: i18n.tr("Hotspot")
                 enabled: Connectivity.hotspotStored
                 onClicked: hotspotSwitch.trigger()
@@ -87,6 +88,7 @@ ItemPage {
                 Switch {
                     id: hotspotSwitch
                     objectName: "hotspotSwitch"
+                    enabled: parent.enabled
                     checked: Connectivity.hotspotEnabled
                     onTriggered: Connectivity.hotspotEnabled = checked
 
