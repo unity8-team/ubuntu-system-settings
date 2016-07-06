@@ -159,17 +159,17 @@ MainView {
                         model: pluginManager.itemModel("uncategorized-top")
                     }
 
-                    CategorySection {
+                    CategoryGrid {
                         category: "network"
                         categoryName: i18n.tr("Network")
                     }
 
-                    CategorySection {
+                    CategoryGrid {
                         category: "personal"
                         categoryName: i18n.tr("Personal")
                     }
 
-                    CategorySection {
+                    CategoryGrid {
                         category: "system"
                         categoryName: i18n.tr("System")
                     }
