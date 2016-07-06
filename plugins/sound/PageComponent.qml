@@ -156,6 +156,7 @@ ItemPage {
                 SettingsListItems.Standard {
                     CheckBox {
                         objectName: "callVibrate"
+                        SlotsLayout.position: SlotsLayout.First
                         property bool serverChecked: backendInfo.incomingCallVibrate
                         onServerCheckedChanged: checked = serverChecked
                         Component.onCompleted: checked = serverChecked
@@ -167,6 +168,7 @@ ItemPage {
                 SettingsListItems.Standard {
                     CheckBox {
                         objectName: "callVibrateSilentMode"
+                        SlotsLayout.position: SlotsLayout.First
                         property bool serverChecked: backendInfo.incomingCallVibrateSilentMode
                         onServerCheckedChanged: checked = serverChecked
                         Component.onCompleted: checked = serverChecked
@@ -210,6 +212,7 @@ ItemPage {
                 SettingsListItems.Standard {
                     CheckBox {
                         objectName: "messageVibrate"
+                        SlotsLayout.position: SlotsLayout.First
                         property bool serverChecked: backendInfo.incomingMessageVibrate
                         onServerCheckedChanged: checked = serverChecked
                         Component.onCompleted: checked = serverChecked
@@ -221,6 +224,7 @@ ItemPage {
                 SettingsListItems.Standard {
                     CheckBox {
                         objectName: "messageVibrateSilentMode"
+                        SlotsLayout.position: SlotsLayout.First
                         property bool serverChecked: backendInfo.incomingMessageVibrateSilentMode
                         onServerCheckedChanged: checked = serverChecked
                         Component.onCompleted: checked = serverChecked
