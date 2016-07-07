@@ -37,6 +37,7 @@ public:
         QObject *parent = 0
     ) override
     {
+        Q_UNUSED(client)
         MockTokenDownloader *d = new MockTokenDownloader(update, parent);
         created.append(d);
         return d;

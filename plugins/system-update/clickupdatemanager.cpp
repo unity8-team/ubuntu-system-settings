@@ -66,7 +66,6 @@ void ClickUpdateManager::init()
 
     connect(this, SIGNAL(checkStarted()), this, SLOT(handleCheckStart()));
     connect(this, SIGNAL(checkCompleted()), this, SLOT(handleCheckStop()));
-    connect(this, SIGNAL(checkCompleted()), this, SLOT(handleCheckCompleted()));
     connect(this, SIGNAL(checkFailed()), this, SLOT(handleCheckStop()));
     connect(this, SIGNAL(checkCanceled()), this, SLOT(handleCheckStop()));
 }
@@ -159,6 +158,7 @@ void ClickUpdateManager::cancel()
 
 void ClickUpdateManager::handleManifestSuccess(const QJsonArray &manifest)
 {
+    qWarning() << "handle manifest succe";
     // Nothing to do.
     if (manifest.size() == 0) {
         Q_EMIT checkCompleted();
@@ -187,11 +187,6 @@ void ClickUpdateManager::handleManifestFailure()
 {
     if (m_checking)
         Q_EMIT checkFailed();
-}
-
-void ClickUpdateManager::handleCheckCompleted()
-{
-    m_db->setLastCheckDate(QDateTime::currentDateTime());
 }
 
 void ClickUpdateManager::handleTokenDownload(QSharedPointer<Update> update)
@@ -281,11 +276,14 @@ void ClickUpdateManager::requestMetadata()
     QUrl url(urlApps);
     url.setQuery(authHeader);
 
+    qWarning() << "requestMetadata";
+
     m_client->requestMetadata(url, packages);
 }
 
 void ClickUpdateManager::handleMetadataSuccess(const QByteArray &metadata)
 {
+    qWarning() << "handleMetadataSuccess" << metadata;
     QJsonParseError *jsonError = new QJsonParseError;
     auto document = QJsonDocument::fromJson(metadata, jsonError);
 
@@ -328,6 +326,7 @@ void ClickUpdateManager::parseMetadata(const QJsonArray &array)
                 update->setChangelog(changelog);
                 update->setTitle(title);
                 update->setRevision(revision);
+                update->setState(Update::State::StateAvailable);
 
                 Click::TokenDownloader* dl = m_downloadFactory->create(m_client, update, this);
                 dl->setAuthToken(m_authToken);
@@ -348,14 +347,6 @@ void ClickUpdateManager::parseMetadata(const QJsonArray &array)
             m_updates.remove(name);
     }
     completionCheck();
-}
-
-bool ClickUpdateManager::isCheckRequired()
-{
-    // Spec says that a manual check should not happen if a check was
-    // completed less than 30 minutes ago.
-    QDateTime now = QDateTime::currentDateTimeUtc().addSecs(-1800); // 30 mins
-    return m_db->lastCheckDate() < now;
 }
 
 bool ClickUpdateManager::authenticated()

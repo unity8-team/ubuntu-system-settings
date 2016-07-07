@@ -29,14 +29,17 @@ namespace Click
 {
 class ManifestImpl : public Manifest
 {
+    Q_OBJECT
 public:
     ManifestImpl(QObject *parent = 0);
     virtual ~ManifestImpl() {};
     virtual void request() override;
 
-private:
+private slots:
     void handleProcessSuccess(const int &exitCode);
     void handleProcessError(const QProcess::ProcessError &error);
+
+private:
     QProcess m_process;
 };
 } // Click

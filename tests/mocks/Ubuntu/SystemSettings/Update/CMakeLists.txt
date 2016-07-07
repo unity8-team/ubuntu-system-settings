@@ -5,11 +5,6 @@ include_directories(
 )
 
 set(PLUGIN_SOURCES
-    ${CMAKE_SOURCE_DIR}/plugins/system-update/clickapiclient.cpp
-    ${CMAKE_SOURCE_DIR}/plugins/system-update/clicktokendownloader.cpp
-    ${CMAKE_SOURCE_DIR}/plugins/system-update/clickupdatemanager.cpp
-    ${CMAKE_SOURCE_DIR}/plugins/system-update/helpers.cpp
-    ${CMAKE_SOURCE_DIR}/plugins/system-update/systemupdate.cpp
     ${CMAKE_SOURCE_DIR}/plugins/system-update/update.cpp
     ${CMAKE_SOURCE_DIR}/plugins/system-update/updatedb.cpp
     ${CMAKE_SOURCE_DIR}/plugins/system-update/updatemodel.cpp

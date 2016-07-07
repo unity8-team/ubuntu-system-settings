@@ -21,17 +21,16 @@
 
 #include <QSharedPointer>
 
-void MockUpdateModel::mockAddUpdate(const QString &id, const int &revision)
+void MockUpdateModel::mockAddUpdate(const QString &id, const uint &revision)
 {
     using namespace UpdatePlugin;
     QSharedPointer<Update> u = QSharedPointer<Update>(new Update);
     u->setIdentifier(id);
     u->setKind(Update::Kind::KindClick);
     u->setRevision(revision);
-    u->setTitle("Test App" + id);
-    u->setRemoteVersion("v" + revision);
+    u->setTitle(QString("Test App %1").arg(id));
+    u->setRemoteVersion(QString("v%1").arg(revision));
     u->setBinaryFilesize(5000 * 1000);
     db()->add(u);
     refresh();
 }
-

@@ -17,7 +17,7 @@
  */
 
 /*
- * This test uses a mock web server, and thus tests implementation classes.
+ * This test uses a mock web server.
  */
 
 #include "mockclickserver.h"

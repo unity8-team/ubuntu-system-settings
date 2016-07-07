@@ -15,24 +15,23 @@
  * You should have received a copy of the GNU General Public License along
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+#ifndef TESTABLE_SYSTEM_UPDATE_H
+#define TESTABLE_SYSTEM_UPDATE_H
 
-#ifndef MOCK_UPDATE_MODEL_H
-#define MOCK_UPDATE_MODEL_H
+#include "systemupdate.h"
 
-#include "updatemodel.h"
-#include <QObject>
-#include <QString>
-#include <QDebug>
-
-class MockUpdateModel : public UpdatePlugin::UpdateModel
+namespace UpdatePlugin
 {
-    Q_OBJECT
+class TestableSystemUpdate : public SystemUpdate
+{
 public:
-    MockUpdateModel(QObject *parent = 0)
-        : UpdatePlugin::UpdateModel(":memory:", parent) {}
-    ~MockUpdateModel(){}
+    explicit TestableSystemUpdate(UpdateDb *db, Network::Manager *nam,
+                                  QObject *parent = 0)
+        : SystemUpdate(db, nam, parent)
+    {}
 
-    Q_INVOKABLE void mockAddUpdate(const QString &id, const uint &revision);
+    ~TestableSystemUpdate() {}
 };
+} // UpdatePlugin
 
-#endif // MOCK_UPDATE_MODEL_H
+#endif // TESTABLE_SYSTEM_UPDATE_H

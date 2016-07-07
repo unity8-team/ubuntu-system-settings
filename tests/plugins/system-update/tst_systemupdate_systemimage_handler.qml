@@ -92,6 +92,7 @@ Item {
             return [
                 {
                     tag: "normal signal, have update",
+                    downloadMode: 0,
                     isAvailable: true, downloading: false,
                     availableVersion: "1", updateSize: 5000000,
                     lastUpdateDate: "", errorReason: "",
@@ -99,12 +100,14 @@ Item {
                 },
                 {
                     tag: "normal signal, no update",
+                    downloadMode: 0,
                     isAvailable: false, downloading: false,
                     availableVersion: "", updateSize: 0,
                     lastUpdateDate: "", errorReason: ""
                 },
                 {
                     tag: "normal signal, update downloading",
+                    downloadMode: 0,
                     isAvailable: true, downloading: true,
                     availableVersion: "1", updateSize: 0,
                     lastUpdateDate: "", errorReason: "",
@@ -112,15 +115,33 @@ Item {
                 },
                 {
                     tag: "normal signal, update paused",
+                    downloadMode: 0,
                     isAvailable: true, downloading: false,
                     availableVersion: "1", updateSize: 0,
                     lastUpdateDate: "", errorReason: "paused",
                     targetState: Update.StateDownloadPaused
+                },
+                {
+                    tag: "normal signal, update (automatically) downloading",
+                    downloadMode: 1,
+                    isAvailable: true, downloading: true,
+                    availableVersion: "1", updateSize: 0,
+                    lastUpdateDate: "", errorReason: "",
+                    targetState: Update.StateDownloadingAutomatically
+                },
+                {
+                    tag: "normal signal, update paused (automatically)",
+                    downloadMode: 1,
+                    isAvailable: true, downloading: false,
+                    availableVersion: "1", updateSize: 0,
+                    lastUpdateDate: "", errorReason: "paused",
+                    targetState: Update.StateAutomaticDownloadPaused
                 }
             ]
         }
 
         function test_availableSignal(data) {
+            SystemImage.setDownloadMode(data.downloadMode);
             SystemImage.mockAvailableStatus(data.isAvailable, data.downloading, data.availableVersion,
                                             data.updateSize, data.lastUpdateDate, data.errorReason);
             tryCompare(pendingModelInstance, "count", data.isAvailable ? 1 : 0);
@@ -138,19 +159,35 @@ Item {
             }
         }
 
-        // function test_manuallyStarted () {
-        //     SystemImage.downloadMode = 0;
-        //     SystemImage.mockStarted();
-        //     compare(instance.updateState, Update.StateQueuedForDownload);
-        // }
+        function test_manuallyStarted () {
+            SystemImage.setDownloadMode(0);
+            SystemImage.mockTargetBuildNumber(300);
+            pendingModelInstance.mockAddUpdate("ubuntu", 300);
+            SystemImage.mockStarted();
 
-        // function test_automaticalProgress () {
-        //     var progressbar = findChild(instance, "updateProgressbar");
-        //     SystemImage.downloadMode = 1;
-        //     SystemImage.mockProgress(50, 0); // pct, eta
-        //     compare(instance.updateState, Update.StateDownloadingAutomatically);
-        //     compare(progressbar.value, 50);
-        // }
+            var delegate = findChild(testRoot, "image-update-0");
+            compare(delegate.updateState, Update.StateDownloading);
+        }
+
+        function test_automaticallyStarted () {
+            SystemImage.setDownloadMode(1);
+            SystemImage.mockTargetBuildNumber(300);
+            pendingModelInstance.mockAddUpdate("ubuntu", 300);
+            SystemImage.mockStarted();
+            wait(3000)
+            var delegate = findChild(testRoot, "image-update-0");
+            compare(delegate.updateState, Update.StateDownloadingAutomatically);
+        }
+
+        function test_automaticalProgress () {
+            SystemImage.setDownloadMode(1);
+            pendingModelInstance.mockAddUpdate("ubuntu", 300);
+            SystemImage.mockProgress(50, 0); // pct, eta
+            var delegate = findChild(testRoot, "image-update-0");
+            var progressbar = findChild(delegate, "updateProgressbar");
+            compare(instance.updateState, Update.StateDownloadingAutomatically);
+            compare(progressbar.value, 50);
+        }
 
         // function test_manualProgress () {
         //     var progressbar = findChild(instance, "updateProgressbar");

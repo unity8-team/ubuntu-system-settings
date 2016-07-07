@@ -21,6 +21,7 @@
 MockSystemImage::MockSystemImage(QObject *parent)
     : QObject(parent)
     , m_downloadMode(-1)
+    , m_targetBuildNumber(-1)
 {
 }
 
@@ -132,7 +133,7 @@ QString MockSystemImage::currentCustomBuildNumber() const
 
 int MockSystemImage::targetBuildNumber() const
 {
-    return 0;
+    return m_targetBuildNumber;
 }
 
 QVariantMap MockSystemImage::detailedVersionDetails() const
@@ -191,3 +192,10 @@ void MockSystemImage::mockFailed(const int &consecutiveFailureCount, const QStri
 {
     Q_EMIT (updateFailed(consecutiveFailureCount, lastReason));
 }
+
+void MockSystemImage::mockTargetBuildNumber(const uint &target)
+{
+    m_targetBuildNumber = target;
+}
+
+

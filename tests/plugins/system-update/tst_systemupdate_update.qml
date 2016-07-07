@@ -336,10 +336,8 @@ Item {
             // Non-functional stuff
             if (data["kind"] === Update.KindImage) {
                 data["name"] = "Ubuntu Touch";
-                data["iconUrl"] = "distributor-logo.png";
             } else if (data["kind"] === Update.KindClick) {
                 data["name"] = "Some app";
-                data["iconUrl"] = "system-settings.png";
             }
 
             instance = update.createObject(testRoot, data);

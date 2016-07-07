@@ -26,15 +26,15 @@ Item {
         target: SystemImage
         onUpdateAvailableStatus: {
             if (isAvailable)
-                updateModel.setImageUpdate("ubuntu", availableVersion, updateSize,
-                                           SystemImage.downloadMode);
+                updateModel.setImageUpdate("ubuntu", availableVersion, updateSize);
                 if (downloading)
                     updateModel.startUpdate("ubuntu", availableVersion);
                 else if (errorReason === "paused")
                     updateModel.pauseUpdate("ubuntu", availableVersion);
         }
         onDownloadStarted: {
-            updateModel.setProgress("ubuntu", SystemImage.targetBuildNumber, -1);
+            console.log("download started");
+            updateModel.setProgress("ubuntu", SystemImage.targetBuildNumber, 0);
         }
         onUpdateProgress: {
             updateModel.setProgress("ubuntu", SystemImage.targetBuildNumber, percentage);

@@ -34,14 +34,11 @@ public:
         downloadUrl = update->downloadUrl();
     }
 
-    virtual void download() override
-    {
-
-    }
+    virtual void download() override {}
 
     virtual void setAuthToken(const UbuntuOne::Token &authToken) override
     {
-
+        Q_UNUSED(authToken)
     }
 
     void mockDownloadSucceeded(const QString &token)
@@ -57,10 +54,7 @@ public:
 
     QString downloadUrl;
 public slots:
-    virtual void cancel() override
-    {
-    }
-
+    virtual void cancel() override {}
 };
 
 #endif // FAKE_TOKEN_DOWNLOADER_H

@@ -48,9 +48,16 @@ public:
     UpdateDb* db();
     Network::Manager* nam();
 
+    Q_INVOKABLE bool isCheckRequired();
+
+public slots:
+    void checkCompleted();
+
 protected:
     explicit SystemUpdate(QObject *parent = 0);
-    ~SystemUpdate() { qWarning() << "SystemUpdate was destroyed."; }
+    explicit SystemUpdate(UpdateDb *db, Network::Manager *nam,
+                          QObject *parent = 0);
+    ~SystemUpdate() {}
 
 private:
     static SystemUpdate *m_instance;

@@ -63,7 +63,7 @@ public:
                NOTIFY errorReasonChanged)
 
     int downloadMode();
-    void setDownloadMode(const int &downloadMode);
+    Q_INVOKABLE void setDownloadMode(const int &downloadMode);
 
     QString deviceName() const;
     QString channelName() const;
@@ -104,6 +104,7 @@ public:
     Q_INVOKABLE void mockDownloaded(); // mock only
     Q_INVOKABLE void mockFailed(const int &consecutiveFailureCount,
                     const QString &lastReason); // mock only
+    Q_INVOKABLE void mockTargetBuildNumber(const uint &target); // mock only
 
 signals:
     void currentBuildNumberChanged();
@@ -142,6 +143,7 @@ signals:
 
 private:
     int m_downloadMode;
+    int m_targetBuildNumber;
 };
 
 #endif // MOCK_SYSTEMIMAGE_H

@@ -54,7 +54,6 @@ public:
     Q_INVOKABLE void check();
     Q_INVOKABLE void check(const QString &packageName, const uint &revision);
     Q_INVOKABLE void cancel();
-    Q_INVOKABLE bool isCheckRequired();
 
     bool authenticated();
 
@@ -69,7 +68,6 @@ private slots:
     void handleCommunicationErrors();
     void handleCheckStart() { m_checking = true; }
     void handleCheckStop() { m_checking = false; }
-    void handleCheckCompleted();
 
 signals:
     void authenticatedChanged();

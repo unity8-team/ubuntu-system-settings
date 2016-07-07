@@ -25,9 +25,6 @@
 #include <QUrl>
 #include <QByteArray>
 
-#include <QtNetwork/QNetworkReply>
-#include <QtNetwork/QSslError>
-
 namespace UpdatePlugin
 {
 namespace Click
@@ -43,12 +40,6 @@ public:
     virtual void requestMetadata(const QUrl &url,
                                  const QList<QString> &packages) = 0;
     virtual void requestToken(const QUrl &url) = 0;
-
-protected slots:
-    virtual void requestSucceeded(QNetworkReply *reply) = 0;
-    virtual void requestFinished(QNetworkReply *reply) = 0;
-    virtual void requestSslFailed(QNetworkReply *reply,
-                                  const QList<QSslError> &errors) = 0;
 
 signals:
     void metadataRequestSucceeded(const QByteArray &metadata);

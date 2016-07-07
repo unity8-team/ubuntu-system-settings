@@ -461,7 +461,7 @@ private slots:
         QVERIFY(!q.next());
     }
 private:
-    UpdateDb *m_instance;
+    UpdateDb *m_instance = nullptr;
     QString m_dbfile;
 };
 

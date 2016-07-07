@@ -30,7 +30,6 @@ TokenDownloaderImpl::TokenDownloaderImpl(Client *client,
     , m_client(client)
 {
     init();
-    qWarning() << "tokendownloaderimpl: init for" << update->identifier();
 }
 
 TokenDownloaderImpl::~TokenDownloaderImpl()
@@ -62,21 +61,22 @@ void TokenDownloaderImpl::cancel()
 
 void TokenDownloaderImpl::download()
 {
-    qWarning() << "download token on url" << m_update->identifier();
     if (!m_authToken.isValid() && !Helpers::isIgnoringCredentials()) {
-        qWarning() << "token invalid";
         Q_EMIT downloadFailed(m_update);
         return;
     }
 
-    QString authHeader = m_authToken.signUrl(
-        m_update->downloadUrl(), QStringLiteral("HEAD"), true
-    );
+    QString authHeader;
+    if (!Helpers::isIgnoringCredentials()) {
+        authHeader = m_authToken.signUrl(
+            m_update->downloadUrl(), QStringLiteral("HEAD"), true
+        );
 
-    if (authHeader.isEmpty()) {
-        // Already logged.
-        downloadFailed(m_update);
-        return;
+        if (authHeader.isEmpty()) {
+            // Already logged.
+            downloadFailed(m_update);
+            return;
+        }
     }
 
     QString signUrl = Helpers::clickTokenUrl(m_update->downloadUrl());

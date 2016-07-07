@@ -372,7 +372,7 @@ Item {
     }
 
     Component.onCompleted: {
-        if (clickUpdateManager.isCheckRequired()) {
+        if (SystemUpdate.isCheckRequired()) {
             checkClick();
             checkSystem();
             console.warn('do check');

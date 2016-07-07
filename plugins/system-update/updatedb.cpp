@@ -150,7 +150,7 @@ void UpdateDb::add(const QSharedPointer<Update> &update)
     q.bindValue(":kind", Update::kindToString(update->kind()));
     q.bindValue(
         ":update_state",
-        Update::stateToString(Update::State::StateAvailable)
+        Update::stateToString(update->state())
     );
     q.bindValue(":automatic", update->automatic());
 
@@ -190,9 +190,14 @@ void UpdateDb::update(const QSharedPointer<Update> &update, const QSqlQuery &que
     update->setCreatedAt(QDateTime::fromMSecsSinceEpoch(
         query.value("created_at_utc").toLongLong()
     ));
-    update->setUpdatedAt(QDateTime::fromMSecsSinceEpoch(
-        query.value("updated_at_utc").toLongLong()
-    ));
+
+    qlonglong updatedAt(query.value("updated_at_utc").toLongLong());
+    if (updatedAt > 0) {
+        update->setUpdatedAt(QDateTime::fromMSecsSinceEpoch(updatedAt));
+    } else {
+        update->setUpdatedAt(QDateTime());
+    }
+
     update->setTitle(query.value("title").toString());
     update->setDownloadHash(query.value("download_hash").toString());
     update->setBinaryFilesize(query.value("size").toUInt());

@@ -18,6 +18,8 @@
 #include "systemupdate.h"
 #include "network/manager_impl.h"
 
+#include <QDateTime>
+
 namespace UpdatePlugin
 {
 SystemUpdate *SystemUpdate::m_instance = 0;
@@ -39,7 +41,14 @@ SystemUpdate::SystemUpdate(QObject *parent)
     , m_db(new UpdateDb(this))
     , m_nam(new Network::ManagerImpl(this))
 {
-    qWarning() << "created system update.";
+}
+
+SystemUpdate::SystemUpdate(UpdateDb *db, Network::Manager *nam,
+                           QObject *parent)
+    : QObject(parent)
+    , m_db(db)
+    , m_nam(nam)
+{
 }
 
 UpdateDb* SystemUpdate::db()
@@ -50,5 +59,18 @@ UpdateDb* SystemUpdate::db()
 Network::Manager* SystemUpdate::nam()
 {
     return m_nam;
+}
+
+bool SystemUpdate::isCheckRequired()
+{
+    // Spec says that a manual check should not happen if a check was
+    // completed less than 30 minutes ago.
+    QDateTime now = QDateTime::currentDateTimeUtc().addSecs(-1800); // 30 mins
+    return m_db->lastCheckDate() < now;
+}
+
+void SystemUpdate::checkCompleted()
+{
+    m_db->setLastCheckDate(QDateTime::currentDateTime());
 }
 } // UpdatePlugin

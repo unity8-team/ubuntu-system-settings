@@ -266,7 +266,7 @@ void UpdateModel::removeRow(int row)
 
 void UpdateModel::moveRow(const int &from, const int &to)
 {
-    qWarning() << "moving rows" << from << to;
+    // qWarning() << "moving rows" << from << to;
     bool fromOk = (from >= 0 && from < m_updates.size());
     bool toOk = (to >= 0 && to < m_updates.size());
     int _to = to;
@@ -369,7 +369,7 @@ void UpdateModel::cancelUpdate(const QString &id, const uint &revision)
 }
 
 void UpdateModel::setImageUpdate(const QString &id, const QString &version,
-                                 const int &updateSize, const int &downloadMode)
+                                 const int &updateSize)
 {
     QSharedPointer<Update> u = QSharedPointer<Update>(new Update);
     u->setIdentifier(id);
@@ -381,10 +381,11 @@ void UpdateModel::setImageUpdate(const QString &id, const QString &version,
         qWarning() << "failed to convert" << version << "to an integer.";
         revision = 0;
     }
+    u->setProgress(0);
     u->setRevision(revision);
     u->setBinaryFilesize((int) updateSize);
     u->setRemoteVersion(version);
-    u->setAutomatic(downloadMode != 0); // 0 is manual
+    u->setState(Update::State::StateAvailable);
 
     m_db->add(u);
 }

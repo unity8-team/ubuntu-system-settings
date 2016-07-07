@@ -2,26 +2,13 @@
 """:"
 exec python $0 ${1+"$@"}
 """
-
+import os
 
 def main():
-    print("""
-[
-    {
-        "name": "com.ubuntu.developer.testclick",
-        "architecture": "all",
-        "framework": "ubuntu-sdk-14.10",
-        "installed-size": "709",
-        "version": "0.1"
-    }, {
-        "name": "com.ubuntu.developer.myclick",
-        "architecture": "all",
-        "framework": "ubuntu-sdk-14.10",
-        "installed-size": "709",
-        "version": "0.1"
-    }
-]
-    """)
+    fname = "%s/click.result" % os.path.dirname(os.path.realpath(__file__))
+    with open(fname, "r") as f:
+      for line in f:
+        print(line)
 
 if __name__ == "__main__":
     # execute only if run as a script

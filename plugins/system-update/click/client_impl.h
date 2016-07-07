@@ -22,14 +22,13 @@
 #include "client.h"
 #include "manager_impl.h"
 
-#define X_CLICK_TOKEN "X-Click-Token"
-
 namespace UpdatePlugin
 {
 namespace Click
 {
 class ClientImpl : public Client
 {
+    Q_OBJECT
 public:
     explicit ClientImpl(QObject *parent = 0);
     explicit ClientImpl(UpdatePlugin::Network::Manager *nam,
@@ -42,10 +41,10 @@ public:
     virtual void requestToken(const QUrl &url) override;
 
 protected slots:
-    virtual void requestSucceeded(QNetworkReply *reply) override;
-    virtual void requestFinished(QNetworkReply *reply) override;
-    virtual void requestSslFailed(QNetworkReply *reply,
-                                  const QList<QSslError> &errors) override;
+    void requestSucceeded(QNetworkReply *reply);
+    void requestFinished(QNetworkReply *reply);
+    void requestSslFailed(QNetworkReply *reply,
+                          const QList<QSslError> &errors);
 
 private:
     void initializeReply(QNetworkReply *reply);

@@ -26,22 +26,25 @@ ManagerImpl::ManagerImpl(QObject *parent)
     : Manager(parent)
     , m_impl()
 {
+  qWarning() << "create manager_impl";
     connect(&m_impl, SIGNAL(finished(QNetworkReply *)),
             this, SIGNAL(finished(QNetworkReply *)));
     connect(&m_impl, SIGNAL(sslErrors(QNetworkReply *,
                                       const QList<QSslError>&)),
             this, SIGNAL(sslErrors(QNetworkReply *,
-                                 const QList<QSslError>&)));
+                                   const QList<QSslError>&)));
 }
 
 QNetworkReply* ManagerImpl::post(const QNetworkRequest &request,
-                                              const QByteArray &data)
+                                 const QByteArray &data)
 {
+    qWarning() << "\tManagerImpl post";
     return m_impl.post(request, data);
 }
 
 QNetworkReply* ManagerImpl::head(const QNetworkRequest &request)
 {
+    qWarning() << "\tManagerImpl head" << request.rawHeaderList() << request.url().toString();
     return m_impl.head(request);
 }
 } // Network

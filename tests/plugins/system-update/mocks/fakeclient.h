@@ -21,8 +21,6 @@
 
 #include "client.h"
 #include <QDebug>
-#include <QtNetwork/QNetworkReply>
-#include <QtNetwork/QSslError>
 
 class MockClient : public UpdatePlugin::Click::Client
 {
@@ -34,7 +32,6 @@ public:
 
     virtual void cancel() override
     {
-
     }
 
     virtual void requestMetadata(const QUrl &url,
@@ -76,12 +73,6 @@ public:
 
     QUrl requestedUrl;
     QList<QString> requestedPackages;
-
-protected slots:
-    virtual void requestSucceeded(QNetworkReply *reply) {}
-    virtual void requestFinished(QNetworkReply *reply) {}
-    virtual void requestSslFailed(QNetworkReply *reply,
-                                  const QList<QSslError> &errors) {}
 };
 
 #endif // FAKE_CLICK_CLIENT_H

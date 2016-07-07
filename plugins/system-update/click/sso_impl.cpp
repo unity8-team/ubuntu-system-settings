@@ -27,8 +27,12 @@ SSOImpl::SSOImpl(QObject *parent)
     : SSO(parent)
     , m_service(new UbuntuOne::SSOService(this))
 {
-    connect(m_service, SIGNAL(credentialsFound(const UbuntuOne::Token&)),
-            this, SLOT(handleCredentialsFound(const UbuntuOne::Token&)));
+    {
+        using namespace UbuntuOne;
+        connect(m_service, SIGNAL(credentialsFound(const Token&)),
+                this, SLOT(handleCredentialsFound(const Token&)));
+
+    }
     connect(m_service, SIGNAL(credentialsNotFound()),
             this, SLOT(handleCredentialsFailed()));
     connect(m_service, SIGNAL(credentialsDeleted()),

@@ -299,7 +299,7 @@ private slots:
         QCOMPARE(Update::stringToKind(kind_s), kind);
     }
 private:
-    Update *m_instance;
+    Update *m_instance = nullptr;
 };
 
 QTEST_MAIN(TstUpdate)

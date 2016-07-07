@@ -47,6 +47,13 @@ private slots:
     {
         return QSharedPointer<Update>(new Update);
     }
+    QSharedPointer<Update> createUpdate(QString id, int rev)
+    {
+        QSharedPointer<Update> u = createUpdate();
+        u->setIdentifier(id);
+        u->setRevision(rev);
+        return u;
+    }
     void testNoUpdates()
     {
         QCOMPARE(m_model->count(), 0);
@@ -243,6 +250,7 @@ private slots:
         app->setChangelog("* Fixed all bugs * Introduced new bugs");
         app->setToken("token");
         app->setProgress(50);
+        app->setState(Update::State::StateInstallPaused);
 
         m_db->add(app);
         m_model->refresh();
@@ -261,13 +269,17 @@ private slots:
         QCOMPARE(m_model->data(idx, UpdateModel::DownloadUrlRole).toString(), app->downloadUrl());
         QCOMPARE(m_model->data(idx, UpdateModel::CommandRole).toStringList(), app->command());
         QCOMPARE(m_model->data(idx, UpdateModel::ChangelogRole).toString(), app->changelog());
+        QCOMPARE(m_model->data(idx, UpdateModel::TokenRole).toString(), app->token());
         QCOMPARE(m_model->data(idx, UpdateModel::InstalledRole).toBool(), false);
         QCOMPARE(m_model->data(idx, UpdateModel::AutomaticRole).toBool(), app->automatic());
         QCOMPARE(m_model->data(idx, UpdateModel::ErrorRole).toString(), QString(""));
+        QCOMPARE(m_model->data(idx, UpdateModel::UpdateStateRole).toUInt(), (uint) Update::State::StateInstallPaused);
         QCOMPARE(m_model->data(idx, UpdateModel::ProgressRole).toInt(), 50);
 
         // Verify that the date ain't empty.
-        QVERIFY(!m_model->data(idx, UpdateModel::CreatedAtRole).toString().isEmpty());
+        QVERIFY(m_model->data(idx, UpdateModel::CreatedAtRole).toDateTime().isValid());
+        QVERIFY(!m_model->data(idx, UpdateModel::UpdatedAtRole).toDateTime().isValid());
+
     }
     void testFilter_data()
     {
@@ -319,9 +331,113 @@ private slots:
             m_model->index(0), UpdateModel::AutomaticRole
         ).toBool(), true);
     }
+    void testSetInstalled()
+    {
+        QSharedPointer<Update> u = createUpdate("id", 42);
+        m_db->add(u);
+        m_model->setInstalled(u->identifier(), u->revision());
+        QCOMPARE(m_db->get(u->identifier(), u->revision())->state(),
+                 Update::State::StateInstallFinished);
+    }
+    void testSetError()
+    {
+        QSharedPointer<Update> u = createUpdate("id", 42);
+        m_db->add(u);
+        m_model->setError(u->identifier(), u->revision(), "fail");
+        QCOMPARE(m_db->get(u->identifier(), u->revision())->state(),
+                 Update::State::StateFailed);
+    }
+    void testSetProgress()
+    {
+        QSharedPointer<Update> u = createUpdate("id", 42);
+        m_db->add(u);
+        m_model->setProgress(u->identifier(), u->revision(), 5);
+        QCOMPARE(m_db->get(u->identifier(), u->revision())->state(),
+                 Update::State::StateDownloading);
+    }
+    void testSetDownloaded()
+    {
+        QSharedPointer<Update> u = createUpdate("id", 42);
+        m_db->add(u);
+        m_model->setDownloaded(u->identifier(), u->revision());
+        QCOMPARE(m_db->get(u->identifier(), u->revision())->state(),
+                 Update::State::StateDownloaded);
+    }
+    void testStartUpdate()
+    {
+        QSharedPointer<Update> u = createUpdate("id", 42);
+        m_db->add(u);
+        m_model->startUpdate(u->identifier(), u->revision());
+        QCOMPARE(m_db->get(u->identifier(), u->revision())->state(),
+                 Update::State::StateDownloading);
+    }
+    void testQueueUpdate()
+    {
+        QSharedPointer<Update> u = createUpdate("id", 42);
+        m_db->add(u);
+        m_model->queueUpdate(u->identifier(), u->revision());
+        QCOMPARE(m_db->get(u->identifier(), u->revision())->state(),
+                 Update::State::StateQueuedForDownload);
+    }
+    void testProcessUpdate()
+    {
+        QSharedPointer<Update> u = createUpdate("id", 42);
+        m_db->add(u);
+        m_model->processUpdate(u->identifier(), u->revision());
+        QCOMPARE(m_db->get(u->identifier(), u->revision())->state(),
+                 Update::State::StateInstalling);
+    }
+    void testPauseUpdate()
+    {
+        QSharedPointer<Update> u = createUpdate("id", 42);
+        m_db->add(u);
+        m_model->pauseUpdate(u->identifier(), u->revision());
+        QCOMPARE(m_db->get(u->identifier(), u->revision())->state(),
+                 Update::State::StateDownloadPaused);
+    }
+    void testResumeUpdate()
+    {
+        QSharedPointer<Update> u = createUpdate("id", 42);
+        m_db->add(u);
+        m_model->resumeUpdate(u->identifier(), u->revision());
+        QCOMPARE(m_db->get(u->identifier(), u->revision())->state(),
+                 Update::State::StateDownloading);
+    }
+    void testCancelUpdate()
+    {
+        QSharedPointer<Update> u = createUpdate("id", 42);
+        m_db->add(u);
+        m_model->cancelUpdate(u->identifier(), u->revision());
+        QCOMPARE(m_db->get(u->identifier(), u->revision())->state(),
+                 Update::State::StateAvailable);
+    }
+    void testRoleNames()
+    {
+        QHash<int, QByteArray> names = m_model->roleNames();
+        QVERIFY(names[Qt::DisplayRole] == "displayName");
+        QVERIFY(names[UpdateModel::Roles::KindRole] == "kind");
+        QVERIFY(names[UpdateModel::Roles::IconUrlRole] == "iconUrl");
+        QVERIFY(names[UpdateModel::Roles::IdRole] == "identifier");
+        QVERIFY(names[UpdateModel::Roles::LocalVersionRole] == "localVersion");
+        QVERIFY(names[UpdateModel::Roles::RemoteVersionRole] == "remoteVersion");
+        QVERIFY(names[UpdateModel::Roles::RevisionRole] == "revision");
+        QVERIFY(names[UpdateModel::Roles::InstalledRole] == "installed");
+        QVERIFY(names[UpdateModel::Roles::CreatedAtRole] == "createdAt");
+        QVERIFY(names[UpdateModel::Roles::UpdatedAtRole] == "updatedAt");
+        QVERIFY(names[UpdateModel::Roles::TitleRole] == "title");
+        QVERIFY(names[UpdateModel::Roles::DownloadHashRole] == "downloadHash");
+        QVERIFY(names[UpdateModel::Roles::SizeRole] == "size");
+        QVERIFY(names[UpdateModel::Roles::DownloadUrlRole] == "downloadUrl");
+        QVERIFY(names[UpdateModel::Roles::ChangelogRole] == "changelog");
+        QVERIFY(names[UpdateModel::Roles::CommandRole] == "command");
+        QVERIFY(names[UpdateModel::Roles::TokenRole] == "token");
+        QVERIFY(names[UpdateModel::Roles::UpdateStateRole] == "updateState");
+        QVERIFY(names[UpdateModel::Roles::ProgressRole] == "progress");
+        QVERIFY(names[UpdateModel::Roles::AutomaticRole] == "automatic");
+    }
 private:
-    UpdateDb *m_db;
-    UpdateModel *m_model;
+    UpdateDb *m_db = nullptr;
+    UpdateModel *m_model = nullptr;
 };
 
 QTEST_MAIN(TstUpdateModel)

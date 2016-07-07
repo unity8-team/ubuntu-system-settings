@@ -25,6 +25,8 @@
 #include <QJsonObject>
 #include <QJsonValue>
 
+#define X_CLICK_TOKEN "X-Click-Token"
+
 namespace UpdatePlugin
 {
 namespace Click
@@ -50,6 +52,7 @@ ClientImpl::~ClientImpl()
 
 void ClientImpl::initializeNam()
 {
+    qWarning() << "\t\t!!!!!!!!!init nam";
     connect(m_nam, SIGNAL(finished(QNetworkReply *)),
             this, SLOT(requestFinished(QNetworkReply *)));
     connect(m_nam, SIGNAL(sslErrors(QNetworkReply *, const QList<QSslError>&)),
@@ -84,6 +87,7 @@ void ClientImpl::requestMetadata(const QUrl &url,
             QByteArray::fromStdString(Helpers::getArchitecture()));
     request.setUrl(url);
     request.setOriginatingObject(this);
+    request.setAttribute(QNetworkRequest::User, "metadata-request");
 
     initializeReply(m_nam->post(request, content));
 }
@@ -93,7 +97,7 @@ void ClientImpl::requestToken(const QUrl &url)
     QNetworkRequest request;
     request.setUrl(url);
     request.setOriginatingObject(this);
-
+    request.setAttribute(QNetworkRequest::User, "token-request");
     initializeReply(m_nam->head(request));
 }
 
@@ -109,16 +113,21 @@ void ClientImpl::requestSslFailed(QNetworkReply *reply,
     foreach (const QSslError &err, errors) {
         errorString += err.errorString();
     }
-    qCritical() << errorString;
+    qCritical() << Q_FUNC_INFO << errorString;
     Q_EMIT serverError();
     reply->deleteLater();
 }
 
 void ClientImpl::requestFinished(QNetworkReply *reply)
 {
+
+    qWarning() << "requestFinished...";
+
     if (reply->request().originatingObject() != this) {
+        qWarning() << "requestFinished, not handling!";
         return; // We did not create this request.
     }
+    qWarning() << "requestFinished, handling!";
 
     if (!validReply(reply)) {
         // Error signals are already sent.
@@ -145,14 +154,18 @@ void ClientImpl::requestFinished(QNetworkReply *reply)
 
 void ClientImpl::requestSucceeded(QNetworkReply *reply)
 {
-    QByteArray content(reply->readAll());
-    if (reply->hasRawHeader(X_CLICK_TOKEN)) {
-        QString header(reply->rawHeader(X_CLICK_TOKEN));
-        Q_EMIT tokenRequestSucceeded(header);
-    } else if (!content.isEmpty()) {
-        Q_EMIT metadataRequestSucceeded(content);
+    QString rtp = reply->request().attribute(QNetworkRequest::User).toString();
+    if (rtp == "token-request") {
+        if (reply->hasRawHeader(X_CLICK_TOKEN)) {
+            QString header(reply->rawHeader(X_CLICK_TOKEN));
+            Q_EMIT tokenRequestSucceeded(header);
+        } else {
+            Q_EMIT tokenRequestSucceeded("");
+        }
+    } else if (rtp == "metadata-request") {
+        Q_EMIT metadataRequestSucceeded(reply->readAll());
     } else {
-        qWarning() << Q_FUNC_INFO << "Request was not understood.";
+        qWarning() << "not handled";
     }
 
     reply->deleteLater();
@@ -164,20 +177,20 @@ bool ClientImpl::validReply(const QNetworkReply *reply)
             QNetworkRequest::HttpStatusCodeAttribute);
     if (!statusAttr.isValid()) {
         Q_EMIT networkError();
-        qCritical() << "Could not parse status code.";
+        qCritical() << Q_FUNC_INFO << "Could not parse status code.";
         return false;
     }
 
     int httpStatus = statusAttr.toInt();
 
     if (httpStatus == 401 || httpStatus == 403) {
-        qCritical() << QString("Server responded with %1.").arg(httpStatus);
+        qCritical() << Q_FUNC_INFO << QString("Server responded with %1.").arg(httpStatus);
         Q_EMIT credentialError();
         return false;
     }
 
     if (httpStatus == 404) {
-        qCritical() << "Server responded with 404.";
+        qCritical() << Q_FUNC_INFO << "Server responded with 404.";
         Q_EMIT serverError();
         return false;
     }

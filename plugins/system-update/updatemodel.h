@@ -104,7 +104,7 @@ public:
     Q_INVOKABLE void resumeUpdate(const QString &id, const uint &revision);
     Q_INVOKABLE void cancelUpdate(const QString &id, const uint &revision);
     Q_INVOKABLE void setImageUpdate(const QString &id, const QString &version,
-                                    const int &updateSize, const int &downloadMode);
+                                    const int &updateSize);
     // Q_INVOKABLE void setDownloadId(const QString &id, const uint &revision,
     //                    const QString &downloadId);
     // Q_INVOKABLE bool contains(const QString &downloadId) const;

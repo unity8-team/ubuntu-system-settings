@@ -26,12 +26,17 @@
 #include <QObject>
 #include <QString>
 
+// Having the full namespaced name in a slot seems to confuse
+// SignalSpy so we need this declaration.
+using namespace UbuntuOne;
+
 namespace UpdatePlugin
 {
 namespace Click
 {
 class SSOImpl : public SSO
 {
+    Q_OBJECT
 public:
     SSOImpl(QObject *parent = 0);
     virtual ~SSOImpl() {};
@@ -39,7 +44,7 @@ public:
     virtual void invalidateCredentials() override;
 
 private slots:
-    void handleCredentialsFound(const UbuntuOne::Token &token);
+    void handleCredentialsFound(const Token &token);
     void handleCredentialsFailed();
 
 private:

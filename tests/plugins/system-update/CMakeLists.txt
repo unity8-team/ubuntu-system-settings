@@ -21,30 +21,6 @@ add_definitions(${UBUNTUONEAUTH_CFLAGS} ${UBUNTUONEAUTH_CFLAGS_OTHER})
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
-set(PLUGIN_HEADERS
-    ${CMAKE_SOURCE_DIR}/plugins/system-update/network/manager.h
-    ${CMAKE_SOURCE_DIR}/plugins/system-update/click/client.h
-    ${CMAKE_SOURCE_DIR}/plugins/system-update/click/manifest.h
-    ${CMAKE_SOURCE_DIR}/plugins/system-update/click/sso.h
-    ${CMAKE_SOURCE_DIR}/plugins/system-update/click/tokendownloader.h
-    ${CMAKE_SOURCE_DIR}/plugins/system-update/click/tokendownloader_factory.h
-)
-
-set(PLUGIN_SOURCES
-    ${CMAKE_SOURCE_DIR}/plugins/system-update/network/manager_impl.cpp
-    ${CMAKE_SOURCE_DIR}/plugins/system-update/click/client_impl.cpp
-    ${CMAKE_SOURCE_DIR}/plugins/system-update/click/manifest_impl.cpp
-    ${CMAKE_SOURCE_DIR}/plugins/system-update/click/sso_impl.cpp
-    ${CMAKE_SOURCE_DIR}/plugins/system-update/click/tokendownloader_impl.cpp
-    ${CMAKE_SOURCE_DIR}/plugins/system-update/click/tokendownloader_factory_impl.cpp
-
-    ${CMAKE_SOURCE_DIR}/plugins/system-update/clickupdatemanager.cpp
-    ${CMAKE_SOURCE_DIR}/plugins/system-update/helpers.cpp
-    ${CMAKE_SOURCE_DIR}/plugins/system-update/systemupdate.cpp
-    ${CMAKE_SOURCE_DIR}/plugins/system-update/update.cpp
-    ${CMAKE_SOURCE_DIR}/plugins/system-update/updatedb.cpp
-)
-
 set(PLUGIN_LIBS
     Qt5::Test
     Qt5::Sql
@@ -59,80 +35,153 @@ file(COPY
     DESTINATION
     ${CMAKE_CURRENT_BINARY_DIR})
 
-# Install a mock click command
-file(COPY
-    ${CMAKE_CURRENT_SOURCE_DIR}/mockclickcommand
-    DESTINATION
-    ${CMAKE_CURRENT_BINARY_DIR})
+# # Install a mock click command
+# file(COPY
+#     ${CMAKE_CURRENT_SOURCE_DIR}/mockclickcommand
+#     DESTINATION
+#     ${CMAKE_CURRENT_BINARY_DIR})
 
-add_executable(tst-click_client
+add_executable(tst-systemupdate-click_client
     tst_click_client.cpp
-    mockclickserver.h
 
-    ${PLUGIN_HEADERS}
-    ${PLUGIN_SOURCES}
+    ${CMAKE_SOURCE_DIR}/plugins/system-update/click/client.h
+    ${CMAKE_SOURCE_DIR}/plugins/system-update/network/manager.h
+
+    ${CMAKE_SOURCE_DIR}/plugins/system-update/helpers.cpp
+    ${CMAKE_SOURCE_DIR}/plugins/system-update/systemupdate.cpp
+    ${CMAKE_SOURCE_DIR}/plugins/system-update/update.cpp
+    ${CMAKE_SOURCE_DIR}/plugins/system-update/updatedb.cpp
+    ${CMAKE_SOURCE_DIR}/plugins/system-update/click/client_impl.cpp
+    ${CMAKE_SOURCE_DIR}/plugins/system-update/network/manager_impl.cpp
 )
-add_test(tst-click_client tst-click_client)
+add_test(tst-systemupdate-click_client tst-systemupdate-click_client)
 set_tests_properties(
-    tst-click_client
+    tst-systemupdate-click_client
         PROPERTIES
         ENVIRONMENT "IGNORE_CREDENTIALS=1;URL_APPS=http://127.0.0.1:9009/metadata"
 )
-target_link_libraries(tst-click_client ${PLUGIN_LIBS})
+target_link_libraries(tst-systemupdate-click_client ${PLUGIN_LIBS})
 
-# add_executable(tst-clicktokendownloader
-#                mocks/mocknetworkaccessmanager.cpp
-#                tst_clicktokendownloader.cpp
-#                ${PLUGIN_SOURCES})
-# add_test(tst-clicktokendownloader tst-clicktokendownloader)
-# set_tests_properties(
-#     tst-clicktokendownloader
-#         PROPERTIES
-#         ENVIRONMENT "IGNORE_CREDENTIALS=1;URL_APPS=http://127.0.0.1:9009/metadata"
-# )
-# target_link_libraries(tst-clicktokendownloader ${PLUGIN_LIBS})
+add_executable(tst-systemupdate-click_token_downloader
+    tst_click_token_downloader.cpp
+    ${CMAKE_SOURCE_DIR}/plugins/system-update/click/client.h
+    ${CMAKE_SOURCE_DIR}/plugins/system-update/click/tokendownloader.h
+    ${CMAKE_SOURCE_DIR}/plugins/system-update/click/tokendownloader_impl.h
+    ${CMAKE_SOURCE_DIR}/plugins/system-update/network/manager.h
 
-add_executable(tst-clickupdatemanager
-    tst_clickupdatemanager.cpp
-    ${PLUGIN_HEADERS}
-    ${PLUGIN_SOURCES}
+    ${CMAKE_SOURCE_DIR}/plugins/system-update/helpers.cpp
+    ${CMAKE_SOURCE_DIR}/plugins/system-update/systemupdate.cpp
+    ${CMAKE_SOURCE_DIR}/plugins/system-update/update.cpp
+    ${CMAKE_SOURCE_DIR}/plugins/system-update/updatedb.cpp
+    ${CMAKE_SOURCE_DIR}/plugins/system-update/click/client_impl.cpp
+    ${CMAKE_SOURCE_DIR}/plugins/system-update/click/tokendownloader_impl.cpp
+    ${CMAKE_SOURCE_DIR}/plugins/system-update/network/manager_impl.cpp
+
 )
-add_test(tst-clickupdatemanager tst-clickupdatemanager)
+add_test(tst-systemupdate-click_token_downloader tst-systemupdate-click_token_downloader)
 set_tests_properties(
-    tst-clickupdatemanager
+    tst-systemupdate-click_token_downloader
+        PROPERTIES
+        ENVIRONMENT "IGNORE_CREDENTIALS=1;URL_APPS=http://127.0.0.1:9009/metadata"
+)
+target_link_libraries(tst-systemupdate-click_token_downloader ${PLUGIN_LIBS})
+
+add_executable(tst-systemupdate-click_update_manager
+    tst_click_update_manager.cpp
+    ${CMAKE_SOURCE_DIR}/plugins/system-update/network/manager.h
+    ${CMAKE_SOURCE_DIR}/plugins/system-update/click/client.h
+    ${CMAKE_SOURCE_DIR}/plugins/system-update/click/manifest.h
+    ${CMAKE_SOURCE_DIR}/plugins/system-update/click/sso.h
+    ${CMAKE_SOURCE_DIR}/plugins/system-update/click/tokendownloader.h
+    ${CMAKE_SOURCE_DIR}/plugins/system-update/click/tokendownloader_factory.h
+
+    ${CMAKE_SOURCE_DIR}/plugins/system-update/network/manager_impl.cpp
+    ${CMAKE_SOURCE_DIR}/plugins/system-update/click/client_impl.cpp
+    ${CMAKE_SOURCE_DIR}/plugins/system-update/click/manifest_impl.cpp
+    ${CMAKE_SOURCE_DIR}/plugins/system-update/click/sso_impl.cpp
+    ${CMAKE_SOURCE_DIR}/plugins/system-update/click/tokendownloader_impl.cpp
+    ${CMAKE_SOURCE_DIR}/plugins/system-update/click/tokendownloader_factory_impl.cpp
+
+    ${CMAKE_SOURCE_DIR}/plugins/system-update/clickupdatemanager.cpp
+    ${CMAKE_SOURCE_DIR}/plugins/system-update/helpers.cpp
+    ${CMAKE_SOURCE_DIR}/plugins/system-update/systemupdate.cpp
+
+    ${CMAKE_SOURCE_DIR}/plugins/system-update/update.cpp
+    ${CMAKE_SOURCE_DIR}/plugins/system-update/updatedb.cpp
+    ${CMAKE_SOURCE_DIR}/plugins/system-update/updatemodel.cpp
+)
+add_test(tst-systemupdate-click_update_manager tst-systemupdate-click_update_manager)
+set_tests_properties(
+    tst-systemupdate-click_update_manager
         PROPERTIES
         ENVIRONMENT "IGNORE_CREDENTIALS=1"
 )
+target_link_libraries(tst-systemupdate-click_update_manager ${PLUGIN_LIBS})
 
-target_link_libraries(tst-clickupdatemanager ${PLUGIN_LIBS})
+add_executable(tst-systemupdate-system_update
+    tst_system_update.cpp
+    ${CMAKE_SOURCE_DIR}/plugins/system-update/network/manager.h
 
-# add_executable(tst-updatedb
-#                tst_updatedb.cpp
-#                ${PLUGIN_SOURCES})
-# add_test(tst-updatedb tst-updatedb)
-# target_link_libraries(tst-updatedb ${PLUGIN_LIBS})
+    ${CMAKE_SOURCE_DIR}/plugins/system-update/update.cpp
+    ${CMAKE_SOURCE_DIR}/plugins/system-update/updatedb.cpp
+    ${CMAKE_SOURCE_DIR}/plugins/system-update/systemupdate.cpp
+    ${CMAKE_SOURCE_DIR}/plugins/system-update/network/manager_impl.cpp
+    ${CMAKE_SOURCE_DIR}/plugins/system-update/systemupdate.cpp
+)
+add_test(tst-systemupdate-system_update tst-systemupdate-system_update)
+target_link_libraries(tst-systemupdate-system_update ${PLUGIN_LIBS})
 
-# add_executable(tst-update
-#                tst_update.cpp
-#                ${PLUGIN_SOURCES})
-# add_test(tst-update tst-update)
-# target_link_libraries(tst-update ${PLUGIN_LIBS})
+add_executable(tst-systemupdate-updatedb
+    tst_updatedb.cpp
+    ${CMAKE_SOURCE_DIR}/plugins/system-update/update.cpp
+    ${CMAKE_SOURCE_DIR}/plugins/system-update/updatedb.cpp
+)
+add_test(tst-systemupdate-updatedb tst-systemupdate-updatedb)
+target_link_libraries(tst-systemupdate-updatedb ${PLUGIN_LIBS})
 
-# add_executable(tst-updatemodel
-#                tst_updatemodel.cpp
-#                ${PLUGIN_SOURCES})
-# add_test(tst-updatemodel tst-updatemodel)
-# target_link_libraries(tst-updatemodel ${PLUGIN_LIBS})
+add_executable(tst-systemupdate-update
+    tst_update.cpp
+    ${CMAKE_SOURCE_DIR}/plugins/system-update/update.cpp
+)
+add_test(tst-systemupdate-update tst-systemupdate-update)
+target_link_libraries(tst-systemupdate-update ${PLUGIN_LIBS})
 
-# add_executable(tst-updatepluginhelpers
-#                tst_helpers.cpp
-#                ${PLUGIN_SOURCES})
-# add_test(tst-updatepluginhelpers tst-updatepluginhelpers)
-# set_tests_properties(
-#     tst-updatepluginhelpers
-#         PROPERTIES
-#         ENVIRONMENT "IGNORE_CREDENTIALS=1;URL_APPS=http://127.0.0.1:9009;FRAMEWORKS_FOLDER=${CMAKE_CURRENT_BINARY_DIR};CLICK_TOKEN_URL=http://example.org;"
-# )
-# target_link_libraries(tst-updatepluginhelpers ${PLUGIN_LIBS})
+add_executable(tst-systemupdate-updatemodel
+    tst_updatemodel.cpp
+    ${CMAKE_SOURCE_DIR}/plugins/system-update/network/manager.h
 
-add_subdirectory(qmltests)
+    ${CMAKE_SOURCE_DIR}/plugins/system-update/update.cpp
+    ${CMAKE_SOURCE_DIR}/plugins/system-update/updatedb.cpp
+    ${CMAKE_SOURCE_DIR}/plugins/system-update/updatemodel.cpp
+    ${CMAKE_SOURCE_DIR}/plugins/system-update/systemupdate.cpp
+    ${CMAKE_SOURCE_DIR}/plugins/system-update/network/manager_impl.cpp
+)
+add_test(tst-systemupdate-updatemodel tst-systemupdate-updatemodel)
+target_link_libraries(tst-systemupdate-updatemodel ${PLUGIN_LIBS})
+
+add_executable(tst-systemupdate-updatepluginhelpers
+    tst_helpers.cpp
+    ${CMAKE_SOURCE_DIR}/plugins/system-update/helpers.cpp
+)
+add_test(tst-systemupdate-updatepluginhelpers tst-systemupdate-updatepluginhelpers)
+set_tests_properties(
+    tst-systemupdate-updatepluginhelpers
+        PROPERTIES
+        ENVIRONMENT "IGNORE_CREDENTIALS=1;URL_APPS=http://127.0.0.1:9009;FRAMEWORKS_FOLDER=${CMAKE_CURRENT_BINARY_DIR};CLICK_TOKEN_URL=http://example.org;"
+)
+target_link_libraries(tst-systemupdate-updatepluginhelpers ${PLUGIN_LIBS})
+
+add_executable(tst-systemupdate-click_manifest
+    tst_click_manifest.cpp
+
+    ${CMAKE_SOURCE_DIR}/plugins/system-update/click/manifest.h
+    ${CMAKE_SOURCE_DIR}/plugins/system-update/helpers.cpp
+    ${CMAKE_SOURCE_DIR}/plugins/system-update/click/manifest_impl.cpp
+)
+add_test(tst-systemupdate-click_manifest tst-systemupdate-click_manifest)
+set_tests_properties(
+    tst-systemupdate-click_manifest
+        PROPERTIES
+        ENVIRONMENT "CLICK_COMMAND=${CMAKE_CURRENT_SOURCE_DIR}/mockclickcommand"
+)
+target_link_libraries(tst-systemupdate-click_manifest ${PLUGIN_LIBS})

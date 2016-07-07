@@ -218,29 +218,6 @@ private slots:
 
         QCOMPARE(m_db->get(id, rev)->token(), QString("foobar"));
     }
-    void testCheckRequired()
-    {
-        QSqlQuery q(m_db->db());
-        QDateTime longAgo = QDateTime::currentDateTime().addMonths(-1).addDays(-1).toUTC();
-
-        q.prepare("REPLACE INTO meta (checked_at_utc) VALUES (:checked_at_utc)");
-        q.bindValue(":checked_at_utc", longAgo.toMSecsSinceEpoch());
-
-        QVERIFY(q.exec());
-
-        QVERIFY(m_instance->isCheckRequired());
-    }
-    void testNotRequiredAfterCheck()
-    {
-        QSignalSpy checkCompletedSpy(m_instance, SIGNAL(checkCompleted()));
-        m_instance->check();
-
-        // Empty manifest will complete check.
-        m_mockmanifest->mockSuccess(QJsonArray::fromStringList(QStringList()));
-
-        QTRY_COMPARE(checkCompletedSpy.count(), 1);
-        QVERIFY(!m_instance->isCheckRequired());
-    }
 private:
     MockClient *m_mockclient = nullptr;
     MockManifest *m_mockmanifest = nullptr;
@@ -253,4 +230,4 @@ private:
 };
 
 QTEST_MAIN(TstClickUpdateManager)
-#include "tst_clickupdatemanager.moc"
+#include "tst_click_update_manager.moc"

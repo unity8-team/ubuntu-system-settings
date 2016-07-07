@@ -48,6 +48,8 @@ void ManifestImpl::request()
 
 void ManifestImpl::handleProcessSuccess(const int &exitCode)
 {
+    Q_UNUSED(exitCode);
+
     QString output(m_process.readAllStandardOutput());
     QJsonDocument document = QJsonDocument::fromJson(output.toUtf8());
     if (document.isArray()) {
@@ -80,9 +82,8 @@ void ManifestImpl::handleProcessError(const QProcess::ProcessError &error)
         err = "UnknownError";
         break;
     }
-    qCritical() << "Manifest failed to execute process:" << err;
+    qCritical() << Q_FUNC_INFO << "Manifest failed to execute process:" << err;
     Q_EMIT requestFailed();
 }
-
 } // Click
 } // UpdatePlugin

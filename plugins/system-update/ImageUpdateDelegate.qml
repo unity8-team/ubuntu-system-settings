@@ -21,12 +21,47 @@ import Ubuntu.SystemSettings.Update 1.0
 
 UpdateDelegate {
     id: update
-    name: "Ubuntu Touch"
+    name: "Ubuntu"
     iconUrl: "file:///usr/share/icons/suru/places/scalable/distributor-logo.svg"
     // updateState: SystemImage.checkTarget() ? Update.StateAvailable :
     //                                           Update.StateUnavailable
     // onRetry: modelData.downloadUpdate();
     onDownload: SystemImage.downloadUpdate();
     onPause: SystemImage.pauseDownload();
-    // onInstall: SystemImage.applyUpdate();
+    onInstall: SystemImage.applyUpdate();
+
+    /* Convert download to an automatic download if this
+    download (most likely) was started automatically. */
+    Binding {
+        target: update
+        property: "updateState"
+        value: Update.StateDownloadingAutomatically
+        when: {
+            var autoMode = SystemImage.downloadMode > 0;
+            var downloading = false;
+            switch (model.updateState) {
+            case Update.StateQueuedForDownload:
+            case Update.StateDownloading:
+                downloading = true;
+            }
+            return autoMode && downloading;
+        }
+    }
+
+    /* Convert paused download to a paused automatic download if this
+    download (most likely) was started automatically. */
+    Binding {
+        target: update
+        property: "updateState"
+        value: Update.StateAutomaticDownloadPaused
+        when: {
+            var autoMode = SystemImage.downloadMode > 0;
+            var paused = false;
+            switch (model.updateState) {
+            case Update.StateDownloadPaused:
+                paused = true;
+            }
+            return autoMode && paused;
+        }
+    }
 }

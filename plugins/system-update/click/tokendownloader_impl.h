@@ -28,6 +28,7 @@ namespace Click
 {
 class TokenDownloaderImpl : public TokenDownloader
 {
+    Q_OBJECT
 public:
     explicit TokenDownloaderImpl(Client *client,
                                  QSharedPointer<Update> update,
@@ -39,7 +40,7 @@ public:
 public slots:
     virtual void cancel() override;
 
-private slots:
+protected slots:
     void handleSuccess(const QString &token);
     void handleFailure();
 
