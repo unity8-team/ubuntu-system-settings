@@ -33,6 +33,8 @@ Component {
 
         property string ssid
         property string bssid
+        property string keyMgmt
+        property string eap
 
         function settingsValid () {
             if (networkname.length === 0) {
@@ -88,9 +90,7 @@ Component {
         }
 
         title: ssid ?
-               /* TODO(jgdx): Hack to avoid breaking string freeze. This will be
-               changed to i18n.tr("Connect to %1").arg(ssid) per spec. */
-               i18n.tr("Connect to Wi‑Fi") + " " + ssid :
+               i18n.tr("Connect to %1").arg(ssid) :
                i18n.tr("Connect to Hidden Network")
         text: feedback.enabled ? feedback.text : "";
 
@@ -322,8 +322,29 @@ Component {
                 i18n.tr("WEP"),                  // index: 3
                 i18n.tr("Dynamic WEP (802.1x)"), // index: 4
                 i18n.tr("LEAP"),                 // index: 5
+                i18n.tr("WAPI Personal"),        // index: 6
+                i18n.tr("WAPI Certificate"),     // index: 7
             ]
-            selectedIndex: 1
+
+            selectedIndex: {
+                switch(keyMgmt) {
+                case 'none': // WEP
+                    return 3;
+                case 'ieee8021x': // Dynamic WEP
+                    return 4;
+                case 'wpa-none': // Ad-Hoc WPA-PSK
+                case 'wpa-psk': // infrastructure WPA-PSK
+                    return 1;
+                case 'wpa-eap': // WPA-Enterprise
+                    return 2;
+                case 'wapi-personal': // WAPI Personal
+                    return 6;
+                case 'wapi-cert': // WAPI Certificate
+                    return 7;
+                default:
+                    return 0;
+                }
+            }
         }
 
         Label {
@@ -357,8 +378,22 @@ Component {
             ]
             visible: securityList.selectedIndex === 2 ||
                      securityList.selectedIndex === 4
+             selectedIndex: {
+                switch(eap) {
+                case 'ttls':
+                    return 1;
+                case 'leap':
+                    return 2;
+                case 'fast':
+                    return 3;
+                case 'peap':
+                    return 4;
+                case 'tls':
+                default:
+                    return 0;
+                 }
+             }
         }
-
         Label {
             id: p2authListLabel
             text : i18n.tr("Inner authentication")
@@ -400,7 +435,8 @@ Component {
             font.bold: false
             color: Theme.palette.normal.baseText
             visible: (securityList.selectedIndex === 2 ||
-                      securityList.selectedIndex === 4 /* WPA or D-WEP */) &&
+                      securityList.selectedIndex === 4 /* WPA or D-WEP */ ||
+                      securityList.selectedIndex === 7) &&
                      (authList.selectedIndex === 0 ||
                       authList.selectedIndex === 1 ||
                       authList.selectedIndex === 3 ||
@@ -414,7 +450,8 @@ Component {
                 right: parent.right
             }
             visible: (securityList.selectedIndex === 2 ||
-                      securityList.selectedIndex === 4 /* WPA or D-WEP */) &&
+                      securityList.selectedIndex === 4 /* WPA or D-WEP */ ||
+                      securityList.selectedIndex === 7) &&
                      (authList.selectedIndex === 0 ||
                       authList.selectedIndex === 1 ||
                       authList.selectedIndex === 3 ||
@@ -516,7 +553,8 @@ Component {
             font.bold: false
             color: Theme.palette.normal.baseText
             visible: (securityList.selectedIndex === 2 ||
-                      securityList.selectedIndex === 4) &&
+                      securityList.selectedIndex === 4 ||
+                      securityList.selectedIndex === 7) &&
                       authList.selectedIndex === 0 // only for TLS
 
         }
@@ -528,7 +566,8 @@ Component {
                 right: parent.right
             }
             visible: (securityList.selectedIndex === 2 ||
-                      securityList.selectedIndex === 4) &&
+                      securityList.selectedIndex === 4 ||
+                      securityList.selectedIndex === 7) &&
                       authList.selectedIndex === 0 // only for TLS
             model: cacertListModel
             expanded: false

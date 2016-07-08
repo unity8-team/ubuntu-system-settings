@@ -73,6 +73,8 @@ void WifiDbusHelper::connect(QString ssid, int security, int auth, QStringList u
     // 3: WEP
     // 4: Dynamic WEP
     // 5: LEAP
+    // 6: WAPI Personal
+    // 7: Wapi Certificate
     if (security != 0) { // WPA Enterprise or Dynamic WEP
         wireless["security"] = QStringLiteral("802-11-wireless-security");
 
