@@ -18,7 +18,7 @@ import QtQuick 2.4
 import QtQuick.Layouts 1.1
 import SystemSettings 1.0
 import Ubuntu.Components 1.3
-import Ubuntu.Components.ListItems 1.3 as ListItem
+import Ubuntu.Components.ListItems 1.3 as ListItems
 import Ubuntu.Components.Popups 1.3
 import Ubuntu.SystemSettings.Wifi 1.0
 import QMenuModel 0.1
@@ -313,7 +313,7 @@ Component {
             elide: Text.ElideRight
         }
 
-        ListItem.ItemSelector {
+        ListItems.ItemSelector {
             id: securityList
             objectName: "securityList"
             model: [i18n.tr("None"),             // index: 0
@@ -346,7 +346,7 @@ Component {
                      securityList.selectedIndex === 4
         }
 
-        ListItem.ItemSelector {
+        ListItems.ItemSelector {
             id: authList
             objectName: "authList"
             model: ["TLS",  // index: 0
@@ -374,7 +374,7 @@ Component {
                       authList.selectedIndex === 4)
         }
 
-        ListItem.ItemSelector {
+        ListItems.ItemSelector {
             id: p2authList
             objectName: "p2authList"
             width: parent.width
@@ -407,7 +407,7 @@ Component {
                       authList.selectedIndex === 4)
         }
 
-        ListItem.ItemSelector {
+        ListItems.ItemSelector {
             id: cacertSelector
             anchors {
                 left: parent.left
@@ -521,7 +521,7 @@ Component {
 
         }
 
-        ListItem.ItemSelector {
+        ListItems.ItemSelector {
             id: usercertSelector
             anchors {
                 left: parent.left
@@ -586,7 +586,7 @@ Component {
             }
         }
 
-        ListItem.ItemSelector {
+        ListItems.ItemSelector {
             id: privateKeySelector
             anchors {
                 left: parent.left
@@ -639,7 +639,7 @@ Component {
             OptionSelectorDelegate { text: pacFileName; }
         }
 
-        ListItem.ItemSelector {
+        ListItems.ItemSelector {
             id: pacFileSelector
             anchors {
                 left: parent.left
@@ -681,7 +681,7 @@ Component {
                       (authList.selectedIndex === 3)
         }
 
-        ListItem.ItemSelector {
+        ListItems.ItemSelector {
             id: pacProvisioningList
             objectName: "pacProvisioningList"
             model: [i18n.tr("Disabled"),      // index: 0
@@ -708,7 +708,7 @@ Component {
                       (authList.selectedIndex === 4)
         }
 
-        ListItem.ItemSelector {
+        ListItems.ItemSelector {
             id: peapVersionList
             objectName: "peapVersionList"
             model: [i18n.tr("Version 0"),  // index: 0
