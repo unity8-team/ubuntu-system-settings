@@ -61,7 +61,7 @@ def has_gsettings():
 
 def set_gsettings(as_value):
     # AS stores a list of maps, GSettings stores a list of tuples.
-    builder = GLib.VariantBuilder.new(GLib.VariantType("a(ss)"))
+    builder = GLib.VariantBuilder.new(GLib.VariantType.new("a(ss)"))
     for as_map in as_value:
         for as_key in as_map:
             gkey = GLib.Variant.new_string(as_key)
