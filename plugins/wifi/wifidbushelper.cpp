@@ -304,7 +304,13 @@ QString WifiDbusHelper::getWifiIpAddress()
         auto type_v = iface.property("DeviceType");
         if (type_v.toUInt() == 2 /* NM_DEVICE_TYPE_WIFI */) {
             auto ip4name = iface.property("IpInterface").toString();
-            return QNetworkInterface::interfaceFromName(ip4name).addressEntries()[0].ip().toString();
+
+            QList<QHostAddress> adrs = QNetworkInterface::interfaceFromName(
+                ip4name
+            ).allAddresses();
+            if (adrs.size() > 0) {
+                return adrs.at(0).toString();
+            }
             break;
         }
     }
