@@ -1,1 +1,2 @@
+debian/ubuntu-system-settings-keyboard-accountsservice-to-gsettings.py
 debian/ubuntu-system-settings-sound-gsettings-to-accountsservice.py
