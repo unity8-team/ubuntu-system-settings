@@ -44,7 +44,10 @@ ItemPage {
         contentHeight: contentItem.childrenRect.height
 
         header: ListItem {
-            ListItemLayout { title.text: i18n.tr("Apps that notify with sound:") }
+            ListItemLayout {
+                title.text: i18n.tr("Apps that notify with sound:")
+                title.color: theme.palette.normal.backgroundSecondaryText
+            }
         }
 
         delegate: ListItem {

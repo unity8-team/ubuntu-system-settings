@@ -71,8 +71,9 @@ ItemPage {
                 height: labelSubtitle.height + units.gu(2)
                 Label {
                     id: labelSubtitle
-                    text: i18n.tr("Selected apps can alert you using notification bubbles, sounds, vibrations, and the Notifications list.")
+                    text: i18n.tr("Apps can alert you using sounds, vibrations, notification bubbles and the Notification list.")
                     wrapMode: Text.WordWrap
+                    color: theme.palette.normal.backgroundSecondaryText
                     anchors {
                         top: parent.top
                         left: parent.left
@@ -90,7 +91,6 @@ ItemPage {
                     Label {
                         objectName: "clickAppsSoundsNotifyLabel"
                         text: clickAppsSoundsNotifyModel.count
-                        fontSize: "large"
                         SlotsLayout.position: SlotsLayout.Trailing;
                     }
                     Icon {
@@ -116,7 +116,6 @@ ItemPage {
                     Label {
                         objectName: "clickAppsVibrationsNotifyLabel"
                         text: clickAppsVibrationsNotifyModel.count
-                        fontSize: "large"
                         SlotsLayout.position: SlotsLayout.Trailing;
                     }
                     Icon {
@@ -137,7 +136,10 @@ ItemPage {
             }
 
             ListItem {
-                ListItemLayout { title.text: i18n.tr("Applications:") }
+                ListItemLayout {
+                    title.text: i18n.tr("Applications:")
+                    title.color: theme.palette.normal.backgroundSecondaryText
+                }
             }
 
         }
@@ -164,7 +166,7 @@ ItemPage {
                 title.text: model.displayName
                 subtitle.text: {
                     if (!model.enableNotifications) {
-                        return i18n.tr("Disabled")
+                        return i18n.tr("No notifications")
                     }
 
                     var arr = []

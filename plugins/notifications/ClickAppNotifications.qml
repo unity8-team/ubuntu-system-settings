@@ -51,11 +51,11 @@ ItemPage {
             height: enableNotificationsLayout.height + (divider.visible ? divider.height : 0)
             ListItemLayout {
                 id: enableNotificationsLayout
-                title.text: i18n.tr("Enable Notifications")
+                title.text: i18n.tr("Notifications")
                 Switch {
                     id: enableNotificationsSwitch
                     objectName: "enableNotificationsSwitch"
-                    SlotsLayout.position: SlotsLayout.Leading
+                    SlotsLayout.position: SlotsLayout.Trailing
                     checked: entry ? entry.enableNotifications : false
 
                     onCheckedChanged: {
@@ -68,7 +68,10 @@ ItemPage {
         }
 
         ListItem {
-            ListItemLayout { title.text: i18n.tr("Let this app alert me using:") }
+            ListItemLayout {
+                title.text: i18n.tr("Let this app alert me using:")
+                title.color: theme.palette.normal.backgroundSecondaryText
+            }
         }
 
         ListItem {

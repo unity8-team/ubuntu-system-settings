@@ -50,7 +50,10 @@ ItemPage {
             }
 
             ListItem {
-                ListItemLayout { title.text: i18n.tr("When in Silent mode:") }
+                ListItemLayout {
+                    title.text: i18n.tr("When in Silent mode:") 
+                    title.color: theme.palette.normal.backgroundSecondaryText
+                }
             }
 
             ListItem {
@@ -82,7 +85,10 @@ ItemPage {
             }
  
             ListItem {
-                ListItemLayout { title.text: i18n.tr("Apps that notify with vibrations:") }
+                ListItemLayout {
+                    title.text: i18n.tr("Apps that notify with vibrations:")
+                    title.color: theme.palette.normal.backgroundSecondaryText
+                }
             }
         }
 
