@@ -1821,7 +1821,7 @@ class PreviousNetworks(
 
     @autopilot.logging.log_action(logger.debug)
     def _select_network(self, name):
-        net = self.select_single('Standard', text=name)
+        net = self.select_single('StandardProgression', text=name)
         self.pointing_device.click_object(net)
 
 
