@@ -163,8 +163,11 @@ Column {
                         case Update.StateInstallPaused:
                         case Update.StateDownloaded:
                         case Update.StateFailed:
-                        case Update.StateInstalled: // Button is hidden if not a click.
                             return true;
+
+                        // Enabled if installed and a click app (can launch).
+                        case Update.StateInstalled:
+                            return kind === Update.KindClick;
 
                         case Update.StateInstalling:
                         case Update.StateInstallingAutomatically:
