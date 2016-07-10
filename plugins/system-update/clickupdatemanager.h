@@ -54,6 +54,7 @@ public:
     Q_INVOKABLE void check();
     Q_INVOKABLE void check(const QString &packageName, const uint &revision);
     Q_INVOKABLE void cancel();
+    Q_INVOKABLE void launch(const QString &packageName);
 
     bool authenticated();
 

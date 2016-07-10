@@ -22,7 +22,6 @@ MockClickUpdateManager::MockClickUpdateManager(QObject *parent)
     : QObject(parent)
     , m_authenticated(true)
     , m_checking(false)
-    , m_checkRequired(false)
 {
 }
 
@@ -47,11 +46,6 @@ void MockClickUpdateManager::clickUpdateInstalled(const QString &packageName, co
 bool MockClickUpdateManager::authenticated()
 {
     return m_authenticated;
-}
-
-bool MockClickUpdateManager::isCheckRequired()
-{
-    return m_checkRequired;
 }
 
 void MockClickUpdateManager::mockCheckStarted()
@@ -97,11 +91,6 @@ void MockClickUpdateManager::mockServerError()
 void MockClickUpdateManager::mockCredentialError()
 {
     Q_EMIT (credentialError());
-}
-
-void MockClickUpdateManager::mockIsCheckRequired(const bool isRequired)
-{
-    m_checkRequired = isRequired;
 }
 
 bool MockClickUpdateManager::isChecking() const

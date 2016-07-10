@@ -24,6 +24,8 @@
 #include "click/sso_impl.h"
 #include "click/tokendownloader_factory_impl.h"
 
+#include <ubuntu-app-launch.h>
+
 #include <QDateTime>
 #include <QJsonDocument>
 #include <QJsonObject>
@@ -154,6 +156,13 @@ void ClickUpdateManager::cancel()
     // foreach (const QString &name, m_updates.keys())m_updates.value(name)->cancel();
     m_client->cancel();
     Q_EMIT checkCanceled();
+}
+
+void ClickUpdateManager::launch(const QString &packageName)
+{
+    if (!ubuntu_app_launch_start_application(packageName.toLatin1().data(), nullptr)) {
+        qWarning() << Q_FUNC_INFO << "Could not launch app" << packageName;
+    }
 }
 
 void ClickUpdateManager::handleManifestSuccess(const QJsonArray &manifest)

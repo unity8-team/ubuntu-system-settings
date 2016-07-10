@@ -67,14 +67,17 @@ public:
         StatusServerError
     };
 
+    Q_INVOKABLE bool isCheckRequired();
+    Q_INVOKABLE void mockIsCheckRequired(const bool isRequired); // mock only
+
 protected:
     MockSystemUpdate(QObject *parent = 0)
-    {
-        Q_UNUSED(parent);
-    }
+        : QObject(parent)
+        , m_checkRequired(false) {}
     ~MockSystemUpdate() {}
 private:
     static MockSystemUpdate *m_instance;
+    bool m_checkRequired;
 };
 
 #endif // MOCK_SYSTEM_UPDATE_H

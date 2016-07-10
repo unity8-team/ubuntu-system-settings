@@ -99,7 +99,11 @@ void UpdateDb::initializeDb()
 
     m_db = QSqlDatabase::addDatabase(QLatin1String("QSQLITE"), m_connectionName);
     m_db.setDatabaseName(m_dbpath);
-    if (!openDb()) return;
+
+    if (!openDb()) {
+        return;
+    }
+
     QSqlQuery q(m_db);
 
     // Check whether the table already exists
@@ -120,17 +124,16 @@ UpdateDb::~UpdateDb()
 
 void UpdateDb::add(const QSharedPointer<Update> &update)
 {
-    if (!openDb()) return;
-
     QSqlQuery q(m_db);
     q.prepare("INSERT OR REPLACE INTO updates (id, revision, installed,"
               "created_at_utc, download_hash, title, size, icon_url,"
-              "download_url, changelog, command, token, progress, "
-              "local_version, remote_version, kind, update_state, automatic) "
-              "VALUES (:id, :revision, :installed, :created_at_utc, "
+              "download_url, changelog, command, token, progress,"
+              "local_version, remote_version, kind, update_state, automatic,"
+              "error) "
+              "VALUES (:id, :revision, :installed, :created_at_utc,"
               ":download_hash, :title, :size, :icon_url, :download_url,"
               ":changelog, :command, :token, :progress, :local_version,"
-              ":remote_version, :kind, :update_state, :automatic)");
+              ":remote_version, :kind, :update_state, :automatic, :error)");
     q.bindValue(":id", update->identifier());
     q.bindValue(":revision", update->revision());
     q.bindValue(":installed", update->installed());
@@ -153,6 +156,7 @@ void UpdateDb::add(const QSharedPointer<Update> &update)
         Update::stateToString(update->state())
     );
     q.bindValue(":automatic", update->automatic());
+    q.bindValue(":error", update->error());
 
     if (!q.exec()) {
         qCritical() << "Could not add update" << q.lastError().text();
@@ -163,8 +167,6 @@ void UpdateDb::add(const QSharedPointer<Update> &update)
 
 void UpdateDb::remove(const QSharedPointer<Update> &update)
 {
-    if (!openDb()) return;
-
     QSqlQuery q(m_db);
     q.prepare("DELETE FROM updates WHERE id=:id AND revision=:revision");
     q.bindValue(":id", update->identifier());
@@ -216,8 +218,6 @@ void UpdateDb::update(const QSharedPointer<Update> &update, const QSqlQuery &que
 
 void UpdateDb::setInstalled(const QString &id, const uint &revision)
 {
-    if (!openDb()) return;
-
     QSqlQuery q(m_db);
     q.prepare("UPDATE updates SET installed=:installed, update_state=:state, "
               "updated_at_utc=:updated_at_utc "
@@ -257,8 +257,6 @@ void UpdateDb::setProcessing(const QString &id, const uint &revision)
 
 void UpdateDb::setError(const QString &id, const uint &revision, const QString &msg)
 {
-    if (!openDb()) return;
-
     QSqlQuery q(m_db);
     q.prepare("UPDATE updates SET error=:error, update_state=:state "
               "WHERE id=:id AND revision=:revision");
@@ -284,8 +282,6 @@ void UpdateDb::setDownloaded(const QString &id, const uint &revision)
 void UpdateDb::setState(const QString &id, const uint &revision,
                         const Update::State &state)
 {
-    if (!openDb()) return;
-
     QSqlQuery q(m_db);
     q.prepare("UPDATE updates SET update_state=:state"
               " WHERE id=:id AND revision=:revision");
@@ -302,8 +298,6 @@ void UpdateDb::setState(const QString &id, const uint &revision,
 void UpdateDb::setProgress(const QString &id, const uint &revision,
                            const int &progress)
 {
-    if (!openDb()) return;
-
     QSqlQuery q(m_db);
     q.prepare("UPDATE updates SET progress=:progress, "
               "update_state=:state WHERE id=:id AND revision=:revision");
@@ -394,8 +388,6 @@ bool UpdateDb::openDb()
 
 void UpdateDb::pruneDb()
 {
-    if (!openDb()) return;
-
     QSqlQuery q(m_db);
     QDateTime monthAgo = QDateTime::currentDateTime().addMonths(-1).toUTC();
     q.prepare("DELETE FROM updates WHERE updated_at_utc < :updated");
@@ -409,8 +401,6 @@ void UpdateDb::pruneDb()
 QDateTime UpdateDb::lastCheckDate()
 {
     QDateTime d;
-    if (!openDb()) return d;
-
     QSqlQuery q(m_db);
     q.exec("SELECT checked_at_utc FROM meta ORDER BY checked_at_utc DESC;");
 
@@ -423,8 +413,6 @@ QDateTime UpdateDb::lastCheckDate()
 
 void UpdateDb::setLastCheckDate(const QDateTime &lastCheck)
 {
-    if (!openDb()) return;
-
     QSqlQuery q(m_db);
     q.prepare("REPLACE INTO meta (checked_at_utc) VALUES (:checked_at_utc)");
     q.bindValue(":checked_at_utc", lastCheck.toUTC().toMSecsSinceEpoch());
@@ -439,11 +427,6 @@ QList<QSharedPointer<Update> > UpdateDb::updates(const uint &filter)
     QList<QSharedPointer<Update> > list;
 
     UpdateModel::Filter eFilter = (UpdateModel::Filter) filter;
-
-    if (!openDb()) {
-        qWarning() << "could not open db";
-        return list;
-    }
 
     QSqlQuery q(m_db);
     switch (eFilter) {
@@ -499,7 +482,6 @@ QList<QSharedPointer<Update> > UpdateDb::updates(const uint &filter)
 QSharedPointer<Update> UpdateDb::get(const QString &id, const uint &revision)
 {
     QSharedPointer<Update> u = QSharedPointer<Update>(new Update);
-    if (!openDb()) return u;
 
     QSqlQuery q(m_db);
     q.prepare(GET_SINGLE_DOWNLOAD);

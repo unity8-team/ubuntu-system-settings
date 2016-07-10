@@ -22,19 +22,6 @@ import Ubuntu.SystemSettings.Update 1.0
 UpdateDelegate {
     id: update
 
-    states: [
-        State {
-            name: "failed"
-            when: update.updateState === Update.StateFailed
-            StateChangeScript {
-                script: update.setError(
-                    i18n.tr("Update failed"),
-                    i18n.tr("Please try again later.")
-                )
-            }
-        }
-    ]
-
     // Makes the progress bar indeterminate when waiting
     Binding {
         target: update

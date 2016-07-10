@@ -74,8 +74,8 @@ class Manager(object):
                     'status_code': 200,
                     'content_type': 'application/json',
                     'content': [{
-                        "name": "com.ubuntu.developer.testclick",
-                        "version": "2.0",
+                        "name": "com.ubuntu.dropping-letters",
+                        "version": "0.1.2.3",
                         "icon_url": (
                             "https://raw.githubusercontent.com/ninja-ide/"
                             "ninja-ide/master/ninja_ide/img/ninja_icon.png"
@@ -85,12 +85,12 @@ class Manager(object):
                             server_port
                         ),
                         "binary_filesize": 23820.0 * 1000.0,
-                        "download_sha512": "1232223sdfdsffs",
-                        "changelog": "New version!",
-                        "title": "Test Click App"
+                        "download_sha512": "foo",
+                        "changelog": "New Dropping Letters.",
+                        "title": "Dropping Letters game"
                     }, {
-                        "name": "com.ubuntu.developer.myclick",
-                        "version": "13.0",
+                        "name": "com.ubuntu.stock-ticker-mobile",
+                        "version": "0.4.0ubuntu1",
                         "icon_url": (
                             "https://upload.wikimedia.org/wikipedia/"
                             "commons/a/ab/Logo-ubuntu_cof-orange-hex.svg"
@@ -102,8 +102,35 @@ class Manager(object):
                         "binary_filesize": 5015.2 * 1000.0,
                         "download_sha512": "489478",
                         "changelog": "Foo",
-                        "title": "My Click App"
-                    }]
+                        "title": "A stock trading app with charts, news, and management"  # noqa
+                    }, {
+                        "name": "com.ubuntu.sudoku",
+                        "version": "0.4.2ubuntu3",
+                        "icon_url": (
+                            "https://upload.wikimedia.org/wikipedia/"
+                            "commons/a/ab/Logo-ubuntu_cof-orange-hex.svg"
+                        ),
+                        "download_url": "http://%s/download:%d" % (
+                            server_address,
+                            server_port
+                        ),
+                        "binary_filesize": 5015.2 * 1000.0,
+                        "download_sha512": "489478",
+                        "changelog": "Foo",
+                        "title": "Sudoku game for Ubuntu devices"
+                    }, {
+                        "name": "com.ubuntu.developer.xda-app",
+                        "version": "0.4.2ubuntu2",
+                        "download_url": "http://%s/download:%d" % (
+                            server_address,
+                            server_port
+                        ),
+                        "binary_filesize": 5015.2 * 1000.0,
+                        "download_sha512": "489478",
+                        "changelog": "Foo",
+                        "title": "XDA Developers App"
+                    }
+                    ]
                 },
                 {
                     'path': '/403',

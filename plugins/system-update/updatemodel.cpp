@@ -80,6 +80,7 @@ QHash<int, QByteArray> UpdateModel::roleNames() const
         names[UpdateStateRole] = "updateState";
         names[ProgressRole] = "progress";
         names[AutomaticRole] = "automatic";
+        names[ErrorRole] = "error";
     }
 
     return names;
@@ -378,7 +379,7 @@ void UpdateModel::setImageUpdate(const QString &id, const QString &version,
     bool ok = false;
     uint revision = version.toUInt(&ok, 10);
     if (!ok) {
-        qWarning() << "failed to convert" << version << "to an integer.";
+        qWarning() << "Did not understand image version" << version;
         revision = 0;
     }
     u->setProgress(0);

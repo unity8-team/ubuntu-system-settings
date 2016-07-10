@@ -39,21 +39,10 @@ Item {
         }
     }
 
-    // Component {
-    //     id: singledownload
-
-    //     SingleDownload {
-    //         metadata: Metadata {}
-    //     }
-    // }
-
     Component {
         id: downloadHandler
 
-        Item {
-
-            DownloadManager {}
-        }
+        DownloadHandler {}
     }
 
     Component {
@@ -77,37 +66,6 @@ Item {
             filter: UpdateModel.Installed
         }
     }
-
-    // function generateClickUpdates(count) {
-    //     for (var i = 0; i < count; i++) {
-    //         mockClickUpdatesModel.append({
-    //             "identifier": "app" + i,
-    //             "revision": i,
-    //             "command": "click test --foo",
-    //             "token": "as54d",
-    //             "downloadUrl": "http://example.org/c.click",
-    //             "downloadHash": "6a5sd4a6s",
-    //             "remoteVersion": i,
-    //             "size": 500,
-    //             "title": "Click Update #" + i,
-    //             "iconUrl": "",
-    //             "changelog": "Changes"
-    //         });
-    //     }
-    // }
-
-    // function generatePreviousUpdates(count) {
-    //     for (var i = 0; i < count; i++) {
-    //         mockPreviousUpdatesModel.append({
-    //             "remoteVersion": i,
-    //             "size": 500,
-    //             "title": "Update #" + i,
-    //             "iconUrl": "",
-    //             "changelog": "Changes"
-    //         });
-    //     }
-    // }
-
 
     UbuntuTestCase {
         name: "UpdatesTest"
@@ -135,7 +93,6 @@ Item {
             clickModelInstance.destroy();
             previousModelInstance.destroy();
             clickUpdateManagerInstance.destroy();
-            wait(100)
         }
 
         function getGlobal() {
@@ -417,6 +374,8 @@ Item {
                     clickModelInstance.mockAddUpdate("a", 1);
                 }
             }
+            console.log("TAG:", data.tag);
+            wait(2000)
 
             compare(getGlobal().hidden, data.global.hidden, "global had wrong visibility");
             compare(getImageUpdate().visible, data.systemupdate.visible, "system update had wrong visibility");

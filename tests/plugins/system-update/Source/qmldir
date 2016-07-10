@@ -6,4 +6,5 @@ ClickUpdateDelegate 1.0 ../../../../plugins/system-update/ClickUpdateDelegate.qm
 ImageUpdateDelegate 1.0 ../../../../plugins/system-update/ImageUpdateDelegate.qml
 Global 1.0 ../../../../plugins/system-update/Global.qml
 NotAuthenticatedNotification 1.0 ../../../../plugins/system-update/NotAuthenticatedNotification.qml
+DownloadHandler 1.0 ../../../../plugins/system-update/DownloadHandler.qml
 SystemImageHandler 1.0 ../../../../plugins/system-update/SystemImageHandler.qml

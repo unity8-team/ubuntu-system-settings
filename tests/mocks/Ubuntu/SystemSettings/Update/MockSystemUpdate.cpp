@@ -24,3 +24,13 @@ MockSystemUpdate *MockSystemUpdate::instance()
     if (!m_instance) m_instance = new MockSystemUpdate;
     return m_instance;
 }
+
+void MockSystemUpdate::mockIsCheckRequired(const bool isRequired)
+{
+    m_checkRequired = isRequired;
+}
+
+bool MockSystemUpdate::isCheckRequired()
+{
+    return m_checkRequired;
+}

@@ -105,6 +105,7 @@ public:
     Q_INVOKABLE void mockFailed(const int &consecutiveFailureCount,
                     const QString &lastReason); // mock only
     Q_INVOKABLE void mockTargetBuildNumber(const uint &target); // mock only
+    Q_INVOKABLE void mockCurrentBuildNumber(const uint &current); // mock only
 
 signals:
     void currentBuildNumberChanged();
@@ -144,6 +145,7 @@ signals:
 private:
     int m_downloadMode;
     int m_targetBuildNumber;
+    int m_currentBuildNumber;
 };
 
 #endif // MOCK_SYSTEMIMAGE_H

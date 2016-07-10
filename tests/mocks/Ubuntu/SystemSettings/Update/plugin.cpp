@@ -34,11 +34,19 @@ static QObject *siSingletonProvider(QQmlEngine *engine, QJSEngine *scriptEngine)
     return new MockSystemImage;
 }
 
+static QObject *suSingletonProvider(QQmlEngine *engine, QJSEngine *scriptEngine)
+{
+    Q_UNUSED(engine)
+    Q_UNUSED(scriptEngine)
+
+    return MockSystemUpdate::instance();
+}
+
 void BackendPlugin::registerTypes(const char *uri)
 {
     Q_ASSERT(uri == QLatin1String("Ubuntu.SystemSettings.Update"));
     qmlRegisterSingletonType<MockSystemImage>(uri, 1, 0, "SystemImage", siSingletonProvider);
-    qmlRegisterUncreatableType<MockSystemUpdate>(uri, 1, 0, "SystemUpdate", "Used for enums only.");
+    qmlRegisterSingletonType<MockSystemUpdate>(uri, 1, 0, "SystemUpdate", suSingletonProvider);
 
     qmlRegisterUncreatableType<MockUpdate>(uri, 1, 0, "Update", "Used for enums only.");
     qmlRegisterType<MockClickUpdateManager>(uri, 1, 0, "ClickUpdateManager");

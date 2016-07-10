@@ -26,36 +26,23 @@ Item {
 
     DownloadManager {
         id: udm
-        cleanDownloads: false
         onDownloadFinished: {
-            // console.warn('udm onDownloadFinished', download.downloadId);
             updateModel.setInstalled(download.metadata.custom.identifier,
                                      download.metadata.custom.revision);
         }
-
         onDownloadPaused: {
-            // console.warn('udm onDownloadPaused', download.downloadId,
-            //             download.metadata.custom.identifier, download.metadata.custom.revision);
             updateModel.pauseUpdate(download.metadata.custom.identifier,
                                     download.metadata.custom.revision)
         }
-
         onDownloadResumed: {
-            // console.warn('udm onDownloadResumed', download.downloadId,
-            //             download.metadata.custom.identifier, download.metadata.custom.revision);
             updateModel.resumeUpdate(download.metadata.custom.identifier,
                                      download.metadata.custom.revision)
         }
-
         onDownloadCanceled: {
-            // console.warn('udm onDownloadCanceled', download.downloadId,
-            //             download.metadata.custom.identifier, download.metadata.custom.revision);
             updateModel.cancelUpdate(download.metadata.custom.identifier,
                                      download.metadata.custom.revision)
         }
-
         onErrorFound: {
-            // console.warn('udm onErrorFound', download.downloadId, download.errorMessage);
             updateModel.setError(download.metadata.custom.identifier,
                                  download.metadata.custom.revision,
                                  download.errorMessage)
@@ -66,7 +53,6 @@ Item {
 
     function restoreDownloads() {
         for (var i = 0; i<downloads.length; i++) {
-            // console.warn(downloads[i].downloadId, downloads[i].metadata.title);
             if (!downloads[i]._bound) {
                 downloads[i].progressChanged.connect(onDownloadProgress.bind(downloads[i]));
                 downloads[i]._bound = true;
@@ -77,23 +63,19 @@ Item {
     function resumeDownload(click) {
         var download = getDownloadFor(click);
         if (download) {
-            // console.warn('resuming', download.downloadId);
             download.resume();
         } else {
-            // console.warn('resume failed');
         }
     }
 
     function pauseDownload(click) {
         var download = getDownloadFor(click);
         if (download) {
-            // console.warn('pausing', download.downloadId);
             download.pause();
-        } else {
-            // console.warn('pause failed');
         }
     }
 
+    // Return download for a click update.
     function getDownloadFor(click) {
         var cust;
         for (var i = 0; i<downloads.length; i++) {
@@ -105,12 +87,10 @@ Item {
     }
 
     function createDownload(click) {
+        // Already had a download.
         if (getDownloadFor(click) !== null) {
-            // console.warn('createDownload, already have download for', click.identifier, click.revision);
             return;
         }
-
-        // console.warn('createDownload', click, click.identifier, click.revision);
 
         var metadata = {
             //"command": click.command,
@@ -177,24 +157,19 @@ Item {
             property bool _bound: true
 
             onDownloadIdChanged: {
-                // console.warn('downloid changed', downloadId);
                 updateModel.queueUpdate(metadata.custom.identifier,
-                                      metadata.custom.revision);
+                                        metadata.custom.revision);
             }
             onProgressChanged: {
-                // console.warn('onProgressChanged', metadata.custom.identifier, metadata.custom.revision, progress);
                 updateModel.setProgress(metadata.custom.identifier,
                                         metadata.custom.revision,
                                         progress);
             }
             onStarted: {
-                // console.warn('onStarted', metadata.custom.identifier, metadata.custom.revision);
-
                 updateModel.startUpdate(metadata.custom.identifier,
                                         metadata.custom.revision);
             }
             onProcessing: {
-                // console.warn('onProcessing');
                 updateModel.processUpdate(metadata.custom.identifier,
                                           metadata.custom.revision);
             }
@@ -206,4 +181,3 @@ Item {
         Metadata {}
     }
 }
-

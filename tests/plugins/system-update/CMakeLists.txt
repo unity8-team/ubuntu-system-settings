@@ -15,6 +15,9 @@ find_package(Qt5Test REQUIRED)
 find_package(Qt5Sql REQUIRED)
 find_package(Qt5Network REQUIRED)
 
+pkg_check_modules(UAL REQUIRED ubuntu-app-launch-2)
+add_definitions(${UAL_CFLAGS} ${UAL_CFLAGS_OTHER})
+
 pkg_check_modules(UBUNTUONEAUTH REQUIRED ubuntuoneauth-2.0)
 add_definitions(${UBUNTUONEAUTH_CFLAGS} ${UBUNTUONEAUTH_CFLAGS_OTHER})
 
@@ -26,6 +29,7 @@ set(PLUGIN_LIBS
     Qt5::Sql
     Qt5::Network
     apt-pkg
+    ${UAL_LDFLAGS}
     ${UBUNTUONEAUTH_LDFLAGS}
 )
 

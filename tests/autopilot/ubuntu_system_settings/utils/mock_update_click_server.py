@@ -74,8 +74,8 @@ class Manager(object):
                     'status_code': 200,
                     'content_type': 'application/json',
                     'content': [{
-                        "name": "com.ubuntu.developer.testclick",
-                        "version": "2.0",
+                        "name": "com.ubuntu.dropping-letters",
+                        "version": "0.1.2.3",
                         "icon_url": (
                             "https://raw.githubusercontent.com/ninja-ide/"
                             "ninja-ide/master/ninja_ide/img/ninja_icon.png"
@@ -84,12 +84,12 @@ class Manager(object):
                                          "ia/commons/3/30/04U_Dec_28_2012_0230"
                                          "Z.jpg"),
                         "binary_filesize": 23820.0 * 1000.0,
-                        "download_sha512": "1232223sdfdsffs",
-                        "changelog": "New version!",
-                        "title": "Test Click App"
+                        "download_sha512": "foo",
+                        "changelog": "New Dropping Letters.",
+                        "title": "Dropping Letters game"
                     }, {
-                        "name": "com.ubuntu.developer.myclick",
-                        "version": "13.0",
+                        "name": "com.ubuntu.stock-ticker-mobile",
+                        "version": "0.3.7ubuntu2",
                         "icon_url": (
                             "https://upload.wikimedia.org/wikipedia/"
                             "commons/a/ab/Logo-ubuntu_cof-orange-hex.svg"
@@ -99,9 +99,9 @@ class Manager(object):
                                          "ainting_by_Brugel%2C_with_frame.jpg"
                                          ),
                         "binary_filesize": 5015.2 * 1000.0,
-                        "download_sha512": "489478",
-                        "changelog": "Foo",
-                        "title": "My Click App"
+                        "download_sha512": "bar",
+                        "changelog": "New ticker.",
+                        "title": "A stock trading app with charts, news, and management"  # noqa
                     }]
                 },
                 {

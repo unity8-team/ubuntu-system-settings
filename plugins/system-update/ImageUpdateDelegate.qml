@@ -23,12 +23,23 @@ UpdateDelegate {
     id: update
     name: "Ubuntu"
     iconUrl: "file:///usr/share/icons/suru/places/scalable/distributor-logo.svg"
-    // updateState: SystemImage.checkTarget() ? Update.StateAvailable :
-    //                                           Update.StateUnavailable
-    // onRetry: modelData.downloadUpdate();
-    onDownload: SystemImage.downloadUpdate();
-    onPause: SystemImage.pauseDownload();
-    onInstall: SystemImage.applyUpdate();
+
+    /* Convert paused download to a paused automatic download if this
+    download (most likely) was started automatically. */
+    Binding {
+        target: update
+        property: "updateState"
+        value: Update.StateAutomaticDownloadPaused
+        when: {
+            var autoMode = SystemImage.downloadMode > 0;
+            var paused = false;
+            switch (model.updateState) {
+            case Update.StateDownloadPaused:
+                paused = true;
+            }
+            return autoMode && paused;
+        }
+    }
 
     /* Convert download to an automatic download if this
     download (most likely) was started automatically. */
@@ -45,23 +56,6 @@ UpdateDelegate {
                 downloading = true;
             }
             return autoMode && downloading;
-        }
-    }
-
-    /* Convert paused download to a paused automatic download if this
-    download (most likely) was started automatically. */
-    Binding {
-        target: update
-        property: "updateState"
-        value: Update.StateAutomaticDownloadPaused
-        when: {
-            var autoMode = SystemImage.downloadMode > 0;
-            var paused = false;
-            switch (model.updateState) {
-            case Update.StateDownloadPaused:
-                paused = true;
-            }
-            return autoMode && paused;
         }
     }
 }

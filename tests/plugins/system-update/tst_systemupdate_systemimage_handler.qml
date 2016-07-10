@@ -60,14 +60,10 @@ Item {
 
         property var instance: null
         property var pendingModelInstance: null
-        property var installedModelInstance: null
 
         function init () {
             pendingModelInstance = mockModel.createObject(testRoot, {
                 filter: UpdateModel.Pending
-            });
-            installedModelInstance = mockModel.createObject(testRoot, {
-                filter: UpdateModel.Installed
             });
             instance = handler.createObject(testRoot, {
                 updateModel: pendingModelInstance
@@ -78,15 +74,7 @@ Item {
         function cleanup () {
             instance.destroy();
             pendingModelInstance.destroy();
-            installedModelInstance.destroy();
         }
-
-        // TODO: reintroduce automatic/manual semantics for image updates
-        // function test_automaticallyStarted () {
-        //     SystemImage.downloadMode = 1;
-        //     SystemImage.mockStarted();
-        //     compare(instance.updateState, Update.StateDownloadingAutomatically);
-        // }
 
         function test_availableSignal_data() {
             return [
@@ -174,72 +162,83 @@ Item {
             SystemImage.mockTargetBuildNumber(300);
             pendingModelInstance.mockAddUpdate("ubuntu", 300);
             SystemImage.mockStarted();
-            wait(3000)
             var delegate = findChild(testRoot, "image-update-0");
             compare(delegate.updateState, Update.StateDownloadingAutomatically);
         }
 
         function test_automaticalProgress () {
             SystemImage.setDownloadMode(1);
+            SystemImage.mockTargetBuildNumber(300);
             pendingModelInstance.mockAddUpdate("ubuntu", 300);
             SystemImage.mockProgress(50, 0); // pct, eta
             var delegate = findChild(testRoot, "image-update-0");
             var progressbar = findChild(delegate, "updateProgressbar");
-            compare(instance.updateState, Update.StateDownloadingAutomatically);
+            compare(delegate.updateState, Update.StateDownloadingAutomatically);
+            compare(progressbar.visible, false);
             compare(progressbar.value, 50);
         }
 
-        // function test_manualProgress () {
-        //     var progressbar = findChild(instance, "updateProgressbar");
-        //     SystemImage.downloadMode = 0;
-        //     SystemImage.mockProgress(50, 0); // pct, eta
-        //     compare(instance.updateState, Update.StateDownloading);
-        //     compare(progressbar.value, 50);
-        // }
+        function test_manualProgress () {
+            SystemImage.setDownloadMode(0);
+            SystemImage.mockTargetBuildNumber(300);
+            pendingModelInstance.mockAddUpdate("ubuntu", 300);
+            SystemImage.mockProgress(50, 0); // pct, eta
+            var delegate = findChild(testRoot, "image-update-0");
+            var progressbar = findChild(delegate, "updateProgressbar");
+            compare(delegate.updateState, Update.StateDownloading);
+            compare(progressbar.visible, true);
+            compare(progressbar.value, 50);
+        }
 
-        // function test_automaticalPause () {
-        //     var progressbar = findChild(instance, "updateProgressbar");
-        //     SystemImage.downloadMode = 1;
-        //     SystemImage.mockPaused(50); // pct
-        //     compare(instance.updateState, Update.StateAutomaticDownloadPaused);
-        //     compare(progressbar.value, 50);
-        // }
+        function test_automaticalPause () {
+            SystemImage.setDownloadMode(1);
+            SystemImage.mockTargetBuildNumber(300);
+            pendingModelInstance.mockAddUpdate("ubuntu", 300);
+            SystemImage.mockPaused(50);
+            var delegate = findChild(testRoot, "image-update-0");
+            compare(delegate.updateState, Update.StateAutomaticDownloadPaused);
+        }
 
-        // function test_manualPause () {
-        //     var progressbar = findChild(instance, "updateProgressbar");
-        //     SystemImage.downloadMode = 0;
-        //     SystemImage.mockPaused(50); // pct
-        //     compare(instance.updateState, Update.StateDownloadPaused);
-        //     compare(progressbar.value, 50);
-        // }
+        function test_manualPause () {
+            SystemImage.setDownloadMode(0);
+            SystemImage.mockTargetBuildNumber(300);
+            pendingModelInstance.mockAddUpdate("ubuntu", 300);
+            SystemImage.mockPaused(50);
+            var delegate = findChild(testRoot, "image-update-0");
+            compare(delegate.updateState, Update.StateDownloadPaused);
 
-        // function test_downloaded () {
-        //     SystemImage.mockDownloaded();
-        //     compare(instance.updateState, Update.StateDownloaded);
-        // }
+        }
 
-        // function test_failed () {
-        //     var error = findChild(instance, "updateError");
-        //     SystemImage.mockFailed(3, "fail");
-        //     compare(instance.updateState, Update.StateFailed);
-        //     compare(error.visible, true);
-        //     compare(error.title, i18n.tr("Update failed"));
-        //     compare(error.detail, "fail");
-        // }
+        function test_downloaded () {
+            SystemImage.setDownloadMode(0);
+            SystemImage.mockTargetBuildNumber(300);
+            pendingModelInstance.mockAddUpdate("ubuntu", 300);
+            SystemImage.mockDownloaded();
+            var delegate = findChild(testRoot, "image-update-0");
+            compare(delegate.updateState, Update.StateDownloaded);
+        }
 
-        // function test_goingManualPausesDownload () {
-        //     SystemImage.downloadMode = 1;
-        //     SystemImage.mockProgress(50, 0); // pct, eta
-        //     compare(instance.updateState, Update.StateDownloadingAutomatically);
+        function test_failed () {
+            SystemImage.mockTargetBuildNumber(300);
+            pendingModelInstance.mockAddUpdate("ubuntu", 300);
+            SystemImage.mockFailed(3, "fail");
+            var delegate = findChild(testRoot, "image-update-0");
+            compare(delegate.updateState, Update.StateFailed);
+            var error = findChild(delegate, "updateError");
+            compare(error.visible, true);
+            compare(error.title, i18n.tr("Update failed"));
+            compare(error.detail, "fail");
+        }
 
-        //     pauseSignalSpy.target = instance;
+        function test_multiplePendingUpdates() {
+            SystemImage.setDownloadMode(0);
+            SystemImage.mockTargetBuildNumber(300);
+            pendingModelInstance.mockAddUpdate("ubuntu", 300);
+            SystemImage.mockAvailableStatus(true, false, 301,
+                                            5000 * 1000, null, null);
+            SystemImage.mockCurrentBuildNumber(300);
+            compare(pendingModelInstance.count, 1);
 
-        //     // Set manual
-        //     SystemImage.downloadMode = 0;
-        //     pauseSignalSpy.wait();
-        //     SystemImage.mockPaused(50); // pct
-        //     compare(instance.updateState, Update.StateDownloadPaused);
-        // }
-
+        }
     }
 }

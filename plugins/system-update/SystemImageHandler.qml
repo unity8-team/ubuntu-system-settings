@@ -24,6 +24,11 @@ Item {
 
     Connections {
         target: SystemImage
+
+        function markInstalled(buildNumber) {
+            updateModel.setInstalled("ubuntu", buildNumber);
+        }
+
         onUpdateAvailableStatus: {
             if (isAvailable)
                 updateModel.setImageUpdate("ubuntu", availableVersion, updateSize);
@@ -33,7 +38,6 @@ Item {
                     updateModel.pauseUpdate("ubuntu", availableVersion);
         }
         onDownloadStarted: {
-            console.log("download started");
             updateModel.setProgress("ubuntu", SystemImage.targetBuildNumber, 0);
         }
         onUpdateProgress: {
@@ -48,6 +52,15 @@ Item {
         }
         onUpdateFailed: {
             updateModel.setError("ubuntu", SystemImage.targetBuildNumber, lastReason);
+        }
+
+        /* This is currently the best we can do for marking image updates as
+        installed. lp:1600449 */
+        onCurrentBuildNumberChanged: {
+            markInstalled(SystemImage.currentBuildNumber);
+        }
+        Component.onCompleted: {
+            markInstalled(SystemImage.currentBuildNumber);
         }
     }
 }

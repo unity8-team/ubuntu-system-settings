@@ -251,6 +251,7 @@ private slots:
         app->setToken("token");
         app->setProgress(50);
         app->setState(Update::State::StateInstallPaused);
+        app->setError("Failure");
 
         m_db->add(app);
         m_model->refresh();
@@ -272,7 +273,7 @@ private slots:
         QCOMPARE(m_model->data(idx, UpdateModel::TokenRole).toString(), app->token());
         QCOMPARE(m_model->data(idx, UpdateModel::InstalledRole).toBool(), false);
         QCOMPARE(m_model->data(idx, UpdateModel::AutomaticRole).toBool(), app->automatic());
-        QCOMPARE(m_model->data(idx, UpdateModel::ErrorRole).toString(), QString(""));
+        QCOMPARE(m_model->data(idx, UpdateModel::ErrorRole).toString(), QString("Failure"));
         QCOMPARE(m_model->data(idx, UpdateModel::UpdateStateRole).toUInt(), (uint) Update::State::StateInstallPaused);
         QCOMPARE(m_model->data(idx, UpdateModel::ProgressRole).toInt(), 50);
 
@@ -300,9 +301,9 @@ private slots:
         QTRY_COMPARE(filterChangedSpy.count(), 1);
         QCOMPARE((uint) m_model->filter(), filter);
     }
-    void testManualImageUpdate()
+    void testImageUpdate()
     {
-        m_model->setImageUpdate("ubuntu", "350", 400000, 0);
+        m_model->setImageUpdate("ubuntu", "350", 400000);
         m_model->setFilter(UpdateModel::Filter::PendingImage);
         QCOMPARE(m_model->count(), 1);
         QCOMPARE(m_model->data(
@@ -315,21 +316,6 @@ private slots:
             m_model->index(0), UpdateModel::AutomaticRole
         ).toBool(), false);
 
-    }
-    void testAutomaticImageUpdate()
-    {
-        m_model->setImageUpdate("ubuntu", "350", 400000, 1);
-        m_model->setFilter(UpdateModel::Filter::PendingImage);
-        QCOMPARE(m_model->count(), 1);
-        QCOMPARE(m_model->data(
-            m_model->index(0), UpdateModel::IdRole
-        ).toString(), QString("ubuntu"));
-        QCOMPARE(m_model->data(
-            m_model->index(0), UpdateModel::RevisionRole
-        ).toUInt(), (uint) 350);
-        QCOMPARE(m_model->data(
-            m_model->index(0), UpdateModel::AutomaticRole
-        ).toBool(), true);
     }
     void testSetInstalled()
     {
@@ -434,6 +420,7 @@ private slots:
         QVERIFY(names[UpdateModel::Roles::UpdateStateRole] == "updateState");
         QVERIFY(names[UpdateModel::Roles::ProgressRole] == "progress");
         QVERIFY(names[UpdateModel::Roles::AutomaticRole] == "automatic");
+        QVERIFY(names[UpdateModel::Roles::ErrorRole] == "error");
     }
 private:
     UpdateDb *m_db = nullptr;

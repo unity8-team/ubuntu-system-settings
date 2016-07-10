@@ -22,6 +22,7 @@ MockSystemImage::MockSystemImage(QObject *parent)
     : QObject(parent)
     , m_downloadMode(-1)
     , m_targetBuildNumber(-1)
+    , m_currentBuildNumber(-1)
 {
 }
 
@@ -113,7 +114,7 @@ QString MockSystemImage::errorReason()
 
 int MockSystemImage::currentBuildNumber() const
 {
-    return 0;
+    return m_currentBuildNumber;
 }
 
 QString MockSystemImage::currentUbuntuBuildNumber() const
@@ -196,6 +197,11 @@ void MockSystemImage::mockFailed(const int &consecutiveFailureCount, const QStri
 void MockSystemImage::mockTargetBuildNumber(const uint &target)
 {
     m_targetBuildNumber = target;
+    Q_EMIT targetBuildNumberChanged();
 }
 
-
+void MockSystemImage::mockCurrentBuildNumber(const uint &current)
+{
+    m_currentBuildNumber = current;
+    Q_EMIT currentBuildNumberChanged();
+}

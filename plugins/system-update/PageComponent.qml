@@ -79,6 +79,11 @@ ItemPage {
     // }
 
     UpdateModel {
+        id: imageUpdate
+        filter: UpdateModel.PendingImage
+    }
+
+    UpdateModel {
         id: clickUpdates
         filter: UpdateModel.PendingClicks
     }
@@ -97,13 +102,14 @@ ItemPage {
         id: updates
         anchors {
             top: parent.top
-            left: parent.left
-            right: parent.right
             bottom: configuration.top
         }
+        width: parent.width
+        clip: true
 
         clickUpdatesModel: clickUpdates
         clickUpdateManager: clickUpdateManager
+        imageUpdateModel: imageUpdate
         previousUpdatesModel: prevUpdates
         downloadHandler: downloadHandler
 
@@ -117,9 +123,13 @@ ItemPage {
     Column {
         id: configuration
 
-        anchors.bottom: parent.bottom
-        anchors.left: parent.left
-        anchors.right: parent.right
+        height: childrenRect.height
+
+        anchors {
+            bottom: parent.bottom
+            left: parent.left
+            right: parent.right
+        }
 
         ListItem.ThinDivider {}
 

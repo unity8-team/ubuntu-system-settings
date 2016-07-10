@@ -30,6 +30,7 @@ Item {
     id: updates
     property var clickUpdateManager
     property var clickUpdatesModel
+    property var imageUpdateModel
     property var previousUpdatesModel
     property var downloadHandler
 
@@ -106,15 +107,6 @@ Item {
         id: scrollWidget
         anchors.fill: parent
         boundsBehavior: (contentHeight > parent.height) ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
-        contentHeight: {
-            var h = 0;
-            h += glob.hidden ? 0 : glob.height;
-            h += imageUpdate.visible ? imageUpdate.height : 0;
-            h += clickUpdates.visible ? clickUpdates.height : 0;
-            h += noauthDivider.visible ? noauthDivider.height : 0;
-            h += notauthNotification.visible ? notauthNotification.height : 0;
-            return h;
-        }
         flickableDirection: Flickable.VerticalFlick
 
         Global {
@@ -144,7 +136,6 @@ Item {
                 updates.status = SystemUpdate.StatusBatchMode;
             }
             onRequestInstall: {
-                console.warn('request install', requireRestart)
                 if (requireRestart) {
                     var popup = PopupUtils.open(updatePrompt, {
                         havePowerForUpdate: updates.havePower
@@ -160,7 +151,7 @@ Item {
             onInstall: updates.status = SystemUpdate.StatusBatchMode;
         }
 
-        ImageUpdateDelegate {
+        Column {
             id: imageUpdate
             objectName: "updatesImageUpdate"
             visible: updates.haveSystemUpdate
@@ -168,6 +159,29 @@ Item {
                 left: parent.left
                 right: parent.right
                 top: glob.bottom
+            }
+            height: childrenRect.height
+
+            Repeater {
+                id: imageUpdateRep
+                model: imageUpdateModel
+                height: childrenRect.height
+                delegate: ImageUpdateDelegate {
+                    objectName: "updatesImageUpdateDelegate" + index
+                    anchors { left: imageUpdate.left; right: imageUpdate.right }
+                    updateState: model.updateState
+                    progress: model.progress
+                    version: remoteVersion
+                    size: model.size
+                    name: title
+                    iconUrl: model.iconUrl
+                    changelog: model.changelog
+
+                    onRetry: SystemImage.downloadUpdate();
+                    onDownload: SystemImage.downloadUpdate();
+                    onPause: SystemImage.pauseDownload();
+                    onInstall: SystemImage.applyUpdate();
+                }
             }
         }
 
@@ -276,7 +290,8 @@ Item {
         objectName: "updatesFullscreenMessage"
         visible: false
         color: "white"
-        anchors.fill: parent
+        width: parent.width
+        height: units.gu(10)
 
         Label {
             id: placeholder
@@ -330,13 +345,6 @@ Item {
     Connections {
         target: SystemImage
         onUpdateAvailableStatus: {
-            // bool isAvailable,
-            // bool downloading,
-            // QString &availableVersion,
-            // int &updateSize,
-            // QString &lastUpdateDate,
-            // QString &errorReason)
-            console.warn('onUpdateAvailableStatus', isAvailable, downloading, availableVersion, updateSize, lastUpdateDate, errorReason);
             updates.haveSystemUpdate = isAvailable;
 
             switch (updates.status) {
@@ -347,17 +355,6 @@ Item {
             }
         }
     }
-
-    // Will apply a System Image if enabled and the click model reaches 0.
-    // Connections {
-    //     id: postClickUpdateImageInstaller
-    //     enabled: false
-    //     target: clickUpdatesModel
-    //     onCountChanged: {
-    //         if (clickUpdatesModel.count === 0 && )
-    //             SystemImage.
-    //     }
-    // }
 
     Connections {
         id: postClickBatchHandler
