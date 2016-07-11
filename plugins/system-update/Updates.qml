@@ -23,15 +23,16 @@ import SystemSettings 1.0
 import Ubuntu.Components 1.3
 import Ubuntu.Connectivity 1.0
 import Ubuntu.Components.ListItems 1.3 as ListItems
+import Ubuntu.Components.Popups 1.3
 import Ubuntu.DownloadManager 1.2
 import Ubuntu.SystemSettings.Update 1.0
 
 Item {
     id: updates
-    property var clickUpdateManager
-    property var clickUpdatesModel
-    property var imageUpdateModel
-    property var previousUpdatesModel
+    property var clickManager
+    property var clickModel
+    property var imageModel
+    property var installedModel
     property var downloadHandler
 
     property Flickable flickable: scrollWidget
@@ -42,8 +43,11 @@ Item {
     property int status: SystemUpdate.StatusIdle
     property int updatesCount: {
         var count = 0;
-        count += updates.haveSystemUpdate ? 1 : 0;
-        count += clickUpdatesModel.count
+        if (authenticated) {
+            count += clickModel.count;
+        }
+        count += imageModel.count;
+        return count;
     }
 
     function checkSystem() {
@@ -58,11 +62,11 @@ Item {
     }
 
     function checkClick() {
-        clickUpdateManager.check();
+        clickManager.check();
     }
 
     function cancelChecks() {
-        clickUpdateManager.cancel();
+        clickManager.cancel();
         updates.status = SystemUpdate.StatusIdle;
     }
 
@@ -75,6 +79,7 @@ Item {
             PropertyChanges { target: glob; hidden: true }
             PropertyChanges { target: imageUpdate; visible: false }
             PropertyChanges { target: clickUpdates; visible: false }
+            PropertyChanges { target: updatesAvailableHeader; visible: false }
             when: !online
         },
         State {
@@ -83,6 +88,7 @@ Item {
             PropertyChanges { target: glob; hidden: true }
             PropertyChanges { target: imageUpdate; visible: false }
             PropertyChanges { target: clickUpdates; visible: false }
+            PropertyChanges { target: updatesAvailableHeader; visible: false }
             when: status === SystemUpdate.StatusNetworkError ||
                   status === SystemUpdate.StatusServerError
         },
@@ -90,7 +96,7 @@ Item {
             name: "noAuth"
             when: !updates.authenticated
             PropertyChanges { target: notauthNotification; visible: true }
-            PropertyChanges { target: noauthDivider; visible: (updates.haveSystemUpdate || !glob.hidden) }
+            PropertyChanges { target: clickUpdates; visible: false }
         },
         State {
             name: "noUpdates"
@@ -106,217 +112,196 @@ Item {
     Flickable {
         id: scrollWidget
         anchors.fill: parent
+        contentHeight: content.height
         boundsBehavior: (contentHeight > parent.height) ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
         flickableDirection: Flickable.VerticalFlick
+        clip: true
 
-        Global {
-            id: glob
-            objectName: "updatesGlobal"
-            anchors {
-                left: parent.left
-                right: parent.right
-                margins: units.gu(2)
-            }
+        Column {
+            id: content
+            anchors { left: parent.left; right: parent.right }
 
-            height: hidden ? 0 : units.gu(6)
-            status: updates.status
-            requireRestart: updates.haveSystemUpdate
-            updatesCount: updates.updatesCount
-            online: updates.online
-            onStop: updates.cancelChecks()
+            Global {
+                id: glob
+                objectName: "updatesGlobal"
+                anchors { left: parent.left; right: parent.right }
 
-            onPause: {
-                downloadHandler.pauseAll();
-                SystemImage.pauseDownload();
-                updates.status = SystemUpdate.StatusBatchModePaused;
-            }
-            onResume: {
-                downloadHandler.resumeAll();
-                SystemImage.downloadUpdate();
-                updates.status = SystemUpdate.StatusBatchMode;
-            }
-            onRequestInstall: {
-                if (requireRestart) {
-                    var popup = PopupUtils.open(updatePrompt, {
-                        havePowerForUpdate: updates.havePower
-                    });
-                    popup.connect.requestSystemUpdate(function () {
+                height: hidden ? 0 : units.gu(8)
+                status: updates.status
+                requireRestart: updates.haveSystemUpdate
+                updatesCount: updates.updatesCount
+                online: updates.online
+                onStop: updates.cancelChecks()
+
+                onPause: {
+                    downloadHandler.pauseAll();
+                    SystemImage.pauseDownload();
+                    updates.status = SystemUpdate.StatusBatchModePaused;
+                }
+                onResume: {
+                    downloadHandler.resumeAll();
+                    SystemImage.downloadUpdate();
+                    updates.status = SystemUpdate.StatusBatchMode;
+                }
+                onRequestInstall: {
+                    if (requireRestart) {
+                        var popup = PopupUtils.open(updatePrompt, {
+                            havePowerForUpdate: updates.havePower
+                        });
+                        popup.connect.requestSystemUpdate(function () {
+                            install();
+                        });
+                    } else {
+                        postClickBatchHandler.target = clickModel;
                         install();
-                    });
-                } else {
-                    postClickBatchHandler.target = clickUpdatesModel;
-                    install();
+                    }
+                }
+                onInstall: updates.status = SystemUpdate.StatusBatchMode;
+            }
+
+            Rectangle {
+                id: overlay
+                objectName: "updatesOverlay"
+                visible: false
+                color: "white"
+                width: parent.width
+                height: units.gu(10)
+
+                Label {
+                    id: placeholder
+                    objectName: "updatesOverlayText"
+                    anchors.fill: parent
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+                    wrapMode: Text.WordWrap
+                    text: {
+                        var s = updates.status;
+                        if (!updates.online) {
+                            return i18n.tr("Connect to the Internet to check for updates.");
+                        } else if (s === SystemUpdate.StatusIdle && updates.updatesCount === 0) {
+                            return i18n.tr("Software is up to date");
+                        } else if (s === SystemUpdate.StatusServerError ||
+                                   s === SystemUpdate.StatusNetworkError) {
+                            return i18n.tr("The update server is not responding. Try again later.");
+                        }
+                        return "";
+                    }
                 }
             }
-            onInstall: updates.status = SystemUpdate.StatusBatchMode;
-        }
 
-        Column {
-            id: imageUpdate
-            objectName: "updatesImageUpdate"
-            visible: updates.haveSystemUpdate
-            anchors {
-                left: parent.left
-                right: parent.right
-                top: glob.bottom
+            SettingsItemTitle {
+                id: updatesAvailableHeader
+                text: i18n.tr("Updates available")
+                visible: updatesCount > 1
             }
-            height: childrenRect.height
 
-            Repeater {
-                id: imageUpdateRep
-                model: imageUpdateModel
-                height: childrenRect.height
-                delegate: ImageUpdateDelegate {
-                    objectName: "updatesImageUpdateDelegate" + index
-                    anchors { left: imageUpdate.left; right: imageUpdate.right }
-                    updateState: model.updateState
-                    progress: model.progress
-                    version: remoteVersion
-                    size: model.size
-                    name: title
-                    iconUrl: model.iconUrl
-                    changelog: model.changelog
+            Column {
+                id: imageUpdate
+                objectName: "updatesImageUpdate"
+                anchors { left: parent.left; right: parent.right }
+                visible: updates.haveSystemUpdate
 
-                    onRetry: SystemImage.downloadUpdate();
-                    onDownload: SystemImage.downloadUpdate();
-                    onPause: SystemImage.pauseDownload();
-                    onInstall: SystemImage.applyUpdate();
-                }
-            }
-        }
+                Repeater {
+                    model: imageModel
 
-        Column {
-            id: clickUpdates
-            objectName: "updatesClickUpdates"
-            visible: !!clickUpdatesRepeater.model && clickUpdatesRepeater.model.count > 0
-            anchors {
-                left: parent.left
-                right: parent.right
-                top: updates.haveSystemUpdate ? imageUpdate.bottom : glob.bottom
-            }
-            height: childrenRect.height
+                    delegate: ImageUpdateDelegate {
+                        objectName: "updatesImageDelegate-" + index
+                        updateState: model.updateState
+                        progress: model.progress
+                        version: remoteVersion
+                        size: model.size
+                        changelog: model.changelog
 
-            Repeater {
-                id: clickUpdatesRepeater
-                model: clickUpdatesModel
-                height: childrenRect.height
-                delegate: ClickUpdateDelegate {
-                    objectName: "updatesClickUpdate" + index
-                    anchors { left: clickUpdates.left; right: clickUpdates.right }
-                    updateState: model.updateState
-                    progress: model.progress
-                    version: remoteVersion
-                    size: model.size
-                    name: title
-                    iconUrl: model.iconUrl
-                    changelog: model.changelog
-
-                    onInstall: downloadHandler.createDownload(model)
-                    onDownload: downloadHandler.createDownload(model)
-
-                    onPause: downloadHandler.pauseDownload(model)
-                    onResume: downloadHandler.resumeDownload(model)
-
-                    Connections {
-                        target: glob
-                        onInstall: install()
+                        onRetry: SystemImage.downloadUpdate();
+                        onDownload: SystemImage.downloadUpdate();
+                        onPause: SystemImage.pauseDownload();
+                        onInstall: {
+                            var popup = PopupUtils.open(updatePrompt, null, {
+                                havePowerForUpdate: updates.havePower
+                            });
+                            popup.requestSystemUpdate.connect(SystemImage.applyUpdate);
+                        }
                     }
                 }
             }
 
             Column {
-                id: previous
-                objectName: "updatesPreviousUpdates"
-                visible: previousUpdatesRepeater.model && previousUpdatesRepeater.model.count > 0
+                id: clickUpdates
+                objectName: "updatesClickUpdates"
+                anchors { left: parent.left; right: parent.right }
+                visible: clickModel.count > 0
+
+                Repeater {
+                    model: clickModel
+
+                    delegate: ClickUpdateDelegate {
+                        objectName: "updatesClickUpdate" + index
+                        updateState: model.updateState
+                        progress: model.progress
+                        version: remoteVersion
+                        size: model.size
+                        name: title
+                        iconUrl: model.iconUrl
+                        changelog: model.changelog
+
+                        onInstall: downloadHandler.createDownload(model)
+                        onDownload: downloadHandler.createDownload(model)
+
+                        onPause: downloadHandler.pauseDownload(model)
+                        onResume: downloadHandler.resumeDownload(model)
+
+                        Connections {
+                            target: glob
+                            onInstall: install()
+                        }
+                    }
+                }
+
+            }
+
+            NotAuthenticatedNotification {
+                id: notauthNotification
+                objectName: "updatesNoAuthNotif"
+                visible: false
                 anchors {
                     left: parent.left
                     right: parent.right
                 }
-                height: childrenRect.height
+                onRequestAuthentication: updates.requestAuthentication()
+            }
 
-                SettingsItemTitle {
-                    text: i18n.tr("Previous Updates")
-                }
+            SettingsItemTitle {
+                text: i18n.tr("Recent updates")
+                visible: installed.visible
+            }
+
+            Column {
+                id: installed
+                objectName: "updatesInstalledUpdates"
+                anchors { left: parent.left; right: parent.right }
+                visible: installedModel.count > 0
 
                 Repeater {
-                    id: previousUpdatesRepeater
-                    model: previousUpdatesModel
-                    height: childrenRect.height
+
+                    model: installedModel
+
                     delegate: UpdateDelegate {
-                        objectName: "updatesPreviousUpdate" + index
-                        width: previous.width
+                        objectName: "updatesInstalledUpdate-" + index
                         version: remoteVersion
                         size: model.size
                         name: title
                         iconUrl: model.iconUrl
                         changelog: model.changelog
                         updateState: Update.StateInstalled
+                        updatedAt: model.updatedAt
                     }
                 }
             }
-        }
-
-        ListItems.ThinDivider {
-            id: noauthDivider
-            visible: false
-            anchors {
-                left: parent.left
-                right: parent.left
-                top: imageUpdate.visible ? imageUpdate.bottom : glob.bottom
-            }
-        }
-
-        NotAuthenticatedNotification {
-            id: notauthNotification
-            objectName: "updatesNoAuthNotif"
-            visible: false
-            anchors {
-                top: {
-                    if (noauthDivider.visible)
-                        return noauthDivider.bottom
-                    else if (imageUpdate.visible)
-                        return imageUpdate.bottom
-                    else
-                        return glob.bottom
-                }
-                topMargin: units.gu(5)
-            }
-            onRequestAuthentication: updates.requestAuthentication()
-        }
-    }
-
-    Rectangle {
-        id: overlay
-        objectName: "updatesFullscreenMessage"
-        visible: false
-        color: "white"
-        width: parent.width
-        height: units.gu(10)
-
-        Label {
-            id: placeholder
-            objectName: "updatesFullscreenMessageText"
-            anchors.fill: parent
-            verticalAlignment: Text.AlignVCenter
-            horizontalAlignment: Text.AlignHCenter
-            wrapMode: Text.WordWrap
-            text: {
-                var s = updates.status;
-                if (!updates.online) {
-                    return i18n.tr("Connect to the Internet to check for updates.");
-                } else if (s === SystemUpdate.StatusIdle && updates.updatesCount === 0) {
-                    return i18n.tr("Software is up to date");
-                } else if (s === SystemUpdate.StatusServerError ||
-                           s === SystemUpdate.StatusNetworkError) {
-                    return i18n.tr("The update server is not responding. Try again later.");
-                }
-                return "";
-            }
-        }
+        } // Column inside flickable.
     }
 
     Connections {
-        target: clickUpdateManager
+        target: clickManager
         function onCheckStop() {
             switch (updates.status) {
             case SystemUpdate.StatusCheckingClickUpdates:

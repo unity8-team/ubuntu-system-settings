@@ -51,6 +51,7 @@ Item {
             version: model.remoteVersion
             updateState: model.updateState
             progress: model.progress
+            errorDetail: error
         }
     }
 
@@ -150,7 +151,7 @@ Item {
         function test_manuallyStarted () {
             SystemImage.setDownloadMode(0);
             SystemImage.mockTargetBuildNumber(300);
-            pendingModelInstance.mockAddUpdate("ubuntu", 300);
+            pendingModelInstance.mockAddUpdate("ubuntu", 300, Update.KindImage);
             SystemImage.mockStarted();
 
             var delegate = findChild(testRoot, "image-update-0");
@@ -160,7 +161,7 @@ Item {
         function test_automaticallyStarted () {
             SystemImage.setDownloadMode(1);
             SystemImage.mockTargetBuildNumber(300);
-            pendingModelInstance.mockAddUpdate("ubuntu", 300);
+            pendingModelInstance.mockAddUpdate("ubuntu", 300, Update.KindImage);
             SystemImage.mockStarted();
             var delegate = findChild(testRoot, "image-update-0");
             compare(delegate.updateState, Update.StateDownloadingAutomatically);
@@ -169,7 +170,7 @@ Item {
         function test_automaticalProgress () {
             SystemImage.setDownloadMode(1);
             SystemImage.mockTargetBuildNumber(300);
-            pendingModelInstance.mockAddUpdate("ubuntu", 300);
+            pendingModelInstance.mockAddUpdate("ubuntu", 300, Update.KindImage);
             SystemImage.mockProgress(50, 0); // pct, eta
             var delegate = findChild(testRoot, "image-update-0");
             var progressbar = findChild(delegate, "updateProgressbar");
@@ -181,7 +182,7 @@ Item {
         function test_manualProgress () {
             SystemImage.setDownloadMode(0);
             SystemImage.mockTargetBuildNumber(300);
-            pendingModelInstance.mockAddUpdate("ubuntu", 300);
+            pendingModelInstance.mockAddUpdate("ubuntu", 300, Update.KindImage);
             SystemImage.mockProgress(50, 0); // pct, eta
             var delegate = findChild(testRoot, "image-update-0");
             var progressbar = findChild(delegate, "updateProgressbar");
@@ -193,7 +194,7 @@ Item {
         function test_automaticalPause () {
             SystemImage.setDownloadMode(1);
             SystemImage.mockTargetBuildNumber(300);
-            pendingModelInstance.mockAddUpdate("ubuntu", 300);
+            pendingModelInstance.mockAddUpdate("ubuntu", 300, Update.KindImage);
             SystemImage.mockPaused(50);
             var delegate = findChild(testRoot, "image-update-0");
             compare(delegate.updateState, Update.StateAutomaticDownloadPaused);
@@ -202,7 +203,7 @@ Item {
         function test_manualPause () {
             SystemImage.setDownloadMode(0);
             SystemImage.mockTargetBuildNumber(300);
-            pendingModelInstance.mockAddUpdate("ubuntu", 300);
+            pendingModelInstance.mockAddUpdate("ubuntu", 300, Update.KindImage);
             SystemImage.mockPaused(50);
             var delegate = findChild(testRoot, "image-update-0");
             compare(delegate.updateState, Update.StateDownloadPaused);
@@ -212,7 +213,7 @@ Item {
         function test_downloaded () {
             SystemImage.setDownloadMode(0);
             SystemImage.mockTargetBuildNumber(300);
-            pendingModelInstance.mockAddUpdate("ubuntu", 300);
+            pendingModelInstance.mockAddUpdate("ubuntu", 300, Update.KindImage);
             SystemImage.mockDownloaded();
             var delegate = findChild(testRoot, "image-update-0");
             compare(delegate.updateState, Update.StateDownloaded);
@@ -220,8 +221,9 @@ Item {
 
         function test_failed () {
             SystemImage.mockTargetBuildNumber(300);
-            pendingModelInstance.mockAddUpdate("ubuntu", 300);
+            pendingModelInstance.mockAddUpdate("ubuntu", 300, Update.KindImage);
             SystemImage.mockFailed(3, "fail");
+            wait(3000)
             var delegate = findChild(testRoot, "image-update-0");
             compare(delegate.updateState, Update.StateFailed);
             var error = findChild(delegate, "updateError");
@@ -233,12 +235,11 @@ Item {
         function test_multiplePendingUpdates() {
             SystemImage.setDownloadMode(0);
             SystemImage.mockTargetBuildNumber(300);
-            pendingModelInstance.mockAddUpdate("ubuntu", 300);
+            pendingModelInstance.mockAddUpdate("ubuntu", 300, Update.KindImage);
             SystemImage.mockAvailableStatus(true, false, 301,
                                             5000 * 1000, null, null);
             SystemImage.mockCurrentBuildNumber(300);
             compare(pendingModelInstance.count, 1);
-
         }
     }
 }

@@ -52,7 +52,15 @@ Item {
     }
 
     Component {
-        id: mockClickUpdatesModel
+        id: mockImageModel
+
+        UpdateModel {
+            filter: UpdateModel.PendingImage
+        }
+    }
+
+    Component {
+        id: mockClickModel
 
         UpdateModel {
             filter: UpdateModel.PendingClicks
@@ -60,445 +68,237 @@ Item {
     }
 
     Component {
-        id: mockPreviousUpdatesModel
+        id: mockInstalledModel
 
         UpdateModel {
             filter: UpdateModel.Installed
         }
     }
 
+    SignalSpy {
+        id: signalSpy
+    }
+
+
     UbuntuTestCase {
-        name: "UpdatesTest"
+        name: "UpdatesTestCase"
         when: windowShown
 
-        property var clickModelInstance: null
-        property var previousModelInstance: null
-        property var updatesInstance: null
-        property var clickUpdateManagerInstance: null
+        property var instance: null
+        property var images: null
+        property var clicks: null
+        property var installed: null
+        property var clickManager: null
 
         function init() {
-            clickModelInstance = mockClickUpdatesModel.createObject(testRoot);
-            previousModelInstance = mockPreviousUpdatesModel.createObject(testRoot);
-            clickUpdateManagerInstance = clickUpdateManagerComponent.createObject(testRoot);
-            updatesInstance = updates.createObject(testRoot, {
-                clickUpdatesModel: clickModelInstance,
-                previousUpdatesModel: previousModelInstance,
+            images = mockImageModel.createObject(testRoot);
+            clicks = mockClickModel.createObject(testRoot);
+            installed = mockInstalledModel.createObject(testRoot);
+            clickManager = clickUpdateManagerComponent.createObject(testRoot);
+            instance = updates.createObject(testRoot, {
+                imageModel: images,
+                clickModel: clicks,
+                installedModel: installed,
                 downloadHandler: downloadHandler.createObject(testRoot, {}),
-                clickUpdateManager: clickUpdateManagerInstance
+                clickManager: clickManager
             });
         }
 
         function cleanup () {
-            updatesInstance.destroy();
-            clickModelInstance.destroy();
-            previousModelInstance.destroy();
-            clickUpdateManagerInstance.destroy();
+            signalSpy.clear();
+            signalSpy.target = null;
+            signalSpy.signalName = "";
+
+            instance.destroy();
+            images.destroy();
+            clicks.destroy();
+            installed.destroy();
+            clickManager.destroy();
         }
 
-        function getGlobal() {
-            return findChild(updatesInstance, "updatesGlobal");
-        }
-
-        function getImageUpdate() {
-            return findChild(updatesInstance, "updatesImageUpdate");
-        }
-
-        function getClickUpdates() {
-            return findChild(updatesInstance, "updatesClickUpdates");
-        }
-
-        function getNoAuthNotif() {
-            return findChild(updatesInstance, "updatesNoAuthNotif");
-        }
-
-        function getFullscreenMessage() {
-            return findChild(updatesInstance, "updatesFullscreenMessage");
-        }
-
-        function getFullscreenMessageText() {
-            return findChild(updatesInstance, "updatesFullscreenMessageText");
-        }
-
-        function test_visibility_data() {
-            var textConnect = i18n.tr("Connect to the Internet to check for updates.");
-            var textUpdated = i18n.tr("Software is up to date");
-            var textNotResponding = i18n.tr("The update server is not responding. Try again later.");
+        function test_connectivity_data() {
             return [
-                {
-                    tag: "check in progress (offline, no auth)",
-                    haveSystemUpdate: false,
-                    updatesCount: 0,
-                    status: SystemUpdate.StatusCheckingAllUpdates,
-                    online: false,
-                    authenticated: false,
-                    // Here be target values:
-                    global: { hidden: true }, systemupdate: { visible: false }, clickupdates: { visible: false },
-                    noauthnotification: { visible: false }, fullscreenmessage: { visible: true, text: textConnect }
-                },
-                {
-                    tag: "check in progress (offline, auth)",
-                    haveSystemUpdate: false,
-                    updatesCount: 0,
-                    status: SystemUpdate.StatusCheckingAllUpdates,
-                    online: false,
-                    authenticated: true,
-                    // Here be target values:
-                    global: { hidden: true }, systemupdate: { visible: false }, clickupdates: { visible: false },
-                    noauthnotification: { visible: false }, fullscreenmessage: { visible: true, text: textConnect }
-                },
-                {
-                    tag: "check in progress (online, no auth)",
-                    haveSystemUpdate: false,
-                    updatesCount: 0,
-                    status: SystemUpdate.StatusCheckingAllUpdates,
-                    online: true,
-                    authenticated: false,
-                    // Here be target values:
-                    global: { hidden: false }, systemupdate: { visible: false }, clickupdates: { visible: false },
-                    noauthnotification: { visible: true }, fullscreenmessage: { visible: false }
-                },
-                {
-                    tag: "check in progress (online, auth)",
-                    haveSystemUpdate: false,
-                    updatesCount: 0,
-                    status: SystemUpdate.StatusCheckingAllUpdates,
-                    online: true,
-                    authenticated: true,
-                    // Here be target values:
-                    global: { hidden: false }, systemupdate: { visible: false }, clickupdates: { visible: false },
-                    noauthnotification: { visible: false }, fullscreenmessage: { visible: false }
-                },
-                {
-                    tag: "no updates (offline, no auth)",
-                    haveSystemUpdate: false,
-                    updatesCount: 0,
-                    status: SystemUpdate.StatusIdle,
-                    online: false,
-                    authenticated: false,
-                    // Here be target values:
-                    global: { hidden: true }, systemupdate: { visible: false }, clickupdates: { visible: false },
-                    noauthnotification: { visible: false }, fullscreenmessage: { visible: true, text: textConnect }
-                },
-                {
-                    tag: "no updates (offline, auth)",
-                    haveSystemUpdate: false,
-                    updatesCount: 0,
-                    status: SystemUpdate.StatusIdle,
-                    online: false,
-                    authenticated: true,
-                    // Here be target values:
-                    global: { hidden: true }, systemupdate: { visible: false }, clickupdates: { visible: false },
-                    noauthnotification: { visible: false }, fullscreenmessage: { visible: true, text: textConnect }
-                },
-                {
-                    tag: "no updates (online, auth)",
-                    haveSystemUpdate: false,
-                    updatesCount: 0,
-                    status: SystemUpdate.StatusIdle,
-                    online: true,
-                    authenticated: true,
-                    // Here be target values:
-                    global: { hidden: true }, systemupdate: { visible: false }, clickupdates: { visible: false },
-                    noauthnotification: { visible: false }, fullscreenmessage: { visible: true, text: textUpdated }
-                },
-                {
-                    tag: "no updates (online, no auth)",
-                    haveSystemUpdate: false,
-                    updatesCount: 0,
-                    status: SystemUpdate.StatusIdle,
-                    online: true,
-                    authenticated: false,
-                    // Here be target values:
-                    global: { hidden: true }, systemupdate: { visible: false }, clickupdates: { visible: false },
-                    noauthnotification: { visible: true }, fullscreenmessage: { visible: false }
-                },
-                {
-                    tag: "offline (auth)",
-                    haveSystemUpdate: false,
-                    updatesCount: 0,
-                    status: SystemUpdate.StatusIdle,
-                    online: false,
-                    authenticated: true,
-                    // Here be target values:
-                    global: { hidden: true }, systemupdate: { visible: false }, clickupdates: { visible: false },
-                    noauthnotification: { visible: false }, fullscreenmessage: { visible: true, text: textConnect }
-                },,
-                {
-                    tag: "offline (no auth)",
-                    haveSystemUpdate: false,
-                    updatesCount: 0,
-                    status: SystemUpdate.StatusIdle,
-                    online: false,
-                    authenticated: false,
-                    // Here be target values:
-                    global: { hidden: true }, systemupdate: { visible: false }, clickupdates: { visible: false },
-                    noauthnotification: { visible: false }, fullscreenmessage: { visible: true, text: textConnect }
-                },
-                {
-                    tag: "server error",
-                    haveSystemUpdate: false,
-                    updatesCount: 0,
-                    status: SystemUpdate.StatusServerError,
-                    online: true,
-                    authenticated: true,
-                    // Here be target values:
-                    global: { hidden: true }, systemupdate: { visible: false }, clickupdates: { visible: false },
-                    noauthnotification: { visible: false }, fullscreenmessage: { visible: true, text: textNotResponding }
-                },
-                {
-                    tag: "network error",
-                    haveSystemUpdate: false,
-                    updatesCount: 0,
-                    status: SystemUpdate.StatusNetworkError,
-                    online: true,
-                    authenticated: true,
-                    // Here be target values:
-                    global: { hidden: true }, systemupdate: { visible: false }, clickupdates: { visible: false },
-                    noauthnotification: { visible: false }, fullscreenmessage: { visible: true, text: textNotResponding }
-                },
-                {
-                    tag: "system update (online, no auth)",
-                    haveSystemUpdate: true,
-                    updatesCount: 1,
-                    status: SystemUpdate.StatusIdle,
-                    online: true,
-                    authenticated: false,
-                    // Here be target values:
-                    global: { hidden: true }, systemupdate: { visible: true }, clickupdates: { visible: false },
-                    noauthnotification: { visible: true }, fullscreenmessage: { visible: false }
-                },
-                {
-                    tag: "system update (online, auth)",
-                    haveSystemUpdate: true,
-                    updatesCount: 1,
-                    status: SystemUpdate.StatusIdle,
-                    online: true,
-                    authenticated: true,
-                    // Here be target values:
-                    global: { hidden: true }, systemupdate: { visible: true }, clickupdates: { visible: false },
-                    noauthnotification: { visible: false }, fullscreenmessage: { visible: false }
-                },
-                {
-                    tag: "system update (offline, auth)",
-                    haveSystemUpdate: true,
-                    updatesCount: 1,
-                    status: SystemUpdate.StatusIdle,
-                    online: false,
-                    authenticated: true,
-                    // Here be target values:
-                    global: { hidden: true }, systemupdate: { visible: false }, clickupdates: { visible: false },
-                    noauthnotification: { visible: false }, fullscreenmessage: { visible: true, text: textConnect }
-                },
-                {
-                    tag: "system update (network error)",
-                    haveSystemUpdate: true,
-                    updatesCount: 1,
-                    status: SystemUpdate.StatusNetworkError,
-                    online: true,
-                    authenticated: true,
-                    // Here be target values:
-                    global: { hidden: true }, systemupdate: { visible: false }, clickupdates: { visible: false },
-                    noauthnotification: { visible: false }, fullscreenmessage: { visible: true, text: textNotResponding }
-                },
-                {
-                    tag: "system update (server error)",
-                    haveSystemUpdate: true,
-                    updatesCount: 1,
-                    status: SystemUpdate.StatusServerError,
-                    online: true,
-                    authenticated: true,
-                    // Here be target values:
-                    global: { hidden: true }, systemupdate: { visible: false }, clickupdates: { visible: false },
-                    noauthnotification: { visible: false }, fullscreenmessage: { visible: true, text: textNotResponding }
-                },
-                {
-                    tag: "click updates (offline, no system update)",
-                    haveSystemUpdate: false,
-                    updatesCount: 2,
-                    status: SystemUpdate.StatusIdle,
-                    online: false,
-                    authenticated: true,
-                    // Here be target values:
-                    global: { hidden: true }, systemupdate: { visible: false }, clickupdates: { visible: false },
-                    noauthnotification: { visible: false }, fullscreenmessage: { visible: true, text: textConnect }
-                },
-                {
-                    tag: "click updates (online, no system update)",
-                    haveSystemUpdate: false,
-                    updatesCount: 2,
-                    status: SystemUpdate.StatusIdle,
-                    online: true,
-                    authenticated: true,
-                    // Here be target values:
-                    global: { hidden: false }, systemupdate: { visible: false }, clickupdates: { visible: true },
-                    noauthnotification: { visible: false }, fullscreenmessage: { visible: false }
-                },
-                {
-                    tag: "click updates (online, system update)",
-                    haveSystemUpdate: true,
-                    updatesCount: 3,
-                    status: SystemUpdate.StatusIdle,
-                    online: true,
-                    authenticated: true,
-                    // Here be target values:
-                    global: { hidden: false }, systemupdate: { visible: true }, clickupdates: { visible: true },
-                    noauthnotification: { visible: false }, fullscreenmessage: { visible: false }
-                },
-                {
-                    tag: "many click updates (online, system update)",
-                    haveSystemUpdate: true,
-                    updatesCount: 50,
-                    status: SystemUpdate.StatusIdle,
-                    online: true,
-                    authenticated: true,
-                    // Here be target values:
-                    global: { hidden: false }, systemupdate: { visible: true }, clickupdates: { visible: true },
-                    noauthnotification: { visible: false }, fullscreenmessage: { visible: false }
-                }
+                { tag: "offline", online: false, targetState: "offline" },
+                { tag: "online", online: true, targetState: "noUpdates" }
             ]
         }
 
-        function test_visibility(data) {
-            updatesInstance.haveSystemUpdate = data.haveSystemUpdate;
-            updatesInstance.updatesCount = data.updatesCount;
-            updatesInstance.status = data.status;
-            updatesInstance.online = data.online;
-            updatesInstance.authenticated = data.authenticated;
+        function test_connectivity(data) {
+            instance.online = data.online;
+            compare(instance.state, data.targetState);
+        }
 
-            // If updatesCount is sufficient, create some dummy click updates.
-            // We don't test the individual click updates here.
-            if (data.updatesCount > 0) {
-                var offset = data.haveSystemUpdate ? 1 : 0
-                var updates = data.updatesCount - offset;
-                for (var i = 0; i < updates; i++) {
-                    clickModelInstance.mockAddUpdate("a", 1);
-                }
-            }
-            console.log("TAG:", data.tag);
-            wait(2000)
+        function test_errors_data() {
+            return [
+                { status: SystemUpdate.StatusServerError, targetState: "error" },
+                { status: SystemUpdate.StatusNetworkError, targetState: "error" }
+            ];
+        }
 
-            compare(getGlobal().hidden, data.global.hidden, "global had wrong visibility");
-            compare(getImageUpdate().visible, data.systemupdate.visible, "system update had wrong visibility");
-            compare(getClickUpdates().visible, data.clickupdates.visible, "click updates had wrong visibility");
-            compare(getNoAuthNotif().visible, data.noauthnotification.visible, "no auth notification had wrong visibility");
-            compare(getFullscreenMessage().visible, data.fullscreenmessage.visible, "fullscreen message had wrong visibility");
-            if (data.fullscreenmessage.text) {
-                compare(getFullscreenMessageText().text, data.fullscreenmessage.text, "fullscreen message had wrong text");
+        function test_errors(data) {
+            instance.online = true; // takes precedence over errors
+            instance.status = data.status;
+            compare(instance.state, data.targetState);
+        }
+
+        function test_auth_data() {
+            return [
+                { auth: false, targetState: "noAuth" },
+                { auth: true, targetState: "noUpdates" },
+            ];
+        }
+
+        function test_auth(data) {
+            instance.online = true; // takes precedence over errors
+            instance.authenticated = data.auth;
+            compare(instance.state, data.targetState);
+        }
+
+        function test_signinPrompt_data() {
+            return [
+                { auth: false }, { auth: true }
+            ]
+        }
+
+        function test_signinPrompt(data) {
+            instance.online = true;
+            instance.authenticated = data.auth;
+            var prompt = findChild(instance, "updatesNoAuthNotif");
+
+            // Visible when not authenticated.
+            compare(prompt.visible, !data.auth);
+        }
+
+        function test_updatesCount_data() {
+            return [
+                { count: 0, targetState: "noUpdates" },
+                { count: 1, targetState: "" },
+            ];
+        }
+
+        function test_updatesCount(data) {
+            instance.online = true; // takes precedence over errors
+            instance.authenticated = true;
+            instance.updatesCount = data.count;
+            compare(instance.state, data.targetState);
+        }
+
+        function test_power_data() {
+            return [
+                { havePower: true },
+                { havePower: false }
+            ]
+        }
+
+        function test_power(data) {
+            // Prerequisites:
+            instance.online = true;
+            instance.authenticated = true;
+            instance.haveSystemUpdate = true;
+
+            instance.havePower = data.havePower;
+
+            // Add mock image update.
+            images.mockAddUpdate("ubuntu", 300, Update.KindImage);
+            images.setDownloaded("ubuntu", 300);
+
+            // Trigger popup.
+            var delegate = findChild(instance, "updatesImageDelegate-0");
+            var btn = findChild(delegate, "updateButton");
+            mouseClick(btn, btn.width / 2, btn.height / 2);
+
+            var applyBtn = findChild(testRoot, "imagePromptInstall");
+            var cancelBtn = findChild(testRoot, "imagePromptCancel");
+
+            if (data.havePower) {
+                compare(applyBtn.visible, true);
+                signalSpy.signalName = "requestSystemUpdate";
+                signalSpy.target = findChild(testRoot, "imagePrompt");
+                mouseClick(applyBtn, applyBtn.width / 2, applyBtn.height / 2);
+                signalSpy.wait();
+            } else {
+                compare(cancelBtn.visible, true);
+                mouseClick(cancelBtn, cancelBtn.width / 2, cancelBtn.height / 2);
             }
+
+            // Halt testing until dialog has been destroyed.
+            tryCompareFunction(function() {
+                return findChild(testRoot, "imagePrompt");
+            }, null);
+        }
+
+        // Tests previous updates visibility in various modes.
+        function test_previous_data() {
+            return [
+                { online: false, authenticated: false, targetVisiblity: true },
+                { online: true, authenticated: false, targetVisiblity: true },
+                { online: false, authenticated: true, targetVisiblity: true },
+                { online: true, authenticated: true, targetVisiblity: true }
+            ];
+        }
+
+        function test_previous(data) {
+            instance.online = data.online;
+            instance.authenticated = data.authenticated;
+
+            // Add mock previous update.
+            installed.mockAddUpdate("app", 1, Update.KindImage);
+            installed.setInstalled("app", 1);
+
+            compare(findChild(instance, "updatesInstalledUpdates").visible, data.targetVisiblity);
+        }
+
+        function test_integration_data() {
+            return [
+                { online: false, authenticated: false },
+                { online: true, authenticated: false },
+                { online: false, authenticated: true },
+                { online: true, authenticated: true }
+            ];
+        }
+        function test_integration(data) {
+            instance.online = data.online;
+            instance.authenticated = data.authenticated;
+            instance.haveSystemUpdate = true;
+
+            images.mockAddUpdate("ubuntu", 300, Update.KindImage);
+
+            // Add mock previous updates.
+            for (var i = 0; i < 5; i++) {
+                installed.mockAddUpdate("app-" + i, i, Update.KindClick);
+                installed.setInstalled("app-" + i, i);
+            }
+
+            // Add mock click updates.
+            for (; i < 10; i++) {
+                clicks.mockAddUpdate("app-" + i, i, Update.KindClick);
+            }
+
+            var glob = findChild(instance, "updatesGlobal");
+            var overlay = findChild(instance, "updatesOverlay");
+            var imageUpdate = findChild(instance, "updatesImageUpdate");
+            var clickUpdates = findChild(instance, "updatesClickUpdates");
+            var noAuthNotification = findChild(instance, "updatesNoAuthNotif");
+            var installedUpdates = findChild(instance, "updatesInstalledUpdates");
+
+            // Global is visible only when we're online and authed.
+            compare(!glob.hidden, data.online && data.authenticated);
+
+            // Overlay is visible only when not online
+            compare(overlay.visible, !data.online);
+
+            // As long as we're online, image updates are visible.
+            compare(imageUpdate.visible, data.online);
+
+            // If online and authenticated, we want click updates.
+            compare(clickUpdates.visible, data.online && data.authenticated);
+
+            // Not authenticated notification visible if online and not authed.
+            compare(noAuthNotification.visible, data.online && !data.authenticated);
+
+            // If there are installed updates, show them no matter what.
+            compare(installedUpdates.visible, true);
+
         }
     }
-
-    // UbuntuTestCase {
-    //     name: "UpdatesIntegration"
-    //     when: windowShown
-
-    //     property var updatesInstance: null
-    //     property var downloadInstance: null
-    //     property var downloadManagerInstance: null
-    //     property var clickUpdateManagerInstance: null
-
-    //     function init() {
-    //         generateClickUpdates(1);
-    //         generatePreviousUpdates(1);
-    //         downloadManagerInstance = downloadmanager.createObject(testRoot);
-    //         downloadInstance = singledownload.createObject(testRoot, {});
-    //         downloadInstance.metadata.custom = { packageName: "app0", revision: "0" };
-    //         downloadManagerInstance.mockDownload(downloadInstance);
-
-    //         clickUpdateManagerInstance = clickUpdateManagerComponent.createObject(testRoot);
-    //         updatesInstance = updates.createObject(testRoot, {
-    //             clickUpdatesModel: mockClickUpdatesModel,
-    //             previousUpdatesModel: mockPreviousUpdatesModel,
-    //             clickUpdateManager: clickUpdateManagerInstance,
-    //             udm: downloadManagerInstance,
-    //             online: true,
-    //             authenticated: true
-    //         });
-
-    //     }
-
-    //     function cleanup() {
-    //         downloadInstance.destroy();
-    //         updatesInstance.destroy();
-    //         downloadManagerInstance.destroy();
-    //         mockClickUpdatesModel.clear();
-    //     }
-
-    //     function test_udm() {
-    //         downloadInstance.mockProgress(50);
-    //         var downloadEl = findChild(updatesInstance, "updatesClickUpdate0");
-    //         compare(downloadEl.download, downloadInstance);
-    //         compare(downloadEl.updateState, SystemUpdate.StateDownloading);
-    //     }
-
-    //     function test_clickDownloadComplete() {
-    //         downloadManagerInstance.mockDownloadFinished(downloadInstance, "");
-    //     }
-
-    //     function test_updateChecking() {
-    //         // Default state.
-    //         compare(updatesInstance.status, SystemUpdate.StatusIdle);
-
-    //         // Start click check.
-    //         clickUpdateManagerInstance.mockCheckStarted();
-    //         compare(updatesInstance.status, SystemUpdate.StatusCheckingClickUpdates);
-
-    //         // Complete click check during click check only.
-    //         clickUpdateManagerInstance.mockCheckComplete();
-    //         compare(updatesInstance.status, SystemUpdate.StatusIdle);
-
-    //         // Start a System Image check from Idle
-    //         updatesInstance.checkSystem();
-    //         compare(updatesInstance.status, SystemUpdate.StatusCheckingSystemUpdates);
-
-    //         // Start click check while System Image check.
-    //         clickUpdateManagerInstance.mockCheckStarted();
-    //         compare(updatesInstance.status, SystemUpdate.StatusCheckingAllUpdates);
-
-    //         // Finish System Image check while checking all.
-    //         SystemImage.mockAvailableStatus(false, false, "", 0, "", "");
-    //         compare(updatesInstance.status, SystemUpdate.StatusCheckingClickUpdates);
-
-    //         // Cancel all
-    //         updatesInstance.checkSystem();
-    //         compare(updatesInstance.status, SystemUpdate.StatusCheckingAllUpdates);
-    //         findChild(updatesInstance, "updatesGlobal").stop();
-    //         compare(updatesInstance.status, SystemUpdate.StatusIdle);
-    //     }
-    // }
-
-    // UbuntuTestCase {
-    //     name: "UpdateDateTimeTests"
-    //     when: windowShown
-
-    //     function test_noCheck() {
-    //         var clickUm = clickUpdateManagerComponent.createObject(testRoot);
-    //         clickUm.mockIsCheckRequired(false);
-
-    //         var update = updates.createObject(testRoot, {
-    //             clickUpdatesModel: mockClickUpdatesModel,
-    //             previousUpdatesModel: mockPreviousUpdatesModel,
-    //             clickUpdateManager: clickUm,
-    //             online: true,
-    //             authenticated: true
-    //         });
-
-    //         verify(!clickUm.isChecking());
-    //     }
-
-    //     function test_check() {
-    //         var clickUm = clickUpdateManagerComponent.createObject(testRoot);
-    //         clickUm.mockIsCheckRequired(true);
-
-    //         var update = updates.createObject(testRoot, {
-    //             clickUpdatesModel: mockClickUpdatesModel,
-    //             previousUpdatesModel: mockPreviousUpdatesModel,
-    //             clickUpdateManager: clickUm,
-    //             online: true,
-    //             authenticated: true
-    //         });
-
-    //         verify(clickUm.isChecking());
-    //     }
-    // }
 }

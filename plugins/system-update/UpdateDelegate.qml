@@ -36,6 +36,7 @@ Column {
     property real size
     property string version
     property string downloadId
+    property date updatedAt
 
     property alias errorTitle: error.title
     property alias errorDetail: error.detail
@@ -45,6 +46,7 @@ Column {
     property alias progress: progressBar.value
 
     height: childrenRect.height
+    width: parent.width
 
     // By Aliceljm [1].
     // [1] http://stackoverflow.com/a/18650828/538866
@@ -347,6 +349,9 @@ Column {
                         case Update.StateInstallFinished:
                             return i18n.tr("Installed");
 
+                        case Update.StateInstalled:
+                            return i18n.tr("Updated at %1").arg(updatedAt.toLocaleDateString());
+
                         default:
                             return "";
                         }
@@ -366,7 +371,7 @@ Column {
                 Layout.fillWidth: true
                 visible: title && detail
 
-                property string title
+                property string title: i18n.tr("Update failed")
                 property string detail
 
                 Label {
@@ -447,10 +452,7 @@ Column {
         } // Layout for the rest of the stuff
     } // Icon and rest layout
 
-    ListItems.ThinDivider {
-        id: divider
-        // visible: update.height !== 0
-    }
+    ListItems.ThinDivider {}
 
     Timer {
         id: hideTimer

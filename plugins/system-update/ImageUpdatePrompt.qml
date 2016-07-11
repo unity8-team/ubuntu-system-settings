@@ -21,6 +21,7 @@ import Ubuntu.Components.Popups 1.3
 
 Dialog {
     id: dialogueInstall
+    objectName: "imagePrompt"
 
     property bool havePowerForUpdate
 
@@ -32,6 +33,7 @@ Dialog {
             : i18n.tr("Connect the device to power before installing the system update.")
 
     Button {
+        objectName: "imagePromptInstall"
         text: i18n.tr("Restart & Install")
         visible: havePowerForUpdate
         color: UbuntuColors.orange
@@ -42,6 +44,7 @@ Dialog {
     }
 
     Button {
+        objectName: "imagePromptCancel"
         text: i18n.tr("Cancel")
         color: UbuntuColors.warmGrey
         onClicked: PopupUtils.close(dialogueInstall)

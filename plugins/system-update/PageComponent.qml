@@ -62,22 +62,6 @@ ItemPage {
         }
     }
 
-    // Flickable {
-    //     id: scrollWidget
-
-    //     anchors.top: parent.top
-    //     anchors.left: parent.left
-    //     anchors.right: parent.right
-    //     anchors.bottom: configuration.top
-
-    //     contentHeight: contentItem.childrenRect.height
-    //     boundsBehavior: (contentHeight > root.height) ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
-    //     /* Set the direction to workaround https://bugreports.qt-project.org/browse/QTBUG-31905
-    //        otherwise the UI might end up in a situation where scrolling doesn't work */
-    //     flickableDirection: Flickable.VerticalFlick
-
-    // }
-
     UpdateModel {
         id: imageUpdate
         filter: UpdateModel.PendingImage
@@ -89,7 +73,7 @@ ItemPage {
     }
 
     UpdateModel {
-        id: prevUpdates
+        id: installedUpdates
         filter: UpdateModel.Installed
     }
 
@@ -107,10 +91,10 @@ ItemPage {
         width: parent.width
         clip: true
 
-        clickUpdatesModel: clickUpdates
-        clickUpdateManager: clickUpdateManager
-        imageUpdateModel: imageUpdate
-        previousUpdatesModel: prevUpdates
+        clickModel: clickUpdates
+        clickManager: clickUpdateManager
+        imageModel: imageUpdate
+        installedModel: installedUpdates
         downloadHandler: downloadHandler
 
         authenticated: clickUpdateManager.authenticated

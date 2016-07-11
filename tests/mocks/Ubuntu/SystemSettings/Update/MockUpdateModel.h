@@ -32,7 +32,8 @@ public:
         : UpdatePlugin::UpdateModel(":memory:", parent) {}
     ~MockUpdateModel(){}
 
-    Q_INVOKABLE void mockAddUpdate(const QString &id, const uint &revision);
+    Q_INVOKABLE void mockAddUpdate(const QString &id, const uint &revision,
+                                   const uint &kind);
 };
 
 #endif // MOCK_UPDATE_MODEL_H

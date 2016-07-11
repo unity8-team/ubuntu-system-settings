@@ -19,10 +19,12 @@
 import QtQuick 2.4
 import QtQuick.Layouts 1.1
 import Ubuntu.Components 1.3
+import Ubuntu.Components.ListItems 1.3 as ListItems
 import Ubuntu.SystemSettings.Update 1.0
 
 Item {
     id: g
+
     property int status // A SystemUpdate::Status
     property bool requireRestart: false
     property int updatesCount: 0
@@ -44,7 +46,7 @@ Item {
     signal install()
     signal resume()
 
-    clip: true
+    // clip: true
 
     Behavior on height {
         UbuntuNumberAnimation {}
@@ -54,9 +56,11 @@ Item {
         id: checking
         spacing: units.gu(2)
         anchors.fill: parent
+
         Behavior on opacity {
             UbuntuNumberAnimation {}
         }
+
         opacity: visible ? 1 : 0
         visible: {
             switch (g.status) {
@@ -70,6 +74,7 @@ Item {
 
         ActivityIndicator {
             running: parent.visible
+            Layout.leftMargin: units.gu(2)
         }
 
         Label {
@@ -81,12 +86,14 @@ Item {
             text: i18n.tr("Stop")
             onClicked: g.stop()
             Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
+            Layout.rightMargin: units.gu(2)
         }
     }
 
     RowLayout {
         id: install
         anchors.fill: parent
+        spacing: units.gu(2)
         Behavior on opacity {
             UbuntuNumberAnimation {}
         }
@@ -96,57 +103,70 @@ Item {
             return canInstall && updatesCount > 1;
         }
 
+        Label {
+            objectName: "updatesGlobalInfoLabel"
+            // TRANSLATORS: %1 is number of software updates available.
+            text: i18n.tr("%1 update available",
+                          "%1 updates available",
+                          updatesCount).arg(updatesCount)
+            Layout.fillWidth: true
+            Layout.leftMargin: units.gu(2)
+        }
+
         Button {
             objectName: "updatesGlobalInstallButton"
             text: {
                 if (g.requireRestart === true) {
-                    return i18n.tr(
-                        "Install %1 update…",
-                        "Install %1 updates…",
-                        updatesCount
-                    ).arg(updatesCount);
+                    return i18n.tr("Update all…");
                 } else {
-                    return i18n.tr(
-                        "Install %1 update",
-                        "Install %1 updates",
-                        updatesCount
-                    ).arg(updatesCount);
+                    return i18n.tr("Update all");
                 }
             }
             onClicked: g.requestInstall()
-            Layout.fillWidth: true
+            color: theme.palette.normal.positive
+            strokeColor: "transparent"
+            Layout.rightMargin: units.gu(2)
         }
     }
 
-    RowLayout {
+    Button {
         id: pause
-        anchors.fill: parent
+        objectName: "updatesGlobalPauseButton"
+        text: i18n.tr("Pause All")
+        anchors {
+            fill: parent
+            margins: units.gu(2)
+        }
         visible: {
             var batchMode = g.status === SystemUpdate.StatusBatchMode;
             return batchMode && updatesCount >= 1;
         }
-
-        Button {
-            objectName: "updatesGlobalPauseButton"
-            text: i18n.tr("Pause All")
-            onClicked: g.pause()
-            Layout.fillWidth: true
-        }
+        onClicked: g.pause()
     }
 
-    RowLayout {
+    Button {
         id: resume
-        anchors.fill: parent
+
+        anchors {
+            fill: parent
+            margins: units.gu(2)
+        }
+
+        objectName: "updatesGlobalResumeButton"
+        text: i18n.tr("Resume All")
         visible: {
             var batchModePaused = g.status === SystemUpdate.StatusBatchModePaused;
             return batchModePaused && updatesCount >= 1;
         }
+        onClicked: g.resume()
+    }
 
-        Button {
-            objectName: "updatesGlobalResumeButton"
-            text: i18n.tr("Resume All")
-            onClicked: g.resume()
-            Layout.fillWidth: true
+    ListItems.ThinDivider {
+        visible: !g.hidden
+        anchors {
+            left: parent.left
+            right: parent.right
+            bottom: parent.bottom
         }
     }
 }

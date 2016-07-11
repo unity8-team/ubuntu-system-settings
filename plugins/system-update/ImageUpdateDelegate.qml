@@ -23,6 +23,7 @@ UpdateDelegate {
     id: update
     name: "Ubuntu"
     iconUrl: "file:///usr/share/icons/suru/places/scalable/distributor-logo.svg"
+    kind: Update.KindImage
 
     /* Convert paused download to a paused automatic download if this
     download (most likely) was started automatically. */

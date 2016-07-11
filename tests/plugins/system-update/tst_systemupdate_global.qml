@@ -36,10 +36,8 @@ Item {
             anchors {
                 left: parent.left;
                 right: parent.right
-                margins: units.gu(2)
             }
-            width: testRoot.width
-            height: units.gu(6)
+            height: units.gu(8)
         }
     }
 
@@ -122,9 +120,10 @@ Item {
             instance.online = true;
             instance.status = SystemUpdate.StatusIdle;
 
+            var info = findChild(instance, "updatesGlobalInfoLabel");
             var install = findChild(instance, "updatesGlobalInstallButton");
             compare(install.visible, true);
-            compare(install.text, i18n.tr("Install %1 update", "Install %1 updates", 2).arg(2));
+            compare(info.text, i18n.tr("%1 update available", "%1 updates available", 2).arg(2));
             mouseClick(install, install.width / 2, install.height / 2);
             requestInstallSpy.wait();
         }
@@ -135,9 +134,10 @@ Item {
             instance.status = SystemUpdate.StatusIdle;
             instance.requireRestart = true;
 
+            var info = findChild(instance, "updatesGlobalInfoLabel");
             var install = findChild(instance, "updatesGlobalInstallButton");
             compare(install.visible, true);
-            compare(install.text, i18n.tr("Install %1 update…", "Install %1 updates…", 2).arg(2));
+            compare(info.text, i18n.tr("%1 update available", "%1 updates available", 2).arg(2));
             mouseClick(install, install.width / 2, install.height / 2);
             requestInstallSpy.wait();
         }

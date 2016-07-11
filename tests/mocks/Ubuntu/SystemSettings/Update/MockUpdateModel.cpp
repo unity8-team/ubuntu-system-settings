@@ -17,16 +17,15 @@
  */
 
 #include "MockUpdateModel.h"
-#include "update.h"
 
 #include <QSharedPointer>
 
-void MockUpdateModel::mockAddUpdate(const QString &id, const uint &revision)
+void MockUpdateModel::mockAddUpdate(const QString &id, const uint &revision, const uint &kind)
 {
     using namespace UpdatePlugin;
     QSharedPointer<Update> u = QSharedPointer<Update>(new Update);
     u->setIdentifier(id);
-    u->setKind(Update::Kind::KindClick);
+    u->setKind((Update::Kind) kind);
     u->setRevision(revision);
     u->setTitle(QString("Test App %1").arg(id));
     u->setRemoteVersion(QString("v%1").arg(revision));
