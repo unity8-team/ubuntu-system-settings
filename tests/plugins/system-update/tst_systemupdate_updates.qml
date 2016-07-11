@@ -223,8 +223,8 @@ Item {
 
             // Halt testing until dialog has been destroyed.
             tryCompareFunction(function() {
-                return findChild(testRoot, "imagePrompt");
-            }, null);
+                return !!findChild(testRoot, "imagePrompt");
+            }, false);
         }
 
         // Tests previous updates visibility in various modes.
