@@ -148,7 +148,7 @@ Item {
                         var popup = PopupUtils.open(updatePrompt, null, {
                             havePowerForUpdate: updates.havePower
                         });
-                        popup.connect.requestSystemUpdate(function () {
+                        popup.requestSystemUpdate.connect(function () {
                             install();
                         });
                     } else {
@@ -206,6 +206,7 @@ Item {
 
                     delegate: ImageUpdateDelegate {
                         objectName: "updatesImageDelegate-" + index
+                        width: imageUpdate.width
                         updateState: model.updateState
                         progress: model.progress
                         version: remoteVersion
@@ -236,6 +237,7 @@ Item {
 
                     delegate: ClickUpdateDelegate {
                         objectName: "updatesClickUpdate" + index
+                        width: clickUpdates.width
                         updateState: model.updateState
                         progress: model.progress
                         version: remoteVersion
@@ -287,6 +289,7 @@ Item {
 
                     delegate: UpdateDelegate {
                         objectName: "updatesInstalledUpdate-" + index
+                        width: installed.width
                         version: remoteVersion
                         size: model.size
                         name: title

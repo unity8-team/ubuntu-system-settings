@@ -248,6 +248,44 @@ Item {
             compare(findChild(instance, "updatesInstalledUpdates").visible, data.targetVisiblity);
         }
 
+        function test_installAllPrompts() {
+            instance.online = true;
+            instance.authenticated = true;
+            instance.haveSystemUpdate = true;
+            instance.havePower = true;
+
+            images.mockAddUpdate("ubuntu", 300, Update.KindImage);
+            clicks.mockAddUpdate("app", 1, Update.KindClick);
+
+            var glob = findChild(instance, "updatesGlobal");
+            glob.requestInstall();
+
+            var btn = findChild(testRoot, "imagePromptInstall");
+            mouseClick(btn, btn.width / 2, btn.height / 2);
+
+            tryCompare(instance, "status", SystemUpdate.StatusBatchMode);
+        }
+
+        function test_installImagePrompts() {
+            instance.online = true;
+            instance.authenticated = true;
+            instance.haveSystemUpdate = true;
+            instance.havePower = true;
+
+            images.mockAddUpdate("ubuntu", 300, Update.KindImage);
+            images.setDownloaded("ubuntu", 300);
+
+            var del = findChild(instance, "updatesImageDelegate-0");
+            del.install();
+
+            var btn = findChild(testRoot, "imagePromptInstall");
+            mouseClick(btn, btn.width / 2, btn.height / 2);
+
+            tryCompareFunction(function () {
+                return SystemImage.isApplyRequested();
+            }, true);
+        }
+
         function test_integration_data() {
             return [
                 { online: false, authenticated: false },

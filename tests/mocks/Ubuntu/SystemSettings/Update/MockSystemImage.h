@@ -106,6 +106,9 @@ public:
                     const QString &lastReason); // mock only
     Q_INVOKABLE void mockTargetBuildNumber(const uint &target); // mock only
     Q_INVOKABLE void mockCurrentBuildNumber(const uint &current); // mock only
+    Q_INVOKABLE bool isApplyRequested(); // mock only
+
+
 
 signals:
     void currentBuildNumberChanged();
@@ -146,6 +149,7 @@ private:
     int m_downloadMode;
     int m_targetBuildNumber;
     int m_currentBuildNumber;
+    bool m_applyRequested;
 };
 
 #endif // MOCK_SYSTEMIMAGE_H

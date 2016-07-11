@@ -23,6 +23,7 @@ MockSystemImage::MockSystemImage(QObject *parent)
     , m_downloadMode(-1)
     , m_targetBuildNumber(-1)
     , m_currentBuildNumber(-1)
+    , m_applyRequested(false)
 {
 }
 
@@ -52,6 +53,7 @@ void MockSystemImage::forceAllowGSMDownload()
 
 void MockSystemImage::applyUpdate()
 {
+    m_applyRequested = true;
 }
 
 void MockSystemImage::cancelUpdate()
@@ -204,4 +206,9 @@ void MockSystemImage::mockCurrentBuildNumber(const uint &current)
 {
     m_currentBuildNumber = current;
     Q_EMIT currentBuildNumberChanged();
+}
+
+bool MockSystemImage::isApplyRequested()
+{
+    return m_applyRequested;
 }
