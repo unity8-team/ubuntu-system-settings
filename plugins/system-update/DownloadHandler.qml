@@ -93,7 +93,7 @@ Item {
         }
 
         var metadata = {
-            //"command": click.command,
+            "command": click.command,
             "title": click.title,
             "showInIndicator": false
         };
@@ -108,8 +108,8 @@ Item {
         var singleDownloadObj = sdl.createObject(root, {
             // "url": click.downloadUrl,
             "autoStart": true,
-            //"hash": click.downloadSha512,
-            // "algorithm": "sha512",
+            "hash": click.downloadHash,
+            "algorithm": "sha512",
             "headers": hdrs,
             "metadata": metadataObj,
             "revision": click.revision,
