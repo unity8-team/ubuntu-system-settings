@@ -46,7 +46,6 @@ Column {
     property alias progress: progressBar.value
 
     height: childrenRect.height
-    width: parent.width
 
     // By Aliceljm [1].
     // [1] http://stackoverflow.com/a/18650828/538866
@@ -354,8 +353,9 @@ Column {
                         case Update.StateAutomaticDownloadPaused:
                             var down = formatter((size / 100) * progress);
                             var left = formatter(size);
-                            // TRANSLATORS: %1 is the human readable amount of bytes
-                            // downloaded, and %2 is the total to be downloaded.
+                            /* TRANSLATORS: %1 is the human readable amount
+                            of bytes downloaded, and %2 is the total to be
+                            downloaded. */
                             return i18n.tr("%1 of %2").arg(down).arg(left);
 
                         case Update.StateDownloaded:
@@ -365,7 +365,11 @@ Column {
                             return i18n.tr("Installed");
 
                         case Update.StateInstalled:
-                            return i18n.tr("Updated at %1").arg(updatedAt.toLocaleDateString());
+                            /* TRANSLATORS: %1 is the date at which this
+                            update was applied. */
+                            return i18n.tr("Updated at %1").arg(
+                                updatedAt.toLocaleDateString(Qt.locale(), "d MMMM")
+                            );
 
                         default:
                             return "";

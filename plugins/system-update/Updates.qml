@@ -145,7 +145,7 @@ Item {
                 }
                 onRequestInstall: {
                     if (requireRestart) {
-                        var popup = PopupUtils.open(updatePrompt, {
+                        var popup = PopupUtils.open(updatePrompt, null, {
                             havePowerForUpdate: updates.havePower
                         });
                         popup.connect.requestSystemUpdate(function () {
@@ -290,6 +290,7 @@ Item {
                         version: remoteVersion
                         size: model.size
                         name: title
+                        kind: model.kind
                         iconUrl: model.iconUrl
                         changelog: model.changelog
                         updateState: Update.StateInstalled

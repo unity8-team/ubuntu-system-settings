@@ -180,7 +180,8 @@ Item {
                             progress: 50,
                             version: "1.0",
                             changelog: "Changes",
-                            iconUrl: "file:///usr/share/icons/suru/apps/sources/online-accounts-twitter.svg"
+                            iconUrl: "file:///usr/share/icons/suru/apps/sources/online-accounts-twitter.svg",
+                            updatedAt: new Date()
                         },
                         {
                             name: "StateDownloaded",
