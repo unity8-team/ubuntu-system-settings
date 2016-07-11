@@ -90,44 +90,60 @@ Column {
         animation: UbuntuNumberAnimation {}
     }
 
+    Item {
+        height: 1; width: 1; // Spacer
+    }
+
     // Layouts the icon first, then the rest to the right/left of that.
     RowLayout {
         id: rootLayout
-        anchors { left: parent.left; right: parent.right }
-        spacing: 0
+        anchors {
+            left: parent.left
+            leftMargin: units.gu(2)
+            right: parent.right
+            rightMargin: units.gu(2)
+        }
+        spacing: units.gu(2)
 
         Item {
             Layout.preferredWidth: units.gu(4)
             Layout.preferredHeight: units.gu(4)
             Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
-            Layout.margins: units.gu(2)
 
-            Image {
-                id: icon
-                visible: kind === Update.KindImage
-                anchors.fill: parent
-                asynchronous: true
-                smooth: true
-                mipmap: true
+            Item {
+                anchors {
+                    top: parent.top
+                    horizontalCenter: parent.horizontalCenter
+                }
+                width: units.gu(4)
+                height: width
+
+                Image {
+                    id: icon
+                    visible: kind === Update.KindImage
+                    anchors.fill: parent
+                    asynchronous: true
+                    smooth: true
+                    mipmap: true
+                }
+
+                UbuntuShape {
+                    visible: kind !== Update.KindImage
+                    anchors.fill: parent
+                    source: icon
+                }
             }
 
-            UbuntuShape {
-                visible: kind !== Update.KindImage
-                anchors.fill: parent
-                source: icon
-            }
         }
 
         // Positions everything but the icon (and divider).
         ColumnLayout {
             Layout.minimumHeight: units.gu(6)
-            Layout.rightMargin: units.gu(2)
-            spacing: 0
+            spacing: units.gu(1)
 
             // Positions name and button.
             RowLayout {
                 spacing: units.gu(2)
-                Layout.topMargin: units.gu(2)
 
                 Label {
                     id: nameLabel
@@ -267,8 +283,7 @@ Column {
             } // Name/button RowLayout
 
             RowLayout {
-                spacing: 0
-                Layout.topMargin: units.gu(1)
+                spacing: units.gu(2)
 
                 ChangelogExpander {
                     Layout.fillWidth: true
@@ -408,7 +423,7 @@ Column {
                 }
                 Layout.maximumHeight: units.gu(0.5)
                 Layout.fillWidth: true
-                Layout.topMargin: units.gu(1)
+                // Layout.topMargin: units.gu(1)
 
                 indeterminate: update.progress < 0 || update.progress > 100
                 minimumValue: 0
@@ -418,7 +433,7 @@ Column {
 
             ChangelogExpander {
                 Layout.fillWidth: true
-                Layout.topMargin: units.gu(2)
+                // Layout.topMargin: units.gu(2)
 
                 version: update.version
                 enabled: update.changelog !== ""
@@ -434,7 +449,7 @@ Column {
                 height: childrenRect.height
 
                 Layout.fillWidth: true
-                Layout.topMargin: units.gu(2)
+                // Layout.topMargin: units.gu(2)
 
                 opacity: visible ? 1 : 0
 
