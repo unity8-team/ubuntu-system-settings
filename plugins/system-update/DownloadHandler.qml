@@ -43,9 +43,10 @@ Item {
                                      download.metadata.custom.revision)
         }
         onErrorFound: {
-            updateModel.setError(download.metadata.custom.identifier,
-                                 download.metadata.custom.revision,
-                                 download.errorMessage)
+            // console.warn('error found', download, download.errorMessage);
+            // updateModel.setError(download.metadata.custom.identifier,
+            //                      download.metadata.custom.revision,
+            //                      download.errorMessage)
         }
         onDownloadsChanged: restoreDownloads()
         Component.onCompleted: restoreDownloads()
@@ -172,6 +173,9 @@ Item {
             onProcessing: {
                 updateModel.processUpdate(metadata.custom.identifier,
                                           metadata.custom.revision);
+            }
+            onErrorMessageChanged: {
+                console.warn(metadata);
             }
         }
     }

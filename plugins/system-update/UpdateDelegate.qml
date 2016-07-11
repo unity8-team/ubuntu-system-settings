@@ -274,6 +274,7 @@ Column {
                             break;
 
                         case Update.StateInstalled:
+                            console.warn('launchdedddd')
                             update.launch();
                             break;
                         }

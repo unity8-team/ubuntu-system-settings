@@ -206,7 +206,7 @@ Item {
 
                     delegate: ImageUpdateDelegate {
                         objectName: "updatesImageDelegate-" + index
-                        width: imageUpdate.width
+                        anchors { left: parent.left; right: parent.right }
                         updateState: model.updateState
                         progress: model.progress
                         version: remoteVersion
@@ -237,7 +237,7 @@ Item {
 
                     delegate: ClickUpdateDelegate {
                         objectName: "updatesClickUpdate" + index
-                        width: clickUpdates.width
+                        anchors { left: parent.left; right: parent.right }
                         updateState: model.updateState
                         progress: model.progress
                         version: remoteVersion
@@ -289,7 +289,7 @@ Item {
 
                     delegate: UpdateDelegate {
                         objectName: "updatesInstalledUpdate-" + index
-                        width: installed.width
+                        anchors { left: parent.left; right: parent.right }
                         version: remoteVersion
                         size: model.size
                         name: title
@@ -298,6 +298,11 @@ Item {
                         changelog: model.changelog
                         updateState: Update.StateInstalled
                         updatedAt: model.updatedAt
+
+                        onLaunch: {
+                            console.warn('launch')
+                            clickManager.launch(model.identifier)
+                        }
                     }
                 }
             }
