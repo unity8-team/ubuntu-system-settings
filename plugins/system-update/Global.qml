@@ -55,7 +55,10 @@ Item {
     RowLayout {
         id: checking
         spacing: units.gu(2)
-        anchors.fill: parent
+        anchors {
+            fill: parent
+            margins: units.gu(2)
+        }
 
         Behavior on opacity {
             UbuntuNumberAnimation {}
@@ -74,7 +77,6 @@ Item {
 
         ActivityIndicator {
             running: parent.visible
-            Layout.leftMargin: units.gu(2)
         }
 
         Label {
@@ -86,13 +88,15 @@ Item {
             text: i18n.tr("Stop")
             onClicked: g.stop()
             Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
-            Layout.rightMargin: units.gu(2)
         }
     }
 
     RowLayout {
         id: install
-        anchors.fill: parent
+        anchors {
+            fill: parent
+            margins: units.gu(2)
+        }
         spacing: units.gu(2)
         Behavior on opacity {
             UbuntuNumberAnimation {}
@@ -110,7 +114,6 @@ Item {
                           "%1 updates available",
                           updatesCount).arg(updatesCount)
             Layout.fillWidth: true
-            Layout.leftMargin: units.gu(2)
         }
 
         Button {
@@ -125,7 +128,6 @@ Item {
             onClicked: g.requestInstall()
             color: theme.palette.normal.positive
             strokeColor: "transparent"
-            Layout.rightMargin: units.gu(2)
         }
     }
 
