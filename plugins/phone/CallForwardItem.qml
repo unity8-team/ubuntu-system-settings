@@ -19,9 +19,8 @@
  */
 
 import QtQuick 2.4
-import SystemSettings.ListItems 1.0 as SettingsListItems
 import Ubuntu.Components 1.3
-import Ubuntu.Components.ListItems 1.0 as ListItems
+import Ubuntu.Components.ListItems 1.3 as ListItem
 import Ubuntu.Components.Themes.Ambiance 0.1
 import MeeGo.QOfono 0.2
 import "callForwardingUtils.js" as Utils
@@ -96,7 +95,7 @@ Column {
         State {
             name: "failed"
             when: d._failed
-            PropertyChanges { target: control; enabled: false }
+            PropertyChanges { target: control; enabled: false; control: check }
             PropertyChanges { target: check; checked: false }
             PropertyChanges { target: failed; visible: true }
             PropertyChanges { target: activity; visible: false }
@@ -111,12 +110,14 @@ Column {
         State {
             name: "requesting"
             when: d._editing && d._pending
+            PropertyChanges { target: control; control: activity }
             PropertyChanges { target: check; enabled: false; visible: false }
             PropertyChanges { target: current; enabled: false; visible: true }
         },
         State {
             name: "pending"
             when: d._pending
+            PropertyChanges { target: control; control: activity }
             PropertyChanges { target: check; enabled: false; visible: false }
             PropertyChanges { target: current; enabled: false; visible: false }
         },
@@ -134,36 +135,27 @@ Column {
         }
     ]
 
-    ListItems.ThinDivider { anchors { left: parent.left; right: parent.right }}
+    ListItem.ThinDivider { anchors { left: parent.left; right: parent.right }}
 
-    SettingsListItems.Standard {
+    ListItem.Standard {
         id: control
         onClicked: check.trigger(!check.checked)
-
-        CheckBox {
+        control: CheckBox {
             id: check
             objectName: "check_" + rule
             checked: callForwarding[rule] !== ""
             onTriggered: Utils.checked(checked)
             visible: !activity.running
-            SlotsLayout.position: SlotsLayout.Trailing
-
-            ActivityIndicator {
-                id: activity
-                anchors.centerIn: parent
-                running: d._pending
-                visible: running
-            }
         }
     }
 
-    SettingsListItems.Standard {
+    ListItem.Standard {
         id: input
         visible: false
+        height: visible ? units.gu(6) : 0
         /* TRANSLATORS: This string will be truncated on smaller displays. */
         text: i18n.tr("Forward to")
-
-        TextField {
+        control: TextField {
             id: field
             objectName: "field_" + rule
             horizontalAlignment: TextInput.AlignRight
@@ -202,7 +194,7 @@ Column {
         }
     }
 
-    SettingsListItems.SingleValue {
+    ListItem.SingleValue {
         id: current
         objectName: "current_" + rule
         visible: value
@@ -224,6 +216,12 @@ Column {
         verticalAlignment: Text.AlignVCenter
         color: theme.palette.normal.negative
         text: i18n.tr("Call forwarding can’t be changed right now.")
+    }
+
+    ActivityIndicator {
+        id: activity
+        running: d._pending
+        visible: running
     }
 
     Connections {

@@ -1,7 +1,7 @@
 /*
  * This file is part of system-settings
  *
- * Copyright (C) 2013-2015 Canonical Ltd.
+ * Copyright (C) 2013 Canonical Ltd.
  *
  * Contact: Sebastien Bacher <sebastien.bacher@canonical.com>
  *
@@ -20,8 +20,8 @@
 
 import QtQuick 2.4
 import SystemSettings 1.0
-import SystemSettings.ListItems 1.0 as SettingsListItems
 import Ubuntu.Components 1.3
+import Ubuntu.Components.ListItems 1.3 as ListItem
 import Ubuntu.History 0.1
 import "dateUtils.js" as DateUtils
 
@@ -83,7 +83,7 @@ ItemPage {
             verticalCenter: parent.verticalCenter
         }
 
-        Item {
+        ListItem.Base {
             anchors.left: parent.left
             anchors.right: parent.right
             height: lastCalledCol.height + units.gu(6)
@@ -112,10 +112,9 @@ ItemPage {
         }
     }
 
-    SettingsListItems.SingleControl {
+    ListItem.SingleControl {
         anchors.bottom: parent.bottom
-
-        Button {
+        control: Button {
             width: parent.width - units.gu(4)
             text: i18n.tr("Call")
             onClicked: Qt.openUrlExternally("tel:///" + encodeURIComponent(

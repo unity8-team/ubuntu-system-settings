@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014-2015 Canonical Ltd
+ * Copyright (C) 2014 Canonical Ltd
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as
@@ -19,22 +19,28 @@
  *
 */
 import QtQuick 2.4
-import SystemSettings.ListItems 1.0 as SettingsListItems
+import Ubuntu.Components 1.3
+import Ubuntu.Components.ListItems 1.3 as ListItem
 
 Column {
 
-    SettingsListItems.StandardProgression {
+    ListItem.Standard {
         text: i18n.tr("Call forwarding")
+        progression: true
         enabled: false
     }
 
-    SettingsListItems.StandardProgression {
+    ListItem.Standard {
         text: i18n.tr("Call waiting")
+        progression: true
         enabled: false
     }
 
-    SettingsListItems.StandardProgression {
+    ListItem.Divider {}
+
+    ListItem.Standard {
         text: i18n.tr("Services")
+        progression: true
         enabled: false
     }
 }
