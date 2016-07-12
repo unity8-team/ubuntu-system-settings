@@ -324,6 +324,7 @@ void ClickUpdateManager::parseMetadata(const QJsonArray &array)
         auto size = object["binary_filesize"].toInt();
         auto title = object["title"].toString();
         auto revision = object["revision"].toInt();
+        auto package_name = object["package_name"].toString();
         if (m_updates.contains(name)) {
             QSharedPointer<Update> update = m_updates.value(name);
             update->setRemoteVersion(version);
@@ -336,6 +337,7 @@ void ClickUpdateManager::parseMetadata(const QJsonArray &array)
                 update->setTitle(title);
                 update->setRevision(revision);
                 update->setState(Update::State::StateAvailable);
+                update->setPackageName(package_name);
 
                 Click::TokenDownloader* dl = m_downloadFactory->create(m_client, update, this);
                 dl->setAuthToken(m_authToken);

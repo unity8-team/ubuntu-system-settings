@@ -33,7 +33,7 @@ namespace {
 const QString ALL = "kind, id, local_version, remote_version, revision, \
     installed, created_at_utc, updated_at_utc, title, download_hash, size, \
     icon_url, download_url, command, changelog, token, \
-    update_state, progress, automatic, error";
+    update_state, progress, automatic, error, package_name";
 
 const QString GET_SINGLE = "SELECT " + ALL + " FROM updates WHERE id=:id \
     AND revision=:revision";
@@ -129,11 +129,12 @@ void UpdateDb::add(const QSharedPointer<Update> &update)
               "created_at_utc, download_hash, title, size, icon_url,"
               "download_url, changelog, command, token, progress,"
               "local_version, remote_version, kind, update_state, automatic,"
-              "error) "
+              "error, package_name) "
               "VALUES (:id, :revision, :installed, :created_at_utc,"
               ":download_hash, :title, :size, :icon_url, :download_url,"
               ":changelog, :command, :token, :progress, :local_version,"
-              ":remote_version, :kind, :update_state, :automatic, :error)");
+              ":remote_version, :kind, :update_state, :automatic, :error,"
+              ":package_name)");
     q.bindValue(":id", update->identifier());
     q.bindValue(":revision", update->revision());
     q.bindValue(":installed", update->installed());
@@ -157,6 +158,7 @@ void UpdateDb::add(const QSharedPointer<Update> &update)
     );
     q.bindValue(":automatic", update->automatic());
     q.bindValue(":error", update->error());
+    q.bindValue(":package_name", update->packageName());
 
     if (!q.exec()) {
         qCritical() << "Could not add update" << q.lastError().text();
@@ -214,6 +216,7 @@ void UpdateDb::update(const QSharedPointer<Update> &update, const QSqlQuery &que
     update->setProgress(query.value("progress").toInt());
     update->setAutomatic(query.value("automatic").toBool());
     update->setError(query.value("error").toString());
+    update->setPackageName(query.value("package_name").toString());
 }
 
 void UpdateDb::setInstalled(const QString &id, const uint &revision)
@@ -367,6 +370,7 @@ bool UpdateDb::createDb()
                 "progress INTEGER,"
                 "automatic INTEGER DEFAULT 0,"
                 "error TEXT,"
+                "package_name TEXT,"
                 "PRIMARY KEY (id, revision))");
     if (Q_UNLIKELY(!ok)) {
         m_db.rollback();

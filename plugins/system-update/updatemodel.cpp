@@ -81,6 +81,7 @@ QHash<int, QByteArray> UpdateModel::roleNames() const
         names[ProgressRole] = "progress";
         names[AutomaticRole] = "automatic";
         names[ErrorRole] = "error";
+        names[PackageNameRole] = "packageName";
     }
 
     return names;
@@ -142,6 +143,8 @@ QVariant UpdateModel::data(const QModelIndex &index, int role) const
         return u->automatic();
     case ErrorRole:
         return u->error();
+    case PackageNameRole:
+        return u->packageName();
     }
     return QVariant();
 }

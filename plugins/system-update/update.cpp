@@ -47,6 +47,7 @@ Update::Update(QObject *parent)
     , m_token("")
     , m_command("")
     , m_automatic(false)
+    , m_packageName("")
 {
 }
 
@@ -99,11 +100,6 @@ QString Update::downloadUrl() const
     return m_downloadUrl;
 }
 
-QString Update::error() const
-{
-    return m_error;
-}
-
 QString Update::iconUrl() const
 {
     return m_iconUrl;
@@ -153,6 +149,17 @@ QStringList Update::command() const
 {
     return m_command;
 }
+
+QString Update::error() const
+{
+    return m_error;
+}
+
+QString Update::packageName() const
+{
+    return m_packageName;
+}
+
 
 void Update::setKind(const Update::Kind &kind)
 {
@@ -215,14 +222,6 @@ void Update::setDownloadUrl(const QString &downloadUrl)
     if (m_downloadUrl != downloadUrl) {
         m_downloadUrl = downloadUrl;
         Q_EMIT downloadUrlChanged();
-    }
-}
-
-void Update::setError(const QString &error)
-{
-    if (m_error != error) {
-        m_error = error;
-        Q_EMIT errorChanged();
     }
 }
 
@@ -327,6 +326,22 @@ void Update::setAutomatic(const bool automatic)
     }
 }
 
+void Update::setError(const QString &error)
+{
+    if (m_error != error) {
+        m_error = error;
+        Q_EMIT errorChanged();
+    }
+}
+
+void Update::setPackageName(const QString &packageName)
+{
+    if (m_packageName != packageName) {
+        m_packageName = packageName;
+        Q_EMIT packageNameChanged();
+    }
+}
+
 bool Update::isUpdateRequired()
 {
     int result = debVS.CmpVersion(m_localVersion.toUtf8().data(),
@@ -364,6 +379,7 @@ bool Update::deepEquals(const Update *other) const
     if (progress() != other->progress()) return false;
     if (automatic() != other->automatic()) return false;
     if (error() != other->error()) return false;
+    if (packageName() != other->packageName()) return false;
 
     return true;
 }

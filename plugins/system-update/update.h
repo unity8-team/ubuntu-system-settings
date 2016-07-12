@@ -71,6 +71,8 @@ class Update : public QObject
     Q_PROPERTY(bool automatic READ automatic WRITE setAutomatic
             NOTIFY automaticChanged)
     Q_PROPERTY(QString error READ error WRITE setError NOTIFY errorChanged)
+    Q_PROPERTY(QString packageName READ packageName WRITE setPackageName
+               NOTIFY packageNameChanged)
 public:
     explicit Update(QObject *parent = 0);
     ~Update();
@@ -118,7 +120,6 @@ public:
     QDateTime updatedAt() const;
     QString downloadHash() const;
     QString downloadUrl() const;
-    QString error() const;
     QString iconUrl() const;
     bool installed() const;
     int progress() const;
@@ -129,6 +130,8 @@ public:
     QString token() const;
     QStringList command() const;
     bool automatic() const;
+    QString error() const;
+    QString packageName() const;
 
     void setKind(const Kind &kind);
     void setIdentifier(const QString &identifier);
@@ -140,7 +143,6 @@ public:
     void setUpdatedAt(const QDateTime &updatedAt);
     void setDownloadHash(const QString &downloadHash);
     void setDownloadUrl(const QString &downloadUrl);
-    void setError(const QString &error);
     void setIconUrl(const QString &iconUrl);
     void setInstalled(const bool installed);
     void setProgress(const int &progress);
@@ -151,6 +153,8 @@ public:
     void setToken(const QString &token);
     void setCommand(const QStringList &command);
     void setAutomatic(const bool automatic);
+    void setError(const QString &error);
+    void setPackageName(const QString &error);
 
     bool isUpdateRequired();
 
@@ -175,7 +179,6 @@ signals:
     void updatedAtChanged();
     void downloadHashChanged();
     void downloadUrlChanged();
-    void errorChanged();
     void iconUrlChanged();
     void progressChanged();
     void stateChanged();
@@ -185,6 +188,8 @@ signals:
     void tokenChanged();
     void commandChanged();
     void automaticChanged();
+    void errorChanged();
+    void packageNameChanged();
 
 protected:
     Kind m_kind;
@@ -208,6 +213,7 @@ protected:
     QString m_token;
     QStringList m_command;
     bool m_automatic;
+    QString m_packageName;
 };
 } // UpdatePlugin
 

@@ -73,7 +73,8 @@ public:
       AutomaticRole,
       DownloadIdRole,
       ErrorRole,
-      LastRole = ErrorRole
+      PackageNameRole,
+      LastRole = PackageNameRole
     };
 
     explicit UpdateModel(QObject *parent = 0);

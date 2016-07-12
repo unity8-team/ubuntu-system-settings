@@ -252,6 +252,7 @@ private slots:
         app->setProgress(50);
         app->setState(Update::State::StateInstallPaused);
         app->setError("Failure");
+        app->setPackageName("testapp");
 
         m_db->add(app);
         m_model->refresh();
@@ -273,9 +274,10 @@ private slots:
         QCOMPARE(m_model->data(idx, UpdateModel::TokenRole).toString(), app->token());
         QCOMPARE(m_model->data(idx, UpdateModel::InstalledRole).toBool(), false);
         QCOMPARE(m_model->data(idx, UpdateModel::AutomaticRole).toBool(), app->automatic());
-        QCOMPARE(m_model->data(idx, UpdateModel::ErrorRole).toString(), QString("Failure"));
         QCOMPARE(m_model->data(idx, UpdateModel::UpdateStateRole).toUInt(), (uint) Update::State::StateInstallPaused);
         QCOMPARE(m_model->data(idx, UpdateModel::ProgressRole).toInt(), 50);
+        QCOMPARE(m_model->data(idx, UpdateModel::ErrorRole).toString(), QString("Failure"));
+        QCOMPARE(m_model->data(idx, UpdateModel::PackageNameRole).toString(), QString("testapp"));
 
         // Verify that the date ain't empty.
         QVERIFY(m_model->data(idx, UpdateModel::CreatedAtRole).toDateTime().isValid());
@@ -421,6 +423,7 @@ private slots:
         QVERIFY(names[UpdateModel::Roles::ProgressRole] == "progress");
         QVERIFY(names[UpdateModel::Roles::AutomaticRole] == "automatic");
         QVERIFY(names[UpdateModel::Roles::ErrorRole] == "error");
+        QVERIFY(names[UpdateModel::Roles::PackageNameRole] == "packageName");
     }
 private:
     UpdateDb *m_db = nullptr;
