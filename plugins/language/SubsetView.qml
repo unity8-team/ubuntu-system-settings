@@ -20,8 +20,8 @@
 
 import QtQuick 2.4
 import SystemSettings 1.0
-import SystemSettings.ListItems 1.0 as SettingsListItems
 import Ubuntu.Components 1.3
+import Ubuntu.Components.ListItems 1.3 as ListItem
 
 ListView {
     id: root
@@ -41,14 +41,13 @@ ListView {
     flickableDirection: Flickable.VerticalFlick
 
     section.property: "subset"
-    section.delegate: SettingsItemTitle {
+    section.delegate: ListItem.Standard {
         text: section == "true" ? subsetLabel : supersetLabel
     }
 
-    delegate: SettingsListItems.Standard {
+    delegate: ListItem.Standard {
         text: model.display
-
-        CheckBox {
+        control: CheckBox {
             checked: model.checked
             onCheckedChanged: {
                 var element = model.index < root.model.subset.length ?

@@ -19,9 +19,9 @@
  */
 
 import QtQuick 2.4
+import QtSystemInfo 5.5
 import GSettings 1.0
 import SystemSettings 1.0
-import SystemSettings.ListItems 1.0 as SettingsListItems
 import Ubuntu.Components 1.3
 import Ubuntu.Components.Popups 1.3
 import Ubuntu.Components.ListItems 1.3 as ListItem
@@ -34,8 +34,19 @@ ItemPage {
 
     title: i18n.tr("Language & Text")
 
+    InputDeviceManager {
+        id: keyboardsModel
+        filter: InputInfo.Keyboard
+    }
+
+    property bool externalKeyboardPresent: keyboardsModel.count > 0
+
     UbuntuLanguagePlugin {
         id: plugin
+    }
+
+    OnScreenKeyboardPlugin {
+        id: oskPlugin
     }
 
     Component {
@@ -48,12 +59,6 @@ ItemPage {
                 })
             }
         }
-    }
-
-    Component {
-        id: keyboardLayouts
-
-        KeyboardLayouts {}
     }
 
     Component {
@@ -97,55 +102,62 @@ ItemPage {
             anchors.left: parent.left
             anchors.right: parent.right
 
-            SettingsItemTitle {
-                text: i18n.tr("Language")
-            }
-
-            SettingsListItems.Standard {
-                id: base
-                height: layout.height + divider.height
-                objectName: "displayLanguage"
-                property int currentLanguage: plugin.currentLanguage
+            Menus.StandardMenu {
+                iconSource: "image://theme/language-chooser"
                 text: i18n.tr("Display language…")
-                layout.subtitle.text: plugin.languageNames[plugin.currentLanguage]
-                layout.subtitle.objectName: "currentLanguage"
-
-                Icon {
-                    source: "image://theme/language-chooser"
-                    height: units.gu(2.5)
-                    width: height
-                    SlotsLayout.position: SlotsLayout.First
+                objectName: "displayLanguage"
+                showDivider: false
+                component: Label {
+                    property int currentLanguage: plugin.currentLanguage
+                    objectName: "currentLanguage"
+                    text: plugin.languageNames[plugin.currentLanguage]
+                    elide: Text.ElideRight
+                    opacity: enabled ? 1.0 : 0.5
                 }
+
                 onClicked: PopupUtils.open(displayLanguage)
             }
 
-            SettingsListItems.SingleValueProgression {
-                text: i18n.tr("Keyboard layouts")
-                value: plugin.keyboardLayoutsModel.subset.length == 1 ?
-                       plugin.keyboardLayoutsModel.superset[plugin.keyboardLayoutsModel.subset[0]][0] :
-                       plugin.keyboardLayoutsModel.subset.length
-                onClicked: pageStack.push(keyboardLayouts)
+            ListItem.Divider {}
+
+            ListItem.SingleValue {
+                text: externalKeyboardPresent ? i18n.tr("On-screen keyboard") :
+                                                i18n.tr("Keyboard layouts")
+                progression: true
+                value: oskPlugin.keyboardLayoutsModel.subset.length == 1 ?
+                       oskPlugin.keyboardLayoutsModel.superset[oskPlugin.keyboardLayoutsModel.subset[0]][0] :
+                       oskPlugin.keyboardLayoutsModel.subset.length
+                onClicked: pageStack.push(Qt.resolvedUrl("KeyboardLayouts.qml"), {
+                    plugin: oskPlugin
+                })
             }
 
-            SettingsItemTitle {
-                text: i18n.tr("Correction")
+            ListItem.Standard {
+                text: i18n.tr("External keyboard")
+                progression: true
+                showDivider: false
+                onClicked: pageStack.push(Qt.resolvedUrl("PageHardwareKeyboard.qml"))
+                visible: externalKeyboardPresent
             }
 
-            SettingsListItems.SingleValueProgression {
+            ListItem.Divider {}
+
+            ListItem.SingleValue {
                 visible: showAllUI
 
                 text: i18n.tr("Spell checking")
                 value: plugin.spellCheckingModel.subset.length == 1 ?
                        plugin.spellCheckingModel.superset[plugin.spellCheckingModel.subset[0]][0] :
                        plugin.spellCheckingModel.subset.length
+                progression: true
 
                 onClicked: pageStack.push(spellChecking)
             }
 
-            SettingsListItems.Standard {
+            ListItem.Standard {
                 text: i18n.tr("Spell checking")
 
-                Switch {
+                control: Switch {
                     property bool serverChecked: settings.spellChecking
                     onServerCheckedChanged: checked = serverChecked
                     Component.onCompleted: checked = serverChecked
@@ -153,10 +165,10 @@ ItemPage {
                 }
             }
 
-            SettingsListItems.Standard {
+            ListItem.Standard {
                 text: i18n.tr("Auto correction")
 
-                Switch {
+                control: Switch {
                     property bool serverChecked: settings.autoCompletion
                     onServerCheckedChanged: checked = serverChecked
                     Component.onCompleted: checked = serverChecked
@@ -164,10 +176,10 @@ ItemPage {
                 }
             }
 
-            SettingsListItems.Standard {
+            ListItem.Standard {
                 text: i18n.tr("Word suggestions")
 
-                Switch {
+                control: Switch {
                     property bool serverChecked: settings.predictiveText
                     onServerCheckedChanged: checked = serverChecked
                     Component.onCompleted: checked = serverChecked
@@ -175,13 +187,13 @@ ItemPage {
                 }
             }
 
-            SettingsListItems.Standard {
-                text: i18n.tr("Auto capitalization")
-                layout.summary.text: i18n.tr(
-                    "Turns on Shift to capitalize the first letter of each sentence."
-                )
+            ListItem.Divider {
+            }
 
-                Switch {
+            ListItem.Standard {
+                text: i18n.tr("Auto capitalization")
+
+                control: Switch {
                     property bool serverChecked: settings.autoCapitalization
                     onServerCheckedChanged: checked = serverChecked
                     Component.onCompleted: checked = serverChecked
@@ -189,13 +201,17 @@ ItemPage {
                 }
             }
 
-            SettingsListItems.Standard {
+            ListItem.Caption {
+                text: i18n.tr("Turns on Shift to capitalize the first letter of each sentence.")
+            }
+
+            ListItem.ThinDivider {
+            }
+
+            ListItem.Standard {
                 text: i18n.tr("Auto punctuation")
 
-                /* TODO: update the string to mention quotes/brackets once the osk does that */
-                layout.summary.text: i18n.tr("Inserts a period when you tap Space twice.")
-
-                Switch {
+                control: Switch {
                     property bool serverChecked: settings.doubleSpaceFullStop
                     onServerCheckedChanged: checked = serverChecked
                     Component.onCompleted: checked = serverChecked
@@ -203,10 +219,18 @@ ItemPage {
                 }
             }
 
-            SettingsListItems.Standard {
+            ListItem.Caption {
+                /* TODO: update the string to mention quotes/brackets once the osk does that */
+                text: i18n.tr("Inserts a period when you tap Space twice.")
+            }
+
+            ListItem.ThinDivider {
+            }
+
+            ListItem.Standard {
                 text: i18n.tr("Keyboard sound")
 
-                Switch {
+                control: Switch {
                     property bool serverChecked: settings.keyPressFeedback
                     onServerCheckedChanged: checked = serverChecked
                     Component.onCompleted: checked = serverChecked
@@ -214,10 +238,10 @@ ItemPage {
                 }
             }
 
-            SettingsListItems.Standard {
+            ListItem.Standard {
                 text: i18n.tr("Keyboard vibration")
 
-                Switch {
+                control: Switch {
                     property bool serverChecked: settings.keyPressHapticFeedback
                     onServerCheckedChanged: checked = serverChecked
                     Component.onCompleted: checked = serverChecked

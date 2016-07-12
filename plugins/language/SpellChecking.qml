@@ -21,8 +21,8 @@
 import QtQuick 2.4
 import GSettings 1.0
 import SystemSettings 1.0
-import SystemSettings.ListItems 1.0 as SettingsListItems
 import Ubuntu.Components 1.3
+import Ubuntu.Components.ListItems 1.3 as ListItem
 import Ubuntu.SystemSettings.LanguagePlugin 1.0
 
 ItemPage {
@@ -38,12 +38,12 @@ ItemPage {
         schema.id: "com.canonical.keyboard.maliit"
     }
 
-    SettingsListItems.Standard {
+    ListItem.Standard {
         id: item
 
         text: i18n.tr("Spell checking")
 
-        Switch {
+        control: Switch {
             property bool serverChecked: settings.spellChecking
             onServerCheckedChanged: checked = serverChecked
             Component.onCompleted: checked = serverChecked
