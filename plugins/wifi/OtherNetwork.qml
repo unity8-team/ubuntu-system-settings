@@ -340,20 +340,21 @@ Component {
             selectedIndex: {
                 switch(keyMgmt) {
                 case 'none': // WEP
+                    return 0;
+                case 'wpa-eap': // WPA-Enterprise
+                    return 2;
+                case 'wep': // WEP
                     return 3;
                 case 'ieee8021x': // Dynamic WEP
                     return 4;
-                case 'wpa-none': // Ad-Hoc WPA-PSK
-                case 'wpa-psk': // infrastructure WPA-PSK
-                    return 1;
-                case 'wpa-eap': // WPA-Enterprise
-                    return 2;
                 case 'wapi-psk': // WAPI Personal
                     return 6;
                 case 'wapi-cert': // WAPI Certificate
                     return 7;
-                default:
-                    return 0;
+                case 'wpa-none': // Ad-Hoc WPA-PSK
+                case 'wpa-psk': // infrastructure WPA-PSK
+                default: // Default is WPA
+                    return 1;
                 }
             }
         }
