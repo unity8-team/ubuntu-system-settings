@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 Canonical Ltd
+ * Copyright (C) 2014-2015 Canonical Ltd
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as
@@ -17,40 +17,36 @@
  * Ken Vandine <ken.vandine@canonical.com>
  * Jonas G. Drange <jonas.drange@canonical.com>
  *
-*/
+ */
 import QtQuick 2.4
 import GSettings 1.0
 import SystemSettings 1.0
+import SystemSettings.ListItems 1.0 as SettingsListItems
 import Ubuntu.Components 1.3
-import Ubuntu.Components.ListItems 1.3 as ListItem
 
 Column {
-
     property var sims
 
     Repeater {
         model: sims
 
         Column {
-
             anchors { left: parent.left; right: parent.right }
 
             SettingsItemTitle { text: sims[index].title }
 
-            ListItem.Standard {
+            SettingsListItems.StandardProgression {
                 objectName: "callWaitSim" + index
                 text: i18n.tr("Call waiting")
-                progression: true
                 onClicked: pageStack.push(Qt.resolvedUrl("CallWaiting.qml"), {
                     sim: sims[index],
                     headerTitle: sims[index].title
                 })
             }
 
-            ListItem.SingleValue {
+            SettingsListItems.SingleValueProgression {
                 objectName: "callFwdSim" + index
                 text: i18n.tr("Call forwarding")
-                progression: true
                 value: sims[index].getCallForwardingSummary()
                 onClicked: pageStack.push(Qt.resolvedUrl("CallForwarding.qml"), {
                     sim: sims[index],
@@ -58,10 +54,9 @@ Column {
                 })
             }
 
-            ListItem.Standard {
+            SettingsListItems.StandardProgression {
                 objectName: "simServicesSim" + index
                 text: i18n.tr("Services")
-                progression: true
                 enabled: {
                     var num;
                     var map = sims[index].simMng.serviceNumbers;
@@ -80,10 +75,6 @@ Column {
                     sim: sims[index].simMng,
                     headerTitle: sims[index].title
                 })
-            }
-
-            ListItem.Divider {
-                visible: index !== (sims.length - 1)
             }
 
             Binding {

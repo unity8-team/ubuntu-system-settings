@@ -20,8 +20,9 @@
 
 import QtQuick 2.4
 import SystemSettings 1.0
+import SystemSettings.ListItems 1.0 as SettingsListItems
 import Ubuntu.Components 1.3
-import Ubuntu.Components.ListItems 1.3 as ListItem
+import Ubuntu.Components.ListItems 1.3 as ListItems
 import MeeGo.QOfono 0.2
 
 ItemPage {
@@ -42,7 +43,7 @@ ItemPage {
             callWaitingIndicator.running = false;
         }
         onVoiceCallWaitingComplete: {
-            //When the property change is complete, the value of checked should always be in sync with serverChecked 
+            //When the property change is complete, the value of checked should always be in sync with serverChecked
             callWaitingSwitch.checked = callWaitingSwitch.serverChecked
             /* Log some additional output to help debug when things don't work */
             console.warn('callSettings, onVoiceCallWaitingComplete modem: ' + modemPath + ' success: ' + success + ' ' + voiceCallWaiting);
@@ -50,54 +51,39 @@ ItemPage {
         }
     }
 
-    ActivityIndicator {
-        id: callWaitingIndicator
-        running: true
-        visible: running && attached
-    }
-
-    Switch {
-        id: callWaitingSwitch
-        objectName: "callWaitingSwitch"
-        visible: !callWaitingIndicator.running
-        enabled: callSettings.ready && attached
-        property bool serverChecked: callSettings.voiceCallWaiting !== "disabled"
-        onServerCheckedChanged: checked = serverChecked
-        Component.onCompleted: checked = serverChecked
-        onTriggered: {
-            callWaitingIndicator.running = true;
-            if (checked)
-                callSettings.voiceCallWaiting = "enabled";
-            else
-                callSettings.voiceCallWaiting = "disabled";
-        }
-    }
-
     Column {
         anchors.fill: parent
 
-        ListItem.Standard {
+        SettingsListItems.Standard {
             id: callWaitingItem
             text: i18n.tr("Call waiting")
-            control: callWaitingIndicator.running ?
-                     callWaitingIndicator : callWaitingSwitch
+
+            Switch {
+                id: callWaitingSwitch
+                objectName: "callWaitingSwitch"
+                visible: !callWaitingIndicator.running
+                enabled: callSettings.ready && attached
+                property bool serverChecked: callSettings.voiceCallWaiting !== "disabled"
+                onServerCheckedChanged: checked = serverChecked
+                Component.onCompleted: checked = serverChecked
+                onTriggered: {
+                    callWaitingIndicator.running = true;
+                    if (checked)
+                        callSettings.voiceCallWaiting = "enabled";
+                    else
+                        callSettings.voiceCallWaiting = "disabled";
+                }
+                ActivityIndicator {
+                    id: callWaitingIndicator
+                    anchors.centerIn: parent
+                    running: callWaitingIndicator.running
+                    visible: running && attached
+                }
+            }
         }
 
-        ListItem.Base {
-            height: textItem.height + units.gu(2)
-            Label {
-                id: textItem
-                anchors {
-                    left: parent.left
-                    right: parent.right
-                    verticalCenter: parent.verticalCenter
-                }
-
-                text: i18n.tr("Lets you answer or start a new call while on another call, and switch between them")
-                horizontalAlignment: Text.AlignHCenter
-                wrapMode: Text.WordWrap
-            }
-            showDivider: false
+        ListItems.Caption {
+            text: i18n.tr("Lets you answer or start a new call while on another call, and switch between them")
         }
     }
 }
