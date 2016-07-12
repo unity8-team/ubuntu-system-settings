@@ -460,6 +460,21 @@ private slots:
         q.exec("SELECT * FROM updates");
         QVERIFY(!q.next());
     }
+    void testUpdateAfterInstalled()
+    {
+        QSharedPointer<Update> installed = QSharedPointer<Update>(new Update);
+        installed->setRevision(100);
+        installed->setIdentifier("com.ubuntu.myapp");
+
+        m_instance->add(installed);
+        m_instance->setInstalled(installed->identifier(), installed->revision());
+
+        // Add a new revision of it.
+        installed->setRevision(101);
+        m_instance->add(installed);
+
+        QCOMPARE(m_instance->updates((uint) UpdateModel::Filter::All).size(), 2);
+    }
 private:
     UpdateDb *m_instance = nullptr;
     QString m_dbfile;

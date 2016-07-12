@@ -300,10 +300,10 @@ Item {
                         updatedAt: model.updatedAt
 
                         onLaunch: {
-                            console.warn('"%1_%2_%3"').arg(identifier).arg(packageName).arg(remoteVersion);
+                            console.warn("%1_%2_%3".arg(identifier).arg(packageName).arg(remoteVersion));
                             /* The Application ID is the string
                             "$(click_package)_$(application)_$(version) */
-                            clickManager.launch("%1_%2_%3").arg(identifier).arg(packageName).arg(remoteVersion);
+                            clickManager.launch("%1_%2_%3".arg(identifier).arg(packageName).arg(remoteVersion));
                         }
                     }
                 }
