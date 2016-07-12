@@ -23,6 +23,7 @@
 #include "wifidbushelper.h"
 #include "previousnetworkmodel.h"
 #include "certhandler.h"
+#include "wifi.h"
 
 namespace {
 
@@ -43,6 +44,7 @@ QObject* dbusProvider(QQmlEngine* engine, QJSEngine* /* scriptEngine */)
 void BackendPlugin::registerTypes(const char *uri)
 {
     Q_ASSERT(uri == QLatin1String("Ubuntu.SystemSettings.Wifi"));
+    qmlRegisterType<Wifi>(uri, 1, 0, "UbuntuWifiPanel");
     qmlRegisterType<UnityMenuModelStack>(uri, 1, 0, "UnityMenuModelStack");
     qmlRegisterSingletonType<WifiDbusHelper>(uri, 1, 0, "DbusHelper", dbusProvider);
     qmlRegisterType<PreviousNetworkModel>(uri, 1, 0, "PreviousNetworkModel");

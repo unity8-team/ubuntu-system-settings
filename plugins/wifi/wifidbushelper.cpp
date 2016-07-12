@@ -66,6 +66,7 @@ void WifiDbusHelper::connect(QString ssid, int security, int auth, QStringList u
     QVariantMap wireless;
     wireless["ssid"] = ssid.toLatin1();
 
+    // TODO: ENUMS!
     // security:
     // 0: None
     // 1: WPA & WPA2 Personal
@@ -103,6 +104,11 @@ void WifiDbusHelper::connect(QString ssid, int security, int auth, QStringList u
             wireless_security["auth-alg"] = QStringLiteral("leap");
             wireless_security["leap-username"] = usernames[0];
             wireless_security["leap-password"] = password[0];
+        } else if (security == 6) { // WAPI Personal
+            wireless_security["key-mgmt"] = QStringLiteral("wapi-psk");
+            wireless_security["psk"] = password[0];
+        } else if (security == 7) { // WAPI Cert
+            wireless_security["key-mgmt"] = QStringLiteral("wapi-cert");
         }
         configuration["802-11-wireless-security"] = wireless_security;
     }
@@ -155,6 +161,10 @@ void WifiDbusHelper::connect(QString ssid, int security, int auth, QStringList u
             if (password[1] == "false") {wireless_802_1x["password-flags"]  = uint(2);}
             if (certs[5] != "2") {wireless_802_1x["phase1-peapver"] = certs[5]; }
             // wireless_802_1x["phase1-peaplabel"] = QString("1"); #jkb:let us unset this until problems are reported.
+        } else if (security == 7) { // WAPI Cert
+            wireless_802_1x["eap"] = QStringList("wapi");
+            if (certs[0] != "") {wireless_802_1x["ca-cert"] = cacert;}
+            if (certs[1] != "") {wireless_802_1x["client-cert"] = clientcert;}
         }
 
         if (auth == 1 || auth == 3 || auth == 4 ){ // only for TTLS, FAST and PEAP

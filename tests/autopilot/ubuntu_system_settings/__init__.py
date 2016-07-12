@@ -1702,6 +1702,10 @@ class OtherNetwork(
                                              text=_('Dynamic WEP (802.1x)'))
         elif security == 'leap':
             item = s_list.wait_select_single('*', text=_('LEAP'))
+        elif security == 'wapi-psk':
+            item = s_list.wait_select_single('*', text=_('WAPI Personal'))
+        elif security == 'wapi-cert':
+            item = s_list.wait_select_single('*', text=_('WAPI Certificate'))
         elif security is not None:
             raise ValueError('security type %s is not valid' % security)
 

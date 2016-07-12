@@ -29,8 +29,8 @@ from time import sleep
 
 from autopilot import platform
 from autopilot.matchers import Eventually
-from dbusmock.templates.networkmanager import (InfrastructureMode,
-                                               NM80211ApSecurityFlags)
+from .networkmanager import (InfrastructureMode,
+                             NM80211ApSecurityFlags)
 from fixtures import EnvironmentVariable
 from gi.repository import UPowerGlib
 from testtools.matchers import Equals, NotEquals, GreaterThan

@@ -164,8 +164,7 @@ ItemPage {
                 PopupUtils.open(otherNetworLoader.item, wifibase, {
                     'ssid': pluginOptions['ssid'],
                     'bssid': pluginOptions['bssid'],
-                    'keyMgmt': pluginOptions['key-mgmt'],
-                    'eap': pluginOptions['eap']
+                    'keyMgmt': pluginOptions['key-mgmt']
                 });
             }
         }
