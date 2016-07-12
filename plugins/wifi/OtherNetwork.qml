@@ -55,6 +55,8 @@ Component {
                            password.length === 10 ||
                            password.length === 13 ||
                            password.length === 26;
+                case 6: // WAPI Personal
+                    return password.length < 127
                 case 0: // None
                 default:
                     return true;
@@ -346,7 +348,7 @@ Component {
                     return 1;
                 case 'wpa-eap': // WPA-Enterprise
                     return 2;
-                case 'wpa-wapi-psk': // WAPI Personal
+                case 'wapi-psk': // WAPI Personal
                     return 6;
                 case 'wapi-cert': // WAPI Certificate
                     return 7;
@@ -430,7 +432,7 @@ Component {
             color: Theme.palette.normal.baseText
             visible: (securityList.selectedIndex === 2 ||
                       securityList.selectedIndex === 4 /* WPA or D-WEP */ ||
-                      securityList.selectedIndex === 7) &&
+                      securityList.selectedIndex === 7 /* WAPI Cert */ ) &&
                      (authList.selectedIndex === 0 ||
                       authList.selectedIndex === 1 ||
                       authList.selectedIndex === 3 ||
@@ -445,7 +447,7 @@ Component {
             }
             visible: (securityList.selectedIndex === 2 ||
                       securityList.selectedIndex === 4 /* WPA or D-WEP */ ||
-                      securityList.selectedIndex === 7) &&
+                      securityList.selectedIndex === 7 /* WAPI Cert */ ) &&
                      (authList.selectedIndex === 0 ||
                       authList.selectedIndex === 1 ||
                       authList.selectedIndex === 3 ||

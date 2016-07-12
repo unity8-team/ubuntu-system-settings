@@ -179,18 +179,22 @@ class WifiEnabledTestCase(WifiBaseTestCase):
         # We cannot make any assertions, because connection deletion
         # is currently not supported.
 
-    def test_connect_to_wapi(self):
-        show_all_ui = EnvironmentVariable('USS_SHOW_ALL_UI', '1')
-        self.useFixture(show_all_ui)
 
+class WapiEnabledTestCase(WifiBaseTestCase):
+    """Tests for Language Page"""
+
+    def setUp(self):
+        self.useFixture(EnvironmentVariable('USS_SHOW_ALL_UI', '1'))
+        super(WapiEnabledTestCase, self).setUp()
+
+    def test_connect_to_wapi(self):
         self.create_access_point(
-            'wapi_test', 'wapi_test',
+            'wapi', 'wapi',
             security=NM80211ApSecurityFlags.NM_802_11_AP_SEC_KEY_MGMT_WAPI
         )
 
         dialog = self.wifi_page.connect_to_hidden_network(
-            'wapi_test',
-            security='wpa-cert',
+            'wapi', security='wapi-cert',
         )
 
         # allow backend to set up listeners
@@ -213,6 +217,7 @@ class WifiEnabledTestCase(WifiBaseTestCase):
         conn_settings = conn.GetSettings()
         wconn = conn_settings['connection']
         w802_11_sec = conn_settings['802-11-wireless-security']
+
         w802_1x = conn_settings['802-1x']
 
         self.assertEquals(wconn['type'], '802-11-wireless')
