@@ -1,3 +1,7 @@
+if(ANDR_PROP_FOUND)
+    add_definitions(-DANDROID_PROPERTIES)
+endif()
+
 set(QML_SOURCES
 AccessPoint.qml
 BaseMenuItem.qml

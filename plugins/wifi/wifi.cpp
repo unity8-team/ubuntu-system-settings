@@ -16,7 +16,10 @@
  */
 
 #include "wifi.h"
+
+#ifdef ANDROID_PROPERTIES
 #include <hybris/properties/properties.h>
+#endif
 
 Wifi::Wifi(QObject *parent)
     : QObject(parent)
@@ -24,7 +27,11 @@ Wifi::Wifi(QObject *parent)
 
 bool Wifi::wapiSupported() const
 {
+#ifdef ANDROID_PROPERTIES
     char wapi[PROP_VALUE_MAX];
     property_get("ubuntu.wapi.supported", wapi, "0");
     return (strcmp(wapi, "0") > 0);
+#else
+    return false;
+#endif
 }
