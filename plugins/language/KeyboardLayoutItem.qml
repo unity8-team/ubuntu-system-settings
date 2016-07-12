@@ -20,82 +20,68 @@
 
 import QtQuick 2.4
 import Ubuntu.Components 1.3
-import Ubuntu.Components.ListItems 1.3 as ListItem
 
-ListItem.Empty {
-    id: root
-    property alias name: name.text
-    property alias checked: checkBox.checked
-    property alias shortName: shortName.text
+ListItem {
+    property string name
+    property alias  checked: checkBox.checked
+    property alias  shortName: shortName.text
     property alias draggable: dragHandle.visible
     property alias dragger: dragArea.drag
 
     signal dragStarted()
     signal dragFinished()
 
-    Rectangle {
-        id: icon
-        anchors {
-            left: parent.left
-            leftMargin: units.gu(2)
-        }
-        width: units.gu(3.0)
-        height: units.gu(3.0)
-        radius: units.gu(0.5)
+    height: layout.height + divider.height
 
-        color: Theme.palette.normal.backgroundText
+    ListItemLayout {
+        id: layout
 
-        anchors.verticalCenter: parent.verticalCenter
+        title.text: name
 
-        Label {
-            id: shortName
+        Rectangle {
+            width: units.gu(3.0)
+            height: units.gu(3.0)
+            radius: units.gu(0.5)
 
-            color: Theme.palette.normal.background
-            fontSize: "small"
+            color: Theme.palette.normal.backgroundText
 
-            anchors.centerIn: parent
-        }
-    }
+            Label {
+                id: shortName
 
-    Label {
-        id: name
-        anchors {
-            left: icon.right
-            leftMargin: units.gu(2)
-            right: dragHandle.visible ? dragHandle.left : checkBox.left
-            rightMargin: units.gu(3)
-        }
-        elide: Text.ElideMiddle
-        anchors.verticalCenter: parent.verticalCenter
-    }
+                color: Theme.palette.normal.background
+                fontSize: "small"
 
-    Icon {
-        id: dragHandle
-        width: units.gu(2.5)
-        height: parent.height
-        anchors {
-            right: checkBox.left
-            rightMargin: units.gu(3)
-            verticalCenter: parent.verticalCenter
+                anchors.centerIn: parent
+            }
+
+            SlotsLayout.position: SlotsLayout.First
         }
 
-        MouseArea {
-            id: dragArea
-            anchors.fill: parent
+        Icon {
+            id: dragHandle
+            width: units.gu(2.5)
+            anchors {
+                right: checkBox.left
+                rightMargin: units.gu(3)
+                verticalCenter: parent.verticalCenter
+            }    
 
-            onPressed: root.dragStarted()
-            onReleased: root.dragFinished()
+            MouseArea {
+                id: dragArea
+                anchors.fill: parent
+
+                onPressed: root.dragStarted()
+                onReleased: root.dragFinished()
+            }
+
+            name: "grip-large"
+            SlotsLayout.position: SlotsLayout.Leading
         }
 
-        name: "grip-large"
-    }
-
-    CheckBox {
-        id: checkBox
-        anchors {
-            right: parent.right
-            rightMargin: units.gu(2)
-            verticalCenter: parent.verticalCenter
+        CheckBox {
+            id: checkBox
+            SlotsLayout.position: SlotsLayout.Trailing
         }
     }
+    onClicked: checked = !checked
 }
