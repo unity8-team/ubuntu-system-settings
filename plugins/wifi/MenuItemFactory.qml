@@ -106,7 +106,7 @@ Item {
             property int menuIndex: -1
             property var extendedData: menu && menu.ext || undefined
             text: menu && menu.label ? menu.label : ""
-            busy: getExtendedProperty(extendedData, "xCanonicalBusyAction", false) || true
+            busy: getExtendedProperty(extendedData, "xCanonicalBusyAction", false)
 
             onMenuModelChanged: {
                 loadAttributes();
