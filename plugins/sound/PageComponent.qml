@@ -260,7 +260,10 @@ ItemPage {
                 visible: showAllUI
             }
 
-            // FIXME: Add spacing here.
+            /* Add some artificial spacing here, once we update the QtQuick.Layouts plugin 
+             * to 1.3 we can replace this with Layout.bottomMargin(units.gu(2))
+             */
+            Item { height: 1; width: 1 }
 
             SettingsListItems.Standard {
                 text: i18n.tr("Other vibrations")
