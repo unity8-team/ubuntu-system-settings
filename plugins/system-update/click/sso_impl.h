@@ -19,7 +19,7 @@
 #ifndef CLICK_SSO_IMPL_H
 #define CLICK_SSO_IMPL_H
 
-#include "sso.h"
+#include "click/sso.h"
 
 #include <ssoservice.h>
 

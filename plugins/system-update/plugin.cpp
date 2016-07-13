@@ -18,12 +18,13 @@
  *
 */
 
-#include "clickupdatemanager.h"
+#include "click/manager.h"
+
 #include "plugin.h"
 #include "systemimage.h"
 #include "systemupdate.h"
 #include "update.h"
-#include "updatedb.h"
+// #include "updatedb.h"
 #include "updatemodel.h"
 
 #include <QtQml>
@@ -52,7 +53,7 @@ void BackendPlugin::registerTypes(const char *uri)
     Q_ASSERT(uri == QLatin1String("Ubuntu.SystemSettings.Update"));
 
     qmlRegisterUncreatableType<Update>(uri, 1, 0, "Update", "Can't be instantiated directly.");
-    qmlRegisterUncreatableType<UpdateDb>(uri, 1, 0, "UpdateDb", "Can't be instantiated directly.");
+    // qmlRegisterUncreatableType<UpdateDb>(uri, 1, 0, "UpdateDb", "Can't be instantiated directly.");
     qmlRegisterSingletonType<SystemUpdate>(
         uri, 1, 0, "SystemUpdate", suSingletonProvider
     );
@@ -62,6 +63,7 @@ void BackendPlugin::registerTypes(const char *uri)
         uri, 1, 0, "SystemImage", siSingletonProvider
     );
 
-    qmlRegisterType<ClickUpdateManager>(uri, 1, 0, "ClickUpdateManager");
+    qmlRegisterType<Click::Manager>(uri, 1, 0, "ClickManager");
     qmlRegisterType<UpdateModel>(uri, 1, 0, "UpdateModel");
+    qmlRegisterType<UpdateModelFilter>(uri, 1, 0, "UpdateModelFilter");
 }

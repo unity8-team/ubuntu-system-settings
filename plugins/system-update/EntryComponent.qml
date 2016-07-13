@@ -39,19 +39,23 @@ ListItem.SingleValue {
     onClicked: main.loadPluginByName("system-update");
 
     UpdateModel {
+        id: model
+    }
+
+    UpdateModelFilter {
         id: updates
-        filter: UpdateModel.Pending
+        installed: false
     }
 
     DownloadManager {
         onDownloadFinished: {
-            updates.setInstalled(download.metadata.custom.identifier,
-                                 download.metadata.custom.revision);
+            model.setInstalled(download.metadata.custom.identifier,
+                               download.metadata.custom.revision);
         }
     }
 
     SystemImageHandler {
-        updateModel: updates
+        updateModel: model
     }
 
     Behavior on height { UbuntuNumberAnimation {} }

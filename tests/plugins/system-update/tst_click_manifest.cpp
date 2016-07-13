@@ -20,7 +20,7 @@
  * This test uses a mock web server.
  */
 
-#include "manifest_impl.h"
+#include "click/manifest_impl.h"
 
 #include <QSignalSpy>
 #include <QTest>

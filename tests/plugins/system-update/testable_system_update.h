@@ -25,9 +25,9 @@ namespace UpdatePlugin
 class TestableSystemUpdate : public SystemUpdate
 {
 public:
-    explicit TestableSystemUpdate(UpdateDb *db, Network::Manager *nam,
+    explicit TestableSystemUpdate(UpdateModel *model, Network::Manager *nam,
                                   QObject *parent = 0)
-        : SystemUpdate(db, nam, parent)
+        : SystemUpdate(model, nam, parent)
     {}
 
     ~TestableSystemUpdate() {}

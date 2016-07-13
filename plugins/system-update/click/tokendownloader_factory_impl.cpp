@@ -16,8 +16,8 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "tokendownloader_impl.h"
-#include "tokendownloader_factory_impl.h"
+#include "click/tokendownloader_impl.h"
+#include "click/tokendownloader_factory_impl.h"
 
 namespace UpdatePlugin
 {

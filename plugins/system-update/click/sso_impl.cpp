@@ -16,8 +16,8 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include "click/sso_impl.h"
 #include "helpers.h"
-#include "sso_impl.h"
 
 namespace UpdatePlugin
 {

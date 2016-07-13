@@ -51,4 +51,5 @@ void BackendPlugin::registerTypes(const char *uri)
     qmlRegisterUncreatableType<MockUpdate>(uri, 1, 0, "Update", "Used for enums only.");
     qmlRegisterType<MockClickUpdateManager>(uri, 1, 0, "ClickUpdateManager");
     qmlRegisterType<MockUpdateModel>(uri, 1, 0, "UpdateModel");
+    qmlRegisterType<MockUpdateModelFilter>(uri, 1, 0, "UpdateModelFilter");
 }

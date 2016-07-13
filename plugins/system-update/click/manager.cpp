@@ -16,9 +16,9 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "clickupdatemanager.h"
 #include "helpers.h"
 
+#include "click/manager.h"
 #include "click/client_impl.h"
 #include "click/manifest_impl.h"
 #include "click/sso_impl.h"
@@ -31,36 +31,46 @@
 #include <QJsonObject>
 #include <QList>
 
+// FIXME: need to do this better including #include "../../src/i18n.h"
+// and linking to it
+#include <libintl.h>
+QString _(const char *text)
+{
+    return QString::fromUtf8(dgettext(0, text));
+}
+
 namespace UpdatePlugin
 {
-ClickUpdateManager::ClickUpdateManager(QObject *parent)
+namespace Click
+{
+Manager::Manager(QObject *parent)
     : QObject(parent)
     , m_client(new Click::ClientImpl(this))
     , m_manifest(new Click::ManifestImpl(this))
     , m_sso(new Click::SSOImpl(this))
     , m_downloadFactory(new Click::TokenDownloaderFactoryImpl)
-    , m_db(SystemUpdate::instance()->db())
+    , m_model(SystemUpdate::instance()->updates())
 {
     init();
 }
 
-ClickUpdateManager::ClickUpdateManager(Click::Client *client,
-                                       Click::Manifest *manifest,
-                                       Click::SSO *sso,
-                                       Click::TokenDownloaderFactory *downloadFactory,
-                                       UpdateDb *db,
-                                       QObject *parent)
+Manager::Manager(Click::Client *client,
+                 Click::Manifest *manifest,
+                 Click::SSO *sso,
+                 Click::TokenDownloaderFactory *downloadFactory,
+                 UpdateModel *model,
+                 QObject *parent)
     : QObject(parent)
     , m_client(client)
     , m_manifest(manifest)
     , m_sso(sso)
     , m_downloadFactory(downloadFactory)
-    , m_db(db)
+    , m_model(model)
 {
     init();
 }
 
-void ClickUpdateManager::init()
+void Manager::init()
 {
     initClient();
     initManifest();
@@ -72,12 +82,12 @@ void ClickUpdateManager::init()
     connect(this, SIGNAL(checkCanceled()), this, SLOT(handleCheckStop()));
 }
 
-ClickUpdateManager::~ClickUpdateManager()
+Manager::~Manager()
 {
     delete m_downloadFactory;
 }
 
-void ClickUpdateManager::initTokenDownloader(const Click::TokenDownloader *downloader)
+void Manager::initTokenDownloader(const Click::TokenDownloader *downloader)
 {
     connect(downloader, SIGNAL(downloadSucceeded(QSharedPointer<Update>)),
             this, SLOT(handleTokenDownload(QSharedPointer<Update>)));
@@ -86,7 +96,7 @@ void ClickUpdateManager::initTokenDownloader(const Click::TokenDownloader *downl
     connect(this, SIGNAL(checkCanceled()), downloader, SLOT(cancel()));
 }
 
-void ClickUpdateManager::initClient()
+void Manager::initClient()
 {
     connect(m_client, SIGNAL(metadataRequestSucceeded(const QByteArray&)),
             this, SLOT(handleMetadataSuccess(const QByteArray&)));
@@ -106,7 +116,7 @@ void ClickUpdateManager::initClient()
             this, SIGNAL(credentialError()));
 }
 
-void ClickUpdateManager::initManifest()
+void Manager::initManifest()
 {
     connect(m_manifest, SIGNAL(requestSucceeded(const QJsonArray&)),
             this, SLOT(handleManifestSuccess(const QJsonArray&)));
@@ -114,7 +124,7 @@ void ClickUpdateManager::initManifest()
             this, SLOT(handleManifestFailure()));
 }
 
-void ClickUpdateManager::initSSO()
+void Manager::initSSO()
 {
     connect(m_sso, SIGNAL(credentialsRequestSucceeded(const UbuntuOne::Token&)),
             this, SLOT(handleCredentialsFound(const UbuntuOne::Token&)));
@@ -122,7 +132,7 @@ void ClickUpdateManager::initSSO()
             this, SLOT(handleCredentialsFailed()));
 }
 
-void ClickUpdateManager::check()
+void Manager::check()
 {
     // Don't check for click updates if there are no credentials,
     // instead ask for credentials.
@@ -137,11 +147,14 @@ void ClickUpdateManager::check()
     m_manifest->request();
 }
 
-void ClickUpdateManager::check(const QString &packageName, const uint &revision)
+void Manager::retry(const QString &identifier, const uint &revision)
 {
-    QSharedPointer<Update> u = m_db->get(packageName, revision);
-    if (u->identifier() == packageName && u->revision() == revision) {
-        u->setAutomatic(true);
+    /* We'll simply ask for another click token if a click update failed
+    to install. */
+    QSharedPointer<Update> u = m_model->get(identifier, revision);
+    if (u->identifier() == identifier && u->revision() == revision) {
+        //m_db->setAvailable(identifier, revision);
+
         Click::TokenDownloader* dl = m_downloadFactory->create(m_client, u, this);
         dl->setAuthToken(m_authToken);
         initTokenDownloader(dl);
@@ -150,7 +163,7 @@ void ClickUpdateManager::check(const QString &packageName, const uint &revision)
 }
 
 // Tries to shut down all checks we might currently be doing.
-void ClickUpdateManager::cancel()
+void Manager::cancel()
 {
     // Abort all click update update data objects.
     // foreach (const QString &name, m_updates.keys())m_updates.value(name)->cancel();
@@ -158,14 +171,14 @@ void ClickUpdateManager::cancel()
     Q_EMIT checkCanceled();
 }
 
-void ClickUpdateManager::launch(const QString &packageName)
+void Manager::launch(const QString &appId)
 {
-    if (!ubuntu_app_launch_start_application(packageName.toLatin1().data(), nullptr)) {
-        qWarning() << Q_FUNC_INFO << "Could not launch app" << packageName;
+    if (!ubuntu_app_launch_start_application(appId.toLatin1().data(), nullptr)) {
+        qWarning() << Q_FUNC_INFO << "Could not launch app" << appId;
     }
 }
 
-void ClickUpdateManager::handleManifestSuccess(const QJsonArray &manifest)
+void Manager::handleManifestSuccess(const QJsonArray &manifest)
 {
     qWarning() << "handle manifest succe";
     // Nothing to do.
@@ -192,26 +205,29 @@ void ClickUpdateManager::handleManifestSuccess(const QJsonArray &manifest)
     requestMetadata();
 }
 
-void ClickUpdateManager::handleManifestFailure()
+void Manager::handleManifestFailure()
 {
     if (m_checking)
         Q_EMIT checkFailed();
 }
 
-void ClickUpdateManager::handleTokenDownload(QSharedPointer<Update> update)
+void Manager::handleTokenDownload(QSharedPointer<Update> update)
 {
+    Click::TokenDownloader* dl = qobject_cast<Click::TokenDownloader*>(QObject::sender());
+    dl->disconnect();
     // Token reported as downloaded, but empty.
     if (update->token().isEmpty()) {
         m_updates.remove(update->identifier());
     }
 
     // Update in db.
-    m_db->add(update);
+    qWarning() << "handleTokenDownload adds update";
+    m_model->add(update);
 
     completionCheck();
 }
 
-void ClickUpdateManager::completionCheck()
+void Manager::completionCheck()
 {
     // Check if all tokens are fetched.
     foreach (const QString &name, m_updates.keys()){
@@ -224,18 +240,23 @@ void ClickUpdateManager::completionCheck()
     Q_EMIT checkCompleted();
 }
 
-void ClickUpdateManager::handleTokenDownloadFailure(QSharedPointer<Update> update)
+void Manager::handleTokenDownloadFailure(QSharedPointer<Update> update)
 {
+    Click::TokenDownloader* dl = qobject_cast<Click::TokenDownloader*>(QObject::sender());
+    dl->disconnect();
+
     // Unset token, let the user try again.
-    update->setToken("");
-    m_db->add(update);
+    // update->setToken("");
+    qWarning() << "handleTokenDownloadFailure adds update";
+    // m_db->add(update);
+
 
     // We're done with it.
     m_updates.remove(update->identifier());
     completionCheck();
 }
 
-void ClickUpdateManager::handleCredentialsFound(const UbuntuOne::Token &token)
+void Manager::handleCredentialsFound(const UbuntuOne::Token &token)
 {
     m_authToken = token;
 
@@ -250,7 +271,7 @@ void ClickUpdateManager::handleCredentialsFound(const UbuntuOne::Token &token)
     check();
 }
 
-void ClickUpdateManager::handleCredentialsFailed()
+void Manager::handleCredentialsFailed()
 {
     m_sso->invalidateCredentials();
     m_authToken = UbuntuOne::Token();
@@ -261,13 +282,13 @@ void ClickUpdateManager::handleCredentialsFailed()
     setAuthenticated(false);
 }
 
-void ClickUpdateManager::handleCommunicationErrors()
+void Manager::handleCommunicationErrors()
 {
     if (m_checking)
         Q_EMIT checkFailed();
 }
 
-void ClickUpdateManager::requestMetadata()
+void Manager::requestMetadata()
 {
     QList<QString> packages;
     Q_FOREACH(const QString &name, m_updates.keys()) {
@@ -290,7 +311,7 @@ void ClickUpdateManager::requestMetadata()
     m_client->requestMetadata(url, packages);
 }
 
-void ClickUpdateManager::handleMetadataSuccess(const QByteArray &metadata)
+void Manager::handleMetadataSuccess(const QByteArray &metadata)
 {
     qWarning() << "handleMetadataSuccess" << metadata;
     QJsonParseError *jsonError = new QJsonParseError;
@@ -311,7 +332,7 @@ void ClickUpdateManager::handleMetadataSuccess(const QByteArray &metadata)
     delete jsonError;
 }
 
-void ClickUpdateManager::parseMetadata(const QJsonArray &array)
+void Manager::parseMetadata(const QJsonArray &array)
 {
     for (int i = 0; i < array.size(); i++) {
         auto object = array.at(i).toObject();
@@ -360,16 +381,17 @@ void ClickUpdateManager::parseMetadata(const QJsonArray &array)
     completionCheck();
 }
 
-bool ClickUpdateManager::authenticated()
+bool Manager::authenticated()
 {
     return m_authenticated || Helpers::isIgnoringCredentials();
 }
 
-void ClickUpdateManager::setAuthenticated(const bool authenticated)
+void Manager::setAuthenticated(const bool authenticated)
 {
     if (authenticated != m_authenticated) {
         m_authenticated = authenticated;
         Q_EMIT authenticatedChanged();
     }
 }
+} // Click
 } // UpdatePlugin

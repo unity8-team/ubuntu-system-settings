@@ -38,8 +38,7 @@ Column {
     property string downloadId
     property date updatedAt
 
-    property alias errorTitle: error.title
-    property alias errorDetail: error.detail
+    property alias error: errorElementDetail.text
     property alias name: nameLabel.text
     property alias iconUrl: icon.source
     property alias changelog: changelogLabel.text
@@ -68,11 +67,6 @@ Column {
     signal resume()
     signal install()
     signal launch()
-
-    function setError (title, detail) {
-        errorTitle = title;
-        errorDetail = detail;
-    }
 
     states: [
         State {
@@ -205,7 +199,7 @@ Column {
 
                         case Update.StateAvailable:
                         case Update.StateQueuedForDownload:
-                            if (kind === Update.KindClick) {
+                            if (update.kind === Update.KindClick) {
                                 return i18n.tr("Update");
                             } else {
                                 return i18n.tr("Download");
@@ -274,7 +268,6 @@ Column {
                             break;
 
                         case Update.StateInstalled:
-                            console.warn('launchdedddd')
                             update.launch();
                             break;
                         }
@@ -389,20 +382,16 @@ Column {
                 spacing: units.gu(1)
                 height: childrenRect.height
                 Layout.fillWidth: true
-                visible: title && detail
-
-                property string title: i18n.tr("Update failed")
-                property string detail
+                visible: errorElementDetail.text
 
                 Label {
                     id: errorElementTitle
-                    text: parent.title
+                    text: i18n.tr("Update failed")
                     color: UbuntuColors.red
                 }
 
                 Label {
                     id: errorElementDetail
-                    text: parent.detail
                     anchors { left: parent.left; right: parent.right }
                     fontSize: "small"
                     wrapMode: Text.WrapAnywhere

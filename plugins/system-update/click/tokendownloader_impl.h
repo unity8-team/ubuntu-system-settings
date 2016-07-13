@@ -19,8 +19,8 @@
 #ifndef CLICK_TOKEN_DOWNLOADER_IMPL_H
 #define CLICK_TOKEN_DOWNLOADER_IMPL_H
 
-#include "tokendownloader.h"
-#include "client.h"
+#include "click/client.h"
+#include "click/tokendownloader.h"
 
 namespace UpdatePlugin
 {

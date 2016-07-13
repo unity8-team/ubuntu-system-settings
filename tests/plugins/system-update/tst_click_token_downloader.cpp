@@ -16,8 +16,8 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "tokendownloader.h"
-#include "tokendownloader_impl.h"
+#include "click/tokendownloader.h"
+#include "click/tokendownloader_impl.h"
 #include "update.h"
 
 #include "fakeclient.h"

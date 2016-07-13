@@ -15,8 +15,8 @@
  * You should have received a copy of the GNU General Public License along
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+#include "network/accessmanager_impl.h"
 #include "systemupdate.h"
-#include "network/manager_impl.h"
 
 #include <QDateTime>
 
@@ -38,22 +38,22 @@ void SystemUpdate::destroyInstance()
 
 SystemUpdate::SystemUpdate(QObject *parent)
     : QObject(parent)
-    , m_db(new UpdateDb(this))
+    , m_model(new UpdateModel(this))
     , m_nam(new Network::ManagerImpl(this))
 {
 }
 
-SystemUpdate::SystemUpdate(UpdateDb *db, Network::Manager *nam,
+SystemUpdate::SystemUpdate(UpdateModel *model, Network::Manager *nam,
                            QObject *parent)
     : QObject(parent)
-    , m_db(db)
+    , m_model(model)
     , m_nam(nam)
 {
 }
 
-UpdateDb* SystemUpdate::db()
+UpdateModel* SystemUpdate::updates()
 {
-    return m_db;
+    return m_model;
 }
 
 Network::Manager* SystemUpdate::nam()
@@ -66,11 +66,12 @@ bool SystemUpdate::isCheckRequired()
     // Spec says that a manual check should not happen if a check was
     // completed less than 30 minutes ago.
     QDateTime now = QDateTime::currentDateTimeUtc().addSecs(-1800); // 30 mins
-    return m_db->lastCheckDate() < now;
+    // TODO: do not break Demeter's law
+    return m_model->db()->lastCheckDate() < now;
 }
 
 void SystemUpdate::checkCompleted()
 {
-    m_db->setLastCheckDate(QDateTime::currentDateTime());
+    m_model->db()->setLastCheckDate(QDateTime::currentDateTime());
 }
 } // UpdatePlugin

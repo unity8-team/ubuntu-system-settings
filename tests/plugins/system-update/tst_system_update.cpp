@@ -16,7 +16,7 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "updatedb.h"
+#include "updatemodel.h"
 #include "testable_system_update.h"
 
 #include <QSignalSpy>
@@ -32,9 +32,9 @@ class TstSystemUpdate : public QObject
 private slots:
     void init()
     {
-        m_db = new UpdateDb(":memory:");
-        m_instance = new TestableSystemUpdate(m_db, nullptr);
-        m_db->setParent(m_instance);
+        m_model = new UpdateModel(":memory:");
+        m_instance = new TestableSystemUpdate(m_model, nullptr);
+        m_model->setParent(m_instance);
     }
     void cleanup()
     {
@@ -64,7 +64,7 @@ private slots:
         QFETCH(QDateTime, checkedAt);
         QFETCH(bool, checkRequired);
 
-        QSqlQuery q(m_db->db());
+        QSqlQuery q(m_model->db()->db());
 
         q.prepare("REPLACE INTO meta (checked_at_utc) VALUES (:checked_at_utc)");
         q.bindValue(":checked_at_utc", checkedAt.toMSecsSinceEpoch());
@@ -73,9 +73,9 @@ private slots:
 
         QCOMPARE(m_instance->isCheckRequired(), checkRequired);
     }
-    void testDb()
+    void testUpdates()
     {
-        QCOMPARE(m_instance->db(), m_db);
+        QCOMPARE(m_instance->updates(), m_model);
     }
     void testNam()
     {
@@ -84,7 +84,7 @@ private slots:
     }
 private:
     TestableSystemUpdate *m_instance = nullptr;
-    UpdateDb *m_db = nullptr;
+    UpdateModel *m_model = nullptr;
 };
 
 QTEST_MAIN(TstSystemUpdate)

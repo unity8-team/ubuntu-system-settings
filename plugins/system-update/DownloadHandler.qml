@@ -43,10 +43,12 @@ Item {
                                      download.metadata.custom.revision)
         }
         onErrorFound: {
-            // console.warn('error found', download, download.errorMessage);
-            // updateModel.setError(download.metadata.custom.identifier,
-            //                      download.metadata.custom.revision,
-            //                      download.errorMessage)
+            console.warn('onErrorFound', download.metadata.custom.identifier,
+                         download.metadata.custom.revision,
+                         download.errorMessage)
+            updateModel.setError(download.metadata.custom.identifier,
+                                 download.metadata.custom.revision,
+                                 download.errorMessage)
         }
         onDownloadsChanged: restoreDownloads()
         Component.onCompleted: restoreDownloads()
@@ -89,7 +91,10 @@ Item {
 
     function createDownload(click) {
         // Already had a download.
-        if (getDownloadFor(click) !== null) {
+        var existingDownload = getDownloadFor(click);
+        if (existingDownload !== null &&
+            !existingDownload.errorMessage &&
+            !existingDownload.isCompleted) {
             return;
         }
 
@@ -173,9 +178,6 @@ Item {
             onProcessing: {
                 updateModel.processUpdate(metadata.custom.identifier,
                                           metadata.custom.revision);
-            }
-            onErrorMessageChanged: {
-                console.warn(metadata);
             }
         }
     }

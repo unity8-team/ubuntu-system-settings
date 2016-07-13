@@ -63,23 +63,29 @@ ItemPage {
     }
 
     UpdateModel {
+        id: model
+    }
+
+    UpdateModelFilter {
         id: imageUpdate
-        filter: UpdateModel.PendingImage
+        kinds: Update.KindImage
+        installed: false
     }
 
-    UpdateModel {
+    UpdateModelFilter {
         id: clickUpdates
-        filter: UpdateModel.PendingClicks
+        kinds: Update.KindClick
+        installed: false
     }
 
-    UpdateModel {
+    UpdateModelFilter {
         id: installedUpdates
-        filter: UpdateModel.Installed
+        installed: true
     }
 
     DownloadHandler {
         id: downloadHandler
-        updateModel: clickUpdates
+        updateModel: model
     }
 
     Updates {

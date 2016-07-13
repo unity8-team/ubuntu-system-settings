@@ -19,7 +19,7 @@
 #ifndef FAKE_CLICK_CLIENT_H
 #define FAKE_CLICK_CLIENT_H
 
-#include "client.h"
+#include "click/client.h"
 #include <QDebug>
 
 class MockClient : public UpdatePlugin::Click::Client

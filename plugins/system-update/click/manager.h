@@ -16,11 +16,11 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef CLICK_UPDATE_MANAGER_H
-#define CLICK_UPDATE_MANAGER_H
+#ifndef CLICK_MANAGER_H
+#define CLICK_MANAGER_H
 
 #include "systemupdate.h"
-#include "updatedb.h"
+#include "updatemodel.h"
 
 #include "click/client.h"
 #include "click/manifest.h"
@@ -36,25 +36,27 @@
 
 namespace UpdatePlugin
 {
-class ClickUpdateManager : public QObject
+namespace Click
+{
+class Manager : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(bool authenticated READ authenticated
                NOTIFY authenticatedChanged)
 public:
-    explicit ClickUpdateManager(QObject *parent = 0);
-    explicit ClickUpdateManager(Click::Client *client,
+    explicit Manager(QObject *parent = 0);
+    explicit Manager(Click::Client *client,
                                 Click::Manifest *manifest,
                                 Click::SSO *sso,
                                 Click::TokenDownloaderFactory *downloadFactory,
-                                UpdateDb *db,
+                                UpdateModel *model,
                                 QObject *parent = 0);
-    ~ClickUpdateManager();
+    ~Manager();
 
     Q_INVOKABLE void check();
-    Q_INVOKABLE void check(const QString &packageName, const uint &revision);
+    Q_INVOKABLE void retry(const QString &identifier, const uint &revision);
     Q_INVOKABLE void cancel();
-    Q_INVOKABLE void launch(const QString &packageName);
+    Q_INVOKABLE void launch(const QString &appId);
 
     bool authenticated();
 
@@ -100,13 +102,14 @@ private:
     Click::Manifest *m_manifest;
     Click::SSO *m_sso;
     Click::TokenDownloaderFactory *m_downloadFactory;
-    UpdateDb *m_db;
+    UpdateModel *m_model;
 
     QHash<QString, QSharedPointer<Update>> m_updates;
     UbuntuOne::Token m_authToken;
     bool m_authenticated = true;
     bool m_checking = false;
 };
+} // Click
 } // UpdatePlugin
 
-#endif // CLICK_UPDATE_MANAGER_H
+#endif // CLICK_MANAGER_H

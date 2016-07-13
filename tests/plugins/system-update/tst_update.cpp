@@ -290,7 +290,6 @@ private slots:
         QTest::newRow("KindUnknown") << Update::Kind::KindUnknown;
         QTest::newRow("KindClick") << Update::Kind::KindClick;
         QTest::newRow("KindImage") << Update::Kind::KindImage;
-        QTest::newRow("KindAll") << Update::Kind::KindAll;
     }
     void testKindEnums()
     {

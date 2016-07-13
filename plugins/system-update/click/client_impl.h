@@ -19,8 +19,8 @@
 #ifndef CLICK_CLIENT_IMPL_H
 #define CLICK_CLIENT_IMPL_H
 
-#include "client.h"
-#include "manager_impl.h"
+#include "click/client.h"
+#include "network/accessmanager_impl.h"
 
 namespace UpdatePlugin
 {

@@ -52,9 +52,13 @@ Item {
     }
 
     Component {
+        id:
+    }
+
+    Component {
         id: mockImageModel
 
-        UpdateModel {
+        UpdateModelFilter {
             filter: UpdateModel.PendingImage
         }
     }
@@ -62,7 +66,7 @@ Item {
     Component {
         id: mockClickModel
 
-        UpdateModel {
+        UpdateModelFilter {
             filter: UpdateModel.PendingClicks
         }
     }
@@ -70,7 +74,7 @@ Item {
     Component {
         id: mockInstalledModel
 
-        UpdateModel {
+        UpdateModelFilter {
             filter: UpdateModel.Installed
         }
     }

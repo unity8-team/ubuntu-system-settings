@@ -19,7 +19,7 @@
 #ifndef FAKE_CLICK_MANIFEST_H
 #define FAKE_CLICK_MANIFEST_H
 
-#include "manifest.h"
+#include "click/manifest.h"
 
 class MockManifest : public UpdatePlugin::Click::Manifest
 {

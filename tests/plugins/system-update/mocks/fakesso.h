@@ -19,7 +19,7 @@
 #ifndef MOCK_CLICK_SSO_H
 #define MOCK_CLICK_SSO_H
 
-#include "sso.h"
+#include "click/sso.h"
 
 #include <token.h>
 

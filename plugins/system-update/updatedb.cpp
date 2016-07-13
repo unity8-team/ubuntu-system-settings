@@ -38,25 +38,7 @@ const QString ALL = "kind, id, local_version, remote_version, revision, \
 const QString GET_SINGLE = "SELECT " + ALL + " FROM updates WHERE id=:id \
     AND revision=:revision";
 
-const QString GET_SINGLE_DOWNLOAD = "SELECT " + ALL + " FROM updates \
-    WHERE id=:id AND revision=:revision";
-
 const QString GET_ALL = "SELECT " + ALL + " FROM updates";
-
-const QString GET_ALL_KIND = "SELECT " + ALL + " FROM \
-    updates WHERE kind=:kind ORDER BY title ASC";
-
-const QString GET_PENDING = "SELECT " + ALL + ", MAX(revision) FROM \
-    updates WHERE installed=0 GROUP BY id ORDER BY title ASC";
-
-const QString GET_PENDING_KIND = "SELECT " + ALL + ", MAX(revision) FROM \
-    updates WHERE installed=0 AND kind=:kind GROUP BY id ORDER BY title ASC";
-
-const QString GET_INSTALLED = "SELECT " + ALL + " FROM updates \
-    WHERE installed=1 ORDER BY updated_at_utc DESC";
-
-const QString GET_INSTALLED_KIND = "SELECT " + ALL + " FROM updates \
-    WHERE installed=1 AND kind=:kind ORDER BY updated_at_utc DESC";
 }
 
 UpdateDb::UpdateDb(QObject *parent)
@@ -124,6 +106,34 @@ UpdateDb::~UpdateDb()
 
 void UpdateDb::add(const QSharedPointer<Update> &update)
 {
+    replaceWith(update);
+    if (insert(update)) {
+        Q_EMIT changed();
+    }
+}
+
+void UpdateDb::replaceWith(const QSharedPointer<Update> &update)
+{
+    QSqlQuery q(m_db);
+    q.prepare("DELETE FROM updates WHERE id=:id AND revision < :revision "
+              "AND installed=:installed");
+    q.bindValue(":id", update->identifier());
+    q.bindValue(":revision", update->revision());
+    q.bindValue(":installed", false);
+    if (!q.exec()) {
+        qCritical() << "Could not replace updates:" << q.lastError().text();
+    }
+}
+
+void UpdateDb::update(const QSharedPointer<Update> &update)
+{
+    if (insert(update)) {
+        Q_EMIT changed(update);
+    }
+}
+
+bool UpdateDb::insert(const QSharedPointer<Update> &update)
+{
     QSqlQuery q(m_db);
     q.prepare("INSERT OR REPLACE INTO updates (id, revision, installed,"
               "created_at_utc, download_hash, title, size, icon_url,"
@@ -161,10 +171,11 @@ void UpdateDb::add(const QSharedPointer<Update> &update)
     q.bindValue(":package_name", update->packageName());
 
     if (!q.exec()) {
-        qCritical() << "Could not add update" << q.lastError().text();
+        qCritical() << "Could not insert update" << q.lastError().text();
+        return false;
+    } else {
+        return true;
     }
-
-    Q_EMIT changed();
 }
 
 void UpdateDb::remove(const QSharedPointer<Update> &update)
@@ -217,123 +228,6 @@ void UpdateDb::update(const QSharedPointer<Update> &update, const QSqlQuery &que
     update->setAutomatic(query.value("automatic").toBool());
     update->setError(query.value("error").toString());
     update->setPackageName(query.value("package_name").toString());
-}
-
-void UpdateDb::setInstalled(const QString &id, const uint &revision)
-{
-    QSqlQuery q(m_db);
-    q.prepare("UPDATE updates SET installed=:installed, update_state=:state, "
-              "updated_at_utc=:updated_at_utc "
-              "WHERE id=:id AND revision=:revision");
-    q.bindValue(":installed", true);
-    q.bindValue(":state", Update::stateToString(Update::State::StateInstallFinished));
-    q.bindValue(":updated_at_utc",
-                QDateTime::currentDateTimeUtc().currentMSecsSinceEpoch());
-    q.bindValue(":id", id);
-    q.bindValue(":revision", revision);
-
-    if (!q.exec()) {
-        qCritical() << "could not mark download" << id << revision
-                    << "as installed" << q.lastError().text();
-    }
-
-    Q_EMIT changed();
-}
-
-void UpdateDb::setStarted(const QString &id, const uint &revision)
-{
-    setState(id, revision, Update::State::StateDownloading);
-    changed(id, revision);
-}
-
-void UpdateDb::setQueued(const QString &id, const uint &revision)
-{
-    setState(id, revision, Update::State::StateQueuedForDownload);
-    changed(id, revision);
-}
-
-void UpdateDb::setProcessing(const QString &id, const uint &revision)
-{
-    setState(id, revision, Update::State::StateInstalling);
-    changed(id, revision);
-}
-
-void UpdateDb::setError(const QString &id, const uint &revision, const QString &msg)
-{
-    QSqlQuery q(m_db);
-    q.prepare("UPDATE updates SET error=:error, update_state=:state "
-              "WHERE id=:id AND revision=:revision");
-    q.bindValue(":error", msg);
-    q.bindValue(":state", Update::stateToString(Update::State::StateFailed));
-    q.bindValue(":id", id);
-    q.bindValue(":revision", revision);
-
-    if (!q.exec()) {
-        qCritical() << "could not set error on " << id << revision
-                    << q.lastError().text();
-    }
-
-    changed(id, revision);
-}
-
-void UpdateDb::setDownloaded(const QString &id, const uint &revision)
-{
-    setState(id, revision, Update::State::StateDownloaded);
-    changed(id, revision);
-}
-
-void UpdateDb::setState(const QString &id, const uint &revision,
-                        const Update::State &state)
-{
-    QSqlQuery q(m_db);
-    q.prepare("UPDATE updates SET update_state=:state"
-              " WHERE id=:id AND revision=:revision");
-    q.bindValue(":state", Update::stateToString(state));
-    q.bindValue(":id", id);
-    q.bindValue(":revision", revision);
-
-    if (!q.exec()) {
-        qCritical() << "could not change state on " << id << revision
-                    << q.lastError().text();
-    }
-}
-
-void UpdateDb::setProgress(const QString &id, const uint &revision,
-                           const int &progress)
-{
-    QSqlQuery q(m_db);
-    q.prepare("UPDATE updates SET progress=:progress, "
-              "update_state=:state WHERE id=:id AND revision=:revision");
-    q.bindValue(":progress", progress);
-    q.bindValue(":state",
-                Update::stateToString(Update::State::StateDownloading));
-    q.bindValue(":id", id);
-    q.bindValue(":revision", revision);
-
-    if (!q.exec()) {
-        qCritical() << "could not set progress on " << id << revision
-                    << q.lastError().text();
-    }
-
-    changed(id, revision);
-}
-
-void UpdateDb::setPaused(const QString &id, const uint &revision)
-{
-    setState(id, revision, Update::State::StateDownloadPaused);
-    changed(id, revision);
-}
-
-void UpdateDb::setResumed(const QString &id, const uint &revision)
-{
-    setState(id, revision, Update::State::StateDownloading);
-    changed(id, revision);
-}
-
-void UpdateDb::setCanceled(const QString &id, const uint &revision)
-{
-    setState(id, revision, Update::State::StateAvailable);
-    changed(id, revision);
 }
 
 bool UpdateDb::createDb()
@@ -426,51 +320,16 @@ void UpdateDb::setLastCheckDate(const QDateTime &lastCheck)
     }
 }
 
-QList<QSharedPointer<Update> > UpdateDb::updates(const uint &filter)
+QList<QSharedPointer<Update> > UpdateDb::updates()
 {
     QList<QSharedPointer<Update> > list;
 
-    UpdateModel::Filter eFilter = (UpdateModel::Filter) filter;
-
     QSqlQuery q(m_db);
-    switch (eFilter) {
-    case UpdateModel::Filter::All:
-        q.prepare(GET_ALL);
-        break;
-    case UpdateModel::Filter::Pending:
-        q.prepare(GET_PENDING);
-        break;
-    case UpdateModel::Filter::PendingClicks:
-        q.prepare(GET_PENDING_KIND);
-        q.bindValue(":kind", Update::kindToString(
-            Update::Kind::KindClick)
-        );
-        break;
-    case UpdateModel::Filter::PendingImage:
-        q.prepare(GET_PENDING_KIND);
-        q.bindValue(":kind", Update::kindToString(
-            Update::Kind::KindImage)
-        );
-        break;
-    case UpdateModel::Filter::Installed:
-        q.prepare(GET_INSTALLED);
-        break;
-    case UpdateModel::Filter::InstalledClicks:
-        q.prepare(GET_INSTALLED_KIND);
-        q.bindValue(":kind", Update::kindToString(
-            Update::Kind::KindClick)
-        );
-        break;
-    case UpdateModel::Filter::InstalledImage:
-        q.prepare(GET_INSTALLED_KIND);
-        q.bindValue(":kind", Update::kindToString(
-            Update::Kind::KindImage)
-        );
-        break;
-    }
+    q.prepare(GET_ALL);
 
     if (!q.exec()) {
-        qCritical() << "could not create list of updates" << q.lastError().text() << q.executedQuery();
+        qCritical() << "failed to query db for list of updates"
+                    << q.lastError().text() << q.executedQuery();
         return list;
     }
 
@@ -488,7 +347,7 @@ QSharedPointer<Update> UpdateDb::get(const QString &id, const uint &revision)
     QSharedPointer<Update> u = QSharedPointer<Update>(new Update);
 
     QSqlQuery q(m_db);
-    q.prepare(GET_SINGLE_DOWNLOAD);
+    q.prepare(GET_SINGLE);
     q.bindValue(":id", id);
     q.bindValue(":revision", revision);
 

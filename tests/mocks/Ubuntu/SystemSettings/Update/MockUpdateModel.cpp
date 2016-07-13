@@ -33,3 +33,9 @@ void MockUpdateModel::mockAddUpdate(const QString &id, const uint &revision, con
     db()->add(u);
     refresh();
 }
+
+
+void MockUpdateModelFilter::mockSetSourceModel(MockUpdateModel *source)
+{
+    setSourceModel(source);
+}

@@ -19,7 +19,7 @@
 #ifndef CLICK_TOKEN_DOWNLOADER_FACTORY_IMPL_H
 #define CLICK_TOKEN_DOWNLOADER_FACTORY_IMPL_H
 
-#include "tokendownloader_factory.h"
+#include "click/tokendownloader_factory.h"
 
 namespace UpdatePlugin
 {

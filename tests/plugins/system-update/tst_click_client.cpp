@@ -20,8 +20,8 @@
  * This test uses a mock web server.
  */
 
+#include "click/client_impl.h"
 #include "mockclickserver.h"
-#include "client_impl.h"
 
 #include <QSignalSpy>
 #include <QTest>

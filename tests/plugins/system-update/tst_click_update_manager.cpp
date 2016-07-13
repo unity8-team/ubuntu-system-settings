@@ -16,9 +16,9 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include "click/manager.h"
 #include "updatedb.h"
 #include "helpers.h"
-#include "clickupdatemanager.h"
 
 #include "fakeclient.h"
 #include "fakemanifest.h"
@@ -34,7 +34,7 @@
 
 using namespace UpdatePlugin;
 
-class TstClickUpdateManager : public QObject
+class TstClickManager : public QObject
 {
     Q_OBJECT
 private slots:
@@ -42,16 +42,17 @@ private slots:
     {
         m_dir = new QTemporaryDir();
         QVERIFY(m_dir->isValid());
-        m_db = new UpdateDb(m_dir->path() + "/cupdatemanagerstore.db");
+        m_model = new UpdateModel(m_dir->path() + "/cupdatemanagerstore.db");
 
         m_mockclient = new MockClient;
         m_mockmanifest = new MockManifest;
         m_mocksso = new MockSSO;
         m_mockdownloadfactory = new MockTokenDownloaderFactory;
 
-        m_instance = new ClickUpdateManager(m_mockclient, m_mockmanifest, m_mocksso,
-                                            m_mockdownloadfactory, m_db);
+        m_instance = new Click::Manager(m_mockclient, m_mockmanifest, m_mocksso,
+                                        m_mockdownloadfactory, m_model);
 
+        m_model->setParent(m_instance);
         m_mockclient->setParent(m_instance);
         m_mockmanifest->setParent(m_instance);
         m_mocksso->setParent(m_instance);
@@ -210,13 +211,13 @@ private slots:
         QSharedPointer<Update> u = QSharedPointer<Update>(new Update);
         u->setIdentifier(id);
         u->setRevision(rev);
-        m_db->add(u);
+        m_model->add(u);
 
-        m_instance->check(id, rev);
+        m_instance->retry(id, rev);
         MockTokenDownloader *dl = m_mockdownloadfactory->created.at(0);
         dl->mockDownloadSucceeded("foobar");
 
-        QCOMPARE(m_db->get(id, rev)->token(), QString("foobar"));
+        QCOMPARE(m_model->get(id, rev)->token(), QString("foobar"));
     }
 private:
     MockClient *m_mockclient = nullptr;
@@ -224,10 +225,10 @@ private:
     MockSSO *m_mocksso = nullptr;
     MockTokenDownloaderFactory *m_mockdownloadfactory = nullptr;
 
-    ClickUpdateManager *m_instance = nullptr;
-    UpdateDb *m_db = nullptr;
+    Click::Manager *m_instance = nullptr;
+    UpdateModel *m_model = nullptr;
     QTemporaryDir *m_dir;
 };
 
-QTEST_MAIN(TstClickUpdateManager)
+QTEST_MAIN(TstClickManager)
 #include "tst_click_update_manager.moc"

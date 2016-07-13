@@ -16,8 +16,8 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include "click/manifest_impl.h"
 #include "helpers.h"
-#include "manifest_impl.h"
 
 #include <QJsonDocument>
 #include <QJsonObject>

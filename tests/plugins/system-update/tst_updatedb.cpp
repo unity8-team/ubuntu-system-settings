@@ -31,7 +31,6 @@
 using namespace UpdatePlugin;
 
 Q_DECLARE_METATYPE(QSharedPointer<Update>)
-Q_DECLARE_METATYPE(UpdateModel::Filter)
 
 class TstUpdateDb : public QObject
 {
@@ -54,7 +53,7 @@ private slots:
     }
     void testNoUpdates()
     {
-        auto list = m_instance->updates((uint) UpdateModel::Filter::All);
+        auto list = m_instance->updates();
         QCOMPARE(list.size(), 0);
     }
     void testAddUpdate()
@@ -81,247 +80,16 @@ private slots:
         auto list = m_instance->updates();
         QCOMPARE(list.size(), 0);
     }
-    void testSetInstalled()
+    void testGetUpdate()
     {
         QSharedPointer<Update> m = createUpdate();
         m->setIdentifier("test.app");
         m->setRevision(1);
         m_instance->add(m);
 
-        QSignalSpy changedSpy(m_instance, SIGNAL(changed()));
-        m_instance->setInstalled(m->identifier(), m->revision());
-        QTRY_COMPARE(changedSpy.count(), 1);
-
-        // See that the DB changed the new Update instance.
-        QCOMPARE(m_instance->updates().at(0)->state(), Update::State::StateInstallFinished);
-        QCOMPARE(m_instance->updates().at(0)->installed(), true);
-    }
-    void testSetError()
-    {
-        QSharedPointer<Update> m = createUpdate();
-        m->setIdentifier("test.app");
-        m->setRevision(1);
-        m_instance->add(m);
-        QSignalSpy changedSpy(m_instance, SIGNAL(changed(const QString, const uint)));
-
-        QString error("Failure.");
-        m_instance->setError(m->identifier(), m->revision(), error);
-
-        // Assert signals from db are correct
-        QTRY_COMPARE(changedSpy.count(), 1);
-        QList<QVariant> args = changedSpy.takeFirst();
-        QCOMPARE(args.at(0).toString(), m->identifier());
-        QCOMPARE(args.at(1).toUInt(), m->revision());
-
-        // See that the DB changed the new Update instance.
-        QCOMPARE(m_instance->updates().at(0)->state(), Update::State::StateFailed);
-        QCOMPARE(m_instance->updates().at(0)->error(), error);
-    }
-    void testSetProgress()
-    {
-        QSharedPointer<Update> m = createUpdate();
-        m->setIdentifier("test.app");
-        m->setRevision(1);
-        m_instance->add(m);
-        QSignalSpy changedSpy(m_instance, SIGNAL(changed(const QString, const uint)));
-
-        int progress = 50;
-        m_instance->setProgress(m->identifier(), m->revision(), progress);
-
-        // Assert signals from db are correct
-        QTRY_COMPARE(changedSpy.count(), 1);
-        QList<QVariant> args = changedSpy.takeFirst();
-        QCOMPARE(args.at(0).toString(), m->identifier());
-        QCOMPARE(args.at(1).toUInt(), m->revision());
-
-        // See that the DB changed the new Update instance.
-        QCOMPARE(m_instance->updates().at(0)->state(), Update::State::StateDownloading);
-        QCOMPARE(m_instance->updates().at(0)->progress(), progress);
-    }
-    void testSetStarted()
-    {
-        QSharedPointer<Update> m = createUpdate();
-        m->setIdentifier("test.app");
-        m->setRevision(1);
-        m_instance->add(m);
-        QSignalSpy changedSpy(m_instance, SIGNAL(changed(const QString, const uint)));
-
-        m_instance->setStarted(m->identifier(), m->revision());
-
-        // Assert signals from db are correct
-        QTRY_COMPARE(changedSpy.count(), 1);
-        QList<QVariant> args = changedSpy.takeFirst();
-        QCOMPARE(args.at(0).toString(), m->identifier());
-        QCOMPARE(args.at(1).toUInt(), m->revision());
-
-        // See that the DB changed the new Update instance.
-        QCOMPARE(m_instance->updates().at(0)->state(), Update::State::StateDownloading);
-    }
-    void testSetQueued()
-    {
-        QSharedPointer<Update> m = createUpdate();
-        m->setIdentifier("test.app");
-        m->setRevision(1);
-        m_instance->add(m);
-        QSignalSpy changedSpy(m_instance, SIGNAL(changed(const QString, const uint)));
-
-        m_instance->setQueued(m->identifier(), m->revision());
-
-        // Assert signals from db are correct
-        QTRY_COMPARE(changedSpy.count(), 1);
-        QList<QVariant> args = changedSpy.takeFirst();
-        QCOMPARE(args.at(0).toString(), m->identifier());
-        QCOMPARE(args.at(1).toUInt(), m->revision());
-
-        // See that the DB changed the new Update instance.
-        QCOMPARE(m_instance->updates().at(0)->state(), Update::State::StateQueuedForDownload);
-    }
-    void testSetProcessing()
-    {
-        QSharedPointer<Update> m = createUpdate();
-        m->setIdentifier("test.app");
-        m->setRevision(1);
-        m_instance->add(m);
-        QSignalSpy changedSpy(m_instance, SIGNAL(changed(const QString, const uint)));
-
-        m_instance->setProcessing(m->identifier(), m->revision());
-
-        // Assert signals from db are correct
-        QTRY_COMPARE(changedSpy.count(), 1);
-        QList<QVariant> args = changedSpy.takeFirst();
-        QCOMPARE(args.at(0).toString(), m->identifier());
-        QCOMPARE(args.at(1).toUInt(), m->revision());
-
-        // See that the DB changed the new Update instance.
-        QCOMPARE(m_instance->updates().at(0)->state(), Update::State::StateInstalling);
-    }
-    void testSetPaused()
-    {
-        QSharedPointer<Update> m = createUpdate();
-        m->setIdentifier("test.app");
-        m->setRevision(1);
-        m_instance->add(m);
-        QSignalSpy changedSpy(m_instance, SIGNAL(changed(const QString, const uint)));
-
-        m_instance->setPaused(m->identifier(), m->revision());
-
-        // Assert signals from db are correct
-        QTRY_COMPARE(changedSpy.count(), 1);
-        QList<QVariant> args = changedSpy.takeFirst();
-        QCOMPARE(args.at(0).toString(), m->identifier());
-        QCOMPARE(args.at(1).toUInt(), m->revision());
-
-        // See that the DB changed the new Update instance.
-        QCOMPARE(m_instance->updates().at(0)->state(), Update::State::StateDownloadPaused);
-    }
-    void testSetResumed()
-    {
-        QSharedPointer<Update> m = createUpdate();
-        m->setIdentifier("test.app");
-        m->setRevision(1);
-        m_instance->add(m);
-        QSignalSpy changedSpy(m_instance, SIGNAL(changed(const QString, const uint)));
-
-        m_instance->setResumed(m->identifier(), m->revision());
-
-        // Assert signals from db are correct
-        QTRY_COMPARE(changedSpy.count(), 1);
-        QList<QVariant> args = changedSpy.takeFirst();
-        QCOMPARE(args.at(0).toString(), m->identifier());
-        QCOMPARE(args.at(1).toUInt(), m->revision());
-
-        // See that the DB changed the new Update instance.
-        QCOMPARE(m_instance->updates().at(0)->state(), Update::State::StateDownloading);
-    }
-    void testSetCanceled()
-    {
-        QSharedPointer<Update> m = createUpdate();
-        m->setIdentifier("test.app");
-        m->setRevision(1);
-        m_instance->add(m);
-        QSignalSpy changedSpy(m_instance, SIGNAL(changed(const QString, const uint)));
-
-        m_instance->setCanceled(m->identifier(), m->revision());
-
-        // Assert signals from db are correct
-        QTRY_COMPARE(changedSpy.count(), 1);
-        QList<QVariant> args = changedSpy.takeFirst();
-        QCOMPARE(args.at(0).toString(), m->identifier());
-        QCOMPARE(args.at(1).toUInt(), m->revision());
-
-        // See that the DB changed the new Update instance.
-        QCOMPARE(m_instance->updates().at(0)->state(), Update::State::StateAvailable);
-    }
-    void testFilters_data()
-    {
-        QTest::addColumn<QSharedPointer<Update> >("a");
-        QTest::addColumn<QSharedPointer<Update> >("b");
-        QTest::addColumn<QSharedPointer<Update> >("c");
-        QTest::addColumn<QSharedPointer<Update> >("d");
-        QTest::addColumn<UpdateModel::Filter>("filter");
-        QTest::addColumn<QStringList>("ids");
-
-        QSharedPointer<Update> a = createUpdate();
-        a->setIdentifier("a");
-        a->setKind(Update::Kind::KindClick);
-
-        QSharedPointer<Update> b = createUpdate();
-        b->setIdentifier("b");
-        b->setKind(Update::Kind::KindImage);
-
-        QSharedPointer<Update> c = createUpdate();
-        c->setIdentifier("c");
-        c->setInstalled(true);
-        c->setKind(Update::Kind::KindClick);
-
-        QSharedPointer<Update> d = createUpdate();
-        d->setIdentifier("d");
-        d->setInstalled(true);
-        d->setKind(Update::Kind::KindImage);
-
-        QStringList all; all << "a" << "b" << "c" << "d";
-        QTest::newRow("All") << a << b << c << d << UpdateModel::Filter::All << all;
-
-        QStringList pending; pending << "a" << "b";
-        QTest::newRow("Pending") << a << b << c << d << UpdateModel::Filter::Pending << pending;
-
-        QStringList pendingClicks; pendingClicks << "a";
-        QTest::newRow("PendingClicks") << a << b << c << d << UpdateModel::Filter::PendingClicks << pendingClicks;
-
-        QStringList pendingImage; pendingImage << "b";
-        QTest::newRow("PendingImage") << a << b << c << d << UpdateModel::Filter::PendingImage << pendingImage;
-
-        QStringList installedClicks; installedClicks << "c";
-        QTest::newRow("InstalledClicks") << a << b << c << d << UpdateModel::Filter::InstalledClicks << installedClicks;
-
-        QStringList installedImage; installedImage << "d";
-        QTest::newRow("InstalledImage") << a << b << c << d << UpdateModel::Filter::InstalledImage << installedImage;
-
-        QStringList installed; installed << "c" << "d";
-        QTest::newRow("Installed") << a << b << c << d << UpdateModel::Filter::Installed << installed;
-    }
-    void testFilters()
-    {
-        QFETCH(QSharedPointer<Update>, a);
-        QFETCH(QSharedPointer<Update>, b);
-        QFETCH(QSharedPointer<Update>, c);
-        QFETCH(QSharedPointer<Update>, d);
-        QFETCH(UpdateModel::Filter, filter);
-        QFETCH(QStringList, ids);
-
-        m_instance->add(a);
-        m_instance->add(b);
-        m_instance->add(c);
-        m_instance->add(d);
-
-        QList<QSharedPointer<Update> > updates = m_instance->updates((uint) filter);
-
-        QStringList actualIds;
-        for (int i = 0; i < updates.size(); i++) {
-            actualIds << updates.at(i)->identifier();
-        }
-
-        QCOMPARE(actualIds, ids);
+        QSharedPointer<Update> m1 = m_instance->get(m->identifier(), m->revision());
+        QCOMPARE(m->identifier(), m1->identifier());
+        QCOMPARE(m->revision(), m1->revision());
     }
     void testSupersededUpdate()
     {
@@ -339,8 +107,29 @@ private slots:
         m_instance->add(replacement);
 
         // We only want the replacement in our db of pending updates.
-        QList<QSharedPointer<Update> > list = m_instance->updates((uint) UpdateModel::Filter::PendingClicks);
+        QList<QSharedPointer<Update> > list = m_instance->updates();
         QCOMPARE(list.count(), 1);
+        QCOMPARE(list.at(0)->revision(), replacement->revision());
+    }
+    void testInstalledUpdatesAreNotSuperseded()
+    {
+        QSharedPointer<Update> installed = createUpdate();
+        installed->setIdentifier("some.app");
+        installed->setRevision(1);
+        installed->setKind(Update::Kind::KindClick);
+        installed->setInstalled(true);
+
+        QSharedPointer<Update> next = createUpdate();
+        next->setIdentifier("some.app");
+        next->setRevision(2);
+        next->setKind(Update::Kind::KindClick);
+
+        m_instance->add(installed);
+        m_instance->add(next);
+
+        // We want to keep both.
+        QList<QSharedPointer<Update> > list = m_instance->updates();
+        QCOMPARE(list.count(), 2);
     }
     void testLastCheck_data() {
         QTest::addColumn<QDateTime>("set");
@@ -368,48 +157,48 @@ private slots:
 
         QCOMPARE(m_instance->lastCheckDate(), target);
     }
-    void testUpdateLifecycle()
-    {
-        QSharedPointer<Update> m = QSharedPointer<Update>(new Update);
-        m->setRevision(42);
-        m->setIdentifier("com.ubuntu.testapp");
-        m->setTitle("ABC");
-        m->setToken("token");
+    // void testUpdateLifecycle()
+    // {
+    //     QSharedPointer<Update> m = QSharedPointer<Update>(new Update);
+    //     m->setRevision(42);
+    //     m->setIdentifier("com.ubuntu.testapp");
+    //     m->setTitle("ABC");
+    //     m->setToken("token");
 
-        QSharedPointer<Update> m2 = QSharedPointer<Update>(new Update);
-        m2->setRevision(100);
-        m2->setIdentifier("com.ubuntu.myapp");
-        m2->setTitle("XYZ");
-        m2->setToken("token");
+    //     QSharedPointer<Update> m2 = QSharedPointer<Update>(new Update);
+    //     m2->setRevision(100);
+    //     m2->setIdentifier("com.ubuntu.myapp");
+    //     m2->setTitle("XYZ");
+    //     m2->setToken("token");
 
-        // Add an app
-        m_instance->add(m);
+    //     // Add an app
+    //     m_instance->add(m);
 
-        QCOMPARE(m_instance->updates((uint) UpdateModel::Filter::All).size(), 1);
+    //     QCOMPARE(m_instance->updates((uint) UpdateModel::Filter::All).size(), 1);
 
-        // We had to refresh tokens, so we re-add the update.
-        m->setToken("newtoken");
-        m_instance->add(m);
-        QList<QSharedPointer<Update> > afterNewTokenList = m_instance->updates((uint) UpdateModel::Filter::Pending);
+    //     // We had to refresh tokens, so we re-add the update.
+    //     m->setToken("newtoken");
+    //     m_instance->add(m);
+    //     QList<QSharedPointer<Update> > afterNewTokenList = m_instance->updates((uint) UpdateModel::Filter::Pending);
 
-        QCOMPARE(afterNewTokenList.size(), 1);
-        QCOMPARE(afterNewTokenList.at(0)->token(), m->token());
+    //     QCOMPARE(afterNewTokenList.size(), 1);
+    //     QCOMPARE(afterNewTokenList.at(0)->token(), m->token());
 
-        // Add second app
-        m_instance->add(m2);
+    //     // Add second app
+    //     m_instance->add(m2);
 
-        QList<QSharedPointer<Update> > list = m_instance->updates((uint) UpdateModel::Filter::Pending);
-        QCOMPARE(list.size(), 2);
+    //     QList<QSharedPointer<Update> > list = m_instance->updates((uint) UpdateModel::Filter::Pending);
+    //     QCOMPARE(list.size(), 2);
 
-        // Update titles are sorted ASC, so we'll assume that order here.
-        QCOMPARE(list.at(0)->identifier(), m->identifier());
-        QCOMPARE(list.at(1)->identifier(), m2->identifier());
+    //     // Update titles are sorted ASC, so we'll assume that order here.
+    //     QCOMPARE(list.at(0)->identifier(), m->identifier());
+    //     QCOMPARE(list.at(1)->identifier(), m2->identifier());
 
-        // Mark as installed
-        m_instance->setInstalled(m2->identifier(), m2->revision());
-        QCOMPARE(m_instance->updates((uint) UpdateModel::Filter::Pending).size(), 1);
-        QCOMPARE(m_instance->updates((uint) UpdateModel::Filter::Installed).size(), 1);
-    }
+    //     // Mark as installed
+    //     m_instance->setInstalled(m2->identifier(), m2->revision());
+    //     QCOMPARE(m_instance->updates((uint) UpdateModel::Filter::Pending).size(), 1);
+    //     QCOMPARE(m_instance->updates((uint) UpdateModel::Filter::Installed).size(), 1);
+    // }
     void testPruning()
     {
         QSharedPointer<Update> recentUpdate = createUpdate();
@@ -444,36 +233,20 @@ private slots:
         }
         QCOMPARE(size, 1);
     }
-    void testNonExistingUpdates()
-    {
-        m_instance->setInstalled("not there", 0);
-        m_instance->setError("not there", 0, "nope");
-        m_instance->setProgress("not there", 0, 0);
-        m_instance->setStarted("not there", 0);
-        m_instance->setQueued("not there", 0);
-        m_instance->setProcessing("not there", 0);
-        m_instance->setPaused("not there", 0);
-        m_instance->setResumed("not there", 0);
-        m_instance->setCanceled("not there", 0);
-
-        QSqlQuery q(m_instance->db());
-        q.exec("SELECT * FROM updates");
-        QVERIFY(!q.next());
-    }
     void testUpdateAfterInstalled()
     {
         QSharedPointer<Update> installed = QSharedPointer<Update>(new Update);
         installed->setRevision(100);
         installed->setIdentifier("com.ubuntu.myapp");
-
+        installed->setInstalled(true);
         m_instance->add(installed);
-        m_instance->setInstalled(installed->identifier(), installed->revision());
+
 
         // Add a new revision of it.
         installed->setRevision(101);
         m_instance->add(installed);
 
-        QCOMPARE(m_instance->updates((uint) UpdateModel::Filter::All).size(), 2);
+        QCOMPARE(m_instance->updates().size(), 2);
     }
 private:
     UpdateDb *m_instance = nullptr;

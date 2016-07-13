@@ -16,43 +16,28 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef CLICKTOKEN_DOWNLOADER_H
-#define CLICKTOKEN_DOWNLOADER_H
+#ifndef NETWORK_ACCESS_MANAGER_IMPL_H
+#define NETWORK_ACCESS_MANAGER_IMPL_H
 
-#include "clickapiclient.h"
-#include "update.h"
-
-#include <token.h>
-
-#include <QObject>
+#include "network/accessmanager.h"
 
 namespace UpdatePlugin
 {
-class ClickTokenDownloader : public QObject
+namespace Network
 {
-    Q_OBJECT
+class ManagerImpl : public Manager
+{
 public:
-    explicit ClickTokenDownloader(QObject *parent, Update *update);
-    ~ClickTokenDownloader();
+    ManagerImpl(QObject *parent = 0);
+    virtual ~ManagerImpl() {};
 
-    void requestToken();
-    void setAuthToken(const UbuntuOne::Token &authToken);
-
-signals:
-    void tokenRequestSucceeded(Update *update);
-    void tokenRequestFailed(Update *update);
-
-private slots:
-    void cancel();
-    void handleSuccess(const QString &token);
-    void handleFailure();
+    virtual QNetworkReply* post(const QNetworkRequest &request, const QByteArray &data) override;
+    virtual QNetworkReply* head(const QNetworkRequest &request) override;
 
 private:
-    void init();
-    Update *m_update;
-    ClickApiClient m_client;
-    UbuntuOne::Token m_authToken;
+    QNetworkAccessManager m_impl;
 };
+} // Network
 } // UpdatePlugin
 
-#endif // CLICKTOKEN_DOWNLOADER_H
+#endif // NETWORK_ACCESS_MANAGER_IMPL_H

@@ -28,6 +28,9 @@
 
 using namespace UpdatePlugin;
 
+Q_DECLARE_METATYPE(Update::Kinds)
+Q_DECLARE_METATYPE(QList<QSharedPointer<Update> >)
+
 class TstUpdateModel : public QObject
 {
     Q_OBJECT
@@ -36,6 +39,7 @@ private slots:
     {
         m_model = new UpdateModel(":memory:");
         m_db = m_model->db();
+        m_filter = new UpdateModelFilter(m_model, m_model);
     }
     void cleanup()
     {
@@ -54,9 +58,21 @@ private slots:
         u->setRevision(rev);
         return u;
     }
+    QSharedPointer<Update> createClickUpdate(QString id, int rev)
+    {
+        QSharedPointer<Update> u = createUpdate(id, rev);
+        u->setKind(Update::Kind::KindClick);
+        return u;
+    }
+    QSharedPointer<Update> createImageUpdate(QString id, int rev)
+    {
+        QSharedPointer<Update> u = createUpdate(id, rev);
+        u->setKind(Update::Kind::KindImage);
+        return u;
+    }
     void testNoUpdates()
     {
-        QCOMPARE(m_model->count(), 0);
+        QCOMPARE(m_model->rowCount(), 0);
     }
     void testAdd()
     {
@@ -67,7 +83,7 @@ private slots:
         QSignalSpy insertedSpy(m_model, SIGNAL(rowsAboutToBeInserted(const QModelIndex&, int, int)));
         m_db->add(m);
         QTRY_COMPARE(insertedSpy.count(), 1);
-        QCOMPARE(m_model->count(), 1);
+        QCOMPARE(m_model->rowCount(), 1);
     }
     void testAddMultiple()
     {
@@ -85,7 +101,7 @@ private slots:
         m_db->add(b);
         m_db->add(c);
 
-        QCOMPARE(m_model->count(), 3);
+        QCOMPARE(m_model->rowCount(), 3);
     }
     void testRemove()
     {
@@ -94,64 +110,64 @@ private slots:
         a->setRevision(1);
 
         m_db->add(a);
-        QCOMPARE(m_model->count(), 1);
+        QCOMPARE(m_model->rowCount(), 1);
 
         QSignalSpy removeSpy(m_model, SIGNAL(rowsAboutToBeRemoved(const QModelIndex&, int, int)));
         m_db->remove(a);
         QTRY_COMPARE(removeSpy.count(), 1);
-        QCOMPARE(m_model->count(), 0);
+        QCOMPARE(m_model->rowCount(), 0);
     }
-    void testMoveUp()
-    {
-        /* For moving, we need a filter that sorts. Pending updates are sorted
-        by title ASC. (See UpdateDb::GET_PENDING) */
-        m_model->setFilter(UpdateModel::Filter::Pending);
+    // void testMoveUp()
+    // {
+    //     /* For moving, we need a filter that sorts. Pending updates are sorted
+    //     by title ASC. (See UpdateDb::GET_PENDING) */
+    //     m_model->setFilter(UpdateModel::Filter::Pending);
 
-        QSharedPointer<Update> a = createUpdate();
-        a->setIdentifier("first.app");
-        a->setRevision(1);
-        a->setTitle("ABC");
+    //     QSharedPointer<Update> a = createUpdate();
+    //     a->setIdentifier("first.app");
+    //     a->setRevision(1);
+    //     a->setTitle("ABC");
 
-        QSharedPointer<Update> b = createUpdate();
-        b->setIdentifier("second.app");
-        b->setRevision(1);
-        b->setTitle("CED");
+    //     QSharedPointer<Update> b = createUpdate();
+    //     b->setIdentifier("second.app");
+    //     b->setRevision(1);
+    //     b->setTitle("CED");
 
-        m_db->add(a);
-        m_db->add(b);
+    //     m_db->add(a);
+    //     m_db->add(b);
 
-        QCOMPARE(m_model->data(m_model->index(0, 0), UpdateModel::Roles::IdRole).toString(),
-                 a->identifier());
-        QCOMPARE(m_model->data(m_model->index(1, 0), UpdateModel::Roles::IdRole).toString(),
-                 b->identifier());
+    //     QCOMPARE(m_model->data(m_model->index(0, 0), UpdateModel::Roles::IdRole).toString(),
+    //              a->identifier());
+    //     QCOMPARE(m_model->data(m_model->index(1, 0), UpdateModel::Roles::IdRole).toString(),
+    //              b->identifier());
 
-        QSqlQuery q(m_db->db());
-        q.prepare("UPDATE updates SET title=:title WHERE id=:id AND revision=:revision");
-        q.bindValue(":title", "XYZ");
-        q.bindValue(":id", a->identifier());
-        q.bindValue(":revision", a->revision());
-        q.exec();
-        q.finish();
+    //     QSqlQuery q(m_db->db());
+    //     q.prepare("UPDATE updates SET title=:title WHERE id=:id AND revision=:revision");
+    //     q.bindValue(":title", "XYZ");
+    //     q.bindValue(":id", a->identifier());
+    //     q.bindValue(":revision", a->revision());
+    //     q.exec();
+    //     q.finish();
 
-        QSignalSpy moveSpy(
-            m_model, SIGNAL(rowsAboutToBeMoved(const QModelIndex&, int, int, const QModelIndex&, int))
-        );
-        m_model->refresh();
+    //     QSignalSpy moveSpy(
+    //         m_model, SIGNAL(rowsAboutToBeMoved(const QModelIndex&, int, int, const QModelIndex&, int))
+    //     );
+    //     m_model->refresh();
 
-        // Moved and reversed.
-        QCOMPARE(m_model->data(m_model->index(1, 0), UpdateModel::Roles::IdRole).toString(),
-                 a->identifier());
-        QCOMPARE(m_model->data(m_model->index(0, 0), UpdateModel::Roles::IdRole).toString(),
-                 b->identifier());
+    //     // Moved and reversed.
+    //     QCOMPARE(m_model->data(m_model->index(1, 0), UpdateModel::Roles::IdRole).toString(),
+    //              a->identifier());
+    //     QCOMPARE(m_model->data(m_model->index(0, 0), UpdateModel::Roles::IdRole).toString(),
+    //              b->identifier());
 
-        QTRY_COMPARE(moveSpy.count(), 1);
+    //     QTRY_COMPARE(moveSpy.count(), 1);
 
-        QList<QVariant> args = moveSpy.takeFirst();
-        // sourceStart == sourceEnd, but destinationRow is 0
-        QCOMPARE(args.at(1).toInt(), 1);
-        QCOMPARE(args.at(2).toInt(), 1);
-        QCOMPARE(args.at(4).toInt(), 0);
-    }
+    //     QList<QVariant> args = moveSpy.takeFirst();
+    //     // sourceStart == sourceEnd, but destinationRow is 0
+    //     QCOMPARE(args.at(1).toInt(), 1);
+    //     QCOMPARE(args.at(2).toInt(), 1);
+    //     QCOMPARE(args.at(4).toInt(), 0);
+    // }
     void testChange()
     {
         QSharedPointer<Update> m = createUpdate();
@@ -207,29 +223,29 @@ private slots:
         QTRY_COMPARE(dataChangedSpy.count(), 3);
         QList<QVariant> args = dataChangedSpy.takeFirst();
     }
-    // TODO: move this test to updatedb.
-    void testSupersededUpdate()
-    {
-        QSharedPointer<Update> superseded = createUpdate();
-        superseded->setIdentifier("some.app");
-        superseded->setRevision(1);
-        superseded->setKind(Update::Kind::KindClick);
+    // // TODO: move this test to updatedb.
+    // void testSupersededUpdate()
+    // {
+    //     QSharedPointer<Update> superseded = createUpdate();
+    //     superseded->setIdentifier("some.app");
+    //     superseded->setRevision(1);
+    //     superseded->setKind(Update::Kind::KindClick);
 
-        QSharedPointer<Update> replacement = createUpdate();
-        replacement->setIdentifier("some.app");
-        replacement->setRevision(2);
-        replacement->setKind(Update::Kind::KindClick);
+    //     QSharedPointer<Update> replacement = createUpdate();
+    //     replacement->setIdentifier("some.app");
+    //     replacement->setRevision(2);
+    //     replacement->setKind(Update::Kind::KindClick);
 
-        m_db->add(superseded);
-        m_db->add(replacement);
+    //     m_db->add(superseded);
+    //     m_db->add(replacement);
 
-        // We only want the replacement in our model of pending updates.
-        m_model->setFilter(UpdateModel::Filter::PendingClicks);
-        QCOMPARE(m_model->count(), 1);
-        QCOMPARE(m_model->data(
-            m_model->index(0), UpdateModel::IdRole
-        ).toString(), replacement->identifier());
-    }
+    //     // We only want the replacement in our model of pending updates.
+    //     m_model->setFilter(UpdateModel::Filter::PendingClicks);
+    //     QCOMPARE(m_model->rowCount(), 1);
+    //     QCOMPARE(m_model->data(
+    //         m_model->index(0), UpdateModel::IdRole
+    //     ).toString(), replacement->identifier());
+    // }
     void testRoles()
     {
         QSharedPointer<Update> app = createUpdate();
@@ -284,30 +300,15 @@ private slots:
         QVERIFY(!m_model->data(idx, UpdateModel::UpdatedAtRole).toDateTime().isValid());
 
     }
-    void testFilter_data()
+    void testNotFound()
     {
-        QTest::addColumn<uint>("filter");
-        QTest::newRow("Pending") << (uint) UpdateModel::Filter::Pending;
-        QTest::newRow("PendingClicks") << (uint) UpdateModel::Filter::PendingClicks;
-        QTest::newRow("PendingImage") << (uint) UpdateModel::Filter::PendingImage;
-        QTest::newRow("InstalledClicks") << (uint) UpdateModel::Filter::InstalledClicks;
-        QTest::newRow("PendingImage") << (uint) UpdateModel::Filter::PendingImage;
-        QTest::newRow("Installed") << (uint) UpdateModel::Filter::Installed;
-    }
-    void testFilter()
-    {
-        QFETCH(uint, filter);
-
-        QSignalSpy filterChangedSpy(m_model, SIGNAL(filterChanged()));
-        m_model->setFilter((UpdateModel::Filter) filter);
-        QTRY_COMPARE(filterChangedSpy.count(), 1);
-        QCOMPARE((uint) m_model->filter(), filter);
+        QSharedPointer<Update> notFound = m_model->get("notfound", 0);
+        QVERIFY(notFound.isNull());
     }
     void testImageUpdate()
     {
         m_model->setImageUpdate("ubuntu", "350", 400000);
-        m_model->setFilter(UpdateModel::Filter::PendingImage);
-        QCOMPARE(m_model->count(), 1);
+        QCOMPARE(m_model->rowCount(), 1);
         QCOMPARE(m_model->data(
             m_model->index(0), UpdateModel::IdRole
         ).toString(), QString("ubuntu"));
@@ -318,6 +319,23 @@ private slots:
             m_model->index(0), UpdateModel::AutomaticRole
         ).toBool(), false);
 
+    }
+    void testSetAvailable()
+    {
+        QSharedPointer<Update> u = createUpdate("id", 42);
+        u->setError("Some error");
+        u->setProgress(95);
+        u->setToken("foobar");
+        m_db->add(u);
+        m_model->setAvailable(u->identifier(), u->revision());
+        QSharedPointer<Update> u1 = m_model->get(u->identifier(), u->revision());
+
+        QVERIFY(!u1.isNull());
+
+        QCOMPARE(u1->error(), QString(""));
+        QCOMPARE(u1->progress(), 0);
+        QCOMPARE(u1->token(), QString(""));
+        QCOMPARE(u1->state(), Update::State::StateAvailable);
     }
     void testSetInstalled()
     {
@@ -425,9 +443,107 @@ private slots:
         QVERIFY(names[UpdateModel::Roles::ErrorRole] == "error");
         QVERIFY(names[UpdateModel::Roles::PackageNameRole] == "packageName");
     }
+    void testFilterKinds_data()
+    {
+        QTest::addColumn<Update::Kinds>("kinds");
+
+        Update::Kinds unknown(Update::Kind::KindUnknown);
+        QTest::newRow("Unknown") << unknown;
+
+        Update::Kinds clickAndImages(Update::Kind::KindImage | Update::Kind::KindClick);
+        QTest::newRow("Click and Images") << clickAndImages;
+
+        Update::Kinds clicks(Update::Kind::KindClick);
+        QTest::newRow("Click") << clicks;
+
+        Update::Kinds images(Update::Kind::KindImage);
+        QTest::newRow("Images") << images;
+    }
+    void testFilterKinds()
+    {
+        QFETCH(Update::Kinds, kinds);
+
+        m_filter->filterOnKinds(kinds);
+        QCOMPARE(m_filter->kinds(), kinds);
+    }
+    void testFilterInstalled_data()
+    {
+        QTest::addColumn<bool>("installed");
+
+        QTest::newRow("Installed") << true;
+        QTest::newRow("Not installed") << false;
+    }
+    void testFilterInstalled()
+    {
+        QFETCH(bool, installed);
+
+        m_filter->filterOnInstalled(installed);
+        QCOMPARE(m_filter->installed(), installed);
+    }
+    void testFilterKindsIntegration_data()
+    {
+        QTest::addColumn<QList<QSharedPointer<Update>> >("updates");
+        QTest::addColumn<Update::Kinds>("kindsFilter");
+        QTest::addColumn<int>("targetCount");
+
+        QList<QSharedPointer<Update>> sample;
+        sample << createClickUpdate("a", 1) << createClickUpdate("b", 2)
+               << createImageUpdate("u", 1);
+
+        Update::Kinds clicks(Update::Kind::KindClick);
+        Update::Kinds images(Update::Kind::KindImage);
+
+        QTest::newRow("Filter on clicks") << sample << clicks << 2;
+        QTest::newRow("Filter on images") << sample << images << 1;
+
+    }
+    void testFilterKindsIntegration()
+    {
+        QFETCH(QList<QSharedPointer<Update> >, updates);
+        QFETCH(Update::Kinds, kindsFilter);
+        QFETCH(int, targetCount);
+
+        Q_FOREACH(QSharedPointer<Update> u, updates) {
+            m_model->add(u);
+        }
+
+        m_filter->filterOnKinds(kindsFilter);
+        QCOMPARE(m_filter->rowCount(), targetCount);
+    }
+    void testFilteringInstalledIntegration_data()
+    {
+        QTest::addColumn<QList<QSharedPointer<Update>> >("updates");
+        QTest::addColumn<bool>("installedFilter");
+        QTest::addColumn<int>("targetCount");
+
+
+        QSharedPointer<Update> installed = createUpdate("a", 1);
+        installed->setInstalled(true);
+
+        QList<QSharedPointer<Update>> sample;
+        sample << createUpdate("b", 1) << createUpdate("c", 1) << installed;
+
+        QTest::newRow("Filter not installed") << sample << false << 2;
+        QTest::newRow("Filter installed") << sample << true << 1;
+
+    }
+    void testFilteringInstalledIntegration()
+    {
+        QFETCH(QList<QSharedPointer<Update> >, updates);
+        QFETCH(bool, installedFilter);
+        QFETCH(int, targetCount);
+
+        Q_FOREACH(QSharedPointer<Update> u, updates) {
+            m_model->add(u);
+        }
+
+        m_filter->filterOnInstalled(installedFilter);
+        QCOMPARE(m_filter->rowCount(), targetCount);
+    }
 private:
     UpdateDb *m_db = nullptr;
     UpdateModel *m_model = nullptr;
+    UpdateModelFilter *m_filter = nullptr;
 };
 
 QTEST_MAIN(TstUpdateModel)

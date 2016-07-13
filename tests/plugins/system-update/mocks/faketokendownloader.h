@@ -19,8 +19,8 @@
 #ifndef FAKE_TOKEN_DOWNLOADER_H
 #define FAKE_TOKEN_DOWNLOADER_H
 
+#include "click/tokendownloader.h"
 #include "update.h"
-#include "tokendownloader.h"
 
 #include <token.h>
 

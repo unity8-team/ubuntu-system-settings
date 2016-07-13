@@ -208,10 +208,12 @@ Item {
                         objectName: "updatesImageDelegate-" + index
                         anchors { left: parent.left; right: parent.right }
                         updateState: model.updateState
+                        kind: model.kind
                         progress: model.progress
                         version: remoteVersion
                         size: model.size
                         changelog: model.changelog
+                        error: model.error
 
                         onRetry: SystemImage.downloadUpdate();
                         onDownload: SystemImage.downloadUpdate();
@@ -239,18 +241,23 @@ Item {
                         objectName: "updatesClickUpdate" + index
                         anchors { left: parent.left; right: parent.right }
                         updateState: model.updateState
+                        kind: model.kind
                         progress: model.progress
                         version: remoteVersion
                         size: model.size
                         name: title
                         iconUrl: model.iconUrl
                         changelog: model.changelog
+                        error: model.error
 
-                        onInstall: downloadHandler.createDownload(model)
-                        onDownload: downloadHandler.createDownload(model)
+                        onInstall: {
+                            console.warn('onInstall');
+                            downloadHandler.createDownload(model);
+                        }
 
                         onPause: downloadHandler.pauseDownload(model)
                         onResume: downloadHandler.resumeDownload(model)
+                        onRetry: clickManager.retry(identifier, revision)
 
                         Connections {
                             target: glob
@@ -300,10 +307,11 @@ Item {
                         updatedAt: model.updatedAt
 
                         onLaunch: {
-                            console.warn("%1_%2_%3".arg(identifier).arg(packageName).arg(remoteVersion));
                             /* The Application ID is the string
                             "$(click_package)_$(application)_$(version) */
-                            clickManager.launch("%1_%2_%3".arg(identifier).arg(packageName).arg(remoteVersion));
+                            clickManager.launch("%1_%2_%3".arg(identifier)
+                                                          .arg(packageName)
+                                                          .arg(remoteVersion));
                         }
                     }
                 }
@@ -316,7 +324,9 @@ Item {
         function onCheckStop() {
             switch (updates.status) {
             case SystemUpdate.StatusCheckingClickUpdates:
-                updates.status = SystemUpdate.StatusIdle; break;
+                updates.status = SystemUpdate.StatusIdle;
+                SystemUpdate.checkCompleted();
+                break;
             case SystemUpdate.StatusCheckingAllUpdates:
                 updates.status = SystemUpdate.StatusCheckingSystemUpdates; break;
             }
@@ -347,7 +357,9 @@ Item {
             case SystemUpdate.StatusCheckingAllUpdates:
                 updates.status = SystemUpdate.StatusCheckingClickUpdates; break;
             case SystemUpdate.StatusCheckingSystemUpdates:
-                updates.status = SystemUpdate.StatusIdle; break;
+                updates.status = SystemUpdate.StatusIdle;
+                SystemUpdate.checkCompleted();
+                break;
             }
         }
     }

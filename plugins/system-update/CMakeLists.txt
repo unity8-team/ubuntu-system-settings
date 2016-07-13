@@ -17,8 +17,6 @@ set(QML_SOURCES
 include_directories(
     ${CMAKE_CURRENT_BINARY_DIR}
     ${CMAKE_CURRENT_SOURCE_DIR}
-    ${CMAKE_CURRENT_SOURCE_DIR}/click
-    ${CMAKE_CURRENT_SOURCE_DIR}/network
     /usr/include/apt-pkg/
 )
 
@@ -27,7 +25,7 @@ add_definitions(${UAL_CFLAGS} ${UAL_CFLAGS_OTHER})
 pkg_check_modules(UBUNTUONEAUTH REQUIRED ubuntuoneauth-2.0)
 add_definitions(${UBUNTUONEAUTH_CFLAGS} ${UBUNTUONEAUTH_CFLAGS_OTHER})
 
-add_library(UbuntuUpdatePanel MODULE
+add_library(UpdatePlugin SHARED
     click/client.h
     click/manifest.h
     click/sso.h
@@ -38,31 +36,31 @@ add_library(UbuntuUpdatePanel MODULE
     click/sso_impl.cpp
     click/tokendownloader_impl.cpp
     click/tokendownloader_factory_impl.cpp
+    click/manager.cpp
 
-    network/manager.h
-    network/manager_impl.cpp
+    network/accessmanager.h
+    network/accessmanager_impl.cpp
 
-    clickupdatemanager.cpp
     helpers.cpp
-    plugin.cpp
     systemupdate.cpp
     update.cpp
     updatedb.cpp
     updatemodel.cpp
-    # helpers.cpp
-    # networkaccessmanager.cpp
-    # networkaccessmanagerimpl.cpp
-    ${QML_SOURCES}
 )
-
-qt5_use_modules(UbuntuUpdatePanel Core Qml Quick Network DBus Sql)
-
-target_link_libraries(UbuntuUpdatePanel
+qt5_use_modules(UpdatePlugin Core Network Sql)
+target_link_libraries(UpdatePlugin
     uss-systemimage
     apt-pkg
     ${UAL_LDFLAGS}
     ${UBUNTUONEAUTH_LDFLAGS}
 )
+
+add_library(UbuntuUpdatePanel MODULE
+    plugin.cpp
+    ${QML_SOURCES}
+)
+qt5_use_modules(UbuntuUpdatePanel Qml Quick)
+target_link_libraries(UbuntuUpdatePanel UpdatePlugin)
 
 set(PLUG_DIR ${PLUGIN_PRIVATE_MODULE_DIR}/Ubuntu/SystemSettings/Update)
 install(TARGETS UbuntuUpdatePanel DESTINATION ${PLUG_DIR})

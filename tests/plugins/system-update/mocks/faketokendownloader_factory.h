@@ -20,10 +20,10 @@
 #ifndef FAKE_TOKEN_DOWNLOADERFACTORY_H
 #define FAKE_TOKEN_DOWNLOADERFACTORY_H
 
+#include "click/client.h"
+#include "click/tokendownloader.h"
+#include "click/tokendownloader_factory.h"
 #include "update.h"
-#include "client.h"
-#include "tokendownloader.h"
-#include "tokendownloader_factory.h"
 
 #include "faketokendownloader.h"
 

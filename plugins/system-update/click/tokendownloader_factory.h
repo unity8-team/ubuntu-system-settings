@@ -19,8 +19,8 @@
 #ifndef CLICK_TOKEN_DOWNLOADER_FACTORY_H
 #define CLICK_TOKEN_DOWNLOADER_FACTORY_H
 
-#include "client.h"
-#include "tokendownloader.h"
+#include "click/client.h"
+#include "click/tokendownloader.h"
 
 #include <QObject>
 

@@ -16,7 +16,7 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "manager_impl.h"
+#include "network/accessmanager_impl.h"
 
 namespace UpdatePlugin
 {
@@ -26,7 +26,6 @@ ManagerImpl::ManagerImpl(QObject *parent)
     : Manager(parent)
     , m_impl()
 {
-  qWarning() << "create manager_impl";
     connect(&m_impl, SIGNAL(finished(QNetworkReply *)),
             this, SIGNAL(finished(QNetworkReply *)));
     connect(&m_impl, SIGNAL(sslErrors(QNetworkReply *,
@@ -38,13 +37,11 @@ ManagerImpl::ManagerImpl(QObject *parent)
 QNetworkReply* ManagerImpl::post(const QNetworkRequest &request,
                                  const QByteArray &data)
 {
-    qWarning() << "\tManagerImpl post";
     return m_impl.post(request, data);
 }
 
 QNetworkReply* ManagerImpl::head(const QNetworkRequest &request)
 {
-    qWarning() << "\tManagerImpl head" << request.rawHeaderList() << request.url().toString();
     return m_impl.head(request);
 }
 } // Network

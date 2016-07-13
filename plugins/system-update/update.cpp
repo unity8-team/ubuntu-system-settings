@@ -463,8 +463,6 @@ Update::State Update::stringToState(const QString &state)
 QString Update::kindToString(const Update::Kind &kind)
 {
     switch (kind) {
-    case Kind::KindAll:
-        return QLatin1String("all");
     case Kind::KindClick:
         return QLatin1String("click");
     case Kind::KindImage:
@@ -477,8 +475,6 @@ QString Update::kindToString(const Update::Kind &kind)
 
 Update::Kind Update::stringToKind(const QString &kind)
 {
-    if (kind == QLatin1String("all"))
-        return Kind::KindAll;
     if (kind == QLatin1String("click"))
         return Kind::KindClick;
     if (kind == QLatin1String("image"))

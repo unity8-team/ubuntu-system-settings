@@ -18,8 +18,8 @@
 #ifndef SYSTEM_UPDATE_H
 #define SYSTEM_UPDATE_H
 
-#include "updatedb.h"
-#include "network/manager.h"
+#include "updatemodel.h"
+#include "network/accessmanager.h"
 
 #include <QDebug>
 
@@ -45,23 +45,25 @@ public:
         StatusServerError
     };
 
-    UpdateDb* db();
+    // We only need one model, views should use UpdateModelFilter.
+    UpdateModel* updates();
+
+    /* Qt recommend only one QNetworkAccessManager per application,
+    and it is provided here. */
     Network::Manager* nam();
 
     Q_INVOKABLE bool isCheckRequired();
-
-public slots:
-    void checkCompleted();
+    Q_INVOKABLE void checkCompleted();
 
 protected:
     explicit SystemUpdate(QObject *parent = 0);
-    explicit SystemUpdate(UpdateDb *db, Network::Manager *nam,
+    explicit SystemUpdate(UpdateModel *model, Network::Manager *nam,
                           QObject *parent = 0);
     ~SystemUpdate() {}
 
 private:
     static SystemUpdate *m_instance;
-    UpdateDb *m_db;
+    UpdateModel *m_model;
     Network::Manager *m_nam;
 };
 

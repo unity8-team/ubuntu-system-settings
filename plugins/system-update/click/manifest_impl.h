@@ -19,7 +19,7 @@
 #ifndef CLICK_MANIFEST_IMPL_H
 #define CLICK_MANIFEST_IMPL_H
 
-#include "manifest.h"
+#include "click/manifest.h"
 
 #include <QProcess>
 

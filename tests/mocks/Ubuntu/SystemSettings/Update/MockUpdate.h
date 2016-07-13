@@ -31,10 +31,9 @@ public:
 
     enum class Kind : uint
     {
-        KindUnknown = 0,
-        KindClick,
-        KindImage,
-        KindAll
+        KindUnknown = 1,
+        KindClick = 2,
+        KindImage = 4
     };
 
     enum class State : uint

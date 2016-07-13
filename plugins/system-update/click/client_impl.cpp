@@ -16,7 +16,7 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "client_impl.h"
+#include "click/client_impl.h"
 #include "helpers.h"
 #include "systemupdate.h"
 
@@ -52,7 +52,6 @@ ClientImpl::~ClientImpl()
 
 void ClientImpl::initializeNam()
 {
-    qWarning() << "\t\t!!!!!!!!!init nam";
     connect(m_nam, SIGNAL(finished(QNetworkReply *)),
             this, SLOT(requestFinished(QNetworkReply *)));
     connect(m_nam, SIGNAL(sslErrors(QNetworkReply *, const QList<QSslError>&)),
@@ -120,14 +119,9 @@ void ClientImpl::requestSslFailed(QNetworkReply *reply,
 
 void ClientImpl::requestFinished(QNetworkReply *reply)
 {
-
-    qWarning() << "requestFinished...";
-
     if (reply->request().originatingObject() != this) {
-        qWarning() << "requestFinished, not handling!";
         return; // We did not create this request.
     }
-    qWarning() << "requestFinished, handling!";
 
     if (!validReply(reply)) {
         // Error signals are already sent.
@@ -165,7 +159,9 @@ void ClientImpl::requestSucceeded(QNetworkReply *reply)
     } else if (rtp == "metadata-request") {
         Q_EMIT metadataRequestSucceeded(reply->readAll());
     } else {
-        qWarning() << "not handled";
+        /* We are not to handle this reply, so do an early return to avoid
+        deleting the reply. */
+        return;
     }
 
     reply->deleteLater();
