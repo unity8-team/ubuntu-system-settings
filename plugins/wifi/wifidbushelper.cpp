@@ -305,11 +305,10 @@ QString WifiDbusHelper::getWifiIpAddress()
         if (type_v.toUInt() == 2 /* NM_DEVICE_TYPE_WIFI */) {
             auto ip4name = iface.property("IpInterface").toString();
 
-            QList<QHostAddress> adrs = QNetworkInterface::interfaceFromName(
-                ip4name
-            ).allAddresses();
-            if (adrs.size() > 0) {
-                return adrs.at(0).toString();
+            QList<QNetworkAddressEntry> entries =
+                QNetworkInterface::interfaceFromName(ip4name).addressEntries();
+            if (entries.size() > 0) {
+                return entries[0].ip().toString();
             }
             break;
         }
