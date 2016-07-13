@@ -176,7 +176,7 @@ ItemPage {
                 })
             }
 
-            SettingsListItems.SingleValueProgression {
+            SettingsListItems.SingleValue {
                 objectName: "lastUpdatedItem"
                 text: i18n.tr("Last updated")
                 value: UpdateManager.lastUpdateDate && !isNaN(UpdateManager.lastUpdateDate) ?
