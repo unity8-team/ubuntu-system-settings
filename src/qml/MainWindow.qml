@@ -119,6 +119,7 @@ MainView {
 
             head.actions: [
                 Action {
+                    objectName: "searchAction"
                     iconName: "find"
                     onTriggered: {
                         pluginManager.filter = "";
