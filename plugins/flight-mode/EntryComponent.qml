@@ -1,7 +1,7 @@
 /*
  * This file is part of system-settings
  *
- * Copyright (C) 2013-2015 Canonical Ltd.
+ * Copyright (C) 2013 Canonical Ltd.
  *
  * Contact: Alberto Mardegan <alberto.mardegan@canonical.com>
  *
@@ -19,30 +19,40 @@
  */
 
 import QtQuick 2.4
-import SystemSettings.ListItems 1.0 as SettingsListItems
 import Ubuntu.Components 1.3
 import Ubuntu.SystemSettings.FlightMode 1.0 as FlightMode
 import Ubuntu.Settings.Components 0.1 as USC
 
-SettingsListItems.Icon {
+ListItem {
     id: root
-    iconSource: model.icon
-    text: i18n.tr(model.displayName)
+    height: layout.height
 
-    Switch {
-        id: switchItem
+    ListItemLayout {
+        id: layout
+        title.text: i18n.tr(model.displayName)
 
-        USC.ServerPropertySynchroniser {
-            userTarget: switchItem
-            userProperty: "checked"
-            serverTarget: helper
-            serverProperty: "inFlightMode"
+        Switch {
+            id: switchItem
 
-            onSyncTriggered: helper.setFlightMode(value)
+            SlotsLayout.position: SlotsLayout.Trailing
+            USC.ServerPropertySynchroniser {
+                userTarget: switchItem
+                userProperty: "checked"
+                serverTarget: helper
+                serverProperty: "inFlightMode"
+    
+                onSyncTriggered: helper.setFlightMode(value)
+            }
+        }
+        Icon {
+            SlotsLayout.position: SlotsLayout.Leading;
+            SlotsLayout.padding { top: 0; bottom: 0 }
+            source: model.icon
+            height: units.gu(5)
         }
     }
 
-    resources: FlightMode.Helper {
+    FlightMode.Helper {
         id: helper
     }
 }

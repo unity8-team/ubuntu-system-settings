@@ -19,12 +19,22 @@
  */
 
 import QtQuick 2.4
-import SystemSettings.ListItems 1.0 as SettingsListItems
 import Ubuntu.Components 1.3
 
-SettingsListItems.IconProgression {
+ListItem {
     id: root
     objectName: "entryComponent-reset"
-    iconSource: model.icon
-    text: i18n.tr(model.displayName)
+    height: layout.height
+
+    ListItemLayout {
+        id: layout
+        title.text: i18n.tr(model.displayName)
+        Icon {
+            SlotsLayout.position: SlotsLayout.Leading;
+            SlotsLayout.padding { top: 0; bottom: 0 }
+            source: model.icon
+            height: units.gu(5)
+        }
+        ProgressionSlot {}
+    }
 }

@@ -20,19 +20,28 @@
 
 import QtQuick 2.4
 import Ubuntu.Components 1.3
-import Ubuntu.Components.ListItems 1.3 as ListItem
 import Ubuntu.SystemSettings.Update 1.0
 
-ListItem.SingleValue {
+ListItem {
     id: root
-    text: i18n.tr(model.displayName)
     objectName: "entryComponent-updates"
-    iconSource: Qt.resolvedUrl(model.icon)
-    iconFrame: false
-    progression: true
-    value: updatesAvailable > 0 ? updatesAvailable : ""
-
     property int updatesAvailable: 0
+    height: layout.height
+
+    ListItemLayout {
+        id: layout
+        title.text: i18n.tr(model.displayName)
+        Icon {
+            SlotsLayout.position: SlotsLayout.Leading;
+            SlotsLayout.padding { top: 0; bottom: 0 }
+            source: model.icon
+            height: units.gu(5)
+        }
+        Label {
+            text: updatesAvailable > 0 ? updatesAvailable : ""
+        }
+        ProgressionSlot {}
+    }
 
     function _updatesRefresh() {
         var _updatesAvailable = 0;
