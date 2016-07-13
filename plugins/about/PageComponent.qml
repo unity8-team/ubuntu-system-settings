@@ -112,19 +112,20 @@ ItemPage {
                 visible: modemsSorted.length == 1
             }
 
-            // ListItem.MultiValue {
-            //     text: "IMEI"
-            //     objectName: "imeiItems"
-            //     values: {
-            //         var imeis = [];
-            //         modemsSorted.forEach(function (path, i) {
-            //             var imei = deviceInfos.imei(i);
-            //             imei ? imeis.push(imei) : imeis.push(i18n.tr("None"));
-            //         });
-            //         return imeis;
-            //     }
-            //     visible: modemsSorted.length > 1
-            // }
+            /* We still need a new ListItem for MultiValue */
+            ListItems.MultiValue {
+                text: "IMEI"
+                objectName: "imeiItems"
+                values: {
+                    var imeis = [];
+                    modemsSorted.forEach(function (path, i) {
+                        var imei = deviceInfos.imei(i);
+                        imei ? imeis.push(imei) : imeis.push(i18n.tr("None"));
+                    });
+                    return imeis;
+                }
+                visible: modemsSorted.length > 1
+            }
 
             SettingsListItems.SingleValue {
                 property string address: wlinfo.macAddress(NetworkInfo.WlanMode, 0)
