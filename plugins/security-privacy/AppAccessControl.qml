@@ -51,7 +51,7 @@ ItemPage {
             Repeater {
                 id: repeater
 
-                SettingsListItems.Standard {
+                SettingsListItems.Icon {
                     text: model.applicationName
                     iconSource: model.iconName
                     Switch {
