@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2013 Michael Zanetti <michael_zanetti@gmx.net>
- *               2013 Canonical Ltd
+ *               2013-2016 Canonical Ltd
  * Canonical modifications by Iain Lane <iain.lane@canonical.com>
  *
  * This program is free software; you can redistribute it and/or modify

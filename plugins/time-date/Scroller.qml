@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2013 Michael Zanetti <michael_zanetti@gmx.net>
- *           (C) 2013-2015 Canonical Ltd
+ *           (C) 2013-2016 Canonical Ltd
  * Canonical modifications by Iain Lane <iain.lane@canonical.com>,
  *                            Jonas G. Drange <jonas.drange@canonical.com>
  *

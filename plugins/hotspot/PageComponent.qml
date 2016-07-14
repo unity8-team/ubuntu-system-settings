@@ -1,7 +1,7 @@
 /*
  * This file is part of system-settings
  *
- * Copyright (C) 2014-2015 Canonical Ltd.
+ * Copyright (C) 2014-2016 Canonical Ltd.
  *
  * Contact: Jonas G. Drange <jonas.drange@canonical.com>
  *
