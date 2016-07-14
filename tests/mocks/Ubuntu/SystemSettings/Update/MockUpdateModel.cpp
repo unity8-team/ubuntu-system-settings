@@ -30,10 +30,8 @@ void MockUpdateModel::mockAddUpdate(const QString &id, const uint &revision, con
     u->setTitle(QString("Test App %1").arg(id));
     u->setRemoteVersion(QString("v%1").arg(revision));
     u->setBinaryFilesize(5000 * 1000);
-    db()->add(u);
-    refresh();
+    add(u);
 }
-
 
 void MockUpdateModelFilter::mockSetSourceModel(MockUpdateModel *source)
 {

@@ -119,14 +119,13 @@ private:
     QList<QSharedPointer<Update> > m_updates;
 };
 
-class UpdateModelFilter: public QSortFilterProxyModel
+class UpdateModelFilter : public QSortFilterProxyModel
 {
     Q_OBJECT
-    Q_PROPERTY(Update::Kinds kinds READ kinds WRITE filterOnKinds
-               NOTIFY kindsChanged)
+    Q_PROPERTY(uint kindFilter READ kindFilter WRITE filterOnKind
+               NOTIFY kindFilterChanged)
     Q_PROPERTY(bool installed READ installed WRITE filterOnInstalled
                NOTIFY installedChanged)
-    Q_PROPERTY(int count READ rowCount NOTIFY countChanged)
     Q_PROPERTY(int sortBy READ sortRole WRITE setSortRole NOTIFY sortRoleChanged)
 
 public:
@@ -135,14 +134,14 @@ public:
     // For testing, when we want to explicitly set the database path.
     explicit UpdateModelFilter(UpdateModel *model, QObject *parent = 0);
 
-    Update::Kinds kinds() const;
-    void filterOnKinds(const Update::Kinds &kinds);
+    uint kindFilter() const;
+    void filterOnKind(const uint &kind);
 
     bool installed() const;
     void filterOnInstalled(const bool installed);
 
 signals:
-    void kindsChanged();
+    void kindFilterChanged();
     void installedChanged();
     void countChanged();
     void sortRoleChanged();
@@ -152,7 +151,7 @@ protected:
 //    virtual bool lessThan(const QModelIndex &left, const QModelIndex &right) const Q_DECL_OVERRIDE;
 
 private:
-    Update::Kinds m_kinds = Update::Kind::KindUnknown;
+    Update::Kind m_kind = Update::Kind::KindUnknown;
     bool m_kindEnabled = false;
     bool m_installed = false;
     bool m_installedEnabled = false;

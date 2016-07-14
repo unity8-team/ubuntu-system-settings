@@ -4,23 +4,17 @@ include_directories(
     /usr/include/apt-pkg/
 )
 
-set(PLUGIN_SOURCES
-    ${CMAKE_SOURCE_DIR}/plugins/system-update/update.cpp
-    ${CMAKE_SOURCE_DIR}/plugins/system-update/updatedb.cpp
-    ${CMAKE_SOURCE_DIR}/plugins/system-update/updatemodel.cpp
-)
-find_package(Qt5Sql REQUIRED)
 pkg_check_modules(UBUNTUONEAUTH REQUIRED ubuntuoneauth-2.0)
 add_definitions(${UBUNTUONEAUTH_CFLAGS} ${UBUNTUONEAUTH_CFLAGS_OTHER})
 set(PLUGIN_LIBS
-    Qt5::Sql
+    UpdatePlugin
     apt-pkg
     ${UBUNTUONEAUTH_LDFLAGS}
 )
 
 set(MOCK_SYSTEMUPDATE_SRCS
     plugin.cpp
-    MockClickUpdateManager.cpp
+    MockClickManager.cpp
     MockSystemImage.cpp
     MockSystemUpdate.cpp
     MockUpdate.cpp

@@ -44,9 +44,9 @@ Item {
     property int updatesCount: {
         var count = 0;
         if (authenticated) {
-            count += clickModel.count;
+            count += clickRepeater.count;
         }
-        count += imageModel.count;
+        count += imageRepeater.count;
         return count;
     }
 
@@ -202,11 +202,12 @@ Item {
                 visible: updates.haveSystemUpdate
 
                 Repeater {
+                    id: imageRepeater
                     model: imageModel
 
                     delegate: ImageUpdateDelegate {
                         objectName: "updatesImageDelegate-" + index
-                        anchors { left: parent.left; right: parent.right }
+                        width: imageUpdate.width
                         updateState: model.updateState
                         kind: model.kind
                         progress: model.progress
@@ -232,14 +233,15 @@ Item {
                 id: clickUpdates
                 objectName: "updatesClickUpdates"
                 anchors { left: parent.left; right: parent.right }
-                visible: clickModel.count > 0
+                visible: clickRepeater.count > 0
 
                 Repeater {
+                    id: clickRepeater
                     model: clickModel
 
                     delegate: ClickUpdateDelegate {
                         objectName: "updatesClickUpdate" + index
-                        anchors { left: parent.left; right: parent.right }
+                        width: clickUpdates.width
                         updateState: model.updateState
                         kind: model.kind
                         progress: model.progress
@@ -288,10 +290,10 @@ Item {
                 id: installed
                 objectName: "updatesInstalledUpdates"
                 anchors { left: parent.left; right: parent.right }
-                visible: installedModel.count > 0
+                visible: installedRepeater.count > 0
 
                 Repeater {
-
+                    id: installedRepeater
                     model: installedModel
 
                     delegate: UpdateDelegate {

@@ -45,8 +45,8 @@ ItemPage {
         Component.onCompleted: start()
     }
 
-    ClickUpdateManager {
-        id: clickUpdateManager
+    ClickManager {
+        id: clickManager
     }
 
     Setup {
@@ -68,13 +68,13 @@ ItemPage {
 
     UpdateModelFilter {
         id: imageUpdate
-        kinds: Update.KindImage
+        kindFilter: Update.KindImage
         installed: false
     }
 
     UpdateModelFilter {
         id: clickUpdates
-        kinds: Update.KindClick
+        kindFilter: Update.KindClick
         installed: false
     }
 
@@ -98,12 +98,12 @@ ItemPage {
         clip: true
 
         clickModel: clickUpdates
-        clickManager: clickUpdateManager
+        clickManager: clickManager
         imageModel: imageUpdate
         installedModel: installedUpdates
         downloadHandler: downloadHandler
 
-        authenticated: clickUpdateManager.authenticated
+        authenticated: clickManager.authenticated
 
         havePower: (indicatorPower.deviceState === "charging")
                     && (indicatorPower.batteryLevel > 25)

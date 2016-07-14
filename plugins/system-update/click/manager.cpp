@@ -155,7 +155,12 @@ void Manager::retry(const QString &identifier, const uint &revision)
     if (u->identifier() == identifier && u->revision() == revision) {
         //m_db->setAvailable(identifier, revision);
 
-        Click::TokenDownloader* dl = m_downloadFactory->create(m_client, u, this);
+
+        // TODO: let the downloader create its own client
+        Click::Client *client = new Click::ClientImpl();
+        Click::TokenDownloader* dl = m_downloadFactory->create(client, u, this);
+        client->setParent(dl);
+
         dl->setAuthToken(m_authToken);
         initTokenDownloader(dl);
         dl->download();
@@ -248,7 +253,7 @@ void Manager::handleTokenDownloadFailure(QSharedPointer<Update> update)
     // Unset token, let the user try again.
     // update->setToken("");
     qWarning() << "handleTokenDownloadFailure adds update";
-    // m_db->add(update);
+    m_model->add(update);
 
 
     // We're done with it.
@@ -360,7 +365,11 @@ void Manager::parseMetadata(const QJsonArray &array)
                 update->setState(Update::State::StateAvailable);
                 update->setPackageName(package_name);
 
-                Click::TokenDownloader* dl = m_downloadFactory->create(m_client, update, this);
+                // TODO: let the downloader create its own client
+                Click::Client *client = new Click::ClientImpl();
+                Click::TokenDownloader* dl = m_downloadFactory->create(client, update, this);
+                client->setParent(dl);
+
                 dl->setAuthToken(m_authToken);
                 initTokenDownloader(dl);
                 dl->download();

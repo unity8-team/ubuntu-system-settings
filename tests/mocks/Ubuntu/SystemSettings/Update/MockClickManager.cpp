@@ -15,85 +15,85 @@
  * You should have received a copy of the GNU General Public License along
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include "MockClickUpdateManager.h"
+#include "MockClickManager.h"
 #include <QDebug>
 
-MockClickUpdateManager::MockClickUpdateManager(QObject *parent)
+MockClickManager::MockClickManager(QObject *parent)
     : QObject(parent)
     , m_authenticated(true)
     , m_checking(false)
 {
 }
 
-void MockClickUpdateManager::check()
+void MockClickManager::check()
 {
     m_checking = true;
 }
 
-void MockClickUpdateManager::check(const QString &packageName)
+void MockClickManager::check(const QString &packageName)
 {
 }
 
-void MockClickUpdateManager::cancel()
+void MockClickManager::cancel()
 {
     m_checking = false;
 }
 
-void MockClickUpdateManager::clickUpdateInstalled(const QString &packageName, const int &revision)
+void MockClickManager::clickUpdateInstalled(const QString &packageName, const int &revision)
 {
 }
 
-bool MockClickUpdateManager::authenticated()
+bool MockClickManager::authenticated()
 {
     return m_authenticated;
 }
 
-void MockClickUpdateManager::mockCheckStarted()
+void MockClickManager::mockCheckStarted()
 {
     check();
     Q_EMIT (checkStarted());
 }
 
-void MockClickUpdateManager::mockCheckComplete()
+void MockClickManager::mockCheckComplete()
 {
     cancel();
     Q_EMIT (checkCompleted());
 }
 
-void MockClickUpdateManager::mockCheckCanceled()
+void MockClickManager::mockCheckCanceled()
 {
     cancel();
     Q_EMIT (checkCanceled());
 }
 
-void MockClickUpdateManager::mockCheckFailed()
+void MockClickManager::mockCheckFailed()
 {
     cancel();
     Q_EMIT (checkFailed());
 }
 
-void MockClickUpdateManager::mockAuthenticated(const bool authenticated)
+void MockClickManager::mockAuthenticated(const bool authenticated)
 {
     m_authenticated = authenticated;
     Q_EMIT(authenticatedChanged());
 }
 
-void MockClickUpdateManager::mockNetworkError()
+void MockClickManager::mockNetworkError()
 {
     Q_EMIT (networkError());
 }
 
-void MockClickUpdateManager::mockServerError()
+void MockClickManager::mockServerError()
 {
     Q_EMIT (serverError());
 }
 
-void MockClickUpdateManager::mockCredentialError()
+void MockClickManager::mockCredentialError()
 {
     Q_EMIT (credentialError());
 }
 
-bool MockClickUpdateManager::isChecking() const
+bool MockClickManager::isChecking() const
 {
     return m_checking;
 }

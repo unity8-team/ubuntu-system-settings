@@ -46,20 +46,23 @@ Item {
     }
 
     Component {
-        id: clickUpdateManagerComponent
+        id: clickManagerComponent
 
-        ClickUpdateManager {}
+        ClickManager {}
     }
 
     Component {
-        id:
+        id: mockModel
+
+        UpdateModel {}
     }
 
     Component {
         id: mockImageModel
 
         UpdateModelFilter {
-            filter: UpdateModel.PendingImage
+            kindFilter: Update.KindImage
+            installed: false
         }
     }
 
@@ -67,7 +70,8 @@ Item {
         id: mockClickModel
 
         UpdateModelFilter {
-            filter: UpdateModel.PendingClicks
+            kindFilter: Update.KindClick
+            installed: false
         }
     }
 
@@ -75,7 +79,7 @@ Item {
         id: mockInstalledModel
 
         UpdateModelFilter {
-            filter: UpdateModel.Installed
+            installed: true
         }
     }
 
@@ -83,22 +87,29 @@ Item {
         id: signalSpy
     }
 
-
     UbuntuTestCase {
         name: "UpdatesTestCase"
         when: windowShown
 
         property var instance: null
+        property var model: null
         property var images: null
         property var clicks: null
         property var installed: null
         property var clickManager: null
 
         function init() {
+            model = mockModel.createObject(testRoot);
+
             images = mockImageModel.createObject(testRoot);
             clicks = mockClickModel.createObject(testRoot);
             installed = mockInstalledModel.createObject(testRoot);
-            clickManager = clickUpdateManagerComponent.createObject(testRoot);
+            images.mockSetSourceModel(model);
+            clicks.mockSetSourceModel(model);
+            installed.mockSetSourceModel(model);
+
+            clickManager = clickManagerComponent.createObject(testRoot);
+
             instance = updates.createObject(testRoot, {
                 imageModel: images,
                 clickModel: clicks,
@@ -112,12 +123,14 @@ Item {
             signalSpy.clear();
             signalSpy.target = null;
             signalSpy.signalName = "";
-
             instance.destroy();
+            clickManager.destroy();
+
             images.destroy();
             clicks.destroy();
             installed.destroy();
-            clickManager.destroy();
+            model.destroy();
+
         }
 
         function test_connectivity_data() {
@@ -203,8 +216,8 @@ Item {
             instance.havePower = data.havePower;
 
             // Add mock image update.
-            images.mockAddUpdate("ubuntu", 300, Update.KindImage);
-            images.setDownloaded("ubuntu", 300);
+            model.mockAddUpdate("ubuntu", 300, Update.KindImage);
+            model.setDownloaded("ubuntu", 300);
 
             // Trigger popup.
             var delegate = findChild(instance, "updatesImageDelegate-0");
@@ -246,8 +259,8 @@ Item {
             instance.authenticated = data.authenticated;
 
             // Add mock previous update.
-            installed.mockAddUpdate("app", 1, Update.KindImage);
-            installed.setInstalled("app", 1);
+            model.mockAddUpdate("app", 1, Update.KindImage);
+            model.setInstalled("app", 1);
 
             compare(findChild(instance, "updatesInstalledUpdates").visible, data.targetVisiblity);
         }
@@ -258,8 +271,8 @@ Item {
             instance.haveSystemUpdate = true;
             instance.havePower = true;
 
-            images.mockAddUpdate("ubuntu", 300, Update.KindImage);
-            clicks.mockAddUpdate("app", 1, Update.KindClick);
+            model.mockAddUpdate("ubuntu", 300, Update.KindImage);
+            model.mockAddUpdate("app", 1, Update.KindClick);
 
             var glob = findChild(instance, "updatesGlobal");
             glob.requestInstall();
@@ -276,8 +289,8 @@ Item {
             instance.haveSystemUpdate = true;
             instance.havePower = true;
 
-            images.mockAddUpdate("ubuntu", 300, Update.KindImage);
-            images.setDownloaded("ubuntu", 300);
+            model.mockAddUpdate("ubuntu", 300, Update.KindImage);
+            model.setDownloaded("ubuntu", 300);
 
             var del = findChild(instance, "updatesImageDelegate-0");
             del.install();
@@ -303,17 +316,17 @@ Item {
             instance.authenticated = data.authenticated;
             instance.haveSystemUpdate = true;
 
-            images.mockAddUpdate("ubuntu", 300, Update.KindImage);
+            model.mockAddUpdate("ubuntu", 300, Update.KindImage);
 
             // Add mock previous updates.
             for (var i = 0; i < 5; i++) {
-                installed.mockAddUpdate("app-" + i, i, Update.KindClick);
-                installed.setInstalled("app-" + i, i);
+                model.mockAddUpdate("app-" + i, i, Update.KindClick);
+                model.setInstalled("app-" + i, i);
             }
 
             // Add mock click updates.
             for (; i < 10; i++) {
-                clicks.mockAddUpdate("app-" + i, i, Update.KindClick);
+                model.mockAddUpdate("app-" + i, i, Update.KindClick);
             }
 
             var glob = findChild(instance, "updatesGlobal");
@@ -340,7 +353,6 @@ Item {
 
             // If there are installed updates, show them no matter what.
             compare(installedUpdates.visible, true);
-
         }
     }
 }

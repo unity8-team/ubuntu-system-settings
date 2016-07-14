@@ -90,16 +90,18 @@ Item {
     }
 
     function createDownload(click) {
+        console.warn('createDownload')
         // Already had a download.
         var existingDownload = getDownloadFor(click);
         if (existingDownload !== null &&
             !existingDownload.errorMessage &&
             !existingDownload.isCompleted) {
+            console.warn('createDownload had')
             return;
         }
 
         var metadata = {
-            "command": click.command,
+            // "command": click.command,
             "title": click.title,
             "showInIndicator": false
         };
@@ -114,8 +116,8 @@ Item {
         var singleDownloadObj = sdl.createObject(root, {
             // "url": click.downloadUrl,
             "autoStart": true,
-            "hash": click.downloadHash,
-            "algorithm": "sha512",
+            // "hash": click.downloadHash,
+            // "algorithm": "sha512",
             "headers": hdrs,
             "metadata": metadataObj,
             "revision": click.revision,
@@ -167,6 +169,8 @@ Item {
                                         metadata.custom.revision);
             }
             onProgressChanged: {
+                console.warn('onProgressChanged', metadata.custom.identifier,
+                             metadata.custom.revision, progress)
                 updateModel.setProgress(metadata.custom.identifier,
                                         metadata.custom.revision,
                                         progress);

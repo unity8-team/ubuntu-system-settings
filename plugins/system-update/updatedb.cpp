@@ -81,6 +81,7 @@ void UpdateDb::initializeDb()
 
     m_db = QSqlDatabase::addDatabase(QLatin1String("QSQLITE"), m_connectionName);
     m_db.setDatabaseName(m_dbpath);
+    qWarning() << "m_dbpath" << m_dbpath;
 
     if (!openDb()) {
         return;
@@ -106,8 +107,10 @@ UpdateDb::~UpdateDb()
 
 void UpdateDb::add(const QSharedPointer<Update> &update)
 {
+    qWarning() << "adding updatete" << update->identifier() << update->revision();
     replaceWith(update);
     if (insert(update)) {
+        qWarning() << "added!";
         Q_EMIT changed();
     }
 }
@@ -128,6 +131,7 @@ void UpdateDb::replaceWith(const QSharedPointer<Update> &update)
 void UpdateDb::update(const QSharedPointer<Update> &update)
 {
     if (insert(update)) {
+        qWarning() << "updated" << update->identifier();
         Q_EMIT changed(update);
     }
 }
@@ -322,6 +326,7 @@ void UpdateDb::setLastCheckDate(const QDateTime &lastCheck)
 
 QList<QSharedPointer<Update> > UpdateDb::updates()
 {
+    qWarning() << "UpdateDb asked for updates";
     QList<QSharedPointer<Update> > list;
 
     QSqlQuery q(m_db);
@@ -338,6 +343,7 @@ QList<QSharedPointer<Update> > UpdateDb::updates()
         update(u, q);
         list.append(u);
     }
+    qWarning() << "UpdateDb returns" << list.size() << "updates";
 
     return list;
 }

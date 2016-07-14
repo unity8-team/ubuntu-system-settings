@@ -15,20 +15,20 @@
  * You should have received a copy of the GNU General Public License along
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef MOCK_CLICK_UPDATE_MANAGER_H
-#define MOCK_CLICK_UPDATE_MANAGER_H
+#ifndef MOCK_CLICK_MANAGER_H
+#define MOCK_CLICK_MANAGER_H
 
 #include <QDateTime>
 #include <QObject>
 
-class MockClickUpdateManager : public QObject
+class MockClickManager : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(bool authenticated READ authenticated
                NOTIFY authenticatedChanged)
 public:
-    explicit MockClickUpdateManager(QObject *parent = 0);
-    ~MockClickUpdateManager() {}
+    explicit MockClickManager(QObject *parent = 0);
+    ~MockClickManager() {}
 
     Q_INVOKABLE void check();
     Q_INVOKABLE void check(const QString &packageName);
@@ -64,4 +64,4 @@ private:
     bool m_checking;
 };
 
-#endif // MOCK_CLICK_UPDATE_MANAGER_H
+#endif // MOCK_CLICK_MANAGER_H

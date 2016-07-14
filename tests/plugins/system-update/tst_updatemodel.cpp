@@ -28,8 +28,8 @@
 
 using namespace UpdatePlugin;
 
-Q_DECLARE_METATYPE(Update::Kinds)
 Q_DECLARE_METATYPE(QList<QSharedPointer<Update> >)
+Q_DECLARE_METATYPE(Update::Kind)
 
 class TstUpdateModel : public QObject
 {
@@ -445,26 +445,17 @@ private slots:
     }
     void testFilterKinds_data()
     {
-        QTest::addColumn<Update::Kinds>("kinds");
-
-        Update::Kinds unknown(Update::Kind::KindUnknown);
-        QTest::newRow("Unknown") << unknown;
-
-        Update::Kinds clickAndImages(Update::Kind::KindImage | Update::Kind::KindClick);
-        QTest::newRow("Click and Images") << clickAndImages;
-
-        Update::Kinds clicks(Update::Kind::KindClick);
-        QTest::newRow("Click") << clicks;
-
-        Update::Kinds images(Update::Kind::KindImage);
-        QTest::newRow("Images") << images;
+        QTest::addColumn<Update::Kind>("kind");
+        QTest::newRow("Unknown") << Update::Kind::KindUnknown;
+        QTest::newRow("Click") << Update::Kind::KindClick;
+        QTest::newRow("Images") << Update::Kind::KindImage;
     }
     void testFilterKinds()
     {
-        QFETCH(Update::Kinds, kinds);
+        QFETCH(Update::Kind, kind);
 
-        m_filter->filterOnKinds(kinds);
-        QCOMPARE(m_filter->kinds(), kinds);
+        m_filter->filterOnKind((uint) kind);
+        QCOMPARE((uint) m_filter->kindFilter(), (uint) kind);
     }
     void testFilterInstalled_data()
     {
@@ -483,31 +474,28 @@ private slots:
     void testFilterKindsIntegration_data()
     {
         QTest::addColumn<QList<QSharedPointer<Update>> >("updates");
-        QTest::addColumn<Update::Kinds>("kindsFilter");
+        QTest::addColumn<Update::Kind>("kindFilter");
         QTest::addColumn<int>("targetCount");
 
         QList<QSharedPointer<Update>> sample;
         sample << createClickUpdate("a", 1) << createClickUpdate("b", 2)
                << createImageUpdate("u", 1);
 
-        Update::Kinds clicks(Update::Kind::KindClick);
-        Update::Kinds images(Update::Kind::KindImage);
-
-        QTest::newRow("Filter on clicks") << sample << clicks << 2;
-        QTest::newRow("Filter on images") << sample << images << 1;
+        QTest::newRow("Filter on clicks") << sample << Update::Kind::KindClick << 2;
+        QTest::newRow("Filter on images") << sample << Update::Kind::KindImage << 1;
 
     }
     void testFilterKindsIntegration()
     {
         QFETCH(QList<QSharedPointer<Update> >, updates);
-        QFETCH(Update::Kinds, kindsFilter);
+        QFETCH(Update::Kind, kindFilter);
         QFETCH(int, targetCount);
 
         Q_FOREACH(QSharedPointer<Update> u, updates) {
             m_model->add(u);
         }
 
-        m_filter->filterOnKinds(kindsFilter);
+        m_filter->filterOnKind((uint) kindFilter);
         QCOMPARE(m_filter->rowCount(), targetCount);
     }
     void testFilteringInstalledIntegration_data()
@@ -515,7 +503,6 @@ private slots:
         QTest::addColumn<QList<QSharedPointer<Update>> >("updates");
         QTest::addColumn<bool>("installedFilter");
         QTest::addColumn<int>("targetCount");
-
 
         QSharedPointer<Update> installed = createUpdate("a", 1);
         installed->setInstalled(true);

@@ -102,7 +102,6 @@ public:
     };
 
     Q_ENUMS(Kind State)
-    Q_DECLARE_FLAGS(Kinds, Kind)
 
     static QString stateToString(const State &state);
     static State stringToState(const QString &state);
@@ -216,7 +215,5 @@ protected:
     QString m_packageName;
 };
 } // UpdatePlugin
-
-Q_DECLARE_OPERATORS_FOR_FLAGS(UpdatePlugin::Update::Kinds)
 
 #endif // UPDATE_H
