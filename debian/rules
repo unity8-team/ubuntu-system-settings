@@ -7,6 +7,10 @@ export DH_VERBOSE=1
 include /usr/share/dpkg/buildflags.mk
 include /usr/share/dpkg/architecture.mk
 
+ifneq ($(DEB_BUILD_GNU_TYPE),$(DEB_HOST_GNU_TYPE))
+export DEB_BUILD_PROFILES := cross
+endif
+
 override_dh_auto_configure:
 	# Debian defines CMAKE_INSTALL_LOCALSTATEDIR as /usr/var, which is wrong.
 	# So until Debian bug 719148 is fixed, do it ourselves.
