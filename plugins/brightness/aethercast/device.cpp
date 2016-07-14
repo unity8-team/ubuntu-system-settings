@@ -139,5 +139,7 @@ void Device::updateProperty(const QString &key, const QVariant &value)
             setState(Device::Association);
         else if (value.toString() == "configuration")
             setState(Device::Configuration);
+        else if (value.toString() == "failure")
+            setState(Device::Failure);
     }
 }
