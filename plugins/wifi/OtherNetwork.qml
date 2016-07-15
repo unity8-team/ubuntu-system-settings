@@ -20,12 +20,18 @@ import SystemSettings 1.0
 import Ubuntu.Components 1.3
 import Ubuntu.Components.ListItems 1.3 as ListItem
 import Ubuntu.Components.Popups 1.3
+import Ubuntu.Settings.Components 0.1
 import Ubuntu.SystemSettings.Wifi 1.0
 import QMenuModel 0.1
 
 Component {
 
     Dialog {
+
+        Component {
+            id: filePickerComponent
+            FilePicker {}
+        }
 
         UbuntuWifiPanel {
             id: panel
@@ -67,11 +73,10 @@ Component {
             var pickerDialog;
             var certDialog;
 
-            pickerDialog = PopupUtils.open(
-                Qt.resolvedUrl("./CertPicker.qml")
-            );
-            pickerDialog.fileImportSignal.connect(function (file) {
-                if (!file === false) {
+            pickerDialog = PopupUtils.open(filePickerComponent);
+            pickerDialog.accept.connect(function (file) {
+                PopupUtils.close(pickerDialog);
+                if (file) {
                     certDialogLoader.source = Qt.resolvedUrl(
                         "./CertDialog.qml"
                     );
@@ -91,6 +96,9 @@ Component {
                         }
                     });
                 }
+            });
+            pickerDialog.reject.connect(function () {
+                PopupUtils.close(pickerDialog);
             });
         }
 
