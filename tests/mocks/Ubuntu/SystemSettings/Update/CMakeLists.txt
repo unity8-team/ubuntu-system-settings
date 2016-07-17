@@ -24,7 +24,7 @@ set(MOCK_SYSTEMUPDATE_SRCS
 
 add_library(MockSystemUpdate MODULE ${MOCK_SYSTEMUPDATE_SRCS})
 target_link_libraries(MockSystemUpdate ${PLUGIN_LIBS})
-qt5_use_modules(MockSystemUpdate Qml Quick Core)
+qt5_use_modules(MockSystemUpdate Qml Quick Core Sql)
 
 add_uss_mock(Ubuntu.SystemSettings.Update 1.0 Ubuntu/SystemSettings/Update
              TARGETS MockSystemUpdate)

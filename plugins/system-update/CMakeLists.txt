@@ -1,4 +1,4 @@
-SET (CMAKE_AUTOMOC ON)
+set(CMAKE_AUTOMOC ON)
 set(QML_SOURCES
     ClickUpdateDelegate.qml
     Configuration.qml
