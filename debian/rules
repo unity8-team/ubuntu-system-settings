@@ -4,8 +4,9 @@
 # Uncomment this to turn on verbose mode.
 export DH_VERBOSE=1
 
-DEB_HOST_ARCH ?= $(shell dpkg-architecture -qDEB_HOST_ARCH)
-# Temporarily skip tests on arm64 to unblock package build without oxide.
+DEB_HOST_ARCH := $(shell dpkg-architecture -qDEB_HOST_ARCH)
+# Skip tests on the archs they are known to be flaky with current configuration
+# Ref.: https://bugs.launchpad.net/ubuntu/+source/mesa/+bug/1585942
 testskip_architectures := arm64
 
 include /usr/share/dpkg/buildflags.mk
@@ -20,13 +21,6 @@ override_dh_auto_build:
 	dh_auto_build
 	$(MAKE) -C obj-$(DEB_HOST_GNU_TYPE) pot
 
-override_dh_auto_test:
-	ifneq ($(DEB_HOST_ARCH),$(findstring $(DEB_HOST_ARCH), $(testskip_architectures)))
-		dh_auto_test
-	else
-		echo "Temporarily skipping tests on $(DEB_HOST_ARCH)."
-	endif
-
 override_dh_install:
 	cd tests/autopilot; \
 	set -ex; for python in $(shell py3versions -r); do \
@@ -40,3 +34,8 @@ override_dh_makeshlibs:
 
 %:
 	dh $@ --fail-missing --with python3,migrations
+
+override_dh_auto_test:
+ifneq ($(DEB_HOST_ARCH),$(findstring $(DEB_HOST_ARCH), $(testskip_architectures)))
+	dh_auto_test
+endif
