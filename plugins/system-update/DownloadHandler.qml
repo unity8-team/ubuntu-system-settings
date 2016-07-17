@@ -127,7 +127,7 @@ Item {
         }
 
         var metadata = {
-            // "command": click.command,
+            "command": click.command,
             "title": click.title,
             "showInIndicator": false
         };
