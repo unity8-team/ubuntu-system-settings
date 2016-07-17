@@ -62,10 +62,6 @@ ItemPage {
         }
     }
 
-    UpdateModel {
-        id: model
-    }
-
     UpdateModelFilter {
         id: imageUpdate
         kindFilter: Update.KindImage
@@ -85,7 +81,7 @@ ItemPage {
 
     DownloadHandler {
         id: downloadHandler
-        updateModel: model
+        updateModel: SystemUpdate.model
     }
 
     Updates {

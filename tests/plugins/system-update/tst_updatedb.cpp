@@ -157,81 +157,26 @@ private slots:
 
         QCOMPARE(m_instance->lastCheckDate(), target);
     }
-    // void testUpdateLifecycle()
-    // {
-    //     QSharedPointer<Update> m = QSharedPointer<Update>(new Update);
-    //     m->setRevision(42);
-    //     m->setIdentifier("com.ubuntu.testapp");
-    //     m->setTitle("ABC");
-    //     m->setToken("token");
-
-    //     QSharedPointer<Update> m2 = QSharedPointer<Update>(new Update);
-    //     m2->setRevision(100);
-    //     m2->setIdentifier("com.ubuntu.myapp");
-    //     m2->setTitle("XYZ");
-    //     m2->setToken("token");
-
-    //     // Add an app
-    //     m_instance->add(m);
-
-    //     QCOMPARE(m_instance->updates((uint) UpdateModel::Filter::All).size(), 1);
-
-    //     // We had to refresh tokens, so we re-add the update.
-    //     m->setToken("newtoken");
-    //     m_instance->add(m);
-    //     QList<QSharedPointer<Update> > afterNewTokenList = m_instance->updates((uint) UpdateModel::Filter::Pending);
-
-    //     QCOMPARE(afterNewTokenList.size(), 1);
-    //     QCOMPARE(afterNewTokenList.at(0)->token(), m->token());
-
-    //     // Add second app
-    //     m_instance->add(m2);
-
-    //     QList<QSharedPointer<Update> > list = m_instance->updates((uint) UpdateModel::Filter::Pending);
-    //     QCOMPARE(list.size(), 2);
-
-    //     // Update titles are sorted ASC, so we'll assume that order here.
-    //     QCOMPARE(list.at(0)->identifier(), m->identifier());
-    //     QCOMPARE(list.at(1)->identifier(), m2->identifier());
-
-    //     // Mark as installed
-    //     m_instance->setInstalled(m2->identifier(), m2->revision());
-    //     QCOMPARE(m_instance->updates((uint) UpdateModel::Filter::Pending).size(), 1);
-    //     QCOMPARE(m_instance->updates((uint) UpdateModel::Filter::Installed).size(), 1);
-    // }
     void testPruning()
     {
         QSharedPointer<Update> recentUpdate = createUpdate();
         recentUpdate->setIdentifier("new.app");
         recentUpdate->setRevision(1);
+        recentUpdate->setInstalled(true);
+        recentUpdate->setUpdatedAt(QDateTime::currentDateTime().addDays(-1).toUTC());
 
         QSharedPointer<Update> oldUpdate = createUpdate();
         oldUpdate->setIdentifier("old.app");
         oldUpdate->setRevision(1);
+        oldUpdate->setInstalled(true);
+        oldUpdate->setUpdatedAt(QDateTime::currentDateTime().addMonths(-1).addDays(-1).toUTC());
 
         m_instance->add(recentUpdate);
         m_instance->add(oldUpdate);
 
-        // Change update date directly in the db
-        QSqlQuery q(m_instance->db());
-        q.prepare("UPDATE updates SET updated_at_utc=:updated WHERE id=:id");
-        QDateTime longAgo = QDateTime::currentDateTime().addMonths(-1).addDays(-1).toUTC();
-
-        q.bindValue(":updated", longAgo.toMSecsSinceEpoch());
-        q.bindValue(":id", oldUpdate->identifier());
-        q.exec();
-
         m_instance->pruneDb();
 
-        QSqlQuery q1(m_instance->db());
-        q1.exec("SELECT * FROM updates");
-        int size = 0;
-        while (q1.next()) {
-            QVERIFY(q1.isValid());
-            QCOMPARE(q1.value("id").toString(), recentUpdate->identifier());
-            size++;
-        }
-        QCOMPARE(size, 1);
+        QCOMPARE(m_instance->updates().size(), 1);
     }
     void testUpdateAfterInstalled()
     {
@@ -247,6 +192,18 @@ private slots:
         m_instance->add(installed);
 
         QCOMPARE(m_instance->updates().size(), 2);
+    }
+    void testUpdatedAt()
+    {
+        // Ensures that updatedAt comes back invalid if not updated.
+        QSharedPointer<Update> update = QSharedPointer<Update>(new Update);
+        update->setRevision(100);
+        update->setIdentifier("com.ubuntu.myapp");
+        m_instance->add(update);
+
+        QSharedPointer<Update> update1 = m_instance->get(update->identifier(),
+                                                         update->revision());
+        QCOMPARE(QDateTime(), update1->updatedAt());
     }
 private:
     UpdateDb *m_instance = nullptr;

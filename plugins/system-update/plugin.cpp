@@ -64,6 +64,6 @@ void BackendPlugin::registerTypes(const char *uri)
     );
 
     qmlRegisterType<Click::Manager>(uri, 1, 0, "ClickManager");
-    qmlRegisterType<UpdateModel>(uri, 1, 0, "UpdateModel");
+    qmlRegisterUncreatableType<UpdateModel>(uri, 1, 0, "UpdateModel", "Can't be instantiated directly.");
     qmlRegisterType<UpdateModelFilter>(uri, 1, 0, "UpdateModelFilter");
 }

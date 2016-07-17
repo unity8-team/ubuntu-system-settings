@@ -331,6 +331,19 @@ Item {
                     ),
                     targetDownloadLabelText: "",
                 },
+
+                // Crazy progress (beyond 100%)
+                {
+                    tag: "Crazy progress",
+                    updateState: Update.StateDownloading,
+                    kind: Update.KindClick,
+                    progress: 150,
+                    button: { text: i18n.tr("Pause"), visibility: true, state: true, signal: "pause" },
+                    progressbar: { visibility: true, progress: 150, },
+                    error: { text: "", visiblity: false, },
+                    targetStatusLabelText: "1 KB",
+                    targetDownloadLabelText: i18n.tr("Downloading"),
+                },
             ]
         }
 

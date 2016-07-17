@@ -32,7 +32,7 @@ namespace UpdatePlugin
 namespace {
 const QString ALL = "kind, id, local_version, remote_version, revision, \
     installed, created_at_utc, updated_at_utc, title, download_hash, size, \
-    icon_url, download_url, command, changelog, token, \
+    icon_url, download_url, command, changelog, token, download_id, \
     update_state, progress, automatic, error, package_name";
 
 const QString GET_SINGLE = "SELECT " + ALL + " FROM updates WHERE id=:id \
@@ -81,7 +81,6 @@ void UpdateDb::initializeDb()
 
     m_db = QSqlDatabase::addDatabase(QLatin1String("QSQLITE"), m_connectionName);
     m_db.setDatabaseName(m_dbpath);
-    qWarning() << "m_dbpath" << m_dbpath;
 
     if (!openDb()) {
         return;
@@ -107,10 +106,8 @@ UpdateDb::~UpdateDb()
 
 void UpdateDb::add(const QSharedPointer<Update> &update)
 {
-    qWarning() << "adding updatete" << update->identifier() << update->revision();
     replaceWith(update);
     if (insert(update)) {
-        qWarning() << "added!";
         Q_EMIT changed();
     }
 }
@@ -131,7 +128,6 @@ void UpdateDb::replaceWith(const QSharedPointer<Update> &update)
 void UpdateDb::update(const QSharedPointer<Update> &update)
 {
     if (insert(update)) {
-        qWarning() << "updated" << update->identifier();
         Q_EMIT changed(update);
     }
 }
@@ -141,14 +137,14 @@ bool UpdateDb::insert(const QSharedPointer<Update> &update)
     QSqlQuery q(m_db);
     q.prepare("INSERT OR REPLACE INTO updates (id, revision, installed,"
               "created_at_utc, download_hash, title, size, icon_url,"
-              "download_url, changelog, command, token, progress,"
+              "download_url, changelog, command, token, download_id, progress,"
               "local_version, remote_version, kind, update_state, automatic,"
-              "error, package_name) "
+              "error, package_name, updated_at_utc) "
               "VALUES (:id, :revision, :installed, :created_at_utc,"
               ":download_hash, :title, :size, :icon_url, :download_url,"
-              ":changelog, :command, :token, :progress, :local_version,"
-              ":remote_version, :kind, :update_state, :automatic, :error,"
-              ":package_name)");
+              ":changelog, :command, :token, :download_id, :progress,"
+              ":local_version, :remote_version, :kind, :update_state,"
+              ":automatic, :error, :package_name, :updated_at_utc)");
     q.bindValue(":id", update->identifier());
     q.bindValue(":revision", update->revision());
     q.bindValue(":installed", update->installed());
@@ -162,6 +158,7 @@ bool UpdateDb::insert(const QSharedPointer<Update> &update)
     q.bindValue(":changelog", update->changelog());
     q.bindValue(":command", update->command().join(" "));
     q.bindValue(":token", update->token());
+    q.bindValue(":download_id", update->downloadId());
     q.bindValue(":progress", update->progress());
     q.bindValue(":local_version", update->localVersion());
     q.bindValue(":remote_version", update->remoteVersion());
@@ -173,6 +170,7 @@ bool UpdateDb::insert(const QSharedPointer<Update> &update)
     q.bindValue(":automatic", update->automatic());
     q.bindValue(":error", update->error());
     q.bindValue(":package_name", update->packageName());
+    q.bindValue(":updated_at_utc", update->updatedAt().toUTC().toMSecsSinceEpoch());
 
     if (!q.exec()) {
         qCritical() << "Could not insert update" << q.lastError().text();
@@ -225,6 +223,7 @@ void UpdateDb::update(const QSharedPointer<Update> &update, const QSqlQuery &que
     update->setCommand(query.value("command").toString().split(" "));
     update->setChangelog(query.value("changelog").toString());
     update->setToken(query.value("token").toString());
+    update->setDownloadId(query.value("download_id").toString());
     update->setState(Update::stringToState(
         query.value("update_state").toString()
     ));
@@ -264,6 +263,7 @@ bool UpdateDb::createDb()
                 "command TEXT,"
                 "changelog TEXT,"
                 "token TEXT,"
+                "download_id TEXT,"
                 "update_state TEXT DEFAULT 'unknown',"
                 "progress INTEGER,"
                 "automatic INTEGER DEFAULT 0,"
@@ -326,7 +326,6 @@ void UpdateDb::setLastCheckDate(const QDateTime &lastCheck)
 
 QList<QSharedPointer<Update> > UpdateDb::updates()
 {
-    qWarning() << "UpdateDb asked for updates";
     QList<QSharedPointer<Update> > list;
 
     QSqlQuery q(m_db);
@@ -343,7 +342,6 @@ QList<QSharedPointer<Update> > UpdateDb::updates()
         update(u, q);
         list.append(u);
     }
-    qWarning() << "UpdateDb returns" << list.size() << "updates";
 
     return list;
 }

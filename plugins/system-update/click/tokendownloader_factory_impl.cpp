@@ -23,6 +23,11 @@ namespace UpdatePlugin
 {
 namespace Click
 {
+TokenDownloader* TokenDownloaderFactoryImpl::create(QSharedPointer<Update> update,
+                                                    QObject *parent)
+{
+    return new TokenDownloaderImpl(update, parent);
+}
 TokenDownloader* TokenDownloaderFactoryImpl::create(Client *client,
                                                     QSharedPointer<Update> update,
                                                     QObject *parent)

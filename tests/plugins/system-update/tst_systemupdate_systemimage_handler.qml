@@ -51,7 +51,7 @@ Item {
             version: model.remoteVersion
             updateState: model.updateState
             progress: model.progress
-            errorDetail: error
+            error: model.error
         }
     }
 
@@ -223,13 +223,11 @@ Item {
             SystemImage.mockTargetBuildNumber(300);
             pendingModelInstance.mockAddUpdate("ubuntu", 300, Update.KindImage);
             SystemImage.mockFailed(3, "fail");
-            wait(3000)
             var delegate = findChild(testRoot, "image-update-0");
             compare(delegate.updateState, Update.StateFailed);
             var error = findChild(delegate, "updateError");
             compare(error.visible, true);
-            compare(error.title, i18n.tr("Update failed"));
-            compare(error.detail, "fail");
+            compare(delegate.error, "fail");
         }
 
         function test_multiplePendingUpdates() {

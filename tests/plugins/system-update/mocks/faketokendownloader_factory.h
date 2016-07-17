@@ -31,6 +31,17 @@ class MockTokenDownloaderFactory
     : public UpdatePlugin::Click::TokenDownloaderFactory
 {
 public:
+    // Not used.
+    virtual UpdatePlugin::Click::TokenDownloader* create(
+        QSharedPointer<UpdatePlugin::Update> update,
+        QObject *parent = 0
+    ) override
+    {
+        Q_UNUSED(parent)
+        MockTokenDownloader *d = new MockTokenDownloader(update);
+        created.append(d);
+        return d;
+    }
     virtual UpdatePlugin::Click::TokenDownloader* create(
         UpdatePlugin::Click::Client *client,
         QSharedPointer<UpdatePlugin::Update> update,
@@ -38,9 +49,9 @@ public:
     ) override
     {
         Q_UNUSED(client)
-        MockTokenDownloader *d = new MockTokenDownloader(update, parent);
-        created.append(d);
-        return d;
+        Q_UNUSED(update)
+        Q_UNUSED(parent)
+        return nullptr;
     }
 
     QList<MockTokenDownloader* > created;

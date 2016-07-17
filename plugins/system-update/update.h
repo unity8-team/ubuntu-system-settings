@@ -45,6 +45,8 @@ class Update : public QObject
             WRITE setUpdatedAt NOTIFY updatedAtChanged)
     Q_PROPERTY(QString downloadHash READ downloadHash
             WRITE setDownloadHash NOTIFY downloadHashChanged)
+    Q_PROPERTY(QString downloadId READ downloadId
+            WRITE setDownloadId NOTIFY downloadIdChanged)
     Q_PROPERTY(QString downloadUrl READ downloadUrl
             WRITE setDownloadUrl NOTIFY downloadUrlChanged)
     Q_PROPERTY(QString iconUrl READ iconUrl
@@ -82,6 +84,7 @@ public:
         KindImage = 4
     };
 
+    // TODO: make StateHint and State (Pending, Installed)
     enum class State : uint
     {
         StateUnknown = 0,
@@ -118,6 +121,7 @@ public:
     QDateTime createdAt() const;
     QDateTime updatedAt() const;
     QString downloadHash() const;
+    QString downloadId() const;
     QString downloadUrl() const;
     QString iconUrl() const;
     bool installed() const;
@@ -141,6 +145,7 @@ public:
     void setCreatedAt(const QDateTime &createdAt);
     void setUpdatedAt(const QDateTime &updatedAt);
     void setDownloadHash(const QString &downloadHash);
+    void setDownloadId(const QString &token);
     void setDownloadUrl(const QString &downloadUrl);
     void setIconUrl(const QString &iconUrl);
     void setInstalled(const bool installed);
@@ -177,6 +182,7 @@ signals:
     void installedChanged();
     void updatedAtChanged();
     void downloadHashChanged();
+    void downloadIdChanged();
     void downloadUrlChanged();
     void iconUrlChanged();
     void progressChanged();
@@ -210,6 +216,7 @@ protected:
     QString m_localVersion;
     QString m_remoteVersion;
     QString m_token;
+    QString m_downloadId;
     QStringList m_command;
     bool m_automatic;
     QString m_packageName;

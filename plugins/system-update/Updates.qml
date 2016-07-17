@@ -251,19 +251,37 @@ Item {
                         iconUrl: model.iconUrl
                         changelog: model.changelog
                         error: model.error
+                        automatic: model.automatic
 
-                        onInstall: {
-                            console.warn('onInstall');
-                            downloadHandler.createDownload(model);
-                        }
-
+                        onInstall: downloadHandler.createDownload(model);
                         onPause: downloadHandler.pauseDownload(model)
                         onResume: downloadHandler.resumeDownload(model)
                         onRetry: clickManager.retry(identifier, revision)
 
+                        Component.onCompleted: console.warn('aaa com compl', automatic, model.downloadId)
+                        onAutomaticChanged: {
+                            console.warn('automatic chaanged', automatic, model.downloadId)
+                            if (automatic && !model.downloadId) {
+                                install();
+                            }
+                        }
+
                         Connections {
                             target: glob
                             onInstall: install()
+                        }
+
+                        /* If we a downloadId, we expect UDM to restore it
+                        after some time. Workaround for lp:1603770. */
+                        Timer {
+                            id: downloadTimeout
+                            interval: 1000
+                            running: true
+                            onTriggered: {
+                                if (model.downloadId) {
+                                    downloadHandler.assertDownloadExist(model);
+                                }
+                            }
                         }
                     }
                 }

@@ -347,10 +347,14 @@ Column {
                         case Update.StateAutomaticDownloadPaused:
                             var down = formatter((size / 100) * progress);
                             var left = formatter(size);
-                            /* TRANSLATORS: %1 is the human readable amount
-                            of bytes downloaded, and %2 is the total to be
-                            downloaded. */
-                            return i18n.tr("%1 of %2").arg(down).arg(left);
+                            if (progress > 100) {
+                                return left;
+                            } else {
+                                /* TRANSLATORS: %1 is the human readable amount
+                                of bytes downloaded, and %2 is the total to be
+                                downloaded. */
+                                return i18n.tr("%1 of %2").arg(down).arg(left);
+                            }
 
                         case Update.StateDownloaded:
                             return i18n.tr("Downloaded");

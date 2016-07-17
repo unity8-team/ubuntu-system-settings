@@ -45,6 +45,7 @@ Update::Update(QObject *parent)
     , m_localVersion("")
     , m_remoteVersion("")
     , m_token("")
+    , m_downloadId("")
     , m_command("")
     , m_automatic(false)
     , m_packageName("")
@@ -93,6 +94,11 @@ QDateTime Update::updatedAt() const
 QString Update::downloadHash() const
 {
     return m_downloadHash;
+}
+
+QString Update::downloadId() const
+{
+    return m_downloadId;
 }
 
 QString Update::downloadUrl() const
@@ -214,6 +220,14 @@ void Update::setDownloadHash(const QString &downloadHash)
     if (m_downloadHash != downloadHash) {
         m_downloadHash = downloadHash;
         Q_EMIT downloadHashChanged();
+    }
+}
+
+void Update::setDownloadId(const QString &downloadId)
+{
+    if (m_downloadId != downloadId) {
+        m_downloadId = downloadId;
+        Q_EMIT downloadIdChanged();
     }
 }
 
@@ -369,6 +383,7 @@ bool Update::deepEquals(const Update *other) const
     if (updatedAt() != other->updatedAt()) return false;
     if (title() != other->title()) return false;
     if (downloadHash() != other->downloadHash()) return false;
+    if (downloadId() != other->downloadId()) return false;
     if (downloadUrl() != other->downloadUrl()) return false;
     if (binaryFilesize() != other->binaryFilesize()) return false;
     if (iconUrl() != other->iconUrl()) return false;

@@ -223,29 +223,6 @@ private slots:
         QTRY_COMPARE(dataChangedSpy.count(), 3);
         QList<QVariant> args = dataChangedSpy.takeFirst();
     }
-    // // TODO: move this test to updatedb.
-    // void testSupersededUpdate()
-    // {
-    //     QSharedPointer<Update> superseded = createUpdate();
-    //     superseded->setIdentifier("some.app");
-    //     superseded->setRevision(1);
-    //     superseded->setKind(Update::Kind::KindClick);
-
-    //     QSharedPointer<Update> replacement = createUpdate();
-    //     replacement->setIdentifier("some.app");
-    //     replacement->setRevision(2);
-    //     replacement->setKind(Update::Kind::KindClick);
-
-    //     m_db->add(superseded);
-    //     m_db->add(replacement);
-
-    //     // We only want the replacement in our model of pending updates.
-    //     m_model->setFilter(UpdateModel::Filter::PendingClicks);
-    //     QCOMPARE(m_model->rowCount(), 1);
-    //     QCOMPARE(m_model->data(
-    //         m_model->index(0), UpdateModel::IdRole
-    //     ).toString(), replacement->identifier());
-    // }
     void testRoles()
     {
         QSharedPointer<Update> app = createUpdate();
@@ -259,6 +236,7 @@ private slots:
         app->setRevision(42);
         app->setTitle("Test App");
         app->setDownloadHash("987654323456789");
+        app->setDownloadId("someuuid");
         app->setBinaryFilesize(1000);
         app->setIconUrl("http://example.org/testapp.png");
         app->setDownloadUrl("http://example.org/testapp.click");
@@ -282,6 +260,7 @@ private slots:
         QCOMPARE(m_model->data(idx, UpdateModel::RevisionRole).toUInt(), app->revision());
         QCOMPARE(m_model->data(idx, UpdateModel::TitleRole).toString(), app->title());
         QCOMPARE(m_model->data(idx, UpdateModel::DownloadHashRole).toString(), app->downloadHash());
+        QCOMPARE(m_model->data(idx, UpdateModel::DownloadIdRole).toString(), app->downloadId());
         QCOMPARE(m_model->data(idx, UpdateModel::SizeRole).toUInt(), app->binaryFilesize());
         QCOMPARE(m_model->data(idx, UpdateModel::IconUrlRole).toString(), app->iconUrl());
         QCOMPARE(m_model->data(idx, UpdateModel::DownloadUrlRole).toString(), app->downloadUrl());
@@ -335,6 +314,7 @@ private slots:
         QCOMPARE(u1->error(), QString(""));
         QCOMPARE(u1->progress(), 0);
         QCOMPARE(u1->token(), QString(""));
+        QCOMPARE(u1->downloadId(), QString(""));
         QCOMPARE(u1->state(), Update::State::StateAvailable);
     }
     void testSetInstalled()
@@ -342,16 +322,19 @@ private slots:
         QSharedPointer<Update> u = createUpdate("id", 42);
         m_db->add(u);
         m_model->setInstalled(u->identifier(), u->revision());
-        QCOMPARE(m_db->get(u->identifier(), u->revision())->state(),
-                 Update::State::StateInstallFinished);
+        QSharedPointer<Update> u1 = m_db->get(u->identifier(), u->revision());
+        QCOMPARE(u1->state(), Update::State::StateInstallFinished);
+        QCOMPARE(u1->downloadId(), QString(""));
     }
     void testSetError()
     {
         QSharedPointer<Update> u = createUpdate("id", 42);
         m_db->add(u);
         m_model->setError(u->identifier(), u->revision(), "fail");
-        QCOMPARE(m_db->get(u->identifier(), u->revision())->state(),
-                 Update::State::StateFailed);
+
+        QSharedPointer<Update> u1 = m_db->get(u->identifier(), u->revision());
+        QCOMPARE(u1->state(), Update::State::StateFailed);
+        QCOMPARE(u1->downloadId(), QString(""));
     }
     void testSetProgress()
     {
@@ -380,10 +363,12 @@ private slots:
     void testQueueUpdate()
     {
         QSharedPointer<Update> u = createUpdate("id", 42);
+        QString targetDid("someId");
         m_db->add(u);
-        m_model->queueUpdate(u->identifier(), u->revision());
-        QCOMPARE(m_db->get(u->identifier(), u->revision())->state(),
-                 Update::State::StateQueuedForDownload);
+        m_model->queueUpdate(u->identifier(), u->revision(), targetDid);
+        QSharedPointer<Update> u1 = m_db->get(u->identifier(), u->revision());
+        QCOMPARE(u1->state(), Update::State::StateQueuedForDownload);
+        QCOMPARE(u1->downloadId(), targetDid);
     }
     void testProcessUpdate()
     {
@@ -414,8 +399,13 @@ private slots:
         QSharedPointer<Update> u = createUpdate("id", 42);
         m_db->add(u);
         m_model->cancelUpdate(u->identifier(), u->revision());
-        QCOMPARE(m_db->get(u->identifier(), u->revision())->state(),
-                 Update::State::StateAvailable);
+
+        QSharedPointer<Update> u1 = m_model->get(u->identifier(), u->revision());
+        QCOMPARE(u1->error(), QString(""));
+        QCOMPARE(u1->progress(), 0);
+        QCOMPARE(u1->token(), QString(""));
+        QCOMPARE(u1->downloadId(), QString(""));
+        QCOMPARE(u1->state(), Update::State::StateAvailable);
     }
     void testRoleNames()
     {
@@ -512,7 +502,6 @@ private slots:
 
         QTest::newRow("Filter not installed") << sample << false << 2;
         QTest::newRow("Filter installed") << sample << true << 1;
-
     }
     void testFilteringInstalledIntegration()
     {
@@ -526,6 +515,84 @@ private slots:
 
         m_filter->filterOnInstalled(installedFilter);
         QCOMPARE(m_filter->rowCount(), targetCount);
+    }
+    void testPendingSorting_data()
+    {
+        QTest::addColumn<QList<QSharedPointer<Update>> >("updates");
+        QTest::addColumn<QStringList>("titleOrder");
+
+        QSharedPointer<Update> a = createUpdate("a", 1);
+        a->setTitle("A");
+        a->setInstalled(false);
+        QSharedPointer<Update> b = createUpdate("b", 1);
+        b->setTitle("B");
+        b->setInstalled(false);
+        QSharedPointer<Update> c = createUpdate("c", 1);
+        c->setTitle("C");
+        c->setInstalled(false);
+        QList<QSharedPointer<Update> > updates1; updates1 << a << b << c;
+        QStringList order1; order1 << "A" << "B" << "C";
+        QTest::newRow("abc") << updates1 << order1;
+
+        QList<QSharedPointer<Update> > updates2; updates2 << c << b << a;
+        QTest::newRow("cba") << updates2 << order1;
+    }
+    void testPendingSorting()
+    {
+        QFETCH(QList<QSharedPointer<Update>>, updates);
+        QFETCH(QStringList, titleOrder);
+
+        m_filter->filterOnInstalled(false);
+        Q_FOREACH(QSharedPointer<Update> u, updates) {
+            m_model->add(u);
+        }
+
+        QCOMPARE(m_filter->rowCount(), 3);
+        for (int i = 0; i < m_filter->rowCount(); i++) {
+            QCOMPARE(
+                 m_filter->data(m_filter->index(i, 0), UpdateModel::TitleRole).toString(),
+                 titleOrder.at(i)
+            );
+        }
+    }
+    void testInstalledSorting_data()
+    {
+        QTest::addColumn<QList<QSharedPointer<Update>> >("updates");
+        QTest::addColumn<QStringList>("idOrder");
+
+        QSharedPointer<Update> old = createUpdate("old", 1);
+        old->setUpdatedAt(QDateTime(QDate(2012, 1, 1)));
+        old->setInstalled(true);
+        QSharedPointer<Update> older = createUpdate("older", 1);
+        older->setUpdatedAt(QDateTime(QDate(2011, 1, 1)));
+        older->setInstalled(true);
+        QSharedPointer<Update> oldest = createUpdate("oldest", 1);
+        oldest->setUpdatedAt(QDateTime(QDate(2010, 1, 1)));
+        oldest->setInstalled(true);
+        QList<QSharedPointer<Update> > updates1; updates1 << old << older << oldest;
+        QStringList order1; order1 << "old" << "older" << "oldest";
+        QTest::newRow("old, older, oldest") << updates1 << order1;
+
+        QList<QSharedPointer<Update> > updates2; updates2 << oldest << older << old;
+        QTest::newRow("oldest, older, old") << updates2 << order1;
+    }
+    void testInstalledSorting()
+    {
+        QFETCH(QList<QSharedPointer<Update>>, updates);
+        QFETCH(QStringList, idOrder);
+
+        m_filter->filterOnInstalled(true);
+        Q_FOREACH(QSharedPointer<Update> u, updates) {
+            m_model->add(u);
+        }
+
+        QCOMPARE(m_filter->rowCount(), 3);
+        for (int i = 0; i < m_filter->rowCount(); i++) {
+            QCOMPARE(
+                 m_filter->data(m_filter->index(i, 0), UpdateModel::IdRole).toString(),
+                 idOrder.at(i)
+            );
+        }
     }
 private:
     UpdateDb *m_db = nullptr;

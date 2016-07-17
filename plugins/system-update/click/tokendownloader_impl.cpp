@@ -16,6 +16,7 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include "click/client_impl.h"
 #include "click/tokendownloader_impl.h"
 #include "helpers.h"
 
@@ -23,6 +24,14 @@ namespace UpdatePlugin
 {
 namespace Click
 {
+TokenDownloaderImpl::TokenDownloaderImpl(QSharedPointer<Update> update,
+                                         QObject *parent)
+    : TokenDownloader(update, parent)
+    , m_client(new ClientImpl(this))
+{
+    init();
+}
+
 TokenDownloaderImpl::TokenDownloaderImpl(Client *client,
                                          QSharedPointer<Update> update,
                                          QObject *parent)

@@ -48,6 +48,7 @@ public:
       UpdatedAtRole,
       TitleRole,
       DownloadHashRole,
+      DownloadIdRole,
       SizeRole,
       DownloadUrlRole,
       CommandRole,
@@ -56,7 +57,6 @@ public:
       UpdateStateRole,
       ProgressRole,
       AutomaticRole,
-      DownloadIdRole,
       ErrorRole,
       PackageNameRole,
       LastRole = PackageNameRole
@@ -77,17 +77,22 @@ public:
     void add(const QSharedPointer<Update> &update);
     void update(const QSharedPointer<Update> &update);
     void remove(const QSharedPointer<Update> &update);
+
+    /* Fetch will grab data from the ORM, while get returns a from cache. */
     QSharedPointer<Update> fetch(const QString &id, const uint &revision);
     QSharedPointer<Update> get(const QString &id, const uint &revision);
 
-    Q_INVOKABLE void setAvailable(const QString &id, const uint &revision);
+    Q_INVOKABLE void setAvailable(const QString &id, const uint &revision,
+                                  const bool autoStart = false);
     Q_INVOKABLE void setInstalled(const QString &id, const uint &revision);
-    Q_INVOKABLE void setError(const QString &id, const uint &revision, const QString &msg);
+    Q_INVOKABLE void setError(const QString &id, const uint &revision,
+                              const QString &msg);
     Q_INVOKABLE void setProgress(const QString &id, const uint &revision,
                      const int &progress);
     Q_INVOKABLE void setDownloaded(const QString &id, const uint &revision);
     Q_INVOKABLE void startUpdate(const QString &id, const uint &revision);
-    Q_INVOKABLE void queueUpdate(const QString &id, const uint &revision);
+    Q_INVOKABLE void queueUpdate(const QString &id, const uint &revision,
+                                 const QString &downloadId);
     Q_INVOKABLE void processUpdate(const QString &id, const uint &revision);
     Q_INVOKABLE void pauseUpdate(const QString &id, const uint &revision);
     Q_INVOKABLE void resumeUpdate(const QString &id, const uint &revision);
@@ -148,7 +153,7 @@ signals:
 
 protected:
     virtual bool filterAcceptsRow(int sourceRow, const QModelIndex &sourceParent) const Q_DECL_OVERRIDE;
-//    virtual bool lessThan(const QModelIndex &left, const QModelIndex &right) const Q_DECL_OVERRIDE;
+    // virtual bool lessThan(const QModelIndex &left, const QModelIndex &right) const Q_DECL_OVERRIDE;
 
 private:
     Update::Kind m_kind = Update::Kind::KindUnknown;

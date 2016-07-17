@@ -30,6 +30,8 @@ class TokenDownloaderImpl : public TokenDownloader
 {
     Q_OBJECT
 public:
+    explicit TokenDownloaderImpl(QSharedPointer<Update> update,
+                                 QObject *parent = 0);
     explicit TokenDownloaderImpl(Client *client,
                                  QSharedPointer<Update> update,
                                  QObject *parent = 0);

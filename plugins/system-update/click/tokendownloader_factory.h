@@ -32,6 +32,8 @@ class TokenDownloaderFactory
 {
 public:
     virtual ~TokenDownloaderFactory() {};
+    virtual TokenDownloader* create(QSharedPointer<Update> update,
+                                    QObject *parent = 0) = 0;
     virtual TokenDownloader* create(Client *client,
                                     QSharedPointer<Update> update,
                                     QObject *parent = 0) = 0;

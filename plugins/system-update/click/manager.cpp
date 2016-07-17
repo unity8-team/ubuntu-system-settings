@@ -153,13 +153,9 @@ void Manager::retry(const QString &identifier, const uint &revision)
     to install. */
     QSharedPointer<Update> u = m_model->get(identifier, revision);
     if (u->identifier() == identifier && u->revision() == revision) {
-        //m_db->setAvailable(identifier, revision);
+        m_model->setAvailable(identifier, revision, true);
 
-
-        // TODO: let the downloader create its own client
-        Click::Client *client = new Click::ClientImpl();
-        Click::TokenDownloader* dl = m_downloadFactory->create(client, u, this);
-        client->setParent(dl);
+        Click::TokenDownloader* dl = m_downloadFactory->create(u);
 
         dl->setAuthToken(m_authToken);
         initTokenDownloader(dl);
@@ -185,7 +181,6 @@ void Manager::launch(const QString &appId)
 
 void Manager::handleManifestSuccess(const QJsonArray &manifest)
 {
-    qWarning() << "handle manifest succe";
     // Nothing to do.
     if (manifest.size() == 0) {
         Q_EMIT checkCompleted();
@@ -225,10 +220,17 @@ void Manager::handleTokenDownload(QSharedPointer<Update> update)
         m_updates.remove(update->identifier());
     }
 
-    // Update in db.
-    qWarning() << "handleTokenDownload adds update";
-    m_model->add(update);
+    // Assume the original update was changed during the download of token.
+    QSharedPointer<Update> freshUpdate = m_model->get(update->identifier(),
+                                                      update->revision());
+    if (freshUpdate) {
+        freshUpdate->setToken(update->token());
+        m_model->add(freshUpdate);
+    } else {
+        m_model->add(update);
+    }
 
+    dl->deleteLater();
     completionCheck();
 }
 
@@ -250,14 +252,20 @@ void Manager::handleTokenDownloadFailure(QSharedPointer<Update> update)
     Click::TokenDownloader* dl = qobject_cast<Click::TokenDownloader*>(QObject::sender());
     dl->disconnect();
 
-    // Unset token, let the user try again.
-    // update->setToken("");
-    qWarning() << "handleTokenDownloadFailure adds update";
-    m_model->add(update);
-
+    // Assume the original update was changed during the download of token.
+    QSharedPointer<Update> freshUpdate = m_model->get(update->identifier(),
+                                                      update->revision());
+    if (freshUpdate) {
+        freshUpdate->setToken("");
+        m_model->add(freshUpdate);
+    } else {
+        update->setToken("");
+        m_model->add(update);
+    }
 
     // We're done with it.
     m_updates.remove(update->identifier());
+    dl->deleteLater();
     completionCheck();
 }
 
@@ -311,14 +319,12 @@ void Manager::requestMetadata()
     QUrl url(urlApps);
     url.setQuery(authHeader);
 
-    qWarning() << "requestMetadata";
 
     m_client->requestMetadata(url, packages);
 }
 
 void Manager::handleMetadataSuccess(const QByteArray &metadata)
 {
-    qWarning() << "handleMetadataSuccess" << metadata;
     QJsonParseError *jsonError = new QJsonParseError;
     auto document = QJsonDocument::fromJson(metadata, jsonError);
 
@@ -365,11 +371,7 @@ void Manager::parseMetadata(const QJsonArray &array)
                 update->setState(Update::State::StateAvailable);
                 update->setPackageName(package_name);
 
-                // TODO: let the downloader create its own client
-                Click::Client *client = new Click::ClientImpl();
-                Click::TokenDownloader* dl = m_downloadFactory->create(client, update, this);
-                client->setParent(dl);
-
+                Click::TokenDownloader* dl = m_downloadFactory->create(update);
                 dl->setAuthToken(m_authToken);
                 initTokenDownloader(dl);
                 dl->download();

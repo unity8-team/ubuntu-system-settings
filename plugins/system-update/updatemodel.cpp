@@ -47,11 +47,11 @@ UpdateModel::UpdateModel(const QString &dbpath, QObject *parent)
 
 void UpdateModel::initialize()
 {
-    qWarning() << "i was initialized";
-    // connect(this, SIGNAL(filterChanged()), SLOT(clear()));
     connect(m_db, SIGNAL(changed()), this, SLOT(refresh()));
     connect(m_db, SIGNAL(changed(const QSharedPointer<Update>&)),
             this, SLOT(refresh(const QSharedPointer<Update>&)));
+
+    refresh();
 }
 
 QHash<int, QByteArray> UpdateModel::roleNames() const
@@ -71,6 +71,7 @@ QHash<int, QByteArray> UpdateModel::roleNames() const
         names[UpdatedAtRole] = "updatedAt";
         names[TitleRole] = "title";
         names[DownloadHashRole] = "downloadHash";
+        names[DownloadIdRole] = "downloadId";
         names[SizeRole] = "size";
         names[DownloadUrlRole] = "downloadUrl";
         names[ChangelogRole] = "changelog";
@@ -122,6 +123,8 @@ QVariant UpdateModel::data(const QModelIndex &index, int role) const
         return u->title();
     case DownloadHashRole:
         return u->downloadHash();
+    case DownloadIdRole:
+        return u->downloadId();
     case SizeRole:
         return u->binaryFilesize();
     case IconUrlRole:
@@ -169,7 +172,6 @@ int UpdateModel::rowCount(const QModelIndex &parent) const
 
 void UpdateModel::clear()
 {
-    qWarning() << "clear called";
     beginResetModel();
     m_updates.clear();
     endResetModel();
@@ -180,8 +182,6 @@ void UpdateModel::clear()
 void UpdateModel::refresh(const QSharedPointer<Update> &update)
 {
     int ix = UpdateModel::indexOf(m_updates, update);
-    qWarning() << "refresh" << update->identifier() << update->revision() << "at" << ix;
-
     if (ix >= 0 && ix < m_updates.size()) {
         m_updates.replace(ix, update);
         emitRowChanged(ix);
@@ -192,52 +192,51 @@ void UpdateModel::refresh()
 {
     QList<QSharedPointer<Update> > now = m_db->updates();
     int oldCount = m_updates.size();
-    qWarning() << "refresh" << now.size();
 
-    qWarning() << "m_updates is";
+    // qWarning() << "m_updates is";
     for (int i = 0; i < m_updates.size(); i++) {
         QSharedPointer<Update> item = m_updates.at(i);
-        qWarning() << "\t" << i << item->identifier();
+        // qWarning() << "\t" << i << item->identifier();
         if (!UpdateModel::contains(now, item)) {
-            qWarning() << "\t\t removing" << i;
+            // qWarning() << "\t\t removing" << i;
             removeRow(i);
         }
     }
 
-    qWarning() << "now is";
+    // qWarning() << "now is";
     for (int i = 0; i < now.size(); i++) {
         QSharedPointer<Update> item = now.at(i);
-        qWarning() << "\t" << item->identifier() << i;
+        // qWarning() << "\t" << item->identifier() << i;
 
-        qWarning() << "\t\twhile m_updates...";
+        // qWarning() << "\t\twhile m_updates...";
         for (int i = 0; i < m_updates.size(); i++) {
             QSharedPointer<Update> item = m_updates.at(i);
-            qWarning() << "\t\t\tm_updates:" << item->identifier();
+            // qWarning() << "\t\t\tm_updates:" << item->identifier();
         }
 
         int oldPos = UpdateModel::indexOf(m_updates, item);
-        qWarning() << "\t\tindexOf" << item->identifier() << "was"<<oldPos;
+        // qWarning() << "\t\tindexOf" << item->identifier() << "was"<<oldPos;
         if (UpdateModel::contains(m_updates, item)) {
-            qWarning() << "\t\tm_updates contains" << item->identifier();
+            // qWarning() << "\t\tm_updates contains" << item->identifier();
             if (oldPos == i) {
                 if (!m_updates.at(oldPos)->deepEquals(item.data())) {
-                    qWarning() << "\t\t\t row"<<i<<"changed";
+                    // qWarning() << "\t\t\t row"<<i<<"changed";
                     emitRowChanged(i);
                 }
             } else {
-                qWarning() << "\t\t\t moving"<<i<<"from"<<oldPos;
+                // qWarning() << "\t\t\t moving"<<i<<"from"<<oldPos;
                 moveRow(oldPos, i);
             }
         } else {
-            qWarning() << "\t\t\t inserting"<<i<<item->identifier();
+            // qWarning() << "\t\t\t inserting"<<i<<item->identifier();
             insertRow(i, item);
         }
     }
 
-    qWarning() << "\n\nm_updates after operation";
+    // qWarning() << "\n\nm_updates after operation";
     for (int i = 0; i < m_updates.size(); i++) {
         QSharedPointer<Update> item = m_updates.at(i);
-        qWarning() << "\tm_updates:" << item->identifier();
+        // qWarning() << "\tm_updates:" << item->identifier();
     }
 
     if (now.size() != oldCount) {
@@ -314,9 +313,7 @@ QSharedPointer<Update> UpdateModel::get(const QString &id, const uint &revision)
 
 QSharedPointer<Update> UpdateModel::find(const QString &id, const uint &revision)
 {
-    qWarning() << "find called, m_updates size" << m_updates.size();
     Q_FOREACH(QSharedPointer<Update> update, m_updates) {
-        qWarning() << "find, checking" << id << revision << "vs" << update->identifier() << update->revision();
         if (id == update->identifier() && revision == update->revision()) {
             return update;
         }
@@ -365,7 +362,8 @@ bool UpdateModel::contains(const QList<QSharedPointer<Update> > &list,
     );
 }
 
-void UpdateModel::setAvailable(const QString &id, const uint &revision)
+void UpdateModel::setAvailable(const QString &id, const uint &revision,
+                               const bool autoStart)
 {
     QSharedPointer<Update> u = find(id, revision);
     if (!u.isNull()) {
@@ -373,16 +371,20 @@ void UpdateModel::setAvailable(const QString &id, const uint &revision)
         u->setInstalled(false);
         u->setProgress(0);
         u->setToken("");
+        u->setDownloadId("");
         u->setError("");
+        u->setAutomatic(autoStart);
         m_db->update(u);
     }
 }
 
-void UpdateModel::queueUpdate(const QString &id, const uint &revision)
+void UpdateModel::queueUpdate(const QString &id, const uint &revision,
+                              const QString &downloadId)
 {
     QSharedPointer<Update> u = find(id, revision);
     if (!u.isNull()) {
         u->setState(Update::State::StateQueuedForDownload);
+        u->setDownloadId(downloadId);
         m_db->update(u);
     }
 }
@@ -394,6 +396,7 @@ void UpdateModel::setInstalled(const QString &id, const uint &revision)
         u->setInstalled(true);
         u->setState(Update::State::StateInstallFinished);
         u->setUpdatedAt(QDateTime::currentDateTimeUtc());
+        u->setDownloadId("");
         m_db->update(u);
     }
 }
@@ -416,12 +419,14 @@ void UpdateModel::processUpdate(const QString &id, const uint &revision)
     }
 }
 
-void UpdateModel::setError(const QString &id, const uint &revision, const QString &msg)
+void UpdateModel::setError(const QString &id, const uint &revision,
+                           const QString &msg)
 {
     QSharedPointer<Update> u = find(id, revision);
     if (!u.isNull()) {
         u->setState(Update::State::StateFailed);
         u->setError(msg);
+        u->setDownloadId("");
         m_db->update(u);
     }
 }
@@ -438,10 +443,8 @@ void UpdateModel::setDownloaded(const QString &id, const uint &revision)
 void UpdateModel::setProgress(const QString &id, const uint &revision,
                               const int &progress)
 {
-    qWarning() << "setProgress" << id << revision << progress;
     QSharedPointer<Update> u = find(id, revision);
     if (!u.isNull()) {
-        qWarning() << "setProgress found, setting";
         u->setState(Update::State::StateDownloading);
         u->setProgress(progress);
         m_db->update(u);
@@ -473,6 +476,7 @@ void UpdateModel::cancelUpdate(const QString &id, const uint &revision)
         u->setState(Update::State::StateAvailable);
         u->setError("");
         u->setToken("");
+        u->setDownloadId("");
         u->setProgress(0);
         m_db->update(u);
     }
@@ -539,14 +543,24 @@ void UpdateModelFilter::filterOnInstalled(const bool installed)
         m_installed = installed;
         Q_EMIT installedChanged();
     }
-    invalidate();
+
     m_installedEnabled = true;
+    invalidateFilter();
+
+    if (installed) {
+        // Installed updates are sorted date (most recent first).
+        setSortRole(UpdateModel::UpdatedAtRole);
+        sort(0, Qt::DescendingOrder);
+    } else {
+        // Pending updates are sorted by title, a-z.
+        setSortRole(UpdateModel::TitleRole);
+        sort(0, Qt::AscendingOrder);
+    }
 }
 
 bool UpdateModelFilter::filterAcceptsRow(int sourceRow,
                                          const QModelIndex &sourceParent) const
 {
-    qWarning() << "filterAcceptsRow" << sourceRow;
     bool accepts = true;
     QModelIndex childIndex = sourceModel()->index(sourceRow, 0, sourceParent);
 
@@ -566,4 +580,16 @@ bool UpdateModelFilter::filterAcceptsRow(int sourceRow,
 
     return accepts;
 }
+
+// bool UpdateModelFilter::lessThan(const QModelIndex &left,
+//                             const QModelIndex &right) const
+// {
+//   qWarning() << "LTE";
+//   const QString a = sourceModel()->data(left,
+//                                         UpdateModel::TitleRole).toString();
+//   const QString b = sourceModel()->data(right,
+//                                         UpdateModel::TitleRole).toString();
+//   qWarning() << a << "vs" << b;
+//   return a < b;
+// }
 } // UpdatePlugin

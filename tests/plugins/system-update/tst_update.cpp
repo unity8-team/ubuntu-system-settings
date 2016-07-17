@@ -78,6 +78,11 @@ private slots:
         QCOMPARE(downloadHash.count(), 1);
         QCOMPARE(m_instance->downloadHash(), QString("downloadHash"));
 
+        QSignalSpy downloadId(m_instance, SIGNAL(downloadIdChanged()));
+        m_instance->setDownloadId("downloadId");
+        QCOMPARE(downloadId.count(), 1);
+        QCOMPARE(m_instance->downloadId(), QString("downloadId"));
+
         QSignalSpy downloadUrlSpy(m_instance, SIGNAL(downloadUrlChanged()));
         m_instance->setDownloadUrl("downloadUrl");
         QCOMPARE(downloadUrlSpy.count(), 1);
@@ -180,6 +185,7 @@ private slots:
         a->setUpdatedAt(updated_a);
         a->setTitle("title_a");
         a->setDownloadHash("downloadHash_a");
+        a->setDownloadId("downloadId_a");
         a->setBinaryFilesize(1000);
         a->setIconUrl("iconUrl_a");
         a->setDownloadUrl("downloadUrl_a");
@@ -202,6 +208,7 @@ private slots:
         b->setUpdatedAt(updated_b);
         b->setTitle("title_b");
         b->setDownloadHash("downloadHash_b");
+        b->setDownloadId("downloadId_b");
         b->setBinaryFilesize(1000);
         b->setIconUrl("iconUrl_b");
         b->setDownloadUrl("downloadUrl_b");

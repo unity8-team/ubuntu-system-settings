@@ -29,6 +29,7 @@ class SystemUpdate : public QObject
 {
     Q_OBJECT
     Q_ENUMS(Status)
+    Q_PROPERTY(UpdateModel* model READ updates CONSTANT)
 public:
     static SystemUpdate *instance();
     static void destroyInstance();
