@@ -24,7 +24,6 @@
 #include "systemimage.h"
 #include "systemupdate.h"
 #include "update.h"
-// #include "updatedb.h"
 #include "updatemodel.h"
 
 #include <QtQml>
@@ -64,6 +63,6 @@ void BackendPlugin::registerTypes(const char *uri)
     );
 
     qmlRegisterType<Click::Manager>(uri, 1, 0, "ClickManager");
-    qmlRegisterUncreatableType<UpdateModel>(uri, 1, 0, "UpdateModel", "Can't be instantiated directly.");
     qmlRegisterType<UpdateModelFilter>(uri, 1, 0, "UpdateModelFilter");
+    qRegisterMetaType<UpdateModel*>("UpdateModel*");
 }
