@@ -140,7 +140,10 @@ Item {
                 compare(delegate.size, data.updateSize);
                 compare(delegate.version, data.availableVersion);
             } else {
-                verify(!delegate);
+                // Wait for delegate to not exist.
+                tryCompareFunction(function () {
+                    return !!delegate;
+                }, false);
             }
 
             if (typeof data.targetState !== "undefined") {
