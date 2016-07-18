@@ -40,8 +40,10 @@ ItemPage {
         busType: 1
         busName: "com.canonical.indicator.power"
         objectPath: "/com/canonical/indicator/power"
-        property variant batteryLevel: action("battery-level").state
+        property variant batteryLevel: action("battery-level").state || 0
         property variant deviceState: action("device-state").state
+        onBatteryLevelChanged: console.warn('batteryLevel changed', batteryLevel)
+        onDeviceStateChanged: console.warn('deviceState changed', deviceState)
         Component.onCompleted: start()
     }
 
@@ -92,17 +94,14 @@ ItemPage {
         }
         width: parent.width
         clip: true
-
         clickModel: clickUpdates
         clickManager: clickManager
         imageModel: imageUpdate
         installedModel: installedUpdates
         downloadHandler: downloadHandler
-
         authenticated: clickManager.authenticated
-
-        havePower: (indicatorPower.deviceState === "charging")
-                    && (indicatorPower.batteryLevel > 25)
+        havePower: (indicatorPower.deviceState === "charging") ||
+                   (indicatorPower.batteryLevel > 25)
         onRequestAuthentication: uoaConfig.exec()
     }
 

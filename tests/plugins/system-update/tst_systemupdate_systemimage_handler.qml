@@ -140,10 +140,7 @@ Item {
                 compare(delegate.size, data.updateSize);
                 compare(delegate.version, data.availableVersion);
             } else {
-                // Wait for delegate to not exist.
-                tryCompareFunction(function () {
-                    return !!delegate;
-                }, false);
+                verify(!findChild(testRoot, "image-update-0"));
             }
 
             if (typeof data.targetState !== "undefined") {
