@@ -11,12 +11,14 @@ pkg_check_modules(UBUNTUONEAUTH REQUIRED ubuntuoneauth-2.0)
 add_definitions(${UBUNTUONEAUTH_CFLAGS} ${UBUNTUONEAUTH_CFLAGS_OTHER})
 
 find_package(Qt5Test REQUIRED)
+find_package(Qt5Sql REQUIRED)
 
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(PLUGIN_LIBS
     UpdatePlugin
     Qt5::Test
+    Qt5::Sql
     ${UAL_LDFLAGS}
     ${UBUNTUONEAUTH_LDFLAGS}
 )
