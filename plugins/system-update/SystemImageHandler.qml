@@ -30,13 +30,13 @@ Item {
         }
 
         onUpdateAvailableStatus: {
-        console.warn("onUpdateAvailableStatus",
-                     isAvailable,
-                     downloading,
-                     availableVersion,
-                     updateSize,
-                     lastUpdateDate,
-                     errorReason);
+            console.warn("onUpdateAvailableStatus",
+                         isAvailable,
+                         downloading,
+                         availableVersion,
+                         updateSize,
+                         lastUpdateDate,
+                         errorReason);
             if (isAvailable)
                 updateModel.setImageUpdate("ubuntu", availableVersion, updateSize);
                 if (downloading)
@@ -45,24 +45,24 @@ Item {
                     updateModel.pauseUpdate("ubuntu", availableVersion);
         }
         onDownloadStarted: {
-            console.warn('onDownloadStarted');
+            console.warn('onDownloadStarted', SystemImage.targetBuildNumber);
             updateModel.setProgress("ubuntu", SystemImage.targetBuildNumber, 0);
         }
         onUpdateProgress: {
-            console.warn('onUpdateProgress', percentage);
+            console.warn('onUpdateProgress', SystemImage.targetBuildNumber, percentage);
             updateModel.setProgress("ubuntu", SystemImage.targetBuildNumber, percentage);
         }
         onUpdatePaused: {
-            console.warn('onUpdatePaused', percentage);
+            console.warn('onUpdatePaused', SystemImage.targetBuildNumber, percentage);
             updateModel.setProgress("ubuntu", SystemImage.targetBuildNumber, percentage);
             updateModel.pauseUpdate("ubuntu", SystemImage.targetBuildNumber);
         }
         onUpdateDownloaded: {
-            console.warn('onUpdateDownloaded');
+            console.warn('onUpdateDownloaded', SystemImage.targetBuildNumber);
             updateModel.setDownloaded("ubuntu", SystemImage.targetBuildNumber);
         }
         onUpdateFailed: {
-            console.warn('onUpdateFailed', lastReason);
+            console.warn('onUpdateFailed', SystemImage.targetBuildNumber, lastReason);
             updateModel.setError("ubuntu", SystemImage.targetBuildNumber, lastReason);
         }
 
@@ -73,7 +73,7 @@ Item {
             markInstalled(SystemImage.currentBuildNumber);
         }
         onRebooting: {
-            console.warn('onRebooting', status);
+            console.warn('onRebooting', SystemImage.targetBuildNumber, status);
             if (status) {
                 updateModel.setInstalling("ubuntu", SystemImage.targetBuildNumber);
             } else {

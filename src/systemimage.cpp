@@ -51,16 +51,14 @@ QSystemImage::QSystemImage(QObject *parent) :
                          m_systemBusConnection),
     m_lastCheckDate(),
     m_channelName(""),
-    m_targetBuildNumber(0),
+    m_targetBuildNumber(-1),
     m_deviceName(""),
     m_updateAvailable(false),
     m_downloading(false),
-    m_availableVersion(""),
     m_updateSize(0),
     m_errorReason("")
 {
     qDBusRegisterMetaType<QMap<QString, QString> >();
-
 
     connect (&m_serviceWatcher,
              SIGNAL(serviceOwnerChanged(QString, QString, QString)),
@@ -126,7 +124,6 @@ void QSystemImage::factoryReset() {
     m_systemServiceIface.asyncCall("FactoryReset");
 }
 
-
 void QSystemImage::productionReset() {
     m_systemServiceIface.asyncCall("ProductionReset");
 }
@@ -167,28 +164,12 @@ void QSystemImage::initializeProperties() {
     if (reply.isValid()) {
         QMap<QString, QString> result = reply.argumentAt<0>();
 
-        m_currentBuildNumber = result["current_build_number"].toInt();
-        Q_EMIT currentBuildNumberChanged();
-
-        m_targetBuildNumber = result["target_build_number"].toInt();
-        Q_EMIT targetBuildNumberChanged();
-
-        // We also set m_availableVersion here for consistency
-        // TODO: maybe drop exposing targetBuildNumber?
-        m_availableVersion = QString::number(m_targetBuildNumber);
-        Q_EMIT availableVersionChanged();
-
-        m_channelName = result["channel_name"];
-        Q_EMIT channelNameChanged();
-
-        m_deviceName = result["device_name"];
-        Q_EMIT deviceNameChanged();
-
-        m_lastUpdateDate = QDateTime::fromString(result["last_update_date"], Qt::ISODate);
-        Q_EMIT lastUpdateDateChanged();
-
-        m_lastCheckDate = QDateTime::fromString(result["last_check_date"], Qt::ISODate);
-        Q_EMIT lastCheckDateChanged();
+        setCurrentBuildNumber(result["current_build_number"].toInt());
+        setTargetBuildNumber(result["target_build_number"].toInt());
+        setChannelName(result["channel_name"]);
+        setDeviceName(result["device_name"]);
+        setLastUpdateDate(QDateTime::fromString(result["last_update_date"], Qt::ISODate));
+        setLastCheckDate(QDateTime::fromString(result["last_check_date"], Qt::ISODate));
 
         QMap<QString, QVariant> details;
         QStringList keyvalue = result["version_detail"].split(",", QString::SkipEmptyParts);
@@ -196,30 +177,34 @@ void QSystemImage::initializeProperties() {
             QStringList pair = keyvalue.at(i).split("=");
             details[pair[0]] = QVariant(pair[1]);
         }
-        m_detailedVersion = details;
-        Q_EMIT detailedVersionDetailsChanged();
+        setDetailedVersionDetails(details);
     } else {
         qWarning() << "Error when retrieving version information: " << reply.error();
     }
 }
 
-bool QSystemImage::checkTarget() const {
+bool QSystemImage::checkTarget() const
+{
     return m_targetBuildNumber > m_currentBuildNumber;
 }
 
-QString QSystemImage::deviceName() const {
+QString QSystemImage::deviceName() const
+{
     return m_deviceName;
 }
 
-QString QSystemImage::channelName() const {
+QString QSystemImage::channelName() const
+{
     return m_channelName;
 }
 
-QDateTime QSystemImage::lastUpdateDate() const {
+QDateTime QSystemImage::lastUpdateDate() const
+{
     return m_lastUpdateDate;
 }
 
-QDateTime QSystemImage::lastCheckDate() const {
+QDateTime QSystemImage::lastCheckDate() const
+{
     return m_lastCheckDate;
 }
 
@@ -233,11 +218,6 @@ bool QSystemImage::downloading()
     return m_downloading;
 }
 
-QString QSystemImage::availableVersion()
-{
-    return m_availableVersion;
-}
-
 int QSystemImage::updateSize()
 {
     return m_updateSize;
@@ -248,34 +228,41 @@ QString QSystemImage::errorReason()
     return m_errorReason;
 }
 
-int QSystemImage::currentBuildNumber() const {
+int QSystemImage::currentBuildNumber() const
+{
     return m_currentBuildNumber;
 }
 
-QString QSystemImage::currentUbuntuBuildNumber() const {
+QString QSystemImage::currentUbuntuBuildNumber() const
+{
     QString val = m_detailedVersion.value("ubuntu").toString();
     return val.isEmpty() ? _("Unavailable") : val;
 }
 
-QString QSystemImage::currentDeviceBuildNumber() const {
+QString QSystemImage::currentDeviceBuildNumber() const
+{
     QString val = m_detailedVersion.value("device").toString();
     return val.isEmpty() ? _("Unavailable") : val;
 }
 
-QString QSystemImage::currentCustomBuildNumber() const {
+QString QSystemImage::currentCustomBuildNumber() const
+{
     QString val = m_detailedVersion.value("custom").toString();
     return val.isEmpty() ? _("Unavailable") : val;
 }
 
-int QSystemImage::targetBuildNumber() const {
+int QSystemImage::targetBuildNumber() const
+{
     return m_targetBuildNumber;
 }
 
-QVariantMap QSystemImage::detailedVersionDetails() const {
+QVariantMap QSystemImage::detailedVersionDetails() const
+{
     return m_detailedVersion;
 }
 
-int QSystemImage::downloadMode() {
+int QSystemImage::downloadMode()
+{
     if (m_downloadMode != -1)
         return m_downloadMode;
 
@@ -323,33 +310,112 @@ void QSystemImage::availableStatusChanged(const bool isAvailable,
                                           const QString &lastUpdateDate,
                                           const QString &errorReason)
 {
+    setUpdateAvailable(isAvailable);
+    setDownloading(downloading);
 
-    if (m_updateAvailable != isAvailable) {
-        m_updateAvailable = isAvailable;
-        Q_EMIT updateAvailableChanged();
+    bool ok;
+    int targetBuildNumber = availableVersion.toInt(&ok);
+    if (ok) {
+        setTargetBuildNumber(targetBuildNumber);
+    } else {
+        qWarning() << "Failed to parse availableVersion" << availableVersion;
     }
 
+    setUpdateSize(updateSize);
+
+    QDateTime lud = QDateTime::fromString(lastUpdateDate, Qt::ISODate);
+    setLastUpdateDate(lud);
+
+    setErrorReason(errorReason);
+}
+
+void QSystemImage::setDeviceName(const QString &deviceName)
+{
+    if (m_deviceName != deviceName) {
+        m_deviceName = deviceName;
+        Q_EMIT deviceNameChanged();
+    }
+}
+
+void QSystemImage::setChannelName(const QString &channelName)
+{
+    if (m_channelName != channelName) {
+        m_channelName = channelName;
+        Q_EMIT channelNameChanged();
+    }
+}
+
+void QSystemImage::setDetailedVersionDetails(const QVariantMap &detailedVersionDetails)
+{
+    if (m_detailedVersion != detailedVersionDetails) {
+        m_detailedVersion = detailedVersionDetails;
+        Q_EMIT detailedVersionDetailsChanged();
+
+        // These properties are read from m_detailedVersion, so notify.
+        Q_EMIT currentUbuntuBuildNumberChanged();
+        Q_EMIT currentDeviceBuildNumberChanged();
+        Q_EMIT currentCustomBuildNumberChanged();
+    }
+}
+
+void QSystemImage::setCurrentBuildNumber(const int &currentBuildNumber)
+{
+    if (m_currentBuildNumber != currentBuildNumber) {
+        m_currentBuildNumber = currentBuildNumber;
+        Q_EMIT currentBuildNumberChanged();
+    }
+}
+
+void QSystemImage::setTargetBuildNumber(const int &targetBuildNumber)
+{
+    if (m_targetBuildNumber != targetBuildNumber) {
+        m_targetBuildNumber = targetBuildNumber;
+        Q_EMIT targetBuildNumberChanged();
+    }
+}
+
+void QSystemImage::setLastUpdateDate(const QDateTime &lastUpdateDate)
+{
+    if (m_lastUpdateDate != lastUpdateDate) {
+        m_lastUpdateDate = lastUpdateDate;
+        Q_EMIT lastUpdateDateChanged();
+    }
+}
+
+void QSystemImage::setLastCheckDate(const QDateTime &lastCheckDate)
+{
+    if (m_lastCheckDate != lastCheckDate) {
+        m_lastCheckDate = lastCheckDate;
+        Q_EMIT lastCheckDateChanged();
+    }
+}
+
+void QSystemImage::setUpdateAvailable(const bool updateAvailable)
+{
+    if (m_updateAvailable != updateAvailable) {
+        m_updateAvailable = updateAvailable;
+        Q_EMIT updateAvailableChanged();
+    }
+}
+
+void QSystemImage::setDownloading(const bool downloading)
+{
     if (m_downloading != downloading) {
         m_downloading = downloading;
         Q_EMIT downloadingChanged();
     }
+}
 
-    if (m_availableVersion != availableVersion) {
-        m_availableVersion = availableVersion;
-        Q_EMIT availableVersionChanged();
-    }
-
+void QSystemImage::setUpdateSize(const int &updateSize)
+{
     if (m_updateSize != updateSize) {
         m_updateSize = updateSize;
         Q_EMIT updateSizeChanged();
     }
+}
 
-    QDateTime lud = QDateTime::fromString(lastUpdateDate, Qt::ISODate);
-    if (m_lastUpdateDate != lud) {
-        m_lastUpdateDate = lud;
-        Q_EMIT lastUpdateDateChanged();
-    }
-
+void QSystemImage::setErrorReason(const QString &errorReason)
+{
     if (m_errorReason != errorReason) {
         m_errorReason = errorReason;
         Q_EMIT errorReasonChanged();

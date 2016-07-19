@@ -62,8 +62,6 @@ public:
                NOTIFY updateAvailableChanged)
     Q_PROPERTY(bool downloading READ downloading
                NOTIFY downloadingChanged)
-    Q_PROPERTY(QString availableVersion READ availableVersion
-               NOTIFY availableVersionChanged)
     Q_PROPERTY(int updateSize READ updateSize
                NOTIFY updateSizeChanged)
     Q_PROPERTY(QString errorReason READ errorReason
@@ -80,14 +78,13 @@ public:
     QVariantMap detailedVersionDetails() const;
     int currentBuildNumber() const;
     int targetBuildNumber() const;
-    QDateTime lastUpdateDate() const;
-    QDateTime lastCheckDate() const;
 
     bool updateAvailable();
     bool downloading();
-    QString availableVersion();
     int updateSize();
     QString errorReason();
+    QDateTime lastUpdateDate() const;
+    QDateTime lastCheckDate() const;
 
     Q_INVOKABLE void checkForUpdate();
     Q_INVOKABLE void downloadUpdate();
@@ -113,7 +110,6 @@ Q_SIGNALS:
 
     void updateAvailableChanged();
     void downloadingChanged();
-    void availableVersionChanged();
     void updateSizeChanged();
     void errorReasonChanged();
 
@@ -146,6 +142,24 @@ private Q_SLOTS:
                                 const QString &errorReason);
 
 private:
+    void setDeviceName(const QString &deviceName);
+    void setChannelName(const QString &channelName);
+    void setDetailedVersionDetails(const QVariantMap &detailedVersionDetails);
+    void setCurrentBuildNumber(const int &currentBuildNumber);
+    void setTargetBuildNumber(const int &targetBuildNumber);
+    void setLastUpdateDate(const QDateTime &lastUpdateDate);
+    void setLastCheckDate(const QDateTime &lastCheckDate);
+
+    void setUpdateAvailable(const bool updateAvailable);
+    void setDownloading(const bool downloading);
+    void setUpdateSize(const int &updateSize);
+    void setErrorReason(const QString &errorReason);
+
+    // Synchronously initialize properties from the Information call.
+    void initializeProperties();
+    // Sets up connections on the DBus interface.
+    void setUpInterface();
+
     int m_currentBuildNumber;
     QMap<QString, QVariant> m_detailedVersion;
     QDateTime m_lastUpdateDate;
@@ -161,14 +175,8 @@ private:
 
     bool m_updateAvailable;
     bool m_downloading;
-    QString m_availableVersion;
     int m_updateSize;
     QString m_errorReason;
-
-    // Synchronously initialize properties from the Information call.
-    void initializeProperties();
-    // Sets up connections on the DBus interface.
-    void setUpInterface();
 };
 
 #endif // QSYSTEMIMAGE_H
