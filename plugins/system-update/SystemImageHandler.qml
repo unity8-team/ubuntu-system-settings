@@ -30,6 +30,13 @@ Item {
         }
 
         onUpdateAvailableStatus: {
+        console.warn("onUpdateAvailableStatus",
+                     isAvailable,
+                     downloading,
+                     availableVersion,
+                     updateSize,
+                     lastUpdateDate,
+                     errorReason);
             if (isAvailable)
                 updateModel.setImageUpdate("ubuntu", availableVersion, updateSize);
                 if (downloading)
@@ -38,28 +45,35 @@ Item {
                     updateModel.pauseUpdate("ubuntu", availableVersion);
         }
         onDownloadStarted: {
+            console.warn('onDownloadStarted');
             updateModel.setProgress("ubuntu", SystemImage.targetBuildNumber, 0);
         }
         onUpdateProgress: {
+            console.warn('onUpdateProgress', percentage);
             updateModel.setProgress("ubuntu", SystemImage.targetBuildNumber, percentage);
         }
         onUpdatePaused: {
+            console.warn('onUpdatePaused', percentage);
             updateModel.setProgress("ubuntu", SystemImage.targetBuildNumber, percentage);
             updateModel.pauseUpdate("ubuntu", SystemImage.targetBuildNumber);
         }
         onUpdateDownloaded: {
+            console.warn('onUpdateDownloaded');
             updateModel.setDownloaded("ubuntu", SystemImage.targetBuildNumber);
         }
         onUpdateFailed: {
+            console.warn('onUpdateFailed', lastReason);
             updateModel.setError("ubuntu", SystemImage.targetBuildNumber, lastReason);
         }
 
         /* This is currently the best we can do for marking image updates as
         installed. lp:1600449 */
         onCurrentBuildNumberChanged: {
+            console.warn('onCurrentBuildNumberChanged', SystemImage.currentBuildNumber);
             markInstalled(SystemImage.currentBuildNumber);
         }
         Component.onCompleted: {
+            console.warn('onCompleted', SystemImage.currentBuildNumber);
             markInstalled(SystemImage.currentBuildNumber);
         }
     }
