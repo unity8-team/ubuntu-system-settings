@@ -27,14 +27,17 @@ import Ubuntu.SystemSettings.Update 1.0
 ListItem.SingleValue {
     id: root
 
-    height: updatesRep.count > 0 ? units.gu(6) : 0
+    height: value > 0 ? units.gu(6) : 0
 
     text: i18n.tr(model.displayName)
     objectName: "entryComponent-updates"
     iconSource: Qt.resolvedUrl(model.icon)
     iconFrame: false
     progression: true
-    value: updatesRep.count
+    value: {
+        var imageUpdateCount = SystemUpdate.checkTarget() ? 1 : 0;
+        return updatesRep.count + imageUpdateCount;
+    }
 
     onClicked: main.loadPluginByName("system-update");
 
@@ -51,10 +54,6 @@ ListItem.SingleValue {
                 download.metadata.custom.revision
             );
         }
-    }
-
-    SystemImageHandler {
-        updateModel: SystemUpdate.model
     }
 
     Repeater {
