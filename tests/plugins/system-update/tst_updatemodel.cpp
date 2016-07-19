@@ -341,8 +341,18 @@ private slots:
         QSharedPointer<Update> u = createUpdate("id", 42);
         m_db->add(u);
         m_model->setProgress(u->identifier(), u->revision(), 5);
-        QCOMPARE(m_db->get(u->identifier(), u->revision())->state(),
-                 Update::State::StateDownloading);
+        QSharedPointer<Update> u1 = m_db->get(u->identifier(), u->revision());
+        QCOMPARE(u1->state(), Update::State::StateDownloading);
+        QCOMPARE(u1->progress(), 5);
+    }
+    void testSetInstalling()
+    {
+        QSharedPointer<Update> u = createUpdate("id", 42);
+        m_db->add(u);
+        m_model->setInstalling(u->identifier(), u->revision(), 5);
+        QSharedPointer<Update> u1 = m_db->get(u->identifier(), u->revision());
+        QCOMPARE(u1->state(), Update::State::StateInstalling);
+        QCOMPARE(u1->progress(), 5);
     }
     void testSetDownloaded()
     {

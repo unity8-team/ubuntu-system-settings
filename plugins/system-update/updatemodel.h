@@ -90,6 +90,8 @@ public:
     Q_INVOKABLE void setProgress(const QString &id, const uint &revision,
                      const int &progress);
     Q_INVOKABLE void setDownloaded(const QString &id, const uint &revision);
+    Q_INVOKABLE void setInstalling(const QString &id, const uint &revision,
+                                   const int &progress = 0);
     Q_INVOKABLE void startUpdate(const QString &id, const uint &revision);
     Q_INVOKABLE void queueUpdate(const QString &id, const uint &revision,
                                  const QString &downloadId);

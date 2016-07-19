@@ -451,6 +451,17 @@ void UpdateModel::setProgress(const QString &id, const uint &revision,
     }
 }
 
+void UpdateModel::setInstalling(const QString &id, const uint &revision,
+                                const int &progress)
+{
+    QSharedPointer<Update> u = find(id, revision);
+    if (!u.isNull()) {
+        u->setState(Update::State::StateInstalling);
+        u->setProgress(progress);
+        m_db->update(u);
+    }
+}
+
 void UpdateModel::pauseUpdate(const QString &id, const uint &revision)
 {
     QSharedPointer<Update> u = find(id, revision);

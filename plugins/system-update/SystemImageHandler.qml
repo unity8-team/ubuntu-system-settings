@@ -72,6 +72,14 @@ Item {
             console.warn('onCurrentBuildNumberChanged', SystemImage.currentBuildNumber);
             markInstalled(SystemImage.currentBuildNumber);
         }
+        onRebooting: {
+            console.warn('onRebooting', status);
+            if (status) {
+                updateModel.setInstalling("ubuntu", SystemImage.targetBuildNumber);
+            } else {
+                updateModel.setError("ubuntu", i18n.tr("Failed to restart device."));
+            }
+        }
         Component.onCompleted: {
             console.warn('onCompleted', SystemImage.currentBuildNumber);
             markInstalled(SystemImage.currentBuildNumber);
