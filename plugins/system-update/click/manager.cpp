@@ -197,6 +197,15 @@ void Manager::handleManifestSuccess(const QJsonArray &manifest)
         update->setLocalVersion(object.value("version").toString());
         update->setKind(Update::Kind::KindClick);
 
+        /* We'll also need the package name, which will be the first key inside
+        the “hooks” key. */
+        if (object.contains("hooks") && object.value("hooks").isObject()) {
+            QJsonObject hooks = object.value("hooks").toObject();
+            if (!hooks.isEmpty()) {
+                update->setPackageName(hooks.keys()[0]);
+            }
+        }
+
         QStringList command;
         command << Helpers::whichPkcon() << "-p" << "install-local" << "$file";
         update->setCommand(command);
@@ -356,7 +365,6 @@ void Manager::parseMetadata(const QJsonArray &array)
         auto size = object["binary_filesize"].toInt();
         auto title = object["title"].toString();
         auto revision = object["revision"].toInt();
-        auto package_name = object["package_name"].toString();
         if (m_updates.contains(name)) {
             QSharedPointer<Update> update = m_updates.value(name);
             update->setRemoteVersion(version);
@@ -369,7 +377,6 @@ void Manager::parseMetadata(const QJsonArray &array)
                 update->setTitle(title);
                 update->setRevision(revision);
                 update->setState(Update::State::StateAvailable);
-                update->setPackageName(package_name);
 
                 Click::TokenDownloader* dl = m_downloadFactory->create(update);
                 dl->setAuthToken(m_authToken);

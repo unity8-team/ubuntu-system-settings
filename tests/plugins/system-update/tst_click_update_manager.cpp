@@ -157,6 +157,36 @@ private slots:
         m_mocksso->mockCredentialsRequestSucceeded(UbuntuOne::Token());
         QTRY_COMPARE(authenticatedChangedSpy.count(), 2);
     }
+    void testManifestParser()
+    {
+        QList<QVariant> manifest;
+        QVariantMap hooks;
+        hooks["A"] = QVariantMap();
+        QVariantMap a;
+        a["name"] = "a";
+        a["version"] = "0";
+        a["hooks"] = hooks;
+        manifest << a;
+
+        QByteArray metadata("[{"
+            "\"name\": \"a\","
+            "\"version\": \"1\","
+            "\"download_url\": \"download_url\""
+        "}]");
+
+        // Transition the manifest data all the way to the model.
+        m_mockmanifest->mockSuccess(QJsonArray::fromVariantList(manifest));
+        m_mockclient->mockMetadataRequestSucceeded(metadata);
+        QTRY_COMPARE(m_mockdownloadfactory->created.size(), 1);
+        MockTokenDownloader *dl = m_mockdownloadfactory->created.at(0);
+        dl->mockDownloadSucceeded("token");
+
+        // Update now in model, assert that the manifest data has been captured.
+        QSharedPointer<Update> u = m_model->get("a", 0);
+        QCOMPARE(u->identifier(), QString("a"));
+        QCOMPARE(u->localVersion(), QString("0"));
+        QCOMPARE(u->packageName(), QString("A"));
+    }
     void testTokenDownload_data()
     {
         QTest::addColumn<QByteArray>("metadata");
@@ -198,9 +228,9 @@ private slots:
         if (downloadSuccess) {
             dl->mockDownloadSucceeded(downloadedToken);
         } else {
-            // dl->mockDownloadFailed();
+            dl->mockDownloadFailed();
         }
-        // QTRY_COMPARE(checkCompletesSpy.count(), 1);
+        QTRY_COMPARE(checkCompletesSpy.count(), 1);
     }
     void testRetryUpdate()
     {
@@ -218,6 +248,10 @@ private slots:
         dl->mockDownloadSucceeded("foobar");
 
         QCOMPARE(m_model->get(id, rev)->token(), QString("foobar"));
+    }
+    void testBuildAppId()
+    {
+
     }
 private:
     MockClient *m_mockclient = nullptr;

@@ -258,9 +258,7 @@ Item {
                         onResume: downloadHandler.resumeDownload(model)
                         onRetry: clickManager.retry(identifier, revision)
 
-                        Component.onCompleted: console.warn('aaa com compl', automatic, model.downloadId)
                         onAutomaticChanged: {
-                            console.warn('automatic chaanged', automatic, model.downloadId)
                             if (automatic && !model.downloadId) {
                                 install();
                             }
@@ -356,7 +354,7 @@ Item {
         onCheckCanceled: onCheckStop()
         onNetworkError: updates.status = SystemUpdate.StatusNetworkError
         onServerError: updates.status = SystemUpdate.StatusServerError
-        onCredentialError: console.warn('Credential error');
+        // onCredentialError: console.warn('Credential error');
         function onCheckStart() {
             switch (updates.status) {
             case SystemUpdate.StatusIdle:
@@ -400,7 +398,6 @@ Item {
         if (SystemUpdate.isCheckRequired()) {
             checkClick();
             checkSystem();
-            console.warn('do check');
         }
     }
     Component.onDestruction: cancelChecks()
