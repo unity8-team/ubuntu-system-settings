@@ -24,7 +24,6 @@ import SystemSettings 1.0
 import Ubuntu.Components 1.3
 import Ubuntu.Components.ListItems 1.3 as ListItem
 import Ubuntu.SystemSettings.StorageAbout 1.0
-import Ubuntu.SystemSettings.Update 1.0
 import Ubuntu.SystemSettings.Bluetooth 1.0
 import MeeGo.QOfono 0.2
 
@@ -161,8 +160,8 @@ ItemPage {
 
             ListItem.SingleValue {
                 property string versionIdentifier: {
-                    var num = UpdateManager.currentBuildNumber;
-                    var ota = UpdateManager.detailedVersionDetails['tag'];
+                    var num = SystemImage.currentBuildNumber;
+                    var ota = SystemImage.detailedVersionDetails['tag'];
                     num = num ? "r%1".arg(num.toString()) : "";
                     return ota ? ota : num;
                 }
@@ -180,8 +179,8 @@ ItemPage {
             ListItem.SingleValue {
                 objectName: "lastUpdatedItem"
                 text: i18n.tr("Last updated")
-                value: UpdateManager.lastUpdateDate && !isNaN(UpdateManager.lastUpdateDate) ?
-                    Qt.formatDate(UpdateManager.lastUpdateDate) : i18n.tr("Never")
+                value: SystemImage.lastUpdateDate && !isNaN(SystemImage.lastUpdateDate) ?
+                    Qt.formatDate(SystemImage.lastUpdateDate) : i18n.tr("Never")
             }
 
             ListItem.SingleControl {

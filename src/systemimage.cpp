@@ -132,7 +132,6 @@ void QSystemImage::productionReset() {
 }
 
 void QSystemImage::checkForUpdate() {
-    qWarning() << "QSystemImage: checking update";
     m_systemServiceIface.asyncCall("CheckForUpdate");
 }
 
@@ -163,7 +162,6 @@ void QSystemImage::pauseDownload() {
 }
 
 void QSystemImage::initializeProperties() {
-    qWarning() << "QSystemImage: initializeProperties";
     QDBusPendingReply<QMap<QString, QString> > reply = m_systemServiceIface.call("Information");
     reply.waitForFinished();
     if (reply.isValid()) {

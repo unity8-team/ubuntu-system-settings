@@ -99,7 +99,7 @@ public:
     Q_INVOKABLE void factoryReset();
     Q_INVOKABLE bool checkTarget() const;
 
-signals:
+Q_SIGNALS:
     void currentBuildNumberChanged();
     void deviceNameChanged();
     void channelNameChanged();
@@ -135,7 +135,7 @@ signals:
 
     void updateProgress(const int &percentage, const double &eta);
 
-private slots:
+private Q_SLOTS:
     void slotNameOwnerChanged(const QString&, const QString&, const QString&);
     void settingsChanged(const QString &key, const QString &newvalue);
     void availableStatusChanged(const bool isAvailable,

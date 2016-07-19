@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013-2014 Canonical Ltd
+ * Copyright (C) 2013-2016 Canonical Ltd
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as
@@ -15,13 +15,13 @@
  *
  * Authors:
  * Didier Roche <didier.roche@canonical.com>
+ * Jonas G. Drange <jonas.drange@canonical.com>
  *
 */
 
 #include "click/manager.h"
 
 #include "plugin.h"
-#include "systemimage.h"
 #include "systemupdate.h"
 #include "update.h"
 #include "updatemodel.h"
@@ -39,30 +39,18 @@ static QObject *suSingletonProvider(QQmlEngine *engine, QJSEngine *scriptEngine)
     return SystemUpdate::instance();
 }
 
-static QObject *siSingletonProvider(QQmlEngine *engine, QJSEngine *scriptEngine)
-{
-    Q_UNUSED(engine)
-    Q_UNUSED(scriptEngine)
-
-    return new QSystemImage;
-}
-
 void BackendPlugin::registerTypes(const char *uri)
 {
     Q_ASSERT(uri == QLatin1String("Ubuntu.SystemSettings.Update"));
 
-    qmlRegisterUncreatableType<Update>(uri, 1, 0, "Update", "Can't be instantiated directly.");
-    // qmlRegisterUncreatableType<UpdateDb>(uri, 1, 0, "UpdateDb", "Can't be instantiated directly.");
+    qmlRegisterUncreatableType<Update>(
+        uri, 1, 0, "Update", "Only provided for enums."
+    );
     qmlRegisterSingletonType<SystemUpdate>(
         uri, 1, 0, "SystemUpdate", suSingletonProvider
     );
-    // SI is a singleton because we use it both in the EntryComponent as well
-    // as in the PageComponent.
-    qmlRegisterSingletonType<QSystemImage>(
-        uri, 1, 0, "SystemImage", siSingletonProvider
-    );
-
     qmlRegisterType<Click::Manager>(uri, 1, 0, "ClickManager");
     qmlRegisterType<UpdateModelFilter>(uri, 1, 0, "UpdateModelFilter");
+
     qRegisterMetaType<UpdateModel*>("UpdateModel*");
 }

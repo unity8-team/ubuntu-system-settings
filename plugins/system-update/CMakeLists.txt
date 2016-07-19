@@ -49,7 +49,6 @@ add_library(UpdatePlugin SHARED
 )
 qt5_use_modules(UpdatePlugin Core Network Sql)
 target_link_libraries(UpdatePlugin
-    uss-systemimage
     apt-pkg
     ${UAL_LDFLAGS}
     ${UBUNTUONEAUTH_LDFLAGS}

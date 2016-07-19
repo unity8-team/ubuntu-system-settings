@@ -21,6 +21,7 @@
 #include "debug.h"
 #include "i18n.h"
 #include "plugin-manager.h"
+#include "systemimage.h"
 #include "utils.h"
 
 #include <QGuiApplication>
@@ -82,11 +83,13 @@ int main(int argc, char **argv)
 
     QQuickView view;
     Utilities utils;
+    QSystemImage systemImage;
     QObject::connect(view.engine(), SIGNAL(quit()), &app, SLOT(quit()),
                      Qt::QueuedConnection);
     qmlRegisterType<QAbstractItemModel>();
     qmlRegisterType<SystemSettings::PluginManager>("SystemSettings", 1, 0, "PluginManager");
     view.engine()->rootContext()->setContextProperty("Utilities", &utils);
+    view.engine()->rootContext()->setContextProperty("SystemImage", &systemImage);
     view.setResizeMode(QQuickView::SizeRootObjectToView);
     view.engine()->addImportPath(PLUGIN_PRIVATE_MODULE_DIR);
     view.engine()->addImportPath(PLUGIN_QML_DIR);
