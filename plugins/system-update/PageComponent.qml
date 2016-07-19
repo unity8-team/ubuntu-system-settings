@@ -86,6 +86,10 @@ ItemPage {
         updateModel: SystemUpdate.model
     }
 
+    SystemImageHandler {
+        updateModel: SystemUpdate.model
+    }
+
     Updates {
         id: updates
         anchors {
