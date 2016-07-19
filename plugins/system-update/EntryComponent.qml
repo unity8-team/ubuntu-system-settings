@@ -35,7 +35,7 @@ ListItem.SingleValue {
     iconFrame: false
     progression: true
     value: {
-        var imageUpdateCount = SystemUpdate.checkTarget() ? 1 : 0;
+        var imageUpdateCount = SystemImage.checkTarget() ? 1 : 0;
         return updatesRep.count + imageUpdateCount;
     }
 
