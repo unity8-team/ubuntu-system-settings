@@ -32,15 +32,29 @@ Item {
     property var clickManager
     property var clickModel
     property var imageModel
+    property var imageHandler
     property var installedModel
     property var downloadHandler
 
     property Flickable flickable: scrollWidget
     property bool havePower: false
     property bool online: NetworkingStatus.online
-    property bool haveSystemUpdate: SystemImage.checkTarget()
+    property bool haveSystemUpdate: SystemImage.updateAvailable ||
+                                    SystemImage.checkTarget()
     property bool authenticated: true
-    property int status: SystemUpdate.StatusIdle
+    property int status: {
+        var c = clickManager.checkingForUpdates;
+        var s = SystemImage.checkingForUpdates;
+        if (c && s) {
+            return SystemUpdate.StatusCheckingAllUpdates;
+        } else if (c && !s) {
+            return SystemUpdate.StatusCheckingClickUpdates;
+        } else if (!c && s) {
+            return SystemUpdate.StatusCheckingSystemUpdates;
+        } else {
+            return SystemUpdate.StatusIdle;
+        }
+    }
     property int updatesCount: {
         var count = 0;
         if (authenticated) {
@@ -50,24 +64,12 @@ Item {
         return count;
     }
 
-    function checkSystem() {
-        SystemImage.checkForUpdate();
-
-        switch (updates.status) {
-        case SystemUpdate.StatusCheckingClickUpdates:
-            updates.status = SystemUpdate.StatusCheckingAllUpdates; break;
-        case SystemUpdate.StatusIdle:
-            updates.status = SystemUpdate.StatusCheckingSystemUpdates; break;
-        }
-    }
-
-    function checkClick() {
-        clickManager.check();
-    }
-
     function cancelChecks() {
         clickManager.cancel();
-        updates.status = SystemUpdate.StatusIdle;
+        var result = SystemImage.cancelUpdate();
+        if (result) {
+            console.warn("Could not cancel check:", result);
+        }
     }
 
     signal requestAuthentication()
@@ -135,19 +137,21 @@ Item {
 
                 onPause: {
                     downloadHandler.pauseAll();
-                    SystemImage.pauseDownload();
+                    imageHandler.pause();
                     updates.status = SystemUpdate.StatusBatchModePaused;
                 }
                 onResume: {
                     downloadHandler.resumeAll();
-                    SystemImage.downloadUpdate();
+                    imageHandler.download();
                     updates.status = SystemUpdate.StatusBatchMode;
                 }
                 onRequestInstall: {
                     if (requireRestart) {
-                        var popup = PopupUtils.open(updatePrompt, null, {
-                            havePowerForUpdate: updates.havePower
-                        });
+                        var popup = PopupUtils.open(
+                            Qt.resolvedUrl("ImageUpdatePrompt.qml"), null, {
+                                havePowerForUpdate: updates.havePower
+                            }
+                        );
                         popup.requestSystemUpdate.connect(function () {
                             install();
                         });
@@ -216,14 +220,16 @@ Item {
                         changelog: model.changelog
                         error: model.error
 
-                        onRetry: SystemImage.downloadUpdate();
-                        onDownload: SystemImage.downloadUpdate();
-                        onPause: SystemImage.pauseDownload();
+                        onRetry: imageHandler.retry();
+                        onDownload: imageHandler.download();
+                        onPause: imageHandler.pause();
                         onInstall: {
-                            var popup = PopupUtils.open(updatePrompt, null, {
-                                havePowerForUpdate: updates.havePower
-                            });
-                            popup.requestSystemUpdate.connect(SystemImage.applyUpdate);
+                            var popup = PopupUtils.open(
+                                Qt.resolvedUrl("ImageUpdatePrompt.qml"), null, {
+                                    havePowerForUpdate: updates.havePower
+                                }
+                            );
+                            popup.requestSystemUpdate.connect(imageHandler.install);
                         }
                     }
                 }
@@ -339,47 +345,14 @@ Item {
 
     Connections {
         target: clickManager
-        function onCheckStop() {
-            switch (updates.status) {
-            case SystemUpdate.StatusCheckingClickUpdates:
-                updates.status = SystemUpdate.StatusIdle;
-                SystemUpdate.checkCompleted();
-                break;
-            case SystemUpdate.StatusCheckingAllUpdates:
-                updates.status = SystemUpdate.StatusCheckingSystemUpdates; break;
-            }
-        }
-        onCheckFailed: onCheckStop()
-        onCheckCompleted: onCheckStop()
-        onCheckCanceled: onCheckStop()
+        onCheckCompleted: SystemUpdate.checkCompleted()
         onNetworkError: updates.status = SystemUpdate.StatusNetworkError
         onServerError: updates.status = SystemUpdate.StatusServerError
-        // onCredentialError: console.warn('Credential error');
-        function onCheckStart() {
-            switch (updates.status) {
-            case SystemUpdate.StatusIdle:
-                updates.status = SystemUpdate.StatusCheckingClickUpdates; break;
-            case SystemUpdate.StatusCheckingSystemUpdates:
-                updates.status = SystemUpdate.StatusCheckingAllUpdates; break;
-            }
-        }
-        onCheckStarted: onCheckStart()
     }
 
     Connections {
         target: SystemImage
-        onUpdateAvailableStatus: {
-            updates.haveSystemUpdate = isAvailable;
-
-            switch (updates.status) {
-            case SystemUpdate.StatusCheckingAllUpdates:
-                updates.status = SystemUpdate.StatusCheckingClickUpdates; break;
-            case SystemUpdate.StatusCheckingSystemUpdates:
-                updates.status = SystemUpdate.StatusIdle;
-                SystemUpdate.checkCompleted();
-                break;
-            }
-        }
+        onUpdateAvailableStatus: SystemUpdate.checkCompleted()
     }
 
     Connections {
@@ -396,15 +369,8 @@ Item {
 
     Component.onCompleted: {
         if (SystemUpdate.isCheckRequired()) {
-            checkClick();
-            checkSystem();
+            clickManager.check();
+            SystemImage.checkForUpdate();
         }
-    }
-    Component.onDestruction: cancelChecks()
-
-    Component {
-        id: updatePrompt
-
-        ImageUpdatePrompt {}
     }
 }

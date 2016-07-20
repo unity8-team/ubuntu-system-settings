@@ -32,9 +32,7 @@ Item {
     Component {
         id: handler
 
-        SystemImageHandler {
-            width: testRoot.width
-        }
+        SystemImageHandler {}
     }
 
     Component {
@@ -148,7 +146,7 @@ Item {
             }
         }
 
-        function test_manuallyStarted () {
+        function test_manualStart () {
             SystemImage.setDownloadMode(0);
             SystemImage.mockTargetBuildNumber(300);
             pendingModelInstance.mockAddUpdate("ubuntu", 300, Update.KindImage);
@@ -158,7 +156,7 @@ Item {
             compare(delegate.updateState, Update.StateDownloading);
         }
 
-        function test_automaticallyStarted () {
+        function test_automaticStart () {
             SystemImage.setDownloadMode(1);
             SystemImage.mockTargetBuildNumber(300);
             pendingModelInstance.mockAddUpdate("ubuntu", 300, Update.KindImage);
@@ -167,7 +165,7 @@ Item {
             compare(delegate.updateState, Update.StateDownloadingAutomatically);
         }
 
-        function test_automaticalProgress () {
+        function test_automaticProgress () {
             SystemImage.setDownloadMode(1);
             SystemImage.mockTargetBuildNumber(300);
             pendingModelInstance.mockAddUpdate("ubuntu", 300, Update.KindImage);
@@ -176,7 +174,7 @@ Item {
             var progressbar = findChild(delegate, "updateProgressbar");
             compare(delegate.updateState, Update.StateDownloadingAutomatically);
             compare(progressbar.visible, false);
-            compare(progressbar.value, 50);
+            tryCompare(progressbar, "value", 50);
         }
 
         function test_manualProgress () {
@@ -188,10 +186,10 @@ Item {
             var progressbar = findChild(delegate, "updateProgressbar");
             compare(delegate.updateState, Update.StateDownloading);
             compare(progressbar.visible, true);
-            compare(progressbar.value, 50);
+            tryCompare(progressbar, "value", 50);
         }
 
-        function test_automaticalPause () {
+        function test_automaticPause () {
             SystemImage.setDownloadMode(1);
             SystemImage.mockTargetBuildNumber(300);
             pendingModelInstance.mockAddUpdate("ubuntu", 300, Update.KindImage);

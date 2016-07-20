@@ -25,18 +25,35 @@ Item {
     Connections {
         target: SystemImage
 
+        function retry() {
+            SystemImage.downloadUpdate();
+        }
+        function download() {
+            SystemImage.downloadUpdate();
+        }
+        function pause() {
+            var result = SystemImage.pauseDownload();
+            if (result) {
+                console.warn('Failed to pause image download', result);
+            }
+        }
+
+        function install() {
+            SystemImage.applyUpdate();
+        }
+
         function markInstalled(buildNumber) {
             updateModel.setInstalled("ubuntu", buildNumber);
         }
 
         onUpdateAvailableStatus: {
-            console.warn("onUpdateAvailableStatus",
-                         isAvailable,
-                         downloading,
-                         availableVersion,
-                         updateSize,
-                         lastUpdateDate,
-                         errorReason);
+            // console.warn("onUpdateAvailableStatus",
+            //              isAvailable,
+            //              downloading,
+            //              availableVersion,
+            //              updateSize,
+            //              lastUpdateDate,
+            //              errorReason);
             if (isAvailable)
                 updateModel.setImageUpdate("ubuntu", availableVersion, updateSize);
                 if (downloading)
@@ -45,35 +62,28 @@ Item {
                     updateModel.pauseUpdate("ubuntu", availableVersion);
         }
         onDownloadStarted: {
-            console.warn('onDownloadStarted', SystemImage.targetBuildNumber);
             updateModel.setProgress("ubuntu", SystemImage.targetBuildNumber, 0);
         }
         onUpdateProgress: {
-            console.warn('onUpdateProgress', SystemImage.targetBuildNumber, percentage);
             updateModel.setProgress("ubuntu", SystemImage.targetBuildNumber, percentage);
         }
         onUpdatePaused: {
-            console.warn('onUpdatePaused', SystemImage.targetBuildNumber, percentage);
             updateModel.setProgress("ubuntu", SystemImage.targetBuildNumber, percentage);
             updateModel.pauseUpdate("ubuntu", SystemImage.targetBuildNumber);
         }
         onUpdateDownloaded: {
-            console.warn('onUpdateDownloaded', SystemImage.targetBuildNumber);
             updateModel.setDownloaded("ubuntu", SystemImage.targetBuildNumber);
         }
         onUpdateFailed: {
-            console.warn('onUpdateFailed', SystemImage.targetBuildNumber, lastReason);
             updateModel.setError("ubuntu", SystemImage.targetBuildNumber, lastReason);
         }
 
         /* This is currently the best we can do for marking image updates as
         installed. lp:1600449 */
         onCurrentBuildNumberChanged: {
-            console.warn('onCurrentBuildNumberChanged', SystemImage.currentBuildNumber);
             markInstalled(SystemImage.currentBuildNumber);
         }
         onRebooting: {
-            console.warn('onRebooting', SystemImage.targetBuildNumber, status);
             if (status) {
                 updateModel.setInstalling("ubuntu", SystemImage.targetBuildNumber, 5);
             } else {
@@ -89,7 +99,6 @@ Item {
                                      i18n.tr("Failed to process update."));
         }
         Component.onCompleted: {
-            console.warn('onCompleted', SystemImage.currentBuildNumber);
             markInstalled(SystemImage.currentBuildNumber);
         }
     }

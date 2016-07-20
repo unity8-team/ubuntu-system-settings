@@ -399,9 +399,14 @@ void Manager::parseMetadata(const QJsonArray &array)
     completionCheck();
 }
 
-bool Manager::authenticated()
+bool Manager::authenticated() const
 {
     return m_authenticated || Helpers::isIgnoringCredentials();
+}
+
+bool Manager::checkingForUpdates() const
+{
+    return m_checking;
 }
 
 void Manager::setAuthenticated(const bool authenticated)
@@ -409,6 +414,14 @@ void Manager::setAuthenticated(const bool authenticated)
     if (authenticated != m_authenticated) {
         m_authenticated = authenticated;
         Q_EMIT authenticatedChanged();
+    }
+}
+
+void Manager::setCheckingForUpdates(const bool checking)
+{
+    if (checking != m_checking) {
+        m_checking = checking;
+        Q_EMIT checkingForUpdatesChanged();
     }
 }
 } // Click

@@ -121,6 +121,7 @@ void QSystemImage::productionReset() {
 
 void QSystemImage::checkForUpdate() {
     m_iface.asyncCall("CheckForUpdate");
+    setCheckingForUpdates(true);
 }
 
 void QSystemImage::downloadUpdate() {
@@ -214,6 +215,11 @@ void QSystemImage::initializeProperties() {
 bool QSystemImage::checkTarget() const
 {
     return m_targetBuildNumber > m_currentBuildNumber;
+}
+
+bool QSystemImage::checkingForUpdates() const
+{
+    return m_checkingForUpdates;
 }
 
 QString QSystemImage::deviceName() const
@@ -336,13 +342,14 @@ void QSystemImage::availableStatusChanged(const bool isAvailable,
 {
     setUpdateAvailable(isAvailable);
     setDownloading(downloading);
+    setCheckingForUpdates(false);
 
     bool ok;
     int targetBuildNumber = availableVersion.toInt(&ok);
     if (ok) {
         setTargetBuildNumber(targetBuildNumber);
     } else {
-        qWarning() << "Failed to parse availableVersion" << availableVersion;
+        qWarning() << "Failed to parse availableVersion:" << availableVersion;
     }
 
     setUpdateSize(updateSize);
@@ -351,6 +358,14 @@ void QSystemImage::availableStatusChanged(const bool isAvailable,
     setLastUpdateDate(lud);
 
     setErrorReason(errorReason);
+}
+
+void QSystemImage::setCheckingForUpdates(const bool checking)
+{
+    if (checking != m_checkingForUpdates) {
+        m_checkingForUpdates = checking;
+        Q_EMIT checkingForUpdatesChanged();
+    }
 }
 
 void QSystemImage::setDeviceName(const QString &deviceName)

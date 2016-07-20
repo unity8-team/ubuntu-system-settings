@@ -20,7 +20,7 @@
 #include "click/tokendownloader_impl.h"
 #include "update.h"
 
-#include "fakeclient.h"
+#include "plugins/system-update/fakeclient.h"
 
 #include <QSharedPointer>
 #include <QSignalSpy>

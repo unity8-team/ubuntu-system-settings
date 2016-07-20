@@ -8,7 +8,7 @@ add_definitions(-DPLUGIN_PRIVATE_MODULE_DIR="${PLUGIN_PRIVATE_MODULE_DIR}")
 add_definitions(-DPLUGIN_MANIFEST_DIR="${CMAKE_CURRENT_SOURCE_DIR}/data")
 add_definitions(-DPLUGIN_MODULE_DIR="${CMAKE_CURRENT_BINARY_DIR}")
 add_definitions(-DPLUGIN_QML_DIR="${CMAKE_CURRENT_BINARY_DIR}")
-add_definitions(-DSYSTEM_IMAGE_TEMPLATE="${CMAKE_SOURCE_DIR}/tests/autopilot/ubuntu_system_settings/tests/systemimage.py")
+add_definitions(-DSYSTEM_IMAGE_DBUS_TEMPLATE="${CMAKE_SOURCE_DIR}/tests/autopilot/ubuntu_system_settings/tests/systemimage.py")
 
 add_library(test-plugin SHARED test-plugin.cpp test-plugin.h)
 target_link_librarieS(test-plugin SystemSettings)
@@ -38,7 +38,7 @@ add_executable(tst-arguments
 add_executable(tst-systemimage
     tst_systemimage.cpp
     ../src/systemimage.cpp
-    mocks/systemimage/fakesystemimage.cpp
+    mocks/system-image-dbus/fakesystemimagedbus.cpp
 )
 
 qt5_use_modules(tst-plugins Core Qml Test)

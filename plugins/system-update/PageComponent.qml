@@ -87,6 +87,7 @@ ItemPage {
     }
 
     SystemImageHandler {
+        id: imageHandler
         updateModel: SystemUpdate.model
     }
 
@@ -101,6 +102,7 @@ ItemPage {
         clickModel: clickUpdates
         clickManager: clickManager
         imageModel: imageUpdate
+        imageHandler: imageHandler
         installedModel: installedUpdates
         downloadHandler: downloadHandler
         authenticated: clickManager.authenticated

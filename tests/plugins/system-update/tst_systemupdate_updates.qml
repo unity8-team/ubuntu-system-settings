@@ -40,9 +40,15 @@ Item {
     }
 
     Component {
-        id: downloadHandler
+        id: downloadHandlerComponent
 
         DownloadHandler {}
+    }
+
+    Component {
+        id: imageHandlerComponent
+
+        SystemImageHandler {}
     }
 
     Component {
@@ -97,6 +103,8 @@ Item {
         property var clicks: null
         property var installed: null
         property var clickManager: null
+        property var imageHandler: null
+        property var downloadHandler: null
 
         function init() {
             model = mockModel.createObject(testRoot);
@@ -104,6 +112,12 @@ Item {
             images = mockImageModel.createObject(testRoot);
             clicks = mockClickModel.createObject(testRoot);
             installed = mockInstalledModel.createObject(testRoot);
+            imageHandler = imageHandlerComponent.createObject(testRoot, {
+                updateModel: model
+            });
+            downloadHandler = downloadHandlerComponent.createObject(testRoot, {
+                updateModel: model
+            });
             images.mockSetSourceModel(model);
             clicks.mockSetSourceModel(model);
             installed.mockSetSourceModel(model);
@@ -114,8 +128,9 @@ Item {
                 imageModel: images,
                 clickModel: clicks,
                 installedModel: installed,
-                downloadHandler: downloadHandler.createObject(testRoot, {}),
-                clickManager: clickManager
+                clickManager: clickManager,
+                downloadHandler: downloadHandler,
+                imageHandler: imageHandler
             });
         }
 
@@ -130,7 +145,8 @@ Item {
             clicks.destroy();
             installed.destroy();
             model.destroy();
-
+            downloadHandler.destroy();
+            imageHandler.destroy();
         }
 
         function test_connectivity_data() {

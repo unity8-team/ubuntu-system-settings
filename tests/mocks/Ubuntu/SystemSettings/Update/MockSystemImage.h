@@ -82,14 +82,14 @@ public:
     int updateSize();
     QString errorReason();
 
-    Q_INVOKABLE void checkForUpdate();
-    Q_INVOKABLE void downloadUpdate();
-    Q_INVOKABLE void forceAllowGSMDownload();
+    Q_INVOKABLE void checkForUpdate() {};
+    Q_INVOKABLE void downloadUpdate() {};
+    Q_INVOKABLE void forceAllowGSMDownload() {};
     Q_INVOKABLE void applyUpdate();
-    Q_INVOKABLE void cancelUpdate();
-    Q_INVOKABLE void pauseDownload();
-    Q_INVOKABLE void productionReset();
-    Q_INVOKABLE void factoryReset();
+    Q_INVOKABLE QString cancelUpdate();
+    Q_INVOKABLE QString pauseDownload();
+    Q_INVOKABLE void productionReset() {};
+    Q_INVOKABLE void factoryReset() {};
     Q_INVOKABLE bool checkTarget() const;
 
     Q_INVOKABLE void mockProgress(const int &percentage, const double &eta); // mock only
@@ -107,8 +107,6 @@ public:
     Q_INVOKABLE void mockTargetBuildNumber(const uint &target); // mock only
     Q_INVOKABLE void mockCurrentBuildNumber(const uint &current); // mock only
     Q_INVOKABLE bool isApplyRequested(); // mock only
-
-
 
 signals:
     void currentBuildNumberChanged();
@@ -131,6 +129,7 @@ signals:
     void downloadModeChanged();
     void updateNotFound();
     void updateProcessFailed(const QString &reason);
+    void updateProcessing();
 
     void rebooting(const bool status);
     void updateFailed(const int &consecutiveFailureCount, const QString &lastReason);

@@ -20,11 +20,11 @@
 #include "updatedb.h"
 #include "helpers.h"
 
-#include "fakeclient.h"
-#include "fakemanifest.h"
-#include "fakesso.h"
-#include "faketokendownloader.h"
-#include "faketokendownloader_factory.h"
+#include "plugins/system-update/fakeclient.h"
+#include "plugins/system-update/fakemanifest.h"
+#include "plugins/system-update/fakesso.h"
+#include "plugins/system-update/faketokendownloader.h"
+#include "plugins/system-update/faketokendownloader_factory.h"
 
 #include <QSignalSpy>
 #include <QSqlError>
@@ -248,10 +248,6 @@ private slots:
         dl->mockDownloadSucceeded("foobar");
 
         QCOMPARE(m_model->get(id, rev)->token(), QString("foobar"));
-    }
-    void testBuildAppId()
-    {
-
     }
 private:
     MockClient *m_mockclient = nullptr;

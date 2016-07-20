@@ -16,9 +16,9 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "fakesystemimage.h"
+#include "fakesystemimagedbus.h"
 
-FakeSystemImage::FakeSystemImage(const QVariantMap &parameters,
+FakeSystemImageDbus::FakeSystemImageDbus(const QVariantMap &parameters,
                                  QObject *parent)
     : QObject(parent)
     , m_dbusTestRunner()
@@ -29,7 +29,7 @@ FakeSystemImage::FakeSystemImage(const QVariantMap &parameters,
 
     /* SYSTEM_IMAGE_TEMPLATE is the path to the systemimage.py file, defined in
     the consuming test's makefile. */
-    m_dbusMock.registerTemplate(SI_SERVICE, SYSTEM_IMAGE_TEMPLATE, parameters,
+    m_dbusMock.registerTemplate(SI_SERVICE, SYSTEM_IMAGE_DBUS_TEMPLATE, parameters,
                                 QDBusConnection::SystemBus);
 
     m_dbusTestRunner.startServices();
@@ -39,7 +39,7 @@ FakeSystemImage::FakeSystemImage(const QVariantMap &parameters,
                                   m_dbusTestRunner.systemConnection());
 }
 
-FakeSystemImage::~FakeSystemImage()
+FakeSystemImageDbus::~FakeSystemImageDbus()
 {
     delete m_siMock;
 }

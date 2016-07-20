@@ -31,37 +31,19 @@ MockSystemImage::~MockSystemImage()
 {
 }
 
-void MockSystemImage::factoryReset()
-{
-}
-
-void MockSystemImage::productionReset()
-{
-}
-
-void MockSystemImage::checkForUpdate()
-{
-}
-
-void MockSystemImage::downloadUpdate()
-{
-}
-
-void MockSystemImage::forceAllowGSMDownload()
-{
-}
-
 void MockSystemImage::applyUpdate()
 {
     m_applyRequested = true;
 }
 
-void MockSystemImage::cancelUpdate()
+QString MockSystemImage::cancelUpdate()
 {
+    return QString();
 }
 
-void MockSystemImage::pauseDownload()
+QString MockSystemImage::pauseDownload()
 {
+    return QString();
 }
 
 bool MockSystemImage::checkTarget() const
@@ -152,14 +134,13 @@ int MockSystemImage::downloadMode()
 void MockSystemImage::setDownloadMode(const int &downloadMode)
 {
     m_downloadMode = downloadMode;
-    Q_EMIT (downloadModeChanged());
+    Q_EMIT downloadModeChanged();
 }
 
 void MockSystemImage::mockProgress(const int &percentage, const double &eta)
 {
-    Q_EMIT (updateProgress(percentage, eta));
+    Q_EMIT updateProgress(percentage, eta);
 }
-
 
 void MockSystemImage::mockAvailableStatus(const bool isAvailable,
                                           const bool downloading,
@@ -168,32 +149,32 @@ void MockSystemImage::mockAvailableStatus(const bool isAvailable,
                                           const QString lastUpdateDate,
                                           const QString errorReason)
 {
-    Q_EMIT (updateAvailableStatus(isAvailable,
-                                  downloading,
-                                  availableVersion,
-                                  updateSize,
-                                  lastUpdateDate,
-                                  errorReason));
+    Q_EMIT updateAvailableStatus(isAvailable,
+                                 downloading,
+                                 availableVersion,
+                                 updateSize,
+                                 lastUpdateDate,
+                                 errorReason);
 }
 
 void MockSystemImage::mockPaused(const int &percentage)
 {
-    Q_EMIT (updatePaused(percentage));
+    Q_EMIT updatePaused(percentage);
 }
 
 void MockSystemImage::mockStarted()
 {
-    Q_EMIT (downloadStarted());
+    Q_EMIT downloadStarted();
 }
 
 void MockSystemImage::mockDownloaded()
 {
-    Q_EMIT (updateDownloaded());
+    Q_EMIT updateDownloaded();
 }
 
 void MockSystemImage::mockFailed(const int &consecutiveFailureCount, const QString &lastReason)
 {
-    Q_EMIT (updateFailed(consecutiveFailureCount, lastReason));
+    Q_EMIT updateFailed(consecutiveFailureCount, lastReason);
 }
 
 void MockSystemImage::mockTargetBuildNumber(const uint &target)

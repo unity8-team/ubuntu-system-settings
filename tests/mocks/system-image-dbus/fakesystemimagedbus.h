@@ -16,8 +16,8 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef FAKESYSTEMIMAGE_H
-#define FAKESYSTEMIMAGE_H
+#ifndef FAKESYSTEMIMAGEDBUS_H
+#define FAKESYSTEMIMAGEDBUS_H
 
 #include <QObject>
 #include <QVariant>
@@ -37,7 +37,7 @@
 using namespace QtDBusTest;
 using namespace QtDBusMock;
 
-class FakeSystemImage : public QObject
+class FakeSystemImageDbus : public QObject
 {
     Q_OBJECT
 private:
@@ -46,8 +46,8 @@ private:
     QDBusInterface *m_siMock;
     QDBusInterface getInterface(const QString &path, const QString &interface);
 public:
-    explicit FakeSystemImage(const QVariantMap &parameters, QObject *parent = 0);
-    ~FakeSystemImage();
+    explicit FakeSystemImageDbus(const QVariantMap &parameters, QObject *parent = 0);
+    ~FakeSystemImageDbus();
 
     const QDBusConnection & dbus() { return m_dbusTestRunner.systemConnection(); }
 
@@ -61,4 +61,4 @@ Q_SIGNALS:
     void mockSettingChanged(const QString &key, const QString &value);
 };
 
-#endif // FAKESYSTEMIMAGE_H
+#endif // FAKESYSTEMIMAGEDBUS_H

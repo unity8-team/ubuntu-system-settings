@@ -43,6 +43,8 @@ class Manager : public QObject
     Q_OBJECT
     Q_PROPERTY(bool authenticated READ authenticated
                NOTIFY authenticatedChanged)
+    Q_PROPERTY(bool checkingForUpdates READ checkingForUpdates
+               NOTIFY checkingForUpdatesChanged)
 public:
     explicit Manager(QObject *parent = 0);
     explicit Manager(Click::Client *client,
@@ -58,7 +60,8 @@ public:
     Q_INVOKABLE void cancel();
     Q_INVOKABLE void launch(const QString &appId);
 
-    bool authenticated();
+    bool authenticated() const;
+    bool checkingForUpdates() const;
 
 private slots:
     void handleManifestSuccess(const QJsonArray &manifest);
@@ -69,11 +72,12 @@ private slots:
     void handleCredentialsFound(const UbuntuOne::Token &token);
     void handleCredentialsFailed();
     void handleCommunicationErrors();
-    void handleCheckStart() { m_checking = true; }
-    void handleCheckStop() { m_checking = false; }
+    void handleCheckStart() { setCheckingForUpdates(true); }
+    void handleCheckStop() { setCheckingForUpdates(false); }
 
 signals:
     void authenticatedChanged();
+    void checkingForUpdatesChanged();
 
     void checkStarted();
     void checkCompleted();
@@ -86,6 +90,7 @@ signals:
 
 private:
     void setAuthenticated(const bool authenticated);
+    void setCheckingForUpdates(const bool checking);
 
     void init();
     void initClient();

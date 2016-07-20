@@ -40,6 +40,8 @@ public:
 
     Q_PROPERTY(int downloadMode READ downloadMode
                WRITE setDownloadMode NOTIFY downloadModeChanged)
+    Q_PROPERTY(bool checkingForUpdates READ checkingForUpdates
+               NOTIFY checkingForUpdatesChanged)
     Q_PROPERTY(QString channelName READ channelName NOTIFY channelNameChanged)
     Q_PROPERTY(QString deviceName READ deviceName NOTIFY deviceNameChanged)
     Q_PROPERTY(int currentBuildNumber READ currentBuildNumber
@@ -70,6 +72,7 @@ public:
     Q_PROPERTY(QString versionTag READ versionTag
                NOTIFY versionTagChanged)
 
+    bool checkingForUpdates() const;
     int downloadMode();
     void setDownloadMode(const int &downloadMode);
 
@@ -101,6 +104,7 @@ public:
     Q_INVOKABLE bool checkTarget() const;
 
 Q_SIGNALS:
+    void checkingForUpdatesChanged();
     void currentBuildNumberChanged();
     void deviceNameChanged();
     void channelNameChanged();
@@ -148,6 +152,7 @@ private Q_SLOTS:
                                 const QString &errorReason);
 
 private:
+    void setCheckingForUpdates(const bool checking);
     void setDeviceName(const QString &deviceName);
     void setChannelName(const QString &channelName);
     void setDetailedVersionDetails(const QVariantMap &detailedVersionDetails);
@@ -166,6 +171,7 @@ private:
     // Sets up connections on the DBus interface.
     void setUpInterface();
 
+    bool m_checkingForUpdates = false;
     int m_currentBuildNumber = 0;
     QMap<QString, QVariant> m_detailedVersion;
     QDateTime m_lastUpdateDate;
