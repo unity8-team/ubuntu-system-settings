@@ -35,6 +35,7 @@ class QSystemImage : public QObject
     Q_OBJECT
 public:
     explicit QSystemImage(QObject *parent = 0);
+    explicit QSystemImage(const QDBusConnection &dbus, QObject *parent = 0);
     ~QSystemImage();
 
     Q_PROPERTY(int downloadMode READ downloadMode
@@ -66,6 +67,8 @@ public:
                NOTIFY updateSizeChanged)
     Q_PROPERTY(QString errorReason READ errorReason
                NOTIFY errorReasonChanged)
+    Q_PROPERTY(QString versionTag READ versionTag
+               NOTIFY versionTagChanged)
 
     int downloadMode();
     void setDownloadMode(const int &downloadMode);
@@ -83,6 +86,7 @@ public:
     bool downloading();
     int updateSize();
     QString errorReason();
+    QString versionTag();
     QDateTime lastUpdateDate() const;
     QDateTime lastCheckDate() const;
 
@@ -90,8 +94,8 @@ public:
     Q_INVOKABLE void downloadUpdate();
     Q_INVOKABLE void forceAllowGSMDownload();
     Q_INVOKABLE void applyUpdate();
-    Q_INVOKABLE void cancelUpdate();
-    Q_INVOKABLE void pauseDownload();
+    Q_INVOKABLE QString cancelUpdate();
+    Q_INVOKABLE QString pauseDownload();
     Q_INVOKABLE void productionReset();
     Q_INVOKABLE void factoryReset();
     Q_INVOKABLE bool checkTarget() const;
@@ -112,10 +116,12 @@ Q_SIGNALS:
     void downloadingChanged();
     void updateSizeChanged();
     void errorReasonChanged();
+    void versionTagChanged();
 
     void downloadModeChanged();
     void updateNotFound();
     void updateProcessFailed(const QString &reason);
+    void updateProcessing();
 
     void rebooting(const bool status);
     void updateFailed(const int &consecutiveFailureCount, const QString &lastReason);
@@ -160,23 +166,24 @@ private:
     // Sets up connections on the DBus interface.
     void setUpInterface();
 
-    int m_currentBuildNumber;
+    int m_currentBuildNumber = 0;
     QMap<QString, QVariant> m_detailedVersion;
     QDateTime m_lastUpdateDate;
-    int m_downloadMode;
-    QDBusConnection m_systemBusConnection;
-    QDBusServiceWatcher m_serviceWatcher;
-    QDBusInterface m_systemServiceIface;
+    int m_downloadMode = -1;
+
+    QDBusConnection m_dbus;
+    QDBusServiceWatcher m_watcher;
+    QDBusInterface m_iface;
 
     QDateTime m_lastCheckDate;
-    QString m_channelName;
-    int m_targetBuildNumber;
-    QString m_deviceName;
+    QString m_channelName = QString::null;
+    int m_targetBuildNumber = -1;
+    QString m_deviceName = QString::null;
 
-    bool m_updateAvailable;
-    bool m_downloading;
-    int m_updateSize;
-    QString m_errorReason;
+    bool m_updateAvailable = false;
+    bool m_downloading = false;
+    int m_updateSize = 0;
+    QString m_errorReason = QString::null;
 };
 
 #endif // QSYSTEMIMAGE_H

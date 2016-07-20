@@ -161,7 +161,7 @@ ItemPage {
             ListItem.SingleValue {
                 property string versionIdentifier: {
                     var num = SystemImage.currentBuildNumber;
-                    var ota = SystemImage.detailedVersionDetails['tag'];
+                    var ota = SystemImage.versionTag;
                     num = num ? "r%1".arg(num.toString()) : "";
                     return ota ? ota : num;
                 }

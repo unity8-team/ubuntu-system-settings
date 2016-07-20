@@ -427,6 +427,10 @@ Column {
                 minimumValue: 0
                 maximumValue: 100
                 showProgressPercentage: false
+
+                Behavior on value {
+                    animation: UbuntuNumberAnimation {}
+                }
             } // Progress bar
 
             ChangelogExpander {

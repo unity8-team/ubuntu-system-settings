@@ -35,35 +35,26 @@ QString _(const char *text)
     return QString::fromUtf8(dgettext(0, text));
 }
 
-QSystemImage::QSystemImage(QObject *parent) :
-    QObject(parent),
-    m_currentBuildNumber(0),
-    m_detailedVersion(),
-    m_lastUpdateDate(),
-    m_downloadMode(-1),
-    m_systemBusConnection(QDBusConnection::systemBus()),
-    m_serviceWatcher("com.canonical.SystemImage",
-                     m_systemBusConnection,
-                     QDBusServiceWatcher::WatchForOwnerChange),
-    m_systemServiceIface("com.canonical.SystemImage",
-                         "/Service",
-                         "com.canonical.SystemImage",
-                         m_systemBusConnection),
-    m_lastCheckDate(),
-    m_channelName(""),
-    m_targetBuildNumber(-1),
-    m_deviceName(""),
-    m_updateAvailable(false),
-    m_downloading(false),
-    m_updateSize(0),
-    m_errorReason("")
+QSystemImage::QSystemImage(QObject *parent)
+    : QSystemImage(QDBusConnection::systemBus(), parent)
+{
+}
+
+QSystemImage::QSystemImage(const QDBusConnection &dbus, QObject *parent)
+    : QObject(parent)
+    , m_detailedVersion()
+    , m_lastUpdateDate()
+    , m_dbus(dbus)
+    , m_watcher("com.canonical.SystemImage", m_dbus,
+                QDBusServiceWatcher::WatchForOwnerChange)
+    , m_iface("com.canonical.SystemImage", "/Service",
+              "com.canonical.SystemImage", m_dbus)
+    , m_lastCheckDate()
 {
     qDBusRegisterMetaType<QMap<QString, QString> >();
 
-    connect (&m_serviceWatcher,
-             SIGNAL(serviceOwnerChanged(QString, QString, QString)),
-             this,
-             SLOT(slotNameOwnerChanged(QString, QString, QString)));
+    connect(&m_watcher, SIGNAL(serviceOwnerChanged(QString, QString, QString)),
+            this, SLOT(slotNameOwnerChanged(QString, QString, QString)));
 
     setUpInterface();
 }
@@ -80,86 +71,100 @@ void QSystemImage::slotNameOwnerChanged(const QString &name,
     if (name != "com.canonical.SystemImage")
         return;
 
-    if (m_systemServiceIface.isValid())
+    if (m_iface.isValid())
         setUpInterface();
 }
 
 void QSystemImage::setUpInterface() {
-    connect(&m_systemServiceIface,
+    connect(&m_iface,
             SIGNAL(UpdateAvailableStatus(bool, bool, QString, int, QString,
                                          QString)),
             this,
             SIGNAL(updateAvailableStatus(bool, bool, QString, int, QString,
                                          QString)));
 
-    connect(&m_systemServiceIface,
+    connect(&m_iface,
             SIGNAL(UpdateAvailableStatus(bool, bool, QString, int, QString,
                                          QString)),
             this,
             SLOT(availableStatusChanged(bool, bool, QString, int, QString,
                                           QString)));
 
-    connect(&m_systemServiceIface, SIGNAL(UpdateProgress(int, double)),
+    connect(&m_iface, SIGNAL(UpdateProgress(int, double)),
                 this, SIGNAL(updateProgress(int, double)));
-    connect(&m_systemServiceIface, SIGNAL(UpdateProgress(int, double)),
+    connect(&m_iface, SIGNAL(UpdateProgress(int, double)),
                 this, SIGNAL(updateProgress(int, double)));
-    connect(&m_systemServiceIface, SIGNAL(UpdatePaused(int)),
+    connect(&m_iface, SIGNAL(UpdatePaused(int)),
                 this, SIGNAL(updatePaused(int)));
-    connect(&m_systemServiceIface, SIGNAL(DownloadStarted()),
+    connect(&m_iface, SIGNAL(DownloadStarted()),
                 this, SIGNAL(downloadStarted()));
-    connect(&m_systemServiceIface, SIGNAL(UpdateDownloaded()),
+    connect(&m_iface, SIGNAL(UpdateDownloaded()),
                 this, SIGNAL(updateDownloaded()));
-    connect(&m_systemServiceIface, SIGNAL(UpdateFailed(int, QString)),
+    connect(&m_iface, SIGNAL(UpdateFailed(int, QString)),
                 this, SIGNAL(updateFailed(int, QString)));
-    connect(&m_systemServiceIface, SIGNAL(Rebooting(bool)),
+    connect(&m_iface, SIGNAL(Rebooting(bool)),
                 this, SIGNAL(rebooting(bool)));
 
-    connect(&m_systemServiceIface, SIGNAL(SettingChanged(QString, QString)),
+    connect(&m_iface, SIGNAL(SettingChanged(QString, QString)),
                 this, SLOT(settingsChanged(QString, QString)));
 
     initializeProperties();
 }
 
 void QSystemImage::factoryReset() {
-    m_systemServiceIface.asyncCall("FactoryReset");
+    m_iface.asyncCall("FactoryReset");
 }
 
 void QSystemImage::productionReset() {
-    m_systemServiceIface.asyncCall("ProductionReset");
+    m_iface.asyncCall("ProductionReset");
 }
 
 void QSystemImage::checkForUpdate() {
-    m_systemServiceIface.asyncCall("CheckForUpdate");
+    m_iface.asyncCall("CheckForUpdate");
 }
 
 void QSystemImage::downloadUpdate() {
-    m_systemServiceIface.asyncCall("DownloadUpdate");
+    m_iface.asyncCall("DownloadUpdate");
 }
 
 void QSystemImage::forceAllowGSMDownload() {
-    m_systemServiceIface.asyncCall("ForceAllowGSMDownload");
+    m_iface.asyncCall("ForceAllowGSMDownload");
 }
 
 void QSystemImage::applyUpdate() {
-    QDBusReply<QString> reply = m_systemServiceIface.call("ApplyUpdate");
-    if (!reply.isValid())
+    QDBusReply<QString> reply = m_iface.call("ApplyUpdate");
+    if (reply.isValid()) {
+        Q_EMIT updateProcessing();
+    } else {
         Q_EMIT updateProcessFailed(reply.value());
+    }
 }
 
-void QSystemImage::cancelUpdate() {
-    QDBusReply<QString> reply = m_systemServiceIface.call("CancelUpdate");
-    if (!reply.isValid())
-        Q_EMIT updateProcessFailed(_("Can't cancel current request (can't contact service)"));
+QString QSystemImage::cancelUpdate() {
+    QDBusPendingReply<QString> reply = m_iface.call("CancelUpdate");
+    reply.waitForFinished();
+    if (reply.isValid()) {
+        return reply.argumentAt<0>();
+    } else {
+        qWarning() << reply.error().message();
+        return _("Can't cancel current request (can't contact service)");
+    }
 }
 
-void QSystemImage::pauseDownload() {
-    QDBusReply<QString> reply = m_systemServiceIface.call("PauseDownload");
-    if (!reply.isValid())
-        Q_EMIT updateProcessFailed(_("Can't pause current request (can't contact service)"));
+QString QSystemImage::pauseDownload() {
+    QDBusPendingReply<QString> reply = m_iface.call("PauseDownload");
+    reply.waitForFinished();
+    if (reply.isValid()) {
+        return reply.argumentAt<0>();
+    } else {
+        qWarning() << reply.error().message();
+        return _("Can't pause current request (can't contact service)");
+    }
 }
 
 void QSystemImage::initializeProperties() {
-    QDBusPendingReply<QMap<QString, QString> > reply = m_systemServiceIface.call("Information");
+    QDBusPendingReply<QMap<QString, QString> > reply =
+        m_iface.call("Information");
     reply.waitForFinished();
     if (reply.isValid()) {
         QMap<QString, QString> result = reply.argumentAt<0>();
@@ -168,18 +173,41 @@ void QSystemImage::initializeProperties() {
         setTargetBuildNumber(result["target_build_number"].toInt());
         setChannelName(result["channel_name"]);
         setDeviceName(result["device_name"]);
-        setLastUpdateDate(QDateTime::fromString(result["last_update_date"], Qt::ISODate));
-        setLastCheckDate(QDateTime::fromString(result["last_check_date"], Qt::ISODate));
+        setLastUpdateDate(QDateTime::fromString(result["last_update_date"],
+                                                Qt::ISODate));
+        setLastCheckDate(QDateTime::fromString(result["last_check_date"],
+                                               Qt::ISODate));
 
         QMap<QString, QVariant> details;
-        QStringList keyvalue = result["version_detail"].split(",", QString::SkipEmptyParts);
+        QStringList keyvalue = result["version_detail"].split(
+            ",", QString::SkipEmptyParts
+        );
         for (int i = 0; i < keyvalue.size(); ++i) {
             QStringList pair = keyvalue.at(i).split("=");
             details[pair[0]] = QVariant(pair[1]);
         }
         setDetailedVersionDetails(details);
     } else {
-        qWarning() << "Error when retrieving version information: " << reply.error();
+        qWarning() << "Error when retrieving version information: "
+                   << reply.error();
+    }
+
+    QDBusReply<QString> dlModeReply = m_iface.call("GetSetting",
+                                                   "auto_download");
+    int default_mode = 1;
+    if (dlModeReply.isValid()) {
+        bool ok;
+        int result;
+        result = dlModeReply.value().toInt(&ok);
+        if (ok) {
+            m_downloadMode = result;
+        } else {
+            m_downloadMode = default_mode;
+        }
+    } else {
+        qWarning() << "Error setting download mode"
+                   << dlModeReply.error().message();
+        m_downloadMode = default_mode;
     }
 }
 
@@ -228,6 +256,12 @@ QString QSystemImage::errorReason()
     return m_errorReason;
 }
 
+QString QSystemImage::versionTag()
+{
+    QString val = m_detailedVersion.value("tag").toString();
+    return val.isEmpty() ? "" : val;
+}
+
 int QSystemImage::currentBuildNumber() const
 {
     return m_currentBuildNumber;
@@ -263,35 +297,25 @@ QVariantMap QSystemImage::detailedVersionDetails() const
 
 int QSystemImage::downloadMode()
 {
-    if (m_downloadMode != -1)
-        return m_downloadMode;
-
-    // TODO: read settings at object creation instead of blocking here?
-    QDBusReply<QString> reply = m_systemServiceIface.call("GetSetting", "auto_download");
-    int default_mode = 1;
-    if (reply.isValid()) {
-        bool ok;
-        int result;
-        result = reply.value().toInt(&ok);
-        if (ok)
-            m_downloadMode = result;
-        else
-            m_downloadMode = default_mode;
-    }
-    else
-        m_downloadMode = default_mode;
     return m_downloadMode;
 }
 
 void QSystemImage::setDownloadMode(const int &downloadMode) {
-    if (m_downloadMode == downloadMode)
+    if (m_downloadMode == downloadMode) {
         return;
+    }
+
+    if (downloadMode < 0 || downloadMode > 2) {
+        return;
+    }
 
     m_downloadMode = downloadMode;
-    m_systemServiceIface.asyncCall("SetSetting", "auto_download", QString::number(downloadMode));
+    m_iface.asyncCall("SetSetting", "auto_download",
+                      QString::number(downloadMode));
 }
 
-void QSystemImage::settingsChanged(const QString &key, const QString &newvalue) {
+void QSystemImage::settingsChanged(const QString &key,
+                                   const QString &newvalue) {
     if(key == "auto_download") {
         bool ok;
         int newintValue;
@@ -355,6 +379,10 @@ void QSystemImage::setDetailedVersionDetails(const QVariantMap &detailedVersionD
         Q_EMIT currentUbuntuBuildNumberChanged();
         Q_EMIT currentDeviceBuildNumberChanged();
         Q_EMIT currentCustomBuildNumberChanged();
+
+        if(m_detailedVersion.contains("tag")) {
+            Q_EMIT versionTagChanged();
+        }
     }
 }
 

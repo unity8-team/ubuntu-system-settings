@@ -75,10 +75,18 @@ Item {
         onRebooting: {
             console.warn('onRebooting', SystemImage.targetBuildNumber, status);
             if (status) {
-                updateModel.setInstalling("ubuntu", SystemImage.targetBuildNumber);
+                updateModel.setInstalling("ubuntu", SystemImage.targetBuildNumber, 5);
             } else {
-                updateModel.setError("ubuntu", i18n.tr("Failed to restart device."));
+                updateModel.setError("ubuntu", SystemImage.targetBuildNumber,
+                                     i18n.tr("Failed to restart device."));
             }
+        }
+        onUpdateProcessing: {
+            updateModel.setInstalling("ubuntu", SystemImage.targetBuildNumber);
+        }
+        onUpdateProcessFailed: {
+                updateModel.setError("ubuntu", SystemImage.targetBuildNumber,
+                                     i18n.tr("Failed to process update."));
         }
         Component.onCompleted: {
             console.warn('onCompleted', SystemImage.currentBuildNumber);
