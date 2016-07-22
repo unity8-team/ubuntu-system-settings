@@ -228,5 +228,13 @@ Item {
             SystemImage.mockCurrentBuildNumber(300);
             compare(updateRepeater.count, 1);
         }
+
+        function test_api() {
+            verify(instance.retry);
+            verify(instance.download);
+            verify(instance.pause);
+            verify(instance.install);
+            verify(instance.markInstalled);
+        }
     }
 }

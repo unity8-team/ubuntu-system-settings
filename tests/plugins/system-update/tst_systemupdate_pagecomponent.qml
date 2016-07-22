@@ -228,5 +228,9 @@ Item {
 
             tryCompare(instance, "batchMode", false);
         }
+
+        function test_imageActions() {
+
+        }
     }
 }

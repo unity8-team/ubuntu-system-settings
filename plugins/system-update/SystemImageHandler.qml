@@ -22,38 +22,33 @@ import Ubuntu.SystemSettings.Update 1.0
 Item {
     property var updateModel
 
+    function retry() {
+        SystemImage.downloadUpdate();
+    }
+
+    function download() {
+        SystemImage.downloadUpdate();
+    }
+
+    function pause() {
+        var result = SystemImage.pauseDownload();
+        if (result) {
+            console.warn('Failed to pause image download', result);
+        }
+    }
+
+    function install() {
+        SystemImage.applyUpdate();
+    }
+
+    function markInstalled(buildNumber) {
+        updateModel.setInstalled("ubuntu", buildNumber);
+    }
+
     Connections {
         target: SystemImage
 
-        function retry() {
-            SystemImage.downloadUpdate();
-        }
-        function download() {
-            SystemImage.downloadUpdate();
-        }
-        function pause() {
-            var result = SystemImage.pauseDownload();
-            if (result) {
-                console.warn('Failed to pause image download', result);
-            }
-        }
-
-        function install() {
-            SystemImage.applyUpdate();
-        }
-
-        function markInstalled(buildNumber) {
-            updateModel.setInstalled("ubuntu", buildNumber);
-        }
-
         onUpdateAvailableStatus: {
-            // console.warn("onUpdateAvailableStatus",
-            //              isAvailable,
-            //              downloading,
-            //              availableVersion,
-            //              updateSize,
-            //              lastUpdateDate,
-            //              errorReason);
             if (isAvailable)
                 updateModel.setImageUpdate("ubuntu", availableVersion, updateSize);
                 if (downloading)
