@@ -44,18 +44,15 @@ ItemPage {
         busType: 1
         busName: "com.canonical.indicator.power"
         objectPath: "/com/canonical/indicator/power"
-        property variant batteryLevel: action("battery-level").state || 0
-        property variant deviceState: action("device-state").state
-        onBatteryLevelChanged: console.warn('batteryLevel changed', batteryLevel)
-        onDeviceStateChanged: console.warn('deviceState changed', deviceState)
+        property var batteryLevel: action("battery-level").state || 0
+        property var deviceState: action("device-state").state
         Component.onCompleted: start()
     }
+
     property bool batchMode: false
     property bool havePower: (indicatorPower.deviceState === "charging") ||
                              (indicatorPower.batteryLevel > 25)
     property bool online: NetworkingStatus.online
-    property bool haveSystemUpdate: SystemImage.updateAvailable ||
-                                    SystemImage.checkTarget()
     property bool authenticated: clickManager.authenticated
     property int status: {
         var c = clickManager.checkingForUpdates;
@@ -84,6 +81,11 @@ ItemPage {
             clickManager.check();
             SystemImage.checkForUpdate();
         }
+    }
+
+    function cancelChecks() {
+        clickManager.cancel();
+        imageHandler.cancel();
     }
 
     ClickManager {
@@ -152,7 +154,7 @@ ItemPage {
                 clip: true
                 status: root.status
                 batchMode: root.batchMode
-                requireRestart: root.haveSystemUpdate
+                requireRestart: imageRepeater.count > 0
                 updatesCount: root.updatesCount
                 online: root.online
                 onStop: root.cancelChecks()
@@ -173,9 +175,9 @@ ItemPage {
                 }
                 onInstall: {
                     root.batchMode = true
-                    if (!requireRestart) {
-                        /* When the count of updates drops to 0, this handler
-                        will reset the ui. */
+                    if (requireRestart) {
+                        postAllBatchHandler.target = root;
+                    } else {
                         postClickBatchHandler.target = root;
                     }
                 }
@@ -221,7 +223,7 @@ ItemPage {
                 id: imageUpdateCol
                 objectName: "updatesImageUpdate"
                 anchors { left: parent.left; right: parent.right }
-                visible: root.haveSystemUpdate
+                visible: imageRepeater.count > 0
 
                 Repeater {
                     id: imageRepeater
@@ -238,8 +240,8 @@ ItemPage {
                         changelog: model.changelog
                         error: model.error
 
-                        onRetry: imageHandler.retry();
-                        onDownload: imageHandler.download();
+                        onRetry: SystemImage.downloadUpdate();
+                        onDownload: SystemImage.downloadUpdate();
                         onPause: imageHandler.pause();
                         onInstall: {
                             var popup = PopupUtils.open(
@@ -247,7 +249,7 @@ ItemPage {
                                     havePowerForUpdate: root.havePower
                                 }
                             );
-                            popup.requestSystemUpdate.connect(imageHandler.install);
+                            popup.requestSystemUpdate.connect(SystemImage.applyUpdate);
                         }
                     }
                 }
@@ -399,6 +401,20 @@ ItemPage {
             if (target.updatesCount === 0) {
                 root.batchMode = false;
                 target = null;
+            }
+        }
+    }
+
+    Connections {
+        id: postAllBatchHandler
+        ignoreUnknownSignals: true
+        target: null
+        onUpdatesCountChanged: {
+            if (target.updatesCount === 1) {
+                SystemImage.updateDownloaded.connect(function () {
+                    SystemImage.applyUpdate();
+                });
+                imageHandler.download();
             }
         }
     }

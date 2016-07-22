@@ -230,10 +230,8 @@ Item {
         }
 
         function test_api() {
-            verify(instance.retry);
             verify(instance.download);
             verify(instance.pause);
-            verify(instance.install);
             verify(instance.markInstalled);
         }
     }

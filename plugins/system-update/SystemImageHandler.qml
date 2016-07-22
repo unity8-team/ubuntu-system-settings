@@ -22,12 +22,11 @@ import Ubuntu.SystemSettings.Update 1.0
 Item {
     property var updateModel
 
-    function retry() {
-        SystemImage.downloadUpdate();
-    }
-
-    function download() {
-        SystemImage.downloadUpdate();
+    function cancel() {
+        var result = SystemImage.cancelUpdate();
+        if (result) {
+            console.warn("Could not cancel check:", result);
+        }
     }
 
     function pause() {
@@ -35,10 +34,6 @@ Item {
         if (result) {
             console.warn('Failed to pause image download', result);
         }
-    }
-
-    function install() {
-        SystemImage.applyUpdate();
     }
 
     function markInstalled(buildNumber) {
@@ -72,10 +67,9 @@ Item {
         onUpdateFailed: {
             updateModel.setError("ubuntu", SystemImage.targetBuildNumber, lastReason);
         }
-
-        /* This is currently the best we can do for marking image updates as
-        installed. lp:1600449 */
         onCurrentBuildNumberChanged: {
+            /* This is currently the best we can do for marking image updates
+            as installed. lp:1600449 */
             markInstalled(SystemImage.currentBuildNumber);
         }
         onRebooting: {

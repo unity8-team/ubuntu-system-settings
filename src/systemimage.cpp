@@ -145,6 +145,7 @@ QString QSystemImage::cancelUpdate() {
     QDBusPendingReply<QString> reply = m_iface.call("CancelUpdate");
     reply.waitForFinished();
     if (reply.isValid()) {
+        setCheckingForUpdates(false);
         return reply.argumentAt<0>();
     } else {
         qWarning() << reply.error().message();

@@ -41,7 +41,7 @@ Item {
     }
 
     UbuntuTestCase {
-        name: "UpdatesTestCase"
+        name: "PageComponentTestCase"
         when: windowShown
 
         property var instance: null
@@ -160,7 +160,6 @@ Item {
             that there are updates and we are online. */
             instance.online = true;
 
-            instance.haveSystemUpdate = data.count > 0;
             var images = findChild(instance, "updatesImageUpdate");
             for (var i = 0; i < data.count; i++) {
                 SystemUpdate.model.mockAddUpdate("image" + i, i, Update.KindImage);
@@ -187,7 +186,7 @@ Item {
 
         function test_lowPower() {
             instance.havePower = false;
-            instance.haveSystemUpdate = true;
+            SystemUpdate.model.mockAddUpdate("ubuntu", 1, Update.KindImage);
             findChild(instance, "global").requestInstall();
             var dialog = findChild(testRoot, "imagePrompt");
             compare(findChild(dialog, "imagePromptInstall").visible, false);
@@ -200,7 +199,7 @@ Item {
 
         function test_sufficientPower() {
             instance.havePower = true;
-            instance.haveSystemUpdate = true;
+            SystemUpdate.model.mockAddUpdate("ubuntu", 1, Update.KindImage);
             findChild(instance, "global").requestInstall();
             var dialog = findChild(testRoot, "imagePrompt");
             compare(findChild(dialog, "imagePromptInstall").visible, true);
@@ -211,14 +210,37 @@ Item {
             }, false);
         }
 
-        function test_batchModeWithoutRestart() {
-            // Requires that the user is authenticated and online.
+        function test_imageActions() {
+
+        }
+    }
+
+
+    UbuntuTestCase {
+        name: "PageComponentBatchModeTestCase"
+        when: windowShown
+
+        property var instance: null
+
+        function init() {
+            instance = pageComponent.createObject(testRoot, {});
+
+            // Requires that the user is authenticated, online and have power.
             instance.authenticated = true;
             instance.online = true;
+            instance.havePower = true;
 
-            // Add two updates and start batch.
+            // We always want some clicks for a batch mode
             SystemUpdate.model.mockAddUpdate("app" + 0, 0, Update.KindClick);
             SystemUpdate.model.mockAddUpdate("app" + 1, 1, Update.KindClick);
+        }
+
+        function cleanup() {
+            instance.destroy();
+            SystemUpdate.model.reset();
+        }
+
+        function test_clicksOnly() {
             findChild(instance, "global").install();
             compare(instance.batchMode, true);
 
@@ -229,7 +251,25 @@ Item {
             tryCompare(instance, "batchMode", false);
         }
 
-        function test_imageActions() {
+        function test_clicksAndImageAlreadyDownloaded() {
+            SystemUpdate.model.mockAddUpdate("ubuntu", 1, Update.KindImage);
+            wait(3000)
+            findChild(instance, "global").requestInstall();
+
+            tryCompareFunction(function () {
+                return !!findChild(testRoot, "imagePrompt")
+            }, true);
+
+            var btn = findChild(testRoot, "imagePromptInstall");
+            mouseClick(btn, btn.width / 2, btn.height / 2);
+
+            tryCompareFunction(function () {
+                return !!findChild(testRoot, "imagePrompt")
+            }, false);
+        }
+
+        // Test when an image update is not even Downloaded.
+        function test_batchModeWithDownloadInstallImageUpdate() {
 
         }
     }
