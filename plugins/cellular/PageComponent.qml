@@ -1,7 +1,7 @@
 /*
  * This file is part of system-settings
  *
- * Copyright (C) 2013 Canonical Ltd.
+ * Copyright (C) 2013-2016 Canonical Ltd.
  *
  * Contact: Iain Lane <iain.lane@canonical.com>
  *
@@ -22,7 +22,6 @@ import QtQuick 2.4
 import SystemSettings 1.0
 import Ubuntu.SystemSettings.Cellular 1.0
 import Ubuntu.Components 1.3
-import Ubuntu.Components.ListItems 1.3 as ListItem
 import MeeGo.QOfono 0.2
 import QMenuModel 0.1
 import "Components" as LocalComponents

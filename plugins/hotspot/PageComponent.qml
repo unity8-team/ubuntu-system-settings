@@ -1,7 +1,7 @@
 /*
  * This file is part of system-settings
  *
- * Copyright (C) 2014-2015 Canonical Ltd.
+ * Copyright (C) 2014-2016 Canonical Ltd.
  *
  * Contact: Jonas G. Drange <jonas.drange@canonical.com>
  *
@@ -20,8 +20,9 @@
 
 import QtQuick 2.4
 import SystemSettings 1.0
+import SystemSettings.ListItems 1.0 as SettingsListItems
+import Ubuntu.Components.ListItems 1.3 as ListItems
 import Ubuntu.Components 1.3
-import Ubuntu.Components.ListItems 1.3 as ListItem
 import Ubuntu.Components.Popups 1.3
 import Ubuntu.Connectivity 1.0
 
@@ -77,12 +78,14 @@ ItemPage {
             }
             spacing: units.gu(1)
 
-            ListItem.Standard {
+            SettingsListItems.Standard {
                 id: hotspotItem
+                objectName: "hotspotItem"
                 text: i18n.tr("Hotspot")
                 enabled: Connectivity.hotspotStored
                 onClicked: hotspotSwitch.trigger()
-                control: Switch {
+
+                Switch {
                     id: hotspotSwitch
                     objectName: "hotspotSwitch"
                     enabled: parent.enabled
@@ -101,7 +104,7 @@ ItemPage {
                 }
             }
 
-            ListItem.Caption {
+            ListItems.Caption {
                 anchors {
                     left: parent.left
                     right: parent.right

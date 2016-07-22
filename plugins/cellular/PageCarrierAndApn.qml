@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 Canonical Ltd
+ * Copyright (C) 2014-2016 Canonical Ltd
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as
@@ -19,12 +19,12 @@
 */
 import QtQuick 2.4
 import SystemSettings 1.0
+import SystemSettings.ListItems 1.0 as SettingsListItems
 import Ubuntu.Components 1.3
-import Ubuntu.Components.ListItems 1.3 as ListItem
 
 ItemPage {
     id: root
-    title: i18n.tr("Carrier")
+    title: i18n.tr("Carrier & APN")
     objectName: "carrierApnPage"
     flickable: null
 
@@ -40,23 +40,23 @@ ItemPage {
             anchors.left: parent.left
             anchors.right: parent.right
 
-            ListItem.SingleValue {
+            SettingsListItems.SingleValueProgression {
                 text: i18n.tr("Carrier")
                 objectName: "carrier"
                 value: sim.netReg.name ? sim.netReg.name : i18n.tr("None")
                 enabled: (sim.netReg.status !== "") &&
                     (sim.netReg.mode !== "auto-only")
-                progression: enabled
+                progressionVisible: enabled
                 onClicked: pageStack.push(Qt.resolvedUrl("PageChooseCarrier.qml"), {
                     sim: sim,
                     title: i18n.tr("Carrier")
                 })
             }
 
-            ListItem.Standard {
+            SettingsListItems.SingleValueProgression {
                 text: i18n.tr("APN")
                 objectName: "apn"
-                progression: enabled
+                progressionVisible: enabled
                 onClicked: pageStack.push(Qt.resolvedUrl("PageChooseApn.qml"), {
                     sim: sim
                 })
