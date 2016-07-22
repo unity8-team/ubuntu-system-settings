@@ -1,7 +1,7 @@
 /*
  * This file is part of system-settings
  *
- * Copyright (C) 2013 Canonical Ltd.
+ * Copyright (C) 2015 Canonical Ltd.
  *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License version 3, as published
@@ -19,26 +19,15 @@
 import QtQuick 2.4
 import Ubuntu.Components 1.3
 
-Item {
-    property alias text: label.text
-    anchors {
-        left: parent.left
-        right: parent.right
-    }
-    height: units.gu(6)
+Standard {
+    id: base
+    property alias iconName: icon.name
+    property alias iconSource: icon.source
 
-    Label {
-        id: label
-        anchors {
-            top: parent.top
-            topMargin: units.gu(3)
-            right: parent.right
-            rightMargin: units.gu(2)
-            bottom: parent.bottom
-            left: parent.left
-            leftMargin: units.gu(2)
-        }
-        fontSize: "small"
-        opacity: 0.75
+    Icon {
+        id: icon
+        width: height
+        height: units.gu(2.5)
+        SlotsLayout.position: SlotsLayout.First
     }
 }

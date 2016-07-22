@@ -6,3 +6,5 @@ set(QML_SOURCES
 set(PLUG_DIR ${PLUGIN_QML_DIR}/SystemSettings)
 install(FILES qmldir DESTINATION ${PLUG_DIR})
 install(FILES ${QML_SOURCES} DESTINATION ${PLUG_DIR})
+
+add_subdirectory(ListItems)
