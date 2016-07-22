@@ -50,6 +50,7 @@ public:
     QDateTime lastCheckDate();
     void setLastCheckDate(const QDateTime &lastCheck);
     void pruneDb();
+    void reset();
 
 signals:
     void changed();

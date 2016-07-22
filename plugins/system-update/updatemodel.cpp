@@ -179,6 +179,12 @@ void UpdateModel::clear()
     refresh();
 }
 
+void UpdateModel::reset()
+{
+    m_db->reset();
+    clear();
+}
+
 void UpdateModel::refresh(const QSharedPointer<Update> &update)
 {
     int ix = UpdateModel::indexOf(m_updates, update);
@@ -515,11 +521,11 @@ void UpdateModel::setImageUpdate(const QString &id, const QString &version,
     m_db->add(u);
 }
 
-UpdateModelFilter::UpdateModelFilter(QObject *parent)
-    : QSortFilterProxyModel(parent)
-{
-    setSourceModel(SystemUpdate::instance()->updates());
-}
+// UpdateModelFilter::UpdateModelFilter(QObject *parent)
+//     : QSortFilterProxyModel(parent)
+// {
+//     setSourceModel(SystemUpdate::instance()->updates());
+// }
 
 UpdateModelFilter::UpdateModelFilter(UpdateModel *model, QObject *parent)
     : QSortFilterProxyModel(parent)

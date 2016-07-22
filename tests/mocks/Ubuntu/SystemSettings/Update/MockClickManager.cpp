@@ -20,7 +20,7 @@
 
 MockClickManager::MockClickManager(QObject *parent)
     : QObject(parent)
-    , m_authenticated(true)
+    , m_authenticated(false)
     , m_checking(false)
 {
 }

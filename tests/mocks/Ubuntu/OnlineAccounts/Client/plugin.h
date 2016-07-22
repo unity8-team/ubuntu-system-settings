@@ -15,32 +15,19 @@
  * You should have received a copy of the GNU General Public License along
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef MOCK_SYSTEM_UPDATE_H
-#define MOCK_SYSTEM_UPDATE_H
 
-#include "systemupdate.h"
-#include "MockUpdateModel.h"
+#ifndef MOCK_ONLINEACCOUNTS_CLIENT_PLUGIN_H
+#define MOCK_ONLINEACCOUNTS_CLIENT_PLUGIN_H
 
-using namespace UpdatePlugin;
+#include <QQmlExtensionPlugin>
 
-class MockSystemUpdate : public SystemUpdate
+class BackendPlugin : public QQmlExtensionPlugin
 {
     Q_OBJECT
+    Q_PLUGIN_METADATA(IID "org.qt-project.Qt.QQmlExtensionInterface")
+
 public:
-    static MockSystemUpdate *instance();
-
-    Q_INVOKABLE bool isCheckRequired();
-    Q_INVOKABLE void mockIsCheckRequired(const bool isRequired); // mock only
-    Q_INVOKABLE void mockAddUpdate(const QString &id, const uint &revision,
-                                   const uint &kind); // Mock only
-
-protected:
-    explicit MockSystemUpdate(MockUpdateModel *model, QObject *parent = 0);
-    ~MockSystemUpdate() {}
-private:
-    static MockSystemUpdate *m_instance;
-
-    bool m_checkRequired = false;
+    void registerTypes(const char *uri) override;
 };
 
-#endif // MOCK_SYSTEM_UPDATE_H
+#endif // MOCK_ONLINEACCOUNTS_CLIENT_PLUGIN_H

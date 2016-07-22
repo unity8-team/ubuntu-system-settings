@@ -19,6 +19,7 @@
 #include "systemupdate.h"
 
 #include <QDateTime>
+#include <QQmlEngine>
 
 namespace UpdatePlugin
 {
@@ -39,21 +40,74 @@ void SystemUpdate::destroyInstance()
 SystemUpdate::SystemUpdate(QObject *parent)
     : QObject(parent)
     , m_model(new UpdateModel(this))
+    , m_pending(new UpdateModelFilter(m_model, this))
+    , m_clicks(new UpdateModelFilter(m_model, this))
+    , m_images(new UpdateModelFilter(m_model, this))
+    , m_installed(new UpdateModelFilter(m_model, this))
     , m_nam(new Network::ManagerImpl(this))
 {
+    init();
 }
 
-SystemUpdate::SystemUpdate(UpdateModel *model, Network::Manager *nam,
+SystemUpdate::SystemUpdate(UpdateModel *model,
+                           UpdateModelFilter *pending,
+                           UpdateModelFilter *clicks,
+                           UpdateModelFilter *images,
+                           UpdateModelFilter *installed,
+                           Network::Manager *nam,
                            QObject *parent)
     : QObject(parent)
     , m_model(model)
+    , m_pending(pending)
+    , m_clicks(clicks)
+    , m_images(images)
+    , m_installed(installed)
     , m_nam(nam)
 {
+    init();
+}
+
+void SystemUpdate::init()
+{
+    m_pending->filterOnInstalled(false);
+
+    m_clicks->filterOnKind((uint) Update::Kind::KindClick);
+    m_clicks->filterOnInstalled(false);
+
+    m_images->filterOnKind((uint) Update::Kind::KindImage);
+    m_images->filterOnInstalled(false);
+
+    m_installed->filterOnInstalled(true);
 }
 
 UpdateModel* SystemUpdate::updates()
 {
+    QQmlEngine::setObjectOwnership(m_model, QQmlEngine::CppOwnership);
     return m_model;
+}
+
+QSortFilterProxyModel* SystemUpdate::pendingUpdates() const
+{
+    QQmlEngine::setObjectOwnership(m_pending, QQmlEngine::CppOwnership);
+    return m_pending;
+}
+
+QSortFilterProxyModel* SystemUpdate::clickUpdates() const
+{
+    QQmlEngine::setObjectOwnership(m_clicks, QQmlEngine::CppOwnership);
+    return m_clicks;
+}
+
+QSortFilterProxyModel* SystemUpdate::imageUpdates() const
+{
+    QQmlEngine::setObjectOwnership(m_images, QQmlEngine::CppOwnership);
+    return m_images;
+}
+
+QSortFilterProxyModel* SystemUpdate::installedUpdates() const
+{
+    QQmlEngine::setObjectOwnership(m_installed, QQmlEngine::CppOwnership);
+    return m_installed;
 }
 
 Network::Manager* SystemUpdate::nam()

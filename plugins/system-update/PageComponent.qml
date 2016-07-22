@@ -33,7 +33,11 @@ import Ubuntu.SystemSettings.Update 1.0
 ItemPage {
     id: root
     objectName: "systemUpdatesPage"
-    flickable: updates.flickable
+
+    header: PageHeader {
+        title: root.title
+        flickable: scrollWidget
+    }
 
     QDBusActionGroup {
         id: indicatorPower
@@ -46,13 +50,54 @@ ItemPage {
         onDeviceStateChanged: console.warn('deviceState changed', deviceState)
         Component.onCompleted: start()
     }
+    property bool batchMode: false
+    property bool havePower: (indicatorPower.deviceState === "charging") ||
+                             (indicatorPower.batteryLevel > 25)
+    property bool online: NetworkingStatus.online
+    property bool haveSystemUpdate: SystemImage.updateAvailable ||
+                                    SystemImage.checkTarget()
+    property bool authenticated: clickManager.authenticated
+    property int status: {
+        var c = clickManager.checkingForUpdates;
+        var s = SystemImage.checkingForUpdates;
+        if (c && s) {
+            return SystemUpdate.StatusCheckingAllUpdates;
+        } else if (c && !s) {
+            return SystemUpdate.StatusCheckingClickUpdates;
+        } else if (!c && s) {
+            return SystemUpdate.StatusCheckingSystemUpdates;
+        } else {
+            return SystemUpdate.StatusIdle;
+        }
+    }
+    property int updatesCount: {
+        var count = 0;
+        if (authenticated) {
+            count += clickRepeater.count;
+        }
+        count += imageRepeater.count;
+        return count;
+    }
+
+    Component.onCompleted: {
+        if (SystemUpdate.isCheckRequired()) {
+            clickManager.check();
+            SystemImage.checkForUpdate();
+        }
+    }
 
     ClickManager {
         id: clickManager
+        onCheckCompleted: SystemUpdate.checkCompleted()
+
+        // These states are final and thus break the binding.
+        onNetworkError: updates.status = SystemUpdate.StatusNetworkError
+        onServerError: updates.status = SystemUpdate.StatusServerError
     }
 
     Setup {
         id: uoaConfig
+        objectName: "uoaConfig"
         applicationId: "ubuntu-system-settings"
         providerId: "ubuntuone"
 
@@ -60,25 +105,8 @@ ItemPage {
             if (reply.errorName)
                 console.warn('Online Accounts failed:', reply.errorName);
             else
-                updates.checkClick();
+                clickManager.check();
         }
-    }
-
-    UpdateModelFilter {
-        id: imageUpdate
-        kindFilter: Update.KindImage
-        installed: false
-    }
-
-    UpdateModelFilter {
-        id: clickUpdates
-        kindFilter: Update.KindClick
-        installed: false
-    }
-
-    UpdateModelFilter {
-        id: installedUpdates
-        installed: true
     }
 
     DownloadHandler {
@@ -91,25 +119,246 @@ ItemPage {
         updateModel: SystemUpdate.model
     }
 
-    Updates {
-        id: updates
+    Connections {
+        target: SystemImage
+        onUpdateAvailableStatus: SystemUpdate.checkCompleted()
+    }
+
+    Flickable {
+        id: scrollWidget
         anchors {
             top: parent.top
+            left: parent.left
+            right: parent.right
             bottom: configuration.top
         }
-        width: parent.width
         clip: true
-        clickModel: clickUpdates
-        clickManager: clickManager
-        imageModel: imageUpdate
-        imageHandler: imageHandler
-        installedModel: installedUpdates
-        downloadHandler: downloadHandler
-        authenticated: clickManager.authenticated
-        havePower: (indicatorPower.deviceState === "charging") ||
-                   (indicatorPower.batteryLevel > 25)
-        onRequestAuthentication: uoaConfig.exec()
-    }
+        contentHeight: content.height
+        boundsBehavior: (contentHeight > parent.height) ?
+                        Flickable.DragAndOvershootBounds :
+                        Flickable.StopAtBounds
+        flickableDirection: Flickable.VerticalFlick
+
+        Column {
+            id: content
+            anchors { left: parent.left; right: parent.right }
+
+            Global {
+                id: glob
+                objectName: "global"
+                anchors { left: parent.left; right: parent.right }
+
+                height: hidden ? 0 : units.gu(8)
+                clip: true
+                status: root.status
+                batchMode: root.batchMode
+                requireRestart: root.haveSystemUpdate
+                updatesCount: root.updatesCount
+                online: root.online
+                onStop: root.cancelChecks()
+
+                onRequestInstall: {
+                    if (requireRestart) {
+                        var popup = PopupUtils.open(
+                            Qt.resolvedUrl("ImageUpdatePrompt.qml"), null, {
+                                havePowerForUpdate: root.havePower
+                            }
+                        );
+                        popup.requestSystemUpdate.connect(function () {
+                            install();
+                        });
+                    } else {
+                        install();
+                    }
+                }
+                onInstall: {
+                    root.batchMode = true
+                    if (!requireRestart) {
+                        /* When the count of updates drops to 0, this handler
+                        will reset the ui. */
+                        postClickBatchHandler.target = root;
+                    }
+                }
+            }
+
+            Rectangle {
+                id: overlay
+                objectName: "overlay"
+                visible: placeholder.text
+                color: theme.palette.normal.background
+                width: parent.width
+                height: units.gu(10)
+
+                Label {
+                    id: placeholder
+                    objectName: "overlayText"
+                    anchors.fill: parent
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+                    wrapMode: Text.WordWrap
+                    text: {
+                        var s = root.status;
+                        if (!root.online) {
+                            return i18n.tr("Connect to the Internet to check for updates.");
+                        } else if (s === SystemUpdate.StatusIdle && updatesCount === 0) {
+                            return i18n.tr("Software is up to date");
+                        } else if (s === SystemUpdate.StatusServerError ||
+                                   s === SystemUpdate.StatusNetworkError) {
+                            return i18n.tr("The update server is not responding. Try again later.");
+                        }
+                        return "";
+                    }
+                }
+            }
+
+            SettingsItemTitle {
+                id: updatesAvailableHeader
+                text: i18n.tr("Updates available")
+                visible: updatesCount > 1
+            }
+
+            Column {
+                id: imageUpdateCol
+                objectName: "updatesImageUpdate"
+                anchors { left: parent.left; right: parent.right }
+                visible: root.haveSystemUpdate
+
+                Repeater {
+                    id: imageRepeater
+                    model: SystemUpdate.imageUpdates
+
+                    delegate: ImageUpdateDelegate {
+                        objectName: "updatesImageDelegate-" + index
+                        width: imageUpdateCol.width
+                        updateState: model.updateState
+                        kind: model.kind
+                        progress: model.progress
+                        version: remoteVersion
+                        size: model.size
+                        changelog: model.changelog
+                        error: model.error
+
+                        onRetry: imageHandler.retry();
+                        onDownload: imageHandler.download();
+                        onPause: imageHandler.pause();
+                        onInstall: {
+                            var popup = PopupUtils.open(
+                                Qt.resolvedUrl("ImageUpdatePrompt.qml"), null, {
+                                    havePowerForUpdate: root.havePower
+                                }
+                            );
+                            popup.requestSystemUpdate.connect(imageHandler.install);
+                        }
+                    }
+                }
+            }
+
+            Column {
+                id: clickUpdatesCol
+                objectName: "updatesClickUpdates"
+                anchors { left: parent.left; right: parent.right }
+                visible: clickRepeater.count > 0
+
+                Repeater {
+                    id: clickRepeater
+                    model: SystemUpdate.clickUpdates
+
+                    delegate: ClickUpdateDelegate {
+                        objectName: "updatesClickUpdate" + index
+                        width: clickUpdatesCol.width
+                        updateState: model.updateState
+                        kind: model.kind
+                        progress: model.progress
+                        version: remoteVersion
+                        size: model.size
+                        name: title
+                        iconUrl: model.iconUrl
+                        changelog: model.changelog
+                        error: model.error
+                        automatic: model.automatic
+
+                        onInstall: downloadHandler.createDownload(model);
+                        onPause: downloadHandler.pauseDownload(model)
+                        onResume: downloadHandler.resumeDownload(model)
+                        onRetry: clickManager.retry(identifier, revision)
+
+                        onAutomaticChanged: {
+                            if (automatic && !model.downloadId) {
+                                install();
+                            }
+                        }
+
+                        Connections {
+                            target: glob
+                            onInstall: install()
+                        }
+
+                        /* If we a downloadId, we expect UDM to restore it
+                        after some time. Workaround for lp:1603770. */
+                        Timer {
+                            id: downloadTimeout
+                            interval: 1000
+                            running: true
+                            onTriggered: {
+                                if (model.downloadId) {
+                                    downloadHandler.assertDownloadExist(model);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            NotAuthenticatedNotification {
+                id: notauthNotification
+                objectName: "noAuthenticationNotification"
+                visible: !authenticated
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                }
+                onRequestAuthentication: uoaConfig.exec()
+            }
+
+            SettingsItemTitle {
+                text: i18n.tr("Recent updates")
+                visible: installed.visible
+            }
+
+            Column {
+                id: installed
+                objectName: "installedUpdates"
+                anchors { left: parent.left; right: parent.right }
+                visible: installedRepeater.count > 0
+
+                Repeater {
+                    id: installedRepeater
+                    model: SystemUpdate.installedUpdates
+
+                    delegate: UpdateDelegate {
+                        objectName: "installedUpdate-" + index
+                        width: installed.width
+                        version: remoteVersion
+                        size: model.size
+                        name: title
+                        kind: model.kind
+                        iconUrl: model.iconUrl
+                        changelog: model.changelog
+                        updateState: Update.StateInstalled
+                        updatedAt: model.updatedAt
+
+                        onLaunch: {
+                            /* The Application ID is the string
+                            "$(click_package)_$(application)_$(version) */
+                            clickManager.launch("%1_%2_%3".arg(identifier)
+                                                          .arg(packageName)
+                                                          .arg(remoteVersion));
+                        }
+                    }
+                }
+            }
+        } // Column inside flickable.
+    } // Flickable
 
     Column {
         id: configuration
@@ -134,9 +383,23 @@ ItemPage {
                     return i18n.tr("On wi-fi")
                 else if (SystemImage.downloadMode === 2)
                     return i18n.tr("Always")
+                else
+                    return i18n.tr("Unknown")
             }
             progression: true
             onClicked: pageStack.push(Qt.resolvedUrl("Configuration.qml"))
+        }
+    }
+
+    Connections {
+        id: postClickBatchHandler
+        ignoreUnknownSignals: true
+        target: null
+        onUpdatesCountChanged: {
+            if (target.updatesCount === 0) {
+                root.batchMode = false;
+                target = null;
+            }
         }
     }
 

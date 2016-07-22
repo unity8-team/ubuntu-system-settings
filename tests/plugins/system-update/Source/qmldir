@@ -1,6 +1,7 @@
 module Source
 
-Updates 1.0 ../../../../plugins/system-update/Updates.qml
+EntryComponent 1.0 ../../../../plugins/system-update/EntryComponent.qml
+PageComponent 1.0 ../../../../plugins/system-update/PageComponent.qml
 UpdateDelegate 1.0 ../../../../plugins/system-update/UpdateDelegate.qml
 ClickUpdateDelegate 1.0 ../../../../plugins/system-update/ClickUpdateDelegate.qml
 ImageUpdateDelegate 1.0 ../../../../plugins/system-update/ImageUpdateDelegate.qml

@@ -46,21 +46,9 @@ Item {
         signalName: "stop"
     }
 
-
-    SignalSpy {
-        id: pauseSignalSpy
-        signalName: "pause"
-    }
-
-
     SignalSpy {
         id: requestInstallSpy
         signalName: "requestInstall"
-    }
-
-    SignalSpy {
-        id: resumeSignalSpy
-        signalName: "resume"
     }
 
     UbuntuTestCase {
@@ -73,16 +61,12 @@ Item {
             instance = glob.createObject(testRoot, {});
 
             stopSignalSpy.target = instance;
-            pauseSignalSpy.target = instance;
             requestInstallSpy.target = instance;
-            resumeSignalSpy.target = instance;
         }
 
         function cleanup () {
             stopSignalSpy.clear();
-            pauseSignalSpy.clear();
             requestInstallSpy.clear();
-            resumeSignalSpy.clear();
 
             instance.destroy();
             instance = null;
@@ -153,31 +137,10 @@ Item {
         function test_batchMode() {
             instance.updatesCount = 2;
             instance.online = true;
-            instance.status = SystemUpdate.StatusBatchMode;
+            instance.status = SystemUpdate.StatusIdle;
+            instance.batchMode = true;
 
-            compare(instance.hidden, false, "global was hidden in batchmode");
-        }
-
-        function test_pause() {
-            instance.updatesCount = 2;
-            instance.online = true;
-            instance.status = SystemUpdate.StatusBatchMode;
-
-            var pause = findChild(instance, "updatesGlobalPauseButton");
-            compare(pause.visible, true);
-            mouseClick(pause, pause.width / 2, pause.height / 2);
-            pauseSignalSpy.wait();
-        }
-
-        function test_resume() {
-            instance.updatesCount = 2;
-            instance.online = true;
-            instance.status = SystemUpdate.StatusBatchModePaused;
-
-            var resume = findChild(instance, "updatesGlobalResumeButton");
-            compare(resume.visible, true);
-            mouseClick(resume, resume.width / 2, resume.height / 2);
-            resumeSignalSpy.wait();
+            compare(instance.hidden, true);
         }
 
         function test_visibility_data() {
@@ -264,43 +227,23 @@ Item {
                 },
                 {
                     tag: "batch mode, no network, no updates",
-                    status: SystemUpdate.StatusBatchMode, online: false, updatesCount: 0, hidden: true
+                    status: SystemUpdate.StatusIdle, online: false, updatesCount: 0, hidden: true, batchMode: true
                 },
                 {
                     tag: "batch mode, no network, updates",
-                    status: SystemUpdate.StatusBatchMode, online: false, updatesCount: 2, hidden: true
+                    status: SystemUpdate.StatusIdle, online: false, updatesCount: 2, hidden: true, batchMode: true
                 },
                 {
                     tag: "batch mode, network, no updates",
-                    status: SystemUpdate.StatusBatchMode, online: true, updatesCount: 0, hidden: false
+                    status: SystemUpdate.StatusIdle, online: true, updatesCount: 0, hidden: true, batchMode: true
                 },
                 {
                     tag: "batch mode, network, one update",
-                    status: SystemUpdate.StatusBatchMode, online: true, updatesCount: 1, hidden: false
+                    status: SystemUpdate.StatusIdle, online: true, updatesCount: 1, hidden: true, batchMode: true
                 },
                 {
                     tag: "batch mode, network, updates",
-                    status: SystemUpdate.StatusBatchMode, online: true, updatesCount: 2, hidden: false
-                },
-                {
-                    tag: "batch mode (paused), no network, no updates",
-                    status: SystemUpdate.StatusBatchModePaused, online: false, updatesCount: 0, hidden: true
-                },
-                {
-                    tag: "batch mode (paused), no network, updates",
-                    status: SystemUpdate.StatusBatchModePaused, online: false, updatesCount: 2, hidden: true
-                },
-                {
-                    tag: "batch mode (paused), network, no updates",
-                    status: SystemUpdate.StatusBatchModePaused, online: true, updatesCount: 0, hidden: false
-                },
-                {
-                    tag: "batch mode (paused), network, one update",
-                    status: SystemUpdate.StatusBatchModePaused, online: true, updatesCount: 1, hidden: false
-                },
-                {
-                    tag: "batch mode (paused), network, updates",
-                    status: SystemUpdate.StatusBatchModePaused, online: true, updatesCount: 2, hidden: false
+                    status: SystemUpdate.StatusIdle, online: true, updatesCount: 2, hidden: true, batchMode: true
                 },
                 {
                     tag: "network error, no network, no updates",
@@ -349,6 +292,7 @@ Item {
             instance.status = data.status;
             instance.online = data.online;
             instance.updatesCount = data.updatesCount;
+            if (data.batchMode) instance.batchMode = data.batchMode
             compare(instance.hidden, data.hidden);
         }
     }

@@ -16,30 +16,44 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "MockUpdateModel.h"
+#include "MockSetup.h"
 
-#include <QSharedPointer>
+namespace OnlineAccountsClient {
 
-void MockUpdateModel::mockAddUpdate(const QString &id, const uint &revision, const uint &kind)
+void MockSetup::setApplicationId(const QString &applicationId)
 {
-    using namespace UpdatePlugin;
-    QSharedPointer<Update> u = QSharedPointer<Update>(new Update);
-    u->setIdentifier(id);
-    u->setKind((Update::Kind) kind);
-    u->setRevision(revision);
-    u->setTitle(QString("Test App %1").arg(id));
-    u->setRemoteVersion(QString("v%1").arg(revision));
-    u->setBinaryFilesize(5000 * 1000);
-    add(u);
+    m_applicationId = applicationId;
+    Q_EMIT applicationIdChanged();
 }
 
-void MockUpdateModel::reset()
+QString MockSetup::applicationId() const
 {
-    UpdateModel::reset();
+    return m_applicationId;
 }
 
-void MockUpdateModelFilter::mockSetSourceModel(MockUpdateModel *source)
+void MockSetup::setProviderId(const QString &providerId)
 {
-    setSourceModel(source);
+    m_providerId = providerId;
+    Q_EMIT providerIdChanged();
 }
 
+QString MockSetup::providerId() const
+{
+    return m_providerId;
+}
+
+void MockSetup::exec()
+{
+    m_execCalled = true;
+}
+
+bool MockSetup::execCalled()
+{
+    return m_execCalled;
+}
+
+void MockSetup::mockFinished(const QVariantMap &reply)
+{
+    Q_EMIT finished(reply);
+}
+}

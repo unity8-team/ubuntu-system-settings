@@ -30,6 +30,10 @@ class SystemUpdate : public QObject
     Q_OBJECT
     Q_ENUMS(Status)
     Q_PROPERTY(UpdateModel* model READ updates CONSTANT)
+    Q_PROPERTY(QSortFilterProxyModel* pendingUpdates READ pendingUpdates CONSTANT)
+    Q_PROPERTY(QSortFilterProxyModel* clickUpdates READ clickUpdates CONSTANT)
+    Q_PROPERTY(QSortFilterProxyModel* imageUpdates READ imageUpdates CONSTANT)
+    Q_PROPERTY(QSortFilterProxyModel* installedUpdates READ installedUpdates CONSTANT)
 public:
     static SystemUpdate *instance();
     static void destroyInstance();
@@ -40,14 +44,15 @@ public:
         StatusCheckingClickUpdates,
         StatusCheckingSystemUpdates,
         StatusCheckingAllUpdates,
-        StatusBatchMode, // Installing all updates
-        StatusBatchModePaused, // Installing all updates paused
         StatusNetworkError,
         StatusServerError
     };
 
-    // We only need one model, views should use UpdateModelFilter.
     UpdateModel* updates();
+    QSortFilterProxyModel* pendingUpdates() const;
+    QSortFilterProxyModel* clickUpdates() const;
+    QSortFilterProxyModel* imageUpdates() const;
+    QSortFilterProxyModel* installedUpdates() const;
 
     /* Qt recommend only one QNetworkAccessManager per application,
     and it is provided here. */
@@ -58,13 +63,23 @@ public:
 
 protected:
     explicit SystemUpdate(QObject *parent = 0);
-    explicit SystemUpdate(UpdateModel *model, Network::Manager *nam,
+    explicit SystemUpdate(UpdateModel *model,
+                          UpdateModelFilter *pending,
+                          UpdateModelFilter *clicks,
+                          UpdateModelFilter *images,
+                          UpdateModelFilter *installed,
+                          Network::Manager *nam,
                           QObject *parent = 0);
     ~SystemUpdate() {}
 
 private:
+    void init();
     static SystemUpdate *m_instance;
     UpdateModel *m_model;
+    UpdateModelFilter *m_pending;
+    UpdateModelFilter *m_clicks;
+    UpdateModelFilter *m_images;
+    UpdateModelFilter *m_installed;
     Network::Manager *m_nam;
 };
 

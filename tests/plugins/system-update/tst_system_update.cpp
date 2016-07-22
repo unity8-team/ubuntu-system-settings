@@ -17,6 +17,7 @@
  */
 
 #include "updatemodel.h"
+#include "systemupdate.h"
 #include "testable_system_update.h"
 
 #include <QSignalSpy>
@@ -33,11 +34,18 @@ private slots:
     void init()
     {
         m_model = new UpdateModel(":memory:");
-        m_instance = new TestableSystemUpdate(m_model, nullptr);
+        m_pending = new UpdateModelFilter(m_model, m_model);
+        m_clicks = new UpdateModelFilter(m_model, m_model);
+        m_images = new UpdateModelFilter(m_model, m_model);
+        m_installed = new UpdateModelFilter(m_model, m_model);
+
+        m_instance = new TestableSystemUpdate(m_model, m_pending, m_clicks,
+                                              m_images, m_installed, nullptr);
         m_model->setParent(m_instance);
     }
     void cleanup()
     {
+        // Everything is ultimately parented to m_instance, thus destroyed.
         QSignalSpy destroyedSpy(m_instance, SIGNAL(destroyed(QObject*)));
         m_instance->deleteLater();
         QTRY_COMPARE(destroyedSpy.count(), 1);
@@ -77,14 +85,35 @@ private slots:
     {
         QCOMPARE(m_instance->updates(), m_model);
     }
+    void testPendingUpdates()
+    {
+        QCOMPARE(m_instance->pendingUpdates(), m_pending);
+    }
+    void testClickUpdates()
+    {
+        QCOMPARE(m_instance->clickUpdates(), m_clicks);
+    }
+    void testImageUpdates()
+    {
+        QCOMPARE(m_instance->imageUpdates(), m_images);
+    }
+    void testInstalledUpdates()
+    {
+        QCOMPARE(m_instance->installedUpdates(), m_installed);
+    }
     void testNam()
     {
         // We passed a nullptr, so just verify that the method exist.
         QVERIFY(!m_instance->nam());
     }
 private:
-    TestableSystemUpdate *m_instance = nullptr;
+    //TestableSystemUpdate *m_instance = nullptr;
+    SystemUpdate *m_instance = nullptr;
     UpdateModel *m_model = nullptr;
+    UpdateModelFilter *m_pending = nullptr;
+    UpdateModelFilter *m_clicks = nullptr;
+    UpdateModelFilter *m_images = nullptr;
+    UpdateModelFilter *m_installed = nullptr;
 };
 
 QTEST_MAIN(TstSystemUpdate)

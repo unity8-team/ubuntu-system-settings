@@ -20,14 +20,21 @@
 
 #include "systemupdate.h"
 
+/* SystemUpdate's ctor is protected from instantiation due to it being a
+singleton. This class provides a public ctor for use in testing. */
 namespace UpdatePlugin
 {
 class TestableSystemUpdate : public SystemUpdate
 {
 public:
-    explicit TestableSystemUpdate(UpdateModel *model, Network::Manager *nam,
+    explicit TestableSystemUpdate(UpdateModel *model,
+                                  UpdateModelFilter *pending,
+                                  UpdateModelFilter *clicks,
+                                  UpdateModelFilter *images,
+                                  UpdateModelFilter *installed,
+                                  Network::Manager *nam,
                                   QObject *parent = 0)
-        : SystemUpdate(model, nam, parent)
+        : SystemUpdate(model, pending, clicks, images, installed, nam, parent)
     {}
 
     ~TestableSystemUpdate() {}

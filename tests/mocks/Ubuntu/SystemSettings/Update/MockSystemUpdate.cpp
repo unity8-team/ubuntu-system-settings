@@ -16,12 +16,27 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "MockSystemUpdate.h"
+#include "updatemodel.h"
+
+using namespace UpdatePlugin;
+
+MockSystemUpdate::MockSystemUpdate(MockUpdateModel *model, QObject *parent)
+    : UpdatePlugin::SystemUpdate(model,
+                                 new UpdateModelFilter(model, model),
+                                 new UpdateModelFilter(model, model),
+                                 new UpdateModelFilter(model, model),
+                                 new UpdateModelFilter(model, model),
+                                 nullptr, parent)
+{
+}
 
 MockSystemUpdate *MockSystemUpdate::m_instance = 0;
 
 MockSystemUpdate *MockSystemUpdate::instance()
 {
-    if (!m_instance) m_instance = new MockSystemUpdate;
+    MockUpdateModel *model = new MockUpdateModel();
+    if (!m_instance) m_instance = new MockSystemUpdate(model);
+    model->setParent(m_instance);
     return m_instance;
 }
 

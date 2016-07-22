@@ -106,6 +106,7 @@ public slots:
     void refresh();
     void refresh(const QSharedPointer<Update> &update);
     void clear();
+    void reset();
 
 signals:
     void countChanged();
@@ -129,16 +130,7 @@ private:
 class UpdateModelFilter : public QSortFilterProxyModel
 {
     Q_OBJECT
-    Q_PROPERTY(uint kindFilter READ kindFilter WRITE filterOnKind
-               NOTIFY kindFilterChanged)
-    Q_PROPERTY(bool installed READ installed WRITE filterOnInstalled
-               NOTIFY installedChanged)
-    Q_PROPERTY(int sortBy READ sortRole WRITE setSortRole NOTIFY sortRoleChanged)
-
 public:
-    explicit UpdateModelFilter(QObject *parent = 0);
-
-    // For testing, when we want to explicitly set the database path.
     explicit UpdateModelFilter(UpdateModel *model, QObject *parent = 0);
 
     uint kindFilter() const;

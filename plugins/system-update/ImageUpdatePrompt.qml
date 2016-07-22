@@ -23,7 +23,7 @@ Dialog {
     id: dialogueInstall
     objectName: "imagePrompt"
 
-    property bool havePowerForUpdate
+    property alias havePowerForUpdate: installBtn.visible
 
     signal requestSystemUpdate()
 
@@ -33,9 +33,9 @@ Dialog {
             : i18n.tr("Connect the device to power before installing the system update.")
 
     Button {
+        id: installBtn
         objectName: "imagePromptInstall"
         text: i18n.tr("Restart & Install")
-        visible: havePowerForUpdate
         color: UbuntuColors.orange
         onClicked: {
             dialogueInstall.requestSystemUpdate();

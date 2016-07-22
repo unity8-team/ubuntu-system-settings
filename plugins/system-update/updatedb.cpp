@@ -300,6 +300,16 @@ void UpdateDb::pruneDb()
     }
 }
 
+void UpdateDb::reset()
+{
+    QSqlQuery q(m_db);
+    q.prepare("DELETE FROM updates");
+
+    if (!q.exec()) {
+        qCritical() << "could not reset db" << q.lastError().text();
+    }
+}
+
 QDateTime UpdateDb::lastCheckDate()
 {
     QDateTime d;

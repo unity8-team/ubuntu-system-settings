@@ -33,6 +33,7 @@ public:
 
     Q_INVOKABLE void mockAddUpdate(const QString &id, const uint &revision,
                                    const uint &kind);
+    Q_INVOKABLE void reset();
 };
 
 class MockUpdateModelFilter: public UpdatePlugin::UpdateModelFilter

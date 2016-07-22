@@ -145,10 +145,10 @@ signals:
     void updateProgress(const int &percentage, const double &eta);
 
 private:
-    int m_downloadMode;
-    int m_targetBuildNumber;
-    int m_currentBuildNumber;
-    bool m_applyRequested;
+    int m_downloadMode = -1;
+    int m_targetBuildNumber = -1;
+    int m_currentBuildNumber = -1;
+    bool m_applyRequested = false;
 };
 
 #endif // MOCK_SYSTEMIMAGE_H

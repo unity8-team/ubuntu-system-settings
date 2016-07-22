@@ -47,7 +47,7 @@ add_library(UpdatePlugin SHARED
     updatedb.cpp
     updatemodel.cpp
 )
-qt5_use_modules(UpdatePlugin Core Network Sql)
+qt5_use_modules(UpdatePlugin Quick Core Network Sql)
 target_link_libraries(UpdatePlugin
     apt-pkg
     ${UAL_LDFLAGS}

@@ -25,6 +25,7 @@ import Ubuntu.SystemSettings.Update 1.0
 Item {
     id: g
 
+    property bool batchMode
     property int status // A SystemUpdate::Status
     property bool requireRestart: false
     property int updatesCount: 0
@@ -37,16 +38,14 @@ Item {
         case SystemUpdate.StatusServerError:
             return true;
         }
-        return updatesCount <= 1 && status === SystemUpdate.StatusIdle || !online;
+        return !online ||
+               (updatesCount <= 1 && status === SystemUpdate.StatusIdle)  ||
+               batchMode
     }
 
     signal stop()
-    signal pause()
     signal requestInstall()
     signal install()
-    signal resume()
-
-    // clip: true
 
     Behavior on height {
         UbuntuNumberAnimation {}
@@ -98,9 +97,11 @@ Item {
             margins: units.gu(2)
         }
         spacing: units.gu(2)
+
         Behavior on opacity {
             UbuntuNumberAnimation {}
         }
+
         opacity: visible ? 1 : 0
         visible: {
             var canInstall = g.status === SystemUpdate.StatusIdle;
@@ -129,38 +130,6 @@ Item {
             color: theme.palette.normal.positive
             strokeColor: "transparent"
         }
-    }
-
-    Button {
-        id: pause
-        objectName: "updatesGlobalPauseButton"
-        text: i18n.tr("Pause All")
-        anchors {
-            fill: parent
-            margins: units.gu(2)
-        }
-        visible: {
-            var batchMode = g.status === SystemUpdate.StatusBatchMode;
-            return batchMode && updatesCount >= 1;
-        }
-        onClicked: g.pause()
-    }
-
-    Button {
-        id: resume
-
-        anchors {
-            fill: parent
-            margins: units.gu(2)
-        }
-
-        objectName: "updatesGlobalResumeButton"
-        text: i18n.tr("Resume All")
-        visible: {
-            var batchModePaused = g.status === SystemUpdate.StatusBatchModePaused;
-            return batchModePaused && updatesCount >= 1;
-        }
-        onClicked: g.resume()
     }
 
     ListItems.ThinDivider {

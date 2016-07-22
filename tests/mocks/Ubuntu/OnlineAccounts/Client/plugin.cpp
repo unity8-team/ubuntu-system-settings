@@ -16,30 +16,14 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "MockUpdateModel.h"
+#include "plugin.h"
 
-#include <QSharedPointer>
+#include "MockSetup.h"
 
-void MockUpdateModel::mockAddUpdate(const QString &id, const uint &revision, const uint &kind)
+#include <QtQml>
+
+void BackendPlugin::registerTypes(const char *uri)
 {
-    using namespace UpdatePlugin;
-    QSharedPointer<Update> u = QSharedPointer<Update>(new Update);
-    u->setIdentifier(id);
-    u->setKind((Update::Kind) kind);
-    u->setRevision(revision);
-    u->setTitle(QString("Test App %1").arg(id));
-    u->setRemoteVersion(QString("v%1").arg(revision));
-    u->setBinaryFilesize(5000 * 1000);
-    add(u);
+    Q_ASSERT(uri == QLatin1String("Ubuntu.OnlineAccounts.Client"));
+    qmlRegisterType<OnlineAccountsClient::MockSetup>(uri, 0, 1, "Setup");
 }
-
-void MockUpdateModel::reset()
-{
-    UpdateModel::reset();
-}
-
-void MockUpdateModelFilter::mockSetSourceModel(MockUpdateModel *source)
-{
-    setSourceModel(source);
-}
-

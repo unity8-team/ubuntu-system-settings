@@ -41,12 +41,6 @@ ListItem.SingleValue {
 
     onClicked: main.loadPluginByName("system-update");
 
-    UpdateModelFilter {
-        id: updates
-        kindFilter: Update.KindClick
-        installed: false
-    }
-
     DownloadManager {
         onDownloadFinished: {
             SystemUpdate.model.setInstalled(
@@ -60,7 +54,7 @@ ListItem.SingleValue {
         width: 1
         height: 1
         id: updatesRep
-        model: updates
+        model: SystemUpdate.clickUpdates
         Item { width: 1; height: 1 }
     }
 

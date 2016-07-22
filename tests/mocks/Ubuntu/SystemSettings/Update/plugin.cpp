@@ -49,8 +49,7 @@ void BackendPlugin::registerTypes(const char *uri)
 
     qmlRegisterUncreatableType<MockUpdate>(uri, 1, 0, "Update", "Used for enums only.");
     qmlRegisterType<MockClickManager>(uri, 1, 0, "ClickManager");
-    qmlRegisterType<MockUpdateModel>(uri, 1, 0, "UpdateModel");
-    qmlRegisterType<MockUpdateModelFilter>(uri, 1, 0, "UpdateModelFilter");
 
     qmlRegisterSingletonType<MockSystemImage>(uri, 1, 0, "SystemImage", siSingletonProvider);
+    qRegisterMetaType<MockUpdateModel*>("UpdateModel*");
 }

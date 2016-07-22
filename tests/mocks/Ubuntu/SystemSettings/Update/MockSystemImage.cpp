@@ -20,10 +20,6 @@
 
 MockSystemImage::MockSystemImage(QObject *parent)
     : QObject(parent)
-    , m_downloadMode(-1)
-    , m_targetBuildNumber(-1)
-    , m_currentBuildNumber(-1)
-    , m_applyRequested(false)
 {
 }
 
@@ -48,7 +44,7 @@ QString MockSystemImage::pauseDownload()
 
 bool MockSystemImage::checkTarget() const
 {
-    return false;
+    return m_targetBuildNumber > m_currentBuildNumber;
 }
 
 QString MockSystemImage::deviceName() const
