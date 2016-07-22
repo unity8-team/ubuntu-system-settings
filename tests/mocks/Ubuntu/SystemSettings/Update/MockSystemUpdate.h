@@ -31,8 +31,6 @@ public:
 
     Q_INVOKABLE bool isCheckRequired();
     Q_INVOKABLE void mockIsCheckRequired(const bool isRequired); // mock only
-    Q_INVOKABLE void mockAddUpdate(const QString &id, const uint &revision,
-                                   const uint &kind); // Mock only
 
 protected:
     explicit MockSystemUpdate(MockUpdateModel *model, QObject *parent = 0);

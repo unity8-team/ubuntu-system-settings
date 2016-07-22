@@ -35,11 +35,6 @@ Item {
         SystemImageHandler {}
     }
 
-    Component {
-        id: mockModel
-        UpdateModel {}
-    }
-
     Repeater {
         id: updateRepeater
         delegate: ImageUpdateDelegate {
@@ -58,21 +53,17 @@ Item {
         when: windowShown
 
         property var instance: null
-        property var pendingModelInstance: null
 
         function init () {
-            pendingModelInstance = mockModel.createObject(testRoot, {
-                filter: UpdateModel.Pending
-            });
             instance = handler.createObject(testRoot, {
-                updateModel: pendingModelInstance
+                updateModel: SystemUpdate.model
             });
-            updateRepeater.model = pendingModelInstance;
+            updateRepeater.model = SystemUpdate.imageUpdates;
         }
 
         function cleanup () {
             instance.destroy();
-            pendingModelInstance.destroy();
+            SystemUpdate.model.reset();
         }
 
         function test_availableSignal_data() {
@@ -131,7 +122,7 @@ Item {
             SystemImage.setDownloadMode(data.downloadMode);
             SystemImage.mockAvailableStatus(data.isAvailable, data.downloading, data.availableVersion,
                                             data.updateSize, data.lastUpdateDate, data.errorReason);
-            tryCompare(pendingModelInstance, "count", data.isAvailable ? 1 : 0);
+
             var delegate = findChild(testRoot, "image-update-0");
 
             if (data.isAvailable) {
@@ -149,7 +140,7 @@ Item {
         function test_manualStart () {
             SystemImage.setDownloadMode(0);
             SystemImage.mockTargetBuildNumber(300);
-            pendingModelInstance.mockAddUpdate("ubuntu", 300, Update.KindImage);
+            SystemUpdate.model.mockAddUpdate("ubuntu", 300, Update.KindImage);
             SystemImage.mockStarted();
 
             var delegate = findChild(testRoot, "image-update-0");
@@ -159,7 +150,7 @@ Item {
         function test_automaticStart () {
             SystemImage.setDownloadMode(1);
             SystemImage.mockTargetBuildNumber(300);
-            pendingModelInstance.mockAddUpdate("ubuntu", 300, Update.KindImage);
+            SystemUpdate.model.mockAddUpdate("ubuntu", 300, Update.KindImage);
             SystemImage.mockStarted();
             var delegate = findChild(testRoot, "image-update-0");
             compare(delegate.updateState, Update.StateDownloadingAutomatically);
@@ -168,7 +159,7 @@ Item {
         function test_automaticProgress () {
             SystemImage.setDownloadMode(1);
             SystemImage.mockTargetBuildNumber(300);
-            pendingModelInstance.mockAddUpdate("ubuntu", 300, Update.KindImage);
+            SystemUpdate.model.mockAddUpdate("ubuntu", 300, Update.KindImage);
             SystemImage.mockProgress(50, 0); // pct, eta
             var delegate = findChild(testRoot, "image-update-0");
             var progressbar = findChild(delegate, "updateProgressbar");
@@ -180,7 +171,7 @@ Item {
         function test_manualProgress () {
             SystemImage.setDownloadMode(0);
             SystemImage.mockTargetBuildNumber(300);
-            pendingModelInstance.mockAddUpdate("ubuntu", 300, Update.KindImage);
+            SystemUpdate.model.mockAddUpdate("ubuntu", 300, Update.KindImage);
             SystemImage.mockProgress(50, 0); // pct, eta
             var delegate = findChild(testRoot, "image-update-0");
             var progressbar = findChild(delegate, "updateProgressbar");
@@ -192,7 +183,7 @@ Item {
         function test_automaticPause () {
             SystemImage.setDownloadMode(1);
             SystemImage.mockTargetBuildNumber(300);
-            pendingModelInstance.mockAddUpdate("ubuntu", 300, Update.KindImage);
+            SystemUpdate.model.mockAddUpdate("ubuntu", 300, Update.KindImage);
             SystemImage.mockPaused(50);
             var delegate = findChild(testRoot, "image-update-0");
             compare(delegate.updateState, Update.StateAutomaticDownloadPaused);
@@ -201,7 +192,7 @@ Item {
         function test_manualPause () {
             SystemImage.setDownloadMode(0);
             SystemImage.mockTargetBuildNumber(300);
-            pendingModelInstance.mockAddUpdate("ubuntu", 300, Update.KindImage);
+            SystemUpdate.model.mockAddUpdate("ubuntu", 300, Update.KindImage);
             SystemImage.mockPaused(50);
             var delegate = findChild(testRoot, "image-update-0");
             compare(delegate.updateState, Update.StateDownloadPaused);
@@ -211,7 +202,7 @@ Item {
         function test_downloaded () {
             SystemImage.setDownloadMode(0);
             SystemImage.mockTargetBuildNumber(300);
-            pendingModelInstance.mockAddUpdate("ubuntu", 300, Update.KindImage);
+            SystemUpdate.model.mockAddUpdate("ubuntu", 300, Update.KindImage);
             SystemImage.mockDownloaded();
             var delegate = findChild(testRoot, "image-update-0");
             compare(delegate.updateState, Update.StateDownloaded);
@@ -219,7 +210,7 @@ Item {
 
         function test_failed () {
             SystemImage.mockTargetBuildNumber(300);
-            pendingModelInstance.mockAddUpdate("ubuntu", 300, Update.KindImage);
+            SystemUpdate.model.mockAddUpdate("ubuntu", 300, Update.KindImage);
             SystemImage.mockFailed(3, "fail");
             var delegate = findChild(testRoot, "image-update-0");
             compare(delegate.updateState, Update.StateFailed);
@@ -231,11 +222,11 @@ Item {
         function test_multiplePendingUpdates() {
             SystemImage.setDownloadMode(0);
             SystemImage.mockTargetBuildNumber(300);
-            pendingModelInstance.mockAddUpdate("ubuntu", 300, Update.KindImage);
+            SystemUpdate.model.mockAddUpdate("ubuntu", 300, Update.KindImage);
             SystemImage.mockAvailableStatus(true, false, 301,
                                             5000 * 1000, null, null);
             SystemImage.mockCurrentBuildNumber(300);
-            compare(pendingModelInstance.count, 1);
+            compare(updateRepeater.count, 1);
         }
     }
 }

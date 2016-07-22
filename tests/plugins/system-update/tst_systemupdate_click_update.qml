@@ -54,7 +54,7 @@ Item {
 
         function test_waitForDownload() {
             instance.updateState = Update.StateQueuedForDownload;
-            compare(instance.progress, -1);
+            tryCompare(instance, "progress", -1);
         }
     }
 }
