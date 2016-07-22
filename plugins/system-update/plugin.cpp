@@ -51,4 +51,5 @@ void BackendPlugin::registerTypes(const char *uri)
     );
     qmlRegisterType<Click::Manager>(uri, 1, 0, "ClickManager");
     qRegisterMetaType<UpdateModel*>("UpdateModel*");
+    qRegisterMetaType<UpdateModelFilter*>("UpdateModelFilter*");
 }

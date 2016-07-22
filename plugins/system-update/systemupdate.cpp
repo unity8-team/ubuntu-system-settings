@@ -86,25 +86,25 @@ UpdateModel* SystemUpdate::updates()
     return m_model;
 }
 
-QSortFilterProxyModel* SystemUpdate::pendingUpdates() const
+UpdateModelFilter* SystemUpdate::pendingUpdates() const
 {
     QQmlEngine::setObjectOwnership(m_pending, QQmlEngine::CppOwnership);
     return m_pending;
 }
 
-QSortFilterProxyModel* SystemUpdate::clickUpdates() const
+UpdateModelFilter* SystemUpdate::clickUpdates() const
 {
     QQmlEngine::setObjectOwnership(m_clicks, QQmlEngine::CppOwnership);
     return m_clicks;
 }
 
-QSortFilterProxyModel* SystemUpdate::imageUpdates() const
+UpdateModelFilter* SystemUpdate::imageUpdates() const
 {
     QQmlEngine::setObjectOwnership(m_images, QQmlEngine::CppOwnership);
     return m_images;
 }
 
-QSortFilterProxyModel* SystemUpdate::installedUpdates() const
+UpdateModelFilter* SystemUpdate::installedUpdates() const
 {
     QQmlEngine::setObjectOwnership(m_installed, QQmlEngine::CppOwnership);
     return m_installed;

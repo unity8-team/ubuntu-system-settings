@@ -30,10 +30,10 @@ class SystemUpdate : public QObject
     Q_OBJECT
     Q_ENUMS(Status)
     Q_PROPERTY(UpdateModel* model READ updates CONSTANT)
-    Q_PROPERTY(QSortFilterProxyModel* pendingUpdates READ pendingUpdates CONSTANT)
-    Q_PROPERTY(QSortFilterProxyModel* clickUpdates READ clickUpdates CONSTANT)
-    Q_PROPERTY(QSortFilterProxyModel* imageUpdates READ imageUpdates CONSTANT)
-    Q_PROPERTY(QSortFilterProxyModel* installedUpdates READ installedUpdates CONSTANT)
+    Q_PROPERTY(UpdateModelFilter* pendingUpdates READ pendingUpdates CONSTANT)
+    Q_PROPERTY(UpdateModelFilter* clickUpdates READ clickUpdates CONSTANT)
+    Q_PROPERTY(UpdateModelFilter* imageUpdates READ imageUpdates CONSTANT)
+    Q_PROPERTY(UpdateModelFilter* installedUpdates READ installedUpdates CONSTANT)
 public:
     static SystemUpdate *instance();
     static void destroyInstance();
@@ -49,10 +49,10 @@ public:
     };
 
     UpdateModel* updates();
-    QSortFilterProxyModel* pendingUpdates() const;
-    QSortFilterProxyModel* clickUpdates() const;
-    QSortFilterProxyModel* imageUpdates() const;
-    QSortFilterProxyModel* installedUpdates() const;
+    UpdateModelFilter* pendingUpdates() const;
+    UpdateModelFilter* clickUpdates() const;
+    UpdateModelFilter* imageUpdates() const;
+    UpdateModelFilter* installedUpdates() const;
 
     /* Qt recommend only one QNetworkAccessManager per application,
     and it is provided here. */
