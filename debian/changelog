@@ -1,3 +1,13 @@
+ubuntu-system-settings (0.4+16.10.20160708-0ubuntu1) yakkety; urgency=medium
+
+  [ Arthur Mello ]
+  * Implement extended Notifications panel using Gsettings to store
+    notifications settings for each app
+  * Skip tests on arm64 as it is known to be flaky with current
+    configuration
+
+ -- Arthur Renato Mello <arthur.mello@canonical.com>  Fri, 08 Jul 2016 22:19:17 +0000
+
 ubuntu-system-settings (0.4+16.10.20160624-0ubuntu1) yakkety; urgency=medium
 
   [ Antti Kaijanmäki ]
