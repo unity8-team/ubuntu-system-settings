@@ -1,6 +1,7 @@
 include(QmlTest)
 
 add_subdirectory(bluetooth)
+add_subdirectory(notifications)
 add_subdirectory(security-privacy)
 add_subdirectory(system-update)
 

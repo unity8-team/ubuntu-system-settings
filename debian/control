@@ -36,6 +36,7 @@ Build-Depends: dbus-test-runner,
                qtdeclarative5-quicklayouts-plugin,
                libapt-pkg-dev,
                libgnome-desktop-3-dev,
+               libgsettings-qt-dev,
 # test-deps
                dpkg-dev,
                qml-module-qttest,
