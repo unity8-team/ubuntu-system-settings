@@ -34,16 +34,16 @@ file(COPY
 #     DESTINATION
 #     ${CMAKE_CURRENT_BINARY_DIR})
 
-add_executable(tst-systemupdate-click_client
-    tst_click_client.cpp
-)
-add_test(tst-systemupdate-click_client tst-systemupdate-click_client)
-set_tests_properties(
-    tst-systemupdate-click_client
-        PROPERTIES
-        ENVIRONMENT "IGNORE_CREDENTIALS=1;URL_APPS=http://127.0.0.1:9009/metadata"
-)
-target_link_libraries(tst-systemupdate-click_client ${PLUGIN_LIBS})
+# add_executable(tst-systemupdate-click_client
+#     tst_click_client.cpp
+# )
+# add_test(tst-systemupdate-click_client tst-systemupdate-click_client)
+# set_tests_properties(
+#     tst-systemupdate-click_client
+#         PROPERTIES
+#         ENVIRONMENT "IGNORE_CREDENTIALS=1;URL_APPS=http://127.0.0.1:9009/metadata"
+# )
+# target_link_libraries(tst-systemupdate-click_client ${PLUGIN_LIBS})
 
 add_executable(tst-systemupdate-click_token_downloader
     tst_click_token_downloader.cpp
