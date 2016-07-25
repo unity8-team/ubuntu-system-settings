@@ -60,8 +60,8 @@ signals:
     void credentialError();
 
 private:
-    bool m_authenticated;
-    bool m_checking;
+    bool m_authenticated = false;
+    bool m_checking = false;
 };
 
 #endif // MOCK_CLICK_MANAGER_H

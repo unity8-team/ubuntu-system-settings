@@ -233,7 +233,6 @@ ItemPage {
                         objectName: "updatesImageDelegate-" + index
                         width: imageUpdateCol.width
                         updateState: model.updateState
-                        kind: model.kind
                         progress: model.progress
                         version: remoteVersion
                         size: model.size
@@ -269,7 +268,6 @@ ItemPage {
                         objectName: "updatesClickUpdate" + index
                         width: clickUpdatesCol.width
                         updateState: model.updateState
-                        kind: model.kind
                         progress: model.progress
                         version: remoteVersion
                         size: model.size

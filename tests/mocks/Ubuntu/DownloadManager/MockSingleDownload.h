@@ -39,7 +39,6 @@ class MockSingleDownload : public QObject
     Q_PROPERTY(QString hash READ hash WRITE setHash NOTIFY hashChanged)
     Q_PROPERTY(QString algorithm READ algorithm WRITE setAlgorithm NOTIFY algorithmChanged)
 
-
  public:
     explicit MockSingleDownload(QObject *parent = 0);
 
@@ -78,7 +77,6 @@ class MockSingleDownload : public QObject
     Q_INVOKABLE void mockProcess(); // mock only
     Q_INVOKABLE void mockStart(); // mock only
 
-
  signals:
     void isCompletedChanged();
     void allowMobileDownloadChanged();
@@ -101,15 +99,15 @@ class MockSingleDownload : public QObject
     void errorChanged();
 
 private:
-    QString m_errorMessage;
-    bool m_downloading;
-    int m_progress;
+    QString m_errorMessage = QString::null;
+    bool m_downloading = false;
+    bool m_completed = false;
+    int m_progress = 0;
     MockMetadata * m_metadata;
     QVariantMap m_headers;
-    bool m_autostart;
-    QString m_hash;
-    QString m_algorithm;
-
+    bool m_autostart = false;
+    QString m_hash = QString::null;
+    QString m_algorithm = QString::null;
 };
 
 #endif // MOCK_SINGLEDOWNLOAD_H

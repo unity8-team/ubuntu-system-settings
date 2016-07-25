@@ -22,10 +22,9 @@ import Ubuntu.DownloadManager 1.2
 Item {
     id: root
     property var updateModel
-    property alias downloads: udm.downloads
-
-    DownloadManager {
-        id: udm
+    property alias downloads: downloadManager.downloads
+    property var udm: DownloadManager {
+        id: downloadManager
         onDownloadFinished: {
             updateModel.setInstalled(download.metadata.custom.identifier,
                                      download.metadata.custom.revision);
@@ -56,6 +55,8 @@ Item {
         for (var i = 0; i<downloads.length; i++) {
             dl = downloads[i];
             if (!dl._bound) {
+                /* We only bind progress as UDM should receive signals for all
+                other events pertinent to a download. */
                 dl.progressChanged.connect(onDownloadProgress.bind(dl));
                 dl._bound = true;
             }
@@ -101,7 +102,7 @@ Item {
         if (existingDownload !== null &&
             !existingDownload.errorMessage &&
             !existingDownload.isCompleted) {
-            return;
+            return null;
         }
 
         var metadata = {
@@ -128,46 +129,21 @@ Item {
             "identifier": click.identifier
         });
         singleDownloadObj.download(click.downloadUrl);
+        return singleDownloadObj;
     }
 
-    function onDownloadProgress (progress) {
+    function onDownloadProgress(progress) {
         updateModel.setProgress(this.metadata.custom.identifier,
                                 this.metadata.custom.revision,
                                 this.progress);
     }
 
-    function resumeAll() {
-        var dl, id, rev;
-        for (var i = 0; i < udm.downloads.length; i++) {
-            dl = udm.downloads[i];
-            id = dl.metadata.custom.identifier;
-            rev = dl.metadata.custom.revision;
-            if (id && (typeof rev !== "undefined")) {
-                dl.resume();
-                updateModel.resumeUpdate(id, rev);
-            }
-        }
-    }
-
-    function pauseAll() {
-        var dl, id, rev;
-        for (var i = 0; i < udm.downloads.length; i++) {
-            dl = udm.downloads[i];
-            id = dl.metadata.custom.identifier;
-            rev = dl.metadata.custom.revision;
-            if (id && (typeof rev !== "undefined")) {
-                dl.pause();
-                updateModel.pauseUpdate(id, rev);
-            }
-        }
-    }
-
     /* If a update's model has a downloadId, check if UDM knows it. If not,
     treat this as a failure. Workaround for lp:1603770. */
-    function assertDownloadExist(model) {
-        if (!getDownloadFor(model)) {
+    function assertDownloadExist(click) {
+        if (!getDownloadFor(click)) {
             updateModel.setError(
-                model.identifier, model.revision,
+                click.identifier, click.revision,
                 i18n.tr("Download timed out. Please try again later.")
             );
         }
@@ -175,8 +151,8 @@ Item {
 
     Component {
         id: sdl
-
         SingleDownload {
+            objectName: "singleDownload"
             property bool _bound: true
 
             onDownloadIdChanged: {

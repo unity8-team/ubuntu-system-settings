@@ -14,9 +14,9 @@ add_qml_test(mouse mouse
 )
 
 set(SYSTEMUPDATE_IMPORT_PATHS
-  ${CMAKE_SOURCE_DIR}/src
-  ${CMAKE_BINARY_DIR}/tests/utils/modules
-  ${CMAKE_BINARY_DIR}/tests/mocks/
+    ${CMAKE_SOURCE_DIR}/src
+    ${CMAKE_BINARY_DIR}/tests/utils/modules
+    ${CMAKE_BINARY_DIR}/tests/mocks/
     ${CMAKE_SOURCE_DIR}/tests/plugins/system-update
 )
 
@@ -25,10 +25,6 @@ add_qml_test(system-update systemupdate_update
 )
 
 add_qml_test(system-update systemupdate_click_update
-    IMPORT_PATHS ${SYSTEMUPDATE_IMPORT_PATHS}
-)
-
-add_qml_test(system-update systemupdate_image_update
     IMPORT_PATHS ${SYSTEMUPDATE_IMPORT_PATHS}
 )
 
@@ -49,5 +45,9 @@ add_qml_test(system-update systemupdate_noauthentication
 )
 
 add_qml_test(system-update systemupdate_systemimage_handler
+    IMPORT_PATHS ${SYSTEMUPDATE_IMPORT_PATHS}
+)
+
+add_qml_test(system-update systemupdate_download_handler
     IMPORT_PATHS ${SYSTEMUPDATE_IMPORT_PATHS}
 )

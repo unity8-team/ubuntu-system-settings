@@ -21,52 +21,51 @@
 
 MockSingleDownload::MockSingleDownload(QObject *parent)
     : QObject(parent)
-    , m_errorMessage("")
-    , m_downloading(false)
-    , m_progress(0)
     , m_metadata(new MockMetadata)
     , m_headers()
-    , m_autostart(false)
-    , m_hash("")
-    , m_algorithm("")
 {
 }
 
 void MockSingleDownload::start()
 {
-    Q_EMIT (started(true));
+    m_downloading = true;
+    Q_EMIT started(true);
 }
 
 void MockSingleDownload::pause()
 {
-    Q_EMIT (started(true));
-
+    m_downloading = false;
+    Q_EMIT started(true);
 }
 
 void MockSingleDownload::resume()
 {
-    Q_EMIT (resumed(true));
+    m_downloading = true;
+    Q_EMIT resumed(true);
 }
 
 void MockSingleDownload::cancel()
 {
-    Q_EMIT (canceled(true));
+    m_downloading = false;
+    m_completed = true;
+    Q_EMIT canceled(true);
 
 }
 
 void MockSingleDownload::download(QString url)
 {
+    Q_UNUSED(url)
     m_downloading = true;
 }
 
 void MockSingleDownload::startDownload()
 {
-
+    m_downloading = true;
 }
 
 bool MockSingleDownload::isCompleted() const
 {
-    return false;
+    return m_completed;
 }
 
 QString MockSingleDownload::errorMessage() const
@@ -76,7 +75,7 @@ QString MockSingleDownload::errorMessage() const
 
 bool MockSingleDownload::allowMobileDownload() const
 {
-
+    return false;
 }
 
 int MockSingleDownload::progress() const
@@ -91,7 +90,7 @@ bool MockSingleDownload::downloading() const
 
 bool MockSingleDownload::downloadInProgress() const
 {
-    return false;
+    return m_downloading;
 }
 
 bool MockSingleDownload::autoStart() const
@@ -101,7 +100,7 @@ bool MockSingleDownload::autoStart() const
 
 QString MockSingleDownload::downloadId() const
 {
-    return "42";
+    return "test";
 }
 
 QVariantMap MockSingleDownload::headers() const
@@ -116,13 +115,13 @@ MockMetadata * MockSingleDownload:: metadata()
 
 void MockSingleDownload::setAllowMobileDownload(bool value)
 {
-
+    Q_UNUSED(value)
 }
 
 void MockSingleDownload::setHeaders(const QVariantMap headers)
 {
     m_headers = headers;
-    Q_EMIT(metadataChanged());
+    Q_EMIT metadataChanged();
 }
 
 void MockSingleDownload::setMetadata(const MockMetadata * metadata)
@@ -139,48 +138,49 @@ void MockSingleDownload::setAutoStart(bool value)
 void MockSingleDownload::mockErrorMessage(const QString &error)
 {
     m_errorMessage = error;
-    Q_EMIT (errorChanged());
+    m_completed = true;
+    Q_EMIT errorChanged();
 }
 
 void MockSingleDownload::mockFinished()
 {
     m_downloading = false;
-
-    Q_EMIT (finished("/path/to/download"));
+    m_completed = true;
+    Q_EMIT finished("/path/to/download");
 }
 
 void MockSingleDownload::mockProgress(const int &progress)
 {
     m_progress = progress;
-    Q_EMIT (progressChanged());
+    Q_EMIT progressChanged();
 }
 
 void MockSingleDownload::mockDownloading(const bool downloading)
 {
     m_downloading = downloading;
-    Q_EMIT (downloadingChanged());
+    Q_EMIT downloadingChanged();
 }
 
 void MockSingleDownload::mockPause()
 {
     m_downloading = false;
-    Q_EMIT (paused(true));
+    Q_EMIT paused(true);
 }
 
 void MockSingleDownload::mockResume()
 {
     m_downloading = true;
-    Q_EMIT (resumed(true));
+    Q_EMIT resumed(true);
 }
 
 void MockSingleDownload::mockProcess()
 {
-    Q_EMIT (processing("/path/to/download"));
+    Q_EMIT processing("/path/to/download");
 }
 
 void MockSingleDownload::mockStart()
 {
-    Q_EMIT (started(true));
+    Q_EMIT started(true);
 }
 
 QString MockSingleDownload::hash() const
@@ -196,13 +196,11 @@ QString MockSingleDownload::algorithm() const
 void MockSingleDownload::setHash(const QString &value)
 {
     m_hash = value;
-    Q_EMIT (hashChanged());
+    Q_EMIT hashChanged();
 }
 
 void MockSingleDownload::setAlgorithm(const QString &value)
 {
     m_algorithm = value;
-    Q_EMIT (algorithmChanged());
+    Q_EMIT algorithmChanged();
 }
-
-

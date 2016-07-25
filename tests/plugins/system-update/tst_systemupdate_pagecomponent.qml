@@ -269,8 +269,20 @@ Item {
         }
 
         // Test when an image update is not even Downloaded.
-        function test_batchModeWithDownloadInstallImageUpdate() {
+        function test_clicksAndImageNotDownloaded() {
+            SystemUpdate.model.mockAddUpdate("ubuntu", 1, Update.KindImage);
+            findChild(instance, "global").requestInstall();
 
+            tryCompareFunction(function () {
+                return !!findChild(testRoot, "imagePrompt")
+            }, true);
+
+            var btn = findChild(testRoot, "imagePromptInstall");
+            mouseClick(btn, btn.width / 2, btn.height / 2);
+
+            tryCompareFunction(function () {
+                return !!findChild(testRoot, "imagePrompt")
+            }, false);
         }
     }
 }

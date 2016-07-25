@@ -16,12 +16,9 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "MockClickManager.h"
-#include <QDebug>
 
 MockClickManager::MockClickManager(QObject *parent)
     : QObject(parent)
-    , m_authenticated(false)
-    , m_checking(false)
 {
 }
 
@@ -32,6 +29,7 @@ void MockClickManager::check()
 
 void MockClickManager::check(const QString &packageName)
 {
+    Q_UNUSED(packageName)
 }
 
 void MockClickManager::cancel()
@@ -41,6 +39,8 @@ void MockClickManager::cancel()
 
 void MockClickManager::clickUpdateInstalled(const QString &packageName, const int &revision)
 {
+    Q_UNUSED(packageName)
+    Q_UNUSED(revision)
 }
 
 bool MockClickManager::authenticated()
@@ -51,25 +51,25 @@ bool MockClickManager::authenticated()
 void MockClickManager::mockCheckStarted()
 {
     check();
-    Q_EMIT (checkStarted());
+    Q_EMIT checkStarted();
 }
 
 void MockClickManager::mockCheckComplete()
 {
     cancel();
-    Q_EMIT (checkCompleted());
+    Q_EMIT checkCompleted();
 }
 
 void MockClickManager::mockCheckCanceled()
 {
     cancel();
-    Q_EMIT (checkCanceled());
+    Q_EMIT checkCanceled();
 }
 
 void MockClickManager::mockCheckFailed()
 {
     cancel();
-    Q_EMIT (checkFailed());
+    Q_EMIT checkFailed();
 }
 
 void MockClickManager::mockAuthenticated(const bool authenticated)
@@ -80,17 +80,17 @@ void MockClickManager::mockAuthenticated(const bool authenticated)
 
 void MockClickManager::mockNetworkError()
 {
-    Q_EMIT (networkError());
+    Q_EMIT networkError();
 }
 
 void MockClickManager::mockServerError()
 {
-    Q_EMIT (serverError());
+    Q_EMIT serverError();
 }
 
 void MockClickManager::mockCredentialError()
 {
-    Q_EMIT (credentialError());
+    Q_EMIT credentialError();
 }
 
 bool MockClickManager::isChecking() const

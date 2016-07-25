@@ -46,6 +46,11 @@ public:
     Q_INVOKABLE void mockDownload(MockSingleDownload *download); // mock only
     Q_INVOKABLE void mockDownloadFinished(MockSingleDownload *download,
                                           const QString &path); // mock only
+    Q_INVOKABLE void mockDownloadPaused(MockSingleDownload *download); // mock only
+    Q_INVOKABLE void mockDownloadResumed(MockSingleDownload *download); // mock only
+    Q_INVOKABLE void mockDownloadCanceled(MockSingleDownload *download); // mock only
+    Q_INVOKABLE void mockErrorFound(MockSingleDownload *download,
+                                    const QString &error); // mock only
 
 signals:
     void errorChanged();
