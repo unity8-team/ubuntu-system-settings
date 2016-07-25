@@ -52,4 +52,5 @@ void BackendPlugin::registerTypes(const char *uri)
 
     qmlRegisterSingletonType<MockSystemImage>(uri, 1, 0, "SystemImage", siSingletonProvider);
     qRegisterMetaType<MockUpdateModel*>("UpdateModel*");
+    qRegisterMetaType<MockUpdateModelFilter*>("UpdateModelFilter*");
 }
