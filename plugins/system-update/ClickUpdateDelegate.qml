@@ -21,7 +21,6 @@ import Ubuntu.SystemSettings.Update 1.0
 
 UpdateDelegate {
     id: update
-    kind: Update.KindClick
 
     property bool automatic: false
 

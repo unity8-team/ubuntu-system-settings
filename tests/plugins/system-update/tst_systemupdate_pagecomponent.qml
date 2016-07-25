@@ -285,4 +285,12 @@ Item {
             }, false);
         }
     }
+
+    function test_networkError() {
+
+    }
+
+    function test_serverError() {
+
+    }
 }

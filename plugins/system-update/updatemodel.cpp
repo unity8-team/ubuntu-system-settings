@@ -513,19 +513,17 @@ void UpdateModel::setImageUpdate(const QString &id, const QString &version,
         revision = 0;
     }
     u->setProgress(0);
+    u->setTitle("Ubuntu");
     u->setRevision(revision);
     u->setBinaryFilesize((int) updateSize);
     u->setRemoteVersion(version);
     u->setState(Update::State::StateAvailable);
+    u->setIconUrl(QLatin1String(
+        "file:///usr/share/icons/suru/places/scalable/distributor-logo.svg"
+    ));
 
     m_db->add(u);
 }
-
-// UpdateModelFilter::UpdateModelFilter(QObject *parent)
-//     : QSortFilterProxyModel(parent)
-// {
-//     setSourceModel(SystemUpdate::instance()->updates());
-// }
 
 UpdateModelFilter::UpdateModelFilter(UpdateModel *model, QObject *parent)
     : QSortFilterProxyModel(parent)
@@ -597,16 +595,4 @@ bool UpdateModelFilter::filterAcceptsRow(int sourceRow,
 
     return accepts;
 }
-
-// bool UpdateModelFilter::lessThan(const QModelIndex &left,
-//                             const QModelIndex &right) const
-// {
-//   qWarning() << "LTE";
-//   const QString a = sourceModel()->data(left,
-//                                         UpdateModel::TitleRole).toString();
-//   const QString b = sourceModel()->data(right,
-//                                         UpdateModel::TitleRole).toString();
-//   qWarning() << a << "vs" << b;
-//   return a < b;
-// }
 } // UpdatePlugin

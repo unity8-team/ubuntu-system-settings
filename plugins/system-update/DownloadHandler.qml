@@ -53,6 +53,9 @@ Item {
     function restoreDownloads() {
         var dl;
         for (var i = 0; i<downloads.length; i++) {
+            console.warn('restoreDownloads', i,
+                         downloads[i].metadata.custom.identifier,
+                         downloads[i].metadata.custom.revision)
             dl = downloads[i];
             if (!dl._bound) {
                 /* We only bind progress as UDM should receive signals for all

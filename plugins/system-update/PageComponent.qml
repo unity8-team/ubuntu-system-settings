@@ -93,8 +93,8 @@ ItemPage {
         onCheckCompleted: SystemUpdate.checkCompleted()
 
         // These states are final and thus break the binding.
-        onNetworkError: updates.status = SystemUpdate.StatusNetworkError
-        onServerError: updates.status = SystemUpdate.StatusServerError
+        onNetworkError: status = SystemUpdate.StatusNetworkError
+        onServerError: status = SystemUpdate.StatusServerError
     }
 
     Setup {
@@ -238,6 +238,9 @@ ItemPage {
                         size: model.size
                         changelog: model.changelog
                         error: model.error
+                        kind: model.kind
+                        iconUrl: model.iconUrl
+                        name: title
 
                         onRetry: SystemImage.downloadUpdate();
                         onDownload: SystemImage.downloadUpdate();
@@ -273,6 +276,7 @@ ItemPage {
                         size: model.size
                         name: title
                         iconUrl: model.iconUrl
+                        kind: model.kind
                         changelog: model.changelog
                         error: model.error
                         automatic: model.automatic
@@ -297,7 +301,7 @@ ItemPage {
                         after some time. Workaround for lp:1603770. */
                         Timer {
                             id: downloadTimeout
-                            interval: 1000
+                            interval: 30000
                             running: true
                             onTriggered: {
                                 if (model.downloadId) {
@@ -337,7 +341,7 @@ ItemPage {
 
                     delegate: UpdateDelegate {
                         objectName: "installedUpdate-" + index
-                        width: installed.width
+                        anchors { left: parent.left; right: parent.right }
                         version: remoteVersion
                         size: model.size
                         name: title
