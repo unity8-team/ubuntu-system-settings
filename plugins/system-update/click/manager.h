@@ -64,12 +64,12 @@ public:
     bool checkingForUpdates() const;
 
 private slots:
-    void handleManifestSuccess(const QJsonArray &manifest);
+    void parseMetadata(const QJsonArray &array);
+    void handleManifest(const QJsonArray &manifest);
     void handleManifestFailure();
-    void handleMetadataSuccess(const QByteArray &metadata);
     void handleTokenDownload(QSharedPointer<Update> update);
     void handleTokenDownloadFailure(QSharedPointer<Update> update);
-    void handleCredentialsFound(const UbuntuOne::Token &token);
+    void handleCredentials(const UbuntuOne::Token &token);
     void handleCredentialsFailed();
     void handleCommunicationErrors();
     void handleCheckStart() { setCheckingForUpdates(true); }
@@ -99,7 +99,7 @@ private:
     void initTokenDownloader(const Click::TokenDownloader *downloader);
 
     void requestMetadata();
-    void parseMetadata(const QJsonArray &array);
+    QList<QSharedPointer<Update> > parseManifest(const QJsonArray &manifest);
 
     void completionCheck();
 
@@ -109,7 +109,7 @@ private:
     Click::TokenDownloaderFactory *m_downloadFactory;
     UpdateModel *m_model;
 
-    QHash<QString, QSharedPointer<Update>> m_updates;
+    QHash<QString, QSharedPointer<Update>> m_candidates;
     UbuntuOne::Token m_authToken;
     bool m_authenticated = true;
     bool m_checking = false;

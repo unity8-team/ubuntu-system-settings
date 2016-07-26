@@ -50,6 +50,7 @@ private:
     void initializeReply(QNetworkReply *reply);
     bool validReply(const QNetworkReply *reply);
     void initializeNam();
+    void handleMetadataReply(QNetworkReply *reply);
 
     UpdatePlugin::Network::Manager *m_nam;
 };

@@ -20,7 +20,6 @@
 #define FAKE_CLICK_CLIENT_H
 
 #include "click/client.h"
-#include <QDebug>
 
 class MockClient : public UpdatePlugin::Click::Client
 {
@@ -46,7 +45,7 @@ public:
         requestedUrl = url;
     }
 
-    void mockMetadataRequestSucceeded(const QByteArray &metadata)
+    void mockMetadataRequestSucceeded(const QJsonArray &metadata)
     {
         Q_EMIT metadataRequestSucceeded(metadata);
     }

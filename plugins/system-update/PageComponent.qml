@@ -92,7 +92,6 @@ ItemPage {
         id: clickManager
         onCheckCompleted: SystemUpdate.checkCompleted()
 
-        // These states are final and thus break the binding.
         onNetworkError: status = SystemUpdate.StatusNetworkError
         onServerError: status = SystemUpdate.StatusServerError
     }
@@ -423,6 +422,11 @@ ItemPage {
                 imageHandler.download();
             }
         }
+    }
+
+    Connections {
+        target: NetworkingStatus
+        onOnlineChanged: root.cancelChecks()
     }
 
     Component {

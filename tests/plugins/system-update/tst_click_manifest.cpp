@@ -30,6 +30,8 @@
 
 using namespace UpdatePlugin;
 
+Q_DECLARE_METATYPE(QProcess::ProcessError)
+
 class TstClickManifest
     : public QObject
 {
@@ -54,6 +56,41 @@ private slots:
         QJsonArray res = args.at(0).toJsonArray();
         QCOMPARE(res.size(), 4); // See click.result
     }
+    void testFailedProcess_data()
+    {
+        QTest::addColumn<QProcess::ProcessError>("error");
+        QTest::newRow("Failed to start") << QProcess::FailedToStart;
+        QTest::newRow("Crashed") << QProcess::Crashed;
+        QTest::newRow("Timed out") << QProcess::Timedout;
+        QTest::newRow("Write error") << QProcess::WriteError;
+        QTest::newRow("Read error") << QProcess::ReadError;
+        QTest::newRow("Unknown error") << QProcess::UnknownError;
+    }
+    void testFailedProcess()
+    {
+        QFETCH(QProcess::ProcessError, error);
+        connect(
+            this, SIGNAL(mockProcessError(const QProcess::ProcessError&)),
+            m_instance, SLOT(handleProcessError(const QProcess::ProcessError&))
+        );
+        QSignalSpy requestFailedSpy(m_instance, SIGNAL(requestFailed()));
+        Q_EMIT mockProcessError(error);
+        QTRY_COMPARE(requestFailedSpy.count(), 1);
+    }
+    void testFailedParsing()
+    {
+        /* The process will not be open for reading, so the parsing fails. */
+        connect(
+            this, SIGNAL(mockProcessSuccess(const int&)),
+            m_instance, SLOT(handleProcessSuccess(const int&))
+        );
+        QSignalSpy requestFailedSpy(m_instance, SIGNAL(requestFailed()));
+        Q_EMIT mockProcessSuccess(0);
+        QTRY_COMPARE(requestFailedSpy.count(), 1);
+    }
+Q_SIGNALS:
+    void mockProcessSuccess(const int&);
+    void mockProcessError(const QProcess::ProcessError&);
 private:
     Click::ManifestImpl *m_instance = nullptr;
 };

@@ -23,7 +23,7 @@
 #include <QList>
 #include <QString>
 #include <QUrl>
-#include <QByteArray>
+#include <QJsonArray>
 
 namespace UpdatePlugin
 {
@@ -42,7 +42,7 @@ public:
     virtual void requestToken(const QUrl &url) = 0;
 
 signals:
-    void metadataRequestSucceeded(const QByteArray &metadata);
+    void metadataRequestSucceeded(const QJsonArray &metadata);
     void tokenRequestSucceeded(const QString &token);
     void networkError();
     void serverError();

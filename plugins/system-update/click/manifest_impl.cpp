@@ -64,22 +64,22 @@ void ManifestImpl::handleProcessError(const QProcess::ProcessError &error)
     QString err;
     switch (error) {
     case QProcess::FailedToStart:
-        err = "FailedToStart";
+        err = "Failed to start";
         break;
     case QProcess::Crashed:
         err = "Crashed";
         break;
     case QProcess::Timedout:
-        err = "Timedout";
+        err = "Timed out";
         break;
     case QProcess::WriteError:
-        err = "WriteError";
+        err = "Write error";
         break;
     case QProcess::ReadError:
-        err = "ReadError";
+        err = "Read error";
         break;
     case QProcess::UnknownError:
-        err = "UnknownError";
+        err = "Unknown error";
         break;
     }
     qCritical() << Q_FUNC_INFO << "Manifest failed to execute process:" << err;

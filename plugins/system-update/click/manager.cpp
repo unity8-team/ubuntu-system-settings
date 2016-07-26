@@ -73,7 +73,13 @@ Manager::Manager(Click::Client *client,
 void Manager::init()
 {
     initClient();
+
     initManifest();
+    /* We use the manifest as a source of information on what state apps are
+    in. I.e. if we have a pending update's remote version matching that of an
+    app in the manifest; we can make assumptions about that update's state. */
+    m_manifest->request();
+
     initSSO();
 
     connect(this, SIGNAL(checkStarted()), this, SLOT(handleCheckStart()));
@@ -98,8 +104,8 @@ void Manager::initTokenDownloader(const Click::TokenDownloader *downloader)
 
 void Manager::initClient()
 {
-    connect(m_client, SIGNAL(metadataRequestSucceeded(const QByteArray&)),
-            this, SLOT(handleMetadataSuccess(const QByteArray&)));
+    connect(m_client, SIGNAL(metadataRequestSucceeded(const QJsonArray&)),
+            this, SLOT(parseMetadata(const QJsonArray&)));
     connect(m_client, SIGNAL(serverError()),
             this, SLOT(handleCommunicationErrors()));
     connect(m_client, SIGNAL(networkError()),
@@ -119,7 +125,7 @@ void Manager::initClient()
 void Manager::initManifest()
 {
     connect(m_manifest, SIGNAL(requestSucceeded(const QJsonArray&)),
-            this, SLOT(handleManifestSuccess(const QJsonArray&)));
+            this, SLOT(handleManifest(const QJsonArray&)));
     connect(m_manifest, SIGNAL(requestFailed()),
             this, SLOT(handleManifestFailure()));
 }
@@ -127,13 +133,18 @@ void Manager::initManifest()
 void Manager::initSSO()
 {
     connect(m_sso, SIGNAL(credentialsRequestSucceeded(const UbuntuOne::Token&)),
-            this, SLOT(handleCredentialsFound(const UbuntuOne::Token&)));
+            this, SLOT(handleCredentials(const UbuntuOne::Token&)));
     connect(m_sso, SIGNAL(credentialsRequestFailed()),
             this, SLOT(handleCredentialsFailed()));
 }
 
 void Manager::check()
 {
+    if (m_checking) {
+        qWarning() << Q_FUNC_INFO << "Check was already in progress.";
+        return;
+    }
+
     // Don't check for click updates if there are no credentials,
     // instead ask for credentials.
     if (!m_authToken.isValid() && !Helpers::isIgnoringCredentials()) {
@@ -142,8 +153,7 @@ void Manager::check()
     }
 
     Q_EMIT checkStarted();
-
-    m_updates.clear();
+    m_candidates.clear();
     m_manifest->request();
 }
 
@@ -176,35 +186,50 @@ void Manager::launch(const QString &appId)
     }
 }
 
-void Manager::handleManifestSuccess(const QJsonArray &manifest)
+void Manager::handleManifest(const QJsonArray &manifest)
 {
-    // Nothing to do.
-    if (manifest.size() == 0) {
-        Q_EMIT checkCompleted();
-        return;
+    QList<QSharedPointer<Update> > updates = parseManifest(manifest);
+
+    Q_FOREACH(const QSharedPointer<Update> &update, updates) {
+        QSharedPointer<Update> existingUpdate = m_model->get(
+            update->identifier(), update->localVersion()
+        );
+        if (!existingUpdate.isNull()) {
+            m_model->setInstalled(existingUpdate->identifier(), existingUpdate->revision());
+        }
     }
 
-    int i;
-    for (i = 0; i < manifest.size(); i++) {
+    if (m_checking) {
+        if (updates.size() == 0) {
+            Q_EMIT checkCompleted();
+            return;
+        }
+
+        Q_FOREACH(QSharedPointer<Update> update, updates) {
+            m_candidates[update->identifier()] = update;
+        }
+
+        requestMetadata();
+    }
+}
+
+void Manager::handleManifestFailure()
+{
+    if (m_checking)
+        Q_EMIT checkFailed();
+}
+
+QList<QSharedPointer<Update> > Manager::parseManifest(const QJsonArray &manifest)
+{
+    QList<QSharedPointer<Update> > updates;
+    for (int i = 0; i < manifest.size(); i++) {
         QSharedPointer<Update> update = QSharedPointer<Update>(new Update);
 
         const QJsonObject object = manifest.at(i).toObject();
-        const QString id = object.value("name").toString();
-        update->setIdentifier(id);
         update->setIdentifier(object.value("name").toString());
         update->setTitle(object.value("title").toString());
         update->setLocalVersion(object.value("version").toString());
         update->setKind(Update::Kind::KindClick);
-
-        /* Before we continue, if the model contains this update (based on
-        matching version strings), we'll mark it as installed and move on. */
-        QSharedPointer<Update> existingUpdate = m_model->get(
-            id, update->localVersion()
-        );
-        if (!existingUpdate.isNull()) {
-            m_model->setInstalled(id, existingUpdate->revision());
-            continue;
-        }
 
         /* We'll also need the package name, which will be the first key inside
         the “hooks” key that contains a “desktop”.. */
@@ -221,29 +246,25 @@ void Manager::handleManifestSuccess(const QJsonArray &manifest)
         QStringList command;
         command << Helpers::whichPkcon() << "-p" << "install-local" << "$file";
         update->setCommand(command);
-        m_updates.insert(update->identifier(), update);
+        updates << update;
     }
-    requestMetadata();
-}
-
-void Manager::handleManifestFailure()
-{
-    if (m_checking)
-        Q_EMIT checkFailed();
+    return updates;
 }
 
 void Manager::handleTokenDownload(QSharedPointer<Update> update)
 {
     Click::TokenDownloader* dl = qobject_cast<Click::TokenDownloader*>(QObject::sender());
     dl->disconnect();
-    // Token reported as downloaded, but empty.
+
+    // Token reported as downloaded, but empty so discard it as a candidate.
     if (update->token().isEmpty()) {
-        m_updates.remove(update->identifier());
+        m_candidates.remove(update->identifier());
     }
 
-    // Assume the original update was changed during the download of token.
-    QSharedPointer<Update> freshUpdate = m_model->get(update->identifier(),
-                                                      update->revision());
+    /* Assume the original update was changed during the download of token and
+    fetch a new one from the database. */
+    QSharedPointer<Update> freshUpdate = m_model->fetch(update->identifier(),
+                                                        update->revision());
     if (freshUpdate) {
         freshUpdate->setToken(update->token());
         m_model->add(freshUpdate);
@@ -257,14 +278,16 @@ void Manager::handleTokenDownload(QSharedPointer<Update> update)
 
 void Manager::completionCheck()
 {
-    // Check if all tokens are fetched.
-    foreach (const QString &name, m_updates.keys()){
-        if (m_updates.value(name)->token().isEmpty()) {
-            return; // Not done.
+    /* Check if tokens are all fetched, or any update has since been marked as
+    installed. Return early if that's the case. */
+    Q_FOREACH(const QString &identifier, m_candidates.keys()) {
+        if (m_candidates[identifier]->token().isEmpty() ||
+            m_candidates[identifier]->installed()) {
+            return;
         }
     }
 
-    // All updates had signed download urls, so we're done.
+    // All updates had tokens, check is complete.
     Q_EMIT checkCompleted();
 }
 
@@ -285,12 +308,12 @@ void Manager::handleTokenDownloadFailure(QSharedPointer<Update> update)
     }
 
     // We're done with it.
-    m_updates.remove(update->identifier());
+    m_candidates.remove(update->identifier());
     dl->deleteLater();
     completionCheck();
 }
 
-void Manager::handleCredentialsFound(const UbuntuOne::Token &token)
+void Manager::handleCredentials(const UbuntuOne::Token &token)
 {
     m_authToken = token;
 
@@ -325,8 +348,8 @@ void Manager::handleCommunicationErrors()
 void Manager::requestMetadata()
 {
     QList<QString> packages;
-    Q_FOREACH(const QString &name, m_updates.keys()) {
-        packages.append(name);
+    Q_FOREACH(const QString &identifier, m_candidates.keys()) {
+        packages.append(identifier);
     }
 
     QString urlApps = Helpers::clickMetadataUrl();
@@ -340,35 +363,14 @@ void Manager::requestMetadata()
     QUrl url(urlApps);
     url.setQuery(authHeader);
 
-
     m_client->requestMetadata(url, packages);
-}
-
-void Manager::handleMetadataSuccess(const QByteArray &metadata)
-{
-    QJsonParseError *jsonError = new QJsonParseError;
-    auto document = QJsonDocument::fromJson(metadata, jsonError);
-
-    if (document.isArray()) {
-        parseMetadata(document.array());
-    } else {
-        qCritical() << "Server click metadata was not an array.";
-        handleCommunicationErrors();
-    }
-
-    if (jsonError->error != QJsonParseError::NoError) {
-        qCritical() << "Server click metadata parsing failed:" << jsonError->errorString();
-        handleCommunicationErrors();
-    }
-
-    delete jsonError;
 }
 
 void Manager::parseMetadata(const QJsonArray &array)
 {
     for (int i = 0; i < array.size(); i++) {
         auto object = array.at(i).toObject();
-        auto name = object["name"].toString();
+        auto identifier = object["name"].toString();
         auto version = object["version"].toString();
         auto icon_url = object["icon_url"].toString();
         auto url = object["download_url"].toString();
@@ -377,9 +379,10 @@ void Manager::parseMetadata(const QJsonArray &array)
         auto size = object["binary_filesize"].toInt();
         auto title = object["title"].toString();
         auto revision = object["revision"].toInt();
-        if (m_updates.contains(name)) {
-            QSharedPointer<Update> update = m_updates.value(name);
+        if (m_candidates.contains(identifier)) {
+            QSharedPointer<Update> update = m_candidates.value(identifier);
             update->setRemoteVersion(version);
+
             if (update->isUpdateRequired()) {
                 update->setIconUrl(icon_url);
                 update->setDownloadUrl(url);
@@ -396,17 +399,17 @@ void Manager::parseMetadata(const QJsonArray &array)
                 dl->download();
             } else {
                 // Update not required, let's remove it.
-                m_updates.remove(update->identifier());
+                m_candidates.remove(update->identifier());
                 completionCheck();
             }
         }
     }
 
-    // Prune m_updates, removing those without necessary update data. These are
-    // either locally installed clicks, or in some other way not in the meta data.
-    foreach (const QString &name, m_updates.keys()) {
-        if (m_updates.value(name)->remoteVersion().isEmpty())
-            m_updates.remove(name);
+    /* Remove clicks that did not have the necessary metadata. They could be
+    locally installed, or removed from upstream. */
+    foreach (const QString &identifier, m_candidates.keys()) {
+        if (m_candidates.value(identifier)->remoteVersion().isEmpty())
+            m_candidates.remove(identifier);
     }
     completionCheck();
 }

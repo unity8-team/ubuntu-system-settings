@@ -119,7 +119,8 @@ Item {
         var metadataObj = mdt.createObject(root, metadata);
         metadataObj.custom = {
             "identifier": click.identifier,
-            "revision": click.revision
+            "package-name": click.identifier,
+            "revision": click.revision,
         };
         var singleDownloadObj = sdl.createObject(root, {
             // "url": click.downloadUrl,

@@ -24,6 +24,7 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QJsonValue>
+#include <QJsonParseError>
 
 #define X_CLICK_TOKEN "X-Click-Token"
 
@@ -59,7 +60,7 @@ void ClientImpl::initializeNam()
 }
 
 void ClientImpl::requestMetadata(const QUrl &url,
-                             const QList<QString> &packages)
+                                 const QList<QString> &packages)
 {
     // Create list of frameworks.
     std::stringstream frameworks;
@@ -157,7 +158,7 @@ void ClientImpl::requestSucceeded(QNetworkReply *reply)
             Q_EMIT tokenRequestSucceeded("");
         }
     } else if (rtp == "metadata-request") {
-        Q_EMIT metadataRequestSucceeded(reply->readAll());
+        handleMetadataReply(reply);
     } else {
         /* We are not to handle this reply, so do an early return to avoid
         deleting the reply. */
@@ -165,6 +166,27 @@ void ClientImpl::requestSucceeded(QNetworkReply *reply)
     }
 
     reply->deleteLater();
+}
+
+void ClientImpl::handleMetadataReply(QNetworkReply *reply)
+{
+    QJsonParseError *jsonError = new QJsonParseError;
+    auto document = QJsonDocument::fromJson(reply->readAll(), jsonError);
+
+    if (document.isArray()) {
+        Q_EMIT metadataRequestSucceeded(document.array());
+    } else {
+        qCritical() << Q_FUNC_INFO << "Got invalid click metadata.";
+        Q_EMIT serverError();
+    }
+
+    if (jsonError->error != QJsonParseError::NoError) {
+        qCritical() << "Could not parse click metadata:"
+                    << jsonError->errorString();
+        Q_EMIT serverError();
+    }
+
+    delete jsonError;
 }
 
 bool ClientImpl::validReply(const QNetworkReply *reply)
@@ -180,7 +202,8 @@ bool ClientImpl::validReply(const QNetworkReply *reply)
     int httpStatus = statusAttr.toInt();
 
     if (httpStatus == 401 || httpStatus == 403) {
-        qCritical() << Q_FUNC_INFO << QString("Server responded with %1.").arg(httpStatus);
+        qCritical() << Q_FUNC_INFO
+                    << QString("Server responded with %1.").arg(httpStatus);
         Q_EMIT credentialError();
         return false;
     }

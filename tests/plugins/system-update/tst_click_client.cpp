@@ -23,6 +23,7 @@
 #include "click/client_impl.h"
 #include "mockclickserver.h"
 
+#include <QJsonArray>
 #include <QSignalSpy>
 #include <QTest>
 #include <QtNetwork/QNetworkAccessManager>
@@ -90,7 +91,9 @@ private slots:
     void testMetadataRequestSuccess()
     {
         QFETCH(QList<QString>, names);
-        QSignalSpy metadataRequestSucceededSpy(m_instance, SIGNAL(metadataRequestSucceeded(const QByteArray)));
+        QSignalSpy metadataRequestSucceededSpy(
+            m_instance, SIGNAL(metadataRequestSucceeded(const QJsonArray&))
+        );
         QUrl query("http://localhost:9009/metadata");
         m_instance->requestMetadata(query, names);
         QVERIFY(metadataRequestSucceededSpy.wait());
@@ -135,8 +138,12 @@ private slots:
         Click::ClientImpl *b = new Click::ClientImpl(m_nam);
 
         // We only want “a” to receive a signal.
-        QSignalSpy aSuccessSpy(a, SIGNAL(metadataRequestSucceeded(const QByteArray)));
-        QSignalSpy bSuccessSpy(b, SIGNAL(metadataRequestSucceeded(const QByteArray)));
+        QSignalSpy aSuccessSpy(
+            a, SIGNAL(metadataRequestSucceeded(const QJsonArray&))
+        );
+        QSignalSpy bSuccessSpy(
+            b, SIGNAL(metadataRequestSucceeded(const QJsonArray&))
+        );
         QUrl query("http://localhost:9009/metadata");
         a->requestMetadata(query, QList<QString>());
         QVERIFY(aSuccessSpy.wait());
