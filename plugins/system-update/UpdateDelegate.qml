@@ -37,6 +37,7 @@ Column {
     property string version
     property string downloadId
     property date updatedAt
+    property bool launchable: false
 
     property alias error: errorElementDetail.text
     property alias name: nameLabel.text
@@ -158,8 +159,7 @@ Column {
                     visible: {
                         switch (updateState) {
                         case Update.StateInstalled:
-                            // If installed, we can launch a click.
-                            return kind === Update.KindClick;
+                            return launchable;
                         default:
                             return true;
                         }

@@ -293,4 +293,8 @@ Item {
     function test_serverError() {
 
     }
+
+    function test_noScopeLaunch() {
+
+    }
 }

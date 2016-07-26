@@ -63,7 +63,6 @@ private slots:
         m_instance->deleteLater();
         QTRY_COMPARE(destroyedSpy.count(), 1);
         delete m_dir;
-
     }
     void testCheckStarts()
     {
@@ -162,6 +161,9 @@ private slots:
         QList<QVariant> manifest;
         QVariantMap hooks;
         hooks["A"] = QVariantMap();
+        QVariantMap B;
+        B["desktop"] = "";
+        hooks["B"] = B;
         QVariantMap a;
         a["name"] = "a";
         a["version"] = "0";
@@ -185,7 +187,7 @@ private slots:
         QSharedPointer<Update> u = m_model->get("a", 0);
         QCOMPARE(u->identifier(), QString("a"));
         QCOMPARE(u->localVersion(), QString("0"));
-        QCOMPARE(u->packageName(), QString("A"));
+        QCOMPARE(u->packageName(), QString("B"));
     }
     void testTokenDownload_data()
     {
@@ -248,6 +250,26 @@ private slots:
         dl->mockDownloadSucceeded("foobar");
 
         QCOMPARE(m_model->get(id, rev)->token(), QString("foobar"));
+    }
+    void testUseMetadataToUpdateState()
+    {
+        // Add update.
+        QSharedPointer<Update> u = QSharedPointer<Update>(new Update);
+        u->setIdentifier("a");
+        u->setRevision(0);
+        u->setRemoteVersion("v1");
+        m_model->add(u);
+
+        QList<QVariant> manifest;
+        QVariantMap a;
+        a["name"] = "a";
+        a["version"] = "v1";
+        manifest << a;
+
+        // The manifest returns that the update is installed.
+        m_mockmanifest->mockSuccess(QJsonArray::fromVariantList(manifest));
+
+        QVERIFY(m_model->get("a", 0)->installed());
     }
 private:
     MockClient *m_mockclient = nullptr;

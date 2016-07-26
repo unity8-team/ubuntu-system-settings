@@ -317,10 +317,25 @@ QSharedPointer<Update> UpdateModel::get(const QString &id, const uint &revision)
     return find(id, revision);
 }
 
+QSharedPointer<Update> UpdateModel::get(const QString &id, const QString &version)
+{
+    return find(id, version);
+}
+
 QSharedPointer<Update> UpdateModel::find(const QString &id, const uint &revision)
 {
     Q_FOREACH(QSharedPointer<Update> update, m_updates) {
         if (id == update->identifier() && revision == update->revision()) {
+            return update;
+        }
+    }
+    return QSharedPointer<Update>();
+}
+
+QSharedPointer<Update> UpdateModel::find(const QString &id, const QString &version)
+{
+    Q_FOREACH(QSharedPointer<Update> update, m_updates) {
+        if (id == update->identifier() && version == update->remoteVersion()) {
             return update;
         }
     }

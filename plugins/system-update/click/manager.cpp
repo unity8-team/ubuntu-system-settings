@@ -163,11 +163,8 @@ void Manager::retry(const QString &identifier, const uint &revision)
     }
 }
 
-// Tries to shut down all checks we might currently be doing.
 void Manager::cancel()
 {
-    // Abort all click update update data objects.
-    // foreach (const QString &name, m_updates.keys())m_updates.value(name)->cancel();
     m_client->cancel();
     Q_EMIT checkCanceled();
 }
@@ -191,18 +188,33 @@ void Manager::handleManifestSuccess(const QJsonArray &manifest)
     for (i = 0; i < manifest.size(); i++) {
         QSharedPointer<Update> update = QSharedPointer<Update>(new Update);
 
-        QJsonObject object = manifest.at(i).toObject();
+        const QJsonObject object = manifest.at(i).toObject();
+        const QString id = object.value("name").toString();
+        update->setIdentifier(id);
         update->setIdentifier(object.value("name").toString());
         update->setTitle(object.value("title").toString());
         update->setLocalVersion(object.value("version").toString());
         update->setKind(Update::Kind::KindClick);
 
+        /* Before we continue, if the model contains this update (based on
+        matching version strings), we'll mark it as installed and move on. */
+        QSharedPointer<Update> existingUpdate = m_model->get(
+            id, update->localVersion()
+        );
+        if (!existingUpdate.isNull()) {
+            m_model->setInstalled(id, existingUpdate->revision());
+            continue;
+        }
+
         /* We'll also need the package name, which will be the first key inside
-        the “hooks” key. */
+        the “hooks” key that contains a “desktop”.. */
         if (object.contains("hooks") && object.value("hooks").isObject()) {
             QJsonObject hooks = object.value("hooks").toObject();
-            if (!hooks.isEmpty()) {
-                update->setPackageName(hooks.keys()[0]);
+            Q_FOREACH(const QString &key, hooks.keys()) {
+                if (hooks[key].isObject() &&
+                    hooks[key].toObject().contains("desktop")) {
+                    update->setPackageName(key);
+                }
             }
         }
 

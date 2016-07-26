@@ -351,6 +351,10 @@ ItemPage {
                         updateState: Update.StateInstalled
                         updatedAt: model.updatedAt
 
+                        // Launchable if there's a package name on a click.
+                        launchable: (!!packageName &&
+                                     model.kind === Update.KindClick)
+
                         onLaunch: {
                             /* The Application ID is the string
                             "$(click_package)_$(application)_$(version) */

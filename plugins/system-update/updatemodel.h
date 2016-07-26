@@ -78,9 +78,10 @@ public:
     void update(const QSharedPointer<Update> &update);
     void remove(const QSharedPointer<Update> &update);
 
-    /* Fetch will grab data from the ORM, while get returns a from cache. */
+    /* Fetch will grab data from the db, while get returns a from cache. */
     QSharedPointer<Update> fetch(const QString &id, const uint &revision);
     QSharedPointer<Update> get(const QString &id, const uint &revision);
+    QSharedPointer<Update> get(const QString &id, const QString &version);
 
     Q_INVOKABLE void setAvailable(const QString &id, const uint &revision,
                                   const bool autoStart = false);
@@ -121,6 +122,7 @@ private:
     static bool contains(const QList<QSharedPointer<Update> > &list,
                          const QSharedPointer<Update> &update);
     QSharedPointer<Update> find(const QString &id, const uint &revision);
+    QSharedPointer<Update> find(const QString &id, const QString &version);
     static int indexOf(const QList<QSharedPointer<Update> > &list,
                         const QSharedPointer<Update> &update);
     UpdateDb* m_db;
