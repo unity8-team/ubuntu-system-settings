@@ -179,9 +179,8 @@ ItemPage {
                     if (model.bubblesNotify) {
                         arr.push(i18n.tr("Bubbles"))
                     }
-                    if (model.listNotify) {
-                        arr.push(i18n.tr("Notification List"))
-                    }
+
+                    arr.push(i18n.tr("Notification List"))
 
                     return arr.join(", ")
                 }
