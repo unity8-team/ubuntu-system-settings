@@ -1,3 +1,11 @@
+ubuntu-system-settings (0.4+16.10.20160727-0ubuntu1) yakkety; urgency=medium
+
+  [ jonas-drange ]
+  * Accept key-mgmt option and respond to the value appropriately. (LP:
+    #1597681)
+
+ -- Jonas G. Drange <jonas.drange@canonical.com>  Wed, 27 Jul 2016 09:35:27 +0000
+
 ubuntu-system-settings (0.4+16.10.20160722.1-0ubuntu1) yakkety; urgency=medium
 
   [ Ken VanDine ]
