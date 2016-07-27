@@ -20,6 +20,7 @@ import SystemSettings 1.0
 import Ubuntu.Components 1.3
 import Ubuntu.Components.ListItems 1.3 as ListItem
 import Ubuntu.Components.Popups 1.3
+import Ubuntu.Settings.Components 0.1
 import Ubuntu.SystemSettings.Wifi 1.0
 import QMenuModel 0.1
 
@@ -27,12 +28,18 @@ Component {
 
     Dialog {
 
+        Component {
+            id: filePickerComponent
+            FilePicker {}
+        }
+
         id: otherNetworkDialog
         objectName: "otherNetworkDialog"
         anchorToKeyboard: true
 
         property string ssid
         property string bssid
+        property string keyMgmt
 
         function settingsValid () {
             if (networkname.length === 0) {
@@ -60,11 +67,10 @@ Component {
             var pickerDialog;
             var certDialog;
 
-            pickerDialog = PopupUtils.open(
-                Qt.resolvedUrl("./CertPicker.qml")
-            );
-            pickerDialog.fileImportSignal.connect(function (file) {
-                if (!file === false) {
+            pickerDialog = PopupUtils.open(filePickerComponent);
+            pickerDialog.accept.connect(function (file) {
+                PopupUtils.close(pickerDialog);
+                if (file) {
                     certDialogLoader.source = Qt.resolvedUrl(
                         "./CertDialog.qml"
                     );
@@ -85,12 +91,13 @@ Component {
                     });
                 }
             });
+            pickerDialog.reject.connect(function () {
+                PopupUtils.close(pickerDialog);
+            });
         }
 
         title: ssid ?
-               /* TODO(jgdx): Hack to avoid breaking string freeze. This will be
-               changed to i18n.tr("Connect to %1").arg(ssid) per spec. */
-               i18n.tr("Connect to Wi‑Fi") + " " + ssid :
+               i18n.tr("Connect to %1").arg(ssid) :
                i18n.tr("Connect to Hidden Network")
         text: feedback.enabled ? feedback.text : "";
 
@@ -323,7 +330,22 @@ Component {
                 i18n.tr("Dynamic WEP (802.1x)"), // index: 4
                 i18n.tr("LEAP"),                 // index: 5
             ]
-            selectedIndex: 1
+            selectedIndex: {
+                switch(keyMgmt) {
+                case 'none': // WEP
+                    return 0;
+                case 'wpa-eap': // WPA-Enterprise
+                    return 2;
+                case 'wep': // WEP
+                    return 3;
+                case 'ieee8021x': // Dynamic WEP
+                    return 4;
+                case 'wpa-none': // Ad-Hoc WPA-PSK
+                case 'wpa-psk': // infrastructure WPA-PSK
+                default: // Default is WPA
+                    return 1;
+                }
+            }
         }
 
         Label {
@@ -358,7 +380,6 @@ Component {
             visible: securityList.selectedIndex === 2 ||
                      securityList.selectedIndex === 4
         }
-
         Label {
             id: p2authListLabel
             text : i18n.tr("Inner authentication")
@@ -792,7 +813,7 @@ Component {
             font.bold: false
             color: Theme.palette.normal.baseText
             elide: Text.ElideRight
-            visible: securityList.selectedIndex !== 0
+            visible: password.visible
         }
 
         TextField {
@@ -800,6 +821,7 @@ Component {
             objectName: "password"
             width: parent.width
             visible: securityList.selectedIndex !== 0
+
             echoMode: passwordVisibleSwitch.checked ?
                       TextInput.Normal : TextInput.Password
             inputMethodHints: Qt.ImhNoPredictiveText
@@ -810,7 +832,7 @@ Component {
             id: passwordVisiblityRow
             layoutDirection: Qt.LeftToRight
             spacing: units.gu(2)
-            visible: securityList.selectedIndex !== 0
+            visible: password.visible
 
             CheckBox {
                 id: passwordVisibleSwitch
