@@ -3,7 +3,7 @@
     "icon": "airplane-mode",
     "translations": "ubuntu-system-settings",
     "category": "uncategorized-top",
-    "priority": 1,
+    "priority": 0,
     "keywords": [
         "flight",
         "plane",

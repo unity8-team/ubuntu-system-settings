@@ -1,7 +1,7 @@
 /*
  * This file is part of ubuntu-system-settings
  *
- * Copyright (C) 2013-2015 Canonical Ltd.
+ * Copyright (C) 2013-2016 Canonical Ltd.
  *
  * Contact: Charles Kerr <charles.kerr@canonical.com>
  *
@@ -21,9 +21,9 @@
 import QMenuModel 0.1
 import QtQuick 2.0
 import SystemSettings 1.0
+import SystemSettings.ListItems 1.0 as SettingsListItems
 import Ubuntu.Components 1.3
 import Ubuntu.Components.Popups 1.3
-import Ubuntu.Components.ListItems 1.3 as ListItem
 import Ubuntu.SystemSettings.Bluetooth 1.0
 
 Page {
@@ -97,64 +97,36 @@ Page {
                 right: parent.right
             }
 
-            ListItem.SingleValue {
+            SettingsListItems.SingleValue {
                 text: i18n.tr("Name")
                 value: backend.selectedDevice &&
                        backend.selectedDevice.name.length > 0 ?
                              backend.selectedDevice.name :
                              i18n.tr("None")
             }
-            ListItem.Standard {
-                Rectangle {
-                    color: "transparent"
-                    anchors.fill: parent
-                    anchors.topMargin: units.gu(1)
-                    anchors.leftMargin: units.gu(2)
-                    anchors.rightMargin: units.gu(2)
-
-                    Label {
-                        anchors {
-                            top: parent.top
-                            left: parent.left
-                            topMargin: units.gu(1)
-                        }
-                        height: units.gu(3)
-                        text: i18n.tr("Type")
-                    }
-                    Image {
-                        anchors {
-                            right: deviceType.left
-                            rightMargin: units.gu(1)
-                        }
-                        height: units.gu(4)
-                        width: units.gu(4)
-                        source: backend.selectedDevice ? backend.selectedDevice.iconName : ""
-                    }
-                    Label {
-                        id: deviceType
-                        anchors {
-                            top: parent.top
-                            right: parent.right
-                            topMargin: units.gu(1)
-                        }
-                        height: units.gu(3)
-                        text: getTypeString(backend.selectedDevice ? backend.selectedDevice.type : Device.OTHER)
-                    }
+            SettingsListItems.SingleValue {
+                text: i18n.tr("Type")
+                value: getTypeString(backend.selectedDevice ? backend.selectedDevice.type : Device.OTHER)
+                Image {
+                    height: units.gu(4)
+                    width: units.gu(4)
+                    source: backend.selectedDevice ? backend.selectedDevice.iconName : ""
+                    visible: source
+                    SlotsLayout.position: SlotsLayout.Trailing-1
                 }
             }
-            ListItem.SingleValue {
+            SettingsListItems.SingleValue {
                 text: i18n.tr("Status")
                 value: getStatusString(backend.selectedDevice ? backend.selectedDevice.connection : Device.Disconnected)
             }
-            ListItem.SingleValue {
+            SettingsListItems.SingleValue {
                 text: i18n.tr("Signal Strength")
                 value: getSignalString(backend.selectedDevice ? backend.selectedDevice.strength : Device.None)
             }
-            ListItem.Standard {
+            SettingsListItems.Standard {
                 id: trustedCheck
                 text: i18n.tr("Connect automatically when detected:")
-                visible: backend.selectedDevice.paired
-                control: CheckBox {
+                CheckBox {
                     property bool serverChecked: backend.selectedDevice ? backend.selectedDevice.trusted : false
                     onServerCheckedChanged: checked = serverChecked
                     Component.onCompleted: checked = serverChecked
@@ -165,10 +137,12 @@ Page {
                     }
                 }
             }
-            ListItem.SingleControl {
-                control: Button {
-                    text: backend.selectedDevice && (backend.selectedDevice.connection == Device.Connected || backend.selectedDevice.connection == Device.Connecting) ? i18n.tr("Disconnect") : i18n.tr("Connect")
+
+            SettingsListItems.SingleControl {
+                Button {
+                    anchors.centerIn: parent
                     width: parent.width - units.gu(8)
+                    text: backend.selectedDevice && (backend.selectedDevice.connection == Device.Connected || backend.selectedDevice.connection == Device.Connecting) ? i18n.tr("Disconnect") : i18n.tr("Connect")
                     onClicked: {
                         if (backend.selectedDevice
                             && (backend.selectedDevice.connection == Device.Connected
@@ -185,10 +159,12 @@ Page {
                     enabled: backend.selectedDevice && backend.powered ? true : false
                 }
             }
-            ListItem.SingleControl {
-                control: Button {
-                    text: i18n.tr("Forget this device")
+
+            SettingsListItems.SingleControl {
+                Button {
+                    anchors.centerIn: parent
                     width: parent.width - units.gu(8)
+                    text: i18n.tr("Forget this device")
                     onClicked: {
                         backend.removeDevice();
                         backend.resetSelectedDevice();

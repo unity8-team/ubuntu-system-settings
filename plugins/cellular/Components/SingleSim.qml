@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 Canonical Ltd
+ * Copyright (C) 2014-2016 Canonical Ltd
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as
@@ -20,8 +20,8 @@
 import QtQuick 2.4
 import SystemSettings 1.0
 import Ubuntu.Connectivity 1.0
+import SystemSettings.ListItems 1.0 as SettingsListItems
 import Ubuntu.Components 1.3
-import Ubuntu.Components.ListItems 1.3 as ListItem
 
 Column {
 
@@ -64,10 +64,10 @@ Column {
         sort.property: "Index"
         sort.order: Qt.AscendingOrder
     }
-
-    ListItem.Standard {
-        text: i18n.tr("Cellular data")
-        control: Switch {
+    SettingsListItems.Standard {
+        id: selector
+        text: i18n.tr("Cellular data:")
+        Switch {
             id: dataSwitch
             objectName: "data"
             checked: Connectivity.mobileDataEnabled
@@ -86,9 +86,11 @@ Column {
             }
         }
     }
-    ListItem.Standard {
+
+    SettingsListItems.Standard {
+        id: dataRoamingItem
         text: i18n.tr("Data roaming")
-        control: Switch {
+        Switch {
             id: roaming
             objectName: "roaming"
             enabled: singlesim.currentSim !== null && dataSwitch.checked
@@ -99,31 +101,24 @@ Column {
         }
     }
 
-    ListItem.Standard {
+    SettingsListItems.StandardProgression{
         text: i18n.tr("Data usage statistics")
-        progression: true
         visible: showAllUI
     }
 
-    ListItem.Divider {
-        visible: radio.visible
+    SettingsListItems.SingleValueProgression {
+        text: i18n.tr("Carrier & APN");
+        id: chooseCarrier
+        objectName: "carrierApnEntry"
+        value: sim.netReg.name || ""
+        onClicked: pageStack.push(Qt.resolvedUrl("../PageCarrierAndApn.qml"), {
+            sim: sim
+        })
     }
 
     RadioSingleSim {
         id: radio
         anchors { left: parent.left; right: parent.right }
         visible: radio.enabled
-    }
-
-    ListItem.Divider {}
-
-    ListItem.SingleValue {
-        text: i18n.tr("Carrier");
-        id: chooseCarrier
-        objectName: "carrierApnEntry"
-        progression: enabled
-        onClicked: pageStack.push(Qt.resolvedUrl("../PageCarrierAndApn.qml"), {
-            sim: sim
-        })
     }
 }
