@@ -16,32 +16,32 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef CLICK_SSO_H
-#define CLICK_SSO_H
-
-#include <token.h>
+#ifndef IMAGE_MANAGER_H
+#define IMAGE_MANAGER_H
 
 #include <QObject>
 #include <QString>
 
 namespace UpdatePlugin
 {
-namespace Click
+namespace Image
 {
-class SSO : public QObject
+class Manager : public QObject
 {
     Q_OBJECT
 public:
-    SSO(QObject *parent = 0) : QObject(parent) {};
-    virtual ~SSO() {};
-    virtual void requestCredentials() = 0;
-    virtual void invalidateCredentials() = 0;
+    explicit Manager(QObject *parent = 0) : QObject(parent) {};
+    virtual ~Manager() {};
+
+    virtual void check() = 0;
+    virtual void cancel() = 0;
+    virtual bool checkingForUpdates() const = 0;
 
 Q_SIGNALS:
-    void credentialsRequestSucceeded(const UbuntuOne::Token &token);
-    void credentialsRequestFailed();
+    void checkingForUpdatesChanged();
+    void checkCompleted();
 };
-} // Click
+} // Image
 } // UpdatePlugin
 
-#endif // CLICK_SSO_H
+#endif // IMAGE_MANAGER_H

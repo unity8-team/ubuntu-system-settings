@@ -1,7 +1,10 @@
-include_directories(${CMAKE_CURRENT_BINARY_DIR} ../src)
-include_directories(${GLIB_INCLUDE_DIRS})
-include_directories(${QTDBUSMOCK_INCLUDE_DIRS})
-include_directories(${QTDBUSTEST_INCLUDE_DIRS})
+include_directories(
+    ../src
+    ${CMAKE_CURRENT_BINARY_DIR}
+    ${GLIB_INCLUDE_DIRS}
+    ${QTDBUSMOCK_INCLUDE_DIRS}
+    ${QTDBUSTEST_INCLUDE_DIRS}
+)
 
 add_definitions(-DI18N_DOMAIN="ubuntu-system-settings")
 add_definitions(-DPLUGIN_PRIVATE_MODULE_DIR="${PLUGIN_PRIVATE_MODULE_DIR}")

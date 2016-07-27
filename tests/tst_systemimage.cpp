@@ -29,12 +29,6 @@ class TstSystemImage: public QObject
     Q_OBJECT
 public:
 private Q_SLOTS:
-    void initTestCase()
-    {
-        qWarning() << "NOTE: The subsequent warnings from QObject::connect "
-                      "regarding “no such signal” can be safely ignored. See "
-                      "<https://github.com/martinpitt/python-dbusmock/issues/23>.";
-    }
     void init()
     {
         QVariantMap parameters;

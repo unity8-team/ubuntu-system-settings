@@ -3,6 +3,8 @@ include_directories(
     ${CMAKE_SOURCE_DIR}/tests/mocks
     ${CMAKE_SOURCE_DIR}/plugins/system-update
     /usr/include/apt-pkg/
+    ${QTDBUSMOCK_INCLUDE_DIRS}
+    ${QTDBUSTEST_INCLUDE_DIRS}
 )
 
 pkg_check_modules(UAL REQUIRED ubuntu-app-launch-2)
@@ -66,6 +68,18 @@ set_tests_properties(
         ENVIRONMENT "IGNORE_CREDENTIALS=1"
 )
 target_link_libraries(tst-systemupdate-click_update_manager ${PLUGIN_LIBS})
+
+add_executable(tst-systemupdate-image-manager
+    tst_image_manager.cpp
+    ${CMAKE_SOURCE_DIR}/src/systemimage.cpp
+    ${CMAKE_SOURCE_DIR}/tests/mocks/system-image-dbus/fakesystemimagedbus.cpp
+)
+add_test(tst-systemupdate-image-manager tst-systemupdate-image-manager)
+target_link_libraries(tst-systemupdate-image-manager
+    ${PLUGIN_LIBS}
+    ${QTDBUSMOCK_LIBRARIES}
+    ${QTDBUSTEST_LIBRARIES}
+)
 
 add_executable(tst-systemupdate-system_update
     tst_system_update.cpp

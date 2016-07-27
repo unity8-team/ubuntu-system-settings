@@ -18,7 +18,6 @@
 
 #include "plugin.h"
 
-#include "MockClickManager.h"
 #include "MockUpdate.h"
 #include "MockUpdateModel.h"
 #include "MockSystemImage.h"
@@ -46,10 +45,7 @@ void BackendPlugin::registerTypes(const char *uri)
 {
     Q_ASSERT(uri == QLatin1String("Ubuntu.SystemSettings.Update"));
     qmlRegisterSingletonType<MockSystemUpdate>(uri, 1, 0, "SystemUpdate", suSingletonProvider);
-
     qmlRegisterUncreatableType<MockUpdate>(uri, 1, 0, "Update", "Used for enums only.");
-    qmlRegisterType<MockClickManager>(uri, 1, 0, "ClickManager");
-
     qmlRegisterSingletonType<MockSystemImage>(uri, 1, 0, "SystemImage", siSingletonProvider);
     qRegisterMetaType<MockUpdateModel*>("UpdateModel*");
     qRegisterMetaType<MockUpdateModelFilter*>("UpdateModelFilter*");

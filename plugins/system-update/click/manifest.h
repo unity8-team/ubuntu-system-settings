@@ -34,7 +34,7 @@ public:
     virtual ~Manifest() {};
     virtual void request() = 0;
 
-signals:
+Q_SIGNALS:
     void requestSucceeded(const QJsonArray &manifest);
     void requestFailed();
 };

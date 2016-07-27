@@ -33,8 +33,11 @@ public:
                                   UpdateModelFilter *images,
                                   UpdateModelFilter *installed,
                                   Network::Manager *nam,
+                                  Image::Manager *imageManager,
+                                  Click::Manager *clickManager,
                                   QObject *parent = 0)
-        : SystemUpdate(model, pending, clicks, images, installed, nam, parent)
+        : SystemUpdate(model, pending, clicks, images, installed, nam,
+                       imageManager, clickManager, parent)
     {}
 
     ~TestableSystemUpdate() {}

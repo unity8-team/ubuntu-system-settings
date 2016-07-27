@@ -50,7 +50,6 @@ public:
 
     bool requestCredentialsCalled = false;
     bool invalidateCredentialsCalled = false;
-signals:
 };
 
 #endif // MOCK_CLICK_SSO_H

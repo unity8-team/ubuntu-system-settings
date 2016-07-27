@@ -20,6 +20,9 @@
 #include "systemupdate.h"
 #include "testable_system_update.h"
 
+#include "plugins/system-update/fakeclickmanager.h"
+#include "plugins/system-update/fakeimagemanager.h"
+
 #include <QSignalSpy>
 #include <QSqlError>
 #include <QSqlQuery>
@@ -39,9 +42,16 @@ private slots:
         m_images = new UpdateModelFilter(m_model, m_model);
         m_installed = new UpdateModelFilter(m_model, m_model);
 
+        m_imageManager = new MockImageManager();
+        m_clickManager = new MockClickManager();
+
+        // Network Access Manager will not be needed for our tests, so it's 0.
         m_instance = new TestableSystemUpdate(m_model, m_pending, m_clicks,
-                                              m_images, m_installed, nullptr);
+                                              m_images, m_installed, nullptr,
+                                              m_imageManager, m_clickManager);
         m_model->setParent(m_instance);
+        m_imageManager->setParent(m_instance);
+        m_clickManager->setParent(m_instance);
     }
     void cleanup()
     {
@@ -106,6 +116,10 @@ private slots:
         // We passed a nullptr, so just verify that the method exist.
         QVERIFY(!m_instance->nam());
     }
+    void testStatus()
+    {
+
+    }
 private:
     //TestableSystemUpdate *m_instance = nullptr;
     SystemUpdate *m_instance = nullptr;
@@ -114,6 +128,8 @@ private:
     UpdateModelFilter *m_clicks = nullptr;
     UpdateModelFilter *m_images = nullptr;
     UpdateModelFilter *m_installed = nullptr;
+    MockClickManager *m_clickManager = nullptr;
+    MockImageManager *m_imageManager = nullptr;
 };
 
 QTEST_MAIN(TstSystemUpdate)

@@ -14,7 +14,6 @@ set(PLUGIN_LIBS
 
 set(MOCK_SYSTEMUPDATE_SRCS
     plugin.cpp
-    MockClickManager.cpp
     MockSystemImage.cpp
     MockSystemUpdate.cpp
     MockUpdate.cpp

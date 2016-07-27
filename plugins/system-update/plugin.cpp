@@ -19,7 +19,7 @@
  *
 */
 
-#include "click/manager.h"
+// #include "click/manager.h"
 
 #include "plugin.h"
 #include "systemupdate.h"
@@ -42,14 +42,14 @@ static QObject *suSingletonProvider(QQmlEngine *engine, QJSEngine *scriptEngine)
 void BackendPlugin::registerTypes(const char *uri)
 {
     Q_ASSERT(uri == QLatin1String("Ubuntu.SystemSettings.Update"));
-
     qmlRegisterUncreatableType<Update>(
         uri, 1, 0, "Update", "Only provided for enums."
     );
     qmlRegisterSingletonType<SystemUpdate>(
         uri, 1, 0, "SystemUpdate", suSingletonProvider
     );
-    qmlRegisterType<Click::Manager>(uri, 1, 0, "ClickManager");
+    // qmlRegisterType<Click::Manager>(uri, 1, 0, "ClickManager");
+    // qmlRegisterType<Image::Manager>(uri, 1, 0, "ImageManager");
     qRegisterMetaType<UpdateModel*>("UpdateModel*");
     qRegisterMetaType<UpdateModelFilter*>("UpdateModelFilter*");
 }

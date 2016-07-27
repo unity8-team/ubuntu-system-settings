@@ -123,7 +123,6 @@ Q_SIGNALS:
     void versionTagChanged();
 
     void downloadModeChanged();
-    void updateNotFound();
     void updateProcessFailed(const QString &reason);
     void updateProcessing();
 
@@ -134,10 +133,10 @@ Q_SIGNALS:
     void updatePaused(const int &percentage);
     void updateAvailableStatus(const bool isAvailable,
                                const bool downloading,
-                               const QString availableVersion,
-                               const int updateSize,
-                               const QString lastUpdateDate,
-                               const QString errorReason);
+                               const QString &availableVersion,
+                               const int &updateSize,
+                               const QString &lastUpdateDate,
+                               const QString &errorReason);
 
     void updateProgress(const int &percentage, const double &eta);
 

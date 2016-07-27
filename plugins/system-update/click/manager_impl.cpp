@@ -18,7 +18,7 @@
 
 #include "helpers.h"
 
-#include "click/manager.h"
+#include "click/manager_impl.h"
 #include "click/client_impl.h"
 #include "click/manifest_impl.h"
 #include "click/sso_impl.h"
@@ -43,24 +43,24 @@ namespace UpdatePlugin
 {
 namespace Click
 {
-Manager::Manager(QObject *parent)
-    : QObject(parent)
+ManagerImpl::ManagerImpl(UpdateModel *model, QObject *parent)
+    : Manager(parent)
     , m_client(new Click::ClientImpl(this))
     , m_manifest(new Click::ManifestImpl(this))
     , m_sso(new Click::SSOImpl(this))
     , m_downloadFactory(new Click::TokenDownloaderFactoryImpl)
-    , m_model(SystemUpdate::instance()->updates())
+    , m_model(model)
 {
     init();
 }
 
-Manager::Manager(Click::Client *client,
+ManagerImpl::ManagerImpl(Click::Client *client,
                  Click::Manifest *manifest,
                  Click::SSO *sso,
                  Click::TokenDownloaderFactory *downloadFactory,
                  UpdateModel *model,
                  QObject *parent)
-    : QObject(parent)
+    : Manager(parent)
     , m_client(client)
     , m_manifest(manifest)
     , m_sso(sso)
@@ -70,7 +70,7 @@ Manager::Manager(Click::Client *client,
     init();
 }
 
-void Manager::init()
+void ManagerImpl::init()
 {
     initClient();
 
@@ -88,12 +88,12 @@ void Manager::init()
     connect(this, SIGNAL(checkCanceled()), this, SLOT(handleCheckStop()));
 }
 
-Manager::~Manager()
+ManagerImpl::~ManagerImpl()
 {
     delete m_downloadFactory;
 }
 
-void Manager::initTokenDownloader(const Click::TokenDownloader *downloader)
+void ManagerImpl::initTokenDownloader(const Click::TokenDownloader *downloader)
 {
     connect(downloader, SIGNAL(downloadSucceeded(QSharedPointer<Update>)),
             this, SLOT(handleTokenDownload(QSharedPointer<Update>)));
@@ -102,7 +102,7 @@ void Manager::initTokenDownloader(const Click::TokenDownloader *downloader)
     connect(this, SIGNAL(checkCanceled()), downloader, SLOT(cancel()));
 }
 
-void Manager::initClient()
+void ManagerImpl::initClient()
 {
     connect(m_client, SIGNAL(metadataRequestSucceeded(const QJsonArray&)),
             this, SLOT(parseMetadata(const QJsonArray&)));
@@ -122,7 +122,7 @@ void Manager::initClient()
             this, SIGNAL(credentialError()));
 }
 
-void Manager::initManifest()
+void ManagerImpl::initManifest()
 {
     connect(m_manifest, SIGNAL(requestSucceeded(const QJsonArray&)),
             this, SLOT(handleManifest(const QJsonArray&)));
@@ -130,7 +130,7 @@ void Manager::initManifest()
             this, SLOT(handleManifestFailure()));
 }
 
-void Manager::initSSO()
+void ManagerImpl::initSSO()
 {
     connect(m_sso, SIGNAL(credentialsRequestSucceeded(const UbuntuOne::Token&)),
             this, SLOT(handleCredentials(const UbuntuOne::Token&)));
@@ -138,7 +138,7 @@ void Manager::initSSO()
             this, SLOT(handleCredentialsFailed()));
 }
 
-void Manager::check()
+void ManagerImpl::check()
 {
     if (m_checking) {
         qWarning() << Q_FUNC_INFO << "Check was already in progress.";
@@ -152,12 +152,12 @@ void Manager::check()
         return;
     }
 
-    Q_EMIT checkStarted();
+    setCheckingForUpdates(true);
     m_candidates.clear();
     m_manifest->request();
 }
 
-void Manager::retry(const QString &identifier, const uint &revision)
+void ManagerImpl::retry(const QString &identifier, const uint &revision)
 {
     /* We'll simply ask for another click token if a click update failed
     to install. */
@@ -173,20 +173,20 @@ void Manager::retry(const QString &identifier, const uint &revision)
     }
 }
 
-void Manager::cancel()
+void ManagerImpl::cancel()
 {
     m_client->cancel();
-    Q_EMIT checkCanceled();
+    setCheckingForUpdates(false);
 }
 
-void Manager::launch(const QString &appId)
+void ManagerImpl::launch(const QString &identifier, const uint &revision)
 {
-    if (!ubuntu_app_launch_start_application(appId.toLatin1().data(), nullptr)) {
-        qWarning() << Q_FUNC_INFO << "Could not launch app" << appId;
-    }
+    // if (!ubuntu_app_launch_start_application(appId.toLatin1().data(), nullptr)) {
+    //     qWarning() << Q_FUNC_INFO << "Could not launch app" << appId;
+    // }
 }
 
-void Manager::handleManifest(const QJsonArray &manifest)
+void ManagerImpl::handleManifest(const QJsonArray &manifest)
 {
     QList<QSharedPointer<Update> > updates = parseManifest(manifest);
 
@@ -202,6 +202,7 @@ void Manager::handleManifest(const QJsonArray &manifest)
     if (m_checking) {
         if (updates.size() == 0) {
             Q_EMIT checkCompleted();
+            setCheckingForUpdates(false);
             return;
         }
 
@@ -213,13 +214,13 @@ void Manager::handleManifest(const QJsonArray &manifest)
     }
 }
 
-void Manager::handleManifestFailure()
+void ManagerImpl::handleManifestFailure()
 {
     if (m_checking)
-        Q_EMIT checkFailed();
+        setCheckingForUpdates(false);
 }
 
-QList<QSharedPointer<Update> > Manager::parseManifest(const QJsonArray &manifest)
+QList<QSharedPointer<Update> > ManagerImpl::parseManifest(const QJsonArray &manifest)
 {
     QList<QSharedPointer<Update> > updates;
     for (int i = 0; i < manifest.size(); i++) {
@@ -251,7 +252,7 @@ QList<QSharedPointer<Update> > Manager::parseManifest(const QJsonArray &manifest
     return updates;
 }
 
-void Manager::handleTokenDownload(QSharedPointer<Update> update)
+void ManagerImpl::handleTokenDownload(QSharedPointer<Update> update)
 {
     Click::TokenDownloader* dl = qobject_cast<Click::TokenDownloader*>(QObject::sender());
     dl->disconnect();
@@ -276,7 +277,7 @@ void Manager::handleTokenDownload(QSharedPointer<Update> update)
     completionCheck();
 }
 
-void Manager::completionCheck()
+void ManagerImpl::completionCheck()
 {
     /* Check if tokens are all fetched, or any update has since been marked as
     installed. Return early if that's the case. */
@@ -289,9 +290,10 @@ void Manager::completionCheck()
 
     // All updates had tokens, check is complete.
     Q_EMIT checkCompleted();
+    setCheckingForUpdates(false);
 }
 
-void Manager::handleTokenDownloadFailure(QSharedPointer<Update> update)
+void ManagerImpl::handleTokenDownloadFailure(QSharedPointer<Update> update)
 {
     Click::TokenDownloader* dl = qobject_cast<Click::TokenDownloader*>(QObject::sender());
     dl->disconnect();
@@ -313,7 +315,7 @@ void Manager::handleTokenDownloadFailure(QSharedPointer<Update> update)
     completionCheck();
 }
 
-void Manager::handleCredentials(const UbuntuOne::Token &token)
+void ManagerImpl::handleCredentials(const UbuntuOne::Token &token)
 {
     m_authToken = token;
 
@@ -328,7 +330,7 @@ void Manager::handleCredentials(const UbuntuOne::Token &token)
     check();
 }
 
-void Manager::handleCredentialsFailed()
+void ManagerImpl::handleCredentialsFailed()
 {
     m_sso->invalidateCredentials();
     m_authToken = UbuntuOne::Token();
@@ -339,13 +341,13 @@ void Manager::handleCredentialsFailed()
     setAuthenticated(false);
 }
 
-void Manager::handleCommunicationErrors()
+void ManagerImpl::handleCommunicationErrors()
 {
     if (m_checking)
-        Q_EMIT checkFailed();
+        setCheckingForUpdates(false);
 }
 
-void Manager::requestMetadata()
+void ManagerImpl::requestMetadata()
 {
     QList<QString> packages;
     Q_FOREACH(const QString &identifier, m_candidates.keys()) {
@@ -366,7 +368,7 @@ void Manager::requestMetadata()
     m_client->requestMetadata(url, packages);
 }
 
-void Manager::parseMetadata(const QJsonArray &array)
+void ManagerImpl::parseMetadata(const QJsonArray &array)
 {
     for (int i = 0; i < array.size(); i++) {
         auto object = array.at(i).toObject();
@@ -414,17 +416,17 @@ void Manager::parseMetadata(const QJsonArray &array)
     completionCheck();
 }
 
-bool Manager::authenticated() const
+bool ManagerImpl::authenticated() const
 {
     return m_authenticated || Helpers::isIgnoringCredentials();
 }
 
-bool Manager::checkingForUpdates() const
+bool ManagerImpl::checkingForUpdates() const
 {
     return m_checking;
 }
 
-void Manager::setAuthenticated(const bool authenticated)
+void ManagerImpl::setAuthenticated(const bool authenticated)
 {
     if (authenticated != m_authenticated) {
         m_authenticated = authenticated;
@@ -432,7 +434,7 @@ void Manager::setAuthenticated(const bool authenticated)
     }
 }
 
-void Manager::setCheckingForUpdates(const bool checking)
+void ManagerImpl::setCheckingForUpdates(const bool checking)
 {
     if (checking != m_checking) {
         m_checking = checking;

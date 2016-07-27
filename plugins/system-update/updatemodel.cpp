@@ -16,16 +16,10 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "systemupdate.h"
 #include "updatedb.h"
 #include "updatemodel.h"
 
-#include <QDir>
-#include <QSqlError>
-#include <QSqlQuery>
-#include <QSqlRecord>
-#include <QSqlField>
-#include <QStandardPaths>
+#include <QDebug>
 
 namespace UpdatePlugin
 {
@@ -156,19 +150,6 @@ int UpdateModel::rowCount(const QModelIndex &parent) const
     Q_UNUSED(parent)
     return m_updates.size();
 }
-
-// void UpdateModel::setFilter(const UpdateModel::Filter &filter)
-// {
-//     if (filter != m_filter) {
-//         m_filter = filter;
-//         Q_EMIT (filterChanged());
-//     }
-// }
-
-// UpdateModel::Filter UpdateModel::filter() const
-// {
-//     return m_filter;
-// }
 
 void UpdateModel::clear()
 {
@@ -422,11 +403,15 @@ void UpdateModel::setInstalled(const QString &id, const uint &revision)
     }
 }
 
-void UpdateModel::startUpdate(const QString &id, const uint &revision)
+void UpdateModel::startUpdate(const QString &id, const uint &revision,
+                              const bool automatic)
 {
     QSharedPointer<Update> u = find(id, revision);
     if (!u.isNull()) {
-        u->setState(Update::State::StateDownloading);
+        Update::State state = automatic ?
+                              Update::State::StateDownloadingAutomatically :
+                              Update::State::StateDownloading;
+        u->setState(state);
         m_db->update(u);
     }
 }
@@ -483,20 +468,28 @@ void UpdateModel::setInstalling(const QString &id, const uint &revision,
     }
 }
 
-void UpdateModel::pauseUpdate(const QString &id, const uint &revision)
+void UpdateModel::pauseUpdate(const QString &id, const uint &revision,
+                              const bool automatic)
 {
     QSharedPointer<Update> u = find(id, revision);
     if (!u.isNull()) {
-        u->setState(Update::State::StateDownloadPaused);
+        Update::State state = automatic ?
+                              Update::State::StateAutomaticDownloadPaused :
+                              Update::State::StateDownloadPaused;
+        u->setState(state);
         m_db->update(u);
     }
 }
 
-void UpdateModel::resumeUpdate(const QString &id, const uint &revision)
+void UpdateModel::resumeUpdate(const QString &id, const uint &revision,
+                               const bool automatic)
 {
     QSharedPointer<Update> u = find(id, revision);
     if (!u.isNull()) {
-        u->setState(Update::State::StateDownloading);
+        Update::State state = automatic ?
+                              Update::State::StateDownloadingAutomatically :
+                              Update::State::StateDownloading;
+        u->setState(state);
         m_db->update(u);
     }
 }
@@ -514,24 +507,17 @@ void UpdateModel::cancelUpdate(const QString &id, const uint &revision)
     }
 }
 
-void UpdateModel::setImageUpdate(const QString &id, const QString &version,
+void UpdateModel::setImageUpdate(const QString &id, const int &version,
                                  const int &updateSize)
 {
     QSharedPointer<Update> u = QSharedPointer<Update>(new Update);
     u->setIdentifier(id);
     u->setKind(Update::Kind::KindImage);
-
-    bool ok = false;
-    uint revision = version.toUInt(&ok, 10);
-    if (!ok) {
-        qWarning() << "Did not understand image version" << version;
-        revision = 0;
-    }
     u->setProgress(0);
     u->setTitle("Ubuntu");
-    u->setRevision(revision);
+    u->setRevision((uint) version);
     u->setBinaryFilesize((int) updateSize);
-    u->setRemoteVersion(version);
+    u->setRemoteVersion(QString::number(version));
     u->setState(Update::State::StateAvailable);
     u->setIconUrl(QLatin1String(
         "file:///usr/share/icons/suru/places/scalable/distributor-logo.svg"

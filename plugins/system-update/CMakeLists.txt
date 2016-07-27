@@ -5,11 +5,9 @@ set(QML_SOURCES
     ChangelogExpander.qml
     DownloadHandler.qml
     Global.qml
-    ImageUpdateDelegate.qml
     ImageUpdatePrompt.qml
     NotAuthenticatedNotification.qml
     PageComponent.qml
-    SystemImageHandler.qml
     Updates.qml
     UpdateDelegate.qml
 )
@@ -26,6 +24,7 @@ pkg_check_modules(UBUNTUONEAUTH REQUIRED ubuntuoneauth-2.0)
 add_definitions(${UBUNTUONEAUTH_CFLAGS} ${UBUNTUONEAUTH_CFLAGS_OTHER})
 
 add_library(UpdatePlugin SHARED
+    click/manager.h
     click/client.h
     click/manifest.h
     click/sso.h
@@ -36,7 +35,10 @@ add_library(UpdatePlugin SHARED
     click/sso_impl.cpp
     click/tokendownloader_impl.cpp
     click/tokendownloader_factory_impl.cpp
-    click/manager.cpp
+    click/manager_impl.cpp
+
+    image/imagemanager.h
+    image/imagemanager_impl.cpp
 
     network/accessmanager.h
     network/accessmanager_impl.cpp
@@ -50,6 +52,7 @@ add_library(UpdatePlugin SHARED
 qt5_use_modules(UpdatePlugin Quick Core Network Sql)
 target_link_libraries(UpdatePlugin
     apt-pkg
+    uss-systemimage
     ${UAL_LDFLAGS}
     ${UBUNTUONEAUTH_LDFLAGS}
 )
@@ -68,9 +71,9 @@ install(FILES qmldir.in DESTINATION ${PLUG_DIR} RENAME qmldir)
 install(FILES ${QML_SOURCES} DESTINATION ${PLUGIN_QML_DIR}/system-update)
 
 install(FILES system-update.settings DESTINATION ${PLUGIN_MANIFEST_DIR})
-install(FILES images/settings-system-update.svg DESTINATION ${PLUGIN_MANIFEST_DIR}/icons)
+install(FILES settings-system-update.svg DESTINATION ${PLUGIN_MANIFEST_DIR}/icons)
 
-set(QML_SOURCES_NOTIFICATION EntryComponent.qml SystemImageHandler.qml)
+set(QML_SOURCES_NOTIFICATION EntryComponent.qml)
 
 # We need a dummy target so the QML files show up in Qt Creator
 # If this plugin gets some C++ sources, remove this.

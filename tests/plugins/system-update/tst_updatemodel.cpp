@@ -286,7 +286,7 @@ private slots:
     }
     void testImageUpdate()
     {
-        m_model->setImageUpdate("ubuntu", "350", 400000);
+        m_model->setImageUpdate("ubuntu", 350, 400000);
         QCOMPARE(m_model->rowCount(), 1);
         QCOMPARE(m_model->data(
             m_model->index(0), UpdateModel::IdRole

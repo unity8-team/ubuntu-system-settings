@@ -54,19 +54,7 @@ ItemPage {
                              (indicatorPower.batteryLevel > 25)
     property bool online: NetworkingStatus.online
     property bool authenticated: clickManager.authenticated
-    property int status: {
-        var c = clickManager.checkingForUpdates;
-        var s = SystemImage.checkingForUpdates;
-        if (c && s) {
-            return SystemUpdate.StatusCheckingAllUpdates;
-        } else if (c && !s) {
-            return SystemUpdate.StatusCheckingClickUpdates;
-        } else if (!c && s) {
-            return SystemUpdate.StatusCheckingSystemUpdates;
-        } else {
-            return SystemUpdate.StatusIdle;
-        }
-    }
+
     property int updatesCount: {
         var count = 0;
         if (authenticated) {
@@ -76,25 +64,18 @@ ItemPage {
         return count;
     }
 
-    Component.onCompleted: {
-        if (SystemUpdate.isCheckRequired()) {
-            clickManager.check();
-            SystemImage.checkForUpdate();
-        }
-    }
+    // ClickManager {
+    //     id: clickManager
+    //     onCheckCompleted: SystemUpdate.checkCompleted()
 
-    function cancelChecks() {
-        clickManager.cancel();
-        imageHandler.cancel();
-    }
+    //     onNetworkError: status = SystemUpdate.StatusNetworkError
+    //     onServerError: status = SystemUpdate.StatusServerError
+    // }
 
-    ClickManager {
-        id: clickManager
-        onCheckCompleted: SystemUpdate.checkCompleted()
-
-        onNetworkError: status = SystemUpdate.StatusNetworkError
-        onServerError: status = SystemUpdate.StatusServerError
-    }
+    // ImageManager {
+    //     id: imageManager
+    //     onCheckCompleted: SystemUpdate.checkCompleted()
+    // }
 
     Setup {
         id: uoaConfig
@@ -113,16 +94,6 @@ ItemPage {
     DownloadHandler {
         id: downloadHandler
         updateModel: SystemUpdate.model
-    }
-
-    SystemImageHandler {
-        id: imageHandler
-        updateModel: SystemUpdate.model
-    }
-
-    Connections {
-        target: SystemImage
-        onUpdateAvailableStatus: SystemUpdate.checkCompleted()
     }
 
     Flickable {
@@ -151,12 +122,12 @@ ItemPage {
 
                 height: hidden ? 0 : units.gu(8)
                 clip: true
-                status: root.status
+                status: SystemUpdate.status
                 batchMode: root.batchMode
                 requireRestart: imageRepeater.count > 0
                 updatesCount: root.updatesCount
                 online: root.online
-                onStop: root.cancelChecks()
+                onStop: SystemUpdate.cancel()
 
                 onRequestInstall: {
                     if (requireRestart) {
@@ -198,7 +169,7 @@ ItemPage {
                     horizontalAlignment: Text.AlignHCenter
                     wrapMode: Text.WordWrap
                     text: {
-                        var s = root.status;
+                        var s = SystemUpdate.status;
                         if (!root.online) {
                             return i18n.tr("Connect to the Internet to check for updates.");
                         } else if (s === SystemUpdate.StatusIdle && updatesCount === 0) {
@@ -228,7 +199,7 @@ ItemPage {
                     id: imageRepeater
                     model: SystemUpdate.imageUpdates
 
-                    delegate: ImageUpdateDelegate {
+                    delegate: UpdateDelegate {
                         objectName: "updatesImageDelegate-" + index
                         width: imageUpdateCol.width
                         updateState: model.updateState
@@ -243,7 +214,7 @@ ItemPage {
 
                         onRetry: SystemImage.downloadUpdate();
                         onDownload: SystemImage.downloadUpdate();
-                        onPause: imageHandler.pause();
+                        onPause: SystemImage.pauseUpdate();
                         onInstall: {
                             var popup = PopupUtils.open(
                                 Qt.resolvedUrl("ImageUpdatePrompt.qml"), null, {
@@ -419,14 +390,14 @@ ItemPage {
                 SystemImage.updateDownloaded.connect(function () {
                     SystemImage.applyUpdate();
                 });
-                imageHandler.download();
+                SystemImage.downloadUpdate();
             }
         }
     }
 
     Connections {
         target: NetworkingStatus
-        onOnlineChanged: root.cancelChecks()
+        onOnlineChanged: SystemUpdate.cancel()
     }
 
     Component {

@@ -45,7 +45,7 @@ public:
 public slots:
     virtual void cancel() = 0;
 
-signals:
+Q_SIGNALS:
     void downloadSucceeded(QSharedPointer<Update> update);
     void downloadFailed(QSharedPointer<Update> update);
 

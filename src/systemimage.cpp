@@ -76,20 +76,32 @@ void QSystemImage::slotNameOwnerChanged(const QString &name,
 }
 
 void QSystemImage::setUpInterface() {
-    connect(&m_iface,
-            SIGNAL(UpdateAvailableStatus(bool, bool, QString, int, QString,
-                                         QString)),
-            this,
-            SIGNAL(updateAvailableStatus(bool, bool, QString, int, QString,
-                                         QString)));
+    initializeProperties();
+
+    if (m_iface.metaObject()->indexOfSignal("UpdateDownloaded()") == -1) {
+        qWarning() << "Unable to locate signal on s-i interface. "
+                      "Will not connect to s-i events.";
+        return;
+    }
 
     connect(&m_iface,
-            SIGNAL(UpdateAvailableStatus(bool, bool, QString, int, QString,
-                                         QString)),
-            this,
-            SLOT(availableStatusChanged(bool, bool, QString, int, QString,
-                                          QString)));
-
+        SIGNAL(UpdateAvailableStatus(const bool, const bool, const QString&,
+                                     const int&, const QString&,
+                                     const QString&)),
+        this,
+        SIGNAL(updateAvailableStatus(const bool, const bool, const QString&,
+                                     const int&, const QString&,
+                                     const QString&))
+    );
+    connect(&m_iface,
+        SIGNAL(UpdateAvailableStatus(const bool, const bool, const QString&,
+                                     const int&, const QString&,
+                                     const QString&)),
+        this,
+        SLOT(availableStatusChanged(const bool, const bool, const QString&,
+                                    const int&, const QString&,
+                                    const QString&))
+    );
     connect(&m_iface, SIGNAL(UpdateProgress(int, double)),
                 this, SIGNAL(updateProgress(int, double)));
     connect(&m_iface, SIGNAL(UpdateProgress(int, double)),
@@ -107,8 +119,6 @@ void QSystemImage::setUpInterface() {
 
     connect(&m_iface, SIGNAL(SettingChanged(QString, QString)),
                 this, SLOT(settingsChanged(QString, QString)));
-
-    initializeProperties();
 }
 
 void QSystemImage::factoryReset() {

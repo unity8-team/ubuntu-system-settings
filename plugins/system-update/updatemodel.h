@@ -23,9 +23,7 @@
 #include "updatedb.h"
 
 #include <QAbstractListModel>
-#include <QDateTime>
 #include <QModelIndex>
-#include <QSqlDatabase>
 #include <QSortFilterProxyModel>
 
 namespace UpdatePlugin
@@ -93,14 +91,17 @@ public:
     Q_INVOKABLE void setDownloaded(const QString &id, const uint &revision);
     Q_INVOKABLE void setInstalling(const QString &id, const uint &revision,
                                    const int &progress = 0);
-    Q_INVOKABLE void startUpdate(const QString &id, const uint &revision);
+    Q_INVOKABLE void startUpdate(const QString &id, const uint &revision,
+                                 const bool automatic = false);
     Q_INVOKABLE void queueUpdate(const QString &id, const uint &revision,
                                  const QString &downloadId);
     Q_INVOKABLE void processUpdate(const QString &id, const uint &revision);
-    Q_INVOKABLE void pauseUpdate(const QString &id, const uint &revision);
-    Q_INVOKABLE void resumeUpdate(const QString &id, const uint &revision);
+    Q_INVOKABLE void pauseUpdate(const QString &id, const uint &revision,
+                                 const bool automatic = false);
+    Q_INVOKABLE void resumeUpdate(const QString &id, const uint &revision,
+                                  const bool automatic = false);
     Q_INVOKABLE void cancelUpdate(const QString &id, const uint &revision);
-    Q_INVOKABLE void setImageUpdate(const QString &id, const QString &version,
+    Q_INVOKABLE void setImageUpdate(const QString &id, const int &version,
                                     const int &updateSize);
 
 public slots:
@@ -149,7 +150,6 @@ signals:
 
 protected:
     virtual bool filterAcceptsRow(int sourceRow, const QModelIndex &sourceParent) const Q_DECL_OVERRIDE;
-    // virtual bool lessThan(const QModelIndex &left, const QModelIndex &right) const Q_DECL_OVERRIDE;
 
 private:
     Update::Kind m_kind = Update::Kind::KindUnknown;
