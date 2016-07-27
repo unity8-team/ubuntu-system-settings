@@ -5,9 +5,9 @@
 export DH_VERBOSE=1
 
 DEB_HOST_ARCH := $(shell dpkg-architecture -qDEB_HOST_ARCH)
-# Skip tests on the archs they are known to be flaky with current configuration
-# Ref.: https://bugs.launchpad.net/ubuntu/+source/mesa/+bug/1585942
-testskip_architectures := arm64
+# Skip tests on the archs they are known to be broken with current configuration
+# Ref.: https://bugs.launchpad.net/ubuntu/+source/qtdeclarative-opensource-src/+bug/1606927
+testskip_architectures := powerpc
 
 include /usr/share/dpkg/buildflags.mk
 include /usr/share/dpkg/architecture.mk
