@@ -38,4 +38,6 @@ override_dh_makeshlibs:
 override_dh_auto_test:
 ifneq ($(DEB_HOST_ARCH),$(findstring $(DEB_HOST_ARCH), $(testskip_architectures)))
 	dh_auto_test
+else
+	true
 endif
