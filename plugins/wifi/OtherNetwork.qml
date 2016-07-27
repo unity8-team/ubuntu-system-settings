@@ -33,6 +33,10 @@ Component {
             FilePicker {}
         }
 
+        UbuntuWifiPanel {
+            id: panel
+        }
+
         id: otherNetworkDialog
         objectName: "otherNetworkDialog"
         anchorToKeyboard: true
@@ -57,6 +61,8 @@ Component {
                            password.length === 10 ||
                            password.length === 13 ||
                            password.length === 26;
+                case 6: // WAPI Personal
+                    return password.length < 127
                 case 0: // None
                 default:
                     return true;
@@ -323,13 +329,22 @@ Component {
         ListItem.ItemSelector {
             id: securityList
             objectName: "securityList"
-            model: [i18n.tr("None"),             // index: 0
-                i18n.tr("WPA & WPA2 Personal"),  // index: 1
-                i18n.tr("WPA & WPA2 Enterprise"),// index: 2
-                i18n.tr("WEP"),                  // index: 3
-                i18n.tr("Dynamic WEP (802.1x)"), // index: 4
-                i18n.tr("LEAP"),                 // index: 5
-            ]
+            model: {
+                var m = [
+                    i18n.tr("None"),                     // index: 0
+                    i18n.tr("WPA & WPA2 Personal"),      // index: 1
+                    i18n.tr("WPA & WPA2 Enterprise"),    // index: 2
+                    i18n.tr("WEP"),                      // index: 3
+                    i18n.tr("Dynamic WEP (802.1x)"),     // index: 4
+                    i18n.tr("LEAP")                      // index: 5
+                ];
+                if (panel.wapiSupported || showAllUI) {
+                    m.push(i18n.tr("WAPI Personal"));    // index: 6
+                    m.push(i18n.tr("WAPI Certificate")); // index: 7
+                }
+                return m;
+            }
+
             selectedIndex: {
                 switch(keyMgmt) {
                 case 'none': // WEP
@@ -340,6 +355,10 @@ Component {
                     return 3;
                 case 'ieee8021x': // Dynamic WEP
                     return 4;
+                case 'wapi-psk': // WAPI Personal
+                    return 6;
+                case 'wapi-cert': // WAPI Certificate
+                    return 7;
                 case 'wpa-none': // Ad-Hoc WPA-PSK
                 case 'wpa-psk': // infrastructure WPA-PSK
                 default: // Default is WPA
@@ -421,7 +440,8 @@ Component {
             font.bold: false
             color: Theme.palette.normal.baseText
             visible: (securityList.selectedIndex === 2 ||
-                      securityList.selectedIndex === 4 /* WPA or D-WEP */) &&
+                      securityList.selectedIndex === 4 /* WPA or D-WEP */ ||
+                      securityList.selectedIndex === 7 /* WAPI Cert */ ) &&
                      (authList.selectedIndex === 0 ||
                       authList.selectedIndex === 1 ||
                       authList.selectedIndex === 3 ||
@@ -435,7 +455,8 @@ Component {
                 right: parent.right
             }
             visible: (securityList.selectedIndex === 2 ||
-                      securityList.selectedIndex === 4 /* WPA or D-WEP */) &&
+                      securityList.selectedIndex === 4 /* WPA or D-WEP */ ||
+                      securityList.selectedIndex === 7 /* WAPI Cert */ ) &&
                      (authList.selectedIndex === 0 ||
                       authList.selectedIndex === 1 ||
                       authList.selectedIndex === 3 ||
@@ -537,7 +558,8 @@ Component {
             font.bold: false
             color: Theme.palette.normal.baseText
             visible: (securityList.selectedIndex === 2 ||
-                      securityList.selectedIndex === 4) &&
+                      securityList.selectedIndex === 4 ||
+                      securityList.selectedIndex === 7) &&
                       authList.selectedIndex === 0 // only for TLS
 
         }
@@ -549,7 +571,8 @@ Component {
                 right: parent.right
             }
             visible: (securityList.selectedIndex === 2 ||
-                      securityList.selectedIndex === 4) &&
+                      securityList.selectedIndex === 4 ||
+                      securityList.selectedIndex === 7) &&
                       authList.selectedIndex === 0 // only for TLS
             model: cacertListModel
             expanded: false
@@ -820,8 +843,9 @@ Component {
             id : password
             objectName: "password"
             width: parent.width
-            visible: securityList.selectedIndex !== 0
-
+            // Shown if not No Authentication or WAPI Cert.
+            visible: securityList.selectedIndex !== 0 &&
+                     securityList.selectedIndex !== 7 // WAPI Cert
             echoMode: passwordVisibleSwitch.checked ?
                       TextInput.Normal : TextInput.Password
             inputMethodHints: Qt.ImhNoPredictiveText
