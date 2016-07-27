@@ -181,7 +181,7 @@ class WifiEnabledTestCase(WifiBaseTestCase):
 
 
 class WapiEnabledTestCase(WifiBaseTestCase):
-    """Tests for Language Page"""
+    """Tests for Wifi (WAPI) Page"""
 
     def setUp(self):
         self.useFixture(EnvironmentVariable('USS_SHOW_ALL_UI', '1'))
