@@ -159,7 +159,8 @@ ItemPage {
                 otherNetworLoader.source = "OtherNetwork.qml";
                 PopupUtils.open(otherNetworLoader.item, wifibase, {
                     'ssid': pluginOptions['ssid'],
-                    'bssid': pluginOptions['bssid']
+                    'bssid': pluginOptions['bssid'],
+                    'keyMgmt': pluginOptions['key-mgmt']
                 });
             }
         }

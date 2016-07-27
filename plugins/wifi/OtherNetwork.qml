@@ -20,6 +20,7 @@ import SystemSettings 1.0
 import Ubuntu.Components 1.3
 import Ubuntu.Components.ListItems 1.3 as ListItems
 import Ubuntu.Components.Popups 1.3
+import Ubuntu.Settings.Components 0.1
 import Ubuntu.SystemSettings.Wifi 1.0
 import QMenuModel 0.1
 
@@ -27,12 +28,22 @@ Component {
 
     Dialog {
 
+        Component {
+            id: filePickerComponent
+            FilePicker {}
+        }
+
+        UbuntuWifiPanel {
+            id: panel
+        }
+
         id: otherNetworkDialog
         objectName: "otherNetworkDialog"
         anchorToKeyboard: true
 
         property string ssid
         property string bssid
+        property string keyMgmt
 
         function settingsValid () {
             if (networkname.length === 0) {
@@ -50,6 +61,8 @@ Component {
                            password.length === 10 ||
                            password.length === 13 ||
                            password.length === 26;
+                case 6: // WAPI Personal
+                    return password.length < 127
                 case 0: // None
                 default:
                     return true;
@@ -60,11 +73,10 @@ Component {
             var pickerDialog;
             var certDialog;
 
-            pickerDialog = PopupUtils.open(
-                Qt.resolvedUrl("./CertPicker.qml")
-            );
-            pickerDialog.fileImportSignal.connect(function (file) {
-                if (!file === false) {
+            pickerDialog = PopupUtils.open(filePickerComponent);
+            pickerDialog.accept.connect(function (file) {
+                PopupUtils.close(pickerDialog);
+                if (file) {
                     certDialogLoader.source = Qt.resolvedUrl(
                         "./CertDialog.qml"
                     );
@@ -85,12 +97,13 @@ Component {
                     });
                 }
             });
+            pickerDialog.reject.connect(function () {
+                PopupUtils.close(pickerDialog);
+            });
         }
 
         title: ssid ?
-               /* TODO(jgdx): Hack to avoid breaking string freeze. This will be
-               changed to i18n.tr("Connect to %1").arg(ssid) per spec. */
-               i18n.tr("Connect to Wi‑Fi") + " " + ssid :
+               i18n.tr("Connect to %1").arg(ssid) :
                i18n.tr("Connect to Hidden Network")
         text: feedback.enabled ? feedback.text : "";
 
@@ -316,14 +329,42 @@ Component {
         ListItems.ItemSelector {
             id: securityList
             objectName: "securityList"
-            model: [i18n.tr("None"),             // index: 0
-                i18n.tr("WPA & WPA2 Personal"),  // index: 1
-                i18n.tr("WPA & WPA2 Enterprise"),// index: 2
-                i18n.tr("WEP"),                  // index: 3
-                i18n.tr("Dynamic WEP (802.1x)"), // index: 4
-                i18n.tr("LEAP"),                 // index: 5
-            ]
-            selectedIndex: 1
+            model: {
+                var m = [
+                    i18n.tr("None"),                     // index: 0
+                    i18n.tr("WPA & WPA2 Personal"),      // index: 1
+                    i18n.tr("WPA & WPA2 Enterprise"),    // index: 2
+                    i18n.tr("WEP"),                      // index: 3
+                    i18n.tr("Dynamic WEP (802.1x)"),     // index: 4
+                    i18n.tr("LEAP")                      // index: 5
+                ];
+                if (panel.wapiSupported || showAllUI) {
+                    m.push(i18n.tr("WAPI Personal"));    // index: 6
+                    m.push(i18n.tr("WAPI Certificate")); // index: 7
+                }
+                return m;
+            }
+
+            selectedIndex: {
+                switch(keyMgmt) {
+                case 'none': // WEP
+                    return 0;
+                case 'wpa-eap': // WPA-Enterprise
+                    return 2;
+                case 'wep': // WEP
+                    return 3;
+                case 'ieee8021x': // Dynamic WEP
+                    return 4;
+                case 'wapi-psk': // WAPI Personal
+                    return 6;
+                case 'wapi-cert': // WAPI Certificate
+                    return 7;
+                case 'wpa-none': // Ad-Hoc WPA-PSK
+                case 'wpa-psk': // infrastructure WPA-PSK
+                default: // Default is WPA
+                    return 1;
+                }
+            }
         }
 
         Label {
@@ -358,7 +399,6 @@ Component {
             visible: securityList.selectedIndex === 2 ||
                      securityList.selectedIndex === 4
         }
-
         Label {
             id: p2authListLabel
             text : i18n.tr("Inner authentication")
@@ -400,7 +440,8 @@ Component {
             font.bold: false
             color: Theme.palette.normal.baseText
             visible: (securityList.selectedIndex === 2 ||
-                      securityList.selectedIndex === 4 /* WPA or D-WEP */) &&
+                      securityList.selectedIndex === 4 /* WPA or D-WEP */ ||
+                      securityList.selectedIndex === 7 /* WAPI Cert */ ) &&
                      (authList.selectedIndex === 0 ||
                       authList.selectedIndex === 1 ||
                       authList.selectedIndex === 3 ||
@@ -414,7 +455,8 @@ Component {
                 right: parent.right
             }
             visible: (securityList.selectedIndex === 2 ||
-                      securityList.selectedIndex === 4 /* WPA or D-WEP */) &&
+                      securityList.selectedIndex === 4 /* WPA or D-WEP */ ||
+                      securityList.selectedIndex === 7 /* WAPI Cert */ ) &&
                      (authList.selectedIndex === 0 ||
                       authList.selectedIndex === 1 ||
                       authList.selectedIndex === 3 ||
@@ -516,7 +558,8 @@ Component {
             font.bold: false
             color: Theme.palette.normal.baseText
             visible: (securityList.selectedIndex === 2 ||
-                      securityList.selectedIndex === 4) &&
+                      securityList.selectedIndex === 4 ||
+                      securityList.selectedIndex === 7) &&
                       authList.selectedIndex === 0 // only for TLS
 
         }
@@ -528,7 +571,8 @@ Component {
                 right: parent.right
             }
             visible: (securityList.selectedIndex === 2 ||
-                      securityList.selectedIndex === 4) &&
+                      securityList.selectedIndex === 4 ||
+                      securityList.selectedIndex === 7) &&
                       authList.selectedIndex === 0 // only for TLS
             model: cacertListModel
             expanded: false
@@ -792,14 +836,16 @@ Component {
             font.bold: false
             color: Theme.palette.normal.baseText
             elide: Text.ElideRight
-            visible: securityList.selectedIndex !== 0
+            visible: password.visible
         }
 
         TextField {
             id : password
             objectName: "password"
             width: parent.width
-            visible: securityList.selectedIndex !== 0
+            // Shown if not No Authentication or WAPI Cert.
+            visible: securityList.selectedIndex !== 0 &&
+                     securityList.selectedIndex !== 7 // WAPI Cert
             echoMode: passwordVisibleSwitch.checked ?
                       TextInput.Normal : TextInput.Password
             inputMethodHints: Qt.ImhNoPredictiveText
@@ -810,7 +856,7 @@ Component {
             id: passwordVisiblityRow
             layoutDirection: Qt.LeftToRight
             spacing: units.gu(2)
-            visible: securityList.selectedIndex !== 0
+            visible: password.visible
 
             CheckBox {
                 id: passwordVisibleSwitch

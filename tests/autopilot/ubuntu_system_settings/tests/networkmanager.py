@@ -136,6 +136,8 @@ class NM80211ApSecurityFlags:
     NM_802_11_AP_SEC_GROUP_CCMP = 0x00000080
     NM_802_11_AP_SEC_KEY_MGMT_PSK = 0x00000100
     NM_802_11_AP_SEC_KEY_MGMT_802_1X = 0x00000200
+    NM_802_11_AP_SEC_KEY_MGMT_WAPI = 0x00000400
+    NM_802_11_AP_SEC_KEY_MGMT_WAPI_PSK = 0x00000800
 
     NAME_MAP = {
         NM_802_11_AP_SEC_KEY_MGMT_PSK: {
@@ -145,6 +147,12 @@ class NM80211ApSecurityFlags:
         NM_802_11_AP_SEC_KEY_MGMT_802_1X: {
             'key-mgmt': 'wpa-eap'
         },
+        NM_802_11_AP_SEC_KEY_MGMT_WAPI: {
+            'key-mgmt': 'wpa-cert'
+        },
+        NM_802_11_AP_SEC_KEY_MGMT_WAPI_PSK: {
+            'key-mgmt': 'wapi-psk'
+        }
     }
 
 
@@ -580,7 +588,8 @@ def AddWiFiConnection(self, dev_path, connection_name, ssid_name, key_mgmt,
         settings['802-11-wireless-security'] = (
             NM80211ApSecurityFlags.NAME_MAP[security])
 
-    if security == NM80211ApSecurityFlags.NM_802_11_AP_SEC_KEY_MGMT_802_1X:
+    if (security == NM80211ApSecurityFlags.NM_802_11_AP_SEC_KEY_MGMT_802_1X or
+            security == NM80211ApSecurityFlags.NM_802_11_AP_SEC_KEY_MGMT_WAPI):
         settings['802-1x'] = config['802-1x']
 
     self.AddObject(
