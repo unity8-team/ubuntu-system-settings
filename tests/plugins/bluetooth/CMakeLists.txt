@@ -1,4 +1,3 @@
-set(XVFB_CMD xvfb-run -a -s "-screen 0 640x480x24")
 include_directories(${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_SOURCE_DIR}/plugins/bluetooth)
 include_directories(${QTDBUSMOCK_INCLUDE_DIRS})
 include_directories(${QTDBUSTEST_INCLUDE_DIRS})

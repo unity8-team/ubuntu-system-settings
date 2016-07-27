@@ -1,4 +1,3 @@
-set(XVFB_CMD xvfb-run -a -s "-screen 0 640x480x24")
 include_directories(${CMAKE_CURRENT_BINARY_DIR} ../../../plugins/security-privacy ${GLIB_INCLUDE_DIRS})
 add_definitions(-DTESTS)
 
