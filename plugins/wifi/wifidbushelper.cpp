@@ -48,7 +48,7 @@ WifiDbusHelper::WifiDbusHelper(QObject *parent) : QObject(parent),
 
 void WifiDbusHelper::connect(QString ssid, int security, int auth, QStringList usernames, QStringList password, QStringList certs, int p2auth)
 {
-    if((security<0 || security>5) || (auth<0 || auth>4) || (p2auth<0 || p2auth>5)) {
+    if((security<0 || security>7) || (auth<0 || auth>4) || (p2auth<0 || p2auth>5)) {
         qWarning() << "Qml and C++ have gotten out of sync. Can't connect.\n";
         return;
     }
@@ -66,6 +66,7 @@ void WifiDbusHelper::connect(QString ssid, int security, int auth, QStringList u
     QVariantMap wireless;
     wireless["ssid"] = ssid.toLatin1();
 
+    // TODO: ENUMS!
     // security:
     // 0: None
     // 1: WPA & WPA2 Personal
@@ -73,7 +74,9 @@ void WifiDbusHelper::connect(QString ssid, int security, int auth, QStringList u
     // 3: WEP
     // 4: Dynamic WEP
     // 5: LEAP
-    if (security != 0) { // WPA Enterprise or Dynamic WEP
+    // 6: WAPI Personal
+    // 7: Wapi Certificate
+    if (security != 0) { // WPA Enterprise, Dynamic WEP or WAPI
         wireless["security"] = QStringLiteral("802-11-wireless-security");
 
         QVariantMap wireless_security;
@@ -101,14 +104,18 @@ void WifiDbusHelper::connect(QString ssid, int security, int auth, QStringList u
             wireless_security["auth-alg"] = QStringLiteral("leap");
             wireless_security["leap-username"] = usernames[0];
             wireless_security["leap-password"] = password[0];
+        } else if (security == 6) { // WAPI Personal
+            wireless_security["key-mgmt"] = QStringLiteral("wapi-psk");
+            wireless_security["psk"] = password[0];
+        } else if (security == 7) { // WAPI Cert
+            wireless_security["key-mgmt"] = QStringLiteral("wapi-cert");
         }
         configuration["802-11-wireless-security"] = wireless_security;
     }
 
     configuration["802-11-wireless"] = wireless;
 
-    if (security == 2 || security == 4){
-
+    if (security == 2 || security == 4 || security == 7){
         QVariantMap wireless_802_1x;
         // [802-1x]
         /*TLS   // index: 0
@@ -116,15 +123,25 @@ void WifiDbusHelper::connect(QString ssid, int security, int auth, QStringList u
           LEAP  // index: 2
           FAST  // index: 3
           PEAP  // index: 4 */
-        wireless_802_1x["identity"] = usernames[0];
-        if (auth != 0) {
-            wireless_802_1x["password"] = password[0];
-        }
 
         QByteArray cacert(    "file://" + certs[0].toUtf8() + '\0');
         QByteArray clientcert("file://" + certs[1].toUtf8() + '\0');
         QByteArray privatekey("file://" + certs[2].toUtf8() + '\0');
         QString pacFile( certs[3] );
+
+        if (security == 7) { // WAPI Cert
+            wireless_802_1x["eap"] = QStringList("wapi");
+            if (certs[0] != "") {wireless_802_1x["ca-cert"] = cacert;}
+            if (certs[1] != "") {wireless_802_1x["client-cert"] = clientcert;}
+
+            // We want auth for WAPI Cert to be N/A.
+            auth = -1;
+        }
+
+        wireless_802_1x["identity"] = usernames[0];
+        if (auth > 0) {
+            wireless_802_1x["password"] = password[0];
+        }
 
         if (auth == 0) { // TLS
             wireless_802_1x["eap"] = QStringList("tls");
@@ -176,6 +193,7 @@ void WifiDbusHelper::connect(QString ssid, int security, int auth, QStringList u
                 wireless_802_1x["phase2-auth"] = QStringLiteral("md5");
             }
         }
+
         configuration["802-1x"] = wireless_802_1x;
     }
 
@@ -304,7 +322,13 @@ QString WifiDbusHelper::getWifiIpAddress()
         auto type_v = iface.property("DeviceType");
         if (type_v.toUInt() == 2 /* NM_DEVICE_TYPE_WIFI */) {
             auto ip4name = iface.property("IpInterface").toString();
-            return QNetworkInterface::interfaceFromName(ip4name).addressEntries()[0].ip().toString();
+
+            QList<QHostAddress> adrs = QNetworkInterface::interfaceFromName(
+                ip4name
+            ).allAddresses();
+            if (adrs.size() > 0) {
+                return adrs.at(0).toString();
+            }
             break;
         }
     }

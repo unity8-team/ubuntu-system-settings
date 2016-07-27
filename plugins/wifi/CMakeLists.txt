@@ -1,7 +1,10 @@
+if(ANDR_PROP_FOUND)
+    add_definitions(-DANDROID_PROPERTIES)
+endif()
+
 set(QML_SOURCES
 AccessPoint.qml
 BaseMenuItem.qml
-CertPicker.qml
 CertDialog.qml
 Common.qml
 DivMenuItem.qml
@@ -20,11 +23,14 @@ StandardMenuItem.qml
 SwitchMenuItem.qml
 )
 
+include_directories(${ANDR_PROP_INCLUDE_DIRS})
+
 add_library(UbuntuWifiPanel MODULE
   certhandler.cpp
   plugin.cpp
   previousnetworkmodel.cpp
   unitymenumodelstack.cpp
+  wifi.cpp
   wifidbushelper.cpp
   certhandler.h
   nm_manager_proxy.h
@@ -36,6 +42,7 @@ add_library(UbuntuWifiPanel MODULE
   wifidbushelper.h
   ${QML_SOURCES}
 )
+target_link_libraries(UbuntuWifiPanel ${ANDR_PROP_LDFLAGS})
 qt5_use_modules(UbuntuWifiPanel Qml Quick DBus)
 
 set(PLUG_DIR ${PLUGIN_PRIVATE_MODULE_DIR}/Ubuntu/SystemSettings/Wifi)

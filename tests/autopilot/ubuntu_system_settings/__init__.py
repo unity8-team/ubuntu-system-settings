@@ -1702,6 +1702,10 @@ class OtherNetwork(
                                              text=_('Dynamic WEP (802.1x)'))
         elif security == 'leap':
             item = s_list.wait_select_single('*', text=_('LEAP'))
+        elif security == 'wapi-psk':
+            item = s_list.wait_select_single('*', text=_('WAPI Personal'))
+        elif security == 'wapi-cert':
+            item = s_list.wait_select_single('*', text=_('WAPI Certificate'))
         elif security is not None:
             raise ValueError('security type %s is not valid' % security)
 
@@ -1932,36 +1936,6 @@ class VpnEditor(
         # some time between writing to the API.
         sleep(1)
         self._openvpn_port_field.write(port)
-
-    @autopilot.logging.log_action(logger.debug)
-    def set_openvpn_ca(self, paths):
-        self.set_openvpn_file(self._openvpn_ca_field, paths)
-
-    @autopilot.logging.log_action(logger.debug)
-    def set_openvpn_file(self, field, paths):
-        self.pointing_device.click_object(field)
-
-        # Wait for expanded animation.
-        sleep(0.5)
-
-        # file = field.wait_select_single(objectName='vpnFileSelectorItem0')
-        choose = field.wait_select_single(objectName='vpnFileSelectorItem1')
-        self.pointing_device.click_object(choose)
-        file_dialog = self.get_root_instance().wait_select_single(
-            objectName='vpnDialogFile'
-        )
-
-        # Go to root /
-        root = file_dialog.wait_select_single(objectName='vpnFilePathItem_/')
-        self.pointing_device.click_object(root)
-
-        for path in paths:
-            list_view = file_dialog.wait_select_single(
-                'QQuickListView', objectName='vpnFileList'
-            )
-            list_view.click_element('vpnFileItem_%s' % path)
-        accept = file_dialog.wait_select_single(objectName='vpnFileAccept')
-        self.pointing_device.click_object(accept)
 
     @autopilot.logging.log_action(logger.debug)
     def openvpn_okay(self):
