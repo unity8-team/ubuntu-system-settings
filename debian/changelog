@@ -1,3 +1,14 @@
+ubuntu-system-settings (0.4+16.10.20160728-0ubuntu1) yakkety; urgency=medium
+
+  [ Lukáš Tinkl ]
+  * Fixes for indicator-keyboard (gsettings compat, HW kbd panel
+    shortcut)
+
+  [ Michał Sawicz ]
+  * Skip tests on powerpc due to Qt 5.6 bug (LP: #1606927)
+
+ -- Michał Sawicz <michal.sawicz@canonical.com>  Thu, 28 Jul 2016 08:52:36 +0000
+
 ubuntu-system-settings (0.4+16.10.20160722.1-0ubuntu1) yakkety; urgency=medium
 
   [ Ken VanDine ]
