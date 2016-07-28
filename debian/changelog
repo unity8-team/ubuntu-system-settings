@@ -1,3 +1,11 @@
+ubuntu-system-settings (0.4+16.10.20160728-0ubuntu1) yakkety; urgency=medium
+
+  [ Lukáš Tinkl ]
+  * Fixes for indicator-keyboard (gsettings compat, HW kbd panel
+    shortcut)
+
+ -- Robert Bruce Park <robert.park@canonical.com>  Thu, 28 Jul 2016 16:24:32 +0000
+
 ubuntu-system-settings (0.4+16.10.20160722.1-0ubuntu1) yakkety; urgency=medium
 
   [ Ken VanDine ]
