@@ -1,7 +1,7 @@
 /*
  * This file is part of system-settings
  *
- * Copyright (C) 2013 Canonical Ltd.
+ * Copyright (C) 2013-2016 Canonical Ltd.
  *
  * Contact: Evan Dandrea <evan.dandrea@canonical.com>
  *
@@ -22,8 +22,9 @@ import Biometryd 0.0
 import GSettings 1.0
 import QMenuModel 0.1
 import QtQuick 2.4
+import SystemSettings.ListItems 1.0 as SettingsListItems
 import Ubuntu.Components 1.3
-import Ubuntu.Components.ListItems 1.3 as ListItem
+import Ubuntu.Components.ListItems 1.3 as ListItems
 import SystemSettings 1.0
 import Ubuntu.Settings.Fingerprint 0.1
 import Ubuntu.SystemSettings.Battery 1.0
@@ -148,15 +149,15 @@ ItemPage {
             anchors.left: parent.left
             anchors.right: parent.right
 
-            ListItem.Header {
+            SettingsItemTitle {
                 id: securityTitle
                 text: i18n.tr("Security")
             }
-            ListItem.SingleValue {
+
+            SettingsListItems.SingleValueProgression {
                 id: fingerprintControl
                 objectName: "fingerprintControl"
                 text: i18n.tr("Fingerprint ID")
-                progression: true
                 onClicked: pageStack.push(fingeprintPage, {
                     passcodeSet: securityPrivacy.securityType !== UbuntuSecurityPrivacyPanel.Swipe
                 })
@@ -173,17 +174,17 @@ ItemPage {
                 }
             }
 
-            ListItem.SingleValue {
+            SettingsListItems.SingleValueProgression {
                 id: lockingControl
                 objectName: "lockingControl"
                 text: i18n.tr("Locking and unlocking")
-                progression: true
                 onClicked: pageStack.push(Qt.resolvedUrl("PhoneLocking.qml"), {
                     usePowerd: usePowerd,
                     powerSettings: powerSettings
                 })
             }
-            ListItem.SingleValue {
+
+            SettingsListItems.SingleValueProgression {
                 id: simControl
                 objectName: "simControl"
                 text: i18n.tr("SIM PIN")
@@ -196,28 +197,31 @@ ItemPage {
                         return i18n.tr("Off");
                 }
                 visible: simsPresent > 0
-                progression: true
                 onClicked: pageStack.push(Qt.resolvedUrl("SimPin.qml"), { sims: sims })
             }
-            ListItem.Standard {
+
+            SettingsListItems.Standard {
                 text: i18n.tr("Encryption")
-                control: Switch {
+                Switch {
                     id: encryptionSwitch
                     checked: false
                 }
                 visible: showAllUI
             }
-            ListItem.Caption {
+
+            ListItems.Caption {
                 text: i18n.tr(
                         "Encryption protects against access to phone data when the phone is connected to a PC or other device.")
                 visible: showAllUI
             }
-            ListItem.Header {
+
+            SettingsItemTitle {
                 text: i18n.tr("Privacy")
             }
-            ListItem.Standard {
+
+            SettingsListItems.Standard {
                 text: i18n.tr("Stats on welcome screen")
-                control: Switch {
+                Switch {
                     property bool serverChecked: securityPrivacy.statsWelcomeScreen
                     onServerCheckedChanged: checked = serverChecked
                     Component.onCompleted: checked = serverChecked
@@ -225,9 +229,9 @@ ItemPage {
                 }
             }
 
-            ListItem.Standard {
+            SettingsListItems.Standard {
                 text: i18n.tr("Messages on welcome screen")
-                control: Switch {
+                Switch {
                     property bool serverChecked: securityPrivacy.messagesWelcomeScreen
                     onServerCheckedChanged: checked = serverChecked
                     Component.onCompleted: checked = serverChecked
@@ -246,12 +250,12 @@ ItemPage {
 
                 Component.onCompleted: start()
             }
-            ListItem.SingleValue {
+
+            SettingsListItems.SingleValueProgression {
                 id: locationItem
                 objectName: "locationItem"
                 text: i18n.tr("Location")
                 value: ""
-                progression: true
                 onClicked: pageStack.push(Qt.resolvedUrl("Location.qml"))
                 visible: true
                 enabled: true
@@ -261,19 +265,20 @@ ItemPage {
                        i18n.tr("On") : i18n.tr("Off")
                 }
             }
+
             Binding {
                 target: locationItem
                 property: "locationEnabled"
                 value: locationActionGroup.enabled.state
             }
-            ListItem.SingleValue {
+
+            SettingsListItems.SingleValueProgression {
                 text: i18n.tr("App permissions")
-                progression: true
                 onClicked: pageStack.push(Qt.resolvedUrl("AppAccess.qml"), {pluginManager: pluginManager})
             }
-            ListItem.SingleValue {
+
+            SettingsListItems.SingleValueProgression {
                 text: i18n.tr("Diagnostics")
-                progression: true
                 value: diagnosticsWidget.reportCrashes ?
                            /* TRANSLATORS: This string is shown when crash
                               reports are to be sent by the system. */

@@ -12,6 +12,8 @@ testskip_architectures := powerpc
 include /usr/share/dpkg/buildflags.mk
 include /usr/share/dpkg/architecture.mk
 
+BUILDHOME=$(CURDIR)/debian/build
+
 override_dh_auto_configure:
 	# Debian defines CMAKE_INSTALL_LOCALSTATEDIR as /usr/var, which is wrong.
 	# So until Debian bug 719148 is fixed, do it ourselves.
@@ -20,6 +22,16 @@ override_dh_auto_configure:
 override_dh_auto_build:
 	dh_auto_build
 	$(MAKE) -C obj-$(DEB_HOST_GNU_TYPE) pot
+
+override_dh_clean:
+	dh_clean
+	rm -rf $(BUILDHOME)
+
+override_dh_auto_test:
+ifneq ($(DEB_HOST_ARCH),$(findstring $(DEB_HOST_ARCH), $(testskip_architectures)))
+	mkdir -p $(BUILDHOME)
+	HOME=$(BUILDHOME) dh_auto_test
+endif
 
 override_dh_install:
 	cd tests/autopilot; \
@@ -34,10 +46,3 @@ override_dh_makeshlibs:
 
 %:
 	dh $@ --fail-missing --with python3,migrations
-
-override_dh_auto_test:
-ifneq ($(DEB_HOST_ARCH),$(findstring $(DEB_HOST_ARCH), $(testskip_architectures)))
-	dh_auto_test
-else
-	true
-endif

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 Canonical Ltd
+ * Copyright (C) 2013-2016 Canonical Ltd
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as
@@ -18,10 +18,11 @@
  */
 
 import QtQuick 2.4
-import Ubuntu.Components 1.3
-import Ubuntu.Components.ListItems 1.3 as ListItem
-import Ubuntu.SystemSettings.SecurityPrivacy 1.0
 import SystemSettings 1.0
+import SystemSettings.ListItems 1.0 as SettingsListItems
+import Ubuntu.Components 1.3
+import Ubuntu.Components.ListItems 1.3 as ListItems
+import Ubuntu.SystemSettings.SecurityPrivacy 1.0
 
 ItemPage {
     id: root
@@ -57,7 +58,7 @@ ItemPage {
             anchors.left: parent.left
             anchors.right: parent.right
 
-            ListItem.Caption {
+            ListItems.Caption {
                 text: i18n.tr("Apps that you have granted access to:")
             }
 
@@ -91,10 +92,10 @@ ItemPage {
             Repeater {
                 model: appsModel
 
-                ListItem.SingleValue {
+                SettingsListItems.SingleValueProgression {
                     text: i18n.tr(model.name)
                     enabled: trustStoreModel.count > 0
-                    progression: enabled ? true : false
+                    progressionVisible: enabled ? true : false
                     value: trustStoreModel.count > 0 ?
                         i18n.tr("%1/%2").arg(trustStoreModel.grantedCount).arg(trustStoreModel.count) :
                         i18n.tr("0")
@@ -104,19 +105,19 @@ ItemPage {
                         "model": trustStoreModel,
                     })
 
-                    TrustStoreModel {
+                    resources: TrustStoreModel {
                         id: trustStoreModel
                         serviceName: model.trustStoreService
                     }
                 }
             }
 
-            ListItem.Caption {
+            ListItems.Caption {
                     text: i18n.tr("Apps may also request access to online accounts.")
             }
 
-            ListItem.SingleControl {
-                control: Button {
+            SettingsListItems.SingleControl {
+                Button {
                     text: i18n.tr("Online Accounts…")
                     width: parent.width - units.gu(4)
                     onClicked: {

@@ -1,7 +1,7 @@
 /*
  * This file is part of system-settings
  *
- * Copyright (C) 2013 Canonical Ltd.
+ * Copyright (C) 2013-2016 Canonical Ltd.
  *
  * Contact:
  *     Sebastien Bacher <sebastien.bacher@canonical.com>
@@ -164,7 +164,6 @@ ItemPage {
             SettingsItemTitle {
                 id: fwdSomeTitle
                 text: i18n.tr("Forward incoming calls when:")
-                showDivider: false
             }
 
             CallForwardItem {
