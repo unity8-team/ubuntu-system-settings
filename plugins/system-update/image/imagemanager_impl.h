@@ -62,8 +62,6 @@ private slots:
     void handleCheckingForUpdatesChanged();
 
 private:
-    void init();
-
     QSystemImage *m_si;
     UpdateModel *m_model;
 };

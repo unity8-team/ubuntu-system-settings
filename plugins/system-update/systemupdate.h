@@ -30,7 +30,7 @@ namespace UpdatePlugin
 class SystemUpdate : public QObject
 {
     Q_OBJECT
-    Q_ENUMS(Status)
+    Q_ENUMS(Status Check)
     Q_PROPERTY(UpdateModel* model READ updates CONSTANT)
     Q_PROPERTY(UpdateModelFilter* pendingUpdates READ pendingUpdates CONSTANT)
     Q_PROPERTY(UpdateModelFilter* clickUpdates READ clickUpdates CONSTANT)
@@ -52,6 +52,14 @@ public:
         StatusServerError
     };
 
+    enum class Check
+    {
+        CheckAutomatic,
+        CheckAll,
+        CheckClick,
+        CheckImage
+    };
+
     UpdateModel* updates();
     UpdateModelFilter* pendingUpdates() const;
     UpdateModelFilter* clickUpdates() const;
@@ -63,7 +71,7 @@ public:
     and it is provided here. */
     Network::Manager* nam();
 
-    Q_INVOKABLE void check();
+    Q_INVOKABLE void check(const Check check = Check::CheckAutomatic);
     Q_INVOKABLE void cancel();
     Q_INVOKABLE void retry(const QString &identifier, const uint &revision);
     Q_INVOKABLE void launch(const QString &identifier, const uint &revision);
@@ -94,7 +102,6 @@ private slots:
     void handleServerError();
 
 private:
-    void init();
     void setStatus(const Status &status);
 
     static SystemUpdate *m_instance;

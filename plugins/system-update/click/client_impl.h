@@ -34,12 +34,11 @@ public:
     explicit ClientImpl(UpdatePlugin::Network::Manager *nam,
                         QObject *parent = 0);
     virtual ~ClientImpl();
-
+public slots:
     virtual void cancel() override;
     virtual void requestMetadata(const QUrl &url,
                                  const QList<QString> &packages) override;
     virtual void requestToken(const QUrl &url) override;
-
 protected slots:
     void requestSucceeded(QNetworkReply *reply);
     void requestFinished(QNetworkReply *reply);
@@ -49,7 +48,6 @@ protected slots:
 private:
     void initializeReply(QNetworkReply *reply);
     bool validReply(const QNetworkReply *reply);
-    void initializeNam();
     void handleMetadataReply(QNetworkReply *reply);
 
     UpdatePlugin::Network::Manager *m_nam;

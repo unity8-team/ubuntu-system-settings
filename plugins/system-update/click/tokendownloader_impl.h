@@ -47,7 +47,6 @@ protected slots:
     void handleFailure();
 
 private:
-    void init();
     Client *m_client;
 };
 } // Click

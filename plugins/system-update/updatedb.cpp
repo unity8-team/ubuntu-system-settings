@@ -358,8 +358,6 @@ QList<QSharedPointer<Update> > UpdateDb::updates()
 
 QSharedPointer<Update> UpdateDb::get(const QString &id, const uint &revision)
 {
-    QSharedPointer<Update> u = QSharedPointer<Update>(new Update);
-
     QSqlQuery q(m_db);
     q.prepare(GET_SINGLE);
     q.bindValue(":id", id);
@@ -370,8 +368,11 @@ QSharedPointer<Update> UpdateDb::get(const QString &id, const uint &revision)
     }
 
     if (q.next()) {
+        QSharedPointer<Update> u = QSharedPointer<Update>(new Update);
         update(u, q);
+        return u;
+    } else {
+        return QSharedPointer<Update>(nullptr);
     }
-    return u;
 }
 } // UpdatePlugin

@@ -15,6 +15,7 @@
  * You should have received a copy of the GNU General Public License along
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 #include "click/manager_impl.h"
 #include "image/imagemanager_impl.h"
 #include "network/accessmanager_impl.h"
@@ -40,17 +41,15 @@ void SystemUpdate::destroyInstance()
 }
 
 SystemUpdate::SystemUpdate(QObject *parent)
-    : QObject(parent)
-    , m_model(new UpdateModel(this))
-    , m_pending(new UpdateModelFilter(m_model, this))
-    , m_clicks(new UpdateModelFilter(m_model, this))
-    , m_images(new UpdateModelFilter(m_model, this))
-    , m_installed(new UpdateModelFilter(m_model, this))
-    , m_nam(new Network::ManagerImpl(this))
-    , m_imageManager(new Image::ManagerImpl(m_model, this))
-    , m_clickManager(new Click::ManagerImpl(m_model, this))
+    : SystemUpdate(new UpdateModel(this),
+                   new UpdateModelFilter(m_model, this),
+                   new UpdateModelFilter(m_model, this),
+                   new UpdateModelFilter(m_model, this),
+                   new UpdateModelFilter(m_model, this),
+                   new Network::ManagerImpl(this),
+                   new Image::ManagerImpl(m_model, this),
+                   new Click::ManagerImpl(m_model, this), parent)
 {
-    init();
 }
 
 SystemUpdate::SystemUpdate(UpdateModel *model,
@@ -71,11 +70,6 @@ SystemUpdate::SystemUpdate(UpdateModel *model,
     , m_imageManager(imageManager)
     , m_clickManager(clickManager)
     , m_nam(nam)
-{
-    init();
-}
-
-void SystemUpdate::init()
 {
     m_pending->filterOnInstalled(false);
 
@@ -178,8 +172,8 @@ void SystemUpdate::setStatus(const Status &status)
 
 bool SystemUpdate::isCheckRequired()
 {
-    // Spec says that a manual check should not happen if a check was
-    // completed less than 30 minutes ago.
+    /* Spec says that a manual check should not happen if a check was completed
+    less than 30 minutes ago. */
     QDateTime now = QDateTime::currentDateTimeUtc().addSecs(-1800); // 30 mins
     // TODO: do not break Demeter's law
     return m_model->db()->lastCheckDate() < now;
@@ -205,11 +199,25 @@ void SystemUpdate::handleServerError()
     setStatus(Status::StatusServerError);
 }
 
-void SystemUpdate::check()
+void SystemUpdate::check(const Check check)
 {
-    if (isCheckRequired()) {
+    switch (check) {
+    case Check::CheckAutomatic:
+        if (isCheckRequired()) {
+            m_imageManager->check();
+            m_clickManager->check();
+        }
+        break;
+    case Check::CheckAll:
         m_imageManager->check();
         m_clickManager->check();
+        break;
+    case Check::CheckClick:
+            m_clickManager->check();
+        break;
+    case Check::CheckImage:
+            m_imageManager->check();
+        break;
     }
 }
 

@@ -1,19 +1,21 @@
 /*
- * Copyright (C) 2013-2016 Canonical Ltd
+ * This file is part of system-settings
  *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License version 3 as
- * published by the Free Software Foundation.
+ * Copyright (C) 2013-2016 Canonical Ltd.
  *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ * This program is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License version 3, as published
+ * by the Free Software Foundation.
  *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranties of
+ * MERCHANTABILITY, SATISFACTORY QUALITY, or FITNESS FOR A PARTICULAR
+ * PURPOSE.  See the GNU General Public License for more details.
  *
+ * You should have received a copy of the GNU General Public License along
+ * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 #include "helpers.h"
 #include <QProcessEnvironment>
 
@@ -80,7 +82,8 @@ std::string Helpers::architectureFromDpkg()
 QString Helpers::clickMetadataUrl()
 {
     QString url = QStringLiteral(
-            "https://search.apps.ubuntu.com/api/v1/click-metadata");
+        "https://search.apps.ubuntu.com/api/v1/click-metadata"
+    );
     QProcessEnvironment environment = QProcessEnvironment::systemEnvironment();
     return environment.value("URL_APPS", url);
 }
@@ -94,8 +97,8 @@ QString Helpers::clickTokenUrl(const QString &url)
 bool Helpers::isIgnoringCredentials()
 {
     QProcessEnvironment environment = QProcessEnvironment::systemEnvironment();
-    // If IGNORE_CREDENTIALS is set to something other than an empty string,
-    // we should ignore credentials.
+    /* If IGNORE_CREDENTIALS is set to something other than an empty string,
+    we should ignore credentials. */
     return environment.value("IGNORE_CREDENTIALS", "") != "";
 }
 
@@ -110,5 +113,4 @@ QString Helpers::whichPkcon()
     QProcessEnvironment environment = QProcessEnvironment::systemEnvironment();
     return environment.value("PKCON_COMMAND", QString("pkcon"));
 }
-
 } // UpdatePlugin

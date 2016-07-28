@@ -26,10 +26,8 @@ namespace Click
 {
 TokenDownloaderImpl::TokenDownloaderImpl(QSharedPointer<Update> update,
                                          QObject *parent)
-    : TokenDownloader(update, parent)
-    , m_client(new ClientImpl(this))
+    : TokenDownloaderImpl(new ClientImpl(this), update, parent)
 {
-    init();
 }
 
 TokenDownloaderImpl::TokenDownloaderImpl(Client *client,
@@ -37,16 +35,6 @@ TokenDownloaderImpl::TokenDownloaderImpl(Client *client,
                                          QObject *parent)
     : TokenDownloader(update, parent)
     , m_client(client)
-{
-    init();
-}
-
-TokenDownloaderImpl::~TokenDownloaderImpl()
-{
-    cancel();
-}
-
-void TokenDownloaderImpl::init()
 {
     connect(m_client, SIGNAL(tokenRequestSucceeded(const QString)),
             this, SLOT(handleSuccess(const QString)));
@@ -56,6 +44,11 @@ void TokenDownloaderImpl::init()
             this, SLOT(handleFailure()));
     connect(m_client, SIGNAL(credentialError()),
             this, SLOT(handleFailure()));
+}
+
+TokenDownloaderImpl::~TokenDownloaderImpl()
+{
+    cancel();
 }
 
 void TokenDownloaderImpl::setAuthToken(const UbuntuOne::Token &authToken)

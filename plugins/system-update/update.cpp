@@ -29,10 +29,6 @@ Update::Update(QObject *parent)
 {
 }
 
-Update::~Update()
-{
-}
-
 Update::Kind Update::kind() const
 {
     return m_kind;

@@ -31,6 +31,7 @@
 #include <QMap>
 #include <QJsonArray>
 #include <QSharedPointer>
+#include <QStateMachine>
 
 namespace UpdatePlugin
 {
@@ -56,42 +57,38 @@ public:
 
     virtual bool authenticated() const override;
     virtual bool checkingForUpdates() const override;
-
 private slots:
     void parseMetadata(const QJsonArray &array);
     void handleManifest(const QJsonArray &manifest);
-    void handleManifestFailure();
     void handleTokenDownload(QSharedPointer<Update> update);
     void handleTokenDownloadFailure(QSharedPointer<Update> update);
     void handleCredentials(const UbuntuOne::Token &token);
     void handleCredentialsFailed();
-    void handleCommunicationErrors();
-
-private:
-    void setAuthenticated(const bool authenticated);
-    void setCheckingForUpdates(const bool checking);
-
-    void init();
-    void initClient();
-    void initManifest();
-    void initSSO();
-    void initTokenDownloader(const Click::TokenDownloader *downloader);
-
     void requestMetadata();
-    QList<QSharedPointer<Update> > parseManifest(const QJsonArray &manifest);
-
     void completionCheck();
+    void handleStateChange();
+Q_SIGNALS:
+    void checkCanceled();
+    void stateChanged();
+private:
+    enum class State { Idle, Manifest, Metadata, Tokens, TokenComplete, Failed,
+                       Complete, Canceled };
+    void setState(const State &state);
+    State state() const;
+    void setAuthenticated(const bool authenticated);
+    void initTokenDownloader(const Click::TokenDownloader *downloader);
+    QList<QSharedPointer<Update> > parseManifest(const QJsonArray &manifest);
 
     Click::Client *m_client;
     Click::Manifest *m_manifest;
     Click::SSO *m_sso;
     Click::TokenDownloaderFactory *m_downloadFactory;
     UpdateModel *m_model;
-
     QMap<QString, QSharedPointer<Update>> m_candidates;
     UbuntuOne::Token m_authToken;
     bool m_authenticated = true;
-    bool m_checking = false;
+    State m_state = State::Idle;
+    QMap<State, QList<State> > m_transitions;
 };
 } // Click
 } // UpdatePlugin

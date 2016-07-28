@@ -27,6 +27,8 @@
 #include <ubuntu-app-launch.h>
 
 #include <QDateTime>
+#include <QFinalState>
+#include <QState>
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QList>
@@ -44,14 +46,11 @@ namespace UpdatePlugin
 namespace Click
 {
 ManagerImpl::ManagerImpl(UpdateModel *model, QObject *parent)
-    : Manager(parent)
-    , m_client(new Click::ClientImpl(this))
-    , m_manifest(new Click::ManifestImpl(this))
-    , m_sso(new Click::SSOImpl(this))
-    , m_downloadFactory(new Click::TokenDownloaderFactoryImpl)
-    , m_model(model)
+    : ManagerImpl(new Click::ClientImpl(this),
+                  new Click::ManifestImpl(this),
+                  new Click::SSOImpl(this),
+                  new Click::TokenDownloaderFactoryImpl, model, parent)
 {
-    init();
 }
 
 ManagerImpl::ManagerImpl(Click::Client *client,
@@ -67,30 +66,114 @@ ManagerImpl::ManagerImpl(Click::Client *client,
     , m_downloadFactory(downloadFactory)
     , m_model(model)
 {
-    init();
-}
-
-void ManagerImpl::init()
-{
-    initClient();
-
-    initManifest();
     /* We use the manifest as a source of information on what state apps are
     in. I.e. if we have a pending update's remote version matching that of an
     app in the manifest; we can make assumptions about that update's state. */
     m_manifest->request();
 
-    initSSO();
+    connect(this, SIGNAL(stateChanged()), this, SLOT(handleStateChange()));
+    connect(this, SIGNAL(stateChanged()), this, SIGNAL(checkingForUpdatesChanged()));
 
-    connect(this, SIGNAL(checkStarted()), this, SLOT(handleCheckStart()));
-    connect(this, SIGNAL(checkCompleted()), this, SLOT(handleCheckStop()));
-    connect(this, SIGNAL(checkFailed()), this, SLOT(handleCheckStop()));
-    connect(this, SIGNAL(checkCanceled()), this, SLOT(handleCheckStop()));
+    connect(m_client, SIGNAL(metadataRequestSucceeded(const QJsonArray&)),
+            this, SLOT(parseMetadata(const QJsonArray&)));
+    connect(m_client, SIGNAL(networkError()), this, SIGNAL(networkError()));
+    connect(m_client, SIGNAL(serverError()), this, SIGNAL(serverError()));
+    connect(m_client, SIGNAL(credentialError()),
+            this, SIGNAL(credentialError()));
+
+    connect(m_client, &Client::serverError, this, [this]() {
+        setState(State::Failed);
+    });
+    connect(m_client, &Client::networkError, this, [this]() {
+        setState(State::Failed);
+    });
+    connect(m_client, &Client::credentialError, this, [this]() {
+        setState(State::Failed);
+        handleCredentialsFailed();
+    });
+
+    connect(m_manifest, SIGNAL(requestSucceeded(const QJsonArray&)),
+            this, SLOT(handleManifest(const QJsonArray&)));
+    connect(m_manifest, &Manifest::requestFailed, this, [this]() {
+        setState(State::Complete);
+    });
+
+    connect(m_sso,
+            SIGNAL(credentialsRequestSucceeded(const UbuntuOne::Token&)),
+            this, SLOT(handleCredentials(const UbuntuOne::Token&)));
+    connect(m_sso, SIGNAL(credentialsRequestFailed()),
+            this, SLOT(handleCredentialsFailed()));
+
+    // Allowed state transitions.
+    m_transitions[State::Idle]          << State::Manifest << State::Failed;
+    m_transitions[State::Manifest]      << State::Metadata << State::Complete << State::Failed;
+    m_transitions[State::Metadata]      << State::Tokens << State::Complete << State::Failed;
+    m_transitions[State::Tokens]        << State::TokenComplete << State::Complete << State::Failed;
+    m_transitions[State::TokenComplete] << State::Tokens << State::Complete << State::Failed;
+    m_transitions[State::Complete]      << State::Idle;
+    m_transitions[State::Canceled]      << State::Idle;
 }
 
 ManagerImpl::~ManagerImpl()
 {
+    Q_EMIT checkCanceled();
     delete m_downloadFactory;
+}
+
+void ManagerImpl::setState(const State &state)
+{
+    if (!m_transitions[m_state].contains(state)) {
+        qWarning() << "illegal transition from" << (int) m_state << "to" << (int) state;
+    }
+
+    if (m_state != state && m_transitions[m_state].contains(state)) {
+        m_state = state;
+        Q_EMIT stateChanged();
+    }
+}
+
+ManagerImpl::State ManagerImpl::state() const
+{
+    return m_state;
+}
+
+void ManagerImpl::handleStateChange()
+{
+    switch (m_state) {
+    case State::Idle:
+        qWarning() << "changed to State::Idle";
+        m_candidates.clear();
+        break;
+    case State::Manifest:
+        qWarning() << "changed to State::Manifest";
+        m_manifest->request();
+        break;
+    case State::Metadata:
+        qWarning() << "changed to State::Metadata";
+        requestMetadata();
+        break;
+    case State::Tokens:
+        qWarning() << "changed to State::Tokens";
+        break;
+    case State::TokenComplete:
+        qWarning() << "changed to State::TokenComplete";
+        completionCheck();
+        break;
+    case State::Failed:
+        qWarning() << "changed to State::Failed";
+        Q_EMIT checkCanceled();
+        break;
+    case State::Complete:
+        qWarning() << "changed to State::Complete";
+        Q_EMIT checkCompleted();
+        setState(State::Idle);
+        break;
+    case State::Canceled:
+        qWarning() << "changed to State::Canceled";
+        Q_EMIT checkCanceled();
+        setState(State::Idle);
+        break;
+    }
 }
 
 void ManagerImpl::initTokenDownloader(const Click::TokenDownloader *downloader)
@@ -102,45 +185,9 @@ void ManagerImpl::initTokenDownloader(const Click::TokenDownloader *downloader)
     connect(this, SIGNAL(checkCanceled()), downloader, SLOT(cancel()));
 }
 
-void ManagerImpl::initClient()
-{
-    connect(m_client, SIGNAL(metadataRequestSucceeded(const QJsonArray&)),
-            this, SLOT(parseMetadata(const QJsonArray&)));
-    connect(m_client, SIGNAL(serverError()),
-            this, SLOT(handleCommunicationErrors()));
-    connect(m_client, SIGNAL(networkError()),
-            this, SLOT(handleCommunicationErrors()));
-    connect(m_client, SIGNAL(credentialError()),
-            this, SLOT(handleCommunicationErrors()));
-
-    // Redirect signals to consumers.
-    connect(m_client, SIGNAL(networkError()),
-            this, SIGNAL(networkError()));
-    connect(m_client, SIGNAL(serverError()),
-            this, SIGNAL(serverError()));
-    connect(m_client, SIGNAL(credentialError()),
-            this, SIGNAL(credentialError()));
-}
-
-void ManagerImpl::initManifest()
-{
-    connect(m_manifest, SIGNAL(requestSucceeded(const QJsonArray&)),
-            this, SLOT(handleManifest(const QJsonArray&)));
-    connect(m_manifest, SIGNAL(requestFailed()),
-            this, SLOT(handleManifestFailure()));
-}
-
-void ManagerImpl::initSSO()
-{
-    connect(m_sso, SIGNAL(credentialsRequestSucceeded(const UbuntuOne::Token&)),
-            this, SLOT(handleCredentials(const UbuntuOne::Token&)));
-    connect(m_sso, SIGNAL(credentialsRequestFailed()),
-            this, SLOT(handleCredentialsFailed()));
-}
-
 void ManagerImpl::check()
 {
-    if (m_checking) {
+    if (checkingForUpdates()) {
         qWarning() << Q_FUNC_INFO << "Check was already in progress.";
         return;
     }
@@ -152,9 +199,7 @@ void ManagerImpl::check()
         return;
     }
 
-    setCheckingForUpdates(true);
-    m_candidates.clear();
-    m_manifest->request();
+    setState(State::Manifest);
 }
 
 void ManagerImpl::retry(const QString &identifier, const uint &revision)
@@ -175,8 +220,7 @@ void ManagerImpl::retry(const QString &identifier, const uint &revision)
 
 void ManagerImpl::cancel()
 {
-    m_client->cancel();
-    setCheckingForUpdates(false);
+    setState(State::Canceled);
 }
 
 void ManagerImpl::launch(const QString &identifier, const uint &revision)
@@ -199,25 +243,16 @@ void ManagerImpl::handleManifest(const QJsonArray &manifest)
         }
     }
 
-    if (m_checking) {
-        if (updates.size() == 0) {
-            Q_EMIT checkCompleted();
-            setCheckingForUpdates(false);
-            return;
-        }
-
-        Q_FOREACH(QSharedPointer<Update> update, updates) {
-            m_candidates[update->identifier()] = update;
-        }
-
-        requestMetadata();
+    Q_FOREACH(QSharedPointer<Update> update, updates) {
+        m_candidates[update->identifier()] = update;
     }
-}
 
-void ManagerImpl::handleManifestFailure()
-{
-    if (m_checking)
-        setCheckingForUpdates(false);
+    if (updates.size() == 0) {
+        setState(State::Complete);
+        return;
+    }
+
+    setState(State::Metadata);
 }
 
 QList<QSharedPointer<Update> > ManagerImpl::parseManifest(const QJsonArray &manifest)
@@ -252,6 +287,21 @@ QList<QSharedPointer<Update> > ManagerImpl::parseManifest(const QJsonArray &mani
     return updates;
 }
 
+void ManagerImpl::completionCheck()
+{
+    /* Check if tokens are all fetched, or any update has since been marked as
+    installed. Return early if that's the case. */
+    Q_FOREACH(const QString &identifier, m_candidates.keys()) {
+        if (m_candidates[identifier]->token().isEmpty() ||
+            m_candidates[identifier]->installed()) {
+            setState(State::Tokens);
+            return;
+        }
+    }
+
+    setState(State::Complete);
+}
+
 void ManagerImpl::handleTokenDownload(QSharedPointer<Update> update)
 {
     Click::TokenDownloader* dl = qobject_cast<Click::TokenDownloader*>(QObject::sender());
@@ -274,23 +324,7 @@ void ManagerImpl::handleTokenDownload(QSharedPointer<Update> update)
     }
 
     dl->deleteLater();
-    completionCheck();
-}
-
-void ManagerImpl::completionCheck()
-{
-    /* Check if tokens are all fetched, or any update has since been marked as
-    installed. Return early if that's the case. */
-    Q_FOREACH(const QString &identifier, m_candidates.keys()) {
-        if (m_candidates[identifier]->token().isEmpty() ||
-            m_candidates[identifier]->installed()) {
-            return;
-        }
-    }
-
-    // All updates had tokens, check is complete.
-    Q_EMIT checkCompleted();
-    setCheckingForUpdates(false);
+    setState(State::TokenComplete);
 }
 
 void ManagerImpl::handleTokenDownloadFailure(QSharedPointer<Update> update)
@@ -312,7 +346,8 @@ void ManagerImpl::handleTokenDownloadFailure(QSharedPointer<Update> update)
     // We're done with it.
     m_candidates.remove(update->identifier());
     dl->deleteLater();
-    completionCheck();
+
+    setState(State::TokenComplete);
 }
 
 void ManagerImpl::handleCredentials(const UbuntuOne::Token &token)
@@ -335,16 +370,8 @@ void ManagerImpl::handleCredentialsFailed()
     m_sso->invalidateCredentials();
     m_authToken = UbuntuOne::Token();
 
-    cancel();
-
     // We've invalidated the token, and the user is now not authenticated.
     setAuthenticated(false);
-}
-
-void ManagerImpl::handleCommunicationErrors()
-{
-    if (m_checking)
-        setCheckingForUpdates(false);
 }
 
 void ManagerImpl::requestMetadata()
@@ -402,7 +429,7 @@ void ManagerImpl::parseMetadata(const QJsonArray &array)
             } else {
                 // Update not required, let's remove it.
                 m_candidates.remove(update->identifier());
-                completionCheck();
+                setState(State::TokenComplete);
             }
         }
     }
@@ -410,10 +437,12 @@ void ManagerImpl::parseMetadata(const QJsonArray &array)
     /* Remove clicks that did not have the necessary metadata. They could be
     locally installed, or removed from upstream. */
     foreach (const QString &identifier, m_candidates.keys()) {
-        if (m_candidates.value(identifier)->remoteVersion().isEmpty())
+        if (m_candidates.value(identifier)->remoteVersion().isEmpty()) {
             m_candidates.remove(identifier);
+            setState(State::TokenComplete);
+        }
     }
-    completionCheck();
+    setState(State::Tokens);
 }
 
 bool ManagerImpl::authenticated() const
@@ -423,7 +452,7 @@ bool ManagerImpl::authenticated() const
 
 bool ManagerImpl::checkingForUpdates() const
 {
-    return m_checking;
+    return m_state != State::Idle;
 }
 
 void ManagerImpl::setAuthenticated(const bool authenticated)
@@ -431,14 +460,6 @@ void ManagerImpl::setAuthenticated(const bool authenticated)
     if (authenticated != m_authenticated) {
         m_authenticated = authenticated;
         Q_EMIT authenticatedChanged();
-    }
-}
-
-void ManagerImpl::setCheckingForUpdates(const bool checking)
-{
-    if (checking != m_checking) {
-        m_checking = checking;
-        Q_EMIT checkingForUpdatesChanged();
     }
 }
 } // Click

@@ -33,6 +33,7 @@ public:
     explicit Manager(QObject *parent = 0) : QObject(parent) {};
     virtual ~Manager() {};
 
+
     virtual void check() = 0;
     virtual void retry(const QString &identifier, const uint &revision) = 0;
     virtual void cancel() = 0;
@@ -40,7 +41,6 @@ public:
 
     virtual bool authenticated() const = 0;
     virtual bool checkingForUpdates() const = 0;
-
 Q_SIGNALS:
     void authenticatedChanged();
     void checkingForUpdatesChanged();

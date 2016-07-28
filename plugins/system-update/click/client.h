@@ -35,12 +35,11 @@ class Client : public QObject
 public:
     explicit Client(QObject *parent = 0) : QObject(parent) {};
     virtual ~Client() {};
-
+public slots:
     virtual void cancel() = 0;
     virtual void requestMetadata(const QUrl &url,
                                  const QList<QString> &packages) = 0;
     virtual void requestToken(const QUrl &url) = 0;
-
 signals:
     void metadataRequestSucceeded(const QJsonArray &metadata);
     void tokenRequestSucceeded(const QString &token);

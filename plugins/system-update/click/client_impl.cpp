@@ -33,30 +33,23 @@ namespace UpdatePlugin
 namespace Click
 {
 ClientImpl::ClientImpl(QObject *parent)
-    : Client(parent)
-    , m_nam(SystemUpdate::instance()->nam())
+    : ClientImpl(SystemUpdate::instance()->nam(), parent)
 {
-    initializeNam();
 }
 
 ClientImpl::ClientImpl(UpdatePlugin::Network::Manager *nam, QObject *parent)
     : Client(parent)
     , m_nam(nam)
 {
-    initializeNam();
+    connect(m_nam, SIGNAL(finished(QNetworkReply *)),
+            this, SLOT(requestFinished(QNetworkReply *)));
+    connect(m_nam, SIGNAL(sslErrors(QNetworkReply *, const QList<QSslError>&)),
+            this, SLOT(requestSslFailed(QNetworkReply *, const QList<QSslError>&)));
 }
 
 ClientImpl::~ClientImpl()
 {
     cancel();
-}
-
-void ClientImpl::initializeNam()
-{
-    connect(m_nam, SIGNAL(finished(QNetworkReply *)),
-            this, SLOT(requestFinished(QNetworkReply *)));
-    connect(m_nam, SIGNAL(sslErrors(QNetworkReply *, const QList<QSslError>&)),
-            this, SLOT(requestSslFailed(QNetworkReply *, const QList<QSslError>&)));
 }
 
 void ClientImpl::requestMetadata(const QUrl &url,

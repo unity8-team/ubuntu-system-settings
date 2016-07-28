@@ -21,6 +21,10 @@
 
 #include "click/manager.h"
 
+#include <QList>
+#include <QPair>
+#include <QString>
+
 class MockClickManager : public UpdatePlugin::Click::Manager
 {
 public:
@@ -45,7 +49,10 @@ public:
 
     virtual void launch(const QString &identifier, const uint &revision) override
     {
-        m_launched = appId;
+        QPair<QString, uint> p;
+        p.first = identifier;
+        p.second = revision;
+        m_launched.append(p);
     }
 
     virtual bool authenticated() const override
@@ -65,7 +72,7 @@ public:
 
     bool m_checkingForUpdates = false;
     bool m_authenticated = false;
-    QString m_launched = QString::null;
+    QList<QPair<QString, uint>> m_launched;
 };
 
 #endif // MOCK_CLICK_MANAGER_H

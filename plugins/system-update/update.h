@@ -75,7 +75,7 @@ class Update : public QObject
                NOTIFY packageNameChanged)
 public:
     explicit Update(QObject *parent = 0);
-    ~Update();
+    ~Update() {};
 
     enum class Kind : uint
     {
@@ -84,7 +84,6 @@ public:
         KindImage = 4
     };
 
-    // TODO: make StateHint and State (Pending, Installed)
     enum class State : uint
     {
         StateUnknown = 0,

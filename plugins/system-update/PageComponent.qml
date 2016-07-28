@@ -53,7 +53,7 @@ ItemPage {
     property bool havePower: (indicatorPower.deviceState === "charging") ||
                              (indicatorPower.batteryLevel > 25)
     property bool online: NetworkingStatus.online
-    property bool authenticated: clickManager.authenticated
+    property bool authenticated: SystemUpdate.authenticated
 
     property int updatesCount: {
         var count = 0;
@@ -63,19 +63,6 @@ ItemPage {
         count += imageRepeater.count;
         return count;
     }
-
-    // ClickManager {
-    //     id: clickManager
-    //     onCheckCompleted: SystemUpdate.checkCompleted()
-
-    //     onNetworkError: status = SystemUpdate.StatusNetworkError
-    //     onServerError: status = SystemUpdate.StatusServerError
-    // }
-
-    // ImageManager {
-    //     id: imageManager
-    //     onCheckCompleted: SystemUpdate.checkCompleted()
-    // }
 
     Setup {
         id: uoaConfig
@@ -87,7 +74,7 @@ ItemPage {
             if (reply.errorName)
                 console.warn('Online Accounts failed:', reply.errorName);
             else
-                clickManager.check();
+                SystemUpdate.check(SystemUpdate.CheckClick);
         }
     }
 
@@ -254,7 +241,7 @@ ItemPage {
                         onInstall: downloadHandler.createDownload(model);
                         onPause: downloadHandler.pauseDownload(model)
                         onResume: downloadHandler.resumeDownload(model)
-                        onRetry: clickManager.retry(identifier, revision)
+                        onRetry: SystemUpdate.retry(identifier, revision)
 
                         onAutomaticChanged: {
                             if (automatic && !model.downloadId) {
@@ -328,9 +315,10 @@ ItemPage {
                         onLaunch: {
                             /* The Application ID is the string
                             "$(click_package)_$(application)_$(version) */
-                            clickManager.launch("%1_%2_%3".arg(identifier)
-                                                          .arg(packageName)
-                                                          .arg(remoteVersion));
+                            // SystemUpdate.launch("%1_%2_%3".arg(identifier)
+                            //                               .arg(packageName)
+                            //                               .arg(remoteVersion));
+                            SystemUpdate.launch(identifier, revision);
                         }
                     }
                 }
@@ -397,7 +385,13 @@ ItemPage {
 
     Connections {
         target: NetworkingStatus
-        onOnlineChanged: SystemUpdate.cancel()
+        onOnlineChanged: {
+            if (!online) {
+                SystemUpdate.cancel();
+            } else {
+                SystemUpdate.check(SystemUpdate.CheckAll);
+            }
+        }
     }
 
     Component {

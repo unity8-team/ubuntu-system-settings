@@ -24,24 +24,14 @@ namespace UpdatePlugin
 namespace Image
 {
 ManagerImpl::ManagerImpl(UpdateModel *model, QObject *parent)
-    : Manager(parent)
-    , m_si(new QSystemImage(this))
-    , m_model(model)
+    : ManagerImpl(new QSystemImage(this), model, parent)
 {
-    init();
 }
 
 ManagerImpl::ManagerImpl(QSystemImage *si, UpdateModel *model, QObject *parent)
     : Manager(parent)
     , m_si(si)
     , m_model(model)
-{
-    init();
-}
-
-const QString ManagerImpl::ubuntuId = QString("ubuntu");
-
-void ManagerImpl::init()
 {
     connect(m_si, SIGNAL(checkingForUpdatesChanged()),
             this, SLOT(handleCheckingForUpdatesChanged()));
@@ -74,6 +64,8 @@ void ManagerImpl::init()
     connect(m_si, SIGNAL(updateProcessFailed(const QString&)),
             this, SLOT(handleUpdateProcessFailed(const QString&)));
 }
+
+const QString ManagerImpl::ubuntuId = QString("ubuntu");
 
 void ManagerImpl::handleUpdateAvailableStatus(const bool isAvailable,
                                           const bool downloading,

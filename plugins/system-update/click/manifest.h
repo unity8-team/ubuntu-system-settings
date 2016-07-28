@@ -32,8 +32,8 @@ class Manifest : public QObject
 public:
     Manifest(QObject *parent = 0) : QObject(parent) {};
     virtual ~Manifest() {};
+public slots:
     virtual void request() = 0;
-
 Q_SIGNALS:
     void requestSucceeded(const QJsonArray &manifest);
     void requestFailed();
