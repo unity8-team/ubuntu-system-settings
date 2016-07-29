@@ -16,60 +16,53 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include "systemupdate.h"
 #include "click/manager_impl.h"
 #include "image/imagemanager_impl.h"
 #include "network/accessmanager_impl.h"
-#include "systemupdate.h"
 
 #include <QDateTime>
 #include <QQmlEngine>
 
 namespace UpdatePlugin
 {
-SystemUpdate *SystemUpdate::m_instance = 0;
-
-SystemUpdate *SystemUpdate::instance()
-{
-    if (!m_instance) m_instance = new SystemUpdate;
-    return m_instance;
-}
-
-void SystemUpdate::destroyInstance()
-{
-    delete m_instance;
-    m_instance = nullptr;
-}
-
 SystemUpdate::SystemUpdate(QObject *parent)
-    : SystemUpdate(new UpdateModel(this),
-                   new UpdateModelFilter(m_model, this),
-                   new UpdateModelFilter(m_model, this),
-                   new UpdateModelFilter(m_model, this),
-                   new UpdateModelFilter(m_model, this),
-                   new Network::ManagerImpl(this),
-                   new Image::ManagerImpl(m_model, this),
-                   new Click::ManagerImpl(m_model, this), parent)
+    : QObject(parent)
+    , m_model(new UpdateModel(this))
+    , m_nam(new Network::ManagerImpl(this))
+    , m_pending(new UpdateModelFilter(m_model, this))
+    , m_clicks(new UpdateModelFilter(m_model, this))
+    , m_images(new UpdateModelFilter(m_model, this))
+    , m_installed(new UpdateModelFilter(m_model, this))
+    , m_imageManager(new Image::ManagerImpl(m_model, this))
+    , m_clickManager(new Click::ManagerImpl(m_model, m_nam, this))
 {
+   init();
 }
 
 SystemUpdate::SystemUpdate(UpdateModel *model,
+                           Network::Manager *nam,
                            UpdateModelFilter *pending,
                            UpdateModelFilter *clicks,
                            UpdateModelFilter *images,
                            UpdateModelFilter *installed,
-                           Network::Manager *nam,
                            Image::Manager *imageManager,
                            Click::Manager *clickManager,
                            QObject *parent)
     : QObject(parent)
     , m_model(model)
+    , m_nam(nam)
     , m_pending(pending)
     , m_clicks(clicks)
     , m_images(images)
     , m_installed(installed)
     , m_imageManager(imageManager)
     , m_clickManager(clickManager)
-    , m_nam(nam)
+{
+    init();
+}
+
+void SystemUpdate::init()
 {
     m_pending->filterOnInstalled(false);
 
@@ -126,11 +119,6 @@ UpdateModelFilter* SystemUpdate::installedUpdates() const
 {
     QQmlEngine::setObjectOwnership(m_installed, QQmlEngine::CppOwnership);
     return m_installed;
-}
-
-Network::Manager* SystemUpdate::nam()
-{
-    return m_nam;
 }
 
 SystemUpdate::Status SystemUpdate::status() const

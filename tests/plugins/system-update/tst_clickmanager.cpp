@@ -51,9 +51,9 @@ private slots:
         m_mocksso = new MockSSO;
         m_mockdownloadfactory = new MockTokenDownloaderFactory;
 
-        m_instance = new Click::ManagerImpl(m_mockclient, m_mockmanifest,
-                                            m_mocksso, m_mockdownloadfactory,
-                                            m_model);
+        m_instance = new Click::ManagerImpl(m_model, nullptr, m_mockclient,
+                                            m_mockmanifest, m_mocksso,
+                                            m_mockdownloadfactory);
         // connect(this, SIGNAL(mockCheck()),
         //         m_instance, SLOT(handleCheckStart()));
         // connect(this, SIGNAL(mockCancelCheck()),
@@ -388,4 +388,4 @@ private:
 };
 
 QTEST_MAIN(TstClickManager)
-#include "tst_click_update_manager.moc"
+#include "tst_clickmanager.moc"

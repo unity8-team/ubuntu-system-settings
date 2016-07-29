@@ -28,11 +28,9 @@ namespace Click
 class TokenDownloaderFactoryImpl : public TokenDownloaderFactory
 {
 public:
-    virtual TokenDownloader* create(QSharedPointer<Update> update,
-                                    QObject *parent = 0) override;
-    virtual TokenDownloader* create(Client *client,
+    virtual TokenDownloader* create(Network::Manager *nam,
                                     QSharedPointer<Update> update,
-                                    QObject *parent = 0) override;
+                                    QObject *parent = nullptr) override;
 };
 } // Click
 } // UpdatePlugin

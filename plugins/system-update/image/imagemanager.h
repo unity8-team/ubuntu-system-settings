@@ -20,6 +20,7 @@
 #define IMAGE_MANAGER_H
 
 #include <QObject>
+#include <QDebug>
 #include <QString>
 
 namespace UpdatePlugin
@@ -30,7 +31,9 @@ class Manager : public QObject
 {
     Q_OBJECT
 public:
-    explicit Manager(QObject *parent = 0) : QObject(parent) {};
+    explicit Manager(QObject *parent = nullptr) : QObject(parent) {
+        qWarning() << "hello from Image::Manager original ctor";
+    };
     virtual ~Manager() {};
 
     virtual void check() = 0;

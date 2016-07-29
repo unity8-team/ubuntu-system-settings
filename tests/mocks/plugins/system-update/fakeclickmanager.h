@@ -28,7 +28,8 @@
 class MockClickManager : public UpdatePlugin::Click::Manager
 {
 public:
-    MockClickManager(QObject *parent = 0) : UpdatePlugin::Click::Manager(parent) {};
+    explicit MockClickManager(QObject *parent = 0)
+        : UpdatePlugin::Click::Manager(parent) {};
     virtual ~MockClickManager() {};
 
     virtual void check() override

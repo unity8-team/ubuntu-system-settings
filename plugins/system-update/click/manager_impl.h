@@ -28,6 +28,8 @@
 #include "click/tokendownloader.h"
 #include "click/tokendownloader_factory.h"
 
+#include "network/accessmanager.h"
+
 #include <QMap>
 #include <QJsonArray>
 #include <QSharedPointer>
@@ -41,13 +43,15 @@ class ManagerImpl : public Manager
 {
     Q_OBJECT
 public:
-    explicit ManagerImpl(UpdateModel *model, QObject *parent = 0);
-    explicit ManagerImpl(Click::Client *client,
+    explicit ManagerImpl(UpdateModel *model, Network::Manager *nam,
+                         QObject *parent = nullptr);
+    explicit ManagerImpl(UpdateModel *model,
+                         Network::Manager *nam,
+                         Click::Client *client,
                          Click::Manifest *manifest,
                          Click::SSO *sso,
-                         Click::TokenDownloaderFactory *downloadFactory,
-                         UpdateModel *model,
-                         QObject *parent = 0);
+                         Click::TokenDownloaderFactory *tokenDownloadFactory,
+                         QObject *parent = nullptr);
     ~ManagerImpl();
 
     virtual void check() override;
@@ -79,11 +83,13 @@ private:
     void initTokenDownloader(const Click::TokenDownloader *downloader);
     QList<QSharedPointer<Update> > parseManifest(const QJsonArray &manifest);
 
+    UpdateModel *m_model;
+    Network::Manager *m_nam;
     Click::Client *m_client;
     Click::Manifest *m_manifest;
     Click::SSO *m_sso;
-    Click::TokenDownloaderFactory *m_downloadFactory;
-    UpdateModel *m_model;
+    Click::TokenDownloaderFactory *m_tokenDownloadFactory;
+
     QMap<QString, QSharedPointer<Update>> m_candidates;
     UbuntuOne::Token m_authToken;
     bool m_authenticated = true;

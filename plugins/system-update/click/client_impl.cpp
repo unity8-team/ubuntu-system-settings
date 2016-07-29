@@ -16,9 +16,11 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "click/client_impl.h"
 #include "helpers.h"
 #include "systemupdate.h"
+
+#include "click/client_impl.h"
+#include "network/accessmanager_impl.h"
 
 #include <QJsonArray>
 #include <QJsonDocument>
@@ -32,12 +34,7 @@ namespace UpdatePlugin
 {
 namespace Click
 {
-ClientImpl::ClientImpl(QObject *parent)
-    : ClientImpl(SystemUpdate::instance()->nam(), parent)
-{
-}
-
-ClientImpl::ClientImpl(UpdatePlugin::Network::Manager *nam, QObject *parent)
+ClientImpl::ClientImpl(Network::Manager *nam, QObject *parent)
     : Client(parent)
     , m_nam(nam)
 {

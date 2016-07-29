@@ -24,7 +24,7 @@
 class MockManifest : public UpdatePlugin::Click::Manifest
 {
 public:
-    explicit MockManifest(QObject* parent=0)
+    explicit MockManifest(QObject *parent = nullptr)
         : UpdatePlugin::Click::Manifest(parent)
     {
     }

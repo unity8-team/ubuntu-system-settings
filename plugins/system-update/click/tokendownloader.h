@@ -20,6 +20,7 @@
 #define CLICK_TOKEN_DOWNLOADER_H
 
 #include "update.h"
+#include "click/client.h"
 
 #include <token.h>
 
@@ -34,13 +35,17 @@ class TokenDownloader : public QObject
 {
     Q_OBJECT
 public:
-    explicit TokenDownloader(QSharedPointer<Update> update, QObject *parent = 0)
+    explicit TokenDownloader(Client *client,
+                             QSharedPointer<Update> update,
+                             QObject *parent = nullptr)
         : QObject(parent)
+        , m_client(client)
         , m_update(update)
         , m_authToken(UbuntuOne::Token()) {}
     virtual ~TokenDownloader() {};
     virtual void download() = 0;
     virtual void setAuthToken(const UbuntuOne::Token &authToken) = 0;
+    virtual Client* client() const = 0;
 
 public slots:
     virtual void cancel() = 0;
@@ -50,6 +55,7 @@ Q_SIGNALS:
     void downloadFailed(QSharedPointer<Update> update);
 
 protected:
+    Client *m_client;
     QSharedPointer<Update> m_update;
     UbuntuOne::Token m_authToken;
 };

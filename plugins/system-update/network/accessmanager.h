@@ -32,7 +32,9 @@ class Manager : public QObject
 {
     Q_OBJECT
 public:
-    Manager(QObject *parent = 0) : QObject(parent) {};
+    explicit Manager(QObject *parent = nullptr) : QObject(parent) {
+        qWarning() << "Network::Manager orig ctor";
+    };
     virtual ~Manager() {};
     virtual QNetworkReply* post(const QNetworkRequest &request, const QByteArray &data) = 0;
     virtual QNetworkReply* head(const QNetworkRequest &request) = 0;

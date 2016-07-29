@@ -31,8 +31,8 @@ class ManifestImpl : public Manifest
 {
     Q_OBJECT
 public:
-    ManifestImpl(QObject *parent = 0);
-    virtual ~ManifestImpl() {};
+    explicit ManifestImpl(QObject *parent = nullptr);
+    ~ManifestImpl();
 public slots:
     virtual void request() override;
 private slots:

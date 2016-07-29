@@ -18,7 +18,8 @@
 
 #include "plugin.h"
 
-#include "MockUpdate.h"
+#include "update.h"
+
 #include "MockUpdateModel.h"
 #include "MockSystemImage.h"
 #include "MockSystemUpdate.h"
@@ -29,23 +30,22 @@ static QObject *siSingletonProvider(QQmlEngine *engine, QJSEngine *scriptEngine)
 {
     Q_UNUSED(engine)
     Q_UNUSED(scriptEngine)
-
     return new MockSystemImage;
 }
 
 static QObject *suSingletonProvider(QQmlEngine *engine, QJSEngine *scriptEngine)
 {
-    Q_UNUSED(engine)
     Q_UNUSED(scriptEngine)
-
-    return MockSystemUpdate::instance();
+    MockSystemUpdate *su = new MockSystemUpdate();
+    engine->setObjectOwnership(su, QQmlEngine::CppOwnership);
+    return su;
 }
 
 void BackendPlugin::registerTypes(const char *uri)
 {
     Q_ASSERT(uri == QLatin1String("Ubuntu.SystemSettings.Update"));
     qmlRegisterSingletonType<MockSystemUpdate>(uri, 1, 0, "SystemUpdate", suSingletonProvider);
-    qmlRegisterUncreatableType<MockUpdate>(uri, 1, 0, "Update", "Used for enums only.");
+    qmlRegisterUncreatableType<Update>(uri, 1, 0, "Update", "Used for enums only.");
     qmlRegisterSingletonType<MockSystemImage>(uri, 1, 0, "SystemImage", siSingletonProvider);
     qRegisterMetaType<MockUpdateModel*>("UpdateModel*");
     qRegisterMetaType<MockUpdateModelFilter*>("UpdateModelFilter*");

@@ -111,6 +111,6 @@ QString Helpers::whichClick()
 QString Helpers::whichPkcon()
 {
     QProcessEnvironment environment = QProcessEnvironment::systemEnvironment();
-    return environment.value("PKCON_COMMAND", QString("pkcon"));
+    return environment.value("PKCON_COMMAND", QStringLiteral("pkcon"));
 }
 } // UpdatePlugin

@@ -18,28 +18,29 @@
 
 #include "MockSystemImage.h"
 
-MockSystemImage::MockSystemImage(QObject *parent)
-    : QObject(parent)
-{
+
+void MockSystemImage::factoryReset() {
 }
 
-MockSystemImage::~MockSystemImage()
-{
+void MockSystemImage::productionReset() {
 }
 
-void MockSystemImage::applyUpdate()
-{
-    m_applyRequested = true;
+void MockSystemImage::checkForUpdate() {
 }
 
-QString MockSystemImage::cancelUpdate()
-{
-    return QString();
+void MockSystemImage::downloadUpdate() {
 }
 
-QString MockSystemImage::pauseDownload()
-{
-    return QString();
+void MockSystemImage::forceAllowGSMDownload() {
+}
+
+void MockSystemImage::applyUpdate() {
+}
+
+QString MockSystemImage::cancelUpdate() {
+}
+
+QString MockSystemImage::pauseDownload() {
 }
 
 bool MockSystemImage::checkTarget() const
@@ -47,49 +48,55 @@ bool MockSystemImage::checkTarget() const
     return m_targetBuildNumber > m_currentBuildNumber;
 }
 
+bool MockSystemImage::checkingForUpdates() const
+{
+    return m_checkingForUpdates;
+}
+
 QString MockSystemImage::deviceName() const
 {
-    return QString();
+    return m_deviceName;
 }
 
 QString MockSystemImage::channelName() const
 {
-    return QString();
+    return m_channelName;
 }
 
 QDateTime MockSystemImage::lastUpdateDate() const
 {
-    return QDateTime();
+    return m_lastUpdateDate;
 }
 
 QDateTime MockSystemImage::lastCheckDate() const
 {
-    return QDateTime();
+    return m_lastCheckDate;
 }
 
 bool MockSystemImage::updateAvailable()
 {
-    return false;
+    return m_updateAvailable;
 }
 
 bool MockSystemImage::downloading()
 {
-    return false;
-}
-
-QString MockSystemImage::availableVersion()
-{
-    return QString();
+    return m_downloading;
 }
 
 int MockSystemImage::updateSize()
 {
-    return 0;
+    return m_updateSize;
 }
 
 QString MockSystemImage::errorReason()
 {
-    return QString();
+    return m_errorReason;
+}
+
+QString MockSystemImage::versionTag()
+{
+    QString val = m_detailedVersion.value("tag").toString();
+    return val.isEmpty() ? "" : val;
 }
 
 int MockSystemImage::currentBuildNumber() const
@@ -99,17 +106,20 @@ int MockSystemImage::currentBuildNumber() const
 
 QString MockSystemImage::currentUbuntuBuildNumber() const
 {
-    return QString();
+    QString val = m_detailedVersion.value("ubuntu").toString();
+    return val.isEmpty() ? "Unavailable" : val;
 }
 
 QString MockSystemImage::currentDeviceBuildNumber() const
 {
-    return QString();
+    QString val = m_detailedVersion.value("device").toString();
+    return val.isEmpty() ? "Unavailable" : val;
 }
 
 QString MockSystemImage::currentCustomBuildNumber() const
 {
-    return QString();
+    QString val = m_detailedVersion.value("custom").toString();
+    return val.isEmpty() ? "Unavailable" : val;
 }
 
 int MockSystemImage::targetBuildNumber() const
@@ -119,7 +129,7 @@ int MockSystemImage::targetBuildNumber() const
 
 QVariantMap MockSystemImage::detailedVersionDetails() const
 {
-    return QVariantMap();
+    return m_detailedVersion;
 }
 
 int MockSystemImage::downloadMode()
@@ -127,10 +137,16 @@ int MockSystemImage::downloadMode()
     return m_downloadMode;
 }
 
-void MockSystemImage::setDownloadMode(const int &downloadMode)
-{
+void MockSystemImage::setDownloadMode(const int &downloadMode) {
+    if (m_downloadMode == downloadMode) {
+        return;
+    }
+
+    if (downloadMode < 0 || downloadMode > 2) {
+        return;
+    }
+
     m_downloadMode = downloadMode;
-    Q_EMIT downloadModeChanged();
 }
 
 void MockSystemImage::mockProgress(const int &percentage, const double &eta)
@@ -175,17 +191,12 @@ void MockSystemImage::mockFailed(const int &consecutiveFailureCount, const QStri
 
 void MockSystemImage::mockTargetBuildNumber(const uint &target)
 {
-    m_targetBuildNumber = target;
+    // m_targetBuildNumber = target;
     Q_EMIT targetBuildNumberChanged();
 }
 
 void MockSystemImage::mockCurrentBuildNumber(const uint &current)
 {
-    m_currentBuildNumber = current;
+    // m_currentBuildNumber = current;
     Q_EMIT currentBuildNumberChanged();
-}
-
-bool MockSystemImage::isApplyRequested()
-{
-    return m_applyRequested;
 }

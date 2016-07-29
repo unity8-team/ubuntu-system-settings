@@ -31,10 +31,10 @@ class ManagerImpl : public Manager
 {
     Q_OBJECT
 public:
-    explicit ManagerImpl(UpdateModel *model, QObject *parent = 0);
+    explicit ManagerImpl(UpdateModel *model, QObject *parent = nullptr);
     explicit ManagerImpl(QSystemImage *si,
                      UpdateModel *model,
-                     QObject *parent = 0);
+                     QObject *parent = nullptr);
     ~ManagerImpl() {};
 
     virtual void check() override;
@@ -62,8 +62,8 @@ private slots:
     void handleCheckingForUpdatesChanged();
 
 private:
-    QSystemImage *m_si;
     UpdateModel *m_model;
+    QSystemImage *m_si;
 };
 } // Image
 } // UpdatePlugin

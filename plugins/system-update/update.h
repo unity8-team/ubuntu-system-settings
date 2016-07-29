@@ -74,7 +74,7 @@ class Update : public QObject
     Q_PROPERTY(QString packageName READ packageName WRITE setPackageName
                NOTIFY packageNameChanged)
 public:
-    explicit Update(QObject *parent = 0);
+    explicit Update(QObject *parent = nullptr);
     ~Update() {};
 
     enum class Kind : uint

@@ -20,7 +20,7 @@
 #define CLICK_CLIENT_IMPL_H
 
 #include "click/client.h"
-#include "network/accessmanager_impl.h"
+#include "network/accessmanager.h"
 
 namespace UpdatePlugin
 {
@@ -30,9 +30,8 @@ class ClientImpl : public Client
 {
     Q_OBJECT
 public:
-    explicit ClientImpl(QObject *parent = 0);
     explicit ClientImpl(UpdatePlugin::Network::Manager *nam,
-                        QObject *parent = 0);
+                        QObject *parent = nullptr);
     virtual ~ClientImpl();
 public slots:
     virtual void cancel() override;
@@ -44,13 +43,11 @@ protected slots:
     void requestFinished(QNetworkReply *reply);
     void requestSslFailed(QNetworkReply *reply,
                           const QList<QSslError> &errors);
-
 private:
     void initializeReply(QNetworkReply *reply);
     bool validReply(const QNetworkReply *reply);
     void handleMetadataReply(QNetworkReply *reply);
-
-    UpdatePlugin::Network::Manager *m_nam;
+    Network::Manager *m_nam;
 };
 } // Click
 } // UpdatePlugin

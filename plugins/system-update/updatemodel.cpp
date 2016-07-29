@@ -26,7 +26,6 @@ namespace UpdatePlugin
 UpdateModel::UpdateModel(QObject *parent)
     : QAbstractListModel(parent)
     , m_db(new UpdateDb(this))
-    , m_updates()
 {
     initialize();
 }
@@ -34,7 +33,6 @@ UpdateModel::UpdateModel(QObject *parent)
 UpdateModel::UpdateModel(const QString &dbpath, QObject *parent)
     : QAbstractListModel(parent)
     , m_db(new UpdateDb(dbpath, this))
-    , m_updates()
 {
     initialize();
 }
@@ -46,6 +44,7 @@ void UpdateModel::initialize()
             this, SLOT(refresh(const QSharedPointer<Update>&)));
 
     refresh();
+    qWarning() << "good updatemodel";
 }
 
 QHash<int, QByteArray> UpdateModel::roleNames() const
@@ -303,9 +302,14 @@ QSharedPointer<Update> UpdateModel::get(const QString &id, const QString &versio
     return find(id, version);
 }
 
+QSharedPointer<Update> UpdateModel::get(const QSharedPointer<Update> &other)
+{
+    return find(other->identifier(), other->revision());
+}
+
 QSharedPointer<Update> UpdateModel::find(const QString &id, const uint &revision)
 {
-    Q_FOREACH(QSharedPointer<Update> update, m_updates) {
+    Q_FOREACH(auto update, m_updates) {
         if (id == update->identifier() && revision == update->revision()) {
             return update;
         }
@@ -315,7 +319,7 @@ QSharedPointer<Update> UpdateModel::find(const QString &id, const uint &revision
 
 QSharedPointer<Update> UpdateModel::find(const QString &id, const QString &version)
 {
-    Q_FOREACH(QSharedPointer<Update> update, m_updates) {
+    Q_FOREACH(auto update, m_updates) {
         if (id == update->identifier() && version == update->remoteVersion()) {
             return update;
         }
@@ -326,6 +330,11 @@ QSharedPointer<Update> UpdateModel::find(const QString &id, const QString &versi
 QSharedPointer<Update> UpdateModel::fetch(const QString &id, const uint &revision)
 {
     return m_db->get(id, revision);
+}
+
+QSharedPointer<Update> UpdateModel::fetch(const QSharedPointer<Update> &other)
+{
+    return m_db->get(other->identifier(), other->revision());
 }
 
 void UpdateModel::add(const QSharedPointer<Update> &update)
@@ -345,7 +354,7 @@ void UpdateModel::remove(const QSharedPointer<Update> &update)
 
 bool UpdateModel::contains(const QString &id, const uint &revision) const
 {
-    Q_FOREACH(const QSharedPointer<Update> &update, m_updates) {
+    Q_FOREACH(auto update, m_updates) {
         if (id == update->identifier() && revision == update->revision()) {
             return true;
         }
@@ -364,10 +373,10 @@ bool UpdateModel::contains(const QList<QSharedPointer<Update> > &list,
     );
 }
 
-void UpdateModel::setAvailable(const QString &id, const uint &revision,
+void UpdateModel::setAvailable(const QString &id, const uint &rev,
                                const bool autoStart)
 {
-    QSharedPointer<Update> u = find(id, revision);
+    auto u = find(id, rev);
     if (!u.isNull()) {
         u->setState(Update::State::StateAvailable);
         u->setInstalled(false);
@@ -380,10 +389,10 @@ void UpdateModel::setAvailable(const QString &id, const uint &revision,
     }
 }
 
-void UpdateModel::queueUpdate(const QString &id, const uint &revision,
+void UpdateModel::queueUpdate(const QString &id, const uint &rev,
                               const QString &downloadId)
 {
-    QSharedPointer<Update> u = find(id, revision);
+    auto u = find(id, rev);
     if (!u.isNull()) {
         u->setState(Update::State::StateQueuedForDownload);
         u->setDownloadId(downloadId);
@@ -391,9 +400,9 @@ void UpdateModel::queueUpdate(const QString &id, const uint &revision,
     }
 }
 
-void UpdateModel::setInstalled(const QString &id, const uint &revision)
+void UpdateModel::setInstalled(const QString &id, const uint &rev)
 {
-    QSharedPointer<Update> u = find(id, revision);
+    auto u = find(id, rev);
     if (!u.isNull()) {
         u->setInstalled(true);
         u->setState(Update::State::StateInstallFinished);
@@ -403,10 +412,10 @@ void UpdateModel::setInstalled(const QString &id, const uint &revision)
     }
 }
 
-void UpdateModel::startUpdate(const QString &id, const uint &revision,
+void UpdateModel::startUpdate(const QString &id, const uint &rev,
                               const bool automatic)
 {
-    QSharedPointer<Update> u = find(id, revision);
+    auto u = find(id, rev);
     if (!u.isNull()) {
         Update::State state = automatic ?
                               Update::State::StateDownloadingAutomatically :
@@ -416,19 +425,19 @@ void UpdateModel::startUpdate(const QString &id, const uint &revision,
     }
 }
 
-void UpdateModel::processUpdate(const QString &id, const uint &revision)
+void UpdateModel::processUpdate(const QString &id, const uint &rev)
 {
-    QSharedPointer<Update> u = find(id, revision);
+    auto u = find(id, rev);
     if (!u.isNull()) {
         u->setState(Update::State::StateInstalling);
         m_db->update(u);
     }
 }
 
-void UpdateModel::setError(const QString &id, const uint &revision,
+void UpdateModel::setError(const QString &id, const uint &rev,
                            const QString &msg)
 {
-    QSharedPointer<Update> u = find(id, revision);
+    auto u = find(id, rev);
     if (!u.isNull()) {
         u->setState(Update::State::StateFailed);
         u->setError(msg);
@@ -437,19 +446,19 @@ void UpdateModel::setError(const QString &id, const uint &revision,
     }
 }
 
-void UpdateModel::setDownloaded(const QString &id, const uint &revision)
+void UpdateModel::setDownloaded(const QString &id, const uint &rev)
 {
-    QSharedPointer<Update> u = find(id, revision);
+    auto u = find(id, rev);
     if (!u.isNull()) {
         u->setState(Update::State::StateDownloaded);
         m_db->update(u);
     }
 }
 
-void UpdateModel::setProgress(const QString &id, const uint &revision,
+void UpdateModel::setProgress(const QString &id, const uint &rev,
                               const int &progress)
 {
-    QSharedPointer<Update> u = find(id, revision);
+    auto u = find(id, rev);
     if (!u.isNull()) {
         u->setState(Update::State::StateDownloading);
         u->setProgress(progress);
@@ -457,10 +466,10 @@ void UpdateModel::setProgress(const QString &id, const uint &revision,
     }
 }
 
-void UpdateModel::setInstalling(const QString &id, const uint &revision,
+void UpdateModel::setInstalling(const QString &id, const uint &rev,
                                 const int &progress)
 {
-    QSharedPointer<Update> u = find(id, revision);
+    auto u = find(id, rev);
     if (!u.isNull()) {
         u->setState(Update::State::StateInstalling);
         u->setProgress(progress);
@@ -468,10 +477,10 @@ void UpdateModel::setInstalling(const QString &id, const uint &revision,
     }
 }
 
-void UpdateModel::pauseUpdate(const QString &id, const uint &revision,
+void UpdateModel::pauseUpdate(const QString &id, const uint &rev,
                               const bool automatic)
 {
-    QSharedPointer<Update> u = find(id, revision);
+    auto u = find(id, rev);
     if (!u.isNull()) {
         Update::State state = automatic ?
                               Update::State::StateAutomaticDownloadPaused :
@@ -481,10 +490,10 @@ void UpdateModel::pauseUpdate(const QString &id, const uint &revision,
     }
 }
 
-void UpdateModel::resumeUpdate(const QString &id, const uint &revision,
+void UpdateModel::resumeUpdate(const QString &id, const uint &rev,
                                const bool automatic)
 {
-    QSharedPointer<Update> u = find(id, revision);
+    auto u = find(id, rev);
     if (!u.isNull()) {
         Update::State state = automatic ?
                               Update::State::StateDownloadingAutomatically :
@@ -494,9 +503,9 @@ void UpdateModel::resumeUpdate(const QString &id, const uint &revision,
     }
 }
 
-void UpdateModel::cancelUpdate(const QString &id, const uint &revision)
+void UpdateModel::cancelUpdate(const QString &id, const uint &rev)
 {
-    QSharedPointer<Update> u = find(id, revision);
+    auto u = find(id, rev);
     if (!u.isNull()) {
         u->setState(Update::State::StateAvailable);
         u->setError("");
@@ -530,6 +539,7 @@ UpdateModelFilter::UpdateModelFilter(UpdateModel *model, QObject *parent)
     : QSortFilterProxyModel(parent)
 {
     setSourceModel(model);
+    qWarning() << "still good from UpdateModelFilter";
 }
 
 uint UpdateModelFilter::kindFilter() const

@@ -24,6 +24,8 @@
 #include <QObject>
 #include <QString>
 
+#include <QDebug>
+
 namespace UpdatePlugin
 {
 namespace Click
@@ -32,7 +34,9 @@ class SSO : public QObject
 {
     Q_OBJECT
 public:
-    SSO(QObject *parent = 0) : QObject(parent) {};
+    explicit SSO(QObject *parent = nullptr) : QObject(parent) {
+        qWarning() << "SSO ctor";
+    };
     virtual ~SSO() {};
     virtual void requestCredentials() = 0;
     virtual void invalidateCredentials() = 0;

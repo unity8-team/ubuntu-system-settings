@@ -38,7 +38,7 @@ class SSOImpl : public SSO
 {
     Q_OBJECT
 public:
-    SSOImpl(QObject *parent = 0);
+    explicit SSOImpl(QObject *parent = nullptr);
     virtual ~SSOImpl() {};
     virtual void requestCredentials() override;
     virtual void invalidateCredentials() override;

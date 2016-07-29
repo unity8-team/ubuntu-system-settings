@@ -17,27 +17,22 @@
  */
 #include "MockSystemUpdate.h"
 #include "updatemodel.h"
+#include "fakeclickmanager.h"
+#include "fakeimagemanager.h"
 
 using namespace UpdatePlugin;
 
-MockSystemUpdate::MockSystemUpdate(MockUpdateModel *model, QObject *parent)
-    : UpdatePlugin::SystemUpdate(model,
-                                 new UpdateModelFilter(model, model),
-                                 new UpdateModelFilter(model, model),
-                                 new UpdateModelFilter(model, model),
-                                 new UpdateModelFilter(model, model),
-                                 nullptr, parent)
+MockSystemUpdate::MockSystemUpdate(QObject *parent)
+    : UpdatePlugin::SystemUpdate(new MockUpdateModel(this),
+                                 nullptr, // We don't need a NAM.
+                                 new UpdateModelFilter(m_model, m_model),
+                                 new UpdateModelFilter(m_model, m_model),
+                                 new UpdateModelFilter(m_model, m_model),
+                                 new UpdateModelFilter(m_model, m_model),
+                                 new MockImageManager(this),
+                                 new MockClickManager(this),
+                                 parent)
 {
-}
-
-MockSystemUpdate *MockSystemUpdate::m_instance = 0;
-
-MockSystemUpdate *MockSystemUpdate::instance()
-{
-    MockUpdateModel *model = new MockUpdateModel();
-    if (!m_instance) m_instance = new MockSystemUpdate(model);
-    model->setParent(m_instance);
-    return m_instance;
 }
 
 void MockSystemUpdate::mockIsCheckRequired(const bool isRequired)

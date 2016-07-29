@@ -36,93 +36,93 @@ file(COPY
 #     DESTINATION
 #     ${CMAKE_CURRENT_BINARY_DIR})
 
-add_executable(tst-systemupdate-click_client
-    tst_click_client.cpp
+add_executable(tst-clickclient
+    tst_clickclient.cpp
 )
-add_test(tst-systemupdate-click_client tst-systemupdate-click_client)
+add_test(tst-clickclient tst-clickclient)
 set_tests_properties(
-    tst-systemupdate-click_client
+    tst-clickclient
         PROPERTIES
         ENVIRONMENT "IGNORE_CREDENTIALS=1;URL_APPS=http://127.0.0.1:9009/metadata"
 )
-target_link_libraries(tst-systemupdate-click_client ${PLUGIN_LIBS})
+target_link_libraries(tst-clickclient ${PLUGIN_LIBS})
 
-add_executable(tst-systemupdate-click_token_downloader
-    tst_click_token_downloader.cpp
+add_executable(tst-tokendownloader
+    tst_tokendownloader.cpp
 )
-add_test(tst-systemupdate-click_token_downloader tst-systemupdate-click_token_downloader)
+add_test(tst-tokendownloader tst-tokendownloader)
 set_tests_properties(
-    tst-systemupdate-click_token_downloader
+    tst-tokendownloader
         PROPERTIES
         ENVIRONMENT "IGNORE_CREDENTIALS=1;URL_APPS=http://127.0.0.1:9009/metadata"
 )
-target_link_libraries(tst-systemupdate-click_token_downloader ${PLUGIN_LIBS})
+target_link_libraries(tst-tokendownloader ${PLUGIN_LIBS})
 
-add_executable(tst-systemupdate-click_update_manager
-    tst_click_update_manager.cpp
+add_executable(tst-clickmanager
+    tst_clickmanager.cpp
 )
-add_test(tst-systemupdate-click_update_manager tst-systemupdate-click_update_manager)
+add_test(tst-clickmanager tst-clickmanager)
 set_tests_properties(
-    tst-systemupdate-click_update_manager
+    tst-clickmanager
         PROPERTIES
         ENVIRONMENT "IGNORE_CREDENTIALS=1"
 )
-target_link_libraries(tst-systemupdate-click_update_manager ${PLUGIN_LIBS})
+target_link_libraries(tst-clickmanager ${PLUGIN_LIBS})
 
-add_executable(tst-systemupdate-image-manager
-    tst_image_manager.cpp
+add_executable(tst-imagemanager
+    tst_imagemanager.cpp
     ${CMAKE_SOURCE_DIR}/src/systemimage.cpp
     ${CMAKE_SOURCE_DIR}/tests/mocks/system-image-dbus/fakesystemimagedbus.cpp
 )
-add_test(tst-systemupdate-image-manager tst-systemupdate-image-manager)
-target_link_libraries(tst-systemupdate-image-manager
+add_test(tst-imagemanager tst-imagemanager)
+target_link_libraries(tst-imagemanager
     ${PLUGIN_LIBS}
     ${QTDBUSMOCK_LIBRARIES}
     ${QTDBUSTEST_LIBRARIES}
 )
 
-add_executable(tst-systemupdate-system_update
-    tst_system_update.cpp
+add_executable(tst-systemupdate
+    tst_systemupdate.cpp
 )
-add_test(tst-systemupdate-system_update tst-systemupdate-system_update)
-target_link_libraries(tst-systemupdate-system_update ${PLUGIN_LIBS})
+add_test(tst-systemupdate tst-systemupdate)
+target_link_libraries(tst-systemupdate ${PLUGIN_LIBS})
 
-add_executable(tst-systemupdate-updatedb
+add_executable(tst-updateplugin-updatedb
     tst_updatedb.cpp
 )
-add_test(tst-systemupdate-updatedb tst-systemupdate-updatedb)
-target_link_libraries(tst-systemupdate-updatedb ${PLUGIN_LIBS})
+add_test(tst-updateplugin-updatedb tst-updateplugin-updatedb)
+target_link_libraries(tst-updateplugin-updatedb ${PLUGIN_LIBS})
 
-add_executable(tst-systemupdate-update
+add_executable(tst-updateplugin-update
     tst_update.cpp
 )
-add_test(tst-systemupdate-update tst-systemupdate-update)
-target_link_libraries(tst-systemupdate-update ${PLUGIN_LIBS})
+add_test(tst-updateplugin-update tst-updateplugin-update)
+target_link_libraries(tst-updateplugin-update ${PLUGIN_LIBS})
 
-add_executable(tst-systemupdate-updatemodel
+add_executable(tst-updateplugin-updatemodel
     tst_updatemodel.cpp
 )
-add_test(tst-systemupdate-updatemodel tst-systemupdate-updatemodel)
-target_link_libraries(tst-systemupdate-updatemodel ${PLUGIN_LIBS})
+add_test(tst-updateplugin-updatemodel tst-updateplugin-updatemodel)
+target_link_libraries(tst-updateplugin-updatemodel ${PLUGIN_LIBS})
 
-add_executable(tst-systemupdate-updatepluginhelpers
+add_executable(tst-updateplugin-helpers
     tst_helpers.cpp
 )
-add_test(tst-systemupdate-updatepluginhelpers tst-systemupdate-updatepluginhelpers)
+add_test(tst-updateplugin-helpers tst-updateplugin-helpers)
 set_tests_properties(
-    tst-systemupdate-updatepluginhelpers
+    tst-updateplugin-helpers
         PROPERTIES
         ENVIRONMENT "IGNORE_CREDENTIALS=1;URL_APPS=http://127.0.0.1:9009;FRAMEWORKS_FOLDER=${CMAKE_CURRENT_BINARY_DIR};CLICK_TOKEN_URL=http://example.org;"
 )
-target_link_libraries(tst-systemupdate-updatepluginhelpers ${PLUGIN_LIBS})
+target_link_libraries(tst-updateplugin-helpers ${PLUGIN_LIBS})
 
-add_executable(tst-systemupdate-click_manifest
-    tst_click_manifest.cpp
+add_executable(tst-clickmanifest
+    tst_clickmanifest.cpp
 )
-add_test(tst-systemupdate-click_manifest tst-systemupdate-click_manifest)
+add_test(tst-clickmanifest tst-clickmanifest)
 set_tests_properties(
-    tst-systemupdate-click_manifest
+    tst-clickmanifest
         PROPERTIES
         ENVIRONMENT "CLICK_COMMAND=${CMAKE_CURRENT_SOURCE_DIR}/mockclickcommand"
 )
-target_link_libraries(tst-systemupdate-click_manifest ${PLUGIN_LIBS})
+target_link_libraries(tst-clickmanifest ${PLUGIN_LIBS})

@@ -21,6 +21,7 @@
 
 #include <QObject>
 #include <QString>
+#include <QDebug>
 
 namespace UpdatePlugin
 {
@@ -30,9 +31,10 @@ class Manager : public QObject
 {
     Q_OBJECT
 public:
-    explicit Manager(QObject *parent = 0) : QObject(parent) {};
-    virtual ~Manager() {};
-
+    explicit Manager(QObject *parent = nullptr) : QObject(parent) {
+        qWarning() << "Click::Manager original ctor says hi.";
+    }
+    virtual ~Manager() {}
 
     virtual void check() = 0;
     virtual void retry(const QString &identifier, const uint &revision) = 0;

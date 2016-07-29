@@ -17,7 +17,6 @@
  */
 
 #include "click/sso_impl.h"
-#include "helpers.h"
 
 namespace UpdatePlugin
 {
@@ -25,9 +24,11 @@ namespace Click
 {
 SSOImpl::SSOImpl(QObject *parent)
     : SSO(parent)
-    , m_service(new UbuntuOne::SSOService(this))
+    , m_service(new UbuntuOne::SSOService(parent))
 {
+    qWarning() << "SSOImpl ctor";
     {
+
         using namespace UbuntuOne;
         connect(m_service, SIGNAL(credentialsFound(const Token&)),
                 this, SLOT(handleCredentialsFound(const Token&)));

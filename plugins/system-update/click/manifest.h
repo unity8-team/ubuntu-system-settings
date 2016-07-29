@@ -22,6 +22,8 @@
 #include <QObject>
 #include <QJsonArray>
 
+#include <QDebug>
+
 namespace UpdatePlugin
 {
 namespace Click
@@ -30,7 +32,9 @@ class Manifest : public QObject
 {
     Q_OBJECT
 public:
-    Manifest(QObject *parent = 0) : QObject(parent) {};
+    explicit Manifest(QObject *parent = nullptr) : QObject(parent) {
+        qWarning() << "Manifest ctor";
+    };
     virtual ~Manifest() {};
 public slots:
     virtual void request() = 0;

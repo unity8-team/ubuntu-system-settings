@@ -28,7 +28,7 @@ class MockUpdateModel : public UpdatePlugin::UpdateModel
 {
     Q_OBJECT
 public:
-    MockUpdateModel(QObject *parent = 0)
+    MockUpdateModel(QObject *parent = nullptr)
         : UpdatePlugin::UpdateModel(":memory:", parent) {}
 
     Q_INVOKABLE void mockAddUpdate(const QString &id, const uint &revision,
@@ -41,7 +41,7 @@ class MockUpdateModelFilter: public UpdatePlugin::UpdateModelFilter
     Q_OBJECT
 public:
     // For testing, when we want to explicitly set the database path.
-    explicit MockUpdateModelFilter(QObject *parent = 0)
+    explicit MockUpdateModelFilter(QObject *parent = nullptr)
         : UpdatePlugin::UpdateModelFilter(nullptr, parent) {}
 
     Q_INVOKABLE void mockSetSourceModel(MockUpdateModel *source);

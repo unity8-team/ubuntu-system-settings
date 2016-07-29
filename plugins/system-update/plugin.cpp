@@ -35,8 +35,9 @@ static QObject *suSingletonProvider(QQmlEngine *engine, QJSEngine *scriptEngine)
 {
     Q_UNUSED(engine)
     Q_UNUSED(scriptEngine)
-
-    return SystemUpdate::instance();
+    SystemUpdate *su = new SystemUpdate();
+    engine->setObjectOwnership(su, QQmlEngine::CppOwnership);
+    return su;
 }
 
 void BackendPlugin::registerTypes(const char *uri)
@@ -48,8 +49,6 @@ void BackendPlugin::registerTypes(const char *uri)
     qmlRegisterSingletonType<SystemUpdate>(
         uri, 1, 0, "SystemUpdate", suSingletonProvider
     );
-    // qmlRegisterType<Click::Manager>(uri, 1, 0, "ClickManager");
-    // qmlRegisterType<Image::Manager>(uri, 1, 0, "ImageManager");
     qRegisterMetaType<UpdateModel*>("UpdateModel*");
     qRegisterMetaType<UpdateModelFilter*>("UpdateModelFilter*");
 }

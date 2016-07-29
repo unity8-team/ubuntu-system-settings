@@ -266,4 +266,4 @@ private:
 };
 
 QTEST_MAIN(TstImageManager)
-#include "tst_image_manager.moc"
+#include "tst_imagemanager.moc"

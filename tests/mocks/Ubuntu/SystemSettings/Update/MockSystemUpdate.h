@@ -27,17 +27,11 @@ class MockSystemUpdate : public SystemUpdate
 {
     Q_OBJECT
 public:
-    static MockSystemUpdate *instance();
-
+    explicit MockSystemUpdate(QObject *parent = nullptr);
+    ~MockSystemUpdate() {}
     Q_INVOKABLE bool isCheckRequired();
     Q_INVOKABLE void mockIsCheckRequired(const bool isRequired); // mock only
-
-protected:
-    explicit MockSystemUpdate(MockUpdateModel *model, QObject *parent = 0);
-    ~MockSystemUpdate() {}
 private:
-    static MockSystemUpdate *m_instance;
-
     bool m_checkRequired = false;
 };
 

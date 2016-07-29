@@ -33,11 +33,6 @@
 class QSystemImage : public QObject
 {
     Q_OBJECT
-public:
-    explicit QSystemImage(QObject *parent = 0);
-    explicit QSystemImage(const QDBusConnection &dbus, QObject *parent = 0);
-    ~QSystemImage();
-
     Q_PROPERTY(int downloadMode READ downloadMode
                WRITE setDownloadMode NOTIFY downloadModeChanged)
     Q_PROPERTY(bool checkingForUpdates READ checkingForUpdates
@@ -60,7 +55,6 @@ public:
                NOTIFY lastUpdateDateChanged)
     Q_PROPERTY(QDateTime lastCheckDate READ lastCheckDate
                NOTIFY lastCheckDateChanged)
-
     Q_PROPERTY(bool updateAvailable READ updateAvailable
                NOTIFY updateAvailableChanged)
     Q_PROPERTY(bool downloading READ downloading
@@ -71,6 +65,10 @@ public:
                NOTIFY errorReasonChanged)
     Q_PROPERTY(QString versionTag READ versionTag
                NOTIFY versionTagChanged)
+public:
+    explicit QSystemImage(QObject *parent = nullptr);
+    explicit QSystemImage(const QDBusConnection &dbus, QObject *parent = nullptr);
+    ~QSystemImage();
 
     bool checkingForUpdates() const;
     int downloadMode();
@@ -115,17 +113,14 @@ Q_SIGNALS:
     void detailedVersionDetailsChanged();
     void lastUpdateDateChanged();
     void lastCheckDateChanged();
-
     void updateAvailableChanged();
     void downloadingChanged();
     void updateSizeChanged();
     void errorReasonChanged();
     void versionTagChanged();
-
     void downloadModeChanged();
     void updateProcessFailed(const QString &reason);
     void updateProcessing();
-
     void rebooting(const bool status);
     void updateFailed(const int &consecutiveFailureCount, const QString &lastReason);
     void updateDownloaded();
@@ -140,7 +135,7 @@ Q_SIGNALS:
 
     void updateProgress(const int &percentage, const double &eta);
 
-private Q_SLOTS:
+protected Q_SLOTS:
     void slotNameOwnerChanged(const QString&, const QString&, const QString&);
     void settingsChanged(const QString &key, const QString &newvalue);
     void availableStatusChanged(const bool isAvailable,
@@ -150,7 +145,7 @@ private Q_SLOTS:
                                 const QString &lastUpdateDate,
                                 const QString &errorReason);
 
-private:
+protected:
     void setCheckingForUpdates(const bool checking);
     void setDeviceName(const QString &deviceName);
     void setChannelName(const QString &channelName);
@@ -159,12 +154,12 @@ private:
     void setTargetBuildNumber(const int &targetBuildNumber);
     void setLastUpdateDate(const QDateTime &lastUpdateDate);
     void setLastCheckDate(const QDateTime &lastCheckDate);
-
     void setUpdateAvailable(const bool updateAvailable);
     void setDownloading(const bool downloading);
     void setUpdateSize(const int &updateSize);
     void setErrorReason(const QString &errorReason);
 
+private:
     // Synchronously initialize properties from the Information call.
     void initializeProperties();
     // Sets up connections on the DBus interface.
@@ -173,14 +168,14 @@ private:
     bool m_checkingForUpdates = false;
     int m_currentBuildNumber = 0;
     QMap<QString, QVariant> m_detailedVersion;
-    QDateTime m_lastUpdateDate;
+    QDateTime m_lastUpdateDate = QDateTime();
     int m_downloadMode = -1;
 
-    QDBusConnection m_dbus;
+    // QDBusConnection m_dbus;
     QDBusServiceWatcher m_watcher;
     QDBusInterface m_iface;
 
-    QDateTime m_lastCheckDate;
+    QDateTime m_lastCheckDate = QDateTime();
     QString m_channelName = QString::null;
     int m_targetBuildNumber = -1;
     QString m_deviceName = QString::null;

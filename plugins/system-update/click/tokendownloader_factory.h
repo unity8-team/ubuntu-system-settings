@@ -19,8 +19,8 @@
 #ifndef CLICK_TOKEN_DOWNLOADER_FACTORY_H
 #define CLICK_TOKEN_DOWNLOADER_FACTORY_H
 
-#include "click/client.h"
 #include "click/tokendownloader.h"
+#include "network/accessmanager.h"
 
 #include <QObject>
 
@@ -28,15 +28,14 @@ namespace UpdatePlugin
 {
 namespace Click
 {
-class TokenDownloaderFactory
+class TokenDownloaderFactory : public QObject
 {
+    Q_OBJECT
 public:
     virtual ~TokenDownloaderFactory() {};
-    virtual TokenDownloader* create(QSharedPointer<Update> update,
-                                    QObject *parent = 0) = 0;
-    virtual TokenDownloader* create(Client *client,
+    virtual TokenDownloader* create(Network::Manager *nam,
                                     QSharedPointer<Update> update,
-                                    QObject *parent = 0) = 0;
+                                    QObject *parent = nullptr) = 0;
 };
 } // Click
 } // UpdatePlugin

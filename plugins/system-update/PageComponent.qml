@@ -218,7 +218,12 @@ ItemPage {
                 id: clickUpdatesCol
                 objectName: "updatesClickUpdates"
                 anchors { left: parent.left; right: parent.right }
-                visible: clickRepeater.count > 0
+                visible: {
+                    var s = SystemUpdate.status;
+                    var canShow = s === SystemUpdate.StatusCheckingSystemUpdates;
+                    canShow = canShow || s === SystemUpdate.StatusIdle;
+                    return clickRepeater.count > 0 && canShow;
+                }
 
                 Repeater {
                     id: clickRepeater
@@ -283,11 +288,11 @@ ItemPage {
 
             SettingsItemTitle {
                 text: i18n.tr("Recent updates")
-                visible: installed.visible
+                visible: installedCol.visible
             }
 
             Column {
-                id: installed
+                id: installedCol
                 objectName: "installedUpdates"
                 anchors { left: parent.left; right: parent.right }
                 visible: installedRepeater.count > 0
@@ -298,7 +303,7 @@ ItemPage {
 
                     delegate: UpdateDelegate {
                         objectName: "installedUpdate-" + index
-                        anchors { left: parent.left; right: parent.right }
+                        width: installedCol.width
                         version: remoteVersion
                         size: model.size
                         name: title
@@ -393,6 +398,8 @@ ItemPage {
             }
         }
     }
+
+    Component.onCompleted: SystemUpdate.check()
 
     Component {
          id: dialogErrorComponent

@@ -20,38 +20,34 @@
 #ifndef FAKE_TOKEN_DOWNLOADERFACTORY_H
 #define FAKE_TOKEN_DOWNLOADERFACTORY_H
 
-#include "click/client.h"
-#include "click/tokendownloader.h"
-#include "click/tokendownloader_factory.h"
 #include "update.h"
 
+#include "click/tokendownloader.h"
+#include "click/tokendownloader_factory.h"
+
+#include "network/accessmanager.h"
+
 #include "faketokendownloader.h"
+#include "fakeclient.h"
+
+using namespace UpdatePlugin;
 
 class MockTokenDownloaderFactory
-    : public UpdatePlugin::Click::TokenDownloaderFactory
+    : public Click::TokenDownloaderFactory
 {
 public:
-    // Not used.
-    virtual UpdatePlugin::Click::TokenDownloader* create(
-        QSharedPointer<UpdatePlugin::Update> update,
-        QObject *parent = 0
+    virtual Click::TokenDownloader* create(
+        Network::Manager *nam,
+        QSharedPointer<Update> update,
+        QObject *parent = nullptr
     ) override
     {
-        Q_UNUSED(parent)
-        MockTokenDownloader *d = new MockTokenDownloader(update);
+        Q_UNUSED(nam);
+        Click::Client *client = new MockClient();
+        MockTokenDownloader *d = new MockTokenDownloader(client, update);
+        client->setParent(d);
         created.append(d);
         return d;
-    }
-    virtual UpdatePlugin::Click::TokenDownloader* create(
-        UpdatePlugin::Click::Client *client,
-        QSharedPointer<UpdatePlugin::Update> update,
-        QObject *parent = 0
-    ) override
-    {
-        Q_UNUSED(client)
-        Q_UNUSED(update)
-        Q_UNUSED(parent)
-        return nullptr;
     }
 
     QList<MockTokenDownloader* > created;

@@ -24,17 +24,16 @@ namespace UpdatePlugin
 {
 namespace Click
 {
-TokenDownloaderImpl::TokenDownloaderImpl(QSharedPointer<Update> update,
-                                         QObject *parent)
-    : TokenDownloaderImpl(new ClientImpl(this), update, parent)
-{
-}
+// TokenDownloaderImpl::TokenDownloaderImpl(QSharedPointer<Update> update,
+//                                          QObject *parent)
+//     : TokenDownloaderImpl(new ClientImpl(this), update, parent)
+// {
+// }
 
 TokenDownloaderImpl::TokenDownloaderImpl(Client *client,
                                          QSharedPointer<Update> update,
                                          QObject *parent)
-    : TokenDownloader(update, parent)
-    , m_client(client)
+    : TokenDownloader(client, update, parent)
 {
     connect(m_client, SIGNAL(tokenRequestSucceeded(const QString)),
             this, SLOT(handleSuccess(const QString)));
@@ -54,6 +53,11 @@ TokenDownloaderImpl::~TokenDownloaderImpl()
 void TokenDownloaderImpl::setAuthToken(const UbuntuOne::Token &authToken)
 {
     m_authToken = authToken;
+}
+
+Client* TokenDownloaderImpl::client() const
+{
+    return m_client;
 }
 
 void TokenDownloaderImpl::cancel()

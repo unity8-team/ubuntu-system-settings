@@ -33,7 +33,8 @@ class Client : public QObject
 {
     Q_OBJECT
 public:
-    explicit Client(QObject *parent = 0) : QObject(parent) {};
+    explicit Client(QObject *parent = nullptr)
+        : QObject(parent) {};
     virtual ~Client() {};
 public slots:
     virtual void cancel() = 0;

@@ -26,7 +26,7 @@
 class MockSSO : public UpdatePlugin::Click::SSO
 {
 public:
-    MockSSO(QObject *parent = 0) : UpdatePlugin::Click::SSO(parent) {};
+    MockSSO(QObject *parent = nullptr) : UpdatePlugin::Click::SSO(parent) {};
     virtual ~MockSSO() {};
 
     virtual void requestCredentials() override

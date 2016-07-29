@@ -20,8 +20,9 @@
  * This test uses a mock web server.
  */
 
-#include "click/client_impl.h"
 #include "mockclickserver.h"
+#include "click/client_impl.h"
+#include "network/accessmanager_impl.h"
 
 #include <QJsonArray>
 #include <QSignalSpy>
@@ -48,7 +49,7 @@ private slots:
     void init()
     {
         m_nam = new Network::ManagerImpl();
-        m_instance = new Click::ClientImpl(m_nam);
+        m_instance = new Click::ClientImpl(m_nam, this);
         m_nam->setParent(m_instance);
     }
     void cleanup()
@@ -159,5 +160,5 @@ private:
 };
 
 QTEST_MAIN(TstClickClient)
-#include "tst_click_client.moc"
+#include "tst_clickclient.moc"
 

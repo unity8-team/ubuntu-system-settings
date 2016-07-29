@@ -20,16 +20,18 @@
 #define FAKE_TOKEN_DOWNLOADER_H
 
 #include "click/tokendownloader.h"
-#include "update.h"
 
 #include <token.h>
 
-class MockTokenDownloader : public UpdatePlugin::Click::TokenDownloader
+using namespace UpdatePlugin;
+
+class MockTokenDownloader : public Click::TokenDownloader
 {
 public:
-    explicit MockTokenDownloader(QSharedPointer<UpdatePlugin::Update> update,
-                                 QObject* parent=0)
-        : UpdatePlugin::Click::TokenDownloader(update, parent)
+    explicit MockTokenDownloader(Click::Client *client,
+                                 QSharedPointer<Update> update,
+                                 QObject *parent = nullptr)
+        : Click::TokenDownloader(client, update, parent)
     {
         downloadUrl = update->downloadUrl();
     }
@@ -39,6 +41,11 @@ public:
     virtual void setAuthToken(const UbuntuOne::Token &authToken) override
     {
         Q_UNUSED(authToken)
+    }
+
+    virtual Click::Client* client() const override
+    {
+        return m_client;
     }
 
     void mockDownloadSucceeded(const QString &token)

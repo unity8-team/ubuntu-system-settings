@@ -105,5 +105,5 @@ private:
 };
 
 QTEST_MAIN(TstClickTokenDownloader)
-#include "tst_click_token_downloader.moc"
+#include "tst_tokendownloader.moc"
 

@@ -33,11 +33,11 @@ class UpdateDb : public QObject
     Q_OBJECT
 public:
 
-    explicit UpdateDb(QObject *parent = 0);
+    explicit UpdateDb(QObject *parent = nullptr);
     ~UpdateDb();
 
     // For testing, when we want to explicitly set the database path.
-    explicit UpdateDb(const QString &dbpath, QObject *parent = 0);
+    explicit UpdateDb(const QString &dbpath, QObject *parent = nullptr);
 
     void add(const QSharedPointer<Update> &update);
     void update(const QSharedPointer<Update> &update);

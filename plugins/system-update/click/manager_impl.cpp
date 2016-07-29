@@ -24,6 +24,8 @@
 #include "click/sso_impl.h"
 #include "click/tokendownloader_factory_impl.h"
 
+#include "network/accessmanager_impl.h"
+
 #include <ubuntu-app-launch.h>
 
 #include <QDateTime>
@@ -45,27 +47,38 @@ namespace UpdatePlugin
 {
 namespace Click
 {
-ManagerImpl::ManagerImpl(UpdateModel *model, QObject *parent)
-    : ManagerImpl(new Click::ClientImpl(this),
-                  new Click::ManifestImpl(this),
-                  new Click::SSOImpl(this),
-                  new Click::TokenDownloaderFactoryImpl, model, parent)
+ManagerImpl::ManagerImpl(UpdateModel *model, Network::Manager *nam,
+                         QObject *parent)
+    : ManagerImpl(model,
+                  nam,
+                  new Click::ClientImpl(nam),
+                  new Click::ManifestImpl(),
+                  new Click::SSOImpl(),
+                  new Click::TokenDownloaderFactoryImpl,
+                  parent)
 {
+    m_client->setParent(this);
+    m_manifest->setParent(this);
+    m_sso->setParent(this);
+    qWarning() << "Click::ManagerImpl delegate ctor says hi";
 }
 
-ManagerImpl::ManagerImpl(Click::Client *client,
-                 Click::Manifest *manifest,
-                 Click::SSO *sso,
-                 Click::TokenDownloaderFactory *downloadFactory,
-                 UpdateModel *model,
-                 QObject *parent)
+ManagerImpl::ManagerImpl(UpdateModel *model,
+                         Network::Manager *nam,
+                         Click::Client *client,
+                         Click::Manifest *manifest,
+                         Click::SSO *sso,
+                         Click::TokenDownloaderFactory *tokenDownloadFactory,
+                         QObject *parent)
     : Manager(parent)
+    , m_model(model)
+    , m_nam(nam)
     , m_client(client)
     , m_manifest(manifest)
     , m_sso(sso)
-    , m_downloadFactory(downloadFactory)
-    , m_model(model)
+    , m_tokenDownloadFactory(tokenDownloadFactory)
 {
+    qWarning() << "Click::ManagerImpl actual ctor says hi";
     /* We use the manifest as a source of information on what state apps are
     in. I.e. if we have a pending update's remote version matching that of an
     app in the manifest; we can make assumptions about that update's state. */
@@ -107,7 +120,7 @@ ManagerImpl::ManagerImpl(Click::Client *client,
     // Allowed state transitions.
     m_transitions[State::Idle]          << State::Manifest << State::Failed;
     m_transitions[State::Manifest]      << State::Metadata << State::Complete << State::Failed;
-    m_transitions[State::Metadata]      << State::Tokens << State::Complete << State::Failed;
+    m_transitions[State::Metadata]      << State::Tokens << State::TokenComplete << State::Complete << State::Failed;
     m_transitions[State::Tokens]        << State::TokenComplete << State::Complete << State::Failed;
     m_transitions[State::TokenComplete] << State::Tokens << State::Complete << State::Failed;
     m_transitions[State::Complete]      << State::Idle;
@@ -117,7 +130,7 @@ ManagerImpl::ManagerImpl(Click::Client *client,
 ManagerImpl::~ManagerImpl()
 {
     Q_EMIT checkCanceled();
-    delete m_downloadFactory;
+    delete m_tokenDownloadFactory;
 }
 
 void ManagerImpl::setState(const State &state)
@@ -206,12 +219,11 @@ void ManagerImpl::retry(const QString &identifier, const uint &revision)
 {
     /* We'll simply ask for another click token if a click update failed
     to install. */
-    QSharedPointer<Update> u = m_model->get(identifier, revision);
-    if (u->identifier() == identifier && u->revision() == revision) {
+    auto update = m_model->get(identifier, revision);
+    if (update) {
         m_model->setAvailable(identifier, revision, true);
-
-        Click::TokenDownloader* dl = m_downloadFactory->create(u);
-
+        Click::TokenDownloader* dl
+            = m_tokenDownloadFactory->create(m_nam, update);
         dl->setAuthToken(m_authToken);
         initTokenDownloader(dl);
         dl->download();
@@ -232,21 +244,17 @@ void ManagerImpl::launch(const QString &identifier, const uint &revision)
 
 void ManagerImpl::handleManifest(const QJsonArray &manifest)
 {
-    QList<QSharedPointer<Update> > updates = parseManifest(manifest);
-
-    Q_FOREACH(const QSharedPointer<Update> &update, updates) {
-        QSharedPointer<Update> existingUpdate = m_model->get(
-            update->identifier(), update->localVersion()
-        );
-        if (!existingUpdate.isNull()) {
-            m_model->setInstalled(existingUpdate->identifier(), existingUpdate->revision());
+    auto updates = parseManifest(manifest);
+    Q_FOREACH(auto update, updates) {
+        auto existing = m_model->get(update->identifier(),
+                                     update->localVersion());
+        if (existing) {
+            m_model->setInstalled(existing->identifier(), existing->revision());
         }
     }
-
-    Q_FOREACH(QSharedPointer<Update> update, updates) {
+    Q_FOREACH(auto update, updates) {
         m_candidates[update->identifier()] = update;
     }
-
     if (updates.size() == 0) {
         setState(State::Complete);
         return;
@@ -259,7 +267,7 @@ QList<QSharedPointer<Update> > ManagerImpl::parseManifest(const QJsonArray &mani
 {
     QList<QSharedPointer<Update> > updates;
     for (int i = 0; i < manifest.size(); i++) {
-        QSharedPointer<Update> update = QSharedPointer<Update>(new Update);
+        auto update = QSharedPointer<Update>(new Update);
 
         const QJsonObject object = manifest.at(i).toObject();
         update->setIdentifier(object.value("name").toString());
@@ -314,8 +322,7 @@ void ManagerImpl::handleTokenDownload(QSharedPointer<Update> update)
 
     /* Assume the original update was changed during the download of token and
     fetch a new one from the database. */
-    QSharedPointer<Update> freshUpdate = m_model->fetch(update->identifier(),
-                                                        update->revision());
+    auto freshUpdate = m_model->fetch(update);
     if (freshUpdate) {
         freshUpdate->setToken(update->token());
         m_model->add(freshUpdate);
@@ -333,8 +340,7 @@ void ManagerImpl::handleTokenDownloadFailure(QSharedPointer<Update> update)
     dl->disconnect();
 
     // Assume the original update was changed during the download of token.
-    QSharedPointer<Update> freshUpdate = m_model->get(update->identifier(),
-                                                      update->revision());
+    auto freshUpdate = m_model->get(update);
     if (freshUpdate) {
         freshUpdate->setToken("");
         m_model->add(freshUpdate);
@@ -376,13 +382,7 @@ void ManagerImpl::handleCredentialsFailed()
 
 void ManagerImpl::requestMetadata()
 {
-    QList<QString> packages;
-    Q_FOREACH(const QString &identifier, m_candidates.keys()) {
-        packages.append(identifier);
-    }
-
     QString urlApps = Helpers::clickMetadataUrl();
-
     QString authHeader;
     if (!Helpers::isIgnoringCredentials()) {
         authHeader = m_authToken.signUrl(
@@ -391,8 +391,7 @@ void ManagerImpl::requestMetadata()
     }
     QUrl url(urlApps);
     url.setQuery(authHeader);
-
-    m_client->requestMetadata(url, packages);
+    m_client->requestMetadata(url, m_candidates.keys());
 }
 
 void ManagerImpl::parseMetadata(const QJsonArray &array)
@@ -409,7 +408,7 @@ void ManagerImpl::parseMetadata(const QJsonArray &array)
         auto title = object["title"].toString();
         auto revision = object["revision"].toInt();
         if (m_candidates.contains(identifier)) {
-            QSharedPointer<Update> update = m_candidates.value(identifier);
+            auto update = m_candidates.value(identifier);
             update->setRemoteVersion(version);
 
             if (update->isUpdateRequired()) {
@@ -422,7 +421,8 @@ void ManagerImpl::parseMetadata(const QJsonArray &array)
                 update->setRevision(revision);
                 update->setState(Update::State::StateAvailable);
 
-                Click::TokenDownloader* dl = m_downloadFactory->create(update);
+                Click::TokenDownloader* dl
+                    = m_tokenDownloadFactory->create(m_nam, update);
                 dl->setAuthToken(m_authToken);
                 initTokenDownloader(dl);
                 dl->download();

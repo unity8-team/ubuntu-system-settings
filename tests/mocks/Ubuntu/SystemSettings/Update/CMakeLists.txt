@@ -1,6 +1,7 @@
 include_directories(
     ${CMAKE_CURRENT_BINARY_DIR}
     ${CMAKE_SOURCE_DIR}/plugins/system-update
+    ${CMAKE_SOURCE_DIR}/tests/mocks/plugins/system-update
     /usr/include/apt-pkg/
 )
 
@@ -16,7 +17,6 @@ set(MOCK_SYSTEMUPDATE_SRCS
     plugin.cpp
     MockSystemImage.cpp
     MockSystemUpdate.cpp
-    MockUpdate.cpp
     MockUpdateModel.cpp
     ${PLUGIN_SOURCES}
 )

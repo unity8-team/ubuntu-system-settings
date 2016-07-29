@@ -18,10 +18,10 @@
 
 #include "updatemodel.h"
 #include "systemupdate.h"
-#include "testable_system_update.h"
 
 #include "plugins/system-update/fakeclickmanager.h"
 #include "plugins/system-update/fakeimagemanager.h"
+#include "testable_system_update.h"
 
 #include <QSignalSpy>
 #include <QSqlError>
@@ -46,8 +46,8 @@ private slots:
         m_clickManager = new MockClickManager();
 
         // Network Access Manager will not be needed for our tests, so it's 0.
-        m_instance = new TestableSystemUpdate(m_model, m_pending, m_clicks,
-                                              m_images, m_installed, nullptr,
+        m_instance = new SystemUpdate(m_model, nullptr, m_pending, m_clicks,
+                                              m_images, m_installed,
                                               m_imageManager, m_clickManager);
         m_model->setParent(m_instance);
         m_imageManager->setParent(m_instance);
@@ -111,17 +111,24 @@ private slots:
     {
         QCOMPARE(m_instance->installedUpdates(), m_installed);
     }
-    void testNam()
-    {
-        // We passed a nullptr, so just verify that the method exist.
-        QVERIFY(!m_instance->nam());
-    }
     void testStatus()
     {
 
     }
+    void testIntegration()
+    {
+        /* Do this so as to test all the actual constructors. Since we cannot
+        say anything about networking/system image dbus, et. al., we do not
+        perform any assertions here, except verifying that the ctor constructed
+        a SystemUpdate. */
+        SystemUpdate *su = new SystemUpdate();
+        QVERIFY(su); // Constructors all worked fine.
+        QTest::qWait(3000); // Wait for things to settle.
+        QSignalSpy destroyedSpy(su, SIGNAL(destroyed(QObject*)));
+        su->deleteLater();
+        QTRY_COMPARE(destroyedSpy.count(), 1);
+    }
 private:
-    //TestableSystemUpdate *m_instance = nullptr;
     SystemUpdate *m_instance = nullptr;
     UpdateModel *m_model = nullptr;
     UpdateModelFilter *m_pending = nullptr;
@@ -133,4 +140,4 @@ private:
 };
 
 QTEST_MAIN(TstSystemUpdate)
-#include "tst_system_update.moc"
+#include "tst_systemupdate.moc"

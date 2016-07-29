@@ -28,7 +28,7 @@ namespace Network
 class ManagerImpl : public Manager
 {
 public:
-    ManagerImpl(QObject *parent = 0);
+    ManagerImpl(QObject *parent = nullptr);
     virtual ~ManagerImpl() {};
 
     virtual QNetworkReply* post(const QNetworkRequest &request, const QByteArray &data) override;

@@ -39,8 +39,17 @@ class SystemUpdate : public QObject
     Q_PROPERTY(Status status READ status NOTIFY statusChanged)
     Q_PROPERTY(bool authenticated READ authenticated NOTIFY authenticatedChanged)
 public:
-    static SystemUpdate *instance();
-    static void destroyInstance();
+    explicit SystemUpdate(QObject *parent = nullptr);
+    explicit SystemUpdate(UpdateModel *model,
+                          Network::Manager *nam,
+                          UpdateModelFilter *pending,
+                          UpdateModelFilter *clicks,
+                          UpdateModelFilter *images,
+                          UpdateModelFilter *installed,
+                          Image::Manager *imageManager,
+                          Click::Manager *clickManager,
+                          QObject *parent = nullptr);
+    ~SystemUpdate() {qWarning() << "dtor of systemupdate called"; };
 
     enum class Status
     {
@@ -67,53 +76,32 @@ public:
     UpdateModelFilter* installedUpdates() const;
     Status status() const;
 
-    /* Qt recommend only one QNetworkAccessManager per application,
-    and it is provided here. */
-    Network::Manager* nam();
-
     Q_INVOKABLE void check(const Check check = Check::CheckAutomatic);
     Q_INVOKABLE void cancel();
     Q_INVOKABLE void retry(const QString &identifier, const uint &revision);
     Q_INVOKABLE void launch(const QString &identifier, const uint &revision);
     bool isCheckRequired();
     bool authenticated();
-
+protected:
+    UpdateModel *m_model; // Protected for testing purposes.
 Q_SIGNALS:
     void statusChanged();
     void authenticatedChanged();
-
-protected:
-    explicit SystemUpdate(QObject *parent = 0);
-    explicit SystemUpdate(UpdateModel *model,
-                          UpdateModelFilter *pending,
-                          UpdateModelFilter *clicks,
-                          UpdateModelFilter *images,
-                          UpdateModelFilter *installed,
-                          Network::Manager *nam,
-                          Image::Manager *imageManager,
-                          Click::Manager *clickManager,
-                          QObject *parent = 0);
-    ~SystemUpdate() {}
-
 private slots:
     void calculateStatus();
     void handleCheckCompleted();
     void handleNetworkError();
     void handleServerError();
-
 private:
+    void init();
     void setStatus(const Status &status);
-
-    static SystemUpdate *m_instance;
-    UpdateModel *m_model;
+    Network::Manager *m_nam;
     UpdateModelFilter *m_pending;
     UpdateModelFilter *m_clicks;
     UpdateModelFilter *m_images;
     UpdateModelFilter *m_installed;
-    Network::Manager *m_nam;
     Image::Manager *m_imageManager;
     Click::Manager *m_clickManager;
-
     Status m_status = Status::StatusIdle;
 };
 

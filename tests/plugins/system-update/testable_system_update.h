@@ -28,18 +28,16 @@ class TestableSystemUpdate : public SystemUpdate
 {
 public:
     explicit TestableSystemUpdate(UpdateModel *model,
+                                  Network::Manager *nam,
                                   UpdateModelFilter *pending,
                                   UpdateModelFilter *clicks,
                                   UpdateModelFilter *images,
                                   UpdateModelFilter *installed,
-                                  Network::Manager *nam,
                                   Image::Manager *imageManager,
                                   Click::Manager *clickManager,
-                                  QObject *parent = 0)
-        : SystemUpdate(model, pending, clicks, images, installed, nam,
-                       imageManager, clickManager, parent)
-    {}
-
+                                  QObject *parent = nullptr)
+        : SystemUpdate(model, nam, pending, clicks, images, installed, imageManager,
+                       clickManager, parent) {}
     ~TestableSystemUpdate() {}
 };
 } // UpdatePlugin

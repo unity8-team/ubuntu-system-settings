@@ -96,5 +96,5 @@ private:
 };
 
 QTEST_MAIN(TstClickManifest)
-#include "tst_click_manifest.moc"
+#include "tst_clickmanifest.moc"
 

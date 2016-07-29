@@ -42,20 +42,14 @@ QSystemImage::QSystemImage(QObject *parent)
 
 QSystemImage::QSystemImage(const QDBusConnection &dbus, QObject *parent)
     : QObject(parent)
-    , m_detailedVersion()
-    , m_lastUpdateDate()
-    , m_dbus(dbus)
-    , m_watcher("com.canonical.SystemImage", m_dbus,
+    , m_watcher("com.canonical.SystemImage", dbus,
                 QDBusServiceWatcher::WatchForOwnerChange)
     , m_iface("com.canonical.SystemImage", "/Service",
-              "com.canonical.SystemImage", m_dbus)
-    , m_lastCheckDate()
+              "com.canonical.SystemImage", dbus)
 {
     qDBusRegisterMetaType<QMap<QString, QString> >();
-
     connect(&m_watcher, SIGNAL(serviceOwnerChanged(QString, QString, QString)),
             this, SLOT(slotNameOwnerChanged(QString, QString, QString)));
-
     setUpInterface();
 }
 

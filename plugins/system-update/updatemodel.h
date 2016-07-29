@@ -60,11 +60,11 @@ public:
       LastRole = PackageNameRole
     };
 
-    explicit UpdateModel(QObject *parent = 0);
+    explicit UpdateModel(QObject *parent = nullptr);
     ~UpdateModel() {};
 
     // For testing, when we want to explicitly set the database path.
-    explicit UpdateModel(const QString &dbpath, QObject *parent = 0);
+    explicit UpdateModel(const QString &dbpath, QObject *parent = nullptr);
 
     UpdateDb* db();
 
@@ -78,29 +78,31 @@ public:
 
     /* Fetch will grab data from the db, while get returns a from cache. */
     QSharedPointer<Update> fetch(const QString &id, const uint &revision);
+    QSharedPointer<Update> fetch(const QSharedPointer<Update> &other);
     QSharedPointer<Update> get(const QString &id, const uint &revision);
     QSharedPointer<Update> get(const QString &id, const QString &version);
+    QSharedPointer<Update> get(const QSharedPointer<Update> &other);
 
-    Q_INVOKABLE void setAvailable(const QString &id, const uint &revision,
+    Q_INVOKABLE void setAvailable(const QString &id, const uint &rev,
                                   const bool autoStart = false);
-    Q_INVOKABLE void setInstalled(const QString &id, const uint &revision);
-    Q_INVOKABLE void setError(const QString &id, const uint &revision,
+    Q_INVOKABLE void setInstalled(const QString &id, const uint &rev);
+    Q_INVOKABLE void setError(const QString &id, const uint &rev,
                               const QString &msg);
-    Q_INVOKABLE void setProgress(const QString &id, const uint &revision,
+    Q_INVOKABLE void setProgress(const QString &id, const uint &rev,
                      const int &progress);
-    Q_INVOKABLE void setDownloaded(const QString &id, const uint &revision);
-    Q_INVOKABLE void setInstalling(const QString &id, const uint &revision,
+    Q_INVOKABLE void setDownloaded(const QString &id, const uint &rev);
+    Q_INVOKABLE void setInstalling(const QString &id, const uint &rev,
                                    const int &progress = 0);
-    Q_INVOKABLE void startUpdate(const QString &id, const uint &revision,
+    Q_INVOKABLE void startUpdate(const QString &id, const uint &rev,
                                  const bool automatic = false);
-    Q_INVOKABLE void queueUpdate(const QString &id, const uint &revision,
+    Q_INVOKABLE void queueUpdate(const QString &id, const uint &rev,
                                  const QString &downloadId);
-    Q_INVOKABLE void processUpdate(const QString &id, const uint &revision);
-    Q_INVOKABLE void pauseUpdate(const QString &id, const uint &revision,
+    Q_INVOKABLE void processUpdate(const QString &id, const uint &rev);
+    Q_INVOKABLE void pauseUpdate(const QString &id, const uint &rev,
                                  const bool automatic = false);
-    Q_INVOKABLE void resumeUpdate(const QString &id, const uint &revision,
+    Q_INVOKABLE void resumeUpdate(const QString &id, const uint &rev,
                                   const bool automatic = false);
-    Q_INVOKABLE void cancelUpdate(const QString &id, const uint &revision);
+    Q_INVOKABLE void cancelUpdate(const QString &id, const uint &rev);
     Q_INVOKABLE void setImageUpdate(const QString &id, const int &version,
                                     const int &updateSize);
 
@@ -134,7 +136,7 @@ class UpdateModelFilter : public QSortFilterProxyModel
 {
     Q_OBJECT
 public:
-    explicit UpdateModelFilter(UpdateModel *model, QObject *parent = 0);
+    explicit UpdateModelFilter(UpdateModel *model, QObject *parent = nullptr);
 
     uint kindFilter() const;
     void filterOnKind(const uint &kind);
@@ -149,7 +151,9 @@ signals:
     void sortRoleChanged();
 
 protected:
-    virtual bool filterAcceptsRow(int sourceRow, const QModelIndex &sourceParent) const Q_DECL_OVERRIDE;
+    virtual bool filterAcceptsRow(
+        int sourceRow, const QModelIndex &sourceParent
+    ) const Q_DECL_OVERRIDE;
 
 private:
     Update::Kind m_kind = Update::Kind::KindUnknown;

@@ -24,7 +24,7 @@
 class MockClient : public UpdatePlugin::Click::Client
 {
 public:
-    explicit MockClient(QObject* parent=0)
+    explicit MockClient(QObject* parent = nullptr)
         : UpdatePlugin::Click::Client(parent)
     {
     }

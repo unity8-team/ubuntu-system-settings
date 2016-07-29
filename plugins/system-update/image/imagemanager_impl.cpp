@@ -24,15 +24,17 @@ namespace UpdatePlugin
 namespace Image
 {
 ManagerImpl::ManagerImpl(UpdateModel *model, QObject *parent)
-    : ManagerImpl(new QSystemImage(this), model, parent)
+    : ManagerImpl(new QSystemImage(parent), model, parent)
 {
+    qWarning() << "in ctor of Image::ManagerImpl";
 }
 
 ManagerImpl::ManagerImpl(QSystemImage *si, UpdateModel *model, QObject *parent)
     : Manager(parent)
-    , m_si(si)
     , m_model(model)
+    , m_si(si)
 {
+    qWarning() << "in actual ctor of Image::ManagerImpl";
     connect(m_si, SIGNAL(checkingForUpdatesChanged()),
             this, SLOT(handleCheckingForUpdatesChanged()));
     connect(
@@ -68,11 +70,11 @@ ManagerImpl::ManagerImpl(QSystemImage *si, UpdateModel *model, QObject *parent)
 const QString ManagerImpl::ubuntuId = QString("ubuntu");
 
 void ManagerImpl::handleUpdateAvailableStatus(const bool isAvailable,
-                                          const bool downloading,
-                                          const QString &availableVersion,
-                                          const int &updateSize,
-                                          const QString &lastUpdateDate,
-                                          const QString &errorReason)
+                                              const bool downloading,
+                                              const QString &availableVersion,
+                                              const int &updateSize,
+                                              const QString &lastUpdateDate,
+                                              const QString &errorReason)
 {
     Q_UNUSED(lastUpdateDate)
 
