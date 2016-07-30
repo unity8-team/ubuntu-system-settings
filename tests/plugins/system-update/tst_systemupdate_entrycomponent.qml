@@ -69,7 +69,7 @@ Item {
 
         function test_clickUpdates() {
             SystemUpdate.model.mockAddUpdate("app" + 0, 0, Update.KindClick);
-            tryCompare(instance, "height", units.gu(6));
+            tryCompare(instance, "height", units.gu(7));
         }
     }
 
@@ -97,12 +97,12 @@ Item {
         }
 
         function test_visibleWhenImageUpdate() {
-            tryCompare(instance, "height", units.gu(6));
+            tryCompare(instance, "height", units.gu(7));
         }
 
         function test_clickUpdates() {
             SystemUpdate.model.mockAddUpdate("app" + 0, 0, Update.KindClick);
-            tryCompare(instance, "height", units.gu(6));
+            tryCompare(instance, "height", units.gu(7));
         }
     }
 }

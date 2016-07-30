@@ -1,7 +1,7 @@
 /*
  * This file is part of system-settings
  *
- * Copyright (C) 2013-2016 Canonical Ltd.
+ * Copyright (C) 2015-2016 Canonical Ltd.
  *
  * Contact: Ken VanDine <ken.vandine@canonical.com>
  *
@@ -19,8 +19,10 @@
  */
 
 import QtQuick 2.4
+import SystemSettings 1.0
+import SystemSettings.ListItems 1.0 as SettingsListItems
 import Ubuntu.Components 1.3
-import Ubuntu.Components.ListItems 1.3 as ListItem
+
 
 Column {
     anchors {
@@ -34,32 +36,17 @@ Column {
 
     objectName: "categoryGrid-" + category
 
-    ListItem.Standard {
+    SettingsItemTitle {
         id: header
-
-        highlightWhenPressed: false
-        showDivider: false
         text: categoryName
         visible: repeater.count > 0
     }
 
-    Grid {
-        property int itemWidth: units.gu(12)
-
-        // The amount of whitespace, including column spacing
-        property int space: parent.width - columns * itemWidth
-
-        // The column spacing is 1/n of the left/right margins
-        property int n: 4
-
-        columnSpacing: space / ((2 * n) + (columns - 1))
-        rowSpacing: units.gu(3)
-        width: (columns * itemWidth) + columnSpacing * (columns - 1)
-        anchors.horizontalCenter: parent.horizontalCenter
-        columns: {
-            var items = Math.floor(parent.width / itemWidth)
-            var count = repeater.count
-            return count < items ? count : items
+    Column {
+        id: col
+        anchors {
+            left: parent.left
+            right: parent.right
         }
 
         Repeater {
@@ -69,7 +56,10 @@ Column {
 
             delegate: Loader {
                 id: loader
-                width: parent.itemWidth
+                anchors {
+                    left: col.left
+                    right: col.right
+                }
                 sourceComponent: model.item.entryComponent
                 active: model.item.visible
                 Connections {
@@ -86,5 +76,4 @@ Column {
             }
         }
     }
-    ListItem.ThinDivider { visible: header.visible }
 }

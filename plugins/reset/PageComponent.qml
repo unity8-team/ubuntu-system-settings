@@ -1,7 +1,7 @@
 /*
  * This file is part of system-settings
  *
- * Copyright (C) 2013 Canonical Ltd.
+ * Copyright (C) 2013-2016 Canonical Ltd.
  *
  * Contact: Alberto Mardegan <alberto.mardegan@canonical.com>
  *
@@ -21,8 +21,8 @@
 import GSettings 1.0
 import QtQuick 2.4
 import SystemSettings 1.0
+import SystemSettings.ListItems 1.0 as SettingsListItems
 import Ubuntu.Components 1.3
-import Ubuntu.Components.ListItems 1.3 as ListItem
 import Ubuntu.Components.Popups 1.3
 import Ubuntu.SystemSettings.Reset 1.0
 
@@ -66,46 +66,81 @@ ItemPage {
             anchors.left: parent.left
             anchors.right: parent.right
 
-            ListItem.SingleControl {
-                control: Button {
+            Label {
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                    margins: units.gu(2)
+                }
+                text: i18n.tr("Reset Launcher")
+                color: UbuntuColors.orange
+                height: units.gu(6)
+                verticalAlignment: Text.AlignVCenter
+            }
+
+            SettingsListItems.Standard {
+
+                Button {
                     id: resetLauncherHomeButton
                     objectName: "resetLauncher"
                     text: i18n.tr("Reset Launcher")
-                    width: parent.width - units.gu(4)
                     onClicked: {
                         buttonActions.source = "ResetLauncherHome.qml";
                         root.popup = PopupUtils.open(buttonActions.item);
                     }
                 }
-                showDivider: false
             }
 
-            ListItem.SingleControl {
-                visible: false // enabled when backend is ready/useful
-                control: Button {
+            Label {
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                    margins: units.gu(2)
+                }
+                visible: showAllUI
+                text: i18n.tr("Reset all system settings…")
+                color: UbuntuColors.orange
+                height: units.gu(6)
+                verticalAlignment: Text.AlignVCenter
+            }
+
+            SettingsListItems.Standard {
+                visible: showAllUI
+
+                Button {
                     id: resetAllSettingsButton
                     text: i18n.tr("Reset all system settings…")
-                    width: parent.width - units.gu(4)
                     onClicked: {
                         buttonActions.source = "ResetAllSettings.qml";
                         root.popup = PopupUtils.open(buttonActions.item);
                     }
                 }
-                showDivider: false
             }
 
-            ListItem.SingleControl {
-                control: Button {
+            Label {
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                    margins: units.gu(2)
+                }
+                text: i18n.tr("Erase & Reset All")
+                color: UbuntuColors.orange
+                height: units.gu(6)
+                verticalAlignment: Text.AlignVCenter
+            }
+
+            SettingsListItems.Standard {
+
+                Button {
                     id: eraseEverythingButton
                     objectName: "factoryReset"
-                    text: i18n.tr("Erase & Reset Everything…")
-                    width: parent.width - units.gu(4)
+
+                    text: i18n.tr("Erase & Reset All")
                     onClicked: {
                         buttonActions.source = "EraseEverything.qml";
                         root.popup = PopupUtils.open(buttonActions.item);
                     }
                 }
-                showDivider: false
             }
         }
     }

@@ -1,3 +1,21 @@
+ubuntu-system-settings (0.4+16.10.20160722.1-0ubuntu1) yakkety; urgency=medium
+
+  [ Ken VanDine ]
+  * Added missing depends on qtdeclarative5-ubuntu-history0.1, qml-
+    module-qtcontacts and qtdeclarative5-ubuntu-keyboard-extensions0.1
+  * Ported to use Slots layout and updated visuals (LP: #1596529)
+
+  [ Ken VanDine, jonas-drange ]
+  * new module SystemSettings.ListItems
+
+  [ Olivier Tilloy ]
+  * Fix unit tests when run under an sbuild chroot. (LP: #1592475)
+
+  [ jonas-drange ]
+  * Do runtime check of address list size.
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Fri, 22 Jul 2016 14:39:12 +0000
+
 ubuntu-system-settings (0.4+16.10.20160708-0ubuntu1) yakkety; urgency=medium
 
   [ Arthur Mello ]

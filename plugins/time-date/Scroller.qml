@@ -1,7 +1,8 @@
 /*
  * Copyright (C) 2013 Michael Zanetti <michael_zanetti@gmx.net>
- *           (C) 2013 Canonical Ltd
- * Canonical modifications by Iain Lane <iain.lane@canonical.com>
+ *           (C) 2013-2016 Canonical Ltd
+ * Canonical modifications by Iain Lane <iain.lane@canonical.com>,
+ *                            Jonas G. Drange <jonas.drange@canonical.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,6 +18,7 @@
  */
 
 import QtQuick 2.4
+import SystemSettings.ListItems 1.0 as SettingsListItems
 import Ubuntu.Components 1.3
 import Ubuntu.Components.ListItems 1.3 as ListItems
 
@@ -106,13 +108,10 @@ Item {
         preferredHighlightEnd: 0.5
         clip: true
 
-        delegate: ListItems.Standard {
+        delegate: SettingsListItems.Standard {
             width: parent.width
             highlightWhenPressed: false
-            Label {
-                anchors.centerIn: parent
-                text: modelData
-            }
+            text: modelData
             showDivider: false
             onClicked: listView.currentIndex = index
         }

@@ -1,9 +1,7 @@
 /*
  * This file is part of system-settings
  *
- * Copyright (C) 2013-2016 Canonical Ltd.
- *
- * Contact: Evan Dandrea <evan.dandrea@canonical.com>
+ * Copyright (C) 2015-2016 Canonical Ltd.
  *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License version 3, as published
@@ -20,25 +18,16 @@
 
 import QtQuick 2.4
 import Ubuntu.Components 1.3
-import Ubuntu.Components.ListItems 1.3 as ListItems
 
-ListItems.Base {
-    property string textEntry: "";
-    property alias checked: checkBox.checked;
-    onClicked: checked = !checked;
+Standard {
+    id: base
+    property alias iconName: icon.name
+    property alias iconSource: icon.source
 
-    Row {
-        anchors.top: parent.top
-        anchors.bottom: parent.bottom
-        spacing: units.gu(2)
-
-        CheckBox {
-            id: checkBox
-            anchors.verticalCenter: parent.verticalCenter
-        }
-        Label {
-            anchors.verticalCenter: parent.verticalCenter
-            text: textEntry
-        }
+    Icon {
+        id: icon
+        width: height
+        height: units.gu(2.5)
+        SlotsLayout.position: SlotsLayout.First
     }
 }

@@ -1,5 +1,5 @@
 # -*- Mode: Python; coding: utf-8; indent-tabs-mode: nil; tab-width: 4 -*-
-# Copyright 2013 Canonical
+# Copyright 2013-2016 Canonical
 #
 # This program is free software: you can redistribute it and/or modify it
 # under the terms of the GNU General Public License version 3, as published
@@ -31,6 +31,7 @@ class SearchTestCases(UbuntuSystemSettingsTestCase):
             'EntryComponent')
 
     def _type_into_search_box(self, text):
+        self.main_view.click_header_action('searchAction')
         search_box = self.main_view.select_single(
             objectName='searchTextField'
         )

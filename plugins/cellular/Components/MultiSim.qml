@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 Canonical Ltd
+ * Copyright (C) 2014-2016 Canonical Ltd
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as
@@ -20,9 +20,10 @@
 import QtQuick 2.4
 import GSettings 1.0
 import SystemSettings 1.0
+import SystemSettings.ListItems 1.0 as SettingsListItems
 import Ubuntu.Components 1.3
-import Ubuntu.Components.ListItems 1.3 as ListItem
 import Ubuntu.SystemSettings.Cellular 1.0
+import Ubuntu.Components.ListItems 1.3 as ListItems
 
 Column {
     objectName: "multiSim"
@@ -49,20 +50,17 @@ Column {
         anchors { left: parent.left; right: parent.right }
     }
 
-    ListItem.Standard {
+    SettingsListItems.StandardProgression {
         id: dataUsage
         text: i18n.tr("Data usage statistics")
-        progression: true
         visible: showAllUI
     }
 
-    ListItem.Divider {}
-
-    ListItem.SingleValue {
+    SettingsListItems.SingleValueProgression {
         text: i18n.tr("Carriers")
         id: chooseCarrier
         objectName: "carrierApnEntry"
-        progression: enabled
+        progressionVisible: enabled
         showDivider: false
         onClicked: {
             pageStack.push(Qt.resolvedUrl("../PageCarriersAndApns.qml"), {
@@ -71,26 +69,24 @@ Column {
         }
     }
 
-    ListItem.Divider {}
-
     SimEditor {
         anchors { left: parent.left; right: parent.right }
     }
 
-    ListItem.Divider {}
+    ListItems.Divider {}
 
     DefaultSim {
         anchors { left: parent.left; right: parent.right }
     }
 
-    ListItem.Divider {}
+    ListItems.Divider {}
 
     SettingsItemTitle { text: i18n.tr("Connection type:") }
 
     Repeater {
         model: sims
 
-        ListItem.ItemSelector {
+        ListItems.ItemSelector {
             id: radio
             property var sim: modelData
 
