@@ -137,12 +137,6 @@ void SystemUpdate::calculateStatus()
 
 void SystemUpdate::setStatus(const Status &status)
 {
-    /* We treat these communication errors as fatal, and return early. */
-    if (m_status == Status::StatusNetworkError ||
-        m_status == Status::StatusServerError) {
-        return;
-    }
-
     if (m_status != status) {
         m_status = status;
         Q_EMIT statusChanged();

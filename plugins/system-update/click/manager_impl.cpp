@@ -151,6 +151,7 @@ ManagerImpl::ManagerImpl(UpdateModel *model,
 
     m_transitions[State::Complete]      << State::Idle;
     m_transitions[State::Canceled]      << State::Idle;
+    m_transitions[State::Failed]        << State::Idle;
 }
 
 ManagerImpl::~ManagerImpl()
@@ -201,6 +202,7 @@ void ManagerImpl::handleStateChange()
     case State::Failed:
         qWarning() << "changed to State::Failed";
         Q_EMIT checkCanceled();
+        setState(State::Idle);
         break;
     case State::Complete:
         qWarning() << "changed to State::Complete";
