@@ -223,6 +223,8 @@ void ManagerImpl::setup(const Click::TokenDownloader *downloader)
             this, SLOT(handleTokenDownload(QSharedPointer<Update>)));
     connect(downloader, SIGNAL(downloadFailed(QSharedPointer<Update>)),
             this, SLOT(handleTokenDownloadFailure(QSharedPointer<Update>)));
+    connect(downloader, SIGNAL(credentialError()),
+            this, SLOT(handleCredentialsFailed()));
     connect(this, SIGNAL(checkCanceled()), downloader, SLOT(cancel()));
 }
 
@@ -236,6 +238,7 @@ void ManagerImpl::check()
     // Don't check for click updates if there are no credentials,
     // instead ask for credentials.
     if (!m_authToken.isValid() && !Helpers::isIgnoringCredentials()) {
+        qWarning() << Q_FUNC_INFO << "Credential invalid.";
         m_sso->requestCredentials();
         return;
     }
@@ -409,13 +412,16 @@ void ManagerImpl::handleTokenDownloadFailure(QSharedPointer<Update> update)
 
 void ManagerImpl::handleCredentials(const UbuntuOne::Token &token)
 {
+    qWarning() << Q_FUNC_INFO;
     m_authToken = token;
 
     if (!m_authToken.isValid() && !Helpers::isIgnoringCredentials()) {
+        qWarning() << Q_FUNC_INFO << "not valid";
         handleCredentialsFailed();
         return;
     }
 
+    qWarning() << Q_FUNC_INFO << "auth true";
     setAuthenticated(true);
 
     cancel();
@@ -424,11 +430,13 @@ void ManagerImpl::handleCredentials(const UbuntuOne::Token &token)
 
 void ManagerImpl::handleCredentialsFailed()
 {
+    qWarning() << Q_FUNC_INFO;
     m_sso->invalidateCredentials();
     m_authToken = UbuntuOne::Token();
 
     // We've invalidated the token, and the user is now not authenticated.
     setAuthenticated(false);
+    qWarning() << Q_FUNC_INFO << "auth false";
     cancel();
 }
 

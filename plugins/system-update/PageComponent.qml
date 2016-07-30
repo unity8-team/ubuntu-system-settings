@@ -143,9 +143,14 @@ ItemPage {
             Rectangle {
                 id: overlay
                 objectName: "overlay"
+                anchors {
+                    left: parent.left
+                    leftMargin: units.gu(2)
+                    right: parent.right
+                    rightMargin: units.gu(2)
+                }
                 visible: placeholder.text
                 color: theme.palette.normal.background
-                width: parent.width
                 height: units.gu(10)
 
                 Label {

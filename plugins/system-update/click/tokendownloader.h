@@ -59,6 +59,7 @@ Q_SIGNALS:
 
     // This signal is emitted when a token download fails.
     void downloadFailed(QSharedPointer<Update> update);
+    void credentialError();
 protected:
     Client *m_client;
     QSharedPointer<Update> m_update;

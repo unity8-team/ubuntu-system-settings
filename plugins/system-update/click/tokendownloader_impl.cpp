@@ -37,6 +37,8 @@ TokenDownloaderImpl::TokenDownloaderImpl(Client *client,
             this, SLOT(handleFailure()));
     connect(m_client, SIGNAL(credentialError()),
             this, SLOT(handleFailure()));
+    connect(m_client, SIGNAL(credentialError()),
+            this, SIGNAL(credentialError()));
 }
 
 TokenDownloaderImpl::~TokenDownloaderImpl()
