@@ -407,6 +407,7 @@ void UpdateModel::setInstalled(const QString &id, const uint &rev)
         update->setState(Update::State::StateInstallFinished);
         update->setUpdatedAt(QDateTime::currentDateTimeUtc());
         update->setDownloadId("");
+        update->setError("");
         m_db->update(update);
     }
 }
@@ -429,6 +430,7 @@ void UpdateModel::processUpdate(const QString &id, const uint &rev)
     auto update = find(id, rev);
     if (!update.isNull()) {
         update->setState(Update::State::StateInstalling);
+        update->setError("");
         m_db->update(update);
     }
 }
@@ -461,6 +463,7 @@ void UpdateModel::setProgress(const QString &id, const uint &rev,
     if (!update.isNull()) {
         update->setState(Update::State::StateDownloading);
         update->setProgress(progress);
+        update->setError("");
         m_db->update(update);
     }
 }
@@ -472,6 +475,7 @@ void UpdateModel::setInstalling(const QString &id, const uint &rev,
     if (!update.isNull()) {
         update->setState(Update::State::StateInstalling);
         update->setProgress(progress);
+        update->setError("");
         m_db->update(update);
     }
 }
