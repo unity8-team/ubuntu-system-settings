@@ -30,13 +30,13 @@ SSOImpl::SSOImpl(QObject *parent)
     {
         using namespace UbuntuOne;
         connect(m_service, SIGNAL(credentialsFound(const Token&)),
-                this, SLOT(handleCredentialsFound(const Token&)));
+                this, SIGNAL(credentialsFound(const Token&)));
 
     }
     connect(m_service, SIGNAL(credentialsNotFound()),
-            this, SLOT(handleCredentialsFailed()));
+            this, SIGNAL(credentialsNotFound()));
     connect(m_service, SIGNAL(credentialsDeleted()),
-            this, SLOT(handleCredentialsFailed()));
+            this, SIGNAL(credentialsDeleted()));
 }
 
 void SSOImpl::requestCredentials()
@@ -48,16 +48,5 @@ void SSOImpl::invalidateCredentials()
 {
     m_service->invalidateCredentials();
 }
-
-void SSOImpl::handleCredentialsFound(const UbuntuOne::Token &token)
-{
-    Q_EMIT credentialsRequestSucceeded(token);
-}
-
-void SSOImpl::handleCredentialsFailed()
-{
-    Q_EMIT credentialsRequestFailed();
-}
-
 } // Click
 } // UpdatePlugin

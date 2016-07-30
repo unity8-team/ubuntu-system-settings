@@ -44,11 +44,14 @@ public:
     virtual void invalidateCredentials() = 0;
 
 Q_SIGNALS:
-    // This signal is emitted when a credential request succeeds.
-    void credentialsRequestSucceeded(const UbuntuOne::Token &token);
+    // This signal is emitted when credentials are found..
+    void credentialsFound(const UbuntuOne::Token &token);
 
-    // This signal is emitted when a credential request fails.
-    void credentialsRequestFailed();
+    // This signal is emitted when credentials are not found.
+    void credentialsNotFound();
+
+    // This signal is emitted when credentials are deleted.
+    void credentialsDeleted();
 };
 } // Click
 } // UpdatePlugin

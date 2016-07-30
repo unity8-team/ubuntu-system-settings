@@ -39,13 +39,19 @@ public:
         invalidateCredentialsCalled = true;
     }
 
-    void mockCredentialsRequestSucceeded(const UbuntuOne::Token &token)
+    void mockCredentialsFound(const UbuntuOne::Token &token)
     {
-        Q_EMIT credentialsRequestSucceeded(token);
+        Q_EMIT credentialsFound(token);
     }
-    void mockCredentialsRequestFailed()
+
+    void mockCredentialsNotFound()
     {
-        Q_EMIT credentialsRequestFailed();
+        Q_EMIT credentialsNotFound();
+    }
+
+    void mockCredentialsDeleted()
+    {
+        Q_EMIT credentialsDeleted();
     }
 
     bool requestCredentialsCalled = false;

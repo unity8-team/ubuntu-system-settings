@@ -69,6 +69,7 @@ private Q_SLOTS:
     void handleTokenDownload(QSharedPointer<Update> update);
     void handleTokenDownloadFailure(QSharedPointer<Update> update);
     void handleCredentials(const UbuntuOne::Token &token);
+    void handleCredentialsAbsence();
     void handleCredentialsFailed();
     void requestMetadata();
     void completionCheck();

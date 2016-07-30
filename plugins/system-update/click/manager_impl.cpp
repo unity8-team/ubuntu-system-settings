@@ -108,10 +108,12 @@ ManagerImpl::ManagerImpl(UpdateModel *model,
         setState(State::Complete);
     });
     connect(m_sso,
-            SIGNAL(credentialsRequestSucceeded(const UbuntuOne::Token&)),
+            SIGNAL(credentialsFound(const UbuntuOne::Token&)),
             this, SLOT(handleCredentials(const UbuntuOne::Token&)));
-    connect(m_sso, SIGNAL(credentialsRequestFailed()),
-            this, SLOT(handleCredentialsFailed()));
+    connect(m_sso, SIGNAL(credentialsNotFound()),
+            this, SLOT(handleCredentialsAbsence()));
+    connect(m_sso, SIGNAL(credentialsDeleted()),
+            this, SLOT(handleCredentialsAbsence()));
 
     /* Describes a state machine for checking. The rationale for these
     transitions are that
@@ -426,6 +428,12 @@ void ManagerImpl::handleCredentials(const UbuntuOne::Token &token)
 
     cancel();
     check();
+}
+
+void ManagerImpl::handleCredentialsAbsence()
+{
+    setAuthenticated(false);
+    cancel();
 }
 
 void ManagerImpl::handleCredentialsFailed()

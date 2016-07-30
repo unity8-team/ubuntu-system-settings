@@ -300,20 +300,26 @@ private slots:
         m_mockclient->mockCredentialError();
         QTRY_COMPARE(credentialErrorSpy.count(), 1);
     }
-    void testSSOCredentialFailure()
+    void testSSOCredentialsNotFound()
     {
         QSignalSpy authenticatedChangedSpy(m_instance, SIGNAL(authenticatedChanged()));
-        m_mocksso->mockCredentialsRequestFailed();
+        m_mocksso->mockCredentialsNotFound();
         QTRY_COMPARE(authenticatedChangedSpy.count(), 1);
     }
-    void testSSOCredentialSuccess()
+    void testSSOCredentialsDeleted()
     {
         QSignalSpy authenticatedChangedSpy(m_instance, SIGNAL(authenticatedChanged()));
-        m_mocksso->mockCredentialsRequestFailed();
+        m_mocksso->mockCredentialsDeleted();
+        QTRY_COMPARE(authenticatedChangedSpy.count(), 1);
+    }
+    void testSSOCredentialsFound()
+    {
+        QSignalSpy authenticatedChangedSpy(m_instance, SIGNAL(authenticatedChanged()));
+        m_mocksso->mockCredentialsDeleted();
         QTRY_COMPARE(authenticatedChangedSpy.count(), 1);
 
         // The token is ignored.
-        m_mocksso->mockCredentialsRequestSucceeded(UbuntuOne::Token());
+        m_mocksso->mockCredentialsFound(UbuntuOne::Token());
         QTRY_COMPARE(authenticatedChangedSpy.count(), 2);
     }
     void testManifestParser()
