@@ -81,7 +81,7 @@ void ManagerImpl::handleUpdateAvailableStatus(const bool isAvailable,
     int rev;
     rev = availableVersion.toInt(&ok);
     if (!ok) {
-        qCritical() << "failed to convert version to a number";
+        qCritical() << Q_FUNC_INFO << "failed to convert version to a number";
         return;
     }
     if (isAvailable) {

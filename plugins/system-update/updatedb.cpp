@@ -49,7 +49,7 @@ UpdateDb::UpdateDb(QObject *parent)
         QStandardPaths::AppDataLocation
     );
     if (Q_UNLIKELY(!QDir().mkpath(dataPath))) {
-        qCritical() << "Could not create" << dataPath;
+        qCritical() << Q_FUNC_INFO << "Could not create" << dataPath;
         return;
     }
     m_dbpath = dataPath + QLatin1String("/updatestore.db");
@@ -88,8 +88,8 @@ void UpdateDb::initializeDb()
     // Check whether the table already exists
     q.exec("SELECT name FROM sqlite_master WHERE type='table' AND name='updates'");
     if (!q.next() && !createDb()) {
-        qCritical() << "Could not create updates database:" << m_dbpath
-            << m_db.lastError().text();
+        qCritical() << Q_FUNC_INFO << "Could not create updates database:"
+                    << m_dbpath << m_db.lastError().text();
             return;
     }
 }
@@ -118,7 +118,8 @@ void UpdateDb::replaceWith(const QSharedPointer<Update> &update)
     q.bindValue(":revision", update->revision());
     q.bindValue(":installed", false);
     if (!q.exec()) {
-        qCritical() << "Could not replace updates:" << q.lastError().text();
+        qCritical() << Q_FUNC_INFO << "Could not replace updates:"
+                    << q.lastError().text();
     }
 }
 
@@ -170,7 +171,8 @@ bool UpdateDb::insert(const QSharedPointer<Update> &update)
     q.bindValue(":updated_at_utc", update->updatedAt().toUTC().toMSecsSinceEpoch());
 
     if (!q.exec()) {
-        qCritical() << "Could not insert update" << q.lastError().text();
+        qCritical() << Q_FUNC_INFO << "Could not insert update"
+                    << q.lastError().text();
         return false;
     } else {
         return true;
@@ -185,7 +187,8 @@ void UpdateDb::remove(const QSharedPointer<Update> &update)
     q.bindValue(":revision", update->revision());
 
     if (!q.exec()) {
-        qCritical() << "Could not delete update" << q.lastError().text();
+        qCritical() << Q_FUNC_INFO << "Could not delete update"
+                    << q.lastError().text();
     }
 
     Q_EMIT changed();
@@ -279,7 +282,8 @@ bool UpdateDb::openDb()
 {
     if (m_db.isOpen()) return true;
     if (Q_UNLIKELY(!m_db.open())) {
-        qCritical() << "Could not open updates database:" << m_db.lastError();
+        qCritical() << Q_FUNC_INFO << "Could not open updates database:"
+                    << m_db.lastError();
         return false;
     }
     return true;
@@ -298,7 +302,8 @@ void UpdateDb::pruneDb()
     q.bindValue(":updated", monthAgo.toMSecsSinceEpoch());
 
     if (!q.exec()) {
-        qCritical() << "could not prune db" << q.lastError().text();
+        qCritical() << Q_FUNC_INFO << "could not prune db"
+                    << q.lastError().text();
     }
 }
 
@@ -308,7 +313,8 @@ void UpdateDb::reset()
     q.prepare("DELETE FROM updates");
 
     if (!q.exec()) {
-        qCritical() << "could not reset db" << q.lastError().text();
+        qCritical() << Q_FUNC_INFO << "could not reset db"
+                    << q.lastError().text();
     }
 }
 
@@ -332,7 +338,8 @@ void UpdateDb::setLastCheckDate(const QDateTime &lastCheck)
     q.bindValue(":checked_at_utc", lastCheck.toUTC().toMSecsSinceEpoch());
 
     if (!q.exec()) {
-        qCritical() << "could not update checked at value" << q.lastError().text();
+        qCritical() << Q_FUNC_INFO << "could not update checked at value"
+                    << q.lastError().text();
     }
 }
 
@@ -344,7 +351,7 @@ QList<QSharedPointer<Update> > UpdateDb::updates()
     q.prepare(GET_ALL);
 
     if (!q.exec()) {
-        qCritical() << "failed to query db for list of updates"
+        qCritical() << Q_FUNC_INFO << "failed to query db for list of updates"
                     << q.lastError().text() << q.executedQuery();
         return list;
     }
@@ -366,7 +373,8 @@ QSharedPointer<Update> UpdateDb::get(const QString &id, const uint &revision)
     q.bindValue(":revision", revision);
 
     if (!q.exec()) {
-        qCritical() << "could not get update" << q.lastError().text();
+        qCritical() << Q_FUNC_INFO << "could not get update"
+                    << q.lastError().text();
     }
 
     if (q.next()) {

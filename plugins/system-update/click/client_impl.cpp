@@ -171,7 +171,7 @@ void ClientImpl::handleMetadataReply(QNetworkReply *reply)
     }
 
     if (jsonError->error != QJsonParseError::NoError) {
-        qCritical() << "Could not parse click metadata:"
+        qCritical() << Q_FUNC_INFO << "Could not parse click metadata:"
                     << jsonError->errorString();
         Q_EMIT serverError();
     }
