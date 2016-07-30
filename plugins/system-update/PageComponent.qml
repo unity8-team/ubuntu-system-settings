@@ -296,8 +296,15 @@ ItemPage {
             NotAuthenticatedNotification {
                 id: notauthNotification
                 objectName: "noAuthenticationNotification"
-                visible: !authenticated && online &&
-                         SystemUpdate.status == SystemUpdate.StatusIdle
+                visible: {
+                    var s = SystemUpdate.status;
+                    switch (s) {
+                    case SystemUpdate.StatusCheckingSystemUpdates:
+                    case SystemUpdate.StatusIdle:
+                        return !authenticated && online;
+                    }
+                    return false;
+                }
                 anchors {
                     left: parent.left
                     right: parent.right
