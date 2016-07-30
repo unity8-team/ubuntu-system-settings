@@ -1,13 +1,16 @@
+# add_qml_test macro
 include(QmlTest)
 
-add_subdirectory(bluetooth)
-add_subdirectory(notifications)
 add_subdirectory(security-privacy)
 add_subdirectory(system-update)
+add_subdirectory(bluetooth)
+add_subdirectory(notifications)
 
 set(qmltest_DEFAULT_TARGETS qmluitests)
 set(qmltest_DEFAULT_PROPERTIES ENVIRONMENT "LC_ALL=C")
-set(XVFB_CMD xvfb-run -a -s "-screen 0 640x480x24")
+set(qmltest_DEFAULT_IMPORT_PATHS
+  ${CMAKE_BINARY_DIR}/tests/utils/modules
+)
 
 add_qml_test(mouse mouse
     IMPORT_PATHS

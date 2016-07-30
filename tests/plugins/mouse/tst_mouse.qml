@@ -52,13 +52,13 @@ Item {
         }
         function test_double_click_fail() {
             mouseClick(area);
-            wait(210);
+            wait(220);
             mouseClick(area);
             compare(area.message, i18n.tr("Not fast enough"));
         }
         function test_double_click_safety() {
             mouseClick(area);
-            wait(210);
+            wait(220);
             mouseClick(area);
             verify(!area.button.enabled);
         }
