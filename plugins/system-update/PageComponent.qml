@@ -71,10 +71,10 @@ ItemPage {
         providerId: "ubuntuone"
 
         onFinished: {
-            if (reply.errorName)
+            if (reply.errorName) {
                 console.warn('Online Accounts failed:', reply.errorName);
-            else
-                SystemUpdate.check(SystemUpdate.CheckClick);
+            }
+            SystemUpdate.check(SystemUpdate.CheckClick);
         }
     }
 
