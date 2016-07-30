@@ -24,6 +24,7 @@ Column {
     id: credentialsNotification
     objectName: "credentialsNotification"
 
+    property bool enabled: true
     signal requestAuthentication()
 
     spacing: units.gu(2)
@@ -38,6 +39,7 @@ Column {
         verticalAlignment: Text.AlignBottom
         wrapMode: Text.Wrap
         height: implicitHeight + units.gu(2)
+        enabled: parent.enabled
         anchors {
             left: parent.left
             leftMargin: units.gu(10)
@@ -47,9 +49,14 @@ Column {
     }
 
     Button {
+        id: btn
         objectName: "updateRequestAuthButton"
         text: i18n.tr("Sign In…")
         anchors.horizontalCenter: parent.horizontalCenter
-        onClicked: credentialsNotification.requestAuthentication()
+        enabled: parent.enabled
+        onClicked: {
+            credentialsNotification.requestAuthentication();
+            parent.enabled = false;
+        }
     }
 }

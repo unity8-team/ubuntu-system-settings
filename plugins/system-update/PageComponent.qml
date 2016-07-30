@@ -75,6 +75,7 @@ ItemPage {
                 console.warn('Online Accounts failed:', reply.errorName);
             }
             SystemUpdate.check(SystemUpdate.CheckClick);
+            notauthNotification.enabled = true;
         }
     }
 
