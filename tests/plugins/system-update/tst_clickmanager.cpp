@@ -74,6 +74,7 @@ private slots:
                                         const QString &version = "")
     {
         auto update = QSharedPointer<Update>(new Update);
+        update->setKind(Update::Kind::KindClick);
         update->setIdentifier(id);
         update->setRevision(rev);
         update->setRemoteVersion(version);
@@ -213,6 +214,19 @@ private slots:
             existing << package1 << package2;
             targetDbUpdates << package1 << package2;
             QTest::newRow("No change")
+                << JSONfromQByteArray(manifest) << existing << installed
+                << removed << targetDbUpdates;
+        }
+        {   // An Image update isn't affected.
+            QByteArray manifest("["
+                "{\"name\": \"a\", \"version\": \"v1\" }"
+            "]");
+            appList existing, installed, removed, targetDbUpdates;
+            auto package1 = createUpdate("a", 0, "v0");
+            package1->setKind(Update::Kind::KindImage);
+            existing << package1;
+            targetDbUpdates << package1;
+            QTest::newRow("No change to image update")
                 << JSONfromQByteArray(manifest) << existing << installed
                 << removed << targetDbUpdates;
         }

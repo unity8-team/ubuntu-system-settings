@@ -298,6 +298,9 @@ void ManagerImpl::synchronize(
     auto dbUpdates = m_model->db()->updates();
 
     Q_FOREACH(auto dbUpdate, dbUpdates) {
+        if (dbUpdate->kind() != Update::Kind::KindClick) {
+            continue;
+        }
         bool found = false;
         Q_FOREACH(auto manifestUpdate, manifestUpdates) {
             /* The local version of a click in the manifest, matched exactly a
