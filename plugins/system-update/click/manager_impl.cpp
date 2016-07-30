@@ -498,11 +498,14 @@ void ManagerImpl::parseMetadata(const QJsonArray &array)
                     << "-p" << "install-local" << "$file";
                 update->setCommand(command);
 
-                Click::TokenDownloader* dl
-                    = m_tokenDownloadFactory->create(m_nam, update);
-                dl->setAuthToken(m_authToken);
-                setup(dl);
-                dl->download();
+                // Ask for a token if there's none.
+                if (update->token().isEmpty()) {
+                    Click::TokenDownloader* dl
+                        = m_tokenDownloadFactory->create(m_nam, update);
+                    dl->setAuthToken(m_authToken);
+                    setup(dl);
+                    dl->download();
+                }
             } else {
                 // Update not required, let's remove it.
                 m_candidates.remove(update->identifier());
