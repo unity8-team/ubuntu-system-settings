@@ -198,23 +198,29 @@ void QSystemImage::initializeProperties() {
                    << reply.error();
     }
 
-    QDBusReply<QString> dlModeReply = m_iface.call("GetSetting",
-                                                   "auto_download");
-    int default_mode = 1;
-    if (dlModeReply.isValid()) {
+    m_downloadMode = getSetting("auto_download", 1);
+    Q_EMIT downloadModeChanged();
+
+    m_failuresBeforeWarning = getSetting("failures_before_warning", 3);
+    Q_EMIT failuresBeforeWarningChanged();
+}
+
+int QSystemImage::getSetting(const QString &setting, const int &defaultValue)
+{
+    QDBusReply<QString> reply = m_iface.call("GetSetting", setting);
+    int ret;
+    if (reply.isValid()) {
         bool ok;
-        int result;
-        result = dlModeReply.value().toInt(&ok);
-        if (ok) {
-            m_downloadMode = result;
-        } else {
-            m_downloadMode = default_mode;
+        ret = reply.value().toInt(&ok);
+        if (!ok) {
+            ret = defaultValue;
         }
     } else {
-        qWarning() << "Error setting download mode"
-                   << dlModeReply.error().message();
-        m_downloadMode = default_mode;
+        qWarning() << "Error getting " << setting
+                   << reply.error().message();
+        ret = defaultValue;
     }
+    return ret;
 }
 
 bool QSystemImage::checkTarget() const
@@ -325,16 +331,27 @@ void QSystemImage::setDownloadMode(const int &downloadMode) {
                       QString::number(downloadMode));
 }
 
+int QSystemImage::failuresBeforeWarning()
+{
+    return m_failuresBeforeWarning;
+}
+
 void QSystemImage::settingsChanged(const QString &key,
                                    const QString &newvalue) {
+    bool ok;
+    int newintValue;
+    newintValue = newvalue.toInt(&ok);
+    if (!ok) {
+        qWarning() << "Failed to parse new value:" << newvalue;
+        return;
+    }
+
     if(key == "auto_download") {
-        bool ok;
-        int newintValue;
-        newintValue = newvalue.toInt(&ok);
-        if (ok) {
-            m_downloadMode = newintValue;
-            Q_EMIT downloadModeChanged();
-        }
+        m_downloadMode = newintValue;
+        Q_EMIT downloadModeChanged();
+    } else if (key == "failures_before_warning") {
+        m_failuresBeforeWarning = newintValue;
+        Q_EMIT failuresBeforeWarningChanged();
     }
 }
 

@@ -164,6 +164,9 @@ private Q_SLOTS:
     {
         Q_EMIT m_siMock->mockSettingChanged("auto_download", "2");
         QCOMPARE(m_systemImage->downloadMode(), 2);
+
+        Q_EMIT m_siMock->mockSettingChanged("failures_before_warning", "80");
+        QCOMPARE(m_systemImage->failuresBeforeWarning(), 80);
     }
     void testChannelName()
     {
@@ -266,6 +269,11 @@ private Q_SLOTS:
         );
         QTRY_COMPARE(checkingChangedSpy.count(), 2);
         QVERIFY(!m_systemImage->checkingForUpdates());
+    }
+    void testFailuresBeforeWarning()
+    {
+        // 3 is the default.
+        QCOMPARE(m_systemImage->failuresBeforeWarning(), 3);
     }
 private:
     QSignalSpy *m_methodSpy;

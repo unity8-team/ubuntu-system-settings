@@ -78,6 +78,8 @@ def load(mock, parameters):
         'update_available': _parameters.get('update_available', False),
         'reply_on_pause': _parameters.get('reply_on_pause', ''),
         'reply_on_cancel': _parameters.get('reply_on_cancel', ''),
+        'failures_before_warning': _parameters.get('failures_before_warning',
+                                                   None),
     }
 
     mock.information = information

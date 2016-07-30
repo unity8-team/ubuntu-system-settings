@@ -38,6 +38,7 @@ void MockSystemImage::applyUpdate()
 
 QString MockSystemImage::cancelUpdate()
 {
+    return QString();
 }
 
 QString MockSystemImage::pauseDownload()
@@ -77,6 +78,13 @@ void MockSystemImage::mockCurrentBuildNumber(const uint &current)
     m_currentBuildNumber = current;
     Q_EMIT currentBuildNumberChanged();
 }
+
+void MockSystemImage::mockUpdateFailed(const int &consecutiveFailureCount,
+                                       const QString &lastReason)
+{
+    Q_EMIT updateFailed(consecutiveFailureCount, lastReason);
+}
+
 
 bool MockSystemImage::called(const QString &functionName)
 {

@@ -35,6 +35,8 @@ class QSystemImage : public QObject
     Q_OBJECT
     Q_PROPERTY(int downloadMode READ downloadMode
                WRITE setDownloadMode NOTIFY downloadModeChanged)
+    Q_PROPERTY(int failuresBeforeWarning READ failuresBeforeWarning
+               NOTIFY failuresBeforeWarningChanged)
     Q_PROPERTY(bool checkingForUpdates READ checkingForUpdates
                NOTIFY checkingForUpdatesChanged)
     Q_PROPERTY(QString channelName READ channelName NOTIFY channelNameChanged)
@@ -73,6 +75,7 @@ public:
     bool checkingForUpdates() const;
     int downloadMode();
     void setDownloadMode(const int &downloadMode);
+    int failuresBeforeWarning();
 
     QString deviceName() const;
     QString channelName() const;
@@ -115,6 +118,7 @@ Q_SIGNALS:
     void lastCheckDateChanged();
     void updateAvailableChanged();
     void downloadingChanged();
+    void failuresBeforeWarningChanged();
     void updateSizeChanged();
     void errorReasonChanged();
     void versionTagChanged();
@@ -122,7 +126,8 @@ Q_SIGNALS:
     void updateProcessFailed(const QString &reason);
     void updateProcessing();
     void rebooting(const bool status);
-    void updateFailed(const int &consecutiveFailureCount, const QString &lastReason);
+    void updateFailed(const int &consecutiveFailureCount,
+                      const QString &lastReason);
     void updateDownloaded();
     void downloadStarted();
     void updatePaused(const int &percentage);
@@ -164,12 +169,14 @@ private:
     void initializeProperties();
     // Sets up connections on the DBus interface.
     void setUpInterface();
+    int getSetting(const QString &setting, const int &defaultValue);
 
     bool m_checkingForUpdates = false;
     int m_currentBuildNumber = 0;
     QMap<QString, QVariant> m_detailedVersion;
     QDateTime m_lastUpdateDate = QDateTime();
     int m_downloadMode = -1;
+    int m_failuresBeforeWarning = -1;
 
     // QDBusConnection m_dbus;
     QDBusServiceWatcher m_watcher;

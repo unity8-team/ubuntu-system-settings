@@ -182,7 +182,6 @@ Item {
         }
 
         function test_previousUpdates(data) {
-            // Note, no prerequisites.
             var previous = findChild(instance, "installedUpdates");
             for (var i = 0; i < data.count; i++) {
                 SystemUpdate.model.mockAddUpdate("app" + i, i, Update.KindClick);
@@ -249,9 +248,29 @@ Item {
         function test_imageUpdateFailureOverflow()
         {
             // Test that after N failures, we get an error message.
+            SystemImage.mockUpdateFailed(4, "fail");
+            tryCompareFunction(function () {
+                return !!findChild(testRoot, "installationFailed")
+            }, true);
+            var dialog = findChild(testRoot, "installationFailed");
+            dialog.destroy();
+            tryCompareFunction(function () {
+                return !!findChild(testRoot, "installationFailed");
+            }, false);
+        }
+
+        function test_networkError() {
+
+        }
+
+        function test_serverError() {
+
+        }
+
+        function test_noScopeLaunch() {
+
         }
     }
-
 
     UbuntuTestCase {
         name: "PageComponentBatchModeTestCase"
@@ -320,17 +339,5 @@ Item {
                 return !!findChild(testRoot, "imagePrompt")
             }, false);
         }
-    }
-
-    function test_networkError() {
-
-    }
-
-    function test_serverError() {
-
-    }
-
-    function test_noScopeLaunch() {
-
     }
 }

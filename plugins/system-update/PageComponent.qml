@@ -412,22 +412,18 @@ ItemPage {
         }
     }
 
-    Component.onCompleted: SystemUpdate.check()
-
-    Component {
-         id: dialogErrorComponent
-         Dialog {
-             id: dialogueError
-             title: i18n.tr("Installation failed")
-             text: root.errorDialogText
-
-             Button {
-                 text: i18n.tr("OK")
-                 color: UbuntuColors.orange
-                 onClicked: {
-                     PopupUtils.close(dialogueError);
-                 }
-             }
-         }
+    Connections {
+        target: SystemImage
+        onUpdateFailed: {
+            if (consecutiveFailureCount > SystemImage.failuresBeforeWarning) {
+                var popup = PopupUtils.open(
+                    Qt.resolvedUrl("InstallationFailed.qml"), null, {
+                        text: lastReason
+                    }
+                );
+            }
+        }
     }
+
+    Component.onCompleted: SystemUpdate.check()
 }

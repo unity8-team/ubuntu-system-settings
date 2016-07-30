@@ -26,6 +26,8 @@
 class MockSystemImage : public QObject
 {
     Q_OBJECT
+    Q_PROPERTY(int failuresBeforeWarning READ failuresBeforeWarning
+               NOTIFY failuresBeforeWarningChanged)
     Q_PROPERTY(bool checkingForUpdates READ checkingForUpdates
                NOTIFY checkingForUpdatesChanged)
     Q_PROPERTY(int currentBuildNumber READ currentBuildNumber
@@ -40,7 +42,7 @@ public:
     bool checkingForUpdates() const;
     int downloadMode();
     void setDownloadMode(const int &downloadMode);
-
+    int failuresBeforeWarning() { return 3; };
     int currentBuildNumber() const;
     int targetBuildNumber() const;
 
@@ -54,6 +56,8 @@ public:
 
     Q_INVOKABLE void mockTargetBuildNumber(const uint &target); // mock only
     Q_INVOKABLE void mockCurrentBuildNumber(const uint &current); // mock only
+    Q_INVOKABLE void mockUpdateFailed(const int &consecutiveFailureCount,
+                                      const QString &lastReason); // mock only
     Q_INVOKABLE bool called(const QString &functionName); // mock only
     Q_INVOKABLE void reset(); // mock only
 
@@ -62,6 +66,9 @@ Q_SIGNALS:
     void checkingForUpdatesChanged();
     void currentBuildNumberChanged();
     void targetBuildNumberChanged();
+    void failuresBeforeWarningChanged();
+    void updateFailed(const int &consecutiveFailureCount,
+                      const QString &lastReason);
 private:
     bool m_checkingForUpdates = false;
     int m_currentBuildNumber = 0;

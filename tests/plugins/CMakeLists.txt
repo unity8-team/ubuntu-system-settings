@@ -1,6 +1,8 @@
 # add_qml_test macro
 include(QmlTest)
 
+set(XVFB_CMD xvfb-run -a -s "-screen 0 640x480x24")
+
 add_subdirectory(security-privacy)
 add_subdirectory(system-update)
 add_subdirectory(bluetooth)
