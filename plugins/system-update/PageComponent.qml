@@ -192,7 +192,7 @@ ItemPage {
                     switch (s) {
                     case SystemUpdate.StatusCheckingClickUpdates:
                     case SystemUpdate.StatusIdle:
-                        return haveUpdates;
+                        return haveUpdates && online;
                     }
                     return false;
                 }
@@ -239,7 +239,7 @@ ItemPage {
                     switch (s) {
                     case SystemUpdate.StatusCheckingSystemUpdates:
                     case SystemUpdate.StatusIdle:
-                        return haveUpdates;
+                        return haveUpdates && online && authenticated;
                     }
                     return false;
                 }
