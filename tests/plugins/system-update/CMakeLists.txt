@@ -87,23 +87,23 @@ add_executable(tst-systemupdate
 add_test(tst-systemupdate tst-systemupdate)
 target_link_libraries(tst-systemupdate ${PLUGIN_LIBS})
 
-add_executable(tst-updateplugin-updatedb
+add_executable(tst-updatedb
     tst_updatedb.cpp
 )
-add_test(tst-updateplugin-updatedb tst-updateplugin-updatedb)
-target_link_libraries(tst-updateplugin-updatedb ${PLUGIN_LIBS})
+add_test(tst-updatedb tst-updatedb)
+target_link_libraries(tst-updatedb ${PLUGIN_LIBS})
 
-add_executable(tst-updateplugin-update
+add_executable(tst-update
     tst_update.cpp
 )
-add_test(tst-updateplugin-update tst-updateplugin-update)
-target_link_libraries(tst-updateplugin-update ${PLUGIN_LIBS})
+add_test(tst-update tst-update)
+target_link_libraries(tst-update ${PLUGIN_LIBS})
 
-add_executable(tst-updateplugin-updatemodel
+add_executable(tst-updatemodel
     tst_updatemodel.cpp
 )
-add_test(tst-updateplugin-updatemodel tst-updateplugin-updatemodel)
-target_link_libraries(tst-updateplugin-updatemodel ${PLUGIN_LIBS})
+add_test(tst-updatemodel tst-updatemodel)
+target_link_libraries(tst-updatemodel ${PLUGIN_LIBS})
 
 add_executable(tst-updateplugin-helpers
     tst_helpers.cpp

@@ -24,17 +24,12 @@ namespace UpdatePlugin
 {
 namespace Click
 {
-// TokenDownloader* TokenDownloaderFactoryImpl::create(QSharedPointer<Update> update,
-//                                                     QObject *parent)
-// {
-//     return new TokenDownloaderImpl(update, parent);
-// }
 TokenDownloader* TokenDownloaderFactoryImpl::create(Network::Manager *nam,
                                                     QSharedPointer<Update> update,
                                                     QObject *parent)
 {
-    Client *client = new Click::ClientImpl(nam, parent);
-    TokenDownloader *downloader = new TokenDownloaderImpl(client, update, parent);
+    auto client = new Click::ClientImpl(nam, parent);
+    auto downloader = new TokenDownloaderImpl(client, update, parent);
     return downloader;
 }
 } // Click

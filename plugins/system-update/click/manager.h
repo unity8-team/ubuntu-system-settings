@@ -31,26 +31,51 @@ class Manager : public QObject
 {
     Q_OBJECT
 public:
-    explicit Manager(QObject *parent = nullptr) : QObject(parent) {
-        qWarning() << "Click::Manager original ctor says hi.";
-    }
+    explicit Manager(QObject *parent = nullptr) : QObject(parent) {}
     virtual ~Manager() {}
 
+    // Check for updates.
     virtual void check() = 0;
+
+    // Retry an update.
     virtual void retry(const QString &identifier, const uint &revision) = 0;
+
+    /* Cancel all activity.
+     *
+     * Will cancel activity in any managed objects (TokenDownloaders).
+     */
     virtual void cancel() = 0;
+
+    /* Launch app.
+     *
+     * Tries to launch an app, but will only succeed if a APP_ID can be created
+     */
     virtual void launch(const QString &identifier, const uint &revision) = 0;
 
+    // Return whether or not a user is authenticated.
     virtual bool authenticated() const = 0;
+
+    // Return whether or not this manager is currently checking for updates.
     virtual bool checkingForUpdates() const = 0;
 Q_SIGNALS:
+    /* This signal is emitted when the user is either authenticated or
+     * de-authenticated.
+     */
     void authenticatedChanged();
+
+    // This signal is emitted when check status changes.
     void checkingForUpdatesChanged();
 
+    // This signal is emitted when a check completes.
     void checkCompleted();
 
+    // This signal is emitted whenever a network error occur.
     void networkError();
+
+    // This signal is emitted whenever a server error occur.
     void serverError();
+
+    // This signal is emitted whenever a credential error occur.
     void credentialError();
 };
 } // Click

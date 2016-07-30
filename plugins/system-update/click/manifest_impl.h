@@ -33,12 +33,11 @@ class ManifestImpl : public Manifest
 public:
     explicit ManifestImpl(QObject *parent = nullptr);
     ~ManifestImpl();
-public slots:
+public Q_SLOTS:
     virtual void request() override;
-private slots:
+private Q_SLOTS:
     void handleProcessSuccess(const int &exitCode);
     void handleProcessError(const QProcess::ProcessError &error);
-
 private:
     QProcess m_process;
 };

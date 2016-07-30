@@ -26,6 +26,7 @@
 #include "plugins/system-update/faketokendownloader.h"
 #include "plugins/system-update/faketokendownloader_factory.h"
 
+#include <QDir>
 #include <QJsonArray>
 #include <QJsonParseError>
 #include <QSignalSpy>
@@ -35,6 +36,10 @@
 #include <QTest>
 
 using namespace UpdatePlugin;
+
+typedef QList<QSharedPointer<Update>> appList;
+
+Q_DECLARE_METATYPE(appList)
 
 class TstClickManager : public QObject
 {
@@ -50,15 +55,9 @@ private slots:
         m_mockmanifest = new MockManifest;
         m_mocksso = new MockSSO;
         m_mockdownloadfactory = new MockTokenDownloaderFactory;
-
         m_instance = new Click::ManagerImpl(m_model, nullptr, m_mockclient,
                                             m_mockmanifest, m_mocksso,
                                             m_mockdownloadfactory);
-        // connect(this, SIGNAL(mockCheck()),
-        //         m_instance, SLOT(handleCheckStart()));
-        // connect(this, SIGNAL(mockCancelCheck()),
-        //         m_instance, SLOT(handleCheckStop()));
-
         m_model->setParent(m_instance);
         m_mockclient->setParent(m_instance);
         m_mockmanifest->setParent(m_instance);
@@ -71,6 +70,15 @@ private slots:
         QTRY_COMPARE(destroyedSpy.count(), 1);
         delete m_dir;
     }
+    QSharedPointer<Update> createUpdate(const QString &id, const uint &rev,
+                                        const QString &version = "")
+    {
+        auto update = QSharedPointer<Update>(new Update);
+        update->setIdentifier(id);
+        update->setRevision(rev);
+        update->setRemoteVersion(version);
+        return update;
+    }
     void testCheckStarts()
     {
         QSignalSpy checkStartsSpy(m_instance, SIGNAL(checkingForUpdatesChanged()));
@@ -82,81 +90,165 @@ private slots:
         m_instance->check();
         QVERIFY(m_mockmanifest->asked);
     }
-    void testManifestSuccessWhileChecking_data()
+    void testManifestUpload_data()
     {
         QTest::addColumn<QJsonArray>("manifest");
-
-        QStringList empty;
-        QTest::newRow("Empty") << QJsonArray::fromStringList(empty);
-
-        QStringList one; one << "package";
-        QTest::newRow("One") << QJsonArray::fromStringList(one);
-
-        QStringList two; two << "package1" << "package2";
-        QTest::newRow("Two") << QJsonArray::fromStringList(one);
+        QTest::addColumn<appList>("existingUpdates");
+        {
+            QByteArray manifest("[]");
+            QTest::newRow("Empty") << JSONfromQByteArray(manifest) << appList();
+        }
+        {
+            QByteArray manifest("[]");
+            auto apps = appList();
+            for (int i = 0; i < 20; i++) {
+                apps.append(createUpdate(QString::number(i), i));
+            }
+            QTest::newRow("Empty manifest, tons of apps") << JSONfromQByteArray(manifest) << apps;
+        }
+        {
+            QByteArray manifest("[{\"name\":\"a\", \"version\": \"1\"}]");
+            auto apps = appList();
+            apps << createUpdate("a", 0, "2");
+            QTest::newRow("One") << JSONfromQByteArray(manifest) << apps;
+        }
+        {
+            QByteArray manifest("["
+                "{\"name\":\"a\", \"version\": \"1\"},"
+                "{\"name\": \"b\", \"version\": \"1\"}"
+            "]");
+            auto apps = appList();
+            apps << createUpdate("a", 0, "2") << createUpdate("b", 1, "2");
+            QTest::newRow("Two") << JSONfromQByteArray(manifest) << apps;
+        }
     }
-    void testManifestSuccessWhileChecking()
+    void testManifestUpload()
     {
         QFETCH(QJsonArray, manifest);
+        QFETCH(appList, existingUpdates);
+
+        Q_FOREACH(auto update, existingUpdates) {
+            qWarning() << "adding existingUpdates" << update->identifier() << update->revision();
+            m_model->add(update);
+        }
+
         m_instance->check();
         m_mockmanifest->mockSuccess(manifest);
+
+        /* We want to make sure only packages that we want to update was
+        passed on to the click client. */
         QTRY_COMPARE(m_mockclient->requestedPackages.size(), manifest.size());
-        if (manifest.size())
-            QTRY_COMPARE(m_mockclient->requestedUrl.toString(), Helpers::clickMetadataUrl());
     }
-    void testManifestSuccessOutsideCheck_data()
+    void testSynchronization_data()
     {
         QTest::addColumn<QJsonArray>("manifest");
-        QTest::addColumn<QList<QSharedPointer<Update>>>("existingUpdates");
+        QTest::addColumn<appList>("existingUpdates");
+        QTest::addColumn<appList>("markedInstalled");
+        QTest::addColumn<appList>("removed");
+        QTest::addColumn<appList>("targetDbUpdates");
 
-        QByteArray manifestA("[{"
-            "\"name\": \"a\","
-            "\"version\": \"v1\""
-        "}]");
-        QList<QSharedPointer<Update>> updatesA;
-        QSharedPointer<Update> packageA = QSharedPointer<Update>(new Update);
-        packageA->setIdentifier("a"); packageA->setRevision(0);
-        packageA->setRemoteVersion("v1");
-        updatesA << packageA;
-        QTest::newRow("One") << JSONfromQByteArray(manifestA) << updatesA;
-
-        QByteArray manifestB("["
-            "{\"name\": \"b\", \"version\": \"v1\" },"
-            "{\"name\": \"c\", \"version\": \"v2\" }"
-        "]");
-        QList<QSharedPointer<Update>> updatesB;
-
-        QSharedPointer<Update> packageB = QSharedPointer<Update>(new Update);
-        packageB->setIdentifier("b"); packageB->setRevision(0);
-        packageB->setRemoteVersion("v1");
-
-        QSharedPointer<Update> packageC = QSharedPointer<Update>(new Update);
-        packageC->setIdentifier("c"); packageC->setRevision(0);
-        packageC->setRemoteVersion("v2");
-
-        updatesB << packageB << packageC;
-        QTest::newRow("Two") << JSONfromQByteArray(manifestB) << updatesB;
+        {   // Mark one update as installed.
+            QByteArray manifest("[{\"name\": \"a\", \"version\": \"v1\"}]");
+            appList existing, installed, removed, targetDbUpdates;
+            auto package1 = createUpdate("a", 0, "v1");
+            existing << package1;
+            installed << package1;
+            QTest::newRow("One installed")
+                << JSONfromQByteArray(manifest) << existing << installed
+                << removed << targetDbUpdates;
+        }
+        {   // Remove an update.
+            QByteArray manifest("[]");
+            appList existing, installed, removed, targetDbUpdates;
+            auto package1 = createUpdate("a", 0, "v1");
+            existing << package1;
+            removed << package1;
+            QTest::newRow("One removed")
+                << JSONfromQByteArray(manifest) << existing << installed
+                << removed << targetDbUpdates;
+        }
+        {   // Mark two updates as installed.
+            QByteArray manifest("["
+                "{\"name\": \"b\", \"version\": \"v1\" },"
+                "{\"name\": \"c\", \"version\": \"v2\" }"
+            "]");
+            appList existing, installed, removed, targetDbUpdates;
+            auto package1 = createUpdate("b", 0, "v1");
+            auto package2 = createUpdate("c", 0, "v2");
+            existing << package1 << package2;
+            QTest::newRow("Two installed")
+                << JSONfromQByteArray(manifest) << existing << installed
+                << removed << targetDbUpdates;
+        }
+        {   // Remove two updates.
+            QByteArray manifest("[]");
+            appList existing, installed, removed, targetDbUpdates;
+            auto package1 = createUpdate("b", 0, "v1");
+            auto package2 = createUpdate("c", 0, "v2");
+            removed << package1 << package2;
+            QTest::newRow("Two removed")
+                << JSONfromQByteArray(manifest) << existing << installed
+                << removed << targetDbUpdates;
+        }
+        {   // Remove one, mark one as installed.
+            QByteArray manifest("[{\"name\": \"a\", \"version\": \"v1\"}]");
+            appList existing, installed, removed, targetDbUpdates;
+            auto package1 = createUpdate("a", 0, "v1");
+            auto package2 = createUpdate("b", 0, "v2");
+            existing << package1 << package2;
+            installed << package1;
+            removed << package2;
+            QTest::newRow("Mix")
+                << JSONfromQByteArray(manifest) << existing << installed
+                << removed << targetDbUpdates;
+        }
+        {   // No changes to the two updates.
+            QByteArray manifest("["
+                "{\"name\": \"a\", \"version\": \"v1\" },"
+                "{\"name\": \"b\", \"version\": \"v1\" }"
+            "]");
+            appList existing, installed, removed, targetDbUpdates;
+            auto package1 = createUpdate("a", 0, "v2");
+            auto package2 = createUpdate("b", 0, "v2");
+            existing << package1 << package2;
+            targetDbUpdates << package1 << package2;
+            QTest::newRow("No change")
+                << JSONfromQByteArray(manifest) << existing << installed
+                << removed << targetDbUpdates;
+        }
     }
-    void testManifestSuccessOutsideCheck()
+    void testSynchronization()
     {
+        /* At start-up, we want to test the manifest against our database,
+        independent of whether or not a check should be started. This test
+        ensures that 1) a check is not started, 2) our database is
+        synchronized. */
         QFETCH(QJsonArray, manifest);
-        QFETCH(QList<QSharedPointer<Update>>, existingUpdates);
+        QFETCH(appList, existingUpdates);
+        QFETCH(appList, markedInstalled);
+        QFETCH(appList, removed);
+        QFETCH(appList, targetDbUpdates);
 
-        Q_FOREACH(const QSharedPointer<Update> &update, existingUpdates) {
+        Q_FOREACH(auto update, existingUpdates) {
             m_model->add(update);
         }
 
         m_mockmanifest->mockSuccess(manifest);
 
-        // Existing updates should now be marked as installed.
-        Q_FOREACH(const QSharedPointer<Update> &update, existingUpdates) {
-            QVERIFY(m_model->get(update->identifier(), update->revision())->installed());
+        Q_FOREACH(auto update, markedInstalled) {
+            QVERIFY(m_model->get(update)->installed());
+        }
+        Q_FOREACH(auto update, removed) {
+            QVERIFY(m_model->get(update).isNull());
+        }
+        Q_FOREACH(auto update, targetDbUpdates) {
+            QVERIFY(!m_model->fetch(update).isNull());
         }
 
-        // Assert no client interaction while not checking.
+        // Assert no client interaction after synchronizing.
         QVERIFY(m_mockclient->requestedUrl.isEmpty());
     }
-    void testManifestFailureWhileChecking()
+    void testManifestFailure()
     {
         m_instance->check();
         QSignalSpy checkCompletedSpy(m_instance, SIGNAL(checkCompleted()));
@@ -238,7 +330,7 @@ private slots:
         QByteArray metadata("[{"
             "\"name\": \"a\","
             "\"version\": \"1\","
-            "\"download_url\": \"download_url\""
+            "\"revision\": \"1\""
         "}]");
 
         m_instance->check();
@@ -246,15 +338,25 @@ private slots:
         // Transition the manifest data all the way to the model.
         m_mockmanifest->mockSuccess(JSONfromQByteArray(manifest));
         m_mockclient->mockMetadataRequestSucceeded(JSONfromQByteArray(metadata));
-        QTRY_COMPARE(m_mockdownloadfactory->created.size(), 1);
-        MockTokenDownloader *dl = m_mockdownloadfactory->created.at(0);
+        auto dl = m_mockdownloadfactory->created.at(0);
         dl->mockDownloadSucceeded("token");
 
         // Update now in model, assert that the manifest data has been captured.
-        QSharedPointer<Update> u = m_model->get("a", 0);
+        auto u = m_model->get("a", 0);
         QCOMPARE(u->identifier(), QString("a"));
         QCOMPARE(u->localVersion(), QString("0"));
         QCOMPARE(u->packageName(), QString("B"));
+    }
+    void testRemovedApp()
+    {
+        /* Tests that an app that was removed from the manifest, that is still
+        in the update db, will be removed from the db. */
+        m_model->add(createUpdate("a", 1));
+
+        // a.1 is not in the manifest, so it should be removed.
+        QByteArray manifest("[]");
+        m_mockmanifest->mockSuccess(JSONfromQByteArray(manifest));
+        QVERIFY(m_model->get("a", 1).isNull());
     }
     void testTokenDownload_data()
     {
@@ -263,34 +365,36 @@ private slots:
         QTest::addColumn<bool>("downloadSuccess");
         QTest::addColumn<QString>("downloadedToken");
 
-        QByteArray onePackage("[{"
-            "\"name\": \"in_need_of_update\","
-            "\"version\": \"1\","
-            "\"download_url\": \"download_url\""
+        QByteArray metaJson("[{"
+            "\"name\": \"a\","
+            "\"version\": \"1\", \"download_url\": \"download_url\""
         "}]");
+        auto metadata = JSONfromQByteArray(metaJson);
 
-
-        QByteArray manifest("[{"
-            "\"name\": \"in_need_of_update\","
+        QByteArray manifestJson("[{"
+            "\"name\": \"a\","
             "\"version\": \"0\""
         "}]");
+        auto manifest = JSONfromQByteArray(manifestJson);
 
-        QTest::newRow("Success")
-            << JSONfromQByteArray(onePackage)
-            << JSONfromQByteArray(manifest)
-            << true
-            << "token";
-
-        QTest::newRow("Success (empty token)")
-            << JSONfromQByteArray(onePackage)
-            << JSONfromQByteArray(manifest)
-            << true
-            << "";
-        QTest::newRow("Failure")
-            << JSONfromQByteArray(onePackage)
-            << JSONfromQByteArray(manifest)
-            << false
-            << "";
+        {
+            QString token("token");
+            bool success = true;
+            QTest::newRow("Success")
+                << metadata << manifest << success << token;
+        }
+        {
+            QString token("");
+            bool success = true;
+            QTest::newRow("Success (empty token)")
+                << metadata << manifest << success << token;
+        }
+        {
+            QString token("");
+            bool success = false;
+            QTest::newRow("Failure")
+                << metadata << manifest << success << token;
+        }
     }
     void testTokenDownload()
     {
@@ -304,7 +408,7 @@ private slots:
         m_mockclient->mockMetadataRequestSucceeded(metadata);
 
         QTRY_COMPARE(m_mockdownloadfactory->created.size(), 1);
-        MockTokenDownloader *dl = m_mockdownloadfactory->created.at(0);
+        auto *dl = m_mockdownloadfactory->created.at(0);
         QCOMPARE(dl->downloadUrl, QString("download_url"));
 
         QSignalSpy checkCompletesSpy(m_instance, SIGNAL(checkCompleted()));
@@ -332,14 +436,13 @@ private slots:
 
     //     QCOMPARE(m_model->get(id, rev)->token(), QString("foobar"));
     // }
-    void testUseMetadataToUpdateState()
+    void testRemotelyUpdatedApp()
     {
-        // Add update.
-        QSharedPointer<Update> u = QSharedPointer<Update>(new Update);
-        u->setIdentifier("a");
-        u->setRevision(0);
-        u->setRemoteVersion("v1");
-        m_model->add(u);
+        /* Tests that apps that are remotely updated, get marked as such. */
+
+        auto update = createUpdate("a", 0);
+        update->setRemoteVersion("v1");
+        m_model->add(update);
 
         QByteArray manifest("[{"
             "\"name\": \"a\","
@@ -354,15 +457,12 @@ private slots:
         // Assert no client interaction while not checking.
         QVERIFY(m_mockclient->requestedUrl.isEmpty());
     }
-Q_SIGNALS:
-    void mockCheck();
-    void mockCancelCheck();
-
 private:
+    // Create JSON Array from a QByteArray.
     QJsonArray JSONfromQByteArray(const QByteArray &byteArray)
     {
         QJsonArray ret;
-        QJsonParseError *jsonError = new QJsonParseError;
+        auto jsonError = new QJsonParseError;
         auto document = QJsonDocument::fromJson(byteArray, jsonError);
 
         if (document.isArray()) {
@@ -371,7 +471,8 @@ private:
 
         if (jsonError->error != QJsonParseError::NoError) {
             qWarning() << Q_FUNC_INFO  << "Could not parse json:"
-                       << jsonError->errorString();
+                       << jsonError->errorString() << ", data: "
+                       << byteArray;
         }
 
         delete jsonError;
@@ -381,7 +482,6 @@ private:
     MockManifest *m_mockmanifest = nullptr;
     MockSSO *m_mocksso = nullptr;
     MockTokenDownloaderFactory *m_mockdownloadfactory = nullptr;
-
     Click::Manager *m_instance = nullptr;
     UpdateModel *m_model = nullptr;
     QTemporaryDir *m_dir;

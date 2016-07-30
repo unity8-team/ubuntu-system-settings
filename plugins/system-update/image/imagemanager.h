@@ -27,21 +27,30 @@ namespace UpdatePlugin
 {
 namespace Image
 {
+/* Image manager communicates and responds to system-image-dbus activity.
+ *
+ * See https://wiki.ubuntu.com/ImageBasedUpgrades/Client#DBus_API
+ */
 class Manager : public QObject
 {
     Q_OBJECT
 public:
-    explicit Manager(QObject *parent = nullptr) : QObject(parent) {
-        qWarning() << "hello from Image::Manager original ctor";
-    };
+    explicit Manager(QObject *parent = nullptr) : QObject(parent) {};
     virtual ~Manager() {};
 
+    // Check for updates.
     virtual void check() = 0;
-    virtual void cancel() = 0;
-    virtual bool checkingForUpdates() const = 0;
 
+    // Cancel a check for updates.
+    virtual void cancel() = 0;
+
+    // Return whether or not this manager is currently checking for updates.
+    virtual bool checkingForUpdates() const = 0;
 Q_SIGNALS:
+    // This signal is emitted when check status changes.
     void checkingForUpdatesChanged();
+
+    // This signal is emitted when a check completes.
     void checkCompleted();
 };
 } // Image

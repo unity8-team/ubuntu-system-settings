@@ -47,6 +47,7 @@ private:
     void initializeReply(QNetworkReply *reply);
     bool validReply(const QNetworkReply *reply);
     void handleMetadataReply(QNetworkReply *reply);
+
     Network::Manager *m_nam;
 };
 } // Click

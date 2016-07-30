@@ -43,7 +43,7 @@ public:
 
     static const QString ubuntuId;
 
-private slots:
+private Q_SLOTS:
     void handleUpdateAvailableStatus(const bool isAvailable,
                                      const bool downloading,
                                      const QString &availableVersion,

@@ -30,8 +30,6 @@ class TokenDownloaderImpl : public TokenDownloader
 {
     Q_OBJECT
 public:
-    // explicit TokenDownloaderImpl(QSharedPointer<Update> update,
-    //                              QObject *parent = nullptr);
     explicit TokenDownloaderImpl(Client *client,
                                  QSharedPointer<Update> update,
                                  QObject *parent = nullptr);
@@ -39,14 +37,11 @@ public:
     virtual void download() override;
     virtual void setAuthToken(const UbuntuOne::Token &authToken) override;
     virtual Client* client() const override;
-
-public slots:
+public Q_SLOTS:
     virtual void cancel() override;
-
-protected slots:
+protected Q_SLOTS:
     void handleSuccess(const QString &token);
     void handleFailure();
-
 };
 } // Click
 } // UpdatePlugin

@@ -24,7 +24,8 @@
 class MockImageManager : public UpdatePlugin::Image::Manager
 {
 public:
-    MockImageManager(QObject *parent = nullptr) : UpdatePlugin::Image::Manager(parent) {};
+    MockImageManager(QObject *parent = nullptr)
+        : UpdatePlugin::Image::Manager(parent) {};
     virtual ~MockImageManager() {};
 
     virtual void check() override

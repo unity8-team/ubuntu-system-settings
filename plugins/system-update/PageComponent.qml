@@ -173,21 +173,30 @@ ItemPage {
             SettingsItemTitle {
                 id: updatesAvailableHeader
                 text: i18n.tr("Updates available")
-                visible: updatesCount > 1
+                visible: imageUpdateCol.visible || clickUpdatesCol.visible
             }
 
             Column {
                 id: imageUpdateCol
-                objectName: "updatesImageUpdate"
+                objectName: "imageUpdates"
                 anchors { left: parent.left; right: parent.right }
-                visible: imageRepeater.count > 0
+                visible: {
+                    var s = SystemUpdate.status;
+                    var haveUpdates = imageRepeater.count > 0;
+                    switch (s) {
+                    case SystemUpdate.StatusCheckingClickUpdates:
+                    case SystemUpdate.StatusIdle:
+                        return haveUpdates;
+                    }
+                    return false;
+                }
 
                 Repeater {
                     id: imageRepeater
                     model: SystemUpdate.imageUpdates
 
                     delegate: UpdateDelegate {
-                        objectName: "updatesImageDelegate-" + index
+                        objectName: "imageUpdatesDelegate-" + index
                         width: imageUpdateCol.width
                         updateState: model.updateState
                         progress: model.progress
@@ -201,7 +210,7 @@ ItemPage {
 
                         onRetry: SystemImage.downloadUpdate();
                         onDownload: SystemImage.downloadUpdate();
-                        onPause: SystemImage.pauseUpdate();
+                        onPause: SystemImage.pauseDownload();
                         onInstall: {
                             var popup = PopupUtils.open(
                                 Qt.resolvedUrl("ImageUpdatePrompt.qml"), null, {
@@ -216,13 +225,17 @@ ItemPage {
 
             Column {
                 id: clickUpdatesCol
-                objectName: "updatesClickUpdates"
+                objectName: "clickUpdates"
                 anchors { left: parent.left; right: parent.right }
                 visible: {
                     var s = SystemUpdate.status;
-                    var canShow = s === SystemUpdate.StatusCheckingSystemUpdates;
-                    canShow = canShow || s === SystemUpdate.StatusIdle;
-                    return clickRepeater.count > 0 && canShow;
+                    var haveUpdates = clickRepeater.count > 0;
+                    switch (s) {
+                    case SystemUpdate.StatusCheckingSystemUpdates:
+                    case SystemUpdate.StatusIdle:
+                        return haveUpdates;
+                    }
+                    return false;
                 }
 
                 Repeater {
@@ -230,7 +243,7 @@ ItemPage {
                     model: SystemUpdate.clickUpdates
 
                     delegate: ClickUpdateDelegate {
-                        objectName: "updatesClickUpdate" + index
+                        objectName: "clickUpdatesDelegate" + index
                         width: clickUpdatesCol.width
                         updateState: model.updateState
                         progress: model.progress
@@ -278,7 +291,7 @@ ItemPage {
             NotAuthenticatedNotification {
                 id: notauthNotification
                 objectName: "noAuthenticationNotification"
-                visible: !authenticated
+                visible: !authenticated && online
                 anchors {
                     left: parent.left
                     right: parent.right
@@ -302,7 +315,7 @@ ItemPage {
                     model: SystemUpdate.installedUpdates
 
                     delegate: UpdateDelegate {
-                        objectName: "installedUpdate-" + index
+                        objectName: "installedUpdateDelegate-" + index
                         width: installedCol.width
                         version: remoteVersion
                         size: model.size

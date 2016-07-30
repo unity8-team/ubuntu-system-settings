@@ -24,12 +24,6 @@ namespace UpdatePlugin
 {
 namespace Click
 {
-// TokenDownloaderImpl::TokenDownloaderImpl(QSharedPointer<Update> update,
-//                                          QObject *parent)
-//     : TokenDownloaderImpl(new ClientImpl(this), update, parent)
-// {
-// }
-
 TokenDownloaderImpl::TokenDownloaderImpl(Client *client,
                                          QSharedPointer<Update> update,
                                          QObject *parent)
@@ -85,7 +79,7 @@ void TokenDownloaderImpl::download()
         }
     }
 
-    QString signUrl = Helpers::clickTokenUrl(m_update->downloadUrl());
+    auto signUrl = Helpers::clickTokenUrl(m_update->downloadUrl());
     QUrl query(signUrl);
     query.setQuery(authHeader);
     m_client->requestToken(query);

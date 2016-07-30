@@ -33,23 +33,49 @@ class Client : public QObject
 {
     Q_OBJECT
 public:
-    explicit Client(QObject *parent = nullptr)
-        : QObject(parent) {};
+    explicit Client(QObject *parent = nullptr) : QObject(parent) {};
     virtual ~Client() {};
-public slots:
+public Q_SLOTS:
+    // Cancel all network activity.
     virtual void cancel() = 0;
+
+    /* Request metadata.
+     *
+     * Requests metadata from a server given an URL and list of packages. A
+     * package is a click_package as described in [1].
+     * [1] https://wiki.ubuntu.com/AppStore/Interfaces/ApplicationId
+     */
     virtual void requestMetadata(const QUrl &url,
                                  const QList<QString> &packages) = 0;
+
+    /* Request a token.
+     *
+     * The URL is a signed download_url as described in [1].
+     * [1] https://wiki.ubuntu.com/AppStore/Interfaces/\
+     *      ClickPackageIndex#The_Short_and_Skinny
+     */
     virtual void requestToken(const QUrl &url) = 0;
-signals:
+Q_SIGNALS:
+    // This signal is emitted whenever a metadata request succeeds.
     void metadataRequestSucceeded(const QJsonArray &metadata);
+
+    // This signal is emitted whenever a token request succeeds.
     void tokenRequestSucceeded(const QString &token);
+
+    // This signal is emitted whenever a network error occur.
     void networkError();
+
+    // This signal is emitted whenever a server error occur.
     void serverError();
+
+    // This signal is emitted whenever a credential error occur.
     void credentialError();
+
+    /* This signal is emitted when the client wants to cancel any active
+     * network requests.
+     */
     void abortNetworking();
 };
-
 } // Click
 } // UpdatePlugin
 

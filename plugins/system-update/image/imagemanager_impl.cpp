@@ -24,9 +24,9 @@ namespace UpdatePlugin
 namespace Image
 {
 ManagerImpl::ManagerImpl(UpdateModel *model, QObject *parent)
-    : ManagerImpl(new QSystemImage(parent), model, parent)
+    : ManagerImpl(new QSystemImage(), model, parent)
 {
-    qWarning() << "in ctor of Image::ManagerImpl";
+    m_si->setParent(this);
 }
 
 ManagerImpl::ManagerImpl(QSystemImage *si, UpdateModel *model, QObject *parent)
@@ -34,7 +34,6 @@ ManagerImpl::ManagerImpl(QSystemImage *si, UpdateModel *model, QObject *parent)
     , m_model(model)
     , m_si(si)
 {
-    qWarning() << "in actual ctor of Image::ManagerImpl";
     connect(m_si, SIGNAL(checkingForUpdatesChanged()),
             this, SLOT(handleCheckingForUpdatesChanged()));
     connect(
@@ -43,9 +42,9 @@ ManagerImpl::ManagerImpl(QSystemImage *si, UpdateModel *model, QObject *parent)
                                      const int&, const QString&,
                                      const QString&)),
         this,
-        SLOT(handleUpdateAvailableStatus(const bool, const bool, const QString&,
-                                         const int&, const QString&,
-                                         const QString&))
+        SLOT(handleUpdateAvailableStatus(const bool, const bool,
+                                         const QString&, const int&,
+                                         const QString&, const QString&))
     );
     connect(m_si, SIGNAL(downloadStarted()),
             this, SLOT(handleDownloadStarted()));

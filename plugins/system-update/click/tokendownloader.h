@@ -43,17 +43,22 @@ public:
         , m_update(update)
         , m_authToken(UbuntuOne::Token()) {}
     virtual ~TokenDownloader() {};
+
+    // Downloads a token.
     virtual void download() = 0;
+
+    // Set the authentication token..
     virtual void setAuthToken(const UbuntuOne::Token &authToken) = 0;
     virtual Client* client() const = 0;
-
-public slots:
+public Q_SLOTS:
+    // Cancel any ongoing token download.
     virtual void cancel() = 0;
-
 Q_SIGNALS:
+    // This signal is emitted when a token download succeeds.
     void downloadSucceeded(QSharedPointer<Update> update);
-    void downloadFailed(QSharedPointer<Update> update);
 
+    // This signal is emitted when a token download fails.
+    void downloadFailed(QSharedPointer<Update> update);
 protected:
     Client *m_client;
     QSharedPointer<Update> m_update;

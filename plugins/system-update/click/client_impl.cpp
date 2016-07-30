@@ -54,14 +54,14 @@ void ClientImpl::requestMetadata(const QUrl &url,
 {
     // Create list of frameworks.
     std::stringstream frameworks;
-    for (auto f : Helpers::getAvailableFrameworks()) {
+    Q_FOREACH(auto f, Helpers::getAvailableFrameworks()) {
         frameworks << "," << f;
     }
 
     // Create JSON bytearray of packages.
     QJsonObject serializer;
     QJsonArray array;
-    Q_FOREACH(const QString &name, packages) {
+    Q_FOREACH(auto name, packages) {
         array.append(QJsonValue(name));
     }
     serializer.insert("name", array);
@@ -122,6 +122,7 @@ void ClientImpl::requestFinished(QNetworkReply *reply)
 
     switch (reply->error()) {
     case QNetworkReply::NoError:
+        // Note that requestSucceeded will delete the reply.
         requestSucceeded(reply);
         return;
     case QNetworkReply::TemporaryNetworkFailureError:
@@ -150,8 +151,7 @@ void ClientImpl::requestSucceeded(QNetworkReply *reply)
     } else if (rtp == "metadata-request") {
         handleMetadataReply(reply);
     } else {
-        /* We are not to handle this reply, so do an early return to avoid
-        deleting the reply. */
+        // We are not to handle this reply, so do an early return
         return;
     }
 

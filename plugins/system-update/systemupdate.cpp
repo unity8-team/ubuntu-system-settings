@@ -30,10 +30,6 @@ SystemUpdate::SystemUpdate(QObject *parent)
     : QObject(parent)
     , m_model(new UpdateModel(this))
     , m_nam(new Network::ManagerImpl(this))
-    , m_pending(new UpdateModelFilter(m_model, this))
-    , m_clicks(new UpdateModelFilter(m_model, this))
-    , m_images(new UpdateModelFilter(m_model, this))
-    , m_installed(new UpdateModelFilter(m_model, this))
     , m_imageManager(new Image::ManagerImpl(m_model, this))
     , m_clickManager(new Click::ManagerImpl(m_model, m_nam, this))
 {
@@ -42,20 +38,12 @@ SystemUpdate::SystemUpdate(QObject *parent)
 
 SystemUpdate::SystemUpdate(UpdateModel *model,
                            Network::Manager *nam,
-                           UpdateModelFilter *pending,
-                           UpdateModelFilter *clicks,
-                           UpdateModelFilter *images,
-                           UpdateModelFilter *installed,
                            Image::Manager *imageManager,
                            Click::Manager *clickManager,
                            QObject *parent)
     : QObject(parent)
     , m_model(model)
     , m_nam(nam)
-    , m_pending(pending)
-    , m_clicks(clicks)
-    , m_images(images)
-    , m_installed(installed)
     , m_imageManager(imageManager)
     , m_clickManager(clickManager)
 {
@@ -64,15 +52,16 @@ SystemUpdate::SystemUpdate(UpdateModel *model,
 
 void SystemUpdate::init()
 {
-    m_pending->filterOnInstalled(false);
-
-    m_clicks->filterOnKind((uint) Update::Kind::KindClick);
-    m_clicks->filterOnInstalled(false);
-
-    m_images->filterOnKind((uint) Update::Kind::KindImage);
-    m_images->filterOnInstalled(false);
-
-    m_installed->filterOnInstalled(true);
+    m_pending.setSourceModel(m_model);
+    m_pending.filterOnInstalled(false);
+    m_clicks.setSourceModel(m_model);
+    m_clicks.filterOnKind((uint) Update::Kind::KindClick);
+    m_clicks.filterOnInstalled(false);
+    m_images.setSourceModel(m_model);
+    m_images.filterOnKind((uint) Update::Kind::KindImage);
+    m_images.filterOnInstalled(false);
+    m_installed.setSourceModel(m_model);
+    m_installed.filterOnInstalled(true);
 
     connect(m_clickManager, SIGNAL(checkingForUpdatesChanged()),
             this, SLOT(calculateStatus()));
@@ -84,7 +73,6 @@ void SystemUpdate::init()
             this, SLOT(handleServerError()));
     connect(m_clickManager, SIGNAL(authenticatedChanged()),
             this, SIGNAL(authenticatedChanged()));
-
     connect(m_imageManager, SIGNAL(checkingForUpdatesChanged()),
             this, SLOT(calculateStatus()));
     connect(m_imageManager, SIGNAL(checkCompleted()),
@@ -97,28 +85,32 @@ UpdateModel* SystemUpdate::updates()
     return m_model;
 }
 
-UpdateModelFilter* SystemUpdate::pendingUpdates() const
+UpdateModelFilter* SystemUpdate::pendingUpdates()
 {
-    QQmlEngine::setObjectOwnership(m_pending, QQmlEngine::CppOwnership);
-    return m_pending;
+    auto ret = &m_pending;
+    QQmlEngine::setObjectOwnership(ret, QQmlEngine::CppOwnership);
+    return ret;
 }
 
-UpdateModelFilter* SystemUpdate::clickUpdates() const
+UpdateModelFilter* SystemUpdate::clickUpdates()
 {
-    QQmlEngine::setObjectOwnership(m_clicks, QQmlEngine::CppOwnership);
-    return m_clicks;
+    auto ret = &m_clicks;
+    QQmlEngine::setObjectOwnership(ret, QQmlEngine::CppOwnership);
+    return ret;
 }
 
-UpdateModelFilter* SystemUpdate::imageUpdates() const
+UpdateModelFilter* SystemUpdate::imageUpdates()
 {
-    QQmlEngine::setObjectOwnership(m_images, QQmlEngine::CppOwnership);
-    return m_images;
+    auto ret = &m_images;
+    QQmlEngine::setObjectOwnership(ret, QQmlEngine::CppOwnership);
+    return ret;
 }
 
-UpdateModelFilter* SystemUpdate::installedUpdates() const
+UpdateModelFilter* SystemUpdate::installedUpdates()
 {
-    QQmlEngine::setObjectOwnership(m_installed, QQmlEngine::CppOwnership);
-    return m_installed;
+    auto ret = &m_installed;
+    QQmlEngine::setObjectOwnership(ret, QQmlEngine::CppOwnership);
+    return ret;
 }
 
 SystemUpdate::Status SystemUpdate::status() const
@@ -145,8 +137,7 @@ void SystemUpdate::calculateStatus()
 
 void SystemUpdate::setStatus(const Status &status)
 {
-    /* We treat these communication errors as fatal. The user needs to leave
-    the System Update panel and come back in—recreating us. */
+    /* We treat these communication errors as fatal, and return early. */
     if (m_status == Status::StatusNetworkError ||
         m_status == Status::StatusServerError) {
         return;
@@ -160,10 +151,7 @@ void SystemUpdate::setStatus(const Status &status)
 
 bool SystemUpdate::isCheckRequired()
 {
-    /* Spec says that a manual check should not happen if a check was completed
-    less than 30 minutes ago. */
     QDateTime now = QDateTime::currentDateTimeUtc().addSecs(-1800); // 30 mins
-    // TODO: do not break Demeter's law
     return m_model->db()->lastCheckDate() < now;
 }
 

@@ -32,15 +32,16 @@ class Manager : public QObject
 {
     Q_OBJECT
 public:
-    explicit Manager(QObject *parent = nullptr) : QObject(parent) {
-        qWarning() << "Network::Manager orig ctor";
-    };
+    explicit Manager(QObject *parent = nullptr) : QObject(parent) {};
     virtual ~Manager() {};
+    // See http://doc.qt.io/qt-5/qnetworkaccessmanager.html#post
     virtual QNetworkReply* post(const QNetworkRequest &request, const QByteArray &data) = 0;
+    // http://doc.qt.io/qt-5/qnetworkaccessmanager.html#head
     virtual QNetworkReply* head(const QNetworkRequest &request) = 0;
-
-signals:
+Q_SIGNALS:
+    // See http://doc.qt.io/qt-5/qnetworkaccessmanager.html#finished
     void finished(QNetworkReply *);
+    // See http://doc.qt.io/qt-5/qnetworkaccessmanager.html#sslErrors
     void sslErrors(QNetworkReply *, const QList<QSslError>&);
 };
 } // Network

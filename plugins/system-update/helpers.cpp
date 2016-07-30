@@ -36,7 +36,6 @@ std::vector<std::string> Helpers::getAvailableFrameworks()
         result.push_back(f.substr(0, f.size() - 10));
     }
     return result;
-
 }
 
 std::string Helpers::getArchitecture()
@@ -60,7 +59,6 @@ std::vector<std::string> Helpers::listFolder(const std::string &folder,
     }
 
     return result;
-
 }
 
 std::string Helpers::architectureFromDpkg()

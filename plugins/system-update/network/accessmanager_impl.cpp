@@ -23,10 +23,9 @@ namespace UpdatePlugin
 namespace Network
 {
 ManagerImpl::ManagerImpl(QObject *parent)
-    : Manager(0)
+    : Manager(parent)
     , m_impl()
 {
-    qWarning() << "Network::Manager actual ctor";
     connect(&m_impl, SIGNAL(finished(QNetworkReply *)),
             this, SIGNAL(finished(QNetworkReply *)));
     connect(&m_impl, SIGNAL(sslErrors(QNetworkReply *,

@@ -74,7 +74,7 @@ class Update : public QObject
     Q_PROPERTY(QString packageName READ packageName WRITE setPackageName
                NOTIFY packageNameChanged)
 public:
-    explicit Update(QObject *parent = nullptr);
+    explicit Update(QObject *parent = nullptr) : QObject(parent) {};
     ~Update() {};
 
     enum class Kind : uint
@@ -86,7 +86,7 @@ public:
 
     enum class State : uint
     {
-        StateUnknown = 0,
+        StateUnknown,
         StateAvailable,
         StateUnavailable,
         StateQueuedForDownload,
@@ -167,10 +167,9 @@ public:
     /* Whether or not either id and rev equals to other, or download id is set
     and that is equal to that of other. */
     bool operator==(const Update &other) const;
-
     bool equals(const Update &other) const;
 
-signals:
+Q_SIGNALS:
     void kindChanged();
     void identifierChanged();
     void revisionChanged();
@@ -194,7 +193,6 @@ signals:
     void automaticChanged();
     void errorChanged();
     void packageNameChanged();
-
 protected:
     Kind m_kind = Kind::KindUnknown;
     QString m_identifier = QString::null;

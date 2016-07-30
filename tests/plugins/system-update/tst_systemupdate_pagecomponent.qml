@@ -52,7 +52,9 @@ Item {
 
         function cleanup() {
             instance.destroy();
+            SystemUpdate.mockStatus(SystemUpdate.StatusIdle);
             SystemUpdate.model.reset();
+            SystemImage.reset();
         }
 
         function test_connectivity_data() {
@@ -60,26 +62,27 @@ Item {
                 {
                     tag: "offline",
                     status: NetworkingStatus.Offline,
+                    visible: true
                 },
                 {
                     tag: "connecting",
                     status: NetworkingStatus.Connecting,
+                    visible: true
                 },
                 {
                     tag: "online",
                     status: NetworkingStatus.Online,
+                    visible: false
                 }
             ]
         }
 
         function test_connectivity(data) {
-            /* A prerequisite for connectivity to have an effect on the UI is
-            that there are updates. */
             instance.updatesCount = 1;
 
             NetworkingStatus.setStatus(data.status);
             var overlay = findChild(instance, "overlay");
-            compare(overlay.visible, data.status !== NetworkingStatus.Online);
+            compare(overlay.visible, data.visible);
         }
 
         function test_errors_data() {
@@ -90,12 +93,10 @@ Item {
         }
 
         function test_errors(data) {
-            /* A prerequisite for errors to have an effect on the UI is
-            that there are updates and we are online. */
             instance.online = true;
             instance.updatesCount = 1;
 
-            instance.status = data.status;
+            SystemUpdate.mockStatus(data.status);
             var overlay = findChild(instance, "overlay");
             compare(overlay.visible, true);
         }
@@ -108,8 +109,6 @@ Item {
         }
 
         function test_auth(data) {
-            /* A prerequisite for errors to have an effect on the UI is
-            that we are online. */
             instance.online = true;
 
             instance.authenticated = data.auth;
@@ -127,44 +126,52 @@ Item {
             compare(config.execCalled(), true);
         }
 
-        function test_clickUpdates_data() {
+        function test_clickUpdatesVisibility_data() {
             return [
-                { count: 0, visible: false },
-                { count: 1, visible: true },
-                { count: 50, visible: true },
+                { count: 0, visible: false, status: SystemUpdate.StatusIdle },
+                { count: 0, visible: false, status: SystemUpdate.StatusCheckingClickUpdates },
+                { count: 1, visible: true, status: SystemUpdate.StatusIdle },
+                { count: 1, visible: false, status: SystemUpdate.StatusCheckingClickUpdates },
+                { count: 1, visible: true, status: SystemUpdate.StatusCheckingSystemUpdates },
+                { count: 1, visible: false, status: SystemUpdate.StatusCheckingAllUpdates },
+                { count: 1, visible: false, status: SystemUpdate.StatusNetworkError },
+                { count: 1, visible: false, status: SystemUpdate.StatusServerError }
             ];
         }
 
-        function test_clickUpdates(data) {
-            /* A prerequisite for errors to have an effect on the UI is
-            that there are updates and we are online and authenticated. */
+        function test_clickUpdatesVisibility(data) {
             instance.online = true;
             instance.authenticated = true;
+            SystemUpdate.mockStatus(data.status);
 
-            var clicks = findChild(instance, "updatesClickUpdates");
+            var item = findChild(instance, "clickUpdates");
             for (var i = 0; i < data.count; i++) {
                 SystemUpdate.model.mockAddUpdate("app" + i, i, Update.KindClick);
             }
-            compare(clicks.visible, data.count > 0);
+            compare(item.visible, data.visible);
         }
 
-        function test_imageUpdates_data() {
+        function test_imageUpdatesVisibility_data() {
             return [
-                { count: 0, visible: false },
-                { count: 1, visible: true }
+                { count: 0, visible: false, status: SystemUpdate.StatusIdle },
+                { count: 0, visible: false, status: SystemUpdate.StatusCheckingSystemUpdates },
+                { count: 1, visible: true, status: SystemUpdate.StatusIdle },
+                { count: 1, visible: true, status: SystemUpdate.StatusCheckingClickUpdates },
+                { count: 1, visible: false, status: SystemUpdate.StatusCheckingSystemUpdates },
+                { count: 1, visible: false, status: SystemUpdate.StatusCheckingAllUpdates },
+                { count: 1, visible: false, status: SystemUpdate.StatusNetworkError },
+                { count: 1, visible: false, status: SystemUpdate.StatusServerError }
             ];
         }
 
-        function test_imageUpdates(data) {
-            /* A prerequisite for errors to have an effect on the UI is
-            that there are updates and we are online. */
+        function test_imageUpdatesVisibility(data) {
+            var item = findChild(instance, "imageUpdates");
             instance.online = true;
-
-            var images = findChild(instance, "updatesImageUpdate");
-            for (var i = 0; i < data.count; i++) {
-                SystemUpdate.model.mockAddUpdate("image" + i, i, Update.KindImage);
+            SystemUpdate.mockStatus(data.status);
+            if (data.count) {
+                SystemUpdate.model.mockAddUpdate("ubuntu", 1, Update.KindImage);
             }
-            compare(images.visible, data.count > 0);
+            compare(item.visible, data.visible);
         }
 
         function test_previousUpdates_data() {
@@ -211,7 +218,37 @@ Item {
         }
 
         function test_imageActions() {
+            SystemUpdate.model.mockAddUpdate("ubuntu", 1, Update.KindImage);
+            var delegate = findChild(instance, "imageUpdatesDelegate-0");
+            instance.havePower = true;
 
+            delegate.retry();
+            verify(SystemImage.called("downloadUpdate"));
+
+            delegate.download();
+            verify(SystemImage.called("downloadUpdate"));
+
+            delegate.pause();
+            verify(SystemImage.called("pauseDownload"));
+
+            delegate.install();
+            tryCompareFunction(function () {
+                return !!findChild(testRoot, "imagePrompt")
+            }, true);
+            var dialog = findChild(testRoot, "imagePrompt");
+            dialog.requestSystemUpdate();
+
+            verify(SystemImage.called("applyUpdate"));
+
+            dialog.destroy();
+            tryCompareFunction(function () {
+                return !!findChild(testRoot, "imagePromptInstall");
+            }, false);
+        }
+
+        function test_imageUpdateFailureOverflow()
+        {
+            // Test that after N failures, we get an error message.
         }
     }
 
@@ -253,7 +290,6 @@ Item {
 
         function test_clicksAndImageAlreadyDownloaded() {
             SystemUpdate.model.mockAddUpdate("ubuntu", 1, Update.KindImage);
-            wait(3000)
             findChild(instance, "global").requestInstall();
 
             tryCompareFunction(function () {

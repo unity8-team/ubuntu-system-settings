@@ -31,7 +31,6 @@ ManifestImpl::ManifestImpl(QObject *parent)
     : Manifest(parent)
     , m_process()
 {
-    qWarning() << "ManifestImpl ctor";
     connect(&m_process, SIGNAL(finished(const int&)),
             this, SLOT(handleProcessSuccess(const int&)));
 }
@@ -39,7 +38,6 @@ ManifestImpl::ManifestImpl(QObject *parent)
 ManifestImpl::~ManifestImpl()
 {
     if (m_process.state() != QProcess::NotRunning) {
-        qWarning() << "not finished";
         m_process.kill();
         m_process.waitForFinished(1);
     }
@@ -50,7 +48,6 @@ void ManifestImpl::request()
     QStringList args("list");
     args << "--manifest";
     QString command = Helpers::whichClick();
-    qWarning() << "req" << command << args;
     m_process.start(command, args);
     if (!m_process.waitForStarted()) {
         handleProcessError(m_process.error());
@@ -62,7 +59,7 @@ void ManifestImpl::handleProcessSuccess(const int &exitCode)
     Q_UNUSED(exitCode);
 
     QString output(m_process.readAllStandardOutput());
-    QJsonDocument document = QJsonDocument::fromJson(output.toUtf8());
+    auto document = QJsonDocument::fromJson(output.toUtf8());
     if (document.isArray()) {
         Q_EMIT requestSucceeded(document.array());
     } else {

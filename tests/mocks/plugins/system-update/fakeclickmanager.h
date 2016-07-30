@@ -28,7 +28,7 @@
 class MockClickManager : public UpdatePlugin::Click::Manager
 {
 public:
-    explicit MockClickManager(QObject *parent = 0)
+    explicit MockClickManager(QObject *parent = nullptr)
         : UpdatePlugin::Click::Manager(parent) {};
     virtual ~MockClickManager() {};
 
@@ -66,9 +66,20 @@ public:
         return m_checkingForUpdates;
     }
 
-    void mockChecking(const bool checking) {
+    void mockChecking(const bool checking)
+    {
         m_checkingForUpdates = checking;
         Q_EMIT checkingForUpdatesChanged();
+    }
+
+    void mockNetworkError()
+    {
+        Q_EMIT networkError();
+    }
+
+    void mockServerError()
+    {
+        Q_EMIT serverError();
     }
 
     bool m_checkingForUpdates = false;

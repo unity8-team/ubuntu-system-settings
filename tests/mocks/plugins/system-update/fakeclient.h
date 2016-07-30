@@ -25,9 +25,7 @@ class MockClient : public UpdatePlugin::Click::Client
 {
 public:
     explicit MockClient(QObject* parent = nullptr)
-        : UpdatePlugin::Click::Client(parent)
-    {
-    }
+        : UpdatePlugin::Click::Client(parent) {}
 
     virtual void cancel() override
     {

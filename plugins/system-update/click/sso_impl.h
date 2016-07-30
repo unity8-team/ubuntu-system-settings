@@ -42,11 +42,9 @@ public:
     virtual ~SSOImpl() {};
     virtual void requestCredentials() override;
     virtual void invalidateCredentials() override;
-
-private slots:
+private Q_SLOTS:
     void handleCredentialsFound(const Token &token);
     void handleCredentialsFailed();
-
 private:
     UbuntuOne::SSOService *m_service;
 };

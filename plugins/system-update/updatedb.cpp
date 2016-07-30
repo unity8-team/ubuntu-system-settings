@@ -46,7 +46,8 @@ UpdateDb::UpdateDb(QObject *parent)
     , m_dbpath("")
 {
     QString dataPath = QStandardPaths::writableLocation(
-        QStandardPaths::AppDataLocation);
+        QStandardPaths::AppDataLocation
+    );
     if (Q_UNLIKELY(!QDir().mkpath(dataPath))) {
         qCritical() << "Could not create" << dataPath;
         return;
@@ -63,11 +64,6 @@ UpdateDb::UpdateDb(const QString &dbpath, QObject *parent)
     initializeDb();
 }
 
-QSqlDatabase UpdateDb::db()
-{
-    return m_db;
-}
-
 void UpdateDb::initializeDb()
 {
     // Create a unique connection name
@@ -79,7 +75,8 @@ void UpdateDb::initializeDb()
         connI++;
     }
 
-    m_db = QSqlDatabase::addDatabase(QLatin1String("QSQLITE"), m_connectionName);
+    m_db = QSqlDatabase::addDatabase(QLatin1String("QSQLITE"),
+                                     m_connectionName);
     m_db.setDatabaseName(m_dbpath);
 
     if (!openDb()) {
@@ -286,6 +283,11 @@ bool UpdateDb::openDb()
         return false;
     }
     return true;
+}
+
+QSqlDatabase UpdateDb::db()
+{
+    return m_db;
 }
 
 void UpdateDb::pruneDb()

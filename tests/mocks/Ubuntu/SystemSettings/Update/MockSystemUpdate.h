@@ -31,6 +31,7 @@ public:
     ~MockSystemUpdate() {}
     Q_INVOKABLE bool isCheckRequired();
     Q_INVOKABLE void mockIsCheckRequired(const bool isRequired); // mock only
+    Q_INVOKABLE void mockStatus(const uint &status); // mock only
 private:
     bool m_checkRequired = false;
 };

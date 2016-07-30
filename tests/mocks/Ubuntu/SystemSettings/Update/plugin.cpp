@@ -35,10 +35,9 @@ static QObject *siSingletonProvider(QQmlEngine *engine, QJSEngine *scriptEngine)
 
 static QObject *suSingletonProvider(QQmlEngine *engine, QJSEngine *scriptEngine)
 {
+    Q_UNUSED(engine)
     Q_UNUSED(scriptEngine)
-    MockSystemUpdate *su = new MockSystemUpdate();
-    engine->setObjectOwnership(su, QQmlEngine::CppOwnership);
-    return su;
+    return new MockSystemUpdate;
 }
 
 void BackendPlugin::registerTypes(const char *uri)

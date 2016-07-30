@@ -72,11 +72,20 @@ public:
     QHash<int, QByteArray> roleNames() const Q_DECL_OVERRIDE;
     int rowCount(const QModelIndex &parent = QModelIndex()) const Q_DECL_OVERRIDE;
 
+    // Add Update to the model
     void add(const QSharedPointer<Update> &update);
+
+    /* Update an Update.
+     *
+     * Update information about an update. If the Update does not exist, it
+     * will be created.
+     */
     void update(const QSharedPointer<Update> &update);
+
+    // Remove an Update.
     void remove(const QSharedPointer<Update> &update);
 
-    /* Fetch will grab data from the db, while get returns a from cache. */
+    // Fetch will grab data from the db, while get returns a from cache.
     QSharedPointer<Update> fetch(const QString &id, const uint &revision);
     QSharedPointer<Update> fetch(const QSharedPointer<Update> &other);
     QSharedPointer<Update> get(const QString &id, const uint &revision);
@@ -105,16 +114,15 @@ public:
     Q_INVOKABLE void cancelUpdate(const QString &id, const uint &rev);
     Q_INVOKABLE void setImageUpdate(const QString &id, const int &version,
                                     const int &updateSize);
-
-public slots:
+    static bool contains(const QList<QSharedPointer<Update> > &list,
+                         const QSharedPointer<Update> &update);
+public Q_SLOTS:
     void refresh();
     void refresh(const QSharedPointer<Update> &update);
     void clear();
     void reset();
-
-signals:
+Q_SIGNALS:
     void countChanged();
-
 private:
     void insertRow(const int &row, const QSharedPointer<Update> &update);
     void removeRow(int i);
@@ -122,8 +130,6 @@ private:
     void emitRowChanged(int row);
     void initialize();
     bool contains(const QString &id, const uint &revision) const;
-    static bool contains(const QList<QSharedPointer<Update> > &list,
-                         const QSharedPointer<Update> &update);
     QSharedPointer<Update> find(const QString &id, const uint &revision);
     QSharedPointer<Update> find(const QString &id, const QString &version);
     static int indexOf(const QList<QSharedPointer<Update> > &list,
@@ -136,32 +142,42 @@ class UpdateModelFilter : public QSortFilterProxyModel
 {
     Q_OBJECT
 public:
-    explicit UpdateModelFilter(UpdateModel *model, QObject *parent = nullptr);
+    explicit UpdateModelFilter(QObject *parent = nullptr)
+        : QSortFilterProxyModel(parent) {};
 
+    /* Return the Kind filter currently installed.
+     *
+     * Note that this filter is disabled by default.
+     */
     uint kindFilter() const;
+
+    // Filter Updates on a Kind.
     void filterOnKind(const uint &kind);
 
+    /* Return the install filter.
+     *
+     * true means installed, false means not installed (pending).
+     * Note that this filter is disabled by default.
+     */
     bool installed() const;
-    void filterOnInstalled(const bool installed);
 
-signals:
+    // Filter on whether or not an Update is installed.
+    void filterOnInstalled(const bool installed);
+Q_SIGNALS:
     void kindFilterChanged();
     void installedChanged();
     void countChanged();
     void sortRoleChanged();
-
 protected:
     virtual bool filterAcceptsRow(
         int sourceRow, const QModelIndex &sourceParent
-    ) const Q_DECL_OVERRIDE;
-
+    ) const override;
 private:
     Update::Kind m_kind = Update::Kind::KindUnknown;
     bool m_kindEnabled = false;
     bool m_installed = false;
     bool m_installedEnabled = false;
 };
-
 } // UpdatePlugin
 
 #endif // UPDATE_MODEL_H

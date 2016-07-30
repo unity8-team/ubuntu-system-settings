@@ -23,14 +23,10 @@
 using namespace UpdatePlugin;
 
 MockSystemUpdate::MockSystemUpdate(QObject *parent)
-    : UpdatePlugin::SystemUpdate(new MockUpdateModel(this),
+    : UpdatePlugin::SystemUpdate(new MockUpdateModel(parent),
                                  nullptr, // We don't need a NAM.
-                                 new UpdateModelFilter(m_model, m_model),
-                                 new UpdateModelFilter(m_model, m_model),
-                                 new UpdateModelFilter(m_model, m_model),
-                                 new UpdateModelFilter(m_model, m_model),
-                                 new MockImageManager(this),
-                                 new MockClickManager(this),
+                                 new MockImageManager(parent),
+                                 new MockClickManager(parent),
                                  parent)
 {
 }
@@ -43,4 +39,10 @@ void MockSystemUpdate::mockIsCheckRequired(const bool isRequired)
 bool MockSystemUpdate::isCheckRequired()
 {
     return m_checkRequired;
+}
+
+void MockSystemUpdate::mockStatus(const uint &status)
+{
+    m_status = (SystemUpdate::Status) status;
+    Q_EMIT statusChanged();
 }

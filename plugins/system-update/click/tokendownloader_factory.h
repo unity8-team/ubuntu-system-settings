@@ -33,6 +33,7 @@ class TokenDownloaderFactory : public QObject
     Q_OBJECT
 public:
     virtual ~TokenDownloaderFactory() {};
+    // Creates a TokenDownloader.
     virtual TokenDownloader* create(Network::Manager *nam,
                                     QSharedPointer<Update> update,
                                     QObject *parent = nullptr) = 0;

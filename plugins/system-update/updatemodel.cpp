@@ -44,7 +44,6 @@ void UpdateModel::initialize()
             this, SLOT(refresh(const QSharedPointer<Update>&)));
 
     refresh();
-    qWarning() << "good updatemodel";
 }
 
 QHash<int, QByteArray> UpdateModel::roleNames() const
@@ -92,54 +91,54 @@ QVariant UpdateModel::data(const QModelIndex &index, int role) const
     if (row < 0 || row > (m_updates.length() - 1))
         return QVariant();
 
-    QSharedPointer<Update> u = m_updates.at(row);
+    auto update = m_updates.at(row);
 
     switch (role) {
     case Qt::DisplayRole:
     case KindRole:
-        return (uint) u->kind();
+        return (uint) update->kind();
     case IdRole:
-        return u->identifier();
+        return update->identifier();
     case LocalVersionRole:
-        return u->localVersion();
+        return update->localVersion();
     case RemoteVersionRole:
-        return u->remoteVersion();
+        return update->remoteVersion();
     case RevisionRole:
-        return u->revision();
+        return update->revision();
     case InstalledRole:
-        return u->installed();
+        return update->installed();
     case CreatedAtRole:
-        return u->createdAt();
+        return update->createdAt();
     case UpdatedAtRole:
-        return u->updatedAt();
+        return update->updatedAt();
     case TitleRole:
-        return u->title();
+        return update->title();
     case DownloadHashRole:
-        return u->downloadHash();
+        return update->downloadHash();
     case DownloadIdRole:
-        return u->downloadId();
+        return update->downloadId();
     case SizeRole:
-        return u->binaryFilesize();
+        return update->binaryFilesize();
     case IconUrlRole:
-        return u->iconUrl();
+        return update->iconUrl();
     case DownloadUrlRole:
-        return u->downloadUrl();
+        return update->downloadUrl();
     case CommandRole:
-        return u->command();
+        return update->command();
     case ChangelogRole:
-        return u->changelog();
+        return update->changelog();
     case TokenRole:
-        return u->token();
+        return update->token();
     case UpdateStateRole:
-        return (uint) u->state();
+        return (uint) update->state();
     case ProgressRole:
-        return u->progress();
+        return update->progress();
     case AutomaticRole:
-        return u->automatic();
+        return update->automatic();
     case ErrorRole:
-        return u->error();
+        return update->error();
     case PackageNameRole:
-        return u->packageName();
+        return update->packageName();
     }
     return QVariant();
 }
@@ -181,7 +180,7 @@ void UpdateModel::refresh()
 
     // qWarning() << "m_updates is";
     for (int i = 0; i < m_updates.size(); i++) {
-        QSharedPointer<Update> item = m_updates.at(i);
+        auto item = m_updates.at(i);
         // qWarning() << "\t" << i << item->identifier();
         if (!UpdateModel::contains(now, item)) {
             // qWarning() << "\t\t removing" << i;
@@ -191,12 +190,12 @@ void UpdateModel::refresh()
 
     // qWarning() << "now is";
     for (int i = 0; i < now.size(); i++) {
-        QSharedPointer<Update> item = now.at(i);
+        auto item = now.at(i);
         // qWarning() << "\t" << item->identifier() << i;
 
         // qWarning() << "\t\twhile m_updates...";
         for (int i = 0; i < m_updates.size(); i++) {
-            QSharedPointer<Update> item = m_updates.at(i);
+            auto item = m_updates.at(i);
             // qWarning() << "\t\t\tm_updates:" << item->identifier();
         }
 
@@ -221,7 +220,7 @@ void UpdateModel::refresh()
 
     // qWarning() << "\n\nm_updates after operation";
     for (int i = 0; i < m_updates.size(); i++) {
-        QSharedPointer<Update> item = m_updates.at(i);
+        auto item = m_updates.at(i);
         // qWarning() << "\tm_updates:" << item->identifier();
     }
 
@@ -314,7 +313,7 @@ QSharedPointer<Update> UpdateModel::find(const QString &id, const uint &revision
             return update;
         }
     }
-    return QSharedPointer<Update>();
+    return QSharedPointer<Update>(nullptr);
 }
 
 QSharedPointer<Update> UpdateModel::find(const QString &id, const QString &version)
@@ -324,7 +323,7 @@ QSharedPointer<Update> UpdateModel::find(const QString &id, const QString &versi
             return update;
         }
     }
-    return QSharedPointer<Update>();
+    return QSharedPointer<Update>(nullptr);
 }
 
 QSharedPointer<Update> UpdateModel::fetch(const QString &id, const uint &revision)
@@ -354,7 +353,7 @@ void UpdateModel::remove(const QSharedPointer<Update> &update)
 
 bool UpdateModel::contains(const QString &id, const uint &revision) const
 {
-    Q_FOREACH(auto update, m_updates) {
+    Q_FOREACH(const auto &update, m_updates) {
         if (id == update->identifier() && revision == update->revision()) {
             return true;
         }
@@ -376,170 +375,163 @@ bool UpdateModel::contains(const QList<QSharedPointer<Update> > &list,
 void UpdateModel::setAvailable(const QString &id, const uint &rev,
                                const bool autoStart)
 {
-    auto u = find(id, rev);
-    if (!u.isNull()) {
-        u->setState(Update::State::StateAvailable);
-        u->setInstalled(false);
-        u->setProgress(0);
-        u->setToken("");
-        u->setDownloadId("");
-        u->setError("");
-        u->setAutomatic(autoStart);
-        m_db->update(u);
+    auto update = find(id, rev);
+    if (!update.isNull()) {
+        update->setState(Update::State::StateAvailable);
+        update->setInstalled(false);
+        update->setProgress(0);
+        update->setToken("");
+        update->setDownloadId("");
+        update->setError("");
+        update->setAutomatic(autoStart);
+        m_db->update(update);
     }
 }
 
 void UpdateModel::queueUpdate(const QString &id, const uint &rev,
                               const QString &downloadId)
 {
-    auto u = find(id, rev);
-    if (!u.isNull()) {
-        u->setState(Update::State::StateQueuedForDownload);
-        u->setDownloadId(downloadId);
-        m_db->update(u);
+    auto update = find(id, rev);
+    if (!update.isNull()) {
+        update->setState(Update::State::StateQueuedForDownload);
+        update->setDownloadId(downloadId);
+        m_db->update(update);
     }
 }
 
 void UpdateModel::setInstalled(const QString &id, const uint &rev)
 {
-    auto u = find(id, rev);
-    if (!u.isNull()) {
-        u->setInstalled(true);
-        u->setState(Update::State::StateInstallFinished);
-        u->setUpdatedAt(QDateTime::currentDateTimeUtc());
-        u->setDownloadId("");
-        m_db->update(u);
+    auto update = find(id, rev);
+    if (!update.isNull()) {
+        update->setInstalled(true);
+        update->setState(Update::State::StateInstallFinished);
+        update->setUpdatedAt(QDateTime::currentDateTimeUtc());
+        update->setDownloadId("");
+        m_db->update(update);
     }
 }
 
 void UpdateModel::startUpdate(const QString &id, const uint &rev,
                               const bool automatic)
 {
-    auto u = find(id, rev);
-    if (!u.isNull()) {
+    auto update = find(id, rev);
+    if (!update.isNull()) {
         Update::State state = automatic ?
                               Update::State::StateDownloadingAutomatically :
                               Update::State::StateDownloading;
-        u->setState(state);
-        m_db->update(u);
+        update->setState(state);
+        m_db->update(update);
     }
 }
 
 void UpdateModel::processUpdate(const QString &id, const uint &rev)
 {
-    auto u = find(id, rev);
-    if (!u.isNull()) {
-        u->setState(Update::State::StateInstalling);
-        m_db->update(u);
+    auto update = find(id, rev);
+    if (!update.isNull()) {
+        update->setState(Update::State::StateInstalling);
+        m_db->update(update);
     }
 }
 
 void UpdateModel::setError(const QString &id, const uint &rev,
                            const QString &msg)
 {
-    auto u = find(id, rev);
-    if (!u.isNull()) {
-        u->setState(Update::State::StateFailed);
-        u->setError(msg);
-        u->setDownloadId("");
-        m_db->update(u);
+    auto update = find(id, rev);
+    if (!update.isNull()) {
+        update->setState(Update::State::StateFailed);
+        update->setError(msg);
+        update->setDownloadId("");
+        m_db->update(update);
     }
 }
 
 void UpdateModel::setDownloaded(const QString &id, const uint &rev)
 {
-    auto u = find(id, rev);
-    if (!u.isNull()) {
-        u->setState(Update::State::StateDownloaded);
-        m_db->update(u);
+    auto update = find(id, rev);
+    if (!update.isNull()) {
+        update->setState(Update::State::StateDownloaded);
+        m_db->update(update);
     }
 }
 
 void UpdateModel::setProgress(const QString &id, const uint &rev,
                               const int &progress)
 {
-    auto u = find(id, rev);
-    if (!u.isNull()) {
-        u->setState(Update::State::StateDownloading);
-        u->setProgress(progress);
-        m_db->update(u);
+    auto update = find(id, rev);
+    if (!update.isNull()) {
+        update->setState(Update::State::StateDownloading);
+        update->setProgress(progress);
+        m_db->update(update);
     }
 }
 
 void UpdateModel::setInstalling(const QString &id, const uint &rev,
                                 const int &progress)
 {
-    auto u = find(id, rev);
-    if (!u.isNull()) {
-        u->setState(Update::State::StateInstalling);
-        u->setProgress(progress);
-        m_db->update(u);
+    auto update = find(id, rev);
+    if (!update.isNull()) {
+        update->setState(Update::State::StateInstalling);
+        update->setProgress(progress);
+        m_db->update(update);
     }
 }
 
 void UpdateModel::pauseUpdate(const QString &id, const uint &rev,
                               const bool automatic)
 {
-    auto u = find(id, rev);
-    if (!u.isNull()) {
-        Update::State state = automatic ?
-                              Update::State::StateAutomaticDownloadPaused :
-                              Update::State::StateDownloadPaused;
-        u->setState(state);
-        m_db->update(u);
+    auto update = find(id, rev);
+    if (!update.isNull()) {
+        auto state = automatic ?
+                     Update::State::StateAutomaticDownloadPaused :
+                     Update::State::StateDownloadPaused;
+        update->setState(state);
+        m_db->update(update);
     }
 }
 
 void UpdateModel::resumeUpdate(const QString &id, const uint &rev,
                                const bool automatic)
 {
-    auto u = find(id, rev);
-    if (!u.isNull()) {
-        Update::State state = automatic ?
-                              Update::State::StateDownloadingAutomatically :
-                              Update::State::StateDownloading;
-        u->setState(state);
-        m_db->update(u);
+    auto update = find(id, rev);
+    if (!update.isNull()) {
+        auto state = automatic ?
+                     Update::State::StateDownloadingAutomatically :
+                     Update::State::StateDownloading;
+        update->setState(state);
+        m_db->update(update);
     }
 }
 
 void UpdateModel::cancelUpdate(const QString &id, const uint &rev)
 {
-    auto u = find(id, rev);
-    if (!u.isNull()) {
-        u->setState(Update::State::StateAvailable);
-        u->setError("");
-        u->setToken("");
-        u->setDownloadId("");
-        u->setProgress(0);
-        m_db->update(u);
+    auto update = find(id, rev);
+    if (!update.isNull()) {
+        update->setState(Update::State::StateAvailable);
+        update->setError("");
+        update->setToken("");
+        update->setDownloadId("");
+        update->setProgress(0);
+        m_db->update(update);
     }
 }
 
 void UpdateModel::setImageUpdate(const QString &id, const int &version,
                                  const int &updateSize)
 {
-    QSharedPointer<Update> u = QSharedPointer<Update>(new Update);
-    u->setIdentifier(id);
-    u->setKind(Update::Kind::KindImage);
-    u->setProgress(0);
-    u->setTitle("Ubuntu");
-    u->setRevision((uint) version);
-    u->setBinaryFilesize((int) updateSize);
-    u->setRemoteVersion(QString::number(version));
-    u->setState(Update::State::StateAvailable);
-    u->setIconUrl(QLatin1String(
+    auto update = QSharedPointer<Update>(new Update);
+    update->setIdentifier(id);
+    update->setKind(Update::Kind::KindImage);
+    update->setProgress(0);
+    update->setTitle("Ubuntu");
+    update->setRevision((uint) version);
+    update->setBinaryFilesize((int) updateSize);
+    update->setRemoteVersion(QString::number(version));
+    update->setState(Update::State::StateAvailable);
+    update->setIconUrl(QLatin1String(
         "file:///usr/share/icons/suru/places/scalable/distributor-logo.svg"
     ));
 
-    m_db->add(u);
-}
-
-UpdateModelFilter::UpdateModelFilter(UpdateModel *model, QObject *parent)
-    : QSortFilterProxyModel(parent)
-{
-    setSourceModel(model);
-    qWarning() << "still good from UpdateModelFilter";
+    m_db->add(update);
 }
 
 uint UpdateModelFilter::kindFilter() const

@@ -40,6 +40,7 @@ Item {
         }
     }
 
+    // Test suite when there's no Image update.
     UbuntuTestCase {
         name: "EntryComponentNoImageUpdateTestCase"
         when: windowShown
@@ -69,10 +70,10 @@ Item {
         function test_clickUpdates() {
             SystemUpdate.model.mockAddUpdate("app" + 0, 0, Update.KindClick);
             tryCompare(instance, "height", units.gu(6));
-            wait(3000)
         }
     }
 
+    // Test suite for when we have an image update.
     UbuntuTestCase {
         name: "EntryComponentImageUpdateTestCase"
         when: windowShown

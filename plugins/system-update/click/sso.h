@@ -34,15 +34,20 @@ class SSO : public QObject
 {
     Q_OBJECT
 public:
-    explicit SSO(QObject *parent = nullptr) : QObject(parent) {
-        qWarning() << "SSO ctor";
-    };
+    explicit SSO(QObject *parent = nullptr) : QObject(parent) {};
     virtual ~SSO() {};
+
+    // Requests credentials.
     virtual void requestCredentials() = 0;
+
+    // Invalidates credentials.
     virtual void invalidateCredentials() = 0;
 
 Q_SIGNALS:
+    // This signal is emitted when a credential request succeeds.
     void credentialsRequestSucceeded(const UbuntuOne::Token &token);
+
+    // This signal is emitted when a credential request fails.
     void credentialsRequestFailed();
 };
 } // Click

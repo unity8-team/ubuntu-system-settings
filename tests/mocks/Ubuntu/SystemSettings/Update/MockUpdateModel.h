@@ -40,9 +40,8 @@ class MockUpdateModelFilter: public UpdatePlugin::UpdateModelFilter
 {
     Q_OBJECT
 public:
-    // For testing, when we want to explicitly set the database path.
     explicit MockUpdateModelFilter(QObject *parent = nullptr)
-        : UpdatePlugin::UpdateModelFilter(nullptr, parent) {}
+        : UpdatePlugin::UpdateModelFilter(parent) {}
 
     Q_INVOKABLE void mockSetSourceModel(MockUpdateModel *source);
 };

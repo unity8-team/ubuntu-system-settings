@@ -24,11 +24,10 @@ namespace Click
 {
 SSOImpl::SSOImpl(QObject *parent)
     : SSO(parent)
-    , m_service(new UbuntuOne::SSOService(parent))
+    , m_service(new UbuntuOne::SSOService())
 {
-    qWarning() << "SSOImpl ctor";
+    m_service->setParent(this);
     {
-
         using namespace UbuntuOne;
         connect(m_service, SIGNAL(credentialsFound(const Token&)),
                 this, SLOT(handleCredentialsFound(const Token&)));

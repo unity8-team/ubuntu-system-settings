@@ -33,11 +33,11 @@ using namespace UpdatePlugin;
 
 static QObject *suSingletonProvider(QQmlEngine *engine, QJSEngine *scriptEngine)
 {
-    Q_UNUSED(engine)
+    // Q_UNUSED(engine)
     Q_UNUSED(scriptEngine)
-    SystemUpdate *su = new SystemUpdate();
-    engine->setObjectOwnership(su, QQmlEngine::CppOwnership);
-    return su;
+    // SystemUpdate *su = new SystemUpdate();
+    // engine->setObjectOwnership(su, QQmlEngine::CppOwnership);
+    return new SystemUpdate;
 }
 
 void BackendPlugin::registerTypes(const char *uri)

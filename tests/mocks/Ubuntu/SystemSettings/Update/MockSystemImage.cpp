@@ -18,29 +18,32 @@
 
 #include "MockSystemImage.h"
 
-
-void MockSystemImage::factoryReset() {
+void MockSystemImage::checkForUpdate()
+{
 }
 
-void MockSystemImage::productionReset() {
+void MockSystemImage::downloadUpdate()
+{
+    m_called << "downloadUpdate";
 }
 
-void MockSystemImage::checkForUpdate() {
+void MockSystemImage::forceAllowGSMDownload()
+{
 }
 
-void MockSystemImage::downloadUpdate() {
+void MockSystemImage::applyUpdate()
+{
+    m_called << "applyUpdate";
 }
 
-void MockSystemImage::forceAllowGSMDownload() {
+QString MockSystemImage::cancelUpdate()
+{
 }
 
-void MockSystemImage::applyUpdate() {
-}
-
-QString MockSystemImage::cancelUpdate() {
-}
-
-QString MockSystemImage::pauseDownload() {
+QString MockSystemImage::pauseDownload()
+{
+    m_called << "pauseDownload";
+    return QString();
 }
 
 bool MockSystemImage::checkTarget() const
@@ -53,73 +56,9 @@ bool MockSystemImage::checkingForUpdates() const
     return m_checkingForUpdates;
 }
 
-QString MockSystemImage::deviceName() const
-{
-    return m_deviceName;
-}
-
-QString MockSystemImage::channelName() const
-{
-    return m_channelName;
-}
-
-QDateTime MockSystemImage::lastUpdateDate() const
-{
-    return m_lastUpdateDate;
-}
-
-QDateTime MockSystemImage::lastCheckDate() const
-{
-    return m_lastCheckDate;
-}
-
-bool MockSystemImage::updateAvailable()
-{
-    return m_updateAvailable;
-}
-
-bool MockSystemImage::downloading()
-{
-    return m_downloading;
-}
-
-int MockSystemImage::updateSize()
-{
-    return m_updateSize;
-}
-
-QString MockSystemImage::errorReason()
-{
-    return m_errorReason;
-}
-
-QString MockSystemImage::versionTag()
-{
-    QString val = m_detailedVersion.value("tag").toString();
-    return val.isEmpty() ? "" : val;
-}
-
 int MockSystemImage::currentBuildNumber() const
 {
     return m_currentBuildNumber;
-}
-
-QString MockSystemImage::currentUbuntuBuildNumber() const
-{
-    QString val = m_detailedVersion.value("ubuntu").toString();
-    return val.isEmpty() ? "Unavailable" : val;
-}
-
-QString MockSystemImage::currentDeviceBuildNumber() const
-{
-    QString val = m_detailedVersion.value("device").toString();
-    return val.isEmpty() ? "Unavailable" : val;
-}
-
-QString MockSystemImage::currentCustomBuildNumber() const
-{
-    QString val = m_detailedVersion.value("custom").toString();
-    return val.isEmpty() ? "Unavailable" : val;
 }
 
 int MockSystemImage::targetBuildNumber() const
@@ -127,76 +66,24 @@ int MockSystemImage::targetBuildNumber() const
     return m_targetBuildNumber;
 }
 
-QVariantMap MockSystemImage::detailedVersionDetails() const
-{
-    return m_detailedVersion;
-}
-
-int MockSystemImage::downloadMode()
-{
-    return m_downloadMode;
-}
-
-void MockSystemImage::setDownloadMode(const int &downloadMode) {
-    if (m_downloadMode == downloadMode) {
-        return;
-    }
-
-    if (downloadMode < 0 || downloadMode > 2) {
-        return;
-    }
-
-    m_downloadMode = downloadMode;
-}
-
-void MockSystemImage::mockProgress(const int &percentage, const double &eta)
-{
-    Q_EMIT updateProgress(percentage, eta);
-}
-
-void MockSystemImage::mockAvailableStatus(const bool isAvailable,
-                                          const bool downloading,
-                                          const QString availableVersion,
-                                          const int updateSize,
-                                          const QString lastUpdateDate,
-                                          const QString errorReason)
-{
-    Q_EMIT updateAvailableStatus(isAvailable,
-                                 downloading,
-                                 availableVersion,
-                                 updateSize,
-                                 lastUpdateDate,
-                                 errorReason);
-}
-
-void MockSystemImage::mockPaused(const int &percentage)
-{
-    Q_EMIT updatePaused(percentage);
-}
-
-void MockSystemImage::mockStarted()
-{
-    Q_EMIT downloadStarted();
-}
-
-void MockSystemImage::mockDownloaded()
-{
-    Q_EMIT updateDownloaded();
-}
-
-void MockSystemImage::mockFailed(const int &consecutiveFailureCount, const QString &lastReason)
-{
-    Q_EMIT updateFailed(consecutiveFailureCount, lastReason);
-}
-
 void MockSystemImage::mockTargetBuildNumber(const uint &target)
 {
-    // m_targetBuildNumber = target;
+    m_targetBuildNumber = target;
     Q_EMIT targetBuildNumberChanged();
 }
 
 void MockSystemImage::mockCurrentBuildNumber(const uint &current)
 {
-    // m_currentBuildNumber = current;
+    m_currentBuildNumber = current;
     Q_EMIT currentBuildNumberChanged();
+}
+
+bool MockSystemImage::called(const QString &functionName)
+{
+    return m_called.contains(functionName);
+}
+
+void MockSystemImage::reset()
+{
+    m_called.clear();
 }

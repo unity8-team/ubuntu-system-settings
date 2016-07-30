@@ -60,7 +60,6 @@ ManagerImpl::ManagerImpl(UpdateModel *model, Network::Manager *nam,
     m_client->setParent(this);
     m_manifest->setParent(this);
     m_sso->setParent(this);
-    qWarning() << "Click::ManagerImpl delegate ctor says hi";
 }
 
 ManagerImpl::ManagerImpl(UpdateModel *model,
@@ -78,58 +77,85 @@ ManagerImpl::ManagerImpl(UpdateModel *model,
     , m_sso(sso)
     , m_tokenDownloadFactory(tokenDownloadFactory)
 {
-    qWarning() << "Click::ManagerImpl actual ctor says hi";
-    /* We use the manifest as a source of information on what state apps are
-    in. I.e. if we have a pending update's remote version matching that of an
-    app in the manifest; we can make assumptions about that update's state. */
+    /* Request a manifest.
+     *
+     * This will produce a manifest with which we will synchronize our
+     * database.
+     */
     m_manifest->request();
 
     connect(this, SIGNAL(stateChanged()), this, SLOT(handleStateChange()));
     connect(this, SIGNAL(stateChanged()), this, SIGNAL(checkingForUpdatesChanged()));
-
     connect(m_client, SIGNAL(metadataRequestSucceeded(const QJsonArray&)),
             this, SLOT(parseMetadata(const QJsonArray&)));
     connect(m_client, SIGNAL(networkError()), this, SIGNAL(networkError()));
     connect(m_client, SIGNAL(serverError()), this, SIGNAL(serverError()));
     connect(m_client, SIGNAL(credentialError()),
             this, SIGNAL(credentialError()));
-
     connect(m_client, &Client::serverError, this, [this]() {
         setState(State::Failed);
     });
     connect(m_client, &Client::networkError, this, [this]() {
         setState(State::Failed);
     });
-    connect(m_client, &Client::credentialError, this, [this]() {
-        setState(State::Failed);
-        handleCredentialsFailed();
-    });
+    connect(m_client, SIGNAL(credentialError()),
+            this, SLOT(handleCredentialsFailed()));
+    connect(this, SIGNAL(checkCanceled()), m_client, SLOT(cancel()));
 
     connect(m_manifest, SIGNAL(requestSucceeded(const QJsonArray&)),
             this, SLOT(handleManifest(const QJsonArray&)));
     connect(m_manifest, &Manifest::requestFailed, this, [this]() {
         setState(State::Complete);
     });
-
     connect(m_sso,
             SIGNAL(credentialsRequestSucceeded(const UbuntuOne::Token&)),
             this, SLOT(handleCredentials(const UbuntuOne::Token&)));
     connect(m_sso, SIGNAL(credentialsRequestFailed()),
             this, SLOT(handleCredentialsFailed()));
 
-    // Allowed state transitions.
-    m_transitions[State::Idle]          << State::Manifest << State::Failed;
-    m_transitions[State::Manifest]      << State::Metadata << State::Complete << State::Failed;
-    m_transitions[State::Metadata]      << State::Tokens << State::TokenComplete << State::Complete << State::Failed;
-    m_transitions[State::Tokens]        << State::TokenComplete << State::Complete << State::Failed;
-    m_transitions[State::TokenComplete] << State::Tokens << State::Complete << State::Failed;
+    /* Describes a state machine for checking. The rationale for these
+    transitions are that
+        * we can cancel a check at any time, but this may not necessarily
+          propagate to every subsystem. So if a subsystem responds with data
+          after a check has been canceled (or completed), it is a noop as far
+          as checking is concerned.
+        * Some parts of the check (e.g. requesting the manifest) should be
+          allowed to happen outside a check.
+        * While we're waiting for e.g. tokens to download, it's neater to have
+          this state as an explicit one, instead of waiting for a queue
+          to empty.
+    */
+    m_transitions[State::Idle]          << State::Manifest
+                                        << State::Failed;
+
+    m_transitions[State::Manifest]      << State::Metadata
+                                        << State::Complete
+                                        << State::Failed
+                                        << State::Canceled;
+
+    m_transitions[State::Metadata]      << State::Tokens
+                                        << State::TokenComplete
+                                        << State::Complete
+                                        << State::Failed
+                                        << State::Canceled;
+
+    m_transitions[State::Tokens]        << State::TokenComplete
+                                        << State::Complete
+                                        << State::Failed
+                                        << State::Canceled;
+
+    m_transitions[State::TokenComplete] << State::Tokens
+                                        << State::Complete
+                                        << State::Failed
+                                        << State::Canceled;
+
     m_transitions[State::Complete]      << State::Idle;
     m_transitions[State::Canceled]      << State::Idle;
 }
 
 ManagerImpl::~ManagerImpl()
 {
-    Q_EMIT checkCanceled();
+    setState(State::Canceled);
     delete m_tokenDownloadFactory;
 }
 
@@ -189,7 +215,7 @@ void ManagerImpl::handleStateChange()
     }
 }
 
-void ManagerImpl::initTokenDownloader(const Click::TokenDownloader *downloader)
+void ManagerImpl::setup(const Click::TokenDownloader *downloader)
 {
     connect(downloader, SIGNAL(downloadSucceeded(QSharedPointer<Update>)),
             this, SLOT(handleTokenDownload(QSharedPointer<Update>)));
@@ -222,10 +248,9 @@ void ManagerImpl::retry(const QString &identifier, const uint &revision)
     auto update = m_model->get(identifier, revision);
     if (update) {
         m_model->setAvailable(identifier, revision, true);
-        Click::TokenDownloader* dl
-            = m_tokenDownloadFactory->create(m_nam, update);
+        auto dl = m_tokenDownloadFactory->create(m_nam, update);
         dl->setAuthToken(m_authToken);
-        initTokenDownloader(dl);
+        setup(dl);
         dl->download();
     }
 }
@@ -245,13 +270,8 @@ void ManagerImpl::launch(const QString &identifier, const uint &revision)
 void ManagerImpl::handleManifest(const QJsonArray &manifest)
 {
     auto updates = parseManifest(manifest);
-    Q_FOREACH(auto update, updates) {
-        auto existing = m_model->get(update->identifier(),
-                                     update->localVersion());
-        if (existing) {
-            m_model->setInstalled(existing->identifier(), existing->revision());
-        }
-    }
+    synchronize(updates);
+
     Q_FOREACH(auto update, updates) {
         m_candidates[update->identifier()] = update;
     }
@@ -263,33 +283,62 @@ void ManagerImpl::handleManifest(const QJsonArray &manifest)
     setState(State::Metadata);
 }
 
+void ManagerImpl::synchronize(
+    const QList<QSharedPointer<Update> > &manifestUpdates
+)
+{
+    auto dbUpdates = m_model->db()->updates();
+
+    Q_FOREACH(auto dbUpdate, dbUpdates) {
+        bool found = false;
+        Q_FOREACH(auto manifestUpdate, manifestUpdates) {
+            /* The local version of a click in the manifest, matched exactly a
+            a remote version in one of our db updates. */
+            if (manifestUpdate->localVersion() == dbUpdate->remoteVersion()) {
+                m_model->setInstalled(dbUpdate->identifier(),
+                                      dbUpdate->revision());
+                found = true;
+            } else if (manifestUpdate->identifier() == dbUpdate->identifier()) {
+                // Fast forward the local version.
+                dbUpdate->setLocalVersion(manifestUpdate->localVersion());
+                found = true;
+            }
+        }
+        if (!found) {
+            m_model->remove(dbUpdate);
+        }
+    }
+}
+
 QList<QSharedPointer<Update> > ManagerImpl::parseManifest(const QJsonArray &manifest)
 {
     QList<QSharedPointer<Update> > updates;
     for (int i = 0; i < manifest.size(); i++) {
-        auto update = QSharedPointer<Update>(new Update);
+        const auto object = manifest.at(i).toObject();
+        auto name = object.value("name").toString();
 
-        const QJsonObject object = manifest.at(i).toObject();
-        update->setIdentifier(object.value("name").toString());
+        // No name? Bail!
+        if (name.isEmpty()) {
+            continue;
+        }
+
+        auto update = QSharedPointer<Update>(new Update);
+        update->setIdentifier(name);
         update->setTitle(object.value("title").toString());
         update->setLocalVersion(object.value("version").toString());
         update->setKind(Update::Kind::KindClick);
 
         /* We'll also need the package name, which will be the first key inside
-        the “hooks” key that contains a “desktop”.. */
+        the “hooks” key that contains a “desktop”. */
         if (object.contains("hooks") && object.value("hooks").isObject()) {
-            QJsonObject hooks = object.value("hooks").toObject();
-            Q_FOREACH(const QString &key, hooks.keys()) {
+            auto hooks = object.value("hooks").toObject();
+            Q_FOREACH(const auto &key, hooks.keys()) {
                 if (hooks[key].isObject() &&
                     hooks[key].toObject().contains("desktop")) {
                     update->setPackageName(key);
                 }
             }
         }
-
-        QStringList command;
-        command << Helpers::whichPkcon() << "-p" << "install-local" << "$file";
-        update->setCommand(command);
         updates << update;
     }
     return updates;
@@ -299,7 +348,7 @@ void ManagerImpl::completionCheck()
 {
     /* Check if tokens are all fetched, or any update has since been marked as
     installed. Return early if that's the case. */
-    Q_FOREACH(const QString &identifier, m_candidates.keys()) {
+    Q_FOREACH(const auto &identifier, m_candidates.keys()) {
         if (m_candidates[identifier]->token().isEmpty() ||
             m_candidates[identifier]->installed()) {
             setState(State::Tokens);
@@ -312,7 +361,7 @@ void ManagerImpl::completionCheck()
 
 void ManagerImpl::handleTokenDownload(QSharedPointer<Update> update)
 {
-    Click::TokenDownloader* dl = qobject_cast<Click::TokenDownloader*>(QObject::sender());
+    auto dl = qobject_cast<Click::TokenDownloader*>(QObject::sender());
     dl->disconnect();
 
     // Token reported as downloaded, but empty so discard it as a candidate.
@@ -336,7 +385,7 @@ void ManagerImpl::handleTokenDownload(QSharedPointer<Update> update)
 
 void ManagerImpl::handleTokenDownloadFailure(QSharedPointer<Update> update)
 {
-    Click::TokenDownloader* dl = qobject_cast<Click::TokenDownloader*>(QObject::sender());
+    auto dl = qobject_cast<Click::TokenDownloader*>(QObject::sender());
     dl->disconnect();
 
     // Assume the original update was changed during the download of token.
@@ -378,6 +427,7 @@ void ManagerImpl::handleCredentialsFailed()
 
     // We've invalidated the token, and the user is now not authenticated.
     setAuthenticated(false);
+    cancel();
 }
 
 void ManagerImpl::requestMetadata()
@@ -421,10 +471,15 @@ void ManagerImpl::parseMetadata(const QJsonArray &array)
                 update->setRevision(revision);
                 update->setState(Update::State::StateAvailable);
 
+                QStringList command;
+                command << Helpers::whichPkcon()
+                    << "-p" << "install-local" << "$file";
+                update->setCommand(command);
+
                 Click::TokenDownloader* dl
                     = m_tokenDownloadFactory->create(m_nam, update);
                 dl->setAuthToken(m_authToken);
-                initTokenDownloader(dl);
+                setup(dl);
                 dl->download();
             } else {
                 // Update not required, let's remove it.
@@ -436,7 +491,7 @@ void ManagerImpl::parseMetadata(const QJsonArray &array)
 
     /* Remove clicks that did not have the necessary metadata. They could be
     locally installed, or removed from upstream. */
-    foreach (const QString &identifier, m_candidates.keys()) {
+    foreach (const auto &identifier, m_candidates.keys()) {
         if (m_candidates.value(identifier)->remoteVersion().isEmpty()) {
             m_candidates.remove(identifier);
             setState(State::TokenComplete);

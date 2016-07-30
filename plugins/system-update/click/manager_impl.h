@@ -45,6 +45,8 @@ class ManagerImpl : public Manager
 public:
     explicit ManagerImpl(UpdateModel *model, Network::Manager *nam,
                          QObject *parent = nullptr);
+
+    // This constructor enables testing.
     explicit ManagerImpl(UpdateModel *model,
                          Network::Manager *nam,
                          Click::Client *client,
@@ -61,7 +63,7 @@ public:
 
     virtual bool authenticated() const override;
     virtual bool checkingForUpdates() const override;
-private slots:
+private Q_SLOTS:
     void parseMetadata(const QJsonArray &array);
     void handleManifest(const QJsonArray &manifest);
     void handleTokenDownload(QSharedPointer<Update> update);
@@ -80,7 +82,22 @@ private:
     void setState(const State &state);
     State state() const;
     void setAuthenticated(const bool authenticated);
-    void initTokenDownloader(const Click::TokenDownloader *downloader);
+
+    /* Set up connections on a TokenDownloader. */
+    void setup(const Click::TokenDownloader *downloader);
+
+    /* Synchronize db updates with a manifest.
+     *
+     * Any app in database not in the manifest, is removed. If an db update's
+     * remote version matches a manifest update's local version, we assume it to be
+     * installed. Any Update's local version is replaced by any new local version.
+     */
+    void synchronize(const QList<QSharedPointer<Update> > &manifestUpdates);
+
+    /* Parse a manifest.
+     *
+     * Return a list of Updates from a parsed manifest.
+     */
     QList<QSharedPointer<Update> > parseManifest(const QJsonArray &manifest);
 
     UpdateModel *m_model;
@@ -89,7 +106,6 @@ private:
     Click::Manifest *m_manifest;
     Click::SSO *m_sso;
     Click::TokenDownloaderFactory *m_tokenDownloadFactory;
-
     QMap<QString, QSharedPointer<Update>> m_candidates;
     UbuntuOne::Token m_authToken;
     bool m_authenticated = true;

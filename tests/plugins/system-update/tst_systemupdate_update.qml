@@ -37,11 +37,9 @@ Item {
         }
     }
 
-    // We try here to address all the states which are enumerated in the
-    // spec [1]. Due to limitations in DownloadManager, “Download” is
-    // not possible on app updates. Click updates are only Update-able
-    // (i.e. Download+Install as one step).
-    // [1] https://wiki.ubuntu.com/SoftwareUpdates#Phone
+    /* We address all the states which are enumerated in the
+     * spec, <https://wiki.ubuntu.com/SoftwareUpdates#Phone>.
+     */
     UbuntuTestCase {
         name: "UpdateTest"
         when: windowShown
@@ -301,22 +299,21 @@ Item {
                     targetStatusLabelText: i18n.tr("Installed"),
                     targetDownloadLabelText: "",
                 },
-
                 // Installed
-                {
-                    tag: "Click update installed",
-                    updateState: Update.StateInstalled,
-                    kind: Update.KindClick,
-                    progress: 1,
-                    button: { text: i18n.tr("Open"), visibility: true, state: true, signal: "launch" },
-                    progressbar: { visibility: false, progress: 1, },
-                    error: { text: "", visiblity: false, },
-                    updatedAt: new Date("December 17, 1995 03:24:00"),
-                    targetStatusLabelText: i18n.tr("Updated at %1").arg(
-                        new Date("December 17, 1995 03:24:00").toLocaleDateString(Qt.locale(), "d MMMM")
-                    ),
-                    targetDownloadLabelText: "",
-                },
+                // {
+                //     tag: "Click update installed",
+                //     updateState: Update.StateInstalled,
+                //     kind: Update.KindClick,
+                //     progress: 1,
+                //     button: { text: i18n.tr("Open"), visibility: true, state: false, signal: "launch" },
+                //     progressbar: { visibility: false, progress: 1, },
+                //     error: { text: "", visiblity: false, },
+                //     updatedAt: new Date("December 17, 1995 03:24:00"),
+                //     targetStatusLabelText: i18n.tr("Updated at %1").arg(
+                //         new Date("December 17, 1995 03:24:00").toLocaleDateString(Qt.locale(), "d MMMM")
+                //     ),
+                //     targetDownloadLabelText: "",
+                // },
                 {
                     tag: "System update installed",
                     updateState: Update.StateInstalled,

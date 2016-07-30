@@ -24,11 +24,6 @@
 
 namespace UpdatePlugin
 {
-Update::Update(QObject *parent)
-    : QObject(parent)
-{
-}
-
 Update::Kind Update::kind() const
 {
     return m_kind;

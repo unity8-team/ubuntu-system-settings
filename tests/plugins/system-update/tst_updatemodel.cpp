@@ -39,7 +39,8 @@ private slots:
     {
         m_model = new UpdateModel(":memory:");
         m_db = m_model->db();
-        m_filter = new UpdateModelFilter(m_model, m_model);
+        m_filter = new UpdateModelFilter(m_model);
+        m_filter->setSourceModel(m_model);
     }
     void cleanup()
     {

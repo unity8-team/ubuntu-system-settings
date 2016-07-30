@@ -32,9 +32,7 @@ class Manifest : public QObject
 {
     Q_OBJECT
 public:
-    explicit Manifest(QObject *parent = nullptr) : QObject(parent) {
-        qWarning() << "Manifest ctor";
-    };
+    explicit Manifest(QObject *parent = nullptr) : QObject(parent) {};
     virtual ~Manifest() {};
 public slots:
     virtual void request() = 0;

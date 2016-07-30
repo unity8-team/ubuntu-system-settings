@@ -36,13 +36,13 @@ public:
     static QString clickMetadataUrl();
     static QString clickTokenUrl(const QString &url);
     static bool isIgnoringCredentials();
-    static QString whichClick(); // CLICK_COMMAND
-    static QString whichPkcon(); // PKCON_COMMAND
+    static QString whichClick();
+    static QString whichPkcon();
 private:
     static std::string architectureFromDpkg();
     static std::vector<std::string> listFolder(const std::string &folder,
                                                const std::string &pattern);
 };
-} // Namespace UpdatePlugin
+} // UpdatePlugin
 
 #endif // SYSTEM_UPDATE_HELPERS_H

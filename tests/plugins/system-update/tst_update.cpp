@@ -250,9 +250,8 @@ private slots:
         b->setRevision(2);
 
         QTest::newRow("Id/rev equality") << a << a << true;
-
         QTest::newRow("Id/rev inequality") << a << b << false;
-        QTest::newRow("Id/rev inequality 2") << b << a << false;
+        QTest::newRow("Id/rev inequality reversed") << b << a << false;
     }
     void testShallowEquality()
     {

@@ -39,23 +39,49 @@ public:
     // For testing, when we want to explicitly set the database path.
     explicit UpdateDb(const QString &dbpath, QObject *parent = nullptr);
 
+    // Add an Update to the database.
     void add(const QSharedPointer<Update> &update);
+
+    /* Update an Update in the database.
+     *
+     * If it does not exist, it will be created.
+     */
     void update(const QSharedPointer<Update> &update);
+
+    // Remove an Update from the database.
     void remove(const QSharedPointer<Update> &update);
+
+    // Return an Update in the database. If not found, the Update will be null.
+    // TODO: There's no sharing going on here, maybe drop the shared pointer?
     QSharedPointer<Update> get(const QString &id, const uint &revision);
+
+    // Return all Updates stored in the database.
     QList<QSharedPointer<Update> > updates();
 
-    QSqlDatabase db(); // For testing.
-
+    // Return date of last (successful) check.
     QDateTime lastCheckDate();
+
+    // Set date of last (successful) check.
     void setLastCheckDate(const QDateTime &lastCheck);
+
+    // Enables testing.
+    QSqlDatabase db();
+
+    /* Remove all installed Updates older than 30 days.
+     *
+     * See https://wiki.ubuntu.com/SoftwareUpdates\
+     *     #Presenting_available_updates
+     */
     void pruneDb();
+
+    // Drops the database. Used in testing.
     void reset();
-
-signals:
+Q_SIGNALS:
+    // This signal is emitted when the database changed substantially.
     void changed();
-    void changed(const QSharedPointer<Update> &update);
 
+    // This signal is emitted when an Update changes.
+    void changed(const QSharedPointer<Update> &update);
 private:
     bool insert(const QSharedPointer<Update> &update);
     static void update(const QSharedPointer<Update> &update,
@@ -64,7 +90,7 @@ private:
     void initializeDb();
     bool openDb();
 
-    // Removes any updates that precede update and are not instaled.
+    // Removes any updates that precede update and are not installed.
     void replaceWith(const QSharedPointer<Update> &update);
 
     QSqlDatabase m_db;
