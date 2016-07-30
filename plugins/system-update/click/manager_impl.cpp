@@ -397,7 +397,6 @@ void ManagerImpl::handleTokenDownload(QSharedPointer<Update> update)
 void ManagerImpl::handleTokenDownloadFailure(QSharedPointer<Update> update)
 {
     auto dl = qobject_cast<Click::TokenDownloader*>(QObject::sender());
-    dl->disconnect();
 
     // Assume the original update was changed during the download of token.
     auto freshUpdate = m_model->get(update);
