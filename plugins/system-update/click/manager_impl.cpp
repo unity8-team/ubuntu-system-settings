@@ -241,6 +241,7 @@ void ManagerImpl::check()
     // instead ask for credentials.
     if (!m_authToken.isValid() && !Helpers::isIgnoringCredentials()) {
         qWarning() << Q_FUNC_INFO << "Credential invalid.";
+        setAuthenticated(false);
         m_sso->requestCredentials();
         return;
     }

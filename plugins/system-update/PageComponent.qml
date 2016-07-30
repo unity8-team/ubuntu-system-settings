@@ -296,7 +296,8 @@ ItemPage {
             NotAuthenticatedNotification {
                 id: notauthNotification
                 objectName: "noAuthenticationNotification"
-                visible: !authenticated && online
+                visible: !authenticated && online &&
+                         SystemUpdate.status == SystemUpdate.StatusIdle
                 anchors {
                     left: parent.left
                     right: parent.right
