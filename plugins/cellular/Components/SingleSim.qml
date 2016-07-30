@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 Canonical Ltd
+ * Copyright (C) 2014-2016 Canonical Ltd
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as
@@ -19,12 +19,14 @@
 */
 import QtQuick 2.4
 import SystemSettings 1.0
+import Ubuntu.Connectivity 1.0
+import SystemSettings.ListItems 1.0 as SettingsListItems
 import Ubuntu.Components 1.3
-import Ubuntu.Components.ListItems 1.3 as ListItem
 
 Column {
 
     objectName: "singleSim"
+    id: singlesim
 
     property var sim
 
@@ -32,58 +34,91 @@ Column {
         @prevOnlineModem path to modem that was online before this event */
     signal umtsModemChanged (var sim, string prevOnlineModem);
 
-    ListItem.Standard {
+    property var currentSim
+    Component.onCompleted: {
+        if (sortedModems.count === 1)
+        {
+            currentSim = sortedModems.get(0).Sim
+            Connectivity.simForMobileData = currentSim
+        }
+        if (sortedModems.count === 2 &&
+                (sortedModems.get(0).Sim === null ||
+                 sortedModems.get(1).Sim === null))
+        {
+            // Dual-SIM phone with only one sim present
+            var sim = sortedModems.get(0).Sim
+            if (sim === null)
+            {
+                sim = sortedModems.get(1).Sim
+            }
+            if (sim !== null)
+            {
+                currentSim = sim
+                Connectivity.simForMobileData = sim
+            }
+        }
+    }
+    SortFilterModel {
+        id: sortedModems
+        model: Connectivity.modems
+        sort.property: "Index"
+        sort.order: Qt.AscendingOrder
+    }
+    SettingsListItems.Standard {
         id: selector
         text: i18n.tr("Cellular data:")
-        control: Switch {
-            id: dataControl
-            objectName: 'data'
-            property bool serverChecked: sim.connMan.powered
-            onServerCheckedChanged: checked = serverChecked
-            Component.onCompleted: checked = serverChecked
-            onTriggered: sim.connMan.powered = checked
+        Switch {
+            id: dataSwitch
+            objectName: "data"
+            checked: Connectivity.mobileDataEnabled
+            enabled: singlesim.currentSim !== null
+            onTriggered: {
+                Connectivity.mobileDataEnabled = checked
+                /*
+                 * We do this binding here to workaround bug:
+                 * https://bugs.launchpad.net/ubuntu/+source/ubuntu-ui-toolkit/+bug/1494387
+                 *
+                 * The bug causes the checked binding to be overridden if plain onTriggered is used.
+                 */
+                checked = Qt.binding(function() {
+                    return Connectivity.mobileDataEnabled
+                })
+            }
         }
     }
 
-    ListItem.Standard {
+    SettingsListItems.Standard {
         id: dataRoamingItem
         text: i18n.tr("Data roaming")
-        enabled: sim.connMan.powered
-        control: Switch {
-            id: dataRoamingControl
+        Switch {
+            id: roaming
             objectName: "roaming"
-            property bool serverChecked: sim.connMan.roamingAllowed
-            onServerCheckedChanged: checked = serverChecked
-            Component.onCompleted: checked = serverChecked
-            onTriggered: sim.connMan.roamingAllowed = checked
+            enabled: singlesim.currentSim !== null && dataSwitch.checked
+            checked: singlesim.currentSim.DataRoamingEnabled
+            function trigger() {
+                singlesim.currentSim.DataRoamingEnabled = !checked
+            }
         }
     }
 
-    ListItem.Standard {
+    SettingsListItems.StandardProgression{
         text: i18n.tr("Data usage statistics")
-        progression: true
         visible: showAllUI
     }
 
-    ListItem.Divider {
-        visible: radio.visible
+    SettingsListItems.SingleValueProgression {
+        text: i18n.tr("Carrier & APN");
+        id: chooseCarrier
+        objectName: "carrierApnEntry"
+        value: sim.netReg.name || ""
+        onClicked: pageStack.push(Qt.resolvedUrl("../PageCarrierAndApn.qml"), {
+            sim: sim
+        })
     }
 
     RadioSingleSim {
         id: radio
         anchors { left: parent.left; right: parent.right }
         visible: radio.enabled
-    }
-
-    ListItem.Divider {}
-
-    ListItem.SingleValue {
-        text: i18n.tr("Carrier");
-        id: chooseCarrier
-        objectName: "carrierApnEntry"
-        progression: enabled
-        onClicked: pageStack.push(Qt.resolvedUrl("../PageCarrierAndApn.qml"), {
-            sim: sim
-        })
     }
 }

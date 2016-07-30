@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 Canonical Ltd.
+ * Copyright 2013-2016 Canonical Ltd.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,8 +16,8 @@
 
 import QtQuick 2.4
 import SystemSettings 1.0
+import SystemSettings.ListItems 1.0 as SettingsListItems
 import Ubuntu.Components 1.3
-import Ubuntu.Components.ListItems 1.3 as ListItem
 import Ubuntu.SystemSettings.Wifi 1.0
 import QMenuModel 0.1
 
@@ -54,9 +54,8 @@ ItemPage {
                 duration: UbuntuAnimation.SnapDuration
             }
         }
-        delegate: ListItem.Standard {
+        delegate: SettingsListItems.StandardProgression {
             text: name
-            progression: true
             onClicked: {
                 pageStack.push(Qt.resolvedUrl("NetworkDetails.qml"),
                 {networkName : name, password : password, lastUsed : lastUsed,

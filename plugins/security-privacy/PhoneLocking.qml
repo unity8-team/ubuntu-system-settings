@@ -1,7 +1,7 @@
 /*
  * This file is part of system-settings
  *
- * Copyright (C) 2013 Canonical Ltd.
+ * Copyright (C) 2013-2016 Canonical Ltd.
  *
  * Contact: Iain Lane <iain.lane@canonical.com>
  *
@@ -21,8 +21,9 @@
 import GSettings 1.0
 import QtQuick 2.4
 import SystemSettings 1.0
+import SystemSettings.ListItems 1.0 as SettingsListItems
 import Ubuntu.Components 1.3
-import Ubuntu.Components.ListItems 1.3 as ListItem
+import Ubuntu.Components.ListItems 1.3 as ListItems
 import Ubuntu.SystemSettings.SecurityPrivacy 1.0
 
 ItemPage {
@@ -31,7 +32,7 @@ ItemPage {
     title: i18n.tr("Locking and unlocking")
 
     property bool usePowerd
-    property variant powerSettings
+    property var powerSettings
 
     UbuntuSecurityPrivacyPanel {
         id: securityPrivacy
@@ -52,14 +53,17 @@ ItemPage {
             anchors.left: parent.left
             anchors.right: parent.right
 
-            ListItem.SingleValue {
+            SettingsListItems.SingleValueProgression {
                 property string swipe: i18n.ctr("Unlock with swipe", "None")
                 property string passcode: i18n.tr("Passcode")
                 property string passphrase: i18n.tr("Passphrase")
+                property string fingerprint: i18n.tr("Fingerprint")
 
                 objectName: "lockSecurity"
                 text: i18n.tr("Lock security")
                 value: {
+                    if (securityPrivacy.enableFingerprintIdentification)
+                        return fingerprint
                     switch (securityPrivacy.securityType) {
                         case UbuntuSecurityPrivacyPanel.Swipe:
                             return swipe
@@ -67,13 +71,14 @@ ItemPage {
                             return passcode
                         case UbuntuSecurityPrivacyPanel.Passphrase:
                             return passphrase
+                        case UbuntuSecurityPrivacyPanel.Fingerprint:
+                            return fingerprint
                     }
                 }
-                progression: true
                 onClicked: pageStack.push(Qt.resolvedUrl("LockSecurity.qml"))
             }
 
-            ListItem.SingleValue {
+            SettingsListItems.SingleValueProgression {
                 objectName: "lockTimeout"
                 property bool lockOnSuspend: securityPrivacy.securityType !==
                                                 UbuntuSecurityPrivacyPanel.Swipe
@@ -104,15 +109,14 @@ ItemPage {
                                     i18n.tr("Never")
                     }
                 }
-                progression: true
                 onClicked:
                     pageStack.push(
                         Qt.resolvedUrl("../battery/SleepValues.qml"),
                         { title: text, lockOnSuspend: lockOnSuspend } )
             }
 
-            ListItem.Standard {
-                control: CheckBox {
+            SettingsListItems.Standard {
+                CheckBox {
                     checked: true
                 }
                 text: i18n.tr("Sleep locks immediately")
@@ -123,9 +127,9 @@ ItemPage {
                 text: i18n.tr("When locked, allow:")
             }
 
-            ListItem.Standard {
+            SettingsListItems.Standard {
                 text: i18n.tr("Launcher")
-                control: CheckBox {
+                CheckBox {
                     id: launcherCheck
                     enabled: securityPrivacy.securityType !== UbuntuSecurityPrivacyPanel.Swipe
 
@@ -136,9 +140,9 @@ ItemPage {
                 }
             }
 
-            ListItem.Standard {
+            SettingsListItems.Standard {
                 text: i18n.tr("Notifications and quick settings")
-                control: CheckBox {
+                 CheckBox {
                     id: indicatorsCheck
                     enabled: securityPrivacy.securityType !== UbuntuSecurityPrivacyPanel.Swipe
 
@@ -149,7 +153,7 @@ ItemPage {
                 }
             }
 
-            ListItem.Caption {
+            ListItems.Caption {
                 text: securityPrivacy.securityType === UbuntuSecurityPrivacyPanel.Swipe ?
                       i18n.tr("Turn on lock security to restrict access when the device is locked.") :
                       i18n.tr("Other apps and functions will prompt you to unlock.")

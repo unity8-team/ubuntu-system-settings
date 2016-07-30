@@ -1,7 +1,7 @@
 
 # -*- Mode: Python; coding: utf-8; indent-tabs-mode: nil; tab-width: 4 -*-
 #
-# Copyright (C) 2014, 2015 Canonical Ltd.
+# Copyright (C) 2014-2016 Canonical Ltd.
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU Lesser General Public License as published by
@@ -15,12 +15,12 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-from time import sleep
 from autopilot import introspection
 from autopilot.exceptions import StateNotFoundError
 from ubuntu_system_settings.utils.i18n import ugettext as _
 
 import logging
+from time import sleep
 import autopilot.logging
 import ubuntuuitoolkit
 import ubuntu_system_settings.utils as utils
@@ -155,6 +155,13 @@ class SystemSettingsMainWindow(ubuntuuitoolkit.MainView):
         self.scroll_to(obj)
         self.pointing_device.click_object(obj)
 
+    def click_header_action(self, action):
+        """Click the action 'action' on the header"""
+        main_view = self.get_root_instance().select_single(
+            objectName='systemSettingsMainView')
+        header = main_view.select_single('AppHeader')
+        header.click_action_button(action)
+
     @property
     def system_settings_page(self):
         return self.select_single(objectName='systemSettingsPage')
@@ -227,9 +234,6 @@ class CellularPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
     @autopilot.logging.log_action(logger.debug)
     def disable_data(self):
         self._set_data(False)
-
-    def disable_datas(self):
-        self.select_sim_for_data('off')
 
     @autopilot.logging.log_action(logger.debug)
     def _set_data(self, data):
@@ -1824,7 +1828,7 @@ class PreviousNetworks(
 
     @autopilot.logging.log_action(logger.debug)
     def _select_network(self, name):
-        net = self.select_single('Standard', text=name)
+        net = self.select_single('StandardProgression', text=name)
         self.pointing_device.click_object(net)
 
 

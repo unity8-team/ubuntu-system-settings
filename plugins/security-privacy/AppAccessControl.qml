@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 Canonical Ltd
+ * Copyright (C) 2013-2016 Canonical Ltd
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as
@@ -18,9 +18,10 @@
  */
 
 import QtQuick 2.4
-import Ubuntu.Components 1.3
-import Ubuntu.Components.ListItems 1.3 as ListItem
 import SystemSettings 1.0
+import SystemSettings.ListItems 1.0 as SettingsListItems
+import Ubuntu.Components 1.3
+import Ubuntu.Components.ListItems 1.3 as ListItems
 
 ItemPage {
     id: root
@@ -43,17 +44,17 @@ ItemPage {
             anchors.left: parent.left
             anchors.right: parent.right
 
-            ListItem.Caption {
+            ListItems.Caption {
                 id: captionLabel
             }
 
             Repeater {
                 id: repeater
 
-                ListItem.Standard {
+                SettingsListItems.Icon {
                     text: model.applicationName
                     iconSource: model.iconName
-                    control: Switch {
+                    Switch {
                         id: welcomeStatsSwitch
                         checked: model.granted
                         onClicked: root.model.setEnabled(index, !model.granted)

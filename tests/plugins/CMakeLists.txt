@@ -16,3 +16,5 @@ add_qml_test(mouse mouse
              IMPORT_PATHS
              ${CMAKE_SOURCE_DIR}/tests/plugins/mouse
              ${qmltest_DEFAULT_IMPORT_PATHS})
+
+add_subdirectory(notifications)

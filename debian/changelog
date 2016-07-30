@@ -1,3 +1,71 @@
+ubuntu-system-settings (0.4+16.10.20160722.1-0ubuntu1) yakkety; urgency=medium
+
+  [ Ken VanDine ]
+  * Added missing depends on qtdeclarative5-ubuntu-history0.1, qml-
+    module-qtcontacts and qtdeclarative5-ubuntu-keyboard-extensions0.1
+  * Ported to use Slots layout and updated visuals (LP: #1596529)
+
+  [ Ken VanDine, jonas-drange ]
+  * new module SystemSettings.ListItems
+
+  [ Olivier Tilloy ]
+  * Fix unit tests when run under an sbuild chroot. (LP: #1592475)
+
+  [ jonas-drange ]
+  * Do runtime check of address list size.
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Fri, 22 Jul 2016 14:39:12 +0000
+
+ubuntu-system-settings (0.4+16.10.20160708-0ubuntu1) yakkety; urgency=medium
+
+  [ Arthur Mello ]
+  * Implement extended Notifications panel using Gsettings to store
+    notifications settings for each app
+  * Skip tests on arm64 as it is known to be flaky with current
+    configuration
+
+ -- Arthur Renato Mello <arthur.mello@canonical.com>  Fri, 08 Jul 2016 22:19:17 +0000
+
+ubuntu-system-settings (0.4+16.10.20160624-0ubuntu1) yakkety; urgency=medium
+
+  [ Antti Kaijanmäki ]
+  * use Connectivity API for cellular data and roaming control. (LP:
+    #1373463)
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Fri, 24 Jun 2016 13:42:47 +0000
+
+ubuntu-system-settings (0.4+16.10.20160619-0ubuntu1) yakkety; urgency=medium
+
+  [ jonas-drange ]
+  * expose fingerprint ID panel and the Fingerprint lock setting (LP:
+    #1547040)
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Sun, 19 Jun 2016 02:48:24 +0000
+
+ubuntu-system-settings (0.4+16.10.20160609-0ubuntu1) yakkety; urgency=medium
+
+  * Fix pin code request is rejected because device is not valid (LP:
+    #1539158)
+
+ -- Konrad Zapałowicz <konrad.zapalowicz@canonical.com>  Thu, 09 Jun 2016 11:16:36 +0000
+
+ubuntu-system-settings (0.4+16.10.20160606-0ubuntu1) yakkety; urgency=medium
+
+  [ Michael Terry ]
+  * Update some button colors to the new theme style (LP: #1581047)
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Mon, 06 Jun 2016 22:02:47 +0000
+
+ubuntu-system-settings (0.4+16.10.20160525-0ubuntu1) yakkety; urgency=medium
+
+  [ Michael Terry ]
+  * Bump version number for change in TimeDate plugin API
+
+  [ CI Train Bot ]
+  * No-change rebuild.
+
+ -- Michael Terry <michael.terry@canonical.com>  Wed, 25 May 2016 06:02:08 +0000
+
 ubuntu-system-settings (0.3+16.10.20160523-0ubuntu1) yakkety; urgency=medium
 
   * Catch connection errors asynchronously
