@@ -8,7 +8,6 @@ set(QML_SOURCES
     ImageUpdatePrompt.qml
     NotAuthenticatedNotification.qml
     PageComponent.qml
-    Updates.qml
     UpdateDelegate.qml
 )
 
@@ -83,5 +82,3 @@ SOURCES ${QML_SOURCES_NOTIFICATION})
 
 install(FILES update-notification.settings DESTINATION ${PLUGIN_MANIFEST_DIR})
 install(FILES ${QML_SOURCES_NOTIFICATION} DESTINATION ${PLUGIN_QML_DIR}/update-notification)
-
-# add_subdirectory(plugin)

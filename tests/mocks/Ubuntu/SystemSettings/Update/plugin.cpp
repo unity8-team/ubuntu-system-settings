@@ -19,6 +19,7 @@
 #include "plugin.h"
 
 #include "update.h"
+#include "utils.h"
 
 #include "MockUpdateModel.h"
 #include "MockSystemImage.h"
@@ -48,4 +49,12 @@ void BackendPlugin::registerTypes(const char *uri)
     qmlRegisterSingletonType<MockSystemImage>(uri, 1, 0, "SystemImage", siSingletonProvider);
     qRegisterMetaType<MockUpdateModel*>("UpdateModel*");
     qRegisterMetaType<MockUpdateModelFilter*>("UpdateModelFilter*");
+}
+
+void BackendPlugin::initializeEngine(QQmlEngine *engine, const char *uri)
+{
+    QQmlExtensionPlugin::initializeEngine(engine, uri);
+    QQmlContext* context = engine->rootContext();
+    auto utils = new SystemSettings::Utilities;
+    context->setContextProperty("Utilities", utils);
 }

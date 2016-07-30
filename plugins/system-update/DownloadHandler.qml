@@ -120,7 +120,6 @@ Item {
             "revision": click.revision,
         };
         var singleDownloadObj = sdl.createObject(root, {
-            // "url": click.downloadUrl,
             "autoStart": true,
             "hash": click.downloadHash,
             "algorithm": "sha512",

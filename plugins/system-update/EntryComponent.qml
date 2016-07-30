@@ -43,7 +43,7 @@ ListItem {
             height: units.gu(5)
         }
         Label {
-            text: root.updatesAvailable > 0 ? root.updatesAvailable : ""
+            text: updatesAvailable > 0 ? updatesAvailable : ""
         }
         ProgressionSlot {}
     }

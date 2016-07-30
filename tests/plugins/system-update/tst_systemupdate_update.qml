@@ -69,7 +69,7 @@ Item {
                     button: { text: i18n.tr("Download"), visibility: true, state: true, signal: "download", },
                     progressbar: { visibility: false, progress: 0, },
                     error: { text: "", visiblity: false, },
-                    targetStatusLabelText: "1 KB",
+                    targetStatusLabelText: "1.0 kB",
                     targetDownloadLabelText: "",
                 },
                 {
@@ -81,7 +81,7 @@ Item {
                     button: { text: i18n.tr("Update"), visibility: true, state: true, signal: "install", },
                     progressbar: { visibility: false, progress: 0, },
                     error: { text: "", visiblity: false, },
-                    targetStatusLabelText: "1 KB",
+                    targetStatusLabelText: "1.0 kB",
                     targetDownloadLabelText: "",
                 },
 
@@ -95,7 +95,7 @@ Item {
                     button: { text: i18n.tr("Pause"), visibility: true, state: true, signal: "pause", },
                     progressbar: { visibility: false, progress: 50, },
                     error: { text: "", visiblity: false, },
-                    targetStatusLabelText: i18n.tr("%1 of %2").arg("500 Bytes").arg("1 KB"),
+                    targetStatusLabelText: i18n.tr("%1 of %2").arg("500 bytes").arg("1.0 kB"),
                     targetDownloadLabelText: "",
                 },
                 {
@@ -107,7 +107,7 @@ Item {
                     button: { text: i18n.tr("Pause"), visibility: true, state: true, signal: "pause", },
                     progressbar: { visibility: false, progress: 50, },
                     error: { text: "", visiblity: false, },
-                    targetStatusLabelText: i18n.tr("%1 of %2").arg("500 Bytes").arg("1 KB"),
+                    targetStatusLabelText: i18n.tr("%1 of %2").arg("500 bytes").arg("1.0 kB"),
                     targetDownloadLabelText: "",
                 },
 
@@ -121,7 +121,7 @@ Item {
                     button: { text: i18n.tr("Pause"), visibility: true, state: true, signal: "pause", },
                     progressbar: { visibility: true, progress: 50, },
                     error: { text: "", visiblity: false, },
-                    targetStatusLabelText: i18n.tr("%1 of %2").arg("500 Bytes").arg("1 KB"),
+                    targetStatusLabelText: i18n.tr("%1 of %2").arg("500 bytes").arg("1.0 kB"),
                     targetDownloadLabelText: i18n.tr("Downloading"),
                 },
                 {
@@ -133,7 +133,7 @@ Item {
                     button: { text: i18n.tr("Pause"), visibility: true, state: true, signal: "pause", },
                     progressbar: { visibility: true, progress: 50, },
                     error: { text: "", visiblity: false, },
-                    targetStatusLabelText: i18n.tr("%1 of %2").arg("500 Bytes").arg("1 KB"),
+                    targetStatusLabelText: i18n.tr("%1 of %2").arg("500 bytes").arg("1.0 kB"),
                     targetDownloadLabelText: i18n.tr("Downloading"),
                 },
 
@@ -249,7 +249,7 @@ Item {
                     button: { text: i18n.tr("Resume"), visibility: true, state: true, signal: "resume", },
                     progressbar: { visibility: true, progress: 100, },
                     error: { text: "", visiblity: false, },
-                    targetStatusLabelText: i18n.tr("%1 of %2").arg("1 KB").arg("1 KB"),
+                    targetStatusLabelText: i18n.tr("%1 of %2").arg("1.0 kB").arg("1.0 kB"),
                     targetDownloadLabelText: i18n.tr("Paused"),
                 },
                 {
@@ -261,7 +261,7 @@ Item {
                     button: { text: i18n.tr("Resume"), visibility: true, state: true, signal: "resume", },
                     progressbar: { visibility: true, progress: 50, },
                     error: { text: "", visiblity: false, },
-                    targetStatusLabelText: i18n.tr("%1 of %2").arg("500 Bytes").arg("1 KB"),
+                    targetStatusLabelText: i18n.tr("%1 of %2").arg("500 bytes").arg("1.0 kB"),
                     targetDownloadLabelText: i18n.tr("Paused"),
                 },
                 {
@@ -272,7 +272,7 @@ Item {
                     button: { text: i18n.tr("Resume"), visibility: true, state: true, signal: "resume", },
                     progressbar: { visibility: false, progress: 50, },
                     error: { text: "", visiblity: false, },
-                    targetStatusLabelText: i18n.tr("%1 of %2").arg("500 Bytes").arg("1 KB"),
+                    targetStatusLabelText: i18n.tr("%1 of %2").arg("500 bytes").arg("1.0 kB"),
                     targetDownloadLabelText: "",
                 },
 
@@ -338,7 +338,7 @@ Item {
                     button: { text: i18n.tr("Pause"), visibility: true, state: true, signal: "pause" },
                     progressbar: { visibility: true, progress: 150, },
                     error: { text: "", visiblity: false, },
-                    targetStatusLabelText: "1 KB",
+                    targetStatusLabelText: "1.0 kB",
                     targetDownloadLabelText: i18n.tr("Downloading"),
                 },
             ]

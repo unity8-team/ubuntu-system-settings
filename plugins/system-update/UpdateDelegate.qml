@@ -31,8 +31,8 @@ Column {
 
     spacing: units.gu(2)
 
-    property int updateState // This is an SystemUpdate::UpdateState
-    property int kind // This is an SystemUpdate::UpdateKind
+    property int updateState // This is an Update::State
+    property int kind // This is an Update::Kind
     property real size
     property string version
     property string downloadId
@@ -46,21 +46,6 @@ Column {
     property alias progress: progressBar.value
 
     height: childrenRect.height
-
-    // By Aliceljm [1].
-    // [1] http://stackoverflow.com/a/18650828/538866
-    property var formatter: function formatBytes(bytes, decimals) {
-        if (typeof Utilities !== "undefined") {
-            return Utilities.formatSize(bytes);
-        }
-        if (typeof decimals === 'undefined') decimals = 0;
-        if(bytes == 0) return '0 Byte';
-        var k = 1000; // or 1024 for binary
-        var dm = decimals + 1 || 3;
-        var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
-        var i = Math.floor(Math.log(bytes) / Math.log(k));
-        return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + " " + sizes[i];
-    }
 
     signal retry()
     signal download()
@@ -339,14 +324,14 @@ Column {
                     text: {
                         switch (updateState) {
                         case Update.StateAvailable:
-                            return formatter(size);
+                            return Utilities.formatSize(size);
 
                         case Update.StateDownloading:
                         case Update.StateDownloadingAutomatically:
                         case Update.StateDownloadPaused:
                         case Update.StateAutomaticDownloadPaused:
-                            var down = formatter((size / 100) * progress);
-                            var left = formatter(size);
+                            var down = Utilities.formatSize((size / 100) * progress);
+                            var left = Utilities.formatSize(size);
                             if (progress > 100) {
                                 return left;
                             } else {
