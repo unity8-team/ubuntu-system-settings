@@ -478,9 +478,25 @@ void ManagerImpl::requestMetadata()
 
 void ManagerImpl::parseMetadata(const QJsonArray &array)
 {
+    auto now = QDateTime::currentDateTimeUtc();
     for (int i = 0; i < array.size(); i++) {
         auto object = array.at(i).toObject();
         auto identifier = object["name"].toString();
+        auto revision = object["revision"].toInt();
+
+        // Check if we already have it's metadata.
+        auto dbUpdate = m_model->get(identifier, revision);
+        if (dbUpdate) {
+            /* If this update is less than 24 hours old (to us), and it has a
+            token, we ignore it. */
+            if (dbUpdate->createdAt().secsTo(now) > 86400
+                && !dbUpdate->token().isEmpty()) {
+                m_candidates.remove(identifier);
+                setState(State::TokenComplete);
+                continue;
+            }
+        }
+
         auto version = object["version"].toString();
         auto icon_url = object["icon_url"].toString();
         auto url = object["download_url"].toString();
@@ -488,7 +504,7 @@ void ManagerImpl::parseMetadata(const QJsonArray &array)
         auto changelog = object["changelog"].toString();
         auto size = object["binary_filesize"].toInt();
         auto title = object["title"].toString();
-        auto revision = object["revision"].toInt();
+
         if (m_candidates.contains(identifier)) {
             auto update = m_candidates.value(identifier);
             update->setRemoteVersion(version);
@@ -508,15 +524,13 @@ void ManagerImpl::parseMetadata(const QJsonArray &array)
                     << "-p" << "install-local" << "$file";
                 update->setCommand(command);
 
-                // Ask for a token if there's none.
-                if (update->token().isEmpty()) {
-                    QString signedHeaderUrl(m_sessionToken->signUrl(
-                        update->downloadUrl(), QStringLiteral("HEAD"), true
-                    ));
-                    auto dl = m_tokenDownloadFactory->create(m_nam, update);
-                    setup(dl);
-                    dl->download(signedHeaderUrl);
-                }
+                // Download a token.
+                QString signedHeaderUrl(m_sessionToken->signUrl(
+                    update->downloadUrl(), QStringLiteral("HEAD"), true
+                ));
+                auto dl = m_tokenDownloadFactory->create(m_nam, update);
+                setup(dl);
+                dl->download(signedHeaderUrl);
             } else {
                 // Update not required, let's remove it.
                 m_candidates.remove(update->identifier());
