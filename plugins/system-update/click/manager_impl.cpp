@@ -483,14 +483,17 @@ void ManagerImpl::parseMetadata(const QJsonArray &array)
         auto object = array.at(i).toObject();
         auto identifier = object["name"].toString();
         auto revision = object["revision"].toInt();
-
+        qWarning() << "parsing metadata for.." << identifier << revision;
         // Check if we already have it's metadata.
         auto dbUpdate = m_model->get(identifier, revision);
         if (dbUpdate) {
+            qWarning() << "had corresponding dbupdate for" << identifier << revision;
             /* If this update is less than 24 hours old (to us), and it has a
             token, we ignore it. */
-            if (dbUpdate->createdAt().secsTo(now) > 86400
+            if (dbUpdate->createdAt().secsTo(now) <= 86400
                 && !dbUpdate->token().isEmpty()) {
+                qWarning() << "had most likely a < 24 hour old token for" << identifier << revision
+                           << "so DONE";
                 m_candidates.remove(identifier);
                 setState(State::TokenComplete);
                 continue;
