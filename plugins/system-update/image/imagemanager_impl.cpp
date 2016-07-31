@@ -18,7 +18,7 @@
  */
 
 #include "imagemanager_impl.h"
-
+        #include <QDebug>
 namespace UpdatePlugin
 {
 namespace Image
@@ -99,6 +99,7 @@ void ManagerImpl::handleUpdateAvailableStatus(const bool isAvailable,
 
 void ManagerImpl::handleDownloadStarted()
 {
+    qWarning() << Q_FUNC_INFO;
     m_model->setProgress(ubuntuId, m_si->targetBuildNumber(), 0);
 }
 
@@ -116,6 +117,7 @@ void ManagerImpl::handleUpdatePaused(const int &percentage)
 
 void ManagerImpl::handleUpdateDownloaded()
 {
+    qWarning() << Q_FUNC_INFO;
     m_model->setDownloaded(ubuntuId, m_si->targetBuildNumber());
 }
 

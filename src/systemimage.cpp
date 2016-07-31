@@ -129,6 +129,7 @@ void QSystemImage::checkForUpdate() {
 }
 
 void QSystemImage::downloadUpdate() {
+    qWarning() << Q_FUNC_INFO;
     m_iface.asyncCall("DownloadUpdate");
 }
 
