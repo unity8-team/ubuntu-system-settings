@@ -29,8 +29,8 @@ SSOImpl::SSOImpl(QObject *parent)
 {
     m_service->setParent(this);
 
-    connect(m_service, SIGNAL(credentialsFound(const UbuntuOne::Token&)),
-            this, SLOT(handleCredentialsFound(const UbuntuOne::Token&)));
+    connect(m_service, SIGNAL(credentialsFound(const Token&)),
+            this, SLOT(handleCredentialsFound(const Token&)));
     connect(m_service, SIGNAL(credentialsNotFound()),
             this, SIGNAL(credentialsNotFound()));
     connect(m_service, SIGNAL(credentialsDeleted()),
@@ -47,7 +47,7 @@ void SSOImpl::invalidateCredentials()
     m_service->invalidateCredentials();
 }
 
-void SSOImpl::handleCredentialsFound(const UbuntuOne::Token &token)
+void SSOImpl::handleCredentialsFound(const Token &token)
 {
     SessionTokenImpl sessionToken(token);
     Q_EMIT credentialsFound(sessionToken);

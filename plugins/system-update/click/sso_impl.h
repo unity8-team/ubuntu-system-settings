@@ -27,6 +27,10 @@
 #include <QObject>
 #include <QString>
 
+/* Having the full namespaced name in a slot seems to confuse
+Qt at runtime, so we need this declaration. */
+using namespace UbuntuOne;
+
 namespace UpdatePlugin
 {
 namespace Click
@@ -40,7 +44,7 @@ public:
     virtual void requestCredentials() override;
     virtual void invalidateCredentials() override;
 private Q_SLOTS:
-    void handleCredentialsFound(const UbuntuOne::Token &token);
+    void handleCredentialsFound(const Token &token);
 private:
     UbuntuOne::SSOService *m_service;
 };
