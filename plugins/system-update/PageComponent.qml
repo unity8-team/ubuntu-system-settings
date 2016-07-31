@@ -215,7 +215,10 @@ ItemPage {
                         name: title
 
                         onRetry: SystemImage.downloadUpdate();
-                        onDownload: SystemImage.downloadUpdate();
+                        onDownload: {
+                            SystemImage.downloadUpdate();
+                            console.warn('si downloadUpdate from qml');
+                        }
                         onPause: SystemImage.pauseDownload();
                         onInstall: {
                             var popup = PopupUtils.open(
