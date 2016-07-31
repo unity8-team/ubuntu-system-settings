@@ -35,11 +35,9 @@ public:
         downloadUrl = update->downloadUrl();
     }
 
-    virtual void download() override {}
-
-    virtual void setSessionToken(Click::SessionToken &sessionToken) override
+    virtual void download(const QString &url) override
     {
-        Q_UNUSED(sessionToken)
+        Q_UNUSED(url)
     }
 
     virtual Click::Client* client() const override

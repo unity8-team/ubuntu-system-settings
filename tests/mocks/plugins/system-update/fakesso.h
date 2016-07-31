@@ -40,7 +40,7 @@ public:
         invalidateCredentialsCalled = true;
     }
 
-    void mockCredentialsFound(const Click::SessionToken &token)
+    void mockCredentialsFound(Click::SessionToken *token)
     {
         Q_EMIT credentialsFound(token);
     }

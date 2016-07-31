@@ -31,7 +31,7 @@ class SessionTokenImpl : public SessionToken
 {
 public:
     // Creates an invalid SessionToken.
-    explicit SessionTokenImpl() {};
+    explicit SessionTokenImpl();
 
     // Creates a SessionToken using a UbuntuOne Token.
     explicit SessionTokenImpl(const UbuntuOne::Token &token);

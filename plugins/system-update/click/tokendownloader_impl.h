@@ -21,7 +21,6 @@
 
 #include "click/client.h"
 #include "click/tokendownloader.h"
-#include "click/sessiontoken_impl.h"
 
 namespace UpdatePlugin
 {
@@ -35,16 +34,13 @@ public:
                                  QSharedPointer<Update> update,
                                  QObject *parent = nullptr);
     virtual ~TokenDownloaderImpl();
-    virtual void download() override;
-    virtual void setSessionToken(SessionToken &sessionToken) override;
+    virtual void download(const QString &url) override;
     virtual Client* client() const override;
 public Q_SLOTS:
     virtual void cancel() override;
 protected Q_SLOTS:
     void handleSuccess(const QString &token);
     void handleFailure();
-private:
-    SessionToken m_sessionToken;
 };
 } // Click
 } // UpdatePlugin

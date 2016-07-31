@@ -31,6 +31,7 @@
 
 #include "network/accessmanager.h"
 
+#include <memory>
 #include <QMap>
 #include <QJsonArray>
 #include <QSharedPointer>
@@ -69,7 +70,7 @@ private Q_SLOTS:
     void handleManifest(const QJsonArray &manifest);
     void handleTokenDownload(QSharedPointer<Update> update);
     void handleTokenDownloadFailure(QSharedPointer<Update> update);
-    void handleCredentials(const SessionToken &token);
+    void handleCredentials(SessionToken *token);
     void handleCredentialsAbsence();
     void handleCredentialsFailed();
     void requestMetadata();
@@ -109,7 +110,7 @@ private:
     SSO *m_sso;
     TokenDownloaderFactory *m_tokenDownloadFactory;
     QMap<QString, QSharedPointer<Update>> m_candidates;
-    SessionToken m_sessionToken;
+    std::unique_ptr<SessionToken> m_sessionToken;
     bool m_authenticated = true;
     State m_state = State::Idle;
     QMap<State, QList<State> > m_transitions;

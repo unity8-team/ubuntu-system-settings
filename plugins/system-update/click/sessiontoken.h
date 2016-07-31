@@ -20,6 +20,7 @@
 #define CLICK_SESSIONTOKEN_H
 
 #include <QString>
+                        #include <QDebug>
 
 namespace UpdatePlugin
 {
@@ -30,10 +31,10 @@ class SessionToken
 public:
     explicit SessionToken() {};
     virtual ~SessionToken() {};
-    virtual bool isValid() const { return false; };
+    virtual bool isValid() const = 0;
     virtual QString signUrl(const QString url,
                             const QString method,
-                            bool asQuery = false) const { return QString(); };
+                            bool asQuery = false) const = 0;
 };
 } // Click
 } // UpdatePlugin

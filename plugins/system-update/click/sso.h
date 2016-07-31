@@ -43,8 +43,13 @@ public:
     virtual void invalidateCredentials() = 0;
 
 Q_SIGNALS:
-    // This signal is emitted when credentials are found..
-    void credentialsFound(const SessionToken &token);
+    /* This signal is emitted when credentials are found.
+     *
+     * Note: It is the responsibility of the receiver to delete this token when
+     * done with it, as the token will not be deleted by SSO, nor used accessed
+     * further.
+     */
+    void credentialsFound(SessionToken *token);
 
     // This signal is emitted when credentials are not found.
     void credentialsNotFound();

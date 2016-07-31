@@ -46,11 +46,6 @@ TokenDownloaderImpl::~TokenDownloaderImpl()
     cancel();
 }
 
-void TokenDownloaderImpl::setSessionToken(SessionToken &sessionToken)
-{
-    m_sessionToken = sessionToken;
-}
-
 Client* TokenDownloaderImpl::client() const
 {
     return m_client;
@@ -61,29 +56,10 @@ void TokenDownloaderImpl::cancel()
     m_client->cancel();
 }
 
-void TokenDownloaderImpl::download()
+void TokenDownloaderImpl::download(const QString &url)
 {
-    if (!m_sessionToken.isValid() && !Helpers::isIgnoringCredentials()) {
-        Q_EMIT credentialError();
-        Q_EMIT downloadFailed(m_update);
-        return;
-    }
-
-    QString authHeader;
-    if (!Helpers::isIgnoringCredentials()) {
-        authHeader = m_sessionToken.signUrl(
-            m_update->downloadUrl(), QStringLiteral("HEAD"), true
-        );
-
-        if (authHeader.isEmpty()) {
-            // Already logged.
-            downloadFailed(m_update);
-            return;
-        }
-    }
-
     QUrl query(m_update->downloadUrl());
-    query.setQuery(authHeader);
+    query.setQuery(url);
     m_client->requestToken(query);
 }
 

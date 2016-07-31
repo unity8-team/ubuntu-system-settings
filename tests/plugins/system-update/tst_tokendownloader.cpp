@@ -94,7 +94,7 @@ private slots:
     {
         QString targetUrl("http://example.org");
         m_update->setDownloadUrl(targetUrl);
-        m_instance->download();
+        m_instance->download("url");
         QCOMPARE(m_mockclient->requestedUrl.toString(), targetUrl);
     }
 private:

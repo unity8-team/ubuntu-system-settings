@@ -77,6 +77,7 @@ ManagerImpl::ManagerImpl(UpdateModel *model,
     , m_manifest(manifest)
     , m_sso(sso)
     , m_tokenDownloadFactory(tokenDownloadFactory)
+    , m_sessionToken(new SessionTokenImpl())
 {
     /* Request a manifest.
      *
@@ -108,8 +109,8 @@ ManagerImpl::ManagerImpl(UpdateModel *model,
     connect(m_manifest, &Manifest::requestFailed, this, [this]() {
         setState(State::Complete);
     });
-    connect(m_sso, SIGNAL(credentialsFound(const SessionToken&)),
-            this, SLOT(handleCredentials(const SessionToken&)));
+    connect(m_sso, SIGNAL(credentialsFound(SessionToken*)),
+            this, SLOT(handleCredentials(SessionToken*)));
     connect(m_sso, SIGNAL(credentialsNotFound()),
             this, SLOT(handleCredentialsAbsence()));
     connect(m_sso, SIGNAL(credentialsDeleted()),
@@ -237,7 +238,7 @@ void ManagerImpl::check()
         return;
     }
 
-    if (!m_sessionToken.isValid() && !Helpers::isIgnoringCredentials()) {
+    if (!m_sessionToken->isValid() && !Helpers::isIgnoringCredentials()) {
         qWarning() << Q_FUNC_INFO << "Can't check: invalid session token.";
         m_sso->requestCredentials();
         return;
@@ -253,8 +254,8 @@ void ManagerImpl::retry(const QString &identifier, const uint &revision)
     UDM download. */
     auto update = m_model->get(identifier, revision);
     if (update) {
-        if (m_sessionToken.isValid() && !Helpers::isIgnoringCredentials()) {
-            QString url = m_sessionToken.signUrl(
+        if (m_sessionToken->isValid() && !Helpers::isIgnoringCredentials()) {
+            QString url = m_sessionToken->signUrl(
                 update->downloadUrl(), QStringLiteral("GET"), true
             );
             update->setSignedDownloadUrl(url);
@@ -425,15 +426,17 @@ void ManagerImpl::handleTokenDownloadFailure(QSharedPointer<Update> update)
     setState(State::TokenComplete);
 }
 
-void ManagerImpl::handleCredentials(const SessionToken &token)
+void ManagerImpl::handleCredentials(SessionToken *token)
 {
     qWarning() << Q_FUNC_INFO;
-    m_sessionToken = token;
+    // We'll take ownership of this token.
+    m_sessionToken = std::unique_ptr<SessionToken>(token);
 
-    if (!m_sessionToken.isValid() && !Helpers::isIgnoringCredentials()) {
+    if (!m_sessionToken->isValid() && !Helpers::isIgnoringCredentials()) {
         qWarning() << Q_FUNC_INFO << "Got invalid session token.";
         return;
     }
+    qWarning() << Q_FUNC_INFO << "Got VALID session token.";
 
     setAuthenticated(true);
 
@@ -450,7 +453,7 @@ void ManagerImpl::handleCredentialsAbsence()
 void ManagerImpl::handleCredentialsFailed()
 {
     m_sso->invalidateCredentials();
-    m_sessionToken = SessionToken();
+    m_sessionToken = std::unique_ptr<SessionToken>(new SessionTokenImpl());
 
     // We've invalidated the token, and the user is now not authenticated.
     setAuthenticated(false);
@@ -462,7 +465,7 @@ void ManagerImpl::requestMetadata()
     QString urlApps = Helpers::clickMetadataUrl();
     QString authHeader;
     if (!Helpers::isIgnoringCredentials()) {
-        authHeader = m_sessionToken.signUrl(
+        authHeader = m_sessionToken->signUrl(
             urlApps, QStringLiteral("POST"), true
         );
     }
@@ -505,10 +508,12 @@ void ManagerImpl::parseMetadata(const QJsonArray &array)
 
                 // Ask for a token if there's none.
                 if (update->token().isEmpty()) {
+                    QString signedHeaderUrl(m_sessionToken->signUrl(
+                        update->downloadUrl(), QStringLiteral("HEAD"), true
+                    ));
                     auto dl = m_tokenDownloadFactory->create(m_nam, update);
-                    dl->setSessionToken(m_sessionToken);
                     setup(dl);
-                    dl->download();
+                    dl->download(signedHeaderUrl);
                 }
             } else {
                 // Update not required, let's remove it.

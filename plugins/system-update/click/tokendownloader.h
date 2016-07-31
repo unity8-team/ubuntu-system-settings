@@ -21,7 +21,6 @@
 
 #include "update.h"
 #include "click/client.h"
-#include "click/sessiontoken.h"
 
 #include <QObject>
 #include <QSharedPointer>
@@ -52,11 +51,12 @@ public:
     }
     virtual ~TokenDownloader() {};
 
-    // Downloads a token.
-    virtual void download() = 0;
-
-    // Set the session token.
-    virtual void setSessionToken(SessionToken &sessionToken) = 0;
+    /* Downloads a token.
+     *
+     * URL should be a oauth signed URL, to be used to perform a HEAD request.
+     * For details, see lp:1231422.
+     */
+    virtual void download(const QString &url) = 0;
     virtual Client* client() const = 0;
 public Q_SLOTS:
     // Cancel any ongoing token download.
