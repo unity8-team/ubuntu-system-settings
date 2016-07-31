@@ -383,7 +383,7 @@ void ManagerImpl::completionCheck()
 
 void ManagerImpl::handleTokenDownload(QSharedPointer<Update> update)
 {
-    qWarning() << Q_FUNC_INFO << update-identifier() << update->token();
+    qWarning() << Q_FUNC_INFO << update->identifier() << update->token();
     auto dl = qobject_cast<TokenDownloader*>(QObject::sender());
     dl->disconnect();
 
@@ -408,7 +408,7 @@ void ManagerImpl::handleTokenDownload(QSharedPointer<Update> update)
 
 void ManagerImpl::handleTokenDownloadFailure(QSharedPointer<Update> update)
 {
-    qWarning() << Q_FUNC_INFO << update-identifier();
+    qWarning() << Q_FUNC_INFO << update->identifier();
     auto dl = qobject_cast<TokenDownloader*>(QObject::sender());
 
     // Assume the original update was changed during the download of token.
