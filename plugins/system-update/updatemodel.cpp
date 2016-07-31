@@ -518,7 +518,6 @@ void UpdateModel::cancelUpdate(const QString &id, const uint &rev)
     if (!update.isNull()) {
         update->setState(Update::State::StateAvailable);
         update->setError("");
-        update->setToken("");
         update->setDownloadId("");
         update->setProgress(0);
         m_db->update(update);

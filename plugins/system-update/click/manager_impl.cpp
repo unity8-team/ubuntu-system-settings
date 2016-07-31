@@ -383,6 +383,7 @@ void ManagerImpl::completionCheck()
 
 void ManagerImpl::handleTokenDownload(QSharedPointer<Update> update)
 {
+    qWarning() << Q_FUNC_INFO << update-identifier() << update->token();
     auto dl = qobject_cast<TokenDownloader*>(QObject::sender());
     dl->disconnect();
 
@@ -401,12 +402,13 @@ void ManagerImpl::handleTokenDownload(QSharedPointer<Update> update)
         m_model->add(update);
     }
 
-    dl->deleteLater();
     setState(State::TokenComplete);
+    dl->deleteLater();
 }
 
 void ManagerImpl::handleTokenDownloadFailure(QSharedPointer<Update> update)
 {
+    qWarning() << Q_FUNC_INFO << update-identifier();
     auto dl = qobject_cast<TokenDownloader*>(QObject::sender());
 
     // Assume the original update was changed during the download of token.
@@ -421,9 +423,9 @@ void ManagerImpl::handleTokenDownloadFailure(QSharedPointer<Update> update)
 
     // We're done with it.
     m_candidates.remove(update->identifier());
-    dl->deleteLater();
-
     setState(State::TokenComplete);
+
+    dl->deleteLater();
 }
 
 void ManagerImpl::handleCredentials(SessionToken *token)
