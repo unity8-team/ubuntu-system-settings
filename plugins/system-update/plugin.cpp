@@ -19,9 +19,8 @@
  *
 */
 
-// #include "click/manager.h"
-
 #include "plugin.h"
+#include "systemimage.h"
 #include "systemupdate.h"
 #include "update.h"
 #include "updatemodel.h"
@@ -31,12 +30,17 @@
 
 using namespace UpdatePlugin;
 
+static QObject *siSingletonProvider(QQmlEngine *engine, QJSEngine *scriptEngine)
+{
+    Q_UNUSED(engine)
+    Q_UNUSED(scriptEngine)
+    return new QSystemImage;
+}
+
 static QObject *suSingletonProvider(QQmlEngine *engine, QJSEngine *scriptEngine)
 {
-    // Q_UNUSED(engine)
+    Q_UNUSED(engine)
     Q_UNUSED(scriptEngine)
-    // SystemUpdate *su = new SystemUpdate();
-    // engine->setObjectOwnership(su, QQmlEngine::CppOwnership);
     return new SystemUpdate;
 }
 
@@ -45,6 +49,9 @@ void BackendPlugin::registerTypes(const char *uri)
     Q_ASSERT(uri == QLatin1String("Ubuntu.SystemSettings.Update"));
     qmlRegisterUncreatableType<Update>(
         uri, 1, 0, "Update", "Only provided for enums."
+    );
+    qmlRegisterSingletonType<QSystemImage>(
+        uri, 1, 0, "SystemImage", siSingletonProvider
     );
     qmlRegisterSingletonType<SystemUpdate>(
         uri, 1, 0, "SystemUpdate", suSingletonProvider

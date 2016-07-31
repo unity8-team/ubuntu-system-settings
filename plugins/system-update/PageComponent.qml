@@ -216,8 +216,8 @@ ItemPage {
 
                         onRetry: SystemImage.downloadUpdate();
                         onDownload: {
-                            SystemImage.downloadUpdate();
                             console.warn('si downloadUpdate from qml');
+                            SystemImage.downloadUpdate();
                         }
                         onPause: SystemImage.pauseDownload();
                         onInstall: {
