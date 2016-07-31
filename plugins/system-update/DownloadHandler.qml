@@ -108,6 +108,7 @@ Item {
     }
 
     function retryDownload(click) {
+        console.warn('retry download');
         return createDownload(click, true);
     }
 

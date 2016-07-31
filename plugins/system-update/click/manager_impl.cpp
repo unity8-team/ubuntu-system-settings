@@ -258,7 +258,9 @@ void ManagerImpl::retry(const QString &identifier, const uint &revision)
             QString url = m_sessionToken->signUrl(
                 update->downloadUrl(), QStringLiteral("GET"), true
             );
-            update->setSignedDownloadUrl(url);
+            update->setSignedDownloadUrl(
+                QString("%1?%2").arg(update->downloadUrl(), url)
+            );
             update->setError("");
             update->setState(Update::State::StateAvailable);
         } else {
@@ -269,7 +271,6 @@ void ManagerImpl::retry(const QString &identifier, const uint &revision)
         update->setProgress(0);
         update->setToken("");
         update->setDownloadId("");
-        update->setAutomatic(true);
         m_model->update(update);
     }
 }
