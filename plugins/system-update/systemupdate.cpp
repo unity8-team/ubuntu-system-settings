@@ -197,14 +197,16 @@ void SystemUpdate::cancel()
     m_clickManager->cancel();
 }
 
-void SystemUpdate::retry(const QString &identifier, const uint &revision)
-{
-    m_clickManager->retry(identifier, revision);
-}
-
 void SystemUpdate::launch(const QString &identifier, const uint &revision)
 {
     m_clickManager->launch(identifier, revision);
+}
+
+void SystemUpdate::retry(const QString &identifier, const uint &revision)
+{
+    /* QML talks to SystemImage directly when retrying, so we only have to deal
+    with clicks here. */
+    m_clickManager->retry(identifier, revision);
 }
 
 } // UpdatePlugin

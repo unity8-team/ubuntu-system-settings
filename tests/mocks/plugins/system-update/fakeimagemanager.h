@@ -21,11 +21,13 @@
 
 #include "image/imagemanager.h"
 
-class MockImageManager : public UpdatePlugin::Image::Manager
+namespace UpdatePlugin
+{
+class MockImageManager : public Image::Manager
 {
 public:
     MockImageManager(QObject *parent = nullptr)
-        : UpdatePlugin::Image::Manager(parent) {};
+        : Image::Manager(parent) {};
     virtual ~MockImageManager() {};
 
     virtual void check() override
@@ -53,5 +55,5 @@ public:
     bool m_checkingForUpdates = false;
     QString m_launched = QString::null;
 };
-
+} // UpdatePlugin
 #endif // MOCK_IMAGE_MANAGER_H

@@ -1,7 +1,7 @@
 /*
  * This file is part of system-settings
  *
- * Copyright (C) 2013-2016 Canonical Ltd.
+ * Copyright (C) 2016 Canonical Ltd.
  *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License version 3, as published
@@ -16,32 +16,26 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef SYSTEM_UPDATE_HELPERS_H
-#define SYSTEM_UPDATE_HELPERS_H
+#ifndef CLICK_SESSIONTOKEN_H
+#define CLICK_SESSIONTOKEN_H
 
-#include <sstream>
-#include <vector>
 #include <QString>
-#include <QDebug>
-#include <QDir>
 
 namespace UpdatePlugin
 {
-class Helpers
+namespace Click
+{
+class SessionToken
 {
 public:
-    static QString getFrameworksDir();
-    static std::vector<std::string> getAvailableFrameworks();
-    static std::string getArchitecture();
-    static QString clickMetadataUrl();
-    static bool isIgnoringCredentials();
-    static QString whichClick();
-    static QString whichPkcon();
-private:
-    static std::string architectureFromDpkg();
-    static std::vector<std::string> listFolder(const std::string &folder,
-                                               const std::string &pattern);
+    explicit SessionToken() {};
+    virtual ~SessionToken() {};
+    virtual bool isValid() const { return false; };
+    virtual QString signUrl(const QString url,
+                            const QString method,
+                            bool asQuery = false) const { return QString(); };
 };
+} // Click
 } // UpdatePlugin
 
-#endif // SYSTEM_UPDATE_HELPERS_H
+#endif // CLICK_SESSIONTOKEN_H

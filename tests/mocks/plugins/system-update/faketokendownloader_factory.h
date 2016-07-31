@@ -33,16 +33,14 @@ class MockTokenDownloaderFactory
     : public Click::TokenDownloaderFactory
 {
 public:
-    virtual Click::TokenDownloader* create(
-        Network::Manager *nam,
-        QSharedPointer<Update> update,
-        QObject *parent = nullptr
+    virtual Click::TokenDownloader* create(Network::Manager *nam,
+                                           QSharedPointer<Update> update
     ) override
     {
         Q_UNUSED(nam);
         Click::Client *client = new MockClient();
         MockTokenDownloader *d = new MockTokenDownloader(client, update);
-        client->setParent(parent);
+        client->setParent(d);
         created.append(d);
         return d;
     }

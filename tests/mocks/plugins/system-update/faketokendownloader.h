@@ -19,9 +19,8 @@
 #ifndef FAKE_TOKEN_DOWNLOADER_H
 #define FAKE_TOKEN_DOWNLOADER_H
 
+#include "click/sessiontoken.h"
 #include "click/tokendownloader.h"
-
-#include <token.h>
 
 using namespace UpdatePlugin;
 
@@ -38,9 +37,9 @@ public:
 
     virtual void download() override {}
 
-    virtual void setAuthToken(const UbuntuOne::Token &authToken) override
+    virtual void setSessionToken(Click::SessionToken &sessionToken) override
     {
-        Q_UNUSED(authToken)
+        Q_UNUSED(sessionToken)
     }
 
     virtual Click::Client* client() const override

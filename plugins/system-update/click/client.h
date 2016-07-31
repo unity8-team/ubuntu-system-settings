@@ -48,12 +48,7 @@ public Q_SLOTS:
     virtual void requestMetadata(const QUrl &url,
                                  const QList<QString> &packages) = 0;
 
-    /* Request a token.
-     *
-     * The URL is a signed download_url as described in [1].
-     * [1] https://wiki.ubuntu.com/AppStore/Interfaces/\
-     *      ClickPackageIndex#The_Short_and_Skinny
-     */
+    // Request a token.
     virtual void requestToken(const QUrl &url) = 0;
 Q_SIGNALS:
     // This signal is emitted whenever a metadata request succeeds.

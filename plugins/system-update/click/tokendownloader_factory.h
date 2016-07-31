@@ -33,10 +33,13 @@ class TokenDownloaderFactory : public QObject
     Q_OBJECT
 public:
     virtual ~TokenDownloaderFactory() {};
-    // Creates a TokenDownloader.
+    /* Create a TokenDownloader.
+     *
+     * The application is responsible for deleting the TokenDownloader once it
+     * finishes.
+     */
     virtual TokenDownloader* create(Network::Manager *nam,
-                                    QSharedPointer<Update> update,
-                                    QObject *parent = nullptr) = 0;
+                                    QSharedPointer<Update> update) = 0;
 };
 } // Click
 } // UpdatePlugin

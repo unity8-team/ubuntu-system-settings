@@ -16,9 +16,7 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "updatedb.h"
 #include "updatemodel.h"
-
 #include <QDebug>
 
 namespace UpdatePlugin
@@ -74,6 +72,7 @@ QHash<int, QByteArray> UpdateModel::roleNames() const
         names[AutomaticRole] = "automatic";
         names[ErrorRole] = "error";
         names[PackageNameRole] = "packageName";
+        names[SignedDownloadUrl] = "signedDownloadUrl";
     }
 
     return names;
@@ -139,6 +138,8 @@ QVariant UpdateModel::data(const QModelIndex &index, int role) const
         return update->error();
     case PackageNameRole:
         return update->packageName();
+    case SignedDownloadUrl:
+        return update->signedDownloadUrl();
     }
     return QVariant();
 }
@@ -175,7 +176,7 @@ void UpdateModel::refresh(const QSharedPointer<Update> &update)
 
 void UpdateModel::refresh()
 {
-    QList<QSharedPointer<Update> > now = m_db->updates();
+    UpdateList now = m_db->updates();
     int oldCount = m_updates.size();
 
     // qWarning() << "m_updates is";
@@ -280,8 +281,8 @@ void UpdateModel::emitRowChanged(int row)
     }
 }
 
-int UpdateModel::indexOf(const QList<QSharedPointer<Update> > &list,
-                          const QSharedPointer<Update> &update)
+int UpdateModel::indexOf(const UpdateList &list,
+                         const QSharedPointer<Update> &update)
 {
     for (int i = 0; i < list.size(); i++) {
         if (*list.at(i) == *update.data()) {
@@ -361,7 +362,7 @@ bool UpdateModel::contains(const QString &id, const uint &revision) const
     return false;
 }
 
-bool UpdateModel::contains(const QList<QSharedPointer<Update> > &list,
+bool UpdateModel::contains(const UpdateList &list,
                            const QSharedPointer<Update> &update)
 {
     return list.end() != std::find_if(
@@ -377,12 +378,12 @@ void UpdateModel::setAvailable(const QString &id, const uint &rev,
 {
     auto update = find(id, rev);
     if (!update.isNull()) {
+        update->setError("");
         update->setState(Update::State::StateAvailable);
         update->setInstalled(false);
         update->setProgress(0);
         update->setToken("");
         update->setDownloadId("");
-        update->setError("");
         update->setAutomatic(autoStart);
         m_db->update(update);
     }
@@ -393,6 +394,7 @@ void UpdateModel::queueUpdate(const QString &id, const uint &rev,
 {
     auto update = find(id, rev);
     if (!update.isNull()) {
+        update->setError("");
         update->setState(Update::State::StateQueuedForDownload);
         update->setDownloadId(downloadId);
         m_db->update(update);
@@ -417,6 +419,7 @@ void UpdateModel::startUpdate(const QString &id, const uint &rev,
 {
     auto update = find(id, rev);
     if (!update.isNull()) {
+        update->setError("");
         Update::State state = automatic ?
                               Update::State::StateDownloadingAutomatically :
                               Update::State::StateDownloading;
@@ -429,8 +432,8 @@ void UpdateModel::processUpdate(const QString &id, const uint &rev)
 {
     auto update = find(id, rev);
     if (!update.isNull()) {
-        update->setState(Update::State::StateInstalling);
         update->setError("");
+        update->setState(Update::State::StateInstalling);
         m_db->update(update);
     }
 }
@@ -451,6 +454,7 @@ void UpdateModel::setDownloaded(const QString &id, const uint &rev)
 {
     auto update = find(id, rev);
     if (!update.isNull()) {
+        update->setError("");
         update->setState(Update::State::StateDownloaded);
         m_db->update(update);
     }
@@ -461,9 +465,9 @@ void UpdateModel::setProgress(const QString &id, const uint &rev,
 {
     auto update = find(id, rev);
     if (!update.isNull()) {
+        update->setError("");
         update->setState(Update::State::StateDownloading);
         update->setProgress(progress);
-        update->setError("");
         m_db->update(update);
     }
 }
@@ -473,9 +477,9 @@ void UpdateModel::setInstalling(const QString &id, const uint &rev,
 {
     auto update = find(id, rev);
     if (!update.isNull()) {
+        update->setError("");
         update->setState(Update::State::StateInstalling);
         update->setProgress(progress);
-        update->setError("");
         m_db->update(update);
     }
 }
@@ -485,6 +489,7 @@ void UpdateModel::pauseUpdate(const QString &id, const uint &rev,
 {
     auto update = find(id, rev);
     if (!update.isNull()) {
+        update->setError("");
         auto state = automatic ?
                      Update::State::StateAutomaticDownloadPaused :
                      Update::State::StateDownloadPaused;
@@ -498,6 +503,7 @@ void UpdateModel::resumeUpdate(const QString &id, const uint &rev,
 {
     auto update = find(id, rev);
     if (!update.isNull()) {
+        update->setError("");
         auto state = automatic ?
                      Update::State::StateDownloadingAutomatically :
                      Update::State::StateDownloading;

@@ -21,14 +21,11 @@
 
 #include "click/sso.h"
 
+#include <token.h>
 #include <ssoservice.h>
 
 #include <QObject>
 #include <QString>
-
-// Having the full namespaced name in a slot seems to confuse
-// SignalSpy so we need this declaration.
-using namespace UbuntuOne;
 
 namespace UpdatePlugin
 {
@@ -43,9 +40,9 @@ public:
     virtual void requestCredentials() override;
     virtual void invalidateCredentials() override;
 private Q_SLOTS:
-    void handleCredentialsFound(const Token &token);
+    void handleCredentialsFound(const UbuntuOne::Token &token);
 private:
-    SSOService *m_service;
+    UbuntuOne::SSOService *m_service;
 };
 } // Click
 } // UpdatePlugin

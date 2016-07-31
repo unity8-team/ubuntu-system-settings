@@ -37,9 +37,6 @@ public:
     // Check for updates.
     virtual void check() = 0;
 
-    // Retry an update.
-    virtual void retry(const QString &identifier, const uint &revision) = 0;
-
     /* Cancel all activity.
      *
      * Will cancel activity in any managed objects (TokenDownloaders).
@@ -51,6 +48,12 @@ public:
      * Tries to launch an app, but will only succeed if a APP_ID can be created
      */
     virtual void launch(const QString &identifier, const uint &revision) = 0;
+
+    /* Retry app.
+     *
+     * Currently, this merely updates the signedDownloadUrl on an Update.
+     */
+    virtual void retry(const QString &identifier, const uint &revision) = 0;
 
     // Return whether or not a user is authenticated.
     virtual bool authenticated() const = 0;

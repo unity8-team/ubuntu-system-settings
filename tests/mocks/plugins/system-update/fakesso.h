@@ -19,14 +19,15 @@
 #ifndef MOCK_CLICK_SSO_H
 #define MOCK_CLICK_SSO_H
 
+#include "click/sessiontoken.h"
 #include "click/sso.h"
 
-#include <token.h>
-
-class MockSSO : public UpdatePlugin::Click::SSO
+namespace UpdatePlugin
+{
+class MockSSO : public Click::SSO
 {
 public:
-    MockSSO(QObject *parent = nullptr) : UpdatePlugin::Click::SSO(parent) {};
+    MockSSO(QObject *parent = nullptr) : Click::SSO(parent) {};
     virtual ~MockSSO() {};
 
     virtual void requestCredentials() override
@@ -39,7 +40,7 @@ public:
         invalidateCredentialsCalled = true;
     }
 
-    void mockCredentialsFound(const UbuntuOne::Token &token)
+    void mockCredentialsFound(const Click::SessionToken &token)
     {
         Q_EMIT credentialsFound(token);
     }
@@ -57,5 +58,5 @@ public:
     bool requestCredentialsCalled = false;
     bool invalidateCredentialsCalled = false;
 };
-
+} // UpdatePlugin
 #endif // MOCK_CLICK_SSO_H

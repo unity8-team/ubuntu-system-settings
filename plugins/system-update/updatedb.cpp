@@ -16,15 +16,12 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "systemupdate.h"
 #include "updatedb.h"
-#include "updatemodel.h"
 
+#include <QDebug>
 #include <QDir>
 #include <QSqlError>
 #include <QSqlQuery>
-#include <QSqlRecord>
-#include <QSqlField>
 #include <QStandardPaths>
 
 namespace UpdatePlugin
@@ -33,7 +30,8 @@ namespace {
 const QString ALL = "kind, id, local_version, remote_version, revision, \
     installed, created_at_utc, updated_at_utc, title, download_hash, size, \
     icon_url, download_url, command, changelog, token, download_id, \
-    update_state, progress, automatic, error, package_name";
+    update_state, signed_download_url, progress, automatic, error, \
+    package_name";
 
 const QString GET_SINGLE = "SELECT " + ALL + " FROM updates WHERE id=:id \
     AND revision=:revision";
@@ -137,12 +135,13 @@ bool UpdateDb::insert(const QSharedPointer<Update> &update)
               "created_at_utc, download_hash, title, size, icon_url,"
               "download_url, changelog, command, token, download_id, progress,"
               "local_version, remote_version, kind, update_state, automatic,"
-              "error, package_name, updated_at_utc) "
+              "error, package_name, updated_at_utc, signed_download_url) "
               "VALUES (:id, :revision, :installed, :created_at_utc,"
               ":download_hash, :title, :size, :icon_url, :download_url,"
               ":changelog, :command, :token, :download_id, :progress,"
               ":local_version, :remote_version, :kind, :update_state,"
-              ":automatic, :error, :package_name, :updated_at_utc)");
+              ":automatic, :error, :package_name, :updated_at_utc, "
+              ":signed_download_url)");
     q.bindValue(":id", update->identifier());
     q.bindValue(":revision", update->revision());
     q.bindValue(":installed", update->installed());
@@ -169,6 +168,7 @@ bool UpdateDb::insert(const QSharedPointer<Update> &update)
     q.bindValue(":error", update->error());
     q.bindValue(":package_name", update->packageName());
     q.bindValue(":updated_at_utc", update->updatedAt().toUTC().toMSecsSinceEpoch());
+    q.bindValue(":signed_download_url", update->signedDownloadUrl());
 
     if (!q.exec()) {
         qCritical() << Q_FUNC_INFO << "Could not insert update"
@@ -206,11 +206,11 @@ void UpdateDb::update(const QSharedPointer<Update> &update, const QSqlQuery &que
     update->setInstalled(query.value("installed").toBool());
     update->setCreatedAt(QDateTime::fromMSecsSinceEpoch(
         query.value("created_at_utc").toLongLong()
-    ));
+    ).toUTC());
 
     qlonglong updatedAt(query.value("updated_at_utc").toLongLong());
     if (updatedAt > 0) {
-        update->setUpdatedAt(QDateTime::fromMSecsSinceEpoch(updatedAt));
+        update->setUpdatedAt(QDateTime::fromMSecsSinceEpoch(updatedAt).toUTC());
     } else {
         update->setUpdatedAt(QDateTime());
     }
@@ -231,6 +231,7 @@ void UpdateDb::update(const QSharedPointer<Update> &update, const QSqlQuery &que
     update->setAutomatic(query.value("automatic").toBool());
     update->setError(query.value("error").toString());
     update->setPackageName(query.value("package_name").toString());
+    update->setSignedDownloadUrl(query.value("signed_download_url").toString());
 }
 
 bool UpdateDb::createDb()
@@ -265,6 +266,7 @@ bool UpdateDb::createDb()
                 "token TEXT,"
                 "download_id TEXT,"
                 "update_state TEXT DEFAULT 'unknown',"
+                "signed_download_url TEXT,"
                 "progress INTEGER,"
                 "automatic INTEGER DEFAULT 0,"
                 "error TEXT,"

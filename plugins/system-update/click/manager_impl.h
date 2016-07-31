@@ -21,10 +21,11 @@
 
 #include "updatemodel.h"
 
-#include "click/manager.h"
 #include "click/client.h"
+#include "click/manager.h"
 #include "click/manifest.h"
 #include "click/sso.h"
+#include "click/sessiontoken.h"
 #include "click/tokendownloader.h"
 #include "click/tokendownloader_factory.h"
 
@@ -33,7 +34,7 @@
 #include <QMap>
 #include <QJsonArray>
 #include <QSharedPointer>
-#include <QStateMachine>
+#include <QScopedPointer>
 
 namespace UpdatePlugin
 {
@@ -49,17 +50,17 @@ public:
     // This constructor enables testing.
     explicit ManagerImpl(UpdateModel *model,
                          Network::Manager *nam,
-                         Click::Client *client,
-                         Click::Manifest *manifest,
-                         Click::SSO *sso,
-                         Click::TokenDownloaderFactory *tokenDownloadFactory,
+                         Client *client,
+                         Manifest *manifest,
+                         SSO *sso,
+                         TokenDownloaderFactory *tokenDownloadFactory,
                          QObject *parent = nullptr);
     ~ManagerImpl();
 
     virtual void check() override;
-    virtual void retry(const QString &identifier, const uint &revision) override;
     virtual void launch(const QString &identifier, const uint &revision) override;
     virtual void cancel() override;
+    virtual void retry(const QString &identifier, const uint &revision) override;
 
     virtual bool authenticated() const override;
     virtual bool checkingForUpdates() const override;
@@ -68,7 +69,7 @@ private Q_SLOTS:
     void handleManifest(const QJsonArray &manifest);
     void handleTokenDownload(QSharedPointer<Update> update);
     void handleTokenDownloadFailure(QSharedPointer<Update> update);
-    void handleCredentials(const UbuntuOne::Token &token);
+    void handleCredentials(const SessionToken &token);
     void handleCredentialsAbsence();
     void handleCredentialsFailed();
     void requestMetadata();
@@ -85,7 +86,7 @@ private:
     void setAuthenticated(const bool authenticated);
 
     /* Set up connections on a TokenDownloader. */
-    void setup(const Click::TokenDownloader *downloader);
+    void setup(const TokenDownloader *downloader);
 
     /* Synchronize db updates with a manifest.
      *
@@ -103,12 +104,12 @@ private:
 
     UpdateModel *m_model;
     Network::Manager *m_nam;
-    Click::Client *m_client;
-    Click::Manifest *m_manifest;
-    Click::SSO *m_sso;
-    Click::TokenDownloaderFactory *m_tokenDownloadFactory;
+    Client *m_client;
+    Manifest *m_manifest;
+    SSO *m_sso;
+    TokenDownloaderFactory *m_tokenDownloadFactory;
     QMap<QString, QSharedPointer<Update>> m_candidates;
-    UbuntuOne::Token m_authToken;
+    SessionToken m_sessionToken;
     bool m_authenticated = true;
     State m_state = State::Idle;
     QMap<State, QList<State> > m_transitions;

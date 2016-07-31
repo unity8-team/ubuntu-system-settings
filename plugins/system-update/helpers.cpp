@@ -86,12 +86,6 @@ QString Helpers::clickMetadataUrl()
     return environment.value("URL_APPS", url);
 }
 
-QString Helpers::clickTokenUrl(const QString &url)
-{
-    QProcessEnvironment environment = QProcessEnvironment::systemEnvironment();
-    return environment.value("CLICK_TOKEN_URL", url);
-}
-
 bool Helpers::isIgnoringCredentials()
 {
     QProcessEnvironment environment = QProcessEnvironment::systemEnvironment();

@@ -22,7 +22,7 @@ import Ubuntu.SystemSettings.Update 1.0
 UpdateDelegate {
     id: update
 
-    property bool automatic: false
+    property string signedUrl
 
     // Makes the progress bar indeterminate when waiting
     Binding {

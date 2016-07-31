@@ -28,6 +28,8 @@
 
 namespace UpdatePlugin
 {
+typedef QList<QSharedPointer<Update>> UpdateList;
+
 class UpdateModel : public QAbstractListModel
 {
     Q_OBJECT
@@ -57,7 +59,8 @@ public:
       AutomaticRole,
       ErrorRole,
       PackageNameRole,
-      LastRole = PackageNameRole
+      SignedDownloadUrl,
+      LastRole = SignedDownloadUrl
     };
 
     explicit UpdateModel(QObject *parent = nullptr);
@@ -114,7 +117,7 @@ public:
     Q_INVOKABLE void cancelUpdate(const QString &id, const uint &rev);
     Q_INVOKABLE void setImageUpdate(const QString &id, const int &version,
                                     const int &updateSize);
-    static bool contains(const QList<QSharedPointer<Update> > &list,
+    static bool contains(const UpdateList &list,
                          const QSharedPointer<Update> &update);
 public Q_SLOTS:
     void refresh();
@@ -132,10 +135,10 @@ private:
     bool contains(const QString &id, const uint &revision) const;
     QSharedPointer<Update> find(const QString &id, const uint &revision);
     QSharedPointer<Update> find(const QString &id, const QString &version);
-    static int indexOf(const QList<QSharedPointer<Update> > &list,
-                        const QSharedPointer<Update> &update);
+    static int indexOf(const UpdateList &list,
+                       const QSharedPointer<Update> &update);
     UpdateDb* m_db;
-    QList<QSharedPointer<Update> > m_updates;
+    UpdateList m_updates;
 };
 
 class UpdateModelFilter : public QSortFilterProxyModel

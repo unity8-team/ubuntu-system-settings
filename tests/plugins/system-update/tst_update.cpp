@@ -121,6 +121,11 @@ private slots:
         QCOMPARE(stateSpy.count(), 1);
         QCOMPARE(m_instance->state(), Update::State::StateFailed);
 
+        QSignalSpy signedDownloadUrlSpy(m_instance, SIGNAL(signedDownloadUrlChanged()));
+        m_instance->setSignedDownloadUrl("signed");
+        QCOMPARE(signedDownloadUrlSpy.count(), 1);
+        QCOMPARE(m_instance->signedDownloadUrl(), QString("signed"));
+
         QSignalSpy titleSpy(m_instance, SIGNAL(titleChanged()));
         m_instance->setTitle("title");
         QCOMPARE(titleSpy.count(), 1);

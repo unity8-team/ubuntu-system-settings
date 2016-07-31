@@ -18,9 +18,10 @@
 
 #include "helpers.h"
 
-#include "click/manager_impl.h"
 #include "click/client_impl.h"
+#include "click/manager_impl.h"
 #include "click/manifest_impl.h"
+#include "click/sessiontoken_impl.h"
 #include "click/sso_impl.h"
 #include "click/tokendownloader_factory_impl.h"
 
@@ -51,10 +52,10 @@ ManagerImpl::ManagerImpl(UpdateModel *model, Network::Manager *nam,
                          QObject *parent)
     : ManagerImpl(model,
                   nam,
-                  new Click::ClientImpl(nam),
-                  new Click::ManifestImpl(),
-                  new Click::SSOImpl(),
-                  new Click::TokenDownloaderFactoryImpl,
+                  new ClientImpl(nam),
+                  new ManifestImpl(),
+                  new SSOImpl(),
+                  new TokenDownloaderFactoryImpl,
                   parent)
 {
     m_client->setParent(this);
@@ -64,10 +65,10 @@ ManagerImpl::ManagerImpl(UpdateModel *model, Network::Manager *nam,
 
 ManagerImpl::ManagerImpl(UpdateModel *model,
                          Network::Manager *nam,
-                         Click::Client *client,
-                         Click::Manifest *manifest,
-                         Click::SSO *sso,
-                         Click::TokenDownloaderFactory *tokenDownloadFactory,
+                         Client *client,
+                         Manifest *manifest,
+                         SSO *sso,
+                         TokenDownloaderFactory *tokenDownloadFactory,
                          QObject *parent)
     : Manager(parent)
     , m_model(model)
@@ -107,9 +108,8 @@ ManagerImpl::ManagerImpl(UpdateModel *model,
     connect(m_manifest, &Manifest::requestFailed, this, [this]() {
         setState(State::Complete);
     });
-    connect(m_sso,
-            SIGNAL(credentialsFound(const UbuntuOne::Token&)),
-            this, SLOT(handleCredentials(const UbuntuOne::Token&)));
+    connect(m_sso, SIGNAL(credentialsFound(const SessionToken&)),
+            this, SLOT(handleCredentials(const SessionToken&)));
     connect(m_sso, SIGNAL(credentialsNotFound()),
             this, SLOT(handleCredentialsAbsence()));
     connect(m_sso, SIGNAL(credentialsDeleted()),
@@ -219,7 +219,7 @@ void ManagerImpl::handleStateChange()
     }
 }
 
-void ManagerImpl::setup(const Click::TokenDownloader *downloader)
+void ManagerImpl::setup(const TokenDownloader *downloader)
 {
     connect(downloader, SIGNAL(downloadSucceeded(QSharedPointer<Update>)),
             this, SLOT(handleTokenDownload(QSharedPointer<Update>)));
@@ -237,11 +237,8 @@ void ManagerImpl::check()
         return;
     }
 
-    // Don't check for click updates if there are no credentials,
-    // instead ask for credentials.
-    if (!m_authToken.isValid() && !Helpers::isIgnoringCredentials()) {
-        qWarning() << Q_FUNC_INFO << "Credential invalid.";
-        setAuthenticated(false);
+    if (!m_sessionToken.isValid() && !Helpers::isIgnoringCredentials()) {
+        qWarning() << Q_FUNC_INFO << "Can't check: invalid session token.";
         m_sso->requestCredentials();
         return;
     }
@@ -251,15 +248,28 @@ void ManagerImpl::check()
 
 void ManagerImpl::retry(const QString &identifier, const uint &revision)
 {
-    /* We'll simply ask for another click token if a click update failed
-    to install. */
+    /* We will not do the token dance here, but rather just create a new signed
+    downloadUrl that is valid for 5 minutes. QML will create the actual
+    UDM download. */
     auto update = m_model->get(identifier, revision);
     if (update) {
-        m_model->setAvailable(identifier, revision, true);
-        auto dl = m_tokenDownloadFactory->create(m_nam, update);
-        dl->setAuthToken(m_authToken);
-        setup(dl);
-        dl->download();
+        if (m_sessionToken.isValid() && !Helpers::isIgnoringCredentials()) {
+            QString url = m_sessionToken.signUrl(
+                update->downloadUrl(), QStringLiteral("GET"), true
+            );
+            update->setSignedDownloadUrl(url);
+            update->setError("");
+            update->setState(Update::State::StateAvailable);
+        } else {
+            qWarning() << Q_FUNC_INFO << "Can't retry: invalid session token.";
+            update->setError(_("Authentication failure."));
+            update->setState(Update::State::StateFailed);
+        }
+        update->setProgress(0);
+        update->setToken("");
+        update->setDownloadId("");
+        update->setAutomatic(true);
+        m_model->update(update);
     }
 }
 
@@ -372,7 +382,7 @@ void ManagerImpl::completionCheck()
 
 void ManagerImpl::handleTokenDownload(QSharedPointer<Update> update)
 {
-    auto dl = qobject_cast<Click::TokenDownloader*>(QObject::sender());
+    auto dl = qobject_cast<TokenDownloader*>(QObject::sender());
     dl->disconnect();
 
     // Token reported as downloaded, but empty so discard it as a candidate.
@@ -396,7 +406,7 @@ void ManagerImpl::handleTokenDownload(QSharedPointer<Update> update)
 
 void ManagerImpl::handleTokenDownloadFailure(QSharedPointer<Update> update)
 {
-    auto dl = qobject_cast<Click::TokenDownloader*>(QObject::sender());
+    auto dl = qobject_cast<TokenDownloader*>(QObject::sender());
 
     // Assume the original update was changed during the download of token.
     auto freshUpdate = m_model->get(update);
@@ -415,18 +425,16 @@ void ManagerImpl::handleTokenDownloadFailure(QSharedPointer<Update> update)
     setState(State::TokenComplete);
 }
 
-void ManagerImpl::handleCredentials(const UbuntuOne::Token &token)
+void ManagerImpl::handleCredentials(const SessionToken &token)
 {
     qWarning() << Q_FUNC_INFO;
-    m_authToken = token;
+    m_sessionToken = token;
 
-    if (!m_authToken.isValid() && !Helpers::isIgnoringCredentials()) {
-        qWarning() << Q_FUNC_INFO << "not valid";
-        handleCredentialsFailed();
+    if (!m_sessionToken.isValid() && !Helpers::isIgnoringCredentials()) {
+        qWarning() << Q_FUNC_INFO << "Got invalid session token.";
         return;
     }
 
-    qWarning() << Q_FUNC_INFO << "auth true";
     setAuthenticated(true);
 
     cancel();
@@ -441,13 +449,11 @@ void ManagerImpl::handleCredentialsAbsence()
 
 void ManagerImpl::handleCredentialsFailed()
 {
-    qWarning() << Q_FUNC_INFO;
     m_sso->invalidateCredentials();
-    m_authToken = UbuntuOne::Token();
+    m_sessionToken = SessionToken();
 
     // We've invalidated the token, and the user is now not authenticated.
     setAuthenticated(false);
-    qWarning() << Q_FUNC_INFO << "auth false";
     cancel();
 }
 
@@ -456,7 +462,7 @@ void ManagerImpl::requestMetadata()
     QString urlApps = Helpers::clickMetadataUrl();
     QString authHeader;
     if (!Helpers::isIgnoringCredentials()) {
-        authHeader = m_authToken.signUrl(
+        authHeader = m_sessionToken.signUrl(
             urlApps, QStringLiteral("POST"), true
         );
     }
@@ -499,9 +505,8 @@ void ManagerImpl::parseMetadata(const QJsonArray &array)
 
                 // Ask for a token if there's none.
                 if (update->token().isEmpty()) {
-                    Click::TokenDownloader* dl
-                        = m_tokenDownloadFactory->create(m_nam, update);
-                    dl->setAuthToken(m_authToken);
+                    auto dl = m_tokenDownloadFactory->create(m_nam, update);
+                    dl->setSessionToken(m_sessionToken);
                     setup(dl);
                     dl->download();
                 }

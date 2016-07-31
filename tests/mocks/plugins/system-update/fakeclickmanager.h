@@ -25,21 +25,19 @@
 #include <QPair>
 #include <QString>
 
-class MockClickManager : public UpdatePlugin::Click::Manager
+namespace UpdatePlugin
+{
+class MockClickManager : public Click::Manager
 {
 public:
     explicit MockClickManager(QObject *parent = nullptr)
-        : UpdatePlugin::Click::Manager(parent) {};
+        : Click::Manager(parent) {};
     virtual ~MockClickManager() {};
 
     virtual void check() override
     {
         m_checkingForUpdates = true;
         Q_EMIT checkingForUpdatesChanged();
-    }
-
-    virtual void retry(const QString &identifier, const uint &revision) override
-    {
     }
 
     virtual void cancel() override
@@ -54,6 +52,14 @@ public:
         p.first = identifier;
         p.second = revision;
         m_launched.append(p);
+    }
+
+    virtual void retry(const QString &identifier, const uint &revision) override
+    {
+        QPair<QString, uint> p;
+        p.first = identifier;
+        p.second = revision;
+        m_retried.append(p);
     }
 
     virtual bool authenticated() const override
@@ -85,6 +91,8 @@ public:
     bool m_checkingForUpdates = false;
     bool m_authenticated = false;
     QList<QPair<QString, uint>> m_launched;
+    QList<QPair<QString, uint>> m_retried;
 };
+} // UpdatePlugin
 
 #endif // MOCK_CLICK_MANAGER_H

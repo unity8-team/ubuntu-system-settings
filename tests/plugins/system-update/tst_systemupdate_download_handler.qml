@@ -189,9 +189,9 @@ Item {
 
         function test_createDownload() {
             var obj = instance.createDownload({
-                command: "",
-                title: "",
-                token: "",
+                command: "cmd",
+                title: "title",
+                token: "token",
                 identifier: "app",
                 revision: 1,
                 downloadHash: "",
@@ -199,6 +199,7 @@ Item {
             });
             compare(obj.metadata.custom.identifier, "app")
             compare(obj.metadata.custom.revision, 1);
+            compare(obj.headers["X-Click-Token"], "token");
         }
 
         function test_downloadExists() {
@@ -209,6 +210,21 @@ Item {
             // An error will be displayed on the update.
             compare(delegate.updateState, Update.StateFailed);
             compare(delegate.error, i18n.tr("Download timed out. Please try again later."));
+        }
+
+        function test_retryDownload() {
+            var obj = instance.retryDownload({
+                command: "",
+                title: "",
+                token: "foo",
+                identifier: "app",
+                revision: 1,
+                downloadHash: "",
+                downloadUrl: ""
+            });
+            compare(obj.metadata.custom.identifier, "app")
+            compare(obj.metadata.custom.revision, 1);
+            compare(obj.headers, {});
         }
     }
 }

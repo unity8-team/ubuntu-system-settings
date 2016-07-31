@@ -260,16 +260,22 @@ ItemPage {
                         kind: model.kind
                         changelog: model.changelog
                         error: model.error
-                        automatic: model.automatic
+                        signedUrl: signedDownloadUrl
 
                         onInstall: downloadHandler.createDownload(model);
                         onPause: downloadHandler.pauseDownload(model)
                         onResume: downloadHandler.resumeDownload(model)
-                        onRetry: SystemUpdate.retry(identifier, revision)
+                        onRetry: {
+                            /* This creates a new signed URL with which we can
+                            retry the download. See onSignedUrlChanged. */
+                            SystemUpdate.retry(model.identifier,
+                                               model.revision);
+                        }
 
-                        onAutomaticChanged: {
-                            if (automatic && !model.downloadId) {
-                                install();
+                        onSignedUrlChanged: {
+                            // If we have a signedUrl, user intend to retry.
+                            if (signedUrl) {
+                                downloadHandler.retryDownload(model);
                             }
                         }
 

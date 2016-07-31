@@ -19,11 +19,10 @@
 #ifndef CLICK_SSO_H
 #define CLICK_SSO_H
 
-#include <token.h>
+#include "sessiontoken.h"
 
 #include <QObject>
 #include <QString>
-
 #include <QDebug>
 
 namespace UpdatePlugin
@@ -45,7 +44,7 @@ public:
 
 Q_SIGNALS:
     // This signal is emitted when credentials are found..
-    void credentialsFound(const UbuntuOne::Token &token);
+    void credentialsFound(const SessionToken &token);
 
     // This signal is emitted when credentials are not found.
     void credentialsNotFound();

@@ -46,9 +46,9 @@ TokenDownloaderImpl::~TokenDownloaderImpl()
     cancel();
 }
 
-void TokenDownloaderImpl::setAuthToken(const UbuntuOne::Token &authToken)
+void TokenDownloaderImpl::setSessionToken(SessionToken &sessionToken)
 {
-    m_authToken = authToken;
+    m_sessionToken = sessionToken;
 }
 
 Client* TokenDownloaderImpl::client() const
@@ -63,14 +63,15 @@ void TokenDownloaderImpl::cancel()
 
 void TokenDownloaderImpl::download()
 {
-    if (!m_authToken.isValid() && !Helpers::isIgnoringCredentials()) {
+    if (!m_sessionToken.isValid() && !Helpers::isIgnoringCredentials()) {
+        Q_EMIT credentialError();
         Q_EMIT downloadFailed(m_update);
         return;
     }
 
     QString authHeader;
     if (!Helpers::isIgnoringCredentials()) {
-        authHeader = m_authToken.signUrl(
+        authHeader = m_sessionToken.signUrl(
             m_update->downloadUrl(), QStringLiteral("HEAD"), true
         );
 
@@ -81,8 +82,7 @@ void TokenDownloaderImpl::download()
         }
     }
 
-    auto signUrl = Helpers::clickTokenUrl(m_update->downloadUrl());
-    QUrl query(signUrl);
+    QUrl query(m_update->downloadUrl());
     query.setQuery(authHeader);
     m_client->requestToken(query);
 }

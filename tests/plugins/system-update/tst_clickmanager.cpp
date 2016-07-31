@@ -333,8 +333,8 @@ private slots:
         QTRY_COMPARE(authenticatedChangedSpy.count(), 1);
 
         // The token is ignored.
-        m_mocksso->mockCredentialsFound(UbuntuOne::Token());
-        QTRY_COMPARE(authenticatedChangedSpy.count(), 2);
+        // m_mocksso->mockCredentialsFound(UbuntuOne::Token());
+        // QTRY_COMPARE(authenticatedChangedSpy.count(), 2);
     }
     void testManifestParser()
     {
@@ -439,23 +439,6 @@ private slots:
         }
         QTRY_COMPARE(checkCompletesSpy.count(), 1);
     }
-    // void testRetryUpdate()
-    // {
-    //     QString id("package1");
-    //     int rev = 42;
-    //     QString targetToken("foobar");
-
-    //     QSharedPointer<Update> u = QSharedPointer<Update>(new Update);
-    //     u->setIdentifier(id);
-    //     u->setRevision(rev);
-    //     m_model->add(u);
-
-    //     m_instance->retry(id, rev);
-    //     MockTokenDownloader *dl = m_mockdownloadfactory->created.at(0);
-    //     dl->mockDownloadSucceeded("foobar");
-
-    //     QCOMPARE(m_model->get(id, rev)->token(), QString("foobar"));
-    // }
     void testRemotelyUpdatedApp()
     {
         /* Tests that apps that are remotely updated, get marked as such. */
@@ -476,6 +459,10 @@ private slots:
 
         // Assert no client interaction while not checking.
         QVERIFY(m_mockclient->requestedUrl.isEmpty());
+    }
+    void testCredentialErrorOnTokenDownload()
+    {
+
     }
 private:
     // Create JSON Array from a QByteArray.

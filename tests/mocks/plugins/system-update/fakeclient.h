@@ -21,11 +21,13 @@
 
 #include "click/client.h"
 
-class MockClient : public UpdatePlugin::Click::Client
+namespace UpdatePlugin
+{
+class MockClient : public Click::Client
 {
 public:
     explicit MockClient(QObject* parent = nullptr)
-        : UpdatePlugin::Click::Client(parent) {}
+        : Click::Client(parent) {}
 
     virtual void cancel() override
     {
@@ -71,5 +73,6 @@ public:
     QUrl requestedUrl;
     QList<QString> requestedPackages;
 };
+} // UpdatePlugin
 
 #endif // FAKE_CLICK_CLIENT_H

@@ -26,7 +26,6 @@
 
 #include "update.h"
 #include "updatedb.h"
-#include "updatemodel.h"
 
 using namespace UpdatePlugin;
 
@@ -196,18 +195,76 @@ private slots:
     void testUpdatedAt()
     {
         // Ensures that updatedAt comes back invalid if not updated.
-        QSharedPointer<Update> update = QSharedPointer<Update>(new Update);
+        auto update = QSharedPointer<Update>(new Update);
         update->setRevision(100);
         update->setIdentifier("com.ubuntu.myapp");
         m_instance->add(update);
 
-        QSharedPointer<Update> update1 = m_instance->get(update->identifier(),
-                                                         update->revision());
+        auto update1 = m_instance->get(update->identifier(),
+                                       update->revision());
         QCOMPARE(QDateTime(), update1->updatedAt());
+    }
+    void testEnterAndRestore()
+    {
+        auto date = QDateTime(QDate(2016, 2, 29), QTime(18, 0), Qt::UTC);
+        auto update = QSharedPointer<Update>(new Update);
+
+        update->setKind(Update::Kind::KindClick);
+        update->setIdentifier("a");
+        update->setRevision(1);
+        update->setBinaryFilesize(100);
+        update->setChangelog("changes");
+        update->setChannel("");
+        update->setCreatedAt(date);
+        update->setUpdatedAt(date);
+        update->setDownloadHash("hash");
+        update->setDownloadId("did");
+        update->setDownloadUrl("durl");
+        update->setIconUrl("iurl");
+        update->setInstalled(true);
+        update->setProgress(42);
+        update->setState(Update::State::StateDownloading);
+        update->setSignedDownloadUrl("signedurl");
+        update->setTitle("title");
+        update->setLocalVersion("v1");
+        update->setRemoteVersion("v2");
+        update->setToken("token");
+
+        QStringList cmd; cmd << "ls" << "-la";
+        update->setCommand(cmd);
+        update->setAutomatic(true);
+        update->setError("error");
+        update->setPackageName("packagename");
+
+        m_instance->add(update);
+        auto dbUpdate = m_instance->updates()[0];
+
+        QCOMPARE(dbUpdate->kind(), Update::Kind::KindClick);
+        QCOMPARE(dbUpdate->identifier(), QString("a"));
+        QCOMPARE(dbUpdate->revision(), (uint) 1);
+        QCOMPARE(dbUpdate->binaryFilesize(), (uint) 100);
+        QCOMPARE(dbUpdate->changelog(), QString("changes"));
+        QCOMPARE(dbUpdate->channel(),QString( ""));
+        QCOMPARE(dbUpdate->updatedAt(), date);
+        QCOMPARE(dbUpdate->downloadHash(), QString("hash"));
+        QCOMPARE(dbUpdate->downloadId(), QString("did"));
+        QCOMPARE(dbUpdate->downloadUrl(), QString("durl"));
+        QCOMPARE(dbUpdate->iconUrl(), QString("iurl"));
+        QCOMPARE(dbUpdate->installed(), true);
+        QCOMPARE(dbUpdate->progress(), 42);
+        QCOMPARE(dbUpdate->state(), Update::State::StateDownloading);
+        QCOMPARE(dbUpdate->signedDownloadUrl(), QString("signedurl"));
+        QCOMPARE(dbUpdate->title(), QString("title"));
+        QCOMPARE(dbUpdate->localVersion(), QString("v1"));
+        QCOMPARE(dbUpdate->remoteVersion(), QString("v2"));
+        QCOMPARE(dbUpdate->token(), QString("token"));
+        QCOMPARE(dbUpdate->command(), cmd);
+        QCOMPARE(dbUpdate->automatic(), true);
+        QCOMPARE(dbUpdate->error(), QString("error"));
+        QCOMPARE(dbUpdate->packageName(), QString("packagename"));
     }
 private:
     UpdateDb *m_instance = nullptr;
-    QString m_dbfile;
 };
 
 QTEST_MAIN(TstUpdateDb)

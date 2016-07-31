@@ -50,6 +50,10 @@ Item {
         Component.onCompleted: restoreDownloads()
     }
 
+    function downloadAll() {
+
+    }
+
     function restoreDownloads() {
         var dl;
         for (var i = 0; i<downloads.length; i++) {
@@ -96,22 +100,26 @@ Item {
         return null;
     }
 
-    function createDownload(click) {
-        // Already had a download.
+    function hasExistingDownload(click) {
         var existingDownload = getDownloadFor(click);
-        if (existingDownload !== null &&
+        return (existingDownload !== null &&
             !existingDownload.errorMessage &&
-            !existingDownload.isCompleted) {
+            !existingDownload.isCompleted);
+    }
+
+    function retryDownload(click) {
+        return createDownload(click, true);
+    }
+
+    function createDownload(click, useSignedUrl) {
+        if (hasExistingDownload(click)) {
             return null;
         }
-
+        var downloadUrl = click.downloadUrl;
         var metadata = {
             "command": click.command,
             "title": click.title,
             "showInIndicator": false
-        };
-        var hdrs = {
-            "X-Click-Token": click.token
         };
         var metadataObj = mdt.createObject(root, metadata);
         metadataObj.custom = {
@@ -119,6 +127,18 @@ Item {
             "package-name": click.identifier,
             "revision": click.revision,
         };
+
+        var hdrs = {}
+        if (useSignedUrl) {
+            if (!click.signedDownloadUrl) {
+                console.warn('The signed download URL was empty.');
+            }
+            downloadUrl = click.signedDownloadUrl;
+        } else {
+            // If we're using an unsigned URL, we need to provide this header.
+            hdrs["X-Click-Token"] = click.token;
+        }
+
         var singleDownloadObj = sdl.createObject(root, {
             "autoStart": true,
             "hash": click.downloadHash,
@@ -128,7 +148,7 @@ Item {
             "revision": click.revision,
             "identifier": click.identifier
         });
-        singleDownloadObj.download(click.downloadUrl);
+        singleDownloadObj.download(downloadUrl);
         return singleDownloadObj;
     }
 

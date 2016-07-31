@@ -17,40 +17,27 @@
  */
 
 #include "click/sessiontoken_impl.h"
-#include "click/sso_impl.h"
 
 namespace UpdatePlugin
 {
 namespace Click
 {
-SSOImpl::SSOImpl(QObject *parent)
-    : SSO(parent)
-    , m_service(new UbuntuOne::SSOService())
+SessionTokenImpl::SessionTokenImpl(const UbuntuOne::Token &token)
+    : SessionToken()
+    , m_token(token)
 {
-    m_service->setParent(this);
-
-    connect(m_service, SIGNAL(credentialsFound(const UbuntuOne::Token&)),
-            this, SLOT(handleCredentialsFound(const UbuntuOne::Token&)));
-    connect(m_service, SIGNAL(credentialsNotFound()),
-            this, SIGNAL(credentialsNotFound()));
-    connect(m_service, SIGNAL(credentialsDeleted()),
-            this, SIGNAL(credentialsDeleted()));
 }
 
-void SSOImpl::requestCredentials()
+bool SessionTokenImpl::isValid() const
 {
-    m_service->getCredentials();
+    return m_token.isValid();
 }
 
-void SSOImpl::invalidateCredentials()
+QString SessionTokenImpl::signUrl(const QString url,
+                                  const QString method,
+                                  bool asQuery) const
 {
-    m_service->invalidateCredentials();
-}
-
-void SSOImpl::handleCredentialsFound(const UbuntuOne::Token &token)
-{
-    SessionTokenImpl sessionToken(token);
-    Q_EMIT credentialsFound(sessionToken);
+    return m_token.signUrl(url, method, asQuery);
 }
 } // Click
 } // UpdatePlugin

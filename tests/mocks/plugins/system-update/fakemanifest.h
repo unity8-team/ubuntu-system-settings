@@ -21,11 +21,13 @@
 
 #include "click/manifest.h"
 
-class MockManifest : public UpdatePlugin::Click::Manifest
+namespace UpdatePlugin
+{
+class MockManifest : public Click::Manifest
 {
 public:
     explicit MockManifest(QObject *parent = nullptr)
-        : UpdatePlugin::Click::Manifest(parent)
+        : Click::Manifest(parent)
     {
     }
 
@@ -46,5 +48,5 @@ public:
 
     bool asked = false;
 };
-
+} // UpdatePlugin
 #endif // FAKE_CLICK_MANIFEST_H

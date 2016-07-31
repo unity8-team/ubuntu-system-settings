@@ -19,8 +19,8 @@
 #ifndef UPDATE_H
 #define UPDATE_H
 
-#include <QObject>
 #include <QDateTime>
+#include <QObject>
 #include <QString>
 #include <QStringList>
 
@@ -59,6 +59,8 @@ class Update : public QObject
             WRITE setRevision NOTIFY revisionChanged)
     Q_PROPERTY(State state READ state
             WRITE setState NOTIFY stateChanged)
+    Q_PROPERTY(QString signedDownloadUrl READ signedDownloadUrl
+            WRITE setSignedDownloadUrl NOTIFY signedDownloadUrlChanged)
     Q_PROPERTY(QString title READ title
             WRITE setTitle NOTIFY titleChanged)
     Q_PROPERTY(QString remoteVersion READ remoteVersion
@@ -126,6 +128,7 @@ public:
     bool installed() const;
     int progress() const;
     State state() const;
+    QString signedDownloadUrl() const;
     QString title() const;
     QString remoteVersion() const;
     QString localVersion() const;
@@ -150,6 +153,7 @@ public:
     void setInstalled(const bool installed);
     void setProgress(const int &progress);
     void setState(const State &state);
+    void setSignedDownloadUrl(const QString &signedDownloadUrl);
     void setTitle(const QString &title);
     void setRemoteVersion(const QString &version);
     void setLocalVersion(const QString &version);
@@ -185,6 +189,7 @@ Q_SIGNALS:
     void iconUrlChanged();
     void progressChanged();
     void stateChanged();
+    void signedDownloadUrlChanged();
     void titleChanged();
     void remoteVersionChanged();
     void localVersionChanged();
@@ -209,6 +214,7 @@ protected:
     bool m_installed = false;
     int m_progress = 0;
     State m_state = State::StateUnknown;
+    QString m_signedDownloadUrl = QString::null;
     QString m_title = QString::null;
     QString m_localVersion = QString::null;
     QString m_remoteVersion = QString::null;

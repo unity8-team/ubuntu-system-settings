@@ -99,6 +99,11 @@ Update::State Update::state() const
     return m_state;
 }
 
+QString Update::signedDownloadUrl() const
+{
+    return m_signedDownloadUrl;
+}
+
 QString Update::title() const
 {
     return m_title;
@@ -255,6 +260,14 @@ void Update::setState(const Update::State &state)
     }
 }
 
+void Update::setSignedDownloadUrl(const QString &signedDownloadUrl)
+{
+    if (m_signedDownloadUrl != signedDownloadUrl) {
+        m_signedDownloadUrl = signedDownloadUrl;
+        Q_EMIT signedDownloadUrlChanged();
+    }
+}
+
 void Update::setTitle(const QString &title)
 {
     if (m_title != title) {
@@ -359,6 +372,7 @@ bool Update::deepEquals(const Update *other) const
     if (changelog() != other->changelog()) return false;
     if (token() != other->token()) return false;
     if (state() != other->state()) return false;
+    if (signedDownloadUrl() != other->signedDownloadUrl()) return false;
     if (progress() != other->progress()) return false;
     if (automatic() != other->automatic()) return false;
     if (error() != other->error()) return false;

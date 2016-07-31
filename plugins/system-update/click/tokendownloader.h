@@ -21,8 +21,7 @@
 
 #include "update.h"
 #include "click/client.h"
-
-#include <token.h>
+#include "click/sessiontoken.h"
 
 #include <QObject>
 #include <QSharedPointer>
@@ -31,6 +30,14 @@ namespace UpdatePlugin
 {
 namespace Click
 {
+/* Performs the dance described in [1].
+ *
+ * This dance is only performed at check time, not for retries and other
+ * scenarios in which a click download is expected to happen within 5 minutes.
+ * The token this downloader downloads is valid for 24 hours.
+ *
+ * [1] https://bugs.launchpad.net/clickmanager-plugin/+bug/1231422
+ */
 class TokenDownloader : public QObject
 {
     Q_OBJECT
@@ -41,14 +48,15 @@ public:
         : QObject(parent)
         , m_client(client)
         , m_update(update)
-        , m_authToken(UbuntuOne::Token()) {}
+    {
+    }
     virtual ~TokenDownloader() {};
 
     // Downloads a token.
     virtual void download() = 0;
 
-    // Set the authentication token..
-    virtual void setAuthToken(const UbuntuOne::Token &authToken) = 0;
+    // Set the session token.
+    virtual void setSessionToken(SessionToken &sessionToken) = 0;
     virtual Client* client() const = 0;
 public Q_SLOTS:
     // Cancel any ongoing token download.
@@ -59,11 +67,12 @@ Q_SIGNALS:
 
     // This signal is emitted when a token download fails.
     void downloadFailed(QSharedPointer<Update> update);
+
+    // This signal is emitted if the client reported a credential error.
     void credentialError();
 protected:
     Client *m_client;
     QSharedPointer<Update> m_update;
-    UbuntuOne::Token m_authToken;
 };
 } // Click
 } // UpdatePlugin

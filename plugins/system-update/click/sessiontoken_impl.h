@@ -16,22 +16,34 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef CLICK_TOKEN_DOWNLOADER_FACTORY_IMPL_H
-#define CLICK_TOKEN_DOWNLOADER_FACTORY_IMPL_H
+#ifndef CLICK_SESSIONTOKEN_IMPL_H
+#define CLICK_SESSIONTOKEN_IMPL_H
 
-#include "click/tokendownloader_factory.h"
+#include "sessiontoken.h"
+
+#include <token.h>
 
 namespace UpdatePlugin
 {
 namespace Click
 {
-class TokenDownloaderFactoryImpl : public TokenDownloaderFactory
+class SessionTokenImpl : public SessionToken
 {
 public:
-    virtual TokenDownloader* create(Network::Manager *nam,
-                                    QSharedPointer<Update> update) override;
+    // Creates an invalid SessionToken.
+    explicit SessionTokenImpl() {};
+
+    // Creates a SessionToken using a UbuntuOne Token.
+    explicit SessionTokenImpl(const UbuntuOne::Token &token);
+    virtual ~SessionTokenImpl() {};
+    virtual bool isValid() const override;
+    virtual QString signUrl(const QString url,
+                            const QString method,
+                            bool asQuery = false) const override;
+private:
+    UbuntuOne::Token m_token;
 };
 } // Click
 } // UpdatePlugin
 
-#endif // CLICK_TOKEN_DOWNLOADER_FACTORY_IMPL_H
+#endif // CLICK_SESSIONTOKEN_IMPL_H
