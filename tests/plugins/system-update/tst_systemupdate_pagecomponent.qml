@@ -85,21 +85,21 @@ Item {
             compare(overlay.visible, data.visible);
         }
 
-        function test_errors_data() {
-            return [
-                { status: SystemUpdate.StatusServerError },
-                { status: SystemUpdate.StatusNetworkError }
-            ];
-        }
+        // function test_errors_data() {
+        //     return [
+        //         { status: SystemUpdate.StatusServerError },
+        //         { status: SystemUpdate.StatusNetworkError }
+        //     ];
+        // }
 
-        function test_errors(data) {
-            instance.online = true;
-            instance.updatesCount = 1;
+        // function test_errors(data) {
+        //     instance.online = true;
+        //     instance.updatesCount = 1;
 
-            SystemUpdate.mockStatus(data.status);
-            var overlay = findChild(instance, "overlay");
-            compare(overlay.visible, true);
-        }
+        //     SystemUpdate.mockStatus(data.status);
+        //     var overlay = findChild(instance, "overlay");
+        //     compare(overlay.visible, true);
+        // }
 
         function test_authenticationNotificationVisibility_data() {
             return [
@@ -214,92 +214,80 @@ Item {
             }, false);
         }
 
-        function test_installOnSufficientPower() {
-            instance.havePower = true;
-            SystemUpdate.model.mockAddUpdate("ubuntu", 1, Update.KindImage);
-            findChild(instance, "global").requestInstall();
-            var dialog = findChild(testRoot, "imagePrompt");
-            compare(findChild(dialog, "imagePromptInstall").visible, true);
+        // function test_installOnSufficientPower() {
+        //     instance.havePower = true;
+        //     SystemUpdate.model.mockAddUpdate("ubuntu", 1, Update.KindImage);
+        //     findChild(instance, "global").requestInstall();
+        //     var dialog = findChild(testRoot, "imagePrompt");
+        //     compare(findChild(dialog, "imagePromptInstall").visible, true);
 
-            dialog.destroy();
-            tryCompareFunction(function () {
-                return !!findChild(testRoot, "imagePromptInstall");
-            }, false);
-        }
+        //     dialog.destroy();
+        //     tryCompareFunction(function () {
+        //         return !!findChild(testRoot, "imagePromptInstall");
+        //     }, false);
+        // }
 
-        function test_imageActions() {
-            SystemUpdate.model.mockAddUpdate("ubuntu", 1, Update.KindImage);
-            var delegate = findChild(instance, "imageUpdatesDelegate-0");
-            instance.havePower = true;
-            SystemImage.downloadMode = 2; // Always download.
+        // function test_imageActions() {
+        //     SystemUpdate.model.mockAddUpdate("ubuntu", 1, Update.KindImage);
+        //     var delegate = findChild(instance, "imageUpdatesDelegate-0");
+        //     instance.havePower = true;
+        //     SystemImage.downloadMode = 2; // Always download.
 
-            delegate.retry();
-            verify(SystemImage.called("downloadUpdate"));
+        //     delegate.retry();
+        //     verify(SystemImage.called("downloadUpdate"));
 
-            delegate.download();
-            verify(SystemImage.called("downloadUpdate"));
+        //     delegate.download();
+        //     verify(SystemImage.called("downloadUpdate"));
 
-            delegate.pause();
-            verify(SystemImage.called("pauseDownload"));
+        //     delegate.pause();
+        //     verify(SystemImage.called("pauseDownload"));
 
-            delegate.install();
-            tryCompareFunction(function () {
-                return !!findChild(testRoot, "imagePrompt")
-            }, true);
-            var dialog = findChild(testRoot, "imagePrompt");
-            dialog.requestSystemUpdate();
+        //     delegate.install();
+        //     tryCompareFunction(function () {
+        //         return !!findChild(testRoot, "imagePrompt")
+        //     }, true);
+        //     var dialog = findChild(testRoot, "imagePrompt");
+        //     dialog.requestSystemUpdate();
 
-            verify(SystemImage.called("applyUpdate"));
+        //     verify(SystemImage.called("applyUpdate"));
 
-            dialog.destroy();
-            tryCompareFunction(function () {
-                return !!findChild(testRoot, "imagePromptInstall");
-            }, false);
-        }
+        //     dialog.destroy();
+        //     tryCompareFunction(function () {
+        //         return !!findChild(testRoot, "imagePromptInstall");
+        //     }, false);
+        // }
 
-        function test_forceAllowGSMDownload() {
-            /* Test that we make s-i do what we want in cases where a Wi-Fi
-            update has stalled. */
-            SystemImage.downloadMode = 0; // Never download.
-            SystemUpdate.model.mockAddUpdate("ubuntu", 1, Update.KindImage);
-            var delegate = findChild(instance, "imageUpdatesDelegate-0");
-            delegate.download();
-            verify(SystemImage.called("forceAllowGSMDownload"));
-        }
+        // function test_forceAllowGSMDownload() {
+        //     /* Test that we make s-i do what we want in cases where a Wi-Fi
+        //     update has stalled. */
+        //     SystemImage.downloadMode = 0; // Never download.
+        //     SystemUpdate.model.mockAddUpdate("ubuntu", 1, Update.KindImage);
+        //     var delegate = findChild(instance, "imageUpdatesDelegate-0");
+        //     delegate.download();
+        //     verify(SystemImage.called("forceAllowGSMDownload"));
+        // }
 
-        function test_forceAllowGSMDownloadRetry() {
-            SystemImage.downloadMode = 0; // Never download.
-            SystemUpdate.model.mockAddUpdate("ubuntu", 1, Update.KindImage);
-            var delegate = findChild(instance, "imageUpdatesDelegate-0");
-            delegate.retry();
-            verify(SystemImage.called("forceAllowGSMDownload"));
-        }
+        // function test_forceAllowGSMDownloadRetry() {
+        //     SystemImage.downloadMode = 0; // Never download.
+        //     SystemUpdate.model.mockAddUpdate("ubuntu", 1, Update.KindImage);
+        //     var delegate = findChild(instance, "imageUpdatesDelegate-0");
+        //     delegate.retry();
+        //     verify(SystemImage.called("forceAllowGSMDownload"));
+        // }
 
-        function test_imageUpdateFailureOverflow()
-        {
-            // Test that after N failures, we get an error message.
-            SystemImage.mockUpdateFailed(4, "fail");
-            tryCompareFunction(function () {
-                return !!findChild(testRoot, "installationFailed")
-            }, true);
-            var dialog = findChild(testRoot, "installationFailed");
-            dialog.destroy();
-            tryCompareFunction(function () {
-                return !!findChild(testRoot, "installationFailed");
-            }, false);
-        }
-
-        function test_networkError() {
-
-        }
-
-        function test_serverError() {
-
-        }
-
-        function test_noScopeLaunch() {
-
-        }
+        // function test_imageUpdateFailureOverflow()
+        // {
+        //     // Test that after N failures, we get an error message.
+        //     SystemImage.mockUpdateFailed(4, "fail");
+        //     tryCompareFunction(function () {
+        //         return !!findChild(testRoot, "installationFailed")
+        //     }, true);
+        //     var dialog = findChild(testRoot, "installationFailed");
+        //     dialog.destroy();
+        //     tryCompareFunction(function () {
+        //         return !!findChild(testRoot, "installationFailed");
+        //     }, false);
+        // }
     }
 
     UbuntuTestCase {
