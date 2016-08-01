@@ -17,46 +17,32 @@ find_package(Qt5Sql REQUIRED)
 
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
-set(PLUGIN_LIBS
-    UpdatePlugin
-    Qt5::Test
-    Qt5::Sql
-    ${UAL_LDFLAGS}
-    ${UBUNTUONEAUTH_LDFLAGS}
-)
-# Install a mock click server
-file(COPY
-    ${CMAKE_CURRENT_SOURCE_DIR}/mockclickserver.py
-    DESTINATION
-    ${CMAKE_CURRENT_BINARY_DIR})
+set(PLUGIN_LIBS UpdatePlugin Qt5::Test Qt5::Sql ${UAL_LDFLAGS} ${UBUNTUONEAUTH_LDFLAGS})
 
-add_executable(tst-clickclient
-    tst_clickclient.cpp
-)
+file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/mockclickserver.py DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+
+add_executable(tst-clickclient tst_clickclient.cpp)
 add_test(tst-clickclient tst-clickclient)
+target_link_libraries(tst-clickclient ${PLUGIN_LIBS})
 set_tests_properties(
     tst-clickclient
         PROPERTIES
         ENVIRONMENT "IGNORE_CREDENTIALS=1;URL_APPS=http://127.0.0.1:9009/metadata;QT_QPA_PLATFORM=minimal"
 )
-target_link_libraries(tst-clickclient ${PLUGIN_LIBS})
 
-add_executable(tst-tokendownloader
-    tst_tokendownloader.cpp
-)
+add_executable(tst-tokendownloader tst_tokendownloader.cpp)
 add_test(tst-tokendownloader tst-tokendownloader)
+target_link_libraries(tst-tokendownloader ${PLUGIN_LIBS})
 set_tests_properties(
     tst-tokendownloader
         PROPERTIES
-        ENVIRONMENT "IGNORE_CREDENTIALS=1;URL_APPS=http://127.0.0.1:9009/metadata"
+        ENVIRONMENT "IGNORE_CREDENTIALS=1;URL_APPS=http://127.0.0.1:9009/metadata;;QT_QPA_PLATFORM=minimal"
 )
-target_link_libraries(tst-tokendownloader ${PLUGIN_LIBS})
 
-add_executable(tst-clickmanager
-    tst_clickmanager.cpp
-)
+add_executable(tst-clickmanager tst_clickmanager.cpp)
 add_test(tst-clickmanager tst-clickmanager)
 target_link_libraries(tst-clickmanager ${PLUGIN_LIBS})
+set_tests_properties(tst-clickmanager PROPERTIES ENVIRONMENT "QT_QPA_PLATFORM=minimal")
 
 add_executable(tst-imagemanager
     tst_imagemanager.cpp
@@ -64,54 +50,43 @@ add_executable(tst-imagemanager
     ${CMAKE_SOURCE_DIR}/tests/mocks/system-image-dbus/fakesystemimagedbus.cpp
 )
 add_test(tst-imagemanager tst-imagemanager)
-target_link_libraries(tst-imagemanager
-    ${PLUGIN_LIBS}
-    ${QTDBUSMOCK_LIBRARIES}
-    ${QTDBUSTEST_LIBRARIES}
-)
+target_link_libraries(tst-imagemanager ${PLUGIN_LIBS} ${QTDBUSMOCK_LIBRARIES} ${QTDBUSTEST_LIBRARIES})
+set_tests_properties(tst-imagemanager PROPERTIES ENVIRONMENT "QT_QPA_PLATFORM=minimal")
 
-add_executable(tst-systemupdate
-    tst_systemupdate.cpp
-)
+add_executable(tst-systemupdate tst_systemupdate.cpp)
 add_test(tst-systemupdate tst-systemupdate)
 target_link_libraries(tst-systemupdate ${PLUGIN_LIBS})
+set_tests_properties(tst-systemupdate PROPERTIES ENVIRONMENT "QT_QPA_PLATFORM=minimal")
 
-add_executable(tst-updatedb
-    tst_updatedb.cpp
-)
+add_executable(tst-updatedb tst_updatedb.cpp)
 add_test(tst-updatedb tst-updatedb)
 target_link_libraries(tst-updatedb ${PLUGIN_LIBS})
+set_tests_properties(tst-updatedb PROPERTIES ENVIRONMENT "QT_QPA_PLATFORM=minimal")
 
-add_executable(tst-update
-    tst_update.cpp
-)
+add_executable(tst-update tst_update.cpp)
 add_test(tst-update tst-update)
 target_link_libraries(tst-update ${PLUGIN_LIBS})
+set_tests_properties(tst-update PROPERTIES ENVIRONMENT "QT_QPA_PLATFORM=minimal")
 
-add_executable(tst-updatemodel
-    tst_updatemodel.cpp
-)
+add_executable(tst-updatemodel tst_updatemodel.cpp)
 add_test(tst-updatemodel tst-updatemodel)
 target_link_libraries(tst-updatemodel ${PLUGIN_LIBS})
+set_tests_properties(tst-updatemodel PROPERTIES ENVIRONMENT "QT_QPA_PLATFORM=minimal")
 
-add_executable(tst-updateplugin-helpers
-    tst_helpers.cpp
-)
+add_executable(tst-updateplugin-helpers tst_helpers.cpp)
 add_test(tst-updateplugin-helpers tst-updateplugin-helpers)
+target_link_libraries(tst-updateplugin-helpers ${PLUGIN_LIBS})
 set_tests_properties(
     tst-updateplugin-helpers
         PROPERTIES
-        ENVIRONMENT "IGNORE_CREDENTIALS=1;URL_APPS=http://127.0.0.1:9009;FRAMEWORKS_FOLDER=${CMAKE_CURRENT_BINARY_DIR};CLICK_TOKEN_URL=http://example.org;"
+        ENVIRONMENT "IGNORE_CREDENTIALS=1;URL_APPS=http://127.0.0.1:9009;FRAMEWORKS_FOLDER=${CMAKE_CURRENT_BINARY_DIR};CLICK_TOKEN_URL=http://example.org;QT_QPA_PLATFORM=minimal"
 )
-target_link_libraries(tst-updateplugin-helpers ${PLUGIN_LIBS})
 
-add_executable(tst-clickmanifest
-    tst_clickmanifest.cpp
-)
+add_executable(tst-clickmanifest tst_clickmanifest.cpp)
 add_test(tst-clickmanifest tst-clickmanifest)
+target_link_libraries(tst-clickmanifest ${PLUGIN_LIBS})
 set_tests_properties(
     tst-clickmanifest
         PROPERTIES
-        ENVIRONMENT "CLICK_COMMAND=${CMAKE_CURRENT_SOURCE_DIR}/mockclickcommand"
+        ENVIRONMENT "CLICK_COMMAND=${CMAKE_CURRENT_SOURCE_DIR}/mockclickcommand;;QT_QPA_PLATFORM=minimal"
 )
-target_link_libraries(tst-clickmanifest ${PLUGIN_LIBS})
