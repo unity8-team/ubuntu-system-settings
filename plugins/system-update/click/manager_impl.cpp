@@ -18,7 +18,7 @@
 
 #include "helpers.h"
 
-#include "click/client_impl.h"
+#include "click/apiclient_impl.h"
 #include "click/manager_impl.h"
 #include "click/manifest_impl.h"
 #include "click/sessiontoken_impl.h"
@@ -52,7 +52,7 @@ ManagerImpl::ManagerImpl(UpdateModel *model, Network::Manager *nam,
                          QObject *parent)
     : ManagerImpl(model,
                   nam,
-                  new ClientImpl(nam),
+                  new ApiClientImpl(nam),
                   new ManifestImpl,
                   new SSOImpl,
                   new TokenDownloaderFactoryImpl,
@@ -66,7 +66,7 @@ ManagerImpl::ManagerImpl(UpdateModel *model, Network::Manager *nam,
 
 ManagerImpl::ManagerImpl(UpdateModel *model,
                          Network::Manager *nam,
-                         Client *client,
+                         ApiClient *client,
                          Manifest *manifest,
                          SSO *sso,
                          TokenDownloaderFactory *tokenDownloadFactory,
@@ -96,10 +96,10 @@ ManagerImpl::ManagerImpl(UpdateModel *model,
     connect(m_client, SIGNAL(serverError()), this, SIGNAL(serverError()));
     connect(m_client, SIGNAL(credentialError()),
             this, SIGNAL(credentialError()));
-    connect(m_client, &Client::serverError, this, [this]() {
+    connect(m_client, &ApiClient::serverError, this, [this]() {
         setState(State::Failed);
     });
-    connect(m_client, &Client::networkError, this, [this]() {
+    connect(m_client, &ApiClient::networkError, this, [this]() {
         setState(State::Failed);
     });
     connect(m_client, SIGNAL(credentialError()),

@@ -21,7 +21,7 @@
 
 #include "updatemodel.h"
 
-#include "click/client.h"
+#include "click/apiclient.h"
 #include "click/manager.h"
 #include "click/manifest.h"
 #include "click/sso.h"
@@ -51,7 +51,7 @@ public:
     // This constructor enables testing.
     explicit ManagerImpl(UpdateModel *model,
                          Network::Manager *nam,
-                         Client *client,
+                         ApiClient *client,
                          Manifest *manifest,
                          SSO *sso,
                          TokenDownloaderFactory *tokenDownloadFactory,
@@ -106,7 +106,7 @@ private:
 
     UpdateModel *m_model;
     Network::Manager *m_nam;
-    Client *m_client;
+    ApiClient *m_client;
     Manifest *m_manifest;
     SSO *m_sso;
     TokenDownloaderFactory *m_tokenDownloadFactory;

@@ -29,6 +29,7 @@ namespace UpdatePlugin
 {
 namespace Click
 {
+// Interface for a SSO client.
 class SSO : public QObject
 {
     Q_OBJECT

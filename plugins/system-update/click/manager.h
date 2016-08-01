@@ -27,6 +27,10 @@ namespace UpdatePlugin
 {
 namespace Click
 {
+/* Interface for a Click package manager. Note that this interface does not
+ * handle actual downloads and installations. See DownloadHandler, which is
+ * the component that communicates with Ubuntu Download Manager.
+ */
 class Manager : public QObject
 {
     Q_OBJECT

@@ -20,9 +20,10 @@
  * This test uses a mock web server.
  */
 
-#include "mockclickserver.h"
-#include "click/client_impl.h"
+#include "click/apiclient_impl.h"
 #include "network/accessmanager_impl.h"
+
+#include "mockclickserver.h"
 
 #include <QJsonArray>
 #include <QSignalSpy>
@@ -32,7 +33,7 @@
 
 using namespace UpdatePlugin;
 
-class TstClickClient
+class TstClickApiClient
     : public QObject
     , public MockClickServerTestCase
 {
@@ -49,7 +50,7 @@ private slots:
     void init()
     {
         m_nam = new Network::ManagerImpl();
-        m_instance = new Click::ClientImpl(m_nam, this);
+        m_instance = new Click::ApiClientImpl(m_nam, this);
         m_nam->setParent(m_instance);
     }
     void cleanup()
@@ -118,8 +119,8 @@ private slots:
     }
     void testTokenRequestDispatching()
     {
-        Click::ClientImpl *a = new Click::ClientImpl(m_nam);
-        Click::ClientImpl *b = new Click::ClientImpl(m_nam);
+        Click::ApiClientImpl *a = new Click::ApiClientImpl(m_nam);
+        Click::ApiClientImpl *b = new Click::ApiClientImpl(m_nam);
 
         // We only want “a” to receive a signal.
         QSignalSpy aSuccessSpy(a, SIGNAL(tokenRequestSucceeded(const QString)));
@@ -135,8 +136,8 @@ private slots:
     }
     void testMetadataRequestDispatching()
     {
-        Click::ClientImpl *a = new Click::ClientImpl(m_nam);
-        Click::ClientImpl *b = new Click::ClientImpl(m_nam);
+        Click::ApiClientImpl *a = new Click::ApiClientImpl(m_nam);
+        Click::ApiClientImpl *b = new Click::ApiClientImpl(m_nam);
 
         // We only want “a” to receive a signal.
         QSignalSpy aSuccessSpy(
@@ -155,10 +156,10 @@ private slots:
         b->deleteLater();
     }
 private:
-    Click::Client *m_instance = nullptr;
+    Click::ApiClient *m_instance = nullptr;
     Network::Manager *m_nam = nullptr;
 };
 
-QTEST_MAIN(TstClickClient)
+QTEST_MAIN(TstClickApiClient)
 #include "tst_clickclient.moc"
 

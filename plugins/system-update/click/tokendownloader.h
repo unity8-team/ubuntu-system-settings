@@ -20,7 +20,7 @@
 #define CLICK_TOKEN_DOWNLOADER_H
 
 #include "update.h"
-#include "click/client.h"
+#include "click/apiclient.h"
 
 #include <QObject>
 #include <QSharedPointer>
@@ -41,7 +41,7 @@ class TokenDownloader : public QObject
 {
     Q_OBJECT
 public:
-    explicit TokenDownloader(Client *client,
+    explicit TokenDownloader(ApiClient *client,
                              QSharedPointer<Update> update,
                              QObject *parent = nullptr)
         : QObject(parent)
@@ -57,7 +57,7 @@ public:
      * For details, see lp:1231422.
      */
     virtual void download(const QString &url) = 0;
-    virtual Client* client() const = 0;
+    virtual ApiClient* client() const = 0;
 public Q_SLOTS:
     // Cancel any ongoing token download.
     virtual void cancel() = 0;
@@ -71,7 +71,7 @@ Q_SIGNALS:
     // This signal is emitted if the client reported a credential error.
     void credentialError();
 protected:
-    Client *m_client;
+    ApiClient *m_client;
     QSharedPointer<Update> m_update;
 };
 } // Click

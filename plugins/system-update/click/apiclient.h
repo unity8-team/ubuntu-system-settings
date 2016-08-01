@@ -16,8 +16,8 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef CLICK_CLIENT_H
-#define CLICK_CLIENT_H
+#ifndef CLICK_APICLIENT_H
+#define CLICK_APICLIENT_H
 
 #include <QObject>
 #include <QList>
@@ -29,12 +29,13 @@ namespace UpdatePlugin
 {
 namespace Click
 {
-class Client : public QObject
+// Interface for a Click API client.
+class ApiClient : public QObject
 {
     Q_OBJECT
 public:
-    explicit Client(QObject *parent = nullptr) : QObject(parent) {};
-    virtual ~Client() {};
+    explicit ApiClient(QObject *parent = nullptr) : QObject(parent) {};
+    virtual ~ApiClient() {};
 public Q_SLOTS:
     // Cancel all network activity.
     virtual void cancel() = 0;
@@ -74,4 +75,4 @@ Q_SIGNALS:
 } // Click
 } // UpdatePlugin
 
-#endif // CLICK_CLIENT_H
+#endif // CLICK_APICLIENT_H

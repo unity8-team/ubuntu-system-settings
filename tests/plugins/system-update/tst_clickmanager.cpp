@@ -20,7 +20,7 @@
 #include "helpers.h"
 #include "click/manager_impl.h"
 
-#include "plugins/system-update/fakeclient.h"
+#include "plugins/system-update/fakeapiclient.h"
 #include "plugins/system-update/fakemanifest.h"
 #include "plugins/system-update/fakesessiontoken.h"
 #include "plugins/system-update/fakesso.h"
@@ -53,7 +53,7 @@ private slots:
         QVERIFY(m_dir->isValid());
         m_model = new UpdateModel(m_dir->path() + "/cupdatemanagerstore.db");
 
-        m_mockclient = new MockClient;
+        m_mockclient = new MockApiClient;
         m_mockmanifest = new MockManifest;
         m_mocksso = new MockSSO;
         m_mockdownloadfactory = new MockTokenDownloaderFactory;
@@ -516,7 +516,7 @@ private:
         delete jsonError;
         return ret;
     }
-    MockClient *m_mockclient = nullptr;
+    MockApiClient *m_mockclient = nullptr;
     MockManifest *m_mockmanifest = nullptr;
     MockSSO *m_mocksso = nullptr;
     MockTokenDownloaderFactory *m_mockdownloadfactory = nullptr;

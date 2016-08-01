@@ -19,7 +19,7 @@
 #include "helpers.h"
 #include "systemupdate.h"
 
-#include "click/client_impl.h"
+#include "click/apiclient_impl.h"
 #include "network/accessmanager_impl.h"
 
 #include <QJsonArray>
@@ -34,8 +34,8 @@ namespace UpdatePlugin
 {
 namespace Click
 {
-ClientImpl::ClientImpl(Network::Manager *nam, QObject *parent)
-    : Client(parent)
+ApiClientImpl::ApiClientImpl(Network::Manager *nam, QObject *parent)
+    : ApiClient(parent)
     , m_nam(nam)
 {
     connect(m_nam, SIGNAL(finished(QNetworkReply *)),
@@ -44,13 +44,13 @@ ClientImpl::ClientImpl(Network::Manager *nam, QObject *parent)
             this, SLOT(requestSslFailed(QNetworkReply *, const QList<QSslError>&)));
 }
 
-ClientImpl::~ClientImpl()
+ApiClientImpl::~ApiClientImpl()
 {
     cancel();
 }
 
-void ClientImpl::requestMetadata(const QUrl &url,
-                                 const QList<QString> &packages)
+void ApiClientImpl::requestMetadata(const QUrl &url,
+                                    const QList<QString> &packages)
 {
     // Create list of frameworks.
     std::stringstream frameworks;
@@ -82,7 +82,7 @@ void ClientImpl::requestMetadata(const QUrl &url,
     initializeReply(m_nam->post(request, content));
 }
 
-void ClientImpl::requestToken(const QUrl &url)
+void ApiClientImpl::requestToken(const QUrl &url)
 {
     QNetworkRequest request;
     request.setUrl(url);
@@ -91,13 +91,13 @@ void ClientImpl::requestToken(const QUrl &url)
     initializeReply(m_nam->head(request));
 }
 
-void ClientImpl::initializeReply(QNetworkReply *reply)
+void ApiClientImpl::initializeReply(QNetworkReply *reply)
 {
     connect(this, SIGNAL(abortNetworking()), reply, SLOT(abort()));
 }
 
-void ClientImpl::requestSslFailed(QNetworkReply *reply,
-                                      const QList<QSslError> &errors)
+void ApiClientImpl::requestSslFailed(QNetworkReply *reply,
+                                     const QList<QSslError> &errors)
 {
     QString errorString = "SSL error: ";
     foreach (const QSslError &err, errors) {
@@ -108,7 +108,7 @@ void ClientImpl::requestSslFailed(QNetworkReply *reply,
     reply->deleteLater();
 }
 
-void ClientImpl::requestFinished(QNetworkReply *reply)
+void ApiClientImpl::requestFinished(QNetworkReply *reply)
 {
     if (reply->request().originatingObject() != this) {
         return; // We did not create this request.
@@ -138,7 +138,7 @@ void ClientImpl::requestFinished(QNetworkReply *reply)
     reply->deleteLater();
 }
 
-void ClientImpl::requestSucceeded(QNetworkReply *reply)
+void ApiClientImpl::requestSucceeded(QNetworkReply *reply)
 {
     QString rtp = reply->request().attribute(QNetworkRequest::User).toString();
     if (rtp == "token-request") {
@@ -158,7 +158,7 @@ void ClientImpl::requestSucceeded(QNetworkReply *reply)
     reply->deleteLater();
 }
 
-void ClientImpl::handleMetadataReply(QNetworkReply *reply)
+void ApiClientImpl::handleMetadataReply(QNetworkReply *reply)
 {
     QJsonParseError *jsonError = new QJsonParseError;
     auto document = QJsonDocument::fromJson(reply->readAll(), jsonError);
@@ -179,7 +179,7 @@ void ClientImpl::handleMetadataReply(QNetworkReply *reply)
     delete jsonError;
 }
 
-bool ClientImpl::validReply(const QNetworkReply *reply)
+bool ApiClientImpl::validReply(const QNetworkReply *reply)
 {
     auto statusAttr = reply->attribute(
             QNetworkRequest::HttpStatusCodeAttribute);
@@ -207,7 +207,7 @@ bool ClientImpl::validReply(const QNetworkReply *reply)
     return true;
 }
 
-void ClientImpl::cancel()
+void ApiClientImpl::cancel()
 {
     // Tell each reply to abort. See initializeReply().
     Q_EMIT abortNetworking();

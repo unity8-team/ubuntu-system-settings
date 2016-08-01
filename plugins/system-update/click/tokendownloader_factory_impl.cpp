@@ -16,7 +16,7 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "click/client_impl.h"
+#include "click/apiclient_impl.h"
 #include "click/tokendownloader_impl.h"
 #include "click/tokendownloader_factory_impl.h"
 
@@ -27,7 +27,7 @@ namespace Click
 TokenDownloader* TokenDownloaderFactoryImpl::create(Network::Manager *nam,
                                                     QSharedPointer<Update> update)
 {
-    auto client = new Click::ClientImpl(nam);
+    auto client = new Click::ApiClientImpl(nam);
     auto downloader = new TokenDownloaderImpl(client, update);
     client->setParent(downloader);
     return downloader;

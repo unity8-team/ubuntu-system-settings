@@ -20,12 +20,12 @@
 #define CLICK_SESSIONTOKEN_H
 
 #include <QString>
-                        #include <QDebug>
 
 namespace UpdatePlugin
 {
 namespace Click
 {
+// Interface for a session token.
 class SessionToken
 {
 public:

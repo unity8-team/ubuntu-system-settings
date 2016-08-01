@@ -19,15 +19,15 @@
 #ifndef FAKE_CLICK_CLIENT_H
 #define FAKE_CLICK_CLIENT_H
 
-#include "click/client.h"
+#include "click/apiclient.h"
 
 namespace UpdatePlugin
 {
-class MockClient : public Click::Client
+class MockApiClient : public Click::ApiClient
 {
 public:
-    explicit MockClient(QObject* parent = nullptr)
-        : Click::Client(parent) {}
+    explicit MockApiClient(QObject* parent = nullptr)
+        : Click::ApiClient(parent) {}
 
     virtual void cancel() override
     {

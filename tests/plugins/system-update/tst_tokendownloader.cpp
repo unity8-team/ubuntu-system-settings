@@ -20,7 +20,7 @@
 #include "click/tokendownloader_impl.h"
 #include "update.h"
 
-#include "plugins/system-update/fakeclient.h"
+#include "plugins/system-update/fakeapiclient.h"
 
 #include <QSharedPointer>
 #include <QSignalSpy>
@@ -35,7 +35,7 @@ class TstClickTokenDownloader
 private slots:
     void init()
     {
-        m_mockclient = new MockClient;
+        m_mockclient = new MockApiClient;
         m_update = QSharedPointer<Update>(new Update);
         m_instance = new Click::TokenDownloaderImpl(m_mockclient, m_update);
 
@@ -98,7 +98,7 @@ private slots:
         QCOMPARE(m_mockclient->requestedUrl.toString(), targetUrl);
     }
 private:
-    MockClient *m_mockclient = nullptr;
+    MockApiClient *m_mockclient = nullptr;
 
     Click::TokenDownloaderImpl *m_instance = nullptr;
     QSharedPointer<Update> m_update;

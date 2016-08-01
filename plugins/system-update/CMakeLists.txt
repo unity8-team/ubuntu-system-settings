@@ -23,14 +23,15 @@ pkg_check_modules(UBUNTUONEAUTH REQUIRED ubuntuoneauth-2.0)
 add_definitions(${UBUNTUONEAUTH_CFLAGS} ${UBUNTUONEAUTH_CFLAGS_OTHER})
 
 add_library(UpdatePlugin SHARED
+    click/apiclient.h
     click/manager.h
-    click/client.h
     click/manifest.h
     click/sessiontoken.h
     click/sso.h
     click/tokendownloader.h
     click/tokendownloader_factory.h
-    click/client_impl.cpp
+
+    click/apiclient_impl.cpp
     click/manifest_impl.cpp
     click/sessiontoken_impl.cpp
     click/sso_impl.cpp

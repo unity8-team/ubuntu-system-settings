@@ -27,7 +27,7 @@ using namespace UpdatePlugin;
 class MockTokenDownloader : public Click::TokenDownloader
 {
 public:
-    explicit MockTokenDownloader(Click::Client *client,
+    explicit MockTokenDownloader(Click::ApiClient *client,
                                  QSharedPointer<Update> update,
                                  QObject *parent = nullptr)
         : Click::TokenDownloader(client, update, parent)
@@ -40,7 +40,7 @@ public:
         Q_UNUSED(url)
     }
 
-    virtual Click::Client* client() const override
+    virtual Click::ApiClient* client() const override
     {
         return m_client;
     }

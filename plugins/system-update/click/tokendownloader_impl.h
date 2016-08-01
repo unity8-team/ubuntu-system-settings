@@ -19,7 +19,6 @@
 #ifndef CLICK_TOKEN_DOWNLOADER_IMPL_H
 #define CLICK_TOKEN_DOWNLOADER_IMPL_H
 
-#include "click/client.h"
 #include "click/tokendownloader.h"
 
 namespace UpdatePlugin
@@ -30,12 +29,12 @@ class TokenDownloaderImpl : public TokenDownloader
 {
     Q_OBJECT
 public:
-    explicit TokenDownloaderImpl(Client *client,
+    explicit TokenDownloaderImpl(ApiClient *client,
                                  QSharedPointer<Update> update,
                                  QObject *parent = nullptr);
     virtual ~TokenDownloaderImpl();
     virtual void download(const QString &url) override;
-    virtual Client* client() const override;
+    virtual ApiClient* client() const override;
 public Q_SLOTS:
     virtual void cancel() override;
 protected Q_SLOTS:

@@ -16,23 +16,23 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef CLICK_CLIENT_IMPL_H
-#define CLICK_CLIENT_IMPL_H
+#ifndef CLICK_APICLIENT_IMPL_H
+#define CLICK_APICLIENT_IMPL_H
 
-#include "click/client.h"
+#include "click/apiclient.h"
 #include "network/accessmanager.h"
 
 namespace UpdatePlugin
 {
 namespace Click
 {
-class ClientImpl : public Client
+class ApiClientImpl : public ApiClient
 {
     Q_OBJECT
 public:
-    explicit ClientImpl(UpdatePlugin::Network::Manager *nam,
-                        QObject *parent = nullptr);
-    virtual ~ClientImpl();
+    explicit ApiClientImpl(UpdatePlugin::Network::Manager *nam,
+                           QObject *parent = nullptr);
+    virtual ~ApiClientImpl();
 public slots:
     virtual void cancel() override;
     virtual void requestMetadata(const QUrl &url,
@@ -53,4 +53,4 @@ private:
 } // Click
 } // UpdatePlugin
 
-#endif // CLICK_CLIENT_IMPL_H
+#endif // CLICK_APICLIENT_IMPL_H

@@ -28,6 +28,7 @@ namespace UpdatePlugin
 {
 namespace Click
 {
+// Interface for a manifest producer.
 class Manifest : public QObject
 {
     Q_OBJECT

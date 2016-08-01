@@ -21,11 +21,12 @@
 #define FAKE_TOKEN_DOWNLOADERFACTORY_H
 
 #include "update.h"
-#include "faketokendownloader.h"
-#include "fakeclient.h"
 #include "click/tokendownloader.h"
 #include "click/tokendownloader_factory.h"
 #include "network/accessmanager.h"
+
+#include "faketokendownloader.h"
+#include "fakeapiclient.h"
 
 using namespace UpdatePlugin;
 
@@ -38,7 +39,7 @@ public:
     ) override
     {
         Q_UNUSED(nam);
-        Click::Client *client = new MockClient();
+        Click::ApiClient *client = new MockApiClient();
         MockTokenDownloader *d = new MockTokenDownloader(client, update);
         client->setParent(d);
         created.append(d);
