@@ -60,7 +60,7 @@ public:
     ~ManagerImpl();
 
     virtual void check() override;
-    virtual void launch(const QString &identifier, const uint &revision) override;
+    virtual bool launch(const QString &identifier) override;
     virtual void cancel() override;
     virtual void retry(const QString &identifier, const uint &revision) override;
 

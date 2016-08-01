@@ -51,7 +51,7 @@ public:
      *
      * Tries to launch an app, but will only succeed if a APP_ID can be created
      */
-    virtual void launch(const QString &identifier, const uint &revision) = 0;
+    virtual bool launch(const QString &identifier) = 0;
 
     /* Retry app.
      *

@@ -46,12 +46,10 @@ public:
         Q_EMIT checkingForUpdatesChanged();
     }
 
-    virtual void launch(const QString &identifier, const uint &revision) override
+    virtual bool launch(const QString &identifier) override
     {
-        QPair<QString, uint> p;
-        p.first = identifier;
-        p.second = revision;
-        m_launched.append(p);
+        m_launched.append(identifier);
+        return true;
     }
 
     virtual void retry(const QString &identifier, const uint &revision) override
@@ -90,7 +88,7 @@ public:
 
     bool m_checkingForUpdates = false;
     bool m_authenticated = false;
-    QList<QPair<QString, uint>> m_launched;
+    QList<QString> m_launched;
     QList<QPair<QString, uint>> m_retried;
 };
 } // UpdatePlugin

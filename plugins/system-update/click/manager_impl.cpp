@@ -277,25 +277,17 @@ void ManagerImpl::cancel()
     setState(State::Canceled);
 }
 
-void ManagerImpl::launch(const QString &identifier, const uint &revision)
+bool ManagerImpl::launch(const QString &identifier)
 {
-    auto update = m_model->get(identifier, revision);
-    if (!update) {
-        return;
-    }
-
-    qWarning() << Q_FUNC_INFO << "identifier" << update->identifier();
-
-    gchar * appId = ubuntu_app_launch_triplet_to_app_id(
-        update->identifier().toLatin1().data(), nullptr, nullptr
+    bool success = false;
+    gchar *appId = ubuntu_app_launch_triplet_to_app_id(
+        identifier.toLatin1().data(), nullptr, nullptr
     );
-
-    qWarning() << Q_FUNC_INFO << appId;
-
-    if (appId && !ubuntu_app_launch_start_application(appId, nullptr)) {
-        qWarning() << Q_FUNC_INFO << "Could not launch app" << appId;
+    if (appId) {
+        success = ubuntu_app_launch_start_application(appId, nullptr);
     }
     g_free(appId);
+    return success;
 }
 
 void ManagerImpl::handleManifest(const QJsonArray &manifest)

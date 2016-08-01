@@ -197,9 +197,10 @@ void SystemUpdate::cancel()
     m_clickManager->cancel();
 }
 
-void SystemUpdate::launch(const QString &identifier, const uint &revision)
+bool SystemUpdate::launch(const QString &identifier)
 {
-    m_clickManager->launch(identifier, revision);
+    // We can currently launch click packages only.
+    return m_clickManager->launch(identifier);
 }
 
 void SystemUpdate::retry(const QString &identifier, const uint &revision)

@@ -80,7 +80,7 @@ public:
 
     Q_INVOKABLE void check(const Check check = Check::CheckAutomatic);
     Q_INVOKABLE void cancel();
-    Q_INVOKABLE void launch(const QString &identifier, const uint &revision);
+    Q_INVOKABLE bool launch(const QString &identifier);
     Q_INVOKABLE void retry(const QString &identifier, const uint &revision);
 
     /* Return whether or not a check is required.
