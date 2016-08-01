@@ -109,7 +109,7 @@ private:
     ApiClient *m_client;
     Manifest *m_manifest;
     SSO *m_sso;
-    TokenDownloaderFactory *m_tokenDownloadFactory;
+    std::unique_ptr<TokenDownloaderFactory> m_tokenDownloadFactory;
     QMap<QString, QSharedPointer<Update>> m_candidates;
     std::unique_ptr<SessionToken> m_sessionToken;
     bool m_authenticated = true;

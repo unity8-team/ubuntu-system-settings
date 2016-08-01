@@ -162,7 +162,6 @@ ManagerImpl::ManagerImpl(UpdateModel *model,
 ManagerImpl::~ManagerImpl()
 {
     setState(State::Canceled);
-    delete m_tokenDownloadFactory;
 }
 
 void ManagerImpl::setState(const State &state)

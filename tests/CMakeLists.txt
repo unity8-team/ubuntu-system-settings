@@ -6,6 +6,16 @@ include_directories(
     ${QTDBUSTEST_INCLUDE_DIRS}
 )
 
+find_program(gcc_exe gcc)
+if (NOT ${gcc_exe} STREQUAL "")
+    exec_program(gcc ARGS "-dumpmachine" OUTPUT_VARIABLE ARCH_TRIPLET)
+    set(LD_PRELOAD_PATH "LD_PRELOAD=/usr/lib/${ARCH_TRIPLET}/mesa/libGL.so.1")
+endif()
+set(XVFB_CMD
+    env ${qmltest_ENVIRONMENT} ${LD_PRELOAD_PATH}
+    xvfb-run -a -s "-screen 0 640x480x24"
+)
+
 add_definitions(-DI18N_DOMAIN="ubuntu-system-settings")
 add_definitions(-DPLUGIN_PRIVATE_MODULE_DIR="${PLUGIN_PRIVATE_MODULE_DIR}")
 add_definitions(-DPLUGIN_MANIFEST_DIR="${CMAKE_CURRENT_SOURCE_DIR}/data")
