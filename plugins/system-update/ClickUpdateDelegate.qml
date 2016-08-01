@@ -25,14 +25,15 @@ UpdateDelegate {
     property string signedUrl
 
     // Makes the progress bar indeterminate when waiting
-    Binding {
-        target: update
-        property: "progress"
-        value: -1
-        when: {
-            var queued = updateState === Update.StateQueuedForDownload;
-            var installing = updateState === Update.StateInstalling;
-            return queued || installing;
-        }
-    }
+    // FIXME: Disabled until lp:1587176 is fixed.
+    // Binding {
+    //     target: update
+    //     property: "progress"
+    //     value: -1
+    //     when: {
+    //         var queued = updateState === Update.StateQueuedForDownload;
+    //         var installing = updateState === Update.StateInstalling;
+    //         return queued || installing;
+    //     }
+    // }
 }
