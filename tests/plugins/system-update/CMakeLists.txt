@@ -37,7 +37,7 @@ add_test(tst-clickclient tst-clickclient)
 set_tests_properties(
     tst-clickclient
         PROPERTIES
-        ENVIRONMENT "IGNORE_CREDENTIALS=1;URL_APPS=http://127.0.0.1:9009/metadata"
+        ENVIRONMENT "IGNORE_CREDENTIALS=1;URL_APPS=http://127.0.0.1:9009/metadata;QT_QPA_PLATFORM=minimal"
 )
 target_link_libraries(tst-clickclient ${PLUGIN_LIBS})
 
