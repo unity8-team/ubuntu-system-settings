@@ -284,10 +284,10 @@ void ManagerImpl::launch(const QString &identifier, const uint &revision)
         return;
     }
 
-    qWarning() << Q_FUNC_INFO << "packageName" << update->packageName();
+    qWarning() << Q_FUNC_INFO << "identifier" << update->identifier();
 
     gchar * appId = ubuntu_app_launch_triplet_to_app_id(
-        update->packageName().toLatin1().data(), nullptr, nullptr
+        update->identifier().toLatin1().data(), nullptr, nullptr
     );
 
     qWarning() << Q_FUNC_INFO << appId;
