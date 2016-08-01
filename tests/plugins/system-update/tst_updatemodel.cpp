@@ -368,9 +368,10 @@ private slots:
         }
         {
             auto update = createUpdate("test", 1);
+            auto target = QDateTime::currentDateTimeUtc();
             UpdateModel::Roles role(UpdateModel::UpdatedAtRole);
-            QVariant value(QDateTime::currentDateTimeUtc());
-            update->setUpdatedAt(QDateTime::currentDateTimeUtc());
+            QVariant value(target);
+            update->setUpdatedAt(target);
             QTest::newRow("UpdatedAtRole") << role << value << update;
         }
     }
