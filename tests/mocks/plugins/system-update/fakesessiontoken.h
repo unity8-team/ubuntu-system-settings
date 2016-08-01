@@ -28,8 +28,7 @@ namespace UpdatePlugin
 class MockSessionToken : public Click::SessionToken
 {
 public:
-    MockSessionToken(QObject *parent = nullptr)
-        : Click::SessionToken(parent) {};
+    MockSessionToken() : Click::SessionToken() {};
     virtual ~MockSessionToken() {};
 
     virtual bool isValid() const
@@ -45,8 +44,8 @@ public:
         return signedUrl;
     };
 
-    bool valid;
-    QString signedUrl;
+    bool valid = true;
+    QString signedUrl = QString::null;
 };
 } // UpdatePlugin
 #endif // MOCK_SESSIONTOKEN_H

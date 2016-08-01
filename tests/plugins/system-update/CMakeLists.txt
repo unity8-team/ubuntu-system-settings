@@ -62,11 +62,6 @@ add_executable(tst-clickmanager
     tst_clickmanager.cpp
 )
 add_test(tst-clickmanager tst-clickmanager)
-set_tests_properties(
-    tst-clickmanager
-        PROPERTIES
-        ENVIRONMENT "IGNORE_CREDENTIALS=1"
-)
 target_link_libraries(tst-clickmanager ${PLUGIN_LIBS})
 
 add_executable(tst-imagemanager

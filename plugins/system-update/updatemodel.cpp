@@ -72,7 +72,7 @@ QHash<int, QByteArray> UpdateModel::roleNames() const
         names[AutomaticRole] = "automatic";
         names[ErrorRole] = "error";
         names[PackageNameRole] = "packageName";
-        names[SignedDownloadUrl] = "signedDownloadUrl";
+        names[SignedDownloadUrlRole] = "signedDownloadUrl";
     }
 
     return names;
@@ -138,7 +138,7 @@ QVariant UpdateModel::data(const QModelIndex &index, int role) const
         return update->error();
     case PackageNameRole:
         return update->packageName();
-    case SignedDownloadUrl:
+    case SignedDownloadUrlRole:
         return update->signedDownloadUrl();
     }
     return QVariant();

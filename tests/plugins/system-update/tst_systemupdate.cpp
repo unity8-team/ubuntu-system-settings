@@ -120,7 +120,6 @@ private slots:
         QTest::newRow("Checking all") << false << false << true << true << SystemUpdate::Status::StatusCheckingAllUpdates;
         QTest::newRow("Checking all (network fail)") << true << false << true << true << SystemUpdate::Status::StatusNetworkError;
         QTest::newRow("Checking all (server fail)") << false << true << true << true << SystemUpdate::Status::StatusServerError;
-        // Network failure is the most important one in a multiple failure scenario.
         QTest::newRow("Checking all (multiple fail)") << true << true << true << true << SystemUpdate::Status::StatusServerError;
     }
     void testStatus()

@@ -35,7 +35,7 @@ namespace Click
  * scenarios in which a click download is expected to happen within 5 minutes.
  * The token this downloader downloads is valid for 24 hours.
  *
- * [1] https://bugs.launchpad.net/clickmanager-plugin/+bug/1231422
+ * [1] lp:1231422
  */
 class TokenDownloader : public QObject
 {

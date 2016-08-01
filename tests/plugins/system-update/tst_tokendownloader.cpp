@@ -92,9 +92,9 @@ private slots:
     }
     void testDownload()
     {
-        QString targetUrl("http://example.org");
+        QString targetUrl("http://example.org?signedUrl");
         m_update->setDownloadUrl(targetUrl);
-        m_instance->download("url");
+        m_instance->download("signedUrl");
         QCOMPARE(m_mockclient->requestedUrl.toString(), targetUrl);
     }
 private:

@@ -55,6 +55,7 @@ public:
                          Manifest *manifest,
                          SSO *sso,
                          TokenDownloaderFactory *tokenDownloadFactory,
+                         SessionToken *token,
                          QObject *parent = nullptr);
     ~ManagerImpl();
 

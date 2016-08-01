@@ -29,6 +29,7 @@ void MockSystemImage::downloadUpdate()
 
 void MockSystemImage::forceAllowGSMDownload()
 {
+    m_called << "forceAllowGSMDownload";
 }
 
 void MockSystemImage::applyUpdate()
@@ -94,4 +95,15 @@ bool MockSystemImage::called(const QString &functionName)
 void MockSystemImage::reset()
 {
     m_called.clear();
+}
+
+int MockSystemImage::downloadMode()
+{
+    return m_downloadMode;
+}
+
+void MockSystemImage::setDownloadMode(const int &downloadMode)
+{
+    m_downloadMode = downloadMode;
+    Q_EMIT downloadModeChanged();
 }

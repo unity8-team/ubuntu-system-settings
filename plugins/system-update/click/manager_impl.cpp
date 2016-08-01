@@ -53,9 +53,10 @@ ManagerImpl::ManagerImpl(UpdateModel *model, Network::Manager *nam,
     : ManagerImpl(model,
                   nam,
                   new ClientImpl(nam),
-                  new ManifestImpl(),
-                  new SSOImpl(),
+                  new ManifestImpl,
+                  new SSOImpl,
                   new TokenDownloaderFactoryImpl,
+                  new SessionTokenImpl,
                   parent)
 {
     m_client->setParent(this);
@@ -69,6 +70,7 @@ ManagerImpl::ManagerImpl(UpdateModel *model,
                          Manifest *manifest,
                          SSO *sso,
                          TokenDownloaderFactory *tokenDownloadFactory,
+                         SessionToken *token,
                          QObject *parent)
     : Manager(parent)
     , m_model(model)
@@ -77,7 +79,7 @@ ManagerImpl::ManagerImpl(UpdateModel *model,
     , m_manifest(manifest)
     , m_sso(sso)
     , m_tokenDownloadFactory(tokenDownloadFactory)
-    , m_sessionToken(new SessionTokenImpl())
+    , m_sessionToken(token)
 {
     /* Request a manifest.
      *
@@ -204,17 +206,12 @@ void ManagerImpl::handleStateChange()
         break;
     case State::Failed:
         qWarning() << "changed to State::Failed";
-        Q_EMIT checkCanceled();
-        setState(State::Idle);
-        break;
-    case State::Complete:
-        qWarning() << "changed to State::Complete";
-        Q_EMIT checkCompleted();
-        setState(State::Idle);
-        break;
     case State::Canceled:
         qWarning() << "changed to State::Canceled";
         Q_EMIT checkCanceled();
+    case State::Complete:
+        qWarning() << "changed to State::Complete";
+        Q_EMIT checkCompleted();
         setState(State::Idle);
         break;
     }
@@ -437,6 +434,7 @@ void ManagerImpl::handleCredentials(SessionToken *token)
 
     if (!m_sessionToken->isValid() && !Helpers::isIgnoringCredentials()) {
         qWarning() << Q_FUNC_INFO << "Got invalid session token.";
+        setAuthenticated(false);
         return;
     }
     qWarning() << Q_FUNC_INFO << "Got VALID session token.";
@@ -449,6 +447,7 @@ void ManagerImpl::handleCredentials(SessionToken *token)
 
 void ManagerImpl::handleCredentialsAbsence()
 {
+    m_sessionToken = std::unique_ptr<SessionToken>(new SessionTokenImpl());
     setAuthenticated(false);
     cancel();
 }

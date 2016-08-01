@@ -34,6 +34,8 @@ class MockSystemImage : public QObject
                NOTIFY currentBuildNumberChanged)
     Q_PROPERTY(int targetBuildNumber READ targetBuildNumber
                NOTIFY targetBuildNumberChanged)
+    Q_PROPERTY(int downloadMode READ downloadMode WRITE setDownloadMode
+               NOTIFY downloadModeChanged)
 public:
     explicit MockSystemImage(QObject *parent = nullptr)
         : QObject(parent) {};
@@ -62,6 +64,7 @@ public:
     Q_INVOKABLE void reset(); // mock only
 
 Q_SIGNALS:
+    void downloadModeChanged();
     void updateDownloaded();
     void checkingForUpdatesChanged();
     void currentBuildNumberChanged();
@@ -73,8 +76,9 @@ private:
     bool m_checkingForUpdates = false;
     int m_currentBuildNumber = 0;
     int m_targetBuildNumber = -1;
+    int m_downloadMode = -1;
 
-    QStringList m_called;
+    QStringList m_called = QStringList();
 };
 
 #endif // MOCK_SYSTEMIMAGE_H

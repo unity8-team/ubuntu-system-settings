@@ -214,10 +214,13 @@ ItemPage {
                         iconUrl: model.iconUrl
                         name: title
 
-                        onRetry: SystemImage.downloadUpdate();
+                        onRetry: download()
                         onDownload: {
-                            console.warn('si downloadUpdate from qml');
-                            SystemImage.downloadUpdate();
+                            if (SystemImage.downloadMode < 2) {
+                                SystemImage.forceAllowGSMDownload();
+                            } else {
+                                SystemImage.downloadUpdate();
+                            }
                         }
                         onPause: SystemImage.pauseDownload();
                         onInstall: {

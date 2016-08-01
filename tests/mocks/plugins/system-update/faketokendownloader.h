@@ -56,6 +56,11 @@ public:
         Q_EMIT downloadFailed(m_update);
     }
 
+    void mockCredentialError()
+    {
+        Q_EMIT credentialError();
+    }
+
     QString downloadUrl;
 public slots:
     virtual void cancel() override {}

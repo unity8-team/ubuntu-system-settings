@@ -31,12 +31,10 @@ SessionTokenImpl::SessionTokenImpl(const UbuntuOne::Token &token)
     : SessionToken()
     , m_token(token)
 {
-    qWarning() << "SessionTokenImpl ctor" << token.name() << token.isValid();
 }
 
 bool SessionTokenImpl::isValid() const
 {
-    qWarning() << Q_FUNC_INFO << m_token.isValid();
     return m_token.isValid();
 }
 
@@ -44,7 +42,6 @@ QString SessionTokenImpl::signUrl(const QString url,
                                   const QString method,
                                   bool asQuery) const
 {
-    qWarning() << Q_FUNC_INFO;
     return m_token.signUrl(url, method, asQuery);
 }
 } // Click

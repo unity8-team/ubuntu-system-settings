@@ -59,8 +59,8 @@ public:
       AutomaticRole,
       ErrorRole,
       PackageNameRole,
-      SignedDownloadUrl,
-      LastRole = SignedDownloadUrl
+      SignedDownloadUrlRole,
+      LastRole = SignedDownloadUrlRole
     };
 
     explicit UpdateModel(QObject *parent = nullptr);

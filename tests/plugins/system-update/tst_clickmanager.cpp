@@ -22,6 +22,7 @@
 
 #include "plugins/system-update/fakeclient.h"
 #include "plugins/system-update/fakemanifest.h"
+#include "plugins/system-update/fakesessiontoken.h"
 #include "plugins/system-update/fakesso.h"
 #include "plugins/system-update/faketokendownloader.h"
 #include "plugins/system-update/faketokendownloader_factory.h"
@@ -37,9 +38,10 @@
 
 using namespace UpdatePlugin;
 
-typedef QList<QSharedPointer<Update>> appList;
+typedef QList<QSharedPointer<Update>> UpdateList;
 
-Q_DECLARE_METATYPE(appList)
+Q_DECLARE_METATYPE(UpdateList)
+Q_DECLARE_METATYPE(MockSessionToken*)
 
 class TstClickManager : public QObject
 {
@@ -55,9 +57,15 @@ private slots:
         m_mockmanifest = new MockManifest;
         m_mocksso = new MockSSO;
         m_mockdownloadfactory = new MockTokenDownloaderFactory;
+
+        // The Manager will take ownership of this object.
+        m_mocksessiontoken = new MockSessionToken;
+        m_mocksessiontoken->valid = true;
+
         m_instance = new Click::ManagerImpl(m_model, nullptr, m_mockclient,
                                             m_mockmanifest, m_mocksso,
-                                            m_mockdownloadfactory);
+                                            m_mockdownloadfactory,
+                                            m_mocksessiontoken);
         m_model->setParent(m_instance);
         m_mockclient->setParent(m_instance);
         m_mockmanifest->setParent(m_instance);
@@ -80,28 +88,34 @@ private slots:
         update->setRemoteVersion(version);
         return update;
     }
-    void testCheckStarts()
+    void testCheckRequestsCredentialsWhenNone()
     {
-        QSignalSpy checkStartsSpy(m_instance, SIGNAL(checkingForUpdatesChanged()));
+        m_mocksso->mockCredentialsDeleted();
         m_instance->check();
-        QTRY_COMPARE(checkStartsSpy.count(), 1);
+        QVERIFY(m_mocksso->requestCredentialsCalled);
     }
-    void testCheckAskForManifest()
+    void testCheckRequestsStartsAfterCredentials()
     {
-        m_instance->check();
+        // The Manager will take ownership of this object.
+        auto token = new MockSessionToken;
+        token->valid = true;
+        m_mocksso->mockCredentialsFound(token);
+        QTRY_VERIFY(m_instance->checkingForUpdates());
+
+        // Make sure Manager asked for a manifest as well.
         QVERIFY(m_mockmanifest->asked);
     }
     void testManifestUpload_data()
     {
         QTest::addColumn<QJsonArray>("manifest");
-        QTest::addColumn<appList>("existingUpdates");
+        QTest::addColumn<UpdateList>("existingUpdates");
         {
             QByteArray manifest("[]");
-            QTest::newRow("Empty") << JSONfromQByteArray(manifest) << appList();
+            QTest::newRow("Empty") << JSONfromQByteArray(manifest) << UpdateList();
         }
         {
             QByteArray manifest("[]");
-            auto apps = appList();
+            auto apps = UpdateList();
             for (int i = 0; i < 20; i++) {
                 apps.append(createUpdate(QString::number(i), i));
             }
@@ -109,7 +123,7 @@ private slots:
         }
         {
             QByteArray manifest("[{\"name\":\"a\", \"version\": \"1\"}]");
-            auto apps = appList();
+            auto apps = UpdateList();
             apps << createUpdate("a", 0, "2");
             QTest::newRow("One") << JSONfromQByteArray(manifest) << apps;
         }
@@ -118,7 +132,7 @@ private slots:
                 "{\"name\":\"a\", \"version\": \"1\"},"
                 "{\"name\": \"b\", \"version\": \"1\"}"
             "]");
-            auto apps = appList();
+            auto apps = UpdateList();
             apps << createUpdate("a", 0, "2") << createUpdate("b", 1, "2");
             QTest::newRow("Two") << JSONfromQByteArray(manifest) << apps;
         }
@@ -126,7 +140,7 @@ private slots:
     void testManifestUpload()
     {
         QFETCH(QJsonArray, manifest);
-        QFETCH(appList, existingUpdates);
+        QFETCH(UpdateList, existingUpdates);
 
         Q_FOREACH(auto update, existingUpdates) {
             qWarning() << "adding existingUpdates" << update->identifier() << update->revision();
@@ -143,14 +157,14 @@ private slots:
     void testSynchronization_data()
     {
         QTest::addColumn<QJsonArray>("manifest");
-        QTest::addColumn<appList>("existingUpdates");
-        QTest::addColumn<appList>("markedInstalled");
-        QTest::addColumn<appList>("removed");
-        QTest::addColumn<appList>("targetDbUpdates");
+        QTest::addColumn<UpdateList>("existingUpdates");
+        QTest::addColumn<UpdateList>("markedInstalled");
+        QTest::addColumn<UpdateList>("removed");
+        QTest::addColumn<UpdateList>("targetDbUpdates");
 
         {   // Mark one update as installed.
             QByteArray manifest("[{\"name\": \"a\", \"version\": \"v1\"}]");
-            appList existing, installed, removed, targetDbUpdates;
+            UpdateList existing, installed, removed, targetDbUpdates;
             auto package1 = createUpdate("a", 0, "v1");
             existing << package1;
             installed << package1;
@@ -160,7 +174,7 @@ private slots:
         }
         {   // Remove an update.
             QByteArray manifest("[]");
-            appList existing, installed, removed, targetDbUpdates;
+            UpdateList existing, installed, removed, targetDbUpdates;
             auto package1 = createUpdate("a", 0, "v1");
             existing << package1;
             removed << package1;
@@ -173,7 +187,7 @@ private slots:
                 "{\"name\": \"b\", \"version\": \"v1\" },"
                 "{\"name\": \"c\", \"version\": \"v2\" }"
             "]");
-            appList existing, installed, removed, targetDbUpdates;
+            UpdateList existing, installed, removed, targetDbUpdates;
             auto package1 = createUpdate("b", 0, "v1");
             auto package2 = createUpdate("c", 0, "v2");
             existing << package1 << package2;
@@ -183,7 +197,7 @@ private slots:
         }
         {   // Remove two updates.
             QByteArray manifest("[]");
-            appList existing, installed, removed, targetDbUpdates;
+            UpdateList existing, installed, removed, targetDbUpdates;
             auto package1 = createUpdate("b", 0, "v1");
             auto package2 = createUpdate("c", 0, "v2");
             removed << package1 << package2;
@@ -193,7 +207,7 @@ private slots:
         }
         {   // Remove one, mark one as installed.
             QByteArray manifest("[{\"name\": \"a\", \"version\": \"v1\"}]");
-            appList existing, installed, removed, targetDbUpdates;
+            UpdateList existing, installed, removed, targetDbUpdates;
             auto package1 = createUpdate("a", 0, "v1");
             auto package2 = createUpdate("b", 0, "v2");
             existing << package1 << package2;
@@ -208,7 +222,7 @@ private slots:
                 "{\"name\": \"a\", \"version\": \"v1\" },"
                 "{\"name\": \"b\", \"version\": \"v1\" }"
             "]");
-            appList existing, installed, removed, targetDbUpdates;
+            UpdateList existing, installed, removed, targetDbUpdates;
             auto package1 = createUpdate("a", 0, "v2");
             auto package2 = createUpdate("b", 0, "v2");
             existing << package1 << package2;
@@ -221,7 +235,7 @@ private slots:
             QByteArray manifest("["
                 "{\"name\": \"a\", \"version\": \"v1\" }"
             "]");
-            appList existing, installed, removed, targetDbUpdates;
+            UpdateList existing, installed, removed, targetDbUpdates;
             auto package1 = createUpdate("a", 0, "v0");
             package1->setKind(Update::Kind::KindImage);
             existing << package1;
@@ -238,10 +252,10 @@ private slots:
         ensures that 1) a check is not started, 2) our database is
         synchronized. */
         QFETCH(QJsonArray, manifest);
-        QFETCH(appList, existingUpdates);
-        QFETCH(appList, markedInstalled);
-        QFETCH(appList, removed);
-        QFETCH(appList, targetDbUpdates);
+        QFETCH(UpdateList, existingUpdates);
+        QFETCH(UpdateList, markedInstalled);
+        QFETCH(UpdateList, removed);
+        QFETCH(UpdateList, targetDbUpdates);
 
         Q_FOREACH(auto update, existingUpdates) {
             m_model->add(update);
@@ -262,7 +276,7 @@ private slots:
         // Assert no client interaction after synchronizing.
         QVERIFY(m_mockclient->requestedUrl.isEmpty());
     }
-    void testManifestFailure()
+    void testManifestFailureCompletesCheck()
     {
         m_instance->check();
         QSignalSpy checkCompletedSpy(m_instance, SIGNAL(checkCompleted()));
@@ -319,22 +333,39 @@ private slots:
         QSignalSpy authenticatedChangedSpy(m_instance, SIGNAL(authenticatedChanged()));
         m_mocksso->mockCredentialsNotFound();
         QTRY_COMPARE(authenticatedChangedSpy.count(), 1);
+        QCOMPARE(m_instance->authenticated(), false);
     }
     void testSSOCredentialsDeleted()
     {
         QSignalSpy authenticatedChangedSpy(m_instance, SIGNAL(authenticatedChanged()));
         m_mocksso->mockCredentialsDeleted();
         QTRY_COMPARE(authenticatedChangedSpy.count(), 1);
+        QCOMPARE(m_instance->authenticated(), false);
+    }
+    void testSSOCredentialsFound_data()
+    {
+        QTest::addColumn<MockSessionToken*>("token");
+        QTest::addColumn<bool>("targetAuthenticated");
+        {
+            // Manager will assume ownership over the token.
+            auto token = new MockSessionToken();
+            token->valid = false;
+            QTest::newRow("Invalid") << token << false;
+        }
+        {
+            // Manager will assume ownership over the token.
+            auto token = new MockSessionToken();
+            token->valid = true;
+            QTest::newRow("Valid") << token << true;
+        }
     }
     void testSSOCredentialsFound()
     {
-        QSignalSpy authenticatedChangedSpy(m_instance, SIGNAL(authenticatedChanged()));
-        m_mocksso->mockCredentialsDeleted();
-        QTRY_COMPARE(authenticatedChangedSpy.count(), 1);
+        QFETCH(MockSessionToken*, token);
+        QFETCH(bool, targetAuthenticated);
 
-        // The token is ignored.
-        // m_mocksso->mockCredentialsFound(UbuntuOne::Token());
-        // QTRY_COMPARE(authenticatedChangedSpy.count(), 2);
+        m_mocksso->mockCredentialsFound(token);
+        QTRY_COMPARE(m_instance->authenticated(), targetAuthenticated);
     }
     void testManifestParser()
     {
@@ -382,7 +413,7 @@ private slots:
     {
         QTest::addColumn<QJsonArray>("metadata");
         QTest::addColumn<QJsonArray>("manifest");
-        QTest::addColumn<bool>("downloadSuccess");
+        QTest::addColumn<QString>("outCome");
         QTest::addColumn<QString>("downloadedToken");
 
         QByteArray metaJson("[{"
@@ -399,28 +430,30 @@ private slots:
 
         {
             QString token("token");
-            bool success = true;
             QTest::newRow("Success")
-                << metadata << manifest << success << token;
+                << metadata << manifest << "success" << token;
         }
         {
             QString token("");
-            bool success = true;
             QTest::newRow("Success (empty token)")
-                << metadata << manifest << success << token;
+                << metadata << manifest << "success" << token;
         }
         {
             QString token("");
-            bool success = false;
             QTest::newRow("Failure")
-                << metadata << manifest << success << token;
+                << metadata << manifest << "failure" << token;
+        }
+        {
+            QString token("");
+            QTest::newRow("Credential error")
+                << metadata << manifest << "credentialError" << token;
         }
     }
     void testTokenDownload()
     {
         QFETCH(QJsonArray, metadata);
         QFETCH(QJsonArray, manifest);
-        QFETCH(bool, downloadSuccess);
+        QFETCH(QString, outCome);
         QFETCH(QString, downloadedToken);
 
         m_instance->check();
@@ -432,17 +465,19 @@ private slots:
         QCOMPARE(dl->downloadUrl, QString("download_url"));
 
         QSignalSpy checkCompletesSpy(m_instance, SIGNAL(checkCompleted()));
-        if (downloadSuccess) {
+        if (outCome == "success") {
             dl->mockDownloadSucceeded(downloadedToken);
-        } else {
+        } else if (outCome == "failure") {
             dl->mockDownloadFailed();
+        } else if (outCome == "credentialError") {
+            dl->mockCredentialError();
+            QTRY_VERIFY(!m_instance->authenticated());
         }
         QTRY_COMPARE(checkCompletesSpy.count(), 1);
     }
     void testRemotelyUpdatedApp()
     {
         /* Tests that apps that are remotely updated, get marked as such. */
-
         auto update = createUpdate("a", 0);
         update->setRemoteVersion("v1");
         m_model->add(update);
@@ -459,10 +494,6 @@ private slots:
 
         // Assert no client interaction while not checking.
         QVERIFY(m_mockclient->requestedUrl.isEmpty());
-    }
-    void testCredentialErrorOnTokenDownload()
-    {
-
     }
 private:
     // Create JSON Array from a QByteArray.
@@ -489,6 +520,7 @@ private:
     MockManifest *m_mockmanifest = nullptr;
     MockSSO *m_mocksso = nullptr;
     MockTokenDownloaderFactory *m_mockdownloadfactory = nullptr;
+    MockSessionToken *m_mocksessiontoken = nullptr;
     Click::Manager *m_instance = nullptr;
     UpdateModel *m_model = nullptr;
     QTemporaryDir *m_dir;

@@ -101,19 +101,30 @@ Item {
             compare(overlay.visible, true);
         }
 
-        function test_auth_data() {
+        function test_authenticationNotificationVisibility_data() {
             return [
-                { auth: false },
-                { auth: true },
+                { auth: false, visible: true, status: SystemUpdate.StatusIdle },
+                { auth: false, visible: false, status: SystemUpdate.StatusCheckingClickUpdates },
+                { auth: false, visible: true, status: SystemUpdate.StatusCheckingSystemUpdates },
+                { auth: false, visible: false, status: SystemUpdate.StatusCheckingAllUpdates },
+                { auth: false, visible: false, status: SystemUpdate.StatusNetworkError },
+                { auth: false, visible: false, status: SystemUpdate.StatusServerError },
+                { auth: true, visible: false, status: SystemUpdate.StatusIdle },
+                { auth: true, visible: false, status: SystemUpdate.StatusCheckingClickUpdates },
+                { auth: true, visible: false, status: SystemUpdate.StatusCheckingSystemUpdates },
+                { auth: true, visible: false, status: SystemUpdate.StatusCheckingAllUpdates },
+                { auth: true, visible: false, status: SystemUpdate.StatusNetworkError },
+                { auth: true, visible: false, status: SystemUpdate.StatusServerError }
             ];
         }
 
-        function test_auth(data) {
-            instance.online = true;
+        function test_authenticationNotificationVisibility(data) {
+            instance.online = true; // It's never shown if not online.
+            SystemUpdate.mockStatus(data.status);
 
             instance.authenticated = data.auth;
             var notif = findChild(instance, "noAuthenticationNotification");
-            compare(notif.visible, !data.auth);
+            compare(notif.visible, data.visible);
         }
 
         function test_uoaConfic() {
@@ -174,14 +185,14 @@ Item {
             compare(item.visible, data.visible);
         }
 
-        function test_previousUpdates_data() {
+        function test_previousUpdatesVisibility_data() {
             return [
                 { count: 0, visible: false },
                 { count: 1, visible: true }
             ];
         }
 
-        function test_previousUpdates(data) {
+        function test_previousUpdatesVisibility(data) {
             var previous = findChild(instance, "installedUpdates");
             for (var i = 0; i < data.count; i++) {
                 SystemUpdate.model.mockAddUpdate("app" + i, i, Update.KindClick);
@@ -190,7 +201,7 @@ Item {
             compare(previous.visible, data.count > 0);
         }
 
-        function test_lowPower() {
+        function test_noInstallOnLowPower() {
             instance.havePower = false;
             SystemUpdate.model.mockAddUpdate("ubuntu", 1, Update.KindImage);
             findChild(instance, "global").requestInstall();
@@ -203,7 +214,7 @@ Item {
             }, false);
         }
 
-        function test_sufficientPower() {
+        function test_installOnSufficientPower() {
             instance.havePower = true;
             SystemUpdate.model.mockAddUpdate("ubuntu", 1, Update.KindImage);
             findChild(instance, "global").requestInstall();
@@ -220,6 +231,7 @@ Item {
             SystemUpdate.model.mockAddUpdate("ubuntu", 1, Update.KindImage);
             var delegate = findChild(instance, "imageUpdatesDelegate-0");
             instance.havePower = true;
+            SystemImage.downloadMode = 2; // Always download.
 
             delegate.retry();
             verify(SystemImage.called("downloadUpdate"));
@@ -243,6 +255,24 @@ Item {
             tryCompareFunction(function () {
                 return !!findChild(testRoot, "imagePromptInstall");
             }, false);
+        }
+
+        function test_forceAllowGSMDownload() {
+            /* Test that we make s-i do what we want in cases where a Wi-Fi
+            update has stalled. */
+            SystemImage.downloadMode = 0; // Never download.
+            SystemUpdate.model.mockAddUpdate("ubuntu", 1, Update.KindImage);
+            var delegate = findChild(instance, "imageUpdatesDelegate-0");
+            delegate.download();
+            verify(SystemImage.called("forceAllowGSMDownload"));
+        }
+
+        function test_forceAllowGSMDownloadRetry() {
+            SystemImage.downloadMode = 0; // Never download.
+            SystemUpdate.model.mockAddUpdate("ubuntu", 1, Update.KindImage);
+            var delegate = findChild(instance, "imageUpdatesDelegate-0");
+            delegate.retry();
+            verify(SystemImage.called("forceAllowGSMDownload"));
         }
 
         function test_imageUpdateFailureOverflow()
