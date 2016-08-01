@@ -78,7 +78,7 @@ private:
     int m_targetBuildNumber = -1;
     int m_downloadMode = -1;
 
-    QStringList m_called = QStringList();
+    QStringList m_called;
 };
 
 #endif // MOCK_SYSTEMIMAGE_H
