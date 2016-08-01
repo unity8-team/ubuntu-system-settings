@@ -45,6 +45,4 @@ public:
 
     Q_INVOKABLE void mockSetSourceModel(MockUpdateModel *source);
 };
-
-
 #endif // MOCK_UPDATE_MODEL_H

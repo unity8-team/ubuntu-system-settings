@@ -30,12 +30,6 @@ file(COPY
     DESTINATION
     ${CMAKE_CURRENT_BINARY_DIR})
 
-# # Install a mock click command
-# file(COPY
-#     ${CMAKE_CURRENT_SOURCE_DIR}/mockclickcommand
-#     DESTINATION
-#     ${CMAKE_CURRENT_BINARY_DIR})
-
 add_executable(tst-clickclient
     tst_clickclient.cpp
 )

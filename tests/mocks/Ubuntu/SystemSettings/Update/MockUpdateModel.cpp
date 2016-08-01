@@ -23,14 +23,14 @@
 void MockUpdateModel::mockAddUpdate(const QString &id, const uint &revision, const uint &kind)
 {
     using namespace UpdatePlugin;
-    QSharedPointer<Update> u = QSharedPointer<Update>(new Update);
-    u->setIdentifier(id);
-    u->setKind((Update::Kind) kind);
-    u->setRevision(revision);
-    u->setTitle(QString("Test App %1").arg(id));
-    u->setRemoteVersion(QString("v%1").arg(revision));
-    u->setBinaryFilesize(5000 * 1000);
-    add(u);
+    auto update = QSharedPointer<Update>(new Update);
+    update->setIdentifier(id);
+    update->setKind((Update::Kind) kind);
+    update->setRevision(revision);
+    update->setTitle(QString("Test App %1").arg(id));
+    update->setRemoteVersion(QString("v%1").arg(revision));
+    update->setBinaryFilesize(5000 * 1000);
+    add(update);
 }
 
 void MockUpdateModel::reset()
@@ -42,4 +42,3 @@ void MockUpdateModelFilter::mockSetSourceModel(MockUpdateModel *source)
 {
     setSourceModel(source);
 }
-
