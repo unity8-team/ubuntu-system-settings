@@ -40,6 +40,8 @@ public:
                             const QString method,
                             bool asQuery = false) const
     {
+        Q_UNUSED(url);
+        Q_UNUSED(method);
         Q_UNUSED(asQuery);
         return signedUrl;
     };
