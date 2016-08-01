@@ -99,11 +99,9 @@ private slots:
     }
 private:
     MockApiClient *m_mockclient = nullptr;
-
     Click::TokenDownloaderImpl *m_instance = nullptr;
     QSharedPointer<Update> m_update;
 };
 
 QTEST_MAIN(TstClickTokenDownloader)
 #include "tst_tokendownloader.moc"
-

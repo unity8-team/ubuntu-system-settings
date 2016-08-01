@@ -279,9 +279,21 @@ void ManagerImpl::cancel()
 
 void ManagerImpl::launch(const QString &identifier, const uint &revision)
 {
-    // if (!ubuntu_app_launch_start_application(appId.toLatin1().data(), nullptr)) {
-    //     qWarning() << Q_FUNC_INFO << "Could not launch app" << appId;
-    // }
+    auto update = m_model->get(identifier, revision);
+    if (!update) {
+        return;
+    }
+
+    gchar * appId = ubuntu_app_launch_triplet_to_app_id(
+        update->packageName().toLatin1().data(), nullptr, nullptr
+    );
+
+    qWarning() << Q_FUNC_INFO << appId;
+
+    if (appId && !ubuntu_app_launch_start_application(appId, nullptr)) {
+        qWarning() << Q_FUNC_INFO << "Could not launch app" << appId;
+    }
+    g_free(appId);
 }
 
 void ManagerImpl::handleManifest(const QJsonArray &manifest)
