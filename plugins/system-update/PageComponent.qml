@@ -58,7 +58,7 @@ ItemPage {
     property int updatesCount: {
         var count = 0;
         if (authenticated) {
-            count += clickUpdates.count;
+            count += clickRepeater.count;
         }
         count += imageRepeater.count;
         return count;
@@ -180,17 +180,16 @@ ItemPage {
                 id: updatesAvailableHeader
                 // TODO: String should be “Updates Available”.
                 text: i18n.tr("Updates")
-                visible: imageUpdates.visible || clickUpdates.visible
+                visible: imageUpdateCol.visible || clickUpdatesCol.visible
             }
 
-            ListView {
-                id: imageUpdates
+            Column {
+                id: imageUpdateCol
                 objectName: "imageUpdates"
                 anchors { left: parent.left; right: parent.right }
-                height: contentItem.height
                 visible: {
                     var s = SystemUpdate.status;
-                    var haveUpdates = count > 0;
+                    var haveUpdates = imageRepeater.count > 0;
                     switch (s) {
                     case SystemUpdate.StatusCheckingClickUpdates:
                     case SystemUpdate.StatusIdle:
@@ -198,50 +197,54 @@ ItemPage {
                     }
                     return false;
                 }
-                model: SystemUpdate.imageUpdates
-                delegate: UpdateDelegate {
-                    objectName: "imageUpdatesDelegate-" + index
-                    width: imageUpdates.width
-                    updateState: model.updateState
-                    progress: model.progress
-                    version: remoteVersion
-                    size: model.size
-                    changelog: model.changelog
-                    error: model.error
-                    kind: model.kind
-                    iconUrl: model.iconUrl
-                    name: title
 
-                    onResume: download()
-                    onRetry: download()
-                    onDownload: {
-                        if (SystemImage.downloadMode < 2) {
-                            SystemImage.downloadUpdate();
-                            SystemImage.forceAllowGSMDownload();
-                        } else {
-                            SystemImage.downloadUpdate();
-                        }
-                    }
-                    onPause: SystemImage.pauseDownload();
-                    onInstall: {
-                        var popup = PopupUtils.open(
-                            Qt.resolvedUrl("ImageUpdatePrompt.qml"), null, {
-                                havePowerForUpdate: root.havePower
+                Repeater {
+                    id: imageRepeater
+                    model: SystemUpdate.imageUpdates
+
+                    delegate: UpdateDelegate {
+                        objectName: "imageUpdatesDelegate-" + index
+                        width: imageUpdateCol.width
+                        updateState: model.updateState
+                        progress: model.progress
+                        version: remoteVersion
+                        size: model.size
+                        changelog: model.changelog
+                        error: model.error
+                        kind: model.kind
+                        iconUrl: model.iconUrl
+                        name: title
+
+                        onResume: download()
+                        onRetry: download()
+                        onDownload: {
+                            if (SystemImage.downloadMode < 2) {
+                                SystemImage.downloadUpdate();
+                                SystemImage.forceAllowGSMDownload();
+                            } else {
+                                SystemImage.downloadUpdate();
                             }
-                        );
-                        popup.requestSystemUpdate.connect(SystemImage.applyUpdate);
+                        }
+                        onPause: SystemImage.pauseDownload();
+                        onInstall: {
+                            var popup = PopupUtils.open(
+                                Qt.resolvedUrl("ImageUpdatePrompt.qml"), null, {
+                                    havePowerForUpdate: root.havePower
+                                }
+                            );
+                            popup.requestSystemUpdate.connect(SystemImage.applyUpdate);
+                        }
                     }
                 }
             }
 
-            ListView {
-                id: clickUpdates
+            Column {
+                id: clickUpdatesCol
                 objectName: "clickUpdates"
                 anchors { left: parent.left; right: parent.right }
-                height: contentItem.height
                 visible: {
                     var s = SystemUpdate.status;
-                    var haveUpdates = count > 0;
+                    var haveUpdates = clickRepeater.count > 0;
                     switch (s) {
                     case SystemUpdate.StatusCheckingSystemUpdates:
                     case SystemUpdate.StatusIdle:
@@ -249,61 +252,59 @@ ItemPage {
                     }
                     return false;
                 }
-                remove: Transition {
-                    ParallelAnimation {
-                        UbuntuNumberAnimation { property: "opacity"; to: 0 }
-                        UbuntuNumberAnimation { property: "height"; to: 0 }
-                    }
-                }
-                removeDisplaced: Transition {
+                move: Transition {
                     UbuntuNumberAnimation { property: "y" }
                 }
-                model: SystemUpdate.clickUpdates
-                delegate: ClickUpdateDelegate {
-                    objectName: "clickUpdatesDelegate" + index
-                    width: clickUpdates.width
-                    updateState: model.updateState
-                    progress: model.progress
-                    version: remoteVersion
-                    size: model.size
-                    name: title
-                    iconUrl: model.iconUrl
-                    kind: model.kind
-                    changelog: model.changelog
-                    error: model.error
-                    signedUrl: signedDownloadUrl
+                Repeater {
+                    id: clickRepeater
+                    model: SystemUpdate.clickUpdates
 
-                    onInstall: downloadHandler.createDownload(model);
-                    onPause: downloadHandler.pauseDownload(model)
-                    onResume: downloadHandler.resumeDownload(model)
-                    onRetry: {
-                        /* This creates a new signed URL with which we can
-                        retry the download. See onSignedUrlChanged. */
-                        SystemUpdate.retry(model.identifier,
-                                           model.revision);
-                    }
+                    delegate: ClickUpdateDelegate {
+                        objectName: "clickUpdatesDelegate" + index
+                        width: clickUpdatesCol.width
+                        updateState: model.updateState
+                        progress: model.progress
+                        version: remoteVersion
+                        size: model.size
+                        name: title
+                        iconUrl: model.iconUrl
+                        kind: model.kind
+                        changelog: model.changelog
+                        error: model.error
+                        signedUrl: signedDownloadUrl
 
-                    onSignedUrlChanged: {
-                        // If we have a signedUrl, user intend to retry.
-                        if (signedUrl) {
-                            downloadHandler.retryDownload(model);
+                        onInstall: downloadHandler.createDownload(model);
+                        onPause: downloadHandler.pauseDownload(model)
+                        onResume: downloadHandler.resumeDownload(model)
+                        onRetry: {
+                            /* This creates a new signed URL with which we can
+                            retry the download. See onSignedUrlChanged. */
+                            SystemUpdate.retry(model.identifier,
+                                               model.revision);
                         }
-                    }
 
-                    Connections {
-                        target: glob
-                        onInstall: install()
-                    }
+                        onSignedUrlChanged: {
+                            // If we have a signedUrl, user intend to retry.
+                            if (signedUrl) {
+                                downloadHandler.retryDownload(model);
+                            }
+                        }
 
-                    /* If we a downloadId, we expect UDM to restore it
-                    after some time. Workaround for lp:1603770. */
-                    Timer {
-                        id: downloadTimeout
-                        interval: 30000
-                        running: true
-                        onTriggered: {
-                            if (model.downloadId) {
-                                downloadHandler.assertDownloadExist(model);
+                        Connections {
+                            target: glob
+                            onInstall: install()
+                        }
+
+                        /* If we a downloadId, we expect UDM to restore it
+                        after some time. Workaround for lp:1603770. */
+                        Timer {
+                            id: downloadTimeout
+                            interval: 30000
+                            running: true
+                            onTriggered: {
+                                if (model.downloadId) {
+                                    downloadHandler.assertDownloadExist(model);
+                                }
                             }
                         }
                     }
@@ -340,7 +341,9 @@ ItemPage {
                 objectName: "installedUpdates"
                 anchors { left: parent.left; right: parent.right }
                 visible: installedRepeater.count > 0
-
+                move: Transition {
+                    UbuntuNumberAnimation { property: "y" }
+                }
                 Repeater {
                     id: installedRepeater
                     model: SystemUpdate.installedUpdates

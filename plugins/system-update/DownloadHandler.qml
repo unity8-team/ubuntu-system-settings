@@ -117,7 +117,7 @@ Item {
         }
         var downloadUrl = click.downloadUrl;
         var metadata = {
-            "command": click.command,
+            // "command": click.command,
             "title": click.title,
             "showInIndicator": false
         };
