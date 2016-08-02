@@ -180,16 +180,17 @@ ItemPage {
                 id: updatesAvailableHeader
                 // TODO: String should be “Updates Available”.
                 text: i18n.tr("Updates")
-                visible: imageUpdateCol.visible || clickUpdates.visible
+                visible: imageUpdates.visible || clickUpdates.visible
             }
 
-            Column {
-                id: imageUpdateCol
+            ListView {
+                id: imageUpdates
                 objectName: "imageUpdates"
                 anchors { left: parent.left; right: parent.right }
+                height: contentItem.height
                 visible: {
                     var s = SystemUpdate.status;
-                    var haveUpdates = imageRepeater.count > 0;
+                    var haveUpdates = count > 0;
                     switch (s) {
                     case SystemUpdate.StatusCheckingClickUpdates:
                     case SystemUpdate.StatusIdle:
@@ -197,43 +198,38 @@ ItemPage {
                     }
                     return false;
                 }
+                model: SystemUpdate.imageUpdates
+                delegate: UpdateDelegate {
+                    objectName: "imageUpdatesDelegate-" + index
+                    width: imageUpdates.width
+                    updateState: model.updateState
+                    progress: model.progress
+                    version: remoteVersion
+                    size: model.size
+                    changelog: model.changelog
+                    error: model.error
+                    kind: model.kind
+                    iconUrl: model.iconUrl
+                    name: title
 
-                Repeater {
-                    id: imageRepeater
-                    model: SystemUpdate.imageUpdates
-
-                    delegate: UpdateDelegate {
-                        objectName: "imageUpdatesDelegate-" + index
-                        width: imageUpdateCol.width
-                        updateState: model.updateState
-                        progress: model.progress
-                        version: remoteVersion
-                        size: model.size
-                        changelog: model.changelog
-                        error: model.error
-                        kind: model.kind
-                        iconUrl: model.iconUrl
-                        name: title
-
-                        onResume: download()
-                        onRetry: download()
-                        onDownload: {
-                            if (SystemImage.downloadMode < 2) {
-                                SystemImage.downloadUpdate();
-                                SystemImage.forceAllowGSMDownload();
-                            } else {
-                                SystemImage.downloadUpdate();
+                    onResume: download()
+                    onRetry: download()
+                    onDownload: {
+                        if (SystemImage.downloadMode < 2) {
+                            SystemImage.downloadUpdate();
+                            SystemImage.forceAllowGSMDownload();
+                        } else {
+                            SystemImage.downloadUpdate();
+                        }
+                    }
+                    onPause: SystemImage.pauseDownload();
+                    onInstall: {
+                        var popup = PopupUtils.open(
+                            Qt.resolvedUrl("ImageUpdatePrompt.qml"), null, {
+                                havePowerForUpdate: root.havePower
                             }
-                        }
-                        onPause: SystemImage.pauseDownload();
-                        onInstall: {
-                            var popup = PopupUtils.open(
-                                Qt.resolvedUrl("ImageUpdatePrompt.qml"), null, {
-                                    havePowerForUpdate: root.havePower
-                                }
-                            );
-                            popup.requestSystemUpdate.connect(SystemImage.applyUpdate);
-                        }
+                        );
+                        popup.requestSystemUpdate.connect(SystemImage.applyUpdate);
                     }
                 }
             }

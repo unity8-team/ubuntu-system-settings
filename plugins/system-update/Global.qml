@@ -113,7 +113,6 @@ Item {
             objectName: "updatesGlobalInfoLabel"
             text: i18n.tr("Install %1 update", "Install %1 updates",
                           updatesCount).arg(updatesCount)
-
             // TODO: Strings should be like the commented code below.
             // // TRANSLATORS: %1 is number of software updates available.
             // text: i18n.tr("%1 update available",
