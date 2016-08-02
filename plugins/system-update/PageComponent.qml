@@ -214,6 +214,7 @@ ItemPage {
                         iconUrl: model.iconUrl
                         name: title
 
+                        onResume: download()
                         onRetry: download()
                         onDownload: {
                             if (SystemImage.downloadMode < 2) {
