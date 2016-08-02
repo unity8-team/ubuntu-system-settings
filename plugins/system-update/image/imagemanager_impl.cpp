@@ -64,6 +64,10 @@ ManagerImpl::ManagerImpl(QSystemImage *si, UpdateModel *model, QObject *parent)
             this, SLOT(handleUpdateProcessing()));
     connect(m_si, SIGNAL(updateProcessFailed(const QString&)),
             this, SLOT(handleUpdateProcessFailed(const QString&)));
+
+    /* If we have a pending image update here that has started, make sure
+    we call DownloadUpdate so as to capture the UpdateDownloaded event. */
+    m_si->downloadUpdate();
 }
 
 const QString ManagerImpl::ubuntuId = QString("ubuntu");

@@ -218,6 +218,7 @@ ItemPage {
                         onRetry: download()
                         onDownload: {
                             if (SystemImage.downloadMode < 2) {
+                                SystemImage.downloadUpdate();
                                 SystemImage.forceAllowGSMDownload();
                             } else {
                                 SystemImage.downloadUpdate();
