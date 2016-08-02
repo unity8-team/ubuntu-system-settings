@@ -72,6 +72,10 @@ ManagerImpl::ManagerImpl(QSystemImage *si, UpdateModel *model, QObject *parent)
     if (update && update->state() == Update::State::StateDownloading) {
         m_si->downloadUpdate();
     }
+
+    /* This is currently the best we can do for marking image updates
+    as, as signals aren't usually sent from s-i.installed. lp:1600449 */
+    handleCurrentBuildNumberChanged();
 }
 
 void ManagerImpl::handleUpdateAvailableStatus(const bool isAvailable,
@@ -87,7 +91,7 @@ void ManagerImpl::handleUpdateAvailableStatus(const bool isAvailable,
     int rev;
     rev = availableVersion.toInt(&ok);
     if (!ok) {
-        qCritical() << Q_FUNC_INFO << "failed to convert version to a number";
+        qWarning() << Q_FUNC_INFO << "Got non-numerical version, ignoring.";
         return;
     }
     if (isAvailable) {
@@ -135,8 +139,9 @@ void ManagerImpl::handleUpdateFailed(const int &consecutiveFailureCount, const Q
 
 void ManagerImpl::handleCurrentBuildNumberChanged()
 {
+    qWarning() << Q_FUNC_INFO << m_si->currentBuildNumber();
     /* This is currently the best we can do for marking image updates
-    as installed. lp:1600449 */
+    as installed, as signals aren't usually sent from s-i. lp:1600449 */
     m_model->setInstalled(ubuntuId, m_si->currentBuildNumber());
 }
 

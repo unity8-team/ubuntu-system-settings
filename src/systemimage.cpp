@@ -170,8 +170,8 @@ QString QSystemImage::pauseDownload() {
 }
 
 void QSystemImage::initializeProperties() {
-    QDBusPendingReply<QMap<QString, QString> > reply =
-        m_iface.call("Information");
+    QDBusPendingReply<QMap<QString, QString> > reply
+        = m_iface.call("Information");
     reply.waitForFinished();
     if (reply.isValid()) {
         QMap<QString, QString> result = reply.argumentAt<0>();
