@@ -65,7 +65,7 @@ Item {
             var btn = findChild(cNotif, "updateRequestAuthButton");
             mouseClick(btn, btn.width / 2, btn.height / 2);
             requestauthSpy.wait();
-            compare(btn.visible, true);
+            verify(btn.visible, "log in button not visible");
         }
     }
 }

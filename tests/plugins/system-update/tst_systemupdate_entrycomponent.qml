@@ -64,12 +64,12 @@ Item {
         }
 
         function test_defaultVisibility() {
-            compare(instance.height, 0);
+            compare(instance.height, 0, "default visibility was wrong");
         }
 
         function test_clickUpdates() {
             SystemUpdate.model.mockAddUpdate("app" + 0, 0, Update.KindClick);
-            tryCompare(instance, "height", units.gu(7));
+            tryCompare(instance, "height", units.gu(7), 5000, "item did not have the correct height when we had click updates");
         }
     }
 
@@ -97,12 +97,12 @@ Item {
         }
 
         function test_visibleWhenImageUpdate() {
-            tryCompare(instance, "height", units.gu(7));
+            tryCompare(instance, "height", units.gu(7), 5000, "item did not have the correct height when we had image updates");
         }
 
         function test_clickUpdates() {
             SystemUpdate.model.mockAddUpdate("app" + 0, 0, Update.KindClick);
-            tryCompare(instance, "height", units.gu(7));
+            tryCompare(instance, "height", units.gu(7), 5000, "item did not have the correct height when we had all types of updates");
         }
     }
 }

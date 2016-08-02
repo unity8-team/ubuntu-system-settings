@@ -77,7 +77,7 @@ Item {
             instance.online = true;
             instance.status = SystemUpdate.StatusCheckingAllUpdates;
 
-            compare(instance.hidden, false, "global was not visible");
+            verify(!instance.hidden, "global was hidden");
         }
 
         function test_stop() {
@@ -86,7 +86,7 @@ Item {
             instance.status = SystemUpdate.StatusCheckingAllUpdates;
 
             var stop = findChild(instance, "updatesGlobalStopButton");
-            compare(stop.visible, true);
+            verify(stop.visible, "stop button was not visible");
             mouseClick(stop, stop.width / 2, stop.height / 2);
             stopSignalSpy.wait();
         }
@@ -96,7 +96,7 @@ Item {
             instance.online = true;
             instance.status = SystemUpdate.StatusIdle;
 
-            compare(instance.hidden, false, "global was not visible");
+            verify(!instance.hidden, "global was hidden");
         }
 
         function test_installApps() {
@@ -106,8 +106,8 @@ Item {
 
             var info = findChild(instance, "updatesGlobalInfoLabel");
             var install = findChild(instance, "updatesGlobalInstallButton");
-            compare(install.visible, true);
-            compare(info.text, i18n.tr("%1 update available", "%1 updates available", 2).arg(2));
+            verify(install.visible, "install button was not visible");
+            compare(info.text, i18n.tr("%1 update available", "%1 updates available", 2).arg(2), "install button had wrong text");
             mouseClick(install, install.width / 2, install.height / 2);
             requestInstallSpy.wait();
         }
@@ -120,8 +120,8 @@ Item {
 
             var info = findChild(instance, "updatesGlobalInfoLabel");
             var install = findChild(instance, "updatesGlobalInstallButton");
-            compare(install.visible, true);
-            compare(info.text, i18n.tr("%1 update available", "%1 updates available", 2).arg(2));
+            verify(install.visible, "install button was not visible");
+            compare(info.text, i18n.tr("%1 update available", "%1 updates available", 2).arg(2), "install button had wrong text");
             mouseClick(install, install.width / 2, install.height / 2);
             requestInstallSpy.wait();
         }
@@ -131,7 +131,7 @@ Item {
             instance.online = true;
             instance.status = SystemUpdate.StatusIdle;
 
-            compare(instance.hidden, true, "global was visible for single update");
+            verify(instance.hidden, "global was not hidden when only one update");
         }
 
         function test_batchMode() {
@@ -140,7 +140,7 @@ Item {
             instance.status = SystemUpdate.StatusIdle;
             instance.batchMode = true;
 
-            compare(instance.hidden, true);
+            verify(instance.hidden, "global was hidden in batchMode");
         }
 
         function test_visibility_data() {
@@ -293,7 +293,7 @@ Item {
             instance.online = data.online;
             instance.updatesCount = data.updatesCount;
             if (data.batchMode) instance.batchMode = data.batchMode
-            compare(instance.hidden, data.hidden);
+            compare(instance.hidden, data.hidden, "had wrong visibility");
         }
     }
 }

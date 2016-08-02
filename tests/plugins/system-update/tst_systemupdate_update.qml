@@ -33,7 +33,6 @@ Item {
         id: update
 
         UpdateDelegate {
-            property bool showAllUI: true
             width: testRoot.width
         }
     }
@@ -365,14 +364,10 @@ Item {
             }
 
             compare(error.visible, data.error.visiblity, "error had wrong visibility");
-
             compare(instance.error, data.error.text, "error text was wrong");
-
             compare(progressbar.visible, data.progressbar.visibility, "progress bar had wrong visibility");
             compare(progressbar.value, data.progressbar.progress, "progress bar had wrong value");
-
             compare(statusLabel.text, data.targetStatusLabelText, "status label had wrong text");
-
             compare(downloadLabel.text, data.targetDownloadLabelText, "download label had wrong text");
         }
 
