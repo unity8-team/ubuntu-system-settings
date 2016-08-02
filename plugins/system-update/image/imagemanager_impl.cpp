@@ -23,6 +23,7 @@ namespace UpdatePlugin
 {
 namespace Image
 {
+const QString ManagerImpl::ubuntuId = QString("ubuntu");
 ManagerImpl::ManagerImpl(UpdateModel *model, QObject *parent)
     : ManagerImpl(new QSystemImage(), model, parent)
 {
@@ -67,10 +68,11 @@ ManagerImpl::ManagerImpl(QSystemImage *si, UpdateModel *model, QObject *parent)
 
     /* If we have a pending image update here that has started, make sure
     we call DownloadUpdate so as to capture the UpdateDownloaded event. */
-    m_si->downloadUpdate();
+    auto update = m_model->get(ubuntuId, m_si->targetBuildNumber());
+    if (update && update->state() == Update::State::StateDownloading) {
+        m_si->downloadUpdate();
+    }
 }
-
-const QString ManagerImpl::ubuntuId = QString("ubuntu");
 
 void ManagerImpl::handleUpdateAvailableStatus(const bool isAvailable,
                                               const bool downloading,
