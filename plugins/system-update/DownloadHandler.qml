@@ -108,7 +108,6 @@ Item {
     }
 
     function retryDownload(click) {
-        console.warn('retry download');
         return createDownload(click, true);
     }
 
@@ -165,7 +164,7 @@ Item {
         if (!getDownloadFor(click)) {
             updateModel.setError(
                 click.identifier, click.revision,
-                i18n.tr("Download timed out. Please try again later.")
+                i18n.tr("Installation failed")
             );
         }
     }

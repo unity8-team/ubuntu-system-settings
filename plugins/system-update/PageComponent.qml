@@ -178,7 +178,8 @@ ItemPage {
 
             SettingsItemTitle {
                 id: updatesAvailableHeader
-                text: i18n.tr("Updates available")
+                // TODO: String should be “Updates Available”.
+                text: i18n.tr("Updates")
                 visible: imageUpdateCol.visible || clickUpdatesCol.visible
             }
 
@@ -328,7 +329,8 @@ ItemPage {
             }
 
             SettingsItemTitle {
-                text: i18n.tr("Recent updates")
+                // TODO: String should be Recent updates.
+                text: i18n.tr("Installed")
                 visible: installedCol.visible
             }
 
@@ -358,14 +360,7 @@ ItemPage {
                         launchable: (!!packageName &&
                                      model.kind === Update.KindClick)
 
-                        onLaunch: {
-                            /* The Application ID is the string
-                            "$(click_package)_$(application)_$(version) */
-                            // SystemUpdate.launch("%1_%2_%3".arg(identifier)
-                            //                               .arg(packageName)
-                            //                               .arg(remoteVersion));
-                            SystemUpdate.launch(identifier, revision);
-                        }
+                        onLaunch: SystemUpdate.launch(identifier, revision);
                     }
                 }
             }

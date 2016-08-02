@@ -261,7 +261,7 @@ void ManagerImpl::retry(const QString &identifier, const uint &revision)
             update->setState(Update::State::StateAvailable);
         } else {
             qWarning() << Q_FUNC_INFO << "Can't retry: invalid session token.";
-            update->setError(_("Authentication failure."));
+            update->setError(_("Installation failed."));
             update->setState(Update::State::StateFailed);
         }
         update->setProgress(0);

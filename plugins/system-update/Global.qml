@@ -84,7 +84,8 @@ Item {
 
         Button {
             objectName: "updatesGlobalStopButton"
-            text: i18n.tr("Stop")
+            // TODO: String should be “Stop”
+            text: i18n.tr("Cancel")
             onClicked: g.stop()
             Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
         }
@@ -115,15 +116,18 @@ Item {
                           "%1 updates available",
                           updatesCount).arg(updatesCount)
             Layout.fillWidth: true
+            visible: showAllUI // Hidden due to missing strings
         }
 
         Button {
             objectName: "updatesGlobalInstallButton"
             text: {
                 if (g.requireRestart === true) {
-                    return i18n.tr("Update all…");
+                    // TODO: String should be “Update all…”
+                    return i18n.tr("Restart & Install");
                 } else {
-                    return i18n.tr("Update all");
+                    // TODO: String should be “Update all”
+                    return i18n.tr("Install");
                 }
             }
             onClicked: g.requestInstall()

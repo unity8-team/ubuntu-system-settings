@@ -48,7 +48,6 @@ ListItem {
         ProgressionSlot {}
     }
 
-
     DownloadManager {
         onDownloadFinished: {
             SystemUpdate.model.setInstalled(

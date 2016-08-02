@@ -54,17 +54,6 @@ Column {
     signal install()
     signal launch()
 
-    states: [
-        State {
-            name: "finished"
-            PropertyChanges {
-                target: update
-                height: 0
-                clip: true
-            }
-        }
-    ]
-
     Behavior on height {
         animation: UbuntuNumberAnimation {}
     }
@@ -210,7 +199,8 @@ Column {
                             }
 
                         case Update.StateInstalled:
-                            return i18n.tr("Open");
+                            // TODO: String should be “Open”
+                            return i18n.tr("Start");
 
                         default:
                             console.error("Unknown update state", updateState);
@@ -296,13 +286,11 @@ Column {
                             return i18n.tr("Paused");
 
                         case Update.StateQueuedForDownload:
-                            return i18n.tr("Waiting to download");
+                            // TODO: String should be “Waiting to download”
+                            return i18n.tr("Downloading");
 
                         case Update.StateDownloading:
                             return i18n.tr("Downloading");
-
-                        // case Update.StateFailed:
-                        //     return i18n.tr("Installation failed");
 
                         default:
                             return "";
@@ -348,11 +336,14 @@ Column {
                             return i18n.tr("Installed");
 
                         case Update.StateInstalled:
-                            /* TRANSLATORS: %1 is the date at which this
-                            update was applied. */
-                            return i18n.tr("Updated at %1").arg(
-                                updatedAt.toLocaleDateString(Qt.locale(), "d MMMM")
-                            );
+                            // TODO: show this
+                            if (showAllUI) {
+                                /* TRANSLATORS: %1 is the date at which this
+                                update was applied. */
+                                return i18n.tr("Updated at %1").arg(
+                                    updatedAt.toLocaleDateString(Qt.locale(), "d MMMM")
+                                );
+                            }
 
                         default:
                             return "";
@@ -375,7 +366,8 @@ Column {
 
                 Label {
                     id: errorElementTitle
-                    text: i18n.tr("Update failed")
+                    // TODO: String should be “Update failed“
+                    text: i18n.tr("Installation failed")
                     color: UbuntuColors.red
                 }
 
@@ -455,11 +447,4 @@ Column {
     } // Icon and rest layout
 
     ListItems.ThinDivider {}
-
-    Timer {
-        id: hideTimer
-        interval: 2000
-        running: update.updateState === Update.StateInstallFinished
-        onTriggered: update.state = "finished"
-    }
 }
