@@ -300,7 +300,10 @@ ItemPage {
                             interval: 30000
                             running: true
                             onTriggered: {
-                                if (model.downloadId) {
+                                var s = updateState;
+                                if (model.downloadId
+                                    || s === Update.StateQueuedForDownload
+                                    || s === Update.StateDownloading) {
                                     downloadHandler.assertDownloadExist(model);
                                 }
                             }
