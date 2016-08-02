@@ -107,7 +107,6 @@ Item {
             var info = findChild(instance, "updatesGlobalInfoLabel");
             var install = findChild(instance, "updatesGlobalInstallButton");
             verify(install.visible, "install button was not visible");
-            compare(info.text, i18n.tr("%1 update available", "%1 updates available", 2).arg(2), "install button had wrong text");
             mouseClick(install, install.width / 2, install.height / 2);
             requestInstallSpy.wait();
         }
@@ -121,7 +120,6 @@ Item {
             var info = findChild(instance, "updatesGlobalInfoLabel");
             var install = findChild(instance, "updatesGlobalInstallButton");
             verify(install.visible, "install button was not visible");
-            compare(info.text, i18n.tr("%1 update available", "%1 updates available", 2).arg(2), "install button had wrong text");
             mouseClick(install, install.width / 2, install.height / 2);
             requestInstallSpy.wait();
         }

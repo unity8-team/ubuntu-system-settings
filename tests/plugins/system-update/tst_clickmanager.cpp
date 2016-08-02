@@ -495,6 +495,10 @@ private slots:
         // Assert no client interaction while not checking.
         QVERIFY(m_mockclient->requestedUrl.isEmpty());
     }
+    void testRetryWithoutHavingRunCheck()
+    {
+        // Verify that a SessionToken is requested even if a check has not run.
+    }
 private:
     // Create JSON Array from a QByteArray.
     QJsonArray JSONfromQByteArray(const QByteArray &byteArray)
