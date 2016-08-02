@@ -252,9 +252,7 @@ ItemPage {
                     }
                     return false;
                 }
-                move: Transition {
-                    UbuntuNumberAnimation { property: "y" }
-                }
+
                 Repeater {
                     id: clickRepeater
                     model: SystemUpdate.clickUpdates
@@ -341,9 +339,7 @@ ItemPage {
                 objectName: "installedUpdates"
                 anchors { left: parent.left; right: parent.right }
                 visible: installedRepeater.count > 0
-                move: Transition {
-                    UbuntuNumberAnimation { property: "y" }
-                }
+
                 Repeater {
                     id: installedRepeater
                     model: SystemUpdate.installedUpdates
