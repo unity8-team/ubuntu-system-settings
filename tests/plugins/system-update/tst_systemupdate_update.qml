@@ -33,6 +33,7 @@ Item {
         id: update
 
         UpdateDelegate {
+            property bool showAllUI: true
             width: testRoot.width
         }
     }
@@ -198,7 +199,7 @@ Item {
                     progressbar: { visibility: true, progress: 0, },
                     error: { text: "", visiblity: false, },
                     targetStatusLabelText: "",
-                    targetDownloadLabelText: i18n.tr("Waiting to download"),
+                    targetDownloadLabelText: i18n.tr("Downloading"),
                 },
                 {
                     tag: "System update Waiting to download (Manual)",
@@ -209,7 +210,7 @@ Item {
                     progressbar: { visibility: true, progress: 0, },
                     error: { text: "", visiblity: false, },
                     targetStatusLabelText: "",
-                    targetDownloadLabelText: i18n.tr("Waiting to download"),
+                    targetDownloadLabelText: i18n.tr("Downloading"),
                 },
 
                 // Installing
@@ -299,27 +300,12 @@ Item {
                     targetStatusLabelText: i18n.tr("Installed"),
                     targetDownloadLabelText: "",
                 },
-                // Installed
-                // {
-                //     tag: "Click update installed",
-                //     updateState: Update.StateInstalled,
-                //     kind: Update.KindClick,
-                //     progress: 1,
-                //     button: { text: i18n.tr("Open"), visibility: true, state: false, signal: "launch" },
-                //     progressbar: { visibility: false, progress: 1, },
-                //     error: { text: "", visiblity: false, },
-                //     updatedAt: new Date("December 17, 1995 03:24:00"),
-                //     targetStatusLabelText: i18n.tr("Updated at %1").arg(
-                //         new Date("December 17, 1995 03:24:00").toLocaleDateString(Qt.locale(), "d MMMM")
-                //     ),
-                //     targetDownloadLabelText: "",
-                // },
                 {
                     tag: "System update installed",
                     updateState: Update.StateInstalled,
                     kind: Update.KindImage,
                     progress: 1,
-                    button: { text: i18n.tr("Open"), visibility: false, state: false },
+                    button: { text: i18n.tr("Start"), visibility: false, state: false },
                     progressbar: { visibility: false, progress: 1, },
                     error: { text: "", visiblity: false, },
                     updatedAt: new Date("December 17, 1995 03:24:00"),

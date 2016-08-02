@@ -209,7 +209,7 @@ Item {
 
             // An error will be displayed on the update.
             compare(delegate.updateState, Update.StateFailed);
-            compare(delegate.error, i18n.tr("Download timed out. Please try again later."));
+            compare(delegate.error, i18n.tr("Installation failed"));
         }
 
         function test_retryDownload() {
