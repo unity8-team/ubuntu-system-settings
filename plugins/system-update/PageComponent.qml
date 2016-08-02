@@ -58,7 +58,7 @@ ItemPage {
     property int updatesCount: {
         var count = 0;
         if (authenticated) {
-            count += clickRepeater.count;
+            count += clickUpdates.count;
         }
         count += imageRepeater.count;
         return count;
@@ -180,7 +180,7 @@ ItemPage {
                 id: updatesAvailableHeader
                 // TODO: String should be “Updates Available”.
                 text: i18n.tr("Updates")
-                visible: imageUpdateCol.visible || clickUpdatesCol.visible
+                visible: imageUpdateCol.visible || clickUpdates.visible
             }
 
             Column {
@@ -238,13 +238,14 @@ ItemPage {
                 }
             }
 
-            Column {
-                id: clickUpdatesCol
+            ListView {
+                id: clickUpdates
                 objectName: "clickUpdates"
                 anchors { left: parent.left; right: parent.right }
+                height: contentItem.height
                 visible: {
                     var s = SystemUpdate.status;
-                    var haveUpdates = clickRepeater.count > 0;
+                    var haveUpdates = count > 0;
                     switch (s) {
                     case SystemUpdate.StatusCheckingSystemUpdates:
                     case SystemUpdate.StatusIdle:
@@ -252,57 +253,61 @@ ItemPage {
                     }
                     return false;
                 }
+                remove: Transition {
+                    ParallelAnimation {
+                        UbuntuNumberAnimation { property: "opacity"; to: 0 }
+                        UbuntuNumberAnimation { property: "height"; to: 0 }
+                    }
+                }
+                removeDisplaced: Transition {
+                    UbuntuNumberAnimation { property: "y" }
+                }
+                model: SystemUpdate.clickUpdates
+                delegate: ClickUpdateDelegate {
+                    objectName: "clickUpdatesDelegate" + index
+                    width: clickUpdates.width
+                    updateState: model.updateState
+                    progress: model.progress
+                    version: remoteVersion
+                    size: model.size
+                    name: title
+                    iconUrl: model.iconUrl
+                    kind: model.kind
+                    changelog: model.changelog
+                    error: model.error
+                    signedUrl: signedDownloadUrl
 
-                Repeater {
-                    id: clickRepeater
-                    model: SystemUpdate.clickUpdates
+                    onInstall: downloadHandler.createDownload(model);
+                    onPause: downloadHandler.pauseDownload(model)
+                    onResume: downloadHandler.resumeDownload(model)
+                    onRetry: {
+                        /* This creates a new signed URL with which we can
+                        retry the download. See onSignedUrlChanged. */
+                        SystemUpdate.retry(model.identifier,
+                                           model.revision);
+                    }
 
-                    delegate: ClickUpdateDelegate {
-                        objectName: "clickUpdatesDelegate" + index
-                        width: clickUpdatesCol.width
-                        updateState: model.updateState
-                        progress: model.progress
-                        version: remoteVersion
-                        size: model.size
-                        name: title
-                        iconUrl: model.iconUrl
-                        kind: model.kind
-                        changelog: model.changelog
-                        error: model.error
-                        signedUrl: signedDownloadUrl
-
-                        onInstall: downloadHandler.createDownload(model);
-                        onPause: downloadHandler.pauseDownload(model)
-                        onResume: downloadHandler.resumeDownload(model)
-                        onRetry: {
-                            /* This creates a new signed URL with which we can
-                            retry the download. See onSignedUrlChanged. */
-                            SystemUpdate.retry(model.identifier,
-                                               model.revision);
+                    onSignedUrlChanged: {
+                        // If we have a signedUrl, user intend to retry.
+                        if (signedUrl) {
+                            downloadHandler.retryDownload(model);
                         }
+                    }
 
-                        onSignedUrlChanged: {
-                            // If we have a signedUrl, user intend to retry.
-                            if (signedUrl) {
-                                downloadHandler.retryDownload(model);
-                            }
-                        }
+                    Connections {
+                        target: glob
+                        onInstall: install()
+                    }
 
-                        Connections {
-                            target: glob
-                            onInstall: install()
-                        }
-
-                        /* If we a downloadId, we expect UDM to restore it
-                        after some time. Workaround for lp:1603770. */
-                        Timer {
-                            id: downloadTimeout
-                            interval: 30000
-                            running: true
-                            onTriggered: {
-                                if (model.downloadId) {
-                                    downloadHandler.assertDownloadExist(model);
-                                }
+                    /* If we a downloadId, we expect UDM to restore it
+                    after some time. Workaround for lp:1603770. */
+                    Timer {
+                        id: downloadTimeout
+                        interval: 30000
+                        running: true
+                        onTriggered: {
+                            if (model.downloadId) {
+                                downloadHandler.assertDownloadExist(model);
                             }
                         }
                     }

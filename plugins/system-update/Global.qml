@@ -111,12 +111,15 @@ Item {
 
         Label {
             objectName: "updatesGlobalInfoLabel"
-            // TRANSLATORS: %1 is number of software updates available.
-            text: i18n.tr("%1 update available",
-                          "%1 updates available",
+            text: i18n.tr("Install %1 update", "Install %1 updates",
                           updatesCount).arg(updatesCount)
+
+            // TODO: Strings should be like the commented code below.
+            // // TRANSLATORS: %1 is number of software updates available.
+            // text: i18n.tr("%1 update available",
+            //               "%1 updates available",
+            //               updatesCount).arg(updatesCount)
             Layout.fillWidth: true
-            visible: showAllUI // Hidden due to missing strings
         }
 
         Button {
