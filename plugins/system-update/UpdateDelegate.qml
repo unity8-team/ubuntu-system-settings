@@ -62,7 +62,6 @@ ListItem {
 
             RowLayout {
                 spacing: units.gu(2)
-                Layout.fillWidth: true
                 Layout.preferredWidth: parent.width
 
                 Label {
