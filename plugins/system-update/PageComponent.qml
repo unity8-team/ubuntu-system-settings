@@ -35,7 +35,7 @@ ItemPage {
     objectName: "systemUpdatesPage"
 
     header: PageHeader {
-        title: root.title
+        title: i18n.tr("Updates")
         flickable: scrollWidget
     }
 
@@ -359,6 +359,17 @@ ItemPage {
                         updateState: Update.StateInstalled
                         updatedAt: model.updatedAt
 
+                        leadingActions: ListItemActions {
+                           actions: [
+                               Action {
+                                    iconName: "delete"
+                                    onTriggered: SystemUpdate.remove(
+                                        model.identifier, model.revision
+                                    )
+                               }
+                           ]
+                        }
+
                         // Launchable if there's a package name on a click.
                         launchable: (!!packageName &&
                                      model.kind === Update.KindClick)
@@ -451,5 +462,5 @@ ItemPage {
         }
     }
 
-    Component.onCompleted: SystemUpdate.check()
+    Component.onCompleted: SystemUpdate.check(SystemUpdate.CheckAll)
 }

@@ -706,9 +706,23 @@ class SystemUpdatesBaseTestCase(UbuntuSystemSettingsTestCase,
         'start': False
     }
 
+    systemimage_parameters = {}
+
+    @classmethod
+    def setUpClass(cls):
+        cls.session_con = cls.get_dbus(False)
+
+        cls.start_system_bus()
+
+        si_tmpl = os.path.join(os.path.dirname(__file__), 'systemimage.py')
+        (cls.si_mock, cls.si_obj) = cls.spawn_server_template(
+            si_tmpl, parameters=cls.systemimage_parameters,
+            stdout=subprocess.PIPE)
+
+        super(SystemUpdatesBaseTestCase, cls).setUpClass()
+
     def setUp(self):
         """Go to SystemUpdates Page."""
-        self.session_con = self.get_dbus(False)
         self.clicksrv_manager = None
         if is_process_running(INDICATOR_NETWORK):
             _stop_process(INDICATOR_NETWORK)
@@ -738,6 +752,20 @@ class SystemUpdatesBaseTestCase(UbuntuSystemSettingsTestCase,
         if self.clicksrv_manager and self.clicksrv_manager.is_running():
             self.clicksrv_manager.stop()
         super(SystemUpdatesBaseTestCase, self).tearDown()
+
+    @classmethod
+    def tearDownClass(cls):
+        cls.si_mock.terminate()
+        cls.si_mock.wait()
+        if dbusmock.DBusTestCase.system_bus_pid is not None:
+            cls.stop_dbus(dbusmock.DBusTestCase.system_bus_pid)
+            del os.environ['DBUS_SYSTEM_BUS_ADDRESS']
+            dbusmock.DBusTestCase.system_bus_pid = None
+        if dbusmock.DBusTestCase.session_bus_pid is not None:
+            cls.stop_dbus(dbusmock.DBusTestCase.session_bus_pid)
+            del os.environ['DBUS_SESSION_BUS_ADDRESS']
+            dbusmock.DBusTestCase.session_bus_pid = None
+        super(SystemUpdatesBaseTestCase, cls).tearDownClass()
 
 
 class BackgroundBaseTestCase(

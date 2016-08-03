@@ -162,6 +162,15 @@ private slots:
         QCOMPARE(m_clickManager->checkingForUpdates(), checkingClick);
         QCOMPARE(m_imageManager->checkingForUpdates(), checkingImage);
     }
+    void testRemove()
+    {
+        auto update = QSharedPointer<Update>(new Update);
+        update->setIdentifier("a");
+        update->setRevision(1);
+        m_model->add(update);
+        m_instance->remove("a", 1);
+        QVERIFY(m_model->get("a", 1).isNull());
+    }
     void testIntegration()
     {
         /* Do this so as to test all the actual constructors. Since we cannot

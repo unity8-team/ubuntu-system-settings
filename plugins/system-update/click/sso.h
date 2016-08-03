@@ -36,26 +36,18 @@ class SSO : public QObject
 public:
     explicit SSO(QObject *parent = nullptr) : QObject(parent) {};
     virtual ~SSO() {};
-
-    // Requests credentials.
     virtual void requestCredentials() = 0;
-
-    // Invalidates credentials.
     virtual void invalidateCredentials() = 0;
 
 Q_SIGNALS:
     /* This signal is emitted when credentials are found.
      *
      * Note: It is the responsibility of the receiver to delete this token when
-     * done with it, as the token will not be deleted by SSO, nor used accessed
+     * done with it, as the token will not be deleted by SSO, nor used/accessed
      * further.
      */
     void credentialsFound(SessionToken *token);
-
-    // This signal is emitted when credentials are not found.
     void credentialsNotFound();
-
-    // This signal is emitted when credentials are deleted.
     void credentialsDeleted();
 };
 } // Click

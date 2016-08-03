@@ -210,4 +210,8 @@ void SystemUpdate::retry(const QString &identifier, const uint &revision)
     m_clickManager->retry(identifier, revision);
 }
 
+void SystemUpdate::remove(const QString &identifier, const uint &revision)
+{
+    m_model->remove(identifier, revision);
+}
 } // UpdatePlugin

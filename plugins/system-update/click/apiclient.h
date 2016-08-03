@@ -37,7 +37,6 @@ public:
     explicit ApiClient(QObject *parent = nullptr) : QObject(parent) {};
     virtual ~ApiClient() {};
 public Q_SLOTS:
-    // Cancel all network activity.
     virtual void cancel() = 0;
 
     /* Request metadata.
@@ -49,24 +48,14 @@ public Q_SLOTS:
     virtual void requestMetadata(const QUrl &url,
                                  const QList<QString> &packages) = 0;
 
-    // Request a token.
+    // Request a token, see lp:1231422.
     virtual void requestToken(const QUrl &url) = 0;
 Q_SIGNALS:
-    // This signal is emitted whenever a metadata request succeeds.
     void metadataRequestSucceeded(const QJsonArray &metadata);
-
-    // This signal is emitted whenever a token request succeeds.
     void tokenRequestSucceeded(const QString &token);
-
-    // This signal is emitted whenever a network error occur.
     void networkError();
-
-    // This signal is emitted whenever a server error occur.
     void serverError();
-
-    // This signal is emitted whenever a credential error occur.
     void credentialError();
-
     /* This signal is emitted when the client wants to cancel any active
      * network requests.
      */

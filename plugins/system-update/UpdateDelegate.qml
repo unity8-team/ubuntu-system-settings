@@ -26,10 +26,8 @@ import Ubuntu.Components.ListItems 1.3 as ListItems
 import Ubuntu.Components.Themes 1.3
 import Ubuntu.SystemSettings.Update 1.0
 
-Column {
+ListItem {
     id: update
-
-    spacing: units.gu(2)
 
     property int updateState // This is an Update::State
     property int kind // This is an Update::Kind
@@ -39,13 +37,11 @@ Column {
     property date updatedAt
     property bool launchable: false
 
-    property alias error: errorElementDetail.text
     property alias name: nameLabel.text
+    property alias error: errorElementDetail.text
     property alias iconUrl: icon.source
     property alias changelog: changelogLabel.text
     property alias progress: progressBar.value
-
-    height: childrenRect.height
 
     signal retry()
     signal download()
@@ -54,64 +50,20 @@ Column {
     signal install()
     signal launch()
 
+    height: layout.height + (divider.visible ? divider.height : 0)
     Behavior on height {
         animation: UbuntuNumberAnimation {}
     }
 
-    Item {
-        height: 1; width: 1; // Spacer
-    }
-
-    // Layouts the icon first, then the rest to the right/left of that.
-    RowLayout {
-        id: rootLayout
-        anchors {
-            left: parent.left
-            leftMargin: units.gu(2)
-            right: parent.right
-            rightMargin: units.gu(2)
-        }
-        spacing: units.gu(2)
-
-        Item {
-            Layout.preferredWidth: units.gu(4)
-            Layout.preferredHeight: units.gu(4)
-            Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
-
-            Item {
-                anchors {
-                    top: parent.top
-                    horizontalCenter: parent.horizontalCenter
-                }
-                width: units.gu(4)
-                height: width
-
-                Image {
-                    id: icon
-                    visible: kind === Update.KindImage
-                    anchors.fill: parent
-                    asynchronous: true
-                    smooth: true
-                    mipmap: true
-                }
-
-                UbuntuShape {
-                    visible: kind !== Update.KindImage
-                    anchors.fill: parent
-                    source: icon
-                }
-            }
-
-        }
-
-        // Positions everything but the icon (and divider).
-        ColumnLayout {
-            Layout.minimumHeight: units.gu(6)
+    SlotsLayout {
+        id: layout
+        mainSlot: ColumnLayout {
             spacing: units.gu(1)
 
-            // Positions name and button.
             RowLayout {
                 spacing: units.gu(2)
+                Layout.fillWidth: true
+                Layout.preferredWidth: parent.width
 
                 Label {
                     id: nameLabel
@@ -124,12 +76,7 @@ Column {
                 Button {
                     id: button
                     objectName: "updateButton"
-
                     Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
-
-                    color: theme.palette.normal.background
-
-                    strokeColor: "transparent"
                     visible: {
                         switch (updateState) {
                         case Update.StateInstalled:
@@ -444,7 +391,37 @@ Column {
                 }
             }
         } // Layout for the rest of the stuff
-    } // Icon and rest layout
 
-    ListItems.ThinDivider {}
+        Item {
+            SlotsLayout.position: SlotsLayout.Leading;
+            width: units.gu(4)
+            height: width
+
+            Image {
+                id: icon
+                visible: kind === Update.KindImage && !fallback.visible
+                anchors.fill: parent
+                asynchronous: true
+                smooth: true
+                mipmap: true
+            }
+
+            UbuntuShape {
+                id: shape
+                visible: kind !== Update.KindImage && !fallback.visible
+                anchors.fill: parent
+                source: icon
+            }
+
+            Image {
+                id: fallback
+                visible: icon.status === Image.Error
+                source : Qt.resolvedUrl("/usr/share/icons/suru/apps/scalable/ubuntu-logo-symbolic.svg")
+                anchors.fill: parent
+                asynchronous: true
+                smooth: true
+                mipmap: true
+            }
+        }
+    }
 }

@@ -22,15 +22,12 @@
 #include "click/tokendownloader.h"
 #include "network/accessmanager.h"
 
-#include <QObject>
-
 namespace UpdatePlugin
 {
 namespace Click
 {
 class TokenDownloaderFactory : public QObject
 {
-    Q_OBJECT
 public:
     virtual ~TokenDownloaderFactory() {};
     /* Create a TokenDownloader.

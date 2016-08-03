@@ -33,16 +33,13 @@ class ManagerImpl : public Manager
 public:
     explicit ManagerImpl(UpdateModel *model, QObject *parent = nullptr);
     explicit ManagerImpl(QSystemImage *si,
-                     UpdateModel *model,
-                     QObject *parent = nullptr);
+                         UpdateModel *model,
+                         QObject *parent = nullptr);
     ~ManagerImpl() {};
-
     virtual void check() override;
     virtual void cancel() override;
     virtual bool checkingForUpdates() const;
-
     static const QString ubuntuId;
-
 private Q_SLOTS:
     void handleUpdateAvailableStatus(const bool isAvailable,
                                      const bool downloading,
@@ -60,7 +57,6 @@ private Q_SLOTS:
     void handleUpdateProcessing();
     void handleUpdateProcessFailed(const QString &reason);
     void handleCheckingForUpdatesChanged();
-
 private:
     UpdateModel *m_model;
     QSystemImage *m_si;

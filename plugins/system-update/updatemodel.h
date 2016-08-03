@@ -68,14 +68,10 @@ public:
 
     // For testing, when we want to explicitly set the database path.
     explicit UpdateModel(const QString &dbpath, QObject *parent = nullptr);
-
     UpdateDb* db();
-
     QVariant data(const QModelIndex &index, int role) const Q_DECL_OVERRIDE;
     QHash<int, QByteArray> roleNames() const Q_DECL_OVERRIDE;
     int rowCount(const QModelIndex &parent = QModelIndex()) const Q_DECL_OVERRIDE;
-
-    // Add Update to the model
     void add(const QSharedPointer<Update> &update);
 
     /* Update an Update.
@@ -84,9 +80,8 @@ public:
      * will be created.
      */
     void update(const QSharedPointer<Update> &update);
-
-    // Remove an Update.
     void remove(const QSharedPointer<Update> &update);
+    void remove(const QString &id, const uint &revision);
 
     // Fetch will grab data from the db, while get returns a from cache.
     QSharedPointer<Update> fetch(const QString &id, const uint &revision);
@@ -153,8 +148,6 @@ public:
      * Note that this filter is disabled by default.
      */
     uint kindFilter() const;
-
-    // Filter Updates on a Kind.
     void filterOnKind(const uint &kind);
 
     /* Return the install filter.
@@ -163,8 +156,6 @@ public:
      * Note that this filter is disabled by default.
      */
     bool installed() const;
-
-    // Filter on whether or not an Update is installed.
     void filterOnInstalled(const bool installed);
 Q_SIGNALS:
     void kindFilterChanged();

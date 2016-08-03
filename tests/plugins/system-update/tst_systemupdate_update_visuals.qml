@@ -80,7 +80,7 @@ Item {
                             progress: 50,
                             version: "1.0",
                             changelog: "Changes",
-                            iconUrl: "file:///usr/share/icons/suru/apps/sources/online-accounts-facebook.svg"
+                            iconUrl: "https://upload.wikimedia.org/wikipedia/en/8/80/Wikipedia-logo-v2.svg"
                         },
                         {
                             name: "StateQueuedForDownload",
@@ -202,8 +202,7 @@ Item {
                             version: "1.0",
                             changelog: "Changes",
                             iconUrl: "file:///usr/share/icons/suru/apps/sources/online-accounts-twitter.svg",
-                            errorTitle: "Fail!",
-                            errorDetail: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec varius posuere odio, vitae sollicitudin libero. In at libero tempor, ultricies leo vel, porttitor quam. Nullam pharetra, ex vitae volutpat consectetur, neque ex vestibulum sem, ut condimentum ex orci in nunc."
+                            error: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec varius posuere odio, vitae sollicitudin libero. In at libero tempor, ultricies leo vel, porttitor quam. Nullam pharetra, ex vitae volutpat consectetur, neque ex vestibulum sem, ut condimentum ex orci in nunc."
                         }
                     ]
                 }

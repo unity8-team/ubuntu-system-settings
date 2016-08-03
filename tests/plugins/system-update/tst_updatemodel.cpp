@@ -113,11 +113,14 @@ private slots:
         update->setRevision(1);
 
         m_db->add(update);
-        QCOMPARE(m_model->rowCount(), 1);
-
         QSignalSpy removeSpy(m_model, SIGNAL(rowsAboutToBeRemoved(const QModelIndex&, int, int)));
-        m_db->remove(update);
+        m_model->remove(update);
         QTRY_COMPARE(removeSpy.count(), 1);
+        QCOMPARE(m_model->rowCount(), 0);
+
+        m_db->add(update);
+        m_model->remove(update->identifier(), update->revision());
+        QTRY_COMPARE(removeSpy.count(), 2);
         QCOMPARE(m_model->rowCount(), 0);
     }
     // void testMoveUp()

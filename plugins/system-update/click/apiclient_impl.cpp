@@ -27,6 +27,7 @@
 #include <QJsonObject>
 #include <QJsonValue>
 #include <QJsonParseError>
+#include <QScopedPointer>
 
 #define X_CLICK_TOKEN "X-Click-Token"
 
@@ -151,7 +152,7 @@ void ApiClientImpl::requestSucceeded(QNetworkReply *reply)
     } else if (rtp == "metadata-request") {
         handleMetadataReply(reply);
     } else {
-        // We are not to handle this reply, so do an early return
+        // We are not to handle this reply, so do an early return.
         return;
     }
 
@@ -160,8 +161,9 @@ void ApiClientImpl::requestSucceeded(QNetworkReply *reply)
 
 void ApiClientImpl::handleMetadataReply(QNetworkReply *reply)
 {
-    QJsonParseError *jsonError = new QJsonParseError;
-    auto document = QJsonDocument::fromJson(reply->readAll(), jsonError);
+    QScopedPointer<QJsonParseError> jsonError(new QJsonParseError);
+    auto document = QJsonDocument::fromJson(reply->readAll(),
+                                            jsonError.data());
 
     if (document.isArray()) {
         Q_EMIT metadataRequestSucceeded(document.array());
@@ -175,8 +177,6 @@ void ApiClientImpl::handleMetadataReply(QNetworkReply *reply)
                     << jsonError->errorString();
         Q_EMIT serverError();
     }
-
-    delete jsonError;
 }
 
 bool ApiClientImpl::validReply(const QNetworkReply *reply)

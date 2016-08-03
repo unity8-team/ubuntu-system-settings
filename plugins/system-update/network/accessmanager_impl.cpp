@@ -28,10 +28,9 @@ ManagerImpl::ManagerImpl(QObject *parent)
 {
     connect(&m_impl, SIGNAL(finished(QNetworkReply *)),
             this, SIGNAL(finished(QNetworkReply *)));
-    connect(&m_impl, SIGNAL(sslErrors(QNetworkReply *,
-                                      const QList<QSslError>&)),
-            this, SIGNAL(sslErrors(QNetworkReply *,
-                                   const QList<QSslError>&)));
+    connect(&m_impl,
+            SIGNAL(sslErrors(QNetworkReply *, const QList<QSslError>&)),
+            this, SIGNAL(sslErrors(QNetworkReply *, const QList<QSslError>&)));
 }
 
 QNetworkReply* ManagerImpl::post(const QNetworkRequest &request,

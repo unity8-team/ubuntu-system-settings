@@ -39,24 +39,16 @@ SSOImpl::SSOImpl(QObject *parent)
 
 void SSOImpl::requestCredentials()
 {
-    qWarning() << "requestCredentials";
     m_service->getCredentials();
 }
 
 void SSOImpl::invalidateCredentials()
 {
-    qWarning() << "invalidateCredentials";
     m_service->invalidateCredentials();
 }
 
 void SSOImpl::handleCredentialsFound(const Token &token)
 {
-    qWarning() << "token found" << token.name()
-                                << token.consumerKey()
-                                << token.consumerSecret()
-                                << token.tokenKey()
-                                << token.tokenSecret()
-                                << token.isValid();
     Q_EMIT credentialsFound(new SessionTokenImpl(token));
 }
 } // Click

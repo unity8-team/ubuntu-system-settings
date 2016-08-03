@@ -82,6 +82,7 @@ public:
     Q_INVOKABLE void cancel();
     Q_INVOKABLE bool launch(const QString &identifier);
     Q_INVOKABLE void retry(const QString &identifier, const uint &revision);
+    Q_INVOKABLE void remove(const QString &identifier, const uint &revision);
 
     /* Return whether or not a check is required.
      *
@@ -99,9 +100,6 @@ protected:
     UpdateModel *m_model;
     Status m_status = Status::StatusIdle;
 Q_SIGNALS:
-    /* This signal is emitted when the Status changes.
-     * Example situations are when a check completes or an error occur.
-     */
     void statusChanged();
     void authenticatedChanged();
 private Q_SLOTS:

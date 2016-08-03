@@ -32,10 +32,8 @@ const QString ALL = "kind, id, local_version, remote_version, revision, \
     icon_url, download_url, command, changelog, token, download_id, \
     update_state, signed_download_url, progress, automatic, error, \
     package_name";
-
 const QString GET_SINGLE = "SELECT " + ALL + " FROM updates WHERE id=:id \
     AND revision=:revision";
-
 const QString GET_ALL = "SELECT " + ALL + " FROM updates";
 }
 
@@ -86,8 +84,7 @@ void UpdateDb::initializeDb()
     // Check whether the table already exists
     q.exec("SELECT name FROM sqlite_master WHERE type='table' AND name='updates'");
     if (!q.next() && !createDb()) {
-        qCritical() << Q_FUNC_INFO << "Could not create updates database:"
-                    << m_dbpath << m_db.lastError().text();
+        qCritical() << Q_FUNC_INFO << m_dbpath << m_db.lastError().text();
             return;
     }
 }
@@ -116,8 +113,7 @@ void UpdateDb::replaceWith(const QSharedPointer<Update> &update)
     q.bindValue(":revision", update->revision());
     q.bindValue(":installed", false);
     if (!q.exec()) {
-        qCritical() << Q_FUNC_INFO << "Could not replace updates:"
-                    << q.lastError().text();
+        qCritical() << Q_FUNC_INFO << q.lastError().text();
     }
 }
 
@@ -170,13 +166,11 @@ bool UpdateDb::insert(const QSharedPointer<Update> &update)
     q.bindValue(":updated_at_utc", update->updatedAt().toUTC().toMSecsSinceEpoch());
     q.bindValue(":signed_download_url", update->signedDownloadUrl());
 
-    if (!q.exec()) {
-        qCritical() << Q_FUNC_INFO << "Could not insert update"
-                    << q.lastError().text();
-        return false;
-    } else {
-        return true;
+    bool success = q.exec();
+    if (!success) {
+        qCritical() << Q_FUNC_INFO << q.lastError().text();
     }
+    return success;
 }
 
 void UpdateDb::remove(const QSharedPointer<Update> &update)
@@ -185,12 +179,9 @@ void UpdateDb::remove(const QSharedPointer<Update> &update)
     q.prepare("DELETE FROM updates WHERE id=:id AND revision=:revision");
     q.bindValue(":id", update->identifier());
     q.bindValue(":revision", update->revision());
-
     if (!q.exec()) {
-        qCritical() << Q_FUNC_INFO << "Could not delete update"
-                    << q.lastError().text();
+        qCritical() << Q_FUNC_INFO << q.lastError().text();
     }
-
     Q_EMIT changed();
 }
 
@@ -246,7 +237,6 @@ bool UpdateDb::createDb()
         m_db.rollback();
         return false;
     }
-
     ok = q.exec("CREATE TABLE updates ("
                 "kind TEXT NOT NULL,"
                 "id TEXT NOT NULL,"
@@ -276,7 +266,6 @@ bool UpdateDb::createDb()
         m_db.rollback();
         return false;
     }
-
     return m_db.commit();
 }
 
@@ -284,8 +273,7 @@ bool UpdateDb::openDb()
 {
     if (m_db.isOpen()) return true;
     if (Q_UNLIKELY(!m_db.open())) {
-        qCritical() << Q_FUNC_INFO << "Could not open updates database:"
-                    << m_db.lastError();
+        qCritical() << Q_FUNC_INFO << m_db.lastError();
         return false;
     }
     return true;
@@ -302,10 +290,8 @@ void UpdateDb::pruneDb()
     QDateTime monthAgo = QDateTime::currentDateTime().addMonths(-1).toUTC();
     q.prepare("DELETE FROM updates WHERE updated_at_utc < :updated");
     q.bindValue(":updated", monthAgo.toMSecsSinceEpoch());
-
     if (!q.exec()) {
-        qCritical() << Q_FUNC_INFO << "could not prune db"
-                    << q.lastError().text();
+        qCritical() << Q_FUNC_INFO << q.lastError().text();
     }
 }
 
@@ -313,10 +299,8 @@ void UpdateDb::reset()
 {
     QSqlQuery q(m_db);
     q.prepare("DELETE FROM updates");
-
     if (!q.exec()) {
-        qCritical() << Q_FUNC_INFO << "could not reset db"
-                    << q.lastError().text();
+        qCritical() << Q_FUNC_INFO << q.lastError().text();
     }
 }
 
@@ -325,11 +309,9 @@ QDateTime UpdateDb::lastCheckDate()
     QDateTime d;
     QSqlQuery q(m_db);
     q.exec("SELECT checked_at_utc FROM meta ORDER BY checked_at_utc DESC;");
-
     if (q.next()) {
         d = QDateTime::fromMSecsSinceEpoch(q.value(0).toLongLong());
     }
-
     return d.toUTC();
 }
 
@@ -338,32 +320,25 @@ void UpdateDb::setLastCheckDate(const QDateTime &lastCheck)
     QSqlQuery q(m_db);
     q.prepare("REPLACE INTO meta (checked_at_utc) VALUES (:checked_at_utc)");
     q.bindValue(":checked_at_utc", lastCheck.toUTC().toMSecsSinceEpoch());
-
     if (!q.exec()) {
-        qCritical() << Q_FUNC_INFO << "could not update checked at value"
-                    << q.lastError().text();
+        qCritical() << Q_FUNC_INFO << q.lastError().text();
     }
 }
 
 QList<QSharedPointer<Update> > UpdateDb::updates()
 {
     QList<QSharedPointer<Update> > list;
-
     QSqlQuery q(m_db);
     q.prepare(GET_ALL);
-
     if (!q.exec()) {
-        qCritical() << Q_FUNC_INFO << "failed to query db for list of updates"
-                    << q.lastError().text() << q.executedQuery();
+        qCritical() << Q_FUNC_INFO << q.lastError().text();
         return list;
     }
-
     while (q.next()) {
-        QSharedPointer<Update> u = QSharedPointer<Update>(new Update);
-        update(u, q);
-        list.append(u);
+        auto update = QSharedPointer<Update>(new Update);
+        this->update(update, q);
+        list.append(update);
     }
-
     return list;
 }
 
@@ -373,16 +348,13 @@ QSharedPointer<Update> UpdateDb::get(const QString &id, const uint &revision)
     q.prepare(GET_SINGLE);
     q.bindValue(":id", id);
     q.bindValue(":revision", revision);
-
     if (!q.exec()) {
-        qCritical() << Q_FUNC_INFO << "could not get update"
-                    << q.lastError().text();
+        qCritical() << Q_FUNC_INFO << q.lastError().text();
     }
-
     if (q.next()) {
-        QSharedPointer<Update> u = QSharedPointer<Update>(new Update);
-        update(u, q);
-        return u;
+        auto update = QSharedPointer<Update>(new Update);
+        this->update(update, q);
+        return update;
     } else {
         return QSharedPointer<Update>(nullptr);
     }

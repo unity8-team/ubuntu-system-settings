@@ -59,16 +59,10 @@ public:
     virtual void download(const QString &url) = 0;
     virtual ApiClient* client() const = 0;
 public Q_SLOTS:
-    // Cancel any ongoing token download.
     virtual void cancel() = 0;
 Q_SIGNALS:
-    // This signal is emitted when a token download succeeds.
     void downloadSucceeded(QSharedPointer<Update> update);
-
-    // This signal is emitted when a token download fails.
     void downloadFailed(QSharedPointer<Update> update);
-
-    // This signal is emitted if the client reported a credential error.
     void credentialError();
 protected:
     ApiClient *m_client;

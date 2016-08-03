@@ -309,8 +309,11 @@ void ManagerImpl::synchronize(
     const QList<QSharedPointer<Update> > &manifestUpdates
 )
 {
+    /* Runs through all DB updates and if the exist in the manifest, each
+    update is “synchronized” with data from the manifest, i.e. marked as
+    installed if installed. If not found, this means the app might be
+    uninstalled, and we remove the DB entry. */
     auto dbUpdates = m_model->db()->updates();
-
     Q_FOREACH(auto dbUpdate, dbUpdates) {
         if (dbUpdate->kind() != Update::Kind::KindClick) {
             continue;
@@ -343,7 +346,7 @@ QList<QSharedPointer<Update> > ManagerImpl::parseManifest(const QJsonArray &mani
         auto name = object.value("name").toString();
 
         // No name? Bail!
-        if (name.isEmpty()) {
+        if (Q_UNLIKELY(name.isEmpty())) {
             continue;
         }
 

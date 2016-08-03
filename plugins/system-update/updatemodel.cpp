@@ -352,6 +352,11 @@ void UpdateModel::remove(const QSharedPointer<Update> &update)
     m_db->remove(update);
 }
 
+void UpdateModel::remove(const QString &id, const uint &revision)
+{
+    remove(get(id, revision));
+}
+
 bool UpdateModel::contains(const QString &id, const uint &revision) const
 {
     Q_FOREACH(const auto &update, m_updates) {
