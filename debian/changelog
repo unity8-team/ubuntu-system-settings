@@ -1,3 +1,9 @@
+ubuntu-system-settings (0.4+16.10.20160803.1-0ubuntu1) UNRELEASED; urgency=medium
+
+  * Make device always valid
+
+ -- Konrad Zapałowicz <konrad.zapalowicz@canonical.com>  Wed, 03 Aug 2016 11:18:31 +0200
+
 ubuntu-system-settings (0.4+16.10.20160722.1-0ubuntu1) yakkety; urgency=medium
 
   [ Ken VanDine ]
