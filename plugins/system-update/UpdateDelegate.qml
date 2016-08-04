@@ -145,8 +145,7 @@ ListItem {
                             }
 
                         case Update.StateInstalled:
-                            // TODO: String should be “Open”
-                            return i18n.tr("Start");
+                            return i18n.tr("Open");
 
                         default:
                             console.error("Unknown update state", updateState);
@@ -232,8 +231,7 @@ ListItem {
                             return i18n.tr("Paused");
 
                         case Update.StateQueuedForDownload:
-                            // TODO: String should be “Waiting to download”
-                            return i18n.tr("Downloading");
+                            return i18n.tr("Waiting to download");
 
                         case Update.StateDownloading:
                             return i18n.tr("Downloading");
@@ -282,15 +280,11 @@ ListItem {
                             return i18n.tr("Installed");
 
                         case Update.StateInstalled:
-                            // TODO: show this
-                            if (showAllUI) {
-                                /* TRANSLATORS: %1 is the date at which this
-                                update was applied. */
-                                return i18n.tr("Updated at %1").arg(
-                                    updatedAt.toLocaleDateString(Qt.locale(), "d MMMM")
-                                );
-                            }
-
+                            /* TRANSLATORS: %1 is the date at which this
+                            update was applied. */
+                            return i18n.tr("Updated at %1").arg(
+                                updatedAt.toLocaleDateString(Qt.locale(), "d MMMM")
+                            );
                         default:
                             return "";
                         }
@@ -312,8 +306,7 @@ ListItem {
 
                 Label {
                     id: errorElementTitle
-                    // TODO: String should be “Update failed“
-                    text: i18n.tr("Installation failed")
+                    text: i18n.tr("“Update failed")
                     color: UbuntuColors.red
                 }
 
@@ -344,8 +337,6 @@ ListItem {
                 }
                 Layout.maximumHeight: units.gu(0.5)
                 Layout.fillWidth: true
-                // Layout.topMargin: units.gu(1)
-
                 indeterminate: update.progress < 0 || update.progress > 100
                 minimumValue: 0
                 maximumValue: 100
@@ -358,8 +349,6 @@ ListItem {
 
             ChangelogExpander {
                 Layout.fillWidth: true
-                // Layout.topMargin: units.gu(2)
-
                 version: update.version
                 enabled: update.changelog !== ""
                 visible: updateState !== Update.StateFailed && downloadLabel.text !== ""
@@ -369,13 +358,9 @@ ListItem {
 
             Column {
                 id: changelogCol
-
                 visible: false
                 height: childrenRect.height
-
                 Layout.fillWidth: true
-                // Layout.topMargin: units.gu(2)
-
                 opacity: visible ? 1 : 0
 
                 Behavior on opacity {

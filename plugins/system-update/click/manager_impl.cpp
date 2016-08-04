@@ -167,7 +167,8 @@ ManagerImpl::~ManagerImpl()
 void ManagerImpl::setState(const State &state)
 {
     if (!m_transitions[m_state].contains(state)) {
-        qWarning() << "illegal transition from" << (int) m_state << "to" << (int) state;
+        qWarning() << "Ignoring transition from" << (int) m_state << "to"
+                   << (int) state;
     }
 
     if (m_state != state && m_transitions[m_state].contains(state)) {
@@ -185,31 +186,23 @@ void ManagerImpl::handleStateChange()
 {
     switch (m_state) {
     case State::Idle:
-        qWarning() << "changed to State::Idle";
         m_candidates.clear();
         break;
     case State::Manifest:
-        qWarning() << "changed to State::Manifest";
         m_manifest->request();
         break;
     case State::Metadata:
-        qWarning() << "changed to State::Metadata";
         requestMetadata();
         break;
     case State::Tokens:
-        qWarning() << "changed to State::Tokens";
         break;
     case State::TokenComplete:
-        qWarning() << "changed to State::TokenComplete";
         completionCheck();
         break;
     case State::Failed:
-        qWarning() << "changed to State::Failed";
     case State::Canceled:
-        qWarning() << "changed to State::Canceled";
         Q_EMIT checkCanceled();
     case State::Complete:
-        qWarning() << "changed to State::Complete";
         Q_EMIT checkCompleted();
         setState(State::Idle);
         break;
@@ -389,7 +382,6 @@ void ManagerImpl::completionCheck()
 
 void ManagerImpl::handleTokenDownload(QSharedPointer<Update> update)
 {
-    qWarning() << Q_FUNC_INFO << update->identifier() << update->token();
     auto dl = qobject_cast<TokenDownloader*>(QObject::sender());
     dl->disconnect();
 
@@ -414,7 +406,6 @@ void ManagerImpl::handleTokenDownload(QSharedPointer<Update> update)
 
 void ManagerImpl::handleTokenDownloadFailure(QSharedPointer<Update> update)
 {
-    qWarning() << Q_FUNC_INFO << update->identifier();
     auto dl = qobject_cast<TokenDownloader*>(QObject::sender());
 
     // Assume the original update was changed during the download of token.
@@ -436,7 +427,6 @@ void ManagerImpl::handleTokenDownloadFailure(QSharedPointer<Update> update)
 
 void ManagerImpl::handleCredentials(SessionToken *token)
 {
-    qWarning() << Q_FUNC_INFO;
     // We'll take ownership of this token.
     m_sessionToken = std::unique_ptr<SessionToken>(token);
 
@@ -445,7 +435,6 @@ void ManagerImpl::handleCredentials(SessionToken *token)
         setAuthenticated(false);
         return;
     }
-    qWarning() << Q_FUNC_INFO << "Got VALID session token.";
 
     setAuthenticated(true);
 
@@ -491,17 +480,13 @@ void ManagerImpl::parseMetadata(const QJsonArray &array)
         auto object = array.at(i).toObject();
         auto identifier = object["name"].toString();
         auto revision = object["revision"].toInt();
-        qWarning() << "parsing metadata for.." << identifier << revision;
         // Check if we already have it's metadata.
         auto dbUpdate = m_model->get(identifier, revision);
         if (dbUpdate) {
-            qWarning() << "had corresponding dbupdate for" << identifier << revision;
             /* If this update is less than 24 hours old (to us), and it has a
             token, we ignore it. */
             if (dbUpdate->createdAt().secsTo(now) <= 86400
                 && !dbUpdate->token().isEmpty()) {
-                qWarning() << "had most likely a < 24 hour old token for" << identifier << revision
-                           << "so DONE";
                 m_candidates.remove(identifier);
                 setState(State::TokenComplete);
                 continue;

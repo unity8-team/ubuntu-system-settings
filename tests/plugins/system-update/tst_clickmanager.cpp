@@ -143,7 +143,6 @@ private slots:
         QFETCH(UpdateList, existingUpdates);
 
         Q_FOREACH(auto update, existingUpdates) {
-            qWarning() << "adding existingUpdates" << update->identifier() << update->revision();
             m_model->add(update);
         }
 

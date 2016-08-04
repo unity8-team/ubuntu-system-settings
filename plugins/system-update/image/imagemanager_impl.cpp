@@ -109,7 +109,6 @@ void ManagerImpl::handleUpdateAvailableStatus(const bool isAvailable,
 
 void ManagerImpl::handleDownloadStarted()
 {
-    qWarning() << Q_FUNC_INFO;
     m_model->setProgress(ubuntuId, m_si->targetBuildNumber(), 0);
 }
 
@@ -127,7 +126,6 @@ void ManagerImpl::handleUpdatePaused(const int &percentage)
 
 void ManagerImpl::handleUpdateDownloaded()
 {
-    qWarning() << Q_FUNC_INFO;
     m_model->setDownloaded(ubuntuId, m_si->targetBuildNumber());
 }
 
@@ -139,7 +137,6 @@ void ManagerImpl::handleUpdateFailed(const int &consecutiveFailureCount, const Q
 
 void ManagerImpl::handleCurrentBuildNumberChanged()
 {
-    qWarning() << Q_FUNC_INFO << m_si->currentBuildNumber();
     /* This is currently the best we can do for marking image updates
     as installed, as signals aren't usually sent from s-i. lp:1600449 */
     m_model->setInstalled(ubuntuId, m_si->currentBuildNumber());

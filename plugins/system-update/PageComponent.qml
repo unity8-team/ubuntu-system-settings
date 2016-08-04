@@ -178,8 +178,7 @@ ItemPage {
 
             SettingsItemTitle {
                 id: updatesAvailableHeader
-                // TODO: String should be “Updates Available”.
-                text: i18n.tr("Updates")
+                text: i18n.tr("“Updates Available")
                 visible: imageUpdateCol.visible || clickUpdatesCol.visible
             }
 
@@ -332,8 +331,7 @@ ItemPage {
             }
 
             SettingsItemTitle {
-                // TODO: String should be Recent updates.
-                text: i18n.tr("Installed")
+                text: i18n.tr("Recent updates")
                 visible: installedCol.visible
             }
 

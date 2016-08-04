@@ -179,50 +179,37 @@ void UpdateModel::refresh()
     UpdateList now = m_db->updates();
     int oldCount = m_updates.size();
 
-    // qWarning() << "m_updates is";
+    /* The following code is an implementation of [1], an algorithm for
+    calculating the difference between two lists. For each difference, a change
+    to the underlying data structure is made before a signal is emitted to
+    views.
+    [1] http://stackoverflow.com/a/6202307/538866
+    */
+
+    // Find items to remove from model.
     for (int i = 0; i < m_updates.size(); i++) {
         auto item = m_updates.at(i);
-        // qWarning() << "\t" << i << item->identifier();
         if (!UpdateModel::contains(now, item)) {
-            // qWarning() << "\t\t removing" << i;
             removeRow(i);
         }
     }
 
-    // qWarning() << "now is";
+    // Find updates to insert, update and move.
     for (int i = 0; i < now.size(); i++) {
         auto item = now.at(i);
-        // qWarning() << "\t" << item->identifier() << i;
-
-        // qWarning() << "\t\twhile m_updates...";
-        for (int i = 0; i < m_updates.size(); i++) {
-            auto item = m_updates.at(i);
-            // qWarning() << "\t\t\tm_updates:" << item->identifier();
-        }
 
         int oldPos = UpdateModel::indexOf(m_updates, item);
-        // qWarning() << "\t\tindexOf" << item->identifier() << "was"<<oldPos;
         if (UpdateModel::contains(m_updates, item)) {
-            // qWarning() << "\t\tm_updates contains" << item->identifier();
             if (oldPos == i) {
                 if (!m_updates.at(oldPos)->deepEquals(item.data())) {
-                    // qWarning() << "\t\t\t row"<<i<<"changed";
                     emitRowChanged(i);
                 }
             } else {
-                // qWarning() << "\t\t\t moving"<<i<<"from"<<oldPos;
                 moveRow(oldPos, i);
             }
         } else {
-            // qWarning() << "\t\t\t inserting"<<i<<item->identifier();
             insertRow(i, item);
         }
-    }
-
-    // qWarning() << "\n\nm_updates after operation";
-    for (int i = 0; i < m_updates.size(); i++) {
-        auto item = m_updates.at(i);
-        // qWarning() << "\tm_updates:" << item->identifier();
     }
 
     if (now.size() != oldCount) {
@@ -251,7 +238,6 @@ void UpdateModel::removeRow(int row)
 
 void UpdateModel::moveRow(const int &from, const int &to)
 {
-    // qWarning() << "moving rows" << from << to;
     bool fromOk = (from >= 0 && from < m_updates.size());
     bool toOk = (to >= 0 && to < m_updates.size());
     int _to = to;
@@ -261,10 +247,6 @@ void UpdateModel::moveRow(const int &from, const int &to)
             _to++;
         }
         if (beginMoveRows(QModelIndex(), from, from, QModelIndex(), _to)) {
-            // qWarning() << "move from" << from << "to" << _to;
-            // qWarning() << "( really move from" << from << "to" << to << ")";
-            // qWarning() << "move" << m_updates.at(from)->identifier()
-            //             << "to" << to;
             m_updates.move(from, to);
             endMoveRows();
         } else {

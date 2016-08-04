@@ -123,57 +123,6 @@ private slots:
         QTRY_COMPARE(removeSpy.count(), 2);
         QCOMPARE(m_model->rowCount(), 0);
     }
-    // void testMoveUp()
-    // {
-    //     /* For moving, we need a filter that sorts. Pending updates are sorted
-    //     by title ASC. (See UpdateDb::GET_PENDING) */
-    //     m_model->setFilter(UpdateModel::Filter::Pending);
-
-    //     QSharedPointer<Update> a = createUpdate();
-    //     a->setIdentifier("first.app");
-    //     a->setRevision(1);
-    //     a->setTitle("ABC");
-
-    //     QSharedPointer<Update> b = createUpdate();
-    //     b->setIdentifier("second.app");
-    //     b->setRevision(1);
-    //     b->setTitle("CED");
-
-    //     m_db->add(a);
-    //     m_db->add(b);
-
-    //     QCOMPARE(m_model->data(m_model->index(0, 0), UpdateModel::Roles::IdRole).toString(),
-    //              a->identifier());
-    //     QCOMPARE(m_model->data(m_model->index(1, 0), UpdateModel::Roles::IdRole).toString(),
-    //              b->identifier());
-
-    //     QSqlQuery q(m_db->db());
-    //     q.prepare("UPDATE updates SET title=:title WHERE id=:id AND revision=:revision");
-    //     q.bindValue(":title", "XYZ");
-    //     q.bindValue(":id", a->identifier());
-    //     q.bindValue(":revision", a->revision());
-    //     q.exec();
-    //     q.finish();
-
-    //     QSignalSpy moveSpy(
-    //         m_model, SIGNAL(rowsAboutToBeMoved(const QModelIndex&, int, int, const QModelIndex&, int))
-    //     );
-    //     m_model->refresh();
-
-    //     // Moved and reversed.
-    //     QCOMPARE(m_model->data(m_model->index(1, 0), UpdateModel::Roles::IdRole).toString(),
-    //              a->identifier());
-    //     QCOMPARE(m_model->data(m_model->index(0, 0), UpdateModel::Roles::IdRole).toString(),
-    //              b->identifier());
-
-    //     QTRY_COMPARE(moveSpy.count(), 1);
-
-    //     QList<QVariant> args = moveSpy.takeFirst();
-    //     // sourceStart == sourceEnd, but destinationRow is 0
-    //     QCOMPARE(args.at(1).toInt(), 1);
-    //     QCOMPARE(args.at(2).toInt(), 1);
-    //     QCOMPARE(args.at(4).toInt(), 0);
-    // }
     void testChange()
     {
         auto update = createUpdate();

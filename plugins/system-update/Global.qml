@@ -32,7 +32,6 @@ Item {
     property bool online: false
 
     property bool hidden: {
-        // For some, we hide unconditionally:
         switch (status) {
         case SystemUpdate.StatusNetworkError:
         case SystemUpdate.StatusServerError:
@@ -84,8 +83,7 @@ Item {
 
         Button {
             objectName: "updatesGlobalStopButton"
-            // TODO: String should be “Stop”
-            text: i18n.tr("Cancel")
+            text: i18n.tr("Stop")
             onClicked: g.stop()
             Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
         }
@@ -111,13 +109,10 @@ Item {
 
         Label {
             objectName: "updatesGlobalInfoLabel"
-            text: i18n.tr("Install %1 update", "Install %1 updates",
-                          updatesCount).arg(updatesCount)
-            // TODO: Strings should be like the commented code below.
             // // TRANSLATORS: %1 is number of software updates available.
-            // text: i18n.tr("%1 update available",
-            //               "%1 updates available",
-            //               updatesCount).arg(updatesCount)
+            text: i18n.tr("%1 update available",
+                          "%1 updates available",
+                          updatesCount).arg(updatesCount)
             Layout.fillWidth: true
         }
 
@@ -125,11 +120,9 @@ Item {
             objectName: "updatesGlobalInstallButton"
             text: {
                 if (g.requireRestart === true) {
-                    // TODO: String should be “Update all…”
-                    return i18n.tr("Restart & Install");
+                    return i18n.tr("Update all…");
                 } else {
-                    // TODO: String should be “Update all”
-                    return i18n.tr("Install");
+                    return i18n.tr("Update all");
                 }
             }
             onClicked: g.requestInstall()

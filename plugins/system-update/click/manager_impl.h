@@ -81,8 +81,8 @@ Q_SIGNALS:
     void checkCanceled();
     void stateChanged();
 private:
-    enum class State { Idle, Manifest, Metadata, Tokens, TokenComplete, Failed,
-                       Complete, Canceled };
+    enum class State { Idle, Manifest, Metadata, Tokens,
+                       TokenComplete, Failed, Complete, Canceled };
     void setState(const State &state);
     State state() const;
     void setAuthenticated(const bool authenticated);

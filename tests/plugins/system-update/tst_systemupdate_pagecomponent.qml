@@ -37,7 +37,14 @@ Item {
         PageComponent {
             title: "System Update Test"
             anchors.fill: parent
+            signal tornDown()
+            Component.onDestruction: tornDown()
         }
+    }
+
+    SignalSpy {
+        id: destroyedSpy
+        signalName: "tornDown"
     }
 
     UbuntuTestCase {
@@ -51,7 +58,14 @@ Item {
         }
 
         function cleanup() {
+            destroyedSpy.target = instance;
+
+            /* Not waiting here would cause a crash in some cases where
+            SystemUpdate.mockStatus would emit a signal to PageComponent which
+            was in the process of being destroyed. Explicitly wait. */
             instance.destroy();
+            destroyedSpy.wait();
+
             SystemUpdate.mockStatus(SystemUpdate.StatusIdle);
             SystemUpdate.model.reset();
             SystemImage.reset();
@@ -310,7 +324,11 @@ Item {
         }
 
         function cleanup() {
+            // See cleanup in topmost testcase for why we wait here.
+            destroyedSpy.target = instance;
             instance.destroy();
+            destroyedSpy.wait();
+
             SystemUpdate.model.reset();
         }
 

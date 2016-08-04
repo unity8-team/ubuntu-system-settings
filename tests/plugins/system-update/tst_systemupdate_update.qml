@@ -198,7 +198,7 @@ Item {
                     progressbar: { visibility: true, progress: 0, },
                     error: { text: "", visiblity: false, },
                     targetStatusLabelText: "",
-                    targetDownloadLabelText: i18n.tr("Downloading"),
+                    targetDownloadLabelText: i18n.tr("Waiting to download"),
                 },
                 {
                     tag: "System update Waiting to download (Manual)",
@@ -209,7 +209,7 @@ Item {
                     progressbar: { visibility: true, progress: 0, },
                     error: { text: "", visiblity: false, },
                     targetStatusLabelText: "",
-                    targetDownloadLabelText: i18n.tr("Downloading"),
+                    targetDownloadLabelText: i18n.tr("Waiting to download"),
                 },
 
                 // Installing
@@ -304,7 +304,7 @@ Item {
                     updateState: Update.StateInstalled,
                     kind: Update.KindImage,
                     progress: 1,
-                    button: { text: i18n.tr("Start"), visibility: false, state: false },
+                    button: { text: i18n.tr("Open"), visibility: false, state: false },
                     progressbar: { visibility: false, progress: 1, },
                     error: { text: "", visiblity: false, },
                     updatedAt: new Date("December 17, 1995 03:24:00"),
@@ -369,10 +369,6 @@ Item {
             compare(progressbar.value, data.progressbar.progress, "progress bar had wrong value");
             compare(statusLabel.text, data.targetStatusLabelText, "status label had wrong text");
             compare(downloadLabel.text, data.targetDownloadLabelText, "download label had wrong text");
-        }
-
-        function test_retry() {
-
         }
     }
 }
