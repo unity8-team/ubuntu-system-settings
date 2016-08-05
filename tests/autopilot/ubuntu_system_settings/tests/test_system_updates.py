@@ -33,6 +33,3 @@ class SystemUpdatesTestCases(SystemUpdatesBaseTestCase):
         updates = self.system_settings.main_view.updates_page
         self.assertThat(updates, NotEquals(None))
         updates.stop_check()
-
-        overlay = updates.select_single(objectName='overlayText')
-        self.assertTrue(overlay.visible)
