@@ -34,6 +34,7 @@ Item {
 
         UpdateDelegate {
             anchors { left: parent.left; right: parent.right }
+            onDownload: updateState = Update.StateDownloading
         }
     }
 
@@ -51,13 +52,6 @@ Item {
     UbuntuTestCase {
         name: "UpdateTest"
         when: windowShown
-
-        function cleanup() {
-        }
-
-        function init() {
-
-        }
 
         function test_all_data() {
             return [

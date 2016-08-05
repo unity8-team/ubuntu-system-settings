@@ -178,7 +178,7 @@ ItemPage {
 
             SettingsItemTitle {
                 id: updatesAvailableHeader
-                text: i18n.tr("“Updates Available")
+                text: i18n.tr("Updates Available")
                 visible: imageUpdateCol.visible || clickUpdatesCol.visible
             }
 
