@@ -59,10 +59,11 @@ ListItem {
         id: layout
         mainSlot: ColumnLayout {
             spacing: units.gu(1)
+            // Width the parent, minus the icon and some padding
+            width: parent.width - (icon.width + (layout.padding.top * 3))
 
             RowLayout {
                 spacing: units.gu(2)
-                Layout.preferredWidth: parent.width
 
                 Label {
                     id: nameLabel
