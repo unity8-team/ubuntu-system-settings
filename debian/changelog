@@ -1,3 +1,10 @@
+ubuntu-system-settings (0.4+16.10.20160808-0ubuntu1) yakkety; urgency=medium
+
+  [ Simon Fels ]
+  * Fixes for Aethercast support
+
+ -- morphis <simon.fels@canonical.com>  Mon, 08 Aug 2016 08:59:08 +0000
+
 ubuntu-system-settings (0.4+16.10.20160730-0ubuntu1) yakkety; urgency=medium
 
   [ Lukáš Tinkl ]
