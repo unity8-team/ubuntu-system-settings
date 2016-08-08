@@ -42,7 +42,6 @@ set_tests_properties(
 add_executable(tst-clickmanager tst_clickmanager.cpp)
 add_test(tst-clickmanager tst-clickmanager)
 target_link_libraries(tst-clickmanager ${PLUGIN_LIBS})
-set_tests_properties(tst-clickmanager PROPERTIES ENVIRONMENT "QT_QPA_PLATFORM=minimal")
 
 add_executable(tst-imagemanager
     tst_imagemanager.cpp

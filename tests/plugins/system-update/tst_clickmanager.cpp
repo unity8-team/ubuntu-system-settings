@@ -529,5 +529,5 @@ private:
     QTemporaryDir *m_dir;
 };
 
-QTEST_MAIN(TstClickManager)
+QTEST_GUILESS_MAIN(TstClickManager)
 #include "tst_clickmanager.moc"
