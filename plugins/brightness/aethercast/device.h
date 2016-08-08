@@ -58,7 +58,7 @@ Q_SIGNALS:
     void deviceChanged(); // catchall for any change
 
 public:
-    enum State { Idle=1, Disconnected=2, Configuration=4, Connected=8 };
+    enum State { Idle=1, Disconnected=2, Association=4, Configuration=8, Connected=16, Failure=32 };
     Q_ENUMS(State)
     Q_DECLARE_FLAGS(States, State)
 
