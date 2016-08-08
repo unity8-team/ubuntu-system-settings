@@ -312,6 +312,6 @@ private:
     Update *m_instance = nullptr;
 };
 
-QTEST_MAIN(TstUpdate)
+QTEST_GUILESS_MAIN(TstUpdate)
 #include "tst_update.moc"
 

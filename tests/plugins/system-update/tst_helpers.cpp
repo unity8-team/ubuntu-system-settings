@@ -66,6 +66,6 @@ private:
     QProcessEnvironment env = QProcessEnvironment::systemEnvironment();
 };
 
-QTEST_MAIN(TstUpdatePluginHelpers)
+QTEST_GUILESS_MAIN(TstUpdatePluginHelpers)
 #include "tst_helpers.moc"
 

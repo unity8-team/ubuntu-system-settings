@@ -283,5 +283,5 @@ private:
     QDBusConnection *m_dbus;
 };
 
-QTEST_MAIN(TstSystemImage)
+QTEST_GUILESS_MAIN(TstSystemImage)
 #include "tst_systemimage.moc"

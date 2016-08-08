@@ -103,5 +103,5 @@ private:
     QSharedPointer<Update> m_update;
 };
 
-QTEST_MAIN(TstClickTokenDownloader)
+QTEST_GUILESS_MAIN(TstClickTokenDownloader)
 #include "tst_tokendownloader.moc"

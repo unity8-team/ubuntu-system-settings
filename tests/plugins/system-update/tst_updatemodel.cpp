@@ -677,5 +677,5 @@ private:
     UpdateModelFilter *m_filter = nullptr;
 };
 
-QTEST_MAIN(TstUpdateModel)
+QTEST_GUILESS_MAIN(TstUpdateModel)
 #include "tst_updatemodel.moc"

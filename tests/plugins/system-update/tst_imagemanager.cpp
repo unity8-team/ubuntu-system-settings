@@ -265,5 +265,5 @@ private:
     UpdateModel *m_model = nullptr;
 };
 
-QTEST_MAIN(TstImageManager)
+QTEST_GUILESS_MAIN(TstImageManager)
 #include "tst_imagemanager.moc"

@@ -95,6 +95,6 @@ private:
     Click::ManifestImpl *m_instance = nullptr;
 };
 
-QTEST_MAIN(TstClickManifest)
+QTEST_GUILESS_MAIN(TstClickManifest)
 #include "tst_clickmanifest.moc"
 

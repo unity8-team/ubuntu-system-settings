@@ -267,5 +267,5 @@ private:
     UpdateDb *m_instance = nullptr;
 };
 
-QTEST_MAIN(TstUpdateDb)
+QTEST_GUILESS_MAIN(TstUpdateDb)
 #include "tst_updatedb.moc"
