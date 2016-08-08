@@ -19,9 +19,10 @@
 #ifndef MOCK_SYSTEMIMAGE_H
 #define MOCK_SYSTEMIMAGE_H
 
-#include <QObject>
-#include <QVariantMap>
 #include <QDateTime>
+#include <QObject>
+#include <QString>
+#include <QVariantMap>
 
 class MockSystemImage : public QObject
 {
@@ -36,6 +37,8 @@ class MockSystemImage : public QObject
                NOTIFY targetBuildNumberChanged)
     Q_PROPERTY(int downloadMode READ downloadMode WRITE setDownloadMode
                NOTIFY downloadModeChanged)
+    Q_PROPERTY(QString versionTag READ versionTag
+               NOTIFY versionTagChanged)
 public:
     explicit MockSystemImage(QObject *parent = nullptr)
         : QObject(parent) {};
@@ -47,6 +50,7 @@ public:
     int failuresBeforeWarning() { return 3; };
     int currentBuildNumber() const;
     int targetBuildNumber() const;
+    QString versionTag() const;
 
     Q_INVOKABLE void checkForUpdate();
     Q_INVOKABLE void downloadUpdate();
@@ -60,10 +64,12 @@ public:
     Q_INVOKABLE void mockCurrentBuildNumber(const uint &current); // mock only
     Q_INVOKABLE void mockUpdateFailed(const int &consecutiveFailureCount,
                                       const QString &lastReason); // mock only
+    Q_INVOKABLE void mockVersionTag(const QString &tag); // mock only
     Q_INVOKABLE bool called(const QString &functionName); // mock only
     Q_INVOKABLE void reset(); // mock only
 
 Q_SIGNALS:
+    void versionTagChanged();
     void downloadModeChanged();
     void updateDownloaded();
     void checkingForUpdatesChanged();
@@ -77,6 +83,7 @@ private:
     int m_currentBuildNumber = 0;
     int m_targetBuildNumber = -1;
     int m_downloadMode = -1;
+    QString m_versionTag = QString::null;
 
     QStringList m_called;
 };

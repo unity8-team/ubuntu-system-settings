@@ -20,6 +20,7 @@
 
 void MockSystemImage::checkForUpdate()
 {
+    m_called << "checkForUpdate";
 }
 
 void MockSystemImage::downloadUpdate()
@@ -86,6 +87,16 @@ void MockSystemImage::mockUpdateFailed(const int &consecutiveFailureCount,
     Q_EMIT updateFailed(consecutiveFailureCount, lastReason);
 }
 
+void MockSystemImage::mockVersionTag(const QString &tag)
+{
+    m_versionTag = tag;
+    Q_EMIT versionTagChanged();
+}
+
+QString MockSystemImage::versionTag() const
+{
+    return m_versionTag;
+}
 
 bool MockSystemImage::called(const QString &functionName)
 {

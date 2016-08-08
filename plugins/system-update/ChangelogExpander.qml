@@ -39,8 +39,7 @@ Item {
         }
 
         verticalAlignment: Text.AlignVCenter
-        // TODO: string should be i18n.tr("Version %1").arg(version)
-        text: i18n.tr("Version: ") + version
+        text: i18n.tr("Version %1").arg(version)
         fontSize: "small"
         elide: Text.ElideMiddle
 
