@@ -195,5 +195,5 @@ private:
     MockImageManager *m_imageManager = nullptr;
 };
 
-QTEST_APPLESS_MAIN(TstSystemUpdate)
+QTEST_GUILESS_MAIN(TstSystemUpdate)
 #include "tst_systemupdate.moc"
