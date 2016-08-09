@@ -1,3 +1,11 @@
+ubuntu-system-settings (0.4+16.10.20160809-0ubuntu1) yakkety; urgency=medium
+
+  [ Timo Jyrinki ]
+  * Depend on upstart to prevent s390x problems until upstart has been
+    fixed.
+
+ -- Michał Sawicz <michal.sawicz@canonical.com>  Tue, 09 Aug 2016 12:14:44 +0000
+
 ubuntu-system-settings (0.4+16.10.20160730-0ubuntu1) yakkety; urgency=medium
 
   [ Lukáš Tinkl ]
