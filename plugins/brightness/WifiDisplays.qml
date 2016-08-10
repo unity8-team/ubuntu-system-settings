@@ -110,7 +110,7 @@ ItemPage {
             ListItem.Standard {
                 objectName: "connectedDisplay"
                 text: i18n.tr("Connected display:")
-                visible: displays.connectedDevices.count > 0 && displays.state === "connected"
+                visible: displays.connectedDevices.count > 0
             }
 
             Repeater {
@@ -124,7 +124,7 @@ ItemPage {
                     iconName: "video-display"
                     iconFrame: false
                     text: displayName
-                    subText: (stateName === AethercastDevice.Connected) ? i18n.tr("Connected") : i18n.tr("Not connected")
+                    subText: stateName === AethercastDevice.Connected ? i18n.tr("Connected") : (stateName === AethercastDevice.Association || stateName == AethercastDevice.Connected ? i18n.tr("Connecting") : i18n.tr("Not connected"))
                     enabled: stateName === AethercastDevice.Idle || stateName === AethercastDevice.Connected || stateName === AethercastDevice.Disconnected
                     onClicked: {
                         if (stateName === AethercastDevice.Connected)

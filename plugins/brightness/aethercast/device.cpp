@@ -43,7 +43,7 @@ void Device::initDevice(const QString &path, QDBusConnection &bus)
     /* Give our calls a bit more time than the default 25 seconds to
      * complete whatever they are doing. In some situations (e.g. with
      * specific devices) the default doesn't seem to be enough to. */
-    m_aethercastDevice->setTimeout(60 * 1000 /* 60 seconds */);
+    m_aethercastDevice->setTimeout(130 * 1000 /* 130 seconds */);
 
     m_aethercastDeviceProperties.reset(new FreeDesktopProperties(AETHERCAST_SERVICE, path, bus));
 
@@ -135,7 +135,11 @@ void Device::updateProperty(const QString &key, const QVariant &value)
             setState(Device::Disconnected);
         else if (value.toString() == "connected")
             setState(Device::Connected);
+        else if (value.toString() == "association")
+            setState(Device::Association);
         else if (value.toString() == "configuration")
             setState(Device::Configuration);
+        else if (value.toString() == "failure")
+            setState(Device::Failure);
     }
 }
