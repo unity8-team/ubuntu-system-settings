@@ -28,6 +28,8 @@ protected:
             }
             QTest::qWait(1000);
         }
+        qWarning() << "STDOUT" << m_mockclickserver.readAllStandardOutput();
+        qWarning() << "STDERR" << m_mockclickserver.readAllStandardError();
         QFAIL("could not start mock server in time.");
     }
 
