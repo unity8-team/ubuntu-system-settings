@@ -5,6 +5,13 @@ ubuntu-system-settings (0.4+16.10.20160808-0ubuntu1) yakkety; urgency=medium
 
  -- morphis <simon.fels@canonical.com>  Mon, 08 Aug 2016 08:59:08 +0000
 
+ubuntu-system-settings (0.4+16.10.20160730-0ubuntu2) yakkety; urgency=medium
+
+  * No change rebuild
+  * Depend on upstart to prevent s390x problems until upstart has been fixed.
+
+ -- Timo Jyrinki <timo-jyrinki@ubuntu.com>  Tue, 09 Aug 2016 15:38:18 +0300
+
 ubuntu-system-settings (0.4+16.10.20160730-0ubuntu1) yakkety; urgency=medium
 
   [ Lukáš Tinkl ]
