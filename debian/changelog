@@ -1,3 +1,9 @@
+ubuntu-system-settings (0.4+16.10.20160808-0ubuntu2) yakkety; urgency=medium
+
+  * Readd the upstart workaround by doing a rebuild from trunk.
+
+ -- Timo Jyrinki <timo-jyrinki@ubuntu.com>  Wed, 10 Aug 2016 15:09:25 +0300
+
 ubuntu-system-settings (0.4+16.10.20160808-0ubuntu1) yakkety; urgency=medium
 
   [ Simon Fels ]
