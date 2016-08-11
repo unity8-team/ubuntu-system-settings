@@ -1,3 +1,34 @@
+ubuntu-system-settings (0.4+16.10.20160808-0ubuntu2) yakkety; urgency=medium
+
+  * Readd the upstart workaround by doing a rebuild from trunk.
+
+ -- Timo Jyrinki <timo-jyrinki@ubuntu.com>  Wed, 10 Aug 2016 15:09:25 +0300
+
+ubuntu-system-settings (0.4+16.10.20160808-0ubuntu1) yakkety; urgency=medium
+
+  [ Simon Fels ]
+  * Fixes for Aethercast support
+
+ -- morphis <simon.fels@canonical.com>  Mon, 08 Aug 2016 08:59:08 +0000
+
+ubuntu-system-settings (0.4+16.10.20160730-0ubuntu2) yakkety; urgency=medium
+
+  * No change rebuild
+  * Depend on upstart to prevent s390x problems until upstart has been fixed.
+
+ -- Timo Jyrinki <timo-jyrinki@ubuntu.com>  Tue, 09 Aug 2016 15:38:18 +0300
+
+ubuntu-system-settings (0.4+16.10.20160730-0ubuntu1) yakkety; urgency=medium
+
+  [ Lukáš Tinkl ]
+  * Fixes for indicator-keyboard (gsettings compat, HW kbd panel
+    shortcut)
+
+  [ Michał Sawicz ]
+  * Skip tests on powerpc due to Qt 5.6 bug (LP: #1606927)
+
+ -- Lukáš Tinkl <lukas.tinkl@canonical.com>  Sat, 30 Jul 2016 21:20:18 +0000
+
 ubuntu-system-settings (0.4+16.10.20160722.1-0ubuntu1) yakkety; urgency=medium
 
   [ Ken VanDine ]
