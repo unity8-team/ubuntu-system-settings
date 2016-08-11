@@ -21,9 +21,9 @@
 
 #include "plugin.h"
 #include "systemimage.h"
-#include "systemupdate.h"
 #include "update.h"
 #include "updatemodel.h"
+#include "updatemanager.h"
 
 #include <QtQml>
 #include <QtQml/QQmlContext>
@@ -37,11 +37,11 @@ static QObject *siSingletonProvider(QQmlEngine *engine, QJSEngine *scriptEngine)
     return new QSystemImage;
 }
 
-static QObject *suSingletonProvider(QQmlEngine *engine, QJSEngine *scriptEngine)
+static QObject *umSingletonProvider(QQmlEngine *engine, QJSEngine *scriptEngine)
 {
     Q_UNUSED(engine)
     Q_UNUSED(scriptEngine)
-    return new SystemUpdate;
+    return new UpdateManager;
 }
 
 void BackendPlugin::registerTypes(const char *uri)
@@ -53,8 +53,8 @@ void BackendPlugin::registerTypes(const char *uri)
     qmlRegisterSingletonType<QSystemImage>(
         uri, 1, 0, "SystemImage", siSingletonProvider
     );
-    qmlRegisterSingletonType<SystemUpdate>(
-        uri, 1, 0, "SystemUpdate", suSingletonProvider
+    qmlRegisterSingletonType<UpdateManager>(
+        uri, 1, 0, "UpdateManager", umSingletonProvider
     );
     qRegisterMetaType<UpdateModel*>("UpdateModel*");
     qRegisterMetaType<UpdateModelFilter*>("UpdateModelFilter*");

@@ -15,8 +15,8 @@
  * You should have received a copy of the GNU General Public License along
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef SYSTEM_UPDATE_H
-#define SYSTEM_UPDATE_H
+#ifndef UPDATE_MANAGER_H
+#define UPDATE_MANAGER_H
 
 #include "updatemodel.h"
 #include "click/manager.h"
@@ -27,7 +27,7 @@
 
 namespace UpdatePlugin
 {
-class SystemUpdate : public QObject
+class UpdateManager : public QObject
 {
     Q_OBJECT
     Q_ENUMS(Status Check)
@@ -41,21 +41,19 @@ class SystemUpdate : public QObject
     Q_PROPERTY(bool authenticated READ authenticated
                NOTIFY authenticatedChanged)
 public:
-    explicit SystemUpdate(QObject *parent = nullptr);
-
+    explicit UpdateManager(QObject *parent = nullptr);
     // This constructor enables testing.
-    explicit SystemUpdate(UpdateModel *model,
+    explicit UpdateManager(UpdateModel *model,
                           Network::Manager *nam,
                           Image::Manager *imageManager,
                           Click::Manager *clickManager,
                           QObject *parent = nullptr);
-    ~SystemUpdate() {};
-
+    ~UpdateManager() {};
     enum class Status : uint
     {
         StatusIdle,
         StatusCheckingClickUpdates,
-        StatusCheckingSystemUpdates,
+        StatusCheckingImageUpdates,
         StatusCheckingAllUpdates,
         StatusNetworkError,
         StatusServerError
@@ -119,6 +117,5 @@ private:
     Image::Manager *m_imageManager;
     Click::Manager *m_clickManager;
 };
-
 } // UpdatePlugin
-#endif // SYSTEM_UPDATE_H
+#endif // UPDATE_MANAGER_H

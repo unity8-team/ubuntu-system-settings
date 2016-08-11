@@ -60,7 +60,7 @@ Item {
 
         function cleanup() {
             instance.destroy();
-            SystemUpdate.model.reset();
+            UpdateManager.model.reset();
         }
 
         function test_defaultVisibility() {
@@ -68,7 +68,7 @@ Item {
         }
 
         function test_clickUpdates() {
-            SystemUpdate.model.mockAddUpdate("app" + 0, 0, Update.KindClick);
+            UpdateManager.model.mockAddUpdate("app" + 0, 0, Update.KindClick);
             tryCompare(instance, "height", units.gu(7), 5000, "item did not have the correct height when we had click updates");
         }
     }
@@ -93,7 +93,7 @@ Item {
 
         function cleanup() {
             instance.destroy();
-            SystemUpdate.model.reset();
+            UpdateManager.model.reset();
         }
 
         function test_visibleWhenImageUpdate() {
@@ -101,7 +101,7 @@ Item {
         }
 
         function test_clickUpdates() {
-            SystemUpdate.model.mockAddUpdate("app" + 0, 0, Update.KindClick);
+            UpdateManager.model.mockAddUpdate("app" + 0, 0, Update.KindClick);
             tryCompare(instance, "height", units.gu(7), 5000, "item did not have the correct height when we had all types of updates");
         }
     }

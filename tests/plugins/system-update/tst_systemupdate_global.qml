@@ -75,7 +75,7 @@ Item {
         function test_checkInProgress() {
             instance.updatesCount = 2;
             instance.online = true;
-            instance.status = SystemUpdate.StatusCheckingAllUpdates;
+            instance.status = UpdateManager.StatusCheckingAllUpdates;
 
             verify(!instance.hidden, "global was hidden");
         }
@@ -83,7 +83,7 @@ Item {
         function test_stop() {
             instance.updatesCount = 2;
             instance.online = true;
-            instance.status = SystemUpdate.StatusCheckingAllUpdates;
+            instance.status = UpdateManager.StatusCheckingAllUpdates;
 
             var stop = findChild(instance, "updatesGlobalStopButton");
             verify(stop.visible, "stop button was not visible");
@@ -94,7 +94,7 @@ Item {
         function test_checkIdle() {
             instance.updatesCount = 2;
             instance.online = true;
-            instance.status = SystemUpdate.StatusIdle;
+            instance.status = UpdateManager.StatusIdle;
 
             verify(!instance.hidden, "global was hidden");
         }
@@ -102,7 +102,7 @@ Item {
         function test_installApps() {
             instance.updatesCount = 2;
             instance.online = true;
-            instance.status = SystemUpdate.StatusIdle;
+            instance.status = UpdateManager.StatusIdle;
 
             var info = findChild(instance, "updatesGlobalInfoLabel");
             var install = findChild(instance, "updatesGlobalInstallButton");
@@ -114,7 +114,7 @@ Item {
         function test_installWithRestart() {
             instance.updatesCount = 2;
             instance.online = true;
-            instance.status = SystemUpdate.StatusIdle;
+            instance.status = UpdateManager.StatusIdle;
             instance.requireRestart = true;
 
             var info = findChild(instance, "updatesGlobalInfoLabel");
@@ -127,7 +127,7 @@ Item {
         function test_singleUpdate() {
             instance.updatesCount = 1;
             instance.online = true;
-            instance.status = SystemUpdate.StatusIdle;
+            instance.status = UpdateManager.StatusIdle;
 
             verify(instance.hidden, "global was not hidden when only one update");
         }
@@ -135,7 +135,7 @@ Item {
         function test_batchMode() {
             instance.updatesCount = 2;
             instance.online = true;
-            instance.status = SystemUpdate.StatusIdle;
+            instance.status = UpdateManager.StatusIdle;
             instance.batchMode = true;
 
             verify(instance.hidden, "global was hidden in batchMode");
@@ -145,143 +145,143 @@ Item {
             return [
                 {
                     tag: "idle",
-                    status: SystemUpdate.StatusIdle, online: true, updatesCount: 0, hidden: true
+                    status: UpdateManager.StatusIdle, online: true, updatesCount: 0, hidden: true
                 },
                 {
                     tag: "idle, no network",
-                    status: SystemUpdate.StatusIdle, online: false, updatesCount: 0, hidden: true
+                    status: UpdateManager.StatusIdle, online: false, updatesCount: 0, hidden: true
                 },
                 {
                     tag: "idle, one update",
-                    status: SystemUpdate.StatusIdle, online: true, updatesCount: 1, hidden: true
+                    status: UpdateManager.StatusIdle, online: true, updatesCount: 1, hidden: true
                 },
                 {
                     tag: "idle, two updates",
-                    status: SystemUpdate.StatusIdle, online: true, updatesCount: 2, hidden: false
+                    status: UpdateManager.StatusIdle, online: true, updatesCount: 2, hidden: false
                 },
                 {
                     tag: "idle, two updates, no network",
-                    status: SystemUpdate.StatusIdle, online: false, updatesCount: 2, hidden: true
+                    status: UpdateManager.StatusIdle, online: false, updatesCount: 2, hidden: true
                 },
                 {
                     tag: "checking clicks, no network, no updates",
-                    status: SystemUpdate.StatusCheckingClickUpdates, online: false, updatesCount: 0, hidden: true
+                    status: UpdateManager.StatusCheckingClickUpdates, online: false, updatesCount: 0, hidden: true
                 },
                 {
                     tag: "checking clicks, no network, updates",
-                    status: SystemUpdate.StatusCheckingClickUpdates, online: false, updatesCount: 2, hidden: true
+                    status: UpdateManager.StatusCheckingClickUpdates, online: false, updatesCount: 2, hidden: true
                 },
                 {
                     tag: "checking clicks, network, no updates",
-                    status: SystemUpdate.StatusCheckingClickUpdates, online: true, updatesCount: 0, hidden: false
+                    status: UpdateManager.StatusCheckingClickUpdates, online: true, updatesCount: 0, hidden: false
                 },
                 {
                     tag: "checking clicks, network, one update",
-                    status: SystemUpdate.StatusCheckingClickUpdates, online: true, updatesCount: 1, hidden: false
+                    status: UpdateManager.StatusCheckingClickUpdates, online: true, updatesCount: 1, hidden: false
                 },
                 {
                     tag: "checking clicks, network, updates",
-                    status: SystemUpdate.StatusCheckingClickUpdates, online: true, updatesCount: 2, hidden: false
+                    status: UpdateManager.StatusCheckingClickUpdates, online: true, updatesCount: 2, hidden: false
                 },
                 {
                     tag: "checking image, no network, no updates",
-                    status: SystemUpdate.StatusCheckingSystemUpdates, online: false, updatesCount: 0, hidden: true
+                    status: UpdateManager.StatusCheckingImageUpdates, online: false, updatesCount: 0, hidden: true
                 },
                 {
                     tag: "checking image, no network, updates",
-                    status: SystemUpdate.StatusCheckingSystemUpdates, online: false, updatesCount: 2, hidden: true
+                    status: UpdateManager.StatusCheckingImageUpdates, online: false, updatesCount: 2, hidden: true
                 },
                 {
                     tag: "checking image, network, no updates",
-                    status: SystemUpdate.StatusCheckingSystemUpdates, online: true, updatesCount: 0, hidden: false
+                    status: UpdateManager.StatusCheckingImageUpdates, online: true, updatesCount: 0, hidden: false
                 },
                 {
                     tag: "checking image, network, one update",
-                    status: SystemUpdate.StatusCheckingSystemUpdates, online: true, updatesCount: 1, hidden: false
+                    status: UpdateManager.StatusCheckingImageUpdates, online: true, updatesCount: 1, hidden: false
                 },
                 {
                     tag: "checking image, network, updates",
-                    status: SystemUpdate.StatusCheckingSystemUpdates, online: true, updatesCount: 2, hidden: false
+                    status: UpdateManager.StatusCheckingImageUpdates, online: true, updatesCount: 2, hidden: false
                 },
                 {
                     tag: "checking all, no network, no updates",
-                    status: SystemUpdate.StatusCheckingAllUpdates, online: false, updatesCount: 0, hidden: true
+                    status: UpdateManager.StatusCheckingAllUpdates, online: false, updatesCount: 0, hidden: true
                 },
                 {
                     tag: "checking all, no network, updates",
-                    status: SystemUpdate.StatusCheckingAllUpdates, online: false, updatesCount: 2, hidden: true
+                    status: UpdateManager.StatusCheckingAllUpdates, online: false, updatesCount: 2, hidden: true
                 },
                 {
                     tag: "checking all, network, no updates",
-                    status: SystemUpdate.StatusCheckingAllUpdates, online: true, updatesCount: 0, hidden: false
+                    status: UpdateManager.StatusCheckingAllUpdates, online: true, updatesCount: 0, hidden: false
                 },
                 {
                     tag: "checking all, network, one update",
-                    status: SystemUpdate.StatusCheckingAllUpdates, online: true, updatesCount: 1, hidden: false
+                    status: UpdateManager.StatusCheckingAllUpdates, online: true, updatesCount: 1, hidden: false
                 },
                 {
                     tag: "checking all, network, updates",
-                    status: SystemUpdate.StatusCheckingAllUpdates, online: true, updatesCount: 2, hidden: false
+                    status: UpdateManager.StatusCheckingAllUpdates, online: true, updatesCount: 2, hidden: false
                 },
                 {
                     tag: "batch mode, no network, no updates",
-                    status: SystemUpdate.StatusIdle, online: false, updatesCount: 0, hidden: true, batchMode: true
+                    status: UpdateManager.StatusIdle, online: false, updatesCount: 0, hidden: true, batchMode: true
                 },
                 {
                     tag: "batch mode, no network, updates",
-                    status: SystemUpdate.StatusIdle, online: false, updatesCount: 2, hidden: true, batchMode: true
+                    status: UpdateManager.StatusIdle, online: false, updatesCount: 2, hidden: true, batchMode: true
                 },
                 {
                     tag: "batch mode, network, no updates",
-                    status: SystemUpdate.StatusIdle, online: true, updatesCount: 0, hidden: true, batchMode: true
+                    status: UpdateManager.StatusIdle, online: true, updatesCount: 0, hidden: true, batchMode: true
                 },
                 {
                     tag: "batch mode, network, one update",
-                    status: SystemUpdate.StatusIdle, online: true, updatesCount: 1, hidden: true, batchMode: true
+                    status: UpdateManager.StatusIdle, online: true, updatesCount: 1, hidden: true, batchMode: true
                 },
                 {
                     tag: "batch mode, network, updates",
-                    status: SystemUpdate.StatusIdle, online: true, updatesCount: 2, hidden: true, batchMode: true
+                    status: UpdateManager.StatusIdle, online: true, updatesCount: 2, hidden: true, batchMode: true
                 },
                 {
                     tag: "network error, no network, no updates",
-                    status: SystemUpdate.StatusNetworkError, online: false, updatesCount: 0, hidden: true
+                    status: UpdateManager.StatusNetworkError, online: false, updatesCount: 0, hidden: true
                 },
                 {
                     tag: "network error, no network, updates",
-                    status: SystemUpdate.StatusNetworkError, online: false, updatesCount: 2, hidden: true
+                    status: UpdateManager.StatusNetworkError, online: false, updatesCount: 2, hidden: true
                 },
                 {
                     tag: "network error, network, no updates",
-                    status: SystemUpdate.StatusNetworkError, online: true, updatesCount: 0, hidden: true
+                    status: UpdateManager.StatusNetworkError, online: true, updatesCount: 0, hidden: true
                 },
                 {
                     tag: "network error, network, one update",
-                    status: SystemUpdate.StatusNetworkError, online: true, updatesCount: 1, hidden: true
+                    status: UpdateManager.StatusNetworkError, online: true, updatesCount: 1, hidden: true
                 },
                 {
                     tag: "network error, network, updates",
-                    status: SystemUpdate.StatusNetworkError, online: true, updatesCount: 2, hidden: true
+                    status: UpdateManager.StatusNetworkError, online: true, updatesCount: 2, hidden: true
                 },
                 {
                     tag: "server error, no network, no updates",
-                    status: SystemUpdate.StatusServerError, online: false, updatesCount: 0, hidden: true
+                    status: UpdateManager.StatusServerError, online: false, updatesCount: 0, hidden: true
                 },
                 {
                     tag: "server error, no network, updates",
-                    status: SystemUpdate.StatusServerError, online: false, updatesCount: 2, hidden: true
+                    status: UpdateManager.StatusServerError, online: false, updatesCount: 2, hidden: true
                 },
                 {
                     tag: "server error, network, no updates",
-                    status: SystemUpdate.StatusServerError, online: true, updatesCount: 0, hidden: true
+                    status: UpdateManager.StatusServerError, online: true, updatesCount: 0, hidden: true
                 },
                 {
                     tag: "server error, network, one update",
-                    status: SystemUpdate.StatusServerError, online: true, updatesCount: 1, hidden: true
+                    status: UpdateManager.StatusServerError, online: true, updatesCount: 1, hidden: true
                 },
                 {
                     tag: "server error, network, updates",
-                    status: SystemUpdate.StatusServerError, online: true, updatesCount: 2, hidden: true
+                    status: UpdateManager.StatusServerError, online: true, updatesCount: 2, hidden: true
                 },
             ]
         }

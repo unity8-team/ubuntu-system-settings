@@ -15,25 +15,34 @@
  * You should have received a copy of the GNU General Public License along
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef MOCK_SYSTEM_UPDATE_H
-#define MOCK_SYSTEM_UPDATE_H
-
-#include "systemupdate.h"
-#include "MockUpdateModel.h"
+#include "MockUpdateManager.h"
+#include "updatemodel.h"
+#include "fakeclickmanager.h"
+#include "fakeimagemanager.h"
 
 using namespace UpdatePlugin;
 
-class MockSystemUpdate : public SystemUpdate
+MockUpdateManager::MockUpdateManager(QObject *parent)
+    : UpdateManager(new MockUpdateModel(parent),
+                    nullptr, // We don't need a NAM.
+                    new MockImageManager(parent),
+                    new MockClickManager(parent),
+                    parent)
 {
-    Q_OBJECT
-public:
-    explicit MockSystemUpdate(QObject *parent = nullptr);
-    ~MockSystemUpdate() {}
-    Q_INVOKABLE bool isCheckRequired();
-    Q_INVOKABLE void mockIsCheckRequired(const bool isRequired); // mock only
-    Q_INVOKABLE void mockStatus(const uint &status); // mock only
-private:
-    bool m_checkRequired = false;
-};
+}
 
-#endif // MOCK_SYSTEM_UPDATE_H
+void MockUpdateManager::mockIsCheckRequired(const bool isRequired)
+{
+    m_checkRequired = isRequired;
+}
+
+bool MockUpdateManager::isCheckRequired()
+{
+    return m_checkRequired;
+}
+
+void MockUpdateManager::mockStatus(const uint &status)
+{
+    m_status = (UpdateManager::Status) status;
+    Q_EMIT statusChanged();
+}
