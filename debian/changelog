@@ -1,3 +1,12 @@
+ubuntu-system-settings (0.4+16.10.20160810-0ubuntu1) yakkety; urgency=medium
+
+  * Skip tests on powerpc due to Qt 5.6 bug (LP: #1606927)
+  * Depend on upstart to prevent s390x problems until upstart has been
+    fixed.
+  * bluetooth: Add Apperance characteristic to type conversion
+
+ -- Konrad Zapałowicz <konrad.zapalowicz@canonical.com>  Wed, 10 Aug 2016 13:17:54 +0000
+
 ubuntu-system-settings (0.4+16.10.20160808-0ubuntu2) yakkety; urgency=medium
 
   * Readd the upstart workaround by doing a rebuild from trunk.
