@@ -155,11 +155,14 @@ ItemPage {
             }
 
             SettingsItemTitle {
+                id: softwareItem
                 objectName: "softwareItem"
+                visible: UpdateManager.currentBuildNumber
                 text: i18n.tr("Software:")
             }
 
             SettingsListItems.SingleValueProgression {
+                visible: softwareItem.visible
                 property string versionIdentifier: {
                     var num = UpdateManager.currentBuildNumber;
                     var ota = UpdateManager.detailedVersionDetails['tag'];
@@ -178,12 +181,14 @@ ItemPage {
 
             SettingsListItems.SingleValue {
                 objectName: "lastUpdatedItem"
+                visible: softwareItem.visible
                 text: i18n.tr("Last updated")
                 value: UpdateManager.lastUpdateDate && !isNaN(UpdateManager.lastUpdateDate) ?
                     Qt.formatDate(UpdateManager.lastUpdateDate) : i18n.tr("Never")
             }
 
             SettingsListItems.SingleControl {
+                visible: softwareItem.visible
 
                 Button {
                     objectName: "updateButton"
