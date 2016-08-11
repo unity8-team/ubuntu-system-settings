@@ -1,3 +1,10 @@
+ubuntu-system-settings (0.4+16.10.20160811.2-0ubuntu1) yakkety; urgency=medium
+
+  * Skip tests on powerpc due to Qt 5.6 bug (LP: #1606927)
+  * Make device always valid.
+
+ -- Konrad Zapałowicz <konrad.zapalowicz@canonical.com>  Thu, 11 Aug 2016 12:37:40 +0000
+
 ubuntu-system-settings (0.4+16.10.20160810-0ubuntu1) yakkety; urgency=medium
 
   * Skip tests on powerpc due to Qt 5.6 bug (LP: #1606927)
