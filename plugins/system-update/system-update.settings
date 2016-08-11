@@ -1,6 +1,7 @@
 {
     "icon": "preferences-system-updates-symbolic",
     "name": "Updates",
+    "plugin": "system-update-plugin",
     "translations": "ubuntu-system-settings",
     "category": "system",
     "priority": 5,
@@ -16,7 +17,7 @@
         "click"
     ],
     "has-dynamic-keywords": false,
-    "has-dynamic-visibility": false,
+    "has-dynamic-visibility": true,
     "page-component": "PageComponent.qml",
     "visible-if-file-exists": "/usr/share/dbus-1/system-services/com.canonical.SystemImage.service"
 }

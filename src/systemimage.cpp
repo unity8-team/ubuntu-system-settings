@@ -23,6 +23,7 @@
 
 #include "systemimage.h"
 #include <QEvent>
+#include <QFile>
 #include <QDateTime>
 #include <QDBusReply>
 #include <unistd.h>
@@ -316,6 +317,12 @@ QVariantMap QSystemImage::detailedVersionDetails() const
 int QSystemImage::downloadMode()
 {
     return m_downloadMode;
+}
+
+bool QSystemImage::exists()
+{
+    auto sid = new QFile(QString("/usr/sbin/system-image-dbus"));
+    return sid->exists();
 }
 
 void QSystemImage::setDownloadMode(const int &downloadMode) {

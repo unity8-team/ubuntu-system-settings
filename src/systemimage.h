@@ -103,6 +103,7 @@ public:
     Q_INVOKABLE void productionReset();
     Q_INVOKABLE void factoryReset();
     Q_INVOKABLE bool checkTarget() const;
+    Q_INVOKABLE bool exists();
 
 Q_SIGNALS:
     void checkingForUpdatesChanged();

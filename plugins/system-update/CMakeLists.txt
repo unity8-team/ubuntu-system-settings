@@ -1,4 +1,6 @@
 set(CMAKE_AUTOMOC ON)
+add_subdirectory(plugin)
+
 set(QML_SOURCES
     ClickUpdateDelegate.qml
     Configuration.qml

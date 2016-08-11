@@ -154,11 +154,14 @@ ItemPage {
             }
 
             SettingsItemTitle {
+                id: softwareItem
                 objectName: "softwareItem"
                 text: i18n.tr("Software:")
+                visible: SystemImage.exists()
             }
 
             SettingsListItems.SingleValueProgression {
+                visible: softwareItem.visible
                 property string versionIdentifier: {
                     var num = SystemImage.currentBuildNumber;
                     var ota = SystemImage.versionTag;
@@ -176,6 +179,7 @@ ItemPage {
             }
 
             SettingsListItems.SingleValue {
+                visible: softwareItem.visible
                 objectName: "lastUpdatedItem"
                 text: i18n.tr("Last updated")
                 value: SystemImage.lastUpdateDate && !isNaN(SystemImage.lastUpdateDate) ?
@@ -183,6 +187,7 @@ ItemPage {
             }
 
             SettingsListItems.SingleControl {
+                visible: softwareItem.visible
 
                 Button {
                     objectName: "updateButton"
