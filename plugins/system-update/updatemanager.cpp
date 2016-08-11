@@ -16,7 +16,7 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "systemupdate.h"
+#include "updatemanager.h"
 #include "click/manager_impl.h"
 #include "image/imagemanager_impl.h"
 #include "network/accessmanager_impl.h"
@@ -26,7 +26,7 @@
 
 namespace UpdatePlugin
 {
-SystemUpdate::SystemUpdate(QObject *parent)
+UpdateManager::UpdateManager(QObject *parent)
     : QObject(parent)
     , m_model(new UpdateModel(this))
     , m_nam(new Network::ManagerImpl(this))
@@ -36,7 +36,7 @@ SystemUpdate::SystemUpdate(QObject *parent)
    init();
 }
 
-SystemUpdate::SystemUpdate(UpdateModel *model,
+UpdateManager::UpdateManager(UpdateModel *model,
                            Network::Manager *nam,
                            Image::Manager *imageManager,
                            Click::Manager *clickManager,
@@ -50,7 +50,7 @@ SystemUpdate::SystemUpdate(UpdateModel *model,
     init();
 }
 
-void SystemUpdate::init()
+void UpdateManager::init()
 {
     m_pending.setSourceModel(m_model);
     m_pending.filterOnInstalled(false);
@@ -79,46 +79,46 @@ void SystemUpdate::init()
             this, SLOT(handleCheckCompleted()));
 }
 
-UpdateModel* SystemUpdate::updates()
+UpdateModel* UpdateManager::updates()
 {
     QQmlEngine::setObjectOwnership(m_model, QQmlEngine::CppOwnership);
     return m_model;
 }
 
-UpdateModelFilter* SystemUpdate::pendingUpdates()
+UpdateModelFilter* UpdateManager::pendingUpdates()
 {
     auto ret = &m_pending;
     QQmlEngine::setObjectOwnership(ret, QQmlEngine::CppOwnership);
     return ret;
 }
 
-UpdateModelFilter* SystemUpdate::clickUpdates()
+UpdateModelFilter* UpdateManager::clickUpdates()
 {
     auto ret = &m_clicks;
     QQmlEngine::setObjectOwnership(ret, QQmlEngine::CppOwnership);
     return ret;
 }
 
-UpdateModelFilter* SystemUpdate::imageUpdates()
+UpdateModelFilter* UpdateManager::imageUpdates()
 {
     auto ret = &m_images;
     QQmlEngine::setObjectOwnership(ret, QQmlEngine::CppOwnership);
     return ret;
 }
 
-UpdateModelFilter* SystemUpdate::installedUpdates()
+UpdateModelFilter* UpdateManager::installedUpdates()
 {
     auto ret = &m_installed;
     QQmlEngine::setObjectOwnership(ret, QQmlEngine::CppOwnership);
     return ret;
 }
 
-SystemUpdate::Status SystemUpdate::status() const
+UpdateManager::Status UpdateManager::status() const
 {
     return m_status;
 }
 
-void SystemUpdate::calculateStatus()
+void UpdateManager::calculateStatus()
 {
     Status status;
     bool clickCheck = m_clickManager->checkingForUpdates();
@@ -128,14 +128,14 @@ void SystemUpdate::calculateStatus()
     } else if (clickCheck) {
         status = Status::StatusCheckingClickUpdates;
     } else if (imageCheck) {
-        status = Status::StatusCheckingSystemUpdates;
+        status = Status::StatusCheckingImageUpdates;
     } else {
         status = Status::StatusIdle;
     }
     setStatus(status);
 }
 
-void SystemUpdate::setStatus(const Status &status)
+void UpdateManager::setStatus(const Status &status)
 {
     if (m_status != status) {
         m_status = status;
@@ -143,33 +143,33 @@ void SystemUpdate::setStatus(const Status &status)
     }
 }
 
-bool SystemUpdate::isCheckRequired()
+bool UpdateManager::isCheckRequired()
 {
     QDateTime now = QDateTime::currentDateTimeUtc().addSecs(-1800); // 30 mins
     return m_model->db()->lastCheckDate() < now;
 }
 
-bool SystemUpdate::authenticated()
+bool UpdateManager::authenticated()
 {
     return m_clickManager->authenticated();
 }
 
-void SystemUpdate::handleCheckCompleted()
+void UpdateManager::handleCheckCompleted()
 {
     m_model->db()->setLastCheckDate(QDateTime::currentDateTime());
 }
 
-void SystemUpdate::handleNetworkError()
+void UpdateManager::handleNetworkError()
 {
     setStatus(Status::StatusNetworkError);
 }
 
-void SystemUpdate::handleServerError()
+void UpdateManager::handleServerError()
 {
     setStatus(Status::StatusServerError);
 }
 
-void SystemUpdate::check(const Check check)
+void UpdateManager::check(const Check check)
 {
     switch (check) {
     case Check::CheckAutomatic:
@@ -191,26 +191,26 @@ void SystemUpdate::check(const Check check)
     }
 }
 
-void SystemUpdate::cancel()
+void UpdateManager::cancel()
 {
     m_imageManager->cancel();
     m_clickManager->cancel();
 }
 
-bool SystemUpdate::launch(const QString &identifier)
+bool UpdateManager::launch(const QString &identifier)
 {
     // We can currently launch click packages only.
     return m_clickManager->launch(identifier);
 }
 
-void SystemUpdate::retry(const QString &identifier, const uint &revision)
+void UpdateManager::retry(const QString &identifier, const uint &revision)
 {
     /* QML talks to SystemImage directly when retrying, so we only have to deal
     with clicks here. */
     m_clickManager->retry(identifier, revision);
 }
 
-void SystemUpdate::remove(const QString &identifier, const uint &revision)
+void UpdateManager::remove(const QString &identifier, const uint &revision)
 {
     m_model->remove(identifier, revision);
 }

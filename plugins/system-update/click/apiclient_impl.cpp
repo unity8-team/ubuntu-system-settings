@@ -17,7 +17,6 @@
  */
 
 #include "helpers.h"
-#include "systemupdate.h"
 
 #include "click/apiclient_impl.h"
 #include "network/accessmanager_impl.h"

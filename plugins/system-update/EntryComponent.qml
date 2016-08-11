@@ -50,7 +50,7 @@ ListItem {
 
     DownloadManager {
         onDownloadFinished: {
-            SystemUpdate.model.setInstalled(
+            UpdateManager.model.setInstalled(
                 download.metadata.custom.identifier,
                 download.metadata.custom.revision
             );
@@ -61,7 +61,7 @@ ListItem {
         width: 1
         height: 1
         id: updatesRep
-        model: SystemUpdate.clickUpdates
+        model: UpdateManager.clickUpdates
         Item { width: 1; height: 1 }
     }
 

@@ -46,10 +46,10 @@ add_library(UpdatePlugin SHARED
     network/accessmanager_impl.cpp
 
     helpers.cpp
-    systemupdate.cpp
     update.cpp
     updatedb.cpp
     updatemodel.cpp
+    updatemanager.cpp
 )
 qt5_use_modules(UpdatePlugin Quick Core Network Sql)
 target_link_libraries(UpdatePlugin

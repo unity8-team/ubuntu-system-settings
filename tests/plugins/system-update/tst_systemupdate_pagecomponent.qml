@@ -61,13 +61,13 @@ Item {
             destroyedSpy.target = instance;
 
             /* Not waiting here would cause a crash in some cases where
-            SystemUpdate.mockStatus would emit a signal to PageComponent which
+            UpdateManager.mockStatus would emit a signal to PageComponent which
             was in the process of being destroyed. Explicitly wait. */
             instance.destroy();
             destroyedSpy.wait();
 
-            SystemUpdate.mockStatus(SystemUpdate.StatusIdle);
-            SystemUpdate.model.reset();
+            UpdateManager.mockStatus(UpdateManager.StatusIdle);
+            UpdateManager.model.reset();
             SystemImage.reset();
         }
 
@@ -101,8 +101,8 @@ Item {
 
         function test_errors_data() {
             return [
-                { status: SystemUpdate.StatusServerError },
-                { status: SystemUpdate.StatusNetworkError }
+                { status: UpdateManager.StatusServerError },
+                { status: UpdateManager.StatusNetworkError }
             ];
         }
 
@@ -110,31 +110,31 @@ Item {
             instance.online = true;
             instance.updatesCount = 1;
 
-            SystemUpdate.mockStatus(data.status);
+            UpdateManager.mockStatus(data.status);
             var overlay = findChild(instance, "overlay");
             compare(overlay.visible, true);
         }
 
         function test_authenticationNotificationVisibility_data() {
             return [
-                { auth: false, visible: true, status: SystemUpdate.StatusIdle },
-                { auth: false, visible: false, status: SystemUpdate.StatusCheckingClickUpdates },
-                { auth: false, visible: true, status: SystemUpdate.StatusCheckingSystemUpdates },
-                { auth: false, visible: false, status: SystemUpdate.StatusCheckingAllUpdates },
-                { auth: false, visible: false, status: SystemUpdate.StatusNetworkError },
-                { auth: false, visible: false, status: SystemUpdate.StatusServerError },
-                { auth: true, visible: false, status: SystemUpdate.StatusIdle },
-                { auth: true, visible: false, status: SystemUpdate.StatusCheckingClickUpdates },
-                { auth: true, visible: false, status: SystemUpdate.StatusCheckingSystemUpdates },
-                { auth: true, visible: false, status: SystemUpdate.StatusCheckingAllUpdates },
-                { auth: true, visible: false, status: SystemUpdate.StatusNetworkError },
-                { auth: true, visible: false, status: SystemUpdate.StatusServerError }
+                { auth: false, visible: true, status: UpdateManager.StatusIdle },
+                { auth: false, visible: false, status: UpdateManager.StatusCheckingClickUpdates },
+                { auth: false, visible: true, status: UpdateManager.StatusCheckingImageUpdates },
+                { auth: false, visible: false, status: UpdateManager.StatusCheckingAllUpdates },
+                { auth: false, visible: false, status: UpdateManager.StatusNetworkError },
+                { auth: false, visible: false, status: UpdateManager.StatusServerError },
+                { auth: true, visible: false, status: UpdateManager.StatusIdle },
+                { auth: true, visible: false, status: UpdateManager.StatusCheckingClickUpdates },
+                { auth: true, visible: false, status: UpdateManager.StatusCheckingImageUpdates },
+                { auth: true, visible: false, status: UpdateManager.StatusCheckingAllUpdates },
+                { auth: true, visible: false, status: UpdateManager.StatusNetworkError },
+                { auth: true, visible: false, status: UpdateManager.StatusServerError }
             ];
         }
 
         function test_authenticationNotificationVisibility(data) {
             instance.online = true; // It's never shown if not online.
-            SystemUpdate.mockStatus(data.status);
+            UpdateManager.mockStatus(data.status);
 
             instance.authenticated = data.auth;
             var notif = findChild(instance, "noAuthenticationNotification");
@@ -153,48 +153,48 @@ Item {
 
         function test_clickUpdatesVisibility_data() {
             return [
-                { count: 0, visible: false, status: SystemUpdate.StatusIdle },
-                { count: 0, visible: false, status: SystemUpdate.StatusCheckingClickUpdates },
-                { count: 1, visible: true, status: SystemUpdate.StatusIdle },
-                { count: 1, visible: false, status: SystemUpdate.StatusCheckingClickUpdates },
-                { count: 1, visible: true, status: SystemUpdate.StatusCheckingSystemUpdates },
-                { count: 1, visible: false, status: SystemUpdate.StatusCheckingAllUpdates },
-                { count: 1, visible: false, status: SystemUpdate.StatusNetworkError },
-                { count: 1, visible: false, status: SystemUpdate.StatusServerError }
+                { count: 0, visible: false, status: UpdateManager.StatusIdle },
+                { count: 0, visible: false, status: UpdateManager.StatusCheckingClickUpdates },
+                { count: 1, visible: true, status: UpdateManager.StatusIdle },
+                { count: 1, visible: false, status: UpdateManager.StatusCheckingClickUpdates },
+                { count: 1, visible: true, status: UpdateManager.StatusCheckingImageUpdates },
+                { count: 1, visible: false, status: UpdateManager.StatusCheckingAllUpdates },
+                { count: 1, visible: false, status: UpdateManager.StatusNetworkError },
+                { count: 1, visible: false, status: UpdateManager.StatusServerError }
             ];
         }
 
         function test_clickUpdatesVisibility(data) {
             instance.online = true;
             instance.authenticated = true;
-            SystemUpdate.mockStatus(data.status);
+            UpdateManager.mockStatus(data.status);
 
             var item = findChild(instance, "clickUpdates");
             for (var i = 0; i < data.count; i++) {
-                SystemUpdate.model.mockAddUpdate("app" + i, i, Update.KindClick);
+                UpdateManager.model.mockAddUpdate("app" + i, i, Update.KindClick);
             }
             compare(item.visible, data.visible);
         }
 
         function test_imageUpdatesVisibility_data() {
             return [
-                { count: 0, visible: false, status: SystemUpdate.StatusIdle },
-                { count: 0, visible: false, status: SystemUpdate.StatusCheckingSystemUpdates },
-                { count: 1, visible: true, status: SystemUpdate.StatusIdle },
-                { count: 1, visible: true, status: SystemUpdate.StatusCheckingClickUpdates },
-                { count: 1, visible: false, status: SystemUpdate.StatusCheckingSystemUpdates },
-                { count: 1, visible: false, status: SystemUpdate.StatusCheckingAllUpdates },
-                { count: 1, visible: false, status: SystemUpdate.StatusNetworkError },
-                { count: 1, visible: false, status: SystemUpdate.StatusServerError }
+                { count: 0, visible: false, status: UpdateManager.StatusIdle },
+                { count: 0, visible: false, status: UpdateManager.StatusCheckingImageUpdates },
+                { count: 1, visible: true, status: UpdateManager.StatusIdle },
+                { count: 1, visible: true, status: UpdateManager.StatusCheckingClickUpdates },
+                { count: 1, visible: false, status: UpdateManager.StatusCheckingImageUpdates },
+                { count: 1, visible: false, status: UpdateManager.StatusCheckingAllUpdates },
+                { count: 1, visible: false, status: UpdateManager.StatusNetworkError },
+                { count: 1, visible: false, status: UpdateManager.StatusServerError }
             ];
         }
 
         function test_imageUpdatesVisibility(data) {
             var item = findChild(instance, "imageUpdates");
             instance.online = true;
-            SystemUpdate.mockStatus(data.status);
+            UpdateManager.mockStatus(data.status);
             if (data.count) {
-                SystemUpdate.model.mockAddUpdate("ubuntu", 1, Update.KindImage);
+                UpdateManager.model.mockAddUpdate("ubuntu", 1, Update.KindImage);
             }
             compare(item.visible, data.visible);
         }
@@ -209,15 +209,15 @@ Item {
         function test_previousUpdatesVisibility(data) {
             var previous = findChild(instance, "installedUpdates");
             for (var i = 0; i < data.count; i++) {
-                SystemUpdate.model.mockAddUpdate("app" + i, i, Update.KindClick);
-                SystemUpdate.model.setInstalled("app" + i, i);
+                UpdateManager.model.mockAddUpdate("app" + i, i, Update.KindClick);
+                UpdateManager.model.setInstalled("app" + i, i);
             }
             compare(previous.visible, data.count > 0);
         }
 
         function test_noInstallOnLowPower() {
             instance.havePower = false;
-            SystemUpdate.model.mockAddUpdate("ubuntu", 1, Update.KindImage);
+            UpdateManager.model.mockAddUpdate("ubuntu", 1, Update.KindImage);
             findChild(instance, "global").requestInstall();
             var dialog = findChild(testRoot, "imagePrompt");
             compare(findChild(dialog, "imagePromptInstall").visible, false);
@@ -230,7 +230,7 @@ Item {
 
         function test_installOnSufficientPower() {
             instance.havePower = true;
-            SystemUpdate.model.mockAddUpdate("ubuntu", 1, Update.KindImage);
+            UpdateManager.model.mockAddUpdate("ubuntu", 1, Update.KindImage);
             findChild(instance, "global").requestInstall();
             var dialog = findChild(testRoot, "imagePrompt");
             compare(findChild(dialog, "imagePromptInstall").visible, true);
@@ -242,7 +242,7 @@ Item {
         }
 
         function test_imageActions() {
-            SystemUpdate.model.mockAddUpdate("ubuntu", 1, Update.KindImage);
+            UpdateManager.model.mockAddUpdate("ubuntu", 1, Update.KindImage);
             var delegate = findChild(instance, "imageUpdatesDelegate-0");
             instance.havePower = true;
             SystemImage.downloadMode = 2; // Always download.
@@ -261,7 +261,7 @@ Item {
                 return !!findChild(testRoot, "imagePrompt")
             }, true);
             var dialog = findChild(testRoot, "imagePrompt");
-            dialog.requestSystemUpdate();
+            dialog.requestUpdateManager();
 
             verify(SystemImage.called("applyUpdate"));
 
@@ -275,7 +275,7 @@ Item {
             /* Test that we make s-i do what we want in cases where a Wi-Fi
             update has stalled. */
             SystemImage.downloadMode = 0; // Never download.
-            SystemUpdate.model.mockAddUpdate("ubuntu", 1, Update.KindImage);
+            UpdateManager.model.mockAddUpdate("ubuntu", 1, Update.KindImage);
             var delegate = findChild(instance, "imageUpdatesDelegate-0");
             delegate.download();
             verify(SystemImage.called("forceAllowGSMDownload"));
@@ -283,7 +283,7 @@ Item {
 
         function test_forceAllowGSMDownloadRetry() {
             SystemImage.downloadMode = 0; // Never download.
-            SystemUpdate.model.mockAddUpdate("ubuntu", 1, Update.KindImage);
+            UpdateManager.model.mockAddUpdate("ubuntu", 1, Update.KindImage);
             var delegate = findChild(instance, "imageUpdatesDelegate-0");
             delegate.retry();
             verify(SystemImage.called("forceAllowGSMDownload"));
@@ -302,6 +302,15 @@ Item {
                 return !!findChild(testRoot, "installationFailed");
             }, false);
         }
+
+        // OTA updates are branded as such.
+        function test_otaUpdate() {
+            UpdateManager.model.mockAddUpdate("ubuntu", 1, Update.KindImage);
+            SystemImage.mockVersionTag("OTA-1");
+            UpdateManager.cancel();
+            var delegate = findChild(instance, "imageUpdatesDelegate-0");
+            compare(delegate.version, "OTA-1");
+        }
     }
 
     UbuntuTestCase {
@@ -319,8 +328,8 @@ Item {
             instance.havePower = true;
 
             // We always want some clicks for a batch mode
-            SystemUpdate.model.mockAddUpdate("app" + 0, 0, Update.KindClick);
-            SystemUpdate.model.mockAddUpdate("app" + 1, 1, Update.KindClick);
+            UpdateManager.model.mockAddUpdate("app" + 0, 0, Update.KindClick);
+            UpdateManager.model.mockAddUpdate("app" + 1, 1, Update.KindClick);
         }
 
         function cleanup() {
@@ -329,7 +338,7 @@ Item {
             instance.destroy();
             destroyedSpy.wait();
 
-            SystemUpdate.model.reset();
+            UpdateManager.model.reset();
         }
 
         function test_clicksOnly() {
@@ -337,14 +346,14 @@ Item {
             compare(instance.batchMode, true);
 
             // Complete updates.
-            SystemUpdate.model.setInstalled("app" + 0, 0);
-            SystemUpdate.model.setInstalled("app" + 1, 1);
+            UpdateManager.model.setInstalled("app" + 0, 0);
+            UpdateManager.model.setInstalled("app" + 1, 1);
 
             tryCompare(instance, "batchMode", false);
         }
 
         function test_clicksAndImageAlreadyDownloaded() {
-            SystemUpdate.model.mockAddUpdate("ubuntu", 1, Update.KindImage);
+            UpdateManager.model.mockAddUpdate("ubuntu", 1, Update.KindImage);
             findChild(instance, "global").requestInstall();
 
             tryCompareFunction(function () {
@@ -361,7 +370,7 @@ Item {
 
         // Test when an image update is not even Downloaded.
         function test_clicksAndImageNotDownloaded() {
-            SystemUpdate.model.mockAddUpdate("ubuntu", 1, Update.KindImage);
+            UpdateManager.model.mockAddUpdate("ubuntu", 1, Update.KindImage);
             findChild(instance, "global").requestInstall();
 
             tryCompareFunction(function () {

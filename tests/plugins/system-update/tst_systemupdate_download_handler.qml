@@ -49,7 +49,7 @@ Item {
 
     Repeater {
         id: updateRepeater
-        model: SystemUpdate.clickUpdates
+        model: UpdateManager.clickUpdates
         delegate: ClickUpdateDelegate {
             width: testRoot.width
             objectName: "click-update-" + index
@@ -70,7 +70,7 @@ Item {
         property var metadata: null
 
         function init () {
-            SystemUpdate.model.mockAddUpdate("app", 1, Update.KindClick);
+            UpdateManager.model.mockAddUpdate("app", 1, Update.KindClick);
             metadata = mdt.createObject(testRoot, {
                 custom: { identifier: "app", revision: 1, title: "test app"}
             });
@@ -78,7 +78,7 @@ Item {
                 metadata: metadata,
             });
             instance = handler.createObject(testRoot, {
-                updateModel: SystemUpdate.model
+                updateModel: UpdateManager.model
             });
             instance.udm.mockDownload(download);
         }
@@ -87,7 +87,7 @@ Item {
             metadata.destroy();
             download.destroy();
             instance.destroy();
-            SystemUpdate.model.reset();
+            UpdateManager.model.reset();
         }
 
         function test_bindings() {
@@ -178,13 +178,13 @@ Item {
 
         function init () {
             instance = handler.createObject(testRoot, {
-                updateModel: SystemUpdate.model
+                updateModel: UpdateManager.model
             });
         }
 
         function cleanup () {
             instance.destroy();
-            SystemUpdate.model.reset();
+            UpdateManager.model.reset();
         }
 
         function test_createDownload() {
@@ -203,7 +203,7 @@ Item {
         }
 
         function test_downloadExists() {
-            SystemUpdate.model.mockAddUpdate("app", 1, Update.KindClick);
+            UpdateManager.model.mockAddUpdate("app", 1, Update.KindClick);
             var delegate = findChild(testRoot, "click-update-0");
             instance.assertDownloadExist({ identifier: "app", revision: 1});
 

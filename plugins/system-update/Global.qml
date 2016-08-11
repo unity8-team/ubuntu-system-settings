@@ -26,19 +26,19 @@ Item {
     id: g
 
     property bool batchMode
-    property int status // A SystemUpdate::Status
+    property int status // A UpdateManager::Status
     property bool requireRestart: false
     property int updatesCount: 0
     property bool online: false
 
     property bool hidden: {
         switch (status) {
-        case SystemUpdate.StatusNetworkError:
-        case SystemUpdate.StatusServerError:
+        case UpdateManager.StatusNetworkError:
+        case UpdateManager.StatusServerError:
             return true;
         }
         return !online ||
-               (updatesCount <= 1 && status === SystemUpdate.StatusIdle)  ||
+               (updatesCount <= 1 && status === UpdateManager.StatusIdle)  ||
                batchMode
     }
 
@@ -65,9 +65,9 @@ Item {
         opacity: visible ? 1 : 0
         visible: {
             switch (g.status) {
-            case SystemUpdate.StatusCheckingClickUpdates:
-            case SystemUpdate.StatusCheckingSystemUpdates:
-            case SystemUpdate.StatusCheckingAllUpdates:
+            case UpdateManager.StatusCheckingClickUpdates:
+            case UpdateManager.StatusCheckingImageUpdates:
+            case UpdateManager.StatusCheckingAllUpdates:
                 return true;
             }
             return false;
@@ -103,7 +103,7 @@ Item {
 
         opacity: visible ? 1 : 0
         visible: {
-            var canInstall = g.status === SystemUpdate.StatusIdle;
+            var canInstall = g.status === UpdateManager.StatusIdle;
             return canInstall && updatesCount > 1;
         }
 

@@ -51,9 +51,9 @@ add_executable(tst-imagemanager
 add_test(tst-imagemanager tst-imagemanager)
 target_link_libraries(tst-imagemanager ${PLUGIN_LIBS} ${QTDBUSMOCK_LIBRARIES} ${QTDBUSTEST_LIBRARIES})
 
-add_executable(tst-systemupdate tst_systemupdate.cpp)
-add_test(tst-systemupdate tst-systemupdate)
-target_link_libraries(tst-systemupdate ${PLUGIN_LIBS})
+add_executable(tst-updatemanager tst_updatemanager.cpp)
+add_test(tst-updatemanager tst-updatemanager)
+target_link_libraries(tst-updatemanager ${PLUGIN_LIBS})
 
 add_executable(tst-updatedb tst_updatedb.cpp)
 add_test(tst-updatedb tst-updatedb)

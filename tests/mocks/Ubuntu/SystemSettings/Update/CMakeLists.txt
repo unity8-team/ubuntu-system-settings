@@ -17,7 +17,7 @@ set(PLUGIN_LIBS
 set(MOCK_SYSTEMUPDATE_SRCS
     plugin.cpp
     MockSystemImage.cpp
-    MockSystemUpdate.cpp
+    MockUpdateManager.cpp
     MockUpdateModel.cpp
     ${CMAKE_SOURCE_DIR}/src/utils.cpp
     ${PLUGIN_SOURCES}
