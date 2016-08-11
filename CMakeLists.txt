@@ -77,6 +77,7 @@ include_directories(lib)
 include_directories(src)
 add_subdirectory(plugins)
 add_subdirectory(src)
+add_subdirectory(tests)
 
 configure_file(${DESKTOP_FILE}.in.in ${DESKTOP_FILE}.in @ONLY)
 add_custom_target(${DESKTOP_FILE} ALL
