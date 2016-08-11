@@ -13,6 +13,7 @@ protected:
         QStringList params;
         params << "mockclickserver.py";
         params << args;
+        params << "--port" << QString::number(m_port);
         m_mockclickserver.start("python3", params);
         QVERIFY(m_mockclickserver.waitForStarted());
 
@@ -28,9 +29,18 @@ protected:
             }
             QTest::qWait(1000);
         }
-        qWarning() << "STDOUT" << m_mockclickserver.readAllStandardOutput();
-        qWarning() << "STDERR" << m_mockclickserver.readAllStandardError();
-        QFAIL("could not start mock server in time.");
+
+        qWarning() << "Failed to start server"
+                   << m_mockclickserver.readAllStandardError()
+                   << "\n\nRetrying on a different port...";
+
+        if (m_retries < 10) {
+            m_port++;
+            m_retries++;
+            startMockClickServer(args);
+        } else {
+            QFAIL("Could not start server.");
+        }
     }
 
     void stopMockClickServer()
@@ -40,6 +50,8 @@ protected:
     }
 
     QProcess m_mockclickserver;
+    uint m_port = 9009;
+    uint m_retries = 0;
 };
 
 #endif // MOCK_CLICKSERVER_TESTCASE_H
