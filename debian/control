@@ -103,7 +103,6 @@ Depends: ${misc:Depends},
          suru-icon-theme (>= 14.04+15.04.20150813~),
          whoopsie-preferences (>= 0.9),
          libsystemsettings1 (= ${binary:Version}),
-         system-image-dbus (>= 3.1),
          ubuntu-keyboard-data (>= 0.99.trunk.phablet2+15.04.20150421),
          urfkill,
 # for the session-migration script (python3 itself also for the push helper)
@@ -113,6 +112,7 @@ Depends: ${misc:Depends},
          python3-xdg,
          gir1.2-glib-2.0,
          qml-module-ubuntu-connectivity (>= 0.7.1)
+Suggests: system-image-dbus (>= 3.1),
 Recommends: ubuntu-system-settings-online-accounts,
             ubuntu-touch-sounds,
 Conflicts: ubuntu-system-settings-example

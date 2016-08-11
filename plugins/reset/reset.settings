@@ -1,6 +1,7 @@
 {
     "icon": "reset",
     "name": "Reset",
+    "plugin": "reset-plugin",
     "translations": "ubuntu-system-settings",
     "category": "uncategorized-bottom",
     "priority": 1,
@@ -12,7 +13,7 @@
         "restore"
     ],
     "has-dynamic-keywords": false,
-    "has-dynamic-visibility": false,
+    "has-dynamic-visibility": true,
     "entry-component": "EntryComponent.qml",
     "page-component": "PageComponent.qml"
 }
