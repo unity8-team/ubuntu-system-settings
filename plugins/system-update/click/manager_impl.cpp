@@ -322,6 +322,12 @@ void ManagerImpl::synchronize(
             } else if (manifestUpdate->identifier() == dbUpdate->identifier()) {
                 // Fast forward the local version.
                 dbUpdate->setLocalVersion(manifestUpdate->localVersion());
+
+                // Is update now in needing to update?
+                if (dbUpdate->isUpdateRequired()) {
+                    m_model->setAvailable(dbUpdate->identifier(),
+                                          dbUpdate->revision());
+                }
                 found = true;
             }
         }

@@ -190,6 +190,7 @@ ItemPage {
                     width: parent.width - units.gu(4)
                     onClicked: {
                         var upPlugin = pluginManager.getByName("system-update")
+                        pluginOptions["forceupdatecheck"] = true;
                         if (upPlugin) {
                             var updatePage = upPlugin.pageComponent
                             if (updatePage)

@@ -31,8 +31,6 @@
 #include <QJsonArray>
 #include <QJsonParseError>
 #include <QSignalSpy>
-#include <QSqlError>
-#include <QSqlQuery>
 #include <QTemporaryDir>
 #include <QTest>
 
@@ -158,55 +156,56 @@ private slots:
         QTest::addColumn<QJsonArray>("manifest");
         QTest::addColumn<UpdateList>("existingUpdates");
         QTest::addColumn<UpdateList>("markedInstalled");
+        QTest::addColumn<UpdateList>("uninstalled");
         QTest::addColumn<UpdateList>("removed");
-        QTest::addColumn<UpdateList>("targetDbUpdates");
+        QTest::addColumn<UpdateList>("targetUpdates");
 
         {   // Mark one update as installed.
             QByteArray manifest("[{\"name\": \"a\", \"version\": \"v1\"}]");
-            UpdateList existing, installed, removed, targetDbUpdates;
+            UpdateList existing, installed, uninstalled, removed, targetUpdates;
             auto package1 = createUpdate("a", 0, "v1");
             existing << package1;
             installed << package1;
             QTest::newRow("One installed")
                 << JSONfromQByteArray(manifest) << existing << installed
-                << removed << targetDbUpdates;
+                << uninstalled << removed << targetUpdates;
         }
         {   // Remove an update.
             QByteArray manifest("[]");
-            UpdateList existing, installed, removed, targetDbUpdates;
+            UpdateList existing, installed, uninstalled, removed, targetUpdates;
             auto package1 = createUpdate("a", 0, "v1");
             existing << package1;
             removed << package1;
             QTest::newRow("One removed")
                 << JSONfromQByteArray(manifest) << existing << installed
-                << removed << targetDbUpdates;
+                << uninstalled << removed << targetUpdates;
         }
         {   // Mark two updates as installed.
             QByteArray manifest("["
                 "{\"name\": \"b\", \"version\": \"v1\" },"
                 "{\"name\": \"c\", \"version\": \"v2\" }"
             "]");
-            UpdateList existing, installed, removed, targetDbUpdates;
+            UpdateList existing, installed, uninstalled, removed, targetUpdates;
             auto package1 = createUpdate("b", 0, "v1");
             auto package2 = createUpdate("c", 0, "v2");
             existing << package1 << package2;
             QTest::newRow("Two installed")
                 << JSONfromQByteArray(manifest) << existing << installed
-                << removed << targetDbUpdates;
+                << uninstalled << removed << targetUpdates;
         }
         {   // Remove two updates.
             QByteArray manifest("[]");
-            UpdateList existing, installed, removed, targetDbUpdates;
+            UpdateList existing, installed, uninstalled, removed, targetUpdates;
             auto package1 = createUpdate("b", 0, "v1");
             auto package2 = createUpdate("c", 0, "v2");
             removed << package1 << package2;
             QTest::newRow("Two removed")
                 << JSONfromQByteArray(manifest) << existing << installed
-                << removed << targetDbUpdates;
+                << uninstalled << removed << targetUpdates;
         }
         {   // Remove one, mark one as installed.
             QByteArray manifest("[{\"name\": \"a\", \"version\": \"v1\"}]");
-            UpdateList existing, installed, removed, targetDbUpdates;
+            UpdateList existing, installed, uninstalled, removed, targetUpdates;
             auto package1 = createUpdate("a", 0, "v1");
             auto package2 = createUpdate("b", 0, "v2");
             existing << package1 << package2;
@@ -214,34 +213,46 @@ private slots:
             removed << package2;
             QTest::newRow("Mix")
                 << JSONfromQByteArray(manifest) << existing << installed
-                << removed << targetDbUpdates;
+                << uninstalled << removed << targetUpdates;
+        }
+        {   // Mark something as uninstalled.
+            QByteArray manifest("[{\"name\": \"a\", \"version\": \"v1\"}]");
+            UpdateList existing, installed, uninstalled, removed, targetUpdates;
+
+            auto package1 = createUpdate("a", 0, "v2");
+            package1->setInstalled(true);
+            existing << package1;
+            uninstalled << package1;
+            QTest::newRow("Uninstalled")
+                << JSONfromQByteArray(manifest) << existing << installed
+                << uninstalled << removed << targetUpdates;
         }
         {   // No changes to the two updates.
             QByteArray manifest("["
                 "{\"name\": \"a\", \"version\": \"v1\" },"
                 "{\"name\": \"b\", \"version\": \"v1\" }"
             "]");
-            UpdateList existing, installed, removed, targetDbUpdates;
+            UpdateList existing, installed, uninstalled, removed, targetUpdates;
             auto package1 = createUpdate("a", 0, "v2");
             auto package2 = createUpdate("b", 0, "v2");
             existing << package1 << package2;
-            targetDbUpdates << package1 << package2;
+            targetUpdates << package1 << package2;
             QTest::newRow("No change")
                 << JSONfromQByteArray(manifest) << existing << installed
-                << removed << targetDbUpdates;
+                << uninstalled << removed << targetUpdates;
         }
         {   // An Image update isn't affected.
             QByteArray manifest("["
                 "{\"name\": \"a\", \"version\": \"v1\" }"
             "]");
-            UpdateList existing, installed, removed, targetDbUpdates;
+            UpdateList existing, installed, uninstalled, removed, targetUpdates;
             auto package1 = createUpdate("a", 0, "v0");
             package1->setKind(Update::Kind::KindImage);
             existing << package1;
-            targetDbUpdates << package1;
+            targetUpdates << package1;
             QTest::newRow("No change to image update")
                 << JSONfromQByteArray(manifest) << existing << installed
-                << removed << targetDbUpdates;
+                << uninstalled << removed << targetUpdates;
         }
     }
     void testSynchronization()
@@ -253,8 +264,9 @@ private slots:
         QFETCH(QJsonArray, manifest);
         QFETCH(UpdateList, existingUpdates);
         QFETCH(UpdateList, markedInstalled);
+        QFETCH(UpdateList, uninstalled);
         QFETCH(UpdateList, removed);
-        QFETCH(UpdateList, targetDbUpdates);
+        QFETCH(UpdateList, targetUpdates);
 
         Q_FOREACH(auto update, existingUpdates) {
             m_model->add(update);
@@ -265,10 +277,13 @@ private slots:
         Q_FOREACH(auto update, markedInstalled) {
             QVERIFY(m_model->get(update)->installed());
         }
+        Q_FOREACH(auto update, uninstalled) {
+            QVERIFY(!m_model->get(update)->installed());
+        }
         Q_FOREACH(auto update, removed) {
             QVERIFY(m_model->get(update).isNull());
         }
-        Q_FOREACH(auto update, targetDbUpdates) {
+        Q_FOREACH(auto update, targetUpdates) {
             QVERIFY(!m_model->fetch(update).isNull());
         }
 

@@ -172,7 +172,7 @@ void UpdateManager::handleServerError()
 void UpdateManager::check(const Check check)
 {
     switch (check) {
-    case Check::CheckAutomatic:
+    case Check::CheckIfNecessary:
         if (isCheckRequired()) {
             m_imageManager->check();
             m_clickManager->check();
