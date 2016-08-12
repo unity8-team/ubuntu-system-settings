@@ -1,7 +1,6 @@
 {
     "icon": "preferences-system-updates-symbolic",
     "name": "Updates",
-    "plugin": "system-update-plugin",
     "translations": "ubuntu-system-settings",
     "category": "system",
     "priority": 5,

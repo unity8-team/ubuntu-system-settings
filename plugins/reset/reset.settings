@@ -1,7 +1,6 @@
 {
     "icon": "reset",
     "name": "Reset",
-    "plugin": "reset-plugin",
     "translations": "ubuntu-system-settings",
     "category": "uncategorized-bottom",
     "priority": 1,
