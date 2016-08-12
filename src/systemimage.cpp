@@ -321,7 +321,7 @@ int QSystemImage::downloadMode()
 
 bool QSystemImage::exists()
 {
-    auto sid = new QFile(QString("/usr/sbin/system-image-dbus"));
+    auto sid = new QFile(QString("/usr/share/dbus-1/system-services/com.canonical.SystemImage.service"));
     return sid->exists();
 }
 
