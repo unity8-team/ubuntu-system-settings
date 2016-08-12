@@ -39,21 +39,13 @@ ItemPage {
         flickable: scrollWidget
     }
 
-    QDBusActionGroup {
-        id: indicatorPower
-        busType: 1
-        busName: "com.canonical.indicator.power"
-        objectPath: "/com/canonical/indicator/power"
-        property var batteryLevel: action("battery-level").state || 0
-        property var deviceState: action("device-state").state
-        Component.onCompleted: start()
-    }
 
     property bool batchMode: false
     property bool havePower: (indicatorPower.deviceState === "charging") ||
                              (indicatorPower.batteryLevel > 25)
     property bool online: NetworkingStatus.online
     property bool authenticated: UpdateManager.authenticated
+    property bool forceCheck: false
 
     property int updatesCount: {
         var count = 0;
@@ -62,6 +54,29 @@ ItemPage {
         }
         count += imageRepeater.count;
         return count;
+    }
+
+    function check(force) {
+        if (force === true) {
+            UpdateManager.check(UpdateManager.CheckAll);
+        } else {
+            if (imageRepeater.count === 0 && clickRepeater.count === 0) {
+                UpdateManager.check(UpdateManager.CheckAll);
+            } else {
+                // Only check 30 minutes after last successful check.
+                UpdateManager.check(UpdateManager.CheckIfNecessary);
+            }
+        }
+    }
+
+    QDBusActionGroup {
+        id: indicatorPower
+        busType: 1
+        busName: "com.canonical.indicator.power"
+        objectPath: "/com/canonical/indicator/power"
+        property var batteryLevel: action("battery-level").state || 0
+        property var deviceState: action("device-state").state
+        Component.onCompleted: start()
     }
 
     Setup {
@@ -246,7 +261,7 @@ ItemPage {
                     var s = UpdateManager.status;
                     var haveUpdates = clickRepeater.count > 0;
                     switch (s) {
-                    case UpdateManager.StatusCheckingSystemUpdates:
+                    case UpdateManager.StatusCheckingImageUpdates:
                     case UpdateManager.StatusIdle:
                         return haveUpdates && online && authenticated;
                     }
@@ -318,7 +333,7 @@ ItemPage {
                 visible: {
                     var s = UpdateManager.status;
                     switch (s) {
-                    case UpdateManager.StatusCheckingSystemUpdates:
+                    case UpdateManager.StatusCheckingImageUpdates:
                     case UpdateManager.StatusIdle:
                         return !authenticated && online;
                     }
@@ -461,14 +476,5 @@ ItemPage {
         }
     }
 
-    Component.onCompleted: {
-        if (pluginOptions["forceupdatecheck"] === true) {
-            UpdateManager.check(UpdateManager.CheckAll);
-        } else if (imageRepeater.count === 0 && clickRepeater.count === 0) {
-            UpdateManager.check(UpdateManager.CheckAll);
-        } else {
-            // Only check 30 minutes after last successful check.
-            UpdateManager.check(UpdateManager.CheckIfNecessary);
-        }
-    }
+    Component.onCompleted: check()
 }

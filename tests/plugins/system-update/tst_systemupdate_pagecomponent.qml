@@ -261,7 +261,7 @@ Item {
                 return !!findChild(testRoot, "imagePrompt")
             }, true);
             var dialog = findChild(testRoot, "imagePrompt");
-            dialog.requestUpdateManager();
+            dialog.requestSystemUpdate();
 
             verify(SystemImage.called("applyUpdate"));
 
