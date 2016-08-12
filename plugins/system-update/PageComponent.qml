@@ -39,21 +39,13 @@ ItemPage {
         flickable: scrollWidget
     }
 
-    QDBusActionGroup {
-        id: indicatorPower
-        busType: 1
-        busName: "com.canonical.indicator.power"
-        objectPath: "/com/canonical/indicator/power"
-        property var batteryLevel: action("battery-level").state || 0
-        property var deviceState: action("device-state").state
-        Component.onCompleted: start()
-    }
 
     property bool batchMode: false
     property bool havePower: (indicatorPower.deviceState === "charging") ||
                              (indicatorPower.batteryLevel > 25)
     property bool online: NetworkingStatus.online
-    property bool authenticated: SystemUpdate.authenticated
+    property bool authenticated: UpdateManager.authenticated
+    property bool forceCheck: false
 
     property int updatesCount: {
         var count = 0;
@@ -62,6 +54,29 @@ ItemPage {
         }
         count += imageRepeater.count;
         return count;
+    }
+
+    function check(force) {
+        if (force === true) {
+            UpdateManager.check(UpdateManager.CheckAll);
+        } else {
+            if (imageRepeater.count === 0 && clickRepeater.count === 0) {
+                UpdateManager.check(UpdateManager.CheckAll);
+            } else {
+                // Only check 30 minutes after last successful check.
+                UpdateManager.check(UpdateManager.CheckIfNecessary);
+            }
+        }
+    }
+
+    QDBusActionGroup {
+        id: indicatorPower
+        busType: 1
+        busName: "com.canonical.indicator.power"
+        objectPath: "/com/canonical/indicator/power"
+        property var batteryLevel: action("battery-level").state || 0
+        property var deviceState: action("device-state").state
+        Component.onCompleted: start()
     }
 
     Setup {
@@ -74,14 +89,14 @@ ItemPage {
             if (reply.errorName) {
                 console.warn('Online Accounts failed:', reply.errorName);
             }
-            SystemUpdate.check(SystemUpdate.CheckClick);
+            UpdateManager.check(UpdateManager.CheckClick);
             notauthNotification.enabled = true;
         }
     }
 
     DownloadHandler {
         id: downloadHandler
-        updateModel: SystemUpdate.model
+        updateModel: UpdateManager.model
     }
 
     Flickable {
@@ -110,12 +125,12 @@ ItemPage {
 
                 height: hidden ? 0 : units.gu(8)
                 clip: true
-                status: SystemUpdate.status
+                status: UpdateManager.status
                 batchMode: root.batchMode
                 requireRestart: imageRepeater.count > 0
                 updatesCount: root.updatesCount
                 online: root.online
-                onStop: SystemUpdate.cancel()
+                onStop: UpdateManager.cancel()
 
                 onRequestInstall: {
                     if (requireRestart) {
@@ -162,13 +177,13 @@ ItemPage {
                     horizontalAlignment: Text.AlignHCenter
                     wrapMode: Text.WordWrap
                     text: {
-                        var s = SystemUpdate.status;
+                        var s = UpdateManager.status;
                         if (!root.online) {
                             return i18n.tr("Connect to the Internet to check for updates.");
-                        } else if (s === SystemUpdate.StatusIdle && updatesCount === 0) {
+                        } else if (s === UpdateManager.StatusIdle && updatesCount === 0) {
                             return i18n.tr("Software is up to date");
-                        } else if (s === SystemUpdate.StatusServerError ||
-                                   s === SystemUpdate.StatusNetworkError) {
+                        } else if (s === UpdateManager.StatusServerError ||
+                                   s === UpdateManager.StatusNetworkError) {
                             return i18n.tr("The update server is not responding. Try again later.");
                         }
                         return "";
@@ -187,11 +202,11 @@ ItemPage {
                 objectName: "imageUpdates"
                 anchors { left: parent.left; right: parent.right }
                 visible: {
-                    var s = SystemUpdate.status;
+                    var s = UpdateManager.status;
                     var haveUpdates = imageRepeater.count > 0;
                     switch (s) {
-                    case SystemUpdate.StatusCheckingClickUpdates:
-                    case SystemUpdate.StatusIdle:
+                    case UpdateManager.StatusCheckingClickUpdates:
+                    case UpdateManager.StatusIdle:
                         return haveUpdates && online;
                     }
                     return false;
@@ -199,7 +214,7 @@ ItemPage {
 
                 Repeater {
                     id: imageRepeater
-                    model: SystemUpdate.imageUpdates
+                    model: UpdateManager.imageUpdates
 
                     delegate: UpdateDelegate {
                         objectName: "imageUpdatesDelegate-" + index
@@ -243,11 +258,11 @@ ItemPage {
                 objectName: "clickUpdates"
                 anchors { left: parent.left; right: parent.right }
                 visible: {
-                    var s = SystemUpdate.status;
+                    var s = UpdateManager.status;
                     var haveUpdates = clickRepeater.count > 0;
                     switch (s) {
-                    case SystemUpdate.StatusCheckingSystemUpdates:
-                    case SystemUpdate.StatusIdle:
+                    case UpdateManager.StatusCheckingImageUpdates:
+                    case UpdateManager.StatusIdle:
                         return haveUpdates && online && authenticated;
                     }
                     return false;
@@ -255,7 +270,7 @@ ItemPage {
 
                 Repeater {
                     id: clickRepeater
-                    model: SystemUpdate.clickUpdates
+                    model: UpdateManager.clickUpdates
 
                     delegate: ClickUpdateDelegate {
                         objectName: "clickUpdatesDelegate" + index
@@ -277,7 +292,7 @@ ItemPage {
                         onRetry: {
                             /* This creates a new signed URL with which we can
                             retry the download. See onSignedUrlChanged. */
-                            SystemUpdate.retry(model.identifier,
+                            UpdateManager.retry(model.identifier,
                                                model.revision);
                         }
 
@@ -316,10 +331,10 @@ ItemPage {
                 id: notauthNotification
                 objectName: "noAuthenticationNotification"
                 visible: {
-                    var s = SystemUpdate.status;
+                    var s = UpdateManager.status;
                     switch (s) {
-                    case SystemUpdate.StatusCheckingSystemUpdates:
-                    case SystemUpdate.StatusIdle:
+                    case UpdateManager.StatusCheckingImageUpdates:
+                    case UpdateManager.StatusIdle:
                         return !authenticated && online;
                     }
                     return false;
@@ -344,7 +359,7 @@ ItemPage {
 
                 Repeater {
                     id: installedRepeater
-                    model: SystemUpdate.installedUpdates
+                    model: UpdateManager.installedUpdates
 
                     delegate: UpdateDelegate {
                         objectName: "installedUpdateDelegate-" + index
@@ -362,7 +377,7 @@ ItemPage {
                            actions: [
                                Action {
                                     iconName: "delete"
-                                    onTriggered: SystemUpdate.remove(
+                                    onTriggered: UpdateManager.remove(
                                         model.identifier, model.revision
                                     )
                                }
@@ -373,7 +388,7 @@ ItemPage {
                         launchable: (!!packageName &&
                                      model.kind === Update.KindClick)
 
-                        onLaunch: SystemUpdate.launch(identifier, revision);
+                        onLaunch: UpdateManager.launch(identifier, revision);
                     }
                 }
             }
@@ -441,9 +456,9 @@ ItemPage {
         target: NetworkingStatus
         onOnlineChanged: {
             if (!online) {
-                SystemUpdate.cancel();
+                UpdateManager.cancel();
             } else {
-                SystemUpdate.check(SystemUpdate.CheckAll);
+                UpdateManager.check(UpdateManager.CheckAll);
             }
         }
     }
@@ -461,5 +476,5 @@ ItemPage {
         }
     }
 
-    Component.onCompleted: SystemUpdate.check(SystemUpdate.CheckAll)
+    Component.onCompleted: check()
 }

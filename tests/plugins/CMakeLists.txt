@@ -32,9 +32,9 @@ add_qml_test(system-update systemupdate_global
     IMPORT_PATHS ${SYSTEMUPDATE_IMPORT_PATHS}
 )
 
-# add_qml_test(system-update systemupdate_pagecomponent
-#     IMPORT_PATHS ${SYSTEMUPDATE_IMPORT_PATHS}
-# )
+add_qml_test(system-update systemupdate_pagecomponent
+    IMPORT_PATHS ${SYSTEMUPDATE_IMPORT_PATHS}
+)
 
 add_qml_test(system-update systemupdate_entrycomponent
     IMPORT_PATHS ${SYSTEMUPDATE_IMPORT_PATHS}

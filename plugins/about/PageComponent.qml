@@ -197,10 +197,13 @@ ItemPage {
                         var upPlugin = pluginManager.getByName("system-update")
                         if (upPlugin) {
                             var updatePage = upPlugin.pageComponent
-                            if (updatePage)
-                                pageStack.push(updatePage)
-                            else
+                            var updatePageItem;
+                            if (updatePage) {
+                                updatePageItem = pageStack.push(updatePage);
+                                updatePageItem.check(true); // Force a check.
+                            } else {
                                 console.warn("Failed to get system-update pageComponent")
+                            }
                         } else {
                             console.warn("Failed to get system-update plugin instance")
                         }

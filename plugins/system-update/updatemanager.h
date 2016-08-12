@@ -59,11 +59,10 @@ public:
         StatusServerError
     };
 
-    /* Representing the user's intention when performing a check. The automatic
-     check is only performed if necessary. */
+    /* Representing the user's intention when performing a check. */
     enum class Check : uint
     {
-        CheckAutomatic,
+        CheckIfNecessary,
         CheckAll,
         CheckClick,
         CheckImage
@@ -76,7 +75,7 @@ public:
     UpdateModelFilter* installedUpdates();
     Status status() const;
 
-    Q_INVOKABLE void check(const Check check = Check::CheckAutomatic);
+    Q_INVOKABLE void check(const Check check = Check::CheckIfNecessary);
     Q_INVOKABLE void cancel();
     Q_INVOKABLE bool launch(const QString &identifier);
     Q_INVOKABLE void retry(const QString &identifier, const uint &revision);

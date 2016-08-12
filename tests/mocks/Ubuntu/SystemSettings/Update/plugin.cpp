@@ -58,4 +58,5 @@ void BackendPlugin::initializeEngine(QQmlEngine *engine, const char *uri)
     auto utils = new SystemSettings::Utilities;
     context->setContextProperty("Utilities", utils);
     context->setContextProperty("showAllUI", true);
+    context->setContextProperty("pluginOptions", QVariantMap());
 }

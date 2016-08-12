@@ -51,15 +51,18 @@ public:
      */
     void pruneDb();
     void reset();
+    const uint SCHEMA_VERSION = 1;
 Q_SIGNALS:
     // This signal is emitted when multiple rows changed.
     void changed();
-    // This signal is emitted when an Update changes.
+    // This signal is emitted when a single Update changes.
     void changed(const QSharedPointer<Update> &update);
 private:
     bool insert(const QSharedPointer<Update> &update);
     static void update(const QSharedPointer<Update> &update,
                        const QSqlQuery &query);
+    bool dropDb();
+    bool migrateDb();
     bool createDb();
     void initializeDb();
     bool openDb();

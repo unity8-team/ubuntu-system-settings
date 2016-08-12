@@ -17,12 +17,14 @@
  */
 
 #include <QDate>
+#include <QDebug>
+#include <QScopedPointer>
 #include <QSignalSpy>
 #include <QSqlQuery>
+#include <QTemporaryDir>
+#include <QTest>
 #include <QTime>
 #include <QTimeZone>
-#include <QTest>
-#include <QDebug>
 
 #include "update.h"
 #include "updatedb.h"
@@ -151,9 +153,7 @@ private slots:
         QFETCH(QDateTime, set);
         QFETCH(QDateTime, target);
         QCOMPARE(m_instance->lastCheckDate().isValid(), false);
-
         m_instance->setLastCheckDate(set);
-
         QCOMPARE(m_instance->lastCheckDate(), target);
     }
     void testPruning()
@@ -184,7 +184,6 @@ private slots:
         installed->setIdentifier("com.ubuntu.myapp");
         installed->setInstalled(true);
         m_instance->add(installed);
-
 
         // Add a new revision of it.
         installed->setRevision(101);
@@ -262,6 +261,39 @@ private slots:
         QCOMPARE(dbUpdate->automatic(), true);
         QCOMPARE(dbUpdate->error(), QString("error"));
         QCOMPARE(dbUpdate->packageName(), QString("packagename"));
+    }
+    void testSchemaVersion()
+    {
+        QSqlQuery q(m_instance->db());
+        q.exec("SELECT schema_version FROM meta");
+        QVERIFY(q.next());
+        QCOMPARE(q.value("schema_version").toUInt(), m_instance->SCHEMA_VERSION);
+    }
+    void testMigration()
+    {
+        QTemporaryDir dir;
+        // “Migration”: We nuke the DB if we get an unexpected schema version.
+        auto dbPath = QString("%1/%2").arg(dir.path()).arg("migrationtest.db");
+        qDebug() << "created temp path at" << dbPath;
+        auto instance = new UpdateDb(dbPath);
+
+        // Add an update so we can confirm a migration happened.
+        auto update = createUpdate();
+        update->setIdentifier("test");
+        update->setRevision(1);
+        instance->add(update);
+
+        // We're now at version SCHEMA_VERSION. Decrease it to force migration.
+        QSqlQuery q(instance->db());
+        q.prepare("UPDATE meta SET schema_version=:schema_version");
+        q.bindValue(":schema_version", instance->SCHEMA_VERSION - 1);
+        QVERIFY(q.exec());
+        delete instance;
+
+        instance = new UpdateDb(dbPath);
+        // Confirm that the DB was nuked by asserting count is 0.
+        QCOMPARE(instance->updates().count(), 0);
+        instance->deleteLater();
     }
 private:
     UpdateDb *m_instance = nullptr;

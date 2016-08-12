@@ -80,13 +80,44 @@ void UpdateDb::initializeDb()
     }
 
     QSqlQuery q(m_db);
-
-    // Check whether the table already exists
     q.exec("SELECT name FROM sqlite_master WHERE type='table' AND name='updates'");
-    if (!q.next() && !createDb()) {
-        qCritical() << Q_FUNC_INFO << m_dbpath << m_db.lastError().text();
+    bool exists = q.next();
+    q.finish();
+
+    if (exists) {
+        if (!migrateDb()) {
+            qCritical() << "Unable to migrate db" << m_db.lastError().text();
             return;
+        }
+    } else {
+        if (!createDb()) {
+            qCritical() << "Unable to create db" << m_db.lastError().text();
+            return;
+        }
     }
+}
+
+bool UpdateDb::migrateDb()
+{
+    uint version = 0;
+    QSqlQuery q(m_db);
+    q.exec("SELECT schema_version FROM meta");
+    if (q.next()) {
+        version = q.value(0).toUInt();
+    }
+    q.finish();
+
+    if (version != SCHEMA_VERSION) {
+        if (!dropDb()) {
+            qCritical() << "Unable to drop db" << m_db.lastError().text();
+            return false;
+        }
+        if (!createDb()) {
+            qCritical() << "Unable to create db" << m_db.lastError().text();
+            return false;
+        }
+    }
+    return true;
 }
 
 UpdateDb::~UpdateDb()
@@ -222,7 +253,23 @@ void UpdateDb::update(const QSharedPointer<Update> &update, const QSqlQuery &que
     update->setAutomatic(query.value("automatic").toBool());
     update->setError(query.value("error").toString());
     update->setPackageName(query.value("package_name").toString());
-    update->setSignedDownloadUrl(query.value("signed_download_url").toString());
+    update->setSignedDownloadUrl(
+        query.value("signed_download_url").toString()
+    );
+}
+
+bool UpdateDb::dropDb()
+{
+    QSqlQuery q(m_db);
+    if (!q.exec("DROP TABLE IF EXISTS meta")) {
+        qCritical() << "failed to drop table meta" << m_db.lastError();
+        return false;
+    }
+    if (!q.exec("DROP TABLE IF EXISTS updates")) {
+        qCritical() << "failed to drop table updates" << m_db.lastError();
+        return false;
+    }
+    return true;
 }
 
 bool UpdateDb::createDb()
@@ -232,11 +279,15 @@ bool UpdateDb::createDb()
     QSqlQuery q(m_db);
     bool ok;
     ok = q.exec("CREATE TABLE meta(checked_at_utc BIGINT, "
-                "system_status TEXT)");
+                         "schema_version INTEGER)");
     if (Q_UNLIKELY(!ok)) {
         m_db.rollback();
         return false;
     }
+    q.prepare("INSERT INTO meta (schema_version) VALUES (:schema_version)");
+    q.bindValue(":schema_version", SCHEMA_VERSION);
+    q.exec();
+
     ok = q.exec("CREATE TABLE updates ("
                 "kind TEXT NOT NULL,"
                 "id TEXT NOT NULL,"
@@ -308,9 +359,14 @@ QDateTime UpdateDb::lastCheckDate()
 {
     QDateTime d;
     QSqlQuery q(m_db);
-    q.exec("SELECT checked_at_utc FROM meta ORDER BY checked_at_utc DESC;");
+    q.exec("SELECT checked_at_utc FROM meta ORDER BY checked_at_utc DESC");
     if (q.next()) {
-        d = QDateTime::fromMSecsSinceEpoch(q.value(0).toLongLong());
+        auto val = q.value(0).toString();
+        if (val.isEmpty()) {
+            d = QDateTime();
+        } else {
+            d = QDateTime::fromMSecsSinceEpoch(q.value(0).toLongLong());
+        }
     }
     return d.toUTC();
 }
