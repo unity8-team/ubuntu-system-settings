@@ -323,10 +323,11 @@ void ManagerImpl::synchronize(
                 // Fast forward the local version.
                 dbUpdate->setLocalVersion(manifestUpdate->localVersion());
 
-                // Is update now in needing to update?
-                if (dbUpdate->isUpdateRequired()) {
-                    m_model->setAvailable(dbUpdate->identifier(),
-                                          dbUpdate->revision());
+                // Is update in need of update, but at the same time installed?
+                if (dbUpdate->isUpdateRequired() && dbUpdate->installed()) {
+                    dbUpdate->setInstalled(false);
+                    dbUpdate->setState(Update::State::StateAvailable);
+                    m_model->update(dbUpdate);
                 }
                 found = true;
             }
