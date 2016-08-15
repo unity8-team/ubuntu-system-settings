@@ -127,7 +127,7 @@ class SecurityTestCase(SecurityBaseTestCase):
         else:
             self.assertEquals(
                 activityTimeout,
-                ('{:d} minutes').format(int(actTimeout/60)))
+                ('After {:d} minutes').format(int(actTimeout/60)))
             if dimTimeout:
                 self.assertEquals(dimTimeout, actTimeout - 10)
 
@@ -160,20 +160,20 @@ class SecurityTestCase(SecurityBaseTestCase):
         unlock_methods = ['method_swipe', 'method_code', 'method_phrase']
         selected_method = None
         for m in unlock_methods:
-            if lock_security_page.select_single(objectName=m).selected:
+            if lock_security_page.wait_select_single(objectName=m).selected:
                 selected_method = m
 
         # If swipe is the selected security, we trigger the dialog by
         # changing the security to method_code
         if selected_method == 'method_swipe':
-            dialog_trigger = lock_security_page.select_single(
+            dialog_trigger = lock_security_page.wait_select_single(
                 objectName='method_code')
             input_selector = 'newInput'
         else:
-            # If the security is anything besides swipe, we trigger the dialog
-            # by changing the code/phrase.
-            dialog_trigger = lock_security_page.select_single(
-                objectName='changePass')
+            # If the security is anything besides swipe, we trigger the current
+            # pass dialog by changing the security to swipe.
+            dialog_trigger = lock_security_page.wait_select_single(
+                objectName='method_swipe')
             input_selector = 'currentInput'
 
         # Trigger dialog.
