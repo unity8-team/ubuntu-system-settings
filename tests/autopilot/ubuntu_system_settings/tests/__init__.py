@@ -661,7 +661,7 @@ class StorageBaseTestCase(AboutBaseTestCase):
         super(StorageBaseTestCase, self).setUp()
         self.main_view.click_item('storageItem')
         self.storage_page = self.main_view.select_single(
-            'Storage', objectName='storagePage'
+            objectName='storagePage'
         )
         self.assertThat(self.storage_page.active, Eventually(Equals(True)))
 
