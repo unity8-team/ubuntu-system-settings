@@ -327,6 +327,8 @@ void ManagerImpl::synchronize(
                 if (dbUpdate->isUpdateRequired() && dbUpdate->installed()) {
                     dbUpdate->setInstalled(false);
                     dbUpdate->setState(Update::State::StateAvailable);
+                    dbUpdate->setDownloadId("");
+                    dbUpdate->setError("");
                     m_model->update(dbUpdate);
                 }
                 found = true;
