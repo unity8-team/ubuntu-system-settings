@@ -849,7 +849,7 @@ class AboutPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
     @autopilot.logging.log_action(logger.info)
     def go_to_software_licenses(self):
         license_item = self.select_single(
-            ubuntuuitoolkit.listitems.Standard, objectName='licenseItem')
+            'StandardProgression', objectName='licenseItem')
         license_item.swipe_into_view()
         self.pointing_device.click_object(license_item)
         licenses_page = self.get_root_instance().wait_select_single(
