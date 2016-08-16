@@ -41,6 +41,7 @@ class WifiEnabledTestCase(WifiBaseTestCase):
         if dialog:
             dialog.wait_until_destroyed()
 
+    @skip('This test hangs sometimes and will be converted to a QML test')
     def test_connect_to_eduroam(self):
         self.create_access_point(
             'eduroam', 'eduroam',
