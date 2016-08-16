@@ -667,7 +667,7 @@ class StorageBaseTestCase(AboutBaseTestCase):
 
     def assert_space_item(self, object_name, text):
         """ Checks whether an space item exists and returns a value """
-        item = self.main_view.storage_page.select_single(
+        item = self.main_view.storage_page.wait_select_single(
             objectName=object_name
         )
         self.assertThat(item, NotEquals(None))
