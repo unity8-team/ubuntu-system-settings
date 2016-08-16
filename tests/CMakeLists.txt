@@ -42,9 +42,9 @@ add_executable(tst-arguments
 
 add_executable(tst-systemimage
     tst_systemimage.cpp
-    ../src/systemimage.cpp
     mocks/system-image-dbus/fakesystemimagedbus.cpp
 )
+target_link_libraries(tst-systemimage uss-systemimage)
 
 qt5_use_modules(tst-plugins Core Qml Test)
 target_link_libraries(tst-plugins SystemSettings ${GLIB_LDFLAGS})

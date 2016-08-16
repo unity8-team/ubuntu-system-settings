@@ -22,18 +22,11 @@
 */
 
 #include "systemimage.h"
+#include "i18n.h"
 #include <QEvent>
 #include <QDateTime>
 #include <QDBusReply>
 #include <unistd.h>
-
-// FIXME: need to do this better including #include "../../src/i18n.h"
-// and linking to it
-#include <libintl.h>
-QString _(const char *text)
-{
-    return QString::fromUtf8(dgettext(0, text));
-}
 
 QSystemImage::QSystemImage(QObject *parent)
     : QSystemImage(QDBusConnection::systemBus(), parent)
@@ -154,7 +147,9 @@ QString QSystemImage::cancelUpdate() {
         return reply.argumentAt<0>();
     } else {
         qWarning() << reply.error().message();
-        return _("Can't cancel current request (can't contact service)");
+        return SystemSettings::_(
+            "Can't cancel current request (can't contact service)"
+        );
     }
 }
 
@@ -165,7 +160,9 @@ QString QSystemImage::pauseDownload() {
         return reply.argumentAt<0>();
     } else {
         qWarning() << reply.error().message();
-        return _("Can't pause current request (can't contact service)");
+        return SystemSettings::_(
+            "Can't pause current request (can't contact service)"
+        );
     }
 }
 
@@ -288,19 +285,19 @@ int QSystemImage::currentBuildNumber() const
 QString QSystemImage::currentUbuntuBuildNumber() const
 {
     QString val = m_detailedVersion.value("ubuntu").toString();
-    return val.isEmpty() ? _("Unavailable") : val;
+    return val.isEmpty() ? SystemSettings::_("Unavailable") : val;
 }
 
 QString QSystemImage::currentDeviceBuildNumber() const
 {
     QString val = m_detailedVersion.value("device").toString();
-    return val.isEmpty() ? _("Unavailable") : val;
+    return val.isEmpty() ? SystemSettings::_("Unavailable") : val;
 }
 
 QString QSystemImage::currentCustomBuildNumber() const
 {
     QString val = m_detailedVersion.value("custom").toString();
-    return val.isEmpty() ? _("Unavailable") : val;
+    return val.isEmpty() ? SystemSettings::_("Unavailable") : val;
 }
 
 int QSystemImage::targetBuildNumber() const

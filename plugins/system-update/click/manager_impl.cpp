@@ -17,15 +17,14 @@
  */
 
 #include "helpers.h"
-
 #include "click/apiclient_impl.h"
 #include "click/manager_impl.h"
 #include "click/manifest_impl.h"
 #include "click/sessiontoken_impl.h"
 #include "click/sso_impl.h"
 #include "click/tokendownloader_factory_impl.h"
-
 #include "network/accessmanager_impl.h"
+#include "../../src/i18n.h"
 
 #include <ubuntu-app-launch.h>
 
@@ -35,14 +34,6 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QList>
-
-// FIXME: need to do this better including #include "../../src/i18n.h"
-// and linking to it
-#include <libintl.h>
-QString _(const char *text)
-{
-    return QString::fromUtf8(dgettext(0, text));
-}
 
 namespace UpdatePlugin
 {
@@ -122,13 +113,13 @@ ManagerImpl::ManagerImpl(UpdateModel *model,
     transitions are that
         * we can cancel a check at any time, but this may not necessarily
           propagate to every subsystem. So if a subsystem responds with data
-          after a check has been canceled (or completed), it is a noop as far
-          as checking is concerned.
+          after a check has been canceled (or completed), it does not start or
+          stop a check erroneously.
         * Some parts of the check (e.g. requesting the manifest) should be
           allowed to happen outside a check.
         * While we're waiting for e.g. tokens to download, it's neater to have
-          this state as an explicit one, instead of waiting for a queue
-          to empty.
+          this state as an explicit one, instead of implicit state using
+          conditional branching.
     */
     m_transitions[State::Idle]          << State::Manifest
                                         << State::Failed;
@@ -166,11 +157,6 @@ ManagerImpl::~ManagerImpl()
 
 void ManagerImpl::setState(const State &state)
 {
-    if (!m_transitions[m_state].contains(state)) {
-        qWarning() << "Ignoring transition from" << (int) m_state << "to"
-                   << (int) state;
-    }
-
     if (m_state != state && m_transitions[m_state].contains(state)) {
         m_state = state;
         Q_EMIT stateChanged();
@@ -254,7 +240,7 @@ void ManagerImpl::retry(const QString &identifier, const uint &revision)
             update->setState(Update::State::StateAvailable);
         } else {
             qWarning() << Q_FUNC_INFO << "Can't retry: invalid session token.";
-            update->setError(_("Installation failed."));
+            update->setError(SystemSettings::_("Installation failed."));
             update->setState(Update::State::StateFailed);
         }
         update->setProgress(0);

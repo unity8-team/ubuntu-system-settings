@@ -50,6 +50,7 @@ add_library(UpdatePlugin SHARED
     updatedb.cpp
     updatemodel.cpp
     updatemanager.cpp
+    ../../src/i18n.cpp
 )
 qt5_use_modules(UpdatePlugin Quick Core Network Sql)
 target_link_libraries(UpdatePlugin

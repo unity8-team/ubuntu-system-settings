@@ -56,14 +56,13 @@ Item {
 
     function restoreDownloads() {
         var dl;
-        console.warn('restoreDownloads...')
         for (var i = 0; i<downloads.length; i++) {
             dl = downloads[i];
-            console.warn('restoreDownloads:', i, dl.metadata.custom.identifier);
             if (!dl._bound) {
-                /* We only bind progress as UDM should receive signals for all
-                other events pertinent to a download. */
+                /* We only bind those signals here, that the UDM does not
+                receive, i.e. processing and progressChanged. */
                 dl.progressChanged.connect(onDownloadProgress.bind(dl));
+                dl.processing.connect(onDownloadProcessing.bind(dl));
                 dl._bound = true;
             }
         }
@@ -87,6 +86,7 @@ Item {
     function getDownloadFor(click) {
         var cust;
         var dl;
+
         for (var i = 0; i<downloads.length; i++) {
             dl = downloads[i];
             if (dl.errorMessage || dl.isCompleted) {
@@ -95,9 +95,9 @@ Item {
             }
 
             cust = downloads[i].metadata.custom;
-
-            if (cust.identifier === click.identifier && cust.revision === click.revision)
+            if (cust.identifier === click.identifier && cust.revision === click.revision) {
                 return downloads[i];
+            }
         }
         return null;
     }
@@ -160,6 +160,11 @@ Item {
                                 this.progress);
     }
 
+    function onDownloadProcessing() {
+        updateModel.processUpdate(this.metadata.custom.identifier,
+                                  this.metadata.custom.revision);
+    }
+
     /* If a update's model has a downloadId, check if UDM knows it. If not,
     treat this as a failure. Workaround for lp:1603770. */
     function assertDownloadExist(click) {
@@ -174,6 +179,7 @@ Item {
     Component {
         id: sdl
         SingleDownload {
+            id: download
             objectName: "singleDownload"
             property bool _bound: true
 
@@ -182,19 +188,12 @@ Item {
                                         metadata.custom.revision,
                                         downloadId);
             }
-            onProgressChanged: {
-                updateModel.setProgress(metadata.custom.identifier,
-                                        metadata.custom.revision,
-                                        progress);
-            }
             onStarted: {
                 updateModel.startUpdate(metadata.custom.identifier,
                                         metadata.custom.revision);
             }
-            onProcessing: {
-                updateModel.processUpdate(metadata.custom.identifier,
-                                          metadata.custom.revision);
-            }
+            onProgressChanged: onDownloadProgress.call(download)
+            onProcessing: onDownloadProcessing.call(download)
         }
     }
 

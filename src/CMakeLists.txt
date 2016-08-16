@@ -34,7 +34,6 @@ QT5_ADD_RESOURCES(system-settings-resources ui.qrc)
 
 add_executable(system-settings ${USS_SOURCES} ${QML_SOURCES} ${system-settings-resources})
 qt5_use_modules(system-settings Core Gui Quick Qml DBus)
-target_link_libraries(system-settings SystemSettings ${GLIB_LDFLAGS})
 install(TARGETS system-settings RUNTIME DESTINATION bin)
 
 add_library(uss-accountsservice SHARED accountsservice.h accountsservice.cpp)
@@ -47,7 +46,7 @@ qt5_use_modules(uss-sessionservice Core Qml DBus)
 set_target_properties(uss-sessionservice PROPERTIES VERSION 0.0 SOVERSION 0.0)
 install(TARGETS uss-sessionservice LIBRARY DESTINATION ${PLUGIN_MODULE_DIR} NAMELINK_SKIP)
 
-add_library(uss-systemimage SHARED systemimage.h systemimage.cpp)
+add_library(uss-systemimage SHARED systemimage.h systemimage.cpp i18n.cpp)
 qt5_use_modules(uss-systemimage Core Qml DBus)
 set_target_properties(uss-systemimage PROPERTIES VERSION 0.0 SOVERSION 0.0)
 install(TARGETS uss-systemimage LIBRARY DESTINATION ${PLUGIN_MODULE_DIR} NAMELINK_SKIP)
