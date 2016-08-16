@@ -196,7 +196,6 @@ void WifiDbusHelper::connect(QString ssid, int security, int auth, QStringList u
 
     QDBusObjectPath dev;
     QDBusObjectPath access_point("/");
-
     for (const auto &d : devices) {
         QDBusInterface iface(NM_SERVICE,
                              d.path(),

@@ -21,6 +21,7 @@ import Ubuntu.Components 1.3
 import Ubuntu.Components.ListItems 1.3 as ListItems
 import Ubuntu.Components.Popups 1.3
 import Ubuntu.SystemSettings.Wifi 1.0
+import QMenuModel 0.1
 
 Component {
 
