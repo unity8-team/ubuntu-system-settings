@@ -34,6 +34,7 @@ QT5_ADD_RESOURCES(system-settings-resources ui.qrc)
 
 add_executable(system-settings ${USS_SOURCES} ${QML_SOURCES} ${system-settings-resources})
 qt5_use_modules(system-settings Core Gui Quick Qml DBus)
+target_link_libraries(system-settings SystemSettings ${GLIB_LDFLAGS})
 install(TARGETS system-settings RUNTIME DESTINATION bin)
 
 add_library(uss-accountsservice SHARED accountsservice.h accountsservice.cpp)
