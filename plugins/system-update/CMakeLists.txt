@@ -22,6 +22,7 @@ target_link_libraries(UbuntuUpdatePanel
 set(PLUG_DIR ${PLUGIN_PRIVATE_MODULE_DIR}/Ubuntu/SystemSettings/Update)
 install(TARGETS UbuntuUpdatePanel DESTINATION ${PLUG_DIR})
 install(FILES qmldir DESTINATION ${PLUG_DIR})
+
 install(FILES ${QML_SOURCES} DESTINATION ${PLUGIN_QML_DIR}/system-update)
 
 install(FILES system-update.settings DESTINATION ${PLUGIN_MANIFEST_DIR})

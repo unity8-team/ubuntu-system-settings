@@ -1,0 +1,3 @@
+module WifiSource
+OtherNetwork 1.0 ../../../../plugins/wifi/OtherNetwork.qml
+CertDialog 1.0 ../../../../plugins/wifi/CertDialog.qml
