@@ -149,7 +149,7 @@ class SystemSettingsMainWindow(ubuntuuitoolkit.MainView):
                 page_center_y - obj.height * 2
             )
             # avoid a flick, this is very important
-            sleep(0.1)
+            sleep(0.3)
 
     def scroll_to_and_click(self, obj):
         self.scroll_to(obj)
