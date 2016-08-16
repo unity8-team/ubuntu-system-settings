@@ -1862,14 +1862,14 @@ class VpnPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
     @autopilot.logging.log_action(logger.debug)
     def add_vpn(self):
         obj = self.select_single(objectName='addVpnButton')
-        self.pointing_device.click_object(obj)
+        self.get_root_instance().main_view.scroll_to_and_click(obj)
         return self.get_root_instance().wait_select_single(
             objectName='vpnEditor')
 
     @autopilot.logging.log_action(logger.debug)
     def preview_vpn(self, at):
         obj = self.wait_select_single(objectName='vpnListConnection%d' % at)
-        self.pointing_device.click_object(obj)
+        self.get_root_instance().main_view.scroll_to_and_click(obj)
         return self.get_root_instance().wait_select_single(
             objectName='vpnPreviewDialog')
 
@@ -1879,7 +1879,7 @@ class VpnPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
         change_button = diag.wait_select_single(
             objectName='vpnPreviewChangeButton'
         )
-        self.pointing_device.click_object(change_button)
+        self.get_root_instance().main_view.scroll_to_and_click(change_button)
         return self.get_root_instance().wait_select_single(
             objectName='vpnEditor')
 
@@ -1930,10 +1930,16 @@ class VpnEditor(
 
     @autopilot.logging.log_action(logger.debug)
     def set_openvpn_server(self, server):
+        self.get_root_instance().main_view.scroll_to(
+            self._openvpn_server_field
+        )
         self._openvpn_server_field.write(server)
 
     @autopilot.logging.log_action(logger.debug)
     def set_openvpn_custom_port(self, port):
+        self.get_root_instance().main_view.scroll_to(
+            self._openvpn_custom_port_toggle
+        )
         self._openvpn_custom_port_toggle.check()
         # XXX: workaround for lp:1546559, i.e. we need to wait
         # some time between writing to the API.
@@ -1946,7 +1952,7 @@ class VpnEditor(
 
     @autopilot.logging.log_action(logger.debug)
     def set_openvpn_file(self, field, paths):
-        self.pointing_device.click_object(field)
+        self.get_root_instance().main_view.scroll_to_and_click(field)
 
         # Wait for expanded animation.
         sleep(0.5)
