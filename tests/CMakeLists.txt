@@ -45,5 +45,14 @@ configure_file (test_push_helper.py.in test_push_helper.py)
 add_test(NAME python3 COMMAND "${CMAKE_CURRENT_BINARY_DIR}/test_code.py")
 add_test(NAME test_push_helper COMMAND "${CMAKE_CURRENT_BINARY_DIR}/test_push_helper.py")
 
+add_subdirectory(utils)
+
+# QML tests that require graphical capabitlies.
+add_custom_target(qmluitests)
+add_dependencies(qmluitests UbuntuTest)
+
+add_custom_target(qmltests)
+add_dependencies(qmltests qmluitests)
+
 add_subdirectory(mocks)
 add_subdirectory(plugins)
