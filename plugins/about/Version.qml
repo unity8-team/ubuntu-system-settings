@@ -28,7 +28,6 @@ import SystemSettings 1.0
 import Ubuntu.Components 1.3
 import Ubuntu.Components.ListItems 1.3 as ListItem
 import Ubuntu.SystemSettings.StorageAbout 1.0
-import Ubuntu.SystemSettings.Update 1.0
 
 ItemPage {
     id: versionPage
@@ -67,8 +66,8 @@ ItemPage {
             SingleValueStacked {
                 objectName: "ubuntuVersionBuildNumberItem"
                 text: i18n.tr("Ubuntu Image part")
-                value: UpdateManager.currentUbuntuBuildNumber
-                visible: UpdateManager.currentUbuntuBuildNumber
+                value: SystemImage.currentUbuntuBuildNumber
+                visible: SystemImage.currentUbuntuBuildNumber
             }
 
             SingleValueStacked {
@@ -81,8 +80,8 @@ ItemPage {
             SingleValueStacked {
                 objectName: "deviceVersionBuildNumberItem"
                 text: i18n.tr("Device Image part")
-                value: UpdateManager.currentDeviceBuildNumber
-                visible: UpdateManager.currentDeviceBuildNumber
+                value: SystemImage.currentDeviceBuildNumber
+                visible: SystemImage.currentDeviceBuildNumber
             }
 
             SingleValueStacked {
@@ -95,8 +94,8 @@ ItemPage {
             SingleValueStacked {
                 objectName: "customizationBuildNumberItem"
                 text: i18n.tr("Customization Image part")
-                value: UpdateManager.currentCustomBuildNumber
-                visible: UpdateManager.currentCustomBuildNumber
+                value: SystemImage.currentCustomBuildNumber
+                visible: SystemImage.currentCustomBuildNumber
             }
         }
     }

@@ -1,161 +1,229 @@
 /*
- * Copyright (C) 2014 Canonical Ltd
+ * This file is part of system-settings
  *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License version 3 as
- * published by the Free Software Foundation.
+ * Copyright (C) 2016 Canonical Ltd.
  *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ * This program is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License version 3, as published
+ * by the Free Software Foundation.
  *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranties of
+ * MERCHANTABILITY, SATISFACTORY QUALITY, or FITNESS FOR A PARTICULAR
+ * PURPOSE.  See the GNU General Public License for more details.
  *
- * Authors:
- * Diego Sarmentero <diego.sarmentero@canonical.com>
- *
-*/
+ * You should have received a copy of the GNU General Public License along
+ * with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
-#pragma once
+#ifndef UPDATE_H
+#define UPDATE_H
 
+#include <QDateTime>
 #include <QObject>
-#include <QtQml>
 #include <QString>
 #include <QStringList>
 
-namespace UpdatePlugin {
-
+namespace UpdatePlugin
+{
 class Update : public QObject
 {
     Q_OBJECT
-    Q_ENUMS(Status)
-    Q_PROPERTY(bool systemUpdate READ systemUpdate WRITE setSystemUpdate
-               NOTIFY systemUpdateChanged)
-    Q_PROPERTY(QString packageName READ getPackageName NOTIFY packageNameChanged)
-    Q_PROPERTY(QString title READ getTitle NOTIFY titleChanged)
-    Q_PROPERTY(QString localVersion READ getLocalVersion
-               NOTIFY localVersionChanged)
-    Q_PROPERTY(QString remoteVersion READ getRemoteVersion
-               NOTIFY remoteVersionChanged)
-    Q_PROPERTY(bool updateRequired READ updateRequired WRITE setUpdateRequired
-               NOTIFY updateRequiredChanged)
-    Q_PROPERTY(QString iconUrl READ iconUrl NOTIFY iconUrlChanged)
-    Q_PROPERTY(int binaryFilesize READ binaryFilesize
-               NOTIFY binaryFilesizeChanged)
-    Q_PROPERTY(bool updateState READ updateState WRITE setUpdateState
-               NOTIFY updateStateChanged)
-    Q_PROPERTY(bool updateReady READ updateReady WRITE setUpdateReady
-               NOTIFY updateReadyChanged)
-    Q_PROPERTY(bool selected READ selected WRITE setSelected
-               NOTIFY selectedChanged)
-    Q_PROPERTY(QString error READ getError NOTIFY errorChanged)
-    Q_PROPERTY(QString lastUpdateDate READ lastUpdateDate
-               NOTIFY lastUpdateDateChanged)
-    Q_PROPERTY(int downloadProgress READ downloadProgress
-               NOTIFY downloadProgressChanged)
-    Q_PROPERTY(QString downloadUrl READ downloadUrl NOTIFY downloadUrlChanged)
-    Q_PROPERTY(QString clickToken READ clickToken NOTIFY clickTokenChanged)
-    Q_PROPERTY(QString downloadSha512 READ downloadSha512 NOTIFY downloadSha512Changed)
-    Q_PROPERTY (Status status
-                READ status
-                WRITE setStatus
-                NOTIFY statusChanged)
-
-Q_SIGNALS:
-    void systemUpdateChanged();
-    void titleChanged();
-    void binaryFilesizeChanged();
-    void iconUrlChanged();
-    void localVersionChanged();
-    void remoteVersionChanged();
-    void updateRequiredChanged();
-    void updateStateChanged();
-    void updateReadyChanged();
-    void selectedChanged();
-    void errorChanged();
-    void downloadProgressChanged();
-    void lastUpdateDateChanged();
-    void downloadUrlChanged();
-    void clickTokenChanged();
-    void packageNameChanged();
-    void downloadSha512Changed();
-    void statusChanged();
-
+    Q_PROPERTY(Kind kind READ kind
+            WRITE setKind NOTIFY kindChanged)
+    Q_PROPERTY(uint binaryFilesize READ binaryFilesize
+            WRITE setBinaryFilesize NOTIFY binaryFilesizeChanged)
+    Q_PROPERTY(QString changelog READ changelog
+            WRITE setChangelog NOTIFY changelogChanged)
+    Q_PROPERTY(QString channel READ channel
+            WRITE setChannel NOTIFY channelChanged)
+    Q_PROPERTY(QDateTime createdAt READ createdAt
+            WRITE setCreatedAt NOTIFY createdAtChanged)
+    Q_PROPERTY(bool installed READ installed
+            WRITE setInstalled NOTIFY installedChanged)
+    Q_PROPERTY(QDateTime updatedAt READ updatedAt
+            WRITE setUpdatedAt NOTIFY updatedAtChanged)
+    Q_PROPERTY(QString downloadHash READ downloadHash
+            WRITE setDownloadHash NOTIFY downloadHashChanged)
+    Q_PROPERTY(QString downloadId READ downloadId
+            WRITE setDownloadId NOTIFY downloadIdChanged)
+    Q_PROPERTY(QString downloadUrl READ downloadUrl
+            WRITE setDownloadUrl NOTIFY downloadUrlChanged)
+    Q_PROPERTY(QString iconUrl READ iconUrl
+            WRITE setIconUrl NOTIFY iconUrlChanged)
+    Q_PROPERTY(QString identifier READ identifier
+            WRITE setIdentifier NOTIFY identifierChanged)
+    Q_PROPERTY(int progress READ progress
+            WRITE setProgress NOTIFY progressChanged)
+    Q_PROPERTY(uint revision READ revision
+            WRITE setRevision NOTIFY revisionChanged)
+    Q_PROPERTY(State state READ state
+            WRITE setState NOTIFY stateChanged)
+    Q_PROPERTY(QString signedDownloadUrl READ signedDownloadUrl
+            WRITE setSignedDownloadUrl NOTIFY signedDownloadUrlChanged)
+    Q_PROPERTY(QString title READ title
+            WRITE setTitle NOTIFY titleChanged)
+    Q_PROPERTY(QString remoteVersion READ remoteVersion
+            WRITE setRemoteVersion NOTIFY remoteVersionChanged)
+    Q_PROPERTY(QString localVersion READ localVersion
+            WRITE setLocalVersion NOTIFY localVersionChanged)
+    Q_PROPERTY(QString token READ token NOTIFY tokenChanged)
+    Q_PROPERTY(QStringList command READ command
+               WRITE setCommand NOTIFY commandChanged)
+    Q_PROPERTY(bool automatic READ automatic WRITE setAutomatic
+            NOTIFY automaticChanged)
+    Q_PROPERTY(QString error READ error WRITE setError NOTIFY errorChanged)
+    Q_PROPERTY(QString packageName READ packageName WRITE setPackageName
+               NOTIFY packageNameChanged)
 public:
-    enum Status {
-         NotStarted,
-         Downloading,
-         Downloaded,
-         Paused
+    explicit Update(QObject *parent = nullptr) : QObject(parent) {};
+    ~Update() {};
+
+    enum class Kind : uint
+    {
+        KindUnknown = 1,
+        KindClick = 2,
+        KindImage = 4
     };
 
-    explicit Update(QObject *parent = 0);
-    virtual ~Update();
+    enum class State : uint
+    {
+        StateUnknown,
+        StateAvailable,
+        StateUnavailable,
+        StateQueuedForDownload,
+        StateDownloading,
+        StateDownloadingAutomatically,
+        StateDownloadPaused,
+        StateAutomaticDownloadPaused,
+        StateInstalling,
+        StateInstallingAutomatically,
+        StateInstallPaused,
+        StateInstallFinished,
+        StateInstalled,
+        StateDownloaded,
+        StateFailed
+    };
 
-    bool systemUpdate() { return m_systemUpdate; }
-    QString getPackageName() { return m_packagename; }
-    QString getTitle() { return m_title; }
-    QString getLocalVersion() { return m_local_version; }
-    QString getRemoteVersion() { return m_remote_version; }
-    QString iconUrl() { return m_icon_url; }
-    QString lastUpdateDate() { return m_lastUpdateDate; }
-    int binaryFilesize() { return m_binary_filesize; }
-    int downloadProgress() { return m_download_progress; }
-    bool updateRequired() { return m_update; }
-    bool updateState() { return m_update_state; }
-    bool updateReady() { return m_update_ready; }
-    bool selected() { return m_selected; }
-    QString getError() { return m_error; }
-    const QString& getClickUrl() const { return m_click_url; }
-    QString downloadUrl() { return m_downloadUrl; }
-    QString clickToken() { return m_clickToken; }
-    QString downloadSha512() { return m_download_sha512; }
-    Status status() { return m_status; }
+    Q_ENUMS(Kind State)
 
-    void setSystemUpdate(bool isSystem);
-    void initializeApplication(QString packagename, QString title,
-                               QString version);
-    void setRemoteVersion(QString &version);
-    void setUpdateRequired(bool state);
-    void setUpdateState(bool state);
-    void setUpdateReady(bool ready);
-    void setSelected(bool value);
-    void setBinaryFilesize(int size);
-    void setDownloadProgress(int progress);
-    void setIconUrl(QString icon);
-    void setError(QString error);
-    void setUpdateAvailable(bool available) { m_update = available; }
-    void setLastUpdateDate(const QString date);
-    void setClickUrl(const QString &url) { m_click_url = url; }
-    void setDownloadUrl(const QString &url);
-    void setClickToken(const QString &token) { m_clickToken = token; Q_EMIT clickTokenChanged(); }
-    void setDownloadSha512(const QString &sha512) { m_download_sha512 = sha512; Q_EMIT downloadSha512Changed(); }
-    void setStatus(Status s) { m_status = s; Q_EMIT statusChanged(); }
+    static QString stateToString(const State &state);
+    static State stringToState(const QString &state);
 
-private:
-    int m_binary_filesize;
-    QString m_click_url;
-    QString m_clickToken;
-    QString m_downloadUrl;
-    int m_download_progress;
-    QString m_error;
-    QString m_icon_url;
-    QString m_lastUpdateDate;
-    QString m_local_version;
-    QString m_packagename;
-    QString m_remote_version;
-    bool m_selected;
-    bool m_systemUpdate;
-    QString m_title;
-    bool m_update;
-    bool m_update_ready;
-    bool m_update_state;
-    QString m_download_sha512;
-    Status m_status = Status::NotStarted;
+    static QString kindToString(const Kind &kind);
+    static Kind stringToKind(const QString &kind);
 
-    bool getIgnoreUpdates();
+    Kind kind() const;
+    QString identifier() const;
+    uint revision() const;
+    uint binaryFilesize() const;
+    QString changelog() const;
+    QString channel() const;
+    QDateTime createdAt() const;
+    QDateTime updatedAt() const;
+    QString downloadHash() const;
+    QString downloadId() const;
+    QString downloadUrl() const;
+    QString iconUrl() const;
+    bool installed() const;
+    int progress() const;
+    State state() const;
+    QString signedDownloadUrl() const;
+    QString title() const;
+    QString remoteVersion() const;
+    QString localVersion() const;
+    QString token() const;
+    QStringList command() const;
+    bool automatic() const;
+    QString error() const;
+    QString packageName() const;
+
+    void setKind(const Kind &kind);
+    void setIdentifier(const QString &identifier);
+    void setRevision(const uint &revision);
+    void setBinaryFilesize(const uint &binaryFilesize);
+    void setChangelog(const QString &changelog);
+    void setChannel(const QString &channel);
+    void setCreatedAt(const QDateTime &createdAt);
+    void setUpdatedAt(const QDateTime &updatedAt);
+    void setDownloadHash(const QString &downloadHash);
+    void setDownloadId(const QString &token);
+    void setDownloadUrl(const QString &downloadUrl);
+    void setIconUrl(const QString &iconUrl);
+    void setInstalled(const bool installed);
+    void setProgress(const int &progress);
+    void setState(const State &state);
+    void setSignedDownloadUrl(const QString &signedDownloadUrl);
+    void setTitle(const QString &title);
+    void setRemoteVersion(const QString &version);
+    void setLocalVersion(const QString &version);
+    void setToken(const QString &token);
+    void setCommand(const QStringList &command);
+    void setAutomatic(const bool automatic);
+    void setError(const QString &error);
+    void setPackageName(const QString &error);
+
+    bool isUpdateRequired();
+
+    // Whether or not all fields in this update is equal to that of other.
+    bool deepEquals(const Update *other) const;
+
+    /* Whether or not either id and rev equals to other, or download id is set
+    and that is equal to that of other. */
+    bool operator==(const Update &other) const;
+    bool equals(const Update &other) const;
+
+Q_SIGNALS:
+    void kindChanged();
+    void identifierChanged();
+    void revisionChanged();
+    void binaryFilesizeChanged();
+    void changelogChanged();
+    void channelChanged();
+    void createdAtChanged();
+    void installedChanged();
+    void updatedAtChanged();
+    void downloadHashChanged();
+    void downloadIdChanged();
+    void downloadUrlChanged();
+    void iconUrlChanged();
+    void progressChanged();
+    void stateChanged();
+    void signedDownloadUrlChanged();
+    void titleChanged();
+    void remoteVersionChanged();
+    void localVersionChanged();
+    void tokenChanged();
+    void commandChanged();
+    void automaticChanged();
+    void errorChanged();
+    void packageNameChanged();
+protected:
+    Kind m_kind = Kind::KindUnknown;
+    QString m_identifier = QString::null;
+    uint m_revision = 0;
+    uint m_binaryFilesize = 0;
+    QString m_changelog = QString::null;
+    QString m_channel = QString::null;
+    QDateTime m_createdAt = QDateTime();
+    QDateTime m_updatedAt = QDateTime();
+    QString m_downloadHash = QString::null;
+    QString m_downloadUrl = QString::null;
+    QString m_error = QString::null;
+    QString m_iconUrl = QString::null;
+    bool m_installed = false;
+    int m_progress = 0;
+    State m_state = State::StateUnknown;
+    QString m_signedDownloadUrl = QString::null;
+    QString m_title = QString::null;
+    QString m_localVersion = QString::null;
+    QString m_remoteVersion = QString::null;
+    QString m_token = QString::null;
+    QString m_downloadId = QString::null;
+    QStringList m_command = QStringList();
+    bool m_automatic = false;
+    QString m_packageName = QString::null;
 };
+} // UpdatePlugin
 
-}
+#endif // UPDATE_H
