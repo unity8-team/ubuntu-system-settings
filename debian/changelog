@@ -1,3 +1,10 @@
+ubuntu-system-settings (0.4+16.10.20160817.1-0ubuntu1) yakkety; urgency=medium
+
+  [ Arthur Mello ]
+  * Remove Notification List option from the per app Notification pannel
+
+ -- Timo Jyrinki <timo.jyrinki@canonical.com>  Wed, 17 Aug 2016 12:12:40 +0000
+
 ubuntu-system-settings (0.4+16.10.20160817-0ubuntu1) yakkety; urgency=medium
 
   * Switch the powerd depends to repowerd. powerd is now a transitional
