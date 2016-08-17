@@ -52,7 +52,7 @@ Item {
         }
         function test_double_click_fail() {
             mouseClick(area);
-            wait(220);
+            wait(500);
             mouseClick(area);
             compare(area.message, i18n.tr("Not fast enough"));
         }
