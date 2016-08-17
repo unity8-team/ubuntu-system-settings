@@ -54,7 +54,7 @@ private Q_SLOTS:
             m_devPath = reply.argumentAt<0>();
         }
 
-        // Add an access points.
+        // Add access points.
         auto wpa = QList<QVariant>();
         wpa << m_devPath << "test_ap_wpa" << "test_ap_wpa" << "00:00:00:00:00:00" << (uint) 3
             << (uint) 60 << (uint) 128 << QVariant::fromValue(uchar(0)) << (uint) 0x00000100;

@@ -32,10 +32,6 @@
 #define NM_IFACE "org.freedesktop.NetworkManager"
 #define NM_MAIN_OBJECT "/org/freedesktop/NetworkManager"
 #define FREEDESKTOP_PROPERTIES_IFACE "org.freedesktop.DBus.Properties"
-// #define NM_AP_IFACE "org.freedesktop.NetworkManager.AccessPoint"
-// #define NM_DEVICE_IFACE "org.freedesktop.NetworkManager.Device"
-// #define NM_DEVICE_WIRELESS_IFACE "org.freedesktop.NetworkManager.Device.Wireless"
-// #define NM_ACTIVE_CONNECTION_IFACE "org.freedesktop.NetworkManager.Connection.Active"
 
 using namespace QtDBusTest;
 using namespace QtDBusMock;
