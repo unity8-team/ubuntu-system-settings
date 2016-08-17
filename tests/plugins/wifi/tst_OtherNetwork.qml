@@ -86,11 +86,13 @@ Item {
         }
 
         function cancel() {
-            mouseClick(findChild(instance, "cancel"));
+            var btn = findChild(instance, "cancel");
+            mouseClick(btn, btn.width / 2, btn.height / 2);
         }
 
         function connect() {
-            mouseClick(findChild(instance, "connect"));
+            var btn = findChild(instance, "connect");
+            mouseClick(btn, btn.width / 2, btn.height / 2);
         }
 
         function test_connect_to_hidden_network() {
