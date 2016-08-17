@@ -44,8 +44,7 @@ public:
         EnableNotifications,
         SoundsNotify,
         VibrationsNotify,
-        BubblesNotify,
-        ListNotify
+        BubblesNotify
     };
 
     // reimplemented from QAbstractListModel
@@ -66,7 +65,6 @@ protected:
         bool soundsNotify = true;
         bool vibrationsNotify = true;
         bool bubblesNotify = true;
-        bool listNotify = true;
     };
     QList<ClickApplicationEntry> m_entries;
 

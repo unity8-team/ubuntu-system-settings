@@ -30,7 +30,6 @@
 #define GSETTINGS_SOUNDS_NOTIFY_KEY "use-sounds-notifications"
 #define GSETTINGS_VIBRATIONS_NOTIFY_KEY "use-vibrations-notifications"
 #define GSETTINGS_BUBBLES_NOTIFY_KEY "use-bubbles-notifications"
-#define GSETTINGS_LIST_NOTIFY_KEY "use-list-notifications"
 
 ClickApplicationsModel::ClickApplicationsModel(QObject* parent)
     : QAbstractListModel(parent),
@@ -58,7 +57,6 @@ QHash<int, QByteArray> ClickApplicationsModel::roleNames() const
         roles[SoundsNotify] = "soundsNotify";
         roles[VibrationsNotify] = "vibrationsNotify";
         roles[BubblesNotify] = "bubblesNotify";
-        roles[ListNotify] = "listNotify";
     }
     return roles;
 }
@@ -89,8 +87,6 @@ QVariant ClickApplicationsModel::data(const QModelIndex& index, int role) const
         return entry.vibrationsNotify;
     case BubblesNotify:
         return entry.bubblesNotify;
-    case ListNotify:
-        return entry.listNotify;
     default:
         return QVariant();
     }
@@ -108,19 +104,6 @@ bool ClickApplicationsModel::setNotifyEnabled(int role, int idx, bool enabled)
 
     QVector<int> roles;
     roles << role;
-
-    if (role != EnableNotifications) {
-        if (!m_entries[idx].soundsNotify &&
-            !m_entries[idx].vibrationsNotify &&
-            !m_entries[idx].bubblesNotify &&
-            !m_entries[idx].listNotify) {
-
-            if (saveNotifyEnabled(m_entries[idx], EnableNotifications, false)) {
-                roles << EnableNotifications;
-            }
-        }
-    }
-
     Q_EMIT dataChanged(this->index(idx, 0), this->index(idx, 0), roles);
     return true;
 }
@@ -174,15 +157,6 @@ bool ClickApplicationsModel::saveNotifyEnabled(ClickApplicationEntry& entry, int
         settings->set(GSETTINGS_BUBBLES_NOTIFY_KEY, enabled);
         return true;
 
-    case ListNotify:
-        if (entry.listNotify == enabled) {
-            return false;
-        }
-
-        entry.listNotify = enabled;
-        settings->set(GSETTINGS_LIST_NOTIFY_KEY, enabled);
-        return true;
-
     default:
         return false;
     }
@@ -228,7 +202,6 @@ void ClickApplicationsModel::getNotificationsSettings(ClickApplicationEntry& ent
     entry.soundsNotify = settings->get(GSETTINGS_SOUNDS_NOTIFY_KEY).toBool();
     entry.vibrationsNotify = settings->get(GSETTINGS_VIBRATIONS_NOTIFY_KEY).toBool();
     entry.bubblesNotify = settings->get(GSETTINGS_BUBBLES_NOTIFY_KEY).toBool();
-    entry.listNotify = settings->get(GSETTINGS_LIST_NOTIFY_KEY).toBool();
 }
 
 bool ClickApplicationsModel::parseApplicationKeyFromSettings(ClickApplicationEntry& entry, const QString& appEntry)

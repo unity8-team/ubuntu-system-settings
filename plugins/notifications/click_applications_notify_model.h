@@ -40,8 +40,7 @@ public:
     enum NotifyTypes {
         SoundsNotify,
         VibrationsNotify,
-        BubblesNotify,
-        ListNotify
+        BubblesNotify
     };
 
     ClickApplicationsModel* sourceModel() const;

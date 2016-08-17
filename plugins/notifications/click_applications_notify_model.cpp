@@ -82,8 +82,6 @@ bool ClickApplicationsNotifyModel::setNotifyEnabled(int row, bool enabled)
         return sourceModel()->setNotifyEnabled(ClickApplicationsModel::VibrationsNotify, idx.row(), enabled);
     case BubblesNotify:
         return sourceModel()->setNotifyEnabled(ClickApplicationsModel::BubblesNotify, idx.row(), enabled);
-    case ListNotify:
-        return sourceModel()->setNotifyEnabled(ClickApplicationsModel::ListNotify, idx.row(), enabled);
     default:
         return false;
     }
@@ -107,9 +105,6 @@ bool ClickApplicationsNotifyModel::filterAcceptsRow(int source_row, const QModel
     }
     if (m_notifyType == BubblesNotify) {
         return sourceModel()->data(index, ClickApplicationsModel::BubblesNotify).toBool();
-    }
-    if (m_notifyType == ListNotify) {
-        return sourceModel()->data(index, ClickApplicationsModel::ListNotify).toBool();
     }
 
     return false;

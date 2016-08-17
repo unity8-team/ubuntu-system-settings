@@ -31,7 +31,6 @@ void MockClickApplicationsModel::addApplication(const QString& pkgName, const QS
     entry.soundsNotify = true;
     entry.vibrationsNotify = true;
     entry.bubblesNotify = true;
-    entry.listNotify = true;
 
     beginInsertRows(QModelIndex(), rowCount(), rowCount());
     m_entries << entry;
@@ -66,30 +65,12 @@ void MockClickApplicationsModel::setNotificationByIndex(int role, int idx, bool 
         m_entries[idx].bubblesNotify = enabled;
         break;
 
-    case ListNotify:
-        m_entries[idx].listNotify = enabled;
-        break;
-
     default:
         return;
     }
 
     QVector<int> roles;
     roles << role;
-
-    if (role != EnableNotifications) {
-        if (!m_entries[idx].soundsNotify &&
-            !m_entries[idx].vibrationsNotify &&
-            !m_entries[idx].bubblesNotify &&
-            !m_entries[idx].listNotify ) {
-            
-            if (m_entries[idx].enableNotifications) {
-                m_entries[idx].enableNotifications = false;
-                roles << EnableNotifications;
-            }
-        }
-    }
-
     Q_EMIT dataChanged(this->index(idx, 0), this->index(idx, 0), roles);
 }
 

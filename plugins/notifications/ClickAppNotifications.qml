@@ -29,19 +29,6 @@ ItemPage {
 
     title: entry ? entry.displayName : ""
 
-    function disableNotificationsWhenAllUnchecked() {
-        if (!entry) {
-            return
-        }
-
-        if (!entry.soundsNotify && !entry.vibrationsNotify && !entry.bubblesNotify && !entry.listNotify) {
-            enableNotificationsSwitch.checked = false
-            entry.enableNotifications = false
-        }
-    }
-
-    Component.onDestruction: disableNotificationsWhenAllUnchecked()
-
     Column {
         id: notificationsColumn
 
@@ -90,7 +77,6 @@ ItemPage {
                         ClickApplicationsModel.setNotifyEnabled(ClickApplicationsModel.SoundsNotify,
                                                                 appNotificationsPage.entryIndex,
                                                                 checked)
-                        disableNotificationsWhenAllUnchecked()
                     }
                 }
             }
@@ -112,7 +98,6 @@ ItemPage {
                         ClickApplicationsModel.setNotifyEnabled(ClickApplicationsModel.VibrationsNotify,
                                                                 appNotificationsPage.entryIndex,
                                                                 checked)
-                        disableNotificationsWhenAllUnchecked()
                     }
                 }
             }
@@ -134,29 +119,6 @@ ItemPage {
                         ClickApplicationsModel.setNotifyEnabled(ClickApplicationsModel.BubblesNotify,
                                                                 appNotificationsPage.entryIndex,
                                                                 checked)
-                        disableNotificationsWhenAllUnchecked()
-                    }
-                }
-            }
-        }
-
-        ListItem {
-            height: listLayout.height + (divider.visible ? divider.height : 0)
-            ListItemLayout {
-                id: listLayout
-                title.text: i18n.tr("Notification List")
-                CheckBox {
-                    id: listChecked
-                    objectName: "listChecked"
-                    SlotsLayout.position: SlotsLayout.Leading
-                    enabled: entry ? entry.enableNotifications : false
-                    checked: entry ? entry.listNotify : false
-
-                    onCheckedChanged: {
-                        ClickApplicationsModel.setNotifyEnabled(ClickApplicationsModel.ListNotify,
-                                                                appNotificationsPage.entryIndex,
-                                                                checked)
-                        disableNotificationsWhenAllUnchecked()
                     }
                 }
             }

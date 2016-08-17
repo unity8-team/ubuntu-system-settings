@@ -47,7 +47,6 @@ ClickAppNotifications {
             root.soundsNotify = true
             root.vibrationsNotify = true
             root.bubblesNotify = true
-            root.listNotify = true
         }
 
         function test_verify_enabled_when_top_enabled() {
@@ -82,35 +81,6 @@ ClickAppNotifications {
             verify(!vibrationsChecked.enabled)
             verify(!bubblesChecked.enabled)
             verify(!listChecked.enabled)
-        }
-
-        function test_verify_unchecking_all_will_disable_top() {
-            var enableSwitch = findChild(root, "enableNotificationsSwitch")
-
-            var soundsChecked = findChild(root, "soundsChecked")
-            var vibrationsChecked = findChild(root, "vibrationsChecked")
-            var bubblesChecked = findChild(root, "bubblesChecked")
-            var listChecked = findChild(root, "listChecked")
-
-            verify(enableSwitch.checked)
-
-            verify(soundsChecked.checked)
-            clickItem(soundsChecked)
-            tryCompare(soundsChecked, "checked", false)
-
-            verify(vibrationsChecked.checked)
-            clickItem(vibrationsChecked)
-            tryCompare(vibrationsChecked, "checked", false)
-
-            verify(bubblesChecked.checked)
-            clickItem(bubblesChecked)
-            tryCompare(bubblesChecked, "checked", false)
-
-            verify(listChecked.checked)
-            clickItem(listChecked)
-            tryCompare(listChecked, "checked", false)
-
-            tryCompare(enableSwitch, "checked", false)
         }
         */
     }
