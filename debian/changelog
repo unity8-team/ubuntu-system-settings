@@ -1,3 +1,13 @@
+ubuntu-system-settings (0.4+16.10.20160817.1-0ubuntu1) yakkety; urgency=medium
+
+  [ Timo Jyrinki ]
+  * Skip tests on powerpc due to Qt 5.6 bug (LP: #1606927)
+
+  [ jonas-drange ]
+  * use the vpn filepicker, and make the cert handling more robust
+
+ -- Timo Jyrinki <timo.jyrinki@canonical.com>  Wed, 17 Aug 2016 12:12:42 +0000
+
 ubuntu-system-settings (0.4+16.10.20160817-0ubuntu1) yakkety; urgency=medium
 
   * Switch the powerd depends to repowerd. powerd is now a transitional
