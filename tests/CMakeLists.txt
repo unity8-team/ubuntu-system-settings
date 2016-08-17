@@ -1,5 +1,8 @@
 include_directories(${CMAKE_CURRENT_BINARY_DIR} ../src)
 include_directories(${GLIB_INCLUDE_DIRS})
+
+set(XVFB_CMD xvfb-run -a -s "-screen 0 640x480x24")
+
 add_definitions(-DI18N_DOMAIN="ubuntu-system-settings")
 add_definitions(-DPLUGIN_PRIVATE_MODULE_DIR="${PLUGIN_PRIVATE_MODULE_DIR}")
 add_definitions(-DPLUGIN_MANIFEST_DIR="${CMAKE_CURRENT_SOURCE_DIR}/data")

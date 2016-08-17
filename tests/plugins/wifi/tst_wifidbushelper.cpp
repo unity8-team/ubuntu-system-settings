@@ -159,5 +159,5 @@ private:
     QString m_devPath = QString::null;
 };
 
-QTEST_MAIN(TstDbusHelper)
+QTEST_GUILESS_MAIN(TstDbusHelper)
 #include "tst_wifidbushelper.moc"
