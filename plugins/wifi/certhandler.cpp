@@ -32,19 +32,19 @@ QByteArray FileHandler::getCertContent(QString filename){
     }
 }
 
-QString FileHandler::moveCertFile(QString filename){
+QString FileHandler::copyCertFile(QString filename){
     QDir certPath(CERTS_PATH);
     if (!certPath.exists(CERTS_PATH)){
         certPath.mkpath(CERTS_PATH);
     }
-    QFile file(filename);
     QByteArray certificate = getCertContent(filename);
     QList<QSslCertificate> SslCertificateList = QSslCertificate::fromData(certificate, QSsl::Pem);
     if ( !SslCertificateList.isEmpty() ){
         QStringList subject = SslCertificateList[0].subjectInfo(QSslCertificate::CommonName);
         QString modFileName = CERTS_PATH+subject[0]+".pem";
-        if(file.rename(modFileName.replace(" ", "_"))){
-            return file.fileName();
+        modFileName = modFileName.replace(" ", "_");
+        if(QFile::copy(filename, modFileName)){
+            return modFileName;
         } else {
             return "";
         }
@@ -52,7 +52,7 @@ QString FileHandler::moveCertFile(QString filename){
     return "";
 }
 
-QString FileHandler::moveKeyFile(QString filename){
+QString FileHandler::copyKeyFile(QString filename){
     QDir keyPath(KEYS_PATH);
     if (!keyPath.exists(KEYS_PATH)){
         keyPath.mkpath(KEYS_PATH);
@@ -64,8 +64,8 @@ QString FileHandler::moveKeyFile(QString filename){
     if ( !checkKey.isNull() ){
         QFileInfo fileInfo(file);
         QString modFileName = KEYS_PATH + fileInfo.fileName().replace(" ", "_");
-        if(file.rename(modFileName)){
-            return file.fileName();
+        if(QFile::copy(filename, modFileName)){
+            return modFileName;
         } else {
             return "" ;
         }
@@ -73,7 +73,7 @@ QString FileHandler::moveKeyFile(QString filename){
     return "";
 }
 
-QString FileHandler::movePacFile(QString filename){
+QString FileHandler::copyPacFile(QString filename){
     QDir keyPath(PACS_PATH);
     if (!keyPath.exists(PACS_PATH)){
         keyPath.mkpath(PACS_PATH);
@@ -81,15 +81,10 @@ QString FileHandler::movePacFile(QString filename){
     QFile file(filename);
     QFileInfo fileInfo(file);
     QString modFileName = PACS_PATH + fileInfo.baseName().replace(" ", "_") + ".pac";
-    if(file.rename(modFileName)){
-        return file.fileName();
+    if(QFile::copy(filename, modFileName)){
+        return modFileName;
     }
     return "" ;
-}
-
-bool FileHandler::removeFile(QString filename){
-    QFile file(filename);
-    return file.remove();
 }
 
 struct CertificateListModel::Private {
@@ -144,8 +139,9 @@ void CertificateListModel::dataupdate(){
 }
 
 QVariant CertificateListModel::data(const QModelIndex &index, int role) const {
+    QVariant rv;
     if(!index.isValid() || index.row() >= ( p->data.size()) ) {
-        return QVariant();
+        return rv;
     } else if (index.row() == 0){
         const QString &row0 = p->data[index.row()];
 
@@ -168,13 +164,19 @@ QVariant CertificateListModel::data(const QModelIndex &index, int role) const {
     const QString &row = CERTS_PATH+p->data[index.row()];
     QList<QSslCertificate> certificate = QSslCertificate::fromPath(row, QSsl::Pem, QRegExp::Wildcard);
 
+    if (certificate.size() == 0) {
+        return rv;
+    }
+
     switch(role) {
-
-    case CNRole : return certificate[0].subjectInfo(QSslCertificate::CommonName)[0];
-    case ORole : return certificate[0].subjectInfo(QSslCertificate::Organization)[0];
-    case expDateRole : return certificate[0].expiryDate().toString("dd.MM.yyyy");
-
-    default : return QVariant();
+    case CNRole:
+        return certificate[0].subjectInfo(QSslCertificate::CommonName).value(0, "");
+    case ORole:
+        return certificate[0].subjectInfo(QSslCertificate::Organization).value(0, "");
+    case expDateRole:
+        return certificate[0].expiryDate().toString("dd.MM.yyyy");
+    default:
+        return rv;
     }
 }
 
