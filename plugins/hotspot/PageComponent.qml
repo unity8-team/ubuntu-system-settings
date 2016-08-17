@@ -37,7 +37,7 @@ ItemPage {
             name: "disabled"
             // Undefined WifiEnabled means Connectivity is unavailable.
             when: typeof Connectivity.wifiEnabled === "undefined" ||
-                  Connectivity.FlightMode
+                  Connectivity.flightMode
             PropertyChanges {
                 target: hotspotItem
                 enabled: false
