@@ -148,8 +148,8 @@ class SystemSettingsMainWindow(ubuntuuitoolkit.MainView):
                 page_center_x,
                 page_center_y - obj.height * 2
             )
-            # avoid a flick
-            sleep(1.0)
+            # avoid a flick, this is very important
+            sleep(0.3)
 
     def scroll_to_and_click(self, obj):
         self.scroll_to(obj)
@@ -849,7 +849,7 @@ class AboutPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
     @autopilot.logging.log_action(logger.info)
     def go_to_software_licenses(self):
         license_item = self.select_single(
-            ubuntuuitoolkit.listitems.Standard, objectName='licenseItem')
+            'StandardProgression', objectName='licenseItem')
         license_item.swipe_into_view()
         self.pointing_device.click_object(license_item)
         licenses_page = self.get_root_instance().wait_select_single(
@@ -1862,14 +1862,14 @@ class VpnPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
     @autopilot.logging.log_action(logger.debug)
     def add_vpn(self):
         obj = self.select_single(objectName='addVpnButton')
-        self.pointing_device.click_object(obj)
+        self.get_root_instance().main_view.scroll_to_and_click(obj)
         return self.get_root_instance().wait_select_single(
             objectName='vpnEditor')
 
     @autopilot.logging.log_action(logger.debug)
     def preview_vpn(self, at):
         obj = self.wait_select_single(objectName='vpnListConnection%d' % at)
-        self.pointing_device.click_object(obj)
+        self.get_root_instance().main_view.scroll_to_and_click(obj)
         return self.get_root_instance().wait_select_single(
             objectName='vpnPreviewDialog')
 
@@ -1879,7 +1879,7 @@ class VpnPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
         change_button = diag.wait_select_single(
             objectName='vpnPreviewChangeButton'
         )
-        self.pointing_device.click_object(change_button)
+        self.get_root_instance().main_view.scroll_to_and_click(change_button)
         return self.get_root_instance().wait_select_single(
             objectName='vpnEditor')
 
@@ -1930,10 +1930,16 @@ class VpnEditor(
 
     @autopilot.logging.log_action(logger.debug)
     def set_openvpn_server(self, server):
+        self.get_root_instance().main_view.scroll_to(
+            self._openvpn_server_field
+        )
         self._openvpn_server_field.write(server)
 
     @autopilot.logging.log_action(logger.debug)
     def set_openvpn_custom_port(self, port):
+        self.get_root_instance().main_view.scroll_to(
+            self._openvpn_custom_port_toggle
+        )
         self._openvpn_custom_port_toggle.check()
         # XXX: workaround for lp:1546559, i.e. we need to wait
         # some time between writing to the API.
@@ -1947,7 +1953,7 @@ class VpnEditor(
     @autopilot.logging.log_action(logger.debug)
     def set_openvpn_file(self, field, paths):
         utils.dismiss_osk()
-        self.pointing_device.click_object(field)
+        self.get_root_instance().main_view.scroll_to_and_click(field)
 
         # Wait for expanded animation.
         sleep(0.5)
