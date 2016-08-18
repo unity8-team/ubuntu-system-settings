@@ -1,3 +1,301 @@
+ubuntu-system-settings (0.4+16.10.20160817-0ubuntu1) yakkety; urgency=medium
+
+  * Switch the powerd depends to repowerd. powerd is now a transitional
+    _all package so gets unconditionally evaluated which is not the
+    purpose. (LP: #1612646)
+
+ -- Timo Jyrinki <timo.jyrinki@canonical.com>  Wed, 17 Aug 2016 09:23:42 +0000
+
+ubuntu-system-settings (0.4+16.10.20160811.2-0ubuntu1) yakkety; urgency=medium
+
+  * Skip tests on powerpc due to Qt 5.6 bug (LP: #1606927)
+  * Make device always valid.
+
+ -- Konrad Zapałowicz <konrad.zapalowicz@canonical.com>  Thu, 11 Aug 2016 12:37:40 +0000
+
+ubuntu-system-settings (0.4+16.10.20160810-0ubuntu1) yakkety; urgency=medium
+
+  * Skip tests on powerpc due to Qt 5.6 bug (LP: #1606927)
+  * Depend on upstart to prevent s390x problems until upstart has been
+    fixed.
+  * bluetooth: Add Apperance characteristic to type conversion
+
+ -- Konrad Zapałowicz <konrad.zapalowicz@canonical.com>  Wed, 10 Aug 2016 13:17:54 +0000
+
+ubuntu-system-settings (0.4+16.10.20160808-0ubuntu2) yakkety; urgency=medium
+
+  * Readd the upstart workaround by doing a rebuild from trunk.
+
+ -- Timo Jyrinki <timo-jyrinki@ubuntu.com>  Wed, 10 Aug 2016 15:09:25 +0300
+
+ubuntu-system-settings (0.4+16.10.20160808-0ubuntu1) yakkety; urgency=medium
+
+  [ Simon Fels ]
+  * Fixes for Aethercast support
+
+ -- morphis <simon.fels@canonical.com>  Mon, 08 Aug 2016 08:59:08 +0000
+
+ubuntu-system-settings (0.4+16.10.20160730-0ubuntu2) yakkety; urgency=medium
+
+  * No change rebuild
+  * Depend on upstart to prevent s390x problems until upstart has been fixed.
+
+ -- Timo Jyrinki <timo-jyrinki@ubuntu.com>  Tue, 09 Aug 2016 15:38:18 +0300
+
+ubuntu-system-settings (0.4+16.10.20160730-0ubuntu1) yakkety; urgency=medium
+
+  [ Lukáš Tinkl ]
+  * Fixes for indicator-keyboard (gsettings compat, HW kbd panel
+    shortcut)
+
+  [ Michał Sawicz ]
+  * Skip tests on powerpc due to Qt 5.6 bug (LP: #1606927)
+
+ -- Lukáš Tinkl <lukas.tinkl@canonical.com>  Sat, 30 Jul 2016 21:20:18 +0000
+
+ubuntu-system-settings (0.4+16.10.20160722.1-0ubuntu1) yakkety; urgency=medium
+
+  [ Ken VanDine ]
+  * Added missing depends on qtdeclarative5-ubuntu-history0.1, qml-
+    module-qtcontacts and qtdeclarative5-ubuntu-keyboard-extensions0.1
+  * Ported to use Slots layout and updated visuals (LP: #1596529)
+
+  [ Ken VanDine, jonas-drange ]
+  * new module SystemSettings.ListItems
+
+  [ Olivier Tilloy ]
+  * Fix unit tests when run under an sbuild chroot. (LP: #1592475)
+
+  [ jonas-drange ]
+  * Do runtime check of address list size.
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Fri, 22 Jul 2016 14:39:12 +0000
+
+ubuntu-system-settings (0.4+16.10.20160708-0ubuntu1) yakkety; urgency=medium
+
+  [ Arthur Mello ]
+  * Implement extended Notifications panel using Gsettings to store
+    notifications settings for each app
+  * Skip tests on arm64 as it is known to be flaky with current
+    configuration
+
+ -- Arthur Renato Mello <arthur.mello@canonical.com>  Fri, 08 Jul 2016 22:19:17 +0000
+
+ubuntu-system-settings (0.4+16.10.20160624-0ubuntu1) yakkety; urgency=medium
+
+  [ Antti Kaijanmäki ]
+  * use Connectivity API for cellular data and roaming control. (LP:
+    #1373463)
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Fri, 24 Jun 2016 13:42:47 +0000
+
+ubuntu-system-settings (0.4+16.10.20160619-0ubuntu1) yakkety; urgency=medium
+
+  [ jonas-drange ]
+  * expose fingerprint ID panel and the Fingerprint lock setting (LP:
+    #1547040)
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Sun, 19 Jun 2016 02:48:24 +0000
+
+ubuntu-system-settings (0.4+16.10.20160609-0ubuntu1) yakkety; urgency=medium
+
+  * Fix pin code request is rejected because device is not valid (LP:
+    #1539158)
+
+ -- Konrad Zapałowicz <konrad.zapalowicz@canonical.com>  Thu, 09 Jun 2016 11:16:36 +0000
+
+ubuntu-system-settings (0.4+16.10.20160606-0ubuntu1) yakkety; urgency=medium
+
+  [ Michael Terry ]
+  * Update some button colors to the new theme style (LP: #1581047)
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Mon, 06 Jun 2016 22:02:47 +0000
+
+ubuntu-system-settings (0.4+16.10.20160525-0ubuntu1) yakkety; urgency=medium
+
+  [ Michael Terry ]
+  * Bump version number for change in TimeDate plugin API
+
+  [ CI Train Bot ]
+  * No-change rebuild.
+
+ -- Michael Terry <michael.terry@canonical.com>  Wed, 25 May 2016 06:02:08 +0000
+
+ubuntu-system-settings (0.3+16.10.20160523-0ubuntu1) yakkety; urgency=medium
+
+  * Catch connection errors asynchronously
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Mon, 23 May 2016 12:27:38 +0000
+
+ubuntu-system-settings (0.3+16.04.20160517-0ubuntu1) xenial; urgency=medium
+
+  * Fixes to sleep/idle settings in the Battery and Security panels (LP:
+    #1581423)
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Tue, 17 May 2016 14:04:58 +0000
+
+ubuntu-system-settings (0.3+16.04.20160511-0ubuntu1) xenial; urgency=medium
+
+  * Play the haptic feedback before pushing the page so it happens when
+    the use taps not after the page has loaded. (LP: #1578816)
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Wed, 11 May 2016 13:44:39 +0000
+
+ubuntu-system-settings (0.3+16.04.20160510-0ubuntu1) xenial; urgency=medium
+
+  * Don't use Ip4Address from NetworkManager, it was deprecated since
+    0.9 and since removed. Use QNetworkInterface to get the IP address.
+    (LP: #1579825)
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Tue, 10 May 2016 18:19:38 +0000
+
+ubuntu-system-settings (0.3+16.04.20160506-0ubuntu1) xenial; urgency=medium
+
+  [ jonas-drange ]
+  * Set Preferred on some context as soon as we know it's type and it is
+    active. Do not copy the Manager instance from panel to panel. (LP:
+    #1537913)
+  * add servicewatcher to system image binding (LP: #1509022)
+
+ -- Jonas G. Drange <ci-train-bot@canonical.com>  Fri, 06 May 2016 13:50:49 +0000
+
+ubuntu-system-settings (0.3+16.04.20160503-0ubuntu1) xenial; urgency=medium
+
+  * Only hide ringer sound settings when there is no modem,
+    IncomingMessageSound is used by ubuntu-push for other generic
+    notifications (LP: #1577783)
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Tue, 03 May 2016 13:52:13 +0000
+
+ubuntu-system-settings (0.3+16.04.20160429.2-0ubuntu1) xenial; urgency=medium
+
+  [ Antti Kaijanmäki ]
+  * Add string for cellular data switch. (LP: #1373463)
+
+  [ Ken VanDine ]
+  * Fixes to sleep/idle settings from Pat McGowan (LP: #1494514,
+    #1367294, #1569758)
+  * Only depend on aethercast on amd64, armhf, i386 which are the only
+    supported arches
+
+  [ Matthew Paul Thomas ]
+  * Removes the GPS switch and caption from Battery settings, fixing bug
+    1520580. (LP: #1520580)
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Fri, 29 Apr 2016 19:26:08 +0000
+
+ubuntu-system-settings (0.3+16.04.20160428-0ubuntu1) xenial; urgency=medium
+
+  [ Ken VanDine ]
+  * Added Display Casting to the brightness panel added:
+    plugins/brightness/WifiDisplays.qml
+    plugins/brightness/WifiDisplaysAlert.qml
+    plugins/brightness/aethercast/
+    plugins/brightness/aethercast/aethercast_device.cpp
+    plugins/brightness/aethercast/aethercast_device.h
+    plugins/brightness/aethercast/aethercast_helper.h
+    plugins/brightness/aethercast/aethercast_manager.cpp
+    plugins/brightness/aethercast/aethercast_manager.h
+    plugins/brightness/aethercast/dbus-shared.h
+    plugins/brightness/aethercast/device.cpp
+    plugins/brightness/aethercast/device.h
+    plugins/brightness/aethercast/devicemodel.cpp
+    plugins/brightness/aethercast/devicemodel.h
+    plugins/brightness/aethercast/displays.cpp
+    plugins/brightness/aethercast/displays.h
+    plugins/brightness/aethercast/freedesktop_objectmanager.cpp
+    plugins/brightness/aethercast/freedesktop_objectmanager.h
+    plugins/brightness/aethercast/freedesktop_properties.cpp
+    plugins/brightness/aethercast/freedesktop_properties.h
+    plugins/brightness/aethercast/org.aethercast.xml
+  * Make the brightness plugin name dynamic based on the android
+    property ubuntu.widi.supported
+
+  [ Michał Sawicz ]
+  * Dynamic grid unit size support
+
+ -- Simon Fels <simon.busch@canonical.com>  Thu, 28 Apr 2016 15:31:45 +0000
+
+ubuntu-system-settings (0.3+16.04.20160412-0ubuntu1) xenial; urgency=medium
+
+  * Dropped workaround for lack of default value for MousePrimaryButton
+    and TouchpadPrimaryButton.
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Tue, 12 Apr 2016 17:08:04 +0000
+
+ubuntu-system-settings (0.3+16.04.20160407-0ubuntu1) xenial; urgency=medium
+
+  [ Ken VanDine ]
+  * Ported DefaultSimForCalls, DefaultSimForMessages and SimNames to use
+    AccountsService (LP: #1418040)
+
+ -- Alfonso Sanchez-Beato <alfonso.sanchez-beato@canonical.com>  Thu, 07 Apr 2016 13:20:44 +0000
+
+ubuntu-system-settings (0.3+16.04.20160330-0ubuntu1) xenial; urgency=medium
+
+  [ Jin Hsieh ]
+  * Bug fixed - Settings/Storage shows we have only 2.3GB total storage
+
+  [ Ken VanDine ]
+  * Use a loader for the Storage page and show an ActivityIndicator
+    until the page is ready Improved performance of building the list of
+    mountedVolumes (LP: #1422206)
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Wed, 30 Mar 2016 17:43:55 +0000
+
+ubuntu-system-settings (0.3+16.04.20160325-0ubuntu1) xenial; urgency=medium
+
+  * Bump Ubuntu.Content import to 1.3 to prevent mixed version imports
+    (LP: #1554621)
+  * Only include the "any data connection" item when there is a modem
+    present. (LP: #1560884)
+  * Play haptic feedback when selecting About and Reset from the main
+    view. (LP: #1560571)
+  * Removed unnecessary mouse-plugin, it was intended for use with
+    dynamic visibility, which is no longer needed.
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Fri, 25 Mar 2016 20:53:47 +0000
+
+ubuntu-system-settings (0.3+16.04.20160323.2-0ubuntu1) xenial; urgency=medium
+
+  [ Jim Hodapp ]
+  * Make sure the sound preview plugin can find the QML Audio.audioRole
+    property.
+
+ -- Timo Jyrinki <timo.jyrinki@canonical.com>  Wed, 23 Mar 2016 22:30:28 +0000
+
+ubuntu-system-settings (0.3+16.04.20160323-0ubuntu1) xenial; urgency=medium
+
+  [ jonas-drange ]
+  * Add External Keyboard panel which allows for configuration of the
+    default keymap. (LP: #1524400, #1491340)
+
+ -- Michael Zanetti <michael.zanetti@canonical.com>  Wed, 23 Mar 2016 08:46:55 +0000
+
+ubuntu-system-settings (0.3+16.04.20160318-0ubuntu1) xenial; urgency=medium
+
+  * Process pairing attempts for unknown devices correctly (LP:
+    #1539158)
+
+ -- Simon Fels <simon.busch@canonical.com>  Fri, 18 Mar 2016 17:56:23 +0000
+
+ubuntu-system-settings (0.3+16.04.20160316.1-0ubuntu1) xenial; urgency=medium
+
+  [ Michael Terry ]
+  * Use geonames library instead of timezonemap library to search city
+    names, which gives us slightly better sorting (and future
+    improvements)
+
+  [ Rodney Dawes ]
+  * Fix the CMakeLists.txt to handle settings.js generation and
+    translations better. (LP: #1555623)
+
+  [ jonas-drange ]
+  * Replace usage of backgroundText from the selected palette for labels
+    with baseText from normal palette.
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Wed, 16 Mar 2016 17:03:54 +0000
+
 ubuntu-system-settings (0.3+16.04.20160314.4-0ubuntu1) xenial; urgency=medium
 
   [ jonas-drange ]

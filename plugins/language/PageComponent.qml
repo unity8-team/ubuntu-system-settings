@@ -19,6 +19,7 @@
  */
 
 import QtQuick 2.4
+import QtSystemInfo 5.5
 import GSettings 1.0
 import SystemSettings 1.0
 import Ubuntu.Components 1.3
@@ -33,8 +34,51 @@ ItemPage {
 
     title: i18n.tr("Language & Text")
 
+    InputDeviceManager {
+        id: keyboardsModel
+        filter: InputInfo.Keyboard
+    }
+
+    property bool externalKeyboardPresent: keyboardsModel.count > 0
+
+    property var pluginOptions
+    Connections {
+        target: pageStack
+        onCurrentPageChanged: {
+            // If we are called with subpage=foo, push foo on the stack.
+            //
+            // We need to wait until the PageComponent has been pushed to the stack
+            // before pushing the subpages, otherwise they will be pushed below the
+            // PageComponent.
+            if (pageStack.currentPage === root) {
+                if (pluginOptions && pluginOptions['subpage']) {
+                    switch (pluginOptions['subpage']) {
+                    case 'hw-keyboard-layouts':
+                        pageStack.push(Qt.resolvedUrl("KeyboardLayouts.qml"), {
+                                           plugin: hwKeyboardPlugin,
+                                           currentLayoutsDraggable: true
+                                       })
+                        break;
+                    }
+                }
+
+                // Once done, disable this Connections, so that if the user navigates
+                // back to the root we won't push the subpages again
+                target = null
+            }
+        }
+    }
+
     UbuntuLanguagePlugin {
         id: plugin
+    }
+
+    OnScreenKeyboardPlugin {
+        id: oskPlugin
+    }
+
+    HardwareKeyboardPlugin {
+        id: hwKeyboardPlugin
     }
 
     Component {
@@ -47,12 +91,6 @@ ItemPage {
                 })
             }
         }
-    }
-
-    Component {
-        id: keyboardLayouts
-
-        KeyboardLayouts {}
     }
 
     Component {
@@ -100,6 +138,7 @@ ItemPage {
                 iconSource: "image://theme/language-chooser"
                 text: i18n.tr("Display language…")
                 objectName: "displayLanguage"
+                showDivider: false
                 component: Label {
                     property int currentLanguage: plugin.currentLanguage
                     objectName: "currentLanguage"
@@ -111,21 +150,29 @@ ItemPage {
                 onClicked: PopupUtils.open(displayLanguage)
             }
 
-            ListItem.Divider {
-            }
+            ListItem.Divider {}
 
             ListItem.SingleValue {
-                text: i18n.tr("Keyboard layouts")
-                value: plugin.keyboardLayoutsModel.subset.length == 1 ?
-                       plugin.keyboardLayoutsModel.superset[plugin.keyboardLayoutsModel.subset[0]][0] :
-                       plugin.keyboardLayoutsModel.subset.length
+                text: externalKeyboardPresent ? i18n.tr("On-screen keyboard") :
+                                                i18n.tr("Keyboard layouts")
                 progression: true
-
-                onClicked: pageStack.push(keyboardLayouts)
+                value: oskPlugin.keyboardLayoutsModel.subset.length == 1 ?
+                       oskPlugin.keyboardLayoutsModel.superset[oskPlugin.keyboardLayoutsModel.subset[0]][0] :
+                       oskPlugin.keyboardLayoutsModel.subset.length
+                onClicked: pageStack.push(Qt.resolvedUrl("KeyboardLayouts.qml"), {
+                    plugin: oskPlugin
+                })
             }
 
-            ListItem.Divider {
+            ListItem.Standard {
+                text: i18n.tr("External keyboard")
+                progression: true
+                showDivider: false
+                onClicked: pageStack.push(Qt.resolvedUrl("PageHardwareKeyboard.qml"))
+                visible: externalKeyboardPresent
             }
+
+            ListItem.Divider {}
 
             ListItem.SingleValue {
                 visible: showAllUI

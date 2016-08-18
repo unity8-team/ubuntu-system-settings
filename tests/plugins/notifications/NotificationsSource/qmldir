@@ -1,0 +1,5 @@
+module NotificationsSource
+PageComponent 1.0 ../../../../plugins/notifications/PageComponent.qml
+ClickAppNotifications 1.0 ../../../../plugins/notifications/ClickAppNotifications.qml
+ClickAppsSoundsNotify 1.0 ../../../../plugins/notifications/ClickAppsSoundsNotify.qml
+ClickAppsVibrationsNotify 1.0 ../../../../plugins/notifications/ClickAppsVibrationsNotify.qml

@@ -196,8 +196,7 @@ Column {
                 right: parent.right
             }
             height: childrenRect.height + units.gu(2)
-            // Workaround an issue in AccountsService not returning default for string
-            selected: backend.mousePrimaryButton ? backend.mousePrimaryButton : "left"
+            selected: backend.mousePrimaryButton
             onSelectedChanged: {
                 backend.mousePrimaryButton = selected;
             }
@@ -369,8 +368,7 @@ Column {
                 right: parent.right
             }
             height: childrenRect.height + units.gu(1)
-            // Workaround an issue in AccountsService not returning default for string
-            selected: backend.touchpadPrimaryButton ?  backend.touchpadPrimaryButton : "left"
+            selected: backend.touchpadPrimaryButton
             onSelectedChanged: {
                 backend.touchpadPrimaryButton = selected;
             }

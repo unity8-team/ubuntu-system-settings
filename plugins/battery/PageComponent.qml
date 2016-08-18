@@ -1,7 +1,7 @@
 /*
  * This file is part of system-settings
  *
- * Copyright (C) 2013 Canonical Ltd.
+ * Copyright (C) 2013-2016 Canonical Ltd.
  *
  * Contact: Sebastien Bacher <sebastien.bacher@canonical.com>
  *
@@ -23,8 +23,8 @@ import QMenuModel 0.1
 import QtQuick 2.4
 import QtSystemInfo 5.0
 import SystemSettings 1.0
+import SystemSettings.ListItems 1.0 as SettingsListItems
 import Ubuntu.Components 1.3
-import Ubuntu.Components.ListItems 1.3 as ListItem
 import Ubuntu.SystemSettings.Battery 1.0
 import Ubuntu.SystemSettings.SecurityPrivacy 1.0
 import Ubuntu.Settings.Components 0.1 as USC
@@ -99,7 +99,7 @@ ItemPage {
             anchors.left: parent.left
             anchors.right: parent.right
 
-            ListItem.SingleValue {
+            SettingsListItems.SingleValue {
                 id: chargingLevel
                 text: i18n.tr("Charge level")
                 value: {
@@ -262,7 +262,7 @@ ItemPage {
                 }
             }
 
-            ListItem.SingleValue {
+            SettingsListItems.SingleValue {
                 id: chargingEntry
                 text: {
                     if (indicatorPower.deviceState === "charging")
@@ -271,6 +271,8 @@ ItemPage {
                         return i18n.tr("Last full charge")
                     else if (indicatorPower.deviceState === "fully-charged")
                         return i18n.tr("Fully charged")
+                    else
+                        return ""
                 }
 
                 value: {
@@ -290,27 +292,31 @@ ItemPage {
                 text: i18n.tr("Ways to reduce battery use:")
             }
 
-            ListItem.Standard {
+            SettingsListItems.StandardProgression {
                 text: i18n.tr("Display brightness")
-                progression: true
                 onClicked: pageStack.push(
                                pluginManager.getByName("brightness").pageComponent)
             }
 
-            ListItem.SingleValue {
+            SettingsListItems.SingleValueProgression {
                 property bool lockOnSuspend:
                     securityPrivacy.securityType !==
                         UbuntuSecurityPrivacyPanel.Swipe
                 text: lockOnSuspend ? i18n.tr("Lock when idle") : i18n.tr("Sleep when idle")
                 value: {
                     if (batteryBackend.powerdRunning ) {
-                        var timeout = Math.round(powerSettings.activityTimeout/60)
-                        return (powerSettings.activityTimeout != 0) ?
+                        var timeout = powerSettings.activityTimeout
+                        return timeout == 0 ?
+                                    i18n.tr("Never") :
+                                    (timeout < 60) ?
+                                    // TRANSLATORS: %1 is the number of seconds
+                                    i18n.tr("After %1 second",
+                                            "After %1 seconds",
+                                             timeout).arg(timeout) :
                                     // TRANSLATORS: %1 is the number of minutes
                                     i18n.tr("After %1 minute",
                                             "After %1 minutes",
-                                            timeout).arg(timeout) :
-                                    i18n.tr("Never")
+                                            Math.round(timeout/60)).arg(Math.round(timeout/60))
                     }
                     else {
                         var timeout = Math.round(powerSettings.idleDelay/60)
@@ -322,7 +328,14 @@ ItemPage {
                                     i18n.tr("Never")
                     }
                 }
-                progression: true
+
+                Icon {
+                    width: units.gu(2.5)
+                    height: width
+                    name: "network-secure"
+                    SlotsLayout.position: SlotsLayout.First
+                }
+
                 onClicked: pageStack.push(
                                Qt.resolvedUrl("SleepValues.qml"),
                                { title: text, lockOnSuspend: lockOnSuspend })
@@ -337,10 +350,12 @@ ItemPage {
                 Component.onCompleted: start()
             }
 
-            ListItem.Standard {
+            SettingsListItems.Icon {
                 // TRANSLATORS: “Wi-Fi used for hotspot” is hidden.
                 text: showAllUI ? i18n.tr("Wi-Fi used for hotspot") : i18n.tr("Wi-Fi")
-                control: Loader {
+                iconName: "wifi-high"
+
+                Loader {
                     active: networkActionGroup.enabled.state != null
                     sourceComponent: Switch {
                         id: wifiSwitch
@@ -371,10 +386,12 @@ ItemPage {
                 Component.onCompleted: start()
             }
 
-            ListItem.Standard {
+            SettingsListItems.Icon {
                 id: btListItem
                 text: i18n.tr("Bluetooth")
-                control: Loader {
+                iconName: "bluetooth-active"
+
+                Loader {
                     active: bluetoothActionGroup.enabled.state != null
                     sourceComponent: Switch {
                         id: btSwitch
@@ -391,44 +408,6 @@ ItemPage {
                     }
                 }
                 visible: bluetoothActionGroup.visible
-            }
-
-            QDBusActionGroup {
-                id: locationActionGroup
-                busType: DBus.SessionBus
-                busName: "com.canonical.indicator.location"
-                objectPath: "/com/canonical/indicator/location"
-
-                property variant enabled: action("gps-detection-enabled")
-
-                Component.onCompleted: start()
-            }
-
-            ListItem.Standard {
-                id: gpsListItem
-                text: i18n.tr("GPS")
-                control: Loader {
-                    active: locationActionGroup.enabled.state != null
-                    sourceComponent: Switch {
-                        id: gpsSwitch
-                        property bool serverChecked: locationActionGroup.enabled.state
-
-                        USC.ServerPropertySynchroniser {
-                            userTarget: gpsSwitch
-                            userProperty: "checked"
-                            serverTarget: gpsSwitch
-                            serverProperty: "serverChecked"
-
-                            onSyncTriggered: locationActionGroup.enabled.activate()
-                        }
-                    }
-                }
-                visible: locationActionGroup.enabled.state !== undefined
-            }
-
-            ListItem.Caption {
-                text: i18n.tr("Accurate location detection requires GPS and/or Wi-Fi.")
-                visible: gpsListItem.visible
             }
         }
     }

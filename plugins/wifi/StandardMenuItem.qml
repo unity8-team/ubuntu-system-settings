@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 Canonical Ltd.
+ * Copyright 2013-2016 Canonical Ltd.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -28,34 +28,12 @@ FramedMenuItem {
 
     signal activate()
 
-    onCheckedChanged: {
-        // Can't rely on binding. Checked is assigned on click.
-        if (checkable) {
-            checkbox.checked = checked;
-        }
-    }
+    layout.subtitle.text: checked ? i18n.tr("Connected") : ""
 
+    progressionVisible: checked
     onClicked: {
-        if (checkable) {
-            checkbox.clicked();
-        } else {
+        if (!checked) {
             menuItem.activate();
         }
-    }
-
-    control: CheckBox {
-        id: checkbox
-
-        Component.onCompleted: {
-            checked = menuItem.checked;
-        }
-
-        // FIXME : should use Checkbox.toggled signal
-        // lp:~nick-dedekind/ubuntu-ui-toolkit/checkbox.toggled
-        onClicked: {
-            menuItem.activate();
-        }
-
-        visible: checkable
     }
 }

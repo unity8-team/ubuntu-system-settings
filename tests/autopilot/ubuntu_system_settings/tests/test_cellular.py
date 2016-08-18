@@ -1,21 +1,25 @@
 # -*- Mode: Python; coding: utf-8; indent-tabs-mode: nil; tab-width: 4 -*-
-# Copyright 2014 Canonical
+# Copyright 2014-2016 Canonical
 #
 # This program is free software: you can redistribute it and/or modify it
 # under the terms of the GNU General Public License version 3, as published
 # by the Free Software Foundation.
 
-from gi.repository import Gio, GLib
+import dbus
 from time import sleep
 
 from autopilot.introspection.dbus import StateNotFoundError
 from autopilot.matchers import Eventually
 from testtools.matchers import Equals, raises, StartsWith
+from unittest import skip
 
 from ubuntu_system_settings.tests import (
-    CellularBaseTestCase, CONNMAN_IFACE, RDO_IFACE,
-    NETREG_IFACE)
+    CellularBaseTestCase, RDO_IFACE,
+    NETREG_IFACE, ACCOUNTS_PHONE_IFACE, CON_IFACE)
 
+from ubuntu_system_settings.tests.connectivity import (
+    SIM_IFACE as CTV_SIM_IFACE
+)
 
 DEV_IFACE = 'org.freedesktop.NetworkManager.Device'
 
@@ -23,49 +27,46 @@ DEV_IFACE = 'org.freedesktop.NetworkManager.Device'
 class CellularTestCase(CellularBaseTestCase):
 
     def test_enable_data(self):
+        self.ctv_private.Set(CON_IFACE, 'MobileDataEnabled', False)
         self.cellular_page.enable_data()
         self.assertThat(
-            lambda: self.modem_0.Get(CONNMAN_IFACE, 'Powered'),
+            lambda: self.ctv_private.Get(CON_IFACE, 'MobileDataEnabled'),
             Eventually(Equals(True))
         )
 
     def test_disable_data(self):
+        self.ctv_private.Set(CON_IFACE, 'MobileDataEnabled', True)
         self.cellular_page.disable_data()
         self.assertThat(
-            lambda: self.modem_0.Get(CONNMAN_IFACE, 'Powered'),
+            lambda: self.ctv_private.Get(CON_IFACE, 'MobileDataEnabled'),
             Eventually(Equals(False))
         )
 
     def test_remote_manipulation_of_data(self):
-        self.modem_0.EmitSignal(
-            CONNMAN_IFACE,
-            'PropertyChanged',
-            'sv',
-            ['Powered', 'true'])
-
+        self.ctv_private.Set(CON_IFACE, 'MobileDataEnabled', True)
         self.assertThat(lambda: self.cellular_page.get_data(),
                         Eventually(Equals(True)))
-
-        self.modem_0.EmitSignal(
-            CONNMAN_IFACE,
-            'PropertyChanged',
-            'sv',
-            ['Powered', 'false'])
-
+        sleep(1)
+        self.ctv_private.Set(CON_IFACE, 'MobileDataEnabled', False)
+        sleep(1)
         self.assertThat(lambda: self.cellular_page.get_data(),
                         Eventually(Equals(False)))
 
     def test_enable_roaming(self):
+        self.ctv_private.Set(CON_IFACE, 'MobileDataEnabled', True)
+        self.ctv_sim0.Set(CTV_SIM_IFACE, 'DataRoamingEnabled', False)
         self.cellular_page.enable_roaming()
         self.assertThat(
-            lambda: self.modem_0.Get(CONNMAN_IFACE, 'RoamingAllowed'),
+            lambda: self.ctv_sim0.Get(CTV_SIM_IFACE, 'DataRoamingEnabled'),
             Eventually(Equals(True))
         )
 
     def test_disable_roaming(self):
+        self.ctv_private.Set(CON_IFACE, 'MobileDataEnabled', True)
+        self.ctv_sim0.Set(CTV_SIM_IFACE, 'DataRoamingEnabled', True)
         self.cellular_page.disable_roaming()
         self.assertThat(
-            lambda: self.modem_0.Get(CONNMAN_IFACE, 'RoamingAllowed'),
+            lambda: self.ctv_sim0.Get(CTV_SIM_IFACE, 'DataRoamingEnabled'),
             Eventually(Equals(False))
         )
 
@@ -98,36 +99,31 @@ class DualSimCellularTestCase(CellularBaseTestCase):
     use_sims = 2
 
     def test_data_off(self):
-        self.cellular_page.disable_datas()
+        self.ctv_private.Set(CON_IFACE, 'MobileDataEnabled', True)
+        self.cellular_page.disable_data()
         self.assertThat(
-            lambda: self.modem_0.Get(CONNMAN_IFACE, 'Powered'),
-            Eventually(Equals(False))
-        )
-        self.assertThat(
-            lambda: self.modem_1.Get(CONNMAN_IFACE, 'Powered'),
+            lambda: self.ctv_private.Get(CON_IFACE, 'MobileDataEnabled'),
             Eventually(Equals(False))
         )
 
     def test_sim1_online(self):
+        self.ctv_private.Set(CON_IFACE,
+                             'SimForMobileData',
+                             dbus.ObjectPath("/"))
         self.cellular_page.select_sim_for_data('/ril_0')
         self.assertThat(
-            lambda: self.modem_0.Get(CONNMAN_IFACE, 'Powered'),
-            Eventually(Equals(True))
-        )
-        self.assertThat(
-            lambda: self.modem_1.Get(CONNMAN_IFACE, 'Powered'),
-            Eventually(Equals(False))
+            lambda: self.ctv_private.Get(CON_IFACE, 'SimForMobileData'),
+            Eventually(Equals(self.ctv_sim0.object_path))
         )
 
     def test_sim2_online(self):
+        self.ctv_private.Set(CON_IFACE,
+                             'SimForMobileData',
+                             dbus.ObjectPath("/"))
         self.cellular_page.select_sim_for_data('/ril_1')
         self.assertThat(
-            lambda: self.modem_0.Get(CONNMAN_IFACE, 'Powered'),
-            Eventually(Equals(False))
-        )
-        self.assertThat(
-            lambda: self.modem_1.Get(CONNMAN_IFACE, 'Powered'),
-            Eventually(Equals(True))
+            lambda: self.ctv_private.Get(CON_IFACE, 'SimForMobileData'),
+            Eventually(Equals(self.ctv_sim1.object_path))
         )
 
     def test_connection_type_on_sim1(self):
@@ -173,10 +169,10 @@ class DualSimCellularTestCase(CellularBaseTestCase):
         self.cellular_page.change_carrier('my.cool.telco', sim=sim)
 
     def test_change_sim1_name(self):
-        gsettings = Gio.Settings.new('com.ubuntu.phone')
+
         sim = '/ril_0'
         try:
-            old_name = gsettings.get_value('sim-names')[sim]
+            old_name = self.obj_phone.GetSimNames()[sim]
         except:
             old_name = 'SIM 1'
         new_name = 'FOO BAR'
@@ -184,21 +180,18 @@ class DualSimCellularTestCase(CellularBaseTestCase):
 
         try:
             self.assertThat(
-                lambda: gsettings.get_value('sim-names')[sim],
+                lambda: self.obj_phone.GetSimNames()[sim],
                 Eventually(Equals(new_name)))
         except Exception as e:
             raise e
         finally:
             self.cellular_page.set_name(sim, old_name)
-            # wait for gsettings
-            sleep(1)
 
     def test_change_sim2_name(self):
-        gsettings = Gio.Settings.new('com.ubuntu.phone')
         sim = '/ril_1'
 
         try:
-            old_name = gsettings.get_value('sim-names')[sim]
+            old_name = self.obj_phone.GetSimNames()[sim]
         except:
             old_name = 'SIM 2'
 
@@ -207,37 +200,32 @@ class DualSimCellularTestCase(CellularBaseTestCase):
 
         try:
             self.assertThat(
-                lambda: gsettings.get_value('sim-names')[sim],
+                lambda: self.obj_phone.GetSimNames()[sim],
                 Eventually(Equals(new_name)))
         except Exception as e:
             raise e
         finally:
             self.cellular_page.set_name(sim, old_name)
-            # wait for gsettings
-            sleep(1)
 
     def test_remote_manipulation_of_name(self):
-        gsettings = Gio.Settings.new('com.ubuntu.phone')
-        old_names = gsettings.get_value('sim-names')
+        old_names = self.obj_phone.GetSimNames()
         sim = '/ril_0'
         name = 'BAS QUX'
-        new_names = old_names.unpack()
+        new_names = old_names
         new_names[sim] = name
-        new_names = GLib.Variant('a{ss}', new_names)
-        gsettings.set_value('sim-names', new_names)
+        self.obj_phone.Set(ACCOUNTS_PHONE_IFACE, "SimNames", new_names)
+        self.dbus_mock.EmitSignal(ACCOUNTS_PHONE_IFACE, "PropertyChanged",
+                                  "sv", dbus.Array(["SimNames", new_names]))
+
         try:
             self.assertThat(
                 lambda: self.cellular_page.get_name(sim),
                 Eventually(StartsWith(name)))
         except Exception as e:
             raise e
-        finally:
-            gsettings.set_value('sim-names', old_names)
-            # wait for gsettings
-            sleep(1)
 
     def test_roaming_switch(self):
-        self.cellular_page.disable_datas()
+        self.cellular_page.disable_data()
         # assert roaming_switch is disabled
         self.assertThat(
             lambda: self.cellular_page.enable_roaming(timeout=1),
@@ -245,34 +233,40 @@ class DualSimCellularTestCase(CellularBaseTestCase):
         )
 
     def test_allow_roaming_sim_1(self):
-        sim = '/ril_0'
-        self.cellular_page.select_sim_for_data(sim)
-
-        self.assertEqual(
-            False, self.modem_0.Get(CONNMAN_IFACE, 'RoamingAllowed'))
+        self.ctv_private.Set(CON_IFACE, 'MobileDataEnabled', True)
+        self.ctv_sim0.Set(CTV_SIM_IFACE, 'DataRoamingEnabled', False)
+        self.ctv_private.Set(CON_IFACE,
+                             'SimForMobileData',
+                             dbus.ObjectPath("/"))
+        self.cellular_page.select_sim_for_data('/ril_0')
+        self.assertThat(
+            lambda: self.ctv_private.Get(CON_IFACE, 'SimForMobileData'),
+            Eventually(Equals(self.ctv_sim0.object_path))
+        )
         self.cellular_page.enable_roaming()
         self.assertThat(
-            lambda: self.modem_0.Get(CONNMAN_IFACE, 'RoamingAllowed'),
-            Eventually(Equals(True)))
+            lambda: self.ctv_sim0.Get(CTV_SIM_IFACE, 'DataRoamingEnabled'),
+            Eventually(Equals(True))
+        )
 
     def test_allow_roaming_sim_2(self):
-        sim = '/ril_1'
-        self.cellular_page.select_sim_for_data(sim)
-
-        self.assertEqual(
-            False, self.modem_1.Get(CONNMAN_IFACE, 'RoamingAllowed'))
+        self.ctv_private.Set(CON_IFACE, 'MobileDataEnabled', True)
+        self.ctv_sim1.Set(CTV_SIM_IFACE, 'DataRoamingEnabled', False)
+        self.ctv_private.Set(CON_IFACE,
+                             'SimForMobileData',
+                             dbus.ObjectPath("/"))
+        self.cellular_page.select_sim_for_data('/ril_1')
+        self.assertThat(
+            lambda: self.ctv_private.Get(CON_IFACE, 'SimForMobileData'),
+            Eventually(Equals(self.ctv_sim1.object_path))
+        )
         self.cellular_page.enable_roaming()
         self.assertThat(
-            lambda: self.modem_1.Get(CONNMAN_IFACE, 'RoamingAllowed'),
-            Eventually(Equals(True)))
+            lambda: self.ctv_sim1.Get(CTV_SIM_IFACE, 'DataRoamingEnabled'),
+            Eventually(Equals(True))
+        )
 
     def test_changing_default_sim_for_calls(self):
-        gsettings = Gio.Settings.new('com.ubuntu.phone')
-        default = gsettings.get_value('default-sim-for-calls')
-
-        self.addCleanup(
-            self.set_default_for_calls, gsettings, default)
-
         # click ask
         self.system_settings.main_view.scroll_to_and_click(
             self.get_default_sim_for_calls_selector('ask'))
@@ -281,15 +275,10 @@ class DualSimCellularTestCase(CellularBaseTestCase):
             self.get_default_sim_for_calls_selector('/ril_0'))
 
         self.assertThat(
-            lambda: gsettings.get_value('default-sim-for-calls').get_string(),
+            lambda: self.obj_phone.GetDefaultSimForCalls(),
             Eventually(Equals('/ril_0')))
 
     def test_changing_default_sim_for_messages(self):
-        gsettings = Gio.Settings.new('com.ubuntu.phone')
-        default = gsettings.get_value('default-sim-for-messages')
-        self.addCleanup(
-            self.set_default_for_messages, gsettings, default)
-
         # click ask
         self.system_settings.main_view.scroll_to_and_click(
             self.get_default_sim_for_messages_selector('ask'))
@@ -298,13 +287,13 @@ class DualSimCellularTestCase(CellularBaseTestCase):
             self.get_default_sim_for_messages_selector('/ril_1'))
 
         self.assertThat(
-            lambda:
-                gsettings.get_value('default-sim-for-messages').get_string(),
+            lambda: self.obj_phone.GetDefaultSimForMessages(),
             Eventually(Equals('/ril_1')))
 
 
 class ApnTestCase(CellularBaseTestCase):
 
+    @skip('Skip until we can get the CPO for ListItem trigger actions')
     def test_remove_apn(self):
         self.add_connection_context(self.modem_0, Type='mms', Name='Failed')
         contexts = self.modem_0.connMan.GetContexts()
@@ -438,6 +427,16 @@ class ApnTestCase(CellularBaseTestCase):
         self.cellular_page.prefer_apn('Provisioned')
 
         # Assert that Preferred becomes true.
+        self.assertThat(
+            lambda: self.modem_0.connMan.GetContexts()[0][1]['Preferred'],
+            Eventually(Equals(True))
+        )
+
+    def active_apn_is_automatically_preferred(self):
+        self.add_connection_context(self.modem_0,
+                                    Type='internet', Name='Provisioned',
+                                    Active=True)
+        self.cellular_page.open_apn_page(None)
         self.assertThat(
             lambda: self.modem_0.connMan.GetContexts()[0][1]['Preferred'],
             Eventually(Equals(True))

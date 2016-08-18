@@ -76,7 +76,6 @@ Row {
         id: add
         action: selectPeer
         objectName: "addCustomBackgroundsButton"
-        gradient: UbuntuColors.greyGradient
         text: i18n.tr("Add an image…")
         width: buttonWidth
         anchors {
@@ -87,7 +86,6 @@ Row {
     Button {
         id: queue
         objectName: "removeCustomBackgroundsButton"
-        gradient: UbuntuColors.greyGradient
         text: i18n.tr("Remove images…")
         width: buttonWidth
         anchors {

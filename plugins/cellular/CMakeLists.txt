@@ -21,6 +21,8 @@ set(QML_SOURCES
 add_library(UbuntuCellularPanel MODULE
   plugin.cpp
   plugin.h
+  cellular.cpp
+  cellular.h
   connectivity.cpp
   connectivity.h
   nm_manager_proxy.h
@@ -28,6 +30,7 @@ add_library(UbuntuCellularPanel MODULE
   nm_settings_connection_proxy.h
   ${QML_SOURCES}
 )
+target_link_libraries(UbuntuCellularPanel uss-accountsservice)
 qt5_use_modules(UbuntuCellularPanel Qml Quick DBus)
 
 set(PLUG_DIR ${PLUGIN_PRIVATE_MODULE_DIR}/Ubuntu/SystemSettings/Cellular)

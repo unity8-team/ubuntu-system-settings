@@ -53,7 +53,8 @@ void AccountsService::slotChanged(QString interface,
                                   QVariantMap changed_properties,
                                   QStringList invalidated_properties)
 {
-    Q_UNUSED (changed_properties);
+    Q_FOREACH (const QString k, changed_properties.keys())
+        Q_EMIT propertyChanged(interface, k);
 
     Q_FOREACH (const QString prop, invalidated_properties)
         Q_EMIT propertyChanged(interface, prop);

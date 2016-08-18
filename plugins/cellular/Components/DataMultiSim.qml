@@ -21,73 +21,138 @@ import QtQuick 2.4
 import SystemSettings 1.0
 import Ubuntu.Components 1.3
 import Ubuntu.Components.ListItems 1.3 as ListItem
+import Ubuntu.Connectivity 1.0
 
 Column {
 
-    property string prevOnlineModem: parent.prevOnlineModem
+    SortFilterModel {
+        id: sortedModems
+        model: Connectivity.modems
+        sort.property: "Index"
+        sort.order: Qt.AscendingOrder
+    }
 
-    function getNameFromIndex (index) {
-        if (index === 0) {
-            return i18n.tr("Off");
-        } else if (index > 0) {
-            return sims[index - 1].title;
+    ListItem.Standard {
+        text: i18n.tr("Cellular data")
+        control: Switch {
+            id: dataSwitch
+            objectName: "data"
+            checked: Connectivity.mobileDataEnabled
+            enabled: simSelector.currentSim !== null
+            onTriggered: {
+                Connectivity.mobileDataEnabled = checked
+                /*
+                 * We do this binding here to workaround bug:
+                 * https://bugs.launchpad.net/ubuntu/+source/ubuntu-ui-toolkit/+bug/1494387
+                 *
+                 * The bug causes the checked binding to be overridden if plain onTriggered is used.
+                 */
+                checked = Qt.binding(function() {
+                    return Connectivity.mobileDataEnabled
+                })
+            }
         }
     }
 
-    height: childrenRect.height
-
-    SettingsItemTitle { text: i18n.tr("Cellular data:") }
-
     ListItem.ItemSelector {
-        id: use
-        objectName: "data"
+        id: simSelector
+        showDivider: false
         expanded: true
-        model: {
-            // create a model of 'off' and all sim paths
-            var m = ['off'];
-            sims.forEach(function (sim) {
-                m.push(sim.path);
-            });
-            return m;
-        }
+        model: sortedModems
+        selectedIndex: -1
+
         delegate: OptionSelectorDelegate {
-            objectName: "use" + modelData
-            text: getNameFromIndex(index)
+            objectName: "use/ril_" + (model.Index - 1)
+            text: {
+                if (model.Sim) {
+                    return  sims[model.Index - 1].name + " (" +
+                            (model.Sim.PrimaryPhoneNumber !== "" ?
+                                model.Sim.PrimaryPhoneNumber : model.Sim.Imsi) + ")"
+                }
+                else {
+                    return i18n.tr("No SIM detected")
+                }
+            }
+            subText: {
+                if (model.Sim) {
+                    return ""
+                }
+                else {
+                    return i18n.tr("Insert a SIM, then restart the device.")
+                }
+            }
+            enabled: model.Sim !== null
         }
-        selectedIndex: {
-            if (prevOnlineModem) {
-                return model.indexOf(prevOnlineModem);
+
+        property var currentSim : null
+        onSelectedIndexChanged: {
+            if (selectedIndex === -1) {
+                currentSim = null
             } else {
-                return [true, sims[0].connMan.powered, sims[1].connMan.powered]
-                    .lastIndexOf(true);
+                currentSim = model.get(selectedIndex).Sim
+            }
+        }
+        onCurrentSimChanged: {
+            if (currentSim !== null) {
+                roaming.checked = Qt.binding(function() {
+                    return currentSim.DataRoamingEnabled
+                })
             }
         }
 
+        function setSelectedIndex() {
+            if (Connectivity.simForMobileData === null) {
+                simSelector.selectedIndex = -1
+                return
+            }
+
+            for (var i = 0; i < sortedModems.count; i++) {
+                if (sortedModems.get(i).Sim === Connectivity.simForMobileData) {
+                    simSelector.selectedIndex = i
+                    return
+                }
+            }
+            simSelector.selectedIndex = -1
+        }
+        Connections {
+            target: Connectivity
+            onSimForMobileDataUpdated: {
+                simSelector.setSelectedIndex()
+            }
+        }
+        Component.onCompleted: {
+            setSelectedIndex()
+        }
+
+        onTriggered:  {
+            // @bug: https://bugs.launchpad.net/ubuntu/+source/ubuntu-ui-toolkit/+bug/1577351
+            // Connectivity.simForMobileData = currentSim
+            /*
+             * There is a bug in onTriggered that causes it to be fired *before* selectedIndex has been updated
+             * and thus there is no way of knowing what index was actually selected by the user.
+             *
+             * This is worked around below by using onDelegateClicked which gives us the missing index.
+             */
+        }
         onDelegateClicked: {
-            // power all sims on or off
-            sims.forEach(function (sim) {
-                sim.connMan.powered = (model[index] === sim.path);
-            });
+            var sim = sortedModems.get(index).Sim
+            if (sim === null) {
+                return
+            }
+            Connectivity.simForMobileData = sim
         }
     }
 
     ListItem.Standard {
-        id: dataRoamingItem
         text: i18n.tr("Data roaming")
-        enabled: use.selectedIndex !== 0
         control: Switch {
-            id: dataRoamingControl
+            id: roaming
             objectName: "roaming"
-
-            property bool serverChecked: poweredSim && poweredSim.connMan.roamingAllowed
-            onServerCheckedChanged: checked = serverChecked
-            Component.onCompleted: checked = serverChecked
-            onTriggered: {
-                if (poweredSim) {
-                    poweredSim.connMan.roamingAllowed = checked;
-                }
+            enabled: simSelector.currentSim !== null && dataSwitch.checked
+            checked: simSelector.currentSim ? simSelector.currentSim.DataRoamingEnabled : false
+            function trigger() {
+                simSelector.currentSim.DataRoamingEnabled = !checked
             }
         }
-        showDivider: false
     }
 }

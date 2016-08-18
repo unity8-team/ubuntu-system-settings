@@ -18,7 +18,7 @@
 
 import QtQuick 2.4
 import Ubuntu.Components 1.3
-import Ubuntu.Components.ListItems 1.3 as ListItem
+import Ubuntu.Components.ListItems 1.3 as ListItems
 import Ubuntu.SystemSettings.Notifications 1.0
 import SystemSettings 1.0
 
@@ -28,25 +28,25 @@ ItemPage {
 
     title: i18n.tr("Notifications")
 
-    NotificationsManager {
-        id: notificationsManager
+    onActiveChanged: {
+        if (active) {
+            clickAppsSoundsNotifyModel.updateEnabledEntries()
+            clickAppsVibrationsNotifyModel.updateEnabledEntries()
+        }
     }
 
-    ListItem.Base {
-        id: subtitle
-        height: labelSubtitle.height + units.gu(2)
-        Label {
-            id: labelSubtitle
-            text: i18n.tr("Selected apps can alert you using notification bubbles, sounds, vibrations, and the Notifications list.")
-            wrapMode: Text.WordWrap
-            anchors {
-                top: parent.top
-                left: parent.left
-                right: parent.right
-                margins: units.gu(1)
-            }
-        }
-        highlightWhenPressed: false
+    ClickApplicationsNotifyModel {
+        id: clickAppsSoundsNotifyModel
+        objectName: "clickAppsSoundsNotifyModel"
+        notifyType: ClickApplicationsNotifyModel.SoundsNotify
+        sourceModel: ClickApplicationsModel
+    }
+
+    ClickApplicationsNotifyModel {
+        id: clickAppsVibrationsNotifyModel
+        objectName: "clickAppsVibrationsNotifyModel"
+        notifyType: ClickApplicationsNotifyModel.VibrationsNotify
+        sourceModel: ClickApplicationsModel
     }
 
     ListView {
@@ -55,28 +55,145 @@ ItemPage {
         anchors {
             left: parent.left
             right: parent.right
-            top: subtitle.bottom
+            top: parent.top
             bottom: parent.bottom
         }
-        model: notificationsManager.model
+        model: ClickApplicationsModel
         clip: true
-        contentHeight: contentItem.childrenRect.height
 
-        delegate: ListItem.Standard {
-            text: modelData.title
-            Component.onCompleted: {
-                if (modelData.icon.search("/") == -1) {
-                    iconName = modelData.icon
+        header: Column {
+            anchors {
+                left: parent.left
+                right: parent.right
+            }
+ 
+            ListItems.Base {
+                height: labelSubtitle.height + units.gu(2)
+                Label {
+                    id: labelSubtitle
+                    text: i18n.tr("Apps can alert you using sounds, vibrations, notification bubbles and the Notification list.")
+                    wrapMode: Text.WordWrap
+                    color: theme.palette.normal.backgroundSecondaryText
+                    anchors {
+                        top: parent.top
+                        left: parent.left
+                        right: parent.right
+                        topMargin: units.gu(1)
+                    }
                 }
-                else {
-                    iconSource = modelData.icon
+
+                highlightWhenPressed: false
+            }
+
+            ListItem {
+                ListItemLayout {
+                    title.text: i18n.tr("Apps that notify with sound");
+                    Label {
+                        objectName: "clickAppsSoundsNotifyLabel"
+                        text: clickAppsSoundsNotifyModel.count
+                        SlotsLayout.position: SlotsLayout.Trailing;
+                    }
+                    Icon {
+                        name: "next"
+                        SlotsLayout.position: SlotsLayout.Trailing;
+                        width: units.gu(2)
+                    }
+                }
+
+                onClicked: {
+                    if (clickAppsSoundsNotifyModel.count <= 0) {
+                        return
+                    }
+
+                    pageStack.push(Qt.resolvedUrl("ClickAppsSoundsNotify.qml"),
+                                                  { model: clickAppsSoundsNotifyModel })
                 }
             }
-            control: Switch {
-                checked: modelData.status
 
-                onCheckedChanged: {
-                    modelData.status = checked;
+            ListItem {
+                ListItemLayout {
+                    title.text: i18n.tr("Apps that notify with vibration");
+                    Label {
+                        objectName: "clickAppsVibrationsNotifyLabel"
+                        text: clickAppsVibrationsNotifyModel.count
+                        SlotsLayout.position: SlotsLayout.Trailing;
+                    }
+                    Icon {
+                        name: "next"
+                        SlotsLayout.position: SlotsLayout.Trailing;
+                        width: units.gu(2)
+                    }
+                }
+
+                onClicked: {
+                    if (clickAppsVibrationsNotifyModel.count <= 0) {
+                        return
+                    }
+
+                    pageStack.push(Qt.resolvedUrl("ClickAppsVibrationsNotify.qml"),
+                                                  { model: clickAppsVibrationsNotifyModel })
+                }
+            }
+
+            ListItem {
+                ListItemLayout {
+                    title.text: i18n.tr("Applications:")
+                    title.color: theme.palette.normal.backgroundSecondaryText
+                }
+            }
+
+        }
+
+        delegate: ListItem {
+            height: layout.height + (divider.visible ? divider.height : 0)
+
+            onClicked: pageStack.push(Qt.resolvedUrl("ClickAppNotifications.qml"),
+                                                     { entry: model,
+                                                       entryIndex: index })
+
+            ListItemLayout {
+                id: layout
+
+                Component.onCompleted: {
+                    var iconPath = model.icon.toString()
+                    if (iconPath.search("/") == -1) {
+                        icon.name = model.icon
+                    } else {
+                        icon.source = model.icon
+                    }
+                }
+
+                title.text: model.displayName
+                subtitle.text: {
+                    if (!model.enableNotifications) {
+                        return i18n.tr("No notifications")
+                    }
+
+                    var arr = []
+                    if (model.soundsNotify) {
+                        arr.push(i18n.tr("Sounds"))
+                    }
+                    if (model.vibrationsNotify) {
+                        arr.push(i18n.tr("Vibrations"))
+                    }
+                    if (model.bubblesNotify) {
+                        arr.push(i18n.tr("Bubbles"))
+                    }
+                    if (model.listNotify) {
+                        arr.push(i18n.tr("Notification List"))
+                    }
+
+                    return arr.join(", ")
+                }
+                Icon {
+                    id: icon
+                    SlotsLayout.position: SlotsLayout.Leading;
+                    width: units.gu(5)
+                }
+                Icon {
+                    name: "next"
+                    SlotsLayout.position: SlotsLayout.Trailing;
+                    width: units.gu(2)
                 }
             }
         }

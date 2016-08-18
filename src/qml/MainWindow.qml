@@ -1,7 +1,7 @@
 /*
  * This file is part of system-settings
  *
- * Copyright (C) 2013, 2014, 2015 Canonical Ltd.
+ * Copyright (C) 2013-2016 Canonical Ltd.
  *
  * Contact: Alberto Mardegan <alberto.mardegan@canonical.com>
  *
@@ -19,14 +19,14 @@
  */
 
 import QtQuick 2.4
+import SystemSettings.ListItems 1.0 as SettingsListItems
 import Ubuntu.Components 1.3
-import Ubuntu.Components.ListItems 1.3 as ListItem
 import SystemSettings 1.0
 
 MainView {
     id: main
-    width: units.gu(50)
-    height: units.gu(90)
+    implicitWidth: units.gu(50)
+    implicitHeight: units.gu(90)
     applicationName: "ubuntu-system-settings"
     objectName: "systemSettingsMainView"
     automaticOrientation: true
@@ -65,9 +65,9 @@ MainView {
                 Qt.quit()
         }
 
-        // when running in windowed mode, use a fixed width
-        view.minimumWidth  = units.gu(50)
-        view.maximumWidth = units.gu(50)
+        // when running in windowed mode, constrain width
+        view.minimumWidth  = Qt.binding( function() { return units.gu(40) } )
+        view.maximumWidth = Qt.binding( function() { return units.gu(50) } )
     }
 
     Connections {
@@ -117,6 +117,17 @@ MainView {
             visible: false
             flickable: mainFlickable
 
+            head.actions: [
+                Action {
+                    objectName: "searchAction"
+                    iconName: "find"
+                    onTriggered: {
+                        pluginManager.filter = "";
+                        search.visible = !search.visible;
+                    }
+                }
+            ]
+
             Flickable {
                 id: mainFlickable
                 anchors.fill: parent
@@ -130,9 +141,11 @@ MainView {
                     anchors.left: parent.left
                     anchors.right: parent.right
 
-                    ListItem.SingleControl {
+                    SettingsListItems.SingleControl {
                         id: search
-                        control: TextField {
+                        visible: false
+                        TextField {
+                            id: searchField
                             width: parent.width - units.gu(4)
                             placeholderText: i18n.tr("Search")
                             objectName: "searchTextField"
@@ -140,6 +153,7 @@ MainView {
                             onDisplayTextChanged:
                                 pluginManager.filter = displayText
                         }
+                        onVisibleChanged: if (visible) searchField.forceActiveFocus()
                     }
 
                     UncategorizedItemsView {

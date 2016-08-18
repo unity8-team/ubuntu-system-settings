@@ -1,7 +1,7 @@
 /*
  * This file is part of system-settings
  *
- * Copyright (C) 2013 Canonical Ltd.
+ * Copyright (C) 2013-2016 Canonical Ltd.
  *
  * Contact:
  *     Sebastien Bacher <sebastien.bacher@canonical.com>
@@ -34,7 +34,7 @@ import Ubuntu.Components 1.3
 import Ubuntu.Components.ListItems 1.3 as ListItem
 import Ubuntu.Components.Popups 1.3
 import Ubuntu.Components.Themes.Ambiance 0.1
-import Ubuntu.Content 0.1
+import Ubuntu.Content 1.3
 import "callForwardingUtils.js" as Utils
 
 ItemPage {
@@ -157,14 +157,13 @@ ItemPage {
                 visible: false
                 text: i18n.tr("Call forwarding status can’t be checked " +
                               "now. Try again later.")
-                color: UbuntuColors.red
+                color: theme.palette.normal.negative
                 horizontalAlignment: Text.AlignHCenter
             }
 
             SettingsItemTitle {
                 id: fwdSomeTitle
                 text: i18n.tr("Forward incoming calls when:")
-                showDivider: false
             }
 
             CallForwardItem {

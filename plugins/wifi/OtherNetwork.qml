@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 Canonical Ltd.
+ * Copyright 2013-2016 Canonical Ltd.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@ import QtQuick 2.4
 import QtQuick.Layouts 1.1
 import SystemSettings 1.0
 import Ubuntu.Components 1.3
-import Ubuntu.Components.ListItems 1.3 as ListItem
+import Ubuntu.Components.ListItems 1.3 as ListItems
 import Ubuntu.Components.Popups 1.3
 import Ubuntu.SystemSettings.Wifi 1.0
 import QMenuModel 0.1
@@ -287,7 +287,7 @@ Component {
             objectName: "networknameLabel"
             fontSize: "medium"
             font.bold: false
-            color: Theme.palette.selected.backgroundText
+            color: Theme.palette.normal.baseText
             elide: Text.ElideRight
             visible: !ssid
         }
@@ -309,11 +309,11 @@ Component {
             objectName: "securityListLabel"
             fontSize: "medium"
             font.bold: false
-            color: Theme.palette.selected.backgroundText
+            color: Theme.palette.normal.baseText
             elide: Text.ElideRight
         }
 
-        ListItem.ItemSelector {
+        ListItems.ItemSelector {
             id: securityList
             objectName: "securityList"
             model: [i18n.tr("None"),             // index: 0
@@ -340,13 +340,13 @@ Component {
             objectName: "authListLabel"
             fontSize: "medium"
             font.bold: false
-            color: Theme.palette.selected.backgroundText
+            color: Theme.palette.normal.baseText
             elide: Text.ElideRight
             visible: securityList.selectedIndex === 2 ||
                      securityList.selectedIndex === 4
         }
 
-        ListItem.ItemSelector {
+        ListItems.ItemSelector {
             id: authList
             objectName: "authList"
             model: ["TLS",  // index: 0
@@ -365,7 +365,7 @@ Component {
             objectName: "p2authLabel"
             fontSize: "medium"
             font.bold: false
-            color: Theme.palette.selected.backgroundText
+            color: Theme.palette.normal.baseText
             elide: Text.ElideRight
             visible: (securityList.selectedIndex === 2 ||
                       securityList.selectedIndex === 4 /* WPA or D-WEP */) &&
@@ -374,7 +374,7 @@ Component {
                       authList.selectedIndex === 4)
         }
 
-        ListItem.ItemSelector {
+        ListItems.ItemSelector {
             id: p2authList
             objectName: "p2authList"
             width: parent.width
@@ -398,7 +398,7 @@ Component {
             objectName: "cacertListLabel"
             fontSize: "medium"
             font.bold: false
-            color: Theme.palette.selected.backgroundText
+            color: Theme.palette.normal.baseText
             visible: (securityList.selectedIndex === 2 ||
                       securityList.selectedIndex === 4 /* WPA or D-WEP */) &&
                      (authList.selectedIndex === 0 ||
@@ -407,7 +407,7 @@ Component {
                       authList.selectedIndex === 4)
         }
 
-        ListItem.ItemSelector {
+        ListItems.ItemSelector {
             id: cacertSelector
             anchors {
                 left: parent.left
@@ -498,7 +498,7 @@ Component {
             objectName: "cacertHintLabel"
             fontSize: "small"
             font.bold: false
-            color: Theme.palette.selected.backgroundText
+            color: Theme.palette.normal.baseText
             visible: (securityList.selectedIndex === 2 ||
                       securityList.selectedIndex === 4 /* WPA or D-WEP */) &&
                      (authList.selectedIndex === 0 ||
@@ -514,14 +514,14 @@ Component {
             objectName: "usercertLabel"
             fontSize: "medium"
             font.bold: false
-            color: Theme.palette.selected.backgroundText
+            color: Theme.palette.normal.baseText
             visible: (securityList.selectedIndex === 2 ||
                       securityList.selectedIndex === 4) &&
                       authList.selectedIndex === 0 // only for TLS
 
         }
 
-        ListItem.ItemSelector {
+        ListItems.ItemSelector {
             id: usercertSelector
             anchors {
                 left: parent.left
@@ -556,7 +556,7 @@ Component {
             objectName: "userprivatekeyLabel"
             fontSize: "medium"
             font.bold: false
-            color: Theme.palette.selected.backgroundText
+            color: Theme.palette.normal.baseText
             visible: (securityList.selectedIndex === 2 ||
                       securityList.selectedIndex === 4) &&
                      (authList.selectedIndex === 0) // only for TLS
@@ -586,7 +586,7 @@ Component {
             }
         }
 
-        ListItem.ItemSelector {
+        ListItems.ItemSelector {
             id: privateKeySelector
             anchors {
                 left: parent.left
@@ -624,7 +624,7 @@ Component {
             objectName: "pacFileLabel"
             fontSize: "medium"
             font.bold: false
-            color: Theme.palette.selected.backgroundText
+            color: Theme.palette.normal.baseText
             visible: (securityList.selectedIndex === 2 ||
                       securityList.selectedIndex === 4 /* WPA or D-WEP */) &&
                       (authList.selectedIndex === 3)
@@ -639,7 +639,7 @@ Component {
             OptionSelectorDelegate { text: pacFileName; }
         }
 
-        ListItem.ItemSelector {
+        ListItems.ItemSelector {
             id: pacFileSelector
             anchors {
                 left: parent.left
@@ -674,14 +674,14 @@ Component {
             objectName: "pacProvisioningListLabel"
             fontSize: "medium"
             font.bold: false
-            color: Theme.palette.selected.backgroundText
+            color: Theme.palette.normal.baseText
             elide: Text.ElideRight
             visible: (securityList.selectedIndex === 2 ||
                       securityList.selectedIndex === 4) &&
                       (authList.selectedIndex === 3)
         }
 
-        ListItem.ItemSelector {
+        ListItems.ItemSelector {
             id: pacProvisioningList
             objectName: "pacProvisioningList"
             model: [i18n.tr("Disabled"),      // index: 0
@@ -701,14 +701,14 @@ Component {
             objectName: "peapVersionListLabel"
             fontSize: "medium"
             font.bold: false
-            color: Theme.palette.selected.backgroundText
+            color: Theme.palette.normal.baseText
             elide: Text.ElideRight
             visible: (securityList.selectedIndex === 2 ||
                       securityList.selectedIndex === 4) &&
                       (authList.selectedIndex === 4)
         }
 
-        ListItem.ItemSelector {
+        ListItems.ItemSelector {
             id: peapVersionList
             objectName: "peapVersionList"
             model: [i18n.tr("Version 0"),  // index: 0
@@ -727,7 +727,7 @@ Component {
             objectName: "anonymousIdentityLabel"
             fontSize: "medium"
             font.bold: false
-            color: Theme.palette.selected.backgroundText
+            color: Theme.palette.normal.baseText
             visible: (securityList.selectedIndex === 2 &&
                       authList.selectedIndex !== 2)
         }
@@ -758,7 +758,7 @@ Component {
             objectName: "usernameLabel"
             fontSize: "medium"
             font.bold: false
-            color: Theme.palette.selected.backgroundText
+            color: Theme.palette.normal.baseText
             elide: Text.ElideRight
             visible: (securityList.selectedIndex === 2 ||
                       securityList.selectedIndex === 4 ||
@@ -790,7 +790,7 @@ Component {
             objectName: "passwordListLabel"
             fontSize: "medium"
             font.bold: false
-            color: Theme.palette.selected.backgroundText
+            color: Theme.palette.normal.baseText
             elide: Text.ElideRight
             visible: securityList.selectedIndex !== 0
         }
@@ -822,7 +822,7 @@ Component {
                 text : i18n.tr("Show password")
                 objectName: "passwordVisibleLabel"
                 fontSize: "medium"
-                color: Theme.palette.selected.backgroundText
+                color: Theme.palette.normal.baseText
                 elide: Text.ElideRight
                 height: passwordVisibleSwitch.height
                 verticalAlignment: Text.AlignVCenter
@@ -858,7 +858,7 @@ Component {
                 text : i18n.tr("Remember password")
                 objectName: "passwordRememberLabel"
                 fontSize: "medium"
-                color: Theme.palette.selected.backgroundText
+                color: Theme.palette.normal.baseText
                 elide: Text.ElideRight
                 height: passwordRememberSwitch.height
                 verticalAlignment: Text.AlignVCenter

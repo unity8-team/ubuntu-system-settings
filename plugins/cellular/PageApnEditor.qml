@@ -32,9 +32,6 @@ ItemPage {
     id: root
     objectName: "apnEditor"
 
-    // Property that holds the APN manager (apn_manager.js) module.
-    property var manager
-
     property OfonoContextConnection contextQML
 
     // All models.
@@ -61,8 +58,10 @@ ItemPage {
     // When user has saved a context.
     signal saved ()
 
-    // Signal for new contexts.
+    // Signal for new contexts seen by the manger.
     signal newContext (OfonoContextConnection context)
+
+    signal requestContextCreation (string type)
 
     // When user cancels.
     signal canceled ()

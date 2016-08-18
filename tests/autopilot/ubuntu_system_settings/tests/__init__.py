@@ -50,6 +50,7 @@ ACCOUNTS_USER_IFACE = 'org.freedesktop.Accounts.User'
 ACCOUNTS_OBJ = '/org/freedesktop/Accounts'
 ACCOUNTS_SERVICE = 'com.canonical.unity.AccountsService'
 ACCOUNTS_SOUND_IFACE = 'com.ubuntu.touch.AccountsService.Sound'
+ACCOUNTS_PHONE_IFACE = 'com.ubuntu.touch.AccountsService.Phone'
 INDICATOR_NETWORK = 'indicator-network'
 ISOUND_SERVICE = 'com.canonical.indicator.sound'
 ISOUND_ACTION_PATH = '/com/canonical/indicator/sound'
@@ -432,16 +433,6 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
 
         super(UbuntuSystemSettingsOfonoTestCase, self).setUp()
 
-    def set_default_for_calls(self, gsettings, default):
-        gsettings.set_value('default-sim-for-calls', default)
-        # wait for gsettings
-        sleep(1)
-
-    def set_default_for_messages(self, gsettings, default):
-        gsettings.set_value('default-sim-for-messages', default)
-        # wait for gsettings
-        sleep(1)
-
     def get_default_sim_for_calls_selector(self, text):
         return self.cellular_page.select_single(
             objectName="defaultForCalls" + text
@@ -455,8 +446,133 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
 
 class CellularBaseTestCase(UbuntuSystemSettingsOfonoTestCase):
 
+    connectivity_parameters = {
+        'Status': 'online'
+    }
+
     def setUp(self):
         """ Go to Cellular page """
+
+        self.session_con = self.get_dbus(False)
+
+        if is_process_running(INDICATOR_NETWORK):
+            _stop_process(INDICATOR_NETWORK)
+            self.addCleanup(_start_process, INDICATOR_NETWORK)
+
+        ctv_tmpl = os.path.join(os.path.dirname(__file__), 'connectivity.py')
+        (self.ctv_mock, self.obj_ctv) = self.spawn_server_template(
+            ctv_tmpl, parameters=self.connectivity_parameters,
+            stdout=subprocess.PIPE)
+
+        sleep(1)
+
+        self.ctv_private = dbus.Interface(
+            self.session_con.get_object(CTV_IFACE, CTV_PRIV_OBJ),
+            'org.freedesktop.DBus.Properties')
+
+        sim = self.obj_ctv.AddSim("1234567890")
+        self.ctv_private.Set(CON_IFACE,
+                             'Sims',
+                             dbus.Array([sim],
+                                        signature='o'))
+        modem = self.obj_ctv.AddModem("0987654321", 1, sim)
+        self.ctv_private.Set(CON_IFACE,
+                             'Modems',
+                             dbus.Array([modem],
+                                        signature='o'))
+
+        self.ctv_modem0 = dbus.Interface(
+            self.session_con.get_object(CTV_IFACE, modem),
+            'org.freedesktop.DBus.Properties')
+        self.ctv_sim0 = dbus.Interface(
+            self.session_con.get_object(CTV_IFACE, sim),
+            'org.freedesktop.DBus.Properties')
+
+        if self.use_sims == 2:
+            sim2 = self.obj_ctv.AddSim("2345678901")
+            self.ctv_private.Set(CON_IFACE,
+                                 'Sims',
+                                 dbus.Array([sim, sim2],
+                                            signature='o'))
+            modem2 = self.obj_ctv.AddModem("1098765432", 2, sim2)
+            self.ctv_private.Set(CON_IFACE,
+                                 'Modems',
+                                 dbus.Array([modem, modem2],
+                                            signature='o'))
+
+            self.ctv_modem1 = dbus.Interface(
+                self.session_con.get_object(CTV_IFACE, modem2),
+                'org.freedesktop.DBus.Properties')
+            self.ctv_sim1 = dbus.Interface(
+                self.session_con.get_object(CTV_IFACE, sim2),
+                'org.freedesktop.DBus.Properties')
+
+        user_obj = '/user/foo'
+
+        self.accts_phone_props = {
+            'DefaultSimForCalls': dbus.String("/ril_0", variant_level=1),
+            'DefaultSimForMessages': dbus.String("/ril_1", variant_level=1),
+            'SimNames': dbus.Dictionary({}, signature='ss', variant_level=1)}
+
+        # start dbus system bus
+        self.mock_server = self.spawn_server(ACCOUNTS_IFACE, ACCOUNTS_OBJ,
+                                             ACCOUNTS_IFACE, system_bus=True,
+                                             stdout=subprocess.PIPE)
+        # give it time to ensure the mock is up
+        sleep(1)
+
+        self.wait_for_bus_object(ACCOUNTS_IFACE,
+                                 ACCOUNTS_OBJ,
+                                 system_bus=True)
+
+        self.dbus_mock = dbus.Interface(self.dbus_con.get_object(
+                                        ACCOUNTS_IFACE,
+                                        ACCOUNTS_OBJ,
+                                        ACCOUNTS_IFACE),
+                                        dbusmock.MOCK_IFACE)
+
+        # let accountservice find a user object path
+        self.dbus_mock.AddMethod(ACCOUNTS_IFACE, 'FindUserById', 'x', 'o',
+                                 'ret = "%s"' % user_obj)
+
+        self.dbus_mock.AddProperties(ACCOUNTS_PHONE_IFACE,
+                                     self.accts_phone_props)
+
+        # add getter and setter to mock
+        self.dbus_mock.AddMethods(
+            'org.freedesktop.DBus.Properties',
+            [
+                ('self.Get',
+                 's',
+                 'v',
+                 'ret = self.accts_phone_props[args[0]]'),
+                ('self.Set',
+                 'sv',
+                 '',
+                 'self.accts_phone_props[args[0]] = args[1]')
+            ])
+
+        # add user object to mock
+        self.dbus_mock.AddObject(
+            user_obj, ACCOUNTS_PHONE_IFACE, self.accts_phone_props,
+            [
+                (
+                    'GetDefaultSimForCalls', '', 'v',
+                    'ret = self.Get("%s", "DefaultSimForCalls")' %
+                    ACCOUNTS_PHONE_IFACE),
+                (
+                    'GetDefaultSimForMessages', '', 'v',
+                    'ret = self.Get("%s", "DefaultSimForMessages")' %
+                    ACCOUNTS_PHONE_IFACE),
+                (
+                    'GetSimNames', '', 'v',
+                    'ret = self.Get("%s", "SimNames")' %
+                    ACCOUNTS_PHONE_IFACE)
+            ])
+
+        self.obj_phone = self.dbus_con.get_object(ACCOUNTS_IFACE, user_obj,
+                                                  ACCOUNTS_IFACE)
+
         super(CellularBaseTestCase, self).setUp()
         self.cellular_page = self.main_view.go_to_cellular_page()
 
@@ -469,6 +585,13 @@ class CellularBaseTestCase(UbuntuSystemSettingsOfonoTestCase):
 
         for key, value in kwargs.items():
             context.SetProperty(key, value)
+
+    def tearDown(self):
+        self.ctv_mock.terminate()
+        self.ctv_mock.wait()
+        self.mock_server.terminate()
+        self.mock_server.wait()
+        super(CellularBaseTestCase, self).tearDown()
 
 
 class HotspotBaseTestCase(UbuntuSystemSettingsHotspotTestCase):

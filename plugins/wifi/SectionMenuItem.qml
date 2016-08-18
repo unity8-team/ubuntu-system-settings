@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 Canonical Ltd.
+ * Copyright 2013-2016 Canonical Ltd.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,37 +18,22 @@
  */
 
 import QtQuick 2.4
+import SystemSettings 1.0
 import Ubuntu.Components 1.3
-import Ubuntu.Components.ListItems 1.3 as ListItem
 
-BaseMenuItem {
-    id: menuItem
-    property alias text: header.text
-    property bool busy: false
+SettingsItemTitle {
+    property alias busy: indicator.running
 
-    implicitHeight: text !== "" ? header.height : 0
-
-    ListItem.Header {
-        id: header
-
-        height: units.gu(4)
+    ActivityIndicator {
+        id: indicator
         anchors {
-            left: parent.left
-            right: parent.right
             top: parent.top
+            topMargin: units.gu(3)
+            right: parent.right
+            rightMargin: units.gu(2)
         }
-        visible: text != ""
-
-        ActivityIndicator {
-            id: indicator
-            running: busy
-            anchors {
-                margins: units.gu(0.5)
-                right: parent.right
-            }
-            height: parent.height - (anchors.margins * 2)
-            width: height
-            anchors.verticalCenter: parent.verticalCenter
-        }
+        height: parent.height - (anchors.topMargin * 1.25)
+        width: height
+        visible: running
     }
 }

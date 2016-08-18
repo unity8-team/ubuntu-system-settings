@@ -1,5 +1,5 @@
 # -*- Mode: Python; coding: utf-8; indent-tabs-mode: nil; tab-width: 4 -*-
-# Copyright 2014 Canonical
+# Copyright 2014-2016 Canonical
 #
 # This program is free software: you can redistribute it and/or modify it
 # under the terms of the GNU General Public License version 3, as published
@@ -199,12 +199,12 @@ class SecurityTestCase(SecurityBaseTestCase):
         elif actTimeout is 60:
             self.assertEquals(
                 activityTimeout,
-                ('{:d} minute').format(int(actTimeout/60))
+                ('After {:d} minute').format(int(actTimeout/60))
             )
         else:
             self.assertEquals(
                 activityTimeout,
-                ('{:d} minutes').format(int(actTimeout/60))
+                ('After {:d} minutes').format(int(actTimeout/60))
             )
 
     def test_idle_never_timeout(self):

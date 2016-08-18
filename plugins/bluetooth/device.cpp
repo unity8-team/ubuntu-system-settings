@@ -27,6 +27,7 @@
 #include "dbus-shared.h"
 
 Device::Device(const QString &path, QDBusConnection &bus) :
+   m_name("unknown"),
    m_strength(Device::None)
 {
     initDevice(path, bus);
@@ -372,6 +373,8 @@ void Device::updateProperty(const QString &key, const QVariant &value)
         updateConnection();
     } else if (key == "Class") {
         setType(getTypeFromClass(value.toUInt()));
+    } else if (key == "Appearance") {
+        setType(getTypeFromAppearance(value.toUInt()));
     } else if (key == "Paired") {
         setPaired(value.toBool());
 
@@ -390,6 +393,22 @@ void Device::updateProperty(const QString &key, const QVariant &value)
         m_strength = getStrengthFromRssi(value.toInt());
         Q_EMIT(strengthChanged());
     }
+}
+
+/* Determine the Type from the bits in the Appearance field.
+   https://developer.bluetooth.org/gatt/characteristics/Pages/CharacteristicViewer.aspx?u=org.bluetooth.characteristic.gap.appearance.xml */
+Device::Type Device::getTypeFromAppearance(quint32 c)
+{
+    /* is it a HID class device? */
+    if (c & 0x03C0) {
+        switch (c & 0x000f) {
+        case 0x1:
+            return Type::Keyboard;
+        case 0x02:
+            return Type::Mouse;
+        }
+    }
+    return Type::Other;
 }
 
 /* Determine the Type from the bits in the Class of Device (CoD) field.

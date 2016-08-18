@@ -23,13 +23,22 @@
 #include <QtQml>
 #include <QtQml/QQmlContext>
 #include "brightness.h"
+#include "aethercast/aethercast_helper.h"
+#include "aethercast/displays.h"
+#include "aethercast/device.h"
 
 
 void BackendPlugin::registerTypes(const char *uri)
 {
     Q_ASSERT(uri == QLatin1String("Ubuntu.SystemSettings.Brightness"));
 
+    // Register additional QtDBus types we need
+    qDBusRegisterMetaType<InterfaceList>();
+    qDBusRegisterMetaType<ManagedObjectList>();
+
     qmlRegisterType<Brightness>(uri, 1, 0, "UbuntuBrightnessPanel");
+    qmlRegisterType<Device>(uri, 1, 0, "AethercastDevice");
+    qmlRegisterType<Displays>(uri, 1, 0, "AethercastDisplays");
 }
 
 void BackendPlugin::initializeEngine(QQmlEngine *engine, const char *uri)

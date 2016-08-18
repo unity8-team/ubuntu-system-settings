@@ -4,8 +4,15 @@
 # Uncomment this to turn on verbose mode.
 export DH_VERBOSE=1
 
+DEB_HOST_ARCH := $(shell dpkg-architecture -qDEB_HOST_ARCH)
+# Skip tests on the archs they are known to be broken with current configuration
+# Ref.: https://bugs.launchpad.net/ubuntu/+source/qtdeclarative-opensource-src/+bug/1606927
+testskip_architectures := powerpc
+
 include /usr/share/dpkg/buildflags.mk
 include /usr/share/dpkg/architecture.mk
+
+BUILDHOME=$(CURDIR)/debian/build
 
 override_dh_auto_configure:
 	# Debian defines CMAKE_INSTALL_LOCALSTATEDIR as /usr/var, which is wrong.
@@ -15,6 +22,16 @@ override_dh_auto_configure:
 override_dh_auto_build:
 	dh_auto_build
 	$(MAKE) -C obj-$(DEB_HOST_GNU_TYPE) pot
+
+override_dh_clean:
+	dh_clean
+	rm -rf $(BUILDHOME)
+
+override_dh_auto_test:
+ifneq ($(DEB_HOST_ARCH),$(findstring $(DEB_HOST_ARCH), $(testskip_architectures)))
+	mkdir -p $(BUILDHOME)
+	HOME=$(BUILDHOME) dh_auto_test
+endif
 
 override_dh_install:
 	cd tests/autopilot; \
