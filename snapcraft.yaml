@@ -1,0 +1,91 @@
+name: ubuntu-system-settings
+version: 0
+summary: The System Settings application for Ubuntu Touch.
+description: The System Settings application for Ubuntu Touch.
+confinement: devmode  # use "strict" to enforce system access only via declared interfaces
+apps:
+  ubuntu-system-settings:
+    command: bin/desktop-launch $SNAP/bin/launcher system-settings
+    plugs: [unity7, network, pulseaudio, home]
+parts:
+  ubuntu-system-settings:
+    plugin: cmake
+    source: .
+    build-packages:
+      - dbus-test-runner
+      - debhelper
+      - dh-migrations
+      - dh-python
+      - python3-setuptools
+      - python3-all
+      - gdb
+      - intltool
+      - libaccountsservice-dev
+      - libandroid-properties-dev
+      - libclick-0.4-dev
+      - libgeonames-dev
+      - libglib2.0-dev
+      - libevdev-dev
+      - libicu-dev
+      - libnm-glib-dev
+      - libpolkit-agent-1-dev
+      - libqmenumodel-dev
+      - libtrust-store-dev
+      - libudev-dev
+      - libunity-api-dev
+      - libupower-glib-dev
+      - pkg-config
+      - qml-module-qtcontacts
+      - qml-module-qtsysteminfo
+      - qml-module-ubuntu-connectivity
+      - qt5-default
+      - qtbase5-dev
+      - qtdeclarative5-dev
+      - qtdeclarative5-ubuntu-history0.1
+      - qtdeclarative5-ubuntu-keyboard-extensions0.1
+      - libapt-pkg-dev
+      - libgnome-desktop-3-dev
+      - libgsettings-qt-dev
+    stage-packages:
+      - accountsservice
+      - accountsservice-ubuntu-schemas
+      - aethercast
+      - bluez
+      - click
+      - dbus-property-service
+      - gsettings-desktop-schemas
+      - gsettings-ubuntu-schemas
+      - indicator-bluetooth
+      - indicator-datetime
+      - indicator-network
+      - indicator-power
+      - powerd
+      - qmenumodel-qml
+      - qml-module-biometryd
+      - qml-module-qt-labs-folderlistmodel
+      - qml-module-ubuntu-connectivity
+      - qml-module-qtmultimedia
+      - qtdeclarative5-gsettings1.0
+      - qtdeclarative5-ofono0.2
+      - qml-module-qtsysteminfo
+      - qtdeclarative5-ubuntu-content1
+      - qtdeclarative5-ubuntu-settings-components
+      - qtdeclarative5-ubuntu-ui-toolkit-plugin
+      - suru-icon-theme
+      - whoopsie-preferences
+      - libsystemsettings1
+      - system-image-dbus
+      - ubuntu-keyboard-data
+      - urfkill
+      - python3
+      - python3-gi
+      - python3-dbus
+      - python3-xdg
+      - gir1.2-glib-2.0
+    after: [desktop/qt5]
+
+  launcher:
+    plugin: copy
+    source: snap
+    files:
+      launcher: bin/launcher

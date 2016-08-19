@@ -1,0 +1,6 @@
+#!/bin/sh
+
+# Explicitly set APP_ID.
+export APP_ID=ubuntu-system-settings
+
+exec $@
