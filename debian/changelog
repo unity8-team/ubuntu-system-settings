@@ -1,3 +1,15 @@
+ubuntu-system-settings (0.4+16.10.20160819-0ubuntu1) yakkety; urgency=medium
+
+  [ Ken VanDine ]
+  * Fixes for failing autopilot tests
+
+  [ jonas-drange ]
+  * Port most autopilot tests in test_wifi to qml tests and ctests.
+  * patch environment with required maliit variable whenever we use
+    osk.dismiss()
+
+ -- Jonas G. Drange <jonas.drange@canonical.com>  Fri, 19 Aug 2016 12:50:21 +0000
+
 ubuntu-system-settings (0.4+16.10.20160817.2-0ubuntu1) yakkety; urgency=medium
 
   [ jonas-drange ]
