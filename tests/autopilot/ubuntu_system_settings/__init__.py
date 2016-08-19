@@ -1759,6 +1759,7 @@ class VpnEditor(
 
     @autopilot.logging.log_action(logger.debug)
     def set_openvpn_file(self, field, paths):
+        utils.dismiss_osk()
         self.get_root_instance().main_view.scroll_to_and_click(field)
 
         # Wait for expanded animation.
@@ -1767,6 +1768,7 @@ class VpnEditor(
         # file = field.wait_select_single(objectName='vpnFileSelectorItem0')
         choose = field.wait_select_single(objectName='vpnFileSelectorItem1')
         self.pointing_device.click_object(choose)
+        self.get_root_instance().main_view.scroll_to_and_click(choose)
         file_dialog = self.get_root_instance().wait_select_single(
             objectName='vpnDialogFile'
         )
