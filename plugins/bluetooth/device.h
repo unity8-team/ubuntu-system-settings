@@ -142,7 +142,7 @@ public:
     Device() {}
     Device(const QString &path, QDBusConnection &bus);
     ~Device() {}
-    bool isValid() const { return getType() != Type::Other; }
+    bool isValid() const { return true; }
     void pair();
     Q_INVOKABLE void cancelPairing();
     void connect();
@@ -161,6 +161,7 @@ public:
     void updateProperties(QSharedPointer<QDBusInterface>);
     void updateProperty(const QString &key, const QVariant &value);
     static Type getTypeFromClass(quint32 bluetoothClass);
+    static Type getTypeFromAppearance(quint32 bluetoothClass);
     Device::Strength getStrengthFromRssi(int rssi);
     void connectAfterPairing();
 };

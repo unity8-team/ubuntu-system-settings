@@ -1,7 +1,7 @@
 
 # -*- Mode: Python; coding: utf-8; indent-tabs-mode: nil; tab-width: 4 -*-
 #
-# Copyright (C) 2014, 2015 Canonical Ltd.
+# Copyright (C) 2014-2016 Canonical Ltd.
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU Lesser General Public License as published by
@@ -154,6 +154,13 @@ class SystemSettingsMainWindow(ubuntuuitoolkit.MainView):
     def scroll_to_and_click(self, obj):
         self.scroll_to(obj)
         self.pointing_device.click_object(obj)
+
+    def click_header_action(self, action):
+        """Click the action 'action' on the header"""
+        main_view = self.get_root_instance().select_single(
+            objectName='systemSettingsMainView')
+        header = main_view.select_single('AppHeader')
+        header.click_action_button(action)
 
     @property
     def system_settings_page(self):
@@ -1821,7 +1828,7 @@ class PreviousNetworks(
 
     @autopilot.logging.log_action(logger.debug)
     def _select_network(self, name):
-        net = self.select_single('Standard', text=name)
+        net = self.select_single('StandardProgression', text=name)
         self.pointing_device.click_object(net)
 
 

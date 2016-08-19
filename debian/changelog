@@ -1,3 +1,86 @@
+ubuntu-system-settings (0.4+16.10.20160817-0ubuntu1) yakkety; urgency=medium
+
+  * Switch the powerd depends to repowerd. powerd is now a transitional
+    _all package so gets unconditionally evaluated which is not the
+    purpose. (LP: #1612646)
+
+ -- Timo Jyrinki <timo.jyrinki@canonical.com>  Wed, 17 Aug 2016 09:23:42 +0000
+
+ubuntu-system-settings (0.4+16.10.20160811.2-0ubuntu1) yakkety; urgency=medium
+
+  * Skip tests on powerpc due to Qt 5.6 bug (LP: #1606927)
+  * Make device always valid.
+
+ -- Konrad Zapałowicz <konrad.zapalowicz@canonical.com>  Thu, 11 Aug 2016 12:37:40 +0000
+
+ubuntu-system-settings (0.4+16.10.20160810-0ubuntu1) yakkety; urgency=medium
+
+  * Skip tests on powerpc due to Qt 5.6 bug (LP: #1606927)
+  * Depend on upstart to prevent s390x problems until upstart has been
+    fixed.
+  * bluetooth: Add Apperance characteristic to type conversion
+
+ -- Konrad Zapałowicz <konrad.zapalowicz@canonical.com>  Wed, 10 Aug 2016 13:17:54 +0000
+
+ubuntu-system-settings (0.4+16.10.20160808-0ubuntu2) yakkety; urgency=medium
+
+  * Readd the upstart workaround by doing a rebuild from trunk.
+
+ -- Timo Jyrinki <timo-jyrinki@ubuntu.com>  Wed, 10 Aug 2016 15:09:25 +0300
+
+ubuntu-system-settings (0.4+16.10.20160808-0ubuntu1) yakkety; urgency=medium
+
+  [ Simon Fels ]
+  * Fixes for Aethercast support
+
+ -- morphis <simon.fels@canonical.com>  Mon, 08 Aug 2016 08:59:08 +0000
+
+ubuntu-system-settings (0.4+16.10.20160730-0ubuntu2) yakkety; urgency=medium
+
+  * No change rebuild
+  * Depend on upstart to prevent s390x problems until upstart has been fixed.
+
+ -- Timo Jyrinki <timo-jyrinki@ubuntu.com>  Tue, 09 Aug 2016 15:38:18 +0300
+
+ubuntu-system-settings (0.4+16.10.20160730-0ubuntu1) yakkety; urgency=medium
+
+  [ Lukáš Tinkl ]
+  * Fixes for indicator-keyboard (gsettings compat, HW kbd panel
+    shortcut)
+
+  [ Michał Sawicz ]
+  * Skip tests on powerpc due to Qt 5.6 bug (LP: #1606927)
+
+ -- Lukáš Tinkl <lukas.tinkl@canonical.com>  Sat, 30 Jul 2016 21:20:18 +0000
+
+ubuntu-system-settings (0.4+16.10.20160722.1-0ubuntu1) yakkety; urgency=medium
+
+  [ Ken VanDine ]
+  * Added missing depends on qtdeclarative5-ubuntu-history0.1, qml-
+    module-qtcontacts and qtdeclarative5-ubuntu-keyboard-extensions0.1
+  * Ported to use Slots layout and updated visuals (LP: #1596529)
+
+  [ Ken VanDine, jonas-drange ]
+  * new module SystemSettings.ListItems
+
+  [ Olivier Tilloy ]
+  * Fix unit tests when run under an sbuild chroot. (LP: #1592475)
+
+  [ jonas-drange ]
+  * Do runtime check of address list size.
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Fri, 22 Jul 2016 14:39:12 +0000
+
+ubuntu-system-settings (0.4+16.10.20160708-0ubuntu1) yakkety; urgency=medium
+
+  [ Arthur Mello ]
+  * Implement extended Notifications panel using Gsettings to store
+    notifications settings for each app
+  * Skip tests on arm64 as it is known to be flaky with current
+    configuration
+
+ -- Arthur Renato Mello <arthur.mello@canonical.com>  Fri, 08 Jul 2016 22:19:17 +0000
+
 ubuntu-system-settings (0.4+16.10.20160624-0ubuntu1) yakkety; urgency=medium
 
   [ Antti Kaijanmäki ]
