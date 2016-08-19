@@ -40,8 +40,14 @@
 typedef QMap<QString,QVariantMap> ConfigurationData;
 Q_DECLARE_METATYPE(ConfigurationData)
 
-WifiDbusHelper::WifiDbusHelper(QObject *parent) : QObject(parent),
-    m_systemBusConnection(QDBusConnection::systemBus())
+WifiDbusHelper::WifiDbusHelper(QObject *parent)
+    : WifiDbusHelper(QDBusConnection::systemBus(), parent)
+{
+}
+
+WifiDbusHelper::WifiDbusHelper(const QDBusConnection &dbus, QObject *parent)
+    : QObject(parent)
+    , m_systemBusConnection(dbus)
 {
     qDBusRegisterMetaType<ConfigurationData>();
 }
@@ -194,7 +200,7 @@ void WifiDbusHelper::connect(QString ssid, int security, int auth, QStringList u
         QDBusInterface iface(NM_SERVICE,
                              d.path(),
                              NM_DEVICE_IFACE,
-                             QDBusConnection::systemBus());
+                             m_systemBusConnection);
 
         auto type_v = iface.property("DeviceType");
         if (type_v.toUInt() == 2 /* NM_DEVICE_TYPE_WIFI */) {
@@ -206,7 +212,7 @@ void WifiDbusHelper::connect(QString ssid, int security, int auth, QStringList u
             QDBusInterface wiface(NM_SERVICE,
                                   d.path(),
                                   NM_DEVICE_WIRELESS_IFACE,
-                                  QDBusConnection::systemBus());
+                                  m_systemBusConnection);
 
             // Get a list of access points and use ssid to find the
             // one we're trying to connect to.
@@ -229,7 +235,7 @@ void WifiDbusHelper::connect(QString ssid, int security, int auth, QStringList u
                     QDBusInterface aiface(NM_SERVICE,
                                           ap_list[i].path(),
                                           NM_AP_IFACE,
-                                          QDBusConnection::systemBus());
+                                          m_systemBusConnection);
 
                     auto ssid_v = aiface.property("Ssid");
 
@@ -484,7 +490,7 @@ QList<QStringList> WifiDbusHelper::getPreviouslyConnectedWifiNetworks() {
     OrgFreedesktopNetworkManagerSettingsInterface foo
             (NM_SERVICE,
              "/org/freedesktop/NetworkManager/Settings",
-             QDBusConnection::systemBus());
+             m_systemBusConnection);
     auto reply = foo.ListConnections();
     reply.waitForFinished();
     if (reply.isValid()) {
@@ -520,7 +526,7 @@ void WifiDbusHelper::forgetConnection(const QString dbus_path) {
     OrgFreedesktopNetworkManagerSettingsConnectionInterface bar
             (NM_SERVICE,
              dbus_path,
-             QDBusConnection::systemBus());
+             m_systemBusConnection);
     auto reply = bar.Delete();
     reply.waitForFinished();
     if(!reply.isValid()) {

@@ -51,8 +51,9 @@ Item {
             compare(area.message, i18n.tr("Double-clicked"));
         }
         function test_double_click_fail() {
+            var timer = findInvisibleChild(testRoot, "clickTimer");
             mouseClick(area);
-            wait(220);
+            tryCompare(timer, "running", false);
             mouseClick(area);
             compare(area.message, i18n.tr("Not fast enough"));
         }

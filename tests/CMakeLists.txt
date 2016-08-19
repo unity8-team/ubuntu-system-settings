@@ -66,7 +66,7 @@ add_test(NAME test_push_helper COMMAND "${CMAKE_CURRENT_BINARY_DIR}/test_push_he
 
 add_subdirectory(utils)
 
-# QML tests that require graphical capabitlies.
+# QML tests that require graphical capabilities.
 add_custom_target(qmluitests)
 add_dependencies(qmluitests UbuntuTest)
 
