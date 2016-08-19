@@ -887,6 +887,10 @@ class SystemUpdatesPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
                 return True
         return False
 
+    def stop_check(self):
+        btn = self.select_single(objectName='updatesGlobalStopButton')
+        self.pointing_device.click_object(btn)
+
 
 class PhonePage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
 

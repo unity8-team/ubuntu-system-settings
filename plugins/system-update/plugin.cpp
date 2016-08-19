@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013-2014 Canonical Ltd
+ * Copyright (C) 2013-2016 Canonical Ltd
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as
@@ -15,33 +15,47 @@
  *
  * Authors:
  * Didier Roche <didier.roche@canonical.com>
+ * Jonas G. Drange <jonas.drange@canonical.com>
  *
 */
 
 #include "plugin.h"
+#include "systemimage.h"
+#include "update.h"
+#include "updatemodel.h"
+#include "updatemanager.h"
 
 #include <QtQml>
 #include <QtQml/QQmlContext>
-#include "update_manager.h"
-#include "system_update.h"
-#include "update.h"
-#include "download_tracker.h"
 
 using namespace UpdatePlugin;
+
+static QObject *siSingletonProvider(QQmlEngine *engine, QJSEngine *scriptEngine)
+{
+    Q_UNUSED(engine)
+    Q_UNUSED(scriptEngine)
+    return new QSystemImage;
+}
+
+static QObject *umSingletonProvider(QQmlEngine *engine, QJSEngine *scriptEngine)
+{
+    Q_UNUSED(engine)
+    Q_UNUSED(scriptEngine)
+    return new UpdateManager;
+}
 
 void BackendPlugin::registerTypes(const char *uri)
 {
     Q_ASSERT(uri == QLatin1String("Ubuntu.SystemSettings.Update"));
-
-    qmlRegisterType<SystemUpdate>(uri, 1, 0, "SystemUpdate");
-    qmlRegisterType<Update>(uri, 1, 0, "Update");
-    qmlRegisterType<DownloadTracker>(uri, 1, 0, "DownloadTracker");
-}
-
-void BackendPlugin::initializeEngine(QQmlEngine *engine, const char *uri)
-{
-    QQmlExtensionPlugin::initializeEngine(engine, uri);
-    QQmlContext* context = engine->rootContext();
-    context->setContextProperty("UpdateManager",
-                                UpdateManager::instance());
+    qmlRegisterUncreatableType<Update>(
+        uri, 1, 0, "Update", "Only provided for enums."
+    );
+    qmlRegisterSingletonType<QSystemImage>(
+        uri, 1, 0, "SystemImage", siSingletonProvider
+    );
+    qmlRegisterSingletonType<UpdateManager>(
+        uri, 1, 0, "UpdateManager", umSingletonProvider
+    );
+    qRegisterMetaType<UpdateModel*>("UpdateModel*");
+    qRegisterMetaType<UpdateModelFilter*>("UpdateModelFilter*");
 }
