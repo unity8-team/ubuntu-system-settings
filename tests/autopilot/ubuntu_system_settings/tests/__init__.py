@@ -661,13 +661,13 @@ class StorageBaseTestCase(AboutBaseTestCase):
         super(StorageBaseTestCase, self).setUp()
         self.main_view.click_item('storageItem')
         self.storage_page = self.main_view.select_single(
-            'Storage', objectName='storagePage'
+            objectName='storagePage'
         )
         self.assertThat(self.storage_page.active, Eventually(Equals(True)))
 
     def assert_space_item(self, object_name, text):
         """ Checks whether an space item exists and returns a value """
-        item = self.main_view.storage_page.select_single(
+        item = self.main_view.storage_page.wait_select_single(
             objectName=object_name
         )
         self.assertThat(item, NotEquals(None))
