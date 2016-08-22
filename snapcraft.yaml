@@ -2,13 +2,16 @@ name: ubuntu-system-settings
 version: 0
 summary: The System Settings application for Ubuntu Touch.
 description: The System Settings application for Ubuntu Touch.
-confinement: devmode  # use "strict" to enforce system access only via declared interfaces
+# confinement: devmode  # use "strict" to enforce system access only via declared interfaces
+confinement: strict
 apps:
   ubuntu-system-settings:
-    command: bin/desktop-launch $SNAP/bin/launcher system-settings
-    plugs: [unity7, network, pulseaudio, home]
+    command: desktop-launch launcher system-settings
+    plugs: [unity7, network, pulseaudio, home, gsettings, opengl]
+
 parts:
   ubuntu-system-settings:
+    configflags: [-DCMAKE_INSTALL_PREFIX=/usr]
     plugin: cmake
     source: .
     build-packages:

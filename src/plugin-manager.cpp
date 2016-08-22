@@ -29,6 +29,7 @@
 #include <QQmlContext>
 #include <QQmlEngine>
 #include <QStringList>
+#include <QtGlobal>
 
 using namespace SystemSettings;
 
@@ -80,7 +81,7 @@ void PluginManagerPrivate::reload()
 {
     Q_Q(PluginManager);
     clear();
-    QDir path(baseDir, "*.settings");
+    QDir path(qgetenv("SNAP").append(baseDir), "*.settings");
 
     /* Use an environment variable USS_SHOW_ALL_UI to show unfinished / beta /
      * deferred components or panels */

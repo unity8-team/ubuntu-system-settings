@@ -1,5 +1,18 @@
 #!/bin/sh
 
+export ARCH="x86_64-linux-gnu"
+
+# Art directory
+# export SYSTEM_SETTINGS_UBUNTU_ART_DIR=/
+
+# XKB config
+export XKB_CONFIG_ROOT=$SNAP/usr/share/X11/xkb
+
+# Qt Modules
+#export QT_PLUGIN_PATH=$SNAP/usr/lib/$ARCH/qt5/plugins
+export QML2_IMPORT_PATH=$QML2_IMPORT_PATH:$SNAP/usr/lib/$ARCH/ubuntu-system-settings/private/
+export QML2_IMPORT_PATH=$QML2_IMPORT_PATH:$SNAP/usr/share/ubuntu/settings/system/qml-plugins/
+
 # Explicitly set APP_ID.
 export APP_ID=ubuntu-system-settings
 

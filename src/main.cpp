@@ -28,6 +28,7 @@
 #include <QQmlContext>
 #include <QUrl>
 #include <QQuickView>
+#include <QtGlobal>
 #include <QtQml>
 #include <QtQml/QQmlDebuggingEnabler>
 static QQmlDebuggingEnabler debuggingEnabler(false);
@@ -88,10 +89,11 @@ int main(int argc, char **argv)
     qmlRegisterType<SystemSettings::PluginManager>("SystemSettings", 1, 0, "PluginManager");
     view.engine()->rootContext()->setContextProperty("Utilities", &utils);
     view.setResizeMode(QQuickView::SizeRootObjectToView);
-    view.engine()->addImportPath(PLUGIN_PRIVATE_MODULE_DIR);
-    view.engine()->addImportPath(PLUGIN_QML_DIR);
+    view.engine()->addImportPath(qgetenv("SNAP").append(PLUGIN_PRIVATE_MODULE_DIR));
+    view.engine()->addImportPath(qgetenv("SNAP").append(PLUGIN_QML_DIR));
     view.rootContext()->setContextProperty("defaultPlugin", defaultPlugin);
-    view.rootContext()->setContextProperty("i18nDirectory", I18N_DIRECTORY);
+    view.rootContext()->setContextProperty(
+        "i18nDirectory", qgetenv("SNAP").append(I18N_DIRECTORY));
     view.rootContext()->setContextProperty("pluginOptions", pluginOptions);
     view.rootContext()->setContextProperty("view", &view);
     view.setSource(QUrl("qrc:/qml/MainWindow.qml"));

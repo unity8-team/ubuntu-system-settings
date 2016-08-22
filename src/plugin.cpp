@@ -30,6 +30,7 @@
 #include <QQmlContext>
 #include <QQmlEngine>
 #include <QStringList>
+#include <QtGlobal>
 #include <QVariantMap>
 
 #include <SystemSettings/ItemBase>
@@ -102,7 +103,8 @@ bool PluginPrivate::ensureLoaded() const
     if (plugin.isEmpty())
         return false;
 
-    QString name = QString("%1/lib%2.so").arg(pluginModuleDir).arg(plugin);
+    auto moduleDir = QString(qgetenv("SNAP").append(pluginModuleDir));
+    QString name = QString("%1/lib%2.so").arg(moduleDir).arg(plugin);
 
     m_loader.setFileName(name);
     if (Q_UNLIKELY(!m_loader.load())) {
@@ -143,7 +145,7 @@ QUrl PluginPrivate::componentFromSettingsFile(const QString &key) const
     QUrl componentUrl = m_data.value(key).toString();
     if (!componentUrl.isEmpty()) {
         if (componentUrl.isRelative()) {
-            QDir dir(pluginQmlDir);
+            QDir dir(qgetenv("SNAP").append(pluginQmlDir));
             if (dir.cd(m_baseName)) {
                 componentUrl =
                     QUrl::fromLocalFile(dir.filePath(componentUrl.path()));
