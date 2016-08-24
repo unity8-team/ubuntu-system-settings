@@ -7,7 +7,16 @@ confinement: strict
 apps:
   ubuntu-system-settings:
     command: desktop-launch launcher system-settings
-    plugs: [unity7, network, pulseaudio, home, gsettings, opengl]
+    plugs:
+      - unity7
+      - network
+      - pulseaudio
+      - home
+      - gsettings
+      - opengl
+      - timezone-control
+      - timeserver-control
+      - network-manager
 
 parts:
   ubuntu-system-settings:

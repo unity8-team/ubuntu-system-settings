@@ -39,6 +39,7 @@
 #include <QJsonObject>
 #include <QtCore/QStorageInfo>
 #include <QtCore/QSharedPointer>
+#include <QtGlobal>
 #include <QProcess>
 #include <QVariant>
 #include <hybris/properties/properties.h>
@@ -195,7 +196,7 @@ QString StorageAbout::ubuntuBuildID()
 {
     if (m_ubuntuBuildID.isEmpty() || m_ubuntuBuildID.isNull())
     {
-        QFile file("/etc/media-info");
+        QFile file(qgetenv("SNAP").append("/etc/media-info"));
         if (!file.exists())
             return "";
         file.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -229,7 +230,7 @@ QString StorageAbout::licenseInfo(const QString &subdir) const
     QString copyright = "/usr/share/doc/" + subdir + "/copyright";
     QString copyrightText;
 
-    QFile file(copyright);
+    QFile file(qgetenv("SNAP").append(copyright));
     if(!file.open(QIODevice::ReadOnly | QIODevice::Text))
         return QString();
     copyrightText = QString(file.readAll());
@@ -333,7 +334,7 @@ void StorageAbout::prepareMountedVolumes()
             /* Only check devices once */
             if (checked.contains(drive))
                 continue;
-             
+
             checked.append(drive);
             QString devicePath(getDevicePath(drive));
             if (devicePath.isEmpty() || m_mountedVolumes.contains(drive))
