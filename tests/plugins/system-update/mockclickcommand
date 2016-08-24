@@ -1,6 +1,6 @@
 #! /bin/sh
 """:"
-exec python $0 ${1+"$@"}
+exec python3 $0 ${1+"$@"}
 """
 import os
 
