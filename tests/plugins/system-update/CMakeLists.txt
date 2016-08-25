@@ -27,7 +27,7 @@ target_link_libraries(tst-clickclient ${PLUGIN_LIBS})
 set_tests_properties(
     tst-clickclient
         PROPERTIES
-        ENVIRONMENT "IGNORE_CREDENTIALS=1;URL_APPS=http://127.0.0.1:9009/metadata;QT_QPA_PLATFORM=minimal"
+        ENVIRONMENT "IGNORE_CREDENTIALS=1"
 )
 
 add_executable(tst-tokendownloader tst_tokendownloader.cpp)
@@ -36,7 +36,7 @@ target_link_libraries(tst-tokendownloader ${PLUGIN_LIBS})
 set_tests_properties(
     tst-tokendownloader
         PROPERTIES
-        ENVIRONMENT "IGNORE_CREDENTIALS=1;URL_APPS=http://127.0.0.1:9009/metadata;"
+        ENVIRONMENT "IGNORE_CREDENTIALS=1"
 )
 
 add_executable(tst-clickmanager tst_clickmanager.cpp)

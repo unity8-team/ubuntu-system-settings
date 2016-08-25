@@ -63,7 +63,7 @@ private slots:
     void testTokenRequestSuccess()
     {
         QSignalSpy tokenRequestSucceededSpy(m_instance, SIGNAL(tokenRequestSucceeded(const QString)));
-        QUrl query("http://localhost:9009/download");
+        QUrl query(QString("%1/download").arg(m_url));
         m_instance->requestToken(query);
         QVERIFY(tokenRequestSucceededSpy.wait());
         QList<QVariant> args = tokenRequestSucceededSpy.takeFirst();
@@ -72,7 +72,7 @@ private slots:
     void testTokenRequestFailure()
     {
         QSignalSpy credentialErrorSpy(m_instance, SIGNAL(tokenRequestSucceeded(const QString)));
-        QUrl query("http://localhost:9009/403");
+        QUrl query(QString("%1/403").arg(m_url));
         m_instance->requestToken(query);
         QVERIFY(credentialErrorSpy.wait());
         QCOMPARE(credentialErrorSpy.count(), 1);
@@ -96,7 +96,7 @@ private slots:
         QSignalSpy metadataRequestSucceededSpy(
             m_instance, SIGNAL(metadataRequestSucceeded(const QJsonArray&))
         );
-        QUrl query("http://localhost:9009/metadata");
+        QUrl query(QString("%1/metadata").arg(m_url));
         m_instance->requestMetadata(query, names);
         QVERIFY(metadataRequestSucceededSpy.wait());
         QCOMPARE(metadataRequestSucceededSpy.count(), 1);
@@ -104,7 +104,7 @@ private slots:
     void testMetadataRequestAuthFailure()
     {
         QSignalSpy credentialErrorSpy(m_instance, SIGNAL(credentialError()));
-        QUrl query("http://localhost:9009/403");
+        QUrl query(QString("%1/403").arg(m_url));
         m_instance->requestMetadata(query, QList<QString>());
         QVERIFY(credentialErrorSpy.wait());
         QCOMPARE(credentialErrorSpy.count(), 1);
@@ -112,7 +112,7 @@ private slots:
     void testMetadataRequestNotFoundFailure()
     {
         QSignalSpy serverErrorSpy(m_instance, SIGNAL(serverError()));
-        QUrl query("http://localhost:9009/404");
+        QUrl query(QString("%1/404").arg(m_url));
         m_instance->requestMetadata(query, QList<QString>());
         QVERIFY(serverErrorSpy.wait());
         QCOMPARE(serverErrorSpy.count(), 1);
@@ -125,7 +125,7 @@ private slots:
         // We only want “a” to receive a signal.
         QSignalSpy aSuccessSpy(a, SIGNAL(tokenRequestSucceeded(const QString)));
         QSignalSpy bSuccessSpy(b, SIGNAL(tokenRequestSucceeded(const QString)));
-        QUrl query("http://localhost:9009/download");
+        QUrl query(QString("%1/download").arg(m_url));
         a->requestToken(query);
         QVERIFY(aSuccessSpy.wait());
         QCOMPARE(aSuccessSpy.count(), 1);
@@ -146,7 +146,7 @@ private slots:
         QSignalSpy bSuccessSpy(
             b, SIGNAL(metadataRequestSucceeded(const QJsonArray&))
         );
-        QUrl query("http://localhost:9009/metadata");
+        QUrl query(QString("%1/metadata").arg(m_url));
         a->requestMetadata(query, QList<QString>());
         QVERIFY(aSuccessSpy.wait());
         QCOMPARE(aSuccessSpy.count(), 1);
@@ -160,6 +160,6 @@ private:
     Network::Manager *m_nam = nullptr;
 };
 
-QTEST_MAIN(TstClickApiClient)
+QTEST_GUILESS_MAIN(TstClickApiClient)
 #include "tst_clickclient.moc"
 

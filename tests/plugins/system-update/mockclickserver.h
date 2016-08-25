@@ -25,6 +25,10 @@ protected:
         for (int i = 0; i < 5; i++) {
             QString out(m_mockclickserver.readAllStandardOutput());
             if (out.contains("Started")) {
+                m_url = QString("http://127.0.0.1:%1").arg(m_port);
+                if (!qputenv("URL_APPS", m_url.toLatin1())) {
+                    QFAIL("Could not set URL_APPS.");
+                }
                 return;
             }
             QTest::qWait(1000);
@@ -50,6 +54,7 @@ protected:
     }
 
     QProcess m_mockclickserver;
+    QString m_url = QString::null;
     uint m_port = 9009;
     uint m_retries = 0;
 };
