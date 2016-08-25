@@ -277,6 +277,7 @@ private slots:
 
         Q_FOREACH(auto update, markedInstalled) {
             QVERIFY(m_model->get(update)->installed());
+            QVERIFY(m_model->get(update)->updatedAt().isValid());
         }
         Q_FOREACH(auto update, uninstalled) {
             QVERIFY(!m_model->get(update)->installed());

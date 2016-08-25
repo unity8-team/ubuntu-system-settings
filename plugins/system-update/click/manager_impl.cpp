@@ -302,6 +302,10 @@ void ManagerImpl::synchronize(
             /* The local version of a click in the manifest, matched exactly a
             a remote version in one of our db updates. */
             if (manifestUpdate->localVersion() == dbUpdate->remoteVersion()) {
+                // We can't know when it was updated, so now() will have to do.
+                if (!dbUpdate->updatedAt().isValid()) {
+                    dbUpdate->setUpdatedAt(QDateTime::currentDateTimeUtc());
+                }
                 dbUpdate->setState(Update::State::StateInstallFinished);
                 dbUpdate->setInstalled(true);
                 dbUpdate->setDownloadId("");
