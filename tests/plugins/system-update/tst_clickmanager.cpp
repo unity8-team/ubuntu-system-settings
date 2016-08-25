@@ -27,6 +27,7 @@
 #include "plugins/system-update/faketokendownloader.h"
 #include "plugins/system-update/faketokendownloader_factory.h"
 
+#include <QDateTime>
 #include <QDir>
 #include <QJsonArray>
 #include <QJsonParseError>
@@ -512,6 +513,27 @@ private slots:
     void testRetryWithoutHavingRunCheck()
     {
         // Verify that a SessionToken is requested even if a check has not run.
+    }
+    void testSynchronizationDoesNotOverwriteUpdatedAt()
+    {
+        // Fix for lp:1616800
+        auto update = createUpdate("a", 0);
+        auto updatedAt = QDateTime(QDate(2016, 2, 29), QTime(18, 0), Qt::UTC);
+        update->setRemoteVersion("v1");
+        update->setInstalled(true);
+        update->setUpdatedAt(updatedAt);
+        m_model->add(update);
+
+        /* Trigger synchronization using data to indicate that a.0 was
+        installed. */
+        QByteArray manifest("[{"
+            "\"name\": \"a\","
+            "\"version\": \"v1\""
+        "}]");
+        m_mockmanifest->mockSuccess(JSONfromQByteArray(manifest));
+
+        auto dbUpdated = m_model->get("a", 0);
+        QCOMPARE(update->updatedAt(), dbUpdated->updatedAt());
     }
 private:
     // Create JSON Array from a QByteArray.
