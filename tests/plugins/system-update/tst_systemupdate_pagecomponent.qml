@@ -302,15 +302,6 @@ Item {
                 return !!findChild(testRoot, "installationFailed");
             }, false);
         }
-
-        // OTA updates are branded as such.
-        function test_otaUpdate() {
-            UpdateManager.model.mockAddUpdate("ubuntu", 1, Update.KindImage);
-            SystemImage.mockVersionTag("OTA-1");
-            UpdateManager.cancel();
-            var delegate = findChild(instance, "imageUpdatesDelegate-0");
-            compare(delegate.version, "OTA-1");
-        }
     }
 
     UbuntuTestCase {
