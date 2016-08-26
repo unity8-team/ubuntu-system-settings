@@ -1,3 +1,14 @@
+ubuntu-system-settings (0.4+16.10.20160826-0ubuntu1) yakkety; urgency=medium
+
+  [ jonas-drange ]
+  * versionTag refers to the currently installed OTA, not a pending
+    image update, so remove it (LP: #1616093)
+  * fix cases where check label is really long (via translations) (LP:
+    #1616099)
+  * do not overwrite updatedAt (LP: #1616800)
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Fri, 26 Aug 2016 14:41:25 +0000
+
 ubuntu-system-settings (0.4+16.10.20160824.1-0ubuntu1) yakkety; urgency=medium
 
   [ Florian Boucault ]
