@@ -293,5 +293,16 @@ Item {
             if (data.batchMode) instance.batchMode = data.batchMode
             compare(instance.hidden, data.hidden, "had wrong visibility");
         }
+
+        function test_longCheckLabel() {
+            // Prerequisites for the global area to be visible.
+            instance.status = true;
+            instance.online = true;
+            instance.updatesCount = true;
+
+            var checkLabel = findChild(instance, "checkLabel");
+            checkLabel.text = "Really really really really really long translated string";
+            verify(checkLabel.width < checkLabel.implicitWidth, "global area was too wide");
+        }
     }
 }

@@ -78,6 +78,9 @@ Item {
         }
 
         Label {
+            objectName: "checkLabel"
+            Layout.fillWidth: true
+            elide: Text.ElideRight
             text: i18n.tr("Checking for updates…")
         }
 
