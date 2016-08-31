@@ -221,8 +221,7 @@ ItemPage {
                         width: imageUpdateCol.width
                         updateState: model.updateState
                         progress: model.progress
-                        version: SystemImage.versionTag ?
-                                 SystemImage.versionTag : remoteVersion
+                        version: remoteVersion
                         size: model.size
                         changelog: model.changelog
                         error: model.error
