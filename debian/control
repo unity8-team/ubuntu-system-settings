@@ -104,6 +104,7 @@ Depends: ${misc:Depends},
          libsystemsettings1 (= ${binary:Version}),
          system-image-dbus (>= 3.1),
          ubuntu-keyboard-data (>= 0.99.trunk.phablet2+15.04.20150421),
+         ubuntu-wallpapers,
          urfkill,
 # for the session-migration script (python3 itself also for the push helper)
          python3,
