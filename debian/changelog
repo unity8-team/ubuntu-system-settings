@@ -1,3 +1,10 @@
+ubuntu-system-settings (0.4+16.10.20160901-0ubuntu1) yakkety; urgency=medium
+
+  [ You-Sheng Yang ]
+  * Build about plugin on arm64. (LP: #1618157)
+
+ -- Łukasz Zemczak <lukasz.zemczak@canonical.com>  Thu, 01 Sep 2016 11:55:06 +0000
+
 ubuntu-system-settings (0.4+16.10.20160826-0ubuntu1) yakkety; urgency=medium
 
   [ jonas-drange ]
