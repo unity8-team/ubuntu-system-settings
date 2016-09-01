@@ -7,16 +7,9 @@
 
 from __future__ import absolute_import
 
-from autopilot.introspection.dbus import StateNotFoundError
-from autopilot.matchers import Eventually
 from fixtures import EnvironmentVariable
-from testtools.matchers import Equals, NotEquals, raises
-
+from testtools.matchers import NotEquals
 from ubuntu_system_settings.tests import SystemUpdatesBaseTestCase
-from unittest import skip
-
-
-""" Tests for Ubuntu System Settings """
 
 
 class SystemUpdatesTestCases(SystemUpdatesBaseTestCase):
@@ -32,101 +25,11 @@ class SystemUpdatesTestCases(SystemUpdatesBaseTestCase):
         self.useFixture(
             EnvironmentVariable("IGNORE_CREDENTIALS", "True"))
         self.useFixture(
-            EnvironmentVariable("AUTOPILOT_ENABLED", "AUTOPILOT_ENABLED"))
-        self.useFixture(
-            EnvironmentVariable("IGNORE_UPDATES", "IGNORE_UPDATES"))
-        self.useFixture(
-            EnvironmentVariable("URL_APPS", "http://localhost:9009"))
+            EnvironmentVariable("URL_APPS", "http://0.0.0.0:9009/metadata"))
         super(SystemUpdatesTestCases, self).setUp()
-
-    def test_show_updates(self):
-        """ Checks whether Search box actually filters the results """
-        updates = self.system_settings.main_view.updates_page
-        self.assertThat(updates, NotEquals(None))
-        # Move to text field
-        self.system_settings.main_view.scroll_to_and_click(updates)
-
-    def test_updates_not_in_main(self):
-        """Check that the updates notification is shown in main."""
-        self.assertThat(lambda: self.system_settings.main_view.select_single(
-            objectName='entryComponent-updates'), raises(StateNotFoundError))
-
-    def test_configuration(self):
-        """Check the configuration button."""
-        self.assertThat(lambda: self.system_settings.main_view.select_single(
-            objectName='configurationPage'), raises(StateNotFoundError))
-        updates = self.system_settings.main_view.updates_page
-        self.assertThat(updates, NotEquals(None))
-        configuration = updates.select_single(objectName='configuration')
-        self.assertThat(configuration, NotEquals(None))
-        self.system_settings.main_view.scroll_to_and_click(configuration)
 
     def test_check_for_updates_area(self):
         """Check that the updates area is shown on opening."""
         updates = self.system_settings.main_view.updates_page
         self.assertThat(updates, NotEquals(None))
-        checkForUpdatesArea = updates.select_single(
-            objectName='checkForUpdatesArea')
-        self.assertThat(checkForUpdatesArea, NotEquals(None))
-        self.assertThat(checkForUpdatesArea.visible,
-                        Eventually(NotEquals(True)))
-
-    @skip('skipped due to lp:1481664')
-    def test_searching_state(self):
-        """Check how the ui reacts to searching state."""
-        updates = self.system_settings.main_view.updates_page
-        self.assertThat(updates, NotEquals(None))
-        updates.state.wait_for("SEARCHING")
-        self.assertThat(updates.state, Equals("SEARCHING"))
-        installAllButton = updates.select_single(
-            objectName='installAllButton')
-        self.assertThat(installAllButton, NotEquals(None))
-        self.assertThat(installAllButton.visible, Equals(False))
-        updateNotification = updates.select_single(
-            objectName='updateNotification')
-        self.assertThat(updateNotification, NotEquals(None))
-        self.assertThat(updateNotification.visible, Equals(False))
-        checkForUpdatesArea = updates.select_single(
-            objectName='checkForUpdatesArea')
-        self.assertThat(checkForUpdatesArea, NotEquals(None))
-        self.assertThat(checkForUpdatesArea.visible, Equals(True))
-
-
-class SystemNoAppUpdatesTestCases(SystemUpdatesBaseTestCase):
-    """Tests for System Updates without any updates."""
-
-    click_server_parameters = {
-        'start': True,
-        'responses': {}
-    }
-
-    def setUp(self):
-        # Set environment variables
-        self.useFixture(
-            EnvironmentVariable("IGNORE_CREDENTIALS", "True"))
-        self.useFixture(
-            EnvironmentVariable("AUTOPILOT_ENABLED", "AUTOPILOT_ENABLED"))
-        self.useFixture(
-            EnvironmentVariable("IGNORE_UPDATES", "IGNORE_UPDATES"))
-        self.useFixture(
-            EnvironmentVariable("URL_APPS", "http://localhost:9009"))
-        super(SystemNoAppUpdatesTestCases, self).setUp()
-
-    def test_no_updates_state(self):
-        """Check how the ui reacts to no updates state."""
-        updates = self.system_settings.main_view.updates_page
-        self.assertThat(updates, NotEquals(None))
-        updates.state.wait_for("NOUPDATES")
-        self.assertThat(updates.state, Equals("NOUPDATES"))
-        updateList = updates.select_single(
-            objectName='updateList')
-        self.assertThat(updateList, NotEquals(None))
-        self.assertThat(updateList.visible, Equals(False))
-        installAllButton = updates.select_single(
-            objectName='installAllButton')
-        self.assertThat(installAllButton, NotEquals(None))
-        self.assertThat(installAllButton.visible, Equals(False))
-        updateNotification = updates.select_single(
-            objectName='updateNotification')
-        self.assertThat(updateNotification, NotEquals(None))
-        self.assertThat(updateNotification.visible, Equals(True))
+        updates.stop_check()

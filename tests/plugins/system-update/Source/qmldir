@@ -1,0 +1,9 @@
+module Source
+
+EntryComponent 1.0 ../../../../plugins/system-update/EntryComponent.qml
+PageComponent 1.0 ../../../../plugins/system-update/PageComponent.qml
+UpdateDelegate 1.0 ../../../../plugins/system-update/UpdateDelegate.qml
+ClickUpdateDelegate 1.0 ../../../../plugins/system-update/ClickUpdateDelegate.qml
+Global 1.0 ../../../../plugins/system-update/Global.qml
+NotAuthenticatedNotification 1.0 ../../../../plugins/system-update/NotAuthenticatedNotification.qml
+DownloadHandler 1.0 ../../../../plugins/system-update/DownloadHandler.qml

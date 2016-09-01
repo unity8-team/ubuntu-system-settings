@@ -31,4 +31,5 @@ macro(add_uss_mock PLUGIN VERSION PATH)
     )
 endmacro()
 
+add_subdirectory(QMenuModel)
 add_subdirectory(Ubuntu)
