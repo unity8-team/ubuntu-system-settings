@@ -111,7 +111,7 @@ public:
                                   const bool automatic = false);
     Q_INVOKABLE void cancelUpdate(const QString &id, const uint &rev);
     void setImageUpdate(const QString &id, const int &version,
-                        const int &updateSize);
+                        const int &updateSize, const QString &channel);
     static bool contains(const UpdateList &list,
                          const QSharedPointer<Update> &update);
 public Q_SLOTS:

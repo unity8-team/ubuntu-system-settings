@@ -512,11 +512,12 @@ void UpdateModel::cancelUpdate(const QString &id, const uint &rev)
 }
 
 void UpdateModel::setImageUpdate(const QString &id, const int &version,
-                                 const int &updateSize)
+                                 const int &updateSize, const QString &channel)
 {
     auto update = QSharedPointer<Update>(new Update);
     update->setIdentifier(id);
     update->setKind(Update::Kind::KindImage);
+    update->setChannel(channel);
     update->setProgress(0);
     update->setTitle("Ubuntu");
     update->setRevision((uint) version);

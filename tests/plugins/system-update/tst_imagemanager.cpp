@@ -43,6 +43,7 @@ private slots:
         QVariantMap parameters;
         parameters["build_number"] = 1;
         parameters["target_build_number"] = 2;
+        parameters["channel_name"] = m_channel;
         m_siMock = new FakeSystemImageDbus(parameters);
         m_dbus = new QDBusConnection(m_siMock->dbus());
         m_systemImage = new QSystemImage(*m_dbus);
@@ -158,14 +159,14 @@ private slots:
     }
     void testDownloadStarted()
     {
-        m_model->setImageUpdate(Image::ManagerImpl::ubuntuId, 2, 0);
+        m_model->setImageUpdate(Image::ManagerImpl::ubuntuId, 2, 0, m_channel);
         Q_EMIT mockDownloadStarted();
         QSharedPointer<Update> u = m_model->fetch(Image::ManagerImpl::ubuntuId, 2);
         QCOMPARE(u->state(), Update::State::StateDownloading);
     }
     void testUpdateProgress()
     {
-        m_model->setImageUpdate(Image::ManagerImpl::ubuntuId, 2, 0);
+        m_model->setImageUpdate(Image::ManagerImpl::ubuntuId, 2, 0, m_channel);
         Q_EMIT mockUpdateProgress(50, 0);
         QSharedPointer<Update> u = m_model->fetch(Image::ManagerImpl::ubuntuId, 2);
         QCOMPARE(u->state(), Update::State::StateDownloading);
@@ -173,7 +174,7 @@ private slots:
     }
     void testUpdatePaused()
     {
-        m_model->setImageUpdate(Image::ManagerImpl::ubuntuId, 2, 0);
+        m_model->setImageUpdate(Image::ManagerImpl::ubuntuId, 2, 0, m_channel);
         Q_EMIT mockUpdatePaused(50);
         QSharedPointer<Update> u = m_model->fetch(Image::ManagerImpl::ubuntuId, 2);
         QCOMPARE(u->state(), Update::State::StateDownloadPaused);
@@ -181,14 +182,14 @@ private slots:
     }
     void testUpdateDownloaded()
     {
-        m_model->setImageUpdate(Image::ManagerImpl::ubuntuId, 2, 0);
+        m_model->setImageUpdate(Image::ManagerImpl::ubuntuId, 2, 0, m_channel);
         Q_EMIT mockUpdateDownloaded();
         QSharedPointer<Update> u = m_model->fetch(Image::ManagerImpl::ubuntuId, 2);
         QCOMPARE(u->state(), Update::State::StateDownloaded);
     }
     void testUpdateFailed()
     {
-        m_model->setImageUpdate(Image::ManagerImpl::ubuntuId, 2, 0);
+        m_model->setImageUpdate(Image::ManagerImpl::ubuntuId, 2, 0, m_channel);
         Q_EMIT mockUpdateFailed(1, "failure");
         QSharedPointer<Update> u = m_model->fetch(Image::ManagerImpl::ubuntuId, 2);
         QCOMPARE(u->error(), QString("failure"));
@@ -197,7 +198,7 @@ private slots:
     {
         /* Makes sure any updates that has the current build number are marked
         as installed. */
-        m_model->setImageUpdate(Image::ManagerImpl::ubuntuId, 1, 0);
+        m_model->setImageUpdate(Image::ManagerImpl::ubuntuId, 1, 0, m_channel);
         Q_EMIT mockCurrentBuildNumberChanged();
         QSharedPointer<Update> u = m_model->fetch(Image::ManagerImpl::ubuntuId, 1);
         QVERIFY(u->installed());
@@ -213,7 +214,7 @@ private slots:
     void testRebooting()
     {
         QFETCH(bool, status);
-        m_model->setImageUpdate(Image::ManagerImpl::ubuntuId, 2, 0);
+        m_model->setImageUpdate(Image::ManagerImpl::ubuntuId, 2, 0, m_channel);
         Q_EMIT mockRebooting(status);
         QSharedPointer<Update> u = m_model->fetch(Image::ManagerImpl::ubuntuId, 2);
         if (status) {
@@ -224,14 +225,14 @@ private slots:
     }
     void testUpdateProcessing()
     {
-        m_model->setImageUpdate(Image::ManagerImpl::ubuntuId, 2, 0);
+        m_model->setImageUpdate(Image::ManagerImpl::ubuntuId, 2, 0, m_channel);
         Q_EMIT mockUpdateProcessing();
         QSharedPointer<Update> u = m_model->fetch(Image::ManagerImpl::ubuntuId, 2);
         QCOMPARE(u->state(), Update::State::StateInstalling);
     }
     void testUpdateProcessFailed()
     {
-        m_model->setImageUpdate(Image::ManagerImpl::ubuntuId, 2, 0);
+        m_model->setImageUpdate(Image::ManagerImpl::ubuntuId, 2, 0, m_channel);
         Q_EMIT mockUpdateProcessFailed("failure");
         QSharedPointer<Update> u = m_model->fetch(Image::ManagerImpl::ubuntuId, 2);
         QCOMPARE(u->state(), Update::State::StateFailed);
@@ -242,7 +243,7 @@ private slots:
         /* Test that older image updates are marked as installed. Note that the
         current build number is 1 here, which means we have to mark 0 as
         installed. */
-        m_model->setImageUpdate(Image::ManagerImpl::ubuntuId, 0, 0);
+        m_model->setImageUpdate(Image::ManagerImpl::ubuntuId, 0, 0, m_channel);
 
         Image::ManagerImpl manager(m_systemImage, m_model);
         QSharedPointer<Update> update = m_model->fetch(Image::ManagerImpl::ubuntuId, 0);
@@ -274,6 +275,7 @@ private:
     QDBusInterface *m_mock = nullptr;
     Image::Manager *m_instance = nullptr;
     UpdateModel *m_model = nullptr;
+    QString m_channel = "test-channel";
 };
 
 QTEST_GUILESS_MAIN(TstImageManager)

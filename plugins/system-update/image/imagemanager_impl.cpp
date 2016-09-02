@@ -95,7 +95,8 @@ void ManagerImpl::handleUpdateAvailableStatus(const bool isAvailable,
         return;
     }
     if (isAvailable) {
-        m_model->setImageUpdate(ubuntuId, rev, updateSize);
+        m_model->setImageUpdate(ubuntuId, rev, updateSize,
+                                m_si->channelName());
         bool automatic = m_si->downloadMode() > 0;
         if (downloading) {
             m_model->startUpdate(ubuntuId, rev, automatic);
