@@ -228,6 +228,7 @@ private slots:
         update->setLocalVersion("v1");
         update->setRemoteVersion("v2");
         update->setToken("token");
+        update->setChannel("test-channel");
 
         QStringList cmd; cmd << "ls" << "-la";
         update->setCommand(cmd);
@@ -243,7 +244,7 @@ private slots:
         QCOMPARE(dbUpdate->revision(), (uint) 1);
         QCOMPARE(dbUpdate->binaryFilesize(), (uint) 100);
         QCOMPARE(dbUpdate->changelog(), QString("changes"));
-        QCOMPARE(dbUpdate->channel(),QString( ""));
+        QCOMPARE(dbUpdate->channel(), QString("test-channel"));
         QCOMPARE(dbUpdate->updatedAt(), date);
         QCOMPARE(dbUpdate->downloadHash(), QString("hash"));
         QCOMPARE(dbUpdate->downloadId(), QString("did"));

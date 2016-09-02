@@ -43,7 +43,7 @@ private slots:
         QVariantMap parameters;
         parameters["build_number"] = 1;
         parameters["target_build_number"] = 2;
-        parameters["channel_name"] = m_channel;
+        parameters["channel"] = m_channel;
         m_siMock = new FakeSystemImageDbus(parameters);
         m_dbus = new QDBusConnection(m_siMock->dbus());
         m_systemImage = new QSystemImage(*m_dbus);
@@ -248,6 +248,16 @@ private slots:
         Image::ManagerImpl manager(m_systemImage, m_model);
         QSharedPointer<Update> update = m_model->fetch(Image::ManagerImpl::ubuntuId, 0);
         QVERIFY(update->installed());
+    }
+    void test1619663()
+    {
+        /* Test that if the user is on channel A, but moves to channel B, all
+        pending updates from A are removed. */
+        m_model->setImageUpdate(Image::ManagerImpl::ubuntuId, 100, 0, "previous-channel");
+
+        Image::ManagerImpl manager(m_systemImage, m_model);
+        QSharedPointer<Update> update = m_model->fetch(Image::ManagerImpl::ubuntuId, 100);
+        QVERIFY(!update);
     }
 Q_SIGNALS:
     void mockUpdateAvailableStatus(const bool isAvailable,

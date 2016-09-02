@@ -31,7 +31,7 @@ const QString ALL = "kind, id, local_version, remote_version, revision, \
     installed, created_at_utc, updated_at_utc, title, download_hash, size, \
     icon_url, download_url, command, changelog, token, download_id, \
     update_state, signed_download_url, progress, automatic, error, \
-    package_name";
+    package_name, channel";
 const QString GET_SINGLE = "SELECT " + ALL + " FROM updates WHERE id=:id \
     AND revision=:revision";
 const QString GET_ALL = "SELECT " + ALL + " FROM updates";
@@ -162,13 +162,14 @@ bool UpdateDb::insert(const QSharedPointer<Update> &update)
               "created_at_utc, download_hash, title, size, icon_url,"
               "download_url, changelog, command, token, download_id, progress,"
               "local_version, remote_version, kind, update_state, automatic,"
-              "error, package_name, updated_at_utc, signed_download_url) "
+              "error, package_name, updated_at_utc, signed_download_url, "
+              "channel) "
               "VALUES (:id, :revision, :installed, :created_at_utc,"
               ":download_hash, :title, :size, :icon_url, :download_url,"
               ":changelog, :command, :token, :download_id, :progress,"
               ":local_version, :remote_version, :kind, :update_state,"
               ":automatic, :error, :package_name, :updated_at_utc, "
-              ":signed_download_url)");
+              ":signed_download_url, :channel)");
     q.bindValue(":id", update->identifier());
     q.bindValue(":revision", update->revision());
     q.bindValue(":installed", update->installed());
@@ -196,6 +197,7 @@ bool UpdateDb::insert(const QSharedPointer<Update> &update)
     q.bindValue(":package_name", update->packageName());
     q.bindValue(":updated_at_utc", update->updatedAt().toUTC().toMSecsSinceEpoch());
     q.bindValue(":signed_download_url", update->signedDownloadUrl());
+    q.bindValue(":channel", update->channel());
 
     bool success = q.exec();
     if (!success) {
@@ -256,6 +258,7 @@ void UpdateDb::update(const QSharedPointer<Update> &update, const QSqlQuery &que
     update->setSignedDownloadUrl(
         query.value("signed_download_url").toString()
     );
+    update->setChannel(query.value("channel").toString());
 }
 
 bool UpdateDb::dropDb()
@@ -312,6 +315,7 @@ bool UpdateDb::createDb()
                 "automatic INTEGER DEFAULT 0,"
                 "error TEXT,"
                 "package_name TEXT,"
+                "channel TEXT,"
                 "PRIMARY KEY (id, revision))");
     if (Q_UNLIKELY(!ok)) {
         m_db.rollback();

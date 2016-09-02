@@ -184,15 +184,15 @@ void ManagerImpl::synchronize()
         }
 
         /* As long as the revision of the update in the database is lower than
-        that of the current build number, we mark it as installed. This means
-        if you move from a channel with tip being rev 500, and you have a
-        pending update 501, to a channel where the tip is 12, you're going to
-        end up with a dud update. */
+        that of the current build number, we mark it as installed. */
         if (revision < currentBuildNumber) {
             m_model->setInstalled(ubuntuId, revision);
         }
 
-        // TODO: Drop all image updates that belong to a different channel.
+        // Drop all pending updates if from different channel than the current.
+        if (update->channel() != m_si->channelName()) {
+            m_model->remove(update);
+        }
     }
 }
 

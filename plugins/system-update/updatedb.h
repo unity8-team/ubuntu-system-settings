@@ -51,7 +51,7 @@ public:
      */
     void pruneDb();
     void reset();
-    const uint SCHEMA_VERSION = 1;
+    const uint SCHEMA_VERSION = 2;
 Q_SIGNALS:
     // This signal is emitted when multiple rows changed.
     void changed();
