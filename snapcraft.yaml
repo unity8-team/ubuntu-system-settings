@@ -44,6 +44,7 @@ parts:
       - qt5-default
       - qtbase5-dev
       - qtdeclarative5-dev
+      - qtdeclarative5-ubuntu-download-manager0.1
       - qtdeclarative5-ubuntu-history0.1
       - qtdeclarative5-ubuntu-keyboard-extensions0.1
       - libapt-pkg-dev
