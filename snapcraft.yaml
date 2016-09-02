@@ -7,16 +7,7 @@ confinement: strict
 apps:
   ubuntu-system-settings:
     command: desktop-launch launcher system-settings
-    plugs:
-      - unity7
-      - network
-      - pulseaudio
-      - home
-      - gsettings
-      - opengl
-      - timezone-control
-      - timeserver-control
-      - network-manager
+    plugs: [unity7, network, pulseaudio, home, gsettings, opengl, timezone-control, timeserver-control, network-manager, time-date-control]
 
 parts:
   ubuntu-system-settings:
@@ -58,6 +49,9 @@ parts:
       - libapt-pkg-dev
       - libgnome-desktop-3-dev
       - libgsettings-qt-dev
+    # stage:
+    #   - -usr/share/pkgconfig/xkeyboard-config.pc
+    #   - -usr/share/pkgconfig/shared-mime-info.pc
     stage-packages:
       - accountsservice
       - accountsservice-ubuntu-schemas
@@ -94,10 +88,14 @@ parts:
       - python3-dbus
       - python3-xdg
       - gir1.2-glib-2.0
+    # snap:
+    #   - -usr/lib/python3
+    #   - -usr/share/doc
+    #   - -usr/include
     after: [desktop/qt5]
 
   launcher:
-    plugin: copy
+    plugin: dump
     source: snap
-    files:
+    organize:
       launcher: bin/launcher

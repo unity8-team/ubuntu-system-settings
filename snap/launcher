@@ -1,12 +1,17 @@
 #!/bin/sh
 
 export ARCH="x86_64-linux-gnu"
+export LD_LIBRARY_PATH=$SNAP/usr/lib/$ARCH:$LD_LIBRARY_PATH
 
 # Art directory
 # export SYSTEM_SETTINGS_UBUNTU_ART_DIR=/
 
 # XKB config
 export XKB_CONFIG_ROOT=$SNAP/usr/share/X11/xkb
+
+# Qt Libs
+export LD_LIBRARY_PATH=$SNAP/usr/lib/$ARCH/qt5/libs:$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=$SNAP/usr/lib/$ARCH/pulseaudio:$LD_LIBRARY_PATH
 
 # Qt Modules
 #export QT_PLUGIN_PATH=$SNAP/usr/lib/$ARCH/qt5/plugins
@@ -15,5 +20,12 @@ export QML2_IMPORT_PATH=$QML2_IMPORT_PATH:$SNAP/usr/share/ubuntu/settings/system
 
 # Explicitly set APP_ID.
 export APP_ID=ubuntu-system-settings
+
+# Mesa Libs
+export LD_LIBRARY_PATH=$SNAP/usr/lib/$ARCH/mesa:$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=$SNAP/usr/lib/$ARCH/mesa-egl:$LD_LIBRARY_PATH
+
+# Necessary for the SDK to find the translations directory
+export APP_DIR=$SNAP
 
 exec $@
