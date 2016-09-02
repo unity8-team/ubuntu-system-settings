@@ -25,6 +25,7 @@
 
 #include <QObject>
 #include <QProcess>
+#include <QDBusInterface>
 
 class Sound : public QObject
 {
@@ -71,7 +72,6 @@ public:
                 READ customRingtonePath
                 NOTIFY customRingtonePathChanged)
 
-
 public Q_SLOTS:
     void slotChanged(QString, QString);
     void slotNameOwnerChanged();
@@ -89,6 +89,7 @@ Q_SIGNALS:
 
 private:
     AccountsService m_accountsService;
+    QDBusInterface m_usensordIface;
 
     QString getIncomingCallSound();
     void setIncomingCallSound(QString sound);

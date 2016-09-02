@@ -25,7 +25,6 @@ import SystemSettings.ListItems 1.0 as SettingsListItems
 import Ubuntu.Components 1.3
 import Ubuntu.Components.ListItems 1.3 as ListItems
 import Ubuntu.SystemSettings.StorageAbout 1.0
-import Ubuntu.SystemSettings.Update 1.0
 import Ubuntu.SystemSettings.Bluetooth 1.0
 import MeeGo.QOfono 0.2
 
@@ -161,8 +160,8 @@ ItemPage {
 
             SettingsListItems.SingleValueProgression {
                 property string versionIdentifier: {
-                    var num = UpdateManager.currentBuildNumber;
-                    var ota = UpdateManager.detailedVersionDetails['tag'];
+                    var num = SystemImage.currentBuildNumber;
+                    var ota = SystemImage.versionTag;
                     num = num ? "r%1".arg(num.toString()) : "";
                     return ota ? ota : num;
                 }
@@ -179,8 +178,8 @@ ItemPage {
             SettingsListItems.SingleValue {
                 objectName: "lastUpdatedItem"
                 text: i18n.tr("Last updated")
-                value: UpdateManager.lastUpdateDate && !isNaN(UpdateManager.lastUpdateDate) ?
-                    Qt.formatDate(UpdateManager.lastUpdateDate) : i18n.tr("Never")
+                value: SystemImage.lastUpdateDate && !isNaN(SystemImage.lastUpdateDate) ?
+                    Qt.formatDate(SystemImage.lastUpdateDate) : i18n.tr("Never")
             }
 
             SettingsListItems.SingleControl {
@@ -193,10 +192,13 @@ ItemPage {
                         var upPlugin = pluginManager.getByName("system-update")
                         if (upPlugin) {
                             var updatePage = upPlugin.pageComponent
-                            if (updatePage)
-                                pageStack.push(updatePage)
-                            else
+                            var updatePageItem;
+                            if (updatePage) {
+                                updatePageItem = pageStack.push(updatePage);
+                                updatePageItem.check(true); // Force a check.
+                            } else {
                                 console.warn("Failed to get system-update pageComponent")
+                            }
                         } else {
                             console.warn("Failed to get system-update plugin instance")
                         }

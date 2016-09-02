@@ -1,3 +1,48 @@
+ubuntu-system-settings (0.4+16.10.20160826-0ubuntu1) yakkety; urgency=medium
+
+  [ jonas-drange ]
+  * versionTag refers to the currently installed OTA, not a pending
+    image update, so remove it (LP: #1616093)
+  * fix cases where check label is really long (via translations) (LP:
+    #1616099)
+  * do not overwrite updatedAt (LP: #1616800)
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Fri, 26 Aug 2016 14:41:25 +0000
+
+ubuntu-system-settings (0.4+16.10.20160824.1-0ubuntu1) yakkety; urgency=medium
+
+  [ Florian Boucault ]
+  * Crossbuilding packaging fixes.
+
+  [ Pat McGowan ]
+  * allows uss to be built by crossbuilder (LP: #1433590, #1614637)
+
+  [ jonas-drange ]
+  * use python3 in mock click command
+  * force python3 to run by refering to it in the shebang of
+    test_code.py
+
+ -- Jonas G. Drange <jonas.drange@canonical.com>  Wed, 24 Aug 2016 13:52:14 +0000
+
+ubuntu-system-settings (0.4+16.10.20160819-0ubuntu1) yakkety; urgency=medium
+
+  [ Ken VanDine ]
+  * Fixes for failing autopilot tests
+
+  [ jonas-drange ]
+  * Port most autopilot tests in test_wifi to qml tests and ctests.
+  * patch environment with required maliit variable whenever we use
+    osk.dismiss()
+
+ -- Jonas G. Drange <jonas.drange@canonical.com>  Fri, 19 Aug 2016 12:50:21 +0000
+
+ubuntu-system-settings (0.4+16.10.20160817.2-0ubuntu1) yakkety; urgency=medium
+
+  [ jonas-drange ]
+  * rewrite the system update panel
+
+ -- Jonas G. Drange <jonas.drange@canonical.com>  Wed, 17 Aug 2016 11:18:39 +0000
+
 ubuntu-system-settings (0.4+16.10.20160817-0ubuntu1) yakkety; urgency=medium
 
   * Switch the powerd depends to repowerd. powerd is now a transitional

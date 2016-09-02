@@ -27,6 +27,7 @@ import Ubuntu.SystemSettings.Sound 1.0
 import Ubuntu.Settings.Menus 0.1 as Menus
 import Ubuntu.Settings.Components 0.1 as USC
 import QMenuModel 0.1
+import Ubuntu.Connectivity 1.0
 
 import "utilities.js" as Utilities
 
@@ -49,6 +50,11 @@ ItemPage {
     GSettings {
         id: soundSettings
         schema.id: "com.ubuntu.touch.sound"
+    }
+
+    Connections {
+        id: networkingStatus
+        target: NetworkingStatus
     }
 
     Flickable {
