@@ -237,6 +237,17 @@ private slots:
         QCOMPARE(u->state(), Update::State::StateFailed);
         QCOMPARE(u->error(), QString("failure"));
     }
+    void test1619605()
+    {
+        /* Test that older image updates are marked as installed. Note that the
+        current build number is 1 here, which means we have to mark 0 as
+        installed. */
+        m_model->setImageUpdate(Image::ManagerImpl::ubuntuId, 0, 0);
+
+        Image::ManagerImpl manager(m_systemImage, m_model);
+        QSharedPointer<Update> update = m_model->fetch(Image::ManagerImpl::ubuntuId, 0);
+        QVERIFY(update->installed());
+    }
 Q_SIGNALS:
     void mockUpdateAvailableStatus(const bool isAvailable,
                                    const bool downloading,

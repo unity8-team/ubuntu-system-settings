@@ -110,8 +110,8 @@ public:
     Q_INVOKABLE void resumeUpdate(const QString &id, const uint &rev,
                                   const bool automatic = false);
     Q_INVOKABLE void cancelUpdate(const QString &id, const uint &rev);
-    Q_INVOKABLE void setImageUpdate(const QString &id, const int &version,
-                                    const int &updateSize);
+    void setImageUpdate(const QString &id, const int &version,
+                        const int &updateSize);
     static bool contains(const UpdateList &list,
                          const QSharedPointer<Update> &update);
 public Q_SLOTS:

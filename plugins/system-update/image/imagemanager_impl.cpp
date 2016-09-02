@@ -75,7 +75,7 @@ ManagerImpl::ManagerImpl(QSystemImage *si, UpdateModel *model, QObject *parent)
 
     /* This is currently the best we can do for marking image updates
     as, as signals aren't usually sent from s-i.installed. lp:1600449 */
-    handleCurrentBuildNumberChanged();
+    synchronize();
 }
 
 void ManagerImpl::handleUpdateAvailableStatus(const bool isAvailable,
@@ -165,6 +165,36 @@ void ManagerImpl::handleUpdateProcessFailed(const QString &reason)
 void ManagerImpl::handleCheckingForUpdatesChanged()
 {
     Q_EMIT checkingForUpdatesChanged();
+}
+
+void ManagerImpl::synchronize()
+{
+    auto currentBuildNumber = m_si->currentBuildNumber();
+    m_model->setInstalled(ubuntuId, currentBuildNumber);
+
+    for (int i = 0; i < m_model->rowCount(); i++) {
+        auto kind = (Update::Kind) m_model->data(
+            m_model->index(i), UpdateModel::Roles::KindRole
+        ).toUInt();
+        auto revision = m_model->data(
+            m_model->index(i), UpdateModel::Roles::RevisionRole
+        ).toUInt();
+
+        if (kind != Update::Kind::KindImage) {
+            continue;
+        }
+
+        /* As long as the revision of the update in the database is lower than
+        that of the current build number, we mark it as installed. This means
+        if you move from a channel with tip being rev 500, and you have a
+        pending update 501, to a channel where the tip is 12, you're going to
+        end up with a dud update. */
+        if (revision < currentBuildNumber) {
+            m_model->setInstalled(ubuntuId, revision);
+        }
+
+        // TODO: Drop all image updates that belong to a different channel.
+    }
 }
 
 void ManagerImpl::check()

@@ -58,6 +58,7 @@ private Q_SLOTS:
     void handleUpdateProcessFailed(const QString &reason);
     void handleCheckingForUpdatesChanged();
 private:
+    void synchronize();
     UpdateModel *m_model;
     QSystemImage *m_si;
 };
