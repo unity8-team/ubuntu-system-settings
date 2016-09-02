@@ -170,18 +170,16 @@ void ManagerImpl::handleCheckingForUpdatesChanged()
 
 void ManagerImpl::synchronize()
 {
-    auto currentBuildNumber = m_si->currentBuildNumber();
+    auto currentBuildNumber = (uint) m_si->currentBuildNumber();
     m_model->setInstalled(ubuntuId, currentBuildNumber);
 
     for (int i = 0; i < m_model->rowCount(); i++) {
-        auto kind = (Update::Kind) m_model->data(
-            m_model->index(i), UpdateModel::Roles::KindRole
-        ).toUInt();
         auto revision = m_model->data(
             m_model->index(i), UpdateModel::Roles::RevisionRole
         ).toUInt();
+        auto update = m_model->get(ubuntuId, revision);
 
-        if (kind != Update::Kind::KindImage) {
+        if (update->kind() != Update::Kind::KindImage) {
             continue;
         }
 
