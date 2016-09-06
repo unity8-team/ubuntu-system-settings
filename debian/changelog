@@ -1,3 +1,10 @@
+ubuntu-system-settings (0.4+16.10.20160906-0ubuntu1) yakkety; urgency=medium
+
+  [ You-Sheng Yang ]
+  * Build about plugin on arm64. (LP: #1618157)
+
+ -- Jonas G. Drange <jonas.drange@canonical.com>  Tue, 06 Sep 2016 10:49:49 +0000
+
 ubuntu-system-settings (0.4+16.10.20160831.1-0ubuntu1) yakkety; urgency=medium
 
   [ jonas-drange ]
