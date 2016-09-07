@@ -7,11 +7,23 @@ confinement: strict
 apps:
   ubuntu-system-settings:
     command: desktop-launch launcher system-settings
-    plugs: [unity7, network, pulseaudio, home, gsettings, opengl, timezone-control, timeserver-control, network-manager, time-date-control]
+    plugs:
+      - unity7
+      - network
+      - pulseaudio
+      - home
+      - gsettings
+      - opengl
+      - timezone-control
+      - timeserver-control
+      - network-manager
+      - time-date-control
+      - upower-observe
+      - bluez
 
 parts:
   ubuntu-system-settings:
-    configflags: [-DCMAKE_INSTALL_PREFIX=/usr]
+    configflags: [-DCMAKE_INSTALL_PREFIX=/usr, -DSNAP=1]
     plugin: cmake
     source: .
     build-packages:
@@ -93,7 +105,10 @@ parts:
       - python3-xdg
       - gir1.2-glib-2.0
       - libqt5gui5
+      - libqt5sql5
+      - libqt5sql5-sqlite
       - appmenu-qt5
+      - xkb-data
     after: [desktop/gtk3]
 
   launcher:
