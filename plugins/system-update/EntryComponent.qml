@@ -20,13 +20,18 @@
 
 import QtQuick 2.4
 import Ubuntu.Components 1.3
+import Ubuntu.DownloadManager 1.2
 import Ubuntu.SystemSettings.Update 1.0
 
 ListItem {
     id: root
     objectName: "entryComponent-updates"
-    property int updatesAvailable: 0
-    height: layout.height
+    property int updatesAvailable: {
+        var imageUpdateCount = SystemImage.checkTarget() ? 1 : 0;
+        return updatesRep.count + imageUpdateCount;
+    }
+    height: updatesAvailable > 0 ? layout.height : 0
+    onClicked: main.loadPluginByName("system-update");
 
     ListItemLayout {
         id: layout
@@ -43,22 +48,22 @@ ListItem {
         ProgressionSlot {}
     }
 
-    function _updatesRefresh() {
-        var _updatesAvailable = 0;
-        for (var i=0; i < UpdateManager.model.length; i++) {
-            if (UpdateManager.model[i].updateRequired)
-                _updatesAvailable += 1;
+    DownloadManager {
+        onDownloadFinished: {
+            UpdateManager.model.setInstalled(
+                download.metadata.custom.identifier,
+                download.metadata.custom.revision
+            );
         }
-        updatesAvailable =  _updatesAvailable;
     }
 
-    Connections {
-        id: updateManager
-        objectName: "updateManager"
-        target: UpdateManager
-        onModelChanged: root._updatesRefresh()
-        onUpdateAvailableFound: root._updatesRefresh()
+    Repeater {
+        width: 1
+        height: 1
+        id: updatesRep
+        model: UpdateManager.clickUpdates
+        Item { width: 1; height: 1 }
     }
 
-    onClicked: main.loadPluginByName("system-update");
+    Behavior on height { UbuntuNumberAnimation {} }
 }

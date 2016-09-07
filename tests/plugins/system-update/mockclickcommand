@@ -1,0 +1,15 @@
+#! /bin/sh
+""":"
+exec python3 $0 ${1+"$@"}
+"""
+import os
+
+def main():
+    fname = "%s/click.result" % os.path.dirname(os.path.realpath(__file__))
+    with open(fname, "r") as f:
+      for line in f:
+        print(line)
+
+if __name__ == "__main__":
+    # execute only if run as a script
+    main()

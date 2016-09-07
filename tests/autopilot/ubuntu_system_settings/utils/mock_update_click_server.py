@@ -5,6 +5,7 @@ import threading
 
 from datetime import datetime
 from http.server import BaseHTTPRequestHandler, HTTPServer
+from urllib.parse import urlparse
 
 
 def log(msg):
@@ -20,7 +21,7 @@ class Handler(BaseHTTPRequestHandler):
     def do_HEAD(self):
         """Sends headers.."""
         self.send_response(200)
-        self.send_header("X-Click-Token", "X-Click-Token")
+        self.send_header("X-Click-Token", "Mock-X-Click-Token")
         self.end_headers()
 
     def do_POST(self):
@@ -29,18 +30,32 @@ class Handler(BaseHTTPRequestHandler):
 
     def do_GET(self):
         """Respond to a GET request."""
-        if '*' in self.server.responses:
-            response = self.server.responses['*']
-        else:
-            response = self.server.responses[self.path]
-        self.send_response(200)
-        self.send_header("Content-type", "application/json")
+        r = None
+        o = urlparse(self.path)
+        for response in self.server.responses:
+            if '*' in response['path']:
+                r = response
+            elif o.path in response['path']:
+                r = response
+
+        if not r:
+            self.log_message('Could not handle request')
+            print(o.path)
+            return
+
+        self.send_response(r['status_code'])
+        self.send_header("Content-type", 'application/json')
         self.end_headers()
-        try:
-            self.wfile.write(json.dumps(response).encode('utf-8'))
-        except BrokenPipeError:
-            # System Settings shut down before we finished up. Log and ignore.
-            self.log_message('Server was interrupted.')
+
+        if 'content' in r:
+            try:
+                self.wfile.write(
+                    json.dumps(r['content']).encode('utf-8')
+                )
+            except BrokenPipeError:
+                # System Settings shut down before we finished
+                # up. Log and ignore.
+                self.log_message('Server was interrupted.')
 
 
 class Manager(object):
@@ -53,20 +68,51 @@ class Manager(object):
         self._thread = None
         self._cmdline = cmdline
         if not responses:
-            responses = {
-                '*': [{
-                    "name": "com.ubuntu.developer.testclick",
-                    "version": "2.0",
-                    "icon_url": (
-                        "https://raw.githubusercontent.com/ninja-ide/"
-                        "ninja-ide/master/ninja_ide/img/ninja_icon.png"
-                    ),
-                    "download_url": ("http://localhost:9009/download"),
-                    "binary_filesize": 9000,
-                    "download_sha512": "1232223sdfdsffs",
-                    "changelog": "New version!"
-                }]
-            }
+            responses = [
+                {
+                    'path': '/metadata',
+                    'status_code': 200,
+                    'content_type': 'application/json',
+                    'content': [{
+                        "name": "com.ubuntu.dropping-letters",
+                        "version": "0.1.2.3",
+                        "icon_url": (
+                            "https://raw.githubusercontent.com/ninja-ide/"
+                            "ninja-ide/master/ninja_ide/img/ninja_icon.png"
+                        ),
+                        "download_url": ("https://upload.wikimedia.org/wikiped"
+                                         "ia/commons/3/30/04U_Dec_28_2012_0230"
+                                         "Z.jpg"),
+                        "binary_filesize": 23820.0 * 1000.0,
+                        "download_sha512": "foo",
+                        "changelog": "New Dropping Letters.",
+                        "title": "Dropping Letters game"
+                    }, {
+                        "name": "com.ubuntu.stock-ticker-mobile",
+                        "version": "0.3.7ubuntu2",
+                        "icon_url": (
+                            "https://upload.wikimedia.org/wikipedia/"
+                            "commons/a/ab/Logo-ubuntu_cof-orange-hex.svg"
+                        ),
+                        "download_url": ("https://upload.wikimedia.org/wikiped"
+                                         "ia/commons/d/d2/The_Harvesters%2C_p"
+                                         "ainting_by_Brugel%2C_with_frame.jpg"
+                                         ),
+                        "binary_filesize": 5015.2 * 1000.0,
+                        "download_sha512": "bar",
+                        "changelog": "New ticker.",
+                        "title": "A stock trading app with charts, news, and management"  # noqa
+                    }]
+                },
+                {
+                    'path': '/403',
+                    'status_code': 403
+                },
+                {
+                    'path': '/404',
+                    'status_code': 404
+                },
+            ]
         self._httpd = HTTPServer((server_address, server_port), Handler)
         self._httpd.responses = responses
         log('Created mock update click server.')
@@ -133,8 +179,8 @@ if __name__ == '__main__':
                              'responses: %s\n' % detail)
             sys.exit(2)
 
-        if not isinstance(responses, dict):
-            sys.stderr.write('JSON responses must be a dictionary\n')
+        if not isinstance(responses, list):
+            sys.stderr.write('JSON responses must be a list\n')
             sys.exit(2)
 
     man = Manager(

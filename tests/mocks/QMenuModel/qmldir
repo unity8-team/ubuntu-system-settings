@@ -1,0 +1,4 @@
+module QMenuModel
+plugin qmenumodel
+
+QDBusActionGroup 0.1 QDBusActionGroup.qml

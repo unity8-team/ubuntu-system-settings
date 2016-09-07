@@ -142,7 +142,7 @@ public:
     Device() {}
     Device(const QString &path, QDBusConnection &bus);
     ~Device() {}
-    bool isValid() const { return getType() != Type::Other; }
+    bool isValid() const { return true; }
     void pair();
     Q_INVOKABLE void cancelPairing();
     void connect();

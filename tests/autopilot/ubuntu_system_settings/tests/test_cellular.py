@@ -99,6 +99,10 @@ class DualSimCellularTestCase(CellularBaseTestCase):
     use_sims = 2
 
     def test_data_off(self):
+        self.ctv_private.Set(CON_IFACE,
+                             'SimForMobileData',
+                             dbus.ObjectPath("/"))
+        self.cellular_page.select_sim_for_data('/ril_0')
         self.ctv_private.Set(CON_IFACE, 'MobileDataEnabled', True)
         self.cellular_page.disable_data()
         self.assertThat(
