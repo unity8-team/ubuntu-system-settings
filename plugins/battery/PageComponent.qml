@@ -294,8 +294,16 @@ ItemPage {
 
             SettingsListItems.StandardProgression {
                 text: i18n.tr("Display brightness")
-                onClicked: pageStack.push(
-                               pluginManager.getByName("brightness").pageComponent)
+                onClicked: {
+                    var brightnessPlugin = pluginManager.getByName("brightness");
+                    if (brightnessPlugin) {
+                        pageStack.push(brightnessPlugin.pageComponent, {
+                            plugin: brightnessPlugin, pluginManager: pluginManager
+                        });
+                    } else {
+                        console.warn("Failed to get brightness plugin instance");
+                    }
+                }
             }
 
             SettingsListItems.SingleValueProgression {
