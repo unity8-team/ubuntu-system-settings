@@ -20,3 +20,9 @@ system-settings.pro.user
 .project
 .settings
 __pycache__
+
+# Snappy stuff
+/parts
+/prime
+/stage
+*.snap
