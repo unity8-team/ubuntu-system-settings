@@ -1,3 +1,5 @@
+add_subdirectory(plugin)
+
 set(QML_SOURCES EntryComponent.qml
     EraseEverything.qml
     PageComponent.qml

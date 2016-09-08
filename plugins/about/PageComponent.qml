@@ -154,11 +154,14 @@ ItemPage {
             }
 
             SettingsItemTitle {
+                id: softwareItem
                 objectName: "softwareItem"
+                visible: UpdateManager.currentBuildNumber
                 text: i18n.tr("Software:")
             }
 
             SettingsListItems.SingleValueProgression {
+                visible: softwareItem.visible
                 property string versionIdentifier: {
                     var num = SystemImage.currentBuildNumber;
                     var ota = SystemImage.versionTag;
@@ -177,12 +180,14 @@ ItemPage {
 
             SettingsListItems.SingleValue {
                 objectName: "lastUpdatedItem"
+                visible: softwareItem.visible
                 text: i18n.tr("Last updated")
                 value: SystemImage.lastUpdateDate && !isNaN(SystemImage.lastUpdateDate) ?
                     Qt.formatDate(SystemImage.lastUpdateDate) : i18n.tr("Never")
             }
 
             SettingsListItems.SingleControl {
+                visible: softwareItem.visible
 
                 Button {
                     objectName: "updateButton"
@@ -194,7 +199,9 @@ ItemPage {
                             var updatePage = upPlugin.pageComponent
                             var updatePageItem;
                             if (updatePage) {
-                                updatePageItem = pageStack.push(updatePage);
+                                updatePageItem = pageStack.push(updatePage, {
+                                    plugin: upPlugin, pluginManager: pluginManager
+                                });
                                 updatePageItem.check(true); // Force a check.
                             } else {
                                 console.warn("Failed to get system-update pageComponent")
