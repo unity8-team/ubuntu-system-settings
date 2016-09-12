@@ -73,7 +73,7 @@ ItemPage {
         anchors.fill: parent
         source: uri
         sourceSize.height: height
-        sourceSize.width: width
+        sourceSize.width: 0
         fillMode: Image.PreserveAspectCrop
     }
 
