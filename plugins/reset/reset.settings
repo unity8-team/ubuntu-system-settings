@@ -1,7 +1,6 @@
 {
     "icon": "reset",
     "name": "Reset",
-    "plugin": "reset-plugin",
     "translations": "ubuntu-system-settings",
     "category": "uncategorized-bottom",
     "priority": 1,
@@ -13,7 +12,8 @@
         "restore"
     ],
     "has-dynamic-keywords": false,
-    "has-dynamic-visibility": true,
+    "has-dynamic-visibility": false,
+    "visible-if-file-exists": "/usr/share/dbus-1/system-services/com.canonical.SystemImage.service",
     "entry-component": "EntryComponent.qml",
     "page-component": "PageComponent.qml"
 }
