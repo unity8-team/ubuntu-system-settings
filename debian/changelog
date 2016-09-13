@@ -1,3 +1,14 @@
+ubuntu-system-settings (0.4+16.10.20160913-0ubuntu1) yakkety; urgency=medium
+
+  * Only display the software section and the check for updates button
+    if we know the current build (LP: #1612263)
+  * cellular, phone, hotspot: Don't default to visible
+  * Updated depends to match renaming of qml-module-ofono (LP: #1342031)
+  * Handle rename of qtquick-layouts build depends
+  * Dropped aethercast to a suggests
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Tue, 13 Sep 2016 14:29:15 +0000
+
 ubuntu-system-settings (0.4+16.10.20160906-0ubuntu1) yakkety; urgency=medium
 
   [ You-Sheng Yang ]
