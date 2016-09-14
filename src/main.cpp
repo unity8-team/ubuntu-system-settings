@@ -98,6 +98,7 @@ int main(int argc, char **argv)
         QByteArray(mountPoint).append(PLUGIN_QML_DIR)
     );
     view.rootContext()->setContextProperty("defaultPlugin", defaultPlugin);
+    view.rootContext()->setContextProperty("mountPoint", mountPoint);
     view.rootContext()->setContextProperty(
         "i18nDirectory", QByteArray(mountPoint).append(I18N_DIRECTORY)
     );

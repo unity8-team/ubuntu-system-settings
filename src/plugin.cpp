@@ -102,7 +102,12 @@ bool PluginPrivate::ensureLoaded() const
     if (plugin.isEmpty())
         return false;
 
-    QString name = QString("%1/lib%2.so").arg(pluginModuleDir).arg(plugin);
+    QQmlEngine engine;
+    const QString mountPoint = engine.rootContext()
+        ->contextProperty("mountPoint").value<QByteArray>();
+
+    QString name = QString("%1/%2/lib%3.so")
+        .arg(mountPoint).arg(pluginModuleDir).arg(plugin);
     qWarning() << name;
     m_loader.setFileName(name);
     if (Q_UNLIKELY(!m_loader.load())) {
