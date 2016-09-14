@@ -23,11 +23,13 @@
 #include "plugin-manager.h"
 #include "utils.h"
 
+#include <QByteArray>
 #include <QGuiApplication>
 #include <QProcessEnvironment>
 #include <QQmlContext>
 #include <QUrl>
 #include <QQuickView>
+#include <QtGlobal>
 #include <QtQml>
 #include <QtQml/QQmlDebuggingEnabler>
 static QQmlDebuggingEnabler debuggingEnabler(false);
@@ -37,6 +39,7 @@ using namespace SystemSettings;
 int main(int argc, char **argv)
 {
     QGuiApplication app(argc, argv);
+    QByteArray mountPoint = qEnvironmentVariableIsSet("SNAP") ? qgetenv("SNAP") : "";
 
     /* The testability driver is only loaded by QApplication but not by
      * QGuiApplication.  However, QApplication depends on QWidget which would
@@ -88,10 +91,16 @@ int main(int argc, char **argv)
     qmlRegisterType<SystemSettings::PluginManager>("SystemSettings", 1, 0, "PluginManager");
     view.engine()->rootContext()->setContextProperty("Utilities", &utils);
     view.setResizeMode(QQuickView::SizeRootObjectToView);
-    view.engine()->addImportPath(PLUGIN_PRIVATE_MODULE_DIR);
-    view.engine()->addImportPath(PLUGIN_QML_DIR);
+    view.engine()->addImportPath(
+        QByteArray(mountPoint).append(PLUGIN_PRIVATE_MODULE_DIR)
+    );
+    view.engine()->addImportPath(
+        QByteArray(mountPoint).append(PLUGIN_QML_DIR)
+    );
     view.rootContext()->setContextProperty("defaultPlugin", defaultPlugin);
-    view.rootContext()->setContextProperty("i18nDirectory", I18N_DIRECTORY);
+    view.rootContext()->setContextProperty(
+        "i18nDirectory", QByteArray(mountPoint).append(I18N_DIRECTORY)
+    );
     view.rootContext()->setContextProperty("pluginOptions", pluginOptions);
     view.rootContext()->setContextProperty("view", &view);
     view.setSource(QUrl("qrc:/qml/MainWindow.qml"));

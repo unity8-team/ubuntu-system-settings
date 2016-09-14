@@ -28,6 +28,7 @@
 #include <QProcessEnvironment>
 #include <QQmlContext>
 #include <QQmlEngine>
+#include <QStandardPaths>
 #include <QStringList>
 
 using namespace SystemSettings;
@@ -80,7 +81,14 @@ void PluginManagerPrivate::reload()
 {
     Q_Q(PluginManager);
     clear();
-    QDir path(baseDir, "*.settings");
+
+    QFileInfoList searchPaths;
+    QStandardPaths::StandardLocation loc =
+        QStandardPaths::StandardLocation::GenericDataLocation;
+    Q_FOREACH(const QString &path, QStandardPaths::standardLocations(loc)) {
+        QDir dir(QString("%1/%2").arg(path).arg(baseDir), "*.settings");
+        searchPaths.append(dir.entryInfoList());
+    }
 
     /* Use an environment variable USS_SHOW_ALL_UI to show unfinished / beta /
      * deferred components or panels */
@@ -95,7 +103,7 @@ void PluginManagerPrivate::reload()
     if (ctx)
         ctx->engine()->rootContext()->setContextProperty("showAllUI", showAll);
 
-    Q_FOREACH(QFileInfo fileInfo, path.entryInfoList()) {
+    Q_FOREACH(QFileInfo fileInfo, searchPaths) {
         Plugin *plugin = new Plugin(fileInfo);
         QQmlEngine::setContextForObject(plugin, ctx);
         QMap<QString, Plugin*> &pluginList = m_plugins[plugin->category()];

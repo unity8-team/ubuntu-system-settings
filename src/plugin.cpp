@@ -103,7 +103,7 @@ bool PluginPrivate::ensureLoaded() const
         return false;
 
     QString name = QString("%1/lib%2.so").arg(pluginModuleDir).arg(plugin);
-
+    qWarning() << name;
     m_loader.setFileName(name);
     if (Q_UNLIKELY(!m_loader.load())) {
         qWarning() << m_loader.errorString() << name;
