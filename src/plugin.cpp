@@ -29,6 +29,7 @@
 #include <QPluginLoader>
 #include <QQmlContext>
 #include <QQmlEngine>
+#include <QStandardPaths>
 #include <QStringList>
 #include <QVariantMap>
 
@@ -38,7 +39,7 @@
 using namespace SystemSettings;
 
 static const QLatin1String pluginModuleDir{PLUGIN_MODULE_DIR};
-static const QLatin1String pluginQmlDir{PLUGIN_QML_DIR};
+static const QLatin1String pluginQmlDir{RELATIVE_PLUGIN_QML_DIR};
 
 namespace SystemSettings {
 
@@ -60,6 +61,7 @@ private:
     mutable PluginInterface2 *m_plugin2;
     QString m_baseName;
     QVariantMap m_data;
+    QString m_dataPath;
 };
 
 } // namespace
@@ -86,6 +88,17 @@ PluginPrivate::PluginPrivate(Plugin *q, const QFileInfo &manifest):
     }
 
     m_data = json.toVariant().toMap();
+
+    QStandardPaths::StandardLocation loc = QStandardPaths::GenericDataLocation;
+    Q_FOREACH(const QString &path, QStandardPaths::standardLocations(loc)) {
+        QDir dir(QString("%1/%2/%3").arg(path).arg(pluginQmlDir).arg(m_baseName));
+        if (dir.exists()) {
+            m_dataPath = dir.absolutePath();
+            break;
+        }
+    }
+    qWarning() << "m_dataPath" << m_dataPath;
+
 }
 
 bool PluginPrivate::ensureLoaded() const
@@ -106,7 +119,7 @@ bool PluginPrivate::ensureLoaded() const
     const QString mountPoint = engine.rootContext()
         ->contextProperty("mountPoint").value<QByteArray>();
 
-    QString name = QString("%1/%2/lib%3.so")
+    QString name = QString("%1%2/lib%3.so")
         .arg(mountPoint).arg(pluginModuleDir).arg(plugin);
     qWarning() << name;
     m_loader.setFileName(name);
@@ -148,13 +161,14 @@ QUrl PluginPrivate::componentFromSettingsFile(const QString &key) const
     QUrl componentUrl = m_data.value(key).toString();
     if (!componentUrl.isEmpty()) {
         if (componentUrl.isRelative()) {
-            QDir dir(pluginQmlDir);
-            if (dir.cd(m_baseName)) {
+            if (!m_dataPath.isEmpty()) {
+                QDir dir(m_dataPath);
                 componentUrl =
                     QUrl::fromLocalFile(dir.filePath(componentUrl.path()));
             }
         }
     }
+    qWarning() << "plugin.cpp componentUrl" << componentUrl;
     return componentUrl;
 }
 

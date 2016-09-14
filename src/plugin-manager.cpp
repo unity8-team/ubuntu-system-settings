@@ -33,7 +33,7 @@
 
 using namespace SystemSettings;
 
-static const QLatin1String baseDir{PLUGIN_MANIFEST_DIR};
+static const QLatin1String baseDir{RELATIVE_PLUGIN_MANIFEST_DIR};
 
 namespace SystemSettings {
 
@@ -83,8 +83,7 @@ void PluginManagerPrivate::reload()
     clear();
 
     QFileInfoList searchPaths;
-    QStandardPaths::StandardLocation loc =
-        QStandardPaths::StandardLocation::GenericDataLocation;
+    QStandardPaths::StandardLocation loc = QStandardPaths::GenericDataLocation;
     Q_FOREACH(const QString &path, QStandardPaths::standardLocations(loc)) {
         QDir dir(QString("%1/%2").arg(path).arg(baseDir), "*.settings");
         searchPaths.append(dir.entryInfoList());
