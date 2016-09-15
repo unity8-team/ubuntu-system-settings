@@ -20,6 +20,7 @@
  */
 
 #include <QtDebug>
+#include <QtGlobal>
 #include "onscreenkeyboard-plugin.h"
 
 #define UBUNTU_KEYBOARD_SCHEMA_ID "com.canonical.keyboard.maliit"
@@ -37,7 +38,7 @@ OnScreenKeyboardPlugin::OnScreenKeyboardPlugin(QObject *parent) :
     GVariantIter *iter;
     const gchar *path;
 
-    m_layoutPaths.append(LAYOUTS_DIR);
+    m_layoutPaths.append(qgetenv("SNAP").append(LAYOUTS_DIR));
     g_settings_get(m_maliitSettings, KEY_PLUGIN_PATHS, "as", &iter);
     for (int i(0); g_variant_iter_next(iter, "&s", &path); i++) {
         m_layoutPaths.append(path);
