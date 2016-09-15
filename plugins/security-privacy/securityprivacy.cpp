@@ -22,6 +22,7 @@
 #include <QtCore/QDateTime>
 #include <QtCore/QDebug>
 #include <QtCore/QProcess>
+#include <QtGlobal>
 #include <QtDBus/QDBusConnection>
 #include <QtDBus/QDBusConnectionInterface>
 #include <QtDBus/QDBusInterface>
@@ -336,7 +337,8 @@ QString SecurityPrivacy::setPassword(QString oldValue, QString value)
     passwdData += value.toUtf8() + '\n' + value.toUtf8() + '\n';
 
     QProcess pamHelper;
-    pamHelper.setProgram("/usr/bin/passwd");
+    // TODO: Decide if this approach is sufficient in a snap world. lp:1616486
+    pamHelper.setProgram(qgetenv("SNAP").append("/usr/bin/passwd"));
     pamHelper.start();
     pamHelper.write(passwdData);
     pamHelper.closeWriteChannel();

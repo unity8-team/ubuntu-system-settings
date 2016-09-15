@@ -18,6 +18,7 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include <QtDebug>
+#include <QtGlobal>
 #include "language-plugin.h"
 #include "keyboard-layout.h"
 
@@ -209,7 +210,7 @@ LanguagePlugin::updateLanguageNamesAndCodes()
 
         if (!likelyLocaleForLanguage.contains(language)) {
             QProcess likelyProcess;
-            likelyProcess.start(LANGUAGE2LOCALE,
+            likelyProcess.start(qgetenv("SNAP").append(LANGUAGE2LOCALE),
                                 QStringList(language),
                                 QIODevice::ReadOnly);
             likelyProcess.waitForFinished();
