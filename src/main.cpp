@@ -91,17 +91,11 @@ int main(int argc, char **argv)
     qmlRegisterType<SystemSettings::PluginManager>("SystemSettings", 1, 0, "PluginManager");
     view.engine()->rootContext()->setContextProperty("Utilities", &utils);
     view.setResizeMode(QQuickView::SizeRootObjectToView);
-    view.engine()->addImportPath(
-        QByteArray(mountPoint).append(PLUGIN_PRIVATE_MODULE_DIR)
-    );
-    view.engine()->addImportPath(
-        QByteArray(mountPoint).append(PLUGIN_QML_DIR)
-    );
+    view.engine()->addImportPath(mountPoint + PLUGIN_PRIVATE_MODULE_DIR);
+    view.engine()->addImportPath(mountPoint + PLUGIN_QML_DIR);
     view.rootContext()->setContextProperty("defaultPlugin", defaultPlugin);
     view.rootContext()->setContextProperty("mountPoint", mountPoint);
-    view.rootContext()->setContextProperty(
-        "i18nDirectory", QByteArray(mountPoint).append(I18N_DIRECTORY)
-    );
+    view.rootContext()->setContextProperty("i18nDirectory", mountPoint + I18N_DIRECTORY);
     view.rootContext()->setContextProperty("pluginOptions", pluginOptions);
     view.rootContext()->setContextProperty("view", &view);
     view.setSource(QUrl("qrc:/qml/MainWindow.qml"));

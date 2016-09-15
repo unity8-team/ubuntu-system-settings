@@ -39,7 +39,7 @@
 using namespace SystemSettings;
 
 static const QLatin1String pluginModuleDir{PLUGIN_MODULE_DIR};
-static const QLatin1String pluginQmlDir{RELATIVE_PLUGIN_QML_DIR};
+static const QLatin1String pluginQmlDir{PLUGIN_QML_DIR_BASE};
 
 namespace SystemSettings {
 
@@ -97,8 +97,6 @@ PluginPrivate::PluginPrivate(Plugin *q, const QFileInfo &manifest):
             break;
         }
     }
-    qWarning() << "m_dataPath" << m_dataPath;
-
 }
 
 bool PluginPrivate::ensureLoaded() const
@@ -121,7 +119,7 @@ bool PluginPrivate::ensureLoaded() const
 
     QString name = QString("%1%2/lib%3.so")
         .arg(mountPoint).arg(pluginModuleDir).arg(plugin);
-    qWarning() << name;
+
     m_loader.setFileName(name);
     if (Q_UNLIKELY(!m_loader.load())) {
         qWarning() << m_loader.errorString() << name;
@@ -168,7 +166,7 @@ QUrl PluginPrivate::componentFromSettingsFile(const QString &key) const
             }
         }
     }
-    qWarning() << "plugin.cpp componentUrl" << componentUrl;
+    qWarning() << m_baseName << "loads componentUrl" << componentUrl << "from key" << key;
     return componentUrl;
 }
 
