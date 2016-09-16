@@ -37,6 +37,7 @@
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <QStandardPaths>
 #include <QtCore/QStorageInfo>
 #include <QtCore/QSharedPointer>
 #include <QtGlobal>
@@ -227,10 +228,18 @@ void StorageAbout::setDeveloperMode(bool mode)
 QString StorageAbout::licenseInfo(const QString &subdir) const
 {
 
-    QString copyright = "/usr/share/doc/" + subdir + "/copyright";
+    QString copyright = "doc/" + subdir + "/copyright";
     QString copyrightText;
 
-    QFile file(qgetenv("SNAP").append(copyright));
+    QString copyrightFile = QStandardPaths::locate(
+        QStandardPaths::GenericDataLocation, copyright,
+        QStandardPaths::LocateFile
+    );
+    if (copyrightFile.isEmpty()) {
+        return QString();
+    }
+
+    QFile file(copyrightFile);
     if(!file.open(QIODevice::ReadOnly | QIODevice::Text))
         return QString();
     copyrightText = QString(file.readAll());

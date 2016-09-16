@@ -174,7 +174,7 @@ void Background::updateUbuntuArt()
     if (envDir != "")
         dir = QDir(envDir);
     else
-        dir = QDir("/usr/share/backgrounds/");
+        dir = QDir(qgetenv("SNAP") + "/usr/share/backgrounds/");
 
 
     dir.setFilter(QDir::Files | QDir::NoSymLinks);

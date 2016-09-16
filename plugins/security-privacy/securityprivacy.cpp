@@ -338,7 +338,7 @@ QString SecurityPrivacy::setPassword(QString oldValue, QString value)
 
     QProcess pamHelper;
     // TODO: Decide if this approach is sufficient in a snap world. lp:1616486
-    pamHelper.setProgram(qgetenv("SNAP").append("/usr/bin/passwd"));
+    pamHelper.setProgram(qgetenv("SNAP") + "/usr/bin/passwd");
     pamHelper.start();
     pamHelper.write(passwdData);
     pamHelper.closeWriteChannel();

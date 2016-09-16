@@ -109,7 +109,7 @@ ItemPage {
                     property variant volume: action("volume")
                     property variant silentMode: action("silent-mode")
                     property variant highVolume: action("high-volume")
-    
+
                     Component.onCompleted: start()
                 }
 
@@ -140,7 +140,7 @@ ItemPage {
                     visible: soundActionGroup.highVolume.state == true
                     text: i18n.tr("High volume can damage your hearing.")
                 }
-    
+
                 SettingsItemTitle {
                     text: i18n.tr("Phone calls:")
                 }
@@ -154,7 +154,7 @@ ItemPage {
                             title: i18n.tr("Ringtone"),
                             showStopButton: true,
                             soundType: 0,
-                            soundsDir: "/usr/share/sounds/ubuntu/ringtones/"
+                            soundsDir: "sounds/ubuntu/ringtones/"
                         }
                     )
                 }
@@ -212,7 +212,7 @@ ItemPage {
                                    { title: i18n.tr("Message received"),
                                       soundType: 1,
                                      soundsDir:
-                                       "/usr/share/sounds/ubuntu/notifications/" })
+                                       "sounds/ubuntu/notifications/" })
                 }
 
                 SettingsListItems.Standard {
@@ -266,7 +266,7 @@ ItemPage {
                 visible: showAllUI
             }
 
-            /* Add some artificial spacing here, once we update the QtQuick.Layouts plugin 
+            /* Add some artificial spacing here, once we update the QtQuick.Layouts plugin
              * to 1.3 we can replace this with Layout.bottomMargin(units.gu(2))
              */
             Item { height: 1; width: 1 }

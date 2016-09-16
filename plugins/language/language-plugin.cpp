@@ -17,15 +17,15 @@
  * You should have received a copy of the GNU General Public License along
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+#include <QStandardPaths>
 #include <QtDebug>
-#include <QtGlobal>
 #include "language-plugin.h"
 #include "keyboard-layout.h"
 
 #include <act/act.h>
 #include <unicode/locid.h>
 
-#define LANGUAGE2LOCALE "/usr/share/language-tools/language2locale"
+#define LANGUAGE2LOCALE "language-tools/language2locale"
 
 static const char * const LOCALE_BLACKLIST[] = {
     "C",
@@ -209,14 +209,21 @@ LanguagePlugin::updateLanguageNamesAndCodes()
         QString language(languageLocale.locale.getLanguage());
 
         if (!likelyLocaleForLanguage.contains(language)) {
-            QProcess likelyProcess;
-            likelyProcess.start(qgetenv("SNAP").append(LANGUAGE2LOCALE),
-                                QStringList(language),
-                                QIODevice::ReadOnly);
-            likelyProcess.waitForFinished();
-            QString likelyLocale(likelyProcess.readAllStandardOutput());
-            likelyLocale = likelyLocale.left(likelyLocale.indexOf('.'));
-            likelyLocaleForLanguage.insert(language, likelyLocale.trimmed());
+            QString l2lPath = QStandardPaths::locate(
+                QStandardPaths::GenericDataLocation, LANGUAGE2LOCALE
+            );
+            if (l2lPath.isEmpty()) {
+                qWarning() << "Could not find language2locale file.";
+            } else {
+                QProcess likelyProcess;
+                likelyProcess.start(l2lPath, QStringList(language),
+                                    QIODevice::ReadOnly);
+                likelyProcess.waitForFinished();
+                QString likelyLocale(likelyProcess.readAllStandardOutput());
+                likelyLocale = likelyLocale.left(likelyLocale.indexOf('.'));
+                likelyLocaleForLanguage.insert(language,
+                                               likelyLocale.trimmed());
+            }
         }
 
         languageLocale.likely = likelyLocaleForLanguage[language] ==

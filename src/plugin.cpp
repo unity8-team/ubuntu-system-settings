@@ -166,7 +166,6 @@ QUrl PluginPrivate::componentFromSettingsFile(const QString &key) const
             }
         }
     }
-    qWarning() << m_baseName << "loads componentUrl" << componentUrl << "from key" << key;
     return componentUrl;
 }
 
