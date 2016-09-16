@@ -1,3 +1,11 @@
+ubuntu-system-settings (0.4+16.10.20160916-0ubuntu1) yakkety; urgency=medium
+
+  [ Michael Terry ]
+  * Use standard default wallpaper instead of unity8's custom one. (LP:
+    #1288364)
+
+ -- Robert Bruce Park <robert.park@canonical.com>  Fri, 16 Sep 2016 21:58:23 +0000
+
 ubuntu-system-settings (0.4+16.10.20160913-0ubuntu1) yakkety; urgency=medium
 
   * Only display the software section and the check for updates button
