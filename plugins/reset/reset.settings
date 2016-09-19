@@ -13,6 +13,7 @@
     ],
     "has-dynamic-keywords": false,
     "has-dynamic-visibility": false,
+    "visible-if-file-exists": "/usr/share/dbus-1/system-services/com.canonical.SystemImage.service",
     "entry-component": "EntryComponent.qml",
     "page-component": "PageComponent.qml"
 }
