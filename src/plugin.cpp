@@ -29,6 +29,7 @@
 #include <QPluginLoader>
 #include <QQmlContext>
 #include <QQmlEngine>
+#include <QStandardPaths>
 #include <QStringList>
 #include <QVariantMap>
 
@@ -38,7 +39,7 @@
 using namespace SystemSettings;
 
 static const QLatin1String pluginModuleDir{PLUGIN_MODULE_DIR};
-static const QLatin1String pluginQmlDir{PLUGIN_QML_DIR};
+static const QLatin1String pluginQmlDir{PLUGIN_QML_DIR_BASE};
 
 namespace SystemSettings {
 
@@ -60,6 +61,7 @@ private:
     mutable PluginInterface2 *m_plugin2;
     QString m_baseName;
     QVariantMap m_data;
+    QString m_dataPath;
 };
 
 } // namespace
@@ -86,6 +88,15 @@ PluginPrivate::PluginPrivate(Plugin *q, const QFileInfo &manifest):
     }
 
     m_data = json.toVariant().toMap();
+
+    QStandardPaths::StandardLocation loc = QStandardPaths::GenericDataLocation;
+    Q_FOREACH(const QString &path, QStandardPaths::standardLocations(loc)) {
+        QDir dir(QString("%1/%2/%3").arg(path).arg(pluginQmlDir).arg(m_baseName));
+        if (dir.exists()) {
+            m_dataPath = dir.absolutePath();
+            break;
+        }
+    }
 }
 
 bool PluginPrivate::ensureLoaded() const
@@ -102,7 +113,12 @@ bool PluginPrivate::ensureLoaded() const
     if (plugin.isEmpty())
         return false;
 
-    QString name = QString("%1/lib%2.so").arg(pluginModuleDir).arg(plugin);
+    QQmlEngine engine;
+    const QString mountPoint = engine.rootContext()
+        ->contextProperty("mountPoint").value<QByteArray>();
+
+    QString name = QString("%1%2/lib%3.so")
+        .arg(mountPoint).arg(pluginModuleDir).arg(plugin);
 
     m_loader.setFileName(name);
     if (Q_UNLIKELY(!m_loader.load())) {
@@ -143,8 +159,8 @@ QUrl PluginPrivate::componentFromSettingsFile(const QString &key) const
     QUrl componentUrl = m_data.value(key).toString();
     if (!componentUrl.isEmpty()) {
         if (componentUrl.isRelative()) {
-            QDir dir(pluginQmlDir);
-            if (dir.cd(m_baseName)) {
+            if (!m_dataPath.isEmpty()) {
+                QDir dir(m_dataPath);
                 componentUrl =
                     QUrl::fromLocalFile(dir.filePath(componentUrl.path()));
             }

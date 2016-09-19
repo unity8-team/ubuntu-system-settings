@@ -36,17 +36,16 @@ ItemPage {
 
     signal save (string uri)
 
-    /* TODO: For now hardcoded paths, later we'll use GSettings */
     /* TODO: fix bug where rotating in uss will change default
     background to tablet_back… thus losing track of phone_back… */
     property string defaultBackground:
         mainPage.width >= units.gu(60) ?
-            "/usr/share/unity8/graphics/tablet_background.jpg" :
-            "/usr/share/unity8/graphics/phone_background.jpg"
+            backgroundPanel.defaultTabletBackgroundFile :
+            backgroundPanel.defaultPhoneBackgroundFile
 
     /* If there is no uri then use the default */
     property string welcomeBackground: (backgroundPanel.backgroundFile === "file:") ?
-                                           "file:///usr/share/unity8/graphics/phone_background.jpg" :
+                                           Qt.resolvedUrl(backgroundPanel.defaultPhoneBackgroundFile) :
                                            backgroundPanel.backgroundFile
 
     property var activeTransfer
