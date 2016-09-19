@@ -109,7 +109,7 @@ ItemPage {
                     property variant volume: action("volume")
                     property variant silentMode: action("silent-mode")
                     property variant highVolume: action("high-volume")
-     
+    
                     Component.onCompleted: start()
                 }
 
@@ -140,7 +140,7 @@ ItemPage {
                     visible: soundActionGroup.highVolume.state == true
                     text: i18n.tr("High volume can damage your hearing.")
                 }
-
+    
                 SettingsItemTitle {
                     text: i18n.tr("Phone calls:")
                 }
