@@ -82,8 +82,12 @@ void PluginManagerPrivate::reload()
     Q_Q(PluginManager);
     clear();
 
-    QFileInfoList searchPaths;
+    /* Create a list of search paths (e.g. /usr/share, /usr/local/share) and
+     * append the baseDir. The reason for not using locateAll is that locateAll
+     * does not seem to work with a dir and file pattern, which means it will
+     * look for all .settings files, not just those in well-known locations. */
     QStandardPaths::StandardLocation loc = QStandardPaths::GenericDataLocation;
+    QFileInfoList searchPaths;
     Q_FOREACH(const QString &path, QStandardPaths::standardLocations(loc)) {
         QDir dir(QString("%1/%2").arg(path).arg(baseDir), "*.settings");
         searchPaths.append(dir.entryInfoList());

@@ -343,7 +343,7 @@ void StorageAbout::prepareMountedVolumes()
             /* Only check devices once */
             if (checked.contains(drive))
                 continue;
-
+            
             checked.append(drive);
             QString devicePath(getDevicePath(drive));
             if (devicePath.isEmpty() || m_mountedVolumes.contains(drive))
