@@ -109,6 +109,7 @@ parts:
       - libqt5sql5-sqlite
       - appmenu-qt5
       - xkb-data
+      - ubuntu-touch-sounds
     after: [desktop/gtk3]
 
   launcher:
