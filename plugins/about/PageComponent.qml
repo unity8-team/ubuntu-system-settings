@@ -236,6 +236,7 @@ ItemPage {
             SettingsListItems.SingleValueProgression {
                 objectName: "devmodeItem"
                 text: i18n.tr("Developer mode")
+                visible: backendInfos.developerModeCapable
                 onClicked: pageStack.push(Qt.resolvedUrl("DevMode.qml"))
             }
         }
