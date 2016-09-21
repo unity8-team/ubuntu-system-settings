@@ -113,9 +113,10 @@ bool PluginPrivate::ensureLoaded() const
     if (plugin.isEmpty())
         return false;
 
-    QQmlEngine engine;
-    const QString mountPoint = engine.rootContext()
-        ->contextProperty("mountPoint").value<QByteArray>();
+    auto ctx = QQmlEngine::contextForObject(q);
+    const QString mountPoint = ctx ?
+        ctx->contextProperty("mountPoint").value<QByteArray>() :
+        "";
 
     QString name = QString("%1%2/lib%3.so")
         .arg(mountPoint).arg(pluginModuleDir).arg(plugin);
