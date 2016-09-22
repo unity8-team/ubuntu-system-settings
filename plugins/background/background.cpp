@@ -50,6 +50,18 @@ QString Background::getBackgroundFile()
     return QString();
 }
 
+QString Background::defaultPhoneBackgroundFile()
+{
+    auto file = "/usr/share/unity8/graphics/phone_background.jpg";
+    return qgetenv("SNAP").append(file);
+}
+
+QString Background::defaultTabletBackgroundFile()
+{
+    auto file = "/usr/share/unity8/graphics/tablet_background.jpg";
+    return qgetenv("SNAP").append(file);
+}
+
 void Background::setBackgroundFile(QUrl backgroundFile)
 {
     if (!backgroundFile.isLocalFile())
@@ -162,7 +174,7 @@ void Background::updateUbuntuArt()
     if (envDir != "")
         dir = QDir(envDir);
     else
-        dir = QDir("/usr/share/backgrounds/");
+        dir = QDir(qgetenv("SNAP") + "/usr/share/backgrounds/");
 
 
     dir.setFilter(QDir::Files | QDir::NoSymLinks);

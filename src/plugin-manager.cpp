@@ -28,11 +28,12 @@
 #include <QProcessEnvironment>
 #include <QQmlContext>
 #include <QQmlEngine>
+#include <QStandardPaths>
 #include <QStringList>
 
 using namespace SystemSettings;
 
-static const QLatin1String baseDir{PLUGIN_MANIFEST_DIR};
+static const QLatin1String baseDir{MANIFEST_DIR};
 
 namespace SystemSettings {
 
@@ -80,7 +81,17 @@ void PluginManagerPrivate::reload()
 {
     Q_Q(PluginManager);
     clear();
-    QDir path(baseDir, "*.settings");
+
+    /* Create a list of search paths (e.g. /usr/share, /usr/local/share) and
+     * append the baseDir. The reason for not using locateAll is that locateAll
+     * does not seem to work with a dir and file pattern, which means it will
+     * look for all .settings files, not just those in well-known locations. */
+    QStandardPaths::StandardLocation loc = QStandardPaths::GenericDataLocation;
+    QFileInfoList searchPaths;
+    Q_FOREACH(const QString &path, QStandardPaths::standardLocations(loc)) {
+        QDir dir(QString("%1/%2").arg(path).arg(baseDir), "*.settings");
+        searchPaths.append(dir.entryInfoList());
+    }
 
     /* Use an environment variable USS_SHOW_ALL_UI to show unfinished / beta /
      * deferred components or panels */
@@ -95,7 +106,7 @@ void PluginManagerPrivate::reload()
     if (ctx)
         ctx->engine()->rootContext()->setContextProperty("showAllUI", showAll);
 
-    Q_FOREACH(QFileInfo fileInfo, path.entryInfoList()) {
+    Q_FOREACH(QFileInfo fileInfo, searchPaths) {
         Plugin *plugin = new Plugin(fileInfo);
         QQmlEngine::setContextForObject(plugin, ctx);
         QMap<QString, Plugin*> &pluginList = m_plugins[plugin->category()];

@@ -10,8 +10,10 @@ set(XVFB_CMD xvfb-run -a -s "-screen 0 640x480x24")
 
 add_definitions(-DI18N_DOMAIN="ubuntu-system-settings")
 add_definitions(-DPLUGIN_PRIVATE_MODULE_DIR="${PLUGIN_PRIVATE_MODULE_DIR}")
-add_definitions(-DPLUGIN_MANIFEST_DIR="${CMAKE_CURRENT_SOURCE_DIR}/data")
 add_definitions(-DPLUGIN_MODULE_DIR="${CMAKE_CURRENT_BINARY_DIR}")
+add_definitions(-DMANIFEST_DIR="data")
+add_definitions(-DPLUGIN_MANIFEST_DIR="${CMAKE_CURRENT_SOURCE_DIR}/data")
+add_definitions(-DQML_DIR="${CMAKE_CURRENT_BINARY_DIR}")
 add_definitions(-DPLUGIN_QML_DIR="${CMAKE_CURRENT_BINARY_DIR}")
 add_definitions(-DSYSTEM_IMAGE_DBUS_TEMPLATE="${CMAKE_SOURCE_DIR}/tests/autopilot/ubuntu_system_settings/tests/systemimage.py")
 
@@ -49,7 +51,9 @@ target_link_libraries(tst-systemimage uss-systemimage)
 qt5_use_modules(tst-plugins Core Qml Test)
 target_link_libraries(tst-plugins SystemSettings ${GLIB_LDFLAGS})
 add_test(tst-plugins tst-plugins)
-set_tests_properties(tst-plugins PROPERTIES ENVIRONMENT "QT_QPA_PLATFORM=minimal")
+set_tests_properties(tst-plugins PROPERTIES ENVIRONMENT
+    "QT_QPA_PLATFORM=minimal;XDG_DATA_DIRS=${CMAKE_CURRENT_SOURCE_DIR}"
+)
 
 qt5_use_modules(tst-arguments Core Test)
 target_link_libraries(tst-arguments ${GLIB_LDFLAGS})

@@ -245,6 +245,16 @@ QString Sound::customRingtonePath()
 QStringList soundsListFromDir(const QString &dirString)
 {
     QDir soundsDir(dirString);
+    if (soundsDir.isRelative()) {
+        QString path = QStandardPaths::locate(
+            QStandardPaths::GenericDataLocation, dirString,
+            QStandardPaths::LocateDirectory
+        );
+        if (path.isEmpty()) {
+            return QStringList();
+        }
+        soundsDir = QDir(path);
+    }
 
     if (soundsDir.exists())
     {

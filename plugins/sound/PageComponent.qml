@@ -154,7 +154,7 @@ ItemPage {
                             title: i18n.tr("Ringtone"),
                             showStopButton: true,
                             soundType: 0,
-                            soundsDir: "/usr/share/sounds/ubuntu/ringtones/"
+                            soundsDir: "sounds/ubuntu/ringtones/"
                         }
                     )
                 }
@@ -212,7 +212,7 @@ ItemPage {
                                    { title: i18n.tr("Message received"),
                                       soundType: 1,
                                      soundsDir:
-                                       "/usr/share/sounds/ubuntu/notifications/" })
+                                       "sounds/ubuntu/notifications/" })
                 }
 
                 SettingsListItems.Standard {
