@@ -39,7 +39,7 @@
 using namespace SystemSettings;
 
 static const QLatin1String pluginModuleDir{PLUGIN_MODULE_DIR};
-static const QLatin1String pluginQmlDir{PLUGIN_QML_DIR_BASE};
+static const QLatin1String pluginQmlDir{QML_DIR};
 
 namespace SystemSettings {
 
@@ -88,15 +88,7 @@ PluginPrivate::PluginPrivate(Plugin *q, const QFileInfo &manifest):
     }
 
     m_data = json.toVariant().toMap();
-
-    QStandardPaths::StandardLocation loc = QStandardPaths::GenericDataLocation;
-    Q_FOREACH(const QString &path, QStandardPaths::standardLocations(loc)) {
-        QDir dir(QString("%1/%2/%3").arg(path).arg(pluginQmlDir).arg(m_baseName));
-        if (dir.exists()) {
-            m_dataPath = dir.absolutePath();
-            break;
-        }
-    }
+    m_dataPath = manifest.absolutePath();
 }
 
 bool PluginPrivate::ensureLoaded() const
@@ -160,8 +152,8 @@ QUrl PluginPrivate::componentFromSettingsFile(const QString &key) const
     QUrl componentUrl = m_data.value(key).toString();
     if (!componentUrl.isEmpty()) {
         if (componentUrl.isRelative()) {
-            if (!m_dataPath.isEmpty()) {
-                QDir dir(m_dataPath);
+            QDir dir(m_dataPath);
+            if (dir.cd(pluginQmlDir) && dir.cd(m_baseName)) {
                 componentUrl =
                     QUrl::fromLocalFile(dir.filePath(componentUrl.path()));
             }
