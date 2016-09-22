@@ -1,3 +1,10 @@
+ubuntu-system-settings (0.4+16.10.20160922.1-0ubuntu1) yakkety; urgency=medium
+
+  * uses XDG_DATA_DIRS where applicable to enable USS to find files and
+    folders on snappy-based systems
+
+ -- Jonas G. Drange <jonas.drange@canonical.com>  Thu, 22 Sep 2016 19:34:17 +0000
+
 ubuntu-system-settings (0.4+16.10.20160913-0ubuntu1) yakkety; urgency=medium
 
   * Only display the software section and the check for updates button
