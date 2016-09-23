@@ -89,7 +89,7 @@ void PluginManagerPrivate::reload()
     QStandardPaths::StandardLocation loc = QStandardPaths::GenericDataLocation;
     QFileInfoList searchPaths;
     Q_FOREACH(const QString &path, QStandardPaths::standardLocations(loc)) {
-        QDir dir(QStringLiteral("%1/%2").arg(path).arg(baseDir), "*.settings");
+        QDir dir(QStringLiteral("%1/%2").arg(path, baseDir), "*.settings");
         searchPaths.append(dir.entryInfoList());
     }
 
