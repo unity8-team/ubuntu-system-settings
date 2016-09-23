@@ -55,9 +55,9 @@ public:
     explicit Background(QObject *parent = 0);
     ~Background();
     QString backgroundFile();
-    QString defaultPhoneBackgroundFile();
-    QString defaultTabletBackgroundFile();
-    void setBackgroundFile(QUrl backgroundFile);
+    QString defaultPhoneBackgroundFile() const;
+    QString defaultTabletBackgroundFile() const;
+    void setBackgroundFile(const QUrl &backgroundFile);
     Q_INVOKABLE QUrl prepareBackgroundFile(const QUrl &url, bool shareWithGreeter);
     Q_INVOKABLE bool fileExists(const QString &file);
     Q_INVOKABLE void rmFile(const QString &file);

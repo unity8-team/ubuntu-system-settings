@@ -50,19 +50,19 @@ QString Background::getBackgroundFile()
     return QString();
 }
 
-QString Background::defaultPhoneBackgroundFile()
+QString Background::defaultPhoneBackgroundFile() const
 {
     auto file = "/usr/share/unity8/graphics/phone_background.jpg";
     return qgetenv("SNAP").append(file);
 }
 
-QString Background::defaultTabletBackgroundFile()
+QString Background::defaultTabletBackgroundFile() const
 {
     auto file = "/usr/share/unity8/graphics/tablet_background.jpg";
     return qgetenv("SNAP").append(file);
 }
 
-void Background::setBackgroundFile(QUrl backgroundFile)
+void Background::setBackgroundFile(const QUrl &backgroundFile)
 {
     if (!backgroundFile.isLocalFile())
         return;

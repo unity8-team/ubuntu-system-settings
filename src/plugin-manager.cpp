@@ -89,7 +89,7 @@ void PluginManagerPrivate::reload()
     QStandardPaths::StandardLocation loc = QStandardPaths::GenericDataLocation;
     QFileInfoList searchPaths;
     Q_FOREACH(const QString &path, QStandardPaths::standardLocations(loc)) {
-        QDir dir(QString("%1/%2").arg(path).arg(baseDir), "*.settings");
+        QDir dir(QStringLiteral("%1/%2").arg(path).arg(baseDir), "*.settings");
         searchPaths.append(dir.entryInfoList());
     }
 
@@ -106,7 +106,7 @@ void PluginManagerPrivate::reload()
     if (ctx)
         ctx->engine()->rootContext()->setContextProperty("showAllUI", showAll);
 
-    Q_FOREACH(QFileInfo fileInfo, searchPaths) {
+    Q_FOREACH(const QFileInfo &fileInfo, searchPaths) {
         Plugin *plugin = new Plugin(fileInfo);
         QQmlEngine::setContextForObject(plugin, ctx);
         QMap<QString, Plugin*> &pluginList = m_plugins[plugin->category()];
