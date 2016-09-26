@@ -27,7 +27,6 @@
 class TstSystemImage: public QObject
 {
     Q_OBJECT
-public:
 private Q_SLOTS:
     void init()
     {
@@ -71,6 +70,8 @@ private Q_SLOTS:
         );
         connect(m_siMock, SIGNAL(mockSettingChanged(QString, QString)),
                 m_systemImage, SLOT(settingsChanged(QString, QString)));
+
+        QTest::qWait(1000);
 
     }
     void cleanup()
