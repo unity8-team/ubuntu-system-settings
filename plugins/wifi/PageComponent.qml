@@ -19,6 +19,7 @@ import SystemSettings 1.0
 import SystemSettings.ListItems 1.0 as SettingsListItems
 import Ubuntu.Components 1.3
 import Ubuntu.Components.Popups 1.3
+import Ubuntu.Connectivity 1.0
 import Ubuntu.SystemSettings.Wifi 1.0
 import QMenuModel 0.1
 
@@ -26,9 +27,20 @@ ItemPage {
     id: wifibase
     objectName: "wifiPage"
     title: i18n.tr("Wi-Fi")
-    property bool wifiEnabled: actionGroup.actionObject.valid ?
-                               actionGroup.actionObject.state : false
+
     property var pluginOptions
+
+    function invokeWiFiConfigurationDialog () {
+        if (Connectivity.wifiEnabled && pluginOptions && pluginOptions['ssid']) {
+            otherNetworLoader.source = "OtherNetwork.qml";
+            PopupUtils.open(otherNetworLoader.item, wifibase, {
+                'ssid': pluginOptions['ssid'],
+                'bssid': pluginOptions['bssid']
+            });
+        }
+    }
+
+    Component.onCompleted: invokeWiFiConfigurationDialog()
 
     UnityMenuModel {
         id: menuModel
@@ -45,17 +57,6 @@ ItemPage {
     MenuItemFactory {
         id: menuFactory
         model: mainMenu.model
-    }
-
-    QDBusActionGroup {
-        id: actionGroup
-        busType: 1
-        busName: "com.canonical.indicator.network"
-        objectPath: "/com/canonical/indicator/network"
-        property variant actionObject: action("wifi.enable")
-        Component.onCompleted: {
-            start()
-        }
     }
 
     Flickable {
@@ -126,7 +127,7 @@ ItemPage {
             SettingsListItems.Standard {
                 objectName: "connectToHiddenNetwork"
                 text: i18n.tr("Connect to hidden network…")
-                visible : wifibase.wifiEnabled
+                visible : Connectivity.wifiEnabled
                 onClicked: {
                     otherNetworLoader.source = "OtherNetwork.qml";
                     PopupUtils.open(otherNetworLoader.item);
@@ -153,18 +154,11 @@ ItemPage {
 
     Connections {
         target: wifibase
-
-        function invokeWiFiConfigurationDialog () {
-            if (wifiEnabled && pluginOptions && pluginOptions['ssid']) {
-                otherNetworLoader.source = "OtherNetwork.qml";
-                PopupUtils.open(otherNetworLoader.item, wifibase, {
-                    'ssid': pluginOptions['ssid'],
-                    'bssid': pluginOptions['bssid']
-                });
-            }
-        }
-
-        onWifiEnabledChanged: invokeWiFiConfigurationDialog()
         onPluginOptionsChanged: invokeWiFiConfigurationDialog()
+    }
+
+    Connections {
+        target: Connectivity
+        onWifiEnabledUpdated: invokeWiFiConfigurationDialog()
     }
 }

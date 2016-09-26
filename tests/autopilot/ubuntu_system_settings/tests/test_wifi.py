@@ -20,6 +20,10 @@ from ubuntu_system_settings.utils.i18n import ugettext as _
 class WifiEnabledTestCase(WifiBaseTestCase):
     """Tests for Language Page"""
 
+    connectivity_parameters = {
+        'WifiEnabled': True,
+    }
+
     def test_wifi_page_title_is_correct(self):
         """Checks whether Wifi page is available"""
         self.assertThat(
@@ -52,9 +56,9 @@ class WifiEnabledTestCase(WifiBaseTestCase):
 
 class WifiDisabledTestCase(WifiBaseTestCase):
 
-    indicatornetwork_parameters = {'actions': {
-        'wifi.enable': (False, '', [False]),
-    }}
+    connectivity_parameters = {
+        'WifiEnabled': False,
+    }
 
     def test_connect_to_hidden_network_dialog_visibility(self):
         self.assertThat(
@@ -67,6 +71,9 @@ class WifiDisabledTestCase(WifiBaseTestCase):
 class WifiWithTestSSIDTestCase(WifiWithSSIDBaseTestCase):
 
     ssid = 'test_ap'
+    connectivity_parameters = {
+        'WifiEnabled': True,
+    }
 
     def test_handle_wifi_url_with_ssid(self):
         dialog = self.main_view.wait_select_single(
