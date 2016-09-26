@@ -52,9 +52,9 @@ class WifiEnabledTestCase(WifiBaseTestCase):
 
 class WifiDisabledTestCase(WifiBaseTestCase):
 
-    indicatornetwork_parameters = {'actions': {
-        'wifi.enable': (False, '', [False]),
-    }}
+    connectivity_parameters = {
+        'WifiEnabled': False,
+    }
 
     def test_connect_to_hidden_network_dialog_visibility(self):
         self.assertThat(
@@ -67,6 +67,9 @@ class WifiDisabledTestCase(WifiBaseTestCase):
 class WifiWithTestSSIDTestCase(WifiWithSSIDBaseTestCase):
 
     ssid = 'test_ap'
+    connectivity_parameters = {
+        'WifiEnabled': True,
+    }
 
     def test_handle_wifi_url_with_ssid(self):
         dialog = self.main_view.wait_select_single(

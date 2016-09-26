@@ -597,6 +597,8 @@ class CellularBaseTestCase(UbuntuSystemSettingsOfonoTestCase):
 class HotspotBaseTestCase(UbuntuSystemSettingsHotspotTestCase):
 
     def setUp(self):
+        self.useFixture(EnvironmentVariable(
+            'USS_SHOW_ALL_UI', '1'))
         super(HotspotBaseTestCase, self).setUp()
         self.hotspot_page = self.main_view.go_to_hotspot_page()
 
@@ -612,6 +614,8 @@ class BluetoothBaseTestCase(UbuntuSystemSettingsTestCase):
 class PhoneOfonoBaseTestCase(UbuntuSystemSettingsOfonoTestCase):
     def setUp(self):
         """ Go to Phone page """
+        self.useFixture(EnvironmentVariable(
+            'USS_SHOW_ALL_UI', '1'))
         super(PhoneOfonoBaseTestCase, self).setUp()
         self.phone_page = self.main_view.go_to_phone_page()
 
@@ -1183,6 +1187,11 @@ class WifiBaseTestCase(UbuntuSystemSettingsTestCase,
             inetwork, parameters=self.indicatornetwork_parameters,
             stdout=subprocess.PIPE)
 
+        ctv_tmpl = os.path.join(os.path.dirname(__file__), 'connectivity.py')
+        (self.ctv_mock, self.obj_ctv) = self.spawn_server_template(
+            ctv_tmpl, parameters=self.connectivity_parameters,
+            stdout=subprocess.PIPE)
+
         self.obj_nm.Reset()
 
         # Add a mock NetworkManager environment so we get consistent results
@@ -1211,6 +1220,8 @@ class WifiBaseTestCase(UbuntuSystemSettingsTestCase,
             self.main_view.scroll_to_and_click
 
     def tearDown(self):
+        self.ctv_mock.terminate()
+        self.ctv_mock.wait()
         self.inetwork_mock.terminate()
         self.inetwork_mock.wait()
         super(WifiBaseTestCase, self).tearDown()

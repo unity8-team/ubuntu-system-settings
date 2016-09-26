@@ -10,6 +10,7 @@ from time import sleep
 
 from autopilot.introspection.dbus import StateNotFoundError
 from autopilot.matchers import Eventually
+from fixtures import EnvironmentVariable
 from testtools.matchers import Equals, raises, StartsWith
 from unittest import skip
 
@@ -274,9 +275,12 @@ class DualSimCellularTestCase(CellularBaseTestCase):
         # click ask
         self.system_settings.main_view.scroll_to_and_click(
             self.get_default_sim_for_calls_selector('ask'))
+
         # click first sim
-        self.system_settings.main_view.scroll_to_and_click(
-            self.get_default_sim_for_calls_selector('/ril_0'))
+        obj = self.get_default_sim_for_calls_selector('/ril_0')
+        self.system_settings.main_view.scroll_to(obj)
+        sleep(0.3)
+        self.system_settings.main_view.pointing_device.click_object(obj)
 
         self.assertThat(
             lambda: self.obj_phone.GetDefaultSimForCalls(),
@@ -296,6 +300,10 @@ class DualSimCellularTestCase(CellularBaseTestCase):
 
 
 class ApnTestCase(CellularBaseTestCase):
+
+    def setUp(self):
+        super(ApnTestCase, self).setUp()
+        self.useFixture(EnvironmentVariable("UITK_USE_MALIIT", "1"))
 
     @skip('Skip until we can get the CPO for ListItem trigger actions')
     def test_remove_apn(self):
