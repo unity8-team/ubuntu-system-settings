@@ -73,7 +73,7 @@ ItemPage {
         anchors.fill: parent
         source: uri
         sourceSize.height: height
-        sourceSize.width: width
+        sourceSize.width: 0
         fillMode: Image.PreserveAspectCrop
     }
 
@@ -100,7 +100,6 @@ ItemPage {
                 text: preview.imported ?
                     i18n.tr("Remove image") : i18n.tr("Cancel")
                 width: (previewButtons.width-units.gu(2)*4)/2
-                gradient: UbuntuColors.greyGradient
                 onClicked: preview.state = "cancelled"
             }
             Button {

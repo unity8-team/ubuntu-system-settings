@@ -27,6 +27,8 @@
 #include <unistd.h>
 #include <QDebug>
 
+#define SYSTEM_BACKGROUND_DIR "/usr/share/backgrounds"
+
 Background::Background(QObject *parent) :
     QObject(parent)
 {
@@ -43,23 +45,12 @@ QString Background::getBackgroundFile()
     QVariant answer = m_accountsService.getUserProperty(
                 "org.freedesktop.Accounts.User",
                 "BackgroundFile");
+    QString filename = answer.toString();
 
-    if (answer.isValid())
-        return answer.toString();
-
-    return QString();
-}
-
-QString Background::defaultPhoneBackgroundFile() const
-{
-    auto file = "/usr/share/unity8/graphics/phone_background.jpg";
-    return qgetenv("SNAP").append(file);
-}
-
-QString Background::defaultTabletBackgroundFile() const
-{
-    auto file = "/usr/share/unity8/graphics/tablet_background.jpg";
-    return qgetenv("SNAP").append(file);
+    if (filename.isEmpty() || !QFile::exists(filename))
+        return defaultBackgroundFile();
+    else
+        return filename;
 }
 
 void Background::setBackgroundFile(const QUrl &backgroundFile)
@@ -70,10 +61,21 @@ void Background::setBackgroundFile(const QUrl &backgroundFile)
     if (backgroundFile.url() == m_backgroundFile)
         return;
 
+    QString oldBackgroundFile = m_backgroundFile;
+
     m_backgroundFile = backgroundFile.url();
     m_accountsService.customSetUserProperty("SetBackgroundFile",
                                             backgroundFile.path());
     Q_EMIT backgroundFileChanged();
+
+    // If old background was a system copy that we still have on the system,
+    // delete our copy.  We don't need it anymore.
+    if (oldBackgroundFile.contains(getCopiedSystemBackgroundFolder().path())) {
+        QString fileName = QUrl(oldBackgroundFile).fileName();
+        if (QFile::exists(qgetenv("SNAP") + SYSTEM_BACKGROUND_DIR "/" + fileName)) {
+            rmFile(oldBackgroundFile);
+        }
+    }
 }
 
 void Background::slotChanged()
@@ -103,8 +105,23 @@ void Background::updateCustomBackgrounds()
     m_customBackgrounds.clear();
     QFileInfoList tmpList;
     tmpList << getCustomBackgroundFolder().entryInfoList(QDir::Files | QDir::NoSymLinks);
-    if (getCustomBackgroundFolder() != getContentHubFolder())
+    if (getCustomBackgroundFolder() != getContentHubFolder()) {
         tmpList << getContentHubFolder().entryInfoList(QDir::Files | QDir::NoSymLinks);
+
+        // If any of our copied system backgrounds are no longer on the system,
+        // treat them as custom backgrounds.  This would only likely happen if
+        // a user was using a background from vivid-wallpapers and we upgraded
+        // to xenial-wallpapers.  In this case, we want the old paper to show
+        // as a custom background, so that the user can delete it when done
+        // with it.
+        // So scan the copied backgrounds.
+        QFileInfoList copyList = getCopiedSystemBackgroundFolder().entryInfoList(QDir::Files | QDir::NoSymLinks);
+        QDir systemDir = QDir(qgetenv("SNAP") + SYSTEM_BACKGROUND_DIR);
+        foreach (QFileInfo f, copyList) {
+            if (!systemDir.exists(f.fileName()))
+                tmpList << f;
+        }
+    }
     if (!tmpList.isEmpty())
     {
         foreach (QFileInfo f, tmpList)
@@ -118,9 +135,18 @@ QUrl Background::prepareBackgroundFile(const QUrl &url, bool shareWithGreeter)
     QUrl prepared = url;
 
     if (getCustomBackgroundFolder() != getContentHubFolder() &&
-        url.path().startsWith(getContentHubFolder().path()))
+        !url.path().startsWith(getCustomBackgroundFolder().path()) &&
+        url != QUrl::fromLocalFile(defaultBackgroundFile()))
     {
-        QDir backgroundFolder = getCustomBackgroundFolder();
+        QDir backgroundFolder;
+        bool moveFile = false;
+        if (url.path().startsWith(getContentHubFolder().path())) {
+            backgroundFolder = getCustomBackgroundFolder();
+            moveFile = true;
+        } else {
+            backgroundFolder = getCopiedSystemBackgroundFolder();
+        }
+
         QUrl newPath = QUrl::fromLocalFile(backgroundFolder.path() + "/" + url.fileName());
 
         if (QFile(newPath.path()).exists())
@@ -135,11 +161,17 @@ QUrl Background::prepareBackgroundFile(const QUrl &url, bool shareWithGreeter)
 
         // Move file from local ContentHub dump to shared greeter data folder
         if (shareWithGreeter &&
-            QDir::root().mkpath(backgroundFolder.path()) &&
-            QFile::rename(url.path(), newPath.path()))
+            QDir::root().mkpath(backgroundFolder.path()))
         {
-            updateCustomBackgrounds();
-            prepared = newPath;
+            if ((moveFile && QFile::rename(url.path(), newPath.path())) ||
+                (!moveFile && (link(url.path().toUtf8().data(),
+                                     newPath.path().toUtf8().data()) == 0 ||
+                               QFile::copy(url.path(), newPath.path()))))
+            {
+                updateUbuntuArt();
+                updateCustomBackgrounds();
+                prepared = newPath;
+            }
         }
     }
 
@@ -156,6 +188,11 @@ QDir Background::getCustomBackgroundFolder()
         return dataDir + "/ubuntu-system-settings/Pictures";
 }
 
+QDir Background::getCopiedSystemBackgroundFolder()
+{
+    return getCustomBackgroundFolder().path() + "/System";
+}
+
 QDir Background::getContentHubFolder()
 {
     return QStandardPaths::writableLocation(QStandardPaths::DataLocation) + "/Pictures";
@@ -165,26 +202,37 @@ QStringList Background::ubuntuArt()
 {
     return m_ubuntuArt;
 }
+
 void Background::updateUbuntuArt()
 {
-
     QString envDir(qgetenv("SYSTEM_SETTINGS_UBUNTU_ART_DIR"));
     QDir dir;
+    QDir copiedBackgroundDir;
 
-    if (envDir != "")
+    if (envDir != "") {
         dir = QDir(envDir);
-    else
-        dir = QDir(qgetenv("SNAP") + "/usr/share/backgrounds/");
+        copiedBackgroundDir = dir;
+    } else {
+        dir = QDir(qgetenv("SNAP") + SYSTEM_BACKGROUND_DIR);
+        copiedBackgroundDir = getCopiedSystemBackgroundFolder();
+    }
 
+    m_ubuntuArt.clear();
 
     dir.setFilter(QDir::Files | QDir::NoSymLinks);
     dir.setSorting(QDir::Name);
     QFileInfoList tmpList = dir.entryInfoList();
     foreach (QFileInfo f, tmpList)
     {
-        if (f.fileName() != "warty-final-ubuntu.png")
-            m_ubuntuArt.append(QUrl::fromLocalFile(f.absoluteFilePath()).toString());
+        QString absPath = f.absoluteFilePath();
+
+        // Prefer copied versions.
+        if (copiedBackgroundDir.exists(f.fileName()))
+            absPath = copiedBackgroundDir.absoluteFilePath(f.fileName());
+
+        m_ubuntuArt.append(QUrl::fromLocalFile(absPath).toString());
     }
+
     Q_EMIT ubuntuArtChanged();
 }
 
@@ -201,7 +249,9 @@ void Background::rmFile(const QString &file)
     if (file.isEmpty() || file.isNull())
         return;
 
-    if (!file.contains(getCustomBackgroundFolder().path()) && !file.contains(getContentHubFolder().path()))
+    if (!file.contains(getCustomBackgroundFolder().path()) &&
+        !file.contains(getCopiedSystemBackgroundFolder().path()) &&
+        !file.contains(getContentHubFolder().path()))
         return;
 
     QUrl fileUri(file);
@@ -211,9 +261,17 @@ void Background::rmFile(const QString &file)
     QFile filePath(fileUri.path());
     if (filePath.exists())
     {
-        if (filePath.remove())
+        if (filePath.remove()) {
+            updateUbuntuArt();
             updateCustomBackgrounds();
+        }
     }
+}
+
+QString Background::defaultBackgroundFile() const
+{
+    /* TODO: For now hardcoded path, later we'll use GSettings */
+    return SYSTEM_BACKGROUND_DIR "/warty-final-ubuntu.png";
 }
 
 Background::~Background() {

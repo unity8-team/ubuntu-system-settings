@@ -200,7 +200,6 @@ Column {
             Button {
                 id: cancel
                 objectName: "cancelRename"
-                gradient: UbuntuColors.greyGradient
                 text: i18n.tr("Cancel")
                 width: (editor.width / 2) - units.gu(1)
                 onClicked: {

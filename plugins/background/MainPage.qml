@@ -36,17 +36,7 @@ ItemPage {
 
     signal save (string uri)
 
-    /* TODO: fix bug where rotating in uss will change default
-    background to tablet_back… thus losing track of phone_back… */
-    property string defaultBackground:
-        mainPage.width >= units.gu(60) ?
-            backgroundPanel.defaultTabletBackgroundFile :
-            backgroundPanel.defaultPhoneBackgroundFile
-
-    /* If there is no uri then use the default */
-    property string welcomeBackground: (backgroundPanel.backgroundFile === "file:") ?
-                                           Qt.resolvedUrl(backgroundPanel.defaultPhoneBackgroundFile) :
-                                           backgroundPanel.backgroundFile
+    readonly property string welcomeBackground: backgroundPanel.backgroundFile
 
     property var activeTransfer
 
@@ -87,13 +77,7 @@ ItemPage {
                 anchors.left: parent.left
                 anchors.right: parent.right
                 columns: 3
-                bgmodel: {
-                    // Make a shallow copy
-                    var backgrounds = backgroundPanel.ubuntuArt.slice(0)
-                    if (backgroundPanel.fileExists(defaultBackground))
-                        backgrounds.push(Qt.resolvedUrl(defaultBackground))
-                    return backgrounds
-                }
+                bgmodel: backgroundPanel.ubuntuArt
                 backgroundPanel: backgroundPanel
                 title: i18n.tr("Ubuntu Art")
                 current: welcomeBackground
