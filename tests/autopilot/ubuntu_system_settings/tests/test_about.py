@@ -139,15 +139,11 @@ class AboutSystemImageTestCase(AboutSystemImageBaseTestCase):
         bus = self.get_dbus(system_bus=True)
         service = bus.get_object('com.canonical.SystemImage', '/Service')
         iface = dbus.Interface(service, 'com.canonical.SystemImage')
-        return iface.Info()
+        return iface.Information()
 
     def _get_last_updated_date(self):
-        info = self._get_system_image_iface()[3]
-
-        if info == 'Unknown':
-            return _('Never')
-        else:
-            return dateutil.parser.parse(info.split()[0]).date()
+        info = self._get_system_image_iface()
+        return dateutil.parser.parse(info['last_update_date']).date()
 
     def test_last_updated(self):
         """Checks whether Last Updated info is correct."""
