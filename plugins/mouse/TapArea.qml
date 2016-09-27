@@ -30,6 +30,7 @@ Item {
 
     Timer {
         id: clickTimer
+        objectName: "clickTimer"
         triggeredOnStart: false
         repeat: false
         interval: doubleTapSpeed

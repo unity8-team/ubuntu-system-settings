@@ -1,3 +1,219 @@
+ubuntu-system-settings (0.4+16.10.20160916-0ubuntu1) yakkety; urgency=medium
+
+  [ Michael Terry ]
+  * Use standard default wallpaper instead of unity8's custom one. (LP:
+    #1288364)
+  * Fix highlight color of currently selected background.
+
+ -- Michał Sawicz <michal.sawicz@canonical.com>  Fri, 16 Sep 2016 15:14:16 +0000
+
+ubuntu-system-settings (0.4+16.10.20160913-0ubuntu1) yakkety; urgency=medium
+
+  * Only display the software section and the check for updates button
+    if we know the current build (LP: #1612263)
+  * cellular, phone, hotspot: Don't default to visible
+  * Updated depends to match renaming of qml-module-ofono (LP: #1342031)
+  * Handle rename of qtquick-layouts build depends
+  * Dropped aethercast to a suggests
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Tue, 13 Sep 2016 14:29:15 +0000
+
+ubuntu-system-settings (0.4+16.10.20160906-0ubuntu1) yakkety; urgency=medium
+
+  [ You-Sheng Yang ]
+  * Build about plugin on arm64. (LP: #1618157)
+
+ -- Jonas G. Drange <jonas.drange@canonical.com>  Tue, 06 Sep 2016 10:49:49 +0000
+
+ubuntu-system-settings (0.4+16.10.20160831.1-0ubuntu1) yakkety; urgency=medium
+
+  [ jonas-drange ]
+  * fixes two crashes in About -> Check for update and Battery ->
+    Brightness (LP: #1617217)
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Wed, 31 Aug 2016 15:19:48 +0000
+
+ubuntu-system-settings (0.4+16.10.20160826-0ubuntu1) yakkety; urgency=medium
+
+  [ jonas-drange ]
+  * versionTag refers to the currently installed OTA, not a pending
+    image update, so remove it (LP: #1616093)
+  * fix cases where check label is really long (via translations) (LP:
+    #1616099)
+  * do not overwrite updatedAt (LP: #1616800)
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Fri, 26 Aug 2016 14:41:25 +0000
+
+ubuntu-system-settings (0.4+16.10.20160824.1-0ubuntu1) yakkety; urgency=medium
+
+  [ Florian Boucault ]
+  * Crossbuilding packaging fixes.
+
+  [ Pat McGowan ]
+  * allows uss to be built by crossbuilder (LP: #1433590, #1614637)
+
+  [ jonas-drange ]
+  * use python3 in mock click command
+  * force python3 to run by refering to it in the shebang of
+    test_code.py
+
+ -- Jonas G. Drange <jonas.drange@canonical.com>  Wed, 24 Aug 2016 13:52:14 +0000
+
+ubuntu-system-settings (0.4+16.10.20160819-0ubuntu1) yakkety; urgency=medium
+
+  [ Ken VanDine ]
+  * Fixes for failing autopilot tests
+
+  [ jonas-drange ]
+  * Port most autopilot tests in test_wifi to qml tests and ctests.
+  * patch environment with required maliit variable whenever we use
+    osk.dismiss()
+
+ -- Jonas G. Drange <jonas.drange@canonical.com>  Fri, 19 Aug 2016 12:50:21 +0000
+
+ubuntu-system-settings (0.4+16.10.20160817.2-0ubuntu1) yakkety; urgency=medium
+
+  [ jonas-drange ]
+  * rewrite the system update panel
+
+ -- Jonas G. Drange <jonas.drange@canonical.com>  Wed, 17 Aug 2016 11:18:39 +0000
+
+ubuntu-system-settings (0.4+16.10.20160817-0ubuntu1) yakkety; urgency=medium
+
+  * Switch the powerd depends to repowerd. powerd is now a transitional
+    _all package so gets unconditionally evaluated which is not the
+    purpose. (LP: #1612646)
+
+ -- Timo Jyrinki <timo.jyrinki@canonical.com>  Wed, 17 Aug 2016 09:23:42 +0000
+
+ubuntu-system-settings (0.4+16.10.20160811.2-0ubuntu1) yakkety; urgency=medium
+
+  * Skip tests on powerpc due to Qt 5.6 bug (LP: #1606927)
+  * Make device always valid.
+
+ -- Konrad Zapałowicz <konrad.zapalowicz@canonical.com>  Thu, 11 Aug 2016 12:37:40 +0000
+
+ubuntu-system-settings (0.4+16.10.20160810-0ubuntu1) yakkety; urgency=medium
+
+  * Skip tests on powerpc due to Qt 5.6 bug (LP: #1606927)
+  * Depend on upstart to prevent s390x problems until upstart has been
+    fixed.
+  * bluetooth: Add Apperance characteristic to type conversion
+
+ -- Konrad Zapałowicz <konrad.zapalowicz@canonical.com>  Wed, 10 Aug 2016 13:17:54 +0000
+
+ubuntu-system-settings (0.4+16.10.20160808-0ubuntu2) yakkety; urgency=medium
+
+  * Readd the upstart workaround by doing a rebuild from trunk.
+
+ -- Timo Jyrinki <timo-jyrinki@ubuntu.com>  Wed, 10 Aug 2016 15:09:25 +0300
+
+ubuntu-system-settings (0.4+16.10.20160808-0ubuntu1) yakkety; urgency=medium
+
+  [ Simon Fels ]
+  * Fixes for Aethercast support
+
+ -- morphis <simon.fels@canonical.com>  Mon, 08 Aug 2016 08:59:08 +0000
+
+ubuntu-system-settings (0.4+16.10.20160730-0ubuntu2) yakkety; urgency=medium
+
+  * No change rebuild
+  * Depend on upstart to prevent s390x problems until upstart has been fixed.
+
+ -- Timo Jyrinki <timo-jyrinki@ubuntu.com>  Tue, 09 Aug 2016 15:38:18 +0300
+
+ubuntu-system-settings (0.4+16.10.20160730-0ubuntu1) yakkety; urgency=medium
+
+  [ Lukáš Tinkl ]
+  * Fixes for indicator-keyboard (gsettings compat, HW kbd panel
+    shortcut)
+
+  [ Michał Sawicz ]
+  * Skip tests on powerpc due to Qt 5.6 bug (LP: #1606927)
+
+ -- Lukáš Tinkl <lukas.tinkl@canonical.com>  Sat, 30 Jul 2016 21:20:18 +0000
+
+ubuntu-system-settings (0.4+16.10.20160722.1-0ubuntu1) yakkety; urgency=medium
+
+  [ Ken VanDine ]
+  * Added missing depends on qtdeclarative5-ubuntu-history0.1, qml-
+    module-qtcontacts and qtdeclarative5-ubuntu-keyboard-extensions0.1
+  * Ported to use Slots layout and updated visuals (LP: #1596529)
+
+  [ Ken VanDine, jonas-drange ]
+  * new module SystemSettings.ListItems
+
+  [ Olivier Tilloy ]
+  * Fix unit tests when run under an sbuild chroot. (LP: #1592475)
+
+  [ jonas-drange ]
+  * Do runtime check of address list size.
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Fri, 22 Jul 2016 14:39:12 +0000
+
+ubuntu-system-settings (0.4+16.10.20160708-0ubuntu1) yakkety; urgency=medium
+
+  [ Arthur Mello ]
+  * Implement extended Notifications panel using Gsettings to store
+    notifications settings for each app
+  * Skip tests on arm64 as it is known to be flaky with current
+    configuration
+
+ -- Arthur Renato Mello <arthur.mello@canonical.com>  Fri, 08 Jul 2016 22:19:17 +0000
+
+ubuntu-system-settings (0.4+16.10.20160624-0ubuntu1) yakkety; urgency=medium
+
+  [ Antti Kaijanmäki ]
+  * use Connectivity API for cellular data and roaming control. (LP:
+    #1373463)
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Fri, 24 Jun 2016 13:42:47 +0000
+
+ubuntu-system-settings (0.4+16.10.20160619-0ubuntu1) yakkety; urgency=medium
+
+  [ jonas-drange ]
+  * expose fingerprint ID panel and the Fingerprint lock setting (LP:
+    #1547040)
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Sun, 19 Jun 2016 02:48:24 +0000
+
+ubuntu-system-settings (0.4+16.10.20160609-0ubuntu1) yakkety; urgency=medium
+
+  * Fix pin code request is rejected because device is not valid (LP:
+    #1539158)
+
+ -- Konrad Zapałowicz <konrad.zapalowicz@canonical.com>  Thu, 09 Jun 2016 11:16:36 +0000
+
+ubuntu-system-settings (0.4+16.10.20160606-0ubuntu1) yakkety; urgency=medium
+
+  [ Michael Terry ]
+  * Update some button colors to the new theme style (LP: #1581047)
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Mon, 06 Jun 2016 22:02:47 +0000
+
+ubuntu-system-settings (0.4+16.10.20160525-0ubuntu1) yakkety; urgency=medium
+
+  [ Michael Terry ]
+  * Bump version number for change in TimeDate plugin API
+
+  [ CI Train Bot ]
+  * No-change rebuild.
+
+ -- Michael Terry <michael.terry@canonical.com>  Wed, 25 May 2016 06:02:08 +0000
+
+ubuntu-system-settings (0.3+16.10.20160523-0ubuntu1) yakkety; urgency=medium
+
+  * Catch connection errors asynchronously
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Mon, 23 May 2016 12:27:38 +0000
+
+ubuntu-system-settings (0.3+16.04.20160517-0ubuntu1) xenial; urgency=medium
+
+  * Fixes to sleep/idle settings in the Battery and Security panels (LP:
+    #1581423)
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Tue, 17 May 2016 14:04:58 +0000
+
 ubuntu-system-settings (0.3+16.04.20160511-0ubuntu1) xenial; urgency=medium
 
   * Play the haptic feedback before pushing the page so it happens when

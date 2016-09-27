@@ -18,42 +18,10 @@ MAIN_OBJ = '/Service'
 SYSTEM_BUS = True
 
 
-def load(mock, parameters):
-    global _parameters
-    _parameters = parameters
-
-    mock.props = {
-        'build_number': _parameters.get('build_number', 0),
-        'device': _parameters.get('device', ''),
-        'channel': _parameters.get('channel', ''),
-        'last_update_date': _parameters.get('last_update_date', ''),
-        'last_check_date': _parameters.get('last_check_date', ''),
-        'target_build_number': _parameters.get('target_build_number', -1),
-        'target_version_detail': _parameters.get('target_version_detail', ''),
-        'version_detail': _parameters.get(
-            'version_detail', dbus.Dictionary({}, signature='ss')
-        )
-    }
-
-
-@dbus.service.method(MAIN_IFACE,
-                     in_signature='', out_signature='isssa{ss}')
-def Info(self):
-    return (
-        self.props['build_number'],
-        self.props['device'],
-        self.props['channel'],
-        self.props['last_update_date'],
-        self.props['version_detail']
-    )
-
-
-@dbus.service.method(MAIN_IFACE,
-                     in_signature='', out_signature='a{ss}')
-def Information(self):
+def information(self):
 
     # Build a version_details key=value string
-    vd_dict = self.props['version_detail']
+    vd_dict = self.si_props['version_detail']
     vd_str = ''
     for i, k in enumerate(vd_dict):
         cmma = ','
@@ -62,11 +30,77 @@ def Information(self):
         vd_str += '%s=%s%s' % (k, str(vd_dict[k]), cmma)
 
     return dbus.Dictionary({
-        'target_build_number': str(self.props['target_build_number']),
-        'device_name': self.props['device'],
-        'last_check_date': self.props['last_check_date'],
+        'target_build_number': str(self.si_props['target_build_number']),
+        'device_name': self.si_props['device'],
+        'last_check_date': self.si_props['last_check_date'],
         'version_detail': vd_str,
-        'channel_name': self.props['channel'],
-        'last_update_date': self.props['last_update_date'],
-        'current_build_number': str(self.props['build_number'])
+        'channel_name': self.si_props['channel'],
+        'last_update_date': self.si_props['last_update_date'],
+        'current_build_number': str(self.si_props['build_number'])
     }, signature='ss')
+
+
+def pausedownload(self):
+    return self.si_props['reply_on_pause']
+
+
+def cancelupdate(self):
+    return self.si_props['reply_on_cancel']
+
+
+def getsetting(self, key):
+    return str(self.si_props[key])
+
+
+def setsetting(self, key, value):
+    self.si_props[key] = value
+    self.EmitSignal(
+        MAIN_IFACE, 'SettingChanged', 'ss', [key, value]
+    )
+
+
+def load(mock, parameters):
+    global _parameters
+    _parameters = parameters
+
+    mock.si_props = {
+        'build_number': _parameters.get('build_number', 0),
+        'device': _parameters.get('device', ''),
+        'auto_download': _parameters.get('auto_download', -1),
+        'channel': _parameters.get('channel', ''),
+        'last_update_date': _parameters.get('last_update_date', ''),
+        'last_check_date': _parameters.get('last_check_date', ''),
+        'target_build_number': _parameters.get('target_build_number', -1),
+        'target_version_detail': _parameters.get('target_version_detail', ''),
+        'version_detail': _parameters.get(
+            'version_detail', dbus.Dictionary({}, signature='ss')
+        ),
+        'update_available': _parameters.get('update_available', False),
+        'reply_on_pause': _parameters.get('reply_on_pause', ''),
+        'reply_on_cancel': _parameters.get('reply_on_cancel', ''),
+        'failures_before_warning': _parameters.get('failures_before_warning',
+                                                   None),
+    }
+
+    mock.information = information
+    mock.pausedownload = pausedownload
+    mock.cancelupdate = cancelupdate
+    mock.getsetting = getsetting
+    mock.setsetting = setsetting
+
+    mock.AddMethods(MAIN_IFACE, [
+        ('Information', '', 'a{ss}', 'ret = self.information(self)'),
+        ('Exit', '', '', ''),
+        ('ApplyUpdate', '', '', ''),
+        ('CheckForUpdate', '', '', ''),
+        ('FactoryReset', '', '', ''),
+        ('ProductionReset', '', '', ''),
+        ('UpdateDownloaded', '', '', ''),
+        ('DownloadUpdate', '', '', ''),
+        ('ForceAllowGSMDownload', '', '', ''),
+        ('GetSetting', 's', 's', 'ret = self.getsetting(self, args[0])'),
+        ('SetSetting', 'ss', '',
+         'ret = self.setsetting(self, args[0], args[1])'),
+        ('PauseDownload', '', 's', 'ret = self.pausedownload(self)'),
+        ('CancelUpdate', '', 's', 'ret = self.cancelupdate(self)'),
+    ])

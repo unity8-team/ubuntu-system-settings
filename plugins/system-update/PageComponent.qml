@@ -1,10 +1,11 @@
 /*
  * This file is part of system-settings
  *
- * Copyright (C) 2013-2014 Canonical Ltd.
+ * Copyright (C) 2013-2016 Canonical Ltd.
  *
  * Contact: Didier Roche <didier.roches@canonical.com>
- * Contact: Diego Sarmentero <diego.sarmentero@canonical.com>
+ *          Diego Sarmentero <diego.sarmentero@canonical.com>
+ *          Jonas G. Drange <jonas.drange@canonical.com>
  *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License version 3, as published
@@ -29,27 +30,43 @@ import Ubuntu.OnlineAccounts.Client 0.1
 import Ubuntu.SystemSettings.Update 1.0
 import Ubuntu.Connectivity 1.0
 
-
 ItemPage {
     id: root
     objectName: "systemUpdatesPage"
 
-    title: installingImageUpdate.visible ? "" : i18n.tr("Updates")
-    flickable: installingImageUpdate.visible ? null : scrollWidget
+    header: PageHeader {
+        title: i18n.tr("Updates")
+        flickable: scrollWidget
+    }
 
-    property bool installAll: false
-    property bool includeSystemUpdate: false
-    property bool systemUpdateInProgress: false
-    property int updatesAvailable: 0
-    property bool isCharging: indicatorPower.deviceState === "charging"
-    property bool batterySafeForUpdate: isCharging || chargeLevel > 25
-    property var chargeLevel: indicatorPower.batteryLevel || 0
-    property var notificationAction;
-    property string errorDialogText: ""
 
-    onUpdatesAvailableChanged: {
-        if (updatesAvailable < 1 && root.state != "SEARCHING")
-            root.state = "NOUPDATES";
+    property bool batchMode: false
+    property bool havePower: (indicatorPower.deviceState === "charging") ||
+                             (indicatorPower.batteryLevel > 25)
+    property bool online: NetworkingStatus.online
+    property bool authenticated: UpdateManager.authenticated
+    property bool forceCheck: false
+
+    property int updatesCount: {
+        var count = 0;
+        if (authenticated) {
+            count += clickRepeater.count;
+        }
+        count += imageRepeater.count;
+        return count;
+    }
+
+    function check(force) {
+        if (force === true) {
+            UpdateManager.check(UpdateManager.CheckAll);
+        } else {
+            if (imageRepeater.count === 0 && clickRepeater.count === 0) {
+                UpdateManager.check(UpdateManager.CheckAll);
+            } else {
+                // Only check 30 minutes after last successful check.
+                UpdateManager.check(UpdateManager.CheckIfNecessary);
+            }
+        }
     }
 
     QDBusActionGroup {
@@ -57,704 +74,406 @@ ItemPage {
         busType: 1
         busName: "com.canonical.indicator.power"
         objectPath: "/com/canonical/indicator/power"
-        property variant batteryLevel: action("battery-level").state
-        property variant deviceState: action("device-state").state
+        property var batteryLevel: action("battery-level").state || 0
+        property var deviceState: action("device-state").state
         Component.onCompleted: start()
-    }
-
-    Connections {
-        id: networkingStatus
-        target: NetworkingStatus
-        onOnlineChanged: {
-            if (NetworkingStatus.online) {
-                activity.running = true;
-                root.state = "SEARCHING";
-                UpdateManager.checkUpdates();
-            } else {
-                activity.running = false;
-            }
-        }
     }
 
     Setup {
         id: uoaConfig
+        objectName: "uoaConfig"
         applicationId: "ubuntu-system-settings"
         providerId: "ubuntuone"
 
         onFinished: {
-            credentialsNotification.visible = false;
-            root.state = "SEARCHING";
-            if (NetworkingStatus.online)
-                UpdateManager.checkUpdates();
-        }
-    }
-
-    Component {
-         id: dialogInstallComponent
-         Dialog {
-             id: dialogueInstall
-             title: i18n.tr("Update System")
-             text: root.batterySafeForUpdate ? i18n.tr("The device needs to restart to install the system update.") : i18n.tr("Connect the device to power before installing the system update.")
-
-             Button {
-                 text: i18n.tr("Restart & Install")
-                 visible: root.batterySafeForUpdate ? true : false
-                 color: UbuntuColors.orange
-                 onClicked: {
-                     installingImageUpdate.visible = true;
-                     UpdateManager.applySystemUpdate();
-                     PopupUtils.close(dialogueInstall);
-                 }
-             }
-             Button {
-                 text: i18n.tr("Cancel")
-                 color: UbuntuColors.warmGrey
-                 onClicked: {
-                     updateList.currentIndex = 0;
-                     var item = updateList.currentItem;
-                     var modelItem = UpdateManager.model[0];
-                     item.actionButton.text = i18n.tr("Install");
-                     item.progressBar.opacity = 0;
-                     modelItem.updateReady = true;
-                     modelItem.selected = false;
-                     root.systemUpdateInProgress = false;
-                     PopupUtils.close(dialogueInstall);
-                 }
-             }
-         }
-    }
-
-    Component {
-         id: dialogErrorComponent
-         Dialog {
-             id: dialogueError
-             title: i18n.tr("Installation failed")
-             text: root.errorDialogText
-
-             Button {
-                 text: i18n.tr("OK")
-                 color: UbuntuColors.orange
-                 onClicked: {
-                     PopupUtils.close(dialogueError);
-                 }
-             }
-         }
-    }
-
-    //states
-    states: [
-        State {
-            name: "SEARCHING"
-            PropertyChanges { target: installAllButton; visible: false}
-            PropertyChanges { target: checkForUpdatesArea; visible: true}
-            PropertyChanges { target: updateNotification; visible: false}
-            PropertyChanges { target: activity; running: NetworkingStatus.online}
-        },
-        State {
-            name: "NOUPDATES"
-            PropertyChanges { target: updateNotification; text: i18n.tr("Software is up to date")}
-            PropertyChanges { target: updateNotification; visible: true}
-            PropertyChanges { target: updateList; visible: false}
-            PropertyChanges { target: installAllButton; visible: false}
-        },
-        State {
-            name: "SYSTEMUPDATEFAILED"
-            PropertyChanges { target: installingImageUpdate; visible: false}
-            PropertyChanges { target: installAllButton; visible: false}
-            PropertyChanges { target: checkForUpdatesArea; visible: false}
-            PropertyChanges { target: updateNotification; visible: false}
-        },
-        State {
-            name: "UPDATE"
-            PropertyChanges { target: updateList; visible: true}
-            PropertyChanges { target: installAllButton; visible: root.updatesAvailable > 1}
-            PropertyChanges { target: updateNotification; visible: false}
-        }
-    ]
-
-    Connections {
-        id: updateManager
-        target: UpdateManager
-        objectName: "updateManager"
-
-        Component.onCompleted: {
-            credentialsNotification.visible = false;
-            root.state = "SEARCHING";
-            if (NetworkingStatus.online)
-                UpdateManager.checkUpdates();
-        }
-
-        onUpdateAvailableFound: {
-            root.updatesAvailable = UpdateManager.model.length;
-            if (root.updatesAvailable > 0)
-                root.includeSystemUpdate = UpdateManager.model[0].systemUpdate
-            root.state = "UPDATE";
-            root.installAll = downloading;
-        }
-
-        onUpdatesNotFound: {
-            if (!credentialsNotification.visible) {
-                root.state = "NOUPDATES";
+            if (reply.errorName) {
+                console.warn('Online Accounts failed:', reply.errorName);
             }
-        }
-
-        onCheckFinished: {
-            checkForUpdatesArea.visible = false;
-        }
-
-        onCredentialsNotFound: {
-            credentialsNotification.visible = true;
-        }
-
-        onCredentialsDeleted: {
-            credentialsNotification.visible = true;
-        }
-
-        onSystemUpdateDownloaded: {
-            root.installAll = false;
-            if (root.includeSystemUpdate)
-                UpdateManager.model[0].status = Update.Downloaded;
-        }
-
-        onSystemUpdateFailed: {
-            root.state = "SYSTEMUPDATEFAILED";
-            root.errorDialogText = i18n.tr("Sorry, the system update failed.");
-            PopupUtils.open(dialogErrorComponent);
-        }
-
-        onUpdateProcessFailed: {
-            root.state = "SYSTEMUPDATEFAILED";
-            root.errorDialogText = i18n.tr("Sorry, the system update failed.");
-            PopupUtils.open(dialogErrorComponent);
-        }
-
-        onServerError: {
-            activity.running = false;
-        }
-
-        onNetworkError: {
-            activity.running = false;
-        }
-
-        onRebooting: {
-            installingImageUpdate.message = i18n.tr("Restarting…");
+            UpdateManager.check(UpdateManager.CheckClick);
+            notauthNotification.enabled = true;
         }
     }
+
+    DownloadHandler {
+        id: downloadHandler
+        updateModel: UpdateManager.model
+    }
+
     Flickable {
         id: scrollWidget
-
-        anchors.top: parent.top
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.bottom: configuration.top
-
-        contentHeight: contentItem.childrenRect.height
-        boundsBehavior: (contentHeight > root.height) ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
+        anchors {
+            top: parent.top
+            left: parent.left
+            right: parent.right
+            bottom: configuration.top
+        }
         clip: true
-        /* Set the direction to workaround https://bugreports.qt-project.org/browse/QTBUG-31905
-           otherwise the UI might end up in a situation where scrolling doesn't work */
+        contentHeight: content.height
+        boundsBehavior: (contentHeight > parent.height) ?
+                        Flickable.DragAndOvershootBounds :
+                        Flickable.StopAtBounds
         flickableDirection: Flickable.VerticalFlick
 
         Column {
-            id: columnId
-            anchors {
-                left: parent.left
-                right: parent.right
-            }
-            height: childrenRect.height
+            id: content
+            anchors { left: parent.left; right: parent.right }
 
-            ListItem.Base {
-                id: checkForUpdatesArea
-                objectName: "checkForUpdatesArea"
-                showDivider: false
-                visible: false
+            Global {
+                id: glob
+                objectName: "global"
+                anchors { left: parent.left; right: parent.right }
 
-                ActivityIndicator {
-                    id: activity
-                    running: checkForUpdatesArea.visible
-                    visible: activity.running
-                    anchors {
-                        left: parent.left
-                        top: parent.top
-                    }
-                    height: parent.height
-                }
+                height: hidden ? 0 : units.gu(8)
+                clip: true
+                status: UpdateManager.status
+                batchMode: root.batchMode
+                requireRestart: imageRepeater.count > 0
+                updatesCount: root.updatesCount
+                online: root.online
+                onStop: UpdateManager.cancel()
 
-                Label {
-                    text: activity.running ? i18n.tr("Checking for updates…") : i18n.tr("Connect to the Internet to check for updates")
-                    verticalAlignment: Text.AlignVCenter
-                    wrapMode: Text.Wrap
-                    anchors {
-                        left: activity.running ? activity.right : parent.left
-                        top: parent.top
-                        right: parent.right
-                        rightMargin: units.gu(2)
-                        leftMargin: units.gu(2)
-                    }
-                    height: parent.height
-                }
-            }
-
-            ListItem.SingleControl {
-                height: installAllButton.visible ? units.gu(8) : units.gu(2)
-                highlightWhenPressed: false
-                control: Button {
-                    id: installAllButton
-                    objectName: "installAllButton"
-                    property string primaryText: includeSystemUpdate ?
-                                                     i18n.tr("Install %1 update…", "Install %1 updates…", root.updatesAvailable).arg(root.updatesAvailable) :
-                                                     i18n.tr("Install %1 update", "Install %1 updates", root.updatesAvailable).arg(root.updatesAvailable)
-                    property string secondaryText: i18n.tr("Pause All")
-                    color: UbuntuColors.orange
-                    text: root.installAll ? secondaryText : primaryText
-                    width: parent.width - units.gu(4)
-
-                    onClicked: {
-                        for (var i=0; i < updateList.count; i++) {
-                            updateList.currentIndex = i;
-                            var item = updateList.currentItem;
-                            var modelItem = UpdateManager.model[i];
-                            if (item.installing || item.installed)
-                                continue;
-                            console.warn("AllClicked: " + modelItem.updateState + " " + modelItem.updateReady + " " +  modelItem.selected);
-                            if (item.retry) {
-                                item.retry = false;
-                                UpdateManager.retryDownload(modelItem.packageName);
-                                continue;
+                onRequestInstall: {
+                    if (requireRestart) {
+                        var popup = PopupUtils.open(
+                            Qt.resolvedUrl("ImageUpdatePrompt.qml"), null, {
+                                havePowerForUpdate: root.havePower
                             }
-                            if (root.installAll && !modelItem.updateReady && modelItem.selected) {
-                                item.pause();
-                                continue;
-                            }
-                            console.warn("Past pause");
-                            if (!root.installAll && !modelItem.updateReady && modelItem.selected) {
-                                item.resume();
-                                continue;
-                            }
-                            console.warn("Past resume");
-                            if (!root.installAll && !modelItem.updateState && !modelItem.updateReady && !modelItem.selected) {
-                                item.start();
-                                continue;
-                            }
-                            console.warn("Past start");
-                        }
-                        root.installAll = !root.installAll;
+                        );
+                        popup.requestSystemUpdate.connect(function () {
+                            install();
+                        });
+                    } else {
+                        install();
                     }
                 }
-                showDivider: false
+                onInstall: {
+                    root.batchMode = true
+                    if (requireRestart) {
+                        postAllBatchHandler.target = root;
+                    } else {
+                        postClickBatchHandler.target = root;
+                    }
+                }
             }
 
-            ListView {
-                id: updateList
-                objectName: "updateList"
+            Rectangle {
+                id: overlay
+                objectName: "overlay"
                 anchors {
                     left: parent.left
+                    leftMargin: units.gu(2)
                     right: parent.right
+                    rightMargin: units.gu(2)
                 }
-                model: UpdateManager.model
-                height: childrenRect.height
-                interactive: false
-                spacing: 0
+                visible: placeholder.text
+                color: theme.palette.normal.background
+                height: units.gu(10)
 
-                delegate: ListItem.Subtitled {
-                    id: listItem
-                    anchors {
-                        left: parent.left
-                        right: parent.right
-                        topMargin: units.gu(1)
-                        bottomMargin: units.gu(1)
-                    }
-                    iconSource: Qt.resolvedUrl(modelData.iconUrl)
-                    iconFrame: modelData.systemUpdate ? false : true
-                    height: visible ? textArea.height + units.gu(2) : 0
-                    highlightWhenPressed: false
-                    showDivider: false
-                    visible: opacity > 0
-                    opacity: installed ? 0 : 1
-                    Behavior on opacity { PropertyAnimation { duration: UbuntuAnimation.SleepyDuration } }
-
-                    property alias actionButton: buttonAppUpdate
-                    property alias progressBar: progress
-                    property bool installing: !modelData.systemUpdate && (modelData.updateReady || (progressBar.value === progressBar.maximumValue))
-                    property bool installed: false
-                    property bool retry: false
-
-                    function pause () {
-                        console.warn("PAUSE: " + modelData.packageName);
-                        if (modelData.systemUpdate)
-                            return UpdateManager.pauseDownload(modelData.packageName);
-                        modelData.updateState = false;
-                        tracker.pause();
-                    }
-
-                    function resume () {
-                        console.warn("RESUME: " + modelData.packageName);
-                        if (modelData.systemUpdate)
-                            return UpdateManager.startDownload(modelData.packageName);
-                        modelData.updateState = true;
-                        tracker.resume();
-                    }
-
-                    function start () {
-                        console.warn("START: " + modelData.packageName);
-                        modelData.selected = true;
-                        modelData.updateState = true;
-                        UpdateManager.startDownload(modelData.packageName);
-                    }
-
-                    function forceDownload () {
-                        console.warn("FORCE DOWNLOAD: " + modelData.packageName);
-                        modelData.selected = true;
-                        modelData.updateState = true;
-                        UpdateManager.forceAllowGSMDownload(modelData.packageName);
-                    }
-
-                    Column {
-                        id: textArea
-                        objectName: "textArea"
-                        anchors {
-                            left: parent.left
-                            right: parent.right
+                Label {
+                    id: placeholder
+                    objectName: "overlayText"
+                    anchors.fill: parent
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+                    wrapMode: Text.WordWrap
+                    text: {
+                        var s = UpdateManager.status;
+                        if (!root.online) {
+                            return i18n.tr("Connect to the Internet to check for updates.");
+                        } else if (s === UpdateManager.StatusIdle && updatesCount === 0) {
+                            return i18n.tr("Software is up to date");
+                        } else if (s === UpdateManager.StatusServerError ||
+                                   s === UpdateManager.StatusNetworkError) {
+                            return i18n.tr("The update server is not responding. Try again later.");
                         }
-                        spacing: units.gu(0.5)
+                        return "";
+                    }
+                }
+            }
 
-                        Item {
-                            anchors {
-                                left: parent.left
-                                right: parent.right
-                            }
-                            height: buttonAppUpdate.height
+            SettingsItemTitle {
+                id: updatesAvailableHeader
+                text: i18n.tr("Updates Available")
+                visible: imageUpdateCol.visible || clickUpdatesCol.visible
+            }
 
-                            Label {
-                                id: labelTitle
-                                objectName: "labelTitle"
-                                anchors {
-                                    left: parent.left
-                                    right: buttonAppUpdate.visible ? buttonAppUpdate.left : parent.right
-                                    verticalCenter: parent.verticalCenter
-                                }
-                                text: modelData.title
-                                font.bold: true
-                                elide: Text.ElideMiddle
-                            }
+            Column {
+                id: imageUpdateCol
+                objectName: "imageUpdates"
+                anchors { left: parent.left; right: parent.right }
+                visible: {
+                    var s = UpdateManager.status;
+                    var haveUpdates = imageRepeater.count > 0;
+                    switch (s) {
+                    case UpdateManager.StatusCheckingClickUpdates:
+                    case UpdateManager.StatusIdle:
+                        return haveUpdates && online;
+                    }
+                    return false;
+                }
 
-                            Button {
-                                id: buttonAppUpdate
-                                objectName: "buttonAppUpdate"
-                                anchors.right: parent.right
-                                height: labelTitle.height + units.gu(1)
-                                enabled: !installing
-                                text: {
-                                    if (retry)
-                                        return i18n.tr("Retry");
-                                    if (modelData.systemUpdate) {
-                                        if (modelData.updateReady) {
-                                            return i18n.tr("Install…");
-                                        } else if ((!modelData.updateState && !modelData.selected) || modelData.status === Update.NotStarted) {
-                                            return i18n.tr("Download");
-                                        }
-                                    }
-                                    if (modelData.updateState || modelData.status === Update.Downloading) {
-                                        return i18n.tr("Pause");
-                                    } else if (modelData.selected) {
-                                        return i18n.tr("Resume");
-                                    }
-                                    return i18n.tr("Update");
-                                }
+                Repeater {
+                    id: imageRepeater
+                    model: UpdateManager.imageUpdates
 
-                                onClicked: {
-                                    if (retry) {
-                                        retry = false;
-                                        return UpdateManager.retryDownload(modelData.packageName);
-                                    }
-                                    if (modelData.updateState)
-                                        return pause();
-                                    if (!modelData.updateState && modelData.selected)
-                                        return resume();
-                                    if (!modelData.updateState && !modelData.selected && !modelData.updateReady)
-                                        return start();
-                                    if (modelData.systemUpdate && modelData.status === Update.NotStarted)
-                                        return forceDownload();
-                                    if (modelData.updateReady)
-                                        PopupUtils.open(dialogInstallComponent);
-                                }
+                    delegate: UpdateDelegate {
+                        objectName: "imageUpdatesDelegate-" + index
+                        width: imageUpdateCol.width
+                        updateState: model.updateState
+                        progress: model.progress
+                        version: remoteVersion
+                        size: model.size
+                        changelog: model.changelog
+                        error: model.error
+                        kind: model.kind
+                        iconUrl: model.iconUrl
+                        name: title
+
+                        onResume: download()
+                        onRetry: download()
+                        onDownload: {
+                            if (SystemImage.downloadMode < 2) {
+                                SystemImage.downloadUpdate();
+                                SystemImage.forceAllowGSMDownload();
+                            } else {
+                                SystemImage.downloadUpdate();
                             }
                         }
-
-                        Item {
-                            id: labelUpdateStatus
-                            anchors {
-                                left: parent.left
-                                right: parent.right
-                            }
-                            height: childrenRect.height
-                            visible: opacity > 0
-                            opacity: (modelData.updateState && modelData.selected && !modelData.updateReady) || (installing || installed) ? 1 : 0
-                            Behavior on opacity { PropertyAnimation { duration: UbuntuAnimation.SleepyDuration } }
-                            Label {
-                                objectName: "labelUpdateStatus"
-                                anchors.left: parent.left
-                                anchors.right: updateStatusLabel.left
-                                elide: Text.ElideMiddle
-                                fontSize: "small"
-                                text: {
-                                    if (retry)
-                                        return modelData.error;
-                                    if (installing)
-                                        return i18n.tr("Installing");
-                                    if (installed)
-                                        return i18n.tr("Installed");
-                                    return i18n.tr("Downloading");
+                        onPause: SystemImage.pauseDownload();
+                        onInstall: {
+                            var popup = PopupUtils.open(
+                                Qt.resolvedUrl("ImageUpdatePrompt.qml"), null, {
+                                    havePowerForUpdate: root.havePower
                                 }
-                            }
-                            Label {
-                                id: updateStatusLabel
-                                anchors.right: parent.right
-                                visible: !labelSize.visible && !installing && !installed
-                                fontSize: "small"
-                                text: {
-                                    if (!labelUpdateStatus.visible)
-                                        return Utilities.formatSize(modelData.binaryFilesize);
-
-                                    return i18n.tr("%1 of %2").arg(
-                                        Utilities.formatSize(modelData.binaryFilesize * (progress.value * 0.01))).arg(
-                                        Utilities.formatSize(modelData.binaryFilesize)
-                                    );
-                                }
-                            }
-                        }
-
-                        ProgressBar {
-                            id: progress
-                            objectName: "progress"
-                            height: units.gu(2)
-                            anchors {
-                                left: parent.left
-                                right: parent.right
-                            }
-                            visible: opacity > 0
-                            opacity: modelData.selected && !modelData.updateReady && !installed ? 1 : 0
-                            value: modelData.systemUpdate ? modelData.downloadProgress : tracker.progress
-                            minimumValue: 0
-                            maximumValue: 100
-
-                            DownloadTracker {
-                                id: tracker
-                                objectName: "tracker"
-                                packageName: modelData.packageName
-                                title: modelData.title
-                                showInIndicator: false
-                                clickToken: modelData.clickToken
-                                download: modelData.downloadUrl
-                                downloadSha512: modelData.downloadSha512
-
-                                onFinished: {
-                                    progress.visible = false;
-                                    buttonAppUpdate.visible = false;
-                                    installed = true;
-                                    installing = false;
-                                    root.updatesAvailable -= 1;
-                                    modelData.updateRequired = false;
-                                    UpdateManager.updateClickScope();
-                                }
-
-                                onProcessing: {
-                                    console.warn("onProcessing: " + modelData.packageName + " " + path);
-                                    buttonAppUpdate.enabled = false;
-                                    installing = true;
-                                    modelData.updateState = false;
-                                }
-
-                                onStarted: {
-                                    console.warn("onStarted: " + modelData.packageName + " " + success);
-                                    if (success)
-                                        modelData.updateState = true;
-                                    else
-                                        modelData.updateState = false;
-                                }
-
-                                onPaused: {
-                                    console.warn("onPaused: " + modelData.packageName + " " + success);
-                                    if (success)
-                                        modelData.updateState = false;
-                                    else
-                                        modelData.updateState = true;
-                                }
-
-                                onResumed: {
-                                    console.warn("onResumed: " + modelData.packageName + " " + success);
-                                    if (success)
-                                        modelData.updateState = true;
-                                    else
-                                        modelData.updateState = false;
-                                }
-
-                                onCanceled: {
-                                    console.warn("onCanceled: " + modelData.packageName + " " + success);
-                                    if (success) {
-                                        modelData.updateState = false;
-                                        modelData.selected = false;
-                                    }
-                                }
-
-                                onErrorFound: {
-                                    console.warn("onErrorFound: " + modelData.packageName + " " + error);
-                                    modelData.updateState = false;
-                                    retry = true;
-                                    installing = false;
-                                }
-                            }
-
-                            Behavior on opacity { PropertyAnimation { duration: UbuntuAnimation.SleepyDuration } }
-                        }
-
-                        Item {
-                            anchors {
-                                left: parent.left
-                                right: parent.right
-                            }
-                            height: childrenRect.height
-                            Label {
-                                id: labelVersion
-                                objectName: "labelVersion"
-                                anchors.left: parent.left
-                                text: modelData.remoteVersion ? i18n.tr("Version: ") + modelData.remoteVersion : ""
-                                elide: Text.ElideRight
-                                fontSize: "small"
-                            }
-
-                            Label {
-                                id: labelSize
-                                objectName: "labelSize"
-                                anchors.right: parent.right
-                                text: Utilities.formatSize(modelData.binaryFilesize)
-                                fontSize: "small"
-                                visible: !labelUpdateStatus.visible && !installing && !installed
-                            }
+                            );
+                            popup.requestSystemUpdate.connect(SystemImage.applyUpdate);
                         }
                     }
                 }
             }
 
             Column {
-                id: credentialsNotification
-                objectName: "credentialsNotification"
+                id: clickUpdatesCol
+                objectName: "clickUpdates"
+                anchors { left: parent.left; right: parent.right }
+                visible: {
+                    var s = UpdateManager.status;
+                    var haveUpdates = clickRepeater.count > 0;
+                    switch (s) {
+                    case UpdateManager.StatusCheckingImageUpdates:
+                    case UpdateManager.StatusIdle:
+                        return haveUpdates && online && authenticated;
+                    }
+                    return false;
+                }
 
-                visible: false
+                Repeater {
+                    id: clickRepeater
+                    model: UpdateManager.clickUpdates
 
-                spacing: units.gu(2)
+                    delegate: ClickUpdateDelegate {
+                        objectName: "clickUpdatesDelegate" + index
+                        width: clickUpdatesCol.width
+                        updateState: model.updateState
+                        progress: model.progress
+                        version: remoteVersion
+                        size: model.size
+                        name: title
+                        iconUrl: model.iconUrl
+                        kind: model.kind
+                        changelog: model.changelog
+                        error: model.error
+                        signedUrl: signedDownloadUrl
+
+                        onInstall: downloadHandler.createDownload(model);
+                        onPause: downloadHandler.pauseDownload(model)
+                        onResume: downloadHandler.resumeDownload(model)
+                        onRetry: {
+                            /* This creates a new signed URL with which we can
+                            retry the download. See onSignedUrlChanged. */
+                            UpdateManager.retry(model.identifier,
+                                               model.revision);
+                        }
+
+                        onSignedUrlChanged: {
+                            // If we have a signedUrl, user intend to retry.
+                            if (signedUrl) {
+                                downloadHandler.retryDownload(model);
+                            }
+                        }
+
+                        Connections {
+                            target: glob
+                            onInstall: install()
+                        }
+
+                        /* If we a downloadId, we expect UDM to restore it
+                        after some time. Workaround for lp:1603770. */
+                        Timer {
+                            id: downloadTimeout
+                            interval: 30000
+                            running: true
+                            onTriggered: {
+                                var s = updateState;
+                                if (model.downloadId
+                                    || s === Update.StateQueuedForDownload
+                                    || s === Update.StateDownloading) {
+                                    downloadHandler.assertDownloadExist(model);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            NotAuthenticatedNotification {
+                id: notauthNotification
+                objectName: "noAuthenticationNotification"
+                visible: {
+                    var s = UpdateManager.status;
+                    switch (s) {
+                    case UpdateManager.StatusCheckingImageUpdates:
+                    case UpdateManager.StatusIdle:
+                        return !authenticated && online;
+                    }
+                    return false;
+                }
                 anchors {
                     left: parent.left
                     right: parent.right
                 }
-                ListItem.ThinDivider {}
+                onRequestAuthentication: uoaConfig.exec()
+            }
 
-                Label {
-                    text: i18n.tr("Sign in to Ubuntu One to receive updates for apps.")
-                    horizontalAlignment: Text.AlignHCenter
-                    wrapMode: Text.Wrap
-                    anchors {
-                        left: parent.left
-                        right: parent.right
+            SettingsItemTitle {
+                text: i18n.tr("Recent updates")
+                visible: installedCol.visible
+            }
+
+            Column {
+                id: installedCol
+                objectName: "installedUpdates"
+                anchors { left: parent.left; right: parent.right }
+                visible: installedRepeater.count > 0
+
+                Repeater {
+                    id: installedRepeater
+                    model: UpdateManager.installedUpdates
+
+                    delegate: UpdateDelegate {
+                        objectName: "installedUpdateDelegate-" + index
+                        width: installedCol.width
+                        version: remoteVersion
+                        size: model.size
+                        name: title
+                        kind: model.kind
+                        iconUrl: model.iconUrl
+                        changelog: model.changelog
+                        updateState: Update.StateInstalled
+                        updatedAt: model.updatedAt
+
+                        leadingActions: ListItemActions {
+                           actions: [
+                               Action {
+                                    iconName: "delete"
+                                    onTriggered: UpdateManager.remove(
+                                        model.identifier, model.revision
+                                    )
+                               }
+                           ]
+                        }
+
+                        // Launchable if there's a package name on a click.
+                        launchable: (!!packageName &&
+                                     model.kind === Update.KindClick)
+
+                        onLaunch: UpdateManager.launch(identifier, revision);
                     }
                 }
-                Button {
-                    text: i18n.tr("Sign In…")
-                    anchors {
-                        left: parent.left
-                        right: parent.right
-                        leftMargin: units.gu(2)
-                        rightMargin: units.gu(2)
-                    }
-                    onClicked: uoaConfig.exec()
-                }
-
             }
-        }
-    }
-
-    Rectangle {
-        id: updateNotification
-        objectName: "updateNotification"
-        anchors {
-            bottom: configuration.top
-            left: parent.left
-            right: parent.right
-            top: parent.top
-        }
-        visible: false
-        property string text: ""
-
-        color: "transparent"
-
-        Label {
-            anchors.centerIn: updateNotification
-            text: updateNotification.text
-            width: updateNotification.width
-            horizontalAlignment: Text.AlignHCenter
-            wrapMode: Text.Wrap
-        }
-    }
-
-    Rectangle {
-        id: installingImageUpdate
-        objectName: "installingImageUpdate"
-        anchors.fill: root
-        visible: false
-        z: 10
-        color: "#221e1c"
-        property string message: i18n.tr("Installing update…")
-
-        Column {
-            anchors.centerIn: parent
-            spacing: units.gu(2)
-
-            Image {
-                source: Qt.resolvedUrl("file:///usr/share/icons/suru/places/scalable/distributor-logo.svg")
-                anchors.horizontalCenter: parent.horizontalCenter
-                height: width
-                width: 96
-                NumberAnimation on rotation {
-                    from: 0
-                    to: 360
-                    running: installingImageUpdate.visible == true
-                    loops: Animation.Infinite
-                    duration: 2000
-                }
-            }
-
-            ProgressBar {
-                indeterminate: true
-                anchors.horizontalCenter: parent.horizontalCenter
-            }
-
-            Label {
-                text: installingImageUpdate.message
-                anchors.horizontalCenter: parent.horizontalCenter
-            }
-        }
-    }
+        } // Column inside flickable.
+    } // Flickable
 
     Column {
         id: configuration
 
-        anchors.bottom: parent.bottom
-        anchors.left: parent.left
-        anchors.right: parent.right
+        height: childrenRect.height
+
+        anchors {
+            bottom: parent.bottom
+            left: parent.left
+            right: parent.right
+        }
+
         ListItem.ThinDivider {}
+
         ListItem.SingleValue {
             objectName: "configuration"
             text: i18n.tr("Auto download")
             value: {
-                if (UpdateManager.downloadMode === 0)
+                if (SystemImage.downloadMode === 0)
                     return i18n.tr("Never")
-                else if (UpdateManager.downloadMode === 1)
+                else if (SystemImage.downloadMode === 1)
                     return i18n.tr("On wi-fi")
-                else if (UpdateManager.downloadMode === 2)
+                else if (SystemImage.downloadMode === 2)
                     return i18n.tr("Always")
+                else
+                    return i18n.tr("Unknown")
             }
             progression: true
             onClicked: pageStack.push(Qt.resolvedUrl("Configuration.qml"))
         }
     }
+
+    Connections {
+        id: postClickBatchHandler
+        ignoreUnknownSignals: true
+        target: null
+        onUpdatesCountChanged: {
+            if (target.updatesCount === 0) {
+                root.batchMode = false;
+                target = null;
+            }
+        }
+    }
+
+    Connections {
+        id: postAllBatchHandler
+        ignoreUnknownSignals: true
+        target: null
+        onUpdatesCountChanged: {
+            if (target.updatesCount === 1) {
+                SystemImage.updateDownloaded.connect(function () {
+                    SystemImage.applyUpdate();
+                });
+                SystemImage.downloadUpdate();
+            }
+        }
+    }
+
+    Connections {
+        target: NetworkingStatus
+        onOnlineChanged: {
+            if (!online) {
+                UpdateManager.cancel();
+            } else {
+                UpdateManager.check(UpdateManager.CheckAll);
+            }
+        }
+    }
+
+    Connections {
+        target: SystemImage
+        onUpdateFailed: {
+            if (consecutiveFailureCount > SystemImage.failuresBeforeWarning) {
+                var popup = PopupUtils.open(
+                    Qt.resolvedUrl("InstallationFailed.qml"), null, {
+                        text: lastReason
+                    }
+                );
+            }
+        }
+    }
+
+    Component.onCompleted: check()
 }

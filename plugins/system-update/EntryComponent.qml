@@ -1,7 +1,7 @@
 /*
  * This file is part of system-settings
  *
- * Copyright (C) 2014 Canonical Ltd.
+ * Copyright (C) 2014-2016 Canonical Ltd.
  *
  * Contact: Diego Sarmentero <diego.sarmentero@canonical.com>
  *
@@ -20,36 +20,50 @@
 
 import QtQuick 2.4
 import Ubuntu.Components 1.3
-import Ubuntu.Components.ListItems 1.3 as ListItem
+import Ubuntu.DownloadManager 1.2
 import Ubuntu.SystemSettings.Update 1.0
 
-ListItem.SingleValue {
+ListItem {
     id: root
-    text: i18n.tr(model.displayName)
     objectName: "entryComponent-updates"
-    iconSource: Qt.resolvedUrl(model.icon)
-    iconFrame: false
-    progression: true
-    value: updatesAvailable > 0 ? updatesAvailable : ""
-
-    property int updatesAvailable: 0
-
-    function _updatesRefresh() {
-        var _updatesAvailable = 0;
-        for (var i=0; i < UpdateManager.model.length; i++) {
-            if (UpdateManager.model[i].updateRequired)
-                _updatesAvailable += 1;
-        }
-        updatesAvailable =  _updatesAvailable;
+    property int updatesAvailable: {
+        var imageUpdateCount = SystemImage.checkTarget() ? 1 : 0;
+        return updatesRep.count + imageUpdateCount;
     }
-
-    Connections {
-        id: updateManager
-        objectName: "updateManager"
-        target: UpdateManager
-        onModelChanged: root._updatesRefresh()
-        onUpdateAvailableFound: root._updatesRefresh()
-    }
-
+    height: updatesAvailable > 0 ? layout.height : 0
     onClicked: main.loadPluginByName("system-update");
+
+    ListItemLayout {
+        id: layout
+        title.text: i18n.tr(model.displayName)
+        Icon {
+            SlotsLayout.position: SlotsLayout.Leading;
+            SlotsLayout.padding { top: 0; bottom: 0 }
+            source: model.icon
+            height: units.gu(5)
+        }
+        Label {
+            text: updatesAvailable > 0 ? updatesAvailable : ""
+        }
+        ProgressionSlot {}
+    }
+
+    DownloadManager {
+        onDownloadFinished: {
+            UpdateManager.model.setInstalled(
+                download.metadata.custom.identifier,
+                download.metadata.custom.revision
+            );
+        }
+    }
+
+    Repeater {
+        width: 1
+        height: 1
+        id: updatesRep
+        model: UpdateManager.clickUpdates
+        Item { width: 1; height: 1 }
+    }
+
+    Behavior on height { UbuntuNumberAnimation {} }
 }

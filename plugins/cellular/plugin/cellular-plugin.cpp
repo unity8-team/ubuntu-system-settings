@@ -52,7 +52,7 @@ CellularItem::CellularItem(const QVariantMap &staticData, QObject *parent):
         }
     }
 
-    bool supportedDevice(true);
+    bool supportedDevice(false);
 
     QDBusInterface m_NetStatusPropertiesIface(
             "com.ubuntu.connectivity1",

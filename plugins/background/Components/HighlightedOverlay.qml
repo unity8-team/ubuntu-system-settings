@@ -23,7 +23,7 @@ import Ubuntu.Components 1.3
 
 Rectangle {
     border.width: units.gu(1)
-    border.color: UbuntuColors.orange
+    border.color: theme.palette.normal.positionText
     width: parent.width + units.gu(2)
     height: parent.height + units.gu(2)
     anchors.centerIn: parent

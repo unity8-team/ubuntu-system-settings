@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 Canonical Ltd
+ * Copyright (C) 2014-2016 Canonical Ltd
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as
@@ -37,6 +37,10 @@ Item {
         return name + (number ? " (" + number + ")" : "");
     }
 
+    function getTechString () {
+        return techToString(radioSettings.technologyPreference);
+    }
+
     function techToString (tech) {
         var strings = {
             'gsm': i18n.tr("2G only (saves battery)"),
@@ -44,7 +48,7 @@ Item {
             'lte': i18n.tr("2G/3G/4G (faster)")
         };
         strings['umts_enable'] = strings['umts'];
-        return strings[tech];
+        return strings[tech] || "";
     }
 
     // adds umts_enable to an copy of model

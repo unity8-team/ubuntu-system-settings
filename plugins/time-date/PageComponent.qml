@@ -1,7 +1,7 @@
 /*
  * This file is part of system-settings
  *
- * Copyright (C) 2013 Canonical Ltd.
+ * Copyright (C) 2013-2016 Canonical Ltd.
  *
  * Contact: Iain Lane <iain.lane@canonical.com>
  *
@@ -20,10 +20,11 @@
 
 import QtQuick 2.4
 import SystemSettings 1.0
+import SystemSettings.ListItems 1.0 as SettingsListItems
 import Ubuntu.Components 1.3
-import Ubuntu.Components.ListItems 1.3 as ListItem
+import Ubuntu.Components.ListItems 1.3 as ListItems
 import Ubuntu.Components.Popups 1.3
-import Ubuntu.SystemSettings.TimeDate 1.0
+import Ubuntu.SystemSettings.TimeDate 1.1
 
 ItemPage {
     id: root
@@ -62,13 +63,11 @@ ItemPage {
 
             SettingsItemTitle { text: i18n.tr ("Time zone:") }
 
-            ListItem.SingleValue {
+            SettingsListItems.SingleValueProgression {
                 objectName: "timeZone"
                 id: timeZone
-                //e.g. America/New_York -> America/New York
-                text: timeDatePanel.timeZone.replace("_", " ")
+                text: timeDatePanel.timeZoneName
                 value: getUTCOffset()
-                progression: true
                 onClicked: pageStack.push(Qt.resolvedUrl("ChooseTimeZone.qml"), {
                     timeDatePanel: timeDatePanel
                 })
@@ -78,7 +77,7 @@ ItemPage {
                 text: i18n.tr ("Set the time and date:")
             }
 
-            ListItem.ItemSelector {
+            ListItems.ItemSelector {
                 id: setTimeAutomatically
                 objectName: "timeItemSelector"
                 model: [ i18n.tr("Automatically") , i18n.tr("Manually")]
@@ -109,11 +108,11 @@ ItemPage {
                 TimePicker {}
             }
 
-            ListItem.Standard {
+            SettingsListItems.StandardProgression {
                 id: currentTime
                 objectName: "currentTime"
-                progression: setTimeAutomatically.selectedIndex === 1 // Manually
-                enabled: progression
+                progressionVisible: setTimeAutomatically.selectedIndex === 1 // Manually
+                enabled: progressionVisible
                 onClicked: {
                     Qt.inputMethod.hide()
                     var popupObj = PopupUtils.open(timePicker);

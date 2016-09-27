@@ -42,6 +42,13 @@ ItemPage {
 
     AethercastDisplays {
         id: aethercastDisplays
+        onEnabledChanged: {
+            /* This is a hack to ensure the aethercast enabled switch stays 
+             * in sync with the enabled property
+             */
+            enabledCheck.serverChecked = enabled;
+            enabledCheck.checked = enabledCheck.serverChecked;
+        }
     }
 
     UbuntuBrightnessPanel {

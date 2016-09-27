@@ -22,15 +22,21 @@
 #include <QDBusMetaType>
 #include <QtAlgorithms>
 #include <QtDebug>
+
+#include <gio/gio.h>
+
 #include "hardwarekeyboard-plugin.h"
 
 #define INPUT_SOURCE_TYPE_XKB "xkb"
+#define SOURCES_CONFIG_SCHEMA_ID "org.gnome.desktop.input-sources"
+#define SOURCES_KEY "sources"
 
 typedef QList<QMap<QString, QString>> StringMapList;
 Q_DECLARE_METATYPE(StringMapList)
 
 HardwareKeyboardPlugin::HardwareKeyboardPlugin(QObject *parent) :
-    QObject(parent)
+    QObject(parent),
+    m_sourcesSettings(g_settings_new(SOURCES_CONFIG_SCHEMA_ID))
 {
     qDBusRegisterMetaType<StringMapList>();
     m_xkbInfo = gnome_xkb_info_new();
@@ -47,6 +53,8 @@ HardwareKeyboardPlugin::~HardwareKeyboardPlugin()
     }
 
     qDeleteAll(m_keyboardLayouts);
+
+    g_object_unref(m_sourcesSettings);
 }
 
 SubsetModel *
@@ -70,7 +78,7 @@ HardwareKeyboardPlugin::keyboardLayoutsModelChanged()
         return;
     }
 
-    StringMapList finalMaps = StringMapList();
+    StringMapList finalMaps;
     for (int i = 0; i < maps.size(); i++) {
         QMap<QString, QString> m = maps.at(i);
 
@@ -95,6 +103,15 @@ HardwareKeyboardPlugin::keyboardLayoutsModelChanged()
 
     m_accountsService.customSetUserProperty(
             "SetInputSources", QVariant::fromValue(finalMaps));
+
+    // Save the config settings (for the keyboard indicator)
+    GVariantBuilder builder;
+    g_variant_builder_init(&builder, G_VARIANT_TYPE("a(ss)"));
+    Q_FOREACH(const auto & keymapPair, finalMaps) {
+        g_variant_builder_add(&builder, "(ss)", keymapPair.firstKey().toUtf8().constData(),
+                              keymapPair.first().toUtf8().constData());
+    }
+    g_settings_set_value(m_sourcesSettings, SOURCES_KEY, g_variant_builder_end(&builder));
 }
 
 static bool

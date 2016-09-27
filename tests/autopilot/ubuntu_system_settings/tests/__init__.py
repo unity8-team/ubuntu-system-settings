@@ -223,6 +223,9 @@ class UbuntuSystemSettingsHotspotTestCase(UbuntuSystemSettingsTestCase,
             inetwork, parameters=self.indicatornetwork_parameters,
             stdout=subprocess.PIPE)
 
+        # Required since this test needs to dismiss the OSK.
+        self.useFixture(EnvironmentVariable("UITK_USE_MALIIT", "1"))
+
         super(UbuntuSystemSettingsHotspotTestCase, self).setUp()
 
     def tearDown(self):
@@ -443,8 +446,66 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
 
 class CellularBaseTestCase(UbuntuSystemSettingsOfonoTestCase):
 
+    connectivity_parameters = {
+        'Status': 'online'
+    }
+
     def setUp(self):
         """ Go to Cellular page """
+
+        self.session_con = self.get_dbus(False)
+
+        if is_process_running(INDICATOR_NETWORK):
+            _stop_process(INDICATOR_NETWORK)
+            self.addCleanup(_start_process, INDICATOR_NETWORK)
+
+        ctv_tmpl = os.path.join(os.path.dirname(__file__), 'connectivity.py')
+        (self.ctv_mock, self.obj_ctv) = self.spawn_server_template(
+            ctv_tmpl, parameters=self.connectivity_parameters,
+            stdout=subprocess.PIPE)
+
+        sleep(1)
+
+        self.ctv_private = dbus.Interface(
+            self.session_con.get_object(CTV_IFACE, CTV_PRIV_OBJ),
+            'org.freedesktop.DBus.Properties')
+
+        sim = self.obj_ctv.AddSim("1234567890")
+        self.ctv_private.Set(CON_IFACE,
+                             'Sims',
+                             dbus.Array([sim],
+                                        signature='o'))
+        modem = self.obj_ctv.AddModem("0987654321", 1, sim)
+        self.ctv_private.Set(CON_IFACE,
+                             'Modems',
+                             dbus.Array([modem],
+                                        signature='o'))
+
+        self.ctv_modem0 = dbus.Interface(
+            self.session_con.get_object(CTV_IFACE, modem),
+            'org.freedesktop.DBus.Properties')
+        self.ctv_sim0 = dbus.Interface(
+            self.session_con.get_object(CTV_IFACE, sim),
+            'org.freedesktop.DBus.Properties')
+
+        if self.use_sims == 2:
+            sim2 = self.obj_ctv.AddSim("2345678901")
+            self.ctv_private.Set(CON_IFACE,
+                                 'Sims',
+                                 dbus.Array([sim, sim2],
+                                            signature='o'))
+            modem2 = self.obj_ctv.AddModem("1098765432", 2, sim2)
+            self.ctv_private.Set(CON_IFACE,
+                                 'Modems',
+                                 dbus.Array([modem, modem2],
+                                            signature='o'))
+
+            self.ctv_modem1 = dbus.Interface(
+                self.session_con.get_object(CTV_IFACE, modem2),
+                'org.freedesktop.DBus.Properties')
+            self.ctv_sim1 = dbus.Interface(
+                self.session_con.get_object(CTV_IFACE, sim2),
+                'org.freedesktop.DBus.Properties')
 
         user_obj = '/user/foo'
 
@@ -526,6 +587,8 @@ class CellularBaseTestCase(UbuntuSystemSettingsOfonoTestCase):
             context.SetProperty(key, value)
 
     def tearDown(self):
+        self.ctv_mock.terminate()
+        self.ctv_mock.wait()
         self.mock_server.terminate()
         self.mock_server.wait()
         super(CellularBaseTestCase, self).tearDown()
@@ -601,13 +664,13 @@ class StorageBaseTestCase(AboutBaseTestCase):
         super(StorageBaseTestCase, self).setUp()
         self.main_view.click_item('storageItem')
         self.storage_page = self.main_view.select_single(
-            'Storage', objectName='storagePage'
+            objectName='storagePage'
         )
         self.assertThat(self.storage_page.active, Eventually(Equals(True)))
 
     def assert_space_item(self, object_name, text):
         """ Checks whether an space item exists and returns a value """
-        item = self.main_view.storage_page.select_single(
+        item = self.main_view.storage_page.wait_select_single(
             objectName=object_name
         )
         self.assertThat(item, NotEquals(None))
@@ -646,9 +709,23 @@ class SystemUpdatesBaseTestCase(UbuntuSystemSettingsTestCase,
         'start': False
     }
 
+    systemimage_parameters = {}
+
+    @classmethod
+    def setUpClass(cls):
+        cls.session_con = cls.get_dbus(False)
+
+        cls.start_system_bus()
+
+        si_tmpl = os.path.join(os.path.dirname(__file__), 'systemimage.py')
+        (cls.si_mock, cls.si_obj) = cls.spawn_server_template(
+            si_tmpl, parameters=cls.systemimage_parameters,
+            stdout=subprocess.PIPE)
+
+        super(SystemUpdatesBaseTestCase, cls).setUpClass()
+
     def setUp(self):
         """Go to SystemUpdates Page."""
-        self.session_con = self.get_dbus(False)
         self.clicksrv_manager = None
         if is_process_running(INDICATOR_NETWORK):
             _stop_process(INDICATOR_NETWORK)
@@ -678,6 +755,20 @@ class SystemUpdatesBaseTestCase(UbuntuSystemSettingsTestCase,
         if self.clicksrv_manager and self.clicksrv_manager.is_running():
             self.clicksrv_manager.stop()
         super(SystemUpdatesBaseTestCase, self).tearDown()
+
+    @classmethod
+    def tearDownClass(cls):
+        cls.si_mock.terminate()
+        cls.si_mock.wait()
+        if dbusmock.DBusTestCase.system_bus_pid is not None:
+            cls.stop_dbus(dbusmock.DBusTestCase.system_bus_pid)
+            del os.environ['DBUS_SYSTEM_BUS_ADDRESS']
+            dbusmock.DBusTestCase.system_bus_pid = None
+        if dbusmock.DBusTestCase.session_bus_pid is not None:
+            cls.stop_dbus(dbusmock.DBusTestCase.session_bus_pid)
+            del os.environ['DBUS_SESSION_BUS_ADDRESS']
+            dbusmock.DBusTestCase.session_bus_pid = None
+        super(SystemUpdatesBaseTestCase, cls).tearDownClass()
 
 
 class BackgroundBaseTestCase(
@@ -1052,6 +1143,8 @@ class VpnBaseTestCase(UbuntuSystemSettingsVpnTestCase):
 
     def setUp(self):
         super(VpnBaseTestCase, self).setUp()
+        # Required since this test needs to dismiss the OSK.
+        self.useFixture(EnvironmentVariable("UITK_USE_MALIIT", "1"))
         self.vpn_page = self.main_view.go_to_vpn_page()
 
     def get_vpn_connection_object(self, path):
@@ -1102,6 +1195,9 @@ class WifiBaseTestCase(UbuntuSystemSettingsTestCase,
             'test_ap', 'test_ap',
             security=NM80211ApSecurityFlags.NM_802_11_AP_SEC_KEY_MGMT_PSK
         )
+
+        # Required since this test needs to dismiss the OSK.
+        self.useFixture(EnvironmentVariable("UITK_USE_MALIIT", "1"))
 
         super(WifiBaseTestCase, self).setUp(panel)
         if panel:

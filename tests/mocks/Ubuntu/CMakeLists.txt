@@ -1,0 +1,4 @@
+add_subdirectory(Connectivity)
+add_subdirectory(DownloadManager)
+add_subdirectory(OnlineAccounts)
+add_subdirectory(SystemSettings)

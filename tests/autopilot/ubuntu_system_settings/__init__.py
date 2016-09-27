@@ -1,7 +1,7 @@
 
 # -*- Mode: Python; coding: utf-8; indent-tabs-mode: nil; tab-width: 4 -*-
 #
-# Copyright (C) 2014, 2015 Canonical Ltd.
+# Copyright (C) 2014-2016 Canonical Ltd.
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU Lesser General Public License as published by
@@ -15,12 +15,12 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-from time import sleep
 from autopilot import introspection
 from autopilot.exceptions import StateNotFoundError
 from ubuntu_system_settings.utils.i18n import ugettext as _
 
 import logging
+from time import sleep
 import autopilot.logging
 import ubuntuuitoolkit
 import ubuntu_system_settings.utils as utils
@@ -148,12 +148,19 @@ class SystemSettingsMainWindow(ubuntuuitoolkit.MainView):
                 page_center_x,
                 page_center_y - obj.height * 2
             )
-            # avoid a flick
-            sleep(1.0)
+            # avoid a flick, this is very important
+            sleep(0.3)
 
     def scroll_to_and_click(self, obj):
         self.scroll_to(obj)
         self.pointing_device.click_object(obj)
+
+    def click_header_action(self, action):
+        """Click the action 'action' on the header"""
+        main_view = self.get_root_instance().select_single(
+            objectName='systemSettingsMainView')
+        header = main_view.select_single('AppHeader')
+        header.click_action_button(action)
 
     @property
     def system_settings_page(self):
@@ -227,9 +234,6 @@ class CellularPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
     @autopilot.logging.log_action(logger.debug)
     def disable_data(self):
         self._set_data(False)
-
-    def disable_datas(self):
-        self.select_sim_for_data('off')
 
     @autopilot.logging.log_action(logger.debug)
     def _set_data(self, data):
@@ -845,7 +849,7 @@ class AboutPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
     @autopilot.logging.log_action(logger.info)
     def go_to_software_licenses(self):
         license_item = self.select_single(
-            ubuntuuitoolkit.listitems.Standard, objectName='licenseItem')
+            'StandardProgression', objectName='licenseItem')
         license_item.swipe_into_view()
         self.pointing_device.click_object(license_item)
         licenses_page = self.get_root_instance().wait_select_single(
@@ -882,6 +886,10 @@ class SystemUpdatesPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
             if state['objectName'][1] == 'systemUpdatesPage':
                 return True
         return False
+
+    def stop_check(self):
+        btn = self.select_single(objectName='updatesGlobalStopButton')
+        self.pointing_device.click_object(btn)
 
 
 class PhonePage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
@@ -1540,60 +1548,6 @@ class WifiPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
         if obj.checked != state:
             self.pointing_device.click_object(obj)
 
-    """Connects to hidden network
-
-    :param name: Network name string (SSID)
-    :kwarg security: A string that is either "none", "wpa" or "wep
-    :kwarg password: A string/hex secret
-    :kwarg cancel: A boolean deciding whether we press cancel or not
-
-    :returns: If we are connecting, it returns the dialog,
-        if we cancel, it returns itself
-
-    """
-    @autopilot.logging.log_action(logger.debug)
-    def connect_to_hidden_network(self, name, security='none', username=None,
-                                  password=None, auth=None, protocol=None,
-                                  cancel=False):
-        dialog = self._click_connect_to_hidden_network()
-        dialog._scroll_to_and_click = self._scroll_to_and_click
-        dialog.enter_name(name)
-        utils.dismiss_osk()
-
-        if security:
-            dialog.set_security(security)
-        if auth:
-            dialog.set_auth(auth)
-        if protocol:
-            dialog.set_protocol(protocol)
-        if username:
-            dialog.enter_username(username)
-            utils.dismiss_osk()
-        if password:
-            dialog.enter_password(password)
-            utils.dismiss_osk()
-        if cancel:
-            utils.dismiss_osk()
-            dialog.cancel()
-            return self
-        else:
-            utils.dismiss_osk()
-            dialog.connect()
-            return dialog
-
-    @autopilot.logging.log_action(logger.debug)
-    def _click_connect_to_hidden_network(self):
-
-        # we can't mock the qunitymenu items, so we
-        # have to wait for them to be built
-        sleep(0.5)
-
-        button = self.select_single('*',
-                                    objectName='connectToHiddenNetwork')
-        self._scroll_to_and_click(button)
-        return self.get_root_instance().wait_select_single(
-            objectName='otherNetworkDialog')
-
     @autopilot.logging.log_action(logger.debug)
     def go_to_previous_networks(self):
         return self._click_previous_network()
@@ -1639,79 +1593,6 @@ class OtherNetwork(
                 return True
         return False
 
-    # FIXME: Use ListItem methods instead.
-    @autopilot.logging.log_action(logger.debug)
-    def _expand_list(self, list_name):
-        item_list = self.select_single(
-            '*', objectName=list_name)
-        active_child = item_list.select_single(
-            '*', objectName='listContainer')
-        self._scroll_to_and_click(active_child)
-        # wait for it to expand
-        sleep(0.5)
-        return item_list
-
-    @autopilot.logging.log_action(logger.debug)
-    def enter_name(self, name):
-        self._enter_name(name)
-
-    @autopilot.logging.log_action(logger.debug)
-    def _enter_name(self, name):
-        namefield = self.wait_select_single('TextField',
-                                            objectName='networkname')
-        self._scroll_to_and_click(namefield)
-        namefield.write(name)
-
-    @autopilot.logging.log_action(logger.debug)
-    def enter_username(self, username):
-        self._enter_username(username)
-
-    @autopilot.logging.log_action(logger.debug)
-    def _enter_username(self, username):
-        namefield = self.wait_select_single('TextField',
-                                            objectName='username')
-        self._scroll_to_and_click(namefield)
-        namefield.write(username)
-
-    @autopilot.logging.log_action(logger.debug)
-    def set_security(self, security):
-        """Sets the hidden network's security
-
-        :param security: Either 'none', 'wpa', 'wep', 'wpa-ep', 'dewp', 'leap'
-
-        :returns: None
-        """
-
-        # We only set security if not none, since none is default
-        if security != 'none':
-            self._set_security(security)
-
-    @autopilot.logging.log_action(logger.debug)
-    def _set_security(self, security):
-        s_list = self._expand_list('securityList')
-        item = None
-        if security == 'none':
-            item = s_list.wait_select_single('*', text=_('None'))
-        elif security == 'wpa':
-            item = s_list.wait_select_single('*',
-                                             text=_('WPA & WPA2 Personal'))
-        elif security == 'wep':
-            item = s_list.wait_select_single('*', text=_('WEP'))
-        elif security == 'wpa-ep':
-            item = s_list.wait_select_single('*',
-                                             text=_('WPA & WPA2 Enterprise'))
-        elif security == 'dwep':
-            item = s_list.wait_select_single('*',
-                                             text=_('Dynamic WEP (802.1x)'))
-        elif security == 'leap':
-            item = s_list.wait_select_single('*', text=_('LEAP'))
-        elif security is not None:
-            raise ValueError('security type %s is not valid' % security)
-
-        self.pointing_device.click_object(item)
-        # wait for ui to change
-        sleep(0.5)
-
     @autopilot.logging.log_action(logger.debug)
     def enter_password(self, password):
         self._enter_password(password)
@@ -1722,76 +1603,6 @@ class OtherNetwork(
                                            objectName='password')
         self._scroll_to_and_click(pwdfield)
         pwdfield.write(password)
-
-    @autopilot.logging.log_action(logger.debug)
-    def set_protocol(self, protocol):
-        """Sets the hidden network's protocol.
-
-        :param protocol: Either 'pap', 'mschapv2', 'mschap', 'chap', 'gtc',
-                         or 'md5'.
-        """
-        self._set_protocol(protocol)
-
-    @autopilot.logging.log_action(logger.debug)
-    def _set_protocol(self, protocol):
-        p_list = self._expand_list('p2authList')
-        item = None
-        if protocol == 'pap':
-            item = p_list.wait_select_single(text='PAP')
-        elif protocol == 'mschapv2':
-            item = p_list.wait_select_single(text='MSCHAPv2')
-        elif protocol == 'mschap':
-            item = p_list.wait_select_single(text='MSCHAP')
-        elif protocol == 'chap':
-            item = p_list.wait_select_single(text='CHAP')
-        elif protocol == 'gtc':
-            item = p_list.wait_select_single(text='GTC')
-        elif protocol == 'md5':
-            item = p_list.wait_select_single(text='MD5')
-        elif protocol is not None:
-            raise ValueError('protocol type %s is not valid' % protocol)
-
-        self.pointing_device.click_object(item)
-        # wait for ui to change
-        sleep(0.5)
-
-    @autopilot.logging.log_action(logger.debug)
-    def set_auth(self, auth):
-        """Sets the hidden network's protocol.
-
-        :param auth: Either 'tls', 'ttls', 'leap', 'fast' or 'peap'.
-        """
-        self._set_auth(auth)
-
-    @autopilot.logging.log_action(logger.debug)
-    def _set_auth(self, auth):
-        a_list = self._expand_list('authList')
-        item = None
-        if auth == 'tls':
-            item = a_list.wait_select_single(text='TLS')
-        elif auth == 'ttls':
-            item = a_list.wait_select_single(text='TTLS')
-        elif auth == 'leap':
-            item = a_list.wait_select_single(text='LEAP')
-        elif auth == 'fast':
-            item = a_list.wait_select_single(text='FAST')
-        elif auth == 'peap':
-            item = a_list.wait_select_single(text='PEAP')
-        elif auth is not None:
-            raise ValueError('auth type %s is not valid' % auth)
-
-        self.pointing_device.click_object(item)
-        # wait for ui to change
-        sleep(0.5)
-
-    @autopilot.logging.log_action(logger.debug)
-    def cancel(self):
-        self._click_cancel()
-
-    @autopilot.logging.log_action(logger.debug)
-    def _click_cancel(self):
-        button = self.select_single('Button', objectName='cancel')
-        self._scroll_to_and_click(button)
 
     @autopilot.logging.log_action(logger.debug)
     def connect(self):
@@ -1824,7 +1635,7 @@ class PreviousNetworks(
 
     @autopilot.logging.log_action(logger.debug)
     def _select_network(self, name):
-        net = self.select_single('Standard', text=name)
+        net = self.select_single('StandardProgression', text=name)
         self.pointing_device.click_object(net)
 
 
@@ -1858,14 +1669,14 @@ class VpnPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
     @autopilot.logging.log_action(logger.debug)
     def add_vpn(self):
         obj = self.select_single(objectName='addVpnButton')
-        self.pointing_device.click_object(obj)
+        self.get_root_instance().main_view.scroll_to_and_click(obj)
         return self.get_root_instance().wait_select_single(
             objectName='vpnEditor')
 
     @autopilot.logging.log_action(logger.debug)
     def preview_vpn(self, at):
         obj = self.wait_select_single(objectName='vpnListConnection%d' % at)
-        self.pointing_device.click_object(obj)
+        self.get_root_instance().main_view.scroll_to_and_click(obj)
         return self.get_root_instance().wait_select_single(
             objectName='vpnPreviewDialog')
 
@@ -1875,7 +1686,7 @@ class VpnPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
         change_button = diag.wait_select_single(
             objectName='vpnPreviewChangeButton'
         )
-        self.pointing_device.click_object(change_button)
+        self.get_root_instance().main_view.scroll_to_and_click(change_button)
         return self.get_root_instance().wait_select_single(
             objectName='vpnEditor')
 
@@ -1926,10 +1737,16 @@ class VpnEditor(
 
     @autopilot.logging.log_action(logger.debug)
     def set_openvpn_server(self, server):
+        self.get_root_instance().main_view.scroll_to(
+            self._openvpn_server_field
+        )
         self._openvpn_server_field.write(server)
 
     @autopilot.logging.log_action(logger.debug)
     def set_openvpn_custom_port(self, port):
+        self.get_root_instance().main_view.scroll_to(
+            self._openvpn_custom_port_toggle
+        )
         self._openvpn_custom_port_toggle.check()
         # XXX: workaround for lp:1546559, i.e. we need to wait
         # some time between writing to the API.
@@ -1942,7 +1759,8 @@ class VpnEditor(
 
     @autopilot.logging.log_action(logger.debug)
     def set_openvpn_file(self, field, paths):
-        self.pointing_device.click_object(field)
+        utils.dismiss_osk()
+        self.get_root_instance().main_view.scroll_to_and_click(field)
 
         # Wait for expanded animation.
         sleep(0.5)
@@ -1950,6 +1768,7 @@ class VpnEditor(
         # file = field.wait_select_single(objectName='vpnFileSelectorItem0')
         choose = field.wait_select_single(objectName='vpnFileSelectorItem1')
         self.pointing_device.click_object(choose)
+        self.get_root_instance().main_view.scroll_to_and_click(choose)
         file_dialog = self.get_root_instance().wait_select_single(
             objectName='vpnDialogFile'
         )

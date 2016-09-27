@@ -1,7 +1,7 @@
 /*
  * This file is part of system-settings
  *
- * Copyright (C) 2013 Canonical Ltd.
+ * Copyright (C) 2013-2016 Canonical Ltd.
  *
  * Contact: Alberto Mardegan <alberto.mardegan@canonical.com>
  *
@@ -21,10 +21,10 @@
 import QtQuick 2.4
 import QtSystemInfo 5.0
 import SystemSettings 1.0
+import SystemSettings.ListItems 1.0 as SettingsListItems
 import Ubuntu.Components 1.3
-import Ubuntu.Components.ListItems 1.3 as ListItem
+import Ubuntu.Components.ListItems 1.3 as ListItems
 import Ubuntu.SystemSettings.StorageAbout 1.0
-import Ubuntu.SystemSettings.Update 1.0
 import Ubuntu.SystemSettings.Bluetooth 1.0
 import MeeGo.QOfono 0.2
 
@@ -70,31 +70,30 @@ ItemPage {
             anchors.left: parent.left
             anchors.right: parent.right
 
-            ListItem.Empty {
-                height: ubuntuLabel.height + deviceLabel.height + units.gu(6)
-
-                Column {
-                    anchors.left: parent.left
-                    anchors.right: parent.right
-                    anchors.centerIn: parent
-                    spacing: units.gu(2)
-                    Label {
-                        id: ubuntuLabel
-                        anchors.horizontalCenter: parent.horizontalCenter
-                        text: ""
-                        fontSize: "x-large"
+            Column {
+                anchors.left: parent.left
+                anchors.right: parent.right
+                Label {
+                    id: ubuntuLabel
+                    anchors {
+                        left: parent.left
+                        right: parent.right
                     }
-                    Label {
-                        id: deviceLabel
-                        objectName: "deviceLabel"
-                        anchors.horizontalCenter: parent.horizontalCenter
-                        text: deviceInfos.manufacturer() ? deviceInfos.manufacturer() + " " + deviceInfos.model() : backendInfos.vendorString
-                    }
+                    height: contentHeight + units.gu(2)
+                    horizontalAlignment: Text.AlignHCenter
+                    verticalAlignment: Text.AlignVCenter
+                    text: ""
+                    fontSize: "x-large"
                 }
-                highlightWhenPressed: false
+                Label {
+                    id: deviceLabel
+                    objectName: "deviceLabel"
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    text: deviceInfos.manufacturer() ? deviceInfos.manufacturer() + " " + deviceInfos.model() : backendInfos.vendorString
+                }
             }
 
-            ListItem.SingleValue {
+            SettingsListItems.SingleValue {
                 id: serialItem
                 objectName: "serialItem"
                 text: i18n.tr("Serial")
@@ -102,7 +101,7 @@ ItemPage {
                 visible: backendInfos.serialNumber
             }
 
-            ListItem.SingleValue {
+            SettingsListItems.SingleValue {
                 objectName: "imeiItem"
                 property string imeiNumber
                 imeiNumber: deviceInfos.imei(0)
@@ -112,7 +111,8 @@ ItemPage {
                 visible: modemsSorted.length == 1
             }
 
-            ListItem.MultiValue {
+            /* We still need a new ListItem for MultiValue */
+            ListItems.MultiValue {
                 text: "IMEI"
                 objectName: "imeiItems"
                 values: {
@@ -126,7 +126,7 @@ ItemPage {
                 visible: modemsSorted.length > 1
             }
 
-            ListItem.SingleValue {
+            SettingsListItems.SingleValue {
                 property string address: wlinfo.macAddress(NetworkInfo.WlanMode, 0)
                 text: i18n.tr("Wi-Fi address")
                 value: address ? address.toUpperCase() : ""
@@ -134,7 +134,7 @@ ItemPage {
                 showDivider: bthwaddr.visible
             }
 
-            ListItem.SingleValue {
+            SettingsListItems.SingleValue {
                 id: bthwaddr
                 text: i18n.tr("Bluetooth address")
                 value: bluetooth.adapterAddress
@@ -142,27 +142,29 @@ ItemPage {
                 showDivider: false
             }
 
-            ListItem.Divider {}
+            ListItems.Divider {}
 
-            ListItem.SingleValue {
+            SettingsListItems.SingleValueProgression {
                 id: storageItem
                 objectName: "storageItem"
                 text: i18n.tr("Storage")
                 /* TRANSLATORS: that's the free disk space, indicated in the most appropriate storage unit */
                 value: i18n.tr("%1 free").arg(Utilities.formatSize(backendInfos.getFreeSpace("/home")))
-                progression: true
                 onClicked: pageStack.push(Qt.resolvedUrl("Storage.qml"))
             }
 
             SettingsItemTitle {
+                id: softwareItem
                 objectName: "softwareItem"
+                visible: UpdateManager.currentBuildNumber
                 text: i18n.tr("Software:")
             }
 
-            ListItem.SingleValue {
+            SettingsListItems.SingleValueProgression {
+                visible: softwareItem.visible
                 property string versionIdentifier: {
-                    var num = UpdateManager.currentBuildNumber;
-                    var ota = UpdateManager.detailedVersionDetails['tag'];
+                    var num = SystemImage.currentBuildNumber;
+                    var ota = SystemImage.versionTag;
                     num = num ? "r%1".arg(num.toString()) : "";
                     return ota ? ota : num;
                 }
@@ -171,21 +173,23 @@ ItemPage {
                 value: "Ubuntu %1%2"
                     .arg(deviceInfos.version(DeviceInfo.Os))
                     .arg(versionIdentifier ? " (%1)".arg(versionIdentifier) : "")
-                progression: true
                 onClicked: pageStack.push(Qt.resolvedUrl("Version.qml"), {
                     version: versionIdentifier
                 })
             }
 
-            ListItem.SingleValue {
+            SettingsListItems.SingleValue {
                 objectName: "lastUpdatedItem"
+                visible: softwareItem.visible
                 text: i18n.tr("Last updated")
-                value: UpdateManager.lastUpdateDate && !isNaN(UpdateManager.lastUpdateDate) ?
-                    Qt.formatDate(UpdateManager.lastUpdateDate) : i18n.tr("Never")
+                value: SystemImage.lastUpdateDate && !isNaN(SystemImage.lastUpdateDate) ?
+                    Qt.formatDate(SystemImage.lastUpdateDate) : i18n.tr("Never")
             }
 
-            ListItem.SingleControl {
-                control: Button {
+            SettingsListItems.SingleControl {
+                visible: softwareItem.visible
+
+                Button {
                     objectName: "updateButton"
                     text: i18n.tr("Check for updates")
                     width: parent.width - units.gu(4)
@@ -193,10 +197,15 @@ ItemPage {
                         var upPlugin = pluginManager.getByName("system-update")
                         if (upPlugin) {
                             var updatePage = upPlugin.pageComponent
-                            if (updatePage)
-                                pageStack.push(updatePage)
-                            else
+                            var updatePageItem;
+                            if (updatePage) {
+                                updatePageItem = pageStack.push(updatePage, {
+                                    plugin: upPlugin, pluginManager: pluginManager
+                                });
+                                updatePageItem.check(true); // Force a check.
+                            } else {
                                 console.warn("Failed to get system-update pageComponent")
+                            }
                         } else {
                             console.warn("Failed to get system-update plugin instance")
                         }
@@ -210,26 +219,23 @@ ItemPage {
                 text: i18n.tr("Legal:")
             }
 
-            ListItem.Standard {
+            SettingsListItems.StandardProgression {
                 objectName: "licenseItem"
                 text: i18n.tr("Software licenses")
-                progression: true
                 onClicked: pageStack.push(Qt.resolvedUrl("Software.qml"))
             }
 
-            ListItem.Standard {
+            SettingsListItems.StandardProgression {
                 property var regulatoryInfo:
                     pluginManager.getByName("regulatory-information")
                 text: i18n.tr("Regulatory info")
-                progression: true
                 visible: regulatoryInfo
                 onClicked: pageStack.push(regulatoryInfo.pageComponent)
             }
 
-            ListItem.SingleValue {
+            SettingsListItems.SingleValueProgression {
                 objectName: "devmodeItem"
                 text: i18n.tr("Developer mode")
-                progression: true
                 onClicked: pageStack.push(Qt.resolvedUrl("DevMode.qml"))
             }
         }

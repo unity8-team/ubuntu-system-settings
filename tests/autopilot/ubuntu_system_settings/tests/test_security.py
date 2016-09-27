@@ -1,5 +1,5 @@
 # -*- Mode: Python; coding: utf-8; indent-tabs-mode: nil; tab-width: 4 -*-
-# Copyright 2014 Canonical
+# Copyright 2014-2016 Canonical
 #
 # This program is free software: you can redistribute it and/or modify it
 # under the terms of the GNU General Public License version 3, as published
@@ -127,7 +127,7 @@ class SecurityTestCase(SecurityBaseTestCase):
         else:
             self.assertEquals(
                 activityTimeout,
-                ('{:d} minutes').format(int(actTimeout/60)))
+                ('After {:d} minutes').format(int(actTimeout/60)))
             if dimTimeout:
                 self.assertEquals(dimTimeout, actTimeout - 10)
 
@@ -160,20 +160,20 @@ class SecurityTestCase(SecurityBaseTestCase):
         unlock_methods = ['method_swipe', 'method_code', 'method_phrase']
         selected_method = None
         for m in unlock_methods:
-            if lock_security_page.select_single(objectName=m).selected:
+            if lock_security_page.wait_select_single(objectName=m).selected:
                 selected_method = m
 
         # If swipe is the selected security, we trigger the dialog by
         # changing the security to method_code
         if selected_method == 'method_swipe':
-            dialog_trigger = lock_security_page.select_single(
+            dialog_trigger = lock_security_page.wait_select_single(
                 objectName='method_code')
             input_selector = 'newInput'
         else:
-            # If the security is anything besides swipe, we trigger the dialog
-            # by changing the code/phrase.
-            dialog_trigger = lock_security_page.select_single(
-                objectName='changePass')
+            # If the security is anything besides swipe, we trigger the current
+            # pass dialog by changing the security to swipe.
+            dialog_trigger = lock_security_page.wait_select_single(
+                objectName='method_swipe')
             input_selector = 'currentInput'
 
         # Trigger dialog.
@@ -199,12 +199,12 @@ class SecurityTestCase(SecurityBaseTestCase):
         elif actTimeout is 60:
             self.assertEquals(
                 activityTimeout,
-                ('{:d} minute').format(int(actTimeout/60))
+                ('After {:d} minute').format(int(actTimeout/60))
             )
         else:
             self.assertEquals(
                 activityTimeout,
-                ('{:d} minutes').format(int(actTimeout/60))
+                ('After {:d} minutes').format(int(actTimeout/60))
             )
 
     def test_idle_never_timeout(self):
