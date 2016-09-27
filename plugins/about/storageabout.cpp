@@ -206,6 +206,15 @@ QString StorageAbout::ubuntuBuildID()
     return m_ubuntuBuildID;
 }
 
+bool StorageAbout::getDeveloperModeCapable() const
+{
+    QDBusReply<bool> reply = m_propertyService->call("GetProperty", "adb");
+
+    if (reply.isValid())
+        return true;
+    return false;
+}
+
 bool StorageAbout::getDeveloperMode()
 {
     QDBusReply<bool> reply = m_propertyService->call("GetProperty", "adb");

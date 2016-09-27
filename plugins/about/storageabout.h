@@ -90,6 +90,9 @@ class StorageAbout : public QObject
     Q_PROPERTY(bool developerMode
                READ getDeveloperMode
                WRITE setDeveloperMode)
+    Q_PROPERTY(bool developerModeCapable
+               READ getDeveloperModeCapable
+                CONSTANT)
 
 public:
     explicit StorageAbout(QObject *parent = 0);
@@ -115,6 +118,7 @@ public:
     Q_INVOKABLE bool isInternal(const QString &drive) const;
     bool getDeveloperMode();
     void setDeveloperMode(bool newMode);
+    bool getDeveloperModeCapable() const;
 
 Q_SIGNALS:
     void sortRoleChanged();
