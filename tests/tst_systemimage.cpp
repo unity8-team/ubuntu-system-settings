@@ -65,6 +65,8 @@ private Q_SLOTS:
         connect(m_siMock, SIGNAL(mockSettingChanged(QString, QString)),
                 m_systemImage, SLOT(settingsChanged(QString, QString)));
 
+        QTest::qWait(2000);
+
     }
     void cleanup()
     {
