@@ -19,21 +19,11 @@ SYSTEM_BUS = True
 
 
 def information(self):
-
-    # Build a version_details key=value string
-    vd_dict = self.si_props['version_detail']
-    vd_str = ''
-    for i, k in enumerate(vd_dict):
-        cmma = ','
-        if (i == len(vd_dict) - 1):
-            cmma = ''
-        vd_str += '%s=%s%s' % (k, str(vd_dict[k]), cmma)
-
     return dbus.Dictionary({
         'target_build_number': str(self.si_props['target_build_number']),
         'device_name': self.si_props['device'],
         'last_check_date': self.si_props['last_check_date'],
-        'version_detail': vd_str,
+        'version_detail': self.si_props['version_detail'],
         'channel_name': self.si_props['channel'],
         'last_update_date': self.si_props['last_update_date'],
         'current_build_number': str(self.si_props['build_number'])
@@ -72,9 +62,7 @@ def load(mock, parameters):
         'last_check_date': _parameters.get('last_check_date', ''),
         'target_build_number': _parameters.get('target_build_number', -1),
         'target_version_detail': _parameters.get('target_version_detail', ''),
-        'version_detail': _parameters.get(
-            'version_detail', dbus.Dictionary({}, signature='ss')
-        ),
+        'version_detail': _parameters.get('version_detail', ''),
         'update_available': _parameters.get('update_available', False),
         'reply_on_pause': _parameters.get('reply_on_pause', ''),
         'reply_on_cancel': _parameters.get('reply_on_cancel', ''),

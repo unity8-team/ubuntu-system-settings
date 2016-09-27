@@ -36,14 +36,8 @@ private Q_SLOTS:
         parameters["channel"] = "testchannel";
         parameters["build_number"] = 10;
         parameters["target_build_number"] = 42;
-
-        QVariantMap versionDetail;
-        versionDetail["foo"] = "bar";
-        versionDetail["tag"] = "OTA-100";
-        versionDetail["ubuntu"] = "101";
-        versionDetail["device"] = "102";
-        versionDetail["custom"] = "103";
-        parameters["version_detail"] = versionDetail;
+        parameters["version_detail"] =
+            "foo=bar,tag=OTA-100,ubuntu=101,device=102,custom=103";
 
         m_siMock = new FakeSystemImageDbus(parameters);
         m_dbus = new QDBusConnection(m_siMock->dbus());
