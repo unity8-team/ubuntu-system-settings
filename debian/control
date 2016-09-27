@@ -103,7 +103,6 @@ Depends: ${misc:Depends},
          libsystemsettings1 (= ${binary:Version}),
          ubuntu-keyboard-data (>= 0.99.trunk.phablet2+15.04.20150421),
          ubuntu-wallpapers,
-         urfkill,
 # for the session-migration script (python3 itself also for the push helper)
          python3,
          python3-gi,
@@ -113,6 +112,7 @@ Depends: ${misc:Depends},
          qml-module-ubuntu-connectivity (>= 0.7.1)
 Suggests: system-image-dbus (>= 3.1),
           aethercast,
+          urfkill,
 Recommends: ubuntu-system-settings-online-accounts,
             ubuntu-touch-sounds,
 Conflicts: ubuntu-system-settings-example

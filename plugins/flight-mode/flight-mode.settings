@@ -13,5 +13,6 @@
     ],
     "has-dynamic-keywords": false,
     "has-dynamic-visibility": false,
+    "visible-if-file-exists": "/etc/dbus-1/system.d/org.freedesktop.URfkill.conf",
     "entry-component": "EntryComponent.qml"
 }
