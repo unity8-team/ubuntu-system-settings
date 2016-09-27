@@ -1,3 +1,12 @@
+ubuntu-system-settings (0.4+16.10.20160927-0ubuntu1) yakkety; urgency=medium
+
+  * Make urfkill a suggests and only show the flight-mode plugin if
+    urfkill is installed.
+  * Only show Developer Mode setting if we can set it. Dropped dbus-
+    property-service to suggests.
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Tue, 27 Sep 2016 13:33:14 +0000
+
 ubuntu-system-settings (0.4+16.10.20160916-0ubuntu1) yakkety; urgency=medium
 
   [ Michael Terry ]
