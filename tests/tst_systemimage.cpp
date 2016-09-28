@@ -36,8 +36,8 @@ private Q_SLOTS:
         parameters["channel"] = "testchannel";
         parameters["build_number"] = 10;
         parameters["target_build_number"] = 42;
-        // parameters["version_detail"] =
-        //     "foo=bar,tag=OTA-100,ubuntu=101,device=102,custom=103";
+        parameters["version_detail"] =
+            "foo=bar,tag=OTA-100,ubuntu=101,device=102,custom=103";
 
         m_siMock = new FakeSystemImageDbus(parameters);
         m_dbus = new QDBusConnection(m_siMock->dbus());
@@ -82,7 +82,7 @@ private Q_SLOTS:
         details["ubuntu"] = "101";
         details["device"] = "102";
         details["custom"] = "103";
-        //QCOMPARE(m_systemImage->detailedVersionDetails(), details);
+        QCOMPARE(m_systemImage->detailedVersionDetails(), details);
     }
     void testVersionTag()
     {
@@ -272,10 +272,10 @@ private Q_SLOTS:
     }
 private:
     QSignalSpy *m_methodSpy;
-    FakeSystemImageDbus *m_siMock;
-    QDBusInterface *m_mock;
-    QSystemImage *m_systemImage;
-    QDBusConnection *m_dbus;
+    FakeSystemImageDbus *m_siMock = nullptr;
+    QDBusInterface *m_mock = nullptr;
+    QSystemImage *m_systemImage = nullptr;
+    QDBusConnection *m_dbus = nullptr;
 };
 
 QTEST_GUILESS_MAIN(TstSystemImage)
