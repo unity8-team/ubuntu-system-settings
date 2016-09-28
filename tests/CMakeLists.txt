@@ -53,7 +53,7 @@ add_executable(tst-systemimage
     tst_systemimage.cpp
     mocks/system-image-dbus/fakesystemimagedbus.cpp
 )
-qt5_use_modules(tst-systemimage Core Test)
+qt5_use_modules(tst-systemimage Core DBus Test)
 add_test(tst-systemimage tst-systemimage)
 target_link_libraries(tst-systemimage
     uss-systemimage
