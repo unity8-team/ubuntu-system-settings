@@ -1,4 +1,4 @@
-name: ubuntu-system-settings
+name: ubuntu-system-settings-dev
 version: 0
 summary: The System Settings application for Ubuntu Touch.
 description: The System Settings application for Ubuntu Touch.
