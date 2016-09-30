@@ -53,7 +53,7 @@ QString Background::getBackgroundFile()
         return filename;
 }
 
-void Background::setBackgroundFile(QUrl backgroundFile)
+void Background::setBackgroundFile(const QUrl &backgroundFile)
 {
     if (!backgroundFile.isLocalFile())
         return;
@@ -72,7 +72,7 @@ void Background::setBackgroundFile(QUrl backgroundFile)
     // delete our copy.  We don't need it anymore.
     if (oldBackgroundFile.contains(getCopiedSystemBackgroundFolder().path())) {
         QString fileName = QUrl(oldBackgroundFile).fileName();
-        if (QFile::exists(SYSTEM_BACKGROUND_DIR "/" + fileName)) {
+        if (QFile::exists(qgetenv("SNAP") + SYSTEM_BACKGROUND_DIR "/" + fileName)) {
             rmFile(oldBackgroundFile);
         }
     }
@@ -116,7 +116,7 @@ void Background::updateCustomBackgrounds()
         // with it.
         // So scan the copied backgrounds.
         QFileInfoList copyList = getCopiedSystemBackgroundFolder().entryInfoList(QDir::Files | QDir::NoSymLinks);
-        QDir systemDir = QDir(SYSTEM_BACKGROUND_DIR);
+        QDir systemDir = QDir(qgetenv("SNAP") + SYSTEM_BACKGROUND_DIR);
         foreach (QFileInfo f, copyList) {
             if (!systemDir.exists(f.fileName()))
                 tmpList << f;
@@ -213,7 +213,7 @@ void Background::updateUbuntuArt()
         dir = QDir(envDir);
         copiedBackgroundDir = dir;
     } else {
-        dir = QDir(SYSTEM_BACKGROUND_DIR);
+        dir = QDir(qgetenv("SNAP") + SYSTEM_BACKGROUND_DIR);
         copiedBackgroundDir = getCopiedSystemBackgroundFolder();
     }
 
@@ -229,7 +229,7 @@ void Background::updateUbuntuArt()
         // Prefer copied versions.
         if (copiedBackgroundDir.exists(f.fileName()))
             absPath = copiedBackgroundDir.absoluteFilePath(f.fileName());
-        
+
         m_ubuntuArt.append(QUrl::fromLocalFile(absPath).toString());
     }
 
@@ -271,7 +271,7 @@ void Background::rmFile(const QString &file)
 QString Background::defaultBackgroundFile() const
 {
     /* TODO: For now hardcoded path, later we'll use GSettings */
-    return SYSTEM_BACKGROUND_DIR "/warty-final-ubuntu.png";
+    return qgetenv("SNAP") + SYSTEM_BACKGROUND_DIR "/warty-final-ubuntu.png";
 }
 
 Background::~Background() {

@@ -19,6 +19,7 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <QStandardPaths>
 #include <QtDebug>
 #include "onscreenkeyboard-plugin.h"
 
@@ -28,7 +29,7 @@
 #define KEY_CURRENT_LAYOUT  "active-language"
 #define KEY_PLUGIN_PATHS "plugin-paths"
 
-#define LAYOUTS_DIR "/usr/share/maliit/plugins/com/ubuntu/lib"
+#define LAYOUTS_DIR "maliit/plugins/com/ubuntu/lib"
 
 OnScreenKeyboardPlugin::OnScreenKeyboardPlugin(QObject *parent) :
     QObject(parent),
@@ -37,7 +38,14 @@ OnScreenKeyboardPlugin::OnScreenKeyboardPlugin(QObject *parent) :
     GVariantIter *iter;
     const gchar *path;
 
-    m_layoutPaths.append(LAYOUTS_DIR);
+    QString layoutPath = QStandardPaths::locate(
+        QStandardPaths::GenericDataLocation, LAYOUTS_DIR,
+        QStandardPaths::LocateDirectory
+    );
+    if (!layoutPath.isEmpty()) {
+        m_layoutPaths.append(layoutPath);
+    }
+
     g_settings_get(m_maliitSettings, KEY_PLUGIN_PATHS, "as", &iter);
     for (int i(0); g_variant_iter_next(iter, "&s", &path); i++) {
         m_layoutPaths.append(path);

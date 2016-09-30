@@ -37,8 +37,10 @@
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <QStandardPaths>
 #include <QtCore/QStorageInfo>
 #include <QtCore/QSharedPointer>
+#include <QtGlobal>
 #include <QProcess>
 #include <QVariant>
 #include <hybris/properties/properties.h>
@@ -195,7 +197,7 @@ QString StorageAbout::ubuntuBuildID()
 {
     if (m_ubuntuBuildID.isEmpty() || m_ubuntuBuildID.isNull())
     {
-        QFile file("/etc/media-info");
+        QFile file(qgetenv("SNAP").append("/etc/media-info"));
         if (!file.exists())
             return "";
         file.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -235,10 +237,18 @@ void StorageAbout::setDeveloperMode(bool mode)
 QString StorageAbout::licenseInfo(const QString &subdir) const
 {
 
-    QString copyright = "/usr/share/doc/" + subdir + "/copyright";
+    QString copyright = "doc/" + subdir + "/copyright";
     QString copyrightText;
 
-    QFile file(copyright);
+    QString copyrightFile = QStandardPaths::locate(
+        QStandardPaths::GenericDataLocation, copyright,
+        QStandardPaths::LocateFile
+    );
+    if (copyrightFile.isEmpty()) {
+        return QString();
+    }
+
+    QFile file(copyrightFile);
     if(!file.open(QIODevice::ReadOnly | QIODevice::Text))
         return QString();
     copyrightText = QString(file.readAll());
