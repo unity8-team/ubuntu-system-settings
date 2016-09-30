@@ -39,27 +39,28 @@ private Q_SLOTS:
         parameters["version_detail"] =
             "foo=bar,tag=OTA-100,ubuntu=101,device=102,custom=103";
 
+        qWarning() << "set up params";
         m_siMock = new FakeSystemImageDbus(parameters);
-        QTest::qWait(200);
-        qDebug() << "init fake si";
+        QTest::qWait(1000);
+        qWarning() << "init fake si";
         m_dbus = new QDBusConnection(m_siMock->dbus());
-        QTest::qWait(200);
-        qDebug() << "init new dbus conn";
+        QTest::qWait(1000);
+        qWarning() << "init new dbus conn";
         m_mock = new QDBusInterface(SI_SERVICE,
                                     SI_MAIN_OBJECT,
                                     "org.freedesktop.DBus.Mock",
                                     *m_dbus);
-        QTest::qWait(200);
-        qDebug() << "init interface";
+        QTest::qWait(1000);
+        qWarning() << "init interface";
         m_methodSpy = new QSignalSpy(
             m_mock, SIGNAL(MethodCalled(const QString &, const QVariantList &))
         );
-        QTest::qWait(200);
-        qDebug() << "init sspy";
+        QTest::qWait(1000);
+        qWarning() << "init sspy";
 
         m_systemImage = new QSystemImage(*m_dbus);
-        QTest::qWait(200);
-        qDebug() << "init qsystemimage";
+        QTest::qWait(1000);
+        qWarning() << "init qsystemimage";
         /* The following connections help us test DBus signals that are not
         mockable. See https://github.com/martinpitt/python-dbusmock/issues/23
         */
