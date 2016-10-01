@@ -41,7 +41,7 @@ private Q_SLOTS:
 
         qWarning() << "set up params";
         m_siMock = new FakeSystemImageDbus(parameters);
-        QTest::qWait(1000);
+        QTest::qWait(500);
         qWarning() << "init fake si";
         m_dbus = new QDBusConnection(m_siMock->dbus());
         // QTest::qWait(1000);
