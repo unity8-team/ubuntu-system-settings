@@ -40,9 +40,6 @@ private Q_SLOTS:
             "foo=bar,tag=OTA-100,ubuntu=101,device=102,custom=103";
 
         m_siMock = new FakeSystemImageDbus(parameters);
-
-        // Workaround for lp:1629575
-        QTest::qWait(1000);
         m_dbus = new QDBusConnection(m_siMock->dbus());
         m_mock = new QDBusInterface(SI_SERVICE,
                                     SI_MAIN_OBJECT,
@@ -51,7 +48,6 @@ private Q_SLOTS:
         m_methodSpy = new QSignalSpy(
             m_mock, SIGNAL(MethodCalled(const QString &, const QVariantList &))
         );
-
         m_systemImage = new QSystemImage(*m_dbus);
 
         /* The following connections help us test DBus signals that are not
@@ -68,7 +64,8 @@ private Q_SLOTS:
         connect(m_siMock, SIGNAL(mockSettingChanged(QString, QString)),
                 m_systemImage, SLOT(settingsChanged(QString, QString)));
 
-
+        // Workaround for lp:1629575
+        QTest::qWait(2000);
     }
     void cleanup()
     {
