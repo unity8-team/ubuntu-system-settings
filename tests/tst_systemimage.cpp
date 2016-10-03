@@ -42,7 +42,7 @@ private Q_SLOTS:
         m_siMock = new FakeSystemImageDbus(parameters);
 
         // Workaround for lp:1629575
-        QTest::qWait(500);
+        QTest::qWait(1000);
         m_dbus = new QDBusConnection(m_siMock->dbus());
         m_mock = new QDBusInterface(SI_SERVICE,
                                     SI_MAIN_OBJECT,
