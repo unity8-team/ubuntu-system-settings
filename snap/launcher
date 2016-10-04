@@ -30,4 +30,4 @@ export LD_LIBRARY_PATH=$SNAP/usr/lib/$ARCH/mesa-egl:$LD_LIBRARY_PATH
 # Necessary for the SDK to find the translations directory
 export APP_DIR=$SNAP
 
-exec $@
+exec $@  --desktop_file_hint=unity8
