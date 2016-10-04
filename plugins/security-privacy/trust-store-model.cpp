@@ -24,6 +24,7 @@
 #include <QIcon>
 #include <QList>
 #include <QMap>
+#include <QtGlobal>
 #include <QSet>
 #include <QStandardPaths>
 
@@ -104,7 +105,10 @@ public:
 
         /* try system location as well, that's at least needed for unity8-dash
          * which is not a click (yet) and doesn't have a .local entry */
-        QString usrDesktopFilename(QString("/usr/share/applications/%1.desktop").arg(id));
+        QString usrDesktopFilename(
+            qgetenv("SNAP") +
+            QString("/usr/share/applications/%1.desktop").arg(id)
+        );
         if (QFile(usrDesktopFilename).exists())
             return usrDesktopFilename;
 

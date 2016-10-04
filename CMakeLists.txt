@@ -53,14 +53,27 @@ find_program(MSGFMT_BIN msgfmt)
 find_program(INTLTOOL_MERGE intltool-merge)
 find_program(INTLTOOL_EXTRACT intltool-extract)
 
-set(PLUGIN_MANIFEST_DIR_BASE share/ubuntu/settings/system)
-set(PLUGIN_MODULE_DIR_BASE ubuntu-system-settings)
-set(PLUGIN_PRIVATE_MODULE_DIR_BASE "${PLUGIN_MODULE_DIR_BASE}/private")
-set(PLUGIN_QML_DIR_BASE share/ubuntu/settings/system/qml-plugins)
+set(DATA_DIR share)
+set(MODULE_DIR ubuntu-system-settings)
+set(MANIFEST_DIR "ubuntu/settings/system")
+set(QML_DIR qml-plugins)
+set(PRIVATE_DIR private)
 
+# share/ubuntu/settings/system
+set(PLUGIN_MANIFEST_DIR_BASE ${DATA_DIR}/${MANIFEST_DIR})
+# ubuntu-system-settings
+set(PLUGIN_MODULE_DIR_BASE ${MODULE_DIR})
+# ubuntu-system-settings/private
+set(PLUGIN_PRIVATE_MODULE_DIR_BASE "${PLUGIN_MODULE_DIR_BASE}/${PRIVATE_DIR}")
+# share/ubuntu/settings/system/qml-plugins
+set(PLUGIN_QML_DIR_BASE ${DATA_DIR}/${MANIFEST_DIR}/${QML_DIR})
+# E.g. /usr/share/ubuntu/settings/system
 set(PLUGIN_MANIFEST_DIR "${CMAKE_INSTALL_PREFIX}/${PLUGIN_MANIFEST_DIR_BASE}")
+# E.g. /usr/lib/ubuntu-system-settings
 set(PLUGIN_MODULE_DIR "${CMAKE_INSTALL_PREFIX}/${LIBDIR}/${PLUGIN_MODULE_DIR_BASE}")
+# E.g. /usr/share/ubuntu/settings/system/qml-plugins
 set(PLUGIN_QML_DIR "${CMAKE_INSTALL_PREFIX}/${PLUGIN_QML_DIR_BASE}")
+# E.g. /usr/lib/ubuntu-system-settings/private
 set(PLUGIN_PRIVATE_MODULE_DIR "${CMAKE_INSTALL_PREFIX}/${LIBDIR}/${PLUGIN_PRIVATE_MODULE_DIR_BASE}")
 set(SETTINGS_SHARE_DIR "${CMAKE_INSTALL_PREFIX}/${PLUGIN_MANIFEST_DIR_BASE}")
 set(PUSH_HELPER_DIR "lib/ubuntu-push-client/legacy-helpers")
