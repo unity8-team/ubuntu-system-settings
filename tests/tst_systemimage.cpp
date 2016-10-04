@@ -65,13 +65,15 @@ private Q_SLOTS:
                 m_systemImage, SLOT(settingsChanged(QString, QString)));
 
         // Workaround for lp:1629575
-        QTest::qWait(2000);
+        // QTest::qWait(2000);
     }
     void cleanup()
     {
+        QSignalSpy destroyedSpy(m_systemImage, SIGNAL(destroyed(QObject*)));
+        m_systemImage->deleteLater();
+        QTRY_COMPARE(destroyedSpy.count(), 1);
         delete m_methodSpy;
         delete m_siMock;
-        delete m_systemImage;
     }
     void testDetailedVersionDetails()
     {
