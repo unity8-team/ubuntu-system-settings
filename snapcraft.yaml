@@ -1,11 +1,11 @@
-name: ubuntu-system-settings-dev
+name: ubuntu-system-settings
 version: 0
 summary: The System Settings application for Ubuntu Touch.
 description: The System Settings application for Ubuntu Touch.
 # confinement: devmode  # use "strict" to enforce system access only via declared interfaces
 confinement: devmode
 apps:
-  ubuntu-system-settings-dev:
+  ubuntu-system-settings:
     command: desktop-launch launcher system-settings
     plugs:
       - unity7
@@ -111,7 +111,8 @@ parts:
       - appmenu-qt5
       - xkb-data
       - ubuntu-touch-sounds
-    after: [desktop/gtk3]
+      - mir-graphics-drivers-desktop
+    after: [desktop-gtk3]
 
   launcher:
     plugin: dump
