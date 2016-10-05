@@ -5,7 +5,7 @@ description: The System Settings application for Ubuntu Touch.
 # confinement: devmode  # use "strict" to enforce system access only via declared interfaces
 confinement: devmode
 apps:
-  ubuntu-system-settings:
+  ubuntu-system-settings-dev:
     command: desktop-launch launcher system-settings
     plugs:
       - unity7
@@ -17,7 +17,7 @@ apps:
       - timezone-control
       - timeserver-control
       - network-manager
-      - time-date-control
+      # - time-date-control
       - upower-observe
       - bluez
 
