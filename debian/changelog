@@ -1,3 +1,12 @@
+ubuntu-system-settings (0.4+16.10.20161011-0ubuntu1) yakkety; urgency=medium
+
+  [ Iain Lane ]
+  * Add OnlyShowIn=Unity8 to the desktop file, so we don't get two
+    "System Settings" in a Unity 7 session, now that u-s-s is installed
+    by default. (LP: #1631997)
+
+ -- Jonas G. Drange <jonas.drange@canonical.com>  Tue, 11 Oct 2016 11:54:29 +0000
+
 ubuntu-system-settings (0.4+16.10.20160930.1-0ubuntu1) yakkety; urgency=medium
 
   [ Jonas G. Drange ]
