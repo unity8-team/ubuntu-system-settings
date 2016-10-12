@@ -1,3 +1,13 @@
+ubuntu-system-settings (0.4+16.10.20161012-0ubuntu1) yakkety; urgency=medium
+
+  [ Jonas G. Drange ]
+  * clarifies how we add the system image test via cmake
+
+  [ Jonas G. Drange, jonas-drange ]
+  * adds pruning of db
+
+ -- Jonas G. Drange <jonas.drange@canonical.com>  Wed, 12 Oct 2016 14:30:53 +0000
+
 ubuntu-system-settings (0.4+16.10.20160930.1-0ubuntu1) yakkety; urgency=medium
 
   [ Jonas G. Drange ]
