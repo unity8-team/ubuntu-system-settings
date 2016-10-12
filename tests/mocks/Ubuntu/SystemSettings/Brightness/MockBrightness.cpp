@@ -31,3 +31,21 @@ bool MockBrightness::getWidiSupported() const
 {
     return m_widiSupported;
 }
+
+void MockBrightness::setPowerdRunning(const bool running)
+{
+    m_powerdRunning = running;
+    Q_EMIT powerdRunningChanged();
+}
+
+void MockBrightness::setAutoBrightnessAvailable(const bool available)
+{
+    m_autoBrightnessAvailable = available;
+    Q_EMIT autoBrightnessAvailableChanged();
+}
+
+void MockBrightness::setWidiSupported(const bool supported)
+{
+    m_widiSupported = supported;
+    Q_EMIT widiSupportedChanged();
+}

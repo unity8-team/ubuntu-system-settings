@@ -20,25 +20,48 @@ import QtQuick 2.4
 import QtTest 1.0
 import Ubuntu.Components 1.3
 import Ubuntu.SystemSettings.Brightness 1.0
+import Ubuntu.Test 0.1
 
 import Source 1.0
 
-PageComponent {
-    id: root
-
+Item {
+    id: testRoot
     width: 300
     height: 500
 
-    TestCase {
+    Component {
+        id: pageComponent
+        PageComponent {
+            anchors.fill: parent
+        }
+    }
+
+    UbuntuTestCase {
         name: "BrightnessPageComponent"
         when: windowShown
 
-        function cleanup() {
+        property var instance: null
 
+        function init() {
+            instance = pageComponent.createObject(testRoot, {});
         }
 
-        function test_start_empty() {
+        function cleanup() {
             wait(3000)
+            instance.destroy();
+        }
+
+        function get_panel_plugin() {
+            return findInvisibleChild(testRoot, "brightnessPanel");
+        }
+
+        function test_brightness_title() {
+            compare(instance.title, i18n.tr("Brightness"));
+        }
+
+        function test_brightness_and_displays_title() {
+            get_panel_plugin().setWidiSupported(true);
+            compare(instance.title, i18n.tr("Brightness & Display"));
         }
     }
 }

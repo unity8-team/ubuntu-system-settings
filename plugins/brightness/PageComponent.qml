@@ -53,6 +53,7 @@ ItemPage {
 
     UbuntuBrightnessPanel {
         id: brightnessPanel
+        objectName: "brightnessPanel"
     }
 
     QDBusActionGroup {

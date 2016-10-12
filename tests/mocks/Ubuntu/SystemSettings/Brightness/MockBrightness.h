@@ -26,13 +26,13 @@ class MockBrightness : public QObject
     Q_OBJECT
     Q_PROPERTY( bool powerdRunning
                 READ getPowerdRunning
-                CONSTANT)
+                NOTIFY powerdRunningChanged)
     Q_PROPERTY (bool autoBrightnessAvailable
                 READ getAutoBrightnessAvailable
-                CONSTANT)
+                NOTIFY autoBrightnessAvailableChanged)
     Q_PROPERTY (bool widiSupported
                 READ getWidiSupported
-                CONSTANT)
+                NOTIFY widiSupportedChanged)
 public:
     explicit MockBrightness(QObject *parent = 0) {
         Q_UNUSED(parent)
@@ -40,7 +40,16 @@ public:
     bool getPowerdRunning() const;
     bool getAutoBrightnessAvailable() const;
     bool getWidiSupported() const;
+    Q_INVOKABLE void setPowerdRunning(const bool running); // mock only
+    Q_INVOKABLE void setAutoBrightnessAvailable(const bool available); // mock only
+    Q_INVOKABLE void setWidiSupported(const bool supported); // mock only
 
+Q_SIGNALS:
+    void powerdRunningChanged(); // mock only
+    void autoBrightnessAvailableChanged(); // mock only
+    void widiSupportedChanged(); // mock only
+
+private:
     bool m_powerdRunning = false;
     bool m_autoBrightnessAvailable = false;
     bool m_widiSupported = false;
