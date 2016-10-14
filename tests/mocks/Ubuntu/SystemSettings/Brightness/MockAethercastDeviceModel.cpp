@@ -19,28 +19,77 @@
 
 int MockAethercastDeviceModel::rowCount(const QModelIndex &parent) const
 {
-
+    Q_UNUSED(parent);
+    return m_devices.size();
 }
 
 QVariant MockAethercastDeviceModel::data(const QModelIndex &index, int role) const
 {
+    QVariant ret;
+    if ((0<=index.row()) && (index.row()<m_devices.size())) {
+        auto device = m_devices[index.row()];
+        QString displayName;
 
+        switch (role) {
+        case Qt::DisplayRole:
+            displayName = device->name();
+
+            if (displayName.isEmpty())
+                displayName = device->address();
+
+            ret = displayName;
+            break;
+
+        case StateRole:
+            ret = device->state();
+            break;
+
+        case AddressRole:
+            ret = device->address();
+            break;
+
+        }
+    }
+    return ret;
 }
 
 QHash<int,QByteArray> MockAethercastDeviceModel::roleNames() const
 {
-
+    static QHash<int,QByteArray> names;
+    if (Q_UNLIKELY(names.empty())) {
+        names[Qt::DisplayRole] = "displayName";
+        names[StateRole] = "stateName";
+        names[AddressRole] = "addressName";
+    }
+    return names;
 }
 
 QSharedPointer<MockAethercastDevice> MockAethercastDeviceModel::getDeviceFromAddress(const QString &address)
 {
-
+    Q_UNUSED(address)
+    return QSharedPointer<MockAethercastDevice>(nullptr);
 }
 
 QSharedPointer<MockAethercastDevice> MockAethercastDeviceModel::getDeviceFromPath(const QString &path)
 {
-
+    Q_UNUSED(path)
+    return QSharedPointer<MockAethercastDevice>(nullptr);
 }
 
-// Q_SIGNALS:
-//     void countChanged(int count);
+void MockAethercastDeviceModel::addDevice(const QString &address,
+                                          const QString &name,
+                                          const int &state)
+{
+    QSharedPointer<MockAethercastDevice> dev =
+        QSharedPointer<MockAethercastDevice>(new MockAethercastDevice);
+    dev->m_address = address;
+    dev->m_name = name;
+    dev->m_state = (MockAethercastDevice::State) state;
+
+    uint row = m_devices.size();
+    beginInsertRows(QModelIndex(), row, row);
+    m_devices.append(dev);
+    endInsertRows();
+
+    emit countChanged(rowCount());
+}

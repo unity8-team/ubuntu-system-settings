@@ -51,10 +51,13 @@ public:
 
     QSharedPointer<MockAethercastDevice> getDeviceFromAddress(const QString &address);
     QSharedPointer<MockAethercastDevice> getDeviceFromPath(const QString &path);
-    QList<QSharedPointer<MockAethercastDevice> > m_devices;
-
+    Q_INVOKABLE void addDevice(const QString &address, const QString &name,
+                               const int &state); // mock only
 Q_SIGNALS:
     void countChanged(int count);
+
+private:
+    QList<QSharedPointer<MockAethercastDevice> > m_devices;
 };
 
 #endif // MOCK_AETHERCAST_DEVICE_MODEL_H

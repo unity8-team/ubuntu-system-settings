@@ -51,11 +51,11 @@ Item {
         }
 
         function get_panel_plugin() {
-            return findInvisibleChild(testRoot, "brightnessPanel");
+            return findInvisibleChild(instance, "brightnessPanel");
         }
 
         function get_aethercast_displays_plugin() {
-            return findInvisibleChild(testRoot, "aethercastDisplays");
+            return findInvisibleChild(instance, "aethercastDisplays");
         }
 
         function test_brightness_title() {
@@ -68,20 +68,20 @@ Item {
         }
 
         function test_switch_disabled() {
-            var swtch = findChild(testRoot, "externalDisplayControl");
+            var swtch = findChild(instance, "externalDisplayControl");
             verify(!swtch.enabled);
         }
 
         function test_switch_enabled() {
             get_panel_plugin().setWidiSupported(true);
-            var swtch = findChild(testRoot, "externalDisplayControl");
+            var swtch = findChild(instance, "externalDisplayControl");
             verify(swtch.enabled);
         }
 
         function test_casting_enabled() {
             get_panel_plugin().setWidiSupported(true);
             get_aethercast_displays_plugin().setEnabled(true);
-            var entry = findChild(testRoot, "displayCasting");
+            var entry = findChild(instance, "displayCasting");
 
             verify(entry.enabled);
             compare(entry.value, i18n.tr("Not connected"));

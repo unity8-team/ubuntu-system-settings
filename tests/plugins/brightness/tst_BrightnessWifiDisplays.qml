@@ -42,6 +42,10 @@ Item {
 
         property var instance: null
 
+        function get_aethercast_displays_plugin() {
+            return findInvisibleChild(instance, "aethercastDisplays");
+        }
+
         function init() {
             instance = wifiDisplays.createObject(testRoot, {});
         }
@@ -50,8 +54,25 @@ Item {
             instance.destroy();
         }
 
-        function test_foo() {
-            wait(3000)
+        function test_no_devices() {
+            var label = findChild(instance, "noDisplaysDetected");
+            verify(label.visible);
+            compare(label.text, i18n.tr("No displays detected"));
+        }
+
+        function test_one_device() {
+            var plugin = get_aethercast_displays_plugin();
+            plugin.devices.addDevice("addr", "my display", AethercastDevice.Idle);
+            plugin.connectedDevices.addDevice("addr", "my display", AethercastDevice.Idle);
+
+            var label = findChild(instance, "noDisplaysDetected");
+            verify(!label.visible);
+
+            var header = findChild(instance, "connectedDisplay");
+            verify(header.visible);
+
+            var repeater = findChild(instance, "displayRepeater");
+            compare(repeater.count, 1);
         }
 
     }
