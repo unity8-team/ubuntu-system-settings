@@ -63,7 +63,5 @@ set(BRIGHTNESS_IMPORT_PATHS
     ${CMAKE_BINARY_DIR}/tests/mocks/
     ${CMAKE_SOURCE_DIR}/tests/plugins/brightness
 )
-add_qml_test(brightness BrightnessPageComponent
-    IMPORT_PATHS ${BRIGHTNESS_IMPORT_PATHS})
-add_qml_test(brightness BrightnessWifiDisplays
-    IMPORT_PATHS ${BRIGHTNESS_IMPORT_PATHS})
+add_qml_test(brightness BrightnessPageComponent IMPORT_PATHS ${BRIGHTNESS_IMPORT_PATHS})
+add_qml_test(brightness BrightnessWifiDisplays IMPORT_PATHS ${BRIGHTNESS_IMPORT_PATHS})
