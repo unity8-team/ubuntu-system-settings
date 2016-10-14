@@ -62,7 +62,6 @@ parts:
       - qtbase5-dev
       - accountsservice
       - accountsservice-ubuntu-schemas
-      - aethercast
       - bluez
       - click
       - dbus-property-service
