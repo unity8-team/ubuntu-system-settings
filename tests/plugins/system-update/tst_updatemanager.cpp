@@ -1,162 +1,195 @@
 /*
- * Copyright 2013 Canonical Ltd.
+ * This file is part of system-settings
  *
- * This library is free software; you can redistribute it and/or
- * modify it under the terms of version 3 of the GNU Lesser General Public
- * License as published by the Free Software Foundation.
+ * Copyright (C) 2016 Canonical Ltd.
  *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- * General Public License for more details.
+ * This program is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License version 3, as published
+ * by the Free Software Foundation.
  *
- * You should have received a copy of the GNU Lesser General Public
- * License along with this library; if not, write to the
- * Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
- * Boston, MA 02110-1301, USA.
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranties of
+ * MERCHANTABILITY, SATISFACTORY QUALITY, or FITNESS FOR A PARTICULAR
+ * PURPOSE.  See the GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <QTest>
-#include <QSignalSpy>
+#include "updatemodel.h"
+#include "updatemanager.h"
 
-#include "update_manager.h"
-#include "update.h"
+#include "plugins/system-update/fakeclickmanager.h"
+#include "plugins/system-update/fakeimagemanager.h"
+
+#include <QSignalSpy>
+#include <QSqlError>
+#include <QSqlQuery>
+#include <QTest>
 
 using namespace UpdatePlugin;
 
-class UpdateManagerTest : public QObject
+Q_DECLARE_METATYPE(UpdateManager::Status)
+Q_DECLARE_METATYPE(UpdateManager::Check)
+
+class TstUpdateManager : public QObject
 {
     Q_OBJECT
+private slots:
+    void init()
+    {
+        m_model = new UpdateModel(":memory:");
+        m_imageManager = new MockImageManager();
+        m_clickManager = new MockClickManager();
+        // Network Access Manager will not be needed for our tests, so it's 0.
+        m_instance = new UpdateManager(m_model, nullptr, m_imageManager,
+                                      m_clickManager);
+        m_model->setParent(m_instance);
+        m_imageManager->setParent(m_instance);
+        m_clickManager->setParent(m_instance);
+    }
+    void cleanup()
+    {
+        // Everything is ultimately parented to m_instance, thus destroyed.
+        QSignalSpy destroyedSpy(m_instance, SIGNAL(destroyed(QObject*)));
+        m_instance->deleteLater();
+        QTRY_COMPARE(destroyedSpy.count(), 1);
+    }
+    void testCheckRequired_data()
+    {
+        QTest::addColumn<QDateTime>("checkedAt");
+        QTest::addColumn<bool>("checkRequired");
 
-private Q_SLOTS:
-    void testRegisterSystemUpdateRequired();
-    void testRegisterSystemUpdateNotRequired();
-    void testStartDownload();
-    void testPauseDownload();
-    void testCheckUpdatesModelSignal();
-    void testCheckUpdatesUpdateSignal();
+        QDateTime now = QDateTime::currentDateTime().toUTC();
+        QTest::newRow("Now") << now << false;
+        QDateTime belowSpecLimit = QDateTime::currentDateTime().addSecs(-1740).toUTC();
+        QTest::newRow("29 mins ago") << belowSpecLimit << false;
+        QDateTime aboveSpecLimit = QDateTime::currentDateTime().addSecs(-1860).toUTC();
+        QTest::newRow("31 mins ago") << aboveSpecLimit << true;
+        QDateTime longAgo = QDateTime::currentDateTime().addMonths(-1).addDays(-1).toUTC();
+        QTest::newRow("Long ago") << longAgo << true;
+    }
+    void testCheckRequired()
+    {
+        QFETCH(QDateTime, checkedAt);
+        QFETCH(bool, checkRequired);
 
+        QSqlQuery q(m_model->db()->db());
+        q.prepare("REPLACE INTO meta (checked_at_utc) VALUES (:checked_at_utc)");
+        q.bindValue(":checked_at_utc", checkedAt.toMSecsSinceEpoch());
+        QVERIFY(q.exec());
+        QCOMPARE(m_instance->isCheckRequired(), checkRequired);
+    }
+    void testUpdates()
+    {
+        QCOMPARE(m_instance->updates(), m_model);
+    }
+    void testPendingUpdates()
+    {
+        QVERIFY(m_instance->pendingUpdates());
+    }
+    void testClickUpdates()
+    {
+        QVERIFY(m_instance->clickUpdates());
+    }
+    void testImageUpdates()
+    {
+        QVERIFY(m_instance->imageUpdates());
+    }
+    void testInstalledUpdates()
+    {
+        QVERIFY(m_instance->installedUpdates());
+    }
+    void testStatus_data()
+    {
+        QTest::addColumn<bool>("networkError");
+        QTest::addColumn<bool>("serverError");
+        QTest::addColumn<bool>("checkingClicks");
+        QTest::addColumn<bool>("checkingImage");
+        QTest::addColumn<UpdateManager::Status>("targetStatus");
+
+        QTest::newRow("Idle") << false << false << false << false << UpdateManager::Status::StatusIdle;
+        QTest::newRow("Checking clicks") << false << false << true << false << UpdateManager::Status::StatusCheckingClickUpdates;
+
+        QTest::newRow("Checking image") << false << false << false << true << UpdateManager::Status::StatusCheckingImageUpdates;
+
+        QTest::newRow("Checking all") << false << false << true << true << UpdateManager::Status::StatusCheckingAllUpdates;
+        QTest::newRow("Checking all (network fail)") << true << false << true << true << UpdateManager::Status::StatusNetworkError;
+        QTest::newRow("Checking all (server fail)") << false << true << true << true << UpdateManager::Status::StatusServerError;
+        QTest::newRow("Checking all (multiple fail)") << true << true << true << true << UpdateManager::Status::StatusServerError;
+    }
+    void testStatus()
+    {
+        QFETCH(bool, networkError);
+        QFETCH(bool, serverError);
+        QFETCH(bool, checkingClicks);
+        QFETCH(bool, checkingImage);
+        QFETCH(UpdateManager::Status, targetStatus);
+
+        m_clickManager->mockChecking(checkingClicks);
+        m_imageManager->mockChecking(checkingImage);
+        if (networkError) {
+            m_clickManager->mockNetworkError();
+        }
+        if (serverError) {
+            m_clickManager->mockServerError();
+        }
+        QCOMPARE(m_instance->status(), targetStatus);
+    }
+    void testChecks_data()
+    {
+        QTest::addColumn<UpdateManager::Check>("mode");
+        QTest::addColumn<bool>("checkingClick");
+        QTest::addColumn<bool>("checkingImage");
+
+        QTest::newRow("CheckIfNecessary") << UpdateManager::Check::CheckIfNecessary << true << true;
+        QTest::newRow("CheckAll") << UpdateManager::Check::CheckAll << true << true;
+        QTest::newRow("CheckClick") << UpdateManager::Check::CheckClick << true << false;
+        QTest::newRow("CheckImage") << UpdateManager::Check::CheckImage << false << true;
+    }
+    void testChecks()
+    {
+        QFETCH(UpdateManager::Check, mode);
+        QFETCH(bool, checkingClick);
+        QFETCH(bool, checkingImage);
+
+        m_instance->check(mode);
+
+        QCOMPARE(m_clickManager->checkingForUpdates(), checkingClick);
+        QCOMPARE(m_imageManager->checkingForUpdates(), checkingImage);
+    }
+    void testRemove()
+    {
+        auto update = QSharedPointer<Update>(new Update);
+        update->setIdentifier("a");
+        update->setRevision(1);
+        m_model->add(update);
+        m_instance->remove("a", 1);
+        QVERIFY(m_model->get("a", 1).isNull());
+    }
+    void testIntegration()
+    {
+        /* Do this so as to test all the actual constructors. Since we cannot
+        say anything about networking/system image dbus, et. al., we do not
+        perform any assertions here, except verifying that the ctor constructed
+        a UpdateManager, and that the dtor destroyed it. */
+        UpdateManager *su = new UpdateManager();
+        QVERIFY(su);
+        QTest::qWait(2000); // Wait for things to quiet down.
+        QSignalSpy destroyedSpy(su, SIGNAL(destroyed(QObject*)));
+        su->deleteLater();
+        QTRY_COMPARE(destroyedSpy.count(), 1);
+    }
 private:
-    Update* getUpdate();
-    UpdateManager* getManager();
+    UpdateManager *m_instance = nullptr;
+    UpdateModel *m_model = nullptr;
+    UpdateModelFilter *m_pending = nullptr;
+    UpdateModelFilter *m_clicks = nullptr;
+    UpdateModelFilter *m_images = nullptr;
+    UpdateModelFilter *m_installed = nullptr;
+    MockClickManager *m_clickManager = nullptr;
+    MockImageManager *m_imageManager = nullptr;
 };
 
-Update* UpdateManagerTest::getUpdate()
-{
-    Update *update = new Update(this);
-    QString packageName("UbuntuImage");
-    update->initializeApplication(packageName, "Ubuntu", QString::number(1));
-    update->setSystemUpdate(true);
-    QString version(2);
-    update->setRemoteVersion(version);
-    update->setBinaryFilesize(12345);
-    update->setUpdateState(false);
-    update->setUpdateAvailable(true);
-
-    return update;
-}
-UpdateManager* UpdateManagerTest::getManager()
-{
-    UpdateManager *manager = UpdateManager::instance();
-    manager->get_model().clear();
-    manager->checkUpdates();
-    return manager;
-}
-
-void UpdateManagerTest::testRegisterSystemUpdateRequired()
-{
-    UpdateManager *manager = getManager();
-    QSignalSpy spy(manager, SIGNAL(modelChanged()));
-    QSignalSpy spy2(manager, SIGNAL(updateAvailableFound(bool)));
-    QTRY_COMPARE(spy.count(), 0);
-    QTRY_COMPARE(spy2.count(), 0);
-    QTRY_COMPARE(manager->get_apps().size(), 0);
-
-    Update *update = getUpdate();
-
-    manager->setCheckSystemUpdates(true);
-    manager->registerSystemUpdate(update->getPackageName(), update);
-    QTRY_COMPARE(spy.count(), 1);
-    QTRY_COMPARE(spy2.count(), 1);
-    QTRY_COMPARE(manager->get_apps().size(), 1);
-    QTRY_COMPARE(manager->get_model().size(), 1);
-    Update* app = manager->get_model()[0].value<Update*>();
-    QCOMPARE(app->getTitle(), QString("Ubuntu"));
-    QCOMPARE(app->updateRequired(), true);
-    QCOMPARE(app->getPackageName(), QString("UbuntuImage"));
-
-    update->deleteLater();
-}
-
-void UpdateManagerTest::testRegisterSystemUpdateNotRequired()
-{
-    UpdateManager *manager = getManager();
-    manager->setCheckintUpdates(1);
-    QSignalSpy spy(manager, SIGNAL(modelChanged()));
-    QSignalSpy spy2(manager, SIGNAL(updateAvailableFound(bool)));
-    QSignalSpy spy3(manager, SIGNAL(updatesNotFound()));
-    QTRY_COMPARE(spy.count(), 0);
-    QTRY_COMPARE(spy2.count(), 0);
-    QTRY_COMPARE(spy3.count(), 0);
-    QTRY_COMPARE(manager->get_apps().size(), 0);
-
-    manager->systemUpdateNotAvailable();
-    QTRY_COMPARE(spy.count(), 0);
-    QTRY_COMPARE(spy2.count(), 0);
-    QTRY_COMPARE(spy3.count(), 1);
-    QTRY_COMPARE(manager->get_apps().size(), 0);
-    QTRY_COMPARE(manager->get_model().size(), 0);
-}
-
-void UpdateManagerTest::testStartDownload()
-{
-    UpdateManager *manager = getManager();
-    manager->setCheckSystemUpdates(true);
-    Update *update = getUpdate();
-    manager->registerSystemUpdate(update->getPackageName(), update);
-    manager->startDownload(update->getPackageName());
-    QTRY_COMPARE(update->updateState(), true);
-}
-
-void UpdateManagerTest::testPauseDownload()
-{
-    UpdateManager *manager = getManager();
-    manager->setCheckSystemUpdates(true);
-    Update *update = getUpdate();
-    manager->registerSystemUpdate(update->getPackageName(), update);
-    update->setUpdateState(true);
-    manager->pauseDownload(update->getPackageName());
-    QTRY_COMPARE(update->updateState(), false);
-}
-
-void UpdateManagerTest::testCheckUpdatesModelSignal()
-{
-    UpdateManager *manager = getManager();
-    QSignalSpy spy(manager, SIGNAL(modelChanged()));
-    QTRY_COMPARE(manager->get_apps().size(), 0);
-    manager->getService().getCredentials();
-    QTRY_COMPARE(manager->get_apps().size(), 4);
-    QTRY_COMPARE(manager->get_model().size(), 1);
-    Update* app = manager->get_model()[0].value<Update*>();
-    QTRY_COMPARE(app->getTitle(), QString("XDA Developers App"));
-    QTRY_COMPARE(app->updateRequired(), true);
-    QTRY_COMPARE(app->getPackageName(), QString("com.ubuntu.developer.xda-app"));
-}
-
-void UpdateManagerTest::testCheckUpdatesUpdateSignal()
-{
-    UpdateManager *manager = getManager();
-    QSignalSpy spy(manager, SIGNAL(updateAvailableFound(bool)));
-    QTRY_COMPARE(manager->get_apps().size(), 0);
-    manager->getService().getCredentials();
-    QTRY_COMPARE(manager->get_apps().size(), 4);
-    QTRY_COMPARE(manager->get_model().size(), 1);
-    Update* app = manager->get_model()[0].value<Update*>();
-    QTRY_COMPARE(app->getTitle(), QString("XDA Developers App"));
-    QTRY_COMPARE(app->updateRequired(), true);
-    QTRY_COMPARE(app->getPackageName(), QString("com.ubuntu.developer.xda-app"));
-}
-
-
-QTEST_MAIN(UpdateManagerTest)
+QTEST_GUILESS_MAIN(TstUpdateManager)
 #include "tst_updatemanager.moc"

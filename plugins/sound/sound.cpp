@@ -20,15 +20,24 @@
 
 #include "sound.h"
 
+#include <QDebug>
 #include <QDir>
 #include <QFile>
 #include <QStandardPaths>
+#include <QDBusReply>
+#include <QDBusVariant>
 #include <unistd.h>
 
 #define AS_INTERFACE "com.ubuntu.touch.AccountsService.Sound"
+#define US_INTERFACE "com.canonical.usensord"
+#define US_PATH "/com/canonical/usensord/haptic"
 
 Sound::Sound(QObject *parent) :
-    QObject(parent)
+    QObject(parent),
+    m_usensordIface (US_INTERFACE,
+                     US_PATH,
+                     "org.freedesktop.DBus.Properties",
+                     QDBusConnection::sessionBus())
 {
     connect (&m_accountsService,
              SIGNAL (propertyChanged (QString, QString)),
@@ -42,7 +51,7 @@ Sound::Sound(QObject *parent) :
 }
 
 void Sound::slotChanged(QString interface,
-                                  QString property)
+                        QString property)
 {
     if (interface != AS_INTERFACE)
         return;
@@ -59,8 +68,6 @@ void Sound::slotChanged(QString interface,
         Q_EMIT incomingCallVibrateSilentModeChanged();
     } else if (property == "IncomingMessageVibrateSilentMode") {
         Q_EMIT incomingMessageVibrateSilentModeChanged();
-    } else if (property == "OtherVibrate") {
-        Q_EMIT otherVibrateChanged();
     } else if (property == "DialpadSoundsEnabled") {
         Q_EMIT dialpadSoundsEnabledChanged();
     }
@@ -75,7 +82,6 @@ void Sound::slotNameOwnerChanged()
     Q_EMIT incomingMessageVibrateChanged();
     Q_EMIT incomingCallVibrateSilentModeChanged();
     Q_EMIT incomingMessageVibrateSilentModeChanged();
-    Q_EMIT otherVibrateChanged();
     Q_EMIT dialpadSoundsEnabledChanged();
 }
 
@@ -198,19 +204,20 @@ void Sound::setIncomingMessageVibrateSilentMode(bool enabled)
 
 bool Sound::getOtherVibrate()
 {
-    return m_accountsService.getUserProperty(AS_INTERFACE,
-                                             "OtherVibrate").toBool();
+    QDBusReply<QDBusVariant> reply = m_usensordIface.call("Get", "com.canonical.usensord.haptic", "OtherVibrate");
+
+    if (reply.isValid()) {
+      return reply.value().variant().toBool();
+    } else {
+        qWarning() << "no value from sensor service" << reply.error();
+        return false;
+    }
 }
 
 void Sound::setOtherVibrate(bool enabled)
 {
-    if (enabled == getOtherVibrate())
-        return;
-
-    m_accountsService.setUserProperty(AS_INTERFACE,
-                                      "OtherVibrate",
-                                      QVariant::fromValue(enabled));
-    Q_EMIT(otherVibrateChanged());
+    quint32 result = enabled ? 1 : 0;
+    m_usensordIface.call("Set", "com.canonical.usensord.haptic", "OtherVibrate", result);
 }
 
 bool Sound::getDialpadSoundsEnabled()
@@ -238,6 +245,16 @@ QString Sound::customRingtonePath()
 QStringList soundsListFromDir(const QString &dirString)
 {
     QDir soundsDir(dirString);
+    if (soundsDir.isRelative()) {
+        QString path = QStandardPaths::locate(
+            QStandardPaths::GenericDataLocation, dirString,
+            QStandardPaths::LocateDirectory
+        );
+        if (path.isEmpty()) {
+            return QStringList();
+        }
+        soundsDir = QDir(path);
+    }
 
     if (soundsDir.exists())
     {

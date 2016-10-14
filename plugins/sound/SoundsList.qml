@@ -28,9 +28,10 @@ ItemPage {
     flickable: scrollWidget
 
     function refreshSoundFileNames() {
+        var customDir = mountPoint + "/custom/usr/share/" + soundsDir;
         if (soundType === 0)
-            return backendInfo.listSounds([soundsDir, "/custom" + soundsDir, backendInfo.customRingtonePath])
-        return backendInfo.listSounds([soundsDir, "/custom" + soundsDir])
+            return backendInfo.listSounds([soundsDir, customDir, backendInfo.customRingtonePath])
+        return backendInfo.listSounds([soundsDir, customDir])
     }
 
     UbuntuSoundPanel {

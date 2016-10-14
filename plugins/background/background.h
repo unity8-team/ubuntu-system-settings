@@ -45,16 +45,21 @@ class Background : public QObject
                 READ ubuntuArt
                 NOTIFY ubuntuArtChanged )
 
+    Q_PROPERTY( QString defaultBackgroundFile
+                READ defaultBackgroundFile
+                CONSTANT )
+
 public:
     explicit Background(QObject *parent = 0);
     ~Background();
     QString backgroundFile();
-    void setBackgroundFile(QUrl backgroundFile);
+    void setBackgroundFile(const QUrl &backgroundFile);
     Q_INVOKABLE QUrl prepareBackgroundFile(const QUrl &url, bool shareWithGreeter);
     Q_INVOKABLE bool fileExists(const QString &file);
     Q_INVOKABLE void rmFile(const QString &file);
     QStringList customBackgrounds();
     QStringList ubuntuArt();
+    QString defaultBackgroundFile() const;
 
 public Q_SLOTS:
     void slotChanged();
@@ -73,6 +78,7 @@ private:
     QString m_backgroundFile;
     QString getBackgroundFile();
     QDir getCustomBackgroundFolder();
+    QDir getCopiedSystemBackgroundFolder();
     QDir getContentHubFolder();
 };
 

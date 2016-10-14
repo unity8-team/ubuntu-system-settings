@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 Canonical Ltd
+ * Copyright (C) 2014-2016 Canonical Ltd
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as
@@ -19,12 +19,12 @@
 */
 import QtQuick 2.4
 import SystemSettings 1.0
+import SystemSettings.ListItems 1.0 as SettingsListItems
 import Ubuntu.Components 1.3
-import Ubuntu.Components.ListItems 1.3 as ListItem
 
 ItemPage {
     id: root
-    title: i18n.tr("Carriers")
+    title: i18n.tr("Carriers & APNs")
     objectName: "carrierApnPage"
     flickable: null
 
@@ -40,56 +40,39 @@ ItemPage {
             anchors.left: parent.left
             anchors.right: parent.right
 
-            SettingsItemTitle {
-                text: sims[0].title
-            }
+            Repeater {
+                model: sims
 
-            ListItem.SingleValue {
-                text: i18n.tr("Carrier")
-                objectName: sims[0].path + "_carriers"
-                value: sims[0].netReg.name ? sims[0].netReg.name :
-                    i18n.tr("None")
-                enabled: (sims[0].netReg.status !== "") &&
-                    (sims[0].netReg.mode !== "auto-only")
-                progression: enabled
-                onClicked: pageStack.push(Qt.resolvedUrl("PageChooseCarrier.qml"), {
-                    sim: sims[0],
-                    title: sims[0].title
-                })
-            }
+                Column {
+                    anchors.left: parent.left
+                    anchors.right: parent.right
 
-            ListItem.Standard {
-                text: i18n.tr("APN")
-                progression: enabled
-                onClicked: pageStack.push(Qt.resolvedUrl("PageChooseApn.qml"), {
-                    sim: sims[0]
-                })
-            }
+                    SettingsItemTitle {
+                        text: sims[index].title
+                    }
 
-            SettingsItemTitle {
-                text: sims[1].title
-            }
+                    SettingsListItems.SingleValueProgression {
+                        text: i18n.tr("Carrier")
+                        objectName: sims[index].path + "_carriers"
+                        value: sims[index].netReg.name ? sims[index].netReg.name :
+                            i18n.tr("None")
+                        enabled: (sims[index].netReg.status !== "") &&
+                            (sims[index].netReg.mode !== "auto-only")
+                        progressionVisible: enabled
+                        onClicked: pageStack.push(Qt.resolvedUrl("PageChooseCarrier.qml"), {
+                            sim: sims[index],
+                            title: sims[index].title
+                        })
+                    }
 
-            ListItem.SingleValue {
-                text: i18n.tr("Carrier")
-                objectName: sims[1].path + "_carriers"
-                value: sims[1].netReg.name ? sims[1].netReg.name :
-                    i18n.tr("None")
-                enabled: (sims[1].netReg.status !== "") &&
-                    (sims[1].netReg.mode !== "auto-only")
-                progression: enabled
-                onClicked: pageStack.push(Qt.resolvedUrl("PageChooseCarrier.qml"), {
-                    sim: sims[1],
-                    title: sims[1].title
-                })
-            }
-
-            ListItem.Standard {
-                text: i18n.tr("APN")
-                progression: enabled
-                onClicked: pageStack.push(Qt.resolvedUrl("PageChooseApn.qml"), {
-                    sim: sims[1]
-                })
+                    SettingsListItems.StandardProgression {
+                        text: i18n.tr("APN")
+                        progressionVisible: enabled
+                        onClicked: pageStack.push(Qt.resolvedUrl("PageChooseApn.qml"), {
+                            sim: sims[index]
+                        })
+                    }
+                }
             }
         }
     }

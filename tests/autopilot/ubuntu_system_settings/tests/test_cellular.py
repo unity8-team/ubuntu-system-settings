@@ -1,5 +1,5 @@
 # -*- Mode: Python; coding: utf-8; indent-tabs-mode: nil; tab-width: 4 -*-
-# Copyright 2014 Canonical
+# Copyright 2014-2016 Canonical
 #
 # This program is free software: you can redistribute it and/or modify it
 # under the terms of the GNU General Public License version 3, as published
@@ -11,6 +11,7 @@ from time import sleep
 from autopilot.introspection.dbus import StateNotFoundError
 from autopilot.matchers import Eventually
 from testtools.matchers import Equals, raises, StartsWith
+from unittest import skip
 
 from ubuntu_system_settings.tests import (
     CellularBaseTestCase, RDO_IFACE,
@@ -98,6 +99,10 @@ class DualSimCellularTestCase(CellularBaseTestCase):
     use_sims = 2
 
     def test_data_off(self):
+        self.ctv_private.Set(CON_IFACE,
+                             'SimForMobileData',
+                             dbus.ObjectPath("/"))
+        self.cellular_page.select_sim_for_data('/ril_0')
         self.ctv_private.Set(CON_IFACE, 'MobileDataEnabled', True)
         self.cellular_page.disable_data()
         self.assertThat(
@@ -292,6 +297,7 @@ class DualSimCellularTestCase(CellularBaseTestCase):
 
 class ApnTestCase(CellularBaseTestCase):
 
+    @skip('Skip until we can get the CPO for ListItem trigger actions')
     def test_remove_apn(self):
         self.add_connection_context(self.modem_0, Type='mms', Name='Failed')
         contexts = self.modem_0.connMan.GetContexts()

@@ -1,7 +1,7 @@
 /*
  * This file is part of system-settings
  *
- * Copyright (C) 2013 Canonical Ltd.
+ * Copyright (C) 2013-2016 Canonical Ltd.
  *
  * Contact: Alberto Mardegan <alberto.mardegan@canonical.com>
  *
@@ -22,26 +22,35 @@ import GSettings 1.0
 import QtQuick 2.4
 import QtQuick.Window 2.1
 import Ubuntu.Components 1.3
-import Ubuntu.Components.ListItems 1.3 as ListItem
 
 
-ListItem.Standard {
+ListItem {
     id: root
-    iconSource: model.icon
-    iconFrame: false
-    text: i18n.tr(model.displayName)
-    control: Switch {
-        id: control
-        objectName: "orientationLockSwitch"
+    height: layout.height
 
-        property bool serverChecked: systemSettings.rotationLock
-        onServerCheckedChanged: checked = serverChecked
-        Component.onCompleted: checked = serverChecked
-        onTriggered: systemSettings.rotationLock = checked
+    ListItemLayout {
+        id: layout
+        title.text: i18n.tr(model.displayName)
+        Switch {
+            id: control
+            objectName: "orientationLockSwitch"
 
-        GSettings {
-            id: systemSettings
-            schema.id: "com.ubuntu.touch.system"
+            SlotsLayout.position: SlotsLayout.Trailing
+            property bool serverChecked: systemSettings.rotationLock
+            onServerCheckedChanged: checked = serverChecked
+            Component.onCompleted: checked = serverChecked
+            onTriggered: systemSettings.rotationLock = checked
+
+            GSettings {
+                id: systemSettings
+                schema.id: "com.ubuntu.touch.system"
+            }
+        }
+        Icon {
+            SlotsLayout.position: SlotsLayout.Leading;
+            SlotsLayout.padding { top: 0; bottom: 0 }
+            source: model.icon
+            height: units.gu(5)
         }
     }
 }

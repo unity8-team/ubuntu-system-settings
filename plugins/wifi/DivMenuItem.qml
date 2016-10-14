@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 Canonical Ltd.
+ * Copyright 2013-2016 Canonical Ltd.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,8 +18,8 @@
  */
 
 import QtQuick 2.4
-import Ubuntu.Components.ListItems 1.3 as ListItem
+import Ubuntu.Components 1.3
 
-ListItem.Empty {
+ListItemLayout {
     height: units.gu(3)
 }

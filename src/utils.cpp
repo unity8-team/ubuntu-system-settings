@@ -22,7 +22,8 @@
 #include "debug.h"
 
 #include <glib.h>
-#include <QUrl>
+#include <QStandardPaths>
+#include <QUrlQuery>
 #include <QUrlQuery>
 
 
@@ -94,13 +95,19 @@ QString Utilities::mapUrl(const QString &source)
  */
 QString Utilities::getDestinationUrl(const QString &source)
 {
+    QString mapFile = QStandardPaths::locate(
+        QStandardPaths::GenericDataLocation,
+        QString("%1/%2").arg(PLUGIN_MANIFEST_DIR).arg("url-map.ini")
+    );
+    if (Q_UNLIKELY(mapFile.isEmpty())) {
+        qWarning() << "could not locate map file";
+        return source;
+    }
+
     // This method will be called from multiple threads, and QSettings
     // is reentrant, meaning each call to this function require its own
     // settings instance.
-    QSettings map(
-        QString("%1/%2").arg(PLUGIN_MANIFEST_DIR).arg("url-map.ini"),
-        QSettings::IniFormat
-    );
+    QSettings map(mapFile, QSettings::IniFormat);
     map.sync();
 
     // If reading the map failed, return the source unchanged.

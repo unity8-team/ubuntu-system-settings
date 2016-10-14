@@ -3,7 +3,7 @@
     "name": "Rotation Lock",
     "translations": "ubuntu-system-settings",
     "category": "uncategorized-top",
-    "priority": 0,
+    "priority": 1,
     "form-factors": [
         "phone",
         "tablet"

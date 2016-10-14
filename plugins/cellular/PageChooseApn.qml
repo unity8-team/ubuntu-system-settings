@@ -1,7 +1,7 @@
 /*
  * This file is part of system-settings
  *
- * Copyright (C) 2014 Canonical Ltd.
+ * Copyright (C) 2014-2016 Canonical Ltd.
  *
  * Contact: Pat McGowan <pat.mcgowan@canonical.com>,
  *          Jonas G. Drange <jonas.drange@canonical.com>
@@ -25,9 +25,9 @@
 
 import QtQuick 2.4
 import SystemSettings 1.0
+import SystemSettings.ListItems 1.0 as SettingsListItems
 import Ubuntu.Components 1.3
 import Ubuntu.Components.Popups 1.3
-import Ubuntu.Components.ListItems 1.3 as ListItem
 import MeeGo.QOfono 0.2
 import Ubuntu.SystemSettings.Cellular 1.0
 import "apn_manager.js" as Manager
@@ -289,16 +289,22 @@ ItemPage {
     Component {
         id: apnDelegate
 
-        ListItem.Standard {
+        SettingsListItems.StandardProgression {
             id: apnListItem
-            property alias text: apnItemName.text
+            text: qml.name
+            layout.subtitle.text: qml.typeString
             objectName: "edit_" + qml.name
-            height: units.gu(6)
-            removable: true
-            confirmRemoval: true
-            progression: true
 
-            onItemRemoved: Manager.removeContext(path);
+            leadingActions: ListItemActions {
+                actions: [
+                    Action {
+                        iconName: "delete"
+                        name: i18n.tr("Delete")
+                        onTriggered: Manager.removeContext(path)
+                    }
+                ]
+            }
+
             onClicked: {
                 editor = pageStack.push(pageApnEditor, {
                     contextQML:      qml,
@@ -308,52 +314,13 @@ ItemPage {
                 });
             }
 
-            control: CheckBox {
+            CheckBox {
                 id: check
                 objectName: qml.name + "_preferred"
                 property bool serverChecked: qml && qml.preferred
                 onServerCheckedChanged: checked = serverChecked
                 Component.onCompleted: checked = serverChecked
                 onTriggered: Manager.setPreferred.call(this, qml, checked)
-            }
-
-            Item  {
-                anchors {
-                    top: parent.top
-                    bottom: parent.bottom
-                    left: parent.left
-                    leftMargin: units.gu(2)
-                    right: parent.right
-                }
-
-                Label {
-                    id: apnItemName
-                    anchors {
-                        topMargin: units.gu(1)
-                        top: parent.top
-                        left: parent.left
-                        right: parent.right
-                    }
-
-                    text: qml.name
-                    elide: Text.ElideRight
-                    opacity: apnListItem.enabled ? 1.0 : 0.5
-                }
-
-                Label {
-                    id: apnItemType
-                    anchors {
-                        left: parent.left
-                        right: parent.right
-                        top: apnItemName.bottom
-                    }
-
-                    text: qml.typeString
-                    color: Theme.palette.normal.backgroundText
-                    fontSize: "small"
-                    wrapMode: Text.Wrap
-                    maximumLineCount: 5
-                }
             }
         }
     }
