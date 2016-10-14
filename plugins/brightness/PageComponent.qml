@@ -42,6 +42,7 @@ ItemPage {
 
     AethercastDisplays {
         id: aethercastDisplays
+        objectName: "aethercastDisplays"
         onEnabledChanged: {
             /* This is a hack to ensure the aethercast enabled switch stays 
              * in sync with the enabled property
@@ -53,6 +54,7 @@ ItemPage {
 
     UbuntuBrightnessPanel {
         id: brightnessPanel
+        objectName: "brightnessPanel"
     }
 
     QDBusActionGroup {
@@ -137,6 +139,7 @@ ItemPage {
             }
 
             ListItem.Standard {
+                objectName: "externalDisplayControl"
                 text: i18n.tr("External display")
                 enabled: brightnessPanel.widiSupported
                 onClicked: enabledCheck.trigger()
