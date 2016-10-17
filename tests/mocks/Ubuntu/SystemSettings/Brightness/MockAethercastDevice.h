@@ -20,6 +20,8 @@
 #define MOCK_AETHERCAST_DEVICE_H
 
 #include <QObject>
+#include <QString>
+#include <QStringList>
 
 class MockAethercastDevice : public QObject
 {
