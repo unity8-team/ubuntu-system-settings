@@ -308,7 +308,7 @@ Item {
                     progressbar: { visibility: false, progress: 1, },
                     error: { text: "", visiblity: false, },
                     updatedAt: new Date("December 17, 1995 03:24:00"),
-                    targetStatusLabelText: i18n.tr("Updated at %1").arg(
+                    targetStatusLabelText: i18n.tr("Updated %1").arg(
                         new Date("December 17, 1995 03:24:00").toLocaleDateString(Qt.locale(), "d MMMM")
                     ),
                     targetDownloadLabelText: "",
