@@ -43,11 +43,16 @@ parts:
       - libglib2.0-dev
       - libgsettings-qt-dev
       - libevdev-dev
+      - libgnome-desktop-3-dev
       - libicu-dev
       - libnm-glib-dev
       - libpolkit-agent-1-dev
       - libqmenumodel-dev
+      - libqtdbusmock1-dev
+      - libqtdbustest1-dev
       - libtrust-store-dev
+      - libubuntu-app-launch2-dev
+      - libubuntuoneauth-2.0-dev
       - libudev-dev
       - libunity-api-dev
       - libupower-glib-dev
@@ -58,6 +63,7 @@ parts:
       - qt5-default
       - qtbase5-dev
       - libapt-pkg-dev
+      - xvfb
     stage-packages:
       - qtbase5-dev
       - accountsservice
