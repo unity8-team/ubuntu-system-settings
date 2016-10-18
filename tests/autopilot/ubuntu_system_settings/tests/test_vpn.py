@@ -35,20 +35,11 @@ class VpnAddTestCase(VpnBaseTestCase):
         page.set_openvpn_server('vpn.ubuntu.com')
         page.set_openvpn_custom_port('1000')
 
-        page.set_openvpn_ca(
-            # Any file will do.
-            ['etc', 'apt', 'sources.list']
-        )
         page.openvpn_okay()
 
         self.assertThat(
             lambda: conn_obj.Get(VPN_CONN_OPENVPN_IFACE, 'remote'),
             Eventually(Equals('vpn.ubuntu.com'))
-        )
-
-        self.assertThat(
-            lambda: conn_obj.Get(VPN_CONN_OPENVPN_IFACE, 'ca'),
-            Eventually(Equals('/etc/apt/sources.list'))
         )
 
         self.assertThat(
