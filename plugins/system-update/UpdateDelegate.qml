@@ -283,7 +283,7 @@ ListItem {
                         case Update.StateInstalled:
                             /* TRANSLATORS: %1 is the date at which this
                             update was applied. */
-                            return i18n.tr("Updated at %1").arg(
+                            return i18n.tr("Updated %1").arg(
                                 updatedAt.toLocaleDateString(Qt.locale(), "d MMMM")
                             );
                         default:
