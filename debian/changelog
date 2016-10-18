@@ -1,3 +1,26 @@
+ubuntu-system-settings (0.4+17.04.20161018-0ubuntu1) zesty; urgency=medium
+
+  [ Daniel van Vugt ]
+  * Allow scroll speed multipliers up to 3.0; since the default speed in
+    (LP: #1607240, #1627567)
+
+  [ Iain Lane ]
+  * Add OnlyShowIn=Unity8 to the desktop file, so we don't get two
+    "System Settings" in a Unity 7 session, now that u-s-s is installed
+    by default. (LP: #1631997)
+
+  [ Ken VanDine ]
+  * Updated example plugin to work with current SDK
+
+  [ Timo Jyrinki ]
+  * Stop depending on transitional packages. (LP: #1583079) (LP:
+    #1583079)
+
+  [ jonas-drange ]
+  * Drop “at” from “Updated at <date>” string
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Tue, 18 Oct 2016 08:07:23 +0000
+
 ubuntu-system-settings (0.4+16.10.20160930.1-0ubuntu1) yakkety; urgency=medium
 
   [ Jonas G. Drange ]
