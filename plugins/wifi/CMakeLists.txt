@@ -1,7 +1,6 @@
 set(QML_SOURCES
 AccessPoint.qml
 BaseMenuItem.qml
-CertPicker.qml
 CertDialog.qml
 Common.qml
 DivMenuItem.qml

@@ -11,10 +11,9 @@ class FileHandler : public QObject
     Q_OBJECT
 public:
     Q_INVOKABLE QByteArray getCertContent(QString filename);
-    Q_INVOKABLE QString moveCertFile(QString filename);
-    Q_INVOKABLE QString moveKeyFile(QString filename);
-    Q_INVOKABLE QString movePacFile(QString filename);
-    Q_INVOKABLE bool removeFile(QString filename);
+    Q_INVOKABLE QString copyCertFile(QString filename);
+    Q_INVOKABLE QString copyKeyFile(QString filename);
+    Q_INVOKABLE QString copyPacFile(QString filename);
 };
 
 
