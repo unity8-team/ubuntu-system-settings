@@ -1,3 +1,15 @@
+ubuntu-system-settings (0.4+17.04.20161019.1-0ubuntu1) zesty; urgency=medium
+
+  [ Jonas G. Drange ]
+  * use the vpn filepicker, and make the cert handling more robust
+  * adds test dep on usc
+
+  [ Timo Jyrinki ]
+  * Stop depending on transitional packages. (LP: #1583079) (LP:
+    #1583079)
+
+ -- Jonas G. Drange <jonas.drange@canonical.com>  Wed, 19 Oct 2016 12:04:41 +0000
+
 ubuntu-system-settings (0.4+16.10.20160930.1-0ubuntu1) yakkety; urgency=medium
 
   [ Jonas G. Drange ]
