@@ -1,3 +1,11 @@
+ubuntu-system-settings (0.4+16.10.20160930.1-0ubuntu1) yakkety; urgency=medium
+
+  [ Jonas G. Drange ]
+  * uses XDG_DATA_DIRS where applicable to enable USS to find files and
+    folders on snappy-based systems (LP: #1629009)
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Fri, 30 Sep 2016 13:48:28 +0000
+
 ubuntu-system-settings (0.4+16.10.20160927-0ubuntu1) yakkety; urgency=medium
 
   * Make urfkill a suggests and only show the flight-mode plugin if
