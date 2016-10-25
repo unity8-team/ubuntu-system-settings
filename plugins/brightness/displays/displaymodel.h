@@ -9,13 +9,13 @@
 #include <QList>
 #include <QModelIndex>
 #include <QSharedPointer>
+#include <QSortFilterProxyModel>
 #include <QVariant>
 
-class DisplayModel: public QAbstractListModel
+class DisplayModel : public QAbstractListModel
 {
     Q_OBJECT
     Q_PROPERTY(int count READ rowCount NOTIFY countChanged)
-
 public:
     explicit DisplayModel(QObject *parent = 0);
     ~DisplayModel();
@@ -24,10 +24,15 @@ public:
     {
       // Qt::DisplayRole holds device name
       TypeRole = Qt::UserRole,
-      ResolutionRole,
       MirroredRole,
-      RotationRole,
-      LastRole = StateRole
+      ConnectedRole,
+      EnabledRole,
+      ModeRole,
+      AvailableModesRole,
+      OrientationRole,
+      ScaleRole,
+      UncommittedChangesRole,
+      LastRole = UncommittedChangesRole
     };
 
     int rowCount(const QModelIndex &parent = QModelIndex()) const;
@@ -37,8 +42,39 @@ public:
 Q_SIGNALS:
     void countChanged();
 
+protected:
+    void emitRowChanged(const int &row);
+    void addDisplay(const QSharedPointer<Display> &display);
+
 private:
     QList<QSharedPointer<Display> > m_displays;
+
+private slots:
+    void displayChangedSlot(const Display *display);
+};
+
+class DisplaysFilter : public QSortFilterProxyModel
+{
+    Q_OBJECT
+    Q_PROPERTY(int count READ rowCount NOTIFY countChanged)
+
+public:
+    DisplaysFilter() {}
+    virtual ~DisplaysFilter() {}
+
+    void filterOnUncommittedChanges(const bool apply);
+
+Q_SIGNALS:
+    void countChanged(int count);
+
+protected:
+    virtual bool filterAcceptsRow(int, const QModelIndex&) const;
+    virtual bool lessThan(const QModelIndex&, const QModelIndex&) const;
+
+private:
+    bool m_uncommittedChanges = false;
+    bool m_uncommittedChangesEnabled = false;
+
 };
 
 #endif // DISPLAY_MODEL_H

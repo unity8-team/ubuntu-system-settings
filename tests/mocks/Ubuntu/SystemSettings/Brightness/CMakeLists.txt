@@ -1,6 +1,7 @@
 include_directories(
     ${CMAKE_CURRENT_BINARY_DIR}
     ${CMAKE_SOURCE_DIR}/plugins/brightness/
+    ${CMAKE_SOURCE_DIR}/plugins/brightness/displays
 )
 
 set(MOCK_BRIGHTNESS_SRCS
@@ -8,6 +9,13 @@ set(MOCK_BRIGHTNESS_SRCS
     MockAethercastDeviceModel.cpp
     MockAethercastDisplays.cpp
     MockBrightness.cpp
+
+    ${CMAKE_SOURCE_DIR}/plugins/brightness/displays/display.h
+    ${CMAKE_SOURCE_DIR}/plugins/brightness/displays/displaymodel.h
+    MockDisplay.h
+    MockDisplayModel.h
+    ${CMAKE_SOURCE_DIR}/plugins/brightness/displays/display.cpp
+    ${CMAKE_SOURCE_DIR}/plugins/brightness/displays/displaymodel.cpp
     plugin.cpp
 )
 

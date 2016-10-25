@@ -27,6 +27,9 @@
 #include "aethercast/displays.h"
 #include "aethercast/device.h"
 
+#include "displays/display.h"
+#include "displays/displaymodel.h"
+
 
 void BackendPlugin::registerTypes(const char *uri)
 {
@@ -39,6 +42,9 @@ void BackendPlugin::registerTypes(const char *uri)
     qmlRegisterType<Brightness>(uri, 1, 0, "UbuntuBrightnessPanel");
     qmlRegisterType<Device>(uri, 1, 0, "AethercastDevice");
     qmlRegisterType<Displays>(uri, 1, 0, "AethercastDisplays");
+
+    qmlRegisterType<DisplayModel>(uri, 1, 0, "DisplayModel");
+    qmlRegisterType<Display>(uri, 1, 0, "Display");
 }
 
 void BackendPlugin::initializeEngine(QQmlEngine *engine, const char *uri)

@@ -23,7 +23,7 @@
 
 #include <QObject>
 
-class MockDisplays : public QObject
+class MockAethercastDisplays : public QObject
 {
     Q_OBJECT
     Q_PROPERTY (QAbstractItemModel* devices
@@ -46,10 +46,10 @@ class MockDisplays : public QObject
                 READ state
                 NOTIFY stateChanged)
 public:
-    explicit MockDisplays(QObject *parent = nullptr) {
+    explicit MockAethercastDisplays(QObject *parent = nullptr) {
         Q_UNUSED(parent)
     };
-    ~MockDisplays() {}
+    ~MockAethercastDisplays() {}
 
     enum Error {
         None,

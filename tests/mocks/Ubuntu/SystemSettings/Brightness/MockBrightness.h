@@ -19,6 +19,8 @@
 #ifndef MOCK_BRIGHTNESS_H
 #define MOCK_BRIGHTNESS_H
 
+#include <QAbstractItemModel>
+#include <QSortFilterProxyModel>
 #include <QObject>
 
 class MockBrightness : public QObject
@@ -33,16 +35,24 @@ class MockBrightness : public QObject
     Q_PROPERTY (bool widiSupported
                 READ getWidiSupported
                 NOTIFY widiSupportedChanged)
+    Q_PROPERTY (QAbstractItemModel* allDisplays
+                READ allDisplays
+                CONSTANT)
+    Q_PROPERTY (QAbstractItemModel* changedDisplays
+                READ changedDisplays
+                CONSTANT)
+
 public:
-    explicit MockBrightness(QObject *parent = 0) {
-        Q_UNUSED(parent)
-    };
+    explicit MockBrightness(QObject *parent = 0);
     bool getPowerdRunning() const;
     bool getAutoBrightnessAvailable() const;
     bool getWidiSupported() const;
     Q_INVOKABLE void setPowerdRunning(const bool running); // mock only
     Q_INVOKABLE void setAutoBrightnessAvailable(const bool available); // mock only
     Q_INVOKABLE void setWidiSupported(const bool supported); // mock only
+    QAbstractItemModel* allDisplays() const;
+    QAbstractItemModel* changedDisplays() const;
+    Q_INVOKABLE void applyDisplayConfiguration();
 
 Q_SIGNALS:
     void powerdRunningChanged(); // mock only
@@ -53,6 +63,9 @@ private:
     bool m_powerdRunning = false;
     bool m_autoBrightnessAvailable = false;
     bool m_widiSupported = false;
+    QAbstractItemModel m_displays;
+    DisplaysFilter m_changedDisplays;
+
 };
 
 #endif // MOCK_BRIGHTNESS_H

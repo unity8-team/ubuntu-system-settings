@@ -15,7 +15,19 @@
  * You should have received a copy of the GNU General Public License along
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+#include "MockDisplayModel.h"
 #include "MockBrightness.h"
+
+#include <QDebug>
+
+MockBrightness::MockBrightness(QObject *parent)
+    : QObject(parent)
+    , m_displays()
+    , m_changedDisplays()
+{
+    m_changedDisplays.filterOnUncommittedChanges(true);
+    m_changedDisplays.setSourceModel(&m_displays);
+}
 
 bool MockBrightness::getPowerdRunning() const
 {
@@ -48,4 +60,18 @@ void MockBrightness::setWidiSupported(const bool supported)
 {
     m_widiSupported = supported;
     Q_EMIT widiSupportedChanged();
+}
+
+QAbstractItemModel* MockBrightness::allDisplays() const
+{
+    auto ret = &m_displays;
+    QQmlEngine::setObjectOwnership(ret, QQmlEngine::CppOwnership);
+    return ret;
+}
+
+QAbstractItemModel* MockBrightness::changedDisplays() const
+{
+    auto ret = &m_changedDisplays;
+    QQmlEngine::setObjectOwnership(ret, QQmlEngine::CppOwnership);
+    return ret;
 }

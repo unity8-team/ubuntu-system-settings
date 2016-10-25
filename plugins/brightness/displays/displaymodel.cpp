@@ -1,5 +1,7 @@
 #include "displaymodel.h"
 
+#include <QDebug>
+
 DisplayModel::DisplayModel(QObject *parent)
 {
 }
@@ -19,27 +21,38 @@ QVariant DisplayModel::data(const QModelIndex &index, int role) const
 
     if ((0<=index.row()) && (index.row() < m_displays.size())) {
 
-        auto device = m_displays[index.row()];
-        QString displayName;
+        auto display = m_displays[index.row()];
 
         switch (role) {
         case Qt::DisplayRole:
-            ret = device->name();
+            ret = display->name();
             break;
         case TypeRole:
-            ret = device->type();
-            break;
-        case ResolutionRole:
-            ret = device->resolution();
+            ret = display->type();
             break;
         case MirroredRole:
-            ret = device->mirrored();
+            ret = display->mirrored();
             break;
-        case RotationRole:
-            ret = device->rotation();
+        case ConnectedRole:
+            ret = display->connected();
             break;
-        case StateRole:
-            ret = device->state();
+        case EnabledRole:
+            ret = display->enabled();
+            break;
+        case ModeRole:
+            ret = display->mode();
+            break;
+        case AvailableModesRole:
+            ret = display->availableModes();
+            break;
+        case OrientationRole:
+            ret = (uint) display->orientation();
+            break;
+        case ScaleRole:
+            ret = display->scale();
+            break;
+        case UncommittedChangesRole:
+            ret = display->uncommittedChanges();
             break;
         }
     }
@@ -52,11 +65,87 @@ QHash<int,QByteArray> DisplayModel::roleNames() const
     static QHash<int,QByteArray> names;
     if (Q_UNLIKELY(names.empty())) {
         names[Qt::DisplayRole] = "displayName";
-        names[TypeRole] = "type";
-        names[ResolutionRole] = "resolution";
         names[MirroredRole] = "mirrored";
-        names[RotationRole] = "rotation";
-        names[StateRole] = "state";
+        names[ConnectedRole] = "connected";
+        names[EnabledRole] = "enabled";
+        names[ModeRole] = "mode";
+        names[AvailableModesRole] = "availableModes";
+        names[OrientationRole] = "orientation";
+        names[ScaleRole] = "scale";
+        names[UncommittedChangesRole] = "uncommittedChanges";
     }
     return names;
+}
+
+void DisplayModel::addDisplay(const QSharedPointer<Display> &display)
+{
+    // TODO: find display
+    int row = -1;
+
+    if (row >= 0) { // update existing display
+        m_displays[row] = display;
+        emitRowChanged(row);
+    } else { // add new display
+        row = m_displays.size();
+        beginInsertRows(QModelIndex(), row, row);
+        m_displays.append(display);
+        endInsertRows();
+    }
+
+   if (display) {
+        QObject::connect(display.data(), SIGNAL(displayChanged(const Display*)),
+                         this, SLOT(displayChangedSlot(const Display*)));
+    }
+
+    Q_EMIT countChanged();
+}
+
+void DisplayModel::emitRowChanged(const int &row)
+{
+    if (0 <= row && row < m_displays.size()) {
+        QModelIndex qmi = index(row, 0);
+        Q_EMIT(dataChanged(qmi, qmi));
+    }
+}
+
+void DisplayModel::displayChangedSlot(const Display *display)
+{
+    // find the row that goes with this display
+    int row = -1;
+    if (display != nullptr)
+        for (int i = 0, n = m_displays.size(); row == -1 && i < n; i++)
+            if (m_displays[i].data() == display)
+                row = i;
+
+    if (row != -1)
+        emitRowChanged(row);
+}
+
+bool DisplaysFilter::lessThan(const QModelIndex &left,
+                              const QModelIndex &right) const
+{
+    const QString a = sourceModel()->data(left, Qt::DisplayRole).value<QString>();
+    const QString b = sourceModel()->data(right, Qt::DisplayRole).value<QString>();
+    return a < b;
+}
+
+void DisplaysFilter::filterOnUncommittedChanges(const bool apply)
+{
+    m_uncommittedChanges = apply;
+    m_uncommittedChangesEnabled = true;
+    invalidateFilter();
+}
+
+bool DisplaysFilter::filterAcceptsRow(int sourceRow,
+                                      const QModelIndex &sourceParent) const
+{
+    bool accepts = true;
+    QModelIndex childIndex = sourceModel()->index(sourceRow, 0, sourceParent);
+
+    if (accepts && m_uncommittedChangesEnabled) {
+        const bool uncommittedChanges = childIndex.model()->data(childIndex, DisplayModel::UncommittedChangesRole).value<bool>();
+        accepts = (m_uncommittedChanges == uncommittedChanges);
+    }
+
+    return accepts;
 }

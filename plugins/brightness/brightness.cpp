@@ -92,7 +92,7 @@ bool Brightness::getPowerdRunning() const {
     return m_powerdRunning;
 }
 
-bool Brightness::getWidiSupported() const 
+bool Brightness::getWidiSupported() const
 {
     char widi[PROP_VALUE_MAX];
     property_get("ubuntu.widi.supported", widi, "0");

@@ -16,6 +16,8 @@ add_library(UbuntuBrightnessPanel MODULE
                 aethercast/displays.h
                 aethercast/freedesktop_properties.h
                 aethercast/freedesktop_objectmanager.h
+                displays/display.h
+                displays/displaymodel.h
                 plugin.h
                 brightness.h
                 aethercast/aethercast_device.cpp
@@ -25,6 +27,8 @@ add_library(UbuntuBrightnessPanel MODULE
                 aethercast/displays.cpp
 	        aethercast/freedesktop_properties.cpp
 	        aethercast/freedesktop_objectmanager.cpp
+                displays/display.cpp
+                displays/displaymodel.cpp
                 plugin.cpp
                 brightness.cpp
                 ${QML_SOURCES})

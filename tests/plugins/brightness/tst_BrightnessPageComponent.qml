@@ -58,33 +58,50 @@ Item {
             return findInvisibleChild(instance, "aethercastDisplays");
         }
 
-        function test_brightness_title() {
-            compare(instance.title, i18n.tr("Brightness"));
+        function get_display_model() {
+            return findInvisibleChild(instance, "displayModel");
         }
 
-        function test_brightness_and_displays_title() {
-            get_panel_plugin().setWidiSupported(true);
-            compare(instance.title, i18n.tr("Brightness & Display"));
-        }
+        // function test_brightness_title() {
+        //     compare(instance.title, i18n.tr("Brightness"));
+        // }
 
-        function test_switch_disabled() {
-            var swtch = findChild(instance, "externalDisplayControl");
-            verify(!swtch.enabled);
-        }
+        // function test_brightness_and_displays_title() {
+        //     get_panel_plugin().setWidiSupported(true);
+        //     compare(instance.title, i18n.tr("Brightness & Display"));
+        // }
 
-        function test_switch_enabled() {
-            get_panel_plugin().setWidiSupported(true);
-            var swtch = findChild(instance, "externalDisplayControl");
-            verify(swtch.enabled);
-        }
+        // function test_switch_disabled() {
+        //     var swtch = findChild(instance, "externalDisplayControl");
+        //     verify(!swtch.enabled);
+        // }
 
-        function test_casting_enabled() {
-            get_panel_plugin().setWidiSupported(true);
-            get_aethercast_displays_plugin().setEnabled(true);
-            var entry = findChild(instance, "displayCasting");
+        // function test_switch_enabled() {
+        //     get_panel_plugin().setWidiSupported(true);
+        //     var swtch = findChild(instance, "externalDisplayControl");
+        //     verify(swtch.enabled);
+        // }
 
-            verify(entry.enabled);
-            compare(entry.value, i18n.tr("Not connected"));
+        // function test_casting_enabled() {
+        //     get_panel_plugin().setWidiSupported(true);
+        //     get_aethercast_displays_plugin().setEnabled(true);
+        //     var entry = findChild(instance, "displayCasting");
+
+        //     verify(entry.enabled);
+        //     compare(entry.value, i18n.tr("Not connected"));
+        // }
+
+        // function test_external_display_disabled() {
+
+        // }
+
+        function test_one_display() {
+            var display = get_display_model().mockAddDisplay();
+            display.setName("Foo")
+            display.addMode("1600x1200x60")
+            display.addMode("1280x1024x60")
+            display.setMode("1600x1200x60")
+            wait(10000)
         }
     }
 }

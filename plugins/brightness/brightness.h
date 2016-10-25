@@ -21,8 +21,14 @@
 #ifndef BRIGHTNESS_H
 #define BRIGHTNESS_H
 
+#include <QAbstractItemModel>
 #include <QDBusInterface>
 #include <QObject>
+
+typedef struct DisplayConfiguration
+{
+
+} DisplayConfiguration;
 
 class Brightness : public QObject
 {
@@ -36,12 +42,21 @@ class Brightness : public QObject
     Q_PROPERTY (bool widiSupported
                 READ getWidiSupported
                 CONSTANT)
+    Q_PROPERTY (QAbstractItemModel* allDisplays
+                READ allDisplays
+                CONSTANT)
+    Q_PROPERTY (QAbstractItemModel* changedDisplays
+                READ changedDisplays
+                CONSTANT)
 
 public:
     explicit Brightness(QObject *parent = 0);
     bool getPowerdRunning() const;
     bool getAutoBrightnessAvailable() const;
     bool getWidiSupported() const;
+    QAbstractItemModel* allDisplays() const;
+    QAbstractItemModel* changedDisplays() const;
+    Q_INVOKABLE void applyDisplayConfiguration();
 
 private:
     QDBusConnection m_systemBusConnection;

@@ -21,6 +21,7 @@
 import GSettings 1.0
 import QtQuick 2.4
 import SystemSettings 1.0
+import SystemSettings.ListItems 1.0 as SettingsListItems
 import Ubuntu.Components 1.3
 import Ubuntu.Components.ListItems 1.3 as ListItem
 import Ubuntu.SystemSettings.Brightness 1.0
@@ -35,6 +36,22 @@ ItemPage {
     title: brightnessPanel.widiSupported ? i18n.tr("Brightness & Display") : i18n.tr("Brightness")
     flickable: scrollWidget
 
+    /* We need to disable keyboard anchoring because we implement the
+    KeyboardRectangle pattern. */
+    Binding {
+        target: main
+        property: "anchorToKeyboard"
+        value: false
+    }
+
+    function formatMode(mode) {
+        mode = mode.split("x");
+        /* TRANSLATORS: %1 refer to the amount of horizontal pixels in a
+        display resolution, and %2 to the vertical pixels. E.g. 1200x720.
+        %3 is the refresh rate in hz. */
+        return i18n.tr("%1×%2 @ %3hz").arg(mode[0]).arg(mode[1]).arg(mode[2]);
+    }
+
     GSettings {
         id: gsettings
         schema.id: "com.ubuntu.touch.system"
@@ -44,12 +61,18 @@ ItemPage {
         id: aethercastDisplays
         objectName: "aethercastDisplays"
         onEnabledChanged: {
-            /* This is a hack to ensure the aethercast enabled switch stays 
+            /* This is a hack to ensure the aethercast enabled switch stays
              * in sync with the enabled property
              */
             enabledCheck.serverChecked = enabled;
             enabledCheck.checked = enabledCheck.serverChecked;
         }
+    }
+
+    DisplayModel {
+        id: displayModel
+        objectName: "displayModel"
+        Component.onCompleted: console.log(displayModel.count)
     }
 
     UbuntuBrightnessPanel {
@@ -68,7 +91,10 @@ ItemPage {
 
     Flickable {
         id: scrollWidget
-        anchors.fill: parent
+        anchors {
+            fill: parent
+            bottomMargin: keyboardButtons.height + keyboard.height
+        }
         contentHeight: contentItem.childrenRect.height
         boundsBehavior: (contentHeight > root.height) ?
                             Flickable.DragAndOvershootBounds :
@@ -82,7 +108,7 @@ ItemPage {
             anchors.left: parent.left
             anchors.right: parent.right
 
-            ListItem.Standard {
+            SettingsListItems.Standard {
                 text: i18n.tr("Display brightness")
                 showDivider: false
             }
@@ -113,12 +139,13 @@ ItemPage {
                 }
             }
 
-            ListItem.Standard {
+            SettingsListItems.Standard {
                 id: adjust
                 text: i18n.tr("Adjust automatically")
                 visible: brightnessPanel.powerdRunning &&
                          brightnessPanel.autoBrightnessAvailable
-                control: CheckBox {
+
+                CheckBox {
                     id: autoAdjustCheck
                     property bool serverChecked: gsettings.autoBrightness
                     onServerCheckedChanged: checked = serverChecked
@@ -138,12 +165,13 @@ ItemPage {
                 visible: brightnessPanel.widiSupported
             }
 
-            ListItem.Standard {
+            SettingsListItems.Standard {
                 objectName: "externalDisplayControl"
                 text: i18n.tr("External display")
                 enabled: brightnessPanel.widiSupported
                 onClicked: enabledCheck.trigger()
-                control: Switch {
+
+                Switch {
                     id: enabledCheck
                     property bool serverChecked: aethercastDisplays.enabled
                     onServerCheckedChanged: checked = serverChecked
@@ -154,15 +182,133 @@ ItemPage {
                 }
             }
 
-            ListItem.SingleValue {
+            SettingsListItems.SingleValueProgression {
                 objectName: "displayCasting"
                 visible: brightnessPanel.widiSupported
                 enabled: aethercastDisplays.enabled
                 text: i18n.tr("Wireless display")
                 value: aethercastDisplays.state === "connected" ? i18n.tr("Connected") : i18n.tr("Not connected")
-                progression: true
                 onClicked: pageStack.push(Qt.resolvedUrl("WifiDisplays.qml"))
             }
+
+            Repeater {
+                model: displayModel
+
+                Column {
+                    anchors {
+                        left: parent.left
+                        right: parent.right
+                    }
+
+                    Label {
+                        visible: displayModel.count > 1
+                        anchors {
+                            left: parent.left
+                            right: parent.right
+                            margins: units.gu(2)
+                        }
+
+                        text: displayName
+                    }
+
+                    SettingsItemTitle {
+                        text: i18n.tr("Rotation:")
+                    }
+
+                    OptionSelector {
+                        id: rotationSelector
+                        objectName: "rotationSelector"
+                        property bool _expanded: false
+                        anchors {
+                            left: parent.left
+                            right: parent.right
+                            margins: units.gu(2)
+                        }
+                        containerHeight: itemHeight * 4
+                        model: [
+                            i18n.tr("None"),
+                            i18n.tr("90° clockwise"),
+                            i18n.tr("180°"),
+                            i18n.tr("270°")
+                        ]
+                        onDelegateClicked: expanded = !currentlyExpanded
+                    }
+
+                    SettingsItemTitle {
+                        text: availableModes.length > 1 ?
+                            i18n.tr("Resolution:") :
+                            /* TRANSLATORS: %1 is a display resolution, e.g.
+                            1200x720. */
+                            i18n.tr("Resolution: %1").arg(formatMode(mode))
+                    }
+
+                    OptionSelector {
+                        id: resolutionSelector
+                        objectName: "resolutionSelector"
+                        property bool _expanded: false
+                        anchors {
+                            left: parent.left
+                            right: parent.right
+                            margins: units.gu(2)
+                        }
+                        visible: availableModes.length > 1
+                        containerHeight: itemHeight * availableModes.length
+                        model: availableModes
+                        onDelegateClicked: expanded = !currentlyExpanded
+                        delegate: OptionSelectorDelegate {
+                            text: formatMode(modelData)
+                        }
+                    }
+
+                    SettingsItemTitle {
+                        text: i18n.tr("Scale screen elements:")
+                    }
+
+                    Menus.SliderMenu {
+                        id: scaleSlider
+                        objectName: "scaleSlider"
+                        minimumValue: 1.0
+                        maximumValue: 100.0
+                        value: scale
+                        minIcon: "image://theme/grip-large"
+                        maxIcon: "image://theme/view-grid-symbolic"
+                    }
+                }
+            }
         }
+    }
+
+    Rectangle {
+        id: keyboardButtons
+        objectName: "keyboardButtons"
+        anchors {
+            left: parent.left
+            right: parent.right
+            bottom: keyboard.top
+        }
+        color: Theme.palette.selected.background
+
+        // TODO: show always?
+        visible: true
+        height: units.gu(6)
+        Button {
+            id: applyButton
+            objectName: "applyButton"
+            anchors {
+                left: parent.left
+                leftMargin: units.gu(1)
+                verticalCenter: parent.verticalCenter
+            }
+            // TODO: enabled when change was made
+            enabled: true
+            text: i18n.tr("Apply Changes…")
+            onClicked: brightnessPanel.applyDisplayConfiguration()
+        }
+    }
+
+    KeyboardRectangle {
+        id: keyboard
+        objectName: "keyboard"
+        anchors.bottom: parent.bottom
     }
 }
