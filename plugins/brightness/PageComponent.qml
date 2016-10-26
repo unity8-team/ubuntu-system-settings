@@ -53,7 +53,7 @@ ItemPage {
         id: aethercastDisplays
         objectName: "aethercastDisplays"
         onEnabledChanged: {
-            /* This is a hack to ensure the aethercast enabled switch stays
+            /* This is a hack to ensure the aethercast enabled switch stays 
              * in sync with the enabled property
              */
             enabledCheck.serverChecked = enabled;

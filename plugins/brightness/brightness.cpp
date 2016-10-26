@@ -82,7 +82,6 @@ Brightness::Brightness(QObject *parent) :
     QDBusArgument result(reply.arguments()[0].value<QDBusArgument>());
     BrightnessParams params = qdbus_cast<BrightnessParams>(result);
     m_autoBrightnessAvailable = params.automatic;
-
     m_changedDisplays.filterOnUncommittedChanges(true);
     m_changedDisplays.setSourceModel(&m_displays);
 }
@@ -96,7 +95,7 @@ bool Brightness::getPowerdRunning() const {
     return m_powerdRunning;
 }
 
-bool Brightness::getWidiSupported() const
+bool Brightness::getWidiSupported() const 
 {
     char widi[PROP_VALUE_MAX];
     property_get("ubuntu.widi.supported", widi, "0");
