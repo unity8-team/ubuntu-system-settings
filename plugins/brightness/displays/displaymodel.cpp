@@ -19,7 +19,7 @@ QVariant DisplayModel::data(const QModelIndex &index, int role) const
 {
     QVariant ret;
 
-    if ((0<=index.row()) && (index.row() < m_displays.size())) {
+    if ((0 <= index.row()) && (index.row() < m_displays.size())) {
 
         auto display = m_displays[index.row()];
 
@@ -59,6 +59,45 @@ QVariant DisplayModel::data(const QModelIndex &index, int role) const
 
     return ret;
 }
+
+bool DisplayModel::setData(const QModelIndex &index, const QVariant &value,
+                           int role)
+{
+    if ((0 <= index.row()) && (index.row() < m_displays.size())) {
+
+        auto display = m_displays[index.row()];
+
+        switch (role) {
+
+        case MirroredRole:
+            display->setMirrored(value.toBool());
+            break;
+        case EnabledRole:
+            display->setEnabled(value.toBool());
+            break;
+        case ModeRole:
+            display->setMode(value.toString());
+            break;
+        case OrientationRole:
+            display->setOrientation((Display::Orientation) value.toUInt());
+            break;
+        case ScaleRole:
+            display->setScale(value.toInt());
+            break;
+        case Qt::DisplayRole:
+        case TypeRole:
+        case ConnectedRole:
+        case AvailableModesRole:
+        case UncommittedChangesRole:
+        default:
+            return false;
+        }
+        return true;
+    } else {
+        return false;
+    }
+}
+
 
 QHash<int,QByteArray> DisplayModel::roleNames() const
 {

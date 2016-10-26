@@ -227,7 +227,9 @@ ItemPage {
                             i18n.tr("180°"),
                             i18n.tr("270°")
                         ]
-                        onDelegateClicked: expanded = !currentlyExpanded
+                        onDelegateClicked: {
+                            expanded = !currentlyExpanded;
+                        }
                     }
 
                     SettingsItemTitle {
