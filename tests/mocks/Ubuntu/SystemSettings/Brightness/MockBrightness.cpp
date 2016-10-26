@@ -18,7 +18,7 @@
 #include "MockDisplayModel.h"
 #include "MockBrightness.h"
 
-#include <QDebug>
+#include <QQmlEngine>
 
 MockBrightness::MockBrightness(QObject *parent)
     : QObject(parent)
@@ -62,16 +62,26 @@ void MockBrightness::setWidiSupported(const bool supported)
     Q_EMIT widiSupportedChanged();
 }
 
-QAbstractItemModel* MockBrightness::allDisplays() const
+QAbstractItemModel* MockBrightness::allDisplays()
 {
     auto ret = &m_displays;
     QQmlEngine::setObjectOwnership(ret, QQmlEngine::CppOwnership);
     return ret;
 }
 
-QAbstractItemModel* MockBrightness::changedDisplays() const
+QAbstractItemModel* MockBrightness::changedDisplays()
 {
     auto ret = &m_changedDisplays;
     QQmlEngine::setObjectOwnership(ret, QQmlEngine::CppOwnership);
     return ret;
+}
+
+void MockBrightness::applyDisplayConfiguration()
+{
+
+}
+
+MockDisplayModel* MockBrightness::displayModel()
+{
+    return (MockDisplayModel*) allDisplays();
 }

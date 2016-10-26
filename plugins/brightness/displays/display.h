@@ -16,24 +16,29 @@ class Display : public QObject
                NOTIFY typeChanged)
     Q_PROPERTY(bool mirrored
                READ mirrored
+               WRITE setMirrored
                NOTIFY mirroredChanged)
     Q_PROPERTY(bool connected
                READ connected
                NOTIFY connectedChanged)
     Q_PROPERTY(bool enabled
                READ enabled
+               WRITE setEnabled
                NOTIFY enabledChanged)
     Q_PROPERTY(QString mode
                READ mode
+               WRITE setMode
                NOTIFY modeChanged)
     Q_PROPERTY(QStringList availableModes
                READ availableModes
                NOTIFY availableModesChanged)
     Q_PROPERTY(Orientation orientation
                READ orientation
+               WRITE setOrientation
                NOTIFY orientationChanged)
     Q_PROPERTY(double scale
                READ scale
+               WRITE setScale
                NOTIFY scaleChanged)
     Q_PROPERTY(bool uncommittedChanges
                READ uncommittedChanges
@@ -75,18 +80,18 @@ public:
     double scale() const;
     bool uncommittedChanges() const;
 
-protected:
-    void setName(const QString &name);
-    void setType(const QString &type);
     void setMirrored(const bool &mirrored);
-    void setConnected(const bool &connected);
     void setEnabled(const bool &enabled);
     void setMode(const QString &mode);
-    void setAvailableModes(const QStringList &availableModes);
     void setOrientation(const Orientation &orientation);
     void setScale(const double &scale);
-    void setUncommitedChanges(const bool uncommittedChanges);
 
+protected:
+    void setName(const QString &name);
+    void setAvailableModes(const QStringList &availableModes);
+    void setConnected(const bool &connected);
+    void setType(const QString &type);
+    void setUncommitedChanges(const bool uncommittedChanges);
     QString m_name = QString::null;
     QString m_type = QString::null;
     bool m_mirrored = false;

@@ -25,6 +25,7 @@
 #include <QDBusReply>
 #include <QDBusMetaType>
 #include <QDebug>
+#include <QQmlEngine>
 
 // Returned data from getBrightnessParams
 struct BrightnessParams {
@@ -81,6 +82,9 @@ Brightness::Brightness(QObject *parent) :
     QDBusArgument result(reply.arguments()[0].value<QDBusArgument>());
     BrightnessParams params = qdbus_cast<BrightnessParams>(result);
     m_autoBrightnessAvailable = params.automatic;
+
+    m_changedDisplays.filterOnUncommittedChanges(true);
+    m_changedDisplays.setSourceModel(&m_displays);
 }
 
 bool Brightness::getAutoBrightnessAvailable() const
@@ -97,4 +101,18 @@ bool Brightness::getWidiSupported() const
     char widi[PROP_VALUE_MAX];
     property_get("ubuntu.widi.supported", widi, "0");
     return (strcmp(widi, "0") > 0);
+}
+
+QAbstractItemModel* Brightness::allDisplays()
+{
+    auto ret = &m_displays;
+    QQmlEngine::setObjectOwnership(ret, QQmlEngine::CppOwnership);
+    return ret;
+}
+
+QAbstractItemModel* Brightness::changedDisplays()
+{
+    auto ret = &m_changedDisplays;
+    QQmlEngine::setObjectOwnership(ret, QQmlEngine::CppOwnership);
+    return ret;
 }

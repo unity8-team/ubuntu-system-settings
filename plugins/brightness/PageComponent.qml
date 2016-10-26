@@ -69,12 +69,6 @@ ItemPage {
         }
     }
 
-    DisplayModel {
-        id: displayModel
-        objectName: "displayModel"
-        Component.onCompleted: console.log(displayModel.count)
-    }
-
     UbuntuBrightnessPanel {
         id: brightnessPanel
         objectName: "brightnessPanel"
@@ -92,8 +86,10 @@ ItemPage {
     Flickable {
         id: scrollWidget
         anchors {
-            fill: parent
-            bottomMargin: keyboardButtons.height + keyboard.height
+            top: parent.top
+            left: parent.left
+            right: parent.right
+            bottom: applyButtonBackground.top
         }
         contentHeight: contentItem.childrenRect.height
         boundsBehavior: (contentHeight > root.height) ?
@@ -192,7 +188,7 @@ ItemPage {
             }
 
             Repeater {
-                model: displayModel
+                model: brightnessPanel.allDisplays
 
                 Column {
                     anchors {
@@ -201,7 +197,7 @@ ItemPage {
                     }
 
                     Label {
-                        visible: displayModel.count > 1
+                        visible: brightnessPanel.allDisplays.count > 1
                         anchors {
                             left: parent.left
                             right: parent.right
@@ -237,8 +233,8 @@ ItemPage {
                     SettingsItemTitle {
                         text: availableModes.length > 1 ?
                             i18n.tr("Resolution:") :
-                            /* TRANSLATORS: %1 is a display resolution, e.g.
-                            1200x720. */
+                            /* TRANSLATORS: %1 is a display mode, e.g.
+                            1200x720x24. */
                             i18n.tr("Resolution: %1").arg(formatMode(mode))
                     }
 
@@ -279,17 +275,16 @@ ItemPage {
     }
 
     Rectangle {
-        id: keyboardButtons
-        objectName: "keyboardButtons"
+        id: applyButtonBackground
+        objectName: "applyButtonBackground"
         anchors {
             left: parent.left
             right: parent.right
-            bottom: keyboard.top
+            bottom: parent.bottom
         }
         color: Theme.palette.selected.background
 
-        // TODO: show always?
-        visible: true
+        visible: brightnessPanel.allDisplays.count > 0
         height: units.gu(6)
         Button {
             id: applyButton
@@ -299,16 +294,9 @@ ItemPage {
                 leftMargin: units.gu(1)
                 verticalCenter: parent.verticalCenter
             }
-            // TODO: enabled when change was made
-            enabled: true
+            enabled: brightnessPanel.changedDisplays.count > 0
             text: i18n.tr("Apply Changes…")
             onClicked: brightnessPanel.applyDisplayConfiguration()
         }
-    }
-
-    KeyboardRectangle {
-        id: keyboard
-        objectName: "keyboard"
-        anchors.bottom: parent.bottom
     }
 }

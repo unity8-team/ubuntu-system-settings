@@ -21,14 +21,11 @@
 #ifndef BRIGHTNESS_H
 #define BRIGHTNESS_H
 
+#include "displays/displaymodel.h"
+
 #include <QAbstractItemModel>
 #include <QDBusInterface>
 #include <QObject>
-
-typedef struct DisplayConfiguration
-{
-
-} DisplayConfiguration;
 
 class Brightness : public QObject
 {
@@ -54,9 +51,8 @@ public:
     bool getPowerdRunning() const;
     bool getAutoBrightnessAvailable() const;
     bool getWidiSupported() const;
-    QAbstractItemModel* allDisplays() const;
-    QAbstractItemModel* changedDisplays() const;
-    Q_INVOKABLE void applyDisplayConfiguration();
+    QAbstractItemModel* allDisplays();
+    QAbstractItemModel* changedDisplays();
 
 private:
     QDBusConnection m_systemBusConnection;
@@ -64,6 +60,8 @@ private:
     QDBusInterface m_powerdIface;
     bool m_powerdRunning;
     bool m_autoBrightnessAvailable;
+    DisplayModel m_displays;
+    DisplaysFilter m_changedDisplays;
 };
 
 #endif // BRIGHTNESS_H
