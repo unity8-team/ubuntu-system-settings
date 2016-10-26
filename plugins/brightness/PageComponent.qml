@@ -36,14 +36,6 @@ ItemPage {
     title: brightnessPanel.widiSupported ? i18n.tr("Brightness & Display") : i18n.tr("Brightness")
     flickable: scrollWidget
 
-    /* We need to disable keyboard anchoring because we implement the
-    KeyboardRectangle pattern. */
-    Binding {
-        target: main
-        property: "anchorToKeyboard"
-        value: false
-    }
-
     function formatMode(mode) {
         mode = mode.split("x");
         /* TRANSLATORS: %1 refer to the amount of horizontal pixels in a

@@ -29,11 +29,6 @@ Item {
     width: 300
     height: 500
 
-    Item {
-        id: main
-        property bool anchorToKeyboard: false
-    }
-
     Component {
         id: pageComponent
         PageComponent {
