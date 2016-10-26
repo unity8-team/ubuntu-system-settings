@@ -180,9 +180,11 @@ ItemPage {
             }
 
             Repeater {
+                objectName: "displayConfigurationRepeater"
                 model: brightnessPanel.allDisplays
 
                 Column {
+                    objectName: "displayConfiguration_" + displayName
                     anchors {
                         left: parent.left
                         right: parent.right

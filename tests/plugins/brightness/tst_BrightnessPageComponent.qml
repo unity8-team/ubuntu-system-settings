@@ -58,10 +58,6 @@ Item {
             return findInvisibleChild(instance, "aethercastDisplays");
         }
 
-        function get_display_model() {
-            return findInvisibleChild(instance, "displayModel");
-        }
-
         function test_brightness_title() {
             compare(instance.title, i18n.tr("Brightness"));
         }
@@ -91,6 +87,13 @@ Item {
             compare(entry.value, i18n.tr("Not connected"));
         }
 
+        // Test that everything is hidden if only aethercast devices (or none)
+        function test_no_displays() {
+            var repeater = findChild(instance, "displayConfigurationRepeater");
+            compare(repeater.count, 0);
+        }
+
+        // Test that there's a UI when we have some display available.
         function test_one_display() {
             var displayModel = get_panel_plugin().displayModel();
             var display = displayModel.mockAddDisplay();
@@ -98,7 +101,11 @@ Item {
             display.addMode("1600x1200x60")
             display.addMode("1280x1024x60")
             display.mode = "1600x1200x60"
-            wait(10000)
+
+            var repeater = findChild(instance, "displayConfigurationRepeater");
+            var panel = findChild(instance, "displayConfiguration_" + display.name);
+            verify(panel.visible);
+            compare(repeater.count, 1);
         }
     }
 }
