@@ -19,6 +19,7 @@
  */
 
 #include "brightness.h"
+#include "displays/mirdisplays_impl.h"
 #include <hybris/properties/properties.h>
 
 #include <QDBusArgument>
@@ -55,15 +56,18 @@ const QDBusArgument &operator>>(const QDBusArgument &argument,
     return argument;
 }
 
-Brightness::Brightness(QObject *parent) :
-    QObject(parent),
-    m_systemBusConnection (QDBusConnection::systemBus()),
-    m_powerdIface ("com.canonical.powerd",
-                   "/com/canonical/powerd",
-                   "com.canonical.powerd",
-                   m_systemBusConnection),
-    m_powerdRunning(false),
-    m_autoBrightnessAvailable(false)
+Brightness::Brightness(QDBusConnection dbus, MirDisplays *mirDisplays,
+                       QObject *parent)
+    : QObject(parent)
+    , m_systemBusConnection(dbus)
+    , m_mirDisplays(mirDisplays)
+    , m_powerdIface("com.canonical.powerd",
+                    "/com/canonical/powerd",
+                    "com.canonical.powerd",
+                    m_systemBusConnection)
+    , m_powerdRunning(false)
+    , m_autoBrightnessAvailable(false)
+
 {
     qRegisterMetaType<BrightnessParams>();
     m_powerdRunning = m_powerdIface.isValid();
@@ -86,6 +90,11 @@ Brightness::Brightness(QObject *parent) :
     m_changedDisplays.setSourceModel(&m_displays);
 }
 
+Brightness::Brightness(QObject *parent) :
+    Brightness(QDBusConnection::systemBus(), new MirDisplaysImpl(), parent)
+{
+}
+
 bool Brightness::getAutoBrightnessAvailable() const
 {
     return m_autoBrightnessAvailable;
@@ -95,7 +104,7 @@ bool Brightness::getPowerdRunning() const {
     return m_powerdRunning;
 }
 
-bool Brightness::getWidiSupported() const 
+bool Brightness::getWidiSupported() const
 {
     char widi[PROP_VALUE_MAX];
     property_get("ubuntu.widi.supported", widi, "0");

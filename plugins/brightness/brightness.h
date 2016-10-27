@@ -22,6 +22,7 @@
 #define BRIGHTNESS_H
 
 #include "displays/displaymodel.h"
+#include "displays/mirdisplays.h"
 
 #include <QAbstractItemModel>
 #include <QDBusInterface>
@@ -48,6 +49,8 @@ class Brightness : public QObject
 
 public:
     explicit Brightness(QObject *parent = 0);
+    explicit Brightness(QDBusConnection dbus,
+                        MirDisplays *mirDisplays, QObject *parent = 0);
     bool getPowerdRunning() const;
     bool getAutoBrightnessAvailable() const;
     bool getWidiSupported() const;
@@ -56,8 +59,9 @@ public:
 
 private:
     QDBusConnection m_systemBusConnection;
-    QString m_objectPath;
+    MirDisplays *m_mirDisplays;
     QDBusInterface m_powerdIface;
+    QString m_objectPath;
     bool m_powerdRunning;
     bool m_autoBrightnessAvailable;
     DisplayModel m_displays;
