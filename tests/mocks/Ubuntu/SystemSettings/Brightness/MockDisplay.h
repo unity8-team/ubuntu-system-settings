@@ -28,25 +28,29 @@ public:
         Q_EMIT connectedChanged();
     }
 
-    Q_INVOKABLE void setAvailableModes(const QStringList &availableModes) // mock only
-    {
-        m_availableModes = availableModes;
-        Q_EMIT availableModesChanged();
-    }
-
     Q_INVOKABLE void setUncommitedChanges(const bool uncommittedChanges) // mock only
     {
         m_uncommittedChanges = uncommittedChanges;
         Q_EMIT uncommittedChangesChanged();
     }
 
-    Q_INVOKABLE void addMode(const QString &mode) // mock only
+    Q_INVOKABLE DisplayMode addMode(const uint &horizontal, const uint &vertical,
+                             const uint &refresh) // mock only
     {
-        m_availableModes.append(mode);
-        Q_EMIT availableModesChanged();
+        DisplayMode mode;
+        mode.vertical_resolution = vertical;
+        mode.horizontal_resolution = horizontal;
+        mode.refresh_rate = refresh;
+
+        m_modes.append(mode);
+        Q_EMIT modesChanged();
+        return mode;
     }
+Q_SIGNALS:
+    void nameChanged();
+    void typeChanged();
 };
 
-Q_DECLARE_METATYPE(MockDisplay*)
+// Q_DECLARE_METATYPE(MockDisplay*)
 
 #endif // MOCK_DISPLAY_H

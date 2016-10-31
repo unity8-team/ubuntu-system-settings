@@ -40,13 +40,13 @@ QVariant DisplayModel::data(const QModelIndex &index, int role) const
             ret = display->enabled();
             break;
         case ModeRole:
-            ret = display->mode();
+            ret = QVariant::fromValue(display->mode());
             break;
-        case AvailableModesRole:
-            ret = display->availableModes();
+        case ModesRole:
+            ret = QVariant::fromValue(display->modes());
             break;
         case OrientationRole:
-            ret = (uint) display->orientation();
+            ret = QVariant::fromValue(display->orientation());
             break;
         case ScaleRole:
             ret = display->scale();
@@ -64,11 +64,9 @@ bool DisplayModel::setData(const QModelIndex &index, const QVariant &value,
                            int role)
 {
     if ((0 <= index.row()) && (index.row() < m_displays.size())) {
-
         auto display = m_displays[index.row()];
 
         switch (role) {
-
         case MirroredRole:
             display->setMirrored(value.toBool());
             break;
@@ -76,10 +74,10 @@ bool DisplayModel::setData(const QModelIndex &index, const QVariant &value,
             display->setEnabled(value.toBool());
             break;
         case ModeRole:
-            display->setMode(value.toString());
+            // display->setMode(value.value<DisplayMode>());
             break;
         case OrientationRole:
-            display->setOrientation((Display::Orientation) value.toUInt());
+            display->setOrientation(value.value<Display::Orientation>());
             break;
         case ScaleRole:
             display->setScale(value.toInt());
@@ -87,7 +85,7 @@ bool DisplayModel::setData(const QModelIndex &index, const QVariant &value,
         case Qt::DisplayRole:
         case TypeRole:
         case ConnectedRole:
-        case AvailableModesRole:
+        case ModesRole:
         case UncommittedChangesRole:
         default:
             return false;
@@ -108,7 +106,7 @@ QHash<int,QByteArray> DisplayModel::roleNames() const
         names[ConnectedRole] = "connected";
         names[EnabledRole] = "enabled";
         names[ModeRole] = "mode";
-        names[AvailableModesRole] = "availableModes";
+        names[ModesRole] = "modes";
         names[OrientationRole] = "orientation";
         names[ScaleRole] = "scale";
         names[UncommittedChangesRole] = "uncommittedChanges";
@@ -131,7 +129,7 @@ void DisplayModel::addDisplay(const QSharedPointer<Display> &display)
         endInsertRows();
     }
 
-   if (display) {
+    if (display) {
         QObject::connect(display.data(), SIGNAL(displayChanged(const Display*)),
                          this, SLOT(displayChangedSlot(const Display*)));
     }
@@ -143,7 +141,7 @@ void DisplayModel::emitRowChanged(const int &row)
 {
     if (0 <= row && row < m_displays.size()) {
         QModelIndex qmi = index(row, 0);
-        Q_EMIT(dataChanged(qmi, qmi));
+        Q_EMIT dataChanged(qmi, qmi);
     }
 }
 
@@ -168,10 +166,17 @@ bool DisplaysFilter::lessThan(const QModelIndex &left,
     return a < b;
 }
 
-void DisplaysFilter::filterOnUncommittedChanges(const bool apply)
+void DisplaysFilter::filterOnUncommittedChanges(const bool uncommitted)
 {
-    m_uncommittedChanges = apply;
+    m_uncommittedChanges = uncommitted;
     m_uncommittedChangesEnabled = true;
+    invalidateFilter();
+}
+
+void DisplaysFilter::filterOnConnected(const bool connected)
+{
+    m_connected = connected;
+    m_connectedEnabled = true;
     invalidateFilter();
 }
 
@@ -182,8 +187,17 @@ bool DisplaysFilter::filterAcceptsRow(int sourceRow,
     QModelIndex childIndex = sourceModel()->index(sourceRow, 0, sourceParent);
 
     if (accepts && m_uncommittedChangesEnabled) {
-        const bool uncommittedChanges = childIndex.model()->data(childIndex, DisplayModel::UncommittedChangesRole).value<bool>();
+        const bool uncommittedChanges = childIndex.model()->data(
+            childIndex, DisplayModel::UncommittedChangesRole
+        ).value<bool>();
         accepts = (m_uncommittedChanges == uncommittedChanges);
+    }
+
+    if (accepts && m_connectedEnabled) {
+        const bool connected = childIndex.model()->data(
+            childIndex, DisplayModel::ConnectedRole
+        ).value<bool>();
+        accepts = (m_connected == connected);
     }
 
     return accepts;

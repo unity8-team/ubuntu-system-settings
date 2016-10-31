@@ -19,7 +19,10 @@
  */
 
 #include "brightness.h"
+#include "displays/display.h"
+#include "displays/helpers.h"
 #include "displays/mirdisplays_impl.h"
+
 #include <hybris/properties/properties.h>
 
 #include <QDBusArgument>
@@ -27,6 +30,7 @@
 #include <QDBusMetaType>
 #include <QDebug>
 #include <QQmlEngine>
+#include <QSharedPointer>
 
 // Returned data from getBrightnessParams
 struct BrightnessParams {
@@ -69,6 +73,18 @@ Brightness::Brightness(QDBusConnection dbus, MirDisplays *mirDisplays,
     , m_autoBrightnessAvailable(false)
 
 {
+    m_changedDisplays.filterOnUncommittedChanges(true);
+    m_changedDisplays.setSourceModel(&m_displays);
+
+    m_connectedDisplays.filterOnConnected(true);
+    m_connectedDisplays.setSourceModel(&m_displays);
+
+    if (m_mirDisplays->isConnected()) {
+        updateMirDisplays();
+    } else {
+        qWarning() << "brightness plugin saw mir displays disconnected";
+    }
+
     qRegisterMetaType<BrightnessParams>();
     m_powerdRunning = m_powerdIface.isValid();
 
@@ -86,8 +102,6 @@ Brightness::Brightness(QDBusConnection dbus, MirDisplays *mirDisplays,
     QDBusArgument result(reply.arguments()[0].value<QDBusArgument>());
     BrightnessParams params = qdbus_cast<BrightnessParams>(result);
     m_autoBrightnessAvailable = params.automatic;
-    m_changedDisplays.filterOnUncommittedChanges(true);
-    m_changedDisplays.setSourceModel(&m_displays);
 }
 
 Brightness::Brightness(QObject *parent) :
@@ -123,4 +137,38 @@ QAbstractItemModel* Brightness::changedDisplays()
     auto ret = &m_changedDisplays;
     QQmlEngine::setObjectOwnership(ret, QQmlEngine::CppOwnership);
     return ret;
+}
+
+
+QAbstractItemModel* Brightness::connectedDisplays()
+{
+    auto ret = &m_connectedDisplays;
+    QQmlEngine::setObjectOwnership(ret, QQmlEngine::CppOwnership);
+    return ret;
+}
+
+void Brightness::updateMirDisplays()
+{
+    qWarning() << "updateMirDisplays";
+
+    MirDisplayConfiguration *conf = m_mirDisplays->getConfiguration();
+    qWarning() << "number of cards" << conf->num_cards;
+    qWarning() << "number of outputs" << conf->num_outputs;
+
+    for(uint i = 0; i < conf->num_outputs; ++i) {
+        MirDisplayOutput output = conf->outputs[i];
+        auto display = QSharedPointer<Display>(new Display(output));
+        m_displays.addDisplay(display);
+        // QSharedPointer<Display> display = m_displaysModel.getDisplay(output.output_id);
+
+        // if (display) {
+        //     qWarning() << __PRETTY_FUNCTION__ << "Updating existing display" << i;
+        //     display->setDisplayOutput(&output);
+        // } else {
+        //     qWarning() << __PRETTY_FUNCTION__ << "Adding new display" << i;
+        //     QSharedPointer<Display> display = QSharedPointer<Display>::create(&output);
+        //     m_displaysModel.addDisplay(display);
+        // }
+    }
+
 }

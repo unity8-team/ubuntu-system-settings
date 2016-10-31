@@ -34,6 +34,7 @@ void BackendPlugin::registerTypes(const char *uri)
     qmlRegisterType<MockAethercastDevice>(uri, 1, 0, "AethercastDevice");
     qmlRegisterType<MockAethercastDisplays>(uri, 1, 0, "AethercastDisplays");
 
-    qmlRegisterUncreatableType<MockDisplay>(uri, 1, 0, "Display", "Not to be instantiated directly.");
     qmlRegisterType<MockDisplayModel>(uri, 1, 0, "DisplayModel");
+    qmlRegisterUncreatableType<MockDisplay>(uri, 1, 0, "Display",
+                                            "Not to be instantiated directly.");
 }

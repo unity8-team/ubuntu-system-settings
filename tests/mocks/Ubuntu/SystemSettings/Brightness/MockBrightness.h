@@ -43,6 +43,9 @@ class MockBrightness : public QObject
     Q_PROPERTY (QAbstractItemModel* changedDisplays
                 READ changedDisplays
                 CONSTANT)
+    Q_PROPERTY (QAbstractItemModel* connectedDisplays
+                READ connectedDisplays
+                CONSTANT)
 
 public:
     explicit MockBrightness(QObject *parent = 0);
@@ -54,6 +57,7 @@ public:
     Q_INVOKABLE void setWidiSupported(const bool supported);
     QAbstractItemModel* allDisplays();
     QAbstractItemModel* changedDisplays();
+    QAbstractItemModel* connectedDisplays();
     Q_INVOKABLE void applyDisplayConfiguration();
     Q_INVOKABLE MockDisplayModel* displayModel(); // mock only
 
@@ -68,6 +72,7 @@ private:
     bool m_widiSupported = false;
     MockDisplayModel m_displays;
     DisplaysFilter m_changedDisplays;
+    DisplaysFilter m_connectedDisplays;
 };
 
 #endif // MOCK_BRIGHTNESS_H

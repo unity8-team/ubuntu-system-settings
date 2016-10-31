@@ -36,14 +36,6 @@ ItemPage {
     title: brightnessPanel.widiSupported ? i18n.tr("Brightness & Display") : i18n.tr("Brightness")
     flickable: scrollWidget
 
-    function formatMode(mode) {
-        mode = mode.split("x");
-        /* TRANSLATORS: %1 refer to the amount of horizontal pixels in a
-        display resolution, and %2 to the vertical pixels. E.g. 1200x720.
-        %3 is the refresh rate in hz. */
-        return i18n.tr("%1×%2 @ %3hz").arg(mode[0]).arg(mode[1]).arg(mode[2]);
-    }
-
     GSettings {
         id: gsettings
         schema.id: "com.ubuntu.touch.system"
@@ -53,7 +45,7 @@ ItemPage {
         id: aethercastDisplays
         objectName: "aethercastDisplays"
         onEnabledChanged: {
-            /* This is a hack to ensure the aethercast enabled switch stays 
+            /* This is a hack to ensure the aethercast enabled switch stays
              * in sync with the enabled property
              */
             enabledCheck.serverChecked = enabled;
@@ -181,13 +173,18 @@ ItemPage {
 
             Repeater {
                 objectName: "displayConfigurationRepeater"
-                model: brightnessPanel.allDisplays
+                model: brightnessPanel.connectedDisplays
 
                 Column {
                     objectName: "displayConfiguration_" + displayName
                     anchors {
                         left: parent.left
                         right: parent.right
+                    }
+
+                    Item {
+                        width: units.gu(1)
+                        height: units.gu(1)
                     }
 
                     Label {
@@ -227,11 +224,11 @@ ItemPage {
                     }
 
                     SettingsItemTitle {
-                        text: availableModes.length > 1 ?
+                        text: modes.length > 1 ?
                             i18n.tr("Resolution:") :
                             /* TRANSLATORS: %1 is a display mode, e.g.
                             1200x720x24. */
-                            i18n.tr("Resolution: %1").arg(formatMode(mode))
+                            i18n.tr("Resolution: %1").arg(mode.toString())
                     }
 
                     OptionSelector {
@@ -243,12 +240,12 @@ ItemPage {
                             right: parent.right
                             margins: units.gu(2)
                         }
-                        visible: availableModes.length > 1
-                        containerHeight: itemHeight * availableModes.length
-                        model: availableModes
+                        visible: modes.length > 1
+                        containerHeight: itemHeight * modes.length
+                        model: modes
                         onDelegateClicked: expanded = !currentlyExpanded
                         delegate: OptionSelectorDelegate {
-                            text: formatMode(modelData)
+                            text: modelData
                         }
                     }
 

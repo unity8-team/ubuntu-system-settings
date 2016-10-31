@@ -46,6 +46,9 @@ class Brightness : public QObject
     Q_PROPERTY (QAbstractItemModel* changedDisplays
                 READ changedDisplays
                 CONSTANT)
+    Q_PROPERTY (QAbstractItemModel* connectedDisplays
+                READ connectedDisplays
+                CONSTANT)
 
 public:
     explicit Brightness(QObject *parent = 0);
@@ -56,8 +59,12 @@ public:
     bool getWidiSupported() const;
     QAbstractItemModel* allDisplays();
     QAbstractItemModel* changedDisplays();
+    QAbstractItemModel* connectedDisplays();
 
 private:
+    void getMirDisplays();
+    void updateMirDisplays();
+
     QDBusConnection m_systemBusConnection;
     MirDisplays *m_mirDisplays;
     QDBusInterface m_powerdIface;
@@ -66,6 +73,7 @@ private:
     bool m_autoBrightnessAvailable;
     DisplayModel m_displays;
     DisplaysFilter m_changedDisplays;
+    DisplaysFilter m_connectedDisplays;
 };
 
 #endif // BRIGHTNESS_H

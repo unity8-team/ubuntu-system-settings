@@ -6,12 +6,15 @@ find_package(Qt5Gui)
 include_directories(${Qt5Gui_PRIVATE_INCLUDE_DIRS} ${MIR_INCLUDE_DIRS})
 
 add_library(uss-displays SHARED
+    displays/helpers.h
+
     displays/display.h
     displays/displaymodel.h
 
     displays/mirdisplays.h
     displays/mirdisplays_impl.h
 
+    displays/helpers.cpp
     displays/display.cpp
     displays/displaymodel.cpp
     displays/mirdisplays_impl.cpp
@@ -35,8 +38,6 @@ add_library(UbuntuBrightnessPanel MODULE
                 aethercast/displays.h
                 aethercast/freedesktop_properties.h
                 aethercast/freedesktop_objectmanager.h
-                displays/display.h
-                displays/displaymodel.h
                 plugin.h
                 brightness.h
                 aethercast/aethercast_device.cpp
@@ -46,8 +47,6 @@ add_library(UbuntuBrightnessPanel MODULE
                 aethercast/displays.cpp
 	        aethercast/freedesktop_properties.cpp
 	        aethercast/freedesktop_objectmanager.cpp
-                displays/display.cpp
-                displays/displaymodel.cpp
                 plugin.cpp
                 brightness.cpp
                 ${QML_SOURCES})

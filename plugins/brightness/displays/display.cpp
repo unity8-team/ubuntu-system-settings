@@ -1,12 +1,42 @@
 #include "display.h"
+#include "helpers.h"
+
+#include <QDebug>
 
 Display::Display(QObject *parent)
     : QObject(parent)
 {
-    QObject::connect(this, SIGNAL(nameChanged()),
-                     this, SLOT(changedSlot()));
-    QObject::connect(this, SIGNAL(typeChanged()),
-                     this, SLOT(changedSlot()));
+    initialize();
+    // TODO: this constructor shouldn't exist.
+}
+
+Display::Display(MirDisplayOutput &output, QObject *parent)
+    : QObject(parent)
+{
+    m_type = DisplayPlugin::Helpers::mirTypeToString(output.type);
+    setConnected(output.connected);
+    setEnabled(output.used);
+
+    auto modes = QList<DisplayMode>();
+    for(uint j = 0; j < output.num_modes; j++) {
+        MirDisplayMode mode = output.modes[j];
+        // modes.append(QString("%1x%2x%3").arg(mode.horizontal_resolution)
+        //                                 .arg(mode.vertical_resolution)
+        //                                 .arg(mode.refresh_rate));
+        // if (output.current_mode == j) {
+        //     setMode()
+        // }
+    }
+    m_modes = modes;
+    m_physicalWidthMm = output.physical_width_mm;
+    m_physicalHeightMm = output.physical_height_mm;
+    m_name = QString("%1").arg(DisplayPlugin::Helpers::mirTypeToString(output.type));
+
+    initialize();
+}
+
+void Display::initialize()
+{
     QObject::connect(this, SIGNAL(mirroredChanged()),
                      this, SLOT(changedSlot()));
     QObject::connect(this, SIGNAL(connectedChanged()),
@@ -15,7 +45,7 @@ Display::Display(QObject *parent)
                      this, SLOT(changedSlot()));
     QObject::connect(this, SIGNAL(modeChanged()),
                      this, SLOT(changedSlot()));
-    QObject::connect(this, SIGNAL(availableModesChanged()),
+    QObject::connect(this, SIGNAL(modesChanged()),
                      this, SLOT(changedSlot()));
     QObject::connect(this, SIGNAL(orientationChanged()),
                      this, SLOT(changedSlot()));
@@ -50,14 +80,18 @@ bool Display::enabled() const
     return m_enabled;
 }
 
-QString Display::mode() const
+DisplayMode Display::mode() const
 {
     return m_mode;
 }
 
-QStringList Display::availableModes() const
+QStringList Display::modes() const
 {
-    return m_availableModes;
+    QStringList modes;
+    Q_FOREACH(const DisplayMode &mode, m_modes) {
+        modes.append(mode.toString());
+    }
+    return modes;
 }
 
 Display::Orientation Display::orientation() const
@@ -75,67 +109,72 @@ bool Display::uncommittedChanges() const
     return m_uncommittedChanges;
 }
 
-void Display::setName(const QString &name)
+uint Display::physicalWidthMm() const
 {
-    m_name = name;
-    Q_EMIT nameChanged();
+    return m_physicalWidthMm;
 }
 
-void Display::setType(const QString &type)
+uint Display::physicalHeightMm() const
 {
-    m_type = type;
-    Q_EMIT typeChanged();
+    return m_physicalHeightMm;
 }
 
 void Display::setMirrored(const bool &mirrored)
 {
-    m_mirrored = mirrored;
-    Q_EMIT mirroredChanged();
+    if (m_mirrored != mirrored) {
+        m_mirrored = mirrored;
+        Q_EMIT mirroredChanged();
+    }
 }
 
 void Display::setConnected(const bool &connected)
 {
-    m_connected = connected;
-    Q_EMIT connectedChanged();
+    if (m_connected != connected) {
+        m_connected = connected;
+        Q_EMIT connectedChanged();
+    }
 }
 
 void Display::setEnabled(const bool &enabled)
 {
-    m_enabled = enabled;
-    Q_EMIT enabledChanged();
+    if (m_enabled != enabled) {
+        m_enabled = enabled;
+        Q_EMIT enabledChanged();
+    }
 }
 
-void Display::setMode(const QString &mode)
+void Display::setMode(const DisplayMode &mode)
 {
     m_mode = mode;
     Q_EMIT modeChanged();
 }
 
-void Display::setAvailableModes(const QStringList &availableModes)
-{
-    m_availableModes = availableModes;
-    Q_EMIT availableModesChanged();
-}
-
 void Display::setOrientation(const Display::Orientation &orientation)
 {
-    m_orientation = orientation;
-    Q_EMIT orientationChanged();
+    if (m_orientation != orientation) {
+        m_orientation = orientation;
+        Q_EMIT orientationChanged();
+    }
 }
 
 void Display::setScale(const double &scale)
 {
-    m_scale = scale;
-    Q_EMIT scaleChanged();
+    if (m_scale != scale) {
+        m_scale = scale;
+        Q_EMIT scaleChanged();
+    }
 }
 
 void Display::setUncommitedChanges(const bool uncommittedChanges)
 {
-    m_uncommittedChanges = uncommittedChanges;
-    Q_EMIT uncommittedChangesChanged();
+    if (m_uncommittedChanges != uncommittedChanges) {
+        m_uncommittedChanges = uncommittedChanges;
+        Q_EMIT uncommittedChangesChanged();
+    }
 }
 
 void Display::changedSlot()
 {
+    qWarning() << "changedSlot";
     Q_EMIT displayChanged(this);
 }

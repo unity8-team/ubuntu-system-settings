@@ -27,6 +27,9 @@ MockBrightness::MockBrightness(QObject *parent)
 {
     m_changedDisplays.filterOnUncommittedChanges(true);
     m_changedDisplays.setSourceModel(&m_displays);
+
+    m_connectedDisplays.filterOnConnected(true);
+    m_connectedDisplays.setSourceModel(&m_displays);
 }
 
 bool MockBrightness::getPowerdRunning() const
@@ -72,6 +75,13 @@ QAbstractItemModel* MockBrightness::allDisplays()
 QAbstractItemModel* MockBrightness::changedDisplays()
 {
     auto ret = &m_changedDisplays;
+    QQmlEngine::setObjectOwnership(ret, QQmlEngine::CppOwnership);
+    return ret;
+}
+
+QAbstractItemModel* MockBrightness::connectedDisplays()
+{
+    auto ret = &m_connectedDisplays;
     QQmlEngine::setObjectOwnership(ret, QQmlEngine::CppOwnership);
     return ret;
 }

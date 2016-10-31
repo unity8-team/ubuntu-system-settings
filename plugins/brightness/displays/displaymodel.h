@@ -28,7 +28,7 @@ public:
       ConnectedRole,
       EnabledRole,
       ModeRole,
-      AvailableModesRole,
+      ModesRole,
       OrientationRole,
       ScaleRole,
       UncommittedChangesRole,
@@ -40,13 +40,13 @@ public:
     bool setData(const QModelIndex &index, const QVariant &value,
                  int role = Qt::EditRole);
     QHash<int,QByteArray> roleNames() const;
+    void addDisplay(const QSharedPointer<Display> &display);
 
 Q_SIGNALS:
     void countChanged();
 
 protected:
     void emitRowChanged(const int &row);
-    void addDisplay(const QSharedPointer<Display> &display);
 
 private:
     QList<QSharedPointer<Display> > m_displays;
@@ -64,7 +64,8 @@ public:
     DisplaysFilter() {}
     virtual ~DisplaysFilter() {}
 
-    void filterOnUncommittedChanges(const bool apply);
+    void filterOnUncommittedChanges(const bool uncommitted);
+    void filterOnConnected(const bool connected);
 
 Q_SIGNALS:
     void countChanged(int count);
@@ -76,6 +77,9 @@ protected:
 private:
     bool m_uncommittedChanges = false;
     bool m_uncommittedChangesEnabled = false;
+
+    bool m_connected = false;
+    bool m_connectedEnabled = false;
 
 };
 
