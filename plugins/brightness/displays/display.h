@@ -26,6 +26,14 @@ public:
             .arg(vertical_resolution)
             .arg(refresh_rate);
     }
+    bool operator==(const DisplayMode &other) const
+    {
+        return (
+            horizontal_resolution == other.horizontal_resolution
+            && vertical_resolution == other.vertical_resolution
+            && refresh_rate == other.refresh_rate
+        );
+    }
 };
 
 class Display : public QObject
@@ -39,7 +47,7 @@ class Display : public QObject
     Q_PROPERTY(bool connected READ connected NOTIFY connectedChanged)
     Q_PROPERTY(bool enabled READ enabled WRITE setEnabled
                NOTIFY enabledChanged)
-    Q_PROPERTY(DisplayMode mode READ mode WRITE setMode
+    Q_PROPERTY(uint mode READ mode WRITE setMode
                NOTIFY modeChanged)
     Q_PROPERTY(QStringList modes READ modes
                NOTIFY modesChanged) // TODO: Maybe constant?
@@ -80,7 +88,7 @@ public:
     bool mirrored() const;
     bool connected() const;
     bool enabled() const;
-    DisplayMode mode() const;
+    uint mode() const;
     QStringList modes() const;
     Orientation orientation() const;
     double scale() const;
@@ -90,7 +98,7 @@ public:
 
     void setMirrored(const bool &mirrored);
     void setEnabled(const bool &enabled);
-    void setMode(const DisplayMode &mode);
+    void setMode(const uint &mode);
     void setOrientation(const Orientation &orientation);
     void setScale(const double &scale);
 

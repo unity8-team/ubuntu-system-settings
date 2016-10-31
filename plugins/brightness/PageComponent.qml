@@ -228,7 +228,7 @@ ItemPage {
                             i18n.tr("Resolution:") :
                             /* TRANSLATORS: %1 is a display mode, e.g.
                             1200x720x24. */
-                            i18n.tr("Resolution: %1").arg(mode.toString())
+                            i18n.tr("Resolution: %1").arg(modes[mode])
                     }
 
                     OptionSelector {
@@ -245,8 +245,9 @@ ItemPage {
                         model: modes
                         onDelegateClicked: expanded = !currentlyExpanded
                         delegate: OptionSelectorDelegate {
-                            text: modelData
+                            text: modelData.toString()
                         }
+                        selectedIndex: mode
                     }
 
                     SettingsItemTitle {

@@ -40,10 +40,10 @@ QVariant DisplayModel::data(const QModelIndex &index, int role) const
             ret = display->enabled();
             break;
         case ModeRole:
-            ret = QVariant::fromValue(display->mode());
+            ret = display->mode();
             break;
         case ModesRole:
-            ret = QVariant::fromValue(display->modes());
+            ret = display->modes();
             break;
         case OrientationRole:
             ret = QVariant::fromValue(display->orientation());
@@ -74,7 +74,7 @@ bool DisplayModel::setData(const QModelIndex &index, const QVariant &value,
             display->setEnabled(value.toBool());
             break;
         case ModeRole:
-            // display->setMode(value.value<DisplayMode>());
+            display->setMode(value.toUInt());
             break;
         case OrientationRole:
             display->setOrientation(value.value<Display::Orientation>());

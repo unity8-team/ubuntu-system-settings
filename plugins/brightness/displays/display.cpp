@@ -80,9 +80,9 @@ bool Display::enabled() const
     return m_enabled;
 }
 
-DisplayMode Display::mode() const
+uint Display::mode() const
 {
-    return m_mode;
+    return m_modes.indexOf(m_mode);
 }
 
 QStringList Display::modes() const
@@ -143,9 +143,9 @@ void Display::setEnabled(const bool &enabled)
     }
 }
 
-void Display::setMode(const DisplayMode &mode)
+void Display::setMode(const uint &mode)
 {
-    m_mode = mode;
+    m_mode = m_modes.value(mode);
     Q_EMIT modeChanged();
 }
 

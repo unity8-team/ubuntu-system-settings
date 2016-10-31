@@ -34,7 +34,8 @@ public:
         Q_EMIT uncommittedChangesChanged();
     }
 
-    Q_INVOKABLE DisplayMode addMode(const uint &horizontal, const uint &vertical,
+    // Return at what index the new mode was placed.
+    Q_INVOKABLE uint addMode(const uint &horizontal, const uint &vertical,
                              const uint &refresh) // mock only
     {
         DisplayMode mode;
@@ -44,7 +45,7 @@ public:
 
         m_modes.append(mode);
         Q_EMIT modesChanged();
-        return mode;
+        return m_modes.indexOf(mode);
     }
 Q_SIGNALS:
     void nameChanged();

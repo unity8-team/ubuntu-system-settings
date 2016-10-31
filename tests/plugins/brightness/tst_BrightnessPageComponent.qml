@@ -99,11 +99,13 @@ Item {
             var display = displayModel.mockAddDisplay();
             display.setName("Foo")
             display.setConnected(true);
+            console.log(display.modes, display.modes.length)
+            display.addMode(1600, 1200, 60)
+            display.mode = 0;
+            console.log(display.modes.length)
             wait(3000)
-            var mode = display.addMode(1600, 1200, 60)
             display.addMode(1280, 1024, 60)
-
-            display.mode = mode
+            display.mode = 1;
 
             var repeater = findChild(instance, "displayConfigurationRepeater");
             //var panel = findChild(instance, "displayConfiguration_" + display.name);
