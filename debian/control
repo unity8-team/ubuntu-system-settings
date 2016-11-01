@@ -111,10 +111,10 @@ Depends: ${misc:Depends},
 Suggests: system-image-dbus (>= 3.1),
           aethercast,
           dbus-property-service,
-          repowerd,
           urfkill,
 Recommends: ubuntu-system-settings-online-accounts,
             ubuntu-touch-sounds,
+            repowerd,
 Conflicts: ubuntu-system-settings-example
 # ubuntu-push-client shipped the system settings push helper until 0.60:
 Breaks: ubuntu-push-client (<<0.61),
