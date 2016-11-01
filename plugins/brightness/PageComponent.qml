@@ -243,9 +243,13 @@ ItemPage {
                         visible: modes.length > 1
                         containerHeight: itemHeight * modes.length
                         model: modes
-                        onDelegateClicked: expanded = !currentlyExpanded
+                        onDelegateClicked: {
+                            expanded = !currentlyExpanded;
+                            mode = index;
+                            console.log('selected', index);
+                        }
                         delegate: OptionSelectorDelegate {
-                            text: modelData.toString()
+                            text: modelData
                         }
                         selectedIndex: mode
                     }
@@ -280,6 +284,7 @@ ItemPage {
 
         visible: brightnessPanel.allDisplays.count > 0
         height: units.gu(6)
+
         Button {
             id: applyButton
             objectName: "applyButton"

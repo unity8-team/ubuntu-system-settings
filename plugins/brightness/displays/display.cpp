@@ -7,11 +7,10 @@ Display::Display(QObject *parent)
     : QObject(parent)
 {
     initialize();
-    // TODO: this constructor shouldn't exist.
 }
 
 Display::Display(MirDisplayOutput &output, QObject *parent)
-    : QObject(parent)
+    : Display(parent)
 {
     m_type = DisplayPlugin::Helpers::mirTypeToString(output.type);
     setConnected(output.connected);
@@ -19,21 +18,20 @@ Display::Display(MirDisplayOutput &output, QObject *parent)
 
     auto modes = QList<DisplayMode>();
     for(uint j = 0; j < output.num_modes; j++) {
-        MirDisplayMode mode = output.modes[j];
-        // modes.append(QString("%1x%2x%3").arg(mode.horizontal_resolution)
-        //                                 .arg(mode.vertical_resolution)
-        //                                 .arg(mode.refresh_rate));
-        // if (output.current_mode == j) {
-        //     setMode()
-        // }
+        DisplayMode mode(output.modes[j]);
+        modes.append(mode);
+
+        if (j == output.current_mode)
+            m_mode = mode;
     }
     m_modes = modes;
+
     m_physicalWidthMm = output.physical_width_mm;
     m_physicalHeightMm = output.physical_height_mm;
     m_name = QString("%1").arg(DisplayPlugin::Helpers::mirTypeToString(output.type));
-
-    initialize();
+    storeConfiguration();
 }
+
 
 void Display::initialize()
 {
@@ -53,6 +51,47 @@ void Display::initialize()
                      this, SLOT(changedSlot()));
     QObject::connect(this, SIGNAL(uncommittedChangesChanged()),
                      this, SLOT(changedSlot()));
+}
+
+void Display::storeConfiguration()
+{
+    m_storedConfig["name"] = QVariant(m_name);
+    m_storedConfig["type"] = QVariant(m_type);
+    m_storedConfig["mirrored"] = QVariant(m_mirrored);
+    m_storedConfig["enabled"] = QVariant(m_enabled);
+    m_storedConfig["mode"] = QVariant(mode());
+    m_storedConfig["orientation"] = QVariant::fromValue(m_orientation);
+    m_storedConfig["scale"] = QVariant(m_scale);
+}
+
+bool Display::hasChanged() const
+{
+    // qWarning()
+    //     << m_storedConfig["name"].toString() << m_name
+    //     << m_storedConfig["type"].toString() << m_type
+    //     << m_storedConfig["mirrored"].toBool() << m_mirrored
+    //     << m_storedConfig["enabled"].toBool() << m_enabled
+    //     << m_storedConfig["mode"].toUInt() << mode()
+    //     << (uint) m_storedConfig["orientation"].value<Orientation>() << (uint) m_orientation
+    //     << m_storedConfig["scale"].toUInt() << m_scale
+    //     << "truth values"
+    //     << (m_storedConfig["name"].toString() != m_name)
+    //     << (m_storedConfig["type"].toString() != m_type)
+    //     << (m_storedConfig["mirrored"].toBool() != m_mirrored)
+    //     << (m_storedConfig["enabled"].toBool() != m_enabled)
+    //     << (m_storedConfig["mode"].toUInt() != mode())
+    //     << (m_storedConfig["orientation"].value<Orientation>() != m_orientation)
+    //     << (m_storedConfig["scale"].toUInt() != m_scale);
+
+    return (
+        m_storedConfig["name"].toString() != m_name
+        || m_storedConfig["type"].toString() != m_type
+        || m_storedConfig["mirrored"].toBool() != m_mirrored
+        || m_storedConfig["enabled"].toBool() != m_enabled
+        || m_storedConfig["mode"].toUInt() != mode()
+        || m_storedConfig["orientation"].value<Orientation>() != m_orientation
+        || m_storedConfig["scale"].toUInt() != m_scale
+    );
 }
 
 QString Display::name() const
@@ -92,6 +131,11 @@ QStringList Display::modes() const
         modes.append(mode.toString());
     }
     return modes;
+}
+
+QList<DisplayMode> Display::availableModes() const
+{
+    return m_modes;
 }
 
 Display::Orientation Display::orientation() const
@@ -167,6 +211,7 @@ void Display::setScale(const double &scale)
 
 void Display::setUncommitedChanges(const bool uncommittedChanges)
 {
+    qWarning() << "setUncommitedChanges" << uncommittedChanges;
     if (m_uncommittedChanges != uncommittedChanges) {
         m_uncommittedChanges = uncommittedChanges;
         Q_EMIT uncommittedChangesChanged();
@@ -175,6 +220,6 @@ void Display::setUncommitedChanges(const bool uncommittedChanges)
 
 void Display::changedSlot()
 {
-    qWarning() << "changedSlot";
+    setUncommitedChanges(hasChanged());
     Q_EMIT displayChanged(this);
 }

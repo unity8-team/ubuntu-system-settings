@@ -158,6 +158,14 @@ void DisplayModel::displayChangedSlot(const Display *display)
         emitRowChanged(row);
 }
 
+DisplaysFilter::DisplaysFilter()
+{
+    connect(this, SIGNAL(rowsInserted(const QModelIndex&, int, int)),
+            this, SLOT(rowsChanged(const QModelIndex&, int, int)));
+    connect(this, SIGNAL(rowsRemoved(const QModelIndex&, int, int)),
+            this, SLOT(rowsChanged(const QModelIndex&, int, int)));
+}
+
 bool DisplaysFilter::lessThan(const QModelIndex &left,
                               const QModelIndex &right) const
 {
@@ -201,4 +209,12 @@ bool DisplaysFilter::filterAcceptsRow(int sourceRow,
     }
 
     return accepts;
+}
+
+void DisplaysFilter::rowsChanged(const QModelIndex &parent, int first, int last)
+{
+    Q_UNUSED(parent)
+    Q_UNUSED(first)
+    Q_UNUSED(last)
+    Q_EMIT countChanged();
 }

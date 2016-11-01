@@ -103,14 +103,13 @@ Item {
             display.addMode(1600, 1200, 60)
             display.mode = 0;
             console.log(display.modes.length)
-            wait(3000)
             display.addMode(1280, 1024, 60)
-            display.mode = 1;
-
+            // display.mode = 1;
+            display.save()
             var repeater = findChild(instance, "displayConfigurationRepeater");
             //var panel = findChild(instance, "displayConfiguration_" + display.name);
             //verify(panel.visible);
-            wait(3000)
+            wait(6000)
             compare(repeater.count, 1);
         }
     }

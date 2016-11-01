@@ -61,14 +61,14 @@ class DisplaysFilter : public QSortFilterProxyModel
     Q_PROPERTY(int count READ rowCount NOTIFY countChanged)
 
 public:
-    DisplaysFilter() {}
+    DisplaysFilter();
     virtual ~DisplaysFilter() {}
 
     void filterOnUncommittedChanges(const bool uncommitted);
     void filterOnConnected(const bool connected);
 
 Q_SIGNALS:
-    void countChanged(int count);
+    void countChanged();
 
 protected:
     virtual bool filterAcceptsRow(int, const QModelIndex&) const;
@@ -81,6 +81,8 @@ private:
     bool m_connected = false;
     bool m_connectedEnabled = false;
 
+private slots:
+    void rowsChanged(const QModelIndex &parent, int first, int last);
 };
 
 #endif // DISPLAY_MODEL_H

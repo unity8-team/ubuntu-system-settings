@@ -45,7 +45,14 @@ public:
 
         m_modes.append(mode);
         Q_EMIT modesChanged();
+        storeConfiguration();
         return m_modes.indexOf(mode);
+    }
+
+    Q_INVOKABLE void save()
+    {
+        storeConfiguration();
+        setUncommitedChanges(false);
     }
 Q_SIGNALS:
     void nameChanged();

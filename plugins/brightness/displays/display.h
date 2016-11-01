@@ -9,10 +9,19 @@
 #include <QObject>
 #include <QString>
 #include <QStringList>
+#include <QVariantMap>
 
-struct DisplayMode {
+class DisplayMode
+{
     Q_GADGET
 public:
+    DisplayMode() {}
+    explicit DisplayMode(const MirDisplayMode &mirMode)
+        : vertical_resolution(mirMode.vertical_resolution)
+        , horizontal_resolution(mirMode.horizontal_resolution)
+        , refresh_rate(mirMode.refresh_rate)
+    {}
+    // ~DisplayMode() {};
     uint vertical_resolution = 0;
     uint horizontal_resolution = 0;
     double refresh_rate = 0.0;
@@ -89,6 +98,7 @@ public:
     bool connected() const;
     bool enabled() const;
     uint mode() const;
+    QList<DisplayMode> availableModes() const;
     QStringList modes() const;
     Orientation orientation() const;
     double scale() const;
@@ -105,6 +115,7 @@ public:
 protected:
     void setUncommitedChanges(const bool uncommittedChanges);
     void setConnected(const bool &connected);
+    void storeConfiguration();
 
     uint m_id = 0;
     QString m_name = QString::null;
@@ -125,6 +136,9 @@ protected slots:
 
 private:
     void initialize();
+    bool hasChanged() const;
+
+    QVariantMap m_storedConfig;
 };
 
 Q_DECLARE_METATYPE(Display*)
