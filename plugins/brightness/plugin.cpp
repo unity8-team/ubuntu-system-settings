@@ -43,8 +43,8 @@ void BackendPlugin::registerTypes(const char *uri)
     qmlRegisterType<Device>(uri, 1, 0, "AethercastDevice");
     qmlRegisterType<Displays>(uri, 1, 0, "AethercastDisplays");
 
-    qmlRegisterType<DisplayModel>(uri, 1, 0, "DisplayModel");
-    qmlRegisterUncreatableType<Display>(uri, 1, 0, "Display", "Use UbuntuBrightnessPanel.");
+    qmlRegisterType<DisplayPlugin::DisplayModel>(uri, 1, 0, "DisplayModel");
+    qmlRegisterUncreatableType<DisplayPlugin::Display>(uri, 1, 0, "Display", "Use UbuntuBrightnessPanel.");
 }
 
 void BackendPlugin::initializeEngine(QQmlEngine *engine, const char *uri)

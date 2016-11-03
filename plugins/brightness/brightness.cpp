@@ -61,7 +61,8 @@ const QDBusArgument &operator>>(const QDBusArgument &argument,
     return argument;
 }
 
-Brightness::Brightness(QDBusConnection dbus, MirDisplays *mirDisplays,
+Brightness::Brightness(QDBusConnection dbus,
+                       DisplayPlugin::MirDisplays *mirDisplays,
                        QObject *parent)
     : QObject(parent)
     , m_systemBusConnection(dbus)
@@ -106,7 +107,8 @@ Brightness::Brightness(QDBusConnection dbus, MirDisplays *mirDisplays,
 }
 
 Brightness::Brightness(QObject *parent) :
-    Brightness(QDBusConnection::systemBus(), new MirDisplaysImpl(), parent)
+    Brightness(QDBusConnection::systemBus(),
+               new DisplayPlugin::MirDisplaysImpl(), parent)
 {
 }
 
@@ -184,7 +186,9 @@ void Brightness::updateMirDisplays()
 
     for(uint i = 0; i < conf->num_outputs; ++i) {
         MirDisplayOutput output = conf->outputs[i];
-        auto display = QSharedPointer<Display>(new Display(output));
+        auto display = QSharedPointer<DisplayPlugin::Display>(
+            new DisplayPlugin::Display(output)
+        );
         m_displays.addDisplay(display);
     }
 }

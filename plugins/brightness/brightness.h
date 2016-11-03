@@ -53,7 +53,7 @@ class Brightness : public QObject
 public:
     explicit Brightness(QObject *parent = 0);
     explicit Brightness(QDBusConnection dbus,
-                        MirDisplays *mirDisplays, QObject *parent = 0);
+                        DisplayPlugin::MirDisplays *mirDisplays, QObject *parent = 0);
     bool getPowerdRunning() const;
     bool getAutoBrightnessAvailable() const;
     bool getWidiSupported() const;
@@ -66,14 +66,14 @@ private:
     void getMirDisplays();
 
     QDBusConnection m_systemBusConnection;
-    MirDisplays *m_mirDisplays;
+    DisplayPlugin::MirDisplays *m_mirDisplays;
     QDBusInterface m_powerdIface;
     QString m_objectPath;
     bool m_powerdRunning;
     bool m_autoBrightnessAvailable;
-    DisplayModel m_displays;
-    DisplaysFilter m_changedDisplays;
-    DisplaysFilter m_connectedDisplays;
+    DisplayPlugin::DisplayModel m_displays;
+    DisplayPlugin::DisplaysFilter m_changedDisplays;
+    DisplayPlugin::DisplaysFilter m_connectedDisplays;
 
 private slots:
     void updateMirDisplays();
