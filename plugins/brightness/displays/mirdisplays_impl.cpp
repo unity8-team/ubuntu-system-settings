@@ -67,7 +67,7 @@ bool MirDisplaysImpl::applyConfiguration(MirDisplayConfiguration *conf) {
 }
 
 void MirDisplaysImpl::connect() {
-    qWarning() << "Connecting...";
+    qWarning() << "Connecting to a Mir server...";
     m_mir_connection = static_cast<MirConnection*>(
             QGuiApplication::platformNativeInterface()
                 ->nativeResourceForIntegration("mirConnection")

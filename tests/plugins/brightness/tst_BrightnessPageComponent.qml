@@ -87,31 +87,44 @@ Item {
             compare(entry.value, i18n.tr("Not connected"));
         }
 
-        // Test that everything is hidden if only aethercast devices (or none)
-        function test_no_displays() {
+        function test_no_mir_displays() {
             var repeater = findChild(instance, "displayConfigurationRepeater");
             compare(repeater.count, 0);
         }
 
-        // Test that there's a UI when we have some display available.
-        function test_one_display() {
+        function test_one_mir_display() {
             var displayModel = get_panel_plugin().displayModel();
             var display = displayModel.mockAddDisplay();
-            display.setName("Foo")
-            display.setEnabled(true);
             display.setConnected(true);
-            console.log(display.modes, display.modes.length)
-            display.addMode(1600, 1200, 60)
-            display.mode = 0;
-            console.log(display.modes.length)
-            display.addMode(1280, 1024, 60)
-            // display.mode = 1;
-            display.save()
             var repeater = findChild(instance, "displayConfigurationRepeater");
-            //var panel = findChild(instance, "displayConfiguration_" + display.name);
-            //verify(panel.visible);
-            wait(6000)
             compare(repeater.count, 1);
+        }
+    }
+
+
+    UbuntuTestCase {
+        name: "BrightnessPageComponent for one Mir display"
+        when: windowShown
+
+        property var instance: null
+
+        function init() {
+            instance = pageComponent.createObject(testRoot, {});
+            var displayModel = get_panel_plugin().displayModel();
+            var display = displayModel.mockAddDisplay();
+            display.setConnected(true);
+        }
+
+        function cleanup() {
+            instance.destroy();
+        }
+
+        function get_panel_plugin() {
+            return findInvisibleChild(instance, "brightnessPanel");
+        }
+
+        function test_enabled_switch() {
+            wait(5000);
         }
     }
 }
