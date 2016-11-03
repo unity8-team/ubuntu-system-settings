@@ -1,4 +1,4 @@
-#include "mirdisplays_impl.h"
+#include "mirclient_impl.h"
 
 #include <QDebug>
 #include <QQmlEngine>
@@ -8,14 +8,13 @@
 namespace DisplayPlugin
 {
 static void mir_display_change_callback(MirConnection *connection, void *context) {
-    qWarning() << "mir_display_change_callback" << context;
     MirDisplayConfiguration *conf = mir_connection_create_display_config(
             connection);
-    static_cast<MirDisplaysImpl*>(context)->setConfiguration(conf);
+    static_cast<MirClientImpl*>(context)->setConfiguration(conf);
 }
 
-MirDisplaysImpl::MirDisplaysImpl(QObject *parent)
-        : MirDisplays(parent)
+MirClientImpl::MirClientImpl(QObject *parent)
+        : MirClient(parent)
         , m_mir_connection(nullptr)
         , m_configuration(nullptr)
 {
@@ -27,27 +26,27 @@ MirDisplaysImpl::MirDisplaysImpl(QObject *parent)
     }
 }
 
-MirDisplaysImpl::~MirDisplaysImpl() {
+MirClientImpl::~MirClientImpl() {
     mir_display_config_destroy(m_configuration);
     mir_connection_release(m_mir_connection);
 }
 
-MirDisplayConfiguration* MirDisplaysImpl::getConfiguration() const {
+MirDisplayConfiguration* MirClientImpl::getConfiguration() const {
     return m_configuration;
 }
 
-bool MirDisplaysImpl::isConnected() {
+bool MirClientImpl::isConnected() {
     return mir_connection_is_valid(m_mir_connection);
 }
 
-void MirDisplaysImpl::setConfiguration(MirDisplayConfiguration *conf) {
+void MirClientImpl::setConfiguration(MirDisplayConfiguration *conf) {
     if (m_configuration != conf) {
         m_configuration = conf;
         Q_EMIT configurationChanged();
     }
 }
 
-bool MirDisplaysImpl::applyConfiguration(MirDisplayConfiguration *conf) {
+bool MirClientImpl::applyConfiguration(MirDisplayConfiguration *conf) {
     MirWaitHandle* handle = mir_connection_set_base_display_config(
         m_mir_connection, conf
     );
@@ -67,7 +66,7 @@ bool MirDisplaysImpl::applyConfiguration(MirDisplayConfiguration *conf) {
     return error.isEmpty();
 }
 
-void MirDisplaysImpl::connect() {
+void MirClientImpl::connect() {
     qWarning() << "Connecting to a Mir server...";
     m_mir_connection = static_cast<MirConnection*>(
             QGuiApplication::platformNativeInterface()

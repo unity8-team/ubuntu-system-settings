@@ -22,7 +22,7 @@
 #define BRIGHTNESS_H
 
 #include "displays/displaymodel.h"
-#include "displays/mirdisplays.h"
+#include "displays/mirclient.h"
 
 #include <QAbstractItemModel>
 #include <QDBusInterface>
@@ -53,7 +53,7 @@ class Brightness : public QObject
 public:
     explicit Brightness(QObject *parent = 0);
     explicit Brightness(QDBusConnection dbus,
-                        DisplayPlugin::MirDisplays *mirDisplays, QObject *parent = 0);
+                        DisplayPlugin::MirClient *mirClient, QObject *parent = 0);
     bool getPowerdRunning() const;
     bool getAutoBrightnessAvailable() const;
     bool getWidiSupported() const;
@@ -63,10 +63,8 @@ public:
     Q_INVOKABLE void applyDisplayConfiguration();
 
 private:
-    void getMirDisplays();
-
     QDBusConnection m_systemBusConnection;
-    DisplayPlugin::MirDisplays *m_mirDisplays;
+    DisplayPlugin::MirClient *m_mirClient;
     QDBusInterface m_powerdIface;
     QString m_objectPath;
     bool m_powerdRunning;
@@ -76,7 +74,7 @@ private:
     DisplayPlugin::DisplaysFilter m_connectedDisplays;
 
 private slots:
-    void updateMirDisplays();
+    void refreshMirDisplays();
 };
 
 #endif // BRIGHTNESS_H

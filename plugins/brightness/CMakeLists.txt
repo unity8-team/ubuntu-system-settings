@@ -11,13 +11,13 @@ add_library(uss-displays SHARED
     displays/display.h
     displays/displaymodel.h
 
-    displays/mirdisplays.h
-    displays/mirdisplays_impl.h
+    displays/mirclient.h
+    displays/mirclient_impl.h
 
     displays/helpers.cpp
     displays/display.cpp
     displays/displaymodel.cpp
-    displays/mirdisplays_impl.cpp
+    displays/mirclient_impl.cpp
     ../../src/i18n.cpp
 )
 qt5_use_modules(uss-displays Quick)

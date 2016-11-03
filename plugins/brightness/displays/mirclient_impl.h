@@ -1,16 +1,16 @@
-#ifndef MIRDISPLAYS_IMPL_H
-#define MIRDISPLAYS_IMPL_H
+#ifndef MIRCLIENT_IMPL_H
+#define MIRCLIENT_IMPL_H
 
-#include "mirdisplays.h"
+#include "mirclient.h"
 
 namespace DisplayPlugin
 {
-class MirDisplaysImpl : public MirDisplays
+class MirClientImpl : public MirClient
 {
     Q_OBJECT
 public:
-    explicit MirDisplaysImpl(QObject *parent = 0);
-    ~MirDisplaysImpl();
+    explicit MirClientImpl(QObject *parent = 0);
+    ~MirClientImpl();
     virtual MirDisplayConfiguration* getConfiguration() const;
     virtual void setConfiguration(MirDisplayConfiguration *conf) override;
     virtual bool applyConfiguration(MirDisplayConfiguration *conf) override;
@@ -23,4 +23,4 @@ private:
 };
 } // DisplayPlugin
 
-#endif // MIRDISPLAYS_IMPL_H
+#endif // MIRCLIENT_IMPL_H
