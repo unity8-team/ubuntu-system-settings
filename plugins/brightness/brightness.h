@@ -60,10 +60,10 @@ public:
     QAbstractItemModel* allDisplays();
     QAbstractItemModel* changedDisplays();
     QAbstractItemModel* connectedDisplays();
+    Q_INVOKABLE void applyDisplayConfiguration();
 
 private:
     void getMirDisplays();
-    void updateMirDisplays();
 
     QDBusConnection m_systemBusConnection;
     MirDisplays *m_mirDisplays;
@@ -74,6 +74,9 @@ private:
     DisplayModel m_displays;
     DisplaysFilter m_changedDisplays;
     DisplaysFilter m_connectedDisplays;
+
+private slots:
+    void updateMirDisplays();
 };
 
 #endif // BRIGHTNESS_H

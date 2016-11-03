@@ -41,6 +41,8 @@ public:
                  int role = Qt::EditRole);
     QHash<int,QByteArray> roleNames() const;
     void addDisplay(const QSharedPointer<Display> &display);
+    QSharedPointer<Display> getById(const uint &id);
+    int findRowFromId(const uint &id);
 
 Q_SIGNALS:
     void countChanged();

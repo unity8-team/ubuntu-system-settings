@@ -31,6 +31,7 @@
 #include <QDebug>
 #include <QQmlEngine>
 #include <QSharedPointer>
+#include <QScopedPointer>
 
 // Returned data from getBrightnessParams
 struct BrightnessParams {
@@ -81,8 +82,8 @@ Brightness::Brightness(QDBusConnection dbus, MirDisplays *mirDisplays,
 
     if (m_mirDisplays->isConnected()) {
         updateMirDisplays();
-    } else {
-        qWarning() << "brightness plugin saw mir displays disconnected";
+        connect(m_mirDisplays, SIGNAL(configurationChanged()),
+                this, SLOT(updateMirDisplays()));
     }
 
     qRegisterMetaType<BrightnessParams>();
@@ -147,28 +148,43 @@ QAbstractItemModel* Brightness::connectedDisplays()
     return ret;
 }
 
+void Brightness::applyDisplayConfiguration()
+{
+    auto conf = m_mirDisplays->getConfiguration();
+
+    if (!conf) {
+        qWarning() << __PRETTY_FUNCTION__ << "config invalid";
+        return;
+    }
+
+    for(uint i = 0; i < conf->num_outputs; ++i) {
+        MirDisplayOutput output = conf->outputs[i];
+        auto display = m_displays.getById(output.output_id);
+        if (display) {
+            output.current_mode = display->mode();
+            output.used = display->enabled();
+            output.orientation =
+                DisplayPlugin::Helpers::orientationToMirOrientation(
+                    display->orientation()
+                );
+        }
+        conf->outputs[i] = output;
+    }
+    m_mirDisplays->applyConfiguration(conf);
+}
+
 void Brightness::updateMirDisplays()
 {
-    qWarning() << "updateMirDisplays";
+    auto conf = m_mirDisplays->getConfiguration();
 
-    MirDisplayConfiguration *conf = m_mirDisplays->getConfiguration();
-    qWarning() << "number of cards" << conf->num_cards;
-    qWarning() << "number of outputs" << conf->num_outputs;
+    if (!conf) {
+        qWarning() << __PRETTY_FUNCTION__ << "config invalid";
+        return;
+    }
 
     for(uint i = 0; i < conf->num_outputs; ++i) {
         MirDisplayOutput output = conf->outputs[i];
         auto display = QSharedPointer<Display>(new Display(output));
         m_displays.addDisplay(display);
-        // QSharedPointer<Display> display = m_displaysModel.getDisplay(output.output_id);
-
-        // if (display) {
-        //     qWarning() << __PRETTY_FUNCTION__ << "Updating existing display" << i;
-        //     display->setDisplayOutput(&output);
-        // } else {
-        //     qWarning() << __PRETTY_FUNCTION__ << "Adding new display" << i;
-        //     QSharedPointer<Display> display = QSharedPointer<Display>::create(&output);
-        //     m_displaysModel.addDisplay(display);
-        // }
     }
-
 }

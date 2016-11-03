@@ -101,5 +101,32 @@ QString Helpers::mirTypeToString(const MirDisplayOutputType &type)
     return ret;
 }
 
+Display::PowerMode Helpers::mirPowerModeToPowerMode(const MirPowerMode &mode)
+{
+    switch(mode) {
+    case mir_power_mode_on:
+        return Display::PowerMode::OnMode;
+    case mir_power_mode_standby:
+        return Display::PowerMode::StandbyMode;
+    case mir_power_mode_suspend:
+        return Display::PowerMode::SuspendMode;
+    case mir_power_mode_off:
+        return Display::PowerMode::OffMode;
+    }
+}
+
+MirPowerMode Helpers::powerModeToMirPowerMode(const Display::PowerMode &mode)
+{
+    switch(mode) {
+    case Display::PowerMode::OnMode:
+        return mir_power_mode_on;
+    case Display::PowerMode::StandbyMode:
+        return mir_power_mode_standby;
+    case Display::PowerMode::SuspendMode:
+        return mir_power_mode_suspend;
+    case Display::PowerMode::OffMode:
+        return mir_power_mode_off;
+    }
+}
 
 } // DisplayPlugin

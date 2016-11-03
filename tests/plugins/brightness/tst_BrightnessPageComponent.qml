@@ -98,6 +98,7 @@ Item {
             var displayModel = get_panel_plugin().displayModel();
             var display = displayModel.mockAddDisplay();
             display.setName("Foo")
+            display.setEnabled(true);
             display.setConnected(true);
             console.log(display.modes, display.modes.length)
             display.addMode(1600, 1200, 60)

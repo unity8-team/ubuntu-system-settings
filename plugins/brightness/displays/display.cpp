@@ -25,10 +25,16 @@ Display::Display(MirDisplayOutput &output, QObject *parent)
             m_mode = mode;
     }
     m_modes = modes;
+    m_orientation = DisplayPlugin::Helpers::mirOrientationToOritentation(output.orientation);
+    m_powerMode = DisplayPlugin::Helpers::mirPowerModeToPowerMode(output.power_mode);
+    m_id = output.output_id;
 
     m_physicalWidthMm = output.physical_width_mm;
     m_physicalHeightMm = output.physical_height_mm;
     m_name = QString("%1").arg(DisplayPlugin::Helpers::mirTypeToString(output.type));
+    qWarning() << m_name << "current_mode" << mode();
+
+    changedSlot();
     storeConfiguration();
 }
 
@@ -94,6 +100,11 @@ bool Display::hasChanged() const
     );
 }
 
+uint Display::id() const
+{
+    return m_id;
+}
+
 QString Display::name() const
 {
     return m_name;
@@ -121,7 +132,7 @@ bool Display::enabled() const
 
 uint Display::mode() const
 {
-    return m_modes.indexOf(m_mode);
+    return m_modes.empty() ? 0 : m_modes.indexOf(m_mode);
 }
 
 QStringList Display::modes() const
@@ -211,7 +222,6 @@ void Display::setScale(const double &scale)
 
 void Display::setUncommitedChanges(const bool uncommittedChanges)
 {
-    qWarning() << "setUncommitedChanges" << uncommittedChanges;
     if (m_uncommittedChanges != uncommittedChanges) {
         m_uncommittedChanges = uncommittedChanges;
         Q_EMIT uncommittedChangesChanged();

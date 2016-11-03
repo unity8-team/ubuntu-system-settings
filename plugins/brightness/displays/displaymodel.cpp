@@ -46,7 +46,7 @@ QVariant DisplayModel::data(const QModelIndex &index, int role) const
             ret = display->modes();
             break;
         case OrientationRole:
-            ret = QVariant::fromValue(display->orientation());
+            ret = (uint) display->orientation();
             break;
         case ScaleRole:
             ret = display->scale();
@@ -77,7 +77,7 @@ bool DisplayModel::setData(const QModelIndex &index, const QVariant &value,
             display->setMode(value.toUInt());
             break;
         case OrientationRole:
-            display->setOrientation(value.value<Display::Orientation>());
+            display->setOrientation((Display::Orientation) value.toUInt());
             break;
         case ScaleRole:
             display->setScale(value.toInt());
@@ -116,8 +116,7 @@ QHash<int,QByteArray> DisplayModel::roleNames() const
 
 void DisplayModel::addDisplay(const QSharedPointer<Display> &display)
 {
-    // TODO: find display
-    int row = -1;
+    int row = findRowFromId(display->id());
 
     if (row >= 0) { // update existing display
         m_displays[row] = display;
@@ -156,6 +155,24 @@ void DisplayModel::displayChangedSlot(const Display *display)
 
     if (row != -1)
         emitRowChanged(row);
+}
+
+QSharedPointer<Display> DisplayModel::getById(const uint &id)
+{
+    Q_FOREACH(auto display, m_displays) {
+        if (display->id() == id)
+            return display;
+    }
+    return QSharedPointer<Display>(nullptr);
+}
+
+int DisplayModel::findRowFromId(const uint &id)
+{
+    for (int i = 0; i < m_displays.size(); i++) {
+        if (m_displays[i]->id() == id)
+            return i;
+    }
+    return -1;
 }
 
 DisplaysFilter::DisplaysFilter()

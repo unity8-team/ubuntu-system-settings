@@ -89,7 +89,10 @@ public:
         LandscapeInvertedModeOrientation,
         PortraitInvertedModeOrientation
     };
-    Q_ENUMS(Orientation)
+    enum class PowerMode : uint {
+        OnMode, StandbyMode, SuspendMode, OffMode
+    };
+    Q_ENUMS(Orientation PowerMode)
 
     uint id() const;
     QString name() const;
@@ -130,6 +133,7 @@ protected:
     bool m_uncommittedChanges = false;
     uint m_physicalWidthMm = 0;
     uint m_physicalHeightMm = 0;
+    PowerMode m_powerMode = PowerMode::OffMode;
 
 protected slots:
     void changedSlot();

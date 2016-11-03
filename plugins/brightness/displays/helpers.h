@@ -14,6 +14,8 @@ public:
     static MirOrientation orientationToMirOrientation(const Display::Orientation &orientation);
     static QString mirTypeToString(const MirDisplayOutputType &type);
     static QString mirModeToString(const MirDisplayOutputType &type);
+    static Display::PowerMode mirPowerModeToPowerMode(const MirPowerMode &mode);
+    static MirPowerMode powerModeToMirPowerMode(const Display::PowerMode &mode);
 
     // Return a sorted list of modes in horizontalxverticalxrate format.
     // static QString mirModesToStringList(const MirDisplayOutputType &type);

@@ -189,13 +189,22 @@ ItemPage {
 
                     Label {
                         visible: brightnessPanel.allDisplays.count > 1
+                        text: displayName
+
                         anchors {
                             left: parent.left
                             right: parent.right
                             margins: units.gu(2)
                         }
 
-                        text: displayName
+                        Switch {
+                            anchors {
+                                right: parent.right
+                                verticalCenter: parent.verticalCenter
+                            }
+                            checked: model.enabled
+                            onCheckedChanged: model.enabled = checked
+                        }
                     }
 
                     SettingsItemTitle {
@@ -204,6 +213,7 @@ ItemPage {
 
                     OptionSelector {
                         id: rotationSelector
+
                         objectName: "rotationSelector"
                         property bool _expanded: false
                         anchors {
@@ -220,7 +230,9 @@ ItemPage {
                         ]
                         onDelegateClicked: {
                             expanded = !currentlyExpanded;
+                            orientation = index;
                         }
+                        selectedIndex: orientation
                     }
 
                     SettingsItemTitle {
@@ -246,7 +258,6 @@ ItemPage {
                         onDelegateClicked: {
                             expanded = !currentlyExpanded;
                             mode = index;
-                            console.log('selected', index);
                         }
                         delegate: OptionSelectorDelegate {
                             text: modelData

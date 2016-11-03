@@ -22,6 +22,12 @@ public:
         Q_EMIT typeChanged();
     }
 
+    Q_INVOKABLE void setEnabled(const bool &enabled) // mock only
+    {
+        m_enabled = enabled;
+        Q_EMIT enabledChanged();
+    }
+
     Q_INVOKABLE void setConnected(const bool &connected) // mock only
     {
         m_connected = connected;
@@ -45,10 +51,10 @@ public:
 
         m_modes.append(mode);
         Q_EMIT modesChanged();
-        storeConfiguration();
         return m_modes.indexOf(mode);
     }
 
+    // Mark a display as unchanged, and save the current config.
     Q_INVOKABLE void save()
     {
         storeConfiguration();

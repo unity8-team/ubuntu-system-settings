@@ -12,7 +12,7 @@ public:
     virtual ~MirDisplays();
     virtual MirDisplayConfiguration * getConfiguration() const = 0;
     virtual void setConfiguration(MirDisplayConfiguration * conf) = 0;
-    virtual void applyConfiguration(MirDisplayConfiguration * conf) = 0;
+    virtual bool applyConfiguration(MirDisplayConfiguration * conf) = 0;
     virtual bool isConnected() = 0;
 
 Q_SIGNALS:

@@ -11,7 +11,7 @@ public:
     ~MirDisplaysImpl();
     virtual MirDisplayConfiguration* getConfiguration() const;
     virtual void setConfiguration(MirDisplayConfiguration *conf) override;
-    virtual void applyConfiguration(MirDisplayConfiguration *conf) override;
+    virtual bool applyConfiguration(MirDisplayConfiguration *conf) override;
     virtual bool isConnected() override;
 
 private:
