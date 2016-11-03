@@ -6,7 +6,8 @@
 #include <QObject>
 #include <QDebug>
 
-struct MockDisplay : public Display
+
+struct MockDisplay : public DisplayPlugin::Display
 {
     Q_OBJECT
 public:
@@ -44,7 +45,7 @@ public:
     Q_INVOKABLE uint addMode(const uint &horizontal, const uint &vertical,
                              const uint &refresh) // mock only
     {
-        DisplayMode mode;
+        DisplayPlugin::DisplayMode mode;
         mode.vertical_resolution = vertical;
         mode.horizontal_resolution = horizontal;
         mode.refresh_rate = refresh;

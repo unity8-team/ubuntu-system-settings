@@ -7,12 +7,12 @@
 #include <QObject>
 #include <QQmlEngine>
 
-class MockDisplayModel : public DisplayModel
+class MockDisplayModel : public DisplayPlugin::DisplayModel
 {
     Q_OBJECT
 public:
-    MockDisplayModel(QObject *parent = 0) : DisplayModel(parent) {
-    };
+    MockDisplayModel(QObject *parent = 0)
+        : DisplayPlugin::DisplayModel(parent) {};
     ~MockDisplayModel() {};
     Q_INVOKABLE MockDisplay* mockAddDisplay() // mock only
     {

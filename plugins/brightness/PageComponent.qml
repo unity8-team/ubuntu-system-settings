@@ -188,7 +188,6 @@ ItemPage {
                     }
 
                     Label {
-                        visible: brightnessPanel.allDisplays.count > 1
                         text: displayName
 
                         anchors {
@@ -198,6 +197,7 @@ ItemPage {
                         }
 
                         Switch {
+                            objectName: "enabledSwitch"
                             anchors {
                                 right: parent.right
                                 verticalCenter: parent.verticalCenter
@@ -213,7 +213,6 @@ ItemPage {
 
                     OptionSelector {
                         id: rotationSelector
-
                         objectName: "rotationSelector"
                         property bool _expanded: false
                         anchors {
@@ -223,6 +222,8 @@ ItemPage {
                         }
                         containerHeight: itemHeight * 4
                         model: [
+                            /* TRANSLATORS: None means no rotation, or
+                            0 degrees. */
                             i18n.tr("None"),
                             i18n.tr("90° clockwise"),
                             i18n.tr("180°"),
@@ -236,11 +237,13 @@ ItemPage {
                     }
 
                     SettingsItemTitle {
+                        objectName: "resolutionLabel"
                         text: modes.length > 1 ?
                             i18n.tr("Resolution:") :
-                            /* TRANSLATORS: %1 is a display mode, e.g.
-                            1200x720x24. */
-                            i18n.tr("Resolution: %1").arg(modes[mode])
+                            /* TRANSLATORS: %1 is a display resolution, e.g.
+                            1200x720x24. Unknown refers to an unknown
+                            resolution (in case of an error). */
+                            i18n.tr("Resolution: %1").arg(modes[mode] || i18n.tr("Unknown"))
                     }
 
                     OptionSelector {

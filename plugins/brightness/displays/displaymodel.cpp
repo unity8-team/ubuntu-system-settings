@@ -2,6 +2,8 @@
 
 #include <QDebug>
 
+namespace DisplayPlugin
+{
 DisplayModel::DisplayModel(QObject *parent)
 {
 }
@@ -235,3 +237,4 @@ void DisplaysFilter::rowsChanged(const QModelIndex &parent, int first, int last)
     Q_UNUSED(last)
     Q_EMIT countChanged();
 }
+} // DisplayPlugin

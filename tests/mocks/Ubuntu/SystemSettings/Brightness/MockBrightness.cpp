@@ -88,6 +88,7 @@ QAbstractItemModel* MockBrightness::connectedDisplays()
 
 void MockBrightness::applyDisplayConfiguration()
 {
+    Q_EMIT applied();
 }
 
 MockDisplayModel* MockBrightness::displayModel()

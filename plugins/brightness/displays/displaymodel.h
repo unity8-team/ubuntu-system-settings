@@ -12,6 +12,8 @@
 #include <QSortFilterProxyModel>
 #include <QVariant>
 
+namespace DisplayPlugin
+{
 class DisplayModel : public QAbstractListModel
 {
     Q_OBJECT
@@ -86,5 +88,6 @@ private:
 private slots:
     void rowsChanged(const QModelIndex &parent, int first, int last);
 };
+} // DisplayPlugin
 
 #endif // DISPLAY_MODEL_H

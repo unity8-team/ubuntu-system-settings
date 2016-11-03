@@ -4,6 +4,8 @@
 #include <mir_toolkit/mir_client_library.h>
 #include <QObject>
 
+namespace DisplayPlugin
+{
 class MirDisplays : public QObject
 {
     Q_OBJECT
@@ -18,5 +20,6 @@ public:
 Q_SIGNALS:
     void configurationChanged() const;
 };
+} // DisplayPlugin
 
 #endif // MIRDISPLAYS_H

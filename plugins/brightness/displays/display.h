@@ -1,9 +1,9 @@
 #ifndef DISPLAY_H
 #define DISPLAY_H
 
-#include <mir_toolkit/mir_client_library.h>
+#include "../../../src/i18n.h"
 
-#include <iostream>
+#include <mir_toolkit/mir_client_library.h>
 
 #include <QList>
 #include <QObject>
@@ -11,38 +11,21 @@
 #include <QStringList>
 #include <QVariantMap>
 
+namespace DisplayPlugin
+{
 class DisplayMode
 {
-    Q_GADGET
 public:
     DisplayMode() {}
     explicit DisplayMode(const MirDisplayMode &mirMode)
         : vertical_resolution(mirMode.vertical_resolution)
         , horizontal_resolution(mirMode.horizontal_resolution)
-        , refresh_rate(mirMode.refresh_rate)
-    {}
-    // ~DisplayMode() {};
+        , refresh_rate(mirMode.refresh_rate) {}
     uint vertical_resolution = 0;
     uint horizontal_resolution = 0;
     double refresh_rate = 0.0;
-    Q_INVOKABLE QString toString() const
-    {
-        /* TRANSLATORS: %1 refer to the amount of horizontal pixels in a
-        display resolution, and %2 to the vertical pixels. E.g. 1200x720.
-        %3 is the refresh rate in hz. */
-        return QString("%1×%2 @ %3hz")
-            .arg(horizontal_resolution)
-            .arg(vertical_resolution)
-            .arg(refresh_rate);
-    }
-    bool operator==(const DisplayMode &other) const
-    {
-        return (
-            horizontal_resolution == other.horizontal_resolution
-            && vertical_resolution == other.vertical_resolution
-            && refresh_rate == other.refresh_rate
-        );
-    }
+    Q_INVOKABLE QString toString() const;
+    bool operator==(const DisplayMode &other) const;
 };
 
 class Display : public QObject
@@ -59,7 +42,7 @@ class Display : public QObject
     Q_PROPERTY(uint mode READ mode WRITE setMode
                NOTIFY modeChanged)
     Q_PROPERTY(QStringList modes READ modes
-               NOTIFY modesChanged) // TODO: Maybe constant?
+               NOTIFY modesChanged)
     Q_PROPERTY(Orientation orientation READ orientation WRITE setOrientation
                NOTIFY orientationChanged)
     Q_PROPERTY(double scale READ scale WRITE setScale NOTIFY scaleChanged)
@@ -145,8 +128,9 @@ private:
     QVariantMap m_storedConfig;
 };
 
-Q_DECLARE_METATYPE(Display*)
-//Q_DECLARE_METATYPE(DisplayMode)
-Q_DECLARE_METATYPE(Display::Orientation)
+} // DisplayPlugin
+
+Q_DECLARE_METATYPE(DisplayPlugin::Display*)
+Q_DECLARE_METATYPE(DisplayPlugin::Display::Orientation)
 
 #endif // DISPLAY_H

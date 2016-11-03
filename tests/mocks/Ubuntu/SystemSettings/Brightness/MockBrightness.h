@@ -62,17 +62,18 @@ public:
     Q_INVOKABLE MockDisplayModel* displayModel(); // mock only
 
 Q_SIGNALS:
-    void powerdRunningChanged(); // mock only
-    void autoBrightnessAvailableChanged(); // mock only
-    void widiSupportedChanged(); // mock only
+    void powerdRunningChanged();
+    void autoBrightnessAvailableChanged();
+    void widiSupportedChanged();
+    void applied(); // mock only
 
 private:
     bool m_powerdRunning = false;
     bool m_autoBrightnessAvailable = false;
     bool m_widiSupported = false;
     MockDisplayModel m_displays;
-    DisplaysFilter m_changedDisplays;
-    DisplaysFilter m_connectedDisplays;
+    DisplayPlugin::DisplaysFilter m_changedDisplays;
+    DisplayPlugin::DisplaysFilter m_connectedDisplays;
 };
 
 #endif // MOCK_BRIGHTNESS_H

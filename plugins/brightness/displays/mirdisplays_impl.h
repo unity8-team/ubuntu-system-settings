@@ -3,6 +3,8 @@
 
 #include "mirdisplays.h"
 
+namespace DisplayPlugin
+{
 class MirDisplaysImpl : public MirDisplays
 {
     Q_OBJECT
@@ -19,5 +21,6 @@ private:
     MirConnection *m_mir_connection;
     MirDisplayConfiguration *m_configuration;
 };
+} // DisplayPlugin
 
 #endif // MIRDISPLAYS_IMPL_H

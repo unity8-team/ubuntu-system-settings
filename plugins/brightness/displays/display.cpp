@@ -3,6 +3,27 @@
 
 #include <QDebug>
 
+namespace DisplayPlugin
+{
+QString DisplayMode::toString() const
+{
+    /* TRANSLATORS: %1 refer to the amount of horizontal pixels in a
+    display resolution, and %2 to the vertical pixels. E.g. 1200x720.
+    %3 is the refresh rate in hz. */
+    return SystemSettings::_("%1×%2 @ %3hz")
+        .arg(horizontal_resolution)
+        .arg(vertical_resolution)
+        .arg(refresh_rate);
+}
+bool DisplayMode::operator==(const DisplayMode &other) const
+{
+    return (
+        horizontal_resolution == other.horizontal_resolution
+        && vertical_resolution == other.vertical_resolution
+        && refresh_rate == other.refresh_rate
+    );
+}
+
 Display::Display(QObject *parent)
     : QObject(parent)
 {
@@ -233,3 +254,4 @@ void Display::changedSlot()
     setUncommitedChanges(hasChanged());
     Q_EMIT displayChanged(this);
 }
+} // DisplayPlugin

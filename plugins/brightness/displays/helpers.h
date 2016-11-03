@@ -20,5 +20,6 @@ public:
     // Return a sorted list of modes in horizontalxverticalxrate format.
     // static QString mirModesToStringList(const MirDisplayOutputType &type);
 };
-}
+} // DisplayPlugin
+
 #endif // DISPLAY_PLUGIN_HELPERS_H

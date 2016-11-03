@@ -5,7 +5,8 @@
 #include <QGuiApplication>
 #include <qpa/qplatformnativeinterface.h>
 
-
+namespace DisplayPlugin
+{
 static void mir_display_change_callback(MirConnection *connection, void *context) {
     qWarning() << "mir_display_change_callback" << context;
     MirDisplayConfiguration *conf = mir_connection_create_display_config(
@@ -78,8 +79,9 @@ void MirDisplaysImpl::connect() {
             error = mir_connection_get_error_message(m_mir_connection);
         qWarning() << __PRETTY_FUNCTION__ << "Could not connect to Mir:" << error;
     } else {
-        qWarning() << "Using Mir as display server.";
+        qWarning() << "Using a Mir server.";
         mir_connection_set_display_config_change_callback(
                 m_mir_connection, mir_display_change_callback, this);
     }
 }
+} // DisplayPlugin

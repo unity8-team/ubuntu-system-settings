@@ -18,6 +18,7 @@ add_library(uss-displays SHARED
     displays/display.cpp
     displays/displaymodel.cpp
     displays/mirdisplays_impl.cpp
+    ../../src/i18n.cpp
 )
 qt5_use_modules(uss-displays Quick)
 set_target_properties(uss-displays PROPERTIES VERSION 0.0 SOVERSION 0.0)

@@ -128,5 +128,4 @@ MirPowerMode Helpers::powerModeToMirPowerMode(const Display::PowerMode &mode)
         return mir_power_mode_off;
     }
 }
-
 } // DisplayPlugin
