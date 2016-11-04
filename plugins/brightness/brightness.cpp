@@ -104,6 +104,8 @@ Brightness::Brightness(QDBusConnection dbus,
     QDBusArgument result(reply.arguments()[0].value<QDBusArgument>());
     BrightnessParams params = qdbus_cast<BrightnessParams>(result);
     m_autoBrightnessAvailable = params.automatic;
+
+    m_mirClient->setParent(this);
 }
 
 Brightness::Brightness(QObject *parent) :
