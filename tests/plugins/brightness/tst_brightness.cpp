@@ -6,18 +6,42 @@
 
 using namespace DisplayPlugin;
 
-class TstBrightnessConstruction : public QObject
+class TstBrightness : public QObject
 {
     Q_OBJECT
 private slots:
-    void initTestCase()
-    {
-    }
-    void cleanupTestCase()
-    {
-    }
     void init()
     {
+        m_mode1.vertical_resolution = 1280;
+        m_mode1.horizontal_resolution = 1024;
+        m_mode1.refresh_rate = 60;
+
+        m_mode2.vertical_resolution = 640;
+        m_mode2.horizontal_resolution = 320;
+        m_mode2.refresh_rate = 30;
+
+        m_modes[0] = m_mode1;
+        m_modes[1] = m_mode2;
+
+        m_output.modes = m_modes;
+        m_output.num_modes = 2;
+        m_output.current_mode = 0;
+        m_output.output_id = 0;
+        m_output.type = MirDisplayOutputType::mir_display_output_type_edp;
+        m_output.connected = true;
+        m_output.used = true;
+        m_output.orientation = MirOrientation::mir_orientation_left;
+
+        m_outputs[0] = m_output;
+        m_conf.num_outputs = 1;
+        m_conf.outputs = m_outputs;
+
+        m_mirClient = new FakeMirClient();
+        m_mirClient->connected = true;
+
+        m_mirClient->conf = &m_conf;
+        m_instance = new Brightness(QDBusConnection::systemBus(),
+                                    m_mirClient);
     }
     void cleanup()
     {
@@ -25,42 +49,74 @@ private slots:
         m_instance->deleteLater();
         QTRY_COMPARE(destroyedSpy.count(), 1);
     }
-    void test_null_config_while_connected()
+    void test_null_config_when_connected()
     {
-        m_mirClient = new FakeMirClient();
-        m_mirClient->connected = true;
-        m_mirClient->conf = nullptr;
-        m_instance = new Brightness(QDBusConnection::systemBus(), m_mirClient);
-        QCOMPARE(m_instance->allDisplays()->rowCount(), 0);
+        FakeMirClient mc;
+        mc.connected = true;
+        mc.conf = nullptr;
+        Brightness b(QDBusConnection::systemBus(), &mc);
+        QCOMPARE(b.allDisplays()->rowCount(), 0);
     }
-    void test_not_connected()
+    void test_not_connected_to_mir()
     {
-        m_mirClient = new FakeMirClient();
-        m_mirClient->connected = false;
-        m_instance = new Brightness(QDBusConnection::systemBus(), m_mirClient);
-        QCOMPARE(m_instance->allDisplays()->rowCount(), 0);
+        FakeMirClient mc;
+        mc.connected = false;
+        Brightness b(QDBusConnection::systemBus(), &mc);
+        QCOMPARE(b.allDisplays()->rowCount(), 0);
     }
-    void test_config()
+    void test_some_config_populates_model()
     {
-        m_mirClient = new FakeMirClient();
-        m_mirClient->connected = true;
+        FakeMirClient mc;
+        mc.connected = true;
 
         MirDisplayConfiguration conf;
         conf.num_outputs = 1;
+
         MirDisplayOutput output;
+        output.num_modes = 0;
+
         MirDisplayOutput outputs[1];
         conf.outputs = outputs;
         conf.outputs[0] = output;
+        mc.conf = &conf;
 
-        m_mirClient->conf = &conf;
-        m_instance = new Brightness(QDBusConnection::systemBus(), m_mirClient);
-        QCOMPARE(m_instance->allDisplays()->rowCount(), 1);
+        Brightness b(QDBusConnection::systemBus(), &mc);
+        QCOMPARE(b.allDisplays()->rowCount(), 1);
     }
+    void test_a_display_was_configured()
+    {
+        auto model = (DisplayModel*) m_instance->allDisplays();
+        auto display = model->getById(0);
+
+        QCOMPARE(display->type(), QString("edp"));
+    }
+    void test_apply_config_to_display()
+    {
+        auto model = (DisplayModel*) m_instance->allDisplays();
+        auto display = model->getById(0);
+        display->setMode(1);
+        display->setEnabled(false);
+        display->setOrientation(Display::Orientation::NormalOrientation);
+
+        m_instance->applyDisplayConfiguration();
+
+        MirDisplayOutput output = m_mirClient->conf->outputs[0];
+        QCOMPARE(output.current_mode, (uint) 1);
+        QCOMPARE((bool) output.used, false);
+        QCOMPARE(output.orientation, MirOrientation::mir_orientation_normal);
+    }
+
 private:
     FakeMirClient *m_mirClient = nullptr;
     Brightness *m_instance = nullptr;
+
+    MirDisplayConfiguration m_conf;
+    MirDisplayOutput m_output;
+    MirDisplayOutput m_outputs[1];
+    MirDisplayMode m_mode1;
+    MirDisplayMode m_mode2;
+    MirDisplayMode m_modes[2];
 };
 
-QTEST_GUILESS_MAIN(TstBrightnessConstruction)
+QTEST_GUILESS_MAIN(TstBrightness)
 #include "tst_brightness.moc"
-

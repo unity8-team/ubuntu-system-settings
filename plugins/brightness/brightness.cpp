@@ -161,7 +161,7 @@ void Brightness::applyDisplayConfiguration()
         return;
     }
 
-    for(uint i = 0; i < conf->num_outputs; ++i) {
+    for(uint i = 0; i < conf->num_outputs; i++) {
         MirDisplayOutput output = conf->outputs[i];
         auto display = m_displays.getById(output.output_id);
         if (display) {
@@ -186,7 +186,7 @@ void Brightness::refreshMirDisplays()
         return;
     }
 
-    for(uint i = 0; i < conf->num_outputs; ++i) {
+    for(uint i = 0; i < conf->num_outputs; i++) {
         MirDisplayOutput output = conf->outputs[i];
         auto display = QSharedPointer<DisplayPlugin::Display>(
             new DisplayPlugin::Display(output)

@@ -53,7 +53,6 @@ Display::Display(MirDisplayOutput &output, QObject *parent)
     m_physicalWidthMm = output.physical_width_mm;
     m_physicalHeightMm = output.physical_height_mm;
     m_name = QString("%1").arg(DisplayPlugin::Helpers::mirTypeToString(output.type));
-    qWarning() << m_name << "current_mode" << mode();
 
     changedSlot();
     storeConfiguration();
