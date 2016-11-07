@@ -15,7 +15,7 @@ public:
     virtual ~FakeMirClient() {}
     virtual MirDisplayConfiguration* getConfiguration() const override
     {
-
+        return conf;
     }
     virtual void setConfiguration(MirDisplayConfiguration *conf) override
     {
@@ -31,6 +31,7 @@ public:
     }
 
     bool connected = false;
+    MirDisplayConfiguration *conf = nullptr;
 };
 
 #endif // FAKEMIRCLIENT_H
