@@ -1,3 +1,14 @@
+ubuntu-system-settings (0.4+17.04.20161108-0ubuntu1) zesty; urgency=medium
+
+  [ Łukasz 'sil2100' Zemczak ]
+  * OTA-14 cherry-pick from trunk: Allow scroll speed multipliers up to
+    3.0; since the default speed in gsettings-ubuntu-touch-schemas is
+    changing from 0.5 to 1.0, some users will want to ability to
+    increase it above the native speed still. (LP: #1607240) (LP:
+    #1627567)
+
+ -- Łukasz Zemczak <lukasz.zemczak@canonical.com>  Tue, 08 Nov 2016 23:24:47 +0000
+
 ubuntu-system-settings (0.4+16.10.20160831.1-0ubuntu1) yakkety; urgency=medium
 
   [ jonas-drange ]
