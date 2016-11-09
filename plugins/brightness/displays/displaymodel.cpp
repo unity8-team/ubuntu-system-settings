@@ -4,7 +4,7 @@
 
 namespace DisplayPlugin
 {
-DisplayModel::DisplayModel(QObject *parent)
+DisplayModel::DisplayModel(QObject *parent) : QAbstractListModel(parent)
 {
 }
 
@@ -14,6 +14,7 @@ DisplayModel::~DisplayModel()
 
 int DisplayModel::rowCount(const QModelIndex &parent) const
 {
+    Q_UNUSED(parent);
     return m_displays.count();
 }
 

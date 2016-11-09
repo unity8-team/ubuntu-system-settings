@@ -113,6 +113,7 @@ Display::PowerMode Helpers::mirPowerModeToPowerMode(const MirPowerMode &mode)
     case mir_power_mode_off:
         return Display::PowerMode::OffMode;
     }
+    return Display::PowerMode::OffMode;
 }
 
 MirPowerMode Helpers::powerModeToMirPowerMode(const Display::PowerMode &mode)
@@ -127,5 +128,6 @@ MirPowerMode Helpers::powerModeToMirPowerMode(const Display::PowerMode &mode)
     case Display::PowerMode::OffMode:
         return mir_power_mode_off;
     }
+    return mir_power_mode_off;
 }
 } // DisplayPlugin

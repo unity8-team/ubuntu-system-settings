@@ -16,11 +16,11 @@ namespace DisplayPlugin
 class DisplayMode
 {
 public:
-    DisplayMode() {}
+    DisplayMode() {};
     explicit DisplayMode(const MirDisplayMode &mirMode)
         : vertical_resolution(mirMode.vertical_resolution)
         , horizontal_resolution(mirMode.horizontal_resolution)
-        , refresh_rate(mirMode.refresh_rate) {}
+        , refresh_rate(mirMode.refresh_rate) {};
     uint vertical_resolution = 0;
     uint horizontal_resolution = 0;
     double refresh_rate = 0.0;
@@ -64,7 +64,9 @@ Q_SIGNALS:
 
 public:
     explicit Display(QObject *parent = nullptr);
+    // Enables testing.
     explicit Display(MirDisplayOutput &output, QObject *parent = nullptr);
+    explicit Display(const uint &id);
     ~Display() {};
 
     enum class Orientation : uint {
@@ -91,6 +93,7 @@ public:
     bool uncommittedChanges() const;
     uint physicalWidthMm() const;
     uint physicalHeightMm() const;
+    PowerMode powerMode() const;
 
     void setMirrored(const bool &mirrored);
     void setEnabled(const bool &enabled);

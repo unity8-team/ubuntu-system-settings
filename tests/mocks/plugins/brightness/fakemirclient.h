@@ -19,12 +19,14 @@ public:
     }
     virtual void setConfiguration(MirDisplayConfiguration *conf) override
     {
+        Q_UNUSED(conf);
     }
     virtual bool applyConfiguration(MirDisplayConfiguration *conf) override
     {
         // This usually happens via a mir callback. Fake it here.
         this->conf = conf;
         Q_EMIT configurationChanged();
+        return true;
     }
     virtual bool isConnected() override
     {

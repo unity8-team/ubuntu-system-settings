@@ -24,6 +24,13 @@ bool DisplayMode::operator==(const DisplayMode &other) const
     );
 }
 
+
+Display::Display(const uint &id)
+{
+    m_id = id;
+    initialize();
+}
+
 Display::Display(QObject *parent)
     : QObject(parent)
 {
@@ -54,8 +61,8 @@ Display::Display(MirDisplayOutput &output, QObject *parent)
     m_physicalHeightMm = output.physical_height_mm;
     m_name = QString("%1").arg(DisplayPlugin::Helpers::mirTypeToString(output.type));
 
-    changedSlot();
     storeConfiguration();
+    changedSlot();
 }
 
 
@@ -92,23 +99,6 @@ void Display::storeConfiguration()
 
 bool Display::hasChanged() const
 {
-    // qWarning()
-    //     << m_storedConfig["name"].toString() << m_name
-    //     << m_storedConfig["type"].toString() << m_type
-    //     << m_storedConfig["mirrored"].toBool() << m_mirrored
-    //     << m_storedConfig["enabled"].toBool() << m_enabled
-    //     << m_storedConfig["mode"].toUInt() << mode()
-    //     << (uint) m_storedConfig["orientation"].value<Orientation>() << (uint) m_orientation
-    //     << m_storedConfig["scale"].toUInt() << m_scale
-    //     << "truth values"
-    //     << (m_storedConfig["name"].toString() != m_name)
-    //     << (m_storedConfig["type"].toString() != m_type)
-    //     << (m_storedConfig["mirrored"].toBool() != m_mirrored)
-    //     << (m_storedConfig["enabled"].toBool() != m_enabled)
-    //     << (m_storedConfig["mode"].toUInt() != mode())
-    //     << (m_storedConfig["orientation"].value<Orientation>() != m_orientation)
-    //     << (m_storedConfig["scale"].toUInt() != m_scale);
-
     return (
         m_storedConfig["name"].toString() != m_name
         || m_storedConfig["type"].toString() != m_type
@@ -192,6 +182,11 @@ uint Display::physicalWidthMm() const
 uint Display::physicalHeightMm() const
 {
     return m_physicalHeightMm;
+}
+
+Display::PowerMode Display::powerMode() const
+{
+    return m_powerMode;
 }
 
 void Display::setMirrored(const bool &mirrored)

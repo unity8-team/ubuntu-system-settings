@@ -48,8 +48,24 @@ public:
 BrightnessItem::BrightnessItem(const QVariantMap &staticData, QObject *parent):
     ItemBase(staticData, parent)
 {
-    setVisibility(true);
-    setDisplayName(_("Brightness"));
+    QDBusInterface m_powerdIface ("com.canonical.powerd",
+                                  "/com/canonical/powerd",
+                                  "com.canonical.powerd",
+                                  QDBusConnection::systemBus());
+
+    // Hide the plugin if powerd isn't running; it's currently redundant
+    setVisibility(m_powerdIface.isValid());
+
+    char widi[PROP_VALUE_MAX] = "";
+    property_get("ubuntu.widi.supported", widi, "0");
+    // We want to log this property to help aid debugging
+    qWarning() << Q_FUNC_INFO << "ubuntu.widi.supported:" << widi;
+
+    if (strcmp(widi, "0") == 0) {
+        setDisplayName(_("Brightness"));
+    } else {
+        setDisplayName(_("Brightness & Display"));
+    }
 }
 
 void BrightnessItem::setDisplayName(const QString &name)
