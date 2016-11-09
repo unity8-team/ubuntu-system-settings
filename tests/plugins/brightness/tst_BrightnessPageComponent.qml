@@ -86,5 +86,114 @@ Item {
             verify(entry.enabled);
             compare(entry.value, i18n.tr("Not connected"));
         }
+
+        function test_no_mir_displays() {
+            var repeater = findChild(instance, "displayConfigurationRepeater");
+            compare(repeater.count, 0);
+        }
+
+        function test_one_mir_display() {
+            var displayModel = get_panel_plugin().displayModel();
+            var display = displayModel.mockAddDisplay();
+            display.setConnected(true);
+            var repeater = findChild(instance, "displayConfigurationRepeater");
+            compare(repeater.count, 1);
+        }
+    }
+
+
+    UbuntuTestCase {
+        name: "BrightnessPageComponent for one Mir display"
+        when: windowShown
+
+        SignalSpy {
+            id: signalSpy
+            signalName: ""
+            target: null
+        }
+
+        property var instance: null
+        property var display: null
+
+        function init() {
+            instance = pageComponent.createObject(testRoot, {});
+            var displayModel = get_panel_plugin().displayModel();
+            display = displayModel.mockAddDisplay();
+            display.setConnected(true);
+            display.setName("test");
+            display.save();
+        }
+
+        function cleanup() {
+            instance.destroy();
+            signalSpy.target = null;
+        }
+
+        function get_panel_plugin() {
+            return findInvisibleChild(instance, "brightnessPanel");
+        }
+
+        function test_no_changes_disables_apply() {
+            var obj = findChild(instance, "applyButton");
+            verify(!obj.enabled);
+        }
+
+        function test_a_change_enables_apply() {
+            var obj = findChild(instance, "enabledSwitch");
+            var apply = findChild(instance, "applyButton");
+            mouseClick(obj, obj.width / 2, obj.height / 2);
+        }
+
+        function test_apply() {
+            signalSpy.target = get_panel_plugin();
+            signalSpy.signalName = "applied";
+
+            display.setEnabled(true);
+            var obj = findChild(instance, "applyButton");
+            mouseClick(obj, obj.width / 2, obj.height / 2);
+
+            signalSpy.wait();
+        }
+
+        function test_default_rotation() {
+            var obj = findChild(instance, "rotationSelector");
+            compare(obj.selectedIndex, 0);
+        }
+
+        function test_other_rotation() {
+            display.orientation = 1;
+            var obj = findChild(instance, "rotationSelector");
+            compare(obj.selectedIndex, 1);
+        }
+
+        function test_change_rotation() {
+            var obj = findChild(instance, "rotationSelector");
+            obj.delegateClicked(2);
+            compare(display.orientation, 2);
+        }
+
+        function test_one_resolution() {
+            display.mode = display.addMode(1024, 768, 60);
+            var obj = findChild(instance, "resolutionLabel");
+            var res = i18n.tr("%1×%2 @ %3hz").arg(1024).arg(768).arg(60);
+            compare(obj.text, i18n.tr("Resolution: %1").arg(res));
+        }
+
+        function test_many_resolutions() {
+            display.addMode(1024, 768, 60);
+            display.addMode(640, 320, 40);
+            display.mode = 1;
+            var obj = findChild(instance, "resolutionSelector");
+            compare(obj.selectedIndex, 1);
+        }
+
+        function test_change_resolution() {
+            display.addMode(1024, 768, 60);
+            display.addMode(640, 320, 40);
+            display.mode = 1;
+            var obj = findChild(instance, "resolutionSelector");
+            obj.delegateClicked(0);
+            compare(display.mode, 0);
+        }
     }
 }

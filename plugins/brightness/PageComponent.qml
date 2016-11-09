@@ -21,6 +21,7 @@
 import GSettings 1.0
 import QtQuick 2.4
 import SystemSettings 1.0
+import SystemSettings.ListItems 1.0 as SettingsListItems
 import Ubuntu.Components 1.3
 import Ubuntu.Components.ListItems 1.3 as ListItem
 import Ubuntu.SystemSettings.Brightness 1.0
@@ -44,7 +45,7 @@ ItemPage {
         id: aethercastDisplays
         objectName: "aethercastDisplays"
         onEnabledChanged: {
-            /* This is a hack to ensure the aethercast enabled switch stays 
+            /* This is a hack to ensure the aethercast enabled switch stays
              * in sync with the enabled property
              */
             enabledCheck.serverChecked = enabled;
@@ -68,7 +69,12 @@ ItemPage {
 
     Flickable {
         id: scrollWidget
-        anchors.fill: parent
+        anchors {
+            top: parent.top
+            left: parent.left
+            right: parent.right
+            bottom: applyButtonBackground.top
+        }
         contentHeight: contentItem.childrenRect.height
         boundsBehavior: (contentHeight > root.height) ?
                             Flickable.DragAndOvershootBounds :
@@ -82,7 +88,7 @@ ItemPage {
             anchors.left: parent.left
             anchors.right: parent.right
 
-            ListItem.Standard {
+            SettingsListItems.Standard {
                 text: i18n.tr("Display brightness")
                 showDivider: false
             }
@@ -113,12 +119,13 @@ ItemPage {
                 }
             }
 
-            ListItem.Standard {
+            SettingsListItems.Standard {
                 id: adjust
                 text: i18n.tr("Adjust automatically")
                 visible: brightnessPanel.powerdRunning &&
                          brightnessPanel.autoBrightnessAvailable
-                control: CheckBox {
+
+                CheckBox {
                     id: autoAdjustCheck
                     property bool serverChecked: gsettings.autoBrightness
                     onServerCheckedChanged: checked = serverChecked
@@ -138,12 +145,13 @@ ItemPage {
                 visible: brightnessPanel.widiSupported
             }
 
-            ListItem.Standard {
+            SettingsListItems.Standard {
                 objectName: "externalDisplayControl"
                 text: i18n.tr("External display")
                 enabled: brightnessPanel.widiSupported
                 onClicked: enabledCheck.trigger()
-                control: Switch {
+
+                Switch {
                     id: enabledCheck
                     property bool serverChecked: aethercastDisplays.enabled
                     onServerCheckedChanged: checked = serverChecked
@@ -154,15 +162,154 @@ ItemPage {
                 }
             }
 
-            ListItem.SingleValue {
+            SettingsListItems.SingleValueProgression {
                 objectName: "displayCasting"
                 visible: brightnessPanel.widiSupported
                 enabled: aethercastDisplays.enabled
                 text: i18n.tr("Wireless display")
                 value: aethercastDisplays.state === "connected" ? i18n.tr("Connected") : i18n.tr("Not connected")
-                progression: true
                 onClicked: pageStack.push(Qt.resolvedUrl("WifiDisplays.qml"))
             }
+
+            Repeater {
+                objectName: "displayConfigurationRepeater"
+                model: brightnessPanel.connectedDisplays
+
+                Column {
+                    objectName: "displayConfiguration_" + displayName
+                    anchors {
+                        left: parent.left
+                        right: parent.right
+                    }
+
+                    Item {
+                        width: units.gu(1)
+                        height: units.gu(1)
+                    }
+
+                    Label {
+                        text: displayName
+
+                        anchors {
+                            left: parent.left
+                            right: parent.right
+                            margins: units.gu(2)
+                        }
+
+                        Switch {
+                            objectName: "enabledSwitch"
+                            anchors {
+                                right: parent.right
+                                verticalCenter: parent.verticalCenter
+                            }
+                            checked: model.enabled
+                            onCheckedChanged: model.enabled = checked
+                        }
+                    }
+
+                    SettingsItemTitle {
+                        text: i18n.tr("Rotation:")
+                    }
+
+                    OptionSelector {
+                        id: rotationSelector
+                        objectName: "rotationSelector"
+                        property bool _expanded: false
+                        anchors {
+                            left: parent.left
+                            right: parent.right
+                            margins: units.gu(2)
+                        }
+                        containerHeight: itemHeight * 4
+                        model: [
+                            /* TRANSLATORS: None means no rotation, or
+                            0 degrees. */
+                            i18n.tr("None"),
+                            i18n.tr("90° clockwise"),
+                            i18n.tr("180°"),
+                            i18n.tr("270°")
+                        ]
+                        onDelegateClicked: {
+                            expanded = !currentlyExpanded;
+                            orientation = index;
+                        }
+                        selectedIndex: orientation
+                    }
+
+                    SettingsItemTitle {
+                        objectName: "resolutionLabel"
+                        text: modes.length > 1 ?
+                            i18n.tr("Resolution:") :
+                            /* TRANSLATORS: %1 is a display resolution, e.g.
+                            1200x720x24. Unknown refers to an unknown
+                            resolution (in case of an error). */
+                            i18n.tr("Resolution: %1").arg(modes[mode] || i18n.tr("Unknown"))
+                    }
+
+                    OptionSelector {
+                        id: resolutionSelector
+                        objectName: "resolutionSelector"
+                        property bool _expanded: false
+                        anchors {
+                            left: parent.left
+                            right: parent.right
+                            margins: units.gu(2)
+                        }
+                        visible: modes.length > 1
+                        containerHeight: itemHeight * modes.length
+                        model: modes
+                        onDelegateClicked: {
+                            expanded = !currentlyExpanded;
+                            mode = index;
+                        }
+                        delegate: OptionSelectorDelegate {
+                            text: modelData
+                        }
+                        selectedIndex: mode
+                    }
+
+                    SettingsItemTitle {
+                        text: i18n.tr("Scale screen elements:")
+                    }
+
+                    Menus.SliderMenu {
+                        id: scaleSlider
+                        objectName: "scaleSlider"
+                        minimumValue: 1.0
+                        maximumValue: 100.0
+                        value: scale
+                        minIcon: "image://theme/grip-large"
+                        maxIcon: "image://theme/view-grid-symbolic"
+                    }
+                }
+            }
+        }
+    }
+
+    Rectangle {
+        id: applyButtonBackground
+        objectName: "applyButtonBackground"
+        anchors {
+            left: parent.left
+            right: parent.right
+            bottom: parent.bottom
+        }
+        color: Theme.palette.selected.background
+
+        visible: brightnessPanel.allDisplays.count > 0
+        height: units.gu(6)
+
+        Button {
+            id: applyButton
+            objectName: "applyButton"
+            anchors {
+                left: parent.left
+                leftMargin: units.gu(1)
+                verticalCenter: parent.verticalCenter
+            }
+            enabled: brightnessPanel.changedDisplays.count > 0
+            text: i18n.tr("Apply Changes…")
+            onClicked: brightnessPanel.applyDisplayConfiguration()
         }
     }
 }

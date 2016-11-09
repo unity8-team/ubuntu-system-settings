@@ -21,6 +21,10 @@
 #ifndef BRIGHTNESS_H
 #define BRIGHTNESS_H
 
+#include "displays/displaymodel.h"
+#include "displays/mirclient.h"
+
+#include <QAbstractItemModel>
 #include <QDBusInterface>
 #include <QObject>
 
@@ -36,19 +40,41 @@ class Brightness : public QObject
     Q_PROPERTY (bool widiSupported
                 READ getWidiSupported
                 CONSTANT)
+    Q_PROPERTY (QAbstractItemModel* allDisplays
+                READ allDisplays
+                CONSTANT)
+    Q_PROPERTY (QAbstractItemModel* changedDisplays
+                READ changedDisplays
+                CONSTANT)
+    Q_PROPERTY (QAbstractItemModel* connectedDisplays
+                READ connectedDisplays
+                CONSTANT)
 
 public:
     explicit Brightness(QObject *parent = 0);
+    explicit Brightness(QDBusConnection dbus,
+                        DisplayPlugin::MirClient *mirClient, QObject *parent = 0);
     bool getPowerdRunning() const;
     bool getAutoBrightnessAvailable() const;
     bool getWidiSupported() const;
+    QAbstractItemModel* allDisplays();
+    QAbstractItemModel* changedDisplays();
+    QAbstractItemModel* connectedDisplays();
+    Q_INVOKABLE void applyDisplayConfiguration();
 
 private:
     QDBusConnection m_systemBusConnection;
-    QString m_objectPath;
+    DisplayPlugin::MirClient *m_mirClient;
     QDBusInterface m_powerdIface;
+    QString m_objectPath;
     bool m_powerdRunning;
     bool m_autoBrightnessAvailable;
+    DisplayPlugin::DisplayModel m_displays;
+    DisplayPlugin::DisplaysFilter m_changedDisplays;
+    DisplayPlugin::DisplaysFilter m_connectedDisplays;
+
+private slots:
+    void refreshMirDisplays();
 };
 
 #endif // BRIGHTNESS_H

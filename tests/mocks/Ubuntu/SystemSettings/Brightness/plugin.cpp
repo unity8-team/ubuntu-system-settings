@@ -22,6 +22,9 @@
 #include "MockAethercastDeviceModel.h"
 #include "MockAethercastDisplays.h"
 
+#include "MockDisplay.h"
+#include "MockDisplayModel.h"
+
 #include <QtQml>
 
 void BackendPlugin::registerTypes(const char *uri)
@@ -29,5 +32,9 @@ void BackendPlugin::registerTypes(const char *uri)
     Q_ASSERT(uri == QLatin1String("Ubuntu.SystemSettings.Brightness"));
     qmlRegisterType<MockBrightness>(uri, 1, 0, "UbuntuBrightnessPanel");
     qmlRegisterType<MockAethercastDevice>(uri, 1, 0, "AethercastDevice");
-    qmlRegisterType<MockDisplays>(uri, 1, 0, "AethercastDisplays");
+    qmlRegisterType<MockAethercastDisplays>(uri, 1, 0, "AethercastDisplays");
+
+    qmlRegisterType<MockDisplayModel>(uri, 1, 0, "DisplayModel");
+    qmlRegisterUncreatableType<MockDisplay>(uri, 1, 0, "Display",
+                                            "Not to be instantiated directly.");
 }

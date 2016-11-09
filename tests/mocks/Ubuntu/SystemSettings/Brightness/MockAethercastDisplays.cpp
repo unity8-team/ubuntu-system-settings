@@ -19,71 +19,71 @@
 
 #include <QQmlEngine>
 
-void MockDisplays::connectDevice(const QString &address)
+void MockAethercastDisplays::connectDevice(const QString &address)
 {
     Q_UNUSED(address)
 }
 
-void MockDisplays::disconnectDevice(const QString &address)
+void MockAethercastDisplays::disconnectDevice(const QString &address)
 {
     Q_UNUSED(address)
 }
 
-void MockDisplays::scan()
+void MockAethercastDisplays::scan()
 {
     m_scanning = true;
     Q_EMIT scanningChanged(m_scanning);
 }
 
-void MockDisplays::stopScan()
+void MockAethercastDisplays::stopScan()
 {
     m_scanning = false;
     Q_EMIT scanningChanged(m_scanning);
 }
 
-void MockDisplays::setProperties(const QMap<QString, QVariant> &properties)
+void MockAethercastDisplays::setProperties(const QMap<QString, QVariant> &properties)
 {
     Q_UNUSED(properties)
 }
 
-QAbstractItemModel* MockDisplays::devices()
+QAbstractItemModel* MockAethercastDisplays::devices()
 {
     auto ret = &m_devices;
     QQmlEngine::setObjectOwnership(ret, QQmlEngine::CppOwnership);
     return ret;
 }
 
-QAbstractItemModel* MockDisplays::connectedDevices()
+QAbstractItemModel* MockAethercastDisplays::connectedDevices()
 {
     auto ret = &m_connectedDevices;
     QQmlEngine::setObjectOwnership(ret, QQmlEngine::CppOwnership);
     return ret;
 }
 
-QAbstractItemModel* MockDisplays::disconnectedDevices()
+QAbstractItemModel* MockAethercastDisplays::disconnectedDevices()
 {
     auto ret = &m_disconnectedDevices;
     QQmlEngine::setObjectOwnership(ret, QQmlEngine::CppOwnership);
     return ret;
 }
 
-bool MockDisplays::scanning() const
+bool MockAethercastDisplays::scanning() const
 {
     return m_scanning;
 }
 
-bool MockDisplays::enabled() const
+bool MockAethercastDisplays::enabled() const
 {
     return m_enabled;
 }
 
-void MockDisplays::setEnabled(const bool enabled)
+void MockAethercastDisplays::setEnabled(const bool enabled)
 {
     m_enabled = enabled;
     Q_EMIT enabledChanged(enabled);
 }
 
-QString MockDisplays::state() const
+QString MockAethercastDisplays::state() const
 {
     return m_state;
 }

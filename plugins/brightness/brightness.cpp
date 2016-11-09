@@ -19,12 +19,19 @@
  */
 
 #include "brightness.h"
+#include "displays/display.h"
+#include "displays/helpers.h"
+#include "displays/mirclient_impl.h"
+
 #include <hybris/properties/properties.h>
 
 #include <QDBusArgument>
 #include <QDBusReply>
 #include <QDBusMetaType>
 #include <QDebug>
+#include <QQmlEngine>
+#include <QSharedPointer>
+#include <QScopedPointer>
 
 // Returned data from getBrightnessParams
 struct BrightnessParams {
@@ -54,16 +61,32 @@ const QDBusArgument &operator>>(const QDBusArgument &argument,
     return argument;
 }
 
-Brightness::Brightness(QObject *parent) :
-    QObject(parent),
-    m_systemBusConnection (QDBusConnection::systemBus()),
-    m_powerdIface ("com.canonical.powerd",
-                   "/com/canonical/powerd",
-                   "com.canonical.powerd",
-                   m_systemBusConnection),
-    m_powerdRunning(false),
-    m_autoBrightnessAvailable(false)
+Brightness::Brightness(QDBusConnection dbus,
+                       DisplayPlugin::MirClient *mirClient,
+                       QObject *parent)
+    : QObject(parent)
+    , m_systemBusConnection(dbus)
+    , m_mirClient(mirClient)
+    , m_powerdIface("com.canonical.powerd",
+                    "/com/canonical/powerd",
+                    "com.canonical.powerd",
+                    m_systemBusConnection)
+    , m_powerdRunning(false)
+    , m_autoBrightnessAvailable(false)
+
 {
+    m_changedDisplays.filterOnUncommittedChanges(true);
+    m_changedDisplays.setSourceModel(&m_displays);
+
+    m_connectedDisplays.filterOnConnected(true);
+    m_connectedDisplays.setSourceModel(&m_displays);
+
+    if (m_mirClient->isConnected()) {
+        refreshMirDisplays();
+        connect(m_mirClient, SIGNAL(configurationChanged()),
+                this, SLOT(refreshMirDisplays()));
+    }
+
     qRegisterMetaType<BrightnessParams>();
     m_powerdRunning = m_powerdIface.isValid();
 
@@ -81,6 +104,14 @@ Brightness::Brightness(QObject *parent) :
     QDBusArgument result(reply.arguments()[0].value<QDBusArgument>());
     BrightnessParams params = qdbus_cast<BrightnessParams>(result);
     m_autoBrightnessAvailable = params.automatic;
+
+    m_mirClient->setParent(this);
+}
+
+Brightness::Brightness(QObject *parent) :
+    Brightness(QDBusConnection::systemBus(),
+               new DisplayPlugin::MirClientImpl(), parent)
+{
 }
 
 bool Brightness::getAutoBrightnessAvailable() const
@@ -92,9 +123,74 @@ bool Brightness::getPowerdRunning() const {
     return m_powerdRunning;
 }
 
-bool Brightness::getWidiSupported() const 
+bool Brightness::getWidiSupported() const
 {
     char widi[PROP_VALUE_MAX];
     property_get("ubuntu.widi.supported", widi, "0");
     return (strcmp(widi, "0") > 0);
+}
+
+QAbstractItemModel* Brightness::allDisplays()
+{
+    auto ret = &m_displays;
+    QQmlEngine::setObjectOwnership(ret, QQmlEngine::CppOwnership);
+    return ret;
+}
+
+QAbstractItemModel* Brightness::changedDisplays()
+{
+    auto ret = &m_changedDisplays;
+    QQmlEngine::setObjectOwnership(ret, QQmlEngine::CppOwnership);
+    return ret;
+}
+
+
+QAbstractItemModel* Brightness::connectedDisplays()
+{
+    auto ret = &m_connectedDisplays;
+    QQmlEngine::setObjectOwnership(ret, QQmlEngine::CppOwnership);
+    return ret;
+}
+
+void Brightness::applyDisplayConfiguration()
+{
+    auto conf = m_mirClient->getConfiguration();
+
+    if (!conf) {
+        qWarning() << __PRETTY_FUNCTION__ << "config invalid";
+        return;
+    }
+
+    for(uint i = 0; i < conf->num_outputs; i++) {
+        MirDisplayOutput output = conf->outputs[i];
+        auto display = m_displays.getById(output.output_id);
+        if (display) {
+            output.current_mode = display->mode();
+            output.used = display->enabled();
+            output.orientation =
+                DisplayPlugin::Helpers::orientationToMirOrientation(
+                    display->orientation()
+                );
+        }
+        conf->outputs[i] = output;
+    }
+    m_mirClient->applyConfiguration(conf);
+}
+
+void Brightness::refreshMirDisplays()
+{
+    auto conf = m_mirClient->getConfiguration();
+
+    if (!conf) {
+        qWarning() << __PRETTY_FUNCTION__ << "config invalid";
+        return;
+    }
+
+    for(uint i = 0; i < conf->num_outputs; i++) {
+        MirDisplayOutput output = conf->outputs[i];
+        auto display = QSharedPointer<DisplayPlugin::Display>(
+            new DisplayPlugin::Display(output)
+        );
+        m_displays.addDisplay(display);
+    }
 }
