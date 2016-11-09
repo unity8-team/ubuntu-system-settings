@@ -94,7 +94,7 @@ void Displays::setEnabled(bool enabled)
     if (!m_manager)
         return;
     bool ret = m_manager->setEnabled(enabled);
-    /* This is a hack to ensure the aethercast enabled switch stays
+    /* This is a hack to ensure the aethercast enabled switch stays 
      * in sync with the enabled property.  We should be able to rely
      * on the propertiesChanged signal to catch this, but we can't
      */
@@ -184,10 +184,10 @@ void Displays::connectDevice(const QString &address)
 
 void Displays::updateProperty(const QString &key, const QVariant &value)
 {
-    if (key == "Scanning")
+    if (key == "Scanning") 
         Q_EMIT(scanningChanged(value.toBool()));
-    if (key == "State")
+    if (key == "State") 
         Q_EMIT(stateChanged());
-    if (key == "Enabled")
+    if (key == "Enabled") 
         Q_EMIT(enabledChanged(value.toBool()));
 }
