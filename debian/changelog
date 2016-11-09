@@ -1,3 +1,20 @@
+ubuntu-system-settings (0.4+17.04.20161101.1-0ubuntu1) zesty; urgency=medium
+
+  * Drop repowerd to a Recommends and stop depending on gnome-settings-
+    daemon to fix a component mismatch
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Tue, 01 Nov 2016 17:51:36 +0000
+
+ubuntu-system-settings (0.4+17.04.20161027-0ubuntu1) zesty; urgency=medium
+
+  [ Jonas G. Drange ]
+  * clarifies how we add the system image test via cmake
+
+  [ Jonas G. Drange, jonas-drange ]
+  * adds pruning of db
+
+ -- Jonas G. Drange <jonas.drange@canonical.com>  Thu, 27 Oct 2016 10:30:34 +0000
+
 ubuntu-system-settings (0.4+16.10.20160930.1-0ubuntu1) yakkety; urgency=medium
 
   [ Jonas G. Drange ]

@@ -52,6 +52,7 @@ UpdateManager::UpdateManager(UpdateModel *model,
 
 void UpdateManager::init()
 {
+    m_model->db()->pruneDb();
     m_pending.setSourceModel(m_model);
     m_pending.filterOnInstalled(false);
     m_clicks.setSourceModel(m_model);
