@@ -174,8 +174,13 @@ class AboutSystemImageTestCase(AboutSystemImageBaseTestCase):
 
 class AboutOtaTestCase(AboutSystemImageBaseTestCase):
     systemimage_parameters = {
-        'version_detail': 'ubuntu=20150123.1,device=20153344.1,\
-            custom=201594834.1,version=257,tag=OTA-100'
+        'version_detail': {
+            'ubuntu': '20150123.1',
+            'device': '20153344.1',
+            'custom': '201594834.1',
+            'version': '257',
+            'tag': 'OTA-100'
+        }
     }
 
     def test_ota_version(self):

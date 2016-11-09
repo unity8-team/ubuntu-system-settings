@@ -27,6 +27,7 @@
 class TstSystemImage: public QObject
 {
     Q_OBJECT
+public:
 private Q_SLOTS:
     void init()
     {
@@ -36,19 +37,26 @@ private Q_SLOTS:
         parameters["channel"] = "testchannel";
         parameters["build_number"] = 10;
         parameters["target_build_number"] = 42;
-        parameters["version_detail"] =
-            "foo=bar,tag=OTA-100,ubuntu=101,device=102,custom=103";
+
+        QVariantMap versionDetail;
+        versionDetail["foo"] = "bar";
+        versionDetail["tag"] = "OTA-100";
+        versionDetail["ubuntu"] = "101";
+        versionDetail["device"] = "102";
+        versionDetail["custom"] = "103";
+        parameters["version_detail"] = versionDetail;
 
         m_siMock = new FakeSystemImageDbus(parameters);
         m_dbus = new QDBusConnection(m_siMock->dbus());
+        m_systemImage = new QSystemImage(*m_dbus);
         m_mock = new QDBusInterface(SI_SERVICE,
                                     SI_MAIN_OBJECT,
                                     "org.freedesktop.DBus.Mock",
                                     *m_dbus);
+
         m_methodSpy = new QSignalSpy(
             m_mock, SIGNAL(MethodCalled(const QString &, const QVariantList &))
         );
-        m_systemImage = new QSystemImage(*m_dbus);
 
         /* The following connections help us test DBus signals that are not
         mockable. See https://github.com/martinpitt/python-dbusmock/issues/23
@@ -63,14 +71,13 @@ private Q_SLOTS:
         );
         connect(m_siMock, SIGNAL(mockSettingChanged(QString, QString)),
                 m_systemImage, SLOT(settingsChanged(QString, QString)));
+
     }
     void cleanup()
     {
-        QSignalSpy destroyedSpy(m_systemImage, SIGNAL(destroyed(QObject*)));
-        m_systemImage->deleteLater();
-        QTRY_COMPARE(destroyedSpy.count(), 1);
         delete m_methodSpy;
         delete m_siMock;
+        delete m_systemImage;
     }
     void testDetailedVersionDetails()
     {
@@ -270,10 +277,10 @@ private Q_SLOTS:
     }
 private:
     QSignalSpy *m_methodSpy;
-    FakeSystemImageDbus *m_siMock = nullptr;
-    QDBusInterface *m_mock = nullptr;
-    QSystemImage *m_systemImage = nullptr;
-    QDBusConnection *m_dbus = nullptr;
+    FakeSystemImageDbus *m_siMock;
+    QDBusInterface *m_mock;
+    QSystemImage *m_systemImage;
+    QDBusConnection *m_dbus;
 };
 
 QTEST_GUILESS_MAIN(TstSystemImage)
