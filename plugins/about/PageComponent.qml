@@ -156,7 +156,7 @@ ItemPage {
             SettingsItemTitle {
                 id: softwareItem
                 objectName: "softwareItem"
-                visible: UpdateManager.currentBuildNumber
+                visible: SystemImage.currentBuildNumber
                 text: i18n.tr("Software:")
             }
 
