@@ -33,6 +33,7 @@ Item {
         id: pageComponent
         PageComponent {
             anchors.fill: parent
+            property bool showAllUI: true
         }
     }
 

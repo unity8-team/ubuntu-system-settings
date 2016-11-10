@@ -174,9 +174,9 @@ ItemPage {
             Repeater {
                 objectName: "displayConfigurationRepeater"
                 model: brightnessPanel.connectedDisplays
-                visible: showAllUI
 
                 Column {
+                    visible: showAllUI
                     objectName: "displayConfiguration_" + displayName
                     anchors {
                         left: parent.left
