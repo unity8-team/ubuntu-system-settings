@@ -1,3 +1,21 @@
+/*
+ * This file is part of system-settings
+ *
+ * Copyright (C) 2016 Canonical Ltd.
+ *
+ * This program is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License version 3, as published
+ * by the Free Software Foundation.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranties of
+ * MERCHANTABILITY, SATISFACTORY QUALITY, or FITNESS FOR A PARTICULAR
+ * PURPOSE.  See the GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 #include "mirclient_impl.h"
 
 #include <QDebug>
@@ -7,16 +25,17 @@
 
 namespace DisplayPlugin
 {
-static void mir_display_change_callback(MirConnection *connection, void *context) {
+static void mir_display_change_callback(MirConnection *connection,
+                                        void *context) {
     MirDisplayConfiguration *conf = mir_connection_create_display_config(
-            connection);
+        connection);
     static_cast<MirClientImpl*>(context)->setConfiguration(conf);
 }
 
 MirClientImpl::MirClientImpl(QObject *parent)
-        : MirClient(parent)
-        , m_mir_connection(nullptr)
-        , m_configuration(nullptr)
+    : MirClient(parent)
+    , m_mir_connection(nullptr)
+    , m_configuration(nullptr)
 {
     connect();
     if (isConnected()) {
@@ -67,10 +86,9 @@ bool MirClientImpl::applyConfiguration(MirDisplayConfiguration *conf) {
 }
 
 void MirClientImpl::connect() {
-    qWarning() << "Connecting to a Mir server...";
     m_mir_connection = static_cast<MirConnection*>(
-            QGuiApplication::platformNativeInterface()
-                ->nativeResourceForIntegration("mirConnection")
+        QGuiApplication::platformNativeInterface()
+            ->nativeResourceForIntegration("mirConnection")
     );
     if (m_mir_connection == nullptr || !isConnected()) {
         const char *error = "Unknown error";
@@ -78,9 +96,8 @@ void MirClientImpl::connect() {
             error = mir_connection_get_error_message(m_mir_connection);
         qWarning() << __PRETTY_FUNCTION__ << "Could not connect to Mir:" << error;
     } else {
-        qWarning() << "Using a Mir server.";
         mir_connection_set_display_config_change_callback(
-                m_mir_connection, mir_display_change_callback, this);
+            m_mir_connection, mir_display_change_callback, this);
     }
 }
 } // DisplayPlugin
