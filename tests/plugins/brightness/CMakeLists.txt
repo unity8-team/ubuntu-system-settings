@@ -8,10 +8,12 @@ include_directories(
 )
 
 pkg_search_module(MIR REQUIRED mirclient)
-find_package(Qt5Test REQUIRED)
+find_package(Qt5Core REQUIRED)
 find_package(Qt5DBus REQUIRED)
+find_package(Qt5Qml REQUIRED)
+find_package(Qt5Test REQUIRED)
 
-set(PLUGIN_LIBS uss-displays Qt5::Test Qt5::DBus)
+set(PLUGIN_LIBS uss-displays Qt5::Core Qt5::Qml Qt5::Test Qt5::DBus)
 
 add_executable(tst-brightness
                ${CMAKE_SOURCE_DIR}/tests/mocks/plugins/brightness/fakemirclient.h
