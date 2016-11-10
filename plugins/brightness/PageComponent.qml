@@ -174,6 +174,7 @@ ItemPage {
             Repeater {
                 objectName: "displayConfigurationRepeater"
                 model: brightnessPanel.connectedDisplays
+                visible: showAllUI
 
                 Column {
                     objectName: "displayConfiguration_" + displayName
@@ -296,7 +297,7 @@ ItemPage {
         }
         color: Theme.palette.selected.background
 
-        visible: brightnessPanel.allDisplays.count > 0
+        visible: brightnessPanel.allDisplays.count > 0 && showAllUI
         height: units.gu(6)
 
         Button {
