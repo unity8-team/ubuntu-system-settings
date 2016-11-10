@@ -48,5 +48,9 @@ Item {
         function cleanup() {
             instance.destroy();
         }
+
+        function test_auto_hide() {
+            wait(3000)
+        }
     }
 }

@@ -51,6 +51,32 @@ void GSettingsControllerQml::setAutoBrightness(bool val)
     }
 }
 
+uint GSettingsControllerQml::launcherWidth() const
+{
+    return m_launcherWidth;
+}
+
+bool GSettingsControllerQml::autohideLauncher() const
+{
+    return m_autohideLauncher;
+}
+
+void GSettingsControllerQml::setLauncherWidth(uint val)
+{
+    if (val != m_launcherWidth) {
+        m_launcherWidth = val;
+        Q_EMIT launcherWidthChanged();
+    }
+}
+
+void GSettingsControllerQml::setAutohideLauncher(bool val)
+{
+    if (val != m_autohideLauncher) {
+        m_autohideLauncher = val;
+        Q_EMIT autohideLauncherChanged();
+    }
+}
+
 GSettingsSchemaQml::GSettingsSchemaQml(QObject *parent): QObject(parent) {
 }
 
@@ -125,3 +151,36 @@ void GSettingsQml::setAutoBrightness(const QVariant &val)
     }
 }
 
+
+QVariant GSettingsQml::launcherWidth() const
+{
+    if (m_valid && m_schema->id() == "com.canonical.Unity8") {
+        return GSettingsControllerQml::instance()->launcherWidth();
+    } else {
+        return QVariant();
+    }
+}
+
+QVariant GSettingsQml::autohideLauncher() const
+{
+    if (m_valid && m_schema->id() == "com.canonical.Unity8") {
+        return GSettingsControllerQml::instance()->autohideLauncher();
+    } else {
+        return QVariant();
+    }
+}
+
+
+void GSettingsQml::setLauncherWidth(const QVariant &val)
+{
+    if (m_valid && m_schema->id() == "com.canonical.Unity8") {
+        GSettingsControllerQml::instance()->setLauncherWidth(val.toUInt());
+    }
+}
+
+void GSettingsQml::setAutohideLauncher(const QVariant &val)
+{
+    if (m_valid && m_schema->id() == "com.canonical.Unity8") {
+        GSettingsControllerQml::instance()->setAutohideLauncher(val.toBool());
+    }
+}
