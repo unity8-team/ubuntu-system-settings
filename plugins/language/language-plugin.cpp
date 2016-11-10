@@ -179,12 +179,14 @@ LanguagePlugin::updateLanguageNamesAndCodes()
     m_languageCodes.clear();
     m_indicesByLocale.clear();
 
-    // Get locales from 'locale -a'.
-    QProcess localeProcess;
-    localeProcess.start("locale", QStringList("-a"), QIODevice::ReadOnly);
-    localeProcess.waitForFinished();
-    QString localeOutput(localeProcess.readAllStandardOutput());
-    QSet<QString> localeNames(localeOutput.split(QRegExp("\\s+")).toSet());
+    QString locpath = QStringLiteral("/usr/lib/locale");
+    if (qEnvironmentVariableIsSet("LOCPATH")) {
+        locpath = QFile::decodeName(qgetenv("LOCPATH"));
+    }
+    QDir dir(locpath);
+    QStringList localeList = dir.entryList(QDir::Dirs | QDir::NoDotAndDotDot | QDir::Readable);
+
+    QSet<QString> localeNames(localeList.toSet());
 
     QHash<QString, QString> likelyLocaleForLanguage;
     QList<LanguageLocale> languageLocales;
