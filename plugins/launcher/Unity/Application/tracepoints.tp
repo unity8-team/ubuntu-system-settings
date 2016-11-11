@@ -1,0 +1,14 @@
+#include <stdint.h>
+
+TRACEPOINT_EVENT(qtmir, startApplication, TP_ARGS(0), TP_FIELDS())
+TRACEPOINT_EVENT(qtmir, onProcessStarting, TP_ARGS(0), TP_FIELDS())
+TRACEPOINT_EVENT(qtmir, authorizeSession, TP_ARGS(0), TP_FIELDS())
+TRACEPOINT_EVENT(qtmir, onProcessStopped, TP_ARGS(0), TP_FIELDS())
+TRACEPOINT_EVENT(qtmir, surfaceCreated, TP_ARGS(0), TP_FIELDS())
+TRACEPOINT_EVENT(qtmir, surfaceDestroyed, TP_ARGS(0), TP_FIELDS())
+TRACEPOINT_EVENT(qtmir, firstFrameDrawn, TP_ARGS(0), TP_FIELDS())
+TRACEPOINT_EVENT(qtmir, appIdHasProcessId_start, TP_ARGS(0), TP_FIELDS())
+TRACEPOINT_EVENT(qtmir, appIdHasProcessId_end, TP_ARGS(int, found), TP_FIELDS(ctf_integer(int, found, found)))
+
+TRACEPOINT_EVENT(qtmir, touchEventConsume_start, TP_ARGS(int64_t, event_time), TP_FIELDS(ctf_integer(int64_t, event_time, event_time)))
+TRACEPOINT_EVENT(qtmir, touchEventConsume_end, TP_ARGS(int64_t, event_time), TP_FIELDS(ctf_integer(int64_t, event_time, event_time)))

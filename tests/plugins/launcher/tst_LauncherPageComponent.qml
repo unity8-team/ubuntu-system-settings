@@ -50,7 +50,7 @@ Item {
         }
 
         function test_auto_hide() {
-            wait(3000)
+            wait(10000)
         }
     }
 }

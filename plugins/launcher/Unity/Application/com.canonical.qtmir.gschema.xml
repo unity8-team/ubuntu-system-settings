@@ -1,0 +1,12 @@
+<schemalist>
+  <!-- This schema is packaged in qtmir for historical reasons.
+       It is interpreted by unity8 these days. -->
+  <schema path="/com/canonical/qtmir/" id="com.canonical.qtmir" gettext-domain="qtmir">
+    <key type="as" name="lifecycle-exempt-appids">
+      <default>[
+        'com.ubuntu.music'
+      ]</default>
+      <summary>List of apps that should be excluded from the app lifecycle</summary>
+    </key>
+  </schema>
+</schemalist>

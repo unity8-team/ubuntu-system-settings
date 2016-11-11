@@ -16,8 +16,8 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef PLUGIN_H
-#define PLUGIN_H
+#ifndef FAKE_GSETTINGS_PLUGIN_H
+#define FAKE_GSETTINGS_PLUGIN_H
 
 #include <QtQml/QQmlExtensionPlugin>
 
@@ -30,4 +30,4 @@ public:
     void registerTypes(const char *uri) override;
 };
 
-#endif // PLUGIN_H
+#endif // FAKE_GSETTINGS_PLUGIN_H

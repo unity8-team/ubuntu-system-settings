@@ -108,8 +108,8 @@ private:
     GSettingsControllerQml();
 
     bool m_autoBrightness;
-    uint m_launcherWidth;
-    bool m_autohideLauncher;
+    uint m_launcherWidth = 8;
+    bool m_autohideLauncher = true;
 
     static GSettingsControllerQml* s_controllerInstance;
     QList<GSettingsQml *> m_registeredGSettings;

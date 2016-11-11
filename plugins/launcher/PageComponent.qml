@@ -22,6 +22,7 @@ import SystemSettings 1.0
 import SystemSettings.ListItems 1.0 as SettingsListItems
 import Ubuntu.Components.ListItems 1.3 as ListItems
 import Ubuntu.Components 1.3
+import Ubuntu.Settings.Menus 0.1 as Menus
 
 ItemPage {
     id: root
@@ -44,7 +45,7 @@ ItemPage {
             spacing: units.gu(1)
 
             SettingsItemTitle {
-                text: i18n.tr("On large screens")
+                text: i18n.tr("On large screens:")
             }
 
             SettingsListItems.Standard {
@@ -60,31 +61,18 @@ ItemPage {
                     onTriggered: unity8Settings.autohideLauncher = checked
                 }
             }
-            // SettingsListItems.Standard {
-            //     id: hotspotItem
-            //     objectName: "hotspotItem"
-            //     text: i18n.tr("Hotspot")
-            //     enabled: Connectivity.hotspotStored
-            //     onClicked: hotspotSwitch.trigger()
 
-            //     Switch {
-            //         id: hotspotSwitch
-            //         objectName: "hotspotSwitch"
-            //         enabled: parent.enabled
-            //         checked: Connectivity.hotspotEnabled
-            //         onTriggered: Connectivity.hotspotEnabled = checked
-
-            //         // Catch taps if Wi-Fi is disable and prompt user.
-            //         MouseArea {
-            //             id: hotspotSwitchWhenWifiDisabled
-            //             anchors.fill: parent
-            //             visible: false
-            //             onClicked: enableWifiAction.diag = PopupUtils.open(
-            //                 enableWifiDialog
-            //             );
-            //         }
-            //     }
-            // }
+            Menus.SliderMenu {
+                text: i18n.tr("Icon size:")
+    
+                id: iconWidth
+                objectName: "iconWidth"
+                function formatValue(v) { return v.toFixed(2) }
+                minimumValue: 6
+                maximumValue: 12
+                value: unity8Settings.launcherWidth
+                live: true
+            }
         }
     }
 

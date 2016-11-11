@@ -18,6 +18,7 @@
 
 #include "fake_gsettings.h"
 
+#include <QDebug>
 #include <QList>
 
 GSettingsControllerQml* GSettingsControllerQml::s_controllerInstance = 0;
@@ -127,8 +128,14 @@ void GSettingsQml::componentComplete()
     // properties in one object.  We should create properties based on the schema.
     connect(GSettingsControllerQml::instance(), &GSettingsControllerQml::autoBrightnessChanged,
             this, &GSettingsQml::autoBrightnessChanged);
+    connect(GSettingsControllerQml::instance(), &GSettingsControllerQml::autohideLauncherChanged,
+            this, &GSettingsQml::autohideLauncherChanged);
+    connect(GSettingsControllerQml::instance(), &GSettingsControllerQml::launcherWidthChanged,
+            this, &GSettingsQml::launcherWidthChanged);
 
     Q_EMIT autoBrightnessChanged();
+    Q_EMIT autohideLauncherChanged();
+    Q_EMIT launcherWidthChanged();
 }
 
 GSettingsSchemaQml * GSettingsQml::schema() const {
@@ -163,6 +170,7 @@ QVariant GSettingsQml::launcherWidth() const
 
 QVariant GSettingsQml::autohideLauncher() const
 {
+    qWarning() << "autohideLauncher" << m_valid << m_schema->id() << GSettingsControllerQml::instance()->autohideLauncher();
     if (m_valid && m_schema->id() == "com.canonical.Unity8") {
         return GSettingsControllerQml::instance()->autohideLauncher();
     } else {
