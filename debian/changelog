@@ -1,3 +1,10 @@
+ubuntu-system-settings (0.4+17.04.20161111.1-0ubuntu1) zesty; urgency=medium
+
+  [ Lukáš Tinkl ]
+  * Get the list of locales using ICU
+
+ -- Marco Trevisan (Treviño) <mail@3v1n0.net>  Fri, 11 Nov 2016 18:52:03 +0000
+
 ubuntu-system-settings (0.4+17.04.20161101.1-0ubuntu1) zesty; urgency=medium
 
   * Drop repowerd to a Recommends and stop depending on gnome-settings-
