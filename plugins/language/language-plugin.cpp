@@ -27,12 +27,7 @@
 
 #define LANGUAGE2LOCALE "language-tools/language2locale"
 
-static const char * const LOCALE_BLACKLIST[] = {
-    "C",
-    "C.UTF-8",
-    "POSIX",
-    nullptr
-};
+static const QStringList LOCALE_BLACKLIST = {"C", "C.UTF-8", "POSIX"};
 
 struct LanguageLocale
 {
@@ -48,21 +43,21 @@ public:
 
 public:
 
-    explicit LanguageLocale(const QString &name);
+    explicit LanguageLocale(const icu::Locale &loc, const QString &name);
 
     bool operator<(const LanguageLocale &l) const;
 };
 
-LanguageLocale::LanguageLocale(const QString &name) :
+LanguageLocale::LanguageLocale(const icu::Locale &loc, const QString &name) :
     likely(false),
     localeName(name),
-    locale(qPrintable(name))
+    locale(loc)
 {
     std::string string;
     icu::UnicodeString unicodeString;
     locale.getDisplayName(locale, unicodeString);
     unicodeString.toUTF8String(string);
-    displayName = string.c_str();
+    displayName = QString::fromStdString(string);
     /* workaround iso-codes casing being inconsistant */
     if (displayName.length() > 0)
         displayName[0] = displayName[0].toUpper();
@@ -179,47 +174,38 @@ LanguagePlugin::updateLanguageNamesAndCodes()
     m_languageCodes.clear();
     m_indicesByLocale.clear();
 
-    QString locpath = QStringLiteral("/usr/lib/locale");
-    if (qEnvironmentVariableIsSet("LOCPATH")) {
-        locpath = QFile::decodeName(qgetenv("LOCPATH"));
-    }
-    QDir dir(locpath);
-    QStringList localeList = dir.entryList(QDir::Dirs | QDir::NoDotAndDotDot | QDir::Readable);
-
-    QSet<QString> localeNames(localeList.toSet());
-
-    QHash<QString, QString> likelyLocaleForLanguage;
     QList<LanguageLocale> languageLocales;
+    QHash<QString, QString> likelyLocaleForLanguage;
 
-    // Remove blacklisted locales.
-    for (unsigned int
-         i(0); i < sizeof(LOCALE_BLACKLIST) / sizeof(const char *); i++)
-        localeNames.remove(LOCALE_BLACKLIST[i]);
+    const QString l2lPath = QStandardPaths::locate(QStandardPaths::GenericDataLocation, LANGUAGE2LOCALE);
 
-    for (QSet<QString>::const_iterator
-         i(localeNames.begin()); i != localeNames.end(); ++i) {
-        // We only want locales that contain '.utf8'.
-        if (i->indexOf(".utf8") < 0)
+    int count;
+    const icu::Locale * locales = icu::Locale::getAvailableLocales(count);
+    languageLocales.reserve(count);
+    for (int i = 0; i < count; i++) {
+        icu::Locale loc = locales[i];
+        QString language = loc.getLanguage();
+        const QString country = loc.getCountry();
+
+        // skip blacklisted, or otherwise unsupported locales (3 letter ISO codes and without country)
+        if (LOCALE_BLACKLIST.contains(loc.getBaseName()) || loc.isBogus() || country.isEmpty()
+                || language.length() > 2 || country.length() > 2)
             continue;
 
-        LanguageLocale languageLocale(*i);
+        QString locName = QStringLiteral("%1_%2.UTF-8").arg(language, country);
+
+        LanguageLocale languageLocale(loc, locName);
 
         // Filter out locales for which we have no display name.
         if (languageLocale.displayName.isEmpty())
             continue;
 
-        QString language(languageLocale.locale.getLanguage());
-
         if (!likelyLocaleForLanguage.contains(language)) {
-            QString l2lPath = QStandardPaths::locate(
-                QStandardPaths::GenericDataLocation, LANGUAGE2LOCALE
-            );
             if (l2lPath.isEmpty()) {
                 qWarning() << "Could not find language2locale file.";
             } else {
                 QProcess likelyProcess;
-                likelyProcess.start(l2lPath, QStringList(language),
-                                    QIODevice::ReadOnly);
+                likelyProcess.start(l2lPath, {language}, QIODevice::ReadOnly);
                 likelyProcess.waitForFinished();
                 QString likelyLocale(likelyProcess.readAllStandardOutput());
                 likelyLocale = likelyLocale.left(likelyLocale.indexOf('.'));
@@ -229,7 +215,7 @@ LanguagePlugin::updateLanguageNamesAndCodes()
         }
 
         languageLocale.likely = likelyLocaleForLanguage[language] ==
-                                i->left(i->indexOf('.'));
+                                locName.left(locName.indexOf('.'));
         languageLocales += languageLocale;
     }
 
@@ -308,7 +294,7 @@ LanguagePlugin::updateSpellCheckingModel()
 }
 
 int
-LanguagePlugin::indexForLocale(const QString &name)
+LanguagePlugin::indexForLocale(const QString &name) const
 {
     return m_indicesByLocale.value(name.left(name.indexOf('.')), -1);
 }
