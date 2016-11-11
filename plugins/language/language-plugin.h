@@ -84,7 +84,7 @@ private:
     void updateCurrentLanguage();
     void updateSpellCheckingModel();
 
-    int indexForLocale(const QString &name);
+    int indexForLocale(const QString &name) const;
 
     void userLoaded();
 

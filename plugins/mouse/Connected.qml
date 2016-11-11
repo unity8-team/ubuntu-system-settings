@@ -67,7 +67,6 @@ Column {
                 }
                 id: mouseMoveSpeed
                 objectName: "mouseMoveSpeed"
-                showDivider: false
                 function formatValue(v) { return v.toFixed(2) }
                 minimumValue: 0.0
                 maximumValue: 1.0
