@@ -8,6 +8,7 @@
         "appearance"
     ],
     "page-component": "PageComponent.qml",
+    "entry-component": "EntryComponent.qml",
     "has-dynamic-keywords": false,
     "has-dynamic-visibility": false
 }

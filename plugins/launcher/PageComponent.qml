@@ -23,11 +23,27 @@ import SystemSettings.ListItems 1.0 as SettingsListItems
 import Ubuntu.Components.ListItems 1.3 as ListItems
 import Ubuntu.Components 1.3
 import Ubuntu.Settings.Menus 0.1 as Menus
+import Ubuntu.SystemSettings.Launcher 1.0
 
 ItemPage {
     id: root
     objectName: "launcherPage"
     title: i18n.tr("Launcher")
+
+    /* The introductory label “On large displays:” should be present if the
+    current display does not fall into <the large screen> category (to explain
+    why the settings aren’t applying to the display that you’re looking at). */
+    property bool largeScreenAvailable: {
+        var currentScreen = LauncherPanelPlugin.getCurrentScreenNumber();
+        for (var i=0; i < LauncherPanelPlugin.screens; i++) {
+            if (LauncherPanelPlugin.screenGeometry(i).width > units.gu(90)) {
+                if (currentScreen === i) {
+                    return false;
+                }
+            }
+        }
+        return true; // No large screens were the current one.
+    }
 
     Flickable {
         id: flick
@@ -46,12 +62,13 @@ ItemPage {
 
             SettingsItemTitle {
                 text: i18n.tr("On large screens:")
+                visible: largeScreenAvailable
             }
 
             SettingsListItems.Standard {
                 id: alwaysShowLauncher
                 objectName: "alwaysShowLauncher"
-                text: i18n.tr("Always")
+                text: i18n.tr("Always show the launcher")
                 layout.subtitle.text: i18n.tr("Videos and full-screen games may hide it temporarily.")
 
                 Switch {
@@ -64,7 +81,7 @@ ItemPage {
 
             Menus.SliderMenu {
                 text: i18n.tr("Icon size:")
-    
+
                 id: iconWidth
                 objectName: "iconWidth"
                 function formatValue(v) { return v.toFixed(2) }
