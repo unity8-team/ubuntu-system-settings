@@ -97,7 +97,7 @@ QString Utilities::getDestinationUrl(const QString &source)
 {
     QString mapFile = QStandardPaths::locate(
         QStandardPaths::GenericDataLocation,
-        QString("%1/%2").arg(PLUGIN_MANIFEST_DIR).arg("url-map.ini")
+        QStringLiteral("%1/%2").arg(MANIFEST_DIR, "url-map.ini")
     );
     if (Q_UNLIKELY(mapFile.isEmpty())) {
         qWarning() << "could not locate map file";
