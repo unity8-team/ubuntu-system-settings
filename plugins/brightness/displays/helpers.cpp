@@ -20,7 +20,7 @@
 
 namespace DisplayPlugin
 {
-Display::Orientation Helpers::mirOrientationToOritentation(const MirOrientation &mirOrientation)
+Display::Orientation Helpers::mirOrientationToOrientation(const MirOrientation &mirOrientation)
 {
     Display::Orientation orientation;
     switch (mirOrientation) {

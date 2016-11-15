@@ -28,7 +28,7 @@ namespace DisplayPlugin
 struct Helpers
 {
 public:
-    static Display::Orientation mirOrientationToOritentation(const MirOrientation &mirOrientation);
+    static Display::Orientation mirOrientationToOrientation(const MirOrientation &mirOrientation);
     static MirOrientation orientationToMirOrientation(const Display::Orientation &orientation);
     static QString mirTypeToString(const MirDisplayOutputType &type);
     static QString mirModeToString(const MirDisplayOutputType &type);

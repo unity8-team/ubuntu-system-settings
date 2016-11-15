@@ -71,7 +71,7 @@ Display::Display(MirDisplayOutput &output, QObject *parent)
             m_mode = mode;
     }
     m_modes = modes;
-    m_orientation = DisplayPlugin::Helpers::mirOrientationToOritentation(output.orientation);
+    m_orientation = DisplayPlugin::Helpers::mirOrientationToOrientation(output.orientation);
     m_powerMode = DisplayPlugin::Helpers::mirPowerModeToPowerMode(output.power_mode);
     m_id = output.output_id;
 
