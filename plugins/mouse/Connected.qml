@@ -107,7 +107,7 @@ Column {
                 objectName: "mouseMoveSpeed"
                 function formatValue(v) { return v.toFixed(2) }
                 minimumValue: 0.0
-                maximumValue: 1.0
+                maximumValue: 3.0
                 value: backend.mouseScrollSpeed
                 live: true
                 property real serverValue: enabled ? backend.mouseScrollSpeed : 0.0
@@ -276,7 +276,7 @@ Column {
                 objectName: "touchScrollSpeed"
                 function formatValue(v) { return v.toFixed(2) }
                 minimumValue: 0.0
-                maximumValue: 1.0
+                maximumValue: 3.0
                 value: backend.touchpadScrollSpeed
                 live: true
                 property real serverValue: enabled ? backend.touchpadScrollSpeed : 0.0

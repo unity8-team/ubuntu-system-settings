@@ -1,3 +1,22 @@
+ubuntu-system-settings (0.4+17.04.20161109.1-0ubuntu1) zesty; urgency=medium
+
+  [ Daniel van Vugt ]
+  * Allow scroll speed multipliers up to 3.0; since the default speed in
+    (LP: #1607240, #1627567)
+
+  [ Ken VanDine ]
+  * Updated example plugin to work with current SDK
+  * Fixed pep8 failure
+
+  [ Timo Jyrinki ]
+  * Stop depending on transitional packages. (LP: #1583079) (LP:
+    #1583079)
+
+  [ jonas-drange ]
+  * Drop “at” from “Updated at <date>” string
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Wed, 09 Nov 2016 15:27:26 +0000
+
 ubuntu-system-settings (0.4+17.04.20161101.1-0ubuntu1) zesty; urgency=medium
 
   * Drop repowerd to a Recommends and stop depending on gnome-settings-
