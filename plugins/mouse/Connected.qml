@@ -105,7 +105,6 @@ Column {
                 }
                 id: mouseScrollSpeed
                 objectName: "mouseMoveSpeed"
-                showDivider: false
                 function formatValue(v) { return v.toFixed(2) }
                 minimumValue: 0.0
                 maximumValue: 1.0
@@ -143,7 +142,6 @@ Column {
                 }
                 id: mouseDoubleClickSpeed
                 objectName: "mouseDoubleClickSpeed"
-                showDivider: false
                 function formatValue(v) { return v.toFixed(2) }
                 minimumValue: 100
                 maximumValue: 1000
@@ -239,7 +237,6 @@ Column {
                 }
                 id: touchMoveSpeed
                 objectName: "touchMoveSpeed"
-                showDivider: false
                 function formatValue(v) { return v.toFixed(2) }
                 minimumValue: 0.0
                 maximumValue: 1.0
@@ -277,7 +274,6 @@ Column {
                 }
                 id: touchScrollSpeed
                 objectName: "touchScrollSpeed"
-                showDivider: false
                 function formatValue(v) { return v.toFixed(2) }
                 minimumValue: 0.0
                 maximumValue: 1.0
@@ -316,7 +312,6 @@ Column {
                 }
                 id: touchClickSpeed
                 objectName: "touchClickSpeed"
-                showDivider: false
                 function formatValue(v) { return v.toFixed(2) }
                 minimumValue: 100
                 maximumValue: 1000
