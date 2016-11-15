@@ -2,7 +2,9 @@ include_directories(${ANDR_PROP_INCLUDE_DIRS})
 add_subdirectory(plugin)
 
 pkg_search_module(MIR REQUIRED mirclient)
+find_package(Qt5Core)
 find_package(Qt5Gui)
+find_package(Qt5Quick)
 include_directories(${Qt5Gui_PRIVATE_INCLUDE_DIRS} ${MIR_INCLUDE_DIRS})
 
 add_library(uss-displays SHARED
@@ -20,10 +22,8 @@ add_library(uss-displays SHARED
     displays/mirclient_impl.cpp
     ../../src/i18n.cpp
 )
-qt5_use_modules(uss-displays Quick)
 set_target_properties(uss-displays PROPERTIES VERSION 0.0 SOVERSION 0.0)
-target_link_libraries(uss-displays ${Qt5Gui_PRIVATE_LDFLAGS} ${MIR_LDFLAGS})
-
+target_link_libraries(uss-displays Qt5::Core Qt5::Quick ${Qt5Gui_PRIVATE_LDFLAGS} ${MIR_LDFLAGS})
 set(QML_SOURCES
     PageComponent.qml
     WifiDisplays.qml
