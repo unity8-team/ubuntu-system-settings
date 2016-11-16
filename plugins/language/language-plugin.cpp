@@ -164,6 +164,12 @@ LanguagePlugin::updateLanguageNamesAndCodes()
     const QByteArray langpackRoot = qgetenv("SNAP") + "/usr/share/locale-langpack";
     //const QByteArray langpackRoot = "/snap/unity8-session/current/usr/share/locale-langpack";
     QDir langpackDir(langpackRoot);
+
+    if (!langpackDir.exists()) {
+        qWarning() << "Cannot find any language packs, bailing out";
+        return;
+    }
+
     const QStringList langpackNames = langpackDir.entryList(QDir::Dirs | QDir::NoDotAndDotDot | QDir::Readable);
 
     qWarning() << "Lang pack root:" << langpackRoot;
@@ -185,8 +191,7 @@ LanguagePlugin::updateLanguageNamesAndCodes()
         if (languageLocale.displayName.isEmpty())
             continue;
 
-        QString language(languageLocale.locale.getLanguage());
-        QLocale tmpLoc(language);
+        QLocale tmpLoc(languageLocale.locale.getLanguage());
         //qWarning() << "Checking locale" << loc;
         languageLocale.likely = tmpLoc.name() == loc.left(loc.indexOf('.')) || // likely if: en_US -> en -> en_US, NOT likely if: en_GB -> en -> en_US
                 (loc.startsWith("pt_PT") && !loc.startsWith("pt_BR")); // "pt" work around for https://bugreports.qt.io/browse/QTBUG-47891
