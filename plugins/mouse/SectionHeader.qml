@@ -43,35 +43,13 @@ Column {
                 top: parent.top
             }
             text: root.text
-            fontSize: "medium"
+            /* We are "large" to avoid looking like normal "medium" text */
+            fontSize: "large"
             elide: Text.ElideRight
             color: Theme.palette.normal.baseText
             font.weight: Text.Normal
         }
         highlightWhenPressed: false
         showDivider: false
-    }
-    Item {
-        anchors {
-            left: parent.left
-            right: parent.right
-        }
-        height: childrenRect.height + units.gu(1)
-        Label {
-            anchors {
-                left: parent.left
-                top: parent.top
-            }
-            text: i18n.tr("Slow")
-            fontSize: "small"
-        }
-        Label {
-            anchors {
-                right: parent.right
-                top: parent.top
-            }
-            text: i18n.tr("Fast")
-            fontSize: "small"
-        }
     }
 }

@@ -56,11 +56,12 @@ Column {
             spacing: 0
             height: childrenRect.height
             ItemTitle {
-                text: i18n.tr("Move:")
-                showDivider: false
+                text: i18n.tr("Cursor speed:")
             }
 
             Menus.SliderMenu {
+                /* FIXME: No appropriate icons exist yet, also SliderMenu lacks
+                          support for text labels on the ends. */
                 anchors { 
                     left: parent.left
                     right: parent.right
@@ -95,11 +96,12 @@ Column {
             height: childrenRect.height
 
             ItemTitle {
-                text: i18n.tr("Scroll:")
-                showDivider: false
+                text: i18n.tr("Wheel scrolling speed:")
             }
 
             Menus.SliderMenu {
+                /* FIXME: No appropriate icons exist yet, also SliderMenu lacks
+                          support for text labels on the ends. */
                 anchors { 
                     left: parent.left
                     right: parent.right
@@ -133,11 +135,12 @@ Column {
             height: childrenRect.height
             visible: showAllUI
             ItemTitle {
-                text: i18n.tr("Double-click:")
-                showDivider: false
+                text: i18n.tr("Double-click speed:")
             }
 
             Menus.SliderMenu {
+                /* FIXME: No appropriate icons exist yet, also SliderMenu lacks
+                          support for text labels on the ends. */
                 anchors { 
                     left: parent.left
                     right: parent.right
@@ -173,7 +176,6 @@ Column {
 
             ItemTitle {
                 text: i18n.tr("Test double-click:")
-                showDivider: false
             }
 
             TapArea {
@@ -229,11 +231,12 @@ Column {
             spacing: 0
             height: childrenRect.height
             ItemTitle {
-                text: i18n.tr("Move:")
-                showDivider: false
+                text: i18n.tr("Cursor speed:")
             }
 
             Menus.SliderMenu {
+                /* FIXME: No appropriate icons exist yet, also SliderMenu lacks
+                          support for text labels on the ends. */
                 anchors { 
                     left: parent.left
                     right: parent.right
@@ -267,11 +270,12 @@ Column {
             spacing: 0
             height: childrenRect.height
             ItemTitle {
-                text: i18n.tr("Scroll:")
-                showDivider: false
+                text: i18n.tr("Finger scrolling speed:")
             }
 
             Menus.SliderMenu {
+                /* FIXME: No appropriate icons exist yet, also SliderMenu lacks
+                          support for text labels on the ends. */
                 anchors { 
                     left: parent.left
                     right: parent.right
@@ -306,11 +310,12 @@ Column {
             height: childrenRect.height
             visible: showAllUI
             ItemTitle {
-                text: i18n.tr("Double-click:")
-                showDivider: false
+                text: i18n.tr("Double-click speed:")
             }
 
             Menus.SliderMenu {
+                /* FIXME: No appropriate icons exist yet, also SliderMenu lacks
+                          support for text labels on the ends. */
                 anchors { 
                     left: parent.left
                     right: parent.right
@@ -346,7 +351,6 @@ Column {
             visible: showAllUI
             ItemTitle {
                 text: i18n.tr("Test double-click:")
-                showDivider: false
             }
 
             TapArea {
