@@ -17,9 +17,9 @@
  */
 
 #include "plugin.h"
-#include "launcher_impl.h"
+#include "MockLauncherPanelPlugin.h"
 
-#include <QtQml/QtQml>
+#include <QtQml>
 
 #define MAKE_SINGLETON_FACTORY(type) \
     static QObject* type##_singleton_factory(QQmlEngine* engine, QJSEngine* scriptEngine) { \
@@ -28,12 +28,10 @@
         return new type(); \
     }
 
-MAKE_SINGLETON_FACTORY(LauncherPanelPluginImpl)
+MAKE_SINGLETON_FACTORY(MockLauncherPanelPlugin)
 
 void BackendPlugin::registerTypes(const char *uri)
 {
     Q_ASSERT(uri == QLatin1String("Ubuntu.SystemSettings.Launcher"));
-    qmlRegisterSingletonType<LauncherPanelPluginImpl>(
-        uri, 1, 0, "LauncherPanelPlugin", LauncherPanelPluginImpl_singleton_factory
-    );
+    qmlRegisterSingletonType<MockLauncherPanelPlugin>(uri, 1, 0, "LauncherPanelPlugin", MockLauncherPanelPlugin_singleton_factory);
 }

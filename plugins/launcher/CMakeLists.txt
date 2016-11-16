@@ -1,7 +1,7 @@
 set(QML_SOURCES EntryComponent.qml PageComponent.qml)
 set(PANEL_SOURCES
-    launcher.cpp
     launcher.h
+    launcher_impl.cpp
     plugin.cpp
     plugin.h
     ${QML_SOURCES}

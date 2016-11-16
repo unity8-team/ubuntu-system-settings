@@ -16,24 +16,25 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "plugin.h"
-#include "launcher_impl.h"
+#ifndef LAUNCHER_IMPL_H
+#define LAUNCHER_IMPL_H
 
-#include <QtQml/QtQml>
+#include "launcher.h"
 
-#define MAKE_SINGLETON_FACTORY(type) \
-    static QObject* type##_singleton_factory(QQmlEngine* engine, QJSEngine* scriptEngine) { \
-        Q_UNUSED(engine); \
-        Q_UNUSED(scriptEngine); \
-        return new type(); \
-    }
+#include <QDesktopWidget>
 
-MAKE_SINGLETON_FACTORY(LauncherPanelPluginImpl)
-
-void BackendPlugin::registerTypes(const char *uri)
+class LauncherPanelPluginImpl : public LauncherPanelPlugin
 {
-    Q_ASSERT(uri == QLatin1String("Ubuntu.SystemSettings.Launcher"));
-    qmlRegisterSingletonType<LauncherPanelPluginImpl>(
-        uri, 1, 0, "LauncherPanelPlugin", LauncherPanelPluginImpl_singleton_factory
-    );
-}
+    Q_OBJECT
+public:
+    explicit LauncherPanelPluginImpl(QObject *parent = nullptr);
+    ~LauncherPanelPluginImpl();
+    virtual int screens() const override;
+public slots:
+    virtual QRect screenGeometry(const int &screen = -1) const override;
+    virtual int getCurrentScreenNumber() const override;
+private:
+    QDesktopWidget *m_desktopWidget = nullptr;
+};
+
+#endif // LAUNCHER_IMPL_H

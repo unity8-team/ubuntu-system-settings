@@ -20,8 +20,8 @@ import GSettings 1.0
 import QtQuick 2.4
 import SystemSettings 1.0
 import SystemSettings.ListItems 1.0 as SettingsListItems
-import Ubuntu.Components.ListItems 1.3 as ListItems
 import Ubuntu.Components 1.3
+import Ubuntu.Settings.Components 0.1 as USC
 import Ubuntu.Settings.Menus 0.1 as Menus
 import Ubuntu.SystemSettings.Launcher 1.0
 
@@ -62,6 +62,7 @@ ItemPage {
 
             SettingsItemTitle {
                 text: i18n.tr("On large screens:")
+                objectName: "largeScreenLabel"
                 visible: largeScreenAvailable
             }
 
@@ -74,8 +75,8 @@ ItemPage {
                 Switch {
                     id: alwaysShowLauncherSwitch
                     objectName: "alwaysShowLauncherSwitch"
-                    checked: unity8Settings.autohideLauncher
-                    onTriggered: unity8Settings.autohideLauncher = checked
+                    checked: !unity8Settings.autohideLauncher
+                    onTriggered: unity8Settings.autohideLauncher = !checked
                 }
             }
 
@@ -89,12 +90,24 @@ ItemPage {
                 maximumValue: 12
                 value: unity8Settings.launcherWidth
                 live: true
+
+                property real serverValue: unity8Settings.launcherWidth
+                USC.ServerPropertySynchroniser {
+                    userTarget: iconWidth
+                    userProperty: "value"
+                    serverTarget: iconWidth
+                    serverProperty: "serverValue"
+                    maximumWaitBufferInterval: 16
+
+                    onSyncTriggered: unity8Settings.launcherWidth = value
+                }
             }
         }
     }
 
     GSettings {
         id: unity8Settings
+        objectName: "unity8Settings"
         schema.id: "com.canonical.Unity8"
     }
 }

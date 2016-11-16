@@ -30,6 +30,9 @@ Item {
 
     objectName: "entryComponent-" + model.item.baseName
 
+    /* The specification require us to hide Launcher if there's no display
+    connected larger than 90 GUs. Since we cannot calculate GUs from c++,
+    thus hiding this plugin the conventional way, we do it here instead. */
     visible: {
         for (var i=0; i < LauncherPanelPlugin.screens; i++) {
             if (LauncherPanelPlugin.screenGeometry(i).width > units.gu(90)) {
@@ -40,8 +43,9 @@ Item {
     }
 
     onVisibleChanged: {
-        if (!visible && pageStack.currentPage.objectName === "launcherPage")
+        if (!visible && pageStack.currentPage.objectName === "launcherPage") {
             pageStack.pop();
+        }
     }
 
     AbstractButton {

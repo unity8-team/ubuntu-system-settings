@@ -19,22 +19,23 @@
 #ifndef LAUNCHER_H
 #define LAUNCHER_H
 
-#include <QDesktopWidget>
 #include <QObject>
+#include <QRect>
 
 class LauncherPanelPlugin : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(int screens READ screens NOTIFY screensChanged)
 public:
-    explicit LauncherPanelPlugin(QObject *parent = nullptr);
-    ~LauncherPanelPlugin();
-    Q_INVOKABLE QRect screenGeometry(int screen = -1) const;
-    Q_INVOKABLE int getCurrentScreenNumber() const;
-    int screens() const;
+    explicit LauncherPanelPlugin(QObject *parent = nullptr) : QObject(parent) {};
+    virtual ~LauncherPanelPlugin() {};
+    // Return index of screen at which USS is currently rendered.
+    virtual int screens() const = 0;
+public slots:
+    virtual QRect screenGeometry(const int &screen = -1) const = 0;
+    virtual int getCurrentScreenNumber() const = 0;
 Q_SIGNALS:
     void screensChanged(int newCount);
-private:
-    QDesktopWidget *m_desktopWidget = nullptr;
 };
+
 #endif // LAUNCHER_H

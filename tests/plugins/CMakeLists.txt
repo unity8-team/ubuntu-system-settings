@@ -63,4 +63,5 @@ set(LAUNCHER_IMPORT_PATHS
     ${CMAKE_SOURCE_DIR}/tests/plugins/launcher
 )
 add_qml_test(launcher LauncherPageComponent IMPORT_PATHS ${LAUNCHER_IMPORT_PATHS})
+add_qml_test(launcher LauncherEntryComponent IMPORT_PATHS ${LAUNCHER_IMPORT_PATHS})
 

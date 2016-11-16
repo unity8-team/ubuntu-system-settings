@@ -170,7 +170,6 @@ QVariant GSettingsQml::launcherWidth() const
 
 QVariant GSettingsQml::autohideLauncher() const
 {
-    qWarning() << "autohideLauncher" << m_valid << m_schema->id() << GSettingsControllerQml::instance()->autohideLauncher();
     if (m_valid && m_schema->id() == "com.canonical.Unity8") {
         return GSettingsControllerQml::instance()->autohideLauncher();
     } else {

@@ -16,24 +16,17 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "plugin.h"
-#include "launcher_impl.h"
+#ifndef MOCK_SYSTEMSETTINGS_LAUNCHER_PLUGIN_H
+#define MOCK_SYSTEMSETTINGS_LAUNCHER_PLUGIN_H
 
-#include <QtQml/QtQml>
+#include <QQmlExtensionPlugin>
 
-#define MAKE_SINGLETON_FACTORY(type) \
-    static QObject* type##_singleton_factory(QQmlEngine* engine, QJSEngine* scriptEngine) { \
-        Q_UNUSED(engine); \
-        Q_UNUSED(scriptEngine); \
-        return new type(); \
-    }
-
-MAKE_SINGLETON_FACTORY(LauncherPanelPluginImpl)
-
-void BackendPlugin::registerTypes(const char *uri)
+class BackendPlugin : public QQmlExtensionPlugin
 {
-    Q_ASSERT(uri == QLatin1String("Ubuntu.SystemSettings.Launcher"));
-    qmlRegisterSingletonType<LauncherPanelPluginImpl>(
-        uri, 1, 0, "LauncherPanelPlugin", LauncherPanelPluginImpl_singleton_factory
-    );
-}
+    Q_OBJECT
+    Q_PLUGIN_METADATA(IID "org.qt-project.Qt.QQmlExtensionInterface")
+public:
+    void registerTypes(const char *uri) override;
+};
+
+#endif // MOCK_SYSTEMSETTINGS_LAUNCHER_PLUGIN_H

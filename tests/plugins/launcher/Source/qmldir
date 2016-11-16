@@ -1,2 +1,3 @@
 module Source
 PageComponent 1.0 ../../../../plugins/launcher/PageComponent.qml
+EntryComponent 1.0 ../../../../plugins/launcher/EntryComponent.qml

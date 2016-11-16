@@ -16,13 +16,13 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "launcher.h"
+#include "launcher_impl.h"
 
-#include <QGuiApplication>
 #include <QApplication>
+#include <QGuiApplication>
 
-LauncherPanelPlugin::LauncherPanelPlugin(QObject *parent)
-    : QObject(parent)
+LauncherPanelPluginImpl::LauncherPanelPluginImpl(QObject *parent)
+    : LauncherPanelPlugin(parent)
 {
     auto app = (QApplication*) QGuiApplication::instance();
     m_desktopWidget = app->desktop();
@@ -30,23 +30,23 @@ LauncherPanelPlugin::LauncherPanelPlugin(QObject *parent)
             this, SIGNAL(screensChanged(int)));
 }
 
-LauncherPanelPlugin::~LauncherPanelPlugin()
+LauncherPanelPluginImpl::~LauncherPanelPluginImpl()
 {
     disconnect(m_desktopWidget, SIGNAL(screenCountChanged(int)),
                this, SIGNAL(screensChanged(int)));
 }
 
-QRect LauncherPanelPlugin::screenGeometry(int screen) const
+QRect LauncherPanelPluginImpl::screenGeometry(const int &screen) const
 {
     return m_desktopWidget->screenGeometry(screen);
 }
 
-int LauncherPanelPlugin::getCurrentScreenNumber() const
+int LauncherPanelPluginImpl::getCurrentScreenNumber() const
 {
     return m_desktopWidget->screenNumber(m_desktopWidget);
 }
 
-int LauncherPanelPlugin::screens() const
+int LauncherPanelPluginImpl::screens() const
 {
     return m_desktopWidget->screenCount();
 }
