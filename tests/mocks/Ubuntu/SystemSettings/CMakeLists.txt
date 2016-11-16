@@ -1,4 +1,6 @@
-add_subdirectory(Brightness)
+if(ANDR_PROP_FOUND)
+    add_subdirectory(Brightness)
+endif()
 add_subdirectory(Notifications)
 add_subdirectory(Update)
 add_subdirectory(Wifi)

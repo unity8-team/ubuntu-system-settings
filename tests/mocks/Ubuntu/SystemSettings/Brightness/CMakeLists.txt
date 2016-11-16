@@ -24,8 +24,7 @@ set(MOCK_BRIGHTNESS_SRCS
 
 add_library(MockBrightnessPanel MODULE ${MOCK_BRIGHTNESS_SRCS})
 
-add_dependencies(MockBrightnessPanel uss-displays)
-target_link_libraries(MockBrightnessPanel uss-displays Qt5::Core Qt5::Quick ${Qt5Gui_PRIVATE_LDFLAGS} ${MIR_LDFLAGS})
+target_link_libraries(MockBrightnessPanel uss-displays)
 
 add_uss_mock(Ubuntu.SystemSettings.Brightness 1.0 Ubuntu/SystemSettings/Brightness
              TARGETS MockBrightnessPanel)
