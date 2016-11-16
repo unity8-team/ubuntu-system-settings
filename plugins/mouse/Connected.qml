@@ -169,6 +169,7 @@ Column {
 
             ItemTitle {
                 text: i18n.tr("Test double-click:")
+                showDivider: false
             }
 
             TapArea {
@@ -338,6 +339,7 @@ Column {
             visible: showAllUI
             ItemTitle {
                 text: i18n.tr("Test double-click:")
+                showDivider: false
             }
 
             TapArea {

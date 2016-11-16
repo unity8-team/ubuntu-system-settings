@@ -24,7 +24,6 @@ ListItem.Standard {
     id: itemEmpty
     property string text
     height: label.height
-    showDivider: false
     Label {
         id: label
         anchors {
