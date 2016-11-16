@@ -138,13 +138,12 @@ ItemPage {
                 iconSource: "image://theme/language-chooser"
                 text: i18n.tr("Display language…")
                 objectName: "displayLanguage"
-                showDivider: false
-                component: Label {
-                    property int currentLanguage: plugin.currentLanguage
+                slots: Label {
                     objectName: "currentLanguage"
                     text: plugin.languageNames[plugin.currentLanguage]
                     elide: Text.ElideRight
                     opacity: enabled ? 1.0 : 0.5
+                    SlotsLayout.position: SlotsLayout.Trailing
                 }
 
                 onClicked: PopupUtils.open(displayLanguage)
