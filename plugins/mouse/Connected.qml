@@ -55,13 +55,11 @@ Column {
             }
             spacing: 0
             height: childrenRect.height
-            ItemTitle {
-                text: i18n.tr("Cursor speed:")
-            }
 
             Menus.SliderMenu {
                 /* FIXME: No appropriate icons exist yet, also SliderMenu lacks
                           support for text labels on the ends. */
+                text: i18n.tr("Cursor speed:")
                 anchors { 
                     left: parent.left
                     right: parent.right
@@ -95,13 +93,10 @@ Column {
             spacing: 0
             height: childrenRect.height
 
-            ItemTitle {
-                text: i18n.tr("Wheel scrolling speed:")
-            }
-
             Menus.SliderMenu {
                 /* FIXME: No appropriate icons exist yet, also SliderMenu lacks
                           support for text labels on the ends. */
+                text: i18n.tr("Wheel scrolling speed:")
                 anchors { 
                     left: parent.left
                     right: parent.right
@@ -134,13 +129,11 @@ Column {
             spacing: 0
             height: childrenRect.height
             visible: showAllUI
-            ItemTitle {
-                text: i18n.tr("Double-click speed:")
-            }
 
             Menus.SliderMenu {
                 /* FIXME: No appropriate icons exist yet, also SliderMenu lacks
                           support for text labels on the ends. */
+                text: i18n.tr("Double-click speed:")
                 anchors { 
                     left: parent.left
                     right: parent.right
@@ -230,13 +223,11 @@ Column {
             }
             spacing: 0
             height: childrenRect.height
-            ItemTitle {
-                text: i18n.tr("Cursor speed:")
-            }
 
             Menus.SliderMenu {
                 /* FIXME: No appropriate icons exist yet, also SliderMenu lacks
                           support for text labels on the ends. */
+                text: i18n.tr("Cursor speed:")
                 anchors { 
                     left: parent.left
                     right: parent.right
@@ -269,13 +260,11 @@ Column {
             }
             spacing: 0
             height: childrenRect.height
-            ItemTitle {
-                text: i18n.tr("Finger scrolling speed:")
-            }
 
             Menus.SliderMenu {
                 /* FIXME: No appropriate icons exist yet, also SliderMenu lacks
                           support for text labels on the ends. */
+                text: i18n.tr("Finger scrolling speed:")
                 anchors { 
                     left: parent.left
                     right: parent.right
@@ -309,13 +298,11 @@ Column {
             spacing: 0
             height: childrenRect.height
             visible: showAllUI
-            ItemTitle {
-                text: i18n.tr("Double-click speed:")
-            }
 
             Menus.SliderMenu {
                 /* FIXME: No appropriate icons exist yet, also SliderMenu lacks
                           support for text labels on the ends. */
+                text: i18n.tr("Double-click speed:")
                 anchors { 
                     left: parent.left
                     right: parent.right
