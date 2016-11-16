@@ -27,13 +27,6 @@
 
 #define LANGUAGE2LOCALE "language-tools/language2locale"
 
-static const char * const LOCALE_BLACKLIST[] = {
-    "C",
-    "C.UTF-8",
-    "POSIX",
-    nullptr
-};
-
 struct LanguageLocale
 {
 public:
@@ -133,17 +126,6 @@ LanguagePlugin::languageCodes() const
     return m_languageCodes;
 }
 
-QString
-LanguagePlugin::languageToLayout(const QString &lang)
-{
-    QString language(lang.left(lang.indexOf('.')));
-    act_user_set_language(m_user, qPrintable(language));
-    act_user_set_formats_locale(m_user, qPrintable(lang));
-
-    icu::Locale locale(qPrintable(lang));
-    return locale.getLanguage();
-}
-
 int
 LanguagePlugin::currentLanguage() const
 {
@@ -179,55 +161,37 @@ LanguagePlugin::updateLanguageNamesAndCodes()
     m_languageCodes.clear();
     m_indicesByLocale.clear();
 
-    // Get locales from 'locale -a'.
-    QProcess localeProcess;
-    localeProcess.start("locale", QStringList("-a"), QIODevice::ReadOnly);
-    localeProcess.waitForFinished();
-    QString localeOutput(localeProcess.readAllStandardOutput());
-    QSet<QString> localeNames(localeOutput.split(QRegExp("\\s+")).toSet());
+    const QByteArray langpackRoot = qgetenv("SNAP") + "/usr/share/locale-langpack";
+    //const QByteArray langpackRoot = "/snap/unity8-session/current/usr/share/locale-langpack";
+    QDir langpackDir(langpackRoot);
+    const QStringList langpackNames = langpackDir.entryList(QDir::Dirs | QDir::NoDotAndDotDot | QDir::Readable);
 
-    QHash<QString, QString> likelyLocaleForLanguage;
+    qWarning() << "Lang pack root:" << langpackRoot;
+
+    QStringList tmpLocales;
+    Q_FOREACH(const QString &langpack, langpackNames) {
+        QLocale tmpLoc(langpack == "pt" ? "pt_PT" : langpack); // "pt" work around for https://bugreports.qt.io/browse/QTBUG-47891
+        tmpLocales.append(tmpLoc.name() + QStringLiteral(".UTF-8"));
+        //qWarning() << "Found langpack" << langpack << ", inserted locale" << tmpLoc.name();
+    }
+
+    QSet<QString> localeNames = tmpLocales.toSet();
     QList<LanguageLocale> languageLocales;
 
-    // Remove blacklisted locales.
-    for (unsigned int
-         i(0); i < sizeof(LOCALE_BLACKLIST) / sizeof(const char *); i++)
-        localeNames.remove(LOCALE_BLACKLIST[i]);
-
-    for (QSet<QString>::const_iterator
-         i(localeNames.begin()); i != localeNames.end(); ++i) {
-        // We only want locales that contain '.utf8'.
-        if (i->indexOf(".utf8") < 0)
-            continue;
-
-        LanguageLocale languageLocale(*i);
+    Q_FOREACH(const QString &loc, localeNames) {
+        LanguageLocale languageLocale(loc);
 
         // Filter out locales for which we have no display name.
         if (languageLocale.displayName.isEmpty())
             continue;
 
         QString language(languageLocale.locale.getLanguage());
+        QLocale tmpLoc(language);
+        //qWarning() << "Checking locale" << loc;
+        languageLocale.likely = tmpLoc.name() == loc.left(loc.indexOf('.')) || // likely if: en_US -> en -> en_US, NOT likely if: en_GB -> en -> en_US
+                (loc.startsWith("pt_PT") && !loc.startsWith("pt_BR")); // "pt" work around for https://bugreports.qt.io/browse/QTBUG-47891
+        //qWarning() << loc << (languageLocale.likely ? "IS" : "IS NOT") << "likely";
 
-        if (!likelyLocaleForLanguage.contains(language)) {
-            QString l2lPath = QStandardPaths::locate(
-                QStandardPaths::GenericDataLocation, LANGUAGE2LOCALE
-            );
-            if (l2lPath.isEmpty()) {
-                qWarning() << "Could not find language2locale file.";
-            } else {
-                QProcess likelyProcess;
-                likelyProcess.start(l2lPath, QStringList(language),
-                                    QIODevice::ReadOnly);
-                likelyProcess.waitForFinished();
-                QString likelyLocale(likelyProcess.readAllStandardOutput());
-                likelyLocale = likelyLocale.left(likelyLocale.indexOf('.'));
-                likelyLocaleForLanguage.insert(language,
-                                               likelyLocale.trimmed());
-            }
-        }
-
-        languageLocale.likely = likelyLocaleForLanguage[language] ==
-                                i->left(i->indexOf('.'));
         languageLocales += languageLocale;
     }
 
@@ -264,6 +228,9 @@ LanguagePlugin::updateCurrentLanguage()
             QString language(formatsLocale.left(formatsLocale.indexOf('.')));
             act_user_set_language(m_user, qPrintable(language));
             act_user_set_formats_locale(m_user, qPrintable(formatsLocale));
+            if (qEnvironmentVariableIsSet("SNAP")) {
+                writePamEnv(language, formatsLocale);
+            }
         } else {
             QString formatsLocale(act_user_get_formats_locale(m_user));
             m_currentLanguage = indexForLocale(formatsLocale);
@@ -306,7 +273,7 @@ LanguagePlugin::updateSpellCheckingModel()
 }
 
 int
-LanguagePlugin::indexForLocale(const QString &name)
+LanguagePlugin::indexForLocale(const QString &name) const
 {
     return m_indicesByLocale.value(name.left(name.indexOf('.')), -1);
 }
@@ -356,6 +323,33 @@ LanguagePlugin::managerLoaded()
     }
 }
 
+void LanguagePlugin::writePamEnv(const QString &language, const QString &locale)
+{
+    const QString pamEnvPath = QDir::homePath() + QStringLiteral("/.pam_environment");
+    qWarning() << "!!! About to write (lang, locale)" << language << locale << "to" << pamEnvPath;
+    const QByteArrayList lcFields = {"LANG", "LC_NUMERIC", "LC_TIME", "LC_MONETARY", "LC_PAPER", "LC_NAME", "LC_ADDRESS",
+                                     "LC_TELEPHONE", "LC_MEASUREMENT", "LC_IDENTIFICATION"};
+
+    QFile file(pamEnvPath);
+    if (file.open(QFile::WriteOnly | QFile::Truncate | QFile::Text)) {
+        QTextStream out(&file);
+
+        out << "LANGUAGE=" << language << ":" << language.left(language.indexOf("_")) << ":en" << endl; // colon separated UI languages, "en" has to come last
+
+        Q_FOREACH(const QByteArray &lcField, lcFields) {
+            out << lcField << "=" << locale << endl;
+        }
+
+        QLocale tmpLoc(locale);
+        const QByteArray paperSize = tmpLoc.measurementSystem() == QLocale::ImperialUSSystem ? "letter" : "a4";
+        out << "PAPERSIZE=" << paperSize << endl;
+
+        file.close();
+    } else {
+        qWarning() << "Failed to open PAM env file for writing:" << pamEnvPath;
+    }
+}
+
 void
 managerLoaded(GObject    *object,
               GParamSpec *pspec,
@@ -370,5 +364,5 @@ managerLoaded(GObject    *object,
 
 void LanguagePlugin::reboot()
 {
-    m_sessionService.reboot();
+    //m_sessionService.reboot();
 }
