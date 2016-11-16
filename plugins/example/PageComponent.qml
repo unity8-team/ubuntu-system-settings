@@ -25,15 +25,6 @@ import SystemSettings 1.0
 ItemPage {
     id: root
 
-    tools: ToolbarActions {
-        Action {
-            text: "one"
-        }
-        Action {
-            text: "two"
-        }
-    }
-
     Rectangle {
         anchors.fill: parent
         anchors.margins: 10
