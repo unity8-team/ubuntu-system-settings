@@ -1,6 +1,7 @@
 {
     "icon": "preferences-desktop-sounds-symbolic",
     "name": "Sound",
+    "plugin": "sound-plugin",
     "translations": "ubuntu-system-settings",
     "category": "personal",
     "priority": 1,
@@ -15,6 +16,6 @@
         "volume"
     ],
     "has-dynamic-keywords": false,
-    "has-dynamic-visibility": false,
+    "has-dynamic-visibility": true,
     "page-component": "PageComponent.qml"
 }

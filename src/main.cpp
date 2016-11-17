@@ -40,6 +40,7 @@ int main(int argc, char **argv)
 {
     QGuiApplication app(argc, argv);
     QByteArray mountPoint = qEnvironmentVariableIsSet("SNAP") ? qgetenv("SNAP") : "";
+    bool isSnap = !mountPoint.isEmpty();
 
     /* The testability driver is only loaded by QApplication but not by
      * QGuiApplication.  However, QApplication depends on QWidget which would
@@ -95,6 +96,7 @@ int main(int argc, char **argv)
     view.engine()->addImportPath(mountPoint + PLUGIN_QML_DIR);
     view.rootContext()->setContextProperty("defaultPlugin", defaultPlugin);
     view.rootContext()->setContextProperty("mountPoint", mountPoint);
+    view.rootContext()->setContextProperty("isSnap", isSnap);
     view.rootContext()->setContextProperty("i18nDirectory", mountPoint + I18N_DIRECTORY);
     view.rootContext()->setContextProperty("pluginOptions", pluginOptions);
     view.rootContext()->setContextProperty("view", &view);
