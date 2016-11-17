@@ -238,6 +238,7 @@ ItemPage {
                 text: i18n.tr("Developer mode")
                 visible: backendInfos.developerModeCapable
                 onClicked: pageStack.push(Qt.resolvedUrl("DevMode.qml"))
+                visible: !isSnap
             }
         }
     }
