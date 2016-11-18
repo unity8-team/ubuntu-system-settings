@@ -96,8 +96,6 @@ private:
                               GParamSpec *pspec,
                               gpointer    user_data);
 
-    void writePamEnv(const QString &language, const QString &locale);
-
     QStringList m_languageNames;
     QStringList m_languageCodes;
     QHash<QString, unsigned int> m_indicesByLocale;

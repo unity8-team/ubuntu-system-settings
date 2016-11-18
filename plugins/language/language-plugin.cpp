@@ -233,9 +233,6 @@ LanguagePlugin::updateCurrentLanguage()
             QString language(formatsLocale.left(formatsLocale.indexOf('.')));
             act_user_set_language(m_user, qPrintable(language));
             act_user_set_formats_locale(m_user, qPrintable(formatsLocale));
-            if (qEnvironmentVariableIsSet("SNAP")) {
-                writePamEnv(language, formatsLocale);
-            }
         } else {
             QString formatsLocale(act_user_get_formats_locale(m_user));
             m_currentLanguage = indexForLocale(formatsLocale);
@@ -325,33 +322,6 @@ LanguagePlugin::managerLoaded()
                 g_signal_connect(m_user, "notify::is-loaded",
                                  G_CALLBACK(::userLoaded), this);
         }
-    }
-}
-
-void LanguagePlugin::writePamEnv(const QString &language, const QString &locale)
-{
-    const QString pamEnvPath = QDir::homePath() + QStringLiteral("/.pam_environment");
-    qWarning() << "!!! About to write (lang, locale)" << language << locale << "to" << pamEnvPath;
-    const QByteArrayList lcFields = {"LANG", "LC_NUMERIC", "LC_TIME", "LC_MONETARY", "LC_PAPER", "LC_NAME", "LC_ADDRESS",
-                                     "LC_TELEPHONE", "LC_MEASUREMENT", "LC_IDENTIFICATION"};
-
-    QFile file(pamEnvPath);
-    if (file.open(QFile::WriteOnly | QFile::Truncate | QFile::Text)) {
-        QTextStream out(&file);
-
-        out << "LANGUAGE=" << language << ":" << language.left(language.indexOf("_")) << ":en" << endl; // colon separated UI languages, "en" has to come last
-
-        Q_FOREACH(const QByteArray &lcField, lcFields) {
-            out << lcField << "=" << locale << endl;
-        }
-
-        QLocale tmpLoc(locale);
-        const QByteArray paperSize = tmpLoc.measurementSystem() == QLocale::ImperialUSSystem ? "letter" : "a4";
-        out << "PAPERSIZE=" << paperSize << endl;
-
-        file.close();
-    } else {
-        qWarning() << "Failed to open PAM env file for writing:" << pamEnvPath;
     }
 }
 
