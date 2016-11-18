@@ -162,7 +162,6 @@ LanguagePlugin::updateLanguageNamesAndCodes()
     m_indicesByLocale.clear();
 
     const QByteArray langpackRoot = qgetenv("SNAP") + "/usr/share/locale-langpack";
-    //const QByteArray langpackRoot = "/snap/unity8-session/current/usr/share/locale-langpack";
     QDir langpackDir(langpackRoot);
 
     if (!langpackDir.exists()) {
@@ -172,13 +171,10 @@ LanguagePlugin::updateLanguageNamesAndCodes()
 
     const QStringList langpackNames = langpackDir.entryList(QDir::Dirs | QDir::NoDotAndDotDot | QDir::Readable);
 
-    qWarning() << "Lang pack root:" << langpackRoot;
-
     QStringList tmpLocales;
     Q_FOREACH(const QString &langpack, langpackNames) {
         QLocale tmpLoc(langpack == "pt" ? "pt_PT" : langpack); // "pt" work around for https://bugreports.qt.io/browse/QTBUG-47891
         tmpLocales.append(tmpLoc.name() + QStringLiteral(".UTF-8"));
-        //qWarning() << "Found langpack" << langpack << ", inserted locale" << tmpLoc.name();
     }
 
     QSet<QString> localeNames = tmpLocales.toSet();
@@ -192,10 +188,8 @@ LanguagePlugin::updateLanguageNamesAndCodes()
             continue;
 
         QLocale tmpLoc(languageLocale.locale.getLanguage());
-        //qWarning() << "Checking locale" << loc;
         languageLocale.likely = tmpLoc.name() == loc.left(loc.indexOf('.')) || // likely if: en_US -> en -> en_US, NOT likely if: en_GB -> en -> en_US
                 (loc.startsWith("pt_PT") && !loc.startsWith("pt_BR")); // "pt" work around for https://bugreports.qt.io/browse/QTBUG-47891
-        //qWarning() << loc << (languageLocale.likely ? "IS" : "IS NOT") << "likely";
 
         languageLocales += languageLocale;
     }
@@ -339,5 +333,5 @@ managerLoaded(GObject    *object,
 
 void LanguagePlugin::reboot()
 {
-    //m_sessionService.reboot();
+    m_sessionService.reboot();
 }
