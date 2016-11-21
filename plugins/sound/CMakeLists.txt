@@ -1,5 +1,3 @@
-add_subdirectory(plugin)
-
 set(QML_SOURCES
     PageComponent.qml
     SoundsList.qml
