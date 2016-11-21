@@ -1,6 +1,7 @@
 {
     "name": "Launcher",
     "icon": "preferences-desktop-launcher-symbolic",
+    "plugin": "launcher-plugin",
     "translations": "ubuntu-system-settings",
     "category": "personal",
     "keywords": [
@@ -8,7 +9,6 @@
         "appearance"
     ],
     "page-component": "PageComponent.qml",
-    "entry-component": "EntryComponent.qml",
     "has-dynamic-keywords": false,
-    "has-dynamic-visibility": false
+    "has-dynamic-visibility": true
 }

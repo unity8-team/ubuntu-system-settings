@@ -1,3 +1,5 @@
+add_subdirectory(plugin)
+
 set(QML_SOURCES EntryComponent.qml PageComponent.qml)
 set(PANEL_SOURCES
     launcher.h

@@ -14,29 +14,24 @@
  *
  * You should have received a copy of the GNU General Public License along
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
  */
 
-#ifndef LAUNCHER_H
-#define LAUNCHER_H
+#ifndef SYSTEM_SETTINGS_HOTSPOT_PLUGIN_H
+#define SYSTEM_SETTINGS_HOTSPOT_PLUGIN_H
 
 #include <QObject>
-#include <QRect>
+#include <SystemSettings/PluginInterface>
 
-class LauncherPanelPlugin : public QObject
+class LauncherPlugin: public QObject, public SystemSettings::PluginInterface2
 {
     Q_OBJECT
-    Q_PROPERTY(int screens READ screens NOTIFY screensChanged)
+    Q_PLUGIN_METADATA(IID "com.ubuntu.SystemSettings.PluginInterface/2.0")
+    Q_INTERFACES(SystemSettings::PluginInterface2)
+
 public:
-    explicit LauncherPanelPlugin(QObject *parent = nullptr)
-        : QObject(parent) {};
-    virtual ~LauncherPanelPlugin() {};
-    // Return index of screen at which USS is currently rendered.
-    virtual int screens() const = 0;
-public slots:
-    virtual QRect screenGeometry(const int &screen = -1) const = 0;
-    virtual int getCurrentScreenNumber() const = 0;
-Q_SIGNALS:
-    void screensChanged(int newCount);
+    SystemSettings::ItemBase *createItem(const QVariantMap &staticData,
+                                         QObject *parent = 0);
 };
 
-#endif // LAUNCHER_H
+#endif // SYSTEM_SETTINGS_HOTSPOT_PLUGIN_H
