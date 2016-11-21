@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef SYSTEM_SETTINGS_HOTSPOT_PLUGIN_H
-#define SYSTEM_SETTINGS_HOTSPOT_PLUGIN_H
+#ifndef SYSTEM_SETTINGS_LAUNCHER_PLUGIN_H
+#define SYSTEM_SETTINGS_LAUNCHER_PLUGIN_H
 
 #include <QObject>
 #include <SystemSettings/PluginInterface>
@@ -34,4 +34,4 @@ public:
                                          QObject *parent = 0);
 };
 
-#endif // SYSTEM_SETTINGS_HOTSPOT_PLUGIN_H
+#endif // SYSTEM_SETTINGS_LAUNCHER_PLUGIN_H
