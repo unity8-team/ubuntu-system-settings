@@ -25,8 +25,8 @@
 #include <QProcessEnvironment>
 #include <QQmlComponent>
 #include <QQmlEngine>
+#include <QScopedPointer>
 #include <QUrl>
-#include <QDebug>
 
 using namespace SystemSettings;
 
@@ -60,7 +60,7 @@ LauncherItem::LauncherItem(const QVariantMap &staticData, QObject *parent):
     QQmlComponent guAccessorComponent(
         &engine, QUrl::fromLocalFile(folder + "/GuAccessor.qml")
     );
-    QObject *guAccessor = guAccessorComponent.create();
+    QScopedPointer<QObject> guAccessor(guAccessorComponent.create());
     int largeScreenThreshold = guAccessor->property("largeScreenThreshold").toInt();
     for (int i = 0; i < panel.screens(); i++) {
         if (panel.screenGeometry(i).width() > largeScreenThreshold) {
@@ -70,7 +70,6 @@ LauncherItem::LauncherItem(const QVariantMap &staticData, QObject *parent):
     }
 
     setVisibility(false);
-    delete guAccessor;
 }
 
 void LauncherItem::setVisibility(bool visible)
