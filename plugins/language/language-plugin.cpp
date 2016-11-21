@@ -1,7 +1,7 @@
 /*
  * This file is part of system-settings
  *
- * Copyright (C) 2013 Canonical Ltd.
+ * Copyright (C) 2013-2016 Canonical Ltd.
  *
  * Contact: William Hua <william.hua@canonical.com>
  *
@@ -24,8 +24,6 @@
 
 #include <act/act.h>
 #include <unicode/locid.h>
-
-#define LANGUAGE2LOCALE "language-tools/language2locale"
 
 struct LanguageLocale
 {
