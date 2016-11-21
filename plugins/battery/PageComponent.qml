@@ -347,7 +347,7 @@ ItemPage {
                 onClicked: pageStack.push(
                                Qt.resolvedUrl("SleepValues.qml"),
                                { title: text, lockOnSuspend: lockOnSuspend })
-                visible: !isSnap
+                visible: !isSnap || showAllUI
             }
 
             QDBusActionGroup {
