@@ -1,3 +1,9 @@
+ubuntu-system-settings (0.4+17.04.20161122-0ubuntu1) zesty; urgency=medium
+
+  * Language pack based language setup
+
+ -- Lukáš Tinkl <lukas.tinkl@canonical.com>  Tue, 22 Nov 2016 09:59:20 +0000
+
 ubuntu-system-settings (0.4+17.04.20161116.1-0ubuntu1) zesty; urgency=medium
 
   [ Lukáš Tinkl ]
