@@ -76,15 +76,13 @@ public:
     SubsetModel *spellCheckingModel();
     Q_SLOT void spellCheckingModelChanged();
 
-    Q_INVOKABLE QString languageToLayout(const QString &lang);
-
 private:
 
     void updateLanguageNamesAndCodes();
     void updateCurrentLanguage();
     void updateSpellCheckingModel();
 
-    int indexForLocale(const QString &name);
+    int indexForLocale(const QString &name) const;
 
     void userLoaded();
 
