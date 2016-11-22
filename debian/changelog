@@ -1,3 +1,10 @@
+ubuntu-system-settings (0.4+17.04.20161116.1-0ubuntu1) zesty; urgency=medium
+
+  [ Lukáš Tinkl ]
+  * Accomodate to new menu components
+
+ -- Marco Trevisan (Treviño) <mail@3v1n0.net>  Wed, 16 Nov 2016 11:41:22 +0000
+
 ubuntu-system-settings (0.4+17.04.20161109.1-0ubuntu1) zesty; urgency=medium
 
   [ Daniel van Vugt ]
