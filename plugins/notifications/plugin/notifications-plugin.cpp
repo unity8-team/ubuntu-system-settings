@@ -18,8 +18,6 @@
 
 #include "notifications-plugin.h"
 
-#include <QProcessEnvironment>
-#include <QDebug>
 #include <SystemSettings/ItemBase>
 
 using namespace SystemSettings;
@@ -37,8 +35,15 @@ NotificationsItem::NotificationsItem(const QVariantMap &staticData,
                                      QObject *parent):
     ItemBase(staticData, parent)
 {
-    QProcessEnvironment env = QProcessEnvironment::systemEnvironment();
-    setVisibility(!env.contains(QLatin1String("SNAP")));
+
+    if (qEnvironmentVariableIsSet("USS_SHOW_ALL_UI") &&
+            !qEnvironmentVariableIsEmpty("USS_SHOW_ALL_UI")) {
+        setVisibility(true);
+        return;
+    }
+
+    // Hide if SNAP is set.
+    setVisibility(!qEnvironmentVariableIsSet("SNAP"));
 }
 
 void NotificationsItem::setVisibility(bool visible)
