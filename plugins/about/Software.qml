@@ -17,7 +17,7 @@ ItemPage {
 
     FolderListModel {
         id: folderModel
-        folder: "/usr/share/doc"
+        folder: mountPoint + "/usr/share/doc"
     }
 
     ListView {
