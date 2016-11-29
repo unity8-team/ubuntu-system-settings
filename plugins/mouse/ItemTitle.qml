@@ -23,7 +23,7 @@ import Ubuntu.Components.ListItems 1.3 as ListItem
 ListItem.Standard {
     id: itemEmpty
     property string text
-    height: label.height - units.gu(2)
+    height: label.height
     Label {
         id: label
         anchors {
