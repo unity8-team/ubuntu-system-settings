@@ -22,7 +22,10 @@
 #include <QAbstractItemModel>
 #include <QObject>
 #include <QString>
+#include <QQmlComponent>
 
+class MockItem;
+class MockItemModel;
 class MockPluginManager : public QObject
 {
     Q_OBJECT
@@ -39,12 +42,58 @@ public Q_SLOTS:
     void resetPlugins();
     QString getFilter();
     void setFilter(const QString &filter);
+    void addPlugin(const QString &name,
+                   QQmlComponent *entry,
+                   QQmlComponent *page,
+                   const QString &category = "uncategorized-bottom");
 
 Q_SIGNALS:
     void filterChanged();
 
 private:
     QString m_filter = QString::null;
+    QMap<QString, MockItemModel*> m_models;
+    QMap<QString, MockItem*> m_plugins;
+};
+
+class MockItem : public QObject
+{
+    Q_OBJECT
+    Q_PROPERTY(QQmlComponent *entryComponent READ entryComponent CONSTANT)
+    Q_PROPERTY(QQmlComponent *pageComponent READ pageComponent CONSTANT)
+    Q_PROPERTY(bool visible READ visible CONSTANT)
+public:
+    explicit MockItem(QObject *parent = 0) : QObject(parent) {};
+    ~MockItem() {};
+    QQmlComponent* entryComponent();
+    void setEntryComponent(QQmlComponent* c);
+    QQmlComponent* pageComponent();
+    void setPageComponent(QQmlComponent* c);
+    bool visible();
+private:
+    QQmlComponent* m_entry;
+    QQmlComponent* m_page;
+};
+
+class MockItemModel : public QAbstractListModel
+{
+    Q_OBJECT
+public:
+    explicit MockItemModel(QObject *parent = 0);
+    ~MockItemModel() {};
+
+    enum Roles {
+        IconRole = Qt::UserRole + 1,
+        ItemRole,
+        KeywordRole,
+    };
+    void addPlugin(MockItem *plugin);
+    int rowCount(const QModelIndex &parent = QModelIndex()) const;
+    QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
+    QHash<int, QByteArray> roleNames() const;
+
+private:
+    QList<MockItem*> m_plugins;
 };
 
 #endif // MOCK_PLUGIN_MANAGER_H

@@ -60,7 +60,7 @@ MainView {
     Component.onCompleted: {
         i18n.domain = "ubuntu-system-settings"
         i18n.bindtextdomain("ubuntu-system-settings", i18nDirectory)
-        pageStack.push(mainPage)
+        // pageStack.push(mainPage)
         if (defaultPlugin) {
             if (!loadPluginByName(defaultPlugin, pluginOptions))
                 Qt.quit()
@@ -68,7 +68,7 @@ MainView {
 
         // when running in windowed mode, constrain width
         view.minimumWidth  = Qt.binding( function() { return units.gu(40) } )
-        view.maximumWidth = Qt.binding( function() { return units.gu(50) } )
+        view.maximumWidth = Qt.binding( function() { return units.gu(140) } )
     }
 
     Connections {
@@ -104,9 +104,9 @@ MainView {
         }
     }
 
-    PageStack {
-        id: pageStack
-
+    AdaptivePageLayout {
+        anchors.fill: parent
+        primaryPage: mainPage
         Page {
             id: mainPage
             objectName: "systemSettingsPage"
@@ -206,4 +206,10 @@ MainView {
             }
         }
     }
+
+    // PageStack {
+    //     id: pageStack
+
+
+    // }
 }

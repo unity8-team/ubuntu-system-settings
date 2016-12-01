@@ -42,36 +42,107 @@ Item {
         }
     }
 
+    // UbuntuTestCase {
+    //     name: "MainWindowTest"
+    //     when: windowShown
+
+    //     property var instance
+
+    //     function init() {
+    //         instance = mainWindowComponent.createObject(testRoot, {});
+    //     }
+
+    //     function cleanup() {
+    //         instance.destroy();
+    //     }
+
+    //     function test_search_filter_results() {
+    //         var standardHeader = findChild(instance, "standardHeader");
+    //         var search = findChild(instance, "searchField");
+    //         standardHeader.trailingActionBar.actions[0].trigger();
+    //         search.text = "blue";
+    //         compare(instance.pluginManager.filter, search.text)
+    //     }
+
+    //     function test_search_cleared_clears_filter() {
+    //         var standardHeader = findChild(instance, "standardHeader");
+    //         var searchHeader = findChild(instance, "searchHeader");
+    //         var search = findChild(instance, "searchField");
+    //         standardHeader.trailingActionBar.actions[0].trigger();
+    //         search.text = "blue";
+    //         searchHeader.trailingActionBar.actions[0].trigger();
+    //         compare(instance.pluginManager.filter, "");
+    //     }
+    // }
+
+
     UbuntuTestCase {
-        name: "MainWindowTest"
+        name: "MainWindowWithPluginsTest"
         when: windowShown
 
+        Component {
+            id: testEntryComponent
+            Button {
+                text: "Test EntryComponent"
+            }
+        }
+
+        Component {
+            id: testPageComponent
+            Page {
+                visible: false
+                header: testHeader
+                PageHeader {
+                    id: testHeader
+                    title: i18n.tr("Test PageComponent")
+                    flickable: testFlickable
+                    Flickable {
+                        id: testFlickable
+                        anchors.fill: parent
+                        contentHeight: contentItem.childrenRect.height
+                        Column {
+                            anchors.left: parent.left
+                            anchors.right: parent.right
+
+                            Label {
+                                text: "Test Content"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        Component {
+            id: pluginManagerComponent
+            PluginManager {}
+        }
+
         property var instance
+        property var entry
+        property var page
+        property var manager
 
         function init() {
-            instance = mainWindowComponent.createObject(testRoot, {});
+            manager = pluginManagerComponent.createObject(testRoot);
+
+            // entry = testEntryComponent.createObject(testRoot);
+            // page = testPageComponent.createObject(testRoot);
+            entry = testEntryComponent;
+            page = testPageComponent;
+
+            manager.addPlugin('Test', entry, page);
+            instance = mainWindowComponent.createObject(testRoot, {
+                pluginManager: manager
+            });
         }
 
         function cleanup() {
             instance.destroy();
         }
 
-        function test_search_filter_results() {
-            var standardHeader = findChild(instance, "standardHeader");
-            var search = findChild(instance, "searchField");
-            standardHeader.trailingActionBar.actions[0].trigger();
-            search.text = "blue";
-            compare(instance.pluginManager.filter, search.text)
-        }
-
-        function test_search_cleared_clears_filter() {
-            var standardHeader = findChild(instance, "standardHeader");
-            var searchHeader = findChild(instance, "searchHeader");
-            var search = findChild(instance, "searchField");
-            standardHeader.trailingActionBar.actions[0].trigger();
-            search.text = "blue";
-            searchHeader.trailingActionBar.actions[0].trigger();
-            compare(instance.pluginManager.filter, "");
+        function test_wait(){
+            wait(3000)
         }
     }
 }
