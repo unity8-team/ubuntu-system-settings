@@ -60,4 +60,5 @@ add_qml_test(main MainWindow
     IMPORT_PATHS
     ${CMAKE_SOURCE_DIR}/tests/plugins/main
     ${CMAKE_BINARY_DIR}/tests/mocks/
+    ${qmltest_DEFAULT_IMPORT_PATHS}
 )
