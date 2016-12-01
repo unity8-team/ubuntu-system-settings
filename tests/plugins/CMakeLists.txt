@@ -55,3 +55,9 @@ add_qml_test(system-update systemupdate_noauthentication
 add_qml_test(system-update systemupdate_download_handler
     IMPORT_PATHS ${SYSTEMUPDATE_IMPORT_PATHS}
 )
+
+add_qml_test(main MainWindow
+    IMPORT_PATHS
+    ${CMAKE_SOURCE_DIR}/tests/plugins/main
+    ${CMAKE_BINARY_DIR}/tests/mocks/
+)

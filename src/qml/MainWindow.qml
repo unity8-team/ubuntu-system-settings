@@ -19,9 +19,9 @@
  */
 
 import QtQuick 2.4
+import SystemSettings 1.0
 import SystemSettings.ListItems 1.0 as SettingsListItems
 import Ubuntu.Components 1.3
-import SystemSettings 1.0
 
 MainView {
     id: main
@@ -31,6 +31,7 @@ MainView {
     objectName: "systemSettingsMainView"
     automaticOrientation: true
     anchorToKeyboard: true
+    property var pluginManager: PluginManager {}
 
     function loadPluginByName(pluginName, pluginOptions) {
         var plugin = pluginManager.getByName(pluginName)
@@ -103,10 +104,6 @@ MainView {
         }
     }
 
-    PluginManager {
-        id: pluginManager
-    }
-
     PageStack {
         id: pageStack
 
@@ -118,6 +115,7 @@ MainView {
 
             PageHeader {
                 id: standardHeader
+                objectName: "standardHeader"
                 visible: mainPage.header === standardHeader
                 title: i18n.tr("System Settings")
                 flickable: mainFlickable
@@ -136,10 +134,12 @@ MainView {
 
             PageHeader {
                 id: searchHeader
+                objectName: "searchHeader"
                 visible: mainPage.header === searchHeader
                 flickable: mainFlickable
                 contents: TextField {
                     id: searchField
+                    objectName: "searchField"
                     anchors {
                         left: parent.left
                         right: parent.right
