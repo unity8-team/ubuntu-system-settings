@@ -19,9 +19,9 @@
  */
 
 import QtQuick 2.4
+import SystemSettings 1.0
 import SystemSettings.ListItems 1.0 as SettingsListItems
 import Ubuntu.Components 1.3
-import SystemSettings 1.0
 
 MainView {
     id: main
@@ -31,6 +31,7 @@ MainView {
     objectName: "systemSettingsMainView"
     automaticOrientation: true
     anchorToKeyboard: true
+    property var pluginManager: PluginManager {}
 
     function loadPluginByName(pluginName, pluginOptions) {
         var plugin = pluginManager.getByName(pluginName)
@@ -103,30 +104,68 @@ MainView {
         }
     }
 
-    PluginManager {
-        id: pluginManager
-    }
-
     PageStack {
         id: pageStack
 
         Page {
             id: mainPage
             objectName: "systemSettingsPage"
-            title: i18n.tr("System Settings")
             visible: false
-            flickable: mainFlickable
+            header: standardHeader
 
-            head.actions: [
-                Action {
-                    objectName: "searchAction"
-                    iconName: "find"
-                    onTriggered: {
-                        pluginManager.filter = "";
-                        search.visible = !search.visible;
+            PageHeader {
+                id: standardHeader
+                objectName: "standardHeader"
+                visible: mainPage.header === standardHeader
+                title: i18n.tr("System Settings")
+                flickable: mainFlickable
+                trailingActionBar.actions: [
+                    Action {
+                        objectName: "searchAction"
+                        iconName: "find"
+                        shortcut: StandardKey.Find
+                        onTriggered: {
+                            pluginManager.filter = "";
+                            mainPage.header = searchHeader;
+                        }
                     }
+                ]
+            }
+
+            PageHeader {
+                id: searchHeader
+                objectName: "searchHeader"
+                visible: mainPage.header === searchHeader
+                flickable: mainFlickable
+                contents: TextField {
+                    id: searchField
+                    objectName: "searchField"
+                    anchors {
+                        left: parent.left
+                        right: parent.right
+                        verticalCenter: parent.verticalCenter
+                    }
+                    inputMethodHints: Qt.ImhNoPredictiveText
+                    onDisplayTextChanged:
+                        pluginManager.filter = displayText
+                    placeholderText: i18n.tr("Search")
+                    hasClearButton: false
                 }
-            ]
+                onVisibleChanged: if (visible) searchField.forceActiveFocus()
+                trailingActionBar.actions: [
+                    Action {
+                        objectName: "searchCancel"
+                        iconName: "close"
+                        shortcut: StandardKey.Cancel
+                        onTriggered: {
+                            pluginManager.filter = "";
+                            searchField.text = "";
+                            mainPage.header = standardHeader;
+                        }
+                    }
+                ]
+                z: 1
+            }
 
             Flickable {
                 id: mainFlickable
@@ -141,36 +180,21 @@ MainView {
                     anchors.left: parent.left
                     anchors.right: parent.right
 
-                    SettingsListItems.SingleControl {
-                        id: search
-                        visible: false
-                        TextField {
-                            id: searchField
-                            width: parent.width - units.gu(4)
-                            placeholderText: i18n.tr("Search")
-                            objectName: "searchTextField"
-                            inputMethodHints: Qt.ImhNoPredictiveText
-                            onDisplayTextChanged:
-                                pluginManager.filter = displayText
-                        }
-                        onVisibleChanged: if (visible) searchField.forceActiveFocus()
-                    }
-
                     UncategorizedItemsView {
                         model: pluginManager.itemModel("uncategorized-top")
                     }
 
-                    CategoryGrid {
+                    CategorySection {
                         category: "network"
                         categoryName: i18n.tr("Network")
                     }
 
-                    CategoryGrid {
+                    CategorySection {
                         category: "personal"
                         categoryName: i18n.tr("Personal")
                     }
 
-                    CategoryGrid {
+                    CategorySection {
                         category: "system"
                         categoryName: i18n.tr("System")
                     }

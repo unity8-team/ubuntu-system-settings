@@ -30,8 +30,11 @@ ListItem {
         var imageUpdateCount = SystemImage.checkTarget() ? 1 : 0;
         return updatesRep.count + imageUpdateCount;
     }
-    height: updatesAvailable > 0 ? layout.height : 0
+    height: (updatesAvailable > 0) || showAllUI ? layout.height : 0
     onClicked: main.loadPluginByName("system-update");
+    divider.colorFrom: "#EEEEEE"
+    divider.colorTo: "#EEEEEE"
+    divider.height: units.dp(1)
 
     ListItemLayout {
         id: layout
@@ -40,7 +43,8 @@ ListItem {
             SlotsLayout.position: SlotsLayout.Leading;
             SlotsLayout.padding { top: 0; bottom: 0 }
             source: model.icon
-            height: units.gu(5)
+            height: units.gu(2.5)
+            color: "#E95420"
         }
         Label {
             text: updatesAvailable > 0 ? updatesAvailable : ""
