@@ -44,7 +44,6 @@ ListItem {
             SlotsLayout.padding { top: 0; bottom: 0 }
             source: model.icon
             height: units.gu(2.5)
-            color: "#E95420"
         }
         Label {
             text: updatesAvailable > 0 ? updatesAvailable : ""
