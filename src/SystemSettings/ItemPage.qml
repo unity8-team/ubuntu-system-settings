@@ -24,9 +24,15 @@ import Ubuntu.Components 1.3
 Page {
     id: root
 
+    property alias title: pageHeader.title
+    property alias flickable: pageHeader.flickable
+
+    header: PageHeader {
+        id: pageHeader
+        title: i18n.dtr(plugin.translations, plugin.displayName)
+    }
+
     property variant plugin
     property variant pluginManager
     property variant pageStack
-
-    title: i18n.dtr(plugin.translations, plugin.displayName)
 }

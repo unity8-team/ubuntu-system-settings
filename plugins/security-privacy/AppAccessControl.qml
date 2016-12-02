@@ -25,11 +25,13 @@ import Ubuntu.Components.ListItems 1.3 as ListItems
 
 ItemPage {
     id: root
+    flickable: scrollWidget
 
     property alias model: repeater.model
     property alias caption: captionLabel.text
 
     Flickable {
+        id: scrollWidget
         anchors.fill: parent
         contentHeight: contentItem.childrenRect.height
         boundsBehavior: (contentHeight > root.height) ?

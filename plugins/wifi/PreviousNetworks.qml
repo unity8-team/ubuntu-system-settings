@@ -25,6 +25,7 @@ ItemPage {
     id: previousNetworks
     objectName: "previousNetworksPage"
     title: i18n.tr("Previous networks")
+    flickable: networkList
 
     PreviousNetworkModel {
         id: pnmodel

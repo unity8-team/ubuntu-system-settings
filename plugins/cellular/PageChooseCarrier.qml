@@ -31,7 +31,7 @@ ItemPage {
     id: root
     title: i18n.tr("Carrier")
     objectName: "chooseCarrierPage"
-    flickable: null
+    flickable: scrollWidget
 
     property var sim
     property bool scanning: true

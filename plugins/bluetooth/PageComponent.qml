@@ -31,6 +31,7 @@ import Ubuntu.Settings.Components 0.1 as USC
 ItemPage {
     id: root
     title: i18n.tr("Bluetooth")
+    flickable: scrollWidget
     objectName: "bluetoothPage"
 
     property var dialogPopupId
@@ -205,6 +206,7 @@ ItemPage {
     }
 
     Flickable {
+        id: scrollWidget
         anchors.fill: parent
         contentHeight: contentItem.childrenRect.height
         boundsBehavior: (contentHeight > root.height) ?

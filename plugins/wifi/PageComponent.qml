@@ -26,6 +26,8 @@ ItemPage {
     id: wifibase
     objectName: "wifiPage"
     title: i18n.tr("Wi-Fi")
+    flickable: pageFlickable
+
     property bool wifiEnabled: actionGroup.actionObject.valid ?
                                actionGroup.actionObject.state : false
     property var pluginOptions

@@ -33,6 +33,7 @@ ItemPage {
     objectName: "languagePage"
 
     title: i18n.tr("Language & Text")
+    flickable: scrollWidget
 
     InputDeviceManager {
         id: keyboardsModel
@@ -121,6 +122,7 @@ ItemPage {
     }
 
     Flickable {
+        id: scrollWidget
         anchors.fill: parent
         contentHeight: contentItem.childrenRect.height
         boundsBehavior: contentHeight > root.height ?

@@ -27,6 +27,7 @@ ItemPage {
     objectName: "systemNotificationsPage"
 
     title: i18n.tr("Notifications")
+    flickable: notificationsList
 
     onActiveChanged: {
         if (active) {
@@ -66,7 +67,7 @@ ItemPage {
                 left: parent.left
                 right: parent.right
             }
- 
+
             ListItems.Base {
                 height: labelSubtitle.height + units.gu(2)
                 Label {

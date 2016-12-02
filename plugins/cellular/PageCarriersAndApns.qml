@@ -26,11 +26,12 @@ ItemPage {
     id: root
     title: i18n.tr("Carriers & APNs")
     objectName: "carrierApnPage"
-    flickable: null
+    flickable: scrollWidget
 
     property var sims
 
     Flickable {
+        id: scrollWidget
         anchors.fill: parent
         contentWidth: parent.width
         contentHeight: contentItem.childrenRect.height

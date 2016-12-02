@@ -27,6 +27,7 @@ import Ubuntu.SystemSettings.SecurityPrivacy 1.0
 ItemPage {
     id: root
     title: i18n.tr("App permissions")
+    flickable: scrollWidget
 
     function openService(service) {
         for (var i = 0; i < appsModel.count; i++) {
@@ -44,6 +45,7 @@ ItemPage {
     }
 
     Flickable {
+        id: scrollWidget
         anchors.fill: parent
         contentHeight: contentItem.childrenRect.height
         boundsBehavior: (contentHeight > root.height) ?

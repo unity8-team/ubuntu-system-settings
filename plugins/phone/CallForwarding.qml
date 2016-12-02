@@ -100,7 +100,7 @@ ItemPage {
         value: false
     }
 
-    flickable: null
+    flickable: flick
     Flickable {
         id: flick
 

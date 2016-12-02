@@ -27,6 +27,7 @@ ItemPage {
     id: root
     objectName: "servicesPage"
     title: headerTitle
+    flickable: scrollWidget
     property string carrierString
     property variant sim
     property var names: []
@@ -44,6 +45,7 @@ ItemPage {
     }
 
     Flickable {
+        id: scrollWidget
         anchors.fill: parent
         contentHeight: contentItem.childrenRect.height
         boundsBehavior: (contentHeight > root.height) ?

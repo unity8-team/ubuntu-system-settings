@@ -74,14 +74,19 @@ Page {
         }
     }
 
-    title: backend.selectedDevice ?
-              backend.selectedDevice.name.length > 0 ?
-                 backend.selectedDevice.name :
-                 backend.selectedDevice.address
-              : i18n.tr("None")
+    header: PageHeader {
+        title: backend.selectedDevice ?
+                  backend.selectedDevice.name.length > 0 ?
+                     backend.selectedDevice.name :
+                     backend.selectedDevice.address
+                  : i18n.tr("None")
+        flickable: scrollWidget
+    }
+
     visible: false
 
     Flickable {
+        id: scrollWidget
         anchors.fill: parent
         contentHeight: contentItem.childrenRect.height
         boundsBehavior: (contentHeight > root.height) ?

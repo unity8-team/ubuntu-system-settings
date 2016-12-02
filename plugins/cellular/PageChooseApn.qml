@@ -35,6 +35,7 @@ import "apn_manager.js" as Manager
 ItemPage {
     id: root
     title: i18n.tr("APN")
+    flickable: scrollWidget
     objectName: "apnPage"
 
     property var sim
