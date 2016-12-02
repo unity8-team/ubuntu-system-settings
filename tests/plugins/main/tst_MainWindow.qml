@@ -19,6 +19,7 @@
 import QtQuick 2.4
 import QtTest 1.0
 import SystemSettings 1.0
+import SystemSettings.ListItems 1.0 as SettingsListItems
 import Ubuntu.Components 1.3
 import Ubuntu.Test 0.1
 
@@ -43,7 +44,7 @@ Item {
     }
 
     // UbuntuTestCase {
-    //     name: "MainWindowTest"
+    //     name: "MainWindowTests"
     //     when: windowShown
 
     //     property var instance
@@ -77,13 +78,24 @@ Item {
 
 
     UbuntuTestCase {
-        name: "MainWindowWithPluginsTest"
+        name: "MainWindowAPLTests"
         when: windowShown
 
         Component {
-            id: testEntryComponent
-            Button {
-                text: "Test EntryComponent"
+            id: testPersonalEntry
+            SettingsListItems.IconProgression {
+                objectName: "testPersonalEntry"
+                text: "Test"
+                iconName: "system-users-symbolic"
+            }
+        }
+
+        Component {
+            id: testNetworkEntryComponent
+            SettingsListItems.IconProgression {
+                objectName: "testNetworkEntryComponent"
+                text: "Test 2"
+                iconName: "phone-smartphone-symbolic"
             }
         }
 
@@ -91,6 +103,7 @@ Item {
             id: testPageComponent
             Page {
                 visible: false
+                property var pluginManager
                 header: testHeader
                 PageHeader {
                     id: testHeader
@@ -119,7 +132,8 @@ Item {
         }
 
         property var instance
-        property var entry
+        property var personalEntry
+        property var networkEntry
         property var page
         property var manager
 
@@ -128,10 +142,12 @@ Item {
 
             // entry = testEntryComponent.createObject(testRoot);
             // page = testPageComponent.createObject(testRoot);
-            entry = testEntryComponent;
+            personalEntry = testPersonalEntry;
+            networkEntry = testNetworkEntryComponent;
             page = testPageComponent;
 
-            manager.addPlugin('Test', entry, page);
+            manager.addPlugin('Test', personalEntry, page, "personal");
+            manager.addPlugin('Phone', networkEntry, page, "network");
             instance = mainWindowComponent.createObject(testRoot, {
                 pluginManager: manager
             });
@@ -142,7 +158,15 @@ Item {
         }
 
         function test_wait(){
-            wait(3000)
+            wait(2000)
+            testRoot.width = units.gu(50)
+            wait(2000)
+            testRoot.width = units.gu(150)
+            wait(2000)
+            testRoot.width = units.gu(90)
+            wait(2000)
+            testRoot.width = units.gu(110)
+            wait(2000)
         }
     }
 }

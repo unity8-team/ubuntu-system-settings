@@ -27,7 +27,6 @@ MockPluginManager::MockPluginManager(QObject *parent) : QObject(parent)
 
 QObject* MockPluginManager::getByName(const QString &name) const
 {
-    qDebug() << "getByName" << name << m_plugins.value(name);
     return m_plugins.value(name);
 }
 
@@ -35,7 +34,6 @@ QAbstractItemModel* MockPluginManager::itemModel(const QString &category)
 {
     QAbstractItemModel* m = m_models.value(category);
     QQmlEngine::setObjectOwnership(m, QQmlEngine::CppOwnership);
-    qDebug() << "itemModel" << category << m;
     return m;
 }
 
@@ -66,7 +64,7 @@ void MockPluginManager::addPlugin(const QString &name, QQmlComponent *entry,
     }
 
     MockItem* item = new MockItem(this);
-    // item->setProperty("name", name);
+    item->setProperty("name", name);
     item->setEntryComponent(entry);
     item->setPageComponent(page);
     model->addPlugin(item);
@@ -127,14 +125,9 @@ QVariant MockItemModel::data(const QModelIndex &index, int role) const
     case Qt::DisplayRole:
         ret = item->property("name");
         break;
-    case IconRole:
-        ret = item->property("icon");
-        break;
     case ItemRole:
         ret = QVariant::fromValue<QObject*>(const_cast<MockItem*>(item));
         break;
-    case KeywordRole:
-        ret = QVariant();
     }
 
     return ret;
@@ -145,9 +138,7 @@ QHash<int, QByteArray> MockItemModel::roleNames() const
     static QHash<int,QByteArray> names;
     if (Q_UNLIKELY(names.empty())) {
         names[Qt::DisplayRole] = "displayName";
-        names[MockItemModel::IconRole] = "icon";
         names[MockItemModel::ItemRole] = "item";
-        names[MockItemModel::KeywordRole] = "keywords";
     }
     return names;
 }

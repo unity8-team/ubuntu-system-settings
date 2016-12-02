@@ -25,7 +25,7 @@ import Ubuntu.Components 1.3
 
 MainView {
     id: main
-    implicitWidth: units.gu(50)
+    implicitWidth: units.gu(140)
     implicitHeight: units.gu(90)
     applicationName: "ubuntu-system-settings"
     objectName: "systemSettingsMainView"
@@ -105,8 +105,30 @@ MainView {
     }
 
     AdaptivePageLayout {
+        id: apl
         anchors.fill: parent
         primaryPage: mainPage
+        layouts: [
+            PageColumnsLayout {
+                when: width > units.gu(90)
+
+                PageColumn {
+                    minimumWidth: units.gu(40)
+                    maximumWidth: units.gu(50)
+                }
+
+                PageColumn {
+                    fillWidth: true
+                }
+            },
+            PageColumnsLayout {
+                when: true
+                PageColumn {
+                    fillWidth: true
+                    minimumWidth: units.gu(10)
+                }
+            }
+        ]
         Page {
             id: mainPage
             objectName: "systemSettingsPage"

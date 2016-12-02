@@ -33,21 +33,12 @@ Column {
 
     Repeater {
         id: repeater
-        onCountChanged: {
-            console.log('repeater count', count)
-            if (count == 1) {
-                console.log(itemAt(0))
-            }
-        }
         Column {
             anchors.left: parent.left
             anchors.right: parent.right
 
             Loader {
                 id: loader
-                Component.onCompleted: {
-                    console.log("loader complete", model, model.item, model.item.entryComponent)
-                }
                 anchors.left: parent.left
                 anchors.right: parent.right
                 sourceComponent: model.item.entryComponent

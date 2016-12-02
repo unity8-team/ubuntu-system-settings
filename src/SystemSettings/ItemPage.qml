@@ -26,6 +26,7 @@ Page {
 
     property variant plugin
     property variant pluginManager
+    property variant pageStack
 
     title: i18n.dtr(plugin.translations, plugin.displayName)
 }

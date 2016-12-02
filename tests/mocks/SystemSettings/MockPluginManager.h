@@ -85,7 +85,6 @@ public:
     enum Roles {
         IconRole = Qt::UserRole + 1,
         ItemRole,
-        KeywordRole,
     };
     void addPlugin(MockItem *plugin);
     int rowCount(const QModelIndex &parent = QModelIndex()) const;

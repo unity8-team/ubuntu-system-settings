@@ -68,8 +68,11 @@ Column {
                     onClicked: {
                         var pageComponent = model.item.pageComponent
                         if (pageComponent) {
-                            pageStack.push(model.item.pageComponent,
-                                           { plugin: model.item, pluginManager: pluginManager })
+                            Haptics.play();
+                            apl.addPageToNextColumn(apl.primaryPage, model.item.pageComponent, {
+                                plugin: model.item, pluginManager: pluginManager,
+                                pageStack: apl.primaryPage.pageStack
+                            });
                         }
                     }
                 }
