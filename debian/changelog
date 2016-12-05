@@ -1,3 +1,63 @@
+ubuntu-system-settings (0.4+17.04.20161129-0ubuntu1) zesty; urgency=medium
+
+  [ Daniel van Vugt ]
+  * Fix unlabelled sliders in Mouse & Touchpad (LP: #1569227) (LP:
+    #1569227)
+
+  [ Jonas G. Drange ]
+  * Packaging change: depend on USC for testing
+  * uses SystemImage binding to read current build number (LP: #1639949)
+  * On snappy it changes the following:
+
+  [ Lukáš Tinkl ]
+  * Fix finding the module mapping file (url-map.ini) (LP: #1641665)
+  * Language pack based language setup
+
+ -- Jonas G. Drange <jonas.drange@canonical.com>  Tue, 29 Nov 2016 11:13:35 +0000
+
+ubuntu-system-settings (0.4+17.04.20161116.1-0ubuntu1) zesty; urgency=medium
+
+  [ Lukáš Tinkl ]
+  * Accomodate to new menu components
+
+ -- Marco Trevisan (Treviño) <mail@3v1n0.net>  Wed, 16 Nov 2016 11:41:22 +0000
+
+ubuntu-system-settings (0.4+17.04.20161109.1-0ubuntu1) zesty; urgency=medium
+
+  [ Daniel van Vugt ]
+  * Allow scroll speed multipliers up to 3.0; since the default speed in
+    (LP: #1607240, #1627567)
+
+  [ Ken VanDine ]
+  * Updated example plugin to work with current SDK
+  * Fixed pep8 failure
+
+  [ Timo Jyrinki ]
+  * Stop depending on transitional packages. (LP: #1583079) (LP:
+    #1583079)
+
+  [ jonas-drange ]
+  * Drop “at” from “Updated at <date>” string
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Wed, 09 Nov 2016 15:27:26 +0000
+
+ubuntu-system-settings (0.4+17.04.20161101.1-0ubuntu1) zesty; urgency=medium
+
+  * Drop repowerd to a Recommends and stop depending on gnome-settings-
+    daemon to fix a component mismatch
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Tue, 01 Nov 2016 17:51:36 +0000
+
+ubuntu-system-settings (0.4+17.04.20161027-0ubuntu1) zesty; urgency=medium
+
+  [ Jonas G. Drange ]
+  * clarifies how we add the system image test via cmake
+
+  [ Jonas G. Drange, jonas-drange ]
+  * adds pruning of db
+
+ -- Jonas G. Drange <jonas.drange@canonical.com>  Thu, 27 Oct 2016 10:30:34 +0000
+
 ubuntu-system-settings (0.4+16.10.20160930.1-0ubuntu1) yakkety; urgency=medium
 
   [ Jonas G. Drange ]

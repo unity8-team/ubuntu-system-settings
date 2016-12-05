@@ -138,13 +138,12 @@ ItemPage {
                 iconSource: "image://theme/language-chooser"
                 text: i18n.tr("Display language…")
                 objectName: "displayLanguage"
-                showDivider: false
-                component: Label {
-                    property int currentLanguage: plugin.currentLanguage
+                slots: Label {
                     objectName: "currentLanguage"
                     text: plugin.languageNames[plugin.currentLanguage]
                     elide: Text.ElideRight
                     opacity: enabled ? 1.0 : 0.5
+                    SlotsLayout.position: SlotsLayout.Trailing
                 }
 
                 onClicked: PopupUtils.open(displayLanguage)
@@ -169,7 +168,9 @@ ItemPage {
                 progression: true
                 showDivider: false
                 onClicked: pageStack.push(Qt.resolvedUrl("PageHardwareKeyboard.qml"))
-                visible: externalKeyboardPresent
+                /* Hidden due to lp:1644268, i.e. no layout sources are
+                enumerated by the current code due to hard coded paths. */
+                visible: (externalKeyboardPresent && !isSnap) || showAllUI
             }
 
             ListItem.Divider {}

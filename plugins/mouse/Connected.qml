@@ -55,19 +55,17 @@ Column {
             }
             spacing: 0
             height: childrenRect.height
-            ItemTitle {
-                text: i18n.tr("Move:")
-                showDivider: false
-            }
 
             Menus.SliderMenu {
+                /* FIXME: No appropriate icons exist yet, also SliderMenu lacks
+                          support for text labels on the ends. */
+                text: i18n.tr("Cursor speed:")
                 anchors { 
                     left: parent.left
                     right: parent.right
                 }
                 id: mouseMoveSpeed
                 objectName: "mouseMoveSpeed"
-                showDivider: false
                 function formatValue(v) { return v.toFixed(2) }
                 minimumValue: 0.0
                 maximumValue: 1.0
@@ -94,22 +92,19 @@ Column {
             spacing: 0
             height: childrenRect.height
 
-            ItemTitle {
-                text: i18n.tr("Scroll:")
-                showDivider: false
-            }
-
             Menus.SliderMenu {
+                /* FIXME: No appropriate icons exist yet, also SliderMenu lacks
+                          support for text labels on the ends. */
+                text: i18n.tr("Wheel scrolling speed:")
                 anchors { 
                     left: parent.left
                     right: parent.right
                 }
                 id: mouseScrollSpeed
                 objectName: "mouseMoveSpeed"
-                showDivider: false
                 function formatValue(v) { return v.toFixed(2) }
                 minimumValue: 0.0
-                maximumValue: 1.0
+                maximumValue: 3.0
                 value: backend.mouseScrollSpeed
                 live: true
                 property real serverValue: enabled ? backend.mouseScrollSpeed : 0.0
@@ -132,19 +127,17 @@ Column {
             spacing: 0
             height: childrenRect.height
             visible: showAllUI
-            ItemTitle {
-                text: i18n.tr("Double-click:")
-                showDivider: false
-            }
 
             Menus.SliderMenu {
+                /* FIXME: No appropriate icons exist yet, also SliderMenu lacks
+                          support for text labels on the ends. */
+                text: i18n.tr("Double-click speed:")
                 anchors { 
                     left: parent.left
                     right: parent.right
                 }
                 id: mouseDoubleClickSpeed
                 objectName: "mouseDoubleClickSpeed"
-                showDivider: false
                 function formatValue(v) { return v.toFixed(2) }
                 minimumValue: 100
                 maximumValue: 1000
@@ -228,19 +221,17 @@ Column {
             }
             spacing: 0
             height: childrenRect.height
-            ItemTitle {
-                text: i18n.tr("Move:")
-                showDivider: false
-            }
 
             Menus.SliderMenu {
+                /* FIXME: No appropriate icons exist yet, also SliderMenu lacks
+                          support for text labels on the ends. */
+                text: i18n.tr("Cursor speed:")
                 anchors { 
                     left: parent.left
                     right: parent.right
                 }
                 id: touchMoveSpeed
                 objectName: "touchMoveSpeed"
-                showDivider: false
                 function formatValue(v) { return v.toFixed(2) }
                 minimumValue: 0.0
                 maximumValue: 1.0
@@ -266,22 +257,20 @@ Column {
             }
             spacing: 0
             height: childrenRect.height
-            ItemTitle {
-                text: i18n.tr("Scroll:")
-                showDivider: false
-            }
 
             Menus.SliderMenu {
+                /* FIXME: No appropriate icons exist yet, also SliderMenu lacks
+                          support for text labels on the ends. */
+                text: i18n.tr("Finger scrolling speed:")
                 anchors { 
                     left: parent.left
                     right: parent.right
                 }
                 id: touchScrollSpeed
                 objectName: "touchScrollSpeed"
-                showDivider: false
                 function formatValue(v) { return v.toFixed(2) }
                 minimumValue: 0.0
-                maximumValue: 1.0
+                maximumValue: 3.0
                 value: backend.touchpadScrollSpeed
                 live: true
                 property real serverValue: enabled ? backend.touchpadScrollSpeed : 0.0
@@ -305,19 +294,17 @@ Column {
             spacing: 0
             height: childrenRect.height
             visible: showAllUI
-            ItemTitle {
-                text: i18n.tr("Double-click:")
-                showDivider: false
-            }
 
             Menus.SliderMenu {
+                /* FIXME: No appropriate icons exist yet, also SliderMenu lacks
+                          support for text labels on the ends. */
+                text: i18n.tr("Double-click speed:")
                 anchors { 
                     left: parent.left
                     right: parent.right
                 }
                 id: touchClickSpeed
                 objectName: "touchClickSpeed"
-                showDivider: false
                 function formatValue(v) { return v.toFixed(2) }
                 minimumValue: 100
                 maximumValue: 1000

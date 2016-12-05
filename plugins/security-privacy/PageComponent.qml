@@ -182,6 +182,7 @@ ItemPage {
                     usePowerd: usePowerd,
                     powerSettings: powerSettings
                 })
+                visible: !isSnap || showAllUI
             }
 
             SettingsListItems.SingleValueProgression {

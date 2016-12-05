@@ -1,0 +1,14 @@
+{
+    "name": "Launcher",
+    "icon": "preferences-desktop-launcher-symbolic",
+    "plugin": "launcher-plugin",
+    "translations": "ubuntu-system-settings",
+    "category": "personal",
+    "keywords": [
+        "launcher",
+        "appearance"
+    ],
+    "page-component": "PageComponent.qml",
+    "has-dynamic-keywords": false,
+    "has-dynamic-visibility": true
+}
