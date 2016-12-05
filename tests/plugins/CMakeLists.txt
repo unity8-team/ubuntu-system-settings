@@ -59,6 +59,15 @@ add_qml_test(system-update systemupdate_download_handler
 add_qml_test(main MainWindow
     IMPORT_PATHS
     ${CMAKE_SOURCE_DIR}/tests/plugins/main
-    ${CMAKE_BINARY_DIR}/tests/mocks/
     ${qmltest_DEFAULT_IMPORT_PATHS}
 )
+
+set(LAUNCHER_IMPORT_PATHS
+    ${CMAKE_SOURCE_DIR}/src
+    ${CMAKE_BINARY_DIR}/tests/utils/modules
+    ${CMAKE_BINARY_DIR}/tests/mocks/
+    ${qmltest_DEFAULT_IMPORT_PATHS}
+    ${CMAKE_SOURCE_DIR}/tests/plugins/launcher
+)
+
+add_qml_test(launcher LauncherPageComponent IMPORT_PATHS ${LAUNCHER_IMPORT_PATHS})

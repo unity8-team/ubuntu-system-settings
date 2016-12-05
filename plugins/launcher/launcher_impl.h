@@ -1,7 +1,7 @@
 /*
  * This file is part of system-settings
  *
- * Copyright (C) 2015 Canonical Ltd.
+ * Copyright (C) 2016 Canonical Ltd.
  *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License version 3, as published
@@ -16,24 +16,25 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import QtQuick 2.4
-import Ubuntu.Components 1.3
-import Ubuntu.Components.ListItems 1.3 as ListItem
+#ifndef LAUNCHER_IMPL_H
+#define LAUNCHER_IMPL_H
 
-ListItem.Standard {
-    id: itemEmpty
-    property string text
-    height: label.height
-    Label {
-        id: label
-        anchors {
-            left: parent.left
-            leftMargin: units.gu(2)
-            right: parent.right
-            rightMargin: units.gu(2)
-            top: parent.top
-        }
-        text: itemEmpty.text
-    }
-    highlightWhenPressed: false
-}
+#include "launcher.h"
+
+#include <QDesktopWidget>
+
+class LauncherPanelPluginImpl : public LauncherPanelPlugin
+{
+    Q_OBJECT
+public:
+    explicit LauncherPanelPluginImpl(QObject *parent = nullptr);
+    ~LauncherPanelPluginImpl();
+    virtual int screens() const override;
+public slots:
+    virtual QRect screenGeometry(const int &screen = -1) const override;
+    virtual int getCurrentScreenNumber() const override;
+private:
+    QDesktopWidget *m_desktopWidget = nullptr;
+};
+
+#endif // LAUNCHER_IMPL_H

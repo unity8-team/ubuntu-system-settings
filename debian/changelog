@@ -1,3 +1,20 @@
+ubuntu-system-settings (0.4+17.04.20161129-0ubuntu1) zesty; urgency=medium
+
+  [ Daniel van Vugt ]
+  * Fix unlabelled sliders in Mouse & Touchpad (LP: #1569227) (LP:
+    #1569227)
+
+  [ Jonas G. Drange ]
+  * Packaging change: depend on USC for testing
+  * uses SystemImage binding to read current build number (LP: #1639949)
+  * On snappy it changes the following:
+
+  [ Lukáš Tinkl ]
+  * Fix finding the module mapping file (url-map.ini) (LP: #1641665)
+  * Language pack based language setup
+
+ -- Jonas G. Drange <jonas.drange@canonical.com>  Tue, 29 Nov 2016 11:13:35 +0000
+
 ubuntu-system-settings (0.4+17.04.20161116.1-0ubuntu1) zesty; urgency=medium
 
   [ Lukáš Tinkl ]

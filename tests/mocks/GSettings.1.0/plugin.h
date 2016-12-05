@@ -1,7 +1,7 @@
 /*
  * This file is part of system-settings
  *
- * Copyright (C) 2015 Canonical Ltd.
+ * Copyright (C) 2016 Canonical Ltd.
  *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License version 3, as published
@@ -16,24 +16,18 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import QtQuick 2.4
-import Ubuntu.Components 1.3
-import Ubuntu.Components.ListItems 1.3 as ListItem
+#ifndef FAKE_GSETTINGS_PLUGIN_H
+#define FAKE_GSETTINGS_PLUGIN_H
 
-ListItem.Standard {
-    id: itemEmpty
-    property string text
-    height: label.height
-    Label {
-        id: label
-        anchors {
-            left: parent.left
-            leftMargin: units.gu(2)
-            right: parent.right
-            rightMargin: units.gu(2)
-            top: parent.top
-        }
-        text: itemEmpty.text
-    }
-    highlightWhenPressed: false
-}
+#include <QtQml/QQmlExtensionPlugin>
+
+class FakeGSettingsQmlPlugin : public QQmlExtensionPlugin
+{
+    Q_OBJECT
+    Q_PLUGIN_METADATA(IID "org.qt-project.Qt.QQmlExtensionInterface")
+
+public:
+    void registerTypes(const char *uri) override;
+};
+
+#endif // FAKE_GSETTINGS_PLUGIN_H

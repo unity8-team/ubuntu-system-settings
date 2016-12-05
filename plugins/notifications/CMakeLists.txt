@@ -1,3 +1,5 @@
+add_subdirectory(plugin)
+
 SET (CMAKE_AUTOMOC ON)
 
 set(QML_SOURCES

@@ -1,6 +1,7 @@
 {
     "icon": "preferences-desktop-notifications-symbolic",
     "name": "Notifications",
+    "plugin": "notifications-plugin",
     "translations": "ubuntu-system-settings",
     "category": "personal",
     "priority": 5,
@@ -18,6 +19,6 @@
         "gmail"
     ],
     "has-dynamic-keywords": false,
-    "has-dynamic-visibility": false,
+    "has-dynamic-visibility": true,
     "page-component": "PageComponent.qml"
 }
