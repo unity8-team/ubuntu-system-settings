@@ -34,5 +34,4 @@ Page {
 
     property variant plugin
     property variant pluginManager
-    property variant pageStack
 }

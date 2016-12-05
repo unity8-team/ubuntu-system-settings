@@ -45,9 +45,10 @@ MainView {
             // Got a valid plugin name - load it
             var pageComponent = plugin.pageComponent
             if (pageComponent) {
-                while (pageStack.depth > 1)
-                    pageStack.pop()
-                pageStack.push(pageComponent, opts)
+                apl.removePages(apl.primaryPage);
+                // while (pageStack.depth > 1)
+                //     pageStack.pop()
+                apl.addPageToNextColumn(apl.primaryPage, pageComponent, opts);
             }
             return true
         } else {
@@ -60,7 +61,6 @@ MainView {
     Component.onCompleted: {
         i18n.domain = "ubuntu-system-settings"
         i18n.bindtextdomain("ubuntu-system-settings", i18nDirectory)
-        // pageStack.push(mainPage)
         if (defaultPlugin) {
             if (!loadPluginByName(defaultPlugin, pluginOptions))
                 Qt.quit()
@@ -129,6 +129,7 @@ MainView {
                 }
             }
         ]
+
         Page {
             id: mainPage
             objectName: "systemSettingsPage"

@@ -168,5 +168,9 @@ Item {
             testRoot.width = units.gu(110)
             wait(2000)
         }
+
+        function test_main_screen() {}
+        function test_panel() {}
+        function test_going_deeper_into_panel() {}
     }
 }

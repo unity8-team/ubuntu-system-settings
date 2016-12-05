@@ -43,32 +43,34 @@ ItemPage {
     property bool externalKeyboardPresent: keyboardsModel.count > 0
 
     property var pluginOptions
-    Connections {
-        target: pageStack
-        onCurrentPageChanged: {
-            // If we are called with subpage=foo, push foo on the stack.
-            //
-            // We need to wait until the PageComponent has been pushed to the stack
-            // before pushing the subpages, otherwise they will be pushed below the
-            // PageComponent.
-            if (pageStack.currentPage === root) {
-                if (pluginOptions && pluginOptions['subpage']) {
-                    switch (pluginOptions['subpage']) {
-                    case 'hw-keyboard-layouts':
-                        pageStack.push(Qt.resolvedUrl("KeyboardLayouts.qml"), {
-                                           plugin: hwKeyboardPlugin,
-                                           currentLayoutsDraggable: true
-                                       })
-                        break;
-                    }
-                }
+    // Connections {
+    //     target: pageStack
+    //     onCurrentPageChanged: {
+    //         // If we are called with subpage=foo, push foo on the stack.
+    //         //
+    //         // We need to wait until the PageComponent has been pushed to the stack
+    //         // before pushing the subpages, otherwise they will be pushed below the
+    //         // PageComponent.
+    //         if (pageStack.currentPage === root) {
+    //             if (pluginOptions && pluginOptions['subpage']) {
+    //                 switch (pluginOptions['subpage']) {
+    //                 case 'hw-keyboard-layouts':
+    //                     pageStack.push(Qt.resolvedUrl("KeyboardLayouts.qml"), {
+    //                                        plugin: hwKeyboardPlugin,
+    //                                        currentLayoutsDraggable: true
+    //                                    })
+    //                     break;
+    //                 }
+    //             }
 
-                // Once done, disable this Connections, so that if the user navigates
-                // back to the root we won't push the subpages again
-                target = null
-            }
-        }
-    }
+    //             // Once done, disable this Connections, so that if the user navigates
+    //             // back to the root we won't push the subpages again
+    //             target = null
+    //         }
+    //     }
+    // }
+
+    Component.onCompleted: console.warn('foooooo')
 
     UbuntuLanguagePlugin {
         id: plugin
@@ -160,7 +162,7 @@ ItemPage {
                 value: oskPlugin.keyboardLayoutsModel.subset.length == 1 ?
                        oskPlugin.keyboardLayoutsModel.superset[oskPlugin.keyboardLayoutsModel.subset[0]][0] :
                        oskPlugin.keyboardLayoutsModel.subset.length
-                onClicked: pageStack.push(Qt.resolvedUrl("KeyboardLayouts.qml"), {
+                onClicked: pageStack.addPageToNextColumn(root, Qt.resolvedUrl("KeyboardLayouts.qml"), {
                     plugin: oskPlugin
                 })
             }
@@ -169,7 +171,7 @@ ItemPage {
                 text: i18n.tr("External keyboard")
                 progression: true
                 showDivider: false
-                onClicked: pageStack.push(Qt.resolvedUrl("PageHardwareKeyboard.qml"))
+                onClicked: pageStack.addPageToNextColumn(root, Qt.resolvedUrl("PageHardwareKeyboard.qml"))
                 visible: externalKeyboardPresent
             }
 
@@ -184,7 +186,7 @@ ItemPage {
                        plugin.spellCheckingModel.subset.length
                 progression: true
 
-                onClicked: pageStack.push(spellChecking)
+                onClicked: pageStack.addPageToNextColumn(root, spellChecking)
             }
 
             ListItem.Standard {
