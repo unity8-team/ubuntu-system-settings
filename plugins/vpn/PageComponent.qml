@@ -35,7 +35,7 @@ ItemPage {
     property var diag
 
     function openConnection(connection, isNew) {
-        pageStack.push(vpnEditorDialog, {
+        pageStack.addPageToNextColumn(root, vpnEditorDialog, {
             "connection": connection,
             "isNew": isNew
         });

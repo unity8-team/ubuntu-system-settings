@@ -29,17 +29,22 @@ ItemPage {
     title: i18n.tr("App permissions")
     flickable: scrollWidget
 
-    function openService(service) {
-        for (var i = 0; i < appsModel.count; i++) {
-            var item = appsModel.get(i)
-            if (item.service === service) {
-                var model = trustStoreModelComponent.createObject(null, { serviceName: item.trustStoreService })
-                pageStack.push(Qt.resolvedUrl("AppAccessControl.qml"), {
-                                    "title": i18n.tr(item.name),
-                                    "caption": i18n.tr(item.caption),
-                                    "model": model
-                               })
-                return;
+    onPushedOntoStack: {
+        var service;
+        if (pluginOptions && pluginOptions['service']) {
+            service = pluginOptions['service'];
+            for (var i = 0; i < appsModel.count; i++) {
+                var item = appsModel.get(i)
+                if (item.service === service) {
+                    var model = trustStoreModelComponent.createObject(null, { serviceName: item.trustStoreService })
+                    pageStack.addPageToNextColumn(
+                        root, Qt.resolvedUrl("AppAccessControl.qml"), {
+                        "title": i18n.tr(item.name),
+                        "caption": i18n.tr(item.caption),
+                        "model": model,
+                    });
+                    return;
+                }
             }
         }
     }
@@ -101,7 +106,7 @@ ItemPage {
                     value: trustStoreModel.count > 0 ?
                         i18n.tr("%1/%2").arg(trustStoreModel.grantedCount).arg(trustStoreModel.count) :
                         i18n.tr("0")
-                    onClicked: pageStack.push(Qt.resolvedUrl("AppAccessControl.qml"), {
+                    onClicked: pageStack.addPageToNextColumn(root, Qt.resolvedUrl("AppAccessControl.qml"), {
                         "title": i18n.tr(model.name),
                         "caption": i18n.tr(model.caption),
                         "model": trustStoreModel,
@@ -127,7 +132,7 @@ ItemPage {
                         if (oaPlugin) {
                             var accountsPage = oaPlugin.pageComponent
                             if (accountsPage)
-                                pageStack.push(accountsPage, {plugin: oaPlugin, pluginManager: pluginManager})
+                                pageStack.addPageToNextColumn(root, accountsPage, {plugin: oaPlugin, pluginManager: pluginManager})
                             else
                                 console.warn("online-accounts")
                         } else {

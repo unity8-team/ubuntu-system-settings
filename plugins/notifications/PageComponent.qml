@@ -106,8 +106,9 @@ ItemPage {
                         return
                     }
 
-                    pageStack.push(Qt.resolvedUrl("ClickAppsSoundsNotify.qml"),
-                                                  { model: clickAppsSoundsNotifyModel })
+                    pageStack.addPageToNextColumn(
+                        root, Qt.resolvedUrl("ClickAppsSoundsNotify.qml"),
+                        { model: clickAppsSoundsNotifyModel })
                 }
             }
 
@@ -131,8 +132,9 @@ ItemPage {
                         return
                     }
 
-                    pageStack.push(Qt.resolvedUrl("ClickAppsVibrationsNotify.qml"),
-                                                  { model: clickAppsVibrationsNotifyModel })
+                    pageStack.addPageToNextColumn(
+                        root, Qt.resolvedUrl("ClickAppsVibrationsNotify.qml"),
+                        { model: clickAppsVibrationsNotifyModel })
                 }
             }
 
@@ -148,9 +150,9 @@ ItemPage {
         delegate: ListItem {
             height: layout.height + (divider.visible ? divider.height : 0)
 
-            onClicked: pageStack.push(Qt.resolvedUrl("ClickAppNotifications.qml"),
-                                                     { entry: model,
-                                                       entryIndex: index })
+            onClicked: pageStack.addPageToNextColumn(
+                root, Qt.resolvedUrl("ClickAppNotifications.qml"),
+                { entry: model, entryIndex: index })
 
             ListItemLayout {
                 id: layout

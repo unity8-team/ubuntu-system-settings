@@ -68,9 +68,11 @@ ItemPage {
                 id: timeZone
                 text: timeDatePanel.timeZoneName
                 value: getUTCOffset()
-                onClicked: pageStack.push(Qt.resolvedUrl("ChooseTimeZone.qml"), {
-                    timeDatePanel: timeDatePanel
-                })
+                onClicked: pageStack.addPageToNextColumn(root,
+                    Qt.resolvedUrl("ChooseTimeZone.qml"), {
+                        timeDatePanel: timeDatePanel
+                    }
+                )
             }
 
             SettingsItemTitle {

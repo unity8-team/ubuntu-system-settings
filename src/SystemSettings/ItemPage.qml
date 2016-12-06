@@ -34,4 +34,17 @@ Page {
 
     property variant plugin
     property variant pluginManager
+    property variant pluginOptions
+
+    signal pushedOntoStack()
+
+    Connections {
+        target: root
+        onVisibleChanged: {
+            if (visible) {
+                pushedOntoStack();
+                target = null;
+            }
+        }
+    }
 }

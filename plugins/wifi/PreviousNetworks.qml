@@ -57,11 +57,12 @@ ItemPage {
         }
         delegate: SettingsListItems.StandardProgression {
             text: name
-            onClicked: {
-                pageStack.push(Qt.resolvedUrl("NetworkDetails.qml"),
-                {networkName : name, password : password, lastUsed : lastUsed,
-                dbusPath : objectPath});
-            }
+            onClicked: pageStack.addPageToNextColumn(previousNetworks,
+                Qt.resolvedUrl("NetworkDetails.qml"), {
+                    networkName : name, password : password,
+                    lastUsed : lastUsed, dbusPath : objectPath
+                }
+            )
         }
     }
 }

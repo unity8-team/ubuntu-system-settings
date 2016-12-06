@@ -421,7 +421,8 @@ ItemPage {
                     return i18n.tr("Unknown")
             }
             progression: true
-            onClicked: pageStack.push(Qt.resolvedUrl("Configuration.qml"))
+            onClicked: pageStack.addPageToNextColumn(
+                root, Qt.resolvedUrl("Configuration.qml"))
         }
     }
 

@@ -48,7 +48,8 @@ ItemPage {
                 enabled: (sim.netReg.status !== "") &&
                     (sim.netReg.mode !== "auto-only")
                 progressionVisible: enabled
-                onClicked: pageStack.push(Qt.resolvedUrl("PageChooseCarrier.qml"), {
+                onClicked: pageStack.addPageToNextColumn(root,
+                    Qt.resolvedUrl("PageChooseCarrier.qml"), {
                     sim: sim,
                     title: i18n.tr("Carrier")
                 })
@@ -58,7 +59,8 @@ ItemPage {
                 text: i18n.tr("APN")
                 objectName: "apn"
                 progressionVisible: enabled
-                onClicked: pageStack.push(Qt.resolvedUrl("PageChooseApn.qml"), {
+                onClicked: pageStack.addPageToNextColumn(root,
+                    Qt.resolvedUrl("PageChooseApn.qml"), {
                     sim: sim
                 })
             }

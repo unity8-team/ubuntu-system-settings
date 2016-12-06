@@ -128,9 +128,7 @@ ItemPage {
                 text: i18n.tr("Custom Ringtone")
                 visible: soundType === 0
                 progression: true
-                onClicked: {
-                    pageStack.push(picker);
-                }
+                onClicked: pageStack.addPageToNextColumn(soundsPage, picker)
             }
         }
     }
@@ -215,7 +213,7 @@ ItemPage {
             showTitle: false
 
             onPeerSelected: {
-                pageStack.pop();
+                pageStack.removeAll(soundsPage);
                 // requests an active transfer from peer
                 function startContentTransfer(callback) {
                     if (callback)
@@ -231,7 +229,7 @@ ItemPage {
                 });
             }
 
-            onCancelPressed: pageStack.pop();
+            onCancelPressed: pageStack.removeAll(soundsPage);
         }
     }
 

@@ -44,9 +44,7 @@ ItemPage {
     Action {
         id: selectPeer
         // when action has been activated, push the picker on the stack
-        onTriggered: {
-            pageStack.push(picker);
-        }
+        onTriggered: pageStack.addPageToNextColumn(mainPage, picker)
     }
 
     // qml bindings for background stuff
@@ -82,7 +80,8 @@ ItemPage {
                 title: i18n.tr("Ubuntu Art")
                 current: welcomeBackground
                 onSelected: {
-                    pageStack.push(Qt.resolvedUrl("Preview.qml"), {uri: uri});
+                    pageStack.addPageToNextColumn(mainPage,
+                        Qt.resolvedUrl("Preview.qml"), {uri: uri});
                     selectedItemConnection.target = pageStack.currentPage;
                 }
             }
@@ -100,7 +99,8 @@ ItemPage {
                 editable: true
                 isCustom: true
                 onSelected: {
-                    pageStack.push(Qt.resolvedUrl("Preview.qml"), {uri: uri});
+                    pageStack.addPageToNextColumn(mainPage,
+                        Qt.resolvedUrl("Preview.qml"), {uri: uri});
                     selectedItemConnection.target = pageStack.currentPage
                 }
             }
@@ -186,9 +186,11 @@ ItemPage {
                 // when peer has been selected, request a transfer, providing
                 // a callback that pushes the preview stack
                 startContentTransfer(function(uri) {
-                    pageStack.push(Qt.resolvedUrl("Preview.qml"), {
-                        uri: uri, imported: true
-                    });
+                    pageStack.addPageToNextColumn(mainPage,
+                        Qt.resolvedUrl("Preview.qml"), {
+                            uri: uri, imported: true
+                        }
+                    );
                     // set Connection target
                     selectedItemConnection.target = pageStack.currentPage;
                 });

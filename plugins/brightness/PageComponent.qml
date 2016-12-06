@@ -43,7 +43,7 @@ ItemPage {
     AethercastDisplays {
         id: aethercastDisplays
         onEnabledChanged: {
-            /* This is a hack to ensure the aethercast enabled switch stays 
+            /* This is a hack to ensure the aethercast enabled switch stays
              * in sync with the enabled property
              */
             enabledCheck.serverChecked = enabled;
@@ -158,7 +158,8 @@ ItemPage {
                 text: i18n.tr("Wireless display")
                 value: aethercastDisplays.state === "connected" ? i18n.tr("Connected") : i18n.tr("Not connected")
                 progression: true
-                onClicked: pageStack.push(Qt.resolvedUrl("WifiDisplays.qml"))
+                onClicked: pageStack.addPageToNextColumn(
+                    root, Qt.resolvedUrl("WifiDisplays.qml"))
             }
         }
     }

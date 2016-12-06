@@ -42,30 +42,15 @@ ItemPage {
 
     property bool externalKeyboardPresent: keyboardsModel.count > 0
 
-    property var pluginOptions
-
-    Connections {
-        id: pagePusher
-        property var page
-        property var opts: ({})
-        onVisibleChanged: {
-            if (target.visible) {
-                pageStack.addPageToNextColumn(target, page, opts);
-                target = null;
-            }
-        }
-    }
-
-    Component.onCompleted: {
+    onPushedOntoStack: {
         if (pluginOptions && pluginOptions['subpage']) {
             switch (pluginOptions['subpage']) {
             case 'hw-keyboard-layouts':
-                pagePusher.target = root;
-                pagePusher.page = Qt.resolvedUrl("KeyboardLayouts.qml");
-                pagePusher.opts = {
+                pageStack.addPageToNextColumn(
+                    root, Qt.resolvedUrl('KeyboardLayouts.qml'), {
                     plugin: hwKeyboardPlugin,
                     currentLayoutsDraggable: true
-                };
+                });
                 break;
             }
         }

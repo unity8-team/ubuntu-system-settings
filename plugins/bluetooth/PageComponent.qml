@@ -301,7 +301,9 @@ ItemPage {
                         }
                         onClicked: {
                             backend.setSelectedDevice(addressName);
-                            pageStack.push(Qt.resolvedUrl("DevicePage.qml"), {backend: backend, root: root});
+                            pageStack.addPageToNextColumn(root,
+                                Qt.resolvedUrl("DevicePage.qml"),
+                                {backend: backend, root: root});
                         }
                     }
                 }
@@ -343,7 +345,9 @@ ItemPage {
                         text: getDisplayName(type, displayName)
                         onClicked: {
                             backend.setSelectedDevice(addressName);
-                            pageStack.push(Qt.resolvedUrl("DevicePage.qml"), {backend: backend, root: root});
+                            pageStack.addPageToNextColumn(root,
+                                Qt.resolvedUrl("DevicePage.qml"),
+                                {backend: backend, root: root});
                         }
                     }
                 }
@@ -377,7 +381,9 @@ ItemPage {
                         text: getDisplayName(type, displayName)
                         onClicked: {
                             backend.setSelectedDevice(addressName);
-                            pageStack.push(Qt.resolvedUrl("DevicePage.qml"), {backend: backend, root: root});
+                            pageStack.addPageToNextColumn(root,
+                                Qt.resolvedUrl("DevicePage.qml"),
+                                {backend: backend, root: root});
                         }
                     }
                 }

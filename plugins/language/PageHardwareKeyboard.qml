@@ -64,10 +64,12 @@ ItemPage {
                        plugin.keyboardLayoutsModel.subset.length
                 progression: true
 
-                onClicked: pageStack.push(Qt.resolvedUrl("KeyboardLayouts.qml"), {
-                    plugin: plugin,
-                    currentLayoutsDraggable: true
-                })
+                onClicked: pageStack.addPageToNextColumn(root,
+                    Qt.resolvedUrl("KeyboardLayouts.qml"), {
+                        plugin: plugin,
+                        currentLayoutsDraggable: true
+                    }
+                )
             }
         }
     }

@@ -65,7 +65,10 @@ ItemPage {
                 ListItem.Standard {
                     progression: true
                     text: modelData
-                    onClicked: pageStack.push(Qt.resolvedUrl("ServiceInfo.qml"), {serviceName: modelData, serviceNumber: sim.serviceNumbers[modelData]})
+                    onClicked: pageStack.addPageToNextColumn(root,
+                        Qt.resolvedUrl("ServiceInfo.qml"), {
+                            serviceName: modelData,
+                            serviceNumber: sim.serviceNumbers[modelData]})
                 }
             }
         }
