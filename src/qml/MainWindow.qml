@@ -46,8 +46,6 @@ MainView {
             var pageComponent = plugin.pageComponent
             if (pageComponent) {
                 apl.removePages(apl.primaryPage);
-                // while (pageStack.depth > 1)
-                //     pageStack.pop()
                 apl.addPageToNextColumn(apl.primaryPage, pageComponent, opts);
             }
             return true
@@ -229,10 +227,4 @@ MainView {
             }
         }
     }
-
-    // PageStack {
-    //     id: pageStack
-
-
-    // }
 }

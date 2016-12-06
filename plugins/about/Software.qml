@@ -30,7 +30,9 @@ ItemPage {
         delegate: ListItem.Standard {
             text: fileName
             progression: true
-            onClicked: pageStack.push(Qt.resolvedUrl("License.qml"), {binary: fileName})
+            onClicked: pageStack.addPageToNextColumn(
+                licensesPage, Qt.resolvedUrl("License.qml"), {binary: fileName}
+            )
         }
 
     }

@@ -67,23 +67,12 @@ Column {
                     target: loader.item
                     onClicked: {
                         var pageComponent = model.item.pageComponent
-                        var incubator;
                         if (pageComponent) {
                             Haptics.play();
-                            incubator = apl.addPageToNextColumn(apl.primaryPage, model.item.pageComponent, {
+                            apl.addPageToNextColumn(apl.primaryPage, model.item.pageComponent, {
                                 plugin: model.item, pluginManager: pluginManager,
                                 // pageStack: apl.primaryPage.pageStack
                             });
-                            // if (incubator && incubator.status == Component.Loading) {
-                            //     incubator.onStatusChanged = function(status) {
-                            //         if (status == Component.Ready) {
-                            //             apl.currentPanel = incubator.object;
-                            //             incubator.object.Component.destruction.connect(function() {
-                            //                 apl.currentPanel = null;
-                            //             });
-                            //         }
-                            //     }
-                            // }
                         }
                     }
                 }

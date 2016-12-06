@@ -43,34 +43,33 @@ ItemPage {
     property bool externalKeyboardPresent: keyboardsModel.count > 0
 
     property var pluginOptions
-    // Connections {
-    //     target: pageStack
-    //     onCurrentPageChanged: {
-    //         // If we are called with subpage=foo, push foo on the stack.
-    //         //
-    //         // We need to wait until the PageComponent has been pushed to the stack
-    //         // before pushing the subpages, otherwise they will be pushed below the
-    //         // PageComponent.
-    //         if (pageStack.currentPage === root) {
-    //             if (pluginOptions && pluginOptions['subpage']) {
-    //                 switch (pluginOptions['subpage']) {
-    //                 case 'hw-keyboard-layouts':
-    //                     pageStack.push(Qt.resolvedUrl("KeyboardLayouts.qml"), {
-    //                                        plugin: hwKeyboardPlugin,
-    //                                        currentLayoutsDraggable: true
-    //                                    })
-    //                     break;
-    //                 }
-    //             }
 
-    //             // Once done, disable this Connections, so that if the user navigates
-    //             // back to the root we won't push the subpages again
-    //             target = null
-    //         }
-    //     }
-    // }
+    Connections {
+        id: pagePusher
+        property var page
+        property var opts: ({})
+        onVisibleChanged: {
+            if (target.visible) {
+                pageStack.addPageToNextColumn(target, page, opts);
+                target = null;
+            }
+        }
+    }
 
-    Component.onCompleted: console.warn('foooooo')
+    Component.onCompleted: {
+        if (pluginOptions && pluginOptions['subpage']) {
+            switch (pluginOptions['subpage']) {
+            case 'hw-keyboard-layouts':
+                pagePusher.target = root;
+                pagePusher.page = Qt.resolvedUrl("KeyboardLayouts.qml");
+                pagePusher.opts = {
+                    plugin: hwKeyboardPlugin,
+                    currentLayoutsDraggable: true
+                };
+                break;
+            }
+        }
+    }
 
     UbuntuLanguagePlugin {
         id: plugin
