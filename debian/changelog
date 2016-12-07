@@ -1,3 +1,10 @@
+ubuntu-system-settings (0.4+17.04.20161207-0ubuntu1) zesty; urgency=medium
+
+  [ Jonas G. Drange, Ken VanDine ]
+  * Replaces the grid with a list
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Wed, 07 Dec 2016 15:17:20 +0000
+
 ubuntu-system-settings (0.4+17.04.20161129-0ubuntu1) zesty; urgency=medium
 
   [ Daniel van Vugt ]
