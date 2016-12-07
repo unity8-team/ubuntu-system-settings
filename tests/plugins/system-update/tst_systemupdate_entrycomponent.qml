@@ -36,6 +36,7 @@ Item {
 
         EntryComponent {
             property var model
+            property bool showAllUI: false
             width: testRoot.width
         }
     }
@@ -69,7 +70,7 @@ Item {
 
         function test_clickUpdates() {
             UpdateManager.model.mockAddUpdate("app" + 0, 0, Update.KindClick);
-            tryCompare(instance, "height", units.gu(7), 5000, "item did not have the correct height when we had click updates");
+            tryCompare(instance, "height", units.gu(6.5), 5000, "item did not have the correct height when we had click updates");
         }
     }
 
@@ -97,12 +98,12 @@ Item {
         }
 
         function test_visibleWhenImageUpdate() {
-            tryCompare(instance, "height", units.gu(7), 5000, "item did not have the correct height when we had image updates");
+            tryCompare(instance, "height", units.gu(6.5), 5000, "item did not have the correct height when we had image updates");
         }
 
         function test_clickUpdates() {
             UpdateManager.model.mockAddUpdate("app" + 0, 0, Update.KindClick);
-            tryCompare(instance, "height", units.gu(7), 5000, "item did not have the correct height when we had all types of updates");
+            tryCompare(instance, "height", units.gu(6.5), 5000, "item did not have the correct height when we had all types of updates");
         }
     }
 }

@@ -1,9 +1,7 @@
 /*
  * This file is part of system-settings
  *
- * Copyright (C) 2013-2016 Canonical Ltd.
- *
- * Contact: Alberto Mardegan <alberto.mardegan@canonical.com>
+ * Copyright (C) 2016 Canonical Ltd.
  *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License version 3, as published
@@ -18,10 +16,35 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import QtQuick 2.4
-import SystemSettings.ListItems 1.0 as SettingsListItems
+#include "MockPluginManager.h"
 
-SettingsListItems.IconProgression {
-    text: i18n.tr(model.displayName)
-    iconSource: model.icon
+MockPluginManager::MockPluginManager(QObject *parent) : QObject(parent)
+{
+}
+
+QObject* MockPluginManager::getByName(const QString &name) const
+{
+    Q_UNUSED(name);
+    return nullptr;
+}
+
+QAbstractItemModel* MockPluginManager::itemModel(const QString &category)
+{
+    Q_UNUSED(category);
+    return nullptr;
+}
+
+void MockPluginManager::resetPlugins()
+{
+}
+
+QString MockPluginManager::getFilter()
+{
+    return m_filter;
+}
+
+void MockPluginManager::setFilter(const QString &filter)
+{
+    m_filter = filter;
+    Q_EMIT filterChanged();
 }

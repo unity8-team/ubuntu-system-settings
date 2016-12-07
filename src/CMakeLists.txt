@@ -23,7 +23,6 @@ set(USS_SOURCES
 )
 
 set(QML_SOURCES
-    qml/CategoryGrid.qml
     qml/CategorySection.qml
     qml/EntryComponent.qml
     qml/MainWindow.qml

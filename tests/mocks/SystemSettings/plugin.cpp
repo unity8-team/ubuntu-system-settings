@@ -1,9 +1,7 @@
 /*
  * This file is part of system-settings
  *
- * Copyright (C) 2013-2016 Canonical Ltd.
- *
- * Contact: Alberto Mardegan <alberto.mardegan@canonical.com>
+ * Copyright (C) 2016 Canonical Ltd.
  *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License version 3, as published
@@ -18,10 +16,13 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import QtQuick 2.4
-import SystemSettings.ListItems 1.0 as SettingsListItems
+#include "plugin.h"
+#include "MockPluginManager.h"
 
-SettingsListItems.IconProgression {
-    text: i18n.tr(model.displayName)
-    iconSource: model.icon
+#include <QtQml>
+
+void BackendPlugin::registerTypes(const char *uri)
+{
+    Q_ASSERT(uri == QLatin1String("SystemSettings"));
+    qmlRegisterType<MockPluginManager>(uri, 1, 0, "PluginManager");
 }
