@@ -36,12 +36,22 @@ Item {
 
             property string i18nDirectory: ""
             property string defaultPlugin: ""
+            property var pluginOptions: ({})
             property var view: ({
                 minimumWidth: 0,
                 maximumWidth: 0,
             })
         }
     }
+
+    // UbuntuTestCase {
+    //     name: "DefaultPluginMainWindowTest"
+    //     when: windowShown
+
+    //     function test_default_plugin () {
+    //         mainWindowComponent.createObject(testRoot, {});
+    //     }
+    // }
 
     // UbuntuTestCase {
     //     name: "MainWindowTests"
@@ -91,9 +101,9 @@ Item {
         }
 
         Component {
-            id: testNetworkEntryComponent
+            id: testUncategorizedEntry
             SettingsListItems.IconProgression {
-                objectName: "testNetworkEntryComponent"
+                objectName: "testUncategorizedEntry"
                 text: "Test 2"
                 iconName: "phone-smartphone-symbolic"
             }
@@ -102,6 +112,7 @@ Item {
         Component {
             id: testPageComponent
             Page {
+                objectName: "testPage"
                 visible: false
                 property var pluginManager
                 header: testHeader
@@ -109,17 +120,17 @@ Item {
                     id: testHeader
                     title: i18n.tr("Test PageComponent")
                     flickable: testFlickable
-                    Flickable {
-                        id: testFlickable
-                        anchors.fill: parent
-                        contentHeight: contentItem.childrenRect.height
-                        Column {
-                            anchors.left: parent.left
-                            anchors.right: parent.right
+                }
+                Flickable {
+                    id: testFlickable
+                    anchors.fill: parent
+                    contentHeight: contentItem.childrenRect.height
+                    Column {
+                        anchors.left: parent.left
+                        anchors.right: parent.right
 
-                            Label {
-                                text: "Test Content"
-                            }
+                        Label {
+                            text: "Test Content"
                         }
                     }
                 }
@@ -131,46 +142,78 @@ Item {
             PluginManager {}
         }
 
+        function waitForPage(page) {
+            tryCompareFunction(function () {
+                return !!findChild(testRoot, page);
+            }, true);
+            return findChild(testRoot, page);
+        }
+
         property var instance
         property var personalEntry
-        property var networkEntry
+        property var uncategorizedEntry
         property var page
         property var manager
 
         function init() {
             manager = pluginManagerComponent.createObject(testRoot);
-
-            // entry = testEntryComponent.createObject(testRoot);
-            // page = testPageComponent.createObject(testRoot);
             personalEntry = testPersonalEntry;
-            networkEntry = testNetworkEntryComponent;
+            uncategorizedEntry = testUncategorizedEntry;
             page = testPageComponent;
 
-            manager.addPlugin('Test', personalEntry, page, "personal");
-            manager.addPlugin('Phone', networkEntry, page, "network");
-            instance = mainWindowComponent.createObject(testRoot, {
-                pluginManager: manager
-            });
+            manager.addPlugin("Test", personalEntry, page, "personal");
+            manager.addPlugin("Phone", uncategorizedEntry, page, "uncategorized-bottom");
         }
 
         function cleanup() {
-            instance.destroy();
+            instance && instance.destroy();
         }
 
-        function test_wait(){
-            wait(2000)
-            testRoot.width = units.gu(50)
-            wait(2000)
-            testRoot.width = units.gu(150)
-            wait(2000)
-            testRoot.width = units.gu(90)
-            wait(2000)
-            testRoot.width = units.gu(110)
-            wait(2000)
-        }
+        // function test_go_to_panel_data() {
+        //     return [
+        //         { tag: "one column, categorized", width: units.gu(50), entry: "testPersonalEntry" },
+        //         { tag: "one column, uncategorized", width: units.gu(50), entry: "testUncategorizedEntry" },
+        //         { tag: "two column, categorized", width: units.gu(110), entry: "testPersonalEntry" },
+        //         { tag: "two column, uncategorized", width: units.gu(110), entry: "testUncategorizedEntry" },
+        //     ];
+        // }
+        // function test_go_to_panel(data) {
+        //     instance = mainWindowComponent.createObject(testRoot, {
+        //         pluginManager: manager
+        //     });
+        //     testRoot.width = data.width;
+        //     var entry = findChild(instance, data.entry);
+        //     mouseClick(entry, entry.width / 2, entry.height / 2);
+        //     waitForPage("testPage")
+        //     var page = waitForPage("testPage");
+        //     tryCompare(page, "visible", true);
+        // }
 
-        function test_main_screen() {}
-        function test_panel() {}
-        function test_going_deeper_into_panel() {}
+        // function test_default_plugin_data() {
+        //     return [
+        //         { tag: "no default", default: "", pageObjectName: "" },
+        //         { tag: "default", default: "Test", pageObjectName: "testPage" },
+        //     ];
+        // }
+
+        // function test_default_plugin(data) {
+        //     instance = mainWindowComponent.createObject(testRoot, {
+        //         pluginManager: manager, defaultPlugin: data.default
+        //     });
+        //     if (data.pageObjectName) {
+        //         var page = waitForPage(data.pageObjectName);
+        //         tryCompare(page, "visible", true);
+        //     }
+        // }
+        function test_load_some_plugin_if_two_columns() {
+            instance = mainWindowComponent.createObject(testRoot, {
+                pluginManager: manager,
+                fallbackPlugin: "Test"
+            });
+            testRoot.width = units.gu(110);
+            wait(4000)
+            testRoot.width = units.gu(50);
+            wait(4000)
+        }
     }
 }

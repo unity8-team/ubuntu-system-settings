@@ -62,6 +62,7 @@ class MockItem : public QObject
     Q_PROPERTY(QQmlComponent *entryComponent READ entryComponent CONSTANT)
     Q_PROPERTY(QQmlComponent *pageComponent READ pageComponent CONSTANT)
     Q_PROPERTY(bool visible READ visible CONSTANT)
+    Q_PROPERTY(QString baseName READ baseName CONSTANT)
 public:
     explicit MockItem(QObject *parent = 0) : QObject(parent) {};
     ~MockItem() {};
@@ -69,10 +70,13 @@ public:
     void setEntryComponent(QQmlComponent* c);
     QQmlComponent* pageComponent();
     void setPageComponent(QQmlComponent* c);
-    bool visible();
+    bool visible() const;
+    QString baseName() const;
+    void setBaseName(const QString &baseName);
 private:
     QQmlComponent* m_entry;
     QQmlComponent* m_page;
+    QString m_baseName;
 };
 
 class MockItemModel : public QAbstractListModel

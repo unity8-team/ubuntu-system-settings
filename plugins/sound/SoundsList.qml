@@ -213,7 +213,7 @@ ItemPage {
             showTitle: false
 
             onPeerSelected: {
-                pageStack.removeAll(soundsPage);
+                pageStack.removePages(soundsPage);
                 // requests an active transfer from peer
                 function startContentTransfer(callback) {
                     if (callback)
@@ -229,7 +229,7 @@ ItemPage {
                 });
             }
 
-            onCancelPressed: pageStack.removeAll(soundsPage);
+            onCancelPressed: pageStack.removePages(soundsPage);
         }
     }
 

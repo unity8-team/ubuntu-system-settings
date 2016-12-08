@@ -64,15 +64,26 @@ void MockPluginManager::addPlugin(const QString &name, QQmlComponent *entry,
     }
 
     MockItem* item = new MockItem(this);
-    item->setProperty("name", name);
+    item->setBaseName(name);
     item->setEntryComponent(entry);
     item->setPageComponent(page);
     model->addPlugin(item);
+    m_plugins.insert(name, item);
 }
 
-bool MockItem::visible()
+bool MockItem::visible() const
 {
     return true;
+}
+
+QString MockItem::baseName() const
+{
+    return m_baseName;
+}
+
+void MockItem::setBaseName(const QString &baseName)
+{
+    m_baseName = baseName;
 }
 
 QQmlComponent* MockItem::entryComponent()
@@ -123,7 +134,7 @@ QVariant MockItemModel::data(const QModelIndex &index, int role) const
 
     switch (role) {
     case Qt::DisplayRole:
-        ret = item->property("name");
+        ret = item->baseName();
         break;
     case ItemRole:
         ret = QVariant::fromValue<QObject*>(const_cast<MockItem*>(item));

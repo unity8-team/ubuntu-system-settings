@@ -31,7 +31,35 @@ MainView {
     objectName: "systemSettingsMainView"
     automaticOrientation: true
     anchorToKeyboard: true
+    property string currentPlugin: ""
+    property string fallbackPlugin: "about"
     property var pluginManager: PluginManager {}
+
+    states: [
+        State {
+            when: !currentPlugin && apl.columns === 1
+            StateChangeScript {
+                script: {
+                    console.warn('fppp')
+                    apl.removePages(apl.primaryPage)
+                }
+            }
+        },
+        State {
+            when: apl.primaryPage.visible && !currentPlugin && apl.columns > 1
+            StateChangeScript {
+                script: {
+                    console.warn('zzzz')
+                    var plugin = pluginManager.getByName(fallbackPlugin);
+                    apl.addPageToNextColumn(
+                        apl.primaryPage, plugin.pageComponent, {
+                            pluginManager: pluginManager, plugin: plugin
+                        }
+                    );
+                }
+            }
+        }
+    ]
 
     function loadPluginByName(pluginName, pluginOptions) {
         var plugin = pluginManager.getByName(pluginName)
@@ -48,6 +76,7 @@ MainView {
                 apl.removePages(apl.primaryPage);
                 apl.addPageToNextColumn(apl.primaryPage, pageComponent, opts);
             }
+            currentPlugin = pluginName;
             return true
         } else {
             // Invalid plugin

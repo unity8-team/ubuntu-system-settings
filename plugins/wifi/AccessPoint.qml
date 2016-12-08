@@ -52,8 +52,6 @@ FramedMenuItem {
 
     signal activate()
 
-    onCheckedChanged: pageStack.removeAll(wifibase)
-
     progressionVisible: checked
     onClicked: {
         if (checked) {
