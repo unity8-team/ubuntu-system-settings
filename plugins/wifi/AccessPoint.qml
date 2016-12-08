@@ -52,18 +52,14 @@ FramedMenuItem {
 
     signal activate()
 
-    onCheckedChanged: {
-        // if stack has NetworkDetailsBrief, pop it
-        if (pageStack.depth === 3) {
-            pageStack.pop();
-        }
-    }
+    onCheckedChanged: pageStack.removeAll(wifibase)
 
     progressionVisible: checked
     onClicked: {
         if (checked) {
-            pageStack.push(Qt.resolvedUrl("NetworkDetailsBrief.qml"),
-            {networkName : text, accessPoint: accessPoint})
+            pageStack.addPageToNextColumn(wifibase,
+                Qt.resolvedUrl("NetworkDetailsBrief.qml"),
+                {networkName : text, accessPoint: accessPoint})
         } else {
             accessPoint.activate();
         }
