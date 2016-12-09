@@ -32,34 +32,7 @@ MainView {
     automaticOrientation: true
     anchorToKeyboard: true
     property string currentPlugin: ""
-    property string fallbackPlugin: "about"
     property var pluginManager: PluginManager {}
-
-    states: [
-        State {
-            when: !currentPlugin && apl.columns === 1
-            StateChangeScript {
-                script: {
-                    console.warn('fppp')
-                    apl.removePages(apl.primaryPage)
-                }
-            }
-        },
-        State {
-            when: apl.primaryPage.visible && !currentPlugin && apl.columns > 1
-            StateChangeScript {
-                script: {
-                    console.warn('zzzz')
-                    var plugin = pluginManager.getByName(fallbackPlugin);
-                    apl.addPageToNextColumn(
-                        apl.primaryPage, plugin.pageComponent, {
-                            pluginManager: pluginManager, plugin: plugin
-                        }
-                    );
-                }
-            }
-        }
-    ]
 
     function loadPluginByName(pluginName, pluginOptions) {
         var plugin = pluginManager.getByName(pluginName)
@@ -72,11 +45,25 @@ MainView {
         if (plugin) {
             // Got a valid plugin name - load it
             var pageComponent = plugin.pageComponent
+            var incubator;
             if (pageComponent) {
                 apl.removePages(apl.primaryPage);
-                apl.addPageToNextColumn(apl.primaryPage, pageComponent, opts);
+                incubator = apl.addPageToNextColumn(apl.primaryPage,
+                                                    pageComponent, opts);
+                if (incubator && incubator.status == Component.Loading) {
+                    incubator.onStatusChanged = function(status) {
+                        if (status == Component.Ready) {
+                            incubator.object.Component.destruction.connect(function() {
+                                if (currentPlugin == this.baseName) {
+                                    currentPlugin = "";
+                                }
+
+                            }.bind(this));
+                            currentPlugin = this.baseName;
+                        }
+                    }.bind(plugin);
+                }
             }
-            currentPlugin = pluginName;
             return true
         } else {
             // Invalid plugin
@@ -127,23 +114,22 @@ MainView {
             } else {
                 loadPluginByName(panel)
             }
-
         }
     }
 
     AdaptivePageLayout {
         id: apl
+        objectName: "apl"
         anchors.fill: parent
         primaryPage: mainPage
         layouts: [
             PageColumnsLayout {
-                when: width > units.gu(90)
-
+                when: width >= units.gu(90)
                 PageColumn {
                     minimumWidth: units.gu(40)
                     maximumWidth: units.gu(50)
+                    preferredWidth: units.gu(50)
                 }
-
                 PageColumn {
                     fillWidth: true
                 }
@@ -152,7 +138,7 @@ MainView {
                 when: true
                 PageColumn {
                     fillWidth: true
-                    minimumWidth: units.gu(10)
+                    minimumWidth: units.gu(40)
                 }
             }
         ]
@@ -196,8 +182,7 @@ MainView {
                         verticalCenter: parent.verticalCenter
                     }
                     inputMethodHints: Qt.ImhNoPredictiveText
-                    onDisplayTextChanged:
-                        pluginManager.filter = displayText
+                    onDisplayTextChanged: pluginManager.filter = displayText
                     placeholderText: i18n.tr("Search")
                     hasClearButton: false
                 }

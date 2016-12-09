@@ -44,48 +44,47 @@ Item {
         }
     }
 
-    // UbuntuTestCase {
-    //     name: "DefaultPluginMainWindowTest"
-    //     when: windowShown
+    UbuntuTestCase {
+        name: "DefaultPluginMainWindowTest"
+        when: windowShown
 
-    //     function test_default_plugin () {
-    //         mainWindowComponent.createObject(testRoot, {});
-    //     }
-    // }
+        function test_default_plugin () {
+            mainWindowComponent.createObject(testRoot, {});
+        }
+    }
 
-    // UbuntuTestCase {
-    //     name: "MainWindowTests"
-    //     when: windowShown
+    UbuntuTestCase {
+        name: "MainWindowTests"
+        when: windowShown
 
-    //     property var instance
+        property var instance
 
-    //     function init() {
-    //         instance = mainWindowComponent.createObject(testRoot, {});
-    //     }
+        function init() {
+            instance = mainWindowComponent.createObject(testRoot, {});
+        }
 
-    //     function cleanup() {
-    //         instance.destroy();
-    //     }
+        function cleanup() {
+            instance.destroy();
+        }
 
-    //     function test_search_filter_results() {
-    //         var standardHeader = findChild(instance, "standardHeader");
-    //         var search = findChild(instance, "searchField");
-    //         standardHeader.trailingActionBar.actions[0].trigger();
-    //         search.text = "blue";
-    //         compare(instance.pluginManager.filter, search.text)
-    //     }
+        function test_search_filter_results() {
+            var standardHeader = findChild(instance, "standardHeader");
+            var search = findChild(instance, "searchField");
+            standardHeader.trailingActionBar.actions[0].trigger();
+            search.text = "blue";
+            compare(instance.pluginManager.filter, search.text)
+        }
 
-    //     function test_search_cleared_clears_filter() {
-    //         var standardHeader = findChild(instance, "standardHeader");
-    //         var searchHeader = findChild(instance, "searchHeader");
-    //         var search = findChild(instance, "searchField");
-    //         standardHeader.trailingActionBar.actions[0].trigger();
-    //         search.text = "blue";
-    //         searchHeader.trailingActionBar.actions[0].trigger();
-    //         compare(instance.pluginManager.filter, "");
-    //     }
-    // }
-
+        function test_search_cleared_clears_filter() {
+            var standardHeader = findChild(instance, "standardHeader");
+            var searchHeader = findChild(instance, "searchHeader");
+            var search = findChild(instance, "searchField");
+            standardHeader.trailingActionBar.actions[0].trigger();
+            search.text = "blue";
+            searchHeader.trailingActionBar.actions[0].trigger();
+            compare(instance.pluginManager.filter, "");
+        }
+    }
 
     UbuntuTestCase {
         name: "MainWindowAPLTests"
@@ -149,6 +148,12 @@ Item {
             return findChild(testRoot, page);
         }
 
+        function waitForPageDestruction(page) {
+            tryCompareFunction(function () {
+                return !!findChild(testRoot, page);
+            }, false);
+        }
+
         property var instance
         property var personalEntry
         property var uncategorizedEntry
@@ -169,51 +174,63 @@ Item {
             instance && instance.destroy();
         }
 
-        // function test_go_to_panel_data() {
-        //     return [
-        //         { tag: "one column, categorized", width: units.gu(50), entry: "testPersonalEntry" },
-        //         { tag: "one column, uncategorized", width: units.gu(50), entry: "testUncategorizedEntry" },
-        //         { tag: "two column, categorized", width: units.gu(110), entry: "testPersonalEntry" },
-        //         { tag: "two column, uncategorized", width: units.gu(110), entry: "testUncategorizedEntry" },
-        //     ];
-        // }
-        // function test_go_to_panel(data) {
-        //     instance = mainWindowComponent.createObject(testRoot, {
-        //         pluginManager: manager
-        //     });
-        //     testRoot.width = data.width;
-        //     var entry = findChild(instance, data.entry);
-        //     mouseClick(entry, entry.width / 2, entry.height / 2);
-        //     waitForPage("testPage")
-        //     var page = waitForPage("testPage");
-        //     tryCompare(page, "visible", true);
-        // }
-
-        // function test_default_plugin_data() {
-        //     return [
-        //         { tag: "no default", default: "", pageObjectName: "" },
-        //         { tag: "default", default: "Test", pageObjectName: "testPage" },
-        //     ];
-        // }
-
-        // function test_default_plugin(data) {
-        //     instance = mainWindowComponent.createObject(testRoot, {
-        //         pluginManager: manager, defaultPlugin: data.default
-        //     });
-        //     if (data.pageObjectName) {
-        //         var page = waitForPage(data.pageObjectName);
-        //         tryCompare(page, "visible", true);
-        //     }
-        // }
-        function test_load_some_plugin_if_two_columns() {
+        function test_go_to_panel_data() {
+            return [
+                { tag: "one column, categorized", width: units.gu(50), entry: "testPersonalEntry" },
+                { tag: "one column, uncategorized", width: units.gu(50), entry: "testUncategorizedEntry" },
+                { tag: "two column, categorized", width: units.gu(110), entry: "testPersonalEntry" },
+                { tag: "two column, uncategorized", width: units.gu(110), entry: "testUncategorizedEntry" },
+            ];
+        }
+        function test_go_to_panel(data) {
             instance = mainWindowComponent.createObject(testRoot, {
-                pluginManager: manager,
-                fallbackPlugin: "Test"
+                pluginManager: manager
             });
-            testRoot.width = units.gu(110);
-            wait(4000)
-            testRoot.width = units.gu(50);
-            wait(4000)
+            testRoot.width = data.width;
+            var entry = findChild(instance, data.entry);
+            mouseClick(entry, entry.width / 2, entry.height / 2);
+            waitForPage("testPage");
+            var page = waitForPage("testPage");
+            tryCompare(page, "visible", true);
+        }
+
+        function test_default_plugin_data() {
+            return [
+                { tag: "no default", default: "", pageObjectName: "" },
+                { tag: "default", default: "Test", pageObjectName: "testPage" },
+            ];
+        }
+
+        function test_default_plugin(data) {
+            instance = mainWindowComponent.createObject(testRoot, {
+                pluginManager: manager, defaultPlugin: data.default
+            });
+            if (data.pageObjectName) {
+                var page = waitForPage(data.pageObjectName);
+                tryCompare(page, "visible", true);
+            }
+        }
+
+        function test_current_plugin_property() {
+            var apl;
+            var entry;
+
+            instance = mainWindowComponent.createObject(testRoot, {
+                pluginManager: manager
+            });
+            waitForRendering(instance);
+            apl = findInvisibleChild(instance, "apl");
+
+            // Base case
+            compare(instance.currentPlugin, "");
+
+            // Push a page
+            instance.loadPluginByName("Test");
+            tryCompare(instance, "currentPlugin", "Test");
+
+            // Pop a page
+            apl.removePages(apl.primaryPage);
+            tryCompare(instance, "currentPlugin", "");
         }
     }
 }

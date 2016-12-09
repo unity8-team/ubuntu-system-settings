@@ -73,6 +73,18 @@ Column {
                         }
                     }
                 }
+                Binding {
+                    target: loader.item
+                    property: "color"
+                    value: theme.palette.highlighted.background
+                    when: currentPlugin == model.item.baseName && apl.columns > 1
+                }
+                Binding {
+                    target: loader.item
+                    property: "color"
+                    value: "transparent"
+                    when: currentPlugin != model.item.baseName || apl.columns == 1
+                }
             }
         }
     }

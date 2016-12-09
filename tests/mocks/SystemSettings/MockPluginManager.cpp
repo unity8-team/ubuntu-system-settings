@@ -27,7 +27,9 @@ MockPluginManager::MockPluginManager(QObject *parent) : QObject(parent)
 
 QObject* MockPluginManager::getByName(const QString &name) const
 {
-    return m_plugins.value(name);
+    MockItem* p = m_plugins.value(name);
+    QQmlEngine::setObjectOwnership(p, QQmlEngine::CppOwnership);
+    return p;
 }
 
 QAbstractItemModel* MockPluginManager::itemModel(const QString &category)
