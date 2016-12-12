@@ -188,6 +188,7 @@ Item {
             instance = mainWindowComponent.createObject(testRoot, {
                 pluginManager: manager
             });
+            waitForRendering(instance);
             testRoot.width = data.width;
             var entry = findChild(instance, data.entry);
             mouseClick(entry, entry.width / 2, entry.height / 2);
