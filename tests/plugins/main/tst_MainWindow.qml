@@ -113,6 +113,8 @@ Item {
             Page {
                 objectName: "testPage"
                 visible: false
+                property var plugin
+                property var pluginOptions
                 property var pluginManager
                 header: testHeader
                 PageHeader {
@@ -209,6 +211,16 @@ Item {
                 var page = waitForPage(data.pageObjectName);
                 tryCompare(page, "visible", true);
             }
+        }
+
+        function test_placeholder_plugin_created_and_destroyed() {
+            instance = mainWindowComponent.createObject(testRoot, {
+                pluginManager: manager, defaultPlugin: data.default,
+                placeholderPlugin: "Test"
+            });
+            waitForPage("testPage");
+            testRoot.width = units.gu(50);
+            waitForPageDestruction("testPage");
         }
 
         function test_current_plugin_property() {

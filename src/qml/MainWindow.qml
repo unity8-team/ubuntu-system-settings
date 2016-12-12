@@ -32,6 +32,7 @@ MainView {
     automaticOrientation: true
     anchorToKeyboard: true
     property string currentPlugin: ""
+    property string placeholderPlugin: "about"
     property var pluginManager: PluginManager {}
 
     function loadPluginByName(pluginName, pluginOptions) {
@@ -78,6 +79,8 @@ MainView {
         if (defaultPlugin) {
             if (!loadPluginByName(defaultPlugin, pluginOptions))
                 Qt.quit()
+        } else if (apl.columns > 1) {
+            loadPluginByName(placeholderPlugin);
         }
 
         // when running in windowed mode, constrain width
@@ -142,6 +145,14 @@ MainView {
                 }
             }
         ]
+
+        onColumnsChanged: {
+            if (columns > 1 && !currentPlugin) {
+                loadPluginByName(placeholderPlugin);
+            } else if (columns == 1 && currentPlugin == placeholderPlugin) {
+                apl.removePages(apl.primaryPage);
+            }
+        }
 
         Page {
             id: mainPage
