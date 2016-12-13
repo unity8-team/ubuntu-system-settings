@@ -61,6 +61,7 @@ Item {
 
         function init() {
             instance = mainWindowComponent.createObject(testRoot, {});
+            waitForRendering(instance);
         }
 
         function cleanup() {
@@ -150,9 +151,11 @@ Item {
             return findChild(testRoot, page);
         }
 
-        function waitForPageDestruction(page) {
+        function waitForPageToGoAway(page) {
             tryCompareFunction(function () {
-                return !!findChild(testRoot, page);
+                var p = findChild(testRoot, page);
+                var visible = p && p.visible;
+                return !!(p && visible);
             }, false);
         }
 
@@ -208,6 +211,7 @@ Item {
             instance = mainWindowComponent.createObject(testRoot, {
                 pluginManager: manager, defaultPlugin: data.default
             });
+            waitForRendering(instance);
             if (data.pageObjectName) {
                 var page = waitForPage(data.pageObjectName);
                 tryCompare(page, "visible", true);
@@ -219,9 +223,10 @@ Item {
                 pluginManager: manager, defaultPlugin: data.default,
                 placeholderPlugin: "Test"
             });
+            waitForRendering(instance);
             waitForPage("testPage");
             testRoot.width = units.gu(50);
-            waitForPageDestruction("testPage");
+            waitForPageToGoAway("testPage");
         }
 
         function test_current_plugin_property() {
