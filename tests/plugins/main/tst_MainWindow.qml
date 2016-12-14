@@ -187,6 +187,7 @@ Item {
                 { tag: "two column, uncategorized", width: units.gu(110), entry: "testUncategorizedEntry" },
             ];
         }
+
         function test_go_to_panel(data) {
             instance = mainWindowComponent.createObject(testRoot, {
                 pluginManager: manager
@@ -249,6 +250,18 @@ Item {
             // Pop a page
             apl.removePages(apl.primaryPage);
             tryCompare(instance, "currentPlugin", "");
+        }
+
+        // Seems this is how Unity8 is resizing a window to its previous size.
+        function test_placeholder_plugin_is_not_initially_shown_on_narrow() {
+            testRoot.width = units.gu(150);
+            instance = mainWindowComponent.createObject(testRoot, {
+                pluginManager: manager, defaultPlugin: data.default,
+                placeholderPlugin: "Test"
+            });
+            testRoot.width = units.gu(50);
+            waitForRendering(instance);
+            waitForPageToGoAway("testPage");
         }
     }
 }

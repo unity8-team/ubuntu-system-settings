@@ -31,9 +31,12 @@ MainView {
     objectName: "systemSettingsMainView"
     automaticOrientation: true
     anchorToKeyboard: true
-    property string currentPlugin: ""
-    property string placeholderPlugin: "about"
     property var pluginManager: PluginManager {}
+    property string currentPlugin: ""
+
+    /* Workaround for lp:1648801, i.e. APL does not support a placeholder,
+    so we implement it here. */
+    property string placeholderPlugin: "about"
 
     function loadPluginByName(pluginName, pluginOptions) {
         var plugin = pluginManager.getByName(pluginName)
@@ -46,24 +49,18 @@ MainView {
         if (plugin) {
             // Got a valid plugin name - load it
             var pageComponent = plugin.pageComponent
-            var incubator;
+            var page;
             if (pageComponent) {
                 apl.removePages(apl.primaryPage);
-                incubator = apl.addPageToNextColumn(apl.primaryPage,
-                                                    pageComponent, opts);
-                if (incubator && incubator.status == Component.Loading) {
-                    incubator.onStatusChanged = function(status) {
-                        if (status == Component.Ready) {
-                            incubator.object.Component.destruction.connect(function() {
-                                if (currentPlugin == this.baseName) {
-                                    currentPlugin = "";
-                                }
-
-                            }.bind(this));
-                            currentPlugin = this.baseName;
-                        }
-                    }.bind(plugin);
-                }
+                page = apl.addComponentToNextColumnSync(
+                    apl.primaryPage, pageComponent, opts
+                );
+                currentPlugin = pluginName;
+                page.Component.destruction.connect(function () {
+                    if (currentPlugin == this.baseName) {
+                        currentPlugin = "";
+                    }
+                }.bind(plugin))
             }
             return true
         } else {
@@ -76,14 +73,15 @@ MainView {
     Component.onCompleted: {
         i18n.domain = "ubuntu-system-settings"
         i18n.bindtextdomain("ubuntu-system-settings", i18nDirectory)
+
         if (defaultPlugin) {
             if (!loadPluginByName(defaultPlugin, pluginOptions))
                 Qt.quit()
         } else if (apl.columns > 1) {
             loadPluginByName(placeholderPlugin);
+            aplConnections.target = apl;
         }
 
-        aplConnections.target = apl;
         // when running in windowed mode, constrain width
         view.minimumWidth  = Qt.binding( function() { return units.gu(40) } )
         view.maximumWidth = Qt.binding( function() { return units.gu(140) } )
@@ -134,7 +132,7 @@ MainView {
         }
     }
 
-    AdaptivePageLayout {
+    USSAdaptivePageLayout {
         id: apl
         objectName: "apl"
         anchors.fill: parent
