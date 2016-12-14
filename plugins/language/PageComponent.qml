@@ -156,9 +156,7 @@ ItemPage {
                 progression: true
                 showDivider: false
                 onClicked: pageStack.addPageToNextColumn(root, Qt.resolvedUrl("PageHardwareKeyboard.qml"))
-                /* Hidden due to lp:1644268, i.e. no layout sources are
-                enumerated by the current code due to hard coded paths. */
-                visible: (externalKeyboardPresent && !isSnap) || showAllUI
+                visible: externalKeyboardPresent || showAllUI
             }
 
             ListItem.Divider {}
