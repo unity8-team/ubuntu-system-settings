@@ -27,6 +27,7 @@ import Ubuntu.Components.Popups 1.3
 import Ubuntu.Components.ListItems 1.3 as ListItem
 import Ubuntu.Settings.Menus 0.1 as Menus
 import Ubuntu.SystemSettings.LanguagePlugin 1.0
+import Ubuntu.Settings.Components 0.1 as USC
 
 ItemPage {
     id: root
@@ -279,6 +280,29 @@ ItemPage {
                     onServerCheckedChanged: checked = serverChecked
                     Component.onCompleted: checked = serverChecked
                     onTriggered: settings.keyPressHapticFeedback = checked
+                }
+            }
+
+            Menus.SliderMenu {
+                text: i18n.tr("Keyboard opacity")
+
+                id: opacity
+                objectName: "opacity"
+                function formatValue(v) { return v * 100 }
+                minimumValue: 0.5
+                maximumValue: 1
+                value: settings.opacity
+                live: true
+
+                property real serverValue: settings.opacity
+                USC.ServerPropertySynchroniser {
+                    userTarget: opacity
+                    userProperty: "value"
+                    serverTarget: opacity
+                    serverProperty: "serverValue"
+                    maximumWaitBufferInterval: 16
+
+                    onSyncTriggered: settings.opacity = value
                 }
             }
         }
