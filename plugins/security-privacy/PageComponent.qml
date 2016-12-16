@@ -149,7 +149,7 @@ ItemPage {
                 onClicked: pageStack.addPageToNextColumn(root, fingeprintPage, {
                     passcodeSet: securityPrivacy.securityType !== UbuntuSecurityPrivacyPanel.Swipe
                 })
-                visible: Biometryd.available
+                visible: Biometryd.available || showAllUI
             }
 
             Component {

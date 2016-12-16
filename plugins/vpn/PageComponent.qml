@@ -89,12 +89,14 @@ ItemPage {
     Component {
         id: vpnEditorDialog
         VpnEditor {
+            id: vpnEditorPage
             onTypeChanged: {
                 connection.remove();
-                pageStack.pop();
+                pageStack.removePages(vpnEditorPage);
                 Connectivity.vpnConnections.add(type);
             }
             onReconnectionPrompt: PopupUtils.open(reconnPrompt)
+            onDone: pageStack.removePages(vpnEditorPage)
         }
     }
 
