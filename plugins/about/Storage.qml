@@ -53,11 +53,6 @@ ItemPage {
     Loader {
         id: pageLoader
         anchors.fill: parent
-        onStateChanged: {
-            if (state === Loader.Ready)
-                storagePage.flickable = scrollWidget;
-        }
-
         asynchronous: true
         visible: status == Loader.Ready
         sourceComponent: Item {
@@ -150,6 +145,8 @@ ItemPage {
         id: scrollWidget
         anchors.fill: parent
         contentHeight: columnId.height
+
+        Component.onCompleted: storagePage.flickable = scrollWidget
 
         Column {
             id: columnId
