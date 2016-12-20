@@ -31,6 +31,7 @@ ItemPage {
     objectName: "hwKbdPage"
 
     title: i18n.tr("Hardware keyboard")
+    flickable: scrollWidget
 
     Component {
         id: keyboardLayouts
@@ -43,6 +44,7 @@ ItemPage {
     }
 
     Flickable {
+        id: scrollWidget
         anchors.fill: parent
         contentHeight: contentItem.childrenRect.height
         boundsBehavior: contentHeight > root.height ?
