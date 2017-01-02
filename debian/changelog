@@ -1,3 +1,16 @@
+ubuntu-system-settings (0.4+17.04.20161214.1-0ubuntu1) zesty; urgency=medium
+
+  * Add keyboard opacity setting to language panel (LP: #1647603)
+
+ -- Michael Sheldon <michael.sheldon@canonical.com>  Wed, 14 Dec 2016 15:11:16 +0000
+
+ubuntu-system-settings (0.4+17.04.20161207-0ubuntu1) zesty; urgency=medium
+
+  [ Jonas G. Drange, Ken VanDine ]
+  * Replaces the grid with a list
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Wed, 07 Dec 2016 15:17:20 +0000
+
 ubuntu-system-settings (0.4+17.04.20161129-0ubuntu1) zesty; urgency=medium
 
   [ Daniel van Vugt ]
