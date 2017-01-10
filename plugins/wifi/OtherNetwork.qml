@@ -491,7 +491,7 @@ Component {
 
         Label {
             id: cacertHintLabel
-            text : i18n.tr("Using certificates is recommend as it increases security.")
+            text : i18n.tr("Using certificates is recommended as it increases security.")
             wrapMode: Text.WordWrap
             opacity: 0.5
             objectName: "cacertHintLabel"
