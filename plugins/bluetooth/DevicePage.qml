@@ -158,7 +158,7 @@ Page {
                         }
 
                         backend.resetSelectedDevice();
-                        pageStack.pop();
+                        pageStack.removePages(connectedDevicePage);
                     }
                     visible: backend.selectedDevice ? true : false
                     enabled: backend.selectedDevice && backend.powered ? true : false
@@ -173,7 +173,7 @@ Page {
                     onClicked: {
                         backend.removeDevice();
                         backend.resetSelectedDevice();
-                        pageStack.pop();
+                        pageStack.removePages(connectedDevicePage);
                     }
                     enabled: backend.powered && backend.selectedDevice && backend.selectedDevice.path.length > 0 && backend.selectedDevice.paired ? true : false
                 }
