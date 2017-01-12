@@ -22,6 +22,12 @@ import Ubuntu.Components 1.3
 AdaptivePageLayout {
     id: layout
 
+    function addFileToNextColumnSync(parentObject, resolvedUrl, properties) {
+        return addComponentToNextColumnSync(parentObject,
+                                            Qt.createComponent(resolvedUrl),
+                                            properties);
+    }
+
     function addComponentToNextColumnSync(parentObject, component, properties) {
         if (typeof(properties) === 'undefined') {
             properties = {}
