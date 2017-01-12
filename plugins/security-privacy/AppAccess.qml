@@ -89,11 +89,6 @@ ItemPage {
                     trustStoreService: "PulseAudio"
                     service: "microphone"
                 }
-                ListElement {
-                    name: QT_TR_NOOP("In-App Purchases")
-                    caption: QT_TR_NOOP("Apps that have requested access for in-app purchases")
-                    trustStoreService: "InAppPurchases"
-                }
             }
 
             Repeater {
