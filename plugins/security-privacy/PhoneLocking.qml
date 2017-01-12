@@ -56,6 +56,7 @@ ItemPage {
             anchors.right: parent.right
 
             SettingsListItems.SingleValueProgression {
+                visible: !isSnap || showAllUI
                 property string swipe: i18n.ctr("Unlock with swipe", "None")
                 property string passcode: i18n.tr("Passcode")
                 property string passphrase: i18n.tr("Passphrase")
@@ -127,10 +128,13 @@ ItemPage {
             }
 
             SettingsItemTitle {
+                id: lockedPermissions
                 text: i18n.tr("When locked, allow:")
+                visible: !isSnap || showAllUI
             }
 
             SettingsListItems.Standard {
+                visible: lockedPermissions.visible
                 text: i18n.tr("Launcher")
                 CheckBox {
                     id: launcherCheck
@@ -144,6 +148,7 @@ ItemPage {
             }
 
             SettingsListItems.Standard {
+                visible: lockedPermissions.visible
                 text: i18n.tr("Notifications and quick settings")
                  CheckBox {
                     id: indicatorsCheck
@@ -157,6 +162,7 @@ ItemPage {
             }
 
             ListItems.Caption {
+                visible: lockedPermissions.visible
                 text: securityPrivacy.securityType === UbuntuSecurityPrivacyPanel.Swipe ?
                       i18n.tr("Turn on lock security to restrict access when the device is locked.") :
                       i18n.tr("Other apps and functions will prompt you to unlock.")
