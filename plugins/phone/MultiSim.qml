@@ -41,10 +41,12 @@ Column {
                 objectName: "callWaitSim" + index
                 text: i18n.tr("Call waiting")
                 progression: true
-                onClicked: pageStack.push(Qt.resolvedUrl("CallWaiting.qml"), {
-                    sim: sims[index],
-                    headerTitle: sims[index].title
-                })
+                onClicked: pageStack.addPageToNextColumn(root,
+                    Qt.resolvedUrl("CallWaiting.qml"), {
+                        sim: sims[index],
+                        headerTitle: sims[index].title
+                    }
+                )
             }
 
             ListItem.SingleValue {
@@ -52,10 +54,12 @@ Column {
                 text: i18n.tr("Call forwarding")
                 progression: true
                 value: sims[index].getCallForwardingSummary()
-                onClicked: pageStack.push(Qt.resolvedUrl("CallForwarding.qml"), {
-                    sim: sims[index],
-                    headerTitle: sims[index].title
-                })
+                onClicked: pageStack.addPageToNextColumn(root,
+                    Qt.resolvedUrl("CallForwarding.qml"), {
+                        sim: sims[index],
+                        headerTitle: sims[index].title
+                    }
+                )
             }
 
             ListItem.Standard {
@@ -75,11 +79,13 @@ Column {
                     return sims[index].simMng.present && nums;
                 }
                 showDivider: false
-                onClicked: pageStack.push(Qt.resolvedUrl("Services.qml"), {
-                    carrierString: sims[index].netReg.name,
-                    sim: sims[index].simMng,
-                    headerTitle: sims[index].title
-                })
+                onClicked: pageStack.addPageToNextColumn(root,
+                    Qt.resolvedUrl("Services.qml"), {
+                        carrierString: sims[index].netReg.name,
+                        sim: sims[index].simMng,
+                        headerTitle: sims[index].title
+                    }
+                )
             }
 
             ListItem.Divider {

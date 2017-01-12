@@ -30,6 +30,7 @@ import "sims.js" as Sims
 ItemPage {
     id: root
     title: i18n.tr("Cellular")
+    flickable: flick
     objectName: "cellularPage"
 
     property var modemsSorted: []

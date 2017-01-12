@@ -150,7 +150,7 @@ ItemPage {
                 text: i18n.tr("Storage")
                 /* TRANSLATORS: that's the free disk space, indicated in the most appropriate storage unit */
                 value: i18n.tr("%1 free").arg(Utilities.formatSize(backendInfos.getFreeSpace("/home")))
-                onClicked: pageStack.push(Qt.resolvedUrl("Storage.qml"))
+                onClicked: pageStack.addPageToNextColumn(root, Qt.resolvedUrl("Storage.qml"))
             }
 
             SettingsItemTitle {
@@ -173,7 +173,7 @@ ItemPage {
                 value: "Ubuntu %1%2"
                     .arg(deviceInfos.version(DeviceInfo.Os))
                     .arg(versionIdentifier ? " (%1)".arg(versionIdentifier) : "")
-                onClicked: pageStack.push(Qt.resolvedUrl("Version.qml"), {
+                onClicked: pageStack.addPageToNextColumn(root, Qt.resolvedUrl("Version.qml"), {
                     version: versionIdentifier
                 })
             }
@@ -199,7 +199,7 @@ ItemPage {
                             var updatePage = upPlugin.pageComponent
                             var updatePageItem;
                             if (updatePage) {
-                                updatePageItem = pageStack.push(updatePage, {
+                                updatePageItem = pageStack.addPageToNextColumn(root, updatePage, {
                                     plugin: upPlugin, pluginManager: pluginManager
                                 });
                                 updatePageItem.check(true); // Force a check.
@@ -222,7 +222,7 @@ ItemPage {
             SettingsListItems.StandardProgression {
                 objectName: "licenseItem"
                 text: i18n.tr("Software licenses")
-                onClicked: pageStack.push(Qt.resolvedUrl("Software.qml"))
+                onClicked: pageStack.addPageToNextColumn(root, Qt.resolvedUrl("Software.qml"))
             }
 
             SettingsListItems.StandardProgression {
@@ -230,14 +230,14 @@ ItemPage {
                     pluginManager.getByName("regulatory-information")
                 text: i18n.tr("Regulatory info")
                 visible: regulatoryInfo
-                onClicked: pageStack.push(regulatoryInfo.pageComponent)
+                onClicked: pageStack.addPageToNextColumn(root, regulatoryInfo.pageComponent)
             }
 
             SettingsListItems.SingleValueProgression {
                 objectName: "devmodeItem"
                 text: i18n.tr("Developer mode")
                 visible: !isSnap && backendInfos.developerModeCapable || showAllUI
-                onClicked: pageStack.push(Qt.resolvedUrl("DevMode.qml"))
+                onClicked: pageStack.addPageToNextColumn(root, Qt.resolvedUrl("DevMode.qml"))
             }
         }
     }

@@ -27,6 +27,7 @@ import Ubuntu.SystemSettings.LanguagePlugin 1.0
 
 ItemPage {
     title: i18n.tr("Spell checking")
+    flickable: scrollWidget
 
     UbuntuLanguagePlugin {
         id: plugin
@@ -52,6 +53,7 @@ ItemPage {
     }
 
     SubsetView {
+        id: scrollWidget
         clip: true
 
         anchors.top: item.bottom

@@ -27,6 +27,7 @@ ItemPage {
     objectName: "systemNotificationsPage"
 
     title: i18n.tr("Notifications")
+    flickable: notificationsList
 
     onActiveChanged: {
         if (active) {
@@ -66,7 +67,7 @@ ItemPage {
                 left: parent.left
                 right: parent.right
             }
- 
+
             ListItems.Base {
                 height: labelSubtitle.height + units.gu(2)
                 Label {
@@ -105,8 +106,9 @@ ItemPage {
                         return
                     }
 
-                    pageStack.push(Qt.resolvedUrl("ClickAppsSoundsNotify.qml"),
-                                                  { model: clickAppsSoundsNotifyModel })
+                    pageStack.addPageToNextColumn(
+                        root, Qt.resolvedUrl("ClickAppsSoundsNotify.qml"),
+                        { model: clickAppsSoundsNotifyModel })
                 }
             }
 
@@ -130,8 +132,9 @@ ItemPage {
                         return
                     }
 
-                    pageStack.push(Qt.resolvedUrl("ClickAppsVibrationsNotify.qml"),
-                                                  { model: clickAppsVibrationsNotifyModel })
+                    pageStack.addPageToNextColumn(
+                        root, Qt.resolvedUrl("ClickAppsVibrationsNotify.qml"),
+                        { model: clickAppsVibrationsNotifyModel })
                 }
             }
 
@@ -147,9 +150,9 @@ ItemPage {
         delegate: ListItem {
             height: layout.height + (divider.visible ? divider.height : 0)
 
-            onClicked: pageStack.push(Qt.resolvedUrl("ClickAppNotifications.qml"),
-                                                     { entry: model,
-                                                       entryIndex: index })
+            onClicked: pageStack.addPageToNextColumn(
+                root, Qt.resolvedUrl("ClickAppNotifications.qml"),
+                { entry: model, entryIndex: index })
 
             ListItemLayout {
                 id: layout

@@ -31,6 +31,7 @@ ItemPage {
     objectName: "hwKbdPage"
 
     title: i18n.tr("Hardware keyboard")
+    flickable: scrollWidget
 
     Component {
         id: keyboardLayouts
@@ -43,6 +44,7 @@ ItemPage {
     }
 
     Flickable {
+        id: scrollWidget
         anchors.fill: parent
         contentHeight: contentItem.childrenRect.height
         boundsBehavior: contentHeight > root.height ?
@@ -64,10 +66,12 @@ ItemPage {
                        plugin.keyboardLayoutsModel.subset.length
                 progression: true
 
-                onClicked: pageStack.push(Qt.resolvedUrl("KeyboardLayouts.qml"), {
-                    plugin: plugin,
-                    currentLayoutsDraggable: true
-                })
+                onClicked: pageStack.addPageToNextColumn(root,
+                    Qt.resolvedUrl("KeyboardLayouts.qml"), {
+                        plugin: plugin,
+                        currentLayoutsDraggable: true
+                    }
+                )
             }
         }
     }

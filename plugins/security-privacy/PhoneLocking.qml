@@ -30,6 +30,7 @@ ItemPage {
     id: root
     objectName: "phoneLockingPage"
     title: i18n.tr("Locking and unlocking")
+    flickable: scrollWidget
 
     property bool usePowerd
     property var powerSettings
@@ -39,6 +40,7 @@ ItemPage {
     }
 
     Flickable {
+        id: scrollWidget
         anchors.fill: parent
         contentHeight: contentItem.childrenRect.height
         boundsBehavior: (contentHeight > root.height) ?
@@ -75,7 +77,8 @@ ItemPage {
                             return fingerprint
                     }
                 }
-                onClicked: pageStack.push(Qt.resolvedUrl("LockSecurity.qml"))
+                onClicked: pageStack.addPageToNextColumn(
+                    root, Qt.resolvedUrl("LockSecurity.qml"))
             }
 
             SettingsListItems.SingleValueProgression {
@@ -110,7 +113,7 @@ ItemPage {
                     }
                 }
                 onClicked:
-                    pageStack.push(
+                    pageStack.addPageToNextColumn(root,
                         Qt.resolvedUrl("../battery/SleepValues.qml"),
                         { title: text, lockOnSuspend: lockOnSuspend } )
             }

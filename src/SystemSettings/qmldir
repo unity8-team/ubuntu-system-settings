@@ -2,3 +2,4 @@ module SystemSettings
 
 ItemPage 1.0 ItemPage.qml
 SettingsItemTitle 1.0 SettingsItemTitle.qml
+USSAdaptivePageLayout 1.0 USSAdaptivePageLayout.qml

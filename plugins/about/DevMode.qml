@@ -115,7 +115,9 @@ ItemPage {
                 objectName: "lockSecurityItem"
                 text: i18n.tr("Lock security")
                 progression: true
-                onClicked: pageStack.push(Qt.resolvedUrl("../security-privacy/LockSecurity.qml"))
+                onClicked: pageStack.addPageToNextColumn(
+                    devModePage, Qt.resolvedUrl("../security-privacy/LockSecurity.qml")
+                )
             }
         }
     }

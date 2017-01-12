@@ -149,7 +149,7 @@ ItemPage {
                     text: i18n.tr("Ringtone")
                     value: Utilities.buildDisplayName(backendInfo.incomingCallSound)
 
-                    onClicked: pageStack.push(
+                    onClicked: pageStack.addPageToNextColumn(root,
                         Qt.resolvedUrl("SoundsList.qml"), {
                             title: i18n.tr("Ringtone"),
                             showStopButton: true,
@@ -209,12 +209,13 @@ ItemPage {
                     text: i18n.tr("Message received")
                     value:Utilities.buildDisplayName(
                               backendInfo.incomingMessageSound)
-                    onClicked: pageStack.push(
-                                   Qt.resolvedUrl("SoundsList.qml"),
-                                   { title: i18n.tr("Message received"),
-                                      soundType: 1,
-                                     soundsDir:
-                                       "sounds/ubuntu/notifications/" })
+                    onClicked: pageStack.addPageToNextColumn(root,
+                        Qt.resolvedUrl("SoundsList.qml"), {
+                            title: i18n.tr("Message received"),
+                            soundType: 1,
+                            soundsDir:  "sounds/ubuntu/notifications/"
+                        }
+                    )
                 }
 
                 SettingsListItems.Standard {

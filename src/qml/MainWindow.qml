@@ -25,13 +25,18 @@ import Ubuntu.Components 1.3
 
 MainView {
     id: main
-    implicitWidth: units.gu(50)
+    implicitWidth: units.gu(140)
     implicitHeight: units.gu(90)
     applicationName: "ubuntu-system-settings"
     objectName: "systemSettingsMainView"
     automaticOrientation: true
     anchorToKeyboard: true
     property var pluginManager: PluginManager {}
+    property string currentPlugin: ""
+
+    /* Workaround for lp:1648801, i.e. APL does not support a placeholder,
+    so we implement it here. */
+    property string placeholderPlugin: "about"
 
     function loadPluginByName(pluginName, pluginOptions) {
         var plugin = pluginManager.getByName(pluginName)
@@ -44,10 +49,18 @@ MainView {
         if (plugin) {
             // Got a valid plugin name - load it
             var pageComponent = plugin.pageComponent
+            var page;
             if (pageComponent) {
-                while (pageStack.depth > 1)
-                    pageStack.pop()
-                pageStack.push(pageComponent, opts)
+                apl.removePages(apl.primaryPage);
+                page = apl.addComponentToNextColumnSync(
+                    apl.primaryPage, pageComponent, opts
+                );
+                currentPlugin = pluginName;
+                page.Component.destruction.connect(function () {
+                    if (currentPlugin == this.baseName) {
+                        currentPlugin = "";
+                    }
+                }.bind(plugin))
             }
             return true
         } else {
@@ -60,15 +73,31 @@ MainView {
     Component.onCompleted: {
         i18n.domain = "ubuntu-system-settings"
         i18n.bindtextdomain("ubuntu-system-settings", i18nDirectory)
-        pageStack.push(mainPage)
+
         if (defaultPlugin) {
             if (!loadPluginByName(defaultPlugin, pluginOptions))
                 Qt.quit()
+        } else if (apl.columns > 1) {
+            loadPluginByName(placeholderPlugin);
+            aplConnections.target = apl;
         }
 
         // when running in windowed mode, constrain width
         view.minimumWidth  = Qt.binding( function() { return units.gu(40) } )
-        view.maximumWidth = Qt.binding( function() { return units.gu(50) } )
+        view.maximumWidth = Qt.binding( function() { return units.gu(140) } )
+    }
+
+    Connections {
+        id: aplConnections
+        ignoreUnknownSignals: true
+        onColumnsChanged: {
+            var columns = target.columns;
+            if (columns > 1 && !currentPlugin) {
+                loadPluginByName(placeholderPlugin);
+            } else if (columns == 1 && currentPlugin == placeholderPlugin) {
+                apl.removePages(apl.primaryPage);
+            }
+        }
     }
 
     Connections {
@@ -100,12 +129,34 @@ MainView {
             } else {
                 loadPluginByName(panel)
             }
-
         }
     }
 
-    PageStack {
-        id: pageStack
+    USSAdaptivePageLayout {
+        id: apl
+        objectName: "apl"
+        anchors.fill: parent
+        primaryPage: mainPage
+        layouts: [
+            PageColumnsLayout {
+                when: width >= units.gu(90)
+                PageColumn {
+                    minimumWidth: units.gu(40)
+                    maximumWidth: units.gu(50)
+                    preferredWidth: units.gu(50)
+                }
+                PageColumn {
+                    fillWidth: true
+                }
+            },
+            PageColumnsLayout {
+                when: true
+                PageColumn {
+                    fillWidth: true
+                    minimumWidth: units.gu(40)
+                }
+            }
+        ]
 
         Page {
             id: mainPage
@@ -146,8 +197,7 @@ MainView {
                         verticalCenter: parent.verticalCenter
                     }
                     inputMethodHints: Qt.ImhNoPredictiveText
-                    onDisplayTextChanged:
-                        pluginManager.filter = displayText
+                    onDisplayTextChanged: pluginManager.filter = displayText
                     placeholderText: i18n.tr("Search")
                     hasClearButton: false
                 }

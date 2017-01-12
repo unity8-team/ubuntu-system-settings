@@ -35,6 +35,7 @@ import "apn_manager.js" as Manager
 ItemPage {
     id: root
     title: i18n.tr("APN")
+    flickable: scrollWidget
     objectName: "apnPage"
 
     property var sim
@@ -106,11 +107,13 @@ ItemPage {
                     iconName: "add"
                     objectName: "newApn"
                     onTriggered: {
-                        editor = pageStack.push(pageApnEditor, {
-                            mmsModel:        mmsContexts,
-                            internetModel:   internetContexts,
-                            iaModel:         iaContexts
-                        });
+                        editor = pageStack.addPageToNextColumn(root,
+                            pageApnEditor, {
+                                mmsModel:        mmsContexts,
+                                internetModel:   internetContexts,
+                                iaModel:         iaContexts
+                            }
+                        );
                     }
                 }
             ]
@@ -306,7 +309,7 @@ ItemPage {
             }
 
             onClicked: {
-                editor = pageStack.push(pageApnEditor, {
+                editor = pageStack.addPageToNextColumn(root, pageApnEditor, {
                     contextQML:      qml,
                     mmsModel:        mmsContexts,
                     internetModel:   internetContexts,

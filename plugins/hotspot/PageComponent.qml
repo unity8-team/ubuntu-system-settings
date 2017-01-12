@@ -31,6 +31,7 @@ ItemPage {
     id: root
     objectName: "hotspotPage"
     title: i18n.tr("Hotspot")
+    flickable: flick
 
     states: [
         State {

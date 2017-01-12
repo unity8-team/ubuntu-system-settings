@@ -612,6 +612,7 @@ class BluetoothBaseTestCase(UbuntuSystemSettingsTestCase):
 class PhoneOfonoBaseTestCase(UbuntuSystemSettingsOfonoTestCase):
     def setUp(self):
         """ Go to Phone page """
+        self.useFixture(EnvironmentVariable("USS_SHOW_ALL_UI", "1"))
         super(PhoneOfonoBaseTestCase, self).setUp()
         self.phone_page = self.main_view.go_to_phone_page()
 
