@@ -26,8 +26,8 @@ import Ubuntu.SystemSettings.Cellular 1.0
 import Ubuntu.Components.ListItems 1.3 as ListItems
 
 Column {
+    id: multiSim
     objectName: "multiSim"
-
     property var sims
     property var poweredSim: {
         var s = null;
@@ -63,9 +63,8 @@ Column {
         progressionVisible: enabled
         showDivider: false
         onClicked: {
-            pageStack.push(Qt.resolvedUrl("../PageCarriersAndApns.qml"), {
-                sims: sims
-            });
+            pageStack.addPageToNextColumn(multiSim,
+                Qt.resolvedUrl("../PageCarriersAndApns.qml"), { sims: sims });
         }
     }
 

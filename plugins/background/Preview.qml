@@ -52,7 +52,7 @@ ItemPage {
             StateChangeScript {
                 script: {
                     save();
-                    pageStack.pop();
+                    pageStack.removePages(preview);
                 }
             }
         },
@@ -60,7 +60,7 @@ ItemPage {
             name: "cancelled"
             StateChangeScript {
                 script: {
-                    pageStack.pop();
+                    pageStack.removePages(preview);
                 }
             }
         }

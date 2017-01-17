@@ -297,9 +297,9 @@ ItemPage {
                 onClicked: {
                     var brightnessPlugin = pluginManager.getByName("brightness");
                     if (brightnessPlugin) {
-                        pageStack.push(brightnessPlugin.pageComponent, {
-                            plugin: brightnessPlugin, pluginManager: pluginManager
-                        });
+                        pageStack.addPageToNextColumn(root,
+                            brightnessPlugin.pageComponent, {
+                                plugin: brightnessPlugin, pluginManager: pluginManager});
                     } else {
                         console.warn("Failed to get brightness plugin instance");
                     }
@@ -344,9 +344,9 @@ ItemPage {
                     SlotsLayout.position: SlotsLayout.First
                 }
 
-                onClicked: pageStack.push(
-                               Qt.resolvedUrl("SleepValues.qml"),
-                               { title: text, lockOnSuspend: lockOnSuspend })
+                onClicked: pageStack.addPageToNextColumn(root,
+                    Qt.resolvedUrl("SleepValues.qml"),{
+                        title: text, lockOnSuspend: lockOnSuspend })
                 visible: !isSnap || showAllUI
             }
 

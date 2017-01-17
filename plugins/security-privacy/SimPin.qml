@@ -35,6 +35,7 @@ ItemPage {
     id: root
     objectName: "simPinPage"
     title: i18n.tr("SIM PIN")
+    flickable: scrollWidget
 
     property var sims
     property var curSim
@@ -345,6 +346,7 @@ ItemPage {
     }
 
     Flickable {
+        id: scrollWidget
         anchors.fill: parent
         contentHeight: contentItem.childrenRect.height
         boundsBehavior: (contentHeight > root.height) ?

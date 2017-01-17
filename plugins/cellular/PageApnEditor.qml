@@ -67,7 +67,7 @@ ItemPage {
     signal canceled ()
 
     title: contextQML ? i18n.tr("Edit") : i18n.tr("New APN")
-
+    flickable: scrollArea
     state: "default"
     states: [
         PageHeadState {
@@ -124,7 +124,6 @@ ItemPage {
         value: false
     }
 
-    flickable: null
     Flickable {
         id: scrollArea
         objectName: "scrollArea"

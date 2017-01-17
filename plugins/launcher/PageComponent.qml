@@ -29,6 +29,7 @@ ItemPage {
     id: root
     objectName: "launcherPage"
     title: i18n.tr("Launcher")
+    flickable: flick
 
     /* The introductory label “On large displays:” should be present if the
     current display does not fall into <the large screen> category (to explain

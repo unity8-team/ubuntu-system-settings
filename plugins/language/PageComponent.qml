@@ -34,6 +34,7 @@ ItemPage {
     objectName: "languagePage"
 
     title: i18n.tr("Language & Text")
+    flickable: scrollWidget
 
     InputDeviceManager {
         id: keyboardsModel
@@ -42,30 +43,16 @@ ItemPage {
 
     property bool externalKeyboardPresent: keyboardsModel.count > 0
 
-    property var pluginOptions
-    Connections {
-        target: pageStack
-        onCurrentPageChanged: {
-            // If we are called with subpage=foo, push foo on the stack.
-            //
-            // We need to wait until the PageComponent has been pushed to the stack
-            // before pushing the subpages, otherwise they will be pushed below the
-            // PageComponent.
-            if (pageStack.currentPage === root) {
-                if (pluginOptions && pluginOptions['subpage']) {
-                    switch (pluginOptions['subpage']) {
-                    case 'hw-keyboard-layouts':
-                        pageStack.push(Qt.resolvedUrl("KeyboardLayouts.qml"), {
-                                           plugin: hwKeyboardPlugin,
-                                           currentLayoutsDraggable: true
-                                       })
-                        break;
-                    }
-                }
-
-                // Once done, disable this Connections, so that if the user navigates
-                // back to the root we won't push the subpages again
-                target = null
+    onPushedOntoStack: {
+        if (pluginOptions && pluginOptions['subpage']) {
+            switch (pluginOptions['subpage']) {
+            case 'hw-keyboard-layouts':
+                pageStack.addPageToNextColumn(
+                    root, Qt.resolvedUrl('KeyboardLayouts.qml'), {
+                    plugin: hwKeyboardPlugin,
+                    currentLayoutsDraggable: true
+                });
+                break;
             }
         }
     }
@@ -122,6 +109,7 @@ ItemPage {
     }
 
     Flickable {
+        id: scrollWidget
         anchors.fill: parent
         contentHeight: contentItem.childrenRect.height
         boundsBehavior: contentHeight > root.height ?
@@ -159,7 +147,7 @@ ItemPage {
                 value: oskPlugin.keyboardLayoutsModel.subset.length == 1 ?
                        oskPlugin.keyboardLayoutsModel.superset[oskPlugin.keyboardLayoutsModel.subset[0]][0] :
                        oskPlugin.keyboardLayoutsModel.subset.length
-                onClicked: pageStack.push(Qt.resolvedUrl("KeyboardLayouts.qml"), {
+                onClicked: pageStack.addPageToNextColumn(root, Qt.resolvedUrl("KeyboardLayouts.qml"), {
                     plugin: oskPlugin
                 })
             }
@@ -168,10 +156,8 @@ ItemPage {
                 text: i18n.tr("External keyboard")
                 progression: true
                 showDivider: false
-                onClicked: pageStack.push(Qt.resolvedUrl("PageHardwareKeyboard.qml"))
-                /* Hidden due to lp:1644268, i.e. no layout sources are
-                enumerated by the current code due to hard coded paths. */
-                visible: (externalKeyboardPresent && !isSnap) || showAllUI
+                onClicked: pageStack.addPageToNextColumn(root, Qt.resolvedUrl("PageHardwareKeyboard.qml"))
+                visible: externalKeyboardPresent || showAllUI
             }
 
             ListItem.Divider {}
@@ -185,7 +171,7 @@ ItemPage {
                        plugin.spellCheckingModel.subset.length
                 progression: true
 
-                onClicked: pageStack.push(spellChecking)
+                onClicked: pageStack.addPageToNextColumn(root, spellChecking)
             }
 
             ListItem.Standard {

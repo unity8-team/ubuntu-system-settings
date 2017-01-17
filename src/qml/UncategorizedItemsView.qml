@@ -33,7 +33,6 @@ Column {
 
     Repeater {
         id: repeater
-
         Column {
             anchors.left: parent.left
             anchors.right: parent.right
@@ -51,11 +50,21 @@ Column {
                         var pageComponent = model.item.pageComponent
                         if (pageComponent) {
                             Haptics.play();
-                            pageStack.push(model.item.pageComponent,
-                                           { plugin: model.item,
-                                             pluginManager: pluginManager })
+                            loadPluginByName(model.item.baseName);
                         }
                     }
+                }
+                Binding {
+                    target: loader.item
+                    property: "color"
+                    value: theme.palette.highlighted.background
+                    when: currentPlugin == model.item.baseName && apl.columns > 1
+                }
+                Binding {
+                    target: loader.item
+                    property: "color"
+                    value: "transparent"
+                    when: currentPlugin != model.item.baseName || apl.columns == 1
                 }
             }
         }

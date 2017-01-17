@@ -1,9 +1,7 @@
 /*
  * This file is part of system-settings
  *
- * Copyright (C) 2013 Canonical Ltd.
- *
- * Contact: Alberto Mardegan <alberto.mardegan@canonical.com>
+ * Copyright (C) 2017 Canonical Ltd.
  *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License version 3, as published
@@ -18,33 +16,25 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import QtQuick 2.4
+import QtQuick 2.0
 import Ubuntu.Components 1.3
 
-Page {
-    id: root
+AdaptivePageLayout {
+    id: layout
 
-    property alias title: pageHeader.title
-    property alias flickable: pageHeader.flickable
-
-    header: PageHeader {
-        id: pageHeader
-        title: i18n.dtr(plugin.translations, plugin.displayName)
+    function addFileToNextColumnSync(parentObject, resolvedUrl, properties) {
+        return addComponentToNextColumnSync(parentObject,
+                                            Qt.createComponent(resolvedUrl),
+                                            properties);
     }
 
-    property variant plugin
-    property variant pluginManager
-    property variant pluginOptions
-
-    signal pushedOntoStack()
-
-    Connections {
-        target: root
-        onVisibleChanged: {
-            if (visible) {
-                pushedOntoStack();
-                target = null;
-            }
+    function addComponentToNextColumnSync(parentObject, component, properties) {
+        if (typeof(properties) === 'undefined') {
+            properties = {}
         }
+
+        var incubator = layout.addPageToNextColumn(parentObject, component, properties)
+        incubator.forceCompletion()
+        return incubator.object
     }
 }

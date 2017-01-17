@@ -22,6 +22,7 @@ import Ubuntu.SystemSettings.SecurityPrivacy 1.0
 
 ItemPage {
     title: i18n.tr("Nokia HERE")
+    flickable: scrollWidget
     id: termsPage
 
     UbuntuSecurityPrivacyPanel {
