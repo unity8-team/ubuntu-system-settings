@@ -130,7 +130,7 @@ Item {
             property var menuModel: menuFactory.model
             property int menuIndex: -1
             property var extendedData: menu && menu.ext || undefined
-            property var strenthAction: QMenuModel.UnityMenuAction {
+            property var strengthAction: QMenuModel.UnityMenuAction {
                 model: menuModel ? menuModel : null
                 name: getExtendedProperty(extendedData, "xCanonicalWifiApStrengthAction", "")
             }
@@ -140,7 +140,16 @@ Item {
             secure: getExtendedProperty(extendedData, "xCanonicalWifiApIsSecure", false)
             adHoc: getExtendedProperty(extendedData, "xCanonicalWifiApIsAdhoc", false)
             checked: serverChecked
-            signalStrength: strenthAction.valid ? strenthAction.state : 0
+            signalStrength: {
+                if (strengthAction.valid) {
+                    var state = strengthAction.state; // handle both int and uchar
+                    if (typeof state == "string") {
+                        return state.charCodeAt();
+                    }
+                    return state;
+                }
+                return 0;
+            }
             enabled: menu ? menu.sensitive : false
 
             onMenuModelChanged: {
