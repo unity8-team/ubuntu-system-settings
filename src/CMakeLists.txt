@@ -23,7 +23,6 @@ set(USS_SOURCES
 )
 
 set(QML_SOURCES
-    qml/CategoryGrid.qml
     qml/CategorySection.qml
     qml/EntryComponent.qml
     qml/MainWindow.qml
@@ -35,7 +34,7 @@ set(QML_SOURCES
 QT5_ADD_RESOURCES(system-settings-resources ui.qrc)
 
 add_executable(system-settings ${USS_SOURCES} ${QML_SOURCES} ${system-settings-resources})
-qt5_use_modules(system-settings Core Gui Quick Qml DBus)
+qt5_use_modules(system-settings Core Gui Quick Qml DBus Widgets)
 target_link_libraries(system-settings SystemSettings ${GLIB_LDFLAGS})
 install(TARGETS system-settings RUNTIME DESTINATION bin)
 

@@ -155,13 +155,6 @@ class SystemSettingsMainWindow(ubuntuuitoolkit.MainView):
         self.scroll_to(obj)
         self.pointing_device.click_object(obj)
 
-    def click_header_action(self, action):
-        """Click the action 'action' on the header"""
-        main_view = self.get_root_instance().select_single(
-            objectName='systemSettingsMainView')
-        header = main_view.select_single('AppHeader')
-        header.click_action_button(action)
-
     @property
     def system_settings_page(self):
         return self.select_single(objectName='systemSettingsPage')

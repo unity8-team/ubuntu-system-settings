@@ -153,7 +153,7 @@ ItemPage {
                         verticalAlignment: Text.AlignVCenter
                         height: contentHeight + units.gu(4)
                         onLinkActivated: {
-                            pageStack.push(Qt.resolvedUrl(link))
+                            pageStack.addPageToNextColumn(locationPage, Qt.resolvedUrl(link))
                         }
                         onLineLaidOut: {
                             dlgt.height = label.height

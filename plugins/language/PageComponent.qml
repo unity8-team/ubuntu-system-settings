@@ -27,12 +27,14 @@ import Ubuntu.Components.Popups 1.3
 import Ubuntu.Components.ListItems 1.3 as ListItem
 import Ubuntu.Settings.Menus 0.1 as Menus
 import Ubuntu.SystemSettings.LanguagePlugin 1.0
+import Ubuntu.Settings.Components 0.1 as USC
 
 ItemPage {
     id: root
     objectName: "languagePage"
 
     title: i18n.tr("Language & Text")
+    flickable: scrollWidget
 
     InputDeviceManager {
         id: keyboardsModel
@@ -41,30 +43,16 @@ ItemPage {
 
     property bool externalKeyboardPresent: keyboardsModel.count > 0
 
-    property var pluginOptions
-    Connections {
-        target: pageStack
-        onCurrentPageChanged: {
-            // If we are called with subpage=foo, push foo on the stack.
-            //
-            // We need to wait until the PageComponent has been pushed to the stack
-            // before pushing the subpages, otherwise they will be pushed below the
-            // PageComponent.
-            if (pageStack.currentPage === root) {
-                if (pluginOptions && pluginOptions['subpage']) {
-                    switch (pluginOptions['subpage']) {
-                    case 'hw-keyboard-layouts':
-                        pageStack.push(Qt.resolvedUrl("KeyboardLayouts.qml"), {
-                                           plugin: hwKeyboardPlugin,
-                                           currentLayoutsDraggable: true
-                                       })
-                        break;
-                    }
-                }
-
-                // Once done, disable this Connections, so that if the user navigates
-                // back to the root we won't push the subpages again
-                target = null
+    onPushedOntoStack: {
+        if (pluginOptions && pluginOptions['subpage']) {
+            switch (pluginOptions['subpage']) {
+            case 'hw-keyboard-layouts':
+                pageStack.addPageToNextColumn(
+                    root, Qt.resolvedUrl('KeyboardLayouts.qml'), {
+                    plugin: hwKeyboardPlugin,
+                    currentLayoutsDraggable: true
+                });
+                break;
             }
         }
     }
@@ -121,6 +109,7 @@ ItemPage {
     }
 
     Flickable {
+        id: scrollWidget
         anchors.fill: parent
         contentHeight: contentItem.childrenRect.height
         boundsBehavior: contentHeight > root.height ?
@@ -138,13 +127,12 @@ ItemPage {
                 iconSource: "image://theme/language-chooser"
                 text: i18n.tr("Display language…")
                 objectName: "displayLanguage"
-                showDivider: false
-                component: Label {
-                    property int currentLanguage: plugin.currentLanguage
+                slots: Label {
                     objectName: "currentLanguage"
                     text: plugin.languageNames[plugin.currentLanguage]
                     elide: Text.ElideRight
                     opacity: enabled ? 1.0 : 0.5
+                    SlotsLayout.position: SlotsLayout.Trailing
                 }
 
                 onClicked: PopupUtils.open(displayLanguage)
@@ -159,7 +147,7 @@ ItemPage {
                 value: oskPlugin.keyboardLayoutsModel.subset.length == 1 ?
                        oskPlugin.keyboardLayoutsModel.superset[oskPlugin.keyboardLayoutsModel.subset[0]][0] :
                        oskPlugin.keyboardLayoutsModel.subset.length
-                onClicked: pageStack.push(Qt.resolvedUrl("KeyboardLayouts.qml"), {
+                onClicked: pageStack.addPageToNextColumn(root, Qt.resolvedUrl("KeyboardLayouts.qml"), {
                     plugin: oskPlugin
                 })
             }
@@ -168,8 +156,8 @@ ItemPage {
                 text: i18n.tr("External keyboard")
                 progression: true
                 showDivider: false
-                onClicked: pageStack.push(Qt.resolvedUrl("PageHardwareKeyboard.qml"))
-                visible: externalKeyboardPresent
+                onClicked: pageStack.addPageToNextColumn(root, Qt.resolvedUrl("PageHardwareKeyboard.qml"))
+                visible: externalKeyboardPresent || showAllUI
             }
 
             ListItem.Divider {}
@@ -183,7 +171,7 @@ ItemPage {
                        plugin.spellCheckingModel.subset.length
                 progression: true
 
-                onClicked: pageStack.push(spellChecking)
+                onClicked: pageStack.addPageToNextColumn(root, spellChecking)
             }
 
             ListItem.Standard {
@@ -278,6 +266,29 @@ ItemPage {
                     onServerCheckedChanged: checked = serverChecked
                     Component.onCompleted: checked = serverChecked
                     onTriggered: settings.keyPressHapticFeedback = checked
+                }
+            }
+
+            Menus.SliderMenu {
+                text: i18n.tr("Keyboard opacity")
+
+                id: opacity
+                objectName: "opacity"
+                function formatValue(v) { return v * 100 }
+                minimumValue: 0.5
+                maximumValue: 1
+                value: settings.opacity
+                live: true
+
+                property real serverValue: settings.opacity
+                USC.ServerPropertySynchroniser {
+                    userTarget: opacity
+                    userProperty: "value"
+                    serverTarget: opacity
+                    serverProperty: "serverValue"
+                    maximumWaitBufferInterval: 16
+
+                    onSyncTriggered: settings.opacity = value
                 }
             }
         }

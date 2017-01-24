@@ -40,13 +40,18 @@ ItemPage {
 
     property var activeTransfer
 
+    function preview(props) {
+        var page = pageStack.addFileToNextColumnSync(
+            mainPage, Qt.resolvedUrl("Preview.qml"), props
+        );
+        selectedItemConnection.target = page;
+    }
+
     // Action to import image
     Action {
         id: selectPeer
         // when action has been activated, push the picker on the stack
-        onTriggered: {
-            pageStack.push(picker);
-        }
+        onTriggered: pageStack.addPageToNextColumn(mainPage, picker)
     }
 
     // qml bindings for background stuff
@@ -81,10 +86,7 @@ ItemPage {
                 backgroundPanel: backgroundPanel
                 title: i18n.tr("Ubuntu Art")
                 current: welcomeBackground
-                onSelected: {
-                    pageStack.push(Qt.resolvedUrl("Preview.qml"), {uri: uri});
-                    selectedItemConnection.target = pageStack.currentPage;
-                }
+                onSelected: preview({ uri: uri })
             }
 
             WallpaperGrid {
@@ -99,10 +101,7 @@ ItemPage {
                 current: welcomeBackground
                 editable: true
                 isCustom: true
-                onSelected: {
-                    pageStack.push(Qt.resolvedUrl("Preview.qml"), {uri: uri});
-                    selectedItemConnection.target = pageStack.currentPage
-                }
+                onSelected: preview({ uri: uri })
             }
 
             ListItem.ThinDivider {}
@@ -172,7 +171,7 @@ ItemPage {
             contentType: ContentType.Pictures
 
             onPeerSelected: {
-                pageStack.pop();
+                pageStack.removePages(picker);
                 // requests an active transfer from peer
                 function startContentTransfer(callback) {
                     if (callback)
@@ -186,15 +185,11 @@ ItemPage {
                 // when peer has been selected, request a transfer, providing
                 // a callback that pushes the preview stack
                 startContentTransfer(function(uri) {
-                    pageStack.push(Qt.resolvedUrl("Preview.qml"), {
-                        uri: uri, imported: true
-                    });
-                    // set Connection target
-                    selectedItemConnection.target = pageStack.currentPage;
+                    preview({ uri: uri, imported: true });
                 });
             }
 
-            onCancelPressed: pageStack.pop();
+            onCancelPressed: pageStack.removePages(picker)
         }
     }
 

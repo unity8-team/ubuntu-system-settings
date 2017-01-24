@@ -19,18 +19,24 @@
  */
 
 import QtQuick 2.4
+import SystemSettings 1.0
 import SystemSettings.ListItems 1.0 as SettingsListItems
 import Ubuntu.Components 1.3
-import SystemSettings 1.0
 
 MainView {
     id: main
-    implicitWidth: units.gu(50)
+    implicitWidth: units.gu(140)
     implicitHeight: units.gu(90)
     applicationName: "ubuntu-system-settings"
     objectName: "systemSettingsMainView"
     automaticOrientation: true
     anchorToKeyboard: true
+    property var pluginManager: PluginManager {}
+    property string currentPlugin: ""
+
+    /* Workaround for lp:1648801, i.e. APL does not support a placeholder,
+    so we implement it here. */
+    property string placeholderPlugin: "about"
 
     function loadPluginByName(pluginName, pluginOptions) {
         var plugin = pluginManager.getByName(pluginName)
@@ -43,10 +49,18 @@ MainView {
         if (plugin) {
             // Got a valid plugin name - load it
             var pageComponent = plugin.pageComponent
+            var page;
             if (pageComponent) {
-                while (pageStack.depth > 1)
-                    pageStack.pop()
-                pageStack.push(pageComponent, opts)
+                apl.removePages(apl.primaryPage);
+                page = apl.addComponentToNextColumnSync(
+                    apl.primaryPage, pageComponent, opts
+                );
+                currentPlugin = pluginName;
+                page.Component.destruction.connect(function () {
+                    if (currentPlugin == this.baseName) {
+                        currentPlugin = "";
+                    }
+                }.bind(plugin))
             }
             return true
         } else {
@@ -59,15 +73,31 @@ MainView {
     Component.onCompleted: {
         i18n.domain = "ubuntu-system-settings"
         i18n.bindtextdomain("ubuntu-system-settings", i18nDirectory)
-        pageStack.push(mainPage)
+
         if (defaultPlugin) {
             if (!loadPluginByName(defaultPlugin, pluginOptions))
                 Qt.quit()
+        } else if (apl.columns > 1) {
+            loadPluginByName(placeholderPlugin);
+            aplConnections.target = apl;
         }
 
         // when running in windowed mode, constrain width
         view.minimumWidth  = Qt.binding( function() { return units.gu(40) } )
-        view.maximumWidth = Qt.binding( function() { return units.gu(50) } )
+        view.maximumWidth = Qt.binding( function() { return units.gu(140) } )
+    }
+
+    Connections {
+        id: aplConnections
+        ignoreUnknownSignals: true
+        onColumnsChanged: {
+            var columns = target.columns;
+            if (columns > 1 && !currentPlugin) {
+                loadPluginByName(placeholderPlugin);
+            } else if (columns == 1 && currentPlugin == placeholderPlugin) {
+                apl.removePages(apl.primaryPage);
+            }
+        }
     }
 
     Connections {
@@ -99,34 +129,93 @@ MainView {
             } else {
                 loadPluginByName(panel)
             }
-
         }
     }
 
-    PluginManager {
-        id: pluginManager
-    }
-
-    PageStack {
-        id: pageStack
+    USSAdaptivePageLayout {
+        id: apl
+        objectName: "apl"
+        anchors.fill: parent
+        primaryPage: mainPage
+        layouts: [
+            PageColumnsLayout {
+                when: width >= units.gu(90)
+                PageColumn {
+                    minimumWidth: units.gu(40)
+                    maximumWidth: units.gu(50)
+                    preferredWidth: units.gu(50)
+                }
+                PageColumn {
+                    fillWidth: true
+                }
+            },
+            PageColumnsLayout {
+                when: true
+                PageColumn {
+                    fillWidth: true
+                    minimumWidth: units.gu(40)
+                }
+            }
+        ]
 
         Page {
             id: mainPage
             objectName: "systemSettingsPage"
-            title: i18n.tr("System Settings")
             visible: false
-            flickable: mainFlickable
+            header: standardHeader
 
-            head.actions: [
-                Action {
-                    objectName: "searchAction"
-                    iconName: "find"
-                    onTriggered: {
-                        pluginManager.filter = "";
-                        search.visible = !search.visible;
+            PageHeader {
+                id: standardHeader
+                objectName: "standardHeader"
+                visible: mainPage.header === standardHeader
+                title: i18n.tr("System Settings")
+                flickable: mainFlickable
+                trailingActionBar.actions: [
+                    Action {
+                        objectName: "searchAction"
+                        iconName: "find"
+                        shortcut: StandardKey.Find
+                        onTriggered: {
+                            pluginManager.filter = "";
+                            mainPage.header = searchHeader;
+                        }
                     }
+                ]
+            }
+
+            PageHeader {
+                id: searchHeader
+                objectName: "searchHeader"
+                visible: mainPage.header === searchHeader
+                flickable: mainFlickable
+                contents: TextField {
+                    id: searchField
+                    objectName: "searchField"
+                    anchors {
+                        left: parent.left
+                        right: parent.right
+                        verticalCenter: parent.verticalCenter
+                    }
+                    inputMethodHints: Qt.ImhNoPredictiveText
+                    onDisplayTextChanged: pluginManager.filter = displayText
+                    placeholderText: i18n.tr("Search")
+                    hasClearButton: false
                 }
-            ]
+                onVisibleChanged: if (visible) searchField.forceActiveFocus()
+                trailingActionBar.actions: [
+                    Action {
+                        objectName: "searchCancel"
+                        iconName: "close"
+                        shortcut: StandardKey.Cancel
+                        onTriggered: {
+                            pluginManager.filter = "";
+                            searchField.text = "";
+                            mainPage.header = standardHeader;
+                        }
+                    }
+                ]
+                z: 1
+            }
 
             Flickable {
                 id: mainFlickable
@@ -141,36 +230,21 @@ MainView {
                     anchors.left: parent.left
                     anchors.right: parent.right
 
-                    SettingsListItems.SingleControl {
-                        id: search
-                        visible: false
-                        TextField {
-                            id: searchField
-                            width: parent.width - units.gu(4)
-                            placeholderText: i18n.tr("Search")
-                            objectName: "searchTextField"
-                            inputMethodHints: Qt.ImhNoPredictiveText
-                            onDisplayTextChanged:
-                                pluginManager.filter = displayText
-                        }
-                        onVisibleChanged: if (visible) searchField.forceActiveFocus()
-                    }
-
                     UncategorizedItemsView {
                         model: pluginManager.itemModel("uncategorized-top")
                     }
 
-                    CategoryGrid {
+                    CategorySection {
                         category: "network"
                         categoryName: i18n.tr("Network")
                     }
 
-                    CategoryGrid {
+                    CategorySection {
                         category: "personal"
                         categoryName: i18n.tr("Personal")
                     }
 
-                    CategoryGrid {
+                    CategorySection {
                         category: "system"
                         categoryName: i18n.tr("System")
                     }

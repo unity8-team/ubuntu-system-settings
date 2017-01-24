@@ -31,6 +31,7 @@ import Ubuntu.Settings.Components 0.1 as USC
 ItemPage {
     id: root
     title: i18n.tr("Bluetooth")
+    flickable: scrollWidget
     objectName: "bluetoothPage"
 
     property var dialogPopupId
@@ -205,6 +206,7 @@ ItemPage {
     }
 
     Flickable {
+        id: scrollWidget
         anchors.fill: parent
         contentHeight: contentItem.childrenRect.height
         boundsBehavior: (contentHeight > root.height) ?
@@ -299,7 +301,9 @@ ItemPage {
                         }
                         onClicked: {
                             backend.setSelectedDevice(addressName);
-                            pageStack.push(Qt.resolvedUrl("DevicePage.qml"), {backend: backend, root: root});
+                            pageStack.addPageToNextColumn(root,
+                                Qt.resolvedUrl("DevicePage.qml"),
+                                {backend: backend, root: root});
                         }
                     }
                 }
@@ -341,7 +345,9 @@ ItemPage {
                         text: getDisplayName(type, displayName)
                         onClicked: {
                             backend.setSelectedDevice(addressName);
-                            pageStack.push(Qt.resolvedUrl("DevicePage.qml"), {backend: backend, root: root});
+                            pageStack.addPageToNextColumn(root,
+                                Qt.resolvedUrl("DevicePage.qml"),
+                                {backend: backend, root: root});
                         }
                     }
                 }
@@ -375,7 +381,9 @@ ItemPage {
                         text: getDisplayName(type, displayName)
                         onClicked: {
                             backend.setSelectedDevice(addressName);
-                            pageStack.push(Qt.resolvedUrl("DevicePage.qml"), {backend: backend, root: root});
+                            pageStack.addPageToNextColumn(root,
+                                Qt.resolvedUrl("DevicePage.qml"),
+                                {backend: backend, root: root});
                         }
                     }
                 }

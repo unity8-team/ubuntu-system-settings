@@ -26,9 +26,10 @@ ItemPage {
     id: wifibase
     objectName: "wifiPage"
     title: i18n.tr("Wi-Fi")
+    flickable: pageFlickable
+
     property bool wifiEnabled: actionGroup.actionObject.valid ?
                                actionGroup.actionObject.state : false
-    property var pluginOptions
 
     UnityMenuModel {
         id: menuModel
@@ -136,7 +137,8 @@ ItemPage {
             SettingsListItems.StandardProgression {
                 objectName: "previousNetwork"
                 text: i18n.tr("Previous networks")
-                onClicked: pageStack.push(Qt.resolvedUrl("PreviousNetworks.qml"))
+                onClicked: pageStack.addPageToNextColumn(wifibase,
+                    Qt.resolvedUrl("PreviousNetworks.qml"))
             }
 
             Loader {
