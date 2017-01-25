@@ -1,3 +1,13 @@
+ubuntu-system-settings (0.4+17.04.20170118.1-0ubuntu1) zesty; urgency=medium
+
+  [ Lukáš Tinkl ]
+  * Fix WIFI APs signal strength icons
+
+  [ Masoud Abkenar ]
+  * typo fix in wifi settings
+
+ -- Jonas G. Drange <jonas.drange@canonical.com>  Wed, 18 Jan 2017 16:19:11 +0000
+
 ubuntu-system-settings (0.4+17.04.20170112-0ubuntu1) zesty; urgency=medium
 
   [ Jonas G. Drange ]
