@@ -1,0 +1,2 @@
+module Qt.labs.folderlistmodel
+plugin QtLabsFolderListModelQml
