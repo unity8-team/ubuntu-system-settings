@@ -26,11 +26,12 @@ ItemPage {
     id: root
     title: i18n.tr("Carriers & APNs")
     objectName: "carrierApnPage"
-    flickable: null
+    flickable: scrollWidget
 
     property var sims
 
     Flickable {
+        id: scrollWidget
         anchors.fill: parent
         contentWidth: parent.width
         contentHeight: contentItem.childrenRect.height
@@ -59,7 +60,8 @@ ItemPage {
                         enabled: (sims[index].netReg.status !== "") &&
                             (sims[index].netReg.mode !== "auto-only")
                         progressionVisible: enabled
-                        onClicked: pageStack.push(Qt.resolvedUrl("PageChooseCarrier.qml"), {
+                        onClicked: pageStack.addPageToNextColumn(root,
+                            Qt.resolvedUrl("PageChooseCarrier.qml"), {
                             sim: sims[index],
                             title: sims[index].title
                         })
@@ -68,7 +70,8 @@ ItemPage {
                     SettingsListItems.StandardProgression {
                         text: i18n.tr("APN")
                         progressionVisible: enabled
-                        onClicked: pageStack.push(Qt.resolvedUrl("PageChooseApn.qml"), {
+                        onClicked: pageStack.addPageToNextColumn(root,
+                            Qt.resolvedUrl("PageChooseApn.qml"), {
                             sim: sims[index]
                         })
                     }

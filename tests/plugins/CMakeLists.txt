@@ -69,3 +69,17 @@ if(ANDR_PROP_FOUND)
     add_qml_test(brightness BrightnessPageComponent IMPORT_PATHS ${BRIGHTNESS_IMPORT_PATHS})
     add_qml_test(brightness BrightnessWifiDisplays IMPORT_PATHS ${BRIGHTNESS_IMPORT_PATHS})
 endif()
+
+add_qml_test(main MainWindow
+    IMPORT_PATHS
+    ${CMAKE_BINARY_DIR}/tests/mocks/
+    ${CMAKE_SOURCE_DIR}/tests/plugins/main
+    ${qmltest_DEFAULT_IMPORT_PATHS}
+)
+
+set(LAUNCHER_IMPORT_PATHS
+    ${CMAKE_BINARY_DIR}/tests/mocks/
+    ${CMAKE_SOURCE_DIR}/tests/plugins/launcher
+    ${qmltest_DEFAULT_IMPORT_PATHS}
+)
+add_qml_test(launcher LauncherPageComponent IMPORT_PATHS ${LAUNCHER_IMPORT_PATHS})

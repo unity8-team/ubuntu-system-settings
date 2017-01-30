@@ -25,6 +25,7 @@ ItemPage {
     id: wifiDisplays
     objectName: "wifiDisplays"
     title: i18n.tr("Wireless Display")
+    flickable: pageFlickable
 
     Component.onCompleted: {
         if (!displays.scanning)

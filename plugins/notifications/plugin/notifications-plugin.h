@@ -16,18 +16,21 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef PLUGIN_H
-#define PLUGIN_H
+#ifndef SYSTEM_SETTINGS_NOTIFICATIONS_PLUGIN_H
+#define SYSTEM_SETTINGS_NOTIFICATIONS_PLUGIN_H
 
-#include <QtQml/QQmlExtensionPlugin>
+#include <QObject>
+#include <SystemSettings/PluginInterface>
 
-class FakeGSettingsQmlPlugin : public QQmlExtensionPlugin
+class NotificationsPlugin: public QObject, public SystemSettings::PluginInterface2
 {
     Q_OBJECT
-    Q_PLUGIN_METADATA(IID "org.qt-project.Qt.QQmlExtensionInterface")
+    Q_PLUGIN_METADATA(IID "com.ubuntu.SystemSettings.PluginInterface/2.0")
+    Q_INTERFACES(SystemSettings::PluginInterface2)
 
 public:
-    void registerTypes(const char *uri) override;
+    SystemSettings::ItemBase *createItem(const QVariantMap &staticData,
+                                         QObject *parent = 0);
 };
 
-#endif // PLUGIN_H
+#endif // SYSTEM_SETTINGS_NOTIFICATIONS_PLUGIN_H

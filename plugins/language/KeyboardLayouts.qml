@@ -27,6 +27,7 @@ import Ubuntu.SystemSettings.LanguagePlugin 1.0
 ItemPage {
     id: root
     title: i18n.tr("Keyboard layouts")
+    flickable: subsetView
 
     property var plugin
     property bool currentLayoutsDraggable: false

@@ -1,6 +1,7 @@
 set(QML_SOURCES
     ItemPage.qml
     SettingsItemTitle.qml
+    USSAdaptivePageLayout.qml
 )
 
 set(PLUG_DIR ${PLUGIN_QML_DIR}/SystemSettings)

@@ -24,7 +24,6 @@ import SystemSettings 1.0
 import Ubuntu.Components 1.3
 import Ubuntu.Components.ListItems 1.3 as ListItem
 import Ubuntu.Settings.Components 0.1 as USC
-import Ubuntu.Settings.Menus 0.1 as Menus
 import Ubuntu.SystemSettings.LanguagePlugin 1.0
 
 ItemPage {
@@ -32,6 +31,7 @@ ItemPage {
     objectName: "hwKbdPage"
 
     title: i18n.tr("Hardware keyboard")
+    flickable: scrollWidget
 
     Component {
         id: keyboardLayouts
@@ -44,6 +44,7 @@ ItemPage {
     }
 
     Flickable {
+        id: scrollWidget
         anchors.fill: parent
         contentHeight: contentItem.childrenRect.height
         boundsBehavior: contentHeight > root.height ?
@@ -65,10 +66,12 @@ ItemPage {
                        plugin.keyboardLayoutsModel.subset.length
                 progression: true
 
-                onClicked: pageStack.push(Qt.resolvedUrl("KeyboardLayouts.qml"), {
-                    plugin: plugin,
-                    currentLayoutsDraggable: true
-                })
+                onClicked: pageStack.addPageToNextColumn(root,
+                    Qt.resolvedUrl("KeyboardLayouts.qml"), {
+                        plugin: plugin,
+                        currentLayoutsDraggable: true
+                    }
+                )
             }
         }
     }

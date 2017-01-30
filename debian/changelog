@@ -1,3 +1,64 @@
+ubuntu-system-settings (0.4+17.04.20170118.1-0ubuntu1) zesty; urgency=medium
+
+  [ Lukáš Tinkl ]
+  * Fix WIFI APs signal strength icons
+
+  [ Masoud Abkenar ]
+  * typo fix in wifi settings
+
+ -- Jonas G. Drange <jonas.drange@canonical.com>  Wed, 18 Jan 2017 16:19:11 +0000
+
+ubuntu-system-settings (0.4+17.04.20170112-0ubuntu1) zesty; urgency=medium
+
+  [ Jonas G. Drange ]
+  * unhides hw keyboard page now that input sources are listed
+  * migrates uss to apl
+  * unhides the "phone locking" screen, but only show working items for
+    a snap system
+
+  [ Rodney Dawes ]
+  * Remove the in-app purchases pieces from the security-privacy plug-
+    in.
+
+ -- Jonas G. Drange <jonas.drange@canonical.com>  Thu, 12 Jan 2017 12:50:05 +0000
+
+ubuntu-system-settings (0.4+17.04.20161214.1-0ubuntu1) zesty; urgency=medium
+
+  * Add keyboard opacity setting to language panel (LP: #1647603)
+
+ -- Michael Sheldon <michael.sheldon@canonical.com>  Wed, 14 Dec 2016 15:11:16 +0000
+
+ubuntu-system-settings (0.4+17.04.20161207-0ubuntu1) zesty; urgency=medium
+
+  [ Jonas G. Drange, Ken VanDine ]
+  * Replaces the grid with a list
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Wed, 07 Dec 2016 15:17:20 +0000
+
+ubuntu-system-settings (0.4+17.04.20161129-0ubuntu1) zesty; urgency=medium
+
+  [ Daniel van Vugt ]
+  * Fix unlabelled sliders in Mouse & Touchpad (LP: #1569227) (LP:
+    #1569227)
+
+  [ Jonas G. Drange ]
+  * Packaging change: depend on USC for testing
+  * uses SystemImage binding to read current build number (LP: #1639949)
+  * On snappy it changes the following:
+
+  [ Lukáš Tinkl ]
+  * Fix finding the module mapping file (url-map.ini) (LP: #1641665)
+  * Language pack based language setup
+
+ -- Jonas G. Drange <jonas.drange@canonical.com>  Tue, 29 Nov 2016 11:13:35 +0000
+
+ubuntu-system-settings (0.4+17.04.20161116.1-0ubuntu1) zesty; urgency=medium
+
+  [ Lukáš Tinkl ]
+  * Accomodate to new menu components
+
+ -- Marco Trevisan (Treviño) <mail@3v1n0.net>  Wed, 16 Nov 2016 11:41:22 +0000
+
 ubuntu-system-settings (0.4+17.04.20161109.1-0ubuntu1) zesty; urgency=medium
 
   [ Daniel van Vugt ]

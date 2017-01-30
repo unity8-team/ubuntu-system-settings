@@ -109,7 +109,7 @@ ItemPage {
                     property variant volume: action("volume")
                     property variant silentMode: action("silent-mode")
                     property variant highVolume: action("high-volume")
-    
+
                     Component.onCompleted: start()
                 }
 
@@ -140,7 +140,7 @@ ItemPage {
                     visible: soundActionGroup.highVolume.state == true
                     text: i18n.tr("High volume can damage your hearing.")
                 }
-    
+
                 SettingsItemTitle {
                     text: i18n.tr("Phone calls:")
                 }
@@ -149,7 +149,7 @@ ItemPage {
                     text: i18n.tr("Ringtone")
                     value: Utilities.buildDisplayName(backendInfo.incomingCallSound)
 
-                    onClicked: pageStack.push(
+                    onClicked: pageStack.addPageToNextColumn(root,
                         Qt.resolvedUrl("SoundsList.qml"), {
                             title: i18n.tr("Ringtone"),
                             showStopButton: true,
@@ -203,16 +203,19 @@ ItemPage {
                     text: i18n.tr("Messages:")
                 }
 
+                visible: !isSnap || showAllUI
+
                 SettingsListItems.SingleValueProgression {
                     text: i18n.tr("Message received")
                     value:Utilities.buildDisplayName(
                               backendInfo.incomingMessageSound)
-                    onClicked: pageStack.push(
-                                   Qt.resolvedUrl("SoundsList.qml"),
-                                   { title: i18n.tr("Message received"),
-                                      soundType: 1,
-                                     soundsDir:
-                                       "sounds/ubuntu/notifications/" })
+                    onClicked: pageStack.addPageToNextColumn(root,
+                        Qt.resolvedUrl("SoundsList.qml"), {
+                            title: i18n.tr("Message received"),
+                            soundType: 1,
+                            soundsDir:  "sounds/ubuntu/notifications/"
+                        }
+                    )
                 }
 
                 SettingsListItems.Standard {
@@ -266,7 +269,7 @@ ItemPage {
                 visible: showAllUI
             }
 
-            /* Add some artificial spacing here, once we update the QtQuick.Layouts plugin 
+            /* Add some artificial spacing here, once we update the QtQuick.Layouts plugin
              * to 1.3 we can replace this with Layout.bottomMargin(units.gu(2))
              */
             Item { height: 1; width: 1 }

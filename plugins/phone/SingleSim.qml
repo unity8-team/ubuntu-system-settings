@@ -33,7 +33,8 @@ Column {
         objectName: "callWait"
         text: i18n.tr("Call waiting")
         progression: true
-        onClicked: pageStack.push(Qt.resolvedUrl("CallWaiting.qml"), {sim: sim})
+        onClicked: pageStack.addPageToNextColumn(root,
+            Qt.resolvedUrl("CallWaiting.qml"), {sim: sim})
     }
 
     ListItem.SingleValue {
@@ -42,7 +43,8 @@ Column {
         showDivider: false
         progression: true
         value: sim.getCallForwardingSummary()
-        onClicked: pageStack.push(Qt.resolvedUrl("CallForwarding.qml"), {sim: sim})
+        onClicked: pageStack.addPageToNextColumn(root,
+            Qt.resolvedUrl("CallForwarding.qml"), {sim: sim})
     }
 
     ListItem.Divider {}
@@ -65,7 +67,8 @@ Column {
             }
             return sim.simMng.present && nums;
         }
-        onClicked: pageStack.push(Qt.resolvedUrl("Services.qml"),
-                                  {carrierString: carrierString, sim: sim.simMng})
+        onClicked: pageStack.addPageToNextColumn(root,
+            Qt.resolvedUrl("Services.qml"),
+            {carrierString: carrierString, sim: sim.simMng})
     }
 }

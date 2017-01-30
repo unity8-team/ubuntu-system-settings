@@ -56,40 +56,28 @@ ItemPage {
         });
         return t;
     }
-    property var pluginOptions
-    Connections {
-        target: pageStack
-        onCurrentPageChanged: {
-            // If we are called with subpage=foo, push foo on the stack.
-            //
-            // We need to wait until the PageComponent has been pushed to the stack
-            // before pushing the subpages, otherwise they will be pushed below the
-            // PageComponent.
-            if (pageStack.currentPage === root) {
-                if (pluginOptions && pluginOptions['subpage']) {
-                    switch (pluginOptions['subpage']) {
-                    case 'location':
-                        pageStack.push(Qt.resolvedUrl("Location.qml"));
-                        break;
-                    case 'permissions':
-                        var page = pageStack.push(Qt.resolvedUrl("AppAccess.qml"), {pluginManager: pluginManager})
-                        if (pluginOptions['service']) {
-                            page.openService(pluginOptions['service'])
-                        }
-                        break;
-                    }
-                } else if (pluginOptions && pluginOptions['service']) {
-                    // This whole else if branch will be removed once the
-                    // camera app asks for [1] as described in lp:1545733.
-                    // [1] settings:///system/permissions?service=camera
-                    var page = pageStack.push(Qt.resolvedUrl("AppAccess.qml"), {pluginManager: pluginManager})
-                    page.openService(pluginOptions['service'])
-                }
 
-                // Once done, disable this Connections, so that if the user navigates
-                // back to the root we won't push the subpages again
-                target = null
+    onPushedOntoStack: {
+        var page;
+        var opts = {
+            pluginManager: pluginManager, pluginOptions: pluginOptions,};
+        if (pluginOptions && pluginOptions['subpage']) {
+            switch (pluginOptions['subpage']) {
+            case 'location':
+                page = Qt.resolvedUrl("Location.qml");
+                break;
+            case 'permissions':
+                page = Qt.resolvedUrl("AppAccess.qml")
+                break;
             }
+        } else if (pluginOptions && pluginOptions['service']) {
+            // This whole else if branch will be removed once the
+            // camera app asks for [1] as described in lp:1545733.
+            // [1] settings:///system/permissions?service=camera
+            page = Qt.resolvedUrl("AppAccess.qml");
+        }
+        if (page) {
+            pageStack.addPageToNextColumn(root, page, opts);
         }
     }
 
@@ -158,18 +146,18 @@ ItemPage {
                 id: fingerprintControl
                 objectName: "fingerprintControl"
                 text: i18n.tr("Fingerprint ID")
-                onClicked: pageStack.push(fingeprintPage, {
+                onClicked: pageStack.addPageToNextColumn(root, fingeprintPage, {
                     passcodeSet: securityPrivacy.securityType !== UbuntuSecurityPrivacyPanel.Swipe
                 })
-                visible: Biometryd.available
+                visible: Biometryd.available || showAllUI
             }
 
             Component {
                 id: fingeprintPage
                 Fingerprints {
                     onRequestPasscode: {
-                        pageStack.pop();
-                        pageStack.push(Qt.resolvedUrl("LockSecurity.qml"));
+                        pageStack.removePages(root);
+                        pageStack.addPageToNextColumn(root, Qt.resolvedUrl("LockSecurity.qml"));
                     }
                 }
             }
@@ -178,7 +166,7 @@ ItemPage {
                 id: lockingControl
                 objectName: "lockingControl"
                 text: i18n.tr("Locking and unlocking")
-                onClicked: pageStack.push(Qt.resolvedUrl("PhoneLocking.qml"), {
+                onClicked: pageStack.addPageToNextColumn(root, Qt.resolvedUrl("PhoneLocking.qml"), {
                     usePowerd: usePowerd,
                     powerSettings: powerSettings
                 })
@@ -197,7 +185,7 @@ ItemPage {
                         return i18n.tr("Off");
                 }
                 visible: simsPresent > 0
-                onClicked: pageStack.push(Qt.resolvedUrl("SimPin.qml"), { sims: sims })
+                onClicked: pageStack.addPageToNextColumn(root, Qt.resolvedUrl("SimPin.qml"), { sims: sims })
             }
 
             SettingsListItems.Standard {
@@ -256,7 +244,7 @@ ItemPage {
                 objectName: "locationItem"
                 text: i18n.tr("Location")
                 value: ""
-                onClicked: pageStack.push(Qt.resolvedUrl("Location.qml"))
+                onClicked: pageStack.addPageToNextColumn(root, Qt.resolvedUrl("Location.qml"))
                 visible: true
                 enabled: true
                 property variant locationEnabled
@@ -274,7 +262,7 @@ ItemPage {
 
             SettingsListItems.SingleValueProgression {
                 text: i18n.tr("App permissions")
-                onClicked: pageStack.push(Qt.resolvedUrl("AppAccess.qml"), {pluginManager: pluginManager})
+                onClicked: pageStack.addPageToNextColumn(root, Qt.resolvedUrl("AppAccess.qml"), {pluginManager: pluginManager})
             }
 
             SettingsListItems.SingleValueProgression {
@@ -288,7 +276,7 @@ ItemPage {
                            i18n.tr("Not sent")
                 onClicked: {
                     var path = "../diagnostics/PageComponent.qml";
-                    pageStack.push(Qt.resolvedUrl(path));
+                    pageStack.addPageToNextColumn(root, Qt.resolvedUrl(path));
                 }
             }
         }

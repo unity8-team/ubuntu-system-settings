@@ -27,7 +27,7 @@ import Ubuntu.SystemSettings.TimeDate 1.1
 
 ItemPage {
     title: i18n.tr("Time zone")
-
+    flickable: locationsListView
     property UbuntuTimeDatePanel timeDatePanel
 
     Timer {
