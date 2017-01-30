@@ -1,7 +1,7 @@
 /*
  * This file is part of system-settings
  *
- * Copyright (C) 2016 Canonical Ltd.
+ * Copyright (C) 2017 Canonical Ltd.
  *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License version 3, as published
@@ -19,6 +19,8 @@
 #ifndef DISPLAY_H
 #define DISPLAY_H
 
+#include "enums.h"
+#include "output/output.h"
 #include "../../../src/i18n.h"
 
 #include <mir_toolkit/mir_client_library.h>
@@ -27,11 +29,12 @@
 #include <QObject>
 #include <QString>
 #include <QStringList>
+#include <QSharedPointer>
 #include <QVariantMap>
 
 namespace DisplayPlugin
 {
-class DisplayMode
+class Q_DECL_EXPORT DisplayMode
 {
 public:
     DisplayMode() {};
@@ -46,7 +49,7 @@ public:
     bool operator==(const DisplayMode &other) const;
 };
 
-class Display : public QObject
+class Q_DECL_EXPORT Display : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(uint id READ id CONSTANT)
@@ -61,7 +64,7 @@ class Display : public QObject
                NOTIFY modeChanged)
     Q_PROPERTY(QStringList modes READ modes
                NOTIFY modesChanged)
-    Q_PROPERTY(Orientation orientation READ orientation WRITE setOrientation
+    Q_PROPERTY(Enums::Orientation orientation READ orientation WRITE setOrientation
                NOTIFY orientationChanged)
     Q_PROPERTY(double scale READ scale WRITE setScale NOTIFY scaleChanged)
     Q_PROPERTY(bool uncommittedChanges READ uncommittedChanges
@@ -81,21 +84,10 @@ Q_SIGNALS:
     void displayChanged(const Display *display);
 
 public:
-    explicit Display(QObject *parent = nullptr);
-    // Enables testing.
-    explicit Display(MirDisplayOutput &output, QObject *parent = nullptr);
+    explicit Display(QObject *parent = Q_NULLPTR);
+    explicit Display(QSharedPointer<Output> output, QObject *parent = Q_NULLPTR);
     explicit Display(const uint &id);
     ~Display() {};
-
-    enum class Orientation : uint {
-        NormalOrientation, PortraitModeOrientation,
-        LandscapeInvertedModeOrientation,
-        PortraitInvertedModeOrientation
-    };
-    enum class PowerMode : uint {
-        OnMode, StandbyMode, SuspendMode, OffMode
-    };
-    Q_ENUMS(Orientation PowerMode)
 
     uint id() const;
     QString name() const;
@@ -106,17 +98,17 @@ public:
     uint mode() const;
     QList<DisplayMode> availableModes() const;
     QStringList modes() const;
-    Orientation orientation() const;
+    Enums::Orientation orientation() const;
     double scale() const;
     bool uncommittedChanges() const;
     uint physicalWidthMm() const;
     uint physicalHeightMm() const;
-    PowerMode powerMode() const;
+    Enums::PowerMode powerMode() const;
 
     void setMirrored(const bool &mirrored);
     void setEnabled(const bool &enabled);
     void setMode(const uint &mode);
-    void setOrientation(const Orientation &orientation);
+    void setOrientation(const Enums::Orientation &orientation);
     void setScale(const double &scale);
 
 protected:
@@ -132,12 +124,13 @@ protected:
     bool m_enabled = false;
     DisplayMode m_mode;
     QList<DisplayMode> m_modes;
-    Orientation m_orientation = Orientation::NormalOrientation;
+    Enums::Orientation m_orientation = Enums::Orientation::NormalOrientation;
     double m_scale = 1;
     bool m_uncommittedChanges = false;
     uint m_physicalWidthMm = 0;
     uint m_physicalHeightMm = 0;
-    PowerMode m_powerMode = PowerMode::OffMode;
+    Enums::PowerMode m_powerMode = Enums::PowerMode::OffMode;
+    QSharedPointer<Output> m_output = QSharedPointer<Output>(Q_NULLPTR);
 
 protected slots:
     void changedSlot();
@@ -152,6 +145,6 @@ private:
 } // DisplayPlugin
 
 Q_DECLARE_METATYPE(DisplayPlugin::Display*)
-Q_DECLARE_METATYPE(DisplayPlugin::Display::Orientation)
+// Q_DECLARE_METATYPE(DisplayPlugin::Display::Orientation)
 
 #endif // DISPLAY_H

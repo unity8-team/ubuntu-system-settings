@@ -1,3 +1,7 @@
+pkg_search_module(MIR_CORE REQUIRED mircore)
+pkg_check_modules(UAL REQUIRED ubuntu-app-launch-2)
+pkg_check_modules(UBUNTUONEAUTH REQUIRED ubuntuoneauth-2.0)
+
 set(CMAKE_AUTOMOC ON)
 set(QML_SOURCES
     ClickUpdateDelegate.qml
@@ -14,12 +18,11 @@ set(QML_SOURCES
 include_directories(
     ${CMAKE_CURRENT_BINARY_DIR}
     ${CMAKE_CURRENT_SOURCE_DIR}
+    ${MIR_CORE_INCLUDE_DIRS}
     /usr/include/apt-pkg/
 )
 
-pkg_check_modules(UAL REQUIRED ubuntu-app-launch-2)
 add_definitions(${UAL_CFLAGS} ${UAL_CFLAGS_OTHER})
-pkg_check_modules(UBUNTUONEAUTH REQUIRED ubuntuoneauth-2.0)
 add_definitions(${UBUNTUONEAUTH_CFLAGS} ${UBUNTUONEAUTH_CFLAGS_OTHER})
 
 add_library(UpdatePlugin SHARED

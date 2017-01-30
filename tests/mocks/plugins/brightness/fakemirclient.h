@@ -21,6 +21,8 @@
 
 #include "mirclient.h"
 
+#include "output/output.h"
+
 #include <mir_toolkit/mir_client_library.h>
 #include <QObject>
 
@@ -31,28 +33,32 @@ public:
     explicit FakeMirClient(QObject *parent = 0)
         : DisplayPlugin::MirClient(parent) {}
     virtual ~FakeMirClient() {}
-    virtual MirDisplayConfiguration* getConfiguration() const override
+    virtual MirDisplayConfig* getConfiguration() const override
     {
         return conf;
     }
-    virtual void setConfiguration(MirDisplayConfiguration *conf) override
+    virtual void setConfiguration(MirDisplayConfig *conf) override
     {
         Q_UNUSED(conf);
     }
-    virtual bool applyConfiguration(MirDisplayConfiguration *conf) override
+    virtual void applyConfiguration(MirDisplayConfig *conf) override
     {
         // This usually happens via a mir callback. Fake it here.
         this->conf = conf;
         Q_EMIT configurationChanged();
-        return true;
     }
     virtual bool isConnected() override
     {
         return connected;
     }
+    virtual QList<QSharedPointer<DisplayPlugin::Output>> outputs() override
+    {
+        return m_outputs;
+    }
 
     bool connected = false;
-    MirDisplayConfiguration *conf = nullptr;
+    MirDisplayConfig *conf = nullptr;
+    QList<QSharedPointer<DisplayPlugin::Output>> m_outputs;
 };
 
 #endif // FAKEMIRCLIENT_H

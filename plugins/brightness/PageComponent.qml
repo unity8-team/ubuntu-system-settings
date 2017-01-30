@@ -168,7 +168,6 @@ ItemPage {
                 enabled: aethercastDisplays.enabled
                 text: i18n.tr("Wireless display")
                 value: aethercastDisplays.state === "connected" ? i18n.tr("Connected") : i18n.tr("Not connected")
-                progression: true
                 onClicked: pageStack.addPageToNextColumn(
                     root, Qt.resolvedUrl("WifiDisplays.qml"))
             }

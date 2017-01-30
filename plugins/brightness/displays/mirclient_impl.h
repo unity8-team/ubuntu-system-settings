@@ -1,7 +1,7 @@
 /*
  * This file is part of system-settings
  *
- * Copyright (C) 2016 Canonical Ltd.
+ * Copyright (C) 2017 Canonical Ltd.
  *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License version 3, as published
@@ -29,15 +29,17 @@ class MirClientImpl : public MirClient
 public:
     explicit MirClientImpl(QObject *parent = 0);
     ~MirClientImpl();
-    virtual MirDisplayConfiguration* getConfiguration() const;
-    virtual void setConfiguration(MirDisplayConfiguration *conf) override;
-    virtual bool applyConfiguration(MirDisplayConfiguration *conf) override;
+    virtual MirDisplayConfig* getConfiguration() const;
+    virtual void setConfiguration(MirDisplayConfig *conf) override;
+    virtual void applyConfiguration(MirDisplayConfig *conf) override;
     virtual bool isConnected() override;
+    virtual QList<QSharedPointer<Output>> outputs() override;
+    void onConfigurationFailed(const QString &reason);
 
 private:
     void connect();
     MirConnection *m_mir_connection;
-    MirDisplayConfiguration *m_configuration;
+    MirDisplayConfig *m_configuration;
 };
 } // DisplayPlugin
 

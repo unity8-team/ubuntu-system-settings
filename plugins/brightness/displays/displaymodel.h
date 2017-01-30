@@ -1,7 +1,7 @@
 /*
  * This file is part of system-settings
  *
- * Copyright (C) 2016 Canonical Ltd.
+ * Copyright (C) 2017 Canonical Ltd.
  *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License version 3, as published
@@ -32,7 +32,7 @@
 
 namespace DisplayPlugin
 {
-class DisplayModel : public QAbstractListModel
+class Q_DECL_EXPORT DisplayModel : public QAbstractListModel
 {
     Q_OBJECT
     Q_PROPERTY(int count READ rowCount NOTIFY countChanged)

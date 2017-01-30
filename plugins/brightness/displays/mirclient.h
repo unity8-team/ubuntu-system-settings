@@ -1,7 +1,7 @@
 /*
  * This file is part of system-settings
  *
- * Copyright (C) 2016 Canonical Ltd.
+ * Copyright (C) 2017 Canonical Ltd.
  *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License version 3, as published
@@ -19,24 +19,30 @@
 #ifndef MIRCLIENT_H
 #define MIRCLIENT_H
 
+#include "output/output.h"
+
 #include <mir_toolkit/mir_client_library.h>
+#include <QList>
 #include <QObject>
+#include <QSharedPointer>
 
 namespace DisplayPlugin
 {
-class MirClient : public QObject
+class Q_DECL_EXPORT MirClient : public QObject
 {
     Q_OBJECT
 public:
     explicit MirClient(QObject *parent = 0) : QObject(parent) {}
     virtual ~MirClient() {};
-    virtual MirDisplayConfiguration* getConfiguration() const = 0;
-    virtual void setConfiguration(MirDisplayConfiguration *conf) = 0;
-    virtual bool applyConfiguration(MirDisplayConfiguration *conf) = 0;
+    virtual MirDisplayConfig* getConfiguration() const = 0;
+    virtual void setConfiguration(MirDisplayConfig *conf) = 0;
+    virtual void applyConfiguration(MirDisplayConfig *conf) = 0;
     virtual bool isConnected() = 0;
+    virtual QList<QSharedPointer<Output>> outputs() = 0;
 
 Q_SIGNALS:
-    void configurationChanged() const;
+    void configurationChanged();
+    void configurationFailed(const QString &errorMessage);
 };
 } // DisplayPlugin
 

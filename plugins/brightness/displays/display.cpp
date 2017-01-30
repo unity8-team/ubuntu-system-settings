@@ -1,7 +1,7 @@
 /*
  * This file is part of system-settings
  *
- * Copyright (C) 2016 Canonical Ltd.
+ * Copyright (C) 2017 Canonical Ltd.
  *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License version 3, as published
@@ -55,34 +55,33 @@ Display::Display(QObject *parent)
     initialize();
 }
 
-Display::Display(MirDisplayOutput &output, QObject *parent)
+Display::Display(QSharedPointer<Output> output, QObject *parent)
     : Display(parent)
 {
-    m_type = DisplayPlugin::Helpers::mirTypeToString(output.type);
-    setConnected(output.connected);
-    setEnabled(output.used);
+    // m_type = DisplayPlugin::Helpers::mirTypeToString(output.type);
+    // setConnected(output.connected);
+    // setEnabled(output.used);
 
-    auto modes = QList<DisplayMode>();
-    for(uint j = 0; j < output.num_modes; j++) {
-        DisplayMode mode(output.modes[j]);
-        modes.append(mode);
+    // auto modes = QList<DisplayMode>();
+    // for(uint j = 0; j < output.num_modes; j++) {
+    //     DisplayMode mode(output.modes[j]);
+    //     modes.append(mode);
 
-        if (j == output.current_mode)
-            m_mode = mode;
-    }
-    m_modes = modes;
-    m_orientation = DisplayPlugin::Helpers::mirOrientationToOrientation(output.orientation);
-    m_powerMode = DisplayPlugin::Helpers::mirPowerModeToPowerMode(output.power_mode);
-    m_id = output.output_id;
+    //     if (j == output.current_mode)
+    //         m_mode = mode;
+    // }
+    // m_modes = modes;
+    // m_orientation = DisplayPlugin::Helpers::mirOrientationToOrientation(output.orientation);
+    // m_powerMode = DisplayPlugin::Helpers::mirPowerModeToPowerMode(output.power_mode);
+    // m_id = output.output_id;
 
-    m_physicalWidthMm = output.physical_width_mm;
-    m_physicalHeightMm = output.physical_height_mm;
-    m_name = QString("%1").arg(DisplayPlugin::Helpers::mirTypeToString(output.type));
+    // m_physicalWidthMm = output.physical_width_mm;
+    // m_physicalHeightMm = output.physical_height_mm;
+    // m_name = QString("%1").arg(DisplayPlugin::Helpers::mirTypeToString(output.type));
 
-    storeConfiguration();
-    changedSlot();
+    // storeConfiguration();
+    // changedSlot();
 }
-
 
 void Display::initialize()
 {
@@ -123,7 +122,7 @@ bool Display::hasChanged() const
         || m_storedConfig["mirrored"].toBool() != m_mirrored
         || m_storedConfig["enabled"].toBool() != m_enabled
         || m_storedConfig["mode"].toUInt() != mode()
-        || m_storedConfig["orientation"].value<Orientation>() != m_orientation
+        || m_storedConfig["orientation"].value<Enums::Orientation>() != m_orientation
         || m_storedConfig["scale"].toUInt() != m_scale
     );
 }
@@ -177,7 +176,7 @@ QList<DisplayMode> Display::availableModes() const
     return m_modes;
 }
 
-Display::Orientation Display::orientation() const
+Enums::Orientation Display::orientation() const
 {
     return m_orientation;
 }
@@ -202,7 +201,7 @@ uint Display::physicalHeightMm() const
     return m_physicalHeightMm;
 }
 
-Display::PowerMode Display::powerMode() const
+Enums::PowerMode Display::powerMode() const
 {
     return m_powerMode;
 }
@@ -237,7 +236,7 @@ void Display::setMode(const uint &mode)
     Q_EMIT modeChanged();
 }
 
-void Display::setOrientation(const Display::Orientation &orientation)
+void Display::setOrientation(const Enums::Orientation &orientation)
 {
     if (m_orientation != orientation) {
         m_orientation = orientation;

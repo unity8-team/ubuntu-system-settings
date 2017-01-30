@@ -1,7 +1,7 @@
 /*
  * This file is part of system-settings
  *
- * Copyright (C) 2016 Canonical Ltd.
+ * Copyright (C) 2017 Canonical Ltd.
  *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License version 3, as published
@@ -27,9 +27,16 @@ namespace DisplayPlugin
 {
 static void mir_display_change_callback(MirConnection *connection,
                                         void *context) {
-    MirDisplayConfiguration *conf = mir_connection_create_display_config(
-        connection);
-    static_cast<MirClientImpl*>(context)->setConfiguration(conf);
+    auto mirClient = static_cast<MirClientImpl*>(context);
+    QString error(mir_connection_get_error_message(connection));
+    if (error.isEmpty()) {
+        qWarning() << "Mir apply config successfully.";
+        MirDisplayConfig *conf = mir_connection_create_display_configuration(
+            connection);
+    } else {
+        qWarning() << "Mir configuration error:" << error;
+        mirClient->onConfigurationFailed(error);
+    }
 }
 
 MirClientImpl::MirClientImpl(QObject *parent)
@@ -40,17 +47,17 @@ MirClientImpl::MirClientImpl(QObject *parent)
     connect();
     if (isConnected()) {
         setConfiguration(
-            mir_connection_create_display_config(m_mir_connection)
+            mir_connection_create_display_configuration(m_mir_connection)
         );
     }
 }
 
 MirClientImpl::~MirClientImpl() {
-    mir_display_config_destroy(m_configuration);
+    mir_display_config_release(m_configuration);
     mir_connection_release(m_mir_connection);
 }
 
-MirDisplayConfiguration* MirClientImpl::getConfiguration() const {
+MirDisplayConfig* MirClientImpl::getConfiguration() const {
     return m_configuration;
 }
 
@@ -58,31 +65,17 @@ bool MirClientImpl::isConnected() {
     return mir_connection_is_valid(m_mir_connection);
 }
 
-void MirClientImpl::setConfiguration(MirDisplayConfiguration *conf) {
+void MirClientImpl::setConfiguration(MirDisplayConfig *conf) {
     if (m_configuration != conf) {
         m_configuration = conf;
         Q_EMIT configurationChanged();
     }
 }
 
-bool MirClientImpl::applyConfiguration(MirDisplayConfiguration *conf) {
-    MirWaitHandle* handle = mir_connection_set_base_display_config(
+void MirClientImpl::applyConfiguration(MirDisplayConfig *conf) {
+    mir_connection_confirm_base_display_configuration(
         m_mir_connection, conf
     );
-
-    if (!handle) {
-        qWarning() << __PRETTY_FUNCTION__ << "Failed to get handle.";
-        return false;
-    }
-
-    mir_wait_for(handle);
-    QString error(mir_connection_get_error_message(m_mir_connection));
-    if (error.isEmpty()) {
-        qWarning() << "Mir apply config successfully.";
-    } else {
-        qWarning() << "Mir configuration error:" << error;
-    }
-    return error.isEmpty();
 }
 
 void MirClientImpl::connect() {
@@ -99,5 +92,15 @@ void MirClientImpl::connect() {
         mir_connection_set_display_config_change_callback(
             m_mir_connection, mir_display_change_callback, this);
     }
+}
+
+QList<QSharedPointer<Output>> MirClientImpl::outputs()
+{
+
+}
+
+void MirClientImpl::onConfigurationFailed(const QString &reason)
+{
+    Q_EMIT configurationFailed(reason);
 }
 } // DisplayPlugin

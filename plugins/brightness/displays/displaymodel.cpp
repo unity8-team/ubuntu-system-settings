@@ -1,7 +1,7 @@
 /*
  * This file is part of system-settings
  *
- * Copyright (C) 2016 Canonical Ltd.
+ * Copyright (C) 2017 Canonical Ltd.
  *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License version 3, as published
@@ -96,7 +96,7 @@ bool DisplayModel::setData(const QModelIndex &index, const QVariant &value,
             display->setMode(value.toUInt());
             break;
         case OrientationRole:
-            display->setOrientation((Display::Orientation) value.toUInt());
+            display->setOrientation((Enums::Orientation) value.toUInt());
             break;
         case ScaleRole:
             display->setScale(value.toInt());

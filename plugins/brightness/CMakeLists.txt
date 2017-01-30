@@ -1,17 +1,21 @@
 include_directories(${ANDR_PROP_INCLUDE_DIRS})
 add_subdirectory(plugin)
 
-pkg_search_module(MIR REQUIRED mirclient)
+pkg_search_module(MIR_CORE REQUIRED mircore)
+pkg_search_module(MIR_CLIENT REQUIRED mirclient)
 find_package(Qt5Core)
 find_package(Qt5Gui)
 find_package(Qt5Quick)
-include_directories(${Qt5Gui_PRIVATE_INCLUDE_DIRS} ${MIR_INCLUDE_DIRS})
+find_package(Qt5Gui)
+include_directories(${Qt5Gui_PRIVATE_INCLUDE_DIRS} ${MIR_CORE_INCLUDE_DIRS} ${MIR_CLIENT_INCLUDE_DIRS})
 
 add_library(uss-displays SHARED
     displays/helpers.h
 
     displays/display.h
     displays/displaymodel.h
+
+    displays/enums.h
 
     displays/mirclient.h
     displays/mirclient_impl.h
@@ -20,6 +24,9 @@ add_library(uss-displays SHARED
     displays/display.cpp
     displays/displaymodel.cpp
     displays/mirclient_impl.cpp
+
+    displays/output/output.h
+    displays/outputmode/outputmode.h
     ../../src/i18n.cpp
 )
 set_target_properties(uss-displays PROPERTIES VERSION 0.0 SOVERSION 0.0)

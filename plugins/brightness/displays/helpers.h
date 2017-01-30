@@ -1,7 +1,7 @@
 /*
  * This file is part of system-settings
  *
- * Copyright (C) 2016 Canonical Ltd.
+ * Copyright (C) 2017 Canonical Ltd.
  *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License version 3, as published
@@ -19,21 +19,22 @@
 #ifndef DISPLAY_PLUGIN_HELPERS_H
 #define DISPLAY_PLUGIN_HELPERS_H
 
+#include "enums.h"
 #include "display.h"
 
 #include <mir_toolkit/mir_client_library.h>
 
 namespace DisplayPlugin
 {
-struct Helpers
+struct Q_DECL_EXPORT Helpers
 {
 public:
-    static Display::Orientation mirOrientationToOrientation(const MirOrientation &mirOrientation);
-    static MirOrientation orientationToMirOrientation(const Display::Orientation &orientation);
+    static Enums::Orientation mirOrientationToOrientation(const MirOrientation &mirOrientation);
+    static MirOrientation orientationToMirOrientation(const Enums::Orientation &orientation);
     static QString mirTypeToString(const MirDisplayOutputType &type);
     static QString mirModeToString(const MirDisplayOutputType &type);
-    static Display::PowerMode mirPowerModeToPowerMode(const MirPowerMode &mode);
-    static MirPowerMode powerModeToMirPowerMode(const Display::PowerMode &mode);
+    static Enums::PowerMode mirPowerModeToPowerMode(const MirPowerMode &mode);
+    static MirPowerMode powerModeToMirPowerMode(const Enums::PowerMode &mode);
 };
 } // DisplayPlugin
 

@@ -28,7 +28,7 @@
 #include <QDBusInterface>
 #include <QObject>
 
-class Brightness : public QObject
+class Q_DECL_EXPORT Brightness : public QObject
 {
     Q_OBJECT
     Q_PROPERTY( bool powerdRunning
@@ -51,9 +51,10 @@ class Brightness : public QObject
                 CONSTANT)
 
 public:
-    explicit Brightness(QObject *parent = 0);
+    explicit Brightness(QObject *parent = Q_NULLPTR);
     explicit Brightness(QDBusConnection dbus,
-                        DisplayPlugin::MirClient *mirClient, QObject *parent = 0);
+                        DisplayPlugin::MirClient *mirClient,
+                        QObject *parent = Q_NULLPTR);
     bool getPowerdRunning() const;
     bool getAutoBrightnessAvailable() const;
     bool getWidiSupported() const;
@@ -64,7 +65,7 @@ public:
 
 private:
     QDBusConnection m_systemBusConnection;
-    DisplayPlugin::MirClient *m_mirClient;
+    DisplayPlugin::MirClient *m_mirClient = Q_NULLPTR;
     QDBusInterface m_powerdIface;
     QString m_objectPath;
     bool m_powerdRunning;

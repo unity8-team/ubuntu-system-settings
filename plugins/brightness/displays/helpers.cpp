@@ -1,7 +1,7 @@
 /*
  * This file is part of system-settings
  *
- * Copyright (C) 2016 Canonical Ltd.
+ * Copyright (C) 2017 Canonical Ltd.
  *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License version 3, as published
@@ -20,42 +20,42 @@
 
 namespace DisplayPlugin
 {
-Display::Orientation Helpers::mirOrientationToOrientation(const MirOrientation &mirOrientation)
+Enums::Orientation Helpers::mirOrientationToOrientation(const MirOrientation &mirOrientation)
 {
-    Display::Orientation orientation;
+    Enums::Orientation orientation;
     switch (mirOrientation) {
     case mir_orientation_normal:
-        orientation = Display::Orientation::NormalOrientation;
+        orientation = Enums::Orientation::NormalOrientation;
         break;
     case mir_orientation_left:
-        orientation = Display::Orientation::PortraitModeOrientation;
+        orientation = Enums::Orientation::PortraitModeOrientation;
         break;
     case mir_orientation_inverted:
-        orientation = Display::Orientation::LandscapeInvertedModeOrientation;
+        orientation = Enums::Orientation::LandscapeInvertedModeOrientation;
         break;
     case mir_orientation_right:
-        orientation = Display::Orientation::PortraitInvertedModeOrientation;
+        orientation = Enums::Orientation::PortraitInvertedModeOrientation;
         break;
     default:
-        orientation = Display::Orientation::NormalOrientation;
+        orientation = Enums::Orientation::NormalOrientation;
     }
     return orientation;
 }
 
-MirOrientation Helpers::orientationToMirOrientation(const Display::Orientation &orientation)
+MirOrientation Helpers::orientationToMirOrientation(const Enums::Orientation &orientation)
 {
     MirOrientation mirOrientation;
     switch (orientation) {
-    case Display::Orientation::NormalOrientation:
+    case Enums::Orientation::NormalOrientation:
         mirOrientation = mir_orientation_normal;
         break;
-    case Display::Orientation::PortraitModeOrientation:
+    case Enums::Orientation::PortraitModeOrientation:
         mirOrientation = mir_orientation_left;
         break;
-    case Display::Orientation::LandscapeInvertedModeOrientation:
+    case Enums::Orientation::LandscapeInvertedModeOrientation:
         mirOrientation = mir_orientation_inverted;
         break;
-    case Display::Orientation::PortraitInvertedModeOrientation:
+    case Enums::Orientation::PortraitInvertedModeOrientation:
         mirOrientation = mir_orientation_right;
         break;
     default:
@@ -119,31 +119,31 @@ QString Helpers::mirTypeToString(const MirDisplayOutputType &type)
     return ret;
 }
 
-Display::PowerMode Helpers::mirPowerModeToPowerMode(const MirPowerMode &mode)
+Enums::PowerMode Helpers::mirPowerModeToPowerMode(const MirPowerMode &mode)
 {
     switch(mode) {
     case mir_power_mode_on:
-        return Display::PowerMode::OnMode;
+        return Enums::PowerMode::OnMode;
     case mir_power_mode_standby:
-        return Display::PowerMode::StandbyMode;
+        return Enums::PowerMode::StandbyMode;
     case mir_power_mode_suspend:
-        return Display::PowerMode::SuspendMode;
+        return Enums::PowerMode::SuspendMode;
     case mir_power_mode_off:
-        return Display::PowerMode::OffMode;
+        return Enums::PowerMode::OffMode;
     }
-    return Display::PowerMode::OffMode;
+    return Enums::PowerMode::OffMode;
 }
 
-MirPowerMode Helpers::powerModeToMirPowerMode(const Display::PowerMode &mode)
+MirPowerMode Helpers::powerModeToMirPowerMode(const Enums::PowerMode &mode)
 {
     switch(mode) {
-    case Display::PowerMode::OnMode:
+    case Enums::PowerMode::OnMode:
         return mir_power_mode_on;
-    case Display::PowerMode::StandbyMode:
+    case Enums::PowerMode::StandbyMode:
         return mir_power_mode_standby;
-    case Display::PowerMode::SuspendMode:
+    case Enums::PowerMode::SuspendMode:
         return mir_power_mode_suspend;
-    case Display::PowerMode::OffMode:
+    case Enums::PowerMode::OffMode:
         return mir_power_mode_off;
     }
     return mir_power_mode_off;
